@@ -1,8 +1,18 @@
 2001-08-14  Fatih Demir <kabalak@gtranslator.org>
 
+	* comment.c: Comment tweaks -- nothing changed in source, just some
+		newlines, breaks at some really bad to read places.
+
+	* prefs_init.c: Set the found locale setting (or the default "en_US")
+		while initializing the first time settings (grr, this was the
+		 main reason why the crash during first time initialization
+		  occured.
+
 	* prefs.c: Made "Miscellaneous" page tab translated again -- grr, how
-		did this get un-prefixed by "_("; also set the value to NULL while
-		 updating the prefs contents.
+		did this get un-prefixed by "_("; also set the value to NULL 
+		 while updating the prefs contents; corrected a typo in a
+		  "gtranslator_config_get_bool" call for the "collapse all
+		    translated entries" option.
 
 2001-08-13  Fatih Demir <kabalak@gtranslator.org>
 

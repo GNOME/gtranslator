@@ -86,10 +86,11 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 		while(GtrPrefixTypes[c].prefix!=NULL)
 		{
 			/*
-			 * If the prefix could be "matched", get type and pure_comment out of
-			 *  the full comment text.
+			 * If the prefix could be "matched", get type and 
+			 *  pure_comment out of the full comment text.
 			 */
-			if(nautilus_istr_has_prefix(comment->comment, GtrPrefixTypes[c].prefix))
+			if(nautilus_istr_has_prefix(comment->comment, 
+				GtrPrefixTypes[c].prefix))
 			{
 				gint 	i=0;
 			
@@ -101,16 +102,15 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 				/*
 				 * Strip the matched prefix out of the string.
 				 */
-				comment->pure_comment=nautilus_str_replace_substring(comment->comment,
-					GtrPrefixTypes[c].prefix, "");
+				comment->pure_comment=nautilus_str_replace_substring(comment->comment, GtrPrefixTypes[c].prefix, "");
 
 				/*
-				 * Now do also strip all the other prefixes out of the pure_comment.
+				 * Now do also strip all the other prefixes out
+				 *  of the pure_comment.
 				 */
 				while(GtrPrefixTypes[i].prefix!=NULL)
 				{
-					comment->pure_comment=nautilus_str_replace_substring(comment->pure_comment,
-						GtrPrefixTypes[i].prefix, "");
+					comment->pure_comment=nautilus_str_replace_substring(comment->pure_comment, GtrPrefixTypes[i].prefix, "");
 					
 					i++;
 				}
@@ -121,15 +121,18 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	}
 
 	/*
-	 * Remove any lungering space on the beginning/end of the pure_comment of the GtrComment.
+	 * Remove any lungering space on the beginning/end of the pure_comment 
+	 *  of the GtrComment.
 	 */
 	comment->pure_comment=g_strstrip(GTR_COMMENT(comment)->pure_comment);
 	
 	/*
 	 * Set up the UTF-8 representations for the GtrComment parts.
 	 */
-	comment->utf8_comment=gtranslator_utf8_get_utf8_string(&comment->comment);
-	comment->pure_utf8_comment=gtranslator_utf8_get_utf8_string(&comment->pure_comment);
+	comment->utf8_comment=gtranslator_utf8_get_utf8_string(
+		&comment->comment);
+	comment->pure_utf8_comment=gtranslator_utf8_get_utf8_string(
+		&comment->pure_comment);
 
 	/*
 	 * Set the fuzzy flag at all if the comment stands for a fuzzy message.

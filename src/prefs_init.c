@@ -41,6 +41,8 @@ void gtranslator_preferences_init_default_values()
 	 */ 
 	if(!date)
 	{
+		gtranslator_config_init();
+		
 		/*
 		 * Determine the language name from the environment.
 		 */
@@ -56,12 +58,13 @@ void gtranslator_preferences_init_default_values()
 			{
 				lc=g_strdup("en_US");
 			}
+
+			gtranslator_config_set_string("language/name", lc);
 		}
 		
 		/*
 		 * Useful options which should be set to TRUE.
 		 */ 
-		gtranslator_config_init();
 		gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", TRUE);
 		gtranslator_config_set_bool("toggles/check_recent_files", TRUE);
 		gtranslator_config_set_bool("toggles/do_not_save_unchanged_files", TRUE);

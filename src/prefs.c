@@ -742,7 +742,7 @@ void gtranslator_preferences_read(void)
 	GtrPreferences.show_messages_table = gtranslator_config_get_bool(
 		"toggles/show_messages_table");
 	GtrPreferences.collapse_translated = gtranslator_config_get_bool(
-		"toggle/collapse_translated_entries");
+		"toggles/collapse_translated_entries");
 
 	/*
 	 * Check if we'd to use special styles.
