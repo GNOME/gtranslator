@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# (C) 2000-2001 Fatih Demir <kabalak@gtranslator.net>
+# (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
 #
 #
 # A slightly changed update.sh script for the update
