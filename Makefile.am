@@ -3,7 +3,10 @@
 SUBDIRS = data intl po help macros man libgtranslator message-db.d src
 
 EXTRA_DIST=INSTALL.CVS kabalak_generate_all_the_files.sh \
-		po/update.pl po/desk.pl po/README.tools
+		HACKING \
+		po/update.pl \
+		po/desk.pl \
+		po/README.tools
 
 distpacks: distdir
 	@-rm -f $(distdir).tar.bz2
