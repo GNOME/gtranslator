@@ -26,7 +26,7 @@
 /**
 * The typedef for the structure.
 **/
-typedef struct GtranslatorPreferencesDialogInternal *GtranslatorPreferencesDialog;
+typedef struct GtranslatorPreferencesDialogInternal GtranslatorPreferencesDialog;
 
 /**
 * The structure itself.
@@ -79,14 +79,14 @@ struct GtranslatorPreferencesDialogInternal
 /**
 * Create a new dialog for us :-)
 **/
-GtranslatorPreferencesDialog gtranslator_preferences_dialog_new(
+GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
 	const gchar *title);
 
 /**
 * Hide the preferences dialog.
 **/
 void gtranslator_preferences_dialog_hide(
-	GtranslatorPreferencesDialog dialog);
+	GtranslatorPreferencesDialog *dialog);
 
 /**
 * Button stuff.
@@ -123,13 +123,13 @@ void gtranslator_preferences_dialog_hide(
 * Enable the buttons defined by the arguments.
 **/
 void gtranslator_preferences_dialog_enable_buttons(
-	GtranslatorPreferencesDialog dialog, gboolean apply_button,
+	GtranslatorPreferencesDialog *dialog, gboolean apply_button,
 	gboolean ok_button, gboolean cancel_button);
 /**
 * And disable them necessarily.
 **/
 void gtranslator_preferences_dialog_disable_buttons(
-	GtranslatorPreferencesDialog dialog, gboolean apply_button,
+	GtranslatorPreferencesDialog *dialog, gboolean apply_button,
 	gboolean ok_button, gboolean cancel_button);
 	
 /**
@@ -140,18 +140,18 @@ void gtranslator_preferences_dialog_disable_buttons(
 * Add another settings section to the dialog.
 **/
 void gtranslator_preferences_dialog_append_section(
-	GtranslatorPreferencesDialog dialog, const gchar *name,
+	GtranslatorPreferencesDialog *dialog, const gchar *name,
 	GtkWidget *section_widget);
 /**
 * Delete the given section by name.
 **/
 gint gtranslator_preferences_dialog_delete_section_by_name(
-	GtranslatorPreferencesDialog dialog, const gchar *name);
+	GtranslatorPreferencesDialog *dialog, const gchar *name);
 /**
 * Or by the # in the list.
 **/
 gint gtranslator_preferences_dialog_delete_section(
-	GtranslatorPreferencesDialog dialog, gint position);
+	GtranslatorPreferencesDialog *dialog, gint position);
 
 /**
 * Position setting stuff.
@@ -161,13 +161,13 @@ gint gtranslator_preferences_dialog_delete_section(
 * Set the default page.
 **/
 void gtranslator_preferences_dialog_set_default_page(
-	GtranslatorPreferencesDialog dialog, gint position);
+	GtranslatorPreferencesDialog *dialog, gint position);
 /**
 * S|Get the current page number.
 **/
 guint gtranslator_preferences_dialog_get_current_page(
-	GtranslatorPreferencesDialog dialog);
+	GtranslatorPreferencesDialog *dialog);
 void gtranslator_preferences_dialog_set_current_page(
-	GtranslatorPreferencesDialog dialog, gint position);
+	GtranslatorPreferencesDialog *dialog, gint position);
 
 #endif

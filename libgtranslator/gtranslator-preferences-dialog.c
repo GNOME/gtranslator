@@ -30,7 +30,7 @@
 /**
 * The generally used "new" widget
 **/
-GtranslatorPreferencesDialog 	window;
+GtranslatorPreferencesDialog 	*window;
 
 /**
 * The pane splitting up the index and the
@@ -41,7 +41,7 @@ GtkWidget			*pane;
 /**
 * Create and return the new widget.
 **/
-GtranslatorPreferencesDialog gtranslator_preferences_dialog_new(
+GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
 	const gchar *title)
 {
 	/**
