@@ -76,7 +76,13 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 GtkWidget *tree;
 ETreeModel *tree_model;
 ETreeMemory *tree_memory;
-ETreePath root_node = NULL;	
+ETreePath root_node = NULL;
+/*
+ * hash table to associate an ETreePath with each message. Used
+ * in update_row to dtermine the node given a message that has been
+ * updated
+ */
+GHashTable *hash_table=NULL;	
 
 
 /* 
@@ -354,18 +360,23 @@ void gtranslator_messages_table_create (void)
 	root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
 	e_tree_root_node_set_visible (E_TREE(tree), FALSE);
 	
+	if(hash_table)
+		g_hash_table_destroy(hash_table);
+	hash_table=g_hash_table_new(g_direct_hash,g_direct_equal);
+	
 	if(!file_opened)
 		return;
 	
 	while(list)
 	{
 		GtrMsg *message=list->data;
-		gchar *id=g_strdup_printf("%d", message->pos);
-		e_tree_memory_node_insert_id(tree_memory, root_node,
-			i, message, id);
+		ETreePath *node;
+		
+		node=e_tree_memory_node_insert(tree_memory, root_node,
+			i, message);
+		g_hash_table_insert(hash_table,message,node); 
 		list = g_list_next(list);
 		i++;
-		g_free(id);
 	}	
 	
 	
@@ -376,14 +387,11 @@ void gtranslator_messages_table_create (void)
  */
 void gtranslator_messages_table_update_row(GtrMsg *message)
 {
-	/*ETreePath node=NULL;
+	ETreePath node=NULL;
 	
-	FIXME: this is not the way to go. Perhaps create a hash
-	table with all the nodes and message->pos entries 
-	node=e_tree_model_get_node_by_id(tree_model, id);
-	if(node) g_print ("%s\n", message->msgid);
+	node=g_hash_table_lookup(hash_table,message);
 	
-	e_tree_model_node_data_changed (tree_model, node);*/
+	e_tree_model_node_data_changed (tree_model, node);
 }
 
 /*
