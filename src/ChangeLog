@@ -1,6 +1,15 @@
 2001-08-07  Fatih Demir <kabalak@gtranslator.org>
 
-	* preferences.c: Made the date string non-translateble as it's only
+	* dialogs.c: Enhanced the edit comment dialog a bit -- if the comment
+		prefix "#" is missing we do now append it and so we do get
+		 always right and well-formed comments -- even if the user did
+		  make something wrong in the edit dialog.
+
+	* color-schemes.c: If we couldn't get a "text_bg" attribute use the
+		"bg" attribute instead -- avoids possible problems with older
+		  colorschemes.
+
+	* preferences.c: Made the date string non-translatable as it's only
 		used internally and is nowhere shown to the user.
 
 	* about.c, dialogs.c, htmlizer.c, main.c & utils_gui.c: Comment
@@ -13,14 +22,14 @@
 	* messages-table.c (_messages_table_clear): fix the bug where
 		value_at_function was called after a table clear. Insert
 		a root node to e-tree after clearing it instead of setting
-		it to NULL. Why this fixes it? I don't have a clue. 
+		it to NULL. Why this fixes it? I don't have a clue.
 
 2001-08-06  Fatih Demir <kabalak@gtranslator.org>
 
 	* comment.c: Corrected the comment type recignition to also use the
 		fields -- source code comments should also be editable.
 
-	* gui.c: Connect the signal for clicking on the "Edit comment" button	
+	* gui.c: Connect the signal for clicking on the "Edit comment" button
 		to the new edit comment dialog.
 
 	* dialogs.c/.h: Added comment edit dialog -- quite simple and small
@@ -40,14 +49,14 @@
 
 2001-08-02  Fatih Demir <kabalak@gtranslator.org>
 
-	* undo.c/.h: Re-animation of some dead code -- again a crippled 
+	* undo.c/.h: Re-animation of some dead code -- again a crippled
 		variant of my most favourite task in gtranslator..
 
 	* utils.h: Also set the free'd variable to NULL in the "GTR_FREE"
 		macro.
 
 	* messages-table.c: The fuzzy messages case is the last case in the
-		switch tree now and is the default (no other types are left 
+		switch tree now and is the default (no other types are left
 		 to be returned).
 
 	* parse.c: Check for the FUZZY_COMMENT status bit instead of
@@ -58,14 +67,14 @@
 
 2001-08-01  Fatih Demir <kabalak@gtranslator.org>
 
-	* message.c: Use the list data instead of the list pointer within the 
+	* message.c: Use the list data instead of the list pointer within the
 		"gtranslator_messages_table_select_row" function call in
 		  "gtranslator_message_go_to".
 
 2001-07-31  Kevin Vandersloot <kfv101@psu.edu>
 
 	* messages-table.c (_messages_table_new): hook up to the
-		"click" signal to get select_row working. 
+		"click" signal to get select_row working.
 	(row_selected): check to see that the left mouse button
 		did the clicking
 	(row_selected): get the model_row from the message number instead
@@ -73,18 +82,18 @@
 
 2001-07-31  Fatih Demir <kabalak@gtranslator.org>
 
-	* parse.c: Call up "gtranslator_messages_table_select_row" when 
-		navigating with the old "style" via toolbar buttons, menu 
-		 entries or via keyboard. 
+	* parse.c: Call up "gtranslator_messages_table_select_row" when
+		navigating with the old "style" via toolbar buttons, menu
+		 entries or via keyboard.
 
-	* messages-table.c: Erh, some little crash cure -- there's still a 
+	* messages-table.c: Erh, some little crash cure -- there's still a
 		problem somewhere (after file closures the "value_at_function"
 		 is called -- bad).
 
 	* comment.c: Always show the comment, always let the pane fit the needed
 		space and simplified the "gtranslator_comment_display" function.
 
-	* sidebar.c: Adapted for the missing comment view -- less items in 
+	* sidebar.c: Adapted for the missing comment view -- less items in
 		the EGroupBar.
 
 	* find.c: Don't try to show the comment as a view -- the comment view
@@ -126,17 +135,17 @@
 	
 2001-07-29  Fatih Demir <kabalak@gtranslator.org>
 
-	* history.c: Really respect the defined maximal history entries count 
+	* history.c: Really respect the defined maximal history entries count
 		from the preferences -- the if condition for the break in the
-		 save routine was not fully right -- it had got to be ">" 
+		 save routine was not fully right -- it had got to be ">"
 		  instead of ">=" to also get the last wanted history entry.
 
 	* Makefile.am: "pixmaps" is now again a subdirectory of src .-)
 
-	* menus.c: Use the "new" pixmaps for the auto accomplishment and query 
+	* menus.c: Use the "new" pixmaps for the auto accomplishment and query
 		menu entries and toolbar entries.
 
-	* pixmaps/*: Added auto accomplishment and query pixmaps (including 
+	* pixmaps/*: Added auto accomplishment and query pixmaps (including
 		Makefile stuff for it) -- the icons are taken from Evolution.
 
 	* dialogs.c: Some more logics for the learn buffer toggle button.
@@ -170,7 +179,7 @@
 		some enumeration values; integrated the line number display
 		 via "COL_LINE" and "line" cells/enumeration values.
 
-	* messages.h, messages-table.c & parse.c: Added "no" field to GtrMsg 
+	* messages.h, messages-table.c & parse.c: Added "no" field to GtrMsg
 		which holds the number of the message in the po file -- set
 		 the entry on parse time and show it in the table instead of
 		  the line number like before.
@@ -179,7 +188,7 @@
 		function to "gtranslator_utils_error_dialog" and put it into
 		 utils_gui.c/.h.
 
-	* backend.c & utils.c: Supply the additional argument to the changed 
+	* backend.c & utils.c: Supply the additional argument to the changed
 		function call.
 
 	* utils.c/.h: The "gtranslator_utils_free_list" function now does also
@@ -194,7 +203,7 @@
 
 	* utils.c/.h: Added "gtranslator_utils_get_environment_locale" which
 		returns any found environment locale (searches $LC_ALL, $LANG,
-		 $LANGUAGE and $LC_MESSAGES for this: the special 
+		 $LANGUAGE and $LC_MESSAGES for this: the special
 		  $GTRANSLATOR_LANGUAGE is also searched for some crazy cases .-)).
 
 2001-07-21  Fatih Demir <kabalak@gtranslator.org>
@@ -232,7 +241,7 @@
 		which frees list data & the list itself quite safely;
 		 also adde the two ultimate macros GTR_FREE and GTR_ITER
 		  which replace really common constructs among the code.
-		
+	
 		And: the ultimate GTR_STRDUP macro did also land in utils.h!
 
 	* gui.c: Save the tree state on "gtranslator_quit" and changed the
@@ -311,7 +320,7 @@
 
 	* messages-table.c: Supplied the statusfile argument for the
 		e_tree_save_state call in the
-		 "gtranslator_messages_table_save_state" function; 
+		 "gtranslator_messages_table_save_state" function;
 		   also display the message's pure comment.
 
 2001-07-18  Kevin Vandersloot <kfv101@psu.edu>
@@ -345,7 +354,7 @@
 
 2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
 
-	* messages-table.[c,h]: renamed _messages_table_update to 
+	* messages-table.[c,h]: renamed _messages_table_update to
 		_messages_table_create.
 
 2001-07-18  Fatih Demir <kabalak@gtranslator.org>
@@ -360,7 +369,7 @@
 	* gui.c: Flush the "runtime/filename" configuration key for the current file
 		name on exit as well as well as on file closure.
 
-	* learn.c/.h: Added "public" function "gtranslator_learn_po_file" which 
+	* learn.c/.h: Added "public" function "gtranslator_learn_po_file" which
 		"learns" the given GtrPo's messages completely (only the translated
 		  messages of course); also added the necessary GFunc for this.
 
@@ -371,7 +380,7 @@
 		 the GtrColorScheme).
 
 	* color-schemes.c/.h: Added "text_bg" field to the GtrColorScheme structure
-		and respected it everywhere in the code -- we don't assume any 
+		and respected it everywhere in the code -- we don't assume any
 		 "text_bg" occurence though -- many if's should avoid pre-"text_bg"
 		   age colorschemes crashes.
 
@@ -388,7 +397,7 @@
 
 2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
 
-	* messages-table.c (messages_table_new): hook up to 
+	* messages-table.c (messages_table_new): hook up to
 	row selected signal of e-tree
 
 	* messages-table.c (row_selected): new function when a row
@@ -405,7 +414,7 @@
 
 2001-07-17  Fatih Demir <kabalak@gtranslator.org>
 
-	* comment.c: Activate the "Edit comment" button if we've for a 
+	* comment.c: Activate the "Edit comment" button if we've for a
 		translator comment or a source comment (any other cases should
 		 not be editable).
 
@@ -423,7 +432,7 @@
 		and integrated the funcs into the "gtranslator_comment_display"
 		 function; added a "pure_utf8_comment" part to the GtrComment
 		  structure and adapted the function respect this new portion
-		   in the GtrComment structure. Also corrected the prefix 
+		   in the GtrComment structure. Also corrected the prefix
 		    snipping to work and use "nautilus_str_replace_substring"
 		     instead of "nautilus_str_get_after_prefix" -- now the
 		      prefix'es get cut.
@@ -440,13 +449,13 @@
 
 	* parse.c: Fixed a cast problem -- UTF-8 editing should work again.
 
-	* utf8.c: Fixed exporting of po files -- the author name and the 
+	* utf8.c: Fixed exporting of po files -- the author name and the
 		eventually existing header comment are now also exported
 		 to UTF-8.
 
 	* learn.c: Added "gtranslator_learn_set_xml_prop" util function to
 		set XML props safely; also respect the found encoding while
-		 writing the XML document and set the encoding attribute 
+		 writing the XML document and set the encoding attribute
 		  accordingly to get a well-structure XML document. Also
 		   make the parsing code work.
 

@@ -350,7 +350,12 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 	 */
 	if(reply==GNOME_OK)
 	{
-		gchar		*comment_dialog_contents;
+		gchar		 *comment_dialog_contents;
+		gchar		**checkarray;
+
+		GString		  *comment_string=g_string_new("");
+		
+		gint		  array_pos=0;
 
 		/*
 		 * Get the comment box contents.
@@ -373,12 +378,46 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		}
 
 		/*
-		 * Update the GtrComment contents and type fields. The contents
-		 *  did change therefore we can now save our file .-)
+		 * Split the comment up and check every part of it.
 		 */
-		gtranslator_comment_update(&comment, comment_dialog_contents);
+		checkarray=g_strsplit(comment_dialog_contents, "\n", 0);
+
+		while(checkarray[array_pos]!=NULL)
+		{
+			if(checkarray[array_pos][0]!='#')
+			{
+				comment_string=g_string_append(comment_string, "# ");
+				comment_string=g_string_append(comment_string,
+					checkarray[array_pos]);
+			}
+			else
+			{
+				comment_string=g_string_append(comment_string,
+					checkarray[array_pos]);
+			}
+
+			comment_string=g_string_append(comment_string, "\n");
+			
+			array_pos++;
+		}
+
+		/*
+		 * Update the GtrComment and activate the GUI elements for the save
+		 *  function.
+		 */
+		gtranslator_comment_update(&comment, comment_string->str);
 		gtranslator_actions_enable(ACT_SAVE);
 
+		/*
+		 * Free all the used stuff here.
+		 */
+		g_free(comment_dialog_contents);
+		g_strfreev(checkarray);
+		g_string_free(comment_string, TRUE);
+		
+		/*
+		 * Set the label contents in the GUI.
+		 */
 		gtk_label_set_text(GTK_LABEL(extra_content_view->comment),
 			comment->pure_comment);
 		

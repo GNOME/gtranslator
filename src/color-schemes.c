@@ -140,6 +140,18 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 	}
 
 	xmlFreeDoc(xmldoc);
+
+	/*
+	 * Now check if we could get any "text_bg" attribute -- if not (in
+	 *  older colorschemes for example), simply use the "bg" attribute
+	 *   for the "text_bg" -- this way we don't get any different text
+	 *    background but don't end up with black on navy or something like
+	 *     that.
+	 */
+	if(scheme->bg && !scheme->text_bg)
+	{
+		scheme->text_bg=g_strdup(scheme->bg);
+	}
 	
 	return scheme;
 }
