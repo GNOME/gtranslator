@@ -516,7 +516,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
-							g_list_position(po->messages, po->current));
+							(gpointer) g_list_position(po->messages, po->current));
 					}
 					break;
 				
@@ -529,7 +529,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
-							g_list_position(po->messages, po->current));
+							(gpointer) g_list_position(po->messages, po->current));
 					}
 					break;
 
@@ -541,7 +541,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
-							g_list_position(po->messages, po->current));
+							(gpointer) g_list_position(po->messages, po->current));
 					}
 					break;
 					
@@ -553,7 +553,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
-							g_list_position(po->messages, po->current));
+							(gpointer) g_list_position(po->messages, po->current));
 					}
 					break;
 					
