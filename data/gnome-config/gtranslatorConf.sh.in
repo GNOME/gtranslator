@@ -2,6 +2,6 @@
 # This is the libgtranslator config-file for
 #  the gnome-config 1.x style.
 #
-GTRANSLATOR_INCLUDEDIR="-I@prefix@/include/libgtranslator -I@prefix@/include"
-GTRANSLATOR_LIBS="-L@prefix@/lib -lgtranslator @XML_LIBS@ @GNOME_LIBS@ @LIBGLADE_LIBS@"
+GTRANSLATOR_INCLUDEDIR="-I@prefix@/include/libgtranslator -I@prefix@/include @XML_CFLAGS@"
+GTRANSLATOR_LIBS="-L@prefix@/lib -lgtranslator @XML_LIBS@ @GNOME_LIBS@"
 MODULE_VERSION="libgtranslator-@VERSION@"

@@ -6,5 +6,5 @@ includedir=@includedir@
 Name: libgtranslator
 Version: @VERSION@
 Description: libgtranslator -- gtranslator's lib site 
-Cflags: -I@prefix@/include/libgtranslator -I@prefix@/include
-Libs: -L@prefix@/lib -lgtranslator @XML_LIBS@ @GNOME_LIBS@ @LIBGLADE_LIBS@
+Cflags: -I@prefix@/include/libgtranslator -I@prefix@/include @XML_CFLAGS@ @GNOME_CFLAGS@
+Libs: -L@prefix@/lib -lgtranslator @XML_LIBS@ @GNOME_LIBS@
