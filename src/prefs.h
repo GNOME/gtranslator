@@ -34,9 +34,6 @@ struct {
 	guint save_geometry		: 1;
 	guint unmark_fuzzy		: 1;
 	
-	/*
-	 * Options, used NOT in prefs-box.
-	 */
 	guint match_case		: 1;
 	guint find_in			: 3;
 	guint use_learn_buffer		: 1;
@@ -45,6 +42,7 @@ struct {
 	guint show_messages_table	: 1;
 	guint show_comment		: 1;
 	guint collapse_all		: 1;
+	guint show_plural_forms		: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.

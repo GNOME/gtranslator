@@ -60,7 +60,7 @@ static GtkWidget
  */
 static GtkWidget
 	*warn_if_fuzzy, *unmark_fuzzy, *save_geometry_tb,
-	*use_dot_char, *use_update_function,
+	*use_dot_char, *use_update_function, *show_pf_dialog,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *autosave,
 	*autosave_with_suffix, *sweep_compile_file, *use_learn_buffer,
@@ -505,6 +505,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 							  GtrPreferences.show_comment,
 							  G_CALLBACK(gtranslator_preferences_dialog_changed));
 	gtk_box_pack_start (GTK_BOX (category_box), show_comment, FALSE, FALSE, 0);
+	show_pf_dialog = gtranslator_preferences_toggle_new(_("Display special dialog for messages with plural forms"),
+							  GtrPreferences.show_plural_forms,
+							  G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), show_pf_dialog, FALSE, FALSE, 0);
 	save_geometry_tb = gtranslator_preferences_toggle_new(_("Save geometry on exit and restore it on startup"),
 							      GtrPreferences.save_geometry,
 							      G_CALLBACK(gtranslator_preferences_dialog_changed));
@@ -673,6 +677,7 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	GtrPreferences.rambo_function = if_active(rambo_function);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_comment = if_active(show_comment);
+	GtrPreferences.show_plural_forms = if_active(show_pf_dialog);
 	GtrPreferences.show_messages_table = if_active(show_messages_table);
 	GtrPreferences.collapse_all = if_active(collapse_all_entries);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
@@ -830,6 +835,8 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 			      GtrPreferences.fuzzy_matching);
 	gtranslator_config_set_bool("toggles/auto_learn",
 			      GtrPreferences.auto_learn);
+	gtranslator_config_set_bool("toggles/show_plural_forms",
+			      GtrPreferences.show_plural_forms);
 	gtranslator_config_set_bool("toggles/show_messages_table",
 			      GtrPreferences.show_messages_table);
 	gtranslator_config_set_bool("toggles/collapse_all",
@@ -1005,6 +1012,8 @@ void gtranslator_preferences_read(void)
 		"toggles/show_messages_table");
 	GtrPreferences.collapse_all = gtranslator_config_get_bool(
 		"toggles/collapse_all");
+	GtrPreferences.show_plural_forms = gtranslator_config_get_bool(
+		"toggles/show_plural_forms");
 
 	/*
 	 * Check if we'd to use special styles.

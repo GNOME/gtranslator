@@ -304,9 +304,9 @@ void gtranslator_message_show(GtrMsg *msg)
 	message_changed = FALSE;
 
 	/*
-	 * Form an informative plural forms displaying dialog.
+	 * Form an informative plural forms displaying dialog if the user desires it.
 	 */
-	if(po->header->plural_forms && msg->msgid_plural)
+	if(po->header->plural_forms && msg->msgid_plural && GtrPreferences.show_plural_forms)
 	{
 		enum
 		{ 
