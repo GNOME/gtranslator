@@ -37,13 +37,16 @@ enum {
 	ACT_SAVE_AS,
 	ACT_REVERT,
 	ACT_CLOSE,
-	/**********/
+	/***********************/
+	ACT_IMPORT_UTF8,
+	ACT_EXPORT_UTF8,
+	/***********************/
 	ACT_VIEW_MESSAGE,
 	ACT_VIEW_COMMENTS,
 	ACT_VIEW_NUMBER,
 	ACT_VIEW_C_FORMAT,
 	ACT_VIEW_HOTKEY,
-	/**********/
+	/***********************/
 	ACT_UNDO,
 	ACT_REDO,
 	ACT_CUT,
@@ -55,7 +58,7 @@ enum {
 	ACT_REPLACE,
 	ACT_QUERY,
 	ACT_HEADER,
-	/**********/
+	/***********************/
 	ACT_FIRST,
 	ACT_BACK,
 	ACT_NEXT,
@@ -63,10 +66,11 @@ enum {
 	ACT_GOTO,
 	ACT_NEXT_FUZZY,
 	ACT_NEXT_UNTRANSLATED,
-	/**********/
+	/***********************/
 	ACT_TRANSLATED,
 	ACT_FUZZY,
 	ACT_STICK,
+	
 	/*
 	 * This must always be the last, add new entries above
 	 */

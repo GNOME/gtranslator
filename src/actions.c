@@ -24,6 +24,7 @@
 #include "message.h"
 #include "prefs.h"
 #include "undo.h"
+#include "utf8.h"
 
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-app.h>
@@ -96,6 +97,9 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_REVERT, the_file_menu[9], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[10], NONE);
 	/*----------------------------------------------------------*/
+	insert_action(ACT_EXPORT_UTF8, the_file_menu[14], NONE);
+	insert_action(ACT_IMPORT_UTF8, the_file_menu[15], NONE);
+	/*----------------------------------------------------------*/
 	insert_action(ACT_VIEW_MESSAGE, the_views_menu[0], NONE);
 	insert_action(ACT_VIEW_COMMENTS, the_views_menu[1], NONE);
 	insert_action(ACT_VIEW_NUMBER, the_views_menu[2], NONE);
@@ -139,7 +143,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK, ACT_VIEW_MESSAGE, 
 			ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT,
-			ACT_VIEW_HOTKEY);
+			ACT_VIEW_HOTKEY, ACT_EXPORT_UTF8);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
@@ -150,9 +154,11 @@ void gtranslator_actions_set_up_file_opened(void)
 		ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
 		ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
 		ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, 
-		ACT_VIEW_C_FORMAT, ACT_VIEW_HOTKEY);
+		ACT_VIEW_C_FORMAT, ACT_VIEW_HOTKEY,
+		ACT_IMPORT_UTF8);
 
 	gtranslator_actions_disable(ACT_SAVE, ACT_UNDO, ACT_REDO);
+	
 	/*
 	 * If we'd have the option to use the update function set, enable the
 	 *  Update button in the toolbar and in the menu.
@@ -160,11 +166,26 @@ void gtranslator_actions_set_up_file_opened(void)
 	if(wants.update_function)
 	{
 		gtranslator_actions_enable(ACT_UPDATE);	
-	}  
+	}
+
+	/*
+	 * Check if the current file is UTF-8 -- then disable the export
+	 *  menu entry; it's already in UTF-8.
+	 */
+	if(gtranslator_utf8_po_file_is_utf8())
+	{
+		gtranslator_actions_disable(ACT_EXPORT_UTF8);
+	}
+	else
+	{
+		gtranslator_actions_enable(ACT_EXPORT_UTF8);
+	}
+
 	/*
 	 * Enable the editing of the msgstrs :-)
 	 */
 	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
+
 	/*
 	 * Make it focused initially
 	 */

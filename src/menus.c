@@ -68,7 +68,7 @@ GnomeUIInfo the_file_menu[] = {
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("Autoaccomplish"),
+		GNOME_APP_UI_ITEM, N_("Aut_oaccomplish"),
 		N_("Automatically fill missing translations from the default query domain"),
 		gtranslator_auto_accomplishment_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
@@ -88,7 +88,22 @@ GnomeUIInfo the_file_menu[] = {
 	GNOMEUIINFO_MENU_REVERT_ITEM(gtranslator_file_revert, NULL),
 	GNOMEUIINFO_MENU_CLOSE_ITEM(gtranslator_file_close, NULL),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_SUBTREE( N_("Recen_t files"), the_last_files_menus),
+	GNOMEUIINFO_SUBTREE(N_("Recen_t files"), the_last_files_menus),
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("_Export to UTF-8"),
+		N_("Export the current po file to UTF-8"),
+		NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
+		GDK_E, GDK_MOD1_MASK, NULL
+	},
+	{
+		GNOME_APP_UI_ITEM, N_("_Import from UTF-8"),
+		N_("Import a UTF-8 encoded po file into it's corresponding plain encoding"),
+		NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+		GDK_I, GDK_MOD1_MASK, NULL
+	},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
 	GNOMEUIINFO_END

@@ -350,24 +350,34 @@ gboolean gtranslator_backend_remove_all_backends(void)
  */
 gboolean gtranslator_backend_open(gchar *filename)
 {
+	GList *mybackends=NULL;
+	
 	g_return_val_if_fail(filename!=NULL, FALSE);
 	g_return_val_if_fail(backends!=NULL, FALSE);
+
+	/*
+	 * Operate on a local copy of the backends list.
+	 */
+	mybackends=g_list_copy(mybackends);
 	
-	while(backends!=NULL)
+	while(mybackends!=NULL)
 	{
 		/*
 		 * Look if the filename matches the filenames supported by the
 		 *  backend module.
 		 */
-		if(GTR_BACKEND(backends->data)->info->filenames &&
-			gtranslator_utils_stringlist_strcasecmp(
-			GTR_BACKEND(backends->data)->info->filenames, 
-				filename)!=-1)
+		GList *filenames=NULL;
+		
+		filenames=g_list_copy(
+			GTR_BACKEND(mybackends->data)->info->filenames);
+		
+		if(filenames && (gtranslator_utils_stringlist_strcasecmp(
+			filenames, filename) !=-1))
 		{
 			/*
 			 * Load the file with the corresponding open handle.
 			 */
-			GTR_BACKEND(backends->data)->open_file(filename, NULL);
+			GTR_BACKEND(mybackends->data)->open_file(filename, NULL);
 			return TRUE;
 		}
 		else
@@ -376,27 +386,34 @@ gboolean gtranslator_backend_open(gchar *filename)
 			 * Check if the filename is of a supported filetype 
 			 *  (extension) of the current backend module.
 			 */
-			 GtrBackend *current=GTR_BACKEND(backends->data);
+			GList *extensions=NULL;
+			
+			extensions=g_list_copy(GTR_BACKEND(mybackends->data)->info->extensions);
 
-			 while(current->info->extensions!=NULL)
-			 {
-				 /*
-				  * If the extensions do match open the file
-				  *  and return TRUE.
-				  */
-				 if(nautilus_istr_has_suffix(filename,
-					(current->info->extensions->data)))
-				 {
-					 current->open_file(filename, NULL);
-					 return TRUE;
-				 }
+			while(extensions!=NULL)
+			{
+				/*
+				 * If the extensions do match open the file
+				 *  and return TRUE.
+				 */
+				if(nautilus_istr_has_suffix(filename, (extensions->data)))
+				{
+					GTR_BACKEND(mybackends->data)->open_file(filename, NULL);
+					return TRUE;
+				}
 				 
-				 current->info->extensions=current->info->extensions->next;
-			 }
+				extensions=extensions->next;
+			}
+
+			g_list_free(extensions);
 		}
 		
-		backends=backends->next;
+		g_list_free(filenames);
+		
+		mybackends=mybackends->next;
 	}
+
+	g_list_free(mybackends);
 
 	return FALSE;
 }

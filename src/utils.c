@@ -162,7 +162,7 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string)
 
 	while(list)
 	{
-		if(!g_strcasecmp(list->data, string))
+		if(!nautilus_strcasecmp(list->data, string))
 		{
 			return pos;
 		}

@@ -1,4 +1,20 @@
+2001-05-15  Fatih Demir <kabalak@gtranslator.org>
+
+	* menus.c: Added import, export from/o UTF-8 menu entries and added
+		the hotkey for Autoaccomplish: it's 'o'.
+
+	* actions.c: Implemented enabling/disabling of the import, export 
+		entries.
+
 2001-05-14  Fatih Demir <kabalak@gtranslator.org>
+
+	* actions.h: Added ACT_IMPORT_UTF8 and ACT_EXPORT_UTF8 enum values.
+
+	* utils.c: Use nautilus_strcasecmp instead of g_strcasecmp in one
+		place.
+
+	* backend.c: Operate on local copies and not on the lists themselves
+		and free the local copies after our operations.
 
 	* header_stuff.c: Also tactile with UTF-8 based translator names and
 		comments.
