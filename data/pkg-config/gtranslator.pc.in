@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libgtranslator
+Version: @VERSION@
+Description: libgtranslator -- gtranslator's lib site 
+Cflags: -I@prefix@/include/libgtranslator -I@prefix@/include
+Libs: -L@prefix@/lib -lgtranslator @XML_LIBS@ @GNOME_LIBS@ @LIBGLADE_LIBS@
