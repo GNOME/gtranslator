@@ -237,18 +237,16 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 		gtk_text_buffer_get_start_iter(buff, &start);
 		gtk_text_buffer_insert(buff, &start, value, strlen(value));
 		gtk_text_view_set_buffer(GTK_TEXT_VIEW(widget), buff);
+		if(callback)
+		{
+			g_signal_connect(G_OBJECT(buff), "changed",
+					 G_CALLBACK(callback), NULL);
+		}
+
 	}
 	gtk_container_add(GTK_CONTAINER(scroll), widget);
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), scroll, 1, 2, row, row + 1);
-
-	if(callback)
-	{
-		g_signal_connect(G_OBJECT(widget), "insert-at-cursor",
-			         G_CALLBACK(callback), NULL);
-		g_signal_connect(G_OBJECT(widget), "delete-from-cursor",
-			         G_CALLBACK(callback), NULL);
-	}
 
 	return widget;
 }

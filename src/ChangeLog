@@ -1,5 +1,8 @@
 2003-07-05  Ross Golder  <ross@golder.org>
 
+	* utils_gui.c (gtranslator_utils_attach_text_with_label): The text
+	          buffer has the 'changed' signal, not the textview.
+
 	* parse.c (gtranslator_po_free): Add 'g_return_if_fail(po!=NULL)'.
 
 	* gui.[ch] (gtranslator_quit): Was defined gint, but returning
