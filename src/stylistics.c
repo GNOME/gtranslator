@@ -99,11 +99,11 @@ gchar* get_path_from_type(ColorType Type)
 }
 
 /*
- * Saves the colors from the given GtkColorPicker.
+ * Saves the colors from the given GnomeColorPicker.
  */
-void gtranslator_color_values_set(GtkColorButton *colorpicker, ColorType Type)
+void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 {
-	GdkColor color;
+	guint8 red, green, blue;
 	gchar spec[8];
 	gchar *path=NULL;
 
@@ -130,23 +130,20 @@ void gtranslator_color_values_set(GtkColorButton *colorpicker, ColorType Type)
 
 	g_return_if_fail(path!=NULL);
 
-	gtk_color_button_get_color(GTK_COLOR_BUTTON(colorpicker),
-		&color);
+	gnome_color_picker_get_i8(GNOME_COLOR_PICKER(colorpicker),
+		&red, &green, &blue, NULL);
 	
 	/*
 	 * Store the color values.
 	 */
-	g_snprintf(spec, 8, "#%02x%02x%02x",
-		   (color.red >> 8), 
-		   (color.green >> 8),
-		   (color.blue >> 8));
+	g_snprintf(spec, 8, "#%02x%02x%02x", red, green, blue);
 	gtranslator_config_set_string(path, spec);
 }
 
 /*
- * Restores the GtkColorButton colors.
+ * Restores the GnomeColorPicker colors.
  */
-void gtranslator_color_values_get(GtkColorButton *colorpicker, ColorType Type)
+void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 {
 	GdkColor color;
 	gchar *spec;
@@ -183,7 +180,8 @@ void gtranslator_color_values_get(GtkColorButton *colorpicker, ColorType Type)
 	if(spec)
 	{
 		gdk_color_parse(spec, &color);
-		gtk_color_button_set_color(colorpicker, &color);
+		gnome_color_picker_set_i16(colorpicker, color.red,
+			color.green, color.blue, 0);
 		GTR_FREE(spec);
 	}
 }		
