@@ -23,7 +23,6 @@
 /*
 *	The variables for all that ....
 */
-const char *filename;
 const char *home_dir;
 const char *scripts_dir=SCRIPTS_DIR;
 char cmd[256];
@@ -385,8 +384,7 @@ on_trans_box_changed                   (GtkWidget	*w,
                                         gpointer	user_data)
 {
 	file_changed=TRUE;	
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_(""));
-	g_warning("File %s changed !",filename);
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("File has been changed !"));
 }
 
 

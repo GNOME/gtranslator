@@ -24,10 +24,10 @@ void check_file(FILE *stream)
 {
 	if(stream < 0 || stream == NULL)
 	{
-		g_warning("\nError opening a file stream !\n");
-		/*
-		*exit(1);
-		*/
+		g_warning("\nError opening the file stream !\n");
+		#ifdef SINIR_ET_BENI
+		exit(1);
+		#endif
 	}
 }
 
@@ -48,10 +48,12 @@ int open_the_files()
 */
 void init_reading(void)
 {
+	#ifndef FINISHED_PARSE
 	input_ids=fopen(ids_file,"r+");
-        fgets(iline[0],255,input_ids);
+        fgets(iline,255,input_ids);
         input_strs=fopen(strs_file,"r+");
-        fgets(sline[0],255,input_strs);
+        fgets(sline,255,input_strs);
+	#endif
         gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline,-1);
         gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,sline,-1);
 	at_the_first=TRUE;
@@ -61,6 +63,26 @@ void init_reading(void)
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Inited reading process ."));
 	#endif
 	gnome_appbar_set_progress(GNOME_APPBAR(appbar1),15);
+}
+
+/*
+*	The real routine for parsing 
+*/
+void parse()
+{
+	FILE *fs;
+	gchar tmp_l[256];
+	int c;
+	/* Open the file got by the open-dialog */
+	fs=fopen(filename,"r+");
+	/* Check if the stream is OK */
+	check_file(fs);
+	count=0;
+	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
+	{
+		count++;
+	}
+	max_count=((count - 10 ) / 3);
 }
 
 /*

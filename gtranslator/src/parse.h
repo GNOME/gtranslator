@@ -63,6 +63,11 @@ gboolean at_the_last;
 void check_file(FILE *);
 
 /*
+*	The proto for the real parse routine ..
+*/
+void parse();
+
+/*
 *	Opens the files "msgids.dat" & "msgstrs.dat" , 
 *	created by split_it_with_awk.sh .
 */

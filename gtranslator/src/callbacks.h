@@ -5,6 +5,8 @@
 	
 #include <gnome.h>
 
+const char *filename;
+
 void
 on_open1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
