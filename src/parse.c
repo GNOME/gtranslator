@@ -212,7 +212,8 @@ static gboolean actual_parse(void)
 			 */
 			g_strchomp(line);
 			if (strlen(line) == 0) {
-				msgstr_ok = TRUE;
+				if(msgid_ok==TRUE)
+					msgstr_ok = TRUE;
 			} else
 			/*
 			 * If it's a msgid
