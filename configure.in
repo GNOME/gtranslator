@@ -236,7 +236,7 @@ else
 	dnl Get the nautilus compile flags for the view..
 	dnl -------------------------------------------------------------------
 	if test "x$build_nv" = "xyes" ; then
-		AC_MSG_CHECKING([for necessary Nautilus headers in ${nautilus_prefix}/include/libnautilus])	
+		AC_MSG_CHECKING([for necessary Nautilus headers in ${nautilus_prefix}/include/libnautilus])
 		if test -f "${nautilus_prefix}/include/libnautilus/nautilus-view.h" -a \
 			-f "${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h" -a \
 			-f "${nautilus_prefix}/include/libnautilus/nautilus-bonobo-ui.h" ; then
@@ -253,11 +253,6 @@ else
 			else
 				AC_MSG_RESULT(older version found)
 			fi	
-			NAUTILUS_CFLAGS="`gnome-config --cflags oaf vfs bonobo bonobox` \
-			-I${nautilus_prefix}/include/libnautilus \
-			`gconf-config --cflags gconf-gtk`"
-			NAUTILUS_LIBS="`gnome-config --libs oaf vfs bonobo bonobox` \
-			-lnautilus `gconf-config --libs gconf-gtk`"
 		else
 			AC_MSG_WARN([
 "-----------------------------------------------------------------------------"
@@ -271,9 +266,31 @@ else
 fi
 
 dnl -------------------------------------------------------------------
-dnl Rescue the previous $LIBS and define the NAUTILUS_CFLAGS for 
-dnl  compiling and NAUTILUS_LIBS for linking with -lnautilus.
+dnl Check for the needed GtkHTML flags if the nautilus-view should be
+dnl  compiled at all and set the options/flags.
 dnl -------------------------------------------------------------------
+if test "%$build_nv" = "%yes" ; then
+	AC_MSG_CHECKING([for GtkHTML])
+	
+	if test `gnome-config --libs gtkhtml` 2>&1 >/dev/null ; then
+		AC_MSG_RESULT([found])
+		
+		NAUTILUS_CFLAGS="`gnome-config --cflags oaf vfs bonobo bonobox gtkhtml` \
+		-I${nautilus_prefix}/include/libnautilus \
+		`gconf-config --cflags gconf-gtk`"
+		NAUTILUS_LIBS="`gnome-config --libs oaf vfs bonobo bonobox gtkhtml` \
+		-L${nautilus_prefix}/lib -lnautilus \
+		`gconf-config --libs gconf-gtk`"
+	else
+		AC_MSG_RESULT([missing])
+		
+		AC_MSG_ERROR([
+"-----------------------------------------------------------------------------"	
+"GtkHTML couldn not be found; it is mandatory for building the nautilus view."
+"-----------------------------------------------------------------------------"])
+	fi
+fi
+
 LIBS="$PRE_LIBS"
 AC_SUBST(NAUTILUS_CFLAGS)
 AC_SUBST(NAUTILUS_LIBS)
