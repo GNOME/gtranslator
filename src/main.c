@@ -62,12 +62,10 @@
  * The static variables used in the poptTable.
  */
 static gchar 	*gtranslator_geometry=NULL;
-static gchar 	*save_html_output_file=NULL;
 static gchar	*learn_file=NULL;
 static gchar	*auto_translate_file=NULL;
 static gchar	*exporting_po_file=NULL;
 static gboolean	build_information=FALSE;
-gboolean 	nosyntax=FALSE;
 
 /*
  * gtranslator's option table.
@@ -96,14 +94,6 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"learn", 'l', POPT_ARG_STRING, &learn_file,
 		0, N_("Learn the file completely & exit"), N_("FILENAME")
-	},
-	{
-		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
-		0, N_("HTML file to write to"), N_("HTMLFILE")
-	},
-	{
-		"nosyntax", 'y', POPT_ARG_NONE, &nosyntax,
-		0, N_("Don't highlight syntax - FIXME: We're always non-syntaxed currently! Sorry..."), NULL 
 	},
 	POPT_AUTOHELP {NULL}
 };
@@ -437,7 +427,7 @@ int main(int argc, char *argv[])
 		 * As everything seemed to went fine, print out a nice
 		 *  message informing the user about the success.
 		 */
-		g_print(_("Learned `%s' successfully.\n"), learn_file);
+		g_print(_("Learned file `%s' successfully for your learn buffer.\n"), learn_file);
 
 		return 0;
 	}
@@ -479,7 +469,7 @@ int main(int argc, char *argv[])
 		/*
 		 * Give us another small status feedback about the export.
 		 */
-		g_print(_("Exported learn buffer to `%s'.\n"), exporting_po_file);
+		g_print(_("Exported learn buffer to file `%s'.\n"), exporting_po_file);
 
 		return 0;
 	}

@@ -1,5 +1,11 @@
 2003-08-03  Fatih Demir <kabalak@gtranslator.org>
 
+	* main.c: Removed the the webalizing option & the nosyntax option from
+		the command line options - we haven't got any webalizing code
+		 left over anymore and the nosyntax option should be only
+		  possible from the prefs dialog, an usage from the cmdline
+		   doesn't seem very logical and suppliable for me.
+
 	* dialogs.c: Fixed the "Save as" dialog callbacks as the signal was
 		connected to the wrong "response" - a change to "clicked" for
 		 the button clicks in the file selection dialog and now the
@@ -9,10 +15,12 @@
 		seriously and don't print "(null)" to the po files.
 
 	* message.c, messages.h & parse.c: Implement a studido way of support
-		for the plural forms via simply attaching msgstr_0/_1/_2 to
-		 the GtrMsg structure - is stupid, but shall work and makes
-		  it also possible to reuse our beloved and already functions
-		   for the string handling.
+		for the plural forms via simply attaching msgstr_1/_2 to the
+		 GtrMsg structure - is stupid, but shall work and makes it
+		  also possible to reuse our beloved and already functions
+		   for the string handling; the normal parsed "msgstr[0]"
+		    field is representen by "msgstr" in GtrMsg to make the
+		     editing more obvious and logical.
 
 2003-08-02  Fatih Demir <kabalak@gtranslator.org>
 

@@ -1,6 +1,7 @@
 /*
  * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  * 			Thomas Ziehmer <thomas@gtranslator.org>
+ * 			Ross Golder <ross@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -233,6 +234,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		GTK_CHECK_MENU_ITEM(the_edit_menu[19].widget),
 		msg->status & GTR_MSG_STATUS_FUZZY
 	);
+
 	nothing_changes = FALSE;
 	message_changed = FALSE;
 }
