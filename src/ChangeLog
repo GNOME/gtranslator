@@ -1,5 +1,13 @@
 2001-03-09  Fatih Demir	<kabalak@gtranslator.org>
 
+	* find.c: Made one comment be a C comment, not a C++ comment.
+
+	* stylistics.c: Parse all informations from the color schemes into the
+		colors.
+
+	* syntax.c: Use a macro for the char-conditions ("eq(1, 'M')" is nicer
+		then "msg[cp+1] && msg[cp+1]=='M'").
+
 	* prefs_init.c: Turn off keeping of obsolete messages per default.
 
 2001-03-08  Fatih Demir	<kabalak@gtranslator.org>

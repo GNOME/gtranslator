@@ -42,6 +42,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	 */
 	#define clear_string(x) x=g_string_truncate(x, 0)
 	#define append_char(x, y) x=g_string_append_c(x, y)
+	#define eq(x, y) ((msg[cp+x]) && (msg[cp+x]==y))
+	#define beq(x, y) ((msg[cp-x]) && (msg[cp-x]==y))
 	
 	GString *string=g_string_new("");
 	GdkColor *color;
@@ -91,7 +93,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '%':
 				clear_string(string);
 
-				if(msg[cp+1] && msg[cp+2] && msg[cp+1]=='l')
+				if(eq(1, 'l') && msg[cp+2])
 				{
 					append_char(string, msg[cp]);
 					append_char(string, msg[cp+1]);
@@ -177,7 +179,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '#':
 			case '/':
 			case '\\':
-			case '|':	
+			case '|':
 				clear_string(string);
 
 				append_char(string, msg[cp]);
@@ -185,7 +187,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				color = get_color_from_type(COLOR_SPECIAL);
 				
 				break;
-				
+			
 			/*
 			 * Everything else:
 			 */ 

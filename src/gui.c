@@ -1148,7 +1148,7 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 }
 
 /*
- * The own keyhandler to get the left/right actions.
+ * The own keyhandler to get the left/right/up/down actions.
  */ 
 static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 {

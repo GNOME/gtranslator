@@ -144,7 +144,9 @@ static GList *get_find_pos(gchar *str)
 	hits = g_list_length(poslist);                             \
 }
 
-//    while (pos[hits].rm_so != -1 && hits < MAXHITS) hits++;        
+/*
+ * while (pos[hits].rm_so != -1 && hits < MAXHITS) hits++;
+ */
 
 static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 {

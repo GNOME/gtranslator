@@ -289,6 +289,8 @@ void init_colors(void)
 	gdk_color_parse(theme->c_format,	&colors[COLOR_C_FORMAT]);
 	gdk_color_parse(theme->number,		&colors[COLOR_NUMBER]);
 	gdk_color_parse(theme->punctuation,	&colors[COLOR_PUNCTUATION]);
+	gdk_color_parse(theme->keyword,		&colors[COLOR_KEYWORD]);
+	gdk_color_parse(theme->address,		&colors[COLOR_ADDRESS]);
 	gdk_color_parse(theme->special,		&colors[COLOR_SPECIAL]);
 	gdk_color_parse(theme->spell_error,	&colors[COLOR_SPELL_ERROR]);
 }
