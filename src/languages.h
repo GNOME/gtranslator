@@ -54,11 +54,23 @@ struct _lang {
 **/
 static lang languages[] = {
 	{
+	 N_("Afrikaans"), "af", "iso-8859-1",
+	 "", "8bit"},
+	{
 	 N_("Arabic"), "ar", "iso-8859-6",
+	 "", "8bit"},
+	{
+	 N_("Azeri"), "az", "iso-8859-9e",
 	 "", "8bit"},
 	{
 	 N_("Basque"), "eu", "iso-8859-1",
 	 "linux-eu@chanae.alphanet.ch", "8bit"},
+	{
+	 N_("Bielorussian"), "be", "windows-1251",
+	 "", "8bit"},
+	{
+	 N_("Britton"), "br", "iso-8859-1",
+	 "", "8bit"},
 	{
 	 N_("Bulgarian"), "bg", "windows-1251",
 	 "bg@li.org", "8bit"},
@@ -153,7 +165,13 @@ static lang languages[] = {
 	 N_("Russian"), "ru", "koi8-r",
 	 "ru@li.org", "8bit"},
 	{
-	 N_("Slovak"), "sk", "iso-8859-2",
+	 N_("Serbian (cyrillic)"), "sp", "iso-8859-5",
+	 "", "8bit"},
+	{
+	 N_("Serbian (latin)"), "sr", "iso-8859-2",
+	 "", "8bit"},
+	{
+	 N_("Slovenian"), "sl", "iso-8859-2",
 	 "", "8bit"},
 	{
 	 N_("Spanish"), "es", "iso-8859-1",
@@ -168,11 +186,17 @@ static lang languages[] = {
 	 N_("Swedish"), "sv", "iso-8859-1",
 	 "sv@li.org", "8bit"},
 	{
+	 N_("Thai"), "th", "tis-620",
+	 "", "8bit"},
+	{
 	 N_("Turkish"), "tr", "iso-8859-9",
 	 "tr@li.org", "8bit"},
 	{
 	 N_("Ukrainian"), "uk", "koi8-u",
 	 "linux@linux.org.ua", "8bit"},
+	{
+	 N_("Vietnamese"), "vi", "tcvn-5712",
+	 "", "8bit"},
 	{
 	 N_("Walloon"), "wa", "iso-8859-1",
 	 "linux-wa@chanae.alphanet.ch", "8bit"},
