@@ -224,7 +224,7 @@ void gtranslator_message_show(GtrMsg *msg)
 #endif //NOT_PORTED
 
 	gtk_check_menu_item_set_active(
-		GTK_CHECK_MENU_ITEM(the_edit_menu[17].widget),
+		GTK_CHECK_MENU_ITEM(the_edit_menu[19].widget),
 		msg->status & GTR_MSG_STATUS_FUZZY
 	);
 	nothing_changes = FALSE;

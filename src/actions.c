@@ -106,11 +106,11 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_FIND, the_edit_menu[7], the_navibar[8]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
 	insert_action(ACT_REPLACE, the_edit_menu[9], the_navibar[9]);
-	insert_action(ACT_QUERY, the_edit_menu[10], the_navibar[10]);
-	insert_action(ACT_HEADER, the_edit_menu[12], the_toolbar[6]);
-	insert_action(ACT_COMMENT, the_edit_menu[14], NONE);
-	insert_action(ACT_COPY_MSGID2MSGSTR, the_edit_menu[16], NONE);
-	insert_action(ACT_FUZZY, the_edit_menu[17], NONE);
+	insert_action(ACT_QUERY, the_edit_menu[11], the_navibar[10]);
+	insert_action(ACT_HEADER, the_edit_menu[13], the_toolbar[6]);
+	insert_action(ACT_COMMENT, the_edit_menu[15], NONE);
+	insert_action(ACT_COPY_MSGID2MSGSTR, the_edit_menu[17], NONE);
+	insert_action(ACT_FUZZY, the_edit_menu[19], NONE);
 	/*-----------------------------------------------------------*/
 	insert_action(ACT_FIRST, the_go_menu[0], the_navibar[0]);
 	insert_action(ACT_BACK, the_go_menu[1], the_navibar[1]);

@@ -469,7 +469,7 @@ void gtranslator_color_scheme_show_list()
 
 	gint		 i=0;
 	
-	gchar 		*menupath=_("_Settings/_Colorschemes/");
+	gchar 		*menupath=_("_View/_Colorschemes/");
 
 	/*
 	 * Delete the old entries.

@@ -45,8 +45,8 @@
 GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
 	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
+	GNOMEUIINFO_MENU_VIEW_TREE(the_view_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Go"), the_go_menu),
-	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
 	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
 	GNOMEUIINFO_END
 };
@@ -139,6 +139,7 @@ GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_MENU_FIND_ITEM(gtranslator_find_dialog, NULL),
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtranslator_find, NULL),
 	GNOMEUIINFO_MENU_REPLACE_ITEM(gtranslator_replace_dialog, NULL),
+	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("_Query..."),
 		N_("Query for a string"),
@@ -170,8 +171,9 @@ GnomeUIInfo the_edit_menu[] = {
 		GNOME_APP_PIXMAP_DATA, copy_msgid2msgstr_xpm,
 		GDK_F11, 0, NULL
 	},
+	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
+		GNOME_APP_UI_TOGGLEITEM, N_("Fu_zzy"),
 		N_("Toggle fuzzy status of a message"),
 		gtranslator_message_change_status,
 		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
@@ -239,12 +241,13 @@ GnomeUIInfo the_go_menu[] = {
 	GNOMEUIINFO_END
 };
 
-GnomeUIInfo the_colorschemes_menu[] = {
+
+GnomeUIInfo the_view_menu[] = {
+	GNOMEUIINFO_SUBTREE(N_("_Colorschemes"), the_colorschemes_menu),
 	GNOMEUIINFO_END
 };
 
-GnomeUIInfo the_settings_menu[] = {
-	GNOMEUIINFO_SUBTREE(N_("_Colorschemes"), the_colorschemes_menu),
+GnomeUIInfo the_colorschemes_menu[] = {
 	GNOMEUIINFO_END
 };
 

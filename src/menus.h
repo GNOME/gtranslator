@@ -29,9 +29,11 @@ extern GnomeUIInfo the_menus[];
 extern GnomeUIInfo the_file_menu[];
 extern GnomeUIInfo the_last_files_menus[];
 extern GnomeUIInfo the_edit_menu[];
-extern GnomeUIInfo the_go_menu[];
+
+extern GnomeUIInfo the_view_menu[];
 extern GnomeUIInfo the_colorschemes_menu[];
-extern GnomeUIInfo the_settings_menu[];
+
+extern GnomeUIInfo the_go_menu[];
 extern GnomeUIInfo the_help_menu[];
 
 extern GnomeUIInfo the_toolbar[];
