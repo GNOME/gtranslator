@@ -832,7 +832,7 @@ void compile(GtkWidget * widget, gpointer useless)
 		fgets(line, 128, fs);
 		g_strchomp(line);
 		g_snprintf(status, sizeof(status),
-		    _("Compile successfull:\n%s"), line);
+		    _("Compile successful:\n%s"), line);
 		gnome_app_message(GNOME_APP(app1), status);
 	}
 	fclose(fs);
