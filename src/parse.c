@@ -69,17 +69,17 @@ void parse(gchar *po)
 	* Set the global filename
 	**/
 	i_love_this_file=po;
-        /**
-        * Parse the file ...
-        **/
-        while(
-        fgets(temp_char,sizeof(temp_char),fs)!=NULL
-        )
-        {
+	/**
+	* Parse the file ...
+	**/
+	while(
+	fgets(temp_char,sizeof(temp_char),fs)!=NULL
+	)
+	{
 		/**
 		* Create a new structure.
 		**/
-		gtr_msg *msg=g_new(gtr_msg,1);
+		gtr_msg *msg=g_new0(gtr_msg,1);
 		z++;
 		/**
 		* Try to get the header :
@@ -134,12 +134,12 @@ void parse(gchar *po)
 		{
 			g_free(msg);
 		}
-        }
-        /**
-        * Show an updated status
-        **/
+	}
+	/**
+	* Show an updated status
+	**/
 	sprintf(status,_("Finished reading \"%s\", %i lines."),po,z);
-        gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	/**
 	* So the other functions can get a point 
 	**/
