@@ -399,12 +399,13 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 	replacy=gnome_entry_new("REPLACE_WITH_THIS");
 	
 	menu=gtk_menu_new();
-	menu_item=gtk_menu_item_new_with_label(_("English"));
+	
+	menu_item = gtk_menu_item_new_with_label(_("Comments"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
-		GINT_TO_POINTER(findEnglish));
+		GINT_TO_POINTER(findComment));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
-	
+
 	menu_item=gtk_menu_item_new_with_label(_("Translated"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
@@ -417,43 +418,23 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 		GINT_TO_POINTER(findBoth));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
-	menu_item = gtk_menu_item_new_with_label(_("Comments"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(findComment));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
-	
-	menu_item = gtk_menu_item_new_with_label(_("In all strings"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(findAll));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
-	
 	switch (wants.find_in) 
 	{
-		case findEnglish:    
-			findMenu=0; 
+		case findComment: 
+			findMenu=0;
 				break;
 			
-		case findTranslated: 
-			findMenu=1; 
-				break;
-			
-		case findBoth:       
-			findMenu=2; 
+		case findTranslated:
+			findMenu=1;
 				break;
 		
-		case findComment:
-			findMenu=3;
-				break;
-		
-		case findAll:
-			findMenu=4;
+		case findBoth:
+			findMenu=2;
 				break;
 	}
 	
 	gtk_menu_set_active(GTK_MENU(menu), findMenu);
-
+	
 	find_in=gtk_label_new(_("Replace in:"));
 	option=gtk_option_menu_new();
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(option), menu);
@@ -511,6 +492,9 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 			rpl=gtranslator_replace_new(findme, replaceme, FALSE, 
 				g_list_position(po->messages, po->current));
 		}
+
+		g_free(findme);
+		g_free(replaceme);
 		
 		gtranslator_replace_run(rpl);
 	}

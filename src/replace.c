@@ -186,33 +186,18 @@ static void replace_msg(gpointer data, gpointer replace)
 	 */
 	switch(wants.find_in)
 	{
-		case 1:
-			replace_core(&msg->msgid, l_replace);
-			
-			break;
+		case 4:
+			replace_core(&msg->comment, l_replace);
+				break;
 
 		case 2:
 			replace_core(&msg->msgstr, l_replace);
-			
-			break;
+				break;
 
 		case 3:
-			replace_core(&msg->msgid, l_replace);
-			replace_core(&msg->msgstr, l_replace);
-			
-			break;
-
-		case 4:
 			replace_core(&msg->comment, l_replace);
-
-			break;
-
-		case 7:
-			replace_core(&msg->msgid, l_replace);
 			replace_core(&msg->msgstr, l_replace);
-			replace_core(&msg->comment, l_replace);
-
-			break;
+				break;
 	}
 }
 
