@@ -1,6 +1,6 @@
 <!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN" [
 <!ENTITY version "0.37">
-<!ENTITY docdate "24 February 2001">
+<!ENTITY docdate "25 March 2001">
 ]>
 
 <article id="index">
@@ -43,7 +43,7 @@
 </legalnotice>
 
 <releaseinfo>
-	gtranslator documentation version 0.2
+	gtranslator documentation version 0.3
 </releaseinfo>
 
 <pubdate>&docdate;</pubdate>
@@ -62,7 +62,8 @@
 	<title>Introduction</title>
 		<para>
 			<application>gtranslator</application> offers you many 
-			comfortable dialogs to edit the po files fields.
+			comfortable dialogs to edit the po files fields and to navigate comfortably
+			through the messages of the po file.
 		</para>
 </sect1>
 
@@ -78,9 +79,7 @@
 					gettext po files</para>
 				</listitem>	
 				<listitem>
-					<para>Very low memory usage (about only
-					<emphasis>950KB with</emphasis> a po 
-					file parsed and displayed)</para>
+					<para>Very low memory usage</para>
 				</listitem>
 				<listitem>
 					<para>Navigation inside the fuzzy,
@@ -110,7 +109,7 @@
 					the filename</para>
 				</listitem>
 				<listitem>
-					<para>Opening of gzip'ed and compiled
+					<para>Opening of gzip&apos;ed and compiled
 					(.mo/.gmo) gettext po files</para>
 				</listitem>
 				<listitem>
@@ -128,41 +127,34 @@
 					file with the (if installed)
 					xml-i18n-tools</para>
 				</listitem>
+				<listitem>
+					<para>Query capability to get already made
+					translations from other gettext domains</para>
+				</listitem>
+				<listitem>
+					<para>Colorschemes for changing the syntax colors
+					on the fly -- these colorschemes are xml files and
+					easy to change/adept.</para>
+				</listitem>
+				<listitem>
+					<para>Autogeneration and filling up of the default
+					header if a new, fresh pot file is taken into
+					gtranslator</para>
+				</listitem>
+				<listitem>
+					<para>A simple Nautilus view with which you can
+					see the header fields of a po file</para>
+				</listitem>
+				<listitem>
+					<para>Find, replace dialogs and functionality</para>
+				</listitem>
+				<listitem>
+					<para>Obsolete entries in the po file are kept now
+					at preference of the user (if you want them you get
+					them in your po files)</para>
+				</listitem>
 			</itemizedlist>
 		</para>
-</sect1>
-
-<sect1 id="use-of-gtranslator">
-	<title>Usual use of <application>gtranslator</application></title>
-		<para>
-			<application>gtranslator</application> is normally used
-			to edit gettext po files (and the various metamorhoses of
-			po files like gzip'ed po files and compiled po files).
-		</para>
-		
-		<para>
-			<application>gtranslator</application> allows you to open
-			a po file directly within the command line as a argument
-			like 
-			<emphasis>
-				gtranslator filename
-			</emphasis>
-			or
-			<emphasis>
-				gtranslator http://remotehost/filename
-			</emphasis>
-			or
-			<emphasis>
-				gtranslator ftp://ftphost/filename
-			</emphasis>.	
-		</para>
-
-		<para>
-			After doing your translation work you can save your file
-			<emphasis>but</emphasis> do not forget that gtranslator
-			is for now vamping your currently not needed translations
-			(these are the strings/lines in the po files starting
-			with #~) before you save it.
 </sect1>
 
 <sect1 id="commandlinearguments">
@@ -181,17 +173,17 @@
 					<para>
 					<emphasis>--version</emphasis> Tells you
 					the version of <application>gtranslator
-					</application> you're using.
+					</application> you&apos;re using.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-					<emphasis>--display</emphasis> Let's you
+					<emphasis>--display</emphasis> Let&apos;s you
 					define the display to start 
 					<application>gtranslator</application>
 					on.
 					</para>
-				</listitem>	
+				</listitem>
 				<listitem>
 					<para>
 					<emphasis>--webalize</emphasis> Prints
@@ -206,10 +198,23 @@
 					--webalize=Evolution.html tr.po
 					</emphasis>
 					</para>
-				</listitem>	
+				</listitem>
 				<listitem>
 					<para>
-					<emphasis>--geometry</emphasis> Let's
+					<emphasis>--scheme</emphasis> Sets the
+					syntax color scheme to the given file
+					</para>
+					<para>
+					For example:
+					<emphasis>
+					<application>gtranslator</application>
+					--scheme=Schemefile
+					</emphasis>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					<emphasis>--geometry</emphasis> Let&apos;s
 					you define a standard geometry string
 					to which the gtranslator window will
 					conform.
@@ -229,6 +234,86 @@
 		</para>
 </sect1>
 
+<sect1 id="aa">
+	<title>Autoaccomplishment</title>
+		<sect2 id="idea">
+			<title>Idea</title>
+			<para>
+			Autoaccomplishment means the completion of non-translated
+			strings with already made and installed translations from the
+			user-defined default query domain (which is a program like
+			"<application>nautilus</application>").
+			</para>
+		</sect2>
+		<sect2 id="praxis">
+			<title>Practical use</title>
+			<para>
+			To use the autoaccomplish feature of gtranslator you&apos;ve got to
+			setup two main things in your personal preference.
+				<itemizedlist>
+					<listitem>
+						<para>Your language details in the <emphasis>
+						Language settings</emphasis> page of the
+						preferences dialog.
+						</para>
+					</listitem>
+					<listitem>
+						<para>Once you&apos;ve set up your language the available
+						query domains will be parsed on the next startup of
+						<application>gtranslator</application>. Then you can
+						select your default query domain in the <emphasis>
+						Personal informations</emphasis> page of the preferences
+						dialog.
+						</para>
+					</listitem>
+				</itemizedlist>
+			After you&apos;ve done this setup steps you can simply use the autoaccomplishment
+			feature by selection the corresponding menu option in the <emphasis>
+			_File</emphasis> menu.
+			</para>
+			<para>
+			All non-translated messages will be checked if they&apos;ve
+			been already translated for the default query domain and if everything went right
+			the translation found in the default query domain will be simply used as the
+			translation for the corresponding msgid.
+			</para>
+		</sect2>
+</sect1>
+
+<sect1 id="colorschemes">
+	<title>Color schemes</title>
+		<para>
+			Color schemes define the colors of the different syntax elements in gtranslator.
+		</para>
+		<para>
+			The file format for color schemes is quite easy and based on <emphasis>XML</emphasis>.
+			The default colors are included as the <emphasis>default.xml</emphasis> color scheme and
+			can be consulted if you want to write an own color scheme.
+		</para>
+		<para>
+			The tags are <emphasis>all</emphasis> mandatory and the &lt;author&gt; tag has to be before 
+			all &lt;color&gt; tags in the file. The available color targets can be also obtained from the 
+			default.xml file.
+		</para>
+		<para>
+			Many color schemes are already distributed with the default package of gtranslator and can be
+			easily selected/changed from the preferences dialog on the "Fonts, colors and color schemes"
+			page.
+		</para>
+</sect1>
+
+<sect1 id="resources">
+	<title>Resources for gtranslator</title>
+		<para>
+			The main resource for gtranslator is definetely <ulink url="http://www.gtranslator.org" 
+			type="http">www.gtranslator.org</ulink>.
+		</para>
+		<para>
+			There you can watch progress in the NEWS section, get newest sources from releases and/or 
+			CVS snapshots, watch screenshots or do other nice things.
+		</para>
+</sect1>
+
 <sect1 id="thanks">
 	<title>Thanks</title>
 		<sect2 id="contributors">
@@ -237,6 +322,13 @@
 			Glacious support in different fields were done by these
 			persons:
 			<itemizedlist mark="bullet">
+				<listitem>
+					<para>
+					Thomas Ziehmer
+					<email>thomas@gtranslator.org</email>
+					for the find dialog implementation
+					</para>
+				</listitem>
 				<listitem>
 					<para>
 					<emphasis>All</emphasis> translators of
@@ -256,7 +348,7 @@
 					</para>
 				</listitem>
 				<listitem>
-					<para>Denis Pleic'
+					<para>Denis Pleic&apos;
 					<email>dpleic@linux.hr</email>
 					</para>
 				</listitem>
@@ -329,16 +421,10 @@
 					<email>menesis@gtranslator.org</email>
 					</para>
 				</listitem>
-				<listitem>
-					<para>
-					Thomas Ziehmer, aka. chip,
-					<email>thomas@gtranslator.org</email>
-					</para>
-				</listitem>	
 			</itemizedlist>
 			More information about the authors can be obtained from
 			<ulink url="http://www.gtranslator.org/authors.html"
-			type="http">gtranslator.org's authors section</ulink>.
+			type="http">gtranslator.org&apos;s authors section</ulink>.
 		</para>
 </sect1>
 

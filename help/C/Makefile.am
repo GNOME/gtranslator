@@ -22,12 +22,14 @@ $(gtranslator_omffile): $(gtranslator_omffile).presetup
 		$(gtranslator_omffile).presetup $(gtranslator_omffile)
 
 gtranslator_htmlfiles = \
+	aa.html \
 	authors.html \
+	colorschemes.html \
 	commandlinearguments.html \
 	features.html \
 	index.html \
+	resources.html \
 	thanks.html \
-	use-of-gtranslator.html \
 	docbook.css
 
 if SCROLLKEEPER_PRESENT
