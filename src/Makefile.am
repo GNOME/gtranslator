@@ -27,10 +27,7 @@ bin_PROGRAMS = gtranslator
 	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
 		< $< > $@
 
-##
-## This should be a file before the first including file of defines.include!
-##
-about.c: defines.include
+$(gtranslator_SOURCES): defines.include
 
 gtranslator_SOURCES = \
 	about.c about.h \

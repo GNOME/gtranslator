@@ -511,12 +511,12 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Up:
 					IfGood(the_navibar[1])
 					{
-						gtranslator_message_go_to_previous(NULL, NULL);
-
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
 							(gpointer) g_list_position(po->messages, po->current));
+						
+						gtranslator_message_go_to_previous(NULL, NULL);
 					}
 					break;
 				
@@ -524,36 +524,36 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Down:
 					IfGood(the_navibar[3])
 					{
-						gtranslator_message_go_to_next(NULL, NULL);
-						
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
 							(gpointer) g_list_position(po->messages, po->current));
+						
+						gtranslator_message_go_to_next(NULL, NULL);
 					}
 					break;
 
 				case GDK_Page_Up:
 					IfGood(the_navibar[0])
 					{
-						gtranslator_message_go_to_first(NULL, NULL);
-						
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
 							(gpointer) g_list_position(po->messages, po->current));
+
+						gtranslator_message_go_to_first(NULL, NULL);
 					}
 					break;
 					
 				case GDK_Page_Down:
 					IfGood(the_navibar[4])
 					{
-						gtranslator_message_go_to_last(NULL, NULL);
-						
 						gtranslator_undo_add("Go to previous",
 							"gtranslator_message_go_to_previous",
 							(GFunc) gtranslator_message_go_to_no, 
 							(gpointer) g_list_position(po->messages, po->current));
+						
+						gtranslator_message_go_to_last(NULL, NULL);
 					}
 					break;
 					
