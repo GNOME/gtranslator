@@ -1,5 +1,4 @@
 #undef BIND_MIME
-#undef EMACS_LOVER
 #undef ENABLE_NLS
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT

@@ -14,7 +14,7 @@
 
 #include <gnome.h>
 
-#ifdef USE_WINDOW_ICON 
+#ifdef USE_WINDOW_ICON
 #include <libgnomeui/gnome-window-icon.h>
 #endif
 
@@ -25,7 +25,7 @@
 GtkWidget *app1;
 GtkWidget *trans_box;
 GtkWidget *text1;
-GtkWidget *appbar1; 
+GtkWidget *appbar1;
 
 void create_app1(void);
 
@@ -50,6 +50,7 @@ enum {
 	ACT_FIND,
 	ACT_FIND_AGAIN,
 	ACT_HEADER,
+	ACT_SPELL,
 	/************/
 	ACT_FIRST,
 	ACT_BACK,
@@ -62,9 +63,6 @@ enum {
 	ACT_TRANSLATED,
 	ACT_FUZZY,
 	ACT_STICK,
-	/************/
-	ACT_ADD,
-	ACT_QUERY,
 	/* This must always be the last, add new entries above */
 	ACT_END
 };

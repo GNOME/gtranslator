@@ -24,19 +24,25 @@ static gboolean find_in_msg(GList * msg, gpointer useless);
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
-gboolean for_each_msg(GList * first, FEFunc func, gpointer user_data)
+/* Calls function func on each item in list 'begin'. Starts from 
+ * item 'begin', loops to first element, and stops at 'begin'.
+ * Returns TRUE, if found, FALSE otherwise */
+gboolean for_each_msg(GList * begin, FEFunc func, gpointer user_data)
 {
 	GList *msg;
-	msg = first;
+
+	g_return_val_if_fail(begin != NULL, FALSE);
+
+	msg = begin;
 	do {
 		if (msg == NULL) {
-			msg = g_list_first(po->messages);
+			msg = g_list_first(begin);
 			g_return_val_if_fail(msg != NULL, TRUE);
-	}
+		}
 		if (func(msg, user_data))
 			return TRUE;
 		msg = msg->next;
-	} while (msg != first);
+	} while (msg != begin);
 	return FALSE;
 }
 
@@ -63,13 +69,17 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 void find_do(GtkWidget * widget, gpointer what)
 {
 	gchar *error;
+	GList *begin;
 	update_msg();
 	if (what) {
 		target = gnome_regex_cache_compile(rxc, what, eflags);
 		g_free(pattern);
 		pattern = what;
 	}
-	if (for_each_msg(po->current->next, (FEFunc)find_in_msg, NULL) == TRUE)
+	begin = po->current->next;
+	if (!begin) 
+		begin = po->messages;
+	if (for_each_msg(begin, (FEFunc)find_in_msg, NULL) == TRUE)
 		return;
 	error = g_strdup_printf(_("Could not find\n\"%s\""), pattern);
 	gnome_app_message(GNOME_APP(app1), error);
@@ -87,8 +97,14 @@ static gboolean is_fuzzy(GList *msg, gpointer useless)
 
 void goto_next_fuzzy(GtkWidget * widget, gpointer useless)
 {
+	GList *begin;
+	
 	g_return_if_fail(file_opened == TRUE);
-	if (for_each_msg(po->current->next, (FEFunc)is_fuzzy, NULL) == TRUE)
+	
+ 	begin = po->current->next;
+	if (!begin)
+		begin = po->messages;
+	if (for_each_msg(begin, (FEFunc)is_fuzzy, NULL) == TRUE)
 		return;
 	gnome_app_message(GNOME_APP(app1), 
 			  _("There are no more fuzzy messages"));
@@ -105,8 +121,14 @@ static gboolean is_untranslated(GList *msg, gpointer useless)
 
 void goto_next_untranslated(GtkWidget * widget, gpointer useless)
 {
+	GList *begin;
+	
 	g_return_if_fail(file_opened == TRUE);
-	if (for_each_msg(po->current->next, (FEFunc)is_untranslated, NULL))
+
+ 	begin = po->current->next;
+	if (!begin)
+		begin = po->messages;
+	if (for_each_msg(begin, (FEFunc)is_untranslated, NULL))
 		return;
 	gnome_app_message(GNOME_APP(app1), 
 			  _("All messages seem to be translated"));

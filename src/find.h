@@ -8,7 +8,7 @@
 * -- the header.
 **/
 
-#ifndef GTR_FIND_H 
+#ifndef GTR_FIND_H
 #define GTR_FIND_H 1
 
 #include <gtk/gtkwidget.h>

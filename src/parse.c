@@ -104,7 +104,7 @@ static void append_line(gchar ** old, const gchar * tail)
 				to_add[d++] = tail[s];
 				g_warning
 				    ("New escaped char found: \\%c\nAddthis to parse.c, line %i",
-					tail[s], __LINE__);
+				     tail[s], __LINE__);
 			}
 		} else {
 			to_add[d++] = tail[s];
@@ -205,7 +205,7 @@ static gboolean actual_parse(void)
 			/* Reset the status of message */
 			msgid_ok = msgstr_ok = comment_ok = FALSE;
 			msg = g_new0(GtrMsg, 1);
-			}
+		}
 	}
 	/* If there was no newline at end of file */
 	if ((msgid_ok == TRUE) && (msgstr_ok == FALSE)) {
@@ -297,10 +297,10 @@ static gchar *restore_msg(gchar * given)
 	GString *rest;
 	gchar *result;
 	gint s, lines = 0, here = 8;
-	
+
 	if (!given)
 		return "";
-	
+
 	rest = g_string_sized_new(strlen(given));
 	for (s = 0; s < strlen(given); s++) {
 		if (given[s] == '\n') {
@@ -312,7 +312,7 @@ static gchar *restore_msg(gchar * given)
 				g_string_append(rest, "\\n\"\n\"");
 				here = 0;
 				lines++;
-		} else 
+			} else
 				g_string_append(rest, "\\n");
 		} else if (given[s] == '\"') {
 			g_string_append(rest, "\\\"");
@@ -352,7 +352,7 @@ static void write_the_message(gpointer data, gpointer fs)
 {
 	GtrMsg *msg = GTR_MSG(data);
 	gchar *id, *str;
-	
+
 	id = restore_msg(msg->msgid);
 	str = restore_msg(msg->msgstr);
 
@@ -385,7 +385,7 @@ static gboolean actual_write(const gchar * name)
 	update_msg();
 	/* Write every message to the file */
 	g_list_foreach(po->messages, (GFunc) write_the_message, (gpointer) fs);
-	
+
 	fclose(fs);
 	po->file_changed = FALSE;
 	return TRUE;
@@ -416,7 +416,7 @@ void save_current_file(GtkWidget * widget, gpointer useless)
 			question = g_strdup_printf(_("You didn't change anything in\n%s\nDo you want to save it anyway?"),
 					    po->filename);
 			dialog = gnome_message_box_new(question,
-				GNOME_MESSAGE_BOX_QUESTION,
+			    GNOME_MESSAGE_BOX_QUESTION,
 			    GNOME_STOCK_BUTTON_YES,
 			    GNOME_STOCK_BUTTON_NO,
 			    GNOME_STOCK_BUTTON_CANCEL,
@@ -480,10 +480,10 @@ void revert_file(GtkWidget * widget, gpointer useless)
 				    po->filename);
 		dialog =
 		    gnome_message_box_new(question,
-			GNOME_MESSAGE_BOX_QUESTION,
+					  GNOME_MESSAGE_BOX_QUESTION,
 					  GNOME_STOCK_BUTTON_YES,
 					  GNOME_STOCK_BUTTON_NO,
-			GNOME_STOCK_BUTTON_CANCEL, NULL);
+					  GNOME_STOCK_BUTTON_CANCEL, NULL);
 		show_nice_dialog(&dialog, "gtranslator -- revert");
 		reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 		g_free(question);
@@ -518,9 +518,9 @@ void compile(GtkWidget * widget, gpointer useless)
 			    PO_FILE,RESULT);
 	res = system(cmd);
 	fs=fopen(RESULT,"r");
-		/**
-		* If there has been an error show an error-box
-		**/
+	/**
+	* If there has been an error show an error-box
+	**/
 	if (res != 0) {
 		compile_error_dialog(fs);
 	} else {

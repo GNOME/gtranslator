@@ -87,7 +87,7 @@ GtrHeader * get_header(GtrMsg * msg)
 		else
 		if_key_is("Last-Translator")
 		    split_name_email(pair[1], &ph->translator, &ph->tr_email);
-		else 
+		else
 		if_key_is("Language-Team")
 		    split_name_email(pair[1], &ph->language, &ph->lg_email);
 		else
@@ -113,7 +113,7 @@ GtrHeader * get_header(GtrMsg * msg)
 		g_print
 		    ("New header entry found (please add it to header_stuff.c):\n%s\n",
 		     pair[0]);
-		
+
 		g_strfreev(pair);
 		i++;
 	}
@@ -127,14 +127,14 @@ GtrHeader * get_header(GtrMsg * msg)
 /* Creates new GtrMsg, with all data set to current state of header */
 GtrMsg * put_header(GtrHeader * h)
 {
-	gchar *lang;
+	gchar *group;
 	GtrMsg *msg = g_new0(GtrMsg, 1);
 	msg->comment = g_strdup(h->comment);
 
 	if (h->lg_email)
-		lang = g_strdup_printf("%s <%s>", h->language, h->lg_email);
+		group = g_strdup_printf("%s <%s>", h->language, h->lg_email);
 	else
-		lang = g_strdup(h->language);
+		group = g_strdup(h->language);
 	
 	msg->msgstr = g_strdup_printf("\
 Project-Id-Version: %s %s\n\
@@ -149,11 +149,11 @@ Content-Transfer-Encoding: %s\n",
 		h->pot_date,
 		h->po_date,
 		h->translator, h->tr_email,
-		lang,
+		group,
 		h->mime_version,
 		h->charset,
 		h->encoding);
-	g_free(lang);
+	g_free(group);
 	return msg;
 }
 
@@ -247,8 +247,8 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	lang_vbox = gtk_vbox_new(FALSE, GNOME_PAD);
 	gnome_property_box_append_page(GNOME_PROPERTY_BOX(e_header), lang_vbox,
 				       label);
-
-        /**
+	
+	/**
         * Add the GNOME-entry-boxes.
         **/
 	prj_comment =

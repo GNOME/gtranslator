@@ -51,214 +51,218 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 * The menu-entries
 **/
 static GnomeUIInfo the_file_menu[] = {
-        {
-          GNOME_APP_UI_ITEM, N_("_Compile"),
-          N_("Compile the po-file"),
-          compile, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
+	{
+	 GNOME_APP_UI_ITEM, N_("_Compile"),
+	 N_("Compile the po-file"),
+	 compile, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
 	 GDK_C, GDK_MOD1_MASK, NULL},
 	GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
-        GNOMEUIINFO_MENU_SAVE_ITEM(save_current_file, NULL),
-        GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
-        GNOMEUIINFO_MENU_REVERT_ITEM(revert_file, NULL),
-        GNOMEUIINFO_MENU_CLOSE_ITEM(close_file, NULL),
-        GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
-        GNOMEUIINFO_END
+	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
+	GNOMEUIINFO_MENU_SAVE_ITEM(save_current_file, NULL),
+	GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
+	GNOMEUIINFO_MENU_REVERT_ITEM(revert_file, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(close_file, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
+	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_MENU_UNDO_ITEM(undo_changes, NULL),
 	GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_MENU_CUT_ITEM(cut_clipboard, NULL),
-        GNOMEUIINFO_MENU_COPY_ITEM(copy_clipboard, NULL),
-        GNOMEUIINFO_MENU_PASTE_ITEM(paste_clipboard, NULL),
+	GNOMEUIINFO_MENU_CUT_ITEM(cut_clipboard, NULL),
+	GNOMEUIINFO_MENU_COPY_ITEM(copy_clipboard, NULL),
+	GNOMEUIINFO_MENU_PASTE_ITEM(paste_clipboard, NULL),
 	GNOMEUIINFO_MENU_CLEAR_ITEM(clear_selection, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_FIND_ITEM(find_dialog, NULL),
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(find_do, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("_Header..."),
-		N_("Edit the header"),
-		edit_header,
+			       N_("Edit the header"),
+			       edit_header,
 			       GNOME_STOCK_MENU_PROP),
 	GNOMEUIINFO_ITEM_STOCK(N_("_Spell check..."),
 			       N_("Check the spelling of translation"),
 			       check_spelling,
 			       GNOME_STOCK_MENU_SPELLCHECK),
-        GNOMEUIINFO_END
+	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_messages_menu[] = {
-        {
-          GNOME_APP_UI_ITEM, N_("_First"),
-          N_("Go to the first message"),
-          goto_first_msg, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FIRST,
+	{
+	 GNOME_APP_UI_ITEM, N_("_First"),
+	 N_("Go to the first message"),
+	 goto_first_msg, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FIRST,
 	 GDK_Home, GDK_CONTROL_MASK, NULL},
-        {
-          GNOME_APP_UI_ITEM, N_("_Back"),
-          N_("Go one message back"),
-          goto_prev_msg, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BACK,
+	{
+	 GNOME_APP_UI_ITEM, N_("_Back"),
+	 N_("Go one message back"),
+	 goto_prev_msg, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BACK,
 	 GDK_Page_Up, 0, NULL},
-        {
-          GNOME_APP_UI_ITEM, N_("_Next"),
-          N_("Go one message forward"),
-          goto_next_msg, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
+	{
+	 GNOME_APP_UI_ITEM, N_("_Next"),
+	 N_("Go one message forward"),
+	 goto_next_msg, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
 	 GDK_Page_Down, 0, NULL},
-        {
-          GNOME_APP_UI_ITEM, N_("_Last"),
+	{
+	 GNOME_APP_UI_ITEM, N_("_Last"),
 	 N_("Go to the last message"),
-          goto_last_msg, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_LAST,
+	 goto_last_msg, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_LAST,
 	 GDK_End, GDK_CONTROL_MASK, NULL},
-        GNOMEUIINFO_SEPARATOR,
-        {
-          GNOME_APP_UI_ITEM, N_("_Go to..."),
-          N_("Goto specified message number"),
-          goto_dlg, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("_Go to..."),
+	 N_("Goto specified message number"),
+	 goto_dlg, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
 	 'G', GDK_CONTROL_MASK, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Next fuzz_y"),
+	 GNOME_APP_UI_ITEM, N_("Next fuz_zy"),
 	 N_("Go to next fuzzy message"),
 	 goto_next_fuzzy, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
-	 'Y', GDK_MOD1_MASK, NULL},
+	 'Z', GDK_MOD1_MASK, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
 	 N_("Go to next untranslated message"),
 	 goto_next_untranslated, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
 	 'U', GDK_MOD1_MASK, NULL},
-        GNOMEUIINFO_END
+	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_msg_status_menu[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Translated"),
-		N_("Toggle translated status of a message"),
-		toggle_msg_status, 
+	 N_("Toggle translated status of a message"),
+	 toggle_msg_status,
 	 GINT_TO_POINTER(GTR_MSG_STATUS_TRANSLATED),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
+	 NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
-		N_("Toggle fuzzy status of a message"),
+	 N_("Toggle fuzzy status of a message"),
 	 toggle_msg_status,
 	 GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+	 NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Stick"),
-		N_("Stick this message"),
+	 N_("Stick this message"),
 	 toggle_msg_status,
 	 GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_STOP,
+	 NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_STOP,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_settings_menu[] = {
-        GNOMEUIINFO_MENU_PREFERENCES_ITEM(prefs_box, NULL),
-        GNOMEUIINFO_END
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(prefs_box, NULL),
+	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_help_menu[] = {
 	GNOMEUIINFO_HELP("gtranslator"),
-        GNOMEUIINFO_MENU_ABOUT_ITEM(about_box, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM(about_box, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
-		N_("gtranslator's homepage on the web"),
-		call_gtranslator_homepage,
+			       N_("gtranslator's homepage on the web"),
+			       call_gtranslator_homepage,
 			       GNOME_STOCK_MENU_HOME),
-        GNOMEUIINFO_END
+	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_menus[] = {
-        GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
-        GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
+	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
+	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
 	GNOMEUIINFO_SUBTREE(N_("Message _status"), the_msg_status_menu),
-        GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
-        GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
-        GNOMEUIINFO_END
+	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
+	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
+	GNOMEUIINFO_END
 };
 
-/*
+/* 
  * The toolbar buttons
  */
 
 static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
-          N_("Compile the po-file"),
-          compile,
+			       N_("Compile the po-file"),
+			       compile,
 			       GNOME_STOCK_PIXMAP_CONVERT),
 	GNOMEUIINFO_ITEM_STOCK(N_("Open"),
-          N_("Open a po-file"),
-          open_file,
+			       N_("Open a po-file"),
+			       open_file,
 			       GNOME_STOCK_PIXMAP_OPEN),
 	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
-          N_("Save File"),
-          save_current_file,
+			       N_("Save File"),
+			       save_current_file,
 			       GNOME_STOCK_PIXMAP_SAVE),
 	GNOMEUIINFO_ITEM_STOCK(N_("Save as"),
-          N_("Save file with a different name"),
-          save_file_as,
+			       N_("Save file with a different name"),
+			       save_file_as,
 			       GNOME_STOCK_PIXMAP_SAVE_AS),
 	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
-          N_("Edit the header"),
-          edit_header,
+			       N_("Edit the header"),
+			       edit_header,
 			       GNOME_STOCK_PIXMAP_PROPERTIES),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Options"),
-          N_("gtranslator options"),
-          prefs_box,
+			       N_("gtranslator options"),
+			       prefs_box,
 			       GNOME_STOCK_PIXMAP_PREFERENCES),
 	GNOMEUIINFO_ITEM_STOCK(N_("Exit"),
-          N_("Exit"),
-          gtranslator_quit,
+			       N_("Exit"),
+			       gtranslator_quit,
 			       GNOME_STOCK_PIXMAP_EXIT),
 	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_searchbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("First"),
-          N_("Go to the first message"),
-          goto_first_msg,
+			       N_("Go to the first message"),
+			       goto_first_msg,
 			       GNOME_STOCK_PIXMAP_FIRST),
 	GNOMEUIINFO_ITEM_STOCK(N_("Back"),
-          N_("Go one message back"),
-          goto_prev_msg,
+			       N_("Go one message back"),
+			       goto_prev_msg,
 			       GNOME_STOCK_PIXMAP_BACK),
 	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
-          N_("Go one message forward"),
-          goto_next_msg,
+			       N_("Go one message forward"),
+			       goto_next_msg,
 			       GNOME_STOCK_PIXMAP_FORWARD),
 	GNOMEUIINFO_ITEM_STOCK(N_("Last"),
 			       N_("Go to the last message"),
-          goto_last_msg,
+			       goto_last_msg,
 			       GNOME_STOCK_PIXMAP_LAST),
+	/*GNOMEUIINFO_ITEM_STOCK(N_("Untranslated"),*/
+	GNOMEUUINFO_ITEM_STOCK(N_("Missing"),
+			       N_("Go to next untranslated message"),
+			       goto_next_untranslated,
+			       GNOME_STOCK_PIXMAP_BOOK_OPEN),
 	GNOMEUIINFO_ITEM_STOCK(N_("GoTo"),
-          N_("Goto specified message number"),
-          goto_dlg,
+			       N_("Goto specified message number"),
+			       goto_dlg,
 			       GNOME_STOCK_PIXMAP_JUMP_TO),
-	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Find"),
-          N_("Find string in po-file"),
-          find_dialog,
+			       N_("Find string in po-file"),
+			       find_dialog,
 			       GNOME_STOCK_PIXMAP_SEARCH),
 	GNOMEUIINFO_END
 };
 
 /*****
- *  Actions stuff goes here
+ * Actions stuff goes here
  *****/
 void change_actions(gboolean state, ...)
 {
@@ -304,6 +308,7 @@ static void create_actions(void)
 	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[6]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
 	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[4]);
+	insert_action(ACT_SPELL, the_edit_menu[11], NONE);
 	/*------------------------------------------------ */
 	insert_action(ACT_FIRST, the_messages_menu[0], the_searchbar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_searchbar[1]);
@@ -311,7 +316,7 @@ static void create_actions(void)
 	insert_action(ACT_LAST, the_messages_menu[3], the_searchbar[3]);
 	insert_action(ACT_GOTO, the_messages_menu[5], the_searchbar[4]);
 	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], NONE);
-	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], NONE);
+	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], the_searchbar[5]);
 	/*------------------------------------------------ */
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
 	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
@@ -327,7 +332,7 @@ void disable_actions_no_file(void)
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_FIRST,
 			ACT_BACK, ACT_NEXT, ACT_LAST, ACT_GOTO,
 			ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
-			ACT_TRANSLATED, ACT_FUZZY, ACT_STICK, ACT_ADD);
+			ACT_TRANSLATED, ACT_FUZZY, ACT_STICK);
 }
 
 void enable_actions_just_opened(void)
@@ -336,7 +341,7 @@ void enable_actions_just_opened(void)
 		       ACT_PASTE, ACT_CLEAR, ACT_FIND, ACT_HEADER, ACT_NEXT,
 		       ACT_LAST, ACT_GOTO, ACT_NEXT_FUZZY, 
 		       ACT_NEXT_UNTRANSLATED, ACT_TRANSLATED,
-		       ACT_FUZZY, ACT_STICK, ACT_ADD);
+		       ACT_FUZZY, ACT_STICK);
 }
 
 /*
@@ -345,14 +350,14 @@ void enable_actions_just_opened(void)
 void create_app1(void)
 {
 	GtkWidget *search_bar, *tool_bar;
-        GtkWidget *vbox1;
+	GtkWidget *vbox1;
 	GtkWidget *scrolledwindow1, *scrolledwindow2;
 
 	/**
 	* Create the app	
 	**/
 	app1 = gnome_app_new("gtranslator", _("gtranslator"));
-        gnome_app_create_menus(GNOME_APP(app1), the_menus);
+	gnome_app_create_menus(GNOME_APP(app1), the_menus);
 
 	/**
 	* Create the tool- and search-bar
@@ -360,17 +365,17 @@ void create_app1(void)
 	tool_bar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(tool_bar), the_toolbar, NULL);
-        gnome_app_add_toolbar(GNOME_APP(app1), GTK_TOOLBAR(tool_bar), 
-		"tool_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
-		GNOME_DOCK_TOP, 1, 0, 0);
+	gnome_app_add_toolbar(GNOME_APP(app1), GTK_TOOLBAR(tool_bar),
+			      "tool_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
+			      GNOME_DOCK_TOP, 1, 0, 0);
 
 	search_bar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 				     GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_searchbar, NULL);
-	gnome_app_add_toolbar(GNOME_APP(app1), GTK_TOOLBAR(search_bar), 
-		"search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
-		GNOME_DOCK_TOP, 2, 0, 0);
-	
+	gnome_app_add_toolbar(GNOME_APP(app1), GTK_TOOLBAR(search_bar),
+			      "search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
+			      GNOME_DOCK_TOP, 2, 0, 0);
+
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gnome_app_set_contents(GNOME_APP(app1), vbox1);
 
@@ -411,10 +416,10 @@ void create_app1(void)
 	/**
 	* The D'n'D signals
 	**/
-	gtk_drag_dest_set(GTK_WIDGET(app1), 
-		GTK_DEST_DEFAULT_ALL | GTK_DEST_DEFAULT_HIGHLIGHT, 
+	gtk_drag_dest_set(GTK_WIDGET(app1),
+			  GTK_DEST_DEFAULT_ALL | GTK_DEST_DEFAULT_HIGHLIGHT,
 			  dragtypes, sizeof(dragtypes) / sizeof(dragtypes[0]),
-		GDK_ACTION_COPY);
+			  GDK_ACTION_COPY);
 	gtk_signal_connect(GTK_OBJECT(app1), "drag_data_received",
 			   GTK_SIGNAL_FUNC(gtranslator_dnd),
 			   GUINT_TO_POINTER(dnd_type));
@@ -438,7 +443,7 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 	return FALSE;
 }
 
-/*
+/* 
  * Display the message in text boxes
  * TODO: add syntax highlighting for %s, numbers, symbols, tabs; option to 
  * replace spaces with centered dot; and append a char at the end of message
@@ -631,7 +636,7 @@ static void undo_changes(GtkWidget * widget, gpointer useless)
 static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 {
 	if (nothing_changes)
-			return;
+		return;
 	if (!po->file_changed) {
 		po->file_changed = TRUE;
 		enable_actions(ACT_SAVE, ACT_REVERT);

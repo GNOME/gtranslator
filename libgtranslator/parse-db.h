@@ -32,16 +32,26 @@
 **/
 #include <messages.h>
 
+/* Maybe we have already included this stuff */
+#ifndef __GNOME_I18N_H__
+
 /**
 * If NLS is requested include the headers and set the define and if it's
 *  not requested, simply make a foo-define.
 */
-#ifndef ENABLE_NLS
-        #include <libintl.h>
-        #include <locale.h>
-        #define _(String) gettext(String)
+#ifdef ENABLE_NLS
+#    include <libintl.h>
+#    define _(String) gettext(String)
+#    ifdef gettext_noop
+#        define N_(String) gettext_noop (String)
+#    else
+#        define N_(String) (String)
+#    endif
 #else
-	#define _(String) String
+#    define _(String) String
+#    define N_(String) (String)
+#endif
+
 #endif
 
 /**
@@ -62,11 +72,6 @@ void parse_db_for_lang(gchar *language_code);
 /**
 * Checks the type of the message db file.
 **/
-gint parse_db_check(xmlDocPtr testit);
-
-/**
-* Simply reloads the current message db.
-**/
-static void parse_db_reload();
+void parse_db_check(xmlDocPtr testit);
 
 #endif

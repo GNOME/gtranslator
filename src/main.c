@@ -16,7 +16,7 @@
 
 #include "gui.h"
 #include "session.h"
-#include "prefs.h" 
+#include "prefs.h"
 #include "parse.h"
 #include "parse-db.h"
 #include "team-handle.h"
@@ -31,10 +31,10 @@ static gchar *gtranslator_geometry = NULL;
 **/
 static struct poptOption gtranslator_options[] = {
 	{
-		NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
+	 NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
 	 0, NULL, NULL},
 	{
-                "geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
+	 "geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 	 0, N_("Specifies the main-window geometry"), "GEOMETRY"},
 	POPT_AUTOHELP {NULL}
 };
@@ -59,8 +59,8 @@ int main(int argc, char *argv[])
 	/**
 	* Init gtranslator.
 	**/
-	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv, 
-		gtranslator_options, 0, &context);
+	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv,
+				   gtranslator_options, 0, &context);
 	/* Initialize the regular expression cache */
 	rxc = gnome_regex_cache_new_with_size(20);
 	read_prefs();
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 			   GTK_SIGNAL_FUNC(gtranslator_sleep),
 			   (gpointer) argv[0]);
 	gtk_signal_connect(GTK_OBJECT(client), "die",
-		GTK_SIGNAL_FUNC(gtranslator_dies_for_you), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_dies_for_you), NULL);
 
 	/* Create the main app-window */
 	create_app1();
@@ -93,6 +93,8 @@ int main(int argc, char *argv[])
 	/* Disable the buttons if no file is opened. */
 	if (!file_opened)
 		disable_actions_no_file();
+	/* Disable spell checking, because it's not written yet */
+	disable_actions(ACT_SPELL);
 
 	/* Check the session client flags, and restore state if needed */
 	flags = gnome_client_get_flags(client);

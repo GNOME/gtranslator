@@ -17,6 +17,8 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
+#include <config.h>
+
 #include <string.h>
 #include <glib.h>
 
@@ -27,35 +29,46 @@
 /**
  * gnome_regex_cache_new:
  * 
- * Creates a new regular expression cache object.
+ * Creates a new regular expression cache object with default size of items
  * 
  * Return value: the new cache object.
  **/
 GnomeRegexCache *
 gnome_regex_cache_new (void)
 {
-	return gnome_regex_cache_new_with_size(DEFAULT_SIZE);
+	return gnome_regex_cache_new_with_size (DEFAULT_SIZE);
 }
 
+/**
+ * gnome_regex_cache_new:
+ * @size: the number of cache items
+ * 
+ * Creates a new regular expression cache object.
+ * 
+ * Return value: the new cache object.
+ **/
 GnomeRegexCache *
 gnome_regex_cache_new_with_size (int size)
 {
 	GnomeRegexCache *rxc = g_new (GnomeRegexCache, 1);
 	rxc->size = size;
 	rxc->next = 0;
-	rxc->slots = g_new0 (GnomeRegexCacheSlot *, rxc->size);
+	rxc->regexs = g_new0 (char *, rxc->size);
+	rxc->patterns = g_new (regex_t, rxc->size);
+	rxc->flags = g_new0 (int, rxc->size);
 	return rxc;
 }
 
 static void
 free_element (GnomeRegexCache *rxc, int elt)
 {
-	if (rxc->slots[elt]) {
-		g_free (rxc->slots[elt]->pattern);
-		regfree (rxc->slots[elt]->regex);
-		g_free (rxc->slots[elt]->regex);
-		g_free (rxc->slots[elt]);
-		rxc->slots[elt] = NULL;
+	if (rxc->regexs[elt]) {
+		g_free (rxc->regexs[elt]);
+
+		/* We only want to try to free a pattern if we know it
+		   has been allocated.  Hence this is inside the
+		   `if'. */
+		regfree (&rxc->patterns[elt]);
 	}
 }
 
@@ -70,9 +83,13 @@ gnome_regex_cache_destroy (GnomeRegexCache *rxc)
 {
 	int i;
 
-	for (i = 0; i < rxc->size; i++)
+	for (i = 0; i < rxc->size; ++i) {
 		free_element (rxc, i);
-	g_free (rxc->slots);
+	}
+
+	g_free (rxc->regexs);
+	g_free (rxc->patterns);
+	g_free (rxc->flags);
 	g_free (rxc);
 }
 
@@ -81,7 +98,7 @@ gnome_regex_cache_destroy (GnomeRegexCache *rxc)
  * @rxc: A regular expression cache object
  * @new_size: new size of cache
  * 
- * Sets the maximum number of regular expressions the cache can
+ * Sets the maxiumum number of regular expressions the cache can
  * hold.  If this is less than the number of currently cached
  * expressions, then the oldest expressions are deleted.
  **/
@@ -99,11 +116,13 @@ gnome_regex_cache_set_size (GnomeRegexCache *rxc, int new_size)
 			free_element (rxc, i);
 		}
 	}
-	rxc->slots = (GnomeRegexCacheSlot **) g_realloc (rxc->slots,
-		      new_size * sizeof (GnomeRegexCacheSlot *));
+	rxc->regexs = (char **) g_realloc (rxc->regexs,
+					   new_size * sizeof (char *));
+	rxc->patterns = (regex_t *) g_realloc (rxc->patterns,
+					       new_size * sizeof (regex_t));
 	if (new_size > rxc->size) {
-		memset (&rxc->slots[rxc->size + 1], 0,
-		    (new_size - rxc->size) * sizeof (GnomeRegexCacheSlot *));
+		memset (&rxc->regexs[rxc->size + 1], 0,
+			(new_size - rxc->size) * sizeof (char *));
 	}
 	rxc->size = new_size;
 	if (rxc->next >= new_size) {
@@ -128,35 +147,33 @@ gnome_regex_cache_compile (GnomeRegexCache *rxc, const char *pattern,
 			   int flags)
 {
 	int i;
-	regex_t *rx;
+	regex_t rx;
 
 	for (i = 0; i < rxc->size; i++) {
-		if (rxc->slots[i] == NULL)
+		if (! rxc->regexs[i])
 			break;
-		if ((rxc->slots[i]->cflags == flags) 
-		    && (! strcmp (rxc->slots[i]->pattern, pattern))) {
-			return rxc->slots[i]->regex;
+		if ((rxc->flags[i] == flags)
+		    && (! strcmp (rxc->regexs[i], pattern))) {
+			return &rxc->patterns[i];
 		}
 	}
 
 	free_element (rxc, rxc->next);
 
-	rx = g_new(regex_t, 1);
 	/* FIXME: use GNU regex call here?  */
-	if (regcomp (rx, pattern, flags)) {
+	if (regcomp (&rx, pattern, flags)) {
 		/* Failure.  */
-		g_free(rx);
 		return NULL;
 	}
 
-	rxc->slots[rxc->next] = g_new (GnomeRegexCacheSlot, 1);
-	rxc->slots[rxc->next]->pattern = g_strdup (pattern);
-	rxc->slots[rxc->next]->regex = rx;
-	rxc->slots[rxc->next]->cflags = flags;
+	rxc->regexs[rxc->next] = g_strdup (pattern);
+	memcpy (&rxc->patterns[rxc->next], &rx, sizeof (regex_t));
+	rxc->flags[rxc->next] = flags;
 
+	i = rxc->next;
 	if (++rxc->next >= rxc->size)
 		rxc->next = 0;
 
-	return rx;
+	return &rxc->patterns[i];
 }
 

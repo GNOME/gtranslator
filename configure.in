@@ -2,9 +2,9 @@ dnl -------------------------------------------------------------------
 dnl Process this file with autoconf to produce a configure script .
 dnl -------------------------------------------------------------------
 
-AC_INIT(README)
-AM_INIT_AUTOMAKE(gtranslator, 0.20)
+AC_INIT(src/parse.c)
 AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(gtranslator, 0.21)
 AM_MAINTAINER_MODE
 
 dnl -------------------------------------------------------------------
@@ -19,7 +19,6 @@ dnl -------------------------------------------------------------------
 GNOME_INIT
 AC_ISC_POSIX
 AC_PROG_CC
-AM_PROG_CC_STDC
 AC_HEADER_STDC
 GNOME_X_CHECKS
 
@@ -29,19 +28,9 @@ dnl -------------------------------------------------------------------
 AM_PROG_LIBTOOL
 
 dnl -------------------------------------------------------------------
-dnl Check for the window-icon feature of gnome-libs > 1.0.59.
+dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
-MY_CFLAGS=$CFLAGS
-MY_LIBS=$LIBS
-CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
-LIBS="$LIBS `gnome-config --libs gnomeui`"
-AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, 
-	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Will use window-icon feature"])
-	AC_DEFINE(USE_WINDOW_ICON)
-	,[
-	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
-CFLAGS=$MY_CFLAGS
-LIBS=$MY_LIBS
+GNOME_COMPILE_WARNINGS
 
 dnl -------------------------------------------------------------------
 dnl Check for glib and gtk+ indepententally from the GNOME checks 
@@ -57,8 +46,23 @@ AM_PATH_GTK(1.2.4)
 dnl -------------------------------------------------------------------
 dnl Our languages caravane has got settled here in place.( add your's )
 dnl -------------------------------------------------------------------
-ALL_LINGUAS="da de es hu ja ko nl no ru sv tr uk"
+ALL_LINGUAS="da de es hu ja ko lt nl no ru sv tr uk"
 AM_GNOME_GETTEXT
+
+dnl -------------------------------------------------------------------
+dnl Check for the window-icon feature of gnome-libs > 1.0.59.
+dnl -------------------------------------------------------------------
+MY_CFLAGS=$CFLAGS
+MY_LIBS=$LIBS
+CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
+LIBS="$LIBS `gnome-config --libs gnomeui`"
+AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, 
+	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Will use window-icon feature"])
+	AC_DEFINE(USE_WINDOW_ICON)
+	,[
+	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
+CFLAGS=$MY_CFLAGS
+LIBS=$MY_LIBS
 
 dnl -------------------------------------------------------------------
 dnl Get the idl parameters.
@@ -201,5 +205,4 @@ where to put the
 
 use the window-icon
  feature of gnome-libs  :	${use_window_icon_feature:-no}
-------------------------------------------------------------------
 "

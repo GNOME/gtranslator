@@ -1,3 +1,19 @@
+2000-09-13  Fatih Demir	<kabalak@gmx.net>
+
+	* gui.c: Changed the hotkey for the next fuzzy translation
+		to Alt + Z( slightens the menus a bit).
+
+2000-09-12  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gnome-regex.*: reverted to original files from gnome-libs,
+		just added 'flags' field to GnomeRegexCache, and check for it
+		before comparing patterns. Start search from 0th item 
+		(was 1st).
+	* find.c: for_each_msg -- fail if start item == NULL; iterate on any
+		list, not messages. In other functions, added check to pass not
+		NULL to this function.
+	* dialogs.c: made find dialog option fit in one line.
+
 2000-09-11  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Removed msg_db.* as they'ren't any longer in

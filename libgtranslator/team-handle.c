@@ -16,7 +16,6 @@
 
 #include <team-handle.h>
 
-
 /**
 * This one inits a new language team.
 **/
@@ -26,7 +25,7 @@ void team_handle_new(gchar *team_code)
 	* The local variables.
 	**/
 	xmlDocPtr teamlist;
-	xmlNodePtr teams,team;
+	xmlNodePtr teams;
 	if(!team_code)
 	{
 		g_error(_("No language/team code defined to register!"));
@@ -108,7 +107,7 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 	/**
 	* Print an error message if the file couldn't be opened.
 	**/
-	if(!teams)
+	if (!teams)
 	{
 		g_warning(_("Teams file `teams.xml` in %s couldn't be opened!"),MESSAGE_DB_DIR);
 	}
@@ -117,17 +116,13 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 	**/
 	team=teams->xmlRootNode->xmlChildrenNode;
 	/**
-	* Allocate the GList.
-	**/
-	list=g_list_alloc();
-	/**
 	* Set the list empty.
 	**/
 	list=NULL;
 	/**
 	* Search for all the apps.
 	**/
-	while(team)
+	while (team)
 	{
 		if(!strcmp(team->name, "app"))
 		{
@@ -144,14 +139,11 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 	/**
 	* Check for the list and return it.
 	**/
-	if(!list)
+	if (!list)
 	{
 		g_error(_("Couldn't return the list of the apps."));
 	}
-	else
-	{
-		return list;
-	}	
+	return list;
 }
 
 gint lookup_in_doc(xmlDocPtr doc,gchar *req)
@@ -161,7 +153,7 @@ gint lookup_in_doc(xmlDocPtr doc,gchar *req)
 	* Get the elements.
 	**/
 	node=doc->xmlRootNode->xmlChildrenNode;
-	while(node)
+	while (node)
 	{
 		/**
 		* If the requested node is a tag and there.

@@ -54,9 +54,9 @@ void open_file(GtkWidget * widget, gpointer useless)
 			   (gpointer) dialog);
 	gtk_signal_connect_object(GTK_OBJECT
 				  (GTK_FILE_SELECTION(dialog)->cancel_button),
-		"clicked",
-		GTK_SIGNAL_FUNC(gtk_widget_destroy),
-		GTK_OBJECT(dialog));
+				  "clicked",
+				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
+				  GTK_OBJECT(dialog));
 	/* Make the dialog transient, show_nice_dialog does not do it */
 	/* because it is not a GnomeDialog */
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(app1));
@@ -78,9 +78,9 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 			   (gpointer) dialog);
 	gtk_signal_connect_object(GTK_OBJECT
 				  (GTK_FILE_SELECTION(dialog)->cancel_button),
-		"clicked",
-		GTK_SIGNAL_FUNC(gtk_widget_destroy),
-		GTK_OBJECT(dialog));
+				  "clicked",
+				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
+				  GTK_OBJECT(dialog));
 	/* Make the dialog transient */
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(app1));
 	show_nice_dialog(&dialog, "gtranslator -- save");
@@ -191,11 +191,11 @@ static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 	}
 	gnome_dialog_close(dialog);
 }
-	
+
 void find_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
-	GtkWidget *label, *findy, *match_case, *find_in, *menu, *option;
+	GtkWidget *label, *findy, *match_case, *find_in, *menu, *option, *hbox;
 
 	raise_and_return_if_exists(dialog);
 	dialog = gnome_dialog_new(_("Find in the po-file"), _("Find"),
@@ -223,8 +223,10 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 	option = gtk_option_menu_new();
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(option), menu);
 
+	hbox = gtk_hbox_new(FALSE, 0);
+
 	/**
-	* Add the elements to the table.
+	* Add the elements to the dialog.
 	**/
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
 			   FALSE, FALSE, 0);
@@ -232,9 +234,11 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 			   FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), match_case,
 			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), find_in,
+	gtk_box_pack_start(GTK_BOX(hbox), find_in,
 			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), option,
+	gtk_box_pack_start(GTK_BOX(hbox), option,
+			   TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), hbox,
 			   FALSE, FALSE, 0);
 	/**
 	* Connect the signals

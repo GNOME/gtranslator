@@ -17,7 +17,7 @@
 * The gtranslator's dnd-types enumeration.
 **/
 enum {
-       	TARGET_URI_LIST,
+	TARGET_URI_LIST,
 	TARGET_NETSCAPE_URL,
 	TARGET_TEXT_PLAIN
 };

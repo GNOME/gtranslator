@@ -26,12 +26,12 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
         * Have we got a filename to check?
         **/
 	if (g_list_length(fnames) > 0) {
-                /**
+		/**
                 * Check the types of the entries of the list
                 *  with the filenames.
                 **/
 		for (fnp = fnames; fnp; fnp = fnp->next) {
-                        /**
+			/**
                         * Is it a filename?
                         **/
 			if (dnd_type == TARGET_URI_LIST) {
@@ -39,7 +39,7 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 				parse(file);
 				return_value = 1;
 			} else {
-                                /**
+				/**
                                 * .. or a dropped URL to a po-file from Netscape.
                                 **/
 				if (dnd_type == TARGET_NETSCAPE_URL) {
@@ -47,7 +47,7 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 					parse(file);
 					return_value = 1;
 				}
-                                /**
+				/**
                                 * .. or simply plain text.
                                 **/
 				if (dnd_type == TARGET_TEXT_PLAIN) {
@@ -61,11 +61,11 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 				}
 			}
 		}
-        }        
-        gnome_uri_list_free_strings(fnames);
-        /**
+	}
+	gnome_uri_list_free_strings(fnames);
+	/**
         * Check if the Drop was successfull.
-        **/        
+        **/
 	if (return_value == 1) {
 		gtk_drag_finish(context, TRUE, FALSE, time);
 	} else {

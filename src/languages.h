@@ -9,7 +9,7 @@
 * -- the languages defining header
 **/
 
-#ifndef GTR_LANGUAGES_H 
+#ifndef GTR_LANGUAGES_H
 #define GTR_LANGUAGES_H 1
 
 #include <glib.h>
@@ -34,10 +34,10 @@ struct _lang {
 	/* For example `tr'     */
 	gchar *lcode;
 	/* 3->The encoding preferably used for this language */
-	/*     For example `iso-8859-9` for Turkish          */
+	/* For example `iso-8859-9` for Turkish          */
 	gchar *enc;
 	/* 4->The group's( at LI/somewhere else ) EMail for the language */
-	/*     For example `tr@li.org' for the Turkish group             */  
+	/* For example `tr@li.org' for the Turkish group             */
 	gchar *group;
 	/* 5->The transfer bit count for the language */
 	/* For example : `8bit' for Turkish           */
@@ -53,139 +53,136 @@ struct _lang {
 *	   translated because of a gettext(S)-call ...
 **/
 static lang languages[] = {
-	{ 
-		N_("Arabic"), "ar", "iso-8859-6",
+	{
+	 N_("Arabic"), "ar", "iso-8859-6",
 	 "", "8bit"},
 	{
-		N_("Basque"), "eu", "iso-8859-1",
+	 N_("Basque"), "eu", "iso-8859-1",
 	 "linux-eu@chanae.alphanet.ch", "8bit"},
-        {
-		N_("Bulgarian"), "bg", "windows-1251",
+	{
+	 N_("Bulgarian"), "bg", "windows-1251",
 	 "bg@li.org", "8bit"},
-        {
-		N_("Catalan"), "ca", "iso-8859-1",
+	{
+	 N_("Catalan"), "ca", "iso-8859-1",
 	 "", "8bit"},
-        {
-		N_("Chinese/Simplified"), "zh_CN.GB2312", "GB2312",
+	{
+	 N_("Chinese/Simplified"), "zh_CN.GB2312", "GB2312",
 	 "cn@linux-mandrake.com", "8bit"},
-        {
-		N_("Chinese/Traditional"), "zh_TW.BIG5", "BIG5",
+	{
+	 N_("Chinese/Traditional"), "zh_TW.BIG5", "BIG5",
 	 "zh@li.org", "8bit"},
 	{
-		N_("Croatian"), "hr", "iso-8859-2",
+	 N_("Croatian"), "hr", "iso-8859-2",
 	 "lokalizacija@linux.hr", "8bit"},
 	{
-		N_("Czech"), "cs", "iso-8859-2",
+	 N_("Czech"), "cs", "iso-8859-2",
 	 "cs@li.org", "8bit"},
-        {
-		N_("Danish"), "da", "iso-8859-1",
+	{
+	 N_("Danish"), "da", "iso-8859-1",
 	 "da@li.org", "8bit"},
-  	{
-		N_("English"), "en", "iso-8859-1",
+	{
+	 N_("English"), "en", "iso-8859-1",
 	 "en@li.org", "8bit"},
 	{
-		N_("English/Canada"), "en_CA", "iso-8859-1",
+	 N_("English/Canada"), "en_CA", "iso-8859-1",
 	 "en@li.org", "8bit"},
 	{
-		N_("English/GB"), "en_GB", "iso-8859-1",
+	 N_("English/GB"), "en_GB", "iso-8859-1",
 	 "en@li.org", "8bit"},
 	{
-		N_("English/USA"), "en", "iso-8859-1",
+	 N_("English/USA"), "en", "iso-8859-1",
 	 "en@li.org", "8bit"},
 	{
-		N_("Estonian"), "et", "iso-8859-15",
+	 N_("Estonian"), "et", "iso-8859-15",
 	 "et@li.org", "8bit"},
 	{
-		N_("Farsi"), "fa", "isiri-3342",
+	 N_("Farsi"), "fa", "isiri-3342",
 	 "", "8bit"},
-        {
-		N_("Finnish"), "fi", "iso-8859-15",
+	{
+	 N_("Finnish"), "fi", "iso-8859-15",
 	 "fi@li.org", "8bit"},
-        {
-		N_("French"), "fr", "iso-8859-1",
+	{
+	 N_("French"), "fr", "iso-8859-1",
 	 "fr@li.org", "8bit"},
-        {
-		N_("Galician"), "gl", "iso-8859-1",
+	{
+	 N_("Galician"), "gl", "iso-8859-1",
 	 "gpul-traduccion@ceu.fi.udc.es", "8bit"},
-        {
-		N_("German"), "de", "iso-8859-1",
+	{
+	 N_("German"), "de", "iso-8859-1",
 	 "de@li.org", "8bit"},
 	{
-		N_("Greek"), "el", "iso-8859-7",
-	 "nls@tux.hellug.gr", "8bit"},
-        {
-		N_("Hungarian"), "hu", "iso-8859-2",
+	 N_("Hungarian"), "hu", "iso-8859-2",
 	 "", "8bit"},
-        {
-		N_("Indonesian"), "id", "iso-8859-1",
+	{
+	 N_("Indonesian"), "id", "iso-8859-1",
 	 "", "8bit"},
-        {
-		N_("Italian"), "it", "iso-8859-1",
+	{
+	 N_("Italian"), "it", "iso-8859-1",
 	 "it@li.org", "8bit"},
 	{
-		N_("Irish"), "ga", "iso-8859-1",
+	 N_("Irish"), "ga", "iso-8859-1",
 	 "", "8bit"},
-        {
+	{
 	 N_("Japanese"), "ja", "euc-jp",
 	 "translation@gnome.gr.jp", "8bit"},
-        {
-		N_("Korean"), "ko", "euc-kr",
+	{
+	 N_("Korean"), "ko", "euc-kr",
 	 "", "8bit"},
 	{
 	 N_("Latvian"), "lv", "iso-8859-13",
 	 "", "8bit"},
 	{
-		N_("Lithuanian"), "lt", "iso-8859-13",
+	 N_("Lithuanian"), "lt", "iso-8859-13",
 	 "komp_lt@konferencijos.lt", "8bit"},
-        {
-		N_("Norwegian/Bookmal"), "no", "iso-8859-1",
+	{
+	 N_("Norwegian/Bookmal"), "no", "iso-8859-1",
 	 "no@li.org", "8bit"},
 	{
-		N_("Norwegian/Nynorsk"), "no@nynorsk", "iso-8859-1",
+	 N_("Norwegian/Nynorsk"), "no@nynorsk", "iso-8859-1",
 	 "no@li.org", "8bit"},
-        {
-		N_("Polish"), "pl", "iso-8859-2",
+	{
+	 N_("Polish"), "pl", "iso-8859-2",
 	 "gnomepl@pandora.info.bielsko.pl", "8bit"},
-        {
-		N_("Portuguese"), "pt", "iso-8859-1",
+	{
+	 N_("Portuguese"), "pt", "iso-8859-1",
 	 "pt@li.org", "8bit"},
-        {
-		N_("Portuguese/Brazil"), "pt_BR", "iso-8859-1",
+	{
+	 N_("Portuguese/Brazil"), "pt_BR", "iso-8859-1",
 	 "", "8bit"},
-        {
-		N_("Russian"), "ru", "koi8-r",
+	{
+	 N_("Russian"), "ru", "koi8-r",
 	 "ru@li.org", "8bit"},
 	{
-		N_("Slovak"), "sk", "iso-8859-2",
+	 N_("Slovak"), "sk", "iso-8859-2",
 	 "", "8bit"},
-        {
-		N_("Spanish"), "es", "iso-8859-1",
+	{
+	 N_("Spanish"), "es", "iso-8859-1",
 	 "es@li.org", "8bit"},
 	{
-		N_("Spanish/Spain"), "es_ES", "iso-8859-1",
+	 N_("Spanish/Spain"), "es_ES", "iso-8859-1",
 	 "es@li.org", "8bit"},
-        {
-		N_("Spanish/Mexico"), "es_MX", "iso-8859-1",
+	{
+	 N_("Spanish/Mexico"), "es_MX", "iso-8859-1",
 	 "", "8bit"},
-        {
-		N_("Swedish"), "sv", "iso-8859-1",
+	{
+	 N_("Swedish"), "sv", "iso-8859-1",
 	 "sv@li.org", "8bit"},
-        {
-		N_("Turkish"), "tr", "iso-8859-9",
+	{
+	 N_("Turkish"), "tr", "iso-8859-9",
 	 "tr@li.org", "8bit"},
-        {
-		N_("Ukrainian"), "uk", "koi8-u",
+	{
+	 N_("Ukrainian"), "uk", "koi8-u",
 	 "linux@linux.org.ua", "8bit"},
 	{
-		N_("Walloon"), "wa", "iso-8859-1", 
+	 N_("Walloon"), "wa", "iso-8859-1",
 	 "linux-wa@chanae.alphanet.ch", "8bit"},
 	{
-		N_("Welsh"), "cy", "iso-8859-14", 
+	 N_("Welsh"), "cy", "iso-8859-14",
 	 "", "8bit"},
-        /**
+	/**
         * This structures-list has to be NULL-terminated
         **/
-        {
+	{
 	 NULL, NULL, NULL,
 	 NULL, NULL}
 };

@@ -47,7 +47,7 @@ GtkWidget *attach_combo_with_label(GtkWidget * table, gint row,
 				   const char *label_text,
 				   GList * list, const char *value,
 				   GtkSignalFunc callback,
-		gpointer user_data)
+				   gpointer user_data)
 {
 	GtkWidget *label;
 	GtkWidget *combo;
@@ -203,7 +203,7 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	    attach_entry_with_label(first_page, 1, _("Author's EMail :"),
 				    email, prefs_box_changed);
 	/**
-	* Create, attach, and connect all the combo boxes with labels
+	* Create, attach, and connect all the combo boxes with labels 
 	**/
 	create_lists();
 
@@ -345,7 +345,7 @@ static void prefs_box_changed(GtkWidget * widget, gpointer flag)
 	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(widget)->entry),\
 			   languages[c].field)
 	switch (GPOINTER_TO_INT(flag)) {
-		case 1:
+	case 1:
 		current =
 		    gtk_entry_get_text(GTK_ENTRY
 				       (GTK_COMBO(authors_language)->entry));
@@ -355,12 +355,12 @@ static void prefs_box_changed(GtkWidget * widget, gpointer flag)
 				set_text(mime_type, enc);
 				set_text(encoding, bits);
 				set_text(lg_email, group);
-					break;
-				}
-				c++;
+				break;
 			}
-			break;
-		case 2:
+			c++;
+		}
+		break;
+	case 2:
 		current =
 		    gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(lcode)->entry));
 		while (languages[c].name != NULL) {
@@ -368,12 +368,12 @@ static void prefs_box_changed(GtkWidget * widget, gpointer flag)
 				set_text(mime_type, enc);
 				set_text(encoding, bits);
 				set_text(lg_email, group);
-					break;
-				}
-				c++;
+				break;
 			}
-			break;
-		default:
+			c++;
+		}
+		break;
+	default:
 		break;
 	}
 #undef set_text

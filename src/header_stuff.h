@@ -54,4 +54,4 @@ void free_header(GtrHeader * the_header);
 **/
 void edit_header(GtkWidget * widget, gpointer useless);
 
-#endif 
+#endif

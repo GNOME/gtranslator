@@ -88,10 +88,6 @@ void parse_db_for_lang(gchar *language)
 			}	
 		}
 	}
-	/**
-	* Allocate the db_list.
-	**/
-	db_list=g_list_alloc();
 	db_list=NULL;
 	/**
 	* Get the nodes.
@@ -121,7 +117,7 @@ void parse_db_for_lang(gchar *language)
 	}
 }
 
-gint parse_db_check(xmlDocPtr test)
+void parse_db_check(xmlDocPtr test)
 {
 	xmlNodePtr muhaha;
 	/**

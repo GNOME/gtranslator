@@ -38,6 +38,6 @@ gtranslator_LDADD = \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
 	$(INTLLIBS) \
-		$(XML_LIBS)
+	$(XML_LIBS)
 
 EXTRA_DIST = ChangeLog TODO

@@ -1,4 +1,4 @@
-/* gnome-regex.h - Regular expression cache.
+/* gnome-regex.h - Regular expression cache object.
 
    Copyright (C) 1998 Tom Tromey
 
@@ -28,22 +28,19 @@ BEGIN_GNOME_DECLS
 #include <regex.h>
 
 typedef struct {
-	int cflags;			/* Compilation flags  */
-	char *pattern;			/* Regular expression string.  */
-	regex_t *regex;			/* Compiled expression.  */
-} GnomeRegexCacheSlot;
-
-typedef struct {
-	int size;			/* Total number of cache slots.  */
-	/* private  */
-	int next;			/* Next available slot.  */
-	GnomeRegexCacheSlot **slots;	/* Array of cache slots  */
+	int size;		/* Total number of cache slots.  */
+	int next;		/* Next available slot.  */
+	char **regexs;		/* Regular expression strings.  */
+	regex_t *patterns;	/* Compiled expressions.  */
+	int *flags;		/* Compilation flags for each expression */
 } GnomeRegexCache;
 
-/* Create a new regular expression cache with default number of items.  */
+/* Create a new regular expression cache with default number of
+   items.  */
 GnomeRegexCache *gnome_regex_cache_new (void);
 
-/* Create a new regular expression cache with given number of items.  */
+/* Create a new regular expression cache with specified number of
+   items.  */
 GnomeRegexCache *gnome_regex_cache_new_with_size (int size);
 
 /* Free a regular expression cache.  */
@@ -56,7 +53,7 @@ void gnome_regex_cache_set_size (GnomeRegexCache *rxc, int new_size);
 regex_t *gnome_regex_cache_compile (GnomeRegexCache *rxc, const char *pattern,
 				    int flags);
 
+
 END_GNOME_DECLS
 
 #endif /* GNOME_REGEX_H */
-
