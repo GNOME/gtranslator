@@ -29,12 +29,6 @@ void gtranslator_open_file(gchar *filestring)
 	**/ 
 	gnome_vfs_init();
 	/**
-	* Flush the vfs/file_to_open configuration setting.
-	**/
-	gtranslator_config_init();
-	gtranslator_config_set_string("vfs/file_to_open", "");
-	gtranslator_config_close();
-	/**
 	* Get the URI for the given filestring.
 	**/
 	file=gnome_vfs_uri_new(filestring);
@@ -46,7 +40,7 @@ void gtranslator_open_file(gchar *filestring)
 	{
 		gtranslator_config_init();
 		gtranslator_config_set_string("vfs/file_to_open",
-			gnome_vfs_uri_to_string(file, 0));
+			gnome_vfs_get_local_path_from_uri(gnome_vfs_uri_to_string(file, 0)));
 		gtranslator_config_close();
 	}
 	else

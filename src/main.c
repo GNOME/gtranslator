@@ -161,7 +161,32 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			parse(args[0]);
+			/**
+			* Do we have got a gzip'ed file?
+			*
+			* Note: This is a stupid suffix-check, so it's
+			*  quite crap.
+			**/
+			if((args[0][strlen(args[0])-1]=='z') &&
+				(args[0][strlen(args[0])-2]=='g') &&
+				(args[0][strlen(args[0])-3]=='.'))
+			{
+				gchar *tmpfile=g_new0(gchar,1);
+				gchar *cmd=g_new0(gchar,1);
+				tmpfile=g_basename(args[0]); 
+				cmd=g_strdup_printf("zcat %s > %s/%s", args[0],
+					"/tmp",	tmpfile);
+				system(cmd);
+				parse(g_strdup_printf("%s/%s", "/tmp", tmpfile));
+				if(cmd)
+				{
+					g_free(cmd);
+				}
+			}
+			else
+			{
+				parse(args[0]);
+			}
 		}
 	}
 	poptFreeContext(context);
