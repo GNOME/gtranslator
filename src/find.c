@@ -1,6 +1,7 @@
 /*
- * (C) 2000-2001 	Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2000-2003 	Gediminas Paulauskas <menesis@gtranslator.org>
  *			Thomas Ziehmer <thomas@gtranslator.org>
+ *			Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,16 +38,19 @@
 
 #define MAXHITS 10
 
+typedef gboolean (*FEFuncRX) (gpointer list_item, gpointer user_data, gboolean first, gboolean a, gboolean b, gboolean c);
+
 static regex_t target;
 static int eflags = 0;
 static gchar *pattern = NULL;
 
-static gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
-			   gboolean first);
-static gboolean find_in_msg(GList * msg, gpointer useless, gboolean first);
+static gboolean repeat_all(GList * begin, FEFuncRX func, gpointer user_data,
+			   gboolean first, gboolean a, gboolean b, gboolean c);
+static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
+	gboolean find_in_comments, gboolean find_in_english, gboolean find_in_translation);
 
-gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
-                    gboolean first)
+gboolean repeat_all(GList * begin, FEFuncRX func, gpointer user_data,
+                    gboolean first, gboolean a, gboolean b, gboolean c)
 {
 	GList *msg;
 	int retval;
@@ -58,7 +62,7 @@ gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
 	do {
 		next = FALSE;
 
-		retval= func(msg, user_data, first);
+		retval=func(msg, user_data, first, a, b, c);
 		switch (retval) {
 		case 1:
 			return TRUE;
@@ -128,7 +132,8 @@ static GList *get_find_pos(gchar *str)
  */
 
 /* Returns: 1 if found, 0 if not found, -1 on error (?) */
-static int find_in_msg(GList * msg, gpointer useless, gboolean first)
+static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
+	gboolean find_in_comments, gboolean find_in_english, gboolean find_in_translation)
 {
 	static int step = 0;
 	static int hits = 0, actpos = 0;
@@ -137,7 +142,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 
 	if (first) step = 0;
 
-	if ((GtrPreferences.find_in & findTranslated) && 1 == step) {
+	if (find_in_translation && 1 == step) {
 		if (hits >= actpos) SEARCH(msgstr);
 
 		if (hits > 0 && actpos < hits) {
@@ -153,7 +158,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			return 1;
 		} else actpos = 0;
 	}
-	if ((GtrPreferences.find_in & findEnglish) && 0 == step) {
+	if (find_in_english && 0 == step) {
 		if (hits >= actpos) SEARCH(msgid);
 		if (hits > 0 && actpos < hits) {
 			/*
@@ -168,7 +173,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			return 1;
 		} else actpos = 0;
 	}
-	if((GtrPreferences.find_in & findComment) && 2 == step) {
+	if(find_in_comments && 2 == step) {
 		if (hits >= actpos)
 		{
 			g_list_free(poslist);
@@ -200,7 +205,8 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 /*
  * The real search function
  */
-void gtranslator_find(GtkWidget * widget, gpointer what)
+void gtranslator_find(GtkWidget * widget, gpointer what, gboolean find_in_comments,
+	gboolean find_in_english, gboolean find_in_translation)
 {
 	gchar *error;
 	GList *begin;
@@ -222,7 +228,7 @@ void gtranslator_find(GtkWidget * widget, gpointer what)
 		begin = po->messages;
 		first = TRUE;
 	}
-	if (repeat_all(begin, (FEFuncR)find_in_msg, NULL, first) == TRUE)
+	if (repeat_all(begin, (FEFuncRX)find_in_msg, NULL, first, find_in_comments, find_in_english, find_in_translation) == TRUE)
 		return;
 	error = g_strdup_printf(_("Could not find\n\"%s\""), pattern);
 	gnome_app_message(GNOME_APP(gtranslator_application), error);

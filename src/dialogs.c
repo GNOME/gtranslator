@@ -58,8 +58,6 @@
 static void gtranslator_go_to_dialog_clicked(GtkDialog * dialog, gint button,
 					     gpointer data);
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
-static void find_dlg_clicked(GtkDialog * dialog, gint button,
-	gpointer findy);
 static void ih_toggled(GtkWidget *widget, gpointer useless);
 
 #ifdef UTF8_CODE
@@ -666,33 +664,6 @@ static void ih_toggled(GtkWidget *widget, gpointer useless)
 			      GtrPreferences.ignore_hotkeys);
 }
 
-static void find_dlg_clicked(GtkDialog * dialog, gint button,
-			     gpointer findy)
-{
-	GtkWidget *entry;
-	gchar *find_what;
-
-	if (button == GTK_RESPONSE_OK) {
-		entry = gnome_entry_gtk_entry(findy);
-		find_what = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
-		g_return_if_fail(find_what!=NULL);
-
-		if(GtrPreferences.ignore_hotkeys)
-		{
-			gchar	*newstr;
-			
-			newstr=nautilus_str_strip_chr(find_what, GtrPreferences.hotkey_char);
-			GTR_FREE(find_what);
-			find_what=newstr;
-		}
-		
-		gtranslator_find(NULL, find_what);
-		gtranslator_actions_enable(ACT_FIND_AGAIN, ACT_END);
-		return;
-	}
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-}
-
 void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
@@ -700,16 +671,20 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	GtkWidget *label, *findy, *subfindy, *match_case;
 	GtkWidget *ih_button, *sbox, *fi_english, *fi_translation, *fi_comments, *fi_label;
 
+	gint reply=0;
+
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
+
 	dialog = gtk_dialog_new_with_buttons(_("Find in the po file"),
 					     GTK_WINDOW(gtranslator_application),
 					     GTK_DIALOG_DESTROY_WITH_PARENT,
 					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					     GTK_STOCK_FIND, GTK_RESPONSE_OK,
 					     NULL);
+
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	label = gtk_label_new(_("Enter search string:"));
@@ -757,8 +732,6 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), sbox,
 			   FALSE, FALSE, 3);
 	
-	g_signal_connect(G_OBJECT(dialog), "response",
-			 G_CALLBACK(find_dlg_clicked), findy);
 	g_signal_connect(G_OBJECT(match_case), "toggled",
 			 G_CALLBACK(match_case_toggled), NULL);
 	g_signal_connect(G_OBJECT(ih_button), "toggled",
@@ -767,6 +740,41 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 	
 	gtranslator_dialog_show(&dialog, "gtranslator -- find");
+	
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
+
+	if(reply==GTK_RESPONSE_CANCEL || reply==GTK_RESPONSE_CLOSE)
+	{
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+	}
+	else
+	{
+		GtkWidget	*entry=NULL;
+		gchar 		*find_text;
+
+		entry=gnome_entry_gtk_entry(GNOME_ENTRY(findy));
+
+		find_text=g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+		g_return_if_fail(find_text!=NULL);
+
+		if(GtrPreferences.ignore_hotkeys)
+		{
+			gchar   *newstr;
+
+			newstr=nautilus_str_strip_chr(find_text, GtrPreferences.hotkey_char);
+			GTR_FREE(find_text);
+			find_text=newstr;
+		}
+
+		gtranslator_find(NULL, find_text,
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_comments)),
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_english)),
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_translation)));
+
+		gtranslator_actions_enable(ACT_FIND_AGAIN, ACT_END);
+
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+	}
 }
 
 /*

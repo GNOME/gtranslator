@@ -1,5 +1,6 @@
 /*
- * (C) 2000-2001 	Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2000-2003 	Gediminas Paulauskas <menesis@gtranslator.org>
+ * 			Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,20 +24,11 @@
 #include <gtk/gtkwidget.h>
 
 /*
- * find modes
+ * The generally used find function - now also with the same syntax like the
+ *  replace functionality though separate.
  */
-typedef enum {
-  findEnglish    = 1,
-  findTranslated = 2,
-  findBoth       = 3,
-  findComment    = 4,
-  findAll        = 7
-} FindMode;
-
-/*
- * The generally used find function-
- */
-void gtranslator_find(GtkWidget *widget, gpointer target);
+void gtranslator_find(GtkWidget *widget, gpointer target, gboolean find_in_comments,
+	gboolean find_in_english, gboolean find_in_translation);
 
 void gtranslator_update_regex_flags(void);
 
