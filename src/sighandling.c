@@ -51,6 +51,8 @@ void gtranslator_signal_handler(int signal)
 		gtranslator_config_init();
 		gtranslator_config_set_string("crash/filename",
 			po->filename);
+		gtranslator_config_set_string("runtime/filename",
+			"--- No file ---");
 		gtranslator_config_close();
 		
 		crashfilename=gtranslator_utils_get_crash_file_name();

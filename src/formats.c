@@ -25,6 +25,8 @@
 #include "messages.h"
 #include "nautilus-string.h"
 
+#include <stdio.h>
+
 #include <ctype.h>
 #include <string.h>
 
@@ -38,7 +40,10 @@ static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *
  */
 static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *string)
 {
-	g_return_if_fail(c_string!=NULL);
+	if(!c_string)
+	{
+		return;
+	}
 
 	/*
 	 * Check if there are any '%' signs; if not, return.
@@ -54,56 +59,118 @@ static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *
 		/*
 		 * Get the characters after the first '%'.
 		 */
-		tuz=strstr(c_string, "%");
-		tuz++;
+		tuz=nautilus_str_get_after_prefix(c_string, "%");
 
 		/*
-		 * Simple '%%' formats should be catched here.
+		 * Return if there's no '%' in the string.
 		 */
-		if(*tuz && *tuz=='%')
+		if(!tuz) 
 		{
-			string=g_string_append_c(string, '%');
+			return;
 		}
 		else
 		{
 			/*
-			 * Cruise through all characters of the msgid/msgstr parts.
+			 * Or go one character forward -- the '%' is left behind now.
 			 */
-			while(*tuz && !isspace(*tuz))
+			tuz++;
+		}
+
+		/*
+		 * Iterate through the characters.
+		 */
+		while(*tuz)
+		{
+			/*
+			 * Quite normal format characters.
+			 */
+			if(!isspace(*tuz) && !isdigit(*tuz) && !ispunct(*tuz))
 			{
-				if(!isdigit(*tuz) && isalpha(*tuz) && *tuz!='u' && *tuz!='l')
-				{
-					/*
-					 * Plain '%X' formats should be home here.
-					 */
-					string=g_string_append_c(string, *tuz);
-				}
-				else if(*tuz=='u' && !isspace(*tuz++))
-				{
-					/*
-					 * '%uX' formats should be catched here.
-					 */
-					string=g_string_append_c(string, 'u');
-					string=g_string_append_c(string, *tuz);
-				}
-				else if(*tuz=='l' && !isspace(*tuz++))
-				{
-					/*
-					 * '%lX' formats should be catched here.
-					 */
-					string=g_string_append_c(string, 'l');
-					string=g_string_append_c(string, *tuz);
-				}
-				else if(*tuz=='$')
-				{
-					/*
-					 * FIXME: %NUMBER$FORMAT -- should be handled.
-					 */
-					tuz--;
-				}
-				
-				tuz++;
+				string=g_string_append_c(string, *tuz);
 			}
+			else if(*tuz=='%')
+			{
+				/*
+				 * An "escaped" % ("%%").
+				 */
+				string=g_string_append_c(string, *tuz);
+			}
+			else if(isdigit(*tuz))
+			{
+				gchar	*restformat;
+
+				restformat=nautilus_str_get_after_prefix(tuz, "$");
+
+				if(!restformat)
+				{
+					continue;
+				}
+				else
+				{
+					gint	position;
+					GString	*position_string=g_string_new("");
+					
+					/*
+					 * Append the current format character to our position_string.
+					 */
+					restformat++;
+					position_string=g_string_append_c(position_string, *tuz);
+					
+					/*
+					 * "Read" the format prefix number for ordering.
+					 */
+					sscanf(position_string->str, "%i", &position);
+
+					/*
+					 * Check the string length for brevity.
+					 */
+					if(position <= 0)
+					{
+						return;
+					}
+					else if(position > string->len)
+					{
+						gint	length=string->len;
+
+						while(length <= position)
+						{
+							string=g_string_append(string, " ");
+							length++;
+						}
+					}
+
+					/*
+					 * Insert the format character at the right position.
+					 */
+					string=g_string_insert_c(string, position--, *restformat);
+					g_string_free(position_string, TRUE);
+				}
+			}
+			else if(*tuz=='-')
+			{
+				/*
+				 * Ignore any "%-s" formed, special align formats' '-' symbol.
+				 */
+				continue;
+			}
+			else if(isspace(*tuz) || ispunct(*tuz))
+			{
+				/*
+				 * Search if there are any other '%'s in the resting
+				 *  string.
+				 */
+				tuz=nautilus_str_get_after_prefix(tuz, "%");
+
+				/*
+				 * Sanity check and return if nothing is left to do.
+				 */
+				if(!tuz)
+				{
+					return;
+				}
+			}
+
+			tuz++;
 		}
 	}
 }
@@ -141,12 +208,12 @@ gboolean gtranslator_formats_check(GtrMsg *message)
 	{
 		gint	i=0;
 		gchar	*id, *str;
-		
-		id=id_formats->str;
-		str=str_formats->str;
 
-		g_return_val_if_fail(id!=NULL, FALSE);
-		g_return_val_if_fail(str!=NULL, FALSE);
+		g_return_val_if_fail(id_formats->str!=NULL, FALSE);
+		g_return_val_if_fail(str_formats->str!=NULL, FALSE);
+
+		id=g_strstrip(id_formats->str);
+		str=g_strstrip(str_formats->str);
 
 		for(i=(strlen(id) - 1); i >= 0; --i)
 		{

@@ -148,6 +148,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK, ACT_VIEW_MESSAGE, 
 			ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT,
 			ACT_VIEW_HOTKEY, ACT_EXPORT_UTF8);
+
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 

@@ -290,6 +290,8 @@ void gtranslator_comment_display(GtrComment *comment)
 			
 			gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
 				comment->pure_comment);
+			
+			gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
 					break;
 
 		default:
@@ -305,6 +307,8 @@ void gtranslator_comment_display(GtrComment *comment)
 			
 			gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
 				_("Invisible comment"));
+
+			gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
 					break;
 	}
 }
