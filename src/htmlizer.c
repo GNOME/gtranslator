@@ -259,7 +259,7 @@ void gtranslator_htmlizer(GtrPo *po, gchar *save_to)
 		fprintf(fstream,
 			_("Last translator: %s"), po->header->translator);
 
-		fprintf(fstream, " <a href=\"mailto:%s\">&lt;%s&gt;</a>",
+		fprintf(fstream, " &lt;<a href=\"mailto:%s\">%s</a>&gt;",
 			po->header->tr_email, po->header->tr_email);
 	}
 

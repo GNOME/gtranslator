@@ -23,11 +23,19 @@
 /*
  * The internal icon callback method.
  */ 
-static GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
+GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	gpointer data);
 
-static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
+/*
+ * Shows the right view for the clicked icon on the sidebar.
+ */ 
+void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 	gint item);	
+
+/*
+ * Nomen est res naturalae. Shows an editable comment view.
+ */ 
+void show_comment(GtkWidget *text);
 
 /*
  * Creates the sidebar (in our case the shortcut-bar).
@@ -100,7 +108,7 @@ void gtranslator_sidebar_clear()
  * This is the "select" callback for the icons in the shortcut bar --
  *  should call the file/view in the future.
  */
-static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
+void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 	gint item)
 {
 	if(event->button.button==1)
@@ -118,39 +126,12 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				break;
 				
 			case 2:
-				if(GTR_MSG(po->current->data)->comment)
-				{
-					/*
-					 * Clean the msgid box and display
-					 *  the comment inside it.
-					 */  
-					gtk_editable_delete_text(
-						GTK_EDITABLE(text1),
-						0, -1);
-					gtk_text_insert(GTK_TEXT(text1),
-						NULL, NULL, NULL,
-						GTR_MSG(
-						po->current->data)->comment,
-						-1);
-					
-					break;
-				}
-				else
-				{
-					/*
-					 * Show an information that there's
-					 *  no comment there.
-					 */  
-					gtk_editable_delete_text(
-						GTK_EDITABLE(text1),
-						0, -1);
-					gtk_text_insert(GTK_TEXT(text1),
-						NULL, NULL, NULL,
-						_("No comment available for this message"),
-						-1);
-					
-					break;
-				}
+				/*
+				 * Display the current comment or
+				 *  show a helping message.
+				 */  
+				 show_comment(text1);
+				 break;
 				
 			default:
 				break;
@@ -161,7 +142,7 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 /*
  * Sets the icons in the shortcut bar for the given url type.
  */
-static GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
+GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	gpointer data)
 {
 	GdkPixbuf *icon;
@@ -209,5 +190,28 @@ static GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	else
 	{
 		return NULL;
+	}
+}
+
+/*
+ * Shows the comment of the current message in the given GtkText.
+ */
+void show_comment(GtkWidget *text)
+{
+	g_return_if_fail(text!=NULL);
+
+	if(GTR_MSG(po->current->data)->comment)
+	{
+		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
+
+		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
+			GTR_MSG(po->current->data)->comment, -1);
+	}
+	else
+	{
+		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
+
+		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
+			_("No comment available for this message") , -1);
 	}
 }
