@@ -20,6 +20,7 @@
 #include "actions.h"
 #include "gtkspell.h"
 #include "gui.h"
+#include "menus.h"
 #include "message.h"
 #include "parse.h"
 #include "prefs.h"
