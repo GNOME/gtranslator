@@ -98,20 +98,54 @@ gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
  * Searches for target in msg, and on success, displays that message.
  */
 
-#define SEARCH(str)                                                \
-{                                                                  \
-  if (!regexec(target, GTR_MSG(msg->data)->str, MAXHITS, pos, 0)) {\
-    hits = 0;                                                      \
-    while (pos[hits].rm_so != -1 && hits < MAXHITS) hits++;        \
-  } else hits = 0;                                                 \
+static GList *get_find_pos(gchar *str)
+{
+  GList      *pl = NULL;
+  regmatch_t *pos;
+  gchar      *strend;
+  int         offset = 0;
+  int         end;
+
+  if (NULL == str) return NULL;
+  strend = str + strlen(str);
+
+  pos = (regmatch_t *)g_malloc(sizeof(regmatch_t));
+  while (str < strend && 0 == regexec(target, str, 1, pos, 0)) {
+    end = pos->rm_eo;
+
+    pos->rm_so += offset;
+    pos->rm_eo += offset;
+    pl = g_list_append(pl, pos);
+
+    if (end == 0) {
+      str++;
+      offset++;
+    } else {
+      str += end;
+      offset += end;
+    }
+
+    pos = (regmatch_t *)g_malloc(sizeof(regmatch_t));
+  }
+
+  return pl;
 }
 
+#define SEARCH(str)                                                \
+{                                                                  \
+	g_list_free(poslist);                                      \
+	poslist = get_find_pos(GTR_MSG(msg->data)->str);           \
+	hits = g_list_length(poslist);                             \
+}
+
+//    while (pos[hits].rm_so != -1 && hits < MAXHITS) hits++;        
 
 static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 {
 	static int step = 0;
 	static int hits = 0, actpos = 0;
-	regmatch_t pos[MAXHITS];
+	GList *poslist = NULL;
+	regmatch_t *pos;
 
 	if (first) step = 0;
 
@@ -120,13 +154,15 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 
 	if ((wants.find_in & findTranslated) && 1 == step) {
 		if (hits >= actpos) SEARCH(msgstr);
+
 		if (hits > 0 && actpos < hits) {
 			/*
 			 * We found it!
 			 */
 			goto_given_msg(msg);
+			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
 			gtk_editable_select_region(GTK_EDITABLE(trans_box),
-				pos[actpos].rm_so, pos[actpos].rm_eo);
+				pos->rm_so, pos->rm_eo);
 			actpos++;
 
 			return 1;
@@ -139,6 +175,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			 * We found it!
 			 */
 			goto_given_msg(msg);
+			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
 			gtk_editable_select_region(GTK_EDITABLE(text1),
 				pos->rm_so, pos->rm_eo);
 			actpos++;
@@ -155,6 +192,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			 */  
 			goto_given_msg(msg);
 			show_comment(text1);
+			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
 			gtk_editable_select_region(GTK_EDITABLE(text1),
 				pos->rm_so, pos->rm_eo);
 			actpos++;
@@ -183,6 +221,12 @@ void find_do(GtkWidget * widget, gpointer what)
 	gboolean first = FALSE;
 	update_msg();
 	if (what) {
+		if (strlen(what) == 0) {
+			error = g_strdup_printf(_("Empty search is not allowed"));
+			gnome_app_message(GNOME_APP(app1), error);
+			g_free(error);
+			return;
+		}
 		target = gnome_regex_cache_compile(rxc, what, eflags);
 		g_free(pattern);
 		pattern = what;
