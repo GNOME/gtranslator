@@ -35,6 +35,8 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+#include <libgnome/gnome-i18n.h>
+
 /*
  * The GtrLearnBuffer structure which holds all informations/parts of the
  *  learn buffer related stuff -- some say personal translation memory to it..
@@ -51,6 +53,8 @@ typedef struct
 
 	gint		serial;
 	gint 		index;
+
+	gint		count;
 	
 	gboolean	init_status;
 	gboolean	changed;
@@ -191,6 +195,8 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 	{
 		g_hash_table_insert(gtranslator_learn_buffer->hash, 
 			g_strdup(original), g_strdup(translation));
+
+		gtranslator_learn_buffer->count++;
 
 		GTR_FREE(original);
 		GTR_FREE(translation);
@@ -363,6 +369,39 @@ static gint gtranslator_learn_buffer_sort_learn_resource(
 }
 
 /*
+ * Print a small command line summary of our learn buffer statistics in general :-)
+ */
+void gtranslator_learn_statistics(void)
+{
+	g_return_if_fail(gtranslator_learn_initialized()!=FALSE);
+
+	g_print("\n\t");
+	g_print(_("gtranslator learn buffer statistics:"));
+	g_print("\n\n\t");
+
+	g_print(_("Learn buffer filename: `%s`"), gtranslator_learn_buffer->filename);
+	g_print("\n\t");
+
+	/*
+	 * Translators: This means the encoding of the learn buffer (XML) file.
+	 */
+	g_print(_("Encoding: `%s'"), gtranslator_learn_buffer->encoding);
+	g_print("\n\t");
+
+	/*
+	 * Translators: "Serial number" of the learn buffer - means # of file updates.
+	 */
+	g_print(_("Serial: `%i'"), gtranslator_learn_buffer->serial);
+	g_print("\n\t");
+
+	/*
+	 * Translators: That's the number of message entries in the learn buffer.
+	 */
+	g_print(_("Number of entries: `%i'"), gtranslator_learn_buffer->count);
+	g_print("\n\n");
+}
+
+/*
  * Learn the given data entry (a GtrMsg) automatically.
  */
 static void gtranslator_learn_buffer_learn_function(gpointer data, 
@@ -399,6 +438,8 @@ void gtranslator_learn_init()
 	gtranslator_learn_buffer->hash=g_hash_table_new(g_str_hash, g_str_equal);
 	gtranslator_learn_buffer->resources=NULL;
 	gtranslator_learn_buffer->index=0;
+
+	gtranslator_learn_buffer->count=0;
 
 	/*
 	 * Read in our autolearned xml document.

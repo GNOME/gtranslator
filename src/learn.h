@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,6 +31,11 @@
  */
 void gtranslator_learn_init(void);
 gboolean gtranslator_learn_initialized(void);
+
+/*
+ * Print out some information about the learn buffer in general on the cmdline.
+ */
+void gtranslator_learn_statistics(void);
 
 /*
  * Learns the given GtrPo file completely -- every translated message

@@ -66,7 +66,9 @@ static gchar 	*gtranslator_geometry=NULL;
 static gchar	*learn_file=NULL;
 static gchar	*auto_translate_file=NULL;
 static gchar	*exporting_po_file=NULL;
+
 static gboolean	build_information=FALSE;
+static gboolean learn_statistics=FALSE;
 
 /*
  * gtranslator's option table.
@@ -95,6 +97,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"learn", 'l', POPT_ARG_STRING, &learn_file,
 		0, N_("Learn the file completely"), N_("FILENAME")
+	},
+	{
+		"learn-statistics", 's', POPT_ARG_NONE, &learn_statistics,
+		0, N_("Show learn buffer statistics"), NULL
 	},
 	POPT_AUTOHELP {NULL}
 };
@@ -248,7 +254,7 @@ int main(int argc, char *argv[])
 	/* 
 	 * Create the main app-window. 
 	 */
-	if(!auto_translate_file || !learn_file)
+	if(!auto_translate_file || !learn_file || !learn_statistics)
 	{
 		gtranslator_create_main_window();
 		gtranslator_utils_restore_geometry(gtranslator_geometry);
@@ -276,7 +282,7 @@ int main(int argc, char *argv[])
 		gtranslator_rescue_file_dialog();
 	}
 
-	if(!auto_translate_file || !learn_file)
+	if(!auto_translate_file || !learn_file || !learn_statistics)
 	{
 		/*
 		 * Load the applied color scheme from the prefs and check it; if it
@@ -370,7 +376,7 @@ int main(int argc, char *argv[])
 		gtranslator_actions_set_up_state_no_file();
 	}
 	
-	if(!auto_translate_file || !learn_file)
+	if(!auto_translate_file || !learn_file || !learn_statistics)
 	{
 		/*
 		 * Check the session client flags, and restore state if needed 
@@ -387,6 +393,25 @@ int main(int argc, char *argv[])
 	 * Init the learn buffer and connected stuff.
 	 */
 	gtranslator_learn_init();
+
+	/*
+	 * If desired, just show a small information tidbit of the learn buffer cakes.
+	 */
+	if(learn_statistics)
+	{
+		gtranslator_learn_statistics();
+		gtranslator_learn_shutdown();
+
+		gtranslator_translator_free(gtranslator_translator);
+		gtranslator_preferences_free();
+
+		if(gnome_vfs_initialized())
+		{
+			gnome_vfs_shutdown();
+		}
+
+		return 0;
+	}
 
 	/*
 	 * Check if any filename for learning was supplied and if yes, learn
