@@ -1,3 +1,15 @@
+2001-10-06  Fatih Demir <kabalak@gtranslator.org>
+
+	* utils.c/.h: Added "gtranslator_utils_calculate_similarity" function
+		to calculate the similarity between two given gchar's -- it
+		 does sound like voodoo, is voodoo and results like voodoo!
+
+	* prefs.c: Split all learn buffer/auto translation options into an
+		own prefs page and assure the gfloat values to be in sane
+		 ranges -- makes prefs merging in some situations easier.
+
+	* prefs.c/.h & prefs_init.c: Added minimum match percentage prefs.
+
 2001-10-05  Fatih Demir <kabalak@gtranslator.org>
 
 	* Makefile.am & \*.c/.h: Reflect the move of save-differently.c/.h to

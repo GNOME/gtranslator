@@ -54,7 +54,8 @@ static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer us
  */
 static GtkWidget 
 	*first_page, *second_page, *third_page, *fourth_page,
-	*fifth_page, *sixth_page, *seventh_page, *eighth_page;
+	*fifth_page, *sixth_page, *seventh_page, *eighth_page,
+	*ninth_page;
 
 /*
  * The entries:
@@ -82,7 +83,7 @@ static GtkWidget
  * The timeout GtkSpinButton:
  */
 static GtkWidget
-	*autosave_timeout, *max_history_entries;
+	*autosave_timeout, *max_history_entries, *min_match_percentage;
 
 /*
  * Font/color specific widgets used in the preferences box.
@@ -117,9 +118,9 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 2, _("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		6, 1, _("Po file editing"));
+		4, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		10, 1, _("Miscellaneous"));
+		8, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		4, 2, _("Recent files & spell checking"));
 	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -128,6 +129,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		4, 2, _("Autosaving"));
 	eighth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		6, 2, _("Messages table"));
+	ninth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+		4, 2, _("Learn buffer & autotranslation"));
 	
 	/*
 	 * Create all the personal entries.
@@ -204,16 +207,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    gtranslator_utils_attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
 		GtrPreferences.warn_if_no_change, gtranslator_preferences_dialog_changed);
-	use_learn_buffer =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
-	    	_("Also query the personal learn buffer while autotranslating untranslated messages"),
-		GtrPreferences.use_learn_buffer, gtranslator_preferences_dialog_changed);
-    	auto_learn =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 5,
-	    	_("Automatically learn a newly translated message"),
-		GtrPreferences.auto_learn, gtranslator_preferences_dialog_changed);
 	keep_obsolete =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 6,
+	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
 		_("Keep obsolete message in the po files"),
 		GtrPreferences.keep_obsolete, gtranslator_preferences_dialog_changed);
 
@@ -235,22 +230,14 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page,
 		5, _("Delete compiled files (e.g. \"project.gmo\")"),
 		GtrPreferences.sweep_compile_file, gtranslator_preferences_dialog_changed);
-	fuzzy_matching=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		/*
-		 * Translators: With "fuzzy" I mean a more enhanced (and more
-		 *  crappy) logic while searching for appropriate translations
-		 *   for a original string.
-		 */
-		6, _("Use \"fuzzy\" matching routines for the learn buffer queries"),
-		GtrPreferences.fuzzy_matching, gtranslator_preferences_dialog_changed);
 	load_backends=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		7, _("Load all backends on startup"),
+		6, _("Load all backends on startup"),
 		GtrPreferences.load_backends, gtranslator_preferences_dialog_changed);
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		8, _("Save geometry on exit & restore it on startup"),
+		7, _("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
 	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		9, _("Show the views sidebar"),
+		8, _("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
 	
 	/*
@@ -270,8 +257,9 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Use special dictionary"),
 		GtrPreferences.use_own_dict, gtranslator_preferences_dialog_changed);
 	dictionary_file=
-	    gtranslator_utils_attach_entry_with_label(fifth_page, 4, _("Dictionary to use:"),
-				    GtrPreferences.dictionary, gtranslator_preferences_dialog_changed);
+	    gtranslator_utils_attach_entry_with_label(fifth_page, 4, 
+	    	_("Dictionary to use:"),
+	        GtrPreferences.dictionary, gtranslator_preferences_dialog_changed);
 	
 	/*
 	 * The sixth page with the special font/color stuff.
@@ -386,6 +374,29 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	mt_translated=gtranslator_utils_attach_color_with_label(eighth_page, 5,
 		_("Translated entries color:"), _("gtranslator -- translated entries' color"),
 		COLOR_MESSAGES_TABLE_TRANSLATED, gtranslator_preferences_dialog_changed);
+
+	/*
+	 * Learn buffer/auto translation options go now into their own prefs page ,-)
+	 */
+	use_learn_buffer =
+	    gtranslator_utils_attach_toggle_with_label(ninth_page, 0,
+	    	_("Also query the personal learn buffer while autotranslating untranslated messages"),
+		GtrPreferences.use_learn_buffer, gtranslator_preferences_dialog_changed);
+    	auto_learn =
+	    gtranslator_utils_attach_toggle_with_label(ninth_page, 1,
+	    	_("Automatically learn a newly translated message"),
+		GtrPreferences.auto_learn, gtranslator_preferences_dialog_changed);
+	fuzzy_matching=gtranslator_utils_attach_toggle_with_label(ninth_page,
+		/*
+		 * Translators: With "fuzzy" I mean a more enhanced (and more
+		 *  crappy) logic while searching for appropriate translations
+		 *   for a original string.
+		 */
+		2, _("Use \"fuzzy\" matching routines for the learn buffer queries"),
+		GtrPreferences.fuzzy_matching, gtranslator_preferences_dialog_changed);
+	min_match_percentage=gtranslator_utils_attach_spin_with_label(ninth_page,
+		3, _("Minimal required similarity percentage while doing autotranslation"),
+		25, 100, GtrPreferences.min_match_percentage, gtranslator_preferences_dialog_changed);
 
 	/*
 	 * Connect the signals to the preferences box.
@@ -536,6 +547,10 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
 			max_history_entries));
 	
+	GtrPreferences.min_match_percentage =
+		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
+			min_match_percentage));
+	
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
 	gtranslator_config_set_string("informations/autosave_suffix", 
 		GtrPreferences.autosave_suffix);
@@ -545,6 +560,9 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 
 	gtranslator_config_set_float("informations/max_history_entries", 
 		GtrPreferences.max_history_entries);
+		
+	gtranslator_config_set_float("informations/min_match_percentage",
+		GtrPreferences.min_match_percentage);
 	
 	GTR_FREE(GtrPreferences.msgid_font);
 	GTR_FREE(GtrPreferences.msgstr_font);
@@ -780,6 +798,23 @@ void gtranslator_preferences_read(void)
 
 	GtrPreferences.max_history_entries =
 		gtranslator_config_get_float("informations/max_history_entries");
+	
+	GtrPreferences.min_match_percentage =
+		gtranslator_config_get_float("informations/min_match_percentage");
+
+	/*
+	 * Check some prefs values for sanity and set sane values if no really
+	 *  good prefs values have been detected.
+	 */
+	if(GtrPreferences.min_match_percentage < 25.0)
+	{
+		GtrPreferences.min_match_percentage=25.0;
+	}
+
+	if(GtrPreferences.autosave_timeout < 1.0)
+	{
+		GtrPreferences.autosave_timeout=1.0;
+	}
 
 	GtrPreferences.instant_spell_check = 
 		gtranslator_config_get_bool("toggles/instant_spell_check");

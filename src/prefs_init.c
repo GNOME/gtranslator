@@ -105,6 +105,11 @@ void gtranslator_preferences_init_default_values()
 		gtranslator_config_set_float("informations/max_history_entries", 10.0);
 
 		/*
+		 * Set the required minimum match percentage to 75% as default.
+		 */
+		gtranslator_config_set_float("informations/min_match_percentage", 75.0);
+
+		/*
 		 * On the first startup we don't have got any history yet.
 		 */
 		gtranslator_config_set_int("history/length", 0);

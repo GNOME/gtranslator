@@ -119,6 +119,12 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 	gboolean with_full_path);
 
 /*
+ * Return the similarity percentage between the two given strings --
+ *  this doesn't only sound like voodoo; it IS voodoo!
+ */
+gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b);
+
+/*
  * Check for matching of an entry of the list entry and the string -- returns
  *  '-1' on non-matching, else the position in the list.
  */

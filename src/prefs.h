@@ -73,6 +73,7 @@ struct {
 	 * The autosave timeout in minutes.
 	 */
 	gfloat autosave_timeout;
+	gfloat min_match_percentage;
 	
 	/*
 	 * User-specified strings.

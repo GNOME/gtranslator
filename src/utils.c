@@ -30,6 +30,7 @@
 #include "translator.h"
 #include "utils.h"
 
+#include <ctype.h>
 #include <dirent.h>
 #include <unistd.h>
 
@@ -580,6 +581,53 @@ void gtranslator_utils_free_list(GList *list, gboolean free_contents)
 		g_list_free(list);
 		list=NULL;
 	}
+}
+
+/*
+ * Some voodoo-alike functions have been missing in gtranslator, so here we
+ *  go: calculates a similarity percentage based on really insane logic.
+ */
+gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
+{
+	gfloat	similarity;
+	gfloat	one_char_percentage;
+	
+	gint	i=0;
+
+	similarity=one_char_percentage=0.0;
+
+	/*
+	 * Eh, check for these quite useless situations in the two gchars.
+	 */
+	if(!a || !b || !nautilus_strcmp(a, "") || !nautilus_strcmp(b, ""))
+	{
+		return 0.0;
+	}
+
+	/*
+	 * Calculate the similarity value a single char is representing.
+	 */
+	one_char_percentage=(100 / (strlen(a) - 1));
+
+	/*
+	 * Now we do check the characters of the two given strings..
+	 *  Voodoo, Magic!
+	 */
+	while(a[i] && b[i] && a[i]!='\0' && b[i]!='\0')
+	{
+		if(a[i]==b[i])
+		{
+			similarity+=one_char_percentage;
+		}
+		else if(tolower(a[i])==tolower(b[i]))
+		{
+			similarity+=(one_char_percentage / 2);
+		}
+		
+		i++;
+	}
+
+	return similarity;
 }
 
 /*
