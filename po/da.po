@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.12\n"
 "POT-Creation-Date: 2000-10-18 22:54+0200\n"
-"PO-Revision-Date: 2000-10-03 22:24+0100\n"
+"PO-Revision-Date: 2000-10-20 22:24+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -34,18 +34,16 @@ msgid "Compile the po-file"
 msgstr "Kompilér po-filen"
 
 #: src/gui.c:93
-#, fuzzy
 msgid "Update po-file"
-msgstr "Åbn en po-fil"
+msgstr "Opdatér po-fil"
 
 #: src/gui.c:94 src/gui.c:242
-#, fuzzy
 msgid "Update the po-file"
-msgstr "Kompilér po-filen"
+msgstr "Opdatér po-filen"
 
 #: src/gui.c:100
 msgid "Recen_t files"
-msgstr ""
+msgstr "_Nylige filer"
 
 #: src/gui.c:117
 msgid "_Header..."
@@ -173,7 +171,7 @@ msgstr "Åbn en po-fil"
 
 #: src/gui.c:241
 msgid "Update"
-msgstr ""
+msgstr "Opdatér"
 
 #: src/gui.c:245
 msgid "Save"
@@ -273,34 +271,34 @@ msgstr "Besked %d / %d / status:"
 #: src/gui.c:752
 #, c-format
 msgid "%s %s [ %i Fuzzy left ]"
-msgstr ""
+msgstr "%s %s [ %i Fuzzy tilbage ]"
 
 #: src/gui.c:756
 #, c-format
 msgid "%s %s [ No fuzzy left ]"
-msgstr ""
+msgstr "%s %s [ Ingen Fuzzy tilbage ]"
 
-#: src/dialogs.c:217 src/gui.c:761
+#: src/dialogs.c:217 src/gui.c:765
 msgid "Translated"
 msgstr "Oversat"
 
-#: src/gui.c:767
+#: src/gui.c:771
 msgid "Stick"
 msgstr "Lim"
 
-#: src/gui.c:775
+#: src/gui.c:779
 #, c-format
 msgid "%s %s [ %i Untranslated left ]"
-msgstr ""
+msgstr "%s %s [ %i uoversatte tilbage ]"
 
-#: src/gui.c:775 src/gui.c:779
+#: src/gui.c:779 src/gui.c:783
 msgid "Untranslated"
 msgstr "Uoversat"
 
-#: src/gui.c:779
+#: src/gui.c:783
 #, c-format
 msgid "%s %s [ No untranslated left ]"
-msgstr ""
+msgstr "%s %s [ Ingen uoversatte tilbage ]"
 
 #: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
@@ -387,11 +385,11 @@ msgstr "Forskelligt"
 
 #: src/prefs.c:214
 msgid "Recent files menu"
-msgstr ""
+msgstr "Menu for nylige filer"
 
 #: src/prefs.c:215
 msgid "Fonts & Colors"
-msgstr ""
+msgstr "Skrifttyper & farver"
 
 #: src/prefs.c:220
 msgid "Author's name :"
@@ -449,6 +447,7 @@ msgstr "Aktivér pop-op-menuen"
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
+"Aktivér opdatér-funktionen i gtranslator (du har brug for kildeteksten til dette)"
 
 #: src/prefs.c:284
 msgid "Save geometry on exit & restore it on startup"
@@ -456,49 +455,46 @@ msgstr "Gem geometri ved afslutningen & genskab den ved opstart"
 
 #: src/prefs.c:287
 msgid "Don't show the update information dialogs"
-msgstr ""
+msgstr "Vis ikke dialogerne for opdateringsoplysningerne"
 
 #: src/prefs.c:299
 msgid "Check every file in the list for existence"
-msgstr ""
+msgstr "Tjek hver fil i listen for eksistens"
 
 #: src/prefs.c:305
 msgid "Number of maximal shown entries in the recent files list:"
-msgstr ""
+msgstr "Maksimalt antal viste indgange i listen af nylige filer:"
 
 #: src/prefs.c:319
 msgid "Apply special font/colors"
-msgstr ""
+msgstr "Anvend specielle skrifttyper/farver"
 
 #. *
 #. * Create the labels.
 #. *
 #: src/prefs.c:324
 msgid "Font:"
-msgstr ""
+msgstr "Skrifttype:"
 
 #: src/prefs.c:325
 msgid "Foreground color:"
-msgstr ""
+msgstr "Forgrundsfarve:"
 
 #: src/prefs.c:326
 msgid "Background color:"
-msgstr ""
+msgstr "Baggrundsfarve:"
 
 #: src/prefs.c:333
-#, fuzzy
 msgid "gtranslator -- font selection"
-msgstr "gtranslator -- alternativer"
+msgstr "gtranslator -- valg af skrifttype"
 
 #: src/prefs.c:341
-#, fuzzy
 msgid "gtranslator -- foreground color"
-msgstr "gtranslator -- gå til"
+msgstr "gtranslator -- forgrundsfarve"
 
 #: src/prefs.c:344
-#, fuzzy
 msgid "gtranslator -- background color"
-msgstr "gtranslator -- gå til"
+msgstr "gtranslator -- baggrundsfarve"
 
 #: src/prefs.c:466
 msgid ""
@@ -662,7 +658,7 @@ msgstr ""
 
 #: src/parse.c:643
 msgid "Sorry, msgfmt isn't available on your system!"
-msgstr ""
+msgstr "Desværre, msgfmt er ikke tilgængelig på dit system!"
 
 #: src/parse.c:668
 #, c-format
@@ -678,20 +674,20 @@ msgstr ""
 #. *
 #: src/parse.c:713 src/parse.c:723 src/parse.c:724
 msgid "_File/Recen_t files/"
-msgstr ""
+msgstr "_Filer/Nylige filer/"
 
 #: src/parse.c:769
-#, fuzzy, c-format
+#, c-format
 msgid "Open %s"
-msgstr "Åbn"
+msgstr "Åbn %s"
 
 #: src/parse.c:889
 msgid "An update would cause no changes."
-msgstr ""
+msgstr "En opdatering vil ikke medføre ændringer."
 
 #: src/parse.c:907
 msgid "The update was successfull."
-msgstr ""
+msgstr "Opdateringen lykkedes."
 
 #: src/find.c:88
 #, c-format
@@ -707,14 +703,12 @@ msgid "Couldn't get the message! Grrr...."
 msgstr "Kunne ikke finde beskeden! Grrr...."
 
 #: src/find.c:122
-#, fuzzy
 msgid "There are no fuzzy messages left."
-msgstr "Der findes ingen ufærdige beskeder"
+msgstr "Der er ikke nogen fuzzy beskeder tilbage."
 
 #: src/find.c:146
-#, fuzzy
 msgid "All messages seem to be translated."
-msgstr "Alle beskeder ser ud til at være oversat"
+msgstr "Alle beskeder ser ud til at være oversat."
 
 #: src/spell.c:25
 msgid "Check spelling"
@@ -906,12 +900,11 @@ msgstr "Kan ikke sætte en boolsk værdi for en ikke-defineret sti!"
 
 #: libgtranslator/preferences.c:247
 msgid "No path defined for gfloat value"
-msgstr ""
+msgstr "Ingen sti defineret for gfloat værdi"
 
 #: libgtranslator/preferences.c:272
-#, fuzzy
 msgid "No path defined to get the gfloat value from!"
-msgstr "Ingen sti defineret hvor heltallet kan findes!"
+msgstr "Ingen sti defineret som gfloat værdi kan findes i!"
 
 #. *
 #. * Set a date identifier; this ought to be also
@@ -919,40 +912,38 @@ msgstr "Ingen sti defineret hvor heltallet kan findes!"
 #. *
 #: libgtranslator/preferences.c:322
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d %H:%M"
 
 #: libgtranslator/preferences.c:328
-#, fuzzy
 msgid "Couldn't generate the current date!"
-msgstr "Kunne ikke hente noderne!"
+msgstr "Kunne ikke generere aktuel dato!"
 
 #: libgtranslator/stylistics.c:71 libgtranslator/stylistics.c:143
-#, fuzzy
 msgid "No color path found!"
-msgstr "Ingenting relevant fundet!"
+msgstr "Ingen farve-sti fundet!"
 
 #: libgtranslator/stylistics.c:196
 msgid "No font set! Using default font"
-msgstr ""
+msgstr "Intet skrifttype-sæt! Bruger standard skrifttype"
 
 #. *
 #. * The default font for gtranslator.
 #. *
 #: libgtranslator/stylistics.c:200
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
+msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
 #: libgtranslator/stylistics.c:204
 msgid "Couldn't even load default font!"
-msgstr ""
+msgstr "Kunne ikke engang indlæse standard skrifttype!"
 
 #: libgtranslator/stylistics.c:224
 msgid "No widgets defined to manipulate their style"
-msgstr ""
+msgstr "Ingen widgetter defineret til behandling af deres stil"
 
 #: src/languages.h:57
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 #: src/languages.h:60
 msgid "Arabic"
@@ -960,20 +951,19 @@ msgstr "Arabisk"
 
 #: src/languages.h:63
 msgid "Azeri"
-msgstr ""
+msgstr "Azeri"
 
 #: src/languages.h:66
 msgid "Basque"
 msgstr "Baskisk"
 
 #: src/languages.h:69
-#, fuzzy
 msgid "Bielorussian"
-msgstr "Russisk"
+msgstr "Hviderussisk"
 
 #: src/languages.h:72
 msgid "Britton"
-msgstr ""
+msgstr "Bretonsk"
 
 #: src/languages.h:75
 msgid "Bulgarian"
@@ -1005,7 +995,7 @@ msgstr "Dansk"
 
 #: src/languages.h:96
 msgid "Dutch"
-msgstr ""
+msgstr "Hollandsk"
 
 #: src/languages.h:102
 msgid "English/Canada"
@@ -1101,16 +1091,15 @@ msgstr "Russisk"
 
 #: src/languages.h:171
 msgid "Serbian/Cyrillic"
-msgstr ""
+msgstr "Serbisk/kyrillisk"
 
 #: src/languages.h:174
 msgid "Serbian/Latin"
-msgstr ""
+msgstr "Serbisk/latinsk"
 
 #: src/languages.h:177
-#, fuzzy
 msgid "Slovenian"
-msgstr "Slovakisk"
+msgstr "Slovensk"
 
 #: src/languages.h:180
 msgid "Spanish"
@@ -1130,7 +1119,7 @@ msgstr "Svensk"
 
 #: src/languages.h:192
 msgid "Thai"
-msgstr ""
+msgstr "Thai"
 
 #: src/languages.h:195
 msgid "Turkish"
@@ -1142,7 +1131,7 @@ msgstr "Ukrainsk"
 
 #: src/languages.h:201
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamesisk"
 
 #: src/languages.h:204
 msgid "Walloon"
@@ -1151,155 +1140,3 @@ msgstr "Vallonsk"
 #: src/languages.h:207
 msgid "Welsh"
 msgstr "Walisisk"
-
-#~ msgid "Couldn't init the GConf library!"
-#~ msgstr "Kunne ikke initiere GConf-biblioteket!"
-
-#~ msgid ""
-#~ "\n"
-#~ "The file stream is lost!\n"
-#~ "%s"
-#~ msgstr ""
-#~ "\n"
-#~ "Filstrømmen er tabt!\n"
-#~ "%s"
-
-#~ msgid "GoTo"
-#~ msgstr "Gå til"
-
-#~ msgid ""
-#~ "gtranslator will be a GNOME framework for translating and managing the "
-#~ "translation of the important po-files and othe i18/19/20..n issues."
-#~ msgstr ""
-#~ "gtranslator skal blive et GNOME program for oversættelse og håndtering af "
-#~ "oversættelsen af vigtige po-filer og andre i18n ting."
-
-#~ msgid "GoTo message entry"
-#~ msgstr "Gå til besked"
-
-#~ msgid "Goto the specified message entry."
-#~ msgstr "Gå til den angivne besked."
-
-#~ msgid ""
-#~ "With this query window you can query\n"
-#~ "the message db for an existing entry\n"
-#~ "with your query string."
-#~ msgstr ""
-#~ "Med forespørgselsvinduet kan du anmode\n"
-#~ "besked-databasen om en eksisterende indgang\n"
-#~ "med forespørgselsstrengen."
-
-#~ msgid "Query"
-#~ msgstr "Spørg"
-
-#~ msgid "gtranslator -- query the message db"
-#~ msgstr "gtranslator -- forespørg besked-databasen"
-
-#~ msgid "Result: `%s'"
-#~ msgstr "Resultat: '%s'"
-
-#~ msgid "Insert"
-#~ msgstr "Indsæt"
-
-#~ msgid "gtranslator -- result for your query"
-#~ msgstr "gtranslator -- resultat af din forespørgsel"
-
-#~ msgid "The header doesn't seem to be parsed rightly."
-#~ msgstr "Hoved ser ikke ud til at blive fortolket rigtigt."
-
-#~ msgid "_Add the current message"
-#~ msgstr "_Tilføj denne besked"
-
-#~ msgid "Add the current message to the messages DB"
-#~ msgstr "Tilføj denne besked til besked-databasen"
-
-#~ msgid "_Query for a message..."
-#~ msgstr "_Søg efter en besked..."
-
-#~ msgid "Query the messages DB for the current msgid"
-#~ msgstr "Forespørg besked-databasen om denne msgid."
-
-#~ msgid "Add"
-#~ msgstr "Tilføj"
-
-#~ msgid "Add to the messages db"
-#~ msgstr "Tilføj til besked-db"
-
-#~ msgid "Query for a message in db"
-#~ msgstr "Søg efter en besked i db"
-
-#~ msgid "Couldn't store current geometry!"
-#~ msgstr "Kunne ikke gemme den aktuelle geometri!"
-
-#~ msgid "You've reached the first message"
-#~ msgstr "Du har nået den første besked"
-
-#~ msgid "You've reached the last message."
-#~ msgstr "Du har nået den sidste besked"
-
-#~ msgid "Greek"
-#~ msgstr "Græsk"
-
-#~ msgid "Sets the minimum match for query"
-#~ msgstr "Sætter minimum match for forespørgsel"
-
-#~ msgid "The messages db to use"
-#~ msgstr "Den besked-db der skal bruges"
-
-#~ msgid "Query the messages db & exit"
-#~ msgstr "Søg i beskeddatabase og afslut"
-
-#~ msgid "Getting results for query: `%s' ...\n"
-#~ msgstr "Finder resultater for forespørgsel: '%s' ...\n"
-
-#~ msgid "Result                   :  %s."
-#~ msgstr "Resultat                 :  %s."
-
-#~ msgid "End of query.\n"
-#~ msgstr "Slut på forespørgsel.\n"
-
-#~ msgid "No message db found! Creating one in `%s'."
-#~ msgstr "Ingen beskeds-database fundet. Opretter én i '%s'."
-
-#~ msgid "gtranslator lost the list of translations!\n"
-#~ msgstr "gtranslator tabte listen med oversættelser!\n"
-
-#~ msgid "The message db `%s' hasn't been initted yet!\n"
-#~ msgstr "Beskedsdatabasen %s er ikke blevet initialiseret endnu!\n"
-
-#~ msgid "Got no message entry!\n"
-#~ msgstr "Fik ingen besked!\n"
-
-#~ msgid "New message entry has wrong/non-logical length.\n"
-#~ msgstr "Ny beskedsopføring har fejl/ikke-logisk længde.\n"
-
-#~ msgid "Not available"
-#~ msgstr "Ikke tilgængelig"
-
-#~ msgid "No messages list ( msg_list ) available for acting on it!\n"
-#~ msgstr ""
-#~ "Ingen beskeds-liste (msg_list) at udføre handlinger på tilgængelig!\n"
-
-#~ msgid "No entry found in the messages db "
-#~ msgstr "Ingen indgang fundet i beskeds-databasen "
-
-#~ msgid "The messages db isn't inited."
-#~ msgstr "besked-db er ikke initialiseret"
-
-#~ msgid "Trying to set an irregular challange length!"
-#~ msgstr "Prøver at sætte en ugangbar prøve-længde!"
-
-#~ msgid "Current file : \"%s\"."
-#~ msgstr "Aktuel fil : '%s'."
-
-#~ msgid "Successfully finished parsing \"%s\", %i lines."
-#~ msgstr "Færdig med læsning af '%s', %i linjer."
-
-#~ msgid "MIME type :"
-#~ msgstr "MIME-type :"
-
-#~ msgid "Add the additional comments to the header"
-#~ msgstr "Tilføj de yderligere kommentarer til hovedet"
-
-#~ msgid "No query, no fun."
-#~ msgstr "Ingen forespørgsel, intet resultat."
