@@ -7,7 +7,6 @@
 #  function of gtranslator.
 #
 [ $# -lt 2 ] && {
-	echo "Not enough parameters given!"
 		exit 1
 }
 #

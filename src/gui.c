@@ -875,7 +875,7 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		* Parse the characters for a free space and replace
 		*  them with the '·'.
 		**/
-		for(len=0;len<strlen(newstr);len++)
+		for(len=0;len<=(strlen(newstr));++len)
 		{
 			if(newstr[len]==' ')
 			{
@@ -885,12 +885,17 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		/**
 		* Go to the first index in the box.
 		**/
-		gtk_text_set_point(GTK_TEXT(trans_box), 0);
+		gtk_text_set_point(GTK_TEXT(trans_box), 0); 
 		/**
 		* Clean up the translation box.
 		**/
 		gtk_text_forward_delete(GTK_TEXT(trans_box),
 			gtk_text_get_length(GTK_TEXT(trans_box)));
+		/**
+		* Thaw up the translation box to avoid the reverse writing
+		*  feature.
+		**/
+		gtk_text_thaw(GTK_TEXT(trans_box));
 		/**
 		* Insert the changed text with the '·''s.
 		**/
@@ -899,12 +904,6 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		/**
 		* Go to the old text index.
 		**/
-		/* FIXME FIXME FIXME BABY. */
 		gtk_text_set_point(GTK_TEXT(trans_box), index);
-		/**
-		* Thaw up the translation box as the new text
-		*  has been inserted now.
-		**/
-		gtk_text_thaw(GTK_TEXT(trans_box));
 	}
 }

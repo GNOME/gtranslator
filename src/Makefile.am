@@ -14,6 +14,9 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator"\" \
 	$(XML_CFLAGS) \
+	if GCONF_IS_PRESENT
+	$(GCONF_CFLAGS) -DGCONF_IS_PRESENT=7 \
+	endif
 	$(myicon)
 
 bin_PROGRAMS = gtranslator
@@ -39,6 +42,9 @@ gtranslator_LDADD = \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
 	$(INTLLIBS) \
+	if GCONF_IS_PRESENT
+	$(GCONF_LIBS)
+	endif
 	$(XML_LIBS)
 
 EXTRA_DIST = ChangeLog TODO.src

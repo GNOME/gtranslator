@@ -1,3 +1,14 @@
+2000-10-11  Fatih Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Include the necessary GConf cflags for compiling
+		and linking gtranslator.
+
+	* gui.c: Solved the FIXME and "removed" the reverse writing
+		"feature" of gtranslator :-)
+		Wrong places for the freeze/thaw up calls of the GtkText,
+		 this has been corrected and it works now again also in
+		  dot char mode.
+
 2000-10-07  Fatih Demir	<kabalak@gmx.net>
 
 	* main.c: Removed the error warning about GConf as it works
