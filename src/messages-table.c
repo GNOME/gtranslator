@@ -199,7 +199,7 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 		return gtranslator_utf8_get_utf8_string(&message->msgstr);
 		break;
 	case COL_COMMENT:
-		return "comment";
+		return message->comment->pure_comment;
 		break;
 	case COL_STATUS:
 		return "status";
@@ -340,23 +340,13 @@ GtkWidget *gtranslator_messages_table_new()
 			ETSPECS_DIR "/messages-table.etspec", 
 			statusfile)
 		);
-	
-	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
-	
-	/*
-	 * FIXME: This is definitely the return value of the
-	 *  gtranslator_utils_get_messages_table_state_file_name() function.
-	 *
-	 * But the statusfile argument to e_tree_scrolled_construct_From_spec_file
-	 *  should already define this.
-	 *
-	e_tree_load_state (E_TREE (tree), statusfile);
-	 */
-	
+
 	g_free(statusfile);
 	
+	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
 	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
 		GTK_SIGNAL_FUNC(row_selected), NULL);
+
 	return messages_tree;
 }
 
