@@ -28,10 +28,10 @@
 #include "prefs.h"
 #include "parse.h"
 #include "languages.h"
+#include "nautilus-string.h"
 
 #include <locale.h>
 #include <time.h>
-#include <string.h>
 
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-uidefs.h>
@@ -538,4 +538,120 @@ gchar *prepare_comment_for_save(gchar *comment)
 	g_strfreev(stringarray);
 	
 	return mystring->str;
+}
+
+/*
+ * Fill up the header entries which are also set up in the prefs.
+ */
+void gtranslator_header_fill_up(GtrHeader *header)
+{
+	/*
+	 * FIXME TODO -- Crashed for now.
+	 */
+	GtrHeader *settings;
+	
+	g_return_if_fail(header!=NULL);
+
+	gtranslator_config_init();
+
+	/*
+	 * Get the translator name per default and check for missing name.
+	 */
+	settings->translator=gtranslator_config_get_string("translator/name");
+
+	/*
+	 * We do have got settings from prefs and a default header -- work for us.
+	 */
+	if(settings->translator && !strcmp(header->translator, "FULL NAME"))
+	{
+		/*
+		 * Get all the header fields from the preferences.
+		 */
+		settings->tr_email=gtranslator_config_get_string("translator/email");
+		
+		settings->language=gtranslator_config_get_string("language/name");
+		settings->lg_email=gtranslator_config_get_string("language/team_email");
+		
+		settings->charset=gtranslator_config_get_string("language/mime_type");
+		settings->encoding=gtranslator_config_get_string("language/encoding");
+
+		/*
+		 * Fill up the original header fields.
+		 */
+		header->translator=g_strdup(settings->translator);
+		header->tr_email=g_strdup(settings->tr_email);
+		
+		header->language=g_strdup(settings->language);
+		header->lg_email=g_strdup(settings->lg_email);
+		
+		header->charset=g_strdup(settings->charset);
+		header->encoding=g_strdup(settings->encoding);
+
+		/*
+		 * If there's any header comment we should also substitute the 
+		 *  values there with useful stuff.
+		 */
+		if(header->comment)
+		{
+			gchar 		*comment;
+			gchar 		*title;
+			
+			time_t 		now;
+			struct tm 	*timebox;
+			gchar 		year[4];
+			
+			/*
+			 * Replace the default strings in the header comment with the stored
+			 *  data and useful strings/dates.
+			 */
+			now=time(NULL);
+			timebox=localtime(&now);
+
+			strftime(year, 4, "%Y", timebox);
+
+			/*
+			 * Translator data should be in sync with the header I guess .-)
+			 */
+			comment=nautilus_str_replace_substring(header->comment,
+				"EMAIL@ADDRESS", g_strdup(settings->tr_email));
+
+			comment=nautilus_str_replace_substring(comment, "FIRST AUTHOR",
+				g_strdup(settings->translator));
+			
+			/*
+			 * The YEAR field gets also filled up.
+			 */
+			comment=nautilus_str_replace_substring(comment, "YEAR", 
+				g_strdup(year));
+
+			/*
+			 * Should be a good description line .-)
+			 */
+			title=g_strdup_printf(_("-- %s gettext translation file for %s."),
+				settings->language, header->prj_name);
+			
+			comment=nautilus_str_replace_substring(comment, 
+				"SOME DESCRIPTIVE TITLE.", title);
+
+			/*
+			 * Strip off the "#, fuzzy" header line from the default header.
+			 */
+			comment=nautilus_str_strip_substring_and_after(comment, "#, fuzzy");
+			
+			/*
+			 * Assign the new header comment now.
+			 */
+			if(comment)
+			{
+				g_free(header->comment);
+				header->comment=g_strdup(comment);
+			}
+
+			g_free(comment);
+		}
+
+		free_header(settings);
+	}
+	
+	gtranslator_config_close();
 }

@@ -399,6 +399,10 @@ void parse(const gchar *filename)
 		if(!strcmp(po->header->prj_name, "PACKAGE")
 			&& !strcmp(po->header->prj_version, "VERSION"))
 		{
+			/*
+			 * Substitute the values for the header fields.
+			 */
+			gtranslator_header_fill_up(po->header);
 			edit_header(NULL, NULL);
 		}
 	}

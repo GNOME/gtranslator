@@ -20,6 +20,9 @@
 #include "parse.h"
 #include "prefs.h"
 
+/*
+ * Sets up some useful options as the user runs the first time gtranslator.
+ */
 void prefs_init_default()
 {
 	gchar *date;

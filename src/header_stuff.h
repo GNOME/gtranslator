@@ -71,4 +71,9 @@ void edit_header(GtkWidget  * widget, gpointer useless);
 gchar *prepare_comment_for_view(gchar *comment);
 gchar *prepare_comment_for_save(gchar *comment);
 
+/*
+ * Fill up some fields of the header if possible.
+ */
+void gtranslator_header_fill_up(GtrHeader *header);
+
 #endif
