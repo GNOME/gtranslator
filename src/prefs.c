@@ -192,7 +192,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 
 	check_formats =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
-	    	_("Check messages for syntactical correctess"),
+	    	_("Check messages for syntactical correctness"),
 		GtrPreferences.check_formats, gtranslator_preferences_dialog_changed);
 
 	/*
