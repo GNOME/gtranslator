@@ -80,9 +80,9 @@ AC_SUBST(VFS_CFLAGS)
 AC_SUBST(VFS_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Check for gal >= 0.5.
+dnl Check for gal >= 0.10.99.
 dnl -------------------------------------------------------------------
-AC_MSG_CHECKING(for gal >= 0.5)
+AC_MSG_CHECKING(for gal >= 0.10.99)
 if gnome-config --libs gal 2>&1 >/dev/null ; then
 	dnl -----------------------------------------------------------
 	dnl gal is present; check for the right version numbers.
@@ -90,7 +90,7 @@ if gnome-config --libs gal 2>&1 >/dev/null ; then
 	GAL_VERSION=`gnome-config --modversion gal | sed -e 's/^[[^0-9]]*//' | \
 	awk -F. '{ print $1 * 10000 + $2 * 100 + $3;}'`
 	
-	if test "$GAL_VERSION" -ge 500 ; then
+	if test "$GAL_VERSION" -ge 1099 ; then
 		AC_MSG_RESULT(found)			
 	else
 		dnl ---------------------------------------------------
@@ -99,7 +99,7 @@ if gnome-config --libs gal 2>&1 >/dev/null ; then
 		dnl ---------------------------------------------------
 		AC_MSG_ERROR([
 "-----------------------------------------------------------------------------"
-"Please install gal >= 0.5 and try configuring again."
+"Please install gal >= 0.10.99 and try configuring again."
 "-----------------------------------------------------------------------------"])
 	fi
 else
