@@ -50,6 +50,24 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string);
 
 /*
+ * Convert the msgid & msgstr's to/from UTF-8.
+ */
+void gtranslator_utils_convert_message_to_utf8(GtrMsg **msg);
+void gtranslator_utils_convert_message_from_utf8(GtrMsg **msg);
+
+/*
+ * Convert the whole messages to/from UTF-8.
+ */
+void gtranslator_utils_convert_to_utf8(void);
+void gtranslator_utils_convert_from_utf8(void);
+
+/*
+ * Get the right localename/charset for the language.
+ */
+gchar *gtranslator_utils_get_locale_name(void); 
+gchar *gtranslator_utils_get_locale_charset(void);
+
+/*
  * Show the homepage of gtranslator.
  */
 void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);
@@ -91,16 +109,19 @@ GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(
 	GtkWidget * probox, gint rows, gint cols, const char *label_text);
 
 /*
- * The lists for the language informations -- are all changed accordingly automatically.
+ * The lists for the language informations -- are all changed 
+ *  accordingly automatically.
  */
-GList *languages_list, *encodings_list, *lcodes_list, *group_emails_list, *bits_list;
+GList *languages_list, *encodings_list, *lcodes_list, *group_emails_list,
+	*bits_list;
 	
 
 /*
  * Creates the lists above and deletes/frees it.
  */
 void gtranslator_utils_language_lists_create(void);
-gboolean gtranslator_utils_language_lists_free(GtkWidget *widget, gpointer useless);
+gboolean gtranslator_utils_language_lists_free(GtkWidget *widget, 
+	gpointer useless);
 
 /*
  * Checks the given file for the right permissions for

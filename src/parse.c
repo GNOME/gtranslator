@@ -482,17 +482,23 @@ static void write_the_message(gpointer data, gpointer fs)
 	id = restore_msg(msg->msgid);
 	str = restore_msg(msg->msgstr);
 	
-	if (msg->comment)
+	if(msg->comment)
+	{
 		fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
 			msg->comment, id, str);
+	}
 	else
+	{
 		fprintf((FILE *) fs, "msgid \"%s\"\nmsgstr \"%s\"\n\n",
 			id, str);
+	}
+	
 	/*
-	 * Strange, but these cause SIGSEGV
-	g_free(id);
-	g_free(msg);
-	*/
+	 * Unknown segfault reason causes us to uncomment the two g_free's.
+	 *
+	 * g_free(id);
+	 * g_free(msg);
+	 */
 }
 
 static gboolean actual_write(const gchar * name)
