@@ -1,24 +1,38 @@
+2003-06-13  Fatih Demir <kabalak@gtranslator.org>
+
+	* man/gtranslator.1.in: Updated the information there a bit & removed
+		the mentioned old features/points of the gtranslator GUI
+		 there aaaand mentioned Ross Golder as the main developer :-)
+
+	* ChangeLog & NEWS: Added some slight pieces of NEWS, reformatted some
+		entries of mine in the last time here (line breaks...) :-)
+
 2003-06-10  Fatih Demir <kabalak@gtranslator.org>
 
-	* kabalak_generate_all_the_files.sh: Added the "=yes" argument to the ./configure
-		call there...
+	* kabalak_generate_all_the_files.sh: Added the "=yes" argument to the 
+		./configure call there...
 
-	* DEPENDS, acconfig.c & configure.in: The jw conditional is now removed as we
-		don't build any html docs or such anymore and adapted to the new stuff.
+	* DEPENDS, acconfig.c & configure.in: The jw conditional is now removed
+		as we don't build any html docs or such anymore and adapted it
+		 to the new stuff.
 
 2003-06-10  Fatih Demir <kabalak@gtranslator.org>
 
-	* INSTALL.CVS & gtranslator.spec.in: Aapetd for the changes - maybe we should now
-		get a new RPM spec file as the old one seems to be very outdated..
+	* INSTALL.CVS & gtranslator.spec.in: Aapetd for the changes - maybe we
+		should now get a new RPM spec file as the old one seems to be 
+		 very outdated..
 
-	* acconfig.h & configure.in: Removed the configuration of the mime type binding
-		files in the ./configure routine - the mime file is now installed per
-		 default so that gtranslator is then automatically bind to po files.
+	* acconfig.h & configure.in: Removed the configuration of the mime type
+		binding files in the ./configure routine - the mime file is now
+		 installed per default so that gtranslator is automatically
+		  bind to po files (no option present for this anymore during
+		   the ./configure cases).
 
-	* BRANCHES: Updated the information about the versionitis & branches/development.
+	* BRANCHES: Updated the information about the versionitis & branches/
+		development.
 
-	* AUTHORS & THANKS: Cleaned up AUTHORS file a bit and moved most thankful
-		addition-doing people to the THANKS file.
+	* AUTHORS & THANKS: Cleaned up AUTHORS file a bit and moved most
+		thankful addition-doing people to the THANKS file.
 
 	* .cvsignore: Slightly extended for the dist packages.
 

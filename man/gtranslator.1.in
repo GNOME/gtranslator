@@ -10,7 +10,7 @@ gtranslator is a comfortable gettext po file editor with many features like spec
 .TP 
 Of course all standard features of a good application like DnD, session support and supplement files for mime types and menu items are present.
 .TP 
-Instant spell checking, excuberant syntax highlighting, instant comment view, a very comfortable messages table with customizable colors, colorschemes, UTF\-8 support, a high level of preferences customizable and a personal learn buffer/translation memory with autotranslation capabilities are the main features of gtranslator.
+Instant comment view, a comfortable quick navigation messages table with customizable colors, colorschemes, UTF\-8 support, a high level of preferences customizable and a personal learn buffer/translation memory with autotranslation capabilities are the main features of gtranslator.
 .SH "OPTIONS"
 .TP 
 .I po\-file
@@ -53,11 +53,10 @@ Prints out the version number of gtranslator.
 .I \-\-usage
 Shows you the pill of options without an explanation.
 .SH "FILES"
-.B ~/.gnome/gtranslator
 .TP 
 .B ~/.gconf/apps/gtranslator
 .TP 
-Your personal gtranslator settings will be stored there (if compiled with GConf support, you'll find it in ~/.gconf/apps/gtranslator/, if not in ~/.gnome/gtranslator).
+Your personal gtranslator settings will be stored there. 
 .TP 
 .B ~/.gtranslator
 This directory is used by gtranslator for all it's "private" files (e.g. temporary files).
@@ -68,8 +67,8 @@ Your personal colorschemes can be placed in this directory \-\- gtranslator does
 .B ~/.gtranslator/etstates/
 The state file for the messages table/tree is stored in this directory.
 .TP 
-.B ~/.gtranslator/umtf/learn\-buffer.xml
-Your personal learn buffer (in UMTF format) is stored in this file \-\- it's used for learning and autotranslation.
+.B ~/.gtranslator/umtf/
+Your personal learn buffers (in UMTF format) are stored in this directory \-\- the learn buffer is used for auto translation issues.
 .TP 
 .B ~/.gtranslator/files/
 Temporary files used by gtranslator are stored in this directory (mostly this directory should be empty).
@@ -137,7 +136,7 @@ gtranslator is distributed under the
 or greater.
 
 .SH "AUTHORS"
-Fatih Demir <kabalak@gtranslator.org>, Gediminas Paulauskas <menesis@gtranslator.org>, Thomas Ziehmer <thomas@gtranslator.org>, Kevin Vandersloot <kfv101@psu.edu> and Peeter Vois <peeter@gtranslator.org>.
+Ross Golder <ross@gtranslator.org>, Fatih Demir <kabalak@gtranslator.org>, Gediminas Paulauskas <menesis@gtranslator.org>, Thomas Ziehmer <thomas@gtranslator.org>, Kevin Vandersloot <kfv101@psu.edu> and Peeter Vois <peeter@gtranslator.org>.
 .SH "WEBSITE"
 .B http://www.gtranslator.org
 
