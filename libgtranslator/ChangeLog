@@ -1,5 +1,13 @@
 2000-10-25  Fatih Demir	<kabalak@gmx.net>
 
+        * parse-db.*: Removed the checking routine which is
+                obsolete as the other functions do also
+                 perform checks; don't print out the node
+                  list.
+
+        * handle-db.*: Removed the filename argument from
+                the call of gtranslator_add_node_to_doc.
+ 
         * Makefile.am: Removed foo.xml from the dist files and
                 added the messages.h file to libgtranslator;
                  that's outsourcing!
@@ -7,18 +15,18 @@
 	* foo.xml: Removed it as it's useless for us :-)
 
         * messages.h: Moved the messages.h from the ./src-dir
-                to libgtranslator.         
+                to libgtranslator.
 
         * *.c/*.h: Use absolute includes for the libgtranslator
                 headers, e.g. <libgtranslator/preferences.h>
                  instead of <preferences.h>.
-        
+ 
         * parse-db.h: Removed the <messages.h> include as the
                 content of this file isn't used yet in any
                  routine of libgtranslator ( and it should'n
                   do that as long as messages.h belongs to
                    gtranslator; possibly this file should be
-                    moved to libgtranslator ).         
+                    moved to libgtranslator ).
 
 	* gtranslator-preferences-dialog.c: Added the first
 		function skeleton for the dialog-creating

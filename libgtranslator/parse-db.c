@@ -15,6 +15,7 @@
 **/
 
 #include <libgtranslator/parse-db.h>
+#include <libgtranslator/messages.h>
 
 /**
 * Parses the lang.xml file.
@@ -25,6 +26,10 @@ void parse_db_for_lang(gchar *language)
 	gboolean lusp=FALSE;
 	xmlNodePtr node=NULL;
 	xmlDocPtr xmldoc;
+	/**
+	* Initialize the list.
+	**/
+	messages=NULL;
 	/**
 	* Check if we did get a language to search for ..
 	**/
@@ -85,7 +90,6 @@ void parse_db_for_lang(gchar *language)
 			}	
 		}
 	}
-	db_list=NULL;
 	/**
 	* Get the nodes.
 	**/
@@ -97,6 +101,7 @@ void parse_db_for_lang(gchar *language)
 	g_print(_("EMail: %s\n"),xmlGetProp(xmldoc->xmlRootNode, "email"));
 	while(node!=NULL)
 	{
+                GtrMsg *msg=g_new0(GtrMsg,1);
 		/**
 		* Get the serial.
 		**/
@@ -104,7 +109,6 @@ void parse_db_for_lang(gchar *language)
 		{
 			g_print(_("Message database informations:\n"));
 			g_print(_("Date: %s\nSerial: %s\n"), xmlGetProp(node, "date"), xmlNodeGetContent(node));
-			
 		}
 		if(!strcmp(node->name, "msgid"))
 		{
@@ -112,7 +116,15 @@ void parse_db_for_lang(gchar *language)
 			newnode=node->xmlChildrenNode;
 			if(newnode)
 			{
-				g_print("Node: %s - %s\n",xmlGetProp(node, "name"),xmlNodeGetContent(newnode));
+				/**
+				* Get the message entries.
+				**/
+				msg->msgid=xmlGetProp(node, "name");
+				msg->msgstr=xmlNodeGetContent(newnode);
+				/**
+				* Add them to the list.
+				**/
+				messages=g_list_prepend(messages, (gpointer) msg);
 				/**
 				* Free the node.
 				**/
@@ -121,32 +133,4 @@ void parse_db_for_lang(gchar *language)
 		}
 		node=node->next;
 	}
-}
-
-void parse_db_check(xmlDocPtr test)
-{
-	xmlNodePtr muhaha;
-	/**
-	* Get the root element.
-	**/
-	muhaha=xmlDocGetRootElement(test);
-	/**
-	* Check it.
-	**/
-	if(!muhaha)
-	{
-		xmlFreeDoc(test);
-		g_error(_("The message db file is empty!"));
-	}
-	else
-	{
-		if(strcmp(muhaha->name, "db"))
-		{
-			g_error(_("The message db doesn't seem to be a message db xml file."));
-		}
-	}
-	/**
-	* Free it if it's still present.
-	**/
-	xmlFreeNode(muhaha);
 }

@@ -50,18 +50,13 @@
 #endif
 
 /**
-* The message db list.
+* The message database list.
 **/
-GList *db_list;
+GList *messages;
 
 /**
 * Loads the message database for the specified language.
 **/
 void parse_db_for_lang(gchar *language_code);
-
-/**
-* Checks the type of the message database file.
-**/
-void parse_db_check(xmlDocPtr testit);
 
 #endif
