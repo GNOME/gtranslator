@@ -64,7 +64,7 @@ GtrBookmark *gtranslator_bookmark_new()
 	
 	bookmark->position=g_list_position(po->messages, po->current);
 
-	bookmark->comment=g_strdup("No comment");
+	bookmark->comment=g_strdup(_("No comment"));
 
 	if(bookmark->position < 0)
 	{
