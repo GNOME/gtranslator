@@ -6,25 +6,40 @@ noinst_PROGRAMS = test-libgtranslator
 
 lib_LTLIBRARIES = libgtranslator.la
 
+if GCONF_IS_PRESENT
+configstuffcflags = $(GCONF_CFLAGS)
+else
+configstuffcflags = $(GNOME_CFLAGS)
+endif
+
 INCLUDES = -I$(includedir) $(IDL_CFLAGS) \
-	$(GLIB_CFLAGS) $(GNOME_CFLAGS) \
+	$(GLIB_CFLAGS) $(configstuffcflags) \
 	$(OAF_CFLAGS) $(XML_CFLAGS) -I../src \
 	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
 
 libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
 	parse-db.c \
 	handle-db.c \
+	preferences.c \
 	team-handle.c
 
-libgtranslator_la_LDFLAGS = -avoid-version
+libgtranslator_la_LDFLAGS =
+
+
+if GCONF_IS_PRESENT
+configstufflibs = $(GCONF_LIBS) $(GNOME_LIBS)
+else
+configstufflibs = $(GNOME_LIBS)
+endif
 
 libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
-	$(XML_LIBS) $(OAF_LIBS)
+	$(XML_LIBS) $(OAF_LIBS) $(configstufflibs)
 
 libgtranslator_include_dir = $(includedir)/libgtranslator
 
 libgtranslator_include__DATA = parse-db.h \
 	handle-db.h \
+	preferences.h \
 	team-handle.h
 
 gtranslatord_SOURCES = main.c

@@ -1,3 +1,18 @@
+2000-09-19  Fatih Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Added the new preferences source files
+		to the libgtranslator sources and added the
+		 $(GNOME_LIBS) to the library additionals.
+
+		Also added some conditionals for the library
+		 chaos caused by our two-way strategy.
+
+	* preferences.c: And this is the source file for the
+		all this config stuff.
+
+	* preferences.h: Added the gtranslator wrapper header
+		for the config-stuff.
+
 2000-09-18  Fatih Demir	<kabalak@gmx.net>
 
 	* .cvsignore: Added this test-libgtranslator programm :)
