@@ -488,6 +488,7 @@ gchar *gtranslator_utils_get_environment_charset()
 	gchar	*locale_charset=NULL;
 
 	locale_name=gtranslator_utils_get_environment_locale();
+
 	if(!locale_name)
 	{
 		/*
@@ -495,7 +496,11 @@ gchar *gtranslator_utils_get_environment_charset()
 		 *  which will be used if gtranslator can't get the current env. locale's
 		 *   default sane encoding by itself.
 		 */
-		return _("iso-8859-1");
+		locale_charset=g_strdup(_("iso-8859-1"));
+	}
+	else if(!nautilus_strcasecmp(locale_name, "C") || !nautilus_strcasecmp(locale_name, "POSIX"))
+	{
+		locale_charset=g_strdup(_("iso-8859-1"));
 	}
 	else
 	{

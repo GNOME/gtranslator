@@ -1,5 +1,6 @@
 /*
  * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ *			Pablo Saratxaga <pablo@mandrakesoft.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -67,11 +68,13 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		g_get_home_dir());
 
 	/*
-	 * Based on a suggestion by Pablo; translator: you should translate
-	 *  this empty string to avoid the usage of the mid dot ('·'). 
+	 * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+	 *
+	 * Translators: you should translate this empty string to avoid the
+	 *  usage of the mid dot ('·') in the displaying routines.
+	 *
 	 *   The contents of your translation are irrelevant in this case.
 	 */
-	/* FIXME: XXX -> compile problems...
 	if (_("")[0]=='\0')
 	{
 		gchar *middot=NULL;
@@ -87,16 +90,13 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		}
 		else
 		{
-			*/
-			config->special_char='^'; /* FIXME: XXX: _("^")[0];*/
-	/* FIXME: XXX -> compile problems..		
+			config->special_char=_("^")[0];
 		}
         }
 	else
 	{
                 config->special_char=_("^")[0];
-        }
-	*/
+        } 
 
 	return config;
 }

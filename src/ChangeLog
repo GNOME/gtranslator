@@ -1,5 +1,16 @@
 2002-02-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* runtime-config.c: Get Pablo's idea into the reality -- woo'sh, it
+		seems to be working like desired! Also added Pablo to the source
+		 authors of "runtime-config.c" for his hint/code lines.
+
+	* utils.c: Make the "gtranslator_utils_get_environment_charset" func.
+		also safe for "C"/"POSIX" locales -- me is also happy now :-)
+
+	* dialogs.c: Added "Query message contents" option to the query dialog;
+		now you can directly query your learn buffer for the current
+		 msgid.
+
 	* gui.c, main.c: Create, show and delete the general colorschemes' list
 		for the GUI menus; fixes b.g.o #71188.
 

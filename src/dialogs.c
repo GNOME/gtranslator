@@ -1083,10 +1083,12 @@ Saying \"No\" will delete the crash recovery file."),
 void gtranslator_query_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
+
 	GtkWidget *innertable;
 	GtkWidget *query_entry;
 	GtkWidget *query_entry_label;
 	GtkWidget *label;
+
 	gint reply;
 	
 	gtranslator_raise_dialog(dialog);
@@ -1104,7 +1106,8 @@ void gtranslator_query_dialog(void)
 	
 	dialog=gnome_dialog_new(
 		_("gtranslator -- query your personal learn buffer"),
-		_("Query"), GNOME_STOCK_BUTTON_CLOSE, NULL);
+		_("Query"), _("Query message content"),
+		GNOME_STOCK_BUTTON_CLOSE, NULL);
 
 	innertable=gtk_table_new(2, 2, FALSE);
 
@@ -1131,19 +1134,26 @@ void gtranslator_query_dialog(void)
 
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 
-	if(reply==GNOME_CANCEL)
+	if(reply==2)
 	{
 		gnome_dialog_close(GNOME_DIALOG(dialog));
 	}
-	else if(reply==GNOME_YES)
+	else if(reply==1 || !reply)
 	{
 		gchar *query_text;
 	
 		/*
 		 * Get the string to query for from the GnomeEntry.
 		 */
-		query_text=gtk_editable_get_chars(GTK_EDITABLE(
-		gnome_entry_gtk_entry(GNOME_ENTRY(query_entry))), 0, -1);
+		if(!reply)
+		{
+			query_text=gtk_editable_get_chars(GTK_EDITABLE(
+				gnome_entry_gtk_entry(GNOME_ENTRY(query_entry))), 0, -1);
+		}
+		else
+		{
+			query_text=g_strdup(GTR_MSG(po->current->data)->msgid);
+		}
 
 		if(!query_text || (strlen(query_text) <= 1))
 		{
