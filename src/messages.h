@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -39,7 +39,14 @@ typedef enum {
 	 * Currently this is only internally useful but when using extended
 	 *  message comments this status might also get "persistent".
 	 */
-	GTR_MSG_STATUS_STICK		= 1 << 2
+	GTR_MSG_STATUS_STICK		= 1 << 2,
+
+	/*
+	 * "Review" could be another virtual/semi-conservative message status
+	 *   with which a translator could mark a message for review via this
+	 *    tag in the comment of the message for example.
+	 */
+	GTR_MSG_STATUS_REVIEW		= 1 << 3
 } GtrMsgStatus;
 
 /*
@@ -53,6 +60,9 @@ typedef struct {
 	
 	gint		no;
 	gint 		pos;
+
+	gint		group;
+	gint		level;
 	
 	GtrMsgStatus 	status;
 } GtrMsg;

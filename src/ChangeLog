@@ -1,5 +1,23 @@
 2003-07-13  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages.h: Added 2 gint entries to the "GtrMsg" structure and a new
+		status enum value - the 2 gints represent the ideas of how to
+		 handle the multiple msgstr translations within newer gettext
+		  implementations; the "group" gint should be set to 0 for
+		   usual msgid/msgstr pairs but for multiple msgstr pairs it
+		    shall be a unique, counting number for grouping the msgstr
+		     to the msgid - the "level" gint counts the levels of the
+		      msgstr entries, e.g. to 1 -> first , 2 -> second, 3 ->
+		      	third msgstr translation etc. to get also 2+ msgstr
+			 translations into the GtrMsg structure.
+
+	* header_stuff.c: Make the "report msgid bugs to" address entry active
+		so that you can copy/cut the address from there to write mail
+		 to the reporting adress - there is specifically NO callback
+		  bound to that entry as it shall not be changed at all by
+		   the translator and therefore can just be handled by the
+		    translator to send mails etc.
+
 	* languages.h & translator.h: Comments shall be pure C and not C++
 		style comments like "//", at least in the headers...
 
