@@ -44,9 +44,11 @@ module libgtranslator
 		// query the message db.
 		void gtranslatordQuery(in string query,out string result);
 		// query the message db with some args.
-		void gtranslatordQueryById(in string query,in long minimumLength);
+		void gtranslatordQueryWithLength(in string query,in long minimumLength);
 		// establish a connection with a client
 		void gtranslatordConnect(in string host,in string client);
+		// and disconnect ..
+		void gtranslatordDisConnect(in string host,in string client);
 	};
 };
 

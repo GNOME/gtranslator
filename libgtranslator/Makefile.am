@@ -2,6 +2,8 @@
 
 bin_PROGRAMS = gtranslatord
 
+noinst_PROGRAMS = test-lg
+
 lib_LTLIBRARIES = libgtranslator.la
 
 INCLUDES = -I$(includedir) $(IDL_CFLAGS) \
@@ -30,6 +32,10 @@ gtranslatord_SOURCES = main.c
 gtranslatord_LDADD = libgtranslator.la $(IDL_LIBS) $(OAF_LIBS) \
 	$(XML_LIBS)
 
+test_lg_SOURCES = test-lg.c
+
+test_lg_LDADD = libgtranslator.la $(GLIB_LIBS) $(XML_LIBS)
+
 idl_dir = $(datadir)/idl
 
 idl__DATA = gtranslatord.idl
@@ -45,4 +51,4 @@ $(GTRANSLATORD_SOURCES): gtranslatord.idl
 clean-am:
 	-rm -f $(GTRANSLATORD_SOURCES)
 
-EXTRA_DIST = $(idl__DATA) $(libgtranslator_include__DATA)
+EXTRA_DIST = $(idl__DATA) $(libgtranslator_include__DATA) foo.xml

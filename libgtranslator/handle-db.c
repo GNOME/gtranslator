@@ -15,3 +15,71 @@
 **/
 
 #include "handle-db.h"
+
+/**
+* Two simple macros.
+**/
+#define FREE_NODE(x); if(x!=NULL) { xmlFreeNode(x); }
+#define FREE_PROP(x); if(x!=NULL) { xmlFreeProp(x); }
+
+/**
+* Adds a node to the doc.
+**/
+gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
+{
+	/**
+	* Check if a nodename has been defined.
+	**/
+	if(!nodename)
+	{
+	g_warning(_("No node name given!"));
+		return 0;
+	}
+	/**
+	* Check the doc.
+	**/
+	if(!doc)
+	{
+		g_warning(_("No document present to add the node `%s'\n"),nodename);
+			return 0;
+	}
+	else
+	{
+		/**
+		* Hmm, open and add the node.
+		**/
+		xmlNodePtr newnode,addnode,fnode;
+		xmlAttrPtr attr;
+		/**
+		* Get the nodes.
+		**/
+		newnode=doc->xmlRootNode->xmlChildrenNode;
+		if(!newnode)
+		{
+			g_warning(_("Couldn't get the nodes!"));
+				return 0;
+		}
+		/**
+		* Get the last child.
+		**/
+		addnode=xmlGetLastChild(newnode);
+		if(!addnode)
+		{
+			g_warning(_("Couldn't get the last node!"));
+				return 0;
+		}
+		fnode=xmlAddChild(newnode,addnode);
+		attr=xmlSetProp(fnode, nodename, nodecontent);
+		/**
+		* Free all the stuff.
+		**/
+		FREE_NODE(fnode);
+		FREE_NODE(addnode);
+		FREE_NODE(newnode);
+		FREE_PROP(attr);
+			/**
+			* Return a value != 0.
+			**/
+			return 1;
+	}	
+}

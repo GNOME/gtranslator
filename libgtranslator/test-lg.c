@@ -14,14 +14,23 @@
 *
 **/
 
-#ifndef HANDLE_DB_H
-#define HANDLE_DB_H 1
-
-#include <parse-db.h>
-
 /**
-* Addes a node to the doc.
+* This happens to be a test-programm for the libgtranslator routines.
 **/
-gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent);
 
-#endif
+#include <handle-db.h>
+
+int main(int argc,char *argv[])
+{
+	xmlDocPtr ptr;
+	ptr=xmlParseFile("./foo.xml");
+	if(!ptr)
+	{
+		g_error("`foo.xml' is missing!\n");
+	}
+	else
+	{
+		add_node(ptr, "nodename", "nodecontent");
+	}
+	return 0;
+}	
