@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2000-09-13 19:59+0200\n"
-"PO-Revision-Date: 2000-09-13 20:39+0200\n"
+"POT-Creation-Date: 2000-09-21 03:50+0200\n"
+"PO-Revision-Date: 2000-09-22 00:26+0200\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -90,7 +90,7 @@ msgstr "Ir á derradeira mensaxe"
 msgid "_Go to..."
 msgstr "_Ir a..."
 
-#: src/gui.c:121 src/gui.c:253
+#: src/gui.c:121
 msgid "Goto specified message number"
 msgstr "Ir ó número de mensaxe especificado"
 
@@ -214,33 +214,60 @@ msgstr "Derradeira"
 msgid "Missing"
 msgstr "Non traducida"
 
-#: src/gui.c:252
-msgid "GoTo"
+#: src/gui.c:252 src/gui.c:563
+msgid "Fuzzy"
+msgstr "Difusa"
+
+#: src/gui.c:253
+msgid "Go to the next fuzzy translation"
+msgstr "Ir á seguinte mensaxe difusa"
+
+#: src/gui.c:256
+msgid "Go to"
 msgstr "Ir a"
 
-#: src/dialogs.c:201 src/gui.c:256
+#: src/gui.c:257
+msgid "Go to specified message number"
+msgstr "Ir ó número de mensaxe especificado"
+
+#: src/dialogs.c:201 src/gui.c:260
 msgid "Find"
 msgstr "Buscar"
 
-#: src/gui.c:257
+#: src/gui.c:261
 msgid "Find string in po-file"
 msgstr "Buscar unha cadea no ficheiro po"
 
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:360
+#: src/gui.c:364
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:439
+#: src/gui.c:443
 msgid "Bye bye!"
 msgstr "¡Adeus!"
 
-#: src/gui.c:545
+#. *
+#. * Assign the first part.
+#. *
+#: src/gui.c:553
 #, c-format
-msgid "Message: %d / %d"
-msgstr "Mensaxe: %d / %d"
+msgid "Message %d / %d / Status:"
+msgstr "Mensaxe: %d / %d / Estado:"
+
+#: src/dialogs.c:217 src/gui.c:567
+msgid "Translated"
+msgstr "Traducida"
+
+#: src/gui.c:573
+msgid "Stick"
+msgstr "Fixa"
+
+#: src/gui.c:577
+msgid "Untranslated"
+msgstr "Sen Traducir"
 
 #: src/dialogs.c:49
 msgid "gtranslator -- open a po-file"
@@ -289,10 +316,6 @@ msgstr "Distinguir maiúsculas"
 #: src/dialogs.c:215 src/languages.h:84
 msgid "English"
 msgstr "Inglés"
-
-#: src/dialogs.c:217
-msgid "Translated"
-msgstr "Traducida"
 
 #: src/dialogs.c:219
 msgid "Both"
@@ -436,22 +459,36 @@ msgstr "E-mail do traductor :"
 msgid "Language group's e-mail :"
 msgstr "E-mail do equipo da lingua :"
 
-#: src/main.c:38
+#: src/main.c:39
 msgid "Specifies the main-window geometry"
 msgstr "Especifica a xeometría da fiestra principal"
 
-#: src/parse.c:39
+#: src/parse.c:95
 #, c-format
 msgid ""
-"\n"
-"The file stream is lost!\n"
-"%s"
+"New escaped char found: \\%c\n"
+"Add this to parse.c, line %i."
 msgstr ""
-"\n"
-"¡Perdeuse o fluxo de ficheiro!\n"
-"%s"
+"Atopouse un novo carácter con código de escape: \\%c\n"
+"Hai que engadilo ó ficheiro parse.c, liña %i."
 
-#: src/parse.c:220
+#: src/parse.c:129 src/parse.c:387
+#, c-format
+msgid "The file `%s' doesn't exist at all!"
+msgstr "¡O ficheiro `%s' non existe!"
+
+#: src/parse.c:194
+#, c-format
+msgid ""
+"Error in file \"%s\"\n"
+"at line %d.\n"
+"Please check the file and try again."
+msgstr ""
+"Erro no ficheiro \"%s\"\n"
+"na liña %d.\n"
+"Verifique o ficheiro e probe de novo."
+
+#: src/parse.c:223
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -460,17 +497,25 @@ msgstr ""
 "O ficheiro está baleiro:\n"
 "%s"
 
+#: src/parse.c:241
+msgid "There's no file to open!\n"
+msgstr "¡Non hai ningún ficheiro para abrir!\n"
+
 #: src/parse.c:269
+msgid "The file has no header!"
+msgstr "¡O ficheiro non ten cabeceira!"
+
+#: src/parse.c:272
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Analizouse correctamente o ficheiro \"%s\""
 
-#: src/parse.c:272
+#: src/parse.c:275
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:372
+#: src/parse.c:375
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -481,7 +526,7 @@ msgstr ""
 "Nembargantes, eses ficheiros son xerados por un programa.\n"
 "O ficheiro debería te-la extensión .po, probablemente %s.po"
 
-#: src/parse.c:416
+#: src/parse.c:432
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -492,7 +537,11 @@ msgstr ""
 "%s\n"
 "¿Quere gardalo de calquera xeito?"
 
-#: src/parse.c:479
+#: src/parse.c:440
+msgid "gtranslator -- unchanged"
+msgstr "gtranslator -- sen cambios"
+
+#: src/parse.c:496
 #, c-format
 msgid ""
 "File %s\n"
@@ -501,10 +550,10 @@ msgstr ""
 "O ficheiro %s\n"
 "foi modificado. ¿Quere realmente voltar á copia gardada?"
 
-#: src/parse.c:531
+#: src/parse.c:548
 #, c-format
 msgid ""
-"Compile successful:\n"
+"Compile successfull:\n"
 "%s"
 msgstr ""
 "Compilación correcta:\n"
@@ -539,7 +588,11 @@ msgstr "¡Comprobación da ortografía completa!"
 msgid "Session restored successfully."
 msgstr "Sesión restaurada con éxito."
 
-#: libgtranslator/parse-db.c:32
+#: libgtranslator/main.c:60
+msgid "gtranslatord has started successfully and will finish now...\n"
+msgstr "gtranslatord iniciouse correctamente e rematará agora...\n"
+
+#: libgtranslator/parse-db.c:33
 msgid "No language defined in the query request!"
 msgstr "¡Non se definiu unha lingua na consulta!"
 
@@ -547,11 +600,11 @@ msgstr "¡Non se definiu unha lingua na consulta!"
 #. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
 #. * Just show a message that tells this.
 #. *
-#: libgtranslator/parse-db.c:43
+#: libgtranslator/parse-db.c:44
 msgid "FYI: Will also lookup the superclass message db.\n"
 msgstr "Tentarase tamén coa base de datos de mensaxes de clase superior.\n"
 
-#: libgtranslator/parse-db.c:63
+#: libgtranslator/parse-db.c:64
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr "Non foi posible abri-lo ficheiro de lingua `%s.xml' en %s.\n"
@@ -559,21 +612,21 @@ msgstr "Non foi posible abri-lo ficheiro de lingua `%s.xml' en %s.\n"
 #. *
 #. * Print some information.
 #. *
-#: libgtranslator/parse-db.c:76
+#: libgtranslator/parse-db.c:77
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr "Non se atopou o ficheiro de subclase `%s.xml'.\n"
 
-#: libgtranslator/parse-db.c:77
+#: libgtranslator/parse-db.c:78
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Tentando o ficheiro de clase superior `%s.xml' ...\n"
 
-#: libgtranslator/parse-db.c:133
+#: libgtranslator/parse-db.c:134
 msgid "The message db file is empty!"
 msgstr "¡O ficheiro da base de datos de mensaxes está baleiro!"
 
-#: libgtranslator/parse-db.c:139
+#: libgtranslator/parse-db.c:140
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr ""
 "A base de datos de mensaxes non semella ser un ficheiro xml de base de datos."
@@ -612,6 +665,55 @@ msgstr "¡Non foi posible abri-lo ficheiro `teams.xml' en %s!"
 #: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
 msgstr "Non se puido devolve-la lista de aplicacións."
+
+#: libgtranslator/preferences.c:68
+msgid "No path defined where I could get the string from."
+msgstr "Non hai ningún camiño definido do que obte-la cadea."
+
+#: libgtranslator/preferences.c:91
+#, c-format
+msgid "Can't set the string `%s' for a non-defined path!\n"
+msgstr "¡Non se pode establece-la cadea `%s' para un camiño non definido!\n"
+
+#: libgtranslator/preferences.c:97
+#, c-format
+msgid "No string defined for the path `%s'!"
+msgstr "¡Non hai ningunha cadea definida para o camiño `%s'!"
+
+#: libgtranslator/preferences.c:121
+msgid "No path defined where I could get the integer from!"
+msgstr "¡Non se definiu un camiño do que obte-lo enteiro!"
+
+#: libgtranslator/preferences.c:122
+msgid "Returning `1' for assurance .."
+msgstr "Devolvendo `1' para asegurar .."
+
+#: libgtranslator/preferences.c:141
+#, c-format
+msgid "Can't set the value `%i' for a non-defined path!"
+msgstr "¡Non se pode establece-lo valor `%i' para un camiño non definido!"
+
+#: libgtranslator/preferences.c:147
+#, c-format
+msgid "No value defined for the path `%s'!"
+msgstr "¡Non se definiu un valor para o camiño `%s'!"
+
+#: libgtranslator/preferences.c:169
+msgid "No path defined where I could get the boolean from."
+msgstr "Non hai ningún camiño definido de onde obte-lo booleano."
+
+#: libgtranslator/preferences.c:170
+msgid "Returning `FALSE' for assurance ..."
+msgstr "Devolvendo 'FALSE' para asegurar ..."
+
+#: libgtranslator/preferences.c:187
+msgid "Can't set a boolean value for a non-defined path!"
+msgstr "¡Non se pode establecer un valor booleano para un camiño non definido!"
+
+#: libgtranslator/preferences.c:193
+#, c-format
+msgid "No boolean value defined for the path `%s'!"
+msgstr "¡Non hai ningún valor booleano definido para o camiño `%s'!"
 
 #: src/languages.h:57
 msgid "Arabic"
