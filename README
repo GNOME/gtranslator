@@ -1,45 +1,44 @@
-###############################################################################
-### gtranslator README R 0.30                                                 #
-###############################################################################
+gtranslator README R 0.32
+-------------------------
 
-	gtranslator is a translation-supporting programm for the Gnome project.
-	It is offering little funtionability yet but it will be more useful
-	and complex later on.
+gtranslator is a translation-supporting programm for the Gnome project.
+It is offering little funtionability yet but it will be more useful
+and complex later on.
+
+If you've got this from CVS , you've got to read the INSTALL.CVS
+file in order to get the ./configure script etc.
+
+On problems with the preferences and crashs within the propertybox
+you've got probably the "crashy" series of GConf 0.9 installed. In
+further CVS development and R 0.10 all problems have been removed.
+If you've got these "crashy" series of GConf you'd probably try to
+configure gtranslator again with the environment variable $NO_GCONF
+set to yes. This will prevent (lib-)gtranslator to be linked against
+GConf even it it's found. For bash you've got to do simply this:
+$ export NO_GCONF=yes
+$ ./configure ALL_YOUR_NASTY_AND_DESIRED_OPTIONS
+
+If you're using RPM packages of (lib-)gtranslator you can be happy :)
+These aren't linked against GConf yet, so you don't have got these
+problems.
 	
-	If you've got this from CVS , you've got to read the INSTALL.CVS
-	file in order to get the ./configure script etc.
+After some direction changes, we're cruising towards a libgtranslator
+which supplies all the important functions and a gtranslatord daemon
+which replies to any requests and queries from the gtranslator client
+programm. This will be the future and I think this will take a long
+time to work, but if we're writing a translation for GNOME, then it
+should be something really good.
 
-	On problems with the preferences and crashs within the propertybox
-	you've got probably the "crashy" series of GConf 0.9 installed. In
-	further CVS development and R 0.10 all problems have been removed.
-	If you've got these "crashy" series of GConf you'd probably try to
-	configure gtranslator again with the environment variable $NO_GCONF
-	set to yes. This will prevent (lib-)gtranslator to be linked against
-	GConf even it it's found. For bash you've got to do simply this:
-	$ export NO_GCONF=yes
-	$ ./configure ALL_YOUR_NASTY_AND_DESIRED_OPTIONS
+The version number doesn't show anything till you'll see a magical 
+"1.0" in the about dialog of gtranslator or in the configure-script.
 
-	If you're using RPM packages of (lib-)gtranslator you can be happy :)
-	These aren't linked against GConf yet, so you don't have got these
-	problems.
-	
-	After some direction changes, we're cruising towards a libgtranslator
-	which supplies all the important functions and a gtranslatord daemon
-	which replies to any requests and queries from the gtranslator client
-	programm. This will be the future and I think this will take a long
-	time to work, but if we're writing a translation for GNOME, then it
-	should be something really good.
+The releases 0.21 and coming releases are now usable and working but
+are missing some important parts of the capabilities which gtranslator
+will offer later on. So stand by and visit the gtranslator homepage
+on the web from time to time:
 
-	The version number doesn't show anything till you'll see a magical 
-	"1.0" in the about dialog of gtranslator or in the configure-script.
-
-	The releases 0.21 and coming releases are now usable and working but
-	are missing some important parts of the capabilities which gtranslator
-	will offer later on. So stand by and visit the gtranslator homepage
-	on the web from time to time:
-	
-		http://gtranslator.sourceforge.net
+	http://gtranslator.sourceforge.net
 
 ###############################################################################
-	/kabalak/kabalak@gmx.net/2000-10-14
+	/kabalak/kabalak@gmx.net/2000-10-28
 ###############################################################################
