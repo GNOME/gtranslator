@@ -1,7 +1,10 @@
 2000-09-20  Fatih Demir	<kabalak@gmx.net>
 
 	* preferences.c: Integrated the int/string/bool
-		methods of our preferences engine :)
+		methods of our preferences engine; inserted some
+		 more usefull checks for missing/NULL entries
+		  in the path/value pairs; use the real paths
+		   for the GConf interactions.
 
 	* Makefile.am: Also add the $(GNOME_CFLAGS) to the
 		cflags.
