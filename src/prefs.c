@@ -670,7 +670,7 @@ to work in ways you find comfortable and productive."));
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)
 {
 	gint c = 0;
-	gchar *current;
+	G_CONST_RETURN gchar *current;
 	gnome_property_box_changed(GNOME_PROPERTY_BOX(prefs));
 #define set_text(widget,field) \
 	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(widget)->entry),\
