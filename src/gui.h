@@ -64,7 +64,7 @@ void gtranslator_create_main_window(void);
 /*
  * Quits from gtranslator.
  */
-gint gtranslator_quit(GtkWidget *widget, GdkEventAny *e,
+void gtranslator_quit(GtkWidget *widget, GdkEventAny *e,
 	gpointer useless);
 
 /*

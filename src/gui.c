@@ -365,14 +365,14 @@ void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 /*
  * The own quit-code
  */
-gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
+void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless)
 {
 	/*
 	 * If file was changed, but user pressed Cancel, don't quit
 	 */
 	if (!gtranslator_should_the_file_be_saved_dialog())
-		return TRUE;
+		return;
 
 	gtranslator_file_close(NULL, NULL);
 
@@ -461,7 +461,7 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 * Quit with the normal Gtk+ quit.
 	 */
 	gtk_main_quit();
-	return FALSE;
+	return;
 }
 
 /*

@@ -1,5 +1,15 @@
 2003-07-05  Ross Golder  <ross@golder.org>
 
+	* parse.c (gtranslator_po_free): Add 'g_return_if_fail(po!=NULL)'.
+
+	* gui.[ch] (gtranslator_quit): Was defined gint, but returning
+	          gbooleans. I just made it void.
+
+	* Makefile.am: Use DEPRECATED_FLAGS. Lets exorcise those evil
+	          GTK1 spirits!
+
+2003-07-05  Ross Golder  <ross@golder.org>
+
 	* gui.c/message.c/parse.c: Don't include gtkspell.h
 	
 	* dialogs.c (gtranslator_edit_comment_dialog): Removed

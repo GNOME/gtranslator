@@ -895,8 +895,8 @@ void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
  */
 void gtranslator_po_free(GtrPo *po)
 {
-	if(!po)
-		return;
+	g_return_if_fail(po!=NULL);
+
 	if (po->messages) 
 	{
 		g_list_foreach(po->messages, gtranslator_message_free, NULL);
@@ -921,7 +921,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	/*
 	 * If user doesn't know what to do with changed file, return
 	 */
-	if (!gtranslator_should_the_file_be_saved_dialog)
+	if (!gtranslator_should_the_file_be_saved_dialog())
 		return;
 	
 	gtranslator_po_free(po);
