@@ -1,6 +1,25 @@
-EXTRA_DIST = \
-	COMMENTS \
+# --------------------------------------------------------------------
+# A small Makefile  for the UMTF spec packaging and inclusion in the
+#  gtranslator dist packs.
+# --------------------------------------------------------------------
+
+EXTRA_DIST = $(UMTF_SPEC_FILES)
+
+UMTF_VERSION = 1.0
+
+UMTF_SPEC_FILES = \
+	COMMENT \
 	ChangeLog \
 	README.UMTF \
 	example.xml \
 	umtf.dtd
+
+specpack: $(UMTF_SPEC_FILES)
+	@-echo Creating a small specifications pack of UMTF $(UMTF_VERSION)...
+	@-mkdir UMTF-$(UMTF_VERSION)
+	@-cp -f $(UMTF_SPEC_FILES) UMTF-$(UMTF_VERSION)
+	@-tar -czf UMTF-$(UMTF_VERSION).tar.gz UMTF-$(UMTF_VERSION)
+	@-rm -f UMTF-$(UMTF_VERSION)
+
+clean:
+	rm -rf UMTF-$(UMTF_VERSION)
