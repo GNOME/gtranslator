@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2000-10-13 13:53+0300\n"
-"PO-Revision-Date: 2000-10-02 13:00+0300\n"
+"POT-Creation-Date: 2000-10-15 16:43+0300\n"
+"PO-Revision-Date: 2000-10-15 13:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "Päivitä kyseinen po-tiedosto"
 
 #: src/gui.c:98
 msgid "Recen_t files"
-msgstr ""
+msgstr "_Pikavalinnat"
 
 #: src/gui.c:115
 msgid "_Header..."
@@ -227,7 +227,7 @@ msgstr "Viimeinen"
 msgid "Missing"
 msgstr "Puuttuu"
 
-#: src/gui.c:288 src/gui.c:716
+#: src/gui.c:288 src/gui.c:724
 msgid "Fuzzy"
 msgstr "Sumea"
 
@@ -265,20 +265,20 @@ msgstr "Hei hei!"
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:706
+#: src/gui.c:714
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Teksti %d / %d / Tila:"
 
-#: src/dialogs.c:217 src/gui.c:720
+#: src/dialogs.c:217 src/gui.c:728
 msgid "Translated"
 msgstr "Käännetty"
 
-#: src/gui.c:726
+#: src/gui.c:734
 msgid "Stick"
 msgstr ""
 
-#: src/gui.c:730
+#: src/gui.c:738
 msgid "Untranslated"
 msgstr "Kääntämätön"
 
@@ -342,111 +342,142 @@ msgstr ""
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Virhe msgfmt:ia suoritettaessa:\n"
 
-#: src/prefs.c:199
+#: src/prefs.c:212
 msgid "gtranslator -- options"
 msgstr "gtranslator -- asetukset"
 
 #. *
 #. * The tables for holding all the entries below
 #. *
-#: src/prefs.c:203
+#: src/prefs.c:216
 msgid "Personal information"
 msgstr "Henkilötiedot"
 
-#: src/prefs.c:204
+#: src/prefs.c:217
 msgid "Language options"
 msgstr "Kieliasetukset"
 
-#: src/prefs.c:205
+#: src/prefs.c:218
 msgid "Po file options"
 msgstr "Po-tiedostojen asetukset"
 
-#: src/prefs.c:206
+#: src/prefs.c:219
 msgid "Miscellaneous"
 msgstr ""
 
-#: src/prefs.c:207
+#: src/prefs.c:220
 msgid "Recent files menu"
 msgstr ""
 
-#: src/prefs.c:212
+#: src/prefs.c:221
+msgid "Fonts & Colors"
+msgstr ""
+
+#: src/prefs.c:226
 msgid "Author's name :"
 msgstr "Kääntäjän nimi :"
 
-#: src/prefs.c:215
+#: src/prefs.c:229
 msgid "Author's EMail :"
 msgstr "Kääntäjän sähköpostiosoite:"
 
-#: src/header_stuff.c:307 src/prefs.c:223
+#: src/header_stuff.c:307 src/prefs.c:237
 msgid "Language :"
 msgstr "Kieli :"
 
-#: src/prefs.c:227
+#: src/prefs.c:241
 msgid "Language code :"
 msgstr "Kielikoodi :"
 
-#: src/prefs.c:232
+#: src/prefs.c:246
 msgid "Language group's EMail :"
 msgstr "Kieliryhmän sähköposti :"
 
-#: src/header_stuff.c:316 src/prefs.c:236
+#: src/header_stuff.c:316 src/prefs.c:250
 msgid "Charset :"
 msgstr "Merkistö :"
 
-#: src/header_stuff.c:320 src/prefs.c:240
+#: src/header_stuff.c:320 src/prefs.c:254
 msgid "Encoding :"
 msgstr "Koodaus :"
 
-#: src/prefs.c:248
+#: src/prefs.c:262
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Aseta teksti ei-sumeaksi muutettaessa"
 
-#: src/prefs.c:252
+#: src/prefs.c:266
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Varoita jos tiedosto sisältää sumeita käännöksiä"
 
-#: src/prefs.c:256
+#: src/prefs.c:270
 msgid "Don't save unchanged .po-files"
 msgstr "Älä tallenna muuttamattomia po-tiedostoja"
 
-#: src/prefs.c:260
+#: src/prefs.c:274
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Varoita, jos yritetään tallentaa muuttamatonta tiedostoa"
 
-#: src/prefs.c:267
+#: src/prefs.c:281
 msgid "Use the dot char (\"·\") instead of a free space"
-msgstr ""
+msgstr "Käydä pistemerkkiä (\"·\") tyhjän tilan sijaan"
 
-#: src/prefs.c:270
+#: src/prefs.c:284
 msgid "Enable the popup menu"
 msgstr ""
 
-#: src/prefs.c:273
+#: src/prefs.c:287
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
 
-#: src/prefs.c:276
+#: src/prefs.c:290
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Tallenna ikkunan koko lopetettaessa"
 
-#: src/prefs.c:279
+#: src/prefs.c:293
 msgid "Don't show the update information dialogs"
 msgstr ""
 
-#: src/prefs.c:291
+#: src/prefs.c:305
 msgid "Check every file in the list for existence"
 msgstr ""
 
-#: src/prefs.c:294
-msgid "Delete obsolete entries in the recent files list"
-msgstr ""
-
-#: src/prefs.c:300
+#: src/prefs.c:311
 msgid "Number of maximal shown entries in the recent files list:"
 msgstr ""
 
-#: src/prefs.c:404
+#: src/prefs.c:325
+msgid "Apply special font/colors"
+msgstr "Toteuta erityiset kirjasimet/värit"
+
+#. *
+#. * Create the labels.
+#. *
+#: src/prefs.c:330
+msgid "Font:"
+msgstr "Kirjasin:"
+
+#: src/prefs.c:331
+msgid "Foreground color:"
+msgstr "Väri:"
+
+#: src/prefs.c:332
+msgid "Background color:"
+msgstr "Taustaväri:"
+
+#: src/prefs.c:339
+msgid "gtranslator -- font selection"
+msgstr "gtranslator -- kirjasimen valinta"
+
+#: src/prefs.c:346
+msgid "gtranslator -- foreground color"
+msgstr "gtranslator -- värin määritys"
+
+#: src/prefs.c:349
+msgid "gtranslator -- background color"
+msgstr "gtranslator -- taustavärin määritys"
+
+#: src/prefs.c:471
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -456,7 +487,7 @@ msgstr ""
 "jotka laittavat gtranslatorin toimimaan\n"
 "kuten SINÄ haluat!"
 
-#: src/prefs.c:555
+#: src/prefs.c:622
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Ikkunan koon määritystä \"%s\" ei voida tallentaa!"
@@ -537,6 +568,9 @@ msgid ""
 "at line %d.\n"
 "Please check the file and try again."
 msgstr ""
+"Virhe tiedostossa \"%s\"\n"
+"rivillä %d.\n"
+"Tarkasta tiedosto ja yritä uudelleen."
 
 #: src/parse.c:229
 #, c-format
@@ -558,7 +592,7 @@ msgstr "Tiedostolla ei ole otsikkoa!"
 #: src/parse.c:279
 #, c-format
 msgid "Successfully parsed the file \"%s\""
-msgstr ""
+msgstr "Tiedosto \"%s\" jäsennetty onnistuneesti"
 
 #: src/parse.c:282
 #, c-format
@@ -602,7 +636,7 @@ msgstr ""
 
 #: src/parse.c:589
 msgid "Sorry, msgfmt isn't available on your system!"
-msgstr ""
+msgstr "Valitettavasti järjestelmästäsi ei löydy komentoa msgfmt!"
 
 #: src/parse.c:614
 #, c-format
@@ -614,24 +648,24 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:653 src/parse.c:663 src/parse.c:664
+#: src/parse.c:659 src/parse.c:669 src/parse.c:670
 msgid "_File/Recen_t files/"
-msgstr ""
+msgstr "_Tiedosto/_Pikavalinnat/"
 
-#: src/parse.c:723
+#: src/parse.c:715
 #, c-format
 msgid "Open %s"
 msgstr "Avaa %s"
 
-#: src/parse.c:846
-msgid "The update caused no changes."
-msgstr "Päivityksestä ei aiheutunut muutoksia."
+#: src/parse.c:835
+msgid "An update would cause no changes."
+msgstr "Päivitys ei aiheuttaisi muutoksia."
 
-#: src/parse.c:864
+#: src/parse.c:853
 msgid "The update was successfull."
 msgstr "Päivitys onnistui."
 
-#: src/find.c:84
+#: src/find.c:88
 #, c-format
 msgid ""
 "Could not find\n"
@@ -640,15 +674,15 @@ msgstr ""
 "Ei löydy:\n"
 "\"%s\""
 
-#: src/find.c:96
+#: src/find.c:100
 msgid "Couldn't get the message! Grrr...."
 msgstr "Tekstiä ei saatu! Grrr...."
 
-#: src/find.c:118
+#: src/find.c:122
 msgid "There are no more fuzzy messages"
 msgstr "Sumeita tekstejä ei löydy enempää"
 
-#: src/find.c:142
+#: src/find.c:146
 msgid "All messages seem to be translated"
 msgstr "Kaikki tekstit näyttäisivät olevan käännetyt"
 
@@ -656,7 +690,7 @@ msgstr "Kaikki tekstit näyttäisivät olevan käännetyt"
 msgid "Check spelling"
 msgstr "Oikolue"
 
-#: src/spell.c:55
+#: src/spell.c:54
 msgid "Spell checking complete!"
 msgstr "Oikoluku suoritettu!"
 
@@ -694,7 +728,7 @@ msgstr "FYI: Etsitään myös yläluokan tekstien tietokannasta.\n"
 #: libgtranslator/parse-db.c:48
 #, c-format
 msgid "Using %s as the message database... \n"
-msgstr ""
+msgstr "Otetaan %s tekstitietokannaksi... \n"
 
 #: libgtranslator/parse-db.c:60
 #, c-format
@@ -720,16 +754,16 @@ msgstr "Yritetään yläluokan tiedostoa `%s.xml' ...\n"
 #: libgtranslator/parse-db.c:96
 #, c-format
 msgid "Database creator/administrator: %s\n"
-msgstr ""
+msgstr "Tietokannan luoja/ylläpitäjä: %s\n"
 
 #: libgtranslator/parse-db.c:97
 #, c-format
 msgid "EMail: %s\n"
-msgstr ""
+msgstr "Sähköposti: %s\n"
 
 #: libgtranslator/parse-db.c:105
 msgid "Message database informations:\n"
-msgstr ""
+msgstr "Tekstitietokannan tiedot:\n"
 
 #: libgtranslator/parse-db.c:106
 #, c-format
@@ -737,14 +771,16 @@ msgid ""
 "Date: %s\n"
 "Serial: %s\n"
 msgstr ""
+"Päiväys: %s\n"
+"Sarjanumero: %s\n"
 
 #: libgtranslator/parse-db.c:139
 msgid "The message db file is empty!"
-msgstr "Tekstien tietokanta on tyhjä!"
+msgstr "Tekstitietokanta on tyhjä!"
 
 #: libgtranslator/parse-db.c:145
 msgid "The message db doesn't seem to be a message db xml file."
-msgstr "Tekstien tietokanta ei näytä olevan tekstitietokanta-xml -tiedosto."
+msgstr "Tekstitietokanta ei näytä olevan tekstitietokanta-xml -tiedosto."
 
 #: libgtranslator/handle-db.c:29
 msgid "No node name given!"
@@ -791,7 +827,8 @@ msgstr "Sovellusluetteloa ei voitu palauttaa."
 msgid ""
 "Error during GConf initialization through libgtranslator:\n"
 "%s"
-msgstr "Virhe GConfin alustuksessa libgtransatorin läpi:\n"
+msgstr ""
+"Virhe GConfin alustuksessa libgtransatorin läpi:\n"
 "%s"
 
 #: libgtranslator/preferences.c:80
@@ -838,7 +875,15 @@ msgstr "Palautetaan `FALSE' varmuuden vuoksi ..."
 msgid "Can't set a boolean value for a non-defined path!"
 msgstr "Ei voida asettaa boolean-arvoa määrittämättömälle polulle!"
 
-#: libgtranslator/preferences.c:272
+#. *
+#. * Set a date identifier; this ought to be also
+#. *  localized!
+#. *
+#: libgtranslator/preferences.c:267
+msgid "%Y-%m-%d %H:%M"
+msgstr "%d-%m-%Y %H:%M"
+
+#: libgtranslator/preferences.c:273
 msgid "Couldn't generate the current date!"
 msgstr "Päiväyksen luominen ei onnistunut!"
 
