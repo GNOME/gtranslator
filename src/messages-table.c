@@ -313,7 +313,7 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 			/*
 			 * Get the number of missing entries/translations.
 			 */
-			untranslated_messages=(po->length - (po->translated + po->fuzzy));
+			untranslated_messages=po->length - po->translated;
 
 			if(untranslated_messages >= 1)
 			{
@@ -570,7 +570,7 @@ GtkWidget *gtranslator_messages_table_new()
 		NULL);
 	
 	e_tree_memory_set_expanded_default(E_TREE_MEMORY(tree_model), TRUE);
-		
+
 	tree_memory=E_TREE_MEMORY(tree_model);
 
 	statusfile=gtranslator_utils_get_messages_table_state_file_name();
@@ -593,7 +593,8 @@ GtkWidget *gtranslator_messages_table_new()
 
 	GTR_FREE(statusfile);
 	
-	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
+	tree = GTK_WIDGET(e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
+
 	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
 		GTK_SIGNAL_FUNC(row_selected), NULL);
 	
@@ -648,6 +649,12 @@ void gtranslator_messages_table_create (void)
 	unknown_node = e_tree_memory_node_insert (tree_memory, root_node, 0, NULL);
 	fuzzy_node = e_tree_memory_node_insert (tree_memory, root_node, 1, NULL);
 	translated_node = e_tree_memory_node_insert (tree_memory, root_node, 2, NULL);
+
+	/*
+	 * Collapse all translated entries according to the user's preference.
+	 */
+	e_tree_node_set_expanded_recurse(E_TREE(tree), translated_node, 
+		!GtrPreferences.collapse_translated);
 	
 	while(list)
 	{

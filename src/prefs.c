@@ -73,7 +73,7 @@ static GtkWidget
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
 	*autosave, *autosave_with_suffix, *sweep_compile_file,
 	*use_learn_buffer, *show_messages_table, *rambo_function,
-	*use_own_mt_colors;
+	*use_own_mt_colors, *collapse_translated_entries;
 
 /*
  * The timeout GtkSpinButton:
@@ -125,7 +125,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		4, 2, _("Autosaving"));
 	eighth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		5, 2, _("Messages table"));
+		6, 2, _("Messages table"));
 	
 	/*
 	 * Create all the personal entries.
@@ -311,19 +311,23 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Show the messages table (requires gtranslator restart)"),
 		GtrPreferences.show_messages_table, gtranslator_preferences_dialog_changed);
 
-	use_own_mt_colors=gtranslator_utils_attach_toggle_with_label(eighth_page, 1,
+	collapse_translated_entries=gtranslator_utils_attach_toggle_with_label(eighth_page, 1,
+		_("Collapse all translated entries per default"),
+		GtrPreferences.collapse_translated, gtranslator_preferences_dialog_changed);
+
+	use_own_mt_colors=gtranslator_utils_attach_toggle_with_label(eighth_page, 2,
 		_("Use own colors for the messages table groups"),
 		GtrPreferences.use_own_mt_colors, gtranslator_preferences_dialog_changed);
 
-	mt_untranslated=gtranslator_utils_attach_color_with_label(eighth_page, 2,
+	mt_untranslated=gtranslator_utils_attach_color_with_label(eighth_page, 3,
 		_("Untranslated entries color:"), _("gtranslator -- untranslated entries' color"),
 		COLOR_MESSAGES_TABLE_UNTRANSLATED, gtranslator_preferences_dialog_changed);
 
-	mt_fuzzy=gtranslator_utils_attach_color_with_label(eighth_page, 3,
+	mt_fuzzy=gtranslator_utils_attach_color_with_label(eighth_page, 4,
 		_("Fuzzy entries color:"), _("gtranslator -- fuzzy entries' color"),
 		COLOR_MESSAGES_TABLE_FUZZY, gtranslator_preferences_dialog_changed);
 
-	mt_translated=gtranslator_utils_attach_color_with_label(eighth_page, 4,
+	mt_translated=gtranslator_utils_attach_color_with_label(eighth_page, 5,
 		_("Translated entries color:"), _("gtranslator -- translated entries' color"),
 		COLOR_MESSAGES_TABLE_TRANSLATED, gtranslator_preferences_dialog_changed);
 
@@ -378,6 +382,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
+	GtrPreferences.collapse_translated = if_active(collapse_translated_entries);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
@@ -530,6 +535,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.use_own_dict);
 	gtranslator_config_set_bool("toggles/use_learn_buffer",
 			      GtrPreferences.use_learn_buffer);
+	gtranslator_config_set_bool("toggles/collapse_translated_entries",
+			      GtrPreferences.collapse_translated);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
 			      GtrPreferences.keep_obsolete);
 	gtranslator_config_set_bool("toggles/autosave",
@@ -693,6 +700,8 @@ void gtranslator_preferences_read(void)
 		"toggles/show_sidebar");
 	GtrPreferences.show_messages_table = gtranslator_config_get_bool(
 		"toggles/show_messages_table");
+	GtrPreferences.collapse_translated = gtranslator_config_get_bool(
+		"toggle/collapse_translated_entries");
 
 	/*
 	 * Check if we'd to use special styles.

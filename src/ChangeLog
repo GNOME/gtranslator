@@ -1,6 +1,15 @@
 2001-08-11  Fatih Demir <kabalak@gtranslator.org>
 
-	* open|save-differently.c, parse.c & update.c: Make the file names all
+	* messages-table.c: Corrected the untranslated count bug (thanks to Kevin
+		for pointing this out); also made the tree respect the new option
+		 for collapsing all translated items per default.
+
+	* prefs_init.c: Set the new option per default to TRUE.
+
+	* prefs.c/.h: Added another option for the messages table to collapse all
+		translated entries per default.
+
+	* open|save-differently.c, parse.c & update.c: Made the file names all
 		be enclosed in single-ticks (') -- should be more safe and 
 		 secure.
 

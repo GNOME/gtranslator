@@ -49,6 +49,7 @@ struct {
 	guint use_learn_buffer		: 1;
 	guint show_sidebar		: 1;
 	guint show_messages_table	: 1;
+	guint collapse_translated	: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.
