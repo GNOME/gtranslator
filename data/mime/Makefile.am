@@ -12,10 +12,14 @@ Mimeinfofilesdir = $(datadir)/mime-info
 Mimeicon_DATA = application-x-po.png application-x-gmo.png
 Mimeinfofiles_predata = gtranslator.keys.in
 Mimeinfofiles_DATA = gtranslator.mime $(Mimeinfofiles_predata:.keys.in=.keys)
-
+	
 ##
-## The xml-i18n tools rule
+## HACK -- overread this please..
 ##
-@XML_I18N_MERGE_KEYS_RULE@
+all-am:
+	@mv $(Mimeinfofiles_predata) $(Mimeinfofiles_predata).backmeup
+	@mv $(Mimeinfofiles_predata:.keys.in=.keys) $(Mimeinfofiles_predata)
+	xml-i18n-merge -k ../../po $(Mimeinfofiles_predata) $(Mimeinfofiles_predata:.keys.in=.keys)
+	@mv $(Mimeinfofiles_predata).backmeup $(Mimeinfofiles_predata)
 
 EXTRA_DIST = $(Mimeicon_DATA) $(Mimeinfofiles_DATA)
