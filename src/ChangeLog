@@ -1,5 +1,8 @@
 2003-07-07  Ross Golder  <ross@golder.org>
 
+	* stylistics.c (gtranslator_set_style): Changed gdk_font_unref and 
+	        gtk_style_unref to g_object_unref.
+
 	* parse.c (gtranslator_save_file): Switch from GnomeWarningDialog
 	        to GtkMessageDialog.
 

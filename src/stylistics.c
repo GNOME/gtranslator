@@ -347,7 +347,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 			 * But for now, let's do the old dirty dancing...
 			 *
 			 */
-		    	gdk_font_unref(style->private_font);
+		    	g_object_unref(style->private_font);
 		  	style->private_font=font;
 		}
 	}
@@ -360,7 +360,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	/*
 	 * Clean up the used style + fontname variable .-)
 	 */
-	gtk_style_unref(style);
+	g_object_unref(style);
 	GTR_FREE(fontname);
 }
 
