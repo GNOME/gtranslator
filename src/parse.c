@@ -334,11 +334,8 @@ gboolean gtranslator_parse_core(GtrPo *po)
 						msg->comment=NULL;
 					}
 				}
-			} else
-			/*
-			 * If it's a msgid
-			 */
-			if (nautilus_str_has_prefix(line, "msgid \"")) {
+			}
+			else if (nautilus_str_has_prefix(line, "msgid \"")) {
 				/*
 				 * This means the comment is completed
 				 */
@@ -346,6 +343,17 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				if (line[8] != '\0')
 					append_line(&msg->msgid, &line[6], FALSE);
 			} 
+			else if (nautilus_str_has_prefix(line, "msgid_plural \""))
+			{
+				/*
+				 * Now we've got a new msgid_plural tag.
+				 */
+				comment_ok=TRUE;
+				if(line[15]!='\0')
+				{
+					append_line(&msg->msgid_plural, &line[13], FALSE);
+				}
+			}
 			/*
 			 * If it's a msgstr. 
 			 */
@@ -357,6 +365,17 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				msgid_ok = TRUE;
 				if (line[9] != '\0')
 					append_line(&msg->msgstr, &line[7], FALSE);
+			}
+			else if(nautilus_str_has_prefix(line, "msgstr["))
+			{
+				/*
+				 * Now we've got a msgstr item in here.
+				 */
+				if(!msgid_ok)
+				{
+					g_message("Shall parse: %s in here", line);
+					msgid_ok=TRUE;
+				}
 			}
 			else
 			/*

@@ -61,8 +61,8 @@ typedef struct {
 	gint		no;
 	gint 		pos;
 
-	gint		group;
-	gint		level;
+	gchar		*msgid_plural;
+	GList		*msgstrs;
 	
 	GtrMsgStatus 	status;
 } GtrMsg;
