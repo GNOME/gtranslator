@@ -158,7 +158,7 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 		{
 			GtkWidget *popup_menu;
 
-			popup_menu=gnome_popup_menu_new(the_popup_menu);
+			popup_menu=gnome_popup_menu_new(the_main_popup_menu);
 
 			gtk_menu_popup(GTK_MENU(popup_menu), NULL, NULL,
 				NULL, NULL, event->button, event->time);

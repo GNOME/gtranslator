@@ -380,7 +380,7 @@ GnomeUIInfo the_navibar[] = {
 /*
  * The popup-menu for the main GUI.
  */
-GnomeUIInfo the_popup_menu[] = {
+GnomeUIInfo the_main_popup_menu[] = {
 	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_CUT_ITEM(gtranslator_clipboard_cut, NULL),
