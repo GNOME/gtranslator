@@ -65,16 +65,20 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 						msg[cp]);
 					
 					string=g_string_append_c(string,
-						msg[cp+1]);	
+						msg[cp+1]);
+					cp++;
+				}
+				else
+				{
+					string=g_string_append_c(string,
+						msg[cp]);
+				}
 					
 				gtk_text_insert(GTK_TEXT(textwidget),
 					NULL,
 					gtranslator_syntax_get_gdk_color(BLUE),
 					NULL,
 					string->str, -1);
-
-				cp++;
-				}
 
 				break;
 		
