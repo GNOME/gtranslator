@@ -25,6 +25,7 @@
 #include "utils.h"
 
 #include <iconv.h>
+#include <string.h>
 
 /*
  * Convert the given string from_encoding -> to_encoding using iconv and
