@@ -4,6 +4,6 @@
 # --------------------------------------------------------
 
 EXTRA_DIST = \
-	auto_accomplishment.xpm \
+	auto_translation.xpm \
 	query.xpm \
 	query_big.xpm
