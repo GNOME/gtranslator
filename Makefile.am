@@ -35,9 +35,9 @@ cvspack:
 	@sed -e "s,AM_INIT_AUTOMAKE.*,AM_INIT_AUTOMAKE\(gtranslator\, CVS_$(shell date +%Y-%m-%d)\),g" < configure.in \
 		> configure.in.new && mv configure.in.new configure.in
 	@./autogen.sh --help
-	@-cp -pR po __po
+	@cp -pR po __po
 	@make dist
-	@-mv __po po
+	@mv __po po
 
 pre-release: cvspack
 	@-./pozilla.sh
