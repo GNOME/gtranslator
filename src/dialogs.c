@@ -569,14 +569,19 @@ Saying \"No\" will delete the crash recovery file."),
 void query_dialog(void)
 {
 	GtkWidget *dialog=NULL;
+	GtkWidget *innertable;
 	GtkWidget *query_entry;
+	GtkWidget *query_entry_label;
 	GtkWidget *domain;
+	GtkWidget *domain_label;
 	GtkWidget *label;
 	gint reply;
 	
 	#define add2Box(x); \
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
 		FALSE, FALSE, 0);
+	#define add2Table(x, y, z); \
+	gtk_table_attach_defaults(GTK_TABLE(innertable), x, y, y+1, z, z+1);
 
 	if(!domains)
 	{
@@ -595,13 +600,20 @@ void query_dialog(void)
 		_("gtranslator -- query existing gettext domains"),
 		_("Query"), _("Close"), NULL);
 
+	innertable=gtk_table_new(2, 2, FALSE);
+
+	gtk_table_set_row_spacings(GTK_TABLE(innertable), 5);
+	gtk_table_set_col_spacings(GTK_TABLE(innertable), 5);
+	
 	query_entry=gnome_entry_new("QUERY");
+	query_entry_label=gtk_label_new(_("Query string:"));
 
 	/*
 	 * Setup our loved domains list as the stringlist for the combobox.
 	 */
 	domain=gtk_combo_new();
 	gtk_combo_set_popdown_strings(GTK_COMBO(domain), domains);
+	domain_label=gtk_label_new(_("Domain to search the translation in:"));
 
 	/*
 	 * Set up the default query domain from the preferences if available.
@@ -616,8 +628,12 @@ void query_dialog(void)
 	 * Add the widgets to the dialog.
 	 */
 	add2Box(label);
-	add2Box(domain);
-	add2Box(query_entry);
+	add2Box(innertable);
+
+	add2Table(query_entry_label, 0, 0);
+	add2Table(query_entry, 1, 0);
+	add2Table(domain_label, 0, 1);
+	add2Table(domain, 1, 1);
 
 	/*
 	 * "Query" should be the default button I guess.
