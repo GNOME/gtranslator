@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "backend.h"
 #include "gui.h"
 #include "nautilus-string.h"
 #include "open-differently.h"
@@ -107,6 +108,10 @@ gboolean gtranslator_open_po_file(gchar *file)
 	else if(nautilus_istr_has_suffix(file, ".po.zip"))
 	{
 		gtranslator_open_ziped_po_file(file);
+		return TRUE;
+	}
+	else if(gtranslator_backend_open(file))
+	{
 		return TRUE;
 	}
 	

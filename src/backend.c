@@ -31,6 +31,52 @@
 GtrBackendInformations *read_xml_descriptor(const gchar *filename);
 
 /*
+ * Utility function to do all the split up.
+ */
+GList *split_up_field(const gchar *content);
+
+/*
+ * Break up the plain line content into a list, a sorted list of elements.
+ */
+GList *split_up_field(const gchar *content)
+{
+	GList *list=NULL;
+	gchar **array;
+	gint i=0;
+	
+	/*
+	 * It's not worth giving here a failed assertion, as it's normally
+	 *  possible to get an empty tag.
+	 */
+	if(!content)
+	{
+		return NULL;
+	}
+	
+	/*
+	 * Split up the content line into is's single gchar elements.
+	 */
+	array=g_strsplit(content, ";", 0);
+	
+	while(array[i]!=NULL)
+	{
+		list=g_list_prepend(list, g_strdup(array[i]));
+		
+		i++;
+	}
+	
+	g_strfreev(array);
+	
+	/*
+	 * Reverse the list of elements and sort it via nautilus_strcasecmp.
+	 */
+	list=g_list_reverse(list);
+	list=g_list_sort(list, (GCompareFunc) nautilus_strcasecmp);
+	
+	return list;
+}
+
+/*
  * Read in the xml descriptor file from the given file.
  */
 GtrBackendInformations *read_xml_descriptor(const gchar *filename)
@@ -92,8 +138,6 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 	while(node!=NULL)
 	{
 		FillUpInformationsForField(modulename, "module");
-		FillUpInformationsForField(extensions, "extensions");
-		FillUpInformationsForField(filenames, "filenames");
 		FillUpInformationsForField(compile_command, "compiler");
 
 		if(!nautilus_strcasecmp(node->name, "compilable"))
@@ -105,6 +149,7 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 			 */
 			if(!value)
 			{
+				infos->compilable=FALSE;
 				break;
 			}
 			
@@ -128,7 +173,54 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 			g_free(value);
 		}
 
+		/*
+		 * Get the filenames list for the backend.
+		 */
+		if(!nautilus_strcasecmp(node->name, "filenames"))
+		{
+			gchar *value=xmlNodeListGetString(doc, node->xmlChildrenNode, 1);
+			
+			/*
+			 * Break up the supplied filenames into the single 
+			 *  elements and set it up as a list.
+			 */
+			infos->filenames=split_up_field(value);
+			
+			g_free(value);
+		}
+		
+		/*
+		 * The supported extensions are also delivered as a list.
+		 */
+		if(!nautilus_strcasecmp(node->name, "extensions"))
+		{
+			gchar *value=xmlNodeListGetString(doc, node->xmlChildrenNode, 1);
+
+			/*
+			 * Get the extensions into the corresponding list.
+			 */
+			infos->extensions=split_up_field(value);
+			
+			g_free(value);
+		}
+		
 		node=node->next;
+	}
+
+	/*
+	 * Set up the module name as a full path.
+	 */
+	if(infos->modulename)
+	{
+		gchar *temp;
+
+		temp=g_strdup(infos->modulename);
+		g_free(infos->modulename);
+
+		infos->modulename=g_strdup_printf("%s/%s/%s", 
+			g_dirname(filename), infos->name, temp);
+
+		g_free(temp);
 	}
 
 	return infos;
@@ -139,18 +231,53 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
  */
 void gtranslator_backend_add(const gchar *filename)
 {
-	GtrBackend *backend;
+	GtrBackend 	*backend;
+	GModule		*module;
+	gpointer	load_function, save_function, save_as_function;
+
+	/*
+	 * The function addresses -- initialize them with NULL.
+	 */
+	load_function=save_function=save_as_function=NULL;
+	
 	g_return_if_fail(filename!=NULL);
 
 	backend=g_new0(GtrBackend, 1);
 	backend->info=read_xml_descriptor(filename);
-
 	g_return_if_fail(backend->info!=NULL);
 
 	/*
-	 * Mr. Debug, never translate such things!
+	 * Load the GModule handle for the given file.
 	 */
-	g_message("%s (%s) descriptor loaded", backend->info->name, backend->info->description);
+	module=g_module_open(backend->info->modulename, G_MODULE_BIND_LAZY);
+	g_return_if_fail(module!=NULL);
+
+	/*
+	 * Load all the symbols/functions from the backend module.
+	 */
+	if(g_module_symbol(module, "backend_open", &load_function) &&
+		g_module_symbol(module, "backend_save", &save_function) &&
+		g_module_symbol(module, "backend_save_as", &save_as_function))
+	{
+		/*
+		 * Assign the resolved symbol functions to the backend's own
+		 *  functions namespace.
+		 */
+		backend->open_file=load_function;
+		backend->save_file=save_function;
+		backend->save_file_as=save_as_function;
+		
+		/*
+		 * Mr. Debug, never translate such things!
+		 */
+		g_message("%s\n (%s) loaded.", backend->info->description, 
+			backend->info->modulename);
+
+		/*
+		 * Finally add this backend to the list of our loaded backends.
+		 */
+		backends=g_list_prepend(backends, backend);
+	}
 }
 
 /*
@@ -158,18 +285,117 @@ void gtranslator_backend_add(const gchar *filename)
  */
 gboolean gtranslator_backend_open_all_backends(const gchar *directory)
 {
+	GList *backends_list=NULL;
+
 	g_return_val_if_fail(directory!=NULL, FALSE);
 	
 	/*
 	 * Get all backend descriptor files from the directory and sort the
 	 *  filename list.
 	 */
-	backends=gtranslator_utils_file_names_from_directory(directory,
+	backends_list=gtranslator_utils_file_names_from_directory(directory,
 		".xml", TRUE, FALSE, TRUE);
 
-	g_return_val_if_fail(backends!=NULL, FALSE);
+	g_return_val_if_fail(backends_list!=NULL, FALSE);
 
-	g_list_foreach(backends, (GFunc) gtranslator_backend_add, NULL);
+	/*
+	 * Add every xml descriptor and it's module to our backends list.
+	 */
+	g_list_foreach(backends_list, (GFunc) gtranslator_backend_add, NULL);
+
+	/*
+	 * Prepending items needs reversing the list at the end of the process.
+	 */
+	backends=g_list_reverse(backends);
 
 	return TRUE;
+}
+
+/*
+ * Remove the given backend module.
+ */
+gboolean gtranslator_backend_remove(GtrBackend **backend)
+{
+	g_return_val_if_fail(backend!=NULL, FALSE);
+
+	return TRUE;
+}
+
+/*
+ * Unload all used/loaded backends and clean up all the stuff around it.
+ */
+gboolean gtranslator_backend_remove_all_backends(void)
+{
+	/*
+	 * If there aren't any backends left in the list, don't try to remove
+	 *  them.
+	 */
+	if(!backends)
+	{
+		return FALSE;
+	}
+	else
+	{
+		g_list_foreach(backends, (GFunc) 
+			gtranslator_backend_remove, NULL);
+
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+/*
+ * Return TRUE if our backends do support opening the given file.
+ */
+gboolean gtranslator_backend_open(gchar *filename)
+{
+	g_return_val_if_fail(filename!=NULL, FALSE);
+	g_return_val_if_fail(backends!=NULL, FALSE);
+	
+	while(backends!=NULL)
+	{
+		/*
+		 * Look if the filename matches the filenames supported by the
+		 *  backend module.
+		 */
+		if(gtranslator_utils_stringlist_strcasecmp(
+			GTR_BACKEND(backends->data)->info->filenames, 
+				filename)!=-1)
+		{
+			/*
+			 * Load the file with the corresponding open handle.
+			 */
+			GTR_BACKEND(backends->data)->open_file(filename, NULL);
+			return TRUE;
+		}
+		else
+		{
+			/*
+			 * Check if the filename is of a supported filetype 
+			 *  (extension) of the current backend module.
+			 */
+			 GtrBackend *current=GTR_BACKEND(backends->data);
+
+			 while(current->info->extensions!=NULL)
+			 {
+				 /*
+				  * If the extensions do match open the file
+				  *  and return TRUE.
+				  */
+				 if(nautilus_istr_has_suffix(filename,
+					(current->info->extensions->data)))
+				 {
+					 current->open_file(filename, NULL);
+					 return TRUE;
+				 }
+				 
+				 current->info->extensions=current->info->extensions->next;
+			 }
+		}
+		
+		backends=backends->next;
+	}
+
+	return FALSE;
 }

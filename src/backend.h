@@ -33,11 +33,11 @@
  */
 typedef struct
 {
-	const gchar 	*modulename;
+	gchar 		*modulename;
 	const gchar 	*name;
 	const gchar 	*description;
-	const gchar 	*extensions;
-	const gchar	*filenames;
+	GList	 	*extensions;
+	GList		*filenames;
 
 	gboolean	compilable;
 	const gchar	*compile_command;
@@ -77,9 +77,9 @@ gboolean gtranslator_backend_open_all_backends(const gchar *directory);
 void gtranslator_backend_add(const gchar *filename); 
 
 /*
- * Removed the given xml-file descriptors module.
+ * Remove the given backend module.
  */
-gboolean gtranslator_backend_remove(const gchar *filename);
+gboolean gtranslator_backend_remove(GtrBackend **backend);
 
 /*
  * Remove all registered modules and clean up our "namespace".
@@ -88,8 +88,8 @@ gboolean gtranslator_backend_remove_all_backends(void);
 
 /*
  * Can we open this file via any registered backend? Returns, yes, rightly 
- *  guessed: TRUE on success.
+ *  guessed: TRUE on success/opening of the file.
  */
-gboolean gtranslator_backend_open(const gchar *filename); 
+gboolean gtranslator_backend_open(gchar *filename); 
 
 #endif
