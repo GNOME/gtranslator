@@ -62,6 +62,7 @@ gtranslator_SOURCES = \
 	nautilus-string.c nautilus-string.h \
 	open.c open.h \
 	parse.c	parse.h \
+	po.c po.h \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \
 	prefs-dialog.c prefs-dialog.h \
