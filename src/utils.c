@@ -1,6 +1,6 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
- *		Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -480,8 +480,8 @@ gchar *gtranslator_utils_get_environment_locale()
 }
 
 /*
- * Returns the "official" charset name for the currently active environment
- *  locale. */
+ * Returns the "official" charset name for the currently active environment locale.
+ */
 gchar *gtranslator_utils_get_environment_charset()
 {
 	gchar	*locale_name=NULL;
@@ -817,7 +817,7 @@ gchar *gtranslator_utils_get_locale_charset(void)
 				 * Now test the language names again for a bit
 				 *  more sanity on "compund" language names.
 				 */
-				if(partial_charset_name)
+				if(partial_charset_name && strstr(po->header->language, partial_charset_name))
 				{
 					partial_charset_name++;
 
@@ -831,7 +831,10 @@ gchar *gtranslator_utils_get_locale_charset(void)
 			}
 		}
 
-		return NULL;
+		/*
+		 * Again return the fallback default locale value given by the translator.
+		 */
+		return g_strdup(_("iso-8859-1"));
 	}
 }
 

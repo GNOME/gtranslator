@@ -1,5 +1,10 @@
 2002-03-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* utils.c: Finally fix the reopened problematic bug with UTF-8 (it's
+		b.g.o #69720) display for double language names like missing
+		 some parts like "Nynorsk" for "Norwegian/Nynorsk" -- more
+		  voodoo was added to the sources for getting this to work.
+
 	* learn.c: Grr, corrected a stupido error in the po file exporting
 		routines of the learn buffer sources.
 
