@@ -37,7 +37,7 @@ gchar *setup_language(gchar *lang);
 /*
  * A simply query method (wraps dgettext).
  */
-GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
+GtrQuery *gtranslator_query_simple(GtrQuery *query)
 {
 	gchar *str;
 	gchar *original_LC_CTYPE, *original_LC_MESSAGES;
@@ -69,8 +69,8 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 	 */
 	if(str && strcmp(str, query->message))
 	{
-		GtrQueryResult *result=gtranslator_new_query_result(
-			query->domain, str);
+		GtrQuery *result=gtranslator_new_query(
+			query->domain, str, query->language);
 
 		return result;
 	}
@@ -143,7 +143,7 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 {
 	GList *matches=NULL;
 	GtrQuery *query;
-	GtrQueryResult *result;
+	GtrQuery *result;
 	
 	g_return_val_if_fail(domainlist!=NULL, NULL);
 	
@@ -167,7 +167,7 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 		 *  ever -- dgettext returns the queried string if it didn't
 		 *   find anything for it, so that we should drop that cases.
 		 */   
-		if(strcmp(result->translation, query->message))
+		if(strcmp(result->message, query->message))
 		{
 			matches=g_list_append(matches, result);
 		}
@@ -294,25 +294,7 @@ GtrQuery *gtranslator_new_query(const gchar *domain,
 }
 
 /*
- * Creates a GtrQueryResult structure -- again with some 
- *  const arguments like the "gtranslator_new_query" function.
- */
-GtrQueryResult *gtranslator_new_query_result(const gchar *domain,
-	const gchar *translation)
-{
-	GtrQueryResult *result=g_new0(GtrQueryResult, 1);
-
-	g_return_val_if_fail(domain!=NULL, NULL);
-	g_return_val_if_fail(translation!=NULL, NULL);
-
-	result->domain=g_strdup(domain);
-	result->translation=g_strdup(translation);
-	
-	return result;
-}
-
-/*
- * Freeing functions:
+ * Freeing function:
  */
 void gtranslator_free_query(GtrQuery **query)
 {
@@ -322,16 +304,6 @@ void gtranslator_free_query(GtrQuery **query)
 		g_free((*query)->domain);
 		g_free((*query)->language);
 		g_free(*query);
-	}
-}
-
-void gtranslator_free_query_result(GtrQueryResult **result)
-{
-	if(*result)
-	{
-		g_free((*result)->translation);
-		g_free((*result)->domain);
-		g_free(*result);
 	}
 }
 
@@ -345,7 +317,7 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 	if(msg && msg->msgid && !msg->msgstr)
 	{
 		GtrQuery *query;
-		GtrQueryResult *matchingtranslation=NULL;
+		GtrQuery *matchingtranslation=NULL;
 
 		/*
 		 * Build up the query for the selected default domain and for the
@@ -363,11 +335,11 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 		/*
 		 * If we did find a matching translation for the msgid and there's
 		 *  no msgstr translation yet, copy the found query result into
-		 *   the msgstr field of the GtrMsg and free the GtrQueryResult.
+		 *   the msgstr field of the GtrMsg and free the GtrQuery.
 		 */
-		if(matchingtranslation && matchingtranslation->translation)
+		if(matchingtranslation && matchingtranslation->message)
 		{
-			msg->msgstr=g_strdup(matchingtranslation->translation);
+			msg->msgstr=g_strdup(matchingtranslation->message);
 
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;
 
@@ -376,7 +348,7 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 			 */
 			po->file_changed=TRUE;
 
-			gtranslator_free_query_result(&matchingtranslation);
+			gtranslator_free_query(&matchingtranslation);
 		}
 	}
 }

@@ -1,3 +1,20 @@
+2001-03-23  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c: If the user didn't enter any string to query for,
+		present him/her an warning dialog (the conditional is
+		 right now), store the last query change in the prefs
+		  and do only use GtrQuery's as the GtrQueryResult stuff
+		   got removed now.
+	
+	* query.c/.h: Removed GtrQueryResult's and made all functions work
+		with GtrQuery's -- the results are also queries now.
+
+	* Makefile.am & main.c: We don't need to also define 
+		"USE_WINDOW_ICON" as we can also use the "WINDOW_ICON"
+		  directive to determine if we can use the window-icon
+		   feature of gnome-libs; removed "USE_WINDOW_ICON" define
+		    from the CFLAGS.
+
 2001-03-22  Fatih Demir <kabalak@gtranslator.org>
 
 	* header_stuff.c/.h: Added "gtranslator_header_fill_up" function

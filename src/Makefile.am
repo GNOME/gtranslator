@@ -7,7 +7,6 @@ SUBDIRS = . pixmaps
 
 if USE_WINDOW_ICON
 myicon = \
-	-DUSE_WINDOW_ICON=7 \
 	-DWINDOW_ICON=\""${datadir}/pixmaps/gtranslator.png"\"
 else
 myicon =

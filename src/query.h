@@ -31,13 +31,7 @@ typedef struct {
 	gchar *language;
 } GtrQuery;
 
-typedef struct {
-	gchar *domain;
-	gchar *translation;
-} GtrQueryResult;
-
 #define GTR_QUERY(x) ((GtrQuery *)(x))
-#define GTR_QUERY_RESULT(x) ((GtrQueryResult *)(x))
 
 /*
  * The generally used domains list.
@@ -53,7 +47,7 @@ gchar *gtranslator_strip_out(gchar *filename);
  * Simply query for the gettext translation for the given message in the
  *  domain (program/package) and for the given language.
  */ 
-GtrQueryResult *gtranslator_query_simple(GtrQuery *query);
+GtrQuery *gtranslator_query_simple(GtrQuery *query);
 
 /*
  * Get all ocurrences for the message in the given domainlist and return a
@@ -69,16 +63,12 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 void gtranslator_query_domains(const gchar *directory);
 
 /*
- * Creation/deletion of GtrQuery(Result)s:
+ * Creation/deletion of GtrQuery's:
  */
 GtrQuery *gtranslator_new_query(const gchar *domain, 
 	const gchar *message, const gchar *language);
 
-GtrQueryResult *gtranslator_new_query_result(const gchar *domain,
-	const gchar *translation);
-
 void gtranslator_free_query(GtrQuery **query);
-void gtranslator_free_query_result(GtrQueryResult **result);
 
 /*
  * Automatically query for an empty msgstr's possible translation and insert

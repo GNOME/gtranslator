@@ -802,7 +802,7 @@ void query_dialog(void)
 		query_text=gtk_editable_get_chars(GTK_EDITABLE(
 		gnome_entry_gtk_entry(GNOME_ENTRY(query_entry))), 0, -1);
 
-		if(!query_text)
+		if(!query_text || (strlen(query_text) <= 1))
 		{
 			/*
 			 * Bad case in here.
@@ -811,11 +811,12 @@ void query_dialog(void)
 				_("No query string given!"));
 
 			g_free(query_text);
+			gnome_dialog_close(GNOME_DIALOG(dialog));
 		}
 		else
 		{
 			GtrQuery *query;
-			GtrQueryResult *result;
+			GtrQuery *result;
 			gchar *domainname;
 
 			/*
@@ -828,8 +829,12 @@ void query_dialog(void)
 			 * Build up and run the query.
 			 */
 			query=gtranslator_new_query(domainname, query_text, lc);
-
 			result=gtranslator_query_simple(query);
+			
+			/*
+			 * Close the open dialog now.
+			 */
+			gnome_dialog_close(GNOME_DIALOG(dialog));
 
 			if(!result)
 			{
@@ -838,8 +843,6 @@ void query_dialog(void)
 				 */
 				gnome_app_warning(GNOME_APP(app1),
 				_("Couldn't find any result for the query!"));
-
-				gnome_dialog_close(GNOME_DIALOG(dialog));
 			}
 			else
 			{
@@ -852,11 +855,21 @@ void query_dialog(void)
 				GtkWidget *condialog=NULL;
 				gint hehue;
 
-				gnome_dialog_close(GNOME_DIALOG(dialog));
-
-				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\".\n\
+				resulttext=g_strdup_printf(_("Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n\
 Would you like to insert it into the translation?"),
-					result->translation, result->domain);
+					result->message, query->message, result->domain);
+
+				/*
+				 * Set the last query result in the prefs for
+				 *  persistence.
+				 */
+				gtranslator_config_init();
+				gtranslator_config_set_int("query/last_match_message",
+					g_list_position(po->messages, po->current));
+				gtranslator_config_set_string("query/last_match_domain", result->domain);
+				gtranslator_config_set_string("query/last_match_message", query->message);
+				gtranslator_config_set_string("query/last_match_translation", result->message);
+				gtranslator_config_close();
 
 				gtranslator_free_query(&query);
 				
@@ -895,19 +908,18 @@ Would you like to insert it into the translation?"),
 					 *  translation box; if so print a warning
 					 *   and don't insert the translation.
 					 */
-					if(content && strcmp(content, result->translation))
+					if(content && strcmp(content, result->message))
 					{
 						/*
 						 * Insert the text and update the
 						 * status flags for it.
 						 */
 						gtranslator_syntax_insert_text(trans_box,
-						result->translation);
+						result->message);
 
 						text_has_got_changed(NULL, NULL);
 
-						g_free(result->domain);
-						g_free(result);
+						gtranslator_free_query(&result);
 					}
 					else
 					{
