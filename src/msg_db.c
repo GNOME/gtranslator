@@ -120,8 +120,7 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 	}
 	else
 	{
-		gint msg_translation_length;
-		if(!msg_translation)
+		if((! msg_translation )||( strlen(msg_translation) < 0) )
 		{
 			/**
 			* Warn if there isn't any message which could be added
@@ -133,10 +132,9 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 		/**
 		* Get the length of the new entry
 		**/
-		msg_translation_length=strlen(msg_translation);
-		if(( msg_translation_length < 0 ) || ( ! msg_translation ))
+		if(( strlen(msg_translation) < 0 ) || ( ! msg_translation ))
 		{
-			g_warning(_("New message entry has wrong/non-logical length : %i\n"),msg_translation_length);
+			g_warning(_("New message entry has wrong/non-logical length.\n"));
 			return 1;
 		}
 		else

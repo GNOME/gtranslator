@@ -62,7 +62,7 @@ void get_header(gchar *hline);
 /**
 * Creates the edit_header-dialog.
 **/
-void edit_header_create(gtr_header *head);
+void edit_header_create();
 
 /**
 * Shows the edit_header-dialog.
@@ -78,10 +78,5 @@ void edit_header_hide(GtkWidget *widget,gpointer useless);
 * Calls the other functions.
 **/
 void edit_header(GtkWidget *widget,gpointer useless);
-
-/**
-* Allocates a new header.
-**/
-gtr_header *new_header();
 
 #endif 

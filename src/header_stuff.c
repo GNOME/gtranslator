@@ -13,7 +13,7 @@
 /**
 * A structure which will be hopefully used now...
 **/
-gtr_header *ph;
+static gtr_header *ph=NULL;
 
 /**
 * This variable is used to recognize the end of the header.
@@ -28,50 +28,25 @@ gchar *inp;
 /**
 * A simple define; .. ok I'm lazy but it avoids many typos ..
 **/
-#define kabalak_str(x) inp[0]='\0'; inp=strstr(hline, ": ");\
-ph->x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));\
-g_print("--  %s\n",ph->x);
+#define kabalak_str(x) inp=NULL; inp=strstr(hline, ": ");\
+ph->x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));
 
 void apply_header(gtr_header *the_header)
 {
 	if((the_header->prj_name==NULL))
 	{
-		g_warning(_("Error while parsing the header!"));
+		g_warning(_("Error while applying the header!"));
 	}
-}
-
-/**
-* Creates and allocates the header.
-**/
-gtr_header *new_header()
-{
-	gtr_header *th=g_new(gtr_header,1);
-	/**
-	* Also allocate the parts of it.
-	**/
-	th->prj_name=g_new0(gchar,1);
-	th->prj_version=g_new0(gchar,1);
-	th->pot_date=g_new0(gchar,1);
-	th->po_date=g_new0(gchar,1);
-	th->last_translator=g_new0(gchar,1);
-	th->language_team=g_new0(gchar,1);
-	th->mime_version=g_new0(gchar,1);
-	th->mime_type=g_new0(gchar,1);
-	th->encoding=g_new0(gchar,1);
-		return th;
 }
 
 void get_header(gchar *hline)
 {
-	(gtr_header *)ph=new_header();
 	header_finish=FALSE;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
-		gchar *temp;
 		kabalak_str(prj_name);
-		temp=ph->prj_name;
-		ph->prj_name=index(temp, ' ');
-		ph->prj_version=rindex(temp, ' ');
+		ph->prj_name=index(ph->prj_name, ' ');
+		ph->prj_version=rindex(ph->prj_name, ' ');
 	}
 	if(!g_strncasecmp(hline,"\"POT-",5))
 	{
@@ -111,13 +86,18 @@ void get_header(gchar *hline)
 /**
 * Creates the Header-edit dialog.
 **/
-void edit_header_create(gtr_header *head)
+void edit_header_create()
 {
 	/**
-	* Some local widgets.
+	* Create a new one and assign the old one.
 	**/
-	GtkWidget *prj_name_label,*prj_version_label,*e_table;
+	gtr_header *head=g_new(gtr_header,1);
+	/**
+        * Some local widgets.
+        **/
+        GtkWidget *prj_name_label,*prj_version_label,*e_table;
         GtkWidget *take_my_options;
+	head=ph;
 	/**
 	* Do a simply check.
 	**/
@@ -195,7 +175,7 @@ void edit_header_show()
 	/**
 	* Give the existing header as an argument.
 	**/
-	edit_header_create((gtr_header *)ph);
+	edit_header_create();
 	gtk_widget_show(gtr_edit_header_dlg);
 }
 

@@ -44,7 +44,9 @@ void parse(gchar *po)
 	**/
 	gchar temp_char[128];
 	gchar *zamane=NULL;
-        guint lines=1,z=0;
+        guint lines=1,z=0,msg_pair=0;
+	gboolean final;
+	final=FALSE;
 	messages=g_list_alloc();
 	messages=NULL;
 	/**
@@ -82,6 +84,11 @@ void parse(gchar *po)
 		* Create a new structure.
 		**/
 		gtr_msg *msg=g_new(gtr_msg,1);
+		/**
+		* Set'em to "".
+		**/
+		msg->msgid="";
+		msg->msgstr=msg->comment=msg->msgid;
 		z++;
 		/**
 		* Try to get the header :
@@ -103,7 +110,7 @@ void parse(gchar *po)
 			* Use the functions defined & used in header_stuff.*
 			*  to rip the header off.
 			**/
-			//->get_header(temp_char);
+			get_header(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
@@ -112,27 +119,31 @@ void parse(gchar *po)
 			*  and set the comment & position.
 			**/
 			msg_pair++;
-			msg->pos=msg_pair;
-			msg->comment=(gchar *)g_strdup(temp_char);
+			(gint)msg->pos=z;
+			(gchar *)msg->comment=(gchar *)g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			msg->msgid=(gchar *)g_strdup(temp_char);
+			(gchar *)msg->msgid=(gchar *)g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			msg->msgstr=(gchar *)g_strdup(temp_char);
+			(gchar *)msg->msgstr=(gchar *)g_strdup(temp_char);
+			final=TRUE;
 		}
 		/**
 		* Add the current message to the messages list.
 		**/
-		messages=g_list_append(messages,(gpointer)msg);
+		if(final!=FALSE)
+		{
+			messages=g_list_append(messages,(gpointer)msg);
+		}
 	}
 	/**
 	* Show an updated status
@@ -211,8 +222,8 @@ void get_last_msg(GtkWidget *widget,gpointer useless)
 	gtr_msg *last=g_new(gtr_msg,1);
 	last=(gtr_msg *)g_list_nth_data(messages,(g_list_length(messages)-1));
 	clean_text_boxes();
-	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)last->msgid,sizeof((gchar *)last->msgid));
-	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)last->msgstr,sizeof((gchar *)last->msgstr));
+	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)last->msgid,-1/*sizeof((gchar *)last->msgid)*/);
+	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)last->msgstr,-1/*sizeof((gchar *)last->msgstr)*/);
 	if(last)
 	{
 		gtk_widget_set_sensitive(first_button,TRUE);

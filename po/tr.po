@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.19\n"
-"POT-Creation-Date: 2000-06-05 01:37+0200\n"
-"PO-Revision-Date: 2000-06-05 01:38+0200\n"
+"POT-Creation-Date: 2000-06-05 15:00+0200\n"
+"PO-Revision-Date: 2000-06-05 15:00+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -128,34 +128,34 @@ msgstr "Bul"
 msgid "Ignore the case"
 msgstr "Yazýlýmýný gözardý et"
 
-#: src/header_stuff.c:39
-msgid "Error while parsing the header!"
-msgstr "Baþlýdý tararken hata oldu!"
+#: src/header_stuff.c:38
+msgid "Error while applying the header!"
+msgstr "Baþlýdý uygularken hata oldu!"
 
-#: src/header_stuff.c:107
+#: src/header_stuff.c:82
 msgid "Header has been parsed."
 msgstr "Baþlýk baþarýyla tarandý."
 
-#: src/header_stuff.c:126
+#: src/header_stuff.c:106
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Baþlýk dodruca taranmamýþ gibi."
 
-#: src/header_stuff.c:128
+#: src/header_stuff.c:108
 msgid "Project name:"
 msgstr "Proje ismi : "
 
-#: src/header_stuff.c:129
+#: src/header_stuff.c:109
 msgid "Project version:"
 msgstr "Proje nesli : "
 
-#: src/header_stuff.c:130
+#: src/header_stuff.c:110
 msgid "Use my personal options to fill out the rest of the header."
 msgstr "þahsi seÇeneklerimi baþlýðý doldurmak için kullan."
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:139
+#: src/header_stuff.c:119
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- baþlýdý deðiþtir"
 
@@ -637,19 +637,18 @@ msgstr "Ileti ve tercüme tabaný olan `%s' açýlmamýþ gibi gözüküyor!\n"
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
-#: src/msg_db.c:130
+#: src/msg_db.c:129
 msgid "Got no message entry!\n"
 msgstr "Ileti/tercüme birimini alamadým!\n"
 
-#: src/msg_db.c:139
-#, c-format
-msgid "New message entry has wrong/non-logical length : %i\n"
-msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil : %i\n"
+#: src/msg_db.c:137
+msgid "New message entry has wrong/non-logical length.\n"
+msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil.\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:175
+#: src/msg_db.c:173
 #, c-format
 msgid "The msg_db `%s' seems not to be inited!\n"
 msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
@@ -657,7 +656,7 @@ msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:179
+#: src/msg_db.c:177
 msgid "Not available"
 msgstr "Yok be !"
 
@@ -665,11 +664,11 @@ msgstr "Yok be !"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:187
+#: src/msg_db.c:185
 msgid "No msg_list available for acting on it!\n"
 msgstr "Iþlenilecek bir msg_list ( ileti/tercüme listesi ) yok ki!\n"
 
-#: src/msg_db.c:211
+#: src/msg_db.c:209
 msgid "No entry found in the msg_db."
 msgstr "Ileti/tercüme tabanýnda böyle bir birim yoktur."
 
@@ -687,7 +686,7 @@ msgstr ""
 "\n"
 "Dosya akýmý kayboldu!%s"
 
-#: src/parse.c:55
+#: src/parse.c:57
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
@@ -695,7 +694,7 @@ msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
 #. *
 #. * Set up a status message
 #. *
-#: src/parse.c:60
+#: src/parse.c:62
 #, c-format
 msgid "Current file : \"%s\"."
 msgstr "Geçerli dosya : \"%s\"."
@@ -703,12 +702,12 @@ msgstr "Geçerli dosya : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:140
+#: src/parse.c:151
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
-#: src/parse.c:157
+#: src/parse.c:168
 msgid "Parsing has been successfull."
 msgstr "Tarama baþarýlý oldu."
 
