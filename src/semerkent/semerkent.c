@@ -23,7 +23,7 @@
  * The homepage for semerkent is: http://semerkent.sourceforge.net
  */
 
-#include "languages.h"
+#include "../languages.h"
 #include "semerkent.h"
 
 G_BEGIN_DECLS
@@ -70,18 +70,18 @@ static void semerkent_init_language_hashes()
 		
 		while(languages[no].name!=NULL)
 		{
-			if(languages[no].lcode)
+			if(languages[no].locale)
 			{
 				g_hash_table_insert(language_codes_hash,
 					g_strdup(languages[no].name),
-					g_strdup(languages[no].lcode));
+					g_strdup(languages[no].locale));
 			}
 
-			if(languages[no].enc)
+			if(languages[no].encoding)
 			{
 				g_hash_table_insert(language_encodings_hash,
 					g_strdup(languages[no].name),
-					g_strdup(languages[no].enc));
+					g_strdup(languages[no].encoding));
 			}
 			
 			no++;
