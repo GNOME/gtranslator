@@ -70,11 +70,11 @@ MY_LIBS=$LIBS
 CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
 LIBS="$LIBS `gnome-config --libs gnomeui`"
 AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, 
-	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Will use window-icon feature"])
+	AC_MSG_RESULT(["·:0 Will use window-icon feature..."])
 	AC_DEFINE(USE_WINDOW_ICON)
 	,[
 	w
-	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
+	AC_MSG_RESULT(["·:0 Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
 CFLAGS=$MY_CFLAGS
 LIBS=$MY_LIBS
 
@@ -98,13 +98,13 @@ dnl -------------------------------------------------------------------
 gconf_is_present=yes
 AM_PATH_GCONF(0.9.0,,gconf_is_present=no,gconf-gtk)
 if test "q$gconf_is_present" = "qno" ; then
-	AC_MSG_RESULT([********** Will NOT use GConf ...])
+	AC_MSG_RESULT(["·:0 Will NOT use GConf..."])
 else
 	if test "ENV$NO_GCONF" = "ENVyes" ; then
 	gconf_is_present=no
-	AC_MSG_RESULT([********** Won't use the found GConf as \$NO_GCONF is set to "yes" ...])
+	AC_MSG_RESULT(["·:0 Will not use the found GConf as \$NO_GCONF is set to _yes_ ..."])
 	else
-	AC_MSG_RESULT([********** Will use GConf ...])
+	AC_MSG_RESULT(["·:0 Will use GConf..."])
 	AC_DEFINE(GCONF_IS_PRESENT)
 	fi
 fi
@@ -166,11 +166,11 @@ AC_ARG_ENABLE(mime-bind,
 AC_MSG_CHECKING([if to bind the po-files with gtranslator ])
 if test "x$enable_mime_bind" = "xyes" ; then
 	AC_DEFINE(BIND_MIME)
-	AC_MSG_RESULT(["Ok,"
-"********** Will install the mime and keys files."])
+	AC_MSG_RESULT([" "
+"·:0 Will install the mime and keys files."])
 else
-	AC_MSG_RESULT(["Ok, "
-"********** Not installing the mime and keys files for the mime-types."])
+	AC_MSG_RESULT([" "
+"·:0 Not installing the mime and keys files for the mime-types."])
 fi
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 
@@ -183,12 +183,12 @@ AC_ARG_WITH(message-db-dir,
 AC_MSG_CHECKING([where to put the message-db.d directory ])
 if test "z$with_message_db_dir" = "zNONE" ; then
 	AC_MSG_RESULT([" "
-"********** Will put the message-db.d dir into gtranslators datadir."])
+"·:0 Will put the message-db.d dir into gtranslators datadir."])
 	MESSAGE_DB_DIR=${datadir}/gtranslator
 	AC_SUBST(MESSAGE_DB_DIR)
 else
 	AC_MSG_RESULT([" "
-"********** Will put the message-db.d dir to ${with_message_db_dir}."])
+"·:0 Will put the message-db.d dir to ${with_message_db_dir}."])
 	MESSAGE_DB_DIR=${with_message_db_dir}
 	AC_SUBST(MESSAGE_DB_DIR)
 fi
@@ -201,12 +201,28 @@ AC_ARG_WITH(debug-specs,
 AC_MSG_CHECKING([for a debuggy build ])
 if test "rt$with_debug_specs" = "rtno" ; then
 	AC_MSG_RESULT([" "
-"********** No, building everything without any debugging informations and flags ..."])
+"·:0 No, building everything without any debugging informations and flags..."])
 	CFLAGS="`echo $CFLAGS|sed -e 's/-g.//g'`"
 else
 	AC_MSG_RESULT([" "
-"********** Yes, building everything WITH debugging informations and flags ..."])
+"·:0 Yes, building everything WITH debugging informations and flags..."])
 	CFLAGS="`echo $CFLAGS|sed -e 's/-O.//g'` -ggdb"
+fi
+
+dnl -------------------------------------------------------------------
+dnl For the extremists of the 'gcc-&-Werror-are-friends' department.
+dnl -------------------------------------------------------------------
+AC_ARG_WITH(extreme-gcc-flags,
+     [  --with-extreme-gcc-flags	   Set the CFLAGS to the most extreme values],extreme_gcc_flags=yes,)
+AC_MSG_CHECKING([for extremists-ala-gcc-Werror ])
+if test "gcc$extreme_gcc_flags" = "gccyes" ; then
+	AC_MSG_RESULT([" "
+"·:0 Yes, you are getting your -Werror -Wformat etc. ..."])
+	CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts"
+	CFLAGS="$CFLAGS	-Wimplicit -Wreturn-type -Wswitch -Wcomment"
+else
+	AC_MSG_RESULT([" "
+"·:0 Huh, no gcc extremist =?"])
 fi
 
 dnl -------------------------------------------------------------------
@@ -271,5 +287,10 @@ if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
 
 if everything should be 
- compiled debuggy	:	${with_debug_specs:-yes} 
+ compiled debuggy	:	${with_debug_specs:-no}
+
+if you're getting your
+ loved -Werror etc.	:	${extreme_gcc_flags:-no}
+
+------------------------------------------------------------------
 "

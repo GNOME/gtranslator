@@ -2,7 +2,7 @@
 #######################################################################
 ### The kabalak'sh answer to ./autogen.sh!
 #######################################################################
-### /kabalak/kabalak@gmx.net/2000-09-14
+### /kabalak/kabalak@gmx.net/2000-10-29
 #######################################################################
 package=gtranslator
 #######################################################################
@@ -10,6 +10,13 @@ echo "I don't check for the stuff I'll use ;-) "
 a="echo -n "
 echo "Starting to process the files ..."
 echo ""
+#
+# Clean up these files from previous
+#  configurations.
+#
+[ -f config.log ] && rm -f config.log
+[ -f config.cache ] && rm -f config.cache
+[ -f config.h ] && rm -f config.h
 #
 # Set up the $ACLOCAL_FLAGS
 #
