@@ -3,15 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 dnl -------------------------------------------------------------------
 dnl (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
 dnl -------------------------------------------------------------------
-AC_INIT([gtranslator], [0.39], 
-	[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator])
-AC_PREREQ(2.50)
-AC_CONFIG_SRCDIR(src/main.c)
-
-dnl -------------------------------------------------------------------
-dnl Init automake and the maintainer mode macros.
-dnl -------------------------------------------------------------------
-AM_INIT_AUTOMAKE(gtranslator, AC_PACKAGE_VERSION)
+AC_INIT(src/main.c)
+AM_INIT_AUTOMAKE(gtranslator, 0.39)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
