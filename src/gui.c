@@ -80,6 +80,12 @@ GtkWidget *gtranslator_application_bar;
 
 GtkWidget *content_pane;
 GtkWidget *table_pane;
+#ifdef NOT_PORTED
+guint text_box_insert_text_signal_id;
+guint text_box_delete_text_signal_id;
+#endif
+guint trans_box_insert_text_signal_id;
+guint trans_box_delete_text_signal_id;
 
 /*
  * The comment/extra content area in the main window.
@@ -88,7 +94,6 @@ GtrExtraContentArea *extra_content_view;
 
 gboolean nothing_changes;
 
-#ifdef NOT_PORTED
 /*
  * Internal text callbacks/handlers.
  */
@@ -98,7 +103,6 @@ static void insert_text_handler (GtkTextBuffer *editable, GtkTextIter *pos,
 
 static void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 				GtkTextIter *end);
-#endif
 
 static void selection_get_handler(GtkWidget *widget,
 	GtkSelectionData *selection_data, guint info,
@@ -302,19 +306,23 @@ void gtranslator_create_main_window(void)
 			 G_CALLBACK(selection_get_handler), NULL);
 
 #ifdef NOT_PORTED
-	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(text_box)), 
-			 "insert-text",
-			 G_CALLBACK(insert_text_handler), NULL);
-	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(text_box)),
-			 "delete-range",
-			 G_CALLBACK(delete_text_handler), NULL);
-	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
-			 "insert-text",
-			 G_CALLBACK(insert_text_handler), NULL);
-	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
-			 "delete-range",
-			 G_CALLBACK(delete_text_handler), NULL);
+	text_box_insert_text_signal_id = g_signal_connect(
+		G_OBJECT(gtk_text_view_get_buffer(text_box)), 
+		"insert-text",
+		G_CALLBACK(insert_text_handler), NULL);
+	text_box_delete_text_signal_id = g_signal_connect(
+		G_OBJECT(gtk_text_view_get_buffer(text_box)),
+		"delete-range",
+		G_CALLBACK(delete_text_handler), NULL);
 #endif
+	trans_box_insert_text_signal_id = g_signal_connect(
+		G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
+		"insert-text",
+		G_CALLBACK(insert_text_handler), NULL);
+	trans_box_delete_text_signal_id = g_signal_connect(
+		G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
+		"delete-range",
+		G_CALLBACK(delete_text_handler), NULL);
 	
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 			 "changed",
@@ -334,7 +342,6 @@ void gtranslator_create_main_window(void)
 			 GUINT_TO_POINTER(dnd_type));
 }
 
-#ifdef NOT_PORTED
 /*
  * An own delete text handler which should work on deletion in the translation
  *  box -- undo is called up here, too.
@@ -356,13 +363,12 @@ void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 		fake_string=gtk_text_buffer_get_text(textbuf, 
 						     start, end, FALSE);
 		
-//		gtranslator_undo_register_deletion(fake_string, start_position);
+//		gtranslator_undo_register_deletion(fake_string, start, end);
 		GTR_FREE(fake_string);
 	}
 	gtranslator_delete_highlighted(textbuf, start, end, NULL);
-	g_signal_stop_emission_by_name (G_OBJECT (textbuf), "delete_text");
+	g_signal_stop_emission_by_name (G_OBJECT (textbuf), "delete-text");
 }
-#endif
 
 /*
  * The own quit-code
@@ -631,7 +637,6 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 	}
 }
 
-#ifdef NOT_PORTED
 /*
  * When inserting text, exchange spaces with dot chars 
  */
@@ -647,7 +652,7 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 		/*
 		* Register the text for an insertion undo action.
 		*/
-//		gtranslator_undo_register_insertion(text, *position);
+//		gtranslator_undo_register_insertion(text, pos);
 
 		if(GtrPreferences.dot_char)
 		{
@@ -655,14 +660,22 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 			old = result;
 			result = gtranslator_utils_invert_dot((gchar*)result);
 			g_free(old);
+			length = strlen(result);
 		}
 	}
-	gtranslator_insert_highlighted(textbuffer, pos, result, length, NULL);
-	g_free(result);
-	g_signal_stop_emission_by_name (G_OBJECT(textbuffer), "insert_text");
-	gtk_text_buffer_place_cursor(textbuffer, pos);
-}
+
+#ifdef NOT_PORTED
+	gtranslator_insert_highlighted(textbuffer, pos, result, length, data);
 #endif
+	g_signal_handler_block(textbuffer, trans_box_insert_text_signal_id);
+	gtk_text_buffer_insert(textbuffer, pos, result, length);
+	g_signal_handler_unblock(textbuffer, trans_box_insert_text_signal_id);
+
+	g_signal_stop_emission_by_name (G_OBJECT(textbuffer), "insert-text");
+	//gtk_text_buffer_place_cursor(textbuffer, pos);
+
+	g_free(result);
+}
 
 void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 			   guint info, guint time_stamp, gpointer data)
