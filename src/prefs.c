@@ -455,7 +455,7 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      wants.check_recent_file);
 	gtranslator_config_set_bool("toggles/use_own_specs",
-			      wants.use_own_specs);		      
+			      wants.use_own_specs);
 }
 
 /**
