@@ -13,7 +13,7 @@ dnl -------------------------------------------------------------------
 AM_ACLOCAL_INCLUDE(macros)
 
 dnl -------------------------------------------------------------------
-dnl The standard ./configure checks and a check for the usleep()-func.
+dnl The standard checks for the compiler and the X includes/libs.
 dnl -------------------------------------------------------------------
 
 GNOME_INIT
@@ -21,7 +21,6 @@ AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
-AC_CHECK_FUNCS(usleep)
 GNOME_X_CHECKS
 
 dnl -------------------------------------------------------------------
