@@ -1062,7 +1062,7 @@ static void remove_translation(gpointer message, gpointer useless)
 	
 	if(msg->status & GTR_MSG_STATUS_FUZZY)
 	{
-		msg->status &= ~GTR_MSG_STATUS_FUZZY;
+		gtranslator_message_status_set_fuzzy(msg, FALSE);
 		internal_change=TRUE;
 	}
 

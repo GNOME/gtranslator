@@ -1,6 +1,11 @@
 2001-09-04  Fatih Demir <kabalak@gtranslator.org>
 
-	* about.c: Added Emese Kovacs to the authors section for her docs.
+	* parse.c: If a message was fuzzy during translation removal set
+		it's status to non-fuzzy afterwards in "remove_translation".
+
+	* about.c: Added Emese Kovacs to the authors section for her
+		documentation and "grouped" Kevin as the "Messages table"
+		 representative exec developer ,-)
 
 	* message.c: Free the comment via "gtranslator_comment_free" and
 		not via a simple "GTR_FREE" in "gtranslator_message_free".
