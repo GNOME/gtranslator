@@ -25,9 +25,11 @@ endif
 
 if USE_GAL_GUI
 gal_cflags = $(GAL_CFLAGS) -DUSE_GAL_GUI=7
+gal_sources = shortcutbar.c shortcutbar.h
 gal_libs = $(GAL_LIBS)
 else
 gal_cflags =
+gal_sources =
 gal_libs = 
 endif
 
@@ -73,6 +75,7 @@ gtranslator_SOURCES = \
 	parse.c	parse.h \
 	prefs.c prefs.h \
 	session.c session.h \
+	$(gal_sources) \
 	update.c
 
 gtranslator_LDADD = \

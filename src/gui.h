@@ -28,15 +28,6 @@
 #endif
 
 /*
- * The generally used EShortcutModel.
- */ 
-#ifdef USE_GAL_GUI
-#include <gal/shortcut-bar/e-shortcut-bar.h>
-
-EShortcutModel *model;
-#endif
-
-/*
  * The globally needed widgets
  */
 

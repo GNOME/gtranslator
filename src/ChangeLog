@@ -1,3 +1,13 @@
+2001-02-04  Fatih Demir	<kabalak@gmx.net>
+
+	* gui.c, gui.h, parse.c: Removed the locally defined
+		shortcut bar stuff as we do now have general
+		 handles for it in shortcutbar.c/.h.
+
+	* Makefile.am: Integrate the new sources conditionally.
+
+	* shortcutbar.c/.h: New sources for shortcut bar stuff.
+
 2001-02-03  Fatih Demir	<kabalak@gmx.net>
 
 	* open-differently.c: Corrected the opening of the "special"
