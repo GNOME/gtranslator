@@ -71,7 +71,7 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy);
 /**
 * The internally used parse-function
 **/
-void parse(const char *po);
+void parse(const gchar *po);
 
 /**
 * Callbacks for the widgets
@@ -92,6 +92,11 @@ void compile(GtkWidget * widget, gpointer useless);
 * Converts the dot chars to free spaces.
 **/
 void undotchar(gchar *text);
+
+/**
+* Opens the given mo-file....
+**/ 
+void gtranslator_open_mo_file(gchar *file);
 
 /**
 * The update function.

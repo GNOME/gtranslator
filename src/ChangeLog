@@ -1,3 +1,20 @@
+2000-12-06  Fatih Demir	<kabalak@gmx.net>
+
+	* main.c: Determine if the given file has got 
+		the suffix ".mo" and open it with the
+		 new function.
+
+	* parse.c/.h: Added the a new function
+		( gtranslator_open_mo_file ), which opens up
+		   a mo-file ( the compiled gettext files )
+		    by calling msgunfmt and tee'ing it's output
+		     to a temporary file...
+		Changed the arguments of a file from being
+		 "const char *" to "const gchar *", added a
+		  saving part for the mo-file function which
+		   gets it's informations from the "temp_po_file"
+		    name which should only be used temporarily.
+
 2000-12-05  Fatih Demir	<kabalak@gmx.net>
 
 	* main.c: Added more VFS stuff, so it

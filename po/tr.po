@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.31\n"
-"POT-Creation-Date: 2000-12-05 22:30+0100\n"
-"PO-Revision-Date: 2000-12-03 16:25+0100\n"
+"POT-Creation-Date: 2000-12-06 16:25+0100\n"
+"PO-Revision-Date: 2000-12-06 16:26+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -658,12 +658,12 @@ msgstr "GConf baþlama hatasý: `%s'."
 #. *
 #. * Print out a warning that GnomeVFS didn't work somehow.
 #. *
-#: src/main.c:224
+#: src/main.c:223
 #, c-format
 msgid "Couldn't open `%s' via GnomeVFS!"
 msgstr "`%s''yi GnomeVFS ile açamadým!"
 
-#: src/main.c:228
+#: src/main.c:227
 msgid ""
 "Can't open gzipped po-files as gtranslator was compiled without VFS support!"
 msgstr ""
@@ -678,7 +678,7 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:132 src/parse.c:490
+#: src/parse.c:132 src/parse.c:515
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" hiç yok ki !"
@@ -733,7 +733,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:535
+#: src/parse.c:560
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -744,11 +744,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:543
+#: src/parse.c:568
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþiksiz"
 
-#: src/parse.c:613
+#: src/parse.c:638
 #, c-format
 msgid ""
 "File %s\n"
@@ -757,11 +757,11 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:650
+#: src/parse.c:675
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
 
-#: src/parse.c:675
+#: src/parse.c:700
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -770,22 +770,30 @@ msgstr ""
 "%s baþarýyla\n"
 "denetlendi"
 
-#: src/parse.c:693
+#: src/parse.c:718
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:790
+#: src/parse.c:815
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
 
-#: src/parse.c:910
+#: src/parse.c:935
 msgid "An update would cause no changes."
 msgstr "Bir yenileme hiç bir deðiþikliðe yol açmazdý."
 
-#: src/parse.c:928
+#: src/parse.c:953
 msgid "The update was successfull."
 msgstr "Yenileme baþarýlý oldu."
+
+#. *
+#. * "Misuse" cmd
+#. *
+#: src/parse.c:1067
+#, c-format
+msgid "Couldn't open mo-file `%s'!"
+msgstr "Mo dosyasý `%s''yi açamadým!"
 
 #: src/prefs.c:206
 msgid "gtranslator -- options"
@@ -1020,8 +1028,7 @@ msgstr "dil_kodu"
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr "
-"...\n"
+"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
 
 #. *
 #. * Print some more exact informations on the GConf init-error.
@@ -1308,3 +1315,4 @@ msgstr ""
 "Akýllý sihirbazýmýz bize iþ bitmiþtir diyor..\n"
 "\n"
 "Inþallah bu doðrudur..."
+

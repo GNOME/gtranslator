@@ -193,8 +193,7 @@ int main(int argc, char *argv[])
 				* Get a temporary filename.
 				**/
 				tempfilename=g_strdup_printf("%s/%s#gzip", 
-					((g_getenv("TMPDIR"))?
-						g_getenv("TMPDIR"):"/tmp"),
+					"/tmp",
 					gnome_vfs_uri_get_basename(gzipfile));
 				tempfile=gnome_vfs_uri_new(tempfilename);
 				/**
@@ -230,7 +229,25 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				parse(args[0]);
+				/**
+				* Check if it seems to be a mo-file ;-)
+				**/
+				if((args[0][strlen(args[0])-1]=='o') &&
+					(args[0][strlen(args[0])-2]=='m') &&
+					(args[0][strlen(args[0])-3]=='.'))
+				{
+					/**
+					* Open the mo-file via a new routine
+					**/
+					gtranslator_open_mo_file((gchar *) args[0]);
+				}
+				else
+				{
+					/**
+					* Open up the plain po-file.
+					**/
+					parse(args[0]);
+				}
 			}
 		}
 	}
