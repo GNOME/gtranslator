@@ -43,7 +43,7 @@ main (int argc, char *argv[])
 
 	#ifdef NEWER_NV_STANDARD_MAIN
 	return nautilus_view_standard_main("nautilus-gtranslator-view", VERSION,
-					    "gtranslator", GNOMELOCALEDIR,
+					    PACKAGE, GNOMELOCALEDIR,
 					    argc, argv,
 					    FACTORY_IID, VIEW_IID,
 					    nautilus_view_create_from_get_type_function,
