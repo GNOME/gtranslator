@@ -1,25 +1,55 @@
+2000-07-07  Fatih Demir	<kabalak@gmx.net>
+
+	+	Added the G_LOG_DOMAIN define for the build
+		
+		of gtranslator.
+			
+		-> Makefile.am
+
 2000-07-06  Fatih Demir	 <kabalak@gmx.net>
 
-	+	Added another Spinbutton with which you can
+	+	Forget all this long if()-trees, we don't need
 	
-		define the challenge length within the query
+		this ones; removed almost all as we do only need
+	
+		the one which is important.
+	
+	+	Use the existing static gtr_header and don't
+	
+		allocate, assign etc. the values and structures.
+
+		-> header_stuff.c
+
+	+	Bloat this menu with stock pixmaps.
+
+	+	Extended the menus with a real messages status
 		
-		dialog.
+		menu tree which represents the possible stati of
+		
+		a message entry.
 	
 	+	Adding another menu-subtree from where you can
-		
+	
 		define the msg_status field of every message.
 	
 		[ Only foo'ish for now .... ]
 	
+		-> gui.c
+	
+	+       Added another Spinbutton with which you can
+
+                define the challenge length within the query
+
+                dialog.
+	
 	+	Get the challenge-length from the Spinbutton
-		
+	
 		for querying the messages db.
-		
+	
 		-> gtr_dialogs.c
 	
 	+	Corrected a typo at the `--challenge-length'
-		
+	
 		option.
 	
 		-> main.c
@@ -27,37 +57,37 @@
 2000-07-04  Fatih Demir  <kabalak@gmx.net>
 
 	+	Disable the corresponding menu entries
-		
+	
 		also if no file is open.
-		
+	
 		-> gui.c
 
 	+	Added another option to specify the
-		
+	
 		desired minimun match length ( aka.
-		
+	
 		challenge length).
 	
 	+	Perform a little check before applying
-		
+	
 		the default challenge length.
 	
 	+	Set the default challenge value on
-		
+	
 		startup to 2.
-		
+	
 		-> main.c
 
 	+	Two new routines which are setting the
-		
-		challenge length ( the length of the 
-		
+	
+		challenge length ( the length of the
+	
 		strncasecmp-calls while retrieving the
-		
+	
 		results for the query. ).
-		
+	
 	+	Introduced a new variable which holds the
-		
+	
 		correspending value for the strncasecmp call.
 	
 	+	Use this value for the strncasecmp call.
@@ -65,9 +95,9 @@
 		-> msg_db.c
 	
 	+	Added the variable and the two prototypes for
-		
+	
 		the new functions and the new variable.
-		
+	
 		-> msg_db.h
 
 2000-06-30  Fatih Demir  <kabalak@gmx.net>
@@ -87,29 +117,29 @@
 2000-06-27  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Added the size returning function for
-		
+	
 		the messages db handling.
-		
-		-> msg_db.c	
+	
+		-> msg_db.c
 	
 	+	Removed the free/malloc stuff from the
-		
+	
 		header routines.
-		
+	
 		-> header_stuff.c
 
 2000-06-14  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed dummy.po from the repo and from
-		
+	
 		the .cvsignore.
-		
+	
 		-> .cvsignore
 	
 	+	Do the same again like weeks before,
-		
+	
 		fill up the structure.
-		
+	
 		-> header_stuff.c
 
 2000-06-12  Fatih Demir  <kabalak@gmx.net>
@@ -117,27 +147,27 @@
 	+	Removed the ifdef for the header routines.
 	
 	+	Started to work on `real'( TM ;) ) header
-		
+	
 		routines.
-		
+	
 		-> header_stuff.c
 
-	+	Get the message only then to the list 
-		
+	+	Get the message only then to the list
+	
 		of it's a msg-block.
-			
+	
 		[ I love this font-shadowing from Eterm,
-		
+	
 		 my CPU doesn't but that's another point.]
 	
 	+	Hmm, do some more widget work.
-		
-		-> parse.c	
+	
+		-> parse.c
 
 2000-06-11  Fatih Demir  <kabalak@gmx.net>
 
 	+	Take the string length of the temp_char
-		
+	
 		as array length.
 	
 	+	Use two other gchar's for the operations.
@@ -147,21 +177,21 @@
 		-> parse.c
 
 2000-06-10  Fatih Demir  <kabalak@gmx.net>
-        
+ 
 	+	Use a generally fresh allocated gchar for
-		
+	
 		the parsing routines.
-		
+	
 	+	Corrected a thinking-typo (?).
-		
+	
 		g_strcasecmp -> !g_strcasecmp
 
 		-> parse.c
 
         +       Make the output of '-q' on the cmd-line
-		
+	
 		look a bit better.
-		
+	
 		-> main.c
 
 2000-06-10  Valek Filippov  <frob@df.ru>
@@ -173,15 +203,15 @@
 	+	EURO 2000 >)>)>)>)>)>)>)>)>)>)>)>)>)>)>)
 
 	+	Set the gtr_msg_status field according to
-			
+	
 		the msgid; that's not the most perfect way
-		
-		to do it, but it seemed possible to me. 
+	
+		to do it, but it seemed possible to me.
 
 	+	Use some woohoo to do the strip-off.
 
 	+	Rip the msgid and the msgstr clearly from
-		
+	
 		the gchar.
 	
 		-> parse.c
@@ -189,47 +219,47 @@
 	+	Don't free the gchar as it's still used.
 	
 	+	Made the mentioned gchar not allocated.
-		
-		-> gtr_dialogs.c	
+	
+		-> gtr_dialogs.c
 
 2000-06-09  Fatih Demir  <kabalak@gmx.net>
 
 	+	Highlight the main window during a drop.
-		
+	
 		-> gui.c
 
 	+	Set the window properties and again use
-		
+	
 		the window-icon if possible.
-		
+	
 	+	Adding the query dialog, the widgets
 	
 		and the according routines.
-		
+	
 		-> gtr_dialogs.c/h
 
-	+	Yeah! The message db works now ! 
-		
+	+	Yeah! The message db works now !
+	
 		[ forgot to remove the unneeded char-
-		
+	
 		   length minorification. ]
 
 		-> msg_db.c
 
 	+	Reverted the fake-signal to "activate".
-	    
+	
 		-> prefs.c
 
-	+	Moved main.c to the last place.	
-		
-		-> Makefile.am		
+	+	Moved main.c to the last place.
+	
+		-> Makefile.am
 
 2000-06-08  Fatih Demir  <kabalak@gmx.net>
 
 	+	Also change the ifdef check to a check
-		
+	
 		for GTR_GUI_H.
-		
+	
 		-> gui.h
 
 	+	Moved interface.c/h to gui.c/h.
@@ -237,49 +267,49 @@
 	+	------------------------------------
 
 	+	Changed all msg_db printage to message db
-		
+	
 		as it should be from the beginning on.
-		
+	
 		-> *.c
 	
 	+	Changed the includes from all the files.
-		
+	
 		-> *.h
 
 	+	Changed interface.c/h to gui.c/h.
 	
 	+	Removed support.* really. They'ren't
-		
+	
 		used by neither gtranslator nor from
-		
+	
 		a function of gtranslator.
-		
+	
 		-> Makefile.am
-		
+	
 		-> support.*
 
 	+	Connect the signals, buttons and menu
-		
+	
 		entries with each other.
-		
+	
 		-> interface,c
 
-	+	Changed the field separator from 
-		
+	+	Changed the field separator from
+	
 		';;;' to ';;'.
-		
+	
 		-> msg_db.c
 
 	+	Use another gint to set the maximal
-		
+	
 		message goto value.
-		
+	
 		-> gtr_dialogs.c/h
 	
 	+	Doing the two additional routines.
-		
+	
 	+	Fuzzling with the msgid/str catching
-		
+	
 		routines.
 	
 		-> parse.c
@@ -287,39 +317,39 @@
 2000-06-06  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the forgotten ifdefs for the
-		
+	
 		window-icon stuff.
-		
+	
 		-> *.c
 
 	+	Made the comments to an ifdef.
 	
 	+	Commented out all header stuff.
-		
+	
 		-> header_stuff.c
 
 	+	Made the find dialog a little bit
-		
+	
 		smaller.
-		
-		-> gtr_dialogs.c	
+	
+		-> gtr_dialogs.c
 
 	+	Use g_strconcat rather than strcat.
 
 	+	Implemented the ( hopefully ) good
-		
+	
 		methods for multi-line translations.
 
 	+	Remvoed the final gboolean; it has been
-		
+	
 		replaced by three other gboolean which
-		
+	
 		are also usefull for the recognition of
-		
+	
 		multi-line translations.
 
 	+	Do the same foo for the jump to the
-		
+	
 		first string.
 	
 		-> parse.c
@@ -327,15 +357,15 @@
 2000-06-05  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed an also unnecessary gchar.
-		
+	
 		-> header_stuff.c
 
 	+	Do a little bit better checks while
-		
+	
 		adding entries to the msg_db.
 
-	+	Removed an unneeded integer,	
-		
+	+	Removed an unneeded integer,
+	
 		-> msg_db.c
 
 2000-06-04  Fatih Demir  <kabalak@gmx.net>
@@ -345,77 +375,77 @@
 	+	Added a separator to the file menu.
 
 	+	Added some more menu entries to be in
-		
+	
 		sync with the toolbar.
 
 	+	Connected the menu entries also with the
-		
+	
 		new functions.
-		
+	
 		-> interface.c
 
 	+	Include "gnome-window-icon.h" only if
-		
+	
 		it's available on the system.
-		
+	
 		-> interface.h
 	
 	+	Removed all // GTR_* comments from the
-		
+	
 		ifdefs as they'ren't ANSI-C conform.
-		
+	
 		-> *.h
 
 	+	Hey, do only get (g_list_length-1)nth
-		
-		data. 
+	
+		data.
 	
 	+	Disable the corresponding button if we're
-		
+	
 		at the first/last entry.
 
-	+	Implementing the button-callbacks as 
-		
+	+	Implementing the button-callbacks as
+	
 		functions.
 
 	+	Reverted the recognition of the error-
-		
+	
 		case.
 	
 	+	Removed the ifdef, so we can now again
-		
+	
 		watch gtranslator crashing...
-		
+	
 		-> parse.c
 	
 	+	Reverted to the old mechanism.
-		
+	
 		-> header_stuff.c
 
 	+	Adjust the dialog size.
 
 	+	Create a table holding the widgets for the
-		
+	
 		Find-dialog.
 	
-	+	You can only "goto" till the last entry of 
-		
+	+	You can only "goto" till the last entry of
+	
 		the list, so carry it as an argument to the
-		
+	
 		core-function.
-		
+	
 	+	Fill out the find dialogs.
 	
 		-> gtr_dialogs.c
 
 	+	Made some text-output non-translatable, e.g. the '\n''s.
-		
-		They'll be printed with another g_print, just to avoid 
-		
+	
+		They'll be printed with another g_print, just to avoid
+	
 		more work for the translators.. ;)
 
 	+	Made the option working and restructured the init a
-		
+	
 		bit.
 	
 	+	Quit after the query before any GUI-element is loaded.
@@ -423,19 +453,19 @@
 	+	Print the query & the result.
 
 	+	Added a for-the-moment dummy option '-q' / '--query'
-		
+	
 		which will be used to query the msg_db for entries
 	
 		without starting the whole GUI. Possibly ...
-		
+	
 		-> main.c
 
 2000-06-03  Fatih Demir  <kabalak@gmx.net>
 
 	+	Make first a check if it exists yet, and
-		
-		it it doesn't exist, print a message and open	
-		
+	
+		it it doesn't exist, print a message and open
+	
 		it with creation flags.
 
 	+	Create the msg_db, if necessary.
@@ -443,40 +473,40 @@
 		-> msg_db.c
 
 	+	Set the window-icon in every popup-dialog.
-		
+	
 		-> gtr_dialogs.c
-		
+	
 		-> prefs.c
 
 	+	Don't free/alloc a temporary char.
-		
+	
 		[ Avoids another crash. ]
 
 	+	Set the first element to '\0' in inp.
-		
+	
 		-> header_stuff.c
 	
 	+	Define and use the WINDOW_ICON defines.
-		
+	
 		-> Makefile.am
 	
 	+	Set the default window-icon.
-		
+	
 		-> interface.c
 
 	+	Disable the msg-parsing for today.
 	
 	+	Cat the strings, don't copy them.
-		
+	
 		-> parse.c
 	
 2000-06-01  Fatih Demir  <kabalak@gmx.net>
 	
 	+	The same for the header-routines.
-		
+	
 		-> header_stuff.c
 
-	+	Recognized the most stupid error in 
+	+	Recognized the most stupid error in
 
 		the parse code.
 	
@@ -487,17 +517,17 @@
 2000-05-30  Fatih Demir  <kabalak@gmx.net>
 
 	+	Use a temporary gchar* as a bridging
-		
+	
 		variable for the msg_db location.
 
 	+	Removed the "hard-coded" msg_db stuff.
-		
+	
 		-> msg_db.c/h
 
 	+	Removed the MSG_DB definition as it's
-		
+	
 		now made more pratically with an option
-		
+	
 		or in the user's dir.
 	
 		-> Makefile.am
@@ -505,33 +535,33 @@
 	+	Print out a string-based error message
 	
 		and not only the error number which isn't
-		
+	
 		quite useful.
-		
+	
 		-> parse.c
 
 	+	Set the widget sizes to be more nice, as we
-		
+	
 		surely want to be able to read the mini-window
-		
+	
 		titles without resizing.
 
 	+	Added a basic search dialog which is really
-		
+	
 		poor in this state.
-		
+	
 		-> gtr_dialogs.c/h
 
 	+	Show a little message before doing the quit.
 
-	+	Connected the additional signals for the 
-		
+	+	Connected the additional signals for the
+	
 		find dialog.
 
 	+	Added another button to the search-bar; an
-			
+	
 		`Add'-button which adds the current message
-		
+	
 		pair to the msg_db.
 
 	+	Connect the corresponding function with the
@@ -541,77 +571,77 @@
 	+	Free the freshly allocated gchar's.
 
 	+	Added another function which is a callback
-	    
+	
 		function in between adding the entries to
-		    
+	
 		the msg_db and the corresponding button.
-		
+	
 	+	Close the msg_db on quit, if the msg_db has
-	    
+	
 		been inited/opened.
-		    
+	
 		-> interface.c
 
 	+	Check for the msg_db option and do some checks.
 
         +       Init the crappy-but-self-written
-                
+ 
                 msg_db-routines on startup.
-                
+ 
                 -> main.c
 
 2000-05-28  Fatih Demir  <kabalak@gmx.net>
 
         +       Freed the filenames list and added
-                
+ 
                 some comments.
-                        
+ 
                 -> dnd.c
 
-	+	Hooked an accelerator to the website 
-		
+	+	Hooked an accelerator to the website
+	
 		menu-entry.
-		
+	
 		-> interface.c
 
 	+	Made the edit_header_create()-function
-		
+	
 		call a reference to the existing structure.
 
         +       Moved the check-button outside the table
-            
+ 
                 and into the vbox.
 
         +       Added a check-button which lets you use
-                
+ 
                 your personal options defined in the Preferences
-                    
-                section to fill out the header. 
+ 
+                section to fill out the header.
 
 	+	Moved some variable declarations around.
 	
-	+	Trying to get the header_stuff working.	
-		
-	+	Allocate the structure freshly via a 
-		
+	+	Trying to get the header_stuff working.
+	
+	+	Allocate the structure freshly via a
+	
 		new function.
 
 		-> header_stuff.c/h
 
 2000-05-26  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added some other gint's which are 
-		
+	+	Added some other gint's which are
+	
 		holding the stored geometry defitions,
-		
+	
 		if this is wished.
-		
+	
 	+	Read & write the geometry definitions.
-		
+	
 		-> prefs.c/h
 
-	+	Set the geometry  from the prefs & 
-		
+	+	Set the geometry  from the prefs &
+	
 		the stored place.
 	
 	+	Read the stored geometry defitions.
@@ -619,63 +649,63 @@
 		-> main.c
 	
 	+	Made the Gtk+ entry-boxes to GNOME
-		
+	
 		entry-boxes and added a table holding
-		
+	
 		all the nice entry-boxes and the labels.
 
 	+	Adding the first entry-boxes which
-		
+	
 		are holding the parsed informations.
-		
-		-> header_stuff.c	
+	
+		-> header_stuff.c
 	
 	+	Removed another crash reason; the check
-		
+	
 		for the filename is now only done by an
-		
+	
 		assertation (!=NULL), nothing more.
 
 	+	Make the Goto button also sensitive;
-		
+	
 		disable it if no po-file is opened.
-		
+	
 		-> interface.c
 
 2000-05-25  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the header-button to the list
-		
+	
 		of the widgets which are disabled if
-		
+	
 		no file is open.
 
 	+	Connected the buttons & menu entry
-		
+	
 		with the new functions.
-		
+	
 		-> interface.c
 
 	+	Playing around with some widgets in order
-		
+	
 		to get a dialog in this week.
 	
 	+	Do a little check before starting to produce
-		
+	
 		dozains of widgets and the dialog.
 
 	+	Let the buttons be stock buttons.
 
 	+	Created the dialog and inserted some
-		
+	
 		parts of it.
 
 	+	Adding some widgets and the routines
-		
+	
 		for the Header edit dialog.
 	
-	+	Made the header structure again to 
-		
+	+	Made the header structure again to
+	
 		a non-pointer.
 	
 		-> header_stuff.c/h
@@ -687,7 +717,7 @@
 	+	-----------------------------------
 	
 	+	Moved the static gtr_header to the header.
-		
+	
 		-> header_stuff.c/h
 
 	+	Assign the strings via g_strdup().
@@ -695,189 +725,189 @@
 	+	Make the structure be a structure-pointer.
 	
 	+	Added some g_prints just for my infor-
-		
+	
 		mation what's going on.
-		
+	
 		-> header_stuff.c
 
-	+	Removed the yazoo-test option and 
-		
+	+	Removed the yazoo-test option and
+	
 		the corresponding variable.
 	
 		-> main.c
 
 	+	Added the `Header' entry to the edit-menu.
-		
+	
 	+	Added a help-menu entry for the homepage.
 	
 	+	No crashing anymore!
 	
 	+	Added an ion for the `Clear' entry in the
-		
+	
 		edit-menu.
 	
 	+	Added Ctrl-K shortcut to the Clear-item.
-		
+	
 		-> interface.c
 
 	+	Allocate the structure via g_new.
 
 	+	Again reverted to NOT produce dozains
-		
+	
 		of structures.
-		
+	
 		-> parse.c
 
 	+	Make a check before executing msgfmt;
-		
-		should avoid a crash.
-		
-		-> interface.c	
 	
-	+	Insert the current filename to the static 
-		
+		should avoid a crash.
+	
+		-> interface.c
+	
+	+	Insert the current filename to the static
+	
 		gchar variable `i_love_this_file'.
-		
+	
 		-> main.c/parse.c
 
 2000-05-23  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the X-Generator header information
-		
+	
 		field from the structure and the header-
-		
+	
 		parsing routine.
-		
+	
 		-> header_stuff.c/h
 
 	+	Ha, another crash again...
 
 	+	Thinking about the removal of some seem-
-		
+	
 		to-be unnecessary includes.
-		
+	
 		-> *.h
 
 	+	Removed the pf-structure as it seems to
 	
 		be useless.
 	
-	+	Introduced another static gchar -- the 
-		
+	+	Introduced another static gchar -- the
+	
 		filename.
 	
 	+	Making the parse-routine again produce
-		
-		dozains of structure's.	
-		
+	
+		dozains of structure's.
+	
 		-> parse.c
 	
 2000-05-21  Fatih Demir  <kabalak@gmx.net>
 
 	+	Doing all the if's and cut's for the
-		
+	
 		header and filled the informations into
-		
+	
 		the header_structure.
 
 	+	Create a structure which holds all
-		
+	
 		these informations.
 	
 	+	Added some debug-g_print's.
 
 	+	Put the header-cutting routine(s) in
-			
+	
 		the header_stuff and while parsing the
-		
+	
 		file, gtranslator calls only this function.
 
 		-> header_stuff.c/h
 	
 	+	Removed the [c]-things and will try
-		
+	
 		it again with GLists.
 
 		-> parse.c
 
 2000-05-20  Fatih Demir  <kabalak@gmx.net>
 
-	+	Changed the gtk_main_quit()-calls to 
-		
+	+	Changed the gtk_main_quit()-calls to
+	
 		gtranslator_quit()-calls.
 
 	+	A new exit-function: gtranslator_quit.
-		
+	
 		It should ( and does ) save some settings
-		
+	
 		and will make some checks in the future.
-		
-		-> interface.c/h 
+	
+		-> interface.c/h
 
 	+	Added the widgets & variables needed for
-		
+	
 		the new option.
 
 	+	Making the geometry-string static.
 
 	+	Added another option to the prefs if to
-		
+	
 		save the geometry( string ).
-		
+	
 		-> prefs.c/h
 
 	+	Added a static gchar holding the current
-		
+	
 		po-files name.
-		
+	
 		-> messages.h
 
 	+	Applied the header-functions skeleton
-		
+	
 		to the new structure.
-		
+	
 		-> header_stuff.c
 
-	+	Added a new structure for the header 
-		
+	+	Added a new structure for the header
+	
 		informations and added also a typedef.
-		
+	
 		-> header_stuff.h
 
 	+	Made the goto-box a little bit more
-		
+	
 		real; change d the Goto-button to a normal
-		
+	
 		Gtk+-button as the GNOME-Stock button isn't
-		
+	
 		available with a search-pixmap.
 	
 		-> gtr_dialogs.c
 
 	+	Print a warning if the geometry-string
-		
+	
 		couldn't be parsed.
 
 	+	Parse for a geometry-parameter and set
-		
+	
 		the necessary values.
-		
+	
 		-> main.c
 
 	+	Get plain-text drop's as a msgstr.
-		
-		[ though I'm thinking about what it 
-		
+	
+		[ though I'm thinking about what it
+	
 		brings ... ]
 	
 	+	Added plain text as  a D'n'D type.
-		
+	
 		-> dnd.c/h
 
 	+	Set the global po-file name.
 	
 	+	Removed the geekPrint function.
-		
+	
 		-> parse.c/h
 
 2000-05-18  Fatih Demir  <kabalak@gmx.net>
@@ -886,34 +916,34 @@
 	
 		-> parse.c
 	
-	+	Connected the right functions with the 
-		
+	+	Connected the right functions with the
+	
 		buttons. One crash less.
-		
+	
 		-> interface.c
 
 2000-05-17  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Binding the new dialogs to the buttons.
-		
+	
 		-> interface.c
 
 	+	Implementing the other dialogs.
 	
 	+	Save&load the history of the search-entry.
-		
+	
 		-> gtr_dialogs.c/h
 
 	+	Cleaned up D'n'D code and made it working ;-|.
-		
+	
 		Almost working...
-		
+	
 		-> dnd.c
 	
 	+	Include the necessary headers and disclude the
-		
+	
 		unneeded things.
-		
+	
 		-> dnd.h
 	
 	+	Reverted the zamane-char stuff.
@@ -921,35 +951,35 @@
 2000-05-16  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the new files to the Makefile.am.
-		
+	
 		-> Makefile.am
 
 	+	Corrected a malformed signal_connect.
 
 	+	Adding D'n'D sources.
-		
+	
 		-> dnd.c/h
 
 	+	Changed the count variables type to static gint.
 
-	+	Restructured the first/back/next/last-msg-calls	
-		
+	+	Restructured the first/back/next/last-msg-calls
+	
 		to represent the "structured"-parsing.
 	
 	+	Removed all g_list stuff. It isn't compatible
-		
+	
 		with my brain!
 
 	+	Removed some unneeded GList's and changed
-		
+	
 		the head GList to a GSList.
-		
+	
 		-> parse.h
 
 	+	Creation and filling into the strcuture
-		
+	
 		fields ( aka "parsing" ) is theoretically
-		
+	
 		done.
 	
 	+	Removed the useless counting-variables.
@@ -963,68 +993,68 @@
 2000-05-15  Fatih Demir  <kabalak@gmx.net>
 
 	+	Changed the cancel-button to a stock-button.
-		
+	
 		-> gtr_dialog.c
 
 	+	Try to get the header with some nonsense.
 
 	+	Adding some test routines for the list-stuff.
-			
-		-> parse.c	
+	
+		-> parse.c
 
 2000-05-14  Fatih Demir  <kabalak@gmx.net>
 
 	+	Adding the search-box routines & widgets.
-		
+	
 		-> gtr_dialogs.c/h
 
 	+	Connected the search-button with the search
-		
-		button.	
+	
+		button.
 
 		-> interface.c
 
 	+	Removed some previous list-tries.
-		
+	
 	+	Removed the gnome_appbar refreshing method.
 
-	+	A stupid typo; now the strings are read, 
-		
+	+	A stupid typo; now the strings are read,
+	
 		but why does the list only accept the first ?
 	
 	+	Starting a rewrite of the parsing-
-		
+	
 		routine;will write it till it works. (?)
-		
+	
 		-> parse.c/h
 
 
 2000-05-13  Fatih Demir  <kabalak@gmx.net>
 
 	+	Disable the buttons at startup and enable
-		
+	
 		them if a po-file is opened.
 	
 	+	Added two functions which do the work for
-		
+	
 		the `idea' above.
-		
+	
 		-> interface.c/h
 
 	+	Set also some statusbar message while
-		
+	
 		opening dialogs
-		
+	
 		-> gtr_dialogs.cs
 
 	+	Moved an include to the header
-		
+	
 		-> msg_db.c/h
 	
 	+	Doing some stupid work...
 
 	+	Calling a usleep for a better readability
-		
+	
 		of the status message
 	
 	+	Having a problem with the list methods...
@@ -1033,60 +1063,60 @@
 
 2000-05-12  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added a function-`skelleton' which will 
+	+	Added a function-`skelleton' which will
 	
-		be important for the next time as it puts 
-		
+		be important for the next time as it puts
+	
 		informations to the opened po-file with the
-		
+	
 		necessary format( hopefully ).( 'last update )
 
 	+	A first try to get the time/date and to replace
-		
-		the old entry in the header-list. 
-		
+	
+		the old entry in the header-list.
+	
 		-> header_stuff.c/h
 
 	+	Removed the old msgfmt-execution code
-		
-		as I'll integrate the new messages 
-		
+	
+		as I'll integrate the new messages
+	
 		structures ( they seem to work ).
-		
+	
 		-> interface.c
 
 	+	Changed the name of the gtr_msg_status
-		
+	
 		variable I've used status somewhere
-		
+	
 		else ( -> interface.c ).
-		
-	+	Adding some more types and future 
-		
+	
+	+	Adding some more types and future
+	
 		work to be done.
 	
 		-> messages.h
 
 	+	Put the header-includes to the header
-		
+	
 		itself
-		
+	
 		-> parse.h
 	
 	+	Implementing a very, very rough way to get
-		
+	
 		the structures filled.
 
-	+	Corrected an error which caused it 
-		
+	+	Corrected an error which caused it
+	
 		to crash on startup.
-		
+	
 		-> parse.c
 	
-	+	Also reformatted some forgotten parts 
-		
+	+	Also reformatted some forgotten parts
+	
 		of the files.
-		
+	
 		-> *.c/h
  
 2000-05-11  Fatih Demir  <kabalak@gmx.net>
@@ -1096,7 +1126,7 @@
 		-> *.c/h
 	
 	+	Playing around with a new structure.
-		
+	
 		-> messages.h
 
 2000-05-10  Fatih Demir  <kabalak@gmx.net>
@@ -1108,9 +1138,9 @@
 		-> interface.c/h
 	
 	+	Added another option to define the msg_db
-		
-		to use on the command-line with the `-m' / 
-		
+	
+		to use on the command-line with the `-m' /
+	
 		`--msg_db' options.
 	
 		-> main.c
@@ -1118,59 +1148,59 @@
 2000-05-09  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a rough method of getting an entry from
-		
+	
 		the msg_db; nothing big but it should work
-		
+	
 	+	Added some translatable strings
 	
 		-> msg_db.c
 
 	+	Added a forgotten '\' to the help-message for
-		
+	
 		the prefs_box
 	
-		[ while building the gtranslator.pot there 
-		
-		aren't any warning messages any more. And the 
-		
-		message is now also translatable. ]	
+		[ while building the gtranslator.pot there
+	
+		aren't any warning messages any more. And the
+	
+		message is now also translatable. ]
 	
 		-> gtr_dialogs.c
 
 	+	Connected the --file= & -f options
-		
+	
 		with the parse()-function.
-		
+	
 		[ Now you can start gtranslator with
-		
-		gtranslator -f xy.po and it reads the 
-		
-		xy.po at the startup ] 
+	
+		gtranslator -f xy.po and it reads the
+	
+		xy.po at the startup ]
 
 	+	Added short-form options
 
-	+	Added a popt-table with the options for 
+	+	Added a popt-table with the options for
 	
 		gtranslator; not quite useful for now but
-		
-		the use will grow later on.	
+	
+		the use will grow later on.
 
 	+	Bind them to the main-function
 	
 	+	Connect the new Sessionmanagement-functions
-		
+	
 		-> main.c
 
 	+	Added Sessionmanagement functions & files
-		
+	
 		-> session.c/h
 
 	+	Added my dummy.po testfile to the cvsignores
-		
+	
 		-> .cvsignore
 
 	+	Added different #ifndef/#define and #endif's
-		
+	
 		-> *.h
 
 	+	Corrected the variable names to be correct.
@@ -1180,25 +1210,25 @@
 	+	Added the cut/copy/paste/clear callbacks
 	
 	+	Connected them with the menu entries
-		
+	
 		-> interface.c/h
 
 	+	Made it a dummy file which'll be used when I've
-		
+	
 		got the po-functions working; the header routines
-		
-		will go there, e.g. the automatic update of the 
-		
-		translation time etc. 
+	
+		will go there, e.g. the automatic update of the
+	
+		translation time etc.
 
-	+	Also a complete rewrite 
-		
-		-> header_stuff.c/h	
+	+	Also a complete rewrite
+	
+		-> header_stuff.c/h
 
 	+	Put the parse()-routine to an own function because
-		
+	
 		of the cmd-line option -f/--file= which allows
-		
+	
 		you to specify a startup file.
 
 	+	Remove the get_header()-call.
@@ -1208,11 +1238,11 @@
 	+	Rewriting the complete parse-methods
 	
 	+	Using GList's for the different context-types
-		
+	
 	+	Adding different elements etc. ..
 	
 	+	Removed the old and unnecessary variables
-		
+	
 		and functions.
 	
 		-> parse.c/h
@@ -1224,15 +1254,15 @@
 2000-05-08  Fatih Demir  <kabalak@gmx.net>
 
 	+	Changed `due' to Pablo's EMail the English
-		
+	
 		encodings and all other encodings to 8bit.
 
 	+	Changed and edited some entries like told.
 	
 	+	Added the Croatian group's EMail address
-		
+	
 		[ `due' to their control-center translation ]
-		
+	
 		-> languages.h
 
 2000-05-08  Karl Eichwalder  <ke@suse.de>
@@ -1241,39 +1271,39 @@
 
 2000-05-07  Fatih Demir  <kabalak@gmx.net>
 
-	+	Reformatted all plain-messages to be 
-		
+	+	Reformatted all plain-messages to be
+	
 		more friendly and English ( no spaces
-		
+	
 		before punctuations .. ).
 	
 		-> *.c/h
 	
 	+	Reformatted it and added another information
-		
+	
 		about a language, the bit encoding
 	
 	+	Made almost every entry having a 8bit-encoding
-		
+	
 		as many languages have got a eog translation
-		
+	
 		and in the .po-files there were always 8bit
-		
+	
 		encodings named, but what about Arabic/Farsi ?
-		
+	
 		-> languages.h
-		
+	
 	+	Removed the ifdef for IT_WORKS ..
-		
+	
 		[ I'll see how to get messages.h to work .. ]
 	
-	+	Began to implement the new routines 
+	+	Began to implement the new routines
 
-		[ in a cmd-line test-programm the new 
-		
+		[ in a cmd-line test-programm the new
+	
 		header-routines	worked well except that it gets
-		
-		the header in the reverse order ?!? .. Simply wait .. ]	
+	
+		the header in the reverse order ?!? .. Simply wait .. ]
 
 		-> parse.c/h
 
@@ -1285,108 +1315,108 @@
 
 		-> about.c/h
 	
-	+	Connected the about-box with the 
-		
+	+	Connected the about-box with the
+	
 		"About" menu entry
 	
 	+	Connected the prefs-box showing method
-		
-		with the menu entry and the icon 
+	
+		with the menu entry and the icon
 	
 	+	Call the online help ..
 	
-	+	Open/save file as handlers are now connected 
+	+	Open/save file as handlers are now connected
 	
 		-> gtr_dialogs.c/h
 	
 	+	Include some headers ..
-		
+	
 		-> interface.c
 	
 	+	Prefs_box is complete now ..
 
 	+	Save & apply of the prefs-box is done
-		
+	
 		now
 	
 	+	Autocompletion of the language specs ..
-		
+	
 		[ if `Turkish' is selected the other language
-		
-		specs `tr', `iso-8859-9' etc. are set 
-		
+	
+		specs `tr', `iso-8859-9' etc. are set
+	
 		automatically ]
 
 	+	The languages' names are now appearing
-		
+	
 		localized ...
 
 	+	Writing more and more of it's pieces
-		
+	
 	+	Changed the prefs_box-function to a
-		
-		pure creating routine without any 
-		
+	
+		pure creating routine without any
+	
 		arguments ..
 	
 	+	Added all gui-elements to it .. callbacks
-		
+	
 		are missing ..
-		
+	
 		-> prefs.c/h
 
 2000-05-06  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Include <glib.h> 
-		
+	+	Include <glib.h>
+	
 		-> messages.h
 
 2000-05-05  Fatih Demir  <kabalak@gmx.net>
 
-	+	Use the new structure and forget the 
-		
-		old one 
-		
+	+	Use the new structure and forget the
+	
+		old one
+	
 		-> parse.c
 
 	+	Include gtr_dialogs.h for the help-box
-		
+	
 		-> prefs.c
 
-	+	"Disclude" languages.h 
+	+	"Disclude" languages.h
 	
 	+	Added typedefs for the structures
-		
+	
 	+	Use the gtr_msg_status structure instead
-		
-		of a gboolean to define the translation 
-		
+	
+		of a gboolean to define the translation
+	
 		status ( also changed the variable name )
-		
+	
 		-> messages.h
-		
-	+	Go to the beginning of the file when 
-		
-		trying to get an entry from the msg_db 
-		
+	
+	+	Go to the beginning of the file when
+	
+		trying to get an entry from the msg_db
+	
 		( SEEK_END -> SEEK_SET )
 	
-	+	Removed some FIXMEs ;) 
+	+	Removed some FIXMEs ;)
 
 		-> msg_db.c
 
 	+	Removing all DEBUG entries
-		
+	
 		-> *.c/h
 
 	+	Removed the definition of DEBUG while
-		
+	
 		building .
-		
+	
 		-> Makefile.am
 	
-	+	Include <config.h> and <gnome.h> 
-		
+	+	Include <config.h> and <gnome.h>
+	
 		-> interface.h
 
 	+	Added a missing comma ( ehem .. )
@@ -1395,32 +1425,32 @@
 	
 	+	Corrected the English/* entries ..
 	
-	+	Changed to the N_() macro as the table 
-		
-		has to be const-o-tic .... [ you can 
-		
+	+	Changed to the N_() macro as the table
+	
+		has to be const-o-tic .... [ you can
+	
 		change it to _() and see almost 33 ( additional )
-		
-		error messages on the screen ... ] 
-		
+	
+		error messages on the screen ... ]
+	
 		-> languages.h
 	
 2000-05-04  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Added the entries which were told to me ..
 	
-	+	`Commonified' the iso-entries 
+	+	`Commonified' the iso-entries
 	
-	+	Corrected some wrong entry points 
+	+	Corrected some wrong entry points
 	
 	+	Made the table non-const ( avoiding an error .. )
-		
+	
 		-> languages.h
 
 2000-05-03  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added .*swp files ( vim->my_editor=TRUE )
-		
+	
 		-> .cvsignore
 	
 	+	Corrected some really stupid typos
@@ -1430,178 +1460,178 @@
 		-> languages.h
 	
 	+	Added the function-prototypes into the header
-		
-		-> prefs.h	
+	
+		-> prefs.h
 
 	+	Implemented the first page of the prefs-box
 	
 	+	Added the basic-signals	..
 	
 	+	Split the prefs-box into four fucntions like the
-		
+	
 		dialogs in the gtr_dialogs.c/h files ...
 	
 		-> prefs.c
 
 2000-05-02  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Added languages.h 
+	+	Added languages.h
 	
 		-> Makefile.am
 	
 	+	Added a new source file for the languages
-		
+	
 		and the structure for this
 
 	+	Adding many /*XXX*/ since I've no 'enlightenment'
-		
+	
 		where the different languages have their encoding
-		
+	
 		or group ( possibly all at li.org , but that can't
-		
-		be all, I think .. ) 
-		
+	
+		be all, I think .. )
+	
 		-> languages.h
 	
 	+	Removed the <glib.h>-include
-		
+	
 		-> messages.h
 
 2000-05-01  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added a table with the language names 
+	+	Added a table with the language names
 	
 		-> prefs.c
 
 	+	General reformat of all comments
-		
+	
 		->*.c/h
 
 	+	Changed the list-adding to a (gpointer)
-		
-	+	Getting from the msg_db will also be working 	
-		
+	
+	+	Getting from the msg_db will also be working
+	
 		-> msg_db.c
 
 	+	Adding labels and entries ..
-		
+	
 		-> prefs.c
 
 	+	Added 3 Glist's for the mime_type etc.
-		
+	
 		-> prefs.h
 
 2000-04-30  Fatih Demir  <kabalak@gmx.net>
 
 	+	Began to write the prefs-box ...
-		
+	
 		-> prefs.c
 
 	+	Do another deeply-structured include
-		
+	
 		test for the _() macro definition .
-		
+	
 		-> main.c
 
 	+	Added the $(GLIB_CFLAGS) & $(GLIB_LIBS)
-		
+	
 		in the INCLUDES and LDADD variables
-		
+	
 		-> Makefile.am
-		
+	
 	+	Check if <glib.h> is included and
-		
+	
 		do it if it isn't included yet ..
-		
+	
 		-> messages.h
 
 	+	Include the messages-structure header
-		
+	
 		-> interface.h
 
 2000-04-29  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the ltrace.log file to .cvsignore's
-		
+	
 		list ( I'm using ltrace very often .. )
-		
+	
 		-> .cvsignore
 
 	+	Removed the callbacks.c/h files from
 
 		the SOURCES list .
-		
+	
 		-> Makefile.am
 	
 	+	Corrected a typo in the GnomeUIInfo
-		
+	
 		structures ..
 	
 	+	Readding the most important callbacks here
-		
-		for the main app
-		
-		-> interface.c 
 	
-	+	Removing the callbacks.* files 
-		
+		for the main app
+	
+		-> interface.c
+	
+	+	Removing the callbacks.* files
+	
 		-> callbacks.c/h
-		
+	
 	+	Changed the widget names for the "Cancel"
-			
-		buttons 
+	
+		buttons
 	
 	+	Corrected some callback errors ..
 	
 		-> gtr_dialogs.h
 	
 	+	Removed all callback-calls from the Preferences-
-		
-		box 
+	
+		box
 	
 	+	Rewriting the preferences-box completely new
 
 		-> prefs.c
 
 	+	All callbacks will be handled locally in
-		
-		the files, no extra callbacks file needed 
-			
+	
+		the files, no extra callbacks file needed
+	
 		-> *.c/h
 
 2000-04-27  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Changing all the interface elements
-		
-		internally . 
+	
+		internally .
 	
 		-> interface.c/h
 
 	+	Starting a complete rewrite of the callbacks
-		
+	
 		and the bindings ..
-		
+	
 		-> callbacks.c/h
 
 	+	Outsourced all dialogs to the new files
-		
+	
 		-> interface.c/h
 
-	+	Reorganized all the file_selections 
-		
+	+	Reorganized all the file_selections
+	
 		-> gtr_dialogs.c/h
 
 	+	Changed the callbacks to be more useful
-		
+	
 		and to be in coordination with the reorga-
-		
+	
 		nization .
-		
+	
 		-> callbacks.c/h
 	
 	+	Redoing the preferences box on my own
-		
-		-> prefs.c/h	
+	
+		-> prefs.c/h
 
 	+	Added the new files to the Makefile.am
 	
@@ -1612,19 +1642,19 @@
 		-> prefs.c/h
 	
 	+	Interface.c is very lightened ...
-		
+	
 		-> interface.c
 
 2000-04-19  Fatih Demir  <kabalak@gmx.net>
 
 	+	Made another messages "gettextable"
-		
+	
 		-> parse.c
 
-	+	Changed the variable names for more 
-		
+	+	Changed the variable names for more
+	
 		obviousness ..
-		
+	
 		-> msg_db.c
 	
 	+	Call the new about_box() method ...
@@ -1632,47 +1662,47 @@
 		-> callbacks.c
 
 	+	Added the necessary includes to the new
-		
+	
 		files
-			
+	
 		-> about.c/h gtr_dialogs.c/h
 	
 	+	Added the new files to the Makefile.am
-		
+	
 		-> Makefile.am
 	
 	+	"Outsourced" the about box ...
-		
+	
 		-> about.c/h
 
-	+	Added the functionability for adding 
-			
-		entries to the msg_db 
-		
+	+	Added the functionability for adding
+	
+		entries to the msg_db
+	
 		-> msg_db.c
-		
+	
 	+	Corrected another stupido ; most error/
-		
+	
 		warning messages weren't "gettexted" so
-		
-		they didn't appear in the gtranslator.pot 
-		
-		file for translations ... 
-		
+	
+		they didn't appear in the gtranslator.pot
+	
+		file for translations ...
+	
 		-> msg_db.c
 
-	+	Add two "new" dialogs : 
-		
+	+	Add two "new" dialogs :
+	
 		1) Errors occured while exec. msgfmt
-		
+	
 		2) No changes were made to the .po-file
-		
-		-> gtr_dialogs.c/h 
+	
+		-> gtr_dialogs.c/h
 
 	+	Added two new files which will hold
-		
+	
 		the dialogs ( every dialog ! )
-		
+	
 		-> gtr_dialogs.c/h
 
 	+	Change the callback-bindings ..
@@ -1680,15 +1710,15 @@
 		-> callbacks.c/h
 
 	+	Put away every dialog-box which was
-		
+	
 		produced by GLADE ..
-		
+	
 		-> interface.c/h
 
 2000-04-18  Fatih Demir  <kabalak@gmx.net>
 
-	+	As the status bar works now rightly 
-		
+	+	As the status bar works now rightly
+	
 		we can uncomment the callbacks ...
 	
 		-> callbacks.c
@@ -1696,13 +1726,13 @@
 	+	[ <pre> I love ltrace </pre> ]
 	
 		Corrected a simple error which caused
-		
+	
 		gtranslator to crash everytime
 	
 	+	Added some interface elements
 	
 	+	Corrected a typo in the About box
-		
+	
 		-> interface.c
 	
 2000-04-01  Fatih Demir  <kabalak@gmx.net>
@@ -1712,87 +1742,87 @@
 		-> parse.c callbacks.c interface.c
 	
 	+	Include "parse.h" for check_file()
-		
+	
 		-> msg_db.c
 	
 	+	Exit if the file stream is away via
-		
+	
 		g_error() ...
-		
+	
 		-> parse.c
 	
 	+	Put DEBUG to 2001 to get some debug
-		
+	
 		informations ..
-		
+	
 		-> Makefile.am
 
 2000-03-31  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the toolbar_style definition
-		
-		from the search bar 
+	
+		from the search bar
 	
 		-> interface.c
 
 2000-03-30  Fatih Demir  <kabalak@gmx.net>
 
 	+	The check_file(FILE *) function was
-		
-		better than the new one ; reversed 
-		
+	
+		better than the new one ; reversed
+	
 		this .
 	
 	+	Corrected all dependencies .
-		
+	
 		-> msg_db.c parse.c/.h
 
 	+	Removed some type of comment .
-		
+	
 		-> interface.c
 
 2000-03-27  Fatih Demir  <kabalak@gmx.net>
 
 	+	A pointer was set wrongly in the are_we*
-		
-		function ; the cast is now hopefully 
+	
+		function ; the cast is now hopefully
 
 		well-formed ....
 	
 	+	Added a &-operand to correct another
-		
+	
 		cast error .
 	
 		-> header_stuff.c
 
 	+	Made the second arg for gnome_help_goto
-		
+	
 		to a '0' ( previously it was 'NULL' ).
-		
+	
 		-> callbacks.c
 	
 	+	Let it produce much less compiling-time
 	
 		warnings ;-))
-		
+	
 		-> *.c
 
 2000-03-21  Fatih Demir  <kabalak@gmx.net>
 
 	+	Fixed an error ; use now strcat for
-		
+	
 		the +=operator ...
 	
-	+	Ooops, no '\n' added in the error 
-		
+	+	Ooops, no '\n' added in the error
+	
 		messages anymore .
-		
+	
 		-> parse.c
 
 2000-03-19  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the ka_widget_show macro ..
-		
+	
 		-> interface.c/.h
 	
 	+	Think , I know why I get NULL-casts,
@@ -1809,32 +1839,32 @@
 
 2000-03-15  Fatih Demir  <kabalak@gmx.net>
 
-	+	Check if the linked lists have been 
-		
+	+	Check if the linked lists have been
+	
 		lost .
-		
+	
 		-> msg_db.c
 	
 2000-03-14  Fatih Demir  <kabalak@gmx.net>
 
-	+	Filled in a missing '*' before 
-		
+	+	Filled in a missing '*' before
+	
 		"cur_list" .
-		
-		-> msg_db.h	
+	
+		-> msg_db.h
 
 	+	Added a copyright notice to all source
-		
+	
 		files ..
-		
+	
 		-> *.c/*.h
 	
-	+	Removed the stupido $(GLIB_CFLAGS) and 
-		
-		$(GLIB_LIBS) variables ; they're 
-		
+	+	Removed the stupido $(GLIB_CFLAGS) and
+	
+		$(GLIB_LIBS) variables ; they're
+	
 		already included in the $(GNOME_CFLAGS)
-		
+	
 		and $(GNOME_LIBS) ...
 	
 		-> Makefile.am
@@ -1842,35 +1872,35 @@
 2000-03-14  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the linked lists and the addition
-		
+	
 		of messages to the linked lists ...
 
-		-> parse.c 
-		
+		-> parse.c
+	
 		-> msg_db.h/.c
 
 2000-03-11  Fatih Demir  <kabalak@gmx.net>
 
 	+	Switching over to pure glib , removed
-		
-		any libdyndata stuff 
-		
+	
+		any libdyndata stuff
+	
 		-> *.c/*.h
 
 2000-03-10  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed impossible function
-		
+	
 		-> msg_db.c/.h
 
 2000-03-09  Fatih Demir  <kabalak@gmx.net>
 
 	+	Wrong appbar-type ; CORRECTED .
-		
-		-> interface.c	
+	
+		-> interface.c
 
-	+	Put the old char-stuff to gchar 
-		
+	+	Put the old char-stuff to gchar
+	
 		-> *.c/*.h
 
 	+	Get the geometry of the main window
@@ -1878,8 +1908,8 @@
 
 		-> main.c
 	
-	+	A new ´gchar*´ for the geometry 
-		
+	+	A new ´gchar*´ for the geometry
+	
 		-> interface.h
 
 2000-03-08  Fatih Demir  <kabalak@gmx.net>
@@ -1887,33 +1917,33 @@
 	+	Added a new toolbar with some extra-
 		funcs ( which will be hopefully created
 		in the next time .. )
-		
+	
 		-> interface.c
 
 	+	Added an enum for the different stati
-		a translation entry could have 
-		
+		a translation entry could have
+	
 		-> messages.h
 	
 	+	Changed some macros for producing less
 		warnings because of wrong types .
-		
+	
 	+	Removed the stupid value= pairs ..
 
 		-> callbacks.c
 	
-	+	Corrected a check which caused an 
+	+	Corrected a check which caused an
 		compilation warning
 
 		-> msg_db.c
 	
-	+	Changed some things : 
-		
+	+	Changed some things :
+	
 		-create_wait_for_help()
-		
+	
 		-search_entry*
-		
-		-> interface.c/.h	
+	
+		-> interface.c/.h
 
 		-negative-value check in check_file()
 	
@@ -1924,27 +1954,27 @@
 		-> parse.c
 	
 	+	Made a necessary cast to (char)tmp .
-		
+	
 		-> header_stuff.c
 
 2000-03-07  Fatih Demir  <kabalak@gmx.net>
 
 	+	Adding some new UI-elements ..
-		
+	
 		-> interface.c/.h
-		
+	
 	+	Removing the unnecessary GLADE-
 		style widget_ref's ( they seem not
 		to be needed ... )
 
 		-> interface.c
 
-	+	Removed the fake progress-bar 
-		
+	+	Removed the fake progress-bar
+	
 		-> interface.c
 	
 	+	Oh, a too deep inclusion ; removed it
-		
+	
 		-> messages.h
 	
 	+	A misformed format ; also corrected
@@ -1953,21 +1983,21 @@
 
 	+	Some other misformed includes which lead
 		to 'multiple definition of ...' ; also
-		corrected ( yes , I compiled it today 
-		:-% ; it compiles ! ) .		
-		
+		corrected ( yes , I compiled it today
+		:-% ; it compiles ! ) .
+	
 		-> msg_db.h messages.h
 
 2000-03-06  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a gnome-entry box for searching
 		some messages in the files ..
-		
+	
 		-> interface.c/.h
 	
 	+	Added the a file which includes the
 		pure message structures
-		
+	
 		-> messages.h
 
 	+	Rearranged the message searches ...
@@ -1975,11 +2005,11 @@
 		-> parse.c
 	
 	+	Notified the new widgets ..
-		
+	
 		-> interface.h
 
 	+	Reorganized some header-includes
-		
+	
 		-> parse.h msg_db.h header_stuff.h
 
 	+	Corrected the error within the struct
@@ -1999,7 +2029,7 @@
 
 	+	Added a (void*)-ified compare fucntion
 		ka_comp(const void *,const void *) ,
-		needed for the dyndata routines ..		
+		needed for the dyndata routines ..
 
 		-> parse.c/.h
 
@@ -2012,26 +2042,26 @@
 
 	+	Reformatting all comments for Gnome-
 		style comments ..
-		
+	
 		-> *.c/*.h
 
 2000-02-26  Fatih Demir  <kabalak@gmx.net>
 
 	+	Changed the string-comparing routines
-		to str(n)casecmp for ignoring the 
+		to str(n)casecmp for ignoring the
 		case .
-		
+	
 		-> parse.c
 	
-	+	Pre-Implemented some more db-func- 
+	+	Pre-Implemented some more db-func-
 		tionability ...
-		
+	
 		-> msg_db.h/.c
 
 2000-02-25  Fatih Demir  <kabalak@gmx.net>
 
 	+	Reput the support.h/.c files into
-		CVS , as they appear to be needed 
+		CVS , as they appear to be needed
 		for gnome-HEAD ...
 	
 		-> support.h/.c
@@ -2040,43 +2070,43 @@
 
 		-> Makefile.am
 	
-	+	Reformatting the comments to be 
+	+	Reformatting the comments to be
 		readable ....
-		
+	
 		-> *.c *.h
 
 2000-02-22  Fatih Demir  <kabalak@gmx.net>
 
-	+	Corrected the errors & forgotten 
+	+	Corrected the errors & forgotten
 		variables .
-		
+	
 		-> parse.h parse.c msg_db.c
 
-	+	Reformed the structures 
+	+	Reformed the structures
 
-		-> parse.h msg_db.c msg_db.h 
+		-> parse.h msg_db.c msg_db.h
 	
 	+	Removed the GLADE-produced files since
-		I can't recognize how I could use them 
+		I can't recognize how I could use them
 		....
 	
 		-> support.h/.c
 
 	+	Started to switch-over to libdyndata
-		
-		-> msg_db.c msg_db.h parse.c 	
+	
+		-> msg_db.c msg_db.h parse.c
 
 	
 2000-02-20  Fatih Demir  <kabalak@gmx.net>
 
 	+ 	Made two structures for the po-&
 		message-handling .
-		
+	
 		-> parse.h msg_db.h msg_db.c
 
-	+	Use the new structures for the 
+	+	Use the new structures for the
 		message actions ..
-		
+	
 		-> parse.c header_stuff.c header_stuff.h
 
 
@@ -2087,15 +2117,15 @@
 
 		-> Makefile.am
 
-	+	Two new routines for getting the next 
+	+	Two new routines for getting the next
 		msgid/msgstr .
 
 		-> parse.c parse.h
 
-	+	First ideas/steps for db-functionality 
+	+	First ideas/steps for db-functionality
 
-		-> msg_db.h 
-		
+		-> msg_db.h
+	
 2000-02-16  Fatih Demir  <kabalak@gmx.net>
 
 	+	Made some me-supporting output only
@@ -2104,7 +2134,7 @@
 	
 		-> Makefile.am header_stuff.c
 	
-	+	Removed some old-stuff from the files 
+	+	Removed some old-stuff from the files
 	
 		-> *.c *.h
 
@@ -2114,7 +2144,7 @@
 		the parser .
 	
 	+	Made the char-arrays for the msg***
-		only one-dimensional for further 
+		only one-dimensional for further
 		parser-progress .
 
 		-> parse.c parse.h
@@ -2123,7 +2153,7 @@
 		routines in gtranslator .
 	
 	+	Try to get the header into the 2-dimen=
-		sional ´header´-array ( are there any 
+		sional ´header´-array ( are there any
 		headers which have got >=15 lines ? )
 	
 		-> header_stuff.c header_stuff.h
@@ -2153,8 +2183,8 @@
 		-> parse.c
 	
 	+	Added two additional gbooleans for
-		avoiding segfaults when pressing 
-		back or next/last 
+		avoiding segfaults when pressing
+		back or next/last
 
 		-> parse.c parse.h callbacks.c
 
@@ -2162,15 +2192,15 @@
 
 		-> Makefile.am
 
-	+	Give the user many informations on 
-		the statusbar 
+	+	Give the user many informations on
+		the statusbar
 	
 		-> callbacks.c
 	
 2000-02-04  Fatih Demir  <kabalak@gmx.net>
 
 	+	Make the build always with -DDEBUGGY
-		to make it more obvious if errors 
+		to make it more obvious if errors
 		occure .
 	
 		-> Makefile.am
@@ -2186,7 +2216,7 @@
 	
 		-> callbacks.c
 
-	+	Inform the user if there is an error 
+	+	Inform the user if there is an error
 		while parsing the files ...
 
 		-> callbacks.c

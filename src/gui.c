@@ -307,15 +307,31 @@ static GnomeUIInfo the_msg_status_menu [] =
 		GNOME_APP_UI_ITEM, N_("Translated"),
 		NULL,
 		NULL, NULL, N_("Translated"),
-		GNOME_APP_PIXMAP_NONE, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
 		0, 0, NULL
 	},
+	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("Untranslated"),
                 NULL,
                 NULL, NULL, N_("Untranslated"),
-                GNOME_APP_PIXMAP_NONE, NULL,
+                GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
                 0, 0, NULL
+	},
+	{
+		GNOME_APP_UI_ITEM, N_("FIXME"),
+		NULL,
+		NULL, NULL, N_("FIXME"),
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+                0, 0, NULL 
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Stick"),
+		NULL,
+		NULL, NULL, N_("Stick this message"),
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
+		0, 0, NULL
 	},
 	GNOMEUIINFO_END
 };

@@ -13,6 +13,7 @@ myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
 
 INCLUDES = $(extra_flags) $(myicon)\
 	-I$(top_srcdir)/intl \
+	-DG_LOG_DOMAIN=\"$(PACKAGE)\" \
 	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS)
 
 bin_PROGRAMS = gtranslator

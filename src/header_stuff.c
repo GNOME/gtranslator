@@ -25,47 +25,27 @@ void apply_header(gtr_header *the_header)
 
 void get_header(gchar *hline)
 {
+	ph->prj_name="";
+	ph->prj_version=ph->prj_name;
+	/**
+	* Set the check variable to FALSE.
+	**/
 	header_finish=FALSE;
-	#ifdef IT_WORKS
+	/**
+	* Wait till we've got the Porject... line..
+	**/
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
-		ph->prj_name="Project";
-		ph->prj_version="Version";
-	}
-	if(!g_strncasecmp(hline,"\"POT-",5))
-	{
-		ph->pot_date=g_strdup(hline);
-	}
-	if(!g_strncasecmp(hline,"\"PO-",4))
-	{
-		ph->po_date=g_strdup(hline);
-	}
-	if(!g_strncasecmp(hline,"\"Las",4))
-	{
-		ph->last_translator=g_strdup(hline);
-	}
-	if(!g_strncasecmp(hline,"\"Lang",5))
-	{
-		ph->language_team=g_strdup(hline);
-	}
-	if(!g_strncasecmp(hline,"\"MIME",5))
-	{
-		ph->mime_version=g_strdup(hline);
-	}
-	if(!g_strncasecmp(hline,"\"Content-Ty",11))
-	{
-		ph->mime_type=g_strdup(hline);
-	}
-	if(!g_strncasecmp(hline,"\"Content-Tr",11))
-	{
-		ph->encoding=g_strdup(hline);
+		g_print("%% %s %%\n",strstr((strstr(hline,": "))," "));
+		/**
+		* Yup, we're finished with the header.
+		**/
 		header_finish=TRUE;
 	}
 	if(header_finish==TRUE)
 	{
-		/*** TODO ***/
+					
 	}
-	#endif
 }
 
 /**
@@ -74,19 +54,14 @@ void get_header(gchar *hline)
 void edit_header_create()
 {
 	/**
-	* Create a new one and assign the old one.
-	**/
-	gtr_header *head=g_new(gtr_header,1);
-	/**
         * Some local widgets.
         **/
         GtkWidget *prj_name_label,*prj_version_label,*e_table;
         GtkWidget *take_my_options;
-	head=ph;
 	/**
 	* Do a simply check.
 	**/
-	if(!head->prj_name)
+	if(!ph->prj_name)
 	{
 		gnome_app_error(GNOME_APP(app1),_("The header doesn't seem to be parsed rightly."));
 	}
@@ -116,9 +91,8 @@ void edit_header_create()
 	/**
 	* Set the parsed values as standard.
 	**/
-	/*
-gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name))),head->prj_name);
-gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_version))),head->prj_version);*/
+gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name))),ph->prj_name);
+gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_version))),ph->prj_version);
 
 	/**
 	* Adds the main-widgets to the dialog.
