@@ -40,7 +40,7 @@ module libgtranslator
 		// 2) By host_id (23)
 		void gtranslatorServerShutDownById(in long hostId) raises(gtranslatordNoShutDown);
 		// gets the hostname for the given host_id
-		string gtranslatorserverGetHost(in long hostId);
+		string gtranslatorServerGetHost(in long hostId);
 		// query the message db.
 		void gtranslatordQuery(in string query,out string result);
 		// query the message db with some args.

@@ -1,5 +1,7 @@
 # the Makefile.am for libgtranslator
 
+bin_PROGRAMS = gtranslatord
+
 lib_LTLIBRARIES = libgtranslator.la
 
 INCLUDES = -I$(includedir) $(IDL_CFLAGS) \
@@ -22,6 +24,11 @@ libgtranslator_include_dir = $(includedir)/libgtranslator
 libgtranslator_include__DATA = parse-db.h \
 	handle-db.h \
 	team-handle.h
+
+gtranslatord_SOURCES = main.c
+
+gtranslatord_LDADD = libgtranslator.la $(IDL_LIBS) $(OAF_LIBS) \
+	$(XML_LIBS)
 
 idl_dir = $(datadir)/idl
 
