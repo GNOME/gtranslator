@@ -117,3 +117,29 @@ int put_to_msg_db(const char *new_message)
 	}
 	return 0;
 }
+
+char *get_from_msg_db(const char *get_similar)
+{
+	if(msg_db_inited==TRUE)
+	{
+		 /**
+                 * Show a little warning ...
+                 **/
+                g_warning("The msg_db : %s seems not to be inited !\n",msg_db);
+		 /**
+		 * Return an explaining char* ...
+		 **/
+                return "Not available";
+	}
+	if(!msg_list)
+	{
+		 /**
+		 * If there's no LL* msg_list 
+		 * print an error message
+  		 **/
+		g_error("No msg_list available for acting on it !\n");
+		 /**
+		 * Exit brutally ...
+		 **/
+	}
+}
