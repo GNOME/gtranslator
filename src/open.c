@@ -77,8 +77,8 @@ gboolean gtranslator_open_po_file(gchar *file)
  */
 void gtranslator_open_compiled_po_file(gchar *file)
 {
-	gchar *cmd;
-	gchar *tempfilename;
+	gchar *cmd=g_new0(gchar,1);
+	gchar *tempfilename=g_new0(gchar,1);
 	/*
 	 * Set the name of the temporary file we will be using.
 	 */
@@ -122,8 +122,9 @@ void gtranslator_open_compiled_po_file(gchar *file)
  */
 void gtranslator_open_gzipped_po_file(gchar *file)
 {
-	gchar *cmd;
-	gchar *tempfilename;
+	gchar *cmd=g_new0(gchar,1);
+	gchar *tempfilename=g_new0(gchar,1);
+
 	/*
 	 * Build the a temporary filename in the same way as for the
 	 *  gtranslator_open_compiled_po_file function.

@@ -28,6 +28,7 @@
 #include "prefs.h"
 #include "dialogs.h"
 #include "gui.h"
+#include "gtkspell.h"
 #include "open-differently.h"
 #include <libgnome/gnome-history.h>
 #include <libgtranslator/recent-files.h>
@@ -688,6 +689,15 @@ void close_file(GtkWidget * widget, gpointer useless)
 	free_po();
 	file_opened = FALSE;
 	nothing_changes = TRUE;
+
+	/*
+	 * Stop gtkspell.
+	 */ 
+	if(wants.instant_spell_check && gtkspell_running())
+	{
+		gtkspell_stop();
+	}
+	
 	clean_text_boxes();
 	/*
 	 * Set a blank appbar status message.
