@@ -42,8 +42,6 @@
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-init.h>
 
-#include <popt-gnome.h>
-
 #ifdef WINDOW_ICON
 #include <libgnomeui/gnome-window-icon.h>
 #endif

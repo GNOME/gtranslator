@@ -631,7 +631,7 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 	substitute(&header->language, "LANGUAGE", language);
 	substitute(&header->lg_email, "LL@li.org", lg);
 	
-	substitute(&header->charset, "CHARSET", lc);
+	substitute(&header->charset, "CHARSET", mime);
 	substitute(&header->encoding, "ENCODING", enc);
 
 	/*
