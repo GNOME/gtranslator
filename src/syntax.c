@@ -112,6 +112,11 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 							msg[cp+1]);
 						cp++;
 					}
+					else
+					{
+						string=g_string_append_c(string,
+							msg[cp]);	
+					}
 				}
 
 				gtk_text_insert(GTK_TEXT(textwidget),
