@@ -33,7 +33,6 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 		     int y, GtkSelectionData * seldata, guint info,
 		     guint time, gpointer data)
 {
-	gint return_value = 0;
 	gchar *file;
 
 	dnd_type = GPOINTER_TO_UINT(data);
