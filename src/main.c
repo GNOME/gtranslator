@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
 		/*
 		 * Try to open up the supported "special" gettext file types.
 		 */ 
-		if(!gtranslator_open_po_file((gchar *) args[0]))
+		if(!gtranslator_open_po_file((gchar *)args[0]))
 		{
 			/*
 			 * Open the file as a "normal" gettext po file

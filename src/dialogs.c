@@ -91,8 +91,11 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 	 * If we do have write perms for the file we can save it under each
 	 *  filename but if we don't have write perms for it, we'd try to
 	 *   save it in our local directory.
+	 *
+	 * OR: The filename points to a copy-result po file, then we do apply
+	 *  the same dialog tactics.
 	 */   
-	if(po->no_write_perms==FALSE)
+	if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator-"))
 	{
 		dialog = gtk_file_selection_new(_("gtranslator -- save file as.."));
 	}
@@ -102,11 +105,13 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 
 		/*
 		 * Set a local filename in the users home directory with the 
-		 *  same filename as the original (e.g. "tr.po").
+		 *  same filename as the original but with a project prefix
+		 *   (e.g. "gtranslator-tr.po").
 		 */  
 		gtk_file_selection_set_filename(GTK_FILE_SELECTION(dialog),
-			g_strdup_printf("%s/%s",
+			g_strdup_printf("%s/%s-%s",
 				g_get_home_dir(),
+				po->header->prj_name,
 				g_basename(po->filename)));
 	}
 	

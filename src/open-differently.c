@@ -32,12 +32,28 @@ gboolean gtranslator_open_po_file(gchar *file)
 	 *  remote files.
 	 */
 	#ifdef USE_VFS_STUFF
+	
 	file=gtranslator_vfs_handle_open_file(file);
 
+	/*
+	 * If we couldn't get a local representation filename
+	 *  for the remote file we do return FALSE.
+	 */  
 	if(!file)
 	{
 		return FALSE;
 	}
+	else
+	{
+		/*
+		 * Here we do open the local representation file
+		 *  of the remote file.
+		 */  
+		parse(file);
+		
+		return TRUE;
+	}
+	
 	#endif
 		
 	/*

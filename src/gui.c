@@ -973,7 +973,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 	if (!po->file_changed)
 	{
 		po->file_changed = TRUE;
-		if(po->no_write_perms==FALSE)
+		if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator-"))
 		{
 			enable_actions(ACT_SAVE, ACT_REVERT, ACT_UNDO);
 		}

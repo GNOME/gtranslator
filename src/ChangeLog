@@ -1,3 +1,16 @@
+2001-02-01  Fatih Demir	<kabalak@gmx.net>
+
+	* dialogs.c: Perhaps the Save as dialog will also detect
+		a previously remote po file and will offer a direct
+		 save as filename.
+
+	* gui.c & parse.c: Also disable the Save button for the
+		"remotely" copied po files.
+
+	* open-differently.c: Made the remote stuff finally really
+		work for all supported kinds of po files; take the
+		 local copy of the remote file as the 'local' file.
+
 2001-01-31  Fatih Demir	<kabalak@gmx.net>
 
 	* open-differently.c: Also use the VFS methods to open
