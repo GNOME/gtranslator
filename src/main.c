@@ -101,11 +101,54 @@ int main(int argc,char *argv[])
 		**/
 		set_challenge_length(challen);
 	}
-	parse_db_for_lang(getenv("LANG"));
 	/**
 	* Read the stored preferences
 	**/
 	read_prefs();
+	/**
+	* If the language is set, call the specified language.xml file.
+	*
+	* But only if a env. variable $LANG isn't set.
+	**/
+	if(lc||!(getenv("LANG")))
+	{
+		/**
+		* .. but only if wished ..
+		**/
+		if(if_use_msg_db)
+		{
+			parse_db_for_lang(lc);
+		}	
+	}
+	else
+	{
+		gchar *langs=g_new0(gchar,1);
+		/**
+		* Check if we've got a $LANG env. variable.
+		*
+		* And if we've got a $LANG, then call the corresponding
+		*  $LANG.xml file as the message db.
+		**/
+		langs=getenv("LANG");
+		if(langs)
+		{
+			parse_db_for_lang(langs);
+		}
+		else
+		{
+			/**
+			* It should not crash, so use the example.xml file :)
+			**/
+			parse_db_for_lang("example");
+		}
+		/**
+		* Free the gchar.
+		**/
+		if(langs)
+		{
+			g_free(langs);
+		}	
+	}	
 	/**
         * Init the msg_db.
         **/

@@ -28,7 +28,7 @@ gtranslator_SOURCES = \
 	languages.h \
 	main.c 
 
-gtranslator_LDADD = ../libgtranslator/libgtranslator.a $(GNOME_LIBDIR) \
+gtranslator_LDADD = ../libgtranslator/libgtranslator.la $(GNOME_LIBDIR) \
 		$(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS) \
 		$(XML_LIBS)
 
