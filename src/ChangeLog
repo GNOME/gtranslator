@@ -1,23 +1,23 @@
 2001-07-30  Thomas Ziehmer	<thomas@gtranslator.org>
+
 	* messages-table.c: right justify number and line
 	
 2001-07-29  Fatih Demir <kabalak@gtranslator.org>
 
-	* history.c: Really respect the defined maximal history entries count from the
-		preferences -- the if condition for the break in the save routine was
-		 not fully right -- it had got to be ">" instead of ">=" to also get the
-		  last wanted history entry.
+	* history.c: Really respect the defined maximal history entries count 
+		from the preferences -- the if condition for the break in the
+		 save routine was not fully right -- it had got to be ">" 
+		  instead of ">=" to also get the last wanted history entry.
 
 	* Makefile.am: "pixmaps" is now again a subdirectory of src .-)
 
-	* menus.c: Use the "new" pixmaps for the auto accomplishment and query menu
-		entries and toolbar entries.
+	* menus.c: Use the "new" pixmaps for the auto accomplishment and query 
+		menu entries and toolbar entries.
 
-	* pixmaps/*: Added auto accomplishment and query pixmaps (including Makefile
-		stuff for it) -- the icons are taken from Evolution.
+	* pixmaps/*: Added auto accomplishment and query pixmaps (including 
+		Makefile stuff for it) -- the icons are taken from Evolution.
 
-	* dialogs.c: Some more logics for the learn buffer toggle button (another
-		nut-bags causing thing).
+	* dialogs.c: Some more logics for the learn buffer toggle button.
 
 	* utils_gui.c: Check if the signal is given for the "_attach_toggle"
 		utility function before connecting it.
