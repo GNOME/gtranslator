@@ -16,6 +16,7 @@ schemes_DATA = \
 	menesis.xml \
 	mmc.xml \
 	nizuu.xml \
+	pdmc.xml \
 	sepia.xml \
 	spiffE.xml \
 	thinice.xml \
