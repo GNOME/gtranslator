@@ -1076,7 +1076,6 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 	}
 
-	gtranslator_syntax_update_text(trans_box);
 
 	/*
 	 * Do all these steps only if the option to use the '·' is set.
@@ -1128,7 +1127,6 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
                  * Thaw up the translation box to avoid the reverse writing.
 		 */
 		gtk_text_thaw(GTK_TEXT(trans_box));
-		gtranslator_syntax_update_text(trans_box);
 
 		/*
 		 * Go to the old text index.
@@ -1152,6 +1150,8 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 
 		nothing_changes = FALSE;
 	}
+	
+	gtranslator_syntax_update_text(trans_box);
 }
 
 /*
