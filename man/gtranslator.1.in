@@ -3,7 +3,7 @@
 gtranslator \-\- a comfortable gettext po file editor with many bells and whistles.
 
 .SH "SYNOPSIS"
-.B gtranslator [ \-\-help ] [ \-\-version ] [ \-a filename ] [ \-e po\-file ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-n ] [ \-y ] [ \-q query\-domains\-dir ] [ po\-file ]
+.B gtranslator [ \-\-help ] [ \-\-version ] [ \-a filename ] [ \-e po\-file ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-n ] [ \-y ] [ po\-file ]
 
 .SH "DESCRIPTION"
 gtranslator is a comfortable gettext po file editor with many features like special char featured editing, regular expression based search function, compile/update possiblities.
@@ -40,9 +40,6 @@ Disables any kind of syntax highlighting of editable text in gtranslator.
 .TP 
 .I \-l \-\-learn=po\-file\-to\-learn
 Learns the given po file within the command line without starting the GUI. The personal learn buffer is used as a translation memory to autoaccomplish missing translations/entries.
-.TP 
-.I \-q \-\-querydomaindir=query\-domains\-dir
-Changes the standard locales directory where gtranslator looks for the available query domains (per default: @prefix@/share/locale).
 .TP 
 .I \-\-display
 With this option you can select on which screen gtranslator should appear.
