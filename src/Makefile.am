@@ -7,6 +7,7 @@ SUBDIRS = pixmaps semerkent
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
+	-Isemerkent/ \
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
         -DPREFIX=\""$(prefix)"\"                                \
         -DSYSCONFDIR=\""$(sysconfdir)"\"                        \
@@ -77,7 +78,8 @@ gtranslator_SOURCES = \
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \
-	$(GTRANSLATOR_LIBS)
+	$(GTRANSLATOR_LIBS) \
+	semerkent/libsemerkent.a
 
 CLEANFILES = defines.include
 
