@@ -58,7 +58,7 @@ typedef struct
  * The generally used GtrLearnBuffer -- should hold all elements of the
  *  learn process.
  */
-static GtrLearnBuffer	*gtranslator_learn_buffer=NULL;
+GtrLearnBuffer		*gtranslator_learn_buffer;
 
 /*
  * Do the hard internal work -- mostly GHashTable related.
@@ -200,6 +200,11 @@ static void gtranslator_learn_buffer_set_umtf_date()
  */
 void gtranslator_learn_init()
 {
+	/*
+	 * Create a new instance of our GtrLearnBuffer.
+	 */
+	gtranslator_learn_buffer=g_new0(GtrLearnBuffer, 1);
+	
 	gtranslator_learn_buffer->filename=g_strdup_printf(
 		"%s/.gtranslator/umtf-learn-buffer.xml", g_get_home_dir());
 
@@ -304,7 +309,6 @@ void gtranslator_learn_shutdown()
 	
 	gchar		*serial_string;
 	
-	g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
 	g_return_if_fail(gtranslator_learn_buffer->filename!=NULL);
 	g_return_if_fail(gtranslator_learn_buffer->init_status==TRUE);
 
@@ -386,7 +390,8 @@ void gtranslator_learn_shutdown()
 	 * Clean up the hash table we're using, write it's contents, free them and destroy
 	 *  the hash table.
 	 */
-	gtranslator_learn_buffer->current_node=serial_node;
+	gtranslator_learn_buffer->current_node=serial_node->xmlChildrenNode;
+	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 	
 	g_hash_table_foreach(gtranslator_learn_buffer->hash, 
 		(GHFunc) gtranslator_learn_buffer_write_hash_entry, NULL);
