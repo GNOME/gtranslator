@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-29 16:44+0300\n"
-"PO-Revision-Date: 2004-03-29 16:45+0200\n"
+"POT-Creation-Date: 2004-12-23 18:00+0200\n"
+"PO-Revision-Date: 2004-12-23 18:13+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -21,37 +21,32 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "GNOME vertimo programa"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1143
+#: data/desktop/gtranslator.desktop.in.h:2
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#. Translator credits
-#: src/about.c:60
-msgid "translator_credits"
+#: src/about.c:77
+msgid "(C) 1999 The Free Software Foundation, Inc."
+msgstr "(C) 1999 The Free Software Foundation, Inc."
+
+#: src/about.c:78
+msgid "gtranslator is a po file editing suite with many bells and whistles."
+msgstr "gtranslator yra po bylų taisymo programa su daug skambučių ir švilpukų"
+
+#: src/about.c:79
+msgid "translator-credits"
 msgstr ""
 "Dabartinis vertėjas:\n"
 "Žygimantas Beručka <uid0@akl.lt>\n"
 "\n"
-"Ankstesnis vertėjas:\n"
-"Gediminas Paulauskas <menesis@delfi.lt>"
+"Ankstesnysis vertėjas:\n"
+"Gediminas Paulauskas <menesis@chatsubo.lt>"
 
-#: src/about.c:80
-msgid "(C) 1999 The Free Software Foundation, Inc."
-msgstr "(C) 1999 The Free Software Foundation, Inc."
-
-#: src/about.c:81
-msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr "gtranslator yra po bylų taisymo programa su daug skambučių ir švilpukų"
-
-#: src/bookmark.c:93 src/dialogs.c:1497
-msgid "No comment"
-msgstr "Nėra komentaro"
-
-#: src/bookmark.c:598
+#: src/bookmark.c:525
 msgid "_View/_Bookmarks/"
 msgstr "_Rodyti/Ž_ymelės/"
 
-#: src/bookmark.c:635
+#: src/bookmark.c:562
 #, c-format
 msgid "Open %s (%s)"
 msgstr "Atidaryti %s (%s)"
@@ -86,19 +81,35 @@ msgstr "_Rodyti/_Spalvų schemos/"
 msgid "Activate colorscheme %s"
 msgstr "Aktyvuoti spalvų schemą %s"
 
-#: src/dialogs.c:115
+#: src/compile.c:80
+msgid "An error occurred while msgfmt was executed:\n"
+msgstr "Įvyko klaida, vykdant msgfmt:\n"
+
+#: src/compile.c:157
+msgid "Sorry, msgfmt isn't available on your system!"
+msgstr "Gaila, bet tavo sistemoje nėra msgfmt!"
+
+#: src/compile.c:197
+#, c-format
+msgid ""
+"Compile successful:\n"
+"%s"
+msgstr ""
+"Kompiliavimas sėkmingas:\n"
+"%s"
+
+#: src/dialogs.c:96
 msgid "gtranslator -- open po file"
 msgstr "gtranslator -- atidaryti po bylą"
 
-#: src/dialogs.c:157
+#.
+#. * Let the user use the file selector to decide where to save it
+#.
+#: src/dialogs.c:135
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- išsaugoti bylą kaip..."
 
-#: src/dialogs.c:177
-msgid "gtranslator -- save local copy of file as.."
-msgstr "gtranslator -- išsaugoti vietinę bylos kopiją kaip..."
-
-#: src/dialogs.c:227
+#: src/dialogs.c:179
 #, c-format
 msgid ""
 "File %s\n"
@@ -107,64 +118,52 @@ msgstr ""
 "Byla %s\n"
 "buvo pakeista. Išsaugoti?"
 
-#: src/dialogs.c:233
-msgid "Don't save"
-msgstr "Nesaugoti"
-
-#: src/dialogs.c:277
-msgid "gtranslator -- import po file"
-msgstr "gtranslator -- importuoti po bylą"
-
-#: src/dialogs.c:324
-msgid "gtranslator -- export po file"
-msgstr "gtranslator -- eksportuoti po bylą"
-
-#: src/dialogs.c:372 src/dialogs.c:405
+#: src/dialogs.c:221 src/dialogs.c:254
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- keisti komentarą"
 
-#: src/dialogs.c:397
+#: src/dialogs.c:246
 msgid "Comment:"
 msgstr "Komentaras:"
 
-#: src/dialogs.c:512
+#: src/dialogs.c:361
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Ar pašalinti VISUS vertimus iš bylos \"%s\"?"
 
-#: src/dialogs.c:615
+#: src/dialogs.c:434
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- eiti"
 
-#: src/dialogs.c:623
+#: src/dialogs.c:442
 msgid "Go to message number:"
 msgstr "Eiti į užrašą numeriu:"
 
-#: src/dialogs.c:681
+#: src/dialogs.c:500
 msgid "Find in the po file"
 msgstr "Ieškoti po byloje"
 
-#: src/dialogs.c:690
+#: src/dialogs.c:509
 msgid "Enter search string:"
 msgstr "Įvesk ieškomą eilutę:"
 
-#: src/dialogs.c:695
+#: src/dialogs.c:514
 msgid "Case sensitive"
 msgstr "Skirti raidžių dydį"
 
-#: src/dialogs.c:700
+#: src/dialogs.c:519
 msgid "Find in:"
 msgstr "Rasti kur:"
 
-#: src/dialogs.c:704 src/dialogs.c:835
+#: src/dialogs.c:523 src/dialogs.c:652
 msgid "Comments"
 msgstr "Komentaruose"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:101
+#: src/dialogs.c:526 src/dialogs.c:655 src/languages.c:101
 msgid "English"
 msgstr "Angliškuose"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:263
+#: src/dialogs.c:529 src/dialogs.c:658 src/messages-table.c:224
 msgid "Translation"
 msgstr "Vertimas"
 
@@ -172,43 +171,39 @@ msgstr "Vertimas"
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: src/dialogs.c:721
+#: src/dialogs.c:540
 msgid "Ignore hotkeys"
 msgstr "Ignoruoti karštus klavišus"
 
-#: src/dialogs.c:814
+#: src/dialogs.c:631
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- pakeisti"
 
-#: src/dialogs.c:818 src/menus.c:355
+#: src/dialogs.c:635 src/menus.c:333
 msgid "Replace"
 msgstr "Pakeisti"
 
-#: src/dialogs.c:819
+#: src/dialogs.c:636
 msgid "Replace all"
 msgstr "Pakeisti visus"
 
-#: src/dialogs.c:824
+#: src/dialogs.c:641
 msgid "String to replace:"
 msgstr "Pakeičiama eilutė:"
 
-#: src/dialogs.c:827
+#: src/dialogs.c:644
 msgid "Replace string:"
 msgstr "Eilutė į kurią pakeisti:"
 
-#: src/dialogs.c:832
+#: src/dialogs.c:649
 msgid "Replace in:"
 msgstr "Pakeisti kur:"
 
-#: src/dialogs.c:902
+#: src/dialogs.c:719
 msgid "Please enter a string to replace!"
 msgstr "Prašau įvesti keičiamą užrašą!"
 
-#: src/dialogs.c:953
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "Įvyko klaida, vykdant msgfmt:\n"
-
-#: src/dialogs.c:994
+#: src/dialogs.c:776
 #, c-format
 msgid ""
 "The file\n"
@@ -231,7 +226,7 @@ msgstr ""
 "\n"
 "Ar kvailys gtranslator turėtų vistiek atidaryti šią bylą?"
 
-#: src/dialogs.c:1035
+#: src/dialogs.c:817
 #, c-format
 msgid ""
 "File %s\n"
@@ -240,23 +235,19 @@ msgstr ""
 "Byla %s\n"
 "buvo pakeista. Ar nori atstatyti iš išsaugotos kopijos?"
 
-#: src/dialogs.c:1064
+#: src/dialogs.c:846
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- atidaryti iš URI"
 
-#: src/dialogs.c:1076
+#: src/dialogs.c:858
 msgid "Enter URI:"
 msgstr "Įvesk URI:"
 
-#: src/dialogs.c:1112
+#: src/dialogs.c:895
 msgid "No URI given!"
 msgstr "Neįvestas joks URI!"
 
-#: src/dialogs.c:1127
-msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr "Nenurodytas palaikomas URI protokolas (kaip \"ftp://\")!"
-
-#: src/dialogs.c:1135
+#: src/dialogs.c:909
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -281,7 +272,7 @@ msgstr ""
 "file:///<PO-BYLA> ar\n"
 "http://www.DOMENAS.COM/PO-BYLA"
 
-#: src/dialogs.c:1174
+#: src/dialogs.c:949
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -298,67 +289,19 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1186
+#: src/dialogs.c:961
 msgid "Postpone decision"
 msgstr "Atidėti sprendimą"
 
-#: src/dialogs.c:1188
+#: src/dialogs.c:963
 msgid "Ignore recovery file"
 msgstr "Ignoruoti atkūrimo bylą"
 
-#: src/dialogs.c:1190
+#: src/dialogs.c:965
 msgid "Recover file"
 msgstr "Atkurti bylą"
 
-#.
-#. * A half-baken dialog for the query functionality.
-#.
-#: src/dialogs.c:1249
-msgid "Here you can query existing translations from your learn buffer."
-msgstr "Čia tu gali užklausti tavo mokymosi buferyje egzistuojančius vertimus."
-
-#: src/dialogs.c:1252
-msgid "gtranslator -- query your personal learn buffer"
-msgstr "gtranslator -- užklausti tavo asmeninį išmoktą buferį"
-
-#: src/dialogs.c:1256 src/menus.c:360
-msgid "Query"
-msgstr "Užklausti"
-
-#: src/dialogs.c:1257
-msgid "Query message content"
-msgstr "Užklausti įrašo turinį"
-
-#: src/dialogs.c:1267
-msgid "Query string:"
-msgstr "Užklausti eilutės:"
-
-#: src/dialogs.c:1305
-msgid "No query string given!"
-msgstr "Neįvesta užklausos eilutė!"
-
-#: src/dialogs.c:1327
-msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr "Nerastas joks užklausos rezultatas Jūsų mokymosi buferyje!"
-
-#: src/dialogs.c:1339
-#, c-format
-msgid ""
-"Found \"%s\" as a translation for \"%s\".\n"
-"Would you like to insert it into the translation?"
-msgstr ""
-"Radau „%s“ kaip „%s“ vertimą.\n"
-"Ar norėtumėt jį įterpti į vertimą?"
-
-#.
-#. * Translators: This means that the query result string is
-#. *  already translated.
-#.
-#: src/dialogs.c:1409
-msgid "Query's result translation is already there!"
-msgstr "Iš užklausos gautoji reikšmė jau čia yra!"
-
-#: src/dialogs.c:1441
+#: src/dialogs.c:1018
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -366,19 +309,23 @@ msgstr ""
 "Ar gtranslator tūrėtų automatiškai išversti bylą naudojant\n"
 "informaciją iš Jūsų asmeninio mokymosi buferio?"
 
-#: src/dialogs.c:1477 src/dialogs.c:1505
+#: src/dialogs.c:1058 src/dialogs.c:1086
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- pridėti žymelę su komentaru?"
 
-#: src/dialogs.c:1497
+#: src/dialogs.c:1078
 msgid "Comment for the bookmark:"
 msgstr "Žymelės komentaras:"
 
-#: src/find.c:217
+#: src/dialogs.c:1078
+msgid "No comment"
+msgstr "Nėra komentaro"
+
+#: src/find.c:216
 msgid "Please enter a search string"
 msgstr "Įveskit ieškomą eilutę"
 
-#: src/find.c:233
+#: src/find.c:232
 #, c-format
 msgid ""
 "Could not find\n"
@@ -387,11 +334,7 @@ msgstr ""
 "Negaliu rasti\n"
 "„%s“"
 
-#: src/gui.c:182
-msgid "Edit comment"
-msgstr "Keisti komentarą"
-
-#: src/gui.c:493
+#: src/gui.c:359
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
@@ -399,24 +342,20 @@ msgstr[0] "%s [ liko %i Fuzzy ]"
 msgstr[1] "%s [ liko %i Fuzzy ]"
 msgstr[2] "%s [ liko %i Fuzzy ]"
 
-#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
+#: src/gui.c:359 src/gui.c:363 src/menus.c:319 src/messages-table.c:272
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
-#: src/gui.c:497
+#: src/gui.c:363
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ neliko fuzzy ]"
 
-#: src/gui.c:505
-msgid "Sticky (Message & translation are the same)"
-msgstr "Lipnus (Įrašas ir vertimas yra tokie patys)"
-
-#: src/gui.c:507 src/messages-table.c:332
+#: src/gui.c:372 src/messages-table.c:280
 msgid "Translated"
 msgstr "Išversta"
 
-#: src/gui.c:516
+#: src/gui.c:380
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
@@ -424,98 +363,107 @@ msgstr[0] "%s [ liko %i neišverstas ]"
 msgstr[1] "%s [ liko %i neišversti ]"
 msgstr[2] "%s [ liko %i neišverstų ]"
 
-#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
+#: src/gui.c:380 src/gui.c:382 src/messages-table.c:264
 msgid "Untranslated"
 msgstr "Neišversta"
 
-#: src/gui.c:518
+#: src/gui.c:382
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ neliko neišverstų ]"
 
-#: src/gui.c:537
+#: src/gui.c:401
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Užrašas: %d / %d / Būsena: %s (Užraše yra daugiskaitos formų)"
 
-#: src/gui.c:541
+#: src/gui.c:405
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Užrašas: %d / %d / Būsena: %s"
 
-#: src/header_stuff.c:495
+#: src/gui.c:707 src/page.c:98
+msgid "Edit comment"
+msgstr "Keisti komentarą"
+
+#: src/header_stuff.c:406
+msgid "No header for this file/domain"
+msgstr "Nėra šios bylos/srities antraštės"
+
+#: src/header_stuff.c:445
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- keisti antraštę"
 
-#: src/header_stuff.c:519
+#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
+#: src/header_stuff.c:469
 msgid "Comments:"
 msgstr "Komentarai:"
 
-#: src/header_stuff.c:526
+#: src/header_stuff.c:476
 msgid "Project name:"
 msgstr "Projekto pavadinimas:"
 
-#: src/header_stuff.c:532
+#: src/header_stuff.c:482
 msgid "Project version:"
 msgstr "Projekto versija:"
 
-#: src/header_stuff.c:539
+#: src/header_stuff.c:489
 msgid "Pot file creation date:"
 msgstr "Pot bylos sukūrimo data:"
 
-#: src/header_stuff.c:545
+#: src/header_stuff.c:495
 msgid "Po file revision date:"
 msgstr "Po bylos pakeitimo data:"
 
-#: src/header_stuff.c:559
+#: src/header_stuff.c:502
 msgid "Report message string bugs to:"
 msgstr "Kam pranešti apie užrašų klaidas:"
 
-#: src/header_stuff.c:572
+#: src/header_stuff.c:516
 msgid "Generator:"
 msgstr "Generatorius:"
 
-#: src/header_stuff.c:576
+#: src/header_stuff.c:521
 msgid "Project"
 msgstr "Projektas"
 
-#: src/header_stuff.c:582
+#: src/header_stuff.c:527
 msgid "Use my options to complete the following entries:"
 msgstr "Naudoti mano nuostatas užpildyti žemiau esančius laukus:"
 
-#: src/header_stuff.c:595
+#: src/header_stuff.c:540
 msgid "Translator's name:"
 msgstr "Vertėjo vardas:"
 
-#: src/header_stuff.c:601
+#: src/header_stuff.c:546
 msgid "Translator's e-mail:"
 msgstr "Vertėjo el. paštas:"
 
-#: src/header_stuff.c:608 src/prefs.c:500
+#: src/header_stuff.c:553 src/prefs.c:458
 msgid "Language:"
 msgstr "Kalba:"
 
-#: src/header_stuff.c:615 src/prefs.c:512
+#: src/header_stuff.c:560 src/prefs.c:470
 msgid "Language group's email:"
 msgstr "Kalbos grupės el.paštas:"
 
-#: src/header_stuff.c:622 src/prefs.c:518
+#: src/header_stuff.c:567 src/prefs.c:476
 msgid "Charset:"
 msgstr "Koduotė:"
 
-#: src/header_stuff.c:629 src/prefs.c:523
+#: src/header_stuff.c:574 src/prefs.c:481
 msgid "Encoding:"
 msgstr "Koduotė:"
 
-#: src/header_stuff.c:637
+#: src/header_stuff.c:582
 msgid "Translator and Language"
 msgstr "Vertėjas ir kalba"
 
-#: src/history.c:195
+#: src/history.c:189
 msgid "_File/Recen_t files/"
 msgstr "_Byla/Pas_tarosios bylos/"
 
-#: src/history.c:243
+#: src/history.c:226
 #, c-format
 msgid "Open %s"
 msgstr "Atidaryti %s"
@@ -541,7 +489,7 @@ msgid "Basque"
 msgstr "Baskų"
 
 #: src/languages.c:57
-msgid "Belorussian"
+msgid "Belarusian"
 msgstr "Baltarusių"
 
 #: src/languages.c:61
@@ -633,166 +581,170 @@ msgid "Gujarati"
 msgstr "Gujarati"
 
 #: src/languages.c:153
+msgid "Hebrew"
+msgstr "Hebrajų"
+
+#: src/languages.c:157
 msgid "Hindi"
 msgstr "Hindi"
 
-#: src/languages.c:157
+#: src/languages.c:161
 msgid "Hungarian"
 msgstr "Vengrų"
 
-#: src/languages.c:161
+#: src/languages.c:165
 msgid "Icelandic"
 msgstr "Islandų"
 
-#: src/languages.c:165
+#: src/languages.c:169
 msgid "Indonesian"
 msgstr "Indonezijos"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Italian"
 msgstr "Italų"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Irish"
 msgstr "Airių"
 
-#: src/languages.c:177
+#: src/languages.c:181
 msgid "Japanese"
 msgstr "Japonų"
 
-#: src/languages.c:181
+#: src/languages.c:185
 msgid "Kannada"
 msgstr "Kanadiečių"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Korean"
 msgstr "Korėjiečių"
 
-#: src/languages.c:189
+#: src/languages.c:193
 msgid "Latvian"
 msgstr "Latvių"
 
-#: src/languages.c:193
+#: src/languages.c:197
 msgid "Lithuanian"
 msgstr "Lietuvių"
 
-#: src/languages.c:197
+#: src/languages.c:201
 msgid "Malay/Bahasa Melayu"
 msgstr "Malay/Bahasa Melayu"
 
-#: src/languages.c:201
+#: src/languages.c:205
 msgid "Maltese"
 msgstr "Maltese"
 
-#: src/languages.c:205
+#: src/languages.c:209
 msgid "Marathi"
 msgstr "Marathi"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Norwegian/Bokmaal"
 msgstr "Norvegų/Bokmaal"
 
-#: src/languages.c:213
+#: src/languages.c:217
 msgid "Norwegian/Nynorsk"
 msgstr "Norvegų/Nynorsk"
 
-#: src/languages.c:217
+#: src/languages.c:221
 msgid "Punjabi"
 msgstr "Punjabi"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Polish"
 msgstr "Lenkų"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Portuguese"
 msgstr "Portugalų"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Portuguese/Brazil"
 msgstr "Portugalų/Brazilija"
 
-#: src/languages.c:233
+#: src/languages.c:237
 msgid "Romanian"
 msgstr "Rumunų"
 
-#: src/languages.c:237
+#: src/languages.c:241
 msgid "Russian"
 msgstr "Rusų"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Serbian/Cyrillic"
 msgstr "Serbų/Kirilica"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Serbian/Latin"
 msgstr "Serbų/Lotyniška"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Slovak"
 msgstr "Slovakų"
 
-#: src/languages.c:253
+#: src/languages.c:257
 msgid "Slovenian"
 msgstr "Slovėnų"
 
-#: src/languages.c:257
+#: src/languages.c:261
 msgid "Spanish"
 msgstr "Ispanų"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Spanish/Spain"
 msgstr "Ispanų/Ispanija"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Spanish/Mexico"
 msgstr "Ispanų/Meksika"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Swedish"
 msgstr "Švedų"
 
-#: src/languages.c:273
+#: src/languages.c:277
 msgid "Tamil"
 msgstr "Tamilų"
 
-#: src/languages.c:277
+#: src/languages.c:281
 msgid "Telugu"
 msgstr "Telugu"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Thai"
 msgstr "Tajų"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Turkish"
 msgstr "Turkų"
 
-#: src/languages.c:289
+#: src/languages.c:293
 msgid "Ukrainian"
 msgstr "Ukrainiečių"
 
-#: src/languages.c:293
+#: src/languages.c:297
 msgid "Uzbekian"
 msgstr "Uzbekų"
 
-#: src/languages.c:297
+#: src/languages.c:301
 msgid "Vietnamese"
 msgstr "Vietnamiečių"
 
-#: src/languages.c:301
+#: src/languages.c:305
 msgid "Walloon"
 msgstr "Valonų"
 
-#: src/languages.c:305
+#: src/languages.c:309
 msgid "Welsh"
 msgstr "Velsų"
 
-#: src/learn.c:379
+#: src/learn.c:380
 msgid "gtranslator learn buffer statistics:"
 msgstr "gtranslator mokymosi buferio statistika:"
 
-#: src/learn.c:382
+#: src/learn.c:383
 #, c-format
 msgid "Learn buffer filename: `%s`"
 msgstr "Mokymosi buferio bylos vardas: „%s\""
@@ -800,7 +752,7 @@ msgstr "Mokymosi buferio bylos vardas: „%s\""
 #.
 #. * Translators: This means the encoding of the learn buffer (XML) file.
 #.
-#: src/learn.c:388
+#: src/learn.c:389
 #, c-format
 msgid "Encoding: `%s'"
 msgstr "Koduotė: „%s“"
@@ -808,7 +760,7 @@ msgstr "Koduotė: „%s“"
 #.
 #. * Translators: "Serial number" of the learn buffer - means # of file updates.
 #.
-#: src/learn.c:394
+#: src/learn.c:395
 #, c-format
 msgid "Serial: `%i'"
 msgstr "Serija: „%i“"
@@ -816,459 +768,377 @@ msgstr "Serija: „%i“"
 #.
 #. * Translators: That's the number of message entries in the learn buffer.
 #.
-#: src/learn.c:400
+#: src/learn.c:401
 #, c-format
 msgid "Number of entries: `%i'"
 msgstr "Įrašų skaičius: „%i\""
 
-#: src/main.c:85
-msgid "Auto translate the po file"
-msgstr "Automatiškai išversti po bylą"
-
-#: src/main.c:85 src/main.c:101
-msgid "FILENAME"
-msgstr "BYLOS VARDAS"
-
-#: src/main.c:89
+#: src/main.c:70
 msgid "Show build specifications"
 msgstr "Rodyti kompiliavimo specifikacijas"
 
-#: src/main.c:93
-msgid "Export learn buffer to a plain po file"
-msgstr "Eksportuoti mokymosi buferį į paprastą po bylą"
-
-#: src/main.c:93
-msgid "PO_FILE"
-msgstr "PO_BYLA"
-
-#: src/main.c:97
+#: src/main.c:74
 msgid "Specify main window geometry"
 msgstr "Nurodyti pagrindinio lango geometriją"
 
-#: src/main.c:97
+#: src/main.c:74
 msgid "GEOMETRY"
 msgstr "GEOMETRIJA"
 
-#: src/main.c:101
-msgid "Learn the file completely"
-msgstr "Išmokti visą bylą"
-
-#: src/main.c:105
-msgid "Show learn buffer statistics"
-msgstr "Rodyti mokymosi buferio statistiką"
-
-#: src/main.c:148
+#: src/main.c:127
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Klaida inicializuojant GConf: %s."
 
-#: src/main.c:180
+#: src/main.c:267
+#, c-format
+msgid "Couldn't open '%s': %s\n"
+msgstr "Nepavyko atidaryti „%s“: %s\n"
+
+#: src/main.c:289
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator kompiliavimo informacija:"
 
-#: src/main.c:182
+#: src/main.c:291
 msgid "Version and build date:"
 msgstr "Versija ir kompiliavimo data:"
 
-#: src/main.c:184
+#: src/main.c:293
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Kompiliuota su GLib /Gtk+ / GNOME / XML versijomis:"
 
-#: src/main.c:186
+#: src/main.c:295
 msgid "Colorschemes directory:"
 msgstr "Spalvų schemų katalogas:"
 
-#: src/main.c:188
+#: src/main.c:297
 msgid "Scripts directory:"
 msgstr "Skriptų katalogas:"
 
-#: src/main.c:190
+#: src/main.c:299
 msgid "Window icon:"
 msgstr "Lango piktograma:"
 
-#: src/main.c:192
+#: src/main.c:301
 msgid "Own locale directory:"
 msgstr "Savas lokalės katalogas:"
 
-#: src/main.c:194
+#: src/main.c:303
 msgid "Default learn buffer file location:"
 msgstr "Įprastos mokymosi buferio bylos vieta:"
 
-#.
-#. * As everything seemed to went fine, print out a nice
-#. *  message informing the user about the success.
-#.
-#: src/main.c:459
-#, c-format
-msgid "Learned file `%s' successfully for your learn buffer.\n"
-msgstr "Byla „%s“ sėkmingai išmokta tavo mokymosi buferiui.\n"
-
-#.
-#. * Give us another small status feedback about the export.
-#.
-#: src/main.c:501
-#, c-format
-msgid "Exported learn buffer to file `%s'.\n"
-msgstr "Eksportuoti mokymosi buferį į bylą „%s“.\n"
-
-#: src/menus.c:48
+#: src/menus.c:52
 msgid "_Go"
 msgstr "_Eiti"
 
-#: src/menus.c:58
+#: src/menus.c:62
 msgid "_Compile"
 msgstr "_Kompiliuoti"
 
-#: src/menus.c:59 src/menus.c:296
+#: src/menus.c:63 src/menus.c:274
 msgid "Compile the po file"
 msgstr "Kompiliuoti po bylą"
 
-#: src/menus.c:65
+#: src/menus.c:69
 msgid "_Update"
 msgstr "At_naujinti"
 
-#: src/menus.c:66 src/menus.c:300
+#: src/menus.c:70 src/menus.c:278
 msgid "Update the po file"
 msgstr "Atnaujinti po bylą"
 
-#: src/menus.c:73
+#: src/menus.c:77
 msgid "Add bookmark"
 msgstr "Pridėti ž_ymelę"
 
-#: src/menus.c:74
+#: src/menus.c:78
 msgid "Add a bookmark for this message in this po file"
 msgstr "Pridėti žymelę šiam įrašui iš šios po bylos"
 
-#: src/menus.c:81
+#: src/menus.c:85
 msgid "Aut_otranslate..."
 msgstr "Aut_omatiškai versti..."
 
-#: src/menus.c:82
+#: src/menus.c:86
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr "Automatiškai išversti bylą pagal informaciją iš mokymosi buferio"
 
-#: src/menus.c:89
+#: src/menus.c:93
 msgid "Remove all translations..."
 msgstr "Pašalinti visus vertimus..."
 
-#: src/menus.c:90
+#: src/menus.c:94
 msgid "Remove all existing translations from the po file"
 msgstr "Pašalinti visus po byloje esančius vertimus"
 
-#: src/menus.c:98
+#: src/menus.c:102
 msgid "Open from _URI..."
 msgstr "Atidaryti iš _URI..."
 
-#: src/menus.c:99
+#: src/menus.c:103
 msgid "Open a po file from a given URI"
 msgstr "Atidaryti po bylą iš nurodyto URI"
 
-#: src/menus.c:109
+#: src/menus.c:113
 msgid "Recen_t files"
 msgstr "Pasku_tinės bylos"
 
-#: src/menus.c:113
-msgid "_Export to UTF-8..."
-msgstr "_Eksportuoti į UTF-8..."
-
-#: src/menus.c:114
-msgid "Export the current po file to UTF-8"
-msgstr "Eksportuoti esamą po bylą į UTF-8"
-
-#: src/menus.c:120
-msgid "_Import from UTF-8..."
-msgstr "_Importuoti iš UTF-8..."
-
-#: src/menus.c:121
-msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr "Importuoti UTF-8 užkoduotą bylą į ją atitinkančią paprastą koduotę"
-
-#: src/menus.c:153
-msgid "_Query..."
-msgstr "_Užklausa..."
-
-#: src/menus.c:154 src/menus.c:361
-msgid "Query for a string"
-msgstr "Užklausti eilutės"
-
-#: src/menus.c:161
+#: src/menus.c:140
 msgid "_Header..."
 msgstr "_Antraštė..."
 
-#: src/menus.c:162
+#: src/menus.c:141
 msgid "Edit po file header"
 msgstr "Keisti po bylos antraštę"
 
-#: src/menus.c:169
+#: src/menus.c:148
 msgid "C_omment..."
 msgstr "K_omentaras..."
 
-#: src/menus.c:170
+#: src/menus.c:149
 msgid "Edit message comment"
 msgstr "Keisti užrašo komentarą"
 
-#: src/menus.c:177
+#: src/menus.c:156
 msgid "Copy _message -> translation"
 msgstr "Kopijuoti į_rašas -> vertimas"
 
-#: src/menus.c:178
+#: src/menus.c:157
 msgid "Copy the original message contents and paste them as translation"
 msgstr "Kopijuoti originalų užrašą ir įdėti jį kaip vertimą"
 
-#: src/menus.c:185
+#: src/menus.c:164
 msgid "Fu_zzy"
 msgstr "Fu_zzy"
 
-#: src/menus.c:186
+#: src/menus.c:165
 msgid "Toggle fuzzy status of a message"
 msgstr "Perjungti užrašo fuzzy būseną"
 
-#: src/menus.c:200
+#: src/menus.c:178
 msgid "_First"
 msgstr "_Pirmas"
 
-#: src/menus.c:201 src/menus.c:317
+#: src/menus.c:179 src/menus.c:295
 msgid "Go to the first message"
 msgstr "Eiti į pirmą užrašą"
 
-#: src/menus.c:207
+#: src/menus.c:185
 msgid "_Back"
 msgstr "_Atgal"
 
-#: src/menus.c:208 src/menus.c:321
+#: src/menus.c:186 src/menus.c:299
 msgid "Move back one message"
 msgstr "Eiti vienu užrašu atgal"
 
-#: src/menus.c:215
+#: src/menus.c:193
 msgid "_Next"
 msgstr "_Kitas"
 
-#: src/menus.c:216 src/menus.c:326
+#: src/menus.c:194 src/menus.c:304
 msgid "Move forward one message"
 msgstr "Eiti vienu užrašu pirmyn"
 
-#: src/menus.c:222
+#: src/menus.c:200
 msgid "_Last"
 msgstr "_Paskutinis"
 
-#: src/menus.c:223 src/menus.c:330
+#: src/menus.c:201 src/menus.c:308
 msgid "Go to the last message"
 msgstr "Eiti į paskutinį užrašą"
 
-#: src/menus.c:230
+#: src/menus.c:208
 msgid "_Go to..."
 msgstr "_Eiti..."
 
-#: src/menus.c:231
+#: src/menus.c:209
 msgid "Goto specified message number"
 msgstr "Eiti į užrašą nurodytu numeriu"
 
-#: src/menus.c:237
+#: src/menus.c:215
 msgid "Next fuz_zy"
 msgstr "Kitas fu_zzy"
 
-#: src/menus.c:238
+#: src/menus.c:216
 msgid "Go to next fuzzy message"
 msgstr "Eiti į kitą fuzzy užrašą"
 
-#: src/menus.c:244
+#: src/menus.c:222
 msgid "Next _untranslated"
 msgstr "Kitas _neišverstas"
 
-#: src/menus.c:245 src/menus.c:335
+#: src/menus.c:223 src/menus.c:313
 msgid "Go to next untranslated message"
 msgstr "Eiti į kitą neišverstą užrašą"
 
-#: src/menus.c:255
+#: src/menus.c:233
 msgid "_Bookmarks"
 msgstr "Ž_ymelės"
 
-#: src/menus.c:256
+#: src/menus.c:234
 msgid "_Colorschemes"
 msgstr "_Spalvų schemos"
 
-#: src/menus.c:270
+#: src/menus.c:248
 msgid "gtranslator _website"
 msgstr "gtranslator _tinklapis"
 
-#: src/menus.c:271
+#: src/menus.c:249
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator tinklapis internete"
 
-#: src/menus.c:282
+#: src/menus.c:260
 msgid "Open"
 msgstr "Atidaryti"
 
-#: src/menus.c:283
+#: src/menus.c:261
 msgid "Open a po file"
 msgstr "Atidaryti po bylą"
 
-#: src/menus.c:286
+#: src/menus.c:264
 msgid "Save"
 msgstr "Išsaugoti"
 
-#: src/menus.c:287
+#: src/menus.c:265
 msgid "Save File"
 msgstr "Išsaugoti bylą"
 
-#: src/menus.c:290
+#: src/menus.c:268
 msgid "Save as"
 msgstr "Pavadinti"
 
-#: src/menus.c:291
+#: src/menus.c:269
 msgid "Save file with a different name"
 msgstr "Išsaugoti bylą kitu vardu"
 
-#: src/menus.c:295
+#: src/menus.c:273
 msgid "Compile"
 msgstr "Kompiliuoti"
 
-#: src/menus.c:299
+#: src/menus.c:277
 msgid "Update"
 msgstr "Atnaujinti"
 
-#: src/menus.c:303
+#: src/menus.c:281
 msgid "Header"
 msgstr "Antraštė"
 
-#: src/menus.c:304
+#: src/menus.c:282
 msgid "Edit the header"
 msgstr "Keisti antraštę"
 
-#: src/menus.c:308
+#: src/menus.c:286
 msgid "Undo"
 msgstr "Atšaukti"
 
-#: src/menus.c:309
+#: src/menus.c:287
 msgid "Undo the last performed action"
 msgstr "Atšaukti ką tik įvykdytą veiksmą"
 
-#: src/menus.c:316
+#: src/menus.c:294
 msgid "First"
 msgstr "Pirmas"
 
-#: src/menus.c:320
+#: src/menus.c:298
 msgid "Back"
 msgstr "Atgal"
 
-#: src/menus.c:325
+#: src/menus.c:303
 msgid "Next"
 msgstr "Pirmyn"
 
-#: src/menus.c:329
+#: src/menus.c:307
 msgid "Last"
 msgstr "Galas"
 
-#: src/menus.c:334
+#: src/menus.c:312
 msgid "Missing"
 msgstr "Tuščias"
 
-#: src/menus.c:342
+#: src/menus.c:320
 msgid "Go to the next fuzzy translation"
 msgstr "Eiti į kitą fuzzy vertimą"
 
-#: src/menus.c:347
+#: src/menus.c:325
 msgid "Go to"
 msgstr "Eiti"
 
-#: src/menus.c:348
+#: src/menus.c:326
 msgid "Go to specified message number"
 msgstr "Eiti į užrašą nurodytu numeriu"
 
-#: src/menus.c:351
+#: src/menus.c:329
 msgid "Find"
 msgstr "Ieškoti"
 
-#: src/menus.c:352
+#: src/menus.c:330
 msgid "Find string in po file"
 msgstr "Rasti eilutę po byloje"
 
-#: src/menus.c:356
+#: src/menus.c:334
 msgid "Replace string in po file"
 msgstr "Pakeisti eilutę po byloje"
 
-#: src/message.c:96
+#: src/message.c:83
 msgid "Couldn't get the message!"
 msgstr "Negalėjau gauti užrašo!"
 
-#: src/message.c:118
+#: src/message.c:105
 msgid "There are no fuzzy messages left."
 msgstr "Daugiau nėra nei vieno fuzzy užrašo,"
 
-#: src/message.c:142
+#: src/message.c:129
 msgid "All messages seem to be translated."
 msgstr "Atrodo, jog visi užrašai išversti."
 
-#: src/message.c:328
-msgid "gtranslator -- edit plural forms of message translation"
-msgstr "gtranslator -- keisti įrašų daugiskaitos formų vertimus"
+#: src/message.c:212
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr "gtkspell klaida: %s\n"
 
-#: src/messages-table.c:252
+#: src/message.c:213
+#, c-format
+msgid ""
+"GtkSpell was unable to initialize.\n"
+" %s"
+msgstr ""
+"Nepavyko inicializuoti GtkSpell.\n"
+" %s"
+
+#: src/messages-table.c:213
 msgid "Original"
 msgstr "Originalas"
 
-#: src/open.c:144
-#, c-format
-msgid "Couldn't open compiled gettext file `%s'!"
-msgstr "Negalėjau atidaryti sukompiliuotos gettext bylos „%s“!"
+#: src/parse.c:85
+msgid "Parser output"
+msgstr "Apdoroklio išvestis"
 
-#: src/open.c:192
+#: src/parse.c:209
 #, c-format
-msgid "Couldn't open compressed gettext file `%s'!"
-msgstr "Negalėjau atidaryti suarchyvuotos gettext bylos „%s“!"
+msgid "Failed opening file '%s': %s"
+msgstr "Nepavyko atidaryti bylos „%s“: %s"
+
+#: src/parse.c:222
+msgid "Gettext returned a null message domain list."
+msgstr "Gettext grąžino tuščią sričių sąrašą."
+
+#: src/parse.c:251
+msgid "No messages obtained from parser."
+msgstr "Iš apdoroklio negauta jokių žinučių."
+
+#: src/parse.c:312 src/parse.c:316
+msgid "N/A"
+msgstr "nėra"
 
 #.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
+#. * Set window title
 #.
-#: src/open.c:202
-#, c-format
-msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr "Negalėjau atidaryti %s gettext bylos „%s“!"
-
-#: src/open.c:271
-#, c-format
-msgid "Couldn't open zip'ed po file `%s'!"
-msgstr "Negalėjau atidaryti zip'uotos gettext bylos „%s“!"
-
-#: src/parse.c:487
-#, c-format
-msgid ""
-"Error in file \"%s\"\n"
-"at line %d.\n"
-"Please check the file and try again."
-msgstr ""
-"Klaida byloje „%s“\n"
-"eilutėje %d.\n"
-"Pataisyk bylą, ir bandyk vėl."
-
-#: src/parse.c:542
-#, c-format
-msgid ""
-"The file is empty:\n"
-"%s"
-msgstr ""
-"Byla yra tuščia:\n"
-"%s"
-
-#: src/parse.c:564
-#, c-format
-msgid "The file `%s' doesn't exist at all!"
-msgstr "Byla „%s“ išvis neegzistuoja"
-
-#.
-#. * Provide a default po->header to avoid segfaults (#62244)
-#.
-#: src/parse.c:696
-msgid "Header record not found - defaulting from preferences"
-msgstr "Antraštės įrašas nerastas - naudojamas įprastas iš nuostatų"
-
-#: src/parse.c:712
+#: src/parse.c:352
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:924
+#: src/parse.c:471
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1279,12 +1149,7 @@ msgstr ""
 "Tokios bylos yra generuojamos kompiliavimo metu.\n"
 "Tavo byla turėtų būti pavadinta „%s.po“."
 
-#: src/parse.c:986
-#, c-format
-msgid "Could not open file `%s' for writing!"
-msgstr "Negalėjau atidaryti bylos „%s“ rašymui!"
-
-#: src/parse.c:1038
+#: src/parse.c:511
 #, c-format
 msgid ""
 "File %s\n"
@@ -1302,294 +1167,241 @@ msgstr[2] ""
 "Byloje %s\n"
 "yra %d fuzzy užrašų"
 
-#: src/parse.c:1310
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "Gaila, bet tavo sistemoje nėra msgfmt!"
-
-#: src/parse.c:1345
-#, c-format
-msgid ""
-"Compile successful:\n"
-"%s"
-msgstr ""
-"Kompiliavimas sėkmingas:\n"
-"%s"
-
 #: src/preferences.c:180
 msgid "Couldn't generate the current date!"
 msgstr "Nepavyko sugeneruoti esamos datos!"
 
-#: src/prefs.c:212
+#: src/prefs.c:210
 msgid "Hotkey indicating character:"
 msgstr "Karštą klavišą nustatantis simbolis:"
 
-#: src/prefs.c:332
+#: src/prefs.c:310
 msgid "gtranslator -- options"
 msgstr "gtranslator -- nuostatos"
 
 #.
 #. * Files page
 #.
-#: src/prefs.c:350
+#: src/prefs.c:329
 msgid "Files"
 msgstr "Bylos"
 
-#: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
+#: src/prefs.c:330 src/prefs.c:488 src/prefs.c:523
 msgid "General"
 msgstr "Pagrindinės"
 
-#: src/prefs.c:352
+#: src/prefs.c:331
 msgid "Warn if po file contains fuzzy translations"
 msgstr "Įspėti, jei byloje yra fuzzy vertimų"
 
-#: src/prefs.c:356
+#: src/prefs.c:335
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Ištrinti kompiliuotas bylas (pvz. \"projektas.gmo\")"
 
-#: src/prefs.c:360
+#: src/prefs.c:339
 msgid "Autosave"
 msgstr "Automatinis saugojimas"
 
-#: src/prefs.c:361
+#: src/prefs.c:340
 msgid "Automatically save at regular intervals"
 msgstr "Reguliariai automatiškai išsaugoti po bylas"
 
-#: src/prefs.c:369
+#: src/prefs.c:348
 msgid "Autosave interval:"
 msgstr "Automatinio saugojimo intervalas:"
 
-#: src/prefs.c:370
+#: src/prefs.c:349
 msgid "Append a suffix to automatically saved files"
 msgstr "Pridėti galunę prie automatiškai saugomų bylų pavadinimo"
 
-#: src/prefs.c:377
+#: src/prefs.c:356
 msgid "Suffix:"
 msgstr "Galūnė:"
 
-#: src/prefs.c:378
+#: src/prefs.c:357
 msgid "Recent files"
 msgstr "Paskutinės bylos"
 
-#: src/prefs.c:386
+#: src/prefs.c:365
 msgid "Maximum number of entries in the recent files list:"
 msgstr "Maksimalus paskutinių bylų sąraše rodomų įrašų skaičius:"
 
-#: src/prefs.c:387
+#: src/prefs.c:366
 msgid "Check recent files before showing in recent files list"
 msgstr "Prieš parodant paskutinių bylų sąraše, patikrinti ar byla egzistuoja"
 
 #.
 #. * Editor page
 #.
-#: src/prefs.c:395
+#: src/prefs.c:374
 msgid "Editor"
 msgstr "Redaktorius"
 
-#: src/prefs.c:398
+#: src/prefs.c:377
 msgid "Text display"
 msgstr "Teksto rodymas"
 
-#: src/prefs.c:399
+#: src/prefs.c:378
 msgid "Highlight syntax of the translation message"
 msgstr "Paryškinti vertimo užrašo sintaksę"
 
-#: src/prefs.c:410
-msgid "Syntax color scheme to use:"
-msgstr "Naudotina sintaksės spalvų schema:"
-
-#: src/prefs.c:411
+#: src/prefs.c:383
 msgid "Use special character to indicate white space"
 msgstr "Naudoti specialų simbolį tarpams žymėti"
 
-#: src/prefs.c:419
+#: src/prefs.c:391
 msgid "Apply own fonts"
 msgstr "Pritaikyti savus šriftus"
 
-#: src/prefs.c:423
+#: src/prefs.c:395
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- šrifto pasirinkimas/msgid šriftas"
 
-#: src/prefs.c:427
+#: src/prefs.c:399
 msgid "Original text font:"
 msgstr "Originalo teksto spalva:"
 
-#: src/prefs.c:428
+#: src/prefs.c:400
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- šrifto pasirinkimas/msgstr šriftas"
 
-#: src/prefs.c:432
+#: src/prefs.c:404
 msgid "Translation font:"
 msgstr "Vertimo šriftas:"
 
-#: src/prefs.c:433
-msgid "Apply own colors:"
-msgstr "Naudoti savas spalvas:"
-
-#: src/prefs.c:437
-msgid "gtranslator -- foreground color"
-msgstr "gtranslator -- raidžių spalva"
-
-#: src/prefs.c:441
-msgid "Foreground color:"
-msgstr "Raidžių spalva:"
-
-#: src/prefs.c:442
-msgid "gtranslator -- background color"
-msgstr "gtranslator -- fono spalva"
-
-#: src/prefs.c:446
-msgid "Background:"
-msgstr "Fonas:"
-
-#: src/prefs.c:447
+#: src/prefs.c:405
 msgid "Contents"
 msgstr "Turinys"
 
-#: src/prefs.c:448
+#: src/prefs.c:406
 msgid "Remove fuzzy status if message is changed"
 msgstr "Nuimti fuzzy būseną užrašui pasikeitus"
 
-#: src/prefs.c:452
+#: src/prefs.c:410
 msgid "Keep obsolete messages in the po files"
 msgstr "Palikti pasenusius užrašus po bylose"
 
-#: src/prefs.c:456
+#: src/prefs.c:414
 msgid "Spell checking"
 msgstr "Rašybos tikrinimas"
 
-#: src/prefs.c:457
+#: src/prefs.c:415
 msgid "Instant spell checking"
 msgstr "Tikrinti rašybą rašant"
 
-#: src/prefs.c:463
+#: src/prefs.c:421
 msgid "Use special dictionary:"
 msgstr "Naudoti specialų žodyną:"
 
 #.
 #. * PO header page
 #.
-#: src/prefs.c:481
+#: src/prefs.c:439
 msgid "PO header"
 msgstr "PO antraštė"
 
-#: src/prefs.c:484
+#: src/prefs.c:442
 msgid "Personal Information"
 msgstr "Asmeninė informacija"
 
-#: src/prefs.c:488
+#: src/prefs.c:446
 msgid "Author's name:"
 msgstr "Autoriaus vardas:"
 
-#: src/prefs.c:492
+#: src/prefs.c:450
 msgid "Author's email:"
 msgstr "Autoriaus el. paštas:"
 
-#: src/prefs.c:493
+#: src/prefs.c:451
 msgid "Language settings"
 msgstr "Kalbos parinktys"
 
-#: src/prefs.c:506
+#: src/prefs.c:464
 msgid "Language code:"
 msgstr "Kalbos kodas:"
 
 #.
 #. * Functionality page
 #.
-#: src/prefs.c:528
+#: src/prefs.c:486
 msgid "Functionality"
 msgstr "Funkcionalumas"
 
-#: src/prefs.c:531
+#: src/prefs.c:489
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Įjungti po bylos atnaujinimo galimybę iš gtranslator"
 
-#: src/prefs.c:535
+#: src/prefs.c:493
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Įjungti galimybę pašalinti iš po bylos visus vertimus"
 
-#: src/prefs.c:539
+#: src/prefs.c:497
 msgid "Show instant comment view in main pane"
 msgstr "Rodyti greitų komentarų vaizdą pagrindiniame skydelyje"
 
-#: src/prefs.c:543
+#: src/prefs.c:501
 msgid "Display special dialog for messages with plural forms"
 msgstr "Rodyti specialų dialogą užrašams su daugiskaitos formomis"
 
-#: src/prefs.c:547
+#: src/prefs.c:505
 msgid "Save geometry on exit and restore it on startup"
 msgstr "Išsaugoti geometriją išeinant ir atkurti pradžioje"
 
-#: src/prefs.c:551
+#: src/prefs.c:509
 msgid "Messages table"
 msgstr "Užrašų lentelė"
 
-#: src/prefs.c:552
+#: src/prefs.c:510
 msgid "Show the messages table (requires restart)"
 msgstr "Rodyti užrašų lentelę (reikia iš naujo paleisti programą)"
 
-#: src/prefs.c:556
+#: src/prefs.c:514
 msgid "Collapse all entries by default"
 msgstr "Įprastai sutraukti visu įrašus"
-
-#: src/prefs.c:560
-msgid "Use own colors for messages table groups"
-msgstr "Naudoti savas spalvas užrašų lentelės grupėms"
-
-#: src/prefs.c:569
-msgid "Fuzzy entries color:"
-msgstr "Fuzzy įrašų spalva:"
-
-#: src/prefs.c:575
-msgid "Untranslated entries color:"
-msgstr "Neišverstų įrašų spalva:"
-
-#: src/prefs.c:581
-msgid "Translated entries color:"
-msgstr "Išverstų įrašų spalva:"
 
 #.
 #. * Autotranslate page
 #.
-#: src/prefs.c:586
+#: src/prefs.c:522
 msgid "Autotranslation"
 msgstr "Automatinis vertimas"
 
-#: src/prefs.c:588
+#: src/prefs.c:524
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 "Automatiškai verčiant užrašus taip pat užklausti ir asmeninį mokymosi buferį"
 
-#: src/prefs.c:592
+#: src/prefs.c:528
 msgid "Automatically learn a newly translated message"
 msgstr "Automatiškai išmokti naujai išverstą užrašą"
 
-#: src/prefs.c:596
+#: src/prefs.c:532
 msgid "Fuzzy matching"
 msgstr "Fuzzy atitikimas"
 
-#: src/prefs.c:603
+#: src/prefs.c:539
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr "Mokymosi buferio užklausoms naudoti „fuzzy“ atitikmenų paprogrames"
 
-#: src/prefs.c:610
+#: src/prefs.c:546
 msgid "Minimal required similarity persentage for fuzzy queries:"
 msgstr "Mažiausias reikalingas panašumas fuzzy užklausoms:"
 
-#: src/prefs.c:659
+#: src/prefs.c:594
 msgid "Please enter your name!"
 msgstr "Prašom įvesti savo vardą!"
 
-#: src/prefs.c:679
+#: src/prefs.c:614
 msgid "Please enter your EMail address!"
 msgstr "Prašom įvesti savo el.pašto adresą!"
 
-#: src/prefs.c:699
+#: src/prefs.c:634
 msgid "Please enter a valid EMail address!"
 msgstr "Prašom įvesti galiojantį el.pašto adresą!"
 
-#: src/replace.c:175
+#: src/replace.c:162
 msgid "No replacements made!"
 msgstr "Neatlikta jokių pakeitimų!"
 
@@ -1631,18 +1443,23 @@ msgstr "Negalėjau išsaugoti suarchyvuotos gettext bylos „%s“!"
 msgid "Couldn't save %s'd gettext file `%s'!"
 msgstr "Negalėjau išsaugoti %s gettext bylos „%s“!"
 
-#: src/save.c:228
+#: src/save.c:227
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
 msgstr "Negalėjau išsaugoti zip'uotos gettext bylos „%s“!"
 
-#: src/session.c:86
+#: src/session.c:85
 msgid "Session restored successfully."
 msgstr "Sesija atkurta sėkmingai."
 
+#: src/sighandling.c:65
+#, c-format
+msgid "Saving file failed: %s"
+msgstr "Bylos išsaugoti nepavyko: %s"
+
 #: src/stylistics.c:265
 msgid "No font set! Using default font"
-msgstr "Joks šriftas nenurodytas! Naudoju įprastą"
+msgstr "Joks šriftas nenurodytas! Naudojamas įprastas šriftas"
 
 #.
 #. * Use gtranslator's font in this case -- should be a fallback font
@@ -1652,68 +1469,35 @@ msgstr "Joks šriftas nenurodytas! Naudoju įprastą"
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-13"
 
-#: src/update.c:102
-msgid "No POTFILES.in found!"
-msgstr "Nerastas POTFILES.in!"
-
-#: src/update.c:113
-msgid "Po file is uptodate."
-msgstr "Po byla ir taip naujausia."
-
-#: src/update.c:120
-msgid "The update was successfull."
-msgstr "Atnaujinimas buvo sėkmingas."
-
-#: src/update.c:125
-msgid "An error occurred while updating the po file."
-msgstr "Įvyko klaida, atnaujinant po bylą."
-
-#: src/utils.c:308 src/utils.c:325
+#: src/utils.c:274 src/utils.c:291
 #, c-format
 msgid "Can't create directory `%s'!"
-msgstr "Negalėjau sukurti katalogo „%s“!"
+msgstr "Nepavyko sukurti aplanko „%s“!"
 
-#.
-#. * Again return the fallback default locale value given by the translator.
-#.
-#: src/utils.c:794
-msgid "iso-8859-1"
-msgstr "iso-8859-13"
+#: src/utils.c:359
+#, c-format
+msgid "Error autosaving file: %s"
+msgstr "Klaida automatiškai saugant bylą: %s"
 
-#: src/utils_gui.c:144
+#: src/utils_gui.c:142
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometrijos eilutės „%s“ nepavyko išnagrinėti!"
 
-#: src/utils_gui.c:360
-#, c-format
-msgid "You are not permitted to access file '%s'."
-msgstr "Tu negali prieiti prie bylos „%s“."
-
-#: src/utils_gui.c:378
-#, c-format
-msgid ""
-"You do not have permission to modify file '%s'.\n"
-"Please save a new copy of it to a place of your choice and get write\n"
-"permission for it."
-msgstr ""
-"Tu neturi teisės modifikuoti bylą „%s“.\n"
-"Prašau išsaugoti jos kopiją į katalogą, kuriame turi rašymo teisę."
-
-#: src/utils_gui.c:467
+#: src/utils_gui.c:356
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
-msgstr "Reikalinga išarchyvavimo byla „%s“ nėra įdiegta!"
+msgstr "Reikalinga išarchyvavimo programa „%s“ nėra įdiegta!"
 
-#: src/utils_gui.c:472
+#: src/utils_gui.c:361
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
-msgstr "Reikalinga archyvavimo byla „%s“ nėra įdiegta!"
+msgstr "Reikalinga archyvavimo programa „%s“ nėra įdiegta!"
 
 #: src/vfs-handle.c:121
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
-msgstr "Negalėjau sukurti laikino katalogo „%s“!"
+msgstr "Nepavyko sukurti laikino katalogo „%s“!"
 
 #: src/vfs-handle.c:149
 #, c-format
@@ -1728,7 +1512,7 @@ msgstr "Įvestas neteisingai suformuotas URI „%s“!"
 #: src/vfs-handle.c:159
 #, c-format
 msgid "Host `%s' couldn't be found!"
-msgstr "Negaliu rasti hosto „%s“!"
+msgstr "Nepavyko rasti hosto „%s“!"
 
 #: src/vfs-handle.c:164
 #, c-format
@@ -1743,372 +1527,3 @@ msgstr "Hostas „%s“ neturi adreso!"
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Siuntimas nutrauktas!"
-
-#~ msgid ""
-#~ "File %s\n"
-#~ "contains %d fuzzy messageFile %s\n"
-#~ "contains %d fuzzy messages"
-#~ msgstr ""
-#~ "Byloje %s\n"
-#~ "yra %d fuzzy užrašųByloje %s\n"
-#~ "yra %d fuzzy užrašų"
-
-#~ msgid "Both"
-#~ msgstr "Visur"
-
-#~ msgid "In all strings"
-#~ msgstr "Visuose užrašuose"
-
-#~ msgid "Are you sure you want to remove ALL translations from this po file?"
-#~ msgstr "Ar tu tikrai nori pašalinti VISUS vertimus iš šios po bylos?"
-
-#~ msgid "Go!"
-#~ msgstr "Eiti"
-
-#~ msgid "Recovering `%s'..."
-#~ msgstr "Gelbstima „%s“..."
-
-#~ msgid "Couldn't save html output to %s!"
-#~ msgstr "Negalėjau išsaugoti html išvesties į %s!"
-
-#~ msgid "Project <b>%s</b> (last po file revision: %s)."
-#~ msgstr "Projektas <b>%s</b> (paskutinis po bylos pataisymas: %s)."
-
-#~ msgid "Last translator: %s"
-#~ msgstr "Paskutinis vertėjas: %s"
-
-#~ msgid "HTML file to write to"
-#~ msgstr "HTML byla, į kurią rašyti"
-
-#~ msgid "HTMLFILE"
-#~ msgstr "HTMLBYLA"
-
-#~ msgid "Status"
-#~ msgstr "Būsena"
-
-#~ msgid "Po file editing"
-#~ msgstr "Po bylos taisymas"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Įvairūs"
-
-#~ msgid "Recent files & spell checking"
-#~ msgstr "Pastarosios bylos & rašyba"
-
-#~ msgid "Fonts, colors and color schemes"
-#~ msgstr "Šriftai ir spalvos"
-
-#~ msgid "Learn buffer & autotranslation"
-#~ msgstr "Mokymosi buferis ir automatinis vertimas"
-
-#~ msgid "Language group's EMail:"
-#~ msgstr "Kalbos grupės el. paštas:"
-
-#~ msgid "gtranslator -- untranslated entries' color"
-#~ msgstr "gtranslator -- neišverstų įrašų spalva"
-
-#~ msgid "gtranslator -- fuzzy entries' color"
-#~ msgstr "gtranslator -- fuzzy įrašų spalva"
-
-#~ msgid "gtranslator -- translated entries' color"
-#~ msgstr "gtranslator -- išverstų įrašų spalva"
-
-#~ msgid ""
-#~ "The Preferences box allows you to customise gtranslator\n"
-#~ "to work in ways you find comfortable and productive."
-#~ msgstr ""
-#~ "Nuostatų langas leidžia tau prisitaikyti gtranslator sau,\n"
-#~ "kad dirbtum patogiau ir prodyktyviau."
-
-#~ msgid "Comment"
-#~ msgstr "Komentarai"
-
-#~ msgid "Line"
-#~ msgstr "Eilutė"
-
-#~ msgid "Number"
-#~ msgstr "Skaičiai"
-
-#~ msgid "Compiled gettext po file"
-#~ msgstr "Sukompiliuota gettext po byla"
-
-#~ msgid "Compressed gettext po file"
-#~ msgstr "Suarchyvuota gettext po byla"
-
-#~ msgid "Gettext po file"
-#~ msgstr "Gettext po byla"
-
-#~ msgid "_Messages"
-#~ msgstr "_Užrašai"
-
-#~ msgid "Mess_age status"
-#~ msgstr "Užrašo bū_sena"
-
-#~ msgid "_Fuzzy"
-#~ msgstr "_Fuzzy"
-
-#~ msgid ""
-#~ "New escaped char found: \\%c\n"
-#~ "Add this to parse.c, line %i."
-#~ msgstr ""
-#~ "Rastas naujas specialus ženklas: \\%c\n"
-#~ "Pridėk jį į parse.c, eilutė %i."
-
-#~ msgid "Enable the popup menu"
-#~ msgstr "Leisti iššokantį meniu"
-
-#, fuzzy
-#~ msgid "unknown"
-#~ msgstr "Nežinomas"
-
-#, fuzzy
-#~ msgid "fuzzy"
-#~ msgstr "Fuzzy"
-
-#, fuzzy
-#~ msgid "translated"
-#~ msgstr "Išverstas"
-
-#~ msgid "Messages table:"
-#~ msgstr "Užrašų lentelė:"
-
-#~ msgid "Documentation:"
-#~ msgstr "Dokumentacija:"
-
-#, fuzzy
-#~ msgid "Translation:"
-#~ msgstr "Vertimas"
-
-#, fuzzy
-#~ msgid "Current colorscheme: \"%s\" (version %s) is brought to you by:"
-#~ msgstr "Esama spalvų schema: \"%s\" (versija %s), sukurta"
-
-#~ msgid ""
-#~ "%s\n"
-#~ " (%s) loaded.\n"
-#~ msgstr ""
-#~ "%s\n"
-#~ " (%s) įkelta.\n"
-
-#, fuzzy
-#~ msgid "Don't load any backend modules"
-#~ msgstr "Neužkrauti jokių "
-
-#~ msgid "_Translated"
-#~ msgstr "_Išverstas"
-
-#~ msgid "Toggle translated status of a message"
-#~ msgstr "Perjungti išverstą užrašo būseną"
-
-#, fuzzy
-#~ msgid "Insert matching translation"
-#~ msgstr "Domenas, kuriame ieškoti vertimo:"
-
-#, fuzzy
-#~ msgid "Take as translation"
-#~ msgstr "Vertimas"
-
-#~ msgid "Untranslated (%i)"
-#~ msgstr "Neišverstas (%i)"
-
-#~ msgid "Fuzzy (%i)"
-#~ msgstr "Fuzzy (%i)"
-
-#~ msgid "Sticky"
-#~ msgstr "Sustingęs"
-
-#~ msgid "Couldn't get list of gettext domains!"
-#~ msgstr "Negalėjau gauti gettext domenų sąrašo!"
-
-#~ msgid "gtranslator -- query existing gettext domains"
-#~ msgstr "gtranslator -- užklausa"
-
-#~ msgid "Stick"
-#~ msgstr "Sustingęs"
-
-#~ msgid "LOCALEDIR"
-#~ msgstr "LOKALĖSKAT"
-
-#~ msgid "_Message"
-#~ msgstr "_Užrašas"
-
-#~ msgid "Standard messages view"
-#~ msgstr "Standartinis užrašo vaizdas"
-
-#~ msgid "_Numbers"
-#~ msgstr "_Skaičiai"
-
-#~ msgid "View numbers in the message"
-#~ msgstr "Rodyti skaičius užraše"
-
-#~ msgid "C _Formats"
-#~ msgstr "C _Formatai"
-
-#~ msgid "View C formats of the message"
-#~ msgstr "Rodyti C formatus užraše"
-
-#~ msgid "_Hotkeys"
-#~ msgstr "_Karštieji klavišai"
-
-#~ msgid "View hotkeys in the message"
-#~ msgstr "Rodyti užraše esančius karštuosius klavišus"
-
-#~ msgid "_Stick"
-#~ msgstr "_Sustingęs"
-
-#~ msgid "Stick this message"
-#~ msgstr "Sustingdyti šį užrašą"
-
-#~ msgid "Options"
-#~ msgstr "Nuostatos"
-
-#~ msgid "gtranslator options"
-#~ msgstr "gtranslator nuostatos"
-
-#~ msgid ""
-#~ "You didn't change anything in\n"
-#~ "%s\n"
-#~ "Do you want to save it anyway?"
-#~ msgstr ""
-#~ "Tu nepakeitei nieko byloje\n"
-#~ "%s\n"
-#~ "Ar nori vis tiek ją išsaugoti?"
-
-#~ msgid "gtranslator -- unchanged"
-#~ msgstr "gtranslator -- nepakeistas"
-
-#~ msgid "Don't save unchanged po files"
-#~ msgstr "Nesaugoti nepakeistų bylų"
-
-#~ msgid "Warn me if I'm trying to save an unchanged file"
-#~ msgstr "Įspėti, jei bandoma išsaugoti nepakeistą bylą"
-
-#~ msgid "Show the views sidebar"
-#~ msgstr "Rodyti rodinių šoninę juostą"
-
-#~ msgid "Dictionary to use:"
-#~ msgstr "Naudojamas žodynas:"
-
-#~ msgid "Autosave timeout in minutes:"
-#~ msgstr "Automatinio saugojimo intervalas, minutėmis:"
-
-#~ msgid ""
-#~ "\t\tThe Preferences box allows you to customise gtranslator\n"
-#~ "\t\tto work in ways you find comfortable and productive."
-#~ msgstr ""
-#~ "\t\tNuostatų langas leidžia tau prisitaikyti gtranslator sau,\n"
-#~ "\t\tkad dirbtum patogiau ir prodyktyviau."
-
-#~ msgid "Preferences section"
-#~ msgstr "Nuostatų skyrius"
-
-#~ msgid "gtranslator -- preferences"
-#~ msgstr "gtranslator -- nuostatos"
-
-#~ msgid ""
-#~ "%i preferences changes have been made.\n"
-#~ "Do you want to discard all of these changes?"
-#~ msgstr ""
-#~ "Buvo atlikta %i nuostatų pakeitimų.\n"
-#~ "Ar tu nori atsisakyti visų šių pakeitimų?"
-
-#~ msgid "Message"
-#~ msgstr "Užrašas"
-
-#~ msgid "Format"
-#~ msgstr "Formatai"
-
-#~ msgid "Hotkey"
-#~ msgstr "Karštieji klavišai"
-
-#~ msgid "Views"
-#~ msgstr "Rodiniai"
-
-#~ msgid "·"
-#~ msgstr "·"
-
-#~ msgid "No numbers found."
-#~ msgstr "Nerasta skaičių."
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "No C formats present."
-#~ msgstr "Nėra C formatų."
-
-#~ msgid "No hotkeys defined in message."
-#~ msgstr "Užraše nėra karštųjų klavišų."
-
-#~ msgid "View URL..."
-#~ msgstr "Žiūrėti URL.."
-
-#~ msgid "Aut_oaccomplish"
-#~ msgstr "Užpildyti _trūkstamus"
-
-#~ msgid "_Comments"
-#~ msgstr "_Komentarai"
-
-#~ msgid "View comments for message"
-#~ msgstr "Rodyti komentarus užrašui"
-
-#~ msgid "Go one message forward"
-#~ msgstr "Eiti vienu užrašu pirmyn"
-
-#~ msgid ""
-#~ "Enable the update function of gtranslator (you need the sources for this)"
-#~ msgstr ""
-#~ "Leisti gtranslator atnaujimo funkciją (tu turi turėti išeities tekstus)"
-
-#~ msgid "Don't show the update information dialogs"
-#~ msgstr "Nerodyti atnaujinim informacijos dialoguose"
-
-#~ msgid "Font:"
-#~ msgstr "Šriftas:"
-
-#~ msgid ""
-#~ "With the Preferences box you can define some variables\n"
-#~ "with which you can make gtranslator make more work\n"
-#~ "like YOU want it to work!"
-#~ msgstr ""
-#~ "Šiame Nuostatų lange tu gali apibrėžti keletą kintamųjų,\n"
-#~ "kurie padarys, kad gtranslator veiktų taip, kaip TU nori,\n"
-#~ "kad jis veiktų!"
-
-#~ msgid "%Y-%m-%d %H:%M"
-#~ msgstr "%Y-%m-%d %H:%M"
-
-#~ msgid "No language defined in preferences to query the domains for!"
-#~ msgstr "Nuostatose nenurodyta kalba, kurios domenus užklausti!"
-
-#~ msgid "Uncatched signal %i!"
-#~ msgstr "Nepagautas signalas %i!"
-
-#~ msgid "An update caused no changes."
-#~ msgstr "Atnaujinimas nieko nepakeitė."
-
-#~ msgid "You don't have read permissions on file `%s'"
-#~ msgstr "Tu neturi teisės perskaityti bylos „%s“"
-
-#~ msgid "No comments available for this message."
-#~ msgstr "Užrašui nėra jokių komentarų."
-
-#~ msgid "Loading po file..."
-#~ msgstr "Įkeliama po byla..."
-
-#~ msgid "Open Po File"
-#~ msgstr "Atidaryti po bylą"
-
-#~ msgid "Gtranslator Po File"
-#~ msgstr "Gtranslator po byla"
-
-#~ msgid "Gtranslator Po File View"
-#~ msgstr "Gtranslator po bylų vaizdas"
-
-#~ msgid "Gtranslator Po File Viewer"
-#~ msgstr "Gtranslator po bylų peržiūros programa"
-
-#~ msgid "View as Po File"
-#~ msgstr "Rodyti kaip po bylą"
-
-#~ msgid "Open _po file"
-#~ msgstr "Atidaryti _po bylą"
