@@ -29,6 +29,9 @@
 #include <libgtranslator/libgtranslator.h>
 #include <popt-gnome.h>
 #include <liboaf/liboaf.h>
+#ifdef GCONF_IS_PRESENT
+#include <gconf/gconf.h>
+#endif
 
 /*
  * gtranslatord's options as a poptTable.

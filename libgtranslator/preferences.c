@@ -18,16 +18,19 @@
  *
  */
 
-#include <libgnome/libgnome.h>
 #include <libgtranslator/preferences.h>
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
+#include <time.h>
 
-/*
- * GConf variables conditionally used in the preferences methods.
- */
 #ifdef GCONF_IS_PRESENT
-GConfClient	*client;
-GError		*error;
+
+#include <gconf/gconf-client.h>
+GConfClient	*client=NULL;
 gchar		*private_path=NULL;
+
+#else
+#include <libgnome/libgnome.h>
 #endif
 
 /*
@@ -36,17 +39,16 @@ gchar		*private_path=NULL;
 void gtranslator_config_init(void)
 {
 	#ifdef GCONF_IS_PRESENT
-	client=gconf_client_get_default();
-	gconf_client_add_dir(client, "/apps/gtranslator",
-		GCONF_CLIENT_PRELOAD_NONE, &error);
-	
-	if(error)
+	/* We need to do it only once */
+	if(client==NULL)
 	{
-		g_error(
-		_("Error during GConf initialization through libgtranslator:\n%s"),
-		error->message);
+		client=gconf_client_get_default();
+		/*
+		 * add_dir is useful only for listeners...
+		gconf_client_add_dir(client, "/apps/gtranslator",
+			GCONF_CLIENT_PRELOAD_NONE, NULL);
+		 */
 	}
-	
 	#else
 	gnome_config_push_prefix("/gtranslator/");
 	#endif
@@ -58,15 +60,7 @@ void gtranslator_config_init(void)
 void gtranslator_config_close(void)
 {
 	#ifdef GCONF_IS_PRESENT
-	/*
-	 * Synchronize the preferences with the default client.
-	 */
-	gconf_client_suggest_sync(client, &error);
-        /*
-         * Remove gtranslator's preferences directory from GConf's
-	 *  default client.
-         */
-        gconf_client_remove_dir(client, "/apps/gtranslator", &error);
+	gconf_client_suggest_sync(client, NULL);
 	#else
 	gnome_config_pop_prefix();
 	gnome_config_sync();
@@ -82,8 +76,8 @@ gchar *gtranslator_config_get_string(gchar *path)
 	g_return_val_if_fail(path != 0, NULL);
 	
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s",path);
-	str = gconf_client_get_string(client, private_path, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	str = gconf_client_get_string(client, private_path, NULL);
 	g_free(private_path);
 	#else
 	str = gnome_config_get_string(path);
@@ -97,8 +91,8 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 	g_return_if_fail(value != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s", path);
-	gconf_client_set_string(client, private_path, value, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	gconf_client_set_string(client, private_path, value, NULL);
 	g_free(private_path);
 	#else
 	gnome_config_set_string(path, value);
@@ -114,8 +108,8 @@ gint gtranslator_config_get_int(gchar *path)
 	g_return_val_if_fail(path != NULL, 1);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s",path);
-	i = gconf_client_get_int(client, private_path, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	i = gconf_client_get_int(client, private_path, NULL);
 	g_free(private_path);
 	#else
 	i = gnome_config_get_int(path);
@@ -128,8 +122,8 @@ void gtranslator_config_set_int(gchar *path, gint value)
 	g_return_if_fail(path != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s", path);
-	gconf_client_set_int(client, private_path, value, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	gconf_client_set_int(client, private_path, value, NULL);
 	g_free(private_path);
 	#else
 	gnome_config_set_int(path, value);
@@ -145,8 +139,8 @@ gboolean gtranslator_config_get_bool(gchar *path)
 	g_return_val_if_fail(path != NULL, FALSE);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s",path);
-	b = gconf_client_get_bool(client, private_path, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	b = gconf_client_get_bool(client, private_path, NULL);
 	g_free(private_path);
 	#else
 	b = gnome_config_get_bool(path);
@@ -159,8 +153,8 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 	g_return_if_fail(path != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s", path);
-	gconf_client_set_bool(client, private_path, value, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	gconf_client_set_bool(client, private_path, value, NULL);
 	g_free(private_path);
 	#else
 	gnome_config_set_bool(path, value);
@@ -176,8 +170,8 @@ gfloat gtranslator_config_get_float(gchar *path)
 	g_return_val_if_fail(path != NULL, 0.0);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s", path);
-	f = gconf_client_get_float(client,  private_path, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	f = gconf_client_get_float(client,  private_path, NULL);
 	g_free(private_path);
 	#else
 	f = gnome_config_get_float(path);
@@ -190,8 +184,8 @@ void gtranslator_config_set_float(gchar *path, gfloat value)
 	g_return_if_fail(path != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("/apps/gtranslator/%s", path);
-	gconf_client_set_float(client, private_path, value, &error);
+	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	gconf_client_set_float(client, private_path, value, NULL);
 	g_free(private_path);
 	#else
 	gnome_config_set_float(path, value);

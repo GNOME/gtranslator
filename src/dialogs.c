@@ -59,10 +59,6 @@ void open_file(GtkWidget * widget, gpointer useless)
 	raise_and_return_if_exists(dialog);
 	dialog = gtk_file_selection_new(_("gtranslator -- open a po-file"));
 	
-	/*
-	 * gtk_file_selection_complete(GTK_FILE_SELECTION(dialog),"*.po*");
-	 */
-	
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
 			   "clicked", GTK_SIGNAL_FUNC(parse_the_file),
 			   (gpointer) dialog);
@@ -71,6 +67,12 @@ void open_file(GtkWidget * widget, gpointer useless)
 				  "clicked",
 				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
 				  GTK_OBJECT(dialog));
+	if (po && po->filename)
+	{
+		gchar *dir=g_dirname(po->filename);
+		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), dir);
+		g_free(dir);
+	}
 	/*
 	 * Make the dialog transient, show_nice_dialog does not do it
 	 *  because it is not a GnomeDialog.

@@ -125,7 +125,7 @@ void gtranslator_history_show(void)
 	gint i;
 	GnomeUIInfo *menu;
 	GList *list, *onelist;
-	gchar *name;
+	GtrHistoryEntry *entry;
 	
 	gchar *menupath = _("_File/Recen_t files/");
 
@@ -149,34 +149,37 @@ void gtranslator_history_show(void)
 		/*
 		 * Get the history entry.
 		 */
-		name=g_strdup(GTR_HISTORY_ENTRY(onelist->data)->filename);
+		entry=GTR_HISTORY_ENTRY(onelist->data);
 
 		menu=g_new0(GnomeUIInfo,2);
 
 		/*
 		 * Set the label name.
 		 */
-		menu->label=g_strdup_printf("_%i: %s", i--, name);
+		menu->label=g_strdup_printf("_%i: %s %s -- %s", i--,
+		                            entry->project_name,
+					    entry->project_version,
+					    g_basename(entry->filename));
 		
 		/*
 		 * Set the GnomeUIInfo settings and labels.
 		 */
 		menu->type=GNOME_APP_UI_ITEM;
-		menu->hint=g_strdup_printf(_("Open %s"), name);
+		menu->hint=g_strdup_printf(_("Open %s"), entry->filename);
 		menu->moreinfo=(gpointer)open_file_from_history;
-		menu->user_data=g_strdup(name);
+		menu->user_data=entry->filename;
 		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
 
 		/*
 		 * Insert this item into menu
 		 */
-		gnome_app_insert_menus (GNOME_APP(app1), menupath, menu);
+		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
+		gnome_app_install_menu_hints(GNOME_APP(app1), menu);
 
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
 		g_free(menu->label);
-		g_free(menu->hint);
 		g_free(menu);
 	}
 }

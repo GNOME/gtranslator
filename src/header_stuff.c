@@ -154,48 +154,26 @@ GtrMsg * put_header(GtrHeader * h)
 {
 	gchar *group;
 	GtrMsg *msg = g_new0(GtrMsg, 1);
-	msg->comment = g_strdup(h->comment);
+	gint c;
+	gchar *lang=h->language;
 
+	/*
+	 * Get the non-localized name for the language, if available
+	 */ 
+	for(c=0;languages[c].group!=NULL;c++)
+	{
+		if(!strcmp(_(languages[c].name), h->language))
+		{
+			lang=languages[c].name;
+			break;
+		}
+	}
+		
 	if (h->lg_email)
-	{
-		/*
-		 * Get the non-localized name for the language by
-		 *  the language group's email address and the charset.
-		 */ 
-		gint c=0;
-		while(languages[c].group!=NULL)
-		{
-			if(!strcmp(languages[c].group, h->lg_email)
-				&& !strcmp(languages[c].enc, h->charset))
-			{
-				h->language=languages[c].name;
-			}
-			
-			c++;
-		}
-		
-		group = g_strdup_printf("%s <%s>", h->language, h->lg_email);
-	}
+		group = g_strdup_printf("%s <%s>", lang, h->lg_email);
 	else
-	{
-		/*
-		 * The same as above but with only charset and encoding.
-		 */
-		gint c=0;
-		while(languages[c].group!=NULL)
-		{
-			if(!strcmp(languages[c].enc, h->charset)
-				&& !strcmp(languages[c].bits, h->encoding))
-			{
-				h->language=languages[c].name;
-			}
-			
-			c++;
-		}
-		
-		group = g_strdup(h->language);
-	}
-	
+		group = g_strdup(lang);
+
 	msg->msgstr = g_strdup_printf("\
 Project-Id-Version: %s %s\n\
 POT-Creation-Date: %s\n\
@@ -214,6 +192,15 @@ Content-Transfer-Encoding: %s\n",
 		h->charset,
 		h->encoding);
 	g_free(group);
+
+	/*
+	 * Just copy the comment, and make sure it ends with endline
+	 * TODO: in entry box there should be no #'s
+	 */
+	if(h->comment[strlen(h->comment-1)] == '\n')
+		msg->comment = g_strdup(h->comment);
+	else
+		msg->comment = g_strconcat(h->comment, "\n", NULL);
 	return msg;
 }
 

@@ -251,7 +251,6 @@ static gboolean actual_parse(void)
 					 && (msgstr_ok == FALSE))
 					append_line(&msg->msgstr, line);
 				else
-					/*g_assert_not_reached();*/
 					goto ERRR;
 			} else {
 				ERRR:
@@ -572,11 +571,9 @@ static void write_the_message(gpointer data, gpointer fs)
 		fprintf((FILE *) fs, "msgid \"%s\"\nmsgstr \"%s\"\n\n",
 			id, str);
 	/*
-	g_print("#a");
+	 * Strange, but these cause SIGSEGV
 	g_free(id);
-	g_print("#b");
 	g_free(msg);
-	g_print("#c");
 	*/
 }
 
@@ -711,6 +708,8 @@ static void free_a_message(gpointer data, gpointer useless)
  */
 static void free_po(void)
 {
+	if(!po)
+		return;
 	if (po->messages) {
 		g_list_foreach(po->messages, free_a_message, NULL);
 		g_list_free(po->messages);

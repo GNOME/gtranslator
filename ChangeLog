@@ -678,10 +678,8 @@
 
 	* configure.in: Changed AC_INIT argument to src/parse.c. Removed
 		AM_PROG_CC_STDC, as I couldn't find where it is. Added lt to
-		ALL_LINGUAS. Added a check for the gnome-regex with my
-		enhancements. Added src/libgnome/Makefile to AC_OUTPUT. Moved
+		ALL_LINGUAS. Added src/libgnome/Makefile to AC_OUTPUT. Moved
 		the check for window-icon after check for Glib.
-	* acconfig.h: added HAVE_MY_REGEX_CACHE.
 	* data/gtranslator.keys.in: removed --file= from all calls, because I
 		removed this option long ago.
 	* man/gtranslator.1.in: updated the man-page: the AUTHORS, BUGS parts,

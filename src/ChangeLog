@@ -1,3 +1,15 @@
+2001-02-04  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* dialogs.c: Open dialog shows the same dir as current file.
+	* parse.c: avoid crash in free_po() if po=NULL.
+	
+2001-02-04  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* header_stuff.c: get not-localized language only from language
+	name, not from other fields. Fix a crash. Ensure comment ends with \n.
+	* history.c: show nice menu items: 1. project 3.14 -- lt.po. Install
+	menu hints into appbar.
+
 2001-02-04  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c, gui.h, parse.c: Removed the locally defined

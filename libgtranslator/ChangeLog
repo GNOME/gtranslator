@@ -1,3 +1,10 @@
+2001-02-03  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* preferences.c: include libgnome only if not using gconf. Removed
+	error because we do not handle them. Pass NULL's instead. Do not
+	add_dir nor remove_dir -- we do not want notifies.
+	* main.c: include gconf only when needed.
+
 2001-04-02  Thomas Ziehmer	<ziehmer@rhrk.uni-kl.de>
 
 	* stylistics.c: If user defined font not found try to start 
