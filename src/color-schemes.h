@@ -68,7 +68,7 @@ GtrColorScheme *theme;
 /*
  * Free the given GtrColorScheme.
  */
-void free_color_scheme(GtrColorScheme **scheme);
+void gtranslator_color_scheme_free(GtrColorScheme **scheme);
 
 /*
  * Returns the GtrColorScheme struct for the given file (a colorscheme) or NULL

@@ -73,15 +73,23 @@ GtkWidget *gtranslator_application_bar;
 gboolean nothing_changes;
 
 /*
- * Pops up a menu if needed
+ * Pops up a menu if needed/possible.
  */
 static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d);
 
+/*
+ * Internal text callbacks/handlers.
+ */
 static void insert_text_handler (GtkEditable *editable, const gchar *text,
-				 gint length, gint *position, gpointer data);
+	gint length, gint *position, gpointer data);
+
+static void delete_text_handler(GtkEditable *editable, gint start_position,
+	gint end_position);
+
 static void selection_get_handler(GtkWidget *widget,
-				  GtkSelectionData *selection_data, guint info,
-				  guint time_stamp, gpointer data);
+	GtkSelectionData *selection_data, guint info,
+	guint time_stamp, gpointer data);
+
 /*
  * To get the left/right moves from the cursor.
  */ 
@@ -248,12 +256,17 @@ void gtranslator_create_main_window(void)
 
 	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
 			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
+	gtk_signal_connect(GTK_OBJECT(trans_box), "delete_text",
+			   GTK_SIGNAL_FUNC(delete_text_handler), NULL);
+	
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
 			   GTK_SIGNAL_FUNC(gtranslator_translation_changed), NULL);
+	
 	gtk_signal_connect(GTK_OBJECT(text_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
+	
 	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "key_press_event",
 			   GTK_SIGNAL_FUNC(gtranslator_keyhandler), NULL);
 	/*
@@ -266,6 +279,24 @@ void gtranslator_create_main_window(void)
 	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "drag_data_received",
 			   GTK_SIGNAL_FUNC(gtranslator_dnd),
 			   GUINT_TO_POINTER(dnd_type));
+}
+
+/*
+ * An own delete text handler which should work on deletion in the translation
+ *  box -- undo is called up here, too.
+ */
+static void delete_text_handler(GtkEditable *editable, gint start_position,
+	gint end_position)
+{
+	/*
+	 * Check for dumb values and do only catch real deletions.
+	 */
+	if(start_position!=0 && end_position!=-1)
+	{
+		/* 
+		 * FIXME: Undo call goes here.
+		 */
+	}
 }
 
 /*
@@ -317,7 +348,7 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Free up our used GtrColorScheme "theme".
 	 */
-	free_color_scheme(&theme);
+	gtranslator_color_scheme_free(&theme);
 	
 	/*
 	 * Quit with the normal Gtk+ quit.
@@ -376,6 +407,7 @@ void gtranslator_application_bar_update(gint pos)
 			status=g_strdup_printf(_("%s [ %i Untranslated left ]"), _("Untranslated"), missya);
 		} else {
 			status=g_strdup_printf(_("%s [ No untranslated left ]"), _("Untranslated"));
+			
 			/*
 			 * Also disable the coressponding buttons for the
 			 *  next untranslated message/accomplish function.
@@ -387,10 +419,12 @@ void gtranslator_application_bar_update(gint pos)
 	 * Assign the first part.
 	 */
 	str=g_strdup_printf(_("Message %d / %d / Status: %s"), pos + 1, po->length, status);
+	
 	/*
 	 * Set the appbar text.
 	 */
 	gnome_appbar_push(GNOME_APPBAR(gtranslator_application_bar), str);
+	
 	/*
 	 * Update the progressbar.
 	 */
@@ -501,7 +535,9 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 	}
 }
 
-/* When inserting text, exchange spaces with dot chars */
+/*
+ * When inserting text, exchange spaces with dot chars 
+ */
 void insert_text_handler (GtkEditable *editable, const gchar *text,
 			  gint length, gint *position, gpointer data)
 {
@@ -509,6 +545,7 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 
 	if (nothing_changes)
 		return;
+		
 	/*
 	 * Do all these steps only if the option to use the '·' is set.
 	 */
@@ -521,10 +558,13 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 	gtk_signal_handler_block_by_func(GTK_OBJECT(editable),
 					 GTK_SIGNAL_FUNC(insert_text_handler),
 					 data);
+	
 	gtk_editable_insert_text(editable, result, length, position);
+	
 	gtk_signal_handler_unblock_by_func(GTK_OBJECT(editable),
 					   GTK_SIGNAL_FUNC(insert_text_handler),
 					   data);
+	
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
 
 	g_free(result);

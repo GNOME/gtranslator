@@ -41,9 +41,12 @@ struct _GtrAction {
 	GtkWidget *tool;
 };
 
-#define SWAP_ACTIONS(x, y); \
-	gtranslator_actions_disable(x); \
-	gtranslator_actions_enable(y);
+/*
+ * "Swaps" the given actions; changes the state correspondingly.
+ */
+#define gtranslator_actions_swap(x, y); \
+		gtranslator_actions_disable(x); \
+		gtranslator_actions_enable(y);
 
 /*
  * An array holds all defined actions.
@@ -199,8 +202,7 @@ void gtranslator_actions_set_up_file_opened(void)
 void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 {
 	gtranslator_message_show(po->current);
-	
-	SWAP_ACTIONS(ACT_UNDO, ACT_REDO);
+	gtranslator_actions_swap(ACT_UNDO, ACT_REDO);
 }
 
 /*
@@ -208,7 +210,7 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
  */
 void gtranslator_actions_redo(GtkWidget *widget, gpointer useless)
 {
-	SWAP_ACTIONS(ACT_REDO, ACT_UNDO);
+	gtranslator_actions_swap(ACT_REDO, ACT_UNDO);
 }
 
 /*

@@ -59,7 +59,6 @@
  * The static variables used in the poptTable.
  */
 static gchar 	*gtranslator_geometry=NULL;
-static gchar 	*scheme_filename=NULL;
 static gchar 	*save_html_output_file=NULL;
 static gchar 	*domains_dir=NULL;
 static gboolean	build_informations=FALSE;
@@ -88,10 +87,6 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"querydomaindir", 'q', POPT_ARG_STRING, &domains_dir,
 		0, N_("Define another query-domains directory"), N_("LOCALEDIR")
-	},
-	{
-		"scheme", 's', POPT_ARG_STRING, &scheme_filename,
-		0, N_("Syntax color scheme to use"), N_("SCHEMEFILE")
 	},
 	{
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
@@ -202,8 +197,6 @@ int main(int argc, char *argv[])
 			 *  list to NULL.
 			 */
 			g_warning(_("Unfortunately your GModule implementation doesn't support loading dynamic modules!"));
-			g_print("gtranslator won't load any backend module...");
-
 			backends=NULL;
 		}
 		else
@@ -283,24 +276,10 @@ int main(int argc, char *argv[])
 	g_free(sp_file);
 	
 	/*
-	 * Load the given color scheme file.
+	 * Load the applied color scheme from the prefs and check it; if it
+	 *  doesn't seem to be right apply the original default colors.
 	 */ 
-	if(scheme_filename)
-	{
-		/*
-		 * Apply the given color scheme if possible.
-		 */ 
-		theme=gtranslator_color_scheme_open(scheme_filename);
-	}
-	else
-	{
-		/*
-		 * Load the applied color scheme from the prefs and check it; if it
-		 *  doesn't seem to be right apply the original default color names.
-		 */ 
-		theme=gtranslator_color_scheme_load_from_prefs();
-	}
-
+	theme=gtranslator_color_scheme_load_from_prefs();
 	if(!theme)
 	{
 		gtranslator_color_scheme_restore_default();

@@ -53,7 +53,7 @@ GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node);
 /*
  * Free up the structure with this function.
  */
-void free_color_scheme_infos(GtrColorSchemeInformations **infos);
+void gtranslator_color_scheme_free_infos(GtrColorSchemeInformations **infos);
 
 /*
  * Open the xml file and return the GtrColorScheme equivalent.
@@ -197,7 +197,7 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	
 	gtranslator_config_close();
 
-	free_color_scheme(&theme);
+	gtranslator_color_scheme_free(&theme);
 }
 
 /*
@@ -315,7 +315,7 @@ gboolean check_if_color_scheme(xmlNodePtr *node)
 /*
  * Free the given GtrColorSchemeInformations.
  */
-void free_color_scheme_infos(GtrColorSchemeInformations **infos)
+void gtranslator_color_scheme_free_infos(GtrColorSchemeInformations **infos)
 {
 	if(*infos)
 	{
@@ -330,13 +330,13 @@ void free_color_scheme_infos(GtrColorSchemeInformations **infos)
 /*
  * Free the given GtrColorScheme.
  */
-void free_color_scheme(GtrColorScheme **scheme)
+void gtranslator_color_scheme_free(GtrColorScheme **scheme)
 {
 	if(*scheme)
 	{
 		if((*scheme)->info)
 		{
-			free_color_scheme_infos(&(*scheme)->info);
+			gtranslator_color_scheme_free_infos(&(*scheme)->info);
 		}
 		
 		g_free((*scheme)->fg);

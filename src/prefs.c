@@ -388,6 +388,14 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 
 	if(g_file_exists(GtrPreferences.scheme))
 	{
+		/*
+		 * Free the old used colorscheme.
+		 */
+		gtranslator_color_scheme_free(&theme);
+		
+		/*
+		 * Read in the new colorscheme and initialize the colors.
+		 */
 		gtranslator_color_scheme_apply(GtrPreferences.scheme);
 		theme=gtranslator_color_scheme_load_from_prefs();
 		

@@ -185,7 +185,8 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	style=gtk_style_copy(gtk_widget_get_style(widget));
 	
 	/*
-	 * Set up the stored values for the background from the preferences.
+	 * Set up the stored values for the background from the preferences/
+	 *  colorscheme.
 	 */
 	if(GtrPreferences.use_own_colors)
 	{
