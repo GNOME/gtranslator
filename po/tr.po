@@ -3,11 +3,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.32\n"
-"POT-Creation-Date: 2001-01-14 15:35+0100\n"
+"Project-Id-Version: gtranslator 0.34\n"
+"POT-Creation-Date: 2001-01-31 15:21+0100\n"
 "PO-Revision-Date: 2001-01-14 15:36+0100\n"
 "Last-Translator: Enis Cezayirli <Enis.Cezayirli@dialup.ankara.edu.tr>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"Language-Team: GNOME Turk <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,8 +19,8 @@ msgid ""
 "It will be based upon a gtranslatord and a gtranslator client. Wish the best "
 "for us translators and for me!"
 msgstr ""
-"gtranslator, Gnome için bu çok önemli po-dosyalarinin tercümesinde kullanilacak "
-"bir uygulamadir.\n"
+"gtranslator, Gnome için bu çok önemli po-dosyalarinin tercümesinde "
+"kullanilacak bir uygulamadir.\n"
 "Bu destek bir gtranslatord sunucusu ve gtranslator uygulamasindan "
 "olusacaktir. Hepimize bol sanslar!"
 
@@ -28,11 +28,15 @@ msgstr ""
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- dosya aç"
 
-#: src/dialogs.c:89
-msgid "gtranslator -- save file as .."
+#: src/dialogs.c:97
+msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- dosyayi farkli kaydet"
 
-#: src/dialogs.c:123
+#: src/dialogs.c:101
+msgid "gtranslator -- save local copy of file as.."
+msgstr "gtranslator -- dosyayi farkli kaydet"
+
+#: src/dialogs.c:145
 #, c-format
 msgid ""
 "File %s\n"
@@ -41,51 +45,51 @@ msgstr ""
 "Dosya %s\n"
 "degistirilmis. Dosya kaydedilsin mi?"
 
-#: src/dialogs.c:164
+#: src/dialogs.c:186
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- geç"
 
-#: src/dialogs.c:164
+#: src/dialogs.c:186
 msgid "Go!"
 msgstr "Geç!"
 
-#: src/dialogs.c:170
+#: src/dialogs.c:192
 msgid "Go to message number:"
 msgstr "Belirtilen iletiye geç:"
 
-#: src/dialogs.c:238
+#: src/dialogs.c:260
 msgid "Find in the po-file"
 msgstr "Po dosyasinda bul"
 
-#: src/dialogs.c:238 src/gui.c:321
+#: src/dialogs.c:260 src/gui.c:321
 msgid "Find"
 msgstr "Bul"
 
-#: src/dialogs.c:241
+#: src/dialogs.c:263
 msgid "Enter your desired search string:"
 msgstr "Aranacak metni belirle:"
 
-#: src/dialogs.c:244
+#: src/dialogs.c:266
 msgid "Case sensitive"
 msgstr "Büyük/küçük harfe duyarli"
 
-#: src/dialogs.c:249 src/languages.h:112
+#: src/dialogs.c:271 src/languages.h:112
 msgid "English"
 msgstr "Orjinal metinlerde"
 
-#: src/dialogs.c:254 src/gui.c:831
+#: src/dialogs.c:276 src/gui.c:831
 msgid "Translated"
 msgstr "Tercümede"
 
-#: src/dialogs.c:259
+#: src/dialogs.c:281
 msgid "Both"
 msgstr "Tüm metinlerde"
 
-#: src/dialogs.c:266
+#: src/dialogs.c:288
 msgid "Find in: "
 msgstr "Arama mahalleri:"
 
-#: src/dialogs.c:309
+#: src/dialogs.c:331
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt çalistirilirken bir hata oldu:\n"
 
@@ -220,18 +224,18 @@ msgstr "Bu iletiyi kalici ilan et"
 
 #: src/gui.c:234
 msgid "gtranslator _website"
-msgstr "gtranslator _websitesi"
+msgstr "gtranslator _web sitesi"
 
 #: src/gui.c:235
 msgid "gtranslator's homepage on the web"
-msgstr "gtranslator'in internet'teki sitesi"
+msgstr "gtranslator'in internet sitesi"
 
 #: src/gui.c:244
 msgid "_Messages"
 msgstr "_Iletiler"
 
 #: src/gui.c:245
-msgid "Message _status"
+msgid "Mess_age status"
 msgstr "Ileti du_rumu"
 
 #: src/gui.c:255
@@ -325,7 +329,7 @@ msgstr "Po dosyasinda bul"
 #.
 #. * Create the app
 #.
-#: src/gui.c:488
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:488
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -369,63 +373,63 @@ msgstr "%s [ Tercüme edilmemis ileti kalmadi ]"
 msgid "Message %d / %d / Status: %s"
 msgstr "Ileti: %d / %d / Durum: %s"
 
-#: src/header_stuff.c:268
+#: src/header_stuff.c:305
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- basligi degistir"
 
-#: src/header_stuff.c:272
+#: src/header_stuff.c:309
 msgid "Project"
 msgstr "Proje"
 
-#: src/header_stuff.c:273
+#: src/header_stuff.c:310
 msgid "Translator and Language"
 msgstr "Tercüman ve dil:"
 
-#: src/header_stuff.c:282
+#: src/header_stuff.c:319
 msgid "Comments :"
 msgstr "Yorumlar:"
 
-#: src/header_stuff.c:286
+#: src/header_stuff.c:323
 msgid "Project name:"
 msgstr "Proje ismi:"
 
-#: src/header_stuff.c:289
+#: src/header_stuff.c:326
 msgid "Project version:"
 msgstr "Proje versiyonu:"
 
-#: src/header_stuff.c:292
+#: src/header_stuff.c:329
 msgid "pot file creation date :"
 msgstr "Pot dosyasinin olusturulma tarihi :"
 
-#: src/header_stuff.c:296
+#: src/header_stuff.c:333
 msgid "po file revision date :"
 msgstr "Po dosyasinin düzeltilme tarihi :"
 
-#: src/header_stuff.c:305
+#: src/header_stuff.c:342
 msgid "Use my options to fill the following entries."
 msgstr "Geri kalanlari sahsi seçeneklerimle tamamla."
 
-#: src/header_stuff.c:318
+#: src/header_stuff.c:355
 msgid "Translator's name :"
-msgstr "Tercüman:"
+msgstr "Tercümanin adi:"
 
-#: src/header_stuff.c:321
+#: src/header_stuff.c:358
 msgid "Translator's e-mail :"
 msgstr "Tercümanin ePosta adresi:"
 
-#: src/header_stuff.c:324 src/prefs.c:252
+#: src/header_stuff.c:361 src/prefs.c:252
 msgid "Language :"
 msgstr "Dil :"
 
-#: src/header_stuff.c:329
+#: src/header_stuff.c:366
 msgid "Language group's e-mail :"
 msgstr "Dil grubunun ePosta adresi :"
 
-#: src/header_stuff.c:333 src/prefs.c:265
+#: src/header_stuff.c:370 src/prefs.c:265
 msgid "Charset :"
 msgstr "Yazi sinifi :"
 
-#: src/header_stuff.c:337 src/prefs.c:269
+#: src/header_stuff.c:374 src/prefs.c:269
 msgid "Encoding :"
 msgstr "Kodlama :"
 
@@ -446,7 +450,7 @@ msgid "Basque"
 msgstr "Baskça"
 
 #: src/languages.h:82
-msgid "Bielorussian"
+msgid "Belorussian"
 msgstr "Beyazrusça"
 
 #: src/languages.h:85
@@ -522,110 +526,114 @@ msgid "German"
 msgstr "Almanca"
 
 #: src/languages.h:142
+msgid "Greek"
+msgstr "Yunanca"
+
+#: src/languages.h:145
 msgid "Hungarian"
 msgstr "Macarca"
 
-#: src/languages.h:145
-msgid "Indonesian"
-msgstr "Endonezce"
-
 #: src/languages.h:148
+msgid "Indonesian"
+msgstr "Endonezyaca"
+
+#: src/languages.h:151
 msgid "Italian"
 msgstr "Italyanca"
 
-#: src/languages.h:151
+#: src/languages.h:154
 msgid "Irish"
 msgstr "Irlandaca"
 
-#: src/languages.h:154
+#: src/languages.h:157
 msgid "Japanese"
 msgstr "Japonca"
 
-#: src/languages.h:157
+#: src/languages.h:160
 msgid "Korean"
 msgstr "Korece"
 
-#: src/languages.h:160
+#: src/languages.h:163
 msgid "Latvian"
 msgstr "Letonyaca"
 
-#: src/languages.h:163
+#: src/languages.h:166
 msgid "Lithuanian"
 msgstr "Litvanyaca"
 
-#: src/languages.h:166
+#: src/languages.h:169
 msgid "Norwegian/Bokmaal"
 msgstr "Norveççe/Bokmaal"
 
-#: src/languages.h:169
+#: src/languages.h:172
 msgid "Norwegian/Nynorsk"
 msgstr "Norveççe/Nynorsk"
 
-#: src/languages.h:172
+#: src/languages.h:175
 msgid "Polish"
 msgstr "Polonyaca"
 
-#: src/languages.h:175
+#: src/languages.h:178
 msgid "Portuguese"
 msgstr "Portekizce"
 
-#: src/languages.h:178
+#: src/languages.h:181
 msgid "Portuguese/Brazil"
 msgstr "Portekizce/Brezilya"
 
-#: src/languages.h:181
+#: src/languages.h:184
 msgid "Russian"
 msgstr "Rusça"
 
-#: src/languages.h:184
+#: src/languages.h:187
 msgid "Serbian/Cyrillic"
 msgstr "Sirpça/Kiril"
 
-#: src/languages.h:187
+#: src/languages.h:190
 msgid "Serbian/Latin"
 msgstr "Sirpça/Latince"
 
-#: src/languages.h:190
+#: src/languages.h:193
 msgid "Slovenian"
 msgstr "Slovence"
 
-#: src/languages.h:193
+#: src/languages.h:196
 msgid "Spanish"
 msgstr "Ispanyolca"
 
-#: src/languages.h:196
+#: src/languages.h:199
 msgid "Spanish/Spain"
 msgstr "Ispanyolca/Ispanya"
 
-#: src/languages.h:199
+#: src/languages.h:202
 msgid "Spanish/Mexico"
 msgstr "Ispanyolca/Meksika"
 
-#: src/languages.h:202
+#: src/languages.h:205
 msgid "Swedish"
 msgstr "Isveççe"
 
-#: src/languages.h:205
+#: src/languages.h:208
 msgid "Thai"
 msgstr "Taylandca"
 
-#: src/languages.h:208
+#: src/languages.h:211
 msgid "Turkish"
 msgstr "Türkçe"
 
-#: src/languages.h:211
+#: src/languages.h:214
 msgid "Ukrainian"
 msgstr "Ukraynaca"
 
-#: src/languages.h:214
+#: src/languages.h:217
 msgid "Vietnamese"
 msgstr "Vietnamca"
 
-#: src/languages.h:217
+#: src/languages.h:220
 msgid "Walloon"
 msgstr "Valon"
 
-#: src/languages.h:220
+#: src/languages.h:223
 msgid "Welsh"
 msgstr "Gallerce"
 
@@ -638,7 +646,7 @@ msgstr "Ana pencere boyutlarini belirler"
 msgid "Error during GConf initialization: %s."
 msgstr "GConf baslama hatasi: `%s'."
 
-#: src/parse.c:135
+#: src/parse.c:136
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -647,12 +655,12 @@ msgstr ""
 "Yeni bir \\%c karakteri bulundu\n"
 "Bunu parse.c dosyasinda, %i. satira ekle."
 
-#: src/parse.c:173 src/parse.c:584
+#: src/parse.c:185 src/parse.c:626
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" yok ki!"
 
-#: src/parse.c:264
+#: src/parse.c:265
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -663,7 +671,7 @@ msgstr ""
 "var (satir %d).\n"
 "Lütfen dosyayi gözden geçirip bir daha dene."
 
-#: src/parse.c:299
+#: src/parse.c:300
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -672,25 +680,25 @@ msgstr ""
 "Dosya bos:\n"
 "%s"
 
-#: src/parse.c:319 src/parse.c:325
+#: src/parse.c:320 src/parse.c:326
 msgid "There's no file to open!"
 msgstr "Açilacak dosya yok ki!"
 
-#: src/parse.c:365
+#: src/parse.c:379
 msgid "The file has no header!"
 msgstr "Dosyanin basligi yok!"
 
-#: src/parse.c:368
+#: src/parse.c:382
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Dosya \"%s\" basariyla incelenmistir"
 
-#: src/parse.c:371
+#: src/parse.c:385
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:546
+#: src/parse.c:588
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -702,7 +710,7 @@ msgstr ""
 "Senin tercüme ettigin dosya ise .po sonekine sahip olsa iyi olur; muhtemelen "
 "%s.po adini tasiyacaktir."
 
-#: src/parse.c:632
+#: src/parse.c:674
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -711,13 +719,13 @@ msgid ""
 msgstr ""
 "%s'de hiç birsey\n"
 "degistirmemissin ki!\n"
-"Yine de dosya yeniden kaydedilsin mi?"
+"Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:640
+#: src/parse.c:682
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- degisiklik yok"
 
-#: src/parse.c:714
+#: src/parse.c:758
 #, c-format
 msgid ""
 "File %s\n"
@@ -726,11 +734,11 @@ msgstr ""
 "Dosya %s\n"
 "degismis. Kaydedilmis kopyaya geri dönmek ister misin?"
 
-#: src/parse.c:753
+#: src/parse.c:797
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalesef bu sistemde msgfmt mevcut degil!"
 
-#: src/parse.c:778
+#: src/parse.c:822
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -739,11 +747,26 @@ msgstr ""
 "Derleme basarili oldu: \n"
 "Rapor: %s"
 
-#: src/parse.c:801
+#: src/parse.c:851
+#, c-format
+msgid "You don't have read permissions on file `%s'"
+msgstr "`%s' dosyasi üzerinde okuma hakkin yok"
+
+#: src/parse.c:870
+#, c-format
+msgid ""
+"You don't have write permissions on file `%s'.\n"
+"This means that you should save it as a copy to a local directory\n"
+"of your choice."
+msgstr "`%s' dosyasi üzerinde yazma hakkin yok.\n"
+"Bu demektir ki dosyayi kendi istedigin baska bir dizine kaydetmelisin"
+
+
+#: src/parse.c:905
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:842
+#: src/parse.c:940
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
@@ -757,7 +780,7 @@ msgstr "gtranslator -- seçenekler"
 #.
 #: src/prefs.c:229
 msgid "Personal information"
-msgstr "Sahsi bilgiler"
+msgstr "Kisisel bilgiler"
 
 #: src/prefs.c:230
 msgid "Language options"
@@ -812,8 +835,8 @@ msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Degistirilmemis bir dosyayi kaydetmeye çalisirsam ikaz et"
 
 #: src/prefs.c:296
-msgid "Use the dot char (\"·\") instead of a free space"
-msgstr "Bosluklar yerine (\"·\") karakterini kullan"
+msgid "Use free space indicating special character"
+msgstr "Özel karakteri belirterek serbest bosluklari kullan"
 
 #: src/prefs.c:299
 msgid "Enable the popup menu"
@@ -823,11 +846,12 @@ msgstr "Sag tiklama mönüsünü aktive et"
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
-"gtranslator'in güncelleme özelligini aktive et (bunun için kaynaklar gereklidir)"
+"gtranslator'in güncelleme özelligini aktive et (bunun için kaynaklar  gereklidir)"
 
 #: src/prefs.c:305
 msgid "Save geometry on exit & restore it on startup"
-msgstr "gtranslator'in yerlesimini ve boyutunu kaydet ve bir sonraki açilista uygula"
+msgstr ""
+"gtranslator'in yerlesimini ve boyutunu kaydet ve bir sonraki açilista uygula"
 
 #: src/prefs.c:308
 msgid "Don't show the update information dialogs"
@@ -931,7 +955,19 @@ msgstr "gtranslatord sunucusu"
 
 #: data/oaf/Gtranslator_Gtranslatord.oaf.in.h:2
 msgid "gtranslatord message database and team management daemon"
-msgstr "gtranslatord ileti/tercüme tabani ve tercüme yönetim sunucusu"
+msgstr "gtranslatord ileti/tercüme veritabani ve tercüme yönetim sunucusu"
+
+#: data/desktop/gtranslator.desktop.in.h:1
+msgid "The Gnome translation program"
+msgstr "Gnome çeviri programi"
+
+#: data/mime/gtranslator.keys.in.h:1
+msgid "Compiled gettext po files"
+msgstr "Gettext po dosyalari derlendi"
+
+#: data/mime/gtranslator.keys.in.h:2
+msgid "Gettext po files"
+msgstr "Son gettext po _dosyalari"
 
 #.
 #. * Print out a warning and exit from the
@@ -970,7 +1006,7 @@ msgstr "Ileti/tercüme veritabanini kaydedecek dosya belirtilmemis."
 #: libgtranslator/handle-db.c:331
 #, c-format
 msgid "Couldn't remove database file `%s'!"
-msgstr "Tercüme veritabani `%s''yi silemedim!"
+msgstr "Tercüme veritabani dosyasi `%s''yi silemedim!"
 
 #: libgtranslator/handle-db.c:370
 #, c-format
@@ -1024,7 +1060,7 @@ msgstr ""
 
 #: libgtranslator/parse-db.c:40
 msgid "No language defined in the query request!"
-msgstr "Istekte istenilen dil belirtilmemis!"
+msgstr "Istekte hiçbir dil belirtilmemis!"
 
 #.
 #. * If a subclass message/translation database should be loaded,
