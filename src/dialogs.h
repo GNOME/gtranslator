@@ -45,19 +45,6 @@ void goto_dlg(GtkWidget * widget, gpointer useless);
 **/
 void find_dialog(GtkWidget * widget, gpointer useless);
 
-/**
-* The query dialog
-**/
-void query_dialog_create();
-void query_dialog(GtkWidget * widget, gpointer useless);
-void query_dialog_hide(GtkWidget * widget, gpointer useless);
-
-/**
-* The result window.
-**/
-void r_window(GtkWidget * widget, gpointer useless);
-void r_window_hide(GtkWidget * widget, gpointer useless);
-
 void compile_error_dialog(FILE * fs);
 void no_changed_dialog(GtkWidget * widget, gpointer useless);
 

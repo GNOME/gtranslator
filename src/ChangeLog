@@ -1,3 +1,21 @@
+2000-09-11  Fatih Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Removed msg_db.* as they'ren't any longer in
+		our sources.
+
+	* msg_db.*: Removed these files as we'll give the duty for this
+		to gtranslatord.
+
+	* prefs.c/h: Removed all message db parts.
+
+	* gui.c: Removed all message db concerning menus & icons.
+
+	* dialogs.c/h: Removed the query dialog & the query results
+		dialogs for now ( including all widgets and variables.)
+
+	* main.c: Removed all msg_db stuff and also cleansed the options
+		and message db inits.
+
 2000-09-10  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Added the gnome-regex sources to the build sources

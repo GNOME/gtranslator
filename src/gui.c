@@ -12,7 +12,6 @@
 #include "gui.h"
 #include "prefs.h"
 #include "dialogs.h"
-#include "msg_db.h"
 #include "parse.h"
 #include "header_stuff.h"
 #include "find.h"
@@ -166,21 +165,6 @@ static GnomeUIInfo the_msg_status_menu[] = {
 	GNOMEUIINFO_END
 };
 
-static GnomeUIInfo the_msg_db_menu[] = {
-	GNOMEUIINFO_ITEM_STOCK(N_("_Add the current message"),
-			       N_
-			       ("Add the current message to the message db"),
-		append_to_msg_db,
-			       GNOME_STOCK_PIXMAP_ADD),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("_Query for a message..."),
-			       N_
-			       ("Query the message db for the current msgid"),
-		query_dialog,
-			       GNOME_STOCK_MENU_SEARCH),
-	GNOMEUIINFO_END
-};
-
 static GnomeUIInfo the_settings_menu[] = {
         GNOMEUIINFO_MENU_PREFERENCES_ITEM(prefs_box, NULL),
         GNOMEUIINFO_END
@@ -202,7 +186,6 @@ static GnomeUIInfo the_menus[] = {
         GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
 	GNOMEUIINFO_SUBTREE(N_("Message _status"), the_msg_status_menu),
-	GNOMEUIINFO_SUBTREE(N_("Message _db"), the_msg_db_menu),
         GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
         GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
         GNOMEUIINFO_END
@@ -271,14 +254,6 @@ static GnomeUIInfo the_searchbar[] = {
           N_("Find string in po-file"),
           find_dialog,
 			       GNOME_STOCK_PIXMAP_SEARCH),
-	GNOMEUIINFO_ITEM_STOCK(N_("Add"),
-			       N_("Add to the message db"),
-          append_to_msg_db,
-			       GNOME_STOCK_PIXMAP_ADD),
-	GNOMEUIINFO_ITEM_STOCK(N_("Query"),
-          N_("Query for a message in db"),
-          query_dialog,
-			       GNOME_STOCK_PIXMAP_BOOK_OPEN),
 	GNOMEUIINFO_END
 };
 
@@ -341,9 +316,6 @@ static void create_actions(void)
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
 	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
 	insert_action(ACT_STICK, the_msg_status_menu[2], NONE);
-	/*------------------------------------------------ */
-	insert_action(ACT_ADD, the_msg_db_menu[0], the_searchbar[7]);
-	insert_action(ACT_QUERY, the_msg_db_menu[1], the_searchbar[8]);
 	/*------------------------------------------------ */
 	insert_action(ACT_END, NONE, NONE);
 }
@@ -459,7 +431,6 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 		return TRUE;
 	close_file(NULL, NULL);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1), _("Bye bye!"));
-		close_msg_db();
 	save_geometry();
 	free_prefs();
 	gnome_regex_cache_destroy(rxc);

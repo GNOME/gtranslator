@@ -30,7 +30,6 @@ gchar *author, *email, *language, *mime, *enc, *lc, *lg;
 
 /* A compact structure to store all the preferences */
 struct {
-	guint use_msg_db		: 1;
 	guint warn_if_fuzzy		: 1;
 	guint warn_if_no_change		: 1;
 	guint dont_save_unchanged_files : 1;

@@ -37,7 +37,7 @@ static GtkWidget
 * The toggle buttons used in the preferences box
 **/
 static GtkWidget
-	*use_msg_db, *warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
+	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb;
 
 /* The preferences dialog */
@@ -247,12 +247,8 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	    attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
 		wants.warn_if_no_change, prefs_box_changed);
-	use_msg_db =
-	    attach_toggle_with_label(third_page, 4,
-		_("Use the messages db"),
-		wants.use_msg_db, prefs_box_changed);
 	save_geometry_tb =
-	    attach_toggle_with_label(third_page, 5,
+	    attach_toggle_with_label(third_page, 4,
 		_("Save geometry on exit & restore it on startup"),
 		wants.save_geometry, prefs_box_changed);
 	/**
@@ -287,7 +283,6 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 #undef update
 #define if_active(widget) \
 	gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))
-	wants.use_msg_db = if_active(use_msg_db);
 	wants.save_geometry = if_active(save_geometry_tb);
 	wants.unmark_fuzzy = if_active(unmark_fuzzy);
 	wants.warn_if_fuzzy = if_active(warn_if_fuzzy);
@@ -303,7 +298,6 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	gnome_config_set_string("Language/Encoding", enc);
 	gnome_config_set_string("Language/Language-code", lc);
 	gnome_config_set_string("Language/Team's EMail address", lg);
-	gnome_config_set_bool("Toggles/Use msg_db", wants.use_msg_db);
 	gnome_config_set_bool("Toggles/Save Geometry", wants.save_geometry);
 	gnome_config_set_bool("Toggles/Warn if fuzzy", wants.warn_if_fuzzy);
 	gnome_config_set_bool("Toggles/Set non-fuzzy if changed", 
@@ -395,7 +389,6 @@ void read_prefs(void)
 	lg = gnome_config_get_string("Language/Team's EMail address");
 	mime = gnome_config_get_string("Language/Mime-type");
 	enc = gnome_config_get_string("Language/Encoding");
-	wants.use_msg_db = gnome_config_get_bool("Toggles/Use msg_db=false");
 	wants.save_geometry =
 	    gnome_config_get_bool("Toggles/Save Geometry=true");
 	wants.unmark_fuzzy =

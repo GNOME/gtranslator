@@ -24,7 +24,6 @@ gtranslator_SOURCES = \
 	dialogs.c dialogs.h \
 	find.c find.h \
 	spell.c spell.h \
-	msg_db.c msg_db.h \
 	about.c about.h \
 	prefs.c prefs.h \
 	session.c session.h \
