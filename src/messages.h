@@ -62,7 +62,7 @@ struct _gtr_po
 	/**
 	* The filename
 	**/
-	gchar *filename;
+	gchar filename[256];
 	/**
 	* If no translated entry has been found this'd set to TRUE.
 	**/

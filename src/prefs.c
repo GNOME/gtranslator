@@ -395,3 +395,49 @@ void read_prefs()
 	gtranslator_geometry_h=gnome_config_get_int("Geometry/Height");
 	gnome_config_pop_prefix();
 }
+
+/**
+* Sets the current file's name in the gnome-config system.
+**/
+void gtranslator_set_filename(gchar *file)
+{
+	if(!file)
+	{
+		g_warning(_("Can't store filename!"));
+	}
+	else
+	{
+		gnome_config_push_prefix("/gtranslator/");
+		/**
+		* Set the filename.
+		**/
+		gnome_config_set_string("Files/Recent",file);
+		/**
+		* Ensecure our storage ..
+		**/
+		gnome_config_pop_prefix();
+		gnome_config_sync();
+		gnome_config_drop_all();
+	}
+}
+
+/**
+* Gets the recent filename.
+**/
+gchar *gtranslator_get_filename()
+{
+	gchar *fn;
+	gnome_config_push_prefix("/gtranslator/");
+	fn=gnome_config_get_string("Files/Recent");
+	if(!fn)
+	{
+		g_warning(_("Couldn't recall the file's name."));
+	}
+	gnome_config_pop_prefix();
+	gnome_config_sync();
+	gnome_config_drop_all();
+	/**
+	* Return the name.
+	**/
+	return fn;
+}

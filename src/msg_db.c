@@ -161,25 +161,25 @@ gchar *get_from_msg_db(const gchar *get_similar)
 	**/
 	if(msg_db_inited!=TRUE)
 	{
-		 /**
-                 * Show a little warning ...
-                 **/
+		/**
+                * Show a little warning ...
+                **/
                 g_warning(_("The message db `%s' seems not to be initted!\n"),msg_db);
-		 /**
-		 * Return a very "explaining" char* ...
-		 **/
+		/**
+		* Return a very "explaining" char* ...
+		**/
                 return _("Not available");
 	}
 	if(!msg_list)
 	{
-		 /**
-		 * If there's no msg_list 
-		 *  print an error message
-  		 **/
+		/**
+		* If there's no msg_list 
+		*  print an error message
+  		**/
 		g_error(_("No messages list ( msg_list ) available for acting on it!\n"));
-		 /**
-		 * Exit brutally ...
-		 **/
+		/**
+		* Exit brutally ...
+		**/
 	}
 	else
 	{

@@ -33,7 +33,7 @@
 /**
 * The global structure for the file-handles.
 **/
-gtr_po *po;
+static gtr_po *po;
 
 /**
 * The counting variable for the messages.

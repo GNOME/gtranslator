@@ -59,6 +59,12 @@ gint gtranslator_geometry_x,gtranslator_geometry_y,
 		gtranslator_geometry_w,gtranslator_geometry_h;
 
 /**
+* These ones store/recall the current file's name.
+**/
+void gtranslator_set_filename(gchar *file);
+gchar *gtranslator_get_filename();
+
+/**
 * The first one creates the preferences-box and the others show/hide it
 **/
 void prefs_box();

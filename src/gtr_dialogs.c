@@ -444,7 +444,6 @@ void r_window(GtkWidget *widget,gpointer useless)
         **/
         gchar *result;
 	gchar result_string[256];
-	result_string[0]='\0';
 	/**
 	* Set the challenge-length as specified in the query-dialog.
 	**/
@@ -454,7 +453,7 @@ void r_window(GtkWidget *widget,gpointer useless)
 	*
 	* Note: This is really ugly but it avoids sparing many lines for this.
 	**/
-	result=get_from_msg_db(gtk_entry_get_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(q_entry)))));
+	result=get_from_msg_db((gchar *)(gtk_entry_get_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(q_entry))))));
 	sprintf(result_string,_("Result: `%s'"),result);
 	/**
 	* Hide the previous query dialog.

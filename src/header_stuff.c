@@ -26,14 +26,19 @@ void apply_header(gtr_header *the_header)
 void get_header(gchar *hline)
 {
 	/**
+	* The array for the g_strsplit function.
+	**/
+	gchar **myheader;
+	/**
 	* Set the check variable to FALSE.
 	**/
 	header_finish=FALSE;
 	/**
-	* Wait till we've got the Porject... line..
+	* Wait till we've got the Project... line..
 	**/
-	if(!g_strncasecmp(hline,"\"Pro",4))
+	if(!g_strncasecmp(hline,"\"Project",8))
 	{
+		myheader=g_strsplit(hline," ",3);
 		/**
 		* Yup, we're finished with the header.
 		**/
@@ -41,7 +46,7 @@ void get_header(gchar *hline)
 	}
 	if(header_finish==TRUE)
 	{
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Header has been pased successfully."));			
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Header has been pased successfully."));
 	}
 }
 

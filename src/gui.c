@@ -93,9 +93,9 @@ void compile(GtkWidget *widget,gpointer useless)
 		/**
 		* If a filename has been set yet, then we can try to compile it.
 		**/
-		if(po->filename)
+		if(gtranslator_get_filename()!=NULL)
 		{
-			sprintf(cmd,"%s %s","msgfmt",(gchar *)(po->filename));
+			sprintf(cmd,"%s %s %s","msgfmt ",gtranslator_get_filename()," -o /tmp/foo.mo");
 			res=system(cmd);
 			/**
 			* If there has been an error show an error-box
@@ -396,10 +396,10 @@ static GnomeUIInfo the_menus[] =
 		0, 0, NULL
         },
 	{
-		GNOME_APP_UI_SUBTREE, N_("Message _status"),
+		GNOME_APP_UI_SUBTREE, N_("Message s_tatus"),
 		NULL,
 		the_msg_status_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, N_("Message _status"),
+		GNOME_APP_PIXMAP_NONE, N_("Message s_tatus"),
 		0, 0, NULL
 	},
 	{

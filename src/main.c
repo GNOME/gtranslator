@@ -121,7 +121,7 @@ int main(int argc,char *argv[])
 		* This should be a clearly sightable separator line.
 		**/
 		g_print("-----------------------------------------------------\n");
-		g_print(_("Result                   :  %s."),get_from_msg_db(query_string));
+		g_print(_("Result                   :  %s"),get_from_msg_db(query_string));
 		g_print("\n");
 		g_print(_("End of query.\n"));
 		/**
@@ -212,7 +212,19 @@ int main(int argc,char *argv[])
 			**/
 			parse(file_to_open);
 			file_opened=TRUE;
-			strcpy(po->filename,file_to_open);
+			/**
+			* Get absolute filenames.
+			**/
+			if(file_to_open[0]!='/')
+			{
+				gchar temp[128];
+				sprintf(temp,"%s/%s",g_get_current_dir(),file_to_open);
+				gtranslator_set_filename(temp);
+			}
+			else
+			{
+				gtranslator_set_filename(file_to_open);
+			}
 		}
 	}
 	/**

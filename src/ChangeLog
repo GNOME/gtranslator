@@ -1,3 +1,41 @@
+2000-07-24  Fatih Demir	<kabalak@gmx.net>
+
+	+	Made the general po-structure static.
+
+		-> parse.h
+
+	+	Reanimate the header_stuff.* files. First
+
+		steps towards a working solution.
+
+		-> header_stuff.c
+
+	+	"_Settings" and "Message _status" can't share
+
+		themselves a "_s" hotkey ...
+
+		[ Took "Message _status" -> "Message s_tatus" ].
+
+	+	Activate the compile function.
+		
+		[ For now we use a "/tmp/foo.mo" file as
+		  
+		   an output-file. ]
+
+		-> gui.c
+
+	+	Use the new functions for filename storing.
+		
+	+	Get the filename as an "absolute" path.
+	
+		-> main.c
+
+	+	Two functions which store/recall the
+
+		filename.
+
+		-> prefs.c/h
+
 2000-07-20  Fatih Demir	<kabalak@gmx.net>
 	
 	+	I'd got written the same check twice;

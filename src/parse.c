@@ -104,9 +104,7 @@ void parse(gchar *po)
 			* Use the functions defined & used in header_stuff.*
 			*  to rip the header off.
 			**/
-			/** FIXME 
-			*get_header(temp_char);
-			**/
+			get_header(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
