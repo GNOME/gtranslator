@@ -167,22 +167,22 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang);
  */
 gchar *gtranslator_utils_getline (FILE* stream);
 
-gchar    *e_xml_get_string_prop_by_name_with_default              (const xmlNode *parent,
-                                                      const xmlChar *prop_name,
-						      const gchar   *def);
 
-void      e_xml_set_string_prop_by_name              (xmlNode       *parent,
-                                                      const xmlChar *prop_name,
-                                                      const gchar   *value);
+/*
+ * These functions are all taken from GAL and integrated simply to here.
+ */
+gchar *gtranslator_xml_get_string_prop_by_name_with_default(const xmlNode *parent,
+	const xmlChar *prop_name, const gchar *default_string);
+
+void  gtranslator_xml_set_string_prop_by_name(xmlNode *parent,
+	const xmlChar *prop_name, const gchar *value);
 						      			
-gint     e_xml_get_integer_prop_by_name_with_default              (const xmlNode *parent,
-                                                      const xmlChar *prop_name,
-						      gint           def);
+gint gtranslator_xml_get_integer_prop_by_name_with_default(const xmlNode *parent,
+	const xmlChar *prop_name, int default_int);
 						      		
-void     e_xml_set_integer_prop_by_name              (xmlNode       *parent,
-                                                      const xmlChar *prop_name,
-                                                      gint           value);						      	      
+void gtranslator_xml_set_integer_prop_by_name(xmlNode *parent, const xmlChar *prop_name,
+	gint value);
 
-int  e_mkdir_hier (const char *path, mode_t mode);
+int  gtranslator_mkdir_hier (const char *path, mode_t mode);
 	
 #endif

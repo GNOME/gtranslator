@@ -116,7 +116,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 		 */ 
 		if(!g_file_test(destdir, G_FILE_TEST_IS_DIR))
 		{
-			if(e_mkdir_hier(destdir, 0755)==-1)
+			if(gtranslator_mkdir_hier(destdir, 0755)==-1)
 			{
 				g_warning(_("Couldn't create temporary directory `%s'!"),
 					destdir);

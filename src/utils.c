@@ -304,7 +304,7 @@ void gtranslator_utils_create_gtranslator_directory()
 	 */
 	if(!g_file_test(dirname, G_FILE_TEST_EXISTS))
 	{
-		if(e_mkdir_hier(dirname, 0755)==-1)
+		if(gtranslator_mkdir_hier(dirname, 0755)==-1)
 		{
 			g_warning(_("Can't create directory `%s'!"), dirname);
 			exit(1);
@@ -321,7 +321,7 @@ void gtranslator_utils_create_gtranslator_directory()
 
 		if(!g_file_test(dirname, G_FILE_TEST_EXISTS))
 		{
-			if(e_mkdir_hier(dirname, 0755)==-1)
+			if(gtranslator_mkdir_hier(dirname, 0755)==-1)
 			{
 				g_warning(_("Can't create directory `%s'!"), dirname);
 				exit(1);
@@ -1012,89 +1012,104 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang)
 	}
 }
 
-gint
-e_xml_get_integer_prop_by_name_with_default (const xmlNode *parent,
-					     const xmlChar *prop_name,
-					     gint def)
+gint gtranslator_xml_get_integer_prop_by_name_with_default (const xmlNode *parent,
+	const xmlChar *prop_name, gint default_int)
 {
 	xmlChar *prop;
-	gint ret_val = def;
+	gint ret_val=default_int;
 
-	g_return_val_if_fail (parent != NULL, 0);
-	g_return_val_if_fail (prop_name != NULL, 0);
+	g_return_val_if_fail(parent!=NULL, 0);
+	g_return_val_if_fail(prop_name!=NULL, 0);
 
-	prop = xmlGetProp ((xmlNode *) parent, prop_name);
-	if (prop != NULL) {
-		(void) sscanf (prop, "%d", &ret_val);
+	prop=xmlGetProp((xmlNode *) parent, prop_name);
+	
+	if(prop!=NULL)
+	{
+		(void) sscanf(prop, "%d", &ret_val);
 		xmlFree (prop);
 	}
+
 	return ret_val;
 }
 
-void
-e_xml_set_integer_prop_by_name (xmlNode *parent,
-				const xmlChar *prop_name,
-				gint value)
+void gtranslator_xml_set_integer_prop_by_name (xmlNode *parent, const xmlChar *prop_name,
+	gint value)
 {
 	gchar *valuestr;
 
-	g_return_if_fail (parent != NULL);
-	g_return_if_fail (prop_name != NULL);
+	g_return_if_fail(parent!=NULL);
+	g_return_if_fail(prop_name!=NULL);
 
-	valuestr = g_strdup_printf ("%d", value);
-	xmlSetProp (parent, prop_name, valuestr);
-	g_free (valuestr);
+	valuestr=g_strdup_printf("%d", value);
+	xmlSetProp(parent, prop_name, valuestr);
+	GTR_FREE(valuestr);
 }
 
-gchar *
-e_xml_get_string_prop_by_name_with_default (const xmlNode *parent, const xmlChar *prop_name, const gchar *def)
+gchar *gtranslator_xml_get_string_prop_by_name_with_default(const xmlNode *parent,
+	const xmlChar *prop_name, const gchar *default_string)
 {
 	xmlChar *prop;
 	gchar *ret_val;
 
-	g_return_val_if_fail (parent != NULL, 0);
-	g_return_val_if_fail (prop_name != NULL, 0);
+	g_return_val_if_fail(parent!=NULL, 0);
+	g_return_val_if_fail(prop_name!=NULL, 0);
 
-	prop = xmlGetProp ((xmlNode *) parent, prop_name);
-	if (prop != NULL) {
-		ret_val = g_strdup (prop);
-		xmlFree (prop);
-	} else {
-		ret_val = g_strdup (def);
+	prop=xmlGetProp((xmlNode *) parent, prop_name);
+	
+	if(prop!=NULL)
+	{
+		ret_val=g_strdup(prop);
+		xmlFree(prop);
 	}
+	else
+	{
+		g_return_if_fail(default_string!=NULL);
+		ret_val=g_strdup (default_string);
+	}
+
 	return ret_val;
 }
 
-void
-e_xml_set_string_prop_by_name (xmlNode *parent, const xmlChar *prop_name, const gchar *value)
+void gtranslator_xml_set_string_prop_by_name(xmlNode *parent, const xmlChar *prop_name,
+	const gchar *value)
 {
-	g_return_if_fail (parent != NULL);
-	g_return_if_fail (prop_name != NULL);
+	g_return_if_fail(parent!=NULL);
+	g_return_if_fail(prop_name!=NULL);
 
-	if (value != NULL) {
-		xmlSetProp (parent, prop_name, value);
+	if(value!=NULL)
+	{
+		xmlSetProp(parent, prop_name, value);
 	}
 }
 
-int e_mkdir_hier(const char *path, mode_t mode)
+int gtranslator_mkdir_hier(const char *path, mode_t mode)
 {
         char *copy, *p;
 
-        p = copy = g_strdup (path);
-        do {
-                p = strchr (p + 1, '/');
-                if (p)
-                        *p = '\0';
-                if (access (copy, F_OK) == -1) {
-                        if (mkdir (copy, mode) == -1) {
-                                g_free (copy);
+        p=copy=g_strdup (path);
+	
+        do
+	{
+                p=strchr(p + 1, '/');
+                if(p)
+		{
+                        *p='\0';
+		}
+		
+                if(access (copy, F_OK)==-1)
+		{
+                        if(mkdir(copy, mode)==-1)
+			{
+                                GTR_FREE(copy);
                                 return -1;
                         }
                 }
-                if (p)
-                        *p = '/';
-        } while (p);
+                if(p)
+		{
+                        *p='/';
+		}
+        } while(p);
 
-        g_free (copy);
+        GTR_FREE(copy);
         return 0;
 }

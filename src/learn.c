@@ -408,8 +408,7 @@ void gtranslator_learn_init()
 		
 		gtranslator_learn_buffer->doc=xmlParseFile(gtranslator_learn_buffer->filename);
 		g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
-		// XXX convert it
-		//		gtranslator_learn_buffer->encoding=e_xml_get_string_prop_by_name(gtranslator_learn_buffer->doc->xmlRootNode, "encoding");
+		translator_learn_buffer->encoding=gtranslator_xml_get_string_prop_by_name_with_default(gtranslator_learn_buffer->doc->xmlRootNode, "encoding", "UTF-8");
 
 		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode->xmlChildrenNode;
 		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
@@ -466,10 +465,10 @@ void gtranslator_learn_init()
 				{
 					GtrLearnResource *resource=g_new0(GtrLearnResource, 1);
 
-					resource->package=e_xml_get_string_prop_by_name(resources_node, "package");
-					resource->updated=e_xml_get_string_prop_by_name(resources_node, "updated");
-					resource->premiereversion=e_xml_get_string_prop_by_name(resources_node, "premiereversion");
-					resource->index=e_xml_get_integer_prop_by_name(resources_node, "index");
+					resource->package=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, "package", NULL);
+					resource->updated=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, "updated", NULL);
+					resource->premiereversion=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, "premiereversion", NULL);
+					resource->index=gtranslator_xml_get_integer_prop_by_name_with_default(resources_node, "index", 1);
 
 					/*
 					 * Add the current parsed in resource to the learn buffer's
@@ -578,11 +577,11 @@ void gtranslator_learn_shutdown()
 		 */
 		language_node=xmlNewChild(root_node, NULL, "language", NULL);
 		
-		e_xml_set_string_prop_by_name(language_node, "ename", 
+		gtranslator_xml_set_string_prop_by_name(language_node, "ename", 
 			gtranslator_translator->language->name);
-		e_xml_set_string_prop_by_name(language_node, "code", 
+		gtranslator_xml_set_string_prop_by_name(language_node, "code", 
 			gtranslator_translator->language->locale);
-		e_xml_set_string_prop_by_name(language_node, "email", 
+		gtranslator_xml_set_string_prop_by_name(language_node, "email", 
 			gtranslator_translator->language->group_email);
 	
 		/*
@@ -590,8 +589,8 @@ void gtranslator_learn_shutdown()
 		 */
 		translator_node=xmlNewChild(root_node, NULL, "translator", NULL);
 		
-		e_xml_set_string_prop_by_name(translator_node, "name", gtranslator_translator->name);
-		e_xml_set_string_prop_by_name(translator_node, "email", gtranslator_translator->email);
+		gtranslator_xml_set_string_prop_by_name(translator_node, "name", gtranslator_translator->name);
+		gtranslator_xml_set_string_prop_by_name(translator_node, "email", gtranslator_translator->email);
 	
 		/*
 		 * Set the UMTF date string for our internal GtrLearnBuffer.
@@ -653,11 +652,11 @@ void gtranslator_learn_shutdown()
 				/*
 				 * Write all the attributes for a resource entry.
 				 */
-				e_xml_set_string_prop_by_name(resource_node, "package", resource->package);
-				e_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
-				e_xml_set_string_prop_by_name(resource_node, "premiereversion", resource->premiereversion); 
+				gtranslator_xml_set_string_prop_by_name(resource_node, "package", resource->package);
+				gtranslator_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
+				gtranslator_xml_set_string_prop_by_name(resource_node, "premiereversion", resource->premiereversion); 
 				
-				e_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
+				gtranslator_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
 				
 				GTR_ITER(gtranslator_learn_buffer->resources);
 			}
