@@ -40,9 +40,8 @@
  * The callbacks:
  */
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer useless);
-static void gtranslator_preferences_dialog_apply(GtkWidget  * widget, gint page_num,
+static void gtranslator_preferences_dialog_close(GtkWidget  * widget, gint page_num,
 			    gpointer useless);
-static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer useless);
 static void toggle_sensitive(GtkWidget *widget, gpointer data);
 
 /*
@@ -87,15 +86,33 @@ static GtkWidget *foreground, *background, *msgid_font, *msgstr_font,
 	*mt_untranslated, *mt_fuzzy, *mt_translated;
 
 /*
- * The preferences dialog widget itself.
+ * The preferences dialog widget itself, plus a notebook.
  */
-static GtkWidget *prefs = NULL;
+static GtkWidget *prefs = NULL, *prefs_notebook = NULL;
+
+/*
+ * Flag to set when something changes
+ */
+static gboolean prefs_changed;
+
+GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(GtkWidget  *notebook, gint rows, gint cols,
+			     const char *label_text)
+{
+	GtkWidget *page;
+	page = gtk_table_new(rows, cols, FALSE);
+	gtk_table_set_col_spacings(GTK_TABLE(page), 2);
+	gtk_table_set_row_spacings(GTK_TABLE(page), 2);
+	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), page, gtk_label_new(label_text));
+	return page;
+}
 
 void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
 	gchar	*old_colorscheme=NULL;
 	GtkObject *adjustment;
-	
+
+	prefs_changed = FALSE;
+
 	if(prefs != NULL) {
 		gtk_window_present(GTK_WINDOW(prefs));
 		return;
@@ -104,31 +121,41 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * Create the preferences box... 
 	 */
-	prefs = gnome_property_box_new();
-	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(
-		GNOME_PROPERTY_BOX(prefs)->notebook), GTK_POS_RIGHT);
-	gtk_window_set_title(GTK_WINDOW(prefs), _("gtranslator -- options"));
-	
+	prefs = gtk_dialog_new_with_buttons(
+		_("gtranslator -- options"),
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(prefs), GTK_RESPONSE_CLOSE);
+
+	/*
+	 * The notebook containing the pages
+	 */
+	prefs_notebook = gtk_notebook_new();
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(prefs)->vbox),
+                      prefs_notebook);
+
 	/*
 	 * The tables for holding all the entries below.
 	 */
-	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 
+	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook, 
 		2, 2, _("Personal information")); 
-	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		5, 2, _("Language settings"));
-	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		4, 1, _("Po file editing"));
-	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		9, 1, _("Miscellaneous"));
-	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		3, 2, _("Recent files & spell checking"));
-	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		6, 2, _("Fonts, colors and color schemes"));
-	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		2, 2, _("Autosaving"));
-	eighth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	eighth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		6, 2, _("Messages table"));
-	ninth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+	ninth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
 		4, 2, _("Learn buffer & autotranslation"));
 	
 	/*
@@ -366,12 +393,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * Connect the signals to the preferences box.
 	 */
-	g_signal_connect(G_OBJECT(prefs), "apply",
-			 G_CALLBACK(gtranslator_preferences_dialog_apply), NULL);
-	g_signal_connect(G_OBJECT(prefs), "help",
-			 G_CALLBACK(gtranslator_preferences_dialog_help), NULL);
-	g_signal_connect(G_OBJECT(prefs), "close",
-			 G_CALLBACK(gtranslator_utils_language_lists_free), NULL);
+	g_signal_connect(G_OBJECT(prefs), "response",
+			 G_CALLBACK(gtranslator_preferences_dialog_close), NULL);
 
 	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
 }
@@ -379,12 +402,25 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 /*
  * The actions to take when the user presses "Apply".
  */
-static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num, gpointer useless)
+static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_num, gpointer useless)
 {
 	gchar	*selected_scheme_file=NULL;
 	gchar	*translator_str=NULL;
 	gchar	*translator_email_str=NULL;
 	
+	/*
+	 * Free the languages list
+	 */
+	gtranslator_utils_language_lists_free(widget, useless);
+
+	/*
+	 * If nothing changed, just return
+	 */
+	if(!prefs_changed) {
+		gtk_widget_destroy(GTK_WIDGET(prefs));
+		return;
+	}
+
 	/*
 	 * We need to apply only once. 
 	 */
@@ -479,15 +515,15 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 #undef if_active
 
 	GtrPreferences.autosave_timeout = 
-		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
+		gtk_spin_button_get_value(GTK_SPIN_BUTTON(
 			autosave_timeout));
 		
 	GtrPreferences.max_history_entries =
-		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
+		gtk_spin_button_get_value(GTK_SPIN_BUTTON(
 			max_history_entries));
 	
 	GtrPreferences.min_match_percentage =
-		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
+		gtk_spin_button_get_value(GTK_SPIN_BUTTON(
 			min_match_percentage));
 	
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
@@ -644,21 +680,13 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	}
 }
 
-/*
- * The preferences box's help window.
- */
-static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer useless)
-{
-	gnome_app_message(GNOME_APP(gtranslator_application), _("\
-The Preferences box allows you to customise gtranslator\n\
-to work in ways you find comfortable and productive."));
-}
-
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)
 {
 	gint c = 0;
 	G_CONST_RETURN gchar *current;
-	gnome_property_box_changed(GNOME_PROPERTY_BOX(prefs));
+
+	prefs_changed = TRUE;
+
 #define set_text(widget,field) \
 	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(widget)->entry),\
 			   languages[c].field)
@@ -702,7 +730,7 @@ void toggle_sensitive(GtkWidget *widget, gpointer data)
 	gboolean active;
 	active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 	gtk_widget_set_sensitive(GTK_WIDGET(data), active);
-	gnome_property_box_changed(GNOME_PROPERTY_BOX(prefs));
+	prefs_changed = TRUE;
 }
 
 void gtranslator_preferences_read(void)
