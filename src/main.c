@@ -212,6 +212,11 @@ int main(int argc, char *argv[])
 	 * Show the application window with icon.
 	 */
 	gnome_window_icon_set_default_from_file(WINDOW_ICON);
+
+	/*
+	 * Create our own .gtranslator directory in the user's home directory.
+	 */
+	gtranslator_utils_create_gtranslator_directory();
 	
 	/* 
 	 * Initialize the regular expression cache 
@@ -246,11 +251,6 @@ int main(int argc, char *argv[])
 	{
 		gnome_vfs_init();
 	}
-
-	/*
-	 * Create our own .gtranslator directory in the user's home directory.
-	 */
-	gtranslator_utils_create_gtranslator_directory();
 
 	/*
 	 * Clean up the temporary file in the user's home dir eventually 

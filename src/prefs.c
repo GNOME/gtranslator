@@ -29,6 +29,7 @@
 #include "gui.h"
 #include "languages.h"
 #include "messages-table.h"
+#include "nautilus-string.h"
 #include "prefs.h"
 #include "query.h"
 #include "sidebar.h"
@@ -104,6 +105,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
 	GList 	*colorschemeslist=NULL;
 	gchar	*old_colorscheme;
+	gchar	*personal_schemes_directory;
 	
 	gtranslator_raise_dialog(prefs);
 	
@@ -261,8 +263,40 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The sixth page with the special font/color stuff.
 	 */
-	colorschemeslist=gtranslator_utils_file_names_from_directory(SCHEMESDIR,
+	personal_schemes_directory=g_strdup_printf("%s/.gtranslator/colorschemes",
+		g_get_home_dir());
+
+	/*
+	 * First load all colorschemes from ~/.gtranslator/colorschemes.
+	 */
+	colorschemeslist=gtranslator_utils_file_names_from_directory(personal_schemes_directory,
 		".xml", TRUE, TRUE, FALSE);
+	GTR_FREE(personal_schemes_directory);
+
+	/*
+	 * Now append/set up the colorschemes from the global colorschemes
+	 *  reservoire.
+	 */
+	if(!colorschemeslist)
+	{
+		colorschemeslist=gtranslator_utils_file_names_from_directory(SCHEMESDIR,
+			".xml", TRUE, TRUE, FALSE);
+	}
+	else
+	{
+		GList	*global_colorschemes=NULL;
+
+		global_colorschemes=gtranslator_utils_file_names_from_directory(SCHEMESDIR,
+			".xml", TRUE, TRUE, FALSE);
+
+		/*
+		 * Append and resort the colorschemes list (now consisting of global +
+		 *  personal colorschemes directory contents).
+		 */
+		colorschemeslist=g_list_concat(colorschemeslist, global_colorschemes);
+		colorschemeslist=g_list_sort(colorschemeslist, (GCompareFunc) nautilus_strcmp);
+	}
+	
 	old_colorscheme=gtranslator_utils_get_raw_file_name(GtrPreferences.scheme);
 	
 	scheme_file=gtranslator_utils_attach_combo_with_label(sixth_page, 0,
@@ -514,8 +548,22 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 
 	if(selected_scheme_file)
 	{
-		GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", SCHEMESDIR,
-			selected_scheme_file);
+		/*
+		 * First check if there's such a colorscheme in 
+		 *  ~/.gtranslator/colorschemes before checking the global directory.
+		 */
+		GtrPreferences.scheme=g_strdup_printf("%s/.gtranslator/colorschemes/%s.xml",
+			g_get_home_dir(), selected_scheme_file);
+
+		/*
+		 * If there's no such colorscheme in the ~/.gtranslator/colorschemes
+		 *  directory try the global directory.
+		 */
+		if(!g_file_exists(GtrPreferences.scheme))
+		{
+			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", SCHEMESDIR,
+				selected_scheme_file);
+		}
 	    
 		if(g_file_exists(GtrPreferences.scheme))
 		{
@@ -634,7 +682,7 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 		    gtk_entry_get_text(GTK_ENTRY
 				       (GTK_COMBO(authors_language)->entry));
 		while (languages[c].name != NULL) {
-			if (!g_strcasecmp(current, _(languages[c].name))) {
+			if (!nautilus_strcasecmp(current, _(languages[c].name))) {
 				set_text(lcode, lcode);
 				set_text(mime_type, enc);
 				set_text(encoding, bits);
@@ -648,7 +696,7 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 		current =
 		    gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(lcode)->entry));
 		while (languages[c].name != NULL) {
-			if (!strcmp(current, languages[c].lcode)) {
+			if (!nautilus_strcmp(current, languages[c].lcode)) {
 				set_text(mime_type, enc);
 				set_text(encoding, bits);
 				set_text(lg_email, group);

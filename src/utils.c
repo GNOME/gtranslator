@@ -136,7 +136,7 @@ const gchar *gtranslator_utils_get_english_language_name(const gchar *lang)
 	{
 		gint c;
 		
-		for(c=0;languages[c].name!=NULL;c++)
+		for(c=0; languages[c].name!=NULL; c++)
 		{
 			if(!nautilus_strcmp(_(languages[c].name), lang))
 			{
@@ -177,7 +177,7 @@ gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_co
 		/*
 		 * First check for full equality, then for a 2 char-prefix equality.
 		 */
-		if(!nautilus_strcmp(languages[i].lcode, locale_code))
+		if(!nautilus_strcasecmp(languages[i].lcode, locale_code))
 		{
 			return _(languages[i].name);
 		}
@@ -188,6 +188,47 @@ gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_co
 	}
 
 	return NULL;
+}
+
+/*
+ * Set the prefs values for the given language.
+ */
+void gtranslator_utils_set_language_values_by_language(const gchar *language)
+{
+	gint	i;
+	
+	g_return_if_fail(language!=NULL);
+
+	for(i=0; languages[i].name!=NULL; i++)
+	{
+		/*
+		 * Search for our language and if found write the corresponding
+		 *  language values into the prefs and return.
+		 */
+		if(!nautilus_strcasecmp(languages[i].name, language) ||
+			!nautilus_strcasecmp(_(languages[i].name), language))
+		{
+			gtranslator_config_init();
+			gtranslator_config_set_string("language/name", languages[i].name);
+			gtranslator_config_set_string("language/language_code", languages[i].lcode);
+			
+			/*
+			 * Unfortunately not all languages in our languages list have
+			 *  got a group EMail address so that we need to be safety-first checking
+			 *   for a group EMail address before writing it into the prefs.
+			 */
+			if(languages[i].group)
+			{
+				gtranslator_config_set_string("language/team_email", languages[i].group);
+			}
+			
+			gtranslator_config_set_string("language/mime_type", languages[i].enc);
+			gtranslator_config_set_string("language/encoding", languages[i].bits);
+			gtranslator_config_close();
+
+			return;
+		}
+	}
 }
 
 /*
@@ -223,11 +264,20 @@ void gtranslator_utils_remove_temp_files()
 void gtranslator_utils_create_gtranslator_directory()
 {
 	gchar *dirname;
+	gint   i=0;
+
+	const	gchar	*subdirectories[] =
+	{
+		"colorschemes",
+		"etstates",
+		"umtf",
+		NULL
+	};
 
 	dirname=g_strdup_printf("%s/.gtranslator", g_get_home_dir());
 
 	/*
-	 * Create the directory if needed.
+	 * First create the ~/.gtranslator main node/directory if needed.
 	 */
 	if(!g_file_test(dirname, G_FILE_TEST_EXISTS))
 	{
@@ -236,6 +286,26 @@ void gtranslator_utils_create_gtranslator_directory()
 			g_warning(_("Can't create directory `%s'!"), dirname);
 			exit(1);
 		}
+	}
+
+	/*
+	 * Now create all the subdirectories under ~/.gtranslator.
+	 */
+	while(subdirectories[i]!=NULL)
+	{
+		GTR_FREE(dirname);
+		dirname=g_strdup_printf("%s/.gtranslator/%s", g_get_home_dir(), subdirectories[i]);
+
+		if(!g_file_test(dirname, G_FILE_TEST_EXISTS))
+		{
+			if(e_mkdir_hier(dirname, 0755)==-1)
+			{
+				g_warning(_("Can't create directory `%s'!"), dirname);
+				exit(1);
+			}
+		}
+
+		i++;
 	}
 
 	GTR_FREE(dirname);
@@ -333,7 +403,7 @@ gchar *gtranslator_utils_get_save_differently_file_name()
 	gchar *sd_file;
 
 	sd_file=g_strdup_printf(
-		"%s/.gtranslator/gtranslator-save-differently-temp-po-file",
+		"%s/.gtranslator/etstates/gtranslator-save-differently-temp-po-file",
 		g_get_home_dir());
 
 	return sd_file;
@@ -347,7 +417,7 @@ gchar *gtranslator_utils_get_messages_table_state_file_name()
 	gchar *state_file;
 	
 	state_file=g_strdup_printf(
-		"%s/.gtranslator/gtranslator-ui-messages-table-state",
+		"%s/.gtranslator/etstates/gtranslator-ui-messages-table-state",
 		g_get_home_dir());
 	
 	return state_file;
@@ -508,17 +578,12 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 		}
 	}
 
-	/*
-	 * Test the files list.
-	 */
-	g_return_val_if_fail(files!=NULL, NULL);
-
 	files=g_list_reverse(files);
 
 	/*
 	 * If the according argument is given, then sort the filenames list.
 	 */
-	if(sort)
+	if(sort && files)
 	{
 		files=g_list_sort(files, (GCompareFunc) nautilus_strcmp);
 	}

@@ -48,6 +48,8 @@ void gtranslator_preferences_init_default_values()
 		 */
 		if(!lc)
 		{
+			gchar	*language_name_for_prefs_init=NULL;
+			
 			lc=gtranslator_utils_get_environment_locale();
 
 			/*
@@ -59,9 +61,12 @@ void gtranslator_preferences_init_default_values()
 				lc=g_strdup("en");
 			}
 
-			gtranslator_config_set_string("language/language_code", lc);
+			language_name_for_prefs_init=gtranslator_utils_get_language_name_by_locale_code(lc);
+			g_return_if_fail(language_name_for_prefs_init!=NULL);
+			
+			gtranslator_utils_set_language_values_by_language(language_name_for_prefs_init);
 		}
-		
+
 		/*
 		 * Useful options which should be set to TRUE.
 		 */ 

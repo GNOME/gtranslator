@@ -289,7 +289,7 @@ void gtranslator_learn_init()
 	gtranslator_learn_buffer=g_new0(GtrLearnBuffer, 1);
 	
 	gtranslator_learn_buffer->filename=g_strdup_printf(
-		"%s/.gtranslator/umtf-learn-buffer.xml", g_get_home_dir());
+		"%s/.gtranslator/umtf/learn-buffer.xml", g_get_home_dir());
 
 	gtranslator_learn_buffer->hash=g_hash_table_new(g_str_hash, g_str_equal);
 	gtranslator_learn_buffer->resources=NULL;
@@ -687,7 +687,17 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 			gtranslator_learn_buffer->hash, 
 				(gconstpointer) query_string);
 
-		return found_string;
+		/*
+		 * Don't trust too short query results .-)
+		 */
+		if(!found_string || strlen(found_string) <= 2)
+		{
+			return NULL;
+		}
+		else
+		{
+			return found_string;
+		}
 	}
 }
 

@@ -57,6 +57,11 @@ const gchar *gtranslator_utils_get_english_language_name(const gchar *lang);
 gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_code);
 
 /*
+ * Sets the prefs values corresponding to the given language.
+ */
+void gtranslator_utils_set_language_values_by_language(const gchar *language);
+
+/*
  * Remove the possibly generated temporary files of gtranslator.
  */
 void gtranslator_utils_remove_temp_files(void); 
