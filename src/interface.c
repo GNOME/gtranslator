@@ -1,8 +1,8 @@
-/*
-* Fatih Demir [ kabalak@gmx.net ]
-*
-* The interface file , totally catastrophed by me ...
-*/
+/**
+ * Fatih Demir [ kabalak@gmx.net ]
+ *
+ * The interface file , totally catastrophed by me ...
+ **/
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -499,9 +499,9 @@ create_app1 (void)
   gtk_widget_ref (trans_box);
   gtk_object_set_data_full (GTK_OBJECT (app1), "trans_box", trans_box,
                             (GtkDestroyNotify) gtk_widget_unref);
-  /*
-  * gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, _("Msgstrs go here ."),20);
-  */
+  /**
+   * gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, _("Msgstrs go here ."),20);
+   **/
 
   gtk_widget_show (trans_box);
   gtk_container_add (GTK_CONTAINER (scrolledwindow2), trans_box);

@@ -1,16 +1,19 @@
-/*
-* Fatih Demir [ kabalak@gmx.net ]
-*
-* A woosh-boosh file ...	
-*/
+/**
+ * Fatih Demir [ kabalak@gmx.net ]
+ *
+ * A woosh-boosh file ...	
+ **/
 	
 #include <gnome.h>
 
-/*
-* A stupid place for a character variable ...
-*/
+/**
+ * A stupid place for a character variable ...
+ **/
 const char *filename;
 
+/**
+ * The long list of cb-functions ...
+ **/
 void
 on_open1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
