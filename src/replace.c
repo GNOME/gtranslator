@@ -46,18 +46,20 @@ static gint replaced_count=0;
  * Create a new GtrReplace object.
  */
 GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
-	gboolean do_it_for_all)
+	gboolean do_it_for_all, gint start)
 {
 	GtrReplace *newreplace=g_new0(GtrReplace, 1);
 
 	g_return_val_if_fail(find!=NULL, NULL);
 	g_return_val_if_fail(replace!=NULL, NULL);
+	g_return_val_if_fail(start < 0, NULL);
 	
 	/*
 	 * g_strdup the string informations for the new structure.
 	 */
 	newreplace->string=g_strdup(find);
 	newreplace->replace_string=g_strdup(replace);
+	newreplace->start_offset=start;
 
 	if(do_it_for_all)
 	{
@@ -110,7 +112,39 @@ void gtranslator_replace_run(GtrReplace *replace)
 	}
 	else
 	{
-		g_list_foreach(po->messages, (GFunc) replace_msg, replace);
+		if(replace->replace_all)
+		{
+			/*
+			 * Perform the replace actions for all messages from the first
+			 *  till the last message.
+			 */
+			g_list_foreach(po->messages, (GFunc) replace_msg, replace);
+		}
+		else
+		{
+			GList *theoriginalchoice=NULL;
+
+			/*
+			 * Rescue the "current" po->current pointer.
+			 */
+			theoriginalchoice=po->current;
+			
+			/*
+			 * Replace till we did succeed in doing a replace, then exit this.
+			 */
+			while((po->current->next) && (replaced_count <= 0))
+			{
+				g_list_foreach(po->current, (GFunc) replace_msg, replace);
+
+				po->current=po->current->next;
+			}
+			
+			/*
+			 * Now we do go back to the status we had before the replace action;
+			 *  the po->current pointer is right now.
+			 */
+			po->current=theoriginalchoice;
+		}
 	}
 
 	if(replaced_count >= 1)
@@ -198,34 +232,39 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 		{
 			if(strstr(*string, rstuff->string))
 			{
-				GString *yummystring=g_string_new("");
+				regex_t *rex;
+				regmatch_t pos[5];
 				
 				/*
-				 * This should never happen that the string to
-				 *  search is inside the string is longer then 
-				 *   the string itself.
+				 * Compile the regex from the string to 
+				 *  replace..
 				 */
-				if(strlen(rstuff->string) > strlen(*string))
+				rex=gnome_regex_cache_compile(rxc, 
+					rstuff->string,
+					REG_EXTENDED|REG_NEWLINE);
+				
+				if(!regexec(rex, (*string), 5, pos, 0))
 				{
-					return;
-				}
-				else
-				{
-					gchar  *zup;
-					gchar *i;
+					gint i=0;
 					
-					zup=*string;
-					i=strstr(zup, rstuff->string);
-					g_message("For %s (to replace with %s): %s.",
-						zup, rstuff->replace_string, i);
-				}
-								
-				g_free(*string);
-				*string=yummystring->str;
+					/*
+					 * FIXME copy & op' on the string.
+					 */
+					while(pos[i].rm_so >= 0)
+					{
+						g_print("%i[%s]%i->%i\n",
+							i,
+							(*string), 
+							pos[i].rm_so,
+							pos[i].rm_eo);
 
+						i++;
+					}
+				}
+				
 				/*
-				 * Hope we'd make a replace, therefore we do increment
-				 *  the replaced_count.
+				 * Hope we'd make a replace, therefore we do 
+				 *  increment the replaced_count.
 				 */
 				replaced_count++;
 			}

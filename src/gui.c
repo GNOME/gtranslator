@@ -515,7 +515,7 @@ void enable_actions_just_opened(void)
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
 
-	disable_actions(ACT_SAVE);
+	disable_actions(ACT_SAVE, ACT_UNDO);
 	/*
 	 * If we'd have the option to use the update function set, enable the
 	 *  Update button in the toolbar and in the menu.
@@ -1084,7 +1084,6 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 	}
 
-
 	/*
 	 * Do all these steps only if the option to use the '·' is set.
 	 */
@@ -1094,15 +1093,12 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		guint len, index;
 
 		nothing_changes = TRUE;
-		/*
-		 * Freeze the translation box.
-		 */
-		gtk_text_freeze(GTK_TEXT(trans_box));
-		
+
 		/*
 		 * Get the current pointer position.
 		 */
 		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
+		
 		/*
 		 * Get the text from the translation box.
 		 */
@@ -1131,11 +1127,6 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		
 		g_free(newstr);
 		
-		/*
-                 * Thaw up the translation box to avoid the reverse writing.
-		 */
-		gtk_text_thaw(GTK_TEXT(trans_box));
-
 		/*
 		 * Go to the old text index.
 		 */

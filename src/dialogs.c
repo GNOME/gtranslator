@@ -508,11 +508,12 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 
 		if(reply==1)
 		{
-			rpl=gtranslator_replace_new(findme, replaceme, TRUE);
+			rpl=gtranslator_replace_new(findme, replaceme, TRUE, 0);
 		}
 		else
 		{
-			rpl=gtranslator_replace_new(findme, replaceme, FALSE);
+			rpl=gtranslator_replace_new(findme, replaceme, FALSE, 
+				g_list_position(po->messages, po->current));
 		}
 		
 		gtranslator_replace_run(rpl);

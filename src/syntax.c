@@ -313,11 +313,11 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 		pos=gtk_editable_get_position(GTK_EDITABLE(textwidget));
 		
 		gtk_text_freeze(GTK_TEXT(textwidget));
-		
+
 		gtk_editable_delete_text(GTK_EDITABLE(textwidget), 0, -1);
 
 		gtranslator_syntax_insert_text(textwidget, str->str);
-		
+
 		gtk_text_thaw(GTK_TEXT(textwidget));
 
 		if(pos >= 0 && pos <= gtk_text_get_length(GTK_TEXT(textwidget)))

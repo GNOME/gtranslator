@@ -1,3 +1,13 @@
+2001-03-16  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c: Give the current message position to the used
+		"gtranslator_replace_new" call.
+
+	* replace.c/.h: Added a "start_offset" field for the GtrReplace
+		structure -- needed for the replace single task which
+		 should now also be more ready; regex based replace is
+		  on the way.
+	
 2001-03-15  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* header-stuff.c, prefs.c: changed " :" to ":" a English 
