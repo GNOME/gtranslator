@@ -150,7 +150,7 @@ static GtrLanguage languages[] = {
 	},
 	{
 	 N_("French"), "fr", "iso-8859-1",
-	 "fr@li.org", "8bit"
+	 "traduc@traduc.org", "8bit"
 	},
 	{
 	 N_("Galician"), "gl", "iso-8859-1",
