@@ -4,8 +4,8 @@
 
 2000-09-13  Robert Brady  <rbrady@suse.de>
 
-	* header-stuff.c: (split_name_email) Don't crash if 
-	str == NULL.  
+	* header-stuff.c: (split_name_email) Don't crash if
+	str == NULL.
 
 	(get_header) Deal with Project-Id-Version: lines with
 	missing version numbers.
@@ -16,7 +16,7 @@
 2000-09-13  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Changed the hotkey for the next fuzzy translation
-		to Alt + Z( slightens the menus a bit) and changed
+		to Alt + Z ( slightens the menus a bit ) and changed
 		 the icon-caption to "Missing" as this doesn't break
 		  the look of the toolbar.
 
@@ -24,7 +24,7 @@
 
 	* gnome-regex.*: reverted to original files from gnome-libs,
 		just added 'flags' field to GnomeRegexCache, and check for it
-		before comparing patterns. Start search from 0th item 
+		before comparing patterns. Start search from 0th item
 		(was 1st).
 	* find.c: for_each_msg -- fail if start item == NULL; iterate on any
 		list, not messages. In other functions, added check to pass not
@@ -63,7 +63,7 @@
 		Ensured file_opened is always in sane state and is checked
 		before doing anything with po structure (this avoids
 		segfaults).
-	* ChangeLog: why lose so much space on this file -- reformatted 
+	* ChangeLog: why lose so much space on this file -- reformatted
 		Fatih's	entries to be like mine. So there's half lines, but
 		size reduced only by 3k...
 	* gui.c: destroy regex cache on quit.
@@ -74,7 +74,7 @@
 	* spell.h, spell.c, gui.c: moved spelling code from gui.c to new
 		separate files.
 	* Makefile.am: added those two files to sources.
-	* find.c: in for_each_msg, reverted to jump to po->messages when NULL 
+	* find.c: in for_each_msg, reverted to jump to po->messages when NULL
 		reached, because of problem when passing first == NULL.
 	* dialogs.c: added fake option menu to select where to find in.
 
@@ -82,7 +82,7 @@
 
 	* gui.c: in update_msg, make both msgid and msgstr end with or without
 		'\n'.
-	* session.*, main.c: added restore_session(), if client is restored. So 
+	* session.*, main.c: added restore_session(), if client is restored. So
 		now goes to the same file and message number.
 	* dialog.c: renamed variables in goto_dlg to shorter ones; added policy
 		set on spin; changed dialog and label titles.
@@ -109,7 +109,7 @@
 		moved all file-specific stuff to GtrPo structure, in that
 		inserted new field -- messages list 'length'.
 	* header_stuff.*: in GtrHeader, splitted language_team into two fields:
-		language and lg_email; also, replaced 'mime_type' with 
+		language and lg_email; also, replaced 'mime_type' with
 		'charset'.
 	
 2000-08-20  Gediminas Paulauskas <menesis@delfi.lt>
@@ -159,7 +159,7 @@
 	* parse.*: added mark_msg_fuzzy function, which does actual change to
 		message comment. Renamed get_msg_status to update_msg_status
 		and changed return type to void. Added rxc -- a regexp cache.
-	* gui.*: added a simple 'Undo' menuitem, ACT_UNDO action, 
+	* gui.*: added a simple 'Undo' menuitem, ACT_UNDO action,
 		undo_changes function. When toggled fuzzy status, call
 		mark_msg_fuzzy.
 	* find.c: use regexps to find. Added update_flags for match case
@@ -175,7 +175,7 @@
 
 2000-08-15  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* prefs.*, header_stuff.c: Lots of changes: moved all language lists to 
+	* prefs.*, header_stuff.c: Lots of changes: moved all language lists to
 		prefs.h, introduced lang_ref reference counting variable,
 		create_lists() and destroy_lists(). All attach_*_with_label()
 		are now in prefs.h, i.e. can be used with any other dialog.
@@ -199,7 +199,7 @@
 	
 2000-08-10  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* find.*, gui.*: renamed search_do to find_do. Created new 
+	* find.*, gui.*: renamed search_do to find_do. Created new
 		for_each_msg function, which works the same as g_list_foreach,
 		except that it starts from specified position, and jumps to
 		first when end reached. All functions in find.h now uses it.
@@ -260,7 +260,7 @@
 	
 2000-08-06  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* *.*: got the CVS 2000-08-04 version, today merged them all. I see 
+	* *.*: got the CVS 2000-08-04 version, today merged them all. I see
 		now, that almost none changes made here by Fatih, only by me.
 		That's good. gui.c, dialogs.c, prefs.c were totally rewritten
 		by me, diff was confused :).
@@ -273,7 +273,7 @@
 		filename setting is done in parse(), removed
 		gtranslator_set_filename from here.
 	* prefs.c: made not use msg db by default, as I could not make program
-		not to crash myself. 
+		not to crash myself.
 	* header_stuff.c: fixed that mime_type was not read. Also made new
 		header to be filled with zeroes, in case some header field was
 		not available.
@@ -305,30 +305,30 @@
 
 	* dialogs.*: done the SAME :) with find dialog. That is, made gnome
 		dialog with icon/parent/wmclass...
-	* prefs.[ch],dialogs.c,header_stuff.c: two new preferences: 
-		if_match_case (for find dialog) and if_fill_header (for edit 
+	* prefs.[ch],dialogs.c,header_stuff.c: two new preferences:
+		if_match_case (for find dialog) and if_fill_header (for edit
 		header dialog). Save them to config.
 	* gui.c: written the search_do function and connected it where needed!
-		Added a function goto_given_msg, which accepts list item as 
+		Added a function goto_given_msg, which accepts list item as
 		user_data.
 	
 2000-08-03  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* prefs.c: ended cleanup. Instead of defines, made some functions to
 		simplify creating of many similar entries. Will use soon in
-		edit_header, maybe...  
+		edit_header, maybe...
 	* parse.c: fixed the bug with ~ and ! :) now should get correct status.
 
 2000-08-02  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* prefs.c: a major cleanup. Moved all widgets from .h to .c and made 
+	* prefs.c: a major cleanup. Moved all widgets from .h to .c and made
 		them static, removed unused ones. Added free_prefs(), which
 		cleans memory, allocated with read_prefs; also, prefs_box_close
 		callback, which destroys the lists when box closes. Moved the
 		code, which initializes the lists, _before_ settting the entries
 		with saved values. Added lots of #defines, so that code was more
 		readable, because there were lots of very similar lines. Made
-		apply callback react only to page_num==-1.  
+		apply callback react only to page_num==-1.
 	* main.c,...: moved some variables used only here from various .h.
 		There's almost no warnings now...
 
@@ -355,7 +355,7 @@
 	* parse.c: changed the argument of parse(const char*). Made a simplier
 		dialog to ask if saving unchanged files. The same to reverting
 		a file. Also, used the nice ask_to_save_file, now saving,
-		opening, closing and reverting is simple, consistent and safe.  
+		opening, closing and reverting is simple, consistent and safe.
 
 2000-07-30  Gediminas Paulauskas <menesis@delfi.lt>
 
@@ -364,13 +364,13 @@
 		loaded simply by 'gtranslator lt.po'. Removed duplicating
 		testing if file is valid, and a bunch of non-interesting
 		comments and braces {}.
-	* prefs.c: minor changes -- added some default values, removed 
+	* prefs.c: minor changes -- added some default values, removed
 		gnome_config_drop_all() call, because this is done
 		automatically.
 
 2000-07-28  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* dialogs.c: added ask_to_save function, to be used when closing 
+	* dialogs.c: added ask_to_save function, to be used when closing
 		application, and file is unsaved. It works now.
 	* gui.*: added disable_actions_no_file, because it is used
 		in main.c and when closing file. Added nothing_changes
@@ -388,17 +388,17 @@
 	* Everywhere: renamed type names to conform with Glib ones:
 		gtr_msg now is GtrMsg, type cast is GTR_MSG(), the same for
 		status, header, action, po.
-	* header_stuff.c,parse.c: at last header parsing is complete! 
+	* header_stuff.c,parse.c: at last header parsing is complete!
 		get_header works fine. Edit header dialog also works, though
 		there's not much... (maybe shouldn't be).
 	* dialogs.c,prefs.c,about.c: added check GNOME_IS_DIALOG(*dlg) to
 		show_nice_dialog, so if *dlg is a GnomeDialog, this function
-		sets parent of it to be the main app. 
+		sets parent of it to be the main app.
 	* gui.c: in Message status menu, merged Untranslated and Translated
 		into one toggle item :) Still no callbacks.
 	* messages.h,parse.c: revised GtrMsgStatus. Now there are only three
-		possible stati: translated, fuzzy, and stick, and they are 
-		flags, so message can be translated AND fuzzy. 
+		possible stati: translated, fuzzy, and stick, and they are
+		flags, so message can be translated AND fuzzy.
 
 2000-07-23  Gediminas Paulauskas <menesis@delfi.lt>
 
@@ -412,11 +412,11 @@
 		toggles/radio items. Created new "actions" framework for
 		enabling/disabling of menu/toolbar entries. Works very well.
 		Before you load a file you can't do much :) Removed lots of
-		stuff from create_app1(), so it looks nice. Of course, 
-		goto_*_msg got changed *much*, now they change actions only 
+		stuff from create_app1(), so it looks nice. Of course,
+		goto_*_msg got changed *much*, now they change actions only
 		if needed.
 	* gui.h: respectyvely, changed this file. Removed all global variables,
-		except app1, appbar1, text1, trans_box, and 
+		except app1, appbar1, text1, trans_box, and
 		gtranslator_geometry. Added actions stuff.
 	* header_stuff.[ch]: finally, made the edit_header dialog like others.
 	* main.c: minor clean up, related to changes in gui.*. Removed the
@@ -436,7 +436,7 @@
 2000-07-22  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* dialogs.*,../po/POTFILES.in,Makefile.am: renamed from gtr_dialogs.*
-	* gui.c: moved get_*_msg, display_msg, update_msg, reached_*_msg, 
+	* gui.c: moved get_*_msg, display_msg, update_msg, reached_*_msg,
 		do_seach from parse.c to here, because they have nothing to do
 		with parsing... renamed get_*_msg to goto_*_msg. removed the
 		setting status in compile() when no file is opened. It should be
@@ -457,7 +457,7 @@
 		destroyed, and raised if were just obscured.
 	* prefs.*: moved widgets from prefs.h to prefs.c as they are not useful
 		for anything outside this file. Replaced (gpointer)1 with
-			GINT_TO_POINTER. 
+			GINT_TO_POINTER.
 	* about.[ch]: left only one callback declared here -- about_box. Added
 		myself to authors, I think I deserve it ;) Removed the "Now you
 		can't see much..." from description, because it works quite
@@ -465,7 +465,7 @@
 	* parse.c: removed the code which calls usleep. What the hell needs it.
 		Instead I changed the status message so that we need only one.
 		However, left it in configure.in...
-	* *.h: removed lots of unused #include's. 
+	* *.h: removed lots of unused #include's.
 	* TODO: added lots of ideas.
 
 2000-07-21  Gediminas Paulauskas <menesis@delfi.lt>
@@ -484,13 +484,13 @@
 
 2000-07-21  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* parse.[ch]: added functions: update_message, save_the_file, 
+	* parse.[ch]: added functions: update_message, save_the_file,
 		write_the_message, restore_msg, the latter being quite long.
-		They implement writing messages to a file. update_message 
+		They implement writing messages to a file. update_message
 		writes the text, if it was changed (a new variable
 		message_changed), from trans_box to msgstr. This made
 		gtranslator a real and useful apllication.
-	* gtr_dialogs.[ch]: removed the uneeded global variables and lots of 
+	* gtr_dialogs.[ch]: removed the uneeded global variables and lots of
 		functions, related to save/open dialogs. There was crap...
 		No made to function properly, save as now works. A "save as"
 		copy of unchanged file is indentical to the original.
@@ -507,7 +507,7 @@
 		function reached_middle_msg for enabling buttons. Also:
 		added get_msg_status(gtr_msg *) for updating the message status
 		with a very simple check. append_line(gchar **, gchar *),
-		which formats the message enclosed in "'s and adds it to the 
+		which formats the message enclosed in "'s and adds it to the
 		first string. So messages are displayed nice... Almost.
 		Fixed cleaning the boxes when text inside was edited.
 		Completely rewrote the parse function, now I do not remember
@@ -528,7 +528,7 @@
 		Completely removed msg_pair variable, instead added cur_msg --
 		a pointer to current message. Added get_msg_status function
 		for getting and adjusting the translating status.
-	* After all of these changes messages got displayed and 
+	* After all of these changes messages got displayed and
 		first/prev/next/last buttons started to work! (What was a goal
 		for 0.20, eh?)
 	* Have read 64% of this file (till 200-05-24)... Uh...
@@ -602,7 +602,7 @@
 	* main.c: Added another option to specify the
 		desired minimun match length ( aka.
  	 	 challenge length); perform a little
-		  check before applying the default 
+		  check before applying the default
 		   challenge length;
 		    set the default challenge length to 2.
 	
@@ -1934,7 +1934,7 @@
 
 	* Implemented the first page of the prefs-box
 	
-	* Added the basic-signals	
+	* Added the basic-signals
 	* Split the prefs-box into four fucntions like the
 	
 		dialogs in the gtr_dialogs.c/h files ...

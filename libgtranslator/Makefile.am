@@ -36,7 +36,7 @@ test_lg_SOURCES = test-lg.c
 
 test_lg_LDADD = libgtranslator.la $(GLIB_LIBS) $(XML_LIBS)
 
-idl_dir = $(datadir)/idl
+idl_dir = $(datadir)/idl/gtranslator
 
 idl__DATA = gtranslatord.idl
 

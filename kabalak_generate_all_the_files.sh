@@ -1,8 +1,8 @@
 #!/bin/sh
 #######################################################################
-### The kabalak'ish answer to ./autogen.sh !
+### The kabalak'sh answer to ./autogen.sh!
 #######################################################################
-### By Fatih Demir [ kabalak@gmx.net ]
+### /kabalak/kabalak@gmx.net/2000-09-14
 #######################################################################
 package=gtranslator
 #######################################################################
@@ -20,10 +20,21 @@ $a "libtoolize -> " && echo "no"|libtoolize --force 2>&1 1>/dev/null
 #grep -sq GETTEXT configure.in && {
 #$a "gettextize -> " && echo "no"|gettextize --force 2>&1 1>/dev/null
 #}
-[ -d macros ] || {
-$a "aclocal -> " && aclocal -I . 
-}
-$a "aclocal -> " && aclocal -I . -I macros
+#
+# Set up the $ACLOCAL_FLAGS
+#
+export ACLOCAL_FLAGS=" -I . $ACLOCAL_FLAGS "
+#
+# Test if the ./macros dir is present
+test -d macros 
+case $? in
+	0)
+	$a "aclocal -> " && aclocal $ACLOCAL_FLAGS -I macros
+	;;
+	*)
+	$a "aclocal -> " && aclocal $ACLOCAL_FLAGS
+	;;
+esac
 $a "autoheader -> " && autoheader
 $a "automake -> " && automake -a
 $a "autoconf -> :-) " && autoconf
