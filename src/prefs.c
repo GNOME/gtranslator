@@ -339,7 +339,7 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	font=gnome_font_picker_new();
 	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
 		_("gtranslator -- font selection"));
-	if (wants.font)
+	if(wants.font)
 		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
 						wants.font);
 	foreground=gnome_color_picker_new();
@@ -438,7 +438,6 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	gtranslator_config_set_string("language/team_email", lg);
 	gtranslator_config_set_string("dict/file", wants.dictionary);
 	
-	g_free(wants.font);
 	wants.font=gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font));
 	gtranslator_config_set_string("font/name", wants.font);
 	

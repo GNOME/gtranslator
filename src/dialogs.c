@@ -129,6 +129,12 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 				  "clicked",
 				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
 				  GTK_OBJECT(dialog));
+	if (po->filename)
+	{
+		gchar *dir=g_dirname(po->filename);
+		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), dir);
+		g_free(dir);
+	}
 	/*
 	 * Make the dialog transient.
 	 */

@@ -299,7 +299,6 @@ static gboolean get_url_from_pos(GtkText* gtktext, int pos, char* buf,
 			buf[pos-start] = GTK_TEXT_INDEX(gtktext, pos);
 		buf[pos-start] = 0;
 	}
-	/* g_print("%c\n", buf[strlen(buf)-1]); */
 
 	if (pstart) *pstart = start;
 	if (pend) *pend = end;

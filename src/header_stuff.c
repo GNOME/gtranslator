@@ -156,6 +156,7 @@ GtrMsg * put_header(GtrHeader * h)
 	GtrMsg *msg = g_new0(GtrMsg, 1);
 	gint c;
 	gchar *lang=h->language;
+	gchar *version;
 
 	/*
 	 * Get the non-localized name for the language, if available
@@ -169,13 +170,18 @@ GtrMsg * put_header(GtrHeader * h)
 		}
 	}
 		
-	if (h->lg_email)
+	if (h->lg_email && h->lg_email[0] != '\0')
 		group = g_strdup_printf("%s <%s>", lang, h->lg_email);
 	else
 		group = g_strdup(lang);
 
+	if (h->prj_version && h->prj_version[0] != '\0')
+		version = g_strdup_printf("%s %s", h->prj_name, h->prj_version);
+	else
+		version = g_strdup(h->prj_name);
+	
 	msg->msgstr = g_strdup_printf("\
-Project-Id-Version: %s %s\n\
+Project-Id-Version: %s\n\
 POT-Creation-Date: %s\n\
 PO-Revision-Date: %s\n\
 Last-Translator: %s <%s>\n\
@@ -183,7 +189,7 @@ Language-Team: %s\n\
 MIME-Version: %s\n\
 Content-Type: text/plain; charset=%s\n\
 Content-Transfer-Encoding: %s\n",
-		h->prj_name, h->prj_version,
+		version,
 		h->pot_date,
 		h->po_date,
 		h->translator, h->tr_email,
@@ -191,13 +197,15 @@ Content-Transfer-Encoding: %s\n",
 		h->mime_version,
 		h->charset,
 		h->encoding);
+
 	g_free(group);
+	g_free(version);
 
 	/*
 	 * Just copy the comment, and make sure it ends with endline
 	 * TODO: in entry box there should be no #'s
 	 */
-	if(h->comment[strlen(h->comment-1)] == '\n')
+	if(h->comment[strlen(h->comment)-1] == '\n')
 		msg->comment = g_strdup(h->comment);
 	else
 		msg->comment = g_strconcat(h->comment, "\n", NULL);

@@ -122,38 +122,17 @@ void gtranslator_set_style(GtkWidget *widget)
 {
 	GtkStyle *style;
 	GdkColor *fg, *bg;
+	GdkFont *font;
 	gchar *fontname;
+
+	g_return_if_fail(widget != NULL);
 
 	gtranslator_config_init();
 	
 	/*
-	 * The stored font setting.
+	 * Copy the style informations of the given widget.
 	 */
-	fontname=gtranslator_config_get_string("font/name");
-
-	if(!fontname)
-	{
-		g_warning(_("No font set! Using default font"));
-		/*
-		 * Use gtranslator's font in this case.
-		 */
-		fontname=_("-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1");
-	}
-	/*
-	 * Check the given widget and get the widget style.
-	 */
-	if(widget)
-	{
-		/*
-		 * Copy the style informations of the given widget.
-		 */
-		style=gtk_style_copy(gtk_widget_get_style(widget));
-	}
-	else
-	{
-		g_error ("No widgets defined to manipulate their style");
-		return;
-	}
+	style=gtk_style_copy(gtk_widget_get_style(widget));
 	
 	/*
 	 * Get the background informations/values of the widget.
@@ -176,29 +155,36 @@ void gtranslator_set_style(GtkWidget *widget)
 	fg->blue=gtranslator_config_get_int("colors/fg_blue");
 	
 	/*
-	 * Unref/free the widget font.
+	 * The stored font setting.
 	 */
-	gdk_font_unref(style->font);
-	
-	/*
-	 * Set the font for the widget from the stored fontname.
-	 */
-	style->font=gdk_font_load(fontname);
-	if(!style->font)
-	{	
-		g_warning(_("Couldn't even load default font! Using fixed"));
+	fontname=gtranslator_config_get_string("font/name");
 
-	        style->font=gdk_font_load("fixed");
-	        if(!style->font)
-		{
-			g_error(_("Couldn't even load default font!"));
-		}
+	if(!fontname)
+	{
+		g_message(_("No font set! Using default font"));
+		/*
+		 * Use gtranslator's font in this case.
+		 */
+		fontname=_("-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1");
+		gtranslator_config_set_string("font/name", fontname);
+	}
+	/*
+	 * Set the font for the widget, if possible.
+	 */
+	font=gdk_font_load(fontname);
+	if(font)
+	{
+		/*
+		 * Unref old widget font.
+		 */
+		gdk_font_unref(style->font);
+		style->font=font;
 	}
 	
 	/*
 	 * The final step: set the widget style.
 	 */
-	gtk_widget_set_style(GTK_WIDGET(widget), style);
+	gtk_widget_set_style(widget, style);
 	
 	/*
 	 * Clean up and close gtranslator's config interface.

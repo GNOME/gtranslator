@@ -23,6 +23,7 @@
 #include "gui.h"
 #include "parse.h"
 #include "open-differently.h"
+#include "prefs.h"
 
 /*
  * From list remove all entries with same filename as entry->filename
@@ -96,6 +97,20 @@ GList *gtranslator_history_get(void)
 
 		g_snprintf(path, 32, "%sfilename", subpath);
 		myentry->filename=gtranslator_config_get_string(path);
+		
+		/*
+		 * Check if the file exists before adding it to list
+		 */
+		if(wants.check_recent_file)
+		{
+			if(!g_file_exists(myentry->filename))
+			{
+				g_free(subpath);
+				g_free(myentry->filename);
+				g_free(myentry);
+				continue;
+			}
+		}
 		
 		g_snprintf(path, 32, "%sproject_name", subpath);
 		myentry->project_name=gtranslator_config_get_string(path);
@@ -223,7 +238,12 @@ void gtranslator_history_save(GList *list)
 
 		g_free(subpath);
 		
-		number++;	
+		number++;
+		/*
+		 * Save only 8 entries. It could be made configurable
+		 */
+		if(number>=8)
+			break;
 		rlist=g_list_next(rlist);
 	}
 

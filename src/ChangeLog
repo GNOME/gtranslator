@@ -1,3 +1,14 @@
+2001-02-05  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* dialogs.c: open working dir in save as dialog also.
+	* header_stuff.c: if no project version is set do not write space after
+	name ;). Fixed stupid error with \n in comment.
+	* history.c: implement "Check if the file exists" option. Save only
+	8 entries.
+	* parse.c: in file open callback, close old file before opening new.
+	Implement "warn user about fuzzy mesages left" option.
+	* prefs.c: do not free internal font name.
+
 2001-02-04  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* dialogs.c: Open dialog shows the same dir as current file.

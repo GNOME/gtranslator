@@ -474,6 +474,8 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
 
+	if(file_opened)
+		close_file(NULL, NULL);
 	/*
 	 * Detect via the new functions the right open function for the file.
 	 */
@@ -645,6 +647,18 @@ static gboolean actual_write(const gchar * name)
 
 	fclose(fs);
 	po->file_changed = FALSE;
+
+	/* If user wants to, warn it about fuzzy mesages left */
+	if(wants.warn_if_fuzzy && po->fuzzy)
+	{
+		gchar *warn;
+		warn = g_strdup_printf(_("File %s\n"
+				       "contains %d fuzzy messages"),
+				       po->filename, po->fuzzy);
+		gnome_warning_dialog_parented(warn, GTK_WINDOW(app1));
+		g_free(warn);
+	}
+	
 	return TRUE;
 }
 
