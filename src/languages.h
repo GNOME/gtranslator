@@ -206,7 +206,7 @@ static lang languages[] = {
 	 "", "8bit"},
 	{
 	 N_("Turkish"), "tr", "iso-8859-9",
-	 "tr@li.org", "8bit"},
+	 "gnome-turk@gnome.org", "8bit"},
 	{
 	 N_("Ukrainian"), "uk", "koi8-u",
 	 "linux@linux.org.ua", "8bit"},
