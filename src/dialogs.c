@@ -719,7 +719,7 @@ Would you like to insert it into the translation?"),
 					 *  translation box; if so print a warning
 					 *   and don't insert the translation.
 					 */
-					if(strcmp(content, result->translation))
+					if(content && strcmp(content, result->translation))
 					{
 						gtranslator_syntax_insert_text(trans_box,
 						result->translation);
@@ -734,7 +734,10 @@ Would you like to insert it into the translation?"),
 						_("Query's result translation is already there!"));
 					}
 
-					gtranslator_free_query_result(&result);
+					/*
+					 * FIXME: Hehe, SEGV.
+					 * gtranslator_free_query_result(&result);
+					 */
 					g_free(content);
 				}
 			}
