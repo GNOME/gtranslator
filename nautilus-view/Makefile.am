@@ -36,6 +36,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/gui.o \
 	$(srcbuild)/header_stuff.o \
 	$(srcbuild)/history.o \
+	$(srcbuild)/menus.o \
 	$(srcbuild)/message.o \
 	$(srcbuild)/nautilus-string.o \
 	$(srcbuild)/open-differently.o \
