@@ -2,6 +2,6 @@
 ## The ETable specs for gal are taken out of the files from here .-)
 ##
 
-etspecs_dir = $(datadir)/gtranslator/etspecs
+etspecsdir = $(datadir)/gtranslator/etspecs
 
-etspecs__DATA = messages-table.etspec
+etspecs_DATA = messages-table.etspec
