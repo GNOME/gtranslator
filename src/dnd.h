@@ -13,8 +13,6 @@
 
 #include "interface.h"
 #include "parse.h"
-#include "msg_db.h"
-#include "messages.h"
 
 /**
 * The gtranslator's dnd-types enumeration.

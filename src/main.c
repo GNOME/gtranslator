@@ -66,6 +66,7 @@ int main(int argc,char *argv[])
 	* For the arguments
 	**/
 	poptContext context;
+	
 #ifdef ENABLE_NLS
 	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain(PACKAGE);
@@ -163,7 +164,7 @@ int main(int argc,char *argv[])
 			**/
 			parse(file_to_open);
 			file_opened=TRUE;
-			pf.filename=file_to_open;
+			i_love_this_file=file_to_open;
 		}
 	}
 	/**

@@ -13,7 +13,15 @@
 /**
 * The general header
 **/
-gtr_header ph;
+gtr_header ph = {
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL
+};
 
 /**
 * A simple define; ok I'm lazy ..
@@ -31,6 +39,7 @@ void apply_header(gtr_header the_header)
 
 void get_header(gchar *hline)
 {
+	gboolean header_finish=FALSE;
 	gchar *inp;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
@@ -63,14 +72,14 @@ void get_header(gchar *hline)
 	if(!g_strncasecmp(hline,"\"Content-Tr",11))
 	{
 		kabalak_str(encoding);
+		header_finish=TRUE;
 	}
-	if(!g_strncasecmp(hline,"\"X-G",4))
+	if(header_finish==TRUE)
 	{
-		kabalak_str(xtranslator);
+		/**
+		* Just a think-about-my-output print-command ...
+		**/
+		g_print("Header :\n%s%s%s%s%s%s",ph.project_id,ph.pot_date,ph.po_date,
+			ph.last_translator,ph.language_team,ph.mime_version);
 	}
-}
-
-void print_header()
-{
-	g_print("%s",ph.last_translator);
 }

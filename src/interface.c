@@ -76,7 +76,7 @@ void compile(GtkWidget *widget,gpointer useless)
 		**/
 		gchar *cmd=" ";
 		gint res=1;
-		sprintf(cmd,"%s %s","msgfmt",pf.filename);
+		sprintf(cmd,"%s %s","msgfmt",i_love_this_file);
 		res=system(cmd);
 		/**
 		* If there has been an error show an error-box

@@ -37,10 +37,6 @@ struct _gtr_header {
 	gchar *mime_version;
 	gchar *mime_type;
 	gchar *encoding;
-	/**
-	* Is this a standard header part?
-	**/
-	gchar *xtranslator;
 };
 
 void apply_header(gtr_header the_header);

@@ -65,10 +65,6 @@ void parse(gchar *po)
 	* Check the file-stream
 	**/
 	check_file(fs);
-	/**
-	* If we're still alive, set the global filename
-	**/
-	pf.filename=po;
         /**
         * Parse the file ...
         **/
@@ -76,7 +72,7 @@ void parse(gchar *po)
         fgets(temp_char,sizeof(temp_char),fs)!=NULL
         )
         {
-		gtr_msg msg;
+		gtr_msg msg[z];
 		z++;
 		/**
 		* Try to get the header :
@@ -107,22 +103,22 @@ void parse(gchar *po)
 			*  and set the comment & position.
 			**/
 			msg_pair++;
-			msg.pos=z;
-			msg.comment=temp_char;
+			msg[z].pos=z;
+			msg[z].comment=temp_char;
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			msg.msgid=temp_char;
+			msg[z].msgid=temp_char;
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			msg.msgstr=temp_char;
+			msg[z].msgstr=temp_char;
 		}
         }
         /**
@@ -146,7 +142,6 @@ void parse(gchar *po)
 	**/
 	enable_buttons();
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));
-	print_header();
 }
 
 /**
