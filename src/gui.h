@@ -30,12 +30,12 @@
  * The globally needed widgets
  */
 
-GtkWidget *app1;
+GtkWidget *gtranslator_application;
 GtkWidget *trans_box;
-GtkWidget *text1;
-GtkWidget *appbar1;
+GtkWidget *text_box;
+GtkWidget *gtranslator_application_bar;
 
-void create_app1(void);
+void gtranslator_create_main_window(void);
 
 /*
  * For the status messages

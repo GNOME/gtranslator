@@ -37,10 +37,10 @@
 /*
  * The callbacks:
  */
-static void prefs_box_changed(GtkWidget  * widget, gpointer useless);
-static void prefs_box_apply(GtkWidget  * widget, gint page_num,
+static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer useless);
+static void gtranslator_preferences_dialog_apply(GtkWidget  * widget, gint page_num,
 			    gpointer useless);
-static void prefs_box_help(GtkWidget  * widget, gpointer useless);
+static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer useless);
 
 static gint list_ref = 0;
 
@@ -164,7 +164,7 @@ GtkWidget *append_page_table(GtkWidget  * probox, gint rows, gint cols,
 /*
  * Set up the lists to use within the combo boxes.
  */
-void create_lists(void)
+void gtranslator_lists_create(void)
 {
 	gint c = 0;
 	list_ref++;
@@ -214,7 +214,7 @@ void create_lists(void)
 	bits_list = g_list_sort(bits_list, (GCompareFunc) strcmp);
 }
 
-void prefs_box(GtkWidget  * widget, gpointer useless)
+void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
 	/*
 	 * The internally used variables.
@@ -248,99 +248,99 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	 */
 	authors_name =
 	    attach_entry_with_label(first_page, 0, _("Author's name:"),
-				    author, prefs_box_changed);
+				    author, gtranslator_preferences_dialog_changed);
 	authors_email =
 	    attach_entry_with_label(first_page, 1, _("Author's EMail:"),
-				    email, prefs_box_changed);
+				    email, gtranslator_preferences_dialog_changed);
 
 	defaultdomain =
 	    attach_combo_with_label(first_page, 2, _("Default query domain:"),
 			    	    domains, wants.defaultdomain,
-				    prefs_box_changed, NULL);
+				    gtranslator_preferences_dialog_changed, NULL);
 	
 	/*
 	 * Create, attach, and connect all the combo boxes with labels. 
 	 */
-	create_lists();
+	gtranslator_lists_create();
 
 	authors_language =
 	    attach_combo_with_label(second_page, 0, _("Language:"),
 				    languages_list, language,
-				    prefs_box_changed, GINT_TO_POINTER(1));
+				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(1));
 	lcode =
 	    attach_combo_with_label(second_page, 1, _("Language code:"),
 				    lcodes_list, lc, 
-				    prefs_box_changed, GINT_TO_POINTER(2));
+				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(2));
 	lg_email =
 	    attach_combo_with_label(second_page, 2,
 				    _("Language group's EMail:"),
 				    group_emails_list, lg,
-				    prefs_box_changed, NULL);
+				    gtranslator_preferences_dialog_changed, NULL);
 	mime_type =
 	    attach_combo_with_label(second_page, 3, _("Charset:"),
 				    encodings_list, mime,
-				    prefs_box_changed, NULL);
+				    gtranslator_preferences_dialog_changed, NULL);
 	encoding =
 	    attach_combo_with_label(second_page, 4, _("Encoding:"),
 				    bits_list, enc,
-				    prefs_box_changed, NULL);
+				    gtranslator_preferences_dialog_changed, NULL);
 	/*
 	 * Create, attach, and connect the toggle buttons.
 	 */
 	unmark_fuzzy =
 	    attach_toggle_with_label(third_page, 0,
 		_("Set non-fuzzy status, if message was changed"),
-		wants.unmark_fuzzy, prefs_box_changed);
+		wants.unmark_fuzzy, gtranslator_preferences_dialog_changed);
 	warn_if_fuzzy =
 	    attach_toggle_with_label(third_page, 1,
 		_("Warn if the .po-file contains fuzzy translations"),
-		wants.warn_if_fuzzy, prefs_box_changed);
+		wants.warn_if_fuzzy, gtranslator_preferences_dialog_changed);
 	dont_save_unchanged_files =
 	    attach_toggle_with_label(third_page, 2,
 		_("Don't save unchanged .po-files"),
-		wants.dont_save_unchanged_files, prefs_box_changed);
+		wants.dont_save_unchanged_files, gtranslator_preferences_dialog_changed);
 	warn_if_no_change =
 	    attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
-		wants.warn_if_no_change, prefs_box_changed);
+		wants.warn_if_no_change, gtranslator_preferences_dialog_changed);
 	keep_obsolete =
 	    attach_toggle_with_label(third_page, 4,
 		_("Keep obsolete message in the po files"),
-		wants.keep_obsolete, prefs_box_changed);
+		wants.keep_obsolete, gtranslator_preferences_dialog_changed);
 
 	/*
 	 * The fourth page with the popup menu & the dot_char.
 	 */
 	use_dot_char=attach_toggle_with_label(fourth_page, 0,
 		_("Use free space indicating special character"),
-		wants.dot_char, prefs_box_changed);
+		wants.dot_char, gtranslator_preferences_dialog_changed);
 	enable_popup_menu=attach_toggle_with_label(fourth_page, 2,
 		_("Enable the popup menu"),
-		wants.popup_menu, prefs_box_changed);	
+		wants.popup_menu, gtranslator_preferences_dialog_changed);	
 	use_update_function=attach_toggle_with_label(fourth_page, 3,
 		_("Enable the update function of gtranslator (you need the sources for this)"),
-		wants.update_function, prefs_box_changed);
+		wants.update_function, gtranslator_preferences_dialog_changed);
 	save_geometry_tb=attach_toggle_with_label(fourth_page, 4,
 		_("Save geometry on exit & restore it on startup"),
-		wants.save_geometry, prefs_box_changed);
+		wants.save_geometry, gtranslator_preferences_dialog_changed);
 	no_uzis=attach_toggle_with_label(fourth_page, 5,
 		_("Don't show the update information dialogs"),
-		wants.uzi_dialogs, prefs_box_changed);
+		wants.uzi_dialogs, gtranslator_preferences_dialog_changed);
 	/*
 	 * The fifth page with the Recent files options.
 	 */
 	check_recent_files=attach_toggle_with_label(fifth_page, 0,
 		_("Check every recent file before listing it up"),
-		wants.check_recent_file, prefs_box_changed);
+		wants.check_recent_file, gtranslator_preferences_dialog_changed);
 	instant_spell_checking=attach_toggle_with_label(fifth_page, 1,
 		_("Instant spell checking"),
-		wants.instant_spell_check, prefs_box_changed);
+		wants.instant_spell_check, gtranslator_preferences_dialog_changed);
 	use_own_dict=attach_toggle_with_label(fifth_page, 2,
 		_("Use special dictionary"),
-		wants.use_own_dict, prefs_box_changed);
+		wants.use_own_dict, gtranslator_preferences_dialog_changed);
 	dictionary_file=
 	    attach_entry_with_label(fifth_page, 3, _("Dictionary to use:"),
-				    wants.dictionary, prefs_box_changed);
+				    wants.dictionary, gtranslator_preferences_dialog_changed);
 	
 	/*
 	 * The sixth page with the special font/color stuff.
@@ -354,7 +354,7 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 
 	own_specs=attach_toggle_with_label(sixth_page, 1,
 		_("Apply special font/colors"),
-		wants.use_own_specs, prefs_box_changed);
+		wants.use_own_specs, gtranslator_preferences_dialog_changed);
 	
 	font_label=gtk_label_new(_("Font:"));
 	fg_color_label=gtk_label_new(_("Foreground color:"));
@@ -408,27 +408,27 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	 * Connect the signals to the preferences box.
 	 */
 	gtk_signal_connect(GTK_OBJECT(font), "font_set",
-			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(foreground), "color_set",
-			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(background), "color_set",
-			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(gnome_file_entry_gtk_entry(
 			   GNOME_FILE_ENTRY(scheme_file))), "changed",
-			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
-			   GTK_SIGNAL_FUNC(prefs_box_apply), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_apply), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "help",
-			   GTK_SIGNAL_FUNC(prefs_box_help), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_help), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "close",
-			   GTK_SIGNAL_FUNC(destroy_lists), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_lists_free), NULL);
 	show_nice_dialog(&prefs, "gtranslator -- prefs");
 }
 
 /*
  * The actions to take when the user presses "Apply".
  */
-static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
+static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num, gpointer useless)
 {
 	/*
 	 * We need to apply only once. 
@@ -493,13 +493,13 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 		gtranslator_color_scheme_apply(wants.scheme);
 		theme=gtranslator_color_scheme_load_from_prefs();
 
-		init_colors();
+		gtranslator_colors_initialize();
 	}
 	
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(background), COLOR_BG);
 
-	gtranslator_set_style(text1);
+	gtranslator_set_style(text_box);
 	gtranslator_set_style(trans_box);
 
 	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);
@@ -534,15 +534,15 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 /*
  * The preferences box's help window.
  */
-static void prefs_box_help(GtkWidget  * widget, gpointer useless)
+static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer useless)
 {
-	gnome_app_message(GNOME_APP(app1), _("\
+	gnome_app_message(GNOME_APP(gtranslator_application), _("\
 With the Preferences box you can define some variables\n\
 with which you can make gtranslator make more work\n\
 like YOU want it to work!"));
 }
 
-gboolean destroy_lists(GtkWidget  * widget, gpointer useless)
+gboolean gtranslator_lists_free(GtkWidget  * widget, gpointer useless)
 {
 	list_ref--;
 	/*
@@ -559,7 +559,7 @@ gboolean destroy_lists(GtkWidget  * widget, gpointer useless)
 	return FALSE;
 }
 
-static void prefs_box_changed(GtkWidget  * widget, gpointer flag)
+static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)
 {
 	gint c = 0;
 	gchar *current;
@@ -602,13 +602,13 @@ static void prefs_box_changed(GtkWidget  * widget, gpointer flag)
 #undef set_text
 }
 
-void read_prefs(void)
+void gtranslator_preferences_read(void)
 {
 	/*
 	 * Initialize the preferences with default values if this is our first
 	 *  startup of gtranslator.
 	 */  
-	prefs_init_default();
+	gtranslator_preferences_init_default_values();
 
 	gtranslator_config_init();
 	author = gtranslator_config_get_string("translator/name");
@@ -654,7 +654,7 @@ void read_prefs(void)
 
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
-	update_flags();
+	gtranslator_update_regex_flags();
 	wants.fill_header = gtranslator_config_get_bool("toggles/fill_header");
 
 	/*
@@ -665,14 +665,14 @@ void read_prefs(void)
 		/*
 		 * Set the own specs for colors and for the font.
 		 */
-		gtranslator_set_style(text1);
+		gtranslator_set_style(text_box);
 		gtranslator_set_style(trans_box);
 	}
 
 	gtranslator_config_close();
 }
 
-void free_prefs(void)
+void gtranslator_preferences_free(void)
 {
 	g_free(author);
 	g_free(email);
@@ -683,12 +683,12 @@ void free_prefs(void)
 	g_free(lg);
 }
 
-void save_geometry(void)
+void gtranslator_geometry_save(void)
 {
 	if (wants.save_geometry == TRUE) {
 		gchar *gstr;
 		gint x, y, w, h;
-		gstr = gnome_geometry_string(app1->window);
+		gstr = gnome_geometry_string(gtranslator_application->window);
 		gnome_parse_geometry(gstr, &x, &y, &w, &h);
 		g_free(gstr);
 		gtranslator_config_init();
@@ -701,7 +701,7 @@ void save_geometry(void)
 	}
 }
 
-void restore_geometry(gchar  * gstr)
+void gtranslator_geometry_restore(gchar  * gstr)
 {
 	gint x, y, width, height;
 	/*
@@ -730,7 +730,7 @@ void restore_geometry(gchar  * gstr)
 		}
 	}
 	if (x != -1)
-		gtk_widget_set_uposition(app1, x, y);
+		gtk_widget_set_uposition(gtranslator_application, x, y);
 	if ((width > 0) && (height > 0))
-		gtk_window_set_default_size(GTK_WINDOW(app1), width, height);
+		gtk_window_set_default_size(GTK_WINDOW(gtranslator_application), width, height);
 }

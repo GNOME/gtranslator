@@ -1,5 +1,6 @@
 /*
  * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ *		Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -133,9 +134,9 @@ void show_comment()
 
 	current_view=GTR_COMMENT_VIEW;
 	
-	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
+	gtk_editable_delete_text(GTK_EDITABLE(text_box), 0, -1);
 
-	setup_text(text1, comment, _("No comments available for this message."));
+	setup_text(text_box, comment, _("No comments available for this message."));
 }
 
 /*
@@ -156,7 +157,7 @@ void show_number()
 	/*
 	 * Show the nude figures!
 	 */
-	show_up_figures(text1, msg->msgid);
+	show_up_figures(text_box, msg->msgid);
 	show_up_figures(trans_box, msg->msgstr);
 }
 
@@ -175,7 +176,7 @@ void show_c_format()
 	/*
 	 * Use the new helper functions for the real core task.
 	 */
-	show_up_formats(text1, msg->msgid);
+	show_up_formats(text_box, msg->msgid);
 	show_up_formats(trans_box, msg->msgstr);
 }
 
@@ -197,7 +198,7 @@ void show_hotkey()
 	/*
 	 * Handle both msgid and msgstr for the hotkeys.
 	 */
-	show_up_hotkeys(text1, msg->msgid);
+	show_up_hotkeys(text_box, msg->msgid);
 	show_up_hotkeys(trans_box, msg->msgstr);
 }
 

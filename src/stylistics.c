@@ -141,7 +141,7 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 		/*
 		 * Possibly convert the old color specs to their new place.
 		 */
-		prefs_convert_colors();
+		gtranslator_colors_convert_to_new_settings();
 		
 		/*
 		 * And reread the specs from the now correct location.
@@ -257,20 +257,20 @@ static gboolean colors_initialized=FALSE;
 /*
  * Return the requested GdkColor
  */
-GdkColor *get_color_from_type(ColorType type)
+GdkColor *gtranslator_get_color_from_type(ColorType type)
 {
 	g_return_val_if_fail(type < COLOR_END, NULL);
 
 	if(!colors_initialized)
 	{
 		colors_initialized=TRUE;
-		init_colors();
+		gtranslator_colors_initialize();
 	}
 
 	return &colors[type];
 }
 
-void init_colors(void)
+void gtranslator_colors_initialize(void)
 {
 	/*
 	 * If no theme is specified/given use the default colors.

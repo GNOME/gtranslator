@@ -339,7 +339,7 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	gtk_window_set_title(GTK_WINDOW(e_header),
 			     _("gtranslator -- edit header"));
 
-	create_lists();
+	gtranslator_lists_create();
 
 	prj_page = append_page_table(e_header, 5, 2, _("Project"));
 	label = gtk_label_new(_("Translator and Language"));
@@ -419,7 +419,7 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	gtk_signal_connect(GTK_OBJECT(e_header), "apply",
 			   GTK_SIGNAL_FUNC(edit_header_apply), NULL);
 	gtk_signal_connect(GTK_OBJECT(e_header), "close",
-			   GTK_SIGNAL_FUNC(destroy_lists), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_lists_free), NULL);
 
 	show_nice_dialog(&e_header, "gtranslator -- header");
 

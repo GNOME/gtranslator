@@ -65,33 +65,33 @@ struct {
 } wants;
 
 /*
- * Creating the preferences box and the neededbackend-functions.
+ * Creating the preferences box and the needed backend-functions.
  */
-void prefs_box(GtkWidget * widget, gpointer useless);
-void read_prefs(void);
-void free_prefs(void);
+void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless);
+void gtranslator_preferences_read(void);
+void gtranslator_preferences_free(void);
 
 /*
  * Initialize the preferences with useful default values if there hasn't
  *  been any options set up yet.
  */
-void prefs_init_default(void);
+void gtranslator_preferences_init_default_values(void);
 
 /*
  * Initialize the syntax highlighting default colors.
  */
-void prefs_init_syntax_colors(void);
+void gtranslator_colors_init_default_colors(void);
 
 /*
  * Convert the fg/bg settings from < 2001-03-03 to the new places.
  */
-void prefs_convert_colors(void);
+void gtranslator_colors_convert_to_new_settings(void);
 
 /*
  * Routines for saving/restoring/setting geometry of the main window.
  */
-void save_geometry(void);
-void restore_geometry(gchar *gstr);
+void gtranslator_geometry_save(void);
+void gtranslator_geometry_restore(gchar *gstr);
 
 /*
  * Font/color specific widgets used in the preferences box.
@@ -104,8 +104,8 @@ GtkWidget *foreground, *background, *font;
 GList *languages_list, *encodings_list,
 	*lcodes_list, *group_emails_list, *bits_list;
 
-void create_lists(void);
-gboolean destroy_lists(GtkWidget *widget, gpointer useless);
+void gtranslator_lists_create(void);
+gboolean gtranslator_lists_free(GtkWidget *widget, gpointer useless);
 
 /*
  * Convenience functions for adding items 

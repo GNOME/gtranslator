@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 	 * Initialize the regular expression cache 
 	 */
 	rxc = gnome_regex_cache_new_with_size(20);
-	read_prefs();
+	gtranslator_preferences_read();
 	
 	/*
 	 * Get the master session management client.
@@ -155,16 +155,16 @@ int main(int argc, char *argv[])
 	 * Connect the signals needed for session management.
 	 */
 	gtk_signal_connect(GTK_OBJECT(client), "save_yourself",
-			   GTK_SIGNAL_FUNC(gtranslator_sleep),
+			   GTK_SIGNAL_FUNC(gtranslator_session_sleep),
 			   (gpointer) argv[0]);
 	gtk_signal_connect(GTK_OBJECT(client), "die",
-			   GTK_SIGNAL_FUNC(gtranslator_dies_for_you), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_session_die), NULL);
 
 	/* 
 	 * Create the main app-window. 
 	 */
-	create_app1();
-	restore_geometry(gtranslator_geometry);
+	gtranslator_create_main_window();
+	gtranslator_geometry_restore(gtranslator_geometry);
 	
 	/*
 	 * Check if a temporary file from the last session had been
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 	 * Set up the text boxes with the _new_ style.
 	 */ 
 	gtranslator_config_init();
-	gtranslator_set_style(text1);
+	gtranslator_set_style(text_box);
 	gtranslator_set_style(trans_box);
 	gtranslator_config_close();
 	
@@ -278,10 +278,10 @@ int main(int argc, char *argv[])
 	flags = gnome_client_get_flags(client);
 	if (flags & GNOME_CLIENT_RESTORED)
 	{
-		restore_session(client);
+		gtranslator_session_restore(client);
 	}
 	
-	gtk_widget_show_all(app1);
+	gtk_widget_show_all(gtranslator_application);
 	
 	/*
 	 * Enter the Gtk+ main-loop.

@@ -1,3 +1,32 @@
+2001-04-06  Fatih Demir <kabalak@gtranslator.org>
+
+	* *.*: Some renamings (for more convenience or logic):
+		Variables:
+		
+		app1 -> gtranslator_application,
+		appbar1	-> gtranslator_application_bar,
+		text1 -> text_box.
+
+		Functions:
+		
+		create_app1 -> gtranslator_create_main_window,
+		about_box -> gtranslator_create_about_box,
+		init_colors -> gtranslator_colors_initialize,
+		restore_session -> gtranslator_session_restore,
+		gtranslator_dies_for_you -> gtranslator_session_die,
+		gtranslator_sleep -> gtranslator_session_sleep,
+		update_flags -> gtranslator_update_regex_flags,
+		get_color_from_type -> gtranslator_get_color_from_type,
+		restore/save_geometry -> gtranslator_geometry_restore/save,
+		create/destroy_lists -> gtranslator_lists_create/free,
+		prefs_convert_colors -> gtranslator_colors_convert_to_new_settings.
+		prefs_init_default -> gtranslator_preferences_init_default_values,
+		prefs_init_syntax_colors -> gtranslator_colors_init_default_colors,
+		free/read_prefs -> gtranslator_preferences_read/free,
+		prefs_box -> gtranslator_preferences_dialog.
+
+	* views.c: Added Gediminas to the author(s) of this file.
+
 2001-04-05  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* dialogs.c: use raise_and_return_if_exists() for dialogs which should

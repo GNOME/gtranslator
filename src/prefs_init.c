@@ -23,7 +23,7 @@
 /*
  * Sets up some useful options as the user runs the first time gtranslator.
  */
-void prefs_init_default()
+void gtranslator_preferences_init_default_values()
 {
 	gchar *date;
 	
@@ -58,7 +58,7 @@ void prefs_init_default()
 		/*
 		 * Initialize the default highlight colors.
 		 */
-		prefs_init_syntax_colors(); 
+		gtranslator_colors_init_default_colors(); 
 
 		/*
 		 * Avoid re-initialization of the default values via setting
@@ -75,7 +75,7 @@ void prefs_init_default()
 /*
  * Setup the default colors.
  */ 
-void prefs_init_syntax_colors()
+void gtranslator_colors_init_default_colors()
 {
 	gtranslator_config_init();
 	
@@ -105,7 +105,7 @@ void prefs_init_syntax_colors()
 /*
  * Try to convert the < 0.37 color preferences to their new location.
  */
-void prefs_convert_colors()
+void gtranslator_colors_convert_to_new_settings()
 {
 	gchar *value;
 	gboolean converted=FALSE;

@@ -187,7 +187,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			 */
 			goto_given_msg(msg);
 			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
-			gtk_editable_select_region(GTK_EDITABLE(text1),
+			gtk_editable_select_region(GTK_EDITABLE(text_box),
 				pos->rm_so, pos->rm_eo);
 			actpos++;
 		
@@ -204,7 +204,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			goto_given_msg(msg);
 			gtranslator_views_set(GTR_COMMENT_VIEW);
 			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
-			gtk_editable_select_region(GTK_EDITABLE(text1),
+			gtk_editable_select_region(GTK_EDITABLE(text_box),
 				pos->rm_so, pos->rm_eo);
 			actpos++;
 		
@@ -234,7 +234,7 @@ void find_do(GtkWidget * widget, gpointer what)
 	if (what) {
 		if (strlen(what) == 0) {
 			error = g_strdup_printf(_("Please enter a search string"));
-			gnome_app_message(GNOME_APP(app1), error);
+			gnome_app_message(GNOME_APP(gtranslator_application), error);
 			g_free(error);
 			return;
 		}
@@ -250,7 +250,7 @@ void find_do(GtkWidget * widget, gpointer what)
 	if (repeat_all(begin, (FEFuncR)find_in_msg, NULL, first) == TRUE)
 		return;
 	error = g_strdup_printf(_("Could not find\n\"%s\""), pattern);
-	gnome_app_message(GNOME_APP(app1), error);
+	gnome_app_message(GNOME_APP(gtranslator_application), error);
 	g_free(error);
 }
 
@@ -282,7 +282,7 @@ void goto_next_fuzzy(GtkWidget * widget, gpointer useless)
 		begin = po->messages;
 	if (for_each_msg(begin, (FEFunc)is_fuzzy, NULL) == TRUE)
 		return;
-	gnome_app_message(GNOME_APP(app1), 
+	gnome_app_message(GNOME_APP(gtranslator_application), 
 			  _("There are no fuzzy messages left."));
 	disable_actions(ACT_NEXT_FUZZY);
 }
@@ -306,12 +306,12 @@ void goto_next_untranslated(GtkWidget * widget, gpointer useless)
 		begin = po->messages;
 	if (for_each_msg(begin, (FEFunc)is_untranslated, NULL))
 		return;
-	gnome_app_message(GNOME_APP(app1), 
+	gnome_app_message(GNOME_APP(gtranslator_application), 
 			  _("All messages seem to be translated."));
 	disable_actions(ACT_NEXT_UNTRANSLATED);
 }
 
-void update_flags(void)
+void gtranslator_update_regex_flags(void)
 {
 	if (wants.match_case)
 		eflags &= ~REG_ICASE;

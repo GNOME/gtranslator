@@ -113,7 +113,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					cp++;
 				}
 				
-				color = get_color_from_type(COLOR_HOTKEY);
+				color = gtranslator_get_color_from_type(COLOR_HOTKEY);
 
 				break;
 		
@@ -133,7 +133,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 				cp--;
 				
-				color = get_color_from_type(COLOR_C_FORMAT);
+				color = gtranslator_get_color_from_type(COLOR_C_FORMAT);
 
 				break;
 				
@@ -152,7 +152,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '0':
 				append_char(string, msg[cp]);
 				
-				color = get_color_from_type(COLOR_NUMBER);
+				color = gtranslator_get_color_from_type(COLOR_NUMBER);
 
 				break;
 
@@ -167,7 +167,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '-':
 				append_char(string, msg[cp]);
 				
-				color = get_color_from_type(COLOR_PUNCTUATION);
+				color = gtranslator_get_color_from_type(COLOR_PUNCTUATION);
 
 				break;
 			
@@ -194,7 +194,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '|':
 				append_char(string, msg[cp]);
 				
-				color = get_color_from_type(COLOR_SPECIAL);
+				color = gtranslator_get_color_from_type(COLOR_SPECIAL);
 				
 				break;
 
@@ -211,7 +211,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					{
 						aInserted=TRUE;
 						
-						color=get_color_from_type(
+						color=gtranslator_get_color_from_type(
 							COLOR_ADDRESS);
 
 						string_add(prefixes[z]);
@@ -225,7 +225,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				{
 					append_char(string, msg[cp]);
 
-					color=get_color_from_type(
+					color=gtranslator_get_color_from_type(
 						COLOR_PUNCTUATION);
 				}
 				
@@ -252,7 +252,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 						string_add(keywords[z]);
 						
-						color=get_color_from_type(COLOR_KEYWORD);
+						color=gtranslator_get_color_from_type(COLOR_KEYWORD);
 						break;
 					}
 					
@@ -270,7 +270,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					 */
 					if(msg[cp]==specialchar)
 					{
-						color=get_color_from_type(COLOR_SPECIAL_CHAR);
+						color=gtranslator_get_color_from_type(COLOR_SPECIAL_CHAR);
 						append_char(string, msg[cp]);
 					}
 					else

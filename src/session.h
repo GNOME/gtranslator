@@ -26,19 +26,19 @@
 /*
  * Quits gtranslator silently because of a closing session.
  */
-gint gtranslator_dies_for_you(GnomeClient * client, gpointer data);
+gint gtranslator_session_die(GnomeClient * client, gpointer data);
 
 /*
  * Saves gtranslator's current state on a save_yourself call through
  *  the session manager.
  */
-gint gtranslator_sleep(GnomeClient * client, gint phase,
+gint gtranslator_session_sleep(GnomeClient * client, gint phase,
 		       GnomeSaveStyle s_style, gint shutdown,
 		       GnomeInteractStyle i_style, gint fast, gpointer data);
 
 /*
  * Restores state saved during save_yourself
  */
-void restore_session(GnomeClient * client);
+void gtranslator_session_restore(GnomeClient * client);
 
 #endif

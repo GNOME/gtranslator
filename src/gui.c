@@ -312,13 +312,13 @@ static GnomeUIInfo the_msg_status_menu[] = {
 };
 
 static GnomeUIInfo the_settings_menu[] = {
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(prefs_box, NULL),
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gtranslator_preferences_dialog_create, NULL),
 	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_help_menu[] = {
 	GNOMEUIINFO_HELP("gtranslator"),
-	GNOMEUIINFO_MENU_ABOUT_ITEM(about_box, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_create_about_box, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
 			       N_("gtranslator's homepage on the web"),
@@ -370,7 +370,7 @@ static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Options"),
 			       N_("gtranslator options"),
-			       prefs_box,
+			       gtranslator_preferences_dialog_create,
 			       GNOME_STOCK_PIXMAP_PREFERENCES),
 	GNOMEUIINFO_ITEM_STOCK(N_("Exit"),
 			       N_("Exit"),
@@ -585,13 +585,13 @@ void enable_actions_just_opened(void)
 	/*
 	 * Make it focused initially
 	 */
-	gtk_window_set_focus(GTK_WINDOW(app1), trans_box);
+	gtk_window_set_focus(GTK_WINDOW(gtranslator_application), trans_box);
 }
 
 /*
-  * The main function, which creates the application
+ * Creates the main gtranslator window.
  */
-void create_app1(void)
+void gtranslator_create_main_window(void)
 {
 	GtkWidget *search_bar, *tool_bar;
 	GtkWidget *vbox1;
@@ -602,8 +602,8 @@ void create_app1(void)
 	/*
 	 * Create the app	
 	 */
-	app1 = gnome_app_new("gtranslator", _("gtranslator"));
-	gnome_app_create_menus(GNOME_APP(app1), the_menus);
+	gtranslator_application = gnome_app_new("gtranslator", _("gtranslator"));
+	gnome_app_create_menus(GNOME_APP(gtranslator_application), the_menus);
 
 	pane=e_hpaned_new();
 	filebox=gtranslator_sidebar_new();
@@ -617,21 +617,21 @@ void create_app1(void)
 	tool_bar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(tool_bar), the_toolbar, NULL);
-	gnome_app_add_toolbar(GNOME_APP(app1), GTK_TOOLBAR(tool_bar),
+	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), GTK_TOOLBAR(tool_bar),
 			      "tool_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 			      GNOME_DOCK_TOP, 1, 0, 0);
 
 	search_bar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 				     GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_navibar, NULL);
-	gnome_app_add_toolbar(GNOME_APP(app1), GTK_TOOLBAR(search_bar),
+	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), GTK_TOOLBAR(search_bar),
 			      "search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 			      GNOME_DOCK_TOP, 2, 0, 0);
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	
 	e_paned_pack2(E_PANED(pane), vbox1, TRUE, FALSE);
-	gnome_app_set_contents(GNOME_APP(app1), pane);
+	gnome_app_set_contents(GNOME_APP(gtranslator_application), pane);
 
 	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow1, TRUE, TRUE, 0);
@@ -639,11 +639,11 @@ void create_app1(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	text1=gtk_text_new(NULL,NULL);
+	text_box=gtk_text_new(NULL,NULL);
 	
-	gtk_container_add(GTK_CONTAINER(scrolledwindow1), text1);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow1), text_box);
 	
-	gtk_text_set_editable(GTK_TEXT(text1), FALSE);
+	gtk_text_set_editable(GTK_TEXT(text_box), FALSE);
 
 	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow2, TRUE, TRUE, 0);
@@ -654,13 +654,13 @@ void create_app1(void)
 	trans_box = gtk_text_new(NULL, NULL);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2), trans_box);
 
-	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
-	gnome_app_set_statusbar(GNOME_APP(app1), appbar1);
+	gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
+	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);
 	
 	/*
 	 * Make menu hints display on the appbar
 	 */
-	gnome_app_install_menu_hints(GNOME_APP(app1), the_menus);
+	gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), the_menus);
 
 	create_actions();
 	disable_actions_no_file();
@@ -670,26 +670,26 @@ void create_app1(void)
 	/*
 	 * The callbacks list
 	 */
-	gtk_signal_connect(GTK_OBJECT(app1), "delete_event",
+	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "delete_event",
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
 			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
 			   GTK_SIGNAL_FUNC(text_has_got_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(text1), "button_press_event",
+	gtk_signal_connect(GTK_OBJECT(text_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
-	gtk_signal_connect(GTK_OBJECT(app1), "key_press_event",
+	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "key_press_event",
 			   GTK_SIGNAL_FUNC(gtranslator_keyhandler), NULL);
 	/*
 	 * The D'n'D signals
 	 */
-	gtk_drag_dest_set(GTK_WIDGET(app1),
+	gtk_drag_dest_set(GTK_WIDGET(gtranslator_application),
 			  GTK_DEST_DEFAULT_ALL | GTK_DEST_DEFAULT_HIGHLIGHT,
 			  dragtypes, sizeof(dragtypes) / sizeof(dragtypes[0]),
 			  GDK_ACTION_COPY);
-	gtk_signal_connect(GTK_OBJECT(app1), "drag_data_received",
+	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "drag_data_received",
 			   GTK_SIGNAL_FUNC(gtranslator_dnd),
 			   GUINT_TO_POINTER(dnd_type));
 }
@@ -706,11 +706,11 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	if (!ask_to_save_file())
 		return TRUE;
 	close_file(NULL, NULL);
-	save_geometry();
+	gtranslator_geometry_save();
 	/*
 	 * Free the preferences stuff.
 	 */
-	free_prefs();
+	gtranslator_preferences_free();
 	gnome_regex_cache_destroy(rxc);
 	/*
 	 * Store the current date.
@@ -790,7 +790,7 @@ void display_msg(GList * list_item)
 		temp = g_strdup(msg->msgid);
 		invert_dot(temp);
 		
-		gtranslator_syntax_insert_text(text1, temp);
+		gtranslator_syntax_insert_text(text_box, temp);
 		
 		g_free(temp);
 
@@ -803,7 +803,7 @@ void display_msg(GList * list_item)
 			g_free(temp);
 		}
 	} else {
-		gtranslator_syntax_insert_text(text1, msg->msgid);
+		gtranslator_syntax_insert_text(text_box, msg->msgid);
 		gtranslator_syntax_insert_text(trans_box, msg->msgstr);
 	}
 	
@@ -927,7 +927,7 @@ void toggle_msg_status(GtkWidget  * item, gpointer which)
  */
 void clean_text_boxes()
 {
-	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
+	gtk_editable_delete_text(GTK_EDITABLE(text_box), 0, -1);
 	gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
 }
 
@@ -935,7 +935,7 @@ void update_appbar(gint pos)
 {
 	gchar *str, *status;
 	GtrMsg *msg;
-	gnome_appbar_pop(GNOME_APPBAR(appbar1));
+	gnome_appbar_pop(GNOME_APPBAR(gtranslator_application_bar));
 	/*
 	 * Get the message.
 	 */
@@ -986,7 +986,7 @@ void update_appbar(gint pos)
 	/*
 	 * Set the appbar text.
 	 */
-	gnome_appbar_push(GNOME_APPBAR(appbar1), str);
+	gnome_appbar_push(GNOME_APPBAR(gtranslator_application_bar), str);
 	/*
 	 * Update the progressbar.
 	 */

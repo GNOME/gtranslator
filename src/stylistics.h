@@ -47,7 +47,7 @@ typedef enum {
 } ColorType;
 
 GdkColor colors[COLOR_END];
-void init_colors(void);
+void gtranslator_colors_initialize(void);
 
 /*
  * Saves the color values from the GnomeColorPicker.
@@ -65,6 +65,6 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
  */
 void gtranslator_set_style(GtkWidget *widget);
 
-GdkColor *get_color_from_type(ColorType type);
+GdkColor *gtranslator_get_color_from_type(ColorType type);
 
 #endif

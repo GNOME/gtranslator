@@ -83,7 +83,7 @@ void update(GtkWidget *widget, gpointer useless)
 	 */
 	if(res==201)
 	{
-		gnome_app_error(GNOME_APP(app1),
+		gnome_app_error(GNOME_APP(gtranslator_application),
 			_("No POTFILES.in found!"));
 	}
 	
@@ -99,19 +99,19 @@ void update(GtkWidget *widget, gpointer useless)
 		 */
 		if(res==200)
 		{
-			gnome_app_message(GNOME_APP(app1),
+			gnome_app_message(GNOME_APP(gtranslator_application),
 				_("An update caused no changes."));
 		}
 		else
 		{
 			if(res==0)
 			{
-				gnome_app_message(GNOME_APP(app1),
+				gnome_app_message(GNOME_APP(gtranslator_application),
 					_("The update was successfull."));
 			}
 			else
 			{
-				gnome_app_warning(GNOME_APP(app1),
+				gnome_app_warning(GNOME_APP(gtranslator_application),
 					_("An error occured while updating the po file."));	
 			}
 		}

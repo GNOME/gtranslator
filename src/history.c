@@ -159,7 +159,7 @@ void gtranslator_history_show(void)
 	/*
 	 * Delete the old entries.
 	 */
-	gnome_app_remove_menu_range(GNOME_APP(app1), menupath, 0, len);
+	gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), menupath, 0, len);
 
 	/*
 	 * Get the old history entries.
@@ -200,8 +200,8 @@ void gtranslator_history_show(void)
 		/*
 		 * Insert this item into menu
 		 */
-		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-		gnome_app_install_menu_hints(GNOME_APP(app1), menu);
+		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
+		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
 
 		/*
 		 * FIXME: this is intended to free hint

@@ -33,7 +33,7 @@
 /*
  * Quits via the normal quit.
  */
-gint gtranslator_dies_for_you(GnomeClient * client, gpointer data)
+gint gtranslator_session_die(GnomeClient * client, gpointer data)
 {
 	gtk_main_quit();
 	return FALSE;
@@ -42,7 +42,7 @@ gint gtranslator_dies_for_you(GnomeClient * client, gpointer data)
 /*
  * Saves the state of gtranslator before quitting.
  */
-gint gtranslator_sleep(GnomeClient * client, gint phase,
+gint gtranslator_session_sleep(GnomeClient * client, gint phase,
 		       GnomeSaveStyle s_style, gint shutdown,
 		       GnomeInteractStyle i_style, gint fast, gpointer data)
 {
@@ -76,7 +76,7 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 /*
  * Restores a previously closed session.
  */ 
-void restore_session(GnomeClient * client)
+void gtranslator_session_restore(GnomeClient * client)
 {
 	guint num;
 
@@ -86,6 +86,6 @@ void restore_session(GnomeClient * client)
 
 	goto_nth_msg(NULL, GUINT_TO_POINTER(num));
 	g_snprintf(status, sizeof(status), _("Session restored successfully."));
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1), status);
+	gnome_appbar_set_status(GNOME_APPBAR(gtranslator_application_bar), status);
 }
 

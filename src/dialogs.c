@@ -58,7 +58,7 @@ void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
 	if (wmname != NULL)
 		gtk_window_set_wmclass(GTK_WINDOW(*dlg), wmname, "gtranslator");
 	if (GNOME_IS_DIALOG(*dlg))
-		gnome_dialog_set_parent(GNOME_DIALOG(*dlg), GTK_WINDOW(app1));
+		gnome_dialog_set_parent(GNOME_DIALOG(*dlg), GTK_WINDOW(gtranslator_application));
 	gtk_signal_connect(GTK_OBJECT(*dlg), "destroy",
 			   GTK_SIGNAL_FUNC(gtk_widget_destroyed), dlg);
 
@@ -97,7 +97,7 @@ void open_file(GtkWidget * widget, gpointer useless)
 	 * Make the dialog transient, show_nice_dialog does not do it
 	 *  because it is not a GnomeDialog.
 	 */
-	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(app1));
+	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
 	show_nice_dialog(&dialog, "gtranslator -- open");
 }
 
@@ -158,7 +158,7 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 	/*
 	 * Make the dialog transient.
 	 */
-	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(app1));
+	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
 	show_nice_dialog(&dialog, "gtranslator -- save");
 }
 
@@ -253,7 +253,7 @@ static void match_case_toggled(GtkWidget * widget, gpointer useless)
 {
 	wants.match_case =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
-	update_flags();
+	gtranslator_update_regex_flags();
 	gtranslator_config_init();
 	gtranslator_config_set_bool("find/case_sensitive",
 			      wants.match_case);
@@ -513,7 +513,7 @@ void compile_error_dialog(FILE * fs)
 	GtkWidget *dialog, *textbox;
 	GtkWidget *scroll;
 
-	dialog = gnome_app_error(GNOME_APP(app1),
+	dialog = gnome_app_error(GNOME_APP(gtranslator_application),
 		_("An error occured while msgfmt was executed:\n"));
 	textbox = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(textbox), FALSE);
@@ -593,7 +593,7 @@ void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			 * Show an error dialog but don't close down the 
 			 *  Open from URI dialog.
 			 */  
-			gnome_app_error(GNOME_APP(app1),
+			gnome_app_error(GNOME_APP(gtranslator_application),
 				_("No URI given!"));	
 		}
 		else
@@ -614,7 +614,7 @@ void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			}
 			else
 			{
-				gnome_app_error(GNOME_APP(app1),
+				gnome_app_error(GNOME_APP(gtranslator_application),
 				_("No supported URI protocol (like \"ftp://\") given!"));
 			}
 		}
@@ -717,7 +717,7 @@ void query_dialog(void)
 
 	if(!domains)
 	{
-		gnome_app_error(GNOME_APP(app1), 
+		gnome_app_error(GNOME_APP(gtranslator_application), 
 			_("Couldn't get list of gettext domains!"));
 
 		return;
@@ -794,7 +794,7 @@ void query_dialog(void)
 			/*
 			 * Bad case in here.
 			 */
-			gnome_app_warning(GNOME_APP(app1),
+			gnome_app_warning(GNOME_APP(gtranslator_application),
 				_("No query string given!"));
 
 			g_free(query_text);
@@ -828,7 +828,7 @@ void query_dialog(void)
 				/* 
 				 * No results? Close down the dialog.
 				 */
-				gnome_app_warning(GNOME_APP(app1),
+				gnome_app_warning(GNOME_APP(gtranslator_application),
 				_("Couldn't find any result for the query!"));
 			}
 			else
@@ -910,7 +910,7 @@ Would you like to insert it into the translation?"),
 					}
 					else
 					{
-						gnome_app_warning(GNOME_APP(app1),
+						gnome_app_warning(GNOME_APP(gtranslator_application),
 						/*
 						 * Translators: This means that the queried string
 						 *  is already translated.

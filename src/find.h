@@ -53,6 +53,6 @@ void goto_next_fuzzy(GtkWidget * widget, gpointer useless);
  */
 void goto_next_untranslated(GtkWidget * widget, gpointer useless);
 
-void update_flags(void);
+void gtranslator_update_regex_flags(void);
 
 #endif

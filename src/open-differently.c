@@ -187,7 +187,7 @@ void gtranslator_open_compiled_po_file(gchar *file)
 		/*
 		 * Show a warning to the user.
 		 */
-		gnome_app_warning(GNOME_APP(app1), cmd);
+		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 
 	g_free(cmd);
@@ -250,7 +250,7 @@ void open_compressed_po_file(gchar *file, gchar *command)
 		/*
 		 * Display the warning to the user.
 		 */
-		gnome_app_warning(GNOME_APP(app1), cmd);
+		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 	
 	g_free(cmd);

@@ -246,7 +246,7 @@ void gtranslator_color_scheme_restore_default()
 	 * Call the function which is also called during the first
 	 *  initialization of gtranslator to get the default colors.
 	 */  
-	prefs_init_syntax_colors();
+	gtranslator_colors_init_default_colors();
 }
 
 /*

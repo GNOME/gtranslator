@@ -26,6 +26,6 @@
 /*
  * Creates the about box for gtranslator.
  */ 
-void about_box(GtkWidget *widget, gpointer useless);
+void gtranslator_create_about_box(GtkWidget *widget, gpointer useless);
 
 #endif
