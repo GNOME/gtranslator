@@ -152,11 +152,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		wants.unmark_fuzzy, gtranslator_preferences_dialog_changed);
 	warn_if_fuzzy =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 1,
-		_("Warn if the .po-file contains fuzzy translations"),
+		_("Warn if the po file contains fuzzy translations"),
 		wants.warn_if_fuzzy, gtranslator_preferences_dialog_changed);
 	dont_save_unchanged_files =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 2,
-		_("Don't save unchanged .po-files"),
+		_("Don't save unchanged po files"),
 		wants.dont_save_unchanged_files, gtranslator_preferences_dialog_changed);
 	warn_if_no_change =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 3,

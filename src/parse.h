@@ -103,6 +103,11 @@ void gtranslator_po_free(void);
 void gtranslator_parse(const gchar *po);
 
 /*
+ * Save the file with the given filename.
+ */
+gboolean gtranslator_save_file(const gchar *name);
+
+/*
  * The main granslator parse function which does use the backend
  *  calls from above and also sets up the GUI.
  */
@@ -111,7 +116,7 @@ void gtranslator_parse_main(const gchar *po);
 /*
  * Callbacks for the widgets
  */
-void parse_the_file(GtkWidget  * widget, gpointer of_dlg);
+void gtranslator_parse_the_file_from_file_dialog(GtkWidget  * widget, gpointer of_dlg);
 void gtranslator_save_file_dialog(GtkWidget  * widget, gpointer sfa_dlg);
 void gtranslator_save_current_file_dialog(GtkWidget  * widget, gpointer useless);
 void gtranslator_file_revert(GtkWidget  * widget, gpointer useless);

@@ -54,14 +54,14 @@ GnomeUIInfo the_menus[] = {
 GnomeUIInfo the_file_menu[] = {
 	{
 		GNOME_APP_UI_ITEM, N_("_Compile"),
-		N_("Compile the po-file"),
+		N_("Compile the po file"),
 		compile, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
 		GDK_C, GDK_MOD1_MASK, NULL
 	},
 	{
 		GNOME_APP_UI_ITEM, N_("_Update"),
-		N_("Update the po-file"),
+		N_("Update the po file"),
 		update, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
 		GDK_F5, 0, NULL
@@ -93,14 +93,14 @@ GnomeUIInfo the_file_menu[] = {
 	{
 		GNOME_APP_UI_ITEM, N_("_Export to UTF-8"),
 		N_("Export the current po file to UTF-8"),
-		NULL, NULL, NULL,
+		gtranslator_export_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
 		GDK_E, GDK_MOD1_MASK, NULL
 	},
 	{
 		GNOME_APP_UI_ITEM, N_("_Import from UTF-8"),
 		N_("Import a UTF-8 encoded po file into it's corresponding plain encoding"),
-		NULL, NULL, NULL,
+		gtranslator_import_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
 		GDK_I, GDK_MOD1_MASK, NULL
 	},
@@ -273,7 +273,7 @@ GnomeUIInfo the_help_menu[] = {
  */
 GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("Open"),
-			       N_("Open a po-file"),
+			       N_("Open a po file"),
 			       gtranslator_open_file_dialog,
 			       GNOME_STOCK_PIXMAP_OPEN),
 	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
@@ -286,11 +286,11 @@ GnomeUIInfo the_toolbar[] = {
 			       GNOME_STOCK_PIXMAP_SAVE_AS),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
-			       N_("Compile the po-file"),
+			       N_("Compile the po file"),
 			       compile,
 			       GNOME_STOCK_PIXMAP_CONVERT),
 	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
-			       N_("Update the po-file"),
+			       N_("Update the po file"),
 			       update,
 			       GNOME_STOCK_PIXMAP_REFRESH),
 	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
@@ -349,11 +349,11 @@ GnomeUIInfo the_navibar[] = {
 			       gtranslator_go_to_dialog,
 			       GNOME_STOCK_PIXMAP_JUMP_TO),
 	GNOMEUIINFO_ITEM_STOCK(N_("Find"),
-			       N_("Find string in po-file"),
+			       N_("Find string in po file"),
 			       gtranslator_find_dialog,
 			       GNOME_STOCK_PIXMAP_SEARCH),
 	GNOMEUIINFO_ITEM_STOCK(N_("Replace"),
-			       N_("Replace string in po-file"),
+			       N_("Replace string in po file"),
 			       gtranslator_replace_dialog,
 			       GNOME_STOCK_PIXMAP_SRCHRPL),
 	GNOMEUIINFO_ITEM_STOCK(N_("Query"),

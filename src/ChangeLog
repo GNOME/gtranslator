@@ -1,3 +1,23 @@
+2001-05-27  Fatih Demir <kabalak@gtranslator.org>
+
+	* parse.c/.h: Renamed "actual_write" to "gtranslator_save_file" and
+		made it be declared publically.
+
+	* menus.c & prefs.c: Use "po file" stringenlty everywhere instead of
+		"po-file" in strings.
+
+	* parse.c/.h: Call up "gtranslator_file_dialogs_store_directory" from the
+		"actual_write" function to store the directory name.
+
+	* parse.c/.h & dialogs.c: Renamed "parse_the_file" to the better name
+		"gtranslator_parse_the_file_from_file_dialog".
+
+	* dialogs.c/.h: Added gtranslator_file_dialogs_set/store_directory
+		for handling the file dialogs completions more convenient.
+
+	* dialogs.c/.h & menus.c: Added import/export dialogs for UTF-8/plain
+		text encoding handling.
+
 2001-05-25  Fatih Demir <kabalak@gtranslator.org>
 
 	* languages.h: By request of Vasif -- changed to Azerbaijani Turkish

@@ -30,8 +30,8 @@ gboolean gtranslator_utf8_po_file_is_utf8(void);
 /*
  * Convert the msgid & msgstr's to/from UTF-8.
  */
-void gtranslator_utf8_convert_message_to_utf8(GtrMsg **msg);
-void gtranslator_utf8_convert_message_from_utf8(GtrMsg **msg);
+void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg);
+void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg);
 
 /*
  * Convert the whole messages to/from UTF-8.

@@ -91,28 +91,28 @@ gboolean gtranslator_utf8_po_file_is_utf8()
 /*
  * Convert the given GtrMsg to UTF-8.
  */
-void gtranslator_utf8_convert_message_to_utf8(GtrMsg **msg)
+void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
 {
 	gchar *msgstr;
 
-	g_return_if_fail(*msg!=NULL);
+	g_return_if_fail(msg!=NULL);
 
-	msgstr=(*msg)->msgstr;
-	(*msg)->msgstr=e_utf8_from_locale_string(msgstr);
+	msgstr=(msg)->msgstr;
+	(msg)->msgstr=e_utf8_from_locale_string(msgstr);
 	g_free(msgstr);
 }
 
 /*
  * Convert the given GtrMsg from UTF-8 to a "normal" string.
  */
-void gtranslator_utf8_convert_message_from_utf8(GtrMsg **msg)
+void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
 {
 	gchar *msgstr;
 
-	g_return_if_fail(*msg!=NULL);
+	g_return_if_fail(msg!=NULL);
 
-	msgstr=(*msg)->msgstr;
-	(*msg)->msgstr=e_utf8_to_locale_string(msgstr);
+	msgstr=(msg)->msgstr;
+	(msg)->msgstr=e_utf8_to_locale_string(msgstr);
 	g_free(msgstr);
 }
 

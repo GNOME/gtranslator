@@ -41,11 +41,28 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname);
 GtkWidget * gtranslator_error(char *format, ...);
 
 /*
+ * Set up the directory parts of the current po file -- or the last stored dir 
+ *  or the home dir.
+ */
+void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection);
+
+/*
+ * Store the current file dialogs directory.
+ */
+void gtranslator_file_dialogs_store_directory(const gchar *filename); 
+
+/*
  * The file open/save (as) file dialogs.
  */
 void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless);
 void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless);
 gboolean gtranslator_should_the_file_be_saved_dialog(void);
+
+/*
+ * The import/export dialogs for the po files.
+ */
+void gtranslator_import_dialog(GtkWidget *widget, gpointer useless);
+void gtranslator_export_dialog(GtkWidget *widget, gpointer useless);
 
 /*
  * This dialog will pop up if a crash recovery file could be found

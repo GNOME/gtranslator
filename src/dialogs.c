@@ -36,6 +36,7 @@
 #include "query.h"
 #include "replace.h"
 #include "syntax.h"
+#include "utf8.h"
 
 #include <string.h>
 #include <locale.h>
@@ -50,6 +51,12 @@ static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 	gpointer findy);
+
+/*
+ * Import/export dialog callbacks.
+ */
+void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog);
+void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog);
 
 /*
  * The open URI dialog signal function:
@@ -94,23 +101,21 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 			gtk_widget_destroy(dialog);
 		return;
 	}
+	
 	gtranslator_raise_dialog(dialog);
-	dialog = gtk_file_selection_new(_("gtranslator -- open a po-file"));
+	dialog = gtk_file_selection_new(_("gtranslator -- open po file"));
 	
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
-			   "clicked", GTK_SIGNAL_FUNC(parse_the_file),
+			   "clicked", GTK_SIGNAL_FUNC(gtranslator_parse_the_file_from_file_dialog),
 			   (gpointer) dialog);
 	gtk_signal_connect_object(GTK_OBJECT
 				  (GTK_FILE_SELECTION(dialog)->cancel_button),
 				  "clicked",
 				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
 				  GTK_OBJECT(dialog));
-	if (po && po->filename)
-	{
-		gchar *dir=g_dirname(po->filename);
-		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), dir);
-		g_free(dir);
-	}
+
+	gtranslator_file_dialogs_set_directory(&dialog);
+	
 	/*
 	 * Make the dialog transient, gtranslator_dialog_show does not do it
 	 *  because it is not a GnomeDialog.
@@ -141,23 +146,21 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	}
 	else
 	{
+		gchar *filename=g_strdup_printf("%s/%s-%s", g_get_home_dir(),
+			po->header->prj_name, g_basename(po->filename));
+		
 		dialog = gtk_file_selection_new(_("gtranslator -- save local copy of file as.."));
 
 		/*
 		 * Set a local filename in the users home directory with the 
 		 *  same filename as the original but with a project prefix
 		 *   (e.g. "gtranslator-tr.po").
-		 */  
-		gtk_file_selection_set_filename(GTK_FILE_SELECTION(dialog),
-			g_strdup_printf("%s/%s-%s",
-				g_get_home_dir(),
-				po->header->prj_name,
-				g_basename(po->filename)));
+		 */ 
+		gtk_file_selection_set_filename(GTK_FILE_SELECTION(dialog), filename);
+		gtranslator_file_dialogs_store_directory(filename);
+
+		g_free(filename);
 	}
-	
-	/*
-	 * gtk_file_selection_complete(GTK_FILE_SELECTION(dialog),"*.po");
-	 */
 	
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
 			   "clicked", GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
@@ -167,12 +170,9 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 				  "clicked",
 				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
 				  GTK_OBJECT(dialog));
-	if (po->filename)
-	{
-		gchar *dir=g_dirname(po->filename);
-		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), dir);
-		g_free(dir);
-	}
+
+	gtranslator_file_dialogs_set_directory(&dialog);
+	
 	/*
 	 * Make the dialog transient.
 	 */
@@ -199,7 +199,7 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 				       GNOME_STOCK_BUTTON_YES,
 				       GNOME_STOCK_BUTTON_NO,
 				       GNOME_STOCK_BUTTON_CANCEL, NULL);
-	gtranslator_dialog_show(&dialog, "gtranslator -- ask");
+	gtranslator_dialog_show(&dialog, "gtranslator -- save the current file?");
 	reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 	g_free(question);
 	if (reply == GNOME_YES)
@@ -209,6 +209,151 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 	else
 		return FALSE;
 	return TRUE;
+}
+
+/*
+ * Import a UTF-8 po file into a "plain encoding".
+ */
+void gtranslator_import_dialog(GtkWidget *widget, gpointer useless)
+{
+	static GtkWidget *import_dialog=NULL;
+	
+	if(file_opened)
+	{
+		/*
+		 * Operate only if the current file shouldn't be saved.
+		 */
+		if(!gtranslator_should_the_file_be_saved_dialog())
+		{
+			return;
+		}
+	}
+
+	gtranslator_raise_dialog(import_dialog);
+	import_dialog=gtk_file_selection_new(_("gtranslator -- import po file"));
+
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(import_dialog)->ok_button),
+		"clicked", GTK_SIGNAL_FUNC(gtranslator_import_dialog_clicked), (gpointer) import_dialog);
+
+	gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(import_dialog)->cancel_button), 
+		"clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), GTK_OBJECT(import_dialog));
+
+	gtranslator_file_dialogs_set_directory(&import_dialog);
+	
+	gtk_window_set_transient_for(GTK_WINDOW(import_dialog), GTK_WINDOW(gtranslator_application)); 
+	gtranslator_dialog_show(&import_dialog, "gtranslator -- import");
+}
+
+/*
+ * The clicked callback for the import dialog.
+ */
+void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog)
+{
+	gchar *filename;
+
+	filename=gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog));
+	gtranslator_file_dialogs_store_directory(filename);
+
+	/*
+	 * Parse the file and convert it from UTF-8.
+	 */
+	gtranslator_parse_main(filename);
+	gtranslator_utf8_convert_po_from_utf8();
+
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+}
+
+/*
+ * Export a plain encoded file into UTF-8.
+ */
+void gtranslator_export_dialog(GtkWidget *widget, gpointer useless)
+{
+	static GtkWidget *export_dialog=NULL;
+	
+	g_return_if_fail(file_opened==TRUE);
+	gtranslator_raise_dialog(export_dialog);
+
+	export_dialog=gtk_file_selection_new(_("gtranslator -- export po file"));
+
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(export_dialog)->ok_button),
+		"clicked", GTK_SIGNAL_FUNC(gtranslator_export_dialog_clicked), (gpointer) export_dialog);
+
+	gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(export_dialog)->cancel_button), 
+		"clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), GTK_OBJECT(export_dialog));
+
+	gtranslator_file_dialogs_set_directory(&export_dialog);
+
+	gtk_window_set_transient_for(GTK_WINDOW(export_dialog), GTK_WINDOW(gtranslator_application));
+	gtranslator_dialog_show(&export_dialog, "gtranslator -- export");
+}
+
+/*
+ * The export dialog callback.
+ */
+void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog)
+{
+	gchar *filename;
+
+	filename=gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog));
+	gtranslator_file_dialogs_store_directory(filename);
+
+	/*
+	 * The same logic as for the import but vice versa .-)
+	 */
+	gtranslator_utf8_convert_po_to_utf8();
+	gtranslator_save_file(filename);
+	
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+}
+
+/*
+ * Set the current/last used directory up for the given file dialog.
+ */
+void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
+{
+	gchar *directory;
+	
+	if(po && po->filename)
+	{
+		directory=g_dirname(po->filename);
+		gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection), directory);
+	}
+	else
+	{
+		gtranslator_config_init();
+		directory=gtranslator_config_get_string("informations/last_directory");
+		gtranslator_config_close();
+
+		if(directory)
+		{
+			gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection), directory);
+		}
+		else
+		{
+			directory=g_get_home_dir();
+			gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection), directory);
+		}
+	}
+
+	g_free(directory);
+}
+
+/*
+ * Store the given filename's directory for our file dialogs completion-routine.
+ */
+void gtranslator_file_dialogs_store_directory(const gchar *filename)
+{
+	gchar *directory;
+
+	g_return_if_fail(filename!=NULL);
+	
+	directory=g_dirname(filename);
+	
+	gtranslator_config_init();
+	gtranslator_config_set_string("informations/last_directory", directory);
+	gtranslator_config_close();
+
+	g_free(directory);
 }
 
 /*
@@ -322,7 +467,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
 	gtranslator_raise_dialog(dialog);
-	dialog = gnome_dialog_new(_("Find in the po-file"), NULL);
+	dialog = gnome_dialog_new(_("Find in the po file"), NULL);
 	gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dialog),
 						_("Find"),
 						GNOME_STOCK_PIXMAP_SEARCH);
