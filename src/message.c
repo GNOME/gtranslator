@@ -542,6 +542,9 @@ void gtranslator_message_free(gpointer data, gpointer useless)
 	GTR_FREE(GTR_MSG(data)->msgstr);
 
 	GTR_FREE(GTR_MSG(data)->msgid_plural);
+	GTR_FREE(GTR_MSG(data)->msgstr_0);
+	GTR_FREE(GTR_MSG(data)->msgstr_1);
+	GTR_FREE(GTR_MSG(data)->msgstr_2);
 
 	GTR_FREE(data);
 }

@@ -62,7 +62,10 @@ typedef struct {
 	gint 		pos;
 
 	gchar		*msgid_plural;
-	gchar		**msgstrs;
+
+	gchar		*msgstr_0;
+	gchar		*msgstr_1;
+	gchar		*msgstr_2;
 	
 	GtrMsgStatus 	status;
 } GtrMsg;

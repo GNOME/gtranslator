@@ -272,7 +272,6 @@ gboolean gtranslator_parse_core(GtrPo *po)
 	
 	guint 	 lines=0;
 	guint	 position=-1;
-	guint	 pluralforms_count=0;
 	
 	/*
 	 * If TRUE, means that a corresponding part is read
@@ -366,7 +365,7 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				if (line[9] != '\0')
 					append_line(&msg->msgstr, &line[7], FALSE);
 			}
-			else if(nautilus_str_has_prefix(line, "msgstr["))
+			else if(nautilus_str_has_prefix(line, "msgstr[0] \""))
 			{
 				/*
 				 * Now we've got a msgstr item in here.
@@ -374,11 +373,22 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				msgid_ok = TRUE;
 				if(line[12]!='\0')
 				{
-					g_message("Add `%s' to msgstrs[%i]", &line[10], pluralforms_count);
-					append_line(&msg->msgstrs[pluralforms_count], &line[10], FALSE);
+					append_line(&msg->msgstr_0, &line[10], FALSE);
 				}
-
-				pluralforms_count++;
+			}
+			else if(nautilus_str_has_prefix(line, "msgstr[1] \""))
+			{
+				if(line[12]!='\0')
+				{
+					append_line(&msg->msgstr_1, &line[10], FALSE);
+				}
+			}
+			else if(nautilus_str_has_prefix(line, "msgstr[2] \""))
+			{
+				if(line[12]!='\0')
+				{
+					append_line(&msg->msgstr_2, &line[10], FALSE);
+				}
 			}
 			else
 			/*
@@ -400,10 +410,24 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				{
 					append_line(&msg->msgstr, line, TRUE);
 				}
-				else if((msgid_ok == TRUE) && (msgstr_ok == FALSE) &&
-					msg->msgstrs[pluralforms_count-1][0]!='\0')
+				else if((msgid_ok == TRUE) && (msgstr_ok == FALSE))
 				{
-					append_line(&msg->msgstrs[pluralforms_count-1], line, TRUE);
+					if(msg->msgstr_0 && !msg->msgstr_1 && !msg->msgstr_2)
+					{
+						append_line(&msg->msgstr_0, line, TRUE);
+					}
+					else if(msg->msgstr_0 && !msg->msgstr_2)
+					{
+						append_line(&msg->msgstr_1, line, TRUE);
+					}
+					else if(msg->msgstr_2)
+					{
+						append_line(&msg->msgstr_2, line, TRUE);
+					}
+					else
+					{
+						g_message("Gnnaaa!");
+					}
 				}
 				else if((comment_ok == FALSE) &&
 					(msgid_ok == FALSE) &&
@@ -443,7 +467,6 @@ gboolean gtranslator_parse_core(GtrPo *po)
 			 * Reset the status of message
 			 */
 			msgid_ok = msgstr_ok = comment_ok = FALSE;
-			pluralforms_count=0;
 			msg = g_new0(GtrMsg, 1);
 		}
 	}
