@@ -5,407 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-05-26 17:25+0300\n"
+"POT-Creation-Date: 2000-06-08 12:15+0300\n"
 "PO-Revision-Date: 2000-05-05 09:45+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-u\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/main.c:37
-msgid "Po-file to open at startup"
-msgstr "po-файл, що в╕дкрива╓ться на початку"
-
-#: src/main.c:41
-msgid "The msg_db to use"
-msgstr "Використовувана база пов╕домлень"
-
-#: src/main.c:45
-msgid "Specifies the main-window geometry"
-msgstr "Визнача╓ геометр╕ю головного в╕кна"
-
-#: src/main.c:133
-#, c-format
-msgid "The geometry string \"%s\" coulnd't be parsed!"
-msgstr "Неможливо пронанал╕зувати рядок геометр╕╖: \"%s\""
-
-#. *
-#. * If the file isn't openable give a warning
-#. *
-#: src/main.c:152
-#, c-format
-msgid "The file \"%s\" doesn't exist or isn't readable!"
-msgstr "Файлу \"%s\" не ╕сну╓, або його неможливо зчитати!"
-
-#: src/main.c:153
-msgid "Skipping it."
-msgstr "Пропуск."
-
-#: src/interface.c:84
-msgid "No po-file opened which could be compiled."
-msgstr "Не в╕дкрито жодного po-фалу, що можна комп╕лювати."
-
-#: src/interface.c:109
-msgid "Po-file has been compiled successfully."
-msgstr "po-файл було усп╕шно скомп╕льовано."
-
-#: src/interface.c:138
-msgid "Couldn't store current geometry!"
-msgstr "Неможливо зберегти поточну геометр╕ю!"
-
-#: src/interface.c:181
-msgid "_Compile"
-msgstr "Комп╕лювати"
-
-#: src/interface.c:201
-msgid "C_lear"
-msgstr "Очистити"
-
-#: src/interface.c:202
-msgid "Clears the current selection"
-msgstr "Очистити поточне вибране"
-
-#: src/interface.c:209
-msgid "_Header"
-msgstr "Заголовок"
-
-#: src/interface.c:210
-msgid "Edit the header"
-msgstr "Зм╕нити заголовок"
-
-#: src/interface.c:221
-msgid "Refresh"
-msgstr "Оновити"
-
-#: src/interface.c:233
-msgid "_First"
-msgstr "Перше"
-
-#: src/interface.c:240
-msgid "_Back"
-msgstr "Назад"
-
-#: src/interface.c:248
-msgid "_Next"
-msgstr "Наступне"
-
-#: src/interface.c:255
-msgid "_Last"
-msgstr "Останн╓"
-
-#: src/interface.c:274
-msgid "_Online help"
-msgstr "Дов╕дка"
-
-#: src/interface.c:282
-msgid "gtranslator website"
-msgstr "Сайт Перекладача"
-
-#: src/interface.c:283
-msgid "gtranslator homepage on the web"
-msgstr "Стор╕нка Перекладач в ╤нтернет╕"
-
-#: src/interface.c:297 src/interface.c:300
-msgid "_Messages"
-msgstr "Пов╕домлення"
-
-#. *
-#. * Create the app
-#. *
-#: src/interface.c:323
-msgid "gtranslator"
-msgstr "Перекладач"
-
-#: src/gtr_dialogs.c:130 src/interface.c:358
-msgid "Search"
-msgstr "Пошук"
-
-#: src/interface.c:359
-msgid "Search for a message"
-msgstr "Пошук пов╕домлення"
-
-#: src/interface.c:366
-msgid "ReSearch"
-msgstr "Повторний пошук"
-
-#: src/interface.c:367
-msgid "Search again"
-msgstr "Шукати знову"
-
-#: src/interface.c:374
-msgid "Goto"
-msgstr "Перейти"
-
-#: src/interface.c:375
-msgid "Goto this message"
-msgstr "Перейти до цього пов╕домлення"
-
-#. *
-#. * Find in the personal catalogue
-#. *
-#: src/interface.c:385
-msgid "F/Cat."
-msgstr "Пошук/Каталог"
-
-#: src/interface.c:386
-msgid "Find in the personal catalog"
-msgstr "Пошук в особистому каталоз╕"
-
-#. *
-#. * Find in the .po-file
-#. *
-#: src/interface.c:396
-msgid "F/Po."
-msgstr "Пошук/po"
-
-#: src/interface.c:397
-msgid "Find in the po file "
-msgstr "Пошук у po-файл╕"
-
-#: src/interface.c:409
-msgid "Header"
-msgstr "Заголовок"
-
-#: src/interface.c:410
-msgid "Edit the header informations"
-msgstr "Зм╕нити ╕нформац╕ю в заголовку"
-
-#: src/interface.c:418
-msgid "Compile"
-msgstr "Комп╕лювати"
-
-#: src/interface.c:419
-msgid "Compile the po-file"
-msgstr "Комп╕лювати po-файл"
-
-#: src/interface.c:427
-msgid "Open"
-msgstr "В╕дкрити"
-
-#: src/interface.c:428
-msgid "Open File"
-msgstr "Зберегти файл"
-
-#: src/interface.c:436
-msgid "Save"
-msgstr "Зберегти"
-
-#: src/interface.c:437
-msgid "Save File"
-msgstr "Зберегти файл"
-
-#: src/interface.c:445
-msgid "Save as"
-msgstr "Зберегти як"
-
-#: src/interface.c:446
-msgid "Save file as"
-msgstr "Зберегти файл як"
-
-#: src/interface.c:454
-msgid "First"
-msgstr "Перший"
-
-#: src/interface.c:455
-msgid "Go to the first message"
-msgstr "Перейти до першого пов╕домлення"
-
-#: src/interface.c:463
-msgid "Back"
-msgstr "Назад"
-
-#: src/interface.c:464
-msgid "Go one message back"
-msgstr "Перейти на одне пов╕домлення назад"
-
-#: src/interface.c:472
-msgid "Options"
-msgstr "Параметри"
-
-#: src/interface.c:473
-msgid "gtranslator options"
-msgstr "Параметри Перекладача"
-
-#: src/interface.c:481
-msgid "Next"
-msgstr "Наступний"
-
-#: src/interface.c:482
-msgid "Go one message forward"
-msgstr "Перейти на одне пов╕домлення вперед"
-
-#: src/interface.c:490
-msgid "Last"
-msgstr "Останн╕й"
-
-#: src/interface.c:491
-msgid "Go to the last message"
-msgstr "Перейти до останнього пов╕домлення"
-
-#: src/interface.c:499 src/interface.c:500
-msgid "Exit"
-msgstr "Вийти"
-
-#. *
-#. * If there are any problems , give a
-#. *  message ..
-#. *
-#: src/parse.c:32
-#, c-format
-msgid ""
-"\n"
-"The file stream is lost! Error no. `%i'"
-msgstr ""
-"\n"
-"Файловий пот╕к втрачено! Номер помилки: \"%i\""
-
-#: src/parse.c:53
-#, c-format
-msgid "There's no file to open or I couldn't understand `%s'!"
-msgstr ""
-
-#. *
-#. * Set up a status message
-#. *
-#: src/parse.c:58
-#, c-format
-msgid "Current file : \"%s\"."
-msgstr "Поточний файл: \"%s\"."
-
-#. *
-#. * Show an updated status
-#. *
-#: src/parse.c:141
-#, c-format
-msgid "Finished reading \"%s\", %i lines."
-msgstr "Зчитано \"%s\". Рядк╕в - %i."
-
-#: src/parse.c:158
-msgid "Parsing has been successfull."
-msgstr "Анал╕з пройшов усп╕шно."
-
-#: src/header_stuff.c:23
-msgid "Error while parsing the header!"
-msgstr "Помилка анал╕зу заголовку!"
-
-#. *
-#. * 3.1) No list, no fun
-#. *
-#: src/msg_db.c:63
-msgid "gtranslator lost the list of translations!\n"
-msgstr ""
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:100 src/msg_db.c:157
-#, c-format
-msgid "The msg_db `%s' seems not to be inited!\n"
-msgstr ""
-
-#. *
-#. * Warn if there isn't any message which could be added
-#. *  to the msg_db .
-#. *
-#: src/msg_db.c:112
-msgid "Got no message entry!\n"
-msgstr ""
-
-#: src/msg_db.c:121
-#, c-format
-msgid "New message entry has wrong/non-logical length : %i\n"
-msgstr ""
-
-#. *
-#. * Return a very "explaining" char* ...
-#. *
-#: src/msg_db.c:161
-msgid "Not available"
-msgstr "Недоступно"
-
-#. *
-#. * If there's no msg_list
-#. *  print an error message
-#. *
-#: src/msg_db.c:169
-msgid "No msg_list available for acting on it!\n"
-msgstr ""
-
-#: src/msg_db.c:193
-msgid "No entry found in the msg_db."
-msgstr "Не знайдено запис╕в у баз╕ пов╕домлень."
-
-#: src/gtr_dialogs.c:21
-msgid ""
-"An error occured while msgfmt was executed.\n"
-"Please check your .po file again."
-msgstr ""
-"Виникла помилка при виконанн╕ msgfmt.\n"
-"Перев╕рте ваш .po-файл знову"
-
-#: src/gtr_dialogs.c:33
-msgid "You didn't change anything in the .po-file!\n"
-msgstr "Ви н╕чого не зм╕нили у po-файл╕!\n"
-
-#: src/gtr_dialogs.c:42
-msgid ""
-"With the Preferences box you can define some variables\n"
-"with which you can make gtranslator make more work\n"
-"like YOU want it to work!"
-msgstr ""
-
-#: src/gtr_dialogs.c:52
-msgid "gtranslator -- open a po-file"
-msgstr "Перекладач -- в╕дкрити po-файл"
-
-#: src/gtr_dialogs.c:65
-msgid "Select your desired po-file to open"
-msgstr "Вибер╕ть необх╕дний po-файл для в╕дкривання"
-
-#: src/gtr_dialogs.c:84
-msgid "gtranslator -- save file as .."
-msgstr "Перекладач -- зберегти файл як .. "
-
-#: src/gtr_dialogs.c:97
-msgid "Select your filename to which the po-file should be saved to."
-msgstr "Вибер╕ть назву файлу п╕д якою буде збережено po-файл."
-
-#: src/gtr_dialogs.c:122
-msgid "gtranslator -- search-box"
-msgstr "Перекладач -- д╕алог пошуку"
-
-#. *
-#. * Set up the information label
-#. *
-#: src/gtr_dialogs.c:128
-msgid "Enter your desired search string: "
-msgstr "Введ╕ть необх╕дний для пошуку рядок:"
-
-#: src/gtr_dialogs.c:194
-msgid "GoTo message entry"
-msgstr "Перейти до пов╕домлення"
-
-#. *
-#. * Create the buttons, the entry & the label
-#. *
-#: src/gtr_dialogs.c:199
-msgid "Go!"
-msgstr "П╕шли!"
-
-#: src/gtr_dialogs.c:203
-msgid "Goto the specified message entry."
-msgstr "Перейти до вказаного пов╕домлення."
-
-#: src/support.c:111 src/support.c:151
-#, c-format
-msgid "Couldn't find pixmap file: %s"
-msgstr "Невдалось знайти файл п╕ктограми: %s"
-
-#: src/support.c:127
-#, c-format
-msgid "Couldn't create pixmap from file: %s"
-msgstr "Невдалось створити п╕ктограму з файлу: %s"
 
 #: src/about.c:22
 msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
@@ -431,76 +37,358 @@ msgstr ""
 "(X)Emacs .\n"
 "Поки ви тут багато чого не знайдете, але це зм╕ниться!"
 
+#: src/gtr_dialogs.c:21
+msgid ""
+"An error occured while msgfmt was executed.\n"
+"Please check your .po file again."
+msgstr ""
+"Виникла помилка при виконанн╕ msgfmt.\n"
+"Перев╕рте ваш .po-файл знову"
+
+#: src/gtr_dialogs.c:33
+msgid "You didn't change anything in the .po-file!\n"
+msgstr "Ви н╕чого не зм╕нили у po-файл╕!\n"
+
+#: src/gtr_dialogs.c:42
+msgid ""
+"With the Preferences box you can define some variables\n"
+"with which you can make gtranslator make more work\n"
+"like YOU want it to work!"
+msgstr ""
+
+#: src/gtr_dialogs.c:52
+msgid "gtranslator -- open a po-file"
+msgstr "Перекладач -- в╕дкрити po-файл"
+
+#: src/gtr_dialogs.c:69
+msgid "Select your desired po-file to open"
+msgstr "Вибер╕ть необх╕дний po-файл для в╕дкривання"
+
+#: src/gtr_dialogs.c:88
+msgid "gtranslator -- save file as .."
+msgstr "Перекладач -- зберегти файл як .. "
+
+#: src/gtr_dialogs.c:105
+msgid "Select your filename to which the po-file should be saved to."
+msgstr "Вибер╕ть назву файлу п╕д якою буде збережено po-файл."
+
+#: src/gtr_dialogs.c:130
+msgid "gtranslator -- search-box"
+msgstr "Перекладач -- д╕алог пошуку"
+
 #. *
-#. * Create the labels ..
+#. * Set up the information label
 #. *
-#: src/prefs.c:34
-msgid "Personal informations"
-msgstr "Персональна ╕нформац╕я"
+#: src/gtr_dialogs.c:137
+msgid "Enter your desired search string: "
+msgstr "Введ╕ть необх╕дний для пошуку рядок:"
 
-#: src/prefs.c:35
-msgid "Language options"
-msgstr "Параметри мови"
+#: src/gtr_dialogs.c:139 src/interface.c:259 src/interface.c:260
+#: src/interface.c:459
+msgid "Search"
+msgstr "Пошук"
 
-#: src/prefs.c:36
-msgid "Po file options"
-msgstr "Параметри po-файлу"
+#: src/gtr_dialogs.c:207
+msgid "GoTo message entry"
+msgstr "Перейти до пов╕домлення"
 
-#: src/prefs.c:37
-msgid "Author's name :"
-msgstr "Назва автора:"
+#. *
+#. * Create the buttons, the entry & the label
+#. *
+#: src/gtr_dialogs.c:213
+msgid "Go!"
+msgstr "П╕шли!"
 
-#: src/prefs.c:38
-msgid "Author's EMail :"
-msgstr "Е-пошта автора: "
+#: src/gtr_dialogs.c:217
+msgid "Goto the specified message entry."
+msgstr "Перейти до вказаного пов╕домлення."
 
-#: src/prefs.c:39
-msgid "Language :"
-msgstr "Мова:"
+#: src/gtr_dialogs.c:270
+msgid "gtranslator -- find in the catalogue"
+msgstr "Перекладач -- пошук у каталоз╕"
 
-#: src/prefs.c:40
-msgid "MIME type :"
-msgstr "Тип MIME:"
+#: src/gtr_dialogs.c:273
+msgid "gtranslator -- find in the po-file"
+msgstr "Перекладач -- пошук у po-файл╕"
 
-#: src/prefs.c:41
-msgid "Encoding :"
-msgstr "Кодування:"
+#: src/gtr_dialogs.c:276
+msgid "gtranslator -- find"
+msgstr "Перекладач -- пошук"
 
-#: src/prefs.c:42
-msgid "Language code :"
-msgstr "Код мови:"
+#: src/gtr_dialogs.c:283 src/interface.c:274 src/interface.c:275
+msgid "Find"
+msgstr "Шукати"
 
-#: src/prefs.c:43
-msgid "Language group's EMail :"
-msgstr "Е-пошта мовно╖ групи:"
+#: src/gtr_dialogs.c:285
+msgid "Ignore the case"
+msgstr "╤гнорувати рег╕стр"
 
-#: src/prefs.c:44
-msgid "Comments :"
-msgstr "Коментар╕:"
+#: src/header_stuff.c:38
+msgid "Error while applying the header!"
+msgstr ""
 
-#: src/prefs.c:57
-msgid "Add the additional comments to the header"
-msgstr "Додати додатков╕ коментар╕ до заголовку"
+#: src/header_stuff.c:82
+msgid "Header has been parsed."
+msgstr "Заголовок проанал╕зовано."
 
-#: src/prefs.c:58
-msgid "Save gtranslator's geometry on exit & restore it on startup"
-msgstr "Збер╕гати геометр╕ю на виход╕ та в╕дновлювати ╖╖ на початку"
+#: src/header_stuff.c:106
+msgid "The header doesn't seem to be parsed rightly."
+msgstr ""
 
-#: src/prefs.c:59
-msgid "Warn me if I'm trying to save an unchanged file"
-msgstr "Попереджувати при спроб╕ зберегти незм╕нений файл"
+#: src/header_stuff.c:108
+msgid "Project name:"
+msgstr "Назва проекту:"
 
-#: src/prefs.c:60
-msgid "Warn if the .po-file contains fuzzy translations"
-msgstr "Попереджувати, якщо po-файл м╕стить невизначен╕ переклади"
+#: src/header_stuff.c:109
+msgid "Project version:"
+msgstr "Верс╕я проекту:"
 
-#: src/prefs.c:61
-msgid "Don't save unchanged .po-files"
-msgstr "Не збер╕гати незм╕нен╕ po-файли"
+#: src/header_stuff.c:110
+msgid "Use my personal options to fill out the rest of the header."
+msgstr ""
 
-#: src/prefs.c:62
-msgid "Use the msg_db"
-msgstr "Використовувана база пов╕домлень"
+#. *
+#. * Set the window-specs.
+#. *
+#: src/header_stuff.c:119
+msgid "gtranslator -- edit header"
+msgstr "Перекладач -- редагування заголовку"
+
+#: src/interface.c:84
+msgid "No po-file opened which could be compiled."
+msgstr "Не в╕дкрито жодного po-фалу, що можна комп╕лювати."
+
+#: src/interface.c:109
+msgid "Po-file has been compiled successfully."
+msgstr "po-файл було усп╕шно скомп╕льовано."
+
+#: src/interface.c:138
+msgid "Couldn't store current geometry!"
+msgstr "Неможливо зберегти поточну геометр╕ю!"
+
+#. *
+#. * Show a Good Bye!-typo message.
+#. *
+#: src/interface.c:151
+msgid "Bye bye!"
+msgstr "Бувай!"
+
+#: src/interface.c:230
+msgid "_Compile"
+msgstr "Комп╕лювати"
+
+#: src/interface.c:251
+msgid "C_lear"
+msgstr "Очистити"
+
+#: src/interface.c:252
+msgid "Clears the current selection"
+msgstr "Очистити поточне вибране"
+
+#: src/interface.c:266 src/interface.c:467
+msgid "ReSearch"
+msgstr "Повторний пошук"
+
+#: src/interface.c:267 src/interface.c:468
+msgid "Search again"
+msgstr "Шукати знову"
+
+#: src/interface.c:283
+msgid "_Header"
+msgstr "Заголовок"
+
+#: src/interface.c:284
+msgid "Edit the header"
+msgstr "Зм╕нити заголовок"
+
+#: src/interface.c:295
+msgid "Refresh"
+msgstr "Оновити"
+
+#: src/interface.c:307
+msgid "_First"
+msgstr "Перше"
+
+#: src/interface.c:314
+msgid "_Back"
+msgstr "Назад"
+
+#: src/interface.c:322
+msgid "_Next"
+msgstr "Наступне"
+
+#: src/interface.c:329
+msgid "_Last"
+msgstr "Останн╓"
+
+#: src/interface.c:341
+msgid "_Add"
+msgstr "Додати"
+
+#: src/interface.c:342
+msgid "Add the current message to the msg_db."
+msgstr "Додати поточне пов╕домлення до бази пов╕домлень."
+
+#: src/interface.c:349
+msgid "_Query"
+msgstr "Запит"
+
+#: src/interface.c:350
+msgid "Query the msg_db for the current msgid."
+msgstr "Зробити запит поточного пов╕домлення у баз╕ пов╕домлень"
+
+#: src/interface.c:368
+msgid "_Online help"
+msgstr "Дов╕дка онлайн"
+
+#: src/interface.c:376
+msgid "gtranslator _website"
+msgstr "Сайт Перекладача"
+
+#: src/interface.c:377
+msgid "gtranslator's homepage on the web"
+msgstr "Стор╕нка Перекладача в ╤нтернет╕"
+
+#: src/interface.c:391 src/interface.c:394
+msgid "_Messages"
+msgstr "Пов╕домлення"
+
+#: src/interface.c:398 src/interface.c:401
+msgid "Msg _db"
+msgstr "База пов╕домлень"
+
+#. *
+#. * Create the app
+#. *
+#: src/interface.c:424
+msgid "gtranslator"
+msgstr "Перекладач"
+
+#: src/interface.c:460
+msgid "Search for a message"
+msgstr "Пошук пов╕домлення"
+
+#: src/interface.c:475
+msgid "Goto"
+msgstr "Перейти"
+
+#: src/interface.c:476
+msgid "Goto this message"
+msgstr "Перейти до цього пов╕домлення"
+
+#: src/interface.c:490
+msgid "Add"
+msgstr "Додати"
+
+#: src/interface.c:491
+msgid "Add to the msg_db."
+msgstr "Додати до бази пов╕домлень."
+
+#. *
+#. * Find in the personal catalogue
+#. *
+#: src/interface.c:505
+msgid "F/Cat."
+msgstr "Пошук/Каталог"
+
+#: src/interface.c:506
+msgid "Find in the personal catalog"
+msgstr "Пошук в особистому каталоз╕"
+
+#. *
+#. * Find in the .po-file
+#. *
+#: src/interface.c:516
+msgid "F/Po."
+msgstr "Пошук/po"
+
+#: src/interface.c:517
+msgid "Find in the po file "
+msgstr "Пошук у po-файл╕"
+
+#: src/interface.c:528
+msgid "Header"
+msgstr "Заголовок"
+
+#: src/interface.c:529
+msgid "Edit the header informations"
+msgstr "Зм╕нити ╕нформац╕ю в заголовку"
+
+#: src/interface.c:537
+msgid "Compile"
+msgstr "Комп╕лювати"
+
+#: src/interface.c:538
+msgid "Compile the po-file"
+msgstr "Комп╕лювати po-файл"
+
+#: src/interface.c:546
+msgid "Open"
+msgstr "В╕дкрити"
+
+#: src/interface.c:547
+msgid "Open File"
+msgstr "Зберегти файл"
+
+#: src/interface.c:555
+msgid "Save"
+msgstr "Зберегти"
+
+#: src/interface.c:556
+msgid "Save File"
+msgstr "Зберегти файл"
+
+#: src/interface.c:564
+msgid "Save as"
+msgstr "Зберегти як"
+
+#: src/interface.c:565
+msgid "Save file as"
+msgstr "Зберегти файл як"
+
+#: src/interface.c:573
+msgid "First"
+msgstr "Перший"
+
+#: src/interface.c:574
+msgid "Go to the first message"
+msgstr "Перейти до першого пов╕домлення"
+
+#: src/interface.c:582
+msgid "Back"
+msgstr "Назад"
+
+#: src/interface.c:583
+msgid "Go one message back"
+msgstr "Перейти на одне пов╕домлення назад"
+
+#: src/interface.c:591
+msgid "Options"
+msgstr "Параметри"
+
+#: src/interface.c:592
+msgid "gtranslator options"
+msgstr "Параметри Перекладача"
+
+#: src/interface.c:600
+msgid "Next"
+msgstr "Наступний"
+
+#: src/interface.c:601
+msgid "Go one message forward"
+msgstr "Перейти на одне пов╕домлення вперед"
+
+#: src/interface.c:609
+msgid "Last"
+msgstr "Останн╕й"
+
+#: src/interface.c:610
+msgid "Go to the last message"
+msgstr "Перейти до останнього пов╕домлення"
+
+#: src/interface.c:618 src/interface.c:619
+msgid "Exit"
+msgstr "Вийти"
 
 #: src/languages.h:59
 msgid "Arabic"
@@ -669,3 +557,233 @@ msgstr "Валонська"
 #: src/languages.h:223
 msgid "Welsh"
 msgstr "Уельська"
+
+#: src/main.c:32
+msgid "Po-file to open at startup"
+msgstr "po-файл, що в╕дкрива╓ться на початку"
+
+#: src/main.c:36
+msgid "The msg_db to use"
+msgstr "Використовувана база пов╕домлень"
+
+#: src/main.c:40
+msgid "Query the msg_db & exit"
+msgstr "Зробити запит бази пов╕домлень та вийти"
+
+#: src/main.c:44
+msgid "Specifies the main-window geometry"
+msgstr "Визнача╓ геометр╕ю головного в╕кна"
+
+#. *
+#. * Simply print it out.
+#. *
+#: src/main.c:95
+#, c-format
+msgid "Getting results for query: `%s' ...\n"
+msgstr "Отримання результат╕в запиту: \"%s\" ...\n"
+
+#: src/main.c:100
+#, c-format
+msgid "Result                   : %s."
+msgstr "Результат                : %s."
+
+#: src/main.c:102
+msgid "End of query.\n"
+msgstr "К╕нець запиту.\n"
+
+#: src/main.c:162
+#, c-format
+msgid "The geometry string \"%s\" coulnd't be parsed!"
+msgstr "Неможливо пронанал╕зувати рядок геометр╕╖: \"%s\""
+
+#. *
+#. * If the file isn't openable give a warning
+#. *
+#: src/main.c:181
+#, c-format
+msgid "The file \"%s\" doesn't exist or isn't readable!"
+msgstr "Файлу \"%s\" не ╕сну╓, або його неможливо зчитати!"
+
+#: src/main.c:182
+msgid "Skipping it."
+msgstr "Пропуск."
+
+#: src/msg_db.c:42
+#, c-format
+msgid "No msg_db found! Creating one in `%s'."
+msgstr "Незнайдено бази пов╕домлень! Створення ╖╖ в \"%s\"."
+
+#. *
+#. * 3.1) No list, no fun
+#. *
+#: src/msg_db.c:81
+msgid "gtranslator lost the list of translations!\n"
+msgstr "Перекладач втратив список переклад╕в!\n"
+
+#. *
+#. * Show a little warning ...
+#. *
+#: src/msg_db.c:118
+#, c-format
+msgid "The msg_db `%s' hasn't been inited yet!\n"
+msgstr ""
+
+#. *
+#. * Warn if there isn't any message which could be added
+#. *  to the msg_db .
+#. *
+#: src/msg_db.c:129
+msgid "Got no message entry!\n"
+msgstr ""
+
+#: src/msg_db.c:137
+msgid "New message entry has wrong/non-logical length.\n"
+msgstr ""
+
+#. *
+#. * Show a little warning ...
+#. *
+#: src/msg_db.c:173
+#, c-format
+msgid "The msg_db `%s' seems not to be inited!\n"
+msgstr ""
+
+#. *
+#. * Return a very "explaining" char* ...
+#. *
+#: src/msg_db.c:177
+msgid "Not available"
+msgstr "Не доступно"
+
+#. *
+#. * If there's no msg_list
+#. *  print an error message
+#. *
+#: src/msg_db.c:185
+msgid "No msg_list available for acting on it!\n"
+msgstr ""
+
+#: src/msg_db.c:209
+msgid "No entry found in the msg_db."
+msgstr "Не знайдено запис╕в у баз╕ пов╕домлень."
+
+#. *
+#. * If there are any problems , give a
+#. *  message ..
+#. *
+#: src/parse.c:33
+#, c-format
+msgid ""
+"\n"
+"The file stream is lost!\n"
+"%s"
+msgstr ""
+"\n"
+"Файловий пот╕к втрачено!\n"
+"%s"
+
+#: src/parse.c:57
+#, c-format
+msgid "There's no file to open or I couldn't understand `%s'!"
+msgstr ""
+
+#. *
+#. * Set up a status message
+#. *
+#: src/parse.c:62
+#, c-format
+msgid "Current file : \"%s\"."
+msgstr "Поточний файл: \"%s\"."
+
+#. *
+#. * Show an updated status
+#. *
+#: src/parse.c:151
+#, c-format
+msgid "Finished reading \"%s\", %i lines."
+msgstr "Зчитано \"%s\". Рядк╕в - %i."
+
+#: src/parse.c:168
+msgid "Parsing has been successfull."
+msgstr "Анал╕з пройшов усп╕шно."
+
+#. *
+#. * Create the labels ..
+#. *
+#: src/prefs.c:34
+msgid "Personal informations"
+msgstr "Персональна ╕нформац╕я"
+
+#: src/prefs.c:35
+msgid "Language options"
+msgstr "Параметри мови"
+
+#: src/prefs.c:36
+msgid "Po file options"
+msgstr "Параметри po-файлу"
+
+#: src/prefs.c:37
+msgid "Author's name :"
+msgstr "Назва автора:"
+
+#: src/prefs.c:38
+msgid "Author's EMail :"
+msgstr "Е-пошта автора: "
+
+#: src/prefs.c:39
+msgid "Language :"
+msgstr "Мова:"
+
+#: src/prefs.c:40
+msgid "MIME type :"
+msgstr "Тип MIME:"
+
+#: src/prefs.c:41
+msgid "Encoding :"
+msgstr "Кодування:"
+
+#: src/prefs.c:42
+msgid "Language code :"
+msgstr "Код мови:"
+
+#: src/prefs.c:43
+msgid "Language group's EMail :"
+msgstr "Е-пошта мовно╖ групи:"
+
+#: src/prefs.c:44
+msgid "Comments :"
+msgstr "Коментар╕:"
+
+#: src/prefs.c:57
+msgid "Add the additional comments to the header"
+msgstr "Додати додатков╕ коментар╕ до заголовку"
+
+#: src/prefs.c:58
+msgid "Save gtranslator's geometry on exit & restore it on startup"
+msgstr "Збер╕гати геометр╕ю на виход╕ та в╕дновлювати ╖╖ на початку"
+
+#: src/prefs.c:59
+msgid "Warn me if I'm trying to save an unchanged file"
+msgstr "Попереджувати при спроб╕ зберегти незм╕нений файл"
+
+#: src/prefs.c:60
+msgid "Warn if the .po-file contains fuzzy translations"
+msgstr "Попереджувати, якщо po-файл м╕стить невизначен╕ переклади"
+
+#: src/prefs.c:61
+msgid "Don't save unchanged .po-files"
+msgstr "Не збер╕гати незм╕нен╕ po-файли"
+
+#: src/prefs.c:62
+msgid "Use the msg_db"
+msgstr "Використовувана база пов╕домлень"
+
+#: src/support.c:111 src/support.c:151
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Невдалось знайти файл п╕ктограми: %s"
+
+#: src/support.c:127
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr "Невдалось створити п╕ктограму з файлу: %s"
