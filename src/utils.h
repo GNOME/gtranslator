@@ -37,6 +37,19 @@
 gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 
 /*
+ * Returns a list of (full) filenames matching the given parameters in ths
+ *  given directory; extension means extension _with_ point (".xml").
+ */
+GList *gtranslator_utils_filenames_from_directory(const gchar *directory,
+	const gchar *extension, gboolean sort);
+
+/*
+ * Check for matching of an entry of the list entry and the string -- returns
+ *  '-1' on non-matching, else the position in the list.
+ */
+gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string);
+
+/*
  * Show the homepage of gtranslator.
  */
 void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);

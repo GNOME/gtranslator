@@ -1,7 +1,6 @@
-# -------------------------------------------------------
-# This is the base for the Makefile, produced by automake
-#   and autoconf. 
-# -------------------------------------------------------
+# --------------------------------------------------------
+# Welcome to the gtranslator-automake-autoconf Wonderland!
+# --------------------------------------------------------
 
 SUBDIRS = . backends pixmaps
 
@@ -28,9 +27,9 @@ bin_PROGRAMS = gtranslator
 	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
 		< $< > $@
 
-#
-# This must always be the first file in the sources list!
-#
+##
+## This should be a file before the first including file of defines.include!
+##
 about.c: defines.include
 
 gtranslator_SOURCES = \

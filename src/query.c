@@ -189,8 +189,6 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
  */ 
 void gtranslator_query_domains(const gchar *directory)
 {
-	struct dirent *entry;
-	DIR *dir;
 	gchar *localedirectory;
 		
 	g_return_if_fail(directory!=NULL);
@@ -205,45 +203,8 @@ void gtranslator_query_domains(const gchar *directory)
 	localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory,
 		lc);
 	
-	dir=opendir(localedirectory);
-	
-	if(!dir)
-	{
-		g_warning(_("Couldn't open locales directory `%s'!"), directory);
-		return;
-	}
-
-	/*
-	 * Get all the entries in the directory -- but first strip out the .mo
-	 *  extension.
-	 */ 
-	while((entry=readdir(dir))!=NULL)
-	{
-		/*
-		 * Don't use non-gettext objects.
-		 */ 
-		if((strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))
-			&& (	strstr(entry->d_name, ".mo") ||
-				strstr(entry->d_name, ".gmo")))
-		{
-			gchar *domainname;
-
-			domainname=gtranslator_utils_get_raw_file_name(entry->d_name);
-
-			/*
-			 * Check the pure filename before adding it to the
-			 *  domains' list.
-			 */
-			if(domainname)
-			{
-				domains=g_list_append(domains, domainname);
-			}
-		}
-	}
-
-	closedir(dir);
-
-	domains=g_list_sort(domains, (GCompareFunc) strcmp);
+	domains=gtranslator_utils_filenames_from_directory(localedirectory,
+		".mo", TRUE);
 }
 
 /*

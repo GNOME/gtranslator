@@ -28,17 +28,25 @@
  * Backends integration file with all the converting surface.
  */
 
+/*
+ * Informations about the xml file.
+ */
 typedef struct
 {
 	const gchar 	*modulename;
 	const gchar 	*name;
 	const gchar 	*description;
-	const gchar 	*mime_types;
+	const gchar 	*extensions;
+	const gchar	*filenames;
 
 	gboolean	compilable;
 	const gchar	*compile_command;
 } GtrBackendInformations;
 
+/*
+ * The main structure which is also used to access the module functions
+ *  directly.
+ */
 typedef struct 
 {
 	GtrBackendInformations	*info;
@@ -46,6 +54,11 @@ typedef struct
 	GFunc			save_file;
 	GFunc			save_file_as;
 } GtrBackend;
+
+#define GTR_BACKEND(x) ((GtrBackend *) x)
+
+#define GTR_BACKEND_INFORMATIONS(x) \
+	((GtrBackendInformations *) x)
 
 /*
  * Opening and registering of backends from the given dir -- returns FALSE on
@@ -61,12 +74,7 @@ void gtranslator_backend_add(const gchar *filename);
 /*
  * Removed the given xml-file descriptors module.
  */
-gboolean gtranslator_backend_remove_by_xml_file(const gchar *filename);
-
-/*
- * Removes the given GtrBackend at all.
- */
-void gtranslator_backend_remove(GtrBackend *backend); 
+gboolean gtranslator_backend_remove(const gchar *filename);
 
 /*
  * Remove all registered modules and clean up our "namespace".

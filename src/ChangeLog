@@ -1,3 +1,23 @@
+2001-04-28  Fatih Demir <kabalak@gtranslator.org>
+
+	* main.c: Added a -b/--build-informations option to get a view on
+		all the build informations.
+
+	* defines.config: Small changes in the define names.
+
+	* Makefile.am: Improved comment a small bit.
+
+	* backend.c/.h: More cleanup, starting implementation; switching
+		over to extension based backend use -- no mime types anymore.
+
+	* query.c: Use the new util-function instead of the own parsing of
+		the localedirectory.
+
+	* utils.c/.h: Added a function to return an appropiate list of
+		filenames matching a given extension -- and if wanted:
+		 also a sorted list of filenames; another function peforms
+		  stringlist_strcasecmp actions .-)
+
 2001-04-27  Fatih Demir <kabalak@gtranslator.org>
 
 	* dialogs.c: Corrected a malformed prefs location and added also

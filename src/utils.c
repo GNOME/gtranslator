@@ -21,8 +21,11 @@
 #include "dialogs.h"
 #include "gui.h"
 #include "languages.h"
+#include "nautilus-string.h"
 #include "prefs.h"
 #include "utils.h"
+
+#include <dirent.h>
 
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-i18n.h>
@@ -63,6 +66,93 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 	}
 
 	g_string_free(o, FALSE);
+}
+
+/*
+ * Subsequently filter out all extension containing filename from the directory.
+ * 
+ * Should be useful for many cases.
+ */
+GList *gtranslator_utils_filenames_from_directory(const gchar *directory,
+	const gchar *extension, gboolean sort)
+{
+	GList		*files=NULL;
+	DIR 		*dir;
+	struct dirent 	*entry;
+
+	/*
+	 * Filter out all bad cases ,-)
+	 */
+	g_return_val_if_fail(directory!=NULL, NULL);
+	g_return_val_if_fail(extension!=NULL, NULL);
+	g_return_val_if_fail(strlen(directory) > strlen(extension), NULL);
+
+	/*
+	 * Operate on/in the given directory and search for out pattern.
+	 */
+	dir=opendir(directory);
+	g_return_val_if_fail(dir!=NULL, NULL);
+
+	while((entry=readdir(dir)) != NULL)
+	{
+		if(strcmp(entry->d_name, ".") && strcmp(entry->d_name, "..") &&
+			(nautilus_str_has_suffix(entry->d_name, extension)==TRUE))
+		{
+			files=g_list_append(files, entry->d_name);
+		}
+	}
+
+	/*
+	 * Test the files list.
+	 */
+	g_return_val_if_fail(files!=NULL, NULL);
+
+	/*
+	 * If the according argument is given, then sort the filenames list.
+	 */
+	if(sort)
+	{
+		files=g_list_append(files, (GFunc) strcmp);
+	}
+
+	closedir(dir);
+
+	return files;
+}
+
+/*
+ * Check for matching of an entry of the list entry and the string -- returns
+ *  '-1' on non-matching, else the position in the list.
+ */
+gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string)
+{
+	gint pos=0;
+	
+	g_return_val_if_fail(list!=NULL, -1);
+	g_return_val_if_fail(string!=NULL, -1);
+
+	/*
+	 * The list should only consist out of gchar's..
+	 */
+	g_return_val_if_fail(sizeof(gchar *) == sizeof(list->data), -1);
+
+	while(list)
+	{
+		if(!g_strcasecmp(list->data, string))
+		{
+			return pos;
+		}
+
+		list=list->next;
+		pos++;
+
+		if(!list)
+		{
+			return -1;
+		}
+	}
+
+	return -1;
 }
 
 /*

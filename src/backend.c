@@ -19,3 +19,43 @@
 
 #include "backend.h"
 #include "defines.include"
+
+#include <gnome-xml/parser.h>
+#include <gnome-xml/tree.h>
+
+/*
+ * Internal prototypes:
+ */
+void read_xml_descriptor(const gchar *filename, GtrBackendInformations **info);
+
+/*
+ * Read in the xml descriptor file from the given file.
+ */
+void read_xml_descriptor(const gchar *filename, GtrBackendInformations **info)
+{
+	xmlDocPtr doc;
+	xmlNodePtr node;
+	
+	doc=xmlParseFile(filename);
+	g_return_if_fail(doc!=NULL);
+
+	node=xmlDocGetRootElement(doc);
+	
+	if(g_strcasecmp(node->name, "backend"))
+	{
+		return;
+	}
+
+	node=node->xmlChildrenNode;
+}
+
+/*
+ * Adds the backend to out list of available backends.
+ */
+void gtranslator_backend_add(const gchar *filename)
+{
+	GtrBackend *backend;
+	g_return_if_fail(filename!=NULL);
+
+	read_xml_descriptor(filename, &GTR_BACKEND_INFORMATIONS(backend->info));
+}

@@ -51,10 +51,11 @@
 /*
  * The static variables used in the poptTable.
  */
-static gchar *gtranslator_geometry=NULL;
-static gchar *scheme_filename=NULL;
-static gchar *save_html_output_file=NULL;
-static gchar *domains_dir=NULL;
+static gchar 	*gtranslator_geometry=NULL;
+static gchar 	*scheme_filename=NULL;
+static gchar 	*save_html_output_file=NULL;
+static gchar 	*domains_dir=NULL;
+static gboolean	build_informations=FALSE;
 
 /*
  * gtranslator's option table.
@@ -63,6 +64,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 	 	NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
 	 	0, NULL, NULL
+	},
+	{
+		"build-informations", 'b', POPT_ARG_NONE, &build_informations,
+		0, N_("Shows build informations/specifications"), NULL
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
@@ -135,6 +140,32 @@ int main(int argc, char *argv[])
 	 */
 	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv,
 				   gtranslator_options, 0, &context);
+
+	/*
+	 * Show up build informations if desired.
+	 */
+	if(build_informations)
+	{
+		g_print("\t");
+		g_print(_("gtranslator build informations/specs:"));
+		g_print("\n\n\t");
+		g_print(_("Version and build date: %s"), BUILD_STRING);
+		g_print("\n\t");
+		g_print(_("Backends directory:     %s"), BACKENDS_DIR);
+		g_print("\n\t");
+		g_print(_("TM backends directory:  %s"), BACKENDS_TM_DIR);
+		g_print("\n\t");
+		g_print(_("Colorschemes directory: %s"), SCHEMESDIR);
+		g_print("\n\t");
+		g_print(_("Scripts directory:      %s"), SCRIPTSDIR);
+		g_print("\n\t");
+		g_print(_("Window icon:            %s"), WINDOW_ICON);
+		g_print("\n\t");
+		g_print(_("Own locale directory:   %s"), GNOMELOCALEDIR);
+		g_print("\n\n");
+
+		exit(1);
+	}
 
 	/*
 	 * Show the application window with icon.
