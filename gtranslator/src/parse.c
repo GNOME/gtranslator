@@ -64,6 +64,7 @@ void parse_this_file_all_through()
 	*	Parse the prepared files to the char[]-arrays 
 	*/ 
 	/* 1. -> For the msgid's */
+	max_count=0;
 	for(count=1;count<=65000;++count)
 	{	
 		while(fgets(iline[count],sizeof(iline[count]),input_ids) != NULL)
@@ -73,9 +74,10 @@ void parse_this_file_all_through()
 			#endif
 			fgets(iline[count],sizeof(iline[count]),input_ids);
 			count++;
+			max_count++;
 		}
 	}
-	
+	/*
 	if(count < 65000 || count > 0 )
 	{
 		max_count=count;
@@ -85,21 +87,24 @@ void parse_this_file_all_through()
 		max_count=0;
 	}
 	else
-	{
+	{*/
 		/* 
 		*	If the read fails , notify the user
 		*/	
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Error while parsing the msgid's !"));
-	}
+	/*	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Error while parsing the msgid's !"));
+	}*/
 	/* 2, -> For the msgstr's */
+	max_count=0;
 	for(count=1;count<=65000;++count)
 	{
 		while(fgets(sline[count],sizeof(sline[count]),input_strs) != NULL)
 		{
 			fgets(sline[count],sizeof(sline[count]),input_strs);
 			count++;
+			max_count++;
 		}
 	}
+	/*
 	if(count < 65000 || count >= 0 )
         {
                 max_count=count;
@@ -112,10 +117,10 @@ void parse_this_file_all_through()
                 max_count=0;
         }
         else
-        {
+        {*/
 		/*
 		*	The same thing as above ...
 		*/
-                gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Error while parsing the msgstr's !"));
-        }
+           /*     gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Error while parsing the msgstr's !"));
+        }*/
 }
