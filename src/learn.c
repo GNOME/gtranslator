@@ -24,8 +24,6 @@
 
 #include <libgnome/gnome-util.h>
 
-#include <gal/util/e-util.h>
-
 /*
  * The internally used variables for learning.
  */
@@ -36,21 +34,19 @@ static GList		*learn_buffer=NULL;
  * A maximum number of read entries can be specified here; unlimited numbers
  *  could eventually cause too much time-loss.
  */
-#define MAX_LEARN_ENTRIES 1024
-
-#define LEARN_FILE "learned-strings"
+#define MAX_LEARN_ENTRIES 2048
 
 /*
  * Initialize our internal learn buffers .-)
  */
-void gtransator_learn_init()
+void gtranslator_learn_init()
 {
 	gchar	*learn_base_file;
 	
 	g_return_if_fail(init_status==FALSE);
 
-	learn_base_file=g_strdup_printf("%s/.gtranslator/%s", g_get_home_dir(), 
-		LEARN_FILE);
+	learn_base_file=g_strdup_printf("%s/.gtranslator/learned-strings", 
+		g_get_home_dir());
 
 	/*
 	 * If a current "learned-strings" file is present, parse it
@@ -59,37 +55,27 @@ void gtransator_learn_init()
 	if(g_file_test(learn_base_file, G_FILE_TEST_ISFILE))
 	{
 		gchar 	*content;
-		gchar 	**entries;
-		gint 	i=0;
+		FILE 	*l_file;
+		gint	counter=0;
 
-		/*
-		 * Read the file and split the fields (here: lines)
-		 *  per "g_strsplit"; there's a maximal limit to avoid
-		 *   parsing of too big "learned-strings" files.
-		 */
-		content=e_read_file(learn_base_file);
-		entries=g_strsplit(content, "\n", MAX_LEARN_ENTRIES);
+		l_file=fopen(learn_base_file, "r");
 
-		while(entries[i]!=NULL && i <= MAX_LEARN_ENTRIES)
+		while((content=gtranslator_utils_getline(l_file))!=NULL &&
+			counter <= MAX_LEARN_ENTRIES)
 		{
-			gchar *e=g_strstrip(entries[i]);
+			counter++;
 			
 			/*
-			 * The '#' should mark a comment line, so
-			 *  we don't need to parse these lines.
+			 * Ignore empty lines and lines starting with '#'.
 			 */
-			if(e[0]!='#')
+			if(content[0]!='\0' && content[0]!='#')
 			{
-				learn_buffer=g_list_prepend(learn_buffer, 
-					g_strdup(e));
+				learn_buffer=g_list_prepend(learn_buffer,
+					g_strdup(content));
 			}
-				
-			i++;
-			g_free(e);
 		}
 
-		g_strfreev(entries);
-		g_free(content);
+		fclose(l_file);
 	}
 	else
 	{
@@ -122,29 +108,54 @@ gboolean gtranslator_learn_initialized()
  */
 void gtranslator_learn_shutdown()
 {
-	GString 	*filestring=g_string_new("# gtranslator learned strings buffer");
 	gchar 		*filename;
+	FILE		*l_file;
+	gint		counter=0;
 	
 	g_return_if_fail(init_status==TRUE);
 
-	while(learn_buffer!=NULL)
+	filename=g_strdup_printf("%s/.gtranslator/learned-strings",
+		g_get_home_dir());
+	
+	/*
+	 * Open up the learned-strings file for writing the entries into it.
+	 */
+	l_file=fopen(filename, "w");
+	g_return_if_fail(l_file!=NULL);
+
+	/*
+	 * A file identification string -- should be useful for mime-types
+	 *  "magic".
+	 */
+	fprintf(l_file, "# gtranslator learned strings file\n");
+
+	/*
+	 * Don't write any further if there isn't any learned strings buffer.
+	 */
+	if(!learn_buffer)
 	{
-		filestring=g_string_append_c(filestring, '\n');
-		filestring=g_string_append(filestring, (learn_buffer->data));
+		fclose(l_file);
+		g_free(filename);
+		
+		return;
+	}
+
+	while(learn_buffer!=NULL && counter <= MAX_LEARN_ENTRIES)
+	{
+		counter++;
+		
+		fprintf(l_file, "%s", (gchar *)learn_buffer->data);
 
 		g_free(learn_buffer->data);
 		learn_buffer=learn_buffer->next;
 	}
 
+	/*
+	 * Free all the used variables.
+	 */
 	g_list_free(learn_buffer);
 
-	g_return_if_fail(filestring->str!=NULL);
-	filename=g_strdup_printf("%s/.gtranslator/%s", g_get_home_dir(),
-		LEARN_FILE);
-
-	e_write_file(filename, filestring->str, 0644);
-
-	g_string_free(filestring, FALSE);
+	fclose(l_file);
 	g_free(filename);
 }
 

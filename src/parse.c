@@ -702,8 +702,8 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	 */
 	if (!gtranslator_should_the_file_be_saved_dialog)
 		return;
+	
 	gtranslator_po_free();
-
 	gtranslator_sidebar_clear_views();
 	
 	file_opened = FALSE;

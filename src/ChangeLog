@@ -1,11 +1,27 @@
 2001-06-03  Fatih Demir <kabalak@gtranslator.org>
 
+	* dialogs.c, open-differently.c: Use the new function to determine
+		the URI prefixes support state.
+
+	* utils.c/.h: New "gtranslator_utils_uri_supported" function to
+		simply determine if the given file_uri includes a supported
+		 prefix/URI.
+
+	* message.c: While updating the message contents also learn the
+		string by inserting it into the learn buffer.
+
+	* gui.c & main.c: Added learn buffer initialization/shutdown.
+
 	* learn.c: Don't create the "~/.gtranslator" directory -- it's done
-		now by the main function; also cleaned up some unneeded stuff.
+		now by the main function; also cleaned up some unneeded stuff
+		 and corrected an importanty typo ("gtransator_learn_init");
+		  changed the read/write logic to be "normal" file stream
+		   operations and set the learned strings limit to 2048.
 
 	* vfs-handle.c: Reduce the includes to include 4 GnomeVFS headers
 		instead of all through <libgnomevfs/gnome-vfs.h>; use the
-		 e_mkdir_hier function for creating the directories.
+		 e_mkdir_hier function for creating the directories and check
+		  some values before operating on them via g_return_val_if_fail.
 
 	* sighandling.c: Save the file directly per "gtransator_save_file" and
 		do not call any dialogs.

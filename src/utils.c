@@ -199,6 +199,27 @@ gchar *gtranslator_utils_get_crash_file_name()
 }
 
 /*
+ * Test the prefixes of the given file_uri for support.
+ */
+gboolean gtranslator_utils_uri_supported(const gchar *file_uri)
+{
+	if(nautilus_istr_has_prefix(file_uri, "http://") ||
+		nautilus_istr_has_suffix(file_uri, "https://") ||
+		nautilus_istr_has_suffix(file_uri, "ftp://") ||
+		nautilus_istr_has_suffix(file_uri, "file:/") ||
+		nautilus_istr_has_suffix(file_uri, "www.") ||
+		nautilus_istr_has_suffix(file_uri, "ftp.") ||
+		nautilus_istr_has_suffix(file_uri, "nfs:/"))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+/*
  * Subsequently filter out all extension containing filename from the directory.
  * 
  * Should be useful for many cases.

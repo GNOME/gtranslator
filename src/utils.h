@@ -63,6 +63,11 @@ void gtranslator_utils_create_gtranslator_directory(void);
 gboolean gtranslator_utils_autosave(gpointer foo_me_or_die);
 
 /*
+ * Returns whether the given file_uri's prefix is supported.
+ */
+gboolean gtranslator_utils_uri_supported(const gchar *file_uri);
+
+/*
  * Returns a list of (full) filenames matching the given parameters in ths
  *  given directory; extension means extension _with_ point (".xml").
  */

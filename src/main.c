@@ -29,6 +29,7 @@
 #include "dialogs.h"
 #include "gui.h"
 #include "htmlizer.h"
+#include "learn.h"
 #include "open-differently.h"
 #include "parse.h"
 #include "prefs.h"
@@ -381,6 +382,11 @@ int main(int argc, char *argv[])
 	{
 		gtranslator_session_restore(client);
 	}
+
+	/*
+	 * Init the learn buffer and connected stuff.
+	 */
+	gtranslator_learn_init();
 	
 	gtk_widget_show_all(gtranslator_application);
 	

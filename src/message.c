@@ -24,6 +24,7 @@
 #include "actions.h"
 #include "gtkspell.h"
 #include "gui.h"
+#include "learn.h"
 #include "menus.h"
 #include "message.h"
 #include "parse.h"
@@ -283,6 +284,12 @@ void gtranslator_message_update(void)
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;
 			po->translated++;
 		}
+
+		/*
+		 * Learn the msgstr as a string.
+		 */
+		gtranslator_learn_string(msg->msgstr);
+		
 	} else {
 		msg->msgstr = NULL;
 		msg->status &= ~GTR_MSG_STATUS_TRANSLATED;

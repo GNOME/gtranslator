@@ -42,6 +42,11 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 	GString *localfilename=g_string_new("");
 	
 	/*
+	 * Don't operate on NULL filenames.
+	 */
+	g_return_val_if_fail(filename!=NULL, NULL);
+	
+	/*
 	 * Init GnomeVFS, if that hasn't already be done.
 	 */
 	if(!gnome_vfs_initialized())
@@ -53,6 +58,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 	 * Get the corresponding URI for the filename.
 	 */
 	file=gnome_vfs_uri_new(filename);
+	g_return_val_if_fail(file!=NULL, NULL);
 	
 	/*
 	 * If an URI is locally available open it with

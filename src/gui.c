@@ -32,6 +32,7 @@
 #include "gui.h"
 #include "header_stuff.h"
 #include "history.h"
+#include "learn.h"
 #include "menus.h"
 #include "message.h"
 #include "parse.h"
@@ -290,10 +291,19 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_config_init();
 	gtranslator_config_set_last_run_date();
 	gtranslator_config_close();
-	
+
+	/*
+	 * Shutdown the eventually (non-)initialized stuff from GnomeVFS and
+	 *  the learn buffer.
+	 */
 	if(gnome_vfs_initialized())
 	{
 		gnome_vfs_shutdown();
+	}
+
+	if(gtranslator_learn_initialized())
+	{
+		gtranslator_learn_shutdown();
 	}
 
 	/*

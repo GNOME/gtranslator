@@ -785,9 +785,10 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			 * Open the URI via our beloved function; the else case
 			 *  is very logical .-)
 			 */ 
-			if(gtranslator_open_po_file(uri->str))
+			if(gtranslator_utils_uri_supported(uri->str))
 			{
 				gnome_dialog_close(dialog);
+				gtranslator_open_po_file(uri->str);
 			}
 			else
 			{
