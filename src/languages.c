@@ -150,6 +150,10 @@ GtrLanguage languages[] = {
 	 "indlinux-gujarati@lists.sourceforge.net", "8bit"
 	},
 	{
+	 N_("Hebrew"), "he", "UTF-8",
+	 "", "8bit"
+	},
+	{
 	 N_("Hindi"), "hi", "UTF-8",
 	 "indlinux-hindi-gnome@lists.sourceforge.net", "8bit"
 	},
