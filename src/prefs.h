@@ -31,7 +31,7 @@ GtkWidget *additional_comments;
 /**
 * Three lists for the combo-boxes ..
 **/
-GList *languages_list,*encodings_list,*lcodes_list,*group_emails_list;
+GList *languages_list,*encodings_list,*lcodes_list,*group_emails_list,*bits_list;
 
 /**
 * The *-buttons used in the preferences box

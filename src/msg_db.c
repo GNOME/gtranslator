@@ -184,6 +184,5 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		* Go to the beginning of the file
 		**/
 		fseek(db_stream,0L,SEEK_SET);
-		/* .... BORGS_DONT_SLEEP .... */
 	}
 }

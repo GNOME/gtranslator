@@ -136,7 +136,7 @@ void prefs_box()
 		lcodes_list=g_list_append(lcodes_list,(gpointer)languages[c].lcode);
 		encodings_list=g_list_append(encodings_list,(gpointer)languages[c].enc);
 		group_emails_list=g_list_append(group_emails_list,(gpointer)languages[c].group);
-		
+		bits_list=g_list_append(bits_list,(gpointer)languages[c].bits);
 		c++;
 	}
 	/**
@@ -153,6 +153,9 @@ void prefs_box()
 	/****************************************************************/
 	gtk_combo_set_popdown_strings(GTK_COMBO(lg_email),group_emails_list);
 	gtk_combo_set_use_arrows(GTK_COMBO(lg_email),10);
+	/****************************************************************/
+	gtk_combo_set_popdown_strings(GTK_COMBO(encoding),bits_list);
+	gtk_combo_set_use_arrows(GTK_COMBO(encoding),10);
 	/**
 	* Add the items to the tables
 	**/
@@ -291,6 +294,7 @@ void prefs_box_changed(GtkWidget *widget,gpointer chitem)
 					gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(lg_email)->entry),languages[c].group);	
 					gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(lcode)->entry),languages[c].lcode);
 					gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(mime_type)->entry),languages[c].enc);	
+					gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(encoding)->entry),languages[c].bits);
 				}
 				c++;
 			}
@@ -304,6 +308,7 @@ void prefs_box_changed(GtkWidget *widget,gpointer chitem)
 				{
 				 	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(lg_email)->entry),languages[c].group);
 					gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(mime_type)->entry),languages[c].enc);
+					gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(encoding)->entry),languages[c].bits);
 				}
 				c++;
 			}

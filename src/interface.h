@@ -30,8 +30,12 @@ GtkWidget* search_button,* search_again_button,* goto_button,* goto_line_button;
 /**
 * Necessary for the geometry handling :
 **/
-
 gchar *gtranslator_geometry;
+
+/**
+* For the status messages
+**/
+gchar status[128];
 
 /**
 * Calls the main help for gtranslator

@@ -52,9 +52,9 @@ void open_file_create()
 	of_dlg=gtk_file_selection_new(_("gtranslator -- open a po-file"));
 	of_dlg_ok=GTK_FILE_SELECTION(of_dlg)->ok_button;
 	of_dlg_cancel=GTK_FILE_SELECTION(of_dlg)->cancel_button;
-	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(of_dlg));
+	gtk_file_selection_show_fileop_buttons(GTK_FILE_SELECTION(of_dlg));
 	gtk_signal_connect(GTK_OBJECT(of_dlg_ok),"clicked",
-		GTK_SIGNAL_FUNC(parse_the_file),(gpointer)gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg)));
+		GTK_SIGNAL_FUNC(parse_the_file),NULL);
 	gtk_signal_connect(GTK_OBJECT(of_dlg_cancel),"clicked",
 		GTK_SIGNAL_FUNC(open_file_hide),NULL);
 }

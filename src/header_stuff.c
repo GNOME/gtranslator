@@ -3,67 +3,28 @@
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
-* Here are the header-cutting&-edging-routines
-* of gtranslator .
+* Completely reorganized header-functions 
+*
+* -- source
 **/
 
 #include "header_stuff.h"
 
-/**
-* A count variable
+/**     
+* To test if the 
+*       msgid "" 
+*       msgstr ""
+*  introduction part has been already passed
+*
 **/
+gboolean nh=FALSE;
 
-int _count=0;
-
-/**
-* Try to catch the header
-**/
-
-void cut_the_header_off_it(FILE *mfs,const gchar *cutties)
+void get_header(gpointer a)
 {
-	/**
-	* Go to the start
-	**/
-	fseek(mfs,0L,SEEK_SET);
-	/**
-	* Some stupid search for the end of the header
-	**/
-	while((fgets(tmp,256,mfs) != NULL) && (are_we_at_the_end((gchar *)tmp,cutties) == 1))
+	if((!g_strncasecmp(a,"msgid \"",7)) && (nh==FALSE))
 	{
-		_count++;
+		head=g_list_append(head,(gpointer)a);
+		g_print("-> %s",(gchar *)a);
+		nh=TRUE;	
 	}
-	/**
-	* Have we got any header ?
-	**/
-	if(_count > 1)
-	{
-		int i;
-		/**
-		* Then copy the lines into ´header´
-		**/
-		for(i=0;i<=_count;++i)
-		{
-			fgets(tmp,256,mfs);
-			strcpy(&header[128][i],tmp);
-		}	
-	}
-}
-
-int are_we_at_the_end(gchar *test,const gchar *ends)
-{
-	/**
-	* Are we at the keylines-end :
-	* "Content-Transfer .... \n"
-	**/
-	if(!strncasecmp(test,ends,strlen(ends)))
-	{
-		/**
-		* Then return 0
-		**/
-		return 0;
-	}	
-	/**
-	* Or 1 if not ...
-	**/
-	return 1;
 }

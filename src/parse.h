@@ -46,14 +46,14 @@ gboolean file_opened;
 gboolean file_changed;
 
 /**
-* For a simple check if we're at the first string 
+* If we're at the last/first entries ...
 **/
-gboolean at_the_first;
+gboolean first_entry,last_entry;
 
 /**
-* ... and if we're at the last string ....
+* Center of interest are these lists -- at least for me
 **/
-gboolean at_the_last;
+GList *msgids,*msgstrs,*head,*temp;
 
 /**
 * A simple file check .
@@ -61,22 +61,36 @@ gboolean at_the_last;
 void check_file(FILE *);
 
 /**
-* The previous parsing routine
-* ; will be removed soon 
-**/
-void parse(char *);
-
-/**
 * The new method
 **/
 void parse_the_file(GtkWidget *widget,gpointer filename);
 
 /**
-* Get next msgid 
+* General functions are following -- these do operate on the
+*  global lists where they get the first/last/next/previous
+*   msgid & mggstr's ...
 **/
-int get_next_msgid(FILE *,char *);
 
 /**
-* Get next msgstr
+* Get first msgid, msgstr
 **/
-int get_next_msgstr(FILE *,char *);
+gchar *get_first_msgid();
+gchar *get_first_msgstr();
+
+/**
+* Get previous msgid, msgstr 
+**/
+gchar *get_prev_msgid();
+gchar *get_prev_msgstr();
+
+/**
+* Get next msgid, msgstr
+**/
+gchar *get_next_msgid();
+gchar *get_next_msgstr();
+
+/**
+* Get last msgid, msgstr
+**/
+gchar *get_last_msgid();
+gchar *get_last_msgstr();

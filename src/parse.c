@@ -13,11 +13,11 @@
 #include <errno.h>
 #include <unistd.h>
 #include "gtr_dialogs.h"
+#include "header_stuff.h"
 
 /**
-* The file-stream for the file-check
+* The file-stream for the file-check & the message parsing
 **/
-
 FILE *fs;
 
 /**
@@ -41,16 +41,13 @@ void check_file(FILE *stream)
 **/
 void parse_the_file(GtkWidget *widget,gpointer filename)
 {
-	/**
-	* A stat-structure ...
-	**/
-	struct stat file_info;
+	gchar *po_file;
+	guint lines=1;
 	/**
 	* Some variables ..
 	**/
-	gint file_size;
+	po_file=gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
 	gtk_widget_hide(of_dlg);
-	po_file=(gchar *)filename;
 	/**
 	* If there's no selection ( is this possible within a Gtk+ fileselection ? )
 	**/
@@ -59,91 +56,40 @@ void parse_the_file(GtkWidget *widget,gpointer filename)
 		g_error(_("There's no file to open or I couldn't understand `%s'!"),po_file);
 	}	
 	/**
-	* Stat the files
+	* Set up a status message
 	**/
-	if(stat(po_file,&file_info))
-	{
-		g_error(_("Couldn't stat the file `%s'!"),po_file);
-	}
-	file_size=file_info.st_size;
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),po_file);
-}
-
-/**
-* This have to be renamed and used in the
-*  msg_*-getting routines ...
-**/
-void parse(char *filename)
-{
-	gchar tmp_l[256];
-	#ifdef IT_WORKS	
-	struct gtr_msg *msg;	
-
-	/** 
-	* Open the file got by the open-dialog
-	**/
-	fs=fopen(filename,"r+");
+	sprintf(status,_("Current file : \"%s\"."),po_file);
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	/**
-	* Check if the stream is OK
+	* Open the parse fstream
 	**/
-	check_file(fs);
-	msg->po->opened=TRUE;
-	msg->po->po_filename=(char *)filename;
-	g_print (_("Got filename  %s\n"),(char *)filename);
-	count=0;
-	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
+	fs=fopen(po_file,"r+");
+	/**
+	* Allocate the lists
+	**/
+	temp=g_list_alloc();
+	head=g_list_alloc();
+	/**
+	* Parse the file, misusing the status gchar ...
+	**/
+	status[0]='\0';
+	while(
+	fgets(status,sizeof(status),fs) != NULL
+	)
 	{
-		count++;
-		/**
-		* Are we at a msgid ?
-		**/
-		if(strncasecmp("msgid \"",tmp_l,7))
-		{
-			/**
-			* Copy the current string to a message 
-			**/
-			msg->msgid=(char *)tmp_l;
-			/**
-			* Define the position
-			**/
-			msg->position=count;
-			/**
-			* Check if the next line 
-			* is a msgstr 
-			**/
-			fgets(tmp_l,sizeof(tmp_l),fs);
-			/**
-			* While there's no msgstr ...
-			* add it to the msgid ...
-			**/
-			while(!strncasecmp("msgstr \"",tmp_l,8))
-			{
-				/**
-				* Add it , add it , ... 
-				**/
-				fgets(tmp_l,sizeof(tmp_l),fs);
-				strncat(msg->msgid,tmp_l,sizeof(tmp_l));
-			}
-		} else {
-			/**
-			* Now we're hopefully at a msgstr
-			**/
-			msg->msgstr=(char *)tmp_l;
-			while(!strncasecmp("msgid \"",tmp_l,7))
-			{
-				/**
-				* Add it , add it , ... 
-				**/
-				fgets(tmp_l,sizeof(tmp_l),fs);
-				strncat(msg->msgstr,tmp_l,sizeof(tmp_l));
-			}
-		}
-		
+		temp=g_list_append(temp,(gpointer)status);
 	}
 	/**
-	* Now we know where the maximum length has to be
+	* The list length ( aka lines count )
 	**/
-	msg->po->file_length=(count - 1);
-	max_count=((count - 10 ) / 3);
-	#endif // IT_WORKS
+	lines=g_list_length(temp);
+	/**
+	* Show an updated status
+	**/
+	sprintf(status,_("Finished reading \"%s\", %i lines."),po_file,lines);
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
+	for(count=1;count<lines;count++)
+	{
+		get_header((gpointer)g_list_nth_data(temp,count));
+	}
 }
