@@ -68,7 +68,7 @@ int init_msg_db()
  		* 2) Parse the msg_db and add every entry to the
 		*     the linked lists 
 		**/
-		msg_list=g_list_append(cur_list,(gpointer)msg_messages);
+		msg_list=g_list_append(msg_list,(gpointer)msg_messages);
 	}
 	/**
 	* 3) Check if we had lost the list 
