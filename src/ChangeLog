@@ -1,3 +1,28 @@
+2001-07-17  Fatih Demir <kabalak@gtranslator.org>
+
+	* comment.c: Activate the "Edit comment" button if we've for a 
+		translator comment or a source comment (any other cases should
+		 not be editable).
+
+	* comment.c, gui.c & parse.c: Removed all the EEntry stuff, use
+		GtkLabel calls everywhere -- changed includes a bit to be
+		 right after the EEntry -> GtkLabel move for the comment area.
+
+	* gui.c/.h: Changed the comment show area to be a GtkLabel, added
+		"Edit comment" button which will allow editing of a translator
+		  comment later on; use a new GtrExtraContentArea structure
+		   to get all the widgets into the pane area. Create/free the
+		    structure/area widgets.
+
+	* comment.c/.h: Removed the "gtranslator_comment_is_visible" function
+		and integrated the funcs into the "gtranslator_comment_display"
+		 function; added a "pure_utf8_comment" part to the GtrComment
+		  structure and adapted the function respect this new portion
+		   in the GtrComment structure. Also corrected the prefix 
+		    snipping to work and use "nautilus_str_replace_substring"
+		     instead of "nautilus_str_get_after_prefix" -- now the
+		      prefix'es get cut.
+
 2001-07-16 Kevin Vandersloot <kfv101@psu.edu>
 
         * message-table.h: add enum for the e-table columns

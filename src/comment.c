@@ -23,7 +23,7 @@
 #include "parse.h"
 #include "utf8.h"
 
-#include <gal/e-text/e-entry.h>
+#include <gtk/gtklabel.h>
 
 /*
  * Creates and returns a new GtrComment -- the comment type is automatically
@@ -50,22 +50,22 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 		if(nautilus_istr_has_prefix(comment->comment, "#~"))
 		{
 			comment->type=OBSOLETE;
-			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#~");
+			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#~", "");
 		}
 		else if(nautilus_istr_has_prefix(comment->comment, "#:"))
 		{
 			comment->type=REFERENCE_COMMENT;
-			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#:");
+			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#:", "");
 		}
 		else if(nautilus_istr_has_prefix(comment->comment, "#."))
 		{
 			comment->type=SOURCE_COMMENT;
-			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#.");
+			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#.", "");
 		}
 		else if(nautilus_istr_has_prefix(comment->comment, "# "))
 		{
 			comment->type=TRANSLATOR_COMMENT;
-			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "# ");
+			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "# ", "");
 		}
 		else if(nautilus_istr_has_prefix(comment->comment, "#,"))
 		{
@@ -75,41 +75,50 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 			if(nautilus_istr_has_prefix(comment->comment, "#, c-format"))
 			{
 				comment->type=C_FORMAT_COMMENT;
-				comment->pure_comment=nautilus_str_get_after_prefix(
-					comment->comment, "#, c-format");
+				comment->pure_comment=nautilus_str_replace_substring(
+					comment->comment, "#, c-format", "");
 			}
 			else if(nautilus_istr_has_prefix(comment->comment, "#, fuzzy, c-format"))
 			{
 				comment->type=FUZZY_C_FORMAT_COMMENT;
-				comment->pure_comment=nautilus_str_get_after_prefix(
-					comment->comment, "#, fuzzy, c-format");
+				comment->pure_comment=nautilus_str_replace_substring(
+					comment->comment, "#, fuzzy, c-format", "");
 			}
 			else if(nautilus_istr_has_prefix(comment->comment, "#, fuzzy"))
 			{
 				comment->type=FUZZY_COMMENT;
-				comment->pure_comment=nautilus_str_get_after_prefix(
-					comment->comment,  "#, fuzzy");
+				comment->pure_comment=nautilus_str_replace_substring(
+					comment->comment,  "#, fuzzy", "");
 			}
 			else
 			{
 				comment->type=FLAG_COMMENT;
-				comment->pure_comment=nautilus_str_get_after_prefix(
-					comment->comment, "#,");
+				comment->pure_comment=nautilus_str_replace_substring(
+					comment->comment, "#,", "");
 			}
 		}
 		else if(nautilus_istr_has_prefix(comment->comment, "#-"))
 		{
 			comment->type=INTERNAL_COMMENT;
-			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#-");
+			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#-", "");
 		}
 		else
 		{
 			comment->type=NO_COMMENT;
-			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#");
+			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#", "");
 		}
 	}
 
-	comment->utf8_comment=gtranslator_utf8_get_utf8_string(&comment->pure_comment);
+	/*
+	 * Remove any lungering space on the beginning/end of the pure_comment of the GtrComment.
+	 */
+	comment->pure_comment=g_strstrip(GTR_COMMENT(comment)->pure_comment);
+	
+	/*
+	 * Set up the UTF-8 representations for the GtrComment parts.
+	 */
+	comment->utf8_comment=gtranslator_utf8_get_utf8_string(&comment->comment);
+	comment->pure_utf8_comment=gtranslator_utf8_get_utf8_string(&comment->pure_comment);
 	
 	return comment;
 }
@@ -182,6 +191,15 @@ GtrComment *gtranslator_comment_copy(GtrComment **comment)
 		copy->utf8_comment=NULL;
 	}
 
+	if(GTR_COMMENT(*comment)->pure_utf8_comment)
+	{
+		copy->pure_utf8_comment=g_strdup(GTR_COMMENT(*comment)->pure_utf8_comment);
+	}
+	else
+	{
+		 copy->pure_utf8_comment=NULL;
+	}
+
 	copy->type=GTR_COMMENT(*comment)->type;	
 
 	return copy;
@@ -197,6 +215,9 @@ void gtranslator_comment_free(GtrComment **comment)
 		g_free(GTR_COMMENT(*comment)->comment);
 		g_free(GTR_COMMENT(*comment)->pure_comment);
 		g_free(GTR_COMMENT(*comment)->utf8_comment);
+		g_free(GTR_COMMENT(*comment)->pure_utf8_comment);
+		
+		g_free(*comment);
 	}
 }
 
@@ -223,30 +244,12 @@ gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_str
 	{
 		return TRUE;
 	}
-	else if(strstr(comment->utf8_comment, search_string))
+	else if(strstr(comment->pure_utf8_comment, search_string))
 	{
 		return TRUE;
 	}
 
 	return FALSE;
-}
-
-/*
- * Determine if the comment type is a "visible" one.
- */
-gboolean gtranslator_comment_is_visible(GtrComment *comment)
-{
-	g_return_val_if_fail(comment!=NULL, FALSE);
-
-	if(comment->type==REFERENCE_COMMENT || comment->type==SOURCE_COMMENT ||
-		comment->type==TRANSLATOR_COMMENT)
-	{
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
-	}
 }
 
 /*
@@ -257,6 +260,20 @@ void gtranslator_comment_display(GtrComment *comment)
 	g_return_if_fail(file_opened==TRUE);
 	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
 
-	e_entry_set_text(E_ENTRY(extra_content_view), comment->pure_comment);
-	e_entry_set_editable(E_ENTRY(extra_content_view), FALSE);
+	switch(GTR_COMMENT(comment)->type)
+	{
+		case TRANSLATOR_COMMENT:
+		case SOURCE_COMMENT:
+			gtk_widget_set_sensitive(extra_content_view->edit_button, TRUE);
+		
+		case INTERNAL_COMMENT:
+			gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
+				comment->pure_comment);
+					break;
+
+		default:
+			gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
+				_("Invisible comment"));
+					break;
+	}
 }

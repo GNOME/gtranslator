@@ -35,7 +35,20 @@ extern GtkWidget *text_box;
 extern GtkWidget *gtranslator_application_bar;
 extern GtkWidget *sidebar_pane;
 extern GtkWidget *content_pane;
-extern GtkWidget *extra_content_view;
+
+/*
+ * This is the "extra" content structure for the comment area 
+ *  and the corresponding variable .-)
+ */
+typedef struct
+{
+	GtkWidget	*box;
+
+	GtkWidget	*comment;
+	GtkWidget	*edit_button;
+} GtrExtraContentArea;
+
+extern GtrExtraContentArea *extra_content_view;
 
 /*
  * Creates the main window ans sets up the environment.

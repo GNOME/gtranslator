@@ -42,6 +42,7 @@
 #include "utils.h"
 #include "utils_gui.h"
 
+#include <gtk/gtklabel.h>
 #include <gtk/gtkfilesel.h>
 
 #include <libgnomeui/gnome-appbar.h>
@@ -52,8 +53,6 @@
 #include <libgnomeui/gnome-uidefs.h>
 
 #include <libgnome/gnome-util.h>
-
-#include <gal/e-text/e-entry.h>
 
 /* Global variables */
 GtrPo *po;
@@ -782,7 +781,8 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	}
 	
 	gtranslator_text_boxes_clean();
-	e_entry_set_text(E_ENTRY(extra_content_view), "");
+	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");
+	gtk_widget_set_sensitive(GTK_WIDGET(extra_content_view->edit_button), FALSE);
 	gtranslator_actions_set_up_state_no_file();
 
 	/*

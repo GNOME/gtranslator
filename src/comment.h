@@ -45,13 +45,16 @@ typedef enum
 typedef struct
 {
 	gchar		*comment;
-	gchar		*pure_comment;
 	gchar		*utf8_comment;
+
+	gchar		*pure_comment;
+	gchar		*pure_utf8_comment;
 	
 	GtrCommentType	type;
 } GtrComment;
 
 #define GTR_COMMENT(x) ((GtrComment *) x)
+#define GTR_COMMENT_TYPE(x) (GTR_COMMENT(x)->type)
 
 /*
  * Creates and returns a new GtrComment -- the comment type is automatically
@@ -84,11 +87,6 @@ GtrComment *gtranslator_comment_copy(GtrComment **comment);
  * Free the GtrComment.
  */
 void gtranslator_comment_free(GtrComment **comment); 
-
-/*
- * Return whether the given message's comment is a "visible" one.
- */
-gboolean gtranslator_comment_is_visible(GtrComment *comment);
 
 /*
  * Display the current comment in it's full beautifulness .-)

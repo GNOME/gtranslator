@@ -51,6 +51,7 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <gtk/gtkdnd.h>
+#include <gtk/gtklabel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtktogglebutton.h>
@@ -68,8 +69,6 @@
 #include <gal/e-table/e-table.h>
 #include <gal/e-table/e-table-scrolled.h>
 
-#include <gal/e-text/e-entry.h>
-
 /*
  * Global external variables
  */
@@ -79,7 +78,11 @@ GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
 GtkWidget *sidebar_pane;
 GtkWidget *content_pane;
-GtkWidget *extra_content_view;
+
+/*
+ * The comment/extra content area in the main window.
+ */
+GtrExtraContentArea *extra_content_view;
 
 /*
  * Internally used local-global variables
@@ -225,9 +228,18 @@ void gtranslator_create_main_window(void)
 		"interface/content_pane_position");
 	gtranslator_config_close();
 
-	extra_content_view=e_entry_new();
-	e_entry_set_editable(E_ENTRY(extra_content_view), FALSE);
+	extra_content_view=g_new0(GtrExtraContentArea, 1);
+	
+	extra_content_view->box=gtk_hbox_new(FALSE, 1);
+	extra_content_view->comment=gtk_label_new("");
+	extra_content_view->edit_button=gtk_button_new_with_label(_("Edit comment"));
 
+	gtk_box_pack_start(GTK_BOX(extra_content_view->box), extra_content_view->comment, 
+		FALSE, FALSE, 0);
+	gtk_box_pack_end(GTK_BOX(extra_content_view->box), extra_content_view->edit_button, 
+		FALSE, FALSE, 0);
+	
+	gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
 	e_paned_set_position(E_PANED(content_pane), content_pane_position);
 
 	/*
@@ -250,7 +262,7 @@ void gtranslator_create_main_window(void)
 
 	vertical_box=gtk_vbox_new(FALSE, 0);
 	
-	e_paned_pack1(E_PANED(content_pane), extra_content_view, TRUE, FALSE);
+	e_paned_pack1(E_PANED(content_pane), extra_content_view->box, TRUE, FALSE);
 	e_paned_pack2(E_PANED(content_pane), vertical_box, TRUE, FALSE);
 	
 	e_paned_pack2(E_PANED(sidebar_pane), content_pane, TRUE, FALSE);
@@ -407,6 +419,11 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 */
 	gtranslator_config_set_last_run_date();
 	gtranslator_config_close();
+
+	/*
+	 * Free our used content area variable on exit .-)
+	 */
+	g_free(extra_content_view);
 
 	/*
 	 * Shutdown the eventually (non-)initialized stuff from GnomeVFS.
