@@ -32,6 +32,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-about.h>
 #include <libgnomeui/gnome-href.h>
+#include <string.h>
 
 /*
  * Creates and shows the about box for gtranslator.
@@ -42,6 +43,7 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	GtkWidget *hbox;
 	GtkWidget *scheme, *author;
 	gchar *umfo, *url;
+	gchar *bottom_line;
 	
 	const gchar *authors[] = {
 		"Fatih Demir <kabalak@gtranslator.org>",
@@ -58,14 +60,37 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	
 	gtranslator_raise_dialog(about);
 
+
+	/* Translators should localize the following string
+ 	 * which will be displayed at the bottom of the about
+	 * box to give credit to the translator(s).
+	 * Translate the "Translation:", add your name and an
+	 * email address. You can span several lines with a
+	 * newline character if needed, but it shouldn't be
+	 * too long; vertical space is limited in the about
+	 * dialog. 
+	 * If you dont translate it nothing will be added 
+	 */
+	if (strcmp (_("Translation:"), "Translation:") == 0) {
+		bottom_line = g_strdup 
+			("gtranslator is a po file editing suite with many bells and whistles.");
+	} else {
+		bottom_line = g_strconcat (
+			_("gtranslator is a po file editing suite with many bells and whistles."),
+			"\n \n",
+			_("Translation:"), NULL);
+	}
+
 	/*
 	 * Create the about box via gnome_about_new.
 	 */ 
 	about =
 	    gnome_about_new("gtranslator", VERSION,
 		_("(C) 1999-2001 The Free Software Foundation"), authors,
-		_("gtranslator is a po file editing suite with many bells and whistles."),
+		bottom_line,
 		NULL);
+
+	g_free(bottom_line);
 	
 	hbox=gtk_hbox_new(TRUE, 0);
 	
