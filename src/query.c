@@ -295,6 +295,9 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
  */
 void gtranslator_query_translate(gboolean use_learn_buffer, gboolean gui)
 {
+	g_return_if_fail(po!=NULL);
+	g_return_if_fail(po->messages!=NULL);
+	
 	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, 
 		GINT_TO_POINTER(use_learn_buffer));
 
