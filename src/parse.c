@@ -28,7 +28,7 @@ static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
 static void free_po(void);
 static void free_a_message(gpointer data, gpointer useless);
-void determine_translation_status(gpointer data, gpointer useless_stuff);
+static void determine_translation_status(gpointer data, gpointer useless_stuff);
 
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
@@ -40,6 +40,7 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		return;
 	if (fuzzy) {
 		msg->status |= GTR_MSG_STATUS_FUZZY;
+		po->fuzzy++;
 		rex = gnome_regex_cache_compile(rxc,
 			  "^(#), c-format", 
 			  REG_EXTENDED | REG_NEWLINE);
@@ -53,6 +54,7 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		g_free(comment);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
+		po->fuzzy--;
 		rex = gnome_regex_cache_compile(rxc, 
 			  "(^#, fuzzy$)|^#, (fuzzy,) c-format",
 			  REG_EXTENDED | REG_NEWLINE);
@@ -304,7 +306,7 @@ void parse(const char *filename)
 	/**
 	* Is there any fuzzy message ?
 	**/
-	if(po->fuzzy>1)
+	if(po->fuzzy>0)
 	{
 		/**
 		* Then enable the Fuzzy buttons/entries in the menus
@@ -314,8 +316,7 @@ void parse(const char *filename)
 	/**
 	* Is there any untranslated message ?
 	**/
-	if((g_list_length(po->messages)-
-		(po->translated+po->fuzzy))>1)
+	if((po->length - po->translated) > 0)
 	{
 		/**
 		* Then enable the Untranslated buttons/entries in the menus
@@ -683,7 +684,7 @@ void gtranslator_display_recent(void)
 	* Couldn't we do that better with bonobo 0.20 ?
 	**/
 	gchar *name;
-	gchar *menupath;
+	gchar *menupath = g_strdup (_("_File/Recen_t files/"));
 	gint len;
 	GnomeUIInfo *menu;
 	GnomeHistoryEntry recent;
@@ -710,18 +711,13 @@ void gtranslator_display_recent(void)
 	/**
 	* Delete the old entries.
 	**/
-	gnome_app_remove_menus(GNOME_APP(app1), _("_File/Recen_t files/"), wants.recent_files);
+	gnome_app_remove_menus(GNOME_APP(app1), menupath, 1);
 
 	/**
 	* Create a new GnomeUIInfo widget.
 	**/
 	menu=g_new0(GnomeUIInfo,2);
-	
-	/**
-	* Get the menupath etc.
-	**/
-	menupath=g_new(gchar, strlen(_("_File/Recen_t files/")) + 2 );
-	sprintf(menupath, "%s", _("_File/Recen_t files/"));
+
 	/**
 	* Insert the end point of the menus.
 	**/
@@ -730,7 +726,7 @@ void gtranslator_display_recent(void)
 	* Insert this menu into the menupath.
 	**/
 	gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-
+	
 	/**
 	* Parse the list, but maximal as many entries as wished
 	*  in the preferences.
@@ -746,7 +742,7 @@ void gtranslator_display_recent(void)
 		/**
 		* Copy the filename.
 		**/
-		name=g_strdup((gchar *) (recent->filename));
+		name=g_strdup(recent->filename);
 		/**
 		* If the filename should be checked for existence.
 		**/
@@ -924,9 +920,9 @@ void update(GtkWidget *widget, gpointer useless)
 * A helper function simply increments the "translated" variable of the
 *  po-file.
 **/
-void determine_translation_status(gpointer data, gpointer useless_stuff)
+static void determine_translation_status(gpointer data, gpointer useless_stuff)
 {
-	GtrMsg *message;
+	static GtrMsg *message;
 	/**
 	* Get the message.
 	**/
@@ -958,11 +954,9 @@ void determine_translation_status(gpointer data, gpointer useless_stuff)
 **/
 void get_translated_count(void)
 {
+	po->translated = 0;
+	po->fuzzy = 0;
 	g_list_foreach(po->messages, (GFunc) determine_translation_status, NULL);
-	/**
-	* Determine what's 1 % of the messages count.
-	**/
-	onepercent=(gfloat )(g_list_length(po->messages)*0.01000);
 	/**
 	* Update the progress bar.
 	**/
@@ -974,7 +968,7 @@ void gtranslator_set_progress_bar(void)
 	/**
 	* Get the total percentage.
 	**/
-	percentage=(gfloat) ((((gfloat )po->translated/(gfloat) onepercent))*0.01000);
+	percentage = 1.0 * po->translated / po->length;
 	/**
 	* Set the progressbar status.
 	**/

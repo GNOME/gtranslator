@@ -63,7 +63,6 @@ gboolean message_changed;
 /**
 * The variables which store the count-stuff.
 **/
-gfloat onepercent;
 gfloat percentage;
 
 /* Changes message fuzzy status */

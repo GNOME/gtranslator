@@ -25,11 +25,11 @@
 /**
 * The general macros for the database fields.
 **/
-#define GTR_DB(x) ((GtranslatorDatabase) x)
+#define GTR_DB(x) ((GtranslatorDatabase *) x)
 #define GTR_DB_LIST(x) ((GList *) (GTR_DB(x)->messages))
 #define GTR_DB_LIST_ITERATE(x) ((GList *) (GTR_DB_LIST(x)=GTR_DB_LIST(x)->next))
 #define GTR_DB_LIST_MSG(x)  ((GtrMsg *) (GTR_DB_LIST(x)->data))
-#define GTR_DB_HEADER(x) ((GtranslatorDatabaseHeader) (GTR_DB(x)->header))
+#define GTR_DB_HEADER(x) ((GtranslatorDatabaseHeader *) (GTR_DB(x)->header))
 #define GTR_DB_FILENAME(x) ((gchar *) (GTR_DB(x)->filename))
 /**
 * The header part-concerning macros.
@@ -61,7 +61,7 @@ typedef struct {
 	* The serial number.
 	**/
 	gint	serial;
-} *GtranslatorDatabaseHeader;
+} GtranslatorDatabaseHeader;
 
 /**
 * The main structure for a message database.
@@ -70,7 +70,7 @@ typedef struct {
 	/**
 	* The header
 	**/
-	GtranslatorDatabaseHeader	header;
+	GtranslatorDatabaseHeader	*header;
 	/**
 	* The list of messages consisting of GtrMsg's.
 	**/
@@ -79,6 +79,6 @@ typedef struct {
 	* The "real" filename of the database.
 	**/
 	gchar				*filename;
-} *GtranslatorDatabase;
+} GtranslatorDatabase;
 
 #endif

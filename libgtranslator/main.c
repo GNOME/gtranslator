@@ -107,7 +107,7 @@ int main(int argc,char *argv[])
 			/**
 			* Parse the requested language database.
 			**/
-			GtranslatorDatabase db;
+			GtranslatorDatabase *db;
 			db=parse_db_for_lang(lang);
 		}
 		/**

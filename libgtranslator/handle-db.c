@@ -19,7 +19,7 @@
 /**
 * This function saves the given database.
 **/
-void gtranslator_save_db(GtranslatorDatabase database)
+void gtranslator_save_db(GtranslatorDatabase *database)
 {
 	/**
 	* The used filestream, the date holding gchar

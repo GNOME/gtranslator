@@ -1,3 +1,16 @@
+2000-10-30 Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gui.c: moved Update menu item just after Compile. Enable Status/Fuzzy
+		menu entry after Open. Focus translation box during startup.
+		Fixed some initialization of variables.
+	* gui.c, parse.c: fixed various places where messages were counted.
+		Removed extra update_appbar calls. Use po->length instead of
+		g_list_length(po->messages).
+	* parse.c: made	determine_translation_status static.  Create menupath
+		only once in gtranslator_display_recent. Initialize counts to 0
+		in get_translated_count. Simplified percentage count, now shows
+		correctly. Removed onepercent variable.
+
 2000-10-29  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Change the corresponding calls to the gtranslator_set_style

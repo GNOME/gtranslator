@@ -56,6 +56,6 @@
 * Loads the message database for the specified language
 *  and returns the loaded database.
 **/
-GtranslatorDatabase parse_db_for_lang(gchar *language_code);
+GtranslatorDatabase * parse_db_for_lang(gchar *language_code);
 
 #endif

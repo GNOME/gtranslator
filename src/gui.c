@@ -82,20 +82,19 @@ static GnomeUIInfo the_file_menu[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
 	 GDK_C, GDK_MOD1_MASK, NULL
 	},
+	{
+	 GNOME_APP_UI_ITEM, N_("_Update"),
+	 N_("Update the po-file"),
+	 update, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
+	 GDK_F5, 0, NULL
+	},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
 	GNOMEUIINFO_MENU_SAVE_ITEM(save_current_file, NULL),
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
 	GNOMEUIINFO_MENU_REVERT_ITEM(revert_file, NULL),
 	GNOMEUIINFO_MENU_CLOSE_ITEM(close_file, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("Update po-file"),
-	 N_("Update the po-file"),
-	 update, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
-	 GDK_F5, 0, NULL
-	},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE( N_("Recen_t files"), the_last_files_menus),
 	GNOMEUIINFO_SEPARATOR,
@@ -379,11 +378,11 @@ static void create_actions(void)
 {
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[0]);
-	insert_action(ACT_SAVE, the_file_menu[3], the_toolbar[3]);
-	insert_action(ACT_SAVE_AS, the_file_menu[4], the_toolbar[4]);
-	insert_action(ACT_REVERT, the_file_menu[5], NONE);
-	insert_action(ACT_CLOSE, the_file_menu[6], NONE);
-	insert_action(ACT_UPDATE, the_file_menu[8], the_toolbar[2]);
+	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[2]);
+	insert_action(ACT_SAVE, the_file_menu[4], the_toolbar[3]);
+	insert_action(ACT_SAVE_AS, the_file_menu[5], the_toolbar[4]);
+	insert_action(ACT_REVERT, the_file_menu[6], NONE);
+	insert_action(ACT_CLOSE, the_file_menu[7], NONE);
 	/*------------------------------------------------ */
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
@@ -425,7 +424,7 @@ void enable_actions_just_opened(void)
 {
 	enable_actions(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_CUT, ACT_COPY,
 		       ACT_PASTE, ACT_CLEAR, ACT_FIND, ACT_HEADER, ACT_NEXT,
-		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED,
+		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED, ACT_FUZZY,
 		       ACT_STICK);
 	/**
 	* If we'd have the option to use the update function set, enable the
@@ -439,6 +438,10 @@ void enable_actions_just_opened(void)
 	* Enable the editing of the msgstrs :-)
 	**/
 	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
+	/*
+	* Make it focused initially
+	**/
+	gtk_window_set_focus(GTK_WINDOW(app1), trans_box);
 }
 
 /*
@@ -666,10 +669,14 @@ void update_msg(void)
 		}
 		msg->msgstr = gtk_editable_get_chars(GTK_EDITABLE(trans_box),
 						     0, len);
-		msg->status |= GTR_MSG_STATUS_TRANSLATED;
+		if (!(msg->status & GTR_MSG_STATUS_TRANSLATED)) {
+			msg->status |= GTR_MSG_STATUS_TRANSLATED;
+			po->translated++;
+		}
 	} else {
 		msg->msgstr = NULL;
 		msg->status &= ~GTR_MSG_STATUS_TRANSLATED;
+		po->translated--;
 	}
 	message_changed = FALSE;
 	/**
@@ -685,28 +692,10 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 	if (nothing_changes)
 		return;
 	text_has_got_changed(NULL, NULL);
-	/* We've got only one case done -- fuzzy */
+	/* We've got only fuzzy done. FIXME: add stick here */
 	if (flag == GTR_MSG_STATUS_FUZZY) {
 		mark_msg_fuzzy(GTR_MSG(po->current->data),
 			       GTK_CHECK_MENU_ITEM(item)->active);
-		/**
-		* Test if the fuzzy item is acive.
-		**/	       
-		if(GTK_CHECK_MENU_ITEM(item)->active==TRUE)
-		{
-			/**
-			* And set the fuzzy count.
-			**/
-			po->fuzzy--;
-			/**
-			* And step up with the translated count.
-			**/
-			/*po->translated++;*/
-		}	       
-		/**
-		* Also update the status information in the statusbar.
-		**/	       
-		update_appbar(g_list_position(po->messages, po->current));
 	} else {
 		if (GTK_CHECK_MENU_ITEM(item)->active)
 		{
@@ -716,10 +705,6 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 		{
 			*stat &= ~flag;
 		}
-		/**
-		* Again the appbar update.
-		**/
-		update_appbar(g_list_position(po->messages, po->current));
 	}
 	update_msg();
 }
@@ -736,7 +721,7 @@ void clean_text_boxes()
 static void update_appbar(gint pos)
 {
 	gchar *str;
-	GtrMsg *msg=g_new0(GtrMsg,1);
+	GtrMsg *msg;
 	gnome_appbar_pop(GNOME_APPBAR(appbar1));
 	/**
 	* Assign the first part.
@@ -776,10 +761,10 @@ static void update_appbar(gint pos)
 		}
 		else
 		{
-			if(((g_list_length(po->messages))-po->translated)>1)
+			if ((po->length - po->translated)>1)
 			{
 				guint missya;
-				missya=((g_list_length(po->messages))-po->translated);
+				missya = po->length - po->translated;
 				str=g_strdup_printf(_("%s %s [ %i Untranslated left ]"), str, _("Untranslated"), missya);
 			}
 			else
@@ -909,22 +894,6 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 	if (!po->file_changed) {
 		po->file_changed = TRUE;
 		enable_actions(ACT_SAVE, ACT_REVERT, ACT_UNDO);
-		if((GTR_MSG(po->current->data)->status | GTR_MSG_STATUS_FUZZY)||
-			GTR_MSG(po->current->data)->status | GTR_MSG_STATUS_TRANSLATED)
-		{
-			/**
-			* Increment the translated count.
-			**/
-			po->translated++;
-			/**
-			* Set the translated flag.
-			**/
-			GTR_MSG(po->current->data)->status &= ~GTR_MSG_STATUS_TRANSLATED;
-			/**
-			* Update the appbar.
-			**/
-			update_appbar(g_list_position(po->messages, po->current));
-		}
 	}
 	if (!message_changed) {
 		GtrMsg *msg = GTR_MSG(po->current->data);
@@ -935,21 +904,8 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		     	mark_msg_fuzzy(msg, FALSE);
 			gtk_check_menu_item_set_active(
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
-			/**
-			* Decrement the fuzzy count.
-			**/
-			po->fuzzy--;
 		}
-		/**
-		* Also update the status information in the statusbar.
-		**/    
-		update_appbar(g_list_position(po->messages,
-			po->current));
 	}
-	/**
-	* And increment the translated count.
-	**/ 
-	po->translated++;
 	/**
 	* Do all these steps only if the option to use the '·' is set.
 	**/

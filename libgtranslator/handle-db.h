@@ -27,6 +27,6 @@
 /**
 * Saves the message database.
 **/
-void gtranslator_save_db(GtranslatorDatabase database);
+void gtranslator_save_db(GtranslatorDatabase *database);
 
 #endif

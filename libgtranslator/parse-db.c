@@ -21,14 +21,14 @@
 /**
 * Parses the lang.xml file into a GtranslatorDatabase.
 **/
-GtranslatorDatabase parse_db_for_lang(gchar *language)
+GtranslatorDatabase * parse_db_for_lang(gchar *language)
 {
 	gchar 			file[256];
 	gboolean 		lusp=FALSE;
 	xmlNodePtr 		node=NULL;
 	xmlDocPtr 		xmldoc;
-	GtranslatorDatabase 	db;
-	GList			*messages;
+	GtranslatorDatabase	*db = g_new(GtranslatorDatabase, 1);
+	GList			*messages = NULL;
 	/**
 	* Check if we did get a language to search for ..
 	**/
