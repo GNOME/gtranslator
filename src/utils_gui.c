@@ -52,7 +52,7 @@ GtkWidget * gtranslator_utils_error_dialog(gchar *format, ...)
  */
 void gtranslator_utils_show_home_page(GtkWidget *widget, gpointer useless)
 {
-	gnome_url_show("http://www.gtranslator.org", NULL);
+	gnome_url_show("http://gtranslator.sourceforge.net", NULL);
 }
 
 /*

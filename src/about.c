@@ -1,6 +1,6 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Roy-Magne Mo <rmo@sunnmore.net>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
@@ -42,12 +42,12 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	gchar *file;
 	
 	const gchar *authors[] = {
-		"Ross Golder <ross@gtranslator.org>",
-		"Fatih Demir <kabalak@gtranslator.org>",
+		"Ross Golder <ross@golder.org>",
+		"Fatih Demir <kabalak@kabalak.net>",
 		" -- ",
 		"Gediminas Paulauskas <menesis@delfi.lt>",
-		"Thomas Ziehmer <thomas@gtranslator.org>",
-		"Peeter Vois <peeter@gtranslator.org>",
+		"Thomas Ziehmer <thomas@kabalak.net>",
+		"Peeter Vois <peeter@kabalak.net>",
 		NULL
 	};	
 	static const char *documenters[] =
