@@ -38,95 +38,75 @@ static GList		*learn_buffer=NULL;
  */
 #define MAX_LEARN_ENTRIES 1024
 
+#define LEARN_FILE "learned-strings"
+
 /*
  * Initialize our internal learn buffers .-)
  */
 void gtransator_learn_init()
 {
-	gchar 	*learn_base_directory;
 	gchar	*learn_base_file;
 	
 	g_return_if_fail(init_status==FALSE);
 
-	/*
-	 * Build the standard "learned-strings" directory in the user's
-	 *  home directory.
-	 */
-	learn_base_directory=g_strdup_printf("%s/.gtranslator/", 
-		g_get_home_dir());
+	learn_base_file=g_strdup_printf("%s/.gtranslator/%s", g_get_home_dir(), 
+		LEARN_FILE);
 
-	if(!g_file_test(learn_base_directory, G_FILE_TEST_ISDIR))
+	/*
+	 * If a current "learned-strings" file is present, parse it
+	 *  and set up our "learn_buffer" list.
+	 */
+	if(g_file_test(learn_base_file, G_FILE_TEST_ISFILE))
 	{
+		gchar 	*content;
+		gchar 	**entries;
+		gint 	i=0;
+
 		/*
-		 * As e_mkdir_hier returns 0 on success, any other value must 
-		 *  be an error.
+		 * Read the file and split the fields (here: lines)
+		 *  per "g_strsplit"; there's a maximal limit to avoid
+		 *   parsing of too big "learned-strings" files.
 		 */
-		if(e_mkdir_hier(learn_base_directory, 0644))
+		content=e_read_file(learn_base_file);
+		entries=g_strsplit(content, "\n", MAX_LEARN_ENTRIES);
+
+		while(entries[i]!=NULL && i <= MAX_LEARN_ENTRIES)
 		{
-			return;
+			gchar *e=g_strstrip(entries[i]);
+			
+			/*
+			 * The '#' should mark a comment line, so
+			 *  we don't need to parse these lines.
+			 */
+			if(e[0]!='#')
+			{
+				learn_buffer=g_list_prepend(learn_buffer, 
+					g_strdup(e));
+			}
+				
+			i++;
+			g_free(e);
 		}
+
+		g_strfreev(entries);
+		g_free(content);
 	}
 	else
 	{
-		learn_base_file=g_strconcat(learn_base_directory, 
-			"learned-strings", NULL);
-
-		/*
-		 * If a current "learned-strings" file is present, parse it
-		 *  and set up our "learn_buffer" list.
-		 */
-		if(g_file_test(learn_base_file, G_FILE_TEST_ISFILE))
-		{
-			gchar 	*content;
-			gchar 	**entries;
-			gint 	i=0;
-
-			/*
-			 * Read the file and split the fields (here: lines)
-			 *  per "g_strsplit"; there's a maximal limit to avoid
-			 *   parsing of too big "learned-strings" files.
-			 */
-			content=e_read_file(learn_base_file);
-			entries=g_strsplit(content, "\n", MAX_LEARN_ENTRIES);
-
-			while(entries[i]!=NULL && i <= MAX_LEARN_ENTRIES)
-			{
-				gchar *e=g_strstrip(entries[i]);
-				
-				/*
-				 * The '#' should mark a comment line, so
-				 *  we don't need to parse these lines.
-				 */
-				if(e[0]!='#')
-				{
-					learn_buffer=g_list_prepend(
-						learn_buffer, g_strdup(e));
-				}
-				
-				i++;
-				g_free(e);
-			}
-
-			g_strfreev(entries);
-			g_free(content);
-		}
-		else
-		{
-			learn_buffer=NULL;
-		}
-
-		/*
-		 * Reverse and sort the entries list.
-		 */
-		if(learn_buffer)
-		{
-			learn_buffer=g_list_reverse(learn_buffer);
-			learn_buffer=g_list_sort(learn_buffer, (GCompareFunc)
-				nautilus_strcmp);
-		}
-
-		init_status=TRUE;
+		learn_buffer=NULL;
 	}
+
+	/*
+	 * Reverse and sort the entries list.
+	 */
+	if(learn_buffer)
+	{
+		learn_buffer=g_list_reverse(learn_buffer);
+		learn_buffer=g_list_sort(learn_buffer, (GCompareFunc)
+			nautilus_strcmp);
+	}
+
+	init_status=TRUE;
 }
 
 /*
@@ -159,7 +139,8 @@ void gtranslator_learn_shutdown()
 	g_list_free(learn_buffer);
 
 	g_return_if_fail(filestring->str!=NULL);
-	filename=g_strdup_printf("%s/gtranslator/learned-strings", g_get_home_dir());
+	filename=g_strdup_printf("%s/.gtranslator/%s", g_get_home_dir(),
+		LEARN_FILE);
 
 	e_write_file(filename, filestring->str, 0644);
 

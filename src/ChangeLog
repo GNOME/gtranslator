@@ -1,5 +1,8 @@
 2001-06-03  Fatih Demir <kabalak@gtranslator.org>
 
+	* learn.c: Don't create the "~/.gtranslator" directory -- it's done
+		now by the main function; also cleaned up some unneeded stuff.
+
 	* vfs-handle.c: Reduce the includes to include 4 GnomeVFS headers
 		instead of all through <libgnomevfs/gnome-vfs.h>; use the
 		 e_mkdir_hier function for creating the directories.
