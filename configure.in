@@ -156,7 +156,7 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 	dnl Test the version of GnomeVFS to be >= 0.4.1
 	dnl -----------------------------------------------------------
 	VFS_VERSION=`gnome-config --modversion vfs|sed -e 's/.*-//g' -e 's/\.//g'`
-	if test "$VFS_VERSION" -ge 0410 ; then
+	if test "$VFS_VERSION" -ge 41 ; then
 		AC_MSG_RESULT([" "
 "+++ Right your GnomeVFS is recent enough for us... "])	
 	else
