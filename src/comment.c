@@ -207,8 +207,10 @@ GtrComment *gtranslator_comment_copy(GtrComment *comment)
 
 	copy->comment=g_strdup(comment->comment);
 	copy->pure_comment=g_strdup(comment->pure_comment);
+#ifdef UTF8_COMMENT
 	copy->utf8_comment=g_strdup(comment->utf8_comment);
 	copy->pure_utf8_comment=g_strdup(comment->pure_utf8_comment);
+#endif
 	copy->type=comment->type;	
 
 	return copy;
@@ -234,8 +236,10 @@ void gtranslator_comment_free(GtrComment **comment)
 	{
 		GTR_FREE((*comment)->comment);
 		GTR_FREE((*comment)->pure_comment);
+#ifdef UTF8_COMMENT
 		GTR_FREE((*comment)->utf8_comment);
 		GTR_FREE((*comment)->pure_utf8_comment);
+#endif
 		
 		GTR_FREE(*comment);
 	}
@@ -264,10 +268,12 @@ gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_str
 	{
 		return TRUE;
 	}
+#ifdef UTF8_COMMENT
 	else if(strstr(comment->pure_utf8_comment, search_string))
 	{
 		return TRUE;
 	}
+#endif
 
 	return FALSE;
 }

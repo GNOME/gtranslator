@@ -46,7 +46,9 @@
 #include "save.h"
 #include "translator.h"
 #include "undo.h"
-#include "utf8.h"
+#ifdef UTF8_CODE
+# include "utf8.h"
+#endif
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -70,7 +72,7 @@ guint autosave_source_tag=1;
  * These are to be used only inside this file
  */
 static void append_line(gchar ** old, const gchar * tail, gboolean continuation);
-static gboolean add_to_obsolete(gchar *comment);
+static gboolean add_to_obsolete(GtrPo *po, gchar *comment);
 static void write_the_message(gpointer data, gpointer fs);
 static gchar *restore_msg(const gchar * given);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
@@ -117,7 +119,7 @@ static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 	*old = result;
 }
 
-gboolean add_to_obsolete(gchar *comment)
+gboolean add_to_obsolete(GtrPo *po, gchar *comment)
 {
 	if(comment && strstr(comment, "#~ msgid"))
 	{
@@ -147,8 +149,9 @@ gboolean add_to_obsolete(gchar *comment)
 /*
  * The core parsing function for the given po file.
  */ 
-void gtranslator_parse(const gchar *filename)
+GtrPo *gtranslator_parse(const gchar *filename)
 {
+	GtrPo *po;
 	gboolean first_is_fuzzy;
 	gchar *base;
 
@@ -182,15 +185,16 @@ void gtranslator_parse(const gchar *filename)
 		return;
 	}
 	
-	if (!gtranslator_parse_core())
+	if (!gtranslator_parse_core(po))
 	{
-		gtranslator_po_free();
+		gtranslator_po_free(po);
 		return;
 	}
 
 #define FIRST_MSG GTR_MSG(po->messages->data)
 	first_is_fuzzy=(FIRST_MSG->status & GTR_MSG_STATUS_FUZZY) != 0;
 	gtranslator_message_status_set_fuzzy(FIRST_MSG, FALSE);
+	po->fuzzy--;
 	
 	/*
 	 * If the first message is header (it always should be)
@@ -212,22 +216,22 @@ void gtranslator_parse(const gchar *filename)
 	else
 	{
 		gtranslator_message_status_set_fuzzy(FIRST_MSG, first_is_fuzzy);
-
-		/*
-		 * Provide a default po->header to avoid segfaults (#62244)
-		 */
-		po->header=gtranslator_header_create_from_prefs();
+		if(first_is_fuzzy)
+			po->fuzzy++;
+		else
+			po->fuzzy--;
 	}
 	
 	file_opened = TRUE;
 	po->file_changed = FALSE;
 	po->length = g_list_length(po->messages);
 
+#ifdef UTF8_CODE
 	/*
 	 * Set the utf8 field of the GtrPo to TRUE if we are editing an UTF-8 
 	 *  encoded file.
 	 */
-	if(gtranslator_utf8_po_file_is_utf8())
+	if(gtranslator_utf8_po_file_is_utf8(po))
 	{
 		po->utf8=TRUE;
 	}
@@ -236,7 +240,7 @@ void gtranslator_parse(const gchar *filename)
 		po->utf8=FALSE;
 	}
 
-	po->locale_charset=gtranslator_utils_get_locale_charset();
+	po->locale_charset=gtranslator_utils_get_locale_charset(po);
 	
 	/* FIXME: converting the messages to UTF8 there since I don't
 	   know the parsing code, and I don't feel like figuring it out
@@ -244,16 +248,19 @@ void gtranslator_parse(const gchar *filename)
 	   properly encoded. Please fix it...
 	*/
 	if (po->utf8 == FALSE) {
-		gtranslator_utf8_convert_po_to_utf8();
+		gtranslator_utf8_convert_po_to_utf8(po);
 	}
+#endif
 
 	/*
 	 * Set the current message to the first message.
 	 */
 	po->current = g_list_first(po->messages);
+
+	return po;
 }
 
-gboolean gtranslator_parse_core(void)
+gboolean gtranslator_parse_core(GtrPo *po)
 {
 	GtrMsg 	*msg;
 	
@@ -318,7 +325,7 @@ gboolean gtranslator_parse_core(void)
 				}
 				else if(msg->comment)
 				{
-					if(add_to_obsolete(GTR_COMMENT(msg->comment)->comment))
+					if(add_to_obsolete(po, GTR_COMMENT(msg->comment)->comment))
 					{
 						gtranslator_comment_free(&msg->comment);
 						msg->comment=NULL;
@@ -418,7 +425,7 @@ gboolean gtranslator_parse_core(void)
 		po->messages = g_list_prepend(po->messages, (gpointer) msg);
 	}
 	else if(msg->comment && msg->comment->comment &&
-		add_to_obsolete(GTR_COMMENT(msg->comment)->comment))
+		add_to_obsolete(po, GTR_COMMENT(msg->comment)->comment))
 	{
 		gtranslator_comment_free(&msg->comment);
 		GTR_FREE(msg);
@@ -443,8 +450,6 @@ gboolean gtranslator_parse_core(void)
  */
 void gtranslator_parse_main(const gchar *filename)
 {
-  gchar 	*title;
-  gchar         *base;
 	/*
 	 * Test if such a file does exist.
 	 */
@@ -472,7 +477,7 @@ void gtranslator_parse_main(const gchar *filename)
 	/*
 	 * Use the new core function.
 	 */
-	gtranslator_parse(filename);
+	po = gtranslator_parse(filename);
 
 	/*
 	 * Iterate to the main GUI thread -- well, no locks for the GUI should
@@ -532,8 +537,6 @@ void gtranslator_parse_main(const gchar *filename)
 		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
 	}
 
-	gtranslator_application_bar_update(0);
-	
 	if(po->header)
 	{
 		/*
@@ -561,6 +564,26 @@ void gtranslator_parse_main(const gchar *filename)
 		/* But PACKAGE and VERSION should be entered by user */
 		gtranslator_header_edit_dialog(NULL, NULL);
 	}
+}
+
+/*
+ * GUI-related stuff. Should only be called when the GUI needs updating. Could
+ * probably also be moved to 'gui.c'.
+ */
+void gtranslator_parse_main_extra()
+{	
+	gchar         *base;
+	gchar 	*title;
+	
+	if(!po->header) {
+		/*
+		 * Provide a default po->header to avoid segfaults (#62244)
+		 */
+		g_warning(_("Header record not found - defaulting from preferences"));
+		po->header=gtranslator_header_create_from_prefs();
+	}
+  
+	gtranslator_application_bar_update(0);
 	
 	gtranslator_message_show(po->current->data);
 
@@ -590,6 +613,7 @@ void gtranslator_parse_main(const gchar *filename)
 	 */
 	if(GtrPreferences.show_messages_table)
 	{
+		gtranslator_messages_table_clear();
 		gtranslator_messages_table_create();
 	}
 
@@ -602,7 +626,6 @@ void gtranslator_parse_main(const gchar *filename)
 			(GtrPreferences.autosave_timeout * 60000),
 			(GSourceFunc) gtranslator_utils_autosave, NULL);
 	}
-	
 }
 
 void gtranslator_parse_the_file_from_file_dialog(GtkWidget * widget, gpointer of_dlg)
@@ -866,7 +889,7 @@ void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
 /*
  * Frees the po variable
  */
-void gtranslator_po_free(void)
+void gtranslator_po_free(GtrPo *po)
 {
 	if(!po)
 		return;
@@ -897,7 +920,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	if (!gtranslator_should_the_file_be_saved_dialog)
 		return;
 	
-	gtranslator_po_free();
+	gtranslator_po_free(po);
 	gtranslator_undo_clean_register();
 	
 	file_opened = FALSE;
@@ -977,6 +1000,7 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 	po->file_changed = FALSE;
 	gtranslator_file_close(NULL, NULL);
 	gtranslator_parse_main(save_this);
+	gtranslator_parse_main_extra(po);
 	GTR_FREE(save_this);
 }
 
@@ -1012,6 +1036,7 @@ static void remove_translation(gpointer message, gpointer useless)
 	if(msg->status & GTR_MSG_STATUS_FUZZY)
 	{
 		gtranslator_message_status_set_fuzzy(msg, FALSE);
+		po->fuzzy--;
 		internal_change=TRUE;
 	}
 

@@ -246,7 +246,7 @@ gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark)
 			 * Free the "new-old" po and reassign the saved
 			 *  original po variable.
 			 */
-			gtranslator_po_free();
+			gtranslator_po_free(po);
 			po=current_po;
 
 			return TRUE;

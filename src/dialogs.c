@@ -39,7 +39,9 @@
 #include "runtime-config.h"
 #include "syntax.h"
 #include "translator.h"
-#include "utf8.h"
+#ifdef UTF8_CODE
+# include "utf8.h"
+#endif
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -56,11 +58,13 @@ static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 	gpointer findy);
 
+#ifdef UTF8_CODE
 /*
  * Import/export dialog callbacks.
  */
 void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog);
 void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog);
+#endif
 
 /*
  * The open URI dialog signal function:
@@ -220,6 +224,7 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 	return TRUE;
 }
 
+#ifdef UTF8_CODE
 /*
  * Import a UTF-8 po file into a "plain encoding".
  */
@@ -270,7 +275,10 @@ void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog)
 	 * Parse the file and convert it from UTF-8.
 	 */
 	gtranslator_parse_main(filename);
-	gtranslator_utf8_convert_po_from_utf8();
+#ifdef UTF8_CODE
+	gtranslator_utf8_convert_po_from_utf8(po);
+#endif
+	gtranslator_parse_main_extra();
 
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
@@ -315,11 +323,14 @@ void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog)
 	/*
 	 * The same logic as for the import but vice versa .-)
 	 */
-	gtranslator_utf8_convert_po_to_utf8();
+#ifdef UTF_CODE
+	gtranslator_utf8_convert_po_to_utf8(po);
+#endif
 	gtranslator_save_file(filename);
 	
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
+#endif
 
 /*
  * Display a small text widget with an editable content.

@@ -34,7 +34,9 @@
 #include "prefs.h"
 #include "syntax.h"
 #include "undo.h"
-#include "utf8.h"
+#ifdef UTF8_CODE
+# include "utf8.h"
+#endif
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -267,7 +269,8 @@ void gtranslator_message_update(void)
 		*/
 
 		GTR_FREE(msg->msgstr);
-		/*
+
+#ifdef UTF8_CODE
 		if(po->utf8)
 		{
 			msg->msgstr=gtranslator_utf8_get_gtk_text_as_utf8_string(GTK_WIDGET(trans_box));
@@ -279,6 +282,11 @@ void gtranslator_message_update(void)
 		}
 		*/
 		// XXX we always work with utf-8
+		// YYY that's why I'm preparing to carve out all
+		//     the utf-8 stuff except and make sure there
+		//     are g_converts on load/save (for non-utf8
+		//     users).
+#endif
 
 		msg->msgstr = gtk_text_buffer_get_text(gtk_text_view_get_buffer(trans_box), &start, &end, FALSE);
 		
@@ -347,6 +355,10 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	if (flag == GTR_MSG_STATUS_FUZZY) {
 		gtranslator_message_status_set_fuzzy(GTR_MSG(po->current->data),
 			       GTK_CHECK_MENU_ITEM(item)->active);
+		if(GTK_CHECK_MENU_ITEM(item)->active)
+			po->fuzzy++;
+		else
+			po->fuzzy--;
 	}
 	
 	gtranslator_message_update();
@@ -463,7 +475,6 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		gchar *comchar;
 		
 		msg->status |= GTR_MSG_STATUS_FUZZY;
-		po->fuzzy++;
 
 		if (!regexec(&rexf, comment, 3, pos, 0)) {
 			comment[pos[1].rm_so] = '\0';
@@ -477,13 +488,12 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		
 		/*
 		 * FIXME: Crashes currently...
-		 *
-		 * GTR_FREE(comment);
+		 * FIXED?
 		 */
+		GTR_FREE(comment);
 		GTR_FREE(comchar);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
-		po->fuzzy--;
 		if (!regexec(&rexc, comment, 3, pos, 0)) {
 			gint i = (pos[1].rm_so == -1) ? 2 : 1;
 			strcpy(comment+pos[i].rm_so, comment+pos[i].rm_eo+1);
@@ -508,6 +518,7 @@ void gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
 	 * It is no longer fuzzy.
 	 */
 	gtranslator_message_status_set_fuzzy(msg, FALSE);
+	po->fuzzy--;
 	msg->status |= GTR_MSG_STATUS_STICK;
 	msg->status |= GTR_MSG_STATUS_TRANSLATED;
 
@@ -522,6 +533,7 @@ void gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
  */
 void gtranslator_message_free(gpointer data, gpointer useless)
 {
+	g_return_if_fail(data!=NULL);
 	gtranslator_comment_free(&GTR_MSG(data)->comment);
 	GTR_FREE(GTR_MSG(data)->msgid);
 	GTR_FREE(GTR_MSG(data)->msgstr);

@@ -39,9 +39,11 @@ enum {
 	ACT_REVERT,
 	ACT_CLOSE,
 	/***********************/
+#ifdef UTF8_CODE
 	ACT_IMPORT_UTF8,
 	ACT_EXPORT_UTF8,
 	/***********************/
+#endif
 	ACT_UNDO,
 	ACT_CUT,
 	ACT_COPY,

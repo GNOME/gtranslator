@@ -1,5 +1,19 @@
 2003-06-16  Ross Golder  <ross@golder.org>
 
+	* *.* : Added #ifdef UTF8_CODE around code that could be removed
+	         when suitable non-UTF8 import/export routines are ready.
+
+	* utf8.[ch]: Take po as an argument, instead of assuming we're
+	         going to be working on the global po. These two files
+	         will soon be redundant anyway.
+	
+	* parse.c: Pass po around as a pointer, instead of relying on
+	         it being a global. Will make it easier to parse other
+		 files for, say merging, or having multiple files open.
+	
+	* parse.[ch]: Broke the GUI related stuff in parse_main into
+	         parse_main_extra, so it is only called when needed.
+
 	* main.c (main): Stole some code from gedit to make passing
 	         filenames on the command line work again.
 	

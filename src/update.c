@@ -130,6 +130,7 @@ void update(GtkWidget *widget, gpointer useless)
 	 * Parse the file again.
 	 */
 	gtranslator_parse_main(newfile);
+	gtranslator_parse_main_extra();
 	GTR_FREE(command);
 	GTR_FREE(newfile);
 }

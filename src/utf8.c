@@ -35,9 +35,10 @@
 /*
  * Return whether we do have got a UTF-8 file or not.
  */
-gboolean gtranslator_utf8_po_file_is_utf8()
+gboolean gtranslator_utf8_po_file_is_utf8(GtrPo *po)
 {
 	g_return_val_if_fail(file_opened!=FALSE, FALSE);
+	g_return_val_if_fail(po!=NULL, FALSE);
 	g_return_val_if_fail(po->header!=NULL, FALSE);
 	g_return_val_if_fail(po->header->charset!=NULL, FALSE);
 
@@ -48,7 +49,7 @@ gboolean gtranslator_utf8_po_file_is_utf8()
 /*
  * Convert the given GtrMsg to UTF-8.
  */
-void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
+void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg, const gchar *orig_enc)
 {
 	gchar *msgstr;
 	gchar *msgid;
@@ -58,14 +59,14 @@ void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
 	if (msg->msgstr) {
 		msgstr=msg->msgstr;
 		msg->msgstr=g_convert(msgstr, -1, 
-	                	      "UTF-8", po->header->charset, 
+	                	      "UTF-8", orig_enc, 
 	        	              NULL, NULL, NULL);
 		g_free(msgstr);
 	}
 
 	msgid=msg->msgid;
 	msg->msgid=g_convert(msgid, -1, 
-	                      "UTF-8", po->header->charset, 
+	                      "UTF-8", orig_enc, 
 	                      NULL, NULL, NULL);
 	g_free(msgid);
 
@@ -74,7 +75,7 @@ void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
 /*
  * Convert the given GtrMsg from UTF-8 to a "normal" string.
  */
-void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
+void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg, const gchar *orig_enc)
 {
 	gchar *msgstr;
 
@@ -82,7 +83,7 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
 
 	msgstr=msg->msgstr;
 	msg->msgstr=g_convert(msgstr, -1, 
-	                      po->header->charset, "UTF-8",
+	                      orig_enc, "UTF-8",
 	                      NULL, NULL, NULL);
 	g_free(msgstr);
 }
@@ -90,15 +91,16 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
 /*
  * Convert all messages completely to UTF-8.
  */
-void gtranslator_utf8_convert_po_to_utf8(void)
+void gtranslator_utf8_convert_po_to_utf8(GtrPo *po)
 {
 	gchar		*author;
 	GtrComment	*header_comment;
 	
+	g_return_if_fail(po!=NULL);
 	g_return_if_fail(po->messages!=NULL);
 	
 	g_list_foreach(po->messages, 
-		(GFunc) gtranslator_utf8_convert_message_to_utf8, NULL);
+		(GFunc) gtranslator_utf8_convert_message_to_utf8, po->header->charset);
 
 	/*
 	 * Convert the author name to UTF-8.
@@ -115,7 +117,7 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	header_comment=gtranslator_comment_new(po->header->comment);
 	GTR_FREE(po->header->comment);
 
-	po->header->comment=g_strdup(GTR_COMMENT(header_comment)->utf8_comment);
+	po->header->comment=g_strdup(GTR_COMMENT(header_comment)->comment);
 	gtranslator_comment_free(&header_comment);
 
 	/*
@@ -128,12 +130,12 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 /*
  * Convert all messages completely from UTF-8.
  */
-void gtranslator_utf8_convert_po_from_utf8(void)
+void gtranslator_utf8_convert_po_from_utf8(GtrPo *po)
 {
 	g_return_if_fail(po->messages!=NULL);
 	
 	g_list_foreach(po->messages,
-		(GFunc) gtranslator_utf8_convert_message_from_utf8, NULL);
+		(GFunc) gtranslator_utf8_convert_message_from_utf8, po->header->charset);
 
 	/*
 	 * Assign the converted charset value.
@@ -147,12 +149,11 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 
 /*
  * Simply saves some typing...
+ * [depracated] - I can't find anywhere that uses this
  */
-gchar *gtranslator_utf8_convert_to_utf8(const gchar *str)
+gchar *gtranslator_utf8_convert_to_utf8(const gchar *orig_enc, const gchar *str)
 {
 	g_return_val_if_fail(str!=NULL, NULL);
-	g_return_val_if_fail(GTR_HEADER(po->header)!=NULL, NULL);
-	g_return_val_if_fail(GTR_HEADER(po->header->charset)!=NULL, NULL);
 
-	return (g_convert(str, -1, "UTF-8", po->header->charset, NULL, NULL, NULL));
+	return (g_convert(str, -1, "UTF-8", orig_enc, NULL, NULL, NULL));
 }

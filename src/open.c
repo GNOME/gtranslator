@@ -72,6 +72,7 @@ void gtranslator_open_file(gchar *filename)
 			 *  of the remote file.
 			 */  
 			gtranslator_parse_main(filename);
+			gtranslator_parse_main_extra();
 		}
 	}
 	else if(nautilus_str_has_prefix(filename, "about:"))
@@ -103,6 +104,7 @@ void gtranslator_open_file(gchar *filename)
 	else
 	{
 		gtranslator_parse_main(filename);
+		gtranslator_parse_main_extra();
 	}
 }
 
@@ -135,6 +137,7 @@ void gtranslator_open_compiled_po_file(gchar *file)
 		 *  plain gettext file.
 		 */
 		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
+		gtranslator_parse_main_extra();
 	}
 	else
 	{
@@ -179,6 +182,7 @@ void open_compressed_po_file(gchar *file, gchar *command)
 		 * Open up the "new" plain gettext file.
 		 */
 		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
+		gtranslator_parse_main_extra();
 	}
 	else
 	{
@@ -260,6 +264,7 @@ void gtranslator_open_ziped_po_file(gchar *file)
 	if(!system(cmd))
 	{
 		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
+		gtranslator_parse_main_extra();
 	}
 	else
 	{

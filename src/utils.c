@@ -690,7 +690,7 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string)
 /*
  * Get the right localename for the language.
  */
-gchar *gtranslator_utils_get_locale_name(void)
+gchar *gtranslator_utils_get_locale_name(GtrPo *po)
 {
 	if((!file_opened) || !(po->header->language))
 	{
@@ -719,10 +719,11 @@ gchar *gtranslator_utils_get_locale_name(void)
 	}
 }
 
+#ifdef UTF8_CODE
 /*
  * Get the right charset/encoding for the language.
  */
-gchar *gtranslator_utils_get_locale_charset(void)
+gchar *gtranslator_utils_get_locale_charset(GtrPo *po)
 {
 	if((!file_opened) || !(po->header->language))
 	{
@@ -792,6 +793,7 @@ gchar *gtranslator_utils_get_locale_charset(void)
 		return g_strdup(_("iso-8859-1"));
 	}
 }
+#endif
 
 /*
  * Set up the lists to use within the combo boxes.

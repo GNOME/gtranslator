@@ -45,10 +45,14 @@ typedef enum
 typedef struct
 {
 	gchar		*comment;
+#ifdef UTF8_COMMENT
 	gchar		*utf8_comment;
+#endif
 
 	gchar		*pure_comment;
+#ifdef UTF8_COMMENT
 	gchar		*pure_utf8_comment;
+#endif
 	
 	GtrCommentType	type;
 } GtrComment;

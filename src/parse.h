@@ -112,9 +112,9 @@ extern gboolean message_changed;
 /*
  * Core backend functions for parsing a po file.
  */ 
-gboolean gtranslator_parse_core(void);
-void gtranslator_po_free(void);
-void gtranslator_parse(const gchar *po);
+gboolean gtranslator_parse_core(GtrPo *po);
+void gtranslator_po_free(GtrPo *po);
+GtrPo *gtranslator_parse(const gchar *po);
 
 /*
  * Save the file with the given filename.
@@ -123,9 +123,14 @@ gboolean gtranslator_save_file(const gchar *name);
 
 /*
  * The main granslator parse function which does use the backend
- *  calls from above and also sets up the GUI.
+ *  calls from above.
  */
 void gtranslator_parse_main(const gchar *po);
+
+/*
+ * The parts that sets up the GUI after it's been parsed
+ */
+void gtranslator_parse_main_extra();
 
 /*
  * Callbacks for the widgets

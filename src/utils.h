@@ -34,6 +34,7 @@
 /*
  * Really nasty wrapper macros which should expand to really common constructs.
  */
+/* #define GTR_FREE(x) if(x) { g_free((x)); } else { g_assert(x); } (x)=NULL; */
 #define GTR_FREE(x) g_free((x)); (x)=NULL;
 #define GTR_ITER(x) if((x)->next) { (x)=(x)->next; } else { break; }
 
@@ -134,8 +135,8 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string);
 /*
  * Get the right localename/charset for the language.
  */
-gchar *gtranslator_utils_get_locale_name(void);
-gchar *gtranslator_utils_get_locale_charset(void);
+gchar *gtranslator_utils_get_locale_name(GtrPo *po);
+gchar *gtranslator_utils_get_locale_charset(GtrPo *po);
 
 /*
  * The lists for the language informations -- are all changed 

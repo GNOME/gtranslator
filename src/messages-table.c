@@ -35,7 +35,9 @@
 #include "prefs.h"
 #include "runtime-config.h"
 #include "utils.h"
-#include "utf8.h"
+#ifdef UTF8_CODE
+# include "utf8.h"
+#endif
 
 #include <gdk/gdkkeysyms.h>
 
