@@ -674,17 +674,37 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	else
 	{
 		gchar	*query_string;
+		gint	 index=0;
 
 		/*
 		 * Strip out all common punctuation characters before re-querying.
 		 */
-		query_string=nautilus_str_strip_chr(search_string, ',');
-		query_string=nautilus_str_strip_chr(query_string, '.');
-		query_string=nautilus_str_strip_chr(query_string, ':');
-		query_string=nautilus_str_strip_chr(query_string, ';');
-		query_string=nautilus_str_strip_chr(query_string, '?');
-		query_string=nautilus_str_strip_chr(query_string, '!');
+		const gchar punctuation_characters[] = 
+		{ 
+			',', '.', ':', ';',
+			'?', '!', '(', ')',
+			'[', ']', '{', '}',
+			'`', '\'', '^', '/',
+			'\\', '<', '>', -1
+		};
 
+		/*
+		 * First strip out all the nice and nifty '´' characters from the string.
+		 */
+		query_string=nautilus_str_strip_chr(search_string, '´');
+
+		/*
+		 * Now strip out all these special characters from the query string 
+		 *  to get a more "raw" string for an eventually better match.
+		 */
+		while(punctuation_characters[index]!=-1)
+		{
+			query_string=nautilus_str_strip_chr(query_string, 
+				punctuation_characters[index]);
+			
+			index++;
+		}
+		
 		/*
 		 * Try this new query.
 		 */

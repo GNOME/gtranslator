@@ -871,6 +871,19 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 }
 
 /*
+ * Remove all translations from the current po file.
+ */
+void gtranslator_remove_all_translations()
+{
+	g_return_if_fail(file_opened==TRUE);
+	g_return_if_fail(po->messages!=NULL);
+
+	/*
+	 * FIXME: Write this.
+	 */
+}
+
+/*
  * The compile function
  */
 void compile(GtkWidget * widget, gpointer useless)

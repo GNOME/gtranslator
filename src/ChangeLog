@@ -1,5 +1,28 @@
 2001-08-07  Fatih Demir <kabalak@gtranslator.org>
 
+	* parse.c/.h: Added "gtranslator_remove_all_translations" core function
+		skeleton.
+
+	* prefs_init.c: Initialize the "Remove all translations" option to 
+		FALSE -- it should only be visible on special user pref,
+		 shouldn't be on by itself.
+
+	* dialogs.c/.h: Added "gtranslator_remove_all_translations_dialog"
+		function/dialog creation routine.
+
+	* actions.c/.h: Added the corresponding action enumeration value
+		"ACT_REMOVE_ALL_TRANSLATIONS" for the new function/ability.
+
+	* menus.c: Added the new menu entry for this new action/option
+		in gtranslator.
+
+	* prefs.c/.h: Added an option to toggle the "Remove all translations"
+		ability.
+
+	* learn.c: Act cleverer on the (secondard in fact) query -- strip out any 
+		punctuation character from a pre-defined array -- could be much
+		 better for the auto accomplishment functions.
+
 	* dialogs.c: Enhanced the edit comment dialog a bit -- if the comment
 		prefix "#" is missing we do now prepend it; so we do get
 		 always right and well-formed comments -- even if the user did

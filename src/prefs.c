@@ -72,7 +72,7 @@ static GtkWidget
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
 	*autosave, *autosave_with_suffix, *sweep_compile_file,
-	*use_learn_buffer, *show_messages_table;
+	*use_learn_buffer, *show_messages_table, *rambo_function;
 
 /*
  * The timeout GtkSpinButton:
@@ -115,7 +115,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		8, 1, ("Miscellaneous"));
+		9, 1, ("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		4, 2, _("Recent files & spell checking"));
 	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -211,18 +211,21 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Enable the popup menu"),
 		GtrPreferences.popup_menu, gtranslator_preferences_dialog_changed);	
 	use_update_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 3,
-		_("Enable the update function of gtranslator (you need the sources for this)"),
+		_("Enable the functionality to update a po file from within gtranslator"),
 		GtrPreferences.update_function, gtranslator_preferences_dialog_changed);
-	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
+	rambo_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
+		_("Enable the functionality to remove all translations from a po file"),
+		GtrPreferences.rambo_function, gtranslator_preferences_dialog_changed);
+	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
 		_("Delete the compile result file (named \"project.gmo\")"),
 		GtrPreferences.sweep_compile_file, gtranslator_preferences_dialog_changed);
-	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
+	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 6,
 		_("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
-	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 6,
+	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 7,
 		_("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
-	show_messages_table=gtranslator_utils_attach_toggle_with_label(fourth_page, 7,
+	show_messages_table=gtranslator_utils_attach_toggle_with_label(fourth_page, 8,
 		_("Show the messages table"),
 		GtrPreferences.show_messages_table, gtranslator_preferences_dialog_changed);
 	
@@ -346,6 +349,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
 	GtrPreferences.dot_char = if_active(use_dot_char);
 	GtrPreferences.update_function = if_active(use_update_function);
+	GtrPreferences.rambo_function = if_active(rambo_function);
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
@@ -461,6 +465,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.show_sidebar);
 	gtranslator_config_set_bool("toggles/show_messages_table",
 			      GtrPreferences.show_messages_table);
+	gtranslator_config_set_bool("toggles/rambo_function",
+			      GtrPreferences.rambo_function);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      GtrPreferences.check_recent_file);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
@@ -618,6 +624,8 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_bool("toggles/use_own_dict");
 	GtrPreferences.keep_obsolete =
 		gtranslator_config_get_bool("toggles/keep_obsolete");
+	GtrPreferences.rambo_function =
+		gtranslator_config_get_bool("toggles/rambo_function");
 
 	GtrPreferences.use_learn_buffer = gtranslator_config_get_bool(
 		"toggles/use_learn_buffer");

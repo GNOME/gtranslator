@@ -96,13 +96,14 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[4]);
 	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[5]);
 	insert_action(ACT_ACCOMPLISH, the_file_menu[3], NONE);
-	insert_action(ACT_SAVE, the_file_menu[7], the_toolbar[1]);
-	insert_action(ACT_SAVE_AS, the_file_menu[8], the_toolbar[2]);
-	insert_action(ACT_REVERT, the_file_menu[9], NONE);
-	insert_action(ACT_CLOSE, the_file_menu[10], NONE);
+	insert_action(ACT_REMOVE_ALL_TRANSLATIONS, the_file_menu[5], NONE);
+	insert_action(ACT_SAVE, the_file_menu[9], the_toolbar[1]);
+	insert_action(ACT_SAVE_AS, the_file_menu[10], the_toolbar[2]);
+	insert_action(ACT_REVERT, the_file_menu[11], NONE);
+	insert_action(ACT_CLOSE, the_file_menu[12], NONE);
 	/*----------------------------------------------------------*/
-	insert_action(ACT_EXPORT_UTF8, the_file_menu[14], NONE);
-	insert_action(ACT_IMPORT_UTF8, the_file_menu[15], NONE);
+	insert_action(ACT_EXPORT_UTF8, the_file_menu[16], NONE);
+	insert_action(ACT_IMPORT_UTF8, the_file_menu[17], NONE);
 	/*----------------------------------------------------------*/
 	insert_action(ACT_VIEW_MESSAGE, the_views_menu[0], NONE);
 	insert_action(ACT_VIEW_COMMENTS, the_views_menu[1], NONE);
@@ -147,7 +148,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK, ACT_VIEW_MESSAGE, 
 			ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT,
-			ACT_VIEW_HOTKEY, ACT_EXPORT_UTF8);
+			ACT_VIEW_HOTKEY, ACT_EXPORT_UTF8, ACT_REMOVE_ALL_TRANSLATIONS);
 
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
@@ -171,6 +172,15 @@ void gtranslator_actions_set_up_file_opened(void)
 	if(GtrPreferences.update_function)
 	{
 		gtranslator_actions_enable(ACT_UPDATE);	
+	}
+
+	/*
+	 * Only activate this very dangerous menu entry if the corresponding option
+	 *  is set in the preferences.
+	 */
+	if(GtrPreferences.rambo_function)
+	{
+		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
 	}
 
 	/*

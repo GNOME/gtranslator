@@ -80,6 +80,14 @@ GnomeUIInfo the_file_menu[] = {
 		GDK_F10, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Remove all translations"),
+		N_("Remove all existing translations from the po file"),
+		gtranslator_remove_all_translations_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+		0, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
 	{
 		GNOME_APP_UI_ITEM, N_("Open from _URI"),

@@ -430,6 +430,73 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 }
 
 /*
+ * The ultimate dialog -- it should be really idiot-proof to avoid unwanted loss of
+ *  work.
+ */
+void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer useless)
+{
+	static GtkWidget *dialog=NULL;
+	
+	gchar	*absolute_question_text;
+	gint 	 reply=0;
+
+	/*
+	 * Translators: This text should really be VERY clear -- the translator/user
+	 *  is about to remove ALL translations from the po file!
+	 */
+	absolute_question_text=g_strdup_printf(
+		_("Should ALL translations from `%s' be removed?"), po->filename);
+
+	dialog=gnome_message_box_new(absolute_question_text,
+		GNOME_MESSAGE_BOX_WARNING,
+		GNOME_STOCK_BUTTON_YES,
+		GNOME_STOCK_BUTTON_NO,
+		GNOME_STOCK_BUTTON_CANCEL,
+		NULL);
+
+	/*
+	 * Here the default should just be 1 -- the "No" button!
+	 */
+	gnome_dialog_set_default(GNOME_DIALOG(dialog), 1);
+	gtranslator_dialog_show(&dialog, _("gtranslator -- remove all translations"));
+
+	/*
+	 * Run the dialog!
+	 */
+	reply=gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
+
+	if(reply==GNOME_YES)
+	{
+		/*
+		 * If the user said "Yes", that doesn't mean absolutely "Yes" for us; check
+		 *  again for any idiot user input in the previous case.
+		 */
+		dialog=gnome_message_box_new(
+			_("Are you really sure to remove ALL translations from this po file?"),
+				GNOME_MESSAGE_BOX_QUESTION,
+				GNOME_STOCK_BUTTON_YES,
+				GNOME_STOCK_BUTTON_NO,
+				NULL);
+		
+		/*
+		 * Again the same game for the return value & co.
+		 */
+		gnome_dialog_set_default(GNOME_DIALOG(dialog), 1);
+		gtranslator_dialog_show(&dialog, 
+			_("gtranslator -- remove all translations confirmation dialog"));
+		reply=gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
+
+		if(reply==GNOME_YES)
+		{
+			/*
+			 * The user wanted it so, so perform the removal.
+			 */
+			gtranslator_remove_all_translations();
+		}
+	}
+}
+
+/*
  * Set the current/last used directory up for the given file dialog.
  */
 void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)

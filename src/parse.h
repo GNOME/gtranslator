@@ -142,6 +142,11 @@ void gtranslator_file_revert(GtkWidget  * widget, gpointer useless);
 void gtranslator_file_close(GtkWidget  * widget, gpointer useless);
 
 /*
+ * Remove all translations from the po file.
+ */
+void gtranslator_remove_all_translations(void);
+
+/*
  * The compile function.
  */
 void compile(GtkWidget  * widget, gpointer useless);
