@@ -3,14 +3,14 @@
 	* header_stuff.c: Eh, corrected a long outstanding and crazy bug in
 		the "gtranslator_header_create_from_prefs" function: till now
 		 we set the charset to the locale name; nothing very right to
-		  do, so we do now do the right thing(TM): set the charset from
+		  do, so we do now the right thing(TM): set the charset from
 		   the preferences.
 
-	* backend.c/.h: Introduce a new type of functions "BackendFunc" is now
-		used for the opening, saving, closing functions; via this, we
-		 are now passing the backend functions' results directly back
-		  from "gtranslator_backend_open" thus allowing us to see 
-		   whether the backend worked or now.
+	* backend.c/.h: Introduce a new type of functions: "BackendFunc" is now
+		used for opening, saving, closing functions; via this, we are
+		 now passing the backend functions' results directly back from
+		  "gtranslator_backend_open" thus allowing us to see whether
+		    the backend could open the file or not.
 
 	* translator.c/.h: Added "gtranslator_translator_get_translator_string"
 		and "gtranslator_translator_set_translator" functions for
