@@ -4,5 +4,4 @@
 
 SUBDIRS = \
 	docbook \
-	text \
-	translation-memories
+	text
