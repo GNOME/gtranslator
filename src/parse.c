@@ -65,6 +65,21 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	}
 }
 
+/* FIXME: check if message counts remain correct */
+void mark_msg_sticky (GtrMsg * msg, gboolean on)
+{
+	if (on) {
+		msg->msgstr = msg->msgid;
+		/* It is no longer fuzzy */
+		mark_msg_fuzzy(msg, FALSE);
+		msg->status |= GTR_MSG_STATUS_STICK;
+	} else {
+		g_free(msg->msgstr);
+		msg->msgstr = NULL;
+		msg->status &= ~GTR_MSG_STATUS_STICK;
+	}
+}
+
 static void check_msg_status(GtrMsg * msg)
 {
 	if (msg->msgstr)

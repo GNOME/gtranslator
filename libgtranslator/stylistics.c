@@ -26,73 +26,42 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker,
 	ColorValueType Type)
 {
 	gushort red, green, blue, alpha;
-	gchar *path=g_new0(gchar,1);
-	gnome_color_picker_get_i16(GNOME_COLOR_PICKER(colorpicker),
-		&red, &green, &blue, &alpha);
-	/**
-	* Initialize the configuration stuff and store the given
-	*  doubles via the fake gfloats.
-	**/
-	gtranslator_config_init();
-	/**
-	* Get the different paths via the Type defined in the
-	*  request.
-	**/
+	gchar path[23];
+	gchar *section;
 	switch(Type)
 	{
 		case COLOR_VALUE_FG:
-			path=g_strdup_printf("colors/%s",
-				"fg");
+			section="fg";
 			break;
 		case COLOR_VALUE_BG:
-			path=g_strdup_printf("colors/%s",
-				"bg");
+			section="bg";
 			break;	
 		case COLOR_VALUE_DOT_CHAR:
-			path=g_strdup_printf("colors/%s",
-				"dot_char");
+			section="dot_char";
 			break;
 		case COLOR_VALUE_END_CHAR:
-			path=g_strdup_printf("colors/%s",
-				"end_char");
+			section="end_char";
 			break;
 		case COLOR_VALUE_SELECTION:
-			path=g_strdup_printf("colors/%s",
-				"selection");
+			section="selection";
 			break;	
 		default:
-			break;
+			g_warning(_("No color path found!"));
+			return;
 	}
-	/**
-	* Just a sanity check.
-	**/
-	if(!path)
-	{
-		g_warning(_("No color path found!"));
-		return;
-	}
+	gnome_color_picker_get_i16(GNOME_COLOR_PICKER(colorpicker),
+		&red, &green, &blue, &alpha);
 	/**
 	* Store the color values.
 	**/
-	gtranslator_config_set_int(g_strdup_printf("%s/%s",
-		path, "red"), red);
-	gtranslator_config_set_int(g_strdup_printf("%s/%s",
-		path, "green"), green);
-	gtranslator_config_set_int(g_strdup_printf("%s/%s",
-		path, "blue"), blue);
-	gtranslator_config_set_int(g_strdup_printf("%s/%s",
-		path, "alpha"), alpha);			
-	/**
-	* And close the preferences now.
-	**/	
-	gtranslator_config_close();
-	/**
-	* Free the gchar at least.
-	**/
-	if(path)
-	{
-		g_free(path);
-	}	
+#define set_color(key,val) \
+	g_snprintf(path, 23, "colors/%s_%s", section, key);\
+	gtranslator_config_set_int(path, val);
+	set_color("red", red);
+	set_color("green", green);
+	set_color("blue", blue);
+	set_color("alpha", alpha);
+#undef set_color
 }
 
 /**
@@ -102,74 +71,45 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 	ColorValueType Type)
 {
 	gushort red, green, blue, alpha;
-	gchar *path=g_new0(gchar,1);
-	/**
-	* Initialize the config-stuff.
-	**/
-	gtranslator_config_init();
-	/**
-	* Again the switch tree from above.
-	**/
+	gchar path[23];
+	gchar *section;
 	switch(Type)
 	{
 		case COLOR_VALUE_FG:
-			path=g_strdup_printf("colors/%s",
-				"fg");
+			section="fg";
 			break;
 		case COLOR_VALUE_BG:
-			path=g_strdup_printf("colors/%s",
-				"bg");
+			section="bg";
 			break;	
 		case COLOR_VALUE_DOT_CHAR:
-			path=g_strdup_printf("colors/%s",
-				"dot_char");
+			section="dot_char";
 			break;
 		case COLOR_VALUE_END_CHAR:
-			path=g_strdup_printf("colors/%s",
-				"end_char");
+			section="end_char";
 			break;
 		case COLOR_VALUE_SELECTION:
-			path=g_strdup_printf("colors/%s",
-				"selection");
+			section="selection";
 			break;	
 		default:
-			break;
+			g_warning(_("No color path found!"));
+			return;
 	}
 	/**
-	* Just a sanity check.
+	* Store the color values.
 	**/
-	if(!path)
-	{
-		g_warning(_("No color path found!"));
-		return;
-	}
-	/**
-	* Fill up the colors.
-	**/
-	red=gtranslator_config_get_int(g_strdup_printf("%s/%s",
-		path, "red"));
-	green=gtranslator_config_get_int(g_strdup_printf("%s/%s",
-		path, "green"));
-	blue=gtranslator_config_get_int(g_strdup_printf("%s/%s",
-		path, "blue"));
-	alpha=gtranslator_config_get_int(g_strdup_printf("%s/%s",
-		path, "alpha"));
-	/**
-	* The same as above again, close the preferences.
-	**/	
-	gtranslator_config_close();
+#define get_color(key,val) \
+	g_snprintf(path, 23, "colors/%s_%s", section, key);\
+	val = gtranslator_config_get_int(path);
+	get_color("red", red);
+	get_color("green", green);
+	get_color("blue", blue);
+	get_color("alpha", alpha);
+#undef get_color
 	/**
 	* Set the values in the given GnomeColorPicker.
 	**/
 	gnome_color_picker_set_i16(colorpicker, red,
 		green, blue, alpha);
-	/**
-	* And free the gchar.
-	**/
-	if(path)
-	{
-		g_free(path);
-	}		
 }		
 
 /**
@@ -183,7 +123,9 @@ void gtranslator_set_style(GtkWidget *widget)
 	**/
 	GtkStyle *style;
 	GdkColor *fg, *bg;
-	gchar *fontname=g_new0(gchar,1);
+	gchar *fontname;
+
+	gtranslator_config_init();
 	/**
 	* Get the fontname.
 	**/
@@ -199,24 +141,16 @@ void gtranslator_set_style(GtkWidget *widget)
 		**/
 		fontname=_("-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1");
 	}
-	if(!gdk_font_load(fontname))
-	{
-		g_error(_("Couldn't even load default font!"));
-	}
 	/**
 	* Check if the widget is existent and get it's style.
 	**/
-	if(widget)
-	{
+	if(widget) {
 		/**
 		* Get the style of the given widget.
 		**/
 		style=gtk_style_copy(gtk_widget_get_style(widget));
-	}
-	else
-	{
-		g_warning(
-		_("No widgets defined to manipulate their style"));
+	} else {
+		g_error ("No widgets defined to manipulate their style");
 		return;
 	}
 	/**
@@ -228,16 +162,16 @@ void gtranslator_set_style(GtkWidget *widget)
 	*  float values from the GnomeColorPicker with 65536 to get the nearer
 	*   integer value guaranteed by the cast.
 	**/
-	bg->red=gtranslator_config_get_int("colors/bg/red");
-	bg->green=gtranslator_config_get_int("colors/bg/green");
-	bg->blue=gtranslator_config_get_int("colors/bg/blue");
+	bg->red=gtranslator_config_get_int("colors/bg_red");
+	bg->green=gtranslator_config_get_int("colors/bg_green");
+	bg->blue=gtranslator_config_get_int("colors/bg_blue");
 	/**
 	* And the same for the foreground.
 	**/
 	fg=&style->text[0];
-	fg->red=gtranslator_config_get_int("colors/fg/red");
-	fg->green=gtranslator_config_get_int("colors/fg/green");
-	fg->blue=gtranslator_config_get_int("colors/fg/blue");
+	fg->red=gtranslator_config_get_int("colors/fg_red");
+	fg->green=gtranslator_config_get_int("colors/fg_green");
+	fg->blue=gtranslator_config_get_int("colors/fg_blue");
 	/**
 	* Release the font.
 	**/
@@ -246,15 +180,16 @@ void gtranslator_set_style(GtkWidget *widget)
 	* And set the stored font.
 	**/
 	style->font=gdk_font_load(fontname);
+	if(!style->font)
+		g_error(_("Couldn't even load default font!"));
 	/**
-	* Test the widget and finally do set the style.
+	* Finally set the style
 	**/
-	if(widget)
-	{
-		gtk_widget_set_style(GTK_WIDGET(widget), style);
-	}
+	gtk_widget_set_style(GTK_WIDGET(widget), style);
 	/**
 	* Unref/clean up the style.
 	**/
 	gtk_style_unref(style);
+	g_free(fontname);
+	gtranslator_config_close();
 }

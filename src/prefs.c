@@ -212,7 +212,7 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 4, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 2, 2, _("Recent files menu"));
-	sixth_page = append_page_table(prefs, 2, 3, _("Fonts & Colors"));
+	sixth_page = append_page_table(prefs, 4, 2, _("Fonts & Colors"));
 	/**
 	* Create all the personal entries
 	**/
@@ -331,8 +331,9 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	font=gnome_font_picker_new();
 	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
 		_("gtranslator -- font selection"));
-	gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
-		wants.font);
+	if (wants.font)
+		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
+						wants.font);
 	/**
 	* And the color pickers.
 	**/
@@ -342,10 +343,13 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	background=gnome_color_picker_new();
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(background),
 		_("gtranslator -- background color"));
+
+	gtranslator_config_init();
 	gtranslator_color_values_get(GNOME_COLOR_PICKER(foreground),
 		COLOR_VALUE_FG);
 	gtranslator_color_values_get(GNOME_COLOR_PICKER(background),
 		COLOR_VALUE_BG);
+	gtranslator_config_close();
 	/**
 	* Insert the widgets.
 	**/		
@@ -429,6 +433,7 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	/**
 	* Get the font and store it.
 	**/
+	g_free(wants.font);
 	wants.font=gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font));
 	gtranslator_config_set_string("font/name", wants.font);
 	/**

@@ -199,8 +199,8 @@ static GnomeUIInfo the_msg_status_menu[] = {
 	 toggle_msg_status,
 	 GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
 	 NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_STOP,
-	 0, 0, NULL},
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
+	 GDK_K, GDK_MOD1_MASK, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -706,19 +706,18 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 	if (nothing_changes)
 		return;
 	text_has_got_changed(NULL, NULL);
-	/* We've got only fuzzy done. FIXME: add stick here */
 	if (flag == GTR_MSG_STATUS_FUZZY) {
 		mark_msg_fuzzy(GTR_MSG(po->current->data),
 			       GTK_CHECK_MENU_ITEM(item)->active);
-	} else {
-		if (GTK_CHECK_MENU_ITEM(item)->active)
-			*stat |= flag;
-		else
-			*stat &= ~flag;
+	} else if (flag == GTR_MSG_STATUS_STICK) {
+		mark_msg_sticky(GTR_MSG(po->current->data),
+				GTK_CHECK_MENU_ITEM(item)->active);
+		display_msg(po->current);
+		message_changed = TRUE;
 	}
 	update_msg();
 }
-
+	 
 /**
 * Cleans up the text boxes.
 **/
@@ -730,13 +729,9 @@ void clean_text_boxes()
 
 static void update_appbar(gint pos)
 {
-	gchar *str;
+	gchar *str, *status;
 	GtrMsg *msg;
 	gnome_appbar_pop(GNOME_APPBAR(appbar1));
-	/**
-	* Assign the first part.
-	**/
-	str=g_strdup_printf(_("Message %d / %d / Status:"), pos + 1, po->length);
 	/**
 	* Get the message.
 	**/
@@ -748,46 +743,39 @@ static void update_appbar(gint pos)
 	{
 		if(po->fuzzy>1)
 		{
-			str=g_strdup_printf(_("%s %s [ %i Fuzzy left ]"), str, _("Fuzzy"), po->fuzzy);
+			status=g_strdup_printf(_("%s [ %i Fuzzy left ]"), _("Fuzzy"), po->fuzzy);
 		}	
 		else
 		{
-			str=g_strdup_printf(_("%s %s [ No fuzzy left ]"), str, _("Fuzzy"));
+			status=g_strdup_printf(_("%s [ No fuzzy left ]"), _("Fuzzy"));
 			/**
 			* Also disable the corresponding button.
 			**/
 			disable_actions(ACT_NEXT_FUZZY);
 		}
-	}
-	if(msg->status & GTR_MSG_STATUS_TRANSLATED)
-	{
-		str=g_strdup_printf("%s %s", str, _("Translated"));
-	}
-	else
-	{
-		if(msg->status & GTR_MSG_STATUS_STICK)
+	} else if(msg->status & GTR_MSG_STATUS_STICK) {
+		status=g_strdup(_("Stick"));
+	} else if(msg->status & GTR_MSG_STATUS_TRANSLATED) {
+		status=g_strdup(_("Translated"));
+	} else { /* Message is untranslated */
+		if ((po->length - po->translated)>1)
 		{
-			str=g_strdup_printf("%s %s", str, _("Stick"));
-		}
-		else
-		{
-			if ((po->length - po->translated)>1)
-			{
-				guint missya;
-				missya = po->length - po->translated;
-				str=g_strdup_printf(_("%s %s [ %i Untranslated left ]"), str, _("Untranslated"), missya);
-			}
-			else
-			{
-				str=g_strdup_printf(_("%s %s [ No untranslated left ]"), str, _("Untranslated"));
-				/**
-				* Also disable the coressponding buttons for the
-				*  next untranslated message.
-				**/
-				disable_actions(ACT_NEXT_UNTRANSLATED);
-			}	
-		}
+			guint missya;
+			missya = po->length - po->translated;
+			status=g_strdup_printf(_("%s [ %i Untranslated left ]"), _("Untranslated"), missya);
+		} else {
+			status=g_strdup_printf(_("%s [ No untranslated left ]"), _("Untranslated"));
+			/**
+			* Also disable the coressponding buttons for the
+			*  next untranslated message.
+			**/
+			disable_actions(ACT_NEXT_UNTRANSLATED);
+		}	
 	}
+	/**
+	* Assign the first part.
+	**/
+	str=g_strdup_printf(_("Message %d / %d / Status: %s"), pos + 1, po->length, status);
 	/**
 	* Set the appbar text.
 	**/
@@ -800,6 +788,7 @@ static void update_appbar(gint pos)
 	* And free the allocated string.
 	**/
 	g_free(str);
+	g_free(status);
 }
 
 /* Updates current msg, and shows to_go msg instead, also adjusts actions */

@@ -68,6 +68,9 @@ gfloat percentage;
 /* Changes message fuzzy status */
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy);
 
+/* Copies msgid to msgstr or blanks msgstr */
+void mark_msg_sticky(GtrMsg * msg, gboolean on);
+
 /**
 * The internally used parse-function
 **/

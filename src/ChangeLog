@@ -1,3 +1,12 @@
+2000-12-30  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gui.c: implemented sticky message status on menuitem toggle.
+	* parse.c,parse.h: new mark_msg_sticky function.
+	* gui.c: Fix memory leak in update_appbar (str was not freed). 
+	change status logic a bit, to make it simpler.
+	* prefs.c: fix size of sixth page table. check if font is saved in
+	preferences, only then set it.
+	
 2000-12-29  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Include the new files alltogether in a build,
