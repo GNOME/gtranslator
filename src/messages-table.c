@@ -21,6 +21,7 @@
 #include "gui.h"
 #include "messages-table.h"
 #include "messages.h"
+#include "message.h"
 #include "parse.h"
 #include "preferences.h"
 #include "utils.h"
@@ -222,14 +223,6 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 static gchar *return_string_for_value_function(ETreeModel *model, int column,
 	const void *value, void *data)
 {
-	if(value)
-	{
-		return g_strdup(value);
-	}
-	else
-	{
-		return g_strdup("");
-	}
 	switch (column) {
 	case COL_ORIG:
 	case COL_TRANS:
@@ -244,6 +237,22 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 		g_assert_not_reached ();
 		return NULL;
 	}
+}
+
+static void
+row_selected (ETree *tree, int row, ETreePath node, gpointer data)
+{
+	GtrMsg *message;
+	gint model_row;
+	
+	message=e_tree_memory_node_get_data (tree_memory, node);
+	/* This sucks. Should use e_tree_view_to_model_row here
+	** but that seems to return the view row. Sigh.*/
+	model_row=g_list_index(po->messages, message);
+	
+	if (model_row<0)
+		return;
+	gtranslator_message_go_to(g_list_nth(po->messages, model_row));
 }
 
 /*
@@ -341,12 +350,19 @@ GtkWidget *gtranslator_messages_table_new()
 	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
 	
 	g_free(statusfile);
+	
+	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
+		GTK_SIGNAL_FUNC(row_selected), NULL);
 	return messages_tree;
 }
 
+/*
+ * Clear the table if it exists and populate with the messages
+ */
 void gtranslator_messages_table_update (void)
 {
 	GList *list = g_list_copy (po->messages);
+	gint i=0;
 	
 	if(root_node)
 		e_tree_memory_node_remove (tree_memory, root_node);
@@ -360,8 +376,9 @@ void gtranslator_messages_table_update (void)
 	{
 		GtrMsg *message=list->data;
 		e_tree_memory_node_insert(tree_memory, root_node,
-			0, message);
+			i, message);
 		list = g_list_next(list);
+		i++;
 	}	
 	
 	

@@ -1,5 +1,14 @@
 2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
 
+	* messages-table.c (messages_table_new): hook up to 
+	row selected signal of e-tree
+
+	*messages-table.c (row_selected): new function when a row
+	is selected will set the corresponding message to be the
+	current.
+
+2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
+
 	* messages-table.c: convert the e_table_simple to
 		e_tree_memory*
 
