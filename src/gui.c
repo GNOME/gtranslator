@@ -242,7 +242,7 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	if (!gtranslator_should_the_file_be_saved_dialog())
 		return TRUE;
 	gtranslator_file_close(NULL, NULL);
-	gtranslator_geometry_save();
+	gtranslator_utils_save_geometry();
 	/*
 	 * Free the preferences stuff.
 	 */

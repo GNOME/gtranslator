@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
 	 * Create the main app-window. 
 	 */
 	gtranslator_create_main_window();
-	gtranslator_geometry_restore(gtranslator_geometry);
+	gtranslator_utils_restore_geometry(gtranslator_geometry);
 	
 	/*
 	 * Check if a temporary file from the last session had been

@@ -88,12 +88,6 @@ void gtranslator_colors_init_default_colors(void);
 void gtranslator_colors_convert_to_new_settings(void);
 
 /*
- * Routines for saving/restoring/setting geometry of the main window.
- */
-void gtranslator_geometry_save(void);
-void gtranslator_geometry_restore(gchar *gstr);
-
-/*
  * Font/color specific widgets used in the preferences box.
  */
 GtkWidget *foreground, *background, *font;

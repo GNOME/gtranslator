@@ -43,4 +43,10 @@ void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);
  */
 void gtranslator_utils_invert_dot(gchar *str);
 
+/*
+ * Routines for saving/restoring/setting geometry of the main window.
+ */
+void gtranslator_utils_save_geometry(void);
+void gtranslator_utils_restore_geometry(gchar *gstr);
+
 #endif

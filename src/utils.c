@@ -18,10 +18,13 @@
  *
  */
 
+#include "gui.h"
+#include "prefs.h"
 #include "utils.h"
 
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnomeui/libgnomeui.h>
 
 /*
  * Strip the filename to get a "raw" enough filename.
@@ -88,4 +91,62 @@ void gtranslator_utils_invert_dot(gchar *str)
 			str[i]=' ';
 		}
 	}
+}
+
+/*
+ * Save the current application main window's geometry.
+ */
+void gtranslator_utils_save_geometry(void)
+{
+	if (wants.save_geometry == TRUE) {
+		gchar *gstr;
+		gint x, y, w, h;
+		gstr = gnome_geometry_string(gtranslator_application->window);
+		gnome_parse_geometry(gstr, &x, &y, &w, &h);
+		g_free(gstr);
+		gtranslator_config_init();
+		gtranslator_config_set_int("geometry/x", x);
+		gtranslator_config_set_int("geometry/y", y);
+		gtranslator_config_set_int("geometry/width", w);
+		gtranslator_config_set_int("geometry/height", h);
+		gtranslator_config_close();
+		
+	}
+}
+
+/*
+ * Restore the geometry.
+ */
+void gtranslator_utils_restore_geometry(gchar  * gstr)
+{
+	gint x, y, width, height;
+	/*
+	 * Set the main window's geometry from the preferences.
+	 */
+	if (gstr == NULL) {
+		if (wants.save_geometry == TRUE) {
+			gtranslator_config_init();
+			x = gtranslator_config_get_int("geometry/x");
+			y = gtranslator_config_get_int("geometry/y");
+			width = gtranslator_config_get_int("geometry/width");
+			height = gtranslator_config_get_int("geometry/height");
+			gtranslator_config_close();
+		}
+		else return;
+	}
+	/*
+	 * If a geometry definition had been defined try to parse it.
+	 */
+	else {
+		if (!gnome_parse_geometry(gstr, &x, &y, &width, &height)) {
+			g_warning(
+			    _("The geometry string \"%s\" couldn't be parsed!"),
+			    gstr);
+			return;
+		}
+	}
+	if (x != -1)
+		gtk_widget_set_uposition(gtranslator_application, x, y);
+	if ((width > 0) && (height > 0))
+		gtk_window_set_default_size(GTK_WINDOW(gtranslator_application), width, height);
 }
