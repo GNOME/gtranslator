@@ -511,7 +511,8 @@ void gtranslator_insert_text(GtkTextView *textview, const gchar *text)
 	GtkTextBuffer *editable = gtk_text_view_get_buffer(textview);
 	
 //	gtk_text_buffer_get_bounds (editable, &start, &end);
-	gtk_text_buffer_set_text (editable, text, -1);
+	if (text)
+		gtk_text_buffer_set_text (editable, text, -1);
 #ifdef NOT_PORTED	
 	/* First, delete old contents */
 	g_signal_emit_by_name(

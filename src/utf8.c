@@ -50,14 +50,24 @@ gboolean gtranslator_utf8_po_file_is_utf8()
 void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
 {
 	gchar *msgstr;
+	gchar *msgid;
 
 	g_return_if_fail(msg!=NULL);
 
-	msgstr=msg->msgstr;
-	msg->msgstr=g_convert(msgstr, -1, 
+	if (msg->msgstr) {
+		msgstr=msg->msgstr;
+		msg->msgstr=g_convert(msgstr, -1, 
+	                	      "UTF-8", po->header->charset, 
+	        	              NULL, NULL, NULL);
+		g_free(msgstr);
+	}
+
+	msgid=msg->msgid;
+	msg->msgid=g_convert(msgid, -1, 
 	                      "UTF-8", po->header->charset, 
 	                      NULL, NULL, NULL);
-	g_free(msgstr);
+	g_free(msgid);
+
 }
 
 /*

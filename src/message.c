@@ -162,18 +162,15 @@ void gtranslator_message_show(GtrMsg *msg)
 	if(GtrPreferences.dot_char)
 	{
 		gchar *temp;
-
-		temp = g_strdup(msg->msgid);
-		gtranslator_utils_invert_dot(temp);
+		gchar *old;
 		
+		temp = gtranslator_utils_invert_dot(msg->msgid);
 		gtranslator_insert_text(text_box, temp);
 		
 		GTR_FREE(temp);
 
 		if (msg->msgstr) {
-			temp=g_strdup(msg->msgstr);
-			
-			gtranslator_utils_invert_dot(temp);
+			temp = gtranslator_utils_invert_dot(msg->msgstr);
 			
 			gtranslator_insert_text(trans_box, temp);
 			
@@ -285,8 +282,12 @@ void gtranslator_message_update(void)
 		/*
 		 * If spaces were substituted with dots, replace them back
 		 */
-		if(GtrPreferences.dot_char)
-			gtranslator_utils_invert_dot(msg->msgstr);
+		if(GtrPreferences.dot_char) {
+			gchar *old;
+			old = msg->msgstr;
+			msg->msgstr = gtranslator_utils_invert_dot(old);
+			g_free(old);
+		}
 		if (!(msg->status & GTR_MSG_STATUS_TRANSLATED)) {
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;
 			po->translated++;

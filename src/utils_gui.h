@@ -43,7 +43,7 @@ void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);
 /*
  * Invert the dots in the message.
  */
-void gtranslator_utils_invert_dot(gchar *str);
+gchar *gtranslator_utils_invert_dot(gchar *str);
 
 /*
  * Routines for saving/restoring/setting geometry of the main window.

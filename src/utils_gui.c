@@ -58,18 +58,30 @@ void gtranslator_utils_show_home_page(GtkWidget *widget, gpointer useless)
  * Go through the characters and search for free spaces
  * and replace them with '·''s.
  */
-void gtranslator_utils_invert_dot(gchar *str)
+gchar *gtranslator_utils_invert_dot(gchar *str)
 {
-	guint i;
-	g_return_if_fail(str != NULL);
+	GString *newstr;
+	gunichar middot;
+	gchar *p;
 
-	for(i=0; str[i] != '\0'; i++) {
-		if(str[i]==' ') {
-			str[i]=gtranslator_runtime_config->special_char;
-		} else if(str[i]==gtranslator_runtime_config->special_char) {
-			str[i]=' ';
-		}
-	}
+	g_return_if_fail(str != NULL);
+	
+	newstr = g_string_sized_new(strlen(str)+10);
+	middot = g_utf8_get_char("Â·");
+	p = str;
+	if (*p)	
+		do 
+		{
+			gunichar c = g_utf8_get_char(p);
+			if (c == middot)
+				g_string_append_c(newstr, ' ');
+			else if (g_unichar_isspace(c))
+				g_string_append_unichar(newstr, middot);
+			else
+				g_string_append_unichar(newstr, c);
+			p = g_utf8_next_char(p);
+		} while (*p);
+	return(g_string_free(newstr, FALSE));
 }
 
 /*

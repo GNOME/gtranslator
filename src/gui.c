@@ -684,7 +684,10 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 
 		if(GtrPreferences.dot_char)
 		{
-			gtranslator_utils_invert_dot((gchar*)text);
+			gchar *old;
+			old = result;
+			result = gtranslator_utils_invert_dot((gchar*)result);
+			g_free(old);
 		}
 	}
 	gtranslator_insert_highlighted(textbuffer, pos, result, length, NULL);
@@ -697,15 +700,17 @@ void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 			   guint info, guint time_stamp, gpointer data)
 {
 	gchar *text;
+	gchar *undotted_text;
 
 	if(!GtrPreferences.dot_char)
 		return;
 
 	text = g_strndup(selection_data->data, selection_data->length);
-	gtranslator_utils_invert_dot(text);
+	undotted_text = gtranslator_utils_invert_dot(text);
 	gtk_selection_data_set(selection_data, selection_data->type,
-			       8, text, strlen(text));
+			       8, undotted_text, strlen(text));
 	g_free(text);
+	g_free(undotted_text);
 }
 
 /*
