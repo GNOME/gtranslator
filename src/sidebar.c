@@ -39,7 +39,7 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 /*
  * Shows the right view for the clicked icon on the sidebar.
  */ 
-void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
+static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 	gint item);	
 
 /*
@@ -135,50 +135,7 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 	gint item)
 {
 	if(event->button.button==1)
-	{
-		/*
-		 * Switch the icon numbers for the right view.
-		 */ 
-		switch(item+1)
-		{
-			case 1:
-				/*
-				 * Just show the message.
-				 */
-				gtranslator_views_set(GTR_MESSAGE_VIEW);
-
-					break;
-
-			case 2:
-				/*
-				 * Display the current comment or
-				 *  show a helping message.
-				 */
-				gtranslator_views_set(GTR_COMMENT_VIEW);
-					break;
-
-			case 3:
-				gtranslator_views_set(GTR_NUMBER_VIEW);
-					break;
-					
-			case 4:
-				/*
-				 * Display eventually existing C formats.
-				 */
-				gtranslator_views_set(GTR_C_FORMAT_VIEW);
-					break;
-				
-			case 5:
-				/*
-				 * Show the hotkeys of the message.
-				 */
-				gtranslator_views_set(GTR_HOTKEY_VIEW);
-					break;
-					
-			default:
-				break;
-		}
-	}
+		gtranslator_views_set(item);
 }
 
 /*

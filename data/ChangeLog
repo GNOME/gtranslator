@@ -1,3 +1,12 @@
+2001-03-29  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* Makefile.am: all subdirs should be processed, because "make dist"
+	otherwise won't take everything.
+	* gconf/Makefile.am: simply fail if gconftool is not found.
+	* mime/Makefile.am: replaced HACK with XML_I18N_MERGE_KEYS_RULE, make
+	if mime bind is enabled, but distribute always.
+	* oaf/Makefile.am, ui/Makefile.am: same.
+
 2001-03-22  Fatih Demir <kabalak@gtranslator.org>
 
 	* ui/nautilus-gtranslator-view-ui.xml: Removed the header 

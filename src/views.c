@@ -61,12 +61,13 @@ void setup_text(GtkWidget *widget, const gchar *string, const gchar *errstring);
  */
 gboolean gtranslator_views_set(GtrView view)
 {
-	gint index;
+	static gint index=0;
 	
-	if(view < 0 || view > GTR_LAST_VIEW)
-	{
-		return FALSE;
-	}
+	g_return_val_if_fail(view >= 0 && view < GTR_LAST_VIEW, FALSE);
+
+	/* Need nothing too change */
+	if(view==current_view)
+		return TRUE;
 
 	/*
 	 * Rescue the current position in the message view.
@@ -74,61 +75,47 @@ gboolean gtranslator_views_set(GtrView view)
 	if(current_view==GTR_MESSAGE_VIEW)
 	{
 		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
+		/* Put text from textbox into msg */
+		gtranslator_update_msg();
 	}
 
-	if(view!=current_view)
-	{
-		previous_view=current_view;
-	}
+	previous_view=current_view;
 
+	nothing_changes=TRUE;
 	
-	/*
-	 * First sync the text boxes with the po file data:
-	 */
-	gtranslator_views_prepare_for_navigation();
-
 	switch(view)
 	{
 		case GTR_C_FORMAT_VIEW:
 			show_c_format();
-				break;
+			break;
 				
 		case GTR_COMMENT_VIEW:
 			show_comment();
-				break;
+			break;
 
 		case GTR_NUMBER_VIEW:
 			show_number();
-				break;
+			break;
 
 		case GTR_HOTKEY_VIEW:
 			show_hotkey();
-				break;
+			break;
 			
 		case GTR_MESSAGE_VIEW:
 		default:
-			gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 			display_msg(po->current);
-				break;
+			gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+			current_view=GTR_MESSAGE_VIEW;
+			break;
 	}
 
-	/*
-	 * Disable view caused saves -- only if there'sn't been any
-	 *  save-valuable action yet.
-	 */
-	if(!po->file_changed)
-	{
-		disable_actions(ACT_SAVE, ACT_UNDO);
-	}
+	if(view==GTR_MESSAGE_VIEW)
+		gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
+	else
+		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 
-	/*
-	 * Reset the pointer to it's previous position in the translation box.
-	 */
-	if(current_view==GTR_MESSAGE_VIEW)
-	{
-		gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
-	}
-
+	nothing_changes=FALSE;
+	
 	return TRUE;
 }
 
@@ -162,14 +149,6 @@ void show_number()
 	clean_text_boxes();
 
 	/*
-	 * Make the translation box non-editable.
-	 */
-	if(previous_view==GTR_MESSAGE_VIEW)
-	{
-		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
-	}
-
-	/*
 	 * Show the nude figures!
 	 */
 	show_up_figures(text1, msg->msgid);
@@ -187,14 +166,6 @@ void show_c_format()
 	
 	current_view=GTR_C_FORMAT_VIEW;
 	clean_text_boxes();
-
-	/*
-	 * Disable editing of pure view data.
-	 */
-	if(previous_view==GTR_MESSAGE_VIEW)
-	{
-		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
-	}
 
 	/*
 	 * Use the new helper functions for the real core task.
@@ -217,14 +188,6 @@ void show_hotkey()
 	 */
 	current_view=GTR_HOTKEY_VIEW;
 	clean_text_boxes();
-
-	/*
-	 * Non-editability.
-	 */
-	if(previous_view==GTR_HOTKEY_VIEW)
-	{
-		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
-	}
 
 	/*
 	 * Handle both msgid and msgstr for the hotkeys.
@@ -423,20 +386,3 @@ GtrView gtranslator_views_get_previous()
 	return previous_view;
 }
 
-/*
- * Prepare the message for navigation.
- */
-void gtranslator_views_prepare_for_navigation()
-{
-	if(current_view!=GTR_MESSAGE_VIEW)
-	{
-		/*
-		 * Get the message view before navigating to anywhere and make
-		 *  the translation box editable again.
-		 */
-		display_msg(po->current);
-		gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
-	}
-	
-	gtranslator_update_msg();
-}

@@ -38,10 +38,6 @@
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
 
-#ifdef USE_WINDOW_ICON
-#include <libgnomeui/gnome-window-icon.h>
-#endif
-
 /*
  * Functions to be used only internally in this file
  */

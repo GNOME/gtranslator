@@ -43,85 +43,29 @@ dnl -------------------------------------------------------------------
 ALL_LINGUAS="az da de el en_GB es fi fr gl hu it ja ko lt nl no pl pt_BR ru sv tr uk wa"
 AM_GNOME_GETTEXT
 
-dnl -------------------------------------------------------------------
-dnl Check for the window-icon feature of gnome-libs > 1.2.0
-dnl -------------------------------------------------------------------
-MY_CFLAGS=$CFLAGS
-MY_LIBS=$LIBS
-CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
-LIBS="$LIBS `gnome-config --libs gnomeui`"
-use_window_icon=yes
-AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, 
-	AC_MSG_RESULT(["+++"	
-"+++ Will use window-icon feature..."
-"+++"])
-	,[
-	AC_MSG_RESULT(["+++"	
-"+++ Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"
-"+++"])
-	use_window_icon=no])
-CFLAGS=$MY_CFLAGS
-LIBS=$MY_LIBS
-AM_CONDITIONAL(USE_WINDOW_ICON, test z$use_window_icon = zyes)
-
-dnl -------------------------------------------------------------------
-dnl Check for GConf >= 0.9 and the stuff around it ..
-dnl -------------------------------------------------------------------
-gconf_is_present=yes
-AM_PATH_GCONF(0.9.0,,gconf_is_present=no,gconf-gtk)
-if test "q$gconf_is_present" = "qno" ; then
-	AC_MSG_RESULT(["+++"	
-"+++ Will NOT use GConf..."
-"+++"])
-else
-	if test "ENV$NO_GCONF" = "ENVyes" ; then
-	gconf_is_present=no
-	AC_MSG_RESULT(["+++"
-"+++ Will not use the found GConf as \$NO_GCONF is set to _yes_ ..."
-"+++"])
-	else
-	AC_MSG_RESULT(["+++"	
-"+++ Will use GConf..."
-"+++"])
-	fi
-fi
-AM_CONDITIONAL(GCONF_IS_PRESENT, test x$gconf_is_present = xyes)
-
-dnl -------------------------------------------------------------------
-dnl Check for GnomeVFS via this crappy check.
-dnl -------------------------------------------------------------------
+dnl -----------------------------------------------------------
+dnl Test the version of GnomeVFS to be >= 0.4.1
+dnl -----------------------------------------------------------
 AC_MSG_CHECKING(for GnomeVFS >= 0.4.1)
-if gnome-config --cflags vfs 2>&1 >/dev/null ; then
-	dnl -----------------------------------------------------------
-	dnl Test the version of GnomeVFS to be >= 0.4.1
-	dnl -----------------------------------------------------------
-	VFS_VERSION=`gnome-config --modversion vfs|sed -e 's/.*-//g' -e 's/\.//g'`
-	if test "$VFS_VERSION" -ge 41 ; then
-		AC_MSG_RESULT([
-"+++"		
-"+++ Right your GnomeVFS is recent enough for us... "
-"+++"])	
+if gnome-config --libs vfs 2>&1 >/dev/null ; then
+	VFS_VERSION=`gnome-config --modversion vfs | sed -e 's/^[[^0-9]]*//' | \
+	awk -F. '{ print $1 * 10000 + $2 * 100 + $3;}'`
+	
+	if test "$VFS_VERSION" -ge 401 ; then
+		AC_MSG_RESULT(found)			
 	else
-		if test "$VFS_VERSION" -ge 5 ; then
-			AC_MSG_RESULT([
+		AC_MSG_ERROR([
 "+++"		
-"+++ Good, quite recent GnomeVFS detected..."
-"+++"])			
-		else
-			AC_MSG_ERROR([
-"+++"		
-"+++ Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4.1"
+"+++ Please install GnomeVFS >= 0.4.1 and try again."
 "+++"])
-		fi	
 	fi
 else
 	AC_MSG_ERROR([
 "+++"		
 "+++ Please install GnomeVFS before trying to compile gtranslator."
-"+++"
-"+++ gtranslator now depends on GnomeVFS."
 "+++"])
-fi	
+fi
+
 dnl -------------------------------------------------------------------
 dnl Define the compile flags for gtranslator
 dnl -------------------------------------------------------------------
@@ -134,21 +78,15 @@ dnl -------------------------------------------------------------------
 dnl Check for gal >= 0.5.
 dnl -------------------------------------------------------------------
 AC_MSG_CHECKING(for gal >= 0.5)
-if gnome-config --modversion gal 2>&1 >/dev/null ; then
+if gnome-config --libs gal 2>&1 >/dev/null ; then
 	dnl -----------------------------------------------------------
 	dnl gal is present; check for the right version numbers.
 	dnl -----------------------------------------------------------
-	_GAL_VERSION=`gnome-config --modversion gal|sed -e 's/^.*-0\.//g' -e 's/\.//g'`
-	if test $_GAL_VERSION -ge 5 -o $_GAL_VERSION -ge 5; then
-		dnl ---------------------------------------------------
-		dnl We've found gal >= 0.5, good for us...
-		dnl ---------------------------------------------------
-		AC_MSG_RESULT([
-"+++"		
-"+++ Found gal."
-"+++"])
-		GAL_CFLAGS=`gnome-config --cflags gal`
-		GAL_LIBS=`gnome-config --libs gal`
+	GAL_VERSION=`gnome-config --modversion gal | sed -e 's/^[[^0-9]]*//' | \
+	awk -F. '{ print $1 * 10000 + $2 * 100 + $3;}'`
+	
+	if test "$GAL_VERSION" -ge 500 ; then
+		AC_MSG_RESULT(found)			
 	else
 		dnl ---------------------------------------------------
 		dnl Tell the user that we've found gal, but it's too
@@ -156,31 +94,65 @@ if gnome-config --modversion gal 2>&1 >/dev/null ; then
 		dnl ---------------------------------------------------
 		AC_MSG_ERROR([
 "+++"		
-"+++ Please install a newer version of gal and try reconfiguring."
+"+++ Please install gal >= 0.5 and try configuring again."
 "+++"])
 	fi
 else
-	dnl -----------------------------------------------------------
-	dnl No gal found at all? No problem, simply use the current
-	dnl  standard GUI.
-	dnl -----------------------------------------------------------
-	AC_MSG_RESULT([no gal found])
 	AC_MSG_ERROR([
 "+++"	
 "+++ Please install gal before configuring again."
 "+++"])
 fi
+
+GAL_CFLAGS=`gnome-config --cflags gal`
+GAL_LIBS=`gnome-config --libs gal`
 AC_SUBST(GAL_CFLAGS)
 AC_SUBST(GAL_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Substitute PACKAGE_LOCALE_DIR in config.h.
+dnl Check for GConf >= 0.9 and the stuff around it ..
 dnl -------------------------------------------------------------------
-if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
+
+GCONF_CFLAGS=""
+GCONF_LIBS=""
+
+try_gconf=true
+AC_ARG_WITH(gconf,
+	[--{with,without}-gconf    Compile with GConf support or without it],
+	if test x$withval = xno; then
+		try_gconf=false
+	fi
+)
+
+gconf_is_present=yes
+if $try_gconf; then
+	AM_PATH_GCONF(0.9.0,,gconf_is_present=no,gconf-gtk)
+	if test "x$gconf_is_present" = "xno" ; then
+		AC_MSG_RESULT(not found)
+	else
+		AC_MSG_RESULT(found)
+		GCONF_CFLAGS="$GCONF_CFLAGS -DGCONF_IS_PRESENT"
+	fi
 else
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
+	echo "Not checking for GConf"
+	gconf_is_present=no
 fi
+
+AC_SUBST(GCONF_CFLAGS)
+AC_SUBST(GCONF_LIBS)
+
+dnl -------------------------------------------------------------------
+dnl Check for the window-icon feature of gnome-libs > 1.0.59
+dnl -------------------------------------------------------------------
+MY_CFLAGS=$CFLAGS
+MY_LIBS=$LIBS
+CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
+LIBS="$LIBS `gnome-config --libs gnomeui`"
+use_window_icon=no
+AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, use_window_icon=yes])
+CFLAGS=$MY_CFLAGS
+LIBS=$MY_LIBS
+AM_CONDITIONAL(USE_WINDOW_ICON, test z$use_window_icon = zyes)
 
 dnl -------------------------------------------------------------------
 dnl Simply substitute the icon-location directory
@@ -197,46 +169,19 @@ AC_ARG_ENABLE(mime-bind,
 AC_MSG_CHECKING([if to bind the po-files with gtranslator ])
 if test "x$enable_mime_bind" = "xyes" ; then
 	AC_DEFINE(BIND_MIME)
-	AC_MSG_RESULT([
-"+++"	
-"+++ Will install the mime and keys files."
-"+++"])
-else
-	AC_MSG_RESULT([
-"+++"
-"+++ Not installing the mime and keys files for the mime-types."
-"+++"])
 fi
+AC_MSG_RESULT($enable_mime_bind)
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
-
-dnl -------------------------------------------------------------------
-dnl Use extended compile warn flags per default.
-dnl -------------------------------------------------------------------
-CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts\
- -Wimplicit -Wreturn-type -Wswitch -Wcomment"
-
-dnl -------------------------------------------------------------------
-dnl Enable debug builds.
-dnl -------------------------------------------------------------------
-AC_ARG_ENABLE(debugspecs,
-	[  --enable-debugspecs           Enable debug specs and build],
-	debugpoints=no, debugpoints=yes)
-
-if test "%${debugpoints}" = "%no" ; then
-	CFLAGS="`echo $CFLAGS|sed -e s/-g.//g -e s/-ggdb//g`"
-else
-	CFLAGS="`echo $CFLAGS|sed -e s/-O.//g` -ggdb"
-fi
-AC_MSG_CHECKING([if a gdb/debug friendly version should be build ])
-AC_MSG_RESULT(${debugpoints})
 
 dnl -------------------------------------------------------------------
 dnl Check for nautilus and try to get out all the flags for the
 dnl  nautilus-view.
 dnl -------------------------------------------------------------------
-nautilus_prefix=
-build=
+build_nv=no
 PRE_LIBS="$LIBS"
+NAUTILUS_CFLAGS=
+NAUTILUS_LIBS=
+
 AC_MSG_CHECKING([whether nautilus-gtranslator-view should be build])
 AC_ARG_ENABLE(nautilus-view,
 [  --enable-nautilus-view        Enable nautilus-gtranslator-view], build=yes,)
@@ -244,65 +189,58 @@ AC_ARG_ENABLE(nautilus-view,
 dnl -------------------------------------------------------------------
 dnl Check if the --enable switch had been given.
 dnl -------------------------------------------------------------------
-if test "x${build}" = "x" ; then
-	AC_MSG_RESULT([
-"+++"	
-"+++ Not building Nautilus view"
-"+++"])
-	build_nv=no
+
+if test "x${build_nv}" = "xno" ; then
+	AC_MSG_RESULT(no)
 else
 	nautilus_prefix=`which nautilus|sed -e s%/bin/nautilus%%g`
-fi
 
-if test "x${build}" = "xyes" -a "z${nautilus_prefix}" = "z"; then
-	AC_MSG_RESULT([
-"+++"	
-"+++ No Nautilus prefix could be determined -- not building nautilus-gtranslator-view"
-"+++"])
-	build_nv=no
-	NAUTILUS_CFLAGS=
-	NAUTILUS_LIBS=
-else
-	if test "x${build}" = "xyes" ; then
-	build_nv=no
-	mycheck_function="nautilus_view_standard_main_multi"
-	AC_MSG_RESULT([
-"+++"	
-"+++ ${nautilus_prefix} as Nautilus prefix determined: checking for Nautilus libraries"
-"+++"])
-	LIBS="`gnome-config --libs gnome gnomeui bonobo bonobox gal vfs` \
-	-L${nautilus_prefix}/lib -lnautilus"
-	AC_CHECK_LIB(nautilus, ${mycheck_function},
-		build_nv=yes,
-		AC_MSG_WARN([
-"+++"		
-"+++ libnautilus does not contain ${mycheck_function}: Not building Nautilus view"
-"+++"]))
-	fi
-fi
-
-dnl -------------------------------------------------------------------
-dnl Get the nautilus compile flags for the view..
-dnl -------------------------------------------------------------------
-if test "t$build_nv" = "tyes" ; then
-	AC_MSG_CHECKING([for necessary Nautilus headers in ${nautilus_prefix}/include/libnautilus])	
-	if test -f "${nautilus_prefix}/include/libnautilus/nautilus-view.h" -a \
-		-f "${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h" -a \
-		-f "${nautilus_prefix}/include/libnautilus/nautilus-bonobo-ui.h" ; then
-		AC_MSG_RESULT([found])
-		NAUTILUS_CFLAGS="`gnome-config --cflags oaf vfs bonobo bonobox` \
-		-I${nautilus_prefix}/include/libnautilus \
-		`gconf-config --cflags gconf-gtk`"
-		NAUTILUS_LIBS="`gnome-config --libs oaf vfs bonobo bonobox` \
-		-lnautilus `gconf-config --libs gconf-gtk`"
-	else
-		AC_MSG_WARN([
-"+++"		
-"+++ Could not find the necessary headers of nautilus: please install also the headers"
-"+++ dev/devel packages of nautilus and reconfigure gtranslator if you also want to"
-"+++ see the nautilus-gtranslator-view in action."
-"+++"])
+	if test "z${nautilus_prefix}" = "z"; then
+		AC_MSG_RESULT([
+	"+++"	
+	"+++ No Nautilus prefix could be determined -- not building nautilus-gtranslator-view"
+	"+++"])
 		build_nv=no
+	else
+		build_nv=no
+		mycheck_function="nautilus_view_standard_main_multi"
+		AC_MSG_RESULT([
+	"+++"	
+	"+++ ${nautilus_prefix} as Nautilus prefix determined: checking for Nautilus libraries"
+	"+++"])
+		LIBS="`gnome-config --libs gnome gnomeui bonobo bonobox gal vfs` \
+		-L${nautilus_prefix}/lib -lnautilus"
+		AC_CHECK_LIB(nautilus, ${mycheck_function},
+			build_nv=yes,
+			AC_MSG_WARN([
+	"+++"		
+	"+++ libnautilus does not contain ${mycheck_function}: Not building Nautilus view"
+	"+++"]))
+	fi
+
+	dnl -------------------------------------------------------------------
+	dnl Get the nautilus compile flags for the view..
+	dnl -------------------------------------------------------------------
+	if test "x$build_nv" = "xyes" ; then
+		AC_MSG_CHECKING([for necessary Nautilus headers in ${nautilus_prefix}/include/libnautilus])	
+		if test -f "${nautilus_prefix}/include/libnautilus/nautilus-view.h" -a \
+			-f "${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h" -a \
+			-f "${nautilus_prefix}/include/libnautilus/nautilus-bonobo-ui.h" ; then
+			AC_MSG_RESULT(found)
+			NAUTILUS_CFLAGS="`gnome-config --cflags oaf vfs bonobo bonobox` \
+			-I${nautilus_prefix}/include/libnautilus \
+			`gconf-config --cflags gconf-gtk`"
+			NAUTILUS_LIBS="`gnome-config --libs oaf vfs bonobo bonobox` \
+			-lnautilus `gconf-config --libs gconf-gtk`"
+		else
+			AC_MSG_WARN([
+	"+++"		
+	"+++ Could not find the necessary headers of nautilus: please install also the headers"
+	"+++ dev/devel packages of nautilus and reconfigure gtranslator if you also want to"
+	"+++ see the nautilus-gtranslator-view in action."
+	"+++"])
+			build_nv=no
+		fi
 	fi
 fi
 
@@ -313,7 +251,7 @@ dnl -------------------------------------------------------------------
 LIBS="$PRE_LIBS"
 AC_SUBST(NAUTILUS_CFLAGS)
 AC_SUBST(NAUTILUS_LIBS)
-AM_CONDITIONAL(BUILD_NV, test a$build_nv = ayes)
+AM_CONDITIONAL(BUILD_NV, test x$build_nv = xyes)
 
 dnl -------------------------------------------------------------------
 dnl Check for Scrollkeeper and set the corresponding conditional var if
@@ -335,6 +273,20 @@ fi
 AC_SUBST(SC_OMFDIR)
 AC_SUBST(SC_STATEDIR)
 AM_CONDITIONAL(SCROLLKEEPER_PRESENT, test z$sc_present = zyes)
+
+dnl -------------------------------------------------------------------
+dnl Enable debug builds.
+dnl -------------------------------------------------------------------
+AC_ARG_ENABLE(debug,
+	[  --enable-debug                Turn on debugging flags [default=no]],
+	,enable_debug=no)
+AC_MSG_CHECKING([if a gdb friendly version should be build])
+if test "x$enable_debug" = "xyes" ; then
+	CFLAGS="$CFLAGS -ggdb"
+else
+	CFLAGS="`echo $CFLAGS|sed -e s/-g //g -e s/-ggdb//g`"
+fi
+AC_MSG_RESULT($enable_debug)
 
 dnl -------------------------------------------------------------------
 dnl Get the date for the man-page and substitute it there and anywhere.
@@ -373,11 +325,9 @@ src/pixmaps/Makefile
 dnl ------------------------------------------------------------------
 dnl Print an information screen at the end of the process
 dnl ------------------------------------------------------------------
-grep -sq USE_WINDOW_ICON\ 1  config.h && \
-use_window_icon_feature=yes
 echo "
 ------------------------------------------------------------------
--- gtranslator compilage options
+-- gtranslator compilation options
 
 gtranslator version	  :	${VERSION}
 
@@ -391,7 +341,7 @@ CFLAGS                 	  :	${CFLAGS}
 
 GConf based config	  :	${gconf_is_present:-no}
 
-debug friendly build	  :	${debugpoints:-no}
+debug friendly build	  :	${enable_debug:-no}
 
 nautilus-gtranslator-view :	${build_nv:-no}
 

@@ -347,25 +347,21 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 
 	text=gtk_editable_get_chars(GTK_EDITABLE(textwidget), 0, -1);
 
+	nothing_changes=TRUE;
 	if(text && text[0]!='\0')
 	{
 		gint pos=gtk_editable_get_position(GTK_EDITABLE(textwidget));
 		
 		gtk_text_freeze(GTK_TEXT(textwidget));
 
-		nothing_changes=TRUE;
 		gtk_editable_delete_text(GTK_EDITABLE(textwidget), 0, -1);
 		gtranslator_syntax_insert_text(textwidget, text);
-		nothing_changes=FALSE;
-
-		if(pos >= 0)
-		{
-			gtk_editable_set_position(GTK_EDITABLE(textwidget), 
-				pos);
-		}
 		
 		gtk_text_thaw(GTK_TEXT(textwidget));
+
+		gtk_editable_set_position(GTK_EDITABLE(textwidget), pos);
 	}
+	nothing_changes=FALSE;
 
 	g_free(text);
 }

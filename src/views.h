@@ -24,13 +24,14 @@
 
 /*
  * gtranslator's view atre all part of this enumeration.
+ * Order should be kept in sync with gtranslator_sidebar_activate_views()
  */
 typedef enum {
-	GTR_C_FORMAT_VIEW,
-	GTR_COMMENT_VIEW,
-	GTR_HOTKEY_VIEW,
 	GTR_MESSAGE_VIEW,
+	GTR_COMMENT_VIEW,
 	GTR_NUMBER_VIEW,
+	GTR_C_FORMAT_VIEW,
+	GTR_HOTKEY_VIEW,
 	GTR_LAST_VIEW
 } GtrView;
 
@@ -45,11 +46,5 @@ gboolean gtranslator_views_set(GtrView view);
  */
 GtrView gtranslator_views_get_current(void);
 GtrView gtranslator_views_get_previous(void);
-
-/*
- * Prepare the message for navigation -- save the contents or
- *  change the view.
- */
-void gtranslator_views_prepare_for_navigation(void);
 
 #endif

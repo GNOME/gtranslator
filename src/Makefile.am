@@ -5,32 +5,17 @@
 
 SUBDIRS = . pixmaps
 
-if USE_WINDOW_ICON
-myicon = \
-	-DWINDOW_ICON=\""${datadir}/pixmaps/gtranslator.png"\"
-else
-myicon =
-endif
-
-if GCONF_IS_PRESENT
-gconf_cflags = $(GCONF_CFLAGS) -DGCONF_IS_PRESENT=7
-gconf_libs = $(GCONF_LIBS)
-else
-gconf_cflags =
-gconf_libs =
-endif
-
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
+	$(GNOME_INCLUDEDIR) \
 	$(GAL_CFLAGS) \
 	$(VFS_CFLAGS) \
-	$(GNOME_INCLUDEDIR) \
+	$(GCONF_CFLAGS) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
-	$(gconf_cflags) \
-	$(myicon) \
+	-DWINDOW_ICON=\""${datadir}/pixmaps/gtranslator.png"\" \
 	-DSCHEMESDIR=\""$(datadir)/gtranslator/colorschemes"\"
 
 bin_PROGRAMS = gtranslator
@@ -68,11 +53,10 @@ gtranslator_SOURCES = \
 	views.c views.h
 
 gtranslator_LDADD = \
-	-L/usr/X11R6/lib \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
 	$(INTLLIBS) \
-	$(gconf_libs) \
+	$(GCONF_LIBS) \
 	$(VFS_LIBS) \
 	$(GAL_LIBS)
 

@@ -856,6 +856,7 @@ void gtranslator_update_msg(void)
 		return;
 	len = gtk_text_get_length(GTK_TEXT(trans_box));
 	if (len) {
+		/* Make both strings end with or without endline */
 		if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
 			if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len - 1)
 			    != '\n')
@@ -1000,8 +1001,8 @@ void goto_given_msg(GList  * to_go)
 {
 	static gint pos = 0;
 
-	gtranslator_views_prepare_for_navigation();
-
+	gtranslator_update_msg();
+	
 	if (pos == 0)
 	{
 		enable_actions(ACT_FIRST, ACT_BACK);
@@ -1076,11 +1077,6 @@ static void copy_clipboard(GtkWidget  * widget, gpointer useless)
 static void paste_clipboard(GtkWidget  * widget, gpointer useless)
 {
 	gtk_editable_paste_clipboard(GTK_EDITABLE(trans_box));
-
-	/*
-	 * Rehighlight the text widget after a paste.
-	 */ 
-	gtranslator_syntax_update_text(trans_box);
 }
 
 static void clear_selection(GtkWidget  * widget, gpointer useless)
@@ -1128,7 +1124,10 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 	}
 
-	gtranslator_syntax_update_text(widget);
+	/* FIXME: this function is used no notify that file has changed, not
+	 * just the text, and sometimes widget==NULL */
+	if(widget)
+		gtranslator_syntax_update_text(widget);
 }
 
 /* When inserting text, exchange spaces with dot chars */

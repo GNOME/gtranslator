@@ -1,3 +1,30 @@
+2001-03-29  Gediminas Paulauskas <menesis@delfi.lt>
+
+	Hopefully fixed all crashes and position problems.
+	
+	* gui.c: use update_msg() instead of removed
+	views_prepare_for_navigation().
+	(paste_clipboard): do not call syntax_update.
+	(text_has_got_changed): same.
+	* sidebar.c: (select_icon): do not switch {}, simply jump to item
+	number.
+	* syntax.c: (syntax_update_text): set position only after thaw. This
+	was the cause of crash.
+	* views.c: (gtranslator_views_set): changed view check to
+	g_return_if_fail to see warnings. Do not change views if not needed.
+	Call update_msg before leaving message view. Set editable flag in
+	this function, also change nothing_changes.
+	(gtranslator_views_prepare_for_navigation): removed.
+	* views.h: sort enum by view order, not alphabet :)
+
+2001-03-29  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* Makefile.am: GCONF_IS_PRESENT is added to GCONF_CFLAGS in configure
+	now. Always define WINDOW_ICON.
+	* main.c: revert back to checking USE_WINDOW_ICON.
+	use GNOMELOCALEDIR instead of additional variable.
+	* dialog.c: no need to include gnome-window-icon anymore.
+
 2001-03-28  Fatih Demir <kabalak@gtranslator.org>
 
 	* views.c: Rewrite the C format routines according to the "new"
