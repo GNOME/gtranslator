@@ -113,6 +113,10 @@ void gtranslator_replace_run(GtrReplace *replace)
 	}
 	else
 	{
+
+		/* A great opportunity to update po->current->data */
+		gtranslator_message_update();
+
 		if(replace->replace_all)
 		{
 			/*
