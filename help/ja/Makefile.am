@@ -2,45 +2,34 @@
 ## gtranslator's docs Makefile.am.
 ##
 
-gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/ja
+SUBDIRS = figures
 
-gtranslator_sgmlfile = gtranslator.sgml
+##
+## Your language locale -- should work with "ja" here already...
+##
+lc = ja
 
-gtranslator_htmlfiles = \
-	authors.html \
-	commandlinearguments.html \
-	features.html \
-	index.html \
-	thanks.html \
-	use-of-gtranslator.html
+gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/$(lc)
 
-gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat
+gtranslator_xmlfile = gtranslator.xml
 
-if JW_PRESENT
-build_command=jw -c /etc/sgml/catalog $(gtranslator_sgmlfile) -o gtranslator
-else
-build_command=db2html $(gtranslator_sgmlfile)
-endif
-	
-$(gtranslator_htmlfiles):$(gtranslator_sgmlfile)
-	-@if [ ! -f gtranslator/index.html ]; then cd $(srcdir) && $(build_command); fi
-	-cd $(srcdir) && cp gtranslator/$@ .
+gtranslator_omfdir = $(SC_OMFDIR)/gtranslator
 
-disthook:
-	$(mkinstalldirs) $(distdir)/gtranslator
-	$(mkinstalldirs) $(distdir)/gtranslator/stylesheets-images
-	-cp $(srcdir)/gtranslator/*.html $(srcdir)/gtranslator/*.css \
-		$(distdir)/gtranslator
-	-cp $(srcdir)/gtranslator/stylesheet-images/*.* \
-		$(distdir)/gtranslator/stylesheet-images
-	-cp $(srcdir)/*.html $(distdir)
-	
-distclean-generic:
-	@-rm -f $(gtranslator_htmlfiles) Makefile
-	@-rm -rf gtranslator
+gtranslator_omf_DATA = $(gtranslator_omffile)
 
-install-data-local: index.html
+gtranslator_omffile = gtranslator-$(lc).omf
 
-EXTRA_DIST = $(gtranslator_sgmlfile) \
-	$(gtranslator_htmlfiles) \
-	topic.dat
+$(gtranslator_omffile): $(gtranslator_omffile).presetup
+	scrollkeeper-preinstall $(gtranslator_helpdir)/$(gtranslator_xmlfile) \
+		$(gtranslator_omffile).presetup $(gtranslator_omffile)
+
+gtranslator_help_DATA=$(gtranslator_xmlfile)
+
+install-data-local: 
+	scrollkeeper-update -p $(SC_STATEDIR)
+
+uninstall-local:
+	scrollkeeper-update -p $(SC_STATEDIR)
+
+EXTRA_DIST = $(gtranslator_xmlfile) \
+	$(gtranslator_omffile).presetup
