@@ -273,7 +273,7 @@ void show_up_formats(GtkWidget *output_widget, const gchar *string)
 			/*
 			 * Recognize and get the formats.
 			 */
-			if(wants.dot_char)
+			if(GtrPreferences.dot_char)
 			{
 				if(string[z]!=_(" ")[0] && !ispunct(string[z]) && 
 					!iscntrl(string[z]))
@@ -351,7 +351,7 @@ void insert_space(GString **string)
 {
 	g_return_if_fail(*string!=NULL);
 
-	if(wants.dot_char)
+	if(GtrPreferences.dot_char)
 	{
 		*string=g_string_append(*string, _("·"));
 	}

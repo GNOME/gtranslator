@@ -82,7 +82,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 		return;
 	}
 
-	if(wants.dot_char)
+	if(GtrPreferences.dot_char)
 	{
 		specialchar=_("·")[0];
 	}

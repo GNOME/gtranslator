@@ -46,6 +46,10 @@ struct {
 	 */
 	guint match_case		: 1;
 	guint find_in			: 3;
+
+	/*
+	 * Special options, taken by value in the prefs-box.
+	 */
 	guint fill_header		: 1;
 	guint update_function		: 1;
 	guint dot_char			: 1;
@@ -56,12 +60,18 @@ struct {
 	guint instant_spell_check	: 1;
 	guint use_own_dict		: 1;
 	guint keep_obsolete		: 1;
+
+	gfloat autosave_timeout;
+	
+	/*
+	 * User-specified strings.
+	 */
 	gchar *spell_command;
 	gchar *dictionary;
 	gchar *font;
 	gchar *scheme;
 	gchar *defaultdomain;
-} wants;
+} GtrPreferences;
 
 /*
  * Creating the preferences box and the needed backend-functions.

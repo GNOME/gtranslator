@@ -114,7 +114,7 @@ GList *gtranslator_history_get(void)
 		/*
 		 * Check if the file exists before adding it to list
 		 */
-		if(wants.check_recent_file)
+		if(GtrPreferences.check_recent_file)
 		{
 			if(!g_file_exists(myentry->filename))
 			{

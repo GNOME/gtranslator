@@ -666,8 +666,8 @@ static gboolean button_press_intercept_cb(GtkText *gtktext, GdkEventButton *eb, 
 	 *  the popup menu if disabled -- in the other case gtkspell
 	 *   takes the middle click.
 	 */
-	if(((wants.popup_menu) && (eb->button != 2)) ||
-	   ((!wants.popup_menu) && (eb->button != 3)))
+	if(((GtrPreferences.popup_menu) && (eb->button != 2)) ||
+	   ((!GtrPreferences.popup_menu) && (eb->button != 3)))
 		return FALSE;
 
 	/* forge the leftclick */

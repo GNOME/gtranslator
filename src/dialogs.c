@@ -427,21 +427,21 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 
 static void match_case_toggled(GtkWidget * widget, gpointer useless)
 {
-	wants.match_case =
+	GtrPreferences.match_case =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 	gtranslator_update_regex_flags();
 	gtranslator_config_init();
 	gtranslator_config_set_bool("find/case_sensitive",
-			      wants.match_case);
+			      GtrPreferences.match_case);
 	gtranslator_config_close();
 }
 
 static void find_in_activated(GtkWidget * widget, gpointer which)
 {
-	wants.find_in = GPOINTER_TO_INT(which);
+	GtrPreferences.find_in = GPOINTER_TO_INT(which);
 	gtranslator_config_init();
 	gtranslator_config_set_int("find/find_in",
-			      wants.find_in);
+			      GtrPreferences.find_in);
 	gtranslator_config_close();
 }
 
@@ -483,7 +483,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	
 	match_case = gtk_check_button_new_with_label(_("Case sensitive"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case),
-				     wants.match_case);
+				     GtrPreferences.match_case);
 
 	menu = gtk_menu_new();
 	menu_item = gtk_menu_item_new_with_label(_("English"));
@@ -516,7 +516,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 			   GINT_TO_POINTER(findAll));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
-	switch (wants.find_in) {
+	switch (GtrPreferences.find_in) {
 	case findEnglish:    findMenu = 0; break;
 	case findTranslated: findMenu = 1; break;
 	case findBoth:       findMenu = 2; break;
@@ -602,7 +602,7 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		GINT_TO_POINTER(findBoth));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
-	switch (wants.find_in) 
+	switch (GtrPreferences.find_in) 
 	{
 		case findComment: 
 			findMenu=0;
@@ -941,10 +941,10 @@ void gtranslator_query_dialog(void)
 	/*
 	 * Set up the default query domain from the preferences if available.
 	 */
-	if(wants.defaultdomain)
+	if(GtrPreferences.defaultdomain)
 	{
 		gtk_entry_set_text(GTK_ENTRY(
-			GTK_COMBO(domain)->entry), wants.defaultdomain);
+			GTK_COMBO(domain)->entry), GtrPreferences.defaultdomain);
 	}
 
 	/*

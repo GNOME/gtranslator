@@ -200,7 +200,7 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 		 * Build up the query for the selected default domain and for the
 		 *  current msgid.
 		 */
-		query=gtranslator_new_query(wants.defaultdomain, msg->msgid, lc);
+		query=gtranslator_new_query(GtrPreferences.defaultdomain, msg->msgid, lc);
 
 		/*
 		 * Get a possible translation for the query and free up the used

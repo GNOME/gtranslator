@@ -180,7 +180,7 @@ void gtranslator_set_style(GtkWidget *widget)
 	/*
 	 * Set up the stored values for the background from the preferences.
 	 */
-	if(wants.use_own_specs)
+	if(GtrPreferences.use_own_specs)
 	{
 		spec=gtranslator_config_get_string("colors/own_bg");
 	}
@@ -198,7 +198,7 @@ void gtranslator_set_style(GtkWidget *widget)
 	/*
 	 * Do the same for the foreground.
 	 */
-	if(wants.use_own_specs)
+	if(GtrPreferences.use_own_specs)
 	{
 		spec=gtranslator_config_get_string("colors/own_fg");
 	}

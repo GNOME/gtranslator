@@ -135,10 +135,10 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 
 	if (first) step = 0;
 
-	if ((wants.find_in != 0) && (GTR_MSG(msg->data)->msgstr == NULL))
+	if ((GtrPreferences.find_in != 0) && (GTR_MSG(msg->data)->msgstr == NULL))
 		return -1;
 
-	if ((wants.find_in & findTranslated) && 1 == step) {
+	if ((GtrPreferences.find_in & findTranslated) && 1 == step) {
 		if (hits >= actpos) SEARCH(msgstr);
 
 		if (hits > 0 && actpos < hits) {
@@ -154,7 +154,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			return 1;
 		} else actpos = 0;
 	}
-	if ((wants.find_in & findEnglish) && 0 == step) {
+	if ((GtrPreferences.find_in & findEnglish) && 0 == step) {
 		if (hits >= actpos) SEARCH(msgid);
 		if (hits > 0 && actpos < hits) {
 			/*
@@ -169,7 +169,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			return 1;
 		} else actpos = 0;
 	}
-	if((wants.find_in & findComment) && 2 == step) {
+	if((GtrPreferences.find_in & findComment) && 2 == step) {
 		if (hits >= actpos) SEARCH(comment);
 		if (hits > 0 && actpos < hits) {
 			/*
@@ -231,7 +231,7 @@ void gtranslator_find(GtkWidget * widget, gpointer what)
 
 void gtranslator_update_regex_flags(void)
 {
-	if (wants.match_case)
+	if (GtrPreferences.match_case)
 		eflags &= ~REG_ICASE;
 	else
 		eflags |= REG_ICASE;

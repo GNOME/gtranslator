@@ -146,7 +146,7 @@ void gtranslator_message_show(GList * list_item)
 	 *  syntax stuff, but should. Then here only gtk_text_insert should be
 	 *   left.
 	 */ 
-	if(wants.dot_char)
+	if(GtrPreferences.dot_char)
 	{
 		gchar *temp;
 
@@ -192,7 +192,7 @@ void gtranslator_message_show(GList * list_item)
 	 * Use instant spell checking via gtkspell only if the corresponding
 	 *  setting in the preferences is set.
 	 */
-	if(wants.instant_spell_check)
+	if(GtrPreferences.instant_spell_check)
 	{
 		/*
 		 * Start up gtkspell if not already done.
@@ -205,11 +205,11 @@ void gtranslator_message_show(GList * list_item)
 			/*
 			 * Should we use special dictionary settings?
 			 */ 
-			if(wants.use_own_dict && wants.dictionary)
+			if(GtrPreferences.use_own_dict && GtrPreferences.dictionary)
 			{
 				ispell_command[2]="-d";
 				ispell_command[3]=g_strdup_printf("%s",
-					wants.dictionary);
+					GtrPreferences.dictionary);
 				ispell_command[4]=NULL;
 			} else {
 				ispell_command[2]=NULL;
@@ -277,7 +277,7 @@ void gtranslator_message_update(void)
 		/*
 		 * If spaces were substituted with dots, replace them back
 		 */
-		if(wants.dot_char)
+		if(GtrPreferences.dot_char)
 			gtranslator_utils_invert_dot(msg->msgstr);
 		if (!(msg->status & GTR_MSG_STATUS_TRANSLATED)) {
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;

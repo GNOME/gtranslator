@@ -125,7 +125,7 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 		 * Only respond if a file has been present/opened and if the
 		 * corresponding option is set.
 		 */
-		if((wants.popup_menu) && (file_opened==TRUE))
+		if((GtrPreferences.popup_menu) && (file_opened==TRUE))
 		{
 			GtkWidget *popup_menu;
 			popup_menu=gnome_popup_menu_new(the_popup_menu);
@@ -437,7 +437,7 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 		GtrMsg *msg = GTR_MSG(po->current->data);
 		message_changed = TRUE;
 		gtranslator_actions_enable(ACT_UNDO);
-		if ((wants.unmark_fuzzy) 
+		if ((GtrPreferences.unmark_fuzzy) 
 		     && (msg->status & GTR_MSG_STATUS_FUZZY))
 		{
 		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
@@ -494,7 +494,7 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 	/*
 	 * Do all these steps only if the option to use the '·' is set.
 	 */
-	if(!wants.dot_char)
+	if(!GtrPreferences.dot_char)
 		return;
 
 	result=g_strdup(text);
@@ -517,7 +517,7 @@ void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 {
 	gchar *text;
 
-	if(!wants.dot_char)
+	if(!GtrPreferences.dot_char)
 		return;
 
 	text = g_strndup(selection_data->data, selection_data->length);

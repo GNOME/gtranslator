@@ -117,7 +117,7 @@ gboolean add_to_obsolete(gchar *comment)
 {
 	if(comment && strstr(comment, "#~ msgid"))
 	{
-		if(wants.keep_obsolete) {
+		if(GtrPreferences.keep_obsolete) {
 			if(po->obsolete == NULL)
 			{
 				po->obsolete=g_strdup(comment);
@@ -588,7 +588,7 @@ gboolean gtranslator_save_file(const gchar *name)
 	/*
 	 * Store the obsolete entries in the file -- if wished and possible.
 	 */
-	if(wants.keep_obsolete && po->obsolete)
+	if(GtrPreferences.keep_obsolete && po->obsolete)
 	{
 		fprintf(fs, po->obsolete);
 	}
@@ -596,8 +596,8 @@ gboolean gtranslator_save_file(const gchar *name)
 	fclose(fs);
 	po->file_changed = FALSE;
 
-	/* If user wants to, warn it about fuzzy mesages left */
-	if(wants.warn_if_fuzzy && po->fuzzy)
+	/* If user GtrPreferences to, warn it about fuzzy mesages left */
+	if(GtrPreferences.warn_if_fuzzy && po->fuzzy)
 	{
 		gchar *warn;
 		warn = g_strdup_printf(_("File %s\n"
@@ -630,9 +630,9 @@ void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
 {
 	if (!po->file_changed) {
-		if (wants.dont_save_unchanged_files)
+		if (GtrPreferences.dont_save_unchanged_files)
 			return;
-		if (wants.warn_if_no_change) {
+		if (GtrPreferences.warn_if_no_change) {
 			GtkWidget *dialog;
 			gchar *question;
 			gint reply;
@@ -695,7 +695,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	/*
 	 * Stop gtkspell.
 	 */ 
-	if(wants.instant_spell_check && gtkspell_running())
+	if(GtrPreferences.instant_spell_check && gtkspell_running())
 	{
 		gtkspell_stop();
 	}

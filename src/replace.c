@@ -186,7 +186,7 @@ static void replace_msg(gpointer data, gpointer replace)
 	/*
 	 * Perform the replace actions according to the given action class.
 	 */
-	switch(wants.find_in)
+	switch(GtrPreferences.find_in)
 	{
 		case 4:
 			replace_core(&msg->comment, l_replace);

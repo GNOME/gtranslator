@@ -163,7 +163,7 @@ void gtranslator_actions_set_up_file_opened(void)
 	 * If we'd have the option to use the update function set, enable the
 	 *  Update button in the toolbar and in the menu.
 	 */	       
-	if(wants.update_function)
+	if(GtrPreferences.update_function)
 	{
 		gtranslator_actions_enable(ACT_UPDATE);	
 	}

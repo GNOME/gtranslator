@@ -114,7 +114,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 
 	defaultdomain =
 	    gtranslator_utils_attach_combo_with_label(first_page, 2, _("Default query domain:"),
-			    	    domains, wants.defaultdomain,
+			    	    domains, GtrPreferences.defaultdomain,
 				    gtranslator_preferences_dialog_changed, NULL);
 	
 	/*
@@ -149,57 +149,57 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	unmark_fuzzy =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 0,
 		_("Set non-fuzzy status, if message was changed"),
-		wants.unmark_fuzzy, gtranslator_preferences_dialog_changed);
+		GtrPreferences.unmark_fuzzy, gtranslator_preferences_dialog_changed);
 	warn_if_fuzzy =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 1,
 		_("Warn if the po file contains fuzzy translations"),
-		wants.warn_if_fuzzy, gtranslator_preferences_dialog_changed);
+		GtrPreferences.warn_if_fuzzy, gtranslator_preferences_dialog_changed);
 	dont_save_unchanged_files =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 2,
 		_("Don't save unchanged po files"),
-		wants.dont_save_unchanged_files, gtranslator_preferences_dialog_changed);
+		GtrPreferences.dont_save_unchanged_files, gtranslator_preferences_dialog_changed);
 	warn_if_no_change =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
-		wants.warn_if_no_change, gtranslator_preferences_dialog_changed);
+		GtrPreferences.warn_if_no_change, gtranslator_preferences_dialog_changed);
 	keep_obsolete =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
 		_("Keep obsolete message in the po files"),
-		wants.keep_obsolete, gtranslator_preferences_dialog_changed);
+		GtrPreferences.keep_obsolete, gtranslator_preferences_dialog_changed);
 
 	/*
 	 * The fourth page with the popup menu & the dot_char.
 	 */
 	use_dot_char=gtranslator_utils_attach_toggle_with_label(fourth_page, 0,
 		_("Use free space indicating special character"),
-		wants.dot_char, gtranslator_preferences_dialog_changed);
+		GtrPreferences.dot_char, gtranslator_preferences_dialog_changed);
 	enable_popup_menu=gtranslator_utils_attach_toggle_with_label(fourth_page, 2,
 		_("Enable the popup menu"),
-		wants.popup_menu, gtranslator_preferences_dialog_changed);	
+		GtrPreferences.popup_menu, gtranslator_preferences_dialog_changed);	
 	use_update_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 3,
 		_("Enable the update function of gtranslator (you need the sources for this)"),
-		wants.update_function, gtranslator_preferences_dialog_changed);
+		GtrPreferences.update_function, gtranslator_preferences_dialog_changed);
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
 		_("Save geometry on exit & restore it on startup"),
-		wants.save_geometry, gtranslator_preferences_dialog_changed);
+		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
 	no_uzis=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
 		_("Don't show the update information dialogs"),
-		wants.uzi_dialogs, gtranslator_preferences_dialog_changed);
+		GtrPreferences.uzi_dialogs, gtranslator_preferences_dialog_changed);
 	/*
 	 * The fifth page with the Recent files options.
 	 */
 	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 0,
 		_("Check every recent file before listing it up"),
-		wants.check_recent_file, gtranslator_preferences_dialog_changed);
+		GtrPreferences.check_recent_file, gtranslator_preferences_dialog_changed);
 	instant_spell_checking=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
 		_("Instant spell checking"),
-		wants.instant_spell_check, gtranslator_preferences_dialog_changed);
+		GtrPreferences.instant_spell_check, gtranslator_preferences_dialog_changed);
 	use_own_dict=gtranslator_utils_attach_toggle_with_label(fifth_page, 2,
 		_("Use special dictionary"),
-		wants.use_own_dict, gtranslator_preferences_dialog_changed);
+		GtrPreferences.use_own_dict, gtranslator_preferences_dialog_changed);
 	dictionary_file=
 	    gtranslator_utils_attach_entry_with_label(fifth_page, 3, _("Dictionary to use:"),
-				    wants.dictionary, gtranslator_preferences_dialog_changed);
+				    GtrPreferences.dictionary, gtranslator_preferences_dialog_changed);
 	
 	/*
 	 * The sixth page with the special font/color stuff.
@@ -213,7 +213,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 
 	own_specs=gtranslator_utils_attach_toggle_with_label(sixth_page, 1,
 		_("Apply special font/colors"),
-		wants.use_own_specs, gtranslator_preferences_dialog_changed);
+		GtrPreferences.use_own_specs, gtranslator_preferences_dialog_changed);
 	
 	font_label=gtk_label_new(_("Font:"));
 	fg_color_label=gtk_label_new(_("Foreground color:"));
@@ -222,10 +222,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
 		_("gtranslator -- font selection"));
 	
-	if(wants.font)
+	if(GtrPreferences.font)
 	{
 		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
-						wants.font);
+						GtrPreferences.font);
 	}
 
 	gnome_font_picker_set_mode(GNOME_FONT_PICKER(font),
@@ -303,53 +303,53 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	update(lg, GTK_COMBO(lg_email)->entry);
 	update(mime, GTK_COMBO(mime_type)->entry);
 	update(enc, GTK_COMBO(encoding)->entry);
-	update(wants.defaultdomain, GTK_COMBO(defaultdomain)->entry);
-	update(wants.dictionary, dictionary_file);
+	update(GtrPreferences.defaultdomain, GTK_COMBO(defaultdomain)->entry);
+	update(GtrPreferences.dictionary, dictionary_file);
 #undef update
 #define if_active(widget) \
 	gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))
-	wants.save_geometry = if_active(save_geometry_tb);
-	wants.unmark_fuzzy = if_active(unmark_fuzzy);
-	wants.warn_if_fuzzy = if_active(warn_if_fuzzy);
-	wants.warn_if_no_change = if_active(warn_if_no_change);
-	wants.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
-	wants.dot_char = if_active(use_dot_char);
-	wants.update_function = if_active(use_update_function);
-	wants.popup_menu = if_active(enable_popup_menu);
-	wants.uzi_dialogs = if_active(no_uzis);
-	wants.check_recent_file = if_active(check_recent_files);
-	wants.instant_spell_check = if_active(instant_spell_checking);
-	wants.use_own_specs = if_active(own_specs);
-	wants.use_own_dict = if_active(use_own_dict);
-	wants.keep_obsolete = if_active(keep_obsolete);
+	GtrPreferences.save_geometry = if_active(save_geometry_tb);
+	GtrPreferences.unmark_fuzzy = if_active(unmark_fuzzy);
+	GtrPreferences.warn_if_fuzzy = if_active(warn_if_fuzzy);
+	GtrPreferences.warn_if_no_change = if_active(warn_if_no_change);
+	GtrPreferences.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
+	GtrPreferences.dot_char = if_active(use_dot_char);
+	GtrPreferences.update_function = if_active(use_update_function);
+	GtrPreferences.popup_menu = if_active(enable_popup_menu);
+	GtrPreferences.uzi_dialogs = if_active(no_uzis);
+	GtrPreferences.check_recent_file = if_active(check_recent_files);
+	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
+	GtrPreferences.use_own_specs = if_active(own_specs);
+	GtrPreferences.use_own_dict = if_active(use_own_dict);
+	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
 #undef if_active
 	
 	gtranslator_config_init();
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
-	gtranslator_config_set_string("query/defaultdomain", wants.defaultdomain);
+	gtranslator_config_set_string("query/defaultdomain", GtrPreferences.defaultdomain);
 	gtranslator_config_set_string("language/name", language);
 	gtranslator_config_set_string("language/mime_type", mime);
 	gtranslator_config_set_string("language/encoding", enc);
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
-	gtranslator_config_set_string("dict/file", wants.dictionary);
+	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
 	
-	g_free(wants.font);
-	wants.font=g_strdup(gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
-	gtranslator_config_set_string("font/name", wants.font);
+	g_free(GtrPreferences.font);
+	GtrPreferences.font=g_strdup(gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
+	gtranslator_config_set_string("font/name", GtrPreferences.font);
 
 	/*
 	 * Apply the given color scheme.
 	 */ 
-	g_free(wants.scheme);
-	wants.scheme=gtk_editable_get_chars(
+	g_free(GtrPreferences.scheme);
+	GtrPreferences.scheme=gtk_editable_get_chars(
 		GTK_EDITABLE(gnome_file_entry_gtk_entry(
 		GNOME_FILE_ENTRY(scheme_file))), 0, -1);
 
-	if(wants.scheme && g_file_exists(wants.scheme))
+	if(GtrPreferences.scheme && g_file_exists(GtrPreferences.scheme))
 	{
-		gtranslator_color_scheme_apply(wants.scheme);
+		gtranslator_color_scheme_apply(GtrPreferences.scheme);
 		theme=gtranslator_color_scheme_load_from_prefs();
 
 		gtranslator_colors_initialize();
@@ -361,32 +361,32 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_set_style(text_box);
 	gtranslator_set_style(trans_box);
 
-	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);
-	gtranslator_config_set_bool("toggles/warn_if_fuzzy", wants.warn_if_fuzzy);
+	gtranslator_config_set_bool("toggles/save_geometry", GtrPreferences.save_geometry);
+	gtranslator_config_set_bool("toggles/warn_if_fuzzy", GtrPreferences.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
-			      wants.unmark_fuzzy);
+			      GtrPreferences.unmark_fuzzy);
 	gtranslator_config_set_bool("toggles/warn_if_no_change",
-			      wants.warn_if_no_change);
+			      GtrPreferences.warn_if_no_change);
 	gtranslator_config_set_bool("toggles/do_not_save_unchanged_files",
-			      wants.dont_save_unchanged_files);
+			      GtrPreferences.dont_save_unchanged_files);
 	gtranslator_config_set_bool("toggles/use_dot_char",
-			      wants.dot_char);
+			      GtrPreferences.dot_char);
 	gtranslator_config_set_bool("toggles/use_update_function",
-			      wants.update_function);
+			      GtrPreferences.update_function);
 	gtranslator_config_set_bool("toggles/enable_popup_menu",
-			      wants.popup_menu);
+			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/uzi_dialogs",
-			      wants.uzi_dialogs);
+			      GtrPreferences.uzi_dialogs);
 	gtranslator_config_set_bool("toggles/check_recent_files",
-			      wants.check_recent_file);
+			      GtrPreferences.check_recent_file);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
-			      wants.instant_spell_check);
+			      GtrPreferences.instant_spell_check);
 	gtranslator_config_set_bool("toggles/use_own_specs",
-			      wants.use_own_specs);
+			      GtrPreferences.use_own_specs);
 	gtranslator_config_set_bool("toggles/use_own_dict",
-			      wants.use_own_dict);
+			      GtrPreferences.use_own_dict);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
-			      wants.keep_obsolete);
+			      GtrPreferences.keep_obsolete);
 	gtranslator_config_close();
 }
 
@@ -455,54 +455,54 @@ void gtranslator_preferences_read(void)
 	gtranslator_config_init();
 	author = gtranslator_config_get_string("translator/name");
 	email = gtranslator_config_get_string("translator/email");
-	wants.defaultdomain = gtranslator_config_get_string("query/defaultdomain");
+	GtrPreferences.defaultdomain = gtranslator_config_get_string("query/defaultdomain");
 	language = gtranslator_config_get_string("language/name");
 	lc = gtranslator_config_get_string("language/language_code");
 	lg = gtranslator_config_get_string("language/team_email");
 	mime = gtranslator_config_get_string("language/mime_type");
 	enc = gtranslator_config_get_string("language/encoding");
-	wants.font = gtranslator_config_get_string("font/name");
-	wants.dictionary = gtranslator_config_get_string("dict/file");
-	wants.scheme =  gtranslator_config_get_string("scheme/filename");
+	GtrPreferences.font = gtranslator_config_get_string("font/name");
+	GtrPreferences.dictionary = gtranslator_config_get_string("dict/file");
+	GtrPreferences.scheme =  gtranslator_config_get_string("scheme/filename");
 
-	wants.instant_spell_check = 
+	GtrPreferences.instant_spell_check = 
 	    gtranslator_config_get_bool("toggles/instant_spell_check");
-	wants.save_geometry =
+	GtrPreferences.save_geometry =
 	    gtranslator_config_get_bool("toggles/save_geometry");
-	wants.unmark_fuzzy =
+	GtrPreferences.unmark_fuzzy =
 	    gtranslator_config_get_bool("toggles/set_non_fuzzy_if_changed"); 
-	wants.warn_if_fuzzy =
+	GtrPreferences.warn_if_fuzzy =
 	    gtranslator_config_get_bool("toggles/warn_if_fuzzy");
-	wants.warn_if_no_change =
+	GtrPreferences.warn_if_no_change =
 	    gtranslator_config_get_bool("toggles/warn_if_no_change");
-	wants.dont_save_unchanged_files =
+	GtrPreferences.dont_save_unchanged_files =
 	    gtranslator_config_get_bool("toggles/do_not_save_unchanged_files");
-	wants.popup_menu =
+	GtrPreferences.popup_menu =
 	    gtranslator_config_get_bool("toggles/enable_popup_menu");
-	wants.update_function =
+	GtrPreferences.update_function =
 	    gtranslator_config_get_bool("toggles/use_update_function");    
-	wants.dot_char = 
+	GtrPreferences.dot_char = 
 	    gtranslator_config_get_bool("toggles/use_dot_char");
-	wants.uzi_dialogs =
+	GtrPreferences.uzi_dialogs =
 	    gtranslator_config_get_bool("toggles/uzi_dialogs");
-	wants.check_recent_file = 
+	GtrPreferences.check_recent_file = 
 	    gtranslator_config_get_bool("toggles/check_recent_files");
-	wants.use_own_specs =
+	GtrPreferences.use_own_specs =
 	    gtranslator_config_get_bool("toggles/use_own_specs");
-	wants.use_own_dict =
+	GtrPreferences.use_own_dict =
 	    gtranslator_config_get_bool("toggles/use_own_dict");
-	wants.keep_obsolete =
+	GtrPreferences.keep_obsolete =
 	    gtranslator_config_get_bool("toggles/keep_obsolete");
 
-	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
-	wants.find_in = gtranslator_config_get_int("find/find_in");
+	GtrPreferences.match_case = gtranslator_config_get_bool("find/case_sensitive");
+	GtrPreferences.find_in = gtranslator_config_get_int("find/find_in");
 	gtranslator_update_regex_flags();
-	wants.fill_header = gtranslator_config_get_bool("toggles/fill_header");
+	GtrPreferences.fill_header = gtranslator_config_get_bool("toggles/fill_header");
 
 	/*
 	 * Check if we'd to use special styles.
 	 */
-	if(wants.use_own_specs)
+	if(GtrPreferences.use_own_specs)
 	{
 		/*
 		 * Set the own specs for colors and for the font.

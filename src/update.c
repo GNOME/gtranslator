@@ -91,7 +91,7 @@ void update(GtkWidget *widget, gpointer useless)
 	/*
 	 * If you wish'em, you get'em ..
 	 */
-	if(wants.uzi_dialogs)
+	if(GtrPreferences.uzi_dialogs)
 	{
 		/*
 		 * The update.sh script returns 200 if the diff

@@ -296,7 +296,7 @@ void gtranslator_utils_invert_dot(gchar *str)
  */
 void gtranslator_utils_save_geometry(void)
 {
-	if (wants.save_geometry == TRUE) {
+	if (GtrPreferences.save_geometry == TRUE) {
 		gchar *gstr;
 		gint x, y, w, h;
 		gstr = gnome_geometry_string(gtranslator_application->window);
@@ -322,7 +322,7 @@ void gtranslator_utils_restore_geometry(gchar  * gstr)
 	 * Set the main window's geometry from the preferences.
 	 */
 	if (gstr == NULL) {
-		if (wants.save_geometry == TRUE) {
+		if (GtrPreferences.save_geometry == TRUE) {
 			gtranslator_config_init();
 			x = gtranslator_config_get_int("geometry/x");
 			y = gtranslator_config_get_int("geometry/y");

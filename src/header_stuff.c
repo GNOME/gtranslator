@@ -321,7 +321,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	replace_substring(&ph->comment, "PACKAGE", ph->prj_name);
 	replace_substring(&ph->comment, "VERSION", ph->prj_version);
 	
-	if (!wants.fill_header) {
+	if (!GtrPreferences.fill_header) {
 		
 		if(gtranslator_utf8_po_file_is_utf8())
 		{
@@ -426,14 +426,14 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 		_("Use my options to fill the following entries."));
 	gtk_box_pack_start(GTK_BOX(lang_vbox), take_my_options, TRUE, TRUE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(take_my_options), 
-				     wants.fill_header);
+				     GtrPreferences.fill_header);
 	gtk_signal_connect(GTK_OBJECT(take_my_options), "toggled",
 			   GTK_SIGNAL_FUNC(take_my_options_toggled), NULL);
 	/*
 	 * Language and translator options
 	 */
 	lang_page = gtk_table_new(7, 2, FALSE);
-	gtk_widget_set_sensitive(lang_page, !wants.fill_header);
+	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
 	gtk_box_pack_start(GTK_BOX(lang_vbox), lang_page, TRUE, TRUE, 0);
 	translator =
 	    gtranslator_utils_attach_entry_with_label(lang_page, 1, _("Translator's name:"),
@@ -503,14 +503,14 @@ static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless
 
 static void take_my_options_toggled(GtkWidget * widget, gpointer useless)
 {
-	wants.fill_header =
+	GtrPreferences.fill_header =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(take_my_options));
 	gtranslator_config_init();
 	gtranslator_config_set_bool("toggles/fill_header",
-			      wants.fill_header);
+			      GtrPreferences.fill_header);
 	gtranslator_config_close();
 	
-	gtk_widget_set_sensitive(lang_page, !wants.fill_header);
+	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
 	gtranslator_header_edit_changed(widget, useless);
 }
 
