@@ -68,11 +68,6 @@
 GList *db_list;
 
 /**
-* The doc-pointer.
-**/
-static xmlDocPtr xmldoc;
-
-/**
 * Loads the message db base for the specified language.
 **/
 void parse_db_for_lang(gchar *language_code);

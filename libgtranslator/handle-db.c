@@ -56,7 +56,7 @@ gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 		/**
 		* Hmm, open and add the node.
 		**/
-		xmlNodePtr newnode,addnode;
+		xmlNodePtr newnode, addnode=NULL;
 		xmlAttrPtr attr;
 		/**
 		* Get the nodes.
@@ -67,8 +67,8 @@ gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 			g_warning(_("Couldn't get the nodes!"));
 				return 0;
 		}
-		addnode=xmlAddChild(newnode,addnode);
 		attr=xmlSetProp(addnode, nodename, nodecontent);
+		addnode=xmlAddChild(newnode,addnode);
 		/**
 		* Free all the stuff.
 		**/

@@ -24,6 +24,7 @@ void parse_db_for_lang(gchar *language)
 	gchar file[256];
 	gboolean lusp=FALSE;
 	xmlNodePtr node;
+	xmlDocPtr xmldoc;
 	/**
 	* Check if we did get a language to search for ..
 	**/
