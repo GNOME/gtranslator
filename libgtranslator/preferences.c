@@ -36,7 +36,7 @@ gchar		*private_path=NULL;
 /**
 * The init-function for libgtranslator.
 **/
-void gtranslator_config_init()
+void gtranslator_config_init(void)
 {
 	#ifdef GCONF_IS_PRESENT
 	client=gconf_client_get_default();
@@ -57,7 +57,7 @@ void gtranslator_config_init()
 /**
 * This function closes all configuration actions.
 **/
-void gtranslator_config_close()
+void gtranslator_config_close(void)
 {
 	#ifdef GCONF_IS_PRESENT
 	/**
@@ -302,7 +302,7 @@ gchar *gtranslator_config_get_last_run_date()
 /**
 * This writes the last run date.
 **/
-void gtranslator_config_set_last_run_date()
+void gtranslator_config_set_last_run_date(void)
 {
 	/**
 	* Some time stuff.

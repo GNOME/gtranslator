@@ -113,7 +113,7 @@ static void append_line(gchar ** old, const gchar * tail)
 static gboolean actual_parse(void)
 {
 	FILE *fs;
-	gchar line[128];
+	gchar line[256];
 	guint lines = 0;
 	/* if TRUE, means that a corresponding part is read */
 	gboolean msgid_ok = FALSE, msgstr_ok = FALSE, comment_ok = FALSE;

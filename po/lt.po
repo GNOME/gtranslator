@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.21\n"
-"POT-Creation-Date: 2000-09-15 19:27+0200\n"
-"PO-Revision-Date: 2000-09-12 19:42+0300\n"
+"Project-Id-Version: gtranslator 0.30\n"
+"POT-Creation-Date: 2000-10-17 02:19+0300\n"
+"PO-Revision-Date: 2000-10-17 11:05+0300\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -20,238 +20,274 @@ msgid ""
 "It will be based upon a gtranslatord and a gtranslator client. Wish the best "
 "for us translators and for me!"
 msgstr ""
-"gtranslator bus Gnome árankis versti toms gyvybiðkai svarbioms po byloms. "
-"Jis turës uþraðø duomenø bazæ gtranslatord. Linkëkit geriausio mums, "
-"vertëjams, ir man!"
+"gtranslator bus Gnome árankis versti toms gyvybiðkai svarbioms po byloms. Jis "
+"turës uþraðø duomenø bazæ gtranslatord. Linkëkit geriausio mums, vertëjams, "
+"ir man!"
 
-#: src/gui.c:55
+#: src/gui.c:79
 msgid "_Compile"
 msgstr "_Kompiliuoti"
 
-#: src/gui.c:56 src/gui.c:200
+#: src/gui.c:80 src/gui.c:234
 msgid "Compile the po-file"
 msgstr "Kompiliuoti po bylà"
 
-#: src/gui.c:82
+#: src/gui.c:93
+msgid "Update po-file"
+msgstr "Atnaujinti po bylà"
+
+#: src/gui.c:94 src/gui.c:242
+msgid "Update the po-file"
+msgstr "Atnaujinti po bylà"
+
+#: src/gui.c:100
+msgid "Recen_t files"
+msgstr "Pas_tarosios bylos"
+
+#: src/gui.c:117
 msgid "_Header..."
 msgstr "_Antraðtë..."
 
-#: src/gui.c:83 src/gui.c:216
+#: src/gui.c:118 src/gui.c:254
 msgid "Edit the header"
 msgstr "Keisti antraðtæ"
 
-#: src/gui.c:86
+#: src/gui.c:121
 msgid "_Spell check..."
 msgstr "_Tikrinti raðybà..."
 
-#: src/gui.c:87
+#: src/gui.c:122
 msgid "Check the spelling of translation"
 msgstr "Tikrinti vertimo raðybà"
 
-#: src/gui.c:95
+#: src/gui.c:130
 msgid "_First"
 msgstr "_Pirmas"
 
-#: src/gui.c:96 src/gui.c:233
+#: src/gui.c:131 src/gui.c:271
 msgid "Go to the first message"
 msgstr "Eiti á pirmà uþraðà"
 
-#: src/gui.c:101
+#: src/gui.c:136
 msgid "_Back"
 msgstr "_Atgal"
 
-#: src/gui.c:102 src/gui.c:237
+#: src/gui.c:137 src/gui.c:275
 msgid "Go one message back"
 msgstr "Eiti vienu uþraðu atgal"
 
-#: src/gui.c:107
+#: src/gui.c:142
 msgid "_Next"
 msgstr "_Kitas"
 
-#: src/gui.c:108 src/gui.c:241
+#: src/gui.c:143 src/gui.c:279
 msgid "Go one message forward"
 msgstr "Eiti vienu uþraðu pirmyn"
 
-#: src/gui.c:113
+#: src/gui.c:148
 msgid "_Last"
 msgstr "_Paskutinis"
 
-#: src/gui.c:114 src/gui.c:245
+#: src/gui.c:149 src/gui.c:283
 msgid "Go to the last message"
 msgstr "Eiti á paskutiná uþraðà"
 
-#: src/gui.c:120
+#: src/gui.c:155
 msgid "_Go to..."
 msgstr "_Eiti..."
 
-#: src/gui.c:121
+#: src/gui.c:156
 msgid "Goto specified message number"
 msgstr "Eiti á uþraðà nurodytu numeriu"
 
-#: src/gui.c:126
-#, fuzzy
+#: src/gui.c:161
 msgid "Next fuz_zy"
-msgstr "Kitas fuzz_y"
+msgstr "Kitas fu_zzy"
 
-#: src/gui.c:127
+#: src/gui.c:162
 msgid "Go to next fuzzy message"
 msgstr "Eiti á kità fuzzy uþraðà"
 
-#: src/gui.c:132
+#: src/gui.c:167
 msgid "Next _untranslated"
 msgstr "Kitas _neiðverstas"
 
-#: src/gui.c:133 src/gui.c:249
+#: src/gui.c:168 src/gui.c:287
 msgid "Go to next untranslated message"
 msgstr "Eiti á kità neiðverstà uþraðà"
 
-#: src/gui.c:142
+#: src/gui.c:177
 msgid "_Translated"
 msgstr "_Iðverstas"
 
-#: src/gui.c:143
+#: src/gui.c:178
 msgid "Toggle translated status of a message"
 msgstr "Perjungti iðverstà uþraðo bûsenà"
 
-#: src/gui.c:150
+#: src/gui.c:185
 msgid "_Fuzzy"
 msgstr "_Fuzzy"
 
-#: src/gui.c:151
+#: src/gui.c:186
 msgid "Toggle fuzzy status of a message"
 msgstr "Perjungti uþraðo fuzzy bûsenà"
 
-#: src/gui.c:158
+#: src/gui.c:193
 msgid "_Stick"
 msgstr "_Sustingæs"
 
-#: src/gui.c:159
+#: src/gui.c:194
 msgid "Stick this message"
 msgstr "Sustingdyti ðá uþraðà"
 
-#: src/gui.c:177
+#: src/gui.c:212
 msgid "gtranslator _website"
 msgstr "gtranslator _tinklapis"
 
-#: src/gui.c:178
+#: src/gui.c:213
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator tinklapis internete"
 
-#: src/gui.c:187
+#: src/gui.c:222
 msgid "_Messages"
 msgstr "_Uþraðai"
 
-#: src/gui.c:188
+#: src/gui.c:223
 msgid "Message _status"
 msgstr "Uþraðo bû_sena"
 
-#: src/gui.c:199
+#: src/gui.c:233
 msgid "Compile"
 msgstr "Kompiliuoti"
 
-#: src/gui.c:203
+#: src/gui.c:237
 msgid "Open"
 msgstr "Atidaryti"
 
-#: src/gui.c:204
+#: src/gui.c:238
 msgid "Open a po-file"
 msgstr "Atidaryti po bylà"
 
-#: src/gui.c:207
+#: src/gui.c:241
+msgid "Update"
+msgstr "Atnaujinti"
+
+#: src/gui.c:245
 msgid "Save"
 msgstr "Iðsaugoti"
 
-#: src/gui.c:208
+#: src/gui.c:246
 msgid "Save File"
 msgstr "Iðsaugoti bylà"
 
-#: src/gui.c:211
+#: src/gui.c:249
 msgid "Save as"
 msgstr "Pavadinti"
 
-#: src/gui.c:212
+#: src/gui.c:250
 msgid "Save file with a different name"
 msgstr "Iðsaugoti bylà kitu vardu"
 
-#: src/gui.c:215
+#: src/gui.c:253
 msgid "Header"
 msgstr "Antraðtë"
 
-#: src/gui.c:220
+#: src/gui.c:258
 msgid "Options"
 msgstr "Nuostatos"
 
-#: src/gui.c:221
+#: src/gui.c:259
 msgid "gtranslator options"
 msgstr "gtransaltor nuostatos"
 
-#: src/gui.c:224 src/gui.c:225
+#: src/gui.c:262 src/gui.c:263
 msgid "Exit"
 msgstr "Iðeiti"
 
-#: src/gui.c:232
+#: src/gui.c:270
 msgid "First"
 msgstr "Pirmas"
 
-#: src/gui.c:236
+#: src/gui.c:274
 msgid "Back"
 msgstr "Atgal"
 
-#: src/gui.c:240
+#: src/gui.c:278
 msgid "Next"
 msgstr "Pirmyn"
 
-#: src/gui.c:244
+#: src/gui.c:282
 msgid "Last"
 msgstr "Galas"
 
-#: src/gui.c:248
+#: src/gui.c:286
 msgid "Missing"
-msgstr ""
+msgstr "Tuðèias"
 
-#: src/gui.c:252
-#, fuzzy
+#: src/gui.c:290 src/gui.c:736
+msgid "Fuzzy"
+msgstr "Fuzzy"
+
+#: src/gui.c:291
+msgid "Go to the next fuzzy translation"
+msgstr "Eiti á kità fuzzy vertimà"
+
+#: src/gui.c:294
 msgid "Go to"
-msgstr "_Eiti..."
+msgstr "Eiti"
 
-#: src/gui.c:253
-#, fuzzy
+#: src/gui.c:295
 msgid "Go to specified message number"
 msgstr "Eiti á uþraðà nurodytu numeriu"
 
-#: src/dialogs.c:201 src/gui.c:256
+#: src/dialogs.c:201 src/gui.c:298
 msgid "Find"
 msgstr "Ieðkoti"
 
-#: src/gui.c:257
+#: src/gui.c:299
 msgid "Find string in po-file"
 msgstr "Rasti eilutæ po byloje"
 
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:360
+#: src/gui.c:456
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:439
+#: src/gui.c:548
 msgid "Bye bye!"
 msgstr "Iki kito karto!"
 
-#: src/gui.c:545
+#. *
+#. * Assign the first part.
+#. *
+#: src/gui.c:726
 #, c-format
-msgid "Message: %d / %d"
-msgstr "Uþraðas: %d / %d"
+msgid "Message %d / %d / Status:"
+msgstr "Uþraðas: %d / %d / Bûsena:"
 
-#: src/dialogs.c:49
+#: src/dialogs.c:217 src/gui.c:740
+msgid "Translated"
+msgstr "Iðverstuose"
+
+#: src/gui.c:746
+msgid "Stick"
+msgstr "Sustingæs"
+
+#: src/gui.c:750
+msgid "Untranslated"
+msgstr "Iðverstas"
+
+#: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- atidaryti po bylà"
 
-#: src/dialogs.c:73
+#: src/dialogs.c:74
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- iðsaugoti á kità bylà"
 
-#: src/dialogs.c:100
+#: src/dialogs.c:101
 #, c-format
 msgid ""
 "File %s\n"
@@ -260,15 +296,15 @@ msgstr ""
 "Byla %s\n"
 "buvo pakeista. Iðsaugoti?"
 
-#: src/dialogs.c:141
+#: src/dialogs.c:142
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- eiti"
 
-#: src/dialogs.c:141
+#: src/dialogs.c:142
 msgid "Go!"
 msgstr "Eiti"
 
-#: src/dialogs.c:145
+#: src/dialogs.c:146
 msgid "Go to message number:"
 msgstr "Eiti á uþraðà numeriu:"
 
@@ -291,10 +327,6 @@ msgstr "Skirti raidþiø dydá"
 msgid "English"
 msgstr "Angliðkuose"
 
-#: src/dialogs.c:217
-msgid "Translated"
-msgstr "Iðverstuose"
-
 #: src/dialogs.c:219
 msgid "Both"
 msgstr "Visur"
@@ -307,74 +339,143 @@ msgstr "Ieðkoti kur:"
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Ávyko klaida, vykdant msgfmt:\n"
 
-#: src/prefs.c:188
+#: src/prefs.c:206
 msgid "gtranslator -- options"
 msgstr "gtranslator -- nuostatos"
 
 #. *
 #. * The tables for holding all the entries below
 #. *
-#: src/prefs.c:192
+#: src/prefs.c:210
 msgid "Personal information"
 msgstr "Asmeninë informacija"
 
-#: src/prefs.c:193
+#: src/prefs.c:211
 msgid "Language options"
 msgstr "Kalbos parinktys"
 
-#: src/prefs.c:194
+#: src/prefs.c:212
 msgid "Po file options"
 msgstr "Po bylos parinktys"
 
-#: src/prefs.c:200
+#: src/prefs.c:213
+msgid "Miscellaneous"
+msgstr "Ávairûs"
+
+#: src/prefs.c:214
+msgid "Recent files menu"
+msgstr "Pastarøjø bylø meniu"
+
+#: src/prefs.c:215
+msgid "Fonts & Colors"
+msgstr "Ðriftai ir spalvos"
+
+#: src/prefs.c:220
 msgid "Author's name :"
 msgstr "Tavo vardas:"
 
-#: src/prefs.c:203
+#: src/prefs.c:223
 msgid "Author's EMail :"
 msgstr "Tavo el. paðtas:"
 
-#: src/header_stuff.c:306 src/prefs.c:211
+#: src/header_stuff.c:307 src/prefs.c:231
 msgid "Language :"
 msgstr "Kalba:"
 
-#: src/prefs.c:215
+#: src/prefs.c:235
 msgid "Language code :"
 msgstr "Kalbos kodas:"
 
-#: src/prefs.c:220
+#: src/prefs.c:240
 msgid "Language group's EMail :"
 msgstr "Kalbos grupës el. paðtas:"
 
-#: src/header_stuff.c:315 src/prefs.c:224
+#: src/header_stuff.c:316 src/prefs.c:244
 msgid "Charset :"
 msgstr "Kodø lentelë:"
 
-#: src/header_stuff.c:319 src/prefs.c:228
+#: src/header_stuff.c:320 src/prefs.c:248
 msgid "Encoding :"
 msgstr "Kodavimas:"
 
-#: src/prefs.c:236
+#: src/prefs.c:256
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Atþymëti fuzzy bûsenà, jei uþraðas pakeistas"
 
-#: src/prefs.c:240
+#: src/prefs.c:260
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Áspëti, jei byloje yra fuzzy vertimø"
 
-#: src/prefs.c:244
+#: src/prefs.c:264
 msgid "Don't save unchanged .po-files"
 msgstr "Nesaugoti nepakeistø bylø"
 
-#: src/prefs.c:248
+#: src/prefs.c:268
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Áspëti, jei bandoma iðsaugoti nepakeistà bylà"
 
-#: src/prefs.c:252
+#: src/prefs.c:275
+msgid "Use the dot char (\"·\") instead of a free space"
+msgstr "Naudoti taðkà (¥·´) vietoj tuðèiø tarpø"
+
+#: src/prefs.c:278
+msgid "Enable the popup menu"
+msgstr "Leisti iððokantá meniu"
+
+#: src/prefs.c:281
+msgid ""
+"Enable the update function of gtranslator (you need the sources for this)"
+msgstr ""
+"Leisti gtranslator atnaujimo funkcijà (tu turi turëti iðeities tekstus)"
+
+#: src/prefs.c:284
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Iðsaugoti geometrijà iðeinant ir atkurti pradþioje"
 
-#: src/prefs.c:318
+#: src/prefs.c:287
+msgid "Don't show the update information dialogs"
+msgstr "Nerodyti atnaujinim informacijos dialoguose"
+
+#: src/prefs.c:299
+msgid "Check every file in the list for existence"
+msgstr "Patikrinti, ar kiekviena byla sàraðe egzistuoja"
+
+#: src/prefs.c:305
+msgid "Number of maximal shown entries in the recent files list:"
+msgstr "Skaièius, kiek daugiausiai rodyti bylø pastarøjø bylø sàraðe:"
+
+#: src/prefs.c:319
+msgid "Apply special font/colors"
+msgstr "naudoti ypatingus ðriftus/spalvas"
+
+#. *
+#. * Create the labels.
+#. *
+#: src/prefs.c:324
+msgid "Font:"
+msgstr "Ðriftas:"
+
+#: src/prefs.c:325
+msgid "Foreground color:"
+msgstr "Raidþiø spalva:"
+
+#: src/prefs.c:326
+msgid "Background color:"
+msgstr "Fono spalva:"
+
+#: src/prefs.c:333
+msgid "gtranslator -- font selection"
+msgstr "gtranslator -- ðrifto parinktis"
+
+#: src/prefs.c:341
+msgid "gtranslator -- foreground color"
+msgstr "gtranslator -- raidþiø spalva"
+
+#: src/prefs.c:344
+msgid "gtranslator -- background color"
+msgstr "gtranslator -- fono spalva"
+
+#: src/prefs.c:466
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -384,75 +485,94 @@ msgstr ""
 "kurie padarys, kad gtranslator veiktø taip, kaip TU nori,\n"
 "kad jis veiktø!"
 
-#: src/prefs.c:457
+#: src/prefs.c:618
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometrijos eilutës ¥%s´ nepavyko iðnagrinëti!"
 
-#: src/header_stuff.c:250
+#: src/header_stuff.c:251
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- keisti antraðtæ"
 
-#: src/header_stuff.c:254
+#: src/header_stuff.c:255
 msgid "Project"
 msgstr "Projektas"
 
-#: src/header_stuff.c:255
+#: src/header_stuff.c:256
 msgid "Translator and Language"
 msgstr "Vertëjas ir kalba"
 
-#: src/header_stuff.c:264
+#: src/header_stuff.c:265
 msgid "Comments :"
 msgstr "Komentarai:"
 
-#: src/header_stuff.c:268
+#: src/header_stuff.c:269
 msgid "Project name:"
 msgstr "Projekto pavadinimas:"
 
-#: src/header_stuff.c:271
+#: src/header_stuff.c:272
 msgid "Project version:"
 msgstr "Projekto versija:"
 
-#: src/header_stuff.c:274
+#: src/header_stuff.c:275
 msgid "pot file creation date :"
 msgstr "pot bylos sukûrimo data:"
 
-#: src/header_stuff.c:278
+#: src/header_stuff.c:279
 msgid "po file revision date :"
 msgstr "po bylos pakeitimo data:"
 
-#: src/header_stuff.c:287
+#: src/header_stuff.c:288
 msgid "Use my options to fill the following entries."
 msgstr "Naudoti mano nuostatas uþpildyti þemiau esanèius laukus."
 
-#: src/header_stuff.c:300
+#: src/header_stuff.c:301
 msgid "Translator's name :"
 msgstr "Vertëjo vardas:"
 
-#: src/header_stuff.c:303
+#: src/header_stuff.c:304
 msgid "Translator's e-mail :"
 msgstr "Vertëjo el. paðtas:"
 
-#: src/header_stuff.c:311
+#: src/header_stuff.c:312
 msgid "Language group's e-mail :"
 msgstr "Kalbos grupës el.paðtas:"
 
-#: src/main.c:38
+#: src/main.c:43
 msgid "Specifies the main-window geometry"
 msgstr "Nurodo pagrindinio lango geometrijà"
 
-#: src/parse.c:39
+#: src/main.c:86
+#, c-format
+msgid "Error during GConf initialization: %s."
+msgstr "Klaida inicializuojant GConf: %s."
+
+#: src/parse.c:96
 #, c-format
 msgid ""
-"\n"
-"The file stream is lost!\n"
-"%s"
+"New escaped char found: \\%c\n"
+"Add this to parse.c, line %i."
 msgstr ""
-"\n"
-"Bylos nepavyko atidaryti!\n"
-"%s"
+"Rastas naujas specialus þenklas: \\%c\n"
+"Pridëk já á parse.c, eilutë %i."
 
-#: src/parse.c:220
+#: src/parse.c:130 src/parse.c:447
+#, c-format
+msgid "The file `%s' doesn't exist at all!"
+msgstr "Byla ¥%s´ iðvis neegzistuoja"
+
+#: src/parse.c:200
+#, c-format
+msgid ""
+"Error in file \"%s\"\n"
+"at line %d.\n"
+"Please check the file and try again."
+msgstr ""
+"Klaida byloje ¥%s´\n"
+"eilutëje %d.\n"
+"Pataisyk bylà, ir bandyk vël."
+
+#: src/parse.c:229
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -461,17 +581,25 @@ msgstr ""
 "Byla yra tuðèia:\n"
 "%s"
 
-#: src/parse.c:269
+#: src/parse.c:248
+msgid "There's no file to open!\n"
+msgstr "Nenurodyta, kokià bylà atidaryti!\n"
+
+#: src/parse.c:276
+msgid "The file has no header!"
+msgstr "Byla neturi antraðtës!"
+
+#: src/parse.c:279
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Sëkmingai iðnagrinëta byla ¥%s´"
 
-#: src/parse.c:272
+#: src/parse.c:282
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:372
+#: src/parse.c:435
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -482,7 +610,7 @@ msgstr ""
 "Deja, tokios bylos yra generuojamos programomis.\n"
 "Tavo byla turëtø bûti pavadinta su *.po plëtiniu, tikriausiai %s.po"
 
-#: src/parse.c:416
+#: src/parse.c:492
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -493,7 +621,11 @@ msgstr ""
 "%s\n"
 "Ar nori vis tiek jà iðsaugoti?"
 
-#: src/parse.c:479
+#: src/parse.c:500
+msgid "gtranslator -- unchanged"
+msgstr "gtranslator -- nepakeistas"
+
+#: src/parse.c:557
 #, c-format
 msgid ""
 "File %s\n"
@@ -502,16 +634,40 @@ msgstr ""
 "Byla %s\n"
 "buvo pakeista. Ar nori atstatyti ið iðsaugotos kopijos?"
 
-#: src/parse.c:531
+#: src/parse.c:594
+msgid "Sorry, msgfmt isn't available on your system!"
+msgstr "Gaila, bet tavo sistemoje nëra msgfmt!"
+
+#: src/parse.c:619
 #, c-format
 msgid ""
-"Compile successful:\n"
+"Compile successfull:\n"
 "%s"
 msgstr ""
 "Kompiliavimas sëkmingas:\n"
 "%s"
 
-#: src/find.c:84
+#. *
+#. * Delete the old entries.
+#. *
+#: src/parse.c:664 src/parse.c:674 src/parse.c:675
+msgid "_File/Recen_t files/"
+msgstr "_Byla/Pas_tarosios bylos"
+
+#: src/parse.c:720
+#, c-format
+msgid "Open %s"
+msgstr "Atidaryti %s"
+
+#: src/parse.c:840
+msgid "An update would cause no changes."
+msgstr "Atnaujus neávyks jokie pakeitimai."
+
+#: src/parse.c:858
+msgid "The update was successfull."
+msgstr "Atnaujinimas buvo sëkmingas."
+
+#: src/find.c:88
 #, c-format
 msgid ""
 "Could not find\n"
@@ -520,11 +676,15 @@ msgstr ""
 "Negaliu rasti\n"
 "¥%s´"
 
-#: src/find.c:110
+#: src/find.c:100
+msgid "Couldn't get the message! Grrr...."
+msgstr "Nepavyko gauti uþraðo! Grrr."
+
+#: src/find.c:122
 msgid "There are no more fuzzy messages"
 msgstr "Daugiau nëra nei vieno fuzzy uþraðo"
 
-#: src/find.c:134
+#: src/find.c:146
 msgid "All messages seem to be translated"
 msgstr "Atrodo, jog visi uþraðai iðversti"
 
@@ -532,15 +692,28 @@ msgstr "Atrodo, jog visi uþraðai iðversti"
 msgid "Check spelling"
 msgstr "Tikrinti raðybà"
 
-#: src/spell.c:55
+#: src/spell.c:54
 msgid "Spell checking complete!"
 msgstr "Raðybos tikrinimas baigtas!"
 
-#: src/session.c:68
+#: src/session.c:61
 msgid "Session restored successfully."
 msgstr "Sesija atkurta sëkmingai."
 
-#: libgtranslator/parse-db.c:32
+#: libgtranslator/main.c:64
+msgid ""
+"gtranslatord has started successfully and will do some operations now ...\n"
+msgstr "gtransaltord sëkmingai apsileido, ir dabar atliks kelis veiksmus...\n"
+
+#. *
+#. * Print some more exact informations on the GConf init-error.
+#. *
+#: libgtranslator/main.c:74
+#, c-format
+msgid "GConf initialization error: `%s'"
+msgstr "GConf inicializavimo klaida: ¥%s´"
+
+#: libgtranslator/parse-db.c:33
 msgid "No language defined in the query request!"
 msgstr "Uþklausoje nenurodyta jokia kalba!"
 
@@ -548,11 +721,16 @@ msgstr "Uþklausoje nenurodyta jokia kalba!"
 #. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
 #. * Just show a message that tells this.
 #. *
-#: libgtranslator/parse-db.c:43
+#: libgtranslator/parse-db.c:44
 msgid "FYI: Will also lookup the superclass message db.\n"
 msgstr ""
 
-#: libgtranslator/parse-db.c:63
+#: libgtranslator/parse-db.c:48
+#, c-format
+msgid "Using %s as the message database... \n"
+msgstr "Naudoju %s uþraðø duombazei...\n"
+
+#: libgtranslator/parse-db.c:60
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr "Nepavyko atidaryti kalbos uþraðø bylos ¥%s.xml´ ið %s\n"
@@ -560,58 +738,185 @@ msgstr "Nepavyko atidaryti kalbos uþraðø bylos ¥%s.xml´ ið %s\n"
 #. *
 #. * Print some information.
 #. *
-#: libgtranslator/parse-db.c:76
+#: libgtranslator/parse-db.c:73
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr ""
 
-#: libgtranslator/parse-db.c:77
+#: libgtranslator/parse-db.c:74
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr ""
 
-#: libgtranslator/parse-db.c:133
+#. *
+#. * Print the informations about the message database.
+#. *
+#: libgtranslator/parse-db.c:96
+#, c-format
+msgid "Database creator/administrator: %s\n"
+msgstr "Duombazës kûrëjas/administratorius: %s\n"
+
+#: libgtranslator/parse-db.c:97
+#, c-format
+msgid "EMail: %s\n"
+msgstr "El. paðtas: %s\n"
+
+#: libgtranslator/parse-db.c:105
+msgid "Message database informations:\n"
+msgstr "Uþraðø duombazës informacija:\n"
+
+#: libgtranslator/parse-db.c:106
+#, c-format
+msgid ""
+"Date: %s\n"
+"Serial: %s\n"
+msgstr ""
+"Data: %s\n"
+"Serial: %s\n"
+
+#: libgtranslator/parse-db.c:139
 msgid "The message db file is empty!"
 msgstr "Uþraðø db byla yra tuðèia!"
 
-#: libgtranslator/parse-db.c:139
+#: libgtranslator/parse-db.c:145
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr ""
 
-#: libgtranslator/handle-db.c:35
+#: libgtranslator/handle-db.c:29
 msgid "No node name given!"
 msgstr ""
 
-#: libgtranslator/handle-db.c:43
+#: libgtranslator/handle-db.c:37
 #, c-format
 msgid "No content for the node `%s' given! Leaving node empty.."
 msgstr ""
 
-#: libgtranslator/handle-db.c:51
+#: libgtranslator/handle-db.c:45
 #, c-format
 msgid "No document present to add the node `%s'\n"
 msgstr ""
 
-#: libgtranslator/handle-db.c:67
+#: libgtranslator/handle-db.c:63
 msgid "Couldn't get the nodes!"
+msgstr ""
+
+#: libgtranslator/handle-db.c:75
+#, c-format
+msgid "Couldn't generate node `%s'!"
 msgstr ""
 
 #: libgtranslator/team-handle.c:31
 msgid "No language/team code defined to register!"
-msgstr ""
+msgstr "Neduotas joks kalbos/komandos kodas uþregistravimui!"
 
-#: libgtranslator/team-handle.c:66
+#: libgtranslator/team-handle.c:67
 msgid "Team is already registered!"
 msgstr "Komanda jau uþregistruota!"
 
-#: libgtranslator/team-handle.c:112
+#: libgtranslator/team-handle.c:119
 #, c-format
 msgid "Teams file `teams.xml` in %s couldn't be opened!"
 msgstr "Negaliu atidaryti komandø bylos ¥teams.xml´ ið %s."
 
-#: libgtranslator/team-handle.c:144
+#: libgtranslator/team-handle.c:151
 msgid "Couldn't return the list of the apps."
 msgstr "Nepavyko gràþinti programø sàraðo."
+
+#: libgtranslator/preferences.c:50
+#, c-format
+msgid ""
+"Error during GConf initialization through libgtranslator:\n"
+"%s"
+msgstr ""
+"Klaida inicializuojant GConf per libgtranslator:\n"
+"%s"
+
+#: libgtranslator/preferences.c:80
+msgid "No path defined where I could get the string from."
+msgstr "Nenurodytas kelias, ið kur að galëèiau gauti eilutæ."
+
+#: libgtranslator/preferences.c:103
+#, c-format
+msgid "Can't set the string `%s' for a non-defined path!\n"
+msgstr ""
+
+#: libgtranslator/preferences.c:110
+#, c-format
+msgid "No string defined for the path `%s'!"
+msgstr ""
+
+#: libgtranslator/preferences.c:139
+msgid "No path defined where I could get the integer from!"
+msgstr ""
+
+#: libgtranslator/preferences.c:140
+msgid "Returning `1' for assurance .."
+msgstr "Gràþinu ¥1´ apsidraudimui..."
+
+#: libgtranslator/preferences.c:162
+#, c-format
+msgid "Can't set the value `%i' for a non-defined path!"
+msgstr ""
+
+#: libgtranslator/preferences.c:169
+#, c-format
+msgid "No value defined for the path `%s'!"
+msgstr "Jokia reikðmë nenurodyta keliui ¥%s´!"
+
+#: libgtranslator/preferences.c:196
+msgid "No path defined where I could get the boolean from."
+msgstr "Nenurodytas kelias, ið kurio galëèiau gauti loginæ reikðmæ."
+
+#: libgtranslator/preferences.c:197
+msgid "Returning `FALSE' for assurance ..."
+msgstr "Gràþinu ¥FALSE´ apsidraudimui..."
+
+#: libgtranslator/preferences.c:215
+msgid "Can't set a boolean value for a non-defined path!"
+msgstr "Negaliu nurodyti loginës reikðmës neapibrëþtam keliui!"
+
+#: libgtranslator/preferences.c:242
+msgid "No path defined for gfloat value"
+msgstr ""
+
+#: libgtranslator/preferences.c:267
+msgid "No path defined to get the gfloat value from!"
+msgstr ""
+
+#. *
+#. * Set a date identifier; this ought to be also
+#. *  localized!
+#. *
+#: libgtranslator/preferences.c:317
+msgid "%Y-%m-%d %H:%M"
+msgstr "%Y-%m-%d %H:%M"
+
+#: libgtranslator/preferences.c:323
+msgid "Couldn't generate the current date!"
+msgstr "Nepavyko sugeneruoti esamos datos!"
+
+#: libgtranslator/stylistics.c:71 libgtranslator/stylistics.c:143
+msgid "No color path found!"
+msgstr ""
+
+#: libgtranslator/stylistics.c:196
+msgid "No font set! Using default font"
+msgstr "Joks ðriftas nenurodytas! Naudoju áprastà"
+
+#. *
+#. * The default font for gtranslator.
+#. *
+#: libgtranslator/stylistics.c:200
+msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-13"
+
+#: libgtranslator/stylistics.c:204
+msgid "Couldn't even load default font!"
+msgstr "Netgi áprastas ðriftas negali bûti uþkrautas!"
+
+#: libgtranslator/stylistics.c:224
+msgid "No widgets defined to manipulate their style"
+msgstr ""
 
 #: src/languages.h:57
 msgid "Arabic"
@@ -771,14 +1076,9 @@ msgstr "Ukrainieèiø"
 
 #: src/languages.h:177
 msgid "Walloon"
-msgstr ""
+msgstr "Velsø"
 
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "Velsø"
 
-#~ msgid "GoTo"
-#~ msgstr "Eiti"
-
-#~ msgid "Untranslated"
-#~ msgstr "Neiðverstas"

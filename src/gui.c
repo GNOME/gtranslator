@@ -30,15 +30,6 @@ struct _GtrAction {
 	GtkWidget *tool;
 };
 
-/**
-* The target formats
-**/
-static  GtkTargetEntry dragtypes[] = {
-	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/plain", 0, TARGET_NETSCAPE_URL },
-	{ "text/plain", 0, TARGET_TEXT_PLAIN }
-};
-
 /* An array holds all defined actions */
 static GtrAction acts[ACT_END];
 
@@ -58,6 +49,15 @@ static void update_appbar(gint pos);
 static void call_gtranslator_homepage(GtkWidget * widget, gpointer useless);
 static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 			     gpointer useless);
+
+/**
+* The target formats
+**/
+static  GtkTargetEntry dragtypes[] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+	{ "text/plain", 0, TARGET_NETSCAPE_URL },
+	{ "text/plain", 0, TARGET_TEXT_PLAIN }
+};
 
 /**
 * The menu-entries
@@ -228,7 +228,7 @@ static GnomeUIInfo the_menus[] = {
 
 /** 
 * The toolbar buttons
-* */
+**/
 static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
 			       N_("Compile the po-file"),
@@ -380,10 +380,10 @@ static void create_actions(void)
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[0]);
 	insert_action(ACT_SAVE, the_file_menu[3], the_toolbar[3]);
-	insert_action(ACT_UPDATE, the_file_menu[8], the_toolbar[2]);
 	insert_action(ACT_SAVE_AS, the_file_menu[4], the_toolbar[4]);
 	insert_action(ACT_REVERT, the_file_menu[5], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[6], NONE);
+	insert_action(ACT_UPDATE, the_file_menu[8], the_toolbar[2]);
 	/*------------------------------------------------ */
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
@@ -494,7 +494,6 @@ void create_app1(void)
 
 	trans_box = gtk_text_new(NULL, NULL);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2), trans_box);
-	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 
 	appbar1 = gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(app1), appbar1);
