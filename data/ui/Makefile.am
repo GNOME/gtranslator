@@ -10,6 +10,7 @@ Glade_Interfaces_dir = @INTERFACE_DIR@
 #
 Glade_Interfaces__DATA = \
 	preferences.glade \
+	beginners_druid.glade \
 	open_po_file_dialog.glade
 
 #
@@ -18,4 +19,5 @@ Glade_Interfaces__DATA = \
 EXTRA_DIST = \
 	$(Glade_Interfaces__DATA) \
 	preferences.glade.h \
+	beginners_druid.glade.h \
 	open_po_file_dialog.glade.h
