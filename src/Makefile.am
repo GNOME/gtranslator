@@ -1,8 +1,6 @@
 ## ------------------------------------------------------
 ## Process this file with automake to produce Makefile.in
 ## ------------------------------------------------------
-## Removed the DEBUG define as it's really useless ..
-## ------------------------------------------------------
 
 #ifdef EMACS_LOVER
 extra_flags = -DEMACS_LOVER=2000
@@ -10,7 +8,9 @@ extra_flags = -DEMACS_LOVER=2000
 extra_flags = 
 #endif
 
-INCLUDES = $(extra_flags) \
+myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
+
+INCLUDES = $(extra_flags) $(myicon)\
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS)
 

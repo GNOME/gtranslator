@@ -21,6 +21,7 @@
 #include <string.h>
 #include <glib.h>
 #include <gnome.h>
+#include <libgnomeui/gnome-window-icon.h>
 #include "interface.h"
 #include "about.h"
 #include "dnd.h"

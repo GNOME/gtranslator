@@ -595,7 +595,12 @@ create_app1 (void)
 	appbar1=gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gtk_widget_show(appbar1);
 	gnome_app_set_statusbar(GNOME_APP(app1), appbar1);
-
+	/**
+	* Use the window-icon feature of gnome-libs, if available.
+	**/
+	#ifdef USE_WINDOW_ICON
+	gnome_window_icon_set_from_file(GTK_WINDOW(app1),WINDOW_ICON);
+	#endif
 	/**
 	* The callbacks list
 	**/

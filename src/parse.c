@@ -103,6 +103,7 @@ void parse(gchar *po)
 			**/
 			get_header(temp_char);
 		}
+		#ifdef NO_X__
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
 			/**
@@ -111,22 +112,23 @@ void parse(gchar *po)
 			**/
 			msg_pair++;
 			msg->pos=z;
-			strcpy(msg->comment,temp_char);
+			strcat(msg->comment,temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			strcpy(msg->msgid,temp_char);
+			strcat(msg->msgid,temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			strcpy(msg->msgstr,temp_char);
+			strcat(msg->msgstr,temp_char);
 		}
+		#endif
 		/**
 		* If a structure is existent, free it.
 		**/
@@ -134,6 +136,7 @@ void parse(gchar *po)
 		{
 			g_free(msg);
 		}
+		
 	}
 	/**
 	* Show an updated status

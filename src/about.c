@@ -37,5 +37,6 @@ void about_box()
 void about_box_show(GtkWidget *widget,gpointer useless)
 {
 	about_box();
+	gnome_window_icon_set_from_file(GTK_WINDOW(about),WINDOW_ICON);
 	gtk_widget_show(about);
 }

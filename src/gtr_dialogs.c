@@ -62,6 +62,10 @@ void open_file_create()
 void open_file_show()
 {
 	open_file_create();
+	/**
+        * Set the icon.
+        **/
+        gnome_window_icon_set_from_file(GTK_WINDOW(of_dlg),WINDOW_ICON);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Select your desired po-file to open"));
 	gtk_widget_show(of_dlg);
 }
@@ -94,6 +98,10 @@ void save_file_as_create()
 void save_file_as_show()
 {
 	save_file_as_create();
+	/**
+        * Set the icon.
+        **/
+        gnome_window_icon_set_from_file(GTK_WINDOW(sfa_dlg),WINDOW_ICON);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Select your filename to which the po-file should be saved to."));
 	gtk_widget_show(sfa_dlg);
 }
@@ -137,6 +145,10 @@ void s_box_create()
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(s_box_dlg)->action_area),s_box_cancel);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(s_box_dlg)->vbox),s_box_label);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(s_box_dlg)->vbox),s_box_string);
+	/**
+        * Set the icon.
+        **/
+        gnome_window_icon_set_from_file(GTK_WINDOW(s_box_dlg),WINDOW_ICON);
 	/**
 	* Show the inserted widgets first
 	**/
@@ -210,6 +222,10 @@ void goto_dlg_create()
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(g_dlg)->action_area),g_dlg_cancel);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(g_dlg)->vbox),g_dlg_label);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(g_dlg)->vbox),g_dlg_line);
+	/**
+        * Set the icon.
+        **/
+        gnome_window_icon_set_from_file(GTK_WINDOW(g_dlg),WINDOW_ICON);
 	/**
 	* Show the widgets
 	**/
@@ -285,6 +301,10 @@ void find_dialog(GtkWidget *widget,gpointer title_type)
 		GTK_SIGNAL_FUNC(find_dialog_hide),NULL);
 	gtk_signal_connect(GTK_OBJECT(find_dlg_ok),"clicked",
 		NULL,NULL);
+	/**
+	* Set the icon.
+	**/
+	gnome_window_icon_set_from_file(GTK_WINDOW(find_dlg),WINDOW_ICON);
 	/**
 	* Show the widgtes and finally the box.
 	**/

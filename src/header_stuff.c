@@ -28,8 +28,8 @@ gchar *inp;
 /**
 * A simple define; .. ok I'm lazy but it avoids many typos ..
 **/
-#define kabalak_str(x) inp=NULL; inp=strstr(hline, ": ");\
-strcpy(ph->x,g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\"")));\
+#define kabalak_str(x) inp[0]='\0'; inp=strstr(hline, ": ");\
+strcat(ph->x,g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\"")));\
 g_print("--  %s\n",ph->x);
 
 void apply_header(gtr_header *the_header)
@@ -49,15 +49,15 @@ gtr_header *new_header()
 	/**
 	* Also allocate the parts of it.
 	**/
-	th->prj_name=g_new(gchar,1);
-	th->prj_version=g_new(gchar,1);
-	th->pot_date=g_new(gchar,1);
-	th->po_date=g_new(gchar,1);
-	th->last_translator=g_new(gchar,1);
-	th->language_team=g_new(gchar,1);
-	th->mime_version=g_new(gchar,1);
-	th->mime_type=g_new(gchar,1);
-	th->encoding=g_new(gchar,1);
+	th->prj_name=g_new0(gchar,1);
+	th->prj_version=g_new0(gchar,1);
+	th->pot_date=g_new0(gchar,1);
+	th->po_date=g_new0(gchar,1);
+	th->last_translator=g_new0(gchar,1);
+	th->language_team=g_new0(gchar,1);
+	th->mime_version=g_new0(gchar,1);
+	th->mime_type=g_new0(gchar,1);
+	th->encoding=g_new0(gchar,1);
 		return th;
 }
 
@@ -178,6 +178,12 @@ void edit_header_create(gtr_header *head)
         gtk_widget_show(take_my_options);
 	gtk_widget_show(gtr_edit_header_dlg_apply);
 	gtk_widget_show(gtr_edit_header_dlg_cancel);
+	/**
+	* Set the icon, if available.
+	**/
+	#ifdef USE_WINDOW_ICON
+	gnome_window_icon_set_from_file(GTK_WINDOW(gtr_edit_header_dlg),WINDOW_ICON);
+	#endif
 	/**
 	* Connect the signals
 	**/

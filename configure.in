@@ -25,6 +25,17 @@ AC_CHECK_FUNCS(usleep)
 GNOME_X_CHECKS
 
 dnl -------------------------------------------------------------------
+dnl Check for the window-icon feature of gnome-libs > 1.0.59.
+dnl -------------------------------------------------------------------
+CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
+LIBS="$LIBS `gnome-config --libs gnomeui`"
+AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, 
+	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Will use window-icon feature"])
+	AC_DEFINE(USE_WINDOW_ICON)
+	,[
+	AC_MSG_RESULT(["\*\*\*\*\*\*\*\*\*\* Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
+
+dnl -------------------------------------------------------------------
 dnl Check for glib and gtk+ indepententally from the GNOME checks 
 dnl -------------------------------------------------------------------
 AM_PATH_GLIB(1.2.3)
@@ -112,6 +123,8 @@ po/Makefile.in
 dnl ------------------------------------------------------------------
 dnl Print an information screen at the end of the process
 dnl ------------------------------------------------------------------
+grep -sq USE_WINDOW_ICON\ 1  config.h && \
+use_window_icon_feature=yes
 echo "
 ------------------------------------------------------------------
 -- gtranslator compilage options
@@ -123,5 +136,8 @@ bind the po-files
 
 (X)Emacs-friendly
  about message     	:	${enable_emacs_lover:-possibly}
+
+use the window-icon
+ feature of gnome-libs  :	${use_window_icon_feature:-no}
 ------------------------------------------------------------------
 "

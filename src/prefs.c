@@ -224,6 +224,10 @@ void prefs_box()
 	/*****************************************************************/
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(GNOME_PROPERTY_BOX(prefs)->notebook));
 	/**
+	* Set the icon.
+	**/
+	gnome_window_icon_set_from_file(GTK_WINDOW(prefs),WINDOW_ICON);
+	/**
 	* The basic signal-handlers 
 	**/
 	/*** FIXME How can I set the first element without this hack ? FIXME ***/
