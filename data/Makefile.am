@@ -3,8 +3,8 @@
 SUBDIRS = \
 	colorschemes \
 	desktop \
-	scripts \
 	gconf \
-	ui \
+	mime \
 	oaf \
-	mime
+	scripts \
+	ui
