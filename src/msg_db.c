@@ -28,7 +28,7 @@ gchar msg_messages[128];
 int init_msg_db()
 {
 	/**
-	* Use the defaul location if no other msg_db
+	* Use the default location if no other msg_db
 	*  has been defined.
 	**/
 	if(!msg_db)
@@ -149,10 +149,10 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			fputs("\n",db_stream);
 			fputs(msg_id,db_stream);
 			/**
-			* These ';;;' are used as separators and shouldn't
+			* These ';;' are used as separators and shouldn't
 			*  appear in normal context ...
 			**/
-			fputs(";;;",db_stream);
+			fputs(";;",db_stream);
 			fputs(msg_translation,db_stream);
 			/**
 			* After all this , the story should be at a happy ending 
@@ -200,9 +200,22 @@ gchar *get_from_msg_db(const gchar *get_similar)
 			**/
 			if(!g_strncasecmp(msg_messages,get_similar,3))
 			{
-				if(strstr(msg_messages,";;;"))
+				if(strstr(msg_messages,";;"))
 				{
-					return msg_messages;
+					gchar *emp;
+					gint emp_i=0,i;
+					emp[0]='\0';
+					while(msg_messages[emp_i]!=';')
+					{
+						emp_i++;
+					}
+					emp_i++;emp_i++;
+					for(i=0;i<((strlen(msg_messages))-emp_i-1);++i)
+					{
+						emp[i]=msg_messages[emp_i];
+						emp_i++;
+					}
+					return (gchar *)emp;
 				}
 			}
 		}	

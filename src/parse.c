@@ -184,6 +184,10 @@ void parse(gchar *po)
 	**/
 	enable_buttons();
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));
+	/**
+	* Set the msg_pair count.
+	**/
+	msg_pair_count=msg_pair;
 }
 
 /**
@@ -214,6 +218,7 @@ void clean_text_boxes()
 	gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
 	gtk_text_thaw(GTK_TEXT(trans_box));
 	gtk_text_thaw(GTK_TEXT(text1));
+	gtk_text_set_editable(GTK_TEXT(text1),TRUE);
 }
 
 /**

@@ -64,6 +64,7 @@ GtkWidget *s_box_ok,*s_box_cancel;
 GtkObject *g_dlg_line_adjustment;
 GtkWidget *g_dlg,*g_dlg_line;
 GtkWidget *g_dlg_ok,*g_dlg_cancel;
+gint msg_pair_count;
 
 /**
 * 8/The basical search dialog widgets
