@@ -29,9 +29,6 @@ GTRANSLATOR_BUILD_VERSIONS = "$(shell glib-config --version) / $(shell gtk-confi
 	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
 		< $< > $@
 
-translation_memory_sources = \
-	translation-memory.c translation-memory.h
-
 $(gtranslator_SOURCES): defines.include
 
 gtranslator_SOURCES = \
@@ -63,7 +60,6 @@ gtranslator_SOURCES = \
 	parse.c	parse.h \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \
-	prefs-dialog.c prefs-dialog.h \
 	query.c query.h \
 	replace.c replace.h \
 	runtime-config.c runtime-config.h \
@@ -73,7 +69,6 @@ gtranslator_SOURCES = \
 	stylistics.c stylistics.h \
 	syntax.c syntax.h \
 	syntax-elements.h \
-	$(translation_memory_sources) \
 	translator.c translator.h \
 	undo.c undo.h \
 	update.c \
