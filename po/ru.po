@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2000-07-05 16:24+0000\n"
-"PO-Revision-Date: 2000-07-05 16:25+00:00\n"
+"POT-Creation-Date: 2000-07-09 18:31+0000\n"
+"PO-Revision-Date: 2000-07-09 18:32+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "gtranslator -- окно поиска"
 msgid "Enter your desired search string: "
 msgstr "Введите строку для поиска:"
 
-#: src/gtr_dialogs.c:143 src/gui.c:225 src/gui.c:226 src/gui.c:425
+#: src/gtr_dialogs.c:143 src/gui.c:225 src/gui.c:226 src/gui.c:467
 msgid "Search"
 msgstr "Поиск"
 
@@ -127,7 +127,7 @@ msgstr "Игнорировать регистр"
 #. *
 #. * Create a helping label.
 #. *
-#: src/gtr_dialogs.c:350
+#: src/gtr_dialogs.c:362
 msgid ""
 "With this query window you can query\n"
 "the message db for an existing entry\n"
@@ -137,30 +137,30 @@ msgstr ""
 "задать запрос к базе данных сообщений,\n"
 "введя вашу строку запроса."
 
-#: src/gtr_dialogs.c:361
+#: src/gtr_dialogs.c:381
 msgid "Query"
 msgstr "Запрос"
 
 #. *
 #. * Set the window-properties.
 #. *
-#: src/gtr_dialogs.c:404
+#: src/gtr_dialogs.c:426
 msgid "gtranslator -- query the message db"
 msgstr "gtranslator -- запрос к базе данных сообщений"
 
-#: src/gtr_dialogs.c:432
+#: src/gtr_dialogs.c:458
 #, c-format
 msgid "Result: `%s'"
 msgstr "Результат: \"%s\""
 
-#: src/gtr_dialogs.c:449
+#: src/gtr_dialogs.c:475
 msgid "Insert"
 msgstr "Вставить"
 
 #. *
 #. * Set the window properties.
 #. *
-#: src/gtr_dialogs.c:453
+#: src/gtr_dialogs.c:479
 msgid "gtranslator -- result for your query"
 msgstr "gtranslator -- результат для вашего запроса"
 
@@ -168,26 +168,26 @@ msgstr "gtranslator -- результат для вашего запроса"
 msgid "Error while applying the header!"
 msgstr "Ошибка при применении заголовка!"
 
-#: src/header_stuff.c:91
+#: src/header_stuff.c:66
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Видимо заголовок не был правильно проанализирован."
 
-#: src/header_stuff.c:93
+#: src/header_stuff.c:68
 msgid "Project name:"
 msgstr "Название проекта:"
 
-#: src/header_stuff.c:94
+#: src/header_stuff.c:69
 msgid "Project version:"
 msgstr "Версия проекта:"
 
-#: src/header_stuff.c:95
+#: src/header_stuff.c:70
 msgid "Use my personal options to fill out the rest of the header."
 msgstr "Использовать мои настройки для заполнения остатка заголовка."
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:104
+#: src/header_stuff.c:79
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- правка заголовка"
 
@@ -222,11 +222,11 @@ msgstr "Очистить"
 msgid "Clears the current selection"
 msgstr "Очистить текущее выделение"
 
-#: src/gui.c:232 src/gui.c:433
+#: src/gui.c:232 src/gui.c:475
 msgid "ReSearch"
 msgstr "Повторный поиск"
 
-#: src/gui.c:233 src/gui.c:434
+#: src/gui.c:233 src/gui.c:476
 msgid "Search again"
 msgstr "Искать снова"
 
@@ -258,172 +258,197 @@ msgstr "След."
 msgid "_Last"
 msgstr "Последнее"
 
-#: src/gui.c:307
+#: src/gui.c:307 src/gui.c:309
+msgid "Translated"
+msgstr "Переведенное"
+
+#: src/gui.c:315 src/gui.c:317
+msgid "Untranslated"
+msgstr "Непереведенное"
+
+#: src/gui.c:322 src/gui.c:324
+msgid "FIXME"
+msgstr "FIXME"
+
+#: src/gui.c:330
+msgid "Stick"
+msgstr ""
+
+#: src/gui.c:332
+#, fuzzy
+msgid "Stick this message"
+msgstr "Перейти к этому сообщению"
+
+#: src/gui.c:342
 msgid "_Add the current message"
 msgstr "Добавить текущее сообщение"
 
-#: src/gui.c:308
+#: src/gui.c:343
 msgid "Add the current message to the messages DB."
 msgstr "Добавить текущее сообщение к базе данных сообщений."
 
-#: src/gui.c:315
+#: src/gui.c:350
 msgid "_Query for a message"
 msgstr "Запрос для сообщения"
 
-#: src/gui.c:316
+#: src/gui.c:351
 msgid "Query the messages DB for the current msgid."
 msgstr "Запрос к базе данных сообщений для текущего msgid."
 
-#: src/gui.c:334
+#: src/gui.c:369
 msgid "_Online help"
 msgstr "Справка"
 
-#: src/gui.c:342
+#: src/gui.c:377
 msgid "gtranslator _website"
 msgstr "Web-сайт Переводчика Gnome"
 
-#: src/gui.c:343
+#: src/gui.c:378
 msgid "gtranslator's homepage on the web"
 msgstr "Web-страница Переводчика Gnome"
 
-#: src/gui.c:357 src/gui.c:360
+#: src/gui.c:392 src/gui.c:395
 msgid "_Messages"
 msgstr "Сообщения"
 
-#: src/gui.c:364 src/gui.c:367
+#: src/gui.c:399 src/gui.c:402
+msgid "Message _status"
+msgstr "Состояние сообщения"
+
+#: src/gui.c:406 src/gui.c:409
 msgid "Message _db"
 msgstr "База данных сообщений"
 
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:390
+#: src/gui.c:432
 msgid "gtranslator"
 msgstr "Переводчик"
 
-#: src/gui.c:426
+#: src/gui.c:468
 msgid "Search for a message"
 msgstr "Поиск сообщения"
 
-#: src/gui.c:441
+#: src/gui.c:483
 msgid "Goto"
 msgstr "Перейти"
 
-#: src/gui.c:442
+#: src/gui.c:484
 msgid "Goto this message"
 msgstr "Перейти к этому сообщению"
 
-#: src/gui.c:456
+#: src/gui.c:498
 msgid "Add"
 msgstr "Добавить"
 
-#: src/gui.c:457
+#: src/gui.c:499
 msgid "Add to the messages db."
 msgstr "Добавить к базе данных сообщений."
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/gui.c:471
+#: src/gui.c:513
 msgid "F/DB"
 msgstr "Поиск в БД"
 
-#: src/gui.c:472
+#: src/gui.c:514
 msgid "Find in the personal messages db"
 msgstr "Поиск в личной базе данных сообщений"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/gui.c:482
+#: src/gui.c:524
 msgid "F/Po."
 msgstr "Поиск в \"po\""
 
-#: src/gui.c:483
+#: src/gui.c:525
 msgid "Find in the po file "
 msgstr "Поиск в po-файле"
 
-#: src/gui.c:494
+#: src/gui.c:536
 msgid "Header"
 msgstr "Заголовок"
 
-#: src/gui.c:495
+#: src/gui.c:537
 msgid "Edit the header informations"
 msgstr "Правка информации заголовка"
 
-#: src/gui.c:503
+#: src/gui.c:545
 msgid "Compile"
 msgstr "Скомпилировать"
 
-#: src/gui.c:504
+#: src/gui.c:546
 msgid "Compile the po-file"
 msgstr "Скомпилировать po-файл"
 
-#: src/gui.c:512
+#: src/gui.c:554
 msgid "Open"
 msgstr "Открыть"
 
-#: src/gui.c:513
+#: src/gui.c:555
 msgid "Open File"
 msgstr "Открыть файл"
 
-#: src/gui.c:521
+#: src/gui.c:563
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/gui.c:522
+#: src/gui.c:564
 msgid "Save File"
 msgstr "Сохранить файл"
 
-#: src/gui.c:530
+#: src/gui.c:572
 msgid "Save as"
 msgstr "Сохранить как"
 
-#: src/gui.c:531
+#: src/gui.c:573
 msgid "Save file as"
 msgstr "Сохранить файл как"
 
-#: src/gui.c:539
+#: src/gui.c:581
 msgid "First"
 msgstr "Первый"
 
-#: src/gui.c:540
+#: src/gui.c:582
 msgid "Go to the first message"
 msgstr "Перейти к первому сообщению"
 
-#: src/gui.c:548
+#: src/gui.c:590
 msgid "Back"
 msgstr "Назад"
 
-#: src/gui.c:549
+#: src/gui.c:591
 msgid "Go one message back"
 msgstr "Перейти на одно сообщение назад"
 
-#: src/gui.c:557
+#: src/gui.c:599
 msgid "Options"
 msgstr "Параметры"
 
-#: src/gui.c:558
+#: src/gui.c:600
 msgid "gtranslator options"
 msgstr "Параметры переводчика"
 
-#: src/gui.c:566
+#: src/gui.c:608
 msgid "Next"
 msgstr "След."
 
-#: src/gui.c:567
+#: src/gui.c:609
 msgid "Go one message forward"
 msgstr "Перейти на одно сообщение вперед"
 
-#: src/gui.c:575
+#: src/gui.c:617
 msgid "Last"
 msgstr "Последнее"
 
-#: src/gui.c:576
+#: src/gui.c:618
 msgid "Go to the last message"
 msgstr "Перейти к последнему сообщению"
 
-#: src/gui.c:584 src/gui.c:585
+#: src/gui.c:626 src/gui.c:627
 msgid "Exit"
 msgstr "Выход"
 
@@ -657,14 +682,14 @@ msgstr "Не найдена база данных сообщений! Создание одной в \"%s\"."
 #. *
 #. * 3.1) No list, no fun
 #. *
-#: src/msg_db.c:81
+#: src/msg_db.c:80
 msgid "gtranslator lost the list of translations!\n"
 msgstr "Переводчик Gnome потерял список переводов!\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:118
+#: src/msg_db.c:117
 #, c-format
 msgid "The message db `%s' hasn't been initted yet!\n"
 msgstr "База данных сообщений \"%s\" еще не инициализирована!\n"
@@ -673,18 +698,18 @@ msgstr "База данных сообщений \"%s\" еще не инициализирована!\n"
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
-#: src/msg_db.c:129
+#: src/msg_db.c:128
 msgid "Got no message entry!\n"
 msgstr "Нет записей сообщений!\n"
 
-#: src/msg_db.c:137
+#: src/msg_db.c:136
 msgid "New message entry has wrong/non-logical length.\n"
 msgstr "Новая строка имеет неправильную/нелогичную длину.\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:173
+#: src/msg_db.c:175
 #, c-format
 msgid "The message db `%s' seems not to be initted!\n"
 msgstr "База данных сообщений \"%s\" видимо не была инициализирована!\n"
@@ -692,7 +717,7 @@ msgstr "База данных сообщений \"%s\" видимо не была инициализирована!\n"
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:177
+#: src/msg_db.c:179
 msgid "Not available"
 msgstr "Не доступно"
 
@@ -700,22 +725,22 @@ msgstr "Не доступно"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:185
+#: src/msg_db.c:187
 msgid "No messages list ( msg_list ) available for acting on it!\n"
 msgstr "Нет доступного списка сообщений (msg_list) для обработки!\n"
 
-#: src/msg_db.c:222
+#: src/msg_db.c:225
 msgid "No entry found in the messages db "
 msgstr "Не найдены записи в базе данных сообщений."
 
-#: src/msg_db.c:233
+#: src/msg_db.c:236
 msgid "The messages db isn't inited."
 msgstr "База данных сообщений не инициализирована."
 
 #. *
 #. * Gives a warning message.
 #. *
-#: src/msg_db.c:262
+#: src/msg_db.c:265
 msgid "Trying to set an irregular challange length!"
 msgstr ""
 
@@ -747,20 +772,20 @@ msgstr "Текущий файл: \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:199
+#: src/parse.c:205
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "Закончено чтение \"%s\", %i строк."
 
-#: src/parse.c:216
+#: src/parse.c:222
 msgid "Parsing has been successfull."
 msgstr "Анализ был успешен."
 
-#: src/parse.c:287
+#: src/parse.c:293
 msgid "You've reached the first message"
 msgstr "Вы дошли до первого сообщения"
 
-#: src/parse.c:324
+#: src/parse.c:330
 msgid "You've reached the last message."
 msgstr "Вы дошли до последнего сообщения."
 
