@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-10-18 22:54+0200\n"
-"PO-Revision-Date: 2000-10-15 12:35+02:00\n"
+"POT-Creation-Date: 2000-10-20 08:31+0200\n"
+"PO-Revision-Date: 2000-10-20 08:40+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -269,12 +269,12 @@ msgstr "Melding %d / %d / status:"
 #: src/gui.c:752
 #, c-format
 msgid "%s %s [ %i Fuzzy left ]"
-msgstr ""
+msgstr "%s %s [ %i uferdige igjen ]"
 
 #: src/gui.c:756
 #, c-format
 msgid "%s %s [ No fuzzy left ]"
-msgstr ""
+msgstr "%s %s [ Ingen uferdige igjen ]"
 
 #: src/dialogs.c:217 src/gui.c:761
 msgid "Translated"
@@ -287,7 +287,7 @@ msgstr "Lim"
 #: src/gui.c:775
 #, c-format
 msgid "%s %s [ %i Untranslated left ]"
-msgstr ""
+msgstr "%s %s [ %i uoversatte igjen ]"
 
 #: src/gui.c:775 src/gui.c:779
 msgid "Untranslated"
@@ -296,7 +296,7 @@ msgstr "Uoversatt"
 #: src/gui.c:779
 #, c-format
 msgid "%s %s [ No untranslated left ]"
-msgstr ""
+msgstr "%s %s [ Ingen uoversatte igjen ]"
 
 #: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
@@ -701,14 +701,12 @@ msgid "Couldn't get the message! Grrr...."
 msgstr "Kunne ikke finne meldingen! Grr...."
 
 #: src/find.c:122
-#, fuzzy
 msgid "There are no fuzzy messages left."
-msgstr "Det finnes ingen uferdige meldinger"
+msgstr "Det finnes ingen uferdige meldinger."
 
 #: src/find.c:146
-#, fuzzy
 msgid "All messages seem to be translated."
-msgstr "Alle meldinger ser ut til å være oversatt"
+msgstr "Alle meldinger ser ut til å være oversatt."
 
 #: src/spell.c:25
 msgid "Check spelling"
@@ -899,12 +897,11 @@ msgstr "Kan ikke sette en bolsk verdi for en ikke-definert sti!"
 
 #: libgtranslator/preferences.c:247
 msgid "No path defined for gfloat value"
-msgstr ""
+msgstr "Ingen sti definert for gfloat-verdi"
 
 #: libgtranslator/preferences.c:272
-#, fuzzy
 msgid "No path defined to get the gfloat value from!"
-msgstr "Ingen sti definert hvor heltallet kan finnes!"
+msgstr "Ingen sti definert hvor flyttallet kan finnes!"
 
 #. *
 #. * Set a date identifier; this ought to be also
@@ -920,30 +917,30 @@ msgstr "Kunne ikke generere dagens dato!"
 
 #: libgtranslator/stylistics.c:71 libgtranslator/stylistics.c:143
 msgid "No color path found!"
-msgstr ""
+msgstr "Ingen fargesti funnet!"
 
 #: libgtranslator/stylistics.c:196
 msgid "No font set! Using default font"
-msgstr ""
+msgstr "Skrifttype ikke satt! Bruker standard skrifttype"
 
 #. *
 #. * The default font for gtranslator.
 #. *
 #: libgtranslator/stylistics.c:200
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
+msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
 #: libgtranslator/stylistics.c:204
 msgid "Couldn't even load default font!"
-msgstr ""
+msgstr "Kunne ikke engang laste standard skrifttype!"
 
 #: libgtranslator/stylistics.c:224
 msgid "No widgets defined to manipulate their style"
-msgstr ""
+msgstr "Ingen widget definert for manipulering av stil"
 
 #: src/languages.h:57
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 #: src/languages.h:60
 msgid "Arabic"
@@ -951,20 +948,19 @@ msgstr "Arabisk"
 
 #: src/languages.h:63
 msgid "Azeri"
-msgstr ""
+msgstr "Azeri"
 
 #: src/languages.h:66
 msgid "Basque"
 msgstr "Baskisk"
 
 #: src/languages.h:69
-#, fuzzy
 msgid "Bielorussian"
-msgstr "Russisk"
+msgstr "Hvite-russisk"
 
 #: src/languages.h:72
 msgid "Britton"
-msgstr ""
+msgstr "Britton"
 
 #: src/languages.h:75
 msgid "Bulgarian"
@@ -996,7 +992,7 @@ msgstr "Dansk"
 
 #: src/languages.h:96
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlandsk"
 
 #: src/languages.h:102
 msgid "English/Canada"
@@ -1092,14 +1088,13 @@ msgstr "Russisk"
 
 #: src/languages.h:171
 msgid "Serbian/Cyrillic"
-msgstr ""
+msgstr "Serbisk/Kyrillisk"
 
 #: src/languages.h:174
 msgid "Serbian/Latin"
-msgstr ""
+msgstr "Serbisk/Latin"
 
 #: src/languages.h:177
-#, fuzzy
 msgid "Slovenian"
 msgstr "Slovensk"
 
@@ -1121,7 +1116,7 @@ msgstr "Svensk"
 
 #: src/languages.h:192
 msgid "Thai"
-msgstr ""
+msgstr "Thai"
 
 #: src/languages.h:195
 msgid "Turkish"
@@ -1133,7 +1128,7 @@ msgstr "Ukrainsk"
 
 #: src/languages.h:201
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamesisk"
 
 #: src/languages.h:204
 msgid "Walloon"
