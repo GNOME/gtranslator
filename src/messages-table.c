@@ -291,8 +291,6 @@ static void insert_translation(GtkWidget *widget, gpointer insertion_kind)
 		}
 
 		gtranslator_translation_changed(NULL, NULL);
-
-		gtranslator_message_update();
 		gtranslator_messages_table_update_message_status(GTR_MSG(retrieval->message));
 		GTR_FREE(retrieval);
 	}

@@ -1,5 +1,10 @@
 2002-02-18  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c: Don't call "gtranslator_message_update" after the
+		insertion of any translation -- this would grep the shown and
+		 not the really clicked-on message as the base for the actions;
+		  still to salvation for the bug thereover.
+
 	* prefs.h: Removal of a non-used preference.
 
 2002-02-17  Fatih Demir <kabalak@gtranslator.org>
