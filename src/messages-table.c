@@ -22,8 +22,12 @@
 #include "messages-table.h"
 #include "messages.h"
 #include "parse.h"
+#include "preferences.h"
 #include "utils.h"
 
+#include <gal/e-paned/e-paned.h>
+
+#include <gal/e-table/e-cell-combo.h>
 #include <gal/e-table/e-cell-number.h>
 #include <gal/e-table/e-cell-text.h>
 #include <gal/e-table/e-table-extras.h>
@@ -67,12 +71,19 @@ static gchar *return_string_for_value_function(ETableModel *model, gint column,
  */
 static gint column_count_function(ETableModel *model, void *useless)
 {
-	return 4;
+	return 3;
 }
 
 static gint row_count_function(ETableModel *model, void *useless)
 {
-	return 0;
+	if(file_opened)
+	{
+		return (po->length-1);
+	}
+	else
+	{
+		return 1;
+	}
 }
 
 static gboolean is_cell_editable_function(ETableModel *model, gint column, gint row,
@@ -105,7 +116,7 @@ static void free_value_function(ETableModel *model, gint column, void *value, vo
 static void set_value_at_function(ETableModel *model, gint column, gint row,
         const void *value, void *useless)
 {
-	g_message("Set value in %i:%i => %s", column, row, (gchar *)value);
+	g_message("Set value for %i[%i]: %s", row, column, (gchar *) value);
 }
 
 static void *duplicate_value_function(ETableModel *model, gint column, const void *value,
@@ -128,10 +139,21 @@ static void *initialize_value_function(ETableModel *model, gint column, void *us
 
 static void *value_at_function(ETableModel *model, gint column, gint row, void *useless)
 {
-	/*
-	 * FIXME: Is foo'sh of course.. 
-	 */
-	return g_strdup("FIXME!");
+	if(file_opened)
+	{
+		if(row > 0 && row <= (po->length - 1))
+		{
+			return g_strdup(GTR_MSG(g_list_nth_data(po->messages, row))->msgid);
+		}
+		else
+		{
+			return g_strdup("");
+		}
+	}
+	else
+	{
+		return g_strdup_printf("%i[%i]", column, row);
+	}
 }
 
 static gchar *return_string_for_value_function(ETableModel *model, gint column, 
@@ -162,21 +184,19 @@ static ETableExtras *table_extras_new()
 		"original",
 		"translation",
 		"comment",
+		"status",
 		NULL
 	};
 
 	extras=e_table_extras_new();
 	
+	/*
+	 * Fill the table parts independently here -- just for easification
+	 *  of the process, we do use this loop instead of 4, 5 different calls.
+	 */
 	while(list_parts[count]!=NULL)
 	{
-		if(!g_strcasecmp(list_parts[count], "number"))
-		{
-			cell=e_cell_number_new(NULL, GTK_JUSTIFY_LEFT);
-		}
-		else
-		{
-			cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
-		}
+		cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
 
 		e_table_extras_add_cell(extras, list_parts[count], cell);
 		count++;
@@ -191,6 +211,8 @@ static ETableExtras *table_extras_new()
  */
 GtkWidget *gtranslator_messages_table_new()
 {
+	gchar		*statusfile;
+	
 	GtkWidget 	*messages_table;
 
 	ETableExtras 	*table_extras;
@@ -211,10 +233,70 @@ GtkWidget *gtranslator_messages_table_new()
 		return_string_for_value_function,
 		NULL);
 
+	statusfile=gtranslator_utils_get_messages_table_state_file_name();
+
 	messages_table=e_table_scrolled_new_from_spec_file(table_model,
 		table_extras,
 		ETSPECS_DIR "/messages-table.etspec", 
-		NULL);
+		statusfile);
 
+	g_free(statusfile);
 	return messages_table;
+}
+
+/*
+ * Apply a very similar mechanism for hide/show/toggle-ing the
+ *  messages table.
+ */
+gboolean gtranslator_messages_table_show()
+{
+	gint position=-1;
+
+	position=e_paned_get_position(E_PANED(content_pane));
+
+	if(position<=0)
+	{
+		return FALSE;
+	}
+	else
+	{
+		gtranslator_config_init();
+		gtranslator_config_set_bool("toggles/show_content_pane", FALSE);
+		gtranslator_config_close();
+
+		e_paned_set_position(E_PANED(content_pane), 0);
+		return TRUE;
+	}
+}
+
+gboolean gtranslator_messages_table_hide()
+{
+	gint position=-1;
+
+	gtranslator_config_init();
+	position=gtranslator_config_get_int("interface/content_pane_position");
+	gtranslator_config_close();
+
+	if(position<=0)
+	{
+		return FALSE;
+	}
+	else
+	{
+		e_paned_set_position(E_PANED(content_pane), position);
+
+		gtranslator_config_init();
+		gtranslator_config_set_bool("toggles/show_content_pane", TRUE);
+		gtranslator_config_close();
+
+		return TRUE;
+	}
+}
+
+void gtranslator_messages_table_toggle()
+{
+	if(!gtranslator_messages_table_hide())
+	{
+		gtranslator_messages_table_show();
+	}
 }

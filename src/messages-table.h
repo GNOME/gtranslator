@@ -27,4 +27,13 @@
  */
 GtkWidget *gtranslator_messages_table_new(void); 
 
+/*
+ * Show/hide and toggle routines accordingly to the 
+ *  existing sidebar routines.
+ */
+gboolean gtranslator_messages_table_show(void);
+gboolean gtranslator_messages_table_hide(void);
+
+void gtranslator_messages_table_toggle(void);
+
 #endif

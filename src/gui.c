@@ -65,6 +65,9 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
 
+#include <gal/e-table/e-table.h>
+#include <gal/e-table/e-table-scrolled.h>
+
 /*
  * Global external variables
  */
@@ -74,6 +77,12 @@ GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
 GtkWidget *sidebar_pane;
 GtkWidget *content_pane;
+
+/*
+ * Internally used local-global variables
+ */
+static GtkWidget *extra_content_views;
+static GtkWidget *views_sidebar;
 
 gboolean nothing_changes;
 
@@ -179,10 +188,6 @@ void gtranslator_create_main_window(void)
 	GtkWidget *original_text_scrolled_window;
 	GtkWidget *translation_text_scrolled_window;
 
-	GtkWidget *extra_content_views;
-	
-	GtkWidget *views_sidebar;
-	
 	/*
 	 * Create the app	
 	 */
@@ -221,10 +226,12 @@ void gtranslator_create_main_window(void)
 		
 		gtranslator_config_close();
 
+		extra_content_views=gtranslator_messages_table_new();
 		e_paned_set_position(E_PANED(content_pane), content_pane_position);
 	}
 	else
 	{
+		extra_content_views=gtk_label_new("");
 		e_paned_set_position(E_PANED(content_pane), 0);
 	}
 
@@ -246,7 +253,6 @@ void gtranslator_create_main_window(void)
 		"search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 		GNOME_DOCK_TOP, 2, 0, 0);
 
-	extra_content_views=gtranslator_messages_table_new();
 	vertical_box=gtk_vbox_new(FALSE, 0);
 	
 	e_paned_pack1(E_PANED(content_pane), extra_content_views, TRUE, FALSE);
@@ -364,7 +370,20 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 */
 	if (!gtranslator_should_the_file_be_saved_dialog())
 		return TRUE;
+
 	gtranslator_file_close(NULL, NULL);
+	
+	if(GtrPreferences.show_content_pane)
+	{
+		gchar *messages_table_state_file;
+
+		messages_table_state_file=gtranslator_utils_get_messages_table_state_file_name();
+		#if 0 /* FIXME: SEGV */
+		e_table_save_state(E_TABLE_SCROLLED(extra_content_views)->table, 
+			messages_table_state_file);
+		#endif
+		g_free(messages_table_state_file);
+	}
 	
 	/*
 	 * Initialize the config and set the pane position -- if needed.

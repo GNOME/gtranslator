@@ -50,6 +50,11 @@ gchar *gtranslator_utils_get_temp_file_name(void);
 gchar *gtranslator_utils_get_crash_file_name(void);
 
 /*
+ * Return the name of the table state holding filename.
+ */
+gchar *gtranslator_utils_get_messages_table_state_file_name(void);
+
+/*
  * Return the name of the pre-differently save filename.
  */
 gchar *gtranslator_utils_get_save_differently_file_name(void);

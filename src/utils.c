@@ -223,6 +223,19 @@ gchar *gtranslator_utils_get_save_differently_file_name()
 }
 
 /*
+ * Get the ETable state specification filename for our messages table. */
+gchar *gtranslator_utils_get_messages_table_state_file_name()
+{
+	gchar *state_file;
+	
+	state_file=g_strdup_printf(
+		"%s/.gtranslator/gtranslator-ui-messages-table-state",
+		g_get_home_dir());
+	
+	return state_file;
+}
+
+/*
  * Set up and assign the test file names for the compile process.
  */
 void gtranslator_utils_get_compile_file_names(gchar **test_file, 

@@ -28,6 +28,7 @@
 #include "find.h"
 #include "gui.h"
 #include "languages.h"
+#include "messages-table.h"
 #include "prefs.h"
 #include "query.h"
 #include "sidebar.h"
@@ -70,7 +71,7 @@ static GtkWidget
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
-	*autosave, *autosave_with_suffix;
+	*autosave, *autosave_with_suffix, *show_content_pane;
 
 /*
  * The timeout GtkSpinButton:
@@ -112,7 +113,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 1, 
 		_("Po file editing"));
-	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, 
+	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 6, 1, 
 		_("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, 
 		_("Recent files & spell checking"));
@@ -204,6 +205,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
 		_("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
+	show_content_pane=gtranslator_utils_attach_toggle_with_label(fourth_page, 6,
+		_("Show the messages table"),
+		GtrPreferences.show_content_pane, gtranslator_preferences_dialog_changed);
+	
 	/*
 	 * The fifth page with the Recent files options.
 	 */
@@ -326,6 +331,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.update_function = if_active(use_update_function);
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
+	GtrPreferences.show_content_pane = if_active(show_content_pane);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
@@ -454,7 +460,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_close();
 
 	/*
-	 * Show or hide the views sidebar according to the preference.
+	 * Show or hide the views sidebar/content pane according to the preferences.
 	 */
 	if(GtrPreferences.show_sidebar)
 	{
@@ -463,6 +469,15 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	else
 	{
 		gtranslator_sidebar_hide();
+	}
+
+	if(GtrPreferences.show_content_pane)
+	{
+		gtranslator_messages_table_show();
+	}
+	else
+	{
+		gtranslator_messages_table_hide();
 	}
 }
 
