@@ -362,7 +362,7 @@ void change_actions(gboolean state, ...)
 		if (acts[id].tool)
 			gtk_widget_set_sensitive(acts[id].tool,state);
 		if (id==0)
-			g_warning("id==0, it shouln't be!");
+			g_warning("id==0, it shouldn't be!");
 	} 
 	va_end(ap);
 }
