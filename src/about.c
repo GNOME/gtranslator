@@ -40,7 +40,7 @@ void gtranslator_create_about_box(GtkWidget * widget, gpointer useless)
 		"Gediminas Paulauskas <menesis@gtranslator.org>",
 		NULL
 	};
-	raise_and_return_if_exists(about);
+	gtranslator_raise_dialog(about);
 
 	/*
 	 * Create the about box via gnome_about_new.
@@ -51,5 +51,5 @@ void gtranslator_create_about_box(GtkWidget * widget, gpointer useless)
 		_("gtranslator is a po file editing suite with many bells and whistles."),
 		NULL);
 
-	show_nice_dialog(&about, "gtranslator -- about");
+	gtranslator_dialog_show(&about, "gtranslator -- about");
 }

@@ -63,7 +63,7 @@ void update(GtkWidget *widget, gpointer useless)
 	/*
 	 * Close the file before updating
 	 */
-	close_file(NULL, NULL);
+	gtranslator_file_close(NULL, NULL);
 	
 	if (file_opened != FALSE) {
 		g_free(newfile);
@@ -120,7 +120,7 @@ void update(GtkWidget *widget, gpointer useless)
 	/*
 	 * Parse the file again.
 	 */
-	parse(newfile);
+	gtranslator_parse_main(newfile);
 	g_free(command);
 	g_free(newfile);
 }

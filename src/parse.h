@@ -98,26 +98,26 @@ gboolean message_changed;
 /*
  * Changes message fuzzy status
  */
-void mark_msg_fuzzy(GtrMsg  * msg, gboolean fuzzy);
+void gtranslator_message_status_set_fuzzy(GtrMsg  * msg, gboolean fuzzy);
 
 /*
  * Copies msgid to msgstr or blanks msgstr 
  */
-void mark_msg_sticky(GtrMsg  * msg, gboolean on);
+void gtranslator_message_status_set_sticky(GtrMsg  * msg, gboolean on);
 
 /*
  * Core backend functions for parsing a po file.
  */ 
-gboolean actual_parse(void);
-void free_po(void);
-void free_a_message(gpointer data, gpointer useless);
-void parse_core(const gchar *po);
+gboolean gtranslator_parse_core(void);
+void gtranslator_po_free(void);
+void gtranslator_message_free(gpointer data, gpointer useless);
+void gtranslator_parse(const gchar *po);
 
 /*
  * The main granslator parse function which does use the backend
  *  calls from above and also sets up the GUI.
  */
-void parse(const gchar *po);
+void gtranslator_parse_main(const gchar *po);
 
 /*
  * The core function for the parse() function above.
@@ -127,10 +127,10 @@ void parse(const gchar *po);
  * Callbacks for the widgets
  */
 void parse_the_file(GtkWidget  * widget, gpointer of_dlg);
-void save_the_file(GtkWidget  * widget, gpointer sfa_dlg);
-void save_current_file(GtkWidget  * widget, gpointer useless);
-void revert_file(GtkWidget  * widget, gpointer useless);
-void close_file(GtkWidget  * widget, gpointer useless);
+void gtranslator_save_file_dialog(GtkWidget  * widget, gpointer sfa_dlg);
+void gtranslator_save_current_file_dialog(GtkWidget  * widget, gpointer useless);
+void gtranslator_file_revert(GtkWidget  * widget, gpointer useless);
+void gtranslator_file_close(GtkWidget  * widget, gpointer useless);
 
 /*
  * The compile function.

@@ -68,7 +68,7 @@ void gtranslator_signal_handler(int signal)
 				/*
 				 * Save the file under the special filename.
 				 */
-				save_current_file(NULL, NULL);
+				gtranslator_save_current_file_dialog(NULL, NULL);
 			}
 			
 			exit(1);

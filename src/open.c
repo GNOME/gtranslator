@@ -54,7 +54,7 @@ gboolean gtranslator_open_po_file(gchar *file)
 		!strncmp(file, "file:/", 6))
 	{
 	
-		file=gtranslator_vfs_handle_open_file(file);
+		file=gtranslator_vfs_handle_gtranslator_open_file_dialog(file);
 
 		/*
 		 * If we couldn't get a local representation filename
@@ -70,7 +70,7 @@ gboolean gtranslator_open_po_file(gchar *file)
 			 * Here we do open the local representation file
 			 *  of the remote file.
 			 */  
-			parse(file);
+			gtranslator_parse_main(file);
 			
 			return TRUE;
 		}
@@ -178,7 +178,7 @@ void gtranslator_open_compiled_po_file(gchar *file)
 		 * If the command could be executed successfully, open the
 		 *  plain gettext file.
 		 */
-		parse(tempfilename);
+		gtranslator_parse_main(tempfilename);
 	}
 	else
 	{
@@ -225,7 +225,7 @@ void open_compressed_po_file(gchar *file, gchar *command)
 		/*
 		 * Open up the "new" plain gettext file.
 		 */
-		parse(tempfilename);
+		gtranslator_parse_main(tempfilename);
 	}
 	else
 	{

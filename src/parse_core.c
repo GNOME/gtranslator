@@ -29,7 +29,7 @@
 /*
  * The core parsing function for the given po file.
  */ 
-void parse_core(const gchar *filename)
+void gtranslator_parse(const gchar *filename)
 {
 	gboolean first_is_fuzzy;
 	gchar *base;
@@ -62,19 +62,19 @@ void parse_core(const gchar *filename)
 		return;
 	}
 	
-	if (!actual_parse())
+	if (!gtranslator_parse_core())
 	{
-		free_po();
+		gtranslator_po_free();
 		return;
 	}
 
 #define FIRST_MSG GTR_MSG(po->messages->data)
 	first_is_fuzzy=(FIRST_MSG->status & GTR_MSG_STATUS_FUZZY) != 0;
-	mark_msg_fuzzy(FIRST_MSG, FALSE);
+	gtranslator_message_status_set_fuzzy(FIRST_MSG, FALSE);
 	/*
 	 * If the first message is header (it always should be)
 	 */
-	po->header = get_header(FIRST_MSG);
+	po->header = gtranslator_header_get(FIRST_MSG);
 	if (po->header)
 	{
 		GList *header_li;
@@ -83,12 +83,12 @@ void parse_core(const gchar *filename)
 		 */
 		header_li = po->messages;
 		po->messages = g_list_remove_link(po->messages, header_li);
-		free_a_message(header_li->data, NULL);
+		gtranslator_message_free(header_li->data, NULL);
 		g_list_free_1(header_li);
 	}
 	else
 	{
-		mark_msg_fuzzy(FIRST_MSG, first_is_fuzzy);
+		gtranslator_message_status_set_fuzzy(FIRST_MSG, first_is_fuzzy);
 	}
 	
 	file_opened = TRUE;

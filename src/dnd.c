@@ -48,12 +48,12 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 		for (fnp = fnames; fnp; fnp = fnp->next) {
 			if (dnd_type == TARGET_URI_LIST) {
 				file = (char *) (fnp->data);
-				parse(file);
+				gtranslator_parse_main(file);
 				return_value = 1;
 			} else {
 				if (dnd_type == TARGET_NETSCAPE_URL) {
 					file = (char *) (fnp->data);
-					parse(file);
+					gtranslator_parse_main(file);
 					return_value = 1;
 				}
 				if (dnd_type == TARGET_TEXT_PLAIN) {

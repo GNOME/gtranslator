@@ -224,7 +224,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 			*font_label,
 			*scheme_file_label;
 	
-	raise_and_return_if_exists(prefs);
+	gtranslator_raise_dialog(prefs);
 	/*
 	 * Create the preferences box... 
 	 */
@@ -422,7 +422,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_help), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "close",
 			   GTK_SIGNAL_FUNC(gtranslator_lists_free), NULL);
-	show_nice_dialog(&prefs, "gtranslator -- prefs");
+	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
 }
 
 /*

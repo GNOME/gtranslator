@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
 	
 	if(g_file_exists(sp_file))
 	{
-		crash_recovery_dialog();
+		gtranslator_rescue_file_dialog();
 	}
 
 	g_free(sp_file);
@@ -249,7 +249,7 @@ int main(int argc, char *argv[])
 			/*
 			 * Open the file as a "normal" gettext po file
 			 */ 
-			parse(args[0]);
+			gtranslator_parse_main(args[0]);
 			
 			/*
 			 * Also write the HTML output of the given file if
@@ -269,7 +269,7 @@ int main(int argc, char *argv[])
 	 */
 	if (!file_opened)
 	{
-		disable_actions_no_file();
+		gtranslator_actions_setup_state_no_file();
 	}
 	
 	/*

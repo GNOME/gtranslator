@@ -36,22 +36,22 @@ typedef enum {
 typedef gboolean (*FEFunc) (gpointer list_item, gpointer user_data);
 typedef gboolean (*FEFuncR) (gpointer list_item, gpointer user_data, gboolean first);
 
-gboolean for_each_msg(GList *first, FEFunc func, gpointer user_data);
+gboolean gtranslator_message_for_each(GList *first, FEFunc func, gpointer user_data);
 
 /*
  * The generally used find function-
  */
-void find_do(GtkWidget *widget, gpointer target);
+void gtranslator_find(GtkWidget *widget, gpointer target);
 
 /*
  * Finds and shows next fuzzy message.
  */
-void goto_next_fuzzy(GtkWidget * widget, gpointer useless);
+void gtranslator_message_go_to_next_fuzzy(GtkWidget * widget, gpointer useless);
 
 /*
  * Finds and shows next untranslated message.
  */
-void goto_next_untranslated(GtkWidget * widget, gpointer useless);
+void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer useless);
 
 void gtranslator_update_regex_flags(void);
 

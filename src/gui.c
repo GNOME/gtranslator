@@ -153,23 +153,23 @@ static GnomeUIInfo the_file_menu[] = {
 	{
 		GNOME_APP_UI_ITEM, N_("Autoaccomplish"),
 		N_("Automatically fill missing translations from the default query domain"),
-		accomplish_dialog, NULL, NULL,
+		gtranslator_auto_accomplishment_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
 		GDK_F10, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
+	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
 	{
 		GNOME_APP_UI_ITEM, N_("Open from _URI"),
 		N_("Open a po file from a given URI"),
-		open_uri_dialog, NULL, NULL,
+		gtranslator_open_uri_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
 		GDK_F3, GDK_MOD1_MASK, NULL
 	},
-	GNOMEUIINFO_MENU_SAVE_ITEM(save_current_file, NULL),
-	GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
-	GNOMEUIINFO_MENU_REVERT_ITEM(revert_file, NULL),
-	GNOMEUIINFO_MENU_CLOSE_ITEM(close_file, NULL),
+	GNOMEUIINFO_MENU_SAVE_ITEM(gtranslator_save_current_file_dialog, NULL),
+	GNOMEUIINFO_MENU_SAVE_AS_ITEM(gtranslator_save_file_as_dialog, NULL),
+	GNOMEUIINFO_MENU_REVERT_ITEM(gtranslator_file_revert, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(gtranslator_file_close, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE( N_("Recen_t files"), the_last_files_menus),
 	GNOMEUIINFO_SEPARATOR,
@@ -204,13 +204,13 @@ static GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_MENU_PASTE_ITEM(paste_clipboard, NULL),
 	GNOMEUIINFO_MENU_CLEAR_ITEM(clear_selection, NULL),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_FIND_ITEM(find_dialog, NULL),
-	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(find_do, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM(replace_dialog, NULL),
+	GNOMEUIINFO_MENU_FIND_ITEM(gtranslator_find_dialog, NULL),
+	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtranslator_find, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM(gtranslator_replace_dialog, NULL),
 	{
 		GNOME_APP_UI_ITEM, N_("_Query"),
 		N_("Query for a string"),
-		query_dialog, NULL, NULL,
+		gtranslator_query_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
 		GDK_F7, 0, NULL
 	},
@@ -218,7 +218,7 @@ static GnomeUIInfo the_edit_menu[] = {
 	{
 		GNOME_APP_UI_ITEM, N_("_Header..."),
 		N_("Edit the header"),
-		edit_header, NULL, NULL,
+		gtranslator_header_edit_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 		GDK_F8, 0, NULL
 	},
@@ -229,14 +229,14 @@ static GnomeUIInfo the_messages_menu[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_First"),
 	 N_("Go to the first message"),
-	 goto_first_msg, NULL, NULL,
+	 gtranslator_message_go_to_first, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FIRST,
 	 GDK_Up, GDK_CONTROL_MASK, NULL
 	},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Back"),
 	 N_("Go one message back"),
-	 goto_prev_msg, NULL, NULL,
+	 gtranslator_message_go_to_previous, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BACK,
 	 GDK_Left, GDK_CONTROL_MASK, NULL
 	},
@@ -244,14 +244,14 @@ static GnomeUIInfo the_messages_menu[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_Next"),
 	 N_("Go one message forward"),
-	 goto_next_msg, NULL, NULL,
+	 gtranslator_message_go_to_next, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
 	 GDK_Right, GDK_CONTROL_MASK, NULL
 	},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Last"),
 	 N_("Go to the last message"),
-	 goto_last_msg, NULL, NULL,
+	 gtranslator_message_go_to_last, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_LAST,
 	 GDK_Down, GDK_CONTROL_MASK, NULL
 	},
@@ -259,21 +259,21 @@ static GnomeUIInfo the_messages_menu[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_Go to..."),
 	 N_("Goto specified message number"),
-	 goto_dlg, NULL, NULL,
+	 gtranslator_go_to_dialog, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
 	 'G', GDK_CONTROL_MASK, NULL
 	},
 	{
 	 GNOME_APP_UI_ITEM, N_("Next fuz_zy"),
 	 N_("Go to next fuzzy message"),
-	 goto_next_fuzzy, NULL, NULL,
+	 gtranslator_message_go_to_next_fuzzy, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
 	 'Z', GDK_MOD1_MASK, NULL
 	},
 	{
 	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
 	 N_("Go to next untranslated message"),
-	 goto_next_untranslated, NULL, NULL,
+	 gtranslator_message_go_to_next_untranslated, NULL, NULL,
 	 GNOME_APP_PIXMAP_DATA, untrans_xpm,
 	 'U', GDK_MOD1_MASK, NULL
 	},
@@ -284,7 +284,7 @@ static GnomeUIInfo the_msg_status_menu[] = {
 	{
 		GNOME_APP_UI_TOGGLEITEM, N_("_Translated"),
 		N_("Toggle translated status of a message"),
-		toggle_msg_status,
+		gtranslator_message_change_status,
 		GINT_TO_POINTER(GTR_MSG_STATUS_TRANSLATED),
 		NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
@@ -293,7 +293,7 @@ static GnomeUIInfo the_msg_status_menu[] = {
 	{
 		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
 		N_("Toggle fuzzy status of a message"),
-		toggle_msg_status,
+		gtranslator_message_change_status,
 		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
 		NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
@@ -302,7 +302,7 @@ static GnomeUIInfo the_msg_status_menu[] = {
 	{
 		GNOME_APP_UI_TOGGLEITEM, N_("_Stick"),
 		N_("Stick this message"),
-		toggle_msg_status,
+		gtranslator_message_change_status,
 		GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
 		NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
@@ -344,15 +344,15 @@ static GnomeUIInfo the_menus[] = {
 static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("Open"),
 			       N_("Open a po-file"),
-			       open_file,
+			       gtranslator_open_file_dialog,
 			       GNOME_STOCK_PIXMAP_OPEN),
 	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
 			       N_("Save File"),
-			       save_current_file,
+			       gtranslator_save_current_file_dialog,
 			       GNOME_STOCK_PIXMAP_SAVE),
 	GNOMEUIINFO_ITEM_STOCK(N_("Save as"),
 			       N_("Save file with a different name"),
-			       save_file_as,
+			       gtranslator_save_file_as_dialog,
 			       GNOME_STOCK_PIXMAP_SAVE_AS),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
@@ -365,7 +365,7 @@ static GnomeUIInfo the_toolbar[] = {
 			       GNOME_STOCK_PIXMAP_REFRESH),		       
 	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
 			       N_("Edit the header"),
-			       edit_header,
+			       gtranslator_header_edit_dialog,
 			       GNOME_STOCK_PIXMAP_PROPERTIES),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Options"),
@@ -382,44 +382,44 @@ static GnomeUIInfo the_toolbar[] = {
 static GnomeUIInfo the_navibar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("First"),
 			       N_("Go to the first message"),
-			       goto_first_msg,
+			       gtranslator_message_go_to_first,
 			       GNOME_STOCK_PIXMAP_FIRST),
 	GNOMEUIINFO_ITEM_STOCK(N_("Back"),
 			       N_("Go one message back"),
-			       goto_prev_msg,
+			       gtranslator_message_go_to_previous,
 			       GNOME_STOCK_PIXMAP_BACK),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
 			       N_("Go one message forward"),
-			       goto_next_msg,
+			       gtranslator_message_go_to_next,
 			       GNOME_STOCK_PIXMAP_FORWARD),
 	GNOMEUIINFO_ITEM_STOCK(N_("Last"),
 			       N_("Go to the last message"),
-			       goto_last_msg,
+			       gtranslator_message_go_to_last,
 			       GNOME_STOCK_PIXMAP_LAST),
 	GNOMEUIINFO_ITEM(N_("Missing"),
 			       N_("Go to next untranslated message"),
-			       goto_next_untranslated,
+			       gtranslator_message_go_to_next_untranslated,
 			       untrans_xpm),
 	GNOMEUIINFO_ITEM_STOCK(N_("Fuzzy"),
 			       N_("Go to the next fuzzy translation"),
-			       goto_next_fuzzy,
+			       gtranslator_message_go_to_next_fuzzy,
 			       GNOME_STOCK_PIXMAP_BOOK_RED),
 	GNOMEUIINFO_ITEM_STOCK(N_("Go to"),
 			       N_("Go to specified message number"),
-			       goto_dlg,
+			       gtranslator_go_to_dialog,
 			       GNOME_STOCK_PIXMAP_JUMP_TO),
 	GNOMEUIINFO_ITEM_STOCK(N_("Find"),
 			       N_("Find string in po-file"),
-			       find_dialog,
+			       gtranslator_find_dialog,
 			       GNOME_STOCK_PIXMAP_SEARCH),
 	GNOMEUIINFO_ITEM_STOCK(N_("Replace"),
 			       N_("Replace string in po-file"),
-			       replace_dialog,
+			       gtranslator_replace_dialog,
 			       GNOME_STOCK_PIXMAP_SRCHRPL),
 	GNOMEUIINFO_ITEM_STOCK(N_("Query"),
 			       N_("Query for a string"),
-			       query_dialog,
+			       gtranslator_query_dialog,
 			       GNOME_STOCK_PIXMAP_JUMP_TO),
 	GNOMEUIINFO_END
 };
@@ -428,15 +428,15 @@ static GnomeUIInfo the_navibar[] = {
  * The popup-menu.
  */
 static GnomeUIInfo the_popup_menu[] = {
-	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
+	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_CUT_ITEM(cut_clipboard, NULL),
 	GNOMEUIINFO_MENU_COPY_ITEM(copy_clipboard, NULL),
 	GNOMEUIINFO_MENU_PASTE_ITEM(paste_clipboard, NULL),
 	GNOMEUIINFO_MENU_CLEAR_ITEM(clear_selection, NULL),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_ITEM(close_file, NULL),
-	GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(gtranslator_file_close, NULL),
+	GNOMEUIINFO_MENU_SAVE_AS_ITEM(gtranslator_save_file_as_dialog, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -473,7 +473,7 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 /****
   * Actions stuff goes here
  ** * */
-void change_actions(gboolean state, ...)
+void gtranslator_actions_set_up(gboolean state, ...)
 {
 	va_list ap;
 	gint id;
@@ -546,9 +546,9 @@ static void create_actions(void)
 	insert_action(ACT_END, NONE, NONE);
 }
 
-void disable_actions_no_file(void)
+void gtranslator_actions_setup_state_no_file(void)
 {
-	disable_actions(ACT_COMPILE, ACT_UPDATE, ACT_ACCOMPLISH,
+	gtranslator_actions_disable(ACT_COMPILE, ACT_UPDATE, ACT_ACCOMPLISH,
 			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
 			ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
@@ -560,23 +560,23 @@ void disable_actions_no_file(void)
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
-void enable_actions_just_opened(void)
+void gtranslator_actions_setup_file_opened(void)
 {
-	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_ACCOMPLISH,
+	gtranslator_actions_enable( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_ACCOMPLISH,
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR, ACT_REPLACE,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
 			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, 
 			ACT_VIEW_C_FORMAT, ACT_VIEW_HOTKEY);
 
-	disable_actions(ACT_SAVE, ACT_UNDO);
+	gtranslator_actions_disable(ACT_SAVE, ACT_UNDO);
 	/*
 	 * If we'd have the option to use the update function set, enable the
 	 *  Update button in the toolbar and in the menu.
 	 */	       
 	if(wants.update_function)
 	{
-		enable_actions(ACT_UPDATE);	
+		gtranslator_actions_enable(ACT_UPDATE);	
 	}  
 	/*
 	 * Enable the editing of the msgstrs :-)
@@ -663,7 +663,7 @@ void gtranslator_create_main_window(void)
 	gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), the_menus);
 
 	create_actions();
-	disable_actions_no_file();
+	gtranslator_actions_setup_state_no_file();
 
 	gtranslator_history_show();
 	
@@ -675,7 +675,7 @@ void gtranslator_create_main_window(void)
 	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
 			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
-			   GTK_SIGNAL_FUNC(text_has_got_changed), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_translation_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(text_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
@@ -703,9 +703,9 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * If file was changed, but user pressed Cancel, don't quit
 	 */
-	if (!ask_to_save_file())
+	if (!gtranslator_should_the_file_be_saved_dialog())
 		return TRUE;
-	close_file(NULL, NULL);
+	gtranslator_file_close(NULL, NULL);
 	gtranslator_geometry_save();
 	/*
 	 * Free the preferences stuff.
@@ -766,7 +766,7 @@ static void invert_dot(gchar *str)
 /* 
  * Display the message in text boxes
  */
-void display_msg(GList * list_item)
+void gtranslator_message_show(GList * list_item)
 {
 	GtrMsg *msg;
 	gchar *ispell_command[5];
@@ -775,7 +775,7 @@ void display_msg(GList * list_item)
 
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
-	clean_text_boxes();
+	gtranslator_text_boxes_clean();
 	/*
 	 * Substitute the free spaces in the msgid only if this is wished and
 	 *  possible.
@@ -857,7 +857,7 @@ void display_msg(GList * list_item)
 	message_changed = FALSE;
 }
 
-void gtranslator_update_msg(void)
+void gtranslator_message_update(void)
 {
 	guint len;
 	GtrMsg *msg = GTR_MSG(po->current->data);
@@ -901,37 +901,37 @@ void gtranslator_update_msg(void)
 	/*
 	 * Update the statusbar informations.
 	 */
-	update_appbar(g_list_position(po->messages, po->current));
+	gtranslator_application_bar_update(g_list_position(po->messages, po->current));
 }
 
-void toggle_msg_status(GtkWidget  * item, gpointer which)
+void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 {
 	gint flag = GPOINTER_TO_INT(which);
 	if (nothing_changes)
 		return;
-	text_has_got_changed(NULL, NULL);
+	gtranslator_translation_changed(NULL, NULL);
 	if (flag == GTR_MSG_STATUS_FUZZY) {
-		mark_msg_fuzzy(GTR_MSG(po->current->data),
+		gtranslator_message_status_set_fuzzy(GTR_MSG(po->current->data),
 			       GTK_CHECK_MENU_ITEM(item)->active);
 	} else if (flag == GTR_MSG_STATUS_STICK) {
-		mark_msg_sticky(GTR_MSG(po->current->data),
+		gtranslator_message_status_set_sticky(GTR_MSG(po->current->data),
 				GTK_CHECK_MENU_ITEM(item)->active);
-		display_msg(po->current);
+		gtranslator_message_show(po->current);
 		message_changed = TRUE;
 	}
-	gtranslator_update_msg();
+	gtranslator_message_update();
 }
 	 
 /*
  * Cleans up the text boxes.
  */
-void clean_text_boxes()
+void gtranslator_text_boxes_clean()
 {
 	gtk_editable_delete_text(GTK_EDITABLE(text_box), 0, -1);
 	gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
 }
 
-void update_appbar(gint pos)
+void gtranslator_application_bar_update(gint pos)
 {
 	gchar *str, *status;
 	GtrMsg *msg;
@@ -955,7 +955,7 @@ void update_appbar(gint pos)
 			/*
 			 * Also disable the corresponding button.
 			 */
-			disable_actions(ACT_NEXT_FUZZY);
+			gtranslator_actions_disable(ACT_NEXT_FUZZY);
 		}
 	} else if(msg->status & GTR_MSG_STATUS_STICK) {
 		status=g_strdup(_("Stick"));
@@ -976,7 +976,7 @@ void update_appbar(gint pos)
 			 * Also disable the coressponding buttons for the
 			 *  next untranslated message/accomplish function.
 			 */
-			disable_actions(ACT_NEXT_UNTRANSLATED, ACT_ACCOMPLISH);
+			gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED, ACT_ACCOMPLISH);
 		}	
 	}
 	/*
@@ -1006,62 +1006,62 @@ void update_appbar(gint pos)
 /*
  * Updates current msg, and shows to_go msg instead, also adjusts actions
  */
-void goto_given_msg(GList * to_go)
+void gtranslator_message_go_to(GList * to_go)
 {
 	static gint pos = 0;
 
 	g_return_if_fail (to_go!=NULL);
 
-	gtranslator_update_msg();
+	gtranslator_message_update();
 	
 	if (pos == 0)
 	{
-		enable_actions(ACT_FIRST, ACT_BACK);
+		gtranslator_actions_enable(ACT_FIRST, ACT_BACK);
 	}	
 	else if (pos == po->length - 1)
 	{
-		enable_actions(ACT_NEXT, ACT_LAST);
+		gtranslator_actions_enable(ACT_NEXT, ACT_LAST);
 	}	
 	po->current = to_go;
-	display_msg(po->current);
+	gtranslator_message_show(po->current);
 	pos = g_list_position(po->messages, po->current);
 	if (pos == 0)
 	{
-		disable_actions(ACT_FIRST, ACT_BACK);
+		gtranslator_actions_disable(ACT_FIRST, ACT_BACK);
 	}	
 	else if (pos == po->length - 1)
 	{
-		disable_actions(ACT_NEXT, ACT_LAST);
+		gtranslator_actions_disable(ACT_NEXT, ACT_LAST);
 	}
-	update_appbar(pos);
+	gtranslator_application_bar_update(pos);
 }
 
 /*
  * Callbacks for moving around messages 
  */
-void goto_first_msg(GtkWidget  * widget, gpointer useless)
+void gtranslator_message_go_to_first(GtkWidget  * widget, gpointer useless)
 {
-	goto_given_msg(g_list_first(po->messages));
+	gtranslator_message_go_to(g_list_first(po->messages));
 }
 
-void goto_prev_msg(GtkWidget  * widget, gpointer useless)
+void gtranslator_message_go_to_previous(GtkWidget  * widget, gpointer useless)
 {
-	goto_given_msg(g_list_previous(po->current));
+	gtranslator_message_go_to(g_list_previous(po->current));
 }
 
-void goto_next_msg(GtkWidget  * widget, gpointer useless)
+void gtranslator_message_go_to_next(GtkWidget  * widget, gpointer useless)
 {
-	goto_given_msg(g_list_next(po->current));
+	gtranslator_message_go_to(g_list_next(po->current));
 }
 
-void goto_last_msg(GtkWidget  * widget, gpointer useless)
+void gtranslator_message_go_to_last(GtkWidget  * widget, gpointer useless)
 {
-	goto_given_msg(g_list_last(po->messages));
+	gtranslator_message_go_to(g_list_last(po->messages));
 }
 
-void goto_nth_msg(GtkWidget  * widget, gpointer number)
+void gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number)
 {
-	goto_given_msg(g_list_nth(po->messages, GPOINTER_TO_UINT(number)));
+	gtranslator_message_go_to(g_list_nth(po->messages, GPOINTER_TO_UINT(number)));
 }
 
 /*
@@ -1097,15 +1097,15 @@ static void clear_selection(GtkWidget  * widget, gpointer useless)
 
 static void undo_changes(GtkWidget  * widget, gpointer useless)
 {
-	display_msg(po->current);
-	disable_actions(ACT_UNDO);
+	gtranslator_message_show(po->current);
+	gtranslator_actions_disable(ACT_UNDO);
 }
 
 /*
  * Set po->file_changed to TRUE if the text in the translation box has been
  * updated.
  */
-void text_has_got_changed(GtkWidget  * widget, gpointer useless)
+void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 {
 	if (nothing_changes)
 		return;
@@ -1114,22 +1114,22 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		po->file_changed = TRUE;
 		if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator-"))
 		{
-			enable_actions(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+			gtranslator_actions_enable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
 		}
 		else
 		{
-			enable_actions(ACT_REVERT, ACT_UNDO);
+			gtranslator_actions_enable(ACT_REVERT, ACT_UNDO);
 		}
 	}
 	if (!message_changed)
 	{
 		GtrMsg *msg = GTR_MSG(po->current->data);
 		message_changed = TRUE;
-		enable_actions(ACT_UNDO);
+		gtranslator_actions_enable(ACT_UNDO);
 		if ((wants.unmark_fuzzy) 
 		     && (msg->status & GTR_MSG_STATUS_FUZZY))
 		{
-		     	mark_msg_fuzzy(msg, FALSE);
+		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
 			gtk_check_menu_item_set_active(
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
 		}
@@ -1222,7 +1222,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Up:
 					IfGood(the_navibar[1])
 					{
-						goto_prev_msg(NULL, NULL);
+						gtranslator_message_go_to_previous(NULL, NULL);
 					}
 					break;
 				
@@ -1230,21 +1230,21 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Down:
 					IfGood(the_navibar[3])
 					{
-						goto_next_msg(NULL, NULL);
+						gtranslator_message_go_to_next(NULL, NULL);
 					}
 					break;
 
 				case GDK_Page_Up:
 					IfGood(the_navibar[0])
 					{
-						goto_first_msg(NULL, NULL);
+						gtranslator_message_go_to_first(NULL, NULL);
 					}
 					break;
 					
 				case GDK_Page_Down:
 					IfGood(the_navibar[4])
 					{
-						goto_last_msg(NULL, NULL);
+						gtranslator_message_go_to_last(NULL, NULL);
 					}
 					break;
 					

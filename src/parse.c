@@ -52,7 +52,7 @@ static gboolean actual_write(const gchar * name);
 static gchar *restore_msg(const gchar * given);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
 
-void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
+void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
 	regex_t *rex;
 	regmatch_t pos[3];
@@ -90,7 +90,7 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	}
 }
 
-void mark_msg_sticky (GtrMsg * msg, gboolean on)
+void gtranslator_message_status_set_sticky (GtrMsg * msg, gboolean on)
 {
 	if (on) {
 		g_free(msg->msgstr);
@@ -99,7 +99,7 @@ void mark_msg_sticky (GtrMsg * msg, gboolean on)
 		/*
 		 * It is no longer fuzzy
 		 */
-		mark_msg_fuzzy(msg, FALSE);
+		gtranslator_message_status_set_fuzzy(msg, FALSE);
 		msg->status |= GTR_MSG_STATUS_STICK;
 	} else {
 		g_free(msg->msgstr);
@@ -159,7 +159,7 @@ static void append_line(gchar ** old, const gchar * tail)
 	*old = result;
 }
 
-gboolean actual_parse(void)
+gboolean gtranslator_parse_core(void)
 {
 	FILE *fs;
 	gchar line[256];
@@ -350,7 +350,7 @@ gboolean actual_parse(void)
 /*
  * The internally used parse-function
  */
-void parse(const gchar *filename)
+void gtranslator_parse_main(const gchar *filename)
 {
 	/*
 	 * Test if such a file does exist.
@@ -372,9 +372,9 @@ void parse(const gchar *filename)
 	/*
 	 * Use the new core function.
 	 */
-	parse_core(filename);
+	gtranslator_parse(filename);
 
-	enable_actions_just_opened();
+	gtranslator_actions_setup_file_opened();
 
 	gtranslator_get_translated_count();
 	/*
@@ -385,7 +385,7 @@ void parse(const gchar *filename)
 		/*
 		 * Then enable the Fuzzy buttons/entries in the menus
 		 */
-		enable_actions(ACT_NEXT_FUZZY);
+		gtranslator_actions_enable(ACT_NEXT_FUZZY);
 	}
 	/*
 	 * Is there any untranslated message ?
@@ -395,10 +395,10 @@ void parse(const gchar *filename)
 		/*
 		 * Then enable the Untranslated buttons/entries in the menus
 		 */
-		enable_actions(ACT_NEXT_UNTRANSLATED);
+		gtranslator_actions_enable(ACT_NEXT_UNTRANSLATED);
 	}
 
-	update_appbar(0);
+	gtranslator_application_bar_update(0);
 	
 	if(po->header)
 	{
@@ -410,24 +410,24 @@ void parse(const gchar *filename)
 		   !strcmp(po->header->prj_name, "PACKAGE") ||
 		   !strcmp(po->header->prj_version, "VERSION"))
 		{
-			text_has_got_changed(NULL, NULL);
+			gtranslator_translation_changed(NULL, NULL);
 			/*
 			 * Pop up the "Edit Header" so that user can verify
 			 * automatically done changes and provide PACKAGE name.
 			 */   
-			edit_header(NULL, NULL);
+			gtranslator_header_edit_dialog(NULL, NULL);
 		}
 	}
 	else
 	{
-		text_has_got_changed(NULL, NULL);
+		gtranslator_translation_changed(NULL, NULL);
 		/* Create good header */
-		po->header=create_header_from_prefs();
+		po->header=gtranslator_header_create_from_prefs();
 		/* But PACKAGE and VERSION should be entered by user */
-		edit_header(NULL, NULL);
+		gtranslator_header_edit_dialog(NULL, NULL);
 	}
 	
-	display_msg(po->current);
+	gtranslator_message_show(po->current);
 
 	/*
 	 * Test if the filename is NOT equivalent to our temp file's name
@@ -460,7 +460,7 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
 
 	if(file_opened)
-		close_file(NULL, NULL);
+		gtranslator_file_close(NULL, NULL);
 	/*
 	 * Detect via the new functions the right open function for the file.
 	 */
@@ -469,7 +469,7 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 		/*
 		 * Open it as a "normal" gettext po file.
 		 */ 
-		parse(po_file);
+		gtranslator_parse_main(po_file);
 	}
 	/*
 	 * Destroy the dialog 
@@ -626,12 +626,12 @@ static gboolean actual_write(const gchar * name)
 		return FALSE;
 	}
 
-	update_header(po->header);
-	header = put_header(po->header);
+	gtranslator_header_update(po->header);
+	header = gtranslator_header_put(po->header);
 	write_the_message(header, (gpointer) fs);
-	free_a_message(header, NULL);
+	gtranslator_message_free(header, NULL);
 
-	gtranslator_update_msg();
+	gtranslator_message_update();
 	
 	/*
 	 * Write every message to the file
@@ -666,7 +666,7 @@ static gboolean actual_write(const gchar * name)
 /*
  * A callback for OK in Save as... dialog 
  */
-void save_the_file(GtkWidget * widget, gpointer sfa_dlg)
+void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 {
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg));
@@ -680,7 +680,7 @@ void save_the_file(GtkWidget * widget, gpointer sfa_dlg)
 /*
  * A callback for Save
  */
-void save_current_file(GtkWidget * widget, gpointer useless)
+void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
 {
 	if (!po->file_changed) {
 		if (wants.dont_save_unchanged_files)
@@ -697,7 +697,7 @@ void save_current_file(GtkWidget * widget, gpointer useless)
 			    GNOME_STOCK_BUTTON_NO,
 			    GNOME_STOCK_BUTTON_CANCEL,
 			    NULL);
-			show_nice_dialog(&dialog, _("gtranslator -- unchanged"));
+			gtranslator_dialog_show(&dialog, _("gtranslator -- unchanged"));
 			reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 			g_free(question);
 			if (reply != GNOME_YES)
@@ -707,10 +707,10 @@ void save_current_file(GtkWidget * widget, gpointer useless)
 
 	actual_write(po->filename);
 
-	disable_actions(ACT_SAVE);
+	gtranslator_actions_disable(ACT_SAVE);
 }
 
-void free_a_message(gpointer data, gpointer useless)
+void gtranslator_message_free(gpointer data, gpointer useless)
 {
 	g_free(GTR_MSG(data)->comment);
 	g_free(GTR_MSG(data)->msgid);
@@ -721,32 +721,32 @@ void free_a_message(gpointer data, gpointer useless)
 /*
  * Frees the po variable
  */
-void free_po(void)
+void gtranslator_po_free(void)
 {
 	if(!po)
 		return;
 	if (po->messages) {
-		g_list_foreach(po->messages, free_a_message, NULL);
+		g_list_foreach(po->messages, gtranslator_message_free, NULL);
 		g_list_free(po->messages);
 	}
 	if (po->header)
-		free_header(po->header);
+		gtranslator_header_free(po->header);
 	g_free(po->filename);
 	g_free(po->obsolete);
 	g_free(po);
 	po = NULL;
 }
 
-void close_file(GtkWidget * widget, gpointer useless)
+void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 {
 	if (!file_opened)
 		return;
 	/*
 	 * If user doesn't know what to do with changed file, return
 	 */
-	if (!ask_to_save_file)
+	if (!gtranslator_should_the_file_be_saved_dialog)
 		return;
-	free_po();
+	gtranslator_po_free();
 
 	gtranslator_sidebar_clear_views();
 	
@@ -761,8 +761,8 @@ void close_file(GtkWidget * widget, gpointer useless)
 		gtkspell_stop();
 	}
 	
-	clean_text_boxes();
-	disable_actions_no_file();
+	gtranslator_text_boxes_clean();
+	gtranslator_actions_setup_state_no_file();
 
 	/*
 	 * Set blank status, progress and window title
@@ -772,7 +772,7 @@ void close_file(GtkWidget * widget, gpointer useless)
 	gtk_window_set_title(GTK_WINDOW(gtranslator_application), _("gtranslator"));
 }
 
-void revert_file(GtkWidget * widget, gpointer useless)
+void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 {
 	gchar *save_this;
 	if (po->file_changed) {
@@ -789,7 +789,7 @@ void revert_file(GtkWidget * widget, gpointer useless)
 					  GNOME_STOCK_BUTTON_YES,
 					  GNOME_STOCK_BUTTON_NO,
 					  GNOME_STOCK_BUTTON_CANCEL, NULL);
-		show_nice_dialog(&dialog, "gtranslator -- revert");
+		gtranslator_dialog_show(&dialog, "gtranslator -- revert");
 		reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 		g_free(question);
 		if (reply != GNOME_YES)
@@ -797,11 +797,11 @@ void revert_file(GtkWidget * widget, gpointer useless)
 	}
 	save_this = g_strdup(po->filename);
 	/*
-	 * Let close_file know it doesn't matter if file was changed
+	 * Let gtranslator_file_close know it doesn't matter if file was changed
 	 */
 	po->file_changed = FALSE;
-	close_file(NULL, NULL);
-	parse(save_this);
+	gtranslator_file_close(NULL, NULL);
+	gtranslator_parse_main(save_this);
 	g_free(save_this);
 }
 
@@ -829,7 +829,7 @@ void compile(GtkWidget * widget, gpointer useless)
 	
 #define RESULT "gtr_result.tmp"
 	actual_write(po->filename);
-	disable_actions(ACT_SAVE);
+	gtranslator_actions_disable(ACT_SAVE);
 
 	cmd = g_strdup_printf("msgfmt -v -c -o /dev/null %s >%s 2>&1",
 			    po->filename, RESULT);
@@ -839,7 +839,7 @@ void compile(GtkWidget * widget, gpointer useless)
 	 * If there has been an error show an error-box
 	 */
 	if (res != 0) {
-		compile_error_dialog(fs);
+		gtranslator_compile_error_dialog(fs);
 	} else {
 		gchar line[128];
 		fgets(line, 128, fs);

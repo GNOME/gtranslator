@@ -41,7 +41,7 @@
 /*
  * Functions to be used only internally in this file
  */
-static void goto_dlg_clicked(GnomeDialog * dialog, gint button,
+static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
 			     gpointer adjustment);
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
@@ -50,10 +50,10 @@ static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 /*
  * The open URI dialog signal function:
  */ 
-void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
+void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 	gpointer entrydata);
 
-void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
+void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 {
 	if (wmname != NULL)
 		gtk_window_set_wmclass(GTK_WINDOW(*dlg), wmname, "gtranslator");
@@ -68,15 +68,15 @@ void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
 /*
  * The "Open file" dialog.
  */
-void open_file(GtkWidget * widget, gpointer useless)
+void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
-	if (!ask_to_save_file()) {
+	if (!gtranslator_should_the_file_be_saved_dialog()) {
 		if (dialog)
 			gtk_widget_destroy(dialog);
 		return;
 	}
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 	dialog = gtk_file_selection_new(_("gtranslator -- open a po-file"));
 	
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
@@ -94,20 +94,20 @@ void open_file(GtkWidget * widget, gpointer useless)
 		g_free(dir);
 	}
 	/*
-	 * Make the dialog transient, show_nice_dialog does not do it
+	 * Make the dialog transient, gtranslator_dialog_show does not do it
 	 *  because it is not a GnomeDialog.
 	 */
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
-	show_nice_dialog(&dialog, "gtranslator -- open");
+	gtranslator_dialog_show(&dialog, "gtranslator -- open");
 }
 
 /*
  * "Save as" dialog.
  */
-void save_file_as(GtkWidget * widget, gpointer useless)
+void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 
 	/*
 	 * If we do have write perms for the file we can save it under each
@@ -142,7 +142,7 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 	 */
 	
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
-			   "clicked", GTK_SIGNAL_FUNC(save_the_file),
+			   "clicked", GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
 			   (gpointer) dialog);
 	gtk_signal_connect_object(GTK_OBJECT
 				  (GTK_FILE_SELECTION(dialog)->cancel_button),
@@ -159,7 +159,7 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 	 * Make the dialog transient.
 	 */
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
-	show_nice_dialog(&dialog, "gtranslator -- save");
+	gtranslator_dialog_show(&dialog, "gtranslator -- save");
 }
 
 /* 
@@ -167,7 +167,7 @@ void save_file_as(GtkWidget * widget, gpointer useless)
  *  the file or not, and returns TRUE. If neither of YES and NO was pressed,
  *   returns FALSE.
  */
-gboolean ask_to_save_file(void)
+gboolean gtranslator_should_the_file_be_saved_dialog(void)
 {
 	GtkWidget *dialog;
 	gchar *question;
@@ -181,11 +181,11 @@ gboolean ask_to_save_file(void)
 				       GNOME_STOCK_BUTTON_YES,
 				       GNOME_STOCK_BUTTON_NO,
 				       GNOME_STOCK_BUTTON_CANCEL, NULL);
-	show_nice_dialog(&dialog, "gtranslator -- ask");
+	gtranslator_dialog_show(&dialog, "gtranslator -- ask");
 	reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 	g_free(question);
 	if (reply == GNOME_YES)
-		save_current_file(NULL, NULL);
+		gtranslator_save_current_file_dialog(NULL, NULL);
 	else if (reply == GNOME_NO)
 		po->file_changed = FALSE;
 	else
@@ -196,16 +196,16 @@ gboolean ask_to_save_file(void)
 /*
  * The "Go to" functions.
  */
-static void goto_dlg_clicked(GnomeDialog * dialog, gint button,
+static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
 			     gpointer adjustment)
 {
 	guint number = GTK_ADJUSTMENT(adjustment)->value - 1;
 	if (button == GNOME_OK)
-		goto_nth_msg(GTK_WIDGET(dialog), GUINT_TO_POINTER(number));
+		gtranslator_message_go_to_no(GTK_WIDGET(dialog), GUINT_TO_POINTER(number));
 	gnome_dialog_close(dialog);
 }
 
-void goto_dlg(GtkWidget * widget, gpointer useless)
+void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
 	static GtkObject *adjustment;
@@ -215,7 +215,7 @@ void goto_dlg(GtkWidget * widget, gpointer useless)
 		gtk_adjustment_set_value(GTK_ADJUSTMENT(adjustment),
 					 g_list_position(po->messages,
 							 po->current) + 1);
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 	dialog = gnome_dialog_new(_("gtranslator -- go to"), _("Go!"),
 			     GNOME_STOCK_BUTTON_CANCEL, NULL);
 	/*
@@ -244,9 +244,9 @@ void goto_dlg(GtkWidget * widget, gpointer useless)
 			   FALSE, FALSE, 0);
 	
 	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
-			   GTK_SIGNAL_FUNC(goto_dlg_clicked), adjustment);
+			   GTK_SIGNAL_FUNC(gtranslator_go_to_dialog_clicked), adjustment);
 	gtk_window_set_focus(GTK_WINDOW(dialog), spin);
-	show_nice_dialog(&dialog, "gtranslator -- goto");
+	gtranslator_dialog_show(&dialog, "gtranslator -- goto");
 }
 
 static void match_case_toggled(GtkWidget * widget, gpointer useless)
@@ -276,21 +276,21 @@ static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 	if (button == GNOME_OK) {
 		find_what = gtk_editable_get_chars(
 			GTK_EDITABLE(gnome_entry_gtk_entry(findy)), 0, -1);
-		find_do(NULL, find_what);
-		enable_actions(ACT_FIND_AGAIN, ACT_END);
+		gtranslator_find(NULL, find_what);
+		gtranslator_actions_enable(ACT_FIND_AGAIN, ACT_END);
 		return;
 	}
 	gnome_dialog_close(dialog);
 }
 
-void find_dialog(GtkWidget * widget, gpointer useless)
+void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 {
 	int findMenu=0;
 	static GtkWidget *dialog = NULL;
 	GtkWidget *label, *findy, *match_case;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 	dialog = gnome_dialog_new(_("Find in the po-file"), _("Find"),
 				  GNOME_STOCK_BUTTON_CLOSE, NULL);
 	
@@ -370,13 +370,13 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 	
-	show_nice_dialog(&dialog, "gtranslator -- find");
+	gtranslator_dialog_show(&dialog, "gtranslator -- find");
 }
 
 /*
  * The replace dialog -- based on the find dialog.
  */
-void replace_dialog(GtkWidget *widget, gpointer useless)
+void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 {
 	int findMenu=0;
 	int reply;
@@ -385,7 +385,7 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 	GtkWidget *findy, *replacy;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 	dialog=gnome_dialog_new(_("gtranslator -- replace"),
 		_("Replace"),
 		_("Replace all"),
@@ -462,7 +462,7 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 
-	show_nice_dialog(&dialog, "gtranslator -- replace");
+	gtranslator_dialog_show(&dialog, "gtranslator -- replace");
 	
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 
@@ -505,7 +505,7 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
  * TODO: Jump to the message containing first error. Something strange with
  * line/message numbers, maybe we need to convert between them?
  */
-void compile_error_dialog(FILE * fs)
+void gtranslator_compile_error_dialog(FILE * fs)
 {
 	gchar buf[2048];
 	gint pos[] = { 0 };
@@ -530,19 +530,19 @@ void compile_error_dialog(FILE * fs)
 	gtk_container_add(GTK_CONTAINER(scroll), textbox);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox),
 			 scroll, TRUE, TRUE, 0);
-	show_nice_dialog(&dialog, NULL);
+	gtranslator_dialog_show(&dialog, NULL);
 }
 
 /*
  * Requests for an URI to open. Uses pregiven protocol list.
  */ 
-void open_uri_dialog(GtkWidget *widget, gpointer useless)
+void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 {
 	static GtkWidget *dialog=NULL;
 	GtkWidget *entry;
 	GtkWidget *label;
 
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 
 	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
 				_("Open"), GNOME_STOCK_BUTTON_CANCEL, NULL);
@@ -564,15 +564,15 @@ void open_uri_dialog(GtkWidget *widget, gpointer useless)
 		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(entry))));
 
 	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
-		GTK_SIGNAL_FUNC(open_uri_dialog_clicked), entry);
+		GTK_SIGNAL_FUNC(gtranslator_open_uri_dialog_clicked), entry);
 			
-	show_nice_dialog(&dialog, "gtranslator -- open URI");
+	gtranslator_dialog_show(&dialog, "gtranslator -- open URI");
 }
 
 /*
  * Checks the URI before it's passed to the core functions.
  */ 
-void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
+void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 	gpointer entrydata)
 {
 	GString *uri=g_string_new("");
@@ -631,7 +631,7 @@ void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 /*
  * Possibly rescue the given file.
  */
-void crash_recovery_dialog(void)
+void gtranslator_rescue_file_dialog(void)
 {
 	GtkWidget *dialog;
 	gchar *recovery_message;
@@ -661,7 +661,7 @@ Saying \"No\" will delete the crash recovery file."),
 
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	
-	show_nice_dialog(&dialog, "gtranslator -- ask for crash recovery");
+	gtranslator_dialog_show(&dialog, "gtranslator -- ask for crash recovery");
 	
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 	
@@ -679,7 +679,7 @@ Saying \"No\" will delete the crash recovery file."),
 		 *  it now again.
 		 */ 
 		rename(file, original_filename);
-		parse(original_filename);
+		gtranslator_parse_main(original_filename);
 	}
 	else if(reply==GNOME_NO)
 	{
@@ -696,7 +696,7 @@ Saying \"No\" will delete the crash recovery file."),
 /*
  * Query for a specific string.
  */
-void query_dialog(void)
+void gtranslator_query_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
 	GtkWidget *innertable;
@@ -707,7 +707,7 @@ void query_dialog(void)
 	GtkWidget *label;
 	gint reply;
 	
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 
 	#define add2Box(x); \
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
@@ -771,7 +771,7 @@ void query_dialog(void)
 	 * "Query" should be the default button I guess.
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
-	show_nice_dialog(&dialog, "gtranslator -- query dialog");
+	gtranslator_dialog_show(&dialog, "gtranslator -- query dialog");
 
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 
@@ -875,7 +875,7 @@ Would you like to insert it into the translation?"),
 				 * Run the dialog and switch the action to take
 				 *  depending on the user's selection.
 				 */
-				show_nice_dialog(&condialog, "gtranslator -- query result");
+				gtranslator_dialog_show(&condialog, "gtranslator -- query result");
 				hehue=gnome_dialog_run_and_close(GNOME_DIALOG(condialog));
 				
 				g_free(resulttext);
@@ -904,7 +904,7 @@ Would you like to insert it into the translation?"),
 						gtranslator_syntax_insert_text(trans_box,
 						result->message);
 
-						text_has_got_changed(NULL, NULL);
+						gtranslator_translation_changed(NULL, NULL);
 
 						gtranslator_free_query(&result);
 					}
@@ -929,12 +929,12 @@ Would you like to insert it into the translation?"),
  * Asks the user if he/she does really want to use autoaccomplishment
  *  and does it if wished.
  */
-void accomplish_dialog(void)
+void gtranslator_auto_accomplishment_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
 	gint reply;
 
-	raise_and_return_if_exists(dialog);
+	gtranslator_raise_dialog(dialog);
 
 	dialog=gnome_message_box_new(
 		_("Should gtranslator accomplish all missing strings (if possible)\n\
@@ -949,7 +949,7 @@ from your default query domain?"),
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	
-	show_nice_dialog(&dialog, "gtranslator -- accomplish?");
+	gtranslator_dialog_show(&dialog, "gtranslator -- accomplish?");
 
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 

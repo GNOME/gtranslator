@@ -47,29 +47,29 @@ typedef struct {
 /*
  * These converts header between GtrMsg and GtrHeader.
  */
-GtrMsg  * put_header(GtrHeader  * h);
-GtrHeader  * get_header(GtrMsg  * msg);
+GtrMsg  * gtranslator_header_put(GtrHeader  * h);
+GtrHeader  * gtranslator_header_get(GtrMsg  * msg);
 
 /*
  * Updates PO-Revision-Date and Last-Translator fields 
  */
-void update_header(GtrHeader  * h);
+void gtranslator_header_update(GtrHeader  * h);
 
 /*
  * Frees the header structure
  */
-void free_header(GtrHeader  * the_header);
+void gtranslator_header_free(GtrHeader  * the_header);
 
 /*
  * Creates and shows the dialog for editing the header
  */
-void edit_header(GtkWidget  * widget, gpointer useless);
+void gtranslator_header_edit_dialog(GtkWidget  * widget, gpointer useless);
 
 /*
  * View <-> real form transition.
  */ 
-gchar *prepare_comment_for_view(gchar *comment);
-gchar *prepare_comment_for_save(gchar *comment);
+gchar *gtranslator_header_comment_convert_for_view(gchar *comment);
+gchar *gtranslator_header_comment_convert_for_save(gchar *comment);
 
 /*
  * Fill up some fields of the header if possible.
@@ -79,6 +79,6 @@ gboolean gtranslator_header_fill_up(GtrHeader *header);
 /*
  * Create new header with good values
  */
-GtrHeader * create_header_from_prefs(void);
+GtrHeader * gtranslator_header_create_from_prefs(void);
 
 #endif

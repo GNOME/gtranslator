@@ -26,7 +26,7 @@
 /*
  * Open up the given file via GnomeVFS routines.
  */
-gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
+gchar	*gtranslator_vfs_handle_gtranslator_open_file_dialog(gchar *filename)
 {
 	GnomeVFSURI *file;
 	GnomeVFSURI *destination;

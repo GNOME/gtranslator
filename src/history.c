@@ -39,7 +39,7 @@
  */
 void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry);
 
-void open_file_from_history(GtkWidget *widget, gchar *filename);
+void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filename);
 
 /* Utility callback to free userdata */
 void free_userdata(GtkWidget *widget, gpointer userdata);
@@ -193,7 +193,7 @@ void gtranslator_history_show(void)
 		 */
 		menu->type=GNOME_APP_UI_ITEM;
 		menu->hint=g_strdup_printf(_("Open %s"), entry->filename);
-		menu->moreinfo=(gpointer)open_file_from_history;
+		menu->moreinfo=(gpointer)gtranslator_open_file_dialog_from_history;
 		menu->user_data=entry->filename;
 		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
 
@@ -222,16 +222,16 @@ void free_userdata(GtkWidget *widget, gpointer userdata)
 	g_free(userdata);
 }
 
-void open_file_from_history(GtkWidget *widget, gchar *filename)
+void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filename)
 {
-	if (!ask_to_save_file())
+	if (!gtranslator_should_the_file_be_saved_dialog())
 		return;
-	close_file(NULL, NULL);
+	gtranslator_file_close(NULL, NULL);
 	/*
 	 * Also detect the right open function in the recent files' list.
 	 */
 	if(!gtranslator_open_po_file(filename))
-		parse(filename);
+		gtranslator_parse_main(filename);
 }
 
 void gtranslator_history_save(GList *list)

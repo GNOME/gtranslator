@@ -50,7 +50,7 @@ static gboolean is_untranslated(GList *msg, gpointer useless);
  * item 'begin', loops to first element, and stops at 'begin'.
  * Returns TRUE, if found, FALSE otherwise.
  */
-gboolean for_each_msg(GList * begin, FEFunc func, gpointer user_data)
+gboolean gtranslator_message_for_each(GList * begin, FEFunc func, gpointer user_data)
 {
 	GList *msg;
 
@@ -170,7 +170,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			/*
 			 * We found it!
 			 */
-			goto_given_msg(msg);
+			gtranslator_message_go_to(msg);
 			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
 			gtk_editable_select_region(GTK_EDITABLE(trans_box),
 				pos->rm_so, pos->rm_eo);
@@ -185,7 +185,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			/*
 			 * We found it!
 			 */
-			goto_given_msg(msg);
+			gtranslator_message_go_to(msg);
 			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
 			gtk_editable_select_region(GTK_EDITABLE(text_box),
 				pos->rm_so, pos->rm_eo);
@@ -201,7 +201,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			 * Hm, we found it in a comment, show it before
 			 *  "hightlighting" it.
 			 */  
-			goto_given_msg(msg);
+			gtranslator_message_go_to(msg);
 			gtranslator_views_set(GTR_COMMENT_VIEW);
 			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
 			gtk_editable_select_region(GTK_EDITABLE(text_box),
@@ -225,12 +225,12 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 /*
  * The real search function
  */
-void find_do(GtkWidget * widget, gpointer what)
+void gtranslator_find(GtkWidget * widget, gpointer what)
 {
 	gchar *error;
 	GList *begin;
 	gboolean first = FALSE;
-	gtranslator_update_msg();
+	gtranslator_message_update();
 	if (what) {
 		if (strlen(what) == 0) {
 			error = g_strdup_printf(_("Please enter a search string"));
@@ -265,13 +265,13 @@ static gboolean is_fuzzy(GList *msg, gpointer useless)
 		return FALSE;
 	}
 	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_FUZZY) {
-		goto_given_msg(msg);
+		gtranslator_message_go_to(msg);
 		return TRUE;
 	} else
 		return FALSE;
 }
 
-void goto_next_fuzzy(GtkWidget * widget, gpointer useless)
+void gtranslator_message_go_to_next_fuzzy(GtkWidget * widget, gpointer useless)
 {
 	GList *begin;
 	
@@ -280,22 +280,22 @@ void goto_next_fuzzy(GtkWidget * widget, gpointer useless)
  	begin = po->current->next;
 	if (!begin)
 		begin = po->messages;
-	if (for_each_msg(begin, (FEFunc)is_fuzzy, NULL) == TRUE)
+	if (gtranslator_message_for_each(begin, (FEFunc)is_fuzzy, NULL) == TRUE)
 		return;
 	gnome_app_message(GNOME_APP(gtranslator_application), 
 			  _("There are no fuzzy messages left."));
-	disable_actions(ACT_NEXT_FUZZY);
+	gtranslator_actions_disable(ACT_NEXT_FUZZY);
 }
 
 static gboolean is_untranslated(GList *msg, gpointer useless)
 {
 	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_TRANSLATED)
 		return FALSE;
-	goto_given_msg(msg);
+	gtranslator_message_go_to(msg);
 	return TRUE;
 }
 
-void goto_next_untranslated(GtkWidget * widget, gpointer useless)
+void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer useless)
 {
 	GList *begin;
 	
@@ -304,11 +304,11 @@ void goto_next_untranslated(GtkWidget * widget, gpointer useless)
  	begin = po->current->next;
 	if (!begin)
 		begin = po->messages;
-	if (for_each_msg(begin, (FEFunc)is_untranslated, NULL))
+	if (gtranslator_message_for_each(begin, (FEFunc)is_untranslated, NULL))
 		return;
 	gnome_app_message(GNOME_APP(gtranslator_application), 
 			  _("All messages seem to be translated."));
-	disable_actions(ACT_NEXT_UNTRANSLATED);
+	gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED);
 }
 
 void gtranslator_update_regex_flags(void)

@@ -92,35 +92,35 @@ enum {
 	ACT_END
 };
 
-void change_actions(gboolean state, ...);
-#define enable_actions(args...) change_actions(TRUE, args, ACT_END)
-#define disable_actions(args...) change_actions(FALSE, args, ACT_END)
-void disable_actions_no_file(void);
-void enable_actions_just_opened(void);
+void gtranslator_actions_set_up(gboolean state, ...);
+#define gtranslator_actions_enable(args...) gtranslator_actions_set_up(TRUE, args, ACT_END)
+#define gtranslator_actions_disable(args...) gtranslator_actions_set_up(FALSE, args, ACT_END)
+void gtranslator_actions_setup_state_no_file(void);
+void gtranslator_actions_setup_file_opened(void);
 
 /*
  * Various functions for displaying messages 
  */
-void gtranslator_update_msg(void);
-void update_appbar(gint pos);
-void display_msg(GList  * list_item);
-void clean_text_boxes(void);
-void toggle_msg_status(GtkWidget  * widget, gpointer which);
+void gtranslator_message_update(void);
+void gtranslator_application_bar_update(gint pos);
+void gtranslator_message_show(GList  * list_item);
+void gtranslator_text_boxes_clean(void);
+void gtranslator_message_change_status(GtkWidget  * widget, gpointer which);
 
 /*
  * Shows the needed message in text boxes
  */
-void goto_given_msg(GList  * to_go);
-void goto_first_msg(GtkWidget  * widget, gpointer useless);
-void goto_prev_msg(GtkWidget  * widget, gpointer useless);
-void goto_next_msg(GtkWidget  * widget, gpointer useless);
-void goto_last_msg(GtkWidget  * widget, gpointer useless);
-void goto_nth_msg(GtkWidget  * widget, gpointer number);
+void gtranslator_message_go_to(GList  * to_go);
+void gtranslator_message_go_to_first(GtkWidget  * widget, gpointer useless);
+void gtranslator_message_go_to_previous(GtkWidget  * widget, gpointer useless);
+void gtranslator_message_go_to_next(GtkWidget  * widget, gpointer useless);
+void gtranslator_message_go_to_last(GtkWidget  * widget, gpointer useless);
+void gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number);
 
 /*
  * A status defining callback -- now generaly defined for instance.
  */
-void text_has_got_changed(GtkWidget  * widget, gpointer useless);
+void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless);
 
 /*
  * If TRUE, means that trans_box is being changed by program, not user

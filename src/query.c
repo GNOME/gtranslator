@@ -366,9 +366,9 @@ void gtranslator_query_accomplish()
 	 */
 	if(po->file_changed)
 	{
-		enable_actions(ACT_SAVE);
+		gtranslator_actions_enable(ACT_SAVE);
 	}
 	
-	display_msg(po->current);
+	gtranslator_message_show(po->current);
 	gtranslator_get_translated_count();
 }

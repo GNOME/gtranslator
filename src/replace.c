@@ -152,7 +152,7 @@ void gtranslator_replace_run(GtrReplace *replace)
 	 * Redisplay the current message to get replaces in the current message
 	 *  on the screen immediately.
 	 */
-	display_msg(po->current);
+	gtranslator_message_show(po->current);
 
 	if(replaced_count >= 1)
 	{
@@ -162,7 +162,7 @@ void gtranslator_replace_run(GtrReplace *replace)
 		 */
 		po->file_changed=TRUE;
 		
-		enable_actions(ACT_SAVE);
+		gtranslator_actions_enable(ACT_SAVE);
 	}
 	else
 	{

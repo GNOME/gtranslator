@@ -18,13 +18,13 @@
  *
  */
 
-#ifndef GTR_GTR_DIALOGS_H
-#define GTR_GTR_DIALOGS_H 1
+#ifndef GTR_DIALOGS_H
+#define GTR_DIALOGS_H 1
 
 #include <stdio.h>
 #include <gtk/gtkwidget.h>
 
-#define raise_and_return_if_exists(dlg)\
+#define gtranslator_raise_dialog(dlg)\
 	if (dlg) {\
 		gdk_window_show(dlg->window);\
 		gdk_window_raise(dlg->window);\
@@ -35,54 +35,54 @@
  * Sets window name/class, icon for it, connects the destroy signal,
  * and shows it. The dialog should be static or global.
  */
-void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname);
+void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname);
 
 /*
  * The file open/save (as) file dialogs.
  */
-void save_file_as(GtkWidget * widget, gpointer useless);
-void open_file(GtkWidget * widget, gpointer useless);
-gboolean ask_to_save_file(void);
+void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless);
+void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless);
+gboolean gtranslator_should_the_file_be_saved_dialog(void);
 
 /*
  * This dialog will pop up if a crash recovery file could be found
  *  in ~.
  */
-void crash_recovery_dialog(void);
+void gtranslator_rescue_file_dialog(void);
 
 /*
  * Set up an query dialog for the query backend -- search for strings
  *  in compiled mo/gmo files in the specific locale directory.
  */
-void query_dialog(void);
+void gtranslator_query_dialog(void);
 
 /*
  * A last questioning dialog before we do accomplish all the missing
  *  strings from the default query domain.
  */
-void accomplish_dialog(void);
+void gtranslator_auto_accomplishment_dialog(void);
 
 /*
  * A replace dialog based onto the find functions.
  */
-void replace_dialog(GtkWidget *widget, gpointer useless);
+void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless);
 
 /*
  * The "Go to" dialog.
  */
-void goto_dlg(GtkWidget * widget, gpointer useless);
+void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless);
 
 /*
  * The find dialog function. 
  */
-void find_dialog(GtkWidget * widget, gpointer useless);
+void gtranslator_find_dialog(GtkWidget * widget, gpointer useless);
 
-void compile_error_dialog(FILE * fs);
-void no_changed_dialog(GtkWidget * widget, gpointer useless);
+void gtranslator_compile_error_dialog(FILE * fs);
+void gtranslator_file_is_not_changed_dialog(GtkWidget * widget, gpointer useless);
 
 /*
  * Open URI dialog.
  */
-void open_uri_dialog(GtkWidget *widget, gpointer useless);
+void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless);
 
 #endif

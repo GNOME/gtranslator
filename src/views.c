@@ -77,7 +77,7 @@ gboolean gtranslator_views_set(GtrView view)
 	{
 		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
 		/* Put text from textbox into msg */
-		gtranslator_update_msg();
+		gtranslator_message_update();
 	}
 
 	previous_view=current_view;
@@ -104,7 +104,7 @@ gboolean gtranslator_views_set(GtrView view)
 			
 		case GTR_MESSAGE_VIEW:
 		default:
-			display_msg(po->current);
+			gtranslator_message_show(po->current);
 
 			if(index >= 0 && index <= gtk_text_get_length(GTK_TEXT(trans_box)))
 			{
@@ -152,7 +152,7 @@ void show_number()
 	 * Set up the view informations and clean up our text boxes.
 	 */
 	current_view=GTR_NUMBER_VIEW;
-	clean_text_boxes();
+	gtranslator_text_boxes_clean();
 
 	/*
 	 * Show the nude figures!
@@ -171,7 +171,7 @@ void show_c_format()
 	g_return_if_fail(msg!=NULL);
 	
 	current_view=GTR_C_FORMAT_VIEW;
-	clean_text_boxes();
+	gtranslator_text_boxes_clean();
 
 	/*
 	 * Use the new helper functions for the real core task.
@@ -193,7 +193,7 @@ void show_hotkey()
 	 * Set the data for our internal use.
 	 */
 	current_view=GTR_HOTKEY_VIEW;
-	clean_text_boxes();
+	gtranslator_text_boxes_clean();
 
 	/*
 	 * Handle both msgid and msgstr for the hotkeys.
