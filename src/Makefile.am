@@ -2,7 +2,7 @@
 # Welcome to the gtranslator-automake-autoconf Wonderland!
 # --------------------------------------------------------
 
-SUBDIRS = pixmaps
+SUBDIRS = pixmaps semerkent
 
 INCLUDES = \
 	-I$(top_srcdir) \
