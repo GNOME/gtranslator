@@ -50,10 +50,10 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/preferences.o \
 	$(srcbuild)/query.o \
 	$(srcbuild)/replace.o \
+	$(srcbuild)/save-differently.o \
 	$(srcbuild)/sidebar.o \
 	$(srcbuild)/stylistics.o \
 	$(srcbuild)/syntax.o \
-	$(srcbuild)/undo-core.o \
 	$(srcbuild)/undo.o \
 	$(srcbuild)/update.o \
 	$(srcbuild)/utf8.o \
