@@ -71,6 +71,12 @@ gint msg_pair_count;
 GtkWidget *find_dlg,*find_dlg_cancel,*find_dlg_ok;
 
 /**
+* 9/The query dialog widgets
+**/
+GtkWidget *q_dlg,*q_dlg_cancel,*q_dlg_query,*q_entry;
+GtkWidget *r_window_dlg,*r_window_apply,*r_window_cancel;
+
+/**
 * The function prototypes :
 **/
 void compile_error_dialog(GtkWidget *widget,gpointer useless);
@@ -119,5 +125,18 @@ void goto_dlg(GtkWidget *widget,gpointer useless);
 **/
 void find_dialog(GtkWidget *widget,gpointer title_type);
 void find_dialog_hide(GtkWidget *widget,gpointer useless);
+
+/**
+* The query dialog
+**/
+void query_dialog_create();
+void query_dialog(GtkWidget *widget,gpointer useless);
+void query_dialog_hide(GtkWidget *widget,gpointer useless);
+
+/**
+* The result window.
+**/
+void r_window(GtkWidget *widget,gpointer useless);
+void r_window_hide(GtkWidget *widget,gpointer useless);
 
 #endif

@@ -39,7 +39,7 @@ int init_msg_db()
 	}
 	if(fopen(msg_db,"r+")==NULL)
 	{
-		g_message(_("No message db found! Creating one in `%s'."),msg_db);
+		g_message(_("No msg_db found! Creating one in `%s'."),msg_db);
 		db_stream=fopen(msg_db,"a+");
 	}
 	else
@@ -115,7 +115,7 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 		/**
 		* Show a little warning ...
 		**/
-		g_warning(_("The message db `%s' hasn't been inited yet!\n"),msg_db);
+		g_warning(_("The msg_db `%s' hasn't been inited yet!\n"),msg_db);
 			return 1;
 	}
 	else
@@ -170,7 +170,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 /**
                  * Show a little warning ...
                  **/
-                g_warning(_("The message db `%s' seems not to be inited!\n"),msg_db);
+                g_warning(_("The msg_db `%s' seems not to be inited!\n"),msg_db);
 		 /**
 		 * Return a very "explaining" char* ...
 		 **/
@@ -182,7 +182,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 * If there's no msg_list 
 		 *  print an error message
   		 **/
-		g_error(_("No messages list (msg_list) available for acting on it!\n"));
+		g_error(_("No msg_list available for acting on it!\n"));
 		 /**
 		 * Exit brutally ...
 		 **/
@@ -210,7 +210,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 						emp_i++;
 					}
 					emp_i++;emp_i++;
-					for(i=0;i<((strlen(msg_messages)-emp_i-1));++i)
+					for(i=0;i<((strlen(msg_messages)));++i)
 					{
 						emp[i]=msg_messages[emp_i];
 						emp_i++;
@@ -219,6 +219,6 @@ gchar *get_from_msg_db(const gchar *get_similar)
 				}
 			}
 		}	
-		return _("No entry found in the message db.");
+		return _("No entry found in the msg_db.");
 	}
 }

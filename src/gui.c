@@ -188,40 +188,6 @@ void append_to_msg_db(GtkWidget *widget,gpointer useless)
 }
 
 /**
-* Disables/greys out the next/... buttons
-**/
-void disable_buttons()
-{
-	gtk_widget_set_sensitive(compile_button,FALSE);
-	gtk_widget_set_sensitive(save_button,FALSE);
-	gtk_widget_set_sensitive(save_as_button,FALSE);
-	gtk_widget_set_sensitive(first_button,FALSE);
-	gtk_widget_set_sensitive(back_button,FALSE);
-	gtk_widget_set_sensitive(next_button,FALSE);
-	gtk_widget_set_sensitive(last_button,FALSE);
-	gtk_widget_set_sensitive(goto_button,FALSE);
-	gtk_widget_set_sensitive(add_button,FALSE);
-	gtk_widget_set_sensitive(header_button,FALSE);
-}
-
-/**
-* Enables the buttons from above
-**/
-void enable_buttons()
-{
-	gtk_widget_set_sensitive(compile_button,TRUE);
-	gtk_widget_set_sensitive(save_button,TRUE);
-        gtk_widget_set_sensitive(save_as_button,TRUE);
-	gtk_widget_set_sensitive(first_button,TRUE);
-        gtk_widget_set_sensitive(back_button,TRUE);
-        gtk_widget_set_sensitive(next_button,TRUE);
-        gtk_widget_set_sensitive(last_button,TRUE);
-	gtk_widget_set_sensitive(goto_button,TRUE);
-	gtk_widget_set_sensitive(add_button,TRUE);
-	gtk_widget_set_sensitive(header_button,TRUE);
-}
-
-/**
 * The menu-entries
 **/
 static GnomeUIInfo the_file_menu[] =
@@ -338,18 +304,18 @@ static GnomeUIInfo the_messages_menu[] =
 static GnomeUIInfo the_msg_db_menu [] =
 {
 	{
-		GNOME_APP_UI_ITEM, N_("_Add"),
+		GNOME_APP_UI_ITEM, N_("_Add the current message"),
 		N_("Add the current message to the messages DB."),
 		append_to_msg_db, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UP,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
 		0, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("_Query"),
+		GNOME_APP_UI_ITEM, N_("_Query for a message"),
 		N_("Query the messages DB for the current msgid."),
-		NULL, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_DOWN,
+		query_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
 		0, 0, NULL
 	},
 	GNOMEUIINFO_END
@@ -388,11 +354,11 @@ static GnomeUIInfo the_menus[] =
         GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
         GNOMEUIINFO_MENU_VIEW_TREE(the_view_menu),
         {
-          GNOME_APP_UI_SUBTREE, N_("_Messages"),
-          NULL,
-          the_messages_menu, NULL, NULL,
-          GNOME_APP_PIXMAP_NONE, N_("_Messages"),
-          0, 0, NULL
+		GNOME_APP_UI_SUBTREE, N_("_Messages"),
+		NULL,
+		the_messages_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, N_("_Messages"),
+		0, 0, NULL
         },
 	{
 		GNOME_APP_UI_SUBTREE, N_("Message _db"),
@@ -708,4 +674,38 @@ create_app1 (void)
         	GTK_SIGNAL_FUNC(gtranslator_dnd), (gpointer)dnd_type);
 	/*****************************************************************/
 	return app1;
+}
+
+/**
+* Disables/greys out the next/... buttons
+**/
+void disable_buttons()
+{
+        gtk_widget_set_sensitive(compile_button,FALSE);
+        gtk_widget_set_sensitive(save_button,FALSE);
+        gtk_widget_set_sensitive(save_as_button,FALSE);
+        gtk_widget_set_sensitive(first_button,FALSE);
+        gtk_widget_set_sensitive(back_button,FALSE);
+        gtk_widget_set_sensitive(next_button,FALSE);
+        gtk_widget_set_sensitive(last_button,FALSE);
+        gtk_widget_set_sensitive(goto_button,FALSE);
+        gtk_widget_set_sensitive(add_button,FALSE);
+        gtk_widget_set_sensitive(header_button,FALSE);
+}
+
+/**
+* Enables the buttons from above
+**/
+void enable_buttons()
+{
+        gtk_widget_set_sensitive(compile_button,TRUE);
+        gtk_widget_set_sensitive(save_button,TRUE);
+        gtk_widget_set_sensitive(save_as_button,TRUE);
+        gtk_widget_set_sensitive(first_button,TRUE);
+        gtk_widget_set_sensitive(back_button,TRUE);
+        gtk_widget_set_sensitive(next_button,TRUE);
+        gtk_widget_set_sensitive(last_button,TRUE);
+        gtk_widget_set_sensitive(goto_button,TRUE);
+        gtk_widget_set_sensitive(add_button,TRUE);
+        gtk_widget_set_sensitive(header_button,TRUE);
 }

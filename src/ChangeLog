@@ -1,3 +1,31 @@
+2000-06-09  Fatih Demir		( kabalak@gmx.net )
+
+	+	Set the window properties and again use
+		
+		the window-icon if possible.
+		
+	+	Adding the query dialog, the widgets
+	
+		and the according routines.
+		
+		-> gtr_dialogs.c/h
+
+	+	Yeah! The message db works now ! 
+		
+		[ forgot to remove the unneeded char-
+		
+		   length minorification. ]
+
+		-> msg_db.c
+
+	+	Reverted the fake-signal to "activate".
+	    
+		-> prefs.c
+
+	+	Moved main.c to the last place.	
+		
+		-> Makefile.am		
+
 2000-06-08  Fatih Demir		( kabalak@gmx.net )
 
 	+	Also change the ifdef check to a check

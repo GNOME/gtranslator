@@ -232,7 +232,7 @@ void prefs_box()
 	/**
 	* The basic signal-handlers 
 	**/
-	gtk_signal_connect(GTK_OBJECT(prefs),"activated",
+	gtk_signal_connect(GTK_OBJECT(prefs),"show",
 		GTK_SIGNAL_FUNC(prefs_box_changed),(gpointer)1);
 	/******************************************************************/
 	gtk_signal_connect(GTK_OBJECT(GTK_ENTRY(GTK_COMBO(authors_language)->entry)),"changed",

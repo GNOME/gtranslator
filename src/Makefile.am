@@ -17,7 +17,6 @@ INCLUDES = $(extra_flags) $(myicon)\
 bin_PROGRAMS = gtranslator
 
 gtranslator_SOURCES = \
-	main.c \
 	gui.c gui.h \
 	parse.c	parse.h \
 	header_stuff.c header_stuff.h \
@@ -28,7 +27,8 @@ gtranslator_SOURCES = \
 	session.c session.h \
 	dnd.c dnd.h \
 	messages.h \
-	languages.h 
+	languages.h \
+	main.c 
 
 gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS)
 

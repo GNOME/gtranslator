@@ -336,3 +336,163 @@ void find_dialog_hide(GtkWidget *widget,gpointer useless)
 {
 	gtk_widget_hide(find_dlg);
 }
+
+void query_dialog_create()
+{
+	GtkWidget *q_dlg_label;
+	/**
+	* Create the dialog.
+	**/
+	q_dlg=gtk_dialog_new();
+	/**
+	* Create a helping label.
+	**/
+	q_dlg_label=gtk_label_new(_("With this query window you can query\n\
+the message db for an existing entry\n\
+with your query string."));
+	/**
+	* Add another GNOME entry.
+	**/
+	q_entry=gnome_entry_new("QUERY");
+	/**
+	* Create the buttons.
+	**/
+	q_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
+	q_dlg_query=gtk_button_new_with_label(_("Query"));
+	/**
+	* Set the size.
+	**/
+	gtk_widget_set_usize(q_dlg,240,120);
+	/**
+	* Add the widgets to the dialog.
+	**/
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->vbox),q_dlg_label);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->vbox),q_entry);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->action_area),q_dlg_query);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->action_area),q_dlg_cancel);
+	/**
+	* Connect the signals.
+	**/
+	gtk_signal_connect(GTK_OBJECT(q_dlg_query),"clicked",
+		GTK_SIGNAL_FUNC(r_window),NULL);
+	gtk_signal_connect(GTK_OBJECT(q_dlg_cancel),"clicked",
+		GTK_SIGNAL_FUNC(query_dialog_hide),NULL);
+	/**
+	* Show the inner-widgets.
+	**/
+	gtk_widget_show(q_dlg_label);
+	gtk_widget_show(q_entry);
+	gtk_widget_show(q_dlg_cancel);
+	gtk_widget_show(q_dlg_query);
+}
+
+void query_dialog(GtkWidget *widget,gpointer useless)
+{
+	/**
+	* Create the dialog.
+	**/
+	query_dialog_create();
+	/**
+	* Set the window-icon.
+	**/
+	#ifdef USE_WINDOW_ICON
+        gnome_window_icon_set_from_file(GTK_WINDOW(q_dlg),WINDOW_ICON);
+        #endif
+	/**
+	* Set the window-properties.
+	**/
+	gtk_window_set_title(GTK_WINDOW(q_dlg),_("gtranslator -- query the message db"));
+	gtk_window_set_wmclass(GTK_WINDOW(q_dlg),"gtranslator","gtranslator");
+	gtk_widget_show(q_dlg);
+}
+
+void query_dialog_hide(GtkWidget *widget,gpointer useless)
+{
+	/**
+	* Hide the dialog.
+	**/
+	gtk_widget_hide(q_dlg);
+}
+
+void r_window(GtkWidget *widget,gpointer useless)
+{
+	GtkWidget *r_label,*r_result;
+	 /**
+        * The gchar holding the result.
+        **/
+        gchar *result=g_new(gchar,1);
+	gchar result_string[256];
+	result_string[0]='\0';
+        result=NULL;
+	/**
+	* Get the result.
+	*
+	* Note: This is really ugly but it avoids sparing many lines for this.
+	**/
+	result=get_from_msg_db(gtk_entry_get_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(q_entry)))));
+	sprintf(result_string,_("Result: `%s'"),result);
+	/**
+	* Hide the previous query dialog.
+	**/
+	gtk_widget_hide(q_dlg);
+	/**
+	* Create the dialog.
+	**/
+	r_window_dlg=gtk_dialog_new();
+	/**
+	* An explaining label in front of the result.
+	**/
+	r_label=gtk_label_new(result_string);
+	/**
+	* Create the buttons.
+	**/
+	r_window_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
+	r_window_apply=gtk_button_new_with_label(_("Insert"));
+	/**
+	* Set the window properties.
+	**/
+	gtk_window_set_title(GTK_WINDOW(r_window_dlg),_("gtranslator -- result fo your query"));
+	gtk_window_set_wmclass(GTK_WINDOW(r_window_dlg),"gtranslator","gtranslator");	
+	/**
+	* Place the other widgets.
+	**/
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(r_window_dlg)->vbox),r_label);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(r_window_dlg)->action_area),r_window_apply);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(r_window_dlg)->action_area),r_window_cancel);
+	/**
+	* Show again the inner widgte first.
+	**/
+	gtk_widget_show(r_label);
+	gtk_widget_show(r_window_apply);
+	gtk_widget_show(r_window_cancel);
+	/**
+        * Set the window-icon.
+        **/
+        #ifdef USE_WINDOW_ICON
+        gnome_window_icon_set_from_file(GTK_WINDOW(q_dlg),WINDOW_ICON);
+        #endif
+	/**
+	* Set the signals.
+	**/
+	gtk_signal_connect(GTK_OBJECT(r_window_cancel),"clicked",
+		GTK_SIGNAL_FUNC(r_window_hide),NULL);
+	/**
+	* Show it now.
+	**/
+	gtk_widget_show(r_window_dlg);
+	/**
+	* Free the gchar.
+	**/
+	if(result)
+	{
+		g_free(result);
+	}
+}
+
+void r_window_hide(GtkWidget *widget,gpointer useless)
+{
+	/**
+	* Hide the result window.
+	**/
+	gtk_widget_hide(r_window_dlg);
+}
