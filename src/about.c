@@ -52,6 +52,7 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	};	
 	static const char *documenters[] =
 	{
+		"Abel Cheung <deaddog@deaddog.org>",
 		"Emese Kovacs <emese@gnome.hu>",
 		NULL
 	};	
