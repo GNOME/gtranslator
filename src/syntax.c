@@ -32,6 +32,9 @@
  * The keywords table.
  */
 static gchar *keywords[] = {
+	"COPYING",
+	"COPYING.LIB",
+	"Copying",
 	"CVS",
 	"FAQ",
 	"FDL",
@@ -47,14 +50,17 @@ static gchar *keywords[] = {
 	"GTK+",
 	"KDE",
 	"Kde",
+	"LICENSE",
 	"License",
 	"NULL",
 	"TODO",
 	"URI",
 	"URL",
+	"Url",
 	"URN",
 	"X11",
 	"WWW",
+	"www",
 	NULL
 };
 

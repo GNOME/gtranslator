@@ -65,7 +65,7 @@ gboolean gtranslator_views_set(GtrView view)
 	
 	g_return_val_if_fail(view >= 0 && view < GTR_LAST_VIEW, FALSE);
 
-	/* Need nothing too change */
+	/* Need nothing to change */
 	if(view==current_view)
 		return TRUE;
 
@@ -104,7 +104,12 @@ gboolean gtranslator_views_set(GtrView view)
 		case GTR_MESSAGE_VIEW:
 		default:
 			display_msg(po->current);
-			gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+
+			if(index >= 0 && index <= gtk_text_get_length(GTK_TEXT(trans_box)))
+			{
+				gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+			}
+			
 			current_view=GTR_MESSAGE_VIEW;
 			break;
 	}
