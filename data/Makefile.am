@@ -3,6 +3,7 @@
 SUBDIRS = \
 	colorschemes \
 	desktop \
+	etspecs \
 	gconf \
 	mime \
 	oaf \
