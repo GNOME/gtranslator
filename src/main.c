@@ -184,27 +184,25 @@ int main(int argc, char *argv[])
 		 * Apply the given color scheme if possible.
 		 */ 
 		gtranslator_color_scheme_apply(scheme_filename);
-	
-		theme=gtranslator_color_scheme_load_from_prefs();
-
-		/*
-		 * Also setup the foreground/background colors from the
-		 *  color scheme.
-		 */  
-		gtranslator_set_style(text1);
-		gtranslator_set_style(trans_box);
-
-		/*
-		 * If no theme could be parsed, restore the default values
-		 *  for the syntax highlighting colors.
-		 */  
-		if(!theme)
-		{
-			gtranslator_color_scheme_restore_default();
-
-			theme=gtranslator_color_scheme_load_from_prefs();
-		}
 	}
+
+	/*
+	 * Load the applied color scheme from the prefs and check it; if it
+	 *  doesn't seem to be right apply the original default color names.
+	 */ 
+	theme=gtranslator_color_scheme_load_from_prefs();
+
+	if(!theme)
+	{
+		gtranslator_color_scheme_restore_default();
+		theme=gtranslator_color_scheme_load_from_prefs();
+	}
+	
+	/*
+	 * Set up the text boxes with the _new_ style.
+	 */ 
+	gtranslator_set_style(text1);
+	gtranslator_set_style(trans_box);
 	
 	/*
 	 * If there are any files given on command line, open them

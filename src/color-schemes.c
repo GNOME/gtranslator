@@ -361,16 +361,17 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 		if(strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))
 		{
 			GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
-			
-			GtrColorSchemeInformations *infos=g_new0(
-				GtrColorSchemeInformations, 1);
+			GtrColorSchemeInformations *infos;
 
 			theme=gtranslator_color_scheme_open(g_strdup_printf("%s/%s",
 				SCHEMESDIR, entry->d_name));
 
-			infos=theme->info;
+			if(theme)
+			{
+				infos=theme->info;
 
-			schemesinfos=g_list_append(schemesinfos, infos);
+				schemesinfos=g_list_append(schemesinfos, infos);
+			}
 
 			free_color_scheme(&theme);
 		}
@@ -396,16 +397,19 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 				if(strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))
 				{
 					GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
+					GtrColorSchemeInformations *infos;
 
-					GtrColorSchemeInformations *infos=g_new0(
-						GtrColorSchemeInformations, 1);
+					theme=gtranslator_color_scheme_open(
+						g_strdup_printf("%s/%s",
+						directory, entry->d_name));
 
-					theme=gtranslator_color_scheme_open(g_strdup_printf(
-						"%s/%s", directory, entry->d_name));
+					if(theme)
+					{
+						infos=theme->info;
 
-					infos=theme->info;
-
-					schemesinfos=g_list_append(schemesinfos, infos);
+						schemesinfos=g_list_append(
+							schemesinfos, infos);
+					}
 
 					free_color_scheme(&theme);
 				}
