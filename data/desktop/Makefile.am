@@ -13,10 +13,7 @@ Application_predata = gtranslator.desktop.in
 Application_DATA = $(Application_predata:.desktop.in=.desktop)
 Applicationicon_DATA = gtranslator.png
 
-##
-## xml-i18n tools rule
-##
-@XML_I18N_MERGE_DESKTOP_RULE@
+@INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = $(Application_DATA) \
 	$(Applicationicon_DATA) \
