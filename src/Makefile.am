@@ -46,7 +46,7 @@ gtranslator_SOURCES = \
 	open-differently.c open-differently.h \
 	parse.c	parse.h \
 	preferences.c preferences.h \
-	prefs.c prefs.h \
+	prefs.c prefs_init.c prefs.h \
 	session.c session.h \
 	sidebar.c sidebar.h \
 	stylistics.c stylistics.h \

@@ -557,6 +557,13 @@ static void prefs_box_changed(GtkWidget  * widget, gpointer flag)
 
 void read_prefs(void)
 {
+
+	/*
+	 * Initialize the preferences with default values if this is our first
+	 *  startup of gtranslator.
+	 */  
+	prefs_init_default();
+
 	gtranslator_config_init();
 	author = gtranslator_config_get_string("translator/name");
 	email = gtranslator_config_get_string("translator/email");

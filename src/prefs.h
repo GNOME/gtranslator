@@ -73,6 +73,12 @@ void read_prefs(void);
 void free_prefs(void);
 
 /*
+ * Initialize the preferences with useful default values if there hasn't
+ *  been any options set up yet.
+ */
+void prefs_init_default(void);
+
+/*
  * Routines for saving/restoring/setting geometry of the main window.
  */
 void save_geometry(void);
