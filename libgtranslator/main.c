@@ -24,6 +24,7 @@
 #include <gtranslatord.h>
 #include <parse-db.h>
 #include <team-handle.h>
+#include <preferences.h>
 
 /**
 * The OAF includes.
@@ -35,8 +36,11 @@
 **/
 int main(int argc,char *argv[])
 {
-	CORBA_ORB orb;
-	CORBA_Environment env;
+	CORBA_ORB		orb;
+	CORBA_Environment	env;
+	#ifdef GCONF_IS_PRESENT
+	GError			*error=NULL;
+	#endif
 	/**
 	* Init the environment.
 	**/
@@ -57,10 +61,23 @@ int main(int argc,char *argv[])
 	**/
 	if(orb)
 	{
-		g_print(_("gtranslatord has started successfully and will finish now...\n"));
+		g_print(_("gtranslatord has started successfully and will do some operations now ...\n"));
+		/**
+		* Again this preliminary GConf stuff.
+		**/
+		#ifdef GCONF_IS_PRESENT
+		if(!(gconf_init(argc,argv, &error))
+		{
+			/**
+			* Print some more exact informations on the GConf init-error.
+			**/
+			g_warning(_("GConf initialization error: `%s'"), error->message);
+			/**
+			* Free the GError.
+			**/
+			g_clear_error(&error);
+		}
+		#endif
 	}
-	/**
-	* TODO: first the libgtranslator has to be extended.
-	**/
 	exit(0);
 }	

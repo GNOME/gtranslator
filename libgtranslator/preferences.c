@@ -46,7 +46,7 @@ void gtranslator_config_init()
 	**/
 	if(error)
 	{
-		g_error(_("Error during Gconf initialization: `%s'!"),error->message);
+		g_error(_("Error during GConf initialization: `%s'!"),error->message);
 	}
 	#else
 	gnome_config_push_prefix("/gtranslator/");

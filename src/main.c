@@ -78,7 +78,14 @@ int main(int argc, char *argv[])
 	#ifdef GCONF_IS_PRESENT
 	if(!(gconf_init(argc,argv, &error)))
 	{
-		g_error(_("Couldn't init the GConf library!"));
+		/**
+		* Print some more exact informations on the GConf init-error.
+		**/
+		g_warning(_("GConf initialization error: `%s'"), error->message);
+		/**
+		* Free the GError.
+		**/
+		g_clear_error(&error);
 	}
 	#endif
 	
