@@ -220,22 +220,32 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 		GTK_WINDOW(gtranslator_application),
 		GTK_DIALOG_DESTROY_WITH_PARENT,
 		GTK_MESSAGE_WARNING,
-		GTK_BUTTONS_YES_NO,
+		GTK_BUTTONS_NONE,
 		_("File %s\nwas changed. Save?"),
 		po->filename);
-
-	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
+	gtk_dialog_add_buttons(
+		GTK_DIALOG(dialog),
+		GTK_STOCK_CANCEL,
+		GTK_RESPONSE_CANCEL,
+		_("Don't save"),
+		GTK_RESPONSE_REJECT,
+		GTK_STOCK_SAVE,
+		GTK_RESPONSE_ACCEPT,
+		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_CANCEL);
 
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 
-	if (reply == GTK_RESPONSE_YES)
+	if (reply == GTK_RESPONSE_ACCEPT) {
 		gtranslator_save_current_file_dialog(NULL, NULL);
-	else if (reply == GTK_RESPONSE_NO)
+		return TRUE;
+	}
+	if (reply == GTK_RESPONSE_REJECT) {
 		po->file_changed = FALSE;
-	else
-		return FALSE;
-	return TRUE;
+		return TRUE;
+	}
+	return FALSE;
 }
 
 #ifdef UTF8_CODE
