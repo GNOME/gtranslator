@@ -14,6 +14,7 @@ schemes_DATA = \
 	mmc.xml \
 	nizuu.xml \
 	sepia.xml \
+	spiffE.xml \
 	tuey.xml \
 	vim.xml \
 	waliays.xml \
