@@ -23,7 +23,6 @@
 
 #include "learn.h"
 #include "nautilus-string.h"
-#include "parse.h"
 #include "prefs.h"
 #include "utils.h"
 
@@ -66,8 +65,11 @@ GtrLearnBuffer		*gtranslator_learn_buffer;
 static void gtranslator_learn_buffer_hash_from_current_node(void);
 static void gtranslator_learn_buffer_free_hash_entry(gpointer key, 
 	gpointer value, gpointer useless);
-static void gtranslator_learn_buffer_write_hash_entry(gpointer key, 
+static void gtranslator_learn_buffer_write_hash_entry(gpointer key,
 	gpointer value, gpointer useless);
+
+static void gtranslator_learn_buffer_learn_function(gpointer date, 
+	gpointer useless);
 
 static void gtranslator_learn_buffer_set_umtf_date(void);
 static void gtranslator_learn_set_xml_prop(xmlNodePtr node,
@@ -233,6 +235,25 @@ static void gtranslator_learn_buffer_set_umtf_date()
 	
 	gtranslator_learn_buffer->serial_date=g_strdup(date_string);
 	g_free(date_string);
+}
+
+/*
+ * Learn the given data entry (a GtrMsg) automatically.
+ */
+static void gtranslator_learn_buffer_learn_function(gpointer data, gpointer useless)
+{
+	GtrMsg 	*message=GTR_MSG(data);
+	
+	g_return_if_fail(message!=NULL);
+	g_return_if_fail(GTR_MSG(message)->msgid!=NULL);
+
+	/*
+	 * Learn only translated messages.
+	 */
+	if(message->msgstr && (message->status & GTR_MSG_STATUS_TRANSLATED))
+	{
+		gtranslator_learn_string(message->msgid, message->msgstr);
+	}
 }
 
 /*
@@ -442,6 +463,18 @@ void gtranslator_learn_shutdown()
 }
 
 /*
+ * Learn the complete GtrPo file's messages.
+ */
+void gtranslator_learn_po_file(GtrPo *po_file)
+{
+	g_return_if_fail(po_file!=NULL);
+	g_return_if_fail(GTR_PO(po_file)->messages!=NULL);
+
+	g_list_foreach(GTR_PO(po_file)->messages, 
+		(GFunc) gtranslator_learn_buffer_learn_function, NULL);
+}
+
+/*
  * Add it to our learned list!
  */
 void gtranslator_learn_string(const gchar *id_string, const gchar *str_string)
@@ -494,8 +527,8 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	/*
 	 * Look the given search_string up in our internally used hash table.
 	 */
-	found_string=(gchar *) g_hash_table_lookup(gtranslator_learn_buffer->hash, 
-		(gconstpointer) search_string);
+	found_string=(gchar *) g_hash_table_lookup(
+		gtranslator_learn_buffer->hash, (gconstpointer) search_string);
 
 	/*
 	 * Return it via g_strdup, free it or return NULL in bad case .-(
@@ -510,3 +543,4 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 		return NULL;
 	}
 }
+

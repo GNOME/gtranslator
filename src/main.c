@@ -61,6 +61,7 @@
 static gchar 	*gtranslator_geometry=NULL;
 static gchar 	*save_html_output_file=NULL;
 static gchar 	*domains_dir=NULL;
+static gchar	*learn_file=NULL;
 static gboolean	build_informations=FALSE;
 static gboolean	no_modules=FALSE;
 
@@ -79,6 +80,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0, N_("Specify main window geometry"), N_("GEOMETRY")
+	},
+	{
+		"learn", 'l', POPT_ARG_STRING, &learn_file,
+		0, N_("Learn the file completely & exit"), N_("FILENAME")
 	},
 	{
 		"no-modules", 'n', POPT_ARG_NONE, &no_modules,
@@ -363,6 +368,58 @@ int main(int argc, char *argv[])
 	 * Init the learn buffer and connected stuff.
 	 */
 	gtranslator_learn_init();
+
+	/*
+	 * Check if any filename for learning was supplied and if yes, 
+	 *  learn the file completely, shutdown the learn buffer and exit afterwards.
+	 */
+	if(learn_file)
+	{
+		/*
+		 * First parse the file completely.
+		 */
+		if(!gtranslator_open_po_file(learn_file))
+		{
+			gtranslator_parse_main(learn_file);
+		}
+		
+		/*
+		 * Now learn the file completely and then shut the
+		 *  learn system down.
+		 */
+		gtranslator_learn_po_file(po);
+		gtranslator_learn_shutdown();
+
+		/*
+		 * Set up the "runtime/filename" config. key to a sane value.
+		 */
+		gtranslator_config_init();
+		gtranslator_config_set_string("runtime/filename", "--- No file ---");
+		gtranslator_config_close();
+
+		/*
+		 * Free all till now allocated stuff.
+		 */
+		gnome_regex_cache_destroy(rxc);
+		gtranslator_preferences_free();
+		gtranslator_color_scheme_free(&theme);
+
+		/*
+		 * Shutdown GnomeVFS.
+		 */
+		if(gnome_vfs_initialized())
+		{
+			gnome_vfs_shutdown();
+		}
+
+		/*
+		 * As everything seemed to went fine, print out a nice
+		 *  message informing the user about the success.
+		 */
+		g_print(_("The file `%s' has been successfully learned.\n"), learn_file);
+
+		return 0;
+	}
 	
 	gtk_widget_show_all(gtranslator_application);
 	

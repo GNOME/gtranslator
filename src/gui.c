@@ -381,7 +381,7 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_file_close(NULL, NULL);
 	
 	/*
-	 * Initialize the config and set the pane position -- if needed.
+	 * Initialize the config and set the pane positions -- if needed.
 	 */
 	gtranslator_config_init();
 
@@ -394,6 +394,11 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	content_pane_position=e_paned_get_position(E_PANED(content_pane));
 	gtranslator_config_set_int("interface/content_pane_position", content_pane_position);
 	gtranslator_utils_save_geometry();
+
+	/*
+	 * "Flush" our runtime config string for the current filename.
+	 */
+	gtranslator_config_set_string("runtime/filename", "--- No file ---");
 
 	/*
 	 * Shutdown our internal learning system.

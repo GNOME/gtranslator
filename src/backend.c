@@ -270,7 +270,7 @@ void gtranslator_backend_add(const gchar *filename)
 		/*
 		 * Mr. Debug, never translate such things!
 		 */
-		g_message("%s\n (%s) loaded.", backend->info->description, 
+		g_print("%s\n (%s) loaded.\n", backend->info->description, 
 			backend->info->modulename);
 
 		/*

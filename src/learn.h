@@ -20,7 +20,7 @@
 #ifndef GTR_LEARN_H
 #define GTR_LEARN_H 1
 
-#include "messages.h"
+#include "parse.h"
 
 /*
  * Learn made translations and store them into a personal file.
@@ -31,6 +31,12 @@
  */
 void gtranslator_learn_init(void);
 gboolean gtranslator_learn_initialized(void);
+
+/*
+ * Learns the given GtrPo file completely -- every translated message
+ *  is learned.
+ */
+void gtranslator_learn_po_file(GtrPo *po_file);
 
 /*
  * Learn the given strings.

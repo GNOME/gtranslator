@@ -1,5 +1,19 @@
 2001-07-18  Fatih Demir <kabalak@gtranslator.org>
 
+	* backend.c & main.c: Changed 2 "g_message" calls to be "g_print" calls.
+
+	* messages-table.c/.h: Added Kevin to the source file authors' list .-)
+
+	* main.c: Added "--learn"/"-l" option to learn a po file completely from the
+		commandline without starting the GUI.
+
+	* gui.c: Flush the "runtime/filename" configuration key for the current file
+		name on exit as well as well as on file closure.
+
+	* learn.c/.h: Added "public" function "gtranslator_learn_po_file" which 
+		"learns" the given GtrPo's messages completely (only the translated
+		  messages of course); also added the necessary GFunc for this.
+
 	* syntax.c: Integrate the "text_bg" color into the syntax insertion method.
 
 	* stylistics.c/.h: Added the new enumeration value "COLOR_TEXT_BG" and did
