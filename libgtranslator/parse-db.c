@@ -96,7 +96,8 @@ void parse_db_for_lang(gchar *language)
 	/**
 	* Get the nodes.
 	**/
-	node=xmldoc->xmlRootNode->xmlChildrenNode;
+	/* XXX node=xmldoc->xmlRootNode->xmlChildrenNode;*/
+	node=xmldoc->children->children;
 	while(node)
 	{
 		/**
