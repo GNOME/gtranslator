@@ -59,7 +59,7 @@ void gtranslator_preferences_init_default_values()
 				lc=g_strdup("en_US");
 			}
 
-			gtranslator_config_set_string("language/name", lc);
+			gtranslator_config_set_string("language/language_code", lc);
 		}
 		
 		/*
