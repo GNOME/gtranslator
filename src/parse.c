@@ -36,9 +36,7 @@ void check_file(FILE *stream)
 
 void geekPrint(gchar *sta)
 {
-	g_print("<GEEK>-----------------------------------------------------\n");
 	g_print(" -- (%-s)\n",sta);
-	g_print("------------------------------------------------------</GEEK\n");
 }
 
 /**
@@ -126,18 +124,11 @@ void parse(gchar *po)
 			**/
 			msg[c].msgstr=temp_char;
 		}
-		if((!msg[c].msgid)||(strlen(msg[c].msgid)<=0))
-		{
-			geekPrint("Yippe!Again anoe");	
-		}
-		else
-		{
-			/**
-			* As all parsing efforts are finished now, we should
-			*  increase C.
-			**/
-			c++;
-		}
+		/**
+		* As all parsing efforts are finished now, we should
+		*  increase C.
+		**/
+		c++;
         }
         /**
         * Show an updated status
