@@ -73,6 +73,7 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 			
 			return NULL;
 		}
+		
 		/*
 		 * The destination path.
 		 */
