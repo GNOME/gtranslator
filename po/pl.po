@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2001-08-26 11:49+0200\n"
-"PO-Revision-Date: 2001-08-26 12:01+0200\n"
+"POT-Creation-Date: 2001-09-01 11:37+0200\n"
+"PO-Revision-Date: 2001-09-01 11:47+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,14 +53,14 @@ msgid "Can't apply color scheme file `%s'!"
 msgstr "Nie mo¿na zastosowaæ pliku schematu kolorów \"%s\"!"
 
 #: src/color-schemes.c:1
-msgid "Couldn't retrieve author informations!"
+msgid "Couldn't retrieve author information!"
 msgstr "Nie mo¿na uzyskaæ informacji o autorze!"
 
 #.
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:1
+#: src/color-schemes.c:1 src/translator.c:1
 msgid "Unknown"
 msgstr "Nieznany"
 
@@ -109,7 +109,7 @@ msgstr "Komentarz:"
 #: src/dialogs.c:1
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
-msgstr ""
+msgstr "Czy usun±æ wszystkie t³umaczenia z \"%s\"?"
 
 #: src/dialogs.c:1
 msgid "gtranslator -- remove all translations"
@@ -117,11 +117,11 @@ msgstr "gtranslator -- usuniêcie wszystkich t³umaczeñ"
 
 #: src/dialogs.c:1
 msgid "Are you really sure to remove ALL translations from this po file?"
-msgstr ""
+msgstr "Czy na pewno chcesz usun±æ wszystkie t³umaczenia z tego pliku po?"
 
 #: src/dialogs.c:1
 msgid "gtranslator -- remove all translations confirmation dialog"
-msgstr ""
+msgstr "gtranslator -- potwierdzenie usuniêcia wszystkich t³umaczeñ"
 
 # ma³e okno dialogowe - "id¼ do" ledwie siê mie¶ci
 #: src/dialogs.c:1
@@ -202,7 +202,7 @@ msgid "Replace in:"
 msgstr "Zakres zastêpowania:"
 
 #: src/dialogs.c:1
-msgid "An error occured while msgfmt was executed:\n"
+msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Wyst±pi³ b³±d w trakcie wykonywania msgfmt:\n"
 
 #: src/dialogs.c:1
@@ -224,6 +224,19 @@ msgstr "Nie podano URI!"
 #: src/dialogs.c:1
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Nie podano obs³ugiwanego protoko³u URI (np. \"ftp://\")!"
+
+#: src/dialogs.c:1
+msgid ""
+"URIs are used to locate files uniquely on different systems.\n"
+"The standard Internet addresses (URLs) are also URIs -- you can\n"
+"use them to open remote po files lying on servers with standard protocols\n"
+"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
+"Some example URIs for clarification (these ones are supported):\n"
+"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+"\n"
+"file:///<PO-FILE>"
+msgstr ""
 
 #: src/dialogs.c:1
 #, c-format
@@ -298,11 +311,19 @@ msgstr "Wynik kwerendy ju¿ siê tu znajduje!"
 
 #: src/dialogs.c:1
 msgid ""
-"Should gtranslator auto accomplish all missing strings (if possible)\n"
-"from your default query domain (and your personal learn buffer)?"
+"Should gtranslator autotranslate the file using information\n"
+"from the default query domain and the personal learn buffer?"
 msgstr ""
-"Czy chcesz, aby gtranslator uzupe³ni³ wszystkie (je¶li to mo¿liwe)\n"
-"brakuj±ce teksty korzystaj±c z twojej domy¶lnej dziedziny kwerend?"
+"Czy chcesz, aby gtranslator automatycznie przet³umaczy³ plik,\n"
+"korzystaj±c z domy¶lnej dziedziny kwerend i bufora zapamiêtanych t³umaczeñ?"
+
+#: src/dialogs.c:1
+msgid ""
+"Should gtranslator autotranslate the file using information\n"
+"from the default query domain?"
+msgstr ""
+"Czy chcesz, aby gtranslator automatycznie przet³umaczy³ plik,\n"
+"korzystaj±c z domy¶lnej dziedziny kwerend?"
 
 #: src/find.c:1
 msgid "Please enter a search string"
@@ -500,12 +521,13 @@ msgid "Basque"
 msgstr "Baskijski"
 
 #: src/languages.h:1
-msgid "Bielorussian"
+msgid "Belorussian"
 msgstr "Bia³oruski"
 
+# Nie jest to do koñca pewne!
 #: src/languages.h:1
 msgid "Britton"
-msgstr ""
+msgstr "Bretoñski"
 
 #: src/languages.h:1
 msgid "Bulgarian"
@@ -716,8 +738,8 @@ msgid "Welsh"
 msgstr "Walijski"
 
 #: src/main.c:1
-msgid "Show build informations/specifications"
-msgstr "Wy¶wietla specyfikacje/informacje o wersji"
+msgid "Show build information/specifications"
+msgstr "Wy¶wietla informacje o wersji"
 
 #: src/main.c:1
 msgid "Specify main window geometry"
@@ -761,16 +783,16 @@ msgid "Error during GConf initialization: %s."
 msgstr "B³±d w trakcie inicjalizacji GConf: %s."
 
 #: src/main.c:1
-msgid "gtranslator build informations/specs:"
-msgstr "Specyfikacje/informacja o wersji gtranslatora:"
+msgid "gtranslator build information/specs:"
+msgstr "Informacje o wersji gtranslatora:"
 
 #: src/main.c:1
 msgid "Version and build date:"
 msgstr "Wersja i data kompilacji:"
 
 #: src/main.c:1
-msgid "Build-Glib/Gtk+/Gnome versions:"
-msgstr "Wersje Glib/GTK+/Gnome u¿yte do kompilacji:"
+msgid "Build GLib/Gtk+/GNOME versions:"
+msgstr "Wersje GLib/GTK+/GNOME u¿yte do kompilacji:"
 
 #: src/main.c:1
 msgid "Backends directory:"
@@ -793,16 +815,9 @@ msgid "Own locale directory:"
 msgstr "U¿ywany katalog locale:"
 
 #: src/main.c:1
-msgid ""
-"Unfortunately your GModule implementation doesn't support loading dynamic "
-"modules!"
+msgid "GModule implementation doesn't support loading dynamic modules!"
 msgstr ""
-"Niestety, Twoja implementacja GModule nie pozwala na ³adowanie dynamicznych "
-"modu³ów!"
-
-#: src/main.c:1
-msgid "gtranslator won't load any backend module...\n"
-msgstr "gtranslator nie za³aduje ¿adnych modu³ów dodatkowych...\n"
+"U¿ywana implementacja GModule nie pozwala na ³adowanie dynamicznych modu³ów!"
 
 #.
 #. * As everything seemed to went fine, print out a nice
@@ -838,25 +853,28 @@ msgid "Update the po file"
 msgstr "Aktualizuje plik .po"
 
 #: src/menus.c:1
-msgid "Aut_oaccomplish"
-msgstr "Uzup_e³nij automatycznie"
+msgid "Aut_otranslate..."
+msgstr "Przet³umacz _automatycznie..."
 
 #: src/menus.c:1
-msgid "Automatically fill missing translations from the default query domain"
+msgid ""
+"Autotranslate the file with information from the default query domain/learn "
+"buffer"
 msgstr ""
-"Automatycznie uzupe³nia brakuj±ce t³umaczenia z domy¶lnej dziedziny kwerend"
+"Automatycznie uzupe³nia t³umaczenia, korzystaj±c z domy¶lnej dziedziny "
+"kwerend i bufora zapamiêtanych t³umaczeñ"
 
 #: src/menus.c:1
-msgid "Remove all translations"
-msgstr "Usuñ wszystkie t³umaczenia"
+msgid "Remove all translations..."
+msgstr "Usuñ wszystkie t³umaczenia..."
 
 #: src/menus.c:1
 msgid "Remove all existing translations from the po file"
 msgstr "Usuwa wszystkie t³umaczenia z pliku po"
 
 #: src/menus.c:1
-msgid "Open from _URI"
-msgstr "Otwórz _URI"
+msgid "Open from _URI..."
+msgstr "Otwórz _URI..."
 
 #: src/menus.c:1
 msgid "Open a po file from a given URI"
@@ -867,24 +885,24 @@ msgid "Recen_t files"
 msgstr "Os_tatnio otwarte"
 
 #: src/menus.c:1
-msgid "_Export to UTF-8"
-msgstr "Wy_eksportuj do UTF-8"
+msgid "_Export to UTF-8..."
+msgstr "Wy_eksportuj do UTF-8..."
 
 #: src/menus.c:1
 msgid "Export the current po file to UTF-8"
 msgstr "Eksportuje bie¿±cy plik .po do pliku z kodowaniem UTF-8"
 
 #: src/menus.c:1
-msgid "_Import from UTF-8"
-msgstr "Za_importuj z UTF-8"
+msgid "_Import from UTF-8..."
+msgstr "Za_importuj z UTF-8..."
 
 #: src/menus.c:1
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr "Importuje plik z kodowaniem UTF-8"
 
 #: src/menus.c:1
-msgid "_Query"
-msgstr "_Kwerenda"
+msgid "_Query..."
+msgstr "_Kwerenda..."
 
 #: src/menus.c:1 src/menus.c:1
 msgid "Query for a string"
@@ -1279,7 +1297,7 @@ msgid "gtranslator -- options"
 msgstr "gtranslator -- preferencje"
 
 #: src/prefs.c:1
-msgid "Personal informations"
+msgid "Personal information"
 msgstr "Informacje osobiste"
 
 #: src/prefs.c:1
@@ -1350,7 +1368,8 @@ msgstr "Ostrzeganie przy próbie zapisu niezmienionego pliku"
 
 #: src/prefs.c:1
 msgid ""
-"Also query the personal learn buffer while auto accomplishing missing entries"
+"Also query the personal learn buffer while autotranslating untranslated "
+"messages"
 msgstr ""
 "Przy automatycznym uzupe³nianiu komunikatów korzystanie równie¿ z osobistego "
 "bufora zapamiêtanych t³umaczeñ"
@@ -1369,11 +1388,11 @@ msgstr "Wy¶wietlanie wyskakuj±cych menu"
 
 #: src/prefs.c:1
 msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr ""
+msgstr "Mo¿liwo¶æ aktualizacji pliku po z gtranslatora"
 
 #: src/prefs.c:1
 msgid "Enable the functionality to remove all translations from a po file"
-msgstr ""
+msgstr "Mo¿liwo¶æ usuniêcia wszystkich t³umaczeñ z pliku po"
 
 #: src/prefs.c:1
 msgid "Delete the compile result file (named \"project.gmo\")"
@@ -1471,15 +1490,15 @@ msgstr "Czas pomiêdzy automatycznymi zapisami w minutach:"
 
 #: src/prefs.c:1
 msgid "Show the messages table (requires gtranslator restart)"
-msgstr ""
+msgstr "Wy¶wietlanie tabeli komunikatów (wymaga ponownego uruchomienia)"
 
 #: src/prefs.c:1
 msgid "Collapse all translated entries per default"
-msgstr ""
+msgstr "Domy¶lne zwiniêcie ga³êzi z przet³umaczonymi komunikatami"
 
 #: src/prefs.c:1
 msgid "Use own colors for the messages table groups"
-msgstr ""
+msgstr "U¿ycie w³asnych kolorów dla grup w tabeli komunikatów"
 
 #: src/prefs.c:1
 msgid "Untranslated entries color:"
@@ -1535,6 +1554,30 @@ msgstr "Nie mo¿na wygenerowaæ aktualnej daty!"
 msgid "No replace made!"
 msgstr "Nie wykonano zast±pieñ!"
 
+#: src/save-differently.c:1
+#, c-format
+msgid "Couldn't save compiled gettext file `%s'!"
+msgstr "Nie mo¿na zapisaæ skompilowanego pliku gettext \"%s\"!"
+
+#: src/save-differently.c:1
+#, c-format
+msgid "Couldn't save compressed gettext file `%s'!"
+msgstr "Nie mo¿na zapisaæ skompresowanego pliku gettext \"%s\"!"
+
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#
+#: src/save-differently.c:1
+msgid "Couldn't save %s'd gettext file `%s'!"
+msgstr "Nie mo¿na zapisaæ (skompresowanego programem %s) pliku gettext \"%s\"!"
+
+#: src/save-differently.c:1
+#, c-format
+msgid "Couldn't save zip'ed po file `%s'!"
+msgstr "Nie mo¿na zapisaæ pliku po \"%s\", skompresowanego programem zip!"
+
 #: src/session.c:1
 msgid "Session restored successfully."
 msgstr "Pomy¶lnie odtworzono sesjê."
@@ -1583,7 +1626,7 @@ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
 #: src/syntax.c:1 src/utils_gui.c:1 src/utils_gui.c:1 src/views.c:1
 #: src/views.c:1
 msgid "·"
-msgstr ""
+msgstr "·"
 
 #: src/update.c:1
 msgid "No POTFILES.in found!"
@@ -1598,8 +1641,8 @@ msgid "The update was successfull."
 msgstr "Aktualizacja zakoñczona pomy¶lnie."
 
 #: src/update.c:1
-msgid "An error occured while updating the po file."
-msgstr "Wyst±pi³ b³±d w trakcie aktualizacji pliku .po."
+msgid "An error occurred while updating the po file."
+msgstr "W trakcie aktualizacji pliku .po wyst±pi³ b³±d."
 
 #: src/utils.c:1 src/utils.c:1
 #, c-format
