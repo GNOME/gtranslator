@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-28 09:05+0200\n"
-"PO-Revision-Date: 2003-08-27 13:52+0200\n"
+"POT-Creation-Date: 2003-08-29 03:27+0200\n"
+"PO-Revision-Date: 2003-08-29 03:26+0200\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
@@ -201,14 +201,12 @@ msgid "Replace in:"
 msgstr "Замени у:"
 
 #: src/dialogs.c:895
-#, fuzzy
 msgid "Please enter a string to replace!"
-msgstr "Унесите низ за претрагу"
+msgstr "Унесите текст који желите да замените!"
 
 #: src/dialogs.c:903
-#, fuzzy
 msgid "Please enter a string to replace with!"
-msgstr "Унесите низ за претрагу"
+msgstr "Унесите текст којим ћете да замените!"
 
 #: src/dialogs.c:945
 msgid "An error occurred while msgfmt was executed:\n"
@@ -435,9 +433,9 @@ msgid "%s [ No untranslated left ]"
 msgstr "%s [ Нема више непреведених]"
 
 #: src/gui.c:545
-#, fuzzy, c-format
+#, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "Порука %d / %d / Стање: %s"
+msgstr "Порука %d / %d / Стање: %s (Порука садржи облике за множину)"
 
 #: src/gui.c:549
 #, c-format
@@ -602,9 +600,8 @@ msgid "Estonian"
 msgstr "естонски"
 
 #: src/languages.c:121
-#, fuzzy
 msgid "Persian"
-msgstr "белоруски"
+msgstr "персијски"
 
 #: src/languages.c:125
 msgid "Finnish"
@@ -787,22 +784,21 @@ msgid "Welsh"
 msgstr "велшки"
 
 #: src/learn.c:379
-#, fuzzy
 msgid "gtranslator learn buffer statistics:"
-msgstr "подаци/особености гпреводилац издања:"
+msgstr "статистика преводилачке меморије гпреводиоца:"
 
 #: src/learn.c:382
-#, fuzzy, c-format
+#, c-format
 msgid "Learn buffer filename: `%s`"
-msgstr "Складиште знања је извежено у датотеку „%s“.\n"
+msgstr "Датотека за преводилачку меморију: „%s“"
 
 #.
 #. * Translators: This means the encoding of the learn buffer (XML) file.
 #.
 #: src/learn.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "Encoding: `%s'"
-msgstr "Начин записа:"
+msgstr "Начин записа: „%s“"
 
 #.
 #. * Translators: "Serial number" of the learn buffer - means # of file updates.
@@ -810,7 +806,7 @@ msgstr "Начин записа:"
 #: src/learn.c:394
 #, c-format
 msgid "Serial: `%i'"
-msgstr ""
+msgstr "Редни број: „%i“"
 
 #.
 #. * Translators: That's the number of message entries in the learn buffer.
@@ -818,78 +814,78 @@ msgstr ""
 #: src/learn.c:400
 #, c-format
 msgid "Number of entries: `%i'"
-msgstr ""
+msgstr "Број уноса: „%i“"
 
-#: src/main.c:83
+#: src/main.c:85
 msgid "Auto translate the po file"
 msgstr "Аутоматски преведи ПО датотеку"
 
-#: src/main.c:83 src/main.c:99
+#: src/main.c:85 src/main.c:101
 msgid "FILENAME"
 msgstr "НАЗИВ ДАТОТЕКЕ"
 
-#: src/main.c:87
+#: src/main.c:89
 msgid "Show build specifications"
 msgstr "Прикажи спецификације издања"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "Export learn buffer to a plain po file"
 msgstr "Извези складиште знања у обичну ПО датотеку"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "PO_FILE"
 msgstr "ПО-ДАТОТЕКА"
 
-#: src/main.c:95
+#: src/main.c:97
 msgid "Specify main window geometry"
 msgstr "Одредите геометрију главног прозора"
 
-#: src/main.c:95
+#: src/main.c:97
 msgid "GEOMETRY"
 msgstr "ГЕОМЕТРИЈА"
 
-#: src/main.c:99
+#: src/main.c:101
 msgid "Learn the file completely"
 msgstr "Савладај датотеку у потпуности"
 
-#: src/main.c:103
+#: src/main.c:105
 msgid "Show learn buffer statistics"
-msgstr ""
+msgstr "Прикажи статистику преводилачке меморије"
 
-#: src/main.c:146
+#: src/main.c:148
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Грешка током покретања GConf -а: %s."
 
-#: src/main.c:178
+#: src/main.c:180
 msgid "gtranslator build information/specs:"
 msgstr "подаци/особености гпреводилац издања:"
 
-#: src/main.c:180
+#: src/main.c:182
 msgid "Version and build date:"
 msgstr "Верзија и датум издања:"
 
-#: src/main.c:182
+#: src/main.c:184
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "GLib / Gtk+ / GNOME / XML верзије издања:"
 
-#: src/main.c:184
+#: src/main.c:186
 msgid "Colorschemes directory:"
 msgstr "Директоријум са шемама:"
 
-#: src/main.c:186
+#: src/main.c:188
 msgid "Scripts directory:"
 msgstr "Директоријум са скриптама:"
 
-#: src/main.c:188
+#: src/main.c:190
 msgid "Window icon:"
 msgstr "Иконица прозора:"
 
-#: src/main.c:190
+#: src/main.c:192
 msgid "Own locale directory:"
 msgstr "Директоријум са властитим локалним подешењима:"
 
-#: src/main.c:192
+#: src/main.c:194
 msgid "Default learn buffer file location:"
 msgstr "Подразумевана локација датотеке са складиштеним знањем:"
 
@@ -897,7 +893,7 @@ msgstr "Подразумевана локација датотеке са скл
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:457
+#: src/main.c:459
 #, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "Успешно сам савладао „%s“ из ваше базе знања.\n"
@@ -905,7 +901,7 @@ msgstr "Успешно сам савладао „%s“ из ваше базе �
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:499
+#: src/main.c:501
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "Складиште знања је извежено у датотеку „%s“.\n"
@@ -1310,9 +1306,10 @@ msgstr ""
 msgid "Couldn't generate the current date!"
 msgstr "Нисам успео да одредим тренутни датум!"
 
+# bug: this could have been clearer, or perhaps "character indicating a hotkey"
 #: src/prefs.c:212
 msgid "Hotkey indicating character:"
-msgstr ""
+msgstr "Знак за означавање пречица:"
 
 #: src/prefs.c:332
 msgid "gtranslator -- options"
