@@ -710,7 +710,7 @@ void gtranslator_messages_table_clear(void)
 void gtranslator_messages_table_create (void)
 {
 	GList *list;
-	gint i=0;
+	gint i=0, j=0, k=0;
 	
 	if(!file_opened)
 		return;
@@ -746,11 +746,13 @@ void gtranslator_messages_table_create (void)
 		switch (message->status){
 		case GTR_MSG_STATUS_UNKNOWN:
 			node=e_tree_memory_node_insert(tree_memory, unknown_node,
-			0, message);
+			i, message);
+			i++;
 			break;
 		case GTR_MSG_STATUS_TRANSLATED:
 			node=e_tree_memory_node_insert(tree_memory, translated_node,
-			0, message);
+			j, message);
+			j++;
 			break;
 		case GTR_MSG_STATUS_STICK:
 			node=NULL;
@@ -758,14 +760,14 @@ void gtranslator_messages_table_create (void)
 		case GTR_MSG_STATUS_FUZZY:
 		default:
 			node=e_tree_memory_node_insert(tree_memory, fuzzy_node,
-			0, message);
+			k, message);
+			k++;
 		}
 		/*node=e_tree_memory_node_insert(tree_memory, root_node,
 			i, message);*/
 		if (node)
 			g_hash_table_insert(hash_table, message, node); 
 		list = g_list_next(list);
-		i++;
 	}
 }
 
