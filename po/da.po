@@ -16,11 +16,11 @@ msgstr ""
 
 #: src/about.c:59
 msgid "(C) 1999-2001 The Free Software Foundation"
-msgstr ""
+msgstr "(C) 1999-2001 The Free Software Foundation"
 
 #: src/about.c:60
 msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr ""
+msgstr "gtranslator er et redigeringsprogram for po-filer med mange faciliteter."
 
 #.
 #. * Print out some colorscheme informations in a label which will be
@@ -29,17 +29,16 @@ msgstr ""
 #: src/about.c:69
 #, c-format
 msgid "Current colorscheme: \"%s\" (version %s) by"
-msgstr ""
+msgstr "Nuværende farvevalg: '%s' (version %s) af"
 
 #: src/color-schemes.c:156
-#, fuzzy, c-format
+#, c-format
 msgid "Can't apply color scheme file `%s'!"
-msgstr "Kunne ikke åbne den oversatte gettext-fil '%s'!"
+msgstr "Kan ikke anvende farvevalgsfil '%s'!"
 
 #: src/color-schemes.c:279
-#, fuzzy
 msgid "Couldn't retrieve author informations!"
-msgstr "Kunne ikke oprette det midlertidige katalog '%s'."
+msgstr "Kunne ikke finde forfatterinformationer!"
 
 #.
 #. * Translators: These strings are used as author informations if
@@ -47,27 +46,25 @@ msgstr "Kunne ikke oprette det midlertidige katalog '%s'."
 #.
 #: src/color-schemes.c:285
 msgid "Unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #: src/color-schemes.c:286
 msgid "<Not Given>"
-msgstr ""
+msgstr "<Ikke angivet>"
 
-#: src/dialogs.c:82
+#: src/dialogs.c:96
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- åben en po-fil"
 
-#: src/dialogs.c:124
-#, fuzzy
+#: src/dialogs.c:138
 msgid "gtranslator -- save file as.."
-msgstr "gtranslator -- gem fil som .."
+msgstr "gtranslator -- gem fil som.."
 
-#: src/dialogs.c:128
-#, fuzzy
+#: src/dialogs.c:142
 msgid "gtranslator -- save local copy of file as.."
-msgstr "gtranslator -- gem fil som .."
+msgstr ""
 
-#: src/dialogs.c:180
+#: src/dialogs.c:194
 #, c-format
 msgid ""
 "File %s\n"
@@ -76,111 +73,112 @@ msgstr ""
 "Filen %s\n"
 "blev ændret. Gem?"
 
-#: src/dialogs.c:221
+#: src/dialogs.c:235
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- gå til"
 
-#: src/dialogs.c:221
+#: src/dialogs.c:235
 msgid "Go!"
 msgstr "Udfør!"
 
-#: src/dialogs.c:227
+#: src/dialogs.c:241
 msgid "Go to message number:"
 msgstr "Gå til beskedsnummer:"
 
-#: src/dialogs.c:296
+#: src/dialogs.c:310
 msgid "Find in the po-file"
 msgstr "Find i po-filen"
 
-#: src/dialogs.c:296 src/menus.h:268
+#: src/dialogs.c:310 src/menus.c:326
 msgid "Find"
 msgstr "Find"
 
-#: src/dialogs.c:299
+#: src/dialogs.c:313
 msgid "Enter your desired search string:"
 msgstr "Indtast den ønskede søgestreng:"
 
-#: src/dialogs.c:302
+#: src/dialogs.c:316
 msgid "Case sensitive"
 msgstr "Skeln mellem store og små bokstaver"
 
-#: src/dialogs.c:307 src/languages.h:122
+#: src/dialogs.c:321 src/languages.h:122
 msgid "English"
 msgstr "Engelsk"
 
-#: src/dialogs.c:313 src/dialogs.c:411 src/gui.c:314
+#: src/dialogs.c:327 src/dialogs.c:425 src/gui.c:317
 msgid "Translated"
 msgstr "Oversat"
 
-#: src/dialogs.c:319 src/dialogs.c:417
+#: src/dialogs.c:333 src/dialogs.c:431
 msgid "Both"
 msgstr "Begge"
 
-#: src/dialogs.c:325 src/dialogs.c:405
-#, fuzzy
+#: src/dialogs.c:339 src/dialogs.c:419
 msgid "Comments"
-msgstr "Kommentarer :"
+msgstr ""
 
-#: src/dialogs.c:331
+#: src/dialogs.c:345
 msgid "In all strings"
 msgstr ""
 
-#: src/dialogs.c:346
+#: src/dialogs.c:360
 msgid "Find in: "
 msgstr "Find i: "
 
-#: src/dialogs.c:391
-#, fuzzy
+#: src/dialogs.c:405
 msgid "gtranslator -- replace"
-msgstr "gtranslator -- brugervalg"
+msgstr ""
 
-#: src/dialogs.c:392 src/menus.h:272
+#: src/dialogs.c:406 src/menus.c:330
 msgid "Replace"
 msgstr ""
 
-#: src/dialogs.c:393
+#: src/dialogs.c:407
 msgid "Replace all"
 msgstr ""
 
-#: src/dialogs.c:397
+#: src/dialogs.c:411
 msgid "String to replace:"
 msgstr ""
 
-#: src/dialogs.c:400
+#: src/dialogs.c:414
 msgid "Replace string:"
 msgstr ""
 
-#: src/dialogs.c:440
+#: src/dialogs.c:454
 msgid "Replace in:"
 msgstr ""
 
-#: src/dialogs.c:519
+#: src/dialogs.c:532
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "En fejl opstod under kørsel af msgfmt.\n"
 
-#: src/dialogs.c:549
-#, fuzzy
+#: src/dialogs.c:562
 msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- gå til"
+msgstr ""
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:550
-#: src/menus.h:201
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:563
+#: src/menus.c:259
 msgid "Open"
 msgstr "Åbn"
 
-#: src/dialogs.c:556
+#: src/dialogs.c:569
 msgid "Enter URI:"
 msgstr ""
 
-#: src/dialogs.c:599
+#.
+#. * Show an error dialog but don't close down the
+#. *  Open from URI dialog.
+#.
+#: src/dialogs.c:611
 msgid "No URI given!"
 msgstr ""
 
-#: src/dialogs.c:620
+#: src/dialogs.c:631
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr ""
 
-#: src/dialogs.c:651
+#: src/dialogs.c:662
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -189,49 +187,47 @@ msgid ""
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
 
-#: src/dialogs.c:677
+#: src/dialogs.c:688
 #, c-format
 msgid "Recovering `%s'..."
 msgstr ""
 
-#: src/dialogs.c:723
-#, fuzzy
+#: src/dialogs.c:733
 msgid "Couldn't get list of gettext domains!"
-msgstr "Kunne ikke åbne den gzippede gettext-fil '%s'!"
+msgstr ""
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:731
+#: src/dialogs.c:740
 msgid "Here you can query existing gettext domains for a translation."
 msgstr ""
 
-#: src/dialogs.c:734
+#: src/dialogs.c:743
 msgid "gtranslator -- query existing gettext domains"
 msgstr ""
 
-#: src/dialogs.c:735 src/menus.h:276
+#: src/dialogs.c:744 src/menus.c:334
 msgid "Query"
 msgstr ""
 
-#: src/dialogs.c:743
+#: src/dialogs.c:752
 msgid "Query string:"
 msgstr ""
 
-#: src/dialogs.c:750
+#: src/dialogs.c:759
 msgid "Domain to search the translation in:"
 msgstr ""
 
-#: src/dialogs.c:800
+#: src/dialogs.c:809
 msgid "No query string given!"
 msgstr ""
 
-#: src/dialogs.c:834
-#, fuzzy
+#: src/dialogs.c:843
 msgid "Couldn't find any result for the query!"
-msgstr "Kunne ikke engang indlæse standard skrifttype!"
+msgstr ""
 
-#: src/dialogs.c:847
+#: src/dialogs.c:856
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
@@ -242,20 +238,19 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:920
+#: src/dialogs.c:929
 msgid "Query's result translation is already there!"
 msgstr ""
 
-#: src/dialogs.c:942
+#: src/dialogs.c:951
 msgid ""
 "Should gtranslator accomplish all missing strings (if possible)\n"
 "from your default query domain?"
 msgstr ""
 
 #: src/find.c:211
-#, fuzzy
 msgid "Please enter a search string"
-msgstr "Indtast den ønskede søgestreng:"
+msgstr ""
 
 #: src/find.c:227
 #, c-format
@@ -266,45 +261,45 @@ msgstr ""
 "Kunne ikke finde\n"
 "\"%s\""
 
-#: src/gtkspell.c:607
+#: src/gtkspell.c:606
 msgid "View URL..."
 msgstr "Vis URL..."
 
 #.
 #. * Create the app
 #.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:142 src/parse.c:709
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:145 src/parse.c:687
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:301
+#: src/gui.c:304
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i Fuzzy tilbage ]"
 
-#: src/gui.c:301 src/gui.c:305 src/menus.h:260
+#: src/gui.c:304 src/gui.c:308 src/menus.c:318
 msgid "Fuzzy"
 msgstr "Ufærdig"
 
-#: src/gui.c:305
+#: src/gui.c:308
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Ingen Fuzzy tilbage ]"
 
-#: src/gui.c:312
+#: src/gui.c:315
 msgid "Stick"
 msgstr "Lim"
 
-#: src/gui.c:323
+#: src/gui.c:326
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i uoversatte tilbage ]"
 
-#: src/gui.c:323 src/gui.c:325
+#: src/gui.c:326 src/gui.c:328
 msgid "Untranslated"
 msgstr "Uoversat"
 
-#: src/gui.c:325
+#: src/gui.c:328
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Ingen uoversatte tilbage ]"
@@ -312,7 +307,7 @@ msgstr "%s [ Ingen uoversatte tilbage ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:336
+#: src/gui.c:339
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Besked %d / %d / status: %s"
@@ -330,9 +325,8 @@ msgid "Translator and Language"
 msgstr "Oversætter og sprog"
 
 #: src/header_stuff.c:374
-#, fuzzy
 msgid "Comments:"
-msgstr "Kommentarer :"
+msgstr ""
 
 #: src/header_stuff.c:380
 msgid "Project name:"
@@ -343,48 +337,40 @@ msgid "Project version:"
 msgstr "Projekt-version:"
 
 #: src/header_stuff.c:386
-#, fuzzy
 msgid "Pot file creation date:"
-msgstr "pot-fil oprettet:"
+msgstr ""
 
 #: src/header_stuff.c:390
-#, fuzzy
 msgid "Po file revision date:"
-msgstr "po-fil revideret:"
+msgstr ""
 
 #: src/header_stuff.c:399
 msgid "Use my options to fill the following entries."
 msgstr "Brug mine alternativer til at udfylde følgende opføringer."
 
 #: src/header_stuff.c:412
-#, fuzzy
 msgid "Translator's name:"
-msgstr "Oversætters navn:"
+msgstr ""
 
 #: src/header_stuff.c:415
-#, fuzzy
 msgid "Translator's e-mail:"
-msgstr "Oversætters e-post:"
+msgstr ""
 
 #: src/header_stuff.c:418 src/prefs.c:125
-#, fuzzy
 msgid "Language:"
-msgstr "Sprog :"
+msgstr ""
 
 #: src/header_stuff.c:423
-#, fuzzy
 msgid "Language group's e-mail:"
-msgstr "Sproggruppens e-post:"
+msgstr ""
 
 #: src/header_stuff.c:427 src/prefs.c:138
-#, fuzzy
 msgid "Charset:"
-msgstr "Tegnsæt:"
+msgstr ""
 
 #: src/header_stuff.c:431 src/prefs.c:142
-#, fuzzy
 msgid "Encoding:"
-msgstr "Kodning :"
+msgstr ""
 
 #: src/history.c:157
 msgid "_File/Recen_t files/"
@@ -420,9 +406,9 @@ msgid "Project <b>%s</b> (last po file revision: %s)."
 msgstr ""
 
 #: src/htmlizer.c:282
-#, fuzzy, c-format
+#, c-format
 msgid "Last translator: %s"
-msgstr "gtranslator -- %s"
+msgstr ""
 
 #.
 #. * This is printed at the end of the HTML page and should also include
@@ -588,9 +574,8 @@ msgid "Portuguese/Brazil"
 msgstr "Portugisisk/Brasilien"
 
 #: src/languages.h:218
-#, fuzzy
 msgid "Romanian"
-msgstr "Kroatisk"
+msgstr ""
 
 #: src/languages.h:222
 msgid "Russian"
@@ -605,9 +590,8 @@ msgid "Serbian/Latin"
 msgstr "Serbisk/latinsk"
 
 #: src/languages.h:234
-#, fuzzy
 msgid "Slovakian"
-msgstr "Slovensk"
+msgstr ""
 
 #: src/languages.h:238
 msgid "Slovenian"
@@ -630,9 +614,8 @@ msgid "Swedish"
 msgstr "Svensk"
 
 #: src/languages.h:258
-#, fuzzy
 msgid "Tamil"
-msgstr "Thai"
+msgstr ""
 
 #: src/languages.h:262
 msgid "Thai"
@@ -666,12 +649,24 @@ msgstr "Walisisk"
 msgid "Specifies the main-window geometry"
 msgstr "Angiver hoved-vinduets geometri"
 
+#: src/main.c:72
+msgid "GEOMETRY"
+msgstr ""
+
 #: src/main.c:76
 msgid "Syntax color scheme to use"
 msgstr ""
 
+#: src/main.c:76
+msgid "SCHEMEFILE"
+msgstr ""
+
 #: src/main.c:80
 msgid "HTML file to write to"
+msgstr ""
+
+#: src/main.c:80
+msgid "HTMLFILE"
 msgstr ""
 
 #: src/main.c:125
@@ -679,283 +674,277 @@ msgstr ""
 msgid "Error during GConf initialization: %s."
 msgstr "Fejl under initiering af GConf: `%s'."
 
-#: src/menus.h:53
-msgid "_Compile"
-msgstr "_Kompilér"
-
-#: src/menus.h:54 src/menus.h:215
-msgid "Compile the po-file"
-msgstr "Kompilér po-filen"
-
-#: src/menus.h:60
-msgid "_Update"
-msgstr "_Opdatér"
-
-#: src/menus.h:61 src/menus.h:219
-msgid "Update the po-file"
-msgstr "Opdatér po-filen"
-
-#: src/menus.h:68
-msgid "Autoaccomplish"
-msgstr ""
-
-#: src/menus.h:69
-msgid "Automatically fill missing translations from the default query domain"
-msgstr ""
-
-#: src/menus.h:77
-msgid "Open from _URI"
-msgstr ""
-
-#: src/menus.h:78
-msgid "Open a po file from a given URI"
-msgstr ""
-
-#: src/menus.h:88
-msgid "Recen_t files"
-msgstr "_Nylige filer"
-
-#: src/menus.h:95
-#, fuzzy
-msgid "_Message"
-msgstr "_Beskeder"
-
-#: src/menus.h:96
-msgid "Standard messages view"
-msgstr ""
-
-#: src/menus.h:98
-#, fuzzy
-msgid "_Comments"
-msgstr "Kommentarer :"
-
-#: src/menus.h:99
-#, fuzzy
-msgid "View comments for message"
-msgstr "Gå til næste ufærdige besked"
-
-#: src/menus.h:101
-msgid "_Numbers"
-msgstr ""
-
-#: src/menus.h:102
-msgid "View numbers in the message"
-msgstr ""
-
-#: src/menus.h:104
-msgid "C _Formats"
-msgstr ""
-
-#: src/menus.h:105
-msgid "View C formats of the message"
-msgstr ""
-
-#: src/menus.h:107
-msgid "_Hotkeys"
-msgstr ""
-
-#: src/menus.h:108
-#, fuzzy
-msgid "View hotkeys in the message"
-msgstr "Gå til denne besked"
-
-#: src/menus.h:125
-msgid "_Query"
-msgstr ""
-
-#: src/menus.h:126 src/menus.h:277
-msgid "Query for a string"
-msgstr ""
-
-#: src/menus.h:133
-msgid "_Header..."
-msgstr "_Hoved..."
-
-#: src/menus.h:134 src/menus.h:223
-msgid "Edit the header"
-msgstr "Redigér hovedet"
-
-#: src/menus.h:144
-msgid "_First"
-msgstr "_Første"
-
-#: src/menus.h:145 src/menus.h:240
-msgid "Go to the first message"
-msgstr "Gå til denne besked"
-
-#: src/menus.h:151
-msgid "_Back"
-msgstr "_Tilbage"
-
-#: src/menus.h:152 src/menus.h:244
-msgid "Go one message back"
-msgstr "Gå en besked tilbage"
-
-#: src/menus.h:159
-msgid "_Next"
-msgstr "_Næste"
-
-#: src/menus.h:160 src/menus.h:249
-msgid "Go one message forward"
-msgstr "Gå en besked frem"
-
-#: src/menus.h:166
-msgid "_Last"
-msgstr "_Sidste"
-
-#: src/menus.h:167 src/menus.h:253
-msgid "Go to the last message"
-msgstr "Gå til sidste besked"
-
-#: src/menus.h:174
-msgid "_Go to..."
-msgstr "_Gå til..."
-
-#: src/menus.h:175
-msgid "Goto specified message number"
-msgstr "Gå til det angivne beskedsnummer."
-
-#: src/menus.h:181
-msgid "Next fuz_zy"
-msgstr "Næste ufærdi_ge"
-
-#: src/menus.h:182
-msgid "Go to next fuzzy message"
-msgstr "Gå til næste ufærdige besked"
-
-#: src/menus.h:188
-msgid "Next _untranslated"
-msgstr "Næste _uoversatte"
-
-#: src/menus.h:189 src/menus.h:257
-msgid "Go to next untranslated message"
-msgstr "Gå til næste uoversatte besked"
-
-#: src/menus.h:202
-msgid "Open a po-file"
-msgstr "Åbn en po-fil"
-
-#: src/menus.h:205
-msgid "Save"
-msgstr "Gem"
-
-#: src/menus.h:206
-msgid "Save File"
-msgstr "Gem fil"
-
-#: src/menus.h:209
-msgid "Save as"
-msgstr "Gem som"
-
-#: src/menus.h:210
-msgid "Save file with a different name"
-msgstr "Gem filen med nyt navn"
-
-#: src/menus.h:214
-msgid "Compile"
-msgstr "Kompilér"
-
-#: src/menus.h:218
-msgid "Update"
-msgstr "Opdatér"
-
-#: src/menus.h:222
-msgid "Header"
-msgstr "Hoved"
-
-#: src/menus.h:227
-msgid "Options"
-msgstr "Indstillinger"
-
-#: src/menus.h:228
-msgid "gtranslator options"
-msgstr "gtranslator valgmuligheder"
-
-#: src/menus.h:231 src/menus.h:232
-msgid "Exit"
-msgstr "Afslut"
-
-#: src/menus.h:239
-msgid "First"
-msgstr "Første"
-
-#: src/menus.h:243
-msgid "Back"
-msgstr "Tilbage"
-
-#: src/menus.h:248
-msgid "Next"
-msgstr "Næste"
-
-#: src/menus.h:252
-msgid "Last"
-msgstr "Sidste"
-
-#: src/menus.h:256
-msgid "Missing"
-msgstr "Mangler"
-
-#: src/menus.h:261
-msgid "Go to the next fuzzy translation"
-msgstr "Gå til næste ufærdige oversættelse"
-
-#: src/menus.h:264
-msgid "Go to"
-msgstr "Gå til"
-
-#: src/menus.h:265
-msgid "Go to specified message number"
-msgstr "Gå til angivet beskedsnummer"
-
-#: src/menus.h:269
-msgid "Find string in po-file"
-msgstr "Find streng i po-fil"
-
-#: src/menus.h:273
-#, fuzzy
-msgid "Replace string in po-file"
-msgstr "Find streng i po-fil"
-
-#: src/menus_main.h:30
+#: src/menus.c:44
 msgid "_Messages"
 msgstr "_Beskeder"
 
-#: src/menus_main.h:31
-#, fuzzy
+#: src/menus.c:45
 msgid "Mess_age status"
-msgstr "Besked_status"
+msgstr ""
 
-#: src/menus_message_status.h:32
+#: src/menus.c:56
+msgid "_Compile"
+msgstr "_Kompilér"
+
+#: src/menus.c:57 src/menus.c:273
+msgid "Compile the po-file"
+msgstr "Kompilér po-filen"
+
+#: src/menus.c:63
+msgid "_Update"
+msgstr "_Opdatér"
+
+#: src/menus.c:64 src/menus.c:277
+msgid "Update the po-file"
+msgstr "Opdatér po-filen"
+
+#: src/menus.c:71
+msgid "Autoaccomplish"
+msgstr ""
+
+#: src/menus.c:72
+msgid "Automatically fill missing translations from the default query domain"
+msgstr ""
+
+#: src/menus.c:80
+msgid "Open from _URI"
+msgstr ""
+
+#: src/menus.c:81
+msgid "Open a po file from a given URI"
+msgstr ""
+
+#: src/menus.c:91
+msgid "Recen_t files"
+msgstr "_Nylige filer"
+
+#: src/menus.c:117
+msgid "_Query"
+msgstr ""
+
+#: src/menus.c:118 src/menus.c:335
+msgid "Query for a string"
+msgstr ""
+
+#: src/menus.c:125
+msgid "_Header..."
+msgstr "_Hoved..."
+
+#: src/menus.c:126 src/menus.c:281
+msgid "Edit the header"
+msgstr "Redigér hovedet"
+
+#: src/menus.c:135
+msgid "_Message"
+msgstr ""
+
+#: src/menus.c:136
+msgid "Standard messages view"
+msgstr ""
+
+#: src/menus.c:138
+msgid "_Comments"
+msgstr ""
+
+#: src/menus.c:139
+msgid "View comments for message"
+msgstr ""
+
+#: src/menus.c:141
+msgid "_Numbers"
+msgstr ""
+
+#: src/menus.c:142
+msgid "View numbers in the message"
+msgstr ""
+
+#: src/menus.c:144
+msgid "C _Formats"
+msgstr ""
+
+#: src/menus.c:145
+msgid "View C formats of the message"
+msgstr ""
+
+#: src/menus.c:147
+msgid "_Hotkeys"
+msgstr ""
+
+#: src/menus.c:148
+msgid "View hotkeys in the message"
+msgstr ""
+
+#: src/menus.c:155
+msgid "_First"
+msgstr "_Første"
+
+#: src/menus.c:156 src/menus.c:298
+msgid "Go to the first message"
+msgstr "Gå til denne besked"
+
+#: src/menus.c:162
+msgid "_Back"
+msgstr "_Tilbage"
+
+#: src/menus.c:163 src/menus.c:302
+msgid "Go one message back"
+msgstr "Gå en besked tilbage"
+
+#: src/menus.c:170
+msgid "_Next"
+msgstr "_Næste"
+
+#: src/menus.c:171 src/menus.c:307
+msgid "Go one message forward"
+msgstr "Gå en besked frem"
+
+#: src/menus.c:177
+msgid "_Last"
+msgstr "_Sidste"
+
+#: src/menus.c:178 src/menus.c:311
+msgid "Go to the last message"
+msgstr "Gå til sidste besked"
+
+#: src/menus.c:185
+msgid "_Go to..."
+msgstr "_Gå til..."
+
+#: src/menus.c:186
+msgid "Goto specified message number"
+msgstr "Gå til det angivne beskedsnummer."
+
+#: src/menus.c:192
+msgid "Next fuz_zy"
+msgstr "Næste ufærdi_ge"
+
+#: src/menus.c:193
+msgid "Go to next fuzzy message"
+msgstr "Gå til næste ufærdige besked"
+
+#: src/menus.c:199
+msgid "Next _untranslated"
+msgstr "Næste _uoversatte"
+
+#: src/menus.c:200 src/menus.c:315
+msgid "Go to next untranslated message"
+msgstr "Gå til næste uoversatte besked"
+
+#: src/menus.c:210
 msgid "_Translated"
 msgstr "Oversa_t"
 
-#: src/menus_message_status.h:33
+#: src/menus.c:211
 msgid "Toggle translated status of a message"
 msgstr "Slå oversatt-status til/fra for en besked"
 
-#: src/menus_message_status.h:41
+#: src/menus.c:219
 msgid "_Fuzzy"
 msgstr "U_færdig"
 
-#: src/menus_message_status.h:42
+#: src/menus.c:220
 msgid "Toggle fuzzy status of a message"
 msgstr "Slå ufærdig-status til/fra for en besked"
 
-#: src/menus_message_status.h:50
+#: src/menus.c:228
 msgid "_Stick"
 msgstr "_Lim"
 
-#: src/menus_message_status.h:51
+#: src/menus.c:229
 msgid "Stick this message"
 msgstr "Behold denne besked"
 
-#: src/menus_misc.h:40
+#: src/menus.c:248
 msgid "gtranslator _website"
 msgstr "gtranslator _websted"
 
-#: src/menus_misc.h:41
+#: src/menus.c:249
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslators hjemmeside på webben"
+
+#: src/menus.c:260
+msgid "Open a po-file"
+msgstr "Åbn en po-fil"
+
+#: src/menus.c:263
+msgid "Save"
+msgstr "Gem"
+
+#: src/menus.c:264
+msgid "Save File"
+msgstr "Gem fil"
+
+#: src/menus.c:267
+msgid "Save as"
+msgstr "Gem som"
+
+#: src/menus.c:268
+msgid "Save file with a different name"
+msgstr "Gem filen med nyt navn"
+
+#: src/menus.c:272
+msgid "Compile"
+msgstr "Kompilér"
+
+#: src/menus.c:276
+msgid "Update"
+msgstr "Opdatér"
+
+#: src/menus.c:280
+msgid "Header"
+msgstr "Hoved"
+
+#: src/menus.c:285
+msgid "Options"
+msgstr "Indstillinger"
+
+#: src/menus.c:286
+msgid "gtranslator options"
+msgstr "gtranslator valgmuligheder"
+
+#: src/menus.c:289 src/menus.c:290
+msgid "Exit"
+msgstr "Afslut"
+
+#: src/menus.c:297
+msgid "First"
+msgstr "Første"
+
+#: src/menus.c:301
+msgid "Back"
+msgstr "Tilbage"
+
+#: src/menus.c:306
+msgid "Next"
+msgstr "Næste"
+
+#: src/menus.c:310
+msgid "Last"
+msgstr "Sidste"
+
+#: src/menus.c:314
+msgid "Missing"
+msgstr "Mangler"
+
+#: src/menus.c:319
+msgid "Go to the next fuzzy translation"
+msgstr "Gå til næste ufærdige oversættelse"
+
+#: src/menus.c:322
+msgid "Go to"
+msgstr "Gå til"
+
+#: src/menus.c:323
+msgid "Go to specified message number"
+msgstr "Gå til angivet beskedsnummer"
+
+#: src/menus.c:327
+msgid "Find string in po-file"
+msgstr "Find streng i po-fil"
+
+#: src/menus.c:331
+msgid "Replace string in po-file"
+msgstr ""
 
 #: src/message.c:68
 msgid "Couldn't get the message!"
@@ -969,36 +958,36 @@ msgstr "Der er ikke nogen fuzzy beskeder tilbage."
 msgid "All messages seem to be translated."
 msgstr "Alle beskeder ser ud til at være oversat."
 
-#: src/open-differently.c:129
+#: src/open-differently.c:125
 #, c-format
 msgid "The necessary uncompression program `%s' is missing!"
 msgstr ""
 
-#: src/open-differently.c:174
+#: src/open-differently.c:170
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Kunne ikke åbne den oversatte gettext-fil '%s'!"
 
-#: src/open-differently.c:226
-#, fuzzy, c-format
+#: src/open-differently.c:222
+#, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
-msgstr "Kunne ikke åbne den oversatte gettext-fil '%s'!"
+msgstr ""
 
 #.
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open-differently.c:236
-#, fuzzy, c-format
+#: src/open-differently.c:232
+#, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr "Kunne ikke åbne den gzippede gettext-fil '%s'!"
+msgstr ""
 
-#: src/open-differently.c:305
-#, fuzzy, c-format
+#: src/open-differently.c:301
+#, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
-msgstr "Kunne ikke åbne mo-fil '%s'!"
+msgstr ""
 
-#: src/parse.c:88
+#: src/parse.c:90
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1007,7 +996,7 @@ msgstr ""
 "Nyt \"escaped\" tegn fundet \\%c\n"
 "Tilføj dette i parse.c, linje %i."
 
-#: src/parse.c:232
+#: src/parse.c:236
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1018,7 +1007,7 @@ msgstr ""
 "på linje %d.\n"
 "Tjek venligst filen og prøv igen."
 
-#: src/parse.c:281
+#: src/parse.c:272
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1027,17 +1016,17 @@ msgstr ""
 "Filen er tom:\n"
 "%s"
 
-#: src/parse.c:307 src/parse.c:567
+#: src/parse.c:295
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen `%s' eksisterer overhovedet ikke!"
 
-#: src/parse.c:386
+#: src/parse.c:368
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:522
+#: src/parse.c:503
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -1048,14 +1037,19 @@ msgstr ""
 "Denne filtype bruges af programmet.\n"
 "Dine filer skal bruge filtypen *.po, mest sandsynligt %s.po"
 
-#: src/parse.c:601
-#, fuzzy, c-format
+#: src/parse.c:546
+#, c-format
+msgid "Could not open file `%s' for writing!"
+msgstr ""
+
+#: src/parse.c:579
+#, c-format
 msgid ""
 "File %s\n"
 "contains %d fuzzy messages"
-msgstr "Gå til næste ufærdige besked"
+msgstr ""
 
-#: src/parse.c:637
+#: src/parse.c:615
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1067,11 +1061,11 @@ msgstr ""
 "!\n"
 "Vil du gemme den alligevel?"
 
-#: src/parse.c:645
+#: src/parse.c:623
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- uændret"
 
-#: src/parse.c:721
+#: src/parse.c:699
 #, c-format
 msgid ""
 "File %s\n"
@@ -1080,30 +1074,15 @@ msgstr ""
 "Filen %s\n"
 "blev ændret. Vil du gå tilbage til en gemt kopi?"
 
-#: src/parse.c:760
+#: src/parse.c:738
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Desværre, msgfmt er ikke tilgængelig på dit system!"
 
-#: src/parse.c:785
-#, fuzzy, c-format
+#: src/parse.c:762
+#, c-format
 msgid ""
 "Compile successful:\n"
 "%s"
-msgstr ""
-"Kompilering fuldført:\n"
-"%s"
-
-#: src/parse.c:813
-#, c-format
-msgid "You don't have read permissions on file `%s'"
-msgstr ""
-
-#: src/parse.c:832
-#, c-format
-msgid ""
-"You don't have write permissions on file `%s'.\n"
-"This means that you should save it as a copy to a local directory\n"
-"of your choice."
 msgstr ""
 
 #: src/prefs.c:92
@@ -1114,19 +1093,16 @@ msgstr "gtranslator -- alternativer"
 #. * The tables for holding all the entries below.
 #.
 #: src/prefs.c:97
-#, fuzzy
 msgid "Personal informations"
-msgstr "Personlige informationer"
+msgstr ""
 
 #: src/prefs.c:98
-#, fuzzy
 msgid "Language settings"
-msgstr "Sprogalternativer"
+msgstr ""
 
 #: src/prefs.c:99
-#, fuzzy
 msgid "Po file editing"
-msgstr "Alternativer for po fil"
+msgstr ""
 
 #: src/prefs.c:100
 msgid "Miscellaneous"
@@ -1141,28 +1117,24 @@ msgid "Fonts, colors and color schemes"
 msgstr ""
 
 #: src/prefs.c:108
-#, fuzzy
 msgid "Author's name:"
-msgstr "Forfatters navn :"
+msgstr ""
 
 #: src/prefs.c:111
-#, fuzzy
 msgid "Author's EMail:"
-msgstr "Forfatters e-post :"
+msgstr ""
 
 #: src/prefs.c:115
 msgid "Default query domain:"
 msgstr ""
 
 #: src/prefs.c:129
-#, fuzzy
 msgid "Language code:"
-msgstr "Sprog-kode :"
+msgstr ""
 
 #: src/prefs.c:134
-#, fuzzy
 msgid "Language group's EMail:"
-msgstr "Sproggruppens e-post:"
+msgstr ""
 
 #: src/prefs.c:150
 msgid "Set non-fuzzy status, if message was changed"
@@ -1227,14 +1199,12 @@ msgstr "Ordbog der skal bruges:"
 #. * The sixth page with the special font/color stuff.
 #.
 #: src/prefs.c:206
-#, fuzzy
 msgid "Syntax color scheme to use:"
-msgstr "Kunne ikke åbne den oversatte gettext-fil '%s'!"
+msgstr ""
 
 #: src/prefs.c:208
-#, fuzzy
 msgid "gtranslator -- color scheme selection"
-msgstr "gtranslator -- valg af skrifttype"
+msgstr ""
 
 #: src/prefs.c:214
 msgid "Apply special font/colors"
@@ -1287,16 +1257,15 @@ msgid "Couldn't generate the current date!"
 msgstr "Kunne ikke generere aktuel dato!"
 
 #: src/query.c:200
-#, fuzzy
 msgid "No language defined in preferences to query the domains for!"
-msgstr "Intet sprog defineret i søgningen!"
+msgstr ""
 
 #: src/query.c:212
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't open locales directory `%s'!"
-msgstr "Kunne ikke oprette det midlertidige katalog '%s'."
+msgstr ""
 
-#: src/session.c:89
+#: src/session.c:90
 msgid "Session restored successfully."
 msgstr "Genopretelse af sessionen fuldført."
 
@@ -1330,7 +1299,7 @@ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 #. * than latin1, feel free to change it to
 #. * whatever you think will be better
 #.
-#: src/syntax.c:87 src/utils.c:95 src/utils.c:96 src/views.c:286
+#: src/syntax.c:87 src/utils.c:96 src/utils.c:97 src/views.c:286
 #: src/views.c:356
 msgid "·"
 msgstr ""
@@ -1348,19 +1317,35 @@ msgid "The update was successfull."
 msgstr "Opdateringen lykkedes."
 
 #: src/update.c:115
-#, fuzzy
 msgid "An error occured while updating the po file."
-msgstr "En fejl opstod under kørsel af msgfmt.\n"
+msgstr ""
 
-#: src/utils.c:149
+#: src/utils.c:150
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometri-streng \"%s\" kunne ikke læses!"
 
+#.
+#. * Create an error box and prevent further reading
+#. *  of the file.
+#.
+#: src/utils.c:382
+#, c-format
+msgid "You don't have read permissions on file `%s'"
+msgstr ""
+
+#: src/utils.c:401
+#, c-format
+msgid ""
+"You don't have write permissions on file `%s'.\n"
+"This means that you should save it as a copy to a local directory\n"
+"of your choice."
+msgstr ""
+
 #: src/vfs-handle.c:113
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't create temporary directory `%s'!"
-msgstr "Kunne ikke oprette det midlertidige katalog '%s'."
+msgstr ""
 
 #: src/vfs-handle.c:139
 #, c-format
@@ -1408,9 +1393,8 @@ msgid "No C formats present."
 msgstr ""
 
 #: src/views.c:342
-#, fuzzy
 msgid "No hotkeys defined in message."
-msgstr "Gå til denne besked"
+msgstr ""
 
 #: src/backends/docbook/docbook.xml.h:1
 msgid "Docbook sgml documents backend"
@@ -1421,24 +1405,24 @@ msgid "Plain text files backend"
 msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:181
-#, fuzzy, c-format
+#, c-format
 msgid "Project: %s"
-msgstr "Projekt"
+msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:184
-#, fuzzy, c-format
+#, c-format
 msgid "Version: %s"
-msgstr "Revision: "
+msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:188
-#, fuzzy, c-format
+#, c-format
 msgid "Last translator: %s <%s>"
-msgstr "gtranslator -- %s"
+msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:192
-#, fuzzy, c-format
+#, c-format
 msgid "Language team: %s <%s>"
-msgstr "Sprog :"
+msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:195
 #, c-format
@@ -1451,16 +1435,16 @@ msgid "Last po file update: %s"
 msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:201
-#, fuzzy, c-format
+#, c-format
 msgid "Encoding: %s (%s)"
-msgstr "Kodning :"
+msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:208
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Comments:\n"
 "%s"
-msgstr "Kommentarer :"
+msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:248
 msgid "Loading po file..."
@@ -1468,43 +1452,36 @@ msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:268
 #: nautilus-view/nautilus-gtranslator-view.c:283
-#, fuzzy
 msgid "Open Po File"
-msgstr "Åbn en po-fil"
+msgstr ""
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
 msgstr "Gnome oversættelsesprogram"
 
 #: data/mime/gtranslator.keys.in.h:1
-#, fuzzy
 msgid "Compiled gettext po file"
-msgstr "Kompilér po-filen"
+msgstr ""
 
 #: data/mime/gtranslator.keys.in.h:2
-#, fuzzy
 msgid "Compressed gettext po file"
-msgstr "Kompilér po-filen"
+msgstr ""
 
 #: data/mime/gtranslator.keys.in.h:3
-#, fuzzy
 msgid "Gettext po file"
-msgstr "Åbn en po-fil"
+msgstr ""
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
-#, fuzzy
 msgid "Gtranslator Po File"
-msgstr "gtranslator valgmuligheder"
+msgstr ""
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:2
-#, fuzzy
 msgid "Gtranslator Po File View"
-msgstr "gtranslator _websted"
+msgstr ""
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:3
-#, fuzzy
 msgid "Gtranslator Po File Viewer"
-msgstr "gtranslator -- redigér hoved"
+msgstr ""
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:4
 msgid "Gtranslator Po file viewer component's factory"
@@ -1523,21 +1500,17 @@ msgid "View as Po File"
 msgstr ""
 
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:2
-#, fuzzy
 msgid "Open _po file"
-msgstr "Åbn en po-fil"
+msgstr ""
 
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:3
-#, fuzzy
 msgid "Open po file"
-msgstr "Åbn en po-fil"
+msgstr ""
 
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#, fuzzy
 msgid "_File"
-msgstr "_Kompilér"
+msgstr ""
 
-#, fuzzy
 #~ msgid "Couldn't open color schemes directory `%s'!"
 #~ msgstr "Kunne ikke åbne den oversatte gettext-fil '%s'!"
 
