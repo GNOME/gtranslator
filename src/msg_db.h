@@ -19,13 +19,6 @@
 #include "parse.h"
 
 /**
-* Some static variables for the poptTable in the main
-*  routines.
-**/
-static gchar *file_to_open=NULL;
-static gchar *query_string=NULL;
-
-/**
 * The default msg_db location .
 **/
 static gchar *msg_db;
@@ -51,6 +44,11 @@ int init_msg_db();
 * & gzip it 
 **/
 void close_msg_db();
+
+/**
+* This is a simple callback for the msg_db-adding method.
+**/
+void append_to_msg_db(GtkWidget *widget,gpointer useless);
 
 /**
 * Put this to the db

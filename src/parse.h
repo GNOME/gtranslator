@@ -5,6 +5,9 @@
 *
 * This is the parser header ...
 * Totally written by me ; I think you can see it .
+* 
+* Yes, of course ;) I even could replace half of it's contents...
+* Gediminas Paulauskas <menesis@delfi.lt>
 *
 * -- the header
 **/
@@ -17,28 +20,28 @@
 #endif
 
 #include <string.h>
-#include <stdlib.h>
 #include <stdio.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include <errno.h>
 
-#include "gui.h"
 #include "messages.h"
 #include "header_stuff.h"
-#include "gtr_dialogs.h"
+#include "gui.h"
 
 /**
-* The global structure for the file-handles.
+* The new filename
 **/
-static gtr_po *po;
+gchar *i_love_this_file;
 
 /**
-* The counting variable for the messages.
+* A list for the messages.
 **/
-static gint msg_pair;
+GList *messages;
+void free_messages(void);
+
+/**
+* The currently displayed message
+**/
+GList *cur_msg;
 
 /**
 * A gboolean for the silly question if a file is open ...
@@ -50,60 +53,31 @@ gboolean file_opened;
 **/
 gboolean file_changed;
 
-/**
-* If we're at the last/first entries ...
-**/
-gboolean first_entry,last_entry;
+// Marks if the current message was changed;
+gboolean message_changed;
 
 /**
 * A simple file check .
 **/
 void check_file(FILE *);
 
+// Updates and returns message status.
+GtrMsgStatus get_msg_status(GtrMsg *msg);
+
 /**
 * The internally used parse-function
 **/
-void parse(gchar *po);
+void parse(const char *po);
 
 /**
-* The new method for the widgets
+* Callbacks for the widgets
 **/
-void parse_the_file(GtkWidget *widget,gpointer useless);
+void parse_the_file(GtkWidget *widget,gpointer of_dlg);
+void save_the_file(GtkWidget *widget,gpointer sfa_dlg);
+void save_current_file(GtkWidget *widget,gpointer useless);
+void revert_file(GtkWidget *widget, gpointer useless);
+void close_file(GtkWidget *widget, gpointer useless);
 
-/**
-* General functions are following -- these do operate on the
-*  global lists where they get the first/last/next/previous
-*   msgid & msgstr's ...
-**/
-
-/**
-* Get first msgid, msgstr
-**/
-void get_first_msg(GtkWidget *widget,gpointer useless);
-
-/**
-* Get previous msgid, msgstr 
-**/
-void get_prev_msg(GtkWidget *widget,gpointer useless);
-
-/**
-* Get next msgid, msgstr
-**/
-void get_next_msg(GtkWidget *widget,gpointer useless);
-
-/**
-* Get last msgid, msgstr
-**/
-void get_last_msg(GtkWidget *widget,gpointer useless);
-
-/**
-* The search function
-**/
-gchar *search_do(GtkWidget *widget,gpointer wherefrom);
-
-/**
-* Two lists for the messages.
-**/
-GList *messages;
+void compile(GtkWidget *widget,gpointer useless);
 
 #endif

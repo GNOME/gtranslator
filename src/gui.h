@@ -3,7 +3,7 @@
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
-* This creates only the main app ..
+* This creates the main app and defines simple callbacks
 *
 * -- the header
 **/
@@ -15,11 +15,6 @@
 	#include <config.h>
 #endif
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <string.h>
-#include <glib.h>
 #include <gnome.h>
 
 #ifdef USE_WINDOW_ICON 
@@ -28,12 +23,12 @@
 
 #include "about.h"
 #include "dnd.h"
-#include "gtr_dialogs.h"
+#include "dialogs.h"
 #include "prefs.h"
 #include "msg_db.h"
 #include "parse.h"
 
-GtkWidget *create_app1 (void);
+void create_app1 (void);
 
 /**
 * The globally needed widgets
@@ -43,17 +38,6 @@ GtkWidget *app1;
 GtkWidget *trans_box;
 GtkWidget *text1;
 GtkWidget *appbar1; 
-GtkWidget *search_bar;
-GtkWidget *search_button, *search_again_button, *goto_button, *goto_line_button;
-GtkWidget *compile_button,*add_button;
-GtkWidget *save_button, *save_as_button;
-GtkWidget *first_button,*back_button,*next_button,*last_button;
-GtkWidget *header_button;
-
-/**
-* Necessary for the geometry handling:
-**/
-static gchar *gtranslator_geometry=NULL;
 
 /**
 * For the status messages
@@ -61,40 +45,40 @@ static gchar *gtranslator_geometry=NULL;
 gchar status[128];
 
 /**
-* Calls the main help for gtranslator
-**/ 
-void call_help_viewer(GtkWidget *widget,gpointer useless);
-
-/**
-* Display gtranslator's homepage
+* Enable/disable the buttons of the toolbars if a file is opened/
+*  closed.
 **/
-void call_gtranslator_homepage(GtkWidget *widget,gpointer useless);
+void enable_actions(const gchar *first, ...);
+void disable_actions(const gchar *first, ...);
+void disable_actions_no_file(void);
 
-/**
-* gtranslator's own exit-routine
+// Various functions for displaying messages
+void update_msg(GList *li);
+void display_msg(GList *list_item);
+void clean_text_boxes(void);
+void toggle_msg_status(GtkWidget *widget,gpointer which);
+
+/** 
+ * General functions -- these do operate on the global lists where they get
+ * the first/previous/next/last msgid & msgstr's ...
 **/
-gint gtranslator_quit(GtkWidget *widget,gpointer useless);
+
+void goto_first_msg(GtkWidget *widget,gpointer useless);
+void goto_prev_msg(GtkWidget *widget,gpointer useless);
+void goto_next_msg(GtkWidget *widget,gpointer useless);
+void goto_last_msg(GtkWidget *widget,gpointer useless);
+void goto_nth_msg(GtkWidget *widget,gpointer adjustment);
+void goto_given_msg(GtkWidget *widget,gpointer to_go);
 
 /**
 * The text-based callbacks
 **/
-void cut_clipboard(GtkWidget *widget,gpointer useless);
-void copy_clipboard(GtkWidget *widget,gpointer useless);
-void paste_clipboard(GtkWidget *widget,gpointer useless);
-void clear_selection(GtkWidget *widget,gpointer useless);
-void text_has_got_changed(GtkWidget *widget,gpointer useless);
-void compile(GtkWidget *widget,gpointer useless);
+
+gboolean nothing_changes;
 
 /**
-* Enable/disable the buttons of the toolbars if a file is opened/
-*  closed.
+* The search function
 **/
-void disable_buttons();
-void enable_buttons();
-
-/**
-* This is a simple callback for the msg_db-adding method.
-**/
-void append_to_msg_db(GtkWidget *widget,gpointer useless);
+void search_do(GtkWidget *widget,gpointer wherefrom);
 
 #endif

@@ -17,16 +17,8 @@
 #endif
 
 #include "gui.h"
+#include "dialogs.h"
 
-/**
-* The widget for the about box
-**/
-GtkWidget *about;
-
-/**
-* This creates the about box
-**/
-void about_box();
-void about_box_show(GtkWidget *widget,gpointer useless);
+void about_box(GtkWidget *widget,gpointer useless);
 
 #endif

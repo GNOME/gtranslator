@@ -1,5 +1,6 @@
 /**
 * Fatih Demir [ kabalak@gmx.net ]
+* Gediminas Paulauskas <menesis@delfi.lt>
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
@@ -15,20 +16,19 @@
 	#include <config.h>
 #endif
 
-#include "parse.h"
-#include "gui.h"
-#include <time.h>
+#include "gtk/gtk.h"
 
 /**
 * A typedef for the new structure.
 **/
-typedef struct _gtr_header gtr_header;
+typedef struct _GtrHeader GtrHeader;
+#define GTR_HEADER(x) ((GtrHeader *)x)
 
 /**
 * The header-structure which should hold the
 *  header informations
 **/
-struct _gtr_header {
+struct _GtrHeader {
 	gchar *prj_name;
 	gchar *prj_version;
 	gchar *pot_date;
@@ -43,45 +43,22 @@ struct _gtr_header {
 /**
 * A structure which will be hopefully used now...
 **/
-static gtr_header *ph;
-
-/**
-* The general widgets for the edit-dialog.
-**/
-GtkWidget *gtr_edit_header_dlg,*gtr_edit_header_dlg_cancel,
-		*gtr_edit_header_dlg_apply;
-GtkWidget *gtr_prj_name,*gtr_prj_version,*gtr_po_date,*gtr_pot_date,
-		*gtr_last_translator,*gtr_language_team,
-		*gtr_mime_version,*gtr_mime_type,*gtr_encoding;
-
-/**
-* Will be useful later on.
-**/
-void apply_header(gtr_header *the_header);
+GtrHeader *ph;
 
 /**
 * This is the current recognition routine.
 **/
-void get_header(gchar *hline);
+gboolean get_header(GtrMsg *msg);
 
 /**
-* Creates the edit_header-dialog.
+* Frees the header structure
 **/
-void edit_header_create();
+void free_header(GtrHeader *the_header);
 
 /**
-* Shows the edit_header-dialog.
-**/
-void edit_header_show();
-
-/**
-* And this one hides it.
-**/
-void edit_header_hide(GtkWidget *widget,gpointer useless);
-
-/**
-* Calls the other functions.
+* Creates and show the dialog for editing the header
 **/
 void edit_header(GtkWidget *widget,gpointer useless);
 
 #endif 
+

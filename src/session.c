@@ -35,7 +35,9 @@ gint gtranslator_sleep(GnomeClient *client, gint phase, GnomeSaveStyle s_style,
 	* State-saving ...
 	**/
 	gnome_config_push_prefix(path);
+	/* TODO XXX 
 	gnome_config_set_string("State/File",po->filename);
+	*/
 	gnome_config_pop_prefix();
 	/**
 	* Simply sync the config-parameters again

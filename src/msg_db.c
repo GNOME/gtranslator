@@ -14,6 +14,7 @@
 **/
 
 #include "msg_db.h"
+#include <sys/stat.h>
 
 /**
 * The db file-stream
@@ -32,11 +33,7 @@ int init_msg_db()
 	*  has been defined.
 	**/
 	if(!msg_db)
-	{
-		gchar temp_db[128];
-		sprintf(temp_db,"%s/%s",g_get_home_dir(),"msg.db");
-		msg_db=temp_db;
-	}
+		msg_db=g_strdup_printf("%s/%s",g_get_home_dir(),"msg.db");
 	if(fopen(msg_db,"r+")==NULL)
 	{
 		g_message(_("No message db found! Creating one in `%s'."),msg_db);
@@ -101,6 +98,10 @@ void close_msg_db()
 	*  to the other routines .
 	**/
 	msg_db_inited=FALSE;
+	/**
+	 * free the filename of msg_db
+	 **/
+	free(msg_db);
 }
 
 int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
@@ -128,6 +129,14 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			g_warning(_("Got no message entry!\n"));
 			return 1;	
 		}
+		/**
+		* Get the length of the new entry
+		**/
+		if(( strlen(msg_translation) < 0 ) || ( ! msg_translation ))
+		{
+			g_warning(_("New message entry has wrong/non-logical length.\n"));
+			return 1;
+		}
 		else
 		{
 			/**
@@ -154,6 +163,38 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 	return 0;
 }
 
+/**
+* Saves the entry in the msg_db.
+**/
+void append_to_msg_db(GtkWidget *widget,gpointer useless)
+{
+	/**
+	* Build two temporary gchar's.
+	**/
+	gchar *tc1=g_new(gchar,1);
+	gchar *tc2=g_new(gchar,1);
+	/**
+	* Get the text-entries.
+	**/
+	tc1=gtk_editable_get_chars(GTK_EDITABLE(trans_box), 0, gtk_text_get_length(GTK_TEXT(trans_box)));
+	tc2=gtk_editable_get_chars(GTK_EDITABLE(text1), 0, gtk_text_get_length(GTK_TEXT(text1)));
+	/**
+	* Call the msg_db-function for adding new entries.
+	**/
+	put_to_msg_db(tc2,tc1);
+	/**
+	* ... and free the gchar's, if possible.
+	**/
+	if(tc1)
+	{
+		g_free(tc1);
+	}
+	if(tc2)
+	{
+		g_free(tc2);
+	}	
+}
+
 gchar *get_from_msg_db(const gchar *get_similar)
 {
 	/**
@@ -161,25 +202,26 @@ gchar *get_from_msg_db(const gchar *get_similar)
 	**/
 	if(msg_db_inited!=TRUE)
 	{
-		/**
-                * Show a little warning ...
-                **/
+		 /**
+                 * Show a little warning ...
+                 **/
                 g_warning(_("The message db `%s' seems not to be initted!\n"),msg_db);
-		/**
-		* Return a very "explaining" char* ...
-		**/
+		 /**
+		 * Return a very "explaining" char* ...
+		 **/
                 return _("Not available");
 	}
 	if(!msg_list)
 	{
-		/**
-		* If there's no msg_list 
-		*  print an error message
-  		**/
+		 /**
+		 * If there's no msg_list 
+		 *  print an error message
+  		 **/
 		g_error(_("No messages list ( msg_list ) available for acting on it!\n"));
-		/**
-		* Exit brutally ...
-		**/
+		 /**
+		 * Exit brutally ...
+		 **/
+		 return ("Error...");
 	}
 	else
 	{
@@ -198,6 +240,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 				{
 					gchar *emp;
 					gint emp_i=0,i;
+					// FIXME: uninitialized buffer
 					emp[0]='\0';
 					while(msg_messages[emp_i]!=';')
 					{
@@ -221,11 +264,12 @@ gchar *get_from_msg_db(const gchar *get_similar)
 /**
 * Returns the size of the message-db.
 **/
-unsigned int get_msg_db_size()
+guint get_msg_db_size()
 {
 	if(msg_db_inited!=TRUE)
 	{
 		g_warning(_("The messages db isn't inited."));
+		return -1;
 	}	
 	else
 	{
@@ -237,7 +281,7 @@ unsigned int get_msg_db_size()
 		/**
 		* Return the size.
 		**/
-		return (unsigned int )(file->st_size);
+		return (guint )(file->st_size);
 	}
 }
 
@@ -271,7 +315,7 @@ void set_challenge_length(int length)
 unsigned int get_challenge_length()
 {
 	/**
-	* Simply returns the challenge length or 0.
+	* Simply returns the challenge length or NULL.
 	**/
 	if(challen<=1)
 	{

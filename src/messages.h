@@ -17,52 +17,51 @@
 /**
 * Typedefs for the `new' data-types
 **/
-typedef enum   _gtr_msg_status gtr_msg_status;
-typedef struct _gtr_msg        gtr_msg;
-typedef struct _gtr_po         gtr_po;
+typedef enum   _GtrMsgStatus	GtrMsgStatus;
+typedef struct _GtrMsg	GtrMsg;
+typedef struct _GtrPo	GtrPo;
+
+// defines for easy casting
+#define GTR_MSG_STATUS(x) ((GtrMsgStatus *)x)
+#define GTR_MSG(x) ((GtrMsg *)x)
+#define GTR_PO(x) ((GtrPo *)x)
 
 /**
 * The different stati of the translatable
 *  messages .
 **/
-enum _gtr_msg_status
+enum _GtrMsgStatus
 {
-	GTRANSLATOR_MSG_STATUS_UNTRANSLATED,
-	GTRANSLATOR_MSG_STATUS_TRANSLATED,
-	GTRANSLATOR_MSG_STATUS_UNKNOWN,
-	/**
- 	* If the message shouldn't be translated
- 	*  ( -> Web-adresses/trade mark names )
-	**/
-	GTRANSLATOR_MSG_STATUS_STICK,
-	/**
-	* If the entry should be translated as
-	*  fast as possible .
-	**/
-	GTRANSLATOR_MSG_STATUS_FIXME
+	GTRANSLATOR_MSG_STATUS_UNKNOWN		= 0,
+	GTRANSLATOR_MSG_STATUS_TRANSLATED	= 1 << 0,
+	GTRANSLATOR_MSG_STATUS_FUZZY		= 1 << 1,
+ 	// If the message shouldn't be translated 
+	// (Web-adresses/trade mark names)
+	GTRANSLATOR_MSG_STATUS_STICK		= 1 << 2
 };
 
 /**
 * Again a try to make a common usable message-struct
 **/
-struct _gtr_msg
+struct _GtrMsg
 {
 	gchar *msgid;
 	gchar *msgstr;
 	gchar *comment;
+// What this pos is used for?
 	gint pos;
-	gtr_msg_status msg_status;
+	GtrMsgStatus status;
 };
 
 /**
 * The general po-file structure
 **/
-struct _gtr_po
+struct _GtrPo
 {
 	/**
 	* The filename
 	**/
-	gchar filename[256];
+	gchar *filename;
 	/**
 	* If no translated entry has been found this'd set to TRUE.
 	**/
@@ -70,11 +69,11 @@ struct _gtr_po
 	/**
 	* A pointer to the first message
 	**/
-	gtr_msg *first;
+	GtrMsg *first;
 	/**
 	* A pointer to the last message
 	**/
-	gtr_msg *last;
+	GtrMsg *last;
 };
 
 #endif

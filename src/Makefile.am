@@ -18,7 +18,7 @@ gtranslator_SOURCES = \
 	parse.c	parse.h \
 	header_stuff.c header_stuff.h \
 	msg_db.c msg_db.h \
-	gtr_dialogs.c gtr_dialogs.h \
+	dialogs.c dialogs.h \
 	about.c about.h \
 	prefs.c prefs.h \
 	session.c session.h \
@@ -32,4 +32,4 @@ gtranslator_LDADD = ../libgtranslator/libgtranslator.la $(GNOME_LIBDIR) \
 		$(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS) \
 		$(XML_LIBS)
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST = ChangeLog TODO.src

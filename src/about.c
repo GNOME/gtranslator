@@ -11,27 +11,28 @@
 
 #include "about.h"
 
-void about_box()
+void about_box(GtkWidget *widget,gpointer useless)
 {
+	static GtkWidget *about=NULL;
 	const gchar *authors[] = {
-		"Fatih Demir",
+		"Fatih Demir <kabalak@gmx.net>",
+		"Gediminas Paulauskas <menesis@delfi.lt>",
 		NULL
 		};
+	raise_and_return_if_exists(about);
 
 	about=gnome_about_new("gtranslator", VERSION,
-		_("(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"),
+		"(C) 1999-2000",
 		authors,
-		_("gtranslator will be a Gnome framework for translating these emminent important po-files.\nIt will be based upon a gtranslatord and a gtranslator client. Wish the best for us translators and for me!"),
+		/**
+		* For you (X)EMacs-lovers ...
+		**/
+		#ifdef EMACS_LOVER
+		_("gtranslator is a Gnome Application for translating .po-files slightly different than in (X)Emacs."),
+		#else
+		_("gtranslator is a Gnome Application for translating .po-files more comfortable than in (X)Emacs."),
+		#endif // EMACS_LOVER
 		NULL);
-	gtk_window_set_modal(GTK_WINDOW (about), TRUE);
-	gtk_window_set_wmclass(GTK_WINDOW (about), "gtranslator", "gtranslator");
+	show_nice_dialog(&about,"gtranslator -- about");
 }
 
-void about_box_show(GtkWidget *widget,gpointer useless)
-{
-	about_box();
-	#ifdef USE_WINDOW_ICON
-	gnome_window_icon_set_from_file(GTK_WINDOW(about),WINDOW_ICON);
-	#endif
-	gtk_widget_show(about);
-}

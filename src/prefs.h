@@ -17,62 +17,24 @@
 #endif
 
 #include "about.h"
-#include "gtr_dialogs.h"
-
-/**
-* The widgets 
-**/
-GtkWidget *prefs,*first_page,*second_page,*third_page;
-
-/**
-* The entries
-**/
-GtkWidget *authors_name,*authors_email,*authors_language;
-GtkWidget *mime_type,*encoding,*lcode,*lg_email;
-GtkWidget *additional_comments;
-
-/**
-* Three lists for the combo-boxes ..
-**/
-GList *languages_list,*encodings_list,*lcodes_list,*group_emails_list,*bits_list;
-
-/**
-* The *-buttons used in the preferences box
-**/
-GtkWidget *use_msg_db,*add_additional_comments,*show_output;
-GtkWidget *warn_if_no_change,*dont_save_unchanged_files,*print_info;
-GtkWidget *warn_if_fuzzy,*warn_if_untranslated,*save_geometry;
-
-/**
-* The labels are all declared in the sources as they're'nt needed
-*  to be here
-**/
+#include "dialogs.h"
 
 /**
 * These are the variables set by the prefs-box ( globally ones )
 **/
-gchar *author,*email,*language,*mime,
-		*enc,*lc,*lg,*comments;
+gchar *author,*email,*language,*mime,*enc,*lc,*lg,*comments;
 gboolean if_use_msg_db,if_add_additional_comments,if_warn_if_fuzzy,
-		if_warn_if_no_change,if_dont_save_unchanged_files,
-		if_warn_if_untranslated,if_save_geometry;
+	if_warn_if_no_change,if_dont_save_unchanged_files,
+	if_save_geometry;
 gint gtranslator_geometry_x,gtranslator_geometry_y,
-		gtranslator_geometry_w,gtranslator_geometry_h;
+	gtranslator_geometry_w,gtranslator_geometry_h;
 
-/**
-* These ones store/recall the current file's name.
-**/
-void gtranslator_set_filename(gchar *file);
-gchar *gtranslator_get_filename();
+// Options, used NOT in prefs-box.
+gboolean if_match_case, if_fill_header;
 
-/**
-* The first one creates the preferences-box and the others show/hide it
-**/
-void prefs_box();
-void prefs_box_show(GtkWidget *widget,gpointer useless);
-void prefs_box_hide(GtkWidget *widget,gpointer useless);
-void prefs_box_changed(GtkWidget *widget,gpointer chitem);
-void prefs_box_apply(GtkWidget *widget,gpointer more_useless);
-void read_prefs();
+// Preferences-box creation and callbacks
+void prefs_box(GtkWidget *widget,gpointer useless);
+void read_prefs(void);
+void free_prefs(void);
 
 #endif

@@ -3,53 +3,112 @@
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
-* Here will be some useful parts of gtranslator
-* next periods of time ....
+* Major changes here done by Gediminas Paulauskas <menesis@delfi.lt>
+* Now this file is absolutely useful. Just needs some extensions sometimes...
 *
 * -- the source
 **/
 
 #include "parse.h"
-#include <error.h>
-#include <errno.h>
-#include <unistd.h>
 
-/**
-* The file-stream for the file-check & the message parsing
-**/
-FILE *fs;
+static GList *header_li;
+
+// Are written below. Maybe should move to "parse.h", but they are private...
+void append_line(gchar **old, const gchar *tail);
+gchar * restore_msg(gchar *given);
+void write_the_message(gpointer data, gpointer fs);
+void actual_write(const gchar *name);
+void free_a_message(gpointer data, gpointer useless);
 
 /**
 * A simple stream-check (I love the ifstream.good()-func from C++ ....)
 **/
 void check_file(FILE *stream)
 {
-	if(stream==NULL)
+	if (stream==NULL)
 	{
 		/**
 		* If there are any problems , give a
 		*  message ..
 		**/
-		g_error(_("\nThe file stream is lost!\n%s"),strerror(errno));
+		g_error(_("\nThe file stream is lost!\n%s"),g_strerror(errno));
 	}
+}
+
+/*
+ * returns the status of a message
+ */
+GtrMsgStatus get_msg_status(GtrMsg *msg)
+{
+	if (msg->msgstr)
+		msg->status |= GTRANSLATOR_MSG_STATUS_TRANSLATED;
+	else
+		msg->status &= ~GTRANSLATOR_MSG_STATUS_TRANSLATED;
+	if (strstr(msg->comment,"#, fuzzy"))
+		msg->status |= GTRANSLATOR_MSG_STATUS_FUZZY;
+	else
+		msg->status &= ~GTRANSLATOR_MSG_STATUS_FUZZY;
+	return msg->status;
+}
+
+// Formats tail to look good when displayed and easier to maintain. Removes
+// unneeded \'s and "'s and replaces \\n with real newline.
+// Then appends this to *old and updates the pointer.
+// TODO: make this use GString
+void append_line(gchar **old, const gchar *tail)
+{
+	gchar *to_add=g_new(gchar,strlen(tail));
+	gchar *result;
+	gint s,d=0;
+	for (s=1;s<strlen(tail)-1;s++) {
+		if (tail[s]=='\\') {
+			s++;
+			if (tail[s]=='n')
+				to_add[d++]='\n';
+			else if (tail[s]=='t')
+				to_add[d++]='\t';
+			else if ((tail[s]=='"') || (tail[s]=='\\'))
+				to_add[d++]=tail[s];
+			else {
+				to_add[d++]='\\';
+				to_add[d++]=tail[s];
+				g_warning("New escaped char found: \\%c\nAddthis to parse.c, line %i",
+					tail[s], __LINE__);
+			}
+		} else {
+			to_add[d++]=tail[s];
+		}
+	}
+	to_add[d]=0;
+	if (*old==NULL)
+		result=g_strdup(to_add);
+	else
+		result=g_strconcat(*old,to_add,NULL);
+	g_free(to_add);
+	g_free(*old);
+	*old=result;
 }
 
 /**
 * The internally used parse-function
 **/
-void parse(gchar *po)
+void parse(const char *po)
 {
 	/**
-	* Some variables
+	* The file-stream for the file-check & the message parsing
 	**/
-	gchar temp_char[128];
-        guint lines=1,z=0,msg_pair=0;
+	FILE *fs;
+	gchar line[128];
+        guint lines=0;
+	// if TRUE, means that a corresponding part is read
 	gboolean msgid_ok=FALSE,msgstr_ok=FALSE,comment_ok=FALSE;
-	messages=g_list_alloc();
+	GtrMsg *msg;
+
 	messages=NULL;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
+	
         if(!po)
         {
                 g_warning(_("There's no file to open or I couldn't understand `%s'!"),po);
@@ -57,7 +116,7 @@ void parse(gchar *po)
         /**
         * Set up a status message
         **/
-        sprintf(status,_("Current file : \"%s\"."),po);
+        g_snprintf(status,128,_("Current file : \"%s\"."),po);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
         /**
         * Open the parse fstream
@@ -68,315 +127,358 @@ void parse(gchar *po)
 	**/
 	check_file(fs);
 	/**
-	* Parse the file ...
+	* Set the global filename
 	**/
-	while(
-	fgets(temp_char,sizeof(temp_char),fs)!=NULL
-	)
+	i_love_this_file=g_strdup(po);
+	/**
+	* Create a new structure.
+	**/
+	msg=g_new0(GtrMsg,1);
+	/**
+	* Parse the file line by line...
+	**/
+	while (fgets(line,sizeof(line),fs)!=NULL)
 	{
-		/**
-		* Create a new structure.
-		**/
-		gtr_msg *msg=g_new(gtr_msg,1);
-		/**
-		* Set'em to "".
-		**/
-		msg->msgid="";
-		msg->msgstr=msg->comment=msg->msgid;
-		z++;
-		/**
-		* Try to get the header :
-		*
-		* 1/If it starts with "
-		* 2/And includes a ": " sequence
-		* 3/And if there has been ONLY one msgid/str-pair yet
-		*
-		**/
-		if(
-		/* 1/ */!g_strncasecmp(temp_char,"\"",1)
-		&&
-		/* 2/ */strstr(temp_char,": ")
-		&&
-		/* 3/ */(msg_pair<=1)
-		)
+		lines++;
+		/*
+		 * If it's a comment, no matter of what kind. It belongs to
+		 * the message pair below
+		 */
+		if(line[0]=='#')
 		{
 			/**
-			* Use the functions defined & used in header_stuff.*
-			*  to rip the header off.
+			* Set the comment & position.
 			**/
-			get_header(temp_char);
-		}
-		if(!g_strncasecmp(temp_char,"#: ",3))
-		{
-			/**
-			* Create the gtr_msg structure
-			*  and set the comment & position.
-			**/
-			(gint)msg->pos=z;
-			(gchar *)msg->comment=(gchar *)g_strdup(temp_char);
-			comment_ok=TRUE;
-		}
-		/**
-		* If it's an msgid
-		**/
-		if(!g_strncasecmp(temp_char,"msgid \"",7))
-		{
-			gint mid,minid;
-			gchar aw[strlen(temp_char)];
-			/**
-			* The msgid itself
-			**/
-			minid=0;
-			for(mid=6;mid<(strlen(temp_char));++mid)
-			{
-				aw[minid]=temp_char[mid];
-				minid++;
-			}	
-			(gchar *)msg->msgid=(gchar *)g_strdup(aw);
-			msgid_ok=TRUE;
-		}
-		/**
-		* If it's an msgstr.
-		**/
-		if(!g_strncasecmp(temp_char,"msgstr \"",8))
-		{
-			gint mstr,mistr;
-			gchar aq[strlen(temp_char)];
-			/**
-			* The msgstr
-			**/
-			mistr=0;
-			for(mstr=7;mstr<(strlen(temp_char));++mstr)
-			{
-				aq[mistr]=temp_char[mstr];
-				mistr++;
+			if (msg->comment==NULL) {
+				msg->pos=lines;
+				msg->comment=g_strdup(line);
+			} else {
+				gchar *tmp=g_strconcat(msg->comment,line,NULL);
+				g_free(msg->comment);
+				msg->comment=tmp;
 			}
-			(gchar *)msg->msgstr=(gchar *)g_strdup(aq);
+		} else {
+			// get rid of end-of-lines... later we will add ours ;)
+			g_strchomp(line);
+			if (strlen(line)==0) 
+					msgstr_ok=TRUE;
+			else 
 			/**
-			* Check the status...
+			* If it's an msgid
 			**/
-			if(!g_strcasecmp(((gchar *)msg->msgstr),"\"\""))
+			if (!g_strncasecmp(line,"msgid \"",7))
 			{
-				(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_UNTRANSLATED;
-			}
-			else
+				// This means the comment is completed
+				comment_ok=TRUE;
+				if (strlen(line)-8>0)
+					append_line(&msg->msgid,&line[6]);
+			} else
+			/**
+			* If it's an msgstr.
+			**/
+			if(!g_strncasecmp(line,"msgstr \"",8))
 			{
-				if(((gchar *)msg->msgstr)!=NULL)
-				{
-					(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_TRANSLATED;
-				}
+				// This means the msgid is completed
+				msgid_ok=TRUE;
+				if (strlen(line)-9>0)
+					append_line(&msg->msgstr,&line[7]);
+			} else
+			// A continuing msgid or msgstr
+			if (line[0]=='"') {
+				if ((comment_ok==TRUE) && (msgid_ok==FALSE))
+					append_line(&msg->msgid,line);
 				else
-				{
-					(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_UNKNOWN;
-				}
+				if ((msgid_ok==TRUE) && (msgstr_ok==FALSE))
+					append_line(&msg->msgstr,line);
+				else g_assert_not_reached();
 			}
-			msgstr_ok=TRUE;
-			msg_pair++;
+			else g_assert_not_reached();
 		}
 		/**
-		* Already a msgid but not yet a msgstr. This can't be an empty line, or ?
-		**/
-		if((msgid_ok==TRUE) && (msgstr_ok!=TRUE))
-		{
-			(gchar *)msg->msgid=g_strconcat((gchar *)msg->msgid,(gchar *)g_strdup(temp_char),NULL);
-		}
-		/**
-		* Yet a msgstr and not a comment.
-		**/
-		if((msgstr_ok==TRUE) && (comment_ok!=TRUE) && (temp_char!=NULL) && (strlen(temp_char)>0))
-		{
-			(gchar *)msg->msgstr=g_strconcat((gchar *)msg->msgstr,(gchar *)g_strdup(temp_char),NULL);
-		}
-		/**
-		* we've got both msgid + msgstr -> add the gtr_msg structure.
+		* we've got both msgid + msgstr
 		**/
 		if((msgid_ok==TRUE) && (msgstr_ok==TRUE))
 		{
+			// Check the status...
+			get_msg_status(msg);
+			// Add the GtrMsg structure.
 			messages=g_list_append(messages,(gpointer)msg);
-		}
+			// Reset the status of message
+			msgid_ok=msgstr_ok=comment_ok=FALSE;
+			// Create a new structure.
+			msg=g_new0(GtrMsg,1);
+			}
+	}
+	if ((msgid_ok==TRUE) && (msgstr_ok==FALSE)) {
+		get_msg_status(msg);
+		messages=g_list_append(messages,(gpointer)msg);
+	} else
+		// not needed allocated structure
+		g_free(msg);
+	// close the data file
+	fclose(fs);
+	// If the first message is header (it always should be)
+	if (get_header(GTR_MSG(messages->data)))
+	{
+		// Unlink it from messages list
+		header_li=messages;
+		messages=g_list_remove_link(messages,header_li);
 	}
 	/**
 	* Show an updated status
 	**/
-	sprintf(status,_("Finished reading \"%s\", %i lines."),po,z);
+	g_snprintf(status,128,_("Successfully finished parsing \"%s\", %i lines."),po,lines);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
-	/**
-	* So the other functions can get a point
-	**/
 	file_opened=TRUE;
-	#ifdef HAVE_USLEEP
-	/**
-	* Wait for a small amount of time while the user can read the status message
-	*  above, if he has got usleep on his machine.
-	**/
-	usleep(500000);
-	#endif
-	/**
-	* As we've got finished we can do some nonsense
-	**/
-	enable_buttons();
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));
-	/**
-	* Set the msg_pair count.
-	**/
-	msg_pair_count=msg_pair;
+	file_changed=FALSE;
+	enable_actions("compile","save_as","close",
+		"cut","copy","paste","clear","find","header",
+		"next","last","goto",
+		"translated","fuzzy","stick",
+		"add",NULL);
+	/*
+	 * Set the current message to the first message, and show it
+	 */
+	cur_msg=g_list_first(messages);
+	display_msg(cur_msg);
 }
 
-/**
-* The new routine
-**/
-void parse_the_file(GtkWidget *widget,gpointer useless)
+void parse_the_file(GtkWidget *widget,gpointer of_dlg)
 {
 	gchar *po_file;
 	/**
 	* Get the filename from the widget
 	**/
 	po_file=gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
-	gtk_widget_hide(of_dlg);
 	/**
 	* Call the function above
 	**/
 	parse(po_file);
+	// Destroy the dialog
+	gtk_widget_destroy(GTK_WIDGET(of_dlg));
 }
 
-/**
-* Cleans up the text boxes.
-**/
-void clean_text_boxes()
+// Restores the formatting of a message, done in append_line
+gchar * restore_msg(gchar *given)
 {
-	gtk_text_backward_delete(GTK_TEXT(text1),gtk_text_get_length(GTK_TEXT(text1)));
-	gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
-	gtk_text_set_editable(GTK_TEXT(text1),TRUE);
-}
-
-/**
-* Get's the first msg.
-**/
-void get_first_msg(GtkWidget *widget,gpointer useless)
-{
-	gtr_msg *first=g_new(gtr_msg,1);
-	clean_text_boxes();
-	first=(gtr_msg *)g_list_nth_data(messages,0);
-	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)first->msgid,-1);
-	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)first->msgstr,-1);
-	if(first)
+	GString *rest;
+	gchar *result;
+	gint s,lines=0,here=8;
+	
+	if (!given) return "";
+	
+	rest=g_string_sized_new(strlen(given));
+	for (s=0;s<strlen(given);s++)
 	{
-		gtk_widget_set_sensitive(last_button,TRUE);
-		gtk_widget_set_sensitive(next_button,TRUE);
-		gtk_widget_set_sensitive(first_button,FALSE);
-		gtk_widget_set_sensitive(back_button,FALSE);
-		g_free(first);
-	}
-}
-
-/**
-* Get the previous message.
-**/
-void get_prev_msg(GtkWidget *widget,gpointer useless)
-{
-	gtr_msg *prev=g_new(gtr_msg,1);
-	clean_text_boxes();
-	msg_pair--;
-	if(msg_pair<=0)
-	{
-		prev=(gtr_msg *)g_list_nth_data(messages,0);
-                gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)prev->msgid,-1);
-                gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)prev->msgstr,-1);
-		gtk_widget_set_sensitive(last_button,TRUE);
-                gtk_widget_set_sensitive(next_button,TRUE);
-                gtk_widget_set_sensitive(first_button,FALSE);
-                gtk_widget_set_sensitive(back_button,FALSE);
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("You've reached the first message"));
-	}
-	else
-	{
-		prev=(gtr_msg *)g_list_nth_data(messages,msg_pair);
-		if(g_list_length(messages)>2)
-		{
-			gtk_widget_set_sensitive(next_button,TRUE);
+		if (given[s]=='\n') {
+			if ((!lines) && (s+1<strlen(given))) {
+				lines++;
+				g_string_prepend(rest,"\"\n\"");
+			}
+			if ((s+1<strlen(given)) && (here<78)) {
+				g_string_append(rest,"\\n\"\n\"");
+				here=0;
+				lines++;
+			} 
+			else g_string_append(rest,"\\n");
+		} else 
+		if (given[s]=='\"') {
+			g_string_append(rest,"\\\"");
+			here++;
+		} else
+		if (given[s]=='\t') {
+			g_string_append(rest,"\\t");
+			here++;
+		} else
+		if (given[s]=='\\') {
+			g_string_append(rest,"\\\\");
+			here++;
+		} else {
+			g_string_append_c(rest,given[s]);
 		}
-		gtk_widget_set_sensitive(back_button,TRUE);
-		gtk_widget_set_sensitive(first_button,TRUE);
-		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)prev->msgid,-1);
-                gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)prev->msgstr,-1);
-	}
-	if(prev)
-	{
-		g_free(prev);
-	}
-}
-
-/**
-* Get the next message
-**/
-void get_next_msg(GtkWidget *widget,gpointer useless)
-{
-	gtr_msg *next=g_new(gtr_msg,1);
-	clean_text_boxes();
-	msg_pair++;
-	if(msg_pair==(g_list_length(messages)-1))
-	{
-		next=(gtr_msg *)g_list_nth_data(messages,(g_list_length(messages)-1));
-	        gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)next->msgid,-1);
-		gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)next->msgstr,-1);
-		gtk_widget_set_sensitive(first_button,TRUE);
-                gtk_widget_set_sensitive(back_button,TRUE);
-                gtk_widget_set_sensitive(last_button,FALSE);
-                gtk_widget_set_sensitive(next_button,FALSE);
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("You've reached the last message."));
-	}
-	else
-	{
-		next=(gtr_msg *)g_list_nth_data(messages,msg_pair);
-		if(msg_pair>2)
-		{
-			gtk_widget_set_sensitive(back_button,TRUE);
+		here++;
+		if (here>78) {
+			if (!lines) {
+				g_string_prepend(rest,"\"\n\"");
+				here-=7;
+			} else {
+				g_string_insert(rest,
+					(strrchr(rest->str,' ')-rest->str)+1,
+					"\"\n\"");
+				here=rest->len-(strrchr(rest->str,'"')-rest->str);
+			}
+			lines++;
 		}
-		gtk_widget_set_sensitive(next_button,TRUE);
-                gtk_widget_set_sensitive(last_button,TRUE);
-		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)next->msgid,-1);
-                gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)next->msgstr,-1);
 	}
-	if(next)
-	{
-		g_free(next);
-	}
+	// Free and return
+	result=g_strdup(rest->str);
+	g_string_free(rest,FALSE);
+	return result;
 }
 
-/**
-* Get the last entry.
-**/
-void get_last_msg(GtkWidget *widget,gpointer useless)
+// Writes one message to a file stream
+void write_the_message(gpointer data, gpointer fs)
 {
-	gtr_msg *last=g_new(gtr_msg,1);
+	GtrMsg *msg=GTR_MSG(data);
+	gchar *id, *str;
+	
+	id=restore_msg(msg->msgid);
+	str=restore_msg(msg->msgstr);
+
+	fprintf((FILE *)fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
+		msg->comment, id, str);
+
+	// Free the written strings
+//	g_free(id);
+//	g_free(str);
+}
+
+void actual_write(const gchar *name)
+{
+	FILE *fs;
+	fs=fopen(name,"w");
+	check_file(fs);
+
+	update_msg(cur_msg);
+	write_the_message(header_li->data,(gpointer)fs);
+	// Write every message to the file
+	g_list_foreach(messages,(GFunc)write_the_message,(gpointer)fs);
+	
+	fclose(fs);
+	file_changed=FALSE;
+}
+
+// A callback for OK in Save as... dialog
+void save_the_file(GtkWidget *widget,gpointer sfa_dlg)
+{
+	gchar *po_file;
+	/**
+	* Get the filename from the widget
+	**/
+	po_file=gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg));
+	actual_write(po_file);
+	g_free(i_love_this_file);
+	i_love_this_file=g_strdup(po_file);
+	// And destroy the dialog...
+	gtk_widget_destroy(GTK_WIDGET(sfa_dlg));
+}
+
+// A callback for Save
+void save_current_file(GtkWidget *widget,gpointer useless)
+{
+	if (!file_changed) {
+		if (if_dont_save_unchanged_files) return;
+		if (if_warn_if_no_change) {
+			GtkWidget *dialog;
+			gchar *question;
+			gint reply;
+			question=g_strdup_printf(_("You didn't change anything in\n%s\n!\nDo you want to save it anyway?"),
+				i_love_this_file);
+			dialog=gnome_message_box_new(question,
+				GNOME_MESSAGE_BOX_QUESTION,
+				GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
+				GNOME_STOCK_BUTTON_CANCEL, NULL);
+			show_nice_dialog(&dialog,"gtranslator -- unchanged");
+			reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+			g_free(question);
+			if (reply!=GNOME_YES) return;
+		}
+	}
+	actual_write(i_love_this_file);
+}
+
+void free_a_message(gpointer data, gpointer useless)
+{
+	g_free(GTR_MSG(data)->comment);
+	g_free(GTR_MSG(data)->msgid);
+	g_free(GTR_MSG(data)->msgstr);
+	g_free(data);
+}
+
+void free_messages(void)
+{
+	g_list_foreach(messages,free_a_message,NULL);
+	g_list_free(messages);
+}
+
+void close_file(GtkWidget *widget, gpointer useless)
+{
+	if (!file_opened) return;
+	// If user doesn't know what to do with changed file, return
+	if (!ask_to_save_file) return;
+	free_messages();
+	free_header(ph);
+	ph=NULL;
+	g_list_free_1(header_li);
+	g_free(i_love_this_file);
+	i_love_this_file=NULL;
+	file_opened=FALSE;
 	clean_text_boxes();
-	last=(gtr_msg *)g_list_nth_data(messages,(g_list_length(messages)-1));
-	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)last->msgid,-1);
-	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)last->msgstr,-1);
-	if(last)
-	{
-		gtk_widget_set_sensitive(first_button,TRUE);
-		gtk_widget_set_sensitive(back_button,TRUE);
-		gtk_widget_set_sensitive(last_button,FALSE);
-		gtk_widget_set_sensitive(next_button,FALSE);
-		g_free(last);
+	disable_actions_no_file();
+}
+
+void revert_file(GtkWidget *widget, gpointer useless)
+{
+	gchar *save_this;
+	if (file_changed) {
+		GtkWidget *dialog;
+		gchar *question;
+		gint reply;
+		question=g_strdup_printf(_("File %s\nwas changed. Do you want to revert to saved copy?"),
+			i_love_this_file);
+		dialog=gnome_message_box_new(question,
+			GNOME_MESSAGE_BOX_QUESTION,
+			GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
+			GNOME_STOCK_BUTTON_CANCEL, NULL);
+		show_nice_dialog(&dialog,"gtranslator -- revert");
+		reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+		g_free(question);
+		if (reply!=GNOME_YES) return;
 	}
+	save_this=g_strdup(i_love_this_file);
+	// Let close_file know it doesn't matter if file was changed
+	file_changed=FALSE;
+	close_file(NULL,NULL);
+	parse(save_this);
+	g_free(save_this);
 }
 
 /**
-* The real search function
+* The compile function
+* TODO: should 'msgfmt -v -c POFILE' and show errors found in file
 **/
-gchar *search_do(GtkWidget *widget,gpointer wherefrom)
+void compile(GtkWidget *widget,gpointer useless)
 {
-	switch((gint)wherefrom)
+	/**
+	* Simply compile the .po-file
+	**/
+	gchar *cmd;
+	gint res=1;
+	/**
+	* If a filename has been set already, we can try to compile it.
+	**/
+	if((i_love_this_file!=NULL))
 	{
-		case 1:
-			g_print("SEARCH! HAS TO BE DONE! ;)\n");
-			break;
-		case 2:
-			g_print("RESEARCH! HAS ALSO TO BE DONE! ;)\n");
-			break;
-		default :
-			break;
+		cmd=g_strdup_printf("msgfmt -v -c -o /dev/null %s",
+			i_love_this_file);
+		res=system(cmd);
+		/**
+		* If there has been an error show an error-box
+		**/
+		if(res!=0)
+		{
+			/**
+			* Should be shown if there is a non-zero return value
+			*  from msgfmt FILE > gtr_test.tmp 2>&1
+			**/
+			gtk_widget_show_all(gnome_app_error(GNOME_APP(app1),
+			_("An error occured while msgfmt was executed.\nPlease check your .po file again.")));
+		}
+		else
+		{
+			gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Po-file has been compiled successfully."));
+		}
+		free(cmd);
 	}
 }
+
