@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
 
 	semerentry=semer_entry_new_with_specs(NULL,
 		"Naaaaa, maybe not?!", "EN-US",
-		"Uhm *posw*§§$$!!!", "EN-GTRANSLATOR",
+		"Uhm *pos*!!!", "EN-GTRANSLATOR",
 		"Another test string...");
 	semer_file_add_entry(semerfile, semerentry);
 	semer_entry_free(semerentry);
