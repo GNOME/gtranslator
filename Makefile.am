@@ -13,8 +13,7 @@ EXTRA_DIST= \
 		gtranslator.spec \
 		intltool-extract.in \
 		intltool-merge.in \
-		intltool-update.in \
-		PROJECT.STATUS-DEAD
+		intltool-update.in
 
 cvspack: distdir
 	@-rm -f $(distdir).tar.gz
