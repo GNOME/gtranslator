@@ -172,7 +172,7 @@ dnl -------------------------------------------------------------------
 dnl Check for Scrollkeeper and set the corresponding conditional var if
 dnl  it could be found.
 dnl -------------------------------------------------------------------
-AC_CHECK_PROG(sc_present, scrollkeeper-config, found, no)
+AC_CHECK_PROG(sc_present, scrollkeeper-config, yes, no)
 if test "z$sc_present" = "zyes" ; then
 	AC_MSG_CHECKING([for scrollkeeper >= 0.1.4])
 	_VERSION=`scrollkeeper-config --version|sed -e 's/\.//g'`
