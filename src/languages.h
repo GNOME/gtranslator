@@ -73,7 +73,7 @@ static lang languages[] = {
 	 N_("Arabic"), "ar", "iso-8859-6",
 	 "", "8bit"},
 	{
-	 N_("Azeri"), "az", "iso-8859-9e",
+	 N_("Azeri"), "az", "utf-8",
 	 "", "8bit"},
 	{
 	 N_("Basque"), "eu", "iso-8859-1",
@@ -169,7 +169,7 @@ static lang languages[] = {
 	 N_("Norwegian/Bokmaal"), "no", "iso-8859-1",
 	 "no@li.org", "8bit"},
 	{
-	 N_("Norwegian/Nynorsk"), "no@nynorsk", "iso-8859-1",
+	 N_("Norwegian/Nynorsk"), "nn", "iso-8859-1",
 	 "no@li.org", "8bit"},
 	{
 	 N_("Polish"), "pl", "iso-8859-2",
@@ -181,6 +181,9 @@ static lang languages[] = {
 	 N_("Portuguese/Brazil"), "pt_BR", "iso-8859-1",
 	 "", "8bit"},
 	{
+	 N_("Romanian"), "ro", "iso-8859-2",
+	 "", "8bit"},
+	{
 	 N_("Russian"), "ru", "koi8-r",
 	 "ru@li.org", "8bit"},
 	{
@@ -188,6 +191,9 @@ static lang languages[] = {
 	 "", "8bit"},
 	{
 	 N_("Serbian/Latin"), "sr", "iso-8859-2",
+	 "", "8bit"},
+	{
+	 N_("Slovakian"), "sk", "iso-8859-2",
 	 "", "8bit"},
 	{
 	 N_("Slovenian"), "sl", "iso-8859-2",
@@ -205,6 +211,9 @@ static lang languages[] = {
 	 N_("Swedish"), "sv", "iso-8859-1",
 	 "sv@li.org", "8bit"},
 	{
+	 N_("Tamil"), "ta", "tscii",
+	 "", "8bit"},
+	{
 	 N_("Thai"), "th", "tis-620",
 	 "", "8bit"},
 	{
@@ -213,6 +222,9 @@ static lang languages[] = {
 	{
 	 N_("Ukrainian"), "uk", "koi8-u",
 	 "linux@linux.org.ua", "8bit"},
+	{
+	 N_("Uzbekian"), "uz", "iso-8859-1",
+	 "", "8bit"},
 	{
 	 N_("Vietnamese"), "vi", "tcvn-5712",
 	 "", "8bit"},
