@@ -202,7 +202,22 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 		return message->comment->pure_comment;
 		break;
 	case COL_STATUS:
-		return "status";
+		switch(message->status) {
+		case GTR_MSG_STATUS_UNKNOWN:
+			return "unknown";
+			break;
+		case GTR_MSG_STATUS_TRANSLATED:
+			return "translated";
+			break;
+		case GTR_MSG_STATUS_FUZZY:
+			return "fuzzy";
+			break;
+		case GTR_MSG_STATUS_STICK:
+			return "sticky";
+			break;
+		default:
+			return NULL;
+		}		
 		break;
 	case COL_NUM:
 		return GINT_TO_POINTER (message->pos);
