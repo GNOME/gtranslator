@@ -420,7 +420,7 @@ void r_window(GtkWidget *widget,gpointer useless)
 	 /**
         * The gchar holding the result.
         **/
-        gchar *result=g_new(gchar,1);
+        gchar *result;
 	gchar result_string[256];
 	result_string[0]='\0';
         result=NULL;
@@ -480,13 +480,6 @@ void r_window(GtkWidget *widget,gpointer useless)
 	* Show it now.
 	**/
 	gtk_widget_show(r_window_dlg);
-	/**
-	* Free the gchar.
-	**/
-	if(result)
-	{
-		g_free(result);
-	}
 }
 
 void r_window_hide(GtkWidget *widget,gpointer useless)
