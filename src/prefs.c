@@ -90,13 +90,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	GtkWidget 	*fg_color_label,
 			*bg_color_label,
 			*font_label,
-			*scheme_file_label,
-			*autosave_timeout_label,
-			*max_history_entries_label;
+			*scheme_file_label;
 
-	GtkObject	*autosave_adjustment,
-			*max_history_entries_adjustment;
-	
 	gtranslator_raise_dialog(prefs);
 	
 	/*
@@ -204,19 +199,9 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The fifth page with the Recent files options.
 	 */
-	max_history_entries_label=gtk_label_new(_("Maximal history entries:"));
-	max_history_entries_adjustment=gtk_adjustment_new(10.0, 1.0, 15.0, 1.0,
-		1.0, 1.0);
-	
-	max_history_entries=gtk_spin_button_new(GTK_ADJUSTMENT(
-		max_history_entries_adjustment), 1, 0);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(max_history_entries),
-		GtrPreferences.max_history_entries);
-
-	gtk_table_attach_defaults(GTK_TABLE(fifth_page), 
-		max_history_entries_label, 0, 1, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
-		max_history_entries, 1, 2, 0, 1);
+	max_history_entries=gtranslator_utils_attach_spin_with_label(fifth_page, 0, 
+		_("Maximally showed recent files:"), 3, 15, 
+		GtrPreferences.max_history_entries, gtranslator_preferences_dialog_changed);
 	
 	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
 		_("Check every recent file before listing it up"),
@@ -296,32 +281,22 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The seventh page of the prefs-box: autosaving options.
 	 */
-	autosave_timeout_label=gtk_label_new(_("Autosave timeout in minutes:"));
 	autosave=gtranslator_utils_attach_toggle_with_label(seventh_page, 0,
 		_("Save the po file automatically after a period of time"),
 		GtrPreferences.autosave, gtranslator_preferences_dialog_changed);
 	
-	autosave_with_suffix=gtranslator_utils_attach_toggle_with_label(seventh_page, 2,
+	autosave_with_suffix=gtranslator_utils_attach_toggle_with_label(seventh_page, 1,
 		_("Append a special suffix to the automatically saved files"),
 		GtrPreferences.autosave_with_suffix, gtranslator_preferences_dialog_changed);
 	
-	autosave_suffix=gtranslator_utils_attach_entry_with_label(seventh_page, 3,
+	autosave_suffix=gtranslator_utils_attach_entry_with_label(seventh_page, 2,
 		_("Autosave suffix:"),
 		GtrPreferences.autosave_suffix, gtranslator_preferences_dialog_changed);
 
-	autosave_adjustment=gtk_adjustment_new(GtrPreferences.autosave_timeout,
-		1.0, 30.0, 1.0, 10.0, 10.0);
+	autosave_timeout=gtranslator_utils_attach_spin_with_label(seventh_page, 3,
+		_("Autosave timeout in minutes:"), 1.0, 30.0,
+		GtrPreferences.autosave_timeout, gtranslator_preferences_dialog_changed);
 
-	autosave_timeout=gtk_spin_button_new(GTK_ADJUSTMENT(
-		autosave_adjustment), 1, 0);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(autosave_timeout),
-		GtrPreferences.autosave_timeout);
-
-	gtk_table_attach_defaults(GTK_TABLE(seventh_page),
-		autosave_timeout_label, 0, 1, 1, 2);
-	gtk_table_attach_defaults(GTK_TABLE(seventh_page),
-		autosave_timeout, 1, 2, 1, 2);
-	
 	/*
 	 * Connect the signals to the preferences box.
 	 */
@@ -333,10 +308,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(gnome_file_entry_gtk_entry(
 			   GNOME_FILE_ENTRY(scheme_file))), "changed",
-			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(autosave_timeout), "changed",
-			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(max_history_entries), "changed",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_apply), NULL);

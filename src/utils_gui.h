@@ -64,6 +64,10 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget * table,
 	gint row, const char *label_text, const char *value,
 	GtkSignalFunc callback);
 
+GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
+	gint row, const gchar *label_text, gfloat minimum, gfloat maximum,
+	gfloat value, GtkSignalFunc callback);
+
 /*
  * Returns the added GtkTable to the preferences box.
  */ 

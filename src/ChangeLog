@@ -1,3 +1,17 @@
+2001-06-07  Fatih Demir <kabalak@gtranslator.org>
+
+	* actions.c, gui.c: Remove any old undo code usage.
+
+	* undo-core.c/.h, undo.c/.h: Starting of a redesign of the undo code.
+
+	* learn.c: Fix the empty lines recognition -- should fix the long and
+		empty learned-strings files.
+
+	* prefs.c: Use the new utils methods for attaching the spin buttons.
+
+	* utils_gui.c/.h: Added "gtranslator_utils_attach_spin_with_label"
+		function for adding/attaching spin buttons easier.
+
 2001-06-06  Fatih Demir <kabalak@gtranslator.org>
 
 	* menus.c: Don't include use the xpm icons, we've moved over to png

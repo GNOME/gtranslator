@@ -69,7 +69,7 @@ void gtranslator_learn_init()
 			/*
 			 * Ignore empty lines and lines starting with '#'.
 			 */
-			if(content && content[0]!='\0' && content[0]!='#')
+			if(g_strstrip(content) && content[0]!='#')
 			{
 				learn_buffer=g_list_prepend(learn_buffer,
 					g_strdup(content));

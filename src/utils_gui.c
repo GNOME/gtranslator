@@ -196,6 +196,29 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 	return widget;
 }
 
+GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
+	gint row, const gchar *label_text, gfloat minimum, gfloat maximum,
+	gfloat value, GtkSignalFunc callback)
+{
+	GtkWidget *label;
+	GtkWidget *spin_button;
+	GtkObject *adjustment;
+
+	label=gtk_label_new(label_text);
+	adjustment=gtk_adjustment_new(value, minimum, maximum, 1.0, 1.0, 1.0);
+
+	spin_button=gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 1, 0);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button), value);
+
+	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), spin_button, 1, 2, row, row + 1);
+
+	gtk_signal_connect(GTK_OBJECT(spin_button), "changed",
+		GTK_SIGNAL_FUNC(callback), NULL);
+	
+	return spin_button;
+}
+
 GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(GtkWidget  * probox, gint rows, gint cols,
 			     const char *label_text)
 {

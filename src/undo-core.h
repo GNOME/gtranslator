@@ -28,38 +28,24 @@
  */
 typedef struct {
 	GFunc		function;
-	gpointer	data;
-
+	GFunc		reverse_function;
+	
 	gchar		*name;
+	
+	gpointer	once;
+	gpointer	twice;
+	gpointer	trice;
 } GtrUndoCore;
 
 #define GTR_UNDO_CORE(x) ((GtrUndoCore *) x)
 
 /*
- * Create a new GtrUndoCore and register it already within our internal
- *  mechanism.
+ * Creation/deletion functions.
  */
-GtrUndoCore *gtranslator_undo_core_new(const gchar *name, GFunc func);
+GtrUndoCore *gtranslator_undo_core_new(GFunc function, GFunc reverse_function,
+	const gchar *name, gconstpointer once, gconstpointer twice,
+	gconstpointer trice);
 
-/*
- * Free the given GtrUndoCore.
- */
 void gtranslator_undo_core_free(GtrUndoCore **core);
-
-/*
- * Sets the data field of the GtrUndoCore.
- */
-void gtranslator_undo_core_set_data(GtrUndoCore **core, gpointer data);
-
-/*
- * Gets the data field string from the GtrUndoCore structure.
- */
-gpointer gtranslator_undo_core_get_data(GtrUndoCore **core);
-
-/*
- * Execute the function for a real Undo/Redo -- core function for our Undo
- *  stuff -- performs the undo function with the data in GtrUndoCore.
- */
-void gtranslator_undo_core_run(GtrUndoCore **core, gpointer additional_data);
 
 #endif

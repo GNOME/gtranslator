@@ -275,11 +275,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_utils_save_geometry();
 	
 	/*
-	 * Free the undo/redo lists on exit.
-	 */
-	gtranslator_undo_free_lists();
-	
-	/*
 	 * Free the preferences stuff.
 	 */
 	gtranslator_preferences_free();

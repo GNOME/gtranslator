@@ -198,7 +198,6 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 	gtranslator_message_show(po->current);
 	
 	SWAP_ACTIONS(ACT_UNDO, ACT_REDO);
-	gtranslator_undo();
 }
 
 /*
@@ -207,7 +206,6 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 void gtranslator_actions_redo(GtkWidget *widget, gpointer useless)
 {
 	SWAP_ACTIONS(ACT_REDO, ACT_UNDO);
-	gtranslator_redo();
 }
 
 /*
@@ -218,3 +216,4 @@ void gtranslator_actions_disable_fuzzy_menu_item(void)
 	gtk_check_menu_item_set_active((GtkCheckMenuItem *) 
 		acts[ACT_FUZZY].menu, FALSE);
 }
+

@@ -22,25 +22,27 @@
 /*
  * Creates the new GtrUndoCore structure.
  */
-GtrUndoCore *gtranslator_undo_core_new(const gchar *name, GFunc func)
+GtrUndoCore *gtranslator_undo_core_new(GFunc function, GFunc reverse_function, 
+	const gchar *name, gconstpointer once, gconstpointer twice,
+	gconstpointer trice)
 {
 	GtrUndoCore *core=g_new0(GtrUndoCore, 1);
 	
+	g_return_val_if_fail(function!=NULL, NULL);
 	g_return_val_if_fail(name!=NULL, NULL);
-	g_return_val_if_fail(func!=NULL, NULL);
 
 	core->name=g_strdup(name);
-	(GFunc) core->function=(GFunc) func;
-	core->data=NULL;
+	(GFunc )core->function=(GFunc )function;
+	(GFunc )core->reverse_function=(GFunc )reverse_function;
 
-	if(core)
-	{
-		return core;
-	}
-	else
-	{
-		return NULL;
-	}
+	/*
+	 * Put up the memory values -- can this be good?
+	 */
+	core->once=g_memdup(once, sizeof(once));
+	core->twice=g_memdup(twice, sizeof(twice));
+	core->trice=g_memdup(trice, sizeof(trice));
+
+	return core;
 }
 
 /*
@@ -50,60 +52,17 @@ void gtranslator_undo_core_free(GtrUndoCore **core)
 {
 	if(*core)
 	{
-		g_free((*core)->name);
+		#define if_free(x) \
+			if(GTR_UNDO_CORE(*core)->x) \
+			{ \
+				g_free(GTR_UNDO_CORE(*core)->x); \
+			}
+
+		if_free(name);
+		if_free(once);
+		if_free(twice);
+		if_free(trice);
 		
-		if((*core)->data)
-		{
-			g_free((*core)->data);
-		}
-	}
-}
-
-/*
- * Set/get the internal data field of the GtrUndoCore.
- */
-void gtranslator_undo_core_set_data(GtrUndoCore **core, gpointer data)
-{
-	g_return_if_fail(*core!=NULL);
-	g_return_if_fail(data!=NULL);
-
-	/*
-	 * Free the text data and assign it or does purely assign it.
-	 */
-	if(GTR_UNDO_CORE(*core)->data)
-	{
-		g_free(GTR_UNDO_CORE(*core)->data);
-		GTR_UNDO_CORE(*core)->data=data;
-	}
-	else
-	{
-		GTR_UNDO_CORE(*core)->data=data;
-	}
-}
-
-gpointer gtranslator_undo_core_get_data(GtrUndoCore **core)
-{
-	g_return_val_if_fail(*core!=NULL, NULL);
-	
-	return (GTR_UNDO_CORE(*core)->data);
-}
-
-/*
- * Perform the real Undo/Redo step through the function & data.
- */
-void gtranslator_undo_core_run(GtrUndoCore **core, gpointer additional_data)
-{
-	g_return_if_fail(*core!=NULL);
-	
-	if(GTR_UNDO_CORE(*core)->data)
-	{
-		if(additional_data)
-		{
-			GTR_UNDO_CORE(*core)->function(additional_data, GTR_UNDO_CORE(*core)->data);
-		}
-		else
-		{
-			GTR_UNDO_CORE(*core)->function(NULL, GTR_UNDO_CORE(*core)->data);
-		}
+		#undef if_free
 	}
 }

@@ -23,43 +23,7 @@
 #include "undo-core.h"
 
 /*
- * The commonly-used GtrUndo structure. 
+ * FIXME: Redesign.
  */
-typedef struct {
-	GtrUndoCore 	*core;
-	gchar 		*description;
-} GtrUndo;
-
-#define GTR_UNDO(x) ((GtrUndo *) x)
-
-#define GTR_UNDO_FUNC(x) \
-	(GTR_UNDO_CORE(GTR_UNDO(x)->core)->function)
-
-/*
- * Almost the same like the "gtranslator_undo_new_register" function
- *  but doesn't return any GtrUndo and handles the data locally:
- */
-void gtranslator_undo_add(const gchar *description,
-	const gchar *actionname, GFunc function, gpointer data);
-
-void gtranslator_redo_add(const gchar *description,
-	const gchar *actionname, GFunc function, gpointer data);
-
-/*
- * Undo/Redo the last performed action -- if there's any.
- */
-void gtranslator_undo(void);
-void gtranslator_redo(void);
-
-/*
- * Lists up all GtrUndo elements in our internal lists.
- */
-void gtranslator_undo_get_undo_list(void);
-void gtranslator_redo_get_redo_list(void);
-
-/*
- * Free up all the internal list data for Undo/Redo.
- */
-void gtranslator_undo_free_lists(void);
 
 #endif
