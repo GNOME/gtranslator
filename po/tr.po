@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.19\n"
-"POT-Creation-Date: 2000-06-08 20:01+0200\n"
-"PO-Revision-Date: 2000-06-08 20:05+0200\n"
+"POT-Creation-Date: 2000-06-09 17:46+0200\n"
+"PO-Revision-Date: 2000-06-09 17:46+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -88,7 +88,7 @@ msgstr "gtranslator -- arama-kutusu"
 msgid "Enter your desired search string: "
 msgstr "Aranacak metni belirle: "
 
-#: src/gtr_dialogs.c:143 src/gui.c:259 src/gui.c:260 src/gui.c:459
+#: src/gtr_dialogs.c:143 src/gui.c:225 src/gui.c:226 src/gui.c:425
 msgid "Search"
 msgstr "Ara"
 
@@ -119,13 +119,53 @@ msgstr "gtranslator -- po-dosyasýnda ara"
 msgid "gtranslator -- find"
 msgstr "gtranslator -- ara"
 
-#: src/gtr_dialogs.c:289 src/gui.c:274 src/gui.c:275
+#: src/gtr_dialogs.c:289 src/gui.c:240 src/gui.c:241
 msgid "Find"
 msgstr "Bul"
 
 #: src/gtr_dialogs.c:291
 msgid "Ignore the case"
 msgstr "Yazýlýmýný gözardý et"
+
+#. *
+#. * Create a helping label.
+#. *
+#: src/gtr_dialogs.c:350
+msgid ""
+"With this query window you can query\n"
+"the message db for an existing entry\n"
+"with your query string."
+msgstr ""
+"Bu sorgulama penceresiyle bilgi/tercüme\n"
+"tabanýna bir soruyu yönetip, aradýðýn\n"
+"metni bir ihtimal bulabilirsin ."
+
+#: src/gtr_dialogs.c:361
+msgid "Query"
+msgstr "Sorgula"
+
+#. *
+#. * Set the window-properties.
+#. *
+#: src/gtr_dialogs.c:404
+msgid "gtranslator -- query the message db"
+msgstr "gtranslator -- bilgi/tercüme tabanýný sorgula"
+
+#: src/gtr_dialogs.c:433
+#, c-format
+msgid "Result: `%s'"
+msgstr "Sonuç: `%s'"
+
+#: src/gtr_dialogs.c:450
+msgid "Insert"
+msgstr "Içer"
+
+#. *
+#. * Set the window properties.
+#. *
+#: src/gtr_dialogs.c:454
+msgid "gtranslator -- result fo your query"
+msgstr "gtranslator -- sorgulamanýn sonuçlarý"
 
 #: src/header_stuff.c:38
 msgid "Error while applying the header!"
@@ -177,220 +217,220 @@ msgstr "GeÇerli yerleþim ve boyutu kaydedemedim!"
 msgid "Bye bye!"
 msgstr "Güle Güle!"
 
-#: src/gui.c:230
+#: src/gui.c:196
 msgid "_Compile"
 msgstr "_Dönüþtür"
 
-#: src/gui.c:251
+#: src/gui.c:217
 msgid "C_lear"
 msgstr "Si_l"
 
-#: src/gui.c:252
+#: src/gui.c:218
 msgid "Clears the current selection"
 msgstr "Geçerli seçimi sil"
 
-#: src/gui.c:266 src/gui.c:467
+#: src/gui.c:232 src/gui.c:433
 msgid "ReSearch"
 msgstr "Yen. Ara"
 
-#: src/gui.c:267 src/gui.c:468
+#: src/gui.c:233 src/gui.c:434
 msgid "Search again"
 msgstr "Yeniden Ara"
 
-#: src/gui.c:283
+#: src/gui.c:249
 msgid "_Header"
 msgstr "_Baþlýk"
 
-#: src/gui.c:284
+#: src/gui.c:250
 msgid "Edit the header"
 msgstr "Baþlýðý deðiþtir"
 
-#: src/gui.c:295
+#: src/gui.c:261
 msgid "Refresh"
 msgstr "Yenile"
 
-#: src/gui.c:307
+#: src/gui.c:273
 msgid "_First"
 msgstr "_Ilk"
 
-#: src/gui.c:314
+#: src/gui.c:280
 msgid "_Back"
 msgstr "_Geri"
 
-#: src/gui.c:322
+#: src/gui.c:288
 msgid "_Next"
 msgstr "I_leri"
 
-#: src/gui.c:329
+#: src/gui.c:295
 msgid "_Last"
 msgstr "_Son"
 
-#: src/gui.c:341
-msgid "_Add"
-msgstr "_Ekle"
+#: src/gui.c:307
+msgid "_Add the current message"
+msgstr "Ileti/tercüme tabanýna _ekle"
 
-#: src/gui.c:342
+#: src/gui.c:308
 msgid "Add the current message to the messages DB."
-msgstr "Ileti/tercüme tabanýna ekle."
+msgstr "Geçerli ileti/tercümeyi ileti/tercüme tabanýna ekle."
 
-#: src/gui.c:349
-msgid "_Query"
-msgstr "_Sorgula"
+#: src/gui.c:315
+msgid "_Query for a message"
+msgstr "Bir iletiyi için tabaný _sorgula"
 
-#: src/gui.c:350
+#: src/gui.c:316
 msgid "Query the messages DB for the current msgid."
 msgstr "Ileti/tercüme tabanýný geçerli ileti için sorgula."
 
-#: src/gui.c:368
+#: src/gui.c:334
 msgid "_Online help"
 msgstr "_Yardým"
 
-#: src/gui.c:376
+#: src/gui.c:342
 msgid "gtranslator _website"
 msgstr "gtranslator _websitesi"
 
-#: src/gui.c:377
+#: src/gui.c:343
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator'in internet'teki sitesi"
 
-#: src/gui.c:391 src/gui.c:394
+#: src/gui.c:357 src/gui.c:360
 msgid "_Messages"
 msgstr "_Mesajlar"
 
-#: src/gui.c:398 src/gui.c:401
+#: src/gui.c:364 src/gui.c:367
 msgid "Message _db"
 msgstr "Ileti _tabaný"
 
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:424
+#: src/gui.c:390
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:460
+#: src/gui.c:426
 msgid "Search for a message"
 msgstr "Bir iletiyi ara"
 
-#: src/gui.c:475
+#: src/gui.c:441
 msgid "Goto"
 msgstr "Git"
 
-#: src/gui.c:476
+#: src/gui.c:442
 msgid "Goto this message"
 msgstr "Bu iletiye git"
 
-#: src/gui.c:490
+#: src/gui.c:456
 msgid "Add"
 msgstr "Ekle"
 
-#: src/gui.c:491
+#: src/gui.c:457
 msgid "Add to the messages db."
 msgstr "Ileti/tercüme tabanýna ekle."
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/gui.c:505
+#: src/gui.c:471
 msgid "F/DB"
 msgstr "Bul/BT"
 
-#: src/gui.c:506
+#: src/gui.c:472
 msgid "Find in the personal messages db"
 msgstr "Þahsi bilgi tabanýnda bul"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/gui.c:516
+#: src/gui.c:482
 msgid "F/Po."
 msgstr "Bul/BT"
 
-#: src/gui.c:517
+#: src/gui.c:483
 msgid "Find in the po file "
 msgstr "Po dosyasýnda bul"
 
-#: src/gui.c:528
+#: src/gui.c:494
 msgid "Header"
 msgstr "Baþlýk"
 
-#: src/gui.c:529
+#: src/gui.c:495
 msgid "Edit the header informations"
 msgstr "Baþlýk bilgilerini deðiþtir"
 
-#: src/gui.c:537
+#: src/gui.c:503
 msgid "Compile"
 msgstr "Dönüþtür"
 
-#: src/gui.c:538
+#: src/gui.c:504
 msgid "Compile the po-file"
 msgstr "Po dosyasýný dönüþtür"
 
-#: src/gui.c:546
+#: src/gui.c:512
 msgid "Open"
 msgstr "Aç"
 
-#: src/gui.c:547
+#: src/gui.c:513
 msgid "Open File"
 msgstr "Dosyayý aç"
 
-#: src/gui.c:555
+#: src/gui.c:521
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/gui.c:556
+#: src/gui.c:522
 msgid "Save File"
 msgstr "Dosyayý kaydet"
 
-#: src/gui.c:564
+#: src/gui.c:530
 msgid "Save as"
 msgstr "F. kaydet"
 
-#: src/gui.c:565
+#: src/gui.c:531
 msgid "Save file as"
 msgstr "Dosyayý farklý kaydet"
 
-#: src/gui.c:573
+#: src/gui.c:539
 msgid "First"
 msgstr "Ilk"
 
-#: src/gui.c:574
+#: src/gui.c:540
 msgid "Go to the first message"
 msgstr "Ilk iletiye git"
 
-#: src/gui.c:582
+#: src/gui.c:548
 msgid "Back"
 msgstr "Geri"
 
-#: src/gui.c:583
+#: src/gui.c:549
 msgid "Go one message back"
 msgstr "Bir ileti geri git"
 
-#: src/gui.c:591
+#: src/gui.c:557
 msgid "Options"
 msgstr "Ayarlar"
 
-#: src/gui.c:592
+#: src/gui.c:558
 msgid "gtranslator options"
 msgstr "gtranslator seçenekleri"
 
-#: src/gui.c:600
+#: src/gui.c:566
 msgid "Next"
 msgstr "Ileri"
 
-#: src/gui.c:601
+#: src/gui.c:567
 msgid "Go one message forward"
 msgstr "Bir ileti ileri git"
 
-#: src/gui.c:609
+#: src/gui.c:575
 msgid "Last"
 msgstr "Son"
 
-#: src/gui.c:610
+#: src/gui.c:576
 msgid "Go to the last message"
 msgstr "Son iletiye git"
 
-#: src/gui.c:618 src/gui.c:619
+#: src/gui.c:584 src/gui.c:585
 msgid "Exit"
 msgstr "Çýk"
 
@@ -629,7 +669,7 @@ msgstr "gtranslator tercümelerin listesini kaybetti!\n"
 #. *
 #: src/msg_db.c:118
 #, c-format
-msgid "The message db `%s' hasn't been inited yet!\n"
+msgid "The message db `%s' hasn't been initted yet!\n"
 msgstr "Ileti ve tercüme tabaný olan `%s' açýlmamýþ gibi gözüküyor!\n"
 
 #. *
@@ -649,7 +689,7 @@ msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil.\n"
 #. *
 #: src/msg_db.c:173
 #, c-format
-msgid "The message db `%s' seems not to be inited!\n"
+msgid "The message db `%s' seems not to be initted!\n"
 msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
 
 #. *
@@ -664,11 +704,11 @@ msgstr "Yok be !"
 #. *  print an error message
 #. *
 #: src/msg_db.c:185
-msgid "No messages list (msg_list) available for acting on it!\n"
+msgid "No messages list ( msg_list ) available for acting on it!\n"
 msgstr "Iþlenilecek bir ileti/tercüme tabaný ( msg_list ) yok ki!\n"
 
 #: src/msg_db.c:222
-msgid "No entry found in the message db."
+msgid "No entry found in the messages db "
 msgstr "Ileti/tercüme tabanýnda böyle bir birim yoktur."
 
 #. *
@@ -701,20 +741,20 @@ msgstr "Geçerli dosya : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:169
+#: src/parse.c:168
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
-#: src/parse.c:186
+#: src/parse.c:185
 msgid "Parsing has been successfull."
 msgstr "Tarama baþarýlý oldu."
 
-#: src/parse.c:261
+#: src/parse.c:260
 msgid "You've reached the first message"
 msgstr "Ilk iletiye vardýn ."
 
-#: src/parse.c:292
+#: src/parse.c:291
 msgid "You've reached the last message."
 msgstr "Son iletiye vardýn ."
 

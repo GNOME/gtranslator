@@ -142,8 +142,7 @@ void parse(gchar *po)
 			/**
 			* The msgstr
 			**/
-			zamane=strtok(strtok(temp_char,"msgstr \""),"\"");
-			(gchar *)msg->msgstr=(gchar *)g_strdup(zamane);
+			(gchar *)msg->msgstr=(gchar *)g_strdup(temp_char);
 			msgstr_ok=TRUE;
 			msg_pair++;
 		}

@@ -665,7 +665,7 @@ create_app1 (void)
 	/**     
 	* Get the drag-sets
 	**/
-	gtk_drag_dest_set(GTK_WIDGET(app1), GTK_DEST_DEFAULT_ALL, dragtypes,
+	gtk_drag_dest_set(GTK_WIDGET(app1), GTK_DEST_DEFAULT_ALL | GTK_DEST_DEFAULT_HIGHLIGHT, dragtypes,
 	        sizeof(dragtypes)/sizeof(dragtypes[0]),GDK_ACTION_COPY);
 	/**     
 	* Connecting the function
