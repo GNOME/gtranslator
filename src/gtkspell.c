@@ -31,6 +31,8 @@
 #include <stdlib.h>
 #include <errno.h>
 
+#include "prefs.h"
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif 
@@ -614,29 +616,66 @@ static void popup_menu(GtkText *gtktext, GdkEventButton *eb, int orig_mouse) {
 
         if (url_test(buf))
         {
-            if (orig_mouse == 3) 
-            {
-                lstchar = buf[strlen(buf)-1];
-                if (!isalpha(lstchar) && lstchar != '/')
-                    buf[strlen(buf)-1] = '\0';
-		gtk_menu_popup(make_url_menu(gtktext, buf), NULL, NULL,
-		               NULL, NULL, eb->button, eb->time);
-                gnome_url_show(buf);
-            }
-                
+	    /*
+	     * Again check for the popup_menu preference and then switch
+	     *  the buttons.
+	     */
+	    if(wants.popup_menu)
+	    {
+                if (orig_mouse == 2) 
+            	{
+            	    lstchar = buf[strlen(buf)-1];
+            	    if (!isalpha(lstchar) && lstchar != '/')
+                	buf[strlen(buf)-1] = '\0';
+		    gtk_menu_popup(make_url_menu(gtktext, buf), NULL, NULL,
+			NULL, NULL, eb->button, eb->time);
+            	    gnome_url_show(buf);
+            	}
+	    }
+	    else
+	    {
+		if (orig_mouse == 3)
+		{
+		    lstchar = buf[strlen(buf)-1];
+		    if (!isalpha(lstchar) && lstchar != '/')
+		    	buf[strlen(buf)-1] = '\0';
+		    gtk_menu_popup(make_url_menu(gtktext, buf), NULL, NULL,
+			NULL, NULL, eb->button, eb->time);
+		    gnome_url_show(buf);
+		}
+	    }
+	    
         }
         else
         {
-            if (orig_mouse == 3) 
-            {    
-                list = misspelled_suggest(buf);
-                if (list != NULL) {
+	    if(wants.popup_menu)
+	    {
+        	if (orig_mouse == 2) 
+        	{    
+            	    list = misspelled_suggest(buf);
+        	    if (list != NULL) {
+                	gtk_menu_popup(make_menu(list, gtktext),
+                    	   NULL, NULL, NULL, NULL,
+                           eb->button, eb->time);
+                    for (l = list; l != NULL; l = l->next)
+                            g_free(l->data);
+                    g_list_free(list);
+		    }
+        	}
+	    }
+	    else
+	    {
+		if (orig_mouse == 2) 
+        	{    
+            	    list = misspelled_suggest(buf);
+            	    if (list != NULL) {
                     gtk_menu_popup(make_menu(list, gtktext),
                                    NULL, NULL, NULL, NULL,
                                    eb->button, eb->time);
                     for (l = list; l != NULL; l = l->next)
                             g_free(l->data);
                     g_list_free(list);
+		    }
                 }
             }
         }
@@ -661,7 +700,25 @@ static gint button_press_intercept_cb(GtkText *gtktext, GdkEvent *e, gpointer d)
 	if (e->type != GDK_BUTTON_PRESS) return FALSE;
 	eb = (GdkEventButton*) e;
 
-	if (eb->button == 2) return FALSE;
+	/*
+	 * Only allow the right-click to be send to gtkspell if
+	 *  the popup menu if disabled -- in the other case gtkspell
+	 *   takes the middle click.
+	 */   
+	if(wants.popup_menu)
+	{
+		if(eb->button==3)
+		{
+			return FALSE;
+		}
+	}
+	else
+	{
+		if(eb->button==2)
+		{
+			return TRUE;
+		}
+	}
 
         /* forge the leftclick */
         orig_mouse = eb->button;

@@ -1,5 +1,13 @@
 2001-01-03  Fatih Demir	<kabalak@gmx.net>
 
+	* gtkspell.c: Changed the mouse button on which
+		the gtkspell suggestion list reacts from 
+		 the right one (which is already used by the
+		  eventually enabled popup menu) to the 
+		   middle one (this is only conditional; if the
+		    popup menu is disabled, it's still on the
+		     right mouse button).
+
 	* session.c/.h: Reformatted the comments.
 
 	* gtkspell.h: Change the #ifndef/define pair for the
