@@ -1164,7 +1164,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 			switch(event->keyval)
 			{
 				case GDK_Left:
-				case GDK_Down:
+				case GDK_Up:
 					IfGood(the_navibar[1])
 					{
 						goto_prev_msg(NULL, NULL);
@@ -1172,7 +1172,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					break;
 				
 				case GDK_Right:
-				case GDK_Up:
+				case GDK_Down:
 					IfGood(the_navibar[3])
 					{
 						goto_next_msg(NULL, NULL);
