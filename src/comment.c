@@ -53,6 +53,7 @@ static GtrCommentPrefixTypeGroup GtrPrefixTypes[] =
 	{ "#,", FLAG_COMMENT },
 	{ "#-", INTERNAL_COMMENT },
 	{ "#>", INTERNAL_COMMENT },
+	{ "* ", NO_COMMENT },
 	{ NULL, NO_COMMENT }
 };
 

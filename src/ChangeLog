@@ -1,5 +1,20 @@
 2001-08-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* comment.c: Added C source comment prefix "* " with NO_COMMENT
+		type to the internal comment prefixes -- the "* " parts
+		 of source comments are now also strip'd out of the 
+		  "pure_comment" part in a GtrComment.
+
+	* parse.c: Added a missing "nothing_changes=FALSE" assignment on
+		file closure -- fixes the weird behaviour of the actions
+		 after closing a file and opening a file just after the
+		  last closure -- the menu entries/toolbar buttons were
+		   just not reacting right.
+
+	* messages-table.c: Expand the tree if we're viewing an translated
+		entry in the collapse-all-translated-entry modus -- fixes a
+		 nasty crash with collapsed Translated entries tree.
+
 	* main.c: Check here for some environment values which could give
 		us a generally different locale directory to query all
 		 domains for ("GTRANSLATOR_LOCALEDIR" and "GNOMELOCALEDIR"

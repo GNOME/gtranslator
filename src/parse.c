@@ -880,6 +880,8 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	gtranslator_config_init();
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
 	gtranslator_config_close();
+
+	nothing_changes = FALSE;
 }
 
 void gtranslator_file_revert(GtkWidget * widget, gpointer useless)

@@ -719,9 +719,25 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 	g_return_if_fail(message!=NULL);
 	
 	node=g_hash_table_lookup(hash_table, message);
-	
+
 	if(node)
 	{
+		/*
+		 * Expand the node if we're calling a translated entry in a
+		 *  translated entry collapsing tree region.
+		 */
+		if((message->status & GTR_MSG_STATUS_TRANSLATED) &&
+			GtrPreferences.collapse_translated)
+		{
+			e_tree_node_set_expanded_recurse(E_TREE(tree), 
+				translated_node, TRUE);
+		}
+		else
+		{
+			e_tree_node_set_expanded_recurse(E_TREE(tree),
+				translated_node, FALSE);
+		}
+		
 		e_tree_set_cursor(E_TREE(tree), node);
 	}
 }
