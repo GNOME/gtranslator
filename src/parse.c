@@ -301,8 +301,10 @@ static gchar *restore_msg(gchar * given)
 	gchar *result;
 	gint s, lines = 0, here = 8;
 
-	if (!given)
+	if(!given||strlen(given)<0)
+	{
 		return "";
+	}
 
 	rest = g_string_sized_new(strlen(given));
 	for (s = 0; s < strlen(given); s++) {
@@ -346,7 +348,7 @@ static gchar *restore_msg(gchar * given)
 		}
 	}
 	result = g_strdup(rest->str);
-	g_string_free(rest, FALSE);
+	g_string_free(rest, TRUE);
 	return result;
 }
 

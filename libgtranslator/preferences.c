@@ -43,12 +43,17 @@ void gtranslator_config_init()
 	gconf_client_add_dir(client,"/apps/gtranslator",
 		GCONF_CLIENT_PRELOAD_NONE, &error);
 	/**
-	* If there's an error.
-	**/
+	* Check for error descriptions.
+	**/	
 	if(error)
 	{
-		g_error(_("Error during GConf initialization: `%s'!"),error->message);
+		g_warning(_("Error during GConf initialization through libgtranslator:\n%s"),
+			error->message);
 	}
+	/**
+	* Clean up the error.
+	**/
+	g_clear_error(&error);			
 	#else
 	gnome_config_push_prefix("/gtranslator/");
 	#endif
@@ -95,19 +100,23 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 {
 	if((!path) && value)
 	{
-		g_warning(_("Can't set the string `%s' for a non-defined path!\n"),value);
+		g_warning(_("Can't set the string `%s' for a non-defined path!\n"),
+			value);
 	}
 	else
 	{
 		if(!value)
 		{
-			g_warning(_("No string defined for the path `%s'!"),path);
+			g_warning(_("No string defined for the path `%s'!"),
+				path);
 		}
 		else
 		{
 			#ifdef GCONF_IS_PRESENT
-			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-			gconf_client_set_string(client, private_path, value, &error);
+			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
+				path);
+			gconf_client_set_string(client, private_path, value,
+				&error);
 			#else
 			gnome_config_set_string(path, value);
 			#endif
@@ -129,8 +138,10 @@ gint gtranslator_config_get_int(gchar *path)
 		return 1;
 	}
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-	return (gconf_client_get_int(client, private_path, &error));
+	private_path=g_strdup_printf("%s/%s","/apps/gtranslator"
+		,path);
+	return (gconf_client_get_int(client, private_path,
+		&error));
 	#else
 	return (gnome_config_get_int(path));
 	#endif
@@ -143,19 +154,23 @@ void gtranslator_config_set_int(gchar *path, gint value)
 {
 	if((!path) && value)
 	{
-		g_warning(_("Can't set the value `%i' for a non-defined path!"),value);
+		g_warning(_("Can't set the value `%i' for a non-defined path!"),
+			value);
 	}
 	else
 	{
 		if(!value)
 		{
-			g_warning(_("No value defined for the path `%s'!"),path);
+			g_warning(_("No value defined for the path `%s'!"),
+				path);
 		}
 		else
 		{
 			#ifdef GCONF_IS_PRESENT
-			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-			gconf_client_set_int(client, private_path, value, &error);
+			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
+				path);
+			gconf_client_set_int(client, private_path, value,
+				&error);
 			#else
 			gnome_config_set_int(path, value);
 			#endif
@@ -176,7 +191,8 @@ gboolean gtranslator_config_get_bool(gchar *path)
 	}
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-	return (gconf_client_get_bool(client, private_path, &error));
+	return (gconf_client_get_bool(client, private_path,
+		&error));
 	#else
 	return (gnome_config_get_bool(path));
 	#endif
@@ -191,8 +207,10 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 	else
 	{
 		#ifdef GCONF_IS_PRESENT
-		private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-		gconf_client_set_bool(client, private_path, value, &error);
+		private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
+			path);
+		gconf_client_set_bool(client, private_path, value,
+			&error);
 		#else
 		gnome_config_set_bool(path, value);
 		#endif
@@ -200,14 +218,42 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 }
 
 /**
-* This returns the config-files location.
+* This is the last time gtranslator has run.
 **/
-gchar *gtranslator_config_get_absolute_path()
+gchar *gtranslator_config_get_last_run_date()
 {
 	#ifdef GCONF_IS_PRESENT
-	g_warning("Hmm, I'd learn how to get gconf's file location :)");
-		return "HEHE";
+	return (gconf_client_get_string(client, "informations/last_run_on",
+		&error));
 	#else
-	return( g_strdup_printf("%s/%s",g_get_home_dir(),".gnome/gtranslator"));
+	return (gnome_config_get_string("informations/last_run_on"));
+	#endif
+}
+
+/**
+* This writes the last run date.
+**/
+void gtranslator_config_set_last_run_date()
+{
+	/**
+	* Some time stuff.
+	**/
+	time_t present_time;
+	struct tm *timebox;
+	gchar date[17];
+	/**
+	* Get the current time.
+	**/
+	present_time=time(NULL);
+	timebox=localtime(&present_time);
+	/**
+	* Set a date identifier.
+	**/
+	strftime(date, 17, "%Y-%m-%d %H:%M", timebox);
+	#ifdef GCONF_IS_PRESENT
+	gconf_client_set_string(client, "/apps/gtranslator/informations/last_run_on",
+		date, &error);
+	#else
+	gnome_config_set_string("informations/last_run_on", date);
 	#endif
 }

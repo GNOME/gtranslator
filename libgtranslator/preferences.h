@@ -18,6 +18,7 @@
 #define PREFERENCES_H 1
 
 #include <parse-db.h>
+#include <time.h>
 
 /**
 * Include the GConf headers if they're present.
@@ -58,9 +59,9 @@ void gtranslator_config_set_string(gchar *path, gchar *value);
 gchar *gtranslator_config_get_string(gchar *path);
 
 /**
-* This happens to eb an equivalent to the gnome_config_get_real_path
-*  function from libgnome.
+* These functions store/recall the last run date of gtranslator.
 **/
-gchar *gtranslator_config_get_absolute_path();
+gchar *gtranslator_config_get_last_run_date();
+void gtranslator_config_set_last_run_date();
 
 #endif

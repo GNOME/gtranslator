@@ -41,7 +41,7 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 	gtranslator_config_close();
 	
 	
-	argv[2] = gtranslator_config_get_absolute_path();
+	argv[2] = NULL;
 
 	gnome_client_set_discard_command(client, 3, argv);
 
@@ -56,9 +56,7 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 void restore_session(GnomeClient * client)
 {
 	guint num;
-	gchar *prefix;
 
-	prefix = gnome_client_get_config_prefix(client);
 	gtranslator_config_init();
 	num = gtranslator_config_get_int("state/message_number");
 	gtranslator_config_close();

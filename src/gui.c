@@ -11,6 +11,7 @@
 
 #include "gui.h"
 #include "prefs.h"
+#include <libgtranslator/preferences.h>
 #include "dialogs.h"
 #include "parse.h"
 #include "header_stuff.h"
@@ -451,6 +452,9 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 	close_file(NULL, NULL);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1), _("Bye bye!"));
 	save_geometry();
+	/**
+	* Free the preferences stuff.
+	**/
 	free_prefs();
 	gnome_regex_cache_destroy(rxc);
 	gtk_main_quit();
@@ -496,7 +500,10 @@ void update_msg(void)
 	GtrMsg *msg = GTR_MSG(po->current->data);
 	if (!message_changed)
 		return;
-	g_free(msg->msgstr);
+	if(msg->msgstr)
+	{
+		g_free(msg->msgstr);
+	}
 	len = gtk_text_get_length(GTK_TEXT(trans_box));
 	if (len) {
 		if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
