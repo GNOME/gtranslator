@@ -66,7 +66,7 @@ int main(int argc,char *argv[])
 		* Again this preliminary GConf stuff.
 		**/
 		#ifdef GCONF_IS_PRESENT
-		if(!(gconf_init(argc,argv, &error))
+		if(!(gconf_init(argc,argv, &error)))
 		{
 			/**
 			* Print some more exact informations on the GConf init-error.

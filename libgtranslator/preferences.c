@@ -15,6 +15,7 @@
 **/
 
 #include <preferences.h>
+
 /**
 * Cleanup the namespace. Remove the '_' defines for now ...
 **/
