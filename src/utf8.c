@@ -91,7 +91,6 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	po->header->charset="UTF-8";
 
 	setlocale(LC_ALL, old_env);
-	g_free(old_env);
 }
 
 /*
@@ -114,5 +113,21 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 		(GFreeFunc) gtranslator_utf8_convert_message_from_utf8);
 
 	setlocale(LC_ALL, old_env);
-	g_free(old_env);
+}
+
+/*
+ * Execute the whole stuff "function" for all list entries.
+ */
+void convert_all_messages(GList *list, GFreeFunc function)
+{
+	g_return_if_fail(list!=NULL);
+	
+	while(list!=NULL)
+	{
+		GtrMsg *message=GTR_MSG(list->data);
+		
+		function(&message);
+		
+		list=list->next;
+	}
 }

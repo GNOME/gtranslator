@@ -264,7 +264,7 @@ static GtrLanguage languages[] = {
 	},
 	{
 	 N_("Turkish"), "tr", "iso-8859-9",
-	 "gnome-turk@gnome.org", "8bit"		
+	 "gnome-turk@gnome.org", "8bit"	
 	},
 	{
 	 N_("Ukrainian"), "uk", "koi8-u",

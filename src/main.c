@@ -146,23 +146,31 @@ int main(int argc, char *argv[])
 	 */
 	if(build_informations)
 	{
+		#define NICE_PRINT(x); \
+			g_print("\n\t\t%s", x); \
+			g_print("\n\t");
+
 		g_print("\t");
 		g_print(_("gtranslator build informations/specs:"));
 		g_print("\n\n\t");
-		g_print(_("Version and build date: %s"), BUILD_STRING);
-		g_print("\n\t");
-		g_print(_("Backends directory:     %s"), BACKENDS_DIR);
-		g_print("\n\t");
-		g_print(_("TM backends directory:  %s"), BACKENDS_TM_DIR);
-		g_print("\n\t");
-		g_print(_("Colorschemes directory: %s"), SCHEMESDIR);
-		g_print("\n\t");
-		g_print(_("Scripts directory:      %s"), SCRIPTSDIR);
-		g_print("\n\t");
-		g_print(_("Window icon:            %s"), WINDOW_ICON);
-		g_print("\n\t");
-		g_print(_("Own locale directory:   %s"), GNOMELOCALEDIR);
-		g_print("\n\n");
+		g_print(_("Version and build date:"));
+		NICE_PRINT(BUILD_STRING);
+		g_print(_("Build-Glib/Gtk+/Gnome versions:"));
+		NICE_PRINT(BUILD_VERSIONS);
+		g_print(_("Backends directory:"));
+		NICE_PRINT(BACKENDS_DIR);
+		g_print(_("TM backends directory:"));
+		NICE_PRINT(BACKENDS_TM_DIR);
+		g_print(_("Colorschemes directory:"));
+		NICE_PRINT(SCHEMESDIR);
+		g_print(_("Scripts directory:"));
+		NICE_PRINT(SCRIPTSDIR);
+		g_print(_("Window icon:"));
+		NICE_PRINT(WINDOW_ICON);
+		g_print(_("Own locale directory:"));
+		NICE_PRINT(GNOMELOCALEDIR);
+
+		#undef NICE_PRINT
 
 		exit(1);
 	}

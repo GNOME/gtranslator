@@ -1,4 +1,14 @@
 2001-05-06  Fatih Demir <kabalak@gtranslator.org>
+	
+	* utf8.c & utils.c: Don't free the "old_env" variables and take 
+		over the convert_all_messages function from utils.c.
+
+	* main.c: Also show up the build versions of Glib/Gtk+/Gnome libs
+		and make it easier for translators by separating the formats
+		 and the plain text fragments.
+
+	* Makefile.am, defines.config: Added Glib/Gtk+/Gnome libs building/
+		compiling versions to the defines.
 
 	* about.c/.h & \*.*: Small re-rename to gtranslator_about_dialog.
 

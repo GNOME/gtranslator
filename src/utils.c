@@ -69,23 +69,6 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 }
 
 /*
- * Execute the whole stuff "function" for all list entries.
- */
-void convert_all_messages(GList *list, GFreeFunc function)
-{
-	g_return_if_fail(list!=NULL);
-	
-	while(list!=NULL)
-	{
-		GtrMsg *message=GTR_MSG(list->data);
-		
-		function(&message);
-		
-		list=list->next;
-	}
-}
-
-/*
  * Subsequently filter out all extension containing filename from the directory.
  * 
  * Should be useful for many cases.

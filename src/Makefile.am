@@ -15,12 +15,15 @@ INCLUDES = \
 
 bin_PROGRAMS = gtranslator
 
+GTRANSLATOR_BUILD_VERSIONS = "$(shell glib-config --version) / $(shell gtk-config --version) / $(shell gnome-config --modversion gnome|sed -e s,gnome-libs-,,)"
+
 %.include: %.config
 	sed \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&BACKENDS_DIR","$(libdir)/backends",g \
 	-e s,"&BACKENDS_TMDIR","$(libdir)/backends/translation-memories",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
+	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&SCHEMESDIR","$(datadir)/gtranslator/colorschemes",g \
 	-e s,"&SCRIPTSDIR","$(datadir)/gtranslator/scripts",g \
