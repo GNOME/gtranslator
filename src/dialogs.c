@@ -688,7 +688,7 @@ static void find_dlg_clicked(GtkDialog * dialog, gint button,
 		{
 			gchar	*newstr;
 			
-			newstr=nautilus_str_strip_chr(find_what, GtrPreferences.hotkey_chars[0]);
+			newstr=nautilus_str_strip_chr(find_what, GtrPreferences.hotkey_char);
 			GTR_FREE(find_what);
 			find_what=newstr;
 		}

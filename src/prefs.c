@@ -53,7 +53,7 @@ static void toggle_sensitive(GtkWidget *widget, gpointer data);
 static GtkWidget
 	*authors_name, *authors_email, *authors_language,
 	*mime_type, *encoding, *lcode, *lg_email, *dictionary_file,
-	*scheme_file, *autosave_suffix;
+	*scheme_file, *autosave_suffix, *hotkey_chars;
 
 /*
  * The toggle buttons/labels used in the preferences box:
@@ -204,6 +204,37 @@ GtkWidget *gtranslator_preferences_combo_new(GList  * list,
 }
 
 
+GtkWidget *gtranslator_preferences_hotkey_char_widget_new(GtkSizeGroup *size_group)
+{
+	GtkWidget *box, *label, *rb_1, *rb_2;
+
+	box=gtk_hbox_new(FALSE, 2);
+	label=gtk_label_new(_("Hotkey indicating character:"));
+
+	rb_1=gtk_radio_button_new_with_label(NULL, "\"_\" (GNOME)");
+	rb_2=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(rb_1), "\"&\" (KDE)");
+
+	if(GtrPreferences.hotkey_char=='_')
+	{
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rb_1), TRUE);
+	}
+	else
+	{
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rb_2), TRUE);
+	}
+	
+	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(label), FALSE, TRUE, 2);
+
+	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(rb_1), FALSE, FALSE, 2);
+	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(rb_2), FALSE, FALSE, 2);
+
+	gtk_size_group_add_widget(GTK_SIZE_GROUP(size_group), GTK_WIDGET(box));
+
+	g_signal_connect(G_OBJECT(rb_1), "toggled", G_CALLBACK(gtranslator_preferences_dialog_changed), GINT_TO_POINTER(10));
+	g_signal_connect(G_OBJECT(rb_2), "toggled", G_CALLBACK(gtranslator_preferences_dialog_changed), GINT_TO_POINTER(11));
+
+	return box;
+}
 
 GtkWidget *gtranslator_preferences_entry_new(const char *value,
 					     GtkSizeGroup *size_group, 
@@ -260,7 +291,6 @@ GtkWidget *gtranslator_preferences_font_picker_new(const gchar *title_text,
 }
 
 
-
 GtkWidget *gtranslator_preferences_color_picker_new(const gchar *title_text,
 						    GtkSizeGroup *size_group, 
 						    ColorType color_type,
@@ -280,7 +310,7 @@ GtkWidget *gtranslator_preferences_color_picker_new(const gchar *title_text,
 	return color_selector;
 }
 
-void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
+void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 {
  	gchar	*old_colorscheme=NULL;
  	GtkObject *adjustment;
@@ -382,6 +412,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 							  GtrPreferences.dot_char,
 							  G_CALLBACK(gtranslator_preferences_dialog_changed));
 	gtk_box_pack_start (GTK_BOX (category_box), use_dot_char, FALSE, FALSE, 0);
+
+	hotkey_chars = gtranslator_preferences_hotkey_char_widget_new(label_size_group);
+	gtk_box_pack_start (GTK_BOX (category_box), hotkey_chars, FALSE, FALSE, 0);
+	
         own_fonts = gtranslator_preferences_toggle_new(_("Apply own fonts"),
 						       GtrPreferences.use_own_fonts,
 						       G_CALLBACK(gtranslator_preferences_dialog_changed));
@@ -707,7 +741,6 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 		gtk_spin_button_get_value(GTK_SPIN_BUTTON(
 			min_match_percentage));
 
-	gtranslator_config_set_string("informations/hotkey_chars", GtrPreferences.hotkey_chars);
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
 	gtranslator_config_set_string("informations/autosave_suffix", 
 		GtrPreferences.autosave_suffix);
@@ -737,6 +770,11 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	gtranslator_config_set_string("interface/translation_font",
 		GtrPreferences.msgstr_font);
 
+	/*
+	 * Assign our attended hotkey character from the prefs dialog.
+	 */
+	gtranslator_config_set_int("editor/hotkey_char", GtrPreferences.hotkey_char);
+	
 	/*
 	 * Apply the given color scheme.
 	 */ 
@@ -906,6 +944,21 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 			c++;
 		}
 		break;
+	case 10:
+		/*
+		 * This is the next group where we're handling the hotkey char changes.
+		 */
+		if(GTK_TOGGLE_BUTTON(widget)->active)
+		{
+			GtrPreferences.hotkey_char='_';
+		}
+		break;
+	case 11:
+		if(GTK_TOGGLE_BUTTON(widget)->active)
+		{
+			GtrPreferences.hotkey_char='&';
+		}
+		break;
 	default:
 		break;
 	}
@@ -933,14 +986,15 @@ void gtranslator_preferences_read(void)
 	GtrPreferences.msgstr_font = 
 		gtranslator_config_get_string("interface/translation_font");
 
-	GtrPreferences.hotkey_chars = gtranslator_config_get_string("informations/hotkey_chars");
+	GtrPreferences.hotkey_char = gtranslator_config_get_int("editor/hotkey_char");
 
 	/*
-	 * Beware us of stupid, non-existing hotkey characters please!
+	 * Beware us of stupid, non-existing hotkey characters please! If so,
+	 *  then assign the standard GNOME '_' hotkey mnemonicial for it.
 	 */
-	if(!GtrPreferences.hotkey_chars)
+	if(!GtrPreferences.hotkey_char || GtrPreferences.hotkey_char<=1)
 	{
-		GtrPreferences.hotkey_chars=g_strdup("_");
+		GtrPreferences.hotkey_char='_';
 	}
 
 	GtrPreferences.dictionary = gtranslator_config_get_string("dict/file");
@@ -1049,7 +1103,6 @@ void gtranslator_preferences_free()
 {
 	GTR_FREE(GtrPreferences.autosave_suffix);
 	GTR_FREE(GtrPreferences.spell_command);
-	GTR_FREE(GtrPreferences.hotkey_chars);
 	GTR_FREE(GtrPreferences.dictionary);
 	GTR_FREE(GtrPreferences.msgid_font);
 	GTR_FREE(GtrPreferences.msgstr_font);

@@ -65,6 +65,8 @@ struct {
 	guint autosave_with_suffix	: 1;
 	guint max_history_entries	: 10;
 
+	guint hotkey_char;
+
 	/*
 	 * The autosave timeout in minutes.
 	 */
@@ -80,8 +82,6 @@ struct {
 	gchar *msgid_font;
 	gchar *msgstr_font;
 	gchar *scheme;
-
-	gchar *hotkey_chars;
 } GtrPreferences;
 
 /*

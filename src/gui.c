@@ -534,9 +534,20 @@ void gtranslator_application_bar_update(gint pos)
 	}
 	
 	/*
-	 * Assign the first part.
+	 * Assign the toolbar message string according to the message quality.
+	 *
+	 * If it's a plural forms message we do have got a more enhanced and
+	 *  longer message there indicating a plural forms message.
+	 *
 	 */
-	str=g_strdup_printf(_("Message %d / %d / Status: %s"), pos + 1, po->length, status);
+	if(msg->msgid_plural)
+	{
+		str=g_strdup_printf(_("Message %d / %d / Status: %s (Message contains plural forms)"), pos + 1, po->length, status);
+	}
+	else
+	{
+		str=g_strdup_printf(_("Message %d / %d / Status: %s"), pos + 1, po->length, status);
+	}
 	
 	/*
 	 * Set the appbar text.

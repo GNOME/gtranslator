@@ -1,5 +1,16 @@
 2003-08-27  Fatih Demir <kabalak@gtranslator.org>
 
+	* gui.c: Adept the application bar message to also indicate whether
+		we've got currently a plural forms message present (think of
+		 the case when you turned the "plural forms dialog" option off
+		  in your prefs).
+
+	* dialogs.c, prefs.[ch] & prefs_init.c: Added a hotkey selection to
+		the prefs dialog where you can simply select from the GNOME/
+		 KDE hotkey chars '_' and '&' ATM and the full implementation
+		  of this stuff is also already done there and accepted in the
+		   find dialog; solves b.g.o #59206 after a long time :-)
+
 	* gui.c: Removed our own keypress handler to get the Ctrl+Left/Right
 		and such things going - it works by itself now in the Gtk+ 2.x
 		 days and therefore it has to go now; w/ the keypress handler
