@@ -731,7 +731,7 @@ gchar *gtranslator_utils_get_locale_charset(void)
 			if(!nautilus_strcmp(languages[c].name, po->header->language) ||
 				!nautilus_strcmp(_(languages[c].name), po->header->language))
 			{
-				return languages[c].enc;
+				return g_strdup(languages[c].enc);
 			}
 		}
 

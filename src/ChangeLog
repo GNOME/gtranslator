@@ -1,5 +1,9 @@
 2001-08-26  Fatih Demir <kabalak@gtranslator.org>
 
+	* utils.c: Fixes another quite nasty crash -- g_strdup the return value
+		in "gtranslator_utils_get_locale_charset" so that we can free
+		 it later on quite safely.
+
 	* color-schemes.c, main.c & prefs.c: Fixed #59566 -- typo/mal-thinko
 		"informations" corrected to be "information".
 
