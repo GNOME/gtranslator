@@ -7,20 +7,17 @@
 %define version		@VERSION@
 %define	default_release	1
 %define release		%{!?CUSTOM_RELEASE:%default_release}
-%define prefix		/usr
-%define	sysconfdir	/etc
 
 Name: 		gtranslator
 Vendor: 	GNOME Project
 Distribution: 	Any
-Version: 	%{version}
+Version: 	@VERSION@
 Release: 	%{release}
 Copyright: 	GPL
 Group: 		Development/Tools
-Source:		http://www.gtranslator.org/download/releases/%{version}/gtranslator-%{version}.tar.gz
+Source:		http://www.gtranslator.org/download/releases/%{version}/%{name}-%{version}.tar.gz
 URL: 		http://www.gtranslator.org
-BuildRoot:	/var/tmp/gtranslator-%{version}
-Docdir:		%{_docdir}
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 Summary:	gtranslator is a comfortable po file editor with many bells and whistles.
 Requires:	glib >= 1.2.8, gtk+ >= 1.2.8, gnome-libs >= 1.2.8, imlib, GConf >= 1.0
 Requires:	gnome-vfs >= 0.4.1, gal >= 0.10.99, scrollkeeper >= 0.1.4
@@ -31,6 +28,9 @@ It features many useful function which ease the work of translators of po
 files immenantly.
 
 %changelog
+
+*  Mon Dec 03 2001 Roy-Magne Mo  <rmo@sunnmore.net>
+-  Used rpm4-macros and cleaned up filedefinitions.
 
 *  Tue Aug 21 2001 Fatih Demir	<kabalak@gtranslator.org>
 
@@ -68,15 +68,19 @@ LANG=""
 export LC_ALL LINGUAS LANG
 
 if [ ! -f configure ] ; then
-	CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh $MYARCH_FLAGS --prefix=%{prefix} \
-		--sysconfdir=%{sysconfdir} \
-		--with-gconf \
-		--enable-mime-bind=yes
+	CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh $MYARCH_FLAGS \
+                --prefix=%{_prefix} --datadir=%{_datadir} \
+                --sysconfdir=%{_sysconfdir} --includedir=%{_includedir} \
+                --libdir=%{_libdir} --bindir=%{_bindir} \
+                --enable-mime-bind=yes \
+                --with-gconf
 else
-	CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS --prefix=%{prefix} \
-		--sysconfdir=%{sysconfdir} \
-		--with-gconf \
-		--enable-mime-bind=yes
+        CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS \
+                --prefix=%{_prefix} --datadir=%{_datadir} \
+                --sysconfdir=%{_sysconfdir} --includedir=%{_includedir} \
+                --libdir=%{_libdir} --bindir=%{_bindir} \
+                --enable-mime-bind=yes \
+                --with-gconf
 fi
 
 if [ "$SMP" != "" ] ; then
@@ -89,13 +93,17 @@ make check
 
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
-make -k prefix=$RPM_BUILD_ROOT%{prefix} sysconfdir=$RPM_BUILD_ROOT%{sysconfdir} mandir=$RPM_BUILD_ROOT%{_mandir} install
+make -k DESTDIR=$RPM_BUILD_ROOT \
+        prefix=%{_prefix} \
+        sysconfdir=%{_sysconfdir} \
+        datadir=%{_datadir} \
+        includedir=%{_includedir} \
+        mandir=%{_mandir} \
+        libdir=%{_libdir} \
+        bindir=%{_bindir} install
 
-make -k -C data/gconf DESTDIR=$RPM_BUILD_ROOT install
-make -k -C help/C DESTDIR=$RPM_BUILD_ROOT install
-
-[ -f $RPM_BUILD_ROOT/bin/gtranslator ] && \
-	strip $RPM_BUILD_ROOT/bin/gtranslator
+[ -f $RPM_BUILD_ROOT%{_bindir}/gtranslator ] && \
+	strip $RPM_BUILD_ROOT%{_bindir}/gtranslator
 
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
@@ -109,29 +117,29 @@ scrollkeeper-update
 %files
 
 %defattr(0555, bin, bin)
-%{prefix}/bin/gtranslator
-%{prefix}/bin/pozilla.sh
-%{prefix}/share/gtranslator/scripts/*
+%{_bindir}/gtranslator
+%{_bindir}/pozilla.sh
+%{_datadir}/gtranslator/scripts
 
 %defattr(0444, bin, bin)
-%{prefix}/share/gtranslator/colorschemes/*
-%{prefix}/share/omf/gtranslator/*
+%{_datadir}/gtranslator/colorschemes
+%{_datadir}/omf/gtranslator
 
 %doc AUTHORS COPYING ChangeLog DEPENDS INSTALL NEWS README THANKS TODO
 %{_mandir}/man1/gtranslator*
 %{_mandir}/man1/pozilla*
-%{prefix}/share/gnome/help/gtranslator/*/*
+%{_datadir}/gnome/help/gtranslator
 
 %defattr(0755, bin, bin)
-%{prefix}/lib/gtranslator/backends/*/*.la
-%{prefix}/lib/gtranslator/backends/*/*.so
+%{_libdir}/gtranslator/backends/*/*.la
+%{_libdir}/gtranslator/backends/*/*.so
 
 %defattr(-, root, root)
-%{sysconfdir}/gconf/schemas/gtranslator.schemas
-%{prefix}/lib/gtranslator/backends/*.xml
-%{prefix}/share/gtranslator/etspecs/*etspec
-%{prefix}/share/gnome/apps/Development/gtranslator*
-%{prefix}/share/pixmaps/*.png
-%{prefix}/share/pixmaps/gtranslator/*
-%{prefix}/share/mime-info/gtranslator.*
-%{prefix}/share/locale/*/LC_MESSAGES/gtranslator.mo
+%{_sysconfdir}/gconf/schemas/gtranslator.schemas
+%{_libdir}/gtranslator/backends/*.xml
+%{_datadir}/gtranslator/etspecs/*etspec
+%{_datadir}/gnome/apps/Development/gtranslator*
+%{_datadir}/pixmaps/*.png
+%{_datadir}/pixmaps/gtranslator
+%{_datadir}/mime-info/gtranslator.*
+%{_datadir}/locale/*/LC_MESSAGES/gtranslator.mo
