@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.0
+export POZILLA_RELEASE=1.0.1
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -177,32 +177,15 @@ echo $POZILLA_NO > $CONFIG_DIR/pozilla.conf
 export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|sed -e 's/^.*(//g' -e 's/,.*$//g'`
 
 #
-# This had to be more app-specific, I guess :-)
+# Hopefully the other apps are using plain version strings
+#  like "0.8" or "0.32".
 #
-case "$PACKAGE"	in
-gtranslator)
-	if test "y$MY_RELEASE" = "y" ; then
-		export `grep ^MAINVERSION configure.in`
-		export `grep ^SUBVERSION configure.in`
-		export RELEASE="$MAINVERSION.$SUBVERSION"
-	else
-		export RELEASE="$MY_RELEASE"
-	fi	
-;;
-*)
-
-	#
-	# Hopefully the other apps are using plain version strings
-	#  like "0.8" or "0.32".
-	#
-	if test "y$MY_RELEASE" = "y" ; then
-		export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
-			sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
-	else
-		export RELEASE="$MY_RELEASE"
-	fi
-;;
-esac
+if test "y$MY_RELEASE" = "y" ; then
+	export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
+		sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
+else
+	export RELEASE="$MY_RELEASE"
+fi
 
 #
 # Go to the po-dir and get the list of all po-files.
