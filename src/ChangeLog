@@ -1,3 +1,24 @@
+2002-01-01  Fatih Demir <kabalak@gtranslator.org>
+
+	* syntax-elements.h: Added some more syntax highlighting patterns:
+		"toc:" as URI prefix and "EURO", "Euro", "Cent", "Ct" as some
+		  new European currency names; for "equality" I did also add
+		   the Dollar to the list ,-)
+
+	* Makefile.am: Added "zpmd.h" to the sources' list.
+
+	* syntax.c & utils_gui.c: Include "zpmd.h" and call the new macro named
+		GTRANSLATOR_MIDDLE_DOT instead of the (_("\xb7")[0]) struct;
+		 this way we try to achieve some better i18n results.
+
+	* zpmd.h: Define an external GTRANSLATOR_MIDDLE_DOT macro to outsource
+		the middle dot definition & structure into an own header file;
+		 why zpmd.h? Because it's a "_z_uper problematic middle dot.h"!
+
+	* dialogs.c: (Ha, finally! Euros have come down ,-)) Check a directory
+		for existence before completing in the file dialogue (bewares
+		 you of "Directory: XYZ/po isn't readable" or similar errors).
+
 2001-12-27  Fatih Demir <kabalak@gtranslator.org>
 
 	* formats.c: Implement the formats checking routines with a quite

@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 #include "prefs.h"
 #include "utils.h"
 #include "utils_gui.h"
+#include "zpmd.h"
 
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-util.h>
@@ -65,17 +66,8 @@ void gtranslator_utils_invert_dot(gchar *str)
 
 	for(i=0; str[i] != '\0'; i++) {
 		if(str[i]==' ') {
-			/*
-			 * The "·" is the "middle dot" (00B7), it is
-			 * used by gtranslator as special char to make
-			 * blanks visible.
-			 * If your language uses that char for another
-			 * purpose or if you use a charset encoding
-			 * that doesn't have it, feel free to change it
-			 * to whatever you think will be better 
-			 */
-			str[i]=(_("\xb7"))[0];
-		} else if(str[i]==(_("\xb7"))[0]) {
+			str[i]=GTRANSLATOR_MIDDLE_DOT;
+		} else if(str[i]==GTRANSLATOR_MIDDLE_DOT) {
 			str[i]=' ';
 		}
 	}

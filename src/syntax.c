@@ -1,5 +1,5 @@
 /*
- * (C) 2001		Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Joe Man <trmetal@yahoo.com.hk>
  *			Peeter Vois <peeter@gtranslator.org>
@@ -27,6 +27,7 @@
 #include "syntax.h"
 #include "syntax-elements.h"
 #include "utils.h"
+#include "zpmd.h"
 
 #include <ctype.h>
 #include <string.h>
@@ -300,7 +301,7 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 
 	if(GtrPreferences.dot_char)
 	{
-		specialchar=_("\xb7")[0];
+		specialchar=GTRANSLATOR_MIDDLE_DOT;
 	}
 	else
 	{

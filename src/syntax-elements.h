@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,12 +31,17 @@
  */
 static gchar *keywords[] = {
 	"BUGS",
+	"Cent",
 	"ChangeLog",
 	"COPYING",
 	"COPYING.LIB",
 	"Copying",
+	"Ct",
 	"CVS",
+	"Dollar",
 	"EMAIL",
+	"EURO",
+	"Euro",
 	"FAQ",
 	"FDL",
 	"FIXME",
@@ -103,6 +108,7 @@ static gchar *prefixes[] =  {
 	"pop3:",
 	"search:",
 	"smtp:",
+	"toc:",
 	"uri:",
 	"urn:",
 	"whois:",

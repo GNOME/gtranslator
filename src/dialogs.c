@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
@@ -521,7 +521,8 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 	if(po && po->filename)
 	{
 		directory=g_dirname(po->filename);
-		gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection), directory);
+		gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection),
+			directory);
 	}
 	else
 	{
@@ -529,14 +530,16 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 		directory=gtranslator_config_get_string("informations/last_directory");
 		gtranslator_config_close();
 
-		if(directory)
+		if(directory && g_file_test(directory, G_FILE_TEST_ISDIR))
 		{
-			gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection), directory);
+			gtk_file_selection_complete(
+				GTK_FILE_SELECTION(*fileselection), directory);
 		}
 		else
 		{
 			directory=g_get_home_dir();
-			gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection), directory);
+			gtk_file_selection_complete(
+				GTK_FILE_SELECTION(*fileselection), directory);
 		}
 	}
 
