@@ -35,6 +35,7 @@
 #include "prefs.h"
 #include "query.h"
 #include "replace.h"
+#include "runtime-config.h"
 #include "syntax.h"
 #include "utf8.h"
 #include "utils.h"
@@ -1014,7 +1015,6 @@ void gtranslator_rescue_file_dialog(void)
 	GtkWidget *dialog;
 	gchar *recovery_message;
 	gchar *original_filename;
-	gchar *file;
 	gint reply;
 	
 	/*
@@ -1045,8 +1045,6 @@ Saying \"No\" will delete the crash recovery file."),
 	
 	GTR_FREE(recovery_message);
 
-	file=gtranslator_utils_get_crash_file_name();
-	
 	if(reply==GNOME_YES)
 	{
 		g_message(_("Recovering `%s'..."), original_filename);
@@ -1055,7 +1053,8 @@ Saying \"No\" will delete the crash recovery file."),
 		 * Move the recovery file to the original filename and re-open
 		 *  it now again.
 		 */ 
-		rename(file, original_filename);
+		rename(gtranslator_runtime_config->crash_filename, 
+			original_filename);
 
 		if(!gtranslator_open_po_file(original_filename))
 		{
@@ -1067,11 +1066,10 @@ Saying \"No\" will delete the crash recovery file."),
 		/*
 		 * Remove the crash recovery file.
 		 */
-		unlink(file);
+		unlink(gtranslator_runtime_config->crash_filename);
 	}
 
 	GTR_FREE(original_filename);
-	GTR_FREE(file);
 }
 
 /*

@@ -73,26 +73,6 @@ void gtranslator_utils_set_language_values_by_language(const gchar *language);
 void gtranslator_utils_remove_temp_files(void); 
 
 /*
- * Return the filename of our generally used temporary filename.
- */
-gchar *gtranslator_utils_get_temp_file_name(void);
-
-/*
- * Return the name of our crash-security filename.
- */
-gchar *gtranslator_utils_get_crash_file_name(void);
-
-/*
- * Return the name of the table state holding filename.
- */
-gchar *gtranslator_utils_get_messages_table_state_file_name(void);
-
-/*
- * Return the name of the pre-differently save filename.
- */
-gchar *gtranslator_utils_get_save_differently_file_name(void);
-
-/*
  * Set up our temporary file names for the test compile run.
  */
 void gtranslator_utils_get_compile_file_names(gchar **test_file, 

@@ -38,6 +38,7 @@
 #include "open-differently.h"
 #include "parse.h"
 #include "prefs.h"
+#include "runtime-config.h"
 #include "save-differently.h"
 #include "sidebar.h"
 #include "undo.h"
@@ -641,9 +642,8 @@ static void write_the_message(gpointer data, gpointer fs)
 
 gboolean gtranslator_save_file(const gchar *name)
 {
-	GtrMsg *header;
-	FILE *fs;
-	gchar *tempo;
+	GtrMsg 	*header;
+	FILE 	*fs;
 
 	if(nautilus_istr_has_suffix(name, ".pot"))
 	{
@@ -659,12 +659,10 @@ gboolean gtranslator_save_file(const gchar *name)
 		return TRUE;
 	}
 	
-	tempo=gtranslator_utils_get_temp_file_name();
-
 	/*
 	 * FIXME: pop up save as... dialog here 
 	 */
-	if(!nautilus_strcmp(name, tempo))
+	if(!nautilus_strcmp(name, gtranslator_runtime_config->temp_filename))
 	{
 		/*
 		 * Create a new filename to use instead of the
@@ -695,10 +693,8 @@ gboolean gtranslator_save_file(const gchar *name)
 		/*
 		 * Delete the old file.
 		 */
-		unlink(tempo);
+		unlink(gtranslator_runtime_config->temp_filename);
 	}
-
-	GTR_FREE(tempo);
 
 	gtranslator_file_dialogs_store_directory(name);
 

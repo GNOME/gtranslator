@@ -38,6 +38,7 @@
 #include "messages-table.h"
 #include "parse.h"
 #include "prefs.h"
+#include "runtime-config.h"
 #include "sidebar.h"
 #include "stylistics.h"
 #include "syntax.h"
@@ -480,6 +481,11 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 * Remove any lungering temp. file.
 	 */
 	gtranslator_utils_remove_temp_files();
+
+	/*
+	 * Free our used runtime config structure.
+	 */
+	gtranslator_runtime_config_free(gtranslator_runtime_config);
 	
 	/*
 	 * Store the current date.

@@ -27,6 +27,7 @@
 #include "nautilus-string.h"
 #include "open-differently.h"
 #include "parse.h"
+#include "runtime-config.h"
 #include "utils.h"
 #include "utils_gui.h"
 #include "vfs-handle.h"
@@ -129,22 +130,19 @@ gboolean gtranslator_open_po_file(gchar *file)
 void gtranslator_open_compiled_po_file(gchar *file)
 {
 	gchar *cmd;
-	gchar *tempfilename;
 
 	if(!gtranslator_utils_check_program("msgunfmt", 0))
 	{
 		return;
 	}
 
-	tempfilename=gtranslator_utils_get_temp_file_name();
-	
 	/*
 	 * Build up the command to execute in the shell to get the plain
 	 *  gettext file.
 	 */
 	cmd=g_strdup_printf("msgunfmt '%s' -o '%s'",
 		file,
-		tempfilename);
+		gtranslator_runtime_config->temp_filename);
 	/* 
 	 * Execute the command and test the result.
 	 */
@@ -154,7 +152,7 @@ void gtranslator_open_compiled_po_file(gchar *file)
 		 * If the command could be executed successfully, open the
 		 *  plain gettext file.
 		 */
-		gtranslator_parse_main(tempfilename);
+		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
 	}
 	else
 	{
@@ -167,7 +165,6 @@ void gtranslator_open_compiled_po_file(gchar *file)
 	}
 
 	GTR_FREE(cmd);
-	GTR_FREE(tempfilename);
 }
 
 /*
@@ -177,22 +174,19 @@ void gtranslator_open_compiled_po_file(gchar *file)
 void open_compressed_po_file(gchar *file, gchar *command)
 {
 	gchar *cmd;
-	gchar *tempfilename;
 
 	if(!gtranslator_utils_check_program(command, 0))
 	{
 		return;
 	}
 
-	tempfilename=gtranslator_utils_get_temp_file_name();
-	
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */
 	cmd=g_strdup_printf("'%s' -dc < '%s' > '%s'",
 		command,
 		file,
-		tempfilename);
+		gtranslator_runtime_config->temp_filename);
 
 	/*
 	 * Execute the command and check the result.
@@ -202,7 +196,7 @@ void open_compressed_po_file(gchar *file, gchar *command)
 		/*
 		 * Open up the "new" plain gettext file.
 		 */
-		gtranslator_parse_main(tempfilename);
+		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
 	}
 	else
 	{
@@ -231,7 +225,6 @@ void open_compressed_po_file(gchar *file, gchar *command)
 	}
 	
 	GTR_FREE(cmd);
-	GTR_FREE(tempfilename);
 }
 
 /*
@@ -269,7 +262,7 @@ void gtranslator_open_compressed_po_file(gchar *file)
  */
 void gtranslator_open_ziped_po_file(gchar *file)
 {
-	gchar *cmd, *tempfilename;
+	gchar 	*cmd;
 
 	g_return_if_fail(file!=NULL);
 
@@ -278,15 +271,13 @@ void gtranslator_open_ziped_po_file(gchar *file)
 		return;
 	}
 
-	tempfilename=gtranslator_utils_get_temp_file_name();
-
 	cmd=g_strdup_printf("unzip -p '%s' > '%s'", 
 		file,
-		tempfilename);
+		gtranslator_runtime_config->temp_filename);
 
 	if(!system(cmd))
 	{
-		gtranslator_parse_main(tempfilename);
+		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
 	}
 	else
 	{
@@ -297,5 +288,4 @@ void gtranslator_open_ziped_po_file(gchar *file)
 	}
 
 	GTR_FREE(cmd);
-	GTR_FREE(tempfilename);
 }

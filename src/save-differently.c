@@ -27,6 +27,7 @@
 #include "nautilus-string.h"
 #include "save-differently.h"
 #include "parse.h"
+#include "runtime-config.h"
 #include "utils.h"
 #include "utils_gui.h"
 #include "vfs-handle.h"
@@ -92,22 +93,21 @@ gboolean gtranslator_save_po_file(const gchar *filename)
 void gtranslator_save_compiled_po_file(const gchar *file)
 {
 	gchar *cmd;
-	gchar *tempfilename;
 
 	if(!gtranslator_utils_check_program("msgfmt", 1))
 	{
 		return;
 	}
 
-	tempfilename=gtranslator_utils_get_save_differently_file_name();
-	gtranslator_save_file(tempfilename);
+	gtranslator_save_file(
+		gtranslator_runtime_config->save_differently_filename);
 	
 	/*
 	 * Build up the command to execute in the shell to get the compiled
 	 *  gettext file.
 	 */
 	cmd=g_strdup_printf("msgfmt '%s' -o '%s'",
-		tempfilename,
+		gtranslator_runtime_config->save_differently_filename,
 		file);
 	/* 
 	 * Execute the command and test the result.
@@ -123,7 +123,6 @@ void gtranslator_save_compiled_po_file(const gchar *file)
 	}
 
 	GTR_FREE(cmd);
-	GTR_FREE(tempfilename);
 }
 
 /*
@@ -133,22 +132,21 @@ void gtranslator_save_compiled_po_file(const gchar *file)
 void save_compressed_po_file(const gchar *file, gchar *command)
 {
 	gchar *cmd;
-	gchar *tempfilename;
 
 	if(!gtranslator_utils_check_program(command, 1))
 	{
 		return;
 	}
 
-	tempfilename=gtranslator_utils_get_save_differently_file_name();
-	gtranslator_save_file(tempfilename);
+	gtranslator_save_file(
+		gtranslator_runtime_config->save_differently_filename);
 	
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */
 	cmd=g_strdup_printf("'%s' -c -q < '%s' > '%s'",
 		command,
-		tempfilename,
+		gtranslator_runtime_config->save_differently_filename,
 		file);
 
 	/*
@@ -181,7 +179,6 @@ void save_compressed_po_file(const gchar *file, gchar *command)
 	}
 	
 	GTR_FREE(cmd);
-	GTR_FREE(tempfilename);
 }
 
 /*
@@ -210,7 +207,7 @@ void gtranslator_save_compressed_po_file(const gchar *file)
 
 void gtranslator_save_ziped_po_file(const gchar *file)
 {
-	gchar *cmd, *tempfilename;
+	gchar 	*cmd;
 
 	g_return_if_fail(file!=NULL);
 
@@ -219,16 +216,16 @@ void gtranslator_save_ziped_po_file(const gchar *file)
 		return;
 	}
 
-	tempfilename=gtranslator_utils_get_save_differently_file_name();
-	gtranslator_save_file(tempfilename);
+	gtranslator_save_file(
+		gtranslator_runtime_config->save_differently_filename);
 
 	cmd=g_strdup_printf("zip -q '%s' '%s'", 
 		file,
-		tempfilename);
+		gtranslator_runtime_config->save_differently_filename);
 
 	if(system(cmd))
 	{
-		gtranslator_parse_main(tempfilename);
+		gtranslator_parse_main(gtranslator_runtime_config->save_differently_filename);
 		cmd=g_strdup_printf(_("Couldn't save zip'ed po file `%s'!"),
 			file);
 
@@ -236,5 +233,4 @@ void gtranslator_save_ziped_po_file(const gchar *file)
 	}
 
 	GTR_FREE(cmd);
-	GTR_FREE(tempfilename);
 }

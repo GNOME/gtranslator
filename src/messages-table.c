@@ -30,6 +30,7 @@
 #include "parse.h"
 #include "preferences.h"
 #include "prefs.h"
+#include "runtime-config.h"
 #include "utils.h"
 #include "utf8.h"
 
@@ -552,8 +553,6 @@ static ETableExtras *table_extras_new()
  */
 GtkWidget *gtranslator_messages_table_new()
 {
-	gchar		*statusfile;
-	
 	GtkWidget 	*messages_tree;
 
 	tree_extras=table_extras_new();
@@ -579,8 +578,6 @@ GtkWidget *gtranslator_messages_table_new()
 
 	tree_memory=E_TREE_MEMORY(tree_model);
 
-	statusfile=gtranslator_utils_get_messages_table_state_file_name();
-
 	/* Calling gtk_widget_new here is to work around a bug in gal
 	** where e_tree_scrolled_new_from_spec is broken */
 	messages_tree=gtk_widget_new(e_tree_scrolled_get_type (),
@@ -594,11 +591,9 @@ GtkWidget *gtranslator_messages_table_new()
 			tree_model,
 			tree_extras,
 			ETSPECS_DIR "/messages-table.etspec", 
-			statusfile)
+			gtranslator_runtime_config->table_state_filename)
 		);
 
-	GTR_FREE(statusfile);
-	
 	tree = GTK_WIDGET(e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
 
 	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
@@ -783,10 +778,6 @@ void gtranslator_messages_table_update_message_status(GtrMsg *message)
  */
 void gtranslator_messages_table_save_state()
 {
-	gchar	*statusfilename;
-
-	statusfilename=gtranslator_utils_get_messages_table_state_file_name();
-	e_tree_save_state (E_TREE (tree), statusfilename);
-
-	GTR_FREE(statusfilename);
+	e_tree_save_state (E_TREE (tree), 
+		gtranslator_runtime_config->table_state_filename);
 }

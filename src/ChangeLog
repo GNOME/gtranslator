@@ -1,3 +1,29 @@
+2001-09-01  Fatih Demir <kabalak@gtranslator.org>
+
+	* main.c: Also adept this and changed the "successful learning" message
+		a bit to be more correct -- typos, tsts.
+
+	* dialogs.c, messages-table.c, open|save-differently.c & parse.c: Adept
+		all these sources to the new GtrRuntimeConfig structure instead
+		 of using the old way via calling 3, 4 different util functions
+		  for this.
+
+	* sighandling.c: Adept to the new GtrRuntimeConfig structure and
+		free preferences, runtime config and regex cache on exit.
+
+	* utils.c/.h: Removed the 4 "gtranslator_utils_get_*" utils functions
+		which are now replaced by the GtrRuntimeConfig structure.
+
+	* gui.c & main.c: Create/free the generally used GtrRuntimeConfig 
+		"gtranslator_runtime_config".
+
+	* Makefile.am: Plug in the new source files for runtime configuration.
+
+	* runtime-config.c/.h: Added GtrRuntimeConfig structure for holding
+		all kinds of runtime configuration -- for now, it stores the
+		 names of the used temporary filenames -- replaces 4 utils
+		  functions ala "gtranslator_utils_get_*".
+
 2001-08-30  Fatih Demir <kabalak@gtranslator.org>
 
 	* convert.c & undo.c: Include <string.h> to run fine with RH systems.

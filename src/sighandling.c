@@ -19,7 +19,8 @@
 
 #include "dialogs.h"
 #include "parse.h"
-#include "preferences.h"
+#include "prefs.h"
+#include "runtime-config.h"
 #include "sighandling.h"
 #include "utils.h"
 
@@ -43,8 +44,6 @@ void gtranslator_signal_handler(int signal)
 
 	if(po && po->file_changed)
 	{
-		gchar *crashfilename;
-			
 		/*
 		 * Store the original filename into the
 		 *  preferences.
@@ -52,16 +51,20 @@ void gtranslator_signal_handler(int signal)
 		gtranslator_config_init();
 		gtranslator_config_set_string("crash/filename",
 			po->filename);
-		crashfilename=gtranslator_utils_get_crash_file_name();
 
 		/*
 		 * Save the file under the special filename.
 		 */
-		gtranslator_save_file(crashfilename);
+		gtranslator_save_file(
+			gtranslator_runtime_config->crash_filename);
 	}
 
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
 	gtranslator_config_close();
+
+	gtranslator_runtime_config_free(gtranslator_runtime_config);
+	gtranslator_preferences_free();
+	gnome_regex_cache_destroy(rxc);
 
 	exit(1);
 }

@@ -26,6 +26,7 @@
 #include "languages.h"
 #include "nautilus-string.h"
 #include "prefs.h"
+#include "runtime-config.h"
 #include "utils.h"
 
 #include <dirent.h>
@@ -273,26 +274,19 @@ void gtranslator_utils_set_language_values_by_language(const gchar *language)
  */
 void gtranslator_utils_remove_temp_files()
 {
-	gchar *tempfile=gtranslator_utils_get_temp_file_name();
-
 	/*
-	 * Check and clean up our "namespace" in ~/.gtranslator.
+	 * Check for any lungering 'round file rests of any temporary action
+	 *  and remove these rests if any had been found.
 	 */
-	 
-	if(g_file_exists(tempfile))
+	if(g_file_exists(gtranslator_runtime_config->temp_filename))
 	{
-		remove(tempfile);
+		remove(gtranslator_runtime_config->temp_filename);
 	}
 
-	GTR_FREE(tempfile);
-	tempfile=gtranslator_utils_get_save_differently_file_name();
-
-	if(g_file_exists(tempfile))
+	if(g_file_exists(gtranslator_runtime_config->crash_filename))
 	{
-		remove(tempfile);
+		remove(gtranslator_runtime_config->crash_filename);
 	}
-
-	GTR_FREE(tempfile);
 }
 
 /*
@@ -404,60 +398,6 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 		
 		return TRUE;
 	}
-}
-
-/*
- * Return the generally used filename of our temp. file.
- */
-gchar *gtranslator_utils_get_temp_file_name()
-{
-	gchar *tempfilename;
-
-	tempfilename=g_strdup_printf("%s/.gtranslator/gtranslator-temp-po-file",
-		g_get_home_dir());
-
-	return tempfilename;
-}
-
-/*
- * Return the filename of the crash-file.
- */
-gchar *gtranslator_utils_get_crash_file_name()
-{
-	gchar *crashfile;
-
-	crashfile=g_strdup_printf("%s/.gtranslator/gtranslator-crash-po-file", 
-		g_get_home_dir());
-
-	return crashfile;
-}
-
-/*
- * Get the different filename for the save-differently.c/.h routines.
- */
-gchar *gtranslator_utils_get_save_differently_file_name()
-{
-	gchar *sd_file;
-
-	sd_file=g_strdup_printf(
-		"%s/.gtranslator/etstates/gtranslator-save-differently-temp-po-file",
-		g_get_home_dir());
-
-	return sd_file;
-}
-
-/*
- * Get the ETable state specification filename for our messages table.
- */
-gchar *gtranslator_utils_get_messages_table_state_file_name()
-{
-	gchar *state_file;
-	
-	state_file=g_strdup_printf(
-		"%s/.gtranslator/etstates/gtranslator-ui-messages-table-state",
-		g_get_home_dir());
-	
-	return state_file;
 }
 
 /*

@@ -34,6 +34,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "query.h"
+#include "runtime-config.h"
 #include "session.h"
 #include "sighandling.h"
 #include "utils.h"
@@ -106,7 +107,6 @@ int main(int argc, char *argv[])
 	poptContext 	context;
 	
 	const char 	**args;
-	gchar 		*sp_file;
 	
 	GError		*error=NULL;
 
@@ -238,6 +238,11 @@ int main(int argc, char *argv[])
 	gtk_signal_connect(GTK_OBJECT(client), "die",
 			   GTK_SIGNAL_FUNC(gtranslator_session_die), NULL);
 
+	/*
+	 * Initialize our generally used GtrRuntimeConfig structure.
+	 */
+	gtranslator_runtime_config=gtranslator_runtime_config_new();
+
 	/* 
 	 * Create the main app-window. 
 	 */
@@ -259,17 +264,13 @@ int main(int argc, char *argv[])
 	gtranslator_utils_remove_temp_files();
 
 	/*
-	 * Test if there's a crash recovery file lying around in ~.
+	 * Test if there's a crash recovery file lying around in ~/.gtranslator.
 	 */
-	sp_file=gtranslator_utils_get_crash_file_name();
-
-	if(g_file_exists(sp_file))
+	if(g_file_exists(gtranslator_runtime_config->crash_filename))
 	{
 		gtranslator_rescue_file_dialog();
 	}
 
-	GTR_FREE(sp_file);
-	
 	/*
 	 * Load the applied color scheme from the prefs and check it; if it
 	 *  doesn't seem to be right apply the original default colors.
@@ -434,7 +435,7 @@ int main(int argc, char *argv[])
 		 * As everything seemed to went fine, print out a nice
 		 *  message informing the user about the success.
 		 */
-		g_print(_("The file `%s' has been successfully learned.\n"), learn_file);
+		g_print(_("Learned `%s' successfully.\n"), learn_file);
 
 		return 0;
 	}

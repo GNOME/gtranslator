@@ -67,6 +67,7 @@ gtranslator_SOURCES = \
 	prefs.c prefs_init.c prefs.h \
 	query.c query.h \
 	replace.c replace.h \
+	runtime-config.c runtime-config.h \
 	save-differently.c save-differently.h \
 	session.c session.h \
 	sidebar.c sidebar.h \
