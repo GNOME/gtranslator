@@ -18,6 +18,7 @@
  *
  */
 
+#include "dialogs.h"
 #include "gui.h"
 #include "languages.h"
 #include "prefs.h"
@@ -355,4 +356,65 @@ void gtranslator_utils_old_colors_to_new_location()
 	}
 
 	gtranslator_config_close();
+}
+
+
+/*
+ * Checks the given file for read permissions first and then
+ *  for the right write permissions.
+ */
+gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
+{
+	FILE *file;
+	gchar *error_message;
+
+	g_return_val_if_fail(po_file != NULL, FALSE);
+	/*
+	 * Open the file first for reading.
+	 */
+	file=fopen(po_file->filename, "r");
+	if(file == NULL)
+	{
+		/*
+		 * Create an error box and prevent further reading
+		 *  of the file.
+		 */  
+		gtranslator_error(_("You don't have read permissions on file `%s'"),
+			po_file->filename);
+
+		return FALSE;
+	}
+	else
+	{
+		/*
+		 * Open the same file also for a write-permission check.
+		 */ 
+		file=fopen(po_file->filename, "r+");
+		if(file == NULL)
+		{
+			/*
+			 * Show a warning box to the user and warn him about
+			 *  the fact of lacking write permissions.
+			 *  FIXME: do this ONLY on file save
+			 */  
+			error_message=g_strdup_printf(
+				_("You don't have write permissions on file `%s'.\n\
+This means that you should save it as a copy to a local directory\n\
+of your choice."),
+				po_file->filename);
+			gnome_app_warning(GNOME_APP(gtranslator_application), error_message);
+
+			po_file->no_write_perms=TRUE;
+		
+			return TRUE;
+		}
+		else
+		{
+			po_file->no_write_perms=FALSE;
+		}
+	}
+
+	fclose(file);
+
+	return TRUE;
 }

@@ -56,7 +56,6 @@ static pid_t spell_pid = -1;
 static int fd_write[2], fd_read[2];
 static int signal_set_up = 0;
 
-/* FIXME? */
 static GdkColor *highlight = &colors[COLOR_SPELL_ERROR];
 static GdkColor *url_highlight = &colors[COLOR_ADDRESS];
 

@@ -128,12 +128,6 @@ void compile(GtkWidget  * widget, gpointer useless);
 void update(GtkWidget *widget, gpointer useless);
 
 /*
- * Checks the given file for the right permissions for
- *  open/writing the files.
- */
-gboolean gtranslator_check_file_perms(GtrPo *po_file);
-
-/*
  * Set the progress bar status/determine the po file status.
  */
 void gtranslator_set_progress_bar(void);

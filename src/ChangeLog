@@ -1,3 +1,18 @@
+2001-04-19  Fatih Demir <kabalak@gtranslator.org>
+
+	* main.c: Mark the argument explanation names for translation.
+
+	* parse_core.c: Include "utils.h" for the moved
+		"gtranslator_utils_check_file_permissions" function.
+
+	* parse.c/h & utils.c/.h: Moved "gtranslator_check_file_perms"
+		to "gtranslator_utils_check_file_permissions"; include
+		 "dialogs.h" in "utils.c".
+
+	* gtkspell.c: Removed the FIXME in front of the color assignments
+		-- it's the way  gtranslator handles the colors and this is
+		 definitely Ok.
+
 2001-04-19  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* dialogs.* (gtranslator_error): new function. Use it everywhere.

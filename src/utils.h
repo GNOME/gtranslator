@@ -25,6 +25,8 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtksignal.h>
 
+#include "parse.h"
+
 /*
  * Utility function for use within gtranslator.
  */
@@ -86,6 +88,12 @@ GList *languages_list, *encodings_list, *lcodes_list, *group_emails_list, *bits_
  */
 void gtranslator_utils_language_lists_create(void);
 gboolean gtranslator_utils_language_lists_free(GtkWidget *widget, gpointer useless);
+
+/*
+ * Checks the given file for the right permissions for
+ *  open/writing the files.
+ */
+gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file);
 
 /*
  * Convert the fg/bg settings from < 2001-03-03 to the new places.

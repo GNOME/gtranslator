@@ -24,6 +24,7 @@
 
 #include "message.h"
 #include "parse.h"
+#include "utils.h"
 
 #include <libgnome/gnome-i18n.h>
 
@@ -58,7 +59,7 @@ void gtranslator_parse(const gchar *filename)
 	/*
 	 * Check the right file access permissions.
 	 */
-	if(gtranslator_check_file_perms(po)==FALSE)
+	if(gtranslator_utils_check_file_permissions(po)==FALSE)
 	{
 		return;
 	}

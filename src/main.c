@@ -69,15 +69,15 @@ static struct poptOption gtranslator_options[] = {
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
-		0, N_("Specifies the main-window geometry"), "GEOMETRY"
+		0, N_("Specifies the main-window geometry"), N_("GEOMETRY")
 	},
 	{
 		"scheme", 's', POPT_ARG_STRING, &scheme_filename,
-		0, N_("Syntax color scheme to use"), "SCHEMEFILE"
+		0, N_("Syntax color scheme to use"), N_("SCHEMEFILE")
 	},
 	{
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
-		0, N_("HTML file to write to"), "HTMLFILE"
+		0, N_("HTML file to write to"), N_("HTMLFILE")
 	},
 	POPT_AUTOHELP {NULL}
 };
