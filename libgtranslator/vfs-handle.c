@@ -58,7 +58,8 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 		 *
 		 */
 		gchar *destdir=g_new0(gchar,1);
-		destdir=g_strdup_printf("%s/%s/%s", g_get_home_dir(), ".gtranslator/remote-po",
+		destdir=g_strdup_printf("%s/.gtranslator/%s",
+			g_get_tmp_dir(),
 			gnome_vfs_uri_get_host_name(file));
 		/*
 		 * Build this temporary files' dir.
