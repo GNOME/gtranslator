@@ -991,9 +991,6 @@ static void undo_changes(GtkWidget  * widget, gpointer useless)
  */
 static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 {
-	GString *syntaxtext;
-	gint ourpos=0;
-	
 	if (nothing_changes)
 		return;
 	if (!po->file_changed)
@@ -1078,46 +1075,6 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		gtk_text_thaw(GTK_TEXT(trans_box));
 		nothing_changes = FALSE;
 	}
-
-	/*
-	 * Hm, another way to get immediate syntax highlighting; delete the
-	 *  last 4 chars and reinsert them.
-	 */
-	ourpos=gtk_editable_get_position(GTK_EDITABLE(trans_box));
-
-	gtk_text_freeze(GTK_TEXT(trans_box));
-
-	if((ourpos-4) >= 0)
-	{
-		syntaxtext=g_string_new(gtk_editable_get_chars(
-			GTK_EDITABLE(trans_box), (ourpos-4), ourpos));
-	}
-	else
-	{
-		syntaxtext=g_string_new(gtk_editable_get_chars(
-			GTK_EDITABLE(trans_box), ourpos, ourpos));
-	}
-
-	if(syntaxtext->len > 0 )
-	{
-		if((ourpos-4) >= 0)
-		{
-			gtk_text_backward_delete(
-				GTK_TEXT(trans_box), 4);
-		}
-		else
-		{
-			gtk_text_backward_delete(
-				GTK_TEXT(trans_box), 1);
-		}
 	
-		gtranslator_syntax_insert_text(
-			trans_box, syntaxtext->str);
-
-		gtk_editable_set_position(GTK_EDITABLE(trans_box), ourpos);
-	}
-		
-	gtk_text_thaw(GTK_TEXT(trans_box));
-	
-	g_string_free(syntaxtext, 1);
+	gtranslator_syntax_update_text(trans_box);
 }
