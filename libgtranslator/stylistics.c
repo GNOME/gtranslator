@@ -186,7 +186,13 @@ void gtranslator_set_style(GtkWidget *widget)
 	style->font=gdk_font_load(fontname);
 	if(!style->font)
 	{	
-		g_error(_("Couldn't even load default font!"));
+		g_warning(_("Couldn't even load default font! Using fixed"));
+
+	        style->font=gdk_font_load("fixed");
+	        if(!style->font)
+		{
+			g_error(_("Couldn't even load default font!"));
+		}
 	}
 	
 	/*
