@@ -30,7 +30,7 @@ cvspack:
 	@cp configure.in __configure.in
 	@sed -e "s,AM_INIT_AUTOMAKE.*,AM_INIT_AUTOMAKE\(gtranslator\, CVS_$(shell date +%Y-%m-%d)\),g" < configure.in \
 		> configure.in.new && mv configure.in.new configure.in
-	@./autogen.sh --prefix=/usr --enable-nautilus-view
+	@./autogen.sh --prefix=/usr 
 	@make dist
 	@-rm -rf po
 	@mv __po po

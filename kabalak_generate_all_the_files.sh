@@ -57,6 +57,6 @@ while [ $t -gt 1 ]
 	t=$[ $t -1 ]
 	done
 $a " last chance (1) " && sleep 1 && echo ""
-./configure --enable-debug --enable-nautilus-view --enable-mime-bind=yes \
+./configure --enable-debug \
 	"$@" && echo -e "\n\tHappy $package-ing\n" && exit 0
 #######################################################################
