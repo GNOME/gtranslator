@@ -684,6 +684,8 @@ void query_dialog(void)
 				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\".\n\
 Would you like to insert it into the translation?"),
 					result->translation, result->domain);
+
+				gtranslator_free_query(&query);
 				
 				gnome_dialog_close(GNOME_DIALOG(dialog));
 
@@ -723,6 +725,9 @@ Would you like to insert it into the translation?"),
 					{
 						gtranslator_syntax_insert_text(trans_box,
 						result->translation);
+
+						g_free(result->domain);
+						g_free(result);
 					}
 					else
 					{
@@ -734,17 +739,9 @@ Would you like to insert it into the translation?"),
 						_("Query's result translation is already there!"));
 					}
 
-					/*
-					 * FIXME: Hehe, SEGV.
-					 * gtranslator_free_query_result(&result);
-					 */
 					g_free(content);
 				}
 			}
-			/*
-			 * FIXME: This causes a SEGV.
-			 * gtranslator_free_query(&query);
-			 */
 		}
 	}
 }
