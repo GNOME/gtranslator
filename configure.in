@@ -125,11 +125,8 @@ if $try_gconf; then
 "-----------------------------------------------------------------------------"
 "No GConf >= 1.0 found! GConf is now mandatory for gtranslator..."
 "-----------------------------------------------------------------------------"])
-	else
-		GCONF_CFLAGS="$GCONF_CFLAGS -DGCONF_IS_PRESENT"
 	fi
 fi
-AC_SUBST(GCONF_CFLAGS)
 
 dnl -------------------------------------------------------------------
 dnl Check for the window-icon feature of gnome-libs >= 1.0.60.
