@@ -65,7 +65,7 @@ void gtranslator_message_status_set_fuzzy(GtrMsg  * msg, gboolean fuzzy);
 /*
  * Copies msgid to msgstr or blanks msgstr 
  */
-void gtranslator_message_status_set_sticky(GtrMsg  * msg, gboolean on);
+void gtranslator_message_status_set_sticky(GtrMsg  *msg, gpointer useless);
 
 /*
  * Frees a GtrMsg.

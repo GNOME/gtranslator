@@ -31,6 +31,7 @@
 #include "utils_gui.h"
 
 #include "pixmaps/auto_translation.xpm"
+#include "pixmaps/copy_msgid2msgstr.xpm"
 #include "pixmaps/edit_comment.xpm"
 #include "pixmaps/query.xpm"
 #include "pixmaps/query_big.xpm"
@@ -162,6 +163,14 @@ GnomeUIInfo the_edit_menu[] = {
 		GNOME_APP_PIXMAP_DATA, edit_comment_xpm,
 		GDK_F9, 0, NULL
 	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Copy _message -> translation"),
+		N_("Copy the original message contents and paste them as translation"),
+		gtranslator_message_status_set_sticky, NULL, NULL,
+		GNOME_APP_PIXMAP_DATA, copy_msgid2msgstr_xpm,
+		GDK_F11, 0, NULL
+	},
 	GNOMEUIINFO_END
 };
 
@@ -238,15 +247,6 @@ GnomeUIInfo the_msg_status_menu[] = {
 		NULL,
 		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
 		GDK_2, GDK_MOD1_MASK, NULL
-	},
-	{
-		GNOME_APP_UI_TOGGLEITEM, N_("_Stick"),
-		N_("Stick this message"),
-		gtranslator_message_change_status,
-		GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
-		GDK_3, GDK_MOD1_MASK, NULL
 	},
 	GNOMEUIINFO_END
 };

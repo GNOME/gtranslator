@@ -529,7 +529,7 @@ void gtranslator_application_bar_update(gint pos)
 			gtranslator_actions_disable(ACT_NEXT_FUZZY);
 		}
 	} else if(msg->status & GTR_MSG_STATUS_STICK) {
-		status=g_strdup(_("Stick"));
+		status=g_strdup(_("Sticky (Message & translation are the same)"));
 	} else if(msg->status & GTR_MSG_STATUS_TRANSLATED) {
 		status=g_strdup(_("Translated"));
 	} else {

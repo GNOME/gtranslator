@@ -53,6 +53,7 @@ enum {
 	ACT_QUERY,
 	ACT_HEADER,
 	ACT_COMMENT,
+	ACT_COPY_MSGID2MSGSTR,
 	/***********************/
 	ACT_FIRST,
 	ACT_BACK,
@@ -64,7 +65,6 @@ enum {
 	/***********************/
 	ACT_TRANSLATED,
 	ACT_FUZZY,
-	ACT_STICK,
 	
 	/*
 	 * This must always be the last, add new entries above

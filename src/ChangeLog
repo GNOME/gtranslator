@@ -1,3 +1,29 @@
+2002-02-15  Fatih Demir <kabalak@gtranslator.org>
+
+	* message.c: Comment a very suspicious GTR_FREE out -- solves the status change
+		bugs we've been reported about, e.g. b.g.o #61884.
+
+	* comment.c/.h: Added new "gtranslator_comment_get_comment_contents" function
+		which returns a sane value for the plain comment string.
+
+	* gui.c: Updated/corrected the "Sticky" status printout on the status
+		line -- it should be right now and explain what's up with the
+		 "stickiness".
+
+	* actions.c/.h, menus.c & message.c: Added new and easier to grep
+		"Copy message -> translation" menu point -- this was previously
+		  the "Sticky" message state functionality from the "Status"
+		   menu -- it should be now much better to understand and use.
+
+	* pixmaps/Makefile.am: Add the new pixmap file to the data files.
+	
+	* pixmaps/copy_msgid2msgstr.xpm: Added "new" pixmap -- also taken from
+		Evolution (thanks to Jakub or to Tuomos? Surely to both :-))
+
+2002-02-14  Fatih Demir <kabalak@gtranslator.org>
+
+	* menus.c: Removed the "Sticky" message status from the status menu.
+
 2002-02-11  Fatih Demir <kabalak@gtranslator.org>
 
 	* prefs.c: Break the string freeze -- add a syntax highlighting pref.

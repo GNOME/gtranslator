@@ -248,7 +248,6 @@ void gtranslator_message_show(GList * list_item)
 		msg->status & flag);
 	set_active(0, GTR_MSG_STATUS_TRANSLATED);
 	set_active(1, GTR_MSG_STATUS_FUZZY);
-	set_active(2, GTR_MSG_STATUS_STICK);
 #undef set_active
 	nothing_changes = FALSE;
 	message_changed = FALSE;
@@ -360,11 +359,6 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	if (flag == GTR_MSG_STATUS_FUZZY) {
 		gtranslator_message_status_set_fuzzy(GTR_MSG(po->current->data),
 			       GTK_CHECK_MENU_ITEM(item)->active);
-	} else if (flag == GTR_MSG_STATUS_STICK) {
-		gtranslator_message_status_set_sticky(GTR_MSG(po->current->data),
-				GTK_CHECK_MENU_ITEM(item)->active);
-		gtranslator_message_show(po->current);
-		message_changed = TRUE;
 	}
 	
 	gtranslator_message_update();
@@ -464,7 +458,7 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	g_return_if_fail(msg->comment!=NULL);
 	g_return_if_fail(GTR_COMMENT(msg->comment)->comment!=NULL);
 
-	comment=GTR_COMMENT(msg->comment)->comment;
+	comment=gtranslator_comment_get_comment_contents(msg->comment);
 	
 	if (!compiled) {
 		regcomp(&rexf, "^(#), c-format", REG_EXTENDED | REG_NEWLINE);
@@ -493,7 +487,11 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 
 		gtranslator_comment_update(&msg->comment, comchar);
 		
-		GTR_FREE(comment);
+		/*
+		 * FIXME: Crashes currently...
+		 *
+		 * GTR_FREE(comment);
+		 */
 		GTR_FREE(comchar);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
@@ -508,23 +506,27 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 /*
  * Set Sticky status.
  */
-void gtranslator_message_status_set_sticky (GtrMsg * msg, gboolean on)
+void gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
 {
-	if (on) {
-		GTR_FREE(msg->msgstr);
-		msg->msgstr = g_strdup(msg->msgid);
-		
-		/*
-		 * It is no longer fuzzy
-		 */
-		gtranslator_message_status_set_fuzzy(msg, FALSE);
-		msg->status |= GTR_MSG_STATUS_STICK;
-	} else {
-		GTR_FREE(msg->msgstr);
-		msg->msgstr = g_strdup("");
-		msg->status &= ~GTR_MSG_STATUS_STICK;
-	}
+	g_return_if_fail(file_opened==TRUE);
+
+	msg=GTR_MSG(GTR_PO(po)->current->data);
+	g_return_if_fail(msg!=NULL);
+
+	GTR_FREE(msg->msgstr);
+	msg->msgstr = g_strdup(msg->msgid);
+	
+	/*
+	 * It is no longer fuzzy.
+	 */
+	gtranslator_message_status_set_fuzzy(msg, FALSE);
+	msg->status |= GTR_MSG_STATUS_STICK;
+	msg->status |= GTR_MSG_STATUS_TRANSLATED;
+
+	message_changed = TRUE;
+	gtranslator_message_show(po->current);
 	gtranslator_get_translated_count();
+	gtranslator_actions_enable(ACT_REVERT, ACT_SAVE);
 }
 
 /*

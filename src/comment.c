@@ -235,6 +235,17 @@ GtrComment *gtranslator_comment_copy(GtrComment **comment)
 }
 
 /*
+ * Returns the "normal" and plain comment contents string.
+ */
+gchar *gtranslator_comment_get_comment_contents(GtrComment *comment)
+{
+	g_return_val_if_fail(GTR_COMMENT(comment)!=NULL, "");
+	g_return_val_if_fail(GTR_COMMENT(comment)->comment!=NULL, "");
+
+	return (GTR_COMMENT(comment)->comment);
+}
+
+/*
  * Free the GtrComment.
  */
 void gtranslator_comment_free(GtrComment **comment)

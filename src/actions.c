@@ -109,6 +109,7 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_QUERY, the_edit_menu[10], the_navibar[10]);
 	insert_action(ACT_HEADER, the_edit_menu[12], the_toolbar[6]);
 	insert_action(ACT_COMMENT, the_edit_menu[14], NONE);
+	insert_action(ACT_COPY_MSGID2MSGSTR, the_edit_menu[16], NONE);
 	/*-----------------------------------------------------------*/
 	insert_action(ACT_FIRST, the_messages_menu[0], the_navibar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_navibar[1]);
@@ -120,7 +121,6 @@ void gtranslator_actions_set_up_default()
 	/*-----------------------------------------------------------*/
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
 	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
-	insert_action(ACT_STICK, the_msg_status_menu[2], NONE);
 	/*-----------------------------------------------------------*/
 	insert_action(ACT_END, NONE, NONE);
 }
@@ -133,8 +133,8 @@ void gtranslator_actions_set_up_state_no_file(void)
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
-			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK, ACT_COMMENT,
-			ACT_EXPORT_UTF8, ACT_REMOVE_ALL_TRANSLATIONS);
+			ACT_FUZZY, ACT_TRANSLATED, ACT_COMMENT, ACT_EXPORT_UTF8,
+			ACT_REMOVE_ALL_TRANSLATIONS, ACT_COPY_MSGID2MSGSTR);
 
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
@@ -144,8 +144,8 @@ void gtranslator_actions_set_up_file_opened(void)
 	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
 		ACT_AUTOTRANSLATE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 		ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
-		ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
-		ACT_IMPORT_UTF8);
+		ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED,
+		ACT_IMPORT_UTF8, ACT_COPY_MSGID2MSGSTR);
 
 	gtranslator_actions_disable(ACT_SAVE, ACT_UNDO);
 	
