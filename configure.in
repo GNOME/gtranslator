@@ -11,7 +11,7 @@ AM_MAINTAINER_MODE
 dnl -------------------------------------------------------------------
 dnl Use intltools.
 dnl -------------------------------------------------------------------
-AC_PROG_INTLTOOL(0.11)
+AC_PROG_INTLTOOL(0.22)
 
 dnl -------------------------------------------------------------------
 dnl Libtool -- needed for backends.
@@ -148,11 +148,6 @@ MY_DATE=`date +%Y-%m-%d`
 AC_SUBST(MY_DATE)
 
 dnl -------------------------------------------------------------------
-dnl The most important check for a library at all!
-dnl -------------------------------------------------------------------
-AC_CHECK_LIB(ife, do_you_think_we_are_just_geeks,,)
-
-dnl -------------------------------------------------------------------
 dnl Put out the configured files.
 dnl -------------------------------------------------------------------
 AC_OUTPUT([
@@ -205,6 +200,7 @@ Scrollkeeper integration  :	${sc_present:-no}
 
 *** IMPORTANT *** 
 
-This is a development version of gtranslator.  You should be using a stable
-version, which is available in the 'gtranslator-gnome-1' branch in CVS.
+This is the GNOME 2.0 world of gtranlator's world, if you're searching for a
+ stable, usable and non-crashing version for the GNOME 1.x world, then you
+  should have a look at the \"gtranslator-gnome-1\" branch in CVS. Thanks!
 "
