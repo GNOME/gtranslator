@@ -57,6 +57,12 @@ void crash_recovery_dialog(void);
 void query_dialog(void);
 
 /*
+ * A last questioning dialog before we do accomplish all the missing
+ *  strings from the default query domain.
+ */
+void accomplish_dialog(void);
+
+/*
  * The "Go to" dialog.
  */
 void goto_dlg(GtkWidget * widget, gpointer useless);

@@ -127,6 +127,14 @@ static GnomeUIInfo the_file_menu[] = {
 		GDK_F5, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Autoaccomplish"),
+		N_("Automatically fill missing translations from the default query domain"),
+		accomplish_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
+		GDK_F10, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
 	{
 		GNOME_APP_UI_ITEM, N_("Open from _URI"),
@@ -452,10 +460,11 @@ static void create_actions(void)
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[4]);
 	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[5]);
-	insert_action(ACT_SAVE, the_file_menu[5], the_toolbar[1]);
-	insert_action(ACT_SAVE_AS, the_file_menu[6], the_toolbar[2]);
-	insert_action(ACT_REVERT, the_file_menu[7], NONE);
-	insert_action(ACT_CLOSE, the_file_menu[8], NONE);
+	insert_action(ACT_ACCOMPLISH, the_file_menu[3], NONE);
+	insert_action(ACT_SAVE, the_file_menu[7], the_toolbar[1]);
+	insert_action(ACT_SAVE_AS, the_file_menu[8], the_toolbar[2]);
+	insert_action(ACT_REVERT, the_file_menu[9], NONE);
+	insert_action(ACT_CLOSE, the_file_menu[10], NONE);
 	/*------------------------------------------------*/
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
@@ -484,7 +493,7 @@ static void create_actions(void)
 
 void disable_actions_no_file(void)
 {
-	disable_actions(ACT_COMPILE, ACT_UPDATE,
+	disable_actions(ACT_COMPILE, ACT_UPDATE, ACT_ACCOMPLISH,
 			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
 			ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
@@ -496,7 +505,7 @@ void disable_actions_no_file(void)
 
 void enable_actions_just_opened(void)
 {
-	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
+	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_ACCOMPLISH,
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
@@ -899,9 +908,9 @@ static void update_appbar(gint pos)
 			status=g_strdup_printf(_("%s [ No untranslated left ]"), _("Untranslated"));
 			/*
 			 * Also disable the coressponding buttons for the
-			 *  next untranslated message.
+			 *  next untranslated message/accomplish function.
 			 */
-			disable_actions(ACT_NEXT_UNTRANSLATED);
+			disable_actions(ACT_NEXT_UNTRANSLATED, ACT_ACCOMPLISH);
 		}	
 	}
 	/*
@@ -1156,6 +1165,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 			switch(event->keyval)
 			{
 				case GDK_Left:
+				case GDK_Down:
 					IfGood(the_navibar[1])
 					{
 						goto_prev_msg(NULL, NULL);
@@ -1163,20 +1173,21 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					break;
 				
 				case GDK_Right:
+				case GDK_Up:
 					IfGood(the_navibar[3])
 					{
 						goto_next_msg(NULL, NULL);
 					}
 					break;
 
-				case GDK_Up:
+				case GDK_Page_Up:
 					IfGood(the_navibar[0])
 					{
 						goto_first_msg(NULL, NULL);
 					}
 					break;
 					
-				case GDK_Down:
+				case GDK_Page_Down:
 					IfGood(the_navibar[4])
 					{
 						goto_last_msg(NULL, NULL);

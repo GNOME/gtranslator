@@ -1,7 +1,27 @@
 2001-03-05  Fatih Demir	<kabalak@gtranslator.org>
 
+	* dialogs.c/.h: Added "accomplish_dialog" which asks if gtranslator
+		should accomplish missing translations from the default domain
+		 and does this with the help of the new function from query.c.
+
+	* gui.c/.h: Added accomplishment menu entry and integrated it into the
+		existing actions model -- also changed the keybindings to now:
+		 Ctrl+Left  or Ctrl+Down -> Back
+		 Ctrl+Right or Ctrl+Up   -> Next
+		 Ctrl+Page Up            -> First
+		 Ctrl+Page Down          -> Last
+
+	* query.c/.h: Added the new "gtranslator_query_all" function which will
+		be useful for the autoinsertion of found translations in the
+		 default domain for a msgid (only applied if the msgstr is empty
+		  of course).
+
+	* prefs.c/.h: Added a combo box for setting up the default domain and
+		added a corresponding structure entry in wants.
+
 	* dialogs.c: Fixed the 2 FIXME's, put the gtranslator_free_query call to
-		the right place and manually free'd the GtrQueryResult.
+		the right place, manually free'd the GtrQueryResult and also made
+		 the dialog set up the stored default query domain at startup.
 
 2001-03-04  Fatih Demir	<kabalak@gtranslator.org>
 

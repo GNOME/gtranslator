@@ -77,4 +77,10 @@ GtrQuery *gtranslator_new_query(const gchar *domain,
 void gtranslator_free_query(GtrQuery **query);
 void gtranslator_free_query_result(GtrQueryResult **result);
 
+/*
+ * Automatically query for all empty msgstr's the possible translations and
+ *  insert them.
+ */
+void gtranslator_query_all(gpointer data, gpointer yeah);
+
 #endif

@@ -33,6 +33,7 @@
 #include "syntax.h"
 
 #include <string.h>
+#include <locale.h>
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
 
@@ -603,6 +604,15 @@ void query_dialog(void)
 	gtk_combo_set_popdown_strings(GTK_COMBO(domain), domains);
 
 	/*
+	 * Set up the default query domain from the preferences if available.
+	 */
+	if(wants.defaultdomain)
+	{
+		gtk_entry_set_text(GTK_ENTRY(
+			GTK_COMBO(domain)->entry), wants.defaultdomain);
+	}
+
+	/*
 	 * Add the widgets to the dialog.
 	 */
 	add2Box(label);
@@ -743,5 +753,44 @@ Would you like to insert it into the translation?"),
 				}
 			}
 		}
+	}
+}
+
+/*
+ * Asks the user if he/she does really want to use autoaccomplishment
+ *  and does it if wished.
+ */
+void accomplish_dialog(void)
+{
+	GtkWidget *dialog=NULL;
+	gint reply;
+
+	dialog=gnome_message_box_new(
+		_("Should gtranslator accomplish all missing strings (if possible)\n\
+from your default query domain?"),
+		GNOME_MESSAGE_BOX_QUESTION,
+		GNOME_STOCK_BUTTON_YES,
+		GNOME_STOCK_BUTTON_NO,
+		NULL);
+
+	/*
+	 * Set the default to "Yes" and show/run the dialog.
+	 */
+	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
+	
+	show_nice_dialog(&dialog, "gtranslator -- accomplish?");
+
+	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+
+	/*
+	 * Only handle the "Yes" case as we do not think about the "No" case -- the
+	 *  user didn't want any accomplishment.
+	 */
+	if(reply==GNOME_YES)
+	{
+		/*
+		 * Accomplish the missing entries via the new query function:
+		 */
+		g_list_foreach(po->messages, (GFunc) gtranslator_query_all, NULL);
 	}
 }

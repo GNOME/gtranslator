@@ -29,6 +29,7 @@
 #include "stylistics.h"
 #include "color-schemes.h"
 #include "languages.h"
+#include "query.h"
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
@@ -65,7 +66,7 @@ static GtkWidget
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_specs, *instant_spell_checking,
-	*use_own_dict, *keep_obsolete;
+	*use_own_dict, *keep_obsolete, *defaultdomain;
 	
 /*
  * The preferences dialog widget itself.
@@ -235,12 +236,12 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	/*
 	 * The tables for holding all the entries below.
 	 */
-	first_page = append_page_table(prefs, 2, 2, _("Personal information"));
-	second_page = append_page_table(prefs, 5, 2, _("Language options"));
-	third_page = append_page_table(prefs, 4, 1, _("Po file options"));
+	first_page = append_page_table(prefs, 3, 2, _("Personal informations"));
+	second_page = append_page_table(prefs, 5, 2, _("Language"));
+	third_page = append_page_table(prefs, 4, 1, _("Po file editing"));
 	fourth_page = append_page_table(prefs, 5, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 4, 2, _("Recent files & spell checking"));
-	sixth_page = append_page_table(prefs, 5, 2, _("Fonts & Colors"));
+	sixth_page = append_page_table(prefs, 5, 2, _("Fonts, colors and color schemes"));
 	
 	/*
 	 * Create all the personal entries.
@@ -251,6 +252,11 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	authors_email =
 	    attach_entry_with_label(first_page, 1, _("Author's EMail :"),
 				    email, prefs_box_changed);
+
+	defaultdomain =
+	    attach_combo_with_label(first_page, 2, _("Default query domain:"),
+			    	    domains, wants.defaultdomain,
+				    prefs_box_changed, NULL);
 	
 	/*
 	 * Create, attach, and connect all the combo boxes with labels. 
@@ -438,6 +444,7 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	update(lg, GTK_COMBO(lg_email)->entry);
 	update(mime, GTK_COMBO(mime_type)->entry);
 	update(enc, GTK_COMBO(encoding)->entry);
+	update(wants.defaultdomain, GTK_COMBO(defaultdomain)->entry);
 	update(wants.dictionary, dictionary_file);
 #undef update
 #define if_active(widget) \
@@ -461,6 +468,7 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	gtranslator_config_init();
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
+	gtranslator_config_set_string("query/defaultdomain", wants.defaultdomain);
 	gtranslator_config_set_string("language/name", language);
 	gtranslator_config_set_string("language/mime_type", mime);
 	gtranslator_config_set_string("language/encoding", enc);
@@ -605,6 +613,7 @@ void read_prefs(void)
 	gtranslator_config_init();
 	author = gtranslator_config_get_string("translator/name");
 	email = gtranslator_config_get_string("translator/email");
+	wants.defaultdomain = gtranslator_config_get_string("query/defaultdomain");
 	language = gtranslator_config_get_string("language/name");
 	lc = gtranslator_config_get_string("language/language_code");
 	lg = gtranslator_config_get_string("language/team_email");

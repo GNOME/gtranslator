@@ -307,3 +307,42 @@ void gtranslator_free_query_result(GtrQueryResult **result)
 		g_free(*result);
 	}
 }
+
+/*
+ * Get all empty msgstr's filled with found msgstr's from the main domain.
+ */
+void gtranslator_query_all(gpointer data, gpointer yeah)
+{
+	GtrMsg *msg=GTR_MSG(data);
+
+	if(msg->msgid && !msg->msgstr)
+	{
+		GtrQuery *query;
+		GtrQueryResult *matchingtranslation;
+
+		/*
+		 * Build up the query for the selected default domain and for the
+		 *  current msgid.
+		 */
+		query=gtranslator_new_query(wants.defaultdomain, msg->msgid, lc);
+
+		/*
+		 * Get a possible translation for the query and free up the used
+		 *  GtrQuery.
+		 */
+		matchingtranslation=gtranslator_query_simple(query);
+		gtranslator_free_query(&query);
+
+		/*
+		 * If we did find a matching translation for the msgid and there's
+		 *  no msgstr translation yet, copy the found query result into
+		 *   the msgstr field of the GtrMsg and free the GtrQueryResult.
+		 */
+		if(matchingtranslation && matchingtranslation->translation)
+		{
+			msg->msgstr=g_strdup(matchingtranslation->translation);
+			
+			gtranslator_free_query_result(&matchingtranslation);
+		}
+	}
+}

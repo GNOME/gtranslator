@@ -61,6 +61,7 @@ struct {
 	gchar *dictionary;
 	gchar *font;
 	gchar *scheme;
+	gchar *defaultdomain;
 } wants;
 
 /*
