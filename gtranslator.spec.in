@@ -87,14 +87,12 @@ if [ ! -f configure ] ; then
                 --prefix=%{_prefix} --datadir=%{_datadir} \
                 --sysconfdir=%{_sysconfdir} --includedir=%{_includedir} \
                 --libdir=%{_libdir} --bindir=%{_bindir} \
-                --enable-mime-bind=yes \
                 --with-gconf
 else
         CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS \
                 --prefix=%{_prefix} --datadir=%{_datadir} \
                 --sysconfdir=%{_sysconfdir} --includedir=%{_includedir} \
                 --libdir=%{_libdir} --bindir=%{_bindir} \
-                --enable-mime-bind=yes \
                 --with-gconf
 fi
 
