@@ -27,6 +27,7 @@ nautilus_gtranslator_view_SOURCES = \
 nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/about.o \
 	$(srcbuild)/actions.o \
+	$(srcbuild)/backend.o \
 	$(srcbuild)/color-schemes.o \
 	$(srcbuild)/dialogs.o \
 	$(srcbuild)/dnd.o \

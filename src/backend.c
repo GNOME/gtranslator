@@ -359,7 +359,8 @@ gboolean gtranslator_backend_open(gchar *filename)
 		 * Look if the filename matches the filenames supported by the
 		 *  backend module.
 		 */
-		if(gtranslator_utils_stringlist_strcasecmp(
+		if(GTR_BACKEND(backends->data)->info->filenames &&
+			gtranslator_utils_stringlist_strcasecmp(
 			GTR_BACKEND(backends->data)->info->filenames, 
 				filename)!=-1)
 		{
