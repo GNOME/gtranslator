@@ -94,27 +94,6 @@ fi
 AM_CONDITIONAL(GCONF_IS_PRESENT, test x$gconf_is_present = xyes)
 
 dnl -------------------------------------------------------------------
-dnl Check for libxml >= 1.8.9 and get the cflags and libs.
-dnl -------------------------------------------------------------------
-AC_PATH_PROG(XML_CONFIG, xml-config, nej)
-if test "our$XML_CONFIG" = "ournej" ; then
-	AC_MSG_ERROR([No xml-config found ! Please install libxml first.])
-else
-	AC_MSG_CHECKING([for libxml >= 1.8.9])
-	XML_VERSION=`xml-config --version|sed -e 's/\.//g'`
-	if test "$XML_VERSION" -lt 189 ; then
-		AC_MSG_RESULT("no")
-		AC_MSG_ERROR("Your libxml is too old!")
-	else
-		AC_MSG_RESULT(["yes, version `xml-config --version`"])
-	fi
-	XML_CFLAGS=`xml-config --cflags`
-	XML_LIBS=`xml-config --libs`
-	AC_SUBST(XML_CFLAGS)
-	AC_SUBST(XML_LIBS)
-fi
-
-dnl -------------------------------------------------------------------
 dnl Check for GnomeVFS via this crappy check.
 dnl -------------------------------------------------------------------
 AC_MSG_CHECKING(for GnomeVFS >= 0.4.1)

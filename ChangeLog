@@ -1,7 +1,9 @@
 2001-02-26  Fatih Demir	<kabalak@gtranslator.org>
 
 	* configure.in: Damn fixes to the --enable-debugspecs option
-		and the output of $CFLAGS at the end.
+		and the output of $CFLAGS at the end. Don't try to
+		 detect libxml if gal does already depend on it > 1.8.8
+		  so that it's allready included.
 
 2001-02-25  Fatih Demir	<kabalak@gtranslator.org>
 
