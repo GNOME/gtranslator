@@ -21,13 +21,19 @@
 #include "interface.h"
 #include "support.h" 
 
-char iline[256][65000],sline[256][65000];
+/*
+*	Define the thought-to-be-the-maximal-numbers-of\
+*	normal-but-not-gnumeric-po-files define 
+*/
+#define LINE_LENGTH 2048
+
+char iline[256][LINE_LENGTH],sline[256][LINE_LENGTH];
 FILE *input_ids,*input_strs;
 
 /*
 *	This are the dimensioneers for the *line-array ..
 */
-static int count,max_count;
+int count,max_count;
 char ids_file[256],strs_file[256];
 
 /*

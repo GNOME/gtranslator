@@ -7,7 +7,7 @@
 
 scriptsdir = $(datadir)/$(PACKAGE)/scripts/
 
-extra_flags = -DDEBUGGY -g1
+extra_flags = -DDEBUGGY -g 
 
 INCLUDES = \
 	-I$(top_srcdir)/intl \
