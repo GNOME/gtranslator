@@ -22,6 +22,7 @@
 #endif
 
 #include "htmlizer.h"
+#include "parse.h"
 
 #include <string.h>
 
@@ -210,11 +211,12 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 /*
  * Convert the given po file to a html document.
  */ 
-void gtranslator_htmlizer(GtrPo *po, gchar *save_to)
+void gtranslator_htmlizer(gchar *save_to)
 {
 	FILE *fstream;
 	gint n;
-	
+
+	g_return_if_fail(file_opened==TRUE);
 	g_return_if_fail(po!=NULL);
 	
 	/*

@@ -62,7 +62,6 @@ gtranslator_SOURCES = \
 	nautilus-string.c nautilus-string.h \
 	open-differently.c open-differently.h \
 	parse.c	parse.h \
-	parse_core.c \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \
 	query.c query.h \

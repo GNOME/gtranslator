@@ -365,7 +365,7 @@ int main(int argc, char *argv[])
 			 */  
 			if(save_html_output_file)
 			{
-				gtranslator_htmlizer(po, save_html_output_file);
+				gtranslator_htmlizer(save_html_output_file);
 			}
 		}
 	}

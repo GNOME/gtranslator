@@ -20,7 +20,7 @@
 #ifndef GTR_HTMLIZER_H
 #define GTR_HTMLIZER_H 1
 
-#include "parse.h"
+#include <glib.h>
 
 /*
  * Converts the given string to a raw html formatted string.
@@ -30,6 +30,6 @@ gchar *gtranslator_string_htmlizer(gchar *textstring);
 /*
  * Builds the html document out of the po file.
  */
-void gtranslator_htmlizer(GtrPo *po, gchar *save_to);
+void gtranslator_htmlizer(gchar *save_to);
 
 #endif

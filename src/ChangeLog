@@ -1,3 +1,22 @@
+2001-09-04  Fatih Demir <kabalak@gtranslator.org>
+
+	* parse.c: Adapted the "add to history" conditional to be based on
+		the new GtrRuntimeConfig structure and to also ignore crash
+		 and backend filenames.
+
+	* main.c: Adapted to the new, changed function signature of the
+		"gtranslator_htmlizer" function.
+
+	* htmlizer.c/.h: Changed "gtranslator_htmlizer"'s arguments list:
+		it just waits for the "save_to" filename to save the HTML file
+		 to now -- uses the global "po" GtrPo structure.
+
+	* parse_core.c & parse.c: Moved the "gtranslator_parse_main" into
+		the main parse source file -- removed the old outsourced
+		 parse_core.c file.
+
+	* Makefile.am: Removed parse_core.c from the sources list.
+
 2001-09-03  Fatih Demir <kabalak@gtranslator.org>
 
 	* parse_core.c: Also include <config.h> conditionally.
