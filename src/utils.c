@@ -744,10 +744,49 @@ gchar *gtranslator_utils_get_locale_charset(void)
 
 		for(c=0; languages[c].name!=NULL; c++)
 		{
-			if(!nautilus_strcmp(languages[c].name, po->header->language) ||
-				!nautilus_strcmp(_(languages[c].name), po->header->language))
+			if(!nautilus_strcasecmp(languages[c].name, 
+					po->header->language) ||
+				!nautilus_strcasecmp(_(languages[c].name), 
+					po->header->language))
 			{
 				return g_strdup(languages[c].encoding);
+			}
+			else if(strstr(po->header->language, "/"))
+			{
+				/*
+				 * If no direct language name did match and
+				 *  we have a compound (or not compound :-)) 
+				 *   language name, then we need some voodoo.
+				 */
+				gchar	*partial_charset_name=NULL;
+
+				partial_charset_name=nautilus_str_get_after_prefix(languages[c].name, "/");
+			
+				/*
+				 * Always do grep the after-"/"-language name
+				 *  for our voodoo plays (like mentioned in 
+				 *   b.g.o #69720 for "Norwegian/Nynorsk").
+				 */
+				if(!partial_charset_name)
+				{
+					partial_charset_name=nautilus_str_get_after_prefix(_(languages[c].name), "/");
+				}
+
+				/*
+				 * Now test the language names again for a bit
+				 *  more sanity on "compund" language names.
+				 */
+				if(partial_charset_name)
+				{
+					partial_charset_name++;
+
+					if(nautilus_strcasecmp(partial_charset_name, po->header->language))
+					{
+						return g_strdup(languages[c].encoding);
+					}
+
+					GTR_FREE(partial_charset_name);
+				}
 			}
 		}
 
