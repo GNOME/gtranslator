@@ -40,6 +40,7 @@
 #include "prefs.h"
 #include "save-differently.h"
 #include "sidebar.h"
+#include "undo.h"
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -820,6 +821,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 		return;
 	
 	gtranslator_po_free();
+	gtranslator_undo_clean_register();
 	gtranslator_sidebar_clear_views();
 	
 	file_opened = FALSE;

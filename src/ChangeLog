@@ -1,5 +1,15 @@
 2001-08-10  Fatih Demir <kabalak@gtranslator.org>
 
+	* undo.c: The position for the undo could also be 0 so that we check
+		the position for being ">= 0" in "gtranslator_undo_run_undo",
+		 also activate the ACT_UNDO action on any registering of an
+		  undo action.
+
+	* gui.c: Also clean the "Undo" register on file closure; bind the
+		"insert/delete_text_handler"s to the new undo mechanism.
+
+	* messages-table.c: Removed a debug "g_print".
+
 	* message.c: Clean up "Undo" stuff on message navigation.
 
 	* actions.c: Disable the "Undo" actions on an undo -- also check the

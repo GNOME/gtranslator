@@ -401,11 +401,19 @@ static void delete_text_handler(GtkEditable *editable, gint start_position,
 	/*
 	 * Check for dumb values and do only catch real deletions.
 	 */
-	if(start_position!=0 && end_position!=-1)
+	if(start_position >= 0 && end_position >= 1 && 
+		(end_position > start_position))
 	{
+		gchar	*fake_string;
+
 		/*
-		 * Eh, FIXME!
+		 * Fill up our fake_string for the strlen() call in undo.c.
 		 */
+		fake_string=gtk_editable_get_chars(GTK_EDITABLE(trans_box),
+			start_position, (end_position - start_position));
+		
+		gtranslator_undo_register_deletion(fake_string, start_position);
+		GTR_FREE(fake_string);
 	}
 }
 
@@ -706,6 +714,12 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 		return;
 
 	result=g_strdup(text);
+
+	/*
+	 * Register the text for an insertion undo action.
+	 */
+	gtranslator_undo_register_insertion(result, *position);
+	
 	gtranslator_utils_invert_dot(result);
 	
 	gtk_signal_handler_block_by_func(GTK_OBJECT(editable),

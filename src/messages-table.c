@@ -312,7 +312,6 @@ row_selected (ETree *et, int row, ETreePath node, int column, gpointer data)
 	
 	if (message != NULL && message != old_message)
 	{
-		g_print ("cursor activated \n");
 		model_row=message->no - 1;
 	
 		if (model_row<0)

@@ -65,6 +65,8 @@ void gtranslator_undo_register_insertion(const gchar *text, const gint position)
 	undo->text=g_strdup(text);
 	undo->position=position;
 	undo->insertion=TRUE;
+
+	gtranslator_actions_enable(ACT_UNDO);
 }
 
 /*
@@ -87,6 +89,8 @@ void gtranslator_undo_register_deletion(const gchar *text, const gint position)
 	undo->text=g_strdup(text);
 	undo->position=position;
 	undo->insertion=FALSE;
+
+	gtranslator_actions_enable(ACT_UNDO);
 }
 
 /*
@@ -124,7 +128,7 @@ void gtranslator_undo_clean_register()
 void gtranslator_undo_run_undo()
 {
 	g_return_if_fail(undo!=NULL);
-	g_return_if_fail(undo->position > 0);
+	g_return_if_fail(undo->position >= 0);
 	g_return_if_fail(undo->text!=NULL);
 
 	/*
@@ -149,7 +153,8 @@ void gtranslator_undo_run_undo()
 		if(undo->position <= gtk_text_get_length(GTK_TEXT(trans_box)))
 		{
 			gtk_editable_delete_text(GTK_EDITABLE(trans_box),
-				undo->position, strlen(undo->text));
+				undo->position, 
+				(undo->position + strlen(undo->text)));
 		}
 	}
 
