@@ -179,8 +179,10 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Hook up the 'close window' callback.
 	 */
-	g_signal_connect(G_OBJECT(gtranslator_application), "delete_event",
-			 G_CALLBACK(gtranslator_quit), NULL);
+	g_signal_connect(G_OBJECT(gtranslator_application),
+			"delete_event",
+			 G_CALLBACK(gtranslator_application_delete_event_cb),
+			 NULL);
 
 	/*
 	 * The D'n'D signals
@@ -234,10 +236,33 @@ void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 #endif /* REDUNDANT */
 
 /*
+ * Callback called when the user closes the main window
+ *
+ * This callback is connected to the delete-event signal on the
+ * gtranslator GnomeApp (ie the main window) and should be called when the user
+ * closes the main window.
+ * It returns true to stop other handlers from being invoked for the event.
+ */
+gboolean gtranslator_application_delete_event_cb(GtkWidget  * widget,
+						 GdkEvent  * event,
+						 gpointer user_data)
+{
+	gtranslator_quit();
+	return TRUE;
+}
+
+/*
+ * Callback called when the user uses the quit command (^Q or Quit in the menu)
+ */
+void gtranslator_menu_quit_cb(void  * data)
+{
+	gtranslator_quit();
+}
+
+/*
  * The own quit-code
  */
-void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
-			     gpointer useless)
+void gtranslator_quit()
 {
 	GList *pagelist;
 	GtrPage *page;
@@ -582,8 +607,9 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		if ((GtrPreferences.unmark_fuzzy) 
 		     && (msg->is_fuzzy))
 		{
-		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
-			current_page->po->fuzzy--;
+	     	gtranslator_message_status_set_fuzzy(msg, FALSE);
+	     	/* the callback on this GtkCheckMenuItem will be called 
+	     	 * and the fuzzy count will be correctly decreased */
 			gtk_check_menu_item_set_active(
 				GTK_CHECK_MENU_ITEM(the_edit_menu[17].widget),
 				FALSE

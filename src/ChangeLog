@@ -1,3 +1,10 @@
+2005-02-05  Ross Golder  <ross@golder.org>
+
+	* gui.c: Removed superfluous po->fuzzy incrementor (Loic Minier
+	#132734)
+	* menus.c, gui.[ch]: Fixed a crash when cancelling the confirmation
+        dialog when closing without saving changes (Loic Minier #158550)
+
 2004-11-22  Ross Golder  <ross@golder.org>
 
 	* open.[ch]: Removed. Redundant.
@@ -10,15 +17,16 @@
 	Replaced occurrences of 'd
 	* parse.[ch]: Renamed 'gtranslator_parse_main' as 'gtranslator_open', and
 	re-implemented to add a new page to the 'notebook_widget'.
-	* dialogs.[ch] (gtranslator_should_the_file_be_saved_dialog): Made to operate
-	only on the current page. Use GTK_*_YES and GTK_*_NO instead of GTK_*_ACCEPT
-	and GTK_*_REJECT.
+	* dialogs.[ch] (gtranslator_should_the_file_be_saved_dialog): Made to
+	operate only on the current page. Use GTK_*_YES and GTK_*_NO instead of
+	GTK_*_ACCEPT and GTK_*_REJECT.
 	* dialogs.[ch] (gtranslator_file_dialogs_set_directory): Removed.
 	* gui.c: Removed 'document_view' (replaced in page.h by 'current_page').
 	Added global 'notebook_widget'.
 	* gui.[ch]: Replaced 'gtranslator_show_file' with
 	'gtranslator_create_main_window'.
-	* main.c: Added 'open_files' list (of GtrPages). Re-arranged execution order.
+	* main.c: Added 'open_files' list (of GtrPages). Re-arranged execution
+	order.
 	* main.c: Created 'show_build_information' function to make main function
 	clearer.
 	* parse.[ch]: Removed global 'autosave_source_tag' and made a per-page
@@ -33,14 +41,14 @@
 	* Makefile.am: Removed unnecessary subdirectories, 'pixmap' and
 	'semerkent'. Removed some other files from the compilation process
 	that are no longer used anywhere.
-	* compile.[ch],parse.[ch],dialogs.[ch]: Moved compile-related functions in from parse.c and
-	dialogs.c.
+	* compile.[ch],parse.[ch],dialogs.[ch]: Moved compile-related functions in
+	from parse.c and dialogs.c.
 	* about.c: Minor tidy-up and use 'translator-credits' (with a hyphen)
 	according to recent gnome-i18n decree.
-	* actions.c,find.c,header_stuff.c: Added #ifdef DONT_FORGET to some code that still
-	needs attention.
-	* bookmark.c,dialogs.c,history.c: Tidy-up and do some basic error handling/reporting
-	(via GError).
+	* actions.c,find.c,header_stuff.c: Added #ifdef DONT_FORGET to some code
+	that still needs attention.
+	* bookmark.c,dialogs.c,history.c: Tidy-up and do some basic error
+	handling/reporting (via GError).
 	* bookmark.[ch]: Remove unused 'gtranslator_bookmark_resolvable'
 	function.
 	* *.c: Replaced GTR_FREE with g_free. Lets face our memory
@@ -54,9 +62,10 @@
 	* dialogs.c: Removed 'gtranslator_query_dialog'.
 	* dnd.c: Use new 'gtranslator_parse_main' API.
 	* *.c: Convert to use new gettext-based members of the GtrPo structure.
-	* gui.[ch]: Renamed and re-organised the widget creation code to work from the
-	new gettext-based structures, and to make less use of the global namespace.
-	Now tries to contain document-related widgets in a GtrDocumentView structure.
+	* gui.[ch]: Renamed and re-organised the widget creation code to work from
+	the new gettext-based structures, and to make less use of the global
+	namespace. 	Now tries to contain document-related widgets in a
+	GtrDocumentView structure.
 	* gui.[ch]: Added 'gtranslator_show_file' to display a given GtrPo.
 	* gui.[ch]: Added 'gtranslator_update_progress_bar' method.
 	* header_stuff.[ch]: Removed 'gtranslator_language_changed' method.
@@ -73,9 +82,10 @@
 	'query_big.xpm'.
 	* menus.c: Disable connection of Update button to 'update' function.
 	* menus.c: Removed 'query' function - for now.
-	* message.h: Replaced message-related variables with a single 'po_message_t'.
-	Added 'is_fuzzy' and 'changed' flags.
-	* message.c: Removed old-style plural-forms handling. Now handled in the GUI.
+	* message.h: Replaced message-related variables with a single
+	'po_message_t'. Added 'is_fuzzy' and 'changed' flags.
+	* message.c: Removed old-style plural-forms handling. Now handled in the
+	GUI.
 	* message.[ch]: Added 'gtranslator_message_copy_to_translation' method.
 	* message.[ch]: Added 'gtranslator_message_status_toggle_fuzzy' method.
 	* message.[ch]: Added 'gtranslator_message_clear_translation' method.
@@ -94,8 +104,8 @@
 	* prefs.c: Remove references to color schemes.
 	* replace.c: Rework 'gtranslator_replace_run' to use gettext-based
 	structures.
-	* runtime-config.c,save.c: Replaced 'save-differently-file' with just 'save-file'
-	for simplicity.
+	* runtime-config.c,save.c: Replaced 'save-differently-file' with just
+	'save-file' for simplicity.
 	* utils.c: Remove 'gtranslator_utils_get_raw_file_name'.
 	* utils.c: Remove 'gtranslator_utils_get_compile_file_names'.
 	* utils.c: Remove 'gtranslator_utils_get_locale_name'.

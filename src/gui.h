@@ -54,11 +54,20 @@ extern gint	table_pane_position;
  */
 void gtranslator_create_main_window(void);
 
+/* Callback called when the user closes the main window */
+gboolean gtranslator_application_delete_event_cb(GtkWidget  * widget,
+						 GdkEvent  * event,
+						 gpointer user_data);
+
+/*
+ * Callback called when the user uses the quit command (^Q or Quit in the menu)
+ */
+void gtranslator_menu_quit_cb(void  * data);
+
 /*
  * Quits from gtranslator.
  */
-void gtranslator_quit(GtkWidget *widget, GdkEventAny *e,
-	gpointer useless);
+void gtranslator_quit();
 
 /*
  * Various functions for displaying messages 
