@@ -1,16 +1,16 @@
 # Serbian translation of gtranslator
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003.
-# 
+# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003, 2004.
+#
 # This file is distributed under the same license as the gtranslator package.
-# 
+#
 # Maintainer: Veljko M. Stanojević <veljko@vms.homelinux.net>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-25 14:33+0100\n"
-"PO-Revision-Date: 2003-12-25 14:32+0100\n"
+"POT-Creation-Date: 2004-01-23 12:23+0100\n"
+"PO-Revision-Date: 2004-01-23 12:23+0100\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "Gnomov program za prevođenje"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1143
 msgid "gtranslator"
 msgstr "GPrevodilac"
 
@@ -46,7 +46,7 @@ msgstr ""
 "GPrevodilac je program za uređivanje datoteka sa prevodima sa brojnim "
 "mogućnostima."
 
-#: src/bookmark.c:93 src/dialogs.c:1492
+#: src/bookmark.c:93 src/dialogs.c:1497
 msgid "No comment"
 msgstr "Nema primedbe"
 
@@ -163,11 +163,11 @@ msgstr "Pretražuj:"
 msgid "Comments"
 msgstr "napomene"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
+#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:101
 msgid "English"
 msgstr "engleske reči"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
+#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:263
 msgid "Translation"
 msgstr "prevod"
 
@@ -203,19 +203,15 @@ msgstr "Tekst kojim treba zameniti:"
 msgid "Replace in:"
 msgstr "Zameni:"
 
-#: src/dialogs.c:895
+#: src/dialogs.c:902
 msgid "Please enter a string to replace!"
 msgstr "Unesite tekst koji želite da zamenite!"
 
-#: src/dialogs.c:903
-msgid "Please enter a string to replace with!"
-msgstr "Unesite tekst kojim ćete da zamenite!"
-
-#: src/dialogs.c:945
+#: src/dialogs.c:953
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Došlo je do greške pri izvršenju msgfmt naredbe:\n"
 
-#: src/dialogs.c:986
+#: src/dialogs.c:994
 #, c-format
 msgid ""
 "The file\n"
@@ -238,7 +234,7 @@ msgstr ""
 "\n"
 "Da li da ovaj primerak GPrevodioca ipak otvori datoteku?"
 
-#: src/dialogs.c:1027
+#: src/dialogs.c:1035
 #, c-format
 msgid ""
 "File %s\n"
@@ -247,23 +243,23 @@ msgstr ""
 "Datoteka %s\n"
 "je izmenjena. Da li želite da se vratite na sačuvani primerak?"
 
-#: src/dialogs.c:1059
+#: src/dialogs.c:1064
 msgid "gtranslator -- open from URI"
 msgstr "GPrevodilac — Otvaranje sa adrese"
 
-#: src/dialogs.c:1071
+#: src/dialogs.c:1076
 msgid "Enter URI:"
 msgstr "Unesite punu adresu:"
 
-#: src/dialogs.c:1107
+#: src/dialogs.c:1112
 msgid "No URI given!"
 msgstr "Adresa nije navedena!"
 
-#: src/dialogs.c:1122
+#: src/dialogs.c:1127
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Nije naveden nijedan podržani protokol (poput „ftp://“)!"
 
-#: src/dialogs.c:1130
+#: src/dialogs.c:1135
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -292,7 +288,7 @@ msgstr ""
 "file:///<datoteka sa prevodom> ili\n"
 "http://prevod.org/-bug-"
 
-#: src/dialogs.c:1169
+#: src/dialogs.c:1174
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -309,51 +305,51 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1181
+#: src/dialogs.c:1186
 msgid "Postpone decision"
 msgstr "Odloži odluku"
 
-#: src/dialogs.c:1183
+#: src/dialogs.c:1188
 msgid "Ignore recovery file"
 msgstr "Zanemari datoteku za oporavak"
 
-#: src/dialogs.c:1185
+#: src/dialogs.c:1190
 msgid "Recover file"
 msgstr "Oporavi datoteku"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1244
+#: src/dialogs.c:1249
 msgid "Here you can query existing translations from your learn buffer."
 msgstr ""
 "Ovde možete pretraživati postojeće prevode iz vaše prevodilačke memorije."
 
-#: src/dialogs.c:1247
+#: src/dialogs.c:1252
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "GPrevodilac — Pretraga prevodilačke memorije"
 
-#: src/dialogs.c:1251 src/menus.c:360
+#: src/dialogs.c:1256 src/menus.c:360
 msgid "Query"
 msgstr "Upit"
 
-#: src/dialogs.c:1252
+#: src/dialogs.c:1257
 msgid "Query message content"
 msgstr "Pretraga sadržaja poruke"
 
-#: src/dialogs.c:1262
+#: src/dialogs.c:1267
 msgid "Query string:"
 msgstr "Tekst za upit:"
 
-#: src/dialogs.c:1300
+#: src/dialogs.c:1305
 msgid "No query string given!"
 msgstr "Nije dat tekst za upit!"
 
-#: src/dialogs.c:1322
+#: src/dialogs.c:1327
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Pretraga prevodilačke memorije nije dala nikakav rezultat!"
 
-#: src/dialogs.c:1334
+#: src/dialogs.c:1339
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -366,11 +362,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1404
+#: src/dialogs.c:1409
 msgid "Query's result translation is already there!"
 msgstr "Rezultat pretrage je već preveden!"
 
-#: src/dialogs.c:1436
+#: src/dialogs.c:1441
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -378,11 +374,11 @@ msgstr ""
 "Da li da GPrevodilac automatski prevede datoteku koristeći\n"
 "podatke iz prevodilačke memorije?"
 
-#: src/dialogs.c:1472 src/dialogs.c:1500
+#: src/dialogs.c:1477 src/dialogs.c:1505
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "GPrevodilac — dodaj obeleživač uz napomenu?"
 
-#: src/dialogs.c:1492
+#: src/dialogs.c:1497
 msgid "Comment for the bookmark:"
 msgstr "Napomena za obeleživač:"
 
@@ -399,11 +395,11 @@ msgstr ""
 "Nisam pronašao\n"
 "„%s“"
 
-#: src/gui.c:199
+#: src/gui.c:182
 msgid "Edit comment"
 msgstr "Uredite napomenu"
 
-#: src/gui.c:501
+#: src/gui.c:493
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
@@ -411,24 +407,24 @@ msgstr[0] "%s [ preostala %i nejasna ]"
 msgstr[1] "%s [ preostale %i nejasne ]"
 msgstr[2] "%s [ preostalo %i nejasnih ]"
 
-#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
+#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "Nejasno"
 
-#: src/gui.c:505
+#: src/gui.c:497
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ nema nejasnih ]"
 
-#: src/gui.c:513
+#: src/gui.c:505
 msgid "Sticky (Message & translation are the same)"
 msgstr "Lepljivo (poruka i prevod su isti)"
 
-#: src/gui.c:515 src/messages-table.c:323
+#: src/gui.c:507 src/messages-table.c:332
 msgid "Translated"
 msgstr "Prevedeno"
 
-#: src/gui.c:524
+#: src/gui.c:516
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
@@ -436,21 +432,21 @@ msgstr[0] "%s [ preostala %i neprevedena ]"
 msgstr[1] "%s [ preostale %i neprevedene ]"
 msgstr[2] "%s [ preostalo %i neprevedenih ]"
 
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
+#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
 msgid "Untranslated"
 msgstr "Neprevedeno"
 
-#: src/gui.c:526
+#: src/gui.c:518
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Nema više neprevedenih]"
 
-#: src/gui.c:545
+#: src/gui.c:537
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Poruka %d / %d / Stanje: %s (Poruka sadrži oblike za množinu)"
 
-#: src/gui.c:549
+#: src/gui.c:541
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Poruka %d / %d / Stanje: %s"
@@ -537,262 +533,266 @@ msgid "Afrikaans"
 msgstr "afrikans"
 
 #: src/languages.c:41
+msgid "Albanian"
+msgstr "albanski"
+
+#: src/languages.c:45
 msgid "Arabic"
 msgstr "arapski"
 
-#: src/languages.c:45
+#: src/languages.c:49
 msgid "Azerbaijani Turkish"
 msgstr "azerbejdžanski/turski"
 
-#: src/languages.c:49
+#: src/languages.c:53
 msgid "Basque"
 msgstr "baskijski"
 
-#: src/languages.c:53
+#: src/languages.c:57
 msgid "Belorussian"
 msgstr "beloruski"
 
-#: src/languages.c:57
+#: src/languages.c:61
 msgid "Bengali"
 msgstr "bengalski"
 
-#: src/languages.c:61
+#: src/languages.c:65
 msgid "Britton"
 msgstr "britonski"
 
-#: src/languages.c:65
+#: src/languages.c:69
 msgid "Bulgarian"
 msgstr "bugarski"
 
-#: src/languages.c:69
+#: src/languages.c:73
 msgid "Catalan"
 msgstr "katalanski"
 
-#: src/languages.c:73
+#: src/languages.c:77
 msgid "Chinese/Simplified"
 msgstr "kineski/pojednostavljeni"
 
-#: src/languages.c:77
+#: src/languages.c:81
 msgid "Chinese/Traditional"
 msgstr "kineski/tradicionalni"
 
-#: src/languages.c:81
+#: src/languages.c:85
 msgid "Croatian"
 msgstr "hrvatski"
 
-#: src/languages.c:85
+#: src/languages.c:89
 msgid "Czech"
 msgstr "češki"
 
-#: src/languages.c:89
+#: src/languages.c:93
 msgid "Danish"
 msgstr "danski"
 
-#: src/languages.c:93
+#: src/languages.c:97
 msgid "Dutch"
 msgstr "holandski"
 
-#: src/languages.c:101
+#: src/languages.c:105
 msgid "English/Canada"
 msgstr "engleski/Kanada"
 
-#: src/languages.c:105
+#: src/languages.c:109
 msgid "English/GB"
 msgstr "engleski/VB"
 
-#: src/languages.c:109
+#: src/languages.c:113
 msgid "English/USA"
 msgstr "engleski/SAD"
 
-#: src/languages.c:113
+#: src/languages.c:117
 msgid "Esperanto"
 msgstr "esperanto"
 
-#: src/languages.c:117
+#: src/languages.c:121
 msgid "Estonian"
 msgstr "estonski"
 
-#: src/languages.c:121
+#: src/languages.c:125
 msgid "Persian"
 msgstr "persijski"
 
-#: src/languages.c:125
+#: src/languages.c:129
 msgid "Finnish"
 msgstr "finski"
 
-#: src/languages.c:129
+#: src/languages.c:133
 msgid "French"
 msgstr "francuski"
 
-#: src/languages.c:133
+#: src/languages.c:137
 msgid "Galician"
 msgstr "galski"
 
-#: src/languages.c:137
+#: src/languages.c:141
 msgid "German"
 msgstr "nemački"
 
-#: src/languages.c:141
+#: src/languages.c:145
 msgid "Greek"
 msgstr "grčki"
 
-#: src/languages.c:145
+#: src/languages.c:149
 msgid "Gujarati"
 msgstr "gujarati"
 
-#: src/languages.c:149
+#: src/languages.c:153
 msgid "Hindi"
 msgstr "hindu"
 
-#: src/languages.c:153
+#: src/languages.c:157
 msgid "Hungarian"
 msgstr "mađarski"
 
-#: src/languages.c:157
+#: src/languages.c:161
 msgid "Icelandic"
 msgstr "islandski"
 
-#: src/languages.c:161
+#: src/languages.c:165
 msgid "Indonesian"
 msgstr "indonežanski"
 
-#: src/languages.c:165
+#: src/languages.c:169
 msgid "Italian"
 msgstr "italijanski"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Irish"
 msgstr "irski"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Japanese"
 msgstr "japanski"
 
-#: src/languages.c:177
+#: src/languages.c:181
 msgid "Kannada"
 msgstr "kanada (južna indija)"
 
-#: src/languages.c:181
+#: src/languages.c:185
 msgid "Korean"
 msgstr "koreanski"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Latvian"
 msgstr "latvijski"
 
-#: src/languages.c:189
+#: src/languages.c:193
 msgid "Lithuanian"
 msgstr "litvanski"
 
-#: src/languages.c:193
+#: src/languages.c:197
 msgid "Malay/Bahasa Melayu"
 msgstr "malajski"
 
-#: src/languages.c:197
+#: src/languages.c:201
 msgid "Maltese"
 msgstr "malteški"
 
-#: src/languages.c:201
+#: src/languages.c:205
 msgid "Marathi"
 msgstr "marati"
 
-#: src/languages.c:205
+#: src/languages.c:209
 msgid "Norwegian/Bokmaal"
 msgstr "norveški/trad. pravopis"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Norwegian/Nynorsk"
 msgstr "norveški/moderni pravopis"
 
-#: src/languages.c:213
+#: src/languages.c:217
 msgid "Punjabi"
 msgstr "pandžabi"
 
-#: src/languages.c:217
+#: src/languages.c:221
 msgid "Polish"
 msgstr "poljski"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Portuguese"
 msgstr "portugalski"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Portuguese/Brazil"
 msgstr "portugalski/Brazil"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Romanian"
 msgstr "rumunski"
 
-#: src/languages.c:233
+#: src/languages.c:237
 msgid "Russian"
 msgstr "ruski"
 
-#: src/languages.c:237
+#: src/languages.c:241
 msgid "Serbian/Cyrillic"
 msgstr "srpski/ćirilica"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Serbian/Latin"
 msgstr "srpski/latinica"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Slovak"
 msgstr "slovački"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Slovenian"
 msgstr "slovenački"
 
-#: src/languages.c:253
+#: src/languages.c:257
 msgid "Spanish"
 msgstr "španski"
 
-#: src/languages.c:257
+#: src/languages.c:261
 msgid "Spanish/Spain"
 msgstr "španski/Španija"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Spanish/Mexico"
 msgstr "španski/Meksiko"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Swedish"
 msgstr "švedski"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Tamil"
 msgstr "tamilski"
 
-#: src/languages.c:273
+#: src/languages.c:277
 msgid "Telugu"
 msgstr "telugu"
 
-#: src/languages.c:277
+#: src/languages.c:281
 msgid "Thai"
 msgstr "tai"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Turkish"
 msgstr "turski"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Ukrainian"
 msgstr "ukrainski"
 
-#: src/languages.c:289
+#: src/languages.c:293
 msgid "Uzbekian"
 msgstr "uzbekistanski"
 
-#: src/languages.c:293
+#: src/languages.c:297
 msgid "Vietnamese"
 msgstr "vijetnamski"
 
-#: src/languages.c:297
+#: src/languages.c:301
 msgid "Walloon"
 msgstr "valun"
 
-#: src/languages.c:301
+#: src/languages.c:305
 msgid "Welsh"
 msgstr "velški"
 
@@ -1212,7 +1212,7 @@ msgstr "Izgleda da su sve poruke prevedene."
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "GPrevodilac — uredite oblike za množinu za prevode poruka"
 
-#: src/messages-table.c:243
+#: src/messages-table.c:252
 msgid "Original"
 msgstr "original"
 
@@ -1240,7 +1240,7 @@ msgstr "Nisam uspeo da otvorim %s -ovanu gettext datoteku „%s“!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Nisam uspeo da otvorim zipovanu datoteku sa prevodom „%s“!"
 
-#: src/parse.c:483
+#: src/parse.c:487
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1251,7 +1251,7 @@ msgstr ""
 "u redu %d.\n"
 "Proverite datoteku i pokušajte iznova."
 
-#: src/parse.c:538
+#: src/parse.c:542
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1260,7 +1260,7 @@ msgstr ""
 "Prazna datoteka:\n"
 "%s"
 
-#: src/parse.c:560
+#: src/parse.c:564
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Datoteka „%s“ uopšte ne postoji!"
@@ -1268,16 +1268,16 @@ msgstr "Datoteka „%s“ uopšte ne postoji!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:692
+#: src/parse.c:696
 msgid "Header record not found - defaulting from preferences"
 msgstr "Zaglavlje nije nađeno — koristi podatke iz postavki"
 
-#: src/parse.c:708
+#: src/parse.c:712
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "GPrevodilac — %s"
 
-#: src/parse.c:920
+#: src/parse.c:924
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1289,12 +1289,12 @@ msgstr ""
 "prevođenja.\n"
 "Vaša datoteka bi trebala biti nazvana „%s.po“."
 
-#: src/parse.c:982
+#: src/parse.c:986
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nisam uspeo da otvorim datoteku „%s“ radi upisa!"
 
-#: src/parse.c:1034
+#: src/parse.c:1038
 #, c-format
 msgid ""
 "File %s\n"
@@ -1312,11 +1312,11 @@ msgstr[2] ""
 "Datoteka %s\n"
 "sadrži %d nejasnih poruka"
 
-#: src/parse.c:1303
+#: src/parse.c:1310
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Nažalost, „msgfmt“ nije dostupan na vašem sistemu!"
 
-#: src/parse.c:1338
+#: src/parse.c:1345
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1601,7 +1601,7 @@ msgstr "Molim unesite vašu e-poštu!"
 msgid "Please enter a valid EMail address!"
 msgstr "Molim unesite ispravnu e-poštu!"
 
-#: src/replace.c:171
+#: src/replace.c:175
 msgid "No replacements made!"
 msgstr "Nisu načinjene nikakve izmene!"
 
@@ -1756,6 +1756,9 @@ msgstr "Domaćin „%s“ nema adresu!"
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Prenos je prekinut!"
+
+#~ msgid "Please enter a string to replace with!"
+#~ msgstr "Unesite tekst kojim ćete da zamenite!"
 
 # bug: plural-forms
 #~ msgid ""
