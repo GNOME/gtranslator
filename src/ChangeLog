@@ -1,8 +1,11 @@
 2000-10-03  Fatih Demir	<kabalak@gmx.net>
 
-	* gui.c: Removed the Message status part of the popup menu
-		to slighten it a bit and made it only react if it's
-		 activated in the prefs.
+	* gui.c: Added some more conditionals in hope of avoiding more
+		crashes, changed the descriptions of the new page's
+		 toggle buttons a bit and removed a g_free as I can't
+		  see any reason why to free a variable which is again
+		   filled 10 lines after the free-ing process.
+		Only react if the option is set in the preferences.
 
 	* prefs.c: Added a 4th page with the options to use the dot char
 		feature and to enable/disable the popup menu. Both of them

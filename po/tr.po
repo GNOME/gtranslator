@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-10-03 12:50+0200\n"
-"PO-Revision-Date: 2000-10-03 12:51+0200\n"
+"POT-Creation-Date: 2000-10-03 23:39+0200\n"
+"PO-Revision-Date: 2000-10-03 23:39+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -207,7 +207,7 @@ msgstr "Son"
 msgid "Missing"
 msgstr "Eksik"
 
-#: src/gui.c:262 src/gui.c:324 src/gui.c:699
+#: src/gui.c:262 src/gui.c:324 src/gui.c:709
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -245,20 +245,20 @@ msgstr "Güle Güle!"
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:689
+#: src/gui.c:699
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Ileti: %d / %d / Durum:"
 
-#: src/dialogs.c:217 src/gui.c:703
+#: src/dialogs.c:217 src/gui.c:713
 msgid "Translated"
 msgstr "Tercüme metinlerinde"
 
-#: src/gui.c:709
+#: src/gui.c:719
 msgid "Stick"
 msgstr "Kalýcý"
 
-#: src/gui.c:713
+#: src/gui.c:723
 msgid "Untranslated"
 msgstr "Tercüme edilmemiþ"
 
@@ -390,12 +390,12 @@ msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Deðiþtirilmemiþ bir dosyayý kaydederken ikaz et"
 
 #: src/prefs.c:258
-msgid "Use the dot char '·' instead of free spaces"
-msgstr "Boþluklar yerine '·' göster"
+msgid "Use the dot char (\"·\") instead of a free space"
+msgstr "Boþluklar yerine (\"·\") harfini kullan"
 
 #: src/prefs.c:261
-msgid "Enable popup menu(s)"
-msgstr "Sað týklama mönüleri kullan"
+msgid "Enable the popup menu"
+msgstr "Sað týklama mönüsünü kullan"
 
 #: src/prefs.c:264
 msgid "Save geometry on exit & restore it on startup"
@@ -482,7 +482,7 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:130 src/parse.c:395
+#: src/parse.c:130 src/parse.c:398
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" hiç yok ki !"
@@ -525,7 +525,7 @@ msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:383
+#: src/parse.c:386
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -537,7 +537,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:440
+#: src/parse.c:443
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -548,11 +548,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:448
+#: src/parse.c:451
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþiksiz"
 
-#: src/parse.c:504
+#: src/parse.c:507
 #, c-format
 msgid ""
 "File %s\n"
@@ -561,7 +561,7 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:556
+#: src/parse.c:559
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -628,6 +628,11 @@ msgstr "Istekte istenilen dil tabanýný belirtmedin !"
 msgid "FYI: Will also lookup the superclass message db.\n"
 msgstr "Bilgi : Üst sýnýf tercüme tabanýný da tarayacaðým.\n"
 
+#: libgtranslator/parse-db.c:48
+#, c-format
+msgid "Using %s as the message database... \n"
+msgstr "%s'yi tercüme tabaný olarak kullanýyorum... \n"
+
 #: libgtranslator/parse-db.c:60
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
@@ -646,11 +651,37 @@ msgstr "Altsýnýf dosya `%s.xml''i bulamadým.\n"
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Üst sýnýf dosya `%s.xml''i deniyorum ...\n"
 
-#: libgtranslator/parse-db.c:130
+#. *
+#. * Print the informations about the message database.
+#. *
+#: libgtranslator/parse-db.c:96
+#, c-format
+msgid "Database creator/administrator: %s\n"
+msgstr "Tercüme tabaný yaratacýsý/yöneticisi: %s\n"
+
+#: libgtranslator/parse-db.c:97
+#, c-format
+msgid "EMail: %s\n"
+msgstr "ePosta: %s\n"
+
+#: libgtranslator/parse-db.c:105
+msgid "Message database informations:\n"
+msgstr "Tercüme tabaný bilgileri:\n"
+
+#: libgtranslator/parse-db.c:106
+#, c-format
+msgid ""
+"Date: %s\n"
+"Serial: %s\n"
+msgstr ""
+"Tarih: %s\n"
+"Seri no: %s\n"
+
+#: libgtranslator/parse-db.c:139
 msgid "The message db file is empty!"
 msgstr "Ileti/tercüme tabaný dosyasý boþ!"
 
-#: libgtranslator/parse-db.c:136
+#: libgtranslator/parse-db.c:145
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr ""
 "Ileti/tercüme tabaný dosyasý bir ileti/tercüme tabaný dosyasýna benzemiyor."

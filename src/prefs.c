@@ -255,10 +255,10 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	* The fourth page with the popup menu & the dot_char.
 	**/
 	use_dot_char=attach_toggle_with_label(fourth_page, 0,
-		_("Use the dot char \'·\' instead of free spaces"),
+		_("Use the dot char (\"·\") instead of a free space"),
 		wants.dot_char, prefs_box_changed);
 	enable_popup_menu=attach_toggle_with_label(fourth_page, 1,
-		_("Enable popup menu(s)"),
+		_("Enable the popup menu"),
 		wants.popup_menu, prefs_box_changed);	
 	save_geometry_tb=attach_toggle_with_label(fourth_page, 2,
 		_("Save geometry on exit & restore it on startup"),

@@ -28,7 +28,6 @@ int main(int argc,char *argv[])
 	GError	*error = NULL;
 	gconf_init(argc,argv, &error);
 	#endif
-	gtranslator_config_init();
 	g_print("Testing the string methods ...");
 	gtranslator_config_set_string("Merhaba", "Hello!");
 	g_print("Getting the test string .......");
@@ -46,8 +45,7 @@ int main(int argc,char *argv[])
 	g_print("Testing the int methods ...\n");
 	gtranslator_config_set_int("Year",2000);
 	g_print("This should be true : 2000 == %i\n",gtranslator_config_get_int("Year"));
-	gtranslator_config_close();
-	parse_db_for_lang("tr");
+	parse_db_for_lang("tr_TR");
 	if(ert)
 	{
 		g_free(ert);

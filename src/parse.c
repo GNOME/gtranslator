@@ -128,7 +128,7 @@ static gboolean actual_parse(void)
 	if(!g_file_exists(po->filename))
 	{
 		error=g_strdup_printf(_("The file `%s' doesn't exist at all!"),po->filename);
-		gnome_app_error(GNOME_APP(app1),error);
+		gnome_app_error(GNOME_APP(app1), error);
 		if(error)
 		{
 			g_free(error);
@@ -343,6 +343,9 @@ static gchar *restore_msg(gchar * given)
 				g_string_prepend(rest, "\"\n\"");
 				here -= 7;
 			} else {
+				/**
+				* FIXME: Crash #1
+				**/
 				g_string_insert(rest,
 						(strrchr(rest->str, ' ') -
 						 rest->str) + 1, "\"\n\"");

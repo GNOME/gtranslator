@@ -19,7 +19,7 @@
 /**
 * Adds a node to the given doc.
 **/
-gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
+gint gtranslator_add_node_to_doc(gchar *filename, xmlDocPtr doc, gchar *nodename, gchar *nodecontent)
 {
 	/**
 	* Check if a nodename has been defined.
@@ -75,7 +75,8 @@ gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodeconten
 			g_warning(_("Couldn't generate node `%s'!"), nodename);
 				return 1;
 		}
-		xmlAddChild(newnode,addnode);
+		xmlAddChild(newnode, addnode);
+		xmlSaveFile(filename, doc);
 		/**
 		* Free all the stuff.
 		**/

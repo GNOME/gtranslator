@@ -569,8 +569,8 @@ void display_msg(GList * list_item)
 			* Go through the characters and search for free spaces and replace them
 			*  with '·''s.
 			**/
-				for(len=0;len<strlen(msg->msgid);++len)
-				{
+			for(len=0;len<strlen(msg->msgid);++len)
+			{
 				/**
 				* Do we have got a free space ?
 				**/
@@ -588,6 +588,10 @@ void display_msg(GList * list_item)
 		**/
 		if(msg->msgstr)
 		{	
+			/**
+			* FIXME: Bug #3 || and I can't see why here a 
+			*  crash occurs.
+			**/
 			for(len=0;len<strlen(msg->msgstr);++len)
 			{
 				if(msg->msgstr[len]==' ')
@@ -620,23 +624,29 @@ void update_msg(void)
 	GtrMsg *msg = GTR_MSG(po->current->data);
 	if (!message_changed)
 		return;
-	if(msg->msgstr)
-	{
-		g_free(msg->msgstr);
-	}
 	len = gtk_text_get_length(GTK_TEXT(trans_box));
 	if (len) {
-		if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
-			if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len -1 )
-			    != '\n')
-				gtk_editable_insert_text(
-				    GTK_EDITABLE(trans_box), "\n", 1, &len);
-		} else {
-			if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len - 1)
-			    == '\n') {
-				gtk_editable_delete_text(
-				    GTK_EDITABLE(trans_box), len-1, len);
-				len--;
+		/**
+		* Do all this only if a STRING is in the boxes, don't operate on
+		*  blank boxes ...
+		**/
+		if(msg->msgid)
+		{
+			/**
+			* FIXME: Bug #2
+			**/
+			if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
+				if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len -1 )
+				    != '\n')
+					gtk_editable_insert_text(
+					    GTK_EDITABLE(trans_box), "\n", 1, &len);
+			} else {
+				if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len - 1)
+				    == '\n') {
+					gtk_editable_delete_text(
+					    GTK_EDITABLE(trans_box), len-1, len);
+					len--;
+				}
 			}
 		}
 		msg->msgstr = gtk_editable_get_chars(GTK_EDITABLE(trans_box),
@@ -841,7 +851,7 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		* The gchar for the text in the translation box which can be changed by
 		*  the user and a guint variable for the length of this text.
 		**/
-		gchar *newstr=g_new(gchar,1);
+		gchar *newstr=g_new0(gchar,1);
 		guint len;
 		/**
 		* Get the text from the translation box.
@@ -865,12 +875,5 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		* Insert the changed text with the '·''s.
 		**/
 		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, newstr, -1);
-		/**
-		* Free the gchar.
-		**/
-		if(newstr)
-		{
-			g_free(newstr);
-		}	
 	}	
 }

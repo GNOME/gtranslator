@@ -23,7 +23,7 @@ void parse_db_for_lang(gchar *language)
 {
 	gchar file[256];
 	gboolean lusp=FALSE;
-	xmlNodePtr node;
+	xmlNodePtr node=NULL;
 	xmlDocPtr xmldoc;
 	/**
 	* Check if we did get a language to search for ..
@@ -45,7 +45,7 @@ void parse_db_for_lang(gchar *language)
 		lusp=TRUE;
 	}
 	sprintf(file,"%s/%s.xml",MESSAGE_DB_DIR,language);
-	g_print("DEBUG: using %s .. \n",file);
+	g_print(_("Using %s as the message database... \n"),file);
 	/**
 	* Parse the xml file.
 	**/
@@ -90,6 +90,11 @@ void parse_db_for_lang(gchar *language)
 	* Get the nodes.
 	**/
 	node=xmldoc->xmlRootNode->xmlChildrenNode;
+	/**
+	* Print the informations about the message database.
+	**/
+	g_print(_("Database creator/administrator: %s\n"),xmlGetProp(xmldoc->xmlRootNode, "author"));
+	g_print(_("EMail: %s\n"),xmlGetProp(xmldoc->xmlRootNode, "email"));
 	while(node!=NULL)
 	{
 		/**
@@ -97,18 +102,22 @@ void parse_db_for_lang(gchar *language)
 		**/
 		if(!strcmp(node->name, "serial"))
 		{
-			g_print("DEBUG: Serial date : %s # : %s\n",xmlGetProp(node, "date"),xmlNodeGetContent(node));
+			g_print(_("Message database informations:\n"));
+			g_print(_("Date: %s\nSerial: %s\n"), xmlGetProp(node, "date"), xmlNodeGetContent(node));
 			
 		}
 		if(!strcmp(node->name, "msgid"))
 		{
 			xmlNodePtr newnode;
 			newnode=node->xmlChildrenNode;
-			g_print("Node: %s - %s\n",xmlGetProp(node, "name"),xmlNodeGetContent(newnode));
-			/**
-			* Free the node.
-			**/
-			xmlFreeNode(newnode);
+			if(newnode)
+			{
+				g_print("Node: %s - %s\n",xmlGetProp(node, "name"),xmlNodeGetContent(newnode));
+				/**
+				* Free the node.
+				**/
+				xmlFreeNode(newnode);
+			}	
 		}
 		node=node->next;
 	}

@@ -22,6 +22,6 @@
 /**
 * Addes a node to the given doc.
 **/
-gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodecontent);
+gint gtranslator_add_node_to_doc(gchar *filename, xmlDocPtr doc,gchar *nodename,gchar *nodecontent);
 
 #endif
