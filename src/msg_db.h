@@ -15,7 +15,7 @@
 #ifndef GTR_MSG_DB_H
 #define GTR_MSG_DB_H 1
 
-#include "interface.h"
+#include "gui.h"
 #include "parse.h"
 
 /**

@@ -16,8 +16,7 @@
 	#include <config.h>
 #endif
 
-#include "interface.h"
-#include "support.h"
+#include "gui.h"
 #include "parse.h"
 
 /**

@@ -11,7 +11,7 @@
 #ifndef GTR_DND_H
 #define GTR_DND_H 1
 
-#include "interface.h"
+#include "gui.h"
 #include "parse.h"
 
 /**

@@ -17,8 +17,7 @@
 #include <popt-gnome.h>
 #include "msg_db.h"
 #include "dnd.h"
-#include "interface.h"
-#include "support.h"
+#include "gui.h"
 #include "session.h"
 #include "messages.h"
 #include "prefs.h" 
@@ -33,11 +32,11 @@ static struct poptOption gtranslator_options [] = {
 	},
 	{
 		"msg-db", 'm', POPT_ARG_STRING, &msg_db,
-		0,N_("The msg_db to use"),"MSG_DB"
+		0,N_("The messages db to use"),"MSG_DB"
 	},
 	{
 		"query", 'q', POPT_ARG_STRING, &query_string,
-		0,N_("Query the msg_db & exit"),"QUERY_STRING"
+		0,N_("Query the messages db & exit"),"QUERY_STRING"
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,

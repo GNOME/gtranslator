@@ -11,7 +11,7 @@
 * -- the source 
 **/
 
-#include "interface.h"
+#include "gui.h"
 
 /**
 * The Gnome-help structure
@@ -339,7 +339,7 @@ static GnomeUIInfo the_msg_db_menu [] =
 {
 	{
 		GNOME_APP_UI_ITEM, N_("_Add"),
-		N_("Add the current message to the msg_db."),
+		N_("Add the current message to the messages DB."),
 		append_to_msg_db, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UP,
 		0, 0, NULL
@@ -347,7 +347,7 @@ static GnomeUIInfo the_msg_db_menu [] =
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("_Query"),
-		N_("Query the msg_db for the current msgid."),
+		N_("Query the messages DB for the current msgid."),
 		NULL, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_DOWN,
 		0, 0, NULL
@@ -395,10 +395,10 @@ static GnomeUIInfo the_menus[] =
           0, 0, NULL
         },
 	{
-		GNOME_APP_UI_SUBTREE, N_("Msg _db"),
+		GNOME_APP_UI_SUBTREE, N_("Message _db"),
 		NULL,
 		the_msg_db_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, N_("Msg _db"),
+		GNOME_APP_PIXMAP_NONE, N_("Message _db"),
 		0, 0, NULL
 	},
         GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
@@ -488,7 +488,7 @@ create_app1 (void)
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
 				_("Add"),
-				_("Add to the msg_db."),NULL,
+				_("Add to the messages db."),NULL,
 				tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(add_button);
 	 /**
@@ -502,8 +502,8 @@ create_app1 (void)
 				/**
 				* Find in the personal catalogue
 				**/
-				_("F/Cat."),
-				_("Find in the personal catalog"),NULL,
+				_("F/DB"),
+				_("Find in the personal messages db"),NULL,
 				tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(cat_button);
 	tmp_toolbar_icon=gnome_stock_pixmap_widget(app1,GNOME_STOCK_PIXMAP_BOOK_OPEN);
@@ -662,6 +662,10 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);
 	gtk_signal_connect(GTK_OBJECT(first_button),"clicked",
 		GTK_SIGNAL_FUNC(get_first_msg),NULL);
+	gtk_signal_connect(GTK_OBJECT(back_button),"clicked",
+		GTK_SIGNAL_FUNC(get_prev_msg),NULL);
+	gtk_signal_connect(GTK_OBJECT(next_button),"clicked",
+		GTK_SIGNAL_FUNC(get_next_msg),NULL);
 	gtk_signal_connect(GTK_OBJECT(last_button),"clicked",
 		GTK_SIGNAL_FUNC(get_last_msg),NULL);
 	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",

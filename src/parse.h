@@ -25,8 +25,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "support.h"
-#include "interface.h"
+#include "gui.h"
 #include "messages.h"
 #include "header_stuff.h"
 #include "gtr_dialogs.h"

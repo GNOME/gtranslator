@@ -16,7 +16,7 @@
 #endif
 
 #include "parse.h"
-#include "interface.h"
+#include "gui.h"
 #include <time.h>
 
 /**

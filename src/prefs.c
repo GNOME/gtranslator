@@ -59,7 +59,7 @@ void prefs_box()
 	warn_if_no_change=gtk_check_button_new_with_label(_("Warn me if I'm trying to save an unchanged file"));
 	warn_if_fuzzy=gtk_check_button_new_with_label(_("Warn if the .po-file contains fuzzy translations"));
 	dont_save_unchanged_files=gtk_check_button_new_with_label(_("Don't save unchanged .po-files"));
-	use_msg_db=gtk_check_button_new_with_label(_("Use the msg_db"));
+	use_msg_db=gtk_check_button_new_with_label(_("Use the messages db"));
 	/**
 	* If previous settings were found they'll be inserted automatically
 	**/
@@ -232,8 +232,7 @@ void prefs_box()
 	/**
 	* The basic signal-handlers 
 	**/
-	/*** FIXME How can I set the first element without this hack ? FIXME ***/
-	gtk_signal_connect(GTK_OBJECT(prefs),"show",
+	gtk_signal_connect(GTK_OBJECT(prefs),"activated",
 		GTK_SIGNAL_FUNC(prefs_box_changed),(gpointer)1);
 	/******************************************************************/
 	gtk_signal_connect(GTK_OBJECT(GTK_ENTRY(GTK_COMBO(authors_language)->entry)),"changed",

@@ -16,7 +16,7 @@
 	#include <config.h>
 #endif
 
-#include "support.h"
+#include "gui.h"
 
 /**
 * The widget for the about box

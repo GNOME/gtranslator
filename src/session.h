@@ -11,7 +11,7 @@
 #ifndef GTR_SESSION_H
 #define GTR_SESSION_H 1
 
-#include "interface.h"
+#include "gui.h"
 #include "parse.h"
 
 /**

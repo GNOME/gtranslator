@@ -242,6 +242,68 @@ void get_first_msg(GtkWidget *widget,gpointer useless)
 }
 
 /**
+* Get the previous message.
+**/
+void get_prev_msg(GtkWidget *widget,gpointer useless)
+{
+	gtr_msg *prev=g_new(gtr_msg,1);
+	clean_text_boxes();
+	msg_pair--;
+	if(msg_pair<=0)
+	{
+		prev=(gtr_msg *)g_list_nth_data(messages,0);
+                gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)prev->msgid,-1);
+                gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)prev->msgstr,-1);
+		gtk_widget_set_sensitive(last_button,TRUE);
+                gtk_widget_set_sensitive(next_button,TRUE);
+                gtk_widget_set_sensitive(first_button,FALSE);
+                gtk_widget_set_sensitive(back_button,FALSE);
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("You've reached the first message"));
+	}
+	else
+	{
+		prev=(gtr_msg *)g_list_nth_data(messages,msg_pair);
+		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)prev->msgid,-1);
+                gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)prev->msgstr,-1);
+	}
+	if(prev)
+	{
+		g_free(prev);
+	}
+}
+
+/**
+* Get the next message
+**/
+void get_next_msg(GtkWidget *widget,gpointer useless)
+{
+	gtr_msg *next=g_new(gtr_msg,1);
+	clean_text_boxes();
+	msg_pair++;
+	if(msg_pair==(g_list_length(messages)-1))
+	{
+		next=(gtr_msg *)g_list_nth_data(messages,(g_list_length(messages)-1));
+	        gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)next->msgid,-1);
+		gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)next->msgstr,-1);
+		gtk_widget_set_sensitive(first_button,TRUE);
+                gtk_widget_set_sensitive(back_button,TRUE);
+                gtk_widget_set_sensitive(last_button,FALSE);
+                gtk_widget_set_sensitive(next_button,FALSE);
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("You've reached the last message."));
+	}
+	else
+	{
+		next=(gtr_msg *)g_list_nth_data(messages,msg_pair);
+		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)next->msgid,-1);
+                gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)next->msgstr,-1);
+	}
+	if(next)
+	{
+		g_free(next);
+	}
+}
+
+/**
 * Get the last entry.
 **/
 void get_last_msg(GtkWidget *widget,gpointer useless)

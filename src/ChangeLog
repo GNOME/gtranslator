@@ -1,5 +1,37 @@
 2000-06-08  Fatih Demir		( kabalak@gmx.net )
 
+	+	Moved interface.c/h to gui.c/h.
+	
+	+	------------------------------------
+
+	+	Changed all msg_db printage to message db
+		
+		as it should be from the beginning on.
+		
+		-> *.c
+	
+	+	Changed the includes from all the files.
+		
+		-> *.h
+
+	+	Changed interface.c/h to gui.c/h.
+	
+	+	Removed support.* really. They'ren't
+		
+		used by neither gtranslator nor from
+		
+		a function of gtranslator.
+		
+		-> Makefile.am
+		
+		-> support.*
+
+	+	Connect the signals, buttons and menu
+		
+		entries with each other.
+		
+		-> interface,c
+
 	+	Changed the field separator from 
 		
 		';;;' to ';;'.
@@ -12,6 +44,8 @@
 		
 		-> gtr_dialogs.c/h
 	
+	+	Doing the two additional routines.
+		
 	+	Fuzzling with the msgid/str catching
 		
 		routines.

@@ -26,7 +26,6 @@
 #include <libgnomeui/gnome-window-icon.h>
 #endif
 
-#include "interface.h"
 #include "about.h"
 #include "dnd.h"
 #include "gtr_dialogs.h"
