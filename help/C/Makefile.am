@@ -2,9 +2,24 @@
 ## gtranslator's docs Makefile.am.
 ##
 
-gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/C
+##
+## Your language locale -- C for the English original manual.
+##
+lc = C
+
+gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/$(lc)
 
 gtranslator_sgmlfile = gtranslator.sgml
+
+gtranslator_omfdir = $(datadir)/omf/gtranslator
+
+gtranslator_omf_DATA = $(gtranslator_omffile)
+
+gtranslator_omffile = gtranslator-$(lc).omf
+
+$(gtranslator_omffile): $(gtranslator_omffile).presetup
+	scrollkeeper-preinstall $(gtranslator_helpdir)/$(gtranslator_sgmlfile) \
+		$(gtranslator_omffile).presetup $(gtranslator_omffile)
 
 gtranslator_htmlfiles = \
 	authors.html \
@@ -15,9 +30,17 @@ gtranslator_htmlfiles = \
 	use-of-gtranslator.html \
 	docbook.css
 
+if SCROLLKEEPER_PRESENT
+gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat $(gtranslator_sgmlfile)
+else
 gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat
+endif
 
+if SCROLLKEEPER_PRESENT
+$(gtranslator_htmlfiles):$(gtranslator_sgmlfile) $(gtranslator_omffile)
+else
 $(gtranslator_htmlfiles):$(gtranslator_sgmlfile)
+endif
 	-@if [ ! -f gtranslator/index.html ]; then cd $(srcdir) && db2html gtranslator.sgml; fi
 	-cd $(srcdir) && cp gtranslator/$@ .
 	
@@ -32,10 +55,15 @@ disthook:
 	
 distclean-generic:
 	@-rm -f $(gtranslator_htmlfiles)
-	@-rm -rf gtranslator
-	@-rm -f Makefile
+	@-rm -rf gtranslator Makefile $(gtranslator_omffile)
 
+
+if SCROLLKEEPER_PRESENT
 install-data-local: index.html
+	scrollkeeper-update
+else	
+install-data-local: index.html
+endif
 
 clean-docs:
 	@-rm -f $(gtranslator_htmlfiles)
@@ -43,4 +71,5 @@ clean-docs:
 
 EXTRA_DIST = $(gtranslator_sgmlfile) \
 	$(gtranslator_htmlfiles) \
+	$(gtranslator_omffile).presetup \
 	topic.dat
