@@ -239,8 +239,8 @@ void gtranslator_htmlizer(GtrPo *po, gchar *save_to)
 	/*
 	 * Produce a nice HTML header.
 	 */ 
-	fprintf(fstream, "<html>\n<head>\n\t<title>%s</title>\n\t",
-		g_basename(po->filename));
+	fprintf(fstream, "<html>\n<head>\n\t<title>%s -- %s</title>\n\t",
+		po->header->prj_name, po->header->prj_version);
 	
 	fprintf(fstream, "<meta name=\"generator\" content=\"gtranslator\">\n");
 	fprintf(fstream, 

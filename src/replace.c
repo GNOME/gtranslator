@@ -22,8 +22,7 @@
 #include "gui.h"
 #include "parse.h"
 #include "prefs.h"
-
-#include <string.h>
+#include "nautilus-string.h"
 
 #include <libgnomeui/libgnomeui.h>
 
@@ -149,6 +148,12 @@ void gtranslator_replace_run(GtrReplace *replace)
 
 	if(replaced_count >= 1)
 	{
+		/*
+		 * Enable the save routines and set the changed
+		 *  new status of the po file.
+		 */
+		po->file_changed=TRUE;
+		
 		enable_actions(ACT_SAVE);
 	}
 	else
@@ -232,70 +237,30 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 		{
 			if(strstr(*string, rstuff->string))
 			{
-				regex_t *rex;
-				regmatch_t pos[5];
+				gchar *nstring;
 				
 				/*
-				 * Compile the regex from the string to 
-				 *  replace..
+				 * Perform the replace via the nautilus string
+				 *  function.
 				 */
-				rex=gnome_regex_cache_compile(rxc, 
-					rstuff->string,
-					REG_EXTENDED|REG_NEWLINE);
-				
-				if(!regexec(rex, (*string), 5, pos, 0))
+				nstring=nautilus_str_replace_substring(*string,
+					rstuff->string, rstuff->replace_string);
+
+				if(nstring)
 				{
-					GString *op=g_string_new("");
-					gint f=1;
-										
 					/*
-					 * Operate on the found match and the
-					 *  original string.
+					 * Set the original string to the new form if
+					 *  the replace was successful.
 					 */
-					while(pos[f].rm_so!=-1)
-					{
-						gint i=0;
-
-						/*
-						 * Copy the real characters to the new
-						 *  string.
-						 */
-						while(i <= pos[f].rm_so)
-						{
-							op=g_string_append_c(op, (*string)[i]);
-						}
-
-						/*
-						 * Append the replace string.
-						 */
-						op=g_string_append(op, rstuff->replace_string);
-
-						/*
-						 * Copy the other resting characters into the string.
-						 */
-						for(i=(pos[f].rm_so+pos[f].rm_eo);i < strlen(*string); ++i)
-						{
-							op=g_string_append_c(op, (*string)[i]);
-						}
-
-						if(op->len > 0)
-						{
-							g_free(*string);
-							*string=op->str;
-						}
-						else
-						{
-							g_string_free(op, FALSE);
-						}
-
-						f++;
-					}
+					g_free(*string);
+					*string=nstring;
 				}
 				
 				/*
 				 * Hope we'd make a replace, therefore we do 
 				 *  increment the replaced_count.
 				 */
+				
 				replaced_count++;
 			}
 		}
