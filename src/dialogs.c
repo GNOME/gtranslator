@@ -666,13 +666,6 @@ static void ih_toggled(GtkWidget *widget, gpointer useless)
 			      GtrPreferences.ignore_hotkeys);
 }
 
-static void find_in_activated(GtkWidget * widget, gpointer which)
-{
-	GtrPreferences.find_in = GPOINTER_TO_INT(which);
-	gtranslator_config_set_int("find/find_in",
-			      GtrPreferences.find_in);
-}
-
 static void find_dlg_clicked(GtkDialog * dialog, gint button,
 			     gpointer findy)
 {
@@ -702,10 +695,10 @@ static void find_dlg_clicked(GtkDialog * dialog, gint button,
 
 void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 {
-	int findMenu=0;
 	static GtkWidget *dialog = NULL;
+
 	GtkWidget *label, *findy, *subfindy, *match_case;
-	GtkWidget *find_in, *menu, *menu_item, *option, *hbox, *ih_button;
+	GtkWidget *ih_button, *sbox, *fi_english, *fi_translation, *fi_comments, *fi_label;
 
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -728,52 +721,19 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case),
 				     GtrPreferences.match_case);
 
-	menu = gtk_menu_new();
-	menu_item = gtk_menu_item_new_with_label(_("English"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-			 G_CALLBACK(find_in_activated),
-			   GINT_TO_POINTER(findEnglish));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	
-	menu_item = gtk_menu_item_new_with_label(_("Translated"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-			 G_CALLBACK(find_in_activated),
-			   GINT_TO_POINTER(findTranslated));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	
-	menu_item = gtk_menu_item_new_with_label(_("Both"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-			 G_CALLBACK(find_in_activated),
-			 GINT_TO_POINTER(findBoth));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	
-	menu_item = gtk_menu_item_new_with_label(_("Comments"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-			 G_CALLBACK(find_in_activated),
-			 GINT_TO_POINTER(findComment));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	
-	menu_item = gtk_menu_item_new_with_label(_("In all strings"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-			 G_CALLBACK(find_in_activated),
-			 GINT_TO_POINTER(findAll));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	
-	switch (GtrPreferences.find_in) {
-	case findEnglish:    findMenu = 0; break;
-	case findTranslated: findMenu = 1; break;
-	case findBoth:       findMenu = 2; break;
-	case findComment:    findMenu = 3; break;
-	case findAll:        findMenu = 4; break;
-	}
-	gtk_menu_set_active(GTK_MENU(menu), findMenu);
+	sbox=gtk_hbox_new(FALSE, 3);
+	fi_label=gtk_label_new(_("Find in:"));
 
-	find_in = gtk_label_new(_("Find in:"));
-	option = gtk_option_menu_new();
-	gtk_option_menu_set_menu(GTK_OPTION_MENU(option), menu);
+	gtk_box_pack_start(GTK_BOX(sbox), GTK_WIDGET(fi_label), FALSE, TRUE, 2);
 
-	hbox = gtk_hbox_new(FALSE, 0);
+	fi_comments=gtk_check_button_new_with_label(_("Comments"));
+	fi_english=gtk_check_button_new_with_label(_("English"));
+	fi_translation=gtk_check_button_new_with_label(_("Translation"));
 
+	gtk_box_pack_start(GTK_BOX(sbox), GTK_WIDGET(fi_comments), FALSE, FALSE, 2);
+	gtk_box_pack_start(GTK_BOX(sbox), GTK_WIDGET(fi_english), FALSE, FALSE, 2);
+	gtk_box_pack_start(GTK_BOX(sbox), GTK_WIDGET(fi_translation), FALSE, FALSE, 2);
+	
 	/*
 	 * Translators: this means that the hotkeys ("_" etc.) are ignored
 	 *  during the search action.
@@ -783,22 +743,19 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
     			   GtrPreferences.ignore_hotkeys);
 
 	/*
-	 * Pack the single elements into the dialog.
+	 * Pack the single elements into the dialog and the box in da box.
 	 */
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
-			   FALSE, FALSE, 0);
+			   FALSE, FALSE, 3);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), findy,
-			   FALSE, FALSE, 0);
+			   FALSE, FALSE, 3);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), match_case,
-			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox), find_in,
-			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox), option,
-			   TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox), ih_button,
-			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
-			   FALSE, FALSE, 0);
+			   FALSE, FALSE, 3);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), ih_button,
+			   FALSE, FALSE, 3);
+
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), sbox,
+			   FALSE, FALSE, 3);
 	
 	g_signal_connect(G_OBJECT(dialog), "response",
 			 G_CALLBACK(find_dlg_clicked), findy);
@@ -817,17 +774,18 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
  */
 void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 {
-	int findMenu=0;
 	int reply;
 	static GtkWidget *dialog = NULL;
-	GtkWidget *label, *sndlabel;
+
+	GtkWidget *label, *sndlabel, *replace_in_label;
 	GtkWidget *findy, *replacy;
-	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
+	GtkWidget *rbox, *ri_english, *ri_translation, *ri_comments;
 
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
+
 	dialog=gtk_dialog_new_with_buttons(
 		_("gtranslator -- replace"),
 		GTK_WINDOW(gtranslator_application),
@@ -836,6 +794,7 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		_("Replace"), GTR_REPLACE_ONCE,
 		_("Replace all"), GTR_REPLACE_ALL,
 		NULL);
+
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTR_REPLACE_ONCE);
 	
 	label=gtk_label_new(_("String to replace:"));
@@ -843,67 +802,33 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 
 	sndlabel=gtk_label_new(_("Replace string:"));
 	replacy=gnome_entry_new("REPLACE_WITH_THIS");
-	
-	menu=gtk_menu_new();
-	
-	menu_item = gtk_menu_item_new_with_label(_("Comments"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-		GTK_SIGNAL_FUNC(find_in_activated),
-		GINT_TO_POINTER(findComment));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
-	menu_item=gtk_menu_item_new_with_label(_("Translated"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-		GTK_SIGNAL_FUNC(find_in_activated),
-		GINT_TO_POINTER(findTranslated));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	
-	menu_item=gtk_menu_item_new_with_label(_("Both"));
-	g_signal_connect(G_OBJECT(menu_item), "activate",
-		GTK_SIGNAL_FUNC(find_in_activated),
-		GINT_TO_POINTER(findBoth));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	
-	switch (GtrPreferences.find_in) 
-	{
-		case findComment: 
-			findMenu=0;
-				break;
-			
-		case findTranslated:
-			findMenu=1;
-				break;
-		
-		case findBoth:
-			findMenu=2;
-				break;
-	}
-	
-	gtk_menu_set_active(GTK_MENU(menu), findMenu);
-	
-	find_in=gtk_label_new(_("Replace in:"));
-	option=gtk_option_menu_new();
-	gtk_option_menu_set_menu(GTK_OPTION_MENU(option), menu);
+	rbox=gtk_hbox_new(FALSE, 3);
 
-	hbox=gtk_hbox_new(FALSE, 0);
+	replace_in_label=gtk_label_new(_("Replace in:"));
+	gtk_box_pack_start(GTK_BOX(rbox), GTK_WIDGET(replace_in_label), FALSE, TRUE, 2);
 
+	ri_comments=gtk_check_button_new_with_label(_("Comments"));
+	ri_english=gtk_check_button_new_with_label(_("English"));
+	ri_translation=gtk_check_button_new_with_label(_("Translation"));
+
+	gtk_box_pack_start(GTK_BOX(rbox), GTK_WIDGET(ri_comments), FALSE, FALSE, 2);
+	gtk_box_pack_start(GTK_BOX(rbox), GTK_WIDGET(ri_english), FALSE, FALSE, 2);
+	gtk_box_pack_start(GTK_BOX(rbox), GTK_WIDGET(ri_translation), FALSE, FALSE, 2);
+	
 	/*
 	 * Pack the single elements into the dialog.
 	 */
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
-		FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), 
-		findy, FALSE, FALSE, 0);
+		FALSE, FALSE, 3);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), findy, 
+		FALSE, FALSE, 3);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), sndlabel,
-		FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), 
-		replacy, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox), find_in,
-		FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox), option,
-		TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
-		FALSE, FALSE, 0);
+		FALSE, FALSE, 3);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), replacy,
+		FALSE, FALSE, 3);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), rbox,
+		FALSE, FALSE, 3);
 	
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
@@ -927,17 +852,23 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		replaceme=gtk_editable_get_chars(GTK_EDITABLE(
 			gnome_entry_gtk_entry(GNOME_ENTRY(replacy))), 0, -1);
 
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-
 		if(reply==1)
 		{
-			rpl=gtranslator_replace_new(findme, replaceme, TRUE, 0);
+			rpl=gtranslator_replace_new(findme, replaceme, TRUE, 0,
+				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_comments)),
+				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_english)),
+				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_translation)));
 		}
 		else
 		{
 			rpl=gtranslator_replace_new(findme, replaceme, FALSE, 
-				g_list_position(po->messages, po->current));
+				g_list_position(po->messages, po->current),
+				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_comments)),
+				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_english)),
+				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_translation)));
 		}
+
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 
 		GTR_FREE(findme);
 		GTR_FREE(replaceme);
@@ -1095,8 +1026,6 @@ void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 		FALSE, FALSE, 0);
 	gtk_window_set_focus(GTK_WINDOW(dialog),
 		gnome_entry_gtk_entry(GNOME_ENTRY(entry)));
-//	gtk_dialog_editable_enters(GTK_DIALOG(dialog),
-//		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(entry))));
 
 	g_signal_connect(G_OBJECT(dialog), "response",
 		GTK_SIGNAL_FUNC(gtranslator_open_uri_dialog_clicked), entry);

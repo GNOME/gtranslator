@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,6 +32,10 @@ typedef struct
 
 	gboolean 	replace_all;
 	gint 		start_offset;
+
+	gboolean	replace_in_comments;
+	gboolean	replace_in_english;
+	gboolean	replace_in_translation;
 } GtrReplace;
 
 #define GTR_REPLACE(x) ((GtrReplace *) x)
@@ -40,7 +44,8 @@ typedef struct
  * Creation/deletion of a GtrReplace structure.
  */
 GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
-	gboolean do_it_for_all, gint start);
+	gboolean do_it_for_all, gint start, gboolean replace_in_comments,
+	gboolean replace_in_english, gboolean replace_in_translation);
 
 void gtranslator_replace_free(GtrReplace **replace);
 

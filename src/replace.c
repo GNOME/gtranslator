@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -49,7 +49,8 @@ static gint replaced_count=0;
  * Create a new GtrReplace object.
  */
 GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
-	gboolean do_it_for_all, gint start)
+	gboolean do_it_for_all, gint start, gboolean replace_in_comments,
+	gboolean replace_in_english, gboolean replace_in_translation)
 {
 	GtrReplace *newreplace=g_new0(GtrReplace, 1);
 
@@ -64,14 +65,11 @@ GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
 	newreplace->replace_string=g_strdup(replace);
 	newreplace->start_offset=start;
 
-	if(do_it_for_all)
-	{
-		newreplace->replace_all=TRUE;
-	}
-	else
-	{
-		newreplace->replace_all=FALSE;
-	}
+	newreplace->replace_all=do_it_for_all;
+
+	newreplace->replace_in_comments=replace_in_comments;
+	newreplace->replace_in_english=replace_in_english;
+	newreplace->replace_in_translation=replace_in_translation;
 
 	if(newreplace)
 	{
@@ -188,21 +186,21 @@ static void replace_msg(gpointer data, gpointer replace)
 	/*
 	 * Perform the replace actions according to the given action class.
 	 */
-	switch(GtrPreferences.find_in)
+	if(l_replace->replace_in_comments)
 	{
-		case 4:
-			replace_core(&GTR_COMMENT(msg->comment)->comment, l_replace);
-				break;
-
-		case 2:
-			replace_core(&msg->msgstr, l_replace);
-				break;
-
-		case 3:
-			replace_core(&GTR_COMMENT(msg->comment)->comment, l_replace);
-			replace_core(&msg->msgstr, l_replace);
-				break;
+		replace_core(&GTR_COMMENT(msg->comment)->comment, l_replace);
 	}
+
+	if(l_replace->replace_in_english)
+	{
+		replace_core(&msg->msgid, l_replace);
+	}
+
+	if(l_replace->replace_in_translation)
+	{
+		replace_core(&msg->msgstr, l_replace);
+	}
+
 }
 
 /*
