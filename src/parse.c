@@ -73,6 +73,11 @@ static void write_the_message(gpointer data, gpointer fs);
 static gchar *restore_msg(const gchar * given);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
 
+/*
+ * Remove the translation and update the message data.
+ */
+static void remove_translation(gpointer message, gpointer useless);
+
 static void check_msg_status(GtrMsg * msg)
 {
 	if (msg->msgstr)
@@ -871,16 +876,83 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 }
 
 /*
+ * Remove the given message's translation -- also update the flags.
+ */
+static void remove_translation(gpointer message, gpointer useless)
+{
+	GtrMsg 	*msg=GTR_MSG(message);
+	gboolean internal_change;
+	
+	g_return_if_fail(msg!=NULL);
+	g_return_if_fail(msg->msgid!=NULL);
+
+	/*
+	 * Free any translation which is left over.
+	 */
+	if(msg->msgstr)
+	{
+		GTR_FREE(msg->msgstr);
+		internal_change=TRUE;
+	}
+
+	/*
+	 * Remove the "translated" status bits and set the untranslated bit.
+	 */
+	if(msg->status & GTR_MSG_STATUS_TRANSLATED)
+	{
+		msg->status &= ~GTR_MSG_STATUS_TRANSLATED;
+		internal_change=TRUE;
+	}
+	
+	if(msg->status & GTR_MSG_STATUS_FUZZY)
+	{
+		msg->status &= ~GTR_MSG_STATUS_FUZZY;
+		internal_change=TRUE;
+	}
+
+	msg->status |= GTR_MSG_STATUS_UNKNOWN;
+
+	/*
+	 * If we did perform any internal change, activate the Save/Revert
+	 *  actions and set the po file's "file_changed" variable to TRUE.
+	 */
+	if(internal_change)
+	{
+		po->file_changed=TRUE;
+		
+		gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);
+	}
+}
+
+/*
  * Remove all translations from the current po file.
  */
 void gtranslator_remove_all_translations()
 {
+	gboolean	prev_file_changed=po->file_changed;
+	
 	g_return_if_fail(file_opened==TRUE);
 	g_return_if_fail(po->messages!=NULL);
 
 	/*
-	 * FIXME: Write this.
+	 * Remove the translations, update the statistics.
 	 */
+	g_list_foreach(po->messages, (GFunc) remove_translation, NULL);
+	gtranslator_get_translated_count();
+
+	/*
+	 * Update (clear and rebuild) the messages table/tree.
+	 */
+	gtranslator_messages_table_clear();
+	gtranslator_messages_table_create();
+
+	/*
+	 * Re-go to the current message if any change has been made.
+	 */
+	if(!prev_file_changed && po->file_changed)
+	{
+		gtranslator_message_go_to(po->current);
+	}
 }
 
 /*
