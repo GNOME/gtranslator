@@ -1,5 +1,13 @@
 2003-08-26  Fatih Demir <kabalak@gtranslator.org>
 
+	* dialogs.c: Also close the auto translation and query dialogs when
+		there's any response - the gtk_widget_destroy callbacks where
+		 missing sometimes; this solves b.g.o #120570.
+
+	* messaegs-table.c: Set/unset the "table_already_created" var when
+		creating/clearing the messages table - doesn't interact with
+		 the bug #120596 but should make the var handling better.
+
 	* messages-table.c & parse.[ch]: Added the "table_already_created"
 		gboolean value to the GtrPo structure which gets set to "TRUE"
 		 if the messages table has been built up - fixes b.g.o #120596

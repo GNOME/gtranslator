@@ -288,8 +288,10 @@ void gtranslator_messages_table_create (void)
 
   GtkTreeStore *model;
 
-  if(!file_opened)
-    return;
+  if(!file_opened || po->table_already_created)
+  {
+	return;
+  }
 
   list=po->messages;
 

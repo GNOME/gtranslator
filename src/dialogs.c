@@ -1294,11 +1294,7 @@ void gtranslator_query_dialog(void)
 
 	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 
-	if(reply==2)
-	{
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-	}
-	else if(reply==1 || !reply)
+	if(reply==1 || !reply)
 	{
 		gchar *query_text;
 	
@@ -1433,6 +1429,10 @@ Would you like to insert it into the translation?"),
 			}
 		}
 	}
+	else
+	{
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+	}
 }
 
 /*
@@ -1440,26 +1440,26 @@ Would you like to insert it into the translation?"),
  */
 void gtranslator_auto_translation_dialog(void)
 {
-	static GtkWidget *dialog=NULL;
+	static GtkWidget *at_dialog=NULL;
 	gint 		reply;
 
-	if(dialog != NULL) {
-		gtk_window_present(GTK_WINDOW(dialog));
+	if(at_dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(at_dialog));
 		return;
 	}
 
-	dialog=gtk_message_dialog_new(
+	at_dialog=gtk_message_dialog_new(
 		GTK_WINDOW(gtranslator_application),
 		GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_MESSAGE_WARNING,
+		GTK_MESSAGE_QUESTION,
 		GTK_BUTTONS_YES_NO,
 		_("Should gtranslator autotranslate the file using information\n\
 from your personal learn buffer?"));
 
-	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
+	gtk_dialog_set_default_response(GTK_DIALOG(at_dialog), GTK_RESPONSE_YES);
 
-	gtranslator_dialog_show(&dialog, "gtranslator -- autotranslate?");
-	reply=gtk_dialog_run(GTK_DIALOG(dialog));
+	gtranslator_dialog_show(&at_dialog, "gtranslator -- autotranslate?");
+	reply=gtk_dialog_run(GTK_DIALOG(at_dialog));
 	
 	/*
 	 * Only handle the "Yes" case as we do not think about the "No" case --
@@ -1472,6 +1472,8 @@ from your personal learn buffer?"));
 		 */
 		gtranslator_learn_autotranslate(TRUE);
 	}
+
+	gtk_widget_destroy(GTK_WIDGET(at_dialog));
 }
 
 /*
