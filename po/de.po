@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-09-18 00:05+0200\n"
-"PO-Revision-Date: 2000-09-18 00:04+0200\n"
+"POT-Creation-Date: 2000-09-20 19:42+0200\n"
+"PO-Revision-Date: 2000-09-20 19:51+0200\n"
 "Last-Translator: Christian Meyer <linux@chrisime.de>\n"
 "Language-Team: deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -604,8 +604,7 @@ msgstr "FYI: Auch in der übergeordneten Datenbank wird nachgesehen.\n"
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr ""
-"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent "
-"werden.\n"
+"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent werden.\n"
 
 #. *
 #. * Print some information.
@@ -662,6 +661,56 @@ msgstr "Teamdatei 'teams.xm' in %s kann nicht geöffnet werden!"
 #: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
 msgstr "Die Liste der Anwendungen konnte nicht zurückgegeben werden."
+
+#: libgtranslator/preferences.c:68
+msgid "No path defined where I could get the string from."
+msgstr "Kein Pfad definiert, von dem der String erhalten werden kann"
+
+#: libgtranslator/preferences.c:91
+#, c-format
+msgid "Can't set the string `%s' for a non-defined path!\n"
+msgstr ""
+"Der String '%s' kann nicht für einen nicht definierten Pfad gesetzt werden!\n"
+
+#: libgtranslator/preferences.c:97
+#, c-format
+msgid "No string defined for the path `%s'!"
+msgstr "Kein String für den Pfad '%s' definiert!"
+
+#: libgtranslator/preferences.c:121
+msgid "No path defined where I could get the integer from!"
+msgstr "Kein Pfad definiert, von den der INteger erhalten werden kann!"
+
+#: libgtranslator/preferences.c:122
+msgid "Returning `1' for assurance .."
+msgstr "Gehe zur Sicherheit '1' zurück..."
+
+#: libgtranslator/preferences.c:141
+#, c-format
+msgid "Can't set the value `%i' for a non-defined path!"
+msgstr "Kann der Wert '%i' nicht für einen undefinierten Pfad setzen!"
+
+#: libgtranslator/preferences.c:147
+#, c-format
+msgid "No value defined for the path `%s'!"
+msgstr "Keine Werte definiert für Pfad '%s'!"
+
+#: libgtranslator/preferences.c:169
+msgid "No path defined where I could get the boolean from."
+msgstr "Kein Pfad definiert, von dem der Boolean-Wert erhalten werden kann"
+
+#: libgtranslator/preferences.c:170
+msgid "Returning `FALSE' for assurance ..."
+msgstr "Gebe zur Sicherheit 'FALSCH' zurück..."
+
+#: libgtranslator/preferences.c:187
+msgid "Can't set a boolean value for a non-defined path!"
+msgstr "Kann keinen Boolean-Wert für einen undefinierten Pfad setzen!"
+
+#: libgtranslator/preferences.c:193
+#, c-format
+msgid "No boolean value defined for the path `%s'!"
+msgstr "Kein Boolean-Wert definiert für den Pafd '%s'!"
 
 #: src/languages.h:57
 msgid "Arabic"
@@ -826,3 +875,4 @@ msgstr "wallonisch"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "walisisch"
+
