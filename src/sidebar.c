@@ -43,10 +43,30 @@ static EShortcutModel	*model;
 static GtkWidget	*sidebar;
 
 /*
+ * Erh, a small own data type for the shortcut view items.
+ */
+typedef struct
+{
+	const gchar	*name;
+	const gchar	*uri_prefix;
+} GtrShortcutViewItem;
+
+/*
+ * The internally used GtrShortcutViewItem array.
+ */
+static GtrShortcutViewItem gtranslator_shortcut_view_items[] = 
+{
+	{ N_("Message"), "message:" },
+	{ N_("Number"), "number:" },
+	{ N_("Format"), "format:" },
+	{ N_("Hotkey"), "hotkey:" },
+	{ NULL,	 NULL }
+};
+
+/*
  * The internal icon callback method.
  */ 
-GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
-	gpointer data);
+GdkPixbuf *get_shortcut_icon(const gchar *url);
 
 /*
  * Shows the right view for the clicked icon on the sidebar.
@@ -71,12 +91,6 @@ GtkWidget *gtranslator_sidebar_new()
 	e_shortcut_bar_set_model(E_SHORTCUT_BAR(sidebar), model);
 
 	/*
-	 * This is our general icon callback for any item in the shortcut bar.
-	 */
-	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(sidebar),
-		get_shortcut_icon, NULL);
-	
-	/*
 	 * Our views/bookmarks sidebar.
 	 */  
 	e_shortcut_model_add_group(E_SHORTCUT_BAR(sidebar)->model,
@@ -85,7 +99,7 @@ GtkWidget *gtranslator_sidebar_new()
 		-1, e_utf8_from_locale_string(_("Bookmarks")));
 
 	e_shortcut_bar_set_view_type(E_SHORTCUT_BAR(sidebar), 0, 
-		E_ICON_BAR_SMALL_ICONS);
+		E_ICON_BAR_LARGE_ICONS);
 
 	gtk_signal_connect(GTK_OBJECT(sidebar), "item_selected",
 		GTK_SIGNAL_FUNC(select_icon), NULL);	
@@ -98,26 +112,27 @@ GtkWidget *gtranslator_sidebar_new()
  */ 
 void gtranslator_sidebar_activate_views()
 {
+	GdkPixbuf	*pixbuf;
+	gint		 count=0;
+	
 	g_return_if_fail(po->filename!=NULL);
 
 	/*
-	 * Add the current view models to the bar.
-	 */ 
-	e_shortcut_model_add_item(model, 0, -1, 
-		"message:",
-		e_utf8_from_locale_string(_("Message")));
+	 * Cruise through our internally used array.
+	 */
+	while(gtranslator_shortcut_view_items[count].name!=NULL)
+	{
+		pixbuf=get_shortcut_icon(gtranslator_shortcut_view_items[count].uri_prefix);
 
-	e_shortcut_model_add_item(model, 0, -1,
-		"number:",
-		e_utf8_from_locale_string(_("Number")));
+		e_shortcut_model_add_item(model, 0, -1,
+			gtranslator_shortcut_view_items[count].uri_prefix,
+			e_utf8_from_locale_string(gtranslator_shortcut_view_items[count].name),
+			pixbuf);
 
-	e_shortcut_model_add_item(model, 0, -1,
-		"format:",
-		e_utf8_from_locale_string(_("Format")));
-
-	e_shortcut_model_add_item(model, 0, -1,
-		"hotkey:",
-		e_utf8_from_locale_string(_("Hotkey")));
+		gdk_pixbuf_unref(pixbuf);
+		
+		count++;
+	}
 }
 
 /*
@@ -150,8 +165,7 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 /*
  * Sets the icons in the shortcut bar for the given url type.
  */
-GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
-	gpointer data)
+GdkPixbuf *get_shortcut_icon(const gchar *url)
 {
 	GdkPixbuf *icon;
 	gchar *pixmap_filename;
