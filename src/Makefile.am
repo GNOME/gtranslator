@@ -21,7 +21,6 @@ GTRANSLATOR_BUILD_VERSIONS = "$(shell glib-config --version) / $(shell gtk-confi
 	sed \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&BACKENDS_DIR","$(libdir)/gtranslator/backends",g \
-	-e s,"&BACKENDS_TMDIR","$(libdir)/gtranslator/translation-memories",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
 	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \

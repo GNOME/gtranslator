@@ -165,8 +165,6 @@ int main(int argc, char *argv[])
 		NICE_PRINT(BUILD_VERSIONS);
 		g_print(_("Backends directory:"));
 		NICE_PRINT(BACKENDS_DIR);
-		g_print(_("TM backends directory:"));
-		NICE_PRINT(BACKENDS_TM_DIR);
 		g_print(_("Colorschemes directory:"));
 		NICE_PRINT(SCHEMESDIR);
 		g_print(_("Scripts directory:"));
