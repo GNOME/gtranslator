@@ -473,7 +473,6 @@ int main(int argc, char *argv[])
 		 */
 		gtranslator_learn_po_file(po);
 		gtranslator_learn_shutdown();
-		gtranslator_po_free();
 
 		/*
 		 * Set up the "runtime/filename" config. key to a sane value.
