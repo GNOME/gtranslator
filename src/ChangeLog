@@ -1,5 +1,19 @@
 2001-10-01  Fatih Demir <kabalak@gtranslator.org>
 
+	* gui.c & sighandling.c: Remove all backends on quitting/closing down
+		gtranslator -- the backend informations are now also freed.
+
+	* learn.c & main.c: Honor the new options while operating in the main
+		routine for loading the backends and while querying the learn
+		 buffer for the fuzzy matching option.
+
+	* prefs_init.c: Initialize the new options to sane values and integrate
+		them in the normal first init canon.
+
+	* prefs.c/.h: New options to inhibit loading of backends on startup
+		and to enable/disable "fuzzy matching" query methods for the
+		 learn buffer.
+
 	* prefs-dialog.c/.h: Add a "content" gpointer part which shall always
 		point to the currently shown widget in the content area.
 

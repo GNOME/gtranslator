@@ -182,10 +182,20 @@ int main(int argc, char *argv[])
 	}
 
 	/*
+	 * Read all of our "normal" preferences -- translator data is now
+	 *  outsourced into the GtrTranslator structure.
+	 */
+	gtranslator_preferences_read();
+
+	/*
 	 * If the loading of the modules isn't inhibited, try to load all
 	 *  backends.
 	 */
-	if(!no_modules)
+	if(!GtrPreferences.load_backends || no_modules)
+	{
+		backends=NULL;
+	}
+	else
 	{
 		/*
 		 * Test first if the local libgmodule supports modules at all.
@@ -204,10 +214,6 @@ int main(int argc, char *argv[])
 			 gtranslator_backend_open_all_backends(BACKENDS_DIR);
 		}
 	}
-	else
-	{
-		backends=NULL;
-	}
 
 	/*
 	 * Show the application window with icon.
@@ -223,7 +229,6 @@ int main(int argc, char *argv[])
 	 * Initialize the regular expression cache 
 	 */
 	rxc = gnome_regex_cache_new_with_size(20);
-	gtranslator_preferences_read();
 
 	/*
 	 * Read the translator information/data into our generally used 

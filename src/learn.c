@@ -728,7 +728,7 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	{
 		return found_string;
 	}
-	else
+	else if(GtrPreferences.fuzzy_matching)
 	{
 		gchar	*query_string;
 
@@ -755,6 +755,10 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 		{
 			return found_string;
 		}
+	}
+	else
+	{
+		return NULL;
 	}
 }
 
