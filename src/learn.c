@@ -28,7 +28,6 @@
  */
 void gtranslator_learn_message(GtrMsg *msg)
 {
-	GtrID *id;
 	gchar *id_string;
 	
 	g_return_if_fail(msg!=NULL);
@@ -37,10 +36,7 @@ void gtranslator_learn_message(GtrMsg *msg)
 	/*
 	 * Generate the GtrID and convert it to a plain string.
 	 */
-	id=gtranslator_id_new();
-	id_string=gtranslator_id_string_from_id(GTR_ID(id));
-
-	gtranslator_id_free(&id);
+	id_string=gtranslator_id_new_id_string();
 
 	if(gtranslator_tm_query_for_message(msg->msgid, NULL)==-1)
 	{

@@ -102,9 +102,18 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 		{
 			if(strip_extension)
 			{
-				files=g_list_append(files, 
-					gtranslator_utils_get_raw_file_name(
-						entry->d_name));
+				gchar *file;
+
+				file=gtranslator_utils_get_raw_file_name(
+					entry->d_name);
+				
+				if(file)
+				{
+					files=g_list_append(files, 
+						g_strdup(file)); 
+				}
+
+				g_free(file);
 			}
 			else
 			{

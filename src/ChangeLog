@@ -1,5 +1,15 @@
 2001-05-10  Fatih Demir <kabalak@gtranslator.org>
 
+	* utf8.c: Made the environment/language set/get-ting routines work
+		more intelligently and made the processes not start 
+		 independently whether we're successful or not.
+
+	* Makefile.am: Corrected a stupid error in the "defines.include" rule:
+		of course the backends directory is in $(libdir)/gtranslator.
+
+	* main.c: Added the "--no-modules/-n" option for inhibiting any module
+		usage -- also added bits of backends stuff.
+
 	* utils.c: Use the nautilus_strcmp function for sorting the file list.
 
 	* learn.c: Use the new GtrID routines to get a TM id.

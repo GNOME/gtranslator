@@ -23,6 +23,7 @@
 #endif
 
 #include "actions.h"
+#include "backend.h"
 #include "color-schemes.h"
 #include "defines.include"
 #include "dialogs.h"
@@ -36,9 +37,9 @@
 #include "sighandling.h"
 #include "utils.h"
 
-#include <gtk/gtkmain.h>
-
 #include <signal.h>
+#include <gmodule.h>
+#include <gtk/gtkmain.h>
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-init.h>
@@ -56,6 +57,7 @@ static gchar 	*scheme_filename=NULL;
 static gchar 	*save_html_output_file=NULL;
 static gchar 	*domains_dir=NULL;
 static gboolean	build_informations=FALSE;
+static gboolean	no_modules=FALSE;
 
 /*
  * gtranslator's option table.
@@ -72,6 +74,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0, N_("Specifies the main-window geometry"), N_("GEOMETRY")
+	},
+	{
+		"no-modules", 'n', POPT_ARG_NONE, &no_modules,
+		0, N_("Don't load'/use any backend modules"), NULL
 	},
 	{
 		"querydomaindir", 'q', POPT_ARG_STRING, &domains_dir,
@@ -174,6 +180,41 @@ int main(int argc, char *argv[])
 		#undef NICE_PRINT
 
 		exit(1);
+	}
+	
+	/*
+	 * If the loading of the modules isn't inhibited, try to load all
+	 *  backends.
+	 */
+	if(!no_modules)
+	{
+		/*
+		 * Test first if the local libgmodule supports modules at all.
+		 */
+		if(g_module_supported()==FALSE)
+		{
+			/*
+			 * The bad case; print a warning and set our module
+			 *  list to NULL.
+			 */
+			g_warning(_("Unfortunately your GModule implementation doesn't support loading dynamic modules!"));
+			g_print("gtranslator won't load any backend module...");
+
+			backends=NULL;
+		}
+		else
+		{
+			/*
+			 * Load all backends from the default backends 
+			 *  directory.
+			 */
+			 gtranslator_backend_open_all_backends(BACKENDS_DIR);
+		}
+	}
+	else
+	{
+		g_message(_("gtranslator won't load any backend module..."));
+		backends=NULL;
 	}
 
 	/*

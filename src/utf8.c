@@ -22,6 +22,7 @@
 
 #include <locale.h>
 
+#include <libgnome/gnome-i18n.h>
 #include <gal/widgets/e-unicode.h>
 
 /*
@@ -71,6 +72,7 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg **msg)
 void gtranslator_utf8_convert_po_to_utf8(void)
 {
 	gchar *old_env;
+	gchar *new_env;
 	
 	if(!file_opened)
 	{
@@ -78,18 +80,27 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	}
 
 	old_env=setlocale(LC_ALL, "");
-	
-	setlocale(LC_ALL, 
-		gtranslator_utils_get_locale_name());
-	
-	convert_all_messages(po->messages, 
-		(GFreeFunc) gtranslator_utf8_convert_message_to_utf8);
+	new_env=gtranslator_utils_get_locale_name();
 
-	/*
-	 * Set the po file charset to UTF-8 as we did convert it now.
-	 */
-	po->header->charset="UTF-8";
-
+	if(new_env)
+	{
+		setlocale(LC_ALL, new_env);
+	
+		convert_all_messages(po->messages, 
+			(GFreeFunc) gtranslator_utf8_convert_message_to_utf8);
+		
+		/*
+		 * Set the po file charset to UTF-8 as we did convert it now.
+		 */
+		g_free(po->header->charset); 
+		po->header->charset=g_strdup("UTF-8");
+	}
+	else
+	{
+		g_warning(_("Couldn't convert po file `%s' to UTF-8!"),
+			po->filename);
+	}
+	
 	setlocale(LC_ALL, old_env);
 }
 
@@ -99,6 +110,7 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 void gtranslator_utf8_convert_po_from_utf8(void)
 {
 	gchar *old_env;
+	gchar *new_env;
 	
 	if(!file_opened)
 	{
@@ -106,11 +118,33 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 	}
 
 	old_env=setlocale(LC_ALL, "");
-	setlocale(LC_ALL, 
-		gtranslator_utils_get_locale_name());
+	new_env=gtranslator_utils_get_locale_name();
 
-	convert_all_messages(po->messages,
-		(GFreeFunc) gtranslator_utf8_convert_message_from_utf8);
+	if(new_env)
+	{
+		gchar *charset;
+		charset=gtranslator_utils_get_locale_charset();
+
+		setlocale(LC_ALL, new_env);
+		
+		convert_all_messages(po->messages,
+			(GFreeFunc) gtranslator_utf8_convert_message_from_utf8);
+
+		/*
+		 * Assign the converted charset value.
+		 */
+		if(charset)
+		{
+			g_free(po->header->charset);
+			po->header->charset=g_strdup(charset);
+			g_free(charset);
+		}
+	}
+	else
+	{
+		g_warning(_("Couldn't convert UTF-8 po file `%s'!"),
+			po->filename);
+	}
 
 	setlocale(LC_ALL, old_env);
 }
