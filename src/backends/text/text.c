@@ -31,6 +31,15 @@
 #include "../../parse.h"
 #include "../../prefs.h"
 
+/*
+ * The prototypes:
+ */
+void write_msg(GList *message, gpointer file);
+gboolean backend_open(const gchar *filename);
+gboolean backend_save(void);
+gboolean backend_save_as(const gchar *filename);
+void backend_close(void);
+
 void write_msg(GList *message, gpointer file)
 {
 	if(message)

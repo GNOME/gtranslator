@@ -37,6 +37,14 @@
 
 xmlDocPtr doc;
 
+/*
+ * The prototypes:
+ */
+gboolean backend_open(const gchar *filename);
+gboolean backend_save(void);
+gboolean backend_save_as(const gchar *filename);
+void backend_close(void);
+
 gboolean backend_open(const gchar *filename)
 {
 	g_return_val_if_fail(filename!=NULL, FALSE);
