@@ -2,8 +2,6 @@
 
 SUBDIRS = data debian doc help man src po
 
-bin_SCRIPTS = pozilla.sh
-
 EXTRA_DIST= \
 		$(bin_SCRIPTS) \
 		DEPENDS \
@@ -23,4 +21,7 @@ cvspack: distdir
 	@-rm -rf $(distdir)
 
 cvsdeb: debian/rules
-	./debian/rules binary
+	@echo Creating debian package...
+	@-rm -f build-stamp configure-stamp install-stamp
+	@./debian/rules configure
+	@./debian/rules binary

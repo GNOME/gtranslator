@@ -1,5 +1,7 @@
 ## the ./data/scripts/Makefile.am of gtranslator
 
+bin_SCRIPTS = pozilla.sh
+
 scriptdir = $(datadir)/gtranslator/scripts
 script_SCRIPTS = \
 	build-gtranslator-learn-buffer.sh \
