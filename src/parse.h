@@ -22,15 +22,28 @@
 #include "support.h" 
 
 /*
-*	two-dimensional array for
-*	the char's of msgid & msgstr :
+*	A structure for the po-files :
 */
-char iline[256][256],sline[256][256],;
+struct po_file {
+	const char *filename;
+	unsigned int maximal_position;
+	gboolean db_enabled;	
+};
 
 /*
-*	This are the dimensioneers for the *line-array ..
+*	The structure for the transations :	
 */
-int count,max_count,old_count;
+struct message  {
+	struct po_file *po-file;
+	char *msgid;
+	char *msgstr;
+	unsigned int position;
+};
+
+/*
+*	This are the global count variables  
+*/
+int count,max_count;
 
 /*
 *	A gboolean for the silly question if a file is open ...
@@ -62,3 +75,13 @@ void check_file(FILE *);
 *	The proto for the real parse routine ..
 */
 void parse(void);
+
+/*
+*	Get next msgid 
+*/
+int get_next_msgid(FILE *,char *);
+
+/*
+*	Get next msgstr
+*/
+int get_next_msgstr(FILE *,char *);

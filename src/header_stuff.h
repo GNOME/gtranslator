@@ -15,7 +15,6 @@
 /*
 *	Some variables needed for the search-routines .
 */
-
 char tmp[256];
 
 /*

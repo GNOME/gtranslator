@@ -5,12 +5,14 @@
 ## should be build , too .
 ## ------------------------------------------------------
 
+msg_db_dir = $(datadir)/gtranslator/
+
 extra_flags = -DDEBUG
 
 INCLUDES = \
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR)  \
-	$(extra_flags)
+	$(extra_flags) -DMSG_DB_DIR=\"$(msg_db_dir)\"
 
 bin_PROGRAMS = gtranslator
 
@@ -20,7 +22,8 @@ gtranslator_SOURCES = \
 	interface.c interface.h \
 	callbacks.c callbacks.h \
 	parse.c	parse.h \
-	header_stuff.c header_stuff.h 
+	header_stuff.c header_stuff.h \
+	msg_db.h msg_db.c 
 
 gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 

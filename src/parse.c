@@ -38,6 +38,7 @@ void parse()
 	*/
 	check_file(fs);
 	count=0;
+	struct message *msg;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
 		count++;
@@ -46,14 +47,23 @@ void parse()
 		*/
 		if(!strncmp(tmp_l,"msgid \"",6))
 		{
+			msg->msgid=tmp_l;
+			msg->position=count;
 			/*
-			* If so , copy the line to iline
+			* If so , check if the next line 
+			* is a msgstr 
 			*/
-			strcpy(iline,tmp_l);
+			fgets(tmp_l,sizeof(tmp_l),fs);
+			if(!strcmp(tmp_l,"msgstr \"",7))
+			{	
+				/*
+				* If this succeeds , build a msg-block
+				*/
+				msg->msgstr=tmp_l;
+			}
 		}
 		
 	}
 	max_count=((count - 10 ) / 3);
-	old_count=count;
 	count=1;
 }
