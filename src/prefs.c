@@ -153,7 +153,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	if(!domains)
 	{
 		domains=g_list_prepend(domains, g_strdup(""));
-		domains=g_list_reverse(domains);
 	}
 
 	defaultdomain =
@@ -514,6 +513,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
 	GtrPreferences.show_comment = if_active(show_comment);
+	GtrPreferences.show_messages_table = if_active(show_messages_table);
 	GtrPreferences.collapse_translated = if_active(collapse_translated_entries);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
@@ -532,24 +532,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 
 	gtranslator_config_init();
 	
-	/*
-	 * Write the messages table setting directly -- so we do always respect
-	 *  changes on a restart.
-	 */
-	if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(show_messages_table)))
-	{
-		gtranslator_config_set_bool("toggles/show_messages_table", 
-			TRUE);
-	}
-	else
-	{
-		gtranslator_config_set_bool("toggles/show_messages_table",
-			FALSE);
-	}
-	
-	/*
-	 * Read out the SpinButton's.
-	 */
 	GtrPreferences.autosave_timeout = 
 		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
 			autosave_timeout));
@@ -703,6 +685,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.load_backends);
 	gtranslator_config_set_bool("toggles/auto_learn",
 			      GtrPreferences.auto_learn);
+	gtranslator_config_set_bool("toggles/show_messages_table",
+			      GtrPreferences.show_messages_table);
 	gtranslator_config_set_bool("toggles/collapse_translated_entries",
 			      GtrPreferences.collapse_translated);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
