@@ -28,6 +28,11 @@ GtkWidget *authors_language_team,*mime_type,*encoding;
 GtkWidget *additional_comments;
 
 /**
+ * Three lists for the combo-boxes ..
+ **/
+GList *languages_list,*encodings_list,*mime_types_list;
+
+/**
  * The *-buttons used in the preferences box
  **/
 GtkWidget *use_msg_db,*add_additional_comments,*show_output;

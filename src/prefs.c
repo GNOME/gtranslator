@@ -23,10 +23,32 @@ void prefs_box(GtkWidget *widget,gpointer useless)
 	 	*mime_type_label,*encoding_label,
 		*additional_comments_label;
 	/**
-	 * Create all the labels and the prefs-box .. 
+	 * Create the prefs-box .. 
 	 **/
 	prefs=gnome_property_box_new();
+	/**
+	 * Create the labels ..
+	 **/
 	first_page_label=gtk_label_new(_("Personal informations"));
 	second_page_label=gtk_label_new(_("Po file options"));
 	third_page_label=gtk_label_new(_("Programm options"));
+	authors_name_label=gtk_label_new(_("Author's name :  "));
+	authors_email_label=gtk_label_new(_("Author's EMail : "));
+	authors_language_label=gtk_label_new(_("Language : "));
+	authors_language_team_label=gtk_label_new(_("Language group : "));
+	mime_type_label=gtk_label_new(_("MIME type : "));
+	encoding_label=gtk_label_new(_("Encoding : "));
+	additional_comments_label=gtk_label_new(_("Comments : "));
+	/**
+	 * The entries for that .
+	 **/
+	authors_name=gnome_entry_new("AUTHOR");
+	authors_email=gnome_entry_new("EMAIL");
+	authors_language=gnome_entry_new("LANGUAGE");
+	/**
+	 * Set the languages list
+ 	 **/	
+	languages_list=g_list_append(languages_list,(gpointer)"Turkish");
+	languages_list=g_list_append(languages_list,(gpointer)"German");
+	gtk_combo_set_popdowm_strings(GTK_COMBO(GNOME_ENTRY(authors_language)->combo),languages_list);
 }
