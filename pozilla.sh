@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.6
+export POZILLA_RELEASE=1.6.1
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -302,7 +302,7 @@ for i in $PO_FILES
 			echo $SENDTO_LANGS|grep -sq $_lang && {
 				gzip --best -cf < $i > $PACKAGE.$i.gz
 			echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
-			echo " immediately with start your update of $i." >> $BODY_FILE
+			echo " immediately start with your update of $i." >> $BODY_FILE
 			echo "" >> $BODY_FILE
 			}
 		fi
