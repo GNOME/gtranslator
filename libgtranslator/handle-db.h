@@ -59,4 +59,23 @@ void gtranslator_move_db(GtranslatorDatabase *database,
 void gtranslator_add_to_db(GtranslatorDatabase *database,
 	GtrMsg *message);
 
+/**
+* Delete the given GtrMsg (the msgid and it's translations)
+*  from the database.
+**/
+void gtranslator_delete_from_db(GtranslatorDatabase *database,
+	GtrMsg *message);
+
+/**
+* Delete the given msgid from the database.
+**/
+void gtranslator_delete_msgid_from_db(GtranslatorDatabase *database,
+	gchar *msgid);
+
+/**
+* Delete the given msgstr from the database.
+**/
+void gtranslator_delete_msgstr_from_db(GtranslatorDatabase *database,
+	gchar *msgstr);
+
 #endif

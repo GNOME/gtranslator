@@ -26,7 +26,7 @@ GtranslatorDatabase *gtranslator_open_db(gchar *filename)
 	/**
 	* The "private" variables.
 	**/
-	GtranslatorDatabase	*db;
+	GtranslatorDatabase	*db=g_new0(GtranslatorDatabase,1);
 	xmlDocPtr		doc;
 	xmlNodePtr		node;
 	/**
@@ -485,3 +485,150 @@ void gtranslator_add_to_db(GtranslatorDatabase *database,
 			(gpointer) message);
 	}
 }
+
+/**
+* Delete the given GtrMsg from the database.
+**/
+void gtranslator_delete_from_db(GtranslatorDatabase *database,
+	GtrMsg *message)
+{
+	/**
+	* The commonly used variables.
+	**/
+	gchar 		*searchitem=g_new0(gchar,1);
+	gboolean	remove_complete_gtr_msg=FALSE;
+	/**
+	* If there's a msgid but no msgstr, then we'd to delete
+	*  all msgstr's connected with the msgid.
+	**/
+	if((message->msgid) && (!message->msgstr))
+	{
+		/**
+		* The msgid is our item to search for.
+		**/
+		searchitem=message->msgid;
+	}
+	/**
+	* If there's only a msgstr, but no msgid, then we'd to
+	*  delete all msgstr occurences of the given msgstr.
+	**/
+	if((message->msgstr) && (!message->msgid))
+	{
+		/**
+		* Here we are searching for a msgstr.
+		**/
+		searchitem=message->msgstr;
+	}
+	/**
+	* If there are both msgid and msgstr defined in the
+	*  given GtrMsg, then we'd to delete only this _one_
+	*   GtrMsg  pair.
+	**/
+	if((message->msgid) && (message->msgstr))
+	{
+		/**
+		* Now, we're again using the msgid as the
+		*  "searchkey" but also setting the 
+		*    remove_complete_gtr_msg gboolean
+		*     to TRUE.
+		**/
+		searchitem=message->msgid;
+		remove_complete_gtr_msg=TRUE;
+	}
+	/**
+	* Cruise through the messages list till we find the 
+	*  corresponding GtrMsg.
+	**/
+	while(GTR_DB_LIST(database))
+	{
+		/*
+		* Do we have got the same msgid or msgstr?
+		**/
+		if(
+			!strcmp(GTR_DB_LIST_MSG(database)->msgid,
+			searchitem)||
+		 	!strcmp(GTR_DB_LIST_MSG(database)->msgstr,
+			searchitem)
+		  )
+		{
+			/**
+			* Are we trying to delete the complete
+			*  GtrMsg or the msgid (which does mean
+			*   the same in result, as no msgstr(list)
+			*    can be used without a msgid.)?
+			**/
+			if((remove_complete_gtr_msg) ||
+				(!strcmp(searchitem, message->msgid)))
+			{
+				/**
+				* The remove the whole GtrMsg.
+				**/
+				GTR_DB_LIST(database)=g_list_remove(
+					GTR_DB_LIST(database), (gpointer)
+					GTR_DB_LIST_MSG(database));
+			}
+			/**
+			* Or delete the msgstr.
+			**/
+			else
+			{
+				/**
+				* Set the msgstr to NULL.
+				**/
+				GTR_DB_LIST_MSG(database)->msgstr=NULL;
+			}
+		}	
+		/**
+		* Iterate the list.
+		**/
+		GTR_DB_LIST_ITERATE(database);
+	}
+	/**
+	* At least free the gchar.
+	**/
+	if(searchitem)
+	{
+		g_free(searchitem);
+	}	
+}
+
+/**
+* Deletes the given msgid from the database, uses the
+*  gtranslator_delete_from_db function internally.
+**/
+void gtranslator_delete_msgid_from_db(GtranslatorDatabase *database,
+	gchar *msgid)
+{
+	/**
+	* Create a new GtrMsg and assign the msgid to the
+	*  msgid of the new structure and set the msgstr 
+	*   to NULL.
+	**/
+	GtrMsg	*msg=g_new0(GtrMsg,1);
+	msg->msgid=msgid;
+	msg->msgstr=NULL;
+	/**
+	* Call the gtranslator_delete_from_db function now.
+	**/
+	gtranslator_delete_from_db(database, msg);
+}
+
+/**
+* This function deletes the given msgid from the database.
+**/
+void gtranslator_delete_msgstr_from_db(GtranslatorDatabase *database,
+	gchar *msgstr)
+{
+	/**
+	* Create again a new GtrMsg structure and assign the msgstr
+	*  and this time set the msgid to NULL.
+	**/
+	GtrMsg	*msg=g_new0(GtrMsg,1);
+	msg->msgid=NULL;
+	msg->msgstr=msgstr;
+	/**
+	* Call the gtranslator_delete_from_db function now
+	*  internally.
+	**/
+	gtranslator_delete_from_db(database, msg);
+}		
