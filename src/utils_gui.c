@@ -172,7 +172,9 @@ GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget  * table, gint r
 	GtkWidget *toggle;
 	toggle = gtk_check_button_new_with_label(label_text);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(toggle), value);
-	gtk_table_attach_defaults(GTK_TABLE(table), toggle, 0, 1, row, row + 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), toggle,
+	                          0, GTK_TABLE(table)->ncols > 1 ? 2 : 1,
+	                          row, row + 1);
 
 	if(callback)
 	{

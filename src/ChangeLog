@@ -1,7 +1,17 @@
 2001-12-23  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* prefs.h, prefs.c, parse.c: Removed "don't save Unchanged files"
-	and "warn if saving unchanged file" options: just don't save.
+	* prefs.c: Merge toggle button and entry of the following options:
+		+ "Use special dictionary" and "Dictionary to use"
+		+ "Save po files automatically..." and "Autosave timeout..."
+		+ "Append a special suffix..." and "Autosave suffix"
+	* utils_gui.c (gtranslator_utils_attach_toggle_with_label): use
+	two columns for togglebuttons so that they don't make first column
+	too wide (look at "Colors" page).
+
+2001-12-23  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* prefs.h, prefs.c, parse.c: Removed "Don't save unchanged files"
+	and "Warn if saving unchanged file" options: just don't save.
 
 2001-12-22  Gediminas Paulauskas <menesis@delfi.lt>
 

@@ -47,6 +47,7 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 static void gtranslator_preferences_dialog_apply(GtkWidget  * widget, gint page_num,
 			    gpointer useless);
 static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer useless);
+static void toggle_sensitive(GtkWidget *widget, gpointer data);
 
 /*
  * The notebook page widgets: 
@@ -104,6 +105,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	GList 	*colorschemeslist=NULL;
 	gchar	*old_colorscheme=NULL;
 	gchar	*personal_schemes_directory=NULL;
+	GtkObject *adjustment;
 	
 	/*
 	 * Create the preferences box... 
@@ -125,11 +127,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		9, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		4, 2, _("Recent files & spell checking"));
+		3, 2, _("Recent files & spell checking"));
 	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		6, 2, _("Fonts, colors and color schemes"));
 	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		4, 2, _("Autosaving"));
+		2, 2, _("Autosaving"));
 	eighth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		6, 2, _("Messages table"));
 	ninth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -247,13 +249,22 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	instant_spell_checking=gtranslator_utils_attach_toggle_with_label(fifth_page, 2,
 		_("Instant spell checking"),
 		GtrPreferences.instant_spell_check, gtranslator_preferences_dialog_changed);
-	use_own_dict=gtranslator_utils_attach_toggle_with_label(fifth_page, 3,
-		_("Use special dictionary"),
-		GtrPreferences.use_own_dict, gtranslator_preferences_dialog_changed);
-	dictionary_file=
-	    gtranslator_utils_attach_entry_with_label(fifth_page, 4, 
-	    	_("Dictionary to use:"),
-	        GtrPreferences.dictionary, gtranslator_preferences_dialog_changed);
+	
+	use_own_dict = gtk_check_button_new_with_label(_("Use special dictionary:"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(use_own_dict),
+	                             GtrPreferences.use_own_dict);
+	gtk_table_attach_defaults(GTK_TABLE(fifth_page), use_own_dict, 0, 1, 3, 4);
+	
+	dictionary_file = gtk_entry_new();
+	if (GtrPreferences.dictionary)
+		gtk_entry_set_text(GTK_ENTRY(dictionary_file), GtrPreferences.dictionary);
+	gtk_widget_set_sensitive(GTK_WIDGET(dictionary_file), GtrPreferences.use_own_dict);
+	gtk_table_attach_defaults(GTK_TABLE(fifth_page), dictionary_file, 1, 2, 3, 4);
+	
+	gtk_signal_connect(GTK_OBJECT(use_own_dict), "toggled",
+			   GTK_SIGNAL_FUNC(toggle_sensitive), dictionary_file);
+	gtk_signal_connect(GTK_OBJECT(dictionary_file), "changed",
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	
 	/*
 	 * The sixth page with the special font/color stuff.
@@ -326,21 +337,36 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The seventh page of the prefs-box: autosaving options.
 	 */
-	autosave=gtranslator_utils_attach_toggle_with_label(seventh_page, 0,
-		_("Save po files automatically at regular intervals"),
-		GtrPreferences.autosave, gtranslator_preferences_dialog_changed);
-	
-	autosave_with_suffix=gtranslator_utils_attach_toggle_with_label(seventh_page, 1,
-		_("Append a special suffix to the automatically saved files"),
-		GtrPreferences.autosave_with_suffix, gtranslator_preferences_dialog_changed);
-	
-	autosave_suffix=gtranslator_utils_attach_entry_with_label(seventh_page, 2,
-		_("Autosave suffix:"),
-		GtrPreferences.autosave_suffix, gtranslator_preferences_dialog_changed);
+	autosave = gtk_check_button_new_with_label(_("Automatically save po files at regular intervals (in minutes):"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(autosave),
+	                             GtrPreferences.autosave);
+	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave, 0, 1, 0, 1);
 
-	autosave_timeout=gtranslator_utils_attach_spin_with_label(seventh_page, 3,
-		_("Autosave timeout in minutes:"), 1.0, 30.0,
-		GtrPreferences.autosave_timeout, gtranslator_preferences_dialog_changed);
+	adjustment=gtk_adjustment_new(GtrPreferences.autosave_timeout, 1.0, 30.0, 1.0, 1.0, 1.0);	
+	autosave_timeout=gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 1, 0);
+	gtk_widget_set_sensitive(GTK_WIDGET(autosave_timeout), GtrPreferences.autosave);
+	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave_timeout, 1, 2, 0, 1);
+	
+	gtk_signal_connect(GTK_OBJECT(autosave), "toggled",
+			   GTK_SIGNAL_FUNC(toggle_sensitive), autosave_timeout);
+	gtk_signal_connect(GTK_OBJECT(autosave_timeout), "changed",
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
+
+	autosave_with_suffix = gtk_check_button_new_with_label(_("Append a suffix to automatically saved files:"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(autosave_with_suffix),
+	                             GtrPreferences.autosave_with_suffix);
+	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave_with_suffix, 0, 1, 1, 2);
+
+	autosave_suffix = gtk_entry_new();
+	if (GtrPreferences.autosave_suffix)
+		gtk_entry_set_text(GTK_ENTRY(autosave_suffix), GtrPreferences.autosave_suffix);
+	gtk_widget_set_sensitive(GTK_WIDGET(autosave_suffix), GtrPreferences.autosave_with_suffix);
+	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave_suffix, 1, 2, 1, 2);
+	
+	gtk_signal_connect(GTK_OBJECT(autosave_with_suffix), "toggled",
+			   GTK_SIGNAL_FUNC(toggle_sensitive), autosave_suffix);
+	gtk_signal_connect(GTK_OBJECT(autosave_suffix), "changed",
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 
 	/*
 	 * The eighth page with the messages table concerning settings.
@@ -741,6 +767,14 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 		break;
 	}
 #undef set_text
+}
+
+void toggle_sensitive(GtkWidget *widget, gpointer data)
+{
+	gboolean active;
+	active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+	gtk_widget_set_sensitive(GTK_WIDGET(data), active);
+	gnome_property_box_changed(GNOME_PROPERTY_BOX(prefs));
 }
 
 void gtranslator_preferences_read(void)
