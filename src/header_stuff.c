@@ -239,6 +239,14 @@ void update_header(GtrHeader * h)
 	strftime(t, 22, "%Y-%m-%d %H:%M%z", now_here);
 	g_free(h->po_date);
 	h->po_date = g_strdup(t);
+
+	/*
+	 * Convert the header comments back if necessary.
+	 */ 
+	if(h->comment[0]!='#')
+	{
+		h->comment=prepare_comment_for_save(h->comment);
+	}
 }
 
 void free_header(GtrHeader * h)
