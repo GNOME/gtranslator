@@ -20,8 +20,8 @@
 #include "sighandling.h"
 
 #include "parse.h"
+#include "dialogs.h"
 #include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-dialog.h>
 
 #include <signal.h>
 
@@ -31,39 +31,52 @@
  */ 
 void gtranslator_signal_handler(int signal)
 {
+	static gint signalscount=0;
+
+	if(signalscount > 0)
+	{
+		return;
+	}	
+	
 	switch(signal)
 	{
 		/*
-		 * "Normal" quit/interrupts which should be
-		 *  catched.
+		 * Catch all signals in one function.
 		 */ 
 		case SIGINT:
 		case SIGQUIT:
 		case SIGTERM:
-		case SIGHUP:
-			
-			/*
-			 * Only show up the rescue dialog of the file has been
-			 *  changed at all.
-			 */  
-			if(po->file_changed)
-			{
-				g_warning("rescue from SIGINT et.c -> new g_main possibly");
-			}
-
-			exit(0);
-			break;
-		
-		/*
-		 * The "not nice" cases which are the reason for
-		 *  our signal handler.
-		 */  
 		case SIGSEGV:
 		case SIGILL:
 
 			if(po->file_changed)
 			{
-				g_warning("ohoh, SEGV");
+				gchar answer;
+
+				g_warning(_("gtranslator did get a heavy error and crashed.\
+Would you like to save `%s'? [y/n]?"), po->filename);
+
+				scanf("%c", &answer);
+
+				/*
+				 * Translators: Please use here the same
+				 *  characters as in the question where
+				 *   you translated [y/n]!
+				 */  
+				if(answer==_("y")[0] || answer==_("Y")[0])
+				{
+					g_print(_("Saving...\n"));
+
+					save_current_file(NULL, NULL);
+
+					g_print(_("Saved `%s'.\n"),
+						po->filename);
+				}
+				else
+				{
+					g_warning(_("Not saving `%s'!"),
+						po->filename);
+				 }
 			}
 			
 			exit(1);
