@@ -55,6 +55,8 @@
 
 #include <libgnomevfs/gnome-vfs-init.h>
 
+#include <semerkent.h>
+
 /*
  * The static variables used in the poptTable.
  */
@@ -114,9 +116,15 @@ int main(int argc, char *argv[])
 	
 	poptContext 	context;
 	
-	const char 	**args = NULL;
+	const char 	**args=NULL;
 	
 	GError		*error=NULL;
+
+	/*
+	 * FIXME: Temporary Semerkent check...
+	 */
+	SemerFile	*semerfile=NULL;
+	SemerEntry	*semerentry=NULL;
 
 	/*
 	 * Initialize gettext.
@@ -162,6 +170,36 @@ int main(int argc, char *argv[])
 	/* XXX fix it! */
 	// 0, &context);
 
+	/*
+	 * FIXME: Temporary chech for Semerkent...
+	 */
+	semerkent_init();
+	
+	semerfile=semer_file_new();
+	semer_file_set_filename(semerfile, "Test_TMX.xml");
+	semerfile->type=SEMER_TMX;
+
+	semerentry=semer_entry_new_with_specs(NULL,
+		"Yessss, it works!", "EN-US",
+		"Yeaaahaha, gnanaaaa waaa!", "EN-GTRANSLATOR",
+		"A test string for the Semerkent integration in gtranslator.");
+	semer_file_add_entry(semerfile, semerentry);
+	semer_entry_free(semerentry);
+
+	semer_tmx_save_file(semerfile);
+
+	semer_file_set_filename(semerfile, "Test_UMTF.xml");
+	semerfile->type=SEMER_UMTF;
+	semer_umtf_save_file(semerfile);
+
+	semer_file_set_filename(semerfile, "Test_OpenTag.otf");
+	semerfile->type=SEMER_OPENTAG;
+	semer_opentag_save_file(semerfile);
+	
+	semer_file_free(semerfile);
+		
+	semerkent_shutdown();
+	
 	/*
 	 * Show up build information if desired.
 	 */
