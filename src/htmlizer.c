@@ -110,6 +110,7 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 			 case ',':
 			 case ';':
 			 case '!':
+			 case '\'':	
 			 case '?':
 				
 				string=g_string_append(string,
@@ -121,11 +122,10 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 			 * Text marker characters.
 			 */
 			 case '"':
-			 case '\'':
 			 case '`':
 				
 				string=g_string_append(string,
-					"<font color=\"silver\">");
+					"<font color=\"red\">");
 				EndHtml(pif);
 				break;
 				

@@ -1,5 +1,17 @@
 2001-02-03  Fatih Demir	<kabalak@gmx.net>
 
+	* gui.c: Added crusty shortcut bar stuff and added a default
+		"Files" group which should always be present.
+
+	* parse.c: Also create a shortcut bar entry for the po file
+		-- just cosmetic for now.
+
+	* gui.h: Define the globally used EShortcutModel and include
+		the corresponding gal header already there.
+
+	* htmlizer.c: Changed the color of quote characters also
+		to red.
+
 	* gui.c: Added some gal parts like an e-vpaned and a
 		shortcut bar which is empty for now -- all is
 		 conditionally defined -- no gal, no e-vpaned etc.

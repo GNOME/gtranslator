@@ -45,7 +45,6 @@
 
 #ifdef USE_GAL_GUI
 #include <gal/e-paned/e-hpaned.h>
-#include <gal/shortcut-bar/e-shortcut-bar.h>
 #endif
 
 typedef struct _GtrAction GtrAction;
@@ -87,6 +86,13 @@ static void update_appbar(gint pos);
 static void call_gtranslator_homepage(GtkWidget  * widget, gpointer useless);
 static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless);
+
+/*
+ * Get the icon for the URLs in the EShortcutBar.
+ */
+#ifdef USE_GAL_GUI
+static GdkPixbuf *get_my_icon(EShortcutBar *bar, const gchar *url, gpointer useless);
+#endif
 
 /*
  * The target formats
@@ -495,7 +501,6 @@ void create_app1(void)
 	#ifdef USE_GAL_GUI
 	GtkWidget *pane;
 	GtkWidget *filebox;
-	EShortcutModel *model;
 	#endif
 	
 	/*
@@ -506,10 +511,17 @@ void create_app1(void)
 
 	#ifdef USE_GAL_GUI
 	pane=e_hpaned_new();
+	
 	model=e_shortcut_model_new();
 	filebox=e_shortcut_bar_new();
 	
 	e_shortcut_bar_set_model(E_SHORTCUT_BAR(filebox), model);
+
+	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(filebox),
+		get_my_icon, NULL);	
+
+	e_shortcut_model_add_group(E_SHORTCUT_BAR(filebox)->model,
+		-1, "Files");	
 	
 	e_paned_pack1(E_PANED(pane), filebox, TRUE, FALSE);
 
@@ -1112,4 +1124,20 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		gtk_text_thaw(GTK_TEXT(trans_box));
 		nothing_changes = FALSE;
 	}
+}
+
+static GdkPixbuf *get_my_icon(EShortcutBar *bar, const gchar *url, gpointer useless)
+{
+	GdkPixbuf *pix;
+	gchar *it;
+	
+	it=gnome_pixmap_file("gtranslator.png");
+	
+	if(it)
+	{
+		pix=gdk_pixbuf_new_from_file(it);
+	}
+
+	gdk_pixbuf_ref(pix);
+	return pix;
 }
