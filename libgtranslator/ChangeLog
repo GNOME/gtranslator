@@ -1,3 +1,16 @@
+2000-09-24  Fatih Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Hmm, the library version should also
+		take the mainversion and add the GCONF_IS_PRESENT
+		 define to the cflags.
+
+	* test-lg.c: Also corrected gconf_init call here.
+
+	* preferences.c: Declare the used gchar for the GConf
+		backends outside the function and corrected the
+		 wrong function call for the set-methods of GConf,
+		  removed the 2 debug g_print's.
+
 2000-09-23  Fatih Demir	<kabalak@gmx.net>
 
 	* parse-db.c/h: Some cosmetic corrections.

@@ -29,6 +29,7 @@
 #ifdef GCONF_IS_PRESENT
 GConfClient	*client;
 GError		*error;
+gchar		*private_path=NULL;
 #endif
 
 /**
@@ -39,7 +40,14 @@ void gtranslator_config_init()
 	#ifdef GCONF_IS_PRESENT
 	client=gconf_client_get_default();
 	gconf_client_add_dir(client,"/apps/gtranslator",
-		GCONF_CLIENT_PRELOAD_NONE,error);
+		GCONF_CLIENT_PRELOAD_NONE, &error);
+	/**
+	* If there's an error.
+	**/
+	if(error)
+	{
+		g_error(_("Error during Gconf initialization: `%s'!"),error->message);
+	}
 	#else
 	gnome_config_push_prefix("/gtranslator/");
 	#endif
@@ -51,7 +59,7 @@ void gtranslator_config_init()
 void gtranslator_config_close()
 {
 	#ifdef GCONF_IS_PRESENT
-	gconf_client_suggest_sync(client, error);
+	gconf_client_suggest_sync(client, &error);
 	#else
 	gnome_config_pop_prefix();
 	gnome_config_sync();
@@ -72,10 +80,8 @@ gchar *gtranslator_config_get_string(gchar *path)
 		return "";
 	}
 	#ifdef GCONF_IS_PRESENT
-	gchar *private_path;
 	private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-	g_print("Getting '%s' ...",private_path);
-	return (gconf_client_get_string(client, private_path, error));
+	return (gconf_client_get_string(client, private_path, &error));
 	#else
 	return (gnome_config_get_string(path));
 	#endif
@@ -99,9 +105,8 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 		else
 		{
 			#ifdef GCONF_IS_PRESENT
-			gchar *private_path;
 			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-			gconf_client_set_string(client, private_path, value, error);
+			gconf_client_set_string(client, private_path, value, &error);
 			#else
 			gnome_config_set_string(path, value);
 			#endif
@@ -123,9 +128,8 @@ gint gtranslator_config_get_int(gchar *path)
 		return 1;
 	}
 	#ifdef GCONF_IS_PRESENT
-	gchar *private_path;
 	private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-	return (gconf_client_get_int(client, private_path, error));
+	return (gconf_client_get_int(client, private_path, &error));
 	#else
 	return (gnome_config_get_int(path));
 	#endif
@@ -149,9 +153,8 @@ void gtranslator_config_set_int(gchar *path, gint value)
 		else
 		{
 			#ifdef GCONF_IS_PRESENT
-			gchar *private_path;
 			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-			gconf_client_set_int(client, private_path, value, error);
+			gconf_client_set_int(client, private_path, value, &error);
 			#else
 			gnome_config_set_int(path, value);
 			#endif
@@ -171,10 +174,8 @@ gboolean gtranslator_config_get_bool(gchar *path)
 		return FALSE;
 	}
 	#ifdef GCONF_IS_PRESENT
-	gchar *private_path;
 	private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-	g_print("Getting '%s' ..", private_path);
-	return (gconf_client_get_bool(client, private_path, error));
+	return (gconf_client_get_bool(client, private_path, &error));
 	#else
 	return (gnome_config_get_bool(path));
 	#endif
@@ -189,9 +190,8 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 	else
 	{
 		#ifdef GCONF_IS_PRESENT
-		gchar *private_path;
 		private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-		gconf_client_set_bool(client, private_path, value, error);
+		gconf_client_set_bool(client, private_path, value, &error);
 		#else
 		gnome_config_set_bool(path, value);
 		#endif

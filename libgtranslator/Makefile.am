@@ -7,12 +7,13 @@ noinst_PROGRAMS = test-libgtranslator
 lib_LTLIBRARIES = libgtranslator.la
 
 if GCONF_IS_PRESENT
-configstuffcflags = $(GCONF_CFLAGS) $(GNOME_CFLAGS)
+configstuffcflags = $(GCONF_CFLAGS) $(GNOME_CFLAGS) -DGCONF_IS_PRESENT=7
 else
 configstuffcflags = $(GNOME_CFLAGS)
 endif
 
-INCLUDES = -I$(includedir) $(IDL_CFLAGS) \
+INCLUDES = \
+	-I$(includedir) $(IDL_CFLAGS) \
 	$(GLIB_CFLAGS) $(configstuffcflags) \
 	$(OAF_CFLAGS) $(XML_CFLAGS) -I../src \
 	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
@@ -23,7 +24,7 @@ libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
 	preferences.c \
 	team-handle.c
 
-libgtranslator_la_LDFLAGS = -version-info 0:@SUBVERSION@
+libgtranslator_la_LDFLAGS = -version-info @MAINVERSION@:@SUBVERSION@
 
 
 if GCONF_IS_PRESENT

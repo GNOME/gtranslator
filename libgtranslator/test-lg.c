@@ -25,8 +25,8 @@ int main(int argc,char *argv[])
 {
 	gchar *ert = g_new0(gchar,1);
 	#ifdef GCONF_IS_PRESENT
-	GError	*error;
-	gconf_init(argc,argv,error);
+	GError	*error = NULL;
+	gconf_init(argc,argv, &error);
 	#endif
 	gtranslator_config_init();
 	g_print("Testing the string methods ...");
