@@ -1,5 +1,8 @@
 2004-01-13  Dan Damian  <dand@gnome.ro>
 
+	* parse.c (gtranslator_parse_main): Check for message_table and
+	don't crash while loading files with no header (#129842).
+
 	* message.c (gtranslator_message_status_set_fuzzy): Don't free
 	comment. Fixes several crashes and file corruption bugs (#130114,
 	#131230).
