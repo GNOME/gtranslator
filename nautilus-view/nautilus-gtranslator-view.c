@@ -57,7 +57,6 @@ static void sample_merge_bonobo_items_callback            (BonoboControl        
 
 
 void open_po_file(GtkWidget *widget, gpointer filename);
-void mail_po_file(GtkWidget *widget, gpointer filename);
 
 static gpointer parent_class;
 
@@ -73,59 +72,6 @@ void open_po_file(GtkWidget *widget, gpointer filename)
 	system(cmd);
 
 	g_free(cmd);
-}
-
-void mail_po_file(GtkWidget *widget, gpointer filename)
-{
-	GtkWidget *dialog;
-	GtkWidget *entry;
-	GtkWidget *label;
-	gchar *tuz=NULL;
-	gchar *mailing;
-
-	dialog=gnome_dialog_new(
-		"nautilus-gtranslator-view -- mail the po file",
-		"Mail", "Cancel", NULL);
-
-	entry=gnome_entry_new("MAIL_TO");
-
-	label=gtk_label_new("Mail to this address:");
-
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
-		FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), entry,
-		FALSE, FALSE, 0);
-
-	gtk_widget_show(label);
-	gtk_widget_show(entry);
-
-	switch(gnome_dialog_run(GNOME_DIALOG(dialog)))
-	{
-		case GNOME_OK:
-
-			tuz=gtk_editable_get_chars(
-				GTK_EDITABLE(gnome_entry_gtk_entry
-					(GNOME_ENTRY(entry))), 0, -1);
-
-			mailing=g_strdup_printf("echo \"%s\" > /tmp/.ZT && cat /tmp/.ZT|mutt '%s' -s '%s' -a \"%s\"",
-				"Po file for you -- take it or blame it!",
-				tuz, "Po file for you!",
-				gnome_vfs_get_local_path_from_uri(
-					(gchar *) filename));
-
-			system(mailing);
-
-			g_free(mailing);
-			g_free(tuz);
-
-			break;
-
-		default:
-
-			break;
-	}
-
-	gtk_widget_destroy(dialog);
 }
 
 GtkType
@@ -221,7 +167,12 @@ load_location (NautilusGtranslatorView *view,
 	g_free(view->details->location);
 	view->details->location=g_strdup(location);
 
-	parse(gnome_vfs_get_local_path_from_uri(view->details->location));
+	/*
+	 * Parse the current location as a po file.
+	 */ 
+	parse_core(
+		gnome_vfs_get_local_path_from_uri(
+			view->details->location));
 
 	#define add_part(x, y, z) \
 	gtk_table_attach_defaults(GTK_TABLE(view->details->table), \
@@ -233,6 +184,11 @@ load_location (NautilusGtranslatorView *view,
 	version=gtk_label_new(g_strdup_printf(_("Version: %s"),
 		po->header->prj_version));
 
+	/*
+	 * These are mailto: hyperlinks so that the mailto: should be 
+	 *  mailto: after the translation. Or is there any gnome-url-handler
+	 *   who also recognizes localized mailto: URL's?
+	 */   
 	translator=gnome_href_new(g_strdup_printf(_("mailto:%s"), po->header->tr_email),
 		g_strdup_printf(_("Last translator: %s <%s>"), po->header->translator,
 		po->header->tr_email));
@@ -322,10 +278,6 @@ bonobo_sample_callback (BonoboUIComponent *ui,
 	{
 		edit_header(NULL, NULL);
 	}
-	if(!strcmp(verb, "Mail File"))
-	{
-		mail_po_file(NULL, view->details->location);
-	}
 }
 
 /* CHANGE: Do your own menu/toolbar merging here. */
@@ -339,7 +291,6 @@ sample_merge_bonobo_items_callback (BonoboControl *control,
 	BonoboUIVerb verbs [] = {
 		BONOBO_UI_VERB(_("Open Po File"), bonobo_sample_callback),
 		BONOBO_UI_VERB(_("Edit Header"), bonobo_sample_callback),
-		BONOBO_UI_VERB("Mail File", bonobo_sample_callback),
 		BONOBO_UI_VERB_END
 	};
 
@@ -357,12 +308,4 @@ sample_merge_bonobo_items_callback (BonoboControl *control,
 		bonobo_ui_component_add_verb_list_with_data(
 			ui_component, verbs, view);
 	}
-
-        /* Note that we do nothing if state is FALSE. Nautilus content
-         * views are activated when installed, but never explicitly
-         * deactivated. When the view changes to another, the content
-         * view object is destroyed, which ends up calling
-         * bonobo_ui_handler_unset_container, which removes its merged
-         * menu & toolbar items.
-	 */
 }

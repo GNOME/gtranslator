@@ -33,6 +33,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(sourcedir)/history.o \
 	$(sourcedir)/open-differently.o \
 	$(sourcedir)/parse.o \
+	$(sourcedir)/parse_core.o \
 	$(sourcedir)/prefs.o \
 	$(sourcedir)/prefs_init.o \
 	$(sourcedir)/preferences.o \
