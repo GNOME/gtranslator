@@ -1,12 +1,12 @@
-#-------------------------------------------------------
+# -------------------------------------------------------
 # Copyright (C) 1999-2000 Free Software Foundation, Inc.
 # Fatih Demir <kabalak@gmx.net>, 1999-2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.19\n"
-"POT-Creation-Date: 2000-06-27 12:44+0200\n"
-"PO-Revision-Date: 2000-06-27 12:45+0200\n"
+"POT-Creation-Date: 2000-07-04 20:11+0200\n"
+"PO-Revision-Date: 2000-07-04 20:12+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -599,39 +599,43 @@ msgid "Welsh"
 msgstr "Velþ"
 
 #: src/main.c:31
+msgid "Sets the minimum match for query"
+msgstr "Sorgula'nýn eþit görülmesi için eþit olacak asgari harf sayýsý"
+
+#: src/main.c:35
 msgid "Po-file to open at startup"
 msgstr "Baþlangýçat açýlacak po-dosyasý"
 
-#: src/main.c:35
+#: src/main.c:39
+msgid "Specifies the main-window geometry"
+msgstr "Ana pencere boyutlarýný belirler"
+
+#: src/main.c:43
 msgid "The messages db to use"
 msgstr "Kullanýlcak ileti/tercüme tabaný"
 
-#: src/main.c:39
+#: src/main.c:47
 msgid "Query the messages db & exit"
 msgstr "Ileti/tercüme tabanýný sorgula & çýk"
-
-#: src/main.c:43
-msgid "Specifies the main-window geometry"
-msgstr "Ana pencere boyutlarýný belirler"
 
 #. *
 #. * Simply print it out.
 #. *
-#: src/main.c:94
+#: src/main.c:112
 #, c-format
 msgid "Getting results for query: `%s' ...\n"
 msgstr "`%s' için ileti/tercüme tabanýný sorguluyorum ...\n"
 
-#: src/main.c:99
+#: src/main.c:117
 #, c-format
 msgid "Result                   :  %s."
 msgstr "Sonuç                    :  %s."
 
-#: src/main.c:101
+#: src/main.c:119
 msgid "End of query.\n"
 msgstr "Sorgulamanýn sonu.\n"
 
-#: src/main.c:161
+#: src/main.c:179
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "\"%s\" yer metni taranamadý!"
@@ -639,12 +643,12 @@ msgstr "\"%s\" yer metni taranamadý!"
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:180
+#: src/main.c:198
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "\"%s\" adýyla bir dosya yok yada o dosya okunamýyor!"
 
-#: src/main.c:181
+#: src/main.c:199
 msgid "Skipping it."
 msgstr "Atlatýyorum."
 
@@ -710,6 +714,13 @@ msgstr "Ileti/tercüme tabanýnda böyle bir birim yoktur."
 #: src/msg_db.c:233
 msgid "The messages db isn't inited."
 msgstr "Ileti/tercüme tabaný açýlmamýþ."
+
+#. *
+#. * Gives a warning message.
+#. *
+#: src/msg_db.c:262
+msgid "Trying to set an irregular challange length!"
+msgstr "Geçersiz bir karþýlaþtýrma sayýsýný oturtmaya uðraþýyorsun !"
 
 #. *
 #. * If there are any problems , give a
