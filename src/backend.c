@@ -416,8 +416,7 @@ gboolean gtranslator_backend_open(gchar *filename)
 			/*
 			 * Load the file with the corresponding open handle.
 			 */
-			be->open_file(filename, NULL);
-			return TRUE;
+			return be->open_file(filename, NULL);
 		}
 		else
 		{
@@ -433,8 +432,7 @@ gboolean gtranslator_backend_open(gchar *filename)
 				 */
 				if(nautilus_istr_has_suffix(filename, be->info->extensions->data))
 				{
-					be->open_file(filename, NULL);
-					return TRUE;
+					return be->open_file(filename, NULL);
 				}
 				 
 				GTR_ITER(be->info->extensions);

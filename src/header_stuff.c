@@ -858,7 +858,7 @@ GtrHeader *gtranslator_header_create_from_prefs(void)
 	h->language=g_strdup(language);
 	h->lg_email=g_strdup(lg);
 	h->mime_version=g_strdup("1.0");
-	h->charset=g_strdup(lc);
+	h->charset=g_strdup(mime);
 	h->encoding=g_strdup(enc);
 
 	year=get_current_year();

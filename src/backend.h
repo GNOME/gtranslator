@@ -29,6 +29,12 @@
  */
 
 /*
+ * The own BackendFunc type of functions -- used for opening, saving and 
+ *  closing the backend supported files.
+ */
+typedef gboolean (*BackendFunc)	(gpointer data, gpointer useless);
+
+/*
  * Informations about the xml file.
  */
 typedef struct
@@ -53,9 +59,9 @@ typedef struct
 
 	GModule			*module;
 
-	GFunc			 open_file;
-	GFunc			 save_file;
-	GFunc			 save_file_as;
+	BackendFunc		 open_file;
+	BackendFunc		 save_file;
+	BackendFunc		 save_file_as;
 } GtrBackend;
 
 #define GTR_BACKEND(x) ((GtrBackend *) x)
