@@ -65,7 +65,9 @@ void open_file_show()
 	/**
         * Set the icon.
         **/
+	#ifdef USE_WINDOW_ICON
         gnome_window_icon_set_from_file(GTK_WINDOW(of_dlg),WINDOW_ICON);
+	#endif
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Select your desired po-file to open"));
 	gtk_widget_show(of_dlg);
 }
@@ -101,7 +103,9 @@ void save_file_as_show()
 	/**
         * Set the icon.
         **/
+	#ifdef USE_WINDOW_ICON
         gnome_window_icon_set_from_file(GTK_WINDOW(sfa_dlg),WINDOW_ICON);
+	#endif
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Select your filename to which the po-file should be saved to."));
 	gtk_widget_show(sfa_dlg);
 }
@@ -225,7 +229,9 @@ void goto_dlg_create(gint lines)
 	/**
         * Set the icon.
         **/
+	#ifdef USE_WINDOW_ICON
         gnome_window_icon_set_from_file(GTK_WINDOW(g_dlg),WINDOW_ICON);
+	#endif
 	/**
 	* Show the widgets
 	**/
@@ -290,7 +296,7 @@ void find_dialog(GtkWidget *widget,gpointer title_type)
 	find_dlg=gtk_dialog_new();
 	gtk_window_set_title(GTK_WINDOW(find_dlg),title);
 	gtk_window_set_wmclass(GTK_WINDOW(find_dlg),"gtranslator","gtranslator");
-	gtk_widget_set_usize(find_dlg,280,120);
+	gtk_widget_set_usize(find_dlg,270,110);
 	/**
 	* Add the elements to the table.
 	**/
@@ -314,7 +320,9 @@ void find_dialog(GtkWidget *widget,gpointer title_type)
 	/**
 	* Set the icon.
 	**/
+	#ifdef USE_WINDOW_ICON
 	gnome_window_icon_set_from_file(GTK_WINDOW(find_dlg),WINDOW_ICON);
+	#endif
 	/**
 	* Show the widgtes and finally the box.
 	**/

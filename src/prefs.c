@@ -226,7 +226,9 @@ void prefs_box()
 	/**
 	* Set the icon.
 	**/
+	#ifdef USE_WINDOW_ICON
 	gnome_window_icon_set_from_file(GTK_WINDOW(prefs),WINDOW_ICON);
+	#endif
 	/**
 	* The basic signal-handlers 
 	**/

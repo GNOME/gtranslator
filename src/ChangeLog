@@ -1,3 +1,43 @@
+2000-06-06  Fatih Demir		( kabalak@gmx.net )
+
+	+	Added the forgotten ifdefs for the
+		
+		window-icon stuff.
+		
+		-> *.c
+
+	+	Made the comments to an ifdef.
+	
+	+	Commented out all header stuff.
+		
+		-> header_stuff.c
+
+	+	Made the find dialog a little bit
+		
+		smaller.
+		
+		-> gtr_dialogs.c	
+
+	+	Use g_strconcat rather than strcat.
+
+	+	Implemented the ( hopefully ) good
+		
+		methods for multi-line translations.
+
+	+	Remvoed the final gboolean; it has been
+		
+		replaced by three other gboolean which
+		
+		are also usefull for the recognition of
+		
+		multi-line translations.
+
+	+	Do the same foo for the jump to the
+		
+		first string.
+	
+		-> parse.c
+
 2000-06-05  Fatih Demir		( kabalak@gmx.net )
 
 	+	Removed an also unnecessary gchar.

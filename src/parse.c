@@ -3,7 +3,7 @@
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
-* Here will be some useful parts of gtranslator 
+* Here will be some useful parts of gtranslator
 * next periods of time ....
 *
 * -- the source
@@ -45,8 +45,7 @@ void parse(gchar *po)
 	gchar temp_char[128];
 	gchar *zamane=NULL;
         guint lines=1,z=0,msg_pair=0;
-	gboolean final;
-	final=FALSE;
+	gboolean msgid_ok=FALSE,msgstr_ok=FALSE,comment_ok=FALSE;
 	messages=g_list_alloc();
 	messages=NULL;
 	/**
@@ -60,7 +59,7 @@ void parse(gchar *po)
         * Set up a status message
         **/
         sprintf(status,_("Current file : \"%s\"."),po);
-        gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);	
+        gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
         /**
         * Open the parse fstream
         **/
@@ -96,7 +95,7 @@ void parse(gchar *po)
 		* 1/If it starts with "
 		* 2/And includes a ": " sequence
 		* 3/And if there has been ONLY one msgid/str-pair yet
-		* 
+		*
 		**/
 		if(
 		/* 1/ */!g_strncasecmp(temp_char,"\"",1)
@@ -118,32 +117,51 @@ void parse(gchar *po)
 			* Create the gtr_msg structure
 			*  and set the comment & position.
 			**/
-			msg_pair++;
 			(gint)msg->pos=z;
 			(gchar *)msg->comment=(gchar *)g_strdup(temp_char);
+			comment_ok=TRUE;
 		}
+		/**
+		* If it's an msgid
+		**/
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			(gchar *)msg->msgid=(gchar *)g_strdup(temp_char);
+			zamane=strtok(strtok(temp_char,"msgid \""),"\"");
+			(gchar *)msg->msgid=(gchar *)g_strdup(zamane);
+			msgid_ok=TRUE;
+			zamane=NULL;
 		}
+		/**
+		* If it's an msgstr.
+		**/
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			(gchar *)msg->msgstr=(gchar *)g_strdup(temp_char);
-			final=TRUE;
+			zamane=strtok(strtok(temp_char,"msgstr \""),"\"");
+			(gchar *)msg->msgstr=(gchar *)g_strdup(zamane);
+			msgstr_ok=TRUE;
+			msg_pair++;
 		}
 		/**
-		* Add the current message to the messages list.
+		* Already a msgid but not yet a msgstr. This can't be an empty line, or ?
 		**/
-		if(final!=FALSE)
+		if((msgid_ok==TRUE) && (msgstr_ok!=TRUE))
 		{
-			messages=g_list_append(messages,(gpointer)msg);
+			(gchar *)msg->msgid=g_strconcat((gchar *)msg->msgid,(gchar *)g_strdup(temp_char),NULL);
 		}
+		/**
+		* Yet a msgstr and not a comment.
+		**/
+		if((msgstr_ok==TRUE) && (comment_ok!=TRUE) && (temp_char!=NULL) && (strlen(temp_char)>0))
+		{
+			(gchar *)msg->msgstr=g_strconcat((gchar *)msg->msgstr,(gchar *)g_strdup(temp_char),NULL);
+		}
+		messages=g_list_append(messages,(gpointer)msg);
 	}
 	/**
 	* Show an updated status
@@ -151,7 +169,7 @@ void parse(gchar *po)
 	sprintf(status,_("Finished reading \"%s\", %i lines."),po,z);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	/**
-	* So the other functions can get a point 
+	* So the other functions can get a point
 	**/
 	file_opened=TRUE;
 	#ifdef HAVE_USLEEP
@@ -190,8 +208,12 @@ void parse_the_file(GtkWidget *widget,gpointer useless)
 **/
 void clean_text_boxes()
 {
+	gtk_text_freeze(GTK_TEXT(trans_box));
+	gtk_text_freeze(GTK_TEXT(text1));
 	gtk_text_backward_delete(GTK_TEXT(text1),gtk_text_get_length(GTK_TEXT(text1)));
 	gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
+	gtk_text_thaw(GTK_TEXT(trans_box));
+	gtk_text_thaw(GTK_TEXT(text1));
 }
 
 /**
@@ -200,10 +222,10 @@ void clean_text_boxes()
 void get_first_msg(GtkWidget *widget,gpointer useless)
 {
 	gtr_msg *first=g_new(gtr_msg,1);
-	first=(gtr_msg *)g_list_nth_data(messages,0);
 	clean_text_boxes();
-	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)first->msgid,sizeof((gchar *)first->msgid));
-	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)first->msgstr,sizeof((gchar *)first->msgstr));
+	first=(gtr_msg *)g_list_nth_data(messages,0);
+	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)first->msgid,-1);
+	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)first->msgstr,-1);
 	if(first)
 	{
 		gtk_widget_set_sensitive(last_button,TRUE);
@@ -220,10 +242,10 @@ void get_first_msg(GtkWidget *widget,gpointer useless)
 void get_last_msg(GtkWidget *widget,gpointer useless)
 {
 	gtr_msg *last=g_new(gtr_msg,1);
-	last=(gtr_msg *)g_list_nth_data(messages,(g_list_length(messages)-1));
 	clean_text_boxes();
-	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)last->msgid,-1/*sizeof((gchar *)last->msgid)*/);
-	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)last->msgstr,-1/*sizeof((gchar *)last->msgstr)*/);
+	last=(gtr_msg *)g_list_nth_data(messages,(g_list_length(messages)-1));
+	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)last->msgid,-1);
+	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)last->msgstr,-1);
 	if(last)
 	{
 		gtk_widget_set_sensitive(first_button,TRUE);

@@ -41,6 +41,7 @@ void apply_header(gtr_header *the_header)
 
 void get_header(gchar *hline)
 {
+	#ifdef IT_WORKS__
 	header_finish=FALSE;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
@@ -81,6 +82,7 @@ void get_header(gchar *hline)
 	{
 		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Header has been parsed."));
 	}
+	#endif
 }
 
 /**
