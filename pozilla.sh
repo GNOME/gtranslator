@@ -26,7 +26,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.3
+export POZILLA_RELEASE=4.4
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -59,7 +59,7 @@ export PO_DIR="."
 #
 # Check for all necessary applications for pozilla.sh.
 #
-for app in msgfmt msgmerge make grep sed awk mutt
+for app in msgfmt msgmerge make grep sed awk
 	do
 		if test "z`which $app`" = "z" ; then
 			echo "---------------------------------------------------------------"
@@ -421,6 +421,16 @@ do
 	;;
 	esac
 done	
+
+#
+# Finally, check for existance of mutt if $RUN_DRY is not defined.
+#
+if test "z`which mutt`" = "z" -a "say_$RUN_DRY" != "say_yes" ; then
+	echo "---------------------------------------------------------------"
+	echo "!ERROR¡: The application \"mutt\" is necessary for running pozilla.sh!"
+	echo "---------------------------------------------------------------"
+	exit 1
+fi
 
 #
 # Check if a po directory is existent in the $PO_DIR.
