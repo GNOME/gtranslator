@@ -17,58 +17,13 @@
  *
  */
 
-#include "gui.h"
+#include "convert.h"
 #include "utf8.h"
 #include "utils.h"
 
 #include <locale.h>
 
 #include <libgnome/gnome-i18n.h>
-#include <gal/widgets/e-unicode.h>
-
-/*
- * The static old environment variable.
- */
-static gchar	*old_environment;
-
-/*
- * Prototypes:
- */
-void get_old_environment(void);
-void set_old_environment(void);
-void set_new_environment(void);
-
-/*
- * Get/set up the old environment.
- */
-void get_old_environment()
-{
-	old_environment=setlocale(LC_ALL, "");
-	g_return_if_fail(old_environment!=NULL);
-}
-
-void set_old_environment()
-{
-	g_return_if_fail(old_environment!=NULL);
-	setlocale(LC_ALL, old_environment);
-}
-
-/*
- * Set up the new environment, like desired by the functions .-)
- */
-void set_new_environment()
-{
-	gchar	*localename;
-
-	localename=gtranslator_utils_get_locale_name();
-	g_return_if_fail(localename!=NULL);
-
-	/*
-	 * Get the full-length language name to satisfy our needs.
-	 */
-	localename=gtranslator_utils_get_full_language_name(localename);
-	setlocale(LC_ALL, localename);
-}
 
 /*
  * Return whether we do have got a UTF-8 file or not.
@@ -97,7 +52,9 @@ void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
 	g_return_if_fail(msg!=NULL);
 
 	msgstr=(msg)->msgstr;
-	(msg)->msgstr=e_utf8_from_locale_string(msgstr);
+	(msg)->msgstr=gtranslator_convert_string_to_utf8(msgstr,
+		po->header->charset);
+	
 	g_free(msgstr);
 }
 
@@ -111,7 +68,9 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
 	g_return_if_fail(msg!=NULL);
 
 	msgstr=(msg)->msgstr;
-	(msg)->msgstr=e_utf8_to_locale_string(msgstr);
+	(msg)->msgstr=gtranslator_convert_string_from_utf8(msgstr,
+		po->header->charset);
+	
 	g_free(msgstr);
 }
 
@@ -120,9 +79,6 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
  */
 void gtranslator_utf8_convert_po_to_utf8(void)
 {
-	get_old_environment();
-	set_new_environment();
-
 	g_list_foreach(po->messages, 
 		(GFunc) gtranslator_utf8_convert_message_to_utf8, NULL);
 		
@@ -131,8 +87,6 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	 */
 	g_free(po->header->charset); 
 	po->header->charset=g_strdup("UTF-8");
-
-	set_old_environment();
 }
 
 /*
@@ -141,10 +95,6 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 void gtranslator_utf8_convert_po_from_utf8(void)
 {
 	gchar *charset;
-
-	get_old_environment();
-	set_new_environment();
-
 	charset=gtranslator_utils_get_locale_charset();
 
 	g_list_foreach(po->messages,
@@ -159,31 +109,6 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 		po->header->charset=g_strdup(charset);
 		g_free(charset);
 	}
-
-	set_old_environment();
-}
-
-/*
- * Set the content of the message right from the text boxes.
- */
-void gtranslator_utf8_get_utf8_for_current_message()
-{
-	gchar *msgstr;
-	GtrMsg *current_message;
-	
-	g_return_if_fail(po->current!=NULL);
-	current_message=GTR_MSG(po->current);
-	
-	get_old_environment();
-	set_new_environment();
-
-	msgstr=e_utf8_gtk_editable_get_text(GTK_EDITABLE(trans_box));
-	g_return_if_fail(msgstr!=NULL);
-
-	current_message->msgstr=g_strdup(msgstr);
-	g_free(msgstr);
-
-	set_old_environment();
 }
 
 /*
@@ -192,15 +117,11 @@ void gtranslator_utf8_get_utf8_for_current_message()
 gchar *gtranslator_utf8_get_plain_string(gchar **string)
 {
 	gchar *plain_string;
-	
+
 	g_return_val_if_fail(*string!=NULL, NULL);
 
-	get_old_environment();
-	set_new_environment();
-
-	plain_string=e_utf8_to_locale_string(*string);
-
-	set_old_environment();
+	plain_string=gtranslator_convert_string_to_utf8(*string,
+		po->header->charset);
 
 	return plain_string;
 }
@@ -210,17 +131,13 @@ gchar *gtranslator_utf8_get_plain_string(gchar **string)
  */
 gchar *gtranslator_utf8_get_utf8_string(gchar **string)
 {
-	gchar *utf8_string;
-
+	gchar 	*utf8_string;
+	
 	g_return_val_if_fail(*string!=NULL, NULL);
 
-	get_old_environment();
-	set_new_environment();
-
-	utf8_string=e_utf8_from_locale_string(*string);
-
-	set_old_environment();
-
+	utf8_string=gtranslator_convert_string_to_utf8(*string,
+		po->header->charset);
+	
 	return utf8_string;
 }
 

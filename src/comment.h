@@ -31,7 +31,10 @@ typedef enum
 	REFERENCE_COMMENT,
 	SOURCE_COMMENT,
 	TRANSLATOR_COMMENT,
-	FLAG,
+	FLAG_COMMENT,
+	FUZZY_COMMENT,
+	FUZZY_C_FORMAT_COMMENT,
+	C_FORMAT_COMMENT,
 	INTERNAL_COMMENT,
 	NO_COMMENT
 } GtrCommentType;
@@ -42,6 +45,8 @@ typedef enum
 typedef struct
 {
 	gchar		*comment;
+	gchar		*pure_comment;
+	
 	GtrCommentType	type;
 } GtrComment;
 

@@ -22,11 +22,6 @@
 #include "parse.h"
 
 /*
- * Extract the comment prefix from the comment.
- */
-gchar *extract_pure_comment(GtrComment *comment); 
-
-/*
  * Creates and returns a new GtrComment -- the comment type is automatically
  *  determined.
  */
@@ -41,41 +36,72 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	/*
 	 * Categorize the current given comment.
 	 */
-	if(comment_string[0]!='#')
+	if(comment->comment[0]!='#')
 	{
+		g_free(comment->comment);
 		return NULL;
 	}
-	else if(comment_string[0]=='#' && comment_string[1])
+	else
 	{
-		switch(comment_string[1])
+		if(nautilus_istr_has_prefix(comment->comment, "#~"))
 		{
-			case '~':
-				comment->type=OBSOLETE;
-					break;
-
-			case ':':
-				comment->type=REFERENCE_COMMENT;
-					break;
-
-			case '.':
-				comment->type=SOURCE_COMMENT;
-					break;
-
-			case ' ':
-				comment->type=TRANSLATOR_COMMENT;
-					break;
-
-			case ',':
-				comment->type=FLAG;
-					break;
-
-			case '-':
-				comment->type=INTERNAL_COMMENT;
-					break;
-
-			default:
-				comment->type=NO_COMMENT;
-					break;
+			comment->type=OBSOLETE;
+			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#~");
+		}
+		else if(nautilus_istr_has_prefix(comment->comment, "#:"))
+		{
+			comment->type=REFERENCE_COMMENT;
+			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#:");
+		}
+		else if(nautilus_istr_has_prefix(comment->comment, "#."))
+		{
+			comment->type=SOURCE_COMMENT;
+			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#.");
+		}
+		else if(nautilus_istr_has_prefix(comment->comment, "# "))
+		{
+			comment->type=TRANSLATOR_COMMENT;
+			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "# ");
+		}
+		else if(nautilus_istr_has_prefix(comment->comment, "#,"))
+		{
+			/*
+			 * Determine all the nice flag-types from the po files.
+			 */
+			if(nautilus_istr_has_prefix(comment->comment, "#, c-format"))
+			{
+				comment->type=C_FORMAT_COMMENT;
+				comment->pure_comment=nautilus_str_get_after_prefix(
+					comment->comment, "#, c-format");
+			}
+			else if(nautilus_istr_has_prefix(comment->comment, "#, fuzzy, c-format"))
+			{
+				comment->type=FUZZY_C_FORMAT_COMMENT;
+				comment->pure_comment=nautilus_str_get_after_prefix(
+					comment->comment, "#, fuzzy, c-format");
+			}
+			else if(nautilus_istr_has_prefix(comment->comment, "#, fuzzy"))
+			{
+				comment->type=FUZZY_COMMENT;
+				comment->pure_comment=nautilus_str_get_after_prefix(
+					comment->comment,  "#, fuzzy");
+			}
+			else
+			{
+				comment->type=FLAG_COMMENT;
+				comment->pure_comment=nautilus_str_get_after_prefix(
+					comment->comment, "#,");
+			}
+		}
+		else if(nautilus_istr_has_prefix(comment->comment, "#-"))
+		{
+			comment->type=INTERNAL_COMMENT;
+			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#-");
+		}
+		else
+		{
+			comment->type=NO_COMMENT;
+			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#");
 		}
 	}
 	
@@ -90,6 +116,7 @@ void gtranslator_comment_free(GtrComment **comment)
 	if(GTR_COMMENT(*comment)->comment)
 	{
 		g_free(GTR_COMMENT(*comment)->comment);
+		g_free(GTR_COMMENT(*comment)->pure_comment);
 	}
 }
 
@@ -109,32 +136,6 @@ gboolean gtranslator_comment_is_visible(GtrComment *comment)
 	{
 		return FALSE;
 	}
-}
-
-/*
- * Extract the pure comment from the GtrComment.
- */
-gchar *extract_pure_comment(GtrComment *comment)
-{
-	gchar *pure_comment, *temp;
-	
-	g_return_val_if_fail(comment!=NULL, NULL);
-	
-	/*
-	 * Assign and reverse the comment.
-	 */
-	temp=g_strdup(comment->comment);
-	g_strreverse(temp);
-	
-	/*
-	 * Strip the first (now last) comment type characters.
-	 */
-	pure_comment=g_strndup(temp, (nautilus_strlen(temp) - 2));
-	g_strreverse(pure_comment);
-
-	g_free(temp);
-	
-	return pure_comment;
 }
 
 /*

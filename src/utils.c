@@ -104,17 +104,17 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 	else if(!po->file_changed)
 	{
 		/*
-		 * As the file didn't change, we don't need to autosave it, but the
-		 *  timeout function must still return TRUE for getting it's periodic
-		 *   sense.
+		 * As the file didn't change, we don't need to autosave it, but
+		 *  the timeout function must still return TRUE for getting it's
+		 *   periodic sense.
 		 */
 		 return TRUE;
 	}
 	else
 	{
 		/*
-		 * Should we use a different suffix for the autosaved files? Should
-		 *  help differing the own-saved/autosaved po files.
+		 * Should we use a different suffix for the autosaved files?
+		 *  (Should help differing the own-saved/autosaved po files.)
 		 */
 		if(GtrPreferences.autosave_with_suffix) 
 		{
@@ -126,7 +126,8 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 			if(GtrPreferences.autosave_suffix)
 			{
 				autosave_filename=g_strdup_printf("%s.%s",
-					po->filename, GtrPreferences.autosave_suffix);
+					po->filename, 
+					GtrPreferences.autosave_suffix);
 			}
 			else
 			{
@@ -276,8 +277,10 @@ gchar *gtranslator_utils_get_locale_name(void)
 			 * Check for the language in the header -- may it be in 
 			 *  English or in the current locale..
 			 */
-			if(!g_strcasecmp(languages[c].name, po->header->language) ||
-				!g_strcasecmp(_(languages[c].name), po->header->language))
+			if(!nautilus_strcasecmp(languages[c].name, 
+					po->header->language) ||
+			   !nautilus_strcasecmp(_(languages[c].name),
+					po->header->language))
 			{
 				return languages[c].lcode;
 			}

@@ -17,38 +17,29 @@
  *
  */
 
-#ifndef GTR_UTF8_H
-#define GTR_UTF8_H 1
+#ifndef GTR_CONVERT_H
+#define GTR_CONVERT_H 1
 
-#include "parse.h"
-
-/*
- * Return TRUE/FALSE if the current file is a UTF-8 file.
- */
-gboolean gtranslator_utf8_po_file_is_utf8(void);
+#include <glib.h>
 
 /*
- * Convert the msgid & msgstr's to/from UTF-8.
+ * Small conversion helper functions to enable re-coding.
  */
-void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg);
-void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg);
 
 /*
- * Convert the whole messages to/from UTF-8.
+ * Converts from_encoding (per default "iso-8859-1") to to_encoding using
+ *  iconv.
  */
-void gtranslator_utf8_convert_po_to_utf8(void);
-void gtranslator_utf8_convert_po_from_utf8(void);
+gchar *gtranslator_convert_string(const gchar *string,
+	const gchar *from_encoding, const gchar *to_encoding);
 
 /*
- * Gets the UTF-8 part of the current string/message and ports it into "plain"
- *  form.
+ * Simple wrappers for converting from/to UTF-8.
  */
-gchar *gtranslator_utf8_get_plain_string(gchar **string); 
-gchar *gtranslator_utf8_get_plain_msgstr(GtrMsg **message); 
+gchar *gtranslator_convert_string_to_utf8(const gchar *string,
+	const gchar *from_encoding);
 
-/*
- * Get me the back to UTF-8!
- */
-gchar *gtranslator_utf8_get_utf8_string(gchar **string); 
+gchar *gtranslator_convert_string_from_utf8(const gchar *string,
+	const gchar *to_encoding);
 
 #endif

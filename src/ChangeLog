@@ -1,5 +1,18 @@
 2001-05-31  Fatih Demir <kabalak@gtranslator.org>
 
+	* comment.c/.h: Added extended comment types recognition/enum values.
+
+	* utf8.c: Made it use the new "gtranslator_convert_" functions
+		instead of hard-to-handle and crazy gal sources; also
+		 removed any locale-setting/getting calls; needs a
+		  review though as it produces sometimes, somehow garbage.
+
+	* utils.c: Use "nautilus_strcasecmp" instead of "g_strcasecmp".
+
+	* Makefile.am: Added convert.c/.h to the build sources.
+
+	* convert.c/.h: Added conversion sources.
+
 	* parse.c: Fix the autosave-checking routines while save-time.
 
 2001-05-30  Fatih Demir <kabalak@gtranslator.org>

@@ -37,6 +37,7 @@ gtranslator_SOURCES = \
 	backend.c backend.h \
 	color-schemes.c color-schemes.h \
 	comment.c comment.h \
+	convert.c convert.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
