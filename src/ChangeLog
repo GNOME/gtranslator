@@ -1,3 +1,10 @@
+2003-06-30  Ross Golder  <ross@golder.org>
+
+	* header_stuff.c (gtranslator_header_edit_apply): Fixed problem
+	         where comment would be applied as empty (#115248).
+	* utils_gui.c (gtranslator_utils_attach_text_with_label): 
+	         Used appropriate signals for a GtkTextView (#115248).
+
 2003-06-26  Ross Golder  <ross@golder.org>
 
 	* dialogs.c: Removed a couple of redundant #ifdef UTF8_CODE.

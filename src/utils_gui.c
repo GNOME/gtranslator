@@ -244,7 +244,9 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 
 	if(callback)
 	{
-		g_signal_connect(G_OBJECT(widget), "changed",
+		g_signal_connect(G_OBJECT(widget), "insert-at-cursor",
+			         G_CALLBACK(callback), NULL);
+		g_signal_connect(G_OBJECT(widget), "delete-from-cursor",
 			         G_CALLBACK(callback), NULL);
 	}
 

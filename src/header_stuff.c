@@ -301,7 +301,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 
 	buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
 	gtk_text_buffer_get_start_iter(buff, &start);
-	gtk_text_buffer_get_start_iter(buff, &end);
+	gtk_text_buffer_get_end_iter(buff, &end);
 	GTR_FREE(ph->comment);
 	ph->comment = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
 
