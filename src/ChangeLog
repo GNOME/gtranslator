@@ -1,5 +1,12 @@
 2001-07-31  Fatih Demir <kabalak@gtranslator.org>
 
+	* parse.c: Call up "gtranslator_messages_table_select_row" when navigating with
+		the old "style" via toolbar buttons, menu entries or via keyboard --
+		 the function doesn't seem to work indeed.
+
+	* messages-table.c: Erh, some little crash cure -- there's still a problem somewhere
+		(after file closures the "value_at_function" is called -- bad).
+
 	* comment.c: Always show the comment, always let the pane fit the needed space
 		and simplified the "gtranslator_comment_display" function much.
 

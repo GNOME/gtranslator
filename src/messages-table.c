@@ -456,7 +456,6 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
 	ETreePath node=NULL;
 
 	g_return_if_fail(message!=NULL);
-
 	node=g_hash_table_lookup(hash_table, message);
 
 	if(node)
@@ -473,7 +472,6 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 	ETreePath node=NULL;
 	
 	g_return_if_fail(message!=NULL);
-	
 	node=g_hash_table_lookup(hash_table, message);
 
 	if(node)

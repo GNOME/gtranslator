@@ -355,6 +355,7 @@ void gtranslator_message_go_to(GList * to_go)
 	
 	po->current = to_go;
 	gtranslator_message_show(po->current);
+	gtranslator_messages_table_select_row(GTR_MSG(po->current));
 	
 	pos = g_list_position(po->messages, po->current);
 	
@@ -366,6 +367,7 @@ void gtranslator_message_go_to(GList * to_go)
 	{
 		gtranslator_actions_disable(ACT_NEXT, ACT_LAST);
 	}
+	
 	gtranslator_application_bar_update(pos);
 }
 
