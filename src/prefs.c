@@ -384,6 +384,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(gtranslator_utils_language_lists_free), NULL);
 
 	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
+	gtk_window_set_position(GTK_WINDOW(prefs), GTK_WIN_POS_CENTER);
 }
 
 /*

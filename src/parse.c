@@ -366,7 +366,10 @@ void gtranslator_parse_main(const gchar *filename)
 	 *  be visible -- avoids "the clean my gtranslator window with dialog"
 	 *   party game ,-)
 	 */
-	gtk_main_iteration();
+	while(gtk_events_pending())
+	{
+		gtk_main_iteration();
+	}
 
 	if(po==NULL)
 		return;

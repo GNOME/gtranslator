@@ -86,7 +86,10 @@ void update(GtkWidget *widget, gpointer useless)
 	 *  this way the user still sees the application GUI and not something
 	 *   very unwanted and unnice .-)
 	 */
-	gtk_main_iteration();
+	while(gtk_events_pending())
+	{
+		gtk_main_iteration();
+	}
 	
 	/*
 	 * Before doing an update, my-update.sh checks if

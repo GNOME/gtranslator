@@ -1,5 +1,11 @@
 2001-08-18  Fatih Demir <kabalak@gtranslator.org>
 
+	* prefs.c: Show the preferences dialog centered via the
+		"gtk_window_set_position" function.
+
+	* parse.c & update.c: "Enhanced" the "gtk_main_iteration" calls by
+		conditionalizing them with "gtk_events_pending".
+
 	* query.c: Redraw the messages tree if any autoaccomplishment 
 		could be performed (Fixes #59204).
 
