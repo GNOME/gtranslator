@@ -343,9 +343,15 @@ GtkWidget *gtranslator_messages_table_new()
 	
 	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
 	
-	/* FIXME: determine where to save this as well as in the save function below
-	e_tree_load_state (E_TREE (tree), "where");
-	*/
+	/*
+	 * FIXME: This is definitely the return value of the
+	 *  gtranslator_utils_get_messages_table_state_file_name() function.
+	 *
+	 * But the statusfile argument to e_tree_scrolled_construct_From_spec_file
+	 *  should already define this.
+	 *
+	e_tree_load_state (E_TREE (tree), statusfile);
+	 */
 	
 	g_free(statusfile);
 	
@@ -406,9 +412,12 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
  */
 void gtranslator_messages_table_save_state()
 {
-	/* FIXME: determine where to save this
-	e_tree_save_state (E_TREE (tree), "where");
-	*/
+	gchar	*statusfilename;
+
+	statusfilename=gtranslator_utils_get_messages_table_state_file_name();
+	e_tree_save_state (E_TREE (tree), statusfilename);
+
+	g_free(statusfilename);
 }
 
 /*
