@@ -30,6 +30,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/backend.o \
 	$(srcbuild)/color-schemes.o \
 	$(srcbuild)/convert.o \
+	$(srcbuild)/comment.o \
 	$(srcbuild)/dialogs.o \
 	$(srcbuild)/dnd.o \
 	$(srcbuild)/find.o \
