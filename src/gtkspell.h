@@ -19,8 +19,6 @@
 #ifndef __gtkspell_h__
 #define __gtkspell_h__
 
-gchar *ispell_cmd[] = { "ispell", "-a", NULL };
-
 /* PLEASE NOTE that this API is unstable and subject to change. */
 
 extern int gtkspell_start(char *path, char *args[]);

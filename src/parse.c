@@ -344,6 +344,16 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 {
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
+	/**
+	* Test if this seems to be a mo/gmo-file..
+	**/
+	if((!strcmp(po_file, ".mo")) || (!strcmp(po_file, ".gmo")))
+	{
+		/**
+		* Then open it up with the new function...
+		**/
+		gtranslator_open_mo_file(po_file);
+	}
 	parse(po_file);
 	/* Destroy the dialog */
 	gtk_widget_destroy(GTK_WIDGET(of_dlg));
@@ -464,7 +474,7 @@ static gboolean actual_write(const gchar * name)
 		/**
 		* Add a foo'sh header entry.
 		**/ 
-		po->header->comment="#   -- created with gtranslator from a mo-file.\n";
+		po->header->comment="#   -- edited with gtranslator.\n";
 	}
 	
 	fs = fopen(name, "w");
@@ -921,6 +931,51 @@ void gtranslator_open_mo_file(gchar *file)
 		* "Misuse" cmd
 		**/
 		cmd=g_strdup_printf(_("Couldn't open mo-file `%s'!"),
+			file);
+		/**
+		* Sorry, didn't work...
+		**/
+		gnome_app_warning(GNOME_APP(app1), cmd);
+	}
+	g_free(cmd);
+	g_free(tempfilename);
+}
+
+/**
+* This is mostly only a copy&pasted part of the mo/gmo-file
+*  opening function which is just adapted to use gunzip ...
+**/
+void gtranslator_open_gzipped_po_file(gchar *file)
+{
+	gchar *cmd;
+	gchar *tempfilename;
+	/**
+	* Set the temporary filename...
+	**/
+	tempfilename=g_strdup_printf("%s/temp_po_file",
+		((g_getenv("TMPDIR")) ? g_getenv("TMPDIR"): "/tmp"));
+	/**
+	* Build up the command to execute in the shell.
+	**/
+	cmd=g_strdup_printf("gzip -dc < %s > %s",
+		file,
+		tempfilename);
+	/**
+	* Execute the command.
+	**/
+	if(!system(cmd))
+	{
+		/**
+		* Yes, it worked for us...
+		**/
+		parse(tempfilename);
+	}
+	else
+	{
+		/**
+		* "Misuse" cmd
+		**/
+		cmd=g_strdup_printf(_("Couldn't open gzipped po-file `%s'!"),
 			file);
 		/**
 		* Sorry, didn't work...

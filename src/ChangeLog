@@ -1,3 +1,16 @@
+2000-12-08  Fatih Demir	<kabalak@gmx.net>
+
+	* parse.c/.h: Added a gtranslator_open_gzipped_po_file function
+		which does work like gtranslator_open_mo_file but it does
+		 it's job for a gzip'ed po-file.
+
+	* main.c: Also open up gmo-files as they're the same as
+		mo-files and do use the same plain stuff for gzip'ed
+		 po-files as for mo-files .. without using GnomeVFS.
+
+	* parse.c: Also allow opening mo/gmo-files from the open file
+		dialog.
+
 2000-12-07  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gui.c: (str_replace) added function which quickly replaces dots with

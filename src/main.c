@@ -167,74 +167,26 @@ int main(int argc, char *argv[])
 			* Note: This is a stupid suffix-check, so it's
 			*  quite crap.
 			**/
-			if((args[0][strlen(args[0])-1]=='z') &&
+			if(     (args[0][strlen(args[0])-1]=='z') &&
 				(args[0][strlen(args[0])-2]=='g') &&
-				(args[0][strlen(args[0])-3]=='.'))
+				(args[0][strlen(args[0])-3]=='.') )
 			{
-				/**
-				* Open the file via GnomeVFS -- if it's here or
-				*  complain about it being missing ..
-				**/
-				#ifdef USE_VFS_STUFF
-				/**
-				* The newly used variables.
-				**/
-				gchar *tempfilename=g_new0(gchar,1);
-				GnomeVFSURI *gzipfile, *tempfile;
-				/**
-				* Initialize GnomeVFS.
-				**/
-				gnome_vfs_init();
-				/**
-				* Get the URI for the given gzip'ed file.
-				**/ 
-				gzipfile=gnome_vfs_uri_new(args[0]);
-				/**
-				* Get a temporary filename.
-				**/
-				tempfilename=g_strdup_printf("%s/%s#gzip", 
-					"/tmp",
-					gnome_vfs_uri_get_basename(gzipfile));
-				tempfile=gnome_vfs_uri_new(tempfilename);
-				/**
-				* If everything went OK, just open the temp-file.
-				**/
-				if(gnome_vfs_xfer_uri(gzipfile, tempfile,
-					GNOME_VFS_XFER_FOLLOW_LINKS,
-					GNOME_VFS_XFER_ERROR_MODE_ABORT,
-					GNOME_VFS_XFER_OVERWRITE_ACTION_REPLACE,
-					NULL,
-					NULL)==GNOME_VFS_OK)
-				{
-					parse(tempfilename);
-					/**
-					* Free the used gchar.
-					**/
-					if(tempfilename)
-					{
-						g_free(tempfilename);
-					}
-				}
-				else
-				{
-					/**
-					* Print out a warning that GnomeVFS didn't work somehow.
-					**/
-					g_warning(_("Couldn't open `%s' via GnomeVFS!"), args[0]);
-				}
-				#else
-				g_error(
-				_("Can't open gzipped po-files as gtranslator was compiled without VFS support!"));
-				#endif
+				gtranslator_open_gzipped_po_file((gchar *)args[0]);
 			}
 			else
 			{
 				/**
-				* Check if it seems to be a mo-file ;-)
+				* Check if it seems to be a mo-file ...
+				*  or a gmo-file..
 				**/
-				if((args[0][strlen(args[0])-1]=='o') &&
-					(args[0][strlen(args[0])-2]=='m') &&
-					(args[0][strlen(args[0])-3]=='.'))
+				if( ((args[0][strlen(args[0])-1]=='o') &&
+				     (args[0][strlen(args[0])-2]=='m') &&
+				     (args[0][strlen(args[0])-3]=='.'))
+						||
+				    ((args[0][strlen(args[0])-1]=='o') &&
+				     (args[0][strlen(args[0])-2]=='m') &&
+				     (args[0][strlen(args[0])-3]=='g') &&
+				     (args[0][strlen(args[0])-4]=='.')) )
 				{
 					/**
 					* Open the mo-file via a new routine
