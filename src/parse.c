@@ -1031,7 +1031,7 @@ Your file should likely be named '%s.po'."),
 			GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_WARNING,
 			GTK_BUTTONS_OK,
-			_("File %s\ncontains %d fuzzy messages"),
+			ngettext("File %s\ncontains %d fuzzy message", "File %s\ncontains %d fuzzy messages", po->fuzzy),
 			po->filename, po->fuzzy);
 		gtk_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(dialog);

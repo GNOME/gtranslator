@@ -498,7 +498,7 @@ void gtranslator_application_bar_update(gint pos)
 	{
 		if(po->fuzzy>0)
 		{
-			status=g_strdup_printf(_("%s [ %i Fuzzy left ]"), _("Fuzzy"), po->fuzzy);
+			status=g_strdup_printf(ngettext("%s [ %i Fuzzy left ]", "%s [ %i Fuzzy left ]", po->fuzzy), _("Fuzzy"), po->fuzzy);
 		}	
 		else
 		{
@@ -521,7 +521,7 @@ void gtranslator_application_bar_update(gint pos)
 		{
 			gint missya;
 			missya = po->length - po->translated;
-			status=g_strdup_printf(_("%s [ %i Untranslated left ]"), _("Untranslated"), missya);
+			status=g_strdup_printf(ngettext("%s [ %i Untranslated left ]", "%s [ %i Untranslated left ]", missya), _("Untranslated"), missya);
 		} else {
 			status=g_strdup_printf(_("%s [ No untranslated left ]"), _("Untranslated"));
 			
