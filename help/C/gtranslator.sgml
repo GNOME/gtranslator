@@ -1,438 +1,836 @@
-<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN" [
-<!ENTITY version "0.39">
-<!ENTITY docdate "12 April 2001">
+<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
+        <!-- if not using PNG graphic, replace reference above with
+             .....PUBLIC "-//OASIS//DTD DocBook V3.1//EN"[
+         -->
+<!ENTITY version "0.40"> <!-- replace with application version -->
 ]>
 
-<article id="index">
-<artheader>
-	<title>gtranslator &version; documentation</title>
 
-	<author>
-		<firstname>Fatih</firstname>
-		<surname>Demir</surname>
-			<affiliation>
-				<address>
-					<email>kabalak@gtranslator.org</email>
-				</address>
-			</affiliation>	
-	</author>
-	
-	<copyright>
-		<year>2001</year>
-		<holder>Fatih Demir</holder>
-	</copyright>
+<!--
+  This is a GNOME documentation template, designed by the GNOME
+  Documentation Project Team. Please use it for writing GNOME
+  documentation, making obvious changes. In particular, all the words
+  written in UPPERCASE (with the exception of GNOME) should be
+  replaced. As for "legalnotice", please leave the reference
+  unchanged.
 
-<legalnotice id="license">
+  Remember that this is a guide, rather than a perfect model to follow
+  slavishly. Make your manual logical and readable.  And don't forget
+  to remove these comments in your final documentation!  ;-)
+-->
+
+<!--
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 1.0.3
+  Template last modified: Nov 16, 2000
+-->
+
+
+<!-- =============Document Header ============================= -->
+
+<article id="index"> <!-- please do not change the id -->
+
+  <artheader>
+    <title>Gtranslator Manual</title>
+    <copyright>
+      <year>2001</year>
+      <holder>Emese Kovacs</holder>
+    </copyright>
+
+  <!-- translators: uncomment this:
+
+  <copyright>
+   <year>2000</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+
+  <!-- do not put authorname in the header except in copyright - use
+  section "authors" below -->
+
+  <!-- Use this legal notice for online documents which depend on -->
+  <!-- core GNOME packages.                                       -->
+  <legalnotice id="legalnotice">
+   <para>
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the <ulink type="help"
+    url="gnome-help:fdl"><citetitle>GNU Free Documentation
+    License</citetitle></ulink>, Version 1.1 or any later version
+    published by the Free Software Foundation with no Invariant Sections,
+    no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license
+    can be found <ulink type="help" url="gnome-help:fdl">here</ulink>.
+   </para>
+   <para>
+    Many of the names used by companies to distinguish their products and
+    services are claimed as trademarks. Where those names appear in any
+    GNOME documentation, and those trademarks are made aware to the members
+    of the GNOME Documentation Project, the names have been printed in caps
+    or initial caps.
+   </para>
+  </legalnotice>
+
+  <!-- Use this legal notice for documents which are placed on  -->
+  <!-- the web, shipped in any way other than online documents  -->
+  <!-- (eg. PS, PDF, or RTF), or which do not depend on the     -->
+  <!-- core GNOME distribution.                                 -->
+  <!--                                                          -->
+  <!-- If you use this version, you must place the following    -->
+  <!-- line in the document declaration at the top of your      -->
+  <!-- document:                                                -->
+  <!--   <!ENTITY FDL SYSTEM "fdl.sgml">                        -->
+  <!-- and the following line at the bottom of your document    -->
+  <!-- after the last </sect1>.                                 -->
+  <!--   &FDL;                                                  -->
+  <!--
+  <legalnotice id="legalnotice">
+   <para>
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the <link linkend="fdl"><citetitle>GNU
+    Free Documentation License</citetitle></link>, Version 1.1 or any later
+    version published by the Free Software Foundation with no Invariant
+    Sections, no Front-Cover Texts, and no Back-Cover Texts.  A copy of the
+    license can be found in <xref linkend="fdl">.
+   </para>
+   <para>
+    Many of the names used by companies to distinguish their products and
+    services are claimed as trademarks. Where those names appear in any
+    GNOME documentation, and those trademarks are made aware to the members
+    of the GNOME Documentation Project, the names have been printed in caps
+    or initial caps.
+   </para>
+  </legalnotice>
+  -->
+
+  <!-- This is the manual version, not application version. -->
+    <releaseinfo>
+       This is version 0.4 of Gtranslator manual.
+    </releaseinfo>
+
+  </artheader>
+
+ <!-- ============= Document Body ============================= -->
+
+ <!-- ============= Introduction ============================== -->
+  <sect1 id="intro">
+    <title>Introduction</title>
+
+    <para>
+     <application>Gtranslator</application> offers you a
+	 comfortable graphical interface to edit gettext po files.
+	 It allows you to eazily navigate among fuzzy, translated and
+	 untranslated messages and has a status bar displaying the number
+	 of messages for each category. <application>Gtranslator</application>
+	 features loading and saving of compressed po files, opening of remote
+	 files via Gnome-VFS, and regular expression based search. Moreover,
+	 the application makes it possible to merge an outdated po file with
+	 a recent pot file via the xml-i18n-tools backend, all from the 
+         graphical interface!
+	</para>
+	<para>
+	 The autotranslate function allows you to <quote>teach</quote>
+	 <application>Gtranslator</application> msgid and msgstr pairs from
+	 a set of translated po files and then translate a new project using
+	 this translation memory.
+	</para>
+
+    <para>
+      To run <application>Gtranslator</application>, select
+      <menuchoice>
+	<guisubmenu>Programs</guisubmenu>
+	<guisubmenu>Development</guisubmenu>
+	<guimenuitem>gtranslator</guimenuitem>
+      </menuchoice>
+      from the <guimenu>Main Menu</guimenu>, or type
+      <command>gtranslator</command> on the command line.
+  </para>
+
+    <para>
+      <application>Gtranslator</application> is included in the
+      <filename>gtranslator</filename> package, which is part of the
+      GNOME desktop environment. This document describes version
+      &version; of <application>Gtranslator</application>.
+    </para>
+  </sect1>
+
+
+ <!-- ================ Usage ================================ -->
+ <!-- This section should describe basic usage of the application. -->
+
+  <sect1 id="usage">
+    <title>Using Gtranslator</title>
+    <para>
+      <application>Gtranslator</application> is a full featureed graphical
+      environment that makes it possible to translate po files painlessly.
+      This section describes basic usage of
+      <application>Gtranslator</application>.
+    </para>
+
+    <!-- ========= Basic Usage =========================== -->
+    <sect2 id="Basic">
+      <title>Basic usage</title>
       <para>
-		Permission is granted to make and distribute verbatim copies of
-		this manual provided the copyright notice and this permission
-		notice are preserved on all copies.
-	</para>
+        This will be about basic functions of gtranslator
+        <!-- Starting <application>MY-GNOME-APP</application> opens the
+        <interface>Main window</interface>, shown in <xref
+        linkend="mainwindow-fig">. The window is at first empty.
+        --> 
+        <!-- ==== Figure ==== -->
+        <figure id="mainwindow-fig">
+	  <title>Gtranslator Main Window</title>
+	  <screenshot>
+	    <screeninfo>Gtranslator Main Window</screeninfo>
+	    <graphic fileref="mainwindow" format="png" srccredit="emese">
+            </graphic>
+	  </screenshot>
+	</figure>
+    <!-- ==== End of Figure ==== -->
+      </para>
+
+
+      <sect3 id="settingup">
+	<title>Configuring at startup</title>
 	<para>
-		Permission is granted to copy and distribute modified versions of
-		this manual under the conditions for verbatim copying, provided
-		that the entire resulting derived work is distributed under the
-		terms of a permission notice identical to this one.
-	</para>
+        Basic configuration stuff comes here,just to get started
+        </para>
+      </sect3>
+
+      <sect3 id="loading">
+	<title>Loading a po file</title>
 	<para>
-		Permission is granted to copy and distribute translations of this
-		manual into another language, under the above conditions for
-		modified versions, except that this permission notice may be
-		stated in a translation approved by the Free Software Foundation.
-	</para>
-</legalnotice>
+        How to load a po file.
+        </para>        
+        <para>
+        The Gnome-VFS way
+        </para>
+        <para>
+        Tip on compressed po  files
+        </para>
+      </sect3>
 
-<releaseinfo>
-	gtranslator documentation version 0.3
-</releaseinfo>
-
-<pubdate>&docdate;</pubdate>
-
-<abstract>
+      <sect3 id="editing">
+	<title>Editing a po file</title>
 	<para>
-		<application>gtranslator</application> is a comfortable editor
-		for the gettext po files which are mostly the basis for i18n
-		in GNOME and other desktop environments.
-	</para>
-</abstract>
+        Basics on panes, where to click, message status, basic navigation
+        </para>
+        <para>
+        Tip on on using the tree view. 
+        </para>
+      </sect3>
 
-</artheader>
+      <sect3 id="saving">
+	<title>Saving a po file</title>
+	<para>
+        How to save, save as comressed?
+        </para>
+        <para>
+        Tip on turning fuzzy warnings on/off
+        </para>
+      </sect3>
 
-<sect1 id="introduction">
-	<title>Introduction</title>
-		<para>
-			<application>gtranslator</application> offers you many 
-			comfortable dialogs to edit the po files fields and to navigate comfortably
-			through the messages of the po file.
-		</para>
-</sect1>
 
-<sect1 id="features">
-	<title>Major features of <application>gtranslator</application></title>
-		<para>
-			gtranslator has got many features which are 
-			<emphasis>useful</emphasis>
-			for editing the gettext po files. The major features are:
-			<itemizedlist>
-				<listitem>
-					<para>Crashless and quick editing of
-					gettext po files</para>
-				</listitem>	
-				<listitem>
-					<para>Very low memory usage</para>
-				</listitem>
-				<listitem>
-					<para>Navigation inside the fuzzy,
-					untranslated and translated
-					messages</para>
-				</listitem>
-				<listitem>
-					<para>Regular expressions based
-					find/search function</para>
-				</listitem>
-				<listitem>
-					<para>Compile function for testing
-					your po files</para>
-				</listitem>
-				<listitem>
-					<para>Status indication with detailed
-					information at the statusbar and a
-					<emphasis>useful and correct</emphasis>
-					progress bar</para>
-				</listitem>
-				<listitem>
-					<para>Advanced history list with
-					<emphasis>
-						project name and version
-					</emphasis>
-					instead of only showing
-					the filename</para>
-				</listitem>
-				<listitem>
-					<para>Opening of gzip&apos;ed and compiled
-					(.mo/.gmo) gettext po files</para>
-				</listitem>
-				<listitem>
-					<para>Opening of remote po files via
-					GnomeVFS (and http, ftp, nfs and other
-					access routines of GnomeVFS).</para>
-				</listitem>
-				<listitem>
-					<para>Editing with the help of a
-					"special char" instead of only hardly
-					recognizable free spaces</para>
-				</listitem>
-				<listitem>
-					<para>Update function to update the po
-					file with the (if installed)
-					xml-i18n-tools</para>
-				</listitem>
-				<listitem>
-					<para>Query capability to get already made
-					translations from other gettext domains</para>
-				</listitem>
-				<listitem>
-					<para>Colorschemes for changing the syntax colors
-					on the fly -- these colorschemes are xml files and
-					easy to change/adept.</para>
-				</listitem>
-				<listitem>
-					<para>Autogeneration and filling up of the default
-					header if a new, fresh pot file is taken into
-					gtranslator</para>
-				</listitem>
-				<listitem>
-					<para>A simple Nautilus view with which you can
-					see the header fields of a po file</para>
-				</listitem>
-				<listitem>
-					<para>Find, replace dialogs and functionality</para>
-				</listitem>
-				<listitem>
-					<para>Obsolete entries in the po file are kept now
-					at preference of the user (if you want them you get
-					them in your po files)</para>
-				</listitem>
-			</itemizedlist>
-		</para>
-</sect1>
+<!--          <menuchoice>
+	    <guisubmenu>File</guisubmenu>
+	    <guimenuitem>New</guimenuitem>
+	  </menuchoice>,
+            which will
+	    bring up the <interface>New Proof</interface> dialog box.
+	    Enter the statement of the theorem in the
+	    <guilabel>Theorem statement</guilabel> field, select your
+	    desired proof type from the drop-down menu, and and press
+	    <guibutton>Prove!</guibutton>.
+        </para>
+	<para>
+          If <application>MY-GNOME-APP</application> cannot prove the
+          theorem by the method you have chosen, or if you have not
+          selected a proof type at all,
+          <application>MY-GNOME-APP</application> will attempt to
+          choose the one that it thinks is most conclusive.  In order,
+          it will attempt to prove the theorem with the following techniques:
 
-<sect1 id="commandlinearguments">
-	<title>Command line arguments</title>
+                <variablelist>
+	    <varlistentry>
+	      <term>Deduction</term>
+	      <listitem>
 		<para>
-			<application>gtranslator</application> understands some
-			command line arguments:
-			<itemizedlist>
-				<listitem>
-					<para>
-					<emphasis>--help</emphasis> Shows you a
-					litte help message on the command line.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					<emphasis>--version</emphasis> Tells you
-					the version of <application>gtranslator
-					</application> you&apos;re using.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					<emphasis>--display</emphasis> Let&apos;s you
-					define the display to start 
-					<application>gtranslator</application>
-					on.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					<emphasis>--webalize</emphasis> Prints
-					out a htmlized output file (you must
-					give the html output filename as the
-					next argument) of the po file.
-					</para>
-					<para>
-					An example call would be:
-					<emphasis>
-					<application>gtranslator</application>
-					--webalize=Evolution.html tr.po
-					</emphasis>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					<emphasis>--scheme</emphasis> Sets the
-					syntax color scheme to the given file
-					</para>
-					<para>
-					For example:
-					<emphasis>
-					<application>gtranslator</application>
-					--scheme=Schemefile
-					</emphasis>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					<emphasis>--geometry</emphasis> Let&apos;s
-					you define a standard geometry string
-					to which the gtranslator window will
-					conform.
-					</para>
-					<para>
-					An example call would be:
-					<emphasis>
-					<application>gtranslator</application>
-					--geometry="320x240+0+0" tr.po
-					</emphasis>
-					(This opens gtranslator at "+0+0", the
-					left upper corner, with a size of 
-					320x240).
-					</para>
-				</listitem>	
-			</itemizedlist>	
-		</para>
-</sect1>
+                  This is a proof method that is generally accepted
+                  for full credit by Logic professors.
+                </para>
+	      </listitem>
+	    </varlistentry>
+	    <varlistentry>
+            <term>Induction</term>
+	    <listitem>
+	      <para>
+                This logical style will also earn you full credit on
+                your homework.
+             </para>
+	    </listitem>
+            </varlistentry>
+	    <varlistentry>
+	      <term>Dialog</term>
+	      <listitem>
+	      <para>
+                This logical method is best for Philosophy classes,
+                and will probably only merit partial credit on Logic
+                or Mathematics homework.
+              </para>
+	    </listitem>
+            </varlistentry>
+            <varlistentry>
+	      <term>Confusion</term>
+	      <listitem>
+	      <para>
+                Suitable only for political debates, battles of wits
+                against the unarmed, and Philosophy classes focusing
+                on the works of Kant. Use with caution.
+              </para>
+	      </listitem>
+	    </varlistentry>
+	  </variablelist>
+          </para>
+-->
+   <!-- You might want to include a note, warning, or tip, e.g. -->
+<!--
+	<warning>
+	  <title>Proving Incorrect Theorms</title>
+	  <para>
+            <application>MY-GNOME-APP</application> cannot prove
+            incorrect theorems. If the theorem you have entered is not
+            demonstrably true, you will get a message to that effect
+            in the main window.  To disprove a theorem, ask
+            <application>MY-GNOME-APP</application> to prove its
+            logical inverse.
+          </para>
+	</warning>
+      </sect3>
+      <sect3 id="editing">
+	<title>Editing Proofs</title>
+	<para>
+          Once you have proven the theorem, it will be displayed in
+          the <interface>main window</interface>.  There, you can read
+          it over, choose text styles for different portions of it,
+          and make comments on it. This section will guide you through
+          that process.
+        </para>
+	<para>
+          To alter text styles, first select the statement you wish to
+          change by clicking on it once.  You can select several
+          statements by Then, choose the style you want to apply from
+          the <guisubmenu>Style</guisubmenu> submenu of the
+          <guimenu>Edit</guimenu> menu.
+          <application>MY-GNOME-APP</application> will convert the
+          text to that style.
+        </para>
+        <para>
+          You can also enter comments on a statement by selecting that
+          statement, and then beginning to type.  Comments will appear
+          after the statement you have selected.
+        </para>
 
-<sect1 id="aa">
-	<title>Autoaccomplishment</title>
-		<sect2 id="idea">
-			<title>Idea</title>
-			<para>
-			Autoaccomplishment means the completion of non-translated
-			strings with already made and installed translations from the
-			user-defined default query domain (which is a program like
-			"<application>nautilus</application>").
-			</para>
-		</sect2>
-		<sect2 id="praxis">
-			<title>Practical use</title>
-			<para>
-			To use the autoaccomplish feature of gtranslator you&apos;ve got to
-			setup two main things in your personal preference.
-				<itemizedlist>
-					<listitem>
-						<para>Your language details in the <emphasis>
-						Language settings</emphasis> page of the
-						preferences dialog.
-						</para>
-					</listitem>
-					<listitem>
-						<para>Once you&apos;ve set up your language the available
-						query domains will be parsed on the next startup of
-						<application>gtranslator</application>. Then you can
-						select your default query domain in the <emphasis>
-						Personal informations</emphasis> page of the preferences
-						dialog.
-						</para>
-					</listitem>
-				</itemizedlist>
-			After you&apos;ve done this setup steps you can simply use the autoaccomplishment
-			feature by selection the corresponding menu option in the <emphasis>
-			_File</emphasis> menu.
-			</para>
-			<para>
-			All non-translated messages will be checked if they&apos;ve
-			been already translated for the default query domain and if everything went right
-			the translation found in the default query domain will be simply used as the
-			translation for the corresponding msgid.
-			</para>
-		</sect2>
-</sect1>
+	<note>
+	  <title>Altering The Proofs Themselves</title>
+          <para>
+            <application>MY-GNOME-APP</application> does not allow you
+            to alter a proof it has produced itself.  You can, save
+            your proof as a plain text file (using the
+            <guimenuitem>Save as...</guimenuitem> menu), and alter it
+            that way.  Be aware, however, that
+            <application>MY-GNOME-APP</application> uses its own file
+            format for saved proofs, and cannot re-open a file unless
+            it is in the .mga format.
+          </para>
+	</note>
+      </sect3>
 
-<sect1 id="colorschemes">
-	<title>Color schemes</title>
-		<para>
-			Color schemes define the colors of the different syntax elements in gtranslator.
-		</para>
-		<para>
-			The file format for color schemes is quite easy and based on <emphasis>XML</emphasis>.
-			The default colors are included as the <emphasis>default.xml</emphasis> color scheme and
-			can be consulted if you want to write an own color scheme.
-		</para>
-		<para>
-			The tags are <emphasis>all</emphasis> mandatory and the &lt;author&gt; tag has to be before 
-			all &lt;color&gt; tags in the file. The available color targets can be also obtained from the 
-			default.xml file.
-		</para>
-		<para>
-			Many color schemes are already distributed with the default package of gtranslator and can be
-			easily selected/changed from the preferences dialog on the "Fonts, colors and color schemes"
-			page.
-		</para>
-</sect1>
+-->
+  <!-- If there are other functions performed from the main window,
+       they belong here.   -->
 
-<sect1 id="resources">
-	<title>Resources for gtranslator</title>
-		<para>
-			The main resource for gtranslator is definetely <ulink url="http://www.gtranslator.org" 
-			type="http">www.gtranslator.org</ulink>.
-		</para>
-		<para>
-			There you can watch progress in the NEWS section, get newest sources from releases and/or 
-			CVS snapshots, watch screenshots or do other nice things.
-		</para>
-</sect1>
+    </sect2>
 
-<sect1 id="thanks">
-	<title>Thanks</title>
-		<sect2 id="contributors">
-		<title>Contributors</title>
-		<para>
-			Glacious support in different fields were done by these
-			persons:
-			<itemizedlist mark="bullet">
-				<listitem>
-					<para>
-					Thomas Ziehmer
-					<email>thomas@gtranslator.org</email>
-					for the find dialog implementation
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					<emphasis>All</emphasis> translators of
-					<application>gtranslator</application>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					The GNOME I18N list
-					<email>gnome-i18n@gnome.org</email>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					Alexandre Hautequest
-					<email>hquest@fesppr.br</email>
-					</para>
-				</listitem>
-				<listitem>
-					<para>Denis Pleic&apos;
-					<email>dpleic@linux.hr</email>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					Josh Jackson 
-					<email>pturing@mailandnews.com</email>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					Robert Brady
-					<email>robert@suse.co.uk</email>
-					</para>
-				</listitem>	
-			</itemizedlist>
-		</para>
-	</sect2>
+    <!-- =========================================================
+      Additional Sect2's should describe additional windows, such as
+      larger dialog boxes, or functionality that differs significantly
+      from the most immediate functions of the application. Make the
+      structure logical.
+      =============================================================  -->
+    <sect2 id="advanced">
+      <title>Advanced features</title>
+       <para>
+       Here come the advanced features, autoaccomlish, regexp search, upadte aso...
+       </para>
+        
+        <sect3 id="aa">
+         <title>Autoaccomplish</title>
+         <para>
+         Autotranslate is a nice feature.
+         </para>
+        </sect3>
+       <sect3 id="upadte">
+         <title>Update</title>
+         <para>
+         Update from source with <command>xml-i18n-tool</command>
+         </para>
+        </sect3>
+       <sect3 id="search">
+         <title>Regexp search</title>
+         <para>
+         Does it work?
+         </para>
+        </sect3>
+    </sect2>
+    
+    <sect2 id="commandline">
+      <title>Available commandline options</title>
+       <para>
+       <application>Gtranslator</application> understands a number of 
+       command line options:
+          <itemizedlist>
+            <listitem>
+              <para>
+                <emphasis>--help</emphasis> Shows you a
+                litte help message on the command line.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+              <emphasis>--version</emphasis> Tells you
+              the version of <application>Gtranslator</application> 
+              you're using.
+              </para>
+            </listitem>
+          </itemizedlist>
+       </para>
+       
+    </sect2>
 
-	<sect2 id="packagers">
-	<title>Packagers</title>
-		<para>
-			We would want to thank those persons for
-			providing packages in the corresponding formats
-			of <application>gtranslator</application>.
-			<itemizedlist mark="bullet">
-				<listitem>
-					<para>Josh Jackshon 
-					<email>pturing@mailandnews.com</email>
-					for his Mandrake packages of
-					<application>gtranslator</application> 0.34
-					</para>
-				</listitem>
-				<listitem>
-					<para>Mike Newman
-					<email>mike@gtnorthern.demon.co.uk</email>
-					for his RH7 (S)RPMs of
-					<application>gtranslator</application>.
-					</para>
-				</listitem>
-				<listitem>
-					<para>Martijn van de Streek
-					<email>martijn@foodfight.org</email>
-					for his Debian packages of
-					<application>gtranslator</application>	
-					</para>
-				</listitem>
-				<listitem>
-					<para>Maxim Sobolev 
-					<email>sobomax@freebsd.org</email>
-					for his FreeBSD ports of
-					<application>gtranslator</application>	
-					</para>
-				</listitem>
-			</itemizedlist>
-		</para>
-	</sect2>
-</sect1>	
+    <sect2 id="toolbar">
+      <title>Toolbar</title>
+      <para>
+        The toolbar (shown in <xref linkend="figure-usage-toolbar">)
+        provides access to several commonly used routines.
+        <figure id="figure-usage-toolbar">
+	  <title>Gtranslator Toolbar</title>
+	  <screenshot>
+	    <screeninfo>Gtranslator Toolbar</screeninfo>
+	    <graphic fileref="usage-toolbar" format="png"></graphic>
+	  </screenshot>
+	</figure>
+        <variablelist>
+	  <varlistentry>
+	    <term>Open</term>
+	    <listitem>
+	      <para>
+                Brings up the <interface>Open file dialog</interface>
+                dialog.
+              </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>Save</term>
+	    <listitem>
+	      <para>
+                 Saves the po file.
+               </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>Compile</term>
+	    <listitem>
+	      <para>
+	         Compiles the po file using msgfmt.
+               </para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+       </para>
+    </sect2>
+    <!-- ========= Menus =========================== -->
 
-<sect1 id="authors">
-	<title>The authors of <application>gtranslator</application></title>
-		<para>
-			We are at the moment only two people, but you can
-			of course join <application>gtranslator</application>
-			development and support us with your efforts and of
-			course also with money ,-)
-			<itemizedlist>
-				<listitem>
-					<para>
-					Fatih Demir, aka. kabalak, 
-					<email>kabalak@gtranslator.org</email>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-					Gediminas Paulauskas, aka. menesis, 
-					<email>menesis@gtranslator.org</email>
-					</para>
-				</listitem>
-			</itemizedlist>
-			More information about the authors can be obtained from
-			<ulink url="http://www.gtranslator.org/authors.html"
-			type="http">gtranslator.org&apos;s authors section</ulink>.
-		</para>
-</sect1>
+    <sect2 id="menubar">
 
+       <!-- Describing the menubar ensures comprehensive feature
+       coverage. Nest itemizedlists inside variablelists so that each
+       menu is easily located by indexing software. Proper indentation
+       makes it easier! -->
+
+      <title>Menus</title>
+      <para>
+	The menu bar, located at the top of the <interface>Main
+	Window</interface>, contains the following menus:
+       </para>
+      <variablelist>
+	<varlistentry>
+	  <term><guimenu>File</guimenu></term>
+	  <listitem>
+	    <para>
+	       This menu contains:
+	       <itemizedlist>
+		<listitem>
+		  <para>
+	            <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Alt</keycap><keycap>C</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Compile</guimenuitem>
+		     </menuchoice>
+	             &mdash; This compiles the current po file.
+	           </para>
+		</listitem>
+		<listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>S</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Save</guimenuitem>
+		    </menuchoice>
+	            &mdash; This saves your file.
+	          </para>
+		</listitem>
+		<listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Close</guimenuitem>
+		    </menuchoice>
+	            &mdash; This closes your file.
+	          </para>
+		</listitem>
+		<listitem>
+		  <para>
+	            <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>Q</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Exit</guimenuitem>
+		    </menuchoice>
+	            &mdash; This quits the application.
+	          </para>
+		</listitem>
+	      </itemizedlist>
+	  </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>Edit</guimenu></term>
+	  <listitem>
+	    <para>
+	   This menu contains:
+	   <itemizedlist>
+		<listitem>
+		  <para>
+	            <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>X</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Cut</guimenuitem>
+		    </menuchoice>
+	            &mdash; This removes any text or data which is selected and
+	            places it in the buffer.
+	          </para>
+		</listitem>
+		<listitem>
+		  <para>
+	            <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Copy</guimenuitem>
+		    </menuchoice>
+	            &mdash; This copies any text or data which is selected into
+	            the buffer.
+	          </para>
+		</listitem>
+		<listitem>
+		  <para>
+	           <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>V</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Paste</guimenuitem>
+		    </menuchoice>
+	            &mdash; This pastes any text or data which is copied into
+	            the buffer.
+	        </para>
+		</listitem>
+		<listitem>
+		  <para>
+	             <guimenuitem>Find&hellip;</guimenuitem>
+	             &mdash; This command opens the find dialog.
+	          </para>
+		</listitem>
+		<listitem>
+		  <para>
+	            <guimenuitem>COMMAND2</guimenuitem>
+	            &mdash; This ....
+	          </para>
+		</listitem>
+	      </itemizedlist>
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+
+	<varlistentry>
+	  <term><guimenu>Settings</guimenu></term>
+	  <listitem>
+	    <para>
+	   This menu contains:
+	   <itemizedlist>
+		<listitem>
+		  <para>
+	      <guimenuitem>Preferences&hellip;</guimenuitem>
+	       &mdash; This opens the <link
+	       linkend="prefs"><interface>Preferences
+	       Dialog</interface></link>, which allows you to configure
+	       many settings.
+	     </para>
+		</listitem>
+	      </itemizedlist>
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>Help</guimenu></term>
+	  <listitem>
+	    <para>
+	      This menu contains:
+	       <itemizedlist>
+		<listitem>
+		  <para>
+	             <guimenuitem>Manual</guimenuitem> &mdash; This
+    	              opens the <application>GNOME Help
+    	              Browser</application> and displays this manual.
+	          </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+	            <guimenuitem>About</guimenuitem> &mdash; This
+    	            opens the <interface>About</interface> dialog
+    	            which shows basic information about
+    	            <application>MY-GNOME-APP</application>, such as
+    	            the author's name, the application version number,
+    	            and the URL for the application's Web page if one
+    	            exists.
+	          </para>
+		</listitem>
+	      </itemizedlist>
+            </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+
+
+
+ <!-- ============= Customization ============================= -->
+
+ <sect1 id="prefs">
+  <title>Customization</title>
+  <para>
+   To change the application settings, select
+   <menuchoice>
+    <guimenu>Settings</guimenu>
+    <guimenuitem>Preferences...</guimenuitem>
+   </menuchoice>.  This opens the
+   <interface>Preferences</interface> dialog, shown in <xref
+   linkend="preferences-fig">.
+  </para>
+
+  <figure id="preferences-fig">
+   <title>Preferences Dialog</title>
+   <screenshot>
+    <screeninfo>Preferences Dialog</screeninfo>
+    <graphic fileref="prefs" format="png"
+     srccredit="emese">
+    </graphic>
+   </screenshot>
+  </figure>
+
+  <para>
+   The properties in the <guilabel>PREFSTABNAME</guilabel> tab are:
+
+   <!--many people use itemizedlists in cases like this. Variablelists
+   are more appropriate -->
+
+      <variablelist>
+	<varlistentry>
+	  <term> <guilabel>Default Text Style</guilabel></term>
+	  <listitem>
+	    <para>
+              Select the default text style for statements in your
+              proof.  You can still change the style for individual
+              proofs or sections of a proof at a later date.
+            </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>(Configuration Item Label)</term>
+	  <listitem>
+	    <para>
+             (Description of Configuration)
+             </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>(Configuration Item Label)</term>
+	  <listitem>
+	    <para>
+             (Description of Configuration)
+             </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
+
+    <para>
+     The properties in the <guilabel>SECONDTABNAME</guilabel> tab are:
+       <variablelist>
+	<varlistentry>
+	  <term>(Configuration Item Label)</term>
+	  <listitem>
+	    <para>
+             (Description of Configuration)
+             </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>(Configuration Item Label)</term>
+	  <listitem>
+	    <para>
+             (Description of Configuration)
+             </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
+
+  <para>
+    After you have made all the changes you want, click on
+    <guibutton>OK</guibutton> to apply the changes and close the
+    <interface>Properties</interface> dialog. To cancel the changes
+    and return to previous values, click the
+    <guibutton>Close</guibutton> button.
+  </para>
+
+ </sect1>
+
+
+ <!-- ============= Various Sections ============================= -->
+
+ <!-- Here you should add, if necessary, several more sect1's,
+ describing other windows (besides the main one), file formats,
+ preferences dialogs,  etc. as appropriate. Try not to make any of
+ these sections too long. -->
+
+
+ <!-- ============= Bugs ================================== -->
+ <!-- This section should describe known bugs and limitations of
+      the program if there are any - please be frank and list all
+      problems you know of. -->
+ <sect1 id="bugs">
+  <title>Known Bugs and Limitations</title>
+  <para>
+   This application has no known bugs.
+  </para>
+ </sect1>
+
+
+<!-- ============= Authors ================================ -->
+
+ <sect1 id="authors">
+  <title>Authors</title>
+  <para>
+   <application>Gtranslator</application> was written by Fatih Demir
+   (<email>kabalak@gtranslator.org</email>). To find more information about
+   <application>Gtranslator</application>, please visit the <ulink
+   url="http://www.gtranslator.org" type="http">Gtranslator Web
+   page</ulink>.  Please send all comments, suggestions, and bug
+   reports to the <ulink url="http://bugzilla.gnome.org" type="http">GNOME
+   bug tracking database</ulink>.  (Instructions for submitting bug
+   reports can be found <ulink
+   url="http://bugzilla.gnome.org/Reporting.html" type="http">
+   on-line</ulink>.)  You can also use <application>Bug Report
+   Tool</application> (<command>bug-buddy</command>), available in the
+   <guisubmenu>Utilities</guisubmenu> submenu of <guimenu>Main
+   Menu</guimenu>, for submitting bug reports.
+  </para>
+
+  <para>
+   This manual was written by Emese Kovacs
+   (<email>emese@gnome.hu</email>). Please send all comments and
+   suggestions regarding this manual to the <ulink type="http"
+   url="http://developer.gnome.org/projects/gdp">GNOME Documentation
+   Project</ulink> by sending an email to
+   <email>docs@gnome.org</email>. You can also add your comments
+   online by using the <ulink type="http"
+   url="http://developer.gnome.org/projects/gdp/doctable/">GNOME
+   Documentation Status Table</ulink>.
+  </para>
+
+  <!-- For translations: uncomment this:
+
+  <para>
+   Latin translation was done by ME
+   (<email>MYNAME@MYADDRESS</email>). Please send all  comments  and
+   suggestions regarding this translation to SOMEWHERE.
+  </para>
+
+  -->
+
+ </sect1>
+
+
+ <!-- ============= Application License ============================= -->
+
+ <sect1 id="license">
+  <title>License</title>
+  <para>
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the  <ulink type="help" url="gnome-help:gpl">
+    <citetitle>GNU General Public License</citetitle></ulink> as
+   published by the Free Software Foundation;
+   either version 2 of the License, or (at your option) any later
+   version.
+  </para>
+  <para>
+   This program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   <citetitle>GNU General Public License</citetitle> for more details.
+  </para>
+  <para>
+   A copy of the <citetitle>GNU General Public License</citetitle> is
+   included as an appendix to the <citetitle>GNOME Users
+   Guide</citetitle>.  You may also obtain a copy of the
+   <citetitle>GNU General Public License</citetitle> from the Free
+   Software Foundation by visiting <ulink type="http"
+   url="http://www.fsf.org">their Web site</ulink> or by writing to
+   <address>
+    Free Software Foundation, Inc.
+    <street>59 Temple Place</street> - Suite 330
+    <city>Boston</city>, <state>MA</state> <postcode>02111-1307</postcode>
+    <country>USA</country>
+   </address>
+  </para>
+ </sect1>
 </article>
+
+
+
+
+
+
+
+
+
