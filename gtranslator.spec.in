@@ -1,0 +1,142 @@
+#
+# The spec file for gtranslator -- adated from Nautilus' & Gnumeric's 
+#  spec files.
+#
+# Fatih Demir <kabalak@gtranslator.org>
+#
+%define version		@VERSION@
+%define	default_release	1
+%define release		%{!?CUSTOM_RELEASE:%default_release}
+%define prefix		/usr
+%define	sysconfdir	/etc
+%define mandir		/usr/man
+%define docdir		/usr/doc
+
+Name: 		gtranslator
+Vendor: 	GNOME Project
+Distribution: 	Any
+Version: 	%{version}
+Release: 	%{release}
+Copyright: 	GPL
+Group: 		Development/Tools
+Source:		http://www.gtranslator.org/download/releases/%{version}/gtranslator-%{version}.tar.gz
+URL: 		http://www.gtranslator.org
+BuildRoot:	/var/tmp/gtranslator-%{version}
+Docdir:		%{docdir}
+Summary:	gtranslator is a comfortable po file editor with many bells and whistles.
+Requires:	glib >= 1.2.8, gtk+ >= 1.2.8, gnome-libs >= 1.2.8, imlib, gconf >= 0.9.0
+Requires:	gnome-vfs >= 0.4.1, gal >= 0.5, scrollkeeper >= 0.1.4
+
+%description
+gtranslator is a comfortable po file editor with many bells and whistles.
+It features many useful function which ease the work of translators of po
+files immenantly.
+
+%package nautilus
+Summary:	The nautilus-gtranslator-view component for Nautilus
+Group:		User Interface/Desktop
+Requires:	nautilus >= 0.8.1
+
+%description nautilus
+The nautilus-gtranslator-view allows you to preview the header details of a po
+file within nautilus and/or to open the file with gtranslator per a single
+icon/menu entry selection.
+
+%changelog
+*  Sat Mar 31 2001 Fatih Demir	<kabalak@gtranslator.org>
+- Made this first spec.in file for easifying RPM builders' work.
+
+%prep
+%setup -q
+
+%build
+%ifarch alpha
+        MYARCH_FLAGS="--host=alpha-redhat-linux"
+%endif
+
+LC_ALL=""
+LINGUAS=""
+LANG=""
+export LC_ALL LINGUAS LANG
+
+if [ ! -f configure ] ; then
+	CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh $MYARCH_FLAGS --prefix=%{prefix} \
+		--sysconfdir=%{sysconfdir} \
+		--mandir=%{mandir} \
+		--with-gconf \
+		--enable-mime-bind=yes \
+		--enable-nautilus-view
+else
+	CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS --prefix=%{prefix} \
+		--sysconfdir=%{sysconfdir} \
+		--mandir=%{mandir} \
+		--with-gconf \
+		--enable-mime-bind=yes \
+		--enable-nautilus-view
+fi
+
+if [ "$SMP" != "" ] ; then
+	make -k -j$SMP "MAKE=make -k -j$SMP"
+else
+	make -k
+fi
+
+make check
+
+%install
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+make -k prefix=$RPM_BUILD_ROOT%{prefix} sysconfdir=$RPM_BUILD_ROOT%{sysconfdir} mandir=$RPM_BUILD_ROOT%{mandir} install
+
+make -k -C data/gconf DESTDIR=$RPM_BUILD_ROOT install
+make -k -C help/C DESTDIR=$RPM_BUILD_ROOT install
+
+[ -f $RPM_BUILD_ROOT/bin/gtranslator ] && \
+	strip $RPM_BUILD_ROOT/bin/gtranslator
+[ -f $RPM_BUILD_ROOT/bin/nautilus-gtranslator-view ] && \
+	strip $RPM_BUILD_ROOT/bin/nautilus-gtranslator-view
+
+%clean
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
+%post -p /sbin/ldconfig
+scrollkeeper-update
+
+%postun -p /sbin/ldconfig
+scrollkeeper-update
+
+%files
+
+%defattr(0555, bin, bin)
+%{prefix}/bin/gtranslator
+%{prefix}/bin/pozilla.sh
+%{prefix}/share/gtranslator/scripts/*
+
+%defattr(0444, bin, bin)
+%{prefix}/share/gtranslator/colorschemes/*
+%{prefix}/share/omf/gtranslator/*
+
+%doc AUTHORS COPYING ChangeLog DEPENDS INSTALL NEWS README THANKS TODO
+%{mandir}/man1/gtranslator*
+%{mandir}/man1/pozilla*
+%{prefix}/share/gnome/help/gtranslator/C/*
+%{prefix}/share/gnome/help/gtranslator/ja/*
+
+%defattr(-, root, root)
+%{sysconfdir}/gconf/schemas/gtranslator.schemas
+%{prefix}/share/gnome/help
+%{prefix}/share/omf/gtranslator
+%{prefix}/share/gnome/apps/Development/gtranslator*
+%{prefix}/share/pixmaps/gtranslator.png
+%{prefix}/share/pixmaps/mc/application-x-*.png
+%{prefix}/share/mime-info/gtranslator.*
+%{prefix}/share/locale/*/LC_MESSAGES/gtranslator.mo
+
+%files nautilus
+
+%defattr(0555, bin, bin)
+%{prefix}/bin/nautilus-gtranslator-view
+
+%defattr(0444, bin, bin)
+%{prefix}/share/oaf/Nautilus_Gtranslator_View.oaf
+%{prefix}/share/gnome/ui/nautilus-gtranslator-view-ui.xml
+%{mandir}/man1/nautilus-gtranslator-view*

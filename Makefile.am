@@ -15,6 +15,7 @@ EXTRA_DIST= \
 		kabalak_generate_all_the_files.sh \
 		DEPENDS \
 		HACKING \
+		gtranslator.spec.in \
 		xml-i18n-extract.in \
 		xml-i18n-merge.in \
 		xml-i18n-update.in
