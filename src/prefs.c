@@ -356,10 +356,48 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	 */
 	if (page_num != -1)
 		return;
-#define update(value,widget) GTR_FREE(value);\
+#define update(value,widget) if(value) { g_free(value); } \
 	value=gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 	update(author, authors_name);
+
+	/*
+	 * Check if the user did forget to enter his/her name into the prefs
+	 *  dialog.
+	 */
+	if(!author)
+	{
+		gnome_app_error(GNOME_APP(gtranslator_application),
+			_("Please enter your name!"));
+
+		return;
+	}
+	
 	update(email, authors_email);
+
+	/*
+	 * Also check if the user did forget to enter his/her EMail address
+	 *  into the prefs dialog.
+	 */
+	if(!email)
+	{
+		gnome_app_error(GNOME_APP(gtranslator_application),
+			_("Please enter your EMail address!"));
+		return;
+	}
+	else
+	{
+		/*
+		 * Also check an eventually given EMail address for brevity.
+		 */
+		if(!strchr(email, '@') || !strchr(email, '.') || 
+			(strlen(email) <= 4))
+		{
+			gnome_app_error(GNOME_APP(gtranslator_application),
+				_("Please enter a valid EMail address!"));
+			return;
+		}
+	}
+	
 	update(language, GTK_COMBO(authors_language)->entry);
 	update(lc, GTK_COMBO(lcode)->entry);
 	update(lg, GTK_COMBO(lg_email)->entry);
@@ -466,25 +504,28 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	selected_scheme_file=gtk_editable_get_chars(GTK_EDITABLE(
 		GTK_COMBO(scheme_file)->entry), 0, -1);
 
-	GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", SCHEMESDIR,
-		selected_scheme_file);
-
-	if(g_file_exists(GtrPreferences.scheme))
+	if(selected_scheme_file)
 	{
-		/*
-		 * Free the old used colorscheme.
-		 */
-		gtranslator_color_scheme_free(&theme);
-		
-		/*
-		 * Read in the new colorscheme and initialize the colors.
-		 */
-		gtranslator_color_scheme_apply(GtrPreferences.scheme);
-		theme=gtranslator_color_scheme_load_from_prefs();
-		
-		gtranslator_colors_initialize();
+		GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", SCHEMESDIR,
+			selected_scheme_file);
+	    
+		if(g_file_exists(GtrPreferences.scheme))
+		{
+			/*
+			 * Free the old used colorscheme.
+			 */
+			gtranslator_color_scheme_free(&theme);
+			
+			/*
+			 * Read in the new colorscheme, initialize the colors.
+			 */
+			gtranslator_color_scheme_apply(GtrPreferences.scheme);
+			theme=gtranslator_color_scheme_load_from_prefs();
+			
+			gtranslator_colors_initialize();
+		}
 	}
-	
+
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(background), COLOR_BG);
 

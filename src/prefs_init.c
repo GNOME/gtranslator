@@ -47,6 +47,15 @@ void gtranslator_preferences_init_default_values()
 		if(!lc)
 		{
 			lc=gtranslator_utils_get_environment_locale();
+
+			/*
+			 * Well, if we couldn't determine any locale, assume
+			 *  plain "en_US".
+			 */
+			if(!lc)
+			{
+				lc=g_strdup("en_US");
+			}
 		}
 		
 		/*

@@ -1,5 +1,10 @@
 2001-08-13  Fatih Demir <kabalak@gtranslator.org>
 
+	* prefs.c: Check whether any translator name, EMail address was
+		entered in the prefs dialog -- give us an error if not;
+		 also check the scheme filename before checking, applying
+		  it.
+
 	* prefs_init.c: Initiliaze the colorscheme name + filename with
 		"default.xml" and also init the "text_bg" attribute to
 		 "white" per default like in "default.xml".
