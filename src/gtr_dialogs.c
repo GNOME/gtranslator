@@ -451,7 +451,7 @@ void r_window(GtkWidget *widget,gpointer useless)
 	/**
 	* Set the window properties.
 	**/
-	gtk_window_set_title(GTK_WINDOW(r_window_dlg),_("gtranslator -- result fo your query"));
+	gtk_window_set_title(GTK_WINDOW(r_window_dlg),_("gtranslator -- result for your query"));
 	gtk_window_set_wmclass(GTK_WINDOW(r_window_dlg),"gtranslator","gtranslator");	
 	/**
 	* Place the other widgets.

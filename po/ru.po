@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2000-06-05 21:15+0000\n"
-"PO-Revision-Date: 2000-06-05 21:19+00:00\n"
+"POT-Creation-Date: 2000-06-10 23:37+0000\n"
+"PO-Revision-Date: 2000-06-10 23:54+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -62,333 +62,372 @@ msgstr ""
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- открытие po-файла"
 
-#: src/gtr_dialogs.c:69
+#: src/gtr_dialogs.c:71
 msgid "Select your desired po-file to open"
 msgstr "Выберите желаемый po-файл для открытия"
 
-#: src/gtr_dialogs.c:88
+#: src/gtr_dialogs.c:90
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- сохранить файл как.."
 
-#: src/gtr_dialogs.c:105
+#: src/gtr_dialogs.c:109
 msgid "Select your filename to which the po-file should be saved to."
 msgstr "Выберите имя для вашего файла, под которым вы хотите его сохранить."
 
-#: src/gtr_dialogs.c:130
+#: src/gtr_dialogs.c:134
 msgid "gtranslator -- search-box"
 msgstr "gtranslator -- окно поиска"
 
 #. *
 #. * Set up the information label
 #. *
-#: src/gtr_dialogs.c:137
+#: src/gtr_dialogs.c:141
 msgid "Enter your desired search string: "
 msgstr "Введите строку для поиска:"
 
-#: src/gtr_dialogs.c:139 src/interface.c:259 src/interface.c:260
-#: src/interface.c:459
+#: src/gtr_dialogs.c:143 src/gui.c:225 src/gui.c:226 src/gui.c:425
 msgid "Search"
 msgstr "Поиск"
 
-#: src/gtr_dialogs.c:207
+#: src/gtr_dialogs.c:211
 msgid "GoTo message entry"
 msgstr "Перейти к сообщению"
 
 #. *
 #. * Create the buttons, the entry & the label
 #. *
-#: src/gtr_dialogs.c:213
+#: src/gtr_dialogs.c:217
 msgid "Go!"
 msgstr "Перейти!"
 
-#: src/gtr_dialogs.c:217
+#: src/gtr_dialogs.c:221
 msgid "Goto the specified message entry."
 msgstr "Перейти к указанному сообщению"
 
-#: src/gtr_dialogs.c:270
+#: src/gtr_dialogs.c:276
 msgid "gtranslator -- find in the catalogue"
 msgstr "gtranslator -- поиск в каталоге"
 
-#: src/gtr_dialogs.c:273
+#: src/gtr_dialogs.c:279
 msgid "gtranslator -- find in the po-file"
 msgstr "gtranslator -- поиск в po-файле"
 
-#: src/gtr_dialogs.c:276
+#: src/gtr_dialogs.c:282
 msgid "gtranslator -- find"
 msgstr "gtranslator -- поиск"
 
-#: src/gtr_dialogs.c:283 src/interface.c:274 src/interface.c:275
+#: src/gtr_dialogs.c:289 src/gui.c:240 src/gui.c:241
 msgid "Find"
 msgstr "Поиск"
 
-#: src/gtr_dialogs.c:285
+#: src/gtr_dialogs.c:291
 msgid "Ignore the case"
 msgstr "Игнорировать регистр"
+
+#. *
+#. * Create a helping label.
+#. *
+#: src/gtr_dialogs.c:350
+msgid ""
+"With this query window you can query\n"
+"the message db for an existing entry\n"
+"with your query string."
+msgstr ""
+"Это окно запроса, в котором вы можете\n"
+"задать запрос к базе данных сообщений,\n"
+"введя вашу строку запроса."
+
+#: src/gtr_dialogs.c:361
+msgid "Query"
+msgstr "Запрос"
+
+#. *
+#. * Set the window-properties.
+#. *
+#: src/gtr_dialogs.c:404
+msgid "gtranslator -- query the message db"
+msgstr "gtranslator -- запрос к базе данных сообщений"
+
+#: src/gtr_dialogs.c:433
+#, c-format
+msgid "Result: `%s'"
+msgstr "Результат: \"%s\""
+
+#: src/gtr_dialogs.c:450
+msgid "Insert"
+msgstr "Вставить"
+
+#. *
+#. * Set the window properties.
+#. *
+#: src/gtr_dialogs.c:454
+msgid "gtranslator -- result fo your query"
+msgstr "gtranslator -- результат для вашего запроса"
 
 #: src/header_stuff.c:38
 msgid "Error while applying the header!"
 msgstr "Ошибка при применении заголовка!"
 
-#: src/header_stuff.c:82
+#: src/header_stuff.c:83
 msgid "Header has been parsed."
 msgstr "Заголовок был проанализирован."
 
-#: src/header_stuff.c:106
+#: src/header_stuff.c:108
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Видимо заголовок не был правильно проанализирован."
 
-#: src/header_stuff.c:108
+#: src/header_stuff.c:110
 msgid "Project name:"
 msgstr "Название проекта:"
 
-#: src/header_stuff.c:109
+#: src/header_stuff.c:111
 msgid "Project version:"
 msgstr "Версия проекта:"
 
-#: src/header_stuff.c:110
+#: src/header_stuff.c:112
 msgid "Use my personal options to fill out the rest of the header."
 msgstr "Использовать мои настройки для заполнения остатка заголовка."
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:119
+#: src/header_stuff.c:121
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- правка заголовка"
 
-#: src/interface.c:84
+#: src/gui.c:84
 msgid "No po-file opened which could be compiled."
 msgstr "Нет открытых po-файлов, которые можно было бы скомпилировать."
 
-#: src/interface.c:109
+#: src/gui.c:109
 msgid "Po-file has been compiled successfully."
 msgstr "Po-файл был успешно скомпилирован."
 
-#: src/interface.c:138
+#: src/gui.c:138
 msgid "Couldn't store current geometry!"
 msgstr "Невозможно сохранить текущую геометрию!"
 
 #. *
 #. * Show a Good Bye!-typo message.
 #. *
-#: src/interface.c:151
+#: src/gui.c:151
 msgid "Bye bye!"
 msgstr "До свидания!"
 
-#: src/interface.c:230
+#: src/gui.c:196
 msgid "_Compile"
 msgstr "Скомпилировать"
 
-#: src/interface.c:251
+#: src/gui.c:217
 msgid "C_lear"
 msgstr "Очистить"
 
-#: src/interface.c:252
+#: src/gui.c:218
 msgid "Clears the current selection"
 msgstr "Очистить текущее выделение"
 
-#: src/interface.c:266 src/interface.c:467
+#: src/gui.c:232 src/gui.c:433
 msgid "ReSearch"
 msgstr "Повторный поиск"
 
-#: src/interface.c:267 src/interface.c:468
+#: src/gui.c:233 src/gui.c:434
 msgid "Search again"
 msgstr "Искать снова"
 
-#: src/interface.c:283
+#: src/gui.c:249
 msgid "_Header"
 msgstr "Заголовок"
 
-#: src/interface.c:284
+#: src/gui.c:250
 msgid "Edit the header"
 msgstr "Правка заголовка"
 
-#: src/interface.c:295
+#: src/gui.c:261
 msgid "Refresh"
 msgstr "Обновить"
 
-#: src/interface.c:307
+#: src/gui.c:273
 msgid "_First"
 msgstr "Первое"
 
-#: src/interface.c:314
+#: src/gui.c:280
 msgid "_Back"
 msgstr "Назад"
 
-#: src/interface.c:322
+#: src/gui.c:288
 msgid "_Next"
 msgstr "След."
 
-#: src/interface.c:329
+#: src/gui.c:295
 msgid "_Last"
 msgstr "Последнее"
 
-#: src/interface.c:341
-msgid "_Add"
-msgstr "Добавить"
+#: src/gui.c:307
+msgid "_Add the current message"
+msgstr "Добавить текущее сообщение"
 
-#: src/interface.c:342
-msgid "Add the current message to the msg_db."
-msgstr "Добавить текущее сообщение к msg_db."
+#: src/gui.c:308
+msgid "Add the current message to the messages DB."
+msgstr "Добавить текущее сообщение к базе данных сообщений."
 
-#: src/interface.c:349
-msgid "_Query"
-msgstr "Запрос"
+#: src/gui.c:315
+msgid "_Query for a message"
+msgstr "Запрос для сообщения"
 
-#: src/interface.c:350
-msgid "Query the msg_db for the current msgid."
-msgstr "Запрос к msg_db для текущего msgid."
+#: src/gui.c:316
+msgid "Query the messages DB for the current msgid."
+msgstr "Запрос к базе данных сообщений для текущего msgid."
 
-#: src/interface.c:368
+#: src/gui.c:334
 msgid "_Online help"
 msgstr "Справка"
 
-#: src/interface.c:376
+#: src/gui.c:342
 msgid "gtranslator _website"
 msgstr "Web-сайт Переводчика Gnome"
 
-#: src/interface.c:377
+#: src/gui.c:343
 msgid "gtranslator's homepage on the web"
 msgstr "Web-страница Переводчика Gnome"
 
-#: src/interface.c:391 src/interface.c:394
+#: src/gui.c:357 src/gui.c:360
 msgid "_Messages"
 msgstr "Сообщения"
 
-#: src/interface.c:398 src/interface.c:401
-msgid "Msg _db"
-msgstr ""
+#: src/gui.c:364 src/gui.c:367
+msgid "Message _db"
+msgstr "База данных сообщений"
 
 #. *
 #. * Create the app
 #. *
-#: src/interface.c:424
+#: src/gui.c:390
 msgid "gtranslator"
 msgstr "Переводчик"
 
-#: src/interface.c:460
+#: src/gui.c:426
 msgid "Search for a message"
 msgstr "Поиск сообщения"
 
-#: src/interface.c:475
+#: src/gui.c:441
 msgid "Goto"
 msgstr "Перейти"
 
-#: src/interface.c:476
+#: src/gui.c:442
 msgid "Goto this message"
 msgstr "Перейти к этому сообщению"
 
-#: src/interface.c:490
+#: src/gui.c:456
 msgid "Add"
 msgstr "Добавить"
 
-#: src/interface.c:491
-msgid "Add to the msg_db."
-msgstr "Добавить к msg_db."
+#: src/gui.c:457
+msgid "Add to the messages db."
+msgstr "Добавить к базе данных сообщений."
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/interface.c:505
-msgid "F/Cat."
-msgstr "Поиск/Кат."
+#: src/gui.c:471
+msgid "F/DB"
+msgstr "Поиск в БД"
 
-#: src/interface.c:506
-msgid "Find in the personal catalog"
-msgstr "Поиск в личном каталоге"
+#: src/gui.c:472
+msgid "Find in the personal messages db"
+msgstr "Поиск в личной базе данных сообщений"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/interface.c:516
+#: src/gui.c:482
 msgid "F/Po."
-msgstr "Поиск 'po'"
+msgstr "Поиск в \"po\""
 
-#: src/interface.c:517
+#: src/gui.c:483
 msgid "Find in the po file "
 msgstr "Поиск в po-файле"
 
-#: src/interface.c:528
+#: src/gui.c:494
 msgid "Header"
 msgstr "Заголовок"
 
-#: src/interface.c:529
+#: src/gui.c:495
 msgid "Edit the header informations"
 msgstr "Правка информации заголовка"
 
-#: src/interface.c:537
+#: src/gui.c:503
 msgid "Compile"
 msgstr "Скомпилировать"
 
-#: src/interface.c:538
+#: src/gui.c:504
 msgid "Compile the po-file"
 msgstr "Скомпилировать po-файл"
 
-#: src/interface.c:546
+#: src/gui.c:512
 msgid "Open"
 msgstr "Открыть"
 
-#: src/interface.c:547
+#: src/gui.c:513
 msgid "Open File"
 msgstr "Открыть файл"
 
-#: src/interface.c:555
+#: src/gui.c:521
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/interface.c:556
+#: src/gui.c:522
 msgid "Save File"
 msgstr "Сохранить файл"
 
-#: src/interface.c:564
+#: src/gui.c:530
 msgid "Save as"
 msgstr "Сохранить как"
 
-#: src/interface.c:565
+#: src/gui.c:531
 msgid "Save file as"
 msgstr "Сохранить файл как"
 
-#: src/interface.c:573
+#: src/gui.c:539
 msgid "First"
 msgstr "Первый"
 
-#: src/interface.c:574
+#: src/gui.c:540
 msgid "Go to the first message"
 msgstr "Перейти к первому сообщению"
 
-#: src/interface.c:582
+#: src/gui.c:548
 msgid "Back"
 msgstr "Назад"
 
-#: src/interface.c:583
+#: src/gui.c:549
 msgid "Go one message back"
 msgstr "Перейти на одно сообщение назад"
 
-#: src/interface.c:591
+#: src/gui.c:557
 msgid "Options"
 msgstr "Параметры"
 
-#: src/interface.c:592
+#: src/gui.c:558
 msgid "gtranslator options"
 msgstr "Параметры переводчика"
 
-#: src/interface.c:600
+#: src/gui.c:566
 msgid "Next"
 msgstr "След."
 
-#: src/interface.c:601
+#: src/gui.c:567
 msgid "Go one message forward"
 msgstr "Перейти на одно сообщение вперед"
 
-#: src/interface.c:609
+#: src/gui.c:575
 msgid "Last"
 msgstr "Последнее"
 
-#: src/interface.c:610
+#: src/gui.c:576
 msgid "Go to the last message"
 msgstr "Перейти к последнему сообщению"
 
-#: src/interface.c:618 src/interface.c:619
+#: src/gui.c:584 src/gui.c:585
 msgid "Exit"
 msgstr "Выход"
 
@@ -560,40 +599,40 @@ msgstr ""
 msgid "Welsh"
 msgstr ""
 
-#: src/main.c:32
+#: src/main.c:31
 msgid "Po-file to open at startup"
 msgstr "Po-файл открываемый при запуске"
 
-#: src/main.c:36
-msgid "The msg_db to use"
-msgstr "Использовать msg_db"
+#: src/main.c:35
+msgid "The messages db to use"
+msgstr "Используемая база данных сообщений"
 
-#: src/main.c:40
-msgid "Query the msg_db & exit"
-msgstr "Запрос к msg_db и выход"
+#: src/main.c:39
+msgid "Query the messages db & exit"
+msgstr "Запрос к базе данных сообщений и выход"
 
-#: src/main.c:44
+#: src/main.c:43
 msgid "Specifies the main-window geometry"
 msgstr "Указать геометрию главного окна"
 
 #. *
 #. * Simply print it out.
 #. *
-#: src/main.c:95
+#: src/main.c:94
 #, c-format
 msgid "Getting results for query: `%s' ...\n"
 msgstr "Получение результатов запроса: \"%s\" ...\n"
 
-#: src/main.c:100
+#: src/main.c:99
 #, c-format
 msgid "Result                   : %s."
 msgstr "Результат                : %s."
 
-#: src/main.c:102
+#: src/main.c:101
 msgid "End of query.\n"
 msgstr "Конец запроса.\n"
 
-#: src/main.c:162
+#: src/main.c:161
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "Невозможно проанализировать строку геометрии \"%s\"!"
@@ -601,19 +640,19 @@ msgstr "Невозможно проанализировать строку геометрии \"%s\"!"
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:181
+#: src/main.c:180
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "Файл \"%s\" не существует или не может быть прочитан!"
 
-#: src/main.c:182
+#: src/main.c:181
 msgid "Skipping it."
 msgstr "Он пропущен."
 
 #: src/msg_db.c:42
 #, c-format
-msgid "No msg_db found! Creating one in `%s'."
-msgstr "Не найдена msg_db! Создание одной в \"%s\"."
+msgid "No message db found! Creating one in `%s'."
+msgstr "Не найдена база данных сообщений! Создание одной в \"%s\"."
 
 #. *
 #. * 3.1) No list, no fun
@@ -627,8 +666,8 @@ msgstr "Переводчик Gnome потерял список переводов!\n"
 #. *
 #: src/msg_db.c:118
 #, c-format
-msgid "The msg_db `%s' hasn't been inited yet!\n"
-msgstr "msg_db \"%s\" еще не инициализирована!\n"
+msgid "The message db `%s' hasn't been initted yet!\n"
+msgstr "База данных сообщений \"%s\" еще не инициализирована!\n"
 
 #. *
 #. * Warn if there isn't any message which could be added
@@ -647,8 +686,8 @@ msgstr "Новая строка имеет неправильную/нелогичную длину.\n"
 #. *
 #: src/msg_db.c:173
 #, c-format
-msgid "The msg_db `%s' seems not to be inited!\n"
-msgstr "msg_db \"%s\" видимо не была инициализирована!\n"
+msgid "The message db `%s' seems not to be initted!\n"
+msgstr "База данных сообщений \"%s\" видимо не была инициализирована!\n"
 
 #. *
 #. * Return a very "explaining" char* ...
@@ -662,12 +701,12 @@ msgstr "Не доступно"
 #. *  print an error message
 #. *
 #: src/msg_db.c:185
-msgid "No msg_list available for acting on it!\n"
-msgstr "Нет доступных msg_list для обработки!\n"
+msgid "No messages list ( msg_list ) available for acting on it!\n"
+msgstr "Нет доступного списка сообщений (msg_list) для обработки!\n"
 
-#: src/msg_db.c:209
-msgid "No entry found in the msg_db."
-msgstr "Не найдены записи в msg_db."
+#: src/msg_db.c:222
+msgid "No entry found in the messages db "
+msgstr "Не найдены записи в базе данных сообщений."
 
 #. *
 #. * If there are any problems , give a
@@ -681,7 +720,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/parse.c:57
+#: src/parse.c:56
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Нет файла для открытия или невозможно понять \"%s\"!"
@@ -689,7 +728,7 @@ msgstr "Нет файла для открытия или невозможно понять \"%s\"!"
 #. *
 #. * Set up a status message
 #. *
-#: src/parse.c:62
+#: src/parse.c:61
 #, c-format
 msgid "Current file : \"%s\"."
 msgstr "Текущий файл: \"%s\"."
@@ -697,14 +736,22 @@ msgstr "Текущий файл: \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:151
+#: src/parse.c:168
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "Закончено чтение \"%s\", %i строк."
 
-#: src/parse.c:168
+#: src/parse.c:185
 msgid "Parsing has been successfull."
 msgstr "Анализ был успешен."
+
+#: src/parse.c:260
+msgid "You've reached the first message"
+msgstr "Вы дошли до первого сообщения"
+
+#: src/parse.c:291
+msgid "You've reached the last message."
+msgstr "Вы дошли до последнего сообщения."
 
 #. *
 #. * Create the labels ..
@@ -775,15 +822,5 @@ msgid "Don't save unchanged .po-files"
 msgstr "Не сохранять неизмененные po-файлы"
 
 #: src/prefs.c:62
-msgid "Use the msg_db"
-msgstr "Использовать msg_db"
-
-#: src/support.c:111 src/support.c:151
-#, c-format
-msgid "Couldn't find pixmap file: %s"
-msgstr "Не удалось найти файл картинки: %s"
-
-#: src/support.c:127
-#, c-format
-msgid "Couldn't create pixmap from file: %s"
-msgstr "Не удалось создать картинку из файла: %s"
+msgid "Use the messages db"
+msgstr "Использовать базу данных сообщений"
