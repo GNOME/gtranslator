@@ -15,7 +15,8 @@
 #include <gnome.h>
 
 #include "callbacks.h"
-#include "interface.h"
+#include "about.h"
+#include "gtr_dialogs.h"
 #include "parse.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -142,9 +143,7 @@ void
 on_about1_activate                     (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	GtkWidget* about_me;
-	about_me=create_about1();
-	gtk_widget_show(about_me);
+	about_box();
 }
 
 void
@@ -262,9 +261,7 @@ on_compile_button_pressed              (GtkButton       *button,
 {
 	if(file_opened==TRUE)
 	{
-		GtkWidget* comp_;
-		comp_=create_compiling_po();
-		gtk_widget_show(comp_);
+		/* ... */
 	}
 	else
 	{
@@ -561,7 +558,5 @@ void
 on_compile1_activate			(GtkMenuItem	*menuitem,
 					gpointer user_data)
 {
-	GtkWidget* comp_it;
-	comp_it=create_compiling_po();
-	gtk_widget_show(comp_it);
+	/* ... */
 }

@@ -29,7 +29,7 @@ void check_file(FILE *stream)
 		 * If there are any problems , give a
 		 *  message ..
 		 **/
-		g_error("\nThe file stream is lost !\nError No. %i .\n",errno);
+		g_error(_("\nThe file stream is lost !\nError No. %i .\n"),errno);
 	}
 }
 
@@ -53,7 +53,7 @@ void parse(char *filename)
 	msg->po->opened=TRUE;
 	msg->po->po_filename=(char *)filename;
 	#ifdef DEBUG
-	g_print ("Got filename  %s \n",(char *)filename);
+	g_print (_("Got filename  %s \n"),(char *)filename);
 	g_print ("Or : %s\n",(char *)msg->po->po_filename);
 	#endif
 	count=0;
@@ -113,6 +113,6 @@ void parse(char *filename)
 	msg->po->file_length=(count - 1);
 	max_count=((count - 10 ) / 3);
 	#ifdef DEBUG
-	g_print ("end of file %s\n", (char *)filename);
+	g_print (_("End of file %s\n"), (char *)filename);
 	#endif
 }

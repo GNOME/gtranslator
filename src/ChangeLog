@@ -1,3 +1,73 @@
+2000-04-19  Fatih Demir		( kabalak@gmx.net )
+
+	+	Made another messages "gettextable"
+		
+		-> parse.c
+
+	+	Changed the variable names for more 
+		
+		obviousness ..
+		
+		-> msg_db.c
+	
+	+	Call the new about_box() method ...
+
+		-> callbacks.c
+
+	+	Added the necessary includes to the new
+		
+		files
+			
+		-> about.c/h gtr_dialogs.c/h
+	
+	+	Added the new files to the Makefile.am
+		
+		-> Makefile.am
+	
+	+	"Outsourced" the about box ...
+		
+		-> about.c/h
+
+	+	Added the functionability for adding 
+			
+		entries to the msg_db 
+		
+		-> msg_db.c
+		
+	+	Corrected another stupido ; most error/
+		
+		warning messages weren't "gettexted" so
+		
+		they didn't appear in the gtranslator.pot 
+		
+		file for translations ... 
+		
+		-> msg_db.c
+
+	+	Add two "new" dialogs : 
+		
+		1) Errors occured while exec. msgfmt
+		
+		2) No changes were made to the .po-file
+		
+		-> gtr_dialogs.c/h 
+
+	+	Added two new files which will hold
+		
+		the dialogs ( every dialog ! )
+		
+		-> gtr_dialogs.c/h
+
+	+	Change the callback-bindings ..
+	
+		-> callbacks.c/h
+
+	+	Put away every dialog-box which was
+		
+		produced by GLADE ..
+		
+		-> interface.c/h
+
 2000-04-18  Fatih Demir		( kabalak@gmx.net )
 
 	+	As the status bar works now rightly 

@@ -54,9 +54,9 @@ int init_msg_db()
 	if(!msg_list)
 	{
 		/**
-		 * 3.1) No list ,no fun
+		 * 3.1) No list, no fun 
 		 **/
-		g_error("%s lost the list of translations !\n",PACKAGE);
+		g_error(_("%s lost the list of translations !\n"),PACKAGE);
 	}
 	return 0;
 }
@@ -82,7 +82,7 @@ void close_msg_db()
 	msg_db_inited=FALSE;
 }
 
-int put_to_msg_db(const gchar *msg_id,const gchar *new_message)
+int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 {
 	/**
 	 * Check if we've got a working 
@@ -93,34 +93,60 @@ int put_to_msg_db(const gchar *msg_id,const gchar *new_message)
 		/**
 		 * Show a little warning ...
 		 **/
-		g_warning("The msg_db : %s seems not to be inited !\n",msg_db);
+		g_warning(_("The msg_db : %s seems not to be inited !\n"),msg_db);
 		return 1;
 	}
 	else
 	{
-		gint new_message_length;
-		if(!new_message)
+		gint msg_translation_length;
+		if(!msg_translation)
 		{
 			/**
-			 * Warn if there isn't any message
+			 * Warn if there isn't any message which could be added
+			 *  to the msg_db .
 			 **/
-			g_warning("Got no message entry !\n");
+			g_warning(_("Got no message entry !\n"));
 			return 1;	
 		}
 		/**
 		 * Get the length of the new entry
 		 **/
-		new_message_length=strlen(new_message);
-		if(( new_message_length < 0 ) || ( ! new_message ))
+		msg_translation_length=strlen(msg_translation);
+		if(( msg_translation_length < 0 ) || ( ! msg_translation ))
 		{
-			g_warning("New message entry has wrong/non-logical length : %i\n",new_message_length);
+			g_warning(_("New message entry has wrong/non-logical length : %i\n"),msg_translation_length);
 			return 1;
 		}
 		else
 		{
-			/** FIXME 
-			 * Where to add this ?
-			 **/	
+			/**
+			 * Go to the end of the file
+			 **/
+			fseek(db_stream,0L,SEEK_END);
+			/**
+			 * Add the given parameters to the msg_db .
+			 *  Using a '+{' as something like a starting
+			 *   tag ....
+			 **/
+			fputs("\n+{",db_stream);
+			fputs(msg_id,db_stream);
+			/**
+			 * These ';;' are used as separators and shouldn't
+			 *  appear in normal context ...
+			 **/
+			fputs(";;",db_stream);
+			fputs(msg_translation,db_stream);
+			/**
+			 * This is the closing tag '}+' ; at the beginning
+		 	 *  and at the end there are always '\n''s appended
+			 *   which makes the reading process much slower , but
+			 *    which guarantees a better read-ability by the user  
+			 **/
+			fputs("}+\n",db_stream);
+			/**
+			 * After all this , the story should be at a happy ending 
+			 **/
+				return 0;
 		}
 	}
 	return 0;
@@ -133,11 +159,11 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 /**
                  * Show a little warning ...
                  **/
-                g_warning("The msg_db : %s seems not to be inited !\n",msg_db);
+                g_warning(_("The msg_db : %s seems not to be inited !\n"),msg_db);
 		 /**
-		 * Return an explaining char* ...
+		 * Return a very "explaining" char* ...
 		 **/
-                return "Not available";
+                return _("Not available");
 	}
 	if(!msg_list)
 	{
@@ -145,7 +171,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 * If there's no msg_list 
 		 *  print an error message
   		 **/
-		g_error("No msg_list available for acting on it !\n");
+		g_error(_("No msg_list available for acting on it !\n"));
 		 /**
 		 * Exit brutally ...
 		 **/

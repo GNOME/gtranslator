@@ -213,6 +213,9 @@ create_app1 (void)
 	cat_button = gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
+				/**
+				 * Find in the personal catalogue
+				 **/
 				_("F/Cat."),
 				_("Find in the personal catalog"),NULL,
 				tmp_toolbar_icon, NULL, NULL);
@@ -221,6 +224,9 @@ create_app1 (void)
 	po_button = gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
+				/**
+				 * Find in the .po-file
+				 **/
 				_("F/Po."),
 				_("Find in the po file "), NULL,
 				tmp_toolbar_icon , NULL, NULL);
@@ -403,28 +409,6 @@ create_app1 (void)
 }
 
 GtkWidget*
-create_about1 (void)
-{
-        const gchar *authors[] = {
-          "Fatih Demir",
-          NULL
-        };
-        GtkWidget *about1;
-
-        about1 = gnome_about_new ("gtranslator", VERSION,
-                              _("(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"),
-                              authors,
-                              _("gtranslator is a Gnome Application for translating .po-files more comfortable than in (X)Emacs .\nTill now you can't see much , but that will change !"),
-                              NULL);
-        gtk_widget_set_name (about1, "about1");
-        gtk_object_set_data (GTK_OBJECT (about1), "about1", about1);
-        gtk_window_set_modal (GTK_WINDOW (about1), TRUE);
-        gtk_window_set_wmclass (GTK_WINDOW (about1), "gtranslator", "gtranslator");
-
-        return about1;
-}
-
-GtkWidget*
 create_propertybox1 (void)
 {
         GtkWidget *propertybox1;
@@ -572,118 +556,6 @@ create_save_file_as (void)
                             save_file_as);
 
         return save_file_as;
-}
-
-GtkWidget*
-create_errors_in_the_po (void)
-{
-        GtkWidget *errors_in_the_po;
-        GtkWidget *dialog_vbox1;
-        GtkWidget *button11;
-        GtkWidget *dialog_action_area1;
-
-        errors_in_the_po = gnome_message_box_new (_("An error occured in your .po-file as it \ncouldn't be compiled by mfgfmt !"),
-                                    GNOME_MESSAGE_BOX_ERROR, NULL);
-        GTK_WINDOW (errors_in_the_po)->type = GTK_WINDOW_DIALOG;
-        gtk_window_set_policy (GTK_WINDOW (errors_in_the_po), FALSE, FALSE, FALSE);
-        gtk_window_set_wmclass (GTK_WINDOW (errors_in_the_po), "gtranslator", "gtranslator");
-        gnome_dialog_set_close (GNOME_DIALOG (errors_in_the_po), TRUE);
-        gnome_dialog_close_hides (GNOME_DIALOG (errors_in_the_po), TRUE);
-
-        dialog_vbox1 = GNOME_DIALOG (errors_in_the_po)->vbox;
-        gtk_widget_show (dialog_vbox1);
-
-        gnome_dialog_append_button (GNOME_DIALOG (errors_in_the_po), GNOME_STOCK_BUTTON_OK);
-        button11 = g_list_last (GNOME_DIALOG (errors_in_the_po)->buttons)->data;
-        gtk_widget_show (button11);
-        GTK_WIDGET_SET_FLAGS (button11, GTK_CAN_DEFAULT);
-
-        dialog_action_area1 = GNOME_DIALOG (errors_in_the_po)->action_area;
-	return errors_in_the_po;
-}
-
-GtkWidget*
-create_save_unchanged_po (void)
-{
-        GtkWidget *save_unchanged_po;
-        GtkWidget *dialog_vbox2;
-        GtkWidget *button12;
-        GtkWidget *dialog_action_area2;
-
-        save_unchanged_po = gnome_message_box_new (_("You try to save an unchanged .po-file !\nHow useless ."),
-                                    GNOME_MESSAGE_BOX_WARNING, NULL);
-        gtk_widget_set_name (save_unchanged_po, "save_unchanged_po");
-        gtk_object_set_data (GTK_OBJECT (save_unchanged_po), "save_unchanged_po", save_unchanged_po);
-        GTK_WINDOW (save_unchanged_po)->type = GTK_WINDOW_DIALOG;
-        gtk_window_set_policy (GTK_WINDOW (save_unchanged_po), FALSE, FALSE, FALSE);
-        gtk_window_set_wmclass (GTK_WINDOW (save_unchanged_po), "gtranslator", "gtranslator");
-        gnome_dialog_set_close (GNOME_DIALOG (save_unchanged_po), TRUE);
-        gnome_dialog_close_hides (GNOME_DIALOG (save_unchanged_po), TRUE);
-
-        dialog_vbox2 = GNOME_DIALOG (save_unchanged_po)->vbox;
-        gtk_widget_set_name (dialog_vbox2, "dialog_vbox2");
-        gtk_object_set_data (GTK_OBJECT (save_unchanged_po), "dialog_vbox2", dialog_vbox2);
-        gtk_widget_show (dialog_vbox2);
-
-        gnome_dialog_append_button (GNOME_DIALOG (save_unchanged_po), GNOME_STOCK_BUTTON_OK);
-        button12 = g_list_last (GNOME_DIALOG (save_unchanged_po)->buttons)->data;
-        gtk_widget_set_name (button12, "button12");
-        gtk_widget_ref (button12);
-        gtk_object_set_data_full (GTK_OBJECT (save_unchanged_po), "button12", button12,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show (button12);
-        GTK_WIDGET_SET_FLAGS (button12, GTK_CAN_DEFAULT);
-
-        dialog_action_area2 = GNOME_DIALOG (save_unchanged_po)->action_area;
-        if (dialog_action_area2 != NULL)
-          gtk_widget_set_name (dialog_action_area2, "dialog_action_area2");
-        gtk_widget_ref (dialog_action_area2);
-        gtk_object_set_data_full (GTK_OBJECT (save_unchanged_po), "dialog_action_area2", dialog_action_area2,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-
-        return save_unchanged_po;
-}
-
-GtkWidget*
-create_compiling_po (void)
-{
-        GtkWidget *compiling_po;
-        GtkWidget *dialog_vbox3;
-        GtkWidget *button13;
-        GtkWidget *dialog_action_area3;
-
-        compiling_po = gnome_message_box_new (_("Your .po-file is being compiled by \nmsgfmt now ...."),
-                                    GNOME_MESSAGE_BOX_INFO, NULL);
-        gtk_widget_set_name (compiling_po, "compiling_po");
-        gtk_object_set_data (GTK_OBJECT (compiling_po), "compiling_po", compiling_po);
-        GTK_WINDOW (compiling_po)->type = GTK_WINDOW_DIALOG;
-        gtk_window_set_policy (GTK_WINDOW (compiling_po), FALSE, FALSE, FALSE);
-        gtk_window_set_wmclass (GTK_WINDOW (compiling_po), "gtranslator", "gtranslator");
-        gnome_dialog_set_close (GNOME_DIALOG (compiling_po), TRUE);
-        gnome_dialog_close_hides (GNOME_DIALOG (compiling_po), TRUE);
-
-        dialog_vbox3 = GNOME_DIALOG (compiling_po)->vbox;
-        gtk_widget_set_name (dialog_vbox3, "dialog_vbox3");
-        gtk_object_set_data (GTK_OBJECT (compiling_po), "dialog_vbox3", dialog_vbox3);
-        gtk_widget_show (dialog_vbox3);
-
-        gnome_dialog_append_button (GNOME_DIALOG (compiling_po), GNOME_STOCK_BUTTON_OK);
-        button13 = g_list_last (GNOME_DIALOG (compiling_po)->buttons)->data;
-        gtk_widget_set_name (button13, "button13");
-        gtk_widget_ref (button13);
-        gtk_object_set_data_full (GTK_OBJECT (compiling_po), "button13", button13,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show (button13);
-        GTK_WIDGET_SET_FLAGS (button13, GTK_CAN_DEFAULT);
-
-        dialog_action_area3 = GNOME_DIALOG (compiling_po)->action_area;
-        if (dialog_action_area3 != NULL)
-          gtk_widget_set_name (dialog_action_area3, "dialog_action_area3");
-        gtk_widget_ref (dialog_action_area3);
-        gtk_object_set_data_full (GTK_OBJECT (compiling_po), "dialog_action_area3", dialog_action_area3,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-        gnome_execute_shell(NULL,"msgfmt tr.po");
-        return compiling_po;
 }
 
 GtkWidget*

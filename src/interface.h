@@ -7,15 +7,10 @@
  *
  **/
 
-
 	GtkWidget* create_app1 (void);
-	GtkWidget* create_about1 (void);
 	GtkWidget* create_propertybox1 (void);
 	GtkWidget* create_open_file (void);
 	GtkWidget* create_save_file_as (void);
-	GtkWidget* create_errors_in_the_po (void);
-	GtkWidget* create_save_unchanged_po (void);
-	GtkWidget* create_compiling_po (void);
 	GtkWidget* create_help_for_the_propbox1 (void);
 
 /**
@@ -28,7 +23,6 @@
 	GtkWidget* appbar1; 
 	GtkWidget* search_bar;
 	GtkWidget* search_button,* search_again_button,* goto_button,* goto_line_button;
-
 
 /**
  * Necessary for the geometry handling :
