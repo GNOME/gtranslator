@@ -38,9 +38,8 @@
 #define GTRANSLATOR_MIDDLE_DOT (_("\xb7")[0])
 
 /*
- * This is the fallback middle dot replacing char -- it shouldn't be needed to
- *  translate as it's pure ASCII or am I wrong here?
+ * This is the fallback middle dot replacing char.
  */
-#define GTRANSLATOR_MIDDLE_DOT_FALLBACK ('^')
+#define GTRANSLATOR_MIDDLE_DOT_FALLBACK (_("^")[0])
 
 #endif

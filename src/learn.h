@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -58,6 +58,17 @@ gboolean gtranslator_learn_learned(const gchar *string);
  *  NULL.
  */
 gchar *gtranslator_learn_get_learned_string(const gchar *search_string);
+
+/*
+ * Translates the missing msgstr if the msgid string had been already learned.
+ */
+void gtranslator_learn_translate(gpointer gtr_msg_gpointer);
+
+/*
+ * Autotranslate the opened po file -- the gboolean arg defines some plays
+ *  for the then visible GUI.
+ */
+void gtranslator_learn_autotranslate(gboolean visual_interface);
 
 /*
  * Shutdown our learn process.

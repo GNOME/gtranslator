@@ -1,9 +1,20 @@
 2002-02-16  Fatih Demir <kabalak@gtranslator.org>
 
-	* dialogs.c: Save the "query/" prefs/information for now in UTF-8 to
-		get right results and to don't have any problems with GConf;
-		 maybe this should also be deleted soon or integrated into
-		  new learn buffer sources.
+	* zpmd.h: Define the '^' to be translatable via _("^")[0] -- one never
+		knows if even ASCII chars are ok as a "special char".
+
+	* dialogs.c, main.c & prefs.c: Adept for the final "elimination" of
+		our "beloved" query.c/.h source files -- renamings & removals 
+		 of includes etc.
+
+	* learn.c/.h: Added new "gtranslator_learn_(auto)translate" functions
+		which are adaptions of the old "gtranslator_query_translate" &
+		 "gtranslator_query_gtr_msg" functions -- the source lines are
+		   simply pasted from the old query.c/.h source files.
+
+	* Makefile.am & query.c/.h: Remove these old source files completely.
+
+	* dialogs.c: Don't save the "query/" prefs/information anymore.
 
 	* query.c/.h: Removed the GtrQuery structure and all related stuff;
 		these source files should be obsolete quite soon, but for a

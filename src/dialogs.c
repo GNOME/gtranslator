@@ -34,7 +34,6 @@
 #include "open.h"
 #include "parse.h"
 #include "prefs.h"
-#include "query.h"
 #include "replace.h"
 #include "runtime-config.h"
 #include "syntax.h"
@@ -1193,27 +1192,6 @@ Would you like to insert it into the translation?"),
 				GTR_FREE(query_text);
 
 				/*
-				 * Set the last query result in the prefs for
-				 *  persistence.
-				 */
-				gtranslator_config_set_string(
-					"query/last_match_filename",
-					gtranslator_utf8_get_utf8_string(&(po->filename)));
-				
-				gtranslator_config_set_int(
-					"query/last_match_message_no",
-					g_list_position(po->messages, 
-						po->current));
-				
-				gtranslator_config_set_string(
-					"query/last_match_message", 
-					gtranslator_utf8_get_utf8_string(&query_text));
-				
-				gtranslator_config_set_string(
-					"query/last_match_translation", 
-					gtranslator_utf8_get_utf8_string(&result));
-
-				/*
 				 * Build up another dialog and show up the
 				 *  possible actions.
 				 */
@@ -1296,7 +1274,6 @@ from your personal learn buffer?");
 		GNOME_STOCK_BUTTON_NO,
 		NULL);
 
-
 	/*
 	 * Set the default to "Yes" and show/run the dialog.
 	 */
@@ -1313,6 +1290,6 @@ from your personal learn buffer?");
 		/*
 		 * Autotranslate the missing entries.
 		 */
-		gtranslator_query_translate(TRUE);
+		gtranslator_learn_autotranslate(TRUE);
 	}
 }

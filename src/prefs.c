@@ -31,7 +31,6 @@
 #include "messages-table.h"
 #include "nautilus-string.h"
 #include "prefs.h"
-#include "query.h"
 #include "stylistics.h"
 #include "translator.h"
 #include "utils.h"

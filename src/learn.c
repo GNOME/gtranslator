@@ -21,7 +21,10 @@
 #include <config.h>
 #endif
 
+#include "actions.h"
 #include "learn.h"
+#include "message.h"
+#include "messages-table.h"
 #include "nautilus-string.h"
 #include "prefs.h"
 #include "translator.h"
@@ -953,5 +956,63 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	else
 	{
 		return NULL;
+	}
+}
+
+/*
+ * Translate the given GtrMsg if possible.
+ */
+void gtranslator_learn_translate(gpointer gtr_msg_gpointer)
+{
+	GtrMsg *msg=GTR_MSG(gtr_msg_gpointer);
+
+	if(msg && msg->msgid && !msg->msgstr)
+	{
+		gchar	*result;
+		
+		result=gtranslator_learn_get_learned_string(msg->msgid);
+		
+		if(result)
+		{
+			/*
+			 * Set the translation content, status etc. from the learn buffer.
+			 */
+			msg->msgstr=g_strdup(result);
+			msg->status |= GTR_MSG_STATUS_TRANSLATED;
+			po->file_changed=TRUE;
+			
+			GTR_FREE(result);
+		}
+	}
+}
+
+/*
+ * Autotranslate the opened po file.
+ */
+void gtranslator_learn_autotranslate(gboolean visual_interface)
+{
+	g_return_if_fail(po!=NULL);
+	g_return_if_fail(po->messages!=NULL);
+	
+	g_list_foreach(po->messages, (GFunc) gtranslator_learn_translate,
+		NULL);
+
+	/*
+	 * Activate the Save menu/toolbar items on changes only if there's
+	 *  a GUI already up/wanted at all.
+	 */
+	if(po->file_changed && visual_interface)
+	{
+		gtranslator_actions_enable(ACT_SAVE);
+		
+		gtranslator_messages_table_clear();
+		gtranslator_messages_table_create();
+
+		gtranslator_get_translated_count();
+	}
+	
+	if(visual_interface)
+	{
+		gtranslator_message_show(po->current);
 	}
 }

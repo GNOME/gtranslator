@@ -34,7 +34,6 @@
 #include "open.h"
 #include "parse.h"
 #include "prefs.h"
-#include "query.h"
 #include "runtime-config.h"
 #include "save.h"
 #include "session.h"
@@ -338,7 +337,7 @@ int main(int argc, char *argv[])
 		 */
 		gtranslator_learn_init();
 		gtranslator_open_file(auto_translate_file);
-		gtranslator_query_translate(FALSE);
+		gtranslator_learn_autotranslate(FALSE);
 		
 		/*
 		 * If any change has been made to the po file: save it.
