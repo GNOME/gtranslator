@@ -20,6 +20,7 @@
 #include "id.h"
 #include "nautilus-string.h"
 #include "parse.h"
+#include "preferences.h"
 #include "utils.h"
 
 #include <libgnome/gnome-util.h>
@@ -36,6 +37,11 @@
 	{ \
 		target=NULL; \
 	}
+
+/*
+ * This should also be configurable later on.
+ */
+#define MAX_ID_LIST_LENGTH 10
 
 /*
  * Create and return a GtrID from the current position & po file -- 
@@ -402,17 +408,100 @@ gboolean gtranslator_id_search(GtrID *id)
 		}
 		
 		checklist=checklist->next;
-
-		/*
-		 * XXX: This should work as the previous one isn't 
-		 *  needed anylonger, but seems very vague for me.
-		 */
 		gtranslator_id_free(GTR_ID(checklist->prev->data));
 	}
 
 	g_list_free(checklist);
 
 	return FALSE;
+}
+
+/*
+ * Load our GtrIDs encoded in string form from the preferences.
+ */
+void gtranslator_id_load_list()
+{
+	gchar	*path;
+	gint	count, c;
+
+	gtranslator_config_init();
+	count=gtranslator_config_get_int("id/length");
+	
+	if(count > MAX_ID_LIST_LENGTH)
+	{
+		count=MAX_ID_LIST_LENGTH;
+	}
+
+	/*
+	 * Read our stored plain-string encoded list of GtrIDs.
+	 */
+	for(c=0; c < count; c++)
+	{
+		GtrID	*id=NULL;
+		gchar	*content;
+
+		path=g_strdup_printf("id%d/id_string", c);
+		content=gtranslator_config_get_string(path);
+		g_free(path);
+		
+		g_return_if_fail(content!=NULL);
+		id=gtranslator_id_new_from_string(content);
+
+		gtranslator_ids=g_list_prepend(gtranslator_ids,
+			gtranslator_id_copy(id));
+		
+		gtranslator_id_free(id);
+	}
+
+	gtranslator_ids=g_list_reverse(gtranslator_ids);
+
+	gtranslator_config_close();
+}
+
+/*
+ * Save our GtrIDs list to the preferences. 
+ */
+void gtranslator_id_save_list()
+{
+	if(gtranslator_ids)
+	{
+		GtrID 	*id;
+		gchar	*path;
+		gchar	*plain_string;
+		
+		gint	c=0;
+
+		GList	*writelist=g_list_first(gtranslator_ids);
+
+		gtranslator_config_init();
+
+		/*
+		 * Write out all GtrIDs in our internal list in string
+		 *  form into the preferences.
+		 */
+		while(writelist!=NULL)
+		{
+			id=GTR_ID(writelist->data);
+
+			path=g_strdup_printf("id%d/id_string", c);
+			plain_string=gtranslator_id_string_from_id(id);
+			
+			gtranslator_config_set_string(path, plain_string);
+			g_free(path);
+			
+			c++;
+
+			if(c >= MAX_ID_LIST_LENGTH)
+			{
+				break;
+			}
+			
+			writelist=g_list_next(writelist);
+		}
+
+		gtranslator_config_set_int("id/length", c);
+		gtranslator_config_close();
+	}
 }
 
 /*

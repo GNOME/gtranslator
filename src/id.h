@@ -102,6 +102,17 @@ gboolean gtranslator_id_remove(GtrID *id);
 gboolean gtranslator_id_search(GtrID *id);
 
 /*
+ * Read in our stored GtrIDs list -- restored the list from the
+ *  preferences.
+ */
+void gtranslator_id_load_list(void);
+
+/*
+ * Saves the GtrIDs list in our preferences.
+ */
+void gtranslator_id_save_list(void);
+
+/*
  * Copy the given GtrID safely.
  */
 GtrID *gtranslator_id_copy(GtrID *id);
