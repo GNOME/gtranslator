@@ -20,7 +20,7 @@
 
 #include "dialogs.h"
 #include "find.h"
-#include "preferences.h"
+#include "prefs.h"
 
 /*
  * Functions to be used only internally in this file

@@ -23,7 +23,6 @@
 #include "languages.h"
 #include "find.h"
 
-#include "preferences.h"
 #include "stylistics.h"
 
 /*

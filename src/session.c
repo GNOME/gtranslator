@@ -19,7 +19,7 @@
  */
 
 #include "session.h"
-#include "preferences.h"
+#include "prefs.h"
 
 /*
  * Quits via the normal quit.

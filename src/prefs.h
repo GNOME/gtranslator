@@ -29,6 +29,8 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtksignal.h>
 
+#include "preferences.h"
+
 /*
  * Global variables used in the preferences.
  */

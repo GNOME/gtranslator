@@ -31,7 +31,6 @@
 #include "gtkspell.h"
 #include "open-differently.h"
 #include "history.h"
-#include "preferences.h"
 
 #include "shortcutbar.h"
 

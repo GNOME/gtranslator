@@ -32,7 +32,6 @@
 
 #include "pixmaps/untrans.xpm"
 
-#include "preferences.h"
 #include "stylistics.h"
 
 #ifdef USE_VFS_STUFF

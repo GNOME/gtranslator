@@ -24,7 +24,7 @@
  * gtranslator specific style functions.
  */ 
 
-#include "preferences.h"
+#include "prefs.h"
 #include <libgnomeui/gnome-color-picker.h>
 
 /*
