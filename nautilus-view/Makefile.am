@@ -33,6 +33,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(sourcedir)/gui.o \
 	$(sourcedir)/header_stuff.o \
 	$(sourcedir)/history.o \
+	$(sourcedir)/nautilus-string.o \
 	$(sourcedir)/open-differently.o \
 	$(sourcedir)/parse.o \
 	$(sourcedir)/parse_core.o \
