@@ -84,7 +84,7 @@ void update(GtkWidget *widget, gpointer useless)
 	 *  there's the POTFILE.in file present; if this file
 	 *   is missing it returns 201.
 	 */
-	if(res==201)
+	if((res >> 8)==201)
 	{
 		gnome_app_error(GNOME_APP(gtranslator_application),
 			_("No POTFILES.in found!"));
@@ -95,7 +95,7 @@ void update(GtkWidget *widget, gpointer useless)
 	 *  between the old file and the new file is smaller
 	 *   then some lame bits (for the date field).
 	 */
-	if(res==200)
+	if((res >> 8)==200)
 	{
 		gnome_app_message(GNOME_APP(gtranslator_application),
 			_("An update caused no changes."));

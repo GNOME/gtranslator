@@ -1,3 +1,12 @@
+2001-08-03  Fatih Demir <kabalak@gtranslator.org>
+
+	* update.c: Rightly catch the return values -- the result of the
+		"system" call is 8-bit encoded, therefore we need a bit-shift
+		  to get the real value.
+
+	* undo.c: Some more free actions -- surely there are tons of bugs in
+		these very less lines.
+
 2001-08-02  Fatih Demir <kabalak@gtranslator.org>
 
 	* undo.c/.h: Re-animation of some dead code -- again a crippled 

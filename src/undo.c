@@ -54,6 +54,9 @@ void gtranslator_undo_register_insertion(const gchar *text, const gint position)
 	g_return_if_fail(position!=-1);
 	g_return_if_fail(text!=NULL);
 
+	GTR_FREE(undo->text);
+	GTR_FREE(undo);
+
 	undo->text=g_strdup(text);
 	undo->position=position;
 	undo->insertion=TRUE;
@@ -66,6 +69,9 @@ void gtranslator_undo_register_deletion(const gchar *text, const gint position)
 {
 	g_return_if_fail(position!=-1);
 	g_return_if_fail(text!=NULL);
+
+	GTR_FREE(undo->text);
+	GTR_FREE(undo);
 
 	undo->text=g_strdup(text);
 	undo->position=position;
@@ -122,6 +128,7 @@ void gtranslator_undo_run_undo()
 {
 	g_return_if_fail(undo!=NULL);
 	g_return_if_fail(undo->position > 0);
+	g_return_if_fail(undo->text!=NULL);
 
 	/*
 	 * Is the previous undoable action was a deletion act _this_ way.
