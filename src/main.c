@@ -111,13 +111,17 @@ static struct poptOption gtranslator_options[] = {
 
 int main(int argc, char *argv[])
 {
+	GnomeProgram    *program=NULL;
 	GnomeClient 	*client=NULL;
 	GnomeClientFlags flags;
 	
 	poptContext 	context;
 	
 	const char 	**args=NULL;
-	
+	GValue value = { 0, };
+	poptContext ctx;
+	int i;
+
 	GError		*error=NULL;
 
 	/*
@@ -152,17 +156,20 @@ int main(int argc, char *argv[])
 
 		g_clear_error(&error);
 	}
-	
+
+	/*
+	 * Grab popt context
+	 */
+
 	/*
 	 * Initialize gtranslator within libgnomeui.
 	 */
-	gnome_program_init("gtranslator", VERSION, LIBGNOMEUI_MODULE, 
+	program = gnome_program_init(PACKAGE, VERSION, LIBGNOMEUI_MODULE, 
 			   argc, argv,
 			   GNOME_PARAM_POPT_TABLE, gtranslator_options, 
 			   GNOME_PROGRAM_STANDARD_PROPERTIES,
 			   NULL);
-	/* XXX fix it! */
-	// 0, &context);
+	context = gnome_program_preinit(program, PACKAGE, VERSION, argc, argv);
 
 	/*
 	 * Show up build information if desired.
@@ -295,11 +302,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	
-	/*
-	 * If there are any files given on command line, open them
-	 */
 	file_opened = FALSE;
-	//	args = poptGetArgs(context);
 
 	/*
 	 * Auto translate the given file argument and exit without starting the
@@ -354,6 +357,12 @@ int main(int argc, char *argv[])
 	 * Open up the arguments as files (for now, only the first file is
 	 *  opened).
 	 */
+	g_value_init (&value, G_TYPE_POINTER);
+	g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
+	context = g_value_get_pointer (&value);
+	g_value_unset (&value);
+
+	args = poptGetArgs(context);
 	if (args)
 	{
 		/*
