@@ -56,6 +56,7 @@
 static gchar *gtranslator_geometry=NULL;
 static gchar *scheme_filename=NULL;
 static gchar *save_html_output_file=NULL;
+static gchar *domains_dir=NULL;
 
 /*
  * gtranslator's option table.
@@ -68,6 +69,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0, N_("Specifies the main-window geometry"), N_("GEOMETRY")
+	},
+	{
+		"querydomaindir", 'q', POPT_ARG_STRING, &domains_dir,
+		0, N_("Define another query domains directory"), N_("LOCALEDIR")
 	},
 	{
 		"scheme", 's', POPT_ARG_STRING, &scheme_filename,
@@ -225,9 +230,25 @@ int main(int argc, char *argv[])
 	gtranslator_config_close();
 	
 	/*
-	 * Parse the domains in our GNOMELOCALEDIR.
+	 * Parse the domains in the given directory or in GNOMELOCALEDIR.
 	 */
-	gtranslator_query_domains(GNOMELOCALEDIR);
+	if(domains_dir)
+	{
+		/*
+		 * Test if the given directory is even a directory.
+		 */
+		if(g_file_test(domains_dir, G_FILE_TEST_ISDIR))
+		{
+			/*
+			 * Parse all entries from this directory.
+			 */
+			gtranslator_query_domains(domains_dir);
+		}
+	}
+	else
+	{
+		gtranslator_query_domains(GNOMELOCALEDIR);
+	}
 	
 	/*
 	 * If there are any files given on command line, open them
