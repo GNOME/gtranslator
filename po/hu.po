@@ -1,0 +1,613 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Gtranslator VERSION\n"
+"POT-Creation-Date: 2000-05-20 15:40+0200\n"
+"PO-Revision-Date: 2000-05-20 16:02+0200\n"
+"Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
+"Language-Team: Hungarian <gnome@gnome.hu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bits\n"
+
+#: src/main.c:35
+msgid "Po-file to open at startup"
+msgstr "Induláskor megnyitandó po fájl"
+
+#: src/main.c:39
+msgid "A test option"
+msgstr "Egy teszt opció"
+
+#: src/main.c:43
+msgid "The msg_db to use"
+msgstr "Használandó msg_db"
+
+#: src/main.c:47
+msgid "Specifies the main-window geometry"
+msgstr "Megadja a fõablak geometriáját"
+
+#. *
+#. * If the file isn't openable give a warning
+#. *
+#: src/main.c:120
+#, c-format
+msgid "The file \"%s\" doesn't exist or isn't readable!"
+msgstr "A \"%s\" fájl nem létezik, vagy nem olvasható!"
+
+#: src/main.c:121
+msgid "Skipping it."
+msgstr "Átugrom."
+
+#: src/interface.c:70
+msgid "No po-file opened which could be compiled."
+msgstr "Nincs po fájl megnyitva, nincs mit fordítani."
+
+#: src/interface.c:116
+msgid "_Compile"
+msgstr "_Fordít"
+
+#: src/interface.c:142
+msgid "Refresh"
+msgstr "Frissít"
+
+#: src/interface.c:154
+msgid "_First"
+msgstr "_Elsõ"
+
+#: src/interface.c:161
+msgid "_Back"
+msgstr "_Vissza"
+
+#: src/interface.c:169
+msgid "_Next"
+msgstr "_Következõ"
+
+#: src/interface.c:176
+msgid "_Last"
+msgstr "_Utolsó"
+
+#: src/interface.c:195
+msgid "_Online help"
+msgstr "_Súgó"
+
+#: src/interface.c:210 src/interface.c:213
+msgid "_Messages"
+msgstr "Ü_zenetek"
+
+#. *
+#. * Create the app
+#. *
+#: src/interface.c:236
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: src/gtr_dialogs.c:130 src/interface.c:271
+msgid "Search"
+msgstr "Keres"
+
+#: src/interface.c:272
+msgid "Search for a message"
+msgstr "Üzenetet keres"
+
+#: src/interface.c:279
+msgid "ReSearch"
+msgstr "Újra keres"
+
+#: src/interface.c:280
+msgid "Search again"
+msgstr "Újra keres"
+
+#: src/interface.c:287
+msgid "Goto"
+msgstr "Ugrás"
+
+#: src/interface.c:288
+msgid "Goto this message"
+msgstr "Erre az üzenetre ugrik"
+
+#. *
+#. * Find in the personal catalogue
+#. *
+#: src/interface.c:298
+msgid "F/Cat."
+msgstr "K/Kat."
+
+#: src/interface.c:299
+msgid "Find in the personal catalog"
+msgstr "Keresés személyes katalógusban"
+
+#. *
+#. * Find in the .po-file
+#. *
+#: src/interface.c:309
+msgid "F/Po."
+msgstr "K/Po."
+
+#: src/interface.c:310
+msgid "Find in the po file "
+msgstr "Keresés po fájlban "
+
+#: src/interface.c:321
+msgid "Compile"
+msgstr "Fordít"
+
+#: src/interface.c:322
+msgid "Compile the po-file"
+msgstr "po fájl fordítása"
+
+#: src/interface.c:330
+msgid "Open"
+msgstr "Megnyit"
+
+#: src/interface.c:331
+msgid "Open File"
+msgstr "Fájl megnyitása"
+
+#: src/interface.c:339
+msgid "Save"
+msgstr "Ment"
+
+#: src/interface.c:340
+msgid "Save File"
+msgstr "Fájl mentése"
+
+#: src/interface.c:348
+msgid "Save as"
+msgstr "Ment mint"
+
+#: src/interface.c:349
+msgid "Save file as"
+msgstr "Elmenti a fájlt más néven"
+
+#: src/interface.c:357
+msgid "First"
+msgstr "Elsõ"
+
+#: src/interface.c:358
+msgid "Go to the first message"
+msgstr "Az elsõ üzenetre ugrik"
+
+#: src/interface.c:366
+msgid "Back"
+msgstr "Vissza"
+
+#: src/interface.c:367
+msgid "Go one message back"
+msgstr "Elõzõ üzenetre ugrik"
+
+#: src/interface.c:375
+msgid "Options"
+msgstr "Beállítások"
+
+#: src/interface.c:376
+msgid "gtranslator options"
+msgstr "A gtranslator beállításai"
+
+#: src/interface.c:384
+msgid "Next"
+msgstr "Következõ"
+
+#: src/interface.c:385
+msgid "Go one message forward"
+msgstr "A következõ üzenetre ugrik"
+
+#: src/interface.c:393
+msgid "Last"
+msgstr "Utolsó"
+
+#: src/interface.c:394
+msgid "Go to the last message"
+msgstr "Az utolsó üzenetre ugrik"
+
+#: src/interface.c:402 src/interface.c:403
+msgid "Exit"
+msgstr "Kilép"
+
+#. *
+#. * If there are any problems , give a
+#. *  message ..
+#. *
+#: src/parse.c:32
+#, c-format
+msgid ""
+"\n"
+"The file stream is lost! Error no. `%i'"
+msgstr "\nA fájl folyam (stream) elveszett! Hibakód: `%i'"
+
+#: src/parse.c:58
+#, c-format
+msgid "There's no file to open or I couldn't understand `%s'!"
+msgstr "Nincs megnyitandó fájl vagy nem értem a `%s'-t!"
+
+#. *
+#. * Set up a status message
+#. *
+#: src/parse.c:63
+#, c-format
+msgid "Current file : \"%s\"."
+msgstr "Aktuális fájl : \"%s\"."
+
+#. *
+#. * Show an updated status
+#. *
+#: src/parse.c:136
+#, c-format
+msgid "Finished reading \"%s\", %i lines."
+msgstr "\"%s\" olvasása befejezõdött, %i sort olvastam."
+
+#: src/parse.c:154
+msgid "Parsing has been successfull."
+msgstr "Az értelmezés sikeresen befejezõdött."
+
+#. *
+#. * 3.1) No list, no fun
+#. *
+#: src/msg_db.c:63
+msgid "gtranslator lost the list of translations!\n"
+msgstr "A gtranslator elvesztette a fordítások listáját!\n"
+
+#. *
+#. * Show a little warning ...
+#. *
+#: src/msg_db.c:100 src/msg_db.c:157
+#, c-format
+msgid "The msg_db `%s' seems not to be inited!\n"
+msgstr "A(z) `%s' msg_db nincs inicializálva!\n"
+
+#. *
+#. * Warn if there isn't any message which could be added
+#. *  to the msg_db .
+#. *
+#: src/msg_db.c:112
+msgid "Got no message entry!\n"
+msgstr "Nincs üzenet bejegyzés!\n"
+
+#: src/msg_db.c:121
+#, c-format
+msgid "New message entry has wrong/non-logical length : %i\n"
+msgstr "Az új üzenetnek rossz/logikátlan a hossza : %i\n"
+
+#. *
+#. * Return a very "explaining" char* ...
+#. *
+#: src/msg_db.c:161
+msgid "Not available"
+msgstr "Nem elérhetõ"
+
+#. *
+#. * If there's no msg_list
+#. *  print an error message
+#. *
+#: src/msg_db.c:169
+msgid "No msg_list available for acting on it!\n"
+msgstr "Nincs msg_list amin dolgozhatnánk!\n"
+
+#: src/msg_db.c:193
+msgid "No entry found in the msg_db."
+msgstr "Nincs bejegyzés az msg_db-ben."
+
+#: src/gtr_dialogs.c:21
+msgid ""
+"An error occured while msgfmt was executed.\n"
+"Please check your .po file again."
+msgstr ""
+"Hiba történt az msgfmt futtatása közben.\n"
+"Ellenõrizd újra a po fájlodat."
+
+#: src/gtr_dialogs.c:33
+msgid "You didn't change anything in the .po-file!\n"
+msgstr "Nem változtattál meg semmit a po fájlban!\n"
+
+#: src/gtr_dialogs.c:42
+msgid ""
+"With the Preferences box you can define some variables\n"
+"with which you can make gtranslator make more work\n"
+"like YOU want it to work!"
+msgstr ""
+"A Beállítások ablakban definiálhatsz néhány változót,\n"
+"amelyek segítségével a gtranslator mûködése testreszabható."
+
+#: src/gtr_dialogs.c:52
+msgid "gtranslator -- open a po-file"
+msgstr "gtranslator -- po fájl megnyitása"
+
+#: src/gtr_dialogs.c:65
+msgid "Select your desired po-file to open"
+msgstr "Válaszd ki a po fájlt"
+
+#: src/gtr_dialogs.c:84
+msgid "gtranslator -- save file as .."
+msgstr "gtranslator -- fájl mentése másként .."
+
+#: src/gtr_dialogs.c:97
+msgid "Select your filename to which the po-file should be saved to."
+msgstr "Add meg a fájlnevet, amivel a po fájl elmentésre kerül."
+
+#: src/gtr_dialogs.c:122
+msgid "gtranslator -- search-box"
+msgstr "gtranslator -- keresés"
+
+#. *
+#. * Set up the information label
+#. *
+#: src/gtr_dialogs.c:128
+msgid "Enter your desired search string: "
+msgstr "Add meg a keresendõ karakterláncot: "
+
+#: src/gtr_dialogs.c:194
+msgid "GoTo message entry"
+msgstr "Ugrás az üzenetbejegyzésre"
+
+#: src/gtr_dialogs.c:203
+msgid "Goto the specified message entry."
+msgstr "A megadott üzenetbejegyzésre ugrik"
+
+#: src/support.c:111 src/support.c:151
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Nem találom a %s pixmap fájlt"
+
+#: src/support.c:127
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr "Nem tudtam létrehozni a pixmap-ot a következõ fájlból: %s"
+
+#: src/about.c:22
+msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
+msgstr "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
+
+#: src/about.c:28
+msgid ""
+"gtranslator is a Gnome Application for translating .po-files slightly "
+"different than in (X)Emacs.\n"
+"Till now you can't see much, but that will change! At least till R 0.20."
+msgstr ""
+"A gtranslator egy Gnome-os segédalkalmazás .po fájlok fordításához. Kicsit különbözik az (X)Emacs-tõl.\n"
+"Most még nem látszik sok belõle, de ez változni fog! Az R 0.20-as verziótól biztosan."
+
+#: src/about.c:30
+msgid ""
+"gtranslator is a Gnome Application for translating .po-files more "
+"comfortable than in (X)Emacs.\n"
+"Till now you can't see much, but that will change! At least till R 0.20."
+msgstr ""
+"A gtranslator egy Gnome-os segédalkalmazás .po fájlok fordításához. Kicsit kényelmesebb az (X)Emacs-nál.\\n\"\n"
+"\"Most még nem látszik sok belõle, de ez változni fog! Az R 0.20-as verziótól biztosan."
+
+#. *
+#. * Create the labels ..
+#. *
+#: src/prefs.c:34
+msgid "Personal informations"
+msgstr "Személyes adatok"
+
+#: src/prefs.c:35
+msgid "Language options"
+msgstr "Nyelvi opciók"
+
+#: src/prefs.c:36
+msgid "Po file options"
+msgstr "Po fájl beállításai"
+
+#: src/prefs.c:37
+msgid "Author's name :"
+msgstr "Fordító neve :"
+
+#: src/prefs.c:38
+msgid "Author's EMail :"
+msgstr "Fordító e-mail címe :"
+
+#: src/prefs.c:39
+msgid "Language :"
+msgstr "Nyelv :"
+
+#: src/prefs.c:40
+msgid "MIME type :"
+msgstr "MIME típus :"
+
+#: src/prefs.c:41
+msgid "Encoding :"
+msgstr "Kódolás :"
+
+#: src/prefs.c:42
+msgid "Language code :"
+msgstr "Nyelv kódja :"
+
+#: src/prefs.c:43
+msgid "Language group's EMail :"
+msgstr "Fordító csapat e-mail címe :"
+
+#: src/prefs.c:44
+msgid "Comments :"
+msgstr "Megjegyzés :"
+
+#: src/prefs.c:57
+msgid "Add the additional comments to the header"
+msgstr "További megjegyzések hozzáadása a fejléchez"
+
+#: src/prefs.c:58
+msgid "Warn me if I'm trying to save an unchanged file"
+msgstr "Figyelmeztess, ha változatlan fájlt próbálok elmenteni"
+
+#: src/prefs.c:59
+msgid "Warn if the .po-file contains fuzzy translations"
+msgstr "Figyelmeztess, ha a po fájlban \"fuzzy\" bejegyzések vannak"
+
+#: src/prefs.c:60
+msgid "Don't save unchanged .po-files"
+msgstr "Ne mentsd a változatlan po fájlokat"
+
+#: src/prefs.c:61
+msgid "Use the msg_db"
+msgstr "Használd az msg_db-t"
+
+#: src/languages.h:59
+msgid "Arabic"
+msgstr "Arab"
+
+#: src/languages.h:63
+msgid "Basque"
+msgstr "Baszk"
+
+#: src/languages.h:67
+msgid "Bulgarian"
+msgstr "Bolgár"
+
+#: src/languages.h:71
+msgid "Catalan"
+msgstr "Katalán"
+
+#: src/languages.h:75
+msgid "Chinese/Simplified"
+msgstr "Kínai/Egyszerûsített"
+
+#: src/languages.h:79
+msgid "Chinese/Traditional"
+msgstr "Kínai/Tradícionális"
+
+#: src/languages.h:83
+msgid "Croatian"
+msgstr "Horvát"
+
+#: src/languages.h:87
+msgid "Czech"
+msgstr "Cseh"
+
+#: src/languages.h:91
+msgid "Danish"
+msgstr "Dán"
+
+#: src/languages.h:95
+msgid "English"
+msgstr "Angol"
+
+#: src/languages.h:99
+msgid "English/Canada"
+msgstr "Angol/Kanada"
+
+#: src/languages.h:103
+msgid "English/GB"
+msgstr "Angol/Brit"
+
+#: src/languages.h:107
+msgid "English/USA"
+msgstr "Angol/USA"
+
+#: src/languages.h:111
+msgid "Estonian"
+msgstr "Észt"
+
+#: src/languages.h:115
+msgid "Farsi"
+msgstr ""
+
+#: src/languages.h:119
+msgid "Finnish"
+msgstr "Finn"
+
+#: src/languages.h:123
+msgid "French"
+msgstr "Francia"
+
+#: src/languages.h:127
+msgid "Galician"
+msgstr "Gall"
+
+#: src/languages.h:131
+msgid "German"
+msgstr "Német"
+
+#: src/languages.h:135
+msgid "Greek"
+msgstr "Görög"
+
+#: src/languages.h:139
+msgid "Hungarian"
+msgstr "Magyar"
+
+#: src/languages.h:143
+msgid "Indonesian"
+msgstr "Indonéz"
+
+#: src/languages.h:147
+msgid "Italian"
+msgstr "Olasz"
+
+#: src/languages.h:151
+msgid "Irish"
+msgstr "Ír"
+
+#: src/languages.h:155
+msgid "Japanese"
+msgstr "Japán"
+
+#: src/languages.h:159
+msgid "Korean"
+msgstr "Koreai"
+
+#: src/languages.h:163
+msgid "Lithuanian"
+msgstr "Litván"
+
+#: src/languages.h:167
+msgid "Norwegian/Bookmal"
+msgstr "Norvég/Bookmal"
+
+#: src/languages.h:171
+msgid "Norwegian/Nynorsk"
+msgstr "Norvég/Nynorsk"
+
+#: src/languages.h:175
+msgid "Polish"
+msgstr "Lengyel"
+
+#: src/languages.h:179
+msgid "Portuguese"
+msgstr "Portugál"
+
+#: src/languages.h:183
+msgid "Portuguese/Brazil"
+msgstr "Portugál/Brazil"
+
+#: src/languages.h:187
+msgid "Russian"
+msgstr "Orosz"
+
+#: src/languages.h:191
+msgid "Slovak"
+msgstr "Szlovák"
+
+#: src/languages.h:195
+msgid "Spanish"
+msgstr "Spanyol"
+
+#: src/languages.h:199
+msgid "Spanish/Spain"
+msgstr "Spanyol/Spanyolország"
+
+#: src/languages.h:203
+msgid "Spanish/Mexico"
+msgstr "Spanyol/Mexikó"
+
+#: src/languages.h:207
+msgid "Swedish"
+msgstr "Svéd"
+
+#: src/languages.h:211
+msgid "Turkish"
+msgstr "Török"
+
+#: src/languages.h:215
+msgid "Ukrainian"
+msgstr "Ukrán"
+
+#: src/languages.h:219
+msgid "Walloon"
+msgstr "Wallon"
+
+#: src/languages.h:223
+msgid "Welsh"
+msgstr "Velszi"
