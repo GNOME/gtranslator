@@ -57,6 +57,10 @@ typedef struct {
 	 */
 	GList *current;
 	/*
+	 * The obsolete messages are stored within this gchar.
+	 */
+	gchar *obsolete;
+	/*
 	 * Marks if the file was changed; 
 	 */
 	guint file_changed : 1;

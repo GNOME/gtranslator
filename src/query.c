@@ -77,6 +77,7 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 		return NULL;
 	}
 
+	g_free(str);
 	gtranslator_free_query(&query);
 }
 

@@ -274,14 +274,28 @@ gboolean actual_parse(void)
 	/*
 	 * If there was no newline at end of file
 	 */
-	if ((msgid_ok == TRUE) && (msgstr_ok == FALSE)) {
+	if ((msgid_ok == TRUE) && (msgstr_ok == FALSE))
+	{
 		check_msg_status(msg);
 		po->messages = g_list_prepend(po->messages, (gpointer) msg);
-	} else
+	}
+	else if((msgid_ok==FALSE) &&
+		  (msgstr_ok==FALSE) &&
+		  msg->comment)
+	{
 		/*
-		 * not needed allocated structure
+		 * Store the obsolete entries if wished.
+		 */
+		if(wants.keep_obsolete)
+		{
+			po->obsolete=g_strdup(msg->comment);
+		}
+		  
+		/*
+		 * Not needed allocated structure
 		 */
 		g_free(msg);
+	}
 	fclose(fs);
 
 	if (po->messages == NULL) {
@@ -590,11 +604,20 @@ static gboolean actual_write(const gchar * name)
 	free_a_message(header, NULL);
 
 	gtranslator_update_msg();
+	
 	/*
 	 * Write every message to the file
 	 */
 	g_list_foreach(po->messages, (GFunc) write_the_message, (gpointer) fs);
 
+	/*
+	 * Store the obsolete entries in the file -- if wished and possible.
+	 */
+	if(wants.keep_obsolete && po->obsolete)
+	{
+		fprintf(fs, "%s", po->obsolete);
+	}
+	
 	fclose(fs);
 	po->file_changed = FALSE;
 
