@@ -1,6 +1,6 @@
 ## the main Makefile.am
 
-SUBDIRS = macros intl po data src help man
+SUBDIRS = data help intl macros man po src
 
 bin_SCRIPTS = pozilla.sh
 

@@ -220,12 +220,13 @@ AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
+with_debug_specs=no
 AC_ARG_WITH(debug-specs,
      [  --with-debug-specs		   Build everything with debug informations],, with_debug_specs=yes)
-AC_MSG_CHECKING([for a debuggy build ])
+AC_MSG_CHECKING([for a gdb friendly build ])
 if test "rt$with_debug_specs" = "rtno" ; then
 	AC_MSG_RESULT([" "
-"+++ No, building everything without any debugging informations and flags..."])
+"+++ No, building everything WITHOUT any debugging informations and flags..."])
 	CFLAGS="`echo $CFLAGS|sed -e 's/-g.//g'`"
 else
 	AC_MSG_RESULT([" "
@@ -234,20 +235,10 @@ else
 fi
 
 dnl -------------------------------------------------------------------
-dnl For the extremists of the 'gcc-&-Werror-are-friends' department.
+dnl Use extended compile warn flags per default.
 dnl -------------------------------------------------------------------
-AC_ARG_WITH(extreme-gcc-flags,
-     [  --with-extreme-gcc-flags	   Set the CFLAGS to the most extreme values],, extreme_gcc_flags=yes)
-AC_MSG_CHECKING([for extremists-ala-gcc-Werror ])
-if test "gcc$extreme_gcc_flags" = "gccyes" ; then
-	AC_MSG_RESULT([" "
-"+++ Yes, you are getting your -Werror -Wformat etc. ..."])
-	CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts"
-	CFLAGS="$CFLAGS	-Wimplicit -Wreturn-type -Wswitch -Wcomment"
-else
-	AC_MSG_RESULT([" "
-"+++ Huh, no gcc extremist =?"])
-fi
+CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts\
+-Wimplicit -Wreturn-type -Wswitch -Wcomment"
 
 dnl -------------------------------------------------------------------
 dnl Try to get a pkg-config directory for us ..
@@ -336,9 +327,6 @@ if we can use GConf
 
 if everything should be 
  compiled debuggy	:	${with_debug_specs:-no}
-
-if you're getting your
- loved -Werror etc.	:	${extreme_gcc_flags:-no}
 
 ------------------------------------------------------------------
 "
