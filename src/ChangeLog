@@ -1,3 +1,10 @@
+2003-08-29  Fatih Demir <kabalak@gtranslator.org>
+
+	* parse.c: Chech while parsing if the charset in the header is still
+		on the default value CHARSET and if so, then let's simply
+		 assume that the charset of such files is UTF-8 now as it's
+		  good to do so/default and such; solves b.g.o #121028.
+
 2003-08-28  Fatih Demir <kabalak@gtranslator.org>
 
 	* utf8.[ch]: Removed unused ("[depr") gtranslator_utf8_convert_to_utf8

@@ -305,6 +305,21 @@ gboolean gtranslator_parse_core(GtrPo *po)
 		 */
 		if (po->header && po->header->charset) {
 			/*
+			 * Check if the header charset line is in a sane state.
+			 */
+			if(!nautilus_strcmp(po->header->charset, "CHARSET"))
+			{
+				/*
+				 * If the default CHARSET definition is present
+				 *  in the po file header, then we do now simply
+				 *   assume the file to be UTF-8 as it's the
+				 *    default charset for GNOME.
+				 */
+				GTR_FREE(po->header->charset);
+				po->header->charset=g_strdup("UTF-8");
+			}
+
+			/*
 			 * Convert from header charset to UTF-8
 			 */
 			line = g_convert(rawline, strlen(rawline), "utf-8", po->header->charset, NULL, NULL, &errv);
