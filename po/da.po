@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.12\n"
 "POT-Creation-Date: 2000-05-20 17:32+0200\n"
-"PO-Revision-Date: 2000-05-30 22:24+0100\n"
+"PO-Revision-Date: 2000-06-10 22:24+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -66,308 +66,372 @@ msgstr ""
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- åben en po-fil"
 
-#: src/gtr_dialogs.c:65
+#: src/gtr_dialogs.c:71
 msgid "Select your desired po-file to open"
 msgstr "Vælg din ønskede .po-fil der skal åbnes"
 
-#: src/gtr_dialogs.c:84
+#: src/gtr_dialogs.c:90
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- gem fil som .."
 
-#: src/gtr_dialogs.c:97
+#: src/gtr_dialogs.c:109
 msgid "Select your filename to which the po-file should be saved to."
 msgstr "Vælg det filnavn som .po-filen skal gemmes i."
 
-#: src/gtr_dialogs.c:122
+#: src/gtr_dialogs.c:134
 msgid "gtranslator -- search-box"
 msgstr "gtranslator -- søgnings-boks"
 
 #. *
 #. * Set up the information label
 #. *
-#: src/gtr_dialogs.c:129
+#: src/gtr_dialogs.c:141
 msgid "Enter your desired search string: "
 msgstr "Indtast den ønskede søgestreng: "
 
-#: src/gtr_dialogs.c:131 src/interface.c:407
+#: src/gtr_dialogs.c:143 src/gui.c:225 src/gui.c:226 src/gui.c:425
 msgid "Search"
 msgstr "Søg"
 
-#: src/gtr_dialogs.c:195
+#: src/gtr_dialogs.c:211
 msgid "GoTo message entry"
 msgstr "Gå til besked"
 
 #. *
 #. * Create the buttons, the entry & the label
 #. *
-#: src/gtr_dialogs.c:201
+#: src/gtr_dialogs.c:217
 msgid "Go!"
 msgstr "Udfør!"
 
-#: src/gtr_dialogs.c:205
+#: src/gtr_dialogs.c:221
 msgid "Goto the specified message entry."
 msgstr "Gå til den angivne besked."
 
-#: src/gtr_dialogs.c:253
+#: src/gtr_dialogs.c:276
 msgid "gtranslator -- find in the catalogue"
 msgstr "gtranslator -- find i kataloget"
 
-#: src/gtr_dialogs.c:256
+#: src/gtr_dialogs.c:279
 msgid "gtranslator -- find in the po-file"
 msgstr "gtranslator -- find i po-filen"
 
-#: src/gtr_dialogs.c:259
+#: src/gtr_dialogs.c:282
 msgid "gtranslator -- find"
 msgstr "gtranslator -- find"
 
-#: src/gtr_dialogs.c:266
+#: src/gtr_dialogs.c:289 src/gui.c:240 src/gui.c:241
 msgid "Find"
 msgstr "Find"
 
-#: src/header_stuff.c:39
-msgid "Error while parsing the header!"
-msgstr "Fejl ved fortolkning af hoved!"
+#: src/gtr_dialogs.c:291
+msgid "Ignore the case"
+msgstr "Ignorér tilfældet"
 
-#: src/header_stuff.c:111
+#. *
+#. * Create a helping label.
+#. *
+#: src/gtr_dialogs.c:350
+msgid ""
+"With this query window you can query\n"
+"the message db for an existing entry\n"
+"with your query string."
+msgstr ""
+"Med forespørgselsvinduet kan du anmode\n"
+"besked-databasen om en eksisterende indgang\n"
+"med forespørgselsstrengen."
+
+#: src/gtr_dialogs.c:361
+msgid "Query"
+msgstr "Spørg"
+
+#. *
+#. * Set the window-properties.
+#. *
+#: src/gtr_dialogs.c:404
+msgid "gtranslator -- query the message db"
+msgstr "gtranslator -- forespørg besked-databasen"
+
+#: src/gtr_dialogs.c:433
+#, c-format
+msgid "Result: `%s'"
+msgstr "Resultat: '%s'"
+
+#: src/gtr_dialogs.c:450
+msgid "Insert"
+msgstr "Indsæt"
+
+#. *
+#. * Set the window properties.
+#. *
+#: src/gtr_dialogs.c:454
+msgid "gtranslator -- result fo your query"
+msgstr "gtranslator -- resultat af din forespørgsel"
+
+#: src/header_stuff.c:38
+msgid "Error while applying the header!"
+msgstr "Fejl ved anvendelse af hovedet!"
+
+#: src/header_stuff.c:83
 msgid "Header has been parsed."
 msgstr "Hovedet er blevet fortolket."
 
-#: src/header_stuff.c:130
+#: src/header_stuff.c:108
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Hoved ser ikke ude til at blive fortolket rigtigt."
 
-#: src/header_stuff.c:132
+#: src/header_stuff.c:110
 msgid "Project name:"
 msgstr "Projektnavn:"
 
-#: src/header_stuff.c:133
+#: src/header_stuff.c:111
 msgid "Project version:"
 msgstr "Projekt-version:"
 
-#: src/header_stuff.c:134
+#: src/header_stuff.c:112
 msgid "Use my personal options to fill out the rest of the header."
 msgstr "Brug mine egne indstillinger til at udfylde resten af hovedet."
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:143
+#: src/header_stuff.c:121
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- redigér hoved"
 
-#: src/interface.c:84
+#: src/gui.c:84
 msgid "No po-file opened which could be compiled."
 msgstr "Ingen .po-fil blev åbnet, som kunne kompileres."
 
-#: src/interface.c:109
+#: src/gui.c:109
 msgid "Po-file has been compiled successfully."
 msgstr "PO-fil er blevet kompileret tilfredsstillende."
 
-#: src/interface.c:138
+#: src/gui.c:138
 msgid "Couldn't store current geometry!"
 msgstr "Kunne ikke gemme den aktuelle geometri!"
 
 #. *
 #. * Show a Good Bye!-typo message.
 #. *
-#: src/interface.c:151
+#: src/gui.c:151
 msgid "Bye bye!"
 msgstr "Farvel!"
 
-#: src/interface.c:230
+#: src/gui.c:196
 msgid "_Compile"
 msgstr "_Kompilér"
 
-#: src/interface.c:250
+#: src/gui.c:217
 msgid "C_lear"
 msgstr "_Nulstil"
 
-#: src/interface.c:251
+#: src/gui.c:218
 msgid "Clears the current selection"
 msgstr "Nulstiller den nuværende markering"
 
-#: src/interface.c:258
+#: src/gui.c:232 src/gui.c:433
+msgid "ReSearch"
+msgstr "Søg igen"
+
+#: src/gui.c:233 src/gui.c:434
+msgid "Search again"
+msgstr "Søg igen"
+
+#: src/gui.c:249
 msgid "_Header"
 msgstr "_Hoved"
 
-#: src/interface.c:259
+#: src/gui.c:250
 msgid "Edit the header"
 msgstr "Redigér hovedet"
 
-#: src/interface.c:270
+#: src/gui.c:261
 msgid "Refresh"
 msgstr "Opdatér"
 
-#: src/interface.c:282
+#: src/gui.c:273
 msgid "_First"
 msgstr "_Første"
 
-#: src/interface.c:289
+#: src/gui.c:280
 msgid "_Back"
 msgstr "_Tilbage"
 
-#: src/interface.c:297
+#: src/gui.c:288
 msgid "_Next"
 msgstr "_Næste"
 
-#: src/interface.c:304
+#: src/gui.c:295
 msgid "_Last"
 msgstr "_Sidste"
 
-#: src/interface.c:323
+#: src/gui.c:307
+msgid "_Add the current message"
+msgstr "_Tilføj denne besked"
+
+#: src/gui.c:308
+msgid "Add the current message to the messages DB."
+msgstr "Tilføj denne besked til besked-databasen"
+
+#: src/gui.c:315
+msgid "_Query for a message"
+msgstr "_Søg efter en meddelelse"
+
+#: src/gui.c:316
+msgid "Query the messages DB for the current msgid."
+msgstr "Forespørg besked-databasen om denne msgid."
+
+#: src/gui.c:334
 msgid "_Online help"
 msgstr "_Online hjælp"
 
-#: src/interface.c:331
+#: src/gui.c:342
 msgid "gtranslator _website"
-msgstr "gtranslator _website"
+msgstr "gtranslator _websted"
 
-#: src/interface.c:332
+#: src/gui.c:343
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslators hjemmeside på webben"
 
-#: src/interface.c:346 src/interface.c:349
+#: src/gui.c:357 src/gui.c:360
 msgid "_Messages"
 msgstr "_Beskeder"
+
+#: src/gui.c:364 src/gui.c:367
+msgid "Message _db"
+msgstr "_Besked_database"
 
 #. *
 #. * Create the app
 #. *
-#: src/interface.c:372
+#: src/gui.c:390
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/interface.c:408
+#: src/gui.c:426
 msgid "Search for a message"
 msgstr "Søg efter en meddelelse"
 
-#: src/interface.c:415
-msgid "ReSearch"
-msgstr "Søg igen"
-
-#: src/interface.c:416
-msgid "Search again"
-msgstr "Søg igen"
-
-#: src/interface.c:423
+#: src/gui.c:441
 msgid "Goto"
 msgstr "Gå til"
 
-#: src/interface.c:424
+#: src/gui.c:442
 msgid "Goto this message"
 msgstr "Gå til denne meddelelse"
 
-#: src/interface.c:438
+#: src/gui.c:456
 msgid "Add"
 msgstr "Tilføj"
 
-#: src/interface.c:439
-msgid "Add to the msg_db."
-msgstr "Tilføj til msg_db."
+#: src/gui.c:457
+msgid "Add to the messages db."
+msgstr "Tilføj til besked-db."
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/interface.c:453
-msgid "F/Cat."
-msgstr "F/Kat."
+#: src/gui.c:471
+msgid "F/DB"
+msgstr "F/DB"
 
-#: src/interface.c:454
-msgid "Find in the personal catalog"
-msgstr "Find i det personlige katalog"
+#: src/gui.c:472
+msgid "Find in the personal messages db"
+msgstr "Find i den personlige beskeds-database"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/interface.c:464
+#: src/gui.c:482
 msgid "F/Po."
 msgstr "F/Po."
 
-#: src/interface.c:465
+#: src/gui.c:483
 msgid "Find in the po file "
 msgstr "Find i po-filen"
 
-#: src/interface.c:476
+#: src/gui.c:494
 msgid "Header"
 msgstr "Hoved"
 
-#: src/interface.c:477
+#: src/gui.c:495
 msgid "Edit the header informations"
 msgstr "Redigér informationerne om hovedet"
 
-#: src/interface.c:485
+#: src/gui.c:503
 msgid "Compile"
 msgstr "Kompilér"
 
-#: src/interface.c:486
+#: src/gui.c:504
 msgid "Compile the po-file"
 msgstr "Kompilér po-filen"
 
-#: src/interface.c:494
+#: src/gui.c:512
 msgid "Open"
 msgstr "Åbn"
 
-#: src/interface.c:495
+#: src/gui.c:513
 msgid "Open File"
 msgstr "Åbn fil"
 
-#: src/interface.c:503
+#: src/gui.c:521
 msgid "Save"
 msgstr "Gem"
 
-#: src/interface.c:504
+#: src/gui.c:522
 msgid "Save File"
 msgstr "Gem fil"
 
-#: src/interface.c:512
+#: src/gui.c:530
 msgid "Save as"
 msgstr "Gem som"
 
-#: src/interface.c:513
+#: src/gui.c:531
 msgid "Save file as"
 msgstr "Gem fil som"
 
-#: src/interface.c:521
+#: src/gui.c:539
 msgid "First"
 msgstr "Første"
 
-#: src/interface.c:522
+#: src/gui.c:540
 msgid "Go to the first message"
 msgstr "Gå til denne besked"
 
-#: src/interface.c:530
+#: src/gui.c:548
 msgid "Back"
 msgstr "Tilbage"
 
-#: src/interface.c:531
+#: src/gui.c:549
 msgid "Go one message back"
 msgstr "Gå en besked tilbage"
 
-#: src/interface.c:539
+#: src/gui.c:557
 msgid "Options"
 msgstr "Indstillinger"
 
-#: src/interface.c:540
+#: src/gui.c:558
 msgid "gtranslator options"
 msgstr "gtranslator valgmuligheder"
 
-#: src/interface.c:548
+#: src/gui.c:566
 msgid "Next"
 msgstr "Næste"
 
-#: src/interface.c:549
+#: src/gui.c:567
 msgid "Go one message forward"
 msgstr "Gå en besked frem"
 
-#: src/interface.c:557
+#: src/gui.c:575
 msgid "Last"
 msgstr "Sidste"
 
-#: src/interface.c:558
+#: src/gui.c:576
 msgid "Go to the last message"
 msgstr "Gå til den sidste besked"
 
-#: src/interface.c:566 src/interface.c:567
+#: src/gui.c:584 src/gui.c:585
 msgid "Exit"
 msgstr "Afslut"
 
@@ -539,19 +603,40 @@ msgstr "Vallonsk"
 msgid "Welsh"
 msgstr "Walisisk"
 
-#: src/main.c:37
+#: src/main.c:31
 msgid "Po-file to open at startup"
 msgstr "Po-fil der skal åbnes ved opstart"
 
-#: src/main.c:41
-msgid "The msg_db to use"
-msgstr "Den msg_db der skal bruges"
+#: src/main.c:35
+msgid "The messages db to use"
+msgstr "Den besked-db der skal bruges"
 
-#: src/main.c:45
+#: src/main.c:39
+msgid "Query the messages db & exit"
+msgstr "Søg i beskeddatabase og afslut"
+
+#: src/main.c:43
 msgid "Specifies the main-window geometry"
 msgstr "Angiver hoved-vinduets geometri"
 
-#: src/main.c:134
+#. *
+#. * Simply print it out.
+#. *
+#: src/main.c:94
+#, c-format
+msgid "Getting results for query: `%s' ...\n"
+msgstr "Finder resultater for forespørgsel: '%s' ...\n"
+
+#: src/main.c:99
+#, c-format
+msgid "Result                   : %s."
+msgstr "Resultat                 : %s."
+
+#: src/main.c:101
+msgid "End of query.\n"
+msgstr "Slut på forespørgsel.\n"
+
+#: src/main.c:161
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "Geometri-strengen '%s' kunne ikke fortolkes!"
@@ -559,55 +644,59 @@ msgstr "Geometri-strengen '%s' kunne ikke fortolkes!"
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:157
+#: src/main.c:180
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "Filen '%s' findes ikke, eller kan ikke læses!"
 
-#: src/main.c:158
+#: src/main.c:181
 msgid "Skipping it."
 msgstr "Overspringer det."
+
+#: src/msg_db.c:42
+#, c-format
+msgid "No message db found! Creating one in `%s'."
+msgstr "Ingen beskeds-database fundet. Opretter én i '%s'."
 
 #. *
 #. * 3.1) No list, no fun
 #. *
-#: src/msg_db.c:73
+#: src/msg_db.c:81
 msgid "gtranslator lost the list of translations!\n"
 msgstr "gtranslator tabte listen med oversættelser!\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:110
+#: src/msg_db.c:118
 #, c-format
-msgid "The msg_db `%s' hasn't been inited yet!\n"
-msgstr "msg_db %s er ikke blevet initialiseret endnu!\n"
+msgid "The message db `%s' hasn't been initted yet!\n"
+msgstr "Beskedsdatabasen %s er ikke blevet initialiseret endnu!\n"
 
 #. *
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
-#: src/msg_db.c:122
+#: src/msg_db.c:129
 msgid "Got no message entry!\n"
 msgstr "Fik ingen besked!\n"
 
-#: src/msg_db.c:131
-#, c-format
-msgid "New message entry has wrong/non-logical length : %i\n"
-msgstr "Ny besked har forkert eller ikke-logisk længde : %i\n"
+#: src/msg_db.c:137
+msgid "New message entry has wrong/non-logical length.\n"
+msgstr "Ny besked har forkert eller ikke-logisk længde.\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:167
+#: src/msg_db.c:173
 #, c-format
-msgid "The msg_db `%s' seems not to be inited!\n"
-msgstr "msg_db %s ser ikke ud til at være initialiseret!\n"
+msgid "The message db `%s' seems not to be initted!\n"
+msgstr "Beskedsdatabasen %s ser ikke ud til at være initialiseret!\n"
 
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:171
+#: src/msg_db.c:177
 msgid "Not available"
 msgstr "Ikke tilgængelig"
 
@@ -615,13 +704,13 @@ msgstr "Ikke tilgængelig"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:179
-msgid "No msg_list available for acting on it!\n"
-msgstr "Ingen msg_list at udføre handlinger på tilgængelig!\n"
+#: src/msg_db.c:185
+msgid "No messages list ( msg_list ) available for acting on it!\n"
+msgstr "Ingen beskeds-liste (msg_list) at udføre handlinger på tilgængelig!\n"
 
-#: src/msg_db.c:203
-msgid "No entry found in the msg_db."
-msgstr "Ingen ingang fundet i msg_db."
+#: src/msg_db.c:222
+msgid "No entry found in the messages db "
+msgstr "Ingen indgang fundet i beskeds-databasen "
 
 #. *
 #. * If there are any problems , give a
@@ -638,7 +727,7 @@ msgstr ""
 "Filstrømmen er tabt!\n"
 "%s"
 
-#: src/parse.c:53
+#: src/parse.c:56
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Der er ikke nogen fil at åbne, eller jeg kunne ikke forstå '%s'!"
@@ -646,7 +735,7 @@ msgstr "Der er ikke nogen fil at åbne, eller jeg kunne ikke forstå '%s'!"
 #. *
 #. * Set up a status message
 #. *
-#: src/parse.c:58
+#: src/parse.c:61
 #, c-format
 msgid "Current file : \"%s\"."
 msgstr "Aktuel fil : '%s'."
@@ -654,14 +743,22 @@ msgstr "Aktuel fil : '%s'."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:141
+#: src/parse.c:168
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "Færdig med læsning af '%s', %i linjer."
 
-#: src/parse.c:158
+#: src/parse.c:185
 msgid "Parsing has been successfull."
 msgstr "Fortolkning lykkedes."
+
+#: src/parse.c:260
+msgid "You've reached the first message"
+msgstr "Du har nået den første besked"
+
+#: src/parse.c:291
+msgid "You've reached the last message."
+msgstr "Du har nået den sidste besked"
 
 #. *
 #. * Create the labels ..
@@ -731,15 +828,5 @@ msgid "Don't save unchanged .po-files"
 msgstr "Gem ikke uændrede .po-filer"
 
 #: src/prefs.c:62
-msgid "Use the msg_db"
-msgstr "Brug msg_db"
-
-#: src/support.c:111 src/support.c:151
-#, c-format
-msgid "Couldn't find pixmap file: %s"
-msgstr "Kunne ikke finde billedfil: %s"
-
-#: src/support.c:127
-#, c-format
-msgid "Couldn't create pixmap from file: %s"
-msgstr "Kunne ikke oprette billede fra fil: %s"
+msgid "Use the messages db"
+msgstr "Brug beskeds-databasen"
