@@ -156,7 +156,7 @@ void gtranslator_replace_run(GtrReplace *replace)
 	 * Redisplay the current message to get replaces in the current message
 	 *  on the screen immediately.
 	 */
-	gtranslator_message_show(po->current);
+	gtranslator_message_show(po->current->data);
 
 	if(replaced_count >= 1)
 	{

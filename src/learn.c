@@ -1013,6 +1013,6 @@ void gtranslator_learn_autotranslate(gboolean visual_interface)
 	
 	if(visual_interface)
 	{
-		gtranslator_message_show(po->current);
+		gtranslator_message_show(po->current->data);
 	}
 }

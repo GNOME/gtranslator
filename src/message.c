@@ -132,9 +132,8 @@ void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer us
 /* 
  * Display the message in text boxes
  */
-void gtranslator_message_show(GList * list_item)
+void gtranslator_message_show(GtrMsg *msg)
 {
-	GtrMsg *msg;
 	gchar *ispell_command[5];
 
 	if(!file_opened)
@@ -142,9 +141,8 @@ void gtranslator_message_show(GList * list_item)
 		return;
 	}
 	
-	g_return_if_fail(list_item!=NULL);
+	g_return_if_fail(msg!=NULL);
 
-	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	gtranslator_text_boxes_clean();
 
@@ -389,7 +387,7 @@ void gtranslator_message_go_to(GList * to_go)
 	}
 	
 	po->current = to_go;
-	gtranslator_message_show(po->current);
+	gtranslator_message_show(po->current->data);
 
 	if(GtrPreferences.show_messages_table)
 	{
@@ -524,7 +522,7 @@ void gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
 	msg->status |= GTR_MSG_STATUS_TRANSLATED;
 
 	message_changed = TRUE;
-	gtranslator_message_show(po->current);
+	gtranslator_message_show(po->current->data);
 	gtranslator_get_translated_count();
 	gtranslator_actions_enable(ACT_REVERT, ACT_SAVE);
 }

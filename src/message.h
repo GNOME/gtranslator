@@ -54,7 +54,7 @@ void gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number);
  * Various GUI/message handling functions.
  */
 void gtranslator_message_update(void);
-void gtranslator_message_show(GList  * list_item);
+void gtranslator_message_show(GtrMsg  * msg);
 void gtranslator_message_change_status(GtkWidget  * widget, gpointer which);
 
 /*

@@ -560,7 +560,7 @@ void gtranslator_parse_main(const gchar *filename)
 		gtranslator_header_edit_dialog(NULL, NULL);
 	}
 	
-	gtranslator_message_show(po->current);
+	gtranslator_message_show(po->current->data);
 
 	/*
 	 * Test if the filename is NOT equivalent to our temp files' names.

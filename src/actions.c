@@ -197,7 +197,7 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 	}
 	else
 	{
-		gtranslator_message_show(po->current);
+		gtranslator_message_show(po->current->data);
 	}
 
 	gtranslator_actions_disable(ACT_UNDO);

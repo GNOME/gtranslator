@@ -120,7 +120,9 @@ typedef struct
  * A new kind of popup menu for our beloved messages table.
  */
 static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
-	GdkEvent *event);
+	                    GdkEvent *event);
+static void row_selected (ETree *et, int row, ETreePath node, int column,
+		          gpointer data);
 
 /*
  * An own insertion callback for the messages table's popup menu to insert
@@ -155,9 +157,11 @@ GHashTable *hash_table=NULL;
  * Pops up on a right click in the messages table -- should show any found 
  *  translation from the learn buffer.
  */
-static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
-	GdkEvent *event)
+gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
+	             GdkEvent *event)
 {
+	row_selected(tree, row, path, column, NULL);
+		
 	if(event->button.button==3)
 	{
 		GtrMsg *message=NULL;
@@ -254,51 +258,34 @@ static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
  */
 static void insert_translation(GtkWidget *widget, gpointer insertion_kind)
 {
-	switch(GPOINTER_TO_INT(insertion_kind))
-	{
-		case 1:
-			retrieval->replace=FALSE;
-				break;
-
-		case 2:
-			retrieval->replace=TRUE;
-				break;
-
-		default:
-			retrieval->replace=FALSE;
-				break;
-	}
+	retrieval->replace=(GPOINTER_TO_INT(insertion_kind) == 2);
 
 	if(retrieval->message && retrieval->found_translation)
 	{
 		if(retrieval->replace)
 		{
-			if(GTR_MSG(retrieval->message)->msgstr)
-			{
-				GTR_FREE(GTR_MSG(retrieval->message)->msgstr);
-			}
-
-			GTR_MSG(retrieval->message)->msgstr=g_strdup(retrieval->found_translation);
+			GTR_FREE(retrieval->message->msgstr);
+			retrieval->message->msgstr=g_strdup(retrieval->found_translation);
 		}
 		else
 		{
-			gchar *oldstr=NULL;
-			
-			if(!GTR_MSG(retrieval->message)->msgstr)
+			if(!retrieval->message->msgstr)
 			{
-				GTR_MSG(retrieval->message)->msgstr=g_strdup(retrieval->found_translation);
+				retrieval->message->msgstr=g_strdup(retrieval->found_translation);
 			}
 			else
 			{
-				oldstr=GTR_MSG(retrieval->message)->msgstr;
-				GTR_MSG(retrieval->message)->msgstr=g_strconcat(oldstr, retrieval->found_translation, NULL);
+				gchar *oldstr=retrieval->message->msgstr;
+				retrieval->message->msgstr=g_strconcat(oldstr, retrieval->found_translation, NULL);
 				GTR_FREE(oldstr);
 			}
 		}
 
-		gtranslator_translation_changed(NULL, NULL);
-		gtranslator_messages_table_update_row(GTR_MSG(retrieval->message));
-		gtranslator_messages_table_update_message_status(GTR_MSG(retrieval->message));
+		gtranslator_message_status_set_fuzzy(retrieval->message, FALSE);
+		gtranslator_message_show(retrieval->message);
+		gtranslator_messages_table_update_message_status(retrieval->message);
+		gtranslator_messages_table_update_row(retrieval->message);
+		/* fixme: leak? */
 		GTR_FREE(retrieval);
 	}
 }
@@ -653,7 +640,7 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 	}
 }
 
-static void
+void
 row_selected (ETree *et, int row, ETreePath node, int column, gpointer data)
 {
 	GtrMsg *message, *old_message;

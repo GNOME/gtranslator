@@ -307,16 +307,12 @@ void gtranslator_comment_display(GtrComment *comment)
 	{
 		if(!GtrPreferences.show_comment)
 		{
-			comment_display_str=" ";
-		}
-		else if(strlen(comment->pure_comment) > 82)
-		{
-			comment_display_str=nautilus_str_middle_truncate(
-				comment->pure_comment, 82);
+			comment_display_str=g_strdup(" ");
 		}
 		else
 		{
-			comment_display_str=comment->pure_comment;
+			comment_display_str=nautilus_str_middle_truncate(
+				comment->pure_comment, 82);
 		}
 	}
 
@@ -335,6 +331,8 @@ void gtranslator_comment_display(GtrComment *comment)
 		gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
 		gtranslator_actions_disable(ACT_COMMENT);
 	}
+
+	g_free(comment_display_str);
 
 	e_paned_set_position(E_PANED(content_pane), 0);
 }
