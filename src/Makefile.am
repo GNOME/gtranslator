@@ -5,6 +5,16 @@
 
 myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
 
+if GCONF_IS_PRESENT
+gconf_cflags = $(GCONF_CFLAGS)
+gconf_libs = $(GCONF_LIBS)
+else
+gconf_cflags =
+gconf_libs =
+endif
+
+
+
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/libgtranslator \
@@ -14,9 +24,7 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator"\" \
 	$(XML_CFLAGS) \
-	if GCONF_IS_PRESENT
-	$(GCONF_CFLAGS) -DGCONF_IS_PRESENT=7 \
-	endif
+	$(gconf_cflags) \
 	$(myicon)
 
 bin_PROGRAMS = gtranslator
@@ -42,9 +50,7 @@ gtranslator_LDADD = \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
 	$(INTLLIBS) \
-	if GCONF_IS_PRESENT
-	$(GCONF_LIBS)
-	endif
+	$(gconf_libs) \
 	$(XML_LIBS)
 
 EXTRA_DIST = ChangeLog TODO.src
