@@ -1,3 +1,33 @@
+2000-10-15  Fatih Demir <kabalak@gmx.net>
+
+	* stylistics.c/h: Put the gtranslator_set_style function
+		here; it's good for manipulating two widgets'
+		 style options ( preferrably for the two text
+		  boxes of gtranslator ).
+
+	* Makefile.am: Removed test-libgtranslator/test-lg.c
+		from the sources and targets.
+	
+	* test-lg.c: Removed it due to uselessness.
+
+	* stylistics.c: Added the routines and sources for the
+		color storing/getting fucntions.
+
+	* stylistics.h: Added this header which controls all the
+		color based stuff within libgtranslator and added
+		 an enumeration which defines what to store.
+
+	* Makefile.am: Added the new "stylistics.c/h" files
+		to the sources and headers list.
+
+	* prefereces.h: Added the gfloat setting/getting
+		routines.
+	
+	* prefereces.c: Corrected some wrong stuff within the date
+		storing/getting routines, added the gfloat get/set-
+		 methods and added defines to wrap the doubles into
+		  the gfloat routines.
+
 2000-10-13  Fatih Demir	<kabalak@gmx.net>
 
 	* preferences.c: Made the date which is stored by 

@@ -230,14 +230,64 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 }
 
 /**
+* The gfloat stuff.
+**/
+void gtranslator_config_set_float(gchar *path, gfloat value)
+{
+	/**
+	* Just test for the path, the rest is obvious.
+	**/
+	if(!path)
+	{
+		g_warning(_("No path defined for gfloat value"));
+		return;
+	}
+	if(value)
+	{
+		gtranslator_config_init();
+		#ifdef GCONF_IS_PRESENT
+		private_path=g_strdup_printf("%s/%s", "/apps/gtranslator",
+			path);
+		gconf_client_set_float(client, private_path, value, 
+			&error);	
+		#else
+		gnome_config_set_float(path, value);
+		#endif
+		gtranslator_config_close();
+	}
+}
+
+/**
+* This gets the gfloat value.
+**/
+gfloat gtranslator_config_get_float(gchar *path)
+{
+	if(!path)
+	{
+		g_warning(_("No path defined to get the gfloat value from!"));
+		return 0;
+	}
+	gtranslator_config_init();
+	#ifdef GCONF_IS_PRESENT
+	private_path=g_strdup_printf("%s/%s", "/apps/gtranslator",
+		path);
+	return (gconf_client_get_float(client,  private_path,
+		&error));
+	#else
+	return (gnome_config_get_float(path));
+	#endif
+	gtranslator_config_close();
+}
+
+/**
 * This is the last time gtranslator has run.
 **/
 gchar *gtranslator_config_get_last_run_date()
 {
 	gtranslator_config_init();
 	#ifdef GCONF_IS_PRESENT
-	return (gconf_client_get_string(client, "informations/last_run_on",
-		&error));
+	return (gconf_client_get_string(client, 
+		"/apps/gtranslator/informations/last_run_on", &error));
 	#else
 	return (gnome_config_get_string("informations/last_run_on"));
 	#endif

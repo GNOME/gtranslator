@@ -34,6 +34,14 @@
 **/
 
 /**
+* Some define wrappers for the gfloat/gdouble stuff.
+**/
+#define gtranslator_config_set_double(path, value) \
+	gtranslator_config_set_float(path, (gfloat) value)
+#define gtranslator_config_get_double(path) \
+	(gdouble) gtranslator_config_get_float(path)
+
+/**
 * libgtranslator's preferences routines have to be prepended by
 *  an initialization and a finalization.
 **/
@@ -47,7 +55,7 @@ void gtranslator_config_set_bool(gchar *path, gboolean value);
 gboolean gtranslator_config_get_bool(gchar *path);
 
 /**
-* These routines are used for setting/getting integer values. 
+* These routines are used for setting/getting integer values.
 **/
 void gtranslator_config_set_int(gchar *path, gint value);
 gint gtranslator_config_get_int(gchar *path);
@@ -57,6 +65,12 @@ gint gtranslator_config_get_int(gchar *path);
 **/
 void gtranslator_config_set_string(gchar *path, gchar *value);
 gchar *gtranslator_config_get_string(gchar *path);
+
+/**
+* Now the ones for the gfloat values.
+**/
+void gtranslator_config_set_float(gchar *path, gfloat value);
+gfloat gtranslator_config_get_float(gchar *path);
 
 /**
 * These functions store/recall the last run date of gtranslator.
