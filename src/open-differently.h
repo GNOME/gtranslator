@@ -36,8 +36,18 @@ gboolean gtranslator_open_po_file(gchar *file);
 void gtranslator_open_compiled_po_file(gchar *file);
 
 /*
- * Open up a gzipped plain gettext po file.
+ * Open up a gzip'ed plain gettext po file (.po.gz).
  */
 void gtranslator_open_gzipped_po_file(gchar *file);
+
+/*
+ * Open up a bzip2'ed plain gettext po file (.po.bz2).
+ */
+void gtranslator_open_bzip2ed_po_file(gchar *file);
+
+/*
+ * Open up a compress'ed plain gettext po file (.po.Z).
+ */ 
+void gtranslator_open_compressed_po_file(gchar *file);
 
 #endif

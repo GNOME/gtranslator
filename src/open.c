@@ -23,6 +23,11 @@
 #include "open-differently.h"
 
 /*
+ * The "backend" for the gzip. bzip2 and uncompress based functions.
+ */
+void open_compressed_po_file(gchar *file, gchar *command);
+
+/*
  * Detects whether we can open up the given file with the
  *  "special" open functions of gtranslator.
  */
@@ -33,8 +38,10 @@ gboolean gtranslator_open_po_file(gchar *file)
 	 *  remote files.
 	 */
 	if(!strncmp(file, "http://", 7)||
+		!strncmp(file, "https://", 7)||	
 		!strncmp(file, "ftp://", 6)||
 		!strncmp(file, "www.", 4)||
+		!strncmp(file, "ftp.", 4)||
 		!strncmp(file, "file:/", 6))
 	{
 	
@@ -81,6 +88,7 @@ gboolean gtranslator_open_po_file(gchar *file)
 		gtranslator_open_compiled_po_file(file);
 		return TRUE;
 	}
+	
 	/*
 	 * And for the gzip'ed po files we do support
 	 *  the "po.gz" suffixes. detect the suffix if
@@ -96,7 +104,34 @@ gboolean gtranslator_open_po_file(gchar *file)
 		gtranslator_open_gzipped_po_file(file);
 		return TRUE;
 	}
+	
+	/*
+	 * Again simply check the suffix for po.bz2 and open it then.
+	 */
+	if(!g_strncasecmp(file, "2zb.op.", 7))
+	{
+		/*
+		 * Open it via the special function for bzip2.
+		 */ 
+		g_strreverse(file);
+		gtranslator_open_bzip2ed_po_file(file);
+		return TRUE;
+	}
 
+	/*
+	 * Detect compress'ed po files (.po[z|Z]).
+	 */
+	if(!g_strncasecmp(file, "z.op.", 5))
+	{
+		/*
+		 * Open this also via the special open function
+		 *  for compress.
+		 */  
+		g_strreverse(file);
+		gtranslator_open_compressed_po_file(file);
+		return TRUE;
+	}
+	
 	/*
 	 * Reverse the filename again into the original
 	 *  form to allow the normal parsing routines to
@@ -151,10 +186,10 @@ void gtranslator_open_compiled_po_file(gchar *file)
 }
 
 /*
- * This function is almost only an adaptation of the gtranslator_open_compiled_po_file
- *  function.
+ * This acts as the backend function for the gzip & bzip2'ed po file
+ *  functions.
  */
-void gtranslator_open_gzipped_po_file(gchar *file)
+void open_compressed_po_file(gchar *file, gchar *command)
 {
 	gchar *cmd=g_new0(gchar,1);
 	gchar *tempfilename=g_new0(gchar,1);
@@ -168,7 +203,8 @@ void gtranslator_open_gzipped_po_file(gchar *file)
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */
-	cmd=g_strdup_printf("gzip -dc < %s > %s",
+	cmd=g_strdup_printf("%s -dc < %s > %s",
+		command,
 		file,
 		tempfilename);
 
@@ -184,8 +220,20 @@ void gtranslator_open_gzipped_po_file(gchar *file)
 	}
 	else
 	{
-		cmd=g_strdup_printf(_("Couldn't open gzip'd gettext file `%s'!"),
+		if(!strcmp(command, "uncompress"))
+		{
+			cmd=g_strdup_printf(
+			_("Couldn't open compressed gettext file `%s'!"),
 			file);
+		}
+		else
+		{
+			cmd=g_strdup_printf(
+				_("Couldn't open %s'd gettext file `%s'!"),
+				command,	
+				file);
+		}
+		
 		/*
 		 * Display the warning to the user.
 		 */
@@ -194,4 +242,34 @@ void gtranslator_open_gzipped_po_file(gchar *file)
 	
 	g_free(cmd);
 	g_free(tempfilename);
+}
+
+/*
+ * Open up the gzip'ed po file.
+ */ 
+void gtranslator_open_gzipped_po_file(gchar *file)
+{
+	g_return_if_fail(file!=NULL);
+
+	open_compressed_po_file(file, "gzip");
+}
+
+/*
+ * Open up the bzip2'ed po file.
+ */
+void gtranslator_open_bzip2ed_po_file(gchar *file)
+{
+	g_return_if_fail(file!=NULL);
+
+	open_compressed_po_file(file, "bzip2");
+}
+
+/*
+ * Open up the Z'ed po file.
+ */
+void gtranslator_open_compressed_po_file(gchar *file)
+{
+	g_return_if_fail(file!=NULL);
+
+	open_compressed_po_file(file, "uncompress");
 }

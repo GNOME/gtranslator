@@ -46,9 +46,6 @@ void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
 		gtk_window_set_wmclass(GTK_WINDOW(*dlg), wmname, "gtranslator");
 	if (GNOME_IS_DIALOG(*dlg))
 		gnome_dialog_set_parent(GNOME_DIALOG(*dlg), GTK_WINDOW(app1));
-	#ifdef USE_WINDOW_ICON
-	gnome_window_icon_set_from_file(GTK_WINDOW(*dlg), WINDOW_ICON);
-	#endif
 	gtk_signal_connect(GTK_OBJECT(*dlg), "destroy",
 			   GTK_SIGNAL_FUNC(gtk_widget_destroyed), dlg);
 	gtk_widget_show_all(*dlg);
@@ -458,10 +455,12 @@ void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			 * Check if it's one of our supported URI
 			 *  types or if it's a "hidden" http URI.
 			 */ 
-			if(!g_strncasecmp(uri->str, "http", 4)||
-				!g_strncasecmp(uri->str, "ftp", 3)||
-				!g_strncasecmp(uri->str, "file", 4)||
-				!g_strncasecmp(uri->str, "www.", 4))
+			if(!strncmp(uri->str, "http", 4)||
+				!strncmp(uri->str, "https", 5)||
+				!strncmp(uri->str, "ftp", 3)||
+				!strncmp(uri->str, "file", 4)||
+				!strncmp(uri->str, "www.", 4)||
+				!strncmp(uri->str, "ftp.", 4))
 			{
 				gnome_dialog_close(dialog);
 				gtranslator_open_po_file(uri->str);

@@ -1,3 +1,16 @@
+2001-02-24  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c & main.c: Set the default window icon from the main loop
+		and don't do this again and again -- simply use a call of
+		 gnome_window_icon_set_default_from_file.
+
+	* open-differently.c/.h: Added functions for opening up bzip2'ed
+		and compress'ed gettext po files and made the functions
+		 known to the "detection" function "gtranslator_open_po_file".
+
+	* dialogs.c & open-differently.c: Also recognize "hidden" ftp
+		and https URI's.
+
 2001-02-24  Thomas Ziehmer	<thomas@gtranslator.org>
 
 	* find.c: now find find's all occurences of a string in a message.
