@@ -1,4 +1,4 @@
-gtranslator README R 0.32
+gtranslator README R 0.34
 -------------------------
 
 gtranslator is a translation-supporting program for the Gnome project.
@@ -8,20 +8,6 @@ and complex later on.
 If you've got this from CVS , you've got to read the INSTALL.CVS
 file in order to get the ./configure script etc.
 
-On problems with the preferences and crashes within the property-box
-you've got probably the "crashy" series of GConf 0.9 installed. In
-further CVS development and R 0.10 all problems have been removed.
-If you've got these "crashy" series of GConf you'd probably try to
-configure gtranslator again with the environment variable $NO_GCONF
-set to yes. This will prevent (lib-)gtranslator to be linked against
-GConf even it it's found. For bash you've got to do simply this:
-$ export NO_GCONF=yes
-$ ./configure ALL_YOUR_NASTY_AND_DESIRED_OPTIONS
-
-If you're using RPM packages of (lib-)gtranslator you can be happy :)
-These aren't linked against GConf yet, so you don't have got these
-problems.
-	
 After some direction changes, we're cruising towards a libgtranslator
 which supplies all the important functions and a gtranslatord daemon
 which replies to any requests and queries from the gtranslator client
@@ -40,5 +26,5 @@ on the web from time to time:
 	http://gtranslator.sourceforge.net
 
 ###############################################################################
-	/Fatih Demir/kabalak@gmx.net/2001-01-03
+	/Fatih Demir/kabalak@gmx.net/2001-01-23
 ###############################################################################
