@@ -77,11 +77,11 @@ static struct poptOption gtranslator_options[] = {
 	},
 	{
 		"auto-translate", 'a', POPT_ARG_STRING, &auto_translate_file,
-		0, N_("Auto translate the po file & exit"), N_("FILENAME")
+		0, N_("Auto translate the po file"), N_("FILENAME")
 	},
 	{
 		"build-information", 'b', POPT_ARG_NONE, &build_information,
-		0, N_("Show build information/specifications"), NULL
+		0, N_("Show build specifications"), NULL
 	},
 	{
 		"export-learn-buffer", 'e', POPT_ARG_STRING, &exporting_po_file,
@@ -93,7 +93,7 @@ static struct poptOption gtranslator_options[] = {
 	},
 	{
 		"learn", 'l', POPT_ARG_STRING, &learn_file,
-		0, N_("Learn the file completely & exit"), N_("FILENAME")
+		0, N_("Learn the file completely"), N_("FILENAME")
 	},
 	POPT_AUTOHELP {NULL}
 };
