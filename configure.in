@@ -1,7 +1,7 @@
 dnl -------------------------------------------------------------------
 dnl Process this file with autoconf to produce a configure script.
 dnl -------------------------------------------------------------------
-dnl (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
+dnl (C) 2000-2002 Fatih Demir <kabalak@gtranslator.org>
 dnl -------------------------------------------------------------------
 AC_INIT(src/main.c)
 AM_INIT_AUTOMAKE(gtranslator, 0.39.2)
@@ -258,7 +258,7 @@ echo "
 
 gtranslator version	  :	${VERSION}
 
-bind the po & co. files	  :	${enable_mime_bind:-possibly}	
+bind po & co. files	  :	${enable_mime_bind:-possibly}	
 
 GAL & GnomeVFS version	  :	`gnome-config --modversion gal|sed -e 's/.*-//g'` & `gnome-config --modversion vfs|sed -e 's/.*-//g'`
 
@@ -268,4 +268,6 @@ debug friendly build	  :	${enable_debug:-no}
 
 Scrollkeeper integration  :	${sc_present:-no}
 ------------------------------------------------------------------
+-- For suggestions, problems & bug reports for gtranslator please
+    use http://bugzilla.gnome.org
 "
