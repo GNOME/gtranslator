@@ -57,6 +57,7 @@ struct {
 	guint instant_spell_check	: 1;
 	guint use_own_dict		: 1;
 	guint keep_obsolete		: 1;
+	guint noreplace			: 1;
 	gchar *spell_command;
 	gchar *dictionary;
 	gchar *font;

@@ -65,6 +65,7 @@ enum {
 	ACT_CLEAR,
 	ACT_FIND,
 	ACT_FIND_AGAIN,
+	ACT_REPLACE,
 	ACT_QUERY,
 	ACT_HEADER,
 	/**********/

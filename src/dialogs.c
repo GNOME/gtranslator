@@ -28,6 +28,7 @@
 #include "prefs.h"
 #include "parse.h"
 #include "query.h"
+#include "replace.h"
 #include "open-differently.h"
 #include "color-schemes.h"
 #include "syntax.h"
@@ -48,7 +49,7 @@ static void goto_dlg_clicked(GnomeDialog * dialog, gint button,
 			     gpointer adjustment);
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
-			     gpointer findy);
+	gpointer findy);
 
 /*
  * The open URI dialog signal function:
@@ -374,6 +375,156 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 	
 	show_nice_dialog(&dialog, "gtranslator -- find");
+}
+
+/*
+ * The replace dialog -- based on the find dialog.
+ */
+void replace_dialog(GtkWidget *widget, gpointer useless)
+{
+	int findMenu=0;
+	int reply;
+	static GtkWidget *dialog = NULL;
+	GtkWidget *label, *match_case, *sndlabel;
+	GtkWidget *findy, *replacy;
+	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
+
+	raise_and_return_if_exists(dialog);
+	dialog=gnome_dialog_new(_("Replace"),
+		_("Replace"),
+		_("Replace all"),
+		GNOME_STOCK_BUTTON_CLOSE, 
+		NULL);
+	
+	label=gtk_label_new(_("String to replace:"));
+	findy=gnome_entry_new("REPLACE_THIS");
+
+	sndlabel=gtk_label_new(_("Replace string:"));
+	replacy=gnome_entry_new("REPLACE_WITH_THIS");
+	
+	match_case=gtk_check_button_new_with_label(_("Case sensitive"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case),
+		wants.match_case);
+
+	menu=gtk_menu_new();
+	menu_item=gtk_menu_item_new_with_label(_("English"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+		GTK_SIGNAL_FUNC(find_in_activated),
+		GINT_TO_POINTER(findEnglish));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	menu_item=gtk_menu_item_new_with_label(_("Translated"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+		GTK_SIGNAL_FUNC(find_in_activated),
+		GINT_TO_POINTER(findTranslated));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	menu_item=gtk_menu_item_new_with_label(_("Both"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+		GTK_SIGNAL_FUNC(find_in_activated),
+		GINT_TO_POINTER(findBoth));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	menu_item=gtk_menu_item_new_with_label(_("Comments"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+		GTK_SIGNAL_FUNC(find_in_activated),
+		GINT_TO_POINTER(findComment));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	menu_item=gtk_menu_item_new_with_label(_("In all strings"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+		GTK_SIGNAL_FUNC(find_in_activated),
+		GINT_TO_POINTER(findAll));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	switch (wants.find_in) 
+	{
+		case findEnglish:    
+			findMenu = 0; 
+			break;
+			
+		case findTranslated: 
+			findMenu = 1; 
+			break;
+			
+		case findBoth:       
+			findMenu = 2; 
+			break;
+			
+		case findComment:    
+			findMenu = 3; 
+			break;
+			
+		case findAll:        
+			findMenu = 4; 
+			break;
+	}
+	gtk_menu_set_active(GTK_MENU(menu), findMenu);
+
+	find_in=gtk_label_new(_("Replace in:"));
+	option=gtk_option_menu_new();
+	gtk_option_menu_set_menu(GTK_OPTION_MENU(option), menu);
+
+	hbox=gtk_hbox_new(FALSE, 0);
+
+	/*
+	 * Pack the single elements into the dialog.
+	 */
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
+		FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), 
+		findy, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), sndlabel,
+		FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), 
+		replacy, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), match_case,
+		FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), find_in,
+		FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), option,
+		TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), hbox,
+		FALSE, FALSE, 0);
+	
+	gtk_signal_connect(GTK_OBJECT(match_case), "toggled",
+		GTK_SIGNAL_FUNC(match_case_toggled), NULL);
+	gtk_window_set_focus(GTK_WINDOW(dialog), 
+		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
+
+	show_nice_dialog(&dialog, "gtranslator -- replace");
+	
+	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+
+	if(reply==2)
+	{
+		gnome_dialog_close(GNOME_DIALOG(dialog));
+	}
+	else
+	{
+		gchar *findme, *replaceme;
+		GtrReplace *rpl;
+
+		findme=gtk_editable_get_chars(GTK_EDITABLE(gnome_entry_gtk_entry(
+			GNOME_ENTRY(findy))), 0, -1);
+
+		replaceme=gtk_editable_get_chars(GTK_EDITABLE(gnome_entry_gtk_entry(
+			GNOME_ENTRY(replacy))), 0, -1);
+
+		if(reply==1)
+		{
+			rpl=gtranslator_replace_new(findme, replaceme, TRUE);
+		}
+		else
+		{
+			rpl=gtranslator_replace_new(findme, replaceme, FALSE);
+		}
+
+		gtranslator_replace_run(rpl);
+
+		gnome_dialog_close(GNOME_DIALOG(dialog));
+	}
+	
 }
 
 /* 
@@ -707,13 +858,14 @@ void query_dialog(void)
 				GtkWidget *condialog=NULL;
 				gint hehue;
 
+				gnome_dialog_close(GNOME_DIALOG(dialog));
+
 				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\".\n\
 Would you like to insert it into the translation?"),
 					result->translation, result->domain);
 
 				gtranslator_free_query(&query);
 				
-				gnome_dialog_close(GNOME_DIALOG(dialog));
 
 				/*
 				 * Build up another dialog and show up the
@@ -729,8 +881,11 @@ Would you like to insert it into the translation?"),
 				 * Run the dialog and switch the action to take
 				 *  depending on the user's selection.
 				 */
-				hehue=gnome_dialog_run(GNOME_DIALOG(condialog));
+				show_nice_dialog(&condialog, "gtranslator -- query result");
+				hehue=gnome_dialog_run_and_close(GNOME_DIALOG(condialog));
+				
 				g_free(resulttext);
+				
 				if(hehue==GNOME_YES)
 				{
 					gchar *content;

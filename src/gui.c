@@ -163,6 +163,7 @@ static GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_FIND_ITEM(find_dialog, NULL),
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(find_do, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM(replace_dialog, NULL),
 	{
 		GNOME_APP_UI_ITEM, N_("_Query"),
 		N_("Query for a string"),
@@ -368,6 +369,10 @@ static GnomeUIInfo the_navibar[] = {
 			       N_("Find string in po-file"),
 			       find_dialog,
 			       GNOME_STOCK_PIXMAP_SEARCH),
+	GNOMEUIINFO_ITEM_STOCK(N_("Replace"),
+			       N_("Replace string in po-file"),
+			       replace_dialog,
+			       GNOME_STOCK_PIXMAP_SRCHRPL),
 	GNOMEUIINFO_ITEM_STOCK(N_("Query"),
 			       N_("Query for a string"),
 			       query_dialog,
@@ -472,8 +477,9 @@ static void create_actions(void)
 	insert_action(ACT_CLEAR, the_edit_menu[5], NONE);
 	insert_action(ACT_FIND, the_edit_menu[7], the_navibar[8]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
-	insert_action(ACT_QUERY, the_edit_menu[9], the_navibar[9]);
-	insert_action(ACT_HEADER, the_edit_menu[11], the_toolbar[6]);
+	insert_action(ACT_REPLACE, the_edit_menu[9], the_navibar[9]);
+	insert_action(ACT_QUERY, the_edit_menu[10], the_navibar[10]);
+	insert_action(ACT_HEADER, the_edit_menu[12], the_toolbar[6]);
 	/*------------------------------------------------*/
 	insert_action(ACT_FIRST, the_messages_menu[0], the_navibar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_navibar[1]);
@@ -496,7 +502,7 @@ void disable_actions_no_file(void)
 			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
 			ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
-			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST,
+			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
@@ -505,7 +511,7 @@ void disable_actions_no_file(void)
 void enable_actions_just_opened(void)
 {
 	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_ACCOMPLISH,
-			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
+			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR, ACT_REPLACE,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
 	/*

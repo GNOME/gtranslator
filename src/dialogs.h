@@ -63,6 +63,11 @@ void query_dialog(void);
 void accomplish_dialog(void);
 
 /*
+ * A replace dialog based onto the find functions.
+ */
+void replace_dialog(GtkWidget *widget, gpointer useless);
+
+/*
  * The "Go to" dialog.
  */
 void goto_dlg(GtkWidget * widget, gpointer useless);
