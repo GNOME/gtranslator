@@ -50,9 +50,10 @@ gboolean for_each_msg(GList * begin, FEFunc func, gpointer user_data)
 static gboolean find_in_msg(GList * msg, gpointer useless)
 {
 	regmatch_t pos[1];
-	if (GTR_MSG(msg->data)->msgstr==NULL) 
+	if ((wants.find_in != 0) && (GTR_MSG(msg->data)->msgstr == NULL))
 		return FALSE;
-	if (!regexec(target, GTR_MSG(msg->data)->msgstr, 1, pos, 0))
+	if ((wants.find_in != 0) &&
+	    (!regexec(target, GTR_MSG(msg->data)->msgstr, 1, pos, 0)))
         {
 		/* We found it */
 		goto_given_msg(msg);
@@ -60,15 +61,20 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 					   pos->rm_so, pos->rm_eo);
 		return TRUE;
 	}
-        else 
+	if ((wants.find_in != 1) &&
+	    (!regexec(target, GTR_MSG(msg->data)->msgid, 1, pos, 0)))
         {
-        	return FALSE;	
-        }                
+		/* We found it */
+		goto_given_msg(msg);
+		gtk_editable_select_region(GTK_EDITABLE(text1),
+					   pos->rm_so, pos->rm_eo);
+		return TRUE;
+	}
+        return FALSE;	
 }
 
 /**
 * The real search function
-* FIXME: this searches only msgstrs!
 **/
 void find_do(GtkWidget * widget, gpointer what)
 {

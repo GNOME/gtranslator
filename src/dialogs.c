@@ -180,6 +180,15 @@ static void match_case_toggled(GtkWidget * widget, gpointer useless)
 	gtranslator_config_close();
 }
 
+static void find_in_activated(GtkWidget * widget, gpointer which)
+{
+	wants.find_in = GPOINTER_TO_INT(which);
+	gtranslator_config_init();
+	gtranslator_config_set_int("find/find_in",
+			      wants.find_in);
+	gtranslator_config_close();
+}
+
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 			     gpointer findy)
 {
@@ -197,7 +206,8 @@ static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 void find_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
-	GtkWidget *label, *findy, *match_case, *find_in, *menu, *option, *hbox;
+	GtkWidget *label, *findy, *match_case;
+	GtkWidget *find_in, *menu, *menu_item, *option, *hbox; 
 
 	raise_and_return_if_exists(dialog);
 	dialog = gnome_dialog_new(_("Find in the po-file"), _("Find"),
@@ -213,12 +223,21 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 				     wants.match_case);
 
 	menu = gtk_menu_new();
-	gtk_menu_append(GTK_MENU(menu), 
-		gtk_menu_item_new_with_label(_("English")));
-	gtk_menu_append(GTK_MENU(menu), 
-		gtk_menu_item_new_with_label(_("Translated")));
-	gtk_menu_append(GTK_MENU(menu), 
-		gtk_menu_item_new_with_label(_("Both")));
+	menu_item = gtk_menu_item_new_with_label(_("English"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+			   GTK_SIGNAL_FUNC(find_in_activated),
+			   GINT_TO_POINTER(0));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	menu_item = gtk_menu_item_new_with_label(_("Translated"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+			   GTK_SIGNAL_FUNC(find_in_activated),
+			   GINT_TO_POINTER(1));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	menu_item = gtk_menu_item_new_with_label(_("Both"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+			   GTK_SIGNAL_FUNC(find_in_activated),
+			   GINT_TO_POINTER(2));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
 	gtk_menu_set_active(GTK_MENU(menu), wants.find_in);
 
 	find_in = gtk_label_new(_("Find in: "));
