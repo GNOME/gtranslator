@@ -1,5 +1,12 @@
 2001-07-18  Kevin Vandersloot <kfv101@psu.edu>
 
+	* messages-table.[c,h] (_save_state): New function to
+		save the e-tree state. Also load the state in
+		 messages_table_new. Commented out until someone
+		  else determines where to save this.
+
+2001-07-18  Kevin Vandersloot <kfv101@psu.edu>
+
 	* messages-table.c: add a hash table to associate an
 		ETreePath with each message. Use it in update_row
 		 so that function now works.

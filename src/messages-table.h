@@ -51,6 +51,11 @@ void gtranslator_messages_table_create(void);
 void gtranslator_messages_table_update_row(GtrMsg *message); 
 
 /*
+ * Save the e-tree state
+ */
+void gtranslator_messages_table_save_state(void);
+
+/*
  * Show/hide and toggle routines accordingly to the 
  *  existing sidebar routines.
  */

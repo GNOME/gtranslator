@@ -340,6 +340,10 @@ GtkWidget *gtranslator_messages_table_new()
 	
 	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
 	
+	/* FIXME: determine where to save this as well as in the save function below
+	e_tree_load_state (E_TREE (tree), "where");
+	*/
+	
 	g_free(statusfile);
 	
 	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
@@ -392,6 +396,16 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
 	node=g_hash_table_lookup(hash_table,message);
 	
 	e_tree_model_node_data_changed (tree_model, node);
+}
+
+/*
+ * Save the e-tree state
+ */
+void gtranslator_messages_table_save_state()
+{
+	/* FIXME: determine where to save this
+	e_tree_save_state (E_TREE (tree), "where");
+	*/
 }
 
 /*
