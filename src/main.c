@@ -78,17 +78,14 @@ static struct poptOption gtranslator_options[] = {
 	 	NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
 	 	0, NULL, NULL
 	},
-	/* FIXME: Enable again if working...
 	{
 		"auto-translate", 'a', POPT_ARG_STRING, &auto_translate_file,
 		0, N_("Auto translate the po file & exit"), N_("FILENAME")
 	},
-	*/
 	{
 		"build-information", 'b', POPT_ARG_NONE, &build_information,
 		0, N_("Show build information/specifications"), NULL
 	},
-	/* FIXME: Enable when working again...
 	{
 		"export-learn-buffer", 'e', POPT_ARG_STRING, &exporting_po_file,
 		0, N_("Export learn buffer to a plain po file"), N_("PO_FILE")
@@ -97,7 +94,6 @@ static struct poptOption gtranslator_options[] = {
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0, N_("Specify main window geometry"), N_("GEOMETRY")
 	},
-	*/
 	{
 		"learn", 'l', POPT_ARG_STRING, &learn_file,
 		0, N_("Learn the file completely & exit"), N_("FILENAME")

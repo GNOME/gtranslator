@@ -1,5 +1,11 @@
 2003-01-12  Fatih Demir <kabalak@gtranslator.org>
 
+	* main.c: Re-enable the now should-be-working functions and parts.
+
+	* utils.h: Remove non-defined function declarations - there were
+		mostly "gtranslator_utf8_get_plain*" functions which are now
+		 not existing anymore and not necessary due to Gtk+ 2.x. 
+
 	* learn.c: Smaller modifications to the learn buffer stuff to work now
 		really per UTF-8 and to get the point 'bout the premiereversion
 		 now right - this was causing the probs with the learn buffer

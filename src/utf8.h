@@ -39,16 +39,4 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg);
 void gtranslator_utf8_convert_po_to_utf8(void);
 void gtranslator_utf8_convert_po_from_utf8(void);
 
-/*
- * Gets the UTF-8 part of the current string/message and ports it into "plain"
- *  form.
- */
-gchar *gtranslator_utf8_get_plain_string(gchar **string); 
-gchar *gtranslator_utf8_get_plain_msgstr(GtrMsg **message); 
-
-/*
- * Get me the back to UTF-8!
- */
-gchar *gtranslator_utf8_get_utf8_string(gchar **string); 
-
 #endif
