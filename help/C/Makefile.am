@@ -2,6 +2,8 @@
 ## gtranslator's docs Makefile.am.
 ##
 
+SUBDIRS = figures
+
 ##
 ## Your language locale -- C for the English original manual.
 ##
