@@ -18,7 +18,6 @@
  *
  */
 
-#include <gdk/gdkkeysyms.h>
 #include "defines.include"
 #include "gui.h"
 #include "messages-table.h"
@@ -28,6 +27,10 @@
 #include "preferences.h"
 #include "utils.h"
 #include "utf8.h"
+
+#include <gdk/gdkkeysyms.h>
+
+#include <gal/widgets/e-unicode.h>
 
 #include <gal/e-paned/e-paned.h>
 
@@ -209,21 +212,21 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	if (path == unknown_node)
 	{
 		if (column == COL_ORIGINAL)
-			return _("UNTRANSLATED");
+			return e_utf8_from_locale_string(_("UNTRANSLATED"));
 		else
 			return NULL;
 	}
 	if (path == fuzzy_node)
 	{
 		if (column == COL_ORIGINAL)
-			return _("FUZZY");
+			return e_utf8_from_locale_string(_("FUZZY"));
 		else
 			return NULL;
 	}
 	if (path == translated_node)
 	{
 		if (column == COL_ORIGINAL)
-			return _("TRANSLATED");
+			return e_utf8_from_locale_string(_("TRANSLATED"));
 		else
 			return NULL;
 	}
@@ -253,17 +256,17 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	case COL_STATUS:
 		switch(message->status) {
 		case GTR_MSG_STATUS_UNKNOWN:
-			return _("Untranslated");
+			return e_utf8_from_locale_string(_("Untranslated"));
 			break;
 		case GTR_MSG_STATUS_TRANSLATED:
-			return _("Translated");
+			return e_utf8_from_locale_string(_("Translated"));
 			break;
 		case GTR_MSG_STATUS_STICK:
-			return _("Sticky");
+			return e_utf8_from_locale_string(_("Sticky"));
 			break;
 		case GTR_MSG_STATUS_FUZZY:
 		default:
-			return _("Fuzzy");
+			return e_utf8_from_locale_string(_("Fuzzy"));
 		}		
 		break;
 	case COL_NUMBER:

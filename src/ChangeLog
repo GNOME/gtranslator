@@ -1,5 +1,9 @@
 2001-08-10  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c: Translate the column names and "group" names into
+		UTF8 via "e_utf8_from_locale_string" for proper display on
+		 locales.
+
 	* undo.c: The position for the undo could also be 0 so that we check
 		the position for being ">= 0" in "gtranslator_undo_run_undo",
 		 also activate the ACT_UNDO action on any registering of an
