@@ -198,7 +198,7 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	void *data)
 {
 	GtrMsg *message;
-	
+
 	message = e_tree_memory_node_get_data (tree_memory, path);
 	g_return_val_if_fail(message!=NULL, NULL);
 	g_return_val_if_fail(file_opened==TRUE, NULL);
@@ -272,24 +272,27 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 	}
 }
 
-static void
-row_selected (ETree *tree, int row, ETreePath node, gpointer data)
+static gint
+row_selected (ETree *tree, int row, ETreePath node, int column, GdkEvent *event, gpointer data)
 {
 	GtrMsg *message;
 	gint model_row;
 	
-	message=e_tree_memory_node_get_data (tree_memory, node);
-	g_return_if_fail(message!=NULL);
+	if (event->button.button != 1)
+		return FALSE;
+	if (!node)
+		return FALSE;
 	
-	/*
-	 * This sucks. Should use e_tree_view_to_model_row here
-	 * but that seems to return the view row. Sigh.
-	 */
-	model_row=g_list_index(po->messages, message);
+	message=e_tree_memory_node_get_data (tree_memory, node);
+	g_return_val_if_fail(message!=NULL, FALSE);
+	
+	model_row=message->no - 1;
 	
 	if (model_row<0)
-		return;
+		return FALSE;
 	gtranslator_message_go_to(g_list_nth(po->messages, model_row));
+	
+	return FALSE;
 }
 
 /*
@@ -391,7 +394,7 @@ GtkWidget *gtranslator_messages_table_new()
 	GTR_FREE(statusfile);
 	
 	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
-	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
+	gtk_signal_connect(GTK_OBJECT(tree), "click",
 		GTK_SIGNAL_FUNC(row_selected), NULL);
 
 	return messages_tree;
@@ -472,8 +475,9 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 	ETreePath node=NULL;
 	
 	g_return_if_fail(message!=NULL);
+	
 	node=g_hash_table_lookup(hash_table, message);
-
+	
 	if(node)
 	{
 		e_tree_set_cursor(E_TREE(tree), node);

@@ -1,3 +1,12 @@
+2001-07-31  Kevin Vandersloot <kfv101@psu.edu>
+
+	* messages-table.c (_messages_table_new): hook up to the
+		"click" signal to get select_row working. 
+	(row_selected): check to see that the left mouse button
+		did the clicking
+	(row_selected): get the model_row from the message number instead
+		of g_list_index. Speeds things up a bit.
+
 2001-07-31  Fatih Demir <kabalak@gtranslator.org>
 
 	* parse.c: Call up "gtranslator_messages_table_select_row" when navigating with
