@@ -26,12 +26,6 @@
  * Small conversion helper functions to enable re-coding.
  */
 
-/*
- * Converts from_encoding (per default "iso-8859-1") to to_encoding using
- *  iconv.
- */
-gchar *gtranslator_convert_string(const gchar *string,
-	const gchar *from_encoding, const gchar *to_encoding);
 
 /*
  * Simple wrappers for converting from/to UTF-8.

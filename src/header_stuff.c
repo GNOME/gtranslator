@@ -292,25 +292,13 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 
 	if (!GtrPreferences.fill_header) {
 		
-		if(po->utf8)
+		if(ph->translator)
 		{
-			if(ph->translator)
-			{
-				prev_translator=g_strdup(ph->translator);
-				GTR_FREE(ph->translator);
-			}
-			
-			ph->translator=gtranslator_utf8_get_gtk_entry_as_utf8_string(translator);
+			prev_translator=g_strdup(ph->translator);
+			GTR_FREE(ph->translator);
 		}
-		else
-		{
-			if(ph->translator)
-			{
-				prev_translator=g_strdup(ph->translator);
-			}
-			
-			update(ph->translator, translator);
-		}
+		
+		ph->translator = gtk_editable_get_chars(GTK_EDITABLE(translator),0,-1);
 		
 		if(ph->tr_email)
 		{
@@ -327,27 +315,12 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 #define replace(what,with,entry) GTR_FREE(what); what = g_strdup(with);\
 	gtk_entry_set_text(GTK_ENTRY(entry), with);
 	
-		if(po->utf8)
+		if(ph->translator)
 		{
-			if(ph->translator)
-			{
-				prev_translator=g_strdup(ph->translator);
-				GTR_FREE(ph->translator);
-			}
-			
-			ph->translator=g_strdup(gtranslator_translator->name);
-			gtranslator_utf8_set_gtk_entry_from_utf8_string(translator, 
-				gtranslator_translator->name);
+			prev_translator=g_strdup(ph->translator);
 		}
-		else
-		{
-			if(ph->translator)
-			{
-				prev_translator=g_strdup(ph->translator);
-			}
-
-			replace(ph->translator, gtranslator_translator->name, translator);
-		}
+		
+		replace(ph->translator, gtranslator_translator->name, translator);
 
 		if(ph->tr_email)
 		{
@@ -452,19 +425,8 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	 */
 	ph->comment=gtranslator_header_comment_convert_for_view(ph->comment);
 
-	if(po->utf8)
-	{
-		gchar	*plain_comment_string=NULL;
-
-		plain_comment_string=gtranslator_utf8_get_plain_string(&ph->comment);
-		prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0,
-			plain_comment_string, _("Comments:"), G_CALLBACK(gtranslator_header_edit_changed));
-	}
-	else
-	{
-		prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0, _("Comments:"),
-			ph->comment, G_CALLBACK(gtranslator_header_edit_changed));
-	}
+	prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0, _("Comments:"),
+							     ph->comment, G_CALLBACK(gtranslator_header_edit_changed));
 	
 	gtk_widget_set_usize(prj_comment, 360, 90);
 	
@@ -510,20 +472,8 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
 	gtk_box_pack_start(GTK_BOX(lang_vbox), lang_page, TRUE, TRUE, 0);
 
-	if(po->utf8)
-	{
-		gchar	*plain_author_string=NULL;
-
-		plain_author_string=gtranslator_utf8_get_plain_string(&ph->translator);
-
-		translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
-			_("Translator's name:"), plain_author_string, G_CALLBACK(gtranslator_header_edit_changed));
-	}
-	else
-	{
-		translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
-			_("Translator's name:"), ph->translator, G_CALLBACK(gtranslator_header_edit_changed));
-	}
+	translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
+							     _("Translator's name:"), ph->translator, G_CALLBACK(gtranslator_header_edit_changed));
 
 	tr_email =
 	    gtranslator_utils_attach_entry_with_label(lang_page, 2, _("Translator's e-mail:"),
@@ -652,14 +602,7 @@ gchar *gtranslator_header_comment_convert_for_view(gchar *comment)
 
 	g_strfreev(stringarray);
 
-	if(po->utf8)
-	{
-		return gtranslator_utf8_get_plain_string(&mystring->str);
-	}
-	else
-	{
-		return mystring->str;
-	}
+	return mystring->str;
 }
 
 /*
@@ -698,14 +641,7 @@ gchar *gtranslator_header_comment_convert_for_save(gchar *comment)
 	
 	g_strfreev(stringarray);
 	
-	if(po->utf8)
-	{
-		return (gtranslator_utf8_get_utf8_string(&mystring->str));
-	}
-	else
-	{
-		return mystring->str;
-	}
+	return mystring->str;
 }
 
 static gchar * get_current_year(void)

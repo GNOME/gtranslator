@@ -261,14 +261,15 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Perform all the packing action between the EPaneds.
 	 */
-	gtk_paned_pack1(GTK_PANED(content_pane), extra_content_view->box, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(content_pane), vertical_box, TRUE, FALSE);
+	gtk_paned_pack1(GTK_PANED(content_pane), extra_content_view->box, 
+			TRUE, FALSE);
+	gtk_paned_pack2(GTK_PANED(content_pane), vertical_box, FALSE, TRUE);
 
 	messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), gtranslator_messages_table);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_paned_pack1(GTK_PANED(table_pane), messages_table_scrolled_window, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(table_pane), content_pane, TRUE, FALSE);
+	gtk_paned_pack1(GTK_PANED(table_pane), messages_table_scrolled_window, FALSE, TRUE);
+	gtk_paned_pack2(GTK_PANED(table_pane), content_pane, FALSE, TRUE);
 	
 	gnome_app_set_contents(GNOME_APP(gtranslator_application), table_pane);
 
@@ -281,7 +282,10 @@ void gtranslator_create_main_window(void)
 
 	// XXX
 	text_box = GTK_TEXT_VIEW(gtk_text_view_new ());
-
+	gtk_text_view_set_editable(text_box, FALSE);
+	gtk_text_view_set_wrap_mode(text_box, GTK_WRAP_CHAR);
+	gtk_text_view_set_cursor_visible(text_box, FALSE);
+	
 //	text_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_box_view));
 
 	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), GTK_WIDGET(text_box));
@@ -294,7 +298,9 @@ void gtranslator_create_main_window(void)
 				       GTK_POLICY_AUTOMATIC);
 
 	trans_box = GTK_TEXT_VIEW(gtk_text_view_new());
-//	trans_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (trans_box_view));
+	gtk_text_view_set_editable(trans_box, TRUE);
+	gtk_text_view_set_wrap_mode(trans_box, GTK_WRAP_CHAR);
+	gtk_text_view_set_cursor_visible(trans_box, TRUE);
 
 	gtk_container_add(GTK_CONTAINER(translation_text_scrolled_window), GTK_WIDGET(trans_box));
 

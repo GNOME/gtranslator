@@ -51,15 +51,4 @@ gchar *gtranslator_utf8_get_plain_msgstr(GtrMsg **message);
  */
 gchar *gtranslator_utf8_get_utf8_string(gchar **string); 
 
-/*
- * Get/Set the GtkEntry/GtkText contents to UTF-8 and return the result.
- */
-gchar *gtranslator_utf8_get_gtk_entry_as_utf8_string(GtkWidget *entry);
-gchar *gtranslator_utf8_get_gtk_text_as_utf8_string(GtkWidget *text);
-
-void gtranslator_utf8_set_gtk_entry_from_utf8_string(GtkWidget *entry, 
-	const gchar *utf8_string);
-void gtranslator_utf8_set_gtk_text_from_utf8_string(GtkWidget *text,
-	const gchar *utf8_string);
-
 #endif

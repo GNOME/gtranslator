@@ -258,13 +258,7 @@ void gtranslator_parse(const gchar *filename)
 	   properly encoded. Please fix it...
 	*/
 	if (po->utf8 == FALSE) {
-		GList *tmp = po->messages;
-		while (tmp != NULL) {
-			tmp->data = g_convert(tmp->data, strlen(tmp->data),
-					      "UTF-8", po->locale_charset,
-					      NULL, NULL, NULL);
-			tmp = tmp->next;
-		}				
+		gtranslator_utf8_convert_po_to_utf8();
 	}
 
 	/*
