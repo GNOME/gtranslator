@@ -289,9 +289,12 @@ static void edit_header_apply(GtkWidget * box, gint page_num, gpointer useless)
 	update(ph->comment, prj_comment);
 
 	/*
-	 * Convert the header comment back for save.
-	 */ 
+	 * Convert the header comment back for save and substitute the
+	 *  PACKAGE and VERSION fields in the header.
+	 */
 	ph->comment=prepare_comment_for_save(ph->comment);
+	replace_substring(&ph->comment, "PACKAGE", ph->prj_name);
+	replace_substring(&ph->comment, "VERSION", ph->prj_version);
 	
 	if (!wants.fill_header) {
 		update(ph->translator, translator);
@@ -607,15 +610,24 @@ void gtranslator_header_fill_up(GtrHeader *header)
 		now=time(NULL);
 		timebox=localtime(&now);
 
-		strftime(year, 4, "%Y", timebox);
+		strftime(year, 5, "%Y", timebox);
 		replace_substring(&header->comment, "YEAR", year);
 
 		/*
 		 * Should be a good description line .-)
 		 */
-		title=g_strdup_printf("%s translation of %s.",
-			language_in_english(header->language),
-			header->prj_name);
+		if(language_in_english(header->language))
+		{
+			title=g_strdup_printf("%s translation of %s.",
+				language_in_english(header->language),
+				header->prj_name);
+		}
+		else
+		{
+			title=g_strdup_printf("Translation of %s.",
+				language_in_english(header->language));	
+		}
+		
 		replace_substring(&header->comment,
 				"SOME DESCRIPTIVE TITLE.", title);
 		g_free(title);

@@ -68,7 +68,13 @@ gboolean gtranslator_views_set(GtrView view)
 		return FALSE;
 	}
 
-	index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
+	/*
+	 * Rescue the current position in the message view.
+	 */
+	if(current_view==GTR_MESSAGE_VIEW)
+	{
+		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
+	}
 
 	if(view!=current_view)
 	{
@@ -80,11 +86,6 @@ gboolean gtranslator_views_set(GtrView view)
 	 * First sync the text boxes with the po file data:
 	 */
 	gtranslator_views_prepare_for_navigation();
-
-	/*
-	 * Disable the save and undo actions.
-	 */
-	disable_actions(ACT_SAVE, ACT_UNDO);
 
 	switch(view)
 	{
@@ -111,7 +112,22 @@ gboolean gtranslator_views_set(GtrView view)
 				break;
 	}
 
-	gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+	/*
+	 * Disable view caused saves -- only if there'sn't been any
+	 *  save-valuable action yet.
+	 */
+	if(!po->file_changed)
+	{
+		disable_actions(ACT_SAVE, ACT_UNDO);
+	}
+
+	/*
+	 * Reset the pointer to it's previous position in the translation box.
+	 */
+	if(current_view==GTR_MESSAGE_VIEW)
+	{
+		gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+	}
 
 	return TRUE;
 }
@@ -279,28 +295,36 @@ void show_up_formats(GtkWidget *output_widget, const gchar *string)
 
 	for(z=0; z < (strlen(string) - 1); ++z)
 	{
-		if(string[z]=='%' && string[z+1])
+		if(string[z]=='%')
 		{
+			formats=g_string_append_c(formats, string[z]);
+			z++;
+			
+			/*
+			 * Recognize and get the formats.
+			 */
+			if(wants.dot_char)
+			{
+				if(string[z]!=_(" ")[0] && !ispunct(string[z]) && 
+					!iscntrl(string[z]))
+				{
+					formats=g_string_append_c(formats, string[z]);
+				}
+			}
+			else
+			{
+				if(string[z]!=_("·")[0] && !ispunct(string[z]) &&
+					!iscntrl(string[z]))
+				{
+					formats=g_string_append_c(formats, string[z]);
+				}
+			}
+			
 			if(rc > 1)
 			{
 				insert_space(&formats);
 			}
 			
-			formats=g_string_append_c(formats, string[z]);
-
-			/*
-			 * Recognize and get the formats.
-			 */
-			if(string[z+1]=='l' && string[z+2])
-			{
-				formats=g_string_append_c(formats, 'l');
-				formats=g_string_append_c(formats, string[z+2]);
-			}
-			else
-			{
-				formats=g_string_append_c(formats, string[z+1]);
-			}
-
 			rc++;
 		}
 	}

@@ -1,3 +1,22 @@
+2001-03-28  Fatih Demir <kabalak@gtranslator.org>
+
+	* views.c: Rewrite the C format routines according to the "new"
+		syntax highlight code for C formats.
+
+	* syntax.c & views.c: Put the gtk_editable_get/set_position to their
+		right positions -- corrects the view changing bug.
+
+	* header_stuff.c: Corrected the year getting/substituting and
+		also update the comment if the user changed the package
+		 name; check if there's a language set in the prefs ever
+		  before using it in the comment -- otherwise use a non-
+		   specific comment.
+
+	* syntax.c: Added Gediminas as an author, fixed C format error which
+		got into the sources; made the used special character appear
+		 translated or pure -- depending on the user preference --
+		  and did extend the C format recognizing a bit.
+
 2001-03-28  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gui.c: (insert_text_handler): new function. Moved simplified dot char

@@ -1,5 +1,6 @@
 /*
  * (C) 2001		Fatih Demir <kabalak@gtranslator.org>
+ *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,6 +20,7 @@
 
 #include "syntax.h"
 #include "parse.h"
+#include "prefs.h"
 #include "gui.h"
 
 #include <ctype.h>
@@ -96,9 +98,12 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	 *  to the text box.
 	 */
 	#define string_add(x); \
-		gtk_text_backward_delete(GTK_TEXT(textwidget), \
-			strlen(x)-1); \
-		string=g_string_append(string, x);
+		if(gtk_text_get_length(GTK_TEXT(textwidget)) > (strlen(x)-1)); \
+		{ \
+			gtk_text_backward_delete(GTK_TEXT(textwidget), \
+				strlen(x)-1); \
+			string=g_string_append(string, x); \
+		}
 
 	/*
 	 * An easifying macro for the new "back_match"function.
@@ -111,6 +116,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	GdkColor *color=NULL;
 	
 	gboolean aInserted;
+	gchar specialchar;
 	
 	gint cp;
 	gint z=0;
@@ -120,6 +126,15 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	if(!msg)
 	{
 		return;
+	}
+
+	if(wants.dot_char)
+	{
+		specialchar=_("·")[0];
+	}
+	else
+	{
+		specialchar=' ';
 	}
 
 	for(cp=0; cp < strlen(msg); ++cp)
@@ -136,9 +151,11 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			 */ 
 			case '_':
 				append_char(string, '_');
+				
 				if(msg[cp+1] && isalpha(msg[cp+1]))
 				{
-					append_char(string, msg[cp++]);
+					append_char(string, msg[cp+1]);
+					cp++;
 				}
 				
 				color = get_color_from_type(COLOR_HOTKEY);
@@ -147,19 +164,20 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 		
 			/*
 			 * Format specifiers:
-			 * FIXME: formats can be much more complex
 			 */
 			case '%':
 				append_char(string, msg[cp]);
-				if(msg[cp+1])
+				cp++;
+			
+				while(msg[cp] && msg[cp]!=specialchar &&
+					!ispunct(msg[cp]) && !iscntrl(msg[cp]))
 				{
-					append_char(string, msg[cp++]);
-					if(msg[cp]=='l' && msg[cp+1])
-					{
-						append_char(string, msg[cp++]);
-					}
+					append_char(string, msg[cp]);
+					cp++;
 				}
 
+				cp--;
+				
 				color = get_color_from_type(COLOR_C_FORMAT);
 
 				break;
@@ -180,17 +198,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				append_char(string, msg[cp]);
 				
 				color = get_color_from_type(COLOR_NUMBER);
-
-				break;
-
-			/*
-			 * "Special characters":
-			 * FIXME: it's not localized
-			 */
-			case '·':
-				append_char(string, msg[cp]);
-
-				color = get_color_from_type(COLOR_SPECIAL_CHAR);
 
 				break;
 
@@ -303,8 +310,19 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				 */
 				if(aInserted==FALSE)
 				{
-					color=NULL;
-					append_char(string, msg[cp]);
+					/*
+					 * Do we have got a "special character"?
+					 */
+					if(msg[cp]==specialchar)
+					{
+						color=get_color_from_type(COLOR_SPECIAL_CHAR);
+						append_char(string, msg[cp]);
+					}
+					else
+					{
+						color=NULL;
+						append_char(string, msg[cp]);
+					}
 				}
 
 				break;
@@ -340,7 +358,11 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 		gtranslator_syntax_insert_text(textwidget, text);
 		nothing_changes=FALSE;
 
-		gtk_editable_set_position(GTK_EDITABLE(textwidget), pos);
+		if(pos >= 0)
+		{
+			gtk_editable_set_position(GTK_EDITABLE(textwidget), 
+				pos);
+		}
 		
 		gtk_text_thaw(GTK_TEXT(textwidget));
 	}

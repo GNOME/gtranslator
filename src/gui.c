@@ -650,7 +650,6 @@ void create_app1(void)
 
 	gtranslator_history_show();
 
-	/* FIXME: these are duplicated in main() */
 	/*
 	 * Check if we'd to use special styles.
 	 */
@@ -670,10 +669,10 @@ void create_app1(void)
 	 */
 	gtk_signal_connect(GTK_OBJECT(app1), "delete_event",
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
-	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
-			   GTK_SIGNAL_FUNC(text_has_got_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
 			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
+	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
+			   GTK_SIGNAL_FUNC(text_has_got_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(text1), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
@@ -1129,8 +1128,7 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 	}
 
-	/* FIXME: this belongs to insert/delete text handlers */
-	gtranslator_syntax_update_text(trans_box);
+	gtranslator_syntax_update_text(widget);
 }
 
 /* When inserting text, exchange spaces with dot chars */
