@@ -93,9 +93,9 @@ void compile(GtkWidget *widget,gpointer useless)
 		/**
 		* If a filename has been set yet, then we can try to compile it.
 		**/
-		if((i_love_this_file!=NULL))
+		if((po->name!=NULL))
 		{
-			sprintf(cmd,"%s %s","msgfmt",i_love_this_file);
+			sprintf(cmd,"%s %s","msgfmt",po->name);
 			res=system(cmd);
 			/**
 			* If there has been an error show an error-box

@@ -68,10 +68,6 @@ void parse(gchar *po)
 	**/
 	check_file(fs);
 	/**
-	* Set the global filename
-	**/
-	i_love_this_file=po;
-	/**
 	* Parse the file ...
 	**/
 	while(

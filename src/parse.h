@@ -31,9 +31,9 @@
 #include "gtr_dialogs.h"
 
 /**
-* The new filename
+* The global structure for the file-handles.
 **/
-static gchar *i_love_this_file=NULL;
+gtr_po *po;
 
 /**
 * The counting variable for the messages.
