@@ -32,6 +32,10 @@ files immenantly.
 
 %changelog
 
+*  Tue Aug 21 2001 Fatih Demir	<kabalak@gtranslator.org>
+
+- Applied the future-proofness changes suggested by Mike Newman .-)
+
 *  Sat Aug 18 2001 Mike Newman <mike@gtnorthern.demon.co.uk>
 
 - Changed deps to need GConf rather than gconf.
@@ -127,9 +131,7 @@ scrollkeeper-update
 %{prefix}/lib/gtranslator/backends/*.xml
 %{prefix}/share/gtranslator/etspecs/*etspec
 %{prefix}/share/gnome/apps/Development/gtranslator*
-%{prefix}/share/pixmaps/gtranslator.png
-%{prefix}/share/pixmaps/gtranslator/*.png
-%{prefix}/share/pixmaps/gnome-application-x-gmo.png
-%{prefix}/share/pixmaps/gnome-application-x-po.png
+%{prefix}/share/pixmaps/*.png
+%{prefix}/share/pixmaps/gtranslator/*
 %{prefix}/share/mime-info/gtranslator.*
 %{prefix}/share/locale/*/LC_MESSAGES/gtranslator.mo
