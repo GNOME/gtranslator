@@ -321,9 +321,19 @@ dnl  it could be found.
 dnl -------------------------------------------------------------------
 AC_CHECK_PROG(sc_present, scrollkeeper-config, yes, no)
 if test "z$sc_present" = "zyes" ; then
-	SC_OMFDIR=`scrollkeeper-config --omfdir`
+	AC_MSG_CHECKING([for scrollkeeper >= 0.1.4])
+	_VERSION=`scrollkeeper-config --version|sed -e 's/\.//g'`
+	if test $_VERSION -ge 014 -o $_VERSION -ge 02; then
+		AC_MSG_RESULT(yes)
+		SC_STATEDIR=`scrollkeeper-config --pkglocalstatedir`
+		SC_OMFDIR=`scrollkeeper-config --omfdir`
+	else
+		AC_MSG_RESULT(no)
+		sc_present=no
+	fi
 fi
 AC_SUBST(SC_OMFDIR)
+AC_SUBST(SC_STATEDIR)
 AM_CONDITIONAL(SCROLLKEEPER_PRESENT, test z$sc_present = zyes)
 
 dnl -------------------------------------------------------------------

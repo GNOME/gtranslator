@@ -62,14 +62,14 @@ distclean-generic:
 
 if SCROLLKEEPER_PRESENT
 install-data-local: index.html
-	scrollkeeper-update
+	scrollkeeper-update -p $(DESTDIR)$(SC_STATEDIR)
 else	
 install-data-local: index.html
 endif
 
 if SCROLLKEEPER_PRESENT
 uninstall-local:
-	scrollkeeper-update
+	scrollkeeper-update -p $(DESTDIR)$(SC_STATEDIR)
 endif
 
 clean-docs:
