@@ -1040,7 +1040,11 @@ Saying \"No\" will delete the crash recovery file."),
 		 *  it now again.
 		 */ 
 		rename(file, original_filename);
-		gtranslator_parse_main(original_filename);
+
+		if(!gtranslator_open_po_file(original_filename))
+		{
+			gtranslator_parse_main(original_filename);
+		}
 	}
 	else if(reply==GNOME_NO)
 	{
