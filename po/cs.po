@@ -1,16 +1,16 @@
 # Czech translation of gtranslator.po
 # Copyright (C) 2003 Free Software Foundation
-# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>
+# Copyright (C) 2004, 2005 Miloslav Trmac <mitr@volny.cz>
 # This file is distributed under the same license as the gtranslator package.
 # Jaroslav Jiricka <jiricka@mujbox.cz>, 2003.
-# Miloslav Trmac <mitr@volny.cz>, 2004.
+# Miloslav Trmac <mitr@volny.cz>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-06 12:08+0100\n"
-"PO-Revision-Date: 2005-02-06 17:00+0100\n"
+"POT-Creation-Date: 2005-03-22 04:20+0100\n"
+"PO-Revision-Date: 2005-03-22 09:39+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -97,18 +97,31 @@ msgstr ""
 "Kompilace se zdařila:\n"
 "%s"
 
-#: src/dialogs.c:96
-msgid "gtranslator -- open po file"
-msgstr "gtranslator – otevřít katalog"
+#: src/dialogs.c:109
+msgid "Gettext translation"
+msgstr "Překlad gettext"
 
-#.
-#. * Let the user use the file selector to decide where to save it
-#.
-#: src/dialogs.c:135
-msgid "gtranslator -- save file as.."
-msgstr "gtranslator – uložit soubor jako..."
+#: src/dialogs.c:114
+msgid "Gettext translation template"
+msgstr "Šablona překladu gettext"
 
-#: src/dialogs.c:179
+#: src/dialogs.c:119
+msgid "All files"
+msgstr "Všechny soubory"
+
+#: src/dialogs.c:182
+msgid "Open file for translation"
+msgstr "Otevřít soubor pro překlad"
+
+#: src/dialogs.c:210
+msgid "Save file as..."
+msgstr "Uložit soubor jako..."
+
+#: src/dialogs.c:218
+msgid "Save local copy of file as..."
+msgstr "Uložt místní kopii souboru jako..."
+
+#: src/dialogs.c:261
 #, c-format
 msgid ""
 "File %s\n"
@@ -117,52 +130,52 @@ msgstr ""
 "Soubor %s\n"
 "byl změněn. Chcete změny uložit?"
 
-#: src/dialogs.c:221 src/dialogs.c:254
+#: src/dialogs.c:303 src/dialogs.c:336
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator – upravit komentář"
 
-#: src/dialogs.c:246
+#: src/dialogs.c:328
 msgid "Comment:"
 msgstr "Komentář:"
 
-#: src/dialogs.c:361
+#: src/dialogs.c:443
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Chcete smazat VŠECHNY překlady ze souboru `%s'?"
 
-#: src/dialogs.c:434
+#: src/dialogs.c:516
 msgid "gtranslator -- go to"
 msgstr "gtranslator – přejít na"
 
-#: src/dialogs.c:442
+#: src/dialogs.c:524
 msgid "Go to message number:"
 msgstr "Přejít na zprávu číslo:"
 
-#: src/dialogs.c:500
+#: src/dialogs.c:582
 msgid "Find in the po file"
 msgstr "Hledání v katalogu"
 
-#: src/dialogs.c:509
+#: src/dialogs.c:591
 msgid "Enter search string:"
 msgstr "Hledat:"
 
-#: src/dialogs.c:514
+#: src/dialogs.c:596
 msgid "Case sensitive"
 msgstr "Rozlišovat velikost"
 
-#: src/dialogs.c:519
+#: src/dialogs.c:601
 msgid "Find in:"
 msgstr "Prohledat:"
 
-#: src/dialogs.c:523 src/dialogs.c:652
+#: src/dialogs.c:605 src/dialogs.c:734
 msgid "Comments"
 msgstr "Komentáře"
 
-#: src/dialogs.c:526 src/dialogs.c:655 src/languages.c:101
+#: src/dialogs.c:608 src/dialogs.c:737 src/languages.c:101
 msgid "English"
 msgstr "Originál"
 
-#: src/dialogs.c:529 src/dialogs.c:658 src/messages-table.c:224
+#: src/dialogs.c:611 src/dialogs.c:740 src/messages-table.c:224
 msgid "Translation"
 msgstr "Překlad"
 
@@ -170,39 +183,39 @@ msgstr "Překlad"
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: src/dialogs.c:540
+#: src/dialogs.c:622
 msgid "Ignore hotkeys"
 msgstr "Ignorovat znaky označující horké klávesy"
 
-#: src/dialogs.c:631
+#: src/dialogs.c:713
 msgid "gtranslator -- replace"
 msgstr "gtranslator – nahradit"
 
-#: src/dialogs.c:635 src/menus.c:333
+#: src/dialogs.c:717 src/menus.c:333
 msgid "Replace"
 msgstr "Nahradit"
 
-#: src/dialogs.c:636
+#: src/dialogs.c:718
 msgid "Replace all"
 msgstr "Nahradit vše"
 
-#: src/dialogs.c:641
+#: src/dialogs.c:723
 msgid "String to replace:"
 msgstr "Hledat:"
 
-#: src/dialogs.c:644
+#: src/dialogs.c:726
 msgid "Replace string:"
 msgstr "Nahradit čím:"
 
-#: src/dialogs.c:649
+#: src/dialogs.c:731
 msgid "Replace in:"
 msgstr "Prohledat:"
 
-#: src/dialogs.c:719
+#: src/dialogs.c:801
 msgid "Please enter a string to replace!"
 msgstr "Prosím, zadejte nahrazovaný řetězec"
 
-#: src/dialogs.c:776
+#: src/dialogs.c:858
 #, c-format
 msgid ""
 "The file\n"
@@ -225,7 +238,7 @@ msgstr ""
 "\n"
 "Má gtranslator přesto tento soubor otevřít?"
 
-#: src/dialogs.c:817
+#: src/dialogs.c:899
 #, c-format
 msgid ""
 "File %s\n"
@@ -234,19 +247,19 @@ msgstr ""
 "Soubor %s\n"
 "byl změněn. Chcete se vrátit k uložené verzi?"
 
-#: src/dialogs.c:846
+#: src/dialogs.c:928
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator – otevřít URI"
 
-#: src/dialogs.c:858
+#: src/dialogs.c:940
 msgid "Enter URI:"
 msgstr "Zadejte URI:"
 
-#: src/dialogs.c:895
+#: src/dialogs.c:977
 msgid "No URI given!"
 msgstr "Nebylo zadáno URI."
 
-#: src/dialogs.c:909
+#: src/dialogs.c:991
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -271,7 +284,7 @@ msgstr ""
 "file:///<PO-SOUBOR> nebo\n"
 "http://www.DOMENA.COM/PO-SOUBOR"
 
-#: src/dialogs.c:949
+#: src/dialogs.c:1031
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -288,19 +301,19 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:961
+#: src/dialogs.c:1043
 msgid "Postpone decision"
 msgstr "Odložit rozhodnutí"
 
-#: src/dialogs.c:963
+#: src/dialogs.c:1045
 msgid "Ignore recovery file"
 msgstr "Ignorovat záložní soubor"
 
-#: src/dialogs.c:965
+#: src/dialogs.c:1047
 msgid "Recover file"
 msgstr "Obnovit soubor"
 
-#: src/dialogs.c:1018
+#: src/dialogs.c:1100
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -308,15 +321,15 @@ msgstr ""
 "Chcete, aby byl proveden automatický hrubý překlad katalogu\n"
 "na základě informací obsažených ve vaší překladové paměti?"
 
-#: src/dialogs.c:1058 src/dialogs.c:1086
+#: src/dialogs.c:1140 src/dialogs.c:1168
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator – přidat záložku s komentářem?"
 
-#: src/dialogs.c:1078
+#: src/dialogs.c:1160
 msgid "Comment for the bookmark:"
 msgstr "Komentář k záložce:"
 
-#: src/dialogs.c:1078
+#: src/dialogs.c:1160
 msgid "No comment"
 msgstr "Žádný komentář"
 
@@ -333,7 +346,7 @@ msgstr ""
 "Nemohu najít\n"
 "\"%s\""
 
-#: src/gui.c:384
+#: src/gui.c:397
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
@@ -341,20 +354,20 @@ msgstr[0] "%s [ Zbývá %i neúplně přeložená ]"
 msgstr[1] "%s [ Zbývají %i neúplně přeložené ]"
 msgstr[2] "%s [ Zbývá %i neúplně přeložených ]"
 
-#: src/gui.c:384 src/gui.c:388 src/menus.c:319 src/messages-table.c:272
+#: src/gui.c:397 src/gui.c:401 src/menus.c:319 src/messages-table.c:272
 msgid "Fuzzy"
 msgstr "Neúplně přeložené"
 
-#: src/gui.c:388
+#: src/gui.c:401
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Žádné neúplně přeložené zprávy ]"
 
-#: src/gui.c:397 src/messages-table.c:280
+#: src/gui.c:410 src/messages-table.c:280
 msgid "Translated"
 msgstr "Přeložené"
 
-#: src/gui.c:405
+#: src/gui.c:418
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
@@ -362,26 +375,26 @@ msgstr[0] "%s [ Zbývá %i nepřeložená ]"
 msgstr[1] "%s [ Zbývá %i nepřeložené ]"
 msgstr[2] "%s [ Zbývá %i nepřeložených ]"
 
-#: src/gui.c:405 src/gui.c:407 src/messages-table.c:264
+#: src/gui.c:418 src/gui.c:420 src/messages-table.c:264
 msgid "Untranslated"
 msgstr "Nepřeložené"
 
-#: src/gui.c:407
+#: src/gui.c:420
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Žádné nepřeložené zprávy ]"
 
-#: src/gui.c:426
+#: src/gui.c:439
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Zpráva %d z %d. Stav: %s (Zpráva s množnými čísly)"
 
-#: src/gui.c:430
+#: src/gui.c:443
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Zpráva %d z %d. Stav: %s"
 
-#: src/gui.c:733 src/page.c:98
+#: src/gui.c:746 src/page.c:98
 msgid "Edit comment"
 msgstr "Upravit komentář"
 
@@ -1485,17 +1498,17 @@ msgstr "Nemohu vytvořit adresář `%s'!"
 msgid "Error autosaving file: %s"
 msgstr "Chyba při automatickém ukládání souboru: %s"
 
-#: src/utils_gui.c:142
+#: src/utils_gui.c:141
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Řetězec \"%s\" určující geometrii není platný."
 
-#: src/utils_gui.c:356
+#: src/utils_gui.c:355
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Program `%s' potřebný pro dekompresi nebyl nalezen."
 
-#: src/utils_gui.c:361
+#: src/utils_gui.c:360
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Program `%s' potřebný pro komprimaci nebyl nalezen."
@@ -1533,3 +1546,6 @@ msgstr "Počítač `%s' nemá adresu."
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Přenos byl přerušen!"
+
+#~ msgid "gtranslator -- save file as.."
+#~ msgstr "gtranslator – uložit soubor jako..."
