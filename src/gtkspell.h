@@ -16,12 +16,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#ifndef GTR_GTKSPELL_H
-#define GTR_GTKSPELL_H 1
+#ifndef __gtkspell_h__
+#define __gtkspell_h__ 1
 
 #include <gtk/gtktext.h>
 
 /* PLEASE NOTE that this API is unstable and subject to change. */
+#define GTKSPELL_VERSION "0.3.2"
 
 extern int gtkspell_start(char *path, char *args[]);
 /* Spawns the spell checking program.
@@ -47,15 +48,15 @@ extern int gtkspell_start(char *path, char *args[]);
  */
 
 
-extern void gtkspell_stop(void);
+extern void gtkspell_stop();
 /* Stop the spellchecking program.
  * This kills the spell checker's process and frees memory.
  */
 
-extern int gtkspell_running(void);
+extern int gtkspell_running();
 /* Is gtkspell running?
  *
- * Returns:
+ * Return:
  * 	nonzero if it running
  * 	zero if is not running
  *
@@ -101,4 +102,4 @@ void gtkspell_uncheck_all(GtkText *gtktext);
  *  - "text" is the widget to check.
  */
 
-#endif
+#endif /* __gtkspell_h__ */
