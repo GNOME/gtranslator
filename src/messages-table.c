@@ -371,6 +371,8 @@ void gtranslator_messages_table_create (void)
   {
 	gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
   }
+
+  po->table_already_created=TRUE;
 }
 
 /*

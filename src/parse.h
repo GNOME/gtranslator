@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -70,6 +70,11 @@ typedef struct {
 	 * Is the file write-permitted?
 	 */
 	gboolean no_write_perms;
+
+	/*
+	 * Did we already create the table for the po file.
+	 */
+	gboolean table_already_created;
 	
 	/*
 	 * The translated entries. 

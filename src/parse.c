@@ -625,6 +625,14 @@ void gtranslator_parse_main(const gchar *filename)
 	if(po->header)
 	{
 		/*
+		 * Fix b.g.o #120596 via checking for our table to be present.
+		 */
+		if(GtrPreferences.show_messages_table && !po->table_already_created)
+		{
+			gtranslator_messages_table_create();
+		}
+
+		/*
 		 * If we've got still some default values,
 		 * substitute with values from preferences,
 		 */

@@ -1,3 +1,12 @@
+2003-08-26  Fatih Demir <kabalak@gtranslator.org>
+
+	* messages-table.c & parse.[ch]: Added the "table_already_created"
+		gboolean value to the GtrPo structure which gets set to "TRUE"
+		 if the messages table has been built up - fixes b.g.o #120596
+		  which caused a crash due to a non-created messages table
+		   though being the translation changed and updated (replacing
+		    the PACKAGE and VERSION keywords).
+
 2003-08-25  Fatih Demir <kabalak@gtranslator.org>
 
 	* message.c: Also update the translation facts if we're copying a
