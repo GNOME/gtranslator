@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.30\n"
-"POT-Creation-Date: 2001-03-08 19:00+0000\n"
-"PO-Revision-Date: 2001-02-21 14:00+0300\n"
+"Project-Id-Version: gtranslator 0.37\n"
+"POT-Creation-Date: 2001-03-12 19:11+0000\n"
+"PO-Revision-Date: 2001-03-12 20:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -52,19 +52,19 @@ msgstr "V‰riteemahakemiston `%s' avaaminen ei onnistunut!"
 msgid "Couldn't open specific color schemes directory `%s'!"
 msgstr "M‰‰ritellyn v‰riteemahakemiston `%s' avaaminen ei onnistunut!"
 
-#: src/dialogs.c:83
+#: src/dialogs.c:84
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- avaa po-tiedosto"
 
-#: src/dialogs.c:125
+#: src/dialogs.c:126
 msgid "gtranslator -- save file as.."
-msgstr "gtranslator -- tallenna nimell‰ .."
+msgstr "gtranslator -- tallenna nimell‰.."
 
-#: src/dialogs.c:129
+#: src/dialogs.c:130
 msgid "gtranslator -- save local copy of file as.."
-msgstr "gtranslator -- tallenna paikallinen kopio nimell‰ .."
+msgstr "gtranslator -- tallenna paikallinen kopio nimell‰.."
 
-#: src/dialogs.c:181
+#: src/dialogs.c:182
 #, c-format
 msgid ""
 "File %s\n"
@@ -73,88 +73,108 @@ msgstr ""
 "Tiedostoa %s\n"
 "on muutettu. Tallenna?"
 
-#: src/dialogs.c:222
+#: src/dialogs.c:223
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- siirry"
 
-#: src/dialogs.c:222
+#: src/dialogs.c:223
 msgid "Go!"
 msgstr "Siirry!"
 
-#: src/dialogs.c:228
+#: src/dialogs.c:229
 msgid "Go to message number:"
 msgstr "Siirry tekstinumeroon:"
 
-#: src/dialogs.c:297
+#: src/dialogs.c:298
 msgid "Find in the po-file"
 msgstr "Etsi po-tiedostosta"
 
-#: src/dialogs.c:297 src/gui.c:367
+#: src/dialogs.c:298 src/gui.c:368
 msgid "Find"
 msgstr "Etsi"
 
-#: src/dialogs.c:300
+#: src/dialogs.c:301
 msgid "Enter your desired search string:"
 msgstr "Anna haluamasi merkkijono etsitt‰v‰ksi:"
 
-#: src/dialogs.c:303
+#: src/dialogs.c:304 src/dialogs.c:405
 msgid "Case sensitive"
 msgstr "Kirjainkoolla on v‰il‰"
 
-#: src/dialogs.c:308 src/languages.h:112
+#: src/dialogs.c:309 src/dialogs.c:410 src/languages.h:112
 msgid "English"
 msgstr "Englanti"
 
-#: src/dialogs.c:314 src/gui.c:896
+#: src/dialogs.c:315 src/dialogs.c:416 src/gui.c:902
 msgid "Translated"
 msgstr "K‰‰nnetty"
 
-#: src/dialogs.c:320
+#: src/dialogs.c:321 src/dialogs.c:422
 msgid "Both"
 msgstr "Molemmat"
 
-#: src/dialogs.c:326
+#: src/dialogs.c:327 src/dialogs.c:428
 msgid "Comments"
 msgstr "Kommentit"
 
-#: src/dialogs.c:332
+#: src/dialogs.c:333 src/dialogs.c:434
 msgid "In all strings"
 msgstr "Kaikista merkkijonoista"
 
-#: src/dialogs.c:347
+#: src/dialogs.c:348
 msgid "Find in: "
-msgstr "Mist‰ etsit‰‰n:"
+msgstr "Mist‰ etsit‰‰n: "
 
-#: src/dialogs.c:392
+#: src/dialogs.c:393 src/dialogs.c:394 src/gui.c:372
+msgid "Replace"
+msgstr "Korvaa"
+
+#: src/dialogs.c:395
+msgid "Replace all"
+msgstr "Korvaa kaikki"
+
+#: src/dialogs.c:399
+msgid "String to replace:"
+msgstr "Korvattava merkkijono:"
+
+#: src/dialogs.c:402
+msgid "Replace string:"
+msgstr "Korvaava merkkijono:"
+
+#: src/dialogs.c:464
+msgid "Replace in:"
+msgstr ""
+
+#: src/dialogs.c:543
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Virhe msgfmt:ia suoritettaessa:\n"
 
-#: src/dialogs.c:420
+#: src/dialogs.c:571
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- avaa URI:st‰"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:3 src/dialogs.c:421
-#: src/gui.c:300
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:3 src/dialogs.c:572
+#: src/gui.c:301
 msgid "Open"
 msgstr "Avaa"
 
-#: src/dialogs.c:421
+#: src/dialogs.c:572
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: src/dialogs.c:425
+#: src/dialogs.c:576
 msgid "Enter URI:"
 msgstr "Anna URI:"
 
-#: src/dialogs.c:467
+#: src/dialogs.c:618
 msgid "No URI given!"
 msgstr "Ei URI:t‰ annettu!"
 
-#: src/dialogs.c:488
+#: src/dialogs.c:639
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Ei annettu tuettua URI-protokollaa! (esim. \"ftp://\")"
 
-#: src/dialogs.c:519
+#: src/dialogs.c:670
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -163,51 +183,51 @@ msgid ""
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
 
-#: src/dialogs.c:545
+#: src/dialogs.c:696
 #, c-format
 msgid "Recovering `%s'..."
 msgstr ""
 
-#: src/dialogs.c:589
+#: src/dialogs.c:740
 msgid "Couldn't get list of gettext domains!"
 msgstr ""
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:597
+#: src/dialogs.c:748
 msgid "Here you can query existing gettext domains for a translation."
 msgstr ""
 
-#: src/dialogs.c:600
+#: src/dialogs.c:751
 msgid "gtranslator -- query existing gettext domains"
 msgstr ""
 
-#: src/dialogs.c:601 src/gui.c:371
+#: src/dialogs.c:752 src/gui.c:376
 msgid "Query"
 msgstr ""
 
-#: src/dialogs.c:601
+#: src/dialogs.c:752
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
 
-#: src/dialogs.c:609
+#: src/dialogs.c:760
 msgid "Query string:"
 msgstr ""
 
-#: src/dialogs.c:616
+#: src/dialogs.c:767
 msgid "Domain to search the translation in:"
 msgstr ""
 
-#: src/dialogs.c:666
+#: src/dialogs.c:817
 msgid "No query string given!"
 msgstr ""
 
-#: src/dialogs.c:695
+#: src/dialogs.c:846
 msgid "Couldn't find any result for the query!"
 msgstr ""
 
-#: src/dialogs.c:710
+#: src/dialogs.c:863
 #, c-format
 msgid ""
 "Found \"%s\" as a translation in domain \"%s\".\n"
@@ -218,21 +238,21 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:771
+#: src/dialogs.c:925
 msgid "Query's result translation is already there!"
 msgstr ""
 
-#: src/dialogs.c:791
+#: src/dialogs.c:945
 msgid ""
 "Should gtranslator accomplish all missing strings (if possible)\n"
 "from your default query domain?"
 msgstr ""
 
-#: src/find.c:231
+#: src/find.c:233
 msgid "Please enter a search string"
 msgstr "Anna haettava merkkijono"
 
-#: src/find.c:247
+#: src/find.c:249
 #, c-format
 msgid ""
 "Could not find\n"
@@ -241,15 +261,15 @@ msgstr ""
 "Ei lˆydy:\n"
 "\"%s\""
 
-#: src/find.c:259
+#: src/find.c:261
 msgid "Couldn't get the message!"
 msgstr "Teksti‰ ei saatu!"
 
-#: src/find.c:281
+#: src/find.c:283
 msgid "There are no fuzzy messages left."
 msgstr "Sumeita tekstej‰ ei lˆydy enemp‰‰."
 
-#: src/find.c:305
+#: src/find.c:307
 msgid "All messages seem to be translated."
 msgstr "Kaikki tekstit n‰ytt‰isiv‰t olevan k‰‰nnetyt."
 
@@ -261,7 +281,7 @@ msgstr "Selaa URL..."
 msgid "_Compile"
 msgstr "_K‰‰nn‰"
 
-#: src/gui.c:116 src/gui.c:314
+#: src/gui.c:116 src/gui.c:315
 msgid "Compile the po-file"
 msgstr "K‰‰nn‰ po-tiedosto"
 
@@ -269,7 +289,7 @@ msgstr "K‰‰nn‰ po-tiedosto"
 msgid "_Update"
 msgstr "_P‰ivit‰"
 
-#: src/gui.c:123 src/gui.c:318
+#: src/gui.c:123 src/gui.c:319
 msgid "Update the po-file"
 msgstr "P‰ivit‰ kyseinen po-tiedosto"
 
@@ -293,237 +313,241 @@ msgstr "Avaa po-tiedosto annetusta URI:st‰"
 msgid "Recen_t files"
 msgstr "_Pikavalinnat"
 
-#: src/gui.c:167
+#: src/gui.c:168
 msgid "_Query"
 msgstr ""
 
-#: src/gui.c:168 src/gui.c:372
+#: src/gui.c:169 src/gui.c:377
 msgid "Query for a string"
 msgstr ""
 
-#: src/gui.c:175
+#: src/gui.c:176
 msgid "_Header..."
-msgstr "_Otsikko"
+msgstr "_Otsikko..."
 
-#: src/gui.c:176 src/gui.c:322
+#: src/gui.c:177 src/gui.c:323
 msgid "Edit the header"
 msgstr "Muokkaa otsikkoa"
 
-#: src/gui.c:186
+#: src/gui.c:187
 msgid "_First"
 msgstr "_Ensimm‰inen"
 
-#: src/gui.c:187 src/gui.c:339
+#: src/gui.c:188 src/gui.c:340
 msgid "Go to the first message"
 msgstr "Siirry ensimm‰iseen tekstiin"
 
-#: src/gui.c:193
+#: src/gui.c:194
 msgid "_Back"
 msgstr "_Takaisin"
 
-#: src/gui.c:194 src/gui.c:343
+#: src/gui.c:195 src/gui.c:344
 msgid "Go one message back"
 msgstr "Siirry yksi teksti takaisinp‰in"
 
-#: src/gui.c:201
+#: src/gui.c:202
 msgid "_Next"
 msgstr "_Seuraava"
 
-#: src/gui.c:202 src/gui.c:348
+#: src/gui.c:203 src/gui.c:349
 msgid "Go one message forward"
 msgstr "Siirry yksi teksti eteenp‰in"
 
-#: src/gui.c:208
+#: src/gui.c:209
 msgid "_Last"
 msgstr "_Viimeinen"
 
-#: src/gui.c:209 src/gui.c:352
+#: src/gui.c:210 src/gui.c:353
 msgid "Go to the last message"
 msgstr "Siirry viimeiseen tekstiin"
 
-#: src/gui.c:216
+#: src/gui.c:217
 msgid "_Go to..."
 msgstr "_Siirry..."
 
-#: src/gui.c:217
+#: src/gui.c:218
 msgid "Goto specified message number"
 msgstr "Siirry tiettyyn viestinumeroon"
 
-#: src/gui.c:223
+#: src/gui.c:224
 msgid "Next fuz_zy"
 msgstr "Seuraava s_umea"
 
-#: src/gui.c:224
+#: src/gui.c:225
 msgid "Go to next fuzzy message"
 msgstr "Siirry seuraavaan sumeaan tekstiin"
 
-#: src/gui.c:230
+#: src/gui.c:231
 msgid "Next _untranslated"
 msgstr "Seuraava k‰‰nt‰m‰t_ˆn"
 
-#: src/gui.c:231 src/gui.c:356
+#: src/gui.c:232 src/gui.c:357
 msgid "Go to next untranslated message"
 msgstr "Siirry seuraavaan k‰‰nt‰m‰ttˆm‰‰n tekstiin"
 
-#: src/gui.c:241
+#: src/gui.c:242
 msgid "_Translated"
 msgstr "K_‰‰nnetty"
 
-#: src/gui.c:242
+#: src/gui.c:243
 msgid "Toggle translated status of a message"
 msgstr "M‰‰rit‰ onko teksti k‰‰nnetty"
 
-#: src/gui.c:250
+#: src/gui.c:251
 msgid "_Fuzzy"
 msgstr "S_umea"
 
-#: src/gui.c:251
+#: src/gui.c:252
 msgid "Toggle fuzzy status of a message"
 msgstr "M‰‰rit‰ onko teksti sumea"
 
-#: src/gui.c:259
+#: src/gui.c:260
 msgid "_Stick"
 msgstr "_Naulaa"
 
-#: src/gui.c:260
+#: src/gui.c:261
 msgid "Stick this message"
 msgstr "Naulaa t‰m‰ teksti"
 
-#: src/gui.c:279
+#: src/gui.c:280
 msgid "gtranslator _website"
 msgstr "gtranslatorin _kotisivu"
 
-#: src/gui.c:280
+#: src/gui.c:281
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslatorin www-sivu"
 
-#: src/gui.c:289
+#: src/gui.c:290
 msgid "_Messages"
 msgstr "_Tekstit"
 
-#: src/gui.c:290
+#: src/gui.c:291
 msgid "Mess_age status"
 msgstr "Tekstin _status"
 
-#: src/gui.c:301
+#: src/gui.c:302
 msgid "Open a po-file"
 msgstr "Avaa po-tiedosto"
 
-#: src/gui.c:304
+#: src/gui.c:305
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/gui.c:305
+#: src/gui.c:306
 msgid "Save File"
 msgstr "Tallenna tiedosto"
 
-#: src/gui.c:308
+#: src/gui.c:309
 msgid "Save as"
 msgstr "Tallenna nimell‰"
 
-#: src/gui.c:309
+#: src/gui.c:310
 msgid "Save file with a different name"
 msgstr "Tallenna tiedosto nimell‰"
 
-#: src/gui.c:313
+#: src/gui.c:314
 msgid "Compile"
 msgstr "K‰‰nn‰"
 
-#: src/gui.c:317
+#: src/gui.c:318
 msgid "Update"
 msgstr "P‰ivit‰"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:2 src/gui.c:321
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:2 src/gui.c:322
 msgid "Header"
 msgstr "Otsikko"
 
-#: src/gui.c:326
+#: src/gui.c:327
 msgid "Options"
 msgstr "Asetukset"
 
-#: src/gui.c:327
+#: src/gui.c:328
 msgid "gtranslator options"
 msgstr "gtranslatorin asetukset"
 
-#: src/gui.c:330 src/gui.c:331
+#: src/gui.c:331 src/gui.c:332
 msgid "Exit"
 msgstr "Poistu"
 
-#: src/gui.c:338
+#: src/gui.c:339
 msgid "First"
 msgstr "Ensimm‰inen"
 
-#: src/gui.c:342
+#: src/gui.c:343
 msgid "Back"
 msgstr "Takaisin"
 
-#: src/gui.c:347
+#: src/gui.c:348
 msgid "Next"
 msgstr "Seuraava"
 
-#: src/gui.c:351
+#: src/gui.c:352
 msgid "Last"
 msgstr "Viimeinen"
 
-#: src/gui.c:355
+#: src/gui.c:356
 msgid "Missing"
 msgstr "Puuttuu"
 
-#: src/gui.c:359 src/gui.c:883 src/gui.c:887
+#: src/gui.c:360 src/gui.c:889 src/gui.c:893
 msgid "Fuzzy"
 msgstr "Sumea"
 
-#: src/gui.c:360
+#: src/gui.c:361
 msgid "Go to the next fuzzy translation"
 msgstr "Siirry seuraavaan sumeaan k‰‰nnˆkseen"
 
-#: src/gui.c:363
+#: src/gui.c:364
 msgid "Go to"
 msgstr "Siirry"
 
-#: src/gui.c:364
+#: src/gui.c:365
 msgid "Go to specified message number"
 msgstr "Siirry tiettyyn viestinumeroon"
 
-#: src/gui.c:368
+#: src/gui.c:369
 msgid "Find string in po-file"
 msgstr "Etsi merkkijonoa po-tiedostosta"
+
+#: src/gui.c:373
+msgid "Replace string in po-file"
+msgstr "Korvaa merkkijono po-tiedostossa"
 
 #.
 #. * Create the app
 #.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:543
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:549
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:700 src/gui.c:701 src/gui.c:1112
+#: src/gui.c:706 src/gui.c:707 src/gui.c:1118
 msgid "∑"
 msgstr "∑"
 
-#: src/gui.c:883
+#: src/gui.c:889
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i sumeaa j‰ljell‰ ]"
 
-#: src/gui.c:887
+#: src/gui.c:893
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Ei sumeita j‰ljell‰ ]"
 
-#: src/gui.c:894
+#: src/gui.c:900
 msgid "Stick"
 msgstr "Naulaa"
 
-#: src/gui.c:905
+#: src/gui.c:911
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i k‰‰nt‰m‰tˆnt‰ j‰ljell‰ ] "
 
-#: src/gui.c:905 src/gui.c:907
+#: src/gui.c:911 src/gui.c:913
 msgid "Untranslated"
 msgstr "K‰‰nt‰m‰tˆn"
 
-#: src/gui.c:907
+#: src/gui.c:913
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Ei k‰‰nt‰m‰ttˆmi‰ j‰ljell‰ ]"
@@ -531,7 +555,7 @@ msgstr "%s [ Ei k‰‰nt‰m‰ttˆmi‰ j‰ljell‰ ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:918
+#: src/gui.c:924
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Teksti %d / %d / Tila: %s"
@@ -1084,7 +1108,7 @@ msgstr "Varoita, jos yritet‰‰n tallentaa muuttamatonta tiedostoa"
 
 #: src/prefs.c:308
 msgid "Keep obsolete message in the po files"
-msgstr ""
+msgstr "S‰ilyt‰ po-tiedoston vanhentuneet tekstit"
 
 #: src/prefs.c:315
 msgid "Use free space indicating special character"
@@ -1191,11 +1215,11 @@ msgstr "%d-%m-%Y %H:%M"
 msgid "Couldn't generate the current date!"
 msgstr "P‰iv‰yksen luominen ei onnistunut!"
 
-#: src/query.c:192
+#: src/query.c:196
 msgid "No language defined in preferences to query the domains for!"
 msgstr ""
 
-#: src/query.c:204
+#: src/query.c:208
 #, c-format
 msgid "Couldn't open locales directory `%s'!"
 msgstr "Lokaalihakemiston '%s' avaaminen ei onnistunut!"
@@ -1208,9 +1232,9 @@ msgstr "Istunto palautettu onnistuneesti."
 msgid "Views"
 msgstr "N‰kym‰t"
 
-#: src/sidebar.c:248
-msgid "No comment available for this message"
-msgstr "Ei kommenttia t‰lle tekstille"
+#: src/sidebar.c:255
+msgid "No comment available for this message."
+msgstr "T‰lle tekstille ei ole kommenttia."
 
 #.
 #. * What to say else? This signals doesn't seem
@@ -1317,12 +1341,12 @@ msgstr "Kieli: %s <%s>"
 #: nautilus-view/nautilus-gtranslator-view.c:200
 #, c-format
 msgid "Last %s.pot update: %s"
-msgstr ""
+msgstr "Viimeisin %s.pot p‰ivitys: %s"
 
 #: nautilus-view/nautilus-gtranslator-view.c:203
 #, c-format
 msgid "Last po file update: %s"
-msgstr ""
+msgstr "Viimeisin po-tiedoston p‰ivitys: %s"
 
 #: nautilus-view/nautilus-gtranslator-view.c:206
 #, c-format
@@ -1354,15 +1378,15 @@ msgstr "Gnomen k‰‰nt‰misohjelma"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
 msgid "Gtranslator Po File"
-msgstr ""
+msgstr "Gtranslator po-tiedosto"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:2
 msgid "Gtranslator Po File View"
-msgstr ""
+msgstr "Gtranslator po-tiedoston n‰kym‰"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:3
 msgid "Gtranslator Po File Viewer"
-msgstr ""
+msgstr "Gtranslator po-tiedoston katselin"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:4
 msgid "Gtranslator Po file viewer component's factory"
@@ -1374,11 +1398,11 @@ msgstr ""
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:6
 msgid "Nautilus Gtranslator view"
-msgstr ""
+msgstr "Nautiluksen gtranslator-n‰kym‰"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:7
 msgid "View as Po File"
-msgstr ""
+msgstr "N‰yt‰ po-tiedostona"
 
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:1
 msgid "Edit the header of this po file"
