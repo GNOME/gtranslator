@@ -43,7 +43,6 @@
 #include "prefs.h"
 #include "runtime-config.h"
 #include "stylistics.h"
-#include "syntax.h"
 #include "translator.h"
 #include "undo.h"
 #include "utils.h"
@@ -78,10 +77,6 @@ GtkWidget *gtranslator_application_bar;
 
 GtkWidget *content_pane;
 GtkWidget *table_pane;
-#ifdef NOT_PORTED
-guint text_box_insert_text_signal_id;
-guint text_box_delete_text_signal_id;
-#endif
 guint trans_box_insert_text_signal_id;
 guint trans_box_delete_text_signal_id;
 
@@ -266,16 +261,6 @@ void gtranslator_create_main_window(void)
 	gtranslator_history_show();
 
 	/*
-	 * Set up our special styles for the text boxes.
-	 */
-	//	gtranslator_set_style(GTK_WIDGET(text_box), 0);
-	//gtranslator_set_style(GTK_WIDGET(trans_box), 1);
-	/*
-	 *  Initialize highlighting
-	 */
-	 gtranslator_syntax_init(trans_box);
-	 gtranslator_syntax_init(text_box);
-	/*
 	 * The callbacks list
 	 */
 	g_signal_connect(G_OBJECT(gtranslator_application), "delete_event",
@@ -289,16 +274,6 @@ void gtranslator_create_main_window(void)
 	g_signal_connect_after(G_OBJECT(trans_box), "selection-get",
 			 G_CALLBACK(selection_get_handler), NULL);
 
-#ifdef NOT_PORTED
-	text_box_insert_text_signal_id = g_signal_connect(
-		G_OBJECT(gtk_text_view_get_buffer(text_box)), 
-		"insert-text",
-		G_CALLBACK(insert_text_handler), NULL);
-	text_box_delete_text_signal_id = g_signal_connect(
-		G_OBJECT(gtk_text_view_get_buffer(text_box)),
-		"delete-range",
-		G_CALLBACK(delete_text_handler), NULL);
-#endif
 	trans_box_insert_text_signal_id = g_signal_connect(
 		G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 		"insert-text",
@@ -775,9 +750,7 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 		}
 	}
 
-#ifdef NOT_PORTED
-	gtranslator_insert_highlighted(textbuffer, pos, result, length, data);
-#endif
+//	gtranslator_insert_text(textbuffer, pos, result, length, data);
 	g_signal_handler_block(textbuffer, trans_box_insert_text_signal_id);
 	gtk_text_buffer_insert(textbuffer, pos, result, length);
 	g_signal_handler_unblock(textbuffer, trans_box_insert_text_signal_id);

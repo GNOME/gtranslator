@@ -39,11 +39,7 @@
 #include "prefs.h"
 #include "replace.h"
 #include "runtime-config.h"
-#include "syntax.h"
 #include "translator.h"
-#ifdef UTF8_CODE
-# include "utf8.h"
-#endif
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -59,14 +55,6 @@ static void gtranslator_go_to_dialog_clicked(GtkDialog * dialog, gint button,
 					     gpointer data);
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void ih_toggled(GtkWidget *widget, gpointer useless);
-
-#ifdef UTF8_CODE
-/*
- * Import/export dialog callbacks.
- */
-void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog);
-void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog);
-#endif
 
 /* Responses for the replace dialog */
 typedef enum {
@@ -251,109 +239,6 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 	return FALSE;
 }
 
-#ifdef UTF8_CODE
-/*
- * Import a UTF-8 po file into a "plain encoding".
- */
-void gtranslator_import_dialog(GtkWidget *widget, gpointer useless)
-{
-	static GtkWidget *import_dialog=NULL;
-	
-	if(file_opened)
-	{
-		/*
-		 * Operate only if the current file shouldn't be saved.
-		 */
-		if(!gtranslator_should_the_file_be_saved_dialog())
-		{
-			return;
-		}
-	}
-
-	if(import_dialog != NULL) {
-		gtk_window_present(GTK_WINDOW(import_dialog));
-		return;
-	}
-	import_dialog=gtk_file_selection_new(_("gtranslator -- import po file"));
-
-	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(import_dialog)->ok_button),
-		"response", GTK_SIGNAL_FUNC(gtranslator_import_dialog_clicked), (gpointer) import_dialog);
-
-	g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(import_dialog)->cancel_button), 
-		"response", G_CALLBACK(gtk_widget_destroy), G_OBJECT(import_dialog));
-
-	gtranslator_file_dialogs_set_directory(&import_dialog);
-	
-	gtk_window_set_transient_for(GTK_WINDOW(import_dialog), GTK_WINDOW(gtranslator_application)); 
-	gtranslator_dialog_show(&import_dialog, "gtranslator -- import");
-}
-
-/*
- * The clicked callback for the import dialog.
- */
-void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog)
-{
-	gchar *filename;
-
-	filename=g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog)));
-	gtranslator_file_dialogs_store_directory(filename);
-
-	/*
-	 * Parse the file and convert it from UTF-8.
-	 */
-	gtranslator_parse_main(filename);
-	gtranslator_utf8_convert_po_from_utf8(po);
-	gtranslator_parse_main_extra();
-
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-}
-
-/*
- * Export a plain encoded file into UTF-8.
- */
-void gtranslator_export_dialog(GtkWidget *widget, gpointer useless)
-{
-	static GtkWidget *export_dialog=NULL;
-	
-	g_return_if_fail(file_opened==TRUE);
-	if(export_dialog != NULL) {
-		gtk_window_present(GTK_WINDOW(export_dialog));
-		return;
-	}
-
-	export_dialog=gtk_file_selection_new(_("gtranslator -- export po file"));
-
-	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(export_dialog)->ok_button),
-		"response", GTK_SIGNAL_FUNC(gtranslator_export_dialog_clicked), (gpointer) export_dialog);
-
-	g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(export_dialog)->cancel_button), 
-		"response", G_CALLBACK(gtk_widget_destroy), G_OBJECT(export_dialog));
-
-	gtranslator_file_dialogs_set_directory(&export_dialog);
-
-	gtk_window_set_transient_for(GTK_WINDOW(export_dialog), GTK_WINDOW(gtranslator_application));
-	gtranslator_dialog_show(&export_dialog, "gtranslator -- export");
-}
-
-/*
- * The export dialog callback.
- */
-void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog)
-{
-	gchar *filename;
-
-	filename=g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog)));
-	gtranslator_file_dialogs_store_directory(filename);
-
-	/*
-	 * The same logic as for the import but vice versa .-)
-	 */
-	gtranslator_utf8_convert_po_to_utf8(po);
-	gtranslator_save_file(filename);
-	
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-}
-#endif
 
 /*
  * Display a small text widget with an editable content.

@@ -108,23 +108,6 @@ GnomeUIInfo the_file_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE(N_("Recen_t files"), the_last_files_menus),
 	GNOMEUIINFO_SEPARATOR,
-#ifdef UTF8_CODE
-	{
-		GNOME_APP_UI_ITEM, N_("_Export to UTF-8..."),
-		N_("Export the current po file to UTF-8"),
-		gtranslator_export_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_BOOK_YELLOW,
-		GDK_E, GDK_MOD1_MASK, NULL
-	},
-	{
-		GNOME_APP_UI_ITEM, N_("_Import from UTF-8..."),
-		N_("Import a UTF-8 encoded po file into it's corresponding plain encoding"),
-		gtranslator_import_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_BOOK_RED,
-		GDK_I, GDK_MOD1_MASK, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-#endif
 	GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
 	GNOMEUIINFO_END
 };

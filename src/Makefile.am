@@ -51,7 +51,6 @@ gtranslator_SOURCES = \
 	main.c \
 	menus.c menus.h \
 	message.c message.h \
-	messages.h \
 	messages-table.c messages-table.h \
 	nautilus-string.c nautilus-string.h \
 	open.c open.h \
@@ -64,12 +63,9 @@ gtranslator_SOURCES = \
 	session.c session.h \
 	sighandling.c sighandling.h \
 	stylistics.c stylistics.h \
-	syntax.c syntax.h \
-	syntax-elements.h \
 	translator.c translator.h \
 	undo.c undo.h \
 	update.c \
-	utf8.c utf8.h \
 	utils.c utils.h \
 	utils_gui.c utils_gui.h \
 	vfs-handle.c vfs-handle.h

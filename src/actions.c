@@ -25,11 +25,9 @@
 #include "gui.h"
 #include "menus.h"
 #include "message.h"
+#include "parse.h"
 #include "prefs.h"
 #include "undo.h"
-#ifdef UTF8_CODE
-# include "utf8.h"
-#endif
 
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-app.h>
@@ -98,11 +96,6 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_REVERT, the_file_menu[13], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[14], NONE);
 	/*----------------------------------------------------------*/
-#ifdef UTF8_CODE
-	insert_action(ACT_EXPORT_UTF8, the_file_menu[18], NONE);
-	insert_action(ACT_IMPORT_UTF8, the_file_menu[19], NONE);
-	/*----------------------------------------------------------*/
-#endif
 	insert_action(ACT_UNDO, the_edit_menu[0], the_toolbar[8]);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);
@@ -130,17 +123,6 @@ void gtranslator_actions_set_up_default()
 
 void gtranslator_actions_set_up_state_no_file(void)
 {
-#ifdef UTF8_CODE
-	gtranslator_actions_disable(ACT_COMPILE, ACT_UPDATE, ACT_AUTOTRANSLATE,
-				    ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
-				    ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
-				    ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
-				    ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
-				    ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
-				    ACT_FUZZY, ACT_COMMENT, ACT_EXPORT_UTF8,
-				    ACT_REMOVE_ALL_TRANSLATIONS, ACT_COPY_MSGID2MSGSTR,
-				    ACT_ADD_BOOKMARK);
-#else
 	gtranslator_actions_disable(ACT_COMPILE, ACT_UPDATE, ACT_AUTOTRANSLATE,
 				    ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
 				    ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
@@ -149,25 +131,16 @@ void gtranslator_actions_set_up_state_no_file(void)
 				    ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 				    ACT_FUZZY, ACT_COMMENT, ACT_REMOVE_ALL_TRANSLATIONS,
 				    ACT_COPY_MSGID2MSGSTR, ACT_ADD_BOOKMARK);
-#endif
 
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(trans_box), FALSE);
 }
 
 void gtranslator_actions_set_up_file_opened(void)
 {
-#ifdef UTF8_CODE
-	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
-				   ACT_AUTOTRANSLATE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
-				   ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
-				   ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_ADD_BOOKMARK,
-				   ACT_IMPORT_UTF8, ACT_COPY_MSGID2MSGSTR);
-#else
 	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_ADD_BOOKMARK,
 				   ACT_AUTOTRANSLATE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 				   ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
 				   ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_COPY_MSGID2MSGSTR);
-#endif
 
 	gtranslator_actions_disable(ACT_SAVE, ACT_UNDO);
 	
@@ -179,21 +152,6 @@ void gtranslator_actions_set_up_file_opened(void)
 	{
 		gtranslator_actions_enable(ACT_UPDATE);	
 	}
-
-#ifdef UTF8_CODE
-	/*
-	 * Check if the current file is UTF-8 -- then disable the export
-	 *  menu entry; it's already in UTF-8.
-	 */
-	if(po->utf8)
-	{
-		gtranslator_actions_disable(ACT_EXPORT_UTF8);
-	}
-	else
-	{
-		gtranslator_actions_enable(ACT_EXPORT_UTF8);
-	}
-#endif
 
 	/*
 	 * Enable the editing of the msgstrs :-)

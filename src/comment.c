@@ -27,7 +27,6 @@
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
-#include "utf8.h"
 #include "utils.h"
 
 #include <gtk/gtklabel.h>

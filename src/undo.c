@@ -28,7 +28,6 @@
 #include "gui.h"
 #include "parse.h"
 #include "prefs.h"
-#include "syntax.h"
 #include "undo.h"
 #include "utils.h"
 

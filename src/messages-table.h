@@ -23,7 +23,7 @@
 #define GTR_MESSAGES_TABLE_H 1
 
 #include <gtk/gtkwidget.h>
-#include "messages.h"
+#include "message.h"
 
 enum
 {

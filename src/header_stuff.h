@@ -22,7 +22,7 @@
 #define GTR_HEADER_STUFF_H 1
 
 #include <gtk/gtkwidget.h>
-#include "messages.h"
+#include "message.h"
 
 /*
  * The header-structure which should hold the header information

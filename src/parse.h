@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <gtk/gtkwidget.h>
 
-#include "messages.h"
 #include "header_stuff.h"
 
 /*

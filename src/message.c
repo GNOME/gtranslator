@@ -34,11 +34,7 @@
 #include "messages-table.h"
 #include "parse.h"
 #include "prefs.h"
-#include "syntax.h"
 #include "undo.h"
-#ifdef UTF8_CODE
-# include "utf8.h"
-#endif
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -204,6 +200,7 @@ static void plural_forms_edited(GtkCellRendererText *crtext, gchar *path, gchar 
  */
 void gtranslator_message_show(GtrMsg *msg)
 {
+	GtkTextBuffer *buf;
 
 	if(!file_opened)
 	{
@@ -236,20 +233,24 @@ void gtranslator_message_show(GtrMsg *msg)
 		g_return_if_fail(msg->msgid!=NULL);
 		
 		temp = gtranslator_utils_invert_dot(msg->msgid);
-		gtranslator_insert_text(text_box, temp);
+		buf =  gtk_text_view_get_buffer(text_box);
+		gtk_text_buffer_set_text(buf, temp, -1);
 		
 		GTR_FREE(temp);
 
 		if (msg->msgstr) {
 			temp = gtranslator_utils_invert_dot(msg->msgstr);
 			
-			gtranslator_insert_text(trans_box, temp);
+			buf = gtk_text_view_get_buffer(trans_box);
+			gtk_text_buffer_set_text(buf, temp, -1);
 			
 			GTR_FREE(temp);
 		}
 	} else {
-		gtranslator_insert_text(text_box, msg->msgid);
-		gtranslator_insert_text(trans_box, msg->msgstr);
+		buf = gtk_text_view_get_buffer(text_box);
+		gtk_text_buffer_set_text(buf, msg->msgid, -1);
+		buf = gtk_text_view_get_buffer(trans_box);
+		gtk_text_buffer_set_text(buf, msg->msgstr, -1);
 	}
 
 	/*
@@ -404,23 +405,6 @@ void gtranslator_message_update(void)
 
 		GTR_FREE(msg->msgstr);
 
-#ifdef UTF8_CODE
-		if(po->utf8)
-		{
-			msg->msgstr=gtranslator_utf8_get_gtk_text_as_utf8_string(GTK_WIDGET(trans_box));
-		}
-		else
-		{
-			msg->msgstr=gtk_editable_get_chars(
-				GTK_EDITABLE(trans_box), 0, len);
-		}
-		*/
-		// XXX we always work with utf-8
-		// YYY that's why I'm preparing to carve out all
-		//     the utf-8 stuff except and make sure there
-		//     are g_converts on load/save (for non-utf8
-		//     users).
-#endif
 
 		msg->msgstr = gtk_text_buffer_get_text(gtk_text_view_get_buffer(trans_box), &start, &end, FALSE);
 		

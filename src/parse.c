@@ -45,9 +45,6 @@
 #include "save.h"
 #include "translator.h"
 #include "undo.h"
-#ifdef UTF8_CODE
-# include "utf8.h"
-#endif
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -228,32 +225,6 @@ GtrPo *gtranslator_parse(const gchar *filename)
 	file_opened = TRUE;
 	po->file_changed = FALSE;
 	po->length = g_list_length(po->messages);
-
-#ifdef UTF8_CODE
-	/*
-	 * Set the utf8 field of the GtrPo to TRUE if we are editing an UTF-8 
-	 *  encoded file.
-	 */
-	if(gtranslator_utf8_po_file_is_utf8(po))
-	{
-		po->utf8=TRUE;
-	}
-	else
-	{
-		po->utf8=FALSE;
-	}
-
-	po->locale_charset=gtranslator_utils_get_locale_charset(po);
-	
-	/* FIXME: converting the messages to UTF8 there since I don't
-	   know the parsing code, and I don't feel like figuring it out
-	   so I temporarily put this here to ensure all the strings are 
-	   properly encoded. Please fix it...
-	*/
-	if (po->utf8 == FALSE) {
-		gtranslator_utf8_convert_po_to_utf8(po);
-	}
-#endif
 
 	/*
 	 * Set the current message to the first message.
@@ -1115,16 +1086,6 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	{
 		gtranslator_messages_table_clear();
 	}
-
-#ifdef NOT_PORTED
-	/*
-	 * Stop gtkspell.
-	 */ 
-	if(GtrPreferences.instant_spell_check && gtkspell_running())
-	{
-		gtkspell_stop();
-	}
-#endif /* NOT_PORTED */	
 
 	gtranslator_text_boxes_clean();
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");

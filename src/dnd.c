@@ -21,7 +21,6 @@
 #include "dnd.h"
 #include "gui.h"
 #include "parse.h"
-#include "syntax.h"
 
 #include <gtk/gtkdnd.h>
 #include <gtk/gtktext.h>
@@ -42,11 +41,6 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	{
 		gtranslator_parse_main(file);
 		gtranslator_parse_main_extra();
-		gtk_drag_finish(context, TRUE, FALSE, time);
-	}
-	else if(dnd_type==TARGET_TEXT_PLAIN)
-	{
-		gtranslator_insert_text(trans_box, file);
 		gtk_drag_finish(context, TRUE, FALSE, time);
 	}
 	else

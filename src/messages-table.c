@@ -30,16 +30,12 @@
 #include "gui.h"
 #include "learn.h"
 #include "messages-table.h"
-#include "messages.h"
 #include "message.h"
 #include "parse.h"
 #include "preferences.h"
 #include "prefs.h"
 #include "runtime-config.h"
 #include "utils.h"
-#ifdef UTF8_CODE
-# include "utf8.h"
-#endif
 
 #include <gdk/gdkkeysyms.h>
 
