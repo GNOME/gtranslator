@@ -66,13 +66,13 @@ gchar *gtranslator_bookmark_new_id_string(void);
 /*
  * The otherway conversion: convert a GtrBookmark into a plain string.
  */
-gchar *gtranslator_bookmark_string_from_id(GtrBookmark *id);
+gchar *gtranslator_bookmark_string_from_id(GtrBookmark *bookmark);
 
 /*
  * Is the given GtrBookmark resolvable at all -- is the file present and do the
  *  other specs also match?!
  */
-gboolean gtranslator_bookmark_resolvable(GtrBookmark *id);
+gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark);
 
 /*
  * Return whether the two GtrBookmark's are equal.
@@ -82,24 +82,24 @@ gboolean gtranslator_bookmark_equal(GtrBookmark *one, GtrBookmark *two);
 /*
  * Smally different: compare the GtrBookmark and the id string.
  */
-gboolean gtranslator_bookmark_string_equal(GtrBookmark *id, const gchar *string); 
+gboolean gtranslator_bookmark_string_equal(GtrBookmark *bookmark, const gchar *string); 
 
 /*
  * Add the given GtrBookmark to the IDs list.
  */
-void gtranslator_bookmark_add(GtrBookmark *id);
+void gtranslator_bookmark_add(GtrBookmark *bookmark);
 
 /*
  * Remove the given GtrBookmark from the IDs list -- the result is
  *  passed as the return-value.
  */
-gboolean gtranslator_bookmark_remove(GtrBookmark *id);
+gboolean gtranslator_bookmark_remove(GtrBookmark *bookmark);
 
 /*
  * Check whether the given GtrBookmark is already included in 
  *  our IDs list -- simple return TRUE in this case.
  */
-gboolean gtranslator_bookmark_search(GtrBookmark *id);
+gboolean gtranslator_bookmark_search(GtrBookmark *bookmark);
 
 /*
  * Read in our stored GtrBookmarks list -- restored the list from the
@@ -115,11 +115,11 @@ void gtranslator_bookmark_save_list(void);
 /*
  * Copy the given GtrBookmark safely.
  */
-GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *id);
+GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *bookmark);
 
 /*
  * Free the given GtrBookmark.
  */
-void gtranslator_bookmark_free(GtrBookmark *id); 
+void gtranslator_bookmark_free(GtrBookmark *bookmark);
 
 #endif
