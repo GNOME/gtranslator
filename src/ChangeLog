@@ -1,3 +1,18 @@
+2000-12-03  Fatih Demir	<kabalak@gmx.net>
+
+	* gui.c: Added the conditional close-down of
+		GnomeVFS if USE_VFS_STUFF is defined and
+		 already running.
+	
+	* main.c: Added some kind of magic to use the new
+		GnomeVFS based function from libgtranslator.
+
+	* gtkspell.h: Made the ispell_cmd non-static,
+		avoids a warning.
+	
+	* Makefile.am: Added the VFS cflags and libs
+		stuff.
+
 2000-12-02  Fatih Demir	<kabalak@gmx.net>
 
 	* main.c: Enable the spell-checking menu entry.

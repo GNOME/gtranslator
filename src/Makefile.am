@@ -13,11 +13,18 @@ gconf_cflags =
 gconf_libs =
 endif
 
-
+if USE_VFS_STUFF
+vfs_cflags = $(VFS_CFLAGS)
+vfs_libs = $(VFS_LIBS)
+else
+vfs_cflags =
+cfs_libs =
+endif
 
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
+	$(vfs_cflags) \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
@@ -54,6 +61,7 @@ gtranslator_LDADD = \
 	$(INTLLIBS) \
 	$(gconf_libs) \
 	$(XML_LIBS) \
-	$(LIBGLADE_LIBS)
+	$(LIBGLADE_LIBS) \
+	$(vfs_libs)
 
 EXTRA_DIST = ChangeLog

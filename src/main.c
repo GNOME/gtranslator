@@ -25,6 +25,10 @@
 #include <gconf/gconf.h>
 #endif
 
+#ifdef USE_VFS_STUFF
+#include <libgtranslator/vfs-handle.h>
+#endif
+
 /**
 * Some static variables for the poptTable in the main routines.
 **/
@@ -118,9 +122,48 @@ int main(int argc, char *argv[])
 	**/
 	file_opened = FALSE;
 	args = poptGetArgs(context);
-
+	
+	/**
+	* Now with extra-crusty VFS stuff, yumm ,-)
+	**/
 	if (args)
-		parse(args[0]);
+	{
+		/**
+		* Is this not a http/ftp/file URI then leave it as it is.
+		**/
+		if(!strncmp(args[0], "ftp://", 6)||
+			(!strncmp(args[0], "http://", 7))||
+			(!strncmp(args[0], "file://", 7)))
+		{
+			#ifdef USE_VFS_STUFF
+			gchar *localfile;
+			/**
+			* Use the new VFS based function from the library.
+			**/ 
+			gtranslator_open_file((char *)args[0]);
+			/**
+			* Get the stored filename....
+			**/ 
+			gtranslator_config_init();
+			localfile=gtranslator_config_get_string("vfs/file_to_open");
+			gtranslator_config_close();
+			/**
+			* Did we get any filename ?
+			**/ 
+			if(localfile)
+			{
+				/**
+				* Then parse the local file..
+				**/ 
+				parse(args[0]);
+			}
+			#endif
+		}
+		else
+		{
+			parse(args[0]);
+		}
+	}
 	poptFreeContext(context);
 	/* Disable the buttons if no file is opened. */
 	if (!file_opened)

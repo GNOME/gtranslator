@@ -22,6 +22,10 @@
 #include <libgtranslator/preferences.h>
 #include <libgtranslator/stylistics.h>
 
+#ifdef USE_VFS_STUFF
+#include <libgnomevfs/gnome-vfs-init.h>
+#endif
+
 typedef struct _GtrAction GtrAction;
 #define GTR_ACTION(x) ((GtrAction *)x)
 
@@ -568,6 +572,18 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 	gtranslator_config_init();
 	gtranslator_config_set_last_run_date();
 	gtranslator_config_close();
+	#ifdef USE_VFS_STUFF
+	/**
+	* Say "Bye, bye" to GnomeVFS... but only if it has been up yet :-)
+	**/
+	if(gnome_vfs_initialized())
+	{
+		gnome_vfs_shutdown();
+	}
+	#endif
+	/**
+	* Quit with the normal Gtk+ quit.
+	**/
 	gtk_main_quit();
 	return FALSE;
 }
