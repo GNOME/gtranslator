@@ -45,7 +45,7 @@ void team_handle_new(gchar *team_code)
 		xmlNodePtr root,tmp;
 		root=xmlNewDocNode(teamlist,NULL,"teams",NULL);
 		tmp=xmlDocSetRootElement(teamlist,root);
-		xmlChildNode(root,tmp);
+		xmlAddChild(root,tmp);
 		/**
 		* Save the file now.
 		**/
@@ -82,20 +82,20 @@ void team_handle_new(gchar *team_code)
 		**/
 		attribute=xmlSetProp(newnode,"name",team_code);
 		/**
+		* Add the node to the document.
+		**/
+		xmlAddChild(teams,newnode);
+		/**
 		* Save the file.
 		**/
 		xmlSaveFile(MESSAGE_DB_DIR"/teams.xml",teamlist);
 		/**
-		* Free the node & the attribute pointers.
+		* Free the node pointer.
 		**/
 		if(newnode)
 		{
 			xmlFreeNode(newnode);
 		}
-		if(attribute)
-		{
-			xmlFreeProp(attribute);
-		}	
 	}
 }
 
@@ -141,7 +141,7 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 		/**
 		* Iterate the node.
 		**/
-		team=team->next;	
+		team=team->next;
 	}
 	/**
 	* Check for the list and return it.
@@ -171,7 +171,7 @@ gint lookup_in_doc(xmlDocPtr doc,gchar *req)
 			{
 				return 1;
 			}
-		}	
+		}
 		/**
 		* Iterate the node.
 		**/

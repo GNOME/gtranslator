@@ -68,12 +68,12 @@
 GList *db_list;
 
 /**
-* Loads the message db base for the specified language.
+* Loads the message database for the specified language.
 **/
 void parse_db_for_lang(gchar *language_code);
 
 /**
-* Checks the type of the message db file.
+* Checks the type of the message database file.
 **/
 void parse_db_check(xmlDocPtr testit);
 

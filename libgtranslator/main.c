@@ -45,7 +45,7 @@ int main(int argc,char *argv[])
 	* Init the NLS if it's necessary.
 	**/
 	#ifdef ENABLE_NLS
-	bindtextdomain("gtranslator",PACKAGE_LOCALE_DIR);
+	bindtextdomain("gtranslator", PACKAGE_LOCALE_DIR);
 	textdomain("gtranslator");
 	#endif
 	/**

@@ -1,6 +1,9 @@
 2000-09-23  Fatih Demir	<kabalak@gmx.net>
 
-	* team-handle.c: Free some used nodes and attributes.
+	* parse-db.c/h: Some cosmetic corrections.
+
+	* team-handle.c: Free the used node but not the attribute
+		which causes a segfault :(
 
 	* handle-db.c: Corrected the add-routines and made them
 		obviously working,

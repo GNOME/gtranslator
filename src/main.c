@@ -53,11 +53,31 @@ int main(int argc, char *argv[])
 	**/
 	poptContext context;
 	const char **args;
-
+	/**
+	* The GConf error stuff.
+	**/
+	#ifdef GCONF_IS_PRESENT
+	GError	*error;
+	#endif
+	
+	/**
+	* Is i18n-support wished ?
+	**/
 	#ifdef ENABLE_NLS
 	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain(PACKAGE);
 	#endif
+
+	/**
+	* Do we have GConf ? 
+	**/
+	#ifdef GCONF_IS_PRESENT
+	if(!(gconf_init(argc,argv, error)))
+	{
+		g_error(_("Couldn't init the GConf library!"));
+	}
+	#endif
+	
 	/**
 	* Init gtranslator.
 	**/

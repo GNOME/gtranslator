@@ -51,10 +51,6 @@ void parse_db_for_lang(gchar *language)
 	**/
 	xmldoc=xmlParseFile(file);
 	/**
-	* Check the file ..
-	**/
-	parse_db_check(xmldoc);
-	/**
 	* If there's no such file print an error .
 	**/
 	if(xmldoc==NULL)
