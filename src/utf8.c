@@ -67,7 +67,6 @@ void set_new_environment()
 	 * Get the full-length language name to satisfy our needs.
 	 */
 	localename=gtranslator_utils_get_full_language_name(localename);
-	
 	setlocale(LC_ALL, localename);
 }
 

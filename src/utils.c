@@ -276,8 +276,8 @@ gchar *gtranslator_utils_get_locale_name(void)
 			 * Check for the language in the header -- may it be in 
 			 *  English or in the current locale..
 			 */
-			if(!strcmp(languages[c].name, po->header->language) ||
-				!strcmp(_(languages[c].name), po->header->language))
+			if(!g_strcasecmp(languages[c].name, po->header->language) ||
+				!g_strcasecmp(_(languages[c].name), po->header->language))
 			{
 				return languages[c].lcode;
 			}
