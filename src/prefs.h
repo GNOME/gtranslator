@@ -81,6 +81,11 @@ void prefs_init_default(void);
 void prefs_init_syntax_colors(void);
 
 /*
+ * Convert the fg/bg settings from < 2001-03-03 to the new places.
+ */
+void prefs_convert_colors(void);
+
+/*
  * Routines for saving/restoring/setting geometry of the main window.
  */
 void save_geometry(void);

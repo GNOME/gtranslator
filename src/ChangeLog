@@ -1,10 +1,16 @@
 2001-03-03  Fatih Demir	<kabalak@gtranslator.org>
 
+	* query.c/.h: Added a list capable query function and a domains parsing
+		function.
+	
 	* stylistics.c: Hm, don't free up the now simply given color value
-		paths.
+		paths and call the new convert fucntion while getting value
+		 from the preferences.
 
-	* prefs_init.c: Changed the initial color values according to the
-		new color value path.
+	* prefs.h & prefs_init.c: Changed the initial color values according to
+		the new color value path and also implemented a new temporary
+		 "prefs_convert_colors" function which converts the previous
+		   fg/bg values to the moved places.
 
 	* gui.c & stylistics.c: Split up the color setting locations to "fg/bg"
 		for color schemes and "own_fg/own_bg" for the GnomeColorPickers

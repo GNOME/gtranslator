@@ -97,7 +97,7 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 	}
 
 	g_return_if_fail(path!=NULL);
-	
+
 	gnome_color_picker_get_i8(GNOME_COLOR_PICKER(colorpicker),
 		&red, &green, &blue, NULL);
 	
@@ -127,6 +127,11 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 	}
 	
 	g_return_if_fail(path!=NULL);
+
+	/*
+	 * Convert the color names/values.
+	 */ 
+	prefs_convert_colors();
 
 	/*
 	 * Restore the color values from the preferences.

@@ -19,16 +19,18 @@
 
 #include "query.h"
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-util.h>
 
 #include <ctype.h>
 #include <string.h>
 #include <locale.h>
+#include <dirent.h>
 
 /*
  * Setup the real language names ala "tr_TR" to get the localized values
  *  for the given "halfwise" language name.
  */
-void setup_language(char **lang);
+gchar *setup_language(gchar *lang);
 
 /*
  * A simply query method (wraps dgettext).
@@ -42,7 +44,7 @@ gchar *gtranslator_query_simple(const gchar *domain, const char *message,
 	g_return_val_if_fail(domain!=NULL, NULL);
 	g_return_val_if_fail(message!=NULL, NULL);
 
-	setup_language(&language);
+	language=setup_language(language);
 	
 	setlocale(LC_ALL, language);
 
@@ -60,53 +62,131 @@ gchar *gtranslator_query_simple(const gchar *domain, const char *message,
 	g_string_free(str, 1);
 }
 
-void setup_language(char **lang)
+/*
+ * Just accomplish the given language name to it's full beautifulness.
+ */
+gchar *setup_language(gchar *lang)
 {
-	g_return_if_fail(*lang!=NULL);
+	g_return_val_if_fail(lang!=NULL, NULL);
 
 	/*
 	 * If the language name does already include an underscore it will
 	 *  be surely a complete language name.
 	 */  
-	if(strchr(*lang, '_'))
+	if(strchr(lang, '_'))
 	{
-		return;
+		return lang;
 	}
 	else
 	{
 		/*
 		 * Longer language names should also be Ok.
 		 */ 
-		if(strlen(*lang) > 2)
+		if(strlen(lang) > 2)
 		{
-			return;
+			return lang;
 		}
 		else
 		{
-			gchar *newlang;
-			gchar tail[1];
-			#define assign(x, y, z); \
-			if(*x[z] && *x[z]!='\0' && isupper(*x[z])) \
-			{ \
-				y[z]=*x[z]; \
-				tolower(*x[z]); \
-			} \
-			else \
-			{ \
-				y[z]=toupper(*x[z]); \
+			gchar *taillanguage=g_strdup(lang);
+			GString *language=g_string_new(lang);
+			
+			g_strup(taillanguage);
+
+			language=g_string_down(language);
+
+			language=g_string_append_c(language, '_');
+			language=g_string_append(language, taillanguage);
+
+			if(language->len > 0)
+			{
+				return language->str;
+			}
+			else
+			{
+				return NULL;
 			}
 
-			assign(lang, tail, 0);
-			assign(lang, tail, 1);
-
-			g_message("0+1 done");
-
-			newlang=*lang;
-
-			sprintf(*lang, "%s_%c%c", newlang,
-				tail[0], tail[1]);
-
-			g_free(newlang);
+			g_string_free(language, 1);
 		}
 	}
+}
+
+/*
+ * Return a list of all matching messages from the domainlist.
+ */
+GList *gtranslator_query_list(GList *domainlist, const gchar *message,
+	gchar *language)
+{
+	GList *matches=NULL;
+	gchar *translation;
+	
+	g_return_val_if_fail(domainlist!=NULL, NULL);
+	
+	/*
+	 * Hm, does the list consist out of gchars or not; test it here.
+	 */ 
+	if(sizeof(domainlist->data)!=sizeof(gchar *))
+	{
+		return NULL;
+	}
+
+	while(domainlist)
+	{
+		translation=gtranslator_query_simple(
+			((const gchar *)domainlist->data),
+			message, language);
+
+		/*
+		 * Only add the result to the list if it's a translation
+		 *  ever -- dgettext returns the queried string if it didn't
+		 *   find anything for it, so that we should drop that cases.
+		 */   
+		if(strcmp(translation, message))
+		{
+			matches=g_list_append(matches, translation);
+		}
+
+		domainlist=domainlist->next;
+	}
+
+	return matches;
+}
+
+/*
+ * Return a list of all domains in the given directory.
+ */ 
+GList *gtranslator_query_domains(const gchar *directory)
+{
+	struct dirent *entry;
+	DIR *dir;
+	GList *domains=NULL;
+		
+	g_return_val_if_fail(directory!=NULL, NULL);
+	
+	dir=opendir(directory);
+	
+	if(!dir)
+	{
+		g_warning(_("Couldn't open locales directory `%s'!"), directory);
+		return NULL;
+	}
+
+	/*
+	 * Get all the entries in the directory -- but first strip out the .mo
+	 *  extension.
+	 */ 
+	while((entry=readdir(dir))!=NULL)
+	{
+		if((strcmp(entry->d_name, ".") && strcmp(entry->d_name, "..")) &&
+			(!strcmp(entry->d_name, ".mo") || 
+			!strcmp(entry->d_name, ".gmo")))
+		{
+			/* FIXME TODO FIXME */
+		}
+	}
+
+	closedir(dir);
+
+	return domains;
 }

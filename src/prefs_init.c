@@ -98,3 +98,35 @@ void prefs_init_syntax_colors()
 	
 	gtranslator_config_close();
 }
+
+void prefs_convert_colors()
+{
+	gchar *value;
+	gboolean converted=FALSE;
+	
+	gtranslator_config_init();
+
+	value=gtranslator_config_get_string("colors/fg");
+
+	if(value && value[0]=='#')
+	{
+		gtranslator_config_set_string("colors/own_fg", value);
+		converted=TRUE;
+	}
+
+	value=gtranslator_config_get_string("colors/bg");
+
+	if(value && value[0]=='#')
+	{
+		gtranslator_config_set_string("colors/own_bg", value);
+		converted=TRUE;
+	}
+
+	if(converted)
+	{
+		gtranslator_config_set_string("colors/fg", "black");
+		gtranslator_config_set_string("colors/bg", "white");
+	}
+
+	gtranslator_config_close();
+}

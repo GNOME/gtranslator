@@ -29,4 +29,16 @@
 gchar *gtranslator_query_simple(const gchar *domain, const gchar *message,
 	gchar *language);
 
+/*
+ * Get all ocurrences for the message in the given domainlist and return a
+ *  GList out of gchar's.
+ */
+GList *gtranslator_query_list(GList *domainlist, const gchar *message,
+	gchar *language);	
+
+/*
+ * Returns a list of all found domains in directory.
+ */
+GList *gtranslator_query_domains(const gchar *directory);
+
 #endif
