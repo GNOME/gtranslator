@@ -1,3 +1,17 @@
+2003-07-05  Fatih Demir <kabalak@gtranslator.org>
+
+	* mime/.cvsignore & mime/Makefile.am: Adepted for the new filename and
+		the changed routine logic of the keys mime file.
+
+	* mime/gtranslator.keys.in|gtranslator.keys_template: Made changes to
+		the logic of how we're building the keys file to avoid problems
+		 with the logic and not substituted @PIXMAP_DIR@ variables in
+		  the keys file - we do now use gtranslator.keys_template.in
+		   as the template file which gets subst by ./configure to
+		    gtranslator.keys_template and intltools generate out of it
+		     the gtranslator.keys file which gets installed then.
+		      Should be working now alltogether...
+
 2003-06-16  Fatih Demir <kabalak@gtranslator.org>
 
 	* scripts/*.sh: Removed the 1st line ":" before the "#!/bin/sh" which
