@@ -63,31 +63,13 @@ gboolean backend_open(const gchar *filename)
 	FILE 		*f;
 	
 	gchar 	 	 line[256];
-	gchar 		*str;
-	gchar 		*e;
+	gchar 		*str=NULL;
+	gchar 		*stuff=NULL;
 
-	gint		 no=0;
-	gint		 lines_count=0;
-	
 	/*
 	 * Wrong filenames are bad .-(
 	 */
 	g_return_val_if_fail(filename!=NULL, FALSE);
-
-	po->filename=g_strdup(filename);
-	po->header=gtranslator_header_create_from_prefs();
-
-	po->header->prj_name=g_strdup(filename);
-	po->header->prj_version="1";
-
-	/*
-	 * Some initializations.
-	 */
-	po->messages=NULL;
-	po->obsolete=NULL;
-	po->fuzzy=0;
-
-	str=e=NULL;
 
 	/*
 	 * Open the file via fopen and check the resulting FILE *.
@@ -98,8 +80,6 @@ gboolean backend_open(const gchar *filename)
 	while(fgets(line, sizeof(line), f)!=NULL)
 	{
 
-		lines_count++;
-		
 		/*
 		 * Every newline should separate a "message".
 		 */
@@ -107,48 +87,20 @@ gboolean backend_open(const gchar *filename)
 		
 		if((!line[0] || line[0]=='\n') && str)
 		{
-			GtrMsg *msg;
-
-			g_return_val_if_fail(str!=NULL, FALSE);
-
-			msg=g_new0(GtrMsg, 1);
-			no++;
-
-			/*
-			 * Construct a foo'sh message.
-			 */
-			msg->no=no;
-			msg->pos=lines_count;
-			
-			msg->msgid=g_strdup(str);
-			msg->msgstr=g_strdup("");
-			
-			msg->comment=gtranslator_comment_new("");
-			msg->status |= GTR_MSG_STATUS_UNKNOWN;
-			
-			GTR_FREE(str);
-
-			/*
-			 * Set up our fake'sh messages list.
-			 */
-			po->messages=g_list_prepend(po->messages, (gpointer) msg);
+			g_message("DEBUG>> msgid \"%s\"\nmsgstr \"\"\n", str);
 		}
 		else
 		{
-			g_return_val_if_fail(str!=NULL, FALSE);
-			
 			/*
-			 * Rescue and append all the lines till the next newline.
+			 * Rescue & append all the lines till the next newline.
 			 */
-			e=g_strdup(str);
+			stuff=g_strdup(str);
 		    	GTR_FREE(str);
 
-			str=g_strdup_printf("%s\n%s", e, line);
-			GTR_FREE(e);
+			str=g_strdup_printf("%s\n%s", stuff, line);
+			GTR_FREE(stuff);
 		}
 	}
-
-	po->messages=g_list_reverse(po->messages);
 
 	fclose(f);
 	return TRUE;
