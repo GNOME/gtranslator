@@ -71,7 +71,7 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 	 * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
 	 *
 	 * Translators: you should translate this foo'sh string into something
-	 *  another then a 'Y' to avoid the usage of the mid dot ('·') in the
+	 *  another than a 'Y' to avoid the usage of the mid dot ('·') in the
 	 *   text displaying routines of gtranslator.
 	 */
 	if (_("Y")[0]=='Y')
