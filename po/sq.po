@@ -1,26 +1,25 @@
 # Albanian translation of gtranslator
 # This file is distributed under the same license as the gtranslator package.
-# Copyright (C) 2000, 2001, 2002, 2003 Free Software Foundation, Inc.
-# Laurent Dhima <laurenti@alblinux.net>, 2003.
+# Copyright (C) 2003, 2004 Free Software Foundation, Inc.
+# Laurent Dhima <laurenti@alblinux.net>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator\n"
+"Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-03 22:56+0200\n"
-"PO-Revision-Date: 2003-08-28 17:24+0200\n"
+"POT-Creation-Date: 2004-02-17 02:31+0100\n"
+"PO-Revision-Date: 2004-02-17 02:34+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
 msgstr "Programi i përkthimit për GNOME"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1143
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -39,7 +38,7 @@ msgstr ""
 "gtranslator është një suite për të edituar file po dhe ju vë në dispozicion "
 "shumë funksione."
 
-#: src/bookmark.c:93 src/dialogs.c:1492
+#: src/bookmark.c:93 src/dialogs.c:1497
 msgid "No comment"
 msgstr "Asnjë koment"
 
@@ -156,11 +155,11 @@ msgstr "Gjej tek:"
 msgid "Comments"
 msgstr "Komente"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
+#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:101
 msgid "English"
 msgstr "Anglisht"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
+#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:263
 msgid "Translation"
 msgstr "Përkthimi"
 
@@ -196,19 +195,15 @@ msgstr "Fraza që do të zevëndësojë:"
 msgid "Replace in:"
 msgstr "Zevëndëso tek:"
 
-#: src/dialogs.c:895
+#: src/dialogs.c:902
 msgid "Please enter a string to replace!"
 msgstr "Ju lutem shkruani frazën për t'u zevëndësuar!"
 
-#: src/dialogs.c:903
-msgid "Please enter a string to replace with!"
-msgstr "Shkruaj frazën zevëndësuese!"
-
-#: src/dialogs.c:945
+#: src/dialogs.c:953
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Gabim gjatë ekzekutimit të msgfmt:\n"
 
-#: src/dialogs.c:986
+#: src/dialogs.c:994
 #, c-format
 msgid ""
 "The file\n"
@@ -231,7 +226,7 @@ msgstr ""
 "\n"
 "Ta hap këtë file sidoqoftë ?"
 
-#: src/dialogs.c:1027
+#: src/dialogs.c:1035
 #, c-format
 msgid ""
 "File %s\n"
@@ -240,23 +235,23 @@ msgstr ""
 "File %s\n"
 "është ndryshuar. Dëshironi të kaloni tek kopja e ruajtur?"
 
-#: src/dialogs.c:1059
+#: src/dialogs.c:1064
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- hap nga URI"
 
-#: src/dialogs.c:1071
+#: src/dialogs.c:1076
 msgid "Enter URI:"
 msgstr "Shkruaj URI:"
 
-#: src/dialogs.c:1107
+#: src/dialogs.c:1112
 msgid "No URI given!"
 msgstr "Nuk është shkruar asnjë URI!"
 
-#: src/dialogs.c:1122
+#: src/dialogs.c:1127
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Protokolli URI i dhënë (si p.sh. \"ftp://\") nuk është i suportuar!"
 
-#: src/dialogs.c:1130
+#: src/dialogs.c:1135
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -284,7 +279,7 @@ msgstr ""
 "file:///<FILE-PO> ose\n"
 "http://www.DOMAIN.COM/FILE-PO"
 
-#: src/dialogs.c:1169
+#: src/dialogs.c:1174
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -301,50 +296,50 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1181
+#: src/dialogs.c:1186
 msgid "Postpone decision"
 msgstr "Postpone decision"
 
-#: src/dialogs.c:1183
+#: src/dialogs.c:1188
 msgid "Ignore recovery file"
 msgstr "Injoro file e rekuperimit"
 
-#: src/dialogs.c:1185
+#: src/dialogs.c:1190
 msgid "Recover file"
 msgstr "File i rekuperimit"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1244
+#: src/dialogs.c:1249
 msgid "Here you can query existing translations from your learn buffer."
 msgstr "Këtu mund të konsultohen përkthimet ekzistuese tek buffer mësues."
 
-#: src/dialogs.c:1247
+#: src/dialogs.c:1252
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "gtranslator -- pyet buffer-in tuaj personal të mësimit"
 
-#: src/dialogs.c:1251 src/menus.c:360
+#: src/dialogs.c:1256 src/menus.c:360
 msgid "Query"
 msgstr "Pyet"
 
-#: src/dialogs.c:1252
+#: src/dialogs.c:1257
 msgid "Query message content"
 msgstr "Kontrollo përmbajtjen e mesazhit"
 
-#: src/dialogs.c:1262
+#: src/dialogs.c:1267
 msgid "Query string:"
 msgstr "Fraza e pyetjes:"
 
-#: src/dialogs.c:1300
+#: src/dialogs.c:1305
 msgid "No query string given!"
 msgstr "Nuk është shkruar asnjë frazë!"
 
-#: src/dialogs.c:1322
+#: src/dialogs.c:1327
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Nuk arrita të gjej asnjë rezultat për kërkesën tuaj tek buffer mësues!"
 
-#: src/dialogs.c:1334
+#: src/dialogs.c:1339
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -357,11 +352,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1404
+#: src/dialogs.c:1409
 msgid "Query's result translation is already there!"
 msgstr "Rezultati i kërkimit është përkthyer njëherë!"
 
-#: src/dialogs.c:1436
+#: src/dialogs.c:1441
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -369,11 +364,11 @@ msgstr ""
 "Dëshironi që gtranslator të përkthejë automatikisht këtë file duke\n"
 "përdorur informacionet nga buffer-i juaj personal mësues?"
 
-#: src/dialogs.c:1472 src/dialogs.c:1500
+#: src/dialogs.c:1477 src/dialogs.c:1505
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- shtoj libërshënues me koment?"
 
-#: src/dialogs.c:1492
+#: src/dialogs.c:1497
 msgid "Comment for the bookmark:"
 msgstr "Komenti për libërshënuesin:"
 
@@ -390,52 +385,56 @@ msgstr ""
 "Nuk u gjet\n"
 "\"%s\""
 
-#: src/gui.c:199
+#: src/gui.c:182
 msgid "Edit comment"
 msgstr "Ndrysho komentin"
 
-#: src/gui.c:501
+#: src/gui.c:493
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ %i akoma me gabime (Fuzzy) ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ %i akoma me gabime (Fuzzy) ]"
+msgstr[1] "%s [ %i akoma me gabime (Fuzzy) ]"
 
-#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
+#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "Me gabime"
 
-#: src/gui.c:505
+#: src/gui.c:497
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nuk ka më asnjë mesazh me gabime ]"
 
-#: src/gui.c:513
+#: src/gui.c:505
 msgid "Sticky (Message & translation are the same)"
 msgstr "Ngjit (Mesazhi dhe përkthimi i tij janë të njëjtë)"
 
-#: src/gui.c:515 src/messages-table.c:323
+#: src/gui.c:507 src/messages-table.c:332
 msgid "Translated"
 msgstr "Përkthyer"
 
-#: src/gui.c:524
+#: src/gui.c:516
 #, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ %i akoma të papërkthyer ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ %i akoma i papërkthyer ]"
+msgstr[1] "%s [ %i akoma i papërkthyer ]"
 
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
+#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
 msgid "Untranslated"
 msgstr "Papërkthyer"
 
-#: src/gui.c:526
+#: src/gui.c:518
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Nuk ka asnjë mesazh të papërkthyer ]"
 
-#: src/gui.c:545
+#: src/gui.c:537
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Mesazhi %d / %d / Gjendja: %s (Mesazhi përmban forma në shumës)"
 
-#: src/gui.c:549
+#: src/gui.c:541
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Mesazhi %d / %d / Gjendja: %s"
@@ -522,262 +521,266 @@ msgid "Afrikaans"
 msgstr "Afrikane"
 
 #: src/languages.c:41
+msgid "Albanian"
+msgstr "Shqip"
+
+#: src/languages.c:45
 msgid "Arabic"
 msgstr "Arabe"
 
-#: src/languages.c:45
+#: src/languages.c:49
 msgid "Azerbaijani Turkish"
 msgstr "Turqishte e Azerbaijani"
 
-#: src/languages.c:49
+#: src/languages.c:53
 msgid "Basque"
 msgstr "Baske"
 
-#: src/languages.c:53
+#: src/languages.c:57
 msgid "Belorussian"
 msgstr "Bjellorusisht"
 
-#: src/languages.c:57
+#: src/languages.c:61
 msgid "Bengali"
 msgstr "Bengali"
 
-#: src/languages.c:61
+#: src/languages.c:65
 msgid "Britton"
 msgstr "Bretonisht"
 
-#: src/languages.c:65
+#: src/languages.c:69
 msgid "Bulgarian"
 msgstr "Bullgarisht"
 
-#: src/languages.c:69
+#: src/languages.c:73
 msgid "Catalan"
 msgstr "Katalane"
 
-#: src/languages.c:73
+#: src/languages.c:77
 msgid "Chinese/Simplified"
 msgstr "Kineze/E thjeshtë"
 
-#: src/languages.c:77
+#: src/languages.c:81
 msgid "Chinese/Traditional"
 msgstr "Kineze/Tradicionale"
 
-#: src/languages.c:81
+#: src/languages.c:85
 msgid "Croatian"
 msgstr "Kroacisht"
 
-#: src/languages.c:85
+#: src/languages.c:89
 msgid "Czech"
 msgstr "Çekisht"
 
-#: src/languages.c:89
+#: src/languages.c:93
 msgid "Danish"
 msgstr "Danisht"
 
-#: src/languages.c:93
+#: src/languages.c:97
 msgid "Dutch"
 msgstr "Hollandeze"
 
-#: src/languages.c:101
+#: src/languages.c:105
 msgid "English/Canada"
 msgstr "Anglisht/Kanada"
 
-#: src/languages.c:105
+#: src/languages.c:109
 msgid "English/GB"
 msgstr "Anglisht/GB"
 
-#: src/languages.c:109
+#: src/languages.c:113
 msgid "English/USA"
 msgstr "Anglisht/USA"
 
-#: src/languages.c:113
+#: src/languages.c:117
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: src/languages.c:117
+#: src/languages.c:121
 msgid "Estonian"
 msgstr "Estonisht"
 
-#: src/languages.c:121
+#: src/languages.c:125
 msgid "Persian"
 msgstr "Persiane"
 
-#: src/languages.c:125
+#: src/languages.c:129
 msgid "Finnish"
 msgstr "Finlandeze"
 
-#: src/languages.c:129
+#: src/languages.c:133
 msgid "French"
 msgstr "Frengjisht"
 
-#: src/languages.c:133
+#: src/languages.c:137
 msgid "Galician"
 msgstr "Galician"
 
-#: src/languages.c:137
+#: src/languages.c:141
 msgid "German"
 msgstr "Gjermanisht"
 
-#: src/languages.c:141
+#: src/languages.c:145
 msgid "Greek"
 msgstr "Greqisht"
 
-#: src/languages.c:145
+#: src/languages.c:149
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: src/languages.c:149
+#: src/languages.c:153
 msgid "Hindi"
 msgstr "Hindi"
 
-#: src/languages.c:153
+#: src/languages.c:157
 msgid "Hungarian"
 msgstr "Hungarisht"
 
-#: src/languages.c:157
+#: src/languages.c:161
 msgid "Icelandic"
 msgstr "Islanda"
 
-#: src/languages.c:161
+#: src/languages.c:165
 msgid "Indonesian"
 msgstr "Indoneziane"
 
-#: src/languages.c:165
+#: src/languages.c:169
 msgid "Italian"
 msgstr "Italisht"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Irish"
 msgstr "Irlandeze"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Japanese"
 msgstr "Japonisht"
 
-#: src/languages.c:177
+#: src/languages.c:181
 msgid "Kannada"
 msgstr "Kanadeze"
 
-#: src/languages.c:181
+#: src/languages.c:185
 msgid "Korean"
 msgstr "Koreane"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Latvian"
 msgstr "Latuane"
 
-#: src/languages.c:189
+#: src/languages.c:193
 msgid "Lithuanian"
 msgstr "Lituane"
 
-#: src/languages.c:193
+#: src/languages.c:197
 msgid "Malay/Bahasa Melayu"
 msgstr "Malay/Bahasa Melayu"
 
-#: src/languages.c:197
+#: src/languages.c:201
 msgid "Maltese"
 msgstr "Malteze"
 
-#: src/languages.c:201
+#: src/languages.c:205
 msgid "Marathi"
 msgstr "Marathi"
 
-#: src/languages.c:205
+#: src/languages.c:209
 msgid "Norwegian/Bokmaal"
 msgstr "Norvegjisht/Bokmaal"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Norwegian/Nynorsk"
 msgstr "Norvegjisht/Nynorsk"
 
-#: src/languages.c:213
+#: src/languages.c:217
 msgid "Punjabi"
 msgstr "Punjabi"
 
-#: src/languages.c:217
+#: src/languages.c:221
 msgid "Polish"
 msgstr "Polonisht"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Portuguese"
 msgstr "Portugeze"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Portuguese/Brazil"
 msgstr "Portugeze/Brazil"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Romanian"
 msgstr "Romanisht"
 
-#: src/languages.c:233
+#: src/languages.c:237
 msgid "Russian"
 msgstr "Rusisht"
 
-#: src/languages.c:237
+#: src/languages.c:241
 msgid "Serbian/Cyrillic"
 msgstr "Sërbisht/Cyrillic"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Serbian/Latin"
 msgstr "Sërbisht/Latin"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Slovak"
 msgstr "Sllovake"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Slovenian"
 msgstr "Sllovenisht"
 
-#: src/languages.c:253
+#: src/languages.c:257
 msgid "Spanish"
 msgstr "Spanjisht"
 
-#: src/languages.c:257
+#: src/languages.c:261
 msgid "Spanish/Spain"
 msgstr "Spanjisht/Spanjë"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Spanish/Mexico"
 msgstr "Spanjisht/Meksikë"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Swedish"
 msgstr "Suedisht"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Tamil"
 msgstr "Tamil"
 
-#: src/languages.c:273
+#: src/languages.c:277
 msgid "Telugu"
 msgstr "Telugu"
 
-#: src/languages.c:277
+#: src/languages.c:281
 msgid "Thai"
 msgstr "Thai"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Turkish"
 msgstr "Turqisht"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Ukrainian"
 msgstr "Ukraine"
 
-#: src/languages.c:289
+#: src/languages.c:293
 msgid "Uzbekian"
 msgstr "Uzbekian"
 
-#: src/languages.c:293
+#: src/languages.c:297
 msgid "Vietnamese"
 msgstr "Vietnamisht"
 
-#: src/languages.c:297
+#: src/languages.c:301
 msgid "Walloon"
 msgstr "Walloon"
 
-#: src/languages.c:301
+#: src/languages.c:305
 msgid "Welsh"
 msgstr "Welsh"
 
@@ -974,8 +977,7 @@ msgstr "_Importo nga UTF-8..."
 
 #: src/menus.c:121
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr ""
-"Importon një file po të kodifikuar UTF-8 në kodifikimin korrispondent piatë "
+msgstr "Importon një file po të kodifikuar UTF-8 në kodifikimin korrispondent piatë "
 
 #: src/menus.c:153
 msgid "_Query..."
@@ -1197,7 +1199,7 @@ msgstr "Të gjithë mesazhet janë të përkthyer."
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "gtranslator -- ndrysho format në shumës tek përkthimi i mesazhit"
 
-#: src/messages-table.c:243
+#: src/messages-table.c:252
 msgid "Original"
 msgstr "Origjinali"
 
@@ -1225,7 +1227,7 @@ msgstr "Nuk arrij të hap file gettext e %s-uar `%s'!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Nuk arrij të hap file e zip-uar po `%s'!"
 
-#: src/parse.c:483
+#: src/parse.c:487
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1236,7 +1238,7 @@ msgstr ""
 "tek rreshti %d.\n"
 "Ju lutem kontrolloni file dhe provoni përsëri."
 
-#: src/parse.c:538
+#: src/parse.c:542
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1245,7 +1247,7 @@ msgstr ""
 "File është bosh:\n"
 "%s"
 
-#: src/parse.c:560
+#: src/parse.c:564
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "File `%s' nuk ekziston fare!"
@@ -1253,16 +1255,16 @@ msgstr "File `%s' nuk ekziston fare!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:692
+#: src/parse.c:696
 msgid "Header record not found - defaulting from preferences"
 msgstr "Regjistrimi i header nuk u gjet - po kopjoj nga preferimet"
 
-#: src/parse.c:708
+#: src/parse.c:712
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:920
+#: src/parse.c:924
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1273,25 +1275,31 @@ msgstr ""
 "Files POT krijohen nga procesi i kompilimit.\n"
 "File juaj duhet të ketë emrin '%s.po'."
 
-#: src/parse.c:982
+#: src/parse.c:986
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nuk arrij të hap në shkrim file `%s'!"
 
-#: src/parse.c:1034
+#: src/parse.c:1038
 #, c-format
 msgid ""
 "File %s\n"
-"contains %d fuzzy messages"
-msgstr ""
+"contains %d fuzzy message"
+msgid_plural ""
 "File %s\n"
-"përmban %d mesazhe me gabime"
+"contains %d fuzzy messages"
+msgstr[0] ""
+"File %s\n"
+"përmban %d mesazh me gabime"
+msgstr[1] ""
+"File %s\n"
+"përmban %d mesazh me gabime"
 
-#: src/parse.c:1303
+#: src/parse.c:1310
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Më vjen keq, në sistemin tuaj mungon msgfmt!"
 
-#: src/parse.c:1338
+#: src/parse.c:1345
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1559,26 +1567,25 @@ msgstr "Fuzzy korrispondues"
 
 #: src/prefs.c:603
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
-"Përdor routine e korrispondimit \"fuzzy\" për pyetjet tek buffer-i mësues"
+msgstr "Përdor routine e korrispondimit \"fuzzy\" për pyetjet tek buffer-i mësues"
 
 #: src/prefs.c:610
 msgid "Minimal required similarity persentage for fuzzy queries:"
 msgstr "Përqindja e ngjashmërisë minimum për pyetjet fuzzy:"
 
-#: src/prefs.c:655
+#: src/prefs.c:659
 msgid "Please enter your name!"
 msgstr "Ju lutem shkruani emrin tuaj!"
 
-#: src/prefs.c:669
+#: src/prefs.c:679
 msgid "Please enter your EMail address!"
 msgstr "Ju lutem shkruani adresën tuaj EMail!"
 
-#: src/prefs.c:682
+#: src/prefs.c:699
 msgid "Please enter a valid EMail address!"
 msgstr "Ju lutem shkruani një adresë të vlefshme EMail!"
 
-#: src/replace.c:171
+#: src/replace.c:175
 msgid "No replacements made!"
 msgstr "Nuk u krye asnjë zevëndësim!"
 
@@ -1733,3 +1740,4 @@ msgstr "Host `%s' nuk ka adresë!"
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Transferimi u ndërpre!"
+
