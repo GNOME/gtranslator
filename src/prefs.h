@@ -58,14 +58,13 @@ struct {
 	**/
 	guint check_recent_file		: 1;
 	/**
-	* If the obsolete entries from the recent files list
-	*  should be deleted.
-	**/
-	guint delete_obsolete_rfentries	: 1;
-	/**
 	* If to show the unneeded dialogs within the update function.
 	**/
 	guint uzi_dialogs		: 1;
+	/**
+	* If we'd use the own font and color specifications.
+	**/
+	guint use_own_specs		: 1;
 } wants;
 
 /* Preferences-box creation and callbacks */

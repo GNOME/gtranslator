@@ -36,12 +36,11 @@ static GtkWidget * spellcheck_create(void)
 static gboolean spellcheck_msg(GList * msg, gpointer * spell)
 {
 	if (GTR_MSG(msg->data)->msgstr == NULL) return FALSE;
-	if (gnome_spell_check(GNOME_SPELL(spell), 
-		GTR_MSG(msg->data)->msgstr) == 0) {
+	if (!gnome_spell_check(GNOME_SPELL(spell), 
+		GTR_MSG(msg->data)->msgstr)) {
 		g_print("Translation is OK!\n");
 		return FALSE;
 	} else {
-		g_print("There are typos :(\n");
 		return TRUE;
 	}
 }

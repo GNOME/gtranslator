@@ -27,7 +27,7 @@ static gint list_ref = 0;
 
 /* The notebook page widgets  */
 static GtkWidget *first_page, *second_page, *third_page, *fourth_page,
-		*fifth_page;
+		*fifth_page, *sixth_page;
 
 /**
 * The entries
@@ -43,8 +43,14 @@ static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
-	*recent_files_number, *check_recent_files,
-	*delete_obsolete_rfentries;
+	*recent_files_number, *check_recent_files, *own_specs;
+	
+/**
+* The font dialog and the color settings widgets.
+**/
+static GtkWidget 
+	*foreground, *background, *font;
+		
 
 /* The preferences dialog */
 static GtkWidget *prefs = NULL;
@@ -191,6 +197,13 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	**/
 	static GtkObject *recent_files_adjustment;
 	GtkWidget *recent_files_number_label;
+	
+	/**
+	* And some more widgets for the color/fonts
+	*  settings.
+	**/
+	GtkWidget *fg_color_label, *bg_color_label, *font_label;
+	
 	raise_and_return_if_exists(prefs);
 	/**
 	* Create the prefs-box .. 
@@ -205,6 +218,7 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 4, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 2, 2, _("Recent files menu"));
+	sixth_page = append_page_table(prefs, 2, 3, _("Fonts & Colors"));
 	/**
 	* Create all the personal entries
 	**/
@@ -290,9 +304,6 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	check_recent_files=attach_toggle_with_label(fifth_page, 0,
 		_("Check every file in the list for existence"),
 		wants.check_recent_file, prefs_box_changed);
-	delete_obsolete_rfentries=attach_toggle_with_label(fifth_page, 1,
-		_("Delete double entries following each other"),
-		wants.delete_obsolete_rfentries, prefs_box_changed);
 	/**
 	* [ GtkSpinButton ] maximal ....., e.g. 7 maximal entries ..
 	**/	
@@ -308,14 +319,62 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
 		recent_files_number, 1, 2, 2, 3);
 	/**
-	* Connect the signal with the GtkSpinButton.
+	* The sixth page.
+	**/
+	own_specs=attach_toggle_with_label(sixth_page, 0,
+		_("Apply special font/colors"),
+		wants.use_own_specs, prefs_box_changed);
+	/**
+	* Create the labels.
+	**/	
+	font_label=gtk_label_new(_("Font:"));
+	fg_color_label=gtk_label_new(_("Foreground color:"));
+	bg_color_label=gtk_label_new(_("Background color:"));
+	
+	/**
+	* Create the font picker.
+	**/
+	font=gnome_font_picker_new();
+	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
+		_("gtranslator -- font selection"));
+		
+	/**
+	* And the color pickers.
+	**/
+	foreground=gnome_color_picker_new();
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER(foreground),
+		_("gtranslator -- foreground color"));
+	background=gnome_color_picker_new();
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER(background),
+		_("gtranslator -- background color"));
+		
+	/**
+	* Insert the widgets.
+	**/		
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		font_label, 0, 1, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		font, 1, 2, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		fg_color_label, 0, 1, 2, 3);
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		foreground, 1, 2, 2, 3);	
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		bg_color_label, 0, 1, 3, 4);
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		background, 1, 2, 3, 4);	
+		
+	/**
+	* Connect the signals.
 	**/
 	gtk_signal_connect(GTK_OBJECT(recent_files_number), "changed",
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
-			
-	/**
-	* The basic signal-handlers 
-	**/
+	gtk_signal_connect(GTK_OBJECT(font), "font_set",
+			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(foreground), "color_set",
+			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(background), "color_set",		   
+			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);		   
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(prefs_box_apply), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "help",
@@ -330,6 +389,8 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 **/
 static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 {
+	gdouble fg_red, fg_green, fg_blue, fg_alpha;
+	gdouble bg_red, bg_green, bg_blue, bg_alpha;
 	/* We need to apply only once */
 	if (page_num != -1)
 		return;
@@ -355,7 +416,7 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.popup_menu = if_active(enable_popup_menu);
 	wants.uzi_dialogs = if_active(no_uzis);
 	wants.check_recent_file = if_active(check_recent_files);
-	wants.delete_obsolete_rfentries = if_active(delete_obsolete_rfentries);
+	wants.use_own_specs = if_active(own_specs);
 #undef if_active
 	
 	wants.recent_files=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(recent_files_number));
@@ -374,6 +435,12 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	gtranslator_config_set_string("language/encoding", enc);
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
+	gtranslator_config_set_string("font/name", 
+		gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
+	gnome_color_picker_get_d(GNOME_COLOR_PICKER(foreground), &fg_red, &fg_green,
+		&fg_blue, &fg_alpha);
+	gnome_color_picker_get_d(GNOME_COLOR_PICKER(background), &bg_red, &bg_green,
+		&bg_blue, &bg_alpha);
 	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", wants.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
@@ -392,8 +459,8 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 			      wants.uzi_dialogs);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      wants.check_recent_file);
-	gtranslator_config_set_bool("toggles/delete_obsolete_recent_files_entries",
-			      wants.delete_obsolete_rfentries);
+	gtranslator_config_set_bool("toggles/use_own_specs",
+			      wants.use_own_specs);		      
 }
 
 /**
@@ -496,8 +563,8 @@ void read_prefs(void)
 	    gtranslator_config_get_bool("toggles/uzi_dialogs");
 	wants.check_recent_file = 
 	    gtranslator_config_get_bool("toggles/check_recent_files");
-	wants.delete_obsolete_rfentries =
-	    gtranslator_config_get_bool("toggles/delete_obsolete_recent_files_entries");
+	wants.use_own_specs =
+	    gtranslator_config_get_bool("toggles/use_own_specs");    
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();

@@ -53,4 +53,4 @@ gtranslator_LDADD = \
 	$(gconf_libs) \
 	$(XML_LIBS)
 
-EXTRA_DIST = ChangeLog TODO.src
+EXTRA_DIST = ChangeLog

@@ -704,21 +704,6 @@ void gtranslator_display_recent(void)
 			}
 		}
 		/**
-		* Try to get double entries following each other and
-		*  delete these ones.
-		**/
-		if(wants.delete_obsolete_rfentries)
-		{
-			/**
-			* Twice the same logo is an indicator that we've
-			*  got the same files again one after another.
-			**/
-			if((menu-1)->user_data==name)
-			{
-				continue;
-			}
-		}
-		/**
 		* Set the label name.
 		**/
 		menu->label=g_strdup_printf("_%i:  %s", len+1,

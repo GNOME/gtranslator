@@ -52,14 +52,18 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 	regmatch_t pos[1];
 	if (GTR_MSG(msg->data)->msgstr==NULL) 
 		return FALSE;
-	if (!regexec(target, GTR_MSG(msg->data)->msgstr, 1, pos, 0)) {
+	if (!regexec(target, GTR_MSG(msg->data)->msgstr, 1, pos, 0))
+        {
 		/* We found it */
 		goto_given_msg(msg);
 		gtk_editable_select_region(GTK_EDITABLE(trans_box),
 					   pos->rm_so, pos->rm_eo);
 		return TRUE;
-	} else
-		return FALSE;
+	}
+        else 
+        {
+        	return FALSE;	
+        }                
 }
 
 /**
