@@ -3,7 +3,7 @@
 ##
 ## First set the default subdirs.
 ##
-DEFAULT_SUBDIRS = desktop oaf scripts
+DEFAULT_SUBDIRS = desktop oaf scripts gnome-config
 
 ##
 ## Extend it with the gconf-files if it's detected.
