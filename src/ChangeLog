@@ -1,3 +1,15 @@
+2001-08-10  Kevin Vandersloot <kfv101@psu.edu>
+
+	Add bold text and color to the tree. Edit value at function to change the
+	colors.
+	
+	* messages-table.h: add enums for bold and color columns
+	
+	* messages-table.c (.table_extras_new ): do the gtk_object_set on the string
+	columns.
+	(value_at_function): show the status headers as bold. Make the entries red if
+	the status is untranslated.
+
 2001-08-11  Thomas Ziehmer <thomas@gtranslator.org>
 
 	* utils.c: There was a problem in reading a dos file, because

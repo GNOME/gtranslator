@@ -123,6 +123,7 @@ static gboolean is_empty_function(ETreeModel *model, int column,
 	switch (column) {
 	case COL_NUMBER:
 	case COL_LINE:
+	case COL_BOLD:
 		return value == NULL;
 	case COL_ORIGINAL:
 	case COL_TRANSLATION:
@@ -146,8 +147,8 @@ static void free_value_function(ETreeModel *model, int column,
 		if (value)
 			GTR_FREE (value);
 		break;
+	case COL_BOLD:
 	case COL_NUMBER:
-		break;
 	case COL_LINE:
 		break;
 	default:
@@ -171,8 +172,7 @@ static void *duplicate_value_function(ETreeModel *model, int column,
 		return g_strdup (value);
 		break;
 	case COL_NUMBER:
-		return (void *) value;
-		break;
+	case COL_BOLD:
 	case COL_LINE:
 		return (void *) value;
 		break;
@@ -193,8 +193,7 @@ static void *initialize_value_function(ETreeModel *model, int column, void *data
 		return g_strdup ("");
 		break;
 	case COL_NUMBER:
-		return NULL;
-		break;
+	case COL_BOLD:
 	case COL_LINE:
 		return NULL;
 		break;
@@ -213,6 +212,8 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	{
 		if (column == COL_ORIGINAL)
 			return e_utf8_from_locale_string(_("UNTRANSLATED"));
+		else if (column == COL_BOLD)
+			return GINT_TO_POINTER (1);
 		else
 			return NULL;
 	}
@@ -220,6 +221,8 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	{
 		if (column == COL_ORIGINAL)
 			return e_utf8_from_locale_string(_("FUZZY"));
+		else if (column == COL_BOLD)
+			return GINT_TO_POINTER (1);
 		else
 			return NULL;
 	}
@@ -227,6 +230,8 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	{
 		if (column == COL_ORIGINAL)
 			return e_utf8_from_locale_string(_("TRANSLATED"));
+		else if (column == COL_BOLD)
+			return GINT_TO_POINTER (1);
 		else
 			return NULL;
 	}
@@ -275,6 +280,18 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	case COL_LINE:
 		return GINT_TO_POINTER(message->pos);
 		break;
+	case COL_BOLD:
+		return GINT_TO_POINTER(0);
+		break;
+	case COL_COLOR:
+		switch (message->status) {
+		case GTR_MSG_STATUS_UNKNOWN:
+			return "#ff0000";
+			break;
+		default:
+			return NULL;
+			break;
+		}
 	default:
 		g_assert_not_reached ();
 		return NULL;
@@ -292,6 +309,7 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 		return g_strdup (value);
 		break;
 	case COL_NUMBER:
+	case COL_BOLD:
 	case COL_LINE:
 		return g_strdup_printf("%d", (gint) value);
 		break;
@@ -358,9 +376,10 @@ static ETableExtras *table_extras_new()
 	count++;
 	
 	cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
-	/*gtk_object_set (GTK_OBJECT (cell),
- 			"bold_column", 2,
-			NULL);*/
+	gtk_object_set (GTK_OBJECT (cell),
+ 			"bold_column", COL_BOLD,
+ 			"color_column", COL_COLOR,
+			NULL);
 	e_table_extras_add_cell(extras, list_parts[count], 
 				e_cell_tree_new(NULL, NULL, FALSE, cell));
 	count++;
@@ -368,7 +387,9 @@ static ETableExtras *table_extras_new()
 	while(list_parts[count]!=NULL)
 	{
 		cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
-
+		gtk_object_set (GTK_OBJECT (cell),
+ 			"color_column", COL_COLOR,
+			NULL);
 		e_table_extras_add_cell(extras, list_parts[count], cell);
 		count++;
 	}
@@ -460,7 +481,6 @@ void gtranslator_messages_table_clear(void)
  */
 void gtranslator_messages_table_create (void)
 {
-	/*ECell *cell;*/
 	GList *list;
 	gint i=0;
 	
@@ -482,11 +502,6 @@ void gtranslator_messages_table_create (void)
 	unknown_node = e_tree_memory_node_insert (tree_memory, root_node, 0, NULL);
 	fuzzy_node = e_tree_memory_node_insert (tree_memory, root_node, 1, NULL);
 	translated_node = e_tree_memory_node_insert (tree_memory, root_node, 2, NULL);
-	
-	/*cell=e_table_extras_get_cell (tree_extras,"original");
-	gtk_object_set (GTK_OBJECT(cell),
-			"bold_column", 0,
-			NULL);*/
 	
 	while(list)
 	{
