@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.1
+export POZILLA_RELEASE=1.2
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -24,6 +24,15 @@ export MAILING_LIST='GNOME I18N List <gnome-i18n@gnome.org>'
 #
 export CONFIG_DIR="$HOME/.pozilla"
 export BODY_FILE="$CONFIG_DIR/mail.body"
+
+#
+# Save the old LANG evironment and unset it after that.
+#
+_LANG="$LANG"
+_LANGUAGE="$LANGUAGE"
+
+unset LANG
+unset LANGUAGE
 
 #
 # Check for all necessary applications for pozilla.sh.
@@ -76,6 +85,7 @@ do
 	echo "---------------------------------------------------------------"
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-d --days         Days remaining for release"
+	echo "-s --send         Send the merged po files to the given lang" 
 	echo "-r --release      Specifies the coming release's number"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
@@ -157,6 +167,21 @@ do
 		shift 1
 	fi	
 	;;
+	[sS]*)
+	shift 1
+	if test "sendto$1" = "sendto" ; then
+		echo "---------------------------------------------------------------"
+		echo "No languages given to send the po file to."
+		echo "---------------------------------------------------------------"
+	else
+
+		echo "---------------------------------------------------------------"
+		export SENDTO_LANGS="$1 $SENDTO_LANGS"
+		shift 1
+		echo "Sending the merged po files to this lang: $SENDTO_LANGS"
+		echo "---------------------------------------------------------------"
+	fi
+	;;
 	*)
 		true
 	;;
@@ -228,32 +253,47 @@ for i in $PO_FILES
 	case $? in
 	1)
 		echo "You should update your $i po-file for $PACKAGE," > $BODY_FILE
-		echo "it's containing fuzzy or/and untranslated entries if you get it" >> $BODY_FILE
-		echo "in sync with the recent sources for $PACKAGE." >> $BODY_FILE
+		echo " it's containing fuzzy or/and untranslated entries if you get it" >> $BODY_FILE
+		echo "  in sync with the recent sources for $PACKAGE." >> $BODY_FILE
 		echo "" >> $BODY_FILE
 		if test "b$DAYS_REMAINING" != "b" ; then
 			echo "$PACKAGE will release R $RELEASE in $DAYS_REMAINING days, so" >> $BODY_FILE
-			echo "that you should update your translation till then." >> $BODY_FILE
+			echo " that you should update your translation till then." >> $BODY_FILE
 		fi
 		echo "" >> $BODY_FILE
 		echo "Your po-file $i's statistics are:" >> $BODY_FILE
 		msgfmt -v $i 2>>$BODY_FILE
 		echo "" >> $BODY_FILE
+		if test "s$SENDTO_LANGS" != "s" ; then
+			_lang=`echo $i|sed -e 's/.po//g'`
+			echo $SENDTO_LANGS|grep -sq $_lang && {
+				gzip --best -cf < $i > $PACKAGE.$i.gz
+			echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
+			echo " immediately with your update of $i." >> $BODY_FILE
+			echo "" >> $BODY_FILE
+			}
+		fi
 		echo "Have fun within the po-updating :-)" >> $BODY_FILE
 	;;
 	*)
 		echo "Congratulations! $PACKAGE is making R $RELEASE and:" > $BODY_FILE
-		echo "your $i is up-to-date :-)" >> $BODY_FILE
+		echo " your $i is up-to-date :-)" >> $BODY_FILE
 	;;
 	esac
-        rm -f $i ; mv $i.backup $i
+        [ -f $i ] && rm -f $i 
+	mv $i.backup $i
 	echo  "" >> $BODY_FILE
 	echo "--" >> $BODY_FILE
 	echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
-	echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
-	echo "- the po-files - send a mail to Fatih Demir <kabalak@gtranslator.org>" >> $BODY_FILE
-	echo "Thanks." >> $BODY_FILE
-	cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR"
+	echo " For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
+	echo "  - the po-files - send a mail to Fatih Demir <kabalak@gtranslator.org>" >> $BODY_FILE
+	echo "   Thanks." >> $BODY_FILE
+	if test -f $PACKAGE.$i.gz ; then
+		cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR" -a $PACKAGE.$i.gz
+	else	
+		cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR"
+	fi
+	[ -f $PACKAGE.$i.gz ] && rm -f $PACKAGE.$i.gz
         done
 
 #
@@ -290,6 +330,12 @@ fi
 # Clean up the rest of the mailfiles.
 #
 [ -f $BODY_FILE ] && rm -f $BODY_FILE
+
+#
+# Recover the old LANG environment flags.
+#
+export LANG="$_LANG"
+export LANGUAGE="$_LANGUAGE"
 
 #
 # Exit with 0. We're all happy :-0
