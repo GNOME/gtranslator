@@ -3,7 +3,6 @@ dnl Process this file with autoconf to produce a configure script.
 dnl -------------------------------------------------------------------
 dnl (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
 dnl -------------------------------------------------------------------
-
 AC_INIT(src/parse.c)
 AM_CONFIG_HEADER(config.h)
 
@@ -225,10 +224,10 @@ AC_ARG_ENABLE(debugspecs,
 	[  --enable-debugspecs                Enable debug specs and build],
 	debugpoints=no, debugpoints=yes)
 
-if test "%${debugpoints}" != "%yes" ; then
-	CFLAGS="`echo $CFLAGS|sed -e 's/-O.//g'` -ggdb"
+if test "%${debugpoints}" = "%no" ; then
+	CFLAGS="`echo $CFLAGS|sed -e s/-g.//g -e s/-ggdb//g`"
 else
-	CFLAGS="`echo $CFLAGS|sed -e 's/-g.//g' -e 's/-ggdb//g'`"
+	CFLAGS="`echo $CFLAGS|sed -e s/-O.//g` -ggdb"
 fi
 AC_MSG_CHECKING([if a gdb/debug friendly version should be build ])
 AC_MSG_RESULT(${debugpoints})
@@ -315,11 +314,11 @@ bind the po-files
  with gtranslator  	:	${enable_mime_bind:-possibly}	
 
 use the window-icon
- feature of gnome-libs  :	${use_window_icon_feature:-no}
+ feature of gnome-libs  :	${use_window_icon:-no}
 
-used GAL version	:	`gnome-config --modversion gal|sed -e 's/.*-//g'`
+GAL || GnomeVFS version	:	`gnome-config --modversion gal|sed -e 's/.*-//g'` || `gnome-config --modversion vfs|sed -e 's/.*-//g'`
 
-used GnomeVFS version	:	`gnome-config --modversion vfs|sed -e 's/.*-//g'`
+CFLAGS                 	:	${CFLAGS}
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
