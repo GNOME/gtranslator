@@ -8,7 +8,7 @@ EXTRA_DIST = $(UMTF_SPEC_FILES)
 UMTF_VERSION = 1.0
 
 UMTF_SPEC_FILES = \
-	COMMENT \
+	COMMENTS \
 	ChangeLog \
 	README.UMTF \
 	example.xml \
