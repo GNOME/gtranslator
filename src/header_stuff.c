@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -451,10 +451,20 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	 * Prepare the header comment for view and edit in the dialog. 
 	 */
 	ph->comment=gtranslator_header_comment_convert_for_view(ph->comment);
-	
-	prj_comment =
-	    gtranslator_utils_attach_text_with_label(prj_page, 0, _("Comments:"), ph->comment,
-	    			   gtranslator_header_edit_changed);
+
+	if(po->utf8)
+	{
+		gchar	*plain_comment_string=NULL;
+
+		plain_author_string=gtranslator_utf8_get_plain_string(&ph->comment);
+		prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0,
+			plain_comment_string, _("Comments:"), gtranslator_header_edit_changed);
+	}
+	else
+	{
+		prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0, _("Comments:"),
+			ph->comment, gtranslator_header_edit_changed);
+	}
 	
 	gtk_widget_set_usize(prj_comment, 360, 90);
 	
@@ -499,9 +509,22 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	lang_page = gtk_table_new(7, 2, FALSE);
 	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
 	gtk_box_pack_start(GTK_BOX(lang_vbox), lang_page, TRUE, TRUE, 0);
-	translator =
-	    gtranslator_utils_attach_entry_with_label(lang_page, 1, _("Translator's name:"),
-				    ph->translator, gtranslator_header_edit_changed);
+
+	if(po->utf8)
+	{
+		gchar	*plain_author_string=NULL;
+
+		plain_author_string=gtranslator_utf8_get_plain_string(&ph->translator);
+
+		translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
+			_("Translator's name:"), plain_author_string, gtranslator_header_edit_changed);
+	}
+	else
+	{
+		translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
+			_("Translator's name:"), ph->translator, gtranslator_header_edit_changed);
+	}
+
 	tr_email =
 	    gtranslator_utils_attach_entry_with_label(lang_page, 2, _("Translator's e-mail:"),
 				    ph->tr_email, gtranslator_header_edit_changed);

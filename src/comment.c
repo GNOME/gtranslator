@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -131,15 +131,26 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	 * Remove any lungering space on the beginning/end of the pure_comment 
 	 *  of the GtrComment.
 	 */
-	comment->pure_comment=g_strstrip(GTR_COMMENT(comment)->pure_comment);
+	if(GTR_COMMENT(comment)->pure_comment)
+	{
+		comment->pure_comment=g_strstrip(GTR_COMMENT(comment)->pure_comment);
+	}
 	
 	/*
 	 * Set up the UTF-8 representations for the GtrComment parts.
 	 */
 	comment->utf8_comment=gtranslator_utf8_get_utf8_string(
 		&comment->comment);
-	comment->pure_utf8_comment=gtranslator_utf8_get_utf8_string(
-		&comment->pure_comment);
+
+	if(GTR_COMMENT(comment)->pure_comment)
+	{
+		comment->pure_utf8_comment=gtranslator_utf8_get_utf8_string(
+			&comment->pure_comment);
+	}
+	else
+	{
+		comment->pure_utf8_comment=NULL;
+	}
 
 	/*
 	 * Set the fuzzy flag at all if the comment stands for a fuzzy message.
