@@ -1,6 +1,7 @@
 /*
-*	-> Fatih Demir [ kabalak@gmx.net ]
-* 	The interface file , totally catastrophed by me ...
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* The interface file , totally catastrophed by me ...
 */
 
 #ifdef HAVE_CONFIG_H
@@ -479,8 +480,10 @@ create_app1 (void)
   gtk_widget_show (text1);
   gtk_container_add (GTK_CONTAINER (scrolledwindow1), text1);
   gtk_widget_realize (text1);
-  /*gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-                   _("The msgids will appear here ."), 29);*/
+  /*
+  *gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
+                   _("The msgids will appear here ."), 29);
+  */
 
   scrolledwindow2 = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_set_name (scrolledwindow2, "scrolledwindow2");
@@ -496,7 +499,9 @@ create_app1 (void)
   gtk_widget_ref (trans_box);
   gtk_object_set_data_full (GTK_OBJECT (app1), "trans_box", trans_box,
                             (GtkDestroyNotify) gtk_widget_unref);
-  /*gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, _("Msgstrs go here ."),20);*/
+  /*
+  * gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, _("Msgstrs go here ."),20);
+  */
 
   gtk_widget_show (trans_box);
   gtk_container_add (GTK_CONTAINER (scrolledwindow2), trans_box);

@@ -1,29 +1,31 @@
 /*
-*	-> Fatih Demir [ kabalak@gmx.net ]
-*	Here will be some useful parts of gtranslator 
-*	next periods of time ....
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* Here will be some useful parts of gtranslator 
+* next periods of time ....
 */
 
 #include "parse.h"
 #include <unistd.h>
 
 /*
-*	A simple stream-check (I love the ifstream.good()-func from C++ ....)
+* A simple stream-check (I love the ifstream.good()-func from C++ ....)
 */
 void check_file(FILE *stream,const char *error)
 {
 	if(stream < 0 || stream == NULL)
 	{
-		g_warning(error);
+		g_error(error);
 		/*
+		* XXX
 		* Too sensitive for gtranslator ?
-		*exit(1);
 		*/
+		/*exit(1);*/
 	}
 }
 
 /*
-*	The real routine for parsing 
+* The real routine for parsing 
 */
 void parse()
 {
@@ -43,32 +45,52 @@ void parse()
 	* Just for now , the db-functionability is
 	* disabled ..
 	*/
-	msg->po->db_enabled=FALSE;
+	msg->po.db_enabled=FALSE;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
 		count++;
 		/*
-		*Are we at a msgid ?
+		* Are we at a msgid ?
 		*/
-		if(!strncmp(tmp_l,"msgid \"",6))
+		if(!strncasecmp(tmp_l,"msgid \"",6))
 		{
+			/*
+			* Copy the current string to a message 
+			*/
 			msg->msgid=tmp_l;
+			/*
+			* Define the position
+			*/
 			msg->position=count;
 			/*
-			* If so , check if the next line 
+			* Check if the next line 
 			* is a msgstr 
 			*/
 			fgets(tmp_l,sizeof(tmp_l),fs);
-			if(!strcmp(tmp_l,"msgstr \"",7))
+			if(!strncasecmp(tmp_l,"msgstr \"",7))
 			{	
 				/*
 				* If this succeeds , build a msg-block
 				*/
 				msg->msgstr=tmp_l;
 			}
+			/*
+			* If not , read another line & check it  		
+			*/
+			fgets(tmp_l,sizeof(tmp_l),fs);
+			/*
+			* Again the same
+			*/
+			if(!strncasecmp(tmp_l,"msgstr \"",7))
+			{
+				msg->msgstr=tmp_l;
+			}
 		}
 		
 	}
+	/*
+	* Now we know where the maximum length has to be
+	*/
+	msg->po_file->maximal_position=(count - 1);
 	max_count=((count - 10 ) / 3);
-	count=1;
 }

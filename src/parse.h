@@ -1,7 +1,8 @@
 /*
-*  -> Fatih Demir [ kabalak@gmx.net ] 
-*	This is the parser header ...
-*	Totally written by me ; I think you can see it .
+* Fatih Demir [ kabalak@gmx.net ] 
+*
+* This is the parser header ...
+* Totally written by me ; I think you can see it .
 */
 
 #ifdef HAVE_CONFIG_H
@@ -21,78 +22,84 @@
 #include "interface.h"
 
 /*
-*	Include the header for the
-*	libdyndata library-functions :
+* Include the header for the
+* libdyndata library-functions :
 */
 #include <dyndata.h>
 
 /*
-*	A structure for the po-files :
+* Define the types 
 */
-typedef struct {
+typedef struct _po_file po_file;
+typedef struct _message message;
+
+/*
+* A structure for the po-files :
+*/
+struct _po_file{
 	const char *filename;
 	unsigned int maximal_position;
 	gboolean db_enabled;	
-} po_file ;
+};
 
 /*
-*	The structure for the translations :	
+* The structure for the translations :	
 */
-typedef struct {
+struct _message{
 	po_file *po;
 	char *msgid;
 	char *msgstr;
 	unsigned int position;
-} message ;
+};
 
 /*
-*	A struct-variable :
+* A struct-variable :
 */
 message *msg;
 
 /*
-*	This are the global count variables  
+* This are the global count variables  
 */
 int count,max_count;
 
 /*
-*	A gboolean for the silly question if a file is open ...
+* A gboolean for the silly question if a file is open ...
 */
 
 gboolean file_opened;
 
 /*
-*	A silly question wants a silly answer ...
+* A silly question wants a silly answer ...
 */
 gboolean file_changed;
 
 /*
-*	For a simple check if we're at the first string 
+* For a simple check if we're at the first string 
 */
 gboolean at_the_first;
 
 /*
-*	... and if we're at the last string ....
+* ... and if we're at the last string ....
 */
 gboolean at_the_last;
 
 /*
-*	A simple file check .
+* A simple file check .
 */
 void check_file(FILE *,const char *);
 
 /*
-*	The previous parseing routine
-*	; will be removed soon 
+* The previous parsing routine
+* ; will be removed soon 
 */
 void parse(void);
 
 /*
-*	Get next msgid 
+* Get next msgid 
 */
 int get_next_msgid(FILE *,char *);
 
 /*
-*	Get next msgstr
+* Get next msgstr
 */
 int get_next_msgstr(FILE *,char *);

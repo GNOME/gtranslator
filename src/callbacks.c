@@ -1,7 +1,8 @@
 /*
-*	-> Fatih Demir [ kabalak@gmx.net ]
-*	A GLADE'd interface's callbacks suite ...
-*	It's too anormally written / don't look for many sense in it ...
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* A GLADE'd interface's callbacks suite ...
+* It's too anormally written / don't look for many sense in it ...
 */
 
 #ifdef HAVE_CONFIG_H
@@ -20,7 +21,7 @@
 #include <glib.h>
 
 /*
-*	The variables for all that ....
+* The variables for all that ....
 */
 char cmd[256];
 char fname[768];

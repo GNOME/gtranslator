@@ -1,10 +1,14 @@
 /*
-*	-> Fatih Demir [ kabalak@gmx.net ]
-* 	A woosh-boosh file ...	
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* A woosh-boosh file ...	
 */
 	
 #include <gnome.h>
 
+/*
+* A stupid place for a character variable ...
+*/
 const char *filename;
 
 void
