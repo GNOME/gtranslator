@@ -5,13 +5,13 @@
 #
 #
 # This script mails the common "oh my god, they're
-#  making a release" messages to the last translaters.
+#  making a release" messages to the last translators.
 #
 
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.6
+export POZILLA_RELEASE=0.7
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -24,6 +24,17 @@ export MAILING_LIST='GNOME I18N List <gnome-i18n@gnome.org>'
 #
 export CONFIG_DIR="$HOME/.pozilla"
 export BODY_FILE="$CONFIG_DIR/mail.body"
+
+#
+# Check for all necessary applications for pozilla.sh.
+#
+for app in msgfmt msgmerge make grep mutt
+	do
+		if test "z`which $app`" = "z" ; then
+			echo "[ERROR: The application \"$app\" is necessary for running pozilla.sh!]"
+				exit 1
+		fi
+	done	
 
 #
 # That's Pozilla, guy!
@@ -49,8 +60,8 @@ case $1 in
 	echo "<·············································"
 	echo " Author: Fatih Demir <kabalak@gmx.net>"
 	echo "<·············································"
-	echo "-A --additional   Defines an additional mal address to mail to"
-	echo "-M --mailinglist  Changed the mailing list to the given arguments"
+	echo "-a --additional   Defines an additional mail address to mail to"
+	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
 	echo "<·············································"
@@ -102,23 +113,27 @@ echo $POZILLA_NO > $CONFIG_DIR/pozilla.conf
 #
 # Get the common values.
 #
-export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|\
-	sed -e 's/^.*(//g' -e 's/,.*$//g'`
+export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|sed -e 's/^.*(//g' -e 's/,.*$//g'`
+
 #
 # This had to be more app-specific, I guess :-)
 #
-export `grep ^MAINVERSION configure.in`
-export `grep ^SUBVERSION configure.in`
-export RELEASE="$MAINVERSION.$SUBVERSION"
+case "$PACKAGE"	in
+gtranslator)
+	export `grep ^MAINVERSION configure.in`
+	export `grep ^SUBVERSION configure.in`
+	export RELEASE="$MAINVERSION.$SUBVERSION"
+;;
+*)
 
-#
-# If you're adepting pozilla.sh for your app and have got
-#  a _plain_ version string like "0.5" or "0.32" then you
-#   can comment out the lines above and uncomment the lines
-#    below. Thanks.
-#
-#export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
-#	sed -e 's/^.*(//g' -e 's/.*,\ //g' -e 's/).*//g'`
+	#
+	# Hopefully the other apps are using plain version strings
+	#  like "0.8" or "0.32".
+	#
+	export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
+		sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
+;;
+esac
 
 #
 # Go to the po-dir and get the list of all po-files.
@@ -132,15 +147,19 @@ export PO_FILES=`ls *.po`
 export SUBJECT="[ Pozilla #$POZILLA_NO ] $PACKAGE R $RELEASE"
 
 #
-# Now get for every po-file the last translator (if you've got the
-#  old GNOME i18n-tools you should uncomment this).
+# Here we build up a recent pot file for the project.
 #
-# ./update.pl -P
-
-#
-# Possibly we want to use the new xml-i18n-tools here,
-# 
-./update.sh -P
+if test -f Makefile -a -f POTFILES ; then
+	[ -f $PACKAGE.pot ] && rm -f $PACKAGE.pot
+	make $PACKAGE.pot
+elif test -x ./update.sh ; then
+	./update.sh -P
+elif test -x ./update.pl ; then
+	./update.pl -P
+else
+	echo "[ERROR: No update.(sh|pl) or usable Makefile found!]"
+		exit 1
+fi
 #
 for i in $PO_FILES
 	do
@@ -155,7 +174,7 @@ for i in $PO_FILES
 	case $? in
 	1)
 		echo "You should update your $i po-file for $PACKAGE," > $BODY_FILE
-		echo "it's containg fuzzy or/and untranslated entries if you get it" >> $BODY_FILE
+		echo "it's containing fuzzy or/and untranslated entries if you get it" >> $BODY_FILE
 		echo "in sync with the recent sources for $PACKAGE." >> $BODY_FILE
 		echo "" >> $BODY_FILE
 		echo "Your po-file $i's statistics are:" >> $BODY_FILE

@@ -1,5 +1,18 @@
 2001-01-25  Fatih Demir	<kabalak@gmx.net>
 
+	* pozilla.sh: Some smaller enhancements for more usability
+		of pozilla.sh in other programs; app versions are now
+		 handled as long as they're plain version strings also
+		  for other apps then gtranslator; the package's pot file
+		   is build with more intelligence, an aspell run has
+		    also been applied to it and it does now also check for
+		     the used programs to be present.
+
+	* Makefile.am: Added a "cvspack" target which creates
+		a current CVS snapshot of gtranslator and added
+		 another target "kabalak" for automatically creating
+		  a CVS snapshot and calling up pozilla.sh.
+
 	* HACKING: Removed the discriminating part about
 		Finnish .-)
 
