@@ -203,8 +203,8 @@ void gtranslator_query_domains(const gchar *directory)
 	localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory,
 		lc);
 	
-	domains=gtranslator_utils_filenames_from_directory(localedirectory,
-		".mo", TRUE);
+	domains=gtranslator_utils_file_names_from_directory(localedirectory,
+		".mo", TRUE, TRUE);
 }
 
 /*

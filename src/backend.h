@@ -61,6 +61,11 @@ typedef struct
 	((GtrBackendInformations *) x)
 
 /*
+ * The generally used backends list.
+ */
+GList *backends;
+
+/*
  * Opening and registering of backends from the given dir -- returns FALSE on
  *  failure.
  */

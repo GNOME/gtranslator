@@ -19,6 +19,7 @@
 
 #include "backend.h"
 #include "defines.include"
+#include "utils.h"
 
 #include <gnome-xml/parser.h>
 #include <gnome-xml/tree.h>
@@ -47,6 +48,15 @@ void read_xml_descriptor(const gchar *filename, GtrBackendInformations **info)
 	}
 
 	node=node->xmlChildrenNode;
+
+	while(node!=NULL)
+	{
+		/*
+		 * FIXME
+		 */
+
+		node=node->next;
+	}
 }
 
 /*
@@ -58,4 +68,22 @@ void gtranslator_backend_add(const gchar *filename)
 	g_return_if_fail(filename!=NULL);
 
 	read_xml_descriptor(filename, &GTR_BACKEND_INFORMATIONS(backend->info));
+}
+
+/*
+ * Parse all files in the directory.
+ */
+gboolean gtranslator_backend_open_all_backends(const gchar *directory)
+{
+	if(!directory)
+	{
+		directory=BACKENDS_DIR;
+	}
+	
+	backends=gtranslator_utils_file_names_from_directory(directory,
+		".xml", TRUE, FALSE);
+
+	g_return_val_if_fail(backends!=NULL, FALSE);
+
+	return TRUE;
 }

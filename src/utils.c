@@ -73,8 +73,8 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
  * 
  * Should be useful for many cases.
  */
-GList *gtranslator_utils_filenames_from_directory(const gchar *directory,
-	const gchar *extension, gboolean sort)
+GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
+	const gchar *extension, gboolean sort, gboolean strip_extension)
 {
 	GList		*files=NULL;
 	DIR 		*dir;
@@ -95,10 +95,22 @@ GList *gtranslator_utils_filenames_from_directory(const gchar *directory,
 
 	while((entry=readdir(dir)) != NULL)
 	{
-		if(strcmp(entry->d_name, ".") && strcmp(entry->d_name, "..") &&
-			(nautilus_str_has_suffix(entry->d_name, extension)==TRUE))
+		if(entry->d_name &&
+			strcmp(entry->d_name, ".") && 
+			strcmp(entry->d_name, "..") &&
+			nautilus_str_has_suffix(entry->d_name, extension))
 		{
-			files=g_list_append(files, entry->d_name);
+			if(strip_extension)
+			{
+				files=g_list_append(files, 
+					gtranslator_utils_get_raw_file_name(
+						entry->d_name));
+			}
+			else
+			{
+				files=g_list_append(files, 
+					g_strdup(entry->d_name));
+			}
 		}
 	}
 
@@ -112,7 +124,7 @@ GList *gtranslator_utils_filenames_from_directory(const gchar *directory,
 	 */
 	if(sort)
 	{
-		files=g_list_append(files, (GFunc) strcmp);
+		files=g_list_append(files, (GFunc) g_strcasecmp);
 	}
 
 	closedir(dir);
