@@ -1,9 +1,13 @@
-2003-07-07  Ross Golder  <rossg@golder.org>
+2003-07-07  Ross Golder  <ross@golder.org>
+
+	* utils.c: De-deprecate a few glib calls.
+
+	* utils_gui.c/.h: De-deprecate a few glib calls, and moved
+	        gtranslator_utils_append_page_to_preferences_dialog
+		into prefs.c.
 
 	* utf8.c (gtranslator_utf8_po_file_is_utf8): Changed 'g_strcasecmp'
 	        to 'g_ascii_strcasecmp' (undeprecated).
-
-2003-07-07  Ross Golder  <ross@golder.org>
 
 	* stylistics.c (gtranslator_set_style): Changed gdk_font_unref and 
 	        gtk_style_unref to g_object_unref.

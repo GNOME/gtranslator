@@ -83,12 +83,6 @@ GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 	ColorType color_type, GCallback callback);
 
 /*
- * Returns the added GtkTable to the preferences box.
- */ 
-GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(
-	GtkWidget * probox, gint rows, gint cols, const char *label_text);
-
-/*
  * Checks the given file for the right permissions for
  *  open/writing the files.
  */

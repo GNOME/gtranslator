@@ -146,9 +146,9 @@ void gtranslator_utils_restore_geometry(gchar  * gstr)
 		}
 	}
 	if (x != -1)
-		gtk_widget_set_uposition(gtranslator_application, x, y);
+		gtk_window_move(GTK_WINDOW(gtranslator_application), x, y);
 	if ((width > 0) && (height > 0))
-		gtk_window_set_default_size(GTK_WINDOW(gtranslator_application), width, height);
+		gtk_window_resize(GTK_WINDOW(gtranslator_application), width, height);
 }
 
 GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint row,
@@ -166,7 +166,7 @@ GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint ro
 	if (value)
 		gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), value);
 	
-	gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(combo)->entry), editable);
+	gtk_editable_set_editable(GTK_EDITABLE(GTK_COMBO(combo)->entry), editable);
 	
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), combo, 1, 2, row, row + 1);
@@ -338,17 +338,6 @@ GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 		G_CALLBACK(callback), NULL);	
 	
 	return color_selector;
-}
-
-GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(GtkWidget  * probox, gint rows, gint cols,
-			     const char *label_text)
-{
-	GtkWidget *label;
-	GtkWidget *page;
-	label = gtk_label_new(label_text);
-	page = gtk_table_new(rows, cols, FALSE);
-	gnome_property_box_append_page(GNOME_PROPERTY_BOX(probox), page, label);
-	return page;
 }
 
 /*

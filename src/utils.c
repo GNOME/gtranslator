@@ -61,7 +61,7 @@ gchar *gtranslator_utils_get_raw_file_name(const gchar *filename)
 	g_return_val_if_fail(filename!=NULL, g_strdup(""));
 
 	o=g_string_new("");
-	filename=g_basename(filename);
+	filename=g_path_get_basename(filename);
 
 	/*
 	 * Strip all extensions after the _first_ point.
@@ -217,7 +217,7 @@ gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_co
 		{
 			return _(languages[i].name);
 		}
-		else if(!g_strncasecmp(languages[i].locale, locale_code, 2))
+		else if(!g_ascii_strncasecmp(languages[i].locale, locale_code, 2))
 		{
 			return _(languages[i].name);
 		}
@@ -603,7 +603,7 @@ gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
 	 */
 	if(strlen(a) > strlen(b))
 	{
-		if(!g_strncasecmp(a, b, (strlen(a) - 1)))
+		if(!g_ascii_strncasecmp(a, b, (strlen(a) - 1)))
 		{
 			return 100.0;
 		}
@@ -612,7 +612,7 @@ gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
 	}
 	else
 	{
-		if(!g_strncasecmp(b, a, (strlen(b) - 1)))
+		if(!g_ascii_strncasecmp(b, a, (strlen(b) - 1)))
 		{
 			return 100.0;
 		}
@@ -989,8 +989,8 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang)
 			 * The first two characters are converted to small
 			 *  characters, and the last two are capitalized.
 			 */
-			language=g_string_down(language);
-			taillanguage=g_string_up(taillanguage);
+			language=g_string_ascii_down(language);
+			taillanguage=g_string_ascii_up(taillanguage);
 
 			/*
 			 * Append the capilized letters after a '_'.
