@@ -93,4 +93,5 @@ clean-am:
 
 EXTRA_DIST = $(idl__DATA) \
 	$(libgtranslator_include__DATA) \
-	vfs-handle.h
+	vfs-handle.h \
+	vfs-handle.c
