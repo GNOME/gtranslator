@@ -15,7 +15,7 @@ AM_PROG_CC_STDC
 AC_HEADER_STDC
 AC_PROG_AWK
 AC_SUBST(AWK)
-AC_CHECK_PROG(SED,sed,/usr/bin/sed,$PATH:/usr/local/bin)
+AC_CHECK_PROG(SED,sed,/bin/sed,/usr/bin/sed,$PATH:/usr/local/bin)
 AC_SUBST(SED)
 AC_CHECK_PROG(HEAD,head,/usr/bin/head,$PATH:/usr/local/bin)
 AC_SUBST(HEAD)
