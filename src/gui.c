@@ -28,15 +28,14 @@
 #include "about.h"
 #include "gtkspell.h"
 #include "history.h"
+#include "sidebar.h"
+#include "stylistics.h"
 
 #include "pixmaps/untrans.xpm"
 
-#include "stylistics.h"
 
 #include <libgnomevfs/gnome-vfs-init.h>
-
 #include <gal/e-paned/e-hpaned.h>
-#include "shortcutbar.h"
 
 typedef struct _GtrAction GtrAction;
 #define GTR_ACTION(x) ((GtrAction *)x)

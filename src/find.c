@@ -21,6 +21,7 @@
 #include "prefs.h"
 #include "parse.h"
 #include "gui.h"
+#include "sidebar.h"
 
 #include <string.h>
 
@@ -72,7 +73,8 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 		 */
 		goto_given_msg(msg);
 		gtk_editable_select_region(GTK_EDITABLE(trans_box),
-					   pos->rm_so, pos->rm_eo);
+			pos->rm_so, pos->rm_eo);
+		
 		return TRUE;
 	}
 	if ((wants.find_in != 1) &&
@@ -83,7 +85,22 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 		 */
 		goto_given_msg(msg);
 		gtk_editable_select_region(GTK_EDITABLE(text1),
-					   pos->rm_so, pos->rm_eo);
+			pos->rm_so, pos->rm_eo);
+		
+		return TRUE;
+	}
+	if((wants.find_in != 3) &&
+	   (!regexec(target, GTR_MSG(msg->data)->comment, 1, pos, 0)))
+	{
+		/*
+		 * Hm, we found it in a comment, show it before "highlighting"
+		 *  it.
+		 */  
+		goto_given_msg(msg);
+		show_comment(text1);
+		gtk_editable_select_region(GTK_EDITABLE(text1),
+			pos->rm_so, pos->rm_eo);
+		
 		return TRUE;
 	}
         return FALSE;	

@@ -286,16 +286,31 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(find_in_activated),
 			   GINT_TO_POINTER(0));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
 	menu_item = gtk_menu_item_new_with_label(_("Translated"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 			   GTK_SIGNAL_FUNC(find_in_activated),
 			   GINT_TO_POINTER(1));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
 	menu_item = gtk_menu_item_new_with_label(_("Both"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 			   GTK_SIGNAL_FUNC(find_in_activated),
 			   GINT_TO_POINTER(2));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	menu_item = gtk_menu_item_new_with_label(_("Comments"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+			   GTK_SIGNAL_FUNC(find_in_activated),
+			   GINT_TO_POINTER(3));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	menu_item = gtk_menu_item_new_with_label(_("In all strings"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+			   GTK_SIGNAL_FUNC(find_in_activated),
+			   GINT_TO_POINTER(4));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
 	gtk_menu_set_active(GTK_MENU(menu), wants.find_in);
 
 	find_in = gtk_label_new(_("Find in: "));
@@ -324,7 +339,8 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(find_dlg_clicked), findy);
 	gtk_signal_connect(GTK_OBJECT(match_case), "toggled",
 			   GTK_SIGNAL_FUNC(match_case_toggled), NULL);
-	gtk_window_set_focus(GTK_WINDOW(dialog), gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
+	gtk_window_set_focus(GTK_WINDOW(dialog), 
+		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 	show_nice_dialog(&dialog, "gtranslator -- find");
 }
 

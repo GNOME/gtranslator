@@ -48,8 +48,9 @@ gtranslator_SOURCES = \
 	preferences.c preferences.h \
 	prefs.c prefs.h \
 	session.c session.h \
-	shortcutbar.c shortcutbar.h \
+	sidebar.c sidebar.h \
 	stylistics.c stylistics.h \
+	syntax.c syntax.h \
 	update.c \
 	vfs-handle.c vfs-handle.h
 

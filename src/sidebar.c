@@ -17,7 +17,7 @@
  *
  */
 
-#include "shortcutbar.h"
+#include "sidebar.h"
 #include "gui.h"
 
 /*
@@ -31,11 +31,6 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
  */ 
 void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 	gint item);	
-
-/*
- * Nomen est res naturalae. Shows an editable comment view.
- */ 
-void show_comment(GtkWidget *text);
 
 /*
  * Creates the sidebar (in our case the shortcut-bar).

@@ -31,8 +31,7 @@
 #include "gtkspell.h"
 #include "open-differently.h"
 #include "history.h"
-
-#include "shortcutbar.h"
+#include "sidebar.h"
 
 /*
  * These are to be used only inside this file

@@ -44,4 +44,9 @@ void gtranslator_sidebar_add_po(GtrPo *po);
  */
 void gtranslator_sidebar_clear(void);
 
+/*
+ * Show the comment of the current message.
+ */
+void show_comment(GtkWidget *text);
+
 #endif
