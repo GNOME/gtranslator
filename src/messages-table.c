@@ -537,7 +537,7 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 	case COL_NUMBER:
 	case COL_BOLD:
 	case COL_LINE:
-		return g_strdup_printf("%d", (gint) value);
+		return g_strdup_printf("%d", GPOINTER_TO_INT(value));
 		break;
 	default:
 		g_assert_not_reached ();
