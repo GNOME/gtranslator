@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GTR_SHORTCUT_BAR_H
-#define GTR_SHORTCUT_BAR_H 1
+#ifndef GTR_SIDEBAR_H
+#define GTR_SIDEBAR_H 1
 
 #include "parse.h"
 #include <gal/shortcut-bar/e-shortcut-bar.h>
