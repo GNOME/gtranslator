@@ -96,11 +96,11 @@ static GtrLanguage languages[] = {
 	},
 	{
 	 N_("Chinese/Simplified"), "zh_CN.GB2312", "GB2312",
-	 "cn@linux-mandrake.com", "8bit"		
+	 "i18n-translation@lists.linux.net.cn", "8bit"
 	},
 	{
-	 N_("Chinese/Traditional"), "zh_TW.BIG5", "BIG5",
-	 "zh@li.org", "8bit"		
+	 N_("Chinese/Traditional"), "zh_TW.Big5", "Big5",
+	 "zh-l10n@linux.org.tw", "8bit"		
 	},
 	{
 	 N_("Croatian"), "hr", "iso-8859-2",
@@ -231,8 +231,8 @@ static GtrLanguage languages[] = {
 	 "", "8bit"		
 	},
 	{
-	 N_("Slovakian"), "sk", "iso-8859-2",
-	 "", "8bit"		
+	 N_("Slovak"), "sk", "iso-8859-2",
+	 "", "8bit"
 	},
 	{
 	 N_("Slovenian"), "sl", "iso-8859-2",
