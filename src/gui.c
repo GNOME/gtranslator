@@ -625,8 +625,8 @@ static void invert_dot(gchar *str)
 
 	for(i=0; str[i] != '\0'; i++) {
 		if(str[i]==' ')
-			str[i]=(int) wants.dotChar;
-		else if(str[i]==(int) wants.dotChar)
+			str[i]=_('·');
+		else if(str[i]==_('·'))
 			str[i]=' ';
 	}
 }
@@ -970,16 +970,26 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 {
 	if (nothing_changes)
 		return;
-	if (!po->file_changed) {
+	if (!po->file_changed)
+	{
 		po->file_changed = TRUE;
-		enable_actions(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+		if(po->no_write_perms==FALSE)
+		{
+			enable_actions(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+		}
+		else
+		{
+			enable_actions(ACT_REVERT, ACT_UNDO);
+		}
 	}
-	if (!message_changed) {
+	if (!message_changed)
+	{
 		GtrMsg *msg = GTR_MSG(po->current->data);
 		message_changed = TRUE;
 		enable_actions(ACT_UNDO);
 		if ((wants.unmark_fuzzy) 
-		     && (msg->status & GTR_MSG_STATUS_FUZZY)) {
+		     && (msg->status & GTR_MSG_STATUS_FUZZY))
+		{
 		     	mark_msg_fuzzy(msg, FALSE);
 			gtk_check_menu_item_set_active(
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
@@ -1024,7 +1034,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 				 * Insert the changed text with the '·''s.
 				 */
 				gtk_editable_insert_text(GTK_EDITABLE(trans_box),
-							 &(wants.dotChar), 1, &pos);
+							 "·", 1, &pos);
 			}
 		}
 		g_free(newstr);

@@ -86,7 +86,29 @@ void save_file_as(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
 	raise_and_return_if_exists(dialog);
-	dialog = gtk_file_selection_new(_("gtranslator -- save file as .."));
+
+	/*
+	 * If we do have write perms for the file we can save it under each
+	 *  filename but if we don't have write perms for it, we'd try to
+	 *   save it in our local directory.
+	 */   
+	if(po->no_write_perms==FALSE)
+	{
+		dialog = gtk_file_selection_new(_("gtranslator -- save file as.."));
+	}
+	else
+	{
+		dialog = gtk_file_selection_new(_("gtranslator -- save local copy of file as.."));
+
+		/*
+		 * Set a local filename in the users home directory with the 
+		 *  same filename as the original (e.g. "tr.po").
+		 */  
+		gtk_file_selection_set_filename(GTK_FILE_SELECTION(dialog),
+			g_strdup_printf("%s/%s",
+				g_get_home_dir(),
+				g_basename(po->filename)));
+	}
 	
 	/*
 	 * gtk_file_selection_complete(GTK_FILE_SELECTION(dialog),"*.po");

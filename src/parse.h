@@ -65,6 +65,10 @@ typedef struct {
 	 */
 	guint file_changed : 1;
 	/*
+	 * Is the file write-permitted?
+	 */
+	gboolean no_write_perms;
+	/*
 	 * The translated entries. 
 	 */
 	guint translated;
@@ -137,10 +141,20 @@ void update(GtkWidget *widget, gpointer useless);
 void gtranslator_display_recent(void);
 
 /*
+ * The recent files list.
+ */
+GList *gtranslator_get_history(void);
+
+/*
+ * Adds another filename to the recent files list.
+ */ 
+void gtranslator_add_history_entry(gchar *filename);
+
+/*
  * Checks the given file for the right permissions for
  *  open/writing the files.
  */
-gboolean gtranslator_check_file_perms(const gchar *filename);
+gboolean gtranslator_check_file_perms(GtrPo *po_file);
 
 /*
  * This function gets the count of the translated messages
