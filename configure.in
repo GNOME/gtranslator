@@ -28,16 +28,20 @@ dnl -------------------------------------------------------------------
 dnl Check for glib and gtk+ indepententally from the GNOME checks 
 dnl -------------------------------------------------------------------
 AM_PATH_GLIB(1.2.3)
-AM_PATH_GTK(1.2.3)
+dnl -------------------------------------------------------------------
+dnl We need Gtk+ >= 1.2.4 for D'n'D, do we? I don't know it, but I've 
+dnl  got heard somewhere that proper D'n'D was integrated with 1.2.4.
+dnl -------------------------------------------------------------------
+AM_PATH_GTK(1.2.4)
 
 dnl -------------------------------------------------------------------
-dnl Add the languages which the application supports here
+dnl Our languages caravane has got settled here in place.( add your's )
 dnl -------------------------------------------------------------------
 ALL_LINGUAS="da de hu ja ko no ru sv tr uk"
 AM_GNOME_GETTEXT
 
 dnl -------------------------------------------------------------------
-dnl Set PACKAGE_LOCALE_DIR in config.h .
+dnl Substitute PACKAGE_LOCALE_DIR in config.h.
 dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
