@@ -1,9 +1,19 @@
+2001-03-04  Fatih Demir	<kabalak@gtranslator.org>
+
+	* syntax.c: Do also insert syntax highlighted text if only one char
+		is left over.
+	
+	* stylistics.c: Take the right locations for the GnomeColorPicker
+		values always -- convert depending if we can get values from
+		 the new location.
+
 2001-03-04  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* color-schemes.c, query.c, stylistics.c: fixed some warnings... but
 	first two files are something insane.
 
 2001-03-03  Thomas Ziehmer	<thomas@gtranslator.org>
+
 	* parse.c: Fixed bug in mark_msg_sticky which caused complete hang of
 		gtranslator
 

@@ -51,6 +51,12 @@ gboolean ask_to_save_file(void);
 void crash_recovery_dialog(void);
 
 /*
+ * Set up an query dialog for the query backend -- search for strings
+ *  in compiled mo/gmo files in the specific localedirectory.
+ */
+void query_dialog(void);
+
+/*
  * The "Go to" dialog.
  */
 void goto_dlg(GtkWidget * widget, gpointer useless);

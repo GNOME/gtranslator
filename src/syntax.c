@@ -223,7 +223,7 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 	str=g_string_new(text);
 	g_free(text);
 
-	if(str->len>0)
+	if(str->len > 0)
 	{
 		gint pos;
 		
@@ -237,7 +237,7 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 		
 		gtk_text_thaw(GTK_TEXT(textwidget));
 
-		if(pos > 0 && pos <= gtk_text_get_length(GTK_TEXT(textwidget)))
+		if(pos >= 0 && pos <= gtk_text_get_length(GTK_TEXT(textwidget)))
 		{
 			gtk_editable_set_position(
 				GTK_EDITABLE(textwidget), pos);

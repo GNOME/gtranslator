@@ -132,19 +132,27 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 	g_return_if_fail(path!=NULL);
 
 	/*
-	 * Convert the color names/values.
-	 */ 
-	prefs_convert_colors();
-
-	/*
 	 * Restore the color values from the preferences.
 	 */
 	spec=gtranslator_config_get_string(path);
 
+	if(!spec)
+	{
+		/*
+		 * Possibly convert the old color specs to their new place.
+		 */
+		prefs_convert_colors();
+		
+		/*
+		 * And reread the specs from the now correct location.
+		 */
+		spec=gtranslator_config_get_string(path);
+	}
+
 	if(spec)
 	{
 		gdk_color_parse(spec, &color);
-		gnome_color_picker_set_i8(colorpicker, color.red,
+		gnome_color_picker_set_i16(colorpicker, color.red,
 			color.green, color.blue, 0);
 		g_free(spec);
 	}

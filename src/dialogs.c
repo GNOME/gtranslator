@@ -555,4 +555,18 @@ Saying \"No\" will delete the crash recovery file."),
 		 */
 		unlink(file);
 	}
+
+	g_free(original_filename);
+	g_free(file);
+}
+
+/*
+ * Query for a specific string.
+ */
+void query_dialog(void)
+{
+	/*GtkWidget *dialog=NULL;
+	GtrQuery *query;
+	gchar *query_text;*/
+
 }
