@@ -218,39 +218,6 @@ CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts\
 -Wimplicit -Wreturn-type -Wswitch -Wcomment"
 
 dnl -------------------------------------------------------------------
-dnl Try to get a pkg-config directory for us ..
-dnl -------------------------------------------------------------------
-AC_MSG_CHECKING([where the pkg-config file should go in])
-PKG_CONF_CONFFILE_DIR="$PKG_CONFIG_PATH"
-if test "foo${PKG_CONF_CONFFILE_DIR}" = "foo" ; then
-	dnl ----------------------------------------------------------
-	dnl Try the standard locations if no variable $PKG_CONFIG_PATH
-	dnl  has been defined on shell-level.
-	dnl ----------------------------------------------------------
-	for dirX in /usr/lib/pkgconfig /usr/libexec/pkgconfig /usr/local/lib/pkgconfig /usr/local/libexec/pkgconfig
-		do
-			if test -d "$dirX" ; then
-				PKG_CONF_CONFFILE_DIR="$dirX"
-				AC_MSG_RESULT([" "
-"+++ Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
-			fi
-		done
-	dnl ----------------------------------------------------------
-	dnl Test if we did find any pkgconfig directory and use the 
-	dnl  default pkgconfig dir "/usr/lib/pkgconfig" in this case..
-	dnl ----------------------------------------------------------
-	if test "foo${PKG_CONF_CONFFILE_DIR}" = "foo" ; then
-		AC_MSG_RESULT([" "
-"+++ No existing pkgconfig directory found, using /usr/lib/pkgconfig ..."])
-		PKG_CONF_CONFFILE_DIR="/usr/lib/pkgconfig"
-	fi
-else
-	AC_MSG_RESULT([" "
-"+++ Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
-fi
-AC_SUBST(PKG_CONF_CONFFILE_DIR)
-
-dnl -------------------------------------------------------------------
 dnl Check for nautilus and try to get out all the flags for the
 dnl  nautilus-view.
 dnl -------------------------------------------------------------------
