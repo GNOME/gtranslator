@@ -21,12 +21,12 @@
 * Opens the given file to the database returned by this
 *  function.
 **/
-GtranslatorDatabase gtranslator_open_db(gchar *filename)
+GtranslatorDatabase *gtranslator_open_db(gchar *filename)
 {
 	/**
 	* The "private" variables.
 	**/
-	GtranslatorDatabase	db;
+	GtranslatorDatabase	*db;
 	xmlDocPtr		doc;
 	/**
 	* Check the filename for existence and 
@@ -186,7 +186,7 @@ void gtranslator_save_db(GtranslatorDatabase *database)
 /**
 * This "dumps" the database to the given file.
 **/
-void gtranslator_dump_db(GtranslatorDatabase database,
+void gtranslator_dump_db(GtranslatorDatabase *database,
 	gchar *filename)
 {
 	/**
@@ -230,7 +230,7 @@ void gtranslator_dump_db(GtranslatorDatabase database,
 * Moves the database to the new "location" and unlinks
 *  the original location.
 **/
-void gtranslator_move_db(GtranslatorDatabase database,
+void gtranslator_move_db(GtranslatorDatabase *database,
 	char *moveto)
 {
 	/**
