@@ -89,6 +89,12 @@ static void clicked_function(GnomeDialog *dialog, gint button,
 			gtranslator_prefs_dialog_close(GTR_PREFS_DIALOG(interesting));
 		}
 	}
+	else if(button==3)
+	{
+		/*
+		 * FIXME: Call a help dialog for the prefs dialog.
+		 */
+	}
 	else
 	{
 		gtranslator_prefs_dialog_close(GTR_PREFS_DIALOG(interesting));
@@ -109,6 +115,7 @@ GtrPrefsDialog *gtranslator_prefs_dialog_new()
 		GNOME_STOCK_BUTTON_OK,
 		GNOME_STOCK_BUTTON_APPLY,
 		GNOME_STOCK_BUTTON_CLOSE,
+		GNOME_STOCK_BUTTON_HELP,
 		NULL);
 
 	dialog->pane=e_hpaned_new();
@@ -200,6 +207,8 @@ void gtranslator_prefs_dialog_changed(GtrPrefsDialog *dialog)
 {
 	g_return_if_fail(dialog!=NULL);
 	g_return_if_fail(GTR_PREFS_DIALOG(dialog)->dialog!=NULL);
+
+	GTR_PREFS_DIALOG(dialog)->changed=TRUE;
 
 	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 0, TRUE);
 	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 1, TRUE);
