@@ -245,8 +245,7 @@ static GnomeUIInfo the_searchbar[] = {
 			       N_("Go to the last message"),
 			       goto_last_msg,
 			       GNOME_STOCK_PIXMAP_LAST),
-	/*GNOMEUIINFO_ITEM_STOCK(N_("Untranslated"),*/
-	GNOMEUUINFO_ITEM_STOCK(N_("Missing"),
+	GNOMEUIINFO_ITEM_STOCK(N_("Untranslated"),
 			       N_("Go to next untranslated message"),
 			       goto_next_untranslated,
 			       GNOME_STOCK_PIXMAP_BOOK_OPEN),
