@@ -30,20 +30,26 @@
  * The keywords which should be highlighted.
  */
 static gchar *keywords[] = {
+	"Authors",
+	"Author",
 	"BUGS",
 	"C++",
 	"C#",
 	"Cent",
 	"ChangeLog",
+	"Contributors",
+	"Contributor",
 	"COPYING",
 	"COPYING.LIB",
 	"Copying",
-	"Ct",
+	"Ct ",
+	"Ct.",
 	"CVS",
 	"Dollar",
 	"EMAIL",
 	"EURO",
-	"Euro",
+	"Euro ",
+	"Euro.",
 	"FAQ",
 	"FDL",
 	"FIXME",
@@ -62,6 +68,7 @@ static gchar *keywords[] = {
 	"Gtranslator",
 	"gtranslator",
 	"HEAD",
+	"HELP",
 	"HTML",
 	"HTTP",
 	"INSTALL",
@@ -127,6 +134,7 @@ static gchar *prefixes[] =  {
 	"urn:",
 	"vfolder:",
 	"whois:",
+	"wysiwyg:",
 	NULL
 };
 
