@@ -1,6 +1,6 @@
 <!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN" [
 <!ENTITY version "0.35">
-<!ENTITY docdate "13 February 2001">
+<!ENTITY docdate "18 February 2001">
 ]>
 
 <article id="index">
@@ -164,6 +164,70 @@
 			with #~) before you save it.
 </sect1>
 
+<sect1 id="commandlinearguments">
+	<title>Command line arguments</title>
+		<para>
+			<application>gtranslator</application> understands some
+			command line arguments:
+			<itemizedlist>
+				<listitem>
+					<para>
+					<emphasis>--help</emphasis> Shows you a
+					litte help message on the command line.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					<emphasis>--version</emphasis> Tells you
+					the version of <application>gtranslator
+					</application> you're using.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					<emphasis>--display</emphasis> Let's you
+					define the display to start 
+					<application>gtranslator</application>
+					on.
+					</para>
+				</listitem>	
+				<listitem>
+					<para>
+					<emphasis>--webalize</emphasis> Prints
+					out a htmlized output file (you must
+					give the html output filename as the
+					next argument) of the po file.
+					</para>
+					<para>
+					An example call would be:
+					<emphasis>
+					<application>gtranslator</application>
+					--webalize=Evolution.html tr.po
+					</emphasis>
+					</para>
+				</listitem>	
+				<listitem>
+					<para>
+					<emphasis>--geometry</emphasis> Let's
+					you define a standard geometry string
+					to which the gtranslator window will
+					conform.
+					</para>
+					<para>
+					An example call would be:
+					<emphasis>
+					<application>gtranslator</application>
+					--geometry="320x240+0+0" tr.po
+					</emphasis>
+					(This opens gtranslator at "+0+0", the
+					left upper corner, with a size of 
+					320x240).
+					</para>
+				</listitem>	
+			</itemizedlist>	
+		</para>
+</sect1>
+
 <sect1 id="thanks-to-contributors">
 	<title>Thanks to our contributors</title>
 		<para>
@@ -208,7 +272,7 @@
 				<listitem>
 					<para>
 					Thomas Ziehmer
-					<email>ziehmer@rhrk.uni-kl.de</email>
+					<email>thomas@gtranslator.org</email>
 					</para>
 				</listitem>
 			</itemizedlist>

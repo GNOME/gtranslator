@@ -4,6 +4,7 @@ gtranslator_sgmlfile = gtranslator.sgml
 
 gtranslator_htmlfiles = \
 	authors.html \
+	commandlinearguments.html \
 	features.html \
 	index.html \
 	thanks-to-contributors.html \
