@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.23\n"
-"POT-Creation-Date: 2000-10-09 11:31+0200\n"
-"PO-Revision-Date: 2000-10-09 11:30+0200\n"
-"Last-Translator: Christian Meyer <cm@ggtt.de>\n"
+"Project-Id-Version: gtranslator 0.30\n"
+"POT-Creation-Date: 2000-10-14 12:48+0200\n"
+"PO-Revision-Date: 2000-10-14 12:51+0200\n"
+"Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -227,7 +227,7 @@ msgstr "Letzte"
 msgid "Missing"
 msgstr "Fehlend"
 
-#: src/gui.c:288 src/gui.c:712
+#: src/gui.c:288 src/gui.c:724
 msgid "Fuzzy"
 msgstr "Ungenau"
 
@@ -265,20 +265,20 @@ msgstr "Auf Wiedersehen!"
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:702
+#: src/gui.c:714
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Meldung: %d / %d / Status:"
 
-#: src/dialogs.c:217 src/gui.c:716
+#: src/dialogs.c:217 src/gui.c:728
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: src/gui.c:722
+#: src/gui.c:734
 msgid "Stick"
 msgstr "Fest"
 
-#: src/gui.c:726
+#: src/gui.c:738
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
@@ -342,115 +342,146 @@ msgstr "Suchen in: "
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Während der Ausführung von msgfmt ist ein Fehler aufgetreten:\n"
 
-#: src/prefs.c:199
+#: src/prefs.c:212
 msgid "gtranslator -- options"
 msgstr "gtranslator -- Optionen"
 
 #. *
 #. * The tables for holding all the entries below
 #. *
-#: src/prefs.c:203
+#: src/prefs.c:216
 msgid "Personal information"
 msgstr "Persönliche Informationen"
 
-#: src/prefs.c:204
+#: src/prefs.c:217
 msgid "Language options"
 msgstr "Sprachoptionen"
 
-#: src/prefs.c:205
+#: src/prefs.c:218
 msgid "Po file options"
 msgstr "Optionen der po-Datei"
 
-#: src/prefs.c:206
+#: src/prefs.c:219
 msgid "Miscellaneous"
 msgstr "Erweitert"
 
-#: src/prefs.c:207
+#: src/prefs.c:220
 msgid "Recent files menu"
 msgstr "Zuletzt·geöffnet-Menü"
 
-#: src/prefs.c:212
+#: src/prefs.c:221
+msgid "Fonts & Colors"
+msgstr "Schrift & Farben"
+
+#: src/prefs.c:226
 msgid "Author's name :"
 msgstr "Name des Autors :"
 
-#: src/prefs.c:215
+#: src/prefs.c:229
 msgid "Author's EMail :"
 msgstr "E-Mail des Autors :"
 
-#: src/header_stuff.c:307 src/prefs.c:223
+#: src/header_stuff.c:307 src/prefs.c:237
 msgid "Language :"
 msgstr "Sprache :"
 
-#: src/prefs.c:227
+#: src/prefs.c:241
 msgid "Language code :"
 msgstr "Sprachkürzel :"
 
-#: src/prefs.c:232
+#: src/prefs.c:246
 msgid "Language group's EMail :"
 msgstr "Maillingliste des Übersetzungsteams :"
 
-#: src/header_stuff.c:316 src/prefs.c:236
+#: src/header_stuff.c:316 src/prefs.c:250
 msgid "Charset :"
 msgstr "Charset :"
 
-#: src/header_stuff.c:320 src/prefs.c:240
+#: src/header_stuff.c:320 src/prefs.c:254
 msgid "Encoding :"
 msgstr "Codierung :"
 
-#: src/prefs.c:248
+#: src/prefs.c:262
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Non-fuzzy Status setzen, wenn Meldung sich verändert hat"
 
-#: src/prefs.c:252
+#: src/prefs.c:266
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Warnen, wenn die .po-Datei  ungenaue Übersetzungen beinhaltet"
 
-#: src/prefs.c:256
+#: src/prefs.c:270
 msgid "Don't save unchanged .po-files"
 msgstr "Unveränderte .po-Dateien nicht speichern"
 
-#: src/prefs.c:260
+#: src/prefs.c:274
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Warnen, wenn man versucht eine unveränderte Datei zu speichern"
 
-#: src/prefs.c:267
+#: src/prefs.c:281
 msgid "Use the dot char (\"·\") instead of a free space"
 msgstr "Das Zeichen \"·\" anstatt eines Leerzeichens verwenden"
 
-#: src/prefs.c:270
+#: src/prefs.c:284
 msgid "Enable the popup menu"
 msgstr "Popup-Menü aktivieren"
 
-#: src/prefs.c:273
+#: src/prefs.c:287
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
 "Die Update-Funktion von gtranslator aktivieren (Sie brauchen den Quellcoe "
 "dazu)"
 
-#: src/prefs.c:276
+#: src/prefs.c:290
 msgid "Save geometry on exit & restore it on startup"
 msgstr ""
 "Die Größe von gtranslator beim Verlassen speichern und beim Start "
 "wiederherstellen"
 
-#: src/prefs.c:279
+#: src/prefs.c:293
 msgid "Don't show the update information dialogs"
 msgstr "Update-Informationsdialoge nicht zeigen"
 
-#: src/prefs.c:291
+#: src/prefs.c:305
 msgid "Check every file in the list for existence"
 msgstr "Jede Datei in der Liste nach ihrer Existenz überprüfen"
 
-#: src/prefs.c:294
-msgid "Delete obsolete entries in the recent files list"
-msgstr "Alte Einträge in der Liste für \"Letzte geöffnete\" löschen"
-
-#: src/prefs.c:300
+#: src/prefs.c:311
 msgid "Number of maximal shown entries in the recent files list:"
 msgstr "Zahl der maximal gezeigten Einträge in Liste für \"Letzte geöffnete\":"
 
-#: src/prefs.c:404
+#: src/prefs.c:325
+msgid "Apply special font/colors"
+msgstr "Spezielle Schriftarten/Farben anwenden"
+
+#. *
+#. * Create the labels.
+#. *
+#: src/prefs.c:330
+msgid "Font:"
+msgstr "Schriftart:"
+
+#: src/prefs.c:331
+msgid "Foreground color:"
+msgstr "Vordergrundfarbe:"
+
+#: src/prefs.c:332
+msgid "Background color:"
+msgstr "Hintergrundfarbe:"
+
+#: src/prefs.c:339
+msgid "gtranslator -- font selection"
+msgstr "gtranslator -- Schriftauswahl"
+
+#: src/prefs.c:346
+msgid "gtranslator -- foreground color"
+msgstr "gtranslator -- Vordergrundfarbe"
+
+#: src/prefs.c:349
+msgid "gtranslator -- background color"
+msgstr "gtranslator -- Hintergrundfarbe"
+
+#: src/prefs.c:471
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -460,7 +491,7 @@ msgstr ""
 "angeben, duch die gtranslator genau so arbeitet,\n"
 "wie SIE es wollen!"
 
-#: src/prefs.c:555
+#: src/prefs.c:622
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Der Geometrie-String \"%s\" konnte nicht analysiert werden!"
@@ -532,7 +563,7 @@ msgstr ""
 "Neues ESC-Zeichen gefunden: \\%c\n"
 "Dies zu parse.c, Zeile %i hinzufügen."
 
-#: src/parse.c:130 src/parse.c:438
+#: src/parse.c:130 src/parse.c:442
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Die Datei `%s' existiert überhaupt nicht!"
@@ -575,7 +606,7 @@ msgstr "Die Datei \"%s\" wurde erfolgreich analysiert"
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:426
+#: src/parse.c:430
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -586,7 +617,7 @@ msgstr ""
 "Diese Dateien werden durch das Programm generiert.\n"
 "Ihre Datei sollte die *.po Endung besitzen, also %s.po"
 
-#: src/parse.c:483
+#: src/parse.c:487
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -597,11 +628,11 @@ msgstr ""
 "%s verändert\n"
 "Wollen Sie trotzdem speichern?"
 
-#: src/parse.c:491
+#: src/parse.c:495
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- unverändert"
 
-#: src/parse.c:548
+#: src/parse.c:552
 #, c-format
 msgid ""
 "File %s\n"
@@ -610,11 +641,11 @@ msgstr ""
 "Datei %s\n"
 "wurde geändert. Wollen Sie zur gesicherten Kopie zurückkehren?"
 
-#: src/parse.c:585
+#: src/parse.c:589
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "msgfmt ist auf diesem System leider nicht verfügbar!"
 
-#: src/parse.c:610
+#: src/parse.c:614
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -626,24 +657,24 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:649 src/parse.c:659 src/parse.c:660
+#: src/parse.c:659 src/parse.c:669 src/parse.c:670
 msgid "_File/Recen_t files/"
 msgstr "_Datei/Z_uletzt bearbeitet/"
 
-#: src/parse.c:704
+#: src/parse.c:715
 #, c-format
 msgid "Open %s"
 msgstr "%s öffnen"
 
-#: src/parse.c:826
-msgid "The update caused no changes."
-msgstr "Das Update brachte keine Änderungen"
+#: src/parse.c:835
+msgid "An update would cause no changes."
+msgstr "Ein Update würde keine Änderungen bringen."
 
-#: src/parse.c:844
+#: src/parse.c:853
 msgid "The update was successfull."
 msgstr "Das Update war erfolgreich."
 
-#: src/find.c:84
+#: src/find.c:88
 #, c-format
 msgid ""
 "Could not find\n"
@@ -652,15 +683,15 @@ msgstr ""
 "\"%s\" konnte nicht\n"
 "gefunden werden"
 
-#: src/find.c:96
+#: src/find.c:100
 msgid "Couldn't get the message! Grrr...."
 msgstr "Die Nachricht konnte nicht geholt werden! Mist..."
 
-#: src/find.c:118
+#: src/find.c:122
 msgid "There are no more fuzzy messages"
 msgstr "Es sind keine ungenauen Übersetzungen mehr vorhanden"
 
-#: src/find.c:142
+#: src/find.c:146
 msgid "All messages seem to be translated"
 msgstr "Alle Meldungen scheinen übersetzt zu sein"
 
@@ -668,7 +699,7 @@ msgstr "Alle Meldungen scheinen übersetzt zu sein"
 msgid "Check spelling"
 msgstr "Rechtschreibung wird überprüft"
 
-#: src/spell.c:55
+#: src/spell.c:54
 msgid "Spell checking complete!"
 msgstr "Rechtschreibungsüberprüfung abgeschlossen!"
 
@@ -712,8 +743,7 @@ msgstr "Verwende %s als Meldungs-Datenbank...\n"
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr ""
-"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent "
-"werden.\n"
+"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent werden.\n"
 
 #. *
 #. * Print some information.
@@ -811,52 +841,60 @@ msgstr ""
 "Fehler während der GConf-Initialisierung durch libgtranslator:\n"
 "%s"
 
-#: libgtranslator/preferences.c:77
+#: libgtranslator/preferences.c:80
 msgid "No path defined where I could get the string from."
 msgstr "Kein Pfad definiert, von dem der String erhalten werden kann"
 
-#: libgtranslator/preferences.c:100
+#: libgtranslator/preferences.c:103
 #, c-format
 msgid "Can't set the string `%s' for a non-defined path!\n"
 msgstr ""
 "Der String '%s' kann nicht für einen nicht definierten Pfad gesetzt werden!\n"
 
-#: libgtranslator/preferences.c:107
+#: libgtranslator/preferences.c:110
 #, c-format
 msgid "No string defined for the path `%s'!"
 msgstr "Kein String für den Pfad '%s' definiert!"
 
-#: libgtranslator/preferences.c:135
+#: libgtranslator/preferences.c:139
 msgid "No path defined where I could get the integer from!"
 msgstr "Kein Pfad definiert, von den der Integerwert erhalten werden kann!"
 
-#: libgtranslator/preferences.c:136
+#: libgtranslator/preferences.c:140
 msgid "Returning `1' for assurance .."
 msgstr "Um sicher zu gehen, wird `1' zurückgegeben..."
 
-#: libgtranslator/preferences.c:158
+#: libgtranslator/preferences.c:162
 #, c-format
 msgid "Can't set the value `%i' for a non-defined path!"
 msgstr "Der Wert '%i' kann nicht für einen undefinierten Pfad gesetzt werden!"
 
-#: libgtranslator/preferences.c:165
+#: libgtranslator/preferences.c:169
 #, c-format
 msgid "No value defined for the path `%s'!"
 msgstr "Keine Werte definiert für Pfad '%s'!"
 
-#: libgtranslator/preferences.c:191
+#: libgtranslator/preferences.c:196
 msgid "No path defined where I could get the boolean from."
 msgstr "Kein Pfad definiert, von dem der Boolean-Wert erhalten werden kann"
 
-#: libgtranslator/preferences.c:192
+#: libgtranslator/preferences.c:197
 msgid "Returning `FALSE' for assurance ..."
 msgstr "Um sicher zu gehen, wird 'FALSCH' zurückgegeben..."
 
-#: libgtranslator/preferences.c:210
+#: libgtranslator/preferences.c:215
 msgid "Can't set a boolean value for a non-defined path!"
 msgstr "Boolean-Wert für einen undefinierten Pfad kann nicht gesetzt werden!"
 
+#. *
+#. * Set a date identifier; this ought to be also
+#. *  localized!
+#. *
 #: libgtranslator/preferences.c:267
+msgid "%Y-%m-%d %H:%M"
+msgstr "%d.%m.%Y %H:%M"
+
+#: libgtranslator/preferences.c:273
 msgid "Couldn't generate the current date!"
 msgstr "Das aktuelle Datum konnte nicht erzeugt werden!"
 
@@ -1023,3 +1061,4 @@ msgstr "wallonisch"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "walisisch"
+
