@@ -2,6 +2,6 @@
 
 bindir = $(datadir)/gtranslator/scripts
 
-bin_SCRIPTS = update.sh
+bin_SCRIPTS = my-update.sh
 
 EXTRA_DIST = $(bin_SCRIPTS)
