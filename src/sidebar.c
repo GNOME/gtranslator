@@ -95,8 +95,6 @@ GtkWidget *gtranslator_sidebar_new()
 	 */  
 	e_shortcut_model_add_group(E_SHORTCUT_BAR(sidebar)->model,
 		-1, e_utf8_from_locale_string(_("Views")));
-	e_shortcut_model_add_group(E_SHORTCUT_BAR(sidebar)->model,
-		-1, e_utf8_from_locale_string(_("Bookmarks")));
 
 	e_shortcut_bar_set_view_type(E_SHORTCUT_BAR(sidebar), 0, 
 		E_ICON_BAR_SMALL_ICONS);
