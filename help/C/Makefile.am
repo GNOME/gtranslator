@@ -11,7 +11,7 @@ lc = C
 
 gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/$(lc)
 
-gtranslator_xmlfile = gtranslator.xml
+gtranslator_sgmlfile = gtranslator.sgml
 
 gtranslator_omfdir = $(SC_OMFDIR)/gtranslator
 
@@ -20,10 +20,10 @@ gtranslator_omf_DATA = $(gtranslator_omffile)
 gtranslator_omffile = gtranslator-$(lc).omf
 
 $(gtranslator_omffile): $(gtranslator_omffile).presetup
-	scrollkeeper-preinstall $(gtranslator_helpdir)/$(gtranslator_xmlfile) \
+	scrollkeeper-preinstall $(gtranslator_helpdir)/$(gtranslator_sgmlfile) \
 		$(gtranslator_omffile).presetup $(gtranslator_omffile)
 
-gtranslator_help_DATA=$(gtranslator_xmlfile)
+gtranslator_help_DATA=$(gtranslator_sgmlfile)
 
 install-data-local: 
 	scrollkeeper-update -p $(SC_STATEDIR)
@@ -31,5 +31,5 @@ install-data-local:
 uninstall-local:
 	scrollkeeper-update -p $(SC_STATEDIR)
 
-EXTRA_DIST = $(gtranslator_xmlfile) \
+EXTRA_DIST = $(gtranslator_sgmlfile) \
 	$(gtranslator_omffile).presetup
