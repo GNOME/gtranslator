@@ -542,7 +542,8 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 
 void gtranslator_insert_text(GtkText *editable, const gchar *text)
 {
-	static gint length, pos=0;
+	static gint length, pos;
+	pos=0;
 
 	length = gtk_text_get_length(editable);
 	/* First, delete old contents */
