@@ -55,14 +55,6 @@ void gtranslator_config_init(void)
 }
 
 /*
- * Closes the configuration access through gtranslator.
- */
-void gtranslator_config_close(void)
-{
-	gconf_client_suggest_sync(client, NULL);
-}
-
-/*
  * String methods:
  */
 gchar *gtranslator_config_get_string(gchar *path)

@@ -198,6 +198,9 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
+	/* Initialize configuration client */
+	gtranslator_config_init();
+
 	/*
 	 * Read all of our "normal" preferences -- translator data is now
 	 *  outsourced into the GtrTranslator structure.
@@ -405,9 +408,7 @@ int main(int argc, char *argv[])
 		/*
 		 * Set up the "runtime/filename" config. key to a sane value.
 		 */
-		gtranslator_config_init();
 		gtranslator_config_set_string("runtime/filename", "--- No file ---");
-		gtranslator_config_close();
 
 		/*
 		 * Free all till now allocated stuff.
@@ -496,9 +497,7 @@ int main(int argc, char *argv[])
 		/*
 		 * Set up the "runtime/filename" config. key to a sane value.
 		 */
-		gtranslator_config_init();
 		gtranslator_config_set_string("runtime/filename", "--- No file ---");
-		gtranslator_config_close();
 
 		/*
 		 * Free all till now allocated stuff.
@@ -540,9 +539,7 @@ int main(int argc, char *argv[])
 		/*
 		 * Set up the "runtime/filename" config. key to a sane value.
 		 */
-		gtranslator_config_init();
 		gtranslator_config_set_string("runtime/filename", "--- No file ---");
-		gtranslator_config_close();
 
 		/*
 		 * Free all till now allocated stuff.

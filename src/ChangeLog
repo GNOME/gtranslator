@@ -1,3 +1,13 @@
+2002-01-19  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* preferences.c/h: remove gtranslator_config_close() --
+	gconf_client_suggest_sync should never be used, and then the function
+	remains empty.
+	* many .c files: do not call gtranslator_config_init() or close() --
+	they are useless.
+	* main.c: gtranslator_config_init() at startup, the only place it is
+	needed.
+
 2002-01-11  Fatih Demir <kabalak@gtranslator.org>
 
 	* Makefile.am: Remove the "prefs-dialog.c/.h" source files.

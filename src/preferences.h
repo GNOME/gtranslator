@@ -27,11 +27,9 @@
 #include <glib.h>
 
 /*
- * gtranslator_config is only available after a initialization; the
- *  close method is also mandatory after using the configuration routines.
+ * gtranslator_config is only available after a initialization.
  */
 void 		gtranslator_config_init(void);
-void 		gtranslator_config_close(void);
 
 /*
  * Boolean methods:

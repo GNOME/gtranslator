@@ -526,9 +526,7 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 	}
 	else
 	{
-		gtranslator_config_init();
 		directory=gtranslator_config_get_string("informations/last_directory");
-		gtranslator_config_close();
 
 		if(directory && g_file_test(directory, G_FILE_TEST_ISDIR))
 		{
@@ -557,9 +555,7 @@ void gtranslator_file_dialogs_store_directory(const gchar *filename)
 	
 	directory=g_dirname(filename);
 	
-	gtranslator_config_init();
 	gtranslator_config_set_string("informations/last_directory", directory);
-	gtranslator_config_close();
 
 	GTR_FREE(directory);
 }
@@ -638,19 +634,15 @@ static void match_case_toggled(GtkWidget * widget, gpointer useless)
 	GtrPreferences.match_case =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 	gtranslator_update_regex_flags();
-	gtranslator_config_init();
 	gtranslator_config_set_bool("find/case_sensitive",
 			      GtrPreferences.match_case);
-	gtranslator_config_close();
 }
 
 static void find_in_activated(GtkWidget * widget, gpointer which)
 {
 	GtrPreferences.find_in = GPOINTER_TO_INT(which);
-	gtranslator_config_init();
 	gtranslator_config_set_int("find/find_in",
 			      GtrPreferences.find_in);
-	gtranslator_config_close();
 }
 
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
@@ -1037,9 +1029,7 @@ void gtranslator_rescue_file_dialog(void)
 	/*
 	 * Get the original filename for the crash-file from the prefs.
 	 */
-	gtranslator_config_init();
 	original_filename=gtranslator_config_get_string("crash/filename");
-	gtranslator_config_close();
 
 	recovery_message=g_strdup_printf(_("Open recovery file for `%s'?\n\
 It was saved by gtranslator before gtranslator last closed\n\
@@ -1248,8 +1238,6 @@ Would you like to insert it into the translation?"),
 				 * Set the last query result in the prefs for
 				 *  persistence.
 				 */
-				gtranslator_config_init();
-				
 				gtranslator_config_set_string(
 					"query/last_match_filename",
 					po->filename);
@@ -1271,8 +1259,6 @@ Would you like to insert it into the translation?"),
 					"query/last_match_translation", 
 					result->message);
 				
-				gtranslator_config_close();
-
 				gtranslator_free_query(&query);
 				
 

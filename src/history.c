@@ -121,8 +121,6 @@ GList *gtranslator_history_get(void)
 	GList *hl=NULL;
 	gint count, c;
 
-	gtranslator_config_init();
-
 	count=gtranslator_config_get_int("history/length");
 
 	/*
@@ -178,8 +176,6 @@ GList *gtranslator_history_get(void)
 		GTR_FREE(subpath);
 	}
 	
-	gtranslator_config_close();
-
 	return hl;
 }
 
@@ -289,8 +285,6 @@ void gtranslator_history_save(GList *list)
 	gint number=0;
 	GList *rlist = g_list_first(list);
 
-	gtranslator_config_init();
-
 	while(rlist != NULL)
 	{
 		entry=GTR_HISTORY_ENTRY(rlist->data);
@@ -325,8 +319,6 @@ void gtranslator_history_save(GList *list)
 	}
 
 	gtranslator_config_set_int("history/length", number);
-	
-	gtranslator_config_close();
 }
 
 /*

@@ -201,8 +201,6 @@ void gtranslator_create_main_window(void)
 		gtranslator_messages_table=gtk_label_new("");
 	}
 
-	gtranslator_config_init();
-
 	if(GtrPreferences.show_messages_table)
 	{
 		table_pane_position=gtranslator_config_get_int(
@@ -215,8 +213,6 @@ void gtranslator_create_main_window(void)
 		e_paned_set_position(E_PANED(table_pane), -1);
 	}
 	
-	gtranslator_config_close();
-
 	extra_content_view=g_new0(GtrExtraContentArea, 1);
 	
 	extra_content_view->box=gtk_hbox_new(FALSE, 1);
@@ -309,10 +305,8 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Set up our special styles for the text boxes.
 	 */
-	gtranslator_config_init();
 	gtranslator_set_style(text_box, 0);
 	gtranslator_set_style(trans_box, 1);
-	gtranslator_config_close();
 	/*
 	 *  Initialize highlighting
 	 */
@@ -407,11 +401,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 		return TRUE;
 
 	gtranslator_file_close(NULL, NULL);
-	
-	/*
-	 * Initialize the config and set the pane positions -- if needed.
-	 */
-	gtranslator_config_init();
 
 	/*
 	 * Get the EPaned's position offset.
@@ -474,7 +463,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 * Store the current date.
 	 */
 	gtranslator_config_set_last_run_date();
-	gtranslator_config_close();
 
 	/*
 	 * Free our used content area variable on exit .-)

@@ -57,10 +57,8 @@ gint gtranslator_session_sleep(GnomeClient * client, gint phase,
 	 * The state (for now only the current message number) is stored
 	 *  in the preferences.
 	 */
-	gtranslator_config_init();
 	gtranslator_config_set_int("state/message_number", 
 			     g_list_position(po->messages, po->current));
-	gtranslator_config_close();
 	
 	argv[2] = NULL;
 
@@ -81,9 +79,7 @@ void gtranslator_session_restore(GnomeClient * client)
 {
 	guint num;
 
-	gtranslator_config_init();
 	num = gtranslator_config_get_int("state/message_number");
-	gtranslator_config_close();
 
 	gtranslator_message_go_to_no(NULL, GUINT_TO_POINTER(num));
 	gnome_appbar_set_status(GNOME_APPBAR(gtranslator_application_bar),

@@ -36,17 +36,13 @@ void gtranslator_preferences_init_default_values()
 	/*
 	 * Seee if gtranslator has been run before.
 	 */ 
-	gtranslator_config_init();
 	date=gtranslator_config_get_string("informations/last_run_on");
-	gtranslator_config_close();
 
 	/*
 	 * Initialize the default values.
 	 */ 
 	if(!date)
 	{
-		gtranslator_config_init();
-		
 		/*
 		 * Init our GtrTranslator structure .-)
 		 */
@@ -132,8 +128,6 @@ void gtranslator_preferences_init_default_values()
 		 *  a last run date.
 		 */  
 		gtranslator_config_set_last_run_date();
-		gtranslator_config_close();
-
 	}
 
 	GTR_FREE(date);
@@ -144,8 +138,6 @@ void gtranslator_preferences_init_default_values()
  */ 
 void gtranslator_colors_init_default_colors()
 {
-	gtranslator_config_init();
-	
 	/*
 	 * Set black on white as default colors for the color pickers.
 	 */ 
@@ -173,6 +165,4 @@ void gtranslator_colors_init_default_colors()
 	gtranslator_config_set_string("colors/messages_table_translated", "#000000");
 	gtranslator_config_set_string("colors/messages_table_fuzzy", "#ff0000");
 	gtranslator_config_set_string("colors/messages_table_untranslated", "#a7453e");
-	
-	gtranslator_config_close();
 }

@@ -247,7 +247,6 @@ void gtranslator_utils_set_language_values_by_language(const gchar *language)
 		if(!nautilus_strcasecmp(languages[i].name, language) ||
 			!nautilus_strcasecmp(_(languages[i].name), language))
 		{
-			gtranslator_config_init();
 			gtranslator_config_set_string("language/name", languages[i].name);
 			gtranslator_config_set_string("language/language_code", languages[i].locale);
 			
@@ -263,7 +262,6 @@ void gtranslator_utils_set_language_values_by_language(const gchar *language)
 			
 			gtranslator_config_set_string("language/mime_type", languages[i].encoding);
 			gtranslator_config_set_string("language/encoding", languages[i].bits);
-			gtranslator_config_close();
 
 			return;
 		}
@@ -821,8 +819,6 @@ void gtranslator_utils_old_colors_to_new_location()
 	gchar *value;
 	gboolean converted=FALSE;
 	
-	gtranslator_config_init();
-
 	value=gtranslator_config_get_string("colors/fg");
 
 	if(value && value[0]=='#')
@@ -844,8 +840,6 @@ void gtranslator_utils_old_colors_to_new_location()
 		gtranslator_config_set_string("colors/fg", "black");
 		gtranslator_config_set_string("colors/bg", "white");
 	}
-
-	gtranslator_config_close();
 }
 
 /* gtranslator_utils_getline

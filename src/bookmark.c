@@ -441,7 +441,6 @@ void gtranslator_bookmark_load_list()
 	gchar	*path;
 	gint	count, c;
 
-	gtranslator_config_init();
 	count=gtranslator_config_get_int("bookmark/length");
 	
 	if(count > MAX_BOOKMARKS)
@@ -471,8 +470,6 @@ void gtranslator_bookmark_load_list()
 	}
 
 	gtranslator_bookmarks=g_list_reverse(gtranslator_bookmarks);
-
-	gtranslator_config_close();
 }
 
 /*
@@ -489,8 +486,6 @@ void gtranslator_bookmark_save_list()
 		gint	c=0;
 
 		GList	*writelist=g_list_first(gtranslator_bookmarks);
-
-		gtranslator_config_init();
 
 		/*
 		 * Write out all GtrBookmarks in our internal list in string
@@ -517,7 +512,6 @@ void gtranslator_bookmark_save_list()
 		}
 
 		gtranslator_config_set_int("bookmark/length", c);
-		gtranslator_config_close();
 	}
 }
 

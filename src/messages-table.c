@@ -212,8 +212,6 @@ static void read_messages_table_colors()
 	{
 		gchar	*value;
 		
-		gtranslator_config_init();
-		
 		value=gtranslator_config_get_string("colors/messages_table_untranslated");
 
 		if(value && value[0]=='#')
@@ -249,8 +247,6 @@ static void read_messages_table_colors()
 		{
 			messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
 		}
-
-		gtranslator_config_close();
 	}
 	else
 	{

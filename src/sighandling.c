@@ -49,7 +49,6 @@ void gtranslator_signal_handler(int signal)
 		 * Store the original filename into the
 		 *  preferences.
 		 */ 
-		gtranslator_config_init();
 		gtranslator_config_set_string("crash/filename",
 			po->filename);
 
@@ -61,7 +60,6 @@ void gtranslator_signal_handler(int signal)
 	}
 
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
-	gtranslator_config_close();
 
 	/*
 	 * Free some other stuff we're definetely using already or whose free/

@@ -179,7 +179,6 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	/*
 	 * Save the color valuesinto the preferences.
 	 */
-	gtranslator_config_init();
 
 	/*
 	 * Also set up the scheme specific foreground and background colors.
@@ -217,8 +216,6 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	gtranslator_config_set_string("scheme/filename", 
 		theme->info->filename);
 	
-	gtranslator_config_close();
-
 	gtranslator_color_scheme_free(&theme);
 }
 
@@ -230,8 +227,6 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
 	GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
 
 	theme->info=g_new0(GtrColorSchemeInformations, 1);
-
-	gtranslator_config_init();
 
 	/*
 	 * Reget the stored color scheme values from the preferences.
@@ -254,8 +249,6 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
 	theme->address=gtranslator_config_get_string("colors/address");
 	theme->keyword=gtranslator_config_get_string("colors/keyword");
 	theme->spell_error=gtranslator_config_get_string("colors/spell_error");
-
-	gtranslator_config_close();
 
 	return theme;
 }

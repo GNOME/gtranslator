@@ -84,12 +84,10 @@ void gtranslator_utils_save_geometry(void)
 		gstr = gnome_geometry_string(gtranslator_application->window);
 		gnome_parse_geometry(gstr, &x, &y, &w, &h);
 		GTR_FREE(gstr);
-		gtranslator_config_init();
 		gtranslator_config_set_int("geometry/x", x);
 		gtranslator_config_set_int("geometry/y", y);
 		gtranslator_config_set_int("geometry/width", w);
 		gtranslator_config_set_int("geometry/height", h);
-		gtranslator_config_close();
 		
 	}
 }
@@ -105,12 +103,10 @@ void gtranslator_utils_restore_geometry(gchar  * gstr)
 	 */
 	if (gstr == NULL) {
 		if (GtrPreferences.save_geometry == TRUE) {
-			gtranslator_config_init();
 			x = gtranslator_config_get_int("geometry/x");
 			y = gtranslator_config_get_int("geometry/y");
 			width = gtranslator_config_get_int("geometry/width");
 			height = gtranslator_config_get_int("geometry/height");
-			gtranslator_config_close();
 		}
 		else return;
 	}
@@ -301,10 +297,8 @@ GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(color_selector),
 		title_text);
 	
-	gtranslator_config_init();
 	gtranslator_color_values_get(GNOME_COLOR_PICKER(color_selector), 
 		color_type);
-	gtranslator_config_close();
 	
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), color_selector, 1, 2, 
@@ -392,9 +386,7 @@ gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
 
 	g_return_val_if_fail(filename!=NULL, FALSE);
 
-	gtranslator_config_init();
 	resultfilename=gtranslator_config_get_string("runtime/filename");
-	gtranslator_config_close();
 
 	/*
 	 * Test if we've got a filename and for equality.

@@ -450,10 +450,8 @@ void gtranslator_parse_main(const gchar *filename)
 	}
 	else
 	{
-		gtranslator_config_init();
 		gtranslator_config_set_string("runtime/filename", 
 			(gchar *) filename);
-		gtranslator_config_close();
 	}
 
 	/*
@@ -967,9 +965,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	/*
 	 * "Remove" the stored "runtime/filename" key.
 	 */
-	gtranslator_config_init();
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
-	gtranslator_config_close();
 
 	nothing_changes = FALSE;
 }

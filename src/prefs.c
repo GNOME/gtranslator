@@ -540,8 +540,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
 #undef if_active
 
-	gtranslator_config_init();
-	
 	GtrPreferences.autosave_timeout = 
 		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
 			autosave_timeout));
@@ -702,8 +700,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_set_bool("toggles/autosave_with_suffix",
 			      GtrPreferences.autosave_with_suffix);
 
-	gtranslator_config_close();
-
 	/*
 	 * Save our translator data.
 	 */
@@ -787,8 +783,6 @@ void gtranslator_preferences_read(void)
 	 */  
 	gtranslator_preferences_init_default_values();
 
-	gtranslator_config_init();
-	
 	GtrPreferences.msgid_font = 
 		gtranslator_config_get_string("interface/original_font");
 	GtrPreferences.msgstr_font = 
@@ -895,8 +889,6 @@ void gtranslator_preferences_read(void)
 		gtranslator_set_style(text_box, 0);
 		gtranslator_set_style(trans_box, 1);
 	}
-
-	gtranslator_config_close();
 }
 
 /*

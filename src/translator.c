@@ -148,7 +148,6 @@ GtrTranslator *gtranslator_translator_new()
 	/*
 	 * Read the translator specific values from the preferences.
 	 */
-	gtranslator_config_init();
 	gtranslator_translator_read_value(&new_translator->name, 
 		"translator/name");
 	gtranslator_translator_read_value(&new_translator->email, 
@@ -184,8 +183,6 @@ GtrTranslator *gtranslator_translator_new()
 	gtranslator_translator_read_value(&new_translator->query_domain,
 		"query/defaultdomain");
 
-	gtranslator_config_close();
-	
 	return new_translator;
 }
 
@@ -430,8 +427,6 @@ void gtranslator_translator_save(GtrTranslator *translator)
 {
 	g_return_if_fail(translator!=NULL);
 	
-	gtranslator_config_init();
-
 	/*
 	 * Save the translator's personal settings.
 	 */
@@ -461,8 +456,6 @@ void gtranslator_translator_save(GtrTranslator *translator)
 		translator->learn_buffer);
 	gtranslator_config_set_string("translator/translator_memory_buffer", 
 		translator->tm_buffer);
-
-	gtranslator_config_close();
 }
 
 /*

@@ -573,10 +573,8 @@ static void take_my_options_toggled(GtkWidget * widget, gpointer useless)
 {
 	GtrPreferences.fill_header =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(take_my_options));
-	gtranslator_config_init();
 	gtranslator_config_set_bool("toggles/fill_header",
 			      GtrPreferences.fill_header);
-	gtranslator_config_close();
 	
 	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
 	gtranslator_header_edit_changed(widget, useless);
