@@ -36,6 +36,7 @@
 #include "syntax.h"
 #include "gtkspell.h"
 #include "color-schemes.h"
+#include "views.h"
 
 #include "pixmaps/untrans.xpm"
 
@@ -85,6 +86,11 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
  * To get the left/right moves from the cursor.
  */ 
 static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event);
+
+/*
+ * Switch the used views.
+ */
+static void switch_view(GtkWidget *widget, gpointer view);
 
 /*
  * The target formats
@@ -150,6 +156,19 @@ static GnomeUIInfo the_file_menu[] = {
 	GNOMEUIINFO_SUBTREE( N_("Recen_t files"), the_last_files_menus),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_views_menu[] = {
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Message"), 
+		N_("Standard messages view"),
+		switch_view, (gpointer) 1, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Comments"), 
+		N_("View comments for message"),
+		switch_view, (gpointer) 2, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Format"), 
+		N_("View C formats of the message"),
+		switch_view, (gpointer) 3, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -286,6 +305,7 @@ static GnomeUIInfo the_help_menu[] = {
 
 static GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Views"), the_views_menu),
 	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
 	GNOMEUIINFO_SUBTREE(N_("Mess_age status"), the_msg_status_menu),
@@ -470,6 +490,10 @@ static void create_actions(void)
 	insert_action(ACT_REVERT, the_file_menu[9], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[10], NONE);
 	/*------------------------------------------------*/
+	insert_action(ACT_VIEW_MESSAGE, the_views_menu[0], NONE);
+	insert_action(ACT_VIEW_COMMENTS, the_views_menu[1], NONE);
+	insert_action(ACT_VIEW_C_FORMAT, the_views_menu[2], NONE);
+	/**************************************************/
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);
@@ -504,7 +528,8 @@ void disable_actions_no_file(void)
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
-			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
+			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
+			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_C_FORMAT);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
@@ -513,7 +538,8 @@ void enable_actions_just_opened(void)
 	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_ACCOMPLISH,
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR, ACT_REPLACE,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
-			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
+			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
+			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_C_FORMAT);
 
 	disable_actions(ACT_SAVE, ACT_UNDO);
 	/*
@@ -1208,4 +1234,26 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 	}
 	
 	return TRUE;
+}
+
+/*
+ * Switch to the given view.
+ */
+static void switch_view(GtkWidget *widget, gpointer view)
+{
+	switch(GPOINTER_TO_INT(view))
+	{
+		case 3:
+			gtranslator_views_set(GTR_C_FORMAT_VIEW);
+				break;
+				
+		case 2:
+			gtranslator_views_set(GTR_COMMENT_VIEW);
+				break;
+				
+		case 1:
+		default:
+			gtranslator_views_set(GTR_MESSAGE_VIEW);
+				break;
+	}
 }

@@ -20,6 +20,7 @@
 #include "views.h"
 #include "gui.h"
 #include "parse.h"
+#include "prefs.h"
 #include "syntax.h"
 
 #include <gtk/gtk.h>
@@ -139,8 +140,13 @@ void show_c_format()
 
 	if(activate)
 	{
-		#define append_char(x) format=g_string_append_c(format, x)
-		GString *format=g_string_new("");
+		#define append_char1(x) \
+			msgidformat=g_string_append_c(msgidformat, x)
+		#define append_char2(x) \
+			msgstrformat=g_string_append_c(msgstrformat,x)
+			
+		GString *msgidformat=g_string_new("");
+		GString *msgstrformat=g_string_new("");
 		gint z=0;
 	
 		/*
@@ -154,29 +160,44 @@ void show_c_format()
 		{
 			if(msg->msgid[z]=='%' && msg->msgid[z++])
 			{
+				/*
+				 * The special char or a white space.
+				 */
+				if(wants.dot_char)
+				{
+					append_char1(_("·")[0]);
+				}
+				else
+				{
+					append_char1(' ');
+				}
+
 				if(msg->msgid[z++]=='l' && msg->msgid[z+2])
 				{
-					append_char(msg->msgid[z]);
-					append_char(msg->msgid[z+1]);
-					append_char(msg->msgid[z+2]);
+					append_char1(msg->msgid[z]);
+					append_char1(msg->msgid[z++]);
+					append_char1(msg->msgid[z+2]);
 
 					z=z+2;
 				}
 				else
 				{
-					append_char(msg->msgid[z]);
-					append_char(msg->msgid[z++]);
+					append_char1(msg->msgid[z]);
+					append_char1(msg->msgid[z++]);
 					
 					z++;
 				}
 			}
-			
-			z++;
+			else
+			{
+				z++;
+			}
 		}
 
-		if(format->len > 0)
+		if(msgidformat->len > 0)
 		{
-			gtranslator_syntax_insert_text(text1, format->str);
+			gtranslator_syntax_insert_text(text1, 
+				msgidformat->str);
 		}
 		else
 		{
@@ -184,41 +205,51 @@ void show_c_format()
 				_("Couldn't extract C formats!"), -1);
 		}
 	
-		/*
-		 * Reset the used variables.
-		 */
-		format=g_string_truncate(format, 0);
 		z=0;
 		
 		while(msg->msgstr[z])
 		{
 			if(msg->msgstr[z]=='%' && msg->msgstr[z++])
 			{
-				append_char(_(" ")[0]);
+
+				/*
+				 * The special char or a white space.
+				 */
+				if(wants.dot_char)
+				{
+					append_char2(_("·")[0]);
+				}
+				else
+				{
+					append_char2(' ');
+				}
 				
 				if(msg->msgid[z++]=='l' && msg->msgid[z+2])
 				{
-					append_char(msg->msgstr[z]);
-					append_char(msg->msgstr[z+1]);
-					append_char(msg->msgstr[z+2]);
+					append_char2(msg->msgstr[z]);
+					append_char2(msg->msgstr[z++]);
+					append_char2(msg->msgstr[z+2]);
 
 					z=z+2;
 				}
 				else
 				{
-					append_char(msg->msgstr[z]);
-					append_char(msg->msgstr[z++]);
+					append_char2(msg->msgstr[z]);
+					append_char2(msg->msgstr[z++]);
 					
 					z++;
 				}
 			}
-			
-			z++;
+			else
+			{
+				z++;
+			}
 		}
 
-		if(format->len > 0)
+		if(msgstrformat->len > 0)
 		{
-			gtranslator_syntax_insert_text(trans_box, format->str);
+			gtranslator_syntax_insert_text(trans_box, 
+				msgstrformat->str);
 		}
 		else
 		{
@@ -226,14 +257,13 @@ void show_c_format()
 				_("Couldn't extract C formats!"), -1);
 		}
 
-		g_string_free(format, FALSE);
+		g_string_free(msgidformat, FALSE);
+		g_string_free(msgstrformat, FALSE);
 	}
-}
-
-/*
- * Update the menu entries.
- */
-void gtranslator_views_update_menus(void)
-{
-	g_warning("TODO");
+	
+	/*
+	 * Disable the current save action as the C format function applies 
+	 *  chanegs which shouldn't be saved.
+	 */
+	disable_actions(ACT_SAVE);
 }

@@ -58,6 +58,10 @@ enum {
 	ACT_REVERT,
 	ACT_CLOSE,
 	/**********/
+	ACT_VIEW_MESSAGE,
+	ACT_VIEW_COMMENTS,
+	ACT_VIEW_C_FORMAT,
+	/**********/
 	ACT_UNDO,
 	ACT_CUT,
 	ACT_COPY,
