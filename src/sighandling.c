@@ -40,7 +40,7 @@ void gtranslator_signal_handler(int signal)
 		return;
 	}	
 	
-	if(po->file_changed)
+	if(po && po->file_changed)
 	{
 		gchar *crashfilename;
 			
