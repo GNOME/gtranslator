@@ -456,7 +456,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	{
 		gchar	*plain_comment_string=NULL;
 
-		plain_author_string=gtranslator_utf8_get_plain_string(&ph->comment);
+		plain_comment_string=gtranslator_utf8_get_plain_string(&ph->comment);
 		prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0,
 			plain_comment_string, _("Comments:"), gtranslator_header_edit_changed);
 	}
