@@ -235,16 +235,23 @@ void show_comment(GtkWidget *text)
 
 	if(GTR_MSG(po->current->data)->comment)
 	{
+		/*
+		 * Show the comment and only the comment.
+		 */
+		gchar *newtext=GTR_MSG(po->current->data)->comment;
+		
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-
-		gtranslator_syntax_insert_text(text,
-			GTR_MSG(po->current->data)->comment);
+	
+		newtext=prepare_comment_for_view(newtext);
+		
+		gtranslator_syntax_insert_text(text, newtext);
+		g_free(newtext);
 	}
 	else
 	{
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
 
 		gtranslator_syntax_insert_text(text,
-			_("No comment available for this message"));
+			_("No comment available for this message."));
 	}
 }

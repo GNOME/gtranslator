@@ -1,5 +1,15 @@
 2001-03-08  Fatih Demir	<kabalak@gtranslator.org>
 
+	* query.c: Free up the used gchar's in "gtranslator_query_simple" --
+		also update the GUI when a string was inserted -- activate Save
+		 menu entry/toolbar item and setup the "file_changed" flag for 
+		  the po file; also corrected setlocale calls to not mix up
+		   the language environment of the user.
+
+	* sidebar.c: When the comment "view" is selected only view the
+		comment and not the #'s -- call "prepare_comment_for_view"
+		 for this.
+
 	* parse.c: Also keep the obsolete messages if wished -- the formatting
 		is somehow bad but it works.
 

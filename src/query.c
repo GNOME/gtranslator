@@ -40,14 +40,15 @@ gchar *setup_language(gchar *lang);
 GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 {
 	gchar *str;
-	gchar *originallang;
+	gchar *original_LC_CTYPE, *original_LC_MESSAGES;
 
 	query->language=setup_language(query->language);
 	
 	/*
 	 * Rescue the current locales.
 	 */
-	originallang=setlocale(LC_ALL, "");
+	original_LC_MESSAGES=setlocale(LC_MESSAGES, "");
+	original_LC_CTYPE=setlocale(LC_CTYPE, "");
 
 	/*
 	 * Query the under the preferences' language.
@@ -59,7 +60,8 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 	/*
 	 * And now reset the locales to the previous settings.
 	 */
-	setlocale(LC_ALL, originallang);
+	setlocale(LC_MESSAGES, original_LC_MESSAGES);
+	setlocale(LC_CTYPE, original_LC_CTYPE);
 
 	/*
 	 * Only setup a result if the result from the dgettext()-based
@@ -78,6 +80,8 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 	}
 
 	g_free(str);
+	g_free(original_LC_CTYPE);
+	g_free(original_LC_MESSAGES);
 	gtranslator_free_query(&query);
 }
 
@@ -367,6 +371,11 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;
 
+			/*
+			 * GUI updates which should be done locally in here.
+			 */
+			po->file_changed=TRUE;
+
 			gtranslator_free_query_result(&matchingtranslation);
 		}
 	}
@@ -380,6 +389,14 @@ void gtranslator_query_accomplish()
 {
 	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, NULL);
 
+	/*
+	 * Activate the Save menu/tollbar items on changes.
+	 */
+	if(po->file_changed)
+	{
+		enable_actions(ACT_SAVE);
+	}
+	
 	display_msg(po->current);
 	gtranslator_get_translated_count();
 }
