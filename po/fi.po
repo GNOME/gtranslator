@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.41\n"
-"POT-Creation-Date: 2002-09-29 19:01+0200\n"
+"POT-Creation-Date: 2002-12-29 15:48+0100\n"
 "PO-Revision-Date: 2002-05-31 17:40+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -142,7 +142,7 @@ msgstr "Kirjainkoko huomioidaan"
 msgid "English"
 msgstr "Englanti"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
 msgid "Translated"
 msgstr "K‰‰nnetty"
 
@@ -280,11 +280,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1292
+#: src/dialogs.c:1291
 msgid "Query's result translation is already there!"
 msgstr ""
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1315
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -312,7 +312,7 @@ msgstr "Muokkaa kommenttia"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i sumeaa j‰ljell‰ ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
 msgid "Fuzzy"
 msgstr "Sumea"
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i k‰‰nt‰m‰tˆnt‰ j‰ljell‰ ] "
 
-#: src/gui.c:568 src/gui.c:570
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
 msgid "Untranslated"
 msgstr "K‰‰nt‰m‰tˆn"
 
@@ -1052,26 +1052,17 @@ msgstr "Etsi merkkijono po-tiedostosta"
 msgid "Replace string in po file"
 msgstr "Korvaa merkkijono po-tiedostossa"
 
-#: src/message.c:82
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Teksti‰ ei saatu!"
 
-#: src/message.c:104
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "Sumeita tekstej‰ ei lˆydy enemp‰‰."
 
-#: src/message.c:128
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Kaikki tekstit n‰ytt‰isiv‰t olevan k‰‰nnetty."
-
-#: src/message.c:319
-#, c-format
-msgid ""
-"The translation for message `%s'\n"
-"contains syntactical errors!"
-msgstr ""
-"K‰‰nnˆs tekstille `%s'\n"
-"sis‰lt‰‰ syntaksivirheit‰!"
 
 #: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
@@ -1096,18 +1087,6 @@ msgstr "K‰‰nnˆs"
 #: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
 msgstr "Kommentti"
-
-#: src/messages-table.c:208
-msgid "unknown"
-msgstr "tuntematon"
-
-#: src/messages-table.c:214
-msgid "fuzzy"
-msgstr "sumea"
-
-#: src/messages-table.c:220
-msgid "translated"
-msgstr "k‰‰nnetty"
 
 #: src/open.c:141
 #, c-format
@@ -1295,152 +1274,148 @@ msgstr "S‰ilyt‰ po-tiedostojen vanhentuneet tekstit"
 msgid "Highlight syntax of the translation messages"
 msgstr ""
 
-#: src/prefs.c:197
-msgid "Check messages for syntactical correctness"
-msgstr ""
-
-#: src/prefs.c:204
+#: src/prefs.c:200
 msgid "Use special character to indicate free space"
 msgstr "K‰yt‰ erikoismerkki‰ kuvaamaan tyhjett‰"
 
-#: src/prefs.c:207
+#: src/prefs.c:203
 msgid "Enable the popup menu"
 msgstr "K‰yt‰ popup-valikkoikkunaa"
 
-#: src/prefs.c:210
+#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "K‰yt‰ toimintoa joka p‰ivitt‰‰ po-tiedoston gtranslatorista k‰sin"
 
-#: src/prefs.c:213
+#: src/prefs.c:209
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "K‰yt‰ toimintoa joka poistaa kaikki k‰‰nnˆkset po-tiedostosta"
 
-#: src/prefs.c:216
+#: src/prefs.c:212
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Poista k‰‰nnetyt (compiled) tiedostot (eli \"paketti.gmo\")"
 
-#: src/prefs.c:219
+#: src/prefs.c:215
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Tallenna ikkunan koko lopetettaessa"
 
-#: src/prefs.c:222
+#: src/prefs.c:218
 msgid "Show instant comment view in the main pane"
 msgstr ""
 
-#: src/prefs.c:229
+#: src/prefs.c:225
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Pikavalintojen enimm‰ism‰‰r‰:"
 
-#: src/prefs.c:233
+#: src/prefs.c:229
 msgid "Check recent files before showing in recent files' list"
 msgstr "Tarkista pikavalinnat ennen niiden n‰ytt‰mist‰ pikavalintalistassa"
 
-#: src/prefs.c:236
+#: src/prefs.c:232
 msgid "Instant spell checking"
 msgstr "Oikolue heti"
 
-#: src/prefs.c:239
+#: src/prefs.c:235
 msgid "Use special dictionary:"
 msgstr "K‰yt‰ erityist‰ sanakirjaa:"
 
-#: src/prefs.c:261
+#: src/prefs.c:257
 msgid "Syntax color scheme to use:"
 msgstr "K‰ytett‰v‰ syntaksiv‰riteema:"
 
-#: src/prefs.c:266
+#: src/prefs.c:262
 msgid "Apply own fonts:"
 msgstr "K‰yt‰ mukautettuja kirjasimia:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "Original text font:"
 msgstr "Alkuper‰isen tekstin kirjasin:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- kirjasimen valinta/msgid-kirjasin"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "Translation font:"
 msgstr "K‰‰nnˆksen kirjasin:"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- kirjasimen valinta/msgstr-kirjasin"
 
-#: src/prefs.c:278
+#: src/prefs.c:274
 msgid "Apply own colors:"
 msgstr "K‰yt‰ mukautettuja v‰rej‰:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "Foreground color:"
 msgstr "V‰ri:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- v‰rin m‰‰ritys"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "Background color:"
 msgstr "Taustav‰ri:"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- taustav‰rin m‰‰ritys"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:292
+#: src/prefs.c:288
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Tallenna po-tiedostot automaattisesti tietyin v‰liajoin (minuuteissa):"
 
-#: src/prefs.c:307
+#: src/prefs.c:303
 msgid "Append a suffix to automatically saved files:"
 msgstr "Lis‰‰ automaattisesti tallennettuihin tiedostoihin j‰lkiliite:"
 
-#: src/prefs.c:327
+#: src/prefs.c:323
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "N‰yt‰ tekstitaulu (vaatii gtranslatorin uudelleenk‰ynnistyksen)"
 
-#: src/prefs.c:331
+#: src/prefs.c:327
 msgid "Collapse translated entries by default"
 msgstr ""
 
-#: src/prefs.c:335
+#: src/prefs.c:331
 msgid "Use own colors for the messages table groups"
 msgstr ""
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "Untranslated entries color:"
 msgstr "K‰‰nt‰m‰ttˆmien kohtien v‰ri:"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- k‰‰nt‰m‰ttˆmien v‰ri"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "Fuzzy entries color:"
 msgstr "Sumeiden kohtien v‰ri:"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- sumeiden v‰ri"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "Translated entries color:"
 msgstr "K‰‰nnettyjen kohtien v‰ri:"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- k‰‰nnettyjen v‰ri"
 
-#: src/prefs.c:355
+#: src/prefs.c:351
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 
-#: src/prefs.c:359
+#: src/prefs.c:355
 msgid "Automatically learn a newly translated message"
 msgstr "Opi automaattisesti uudet k‰‰nnetyt tekstit"
 
@@ -1449,28 +1424,28 @@ msgstr "Opi automaattisesti uudet k‰‰nnetyt tekstit"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:367
+#: src/prefs.c:363
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
 "K‰yt‰ \"sumeita\" vastaavuusrutiineja oppimispuskuriin teht‰ville kyselyille"
 
-#: src/prefs.c:370
+#: src/prefs.c:366
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "V‰himm‰isvastaavuus sumeina tehdyille kyselyille prosentteina"
 
-#: src/prefs.c:412
+#: src/prefs.c:408
 msgid "Please enter your name!"
 msgstr "Anna nimesi!"
 
-#: src/prefs.c:426
+#: src/prefs.c:422
 msgid "Please enter your EMail address!"
 msgstr "Anna s‰hkˆpostiosoitteesi!"
 
-#: src/prefs.c:439
+#: src/prefs.c:435
 msgid "Please enter a valid EMail address!"
 msgstr "Anna kelvollinen s‰hkˆpostiosoite!"
 
-#: src/prefs.c:665
+#: src/prefs.c:658
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1573,17 +1548,17 @@ msgstr "Hakemiston '%s' luominen ep‰onnistui!"
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 
-#: src/utils_gui.c:133
+#: src/utils_gui.c:134
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Ikkunan koon m‰‰rityst‰ \"%s\" ei voida tallentaa!"
 
-#: src/utils_gui.c:355
+#: src/utils_gui.c:356
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Sinulla ei ole oikeuksia tiedostoon '%s'."
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:374
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1594,7 +1569,7 @@ msgstr ""
 "Tallenna uusi kopio siit‰ valitsemaasi paikkaan ja hanki\n"
 "kirjoitusoikeudet siihen."
 
-#: src/utils_gui.c:443
+#: src/utils_gui.c:444
 #, c-format
 msgid ""
 "The file\n"
@@ -1608,12 +1583,12 @@ msgid ""
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
 
-#: src/utils_gui.c:488
+#: src/utils_gui.c:489
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr ""
 
-#: src/utils_gui.c:493
+#: src/utils_gui.c:494
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr ""
@@ -1667,3 +1642,19 @@ msgstr "Pakattu gettext po-tiedosto"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Gettext po-tiedosto"
+
+#~ msgid ""
+#~ "The translation for message `%s'\n"
+#~ "contains syntactical errors!"
+#~ msgstr ""
+#~ "K‰‰nnˆs tekstille `%s'\n"
+#~ "sis‰lt‰‰ syntaksivirheit‰!"
+
+#~ msgid "unknown"
+#~ msgstr "tuntematon"
+
+#~ msgid "fuzzy"
+#~ msgstr "sumea"
+
+#~ msgid "translated"
+#~ msgstr "k‰‰nnetty"

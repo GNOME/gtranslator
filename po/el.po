@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.37\n"
-"POT-Creation-Date: 2002-09-29 19:01+0200\n"
+"POT-Creation-Date: 2002-12-29 15:48+0100\n"
 "PO-Revision-Date: 2001-10-06 01:48+0100\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -157,7 +157,7 @@ msgstr "Διάκριση μικρών/κεφαλαίων"
 msgid "English"
 msgstr "Αγγλικά"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
 msgid "Translated"
 msgstr "Μεταφράστηκε"
 
@@ -304,11 +304,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1292
+#: src/dialogs.c:1291
 msgid "Query's result translation is already there!"
 msgstr "Η μετάφραση του αποτελέσματος της διερώτησης είναι ήδη εκεί!"
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1315
 #, fuzzy
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
@@ -340,7 +340,7 @@ msgstr "Επεξεργασία σχολίου"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ απέμειναν %i μη-ολοκληρωμένα ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
 msgid "Fuzzy"
 msgstr "Μη ολοκληρωμένο"
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ Απέμειναν %i μη-μεταφρασμένα ]"
 
-#: src/gui.c:568 src/gui.c:570
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
 msgid "Untranslated"
 msgstr "Μη μεταφρασμένο"
 
@@ -1129,26 +1129,19 @@ msgid "Replace string in po file"
 msgstr "Αναζήτηση ακολουθίας"
 
 #
-#: src/message.c:82
+#: src/message.c:81
 #, fuzzy
 msgid "Couldn't get the message!"
 msgstr "Αδύνατο η εγγραφή μηνύματος"
 
-#: src/message.c:104
+#: src/message.c:103
 #, fuzzy
 msgid "There are no fuzzy messages left."
 msgstr "Με συγχωρείτε, δεν υπάρχουν αρθρώματα εγγραφής, αποθήκευση αδύνατη"
 
-#: src/message.c:128
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Όλα τα μηνύματα είναι μεταφρασμένα."
-
-#: src/message.c:319
-#, c-format
-msgid ""
-"The translation for message `%s'\n"
-"contains syntactical errors!"
-msgstr ""
 
 #: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
@@ -1173,21 +1166,6 @@ msgstr "Μετάφραση"
 #: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
 msgstr "Σχόλιο"
-
-#: src/messages-table.c:208
-#, fuzzy
-msgid "unknown"
-msgstr "Άγνωστο"
-
-#: src/messages-table.c:214
-#, fuzzy
-msgid "fuzzy"
-msgstr "Μη ολοκληρωμένο"
-
-#: src/messages-table.c:220
-#, fuzzy
-msgid "translated"
-msgstr "Μη μεταφρασμένο"
 
 #
 #: src/open.c:141
@@ -1392,108 +1370,104 @@ msgstr "Διατήρηση μηνυμάτων που δεν χρησιμοποιούνται πλέον στα αρχεία po"
 msgid "Highlight syntax of the translation messages"
 msgstr ""
 
-#: src/prefs.c:197
-msgid "Check messages for syntactical correctness"
-msgstr ""
-
-#: src/prefs.c:204
+#: src/prefs.c:200
 msgid "Use special character to indicate free space"
 msgstr "Χρήση ειδικού χαρακτήρα για την υποδήλωση του διαστήματος"
 
-#: src/prefs.c:207
+#: src/prefs.c:203
 #, fuzzy
 msgid "Enable the popup menu"
 msgstr "Ενεργοποίηση αυτής της μονάδας"
 
-#: src/prefs.c:210
+#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr ""
 "Ενεργοποίηση της λειτουργίας ενημέρωσης του αρχείο po μέσα από το gtranslator"
 
-#: src/prefs.c:213
+#: src/prefs.c:209
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr ""
 "Ενεργοποίηση της λειτουργίας διαγραφής όλων των μεταφρασμένων από αρχεία po"
 
-#: src/prefs.c:216
+#: src/prefs.c:212
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Διαγραφή μεταγλωττισμένων αρχείων (π.χ. \"έργο.gmo\")"
 
-#: src/prefs.c:219
+#: src/prefs.c:215
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Αποθήκευση γεωμ. στοιχείων παραθύρου και ανάκτηση κατά την εκκίνηση"
 
-#: src/prefs.c:222
+#: src/prefs.c:218
 msgid "Show instant comment view in the main pane"
 msgstr ""
 
-#: src/prefs.c:229
+#: src/prefs.c:225
 #, fuzzy
 msgid "Maximum number of entries in the recent files' list:"
 msgstr ""
 "Μέγιστος αριθμός προσφάτων αρχείων προς εμφάνιση στη λίστα πρόσφατων αρχείων:"
 
-#: src/prefs.c:233
+#: src/prefs.c:229
 msgid "Check recent files before showing in recent files' list"
 msgstr ""
 "Έλεγχος προσφάτων αρχείων πριν την εμφάνιση της λίστας προσφάτων αρχείων"
 
-#: src/prefs.c:236
+#: src/prefs.c:232
 #, fuzzy
 msgid "Instant spell checking"
 msgstr "Έλεγχος ορθογραφίας"
 
-#: src/prefs.c:239
+#: src/prefs.c:235
 #, fuzzy
 msgid "Use special dictionary:"
 msgstr "Επιλογή λεξικού"
 
-#: src/prefs.c:261
+#: src/prefs.c:257
 msgid "Syntax color scheme to use:"
 msgstr "Σχήμα χρωμάτων σύνταξης προς χρήση:"
 
-#: src/prefs.c:266
+#: src/prefs.c:262
 msgid "Apply own fonts:"
 msgstr "Εφαρμογή ιδίων γραμματοσειρών:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "Original text font:"
 msgstr "Γραμματοσειρά αρχικού κειμένου:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 #, fuzzy
 msgid "gtranslator -- font selection/msgid font"
 msgstr "Εισάγετε τον παραλήπτη του μηνύματος"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 #, fuzzy
 msgid "Translation font:"
 msgstr "Μεταφραστής:"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 #, fuzzy
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "Εισάγετε τον παραλήπτη του μηνύματος"
 
-#: src/prefs.c:278
+#: src/prefs.c:274
 msgid "Apply own colors:"
 msgstr "Εφαρμογή ιδίων χρωμάτων:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "Foreground color:"
 msgstr "Χρώμα προσκηνίου:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 #, fuzzy
 msgid "gtranslator -- foreground color"
 msgstr "Καθορισμός χρώματος κειμένου"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "Background color:"
 msgstr "Χρώμα παρασκηνίου:"
 
 #
-#: src/prefs.c:286
+#: src/prefs.c:282
 #, fuzzy
 msgid "gtranslator -- background color"
 msgstr "Θέτει το χρώμα φόντου"
@@ -1501,63 +1475,63 @@ msgstr "Θέτει το χρώμα φόντου"
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:292
+#: src/prefs.c:288
 #, fuzzy
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Αποθήκευση αρχείων po αυτόματα κατά τακτά διαστήματα"
 
-#: src/prefs.c:307
+#: src/prefs.c:303
 #, fuzzy
 msgid "Append a suffix to automatically saved files:"
 msgstr "Προσθήκη ειδικής κατάληξης στα αυτομάτως αποθηκευμένα αρχεία"
 
-#: src/prefs.c:327
+#: src/prefs.c:323
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Εμφάνιση πίνακα μηνυμάτων (απαιτεί επανεκκίνηση του gtranslator)"
 
-#: src/prefs.c:331
+#: src/prefs.c:327
 msgid "Collapse translated entries by default"
 msgstr ""
 
-#: src/prefs.c:335
+#: src/prefs.c:331
 msgid "Use own colors for the messages table groups"
 msgstr "Χρήση ιδίων χρωμάτων για τις ομάδες του πίνακα μηνυμάτων"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 #, fuzzy
 msgid "Untranslated entries color:"
 msgstr "Μεταφραστής:"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 #, fuzzy
 msgid "gtranslator -- untranslated entries' color"
 msgstr "Καθορισμός χρώματος κειμένου"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "Fuzzy entries color:"
 msgstr "Χρώμα μη-ολοκληρωμένων εγγραφών:"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 #, fuzzy
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "Καθορισμός χρώματος κειμένου"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "Translated entries color:"
 msgstr "Χρώμα μεταφρασμένων εγγραφών:"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 #, fuzzy
 msgid "gtranslator -- translated entries' color"
 msgstr "Καθορισμός χρώματος κειμένου"
 
-#: src/prefs.c:355
+#: src/prefs.c:351
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 
-#: src/prefs.c:359
+#: src/prefs.c:355
 #, fuzzy
 msgid "Automatically learn a newly translated message"
 msgstr "Πήγαινε στο επόμενο μη μεταφρασμένο μήνυμα"
@@ -1567,31 +1541,31 @@ msgstr "Πήγαινε στο επόμενο μη μεταφρασμένο μήνυμα"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:367
+#: src/prefs.c:363
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
 "Χρήση \"ειδικών\" διαδικασιών ταιριάσματος για τις διερωτήσεις του "
 "ενταμιευτή εκμάθησης"
 
-#: src/prefs.c:370
+#: src/prefs.c:366
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr ""
 
-#: src/prefs.c:412
+#: src/prefs.c:408
 #, fuzzy
 msgid "Please enter your name!"
 msgstr "Εισαγωγή ακολουθίας προς αναζήτηση"
 
-#: src/prefs.c:426
+#: src/prefs.c:422
 #, fuzzy
 msgid "Please enter your EMail address!"
 msgstr "Εισαγωγή ακολουθίας προς αναζήτηση"
 
-#: src/prefs.c:439
+#: src/prefs.c:435
 msgid "Please enter a valid EMail address!"
 msgstr "Παρακαλώ εισάγετε μια έγκυρη διεύθηνση ηλεκτρονικής αλληλογραφίας!"
 
-#: src/prefs.c:665
+#: src/prefs.c:658
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1700,17 +1674,17 @@ msgstr "Aδύνατη η δημιουργία καταλόγου %s"
 msgid "iso-8859-1"
 msgstr ""
 
-#: src/utils_gui.c:133
+#: src/utils_gui.c:134
 #, fuzzy, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Τα δικαιώματα του \"%s\" δε μπόρεσαν να εξακριβωθούν."
 
-#: src/utils_gui.c:355
+#: src/utils_gui.c:356
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Δε σας επιτρέπετε να προσπελάσετε το αρχείο '%s'."
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:374
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1718,7 +1692,7 @@ msgid ""
 "permission for it."
 msgstr ""
 
-#: src/utils_gui.c:443
+#: src/utils_gui.c:444
 #, c-format
 msgid ""
 "The file\n"
@@ -1732,12 +1706,12 @@ msgid ""
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
 
-#: src/utils_gui.c:488
+#: src/utils_gui.c:489
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr ""
 
-#: src/utils_gui.c:493
+#: src/utils_gui.c:494
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr ""
@@ -1794,6 +1768,18 @@ msgstr "Άνοιγμα αρχείου po"
 #, fuzzy
 msgid "Gettext po file"
 msgstr "Άνοιγμα αρχείου po"
+
+#, fuzzy
+#~ msgid "unknown"
+#~ msgstr "Άγνωστο"
+
+#, fuzzy
+#~ msgid "fuzzy"
+#~ msgstr "Μη ολοκληρωμένο"
+
+#, fuzzy
+#~ msgid "translated"
+#~ msgstr "Μη μεταφρασμένο"
 
 #
 #, fuzzy

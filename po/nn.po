@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39.1\n"
-"POT-Creation-Date: 2002-09-29 19:01+0200\n"
+"POT-Creation-Date: 2002-12-29 15:48+0100\n"
 "PO-Revision-Date: 2002-01-25 01:42+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian/Nynorsk <nn@li.org>\n"
@@ -141,7 +141,7 @@ msgstr "Skil mellom små og store bokstavar"
 msgid "English"
 msgstr "Engelsk"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
 msgid "Translated"
 msgstr "Omsett"
 
@@ -301,11 +301,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1292
+#: src/dialogs.c:1291
 msgid "Query's result translation is already there!"
 msgstr "Resultatet av spørjing er allereide på plass!"
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1315
 #, fuzzy
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
@@ -336,7 +336,7 @@ msgstr "Rediger kommentar"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i uferdige att ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
 msgid "Fuzzy"
 msgstr "Uferdig"
 
@@ -354,7 +354,7 @@ msgstr ""
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i uomsett att ]"
 
-#: src/gui.c:568 src/gui.c:570
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
 msgid "Untranslated"
 msgstr "Ikkje omsett"
 
@@ -1080,24 +1080,17 @@ msgstr "Finn streng i po-fil"
 msgid "Replace string in po file"
 msgstr "Byt ut streng i po-fil"
 
-#: src/message.c:82
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Klarte ikkje å få tak i melding!"
 
-#: src/message.c:104
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "Det er ingen fleire uferdige meldingar."
 
-#: src/message.c:128
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Alle meldingar ser ut til å ha vorte omsett."
-
-#: src/message.c:319
-#, c-format
-msgid ""
-"The translation for message `%s'\n"
-"contains syntactical errors!"
-msgstr ""
 
 #: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
@@ -1122,21 +1115,6 @@ msgstr "Omsetjing"
 #: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
 msgstr "Merknad"
-
-#: src/messages-table.c:208
-#, fuzzy
-msgid "unknown"
-msgstr "Ukjend"
-
-#: src/messages-table.c:214
-#, fuzzy
-msgid "fuzzy"
-msgstr "Uferdig"
-
-#: src/messages-table.c:220
-#, fuzzy
-msgid "translated"
-msgstr "Ikkje omsett"
 
 #: src/open.c:141
 #, c-format
@@ -1324,153 +1302,149 @@ msgstr "Hald på utdaterte meldingar i po-filer"
 msgid "Highlight syntax of the translation messages"
 msgstr "Lys opp syntaksen på omsette meldingar"
 
-#: src/prefs.c:197
-msgid "Check messages for syntactical correctness"
-msgstr ""
-
-#: src/prefs.c:204
+#: src/prefs.c:200
 msgid "Use special character to indicate free space"
 msgstr "Bruk spesialteikn for å vise tom plass"
 
-#: src/prefs.c:207
+#: src/prefs.c:203
 msgid "Enable the popup menu"
 msgstr "Slå på pop-opp-meny"
 
-#: src/prefs.c:210
+#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Slå på moglegheita til å oppdatere ei po-file frå gtranslator"
 
-#: src/prefs.c:213
+#: src/prefs.c:209
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Slå på funksjonalitet for å fjerne alle omsetjingar frå po-filer"
 
-#: src/prefs.c:216
+#: src/prefs.c:212
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Slett kompilerte filer (t.d. «project.gmo»)"
 
-#: src/prefs.c:219
+#: src/prefs.c:215
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Lagre geometrien ved avslutning og hent den fram att ved oppstart"
 
-#: src/prefs.c:222
+#: src/prefs.c:218
 msgid "Show instant comment view in the main pane"
 msgstr "Vis kommentarar i hovudruta"
 
-#: src/prefs.c:229
+#: src/prefs.c:225
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Maksimal tak på oppføringar i nyleg-brukte filer lista:"
 
-#: src/prefs.c:233
+#: src/prefs.c:229
 msgid "Check recent files before showing in recent files' list"
 msgstr "Sjekk nyleg-brukte filer før ei fil viser i nyleg-brukte filer lista"
 
-#: src/prefs.c:236
+#: src/prefs.c:232
 msgid "Instant spell checking"
 msgstr "Umiddelbar stavekontroll"
 
-#: src/prefs.c:239
+#: src/prefs.c:235
 msgid "Use special dictionary:"
 msgstr "Bruk spesialordbok:"
 
-#: src/prefs.c:261
+#: src/prefs.c:257
 msgid "Syntax color scheme to use:"
 msgstr "Fargeskjema for syntaksmerking som skal brukast:"
 
-#: src/prefs.c:266
+#: src/prefs.c:262
 msgid "Apply own fonts:"
 msgstr "Bruk eigne fargar:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "Original text font:"
 msgstr "Opprinneleg tekstfarge:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- skrfttypeval/msgid skrifttype"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "Translation font:"
 msgstr "Omsetjings-skrifttype:"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- skrifttypeval/msgstr skrifttype"
 
-#: src/prefs.c:278
+#: src/prefs.c:274
 msgid "Apply own colors:"
 msgstr "Bruk eigne fargar:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "Foreground color:"
 msgstr "Forgrunnsfarge:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- framgrunnsfarge"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- bakgrunnsfarge"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:292
+#: src/prefs.c:288
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Lagre po-filer automatisk ved gitte intervall (i minutt):"
 
-#: src/prefs.c:307
+#: src/prefs.c:303
 msgid "Append a suffix to automatically saved files:"
 msgstr "Legg til etternamn på filer som lagra automatisk:"
 
-#: src/prefs.c:327
+#: src/prefs.c:323
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Vi meldingstabellen (gtranslator må startast om att)"
 
-#: src/prefs.c:331
+#: src/prefs.c:327
 msgid "Collapse translated entries by default"
 msgstr "Slå saman omsette strengar til vanleg"
 
-#: src/prefs.c:335
+#: src/prefs.c:331
 msgid "Use own colors for the messages table groups"
 msgstr "Bruk eigne fargar for meldingstabell grupper"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "Untranslated entries color:"
 msgstr "Uomsette oppføringar farge:"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- uomsette oppføringar farge"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "Fuzzy entries color:"
 msgstr "Uklare omsetjingar farge:"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- uklare oppføringar farge"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "Translated entries color:"
 msgstr "Omsette oppføringar farge:"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- omsette oppføringar farge"
 
-#: src/prefs.c:355
+#: src/prefs.c:351
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 "Spør også det personleg lærebufferet når ein automsett uomsette meldingar"
 
-#: src/prefs.c:359
+#: src/prefs.c:355
 msgid "Automatically learn a newly translated message"
 msgstr "Automatisk lær nye omsette meldingar"
 
@@ -1479,28 +1453,28 @@ msgstr "Automatisk lær nye omsette meldingar"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:367
+#: src/prefs.c:363
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr "Bruk «fuzzy» treffrutiner for læringsbufferet"
 
-#: src/prefs.c:370
+#: src/prefs.c:366
 #, fuzzy
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "Minimum krevd likheitsprosent for autoomsetjing"
 
-#: src/prefs.c:412
+#: src/prefs.c:408
 msgid "Please enter your name!"
 msgstr "Tast inn namnet ditt!"
 
-#: src/prefs.c:426
+#: src/prefs.c:422
 msgid "Please enter your EMail address!"
 msgstr "Tast inn E-post addressa di!"
 
-#: src/prefs.c:439
+#: src/prefs.c:435
 msgid "Please enter a valid EMail address!"
 msgstr "Tast inn ei gyldig E-post addresse!"
 
-#: src/prefs.c:665
+#: src/prefs.c:658
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1603,17 +1577,17 @@ msgstr "Klarar ikkje å opprette katalogen «%s»!"
 msgid "iso-8859-1"
 msgstr ""
 
-#: src/utils_gui.c:133
+#: src/utils_gui.c:134
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometri-strengen «%s» kunne ikkje tolkast!"
 
-#: src/utils_gui.c:355
+#: src/utils_gui.c:356
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Du har ikkje løyve til å akessere fila «%s»."
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:374
 #, fuzzy, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1624,7 +1598,7 @@ msgstr ""
 "Lagre ein ny kopi i ein katalog der du har\n"
 "skriveløyve."
 
-#: src/utils_gui.c:443
+#: src/utils_gui.c:444
 #, c-format
 msgid ""
 "The file\n"
@@ -1638,12 +1612,12 @@ msgid ""
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
 
-#: src/utils_gui.c:488
+#: src/utils_gui.c:489
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Det naudsynte dekomprimeringsprogrammet «%s» er ikkje installert!"
 
-#: src/utils_gui.c:493
+#: src/utils_gui.c:494
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Det nødvendige kompresjonsprogrammet «%s» er ikkje installert!"
@@ -1697,6 +1671,18 @@ msgstr "Komprimert gettext po-fil"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Gettext po-fil"
+
+#, fuzzy
+#~ msgid "unknown"
+#~ msgstr "Ukjend"
+
+#, fuzzy
+#~ msgid "fuzzy"
+#~ msgstr "Uferdig"
+
+#, fuzzy
+#~ msgid "translated"
+#~ msgstr "Ikkje omsett"
 
 #~ msgid "Messages table:"
 #~ msgstr "Meldingstabell:"

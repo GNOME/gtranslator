@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39\n"
-"POT-Creation-Date: 2002-09-29 19:01+0200\n"
+"POT-Creation-Date: 2002-12-29 15:48+0100\n"
 "PO-Revision-Date: 2001-11-20 16:24-03:00\n"
 "Last-Translator: Francisco Petrucio <fpetrucio@mat.ufal.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -160,7 +160,7 @@ msgid "English"
 msgstr "Inglês"
 
 # src/dialogs.c:217 src/gui.c:712
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
 msgid "Translated"
 msgstr "Traduzida"
 
@@ -330,11 +330,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1292
+#: src/dialogs.c:1291
 msgid "Query's result translation is already there!"
 msgstr "A tradução para a string consultada já existe!"
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1315
 #, fuzzy
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
@@ -368,7 +368,7 @@ msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ Restam %i aproximadas ]"
 
 # src/gui.c:288 src/gui.c:708
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
 msgid "Fuzzy"
 msgstr "Aproximada"
 
@@ -387,7 +387,7 @@ msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ Restam %i nao traduzidas ]"
 
 # src/gui.c:722
-#: src/gui.c:568 src/gui.c:570
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
 msgid "Untranslated"
 msgstr "Não traduzida"
 
@@ -1237,26 +1237,19 @@ msgid "Replace string in po file"
 msgstr "Substituir uma string no arquivo po"
 
 # src/find.c:96
-#: src/message.c:82
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Não foi possível pegar a mensagem!"
 
 # src/find.c:118
-#: src/message.c:104
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "Não há mais mensagens aproximadas."
 
 # src/find.c:142
-#: src/message.c:128
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Todas as mensagem parecem traduzidas."
-
-#: src/message.c:319
-#, c-format
-msgid ""
-"The translation for message `%s'\n"
-"contains syntactical errors!"
-msgstr ""
 
 #: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
@@ -1283,23 +1276,6 @@ msgstr "Tradução"
 #: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
 msgstr "Comentário"
-
-#: src/messages-table.c:208
-#, fuzzy
-msgid "unknown"
-msgstr "Desconhecido"
-
-# src/gui.c:288 src/gui.c:708
-#: src/messages-table.c:214
-#, fuzzy
-msgid "fuzzy"
-msgstr "Aproximada"
-
-# src/gui.c:722
-#: src/messages-table.c:220
-#, fuzzy
-msgid "translated"
-msgstr "Não traduzida"
 
 # libgtranslator/handle-db.c:75
 #: src/open.c:141
@@ -1517,162 +1493,158 @@ msgstr "Manter mensagens obsoletas nos arquivos po"
 msgid "Highlight syntax of the translation messages"
 msgstr ""
 
-#: src/prefs.c:197
-msgid "Check messages for syntactical correctness"
-msgstr ""
-
-#: src/prefs.c:204
+#: src/prefs.c:200
 msgid "Use special character to indicate free space"
 msgstr "Usar um caractere especial para indicar espaço em branco"
 
 # src/prefs.c:269
-#: src/prefs.c:207
+#: src/prefs.c:203
 msgid "Enable the popup menu"
 msgstr "Ativar o menu contextual"
 
-#: src/prefs.c:210
+#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr ""
 "Ativar a funcionalidade de atualizar um arquivo po de dentro do gtranslator"
 
-#: src/prefs.c:213
+#: src/prefs.c:209
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Ativar a funcionalidade de remover todas as mensagens de um arquivo po"
 
-#: src/prefs.c:216
+#: src/prefs.c:212
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Remover os arquivos compilados (por exemplo \"projeto.gmo\")"
 
 # src/prefs.c:275
-#: src/prefs.c:219
+#: src/prefs.c:215
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Salvar a posição e tamanho da janela ao sair e restaurar ao iniciar"
 
-#: src/prefs.c:222
+#: src/prefs.c:218
 msgid "Show instant comment view in the main pane"
 msgstr ""
 
-#: src/prefs.c:229
+#: src/prefs.c:225
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Número máximo de entradas na lista de arquivos recentes:"
 
 # src/prefs.c:287
-#: src/prefs.c:233
+#: src/prefs.c:229
 msgid "Check recent files before showing in recent files' list"
 msgstr "Verificar arquivos recentes antes de listá-los"
 
-#: src/prefs.c:236
+#: src/prefs.c:232
 msgid "Instant spell checking"
 msgstr "Verificar a ortografia automaticamente"
 
-#: src/prefs.c:239
+#: src/prefs.c:235
 #, fuzzy
 msgid "Use special dictionary:"
 msgstr "Usar dicionário especial"
 
-#: src/prefs.c:261
+#: src/prefs.c:257
 msgid "Syntax color scheme to use:"
 msgstr "Esquema de cores a usar:"
 
-#: src/prefs.c:266
+#: src/prefs.c:262
 msgid "Apply own fonts:"
 msgstr "Aplicar fontes próprias:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "Original text font:"
 msgstr "Fonte do texto original"
 
 # src/prefs.c:198
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- seleção de fonte/msgid"
 
 # src/header_stuff.c:301
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "Translation font:"
 msgstr "Fonte da tradução:"
 
 # src/prefs.c:198
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- seleção de fonte/fonte de msgstr"
 
-#: src/prefs.c:278
+#: src/prefs.c:274
 msgid "Apply own colors:"
 msgstr "Aplicar cores próprias:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "Foreground color:"
 msgstr "Cor do primeiro plano"
 
 # src/dialogs.c:142
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- Cor do primeiro plano"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "Background color:"
 msgstr "Cor do sequndo plano:"
 
 # src/dialogs.c:142
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- Cor do segundo plano"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:292
+#: src/prefs.c:288
 #, fuzzy
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Salvar o arquivo po automaticamente em itervalos regulares"
 
-#: src/prefs.c:307
+#: src/prefs.c:303
 #, fuzzy
 msgid "Append a suffix to automatically saved files:"
 msgstr "Acrescentar um sufixo especial aos arquivos salvos automaticamente"
 
-#: src/prefs.c:327
+#: src/prefs.c:323
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Mostrar a tabela de mensagens (requer reiniciar gtranslator)"
 
-#: src/prefs.c:331
+#: src/prefs.c:327
 msgid "Collapse translated entries by default"
 msgstr "Ocultar todas as mensagens traduzidas por padrão"
 
-#: src/prefs.c:335
+#: src/prefs.c:331
 msgid "Use own colors for the messages table groups"
 msgstr "Usar cores próprias para os grupos de tabela de mensagem"
 
 # src/gui.c:722
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "Untranslated entries color:"
 msgstr "Cor das mensagens não traduzidas:"
 
 # src/dialogs.c:142
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- cor das mensagens não traduzidas"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "Fuzzy entries color:"
 msgstr "Cor das mensagens aproximadas:"
 
 # src/dialogs.c:142
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- cor das mensagens aproximadas"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "Translated entries color:"
 msgstr "Cor das mensagens traduzidas"
 
 # src/dialogs.c:142
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- cor das mensagens traduzidas"
 
-#: src/prefs.c:355
+#: src/prefs.c:351
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
@@ -1681,7 +1653,7 @@ msgstr ""
 "mensagensautomaticamente"
 
 # src/gui.c:166 src/gui.c:285
-#: src/prefs.c:359
+#: src/prefs.c:355
 msgid "Automatically learn a newly translated message"
 msgstr "Aprender automaticamente mensagens recém traduzidas"
 
@@ -1690,28 +1662,28 @@ msgstr "Aprender automaticamente mensagens recém traduzidas"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:367
+#: src/prefs.c:363
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr "Usar rotinas de correspondência \"aproximada\" nas consultas"
 
-#: src/prefs.c:370
+#: src/prefs.c:366
 #, fuzzy
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "Porcentagem de similaridade mínima para fazer traduções automáticas"
 
-#: src/prefs.c:412
+#: src/prefs.c:408
 msgid "Please enter your name!"
 msgstr "Por favor, digite seu nome."
 
-#: src/prefs.c:426
+#: src/prefs.c:422
 msgid "Please enter your EMail address!"
 msgstr "Por favor, digite seu endereço de email."
 
-#: src/prefs.c:439
+#: src/prefs.c:435
 msgid "Please enter a valid EMail address!"
 msgstr "Por favor, digite um endereço de email válido."
 
-#: src/prefs.c:665
+#: src/prefs.c:658
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1824,17 +1796,17 @@ msgid "iso-8859-1"
 msgstr ""
 
 # src/prefs.c:546
-#: src/utils_gui.c:133
+#: src/utils_gui.c:134
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "A string de geometria \"%s\" não pôde ser interpretada!"
 
-#: src/utils_gui.c:355
+#: src/utils_gui.c:356
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Você não tem permissão para acessar o aquivo '%s'."
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:374
 #, fuzzy, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1845,7 +1817,7 @@ msgstr ""
 "Salve uma nova cópia para um diretório onde você \n"
 "tenha permissão."
 
-#: src/utils_gui.c:443
+#: src/utils_gui.c:444
 #, c-format
 msgid ""
 "The file\n"
@@ -1859,12 +1831,12 @@ msgid ""
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
 
-#: src/utils_gui.c:488
+#: src/utils_gui.c:489
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "O programa de descompressão `%s' não está instalado."
 
-#: src/utils_gui.c:493
+#: src/utils_gui.c:494
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "O programa de compressão `%s' não está instalado."
@@ -1923,6 +1895,20 @@ msgstr "Arquivo po gettext compactado"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Arquivo po gettext"
+
+#, fuzzy
+#~ msgid "unknown"
+#~ msgstr "Desconhecido"
+
+# src/gui.c:288 src/gui.c:708
+#, fuzzy
+#~ msgid "fuzzy"
+#~ msgstr "Aproximada"
+
+# src/gui.c:722
+#, fuzzy
+#~ msgid "translated"
+#~ msgstr "Não traduzida"
 
 # src/gui.c:220
 #~ msgid "Messages table:"

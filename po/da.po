@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.32\n"
-"POT-Creation-Date: 2002-09-29 19:01+0200\n"
+"POT-Creation-Date: 2002-12-29 15:48+0100\n"
 "PO-Revision-Date: 2001-09-09 22:24+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -146,7 +146,7 @@ msgstr "Skeln mellem store og små bokstaver"
 msgid "English"
 msgstr "Engelsk"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
 msgid "Translated"
 msgstr "Oversat"
 
@@ -306,11 +306,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1292
+#: src/dialogs.c:1291
 msgid "Query's result translation is already there!"
 msgstr "Forespørgslens resulterende oversættelse findes der allerede!"
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1315
 #, fuzzy
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
@@ -341,7 +341,7 @@ msgstr "Redigér kommentar"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i uafklaret tilbage ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
 msgid "Fuzzy"
 msgstr "Uafklaret"
 
@@ -359,7 +359,7 @@ msgstr ""
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i uoversatte tilbage ]"
 
-#: src/gui.c:568 src/gui.c:570
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
 msgid "Untranslated"
 msgstr "Uoversat"
 
@@ -1101,24 +1101,17 @@ msgstr "Find streng i po-filen"
 msgid "Replace string in po file"
 msgstr "Erstat streng i po-filen"
 
-#: src/message.c:82
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Kunne ikke finde beskeden!"
 
-#: src/message.c:104
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "Der er ikke nogen fuzzy beskeder tilbage."
 
-#: src/message.c:128
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Alle beskeder ser ud til at være oversat."
-
-#: src/message.c:319
-#, c-format
-msgid ""
-"The translation for message `%s'\n"
-"contains syntactical errors!"
-msgstr ""
 
 #: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
@@ -1143,21 +1136,6 @@ msgstr "Oversættelse"
 #: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
 msgstr "Kommentar"
-
-#: src/messages-table.c:208
-#, fuzzy
-msgid "unknown"
-msgstr "Ukendt"
-
-#: src/messages-table.c:214
-#, fuzzy
-msgid "fuzzy"
-msgstr "Uafklaret"
-
-#: src/messages-table.c:220
-#, fuzzy
-msgid "translated"
-msgstr "Uoversat"
 
 #: src/open.c:141
 #, c-format
@@ -1349,152 +1327,148 @@ msgstr "Behold forældede beskeder i po-filerne"
 msgid "Highlight syntax of the translation messages"
 msgstr ""
 
-#: src/prefs.c:197
-msgid "Check messages for syntactical correctness"
-msgstr ""
-
-#: src/prefs.c:204
+#: src/prefs.c:200
 msgid "Use special character to indicate free space"
 msgstr ""
 
-#: src/prefs.c:207
+#: src/prefs.c:203
 msgid "Enable the popup menu"
 msgstr "Aktivér pop-op-menuen"
 
-#: src/prefs.c:210
+#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Aktivér funktionaliteten for at opdatere en po-fil fra gtranslator"
 
-#: src/prefs.c:213
+#: src/prefs.c:209
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr ""
 "Aktivér funktionaliteten for at fjerne alle oversættelser fra en po-fil"
 
-#: src/prefs.c:216
+#: src/prefs.c:212
 #, fuzzy
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Fjern filen med kompileringsresultat (kaldt \"projekt.gmo\")"
 
-#: src/prefs.c:219
+#: src/prefs.c:215
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Gem geometri ved afslutningen & genskab den ved opstart"
 
-#: src/prefs.c:222
+#: src/prefs.c:218
 msgid "Show instant comment view in the main pane"
 msgstr ""
 
-#: src/prefs.c:229
+#: src/prefs.c:225
 msgid "Maximum number of entries in the recent files' list:"
 msgstr ""
 
-#: src/prefs.c:233
+#: src/prefs.c:229
 #, fuzzy
 msgid "Check recent files before showing in recent files' list"
 msgstr "Tjek hver nylig fil i listen før listning af den"
 
-#: src/prefs.c:236
+#: src/prefs.c:232
 msgid "Instant spell checking"
 msgstr "Øjeblikkelig stavekontrol"
 
-#: src/prefs.c:239
+#: src/prefs.c:235
 #, fuzzy
 msgid "Use special dictionary:"
 msgstr "Brug speciel ordbog"
 
-#: src/prefs.c:261
+#: src/prefs.c:257
 msgid "Syntax color scheme to use:"
 msgstr "Syntaksfarveskema som skal bruges:"
 
-#: src/prefs.c:266
+#: src/prefs.c:262
 msgid "Apply own fonts:"
 msgstr "Anvend egne skrifttyper:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "Original text font:"
 msgstr "Oprindelig tekstskrifttype:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- valg af skrifttype/msgid skrifttype"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "Translation font:"
 msgstr "Skrifttype for oversættelser:"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- valg af skrifttype/msgstr skrifttype"
 
-#: src/prefs.c:278
+#: src/prefs.c:274
 msgid "Apply own colors:"
 msgstr "Brug egne farver:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "Foreground color:"
 msgstr "Forgrundsfarve:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- forgrundsfarve"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "Background color:"
 msgstr "Baggrundsfarve:"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- baggrundsfarve"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:292
+#: src/prefs.c:288
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr ""
 
-#: src/prefs.c:307
+#: src/prefs.c:303
 #, fuzzy
 msgid "Append a suffix to automatically saved files:"
 msgstr "Tilføj en speciel endelse til de automatisk gemte filer"
 
-#: src/prefs.c:327
+#: src/prefs.c:323
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Vis beskedstabellen (kræver genstart af gtranslator)"
 
-#: src/prefs.c:331
+#: src/prefs.c:327
 #, fuzzy
 msgid "Collapse translated entries by default"
 msgstr "Fold alle oversatte poster ind som standard"
 
-#: src/prefs.c:335
+#: src/prefs.c:331
 msgid "Use own colors for the messages table groups"
 msgstr "Anvend egne farver for grupper i meddelandetabellen"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "Untranslated entries color:"
 msgstr "Farve for uoversatte indgange:"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator - farve for uoversatte indgange"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "Fuzzy entries color:"
 msgstr "Farve for uafklarede indgange:"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator - farve for uafklarede indgange"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "Translated entries color:"
 msgstr "Farve for oversatte indgange:"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator - farve for oversatte indgange"
 
-#: src/prefs.c:355
+#: src/prefs.c:351
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
@@ -1502,7 +1476,7 @@ msgstr ""
 "Søg også i den personlige indlæringsbuffer ved automatisk oversættelse af "
 "manglende poster"
 
-#: src/prefs.c:359
+#: src/prefs.c:355
 #, fuzzy
 msgid "Automatically learn a newly translated message"
 msgstr "Gå til næste uoversatte besked"
@@ -1512,27 +1486,27 @@ msgstr "Gå til næste uoversatte besked"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:367
+#: src/prefs.c:363
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
 
-#: src/prefs.c:370
+#: src/prefs.c:366
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr ""
 
-#: src/prefs.c:412
+#: src/prefs.c:408
 msgid "Please enter your name!"
 msgstr "Venligst indtast dit navn!"
 
-#: src/prefs.c:426
+#: src/prefs.c:422
 msgid "Please enter your EMail address!"
 msgstr "Venligst indtast din epost-adresse!"
 
-#: src/prefs.c:439
+#: src/prefs.c:435
 msgid "Please enter a valid EMail address!"
 msgstr "Indtast venligst en gyldig epost-adresse!"
 
-#: src/prefs.c:665
+#: src/prefs.c:658
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1636,17 +1610,17 @@ msgstr "Kunne ikke oprette katalog `%s'!"
 msgid "iso-8859-1"
 msgstr ""
 
-#: src/utils_gui.c:133
+#: src/utils_gui.c:134
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometri-streng \"%s\" kunne ikke læses!"
 
-#: src/utils_gui.c:355
+#: src/utils_gui.c:356
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr ""
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:374
 #, fuzzy, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1657,7 +1631,7 @@ msgstr ""
 "Dette betyder at du bør gemme den som en kopi i et lokalt katalog\n"
 "som du kan vælge selv."
 
-#: src/utils_gui.c:443
+#: src/utils_gui.c:444
 #, c-format
 msgid ""
 "The file\n"
@@ -1671,12 +1645,12 @@ msgid ""
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
 
-#: src/utils_gui.c:488
+#: src/utils_gui.c:489
 #, fuzzy, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Det nødvendige dekomprimeringssprogram \"%s\" mangler!"
 
-#: src/utils_gui.c:493
+#: src/utils_gui.c:494
 #, fuzzy, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Det nødvendige komprimeringsprogram \"%s\" mangler!"
@@ -1730,6 +1704,18 @@ msgstr "Komprimeret gettext po-fil"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Gettext po-fil"
+
+#, fuzzy
+#~ msgid "unknown"
+#~ msgstr "Ukendt"
+
+#, fuzzy
+#~ msgid "fuzzy"
+#~ msgstr "Uafklaret"
+
+#, fuzzy
+#~ msgid "translated"
+#~ msgstr "Uoversat"
 
 #, fuzzy
 #~ msgid "Messages table:"

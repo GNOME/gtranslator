@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39\n"
-"POT-Creation-Date: 2002-09-29 19:01+0200\n"
+"POT-Creation-Date: 2002-12-29 15:48+0100\n"
 "PO-Revision-Date: 2002-08-31 14:33+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walloon <linux-wa@chanae.alphanet.ch>\n"
@@ -145,7 +145,7 @@ msgstr "Diferince po ptitès et grandès letes"
 msgid "English"
 msgstr "Inglès"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
 msgid "Translated"
 msgstr "Ratourné"
 
@@ -293,11 +293,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1292
+#: src/dialogs.c:1291
 msgid "Query's result translation is already there!"
 msgstr "Li tchinne pol cweraedje est ddja ratournêye chal!"
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1315
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -325,7 +325,7 @@ msgstr "Candjî l' rawete"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ I resse %i intrêyes «fuzzy» ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -343,7 +343,7 @@ msgstr ""
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ I resse %i nén co ratournés ]"
 
-#: src/gui.c:568 src/gui.c:570
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
 msgid "Untranslated"
 msgstr "Nén ratourné"
 
@@ -1073,24 +1073,17 @@ msgstr "Trover ene tchinne el fitchî .po"
 msgid "Replace string in po file"
 msgstr "Mete ene tchinne el plaece d' ene ôte el fitchî .po"
 
-#: src/message.c:82
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Dji n' a savou aveur li messaedje!"
 
-#: src/message.c:104
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "I n' resse nou messaedje «fuzzy»."
 
-#: src/message.c:128
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "I shonne ki tos les messaedjes seuye ratournés."
-
-#: src/message.c:319
-#, c-format
-msgid ""
-"The translation for message `%s'\n"
-"contains syntactical errors!"
-msgstr ""
 
 #: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
@@ -1115,18 +1108,6 @@ msgstr "Ratournaedje"
 #: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
 msgstr "Rawete"
-
-#: src/messages-table.c:208
-msgid "unknown"
-msgstr "nén cnoxhou"
-
-#: src/messages-table.c:214
-msgid "fuzzy"
-msgstr "fuzzy"
-
-#: src/messages-table.c:220
-msgid "translated"
-msgstr "ratourné"
 
 #: src/open.c:141
 #, c-format
@@ -1315,153 +1296,149 @@ msgstr "Wårder les vîs messaedjes ezès fitchîs po"
 msgid "Highlight syntax of the translation messages"
 msgstr ""
 
-#: src/prefs.c:197
-msgid "Check messages for syntactical correctness"
-msgstr ""
-
-#: src/prefs.c:204
+#: src/prefs.c:200
 msgid "Use special character to indicate free space"
 msgstr "Mostrer les blancs avou on caractere sipeciål"
 
-#: src/prefs.c:207
+#: src/prefs.c:203
 msgid "Enable the popup menu"
 msgstr ""
 
-#: src/prefs.c:210
+#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr ""
 
-#: src/prefs.c:213
+#: src/prefs.c:209
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr ""
 
-#: src/prefs.c:216
+#: src/prefs.c:212
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Disfacer les fitchîs copilés (eg: «prodjet.gmo»)"
 
-#: src/prefs.c:219
+#: src/prefs.c:215
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Schaper li djeometreye cwand on cwite, et l' rapexhî cwand on enonde"
 
-#: src/prefs.c:222
+#: src/prefs.c:218
 msgid "Show instant comment view in the main pane"
 msgstr ""
 
-#: src/prefs.c:229
+#: src/prefs.c:225
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Intrêyes macsimom pol djivêye des dierins fitchîs:"
 
-#: src/prefs.c:233
+#: src/prefs.c:229
 msgid "Check recent files before showing in recent files' list"
 msgstr "Verifyîz l' fitchî dvant del mete e l' djivêye des dierins fitchîs"
 
-#: src/prefs.c:236
+#: src/prefs.c:232
 msgid "Instant spell checking"
 msgstr "Coridjaedje tot tapant"
 
-#: src/prefs.c:239
+#: src/prefs.c:235
 msgid "Use special dictionary:"
 msgstr "Eployî on motî speciål:"
 
-#: src/prefs.c:261
+#: src/prefs.c:257
 msgid "Syntax color scheme to use:"
 msgstr "Énsembe di coleurs pol sintacse a-z eployî:"
 
-#: src/prefs.c:266
+#: src/prefs.c:262
 msgid "Apply own fonts:"
 msgstr "Mete en ouve les fontes da vosse:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "Original text font:"
 msgstr "Fonte pol tecse d' oridjinne:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- tchoezi l' fonte po les msgid"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "Translation font:"
 msgstr "Fonte po les ratournaedjes:"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- tchoezi l' fonte po les msgstr"
 
-#: src/prefs.c:278
+#: src/prefs.c:274
 msgid "Apply own colors:"
 msgstr "Mete en ouve les coleurs da vosse:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "Foreground color:"
 msgstr "Coleur di dvant:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- coleur di dvant"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "Background color:"
 msgstr "Coleur di fond:"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- coleur di fond"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:292
+#: src/prefs.c:288
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Schaper otomaticmint les fitchîs *.po totes les (e munutes):"
 
-#: src/prefs.c:307
+#: src/prefs.c:303
 msgid "Append a suffix to automatically saved files:"
 msgstr "Radjouter ene cawete ås fitchîs schapés otomaticmint:"
 
-#: src/prefs.c:327
+#: src/prefs.c:323
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Mostrer li tåvlea des messaedjes (i vs fåt renonder gtranslator)"
 
-#: src/prefs.c:331
+#: src/prefs.c:327
 #, fuzzy
 msgid "Collapse translated entries by default"
 msgstr "Coleur po ls intrêyes nén ratournêyes:"
 
-#: src/prefs.c:335
+#: src/prefs.c:331
 msgid "Use own colors for the messages table groups"
 msgstr "Eployî des coleurs da vosse po les groupes des tåvleas d' messaedjes"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "Untranslated entries color:"
 msgstr "Coleur po ls intrêyes nén ratournêyes:"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- coleur po ls intrêyes nén ratournêyes"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "Fuzzy entries color:"
 msgstr "Coleur po ls intrêyes fuzzy:"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- coleur po ls intrêyes fuzzy"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "Translated entries color:"
 msgstr "Coleur po ls intrêyes ratournêyes:"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- coleur po ls intrêyes ratournêyes"
 
-#: src/prefs.c:355
+#: src/prefs.c:351
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 
-#: src/prefs.c:359
+#: src/prefs.c:355
 #, fuzzy
 msgid "Automatically learn a newly translated message"
 msgstr "Potchî å messaedje nén co ratourné shuvant"
@@ -1471,29 +1448,29 @@ msgstr "Potchî å messaedje nén co ratourné shuvant"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:367
+#: src/prefs.c:363
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
 
-#: src/prefs.c:370
+#: src/prefs.c:366
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr ""
 
-#: src/prefs.c:412
+#: src/prefs.c:408
 #, fuzzy
 msgid "Please enter your name!"
 msgstr "Dinez li tchinne a cweri après s' i vs plait"
 
-#: src/prefs.c:426
+#: src/prefs.c:422
 #, fuzzy
 msgid "Please enter your EMail address!"
 msgstr "Dinez li tchinne a cweri après s' i vs plait"
 
-#: src/prefs.c:439
+#: src/prefs.c:435
 msgid "Please enter a valid EMail address!"
 msgstr ""
 
-#: src/prefs.c:665
+#: src/prefs.c:658
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1594,17 +1571,17 @@ msgstr "Dji n' pout askepyî li ridant «%s»!"
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 
-#: src/utils_gui.c:133
+#: src/utils_gui.c:134
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr ""
 
-#: src/utils_gui.c:355
+#: src/utils_gui.c:356
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr ""
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:374
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1612,7 +1589,7 @@ msgid ""
 "permission for it."
 msgstr ""
 
-#: src/utils_gui.c:443
+#: src/utils_gui.c:444
 #, c-format
 msgid ""
 "The file\n"
@@ -1626,12 +1603,12 @@ msgid ""
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
 
-#: src/utils_gui.c:488
+#: src/utils_gui.c:489
 #, fuzzy, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Nou programe di disrastrindaedje «%s» k' i gn end a mezåjhe!"
 
-#: src/utils_gui.c:493
+#: src/utils_gui.c:494
 #, fuzzy, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Nou programe di rastrindaedje «%s» k' i gn end a mezåjhe!"
@@ -1685,6 +1662,15 @@ msgstr "Fitchî .po di gettext zip-sipotchî"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Fitchî .po di gettext"
+
+#~ msgid "unknown"
+#~ msgstr "nén cnoxhou"
+
+#~ msgid "fuzzy"
+#~ msgstr "fuzzy"
+
+#~ msgid "translated"
+#~ msgstr "ratourné"
 
 #~ msgid "Current colorscheme: \"%s\" (version %s) by"
 #~ msgstr "Énsembe di coleurs do moumint: «%s» (modêye %s) pa"

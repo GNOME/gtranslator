@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator VERSION\n"
-"POT-Creation-Date: 2002-09-29 19:01+0200\n"
+"POT-Creation-Date: 2002-12-29 15:48+0100\n"
 "PO-Revision-Date: 2002-05-30 14:56+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -138,7 +138,7 @@ msgstr "Phân biệt hoa/thường"
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
 msgid "Translated"
 msgstr "Đã dịch"
 
@@ -294,11 +294,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1292
+#: src/dialogs.c:1291
 msgid "Query's result translation is already there!"
 msgstr "Câu dịch truy vấn là ở đó rồi!"
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1315
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -328,7 +328,7 @@ msgstr "Sửa ghi chú"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i Fuzzy ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -346,7 +346,7 @@ msgstr "Bám dính (Thông điệp và phần dịch như nhau)"
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i câu chưa dịch ]"
 
-#: src/gui.c:568 src/gui.c:570
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
 msgid "Untranslated"
 msgstr "Chưa dịch"
 
@@ -1069,26 +1069,17 @@ msgstr "Tìm chuỗi trong tập tin po"
 msgid "Replace string in po file"
 msgstr "Thay thế chuỗi trong tập tin po"
 
-#: src/message.c:82
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Không thể lấy thông điệp!"
 
-#: src/message.c:104
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "Không còn thông điệp fuzzy nào nữa."
 
-#: src/message.c:128
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Xin chúc mừng! Mọi thông điệp điều đã được dịch."
-
-#: src/message.c:319
-#, c-format
-msgid ""
-"The translation for message `%s'\n"
-"contains syntactical errors!"
-msgstr ""
-"Câu dịch của thông điệp `%s'\n"
-"chứa lỗi cú pháp!"
 
 #: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
@@ -1113,18 +1104,6 @@ msgstr "Câu dịch"
 #: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
 msgstr "Ghi chú"
-
-#: src/messages-table.c:208
-msgid "unknown"
-msgstr "không biết"
-
-#: src/messages-table.c:214
-msgid "fuzzy"
-msgstr "fuzzy"
-
-#: src/messages-table.c:220
-msgid "translated"
-msgstr "chưa dịch"
 
 #: src/open.c:141
 #, c-format
@@ -1312,147 +1291,143 @@ msgstr "Giữ nguyên thông điệp obsolete trong tập tin po"
 msgid "Highlight syntax of the translation messages"
 msgstr "Điểm sáng cú pháp của thông điệp dịch"
 
-#: src/prefs.c:197
-msgid "Check messages for syntactical correctness"
-msgstr "Kiểm tra cú pháp thông điệp"
-
-#: src/prefs.c:204
+#: src/prefs.c:200
 msgid "Use special character to indicate free space"
 msgstr "Dùng ký tự đặc biệt để thể hiện khoảng trắng"
 
-#: src/prefs.c:207
+#: src/prefs.c:203
 msgid "Enable the popup menu"
 msgstr "Cho phép popup menu"
 
-#: src/prefs.c:210
+#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Cho phép tính năng cập nhật tập tin po từ trong gtranslator"
 
-#: src/prefs.c:213
+#: src/prefs.c:209
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Cho phép tính năng loại bỏ mọi câu dịch trong tập tin po"
 
-#: src/prefs.c:216
+#: src/prefs.c:212
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Xóa các tập tin biên dịch (vd \"project.gmo\")"
 
-#: src/prefs.c:219
+#: src/prefs.c:215
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Lư vị trí khi thoát và phục hồi lại khi khởi động"
 
-#: src/prefs.c:222
+#: src/prefs.c:218
 msgid "Show instant comment view in the main pane"
 msgstr "Hiển thị xem bình luận tức thời trong ô chính"
 
-#: src/prefs.c:229
+#: src/prefs.c:225
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Số mục tối đa trong danh sách \"Tập tin gần đây\":"
 
-#: src/prefs.c:233
+#: src/prefs.c:229
 msgid "Check recent files before showing in recent files' list"
 msgstr ""
 "Kiểm tra tập tin trong danh sách \"Tập tin gần đây\" trước khi hiển thị"
 
-#: src/prefs.c:236
+#: src/prefs.c:232
 msgid "Instant spell checking"
 msgstr "Kiểm tra chính tả tức thì"
 
-#: src/prefs.c:239
+#: src/prefs.c:235
 msgid "Use special dictionary:"
 msgstr "Dùng từ điển đặc biệt:"
 
-#: src/prefs.c:261
+#: src/prefs.c:257
 msgid "Syntax color scheme to use:"
 msgstr "Mẫu màu cú pháp cần dùng:"
 
-#: src/prefs.c:266
+#: src/prefs.c:262
 msgid "Apply own fonts:"
 msgstr "Áp dụng font riêng:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "Original text font:"
 msgstr "Font text gốc:"
 
-#: src/prefs.c:270
+#: src/prefs.c:266
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- bộ chọn font msgid"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "Translation font:"
 msgstr "Font câu dịch:"
 
-#: src/prefs.c:274
+#: src/prefs.c:270
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- bộ chọn font msgstr"
 
-#: src/prefs.c:278
+#: src/prefs.c:274
 msgid "Apply own colors:"
 msgstr "Áp dụng màu riêng:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "Foreground color:"
 msgstr "Màu chữ:"
 
-#: src/prefs.c:282
+#: src/prefs.c:278
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- màu chữ"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "Background color:"
 msgstr "Màu nền"
 
-#: src/prefs.c:286
+#: src/prefs.c:282
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- màu nền"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:292
+#: src/prefs.c:288
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Tự động cập nhật tập tin po sau mỗi khoảng thời gian (phút):"
 
-#: src/prefs.c:307
+#: src/prefs.c:303
 msgid "Append a suffix to automatically saved files:"
 msgstr "Tự động thêm vào đuôi tập tin được lưu:"
 
-#: src/prefs.c:327
+#: src/prefs.c:323
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Hiện bảng thông điệp (cần khởi động lại gtranslator)"
 
-#: src/prefs.c:331
+#: src/prefs.c:327
 msgid "Collapse translated entries by default"
 msgstr "Mặc định thu gọn các câu đã dịch"
 
-#: src/prefs.c:335
+#: src/prefs.c:331
 msgid "Use own colors for the messages table groups"
 msgstr "Dùng màu riêng cho các nhóm bảng thông điệp"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "Untranslated entries color:"
 msgstr "Màu mục chưa dịch:"
 
-#: src/prefs.c:339
+#: src/prefs.c:335
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- màu mục chưa dịch"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "Fuzzy entries color:"
 msgstr "Màu mục fuzzy:"
 
-#: src/prefs.c:343
+#: src/prefs.c:339
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- màu mục fuzzy"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "Translated entries color:"
 msgstr "Màu mục đã dịch:"
 
-#: src/prefs.c:347
+#: src/prefs.c:343
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- màu mục đã dịch"
 
-#: src/prefs.c:355
+#: src/prefs.c:351
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
@@ -1460,7 +1435,7 @@ msgstr ""
 "Ngoài ra truy vấn learn buffer cá nhân trong khi tự động dịch các thông điệp "
 "chưa dịch"
 
-#: src/prefs.c:359
+#: src/prefs.c:355
 msgid "Automatically learn a newly translated message"
 msgstr "Tự động học các thông điệp mới dịch"
 
@@ -1469,27 +1444,27 @@ msgstr "Tự động học các thông điệp mới dịch"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:367
+#: src/prefs.c:363
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr "Dùng hàm so khớp \"fuzzy\" cho truy vấn vùng đệm nghiên cứu"
 
-#: src/prefs.c:370
+#: src/prefs.c:366
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "Phần trăm yêu cầu giống nhau tối thiểu cho truy vấn fuzzy"
 
-#: src/prefs.c:412
+#: src/prefs.c:408
 msgid "Please enter your name!"
 msgstr "Vui lòng nhập tên bạn!"
 
-#: src/prefs.c:426
+#: src/prefs.c:422
 msgid "Please enter your EMail address!"
 msgstr "Vui lòng nhập địa chỉ email của bạn!"
 
-#: src/prefs.c:439
+#: src/prefs.c:435
 msgid "Please enter a valid EMail address!"
 msgstr "Vui lòng nhập một địa chỉ email hợp lệ!"
 
-#: src/prefs.c:665
+#: src/prefs.c:658
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1592,17 +1567,17 @@ msgstr "Không thể tạo thư mục `%s'!"
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 
-#: src/utils_gui.c:133
+#: src/utils_gui.c:134
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Không thể phân tích huỗi vị trí \"%s\"!"
 
-#: src/utils_gui.c:355
+#: src/utils_gui.c:356
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Bạn không có quyền truy cập tập tin '%s'."
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:374
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1612,7 +1587,7 @@ msgstr ""
 "Bạn không có quyền thay đổi tập tin '%s'.\n"
 "Vui lòng tạo một bản sao và cho phép ghi vào đó."
 
-#: src/utils_gui.c:443
+#: src/utils_gui.c:444
 #, c-format
 msgid ""
 "The file\n"
@@ -1634,12 +1609,12 @@ msgstr ""
 "\n"
 "Bạn muốn gtranslator trở nên dại dột khi cố mở tập tin này chứ?"
 
-#: src/utils_gui.c:488
+#: src/utils_gui.c:489
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Chương trình giải nén `%s' không được cài đặt!"
 
-#: src/utils_gui.c:493
+#: src/utils_gui.c:494
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Chương trình nén `%s' không được cài đặt!"
@@ -1693,6 +1668,25 @@ msgstr "Tập tin po nén"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Tập tin po"
+
+#~ msgid ""
+#~ "The translation for message `%s'\n"
+#~ "contains syntactical errors!"
+#~ msgstr ""
+#~ "Câu dịch của thông điệp `%s'\n"
+#~ "chứa lỗi cú pháp!"
+
+#~ msgid "unknown"
+#~ msgstr "không biết"
+
+#~ msgid "fuzzy"
+#~ msgstr "fuzzy"
+
+#~ msgid "translated"
+#~ msgstr "chưa dịch"
+
+#~ msgid "Check messages for syntactical correctness"
+#~ msgstr "Kiểm tra cú pháp thông điệp"
 
 #~ msgid "Messages table:"
 #~ msgstr "Bảng thông điệp:"
