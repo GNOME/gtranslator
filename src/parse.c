@@ -619,7 +619,7 @@ gboolean gtranslator_save_file(const gchar *name)
 	 */
 	if(GtrPreferences.keep_obsolete && po->obsolete)
 	{
-		fprintf(fs, po->obsolete);
+		fprintf(fs, "%s", po->obsolete);
 	}
 
 	/*
