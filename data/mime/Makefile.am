@@ -21,7 +21,7 @@ mime_DATA = gtranslator.mime
 all-am:
 	@mv $(srcdir)/gtranslator.keys.in gtranslator.keys.in.bak
 	@mv gtranslator.keys gtranslator.keys.in
-	$(INTLTOOL_MERGE) -k -p $(top_srcdir)/po gtranslator.keys.in \
+	$(INTLTOOL_MERGE) -k $(top_srcdir)/po gtranslator.keys.in \
 		gtranslator.keys
 	@mv gtranslator.keys.in.bak $(srcdir)/gtranslator.keys.in
 
