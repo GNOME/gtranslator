@@ -33,6 +33,8 @@
 #include <gal/util/e-xml-utils.h>
 
 
+GList *backends;
+
 /*
  * Internal prototypes:
  */
@@ -441,8 +443,6 @@ gboolean gtranslator_backend_open(gchar *filename)
 		
 		GTR_ITER(mybackends);
 	}
-
-	g_list_free(mybackends);
 
 	return FALSE;
 }

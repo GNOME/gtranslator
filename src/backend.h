@@ -66,7 +66,7 @@ typedef struct
 /*
  * The generally used backends list.
  */
-GList *backends;
+extern GList *backends;
 
 /*
  * Opening and registering of backends from the given dir -- returns FALSE on
