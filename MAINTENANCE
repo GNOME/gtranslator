@@ -1,0 +1,26 @@
+Maintainer notes
+----------------
+
+Handy stuff to know for people maintaining gtranslator.
+
+
+How to make a release
+---------------------
+
+If you're planning to make a release, let gnome-i18n@gnome.org as soon as possible, and give them a few days to update their translations. Also, let gtranslator-devel@lists.sourceforge.net know, in case anyone has any last minute bugfixes for inclusion.
+
+Check the version information in configure.in is up-to-date.
+
+Then, do the following:
+
+cvs rtag -R gtranslator-1-0-1 gtranslator
+cvs export -r gtranslator-1-0-1 gtranslator
+cd gtranslator
+./autogen.sh
+make dist
+
+This will give you the '.tar.gz' tarball. Do a test build to ensure there are no obvious mistakes or omissions in the tarball before it's made public.
+
+Send a copy of the tarball to Fatih Demir <kabalak@gtranslator.org> for upload to <http://www.gtranslator.org/>, and upload a copy to SourceForge using the fancy release mechanism.
+
+Fill out an announcement form on the GNOME website. Forward the announcement to gtranslator-devel@lists.sourceforge.net.
