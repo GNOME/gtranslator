@@ -39,4 +39,9 @@ GtkWidget *gtranslator_sidebar_new(void);
  */ 
 void gtranslator_sidebar_add_po(GtrPo *po);
 
+/*
+ * Clean the sidebar. Remove all the nice icons for the views.
+ */
+void gtranslator_sidebar_clear(void);
+
 #endif

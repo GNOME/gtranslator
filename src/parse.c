@@ -739,6 +739,9 @@ void close_file(GtkWidget * widget, gpointer useless)
 	if (!ask_to_save_file)
 		return;
 	free_po();
+
+	gtranslator_sidebar_clear();
+	
 	file_opened = FALSE;
 	nothing_changes = TRUE;
 

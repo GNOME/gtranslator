@@ -35,7 +35,7 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 GtkWidget *gtranslator_sidebar_new()
 {
 	GtkWidget *sidebar;
-
+	
 	/*
 	 * Create the EShortcutModel & EShortcutBar.
 	 */ 
@@ -85,6 +85,18 @@ void gtranslator_sidebar_add_po(GtrPo *po)
 }
 
 /*
+ * Clean the sidebar fro the icons.
+ */ 
+void gtranslator_sidebar_clear()
+{
+	/*
+	 * Remove the view icons/items from the sidebar model.
+	 */
+	e_shortcut_model_remove_item(model, 0, 1);
+	e_shortcut_model_remove_item(model, 0, 0);
+}
+
+/*
  * This is the "select" callback for the icons in the shortcut bar --
  *  should call the file/view in the future.
  */
@@ -106,7 +118,7 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				break;
 				
 			case 2:
-				if(GTR_MSG(po->current)->comment)
+				if(GTR_MSG(po->current->data)->comment)
 				{
 					/*
 					 * Clean the msgid box and display
@@ -117,8 +129,10 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 						0, -1);
 					gtk_text_insert(GTK_TEXT(text1),
 						NULL, NULL, NULL,
-						GTR_MSG(po->current->data)->comment,
+						GTR_MSG(
+						po->current->data)->comment,
 						-1);
+					
 					break;
 				}
 				else
@@ -134,6 +148,7 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 						NULL, NULL, NULL,
 						_("No comment available for this message"),
 						-1);
+					
 					break;
 				}
 				
