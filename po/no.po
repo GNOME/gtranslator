@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.34\n"
-"POT-Creation-Date: 2001-05-22 16:11+0200\n"
-"PO-Revision-Date: 2001-05-22 16:12+02:00\n"
+"POT-Creation-Date: 2001-08-10 18:20+0200\n"
+"PO-Revision-Date: 2001-08-10 18:25+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,20 +23,30 @@ msgstr ""
 "gtranslator er et program for redigering av po-filer med mange funksjoner."
 
 #.
-#. * Print out some colorscheme informations in a label which will be
-#. *  followed by the author name/email address.
+#. * This string is displayed in the about box as an information about
+#. *  the currently used colorscheme.
 #.
 #: src/about.c:69
 #, c-format
 msgid "Current colorscheme: \"%s\" (version %s) by"
 msgstr ""
 
-#: src/color-schemes.c:156
+#.
+#. * This is a status report feedback: "Blabla backend\n (filename) loaded.\n".
+#.
+#: src/backend.c:279
+#, c-format
+msgid ""
+"%s\n"
+" (%s) loaded.\n"
+msgstr ""
+
+#: src/color-schemes.c:170
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Kunne ikke bruke schema-fil for farger, `%s'!"
 
-#: src/color-schemes.c:279
+#: src/color-schemes.c:299
 msgid "Couldn't retrieve author informations!"
 msgstr "Fikk ikke hentet informasjon om forfatter!"
 
@@ -44,27 +54,27 @@ msgstr "Fikk ikke hentet informasjon om forfatter!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:285
+#: src/color-schemes.c:305
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: src/color-schemes.c:286
+#: src/color-schemes.c:306
 msgid "<Not Given>"
 msgstr "<Ikke oppgitt>"
 
-#: src/dialogs.c:98
-msgid "gtranslator -- open a po-file"
-msgstr "gtranslator -- åpne en po-fil"
+#: src/dialogs.c:94
+msgid "gtranslator -- open po file"
+msgstr "gtranslator -- åpne po-fil"
 
-#: src/dialogs.c:140
+#: src/dialogs.c:133
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- lagre fil som.."
 
-#: src/dialogs.c:144
+#: src/dialogs.c:140
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- lagre lokal kopi av fil som.."
 
-#: src/dialogs.c:196
+#: src/dialogs.c:184
 #, c-format
 msgid ""
 "File %s\n"
@@ -73,112 +83,140 @@ msgstr ""
 "Filen %s\n"
 "ble endret. Lagre?"
 
-#: src/dialogs.c:244
+#: src/dialogs.c:221
+msgid "gtranslator -- import po file"
+msgstr "gtranslator -- importer po-fil"
+
+#: src/dialogs.c:264
+msgid "gtranslator -- export po file"
+msgstr "gtranslator -- eksporter po-fil"
+
+#: src/dialogs.c:310 src/dialogs.c:344
+msgid "gtranslator -- edit comment"
+msgstr "gtranslator -- rediger kommentar"
+
+#: src/dialogs.c:332
+msgid "Comment:"
+msgstr "Kommentar:"
+
+#: src/dialogs.c:448
+#, c-format
+msgid "Should ALL translations from `%s' be removed?"
+msgstr ""
+
+#: src/dialogs.c:461
+msgid "gtranslator -- remove all translations"
+msgstr "gtranslator -- fjern alle oversettelser"
+
+#: src/dialogs.c:475
+msgid "Are you really sure to remove ALL translations from this po file?"
+msgstr ""
+
+#: src/dialogs.c:486
+msgid "gtranslator -- remove all translations confirmation dialog"
+msgstr ""
+
+#: src/dialogs.c:579
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- gå til"
 
-#: src/dialogs.c:246
+#: src/dialogs.c:581
 msgid "Go!"
 msgstr "Gå!"
 
-#: src/dialogs.c:255
+#: src/dialogs.c:590
 msgid "Go to message number:"
 msgstr "Gå til meldingsnummer:"
 
-#: src/dialogs.c:325
-msgid "Find in the po-file"
-msgstr "Finn i po-filen "
+#: src/dialogs.c:660
+msgid "Find in the po file"
+msgstr "Finn i po-filen"
 
-#: src/dialogs.c:327 src/menus.c:351
+#: src/dialogs.c:662 src/menus.c:362
 msgid "Find"
 msgstr "Finn"
 
-#: src/dialogs.c:332
+#: src/dialogs.c:669
 msgid "Enter your desired search string:"
 msgstr "Skriv inn ønsket søkestreng: "
 
-#: src/dialogs.c:335
+#: src/dialogs.c:674
 msgid "Case sensitive"
 msgstr "Skill mellom store og små bokstaver"
 
-#: src/dialogs.c:340 src/languages.h:122
+#: src/dialogs.c:679 src/languages.h:120
 msgid "English"
 msgstr "Engelsk"
 
-#: src/dialogs.c:346 src/dialogs.c:444 src/gui.c:346
+#: src/dialogs.c:685 src/dialogs.c:783 src/gui.c:553 src/messages-table.c:259
 msgid "Translated"
 msgstr "Oversatt"
 
-#: src/dialogs.c:352 src/dialogs.c:450
+#: src/dialogs.c:691 src/dialogs.c:789
 msgid "Both"
 msgstr "Begge"
 
-#: src/dialogs.c:358 src/dialogs.c:438
+#: src/dialogs.c:697 src/dialogs.c:777
 msgid "Comments"
 msgstr "Kommentarer"
 
-#: src/dialogs.c:364
+#: src/dialogs.c:703
 msgid "In all strings"
 msgstr "I alle strenger"
 
-#: src/dialogs.c:379
+#: src/dialogs.c:718
 msgid "Find in: "
 msgstr "Finn i: "
 
-#: src/dialogs.c:424
+#: src/dialogs.c:763
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- erstatt"
 
-#: src/dialogs.c:425 src/menus.c:355
+#: src/dialogs.c:764 src/menus.c:366
 msgid "Replace"
 msgstr "Erstatt"
 
-#: src/dialogs.c:426
+#: src/dialogs.c:765
 msgid "Replace all"
 msgstr "Erstatt alle"
 
-#: src/dialogs.c:430
+#: src/dialogs.c:769
 msgid "String to replace:"
 msgstr "Streng som skal erstattes:"
 
-#: src/dialogs.c:433
+#: src/dialogs.c:772
 msgid "Replace string:"
 msgstr "Erstatning:"
 
-#: src/dialogs.c:473
+#: src/dialogs.c:812
 msgid "Replace in:"
 msgstr "Erstatt i:"
 
-#: src/dialogs.c:551
+#: src/dialogs.c:890
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "En feil oppstod under kjøring av msgfmt.\n"
 
-#: src/dialogs.c:581
+#: src/dialogs.c:920
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- åpne fra URI"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:582
-#: src/menus.c:275
+#: src/dialogs.c:921 src/menus.c:284
 msgid "Open"
 msgstr "Åpne"
 
-#: src/dialogs.c:588
+#: src/dialogs.c:927
 msgid "Enter URI:"
 msgstr "Skriv inn URI:"
 
-#.
-#. * Show an error dialog but don't close down the
-#. *  Open from URI dialog.
-#.
-#: src/dialogs.c:630
+#: src/dialogs.c:965
 msgid "No URI given!"
 msgstr "Ingen URI oppgitt!"
 
-#: src/dialogs.c:662
+#: src/dialogs.c:980
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Ingen støttet URI-protokoll (som \"ftp://\") oppgitt!"
 
-#: src/dialogs.c:693
+#: src/dialogs.c:1011
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -187,47 +225,47 @@ msgid ""
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
 
-#: src/dialogs.c:719
+#: src/dialogs.c:1036
 #, c-format
 msgid "Recovering `%s'..."
 msgstr ""
 
-#: src/dialogs.c:764
+#: src/dialogs.c:1081
 msgid "Couldn't get list of gettext domains!"
 msgstr "Kunne ikke finne en liste over gettext-domener!"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:771
+#: src/dialogs.c:1088
 msgid "Here you can query existing gettext domains for a translation."
 msgstr ""
 
-#: src/dialogs.c:774
+#: src/dialogs.c:1091
 msgid "gtranslator -- query existing gettext domains"
 msgstr ""
 
-#: src/dialogs.c:775 src/menus.c:359
+#: src/dialogs.c:1092 src/menus.c:371
 msgid "Query"
 msgstr "Spørring"
 
-#: src/dialogs.c:783
+#: src/dialogs.c:1100
 msgid "Query string:"
 msgstr "Streng i spørring:"
 
-#: src/dialogs.c:790
+#: src/dialogs.c:1107
 msgid "Domain to search the translation in:"
 msgstr ""
 
-#: src/dialogs.c:840
+#: src/dialogs.c:1157
 msgid "No query string given!"
 msgstr ""
 
-#: src/dialogs.c:874
+#: src/dialogs.c:1191
 msgid "Couldn't find any result for the query!"
 msgstr ""
 
-#: src/dialogs.c:887
+#: src/dialogs.c:1204
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
@@ -238,21 +276,21 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:977
+#: src/dialogs.c:1294
 msgid "Query's result translation is already there!"
 msgstr ""
 
-#: src/dialogs.c:999
+#: src/dialogs.c:1316
 msgid ""
-"Should gtranslator accomplish all missing strings (if possible)\n"
-"from your default query domain?"
+"Should gtranslator auto accomplish all missing strings (if possible)\n"
+"from your default query domain (and your personal learn buffer)?"
 msgstr ""
 
-#: src/find.c:211
+#: src/find.c:213
 msgid "Please enter a search string"
 msgstr "Vennligst skriv inn en søkestreng"
 
-#: src/find.c:227
+#: src/find.c:229
 #, c-format
 msgid ""
 "Could not find\n"
@@ -261,45 +299,38 @@ msgstr ""
 "Kunne ikke finne\n"
 "\"%s\""
 
-#: src/gtkspell.c:606
-msgid "View URL..."
-msgstr "Vis URL..."
+#: src/gui.c:268
+msgid "Edit comment"
+msgstr "Rediger kommentar"
 
-#.
-#. * Create the app
-#.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:158 src/parse.c:707
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#: src/gui.c:333
+#: src/gui.c:539
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i uferdige igjen ]"
 
-#: src/gui.c:333 src/gui.c:337 src/menus.c:343
+#: src/gui.c:539 src/gui.c:543 src/menus.c:352 src/messages-table.c:266
 msgid "Fuzzy"
 msgstr "Uferdig"
 
-#: src/gui.c:337
+#: src/gui.c:543
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Ingen uferdige igjen ]"
 
-#: src/gui.c:344
+#: src/gui.c:551
 msgid "Stick"
 msgstr "Lim"
 
-#: src/gui.c:355
+#: src/gui.c:562
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i uoversatte igjen ]"
 
-#: src/gui.c:355 src/gui.c:357
+#: src/gui.c:562 src/gui.c:564 src/messages-table.c:256
 msgid "Untranslated"
 msgstr "Uoversatt"
 
-#: src/gui.c:357
+#: src/gui.c:564
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Ingen uoversatte igjen ]"
@@ -307,76 +338,80 @@ msgstr "%s [ Ingen uoversatte igjen ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:368
+#: src/gui.c:577
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Melding %d / %d / status: %s"
 
-#: src/header_stuff.c:385
+#: src/header_stuff.c:481
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- rediger header"
 
-#: src/header_stuff.c:389
+#: src/header_stuff.c:488 src/header_stuff.c:493
 msgid "Project"
 msgstr "Prosjekt"
 
-#: src/header_stuff.c:390
+#: src/header_stuff.c:496
 msgid "Translator and Language"
 msgstr "Oversetter og språk"
 
-#: src/header_stuff.c:401
+#: src/header_stuff.c:507
 msgid "Comments:"
 msgstr "Kommentarer:"
 
-#: src/header_stuff.c:407
+#: src/header_stuff.c:513
 msgid "Project name:"
 msgstr "Prosjektnavn:"
 
-#: src/header_stuff.c:410
+#: src/header_stuff.c:516
 msgid "Project version:"
 msgstr "Prosjektversjon:"
 
-#: src/header_stuff.c:413
+#: src/header_stuff.c:519
 msgid "Pot file creation date:"
 msgstr "Dato for oppretting av Pot-fil:"
 
-#: src/header_stuff.c:417
+#: src/header_stuff.c:524
 msgid "Po file revision date:"
 msgstr "po-fil revisjonsdato:"
 
-#: src/header_stuff.c:426
+#: src/header_stuff.c:531
+msgid "Generator:"
+msgstr ""
+
+#: src/header_stuff.c:541
 msgid "Use my options to fill the following entries."
 msgstr "Bruk mine alternativer til å fylle ut følgende oppføringer."
 
-#: src/header_stuff.c:439
+#: src/header_stuff.c:554
 msgid "Translator's name:"
 msgstr "Oversetters navn:"
 
-#: src/header_stuff.c:442
+#: src/header_stuff.c:557
 msgid "Translator's e-mail:"
 msgstr "Oversetters e-post:"
 
-#: src/header_stuff.c:445 src/prefs.c:126
+#: src/header_stuff.c:560 src/prefs.c:156
 msgid "Language:"
 msgstr "Språk:"
 
-#: src/header_stuff.c:450
+#: src/header_stuff.c:565
 msgid "Language group's e-mail:"
 msgstr "Språkgruppens e-post:"
 
-#: src/header_stuff.c:454 src/prefs.c:139
+#: src/header_stuff.c:569 src/prefs.c:169
 msgid "Charset:"
 msgstr "Tegnsett:"
 
-#: src/header_stuff.c:458 src/prefs.c:143
+#: src/header_stuff.c:573 src/prefs.c:173
 msgid "Encoding:"
 msgstr "Koding:"
 
-#: src/history.c:158
+#: src/history.c:168
 msgid "_File/Recen_t files/"
 msgstr "_Fil/Sis_te filer/"
 
-#: src/history.c:196
+#: src/history.c:206
 #, c-format
 msgid "Open %s"
 msgstr "Åpne %s"
@@ -417,659 +452,676 @@ msgstr "Siste oversetter: %s"
 #. * In the output it looks then like "HTML output of "tr.po" produced
 #. *  by gtranslator version 0.39".
 #. *
+#. * Please don't forget to include the HTML tags in the msgid.
 #.
-#: src/htmlizer.c:318
+#: src/htmlizer.c:320
 #, c-format
 msgid ""
-"HTML output of \"%s\" produced by <a "
-"href=\"http://www.gtranslator.org\">gtranslator</a> version %s."
+"HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
+"\">gtranslator</a> version %s."
 msgstr ""
 
-#: src/languages.h:66
+#: src/languages.h:64
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
-#: src/languages.h:70
+#: src/languages.h:68
 msgid "Arabic"
 msgstr "Arabisk"
 
-#: src/languages.h:74
-msgid "Azeri"
-msgstr "Azeri"
+#: src/languages.h:72
+msgid "Azerbaijani Turkish"
+msgstr ""
 
-#: src/languages.h:78
+#: src/languages.h:76
 msgid "Basque"
 msgstr "Baskisk"
 
-#: src/languages.h:82
+#: src/languages.h:80
 msgid "Bielorussian"
 msgstr "Hvite-russisk"
 
-#: src/languages.h:86
+#: src/languages.h:84
 msgid "Britton"
 msgstr "Britton"
 
-#: src/languages.h:90
+#: src/languages.h:88
 msgid "Bulgarian"
 msgstr "Bulgarsk"
 
-#: src/languages.h:94
+#: src/languages.h:92
 msgid "Catalan"
 msgstr "Katalansk"
 
-#: src/languages.h:98
+#: src/languages.h:96
 msgid "Chinese/Simplified"
 msgstr "Kinesisk/Forenklet"
 
-#: src/languages.h:102
+#: src/languages.h:100
 msgid "Chinese/Traditional"
 msgstr "Kinesisk/Tradisjonell"
 
-#: src/languages.h:106
+#: src/languages.h:104
 msgid "Croatian"
 msgstr "Koratisk"
 
-#: src/languages.h:110
+#: src/languages.h:108
 msgid "Czech"
 msgstr "Tjekkisk"
 
-#: src/languages.h:114
+#: src/languages.h:112
 msgid "Danish"
 msgstr "Dansk"
 
-#: src/languages.h:118
+#: src/languages.h:116
 msgid "Dutch"
 msgstr "Nederlandsk"
 
-#: src/languages.h:126
+#: src/languages.h:124
 msgid "English/Canada"
 msgstr "Engelsk/Kanada"
 
-#: src/languages.h:130
+#: src/languages.h:128
 msgid "English/GB"
 msgstr "Engelsk/GB"
 
-#: src/languages.h:134
+#: src/languages.h:132
 msgid "English/USA"
 msgstr "Engelsk/USA"
 
-#: src/languages.h:138
+#: src/languages.h:136
+msgid "Esperanto"
+msgstr ""
+
+#: src/languages.h:140
 msgid "Estonian"
 msgstr "Estlandsk"
 
-#: src/languages.h:142
+#: src/languages.h:144
 msgid "Farsi"
 msgstr "Farsi"
 
-#: src/languages.h:146
+#: src/languages.h:148
 msgid "Finnish"
 msgstr "Finsk"
 
-#: src/languages.h:150
+#: src/languages.h:152
 msgid "French"
 msgstr "Fransk"
 
-#: src/languages.h:154
+#: src/languages.h:156
 msgid "Galician"
 msgstr "Galisisk"
 
-#: src/languages.h:158
+#: src/languages.h:160
 msgid "German"
 msgstr "Tysk"
 
-#: src/languages.h:162
+#: src/languages.h:164
 msgid "Greek"
 msgstr "Gresk"
 
-#: src/languages.h:166
+#: src/languages.h:168
 msgid "Hungarian"
 msgstr "Ungarsk"
 
-#: src/languages.h:170
+#: src/languages.h:172
 msgid "Indonesian"
 msgstr "Indonesisk"
 
-#: src/languages.h:174
+#: src/languages.h:176
 msgid "Italian"
 msgstr "Italiensk"
 
-#: src/languages.h:178
+#: src/languages.h:180
 msgid "Irish"
 msgstr "Irsk"
 
-#: src/languages.h:182
+#: src/languages.h:184
 msgid "Japanese"
 msgstr "Japansk"
 
-#: src/languages.h:186
+#: src/languages.h:188
 msgid "Korean"
 msgstr "Koreansk"
 
-#: src/languages.h:190
+#: src/languages.h:192
 msgid "Latvian"
 msgstr "Latvisk"
 
-#: src/languages.h:194
+#: src/languages.h:196
 msgid "Lithuanian"
 msgstr "Lithausk"
 
-#: src/languages.h:198
+#: src/languages.h:200
+msgid "Malay/Bahasa Melayu"
+msgstr ""
+
+#: src/languages.h:204
+msgid "Maltese"
+msgstr ""
+
+#: src/languages.h:208
 msgid "Norwegian/Bokmaal"
 msgstr "Norsk/Bokmål"
 
-#: src/languages.h:202
+#: src/languages.h:212
 msgid "Norwegian/Nynorsk"
 msgstr "Norsk/Nynorsk"
 
-#: src/languages.h:206
+#: src/languages.h:216
 msgid "Polish"
 msgstr "Polsk"
 
-#: src/languages.h:210
+#: src/languages.h:220
 msgid "Portuguese"
 msgstr "Portugisisk"
 
-#: src/languages.h:214
+#: src/languages.h:224
 msgid "Portuguese/Brazil"
 msgstr "Portugisisk/Brasil"
 
-#: src/languages.h:218
+#: src/languages.h:228
 msgid "Romanian"
 msgstr "Rumensk"
 
-#: src/languages.h:222
+#: src/languages.h:232
 msgid "Russian"
 msgstr "Russisk"
 
-#: src/languages.h:226
+#: src/languages.h:236
 msgid "Serbian/Cyrillic"
 msgstr "Serbisk/Kyrillisk"
 
-#: src/languages.h:230
+#: src/languages.h:240
 msgid "Serbian/Latin"
 msgstr "Serbisk/Latin"
 
-#: src/languages.h:234
-msgid "Slovakian"
-msgstr "Slovensk"
+#: src/languages.h:244
+msgid "Slovak"
+msgstr "Slovakisk"
 
-#: src/languages.h:238
+#: src/languages.h:248
 msgid "Slovenian"
 msgstr "Slovensk"
 
-#: src/languages.h:242
+#: src/languages.h:252
 msgid "Spanish"
 msgstr "Spansk"
 
-#: src/languages.h:246
+#: src/languages.h:256
 msgid "Spanish/Spain"
 msgstr "Spansk/Spania"
 
-#: src/languages.h:250
+#: src/languages.h:260
 msgid "Spanish/Mexico"
 msgstr "Spansk/Mexico"
 
-#: src/languages.h:254
+#: src/languages.h:264
 msgid "Swedish"
 msgstr "Svensk"
 
-#: src/languages.h:258
+#: src/languages.h:268
 msgid "Tamil"
 msgstr "Tamil"
 
-#: src/languages.h:262
+#: src/languages.h:272
 msgid "Thai"
 msgstr "Thai"
 
-#: src/languages.h:266
+#: src/languages.h:276
 msgid "Turkish"
 msgstr "Tyrkisk"
 
-#: src/languages.h:270
+#: src/languages.h:280
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
-#: src/languages.h:274
+#: src/languages.h:284
 msgid "Uzbekian"
 msgstr "Usbekisk"
 
-#: src/languages.h:278
+#: src/languages.h:288
 msgid "Vietnamese"
 msgstr "Vietnamesisk"
 
-#: src/languages.h:282
+#: src/languages.h:292
 msgid "Walloon"
 msgstr "Walloon"
 
-#: src/languages.h:286
+#: src/languages.h:296
 msgid "Welsh"
 msgstr "Walisisk"
 
-#: src/main.c:72
-msgid "Shows build informations/specifications"
-msgstr ""
-
 #: src/main.c:76
-msgid "Specifies the main-window geometry"
-msgstr "Spesifiserer geometri for hovedvinduet"
-
-#: src/main.c:76
-msgid "GEOMETRY"
-msgstr ""
+msgid "Show build informations/specifications"
+msgstr "Vis informasjon/spesifikasjon for bygg"
 
 #: src/main.c:80
-msgid "Don't load'/use any backend modules"
-msgstr ""
+msgid "Specify main window geometry"
+msgstr "Spesifiser geometri for hovedvinduet"
+
+#: src/main.c:80
+msgid "GEOMETRY"
+msgstr "GEOMETRI"
 
 #: src/main.c:84
-msgid "Define another query domains directory"
-msgstr ""
+msgid "Learn the file completely & exit"
+msgstr "Lær hele filen og avslutt"
 
 #: src/main.c:84
-msgid "LOCALEDIR"
-msgstr ""
+msgid "FILENAME"
+msgstr "FILNAVN"
 
 #: src/main.c:88
-msgid "Syntax color scheme to use"
-msgstr ""
-
-#: src/main.c:88
-msgid "SCHEMEFILE"
-msgstr ""
+msgid "Don't load any backend modules"
+msgstr "Ikke last noen moduler"
 
 #: src/main.c:92
+msgid "Define another query-domains directory"
+msgstr "Definer en annen katalog for spørredomener"
+
+#: src/main.c:92
+msgid "LOCALEDIR"
+msgstr "LOCALEKATALOG"
+
+#: src/main.c:96
 msgid "HTML file to write to"
 msgstr "HTML-fil for utskrift"
 
-#: src/main.c:92
+#: src/main.c:96
 msgid "HTMLFILE"
-msgstr ""
+msgstr "HTMLFIL"
 
 #: src/main.c:137
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Feil under initiering av GConf: %s."
 
-#: src/main.c:160
+#: src/main.c:159
 #, fuzzy
 msgid "gtranslator build informations/specs:"
 msgstr "gtranslator -- alternativer"
 
-#: src/main.c:162
+#: src/main.c:161
 msgid "Version and build date:"
 msgstr ""
 
-#: src/main.c:164
+#: src/main.c:163
 msgid "Build-Glib/Gtk+/Gnome versions:"
 msgstr ""
 
-#: src/main.c:166
+#: src/main.c:165
 #, fuzzy
 msgid "Backends directory:"
 msgstr "Bakgrunnsfarge:"
 
-#: src/main.c:168
-msgid "TM backends directory:"
-msgstr ""
-
-#: src/main.c:170
+#: src/main.c:167
 msgid "Colorschemes directory:"
 msgstr ""
 
-#: src/main.c:172
+#: src/main.c:169
 msgid "Scripts directory:"
 msgstr ""
 
-#: src/main.c:174
+#: src/main.c:171
 msgid "Window icon:"
 msgstr "Vindusikon:"
 
-#: src/main.c:176
+#: src/main.c:173
 #, fuzzy
 msgid "Own locale directory:"
 msgstr "Kunne ikke åpne locale-katalog `%s'!"
 
-#.
-#. * The bad case; print a warning and set our module
-#. *  list to NULL.
-#.
-#: src/main.c:200
+#: src/main.c:193
 msgid ""
 "Unfortunately your GModule implementation doesn't support loading dynamic "
 "modules!"
 msgstr ""
 
-#: src/main.c:216
-msgid "gtranslator won't load any backend module..."
+#: src/main.c:207
+msgid "gtranslator won't load any backend module...\n"
 msgstr ""
 
-#: src/menus.c:44
+#.
+#. * As everything seemed to went fine, print out a nice
+#. *  message informing the user about the success.
+#.
+#: src/main.c:408
+#, c-format
+msgid "The file `%s' has been successfully learned.\n"
+msgstr ""
+
+#: src/menus.c:49
 msgid "_Messages"
 msgstr "_Meldinger"
 
-#: src/menus.c:45
+#: src/menus.c:50
 msgid "Mess_age status"
 msgstr "Meldingsst_atus"
 
-#: src/menus.c:56
+#: src/menus.c:61
 msgid "_Compile"
 msgstr "_Kompiler"
 
-#: src/menus.c:57 src/menus.c:289
-msgid "Compile the po-file"
-msgstr "Kompiler po-filen "
+#: src/menus.c:62 src/menus.c:298
+msgid "Compile the po file"
+msgstr "Kompiler po-filen"
 
-#: src/menus.c:63
+#: src/menus.c:68
 msgid "_Update"
 msgstr "_Oppdater"
 
-#: src/menus.c:64 src/menus.c:293
-msgid "Update the po-file"
+#: src/menus.c:69 src/menus.c:302
+msgid "Update the po file"
 msgstr "Oppdater po-filen"
 
-#: src/menus.c:71
+#: src/menus.c:76
 msgid "Aut_oaccomplish"
 msgstr ""
 
-#: src/menus.c:72
+#: src/menus.c:77
 msgid "Automatically fill missing translations from the default query domain"
 msgstr ""
 
-#: src/menus.c:80
+#: src/menus.c:84
+msgid "Remove all translations"
+msgstr ""
+
+#: src/menus.c:85
+msgid "Remove all existing translations from the po file"
+msgstr ""
+
+#: src/menus.c:93
 msgid "Open from _URI"
 msgstr "Åpne fra _URI"
 
-#: src/menus.c:81
+#: src/menus.c:94
 msgid "Open a po file from a given URI"
 msgstr "Åpne en po-fil fra en gitt URI"
 
-#: src/menus.c:91
+#: src/menus.c:104
 msgid "Recen_t files"
 msgstr "Sis_te filer"
 
-#: src/menus.c:94
+#: src/menus.c:107
 msgid "_Export to UTF-8"
 msgstr ""
 
-#: src/menus.c:95
+#: src/menus.c:108
 msgid "Export the current po file to UTF-8"
 msgstr ""
 
-#: src/menus.c:101
+#: src/menus.c:114
 msgid "_Import from UTF-8"
 msgstr ""
 
-#: src/menus.c:102
+#: src/menus.c:115
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr ""
 
-#: src/menus.c:133
+#: src/menus.c:145
 msgid "_Query"
 msgstr ""
 
-#: src/menus.c:134 src/menus.c:360
+#: src/menus.c:146 src/menus.c:372
 msgid "Query for a string"
 msgstr ""
 
-#: src/menus.c:141
+#: src/menus.c:153
 msgid "_Header..."
 msgstr "_Header..."
 
-#: src/menus.c:142 src/menus.c:297
+#: src/menus.c:154 src/menus.c:306
 msgid "Edit the header"
 msgstr "Rediger headeren"
 
-#: src/menus.c:151
+#: src/menus.c:163
 msgid "_Message"
 msgstr "_Melding"
 
-#: src/menus.c:152
+#: src/menus.c:164
 msgid "Standard messages view"
 msgstr ""
 
-#: src/menus.c:154
-msgid "_Comments"
-msgstr "_Kommentarer"
-
-#: src/menus.c:155
-msgid "View comments for message"
-msgstr "Vis kommentarer for melding"
-
-#: src/menus.c:157
+#: src/menus.c:166
 msgid "_Numbers"
 msgstr "_Tall"
 
-#: src/menus.c:158
+#: src/menus.c:167
 msgid "View numbers in the message"
 msgstr "Vis tall i meldingen"
 
-#: src/menus.c:160
+#: src/menus.c:169
 msgid "C _Formats"
 msgstr "C-_format"
 
-#: src/menus.c:161
+#: src/menus.c:170
 msgid "View C formats of the message"
 msgstr ""
 
-#: src/menus.c:163
+#: src/menus.c:172
 msgid "_Hotkeys"
 msgstr "_Hurtigtaster"
 
-#: src/menus.c:164
+#: src/menus.c:173
 msgid "View hotkeys in the message"
 msgstr "Vis hurtigtaster i meldingen"
 
-#: src/menus.c:171
+#: src/menus.c:180
 msgid "_First"
 msgstr "_Første"
 
-#: src/menus.c:172 src/menus.c:323
+#: src/menus.c:181 src/menus.c:328
 msgid "Go to the first message"
 msgstr "Gå til første melding"
 
-#: src/menus.c:178
+#: src/menus.c:187
 msgid "_Back"
 msgstr "_Tilbake"
 
-#: src/menus.c:179 src/menus.c:327
+#: src/menus.c:188 src/menus.c:332
 msgid "Go one message back"
 msgstr "Gå tilbake en melding"
 
-#: src/menus.c:186
+#: src/menus.c:195
 msgid "_Next"
 msgstr "_Neste"
 
-#: src/menus.c:187 src/menus.c:332
+#: src/menus.c:196 src/menus.c:337
 msgid "Go one message forward"
 msgstr "Gå frem en melding"
 
-#: src/menus.c:193
+#: src/menus.c:202
 msgid "_Last"
 msgstr "_Siste"
 
-#: src/menus.c:194 src/menus.c:336
+#: src/menus.c:203 src/menus.c:341
 msgid "Go to the last message"
 msgstr "Gå til siste melding"
 
-#: src/menus.c:201
+#: src/menus.c:210
 msgid "_Go to..."
 msgstr "_Gå til..."
 
-#: src/menus.c:202
+#: src/menus.c:211
 msgid "Goto specified message number"
 msgstr "Gå til spesifisert meldingsnummer"
 
-#: src/menus.c:208
+#: src/menus.c:217
 msgid "Next fuz_zy"
 msgstr "Neste uferdi_ge"
 
-#: src/menus.c:209
+#: src/menus.c:218
 msgid "Go to next fuzzy message"
 msgstr "Gå til neste uferdige melding"
 
-#: src/menus.c:215
+#: src/menus.c:224
 msgid "Next _untranslated"
 msgstr "Neste _uoversatte"
 
-#: src/menus.c:216 src/menus.c:340
+#: src/menus.c:225 src/menus.c:346
 msgid "Go to next untranslated message"
 msgstr "Gå til neste uoversatte melding"
 
-#: src/menus.c:226
+#: src/menus.c:235
 msgid "_Translated"
 msgstr "Oversa_tt"
 
-#: src/menus.c:227
+#: src/menus.c:236
 msgid "Toggle translated status of a message"
 msgstr "Slå på/av oversatt-status for en melding"
 
-#: src/menus.c:235
+#: src/menus.c:244
 msgid "_Fuzzy"
 msgstr "U_ferdig"
 
-#: src/menus.c:236
+#: src/menus.c:245
 msgid "Toggle fuzzy status of a message"
 msgstr "Slå på/av uferdig-status for en melding"
 
-#: src/menus.c:244
+#: src/menus.c:253
 msgid "_Stick"
 msgstr "_Lim"
 
-#: src/menus.c:245
+#: src/menus.c:254
 msgid "Stick this message"
 msgstr "Lim denne meldingen"
 
-#: src/menus.c:264
+#: src/menus.c:273
 msgid "gtranslator _website"
 msgstr "gtranslator _webside"
 
-#: src/menus.c:265
+#: src/menus.c:274
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslators hjemmeside på web"
 
-#: src/menus.c:276
-msgid "Open a po-file"
+#: src/menus.c:285
+msgid "Open a po file"
 msgstr "Åpne en po-fil"
 
-#: src/menus.c:279
+#: src/menus.c:288
 msgid "Save"
 msgstr "Lagre"
 
-#: src/menus.c:280
+#: src/menus.c:289
 msgid "Save File"
 msgstr "Lagre fil"
 
-#: src/menus.c:283
+#: src/menus.c:292
 msgid "Save as"
 msgstr "Lagre som"
 
-#: src/menus.c:284
+#: src/menus.c:293
 msgid "Save file with a different name"
 msgstr "Lagre filen med nytt navn"
 
-#: src/menus.c:288
+#: src/menus.c:297
 msgid "Compile"
 msgstr "Kompiler"
 
-#: src/menus.c:292
+#: src/menus.c:301
 msgid "Update"
 msgstr "Oppdater"
 
-#: src/menus.c:296
+#: src/menus.c:305
 msgid "Header"
 msgstr "Header"
 
-#: src/menus.c:301
+#: src/menus.c:310
 msgid "Undo"
 msgstr ""
 
-#: src/menus.c:302
+#: src/menus.c:311
 msgid "Undo the last performed action"
 msgstr ""
 
-#: src/menus.c:305
-msgid "Redo"
-msgstr ""
-
-#: src/menus.c:306
-msgid "Redo the last undone action"
-msgstr ""
-
-#: src/menus.c:310
+#: src/menus.c:315
 msgid "Options"
 msgstr "Alternativer"
 
-#: src/menus.c:311
+#: src/menus.c:316
 msgid "gtranslator options"
 msgstr "gtranslator alternativer"
 
-#: src/menus.c:314 src/menus.c:315
+#: src/menus.c:319 src/menus.c:320
 msgid "Exit"
 msgstr "Avslutt"
 
-#: src/menus.c:322
+#: src/menus.c:327
 msgid "First"
 msgstr "Første"
 
-#: src/menus.c:326
+#: src/menus.c:331
 msgid "Back"
 msgstr "Tilbake"
 
-#: src/menus.c:331
+#: src/menus.c:336
 msgid "Next"
 msgstr "Neste"
 
-#: src/menus.c:335
+#: src/menus.c:340
 msgid "Last"
 msgstr "Siste"
 
-#: src/menus.c:339
+#: src/menus.c:345
 msgid "Missing"
 msgstr "Mangler"
 
-#: src/menus.c:344
+#: src/menus.c:353
 msgid "Go to the next fuzzy translation"
 msgstr "Gå til neste uferdige oversettelse"
 
-#: src/menus.c:347
+#: src/menus.c:358
 msgid "Go to"
 msgstr "Gå til"
 
-#: src/menus.c:348
+#: src/menus.c:359
 msgid "Go to specified message number"
 msgstr "Gå til spesifisert meldingsnummer"
 
-#: src/menus.c:352
-msgid "Find string in po-file"
-msgstr "Finn streng i po-filen "
+#: src/menus.c:363
+msgid "Find string in po file"
+msgstr "Finn streng i po-filen"
 
-#: src/menus.c:356
-msgid "Replace string in po-file"
-msgstr "Erstatt streng i po-filen "
+#: src/menus.c:367
+msgid "Replace string in po file"
+msgstr "Erstatt streng i po-filen"
 
-#: src/message.c:77
+#: src/message.c:80
 msgid "Couldn't get the message!"
 msgstr "Kunne ikke hente meldingen!"
 
-#: src/message.c:99
+#: src/message.c:102
 msgid "There are no fuzzy messages left."
 msgstr "Det finnes ingen uferdige meldinger."
 
-#: src/message.c:123
+#: src/message.c:126
 msgid "All messages seem to be translated."
 msgstr "Alle meldinger ser ut til å være oversatt."
 
-#: src/open-differently.c:130
-#, c-format
-msgid "The necessary uncompression program `%s' is missing!"
+#: src/messages-table.c:212
+msgid "UNTRANSLATED"
 msgstr ""
 
-#: src/open-differently.c:175
+#: src/messages-table.c:219
+msgid "FUZZY"
+msgstr ""
+
+#: src/messages-table.c:226
+msgid "TRANSLATED"
+msgstr ""
+
+#: src/messages-table.c:262
+msgid "Sticky"
+msgstr "Klebrig"
+
+#: src/open-differently.c:161
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Kunne ikke åpne kompilert gettext-fil `%s'!"
 
-#: src/open-differently.c:227
+#: src/open-differently.c:212
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Kunne ikke åpne komprimert gettext-fil `%s'!"
@@ -1078,17 +1130,17 @@ msgstr "Kunne ikke åpne komprimert gettext-fil `%s'!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open-differently.c:237
+#: src/open-differently.c:222
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr ""
 
-#: src/open-differently.c:306
-#, fuzzy, c-format
+#: src/open-differently.c:293
+#, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
-msgstr "Kunne ikke åpne kompilert gettext-fil `%s'!"
+msgstr "Kunne ikke åpne zippet po-fil `%s'!"
 
-#: src/parse.c:98
+#: src/parse.c:112
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1097,7 +1149,7 @@ msgstr ""
 "Ny \"escaped\" tegn funnet \\%c\n"
 "Legg til dette i parse.c, linje %i."
 
-#: src/parse.c:244
+#: src/parse.c:267
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1108,7 +1160,7 @@ msgstr ""
 "på linje %d.\n"
 "Vennligst sjekk filen og prøv igjen."
 
-#: src/parse.c:280
+#: src/parse.c:313
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1117,17 +1169,17 @@ msgstr ""
 "Filen er tom:\n"
 "%s"
 
-#: src/parse.c:303
+#: src/parse.c:336
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen `%s' eksisterer ikke i det hele tatt!"
 
-#: src/parse.c:379
+#: src/parse.c:447
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:523
+#: src/parse.c:636
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -1138,12 +1190,12 @@ msgstr ""
 "Denne filtypen brukes av programmet.\n"
 "Dine filer skal bruke filtypen *.po, mest sannsynlig %s.po"
 
-#: src/parse.c:566
+#: src/parse.c:682
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr ""
 
-#: src/parse.c:599
+#: src/parse.c:728
 #, c-format
 msgid ""
 "File %s\n"
@@ -1152,7 +1204,7 @@ msgstr ""
 "Fil %s\n"
 "inneholder %d uferdige meldinger"
 
-#: src/parse.c:635
+#: src/parse.c:764
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1164,11 +1216,15 @@ msgstr ""
 "!\n"
 "Vil du lagre den likevel?"
 
-#: src/parse.c:643
+#: src/parse.c:772
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- uendret"
 
-#: src/parse.c:719
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:856
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: src/parse.c:881
 #, c-format
 msgid ""
 "File %s\n"
@@ -1177,11 +1233,11 @@ msgstr ""
 "Filen %s\n"
 "ble endret. Vil du gå tilbake til en lagret kopi?"
 
-#: src/parse.c:758
+#: src/parse.c:1018
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Beklager, msgfmt er ikke tilgjengelig på ditt system!"
 
-#: src/parse.c:782
+#: src/parse.c:1048
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1190,157 +1246,196 @@ msgstr ""
 "Komplering fullført:\n"
 "%s"
 
-#: src/prefs.c:93
+#: src/prefs.c:106
 msgid "gtranslator -- options"
 msgstr "gtranslator -- alternativer"
 
-#.
-#. * The tables for holding all the entries below.
-#.
-#: src/prefs.c:98
+#: src/prefs.c:112
 msgid "Personal informations"
 msgstr "Personlig informasjon"
 
-#: src/prefs.c:99
+#: src/prefs.c:114
 msgid "Language settings"
 msgstr "Språkinnstillinger"
 
-#: src/prefs.c:100
-#, fuzzy
+#: src/prefs.c:116
 msgid "Po file editing"
-msgstr "Alternativer for po fil"
+msgstr "Redigering av po filer"
 
-#: src/prefs.c:101
-msgid "Miscellaneous"
-msgstr "Forskjellig"
-
-#: src/prefs.c:102
+#: src/prefs.c:120
 msgid "Recent files & spell checking"
 msgstr "Siste filer & stavekontroll"
 
-#: src/prefs.c:103
+#: src/prefs.c:122
 msgid "Fonts, colors and color schemes"
 msgstr ""
 
-#: src/prefs.c:109
-msgid "Author's name:"
-msgstr "Forfatters navn:"
-
-#: src/prefs.c:112
-msgid "Author's EMail:"
-msgstr "Forfatters e-post:"
-
-#: src/prefs.c:116
-msgid "Default query domain:"
+#: src/prefs.c:124
+msgid "Autosaving"
 msgstr ""
 
 #: src/prefs.c:130
+msgid "Author's name:"
+msgstr "Forfatters navn:"
+
+#: src/prefs.c:133
+msgid "Author's EMail:"
+msgstr "Forfatters e-post:"
+
+#: src/prefs.c:146
+msgid "Default query domain:"
+msgstr ""
+
+#: src/prefs.c:160
 msgid "Language code:"
 msgstr "Språkkode:"
 
-#: src/prefs.c:135
+#: src/prefs.c:165
 msgid "Language group's EMail:"
 msgstr "Språkgruppens e-post:"
 
-#: src/prefs.c:151
+#: src/prefs.c:181
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Sett uferdig-status, hvis meldingen er endret"
 
-#: src/prefs.c:155
-msgid "Warn if the .po-file contains fuzzy translations"
-msgstr "Gi advarsel hvis .po-filen inneholder fuzzy oversettelser"
+#: src/prefs.c:185
+msgid "Warn if the po file contains fuzzy translations"
+msgstr "Gi advarsel hvis po-filen inneholder fuzzy oversettelser"
 
-#: src/prefs.c:159
-msgid "Don't save unchanged .po-files"
-msgstr "Ikke lagre uendrede .po-filer"
+#: src/prefs.c:189
+msgid "Don't save unchanged po files"
+msgstr "Ikke lagre uendrede po-filer"
 
-#: src/prefs.c:163
+#: src/prefs.c:193
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Gi advarsel ved lagring av uendret fil"
 
-#: src/prefs.c:167
+#: src/prefs.c:197
+msgid ""
+"Also query the personal learn buffer while auto accomplishing missing entries"
+msgstr ""
+
+#: src/prefs.c:201
 msgid "Keep obsolete message in the po files"
 msgstr ""
 
-#: src/prefs.c:174
+#: src/prefs.c:208
 msgid "Use free space indicating special character"
 msgstr "Bruk ledig plass til å indikere spesielt tegn"
 
-#: src/prefs.c:177
+#: src/prefs.c:211
 msgid "Enable the popup menu"
 msgstr "Slå på oppsprettmenyen"
 
-#: src/prefs.c:180
-msgid ""
-"Enable the update function of gtranslator (you need the sources for this)"
+#: src/prefs.c:214
+msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr ""
-"Bruk gtranslator's oppdateringsfunksjon (du må ha kildekode for å bruke "
-"denne)"
 
-#: src/prefs.c:183
+#: src/prefs.c:217
+msgid "Enable the functionality to remove all translations from a po file"
+msgstr ""
+
+#: src/prefs.c:220
+msgid "Delete the compile result file (named \"project.gmo\")"
+msgstr ""
+
+#: src/prefs.c:223
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Lagre geometri ved avslutting og gjenopprett ved oppstart"
 
-#: src/prefs.c:186
-msgid "Don't show the update information dialogs"
-msgstr "Ikke vis dialoger med oppdateringsinformasjon"
+#: src/prefs.c:226
+msgid "Show the views sidebar"
+msgstr ""
 
-#: src/prefs.c:192
+#: src/prefs.c:229
+msgid ""
+"Show the messages table (requires gtranslator restart for taking effect)"
+msgstr ""
+
+#: src/prefs.c:236
+msgid "Maximally showed recent files:"
+msgstr ""
+
+#: src/prefs.c:240
 msgid "Check every recent file before listing it up"
 msgstr "Sjekk alle seneste filer før de vises på listen"
 
-#: src/prefs.c:195
+#: src/prefs.c:243
 msgid "Instant spell checking"
 msgstr "Automatisk stavekontroll"
 
-#: src/prefs.c:198
+#: src/prefs.c:246
 msgid "Use special dictionary"
 msgstr "Bruk spesiell ordbok"
 
-#: src/prefs.c:201
+#: src/prefs.c:249
 msgid "Dictionary to use:"
 msgstr "Ordbok som skal brukes:"
 
-#.
-#. * The sixth page with the special font/color stuff.
-#.
-#: src/prefs.c:207
+#: src/prefs.c:260
 msgid "Syntax color scheme to use:"
 msgstr ""
 
-#: src/prefs.c:209
-msgid "gtranslator -- color scheme selection"
-msgstr "gtranslator -- valg av farge-schema"
+#: src/prefs.c:264
+msgid "Apply own fonts:"
+msgstr ""
 
-#: src/prefs.c:215
-msgid "Apply special font/colors"
+#: src/prefs.c:268
+msgid "Original text font:"
+msgstr ""
+
+#: src/prefs.c:268
+#, fuzzy
+msgid "gtranslator -- font selection/msgid font"
+msgstr "gtranslator -- valg av skrifttype"
+
+#: src/prefs.c:272
+msgid "Translation font:"
+msgstr "Skrifttype for oversettelser:"
+
+#: src/prefs.c:272
+#, fuzzy
+msgid "gtranslator -- font selection/msgstr font"
+msgstr "gtranslator -- valg av skrifttype"
+
+#: src/prefs.c:276
+#, fuzzy
+msgid "Apply own colors:"
 msgstr "Bruk spesielle skrifttyper/farger"
 
-#: src/prefs.c:218
-msgid "Font:"
-msgstr "Skrifttype:"
-
-#: src/prefs.c:219
+#: src/prefs.c:280
 msgid "Foreground color:"
 msgstr "Forgrunnsfarge:"
 
-#: src/prefs.c:220
-msgid "Background color:"
-msgstr "Bakgrunnsfarge:"
-
-#: src/prefs.c:223
-msgid "gtranslator -- font selection"
-msgstr "gtranslator -- valg av skrifttype"
-
-#: src/prefs.c:236
+#: src/prefs.c:280
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- forgrunnsfarge"
 
-#: src/prefs.c:239
+#: src/prefs.c:284
+msgid "Background color:"
+msgstr "Bakgrunnsfarge:"
+
+#: src/prefs.c:284
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- bakgrunnsfarge"
 
-#: src/prefs.c:398
+#: src/prefs.c:291
+msgid "Save the po file automatically after a period of time"
+msgstr ""
+
+#: src/prefs.c:295
+msgid "Append a special suffix to the automatically saved files"
+msgstr ""
+
+#: src/prefs.c:299
+msgid "Autosave suffix:"
+msgstr ""
+
+#: src/prefs.c:303
+msgid "Autosave timeout in minutes:"
+msgstr ""
+
+#: src/prefs.c:523
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -1349,23 +1444,11 @@ msgstr ""
 "I brukervalg boksen kan du definere noen variabler som\n"
 "kan la deg bestemme hvordan gtranslator skal fungere!"
 
-#.
-#. * The generally used date format -- i18n this please,
-#. *  translators ,-)
-#.
-#: src/preferences.c:228
-msgid "%Y-%m-%d %H:%M"
-msgstr "%Y-%m-%d %H:%M"
-
-#: src/preferences.c:235
+#: src/preferences.c:188
 msgid "Couldn't generate the current date!"
 msgstr "Kunne ikke generere dagens dato!"
 
-#: src/query.c:142
-msgid "No language defined in preferences to query the domains for!"
-msgstr ""
-
-#: src/replace.c:171
+#: src/replace.c:173
 msgid "No replace made!"
 msgstr ""
 
@@ -1373,24 +1456,44 @@ msgstr ""
 msgid "Session restored successfully."
 msgstr "Gjenoppretting av sesjonen fullført."
 
-#.
-#. * What to say else? This signals doesn't seem
-#. *  interesting for us but should still get a
-#. *   warning message.
-#.
-#: src/sighandling.c:84
-#, c-format
-msgid "Uncatched signal %i!"
+#: src/sidebar.c:59
+#, fuzzy
+msgid "Message"
+msgstr "_Melding"
+
+#: data/etspecs/messages-table.etspec.h:3 src/sidebar.c:60
+#, fuzzy
+msgid "Number"
+msgstr "_Tall"
+
+#: src/sidebar.c:61
+#, fuzzy
+msgid "Format"
+msgstr "C-_format"
+
+#: src/sidebar.c:62
+#, fuzzy
+msgid "Hotkey"
+msgstr "_Hurtigtaster"
+
+#: src/sidebar.c:97
+#, fuzzy
+msgid "Views"
+msgstr "_Visninger"
+
+#: src/sidebar.c:99
+msgid "Bookmarks"
 msgstr ""
 
-#: src/stylistics.c:223
+#: src/stylistics.c:241
 msgid "No font set! Using default font"
 msgstr "Skrifttype ikke satt! Bruker standard skrifttype"
 
 #.
-#. * Use gtranslator's font in this case.
+#. * Use gtranslator's font in this case -- should be a fallback font
+#. *  for your language.
 #.
-#: src/stylistics.c:227
+#: src/stylistics.c:247
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
@@ -1399,46 +1502,47 @@ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 #. * used by gtranslator as special char to make
 #. * blanks visible.
 #. * If your language uses that char for another
-#. * purpose or if you use another enocoding
-#. * than latin1, feel free to change it to
-#. * whatever you think will be better
+#. * purpose or if you use a charset encoding
+#. * that doesn't have it, feel free to change it
+#. * to whatever you think will be better
 #.
-#: src/syntax.c:87 src/utils.c:266 src/utils.c:267 src/views.c:286
-#: src/views.c:356
+#: src/syntax.c:90 src/utils_gui.c:76 src/utils_gui.c:77 src/views.c:271
+#: src/views.c:341
 msgid "·"
 msgstr "·"
 
-#: src/update.c:88
+#: src/update.c:90
 msgid "No POTFILES.in found!"
 msgstr "POTFILES.in ikke funnet!"
 
-#: src/update.c:104
+#: src/update.c:101
 msgid "An update caused no changes."
 msgstr "En oppdatering medførte ingen endringer."
 
-#: src/update.c:111
+#: src/update.c:108
 msgid "The update was successfull."
 msgstr "Oppdatering fullført."
 
-#: src/update.c:116
+#: src/update.c:113
 msgid "An error occured while updating the po file."
 msgstr "En feil oppsto under oppdatering av po-fil."
 
-#: src/utils.c:320
+#: src/utils.c:196
+#, fuzzy, c-format
+msgid "Can't create directory `%s'!"
+msgstr "Kunne ikke opprette midlertidig katalog `%s'!"
+
+#: src/utils_gui.c:130
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometri-streng \"%s\" kunne ikke leses!"
 
-#.
-#. * Create an error box and prevent further reading
-#. *  of the file.
-#.
-#: src/utils.c:552
+#: src/utils_gui.c:351
 #, c-format
 msgid "You don't have read permissions on file `%s'"
 msgstr "Du har ikke leserettigheter til filen `%s'"
 
-#: src/utils.c:571
+#: src/utils_gui.c:369
 #, c-format
 msgid ""
 "You don't have write permissions on file `%s'.\n"
@@ -1449,57 +1553,68 @@ msgstr ""
 "Dette betyr at du bør lagre den som en kopi i en lokal katalog\n"
 "som du kan velge selv."
 
-#: src/vfs-handle.c:114
+#: src/utils_gui.c:411
+#, c-format
+msgid "The file `%s' is already open in another instance of gtranslator!"
+msgstr ""
+
+#: src/utils_gui.c:444
+#, c-format
+msgid "The necessary decompression program `%s' is missing!"
+msgstr ""
+
+#: src/utils_gui.c:449
+#, c-format
+msgid "The necessary compression program `%s' is missing!"
+msgstr ""
+
+#: src/vfs-handle.c:126
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "Kunne ikke opprette midlertidig katalog `%s'!"
 
-#: src/vfs-handle.c:140
+#: src/vfs-handle.c:154
 #, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "Fil `%s' ble ikke funnet!"
 
-#: src/vfs-handle.c:145
+#: src/vfs-handle.c:159
 #, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr "Feilutformet URI `%s' oppgitt!"
 
-#: src/vfs-handle.c:150
+#: src/vfs-handle.c:164
 #, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "Vert `%s' ble ikke funnet!"
 
-#: src/vfs-handle.c:155
+#: src/vfs-handle.c:169
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "Ugyldig vertsnavn `%s'!"
 
-#: src/vfs-handle.c:160
+#: src/vfs-handle.c:174
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "Vert `%s' har ingen adresse!"
 
-#: src/vfs-handle.c:165
+#: src/vfs-handle.c:179
 msgid "Transfer interrupted!"
 msgstr "Overføring avbrutt!"
 
-#: src/views.c:140
-msgid "No comments available for this message."
-msgstr "Ingen kommentarer tilgjengelig for denne meldingen."
-
-#: src/views.c:246
+#: src/views.c:231
 msgid "No numbers found."
 msgstr "Ingen tall funnet."
 
-#: src/views.c:278
+#: src/views.c:263
 msgid " "
 msgstr " "
 
-#: src/views.c:302
+#: src/views.c:287
 msgid "No C formats present."
 msgstr "Ingen C-format funnet."
 
-#: src/views.c:342
+#: src/views.c:327
 #, fuzzy
 msgid "No hotkeys defined in message."
 msgstr "Gå til første melding"
@@ -1512,70 +1627,31 @@ msgstr ""
 msgid "Plain text files backend"
 msgstr ""
 
-#: src/backends/translation-memories/opentag/opentag.xml.h:1
-msgid "OpenTag (otf) translation memories support"
-msgstr ""
-
-#: src/backends/translation-memories/tmx/tmx.xml.h:1
-msgid "LISA TMX translation memories support"
-msgstr ""
-
-#: nautilus-view/nautilus-gtranslator-view.c:181
-#, c-format
-msgid "Project: %s"
-msgstr "Prosjekt: %s"
-
-#: nautilus-view/nautilus-gtranslator-view.c:184
-#, c-format
-msgid "Version: %s"
-msgstr "Versjon: %s"
-
-#: nautilus-view/nautilus-gtranslator-view.c:188
-#, c-format
-msgid "Last translator: %s <%s>"
-msgstr "Siste oversetter: %s <%s>"
-
-#: nautilus-view/nautilus-gtranslator-view.c:192
-#, c-format
-msgid "Language team: %s <%s>"
-msgstr "Språklag: %s <%s>"
-
-#: nautilus-view/nautilus-gtranslator-view.c:195
-#, c-format
-msgid "Last %s.pot update: %s"
-msgstr ""
-
-#: nautilus-view/nautilus-gtranslator-view.c:198
-#, c-format
-msgid "Last po file update: %s"
-msgstr ""
-
-#: nautilus-view/nautilus-gtranslator-view.c:201
-#, c-format
-msgid "Encoding: %s (%s)"
-msgstr "Koding: %s (%s)"
-
-#: nautilus-view/nautilus-gtranslator-view.c:208
-#, c-format
-msgid ""
-"Comments:\n"
-"%s"
-msgstr ""
-"Kommentarer:\n"
-"%s"
-
-#: nautilus-view/nautilus-gtranslator-view.c:248
-msgid "Loading po file..."
-msgstr "Leser inn po-fil..."
-
-#: nautilus-view/nautilus-gtranslator-view.c:268
-#: nautilus-view/nautilus-gtranslator-view.c:283
-msgid "Open Po File"
-msgstr "Åpne po-fil"
-
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
 msgstr "GNOME oversettingsprogram"
+
+#: data/etspecs/messages-table.etspec.h:1
+#, fuzzy
+msgid "Comment"
+msgstr "Kommentarer"
+
+#: data/etspecs/messages-table.etspec.h:2
+msgid "Line"
+msgstr ""
+
+#: data/etspecs/messages-table.etspec.h:4
+msgid "Original"
+msgstr ""
+
+#: data/etspecs/messages-table.etspec.h:5
+msgid "Status"
+msgstr ""
+
+#: data/etspecs/messages-table.etspec.h:6
+#, fuzzy
+msgid "Translation"
+msgstr "Oversatt"
 
 #: data/mime/gtranslator.keys.in.h:1
 msgid "Compiled gettext po file"
@@ -1589,56 +1665,101 @@ msgstr "Komprimert gettext po-fil"
 msgid "Gettext po file"
 msgstr "Gettext po-fil"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
-msgid "Gtranslator Po File"
-msgstr "Gtranslator po-fil"
+#~ msgid "View URL..."
+#~ msgstr "Vis URL..."
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:2
-msgid "Gtranslator Po File View"
-msgstr "Gtranslator po-fil visning"
+#~ msgid "Azeri"
+#~ msgstr "Azeri"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:3
+#~ msgid "_Comments"
+#~ msgstr "_Kommentarer"
+
+#~ msgid "View comments for message"
+#~ msgstr "Vis kommentarer for melding"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Forskjellig"
+
+#~ msgid ""
+#~ "Enable the update function of gtranslator (you need the sources for this)"
+#~ msgstr ""
+#~ "Bruk gtranslator's oppdateringsfunksjon (du må ha kildekode for å bruke "
+#~ "denne)"
+
+#~ msgid "Don't show the update information dialogs"
+#~ msgstr "Ikke vis dialoger med oppdateringsinformasjon"
+
+#~ msgid "gtranslator -- color scheme selection"
+#~ msgstr "gtranslator -- valg av farge-schema"
+
+#~ msgid "Font:"
+#~ msgstr "Skrifttype:"
+
+#~ msgid "%Y-%m-%d %H:%M"
+#~ msgstr "%Y-%m-%d %H:%M"
+
+#~ msgid "No comments available for this message."
+#~ msgstr "Ingen kommentarer tilgjengelig for denne meldingen."
+
+#~ msgid "Project: %s"
+#~ msgstr "Prosjekt: %s"
+
+#~ msgid "Version: %s"
+#~ msgstr "Versjon: %s"
+
+#~ msgid "Last translator: %s <%s>"
+#~ msgstr "Siste oversetter: %s <%s>"
+
+#~ msgid "Language team: %s <%s>"
+#~ msgstr "Språklag: %s <%s>"
+
+#~ msgid "Encoding: %s (%s)"
+#~ msgstr "Koding: %s (%s)"
+
+#~ msgid ""
+#~ "Comments:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kommentarer:\n"
+#~ "%s"
+
+#~ msgid "Loading po file..."
+#~ msgstr "Leser inn po-fil..."
+
+#~ msgid "Open Po File"
+#~ msgstr "Åpne po-fil"
+
+#~ msgid "Gtranslator Po File"
+#~ msgstr "Gtranslator po-fil"
+
+#~ msgid "Gtranslator Po File View"
+#~ msgstr "Gtranslator po-fil visning"
+
 #, fuzzy
-msgid "Gtranslator Po File Viewer"
-msgstr "gtranslator -- rediger header"
+#~ msgid "Gtranslator Po File Viewer"
+#~ msgstr "gtranslator -- rediger header"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:4
-msgid "Gtranslator Po file viewer component's factory"
-msgstr ""
-
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:5
-msgid "Nautilus Gtranslator View factory"
-msgstr ""
-
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:6
 #, fuzzy
-msgid "Nautilus Gtranslator view"
-msgstr "Siste oversetter: %s"
+#~ msgid "Nautilus Gtranslator view"
+#~ msgstr "Siste oversetter: %s"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:7
-msgid "View as Po File"
-msgstr "Vis som po-fil"
+#~ msgid "View as Po File"
+#~ msgstr "Vis som po-fil"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:2
-msgid "Open _po file"
-msgstr "Åpne _po-fil"
+#~ msgid "Open _po file"
+#~ msgstr "Åpne _po-fil"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:3
-msgid "Open po file"
-msgstr "Åpne po-fil"
+#~ msgid "Open po file"
+#~ msgstr "Åpne po-fil"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:4
-msgid "_File"
-msgstr "_Fil"
+#~ msgid "_File"
+#~ msgstr "_Fil"
 
 #~ msgid "Cancel"
 #~ msgstr "Avbryt"
 
 #~ msgid "Close"
 #~ msgstr "Lukk"
-
-#~ msgid "_Views"
-#~ msgstr "_Visninger"
 
 #~ msgid "Successfully parsed the file \"%s\""
 #~ msgstr "Fullført innlesing av fil \"%s\""
