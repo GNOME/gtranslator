@@ -1,3 +1,8 @@
+2004-04-08  Ross Golder  <ross@golder.org>
+
+	* bookmark.c, color-schemes.c, history.c: Replaced GTR_FREE with
+	  plain g_free to prevent compiler warning.
+
 2004-01-28  Ross Golder  <ross@golder.org>
 
 	* prefs.c: Replaced gnome_app_error with gtk_message_dialog.

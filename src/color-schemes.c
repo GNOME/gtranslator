@@ -516,7 +516,7 @@ void gtranslator_color_scheme_show_list()
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
- 		GTR_FREE((gpointer) menu->label);
+ 		g_free((gpointer) menu->label);
 		GTR_FREE(menu);
 	}
 }
