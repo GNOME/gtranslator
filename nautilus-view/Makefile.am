@@ -38,6 +38,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(sourcedir)/prefs.o \
 	$(sourcedir)/prefs_init.o \
 	$(sourcedir)/preferences.o \
+	$(sourcedir)/query.o \
 	$(sourcedir)/sidebar.o \
 	$(sourcedir)/stylistics.o \
 	$(sourcedir)/syntax.o \
