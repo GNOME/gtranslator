@@ -58,6 +58,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/update.o \
 	$(srcbuild)/utf8.o \
 	$(srcbuild)/utils.o \
+	$(srcbuild)/utils_gui.o \
 	$(srcbuild)/vfs-handle.o \
 	$(srcbuild)/views.o
 

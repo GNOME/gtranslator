@@ -140,6 +140,7 @@ static void nautilus_gtranslator_view_url_clicked(GtkHTML *html, const gchar *ur
 	g_return_if_fail(html!=NULL);
 	g_return_if_fail(url!=NULL);
 
+
 	if(nautilus_istr_has_prefix(url, "run:"))
 	{
 		gchar *cmd;
