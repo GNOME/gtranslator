@@ -54,12 +54,10 @@ if gnome-config --libs vfs 2>&1 >/dev/null ; then
 	if test "$VFS_VERSION" -ge 401 ; then
 		AC_MSG_RESULT(found)			
 	else
-		AC_MSG_ERROR([
-"+++ Please install GnomeVFS >= 0.4.1 and try again."])
+		AC_MSG_ERROR(["Please install GnomeVFS >= 0.4.1 and try again."])
 	fi
 else
-	AC_MSG_ERROR([
-"+++ Please install GnomeVFS before trying to compile gtranslator."])
+	AC_MSG_ERROR(["Please install GnomeVFS before trying to compile gtranslator."])
 fi
 
 dnl -------------------------------------------------------------------
@@ -88,12 +86,10 @@ if gnome-config --libs gal 2>&1 >/dev/null ; then
 		dnl Tell the user that we've found gal, but it's too
 		dnl  old for us.
 		dnl ---------------------------------------------------
-		AC_MSG_ERROR([
-"+++ Please install gal >= 0.5 and try configuring again."])
+		AC_MSG_ERROR(["Please install gal >= 0.5 and try configuring again."])
 	fi
 else
-	AC_MSG_ERROR([
-"+++ Please install gal before configuring again."])
+	AC_MSG_ERROR(["Please install gal before configuring again."])
 fi
 
 GAL_CFLAGS=`gnome-config --cflags gal`
@@ -176,7 +172,7 @@ NAUTILUS_LIBS=
 
 AC_MSG_CHECKING([whether nautilus-gtranslator-view should be build])
 AC_ARG_ENABLE(nautilus-view,
-[  --enable-nautilus-view        Enable nautilus-gtranslator-view], build_nv=yes,)
+[  --enable-nautilus-view        Enable nautilus-gtranslator-view], build_nv=yes, build_nv=no)
 
 dnl -------------------------------------------------------------------
 dnl Check if the --enable switch had been given.
@@ -188,20 +184,16 @@ else
 	nautilus_prefix=`which nautilus|sed -e s%/bin/nautilus%%g`
 
 	if test "z${nautilus_prefix}" = "z"; then
-		AC_MSG_RESULT([
-"+++ No Nautilus prefix could be determined -- not building nautilus-gtranslator-view"])
+		AC_MSG_RESULT(["No Nautilus prefix could be determined -- not building nautilus-gtranslator-view"])
 		build_nv=no
 	else
 		build_nv=no
 		mycheck_function="nautilus_view_standard_main_multi"
-		AC_MSG_RESULT([
-"+++ ${nautilus_prefix} as Nautilus prefix determined: checking for Nautilus libraries"])
-		LIBS="`gnome-config --libs gnome gnomeui bonobo bonobox gal vfs` \
-		-L${nautilus_prefix}/lib -lnautilus"
+		AC_MSG_RESULT(["${nautilus_prefix} as Nautilus prefix determined: checking for Nautilus libraries"])
+		LIBS="`gnome-config --libs gnome gnomeui bonobo bonobox gal vfs` -L${nautilus_prefix}/lib -lnautilus"
 		AC_CHECK_LIB(nautilus, ${mycheck_function},
 			build_nv=yes,
-			AC_MSG_WARN([
-"+++ libnautilus does not contain ${mycheck_function}: Not building Nautilus view"])
+			AC_MSG_WARN(["libnautilus does not contain ${mycheck_function}: Not building Nautilus view"])
 	fi
 
 	dnl -------------------------------------------------------------------
@@ -220,9 +212,10 @@ else
 			-lnautilus `gconf-config --libs gconf-gtk`"
 		else
 			AC_MSG_WARN([
-"+++ Could not find the necessary headers of nautilus: please install also the headers"
-"+++ dev/devel packages of nautilus and reconfigure gtranslator if you also want to"
-"+++ see the nautilus-gtranslator-view in action."])
+"Could not find the necessary headers of nautilus: please install also the headers"
+"dev/devel packages of nautilus and reconfigure gtranslator if you also want to"
+"see the nautilus-gtranslator-view in action."
+])
 			build_nv=no
 		fi
 	fi
