@@ -154,6 +154,10 @@ GtrLanguage languages[] = {
 	 "hu@gnome.hu", "8bit"
 	},
 	{
+	 N_("Icelandic"), "is", "iso-8859-1",
+	 "gnome@techattack.nu", "8bit"
+	},
+	{
 	 N_("Indonesian"), "id", "iso-8859-1",
 	 "", "8bit"
 	},
