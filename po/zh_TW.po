@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.41\n"
-"POT-Creation-Date: 2003-05-25 06:52+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-09 13:18+0200\n"
 "PO-Revision-Date: 2002-04-09 14:28+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: Chinese (Traditional) <zh-l10n@linux.org.tw>\n"
@@ -21,7 +22,7 @@ msgstr "gtranslator 網址 (_W)"
 
 #: src/about.c:78
 #, fuzzy
-msgid "(C) 1999-2003 The Free Software Foundation"
+msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr "(C) 1999-2002 自由軟體基金會"
 
 #: src/about.c:79
@@ -141,7 +142,7 @@ msgstr "區分大小寫"
 msgid "English"
 msgstr "英文"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:552 src/messages-table.c:212
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:513 src/messages-table.c:212
 msgid "Translated"
 msgstr "繙譯訊息"
 
@@ -307,11 +308,11 @@ msgstr ""
 "是否讓 gtranslator 從個人的自學區中\n"
 "找出相關訊息並且自動完成可繙譯的待譯訊息？"
 
-#: src/find.c:214
+#: src/find.c:211
 msgid "Please enter a search string"
 msgstr "請輸入需要尋找的字串"
 
-#: src/find.c:230
+#: src/find.c:227
 #, c-format
 msgid ""
 "Could not find\n"
@@ -320,38 +321,38 @@ msgstr ""
 "找不到\n"
 "\"%s\""
 
-#: src/gui.c:229
+#: src/gui.c:194
 msgid "Edit comment"
 msgstr "編輯備註"
 
-#: src/gui.c:538
+#: src/gui.c:499
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ 剩下 %i 個模糊繙譯 ]"
 
-#: src/gui.c:538 src/gui.c:542 src/menus.c:327 src/messages-table.c:206
+#: src/gui.c:499 src/gui.c:503 src/menus.c:327 src/messages-table.c:206
 msgid "Fuzzy"
 msgstr "模糊繙譯"
 
-#: src/gui.c:542
+#: src/gui.c:503
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ 沒有模糊繙譯 ]"
 
-#: src/gui.c:550
+#: src/gui.c:511
 msgid "Sticky (Message & translation are the same)"
 msgstr "紀錄 (原文與繙譯相同)"
 
-#: src/gui.c:561
+#: src/gui.c:522
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ 剩下 %i 個待譯訊息 ]"
 
-#: src/gui.c:561 src/gui.c:563 src/messages-table.c:200
+#: src/gui.c:522 src/gui.c:524 src/messages-table.c:200
 msgid "Untranslated"
 msgstr "待譯訊息"
 
-#: src/gui.c:563
+#: src/gui.c:524
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ 沒有待譯訊息 ]"
@@ -359,7 +360,7 @@ msgstr "%s [ 沒有待譯訊息 ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:576
+#: src/gui.c:537
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "訊息 %d / %d / 狀態： %s"
@@ -1146,16 +1147,7 @@ msgstr "無法開啟 %s'd gettext 檔案 '%s'!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "無法開啟 zip'ed 壓縮的po 檔案 '%s'!"
 
-#: src/parse.c:115
-#, c-format
-msgid ""
-"New escaped char found: \\%c\n"
-"Add this to parse.c, line %i."
-msgstr ""
-"找到新的 escaped 字元： \\%c\n"
-"新增至 parse.c，第 %i 行。"
-
-#: src/parse.c:387
+#: src/parse.c:383
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1166,7 +1158,7 @@ msgstr ""
 "在第 %d 行。\n"
 "請檢查後再試。"
 
-#: src/parse.c:433
+#: src/parse.c:429
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1175,17 +1167,17 @@ msgstr ""
 "檔案沒有內容：\n"
 "%s"
 
-#: src/parse.c:457
+#: src/parse.c:453
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "檔案 '%s' 不存在!"
 
-#: src/parse.c:580
+#: src/parse.c:576
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:759
+#: src/parse.c:720
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1196,12 +1188,12 @@ msgstr ""
 "這動格式的檔案應該是經由編譯過程所產生的。\n"
 "您的檔案應該儲存成 '%s.po'。"
 
-#: src/parse.c:821
+#: src/parse.c:782
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "無法對檔案 '%s' 進行寫入動作!"
 
-#: src/parse.c:867
+#: src/parse.c:828
 #, c-format
 msgid ""
 "File %s\n"
@@ -1210,11 +1202,11 @@ msgstr ""
 "檔案 %s\n"
 "有 %d 個模糊繙譯"
 
-#: src/parse.c:972 data/desktop/gtranslator.desktop.in.h:2
+#: src/parse.c:933 data/desktop/gtranslator.desktop.in.h:2
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/parse.c:997
+#: src/parse.c:958
 #, c-format
 msgid ""
 "File %s\n"
@@ -1223,11 +1215,11 @@ msgstr ""
 "檔案 %s\n"
 "已改變。是否須要還原已儲存的檔案？"
 
-#: src/parse.c:1148
+#: src/parse.c:1109
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "抱歉，在本機內找不到 msgfmt 這個程式! "
 
-#: src/parse.c:1183
+#: src/parse.c:1144
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1313,143 +1305,139 @@ msgid "Use special character to indicate free space"
 msgstr "使用特別字元代替空白字元"
 
 #: src/prefs.c:203
-msgid "Enable the popup menu"
-msgstr "啟動彈出式選單"
-
-#: src/prefs.c:206
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "啟動 gtranslator 的內置更新 po 檔功能"
 
-#: src/prefs.c:209
+#: src/prefs.c:206
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "啟動移除 po 檔內全部繙譯訊息功能"
 
-#: src/prefs.c:212
+#: src/prefs.c:209
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "刪除已編譯的檔案 (範例： \"project.gmo\")"
 
-#: src/prefs.c:215
+#: src/prefs.c:212
 msgid "Save geometry on exit & restore it on startup"
 msgstr "離開前儲存視窗大小及位置然後在下一次啟動時還原"
 
-#: src/prefs.c:218
+#: src/prefs.c:215
 msgid "Show instant comment view in the main pane"
 msgstr "在主窗格中顯示即時備註"
 
-#: src/prefs.c:225
+#: src/prefs.c:222
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "在\"最近開檔紀錄\"選單內，最多可紀錄的檔案數目："
 
-#: src/prefs.c:229
+#: src/prefs.c:226
 msgid "Check recent files before showing in recent files' list"
 msgstr "建立最近開檔紀錄清單前先檢查檔案是否存在"
 
-#: src/prefs.c:232
+#: src/prefs.c:229
 msgid "Instant spell checking"
 msgstr "即時併字檢查"
 
-#: src/prefs.c:235
+#: src/prefs.c:232
 msgid "Use special dictionary:"
 msgstr "使用特別字典："
 
-#: src/prefs.c:257
+#: src/prefs.c:254
 msgid "Syntax color scheme to use:"
 msgstr "色彩方案："
 
-#: src/prefs.c:262
+#: src/prefs.c:259
 msgid "Apply own fonts:"
 msgstr "使用自訂字型："
 
-#: src/prefs.c:266
+#: src/prefs.c:263
 msgid "Original text font:"
 msgstr "原文字型："
 
-#: src/prefs.c:266
+#: src/prefs.c:263
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- 字型選擇/msgid 字型"
 
-#: src/prefs.c:270
+#: src/prefs.c:267
 msgid "Translation font:"
 msgstr "繙譯字型："
 
-#: src/prefs.c:270
+#: src/prefs.c:267
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- 字型選擇/msgstr 字型"
 
-#: src/prefs.c:274
+#: src/prefs.c:271
 msgid "Apply own colors:"
 msgstr "使用自訂色彩："
 
-#: src/prefs.c:278
+#: src/prefs.c:275
 msgid "Foreground color:"
 msgstr "前景色彩："
 
-#: src/prefs.c:278
+#: src/prefs.c:275
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- 前景色彩"
 
-#: src/prefs.c:282
+#: src/prefs.c:279
 msgid "Background color:"
 msgstr "背景色彩："
 
-#: src/prefs.c:282
+#: src/prefs.c:279
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- 背景色彩"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:288
+#: src/prefs.c:285
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "每隔一特定時間後自動儲存 po 檔案 (分)："
 
-#: src/prefs.c:303
+#: src/prefs.c:300
 msgid "Append a suffix to automatically saved files:"
 msgstr "增加前置字於檔案名稱："
 
-#: src/prefs.c:323
+#: src/prefs.c:320
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "顯示訊息表格 (要重新啟動本程式才會生效)"
 
-#: src/prefs.c:327
+#: src/prefs.c:324
 msgid "Collapse translated entries by default"
 msgstr "預設將全部已繙譯訊息摺疊"
 
-#: src/prefs.c:331
+#: src/prefs.c:328
 msgid "Use own colors for the messages table groups"
 msgstr "使用自訂色彩於訊息表格群組"
 
-#: src/prefs.c:335
+#: src/prefs.c:332
 msgid "Untranslated entries color:"
 msgstr "待譯訊息色彩："
 
-#: src/prefs.c:335
+#: src/prefs.c:332
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- 待譯訊息色彩"
 
-#: src/prefs.c:339
+#: src/prefs.c:336
 msgid "Fuzzy entries color:"
 msgstr "模糊繙譯色彩："
 
-#: src/prefs.c:339
+#: src/prefs.c:336
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- 模糊繙譯色彩"
 
-#: src/prefs.c:343
+#: src/prefs.c:340
 msgid "Translated entries color:"
 msgstr "繙譯訊息色彩："
 
-#: src/prefs.c:343
+#: src/prefs.c:340
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- 繙譯訊息色彩"
 
-#: src/prefs.c:351
+#: src/prefs.c:348
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr "當啟動自動繙譯待譯訊息時，要同時查詢個人的自學區"
 
-#: src/prefs.c:355
+#: src/prefs.c:352
 msgid "Automatically learn a newly translated message"
 msgstr "自動學習新增的繙譯訊息"
 
@@ -1458,27 +1446,27 @@ msgstr "自動學習新增的繙譯訊息"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:363
+#: src/prefs.c:360
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr "在個人自學區內尋找合適繙譯時，\"模糊繙譯\" 亦視為有效"
 
-#: src/prefs.c:366
+#: src/prefs.c:363
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "當在模糊繙譯查詢時，最低可接受的精準度百份比"
 
-#: src/prefs.c:408
+#: src/prefs.c:405
 msgid "Please enter your name!"
 msgstr "請輸入您的姓名！"
 
-#: src/prefs.c:422
+#: src/prefs.c:419
 msgid "Please enter your EMail address!"
 msgstr "請輸入您的電郵地址！"
 
-#: src/prefs.c:435
+#: src/prefs.c:432
 msgid "Please enter a valid EMail address!"
 msgstr "請輸入一個有效的電郵地址！"
 
-#: src/prefs.c:658
+#: src/prefs.c:652
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1692,6 +1680,16 @@ msgstr "已壓縮的 gettext po 檔案"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Gettext po 檔案"
+
+#~ msgid ""
+#~ "New escaped char found: \\%c\n"
+#~ "Add this to parse.c, line %i."
+#~ msgstr ""
+#~ "找到新的 escaped 字元： \\%c\n"
+#~ "新增至 parse.c，第 %i 行。"
+
+#~ msgid "Enable the popup menu"
+#~ msgstr "啟動彈出式選單"
 
 #~ msgid "_Settings/_Colorschemes/"
 #~ msgstr "設定(_S)/色彩方案(_C)/"
