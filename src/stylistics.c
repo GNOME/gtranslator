@@ -88,7 +88,7 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 {
 	guint8 red, green, blue;
 	gchar spec[8];
-	gchar *path;
+	gchar *path=NULL;
 	
 	if(Type==COLOR_FG)
 	{
@@ -118,7 +118,7 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 {
 	GdkColor color;
 	gchar *spec;
-	gchar *path;
+	gchar *path=NULL;
 	
 	if(Type==COLOR_FG)
 	{

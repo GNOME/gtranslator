@@ -37,10 +37,9 @@ gchar *setup_language(gchar *lang);
  */
 GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 {
-	GtrQueryResult *result;
-	GString *str=g_string_new("");
+	gchar *str;
 
-	g_return_val_if_fail(query->language!=NULL, NULL);
+	g_return_val_if_fail(query!=NULL, NULL);
 	g_return_val_if_fail(query->domain!=NULL, NULL);
 	g_return_val_if_fail(query->message!=NULL, NULL);
 
@@ -48,11 +47,13 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 	
 	setlocale(LC_ALL, query->language);
 
-	str=g_string_append(str, dgettext(query->domain, query->message));
+	str=dgettext(query->domain, query->message);
 
-	if(str->len > 0)
+	if(str!=query->message)
 	{
-		result->translation=str->str;
+		GtrQueryResult *result=g_new(GtrQueryResult, 1);
+
+		result->translation=str;
 		result->domain=query->domain;
 
 		return result;
@@ -61,8 +62,6 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 	{
 		return NULL;
 	}
-
-	g_string_free(str, 1);
 }
 
 /*
@@ -135,8 +134,11 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 		return NULL;
 	}
 
+	query=g_new(GtrQuery, 1);
+	
 	while(domainlist)
 	{
+		/* FIXME: these are never freed */
 		query->domain=g_strdup(domainlist->data);
 		query->message=g_strdup(message);
 		query->language=g_strdup(language);
@@ -156,6 +158,7 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 		domainlist=domainlist->next;
 	}
 
+	g_free(query);
 	return matches;
 }
 

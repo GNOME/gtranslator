@@ -459,13 +459,13 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
 	GtrColorSchemeInformations *infos)
 {
-	GtrColorSchemeInformations *copy;
+	GtrColorSchemeInformations *copy=g_new(GtrColorSchemeInformations, 1);
 
-	copy->name=infos->name;
-	copy->version=infos->version;
-	copy->author=infos->author;
-	copy->author_email=infos->author_email;
-	copy->filename=infos->filename;
+	copy->name=g_strdup(infos->name);
+	copy->version=g_strdup(infos->version);
+	copy->author=g_strdup(infos->author);
+	copy->author_email=g_strdup(infos->author_email);
+	copy->filename=g_strdup(infos->filename);
 
 	return copy;
 }
@@ -475,21 +475,21 @@ GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
  */
 GtrColorScheme *gtranslator_color_scheme_copy(GtrColorScheme *scheme)
 {
-	GtrColorScheme *copy;
+	GtrColorScheme *copy=g_new(GtrColorScheme, 1);
 
 	copy->info=gtranslator_color_scheme_infos_copy(scheme->info);
 
-	copy->fg=scheme->fg;
-	copy->bg=scheme->bg;
-	copy->special_char=scheme->special_char;
-	copy->hotkey=scheme->hotkey;
-	copy->c_format=scheme->c_format;
-	copy->number=scheme->number;
-	copy->punctuation=scheme->punctuation;
-	copy->special=scheme->special;
-	copy->address=scheme->address;
-	copy->keyword=scheme->keyword;
-	copy->spell_error=scheme->spell_error;
+	copy->fg=g_strdup(scheme->fg);
+	copy->bg=g_strdup(scheme->bg);
+	copy->special_char=g_strdup(scheme->special_char);
+	copy->hotkey=g_strdup(scheme->hotkey);
+	copy->c_format=g_strdup(scheme->c_format);
+	copy->number=g_strdup(scheme->number);
+	copy->punctuation=g_strdup(scheme->punctuation);
+	copy->special=g_strdup(scheme->special);
+	copy->address=g_strdup(scheme->address);
+	copy->keyword=g_strdup(scheme->keyword);
+	copy->spell_error=g_strdup(scheme->spell_error);
 
 	return copy;
 }
