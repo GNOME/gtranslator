@@ -22,6 +22,17 @@
 
 #include <gtk/gtkwidget.h>
 
+enum
+{
+	COL_NUM,
+	COL_ORIG,
+	COL_TRANS,
+	COL_COMMENT,
+	COL_STATUS,
+};
+
+
+
 /*
  * Returns the ready widget with all the specs.
  */

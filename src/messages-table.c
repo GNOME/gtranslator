@@ -74,7 +74,7 @@ static gchar *return_string_for_value_function(ETableModel *model, gint column,
  */
 static gint column_count_function(ETableModel *model, void *useless)
 {
-	return 3;
+	return 5;
 }
 
 static gint row_count_function(ETableModel *model, void *useless)
@@ -85,7 +85,7 @@ static gint row_count_function(ETableModel *model, void *useless)
 	}
 	else
 	{
-		return 1;
+		return 100;
 	}
 }
 
@@ -98,12 +98,16 @@ static gboolean is_cell_editable_function(ETableModel *model, gint column,
 static gboolean is_empty_function(ETableModel *model, gint column, 
 	const void *value, void *useless)
 {
-	if(!value || value=='\0')
-	{
-		return TRUE;
-	}
-	else
-	{
+	switch (column) {
+	case COL_NUM:
+		return value == NULL;
+	case COL_ORIG:
+	case COL_TRANS:
+	case COL_COMMENT:
+	case COL_STATUS:
+		return !(value && *(char *)value);
+	default:
+		g_assert_not_reached ();
 		return FALSE;
 	}
 }
@@ -111,9 +115,18 @@ static gboolean is_empty_function(ETableModel *model, gint column,
 static void free_value_function(ETableModel *model, gint column, void *value, 
 	void *useless)
 {
-	if(value)
-	{
-		g_free(value);
+	switch (column) {
+	case COL_ORIG:
+	case COL_TRANS:
+	case COL_COMMENT:
+	case COL_STATUS:
+		if (value)
+			g_free (value);
+		break;
+	case COL_NUM:
+		break;
+	default:
+		g_assert_not_reached ();
 	}
 }
 
@@ -125,12 +138,18 @@ static void set_value_at_function(ETableModel *model, gint column, gint row,
 static void *duplicate_value_function(ETableModel *model, gint column, 
 	const void *value, void *useless)
 {
-	if(value)
-	{
-		return g_strdup(value);
-	}
-	else
-	{
+	switch (column) {
+	case COL_ORIG:
+	case COL_TRANS:
+	case COL_COMMENT:
+	case COL_STATUS:
+		return g_strdup (value);
+		break;
+	case COL_NUM:
+		return (void *)value;
+		break;
+	default:
+		g_assert_not_reached ();
 		return NULL;
 	}
 }
@@ -138,13 +157,30 @@ static void *duplicate_value_function(ETableModel *model, gint column,
 static void *initialize_value_function(ETableModel *model, gint column, 
 	void *useless)
 {
-	return g_strdup("");
+	switch (column) {
+	case COL_ORIG:
+	case COL_TRANS:
+	case COL_COMMENT:
+	case COL_STATUS:
+		return g_strdup ("");
+		break;
+	case COL_NUM:
+		return NULL;
+		break;
+	default:
+		g_assert_not_reached ();
+		return NULL;
+	}
 }
 
 static void *value_at_function(ETableModel *model, gint column, gint row, 
 	void *useless)
 {
-	if(file_opened)
+	GtrMsg *message;
+	
+	/*message = g_list_nth_data (po->messages, row);*/
+
+	/*if(file_opened)
 	{
 		if(row > 0 && row <= (po->length - 1))
 		{
@@ -159,6 +195,26 @@ static void *value_at_function(ETableModel *model, gint column, gint row,
 	else
 	{
 		return g_strdup_printf("%i[%i]", column, row);
+	}*/
+	switch (column) {
+	case COL_ORIG:
+		return "original";
+		break;
+	case COL_TRANS:
+		return "translation";
+		break;
+	case COL_COMMENT:
+		return "comment";
+		break;
+	case COL_STATUS:
+		return "status";
+		break;
+	case COL_NUM:
+		return GINT_TO_POINTER (1);
+		break;
+	default:
+		g_assert_not_reached ();
+		return NULL;
 	}
 }
 
@@ -172,6 +228,20 @@ static gchar *return_string_for_value_function(ETableModel *model, gint column,
 	else
 	{
 		return g_strdup("");
+	}
+	switch (column) {
+	case COL_ORIG:
+	case COL_TRANS:
+	case COL_COMMENT:
+	case COL_STATUS:
+		return g_strdup (value);
+		break;
+	case COL_NUM:
+		return g_strdup_printf ("%d",(int) value);
+		break;
+	default:
+		g_assert_not_reached ();
+		return NULL;
 	}
 }
 
@@ -200,6 +270,11 @@ static ETableExtras *table_extras_new()
 	 * Fill the table parts independently here -- just for easification
 	 *  of the process, we do use this loop instead of 4, 5 different calls.
 	 */
+	 
+	cell = e_cell_number_new (NULL, GTK_JUSTIFY_LEFT);
+	e_table_extras_add_cell(extras, list_parts[count], cell); 
+	count++;
+	
 	while(list_parts[count]!=NULL)
 	{
 		cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
@@ -223,7 +298,8 @@ GtkWidget *gtranslator_messages_table_new()
 
 	ETableExtras 	*table_extras;
 	ETableModel	*table_model;
-
+	
+	
 	table_extras=table_extras_new();
 	
 	table_model=e_table_simple_new(
