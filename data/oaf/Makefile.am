@@ -1,7 +1,11 @@
 ## ./data/oaf/Makefile.am of gtranslator
 
-OAF_dir = $(datadir)/oaf
+oafdir = $(datadir)/oaf
 
-OAF__DATA = gtranslatord.oafinfo
+oaf_in_files = Gtranslator_Gtranslatord.oaf.in
 
-EXTRA_DIST = $(OAF__DATA)
+oaf_DATA = $(oaf_in_files:.oaf.in=.oaf)
+	 
+@XML_I18N_MERGE_OAF_RULE@
+
+EXTRA_DIST = $(oaf_DATA) $(oaf_in_files)
