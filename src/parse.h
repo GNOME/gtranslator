@@ -24,21 +24,21 @@
 /*
 *	A structure for the po-files :
 */
-struct po_file {
+typedef struct {
 	const char *filename;
 	unsigned int maximal_position;
 	gboolean db_enabled;	
-};
+} po_file ;
 
 /*
 *	The structure for the transations :	
 */
-struct message  {
-	struct po_file *po-file;
+typedef struct {
+	static struct po_file *po;
 	char *msgid;
 	char *msgstr;
 	unsigned int position;
-};
+} message ;
 
 /*
 *	This are the global count variables  
@@ -72,7 +72,8 @@ gboolean at_the_last;
 void check_file(FILE *);
 
 /*
-*	The proto for the real parse routine ..
+*	The previous parseing routine
+*	; will be removed soon 
 */
 void parse(void);
 

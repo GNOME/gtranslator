@@ -39,6 +39,11 @@ void parse()
 	check_file(fs);
 	count=0;
 	struct message *msg;
+	/*
+	* Just for now , the db-functionability is
+	* disabled ..
+	*/
+	msg->po->db_enabled=FALSE;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
 		count++;
