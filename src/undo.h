@@ -27,40 +27,20 @@
  *  here as there isn't any general handling integrated/possible yet.
  */
 
-/*
- * Register and get the undo stuff for view changes (the previous/current view can
- *  be simply get via the gtranslator_views_* interface).
- */
-void gtranslator_undo_register_view_change(void);
+void gtranslator_undo_register_deletion(const gchar *text, const gint position);
+void gtranslator_undo_register_insertion(const gchar *text, const gint position);
 
 /*
- * Replaces should point to revert, a single replace in the current message
- *  should be undoable at place.
+ * Return the status of the register variables used internally for this
+ *  piece of enormous insanity.
  */
-void gtranslator_undo_register_replace(const gchar *original, const gchar *replace_string);
-void gtranslator_undo_register_replaces(void);
+gboolean gtranslator_undo_get_if_registered_undo(void);
+gboolean gtranslator_undo_get_if_registered_redo(void);
 
 /*
- * Register type changes (untranslated <-> fuzzy <-> translated) -- must get "hidden"
- *  when the message is changed.
+ * These functions are quite clearly named I guess .-)
  */
-void gtranslator_undo_register_type_change(GtrMsgStatus previous_status);
-
-/*
- * Register text deletion/insertion into the translation here.
- */
-void gtranslator_undo_register_insert_text(const gint start_pos, const gchar *new_text);
-void gtranslator_undo_register_delete_text(const gint start_pos, const gint length);
-
-/*
- * Get if there are any undos remaining.
- */
-gboolean gtranslator_undo_is_any_item_remaining(void);
-
-/*
- * Handle the undos/redos opaquely here.
- */
-void gtranslator_undo_run(void);
-void gtranslator_redo_run(void);
+void gtranslator_undo_clean_registers(void);
+void gtranslator_undo_run_undo(void);
 
 #endif

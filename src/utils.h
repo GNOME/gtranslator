@@ -32,7 +32,7 @@
 /*
  * Really nasty wrapper macros which should expand to really common constructs.
  */
-#define GTR_FREE(x) if((x)) { g_free((x)); }
+#define GTR_FREE(x) if((x)) { g_free((x)); (x)=NULL; }
 #define GTR_ITER(x) if((x)->next) { (x)=(x)->next; } else { break; }
 #define GTR_STRDUP(to, from) if(from) { to=g_strdup(from); } else { to=NULL; }
 

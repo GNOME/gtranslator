@@ -95,9 +95,10 @@ static GtkWidget *views_sidebar;
 gboolean nothing_changes;
 
 /*
- * Pops up a menu if needed/possible.
+ * Popup menu creation/deletion functions.
  */
-static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d);
+static gint create_popup_menu(GtkText *widget, GdkEventButton *event, 
+	gpointer d);
 
 /*
  * Internal text callbacks/handlers.
@@ -173,10 +174,8 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 			popup_menu=gnome_popup_menu_new(the_popup_menu);
 			gnome_popup_menu_do_popup_modal(popup_menu,
 				NULL, NULL, NULL, event);
-			/*
-			 * Destroy the menu after creation.
-			 */
-			gtk_widget_destroy(popup_menu);
+
+			gtk_widget_destroy(GTK_WIDGET(popup_menu));
 			return TRUE;
 		}
 	}
@@ -379,7 +378,7 @@ static void delete_text_handler(GtkEditable *editable, gint start_position,
 	if(start_position!=0 && end_position!=-1)
 	{
 		/*
-		 * FIXME: Handle this deleted text.
+		 * Eh, FIXME!
 		 */
 	}
 }
