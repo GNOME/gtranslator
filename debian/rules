@@ -52,6 +52,15 @@ binary-arch: build install
 
 	install -m 644 -o root -g root README			\
 		debian/tmp/usr/share/doc/gtranslator/README
+	install -m 644 -o root -g root 			\
+		debian/tmp/usr/share/doc/gtranslator/NEWS
+	install -m 644 -o root -g root 			\
+		debian/tmp/usr/share/doc/gtranslator/AUTHORS
+	install -m 644 -o root -g root 			\
+		debian/tmp/usr/share/doc/gtranslator/THANKS
+	install -m 644 -o root -g root 			\
+		debian/tmp/usr/share/doc/gtranslator/TODO
+
 	install -m 644 -o root -g root ChangeLog		\
 		debian/tmp/usr/share/doc/gtranslator/changelog
 
@@ -68,18 +77,15 @@ binary-arch: build install
 	install -m 755 -o root -g root debian/postrm		\
 		debian/tmp/DEBIAN/postrm
 
-	# And gzip it
 	gzip -9f debian/tmp/usr/share/doc/gtranslator/README
+	gzip -9f debian/tmp/usr/share/doc/gtranslator/NEWS
 	gzip -9f debian/tmp/usr/share/doc/gtranslator/changelog
 	gzip -9f debian/tmp/usr/share/doc/gtranslator/changelog.Debian
 
-	# Build packages (dpkg-deb, shlibdeps)	
 	dpkg-shlibdeps -Tdebian/substvars			\
 		debian/tmp/usr/bin/gtranslator
 	dpkg-gencontrol -pgtranslator -isp -Pdebian/tmp -Tdebian/substvars
 	dpkg --build debian/tmp ..
-
-# Build packages (dpkg-deb)
 
 binary:	binary-arch
 
