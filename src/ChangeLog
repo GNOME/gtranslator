@@ -1,3 +1,28 @@
+2000-10-07  Fatih Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Compiling and added the SCRIPTSDIR define to the
+		 compile defines.
+
+	* parse.c: Clean up the appbar when closing a file, wrote the
+		update function which uses the "changed" update.sh script
+		 from here to work; close the file before updating it and
+		  open it then again.
+
+	* gui.c: Freeze and thaw the translation box during updating
+		the contents and delete all the characters in the
+		 translation box forwardly, added a FIXME as it goes
+		  to the index 0 though I want it to go somewhere else.
+		Store the date via gtranslator_config_set_last_run_date()
+		 on exit.
+
+	* prefs.c: Changed the update policy of the GtkSpinButton to
+		GTK_UPDATE_ALWAYS, added the toggle button for the new
+		 togglebutton and added another togglebutton to switch
+		  off these nice dialogs within the update function.
+	
+	* prefs.h: Added the delete_obsolete_rfentries value and the 
+		uzi_dialogs values to the wants structure.
+
 2000-10-06  Fatih Demir	<kabalak@gmx.net>
 
 	* languages.h: Corrected the German mailing list address.
@@ -47,7 +72,7 @@
 		put some dope stuff around it.
 
 	* parse.c/h: Added Recent file menus on top of the libgnome's
-		gnome_history interface. It works! Still needs 
+		gnome_history interface. It works! Still needs
 		 preferences merging...
 
 	* parse.c/h: Added the update function's skeleton -- nothing
@@ -80,7 +105,7 @@
 		  replace the dot chars again with free spaces. This does
 		   solve all FIXME's. Hurray.
 
-	* \*.c: Added 3 FIXME's which are the three places where 
+	* \*.c: Added 3 FIXME's which are the three places where
 		gtranslator crashes regularly; these are FIXME's :)
 
 2000-10-03  Fatih Demir	<kabalak@gmx.net>
@@ -162,7 +187,7 @@
 		 preferences routines of libgtranslator.
 
 	* main.c: Include the GConf header if necessary and
-		take the right argument style to the 
+		take the right argument style to the
 		 gconf_init function :)
 
 2000-09-23  Fatih Demir	<kabalak@gmx.net>
@@ -207,7 +232,7 @@
 		  now use a gnome_app_error to display the error, doesn't
 		   parse anything and the app is still there ( hehe,
 		    no crash ).
-		 
+	
 		Also disabled the Save button if the file has been saved
 		 and haven't been changed since then.
 

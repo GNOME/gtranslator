@@ -57,6 +57,15 @@ struct {
 	* If the recent files should be checked.
 	**/
 	guint check_recent_file		: 1;
+	/**
+	* If the obsolete entries from the recent files list
+	*  should be deleted.
+	**/
+	guint delete_obsolete_rfentries	: 1;
+	/**
+	* If to show the unneeded dialogs within the update function.
+	**/
+	guint uzi_dialogs		: 1;
 } wants;
 
 /* Preferences-box creation and callbacks */

@@ -41,9 +41,10 @@ static GtkWidget
 **/
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
-	*dont_save_unchanged_files, *save_geometry_tb,
+	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
-	*recent_files_number, *check_recent_files;
+	*recent_files_number, *check_recent_files,
+	*delete_obsolete_rfentries;
 
 /* The preferences dialog */
 static GtkWidget *prefs = NULL;
@@ -202,7 +203,7 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	first_page = append_page_table(prefs, 2, 2, _("Personal information"));
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
-	fourth_page = append_page_table(prefs, 3, 1, _("Miscellaneous"));
+	fourth_page = append_page_table(prefs, 4, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 2, 2, _("Recent files menu"));
 	/**
 	* Create all the personal entries
@@ -274,32 +275,38 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	save_geometry_tb=attach_toggle_with_label(fourth_page, 3,
 		_("Save geometry on exit & restore it on startup"),
 		wants.save_geometry, prefs_box_changed);
+	no_uzis=attach_toggle_with_label(fourth_page, 4,
+		_("Don't show the update information dialogs"),
+		wants.uzi_dialogs, prefs_box_changed);
 	/**
 	* The fifth page with the Recent files options.
 	**/
 	recent_files_adjustment=gtk_adjustment_new(wants.recent_files,
-		1, 10, 1, 10, 10);
+		1, 12, 1, 10, 10);
 	recent_files_number=gtk_spin_button_new(GTK_ADJUSTMENT(
 		recent_files_adjustment), 1, 0);
 	gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(recent_files_number),
-		GTK_UPDATE_IF_VALID);
+		GTK_UPDATE_ALWAYS);	
 	check_recent_files=attach_toggle_with_label(fifth_page, 0,
-		_("Check every file for existence"),
+		_("Check every file in the list for existence"),
 		wants.check_recent_file, prefs_box_changed);
+	delete_obsolete_rfentries=attach_toggle_with_label(fifth_page, 1,
+		_("Delete obsolete entries in the recent files list"),
+		wants.delete_obsolete_rfentries, prefs_box_changed);
 	/**
 	* [ GtkSpinButton ] maximal ....., e.g. 7 maximal entries ..
 	**/	
 	recent_files_number_label=gtk_label_new(
-		_("Number of maximal shown entries:"));
+		_("Number of maximal shown entries in the recent files list:"));
 	gtk_label_set_justify(GTK_LABEL(recent_files_number_label),
 		GTK_JUSTIFY_LEFT);
 	/**
 	* Attach the widgets to the fifth page.
 	**/
 	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
-		recent_files_number_label, 0, 1, 1, 2);
+		recent_files_number_label, 0, 1, 2, 3);
 	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
-		recent_files_number, 1, 2, 1, 2);
+		recent_files_number, 1, 2, 2, 3);
 	/**
 	* Connect the signal with the GtkSpinButton.
 	**/
@@ -346,7 +353,9 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.dot_char = if_active(use_dot_char);
 	wants.update_function = if_active(use_update_function);
 	wants.popup_menu = if_active(enable_popup_menu);
+	wants.uzi_dialogs = if_active(no_uzis);
 	wants.check_recent_file = if_active(check_recent_files);
+	wants.delete_obsolete_rfentries = if_active(delete_obsolete_rfentries);
 #undef if_active
 	
 	wants.recent_files=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(recent_files_number));
@@ -376,11 +385,15 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	gtranslator_config_set_bool("toggles/use_dot_char",
 			      wants.dot_char);
 	gtranslator_config_set_bool("toggles/use_update_function",
-			      wants.update_function);		      
+			      wants.update_function);
 	gtranslator_config_set_bool("toggles/enable_popup_menu",
 			      wants.popup_menu);
+	gtranslator_config_set_bool("toggles/uzi_dialogs",
+			      wants.uzi_dialogs);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      wants.check_recent_file);
+	gtranslator_config_set_bool("toggles/delete_obsolete_recent_files_entries",
+			      wants.delete_obsolete_rfentries);
 }
 
 /**
@@ -479,16 +492,12 @@ void read_prefs(void)
 	    gtranslator_config_get_bool("toggles/use_update_function");    
 	wants.dot_char = 
 	    gtranslator_config_get_bool("toggles/use_dot_char");
+	wants.uzi_dialogs =
+	    gtranslator_config_get_bool("toggles/uzi_dialogs");
 	wants.check_recent_file = 
 	    gtranslator_config_get_bool("toggles/check_recent_files");
-	/**
-	* Check for some kind of the-programmer-didn't-understand-what-he-
-	*  had-written-in-the-prefs.c-file-syndrom..
-	**/    
-	if(wants.check_recent_file<2)
-	{
-		wants.check_recent_file=2;
-	}    
+	wants.delete_obsolete_rfentries =
+	    gtranslator_config_get_bool("toggles/delete_obsolete_recent_files_entries");
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();

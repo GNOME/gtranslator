@@ -12,6 +12,7 @@ INCLUDES = \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
+	-DSCRIPTSDIR=\""$(datadir)/gtranslator"\" \
 	$(XML_CFLAGS) \
 	$(myicon)
 

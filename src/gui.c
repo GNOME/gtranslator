@@ -540,6 +540,10 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 	**/
 	free_prefs();
 	gnome_regex_cache_destroy(rxc);
+	/**
+	* Store the current date.
+	**/
+	gtranslator_config_set_last_run_date();
 	gtk_main_quit();
 	return FALSE;
 }
@@ -854,13 +858,22 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		*  the user and a guint variable for the length of this text.
 		**/
 		gchar *newstr=g_new0(gchar,1);
-		guint len;
+		guint len, index=1;
+		/**
+		* Get the current pointer.
+		**/
+		index=gtk_text_get_point(GTK_TEXT(trans_box));
+		/**
+		* Freeze the translation box.
+		**/
+		gtk_text_freeze(GTK_TEXT(trans_box));
 		/**
 		* Get the text from the translation box.
 		**/
-		newstr=gtk_editable_get_chars(GTK_EDITABLE(trans_box),0,-1);
+		newstr=gtk_editable_get_chars(GTK_EDITABLE(trans_box), 0, -1);
 		/**
-		* Parse the characters for a free space and replace them with the '·'.
+		* Parse the characters for a free space and replace
+		*  them with the '·'.
 		**/
 		for(len=0;len<strlen(newstr);len++)
 		{
@@ -870,12 +883,28 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 			}
 		}
 		/**
+		* Go to the first index in the box.
+		**/
+		gtk_text_set_point(GTK_TEXT(trans_box), 0);
+		/**
 		* Clean up the translation box.
 		**/
-		gtk_text_backward_delete(GTK_TEXT(trans_box), gtk_text_get_length(GTK_TEXT(trans_box)));
+		gtk_text_forward_delete(GTK_TEXT(trans_box),
+			gtk_text_get_length(GTK_TEXT(trans_box)));
 		/**
 		* Insert the changed text with the '·''s.
 		**/
-		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, newstr, -1);
+		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
+			newstr, -1);
+		/**
+		* Go to the old text index.
+		**/
+		/* FIXME FIXME FIXME BABY. */
+		gtk_text_set_point(GTK_TEXT(trans_box), index);
+		/**
+		* Thaw up the translation box as the new text
+		*  has been inserted now.
+		**/
+		gtk_text_thaw(GTK_TEXT(trans_box));
 	}
 }

@@ -3,7 +3,7 @@
 ##
 ## First set the default subdirs.
 ##
-DEFAULT_SUBDIRS = desktop oaf
+DEFAULT_SUBDIRS = desktop oaf scripts
 
 ##
 ## Extend it with the gconf-files if it's detected.

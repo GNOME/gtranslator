@@ -532,6 +532,7 @@ void close_file(GtkWidget * widget, gpointer useless)
 	file_opened = FALSE;
 	nothing_changes = TRUE;
 	clean_text_boxes();
+	gnome_appbar_push(GNOME_APPBAR(appbar1), "");
 	disable_actions_no_file();
 }
 
@@ -641,6 +642,11 @@ void gtranslator_display_recent(void)
 	{
 		return;
 	}
+
+	/**
+	* Delete the old entries.
+	**/
+	gnome_app_remove_menu_range(GNOME_APP(app1), _("_File/Recen_t files/"), 0, wants.recent_files);
 
 	/**
 	* Create a new GnomeUIInfo widget.
@@ -787,8 +793,66 @@ void undotchar(gchar *text)
 **/
 void update(GtkWidget *widget, gpointer useless)
 {
+	gint res=1;
+	gchar *command;
+	gchar *newfile=g_new0(gchar,1);
 	/**
-	* FIXME
+	* Build this magical line.
 	**/
-	gnome_app_message(GNOME_APP(app1), _("Not written yet!"));
+	command=g_strdup_printf("%s %s %s 2>&1 1>/dev/null", SCRIPTSDIR "/update.sh", po->filename, po->header->prj_name);
+	/**
+	* Get the filename.
+	**/
+	newfile=g_strdup(po->filename);
+	/**
+	* Close the current file.
+	**/
+	close_file(NULL, NULL);
+	/**
+	* Execute the command.
+	**/
+	res=system(command);
+	if(res!=0)
+	{
+		/**
+		* Only show the dialogs if wished.
+		**/
+		if(wants.uzi_dialogs)
+		{
+			/**
+			* Inform the user that nothing seem to have changed.
+			**/
+			gnome_app_message(GNOME_APP(app1),
+				_("The update caused no changes."));
+		}		
+		/**
+		* Simply parse it again.
+		**/
+		parse(newfile);
+	}
+	else
+	{
+		/**
+		* If you wish'em, you get'em ..
+		**/
+		if(wants.uzi_dialogs)
+		{
+			/**
+			 Print a nice information dialog.
+			*/
+			gnome_app_message(GNOME_APP(app1),
+				_("The update was successfull."));
+		}	
+		/**
+		* Reopen it after the successfull update.
+		**/
+		parse(newfile);
+	}
+	/**
+	* Free the newfile string.
+	**/
+	if(newfile)
+	{
+		g_free(newfile);
+	}	
 }
