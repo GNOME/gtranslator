@@ -42,8 +42,8 @@ gboolean gtranslator_utf8_po_file_is_utf8(GtrPo *po)
 	g_return_val_if_fail(po->header!=NULL, FALSE);
 	g_return_val_if_fail(po->header->charset!=NULL, FALSE);
 
-	return (!g_strcasecmp(po->header->charset, "utf-8") ||
-		!g_strcasecmp(po->header->charset, "utf8"));	
+	return (!g_ascii_strcasecmp(po->header->charset, "utf-8") ||
+		!g_ascii_strcasecmp(po->header->charset, "utf8"));	
 }
 
 /*
