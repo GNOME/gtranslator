@@ -17,7 +17,7 @@ INCLUDES = \
 
 bin_PROGRAMS = gtranslator
 
-GTRANSLATOR_BUILD_VERSIONS = "$(shell glib-config --version) / $(shell gtk-config --version) / $(shell gnome-config --modversion gnome|sed -e s,gnome-libs-,,)"
+GTRANSLATOR_BUILD_VERSIONS = "$(shell pkgconfig --modversion glib-2.0) / $(shell pkgconfig --modversion gtk+-2.0) / $(shell pkgconfig --modversion libgnomeui-2.0)"
 
 %.include: %.config
 	sed \
