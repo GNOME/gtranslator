@@ -1,7 +1,7 @@
 2001-06-26  Fatih Demir <kabalak@gtranslator.org>
 
 	* THANKS: Added Abel due to his pozilla.sh patches to
-		the THAKS file .-)
+		the THANKS file .-)
 
 	* man/pozilla.sh.1: Version increment.
 
@@ -48,7 +48,7 @@
 		  can now also use "pozilla.sh -n" to avoid personal
 		   spamming of the translators; this option sends the
 		    EMail with the statistics table only to the mailing
-		     list and also added an output filename defining 
+		     list and also added an output filename defining
 		      option.
 
 2001-06-12  Fatih Demir <kabalak@gtranslator.org>
@@ -61,10 +61,10 @@
 		 files on 0.10.38 which are working for previous releases;
 		  also applied Abel's patch to set up the "C" environment --
 		   also added an IP test on the first run of pozilla.sh.
-		
+	
 		Added "-A"/"--send-to-all" option to send the updated po files
 		 to all languages, made some small options renaming and made
-		  the  package name and version checks/determinations more 
+		  the  package name and version checks/determinations more
 		   proof and "assertive"; also checks for  configure.in's and
 		    allows now also the use of pozilla.sh for non-autoconf/
 		     automake based projects -- much stuff, there we did
@@ -95,7 +95,7 @@
 		in the debian/changelog.
 
 	* debian/rules: Don't run ./autogen.sh; just run ./configure to avoid
-		debian building problems (thanks to Carlos Nieves Ónega 
+		debian building problems (thanks to Carlos Nieves Ónega
 		 <cnieves@iname.com> forpointing this out).
 
 	* NEWS: Added news item about the new icons from Ville.
@@ -137,7 +137,7 @@
 
 2001-05-22  Fatih Demir <kabalak@gtranslator.org>
 
-	* help/C/Makefile.am: Small changes due to the hints of 
+	* help/C/Makefile.am: Small changes due to the hints of
 		Carlos Nieves Ónega <cnieves@iname.com>.
 
 2001-05-18  Fatih Demir <kabalak@gtranslator.org>
@@ -162,7 +162,7 @@
 
 2001-05-13  Fatih Demir <kabalak@gtranslator.org>
 
-	* NEWS: Added news item about the on-going integration of the 
+	* NEWS: Added news item about the on-going integration of the
 		backends into gtranslator.
 
 	* README: Updated the version number to be 0.40.
@@ -176,18 +176,18 @@
 
 2001-05-02  Fatih Demir <kabalak@gtranslator.org>
 
-	* kabalak_generate_all_the_files.sh: Added "--enable-debug", 
+	* kabalak_generate_all_the_files.sh: Added "--enable-debug",
 		"--enable-nautilus-view" to the default configure flags.
 
 2001-04-30  Fatih Demir <kabalak@gtranslator.org>
 
-	* Makefile.am, configure.in, debian/Makefile.am & debian/.cvsignore: 
+	* Makefile.am, configure.in, debian/Makefile.am & debian/.cvsignore:
 		Added the debian subdirectory to the dist. includes -- also extended
 		 the ignores accordingly.
 
 2001-04-27  Fatih Demir <kabalak@gtranslator.org>
 
-	* acconfig.h: Removed some old defines. 
+	* acconfig.h: Removed some old defines.
 	
 	* configure.in: Make us depend on gnome-libs >= 1.0.60 -- bail out
 		with error if the present gnome-libs doesn't support
@@ -306,7 +306,7 @@
 
 	* .cvsignore: Ignore the generated spec file.
 
-	* Makefile.am: Include the gtranslator.spec.in file in a dist. 
+	* Makefile.am: Include the gtranslator.spec.in file in a dist.
 
 	* configure.in: Substitute the values in the spec file.
 
@@ -345,7 +345,7 @@
 		the scrollkeeper-update call.
 
 	* configure.in: Also get and substitute $(SC_STATEDIR) which
-		is get from scrollkeeper-config and check for a 
+		is get from scrollkeeper-config and check for a
 		 Scrollkeeper >= 0.1.4.
 
 2001-03-25  Fatih Demir	<kabalak@gtranslator.org>
@@ -375,7 +375,7 @@
 	* help/C/gtranslator-C.omf.presetup: Added omf file template
 		for the gtranslator docs.
 
-	* acconfig.h: Removed USE_WINDOW_ICON define and added 
+	* acconfig.h: Removed USE_WINDOW_ICON define and added
 		SCROLLKEEPER_PRESENT define.
 	
 	* configure.in: Added check for Scrollkeeper and conditional
@@ -396,11 +396,11 @@
 
 	* pozilla.sh: Made R 1.7, handles now only the exact options
 		(do not accept wrong options, exit in the case of
-		  a non-existing/not supported option), added a 
-		   "ignore" function with which you can exclude po 
+		  a non-existing/not supported option), added a
+		   "ignore" function with which you can exclude po
 		     files from the anounce circle (e.g. "en_GB")
 		      and made the error messages nicer.
-		      
+	
 	* Makefile.am: Removed the ominous "0.5" file deletion as this
 		is now not any more put out by configure.
 
@@ -416,7 +416,7 @@
 
 2001-03-22  Fatih Demir <kabalak@gtranslator.org>
 
-	* configure.in & DEPENDS: Updated gal requirement to be at 
+	* configure.in & DEPENDS: Updated gal requirement to be at
 		least 0.5.
 
 	* NEWS: NEWS item about the autocompletion of the default
@@ -437,14 +437,14 @@
 
 2001-03-17  Fatih Demir <kabalak@gtranslator.org>
 
-	* Makefile.am: Also configure gtranslator with the 
+	* Makefile.am: Also configure gtranslator with the
 		nautilus-gtranslator-view before building a CVS snapshot.
 
 2001-03-15  Fatih Demir <kabalak@gtranslator.org>
 
 	* Makefile.am: Changed the CVS snapshot target to use "make dist"
 		and to rescue the po files subdirectory before doing dist;
-		 also did some sed plays for the version number. 
+		 also did some sed plays for the version number.
 
 2001-03-13  Fatih Demir <kabalak@gtranslator.org>
 
@@ -537,7 +537,7 @@
 		 a nautilus prefix option and a check around it to make it
 		  possible to also compile the nautilus-view if possible
 		   (if a prefix is given it checks for the mainly used
-		     nautilus_view_standard_mail_multi function from 
+		     nautilus_view_standard_mail_multi function from
 		      libnautilus).
 
 2001-02-26  Fatih Demir	<kabalak@gtranslator.org>
@@ -808,7 +808,7 @@
 
 	* configure.in: Also enable the build with extended warning
 		flags by default.
-		
+	
 		Changed the version number to 0.40 in HEAD.
 
 	* Makefile.am: Also remove the removed files from the po
@@ -889,7 +889,7 @@
 
 	* \*.cvsignore: Added the ".nautilus-metafile.xml"
 		file to the cvs ignores.
-		
+	
 2001-01-23  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* pozilla.sh: CONFIG_DIR="$HOME/.pozilla", not kabalak...
