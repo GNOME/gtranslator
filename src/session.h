@@ -25,4 +25,4 @@ gint gtranslator_dies_for_you(GnomeClient *client,gpointer data);
 gint gtranslator_sleep(GnomeClient *client, gint phase, GnomeSaveStyle s_style,
 	gint shutdown, GnomeInteractStyle i_style,gint fast,gpointer data);
 
-#endif // GTR_SESSION_H
+#endif

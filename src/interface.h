@@ -13,7 +13,7 @@
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
-#endif // HAVE_CONFIG_H
+#endif
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -21,7 +21,11 @@
 #include <string.h>
 #include <glib.h>
 #include <gnome.h>
+
+#ifdef USE_WINDOW_ICON 
 #include <libgnomeui/gnome-window-icon.h>
+#endif
+
 #include "interface.h"
 #include "about.h"
 #include "dnd.h"
@@ -92,4 +96,4 @@ void enable_buttons();
 **/
 void append_to_msg_db(GtkWidget *widget,gpointer useless);
 
-#endif // GTR_INTERFACE_H
+#endif

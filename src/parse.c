@@ -78,7 +78,6 @@ void parse(gchar *po)
 	fgets(temp_char,sizeof(temp_char),fs)!=NULL
 	)
 	{
-		#ifdef WORKS_X
 		/**
 		* Create a new structure.
 		**/
@@ -114,24 +113,26 @@ void parse(gchar *po)
 			**/
 			msg_pair++;
 			msg->pos=z;
-			strcpy(msg->comment,g_strdup(temp_char));
+			msg->comment=g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			strcpy(msg->msgid,g_strdup(temp_char));
+			msg->msgid=g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			strcpy(msg->msgstr,g_strdup(temp_char));
+			msg->msgstr=g_strdup(temp_char);
 		}
+		/**
+		* Add the current message to the messages list.
+		**/
 		messages=g_list_append(messages,(gpointer)msg);
-		#endif
 	}
 	/**
 	* Show an updated status

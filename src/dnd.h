@@ -62,4 +62,4 @@ void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
         int x,int y,GtkSelectionData *seldata, guint info,guint time,
                 gpointer data);
 
-#endif // GTR_DND_H 
+#endif

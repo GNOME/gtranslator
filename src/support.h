@@ -43,4 +43,4 @@
 
 	GdkImlibImage* create_image            (const gchar     *filename);
 
-#endif // GTR_SUPPORT_H 
+#endif

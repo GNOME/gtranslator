@@ -196,7 +196,7 @@ void search(GtkWidget *widget,gpointer useless)
 /**
 * The GoTo methods
 **/
-void goto_dlg_create()
+void goto_dlg_create(gint lines)
 {
 	GtkWidget *g_dlg_label;
 	gint nb=1;
@@ -212,7 +212,7 @@ void goto_dlg_create()
 	**/
 	g_dlg_ok=gtk_button_new_with_label(_("Go!"));
 	g_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	g_dlg_line_adjustment=gtk_adjustment_new(nb, 1, 250, 1, 2, 2);
+	g_dlg_line_adjustment=gtk_adjustment_new(nb, 1, lines, 1, 2, 2);
 	g_dlg_line=gtk_spin_button_new(GTK_ADJUSTMENT(g_dlg_line_adjustment), 1, 0);
 	g_dlg_label=gtk_label_new(_("Goto the specified message entry."));
 	/**
@@ -242,7 +242,7 @@ void goto_dlg_create()
 
 void goto_dlg_show()
 {
-	goto_dlg_create();
+	goto_dlg_create((gint)g_list_length(messages));
 	gtk_widget_show(g_dlg);
 }
 
@@ -258,6 +258,7 @@ void goto_dlg(GtkWidget *widget,gpointer useless)
 
 void find_dialog(GtkWidget *widget,gpointer title_type)
 {
+	GtkWidget *findy,*ignore_case,*t;
 	gchar *title;
 	/**
 	* Simply define the title via 
@@ -280,16 +281,25 @@ void find_dialog(GtkWidget *widget,gpointer title_type)
 	**/
 	find_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
 	find_dlg_ok=gtk_button_new_with_label(_("Find"));
+	findy=gnome_entry_new("FINDY");
+	ignore_case=gtk_check_button_new_with_label(_("Ignore the case"));
+	t=gtk_table_new(2,3,FALSE);
 	/**
 	* Create the dialog.
 	**/
 	find_dlg=gtk_dialog_new();
 	gtk_window_set_title(GTK_WINDOW(find_dlg),title);
 	gtk_window_set_wmclass(GTK_WINDOW(find_dlg),"gtranslator","gtranslator");
-	gtk_widget_set_usize(find_dlg,280,80);
+	gtk_widget_set_usize(find_dlg,280,120);
+	/**
+	* Add the elements to the table.
+	**/
+	gtk_table_attach_defaults(GTK_TABLE(t),findy,1,2,0,1);
+	gtk_table_attach_defaults(GTK_TABLE(t),ignore_case,1,2,1,2);
 	/**
 	* .. and add the buttons.
 	**/
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(find_dlg)->vbox),t);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(find_dlg)->action_area),find_dlg_ok);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(find_dlg)->action_area),find_dlg_cancel);
 	/**
@@ -308,6 +318,7 @@ void find_dialog(GtkWidget *widget,gpointer title_type)
 	/**
 	* Show the widgtes and finally the box.
 	**/
+	gtk_widget_show_all(t);
 	gtk_widget_show(find_dlg_ok);
 	gtk_widget_show(find_dlg_cancel);
 	gtk_widget_show(find_dlg);

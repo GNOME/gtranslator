@@ -24,11 +24,6 @@
 #include "prefs.h" 
 
 /**
-* Some static variables for the poptTable
-**/
-static gchar *file_to_open=NULL;
-
-/**
 * The popt-options table
 **/
 static struct poptOption gtranslator_options [] = {
@@ -41,8 +36,8 @@ static struct poptOption gtranslator_options [] = {
 		0,N_("The msg_db to use"),"MSG_DB"
 	},
 	{
-		"query", 'q', POPT_ARG_NONE, NULL,
-		0,N_("Query the msg_db"),""
+		"query", 'q', POPT_ARG_STRING, &query_string,
+		0,N_("Query the msg_db & exit"),"QUERY_STRING"
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
@@ -65,14 +60,18 @@ int main(int argc,char *argv[])
 	* For the arguments
 	**/
 	poptContext context;
-	
+	/**
+	* Check whether NLS is requested.
+	**/
 #ifdef ENABLE_NLS
 	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain(PACKAGE);
 #endif
+	/**
+	* Init gtranslator.
+	**/
 	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv, 
 		gtranslator_options, 0, &context);
-	
 	/**
 	* Free the poptContext
 	**/
@@ -81,6 +80,25 @@ int main(int argc,char *argv[])
 	* Read the stored preferences
 	**/
 	read_prefs();
+	/**
+        * Init the msg_db.
+        **/
+        init_msg_db();
+	/**
+        * If a query has been done.
+        **/
+        if(query_string)
+        {
+		/**
+		* Simply print it out.
+		**/
+                g_print(_("Getting results for query: `%s' ...\n"),query_string);
+		g_print(_("Result                   : %s."),get_from_msg_db(query_string));
+			/**
+			* Exit within the non-GUI circles.
+			**/
+			exit(0);
+        }
 	/**
 	* Get the client
 	**/
@@ -139,10 +157,6 @@ int main(int argc,char *argv[])
 		}
         }
 	gtk_widget_show(app1);
-        /**
-        * Init the msg_db.
-        **/
-	init_msg_db();
 	/**
 	* Is a po-file given to start with ?
 	**/

@@ -33,7 +33,7 @@ int init_msg_db()
 	**/
 	if(!msg_db)
 	{
-		gchar *temp_db;
+		gchar temp_db[128];
 		sprintf(temp_db,"%s/%s",g_get_home_dir(),"msg.db");
 		msg_db=temp_db;
 	}
@@ -200,7 +200,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 			/**
 			* Only challenge the first 3 characters
 			**/
-			if(!g_strncasecmp(msg_messages,get_similar,4))
+			if(!g_strncasecmp(msg_messages,get_similar,3))
 			{
 				if(strstr(msg_messages,";;;"))
 				{

@@ -13,7 +13,7 @@
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
-#endif // HAVE_CONFIG_H
+#endif
 
 #include "parse.h"
 #include "interface.h"
@@ -84,4 +84,4 @@ void edit_header(GtkWidget *widget,gpointer useless);
 **/
 gtr_header *new_header();
 
-#endif // GTR_HEADER_STUFF_H
+#endif 

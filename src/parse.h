@@ -14,7 +14,7 @@
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
-#endif // HAVE_CONFIG_H
+#endif
 
 #include <string.h>
 #include <stdlib.h>
@@ -102,4 +102,4 @@ gchar *search_do(GtkWidget *widget,gpointer wherefrom);
 **/
 GList *messages;
 
-#endif // GTR_PARSE_H
+#endif

@@ -232,4 +232,4 @@ lang languages[] =
 	}
 };
 
-#endif // GTR_LANGUAGES_H
+#endif

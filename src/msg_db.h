@@ -19,6 +19,13 @@
 #include "parse.h"
 
 /**
+* Some static variables for the poptTable in the main
+*  routines.
+**/
+static gchar *file_to_open=NULL;
+static gchar *query_string=NULL;
+
+/**
 * The default msg_db location .
 **/
 static gchar *msg_db;
@@ -62,4 +69,4 @@ unsigned int get_msg_db_size();
 **/
 GList *msg_list, *cur_list;
 
-#endif // GTR_MSG_DB_H
+#endif

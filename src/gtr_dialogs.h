@@ -14,7 +14,7 @@
 
 #ifdef HAVE_CONFIG_H	
 	#include <config.h>
-#endif // HAVE_CONFIG_H
+#endif
 
 #include "interface.h"
 #include "support.h"
@@ -120,4 +120,4 @@ void goto_dlg(GtkWidget *widget,gpointer useless);
 void find_dialog(GtkWidget *widget,gpointer title_type);
 void find_dialog_hide(GtkWidget *widget,gpointer useless);
 
-#endif // GTR_GTR_DIALOGS_H
+#endif

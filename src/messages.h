@@ -67,4 +67,4 @@ struct _gtr_po
 	gboolean notrans;
 };
 
-#endif // GTR_MESSAGES_H
+#endif

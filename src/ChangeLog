@@ -1,3 +1,63 @@
+2000-06-04  Fatih Demir		( kabalak@gmx.net )
+
+	+	Include "gnome-window-icon.h" only if
+		
+		it's available on the system.
+		
+		-> interface.h
+	
+	+	Removed all // GTR_* comments from the
+		
+		ifdefs as they'ren't ANSI-C conform.
+		
+		-> *.h
+	
+	+	Reverted the recognition of the error-
+		
+		case.
+	
+	+	Removed the ifdef, so we can now again
+		
+		watch gtranslator crashing...
+		
+		-> parse.c
+	
+	+	Reverted to the old mechanism.
+		
+		-> header_stuff.c
+
+	+	Adjust the dialog size.
+
+	+	Create a table holding the widgets for the
+		
+		Find-dialog.
+	
+	+	You can only "goto" till the last entry of 
+		
+		the list, so carry it as an argument to the
+		
+		core-function.
+		
+	+	Fill out the find dialogs.
+	
+		-> gtr_dialogs.c
+
+	+	Made the option working and restructured the init a
+		
+		bit.
+	
+	+	Quit after the query before any GUI-element is loaded.
+	
+	+	Print the query & the result.
+
+	+	Added a for-the-moment dummy option '-q' / '--query'
+		
+		which will be used to query the msg_db for entries
+	
+		without starting the whole GUI. Possibly ...
+		
+		-> main.c
+
 2000-06-03  Fatih Demir		( kabalak@gmx.net )
 
 	+	Make first a check if it exists yet, and

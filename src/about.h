@@ -14,7 +14,7 @@
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
-#endif // HAVE_CONFIG_H
+#endif
 
 #include "support.h"
 
@@ -29,4 +29,4 @@ GtkWidget *about;
 void about_box();
 void about_box_show(GtkWidget *widget,gpointer useless);
 
-#endif // GTR_ABOUT_H
+#endif

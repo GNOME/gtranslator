@@ -29,7 +29,7 @@ gchar *inp;
 * A simple define; .. ok I'm lazy but it avoids many typos ..
 **/
 #define kabalak_str(x) inp[0]='\0'; inp=strstr(hline, ": ");\
-strcat((char *)ph->x,g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\"")));\
+ph->x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));\
 g_print("--  %s\n",ph->x);
 
 void apply_header(gtr_header *the_header)

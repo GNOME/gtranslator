@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.18\n"
-"POT-Creation-Date: 2000-06-03 11:30+0200\n"
-"PO-Revision-Date: 2000-05-30 17:41+0200\n"
+"Project-Id-Version: gtranslator 0.19\n"
+"POT-Creation-Date: 2000-06-04 13:49+0200\n"
+"PO-Revision-Date: 2000-06-04 13:50+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,92 +65,96 @@ msgstr ""
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- açýlanacak dosyayý seç"
 
-#: src/gtr_dialogs.c:65
+#: src/gtr_dialogs.c:69
 msgid "Select your desired po-file to open"
 msgstr "Açýlacak po-dosyasýný belirle"
 
-#: src/gtr_dialogs.c:84
+#: src/gtr_dialogs.c:88
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- kaydedilinecek dosyayý seç .."
 
-#: src/gtr_dialogs.c:97
+#: src/gtr_dialogs.c:105
 msgid "Select your filename to which the po-file should be saved to."
 msgstr "Po-dosyasýný kaydedilecek dosyayý belirle."
 
-#: src/gtr_dialogs.c:122
+#: src/gtr_dialogs.c:130
 msgid "gtranslator -- search-box"
 msgstr "gtranslator -- arama-kutusu"
 
 #. *
 #. * Set up the information label
 #. *
-#: src/gtr_dialogs.c:129
+#: src/gtr_dialogs.c:137
 msgid "Enter your desired search string: "
 msgstr "Aranacak metni belirle: "
 
-#: src/gtr_dialogs.c:131 src/interface.c:407
+#: src/gtr_dialogs.c:139 src/interface.c:407
 msgid "Search"
 msgstr "Ara"
 
-#: src/gtr_dialogs.c:195
+#: src/gtr_dialogs.c:207
 msgid "GoTo message entry"
 msgstr "Ileti/tercüme birimine git!"
 
 #. *
 #. * Create the buttons, the entry & the label
 #. *
-#: src/gtr_dialogs.c:201
+#: src/gtr_dialogs.c:213
 msgid "Go!"
 msgstr "Git!"
 
-#: src/gtr_dialogs.c:205
+#: src/gtr_dialogs.c:217
 msgid "Goto the specified message entry."
 msgstr "Belirtilen iletiye git."
 
-#: src/gtr_dialogs.c:253
+#: src/gtr_dialogs.c:270
 msgid "gtranslator -- find in the catalogue"
 msgstr "gtranslator -- bilgi/ileti tercümeler'de ara"
 
-#: src/gtr_dialogs.c:256
+#: src/gtr_dialogs.c:273
 msgid "gtranslator -- find in the po-file"
 msgstr "gtranslator -- po-dosyasýnda ara"
 
-#: src/gtr_dialogs.c:259
+#: src/gtr_dialogs.c:276
 msgid "gtranslator -- find"
 msgstr "gtranslator -- ara"
 
-#: src/gtr_dialogs.c:266
+#: src/gtr_dialogs.c:283
 msgid "Find"
 msgstr "Bul"
+
+#: src/gtr_dialogs.c:285
+msgid "Ignore the case"
+msgstr "Yazýlýmýný gözardý et"
 
 #: src/header_stuff.c:39
 msgid "Error while parsing the header!"
 msgstr "Baþlýdý tararken hata oldu!"
 
-#: src/header_stuff.c:111
+#: src/header_stuff.c:107
 msgid "Header has been parsed."
 msgstr "Baþlýk baþarýyla tarandý."
 
-#: src/header_stuff.c:130
+#: src/header_stuff.c:126
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Baþlýk dodruca taranmamýþ gibi."
 
-#: src/header_stuff.c:132
+#: src/header_stuff.c:128
 msgid "Project name:"
 msgstr "Proje ismi : "
 
-#: src/header_stuff.c:133
+#: src/header_stuff.c:129
 msgid "Project version:"
 msgstr "Proje nesli : "
 
-#: src/header_stuff.c:134
+#: src/header_stuff.c:130
 msgid "Use my personal options to fill out the rest of the header."
 msgstr "þahsi seÇeneklerimi baþlýðý doldurmak için kullan."
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:143
+#: src/header_stuff.c:139
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- baþlýdý deðiþtir"
 
@@ -538,19 +542,36 @@ msgstr "Galik"
 msgid "Welsh"
 msgstr "Velþ"
 
-#: src/main.c:37
+#: src/main.c:32
 msgid "Po-file to open at startup"
 msgstr "Baþlangýçat açýlacak po-dosyasý"
 
-#: src/main.c:41
+#: src/main.c:36
 msgid "The msg_db to use"
 msgstr "Kullanýlcak ileti/tercüme tabaný"
 
-#: src/main.c:45
+#: src/main.c:40
+msgid "Query the msg_db & exit"
+msgstr "Ileti/tercüme tabanýný sorgula & çýk"
+
+#: src/main.c:44
 msgid "Specifies the main-window geometry"
 msgstr "Ana pencere boyutlarýný belirler"
 
-#: src/main.c:134
+#. *
+#. * Simply print it out.
+#. *
+#: src/main.c:95
+#, c-format
+msgid "Getting results for query: `%s' ...\n"
+msgstr "`%s' için ileti/tercüme tabanýný sorguluyorum ...\n"
+
+#: src/main.c:96
+#, c-format
+msgid "Result                   : `%s'.\n"
+msgstr "Sonuç                  : `%s'.\n"
+
+#: src/main.c:156
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "\"%s\" yer metni taranamadý!"
@@ -558,26 +579,31 @@ msgstr "\"%s\" yer metni taranamadý!"
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:157
+#: src/main.c:175
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "\"%s\" adýyla bir dosya yok yada o dosya okunamýyor!"
 
-#: src/main.c:158
+#: src/main.c:176
 msgid "Skipping it."
 msgstr "Atlatýyorum."
+
+#: src/msg_db.c:42
+#, c-format
+msgid "No msg_db found! Creating one in `%s'."
+msgstr "Öyle bir ileti/tercüme tabaný yok ! `%s''de bir tabaný yaratýyorum."
 
 #. *
 #. * 3.1) No list, no fun
 #. *
-#: src/msg_db.c:73
+#: src/msg_db.c:81
 msgid "gtranslator lost the list of translations!\n"
 msgstr "gtranslator tercümelerin listesini kaybetti!\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:110
+#: src/msg_db.c:118
 #, c-format
 msgid "The msg_db `%s' hasn't been inited yet!\n"
 msgstr "Ileti ve tercüme tabaný olan `%s' açýlmamýþ gibi gözüküyor!\n"
@@ -586,11 +612,11 @@ msgstr "Ileti ve tercüme tabaný olan `%s' açýlmamýþ gibi gözüküyor!\n"
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
-#: src/msg_db.c:122
+#: src/msg_db.c:130
 msgid "Got no message entry!\n"
 msgstr "Ileti/tercüme birimini alamadým!\n"
 
-#: src/msg_db.c:131
+#: src/msg_db.c:139
 #, c-format
 msgid "New message entry has wrong/non-logical length : %i\n"
 msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil : %i\n"
@@ -598,7 +624,7 @@ msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil : %i\n"
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:167
+#: src/msg_db.c:175
 #, c-format
 msgid "The msg_db `%s' seems not to be inited!\n"
 msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
@@ -606,7 +632,7 @@ msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:171
+#: src/msg_db.c:179
 msgid "Not available"
 msgstr "Yok be !"
 
@@ -614,11 +640,11 @@ msgstr "Yok be !"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:179
+#: src/msg_db.c:187
 msgid "No msg_list available for acting on it!\n"
 msgstr "Iþlenilecek bir msg_list ( ileti/tercüme listesi ) yok ki!\n"
 
-#: src/msg_db.c:203
+#: src/msg_db.c:211
 msgid "No entry found in the msg_db."
 msgstr "Ileti/tercüme tabanýnda böyle bir birim yoktur."
 
@@ -636,7 +662,7 @@ msgstr ""
 "\n"
 "Dosya akýmý kayboldu!%s"
 
-#: src/parse.c:53
+#: src/parse.c:55
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
@@ -644,7 +670,7 @@ msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
 #. *
 #. * Set up a status message
 #. *
-#: src/parse.c:58
+#: src/parse.c:60
 #, c-format
 msgid "Current file : \"%s\"."
 msgstr "Geçerli dosya : \"%s\"."
@@ -652,12 +678,12 @@ msgstr "Geçerli dosya : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:141
+#: src/parse.c:140
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
-#: src/parse.c:158
+#: src/parse.c:157
 msgid "Parsing has been successfull."
 msgstr "Tarama baþarýlý oldu."
 

@@ -14,7 +14,7 @@
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
-#endif // HAVE_CONFIG_H
+#endif
 
 #include "about.h"
 #include "gtr_dialogs.h"
@@ -68,4 +68,4 @@ void prefs_box_changed(GtkWidget *widget,gpointer chitem);
 void prefs_box_apply(GtkWidget *widget,gpointer more_useless);
 void read_prefs();
 
-#endif // GTR_PREFS_H
+#endif
