@@ -30,12 +30,10 @@ gboolean gtranslator_open_po_file(gchar *file)
 	 * Use conditionally the VFS routines to access
 	 *  remote files.
 	 */
-	#ifdef USE_VFS_STUFF
-
-	if(!g_strncasecmp(file, "http://", 7)||
-		!g_strncasecmp(file, "ftp://", 6)||
-		!g_strncasecmp(file, "www.", 4)||
-		!g_strncasecmp(file, "file:/", 6))
+	if(!strncmp(file, "http://", 7)||
+		!strncmp(file, "ftp://", 6)||
+		!strncmp(file, "www.", 4)||
+		!strncmp(file, "file:/", 6))
 	{
 	
 		file=gtranslator_vfs_handle_open_file(file);
@@ -59,7 +57,6 @@ gboolean gtranslator_open_po_file(gchar *file)
 			return TRUE;
 		}
 	}
-	#endif
 		
 	/*
 	 * Reverse the filename for an easier catching
