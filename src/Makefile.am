@@ -47,6 +47,7 @@ gtranslator_SOURCES = \
 
 gtranslator_LDADD = \
 	$(top_builddir)/libgtranslator/libgtranslator.la \
+	-L/usr/X11R6/lib \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
 	$(INTLLIBS) \
