@@ -11,77 +11,25 @@ lc = C
 
 gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/$(lc)
 
-gtranslator_sgmlfile = gtranslator.sgml
+gtranslator_xmlfile = gtranslator.xml
 
 gtranslator_omfdir = $(SC_OMFDIR)/gtranslator
 
-if SCROLLKEEPER_PRESENT
 gtranslator_omf_DATA = $(gtranslator_omffile)
 
 gtranslator_omffile = gtranslator-$(lc).omf
 
 $(gtranslator_omffile): $(gtranslator_omffile).presetup
-	scrollkeeper-preinstall $(gtranslator_helpdir)/$(gtranslator_sgmlfile) \
+	scrollkeeper-preinstall $(gtranslator_helpdir)/$(gtranslator_xmlfile) \
 		$(gtranslator_omffile).presetup $(gtranslator_omffile)
-endif		
 
-gtranslator_htmlfiles = \
-	authors.html \
-	bugs.html \
-	glossary.html \
-	index.html \
-	license.html \
-	prefs.html \
-	usage.html
+gtranslator_help_DATA=$(gtranslator_xmlfile)
 
-if SCROLLKEEPER_PRESENT
-gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat $(gtranslator_sgmlfile)
-else
-gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat
-endif
-
-if JW_PRESENT
-build_command=jw -c /etc/sgml/catalog $(gtranslator_sgmlfile) -o gtranslator
-else
-build_command=db2html $(gtranslator_sgmlfile)
-endif
-
-if SCROLLKEEPER_PRESENT
-$(gtranslator_htmlfiles):$(gtranslator_sgmlfile) $(gtranslator_omffile)
-else
-$(gtranslator_htmlfiles):$(gtranslator_sgmlfile)
-endif
-	-@if [ ! -f gtranslator/index.html ]; then \
-		cd $(srcdir) && $(build_command) ; \
-	fi
-	-cd $(srcdir) && cp gtranslator/$@ .
-	
-disthook:
-	$(mkinstalldirs) $(distdir)/gtranslator
-	$(mkinstalldirs) $(distdir)/gtranslator/stylesheets-images
-	-cp $(srcdir)/gtranslator/*.html $(srcdir)/gtranslator/*.css \
-		$(distdir)/gtranslator
-	-cp $(srcdir)/gtranslator/stylesheet-images/*.* \
-		$(distdir)/gtranslator/stylesheet-images
-	-cp $(srcdir)/*.html $(distdir)
-
-distclean-generic:
-	@-rm -f $(gtranslator_htmlfiles) $(gtranslator_omffile) Makefile
-	@-rm -rf gtranslator 
-
-if SCROLLKEEPER_PRESENT
-install-data-local: index.html
+install-data-local: 
 	scrollkeeper-update -p $(SC_STATEDIR)
-else	
-install-data-local: index.html
-endif
 
-if SCROLLKEEPER_PRESENT
 uninstall-local:
 	scrollkeeper-update -p $(SC_STATEDIR)
-endif
 
-EXTRA_DIST = $(gtranslator_sgmlfile) \
-	$(gtranslator_htmlfiles) \
-	$(gtranslator_omffile).presetup \
-	topic.dat
+EXTRA_DIST = $(gtranslator_xmlfile) \
+	$(gtranslator_omffile).presetup
