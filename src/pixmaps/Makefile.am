@@ -5,6 +5,7 @@
 
 EXTRA_DIST = \
 	auto_translation.xpm \
+	copy_msgid2msgstr.xpm \
 	edit_comment.xpm \
 	query.xpm \
 	query_big.xpm
