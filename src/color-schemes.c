@@ -25,6 +25,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "preferences.h"
+
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
 
@@ -32,48 +33,24 @@
 #include <libgnome/gnome-i18n.h>
 #endif
 
-/*
- * Check the given xml document to be a color scheme.
- */ 
-gboolean check_if_scheme(xmlDocPtr doc);
-
-gboolean check_if_scheme(xmlDocPtr doc)
-{
-	g_return_val_if_fail(doc!=NULL, FALSE);
-	#define Malif(x); if(x) { return FALSE; }
-	
-	/*
-	 * Check the various cases where the document is malformed.
-	 */  
-	Malif(strcmp((doc->xmlRootNode)->name, "colorscheme"));
-	Malif(!xmlNodeGetContent((doc->xmlRootNode)));
-	Malif(strcmp((doc->xmlRootNode->xmlChildrenNode)->name, "author"));
-	Malif(!xmlNodeGetContent((doc->xmlRootNode->xmlChildrenNode->next)));
-
-	return TRUE;
-}
-
 GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 {
-	xmlDocPtr xmldoc;
-	xmlNodePtr node;
-	GtrColorScheme *scheme=g_new0(GtrColorScheme,1);
+	xmlDocPtr 	xmldoc;
+	xmlNodePtr 	node;
+	GtrColorScheme *scheme;
 
 	#define GetData(x, y); \
-	if(!strcmp(xmlGetProp(node, "target"), y)) \
+	if(node && !strcmp(xmlGetProp(node, "target"), y)) \
 	{ \
 		scheme->x=xmlNodeGetContent(node); \
 	}
 
 	g_return_val_if_fail(filename!=NULL, NULL);
-	
+
 	xmldoc=xmlParseFile(filename);
 
-	if(check_if_scheme(xmldoc)==FALSE)
-	{
-		return NULL;
-	}
-
+	g_assert(xmldoc);
+	
 	scheme->name=xmlGetProp(xmldoc->xmlRootNode, "name");
 	scheme->version=xmlGetProp(xmldoc->xmlRootNode, "version");
 	
@@ -81,7 +58,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 
 	scheme->author=xmlGetProp(node, "name");
 	scheme->author_email=xmlGetProp(node, "email");
-
+	
 	while(node!=NULL)
 	{
 		GetData(fg, "fg");
@@ -97,9 +74,6 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 		node=node->next;
 	}
 	
-	xmlFreeNode(node);
-	xmlFreeDoc(xmldoc);
-	
 	return scheme;
 }
 
@@ -112,7 +86,7 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 
 	theme=gtranslator_color_scheme_open(filename);
 
-	if(!theme)
+	if(theme==NULL)
 	{
 		g_warning(_("Can't apply color scheme file `%s'!"),
 			filename);
@@ -120,9 +94,6 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 		return;
 	}
 
-	g_print("Applying scheme %s from %s <%s>", theme->name,
-		theme->author, theme->author_email);	
-	
 	/*
 	 * Save the color valuesinto the preferences.
 	 */
@@ -146,6 +117,15 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	gtranslator_config_set_string("colors/special", theme->special);
 	gtranslator_config_set_string("colors/address", theme->address);
 	gtranslator_config_set_string("colors/keyword", theme->keyword);
+
+	/*
+	 * Set up the scheme information.
+	 */
+	gtranslator_config_set_string("scheme/name", theme->name);
+	gtranslator_config_set_string("scheme/version", theme->version);
+	gtranslator_config_set_string("scheme/author", theme->author);
+	gtranslator_config_set_string("scheme/author_email",
+		theme->author_email);
 	
 	gtranslator_config_close();
 }
