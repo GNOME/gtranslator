@@ -85,6 +85,10 @@ static void gtranslator_learn_hash_from_node(xmlNodePtr node)
 			translation=NULL;
 		}
 	}
+	else
+	{
+		translation=NULL;
+	}
 
 	if(original && translation)
 	{
