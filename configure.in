@@ -105,7 +105,7 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 		if test "$VFS_VERSION" -ge 5 ; then
 			AC_MSG_RESULT([
 "+++"		
-"+++ Right GnomeVFS > 0.5 detected..."
+"+++ Good, quite recent GnomeVFS detected..."
 "+++"])			
 		else
 			AC_MSG_ERROR([
@@ -370,7 +370,7 @@ CFLAGS                 	  :	${CFLAGS}
 
 GConf based config	  :	${gconf_is_present:-no}
 
-debug frienldy build	  :	${debugpoints:-no}
+debug friendly build	  :	${debugpoints:-no}
 
 nautilus-gtranslator-view :	${build_nv:-no}
 

@@ -1,3 +1,31 @@
+2001-03-23  Fatih Demir <kabalak@gtranslator.org>
+
+	* man/Makefile.am: Remove the gzip'ed man-pages on any
+		"make clean" run.
+
+	* help/ja/.cvsignore: Added cvsignore for the Japanese help
+		files.
+
+	* DEPENDS: Changed the download address for the xml-i18n-tools
+		to be on the new http://download.gnome.org domain.
+	
+	* NEWS: Added news item about enhanced pozilla.
+
+	* pozilla.sh: Made R 1.7, handles now only the exact options
+		(do not accept wrong options, exit in the case of
+		  a non-existing/not supported option), added a 
+		   "ignore" function with which you can exclude po 
+		     files from the anounce circle (e.g. "en_GB")
+		      and made the error messages nicer.
+		      
+	* Makefile.am: Removed the ominous "0.5" file deletion as this
+		is now not any more put out by configure.
+
+	* configure.in: Fixed a simple typo in the output of the
+		./configure process and changed some messages a bit and
+		  removed fallible code which created ominous "0.5" or
+		   "=" files in the top directory.
+
 2001-03-23  Yukihiro Nakai  <nakai@gnome.gr.jp>
 
 	* help/ja: Add Japanese help.

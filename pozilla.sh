@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.6.1
+export POZILLA_RELEASE=1.7
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -46,7 +46,7 @@ for app in msgfmt msgmerge make grep sed mutt
 	do
 		if test "z`which $app`" = "z" ; then
 			echo "---------------------------------------------------------------"
-			echo "[ERROR: The application \"$app\" is necessary for running pozilla.sh!]"
+			echo "!ERROR¡: The application \"$app\" is necessary for running pozilla.sh!"
 			echo "---------------------------------------------------------------"
 				exit 1
 		fi
@@ -70,9 +70,8 @@ for app in msgfmt msgmerge make grep sed mutt
 
 while [ ! -z "$1" ]
 do
-	option=`echo "$1"|sed -e 's/-//g' -e 's/--//g'`
-	case "$option" in
-	[hH]*)
+	case "$1" in
+	-h|--help)
 	echo "---------------------------------------------------------------"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	echo "---------------------------------------------------------------"
@@ -80,8 +79,13 @@ do
 	echo "---------------------------------------------------------------"
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-d --days         Days remaining for release"
-	echo "-p --podirectory  Defines the po directory location (default: ./po"
-	echo "-s --send         Send the merged po files to the given languages (':' separated list)" 
+	echo "-p --podirectory  Defines the po directory location (default: ./po)"
+	echo "-s --sendto       Send the merged po files to the given languages"
+	echo "-i --ignore       Don't operate for these languages (ignore them)"
+	echo ""
+	echo "Important: Both of the \"--send\" and \"--ignore\" options do "
+	echo " await a ':' separated list like \"az:tr:uk\"."
+	echo ""
 	echo "-r --release      Specifies the coming release's number"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
@@ -89,7 +93,7 @@ do
 	echo "---------------------------------------------------------------"
 		exit 1
 	;;
-	[vV]*)
+	-v|--version)
 	echo "---------------------------------------------------------------"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	echo "---------------------------------------------------------------"
@@ -97,7 +101,7 @@ do
 	echo "---------------------------------------------------------------"
 		exit 1
 	;;
-	[mM]*)
+	-m|--mailinglist)
 	shift 1
 	if test "hehe$1" = "hehe" ; then
 		echo "---------------------------------------------------------------"
@@ -113,7 +117,7 @@ do
 		shift 1
 	fi
 	;;
-	[aA]*)
+	-a|--additional)
 	shift 1
 	if test "hehe$1" = "hehe" ; then
 		echo "---------------------------------------------------------------"
@@ -127,7 +131,7 @@ do
 		shift 1
 	fi	
 	;;
-	[dD]*)
+	-d|--days)
 	shift 1
 	if test "days$1" = "days" ; then
 		echo "---------------------------------------------------------------"
@@ -149,7 +153,7 @@ do
 		fi	
 	fi
 	;;
-	[rR]*)
+	-r|--release)
 	shift 1
 	if test "r$1" = "r" ; then
 		echo "---------------------------------------------------------------"
@@ -163,7 +167,21 @@ do
 		shift 1
 	fi	
 	;;
-	[sS]*)
+	-i|--ignore)
+	shift 1
+	if test "ig$1" = "ig" ; then
+		echo "---------------------------------------------------------------"
+		echo "No languages to ignore given."
+		echo "---------------------------------------------------------------"
+	else
+		echo "---------------------------------------------------------------"
+		export IGNORE_LANGS="`echo $1|sed -e 's/:/\ /g'`"
+		shift 1
+		echo "Ignoring po files for this/these lang(s): $IGNORE_LANGS"
+		echo "---------------------------------------------------------------"
+	fi
+	;;
+	-s|--sendto)
 	shift 1
 	if test "sendto$1" = "sendto" ; then
 		echo "---------------------------------------------------------------"
@@ -178,7 +196,7 @@ do
 		echo "---------------------------------------------------------------"
 	fi
 	;;
-	[pP]*)
+	-p|--podirectory)
 	shift 1
 	if test "po$1" = "po" ; then
 		echo "---------------------------------------------------------------"
@@ -198,7 +216,10 @@ do
 	fi
 	;;
 	*)
-		true
+		echo "---------------------------------------------------------------"
+		echo "!ERROR¡: Unknown option \"$1\" given.                          "
+		echo "---------------------------------------------------------------"
+			exit 1
 	;;
 	esac
 done	
@@ -208,7 +229,7 @@ done
 #
 if ! test -d $PO_DIR/po ; then
 	echo "---------------------------------------------------------------"
-	echo "[ERROR: There is no \"po\" directory present in \"$PO_DIR\"!  ]"
+	echo "!ERROR¡: There is no \"po\" directory present in \"$PO_DIR\"!"
 	echo "---------------------------------------------------------------"
 		exit 1
 fi
@@ -268,7 +289,7 @@ elif test -x ./update.pl ; then
 	./update.pl -P
 else
 	echo "---------------------------------------------------------------"
-	echo "[ERROR: No update.(sh|pl) or usable Makefile found!]"
+	echo "!ERROR¡: No update.(sh|pl) or usable Makefile found!"
 	echo "---------------------------------------------------------------"
 		exit 1
 fi
@@ -277,6 +298,15 @@ for i in $PO_FILES
 	do
 	AUTHOR=`grep ^\"Last $i|sed -e 's/.*:\ //g' \
 		-e 's/\\\n.*$//g' -e 's/\,//g'`
+	#
+	# Test if the current po file should be ignored.
+	#
+	if test "i$IGNORE_LANGS" != "i" ; then
+		_PO_LANG=`echo $i|sed -e 's/.po//g'`
+		echo $IGNORE_LANGS|grep -sq $_PO_LANG && {
+			continue
+		}
+	fi
 	#
 	# And evaluate the statistics for the po-file.
 	#
