@@ -105,7 +105,7 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
 		'?', '!', '(', ')',
 		'[', ']', '{', '}',
 		'`', '\'', '^', '/',
-		'\\', '<', '>', -1
+		'\\', '<', '>', 1
 	};
 
 	g_return_val_if_fail(str!=NULL, NULL);
@@ -119,7 +119,7 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
 	 * Now strip out all these special characters to get a more raw
 	 *  string (could result in better results for matching).
 	 */
-	while(punctuation_characters[index]!=-1)
+	while((gint) punctuation_characters[index]!=1)
 	{
 		stripped_string=nautilus_str_strip_chr(stripped_string,
 			punctuation_characters[index]);
