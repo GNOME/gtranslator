@@ -1,3 +1,7 @@
+##
+## gtranslator's docs Makefile.am.
+##
+
 gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/C
 
 gtranslator_sgmlfile = gtranslator.sgml
