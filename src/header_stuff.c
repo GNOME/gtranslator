@@ -10,6 +10,10 @@
 
 #include "header_stuff.h"
 
-void apply_header()
+void apply_header(gtr_header the_header)
 {
+	if((the_header.project_id==NULL)||(strlen(the_header.project_id)<=0))
+	{
+		g_warning(_("Error while parsing the header!"));
+	}
 }

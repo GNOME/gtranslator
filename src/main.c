@@ -101,6 +101,29 @@ int main(int argc,char *argv[])
 	* Creates the main app-window
 	**/	
 	app1=create_app1();
+	/**
+        * Check if a geometry-definition has been given
+        **/
+        if(gtranslator_geometry)
+        {
+                gint x, y, width, height;
+                if(gnome_parse_geometry(gtranslator_geometry, &x, &y,
+                        &width, &height))
+		{
+			if(x!=-1)
+			{
+				gtk_widget_set_uposition(app1, x, y);
+			}
+			if((width>0)&&(height>0))
+			{
+				gtk_window_set_default_size(GTK_WINDOW(app1), width, height);
+			}
+		}
+		else
+		{
+			g_warning(_("The geometry string \"%s\" coulnd't be parsed!"),gtranslator_geometry);
+		}
+        }
 	gtk_widget_show(app1);
 	/**
 	* Is a po-file given to start with ?

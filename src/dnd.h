@@ -32,7 +32,8 @@ gtr_dnd_types dnd_type;
 enum _gtr_dnd_types
 {
        	TARGET_URI_LIST,
-	TARGET_NETSCAPE_URL 
+	TARGET_NETSCAPE_URL,
+	TARGET_TEXT_PLAIN
 };
 
 /**
@@ -40,8 +41,15 @@ enum _gtr_dnd_types
 **/
 static GtkTargetEntry dragtypes[] =
 {
-        { "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/plain", 0, TARGET_NETSCAPE_URL }
+        {
+		"text/uri-list", 0, TARGET_URI_LIST
+	},
+	{
+		"text/plain", 0, TARGET_NETSCAPE_URL
+	},
+	{
+		"text/plain", 0, TARGET_TEXT_PLAIN
+	}
 };
 
 /**

@@ -19,6 +19,30 @@
 #include "interface.h"
 #include <time.h>
 
-void apply_header();
+/**
+* A typedef for the new structure.
+**/
+typedef struct _gtr_header gtr_header;
+
+/**
+* The header-structure which should hold the
+*  header informations
+**/
+struct _gtr_header {
+	gchar *project_id;
+	gchar *pot_date;
+	gchar *po_date;
+	gchar *last_translator;
+	gchar *language_team;
+	gchar *mime_version;
+	gchar *mime_type;
+	gchar *encoding;
+	/**
+	* Is this a standard header part?
+	**/
+	gchar *xtranslator;
+};
+
+void apply_header(gtr_header the_header);
 
 #endif // GTR_HEADER_STUFF_H

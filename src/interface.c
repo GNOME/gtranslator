@@ -72,10 +72,19 @@ void compile(GtkWidget *widget,gpointer useless)
 	else
 	{
 		/**
-		* Simply call msgfmt with the currently compiled
-		*  file
+		* Simply compile the .po-file
 		**/
-		/** TODO **/
+		gchar *cmd;
+		gint res=1;
+		sprintf(cmd,"msgfmt %s",pf);
+		res=system(cmd);
+		/**
+		* If there has been an error show an error-box
+		**/
+		if(res!=0)
+		{
+			compile_error_dialog(widget,NULL);
+		}
 	}
 }
 

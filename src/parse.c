@@ -34,11 +34,6 @@ void check_file(FILE *stream)
 	}
 }
 
-void geekPrint(gchar *sta)
-{
-	g_print(" -- (%-s)\n",sta);
-}
-
 /**
 * The internally used parse-function
 **/
@@ -70,6 +65,10 @@ void parse(gchar *po)
 	* Check the file-stream
 	**/
 	check_file(fs);
+	/**
+	* Set the global po-file name
+	**/
+	pf=po;
         /**
         * Parse the file ...
         **/
@@ -149,7 +148,6 @@ void parse(gchar *po)
 	/**
 	* As we've got finished we can do some nonsense
 	**/
-	apply_header();
 	enable_buttons();
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));
 }
@@ -197,10 +195,10 @@ gchar *search_do(GtkWidget *widget,gpointer wherefrom)
 	switch((gint)wherefrom)
 	{
 		case 1:
-			geekPrint("SEARCH!");
+			g_print("SEARCH!\n");
 			break;
 		case 2:
-			geekPrint("RESEARCH!");
+			g_print("RESEARCH!\n");
 			break;
 		default :
 			break;

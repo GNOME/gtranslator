@@ -186,7 +186,7 @@ void search(GtkWidget *widget,gpointer useless)
 void goto_dlg_create()
 {
 	GtkWidget *g_dlg_label;
-	gint nb=102;
+	gint nb=1;
 	/**
 	* Again create a Gtk+ dialog
 	**/
@@ -196,9 +196,9 @@ void goto_dlg_create()
 	/**
 	* Create the buttons, the entry & the label
 	**/
-	g_dlg_ok=gnome_stock_button(GNOME_STOCK_BUTTON_OK);
+	g_dlg_ok=gtk_button_new_with_label(_("Go!"));
 	g_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	g_dlg_line_adjustment=gtk_adjustment_new(nb, 1, 1000, 1, 2, 2);
+	g_dlg_line_adjustment=gtk_adjustment_new(nb, 1, 250, 1, 2, 2);
 	g_dlg_line=gtk_spin_button_new(GTK_ADJUSTMENT(g_dlg_line_adjustment), 1, 0);
 	g_dlg_label=gtk_label_new(_("Goto the specified message entry."));
 	/**

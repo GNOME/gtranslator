@@ -26,12 +26,26 @@ void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
 			if (dnd_type==TARGET_URI_LIST) 
 			{
 				file=(char *)(fnp->data);
-				geekPrint(file);
 				parse(file);
-				geekPrint("Parsing it.");
 				return_value=1;
 			}
-		}	
+			else
+			{
+				if(dnd_type==TARGET_NETSCAPE_URL)
+				{
+					file=(char *)(fnp->data);
+					parse(file);
+					return_value=1;
+				}
+				if(dnd_type==TARGET_TEXT_PLAIN)
+				{
+					file=(char *)(fnp->data);
+					gtk_editable_insert_text(GTK_EDITABLE(trans_box),
+					file,sizeof(file),0);	
+					return_value=1;
+				}
+			}
+		}
 	if(return_value==1)
 	{
 		gtk_drag_finish(context,TRUE,FALSE,time);
@@ -40,5 +54,4 @@ void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
 	{
 		gtk_drag_finish(context,TRUE,TRUE,time);
 	}
-	geekPrint("Finished.");
 }

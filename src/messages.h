@@ -15,6 +15,11 @@
 #include <glib.h>
 
 /**
+* A static gchar holding the current file name.
+**/
+static gchar *pf;
+
+/**
 * Typedefs for the `new' data-types
 **/
 typedef enum   _gtr_msg_status gtr_msg_status;
@@ -65,7 +70,6 @@ struct _gtr_po
 {
 	gchar *filename;
 	gboolean notrans;
-	gtr_msg *msg;
 };
 
 #endif // GTR_MESSAGES_H
