@@ -1,5 +1,8 @@
 2001-06-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* gui.c & main.c: Call the "gtranslator_set_style" functions on window
+		creation and not in the main() function.
+
 	* id.c/.h: Added "gtranslator_id_load/save_list" functions for loading/
 		saving a plain string encoded list of GtrIDs -- the maximum
 		 length is currently hard coded to 10.

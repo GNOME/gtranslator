@@ -388,14 +388,6 @@ int main(int argc, char *argv[])
 	gtk_widget_show_all(gtranslator_application);
 	
 	/*
-	 * Set up the text boxes with the _new_ style.
-	 */ 
-	gtranslator_config_init();
-	gtranslator_set_style(text_box, 0);
-	gtranslator_set_style(trans_box, 1);
-	gtranslator_config_close();	
-
-	/*
 	 * Enter the Gtk+ main-loop.
 	 */
 	gtk_main();

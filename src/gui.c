@@ -226,6 +226,14 @@ void gtranslator_create_main_window(void)
 	gtranslator_actions_set_up_state_no_file();
 
 	gtranslator_history_show();
+
+	/*
+	 * Set up our special styles for the text boxes.
+	 */
+	gtranslator_config_init();
+	gtranslator_set_style(text_box, 0);
+	gtranslator_set_style(trans_box, 1);
+	gtranslator_config_close();
 	
 	/*
 	 * The callbacks list
