@@ -654,7 +654,7 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		{
 		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
 			gtk_check_menu_item_set_active(
-				GTK_CHECK_MENU_ITEM(the_msg_status_menu[0].widget),
+				GTK_CHECK_MENU_ITEM(the_edit_menu[17].widget),
 				FALSE
 			);
 		}
