@@ -238,6 +238,10 @@ void open_compressed_po_file(gchar *file, gchar *command)
 		else
 		{
 			cmd=g_strdup_printf(
+				/*
+				 * The %s format here stands for the used
+				 *  compressions program (gzip, bzip2 etc.)
+				 */
 				_("Couldn't open %s'd gettext file `%s'!"),
 				command,	
 				file);
