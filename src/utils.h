@@ -42,6 +42,22 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 void gtranslator_utils_remove_temp_file(void); 
 
 /*
+ * Return the filename of our generally used temporary filename.
+ */
+gchar *gtranslator_utils_get_temp_file_name(void);
+
+/*
+ * Return the name of our crash-security filename.
+ */
+gchar *gtranslator_utils_get_crash_file_name(void);
+
+/*
+ * Initialize and create the gtranslator directory ~/.gtranslator in the user's
+ *  home directory.
+ */
+void gtranslator_utils_create_gtranslator_directory(void); 
+
+/*
  * The autosave function.
  */
 gboolean gtranslator_utils_autosave(gpointer foo_me_or_die);

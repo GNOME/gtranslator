@@ -423,7 +423,7 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 	if (!po->file_changed)
 	{
 		po->file_changed = TRUE;
-		if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator-"))
+		if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator/"))
 		{
 			gtranslator_actions_enable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
 		}

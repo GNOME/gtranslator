@@ -159,8 +159,7 @@ void gtranslator_learn_shutdown()
 	g_list_free(learn_buffer);
 
 	g_return_if_fail(filestring->str!=NULL);
-	filename=g_strdup_printf("%s/gtranslator/learned-strings", 
-		g_get_home_dir());
+	filename=g_strdup_printf("%s/gtranslator/learned-strings", g_get_home_dir());
 
 	e_write_file(filename, filestring->str, 0644);
 

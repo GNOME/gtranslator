@@ -37,6 +37,7 @@
 #include "replace.h"
 #include "syntax.h"
 #include "utf8.h"
+#include "utils.h"
 
 #include <string.h>
 #include <locale.h>
@@ -140,7 +141,7 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	 * OR: The filename points to a copy-result po file, then we do apply
 	 *  the same dialog tactics.
 	 */   
-	if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator-"))
+	if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator/"))
 	{
 		dialog = gtk_file_selection_new(_("gtranslator -- save file as.."));
 	}
@@ -781,30 +782,12 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 		else
 		{
 			/*
-			 * Check if it's one of our supported URI
-			 *  types or if it's a "hidden" http URI.
+			 * Open the URI via our beloved function; the else case
+			 *  is very logical .-)
 			 */ 
-			if(nautilus_str_has_prefix(uri->str, "http") ||
-				nautilus_str_has_prefix(uri->str, "https") ||
-				nautilus_str_has_prefix(uri->str, "ftp")   ||
-				nautilus_str_has_prefix(uri->str, "file")  ||
-				nautilus_str_has_prefix(uri->str, "www.")  ||
-				nautilus_str_has_prefix(uri->str, "ftp.")  ||
-				nautilus_str_has_prefix(uri->str, "about:"))
+			if(gtranslator_open_po_file(uri->str))
 			{
 				gnome_dialog_close(dialog);
-
-				/*
-				 * Catch the special "prefix" about: ,-)
-				 */
-				if(nautilus_str_has_prefix(uri->str, "about:"))
-				{
-					gtranslator_about_dialog(NULL, NULL);
-				}
-				else
-				{
-					gtranslator_open_po_file(uri->str);
-				}
 			}
 			else
 			{
@@ -860,8 +843,7 @@ Saying \"No\" will delete the crash recovery file."),
 	
 	g_free(recovery_message);
 
-	file=g_strdup_printf("%s/%s", g_get_home_dir(), 
-		".crash-gtranslator.po");
+	file=gtranslator_utils_get_crash_file_name();
 	
 	if(reply==GNOME_YES)
 	{

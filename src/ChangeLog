@@ -1,3 +1,50 @@
+2001-06-03  Fatih Demir <kabalak@gtranslator.org>
+
+	* vfs-handle.c: Reduce the includes to include 4 GnomeVFS headers
+		instead of all through <libgnomevfs/gnome-vfs.h>; use the
+		 e_mkdir_hier function for creating the directories.
+
+	* sighandling.c: Save the file directly per "gtransator_save_file" and
+		do not call any dialogs.
+
+	* main.c: Initialize GnomeVFS if needed and create ~/.gtranslator per
+		"gtranslator_utils_create_gtranslator_directory".
+
+	* utils.c/.h: Added "gtranslator_utils_create_gtranslator_directory"
+		function which should create ~/.gtranslator per GnomeVFS;
+		 include all the necessary GnomeVFS headers for this.
+
+	* dialogs.c, parse.c, main.c & sighandling.c: Use the new 
+		"gtranslator_utils_get_crash_file_name" function to get the
+		  crash file's filename.
+
+	* dialogs.c, parse.c & utils.c: Use the new temp. file name getting
+		"gtranslator_utils_get_temp_file_name" function instead of own
+		  g_strdup_printf dump.
+
+	* utils.c/.h: Added "gtranslator_utils_get_temp_file_name" function
+		which returns the newly temporary filename, which is now:
+		 "~/.gtranslator/gtranslator-temp-po-file"; also added 
+		  a corresponding "gtranslator_utils_get_crash_file_name" 
+		   function.
+
+	* parse.c: Reordered includes and use once a nautilus_strcmp instead
+		off strcmp.
+
+	* dialogs.c, gui.c & vfs-handle.c: Made the remote->local corresponding
+		directory to be "~/.gtranslator/hostname" instead of the old
+		 "~/.gtranslator-hostname".
+
+	* header_stuff.c: Check if the regex could be compiled at all before
+		acting on it -- if not, try to determine the elements via very
+		 strange nautilus_str & g_strreverse games; should fix the
+		  strange crash on hu_HU locale.
+
+	* dialogs.c: No need to duplicate the "about:" URI detection in the
+		URI dialogs callback and in the "gtranslator_open_po_file"
+		 function; removed the dialog callback detection lines and
+		  require real prefixes like "http://" instead of just "http:".
+
 2001-06-02  Fatih Demir <kabalak@gtranslator.org>
 
 	* open-differently.c: Added "about:" URI support also for the command

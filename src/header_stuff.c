@@ -75,13 +75,49 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 	rx = gnome_regex_cache_compile(rxc,
 		"(.+) <([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+)>", 
 		REG_EXTENDED);
-	if (!regexec(rx, str, 3, m, 0)) {
-		if (m[1].rm_so != -1)
-			*name = g_strndup(str+m[1].rm_so, 
-					  m[1].rm_eo - m[1].rm_so);
-		if (m[2].rm_so != -2)
-			*email = g_strndup(str+m[2].rm_so, 
-					  m[2].rm_eo - m[2].rm_so);
+
+	/*
+	 * Handle the cases where no regex-cache could be compiled; try to get
+	 *  the mail address and the name via complicated string-plays.
+	 */
+	if(!rx)
+	{
+		gchar *tempbazooka;
+		
+		/*
+		 * Strip everything after the '<' of the email address; only
+		 *  the name should be the rest -- here assigned to "*name".
+		 */
+		*name=nautilus_str_strip_substring_and_after(str, "<");
+		
+		/*
+		 * Operate on a copy of the whole string, reverse it and now
+		 *  apply the logic that an email address _cannot_ contain any
+		 *   spaces, the spaces should be also the separator for the
+		 *    name/email pair.
+		 */
+		tempbazooka=g_strdup(str);
+		g_strreverse(tempbazooka);
+
+		*email=nautilus_str_strip_substring_and_after(tempbazooka, " ");
+		
+		g_free(tempbazooka);
+	}
+	else
+	{
+		if (!regexec(rx, str, 3, m, 0))
+		{
+			if (m[1].rm_so != -1)
+			{
+				*name = g_strndup(str+m[1].rm_so, 
+					m[1].rm_eo - m[1].rm_so);
+			}
+			if (m[2].rm_so != -2)
+			{
+				*email = g_strndup(str+m[2].rm_so, 
+					m[2].rm_eo - m[2].rm_so);
+			}
+		}
 	}
 }
 

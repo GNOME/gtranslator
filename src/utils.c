@@ -33,6 +33,8 @@
 
 #include <libgnomeui/libgnomeui.h>
 
+#include <gal/util/e-util.h>
+
 /*
  * The used ref' count for the language lists.
  */
@@ -75,8 +77,7 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
  */
 void gtranslator_utils_remove_temp_file()
 {
-	gchar *tempfile=g_strdup_printf("%s/gtranslator-temp-po-file", 
-		g_get_home_dir());
+	gchar *tempfile=gtranslator_utils_get_temp_file_name();
 
 	/*
 	 * Test if the file is present and clean it up.
@@ -88,7 +89,31 @@ void gtranslator_utils_remove_temp_file()
 
 	g_free(tempfile);
 }
- 
+
+/*
+ * Create the ".gtranslator" directory in the users home directory if necessary.
+ */
+void gtranslator_utils_create_gtranslator_directory()
+{
+	gchar *dirname;
+
+	dirname=g_strdup_printf("%s/.gtranslator", g_get_home_dir());
+
+	/*
+	 * Create the directory if needed.
+	 */
+	if(!g_file_test(dirname, G_FILE_TEST_EXISTS))
+	{
+		if(e_mkdir_hier(dirname, 0755)==-1)
+		{
+			g_warning(_("Can't create directory `%s'!"), dirname);
+			exit(1);
+		}
+	}
+
+	g_free(dirname);
+}
+
 /*
  * The GSourceFunc for the periodic autosaving.
  */
@@ -145,6 +170,32 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 		
 		return TRUE;
 	}
+}
+
+/*
+ * Return the generally used filename of our temp. file.
+ */
+gchar *gtranslator_utils_get_temp_file_name()
+{
+	gchar *tempfilename;
+
+	tempfilename=g_strdup_printf("%s/.gtranslator/gtranslator-temp-po-file",
+		g_get_home_dir());
+
+	return tempfilename;
+}
+
+/*
+ * Return the filename of the crash-file.
+ */
+gchar *gtranslator_utils_get_crash_file_name()
+{
+	gchar *crashfile;
+
+	crashfile=g_strdup_printf("%s/.gtranslator/gtranslator-crash-po-file", 
+		g_get_home_dir());
+
+	return crashfile;
 }
 
 /*

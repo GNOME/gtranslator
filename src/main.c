@@ -45,6 +45,8 @@
 #include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-window-icon.h>
 
+#include <libgnomevfs/gnome-vfs-init.h>
+
 #ifdef GCONF_IS_PRESENT
 #include <gconf/gconf.h>
 #endif
@@ -247,6 +249,19 @@ int main(int argc, char *argv[])
 	gtranslator_utils_restore_geometry(gtranslator_geometry);
 
 	/*
+	 * Initialize GnomeVFS right now, if needed.
+	 */
+	if(!gnome_vfs_initialized())
+	{
+		gnome_vfs_init();
+	}
+
+	/*
+	 * Create our own .gtranslator directory in the user's home directory.
+	 */
+	gtranslator_utils_create_gtranslator_directory();
+
+	/*
 	 * Clean up the temporary file in the user's home dir eventually 
 	 *  created by gtranslator.
 	 */
@@ -255,9 +270,7 @@ int main(int argc, char *argv[])
 	/*
 	 * Test if there's a crash recovery file lying around in ~.
 	 */
-	sp_file=g_strdup_printf("%s/%s", g_get_home_dir(),
-		".crash-gtranslator.po");
-	
+	sp_file=gtranslator_utils_get_crash_file_name();
 	if(g_file_exists(sp_file))
 	{
 		gtranslator_rescue_file_dialog();
@@ -322,7 +335,7 @@ int main(int argc, char *argv[])
 	 */
 	file_opened = FALSE;
 	args = poptGetArgs(context);
-	
+
 	/*
 	 * Open up the arguments as files (for now, only the first file is
 	 *  opened).

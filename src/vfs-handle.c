@@ -23,7 +23,14 @@
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
-#include <libgnomevfs/gnome-vfs.h>
+
+#include <libgnomevfs/gnome-vfs-types.h>
+
+#include <libgnomevfs/gnome-vfs-init.h>
+#include <libgnomevfs/gnome-vfs-uri.h>
+#include <libgnomevfs/gnome-vfs-xfer.h>
+
+#include <gal/util/e-util.h>
 
 /*
  * Open up the given file via GnomeVFS routines.
@@ -95,10 +102,9 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 		 *  remote files.
 		 *
 		 * Therefore we do need some extra stuff.
-		 *
 		 */
 		gchar *destdir;
-		destdir=g_strdup_printf("%s/.gtranslator-%s",
+		destdir=g_strdup_printf("%s/.gtranslator/%s",
 			g_get_home_dir(),
 			gnome_vfs_uri_get_host_name(file));
 	
@@ -106,13 +112,14 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 		 * Test if this directory is already existent and
 		 *  create the directory if it's existent.
 		 */ 
-		if(!g_file_exists(destdir))
+		if(!g_file_test(destdir, G_FILE_TEST_ISDIR))
 		{
-			if(gnome_vfs_make_directory(destdir, 0644)
-				!=GNOME_VFS_OK)
+			if(e_mkdir_hier(destdir, 0755)==-1)
 			{
 				g_warning(_("Couldn't create temporary directory `%s'!"),
 					destdir);
+
+				return NULL;
 			}
 		}
 		

@@ -27,6 +27,7 @@
 #include "nautilus-string.h"
 #include "open-differently.h"
 #include "parse.h"
+#include "utils.h"
 #include "vfs-handle.h"
 
 #include <string.h>
@@ -153,11 +154,8 @@ void gtranslator_open_compiled_po_file(gchar *file)
 
 	check_for_prog("msgunfmt");
 
-	/*
-	 * Set the name of the temporary file we will be using.
-	 */
-	tempfilename=g_strdup_printf("%s/gtranslator-temp-po-file",
-		g_get_home_dir());
+	tempfilename=gtranslator_utils_get_temp_file_name();
+	
 	/*
 	 * Build up the command to execute in the shell to get the plain
 	 *  gettext file.
@@ -201,12 +199,8 @@ void open_compressed_po_file(gchar *file, gchar *command)
 
 	check_for_prog(command);
 
-	/*
-	 * Build the a temporary filename in the same way as for the
-	 *  gtranslator_open_compiled_po_file function.
-	 */
-	tempfilename=g_strdup_printf("%s/gtranslator-temp-po-file",
-		g_get_home_dir());
+	tempfilename=gtranslator_utils_get_temp_file_name();
+	
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */
@@ -296,8 +290,7 @@ void gtranslator_open_ziped_po_file(gchar *file)
 
 	check_for_prog("unzip");
 
-	tempfilename=g_strdup_printf("%s/gtranslator-temp-po-file",
-		g_get_home_dir());
+	tempfilename=gtranslator_utils_get_temp_file_name();
 
 	cmd=g_strdup_printf("unzip -p %s > %s", 
 		file,

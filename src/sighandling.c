@@ -21,6 +21,7 @@
 #include "parse.h"
 #include "preferences.h"
 #include "sighandling.h"
+#include "utils.h"
 
 #include <signal.h>
 #include <stdlib.h>
@@ -52,6 +53,8 @@ void gtranslator_signal_handler(int signal)
 
 			if(po->file_changed)
 			{
+				gchar *crashfilename;
+				
 				/*
 				 * Store the original filename into the
 				 *  preferences.
@@ -61,14 +64,12 @@ void gtranslator_signal_handler(int signal)
 					po->filename);
 				gtranslator_config_close();
 				
-				po->filename=g_strdup_printf("%s/%s",
-					g_get_home_dir(),
-					".crash-gtranslator.po");
+				crashfilename=gtranslator_utils_get_crash_file_name();
 
 				/*
 				 * Save the file under the special filename.
 				 */
-				gtranslator_save_current_file_dialog(NULL, NULL);
+				gtranslator_save_file(crashfilename);
 			}
 			
 			exit(1);
