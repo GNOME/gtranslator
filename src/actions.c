@@ -110,16 +110,15 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_HEADER, the_edit_menu[12], the_toolbar[6]);
 	insert_action(ACT_COMMENT, the_edit_menu[14], NONE);
 	insert_action(ACT_COPY_MSGID2MSGSTR, the_edit_menu[16], NONE);
+	insert_action(ACT_FUZZY, the_edit_menu[17], NONE);
 	/*-----------------------------------------------------------*/
-	insert_action(ACT_FIRST, the_messages_menu[0], the_navibar[0]);
-	insert_action(ACT_BACK, the_messages_menu[1], the_navibar[1]);
-	insert_action(ACT_NEXT, the_messages_menu[3], the_navibar[3]);
-	insert_action(ACT_LAST, the_messages_menu[4], the_navibar[4]);
-	insert_action(ACT_GOTO, the_messages_menu[6], the_navibar[7]);
-	insert_action(ACT_NEXT_FUZZY, the_messages_menu[7], the_navibar[6]);
-	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[8], the_navibar[5]);
-	/*-----------------------------------------------------------*/
-	insert_action(ACT_FUZZY, the_msg_status_menu[0], NONE);
+	insert_action(ACT_FIRST, the_go_menu[0], the_navibar[0]);
+	insert_action(ACT_BACK, the_go_menu[1], the_navibar[1]);
+	insert_action(ACT_NEXT, the_go_menu[3], the_navibar[3]);
+	insert_action(ACT_LAST, the_go_menu[4], the_navibar[4]);
+	insert_action(ACT_GOTO, the_go_menu[6], the_navibar[7]);
+	insert_action(ACT_NEXT_FUZZY, the_go_menu[7], the_navibar[6]);
+	insert_action(ACT_NEXT_UNTRANSLATED, the_go_menu[8], the_navibar[5]);
 	/*-----------------------------------------------------------*/
 	insert_action(ACT_END, NONE, NONE);
 }

@@ -45,8 +45,7 @@
 GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
 	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
-	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
-	GNOMEUIINFO_SUBTREE(N_("Mess_age status"), the_msg_status_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Go"), the_go_menu),
 	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
 	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
 	GNOMEUIINFO_END
@@ -171,10 +170,21 @@ GnomeUIInfo the_edit_menu[] = {
 		GNOME_APP_PIXMAP_DATA, copy_msgid2msgstr_xpm,
 		GDK_F11, 0, NULL
 	},
+	{
+		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
+		N_("Toggle fuzzy status of a message"),
+		gtranslator_message_change_status,
+		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
+		NULL,
+		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
+		GDK_2, GDK_MOD1_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gtranslator_preferences_dialog_create, NULL),
 	GNOMEUIINFO_END
 };
 
-GnomeUIInfo the_messages_menu[] = {
+GnomeUIInfo the_go_menu[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_First"),
 	 N_("Go to the first message"),
@@ -229,26 +239,11 @@ GnomeUIInfo the_messages_menu[] = {
 	GNOMEUIINFO_END
 };
 
-GnomeUIInfo the_msg_status_menu[] = {
-	{
-		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
-		N_("Toggle fuzzy status of a message"),
-		gtranslator_message_change_status,
-		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
-		NULL,
-		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
-		GDK_2, GDK_MOD1_MASK, NULL
-	},
-	GNOMEUIINFO_END
-};
-
 GnomeUIInfo the_colorschemes_menu[] = {
 	GNOMEUIINFO_END
 };
 
 GnomeUIInfo the_settings_menu[] = {
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gtranslator_preferences_dialog_create, NULL),
-	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE(N_("_Colorschemes"), the_colorschemes_menu),
 	GNOMEUIINFO_END
 };
