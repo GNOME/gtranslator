@@ -27,16 +27,13 @@
 
 #include <time.h>
 
+#include <gconf/gconf-client.h>
+
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
-#ifdef GCONF_IS_PRESENT
-#include <gconf/gconf-client.h>
 GConfClient	*client=NULL;
 gchar		*private_path=NULL;
-#else
-#include <libgnome/libgnome.h>
-#endif
 
 #define CONFIG_PREFIX "/apps/gtranslator/"
 
@@ -45,7 +42,6 @@ gchar		*private_path=NULL;
  */
 void gtranslator_config_init(void)
 {
-	#ifdef GCONF_IS_PRESENT
 	/* We need to do it only once */
 	if(client==NULL)
 	{
@@ -56,9 +52,6 @@ void gtranslator_config_init(void)
 			GCONF_CLIENT_PRELOAD_NONE, NULL);
 		 */
 	}
-	#else
-	gnome_config_push_prefix("/gtranslator/");
-	#endif
 }
 
 /*
@@ -66,12 +59,7 @@ void gtranslator_config_init(void)
  */
 void gtranslator_config_close(void)
 {
-	#ifdef GCONF_IS_PRESENT
 	gconf_client_suggest_sync(client, NULL);
-	#else
-	gnome_config_pop_prefix();
-	gnome_config_sync();
-	#endif
 }
 
 /*
@@ -82,13 +70,9 @@ gchar *gtranslator_config_get_string(gchar *path)
 	gchar *str;
 	g_return_val_if_fail(path != 0, NULL);
 	
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	str = gconf_client_get_string(client, private_path, NULL);
 	GTR_FREE(private_path);
-	#else
-	str = gnome_config_get_string(path);
-	#endif
 	return str;
 }
 
@@ -97,13 +81,9 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 	g_return_if_fail(path != NULL);
 	g_return_if_fail(value != NULL);
 
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_string(client, private_path, value, NULL);
 	GTR_FREE(private_path);
-	#else
-	gnome_config_set_string(path, value);
-	#endif
 }
 
 /*
@@ -114,13 +94,9 @@ gint gtranslator_config_get_int(gchar *path)
 	gint i;
 	g_return_val_if_fail(path != NULL, 1);
 
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	i = gconf_client_get_int(client, private_path, NULL);
 	GTR_FREE(private_path);
-	#else
-	i = gnome_config_get_int(path);
-	#endif
 	return i;
 }
 
@@ -128,13 +104,9 @@ void gtranslator_config_set_int(gchar *path, gint value)
 {
 	g_return_if_fail(path != NULL);
 
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_int(client, private_path, value, NULL);
 	GTR_FREE(private_path);
-	#else
-	gnome_config_set_int(path, value);
-	#endif
 }
 
 /*
@@ -145,13 +117,9 @@ gboolean gtranslator_config_get_bool(gchar *path)
 	gboolean b;
 	g_return_val_if_fail(path != NULL, FALSE);
 
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	b = gconf_client_get_bool(client, private_path, NULL);
 	GTR_FREE(private_path);
-	#else
-	b = gnome_config_get_bool(path);
-	#endif
 	return b;
 }
 
@@ -159,13 +127,9 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 {
 	g_return_if_fail(path != NULL);
 
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_bool(client, private_path, value, NULL);
 	GTR_FREE(private_path);
-	#else
-	gnome_config_set_bool(path, value);
-	#endif
 }
 
 /*
@@ -176,13 +140,9 @@ gfloat gtranslator_config_get_float(gchar *path)
 	gfloat f;
 	g_return_val_if_fail(path != NULL, 0.0);
 
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	f = gconf_client_get_float(client,  private_path, NULL);
 	GTR_FREE(private_path);
-	#else
-	f = gnome_config_get_float(path);
-	#endif
 	return f;
 }
 
@@ -190,13 +150,9 @@ void gtranslator_config_set_float(gchar *path, gfloat value)
 {
 	g_return_if_fail(path != NULL);
 
-	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_float(client, private_path, value, NULL);
 	GTR_FREE(private_path);
-	#else
-	gnome_config_set_float(path, value);
-	#endif
 }
 
 /*

@@ -43,6 +43,8 @@
 
 #include <gmodule.h>
 
+#include <gconf/gconf.h>
+
 #include <gtk/gtkmain.h>
 
 #include <libgnome/gnome-util.h>
@@ -50,10 +52,6 @@
 #include <libgnomeui/gnome-window-icon.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
-
-#ifdef GCONF_IS_PRESENT
-#include <gconf/gconf.h>
-#endif
 
 /*
  * The static variables used in the poptTable.
@@ -102,15 +100,15 @@ static struct poptOption gtranslator_options[] = {
 
 int main(int argc, char *argv[])
 {
-	GnomeClient *client;
+	GnomeClient 	*client;
 	GnomeClientFlags flags;
-	poptContext context;
-	const char **args;
-	gchar *sp_file;
-
-	#ifdef GCONF_IS_PRESENT
-	GError	*error=NULL;
-	#endif
+	
+	poptContext 	context;
+	
+	const char 	**args;
+	gchar 		*sp_file;
+	
+	GError		*error=NULL;
 
 	/*
 	 * Initialize gettext.
@@ -130,9 +128,8 @@ int main(int argc, char *argv[])
 	signal(SIGTERM, gtranslator_signal_handler);
 
 	/*
-	 * Initialize the GConf library conditionally.
+	 * Initialize the GConf library.
 	 */
-	#ifdef GCONF_IS_PRESENT
 	if(!(gconf_init(argc,argv, &error)))
 	{
 		if(error)
@@ -142,7 +139,6 @@ int main(int argc, char *argv[])
 		}
 		g_clear_error(&error);
 	}
-	#endif
 	
 	/*
 	 * Initialize gtranslator within libgnomeui.
