@@ -31,6 +31,7 @@
 #include "color-schemes.h"
 #include "htmlizer.h"
 #include "sighandling.h"
+#include "query.h"
 
 #include <gtk/gtkmain.h>
 
@@ -86,7 +87,7 @@ int main(int argc, char *argv[])
 	poptContext context;
 	const char **args;
 	gchar *sp_file;
-	
+
 	/*
 	 * GConf error handling variable.
 	 */
@@ -219,6 +220,11 @@ int main(int argc, char *argv[])
 	gtranslator_set_style(trans_box);
 	
 	/*
+	 * Parse the domains in our GNOMELOCALEDIR.
+	 */
+	gtranslator_query_domains(GNOMELOCALEDIR);
+	
+	/*
 	 * If there are any files given on command line, open them
 	 */
 	file_opened = FALSE;
@@ -252,7 +258,7 @@ int main(int argc, char *argv[])
 	}
 	
 	poptFreeContext(context);
-	
+
 	/*
 	 * Disable the buttons if no file is opened.
 	 */

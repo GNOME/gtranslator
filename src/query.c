@@ -18,6 +18,7 @@
  */
 
 #include "query.h"
+#include "prefs.h"
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 
@@ -40,28 +41,24 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 	gchar *str;
 	gchar *originallang;
 
-	g_return_val_if_fail(query!=NULL, NULL);
-	g_return_val_if_fail(query->domain!=NULL, NULL);
-	g_return_val_if_fail(query->message!=NULL, NULL);
-
 	query->language=setup_language(query->language);
 	
 	/*
 	 * Rescue the current locale.
 	 */
-	originallang=setlocale(LC_ALL, NULL);
+	originallang=setlocale(LC_MESSAGES, "");
 
 	/*
 	 * Query the under the preferences' language.
 	 */
-	setlocale(LC_ALL, query->language);
+	setlocale(LC_MESSAGES, query->language);
 	str=dgettext(query->domain, query->message);
 
 	/*
 	 * And now reset the language locale to it's original settings.
 	 */
-	setlocale(LC_ALL, originallang);
-
+	setlocale(LC_MESSAGES, originallang);
+	
 	if(strcmp(str, query->message))
 	{
 		GtrQueryResult *result=g_new(GtrQueryResult, 1);
@@ -70,10 +67,12 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 		result->domain=query->domain;
 
 		return result;
+		gtranslator_free_query(&query);
 	}
 	else
 	{
 		return NULL;
+		gtranslator_free_query(&query);
 	}
 }
 
@@ -147,14 +146,10 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 		return NULL;
 	}
 
-	query=g_new(GtrQuery, 1);
-	
 	while(domainlist)
 	{
-		/* FIXME: these are never freed */
-		query->domain=g_strdup(domainlist->data);
-		query->message=g_strdup(message);
-		query->language=g_strdup(language);
+		query=gtranslator_new_query(domainlist->data,
+			message, language);
 		
 		result=gtranslator_query_simple(query);
 
@@ -165,33 +160,44 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 		 */   
 		if(strcmp(result->translation, query->message))
 		{
-			matches=g_list_append(matches, result->translation);
+			matches=g_list_append(matches, result);
 		}
 
 		domainlist=domainlist->next;
+
+		gtranslator_free_query(&query);
 	}
 
-	g_free(query);
 	return matches;
 }
 
 /*
- * Return a list of all domains in the given directory.
+ * Sets up the list of domains.
  */ 
-GList *gtranslator_query_domains(const gchar *directory)
+void gtranslator_query_domains(const gchar *directory)
 {
 	struct dirent *entry;
 	DIR *dir;
-	GList *domainlist=NULL;
+	gchar *localedirectory;
 		
-	g_return_val_if_fail(directory!=NULL, NULL);
+	g_return_if_fail(directory!=NULL);
+
+	if(!lc)
+	{
+		g_warning(_("No language defined in preferences to query the domains for!"));
+
+		return;
+	}
+
+	localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory,
+		lc);
 	
-	dir=opendir(directory);
+	dir=opendir(localedirectory);
 	
 	if(!dir)
 	{
 		g_warning(_("Couldn't open locales directory `%s'!"), directory);
-		return NULL;
+		return;
 	}
 
 	/*
@@ -217,16 +223,14 @@ GList *gtranslator_query_domains(const gchar *directory)
 			 */
 			if(domainname)
 			{
-				domainlist=g_list_append(domainlist, domainname);
+				domains=g_list_append(domains, domainname);
 			}
 		}
 	}
 
 	closedir(dir);
 
-	domainlist=g_list_sort(domainlist, (GCompareFunc) strcmp);
-
-	return domainlist;
+	domains=g_list_sort(domains, (GCompareFunc) strcmp);
 }
 
 /*
@@ -259,4 +263,47 @@ gchar *gtranslator_strip_out(gchar *filename)
 	}
 
 	g_string_free(o, 1);
+}
+
+/*
+ * Create a new GtrQuery with the given values.
+ */
+GtrQuery *gtranslator_new_query(const gchar *domain,
+	const gchar *message, const gchar *language)
+{
+	GtrQuery *query=g_new(GtrQuery, 1);
+
+	g_return_val_if_fail(message!=NULL, NULL);
+	g_return_val_if_fail(domain!=NULL, NULL);
+	g_return_val_if_fail(language!=NULL, NULL);
+
+	query->message=g_strdup(message);
+	query->language=g_strdup(language);
+	query->domain=g_strdup(domain);
+
+	return query;
+}
+
+/*
+ * Freeing functions:
+ */
+void gtranslator_free_query(GtrQuery **query)
+{
+	if(*query)
+	{
+		g_free((*query)->message);
+		g_free((*query)->domain);
+		g_free((*query)->language);
+		g_free(*query);
+	}
+}
+
+void gtranslator_free_query_result(GtrQueryResult **result)
+{
+	if(*result)
+	{
+		g_free((*result)->translation);
+		g_free((*result)->domain);
+		g_free(*result);
+	}
 }

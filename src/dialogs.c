@@ -570,19 +570,12 @@ void query_dialog(void)
 	GtkWidget *query_entry;
 	GtkWidget *domain;
 	GtkWidget *label;
-	GList *domains=NULL;
-	gchar *query_text;
 	gint reply;
 	
 	#define add2Box(x); \
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
 		FALSE, FALSE, 0);
 
-	query_text=g_strdup_printf("%s/%s/%s", GNOMELOCALEDIR, lc,
-		"LC_MESSAGES");
-
-	domains=gtranslator_query_domains(query_text);
-	
 	if(!domains)
 	{
 		gnome_app_error(GNOME_APP(app1), 
@@ -591,8 +584,9 @@ void query_dialog(void)
 		return;
 	}
 
-	g_free(query_text);
-
+	/*
+	 * A half-baken dialog for the query functionality.
+	 */
 	label=gtk_label_new(_("Here you can query existing gettext domains for an exisiting translation."));
 	
 	dialog=gnome_dialog_new(
@@ -601,16 +595,23 @@ void query_dialog(void)
 
 	query_entry=gnome_entry_new("QUERY");
 
+	/*
+	 * Setup our loved domains list as the stringlist for the combobox.
+	 */
 	domain=gtk_combo_new();
-
 	gtk_combo_set_popdown_strings(GTK_COMBO(domain), domains);
 
+	/*
+	 * Add the widgets to the dialog.
+	 */
 	add2Box(label);
 	add2Box(query_entry);
 	add2Box(domain);
 
+	/*
+	 * "Query" should be the default button I guess.
+	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
-
 	show_nice_dialog(&dialog, "gtranslator -- query dialog");
 
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
@@ -618,37 +619,50 @@ void query_dialog(void)
 	if(reply==GNOME_CANCEL)
 	{
 		gnome_dialog_close(GNOME_DIALOG(dialog));
-
-		g_list_free(domains);
 	}
 	else if(reply==GNOME_YES)
 	{
-		gchar *text=gtk_editable_get_chars(GTK_EDITABLE(
+		gchar *query_text;
+	
+		/*
+		 * Get the string to query for from the GnomeEntry.
+		 */
+		query_text=gtk_editable_get_chars(GTK_EDITABLE(
 		gnome_entry_gtk_entry(GNOME_ENTRY(query_entry))), 0, -1);
 
-		if(!text)
+		if(!query_text)
 		{
+			/*
+			 * Bad case in here.
+			 */
 			gnome_app_warning(GNOME_APP(app1),
 				_("No query string given!"));
+
+			g_free(query_text);
 		}
 		else
 		{
 			GtrQuery *query;
 			GtrQueryResult *result;
-			gchar *text;
+			gchar *domainname;
+
+			/*
+			 * Get the domain's name from the combobox.
+			 */
+			domainname=gtk_editable_get_chars(GTK_EDITABLE(GTK_COMBO(
+				domain)->entry), 0, -1);			
 			
-			query->message=text;
-			query->language=lc;
-			text=gtk_editable_get_chars(GTK_EDITABLE(
-				GTK_COMBO(domain)->entry), 0, -1);
-
-			query->domain=text;
-			g_free(text);
-
+			/*
+			 * Build up and run the query.
+			 */
+			query=gtranslator_new_query(domainname, query_text, lc);
 			result=gtranslator_query_simple(query);
 
 			if(!result)
 			{
+				/* 
+				 * No results? CLose down the dialog.
+				 */
 				gnome_app_warning(GNOME_APP(app1),
 				_("Couldn't find any result for the query!"));
 
@@ -656,17 +670,26 @@ void query_dialog(void)
 			}
 			else
 			{
+				/*
+				 * In the other case simply print out the
+				 *  found translation with the domain name for 
+				 *   now and close/exit then.
+				 */
 				gchar *resulttext;
 
-				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\"."), result->translation, result->domain);
-
-				gnome_app_message(GNOME_APP(app1), resulttext);
-				g_free(resulttext);
-
+				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\"."),
+					result->translation, result->domain);
+				
 				gnome_dialog_close(GNOME_DIALOG(dialog));
 
-				g_free(result);
+				gnome_app_message(GNOME_APP(app1), resulttext);
+				
+				g_free(resulttext);
 			}
+			/*
+			 * FIXME: This causes a SEGV.
+			 * gtranslator_free_query(&query);
+			 */
 		}
 	}
 }

@@ -1,5 +1,15 @@
 2001-03-04  Fatih Demir	<kabalak@gtranslator.org>
 
+	* prefs.c, prefs.h & prefs_init.c: Added a toggle option for
+		keeping the obsolete messages and also changed the prefs_init
+		 function for this.
+
+	* dialogs.c & query.c: Use the new free'ing functions for the own
+		GtrQuery(Result) structures; added gtranslator_new_query
+		 function for creating a GtrQuery and made the setlocale
+		  call reasonable and working (only rescue LC_MESSAGES and
+		   reset it).
+
 	* dialogs.c/.h: Added a query dialog which does even work now and 
 		free the variables a little bit up.
 
@@ -9,7 +19,8 @@
 		  be as easy as in C++ via str!=query->message...
 		
 		Rescue and reset up the current locale settings after the
-		 query.
+		 query, added free'ing functions for the structures aka.
+		  "gtranslator_free_query(_result)".
 
 	* syntax.c: Do also insert syntax highlighted text if only one char
 		is left over.

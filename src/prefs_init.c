@@ -50,7 +50,7 @@ void prefs_init_default()
 		gtranslator_config_set_bool(
 			"toggles/use_dot_char", TRUE);
 		gtranslator_config_set_bool(
-			"toggles/keep_obsolete_messages", TRUE);	
+			"toggles/keep_obsolete", TRUE);	
 
 		/*
 		 * Initialize the default highlight colors.

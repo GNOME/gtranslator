@@ -65,7 +65,7 @@ static GtkWidget
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_specs, *instant_spell_checking,
-	*use_own_dict;
+	*use_own_dict, *keep_obsolete;
 	
 /*
  * The preferences dialog widget itself.
@@ -237,7 +237,7 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	 */
 	first_page = append_page_table(prefs, 2, 2, _("Personal information"));
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
-	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
+	third_page = append_page_table(prefs, 4, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 5, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 4, 2, _("Recent files & spell checking"));
 	sixth_page = append_page_table(prefs, 5, 2, _("Fonts & Colors"));
@@ -297,6 +297,10 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	    attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
 		wants.warn_if_no_change, prefs_box_changed);
+	keep_obsolete =
+	    attach_toggle_with_label(third_page, 4,
+		_("Keep obsolete message in the po files"),
+		wants.keep_obsolete, prefs_box_changed);
 
 	/*
 	 * The fourth page with the popup menu & the dot_char.
@@ -451,6 +455,7 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	wants.instant_spell_check = if_active(instant_spell_checking);
 	wants.use_own_specs = if_active(own_specs);
 	wants.use_own_dict = if_active(use_own_dict);
+	wants.keep_obsolete = if_active(keep_obsolete);
 #undef if_active
 	
 	gtranslator_config_init();
@@ -513,6 +518,8 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 			      wants.use_own_specs);
 	gtranslator_config_set_bool("toggles/use_own_dict",
 			      wants.use_own_dict);
+	gtranslator_config_set_bool("toggles/keep_obsolete",
+			      wants.keep_obsolete);
 	gtranslator_config_close();
 }
 
@@ -633,6 +640,9 @@ void read_prefs(void)
 	    gtranslator_config_get_bool("toggles/use_own_specs");
 	wants.use_own_dict =
 	    gtranslator_config_get_bool("toggles/use_own_dict");
+	wants.keep_obsolete =
+	    gtranslator_config_get_bool("toggles/keep_obsolete");
+
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();

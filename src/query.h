@@ -40,6 +40,11 @@ typedef struct {
 #define GTR_QUERY_RESULT(x) ((GtrQueryResult *)(x))
 
 /*
+ * The generally used domains list.
+ */
+GList *domains;
+
+/*
  * Returns the non-prefixed and non-suffixed filename back.
  */
 gchar *gtranslator_strip_out(gchar *filename);
@@ -58,9 +63,18 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 	gchar *language);
 
 /*
- * Returns a list of all found domains in directory (the list consists of
- *  gchars).
+ * Set up the "domains" GList with all domains in the given directory for
+ *  the language which is specified in the preferences.
  */
-GList *gtranslator_query_domains(const gchar *directory);
+void gtranslator_query_domains(const gchar *directory);
+
+/*
+ * Creation/deletion of GtrQuery(Result)s:
+ */
+GtrQuery *gtranslator_new_query(const gchar *domain, 
+	const gchar *message, const gchar *language);
+
+void gtranslator_free_query(GtrQuery **query);
+void gtranslator_free_query_result(GtrQueryResult **result);
 
 #endif
