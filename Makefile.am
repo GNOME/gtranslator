@@ -20,9 +20,10 @@ distpacks: distdir
 	@echo Cleaning up...
 	@-rm -rf $(distdir)
 
-cvspack: distclean
+cvspack: clean
 	@-rm -f gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz
 	@echo Creating CVS package of gtranslator...
+	@./autogen.sh --help
 	@$(TAR) -C .. -chozf gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz gtranslator
 
 pre-release: cvspack
