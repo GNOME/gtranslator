@@ -26,6 +26,9 @@
 #include "runtime-config.h"
 #include "utils.h"
 
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
+
 /*
  * This is the externally declared and generally used GtrRuntimeConfig.
  */
@@ -68,7 +71,7 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 	 *  this empty string to avoid the usage of the mid dot ('·'). The contents
 	 *   of your translations are irrelevant in this case.
 	 */
-	if (_("")[0]="\0")
+	if (_("")[0]=='\0')
 	{
 		gchar *middot=NULL;
 		gchar *encoding=NULL;

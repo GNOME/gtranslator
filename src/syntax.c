@@ -28,7 +28,6 @@
 #include "syntax.h"
 #include "syntax-elements.h"
 #include "utils.h"
-#include "zpmd.h"
 
 #include <ctype.h>
 #include <string.h>

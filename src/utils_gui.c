@@ -24,7 +24,6 @@
 #include "runtime-config.h"
 #include "utils.h"
 #include "utils_gui.h"
-#include "zpmd.h"
 
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-util.h>
