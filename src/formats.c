@@ -25,6 +25,7 @@
 #include "messages.h"
 #include "nautilus-string.h"
 
+#include <ctype.h>
 #include <string.h>
 
 /*
@@ -49,25 +50,60 @@ static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *
 	else
 	{
 		gchar	*tuz;
-		guint	 formats;
 
-		formats=nautilus_str_count_characters(c_string, '%');
+		/*
+		 * Get the characters after the first '%'.
+		 */
+		tuz=strstr(c_string, "%");
+		tuz++;
 
-		if(formats <= 1)
+		/*
+		 * Simple '%%' formats should be catched here.
+		 */
+		if(*tuz && *tuz=='%')
 		{
-			/*
-			 * Get the characters after the first '%'.
-			 */
-			tuz=nautilus_str_get_after_prefix(c_string, "%");
-
-			if(*tuz=='%')
-			{
-				string=g_string_append_c(string, '%');
-			}
+			string=g_string_append_c(string, '%');
 		}
 		else
 		{
-			g_message(">>%u", formats);
+			/*
+			 * Cruise through all characters of the msgid/msgstr parts.
+			 */
+			while(*tuz && !isspace(*tuz))
+			{
+				if(!isdigit(*tuz) && isalpha(*tuz) && *tuz!='u' && *tuz!='l')
+				{
+					/*
+					 * Plain '%X' formats should be home here.
+					 */
+					string=g_string_append_c(string, *tuz);
+				}
+				else if(*tuz=='u' && !isspace(*tuz++))
+				{
+					/*
+					 * '%uX' formats should be catched here.
+					 */
+					string=g_string_append_c(string, 'u');
+					string=g_string_append_c(string, *tuz);
+				}
+				else if(*tuz=='l' && !isspace(*tuz++))
+				{
+					/*
+					 * '%lX' formats should be catched here.
+					 */
+					string=g_string_append_c(string, 'l');
+					string=g_string_append_c(string, *tuz);
+				}
+				else if(*tuz=='$')
+				{
+					/*
+					 * FIXME: %NUMBER$FORMAT -- should be handled.
+					 */
+					tuz--;
+				}
+				
+				tuz++;
+			}
 		}
 	}
 }
@@ -93,6 +129,33 @@ gboolean gtranslator_formats_check(GtrMsg *message)
 	 */
 	gtranslator_formats_fill_check_data(GTR_MSG(message)->msgid, id_formats);
 	gtranslator_formats_fill_check_data(GTR_MSG(message)->msgstr, str_formats);
+
+	/*
+	 * Check the length's of the two GString's for equality.
+	 */
+	if(id_formats->len!=str_formats->len)
+	{
+		return FALSE;
+	}
+	else
+	{
+		gint	i=0;
+		gchar	*id, *str;
+		
+		id=id_formats->str;
+		str=str_formats->str;
+
+		g_return_val_if_fail(id!=NULL, FALSE);
+		g_return_val_if_fail(str!=NULL, FALSE);
+
+		for(i=(strlen(id) - 1); i >= 0; --i)
+		{
+			if(id[i] && str[i] && id[i]!=str[i])
+			{
+				return FALSE;
+			}
+		}
+	}
 
 	g_string_free(id_formats, TRUE);
 	g_string_free(str_formats, TRUE);

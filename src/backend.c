@@ -17,13 +17,21 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "backend.h"
 #include "defines.include"
 #include "nautilus-string.h"
 #include "utils.h"
 
-#include <gal/util/e-xml-utils.h>
 #include <gnome-xml/parser.h>
+
+#include <libgnome/gnome-i18n.h>
+
+#include <gal/util/e-xml-utils.h>
+
 
 /*
  * Internal prototypes:
@@ -268,9 +276,9 @@ void gtranslator_backend_add(const gchar *filename)
 		backend->save_file_as=save_as_function;
 		
 		/*
-		 * Mr. Debug, never translate such things!
+		 * This is a status report feedback: "Blabla backend\n (filename) loaded.\n".
 		 */
-		g_print("%s\n (%s) loaded.\n", backend->info->description, 
+		g_print(_("%s\n (%s) loaded.\n"), _(backend->info->description),
 			backend->info->modulename);
 
 		/*
