@@ -43,6 +43,7 @@ static gchar *keywords[] = {
 	"Glib",
 	"GLIB",
 	"GNU",
+	"Gnu",
 	"GNOME",
 	"Gnome",
 	"GPL",
@@ -62,6 +63,7 @@ static gchar *keywords[] = {
 	"URN",
 	"X11",
 	"WWW",
+	"WEB",
 	"www",
 	NULL
 };
@@ -82,6 +84,7 @@ static gchar *prefixes[] =  {
 	"man:",
 	"medusa:",
 	"news:",
+	"nfs:",
 	"nntp:",
 	"search:",
 	"uri:",
