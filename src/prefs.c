@@ -421,11 +421,6 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 		return;
 	}
 
-	/*
-	 * We need to apply only once. 
-	 */
-	if (page_num != -1)
-		return;
 #define update(value,widget) GTR_FREE(value); \
 	value=gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 
@@ -678,6 +673,9 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	{
 		gtranslator_comment_hide();
 	}
+
+	gtk_widget_destroy(GTK_WIDGET(prefs));
+	return;
 }
 
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)
