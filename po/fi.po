@@ -3,10 +3,19 @@
 # Copyright (C) 2000-2002 Free Software Foundation, Inc.
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2002.
 # 
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this empty string to avoid the
+#. *  usage of the mid dot ('·') in the displaying routines.
+#. *
+#. *   The contents of your translation are irrelevant in this case.
+#.
+#: src/runtime-config.c:78
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39.1\n"
-"POT-Creation-Date: 2002-02-12 14:09+0200\n"
+"POT-Creation-Date: 2002-03-09 15:45+0100\n"
 "PO-Revision-Date: 2002-02-12 14:13+0200\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -67,12 +76,12 @@ msgid ""
 " (%s) loaded.\n"
 msgstr ""
 
-#: src/color-schemes.c:173
+#: src/color-schemes.c:199
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Väriteematiedoston `%s' toteuttaminen ei onnistu!"
 
-#: src/color-schemes.c:295
+#: src/color-schemes.c:321
 msgid "Couldn't retrieve author information!"
 msgstr "Tekijätietoja ei löytynyt!"
 
@@ -80,27 +89,36 @@ msgstr "Tekijätietoja ei löytynyt!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:301 src/translator.c:326
+#: src/color-schemes.c:327 src/translator.c:312
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: src/color-schemes.c:302
+#: src/color-schemes.c:328
 msgid "<Not Given>"
 msgstr "<Ei Annettu>"
 
-#: src/dialogs.c:96
+#: src/color-schemes.c:475
+msgid "_Settings/_Colorschemes/"
+msgstr ""
+
+#: src/color-schemes.c:505
+#, fuzzy, c-format
+msgid "Activate colorscheme %s"
+msgstr "Käytettävä syntaksiväritys:"
+
+#: src/dialogs.c:97
 msgid "gtranslator -- open po file"
 msgstr "gtranslator -- avaa po-tiedosto"
 
-#: src/dialogs.c:135
+#: src/dialogs.c:136
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- tallenna nimellä.."
 
-#: src/dialogs.c:155
+#: src/dialogs.c:156
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- tallenna paikallinen kopio nimellä.."
 
-#: src/dialogs.c:199
+#: src/dialogs.c:200
 #, c-format
 msgid ""
 "File %s\n"
@@ -109,137 +127,137 @@ msgstr ""
 "Tiedostoa %s\n"
 "on muutettu. Tallenna?"
 
-#: src/dialogs.c:236
+#: src/dialogs.c:237
 msgid "gtranslator -- import po file"
 msgstr "gtranslator -- tuo po-tiedosto"
 
-#: src/dialogs.c:279
+#: src/dialogs.c:280
 msgid "gtranslator -- export po file"
 msgstr "gtranslator -- vie po-tiedosto"
 
-#: src/dialogs.c:325 src/dialogs.c:359
+#: src/dialogs.c:326 src/dialogs.c:360
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- muokkaa kommenttia"
 
-#: src/dialogs.c:347
+#: src/dialogs.c:348
 msgid "Comment:"
 msgstr "Kommentti:"
 
-#: src/dialogs.c:463
+#: src/dialogs.c:464
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr ""
 
-#: src/dialogs.c:476 src/dialogs.c:501
+#: src/dialogs.c:477 src/dialogs.c:502
 msgid "gtranslator -- confirm removal of all translations"
 msgstr "gtranslator -- vahvista kaikkien käännösten poistaminen"
 
-#: src/dialogs.c:490
+#: src/dialogs.c:491
 msgid "Are you sure you want to remove ALL translations from this po file?"
 msgstr ""
 
-#: src/dialogs.c:593
+#: src/dialogs.c:594
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- siirry"
 
-#: src/dialogs.c:595
+#: src/dialogs.c:596
 msgid "Go!"
 msgstr "Siirry!"
 
-#: src/dialogs.c:604
+#: src/dialogs.c:605
 msgid "Go to message number:"
 msgstr "Siirry tekstinumeroon:"
 
-#: src/dialogs.c:670
+#: src/dialogs.c:671
 msgid "Find in the po file"
 msgstr "Etsi po-tiedostosta"
 
-#: src/dialogs.c:672 src/menus.c:342
+#: src/dialogs.c:673 src/menus.c:348
 msgid "Find"
 msgstr "Etsi"
 
-#: src/dialogs.c:679
+#: src/dialogs.c:680
 msgid "Enter search string:"
 msgstr "Anna hakumerkkijono:"
 
-#: src/dialogs.c:684
+#: src/dialogs.c:685
 msgid "Case sensitive"
 msgstr "Kirjainkoolla on väilä"
 
-#: src/dialogs.c:689 src/languages.c:91
+#: src/dialogs.c:690 src/languages.c:91
 msgid "English"
 msgstr "Englanti"
 
-#: src/dialogs.c:695 src/dialogs.c:793 src/gui.c:534 src/messages-table.c:451
-#: src/messages-table.c:492
+#: src/dialogs.c:696 src/dialogs.c:794 src/gui.c:540 src/messages-table.c:546
+#: src/messages-table.c:587
 msgid "Translated"
 msgstr "Käännetty"
 
-#: src/dialogs.c:701 src/dialogs.c:799
+#: src/dialogs.c:702 src/dialogs.c:800
 msgid "Both"
 msgstr "Molemmat"
 
-#: src/dialogs.c:707 src/dialogs.c:787
+#: src/dialogs.c:708 src/dialogs.c:788
 msgid "Comments"
 msgstr "Kommentit"
 
-#: src/dialogs.c:713
+#: src/dialogs.c:714
 msgid "In all strings"
 msgstr "Kaikista merkkijonoista"
 
-#: src/dialogs.c:728
+#: src/dialogs.c:729
 msgid "Find in: "
 msgstr "Mistä etsitään: "
 
-#: src/dialogs.c:773
+#: src/dialogs.c:774
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- korvaa"
 
-#: src/dialogs.c:774 src/menus.c:346
+#: src/dialogs.c:775 src/menus.c:352
 msgid "Replace"
 msgstr "Korvaa"
 
-#: src/dialogs.c:775
+#: src/dialogs.c:776
 msgid "Replace all"
 msgstr "Korvaa kaikki"
 
-#: src/dialogs.c:779
+#: src/dialogs.c:780
 msgid "String to replace:"
 msgstr "Korvattava merkkijono:"
 
-#: src/dialogs.c:782
+#: src/dialogs.c:783
 msgid "Replace string:"
 msgstr "Korvaava merkkijono:"
 
-#: src/dialogs.c:822
+#: src/dialogs.c:823
 msgid "Replace in:"
 msgstr ""
 
-#: src/dialogs.c:900
+#: src/dialogs.c:901
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Virhe msgfmt:ia suoritettaessa:\n"
 
-#: src/dialogs.c:930
+#: src/dialogs.c:931
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- avaa URI:stä"
 
-#: src/dialogs.c:931 src/menus.c:273
+#: src/dialogs.c:932 src/menus.c:279
 msgid "Open"
 msgstr "Avaa"
 
-#: src/dialogs.c:939
+#: src/dialogs.c:940
 msgid "Enter URI:"
 msgstr "Anna URI:"
 
-#: src/dialogs.c:977
+#: src/dialogs.c:978
 msgid "No URI given!"
 msgstr "Ei URI:tä annettu!"
 
-#: src/dialogs.c:992
+#: src/dialogs.c:993
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Ei annettu tuettua URI-protokollaa! (esim. \"ftp://\")"
 
-#: src/dialogs.c:1000
+#: src/dialogs.c:1001
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -249,10 +267,11 @@ msgid ""
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
 "ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
 "\n"
-"file:///<PO-FILE>"
+"file:///<PO-FILE> or\n"
+"http://www.DOMAIN.COM/PO-FILE"
 msgstr ""
 
-#: src/dialogs.c:1034
+#: src/dialogs.c:1036
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -261,71 +280,63 @@ msgid ""
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
 
-#: src/dialogs.c:1057
+#: src/dialogs.c:1059
 #, c-format
 msgid "Recovering `%s'..."
-msgstr ""
-
-#: src/dialogs.c:1103
-msgid "Couldn't get list of gettext domains!"
 msgstr ""
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1110
-msgid "Here you can query existing gettext domains for a translation."
+#: src/dialogs.c:1106
+msgid "Here you can query existing translations from your learn buffer."
 msgstr ""
 
-#: src/dialogs.c:1113
-msgid "gtranslator -- query existing gettext domains"
-msgstr ""
+#: src/dialogs.c:1109
+#, fuzzy
+msgid "gtranslator -- query your personal learn buffer"
+msgstr "gtranslator -- vie po-tiedosto"
 
-#: src/dialogs.c:1114 src/menus.c:351
+#: src/dialogs.c:1110 src/menus.c:357
 msgid "Query"
 msgstr ""
 
-#: src/dialogs.c:1122
+#: src/dialogs.c:1110
+#, fuzzy
+msgid "Query message content"
+msgstr "Muokkaa tekstin kommenttia"
+
+#: src/dialogs.c:1119
 msgid "Query string:"
 msgstr ""
 
-#: src/dialogs.c:1129
-msgid "Domain to search the translation in:"
-msgstr ""
-
-#: src/dialogs.c:1179
+#: src/dialogs.c:1165
 msgid "No query string given!"
 msgstr ""
 
-#: src/dialogs.c:1220
-msgid "Couldn't find any result for the query!"
+#: src/dialogs.c:1187
+msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr ""
 
-#: src/dialogs.c:1233
+#: src/dialogs.c:1199
 #, c-format
 msgid ""
-"Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
+"Found \"%s\" as a translation for \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
 
 #.
-#. * Translators: This means that the queried string
-#. *  is already translated.
+#. * Translators: This means that the query result string is
+#. *  already translated.
 #.
-#: src/dialogs.c:1317
+#: src/dialogs.c:1266
 msgid "Query's result translation is already there!"
 msgstr ""
 
-#: src/dialogs.c:1340
+#: src/dialogs.c:1287
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
-"from the default query domain and the personal learn buffer?"
-msgstr ""
-
-#: src/dialogs.c:1345
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from the default query domain?"
+"from your personal learn buffer?"
 msgstr ""
 
 #: src/find.c:214
@@ -345,36 +356,36 @@ msgstr ""
 msgid "Edit comment"
 msgstr "Muokkaa kommenttia"
 
-#: src/gui.c:520
+#: src/gui.c:526
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i sumeaa jäljellä ]"
 
-#: src/gui.c:520 src/gui.c:524 src/menus.c:332 src/messages-table.c:437
-#: src/messages-table.c:499
+#: src/gui.c:526 src/gui.c:530 src/menus.c:338 src/messages-table.c:532
+#: src/messages-table.c:594
 msgid "Fuzzy"
 msgstr "Sumea"
 
-#: src/gui.c:524
+#: src/gui.c:530
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Ei sumeita jäljellä ]"
 
-#: src/gui.c:532
-msgid "Stick"
-msgstr "Naulaa"
+#: src/gui.c:538
+msgid "Sticky (Message & translation are the same)"
+msgstr ""
 
-#: src/gui.c:543
+#: src/gui.c:549
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i kääntämätöntä jäljellä ] "
 
-#: src/gui.c:543 src/gui.c:545 src/messages-table.c:409
-#: src/messages-table.c:489
+#: src/gui.c:549 src/gui.c:551 src/messages-table.c:504
+#: src/messages-table.c:584
 msgid "Untranslated"
 msgstr "Kääntämätön"
 
-#: src/gui.c:545
+#: src/gui.c:551
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Ei kääntämättömiä jäljellä ]"
@@ -382,7 +393,7 @@ msgstr "%s [ Ei kääntämättömiä jäljellä ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:558
+#: src/gui.c:564
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Teksti %d / %d / Tila: %s"
@@ -435,7 +446,7 @@ msgstr "Kääntäjän nimi:"
 msgid "Translator's e-mail:"
 msgstr "Kääntäjän sähköpostiosoite:"
 
-#: src/header_stuff.c:509 src/prefs.c:170
+#: src/header_stuff.c:509 src/prefs.c:148
 msgid "Language:"
 msgstr "Kieli:"
 
@@ -443,11 +454,11 @@ msgstr "Kieli:"
 msgid "Language group's e-mail:"
 msgstr "Kieliryhmän sähköpostiosoite:"
 
-#: src/header_stuff.c:520 src/prefs.c:186
+#: src/header_stuff.c:520 src/prefs.c:164
 msgid "Charset:"
 msgstr "Merkistö:"
 
-#: src/header_stuff.c:525 src/prefs.c:191
+#: src/header_stuff.c:532 src/prefs.c:169
 msgid "Encoding:"
 msgstr "Koodaus:"
 
@@ -460,7 +471,7 @@ msgstr "_Tiedosto/_Pikavalinnat/"
 msgid "Open %s"
 msgstr "Avaa %s"
 
-#: src/htmlizer.c:238
+#: src/htmlizer.c:276
 #, c-format
 msgid "Couldn't save html output to %s!"
 msgstr "html-tulostuksen tallentaminen kohteeseen %s epäonnistui!"
@@ -468,7 +479,7 @@ msgstr "html-tulostuksen tallentaminen kohteeseen %s epäonnistui!"
 #.
 #. * Translatable output to a html file which is visible on the pages.
 #.
-#: src/htmlizer.c:256
+#: src/htmlizer.c:302
 #, c-format
 msgid "%s-%s contains %i messages."
 msgstr "%s-%s sisältää %i tekstiä."
@@ -479,12 +490,12 @@ msgstr "%s-%s sisältää %i tekstiä."
 #. * NOTE: Please do not forget to also "translate" the <b> tags as the
 #. *  project name should be displayed bold on the output pages.
 #.
-#: src/htmlizer.c:269
+#: src/htmlizer.c:315
 #, c-format
 msgid "Project <b>%s</b> (last po file revision: %s)."
 msgstr "Projekti <b>%s</b> (po-tiedoston edellinen tarkistus: %s)."
 
-#: src/htmlizer.c:284
+#: src/htmlizer.c:330
 #, c-format
 msgid "Last translator: %s"
 msgstr "Viimeisin kääntäjä: %s"
@@ -494,15 +505,15 @@ msgstr "Viimeisin kääntäjä: %s"
 #. *  the hyperlink in the translations.
 #. *
 #. * In the output it looks then like "HTML output of "tr.po" produced
-#. *  by gtranslator version 0.39".
+#. *  by gtranslator version X.YY".
 #. *
 #. * Please don't forget to include the HTML tags in the msgid.
 #.
-#: src/htmlizer.c:322
+#: src/htmlizer.c:369
 #, c-format
 msgid ""
-"HTML output of \"%s\" produced by <a "
-"href=\"http://www.gtranslator.org\">gtranslator</a> version %s."
+"HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
+"\">gtranslator</a> version %s."
 msgstr ""
 
 #: src/languages.c:35
@@ -737,100 +748,92 @@ msgstr "Walloon"
 msgid "Welsh"
 msgstr "Welsh"
 
-#: src/main.c:83
+#: src/main.c:81
 msgid "Auto translate the po file & exit"
 msgstr ""
 
-#: src/main.c:83 src/main.c:99
+#: src/main.c:81 src/main.c:97
 msgid "FILENAME"
 msgstr ""
 
-#: src/main.c:87
+#: src/main.c:85
 msgid "Show build information/specifications"
 msgstr ""
 
-#: src/main.c:91
+#: src/main.c:89
 msgid "Export learn buffer to a plain po file"
 msgstr ""
 
-#: src/main.c:91
+#: src/main.c:89
 msgid "PO_FILE"
 msgstr ""
 
-#: src/main.c:95
+#: src/main.c:93
 msgid "Specify main window geometry"
 msgstr "Määritä pääikkunan koko"
 
-#: src/main.c:95
+#: src/main.c:93
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/main.c:99
+#: src/main.c:97
 msgid "Learn the file completely & exit"
 msgstr ""
 
-#: src/main.c:103
+#: src/main.c:101
 msgid "Don't load any backend modules"
 msgstr ""
 
-#: src/main.c:107
-msgid "Define another query-domains directory"
-msgstr ""
-
-#: src/main.c:107
-msgid "LOCALEDIR"
-msgstr ""
-
-#: src/main.c:111
+#: src/main.c:105
 msgid "HTML file to write to"
 msgstr "HTML-tiedosto johon kirjoitetaan"
 
-#: src/main.c:111
+#: src/main.c:105
 msgid "HTMLFILE"
 msgstr ""
 
-#: src/main.c:115
+#: src/main.c:109
 msgid "Don't highlight syntax"
 msgstr ""
 
-#: src/main.c:155
+#: src/main.c:150
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Virhe GConfin alustuksessa : %s."
 
-#: src/main.c:178
+#: src/main.c:173
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator -- koontikäännöstiedot:"
 
-#: src/main.c:180
+#: src/main.c:175
 msgid "Version and build date:"
 msgstr ""
 
-#: src/main.c:182
+#: src/main.c:177
 msgid "Build GLib/Gtk+/GNOME versions:"
 msgstr ""
 
-#: src/main.c:184
+#: src/main.c:179
 msgid "Backends directory:"
 msgstr ""
 
-#: src/main.c:186
+#: src/main.c:181
 msgid "Colorschemes directory:"
 msgstr ""
 
-#: src/main.c:188
+#: src/main.c:183
 msgid "Scripts directory:"
 msgstr ""
 
-#: src/main.c:190
+#: src/main.c:185
 msgid "Window icon:"
 msgstr "Ikkunan kuvake:"
 
-#: src/main.c:192
+#: src/main.c:187
 msgid "Own locale directory:"
 msgstr "Oma lokaalihakemisto:"
 
-#: src/main.c:225
+#: src/main.c:220
 msgid "GModule implementation doesn't support loading dynamic modules!"
 msgstr ""
 
@@ -838,7 +841,7 @@ msgstr ""
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:520
+#: src/main.c:468
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "`%s' opittu onnistuneesti.\n"
@@ -846,274 +849,276 @@ msgstr "`%s' opittu onnistuneesti.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:561
+#: src/main.c:510
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
 msgstr ""
 
-#: src/menus.c:47
+#: src/menus.c:48
 msgid "_Messages"
 msgstr "T_ekstit"
 
-#: src/menus.c:48
+#: src/menus.c:49
 msgid "Mess_age status"
 msgstr "Tekstin t_ila"
 
-#: src/menus.c:59
+#: src/menus.c:60
 msgid "_Compile"
 msgstr "_Käännä"
 
-#: src/menus.c:60 src/menus.c:287
+#: src/menus.c:61 src/menus.c:293
 msgid "Compile the po file"
 msgstr "Käännä (compile) po-tiedosto"
 
-#: src/menus.c:66
+#: src/menus.c:67
 msgid "_Update"
 msgstr "_Päivitä"
 
-#: src/menus.c:67 src/menus.c:291
+#: src/menus.c:68 src/menus.c:297
 msgid "Update the po file"
 msgstr "Päivitä po-tiedosto"
 
-#: src/menus.c:74
+#: src/menus.c:75
 msgid "Aut_otranslate..."
 msgstr ""
 
-#: src/menus.c:75
-msgid ""
-"Autotranslate the file with information from the default query domain/learn "
-"buffer"
+#: src/menus.c:76
+msgid "Autotranslate the file with information from your learn buffer"
 msgstr ""
 
-#: src/menus.c:82
+#: src/menus.c:83
 msgid "Remove all translations..."
 msgstr "Poista kaikki käännökset..."
 
-#: src/menus.c:83
+#: src/menus.c:84
 msgid "Remove all existing translations from the po file"
 msgstr ""
 
-#: src/menus.c:91
+#: src/menus.c:92
 msgid "Open from _URI..."
 msgstr "Avaa _netistä"
 
-#: src/menus.c:92
+#: src/menus.c:93
 msgid "Open a po file from a given URI"
 msgstr "Avaa po-tiedosto annetusta URI:stä"
 
-#: src/menus.c:102
+#: src/menus.c:103
 msgid "Recen_t files"
 msgstr "_Pikavalinnat"
 
-#: src/menus.c:105
+#: src/menus.c:106
 msgid "_Export to UTF-8..."
 msgstr "Vi_e UTF-8:na..."
 
-#: src/menus.c:106
+#: src/menus.c:107
 msgid "Export the current po file to UTF-8"
 msgstr "Tallentaa tiedoston UTF-8 -koodattuna"
 
-#: src/menus.c:112
+#: src/menus.c:113
 msgid "_Import from UTF-8..."
 msgstr "_Tuo UTF-8:sta..."
 
-#: src/menus.c:113
+#: src/menus.c:114
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr "Tuo UTF-8 -koodatun tiedoston puhtaana tekstinä"
 
-#: src/menus.c:143
+#: src/menus.c:144
 msgid "_Query..."
 msgstr "_Haku..."
 
-#: src/menus.c:144 src/menus.c:352
+#: src/menus.c:145 src/menus.c:358
 msgid "Query for a string"
 msgstr "Hae merkkijonoa"
 
-#: src/menus.c:151
+#: src/menus.c:152
 msgid "_Header..."
 msgstr "_Otsikko..."
 
-#: src/menus.c:152
+#: src/menus.c:153
 msgid "Edit po file header"
 msgstr "Muokkaa po-tiedoston otsikkoa"
 
-#: src/menus.c:159
+#: src/menus.c:160
 msgid "C_omment..."
 msgstr "K_ommentti..."
 
-#: src/menus.c:160
+#: src/menus.c:161
 msgid "Edit message comment"
 msgstr "Muokkaa tekstin kommenttia"
 
-#: src/menus.c:170
+#: src/menus.c:168
+msgid "Copy _message -> translation"
+msgstr ""
+
+#: src/menus.c:169
+msgid "Copy the original message contents and paste them as translation"
+msgstr ""
+
+#: src/menus.c:179
 msgid "_First"
 msgstr "_Ensimmäinen"
 
-#: src/menus.c:171 src/menus.c:308
+#: src/menus.c:180 src/menus.c:314
 msgid "Go to the first message"
 msgstr "Siirry ensimmäiseen tekstiin"
 
-#: src/menus.c:177
+#: src/menus.c:186
 msgid "_Back"
 msgstr "_Edellinen"
 
-#: src/menus.c:178 src/menus.c:312
+#: src/menus.c:187 src/menus.c:318
 msgid "Move back one message"
 msgstr "Siirry yksi teksti takaisinpäin"
 
-#: src/menus.c:185
+#: src/menus.c:194
 msgid "_Next"
 msgstr "_Seuraava"
 
-#: src/menus.c:186 src/menus.c:317
+#: src/menus.c:195 src/menus.c:323
 msgid "Move forward one message"
 msgstr "Siirry yksi teksti eteenpäin"
 
-#: src/menus.c:192
+#: src/menus.c:201
 msgid "_Last"
 msgstr "_Viimeinen"
 
-#: src/menus.c:193 src/menus.c:321
+#: src/menus.c:202 src/menus.c:327
 msgid "Go to the last message"
 msgstr "Siirry viimeiseen tekstiin"
 
-#: src/menus.c:200
+#: src/menus.c:209
 msgid "_Go to..."
 msgstr "_Siirry..."
 
-#: src/menus.c:201
+#: src/menus.c:210
 msgid "Goto specified message number"
 msgstr "Siirry tiettyyn viestinumeroon"
 
-#: src/menus.c:207
+#: src/menus.c:216
 msgid "Next fuz_zy"
 msgstr "Seuraava s_umea"
 
-#: src/menus.c:208
+#: src/menus.c:217
 msgid "Go to next fuzzy message"
 msgstr "Siirry seuraavaan sumeaan tekstiin"
 
-#: src/menus.c:214
+#: src/menus.c:223
 msgid "Next _untranslated"
 msgstr "Seuraava kääntämät_ön"
 
-#: src/menus.c:215 src/menus.c:326
+#: src/menus.c:224 src/menus.c:332
 msgid "Go to next untranslated message"
 msgstr "Siirry seuraavaan kääntämättömään tekstiin"
 
-#: src/menus.c:225
+#: src/menus.c:234
 msgid "_Translated"
 msgstr "K_äännetty"
 
-#: src/menus.c:226
+#: src/menus.c:235
 msgid "Toggle translated status of a message"
 msgstr "Määritä onko teksti käännetty"
 
-#: src/menus.c:234
+#: src/menus.c:243
 msgid "_Fuzzy"
 msgstr "S_umea"
 
-#: src/menus.c:235
+#: src/menus.c:244
 msgid "Toggle fuzzy status of a message"
 msgstr "Määritä onko teksti sumea"
 
-#: src/menus.c:243
-msgid "_Stick"
-msgstr "_Naulaa"
-
-#: src/menus.c:244
-msgid "Stick this message"
-msgstr "Naulaa tämä teksti"
-
 #: src/menus.c:261
+msgid "_Colorschemes"
+msgstr ""
+
+#: src/menus.c:267
 msgid "gtranslator _website"
 msgstr "gtranslatorin _kotisivu"
 
-#: src/menus.c:262
+#: src/menus.c:268
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslatorin www-sivu"
 
-#: src/menus.c:274
+#: src/menus.c:280
 msgid "Open a po file"
 msgstr "Avaa po-tiedosto"
 
-#: src/menus.c:277
+#: src/menus.c:283
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/menus.c:278
+#: src/menus.c:284
 msgid "Save File"
 msgstr "Tallenna tiedosto"
 
-#: src/menus.c:281
+#: src/menus.c:287
 msgid "Save as"
 msgstr "Tallenna nimellä"
 
-#: src/menus.c:282
+#: src/menus.c:288
 msgid "Save file with a different name"
 msgstr "Tallenna tiedosto nimellä"
 
-#: src/menus.c:286
+#: src/menus.c:292
 msgid "Compile"
 msgstr "Käännä"
 
-#: src/menus.c:290
+#: src/menus.c:296
 msgid "Update"
 msgstr "Päivitä"
 
-#: src/menus.c:294
+#: src/menus.c:300
 msgid "Header"
 msgstr "Otsikko"
 
-#: src/menus.c:295
+#: src/menus.c:301
 msgid "Edit the header"
 msgstr "Muokkaa otsikkoa"
 
-#: src/menus.c:299
+#: src/menus.c:305
 msgid "Undo"
 msgstr ""
 
-#: src/menus.c:300
+#: src/menus.c:306
 msgid "Undo the last performed action"
 msgstr ""
 
-#: src/menus.c:307
+#: src/menus.c:313
 msgid "First"
 msgstr "Ensimmäinen"
 
-#: src/menus.c:311
+#: src/menus.c:317
 msgid "Back"
 msgstr "Edellinen"
 
-#: src/menus.c:316
+#: src/menus.c:322
 msgid "Next"
 msgstr "Seuraava"
 
-#: src/menus.c:320
+#: src/menus.c:326
 msgid "Last"
 msgstr "Viimeinen"
 
-#: src/menus.c:325
+#: src/menus.c:331
 msgid "Missing"
 msgstr "Puuttuva"
 
-#: src/menus.c:333
+#: src/menus.c:339
 msgid "Go to the next fuzzy translation"
 msgstr "Siirry seuraavaan sumeaan käännökseen"
 
-#: src/menus.c:338
+#: src/menus.c:344
 msgid "Go to"
 msgstr "Siirry"
 
-#: src/menus.c:339
+#: src/menus.c:345
 msgid "Go to specified message number"
 msgstr "Siirry tiettyyn viestinumeroon"
 
-#: src/menus.c:343
+#: src/menus.c:349
 msgid "Find string in po file"
 msgstr "Etsi merkkijono po-tiedostosta"
 
-#: src/menus.c:347
+#: src/menus.c:353
 msgid "Replace string in po file"
 msgstr "Korvaa merkkijono po-tiedostossa"
 
@@ -1129,19 +1134,37 @@ msgstr "Sumeita tekstejä ei löydy enempää."
 msgid "All messages seem to be translated."
 msgstr "Kaikki tekstit näyttäisivät olevan käännetyt."
 
-#: src/messages-table.c:171
+#: src/message.c:322
+#, c-format
+msgid ""
+"The translation for message `%s'\n"
+"contains syntactical errors!"
+msgstr ""
+
+#: src/messages-table.c:197
 msgid "Appropriate match:"
 msgstr ""
 
-#: src/messages-table.c:179
-msgid "Found nothing appropriate in the personal learn buffer."
+#: src/messages-table.c:206
+msgid "Insert matching translation"
+msgstr ""
+
+#: src/messages-table.c:208
+#, fuzzy
+msgid "Take as translation"
+msgstr "Käännös"
+
+#: src/messages-table.c:234
+msgid ""
+"Found nothing appropriate in\n"
+" the personal learn buffer."
 msgstr ""
 
 #.
 #. * The `%i' format stands for the number of
 #. *  untranslated messages left over.
 #.
-#: src/messages-table.c:404
+#: src/messages-table.c:499
 #, c-format
 msgid "Untranslated (%i)"
 msgstr "Kääntämättömiä (%i)"
@@ -1150,12 +1173,12 @@ msgstr "Kääntämättömiä (%i)"
 #. * The '%i' format stands for the number
 #. *  of fuzzy entries/messages left over.
 #.
-#: src/messages-table.c:432
+#: src/messages-table.c:527
 #, c-format
 msgid "Fuzzy (%i)"
 msgstr "Sumeita (%i)"
 
-#: src/messages-table.c:495
+#: src/messages-table.c:590
 msgid "Sticky"
 msgstr ""
 
@@ -1273,228 +1296,228 @@ msgstr ""
 "Kääntäminen onnistui:\n"
 "%s"
 
-#: src/prefs.c:116
+#: src/prefs.c:108
 msgid "gtranslator -- options"
 msgstr "gtranslator -- asetukset"
 
-#: src/prefs.c:122
+#: src/prefs.c:114
 msgid "Personal information"
 msgstr "Henkilötiedot"
 
-#: src/prefs.c:124
+#: src/prefs.c:116
 msgid "Language settings"
 msgstr "Kieliasetukset"
 
-#: src/prefs.c:126
+#: src/prefs.c:118
 msgid "Po file editing"
 msgstr "Po-tiedostojen muokkaus"
 
-#: src/prefs.c:128
+#: src/prefs.c:120
 msgid "Miscellaneous"
 msgstr "Sekalaiset"
 
-#: src/prefs.c:130
+#: src/prefs.c:122
 msgid "Recent files & spell checking"
 msgstr "Pikavalinnat & oikoluku"
 
-#: src/prefs.c:132
+#: src/prefs.c:124
 msgid "Fonts, colors and color schemes"
 msgstr "Kirjasimet, värit ja väriteemat"
 
-#: src/prefs.c:134
+#: src/prefs.c:126
 msgid "Autosaving"
 msgstr "Automaattitallennus"
 
-#: src/prefs.c:136
+#: src/prefs.c:128
 msgid "Messages table"
 msgstr "Tekstitaulu"
 
-#: src/prefs.c:138
+#: src/prefs.c:130
 msgid "Learn buffer & autotranslation"
 msgstr "Oppimispuskuri & automaattinen kääntäminen"
 
-#: src/prefs.c:144
+#: src/prefs.c:136
 msgid "Author's name:"
 msgstr "Kääntäjän nimi:"
 
-#: src/prefs.c:147
+#: src/prefs.c:139
 msgid "Author's EMail:"
 msgstr "Kääntäjän sähköpostiosoite:"
 
-#: src/prefs.c:159
-msgid "Default query domain:"
-msgstr ""
-
-#: src/prefs.c:175
+#: src/prefs.c:153
 msgid "Language code:"
 msgstr "Kielikoodi:"
 
-#: src/prefs.c:181
+#: src/prefs.c:159
 msgid "Language group's EMail:"
 msgstr "Kieliryhmän sähköposti:"
 
-#: src/prefs.c:200
+#: src/prefs.c:178
 msgid "Remove fuzzy status if message changed"
 msgstr "Poista tekstin sumea-merkintä kun sitä muutetaan"
 
-#: src/prefs.c:204
+#: src/prefs.c:182
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Varoita jos po-tiedosto sisältää sumeita käännöksiä"
 
-#: src/prefs.c:208
+#: src/prefs.c:186
 msgid "Keep obsolete messages in the po files"
 msgstr "Säilytä po-tiedostojen vanhentuneet tekstit"
 
-#: src/prefs.c:212
+#: src/prefs.c:190
 msgid "Highlight syntax of the translation messages"
 msgstr ""
 
-#: src/prefs.c:219
+#: src/prefs.c:195
+msgid "Check messages for syntactical correctess"
+msgstr ""
+
+#: src/prefs.c:202
 msgid "Use special character to indicate free space"
 msgstr "Käytä erikoismerkkiä kuvaamaan tyhjettä"
 
-#: src/prefs.c:222
+#: src/prefs.c:205
 msgid "Enable the popup menu"
 msgstr "Käytä popup-valikkoikkunaa"
 
-#: src/prefs.c:225
+#: src/prefs.c:208
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Käytä toimintoa joka päivittää po-tiedoston gtranslatorista käsin"
 
-#: src/prefs.c:228
+#: src/prefs.c:211
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Käytä toimintoa joka poistaa kaikki käännökset po-tiedostosta"
 
-#: src/prefs.c:231
+#: src/prefs.c:214
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Poista käännetyt (compiled) tiedostot (eli \"paketti.gmo\")"
 
-#: src/prefs.c:234
+#: src/prefs.c:217
 msgid "Load all backends on startup"
 msgstr ""
 
-#: src/prefs.c:237
+#: src/prefs.c:220
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Tallenna ikkunan koko lopetettaessa"
 
-#: src/prefs.c:240
+#: src/prefs.c:223
 msgid "Show instant comment view in the main pane"
 msgstr ""
 
-#: src/prefs.c:247
+#: src/prefs.c:230
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Pikavalintojen enimmäismäärä:"
 
-#: src/prefs.c:251
+#: src/prefs.c:234
 msgid "Check recent files before showing in recent files' list"
 msgstr "Tarkista pikavalinnat ennen niiden näyttämistä pikavalintalistassa"
 
-#: src/prefs.c:254
+#: src/prefs.c:237
 msgid "Instant spell checking"
 msgstr "Oikolue heti"
 
-#: src/prefs.c:257
+#: src/prefs.c:240
 msgid "Use special dictionary:"
 msgstr "Käytä erityistä sanakirjaa:"
 
-#: src/prefs.c:313
+#: src/prefs.c:262
 msgid "Syntax color scheme to use:"
 msgstr "Käytettävä syntaksiväritys:"
 
-#: src/prefs.c:318
+#: src/prefs.c:267
 msgid "Apply own fonts:"
 msgstr "Käytä mukautettuja kirjasimia:"
 
-#: src/prefs.c:322
+#: src/prefs.c:271
 msgid "Original text font:"
 msgstr "Alkuperäisen tekstin kirjasin:"
 
-#: src/prefs.c:322
+#: src/prefs.c:271
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- kirjasimen valinta/msgid-kirjasin"
 
-#: src/prefs.c:326
+#: src/prefs.c:275
 msgid "Translation font:"
 msgstr "Käännöksen kirjasin:"
 
-#: src/prefs.c:326
+#: src/prefs.c:275
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- kirjasimen valinta/msgstr-kirjasin"
 
-#: src/prefs.c:330
+#: src/prefs.c:279
 msgid "Apply own colors:"
 msgstr "Käytä mukautettuja värejä:"
 
-#: src/prefs.c:334
+#: src/prefs.c:283
 msgid "Foreground color:"
 msgstr "Väri:"
 
-#: src/prefs.c:334
+#: src/prefs.c:283
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- värin määritys"
 
-#: src/prefs.c:338
+#: src/prefs.c:287
 msgid "Background color:"
 msgstr "Taustaväri:"
 
-#: src/prefs.c:338
+#: src/prefs.c:287
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- taustavärin määritys"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:344
+#: src/prefs.c:293
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Tallenna po-tiedostot automaattisesti tietyin väliajoin (minuuteissa):"
 
-#: src/prefs.c:359
+#: src/prefs.c:308
 msgid "Append a suffix to automatically saved files:"
 msgstr "Lisää automaattisesti tallennettuihin tiedostoihin jälkiliite:"
 
-#: src/prefs.c:379
+#: src/prefs.c:328
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Näytä tekstitaulu (vaatii gtranslatorin uudelleenkäynnistyksen)"
 
-#: src/prefs.c:383
+#: src/prefs.c:332
 msgid "Collapse translated entries by default"
 msgstr ""
 
-#: src/prefs.c:387
+#: src/prefs.c:336
 msgid "Use own colors for the messages table groups"
 msgstr ""
 
-#: src/prefs.c:391
+#: src/prefs.c:340
 msgid "Untranslated entries color:"
 msgstr "Kääntämättömien kohtien väri:"
 
-#: src/prefs.c:391
+#: src/prefs.c:340
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- kääntämättömien väri"
 
-#: src/prefs.c:395
+#: src/prefs.c:344
 msgid "Fuzzy entries color:"
 msgstr "Sumeiden kohtien väri:"
 
-#: src/prefs.c:395
+#: src/prefs.c:344
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- sumeiden väri"
 
-#: src/prefs.c:399
+#: src/prefs.c:348
 msgid "Translated entries color:"
 msgstr "Käännettyjen kohtien väri:"
 
-#: src/prefs.c:399
+#: src/prefs.c:348
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- käännettyjen väri"
 
-#: src/prefs.c:407
+#: src/prefs.c:356
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 
-#: src/prefs.c:411
+#: src/prefs.c:360
 msgid "Automatically learn a newly translated message"
 msgstr "Opi automaattisesti uudet käännetyt tekstit"
 
@@ -1503,27 +1526,27 @@ msgstr "Opi automaattisesti uudet käännetyt tekstit"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:419
+#: src/prefs.c:368
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
 
-#: src/prefs.c:423
-msgid "Minimal required similarity percentage while doing autotranslation"
+#: src/prefs.c:371
+msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr ""
 
-#: src/prefs.c:469
+#: src/prefs.c:416
 msgid "Please enter your name!"
 msgstr "Anna nimesi!"
 
-#: src/prefs.c:483
+#: src/prefs.c:430
 msgid "Please enter your EMail address!"
 msgstr "Anna sähköpostiosoitteesi!"
 
-#: src/prefs.c:496
+#: src/prefs.c:443
 msgid "Please enter a valid EMail address!"
 msgstr "Anna kelvollinen sähköpostiosoite!"
 
-#: src/prefs.c:729
+#: src/prefs.c:672
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1537,6 +1560,10 @@ msgstr "Päiväyksen luominen ei onnistunut!"
 
 #: src/replace.c:173
 msgid "No replacements made!"
+msgstr ""
+
+#: src/runtime-config.c:93 src/runtime-config.c:98
+msgid "^"
 msgstr ""
 
 #: src/save.c:117
@@ -1600,6 +1627,15 @@ msgstr "Virhe päivitettäessä po-tiedostoa."
 msgid "Can't create directory `%s'!"
 msgstr "Hakemiston '%s' luominen epäonnistui!"
 
+#.
+#. * Translators: this should be your default fall back encoding
+#. *  which will be used if gtranslator can't get the current env. locale's
+#. *   default sane encoding by itself.
+#.
+#: src/utils.c:499 src/utils.c:503
+msgid "iso-8859-1"
+msgstr ""
+
 #: src/utils_gui.c:119
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
@@ -1611,27 +1647,30 @@ msgid "You are not permitted to access file '%s'."
 msgstr ""
 
 #: src/utils_gui.c:359
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
-"Please save a new copy in a directory where\n"
-"you have write permission."
+"Please save a new copy of it to a place of your choice and get write\n"
+"permission for it."
 msgstr ""
 "Sinulla ei ole kirjoitusoikeuksia tiedostoon `%s'.\n"
 "Tallenna uusi kopio siitä hakemistoon, jonne\n"
 "sinulla on kirjoitusoikeudet."
 
-#: src/utils_gui.c:399
+#: src/utils_gui.c:401
 #, c-format
-msgid "The file `%s' is already open in another instance of gtranslator!"
+msgid ""
+"The file `%s' is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling `%s' currently to\n"
+"re-gain access to this file (also applies for post-crash cases)."
 msgstr ""
 
-#: src/utils_gui.c:432
+#: src/utils_gui.c:437
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr ""
 
-#: src/utils_gui.c:437
+#: src/utils_gui.c:442
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr ""
@@ -1718,16 +1757,17 @@ msgstr "Pakattu gettext po-tiedosto"
 msgid "Gettext po file"
 msgstr "Gettext po-tiedosto"
 
-#.
-#. * This is a middle dot (00B7 hexad.?) and represents the free space character
-#. *  if the gtranslator user wants to it so. It could be that the \xb7 character
-#. *   is already reserved in your language (locale) for something more important
-#. *    so that you will probably change the value of the translation of this
-#. *     string so, that the translated string doesn't conflict with your locale.
-#.
-#: src/zpmd.h:38
-msgid "·"
-msgstr "·"
+#~ msgid "Stick"
+#~ msgstr "Naulaa"
+
+#~ msgid "_Stick"
+#~ msgstr "_Naulaa"
+
+#~ msgid "Stick this message"
+#~ msgstr "Naulaa tämä teksti"
+
+#~ msgid "·"
+#~ msgstr "·"
 
 #~ msgid "_Message"
 #~ msgstr "T_eksti"

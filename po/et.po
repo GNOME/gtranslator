@@ -10,10 +10,19 @@
 # . *   The contents of your translation are irrelevant in this case.
 # .
 # 
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this empty string to avoid the
+#. *  usage of the mid dot ('·') in the displaying routines.
+#. *
+#. *   The contents of your translation are irrelevant in this case.
+#.
+#: src/runtime-config.c:78
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
-"POT-Creation-Date: 2002-02-28 20:42+0100\n"
+"POT-Creation-Date: 2002-03-09 15:45+0100\n"
 "PO-Revision-Date: 2002-03-01 08:59+0200\n"
 "Last-Translator: Peeter Vois <Peeter.Vois@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -461,7 +470,7 @@ msgstr "Tõlkija nimi"
 msgid "Translator's e-mail:"
 msgstr "Tõlkija e-post:"
 
-#: src/header_stuff.c:509 src/prefs.c:153
+#: src/header_stuff.c:509 src/prefs.c:148
 msgid "Language:"
 msgstr "Keel:"
 
@@ -469,11 +478,11 @@ msgstr "Keel:"
 msgid "Language group's e-mail:"
 msgstr "Keele grupi e-post:"
 
-#: src/header_stuff.c:520 src/prefs.c:169
+#: src/header_stuff.c:520 src/prefs.c:164
 msgid "Charset:"
 msgstr "Sümbolihunnik:"
 
-#: src/header_stuff.c:532 src/prefs.c:174
+#: src/header_stuff.c:532 src/prefs.c:169
 msgid "Encoding:"
 msgstr "Kodeering:"
 
@@ -527,11 +536,11 @@ msgstr "Viimane transleerija: %s"
 #: src/htmlizer.c:369
 #, c-format
 msgid ""
-"HTML output of \"%s\" produced by <a "
-"href=\"http://www.gtranslator.org\">gtranslator</a> version %s."
+"HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
+"\">gtranslator</a> version %s."
 msgstr ""
-"HTML \"%s\"-i väljund koostatud <a "
-"href=\"http://www.gtranslator.org>gtranslator</a>versioon %s."
+"HTML \"%s\"-i väljund koostatud <a href=\"http://www.gtranslator."
+"org>gtranslator</a>versioon %s."
 
 #: src/languages.c:35
 msgid "Afrikaans"
@@ -1151,6 +1160,13 @@ msgstr "Rohkem näruseid teateid ei ole."
 msgid "All messages seem to be translated."
 msgstr "Paistab, et kõik teated on tõlgitud."
 
+#: src/message.c:322
+#, c-format
+msgid ""
+"The translation for message `%s'\n"
+"contains syntactical errors!"
+msgstr ""
+
 #: src/messages-table.c:197
 msgid "Appropriate match:"
 msgstr "Sobiv vaste:"
@@ -1307,77 +1323,81 @@ msgstr ""
 "Edukalt koostatud:\n"
 "%s"
 
-#: src/prefs.c:113
+#: src/prefs.c:108
 msgid "gtranslator -- options"
 msgstr "gtranslator -- häälestus"
 
-#: src/prefs.c:119
+#: src/prefs.c:114
 msgid "Personal information"
 msgstr "Isiklik informatsioon"
 
-#: src/prefs.c:121
+#: src/prefs.c:116
 msgid "Language settings"
 msgstr "Keele seaded"
 
-#: src/prefs.c:123
+#: src/prefs.c:118
 msgid "Po file editing"
 msgstr "Po faili redigeerimine"
 
-#: src/prefs.c:125
+#: src/prefs.c:120
 msgid "Miscellaneous"
 msgstr "Igasugust"
 
-#: src/prefs.c:127
+#: src/prefs.c:122
 msgid "Recent files & spell checking"
 msgstr "Viimased failid ja kirja kontroll"
 
-#: src/prefs.c:129
+#: src/prefs.c:124
 msgid "Fonts, colors and color schemes"
 msgstr "Kirjad, värvid ja värviskeemid"
 
-#: src/prefs.c:131
+#: src/prefs.c:126
 msgid "Autosaving"
 msgstr "Automaatsalvestus"
 
-#: src/prefs.c:133
+#: src/prefs.c:128
 msgid "Messages table"
 msgstr "Teadete tabel"
 
-#: src/prefs.c:135
+#: src/prefs.c:130
 msgid "Learn buffer & autotranslation"
 msgstr "Õppepuhver ja autotõlked"
 
-#: src/prefs.c:141
+#: src/prefs.c:136
 msgid "Author's name:"
 msgstr "Autori nimi:"
 
-#: src/prefs.c:144
+#: src/prefs.c:139
 msgid "Author's EMail:"
 msgstr "Autori e-post:"
 
-#: src/prefs.c:158
+#: src/prefs.c:153
 msgid "Language code:"
 msgstr "Keele kood:"
 
-#: src/prefs.c:164
+#: src/prefs.c:159
 msgid "Language group's EMail:"
 msgstr "Keele grupi e-post:"
 
-#: src/prefs.c:183
+#: src/prefs.c:178
 msgid "Remove fuzzy status if message changed"
 msgstr "Eemalda näruselt staatus, kui see teade on muudetud"
 
-#: src/prefs.c:187
+#: src/prefs.c:182
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Hoita, kui po fail sisaldab näruseid tõlkeid"
 
-#: src/prefs.c:191
+#: src/prefs.c:186
 msgid "Keep obsolete messages in the po files"
 msgstr "Hoia iganenud teateid po failis"
 
-#: src/prefs.c:195
+#: src/prefs.c:190
 msgid "Highlight syntax of the translation messages"
 msgstr "Näita teateid värviliselt"
+
+#: src/prefs.c:195
+msgid "Check messages for syntactical correctess"
+msgstr ""
 
 #: src/prefs.c:202
 msgid "Use special character to indicate free space"
@@ -1523,8 +1543,8 @@ msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
-"Tee päringuid ka personaalses õppebufris tõlkimata teadete automaat-tõlkimise "
-"ajal"
+"Tee päringuid ka personaalses õppebufris tõlkimata teadete automaat-"
+"tõlkimise ajal"
 
 #: src/prefs.c:360
 msgid "Automatically learn a newly translated message"
@@ -1539,23 +1559,24 @@ msgstr "Õpi värskelt tõlgitud teade automaatselt"
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr "Kausta \"näruste\" sobitamist õppepuhvri päringutes"
 
-#: src/prefs.c:372
-msgid "Minimal required similarity percentage while doing autotranslation"
+#: src/prefs.c:371
+#, fuzzy
+msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "Minimaalne nõutav sarnasuse protsent autotõlgetel"
 
-#: src/prefs.c:418
+#: src/prefs.c:416
 msgid "Please enter your name!"
 msgstr "Palun sisestage oma nimi!"
 
-#: src/prefs.c:432
+#: src/prefs.c:430
 msgid "Please enter your EMail address!"
 msgstr "Palun sisestage oma e-posti aadress!"
 
-#: src/prefs.c:445
+#: src/prefs.c:443
 msgid "Please enter a valid EMail address!"
 msgstr "Palun sisestage õige e-posti aadress!"
 
-#: src/prefs.c:677
+#: src/prefs.c:672
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1639,7 +1660,8 @@ msgstr "Ei suuda luua kataloogi '%s'!"
 #.
 #. * Translators: this should be your default fall back encoding
 #. *  which will be used if gtranslator can't get the current env. locale's
-#. *   default sane encoding by itself.#.
+#. *   default sane encoding by itself.
+#.
 #: src/utils.c:499 src/utils.c:503
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
@@ -1655,27 +1677,30 @@ msgid "You are not permitted to access file '%s'."
 msgstr "Teil ei ole õigusi kasutada faili '%s'."
 
 #: src/utils_gui.c:359
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
-"Please save a new copy in a directory where\n"
-"you have write permission."
+"Please save a new copy of it to a place of your choice and get write\n"
+"permission for it."
 msgstr ""
 "Teil ei ole õigusi faili '%s' muutmiseks.\n"
 "Palun salvestage uus koopia kataloogi, kus\n"
 "teil on salvestamise õigused."
 
-#: src/utils_gui.c:399
+#: src/utils_gui.c:401
 #, c-format
-msgid "The file `%s' is already open in another instance of gtranslator!"
-msgstr "Fail '%s' on juba avatud teise kõivitatud gtranslatori poolt!"
+msgid ""
+"The file `%s' is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling `%s' currently to\n"
+"re-gain access to this file (also applies for post-crash cases)."
+msgstr ""
 
-#: src/utils_gui.c:432
+#: src/utils_gui.c:437
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Vajalikku lahtipakkimise programmi '%s' ei ole installeeritud!"
 
-#: src/utils_gui.c:437
+#: src/utils_gui.c:442
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Vajalikku pakkimise programmi '%s' ei ole installeeritud!"
@@ -1762,3 +1787,5 @@ msgstr "Pakitud gettext po fail"
 msgid "Gettext po file"
 msgstr "Gettexti po fail"
 
+#~ msgid "The file `%s' is already open in another instance of gtranslator!"
+#~ msgstr "Fail '%s' on juba avatud teise kõivitatud gtranslatori poolt!"

@@ -1,11 +1,19 @@
 # Copyright (C) 2000-2002 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2000-2002.
 #
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this empty string to avoid the
+#. *  usage of the mid dot ('╥') in the displaying routines.
+#. *
+#. *   The contents of your translation are irrelevant in this case.
+#.
 #: src/runtime-config.c:78
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2002-02-28 23:50+0300\n"
+"POT-Creation-Date: 2002-03-09 15:45+0100\n"
 "PO-Revision-Date: 2002-03-01 00:04+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -440,7 +448,7 @@ msgstr "Имя переводчика:"
 msgid "Translator's e-mail:"
 msgstr "Эл.адрес переводчика:"
 
-#: src/header_stuff.c:509 src/prefs.c:153
+#: src/header_stuff.c:509 src/prefs.c:148
 msgid "Language:"
 msgstr "Язык:"
 
@@ -448,11 +456,11 @@ msgstr "Язык:"
 msgid "Language group's e-mail:"
 msgstr "Эл.адрес языковой группы:"
 
-#: src/header_stuff.c:520 src/prefs.c:169
+#: src/header_stuff.c:520 src/prefs.c:164
 msgid "Charset:"
 msgstr "Набор символов:"
 
-#: src/header_stuff.c:532 src/prefs.c:174
+#: src/header_stuff.c:532 src/prefs.c:169
 msgid "Encoding:"
 msgstr "Кодировка:"
 
@@ -1128,6 +1136,13 @@ msgstr "Не осталось нечетких сообщений."
 msgid "All messages seem to be translated."
 msgstr "Похоже все сообщения переведены."
 
+#: src/message.c:322
+#, c-format
+msgid ""
+"The translation for message `%s'\n"
+"contains syntactical errors!"
+msgstr ""
+
 #: src/messages-table.c:197
 msgid "Appropriate match:"
 msgstr "Подходящее совпадение:"
@@ -1284,77 +1299,81 @@ msgstr ""
 "Компиляция успешна:\n"
 "%s"
 
-#: src/prefs.c:113
+#: src/prefs.c:108
 msgid "gtranslator -- options"
 msgstr "Переводчик -- параметры"
 
-#: src/prefs.c:119
+#: src/prefs.c:114
 msgid "Personal information"
 msgstr "Персональная информация"
 
-#: src/prefs.c:121
+#: src/prefs.c:116
 msgid "Language settings"
 msgstr "Параметры языка"
 
-#: src/prefs.c:123
+#: src/prefs.c:118
 msgid "Po file editing"
 msgstr "Правка po-файла"
 
-#: src/prefs.c:125
+#: src/prefs.c:120
 msgid "Miscellaneous"
 msgstr "Разное"
 
-#: src/prefs.c:127
+#: src/prefs.c:122
 msgid "Recent files & spell checking"
 msgstr "Меню недавних файлов и проверка правописания"
 
-#: src/prefs.c:129
+#: src/prefs.c:124
 msgid "Fonts, colors and color schemes"
 msgstr "Шрифты, цвета и цветовые схемы"
 
-#: src/prefs.c:131
+#: src/prefs.c:126
 msgid "Autosaving"
 msgstr "Автосохранение"
 
-#: src/prefs.c:133
+#: src/prefs.c:128
 msgid "Messages table"
 msgstr "Таблица сообщений"
 
-#: src/prefs.c:135
+#: src/prefs.c:130
 msgid "Learn buffer & autotranslation"
 msgstr "Заученный буфер и автоперевод"
 
-#: src/prefs.c:141
+#: src/prefs.c:136
 msgid "Author's name:"
 msgstr "Имя автора:"
 
-#: src/prefs.c:144
+#: src/prefs.c:139
 msgid "Author's EMail:"
 msgstr "Эл.адрес автора:"
 
-#: src/prefs.c:158
+#: src/prefs.c:153
 msgid "Language code:"
 msgstr "Код языка:"
 
-#: src/prefs.c:164
+#: src/prefs.c:159
 msgid "Language group's EMail:"
 msgstr "Эл.адрес языковой группы:"
 
-#: src/prefs.c:183
+#: src/prefs.c:178
 msgid "Remove fuzzy status if message changed"
 msgstr "Отключить нечеткое состояние сообщения, если оно было изменено"
 
-#: src/prefs.c:187
+#: src/prefs.c:182
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Предупреждать если po-файл содержит нечеткие (fuzzy) переводы"
 
-#: src/prefs.c:191
+#: src/prefs.c:186
 msgid "Keep obsolete messages in the po files"
 msgstr "Сохранять устаревшие сообщения в po-файле"
 
-#: src/prefs.c:195
+#: src/prefs.c:190
 msgid "Highlight syntax of the translation messages"
 msgstr "Подсвечивать синтаксис переводимых сообщений"
+
+#: src/prefs.c:195
+msgid "Check messages for syntactical correctess"
+msgstr ""
 
 #: src/prefs.c:202
 msgid "Use special character to indicate free space"
@@ -1453,7 +1472,9 @@ msgstr "Переводчик -- цвет фона"
 #.
 #: src/prefs.c:293
 msgid "Automatically save po files at regular intervals (in minutes):"
-msgstr "Автоматически сохранять po-файл через заданный промежуток времени (в минутах):"
+msgstr ""
+"Автоматически сохранять po-файл через заданный промежуток времени (в "
+"минутах):"
 
 #: src/prefs.c:308
 msgid "Append a suffix to automatically saved files:"
@@ -1499,7 +1520,8 @@ msgstr "gtranslator -- цвет переведённых сообщений"
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
-msgstr "Также запрашивать персональную базу при автопереводе непереведённых сообщений"
+msgstr ""
+"Также запрашивать персональную базу при автопереводе непереведённых сообщений"
 
 #: src/prefs.c:360
 msgid "Automatically learn a newly translated message"
@@ -1514,23 +1536,24 @@ msgstr "Автоматически заучивать новые переведённые сообщения"
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
 
-#: src/prefs.c:372
-msgid "Minimal required similarity percentage while doing autotranslation"
+#: src/prefs.c:371
+#, fuzzy
+msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "Процент минимально необходимой похожести для выполнения автоперевода"
 
-#: src/prefs.c:418
+#: src/prefs.c:416
 msgid "Please enter your name!"
 msgstr "Пожалуйста, введите ваше имя!"
 
-#: src/prefs.c:432
+#: src/prefs.c:430
 msgid "Please enter your EMail address!"
 msgstr "Пожалуйста, введите ваш эл. адрес!"
 
-#: src/prefs.c:445
+#: src/prefs.c:443
 msgid "Please enter a valid EMail address!"
 msgstr "Пожалуйста, введите правильный эл.адрес!"
 
-#: src/prefs.c:677
+#: src/prefs.c:672
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1631,27 +1654,30 @@ msgid "You are not permitted to access file '%s'."
 msgstr "У вас нет доступа к файлу \"%s\"."
 
 #: src/utils_gui.c:359
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
-"Please save a new copy in a directory where\n"
-"you have write permission."
+"Please save a new copy of it to a place of your choice and get write\n"
+"permission for it."
 msgstr ""
 "У вас нет прав для изменения файла \"%s\".\n"
 "Это значит, что вам придется сохранить копию в каталоге\n"
 "в котором у вас есть права на запись."
 
-#: src/utils_gui.c:399
+#: src/utils_gui.c:401
 #, c-format
-msgid "The file `%s' is already open in another instance of gtranslator!"
-msgstr "Файл \"%s\" уже открыт в другом окне gtranslator!"
+msgid ""
+"The file `%s' is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling `%s' currently to\n"
+"re-gain access to this file (also applies for post-crash cases)."
+msgstr ""
 
-#: src/utils_gui.c:432
+#: src/utils_gui.c:437
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Необходимая для декомпрессии программ \"%s\" не установлена!"
 
-#: src/utils_gui.c:437
+#: src/utils_gui.c:442
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Необходимая программа сжатия \"%s\" не установлена!"
@@ -1737,3 +1763,6 @@ msgstr "Сжатый po-файл"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "po-файл"
+
+#~ msgid "The file `%s' is already open in another instance of gtranslator!"
+#~ msgstr "Файл \"%s\" уже открыт в другом окне gtranslator!"
