@@ -151,7 +151,7 @@ conf_flags="--enable-maintainer-mode --enable-compile-warnings" #--enable-iso-c
 if test x$NOCONFIGURE = x; then
   echo Running $srcdir/configure $conf_flags "$@" ...
   $srcdir/configure $conf_flags "$@" \
-  && echo -e "\n\tNow type \`make\' to compile $PKG_NAME\n" || exit 1
+  && echo -e "\n\tNow type \`make' to compile $PKG_NAME\n" || exit 1
 else
   echo Skipping configure process.
 fi
