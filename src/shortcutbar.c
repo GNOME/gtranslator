@@ -18,6 +18,7 @@
  */
 
 #include "shortcutbar.h"
+#include "gui.h"
 
 /*
  * The internal icon callback method.
@@ -73,13 +74,15 @@ void gtranslator_sidebar_add_po(GtrPo *po)
 	g_return_if_fail(po->filename!=NULL);
 
 	/*
-	 * Add the filename to the shortcut bar.
+	 * Add the current view models to the bar.
 	 */ 
 	e_shortcut_model_add_item(model, 0, -1, 
 		"file:",
-		g_strdup_printf("%s -- %s",
-		po->header->prj_name,	
-		g_basename(po->filename)));
+		"Message");
+
+	e_shortcut_model_add_item(model, 0, -1,
+		"comment:",
+		"Comment");
 }
 
 /*
@@ -91,8 +94,53 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 {
 	if(event->button.button==1)
 	{
-		g_print("open up/popup view for group %i, item %i\n",
-			group+1, item+1);
+		/*
+		 * Switch the icon numbers for the right view.
+		 */ 
+		switch(item+1)
+		{
+			case 1:
+				/*
+				 * Just show the message.
+				 */ 
+				display_msg(po->current);
+				break;
+				
+			case 2:
+				if(GTR_MSG(po->current)->comment)
+				{
+					/*
+					 * Clean the msgid box and display
+					 *  the comment inside it.
+					 */  
+					gtk_editable_delete_text(
+						GTK_EDITABLE(text1),
+						0, -1);
+					gtk_text_insert(GTK_TEXT(text1),
+						NULL, NULL, NULL,
+						GTR_MSG(po->current->data)->comment,
+						-1);
+					break;
+				}
+				else
+				{
+					/*
+					 * Show an information that there's
+					 *  no comment there.
+					 */  
+					gtk_editable_delete_text(
+						GTK_EDITABLE(text1),
+						0, -1);
+					gtk_text_insert(GTK_TEXT(text1),
+						NULL, NULL, NULL,
+						_("No comment available for this message"),
+						-1);
+					break;
+				}
+			
+			default:
+				break;
+		}
 	}
 }
 
