@@ -1,32 +1,40 @@
 :
 #!/bin/sh
 #
-# (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
+# (C) 2000-2002 Fatih Demir <kabalak@gtranslator.org>
 #
 # This script mails the common "oh my god, they're
 #  making a release" messages to the last translators.
+#
+# For full usage explanations and some usage examples, please
+#  review the man page for pozilla.sh via "man pozilla.sh".
 #
 
 #
 # Some utility functions:
 #
+
+print_separator_line ()  {
+	echo "·-=============================================================-·"
+}
+
 dry_run_information_message ()  {
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "We're running in dry mode, any mailing option will be ignored..."
-	echo "---------------------------------------------------------------"
+	print_separator_line
 }
 
 no_personal_information_message () {
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "No personal EMails are being sent to the translators, therefore"
 	echo " neither po files will be sent nor will languages be ignored."
-	echo "---------------------------------------------------------------"
+	print_separator_line
 }
 
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=5.1
+export POZILLA_RELEASE=5.2
 
 #
 # Here we do define the corresponding i18n mailing list which should also get
@@ -63,9 +71,9 @@ export PO_DIR="."
 for app in msgfmt msgmerge make grep sed awk
 	do
 		if test "z`which $app`" = "z" ; then
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "!ERROR¡: The application \"$app\" is necessary for running pozilla.sh!"
-			echo "---------------------------------------------------------------"
+			print_separator_line
 				exit 1
 		fi
 	done	
@@ -74,7 +82,7 @@ for app in msgfmt msgmerge make grep sed awk
 # That's Pozilla, guy!
 #
 [ -d $CONFIG_DIR ] || {
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "!WARNING¡"
 	echo ""
 	echo "This utility is extremely useful but you'd know what you can do"
@@ -84,7 +92,7 @@ for app in msgfmt msgmerge make grep sed awk
 	echo "You'd first read the manual page for pozilla.sh to get an overview"
 	echo " of pozilla.sh -- call \"man pozilla.sh\" for this purpose."
 	echo ""
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	
 	read -p "Are you sure to use pozilla now? [y/N] " confirmation
 
@@ -92,7 +100,7 @@ for app in msgfmt msgmerge make grep sed awk
 	# Make an IP test to avoid unknown use of it.
 	#
 	if test "%$confirmation" != "%y" ; then 
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "!ERROR¡ "
 		echo ""
 		echo "Confirmation not succeeded; you need to confirm the use"
@@ -101,7 +109,7 @@ for app in msgfmt msgmerge make grep sed awk
 		echo "Please look into the manual page for pozilla.sh before playing"
 		echo " 'round with it as it could cause heart attacks for some of"
 		echo "   your package's translators ,-)"
-		echo "---------------------------------------------------------------"
+		print_separator_line
 			exit 1
 	fi
 	
@@ -131,11 +139,11 @@ while [ ! -z "$1" ]
 do
 	case "$1" in
 	-h|--help)
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo " Pozilla.sh R $POZILLA_RELEASE"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo " Author: Fatih Demir <kabalak@gtranslator.org>"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-A --send-to-all  Send the merged po files for all languages"
 	echo "-d --days         Days remaining for release"
@@ -155,25 +163,25 @@ do
 	echo "-n --no-personal  Don't send personal EMails to the last translators"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "Please consult pozilla.sh's manual page for more usage examples"
 	echo " and informations; you can reach it via \"man pozilla.sh\"."
-	echo "---------------------------------------------------------------"
+	print_separator_line
 		exit 1
 	;;
 	-v|--version)
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo " Pozilla.sh R $POZILLA_RELEASE"
-	echo "---------------------------------------------------------------"
+	print_separator_line
         echo " Author:  Fatih Demir <kabalak@gtranslator.org>"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 		exit 1
 	;;
 	-D|--dry-run)
 	shift 1
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "Running in dry mode -- won't send any emails out..."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		export RUN_DRY=yes
 		export PRINT_TABLE=yes
 	;;
@@ -182,9 +190,9 @@ do
 	if test "say_$RUN_DRY" = "say_yes" ; then
 		dry_run_information_message
 	else
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "Not sending any personal EMails; only sending to the list..."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		export NO_PERSONAL=yes
 	fi
 	;;
@@ -193,38 +201,38 @@ do
 	if test "say_$RUN_DRY" = "say_yes" ; then
 		dry_run_information_message
 	else
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "Not sending any EMails to the list..."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		export NO_LIST=yes
 	fi
 	;;
 	-o|--output-file)
 	shift 1
 		if test "file$1" = "file" ; then
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "!WARNING¡"
 			echo ""
 			echo "No output filename given! Will print an eventual statistics"
 			echo " table to stdout."
-			echo "---------------------------------------------------------------"
+			print_separator_line
 		else
 			if test -d "$1" ; then
 				export OUTPUT_FILE="$1.statistics"
 				
-				echo "---------------------------------------------------------------"
+				print_separator_line
 				echo "\"$1\" is a directory! Will take \"$OUTPUT_FILE\" as filename."
-				echo "---------------------------------------------------------------"
+				print_separator_line
 			else
 				export OUTPUT_FILE="$1"
 			fi
 
 			shift 1
 			
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "Will print an eventual statistics table to the following file:"
 			echo "\"$OUTPUT_FILE\""
-			echo "---------------------------------------------------------------"
+			print_separator_line
 		fi
 	;;
 	-m|--mailinglist)
@@ -237,16 +245,16 @@ do
 		fi
 	else
 		if test "hehe$1" = "hehe" ; then
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "No mailing list given, using default:"
 			echo "$MAILING_LIST"
-			echo "---------------------------------------------------------------"
+			print_separator_line
 		else
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "Using special mailing list:"
 			export MAILING_LIST="$1"
 			echo "$MAILING_LIST"
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			shift 1
 		fi
 	fi
@@ -261,14 +269,14 @@ do
 		fi
 	else
 		if test "hehe$1" = "hehe" ; then
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "No additional mail address given!"
-			echo "---------------------------------------------------------------"
+			print_separator_line
 		else
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			export ADDITIONAL_MAILING_ADDRESS="$1"
 			echo "Using $ADDITIONAL_MAILING_ADDRESS for additional mailing."
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			shift 1
 		fi
 	fi
@@ -276,22 +284,22 @@ do
 	-d|--days)
 	shift 1
 	if test "days$1" = "days" ; then
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "No number of days given! Assuming \"7\" days to go..."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		export DAYS_REMAINING=7
 	else
 		if test $1 -le 3 ; then
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "You're giving your translators only $1 day(s); that's too less!"
 			echo "Please give them more time to update their translations."
-			echo "---------------------------------------------------------------"
+			print_separator_line
 				exit 1
 		else
 			export DAYS_REMAINING="$1"
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "Days remaining: $DAYS_REMAINING"
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			shift 1
 		fi
 	fi
@@ -299,14 +307,14 @@ do
 	-r|--release)
 	shift 1
 	if test "r$1" = "r" ; then
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "No release number defined! Trying to figuring it out.."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 	else
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		export MY_RELEASE="$1"
 		echo "Using user-defined release string $MY_RELEASE"
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		shift 1
 	fi	
 	;;
@@ -325,15 +333,15 @@ do
 			if test "%$1" != "%" ; then shift 1 ; fi
 		else
 			if test "ig$1" = "ig" ; then
-				echo "---------------------------------------------------------------"
+				print_separator_line
 				echo "No languages to ignore given."
-				echo "---------------------------------------------------------------"
+				print_separator_line
 			else
-				echo "---------------------------------------------------------------"
+				print_separator_line
 				export IGNORE_LANGS="`echo $1|sed -e 's/:/\ /g'`"
 				shift 1
 				echo "Ignoring po files for this/these lang(s): $IGNORE_LANGS"
-				echo "---------------------------------------------------------------"
+				print_separator_line
 			fi
 		fi
 	fi
@@ -346,9 +354,9 @@ do
 		if test "say_$NO_PERSONAL" = "say_yes" ; then
 			no_personal_information_message
 		else
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "Sending po files to all languages..."
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			export SEND_TO_ALL_LANGUAGES=yes
 		fi
 	fi
@@ -361,64 +369,64 @@ do
 		if test "%$1" != "%" ; then shift 1 ; fi
 	else
 		if test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "Sending the po files to all languages switch is already active.."
 			echo "Ignoring arguments.."
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			
 			if test "foo$1" != "foo" ; then shift 1 ; fi
 		else	
 			if test "sendto$1" = "sendto" ; then
-				echo "---------------------------------------------------------------"
+				print_separator_line
 				echo "No language given to send the po file to."
-				echo "---------------------------------------------------------------"
+				print_separator_line
 			else
-				echo "---------------------------------------------------------------"
+				print_separator_line
 				export SEND_TO_LANGS="`echo $1|sed -e 's/:/\ /g'`"
 				shift 1
 				echo "Sending the merged po files to this/these lang(s): $SEND_TO_LANGS"
-				echo "---------------------------------------------------------------"
+				print_separator_line
 			fi
 		fi
 	fi
 	;;
 	-S|--statistics)
 	if test "say_$RUN_DRY" = "say_yes" ; then
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "We're already running in dry-modus -- the statistics table will"
 		echo " be printed at the end of the process."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 	else
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "Will print out the statistics table..." 
 		export PRINT_TABLE=yes
-		echo "---------------------------------------------------------------"
+		print_separator_line
 	fi
 	shift 1
 	;;
 	-p|--podirectory)
 	shift 1
 	if test "po$1" = "po" ; then
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "No po directory location defined. Using default location ./po ..."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		export PO_DIR="."
 	else
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		export PO_DIR="$1"
 		if ! test -d "$PO_DIR" ; then
 			echo "\"$PO_DIR\" is not a directory; taking default location ./po..."
 		else	
 			echo "Using \"$PO_DIR\" as po directory location..."
 		fi
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		shift 1
 	fi
 	;;
 	*)
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "!ERROR¡: Unknown option \"$1\" given.                          "
-		echo "---------------------------------------------------------------"
+		print_separator_line
 			exit 1
 	;;
 	esac
@@ -428,9 +436,9 @@ done
 # Finally, check for existance of mutt if $RUN_DRY is not defined.
 #
 if test "z`which mutt`" = "z" -a "say_$RUN_DRY" != "say_yes" ; then
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "!ERROR¡: The application \"mutt\" is necessary for running pozilla.sh!"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	exit 1
 fi
 
@@ -438,9 +446,9 @@ fi
 # Check if a po directory is existent in the $PO_DIR.
 #
 if ! test -d $PO_DIR/po ; then
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "!ERROR¡: There is no \"po\" directory present in \"$PO_DIR\"!"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 		exit 1
 fi
 
@@ -472,13 +480,13 @@ if test -f configure.in ; then
 	if test "z$PACKAGE" = "z" ; then
 		export PACKAGE=`basename ${PWD:-`pwd`}`
 
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "Couldn't automatically determine package name, taking local"
 		echo " directory name \"$PACKAGE\" instead..."
-		echo "---------------------------------------------------------------"
+		print_separator_line
 	fi
 else
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "No configure.in found in ${PWD:-`pwd`}, so you do now"
 
 	read -p " please enter the package name: " package_name
@@ -489,13 +497,13 @@ else
 		echo ""
 		echo "Setting package name to \"$PACKAGE\"..."
 	else
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "!ERROR¡ You didn't enter any package name!"
-		echo "---------------------------------------------------------------"
+		print_separator_line
 			exit 1
 	fi
 	
-	echo "---------------------------------------------------------------"
+	print_separator_line
 fi
 
 #
@@ -507,7 +515,7 @@ if test "y$MY_RELEASE" = "y" ; then
 		sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
 	
 	if test "r$RELEASE" = "r" ; then
-		echo "---------------------------------------------------------------"
+		print_separator_line
 		echo "Couldn't automatically determine package version and as no"
 		echo " special version string was specified using the \"-r\" switch,"
 		read -p "  please enter the version : " version_string
@@ -518,16 +526,16 @@ if test "y$MY_RELEASE" = "y" ; then
 			echo ""
 			echo "Taking \"$RELEASE\" as version..."
 		else
-			echo "---------------------------------------------------------------"
+			print_separator_line
 			echo "!ERROR¡"
 			echo ""
 			echo "No version detected/entered, please try using the \"-r\" switch"
 			echo " switch from the command line next time."
-			echo "---------------------------------------------------------------"
+			print_separator_line
 				exit 1
 		fi
 		
-		echo "---------------------------------------------------------------"
+		print_separator_line
 	fi
 else
 	export RELEASE="$MY_RELEASE"
@@ -561,12 +569,12 @@ elif test -x ./update.pl ; then
 elif test -x ./update.sh ; then
 	./update.sh -P 2>&1 >/dev/null
 else
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "!ERROR¡:"
 	echo ""
 	echo "Neither \"xml-i18n-update\" nor usable Makefile/update scripts"
 	echo " like \"./update.pl\" or \"./update.sh\" found!"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 		exit 1
 fi
 
@@ -574,9 +582,9 @@ fi
 # Test if we could build the pot file.
 #
 [ -f $PACKAGE.pot ] || {
-	echo "---------------------------------------------------------------"
+	print_separator_line
 	echo "!ERROR¡: Couldn't build \"$PACKAGE.pot\" file!"
-	echo "---------------------------------------------------------------"
+	print_separator_line
 		exit 1
 }
 
