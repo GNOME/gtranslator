@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.32\n"
 "POT-Creation-Date: 2001-01-07 15:12+0100\n"
-"PO-Revision-Date: 2001-01-07 15:38+0100\n"
+"PO-Revision-Date: 2001-01-10 18:32+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -256,7 +256,7 @@ msgstr "F. kaydet"
 
 #: src/gui.c:264
 msgid "Save file with a different name"
-msgstr "Dosyayý deðiþik bir isimle kaydet"
+msgstr "Dosyayý deðiþik bir isim altýnda kaydet"
 
 #: src/gui.c:268
 msgid "Compile"
@@ -375,43 +375,43 @@ msgstr "gtranslator -- baþlýðý deðiþtir"
 
 #: src/header_stuff.c:272
 msgid "Project"
-msgstr "Proje ismi"
+msgstr "Proje"
 
 #: src/header_stuff.c:273
 msgid "Translator and Language"
-msgstr "Tercüman ve dil grubu :"
+msgstr "Tercüman ve dil:"
 
 #: src/header_stuff.c:282
 msgid "Comments :"
-msgstr "Eklentiler :"
+msgstr "Eklentiler:"
 
 #: src/header_stuff.c:286
 msgid "Project name:"
-msgstr "Proje ismi : "
+msgstr "Proje ismi:"
 
 #: src/header_stuff.c:289
 msgid "Project version:"
-msgstr "Proje nesli : "
+msgstr "Proje nesli:"
 
 #: src/header_stuff.c:292
 msgid "pot file creation date :"
-msgstr "Pot dosyasýnýn tarihi :"
+msgstr "Pot dosyasýný tarihi :"
 
 #: src/header_stuff.c:296
 msgid "po file revision date :"
-msgstr "Po dosyasýnýn tarihi :"
+msgstr "Po dosyasýný tarihi :"
 
 #: src/header_stuff.c:305
 msgid "Use my options to fill the following entries."
-msgstr "Þahsi seçeneklerimi baþlýðý doldurmak için kullan."
+msgstr "Þahsi seçeneklerimle baþlýðý tamamla."
 
 #: src/header_stuff.c:318
 msgid "Translator's name :"
-msgstr "Tercümanýn adý :"
+msgstr "Tercüman:"
 
 #: src/header_stuff.c:321
 msgid "Translator's e-mail :"
-msgstr "Tercümanýn eposta adresi :"
+msgstr "Tercümanýn ePosta adresi:"
 
 #: src/header_stuff.c:324 src/prefs.c:252
 msgid "Language :"
@@ -650,7 +650,7 @@ msgstr ""
 #: src/parse.c:174 src/parse.c:585
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
-msgstr "Dosya \"%s\" hiç yok ki !"
+msgstr "Dosya \"%s\" yok ki!"
 
 #: src/parse.c:265
 #, c-format
@@ -660,7 +660,7 @@ msgid ""
 "Please check the file and try again."
 msgstr ""
 "Dosya \"%s\"'de hata\n"
-"var; satýr %d.\n"
+"var (satýr %d).\n"
 "Lütfen dosyayý gözden gecýrip bir deneme daha yap."
 
 #: src/parse.c:300
@@ -669,12 +669,12 @@ msgid ""
 "The file is empty:\n"
 "%s"
 msgstr ""
-"Bu dosya boþtur:\n"
+"Dosya boþtur:\n"
 "%s"
 
 #: src/parse.c:320 src/parse.c:326
 msgid "There's no file to open!"
-msgstr "Açýlacak dosya yok!"
+msgstr "Açýlacak dosya yok ki!"
 
 #: src/parse.c:366
 msgid "The file has no header!"
@@ -711,11 +711,11 @@ msgid ""
 msgstr ""
 "%s'de hiç birþey\n"
 "deðiþtirmemiþsin ki!\n"
-"Yine de dosya kaydedilsin mi?"
+"Yine de dosya yeniden kaydedilsin mi?"
 
 #: src/parse.c:641
 msgid "gtranslator -- unchanged"
-msgstr "gtranslator -- deðiþiksiz"
+msgstr "gtranslator -- deðiþik yok"
 
 #: src/parse.c:715
 #, c-format
@@ -724,7 +724,7 @@ msgid ""
 "was changed. Do you want to revert to saved copy?"
 msgstr ""
 "Dosya %s\n"
-"deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
+"deðiþmiþ. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
 #: src/parse.c:754
 msgid "Sorry, msgfmt isn't available on your system!"
@@ -736,8 +736,8 @@ msgid ""
 "Compile successfull:\n"
 "%s"
 msgstr ""
-"%s baþarýyla\n"
-"denetlendi"
+"Denetleme baþarýlý oldu: \n"
+"Rapor: %s"
 
 #: src/parse.c:802
 msgid "_File/Recen_t files/"
@@ -773,7 +773,7 @@ msgstr "Karýþýk"
 
 #: src/prefs.c:233
 msgid "Recent files & spell checking"
-msgstr "Son dosyalar ve imla kontrolü"
+msgstr "Son dosyalar & imla kontrolü"
 
 #: src/prefs.c:234
 msgid "Fonts & Colors"
@@ -1009,7 +1009,7 @@ msgstr "Çift tercüme `%s' ileti `%s' için eklenmeye deneniyor!"
 
 #: libgtranslator/main.c:44
 msgid "The language to parse the db for"
-msgstr "Taranacak tercüme/ileti tabaný dili"
+msgstr "Taranacak tercüme/ileti tabaný"
 
 #: libgtranslator/main.c:44
 msgid "language_code"
@@ -1019,7 +1019,7 @@ msgstr "dil_kodu"
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
+"gtranslatord baþarýyla baþladý ve þimdi birtakým birþeyler yapacaktýr ...\n"
 
 #: libgtranslator/main.c:107
 #, c-format
@@ -1032,7 +1032,7 @@ msgstr ""
 
 #: libgtranslator/parse-db.c:40
 msgid "No language defined in the query request!"
-msgstr "Istekte istenilen dil tabanýný belirtmedin !"
+msgstr "Istekte istenilen dil tabaný belirtilmemiþ!"
 
 #.
 #. * If a subclass message/translation database should be loaded,
@@ -1040,7 +1040,7 @@ msgstr "Istekte istenilen dil tabanýný belirtmedin !"
 #.
 #: libgtranslator/parse-db.c:52
 msgid "FYI: Will also lookup the superclass message db.\n"
-msgstr "Bilgi : Üst sýnýf tercüme tabanýný da tarayacaðým.\n"
+msgstr "Bilgi için : Üst sýnýf tercüme tabanýný da tarayacaðým.\n"
 
 #: libgtranslator/parse-db.c:64
 #, c-format
