@@ -129,7 +129,7 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 	**/
 	while(team)
 	{
-		if(!strcmp(team->name, "app")
+		if(!strcmp(team->name, "app"))
 		{
 			/**
 			* Append the app to the list.
@@ -139,7 +139,7 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 		/**
 		* Iterate the node.
 		**/
-		team=team->node;	
+		team=team->next;	
 	}
 	/**
 	* Check for the list and return it.

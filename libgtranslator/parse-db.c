@@ -146,5 +146,5 @@ gint parse_db_check(xmlDocPtr test)
 	/**
 	* Free it if it's still present.
 	**/
-	xmlFreePtr(muhaha);
+	xmlFreeNode(muhaha);
 }
