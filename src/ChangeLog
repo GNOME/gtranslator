@@ -1,5 +1,8 @@
 2003-08-17  Ross Golder <ross@golder.org>
 
+	* parse.c: If header specifies a particular charset, attempt to
+	        convert to/from that charset when loading/saving.
+	
 	* parse.c (append_line/restore_msg): Only deal with double quotes, as
 	        dealing with backslashes breaks load/save.
 

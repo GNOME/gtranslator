@@ -206,11 +206,6 @@ GtrPo *gtranslator_parse(const gchar *filename)
 	gtranslator_message_status_set_fuzzy(FIRST_MSG, FALSE);
 	po->fuzzy--;
 	
-	/*
-	 * If the first message is header (it always should be)
-	 */
-	po->header = GTR_HEADER(gtranslator_header_get(FIRST_MSG));
-
 	if (po->header)
 	{
 		GList *header_li;
@@ -275,11 +270,14 @@ gboolean gtranslator_parse_core(GtrPo *po)
 	GtrMsg 	*msg;
 	
 	FILE 	*fs;
+	char 	*rawline;
 	char 	*line;
-	
+
 	guint 	 lines=0;
 	guint	 position=-1;
-	
+
+	GError  *errv;
+
 	/*
 	 * If TRUE, means that a corresponding part is read
 	 */
@@ -298,16 +296,33 @@ gboolean gtranslator_parse_core(GtrPo *po)
 	/*
 	 * Parse the file line by line...
 	 */
-	while ((line = gtranslator_utils_getline (fs)) != NULL) {
+	while ((rawline = gtranslator_utils_getline (fs)) != NULL) {
 		
 		lines++;
 
 		/*
-		 * Warn if not valid UTF-8
+		 * Convert lines from charset specified in header
 		 */
-		if (!g_utf8_validate(line, strlen(line), NULL))
-			g_warning("%s:%d: line contains invalid UTF-8", po->filename, lines);
+		if (po->header && po->header->charset) {
+			/*
+			 * Convert from header charset to UTF-8
+			 */
+			line = g_convert(rawline, strlen(rawline), "utf-8", po->header->charset, NULL, NULL, &errv);
+			if(!line) {
+				g_warning("%s:%d: could not convert line from '%s' to UTF-8: %s", po->filename, lines, po->header->charset, errv->message);
+				continue;
+			}
+		}
+		else {
+			line = rawline;
+		}
 
+       		/*
+		 * Warn if result still not valid UTF-8
+		 */
+		if(!g_utf8_validate(line, strlen(line), NULL))
+			g_warning("%s:%d: line contains invalid UTF-8", po->filename, lines);
+			
 		/*
 		 * If it's a comment, no matter of what kind. It belongs to
 		 * the message pair below
@@ -463,9 +478,18 @@ gboolean gtranslator_parse_core(GtrPo *po)
 			
 			position++;
 			msg->no=position;
-			
+
 			po->messages =
 			    g_list_prepend(po->messages, (gpointer) msg);
+
+			/*
+			 * The first message should always be the header. Parse it
+			 * do determine charset to read rest of file in with.
+			 */
+			if(position == 0) {
+				po->header = GTR_HEADER(gtranslator_header_get(FIRST_MSG));
+			}
+
 			/*
 			 * Reset the status of message
 			 */
@@ -757,6 +781,8 @@ static void write_the_message(gpointer data, gpointer fs)
 	GString *string;
 	gchar 	*id;
 	gchar	*str;
+	gchar   *line;
+	GError  *errv;
 
 	msg=GTR_MSG(data);
 
@@ -836,9 +862,26 @@ static void write_the_message(gpointer data, gpointer fs)
 	}
 	
 	/*
+	 * Convert lines from charset specified in header
+	 */
+	if (po->header && po->header->charset) {
+		/*
+		 * Convert from header charset to UTF-8
+		 */
+		line = g_convert(string->str, strlen(string->str), po->header->charset, "utf-8", NULL, NULL, &errv);
+		if(!line) {
+			g_warning("could not convert message number '%d' from UTF-8 to '%s' to UTF-8: %s", msg->pos, po->header->charset, errv->message);
+			line = string->str;
+		}
+	}
+	else {
+		line = string->str;
+	}
+	
+	/*
 	 * Write the string content and the newlines to our write stream.
 	 */
-	fprintf((FILE *) fs, "%s\"\n\n", string->str);
+	fprintf((FILE *) fs, "%s\"\n\n", line);
 	
 	g_string_free(string, TRUE);
 }
