@@ -8,9 +8,25 @@
 #
 
 #
+# Some utility functions:
+#
+dry_run_information_message ()  {
+	echo "---------------------------------------------------------------"
+	echo "We're running in dry mode, any mailing option will be ignored..."
+	echo "---------------------------------------------------------------"
+}
+
+no_personal_information_message () {
+	echo "---------------------------------------------------------------"
+	echo "No personal EMails are being sent to the translators, therefore"
+	echo " neither po files will be sent nor will languages be ignored."
+	echo "---------------------------------------------------------------"
+}
+
+#
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=3.5
+export POZILLA_RELEASE=4.0
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -85,7 +101,6 @@ for app in msgfmt msgmerge make grep sed awk mutt
 		echo "Please look into the manual page for pozilla.sh before playing"
 		echo " 'round with it as it could cause heart attacks for some of"
 		echo "   your package's translators ,-)"
-		echo ""
 		echo "---------------------------------------------------------------"
 			exit 1
 	fi
@@ -111,18 +126,20 @@ do
 	echo " Author: Fatih Demir <kabalak@gtranslator.org>"
 	echo "---------------------------------------------------------------"
 	echo "-a --additional   Defines an additional mail address to mail to"
-	echo "-d --days         Days remaining for release"
-	echo "-p --podirectory  Defines the po directory location (default: ./po)"
 	echo "-A --send-to-all  Send the merged po files for all languages"
-	echo "-s --send-to      Send the merged po files to the given languages"
+	echo "-d --days         Days remaining for release"
+	echo "-m --mailinglist  Changed the mailing list to the given arguments"
+	echo "-p --podirectory  Defines the po directory location (default: ./po)"
+	echo "-r --release      Specifies the coming release's number"
 	echo "-i --ignore       Don't operate for these languages (ignore them)"
+	echo "-s --send-to      Send the merged po files to the given languages"
 	echo ""
 	echo "Important: Both of the \"--send-to\" and \"--ignore\" options do "
 	echo " await a ':' separated list like \"az:tr:uk\"."
 	echo ""
-	echo "-r --release      Specifies the coming release's number"
 	echo "-S --statistics   Print out the statistics table at the end"
-	echo "-m --mailinglist  Changed the mailing list to the given arguments"
+	echo "-D --dry-run      Don't send any EMails, create statistics (implies -S)"
+	echo "-n --no-personal  Don't send personal EMails to the last translators"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
 	echo "---------------------------------------------------------------"
@@ -139,42 +156,78 @@ do
 	echo "---------------------------------------------------------------"
 		exit 1
 	;;
-	-m|--mailinglist)
+	-D|--dry-run)
 	shift 1
-	if test "hehe$1" = "hehe" ; then
 		echo "---------------------------------------------------------------"
-		echo "No mailing list given, using default:"
-		echo "$MAILING_LIST"
+		echo "Running in dry mode -- won't send any emails out..."
 		echo "---------------------------------------------------------------"
+		export RUN_DRY=yes
+		export PRINT_TABLE=yes
+	;;
+	-n|--no-personal)
+	shift 1
+	if test "say_$RUN_DRY" = "say_yes" ; then
+		dry_run_information_message
 	else
 		echo "---------------------------------------------------------------"
-		echo "Using special mailing list:"
-		export MAILING_LIST="$1"
-		echo "$MAILING_LIST"
+		echo "Not sending any personal EMails; only sending to the list..."
 		echo "---------------------------------------------------------------"
-		shift 1
+		export NO_PERSONAL=yes
+	fi
+	;;
+	-m|--mailinglist)
+	shift 1
+	if test "say_$RUN_DRY" = "say_yes" ; then
+		dry_run_information_message
+
+		if test "q$1" != "q" ; then
+			shift 1
+		fi
+	else
+		if test "hehe$1" = "hehe" ; then
+			echo "---------------------------------------------------------------"
+			echo "No mailing list given, using default:"
+			echo "$MAILING_LIST"
+			echo "---------------------------------------------------------------"
+		else
+			echo "---------------------------------------------------------------"
+			echo "Using special mailing list:"
+			export MAILING_LIST="$1"
+			echo "$MAILING_LIST"
+			echo "---------------------------------------------------------------"
+			shift 1
+		fi
 	fi
 	;;
 	-a|--additional)
 	shift 1
-	if test "hehe$1" = "hehe" ; then
-		echo "---------------------------------------------------------------"
-		echo "No additional mail address given!"
-		echo "---------------------------------------------------------------"
+	if test "say_$RUN_DRY" = "say_yes" ; then
+		dry_run_information_message
+
+		if test "q$1" != "q" ; then
+			shift 1
+		fi
 	else
-		echo "---------------------------------------------------------------"
-		export ADDITIONAL_MAILING_ADDRESS="$1"
-		echo "Using $ADDITIONAL_MAILING_ADDRESS for additional mailing."
-		echo "---------------------------------------------------------------"
-		shift 1
-	fi	
+		if test "hehe$1" = "hehe" ; then
+			echo "---------------------------------------------------------------"
+			echo "No additional mail address given!"
+			echo "---------------------------------------------------------------"
+		else
+			echo "---------------------------------------------------------------"
+			export ADDITIONAL_MAILING_ADDRESS="$1"
+			echo "Using $ADDITIONAL_MAILING_ADDRESS for additional mailing."
+			echo "---------------------------------------------------------------"
+			shift 1
+		fi
+	fi
 	;;
 	-d|--days)
 	shift 1
 	if test "days$1" = "days" ; then
 		echo "---------------------------------------------------------------"
-		echo "No number of days given!"
+		echo "No number of days given! Assuming \"7\" days to go..."
 		echo "---------------------------------------------------------------"
+		export DAYS_REMAINING=7
 	else
 		if test $1 -le 3 ; then
 			echo "---------------------------------------------------------------"
@@ -188,7 +241,7 @@ do
 			echo "Days remaining: $DAYS_REMAINING"
 			echo "---------------------------------------------------------------"
 			shift 1
-		fi	
+		fi
 	fi
 	;;
 	-r|--release)
@@ -207,53 +260,88 @@ do
 	;;
 	-i|--ignore)
 	shift 1
-	if test "ig$1" = "ig" ; then
-		echo "---------------------------------------------------------------"
-		echo "No languages to ignore given."
-		echo "---------------------------------------------------------------"
+	if test "say_$RUN_DRY" = "say_yes" ; then
+		dry_run_information_message
+
+		if test "q$1" != "q" ; then
+			shift 1
+		fi
 	else
-		echo "---------------------------------------------------------------"
-		export IGNORE_LANGS="`echo $1|sed -e 's/:/\ /g'`"
-		shift 1
-		echo "Ignoring po files for this/these lang(s): $IGNORE_LANGS"
-		echo "---------------------------------------------------------------"
+		if test "say_$NO_PERSONAL" = "say_yes" ; then
+			no_personal_information_message
+
+			if test "%$1" != "%" ; then shift 1 ; fi
+		else
+			if test "ig$1" = "ig" ; then
+				echo "---------------------------------------------------------------"
+				echo "No languages to ignore given."
+				echo "---------------------------------------------------------------"
+			else
+				echo "---------------------------------------------------------------"
+				export IGNORE_LANGS="`echo $1|sed -e 's/:/\ /g'`"
+				shift 1
+				echo "Ignoring po files for this/these lang(s): $IGNORE_LANGS"
+				echo "---------------------------------------------------------------"
+			fi
+		fi
 	fi
 	;;
 	-A|--send-to-all)
 	shift 1
-		echo "---------------------------------------------------------------"
-		echo "Sending po files to all languages..."
-		echo "---------------------------------------------------------------"
-		SEND_TO_ALL_LANGUAGES=yes
+	if test "say_$RUN_DRY" = "say_yes" ; then
+		dry_run_information_message
+	else
+		if test "say_$NO_PERSONAL" = "say_yes" ; then
+			no_personal_information_message
+		else
+			echo "---------------------------------------------------------------"
+			echo "Sending po files to all languages..."
+			echo "---------------------------------------------------------------"
+			export SEND_TO_ALL_LANGUAGES=yes
+		fi
+	fi
 	;;
 	-s|--send-to)
 	shift 1
-	if test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
-		echo "---------------------------------------------------------------"
-		echo "Sending the po files to all languages switch is already active.."
-		echo "Ignoring arguments.."
-		echo "---------------------------------------------------------------"
-		
-		if test "foo$1" != "foo" ; then shift 1 ; fi
-	else	
-		if test "sendto$1" = "sendto" ; then
+	if test "say_$NO_PERSONAL" = "say_yes" ; then
+		no_personal_information_message
+
+		if test "%$1" != "%" ; then shift 1 ; fi
+	else
+		if test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
 			echo "---------------------------------------------------------------"
-			echo "No language given to send the po file to."
+			echo "Sending the po files to all languages switch is already active.."
+			echo "Ignoring arguments.."
 			echo "---------------------------------------------------------------"
-		else
-			echo "---------------------------------------------------------------"
-			export SEND_TO_LANGS="`echo $1|sed -e 's/:/\ /g'`"
-			shift 1
-			echo "Sending the merged po files to this/these lang(s): $SEND_TO_LANGS"
-			echo "---------------------------------------------------------------"
+			
+			if test "foo$1" != "foo" ; then shift 1 ; fi
+		else	
+			if test "sendto$1" = "sendto" ; then
+				echo "---------------------------------------------------------------"
+				echo "No language given to send the po file to."
+				echo "---------------------------------------------------------------"
+			else
+				echo "---------------------------------------------------------------"
+				export SEND_TO_LANGS="`echo $1|sed -e 's/:/\ /g'`"
+				shift 1
+				echo "Sending the merged po files to this/these lang(s): $SEND_TO_LANGS"
+				echo "---------------------------------------------------------------"
+			fi
 		fi
 	fi
 	;;
 	-S|--statistics)
+	if test "say_$RUN_DRY" = "say_yes" ; then
+		echo "---------------------------------------------------------------"
+		echo "We're already running in dry-modus -- the statistics table will"
+		echo " be printed at the end of the process."
+		echo "---------------------------------------------------------------"
+	else
 		echo "---------------------------------------------------------------"
 		echo "Will print out the statistics table..." 
-		PRINT_TABLE=yes
+		export PRINT_TABLE=yes
 		echo "---------------------------------------------------------------"
+	fi
 	shift 1
 	;;
 	-p|--podirectory)
@@ -499,6 +587,12 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 	#
 	msgfmt -vv $i 2>/dev/null
 	
+	#
+	# Only operate if we don't need to run drily or to send personal mails.
+	#
+	if test "say_$RUN_DRY" != "say_yes" ; then
+		if test "say_$NO_PERSONAL" != "say_yes" ; then
+	
 	case $? in
 	1)
 		echo "You should update your $i po-file for $PACKAGE," > $BODY_FILE
@@ -548,11 +642,26 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 		cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR"
 	fi
 	[ -f $PACKAGE.$i.gz ] && rm -f $PACKAGE.$i.gz
+	
+		#
+		# Nested if's -- these are the "toplevel" if's.
+		#
+		fi
+	fi
+
+	#
+	# Clean up any resting backup file (due to --dry-run/--no-personal).
+	#
+	[ -f $i ] && rm -f $i
+	mv $i.backup $i
+	
         done
 
 #
-# Send a mail to the mailing list.
+# Send a mail to the mailing list -- if we're running in "wet-modus".
 #
+if test "say_$RUN_DRY" != "say_yes" ; then
+
 echo "Dear translators of $PACKAGE:" > $BODY_FILE
 echo "" >> $BODY_FILE
 if test "Z$DAYS_REMAINING" = "Z" ; then
@@ -562,8 +671,10 @@ else
 fi	
 echo "and you all should update your translator for it please." >> $BODY_FILE
 echo "" >> $BODY_FILE
+if test "say_$NO_PERSONAL" != "say_yes" ; then
 echo "Possibly you'll also get a \"private\" message from pozilla informing" >> $BODY_FILE
 echo "you about the coming release with the specs/status of your po-file." >> $BODY_FILE
+fi
 if test "Q$SEND_TO_ALL_LANGUAGES" != "Q" ; then
 echo "" >> $BODY_FILE
 echo "Updated and merged po files have been sent to all last translators" >> $BODY_FILE
@@ -586,6 +697,8 @@ if test "my$ADDITIONAL_MAILING_ADDRESS" = "my" ; then
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST"
 else
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST" -c "$ADDITIONAL_MAILING_ADDRESS"
+fi
+
 fi
 
 #

@@ -1,32 +1,40 @@
-.TH "pozilla.sh" "1" "3.5" "Fatih Demir" "Pozilla -- neat i18 stuff"
+.TH "pozilla.sh" "1" "4.0" "Fatih Demir" "Pozilla -- neat i18 stuff"
 .SH "NAME"
 .LP 
 pozilla.sh \-\- a i18n and admin helper script for releases and related i18n tasks.
 .SH "SYNTAX"
 .LP 
-pozilla.sh [\fI\-d|\-\-days days\fP]
+pozilla.sh [\fI\-d | \-\-days days\fP]
 .br 
-pozilla.sh [\fI\-r|\-\-release release\fP]
+pozilla.sh [\fI\-r | \-\-release release\fP]
 .br 
-pozilla.sh [\fI\-s|\-\-send\-to sendto languages\fP]
+pozilla.sh [\fI\-s | \-\-send\-to sendto languages\fP]
 .br 
-pozilla.sh [\fI\-p|\-\-podirectory po directory\fP]
+pozilla.sh [\fI\-p | \-\-podirectory po directory\fP]
 .br 
-pozilla.sh [\fI\-a|\-\-additional additional email address\fP]
+pozilla.sh [\fI\-a | \-\-additional additional email address\fP]
 .br 
-pozilla.sh [\fI\-m|\-\-mailinglist mailing list address\fP]
+pozilla.sh [\fI\-m | \-\-mailinglist mailing list address\fP]
 .br 
-pozilla.sh [\fI\-S|\-\-statistics\fP]
+pozilla.sh [\fI\-S | \-\-statistics\fP]
 .br 
-pozilla.sh [\fI\-A|\-\-send\-to\-all\fP]
+pozilla.sh [\fI\-A | \-\-send\-to\-all\fP]
+.br 
+pozilla.sh [\fI\-D | \-\-dry\-run\fP]
+.br 
+pozilla.sh [\fI\-n | \-\-no\-personal\fP]
 .SH "DESCRIPTION"
 .LP 
 pozilla.sh makes i18n and project admins more happy alltogether .\-)
 .br 
 It does mail all the last translators of the po files mails with their current translation status and the coming release (eventually also with a timed deadline if you do also use the corresponding command line parameter); it can also send the updated and merged po file to the last translator if wished and can easily also operate from other directories then the main project directory.
 .br 
+Though all of the nice features/options of pozilla.sh you'd really know what you're doing \fBor\fR try running pozilla.sh with only the "\fB\-D\fR" option to get a \fBdry preview\fR of what the statistics are looking like.
+.br 
 See the \fB\fREXAMPLE section for further examples on how doing all this.
 .SH "OPTIONS"
+.LP 
+All long options do have the same effect like the short options, I'm using the short options here just for a shorter text.
 .LP 
 .TP 
 \fB\-r\fR <\fIRelease_Number\fP>
@@ -53,6 +61,12 @@ Prints out the neat statistics table for the po files at the end.
 \fB\-A\fR
 Sends the updated and merged po files to all last translators \-\- any \fB\-\-send\-to\fR/\fB\-s\fR argument is ignored if this switch is used.
 .TP 
+\fB\-D\fR
+Runs pozilla.sh in dry mode, so that the statistics table is shown at the end but \fBno\fR mail is being sent to anyone.
+.TP 
+\fB\-n\fR
+Causes pozilla.sh to not send any personal statistics EMail to the last translators, but to send the statistics EMail to the mailing list \-\- avoids the personal EMail spammage for the last translators if not wished.
+.TP 
 \fB\-\-help\fR
 Show a small help screen with all the options.
 .TP 
@@ -61,6 +75,10 @@ Show version informations about pozilla.sh.
 .SH "EXAMPLES"
 .LP 
 Some real life examples for easier understanding how it can work:
+.LP 
+For simply viewing the projects po files statistics and to not send any EMail (=just for preview of the pozilla.sh statistics functions) you can do in the main project directory:
+.LP 
+pozilla.sh \-\-dry\-run
 .LP 
 Then you can simply run this if the release will be in 6 days and if you're in the main project directory:
 .LP 
@@ -77,6 +95,10 @@ pozilla.sh \-r 1.0 \-d 10 \-p /PROJECT \-a "<mail@domain.org>"
 Sends all merged and updated po files to all last translators, finds project (hopefully) in /PROJECT and shows the statisticstable at the end of the process:
 .LP 
 pozilla.sh \-S \-A \-p /PROJECT
+.LP 
+To avoid the sending of any personal/private EMail message to the last translators you can do the following:
+.LP 
+pozilla.sh \-n
 .LP 
 Now the ultimate real life case where pozilla.sh will get your loved release helper: you will do release 0.40 in 6 days and the "sv" and "tr" teams don't have got immediate CVS access or otherwise access to the newest po files, so that you should send the po files with the status and release announce mail to the last translators. In this case you can do it simply via pozilla.sh:
 .LP 
