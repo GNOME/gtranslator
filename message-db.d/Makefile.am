@@ -8,4 +8,6 @@ message_db__DATA = tr.xml \
 	ja.xml \
 	example.xml
 
-EXTRA_DIST = $(message_db__DATA) ChangeLog
+EXTRA_DIST = $(message_db__DATA) \
+	ChangeLog \
+	THIS-FORMAT-IS-TOTALLY-DEAD
