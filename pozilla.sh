@@ -1,8 +1,7 @@
+:
 #!/bin/sh
-
 #
 # (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
-#
 #
 # This script mails the common "oh my god, they're
 #  making a release" messages to the last translators.
@@ -11,7 +10,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.7
+export POZILLA_RELEASE=2.0
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -42,7 +41,7 @@ export PO_DIR="."
 #
 # Check for all necessary applications for pozilla.sh.
 #
-for app in msgfmt msgmerge make grep sed mutt
+for app in msgfmt msgmerge make grep sed awk mutt
 	do
 		if test "z`which $app`" = "z" ; then
 			echo "---------------------------------------------------------------"
@@ -67,7 +66,6 @@ for app in msgfmt msgmerge make grep sed mutt
 	echo 0 > $CONFIG_DIR/pozilla.conf
 }
 
-
 while [ ! -z "$1" ]
 do
 	case "$1" in
@@ -87,6 +85,7 @@ do
 	echo " await a ':' separated list like \"az:tr:uk\"."
 	echo ""
 	echo "-r --release      Specifies the coming release's number"
+	echo "-S --statistics   Print out the statistics table at the end"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
@@ -196,6 +195,13 @@ do
 		echo "---------------------------------------------------------------"
 	fi
 	;;
+	-S|--statistics)
+		echo "---------------------------------------------------------------"
+		echo "Will print out the statistics table..." 
+		PRINT_TABLE=yes
+		echo "---------------------------------------------------------------"
+	shift 1
+	;;
 	-p|--podirectory)
 	shift 1
 	if test "po$1" = "po" ; then
@@ -293,6 +299,27 @@ else
 	echo "---------------------------------------------------------------"
 		exit 1
 fi
+
+#
+# Test if we could build the pot file.
+#
+[ -f $PACKAGE.pot ] || {
+	echo "---------------------------------------------------------------"
+	echo "!ERROR¡: Couldn't build \"$PACKAGE.pot\" file!"
+	echo "---------------------------------------------------------------"
+		exit 1
+}
+
+#
+# Setup the table-header .-)
+#
+STAT_TABLE="
+Language	Total messages	Translated	Percentage	Missing
+========--------==============--==========------==========------=======
+"
+
+#
+# Put up all the mail messages and statistics.
 #
 for i in $PO_FILES
 	do
@@ -307,12 +334,34 @@ for i in $PO_FILES
 			continue
 		}
 	fi
+	
 	#
 	# And evaluate the statistics for the po-file.
 	#
 	cp $i $i.backup
 	msgmerge $i $PACKAGE.pot -o $i
+
+	#
+	# Get the values for the messages statistics.
+	#
+	statistics=(`msgfmt -v $i 2>&1`)
+	language=`basename $i .po`
+	translated=${statistics[0]}
+	fuzzy=${statistics[3]:-0}
+	untranslated=${statistics[6]:-0}
+	messages=$[ $translated + $fuzzy + $untranslated ]
+	missing=$[ $fuzzy + $untranslated ]
+	centil=`awk "{ print $messages / 100 }" $CONFIG_DIR/pozilla.conf`
+	percent=`awk "{ print $translated / $centil }" $CONFIG_DIR/pozilla.conf`
+
+	STAT_TABLE="$STAT_TABLE
+$language\t\t$messages\t\t$translated\t\t$percent\t\t$missing"
+
+	#
+	# Compile the current merged po file.
+	#
 	msgfmt -vv $i 2>/dev/null
+	
 	case $? in
 	1)
 		echo "You should update your $i po-file for $PACKAGE," > $BODY_FILE
@@ -325,7 +374,7 @@ for i in $PO_FILES
 		fi
 		echo "" >> $BODY_FILE
 		echo "Your po-file $i's statistics are:" >> $BODY_FILE
-		msgfmt -v $i 2>>$BODY_FILE
+		echo "${statistics[*]} [$percent%]" >>$BODY_FILE
 		echo "" >> $BODY_FILE
 		if test "s$SENDTO_LANGS" != "s" ; then
 			_lang=`echo $i|sed -e 's/.po//g'`
@@ -374,6 +423,9 @@ echo "" >> $BODY_FILE
 echo "Possibly you'll also get a \"private\" message from pozilla informing" >> $BODY_FILE
 echo "you about the coming release with the specs/status of your po-file." >> $BODY_FILE
 echo "" >> $BODY_FILE
+echo "Current po files statistics table:" >> $BODY_FILE
+echo "$STAT_TABLE" >> $BODY_FILE
+echo "" >> $BODY_FILE
 echo "--" >> $BODY_FILE
 echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
@@ -393,6 +445,13 @@ fi
 # Clean up the rest of the mailfiles.
 #
 [ -f $BODY_FILE ] && rm -f $BODY_FILE
+
+#
+# Print out the statistics table if necessary.
+#
+if test "&$PRINT_TABLE" = "&yes" ; then
+	echo "$STAT_TABLE"
+fi
 
 #
 # Recover the old LANG environment flags.

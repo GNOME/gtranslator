@@ -3,7 +3,7 @@
 gtranslator \-\- a comfortable gettext po file editor with many features
 
 .SH "SYNOPSIS"
-.B gtranslator [ \-\-help ] [ \-\-version ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-s scheme\-file ] [ po\-file ]
+.B gtranslator [ \-\-help ] [ \-\-version ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-s scheme\-file ] [ \-b ] [ \-n ] [ \-q query\-domains\-dir ] [ po\-file ]
 
 .SH "DESCRIPTION"
 gtranslator is a comfortable gettext po file editor with many features like special char featured editing, regular expression based search function, compile/update possiblities.
@@ -25,6 +25,15 @@ Especially good for webpages and other nice sites.
 .TP 
 .I \-s \-\-scheme=scheme\-file
 Allows you to set a colorscheme file on the command line.
+.TP 
+.I \-b \-\-build\-informations
+Shows the build specifications (date, time, versions, directories) of gtranslator.
+.TP 
+.I \-n \-\-no\-modules
+Inhibit the loading of any backend modules.
+.TP 
+.I \-q \-\-querydomaindir=query\-domains\-dir
+Changes the standard locales directory where gtranslator looks for the available query domains (per default: @prefix@/share/locale).
 .TP 
 .I \-\-display
 With this option you can select on which screen gtranslator should appear.
@@ -68,9 +77,6 @@ Opens \*(lq/tmp/mypo.po\*(rq file (as you can see gtranslator now supports local
 .B gtranslator \-g \*(lq320x240+0+0\*(rq
 Lets gtranslator appear on the left upper edge of the screen \*(lq+0+0\*(rq and gtranslator is
 sized to \*(lq320x240\*(rq.
-
-.SH "BUGS"
-Obsolete messages get lost and the TMX integration has also to be done right now.
 
 .SH "LICENSE"
 gtranslator is distributed under the 
