@@ -1,3 +1,15 @@
+2001-11-24  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* sidebar.c, message.c, gui.c: update messages table and show sidebar
+	only if they are enabled.
+	* find.c, message.c, header_stuff.c: do not use regex cache, replace
+	it with regcomp	or simple str functions.
+	* gui.c, main.c, parse.h, parse.c, sighandling.c: don't
+	create/destroy regex cache.
+	* gnome-regex.c, gnome-regex.h: removed -- no longer needed.
+	* Makefile.am: remove these from build.
+	* backend.c, bookmark.c, messages.h, parse.h: fix includes.
+
 2001-11-21  Fatih Demir <kabalak@gtranslator.org>
 
 	* prefs.c: #ifdef out the new percentage prefs stuff -- it isn't 

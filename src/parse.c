@@ -69,7 +69,6 @@
 GtrPo *po;
 gboolean file_opened;
 gboolean message_changed;
-GnomeRegexCache *rxc;
 guint autosave_source_tag=1;
 
 /*

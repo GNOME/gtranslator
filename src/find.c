@@ -32,12 +32,13 @@
 #include "utils.h"
 
 #include <string.h>
+#include <regex.h>
 #include <gtk/gtkeditable.h>
 #include <libgnomeui/gnome-app-util.h>
 
 #define MAXHITS 10
 
-static regex_t *target;
+static regex_t target;
 static int eflags = 0;
 static gchar *pattern = NULL;
 
@@ -73,7 +74,7 @@ gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
 		first = FALSE;
 		if (msg == NULL) {
 			msg = g_list_first(begin);
-			g_return_val_if_fail(msg != NULL, TRUE);
+			g_return_val_if_fail(msg != NULL, FALSE);
 		}
 	} while (msg != begin || next);
 	return FALSE;
@@ -95,7 +96,7 @@ static GList *get_find_pos(gchar *str)
   strend = str + strlen(str);
 
   pos = (regmatch_t *)g_malloc(sizeof(regmatch_t));
-  while (str < strend && 0 == regexec(target, str, 1, pos, 0)) {
+  while (str < strend && 0 == regexec(&target, str, 1, pos, 0)) {
     end = pos->rm_eo;
 
     pos->rm_so += offset;
@@ -127,6 +128,7 @@ static GList *get_find_pos(gchar *str)
  * while (pos[hits].rm_so != -1 && hits < MAXHITS) hits++;
  */
 
+/* Returns: 1 if found, 0 if not found, -1 on error (?) */
 static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 {
 	static int step = 0;
@@ -215,7 +217,7 @@ void gtranslator_find(GtkWidget * widget, gpointer what)
 			GTR_FREE(error);
 			return;
 		}
-		target = gnome_regex_cache_compile(rxc, what, eflags);
+		regcomp(&target, what, eflags);
 		GTR_FREE(pattern);
 		pattern = what;
 	}

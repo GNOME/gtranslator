@@ -469,10 +469,9 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_translator_free(gtranslator_translator);
 
 	/*
-	 * Free any lungering stuff 'round -- free prefs & regex cache.
+	 * Free any lungering stuff 'round -- free prefs.
 	 */
 	gtranslator_preferences_free();
-	gnome_regex_cache_destroy(rxc);
 
 	/*
 	 * Remove any lungering temp. file.
@@ -653,7 +652,10 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 		     && (msg->status & GTR_MSG_STATUS_FUZZY))
 		{
 		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
-			gtranslator_messages_table_update_message_status(msg);
+			if(GtrPreferences.show_messages_table)
+			{
+				gtranslator_messages_table_update_message_status(msg);
+			}
 			gtranslator_actions_disable_fuzzy_menu_item();
 		}
 	}

@@ -64,62 +64,22 @@ static void replace_substring(gchar **item, const gchar *bad, const gchar *good)
 
 static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 {
-	regex_t *rx;
-	regmatch_t m[3];
-	
+	char *prefix_start;
+
 	if (!str) {
 		*name = g_strdup("");
 		*email = g_strdup("");
 		return;
 	}
 	
-	rx = gnome_regex_cache_compile(rxc,
-		"(.+) <([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+)>", 
-		REG_EXTENDED);
+	prefix_start = strstr (str, " <");
 
-	/*
-	 * Handle the cases where no regex-cache could be compiled; try to get
-	 *  the mail address and the name via complicated string-plays.
-	 */
-	if(!rx)
-	{
-		gchar *tempbazooka;
-		
-		/*
-		 * Strip everything after the '<' of the email address; only
-		 *  the name should be the rest -- here assigned to "*name".
-		 */
-		*name=nautilus_str_strip_substring_and_after(str, "<");
-		
-		/*
-		 * Operate on a copy of the whole string, reverse it and now
-		 *  apply the logic that an email address _cannot_ contain any
-		 *   spaces, the spaces should be also the separator for the
-		 *    name/email pair.
-		 */
-		tempbazooka=g_strdup(str);
-		g_strreverse(tempbazooka);
+	if (prefix_start == NULL) {
+		*name = g_strdup(str);
+	} else {
 
-		*email=nautilus_str_strip_substring_and_after(tempbazooka, " ");
-		g_strreverse(*email);
-		
-		GTR_FREE(tempbazooka);
-	}
-	else
-	{
-		if (!regexec(rx, str, 3, m, 0))
-		{
-			if (m[1].rm_so != -1)
-			{
-				*name = g_strndup(str+m[1].rm_so, 
-					m[1].rm_eo - m[1].rm_so);
-			}
-			if (m[2].rm_so != -2)
-			{
-				*email = g_strndup(str+m[2].rm_so, 
-					m[2].rm_eo - m[2].rm_so);
-			}
-		}
+		*name = g_strndup (str, prefix_start - str);
+		*email = g_strndup (prefix_start + 2, strlen (prefix_start) - 3);
 	}
 }
 
@@ -139,20 +99,11 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 
 #define if_key_is(str) if (!g_strcasecmp(pair[0],str))
 		if_key_is("Project-Id-Version") {
-			regex_t *rx;
-			regmatch_t m[3];
-			
-			rx = gnome_regex_cache_compile(rxc,
-				"(.+) +([[:alnum:]._-]+)$", 
-				REG_EXTENDED);
-			if (!regexec(rx, pair[1], 3, m, 0)) {
-				if (m[1].rm_so != -1)
-					ph->prj_name = 
-					    g_strndup(pair[1]+m[1].rm_so,
-						      m[1].rm_eo - m[1].rm_so);
-				if (m[2].rm_so != -1)
-					ph->prj_version =
-					    g_strdup(pair[1]+m[2].rm_so);
+			gchar *space;
+			space = strrchr (pair[1], ' ');
+			if (space) {
+				ph->prj_name = g_strndup(pair[1], space - pair[1]);
+				ph->prj_version = g_strdup(space + 1);
 			} else {
 		  	  ph->prj_name = g_strdup(pair[1]);
 			  ph->prj_version = g_strdup("");
@@ -175,16 +126,13 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		    ph->mime_version = g_strdup(pair[1]);
 		else
 		if_key_is("Content-Type") {
-			regex_t *rx;
-			regmatch_t m[2];
+			gchar *prefix;
 			
-			rx = gnome_regex_cache_compile(rxc,
-				"text/plain; charset=(.+)$", REG_EXTENDED);
-			if (!regexec(rx, pair[1], 2, m, 0)) {
-				if (m[1].rm_so != -1)
-					ph->charset =
-					    g_strdup(pair[1]+m[1].rm_so);
-			}
+			prefix = strstr (pair[1], "text/plain; charset=");
+			if (prefix)
+				ph->charset = g_strdup (prefix + 20);
+			else
+				ph->charset = g_strdup (pair[1]);
 		}
 		else
 		if_key_is("Content-Transfer-Encoding")

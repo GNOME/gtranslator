@@ -234,11 +234,6 @@ int main(int argc, char *argv[])
 	 */
 	gtranslator_utils_create_gtranslator_directory();
 
-	/* 
-	 * Initialize the regular expression cache 
-	 */
-	rxc = gnome_regex_cache_new_with_size(20);
-
 	/*
 	 * Read the translator information/data into our generally used 
 	 *  GtrTranslator structure.
@@ -408,7 +403,6 @@ int main(int argc, char *argv[])
 		 */
 		gtranslator_translator_free(gtranslator_translator);
 		gtranslator_preferences_free();
-		gnome_regex_cache_destroy(rxc);
 
 		/*
 		 * Shutdown GnomeVFS.
@@ -500,7 +494,6 @@ int main(int argc, char *argv[])
 		 */
 		gtranslator_translator_free(gtranslator_translator);
 		gtranslator_preferences_free();
-		gnome_regex_cache_destroy(rxc);
 
 		/*
 		 * Shutdown GnomeVFS.

@@ -71,7 +71,6 @@ void gtranslator_signal_handler(int signal)
 	gtranslator_translator_free(gtranslator_translator);
 	gtranslator_preferences_free();
 	gtranslator_runtime_config_free(gtranslator_runtime_config);
-	gnome_regex_cache_destroy(rxc);
 
 	exit(1);
 }

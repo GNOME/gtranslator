@@ -24,6 +24,7 @@
 
 #include "gui.h"
 #include "preferences.h"
+#include "prefs.h"
 #include "sidebar.h"
 #include "syntax.h"
 #include "undo.h"
@@ -113,6 +114,9 @@ void gtranslator_sidebar_activate_views()
 	GdkPixbuf	*pixbuf;
 	gint		 count=0;
 	
+	if(!GtrPreferences.show_sidebar)
+		return;
+	
 	g_return_if_fail(po->filename!=NULL);
 
 	/*
@@ -138,6 +142,9 @@ void gtranslator_sidebar_activate_views()
  */ 
 void gtranslator_sidebar_clear_views()
 {
+	if(!GtrPreferences.show_sidebar)
+		return;
+	
 	/*
 	 * Remove the view icons/items from the sidebar model.
 	 */

@@ -38,6 +38,7 @@
 #include "utils_gui.h"
 
 #include <string.h>
+#include <regex.h>
 #include <gtk/gtk.h>
 
 #include <libgnomeui/gnome-app.h>
@@ -353,7 +354,10 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	}
 	
 	gtranslator_message_update();
-	gtranslator_messages_table_update_message_status(GTR_MSG(po->current->data));
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table_update_message_status(GTR_MSG(po->current->data));
+	}
 }
 
 /*
@@ -437,7 +441,8 @@ void gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number)
  */
 void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
-	regex_t *rex;
+	static int compiled = FALSE;
+	static regex_t rexf, rexc;
 	regmatch_t pos[3];
 	gchar *comment;
 
@@ -447,6 +452,12 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 
 	comment=GTR_COMMENT(msg->comment)->comment;
 	
+	if (!compiled) {
+		regcomp(&rexf, "^(#), c-format", REG_EXTENDED | REG_NEWLINE);
+		regcomp(&rexc, "(^#, fuzzy$)|^#, (fuzzy,) .*$", REG_EXTENDED | REG_NEWLINE);
+		compiled = TRUE;
+	}
+
 	/* 
 	 * If fuzzy status is already correct
 	 */
@@ -457,10 +468,8 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		
 		msg->status |= GTR_MSG_STATUS_FUZZY;
 		po->fuzzy++;
-		rex = gnome_regex_cache_compile(rxc,
-			  "^(#), c-format", 
-			  REG_EXTENDED | REG_NEWLINE);
-		if (!regexec(rex, comment, 3, pos, 0)) {
+
+		if (!regexec(&rexf, comment, 3, pos, 0)) {
 			comment[pos[1].rm_so] = '\0';
 			comchar = g_strdup_printf("%s#, fuzzy%s", comment, 
 					    comment+pos[1].rm_eo);
@@ -475,10 +484,7 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
 		po->fuzzy--;
-		rex = gnome_regex_cache_compile(rxc, 
-			  "(^#, fuzzy$)|^#, (fuzzy,) c-format",
-			  REG_EXTENDED | REG_NEWLINE);
-		if (!regexec(rex, comment, 3, pos, 0)) {
+		if (!regexec(&rexc, comment, 3, pos, 0)) {
 			gint i = (pos[1].rm_so == -1) ? 2 : 1;
 			strcpy(comment+pos[i].rm_so, comment+pos[i].rm_eo+1);
 		}

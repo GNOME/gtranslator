@@ -28,6 +28,7 @@
 
 #include <gnome-xml/parser.h>
 
+#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
 #include <gal/util/e-xml-utils.h>

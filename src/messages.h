@@ -21,6 +21,7 @@
 #ifndef GTR_MESSAGES_H
 #define GTR_MESSAGES_H 1
 
+#include <glib.h>
 #include "comment.h"
 
 /*
