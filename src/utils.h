@@ -143,9 +143,8 @@ gchar *gtranslator_utils_get_locale_charset(void);
  * The lists for the language informations -- are all changed 
  *  accordingly automatically.
  */
-GList *languages_list, *encodings_list, *lcodes_list, *group_emails_list,
+extern GList *languages_list, *encodings_list, *lcodes_list, *group_emails_list,
 	*bits_list;
-	
 
 /*
  * Creates the lists above and deletes/frees it.

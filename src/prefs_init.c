@@ -48,8 +48,6 @@ void gtranslator_preferences_init_default_values()
 		 */
 		if(!lc)
 		{
-			gchar	*language_name;
-			
 			lc=gtranslator_utils_get_environment_locale();
 
 			/*
@@ -61,14 +59,7 @@ void gtranslator_preferences_init_default_values()
 				lc=g_strdup("en");
 			}
 
-			language_name=gtranslator_utils_get_language_name_by_locale_code(lc);
-
 			gtranslator_config_set_string("language/language_code", lc);
-
-			if(language_name)
-			{
-				gtranslator_config_set_string("language/name", language_name);
-			}
 		}
 		
 		/*

@@ -1,5 +1,18 @@
 2001-08-15  Fatih Demir <kabalak@gtranslator.org>
 
+	* prefs_init.c: Don't initialize the language name -- let the 
+		user fill in this data.
+
+	* utils.c/.h: Also declare the language data lists "extern"al.
+
+	* utils.c: Updated the language name getting routines to be a bit
+		more logical, if no full match is possible, check the first
+		 2 characters for equality (-> if "tr_TR" is not found,
+		  check for "tr").
+
+	* color-schemes.c/.h: Also made the generally used GtrColorScheme
+		"theme" declared extern in the header.
+
 	* prefs.c: Re-use the GTR_FREE macro while updating the prefs contents
 		and also check for the EMail address length to be at least 6
 		 characters long.
@@ -16,7 +29,7 @@
 2001-08-11  Thomas Ziehmer <thomas@gtranslator.org>
 
 	* prefs.c, prefs.h: Code cleanup and fix of a potential bug with global
-		variables, which were not realy global.
+		variables, which were not really global.
 
 2001-08-14  Fatih Demir <kabalak@gtranslator.org>
 

@@ -42,6 +42,11 @@
 #include <libgnome/gnome-util.h>
 
 /*
+ * The globally used GtrColorScheme.
+ */
+GtrColorScheme	*theme=NULL;
+
+/*
  * Check if the given xml file is a gtranslator color scheme file.
  */
 gboolean check_if_color_scheme(xmlNodePtr *node);

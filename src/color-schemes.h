@@ -64,7 +64,7 @@ typedef struct {
 /*
  * The general GtrColorScheme we do use in gtranslator.
  */
-GtrColorScheme *theme; 
+extern GtrColorScheme *theme; 
 
 /*
  * Free the given GtrColorScheme.

@@ -42,6 +42,15 @@
 static gint list_ref=0; 
 
 /*
+ * The language data lists -- declare and initialize them here locally.
+ */
+GList *languages_list=NULL;
+GList *encodings_list=NULL;
+GList *lcodes_list=NULL;
+GList *group_emails_list=NULL;
+GList *bits_list=NULL;
+
+/*
  * Strip the filename to get a "raw" enough filename.
  */ 
 gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
@@ -156,7 +165,7 @@ const gchar *gtranslator_utils_get_english_language_name(const gchar *lang)
  */
 gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_code)
 {
-	gint i;
+	gint 	i;
 	
 	g_return_val_if_fail(locale_code!=NULL, NULL);
 
@@ -165,7 +174,14 @@ gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_co
 	 */
 	for(i=0; languages[i].lcode!=NULL; i++)
 	{
+		/*
+		 * First check for full equality, then for a 2 char-prefix equality.
+		 */
 		if(!nautilus_strcmp(languages[i].lcode, locale_code))
+		{
+			return _(languages[i].name);
+		}
+		else if(!g_strncasecmp(languages[i].lcode, locale_code, 2))
 		{
 			return _(languages[i].name);
 		}

@@ -46,6 +46,7 @@ gchar *mime     = NULL;
 gchar *enc      = NULL;
 gchar *lc       = NULL;
 gchar *lg       = NULL;
+
 /*
  * The callbacks:
  */
