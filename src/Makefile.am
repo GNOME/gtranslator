@@ -3,6 +3,8 @@
 #   and autoconf. 
 # -------------------------------------------------------
 
+SUBDIRS = pixmaps
+
 myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
 
 if GCONF_IS_PRESENT
@@ -63,4 +65,4 @@ gtranslator_LDADD = \
 	$(XML_LIBS) \
 	$(vfs_libs)
 
-EXTRA_DIST = ChangeLog pixmaps/untrans.xpm
+EXTRA_DIST = ChangeLog

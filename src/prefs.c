@@ -1,6 +1,6 @@
 /*
- * (C) 2000 	Fatih Demir <kabalak@gmx.net>
- *		Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
+ *			Gediminas Paulauskas <menesis@delfi.lt>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,9 +55,9 @@ static GtkWidget
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
-	*enable_popup_menu, *use_dot_char, *use_update_function,
-	*check_recent_files, *own_specs, *instant_spell_checking,
-	*use_own_dict;
+	*enable_popup_menu, *use_dot_char, *use_dotChar,
+	*use_update_function, *check_recent_files, *own_specs,
+	*instant_spell_checking, *use_own_dict;
 	
 /*
  * The preferences dialog widget itself.
@@ -208,11 +208,18 @@ void create_lists(void)
 void prefs_box(GtkWidget  * widget, gpointer useless)
 {
 	/*
-	 * the internally used labels.
+	 * The internally used variables.
 	 */
 	GtkWidget 	*fg_color_label,
 			*bg_color_label,
 			*font_label;
+	GList		*dotChars;
+	
+	dotChars=g_list_alloc();
+
+	dotChars=g_list_append(dotChars, (gpointer) _("·"));
+	dotChars=g_list_append(dotChars, (gpointer) _("°"));
+	dotChars=g_list_append(dotChars, (gpointer) _("|"));
 	
 	raise_and_return_if_exists(prefs);
 	/*
@@ -229,7 +236,7 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	first_page = append_page_table(prefs, 2, 2, _("Personal information"));
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
-	fourth_page = append_page_table(prefs, 4, 1, _("Miscellaneous"));
+	fourth_page = append_page_table(prefs, 5, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 4, 2, _("Recent files & spell checking"));
 	sixth_page = append_page_table(prefs, 4, 2, _("Fonts & Colors"));
 	
@@ -293,18 +300,21 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	 * The fourth page with the popup menu & the dot_char.
 	 */
 	use_dot_char=attach_toggle_with_label(fourth_page, 0,
-		_("Use the dot char (\"·\") instead of a free space"),
+		_("Use free space indicating special character"),
 		wants.dot_char, prefs_box_changed);
-	enable_popup_menu=attach_toggle_with_label(fourth_page, 1,
+	use_dotChar=attach_combo_with_label(fourth_page, 1,
+		_("Special character"), dotChars, _("·"),
+		prefs_box_changed, NULL);
+	enable_popup_menu=attach_toggle_with_label(fourth_page, 2,
 		_("Enable the popup menu"),
 		wants.popup_menu, prefs_box_changed);	
-	use_update_function=attach_toggle_with_label(fourth_page, 2,
+	use_update_function=attach_toggle_with_label(fourth_page, 3,
 		_("Enable the update function of gtranslator (you need the sources for this)"),
 		wants.update_function, prefs_box_changed);
-	save_geometry_tb=attach_toggle_with_label(fourth_page, 3,
+	save_geometry_tb=attach_toggle_with_label(fourth_page, 4,
 		_("Save geometry on exit & restore it on startup"),
 		wants.save_geometry, prefs_box_changed);
-	no_uzis=attach_toggle_with_label(fourth_page, 4,
+	no_uzis=attach_toggle_with_label(fourth_page, 5,
 		_("Don't show the update information dialogs"),
 		wants.uzi_dialogs, prefs_box_changed);
 	/*
@@ -411,6 +421,7 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	update(enc, GTK_COMBO(encoding)->entry);
 	update(wants.dictionary, dictionary_file);
 #undef update
+	wants.dotChar=(int) gtk_editable_get_chars(GTK_EDITABLE(GTK_COMBO(use_dotChar)->entry), 0, -1);
 #define if_active(widget) \
 	gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))
 	wants.save_geometry = if_active(save_geometry_tb);
@@ -436,6 +447,7 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	gtranslator_config_set_string("language/encoding", enc);
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
+	gtranslator_config_set_int("special/dot_char", wants.dotChar);
 	gtranslator_config_set_string("dict/file", wants.dictionary);
 	
 	g_free(wants.font);
@@ -556,6 +568,7 @@ void read_prefs(void)
 	mime = gtranslator_config_get_string("language/mime_type");
 	enc = gtranslator_config_get_string("language/encoding");
 	wants.font = gtranslator_config_get_string("font/name");
+	wants.dotChar = gtranslator_config_get_int("special/dot_char");
 	wants.dictionary = gtranslator_config_get_string("dict/file");
 	
 	wants.instant_spell_check = 

@@ -1,6 +1,6 @@
 /*
- * (C) 2000 	Fatih Demir <kabalak@gmx.net>
- *		Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
+ *			Gediminas Paulauskas <menesis@delfi.lt>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -625,8 +625,8 @@ static void invert_dot(gchar *str)
 
 	for(i=0; str[i] != '\0'; i++) {
 		if(str[i]==' ')
-			str[i]='·';
-		else if(str[i]=='·')
+			str[i]=(int) wants.dotChar;
+		else if(str[i]==(int) wants.dotChar)
 			str[i]=' ';
 	}
 }
@@ -1013,7 +1013,6 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		for(len=0; newstr[len]!='\0'; len++) {
 			if(newstr[len]==' ') {
 				static gint pos;
-				static gchar dot = '·';
 				pos = len;
 
 				/*
@@ -1025,7 +1024,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 				 * Insert the changed text with the '·''s.
 				 */
 				gtk_editable_insert_text(GTK_EDITABLE(trans_box),
-							 &dot, 1, &pos);
+							 &(wants.dotChar), 1, &pos);
 			}
 		}
 		g_free(newstr);

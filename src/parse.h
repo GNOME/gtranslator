@@ -1,6 +1,6 @@
 /*
- * (C) 2000 	Fatih Demir <kabalak@gmx.net>
- *		Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
+ *			Gediminas Paulauskas <menesis@delfi.lt>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -135,6 +135,12 @@ void update(GtkWidget *widget, gpointer useless);
  * This shows you the most recent menus.
  */
 void gtranslator_display_recent(void);
+
+/*
+ * Checks the given file for the right permissions for
+ *  open/writing the files.
+ */
+gboolean gtranslator_check_file_perms(const gchar *filename);
 
 /*
  * This function gets the count of the translated messages

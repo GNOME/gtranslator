@@ -1,6 +1,6 @@
 /*
- * (C) 2000 	Fatih Demir <kabalak@gmx.net>
- *		Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
+ *			Gediminas Paulauskas <menesis@delfi.lt>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -338,6 +338,14 @@ void parse(const gchar *filename)
 	} else
 		po->filename = g_strdup(filename);
 
+	/*
+	 * Check the right file access permissions.
+	 */
+	if(gtranslator_check_file_perms(filename)==FALSE)
+	{
+		return;
+	}
+	
 	if (!actual_parse()) {
 		free_po();
 		return;
@@ -782,6 +790,60 @@ void compile(GtkWidget * widget, gpointer useless)
 	remove(RESULT);
 	remove(PO_FILE);
 	g_free(cmd);
+}
+
+/*
+ * Checks the given file for read permissions first and then
+ *  for the right write permissions.
+ */
+gboolean gtranslator_check_file_perms(const gchar *filename)
+{
+	FILE *file;
+	gchar *error_message;
+
+	/*
+	 * Open the file first for reading.
+	 */
+	file=fopen(filename, "r");
+	if(!file)
+	{
+		/*
+		 * Create an error box and prevent further reading
+		 *  of the file.
+		 */  
+		error_message=g_strdup_printf(
+			_("You don't have read permissions on file `%s'"),
+			filename);
+		gnome_app_error(GNOME_APP(app1), error_message);
+
+		return FALSE;
+	}
+	else
+	{
+		/*
+		 * Open the same file also for a write-permission check.
+		 */ 
+		file=fopen(filename, "r+");
+		if(!file)
+		{
+			/*
+			 * Show a warning box to the user and warn him about
+			 *  the fact of lacking write permissions.
+			 */  
+			error_message=g_strdup_printf(
+				_("You don't have write permissions on file `%s'.\n\
+This means that you should save it as a copy\n\
+to a local dir of your choice."),
+				filename);
+			gnome_app_warning(GNOME_APP(app1), error_message);
+
+			return FALSE;
+		}
+	}
+
+	fclose(file);
+
+	return TRUE;
 }
 
 /*

@@ -1,6 +1,6 @@
 /*
- * (C) 2000 	Fatih Demir <kabalak@gmx.net>
- *		Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
+ *			Gediminas Paulauskas <menesis@delfi.lt>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ void about_box(GtkWidget * widget, gpointer useless)
 	 * Create the about box via gnome_about_new.
 	 */ 
 	about =
-	    gnome_about_new("gtranslator", VERSION, "(C) 1999-2000", authors,
+	    gnome_about_new("gtranslator", VERSION, "(C) 1999-2001", authors,
 			    _("gtranslator will be a Gnome framework for translating these emminent important po-files.\nIt will be based upon a gtranslatord and a gtranslator client. Wish the best for us translators and for me!"),
 			    NULL);
 

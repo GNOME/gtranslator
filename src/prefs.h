@@ -1,6 +1,6 @@
 /*
- * (C) 2000 	Fatih Demir <kabalak@gmx.net>
- *		Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
+ *			Gediminas Paulauskas <menesis@delfi.lt>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,6 +43,7 @@ struct {
 	guint dont_save_unchanged_files : 1;
 	guint save_geometry		: 1;
 	guint unmark_fuzzy		: 1;
+	
 	/*
 	 * Options, used NOT in prefs-box.
 	 */
@@ -60,6 +61,7 @@ struct {
 	gchar *spell_command;
 	gchar *dictionary;
 	gchar *font;
+	gchar dotChar;
 } wants;
 
 /*
