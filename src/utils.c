@@ -607,7 +607,14 @@ gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
 	/*
 	 * Calculate the similarity value a single char is representing.
 	 */
-	one_char_percentage=(100 / (strlen(a) - 1));
+	if(strlen(a) > strlen(b))
+	{
+		one_char_percentage=(100 / (strlen(a) - 1));
+	}
+	else
+	{
+		one_char_percentage=(100 / (strlen(b) - 1));
+	}
 
 	/*
 	 * Now we do check the characters of the two given strings..

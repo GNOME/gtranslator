@@ -23,8 +23,7 @@
 #include <glib.h>
 
 /*
- * Try to save the file "differently" -- very similar to the open-differently
- *  interface for opening the files "differently".
+ * Save the po file rightly.
  */
 gboolean gtranslator_save_po_file(const gchar *filename);
 
