@@ -142,7 +142,7 @@ void gtranslator_open_compiled_po_file(gchar *file)
 	 * Build up the command to execute in the shell to get the plain
 	 *  gettext file.
 	 */
-	cmd=g_strdup_printf("msgunfmt %s -o %s",
+	cmd=g_strdup_printf("msgunfmt '%s' -o '%s'",
 		file,
 		tempfilename);
 	/* 
@@ -189,7 +189,7 @@ void open_compressed_po_file(gchar *file, gchar *command)
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */
-	cmd=g_strdup_printf("%s -dc < %s > %s",
+	cmd=g_strdup_printf("'%s' -dc < '%s' > '%s'",
 		command,
 		file,
 		tempfilename);
@@ -280,7 +280,7 @@ void gtranslator_open_ziped_po_file(gchar *file)
 
 	tempfilename=gtranslator_utils_get_temp_file_name();
 
-	cmd=g_strdup_printf("unzip -p %s > %s", 
+	cmd=g_strdup_printf("unzip -p '%s' > '%s'", 
 		file,
 		tempfilename);
 

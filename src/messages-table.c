@@ -25,6 +25,7 @@
 #include "message.h"
 #include "parse.h"
 #include "preferences.h"
+#include "prefs.h"
 #include "utils.h"
 #include "utf8.h"
 
@@ -75,7 +76,23 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 
 static gchar *return_string_for_value_function(ETreeModel *model, int column,
 	const void *value, void *data);
-	
+
+/*
+ * Simply sets up/frees the generally used messages table colors.
+ */
+static void read_messages_table_colors(void);
+static void free_messages_table_colors(void);
+
+/*
+ * Own messages table color container.
+ */
+typedef struct
+{
+	gchar	*untranslated;
+	gchar	*fuzzy;
+	gchar	*translated;
+} GtrMessagesTableColors;
+
 /*
  * Global variables
  */
@@ -88,13 +105,91 @@ ETreePath fuzzy_node = NULL;
 ETreePath unknown_node = NULL;
 ETableExtras *tree_extras;
 
+GtrMessagesTableColors *messages_table_colors;
+
 /*
  * hash table to associate an ETreePath with each message. Used
- * in update_row to dtermine the node given a message that has been
+ * in update_row to determine the node given a message that has been
  * updated
  */
 GHashTable *hash_table=NULL;	
 
+/*
+ * Initialize and set up the generally used messages table colors.
+ */
+static void read_messages_table_colors()
+{
+	messages_table_colors=g_new0(GtrMessagesTableColors, 1);
+
+	/*
+	 * Read the values from the prefs in -- but only if desired.
+	 */
+	if(GtrPreferences.use_own_mt_colors)
+	{
+		gchar	*value;
+		
+		gtranslator_config_init();
+		
+		value=gtranslator_config_get_string("colors/messages_table_untranslated");
+
+		if(value && value[0]=='#')
+		{
+			messages_table_colors->untranslated=g_strdup(value);
+			GTR_FREE(value);
+		}
+		else
+		{
+			messages_table_colors->untranslated=g_strdup("#a7453e");
+		}
+
+		value=gtranslator_config_get_string("colors/messages_table_fuzzy");
+
+		if(value && value[0]=='#')
+		{
+			messages_table_colors->fuzzy=g_strdup(value);
+			GTR_FREE(value);
+		}
+		else
+		{
+			messages_table_colors->fuzzy=g_strdup("#ff0000");
+		}
+
+		value=gtranslator_config_get_string("colors/messages_table_translated");
+
+		if(value && value[0]=='#')
+		{
+			messages_table_colors->translated=g_strdup(value);
+			GTR_FREE(value);
+		}
+		else
+		{
+			messages_table_colors->translated=NULL;
+		}
+
+		gtranslator_config_close();
+	}
+	else
+	{
+		messages_table_colors->untranslated=g_strdup("#a7453e");
+		messages_table_colors->fuzzy=g_strdup("#ff0000");
+		messages_table_colors->translated=NULL;
+	}
+}
+
+/*
+ * Frees the internally used GtrMessagesTableColors structure.
+ */
+static void free_messages_table_colors()
+{
+	if(messages_table_colors)
+	{
+		GTR_FREE(messages_table_colors->untranslated);
+		GTR_FREE(messages_table_colors->fuzzy);
+		GTR_FREE(messages_table_colors->translated);
+
+		GTR_FREE(messages_table_colors);
+	}
+}
 
 /* 
  * Functions:
@@ -330,19 +425,15 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	case COL_COLOR:
 		if(message->status & GTR_MSG_STATUS_FUZZY)
 		{
-			return "#ff0000";
+			return messages_table_colors->fuzzy;
 		}
 		else if(message->status & GTR_MSG_STATUS_TRANSLATED)
 		{
-			return NULL;
+			return messages_table_colors->translated;
 		}
 		else
 		{
-			/*
-			 * This is the color for the untranslated entries;
-			 *  all other cases have already been handled.
-			 */
-			return "#a7453e";
+			return messages_table_colors->untranslated;
 		}
 	default:
 		g_assert_not_reached ();
@@ -526,6 +617,8 @@ void gtranslator_messages_table_clear(void)
 		g_hash_table_destroy(hash_table);
 		hash_table=NULL;
 	}
+
+	free_messages_table_colors();
 }		
 
 /*
@@ -549,6 +642,7 @@ void gtranslator_messages_table_create (void)
 		root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
 	e_tree_root_node_set_visible (E_TREE(tree), FALSE);
 	
+	read_messages_table_colors();
 	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
 	
 	unknown_node = e_tree_memory_node_insert (tree_memory, root_node, 0, NULL);
@@ -583,7 +677,7 @@ void gtranslator_messages_table_create (void)
 			g_hash_table_insert(hash_table, message, node); 
 		list = g_list_next(list);
 		i++;
-	}	
+	}
 }
 
 /*

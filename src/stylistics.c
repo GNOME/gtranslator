@@ -40,6 +40,7 @@ gchar *get_path_from_type(ColorType Type);
 gchar* get_path_from_type(ColorType Type)
 {
 	gchar *section;
+
 	switch(Type)
 	{
 		case COLOR_FG:
@@ -78,6 +79,15 @@ gchar* get_path_from_type(ColorType Type)
 		case COLOR_SPELL_ERROR:
 			section="spell_error";
 			break;
+		case COLOR_MESSAGES_TABLE_UNTRANSLATED:
+		    	section="messages_table_untranslated";
+			break;
+		case COLOR_MESSAGES_TABLE_FUZZY:
+		    	section="messages_table_fuzzy";
+			break;
+		case COLOR_MESSAGES_TABLE_TRANSLATED:
+		    	section="messages_table_translated";
+		    	break;
 		default:
 			return NULL;
 	}
@@ -93,7 +103,7 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 	guint8 red, green, blue;
 	gchar spec[8];
 	gchar *path=NULL;
-	
+
 	if(Type==COLOR_FG)
 	{
 		path="colors/own_fg";
@@ -101,6 +111,18 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 	else if(Type==COLOR_BG)
 	{
 		path="colors/own_bg";
+	}
+	else if(Type==COLOR_MESSAGES_TABLE_UNTRANSLATED)
+	{
+		path="colors/messages_table_untranslated";
+	}
+	else if(Type==COLOR_MESSAGES_TABLE_FUZZY)
+	{
+		path="colors/messages_table_fuzzy";
+	}
+	else if(Type==COLOR_MESSAGES_TABLE_TRANSLATED)
+	{
+		path="colors/messages_table_translated";
 	}
 
 	g_return_if_fail(path!=NULL);
@@ -124,7 +146,7 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 	gchar *spec;
 	gchar *path=NULL;
 	
-	if(Type==COLOR_FG)
+    	if(Type==COLOR_FG)
 	{
 		path="colors/own_fg";
 	}
@@ -132,7 +154,19 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 	{
 		path="colors/own_bg";
 	}
-	
+	else if(Type==COLOR_MESSAGES_TABLE_UNTRANSLATED)
+	{
+		path="colors/messages_table_untranslated";
+	}
+	else if(Type==COLOR_MESSAGES_TABLE_FUZZY)
+	{
+		path="colors/messages_table_fuzzy";
+	}
+	else if(Type==COLOR_MESSAGES_TABLE_TRANSLATED)
+	{
+		path="colors/messages_table_translated";
+	}
+
 	g_return_if_fail(path!=NULL);
 
 	/*

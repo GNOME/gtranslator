@@ -36,8 +36,6 @@ enum
 	COL_COLOR,
 };
 
-
-
 /*
  * Returns the ready widget with all the specs.
  */

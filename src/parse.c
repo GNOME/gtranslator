@@ -1034,7 +1034,7 @@ void compile(GtkWidget * widget, gpointer useless)
 		return;
 	}
 
-	cmd = g_strdup_printf("msgfmt -v -c -o %s %s >%s 2>&1",
+	cmd = g_strdup_printf("msgfmt -v -c -o '%s' '%s' > '%s' 2>&1",
 			    output_file_name, test_file_name, result_file_name);
 	
 	res = system(cmd);

@@ -118,7 +118,7 @@ void gtranslator_colors_init_default_colors()
 	 * Set black on white as default colors for the color pickers.
 	 */ 
 	gtranslator_config_set_string("colors/own_fg", "#000000");
-	gtranslator_config_set_string("colors/own_bg", "#FFFFFF");
+	gtranslator_config_set_string("colors/own_bg", "#ffffff");
 	
 	/*
 	 * The default syntax colors.
@@ -133,6 +133,13 @@ void gtranslator_colors_init_default_colors()
 	gtranslator_config_set_string("colors/special", "maroon");
 	gtranslator_config_set_string("colors/address", "maroon");
 	gtranslator_config_set_string("colors/keyword", "darkred");
+
+	/*
+	 * The default colors for the messages table.
+	 */
+	gtranslator_config_set_string("colors/messages_table_translated", "#000000");
+	gtranslator_config_set_string("colors/messages_table_fuzzy", "#ff0000");
+	gtranslator_config_set_string("colors/messages_table_untranslated", "#a7453e");
 	
 	gtranslator_config_close();
 }

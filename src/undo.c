@@ -163,7 +163,7 @@ void gtranslator_undo_run_undo()
 	}
 
 	/*
-	 * Now let the syntax highlighting be updated.
+	 * Now update the syntax highlighting.
 	 */
 	gtranslator_syntax_update_text(trans_box);
 }

@@ -26,7 +26,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.4
+export POZILLA_RELEASE=4.5
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -613,9 +613,8 @@ for i in $PO_FILES
 
 	if echo $merge_status|grep -sq invalid\ control ; then
 		extra_args="OLD_PO_FILE_INPUT=yes"
+		merge_status=`$extra_args msgmerge $i $PACKAGE.pot -o $i 2>&1`
 	fi
-
-	merge_status=`$extra_args msgmerge $i $PACKAGE.pot -o $i 2>&1`
 	
 	if echo $merge_status|grep -sq warning ; then
 		mv $i.backup $i
@@ -656,8 +655,7 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 	#
 	# Only operate if we don't need to run drily or to send personal mails.
 	#
-	if test "say_$RUN_DRY" != "say_yes" ; then
-		if test "say_$NO_PERSONAL" != "say_yes" ; then
+	if test "say_$RUN_DRY" != "say_yes" -o "say_$NO_PERSONAL" != "say_yes" ; then
 	
 	case $? in
 	1)
@@ -708,11 +706,7 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 		cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR"
 	fi
 	[ -f $PACKAGE.$i.gz ] && rm -f $PACKAGE.$i.gz
-	
-		#
-		# Nested if's -- these are the "toplevel" if's.
-		#
-		fi
+
 	fi
 
 	#
@@ -730,9 +724,7 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 #
 # Send a mail to the mailing list -- if we're running in "wet-modus".
 #
-if test "say_$RUN_DRY" != "say_yes" ; then
-
-if test "say_$NO_LIST" != "say_yes" ; then
+if test "say_$RUN_DRY" != "say_yes" -o "say_$NO_LIST" != "say_yes" ; then
 
 echo "Dear translators of $PACKAGE:" > $BODY_FILE
 echo "" >> $BODY_FILE
@@ -770,10 +762,7 @@ if test "my$ADDITIONAL_MAILING_ADDRESS" = "my" ; then
 else
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST" -c "$ADDITIONAL_MAILING_ADDRESS"
 fi
-	#
-	# Again some nested if's.
-	#
-	fi
+
 fi
 
 #

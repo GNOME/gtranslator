@@ -106,7 +106,7 @@ void gtranslator_save_compiled_po_file(const gchar *file)
 	 * Build up the command to execute in the shell to get the compiled
 	 *  gettext file.
 	 */
-	cmd=g_strdup_printf("msgfmt %s -o %s",
+	cmd=g_strdup_printf("msgfmt '%s' -o '%s'",
 		tempfilename,
 		file);
 	/* 
@@ -146,7 +146,7 @@ void save_compressed_po_file(const gchar *file, gchar *command)
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */
-	cmd=g_strdup_printf("%s -c -q < %s > %s",
+	cmd=g_strdup_printf("'%s' -c -q < '%s' > '%s'",
 		command,
 		tempfilename,
 		file);
@@ -222,7 +222,7 @@ void gtranslator_save_ziped_po_file(const gchar *file)
 	tempfilename=gtranslator_utils_get_save_differently_file_name();
 	gtranslator_save_file(tempfilename);
 
-	cmd=g_strdup_printf("zip -q %s %s", 
+	cmd=g_strdup_printf("zip -q '%s' '%s'", 
 		file,
 		tempfilename);
 

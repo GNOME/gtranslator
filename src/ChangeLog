@@ -1,5 +1,26 @@
 2001-08-11  Fatih Demir <kabalak@gtranslator.org>
 
+	* open|save-differently.c, parse.c & update.c: Make the file names all
+		be enclosed in single-ticks (') -- should be more safe and 
+		 secure.
+
+	* messages-table.c/.h: Added the new "read/free_messages_table_colors"
+		functions, which are setting up/freeing the colors for the
+		 groups in the messages tree -- they use default values if the
+		  user doesn't want customized colors; the colors are read in
+		   from the preferences (-> you can define the colors there
+		    via the GnomeColorPicker's).
+
+	* prefs.c/.h: Added eighth page with messages table settings -- toggling
+		the table and special colors for the table groups can be defined
+		 from there -- the prefs reading, writing is done, too.
+
+	* prefs_init.c: Initialize the standard color values for the messages
+		table on the first startup.
+
+	* stylistics.c/.h: Added COLOR_MESSAGES_TABLE_* color types and expanded
+		"get_path_from_type" to resolve these new enumeration values.
+
 	* sidebar.c: Only show up the views group for now -- bookmarks need more
 		work & integration -- maybe for 0.40 ,-)
 

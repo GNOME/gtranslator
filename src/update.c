@@ -52,7 +52,7 @@ void update(GtkWidget *widget, gpointer useless)
 	/*
 	 * Build this magical line.
 	 */
-	command=g_strdup_printf("%s %s %s %s 2>&1 1>/dev/null",
+	command=g_strdup_printf("'%s' '%s' '%s' '%s' 2>&1 1>/dev/null",
 		SCRIPTSDIR "/my-update.sh",
 		g_basename(po->filename),
 		g_dirname(po->filename),

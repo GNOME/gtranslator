@@ -61,6 +61,7 @@ struct {
 	guint check_recent_file		: 1;
 	guint use_own_fonts		: 1;
 	guint use_own_colors		: 1;
+	guint use_own_mt_colors		: 1;
 	guint instant_spell_check	: 1;
 	guint use_own_dict		: 1;
 	guint keep_obsolete		: 1;

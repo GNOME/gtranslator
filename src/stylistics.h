@@ -43,7 +43,17 @@ typedef enum {
 	COLOR_ADDRESS,
 	COLOR_KEYWORD,
 	COLOR_SPELL_ERROR,
-	/* This is a fake color, should be the last */
+
+	/*
+	 * The colors for the entries in the messages table/tree.
+	 */
+	COLOR_MESSAGES_TABLE_UNTRANSLATED,
+	COLOR_MESSAGES_TABLE_FUZZY,
+	COLOR_MESSAGES_TABLE_TRANSLATED,
+	
+	/*
+	 * This is a fake color, should be the last 
+	 */
 	COLOR_END
 } ColorType;
 
