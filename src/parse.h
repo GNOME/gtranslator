@@ -90,6 +90,11 @@ typedef struct {
 	 * Are we editing an UTF-8 po file?
 	 */
 	gboolean utf8;
+
+	/*
+	 * The locale charset name.
+	 */
+	gchar *locale_charset;
 } GtrPo;
 
 #define GTR_PO(x) ((GtrPo *)x)

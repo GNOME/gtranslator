@@ -107,20 +107,16 @@ void gtranslator_utf8_convert_po_to_utf8(void)
  */
 void gtranslator_utf8_convert_po_from_utf8(void)
 {
-	gchar *charset;
-	charset=gtranslator_utils_get_locale_charset();
-
 	g_list_foreach(po->messages,
 		(GFunc) gtranslator_utf8_convert_message_from_utf8, NULL);
 
 	/*
 	 * Assign the converted charset value.
 	 */
-	if(charset)
+	if(po->locale_charset)
 	{
 		g_free(po->header->charset);
-		po->header->charset=g_strdup(charset);
-		g_free(charset);
+		po->header->charset=g_strdup(po->locale_charset);
 	}
 }
 
@@ -134,7 +130,7 @@ gchar *gtranslator_utf8_get_plain_string(gchar **string)
 	g_return_val_if_fail(*string!=NULL, NULL);
 
 	plain_string=gtranslator_convert_string_from_utf8(*string,
-		po->header->charset);
+		po->locale_charset);
 
 	return plain_string;
 }
@@ -149,7 +145,7 @@ gchar *gtranslator_utf8_get_utf8_string(gchar **string)
 	g_return_val_if_fail(*string!=NULL, NULL);
 
 	utf8_string=gtranslator_convert_string_to_utf8(*string,
-		po->header->charset);
+		po->locale_charset);
 
 	return utf8_string;
 }
@@ -177,21 +173,24 @@ gchar *gtranslator_utf8_get_gtk_entry_as_utf8_string(GtkWidget *entry)
 	entry_content=gtk_entry_get_text(GTK_ENTRY(entry));
 	g_return_val_if_fail(entry_content!=NULL, NULL);
 
-	return (gtranslator_convert_string_to_utf8(entry_content, 
-		po->header->charset));
+	return (gtranslator_utf8_get_utf8_string(&entry_content));
 }
 
 void gtranslator_utf8_set_gtk_entry_from_utf8_string(GtkWidget *entry,
 	const gchar *utf8_string)
 {
 	gchar *plain_string;
+	gchar *convert_me;
 	
 	g_return_if_fail(GTK_WIDGET(entry)!=NULL);
 	g_return_if_fail(utf8_string!=NULL);
+	
+	convert_me=g_strdup(utf8_string);
 
-	plain_string=gtranslator_convert_string_from_utf8(utf8_string,
-		po->header->charset);
+	plain_string=gtranslator_utf8_get_plain_string(&convert_me);
 	g_return_if_fail(plain_string!=NULL);
+	
+	g_free(convert_me);
 
 	gtk_entry_set_text(GTK_ENTRY(entry), plain_string);
 }
@@ -209,21 +208,24 @@ gchar *gtranslator_utf8_get_gtk_text_as_utf8_string(GtkWidget *text)
 	text_content=gtk_editable_get_chars(GTK_EDITABLE(text), 0, -1);
 	g_return_val_if_fail(text_content!=NULL, NULL);
 
-	return (gtranslator_convert_string_to_utf8(text_content,
-		po->header->charset));
+	return (gtranslator_utf8_get_utf8_string(&text_content));
 }
 
 void gtranslator_utf8_set_gtk_text_from_utf8_string(GtkWidget *text,
 	const gchar *utf8_string)
 {
 	gchar *plain_string;
+	gchar *convert_me;
 
 	g_return_if_fail(GTK_WIDGET(text)!=NULL);
 	g_return_if_fail(utf8_string!=NULL);
 
-	plain_string=gtranslator_convert_string_from_utf8(utf8_string,
-		po->header->charset);
+	convert_me=g_strdup(utf8_string);
+
+	plain_string=gtranslator_utf8_get_plain_string(&convert_me);
 	g_return_if_fail(plain_string!=NULL);
+
+	g_free(convert_me);
 
 	/*
 	 * We'll use our syntax highlighted insertion method also here .-)

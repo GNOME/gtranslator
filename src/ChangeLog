@@ -1,10 +1,20 @@
 2001-06-16  Fatih Demir <kabalak@gtranslator.org>
 
+	* parse.h, parse_core.c & utf8.c: Honor the new "locale_charset" field for the GtrPo
+		structure which holds now the locale charset name returned by the
+		 "gtranslator_utils_get_locale_name" function -- no need to let the function
+		   work x times in the sources.
+
+	* open-differently.c: Added "about:" to the URI detection routines -- hmm, finally
+		about: URIs should work now.
+
 	* convert.c: Disabled an assertion which made the conversion function moan on
-		non-translated msgstrs.
+		non-translated msgstrs -- NULL msgstrs are ok, as untranslated messages
+		 are "normal".
 
 	* utf8.c: Corrected a really wrong typo _to_utf8 to _from_utf8 to make the
-		function work right.
+		function work right and corrected a wrong call of the conversion functions
+		 to finally fix the UTF-8 support.
 
 	* parse.c: Honor the new function and set up/clean up the "runtime/filename"
 		preferences key used for the instances detection

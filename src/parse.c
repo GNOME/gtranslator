@@ -704,12 +704,22 @@ void gtranslator_po_free(void)
 {
 	if(!po)
 		return;
-	if (po->messages) {
+	if (po->messages) 
+	{
 		g_list_foreach(po->messages, gtranslator_message_free, NULL);
 		g_list_free(po->messages);
 	}
+	
 	if (po->header)
+	{
 		gtranslator_header_free(po->header);
+	}
+	
+	if(po->locale_charset)
+	{
+		g_free(po->locale_charset);
+	}
+	
 	g_free(po->filename);
 	g_free(po->obsolete);
 	g_free(po);

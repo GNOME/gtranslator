@@ -25,6 +25,7 @@
 #include "message.h"
 #include "parse.h"
 #include "utf8.h"
+#include "utils.h"
 #include "utils_gui.h"
 
 #include <libgnome/gnome-i18n.h>
@@ -105,10 +106,12 @@ void gtranslator_parse(const gchar *filename)
 	if(gtranslator_utf8_po_file_is_utf8())
 	{
 		po->utf8=TRUE;
+		po->locale_charset=gtranslator_utils_get_locale_charset();
 	}
 	else
 	{
 		po->utf8=FALSE;
+		po->locale_charset=NULL;
 	}
 
 	/*
