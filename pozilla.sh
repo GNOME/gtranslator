@@ -10,7 +10,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=3.0.2
+export POZILLA_RELEASE=3.1
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -55,6 +55,30 @@ for app in msgfmt msgmerge make grep sed awk mutt
 # That's Pozilla, guy!
 #
 [ -d $CONFIG_DIR ] || {
+	echo "---------------------------------------------------------------"
+	echo "!WARNING¡"
+	echo ""
+	echo "This utility is extremely useful but you'd know what you can do"
+	echo " with pozilla, so please be aware that pozilla sends emails to"
+	echo "  the net automatically for it's meant purpose"
+	echo ""
+	echo "You'd first read the manual page for pozilla.sh to get an overview"
+	echo " of pozilla.sh -- call \"man pozilla.sh\" for this purpose."
+	echo ""
+	echo "---------------------------------------------------------------"
+	read -p "Are you sure to use pozilla now? [y/N] " confirmation
+
+	#
+	# Make an IP test to avoid unknown use of it.
+	#
+	if test "%$confirmation" = "%n" -o "%$confirmation" = "%N" -o \
+		"%$confirmation" = "%" ; then
+		echo "---------------------------------------------------------------"
+		echo "!ERROR¡ Confirmation not succeeded."
+		echo "---------------------------------------------------------------"
+		exit 1
+	fi
+	
 	mkdir -p $CONFIG_DIR
 }
 
