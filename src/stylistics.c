@@ -298,40 +298,44 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 
 		font=gdk_font_load(fontname);
 		
-		/**********************************************************/
-		/* for multibyte 
-		
-		   we need this header, added at top
-		   #include <gdk/gdkx.h>
-		*/
-		/*  
-		 * Is it multibyte font?
-		 */		
-		xfs = GDK_FONT_XFONT(font);
-		if (xfs->min_byte1 != 0 || xfs->max_byte1 != 0)
+		if(font)
 		{
-  
-		    /*
-		    *  if multibyte, use orignial_font and the selected
-		    *  multibyte font to display the translated messages
-		    */
-		
-		    if(foo_us_and_spec_the_widget==1)
-		    {
-			default_font = gtranslator_config_get_string("interface/original_font");
-			join_fonts = g_strjoin(",", default_font, fontname, NULL);
+			/**********************************************************/
+			/* for multibyte 
 			
-			/*
-			 * This function inform
-			 * editBox to process multibyte character
-			 */
-			font = gdk_fontset_load(join_fonts);
-    
-			GTR_FREE(join_fonts);
-		    }		    
-		    
-		    
+			   we need this header, added at top
+			   #include <gdk/gdkx.h>
+			*/
+			/*  
+			 * Is it multibyte font?
+			 */		
+			xfs = GDK_FONT_XFONT(font);
+			if (xfs->min_byte1 != 0 || xfs->max_byte1 != 0)
+			{
+	  
+			    /*
+			    *  if multibyte, use orignial_font and the selected
+			    *  multibyte font to display the translated messages
+			    */
+			
+			    if(foo_us_and_spec_the_widget==1)
+			    {
+				default_font = gtranslator_config_get_string("interface/original_font");
+				join_fonts = g_strjoin(",", default_font, fontname, NULL);
+				
+				/*
+				 * This function inform
+				 * editBox to process multibyte character
+				 */
+				font = gdk_fontset_load(join_fonts);
+	    
+				GTR_FREE(join_fonts);
+			    }		    
+			    
+			    
+			}
 		}
+		
 		/*************************************************************/
 	
 		if(font)
