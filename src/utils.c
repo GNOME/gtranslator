@@ -760,6 +760,10 @@ gtranslator_utils_getline (FILE* stream)
 		}
 		ret [ret_used++] = char_read;
 		if ('\n' == char_read || '\r' == char_read ) {
+			int next_char = fgetc(stream);
+			if (EOF != next_char && '\r' != next_char && 
+			    '\n' != next_char)
+			  ungetc(next_char, stream);
 			break;
 		}
 	}
