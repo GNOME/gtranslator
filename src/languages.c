@@ -203,11 +203,11 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Norwegian/Bokmaal"), "no", "iso-8859-1",
-	 "no@li.org", "8bit"
+	 "i18n-nb@lister.ping.uio.no", "8bit"
 	},
 	{
 	 N_("Norwegian/Nynorsk"), "nn", "iso-8859-1",
-	 "nn@li.org", "8bit"
+	 "i18n-nn@lister.ping.uio.no", "8bit"
 	},
 	{
 	 N_("Punjabi"), "pa", "UTF-8",
