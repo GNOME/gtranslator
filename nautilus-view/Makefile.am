@@ -45,7 +45,8 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(sourcedir)/stylistics.o \
 	$(sourcedir)/syntax.o \
 	$(sourcedir)/update.o \
-	$(sourcedir)/vfs-handle.o
+	$(sourcedir)/vfs-handle.o \
+	$(sourcedir)/views.o
 
 nautilus_gtranslator_view_LDADD = \
 	$(GNOMEUI_LIBS) \
