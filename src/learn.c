@@ -393,7 +393,8 @@ void gtranslator_learn_init()
 	gtranslator_learn_buffer=g_new0(GtrLearnBuffer, 1);
 	
 	gtranslator_learn_buffer->filename=g_strdup_printf(
-		"%s/.gtranslator/umtf/Standard_Learn_Buffer.xml", g_get_home_dir());
+		"%s/.gtranslator/umtf/personal-learn-buffer.xml", 
+			g_get_home_dir());
 
 	gtranslator_learn_buffer->hash=g_hash_table_new(g_str_hash, g_str_equal);
 	gtranslator_learn_buffer->resources=NULL;
@@ -654,7 +655,7 @@ void gtranslator_learn_shutdown()
 				 */
 				gtranslator_xml_set_string_prop_by_name(resource_node, "package", resource->package);
 				gtranslator_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
-				gtranslator_xml_set_string_prop_by_name(resource_node, "premiereversion", resource->premiereversion); 
+				gtranslator_xml_set_string_prop_by_name(resource_node, "premiereversion", (resource->premiereversion?resource->premiereversion:"1")); 
 				
 				gtranslator_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
 				
@@ -856,9 +857,20 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
  */
 void gtranslator_learn_string(const gchar *id_string, const gchar *str_string)
 {
+	gchar *id_dup, *str_dup;
+	
 	g_return_if_fail(id_string!=NULL);
 	g_return_if_fail(str_string!=NULL);
 
+	/*
+	 * Convert both entries to UTF-8 before adding to the learn buffer.
+	 */
+	id_dup=g_convert(id_string, -1, "UTF-8", po->header->charset,
+		NULL, NULL, NULL);
+
+	str_dup=g_convert(str_string, -1, "UTF-8", po->header->charset,
+		NULL, NULL, NULL);
+	
 	/*
 	 * Insert the id/str_string pair only if there's no entry for the
 	 *  id_string yet.
