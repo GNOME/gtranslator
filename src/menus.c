@@ -310,15 +310,6 @@ GnomeUIInfo the_toolbar[] = {
 			       N_("Undo the last performed action"),
 			       gtranslator_actions_undo,
 			       GNOME_STOCK_PIXMAP_UNDO),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("Options"),
-			       N_("gtranslator options"),
-			       gtranslator_preferences_dialog_create,
-			       GNOME_STOCK_PIXMAP_PREFERENCES),
-	GNOMEUIINFO_ITEM_STOCK(N_("Exit"),
-			       N_("Exit"),
-			       gtranslator_quit,
-			       GNOME_STOCK_PIXMAP_EXIT),
 	GNOMEUIINFO_END
 };
 
