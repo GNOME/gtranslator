@@ -157,7 +157,7 @@ void parse(gchar *po)
 /**
 * The new routine
 **/
-void parse_the_file(GtkWidget *widget,gpointer filename)
+void parse_the_file(GtkWidget *widget,gpointer useless)
 {
 	gchar *po_file;
 	/**

@@ -64,7 +64,7 @@ void parse(gchar *po);
 /**
 * The new method for the widgets
 **/
-void parse_the_file(GtkWidget *widget,gpointer filename);
+void parse_the_file(GtkWidget *widget,gpointer useless);
 
 /**
 * General functions are following -- these do operate on the

@@ -119,9 +119,9 @@ static GnomeUIInfo the_file_menu[] =
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
           GDK_C, GDK_MOD1_MASK, NULL
         },
-        GNOMEUIINFO_MENU_OPEN_ITEM(open_file_show, NULL),
+        GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
         GNOMEUIINFO_MENU_SAVE_ITEM(NULL, NULL),
-        GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as_show, NULL),
+        GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
         GNOMEUIINFO_SEPARATOR,
         GNOMEUIINFO_MENU_EXIT_ITEM(GTK_SIGNAL_FUNC(gtk_main_quit), NULL),
         GNOMEUIINFO_END
@@ -439,6 +439,8 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
 	gtk_signal_connect(GTK_OBJECT(exit_button),"clicked",
 		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
+	gtk_signal_connect(GTK_OBJECT(first_button),"clicked",
+		GTK_SIGNAL_FUNC(get_first_msg),NULL);
 	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",
 		GTK_SIGNAL_FUNC(prefs_box_show),NULL);
 	gtk_signal_connect(GTK_OBJECT(compile_button),"clicked",
@@ -450,9 +452,9 @@ create_app1 (void)
 	gtk_signal_connect(GTK_OBJECT(goto_button),"clicked",
 		GTK_SIGNAL_FUNC(goto_dlg),NULL);
 	gtk_signal_connect(GTK_OBJECT(open_button),"clicked",
-		GTK_SIGNAL_FUNC(open_file_show),NULL);	
+		GTK_SIGNAL_FUNC(open_file),NULL);	
 	gtk_signal_connect(GTK_OBJECT(save_as_button),"clicked",
-		GTK_SIGNAL_FUNC(save_file_as_show),NULL);
+		GTK_SIGNAL_FUNC(save_file_as),NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box),"changed",
 		GTK_SIGNAL_FUNC(text_has_got_changed),NULL);
 	/*****************************************************************/
