@@ -25,8 +25,32 @@
 **/
 
 /**
+* A "logic-encapsulator" for the gtranslator_dump_db function.
+**/
+#define gtranslator_copy_db(db, name) gtranslator_dump_db(db, name)
+
+/**
+* Opens the database from the specified file ( this needs
+*  to be an absolute path).
+**/
+GtranslatorDatabase gtranslator_open_db(gchar *filename);
+
+/**
 * Saves the message database.
 **/
-void gtranslator_save_db(GtranslatorDatabase *database);
+void gtranslator_save_db(GtranslatorDatabase database);
+
+/**
+* Dumps the given database to the given file.
+**/
+void gtranslator_dump_db(GtranslatorDatabase database,
+	gchar *filename);
+
+/**
+* "Moves" the given database to the file specified by 
+*  "moveto".
+**/
+void gtranslator_move_db(GtranslatorDatabase database,
+	char *moveto);
 
 #endif

@@ -20,9 +20,7 @@
 * The local includes.
 **/
 #include <gtranslatord.h>
-#include <libgtranslator/parse-db.h>
-#include <libgtranslator/team-handle.h>
-#include <libgtranslator/preferences.h>
+#include <libgtranslator/libgtranslator.h>
 #include <popt-gnome.h>
 
 /**

@@ -28,6 +28,7 @@
 #include <libgtranslator/parse-db.h>
 #include <libgtranslator/preferences.h>
 #include <libgtranslator/stylistics.h>
+#include <libgtranslator/team-database.h>
 #include <libgtranslator/team-handle.h>
 #include <libgtranslator/translation-database.h>
 

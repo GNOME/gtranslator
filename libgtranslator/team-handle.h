@@ -16,16 +16,11 @@
 #define TEAM_HANDLE_H 1
 
 #include <libgtranslator/parse-db.h>
+#include <libgtranslator/team-database.h>
 
 /**
 * These functions are for the team-handling of gtranslatord.
 **/
-
-/**
-* The list with the translated apps.
-**/
-GList *translations;
-
 
 /**
 * Inits the team's db if not done yet.
@@ -49,7 +44,7 @@ gboolean team_handle_lookup_app(gchar *appname);
 GList *team_handle_lookup_author(gchar *author);
 
 /**
-* "Registers" the translation with author+appname.
+* "Registers" the translation with author & appname.
 **/
 void team_handle_add_translation(gchar *appname, gchar *author);
 
@@ -62,10 +57,5 @@ void team_handle_set_author(gchar *appname, gchar *author);
 * Returns a list of all translated apps.
 **/
 GList *team_handle_get_all_translations_for_team(gchar *teamname);
-
-/**
-* Simply looks if the "req" is already in the doc.
-**/
-gint lookup_in_doc(xmlDocPtr doc,gchar *req);
 
 #endif

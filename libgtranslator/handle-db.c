@@ -15,6 +15,61 @@
 **/
 
 #include <libgtranslator/handle-db.h>
+#include <unistd.h>
+
+/**
+* Opens the given file to the database returned by this
+*  function.
+**/
+GtranslatorDatabase gtranslator_open_db(gchar *filename)
+{
+	/**
+	* The "private" variables.
+	**/
+	GtranslatorDatabase	db;
+	xmlDocPtr		doc;
+	/**
+	* Check the filename for existence and 
+	*  absolutelyness.
+	**/
+	if(!filename)
+	{
+		/**
+		* Print out a warning and exit from the
+		*  function.
+		**/
+		g_warning(_("No file specified!"));
+		return NULL;
+	}
+	/**
+	* Test the filename for absolutelyness.
+	**/
+	if(g_path_is_absolute(filename))
+	{
+		/**
+		* Also print out a warning and exit.
+		**/
+		g_warning(
+			_("The given filepath isn't absolute!"));
+		return NULL;
+	}
+	/**
+	* Open the file with libxml.
+	**/
+	doc=xmlParseFile(filename);
+	/**
+	* Is this file existent/did an error occure?
+	**/
+	if(!doc)
+	{
+		g_warning(_("Couldn't open database `%s'!"), filename);
+		return NULL;
+	}
+	/**
+	* Return the build GtranslatorDatabase.
+	**/
+	return db;
+}
 
 /**
 * This function saves the given database.
@@ -125,5 +180,73 @@ void gtranslator_save_db(GtranslatorDatabase *database)
 	if(msg)
 	{
 		g_free(msg);
+	}
+}
+
+/**
+* This "dumps" the database to the given file.
+**/
+void gtranslator_dump_db(GtranslatorDatabase database,
+	gchar *filename)
+{
+	/**
+	* The new gchar variable.
+	**/
+	gchar 	*temp=g_new0(gchar,1);
+	/**
+	* Simple check the filename.
+	**/
+	if(!filename)
+	{
+		g_warning(_("No filename given to dump the database."));
+		return;
+	}
+	/**
+	* Get the old "original" filename to the new variable.
+	**/
+	temp=g_strdup(GTR_DB_FILENAME(database));
+	/**
+	* Now set the "new" filename.
+	**/
+	GTR_DB_FILENAME(database)=filename;
+	/**
+	* Save it.
+	**/
+	gtranslator_save_db(database);
+	/**
+	* And now "restore" the original filename.
+	**/
+	GTR_DB_FILENAME(database)=g_strdup(temp);
+	/**
+	* Free the temporary variable.
+	**/
+	if(temp)
+	{
+		g_free(temp);
+	}	
+}
+
+/**
+* Moves the database to the new "location" and unlinks
+*  the original location.
+**/
+void gtranslator_move_db(GtranslatorDatabase database,
+	char *moveto)
+{
+	/**
+	* Dump the database to the new file.
+	**/
+	gtranslator_dump_db(database, moveto);
+	/**
+	* And now unlink the "old" file.
+	**/
+	if(!unlink(GTR_DB_FILENAME(database)))
+	{
+		/**
+		* If the action didn't succeed inform
+		*  the user about this.
+		**/
+		g_warning(_("Couldn't remove database file `%s'!"),
+			GTR_DB_FILENAME(database));
 	}
 }

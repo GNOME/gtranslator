@@ -50,6 +50,7 @@ libgtranslator_include__DATA = \
 	parse-db.h \
 	preferences.h \
 	stylistics.h \
+	team-database.h \
 	team-handle.h \
 	translation-database.h
 

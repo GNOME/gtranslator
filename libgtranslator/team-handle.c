@@ -26,6 +26,8 @@ void team_handle_new(gchar *team_code)
 	**/
 	xmlDocPtr teamlist;
 	xmlNodePtr teams;
+	xmlNodePtr newnode;
+	xmlAttrPtr attribute;
 	if(!team_code)
 	{
 		g_error(_("No language/team code defined to register!"));
@@ -60,42 +62,27 @@ void team_handle_new(gchar *team_code)
 	**/
 	teams=teamlist->xmlRootNode->xmlChildrenNode;
 	/**
-	* Look if the team is already there.
+	* Set a new <team> node ..
 	**/
-	if(lookup_in_doc(teamlist,team_code))
+	newnode=xmlNewDocNode(teamlist,NULL,"team",NULL);
+	/**
+	* The content is the team_code ...
+	**/
+	attribute=xmlSetProp(newnode,"name",team_code);
+	/**
+	* Add the node to the document.
+	**/
+	xmlAddChild(teams,newnode);
+	/**
+	* Save the file.
+	**/
+	xmlSaveFile(MESSAGE_DB_DIR"/teams.xml",teamlist);
+	/**
+	* Free the node pointer.
+	**/
+	if(newnode)
 	{
-		g_warning(_("Team is already registered!"));
-	}
-	else
-	{
-		/**
-		* Add a new node with the team_code.
-		**/
-		xmlNodePtr newnode;
-		xmlAttrPtr attribute;
-		/**
-		* Set a new <team> node ..
-		**/
-		newnode=xmlNewDocNode(teamlist,NULL,"team",NULL);
-		/**
-		* The content is the team_code ...
-		**/
-		attribute=xmlSetProp(newnode,"name",team_code);
-		/**
-		* Add the node to the document.
-		**/
-		xmlAddChild(teams,newnode);
-		/**
-		* Save the file.
-		**/
-		xmlSaveFile(MESSAGE_DB_DIR"/teams.xml",teamlist);
-		/**
-		* Free the node pointer.
-		**/
-		if(newnode)
-		{
-			xmlFreeNode(newnode);
-		}
+		xmlFreeNode(newnode);
 	}
 }
 
@@ -151,34 +138,4 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 		g_error(_("Couldn't return the list of the apps."));
 	}
 	return list;
-}
-
-gint lookup_in_doc(xmlDocPtr doc,gchar *req)
-{
-	xmlNodePtr node;
-	/**
-	* Get the elements.
-	**/
-	node=doc->xmlRootNode->xmlChildrenNode;
-	while (node)
-	{
-		/**
-		* If the requested node is a tag and there.
-		**/
-		if(!strcmp(node->name, "team"))
-		{
-			if(!strcmp(xmlGetProp(node, "name"), req))
-			{
-				return 1;
-			}
-		}
-		/**
-		* Iterate the node.
-		**/
-		node=node->next;
-	}
-	/**
-	* And if it's not found return '0' at the end.
-	**/
-	return 0;
 }

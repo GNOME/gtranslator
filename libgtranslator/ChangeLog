@@ -1,3 +1,22 @@
+2000-10-30  Fatih Demir	<kabalak@gmx.net>
+
+	* main.c: Only include the main header and not three
+		"sub-headers".
+
+	* Makefile.am: Added the new team-database.h header
+		to the includes list.
+	
+	* libgtranslator.h: Include the new team-database.h
+		header.
+	
+	* team-database.h: Added the header containing the 
+		team structures for use with the team 
+		 management and coordination routines.
+	
+	* team-handle.c/h: Removed the unused "list" variable
+		and the lookup_in_doc function; this should be
+		 solved in another way.
+	
 2000-10-30  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* handle-db.h, main.c, parse-db.*, translation-database.h:
@@ -7,6 +26,17 @@
 		parse_db_for_lang.
 	
 2000-10-29  Fatih Demir <kabalak@gmx.net>
+
+	* handle-db.c: Include <unistd.h> for the unlink
+		function.
+
+	* handle-db.c/h: Added a dump function which stores
+		the given database under another filename,
+		 also added a define for this new function
+		  which takes the much more logical name
+		   gtranslator_copy_db and added the new
+		    gtranslator_move_db function which
+		     does already use this new function.
 
 	* messages.h: Added a msgstrlist field which is
 		a list of possible translations for a msgid,
