@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-05-08 22:29+0200\n"
-"PO-Revision-Date: 2000-05-08 22:36+0200\n"
+"POT-Creation-Date: 2000-05-09 14:51+0200\n"
+"PO-Revision-Date: 2000-05-09 14:52+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr "Çýk"
 #. * If there are any problems , give a
 #. *  message ..
 #. *
-#: src/parse.c:34
+#: src/parse.c:33
 #, c-format
 msgid ""
 "\n"
@@ -184,20 +184,26 @@ msgstr ""
 "\n"
 "Dosya akýmý kayboldu! Hata no. `%i'"
 
-#: src/parse.c:59
+#: src/parse.c:55
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
 
-#: src/parse.c:66
+#. *
+#. * Set up a status message
+#. *
+#: src/parse.c:60
 #, c-format
-msgid "Couldn't stat the file `%s'!"
-msgstr "`%s''yi stat edemedim !"
+msgid "Current file : \"%s\"."
+msgstr "Geçerli dosya : \"%s\"."
 
-#: src/parse.c:92
+#. *
+#. * Show an updated status
+#. *
+#: src/parse.c:87
 #, c-format
-msgid "Got filename  %s\n"
-msgstr "Dosya adýný aldým : %s\n"
+msgid "Finished reading \"%s\", %i lines."
+msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
 #. *
 #. * 3.1) No list, no fun
@@ -288,7 +294,8 @@ msgid ""
 msgstr ""
 "gtranslator .po dosyalarýnýn tercümesini kolaylaþtýracak bir uygulama "
 "olacaktýr / idir .\n"
-"Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek ! 0.20 nesline kadar iþe yarar hale gelmesi lazým !"
+"Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek ! 0.20 nesline kadar "
+"iþe yarar hale gelmesi lazým !"
 
 #: src/about.c:30
 msgid ""
@@ -298,7 +305,8 @@ msgid ""
 msgstr ""
 "gtranslator .po dosyalarýnýn tercümesini kolaylaþtýracak bir uygulama "
 "olacaktýr / idir.\n"
-"Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek! 0.20 nesline kadar iþe yarar hale gelmesi lazým !"
+"Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek! 0.20 nesline kadar "
+"iþe yarar hale gelmesi lazým !"
 
 #. *
 #. * Create the labels ..
