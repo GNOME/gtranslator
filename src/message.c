@@ -355,7 +355,7 @@ void gtranslator_message_go_to(GList * to_go)
 	
 	po->current = to_go;
 	gtranslator_message_show(po->current);
-	gtranslator_messages_table_select_row(GTR_MSG(po->current));
+	gtranslator_messages_table_select_row(GTR_MSG(po->current->data));
 	
 	pos = g_list_position(po->messages, po->current);
 	
