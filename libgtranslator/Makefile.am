@@ -2,7 +2,7 @@
 
 bin_PROGRAMS = gtranslatord
 
-noinst_PROGRAMS = test-lg
+noinst_PROGRAMS = test-libgtranslator
 
 lib_LTLIBRARIES = libgtranslator.la
 
@@ -32,9 +32,9 @@ gtranslatord_SOURCES = main.c
 gtranslatord_LDADD = libgtranslator.la $(IDL_LIBS) $(OAF_LIBS) \
 	$(XML_LIBS)
 
-test_lg_SOURCES = test-lg.c
+test_libgtranslator_SOURCES = test-lg.c
 
-test_lg_LDADD = libgtranslator.la $(GLIB_LIBS) $(XML_LIBS)
+test_libgtranslator_LDADD = libgtranslator.la $(GLIB_LIBS) $(XML_LIBS)
 
 idl_dir = $(datadir)/idl/gtranslator
 

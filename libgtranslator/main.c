@@ -53,7 +53,14 @@ int main(int argc,char *argv[])
 	**/
 	orb=oaf_init(argc,argv);
 	/**
-	* TODO XXX : first the libgtranslator has to be extended.
+	* Print a simply statement till we can do more.
+	**/
+	if(orb)
+	{
+		g_print(_("gtranslatord has started successfully and will finish now...\n"));
+	}
+	/**
+	* TODO: first the libgtranslator has to be extended.
 	**/
 	exit(0);
 }	
