@@ -67,6 +67,7 @@ GtrPo *po;
 gboolean file_opened;
 gboolean message_changed;
 guint autosave_source_tag=1;
+gboolean open_anyway=FALSE;
 
 /*
  * These are to be used only inside this file
@@ -466,13 +467,12 @@ void gtranslator_parse_main(const gchar *filename)
 	 */
 	if(gtranslator_utils_check_file_being_open(filename))
 	{
-		return;
+		if(!open_anyway)
+			return;
 	}
-	else
-	{
-		gtranslator_config_set_string("runtime/filename", 
-			(gchar *) filename);
-	}
+
+	gtranslator_config_set_string("runtime/filename", 
+				      (gchar *) filename);
 
 	/*
 	 * Use the new core function.
@@ -936,6 +936,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 		gtranslator_messages_table_clear();
 	}
 
+#ifdef NOT_PORTED
 	/*
 	 * Stop gtkspell.
 	 */ 
@@ -943,7 +944,8 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	{
 		gtkspell_stop();
 	}
-	
+#endif /* NOT_PORTED */	
+
 	gtranslator_text_boxes_clean();
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");
 	gtk_widget_set_sensitive(GTK_WIDGET(extra_content_view->edit_button), FALSE);
@@ -976,23 +978,9 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 {
 	gchar *save_this;
 	if (po->file_changed) {
-		GtkWidget *dialog;
-		gchar *question;
-		gint reply;
-		question =
-		    g_strdup_printf(
-				    _("File %s\nwas changed. Do you want to revert to saved copy?"),
-				    po->filename);
-		dialog =
-		    gnome_message_box_new(question,
-					  GNOME_MESSAGE_BOX_QUESTION,
-					  GTK_STOCK_YES,
-					  GTK_STOCK_NO,
-					  GTK_STOCK_CANCEL, NULL);
-		gtranslator_dialog_show(&dialog, "gtranslator -- revert");
-		reply = gnome_dialog_run(GNOME_DIALOG(dialog));
-		GTR_FREE(question);
-		if (reply != GNOME_YES)
+		guint reply;
+		reply = gtranslator_file_revert_dialog(NULL, po->filename);
+		if (reply != GTK_RESPONSE_YES)
 			return;
 	}
 	save_this = g_strdup(po->filename);
@@ -1002,7 +990,7 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 	po->file_changed = FALSE;
 	gtranslator_file_close(NULL, NULL);
 	gtranslator_parse_main(save_this);
-	gtranslator_parse_main_extra(po);
+	gtranslator_parse_main_extra();
 	GTR_FREE(save_this);
 }
 

@@ -32,16 +32,16 @@
 #include "undo.h"
 #include "utils.h"
 
-#include <gtk/gtkeditable.h>
-#include <gtk/gtktext.h>
+#include <gtk/gtk.h>
 
 /*
  * Internal undo types -- no, please no questions why so.
  */
 typedef struct
 {
-	gchar	*text;
-	gint	 position;
+	gchar *text;
+	GtkTextIter *position;
+	GtkTextIter *endposition;
 	gboolean insertion;
 } GtrUndo;
 
@@ -50,14 +50,15 @@ GtrUndo *undo=NULL;
 /*
  * Register the given text for an insertion step.
  */
-void gtranslator_undo_register_insertion(const gchar *text, const gint position)
+void gtranslator_undo_register_insertion(const gchar *text, const GtkTextIter *position)
 {
-	g_return_if_fail(position!=-1);
+	g_return_if_fail(position!=NULL);
 	g_return_if_fail(text!=NULL);
 
 	if(undo)
 	{
 		GTR_FREE(undo->text);
+		GTR_FREE(undo->position);
 	}
 	
 	GTR_FREE(undo);
@@ -65,8 +66,8 @@ void gtranslator_undo_register_insertion(const gchar *text, const gint position)
 	undo=g_new0(GtrUndo, 1);
 
 	undo->text=g_strdup(text);
-	undo->position=position;
 	undo->insertion=TRUE;
+        memcpy(undo->position, position, sizeof(undo->position));
 
 	gtranslator_actions_enable(ACT_UNDO);
 }
@@ -74,18 +75,16 @@ void gtranslator_undo_register_insertion(const gchar *text, const gint position)
 /*
  * Do the same for the deletion step.
  */
-void gtranslator_undo_register_deletion(const gchar *text, const gint position)
+void gtranslator_undo_register_deletion(const gchar *text, const GtkTextIter *position, const GtkTextIter *endposition)
 {
-	g_return_if_fail(position!=-1);
-
-	if(!text)
-	{
-		return;
-	}
+	g_return_if_fail(position!=NULL);
+	g_return_if_fail(text!=NULL);
 
 	if(undo)
 	{
 		GTR_FREE(undo->text);
+		GTR_FREE(undo->position);
+		GTR_FREE(undo->endposition);
 	}
 	
 	GTR_FREE(undo);
@@ -93,8 +92,9 @@ void gtranslator_undo_register_deletion(const gchar *text, const gint position)
 	undo=g_new0(GtrUndo, 1);
 
 	undo->text=g_strdup(text);
-	undo->position=position;
 	undo->insertion=FALSE;
+        memcpy(undo->position, position, sizeof(undo->position));
+        memcpy(undo->endposition, endposition, sizeof(undo->endposition));
 
 	gtranslator_actions_enable(ACT_UNDO);
 }
@@ -126,34 +126,26 @@ void gtranslator_undo_clean_register()
  */
 void gtranslator_undo_run_undo()
 {
+	GtkTextBuffer *buffer;
+	GtkTextIter *end = NULL;
+
 	g_return_if_fail(undo!=NULL);
 	g_return_if_fail(undo->position >= 0);
 	g_return_if_fail(undo->text!=NULL);
 
+	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(trans_box));
+	gtk_text_buffer_get_end_iter(buffer, end);
+
 	/*
-	 * Is the previous undoable action was a deletion act _this_ way.
+	 * Is the previous undoable action was a deletion act _this_ way
+	 * (with sanity check).
 	 */
-	if(!undo->insertion)
+	if(!undo->insertion && gtk_text_iter_compare(undo->position, end) > 0)
 	{
-		/*
-		 * Check if the undo position is still appliable.
-		 */
-		if(undo->position <= gtk_text_get_length(GTK_TEXT(trans_box)))
-		{
-			gtk_editable_insert_text(GTK_EDITABLE(trans_box),
-				undo->text, strlen(undo->text), &undo->position);
-		}
+		gtk_text_buffer_insert(buffer, undo->position, undo->text, strlen(undo->text));
 	}
 	else
 	{
-		/*
-		 * Again, check for sanity.
-		 */
-		if(undo->position <= gtk_text_get_length(GTK_TEXT(trans_box)))
-		{
-			gtk_editable_delete_text(GTK_EDITABLE(trans_box),
-				undo->position, 
-				(undo->position + strlen(undo->text)));
-		}
+		gtk_text_buffer_delete(buffer, undo->position, undo->endposition);
 	}
 }

@@ -27,8 +27,8 @@
  *  here as there isn't any general handling integrated/possible yet.
  */
 
-void gtranslator_undo_register_deletion(const gchar *text, const gint position);
-void gtranslator_undo_register_insertion(const gchar *text, const gint position);
+void gtranslator_undo_register_deletion(const gchar *text, const GtkTextIter *position, const GtkTextIter *endposition);
+void gtranslator_undo_register_insertion(const gchar *text, const GtkTextIter *position);
 
 /*
  * Return the status of the register variables used internally for this

@@ -1,3 +1,23 @@
+2003-07-05  Ross Golder  <ross@golder.org>
+
+	* color-schemes.c (GetData): Replaced deprecated 'g_strcasecmp'
+	         with plain 'strcmp' (no need for case insensitivity).
+
+	* header_stuff.c: Replaced deprecated 'g_strcasecmp' with plain
+	         'strcmp' (no need for case insensitivity).
+
+	* dialogs.c/h: Replaced all deprecated GTK/GNOME calls with
+	         updated versions. In particular, change all GtkText
+		 objects to GtkTextView objects, and replace all
+		 GnomeDialog objects with GtkDialog objects.
+
+	* main.c/parse.c: Move global open_anyway from main to parse.
+
+	* undo.c/h: Use GtkTextIters instead of character positions.
+
+	* utils_gui.c/dialogs.c: Made 'gtranslator_already_open_dialog'
+	         and moved code from utils_gui to dialogs.
+	
 2003-07-01  Ross Golder  <ross@golder.org>
 
 	* parse.c (gtranslator_file_revert): Replaced deprecated

@@ -47,15 +47,16 @@
 
 #include <string.h>
 #include <locale.h>
+#include <gnome.h>
 #include <libgnomeui/libgnomeui.h>
 
 /*
  * Functions to be used only internally in this file
  */
-static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
+static void gtranslator_go_to_dialog_clicked(GtkDialog * dialog, gint button,
 					     gpointer data);
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
-static void find_dlg_clicked(GnomeDialog * dialog, gint button,
+static void find_dlg_clicked(GtkDialog * dialog, gint button,
 	gpointer findy);
 
 #ifdef UTF8_CODE
@@ -66,18 +67,28 @@ void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog);
 void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog);
 #endif
 
+/* Responses for the replace dialog */
+typedef enum {
+	GTR_REPLACE_ONCE,
+	GTR_REPLACE_ALL
+} GtrReplaceDialogResponse;
+
+/* Responses for the query dialog */
+typedef enum {
+	GTR_RESPONSE_QUERY,
+	GTR_RESPONSE_QUERY_CONTENT
+} GtrQueryDialogResponse;
+
 /*
  * The open URI dialog signal function:
  */ 
-void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
+void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 	gpointer entrydata);
 
 void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 {
 	if (wmname != NULL)
 		gtk_window_set_wmclass(GTK_WINDOW(*dlg), wmname, "gtranslator");
-	if (GNOME_IS_DIALOG(*dlg))
-		gnome_dialog_set_parent(GNOME_DIALOG(*dlg), GTK_WINDOW(gtranslator_application));
 	g_signal_connect(G_OBJECT(*dlg), "destroy",
 			 G_CALLBACK(gtk_widget_destroyed), dlg);
 
@@ -115,7 +126,7 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 	
 	/*
 	 * Make the dialog transient, gtranslator_dialog_show does not do it
-	 *  because it is not a GnomeDialog.
+	 *  because it is not a GtkDialog.
 	 */
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
 	gtranslator_dialog_show(&dialog, NULL );
@@ -176,11 +187,11 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	}
 	
 	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
-			   "clicked", GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
+			   "response", GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
 			   (gpointer) dialog);
 	g_signal_connect_swapped(G_OBJECT
 				 (GTK_FILE_SELECTION(dialog)->cancel_button),
-				 "clicked",
+				 "response",
 				 G_CALLBACK(gtk_widget_destroy),
 				 G_OBJECT(dialog));
 
@@ -201,23 +212,26 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 gboolean gtranslator_should_the_file_be_saved_dialog(void)
 {
 	GtkWidget *dialog;
-	gchar *question;
 	gint reply;
 
 	if ((!file_opened) || (!po->file_changed))
 		return TRUE;
-	question = g_strdup_printf(_("File %s\nwas changed. Save?"),
-				   po->filename);
-	dialog = gnome_message_box_new(question, GNOME_MESSAGE_BOX_QUESTION,
-				       GTK_STOCK_YES,
-				       GTK_STOCK_NO,
-				       GTK_STOCK_CANCEL, NULL);
-	gtranslator_dialog_show(&dialog, "gtranslator -- save the current file?");
-	reply = gnome_dialog_run(GNOME_DIALOG(dialog));
-	GTR_FREE(question);
-	if (reply == GNOME_YES)
+	dialog=gtk_message_dialog_new(
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_MESSAGE_WARNING,
+		GTK_BUTTONS_YES_NO,
+		_("File %s\nwas changed. Save?"),
+		po->filename);
+
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
+
+	reply = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	if (reply == GTK_RESPONSE_YES)
 		gtranslator_save_current_file_dialog(NULL, NULL);
-	else if (reply == GNOME_NO)
+	else if (reply == GTK_RESPONSE_NO)
 		po->file_changed = FALSE;
 	else
 		return FALSE;
@@ -250,10 +264,10 @@ void gtranslator_import_dialog(GtkWidget *widget, gpointer useless)
 	import_dialog=gtk_file_selection_new(_("gtranslator -- import po file"));
 
 	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(import_dialog)->ok_button),
-		"clicked", GTK_SIGNAL_FUNC(gtranslator_import_dialog_clicked), (gpointer) import_dialog);
+		"response", GTK_SIGNAL_FUNC(gtranslator_import_dialog_clicked), (gpointer) import_dialog);
 
 	g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(import_dialog)->cancel_button), 
-		"clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(import_dialog));
+		"response", G_CALLBACK(gtk_widget_destroy), G_OBJECT(import_dialog));
 
 	gtranslator_file_dialogs_set_directory(&import_dialog);
 	
@@ -297,10 +311,10 @@ void gtranslator_export_dialog(GtkWidget *widget, gpointer useless)
 	export_dialog=gtk_file_selection_new(_("gtranslator -- export po file"));
 
 	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(export_dialog)->ok_button),
-		"clicked", GTK_SIGNAL_FUNC(gtranslator_export_dialog_clicked), (gpointer) export_dialog);
+		"response", GTK_SIGNAL_FUNC(gtranslator_export_dialog_clicked), (gpointer) export_dialog);
 
 	g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(export_dialog)->cancel_button), 
-		"clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(export_dialog));
+		"response", G_CALLBACK(gtk_widget_destroy), G_OBJECT(export_dialog));
 
 	gtranslator_file_dialogs_set_directory(&export_dialog);
 
@@ -341,17 +355,21 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 	
 	gint reply=0;
 
-	dialog=gnome_dialog_new(_("gtranslator -- edit comment"), 
-		GTK_STOCK_APPLY,
-		GTK_STOCK_CANCEL,
-		GTK_STOCK_OK,
+	dialog=gtk_dialog_new_with_buttons(
+		_("gtranslator -- edit comment"),
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	/*
 	 * Create and pack the inner_table into the dialog.
 	 */
 	inner_table=gtk_table_new(1, 2, FALSE);
-	gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(dialog)->vbox), 
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), 
 		inner_table);
 
 	/*
@@ -369,21 +387,17 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 	/*
 	 * The window should be resizable and somehow bigger then normally.
 	 */
-	gtk_window_set_policy(GTK_WINDOW(dialog), 0, 1, 1);
-	gtk_widget_set_usize(GTK_WIDGET(dialog), 380, 200);
+	gtk_window_set_resizable(GTK_WINDOW(dialog), TRUE);
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 380, 200);
 	
-	/*
-	 * Some usual playing: "Apply" should be the default.
-	 */
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	gtranslator_dialog_show(&dialog, _("gtranslator -- edit comment"));
 	
-	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 
 	/*
 	 * Now operate on the contents as the user pressed "Ok".
 	 */
-	if(reply==GNOME_OK)
+	if(reply==GTK_RESPONSE_OK)
 	{
 		gchar		 *comment_dialog_contents;
 		gchar		**checkarray;
@@ -407,13 +421,13 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		/*
 		 * Check if the user did change anything in the comment_box.
 		 */
-		if(!nautilus_strcasecmp(comment_dialog_contents, 
+		if(!strcmp(comment_dialog_contents, 
 			GTR_COMMENT(comment)->comment))
 		{
 			/*
 			 * If the contents are still the same simply return.
 			 */
-			gnome_dialog_close(GNOME_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
 			return;
 		}
 
@@ -461,11 +475,11 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		gtk_label_set_text(GTK_LABEL(extra_content_view->comment),
 			comment->pure_comment);
 		
-		gnome_dialog_close(GNOME_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
 	else
 	{
-		gnome_dialog_close(GNOME_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
 }
 
@@ -477,62 +491,34 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 {
 	static GtkWidget *dialog=NULL;
 	
-	gchar	*absolute_question_text;
 	gint 	 reply=0;
 
 	/*
 	 * Translators: This text should really be VERY clear -- the translator/user
 	 *  is about to remove ALL translations from the po file!
 	 */
-	absolute_question_text=g_strdup_printf(
-		_("Should ALL translations from `%s' be removed?"), po->filename);
+	dialog=gtk_message_dialog_new(
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_MESSAGE_WARNING,
+		GTK_BUTTONS_YES_NO,
+		_("Should ALL translations from `%s' be removed?"),
+		po->filename);
 
-	dialog=gnome_message_box_new(absolute_question_text,
-		GNOME_MESSAGE_BOX_WARNING,
-		GTK_STOCK_YES,
-		GTK_STOCK_NO,
-		GTK_STOCK_CANCEL,
-		NULL);
-
-	/*
-	 * Here the default should just be 1 -- the "No" button!
-	 */
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 1);
-	gtranslator_dialog_show(&dialog, _("gtranslator -- confirm removal of all translations"));
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
 
 	/*
 	 * Run the dialog!
 	 */
-	reply=gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 
-	if(reply==GNOME_YES)
+	if(reply==GTK_RESPONSE_YES)
 	{
 		/*
-		 * If the user said "Yes", that doesn't mean absolutely "Yes" for us; check
-		 *  again for any idiot user input in the previous case.
+		 * The user wanted it so, so perform the removal.
 		 */
-		dialog=gnome_message_box_new(
-			_("Are you sure you want to remove ALL translations from this po file?"),
-				GNOME_MESSAGE_BOX_QUESTION,
-				GTK_STOCK_YES,
-				GTK_STOCK_NO,
-				NULL);
-		
-		/*
-		 * Again the same game for the return value & co.
-		 */
-		gnome_dialog_set_default(GNOME_DIALOG(dialog), 1);
-		gtranslator_dialog_show(&dialog, 
-			_("gtranslator -- confirm removal of all translations"));
-		reply=gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
-
-		if(reply==GNOME_YES)
-		{
-			/*
-			 * The user wanted it so, so perform the removal.
-			 */
-			gtranslator_remove_all_translations();
-		}
+		gtranslator_remove_all_translations();
 	}
 }
 
@@ -545,7 +531,7 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 	
 	if(po && po->filename)
 	{
-		directory=g_dirname(po->filename);
+		directory=g_path_get_dirname(po->filename);
 		gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection),
 			directory);
 	}
@@ -578,7 +564,7 @@ void gtranslator_file_dialogs_store_directory(const gchar *filename)
 
 	g_return_if_fail(filename!=NULL);
 	
-	directory=g_dirname(filename);
+	directory=g_path_get_dirname(filename);
 	
 	gtranslator_config_set_string("informations/last_directory", directory);
 
@@ -588,10 +574,10 @@ void gtranslator_file_dialogs_store_directory(const gchar *filename)
 /*
  * The "Go to" functions.
  */
-static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
+static void gtranslator_go_to_dialog_clicked(GtkDialog * dialog, gint button,
 					     gpointer data)
 {
-	if (button == GNOME_OK)
+	if (button == GTK_RESPONSE_OK)
 	{
 		GtkSpinButton *spin = GTK_SPIN_BUTTON(data);
 		guint number;
@@ -601,7 +587,7 @@ static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
 		gtranslator_message_go_to_no(GTK_WIDGET(dialog),
 					     GUINT_TO_POINTER(number));
 	}
-	gnome_dialog_close(dialog);
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
 void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
@@ -618,16 +604,14 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
-	dialog = gnome_dialog_new(_("gtranslator -- go to"), NULL);
-	gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dialog),
-						_("Go!"),
-						GNOME_STOCK_PIXMAP_JUMP_TO);
-	gnome_dialog_append_button (GNOME_DIALOG (dialog),
-				    GTK_STOCK_CANCEL);
-	/*
-	 * We want the "Go!" button to be the default.
-	 */
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
+	dialog = gtk_dialog_new_with_buttons(
+		_("gtranslator -- go to"),
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+		GTK_STOCK_JUMP_TO, GTK_RESPONSE_OK,
+		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	label = gtk_label_new(_("Go to message number:"));
 	
@@ -640,17 +624,16 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 	spin = gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 1, 0);
 	gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(spin),
 					  GTK_UPDATE_IF_VALID);
-	gnome_dialog_editable_enters(GNOME_DIALOG(dialog), GTK_EDITABLE(spin));
 	
 	/*
 	 * Pack the label & the Gnome entry into the dialog.
 	 */
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
 			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), spin,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), spin,
 			   FALSE, FALSE, 0);
 	
-	g_signal_connect(G_OBJECT(dialog), "clicked",
+	g_signal_connect(G_OBJECT(dialog), "response",
 			 G_CALLBACK(gtranslator_go_to_dialog_clicked),
 			   spin);
 	gtk_window_set_focus(GTK_WINDOW(dialog), spin);
@@ -673,44 +656,45 @@ static void find_in_activated(GtkWidget * widget, gpointer which)
 			      GtrPreferences.find_in);
 }
 
-static void find_dlg_clicked(GnomeDialog * dialog, gint button,
+static void find_dlg_clicked(GtkDialog * dialog, gint button,
 			     gpointer findy)
 {
+	GtkWidget *entry;
 	gchar *find_what;
-	if (button == GNOME_OK) {
-		find_what = gtk_editable_get_chars(
-			GTK_EDITABLE(gnome_entry_gtk_entry(findy)), 0, -1);
+
+	if (button == GTK_RESPONSE_OK) {
+		entry = gnome_entry_gtk_entry(findy);
+		find_what = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 		gtranslator_find(NULL, find_what);
 		gtranslator_actions_enable(ACT_FIND_AGAIN, ACT_END);
 		return;
 	}
-	gnome_dialog_close(dialog);
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
 void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 {
 	int findMenu=0;
 	static GtkWidget *dialog = NULL;
-	GtkWidget *label, *findy, *match_case;
+	GtkWidget *label, *findy, *subfindy, *match_case;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
-	dialog = gnome_dialog_new(_("Find in the po file"), NULL);
-	gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dialog),
-						_("Find"),
-						GNOME_STOCK_PIXMAP_SEARCH);
-	gnome_dialog_append_button (GNOME_DIALOG (dialog),
-				    GTK_STOCK_CLOSE);
-	/* Make Find button the default */
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
-	
+	dialog = gtk_dialog_new_with_buttons(_("Find in the po file"),
+					     GTK_WINDOW(gtranslator_application),
+					     GTK_DIALOG_DESTROY_WITH_PARENT,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_FIND, GTK_RESPONSE_OK,
+					     NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+
 	label = gtk_label_new(_("Enter search string:"));
 	findy = gnome_entry_new("FINDY");
-	gnome_dialog_editable_enters(GNOME_DIALOG(dialog),
-		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(findy))));
+	subfindy = gnome_entry_gtk_entry(GNOME_ENTRY(findy));
+	gtk_entry_set_activates_default(GTK_ENTRY(subfindy), TRUE);
 	
 	match_case = gtk_check_button_new_with_label(_("Case sensitive"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case),
@@ -721,31 +705,31 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 			 G_CALLBACK(find_in_activated),
 			   GINT_TO_POINTER(findEnglish));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Translated"));
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 			 G_CALLBACK(find_in_activated),
 			   GINT_TO_POINTER(findTranslated));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Both"));
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 			 G_CALLBACK(find_in_activated),
 			 GINT_TO_POINTER(findBoth));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Comments"));
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 			 G_CALLBACK(find_in_activated),
 			 GINT_TO_POINTER(findComment));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("In all strings"));
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 			 G_CALLBACK(find_in_activated),
 			 GINT_TO_POINTER(findAll));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 	
 	switch (GtrPreferences.find_in) {
 	case findEnglish:    findMenu = 0; break;
@@ -765,20 +749,20 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	/*
 	 * Pack the single elements into the dialog.
 	 */
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
 			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), findy,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), findy,
 			   FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), match_case,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), match_case,
 			   FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), find_in,
 			   FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), option,
 			   TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), hbox,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
 			   FALSE, FALSE, 0);
 	
-	g_signal_connect(G_OBJECT(dialog), "clicked",
+	g_signal_connect(G_OBJECT(dialog), "response",
 			 G_CALLBACK(find_dlg_clicked), findy);
 	g_signal_connect(G_OBJECT(match_case), "toggled",
 			 G_CALLBACK(match_case_toggled), NULL);
@@ -804,11 +788,15 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
-	dialog=gnome_dialog_new(_("gtranslator -- replace"),
-		_("Replace"),
-		_("Replace all"),
-		GTK_STOCK_CLOSE, 
+	dialog=gtk_dialog_new_with_buttons(
+		_("gtranslator -- replace"),
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+		_("Replace"), GTR_REPLACE_ONCE,
+		_("Replace all"), GTR_REPLACE_ALL,
 		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTR_REPLACE_ONCE);
 	
 	label=gtk_label_new(_("String to replace:"));
 	findy=gnome_entry_new("REPLACE_THIS");
@@ -822,19 +810,19 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
 		GINT_TO_POINTER(findComment));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
 	menu_item=gtk_menu_item_new_with_label(_("Translated"));
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
 		GINT_TO_POINTER(findTranslated));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 	
 	menu_item=gtk_menu_item_new_with_label(_("Both"));
 	g_signal_connect(G_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
 		GINT_TO_POINTER(findBoth));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 	
 	switch (GtrPreferences.find_in) 
 	{
@@ -862,19 +850,19 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 	/*
 	 * Pack the single elements into the dialog.
 	 */
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
 		FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), 
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), 
 		findy, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), sndlabel,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), sndlabel,
 		FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), 
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), 
 		replacy, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), find_in,
 		FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), option,
 		TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), hbox,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
 		FALSE, FALSE, 0);
 	
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
@@ -882,11 +870,11 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 
 	gtranslator_dialog_show(&dialog, "gtranslator -- replace");
 	
-	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 
 	if(reply==2)
 	{
-		gnome_dialog_close(GNOME_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
 	else
 	{
@@ -899,7 +887,7 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		replaceme=gtk_editable_get_chars(GTK_EDITABLE(
 			gnome_entry_gtk_entry(GNOME_ENTRY(replacy))), 0, -1);
 
-		gnome_dialog_close(GNOME_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 
 		if(reply==1)
 		{
@@ -926,28 +914,109 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 void gtranslator_compile_error_dialog(FILE * fs)
 {
 	gchar buf[2048];
-	gint pos[] = { 0 };
 	gint len;
 	GtkWidget *dialog, *textbox;
 	GtkWidget *scroll;
+	GtkTextBuffer *buffer;
+	GtkTextIter *iter = NULL;
 
 	dialog = gtranslator_utils_error_dialog(_("An error occurred while msgfmt was executed:\n"));
-	textbox = gtk_text_new(NULL, NULL);
-	//	gtk_text_set_editable(GTK_TEXT(textbox), FALSE);
+	buffer = gtk_text_buffer_new(NULL);
 	while (TRUE) {
 		len = fread(buf, 1, sizeof(buf), fs);
 		if (len == 0)
 			break;
-		gtk_editable_insert_text(GTK_EDITABLE(textbox), buf, len, pos);
+		gtk_text_buffer_get_end_iter(buffer, iter);
+		gtk_text_buffer_insert(buffer, iter, buf, len);
 	}
+	textbox = gtk_text_view_new_with_buffer(buffer);
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(textbox), FALSE);
+
 	scroll = gtk_scrolled_window_new(NULL, NULL);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_container_add(GTK_CONTAINER(scroll), textbox);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox),
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),
 			 scroll, TRUE, TRUE, 0);
 	gtranslator_dialog_show(&dialog, NULL);
+}
+
+/* 
+ * Tells the user the file is already open, and ask if they are sure
+ * they want to open it.
+ */
+gint gtranslator_already_open_dialog(GtkWidget *widget, gpointer filename)
+{
+	GtkWidget *dialog;
+
+	gint reply;
+
+	gchar *fname;
+
+	fname = g_strdup((gchar*)filename);
+
+	dialog=gtk_message_dialog_new(
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_MESSAGE_WARNING,
+		GTK_BUTTONS_YES_NO,
+		_("The file\n"
+		  "\n"
+		  "   %s\n"
+		  "\n"
+		  "is already open in another instance of gtranslator!\n"
+		  "Please close the other instance of gtranslator handling\n"
+		  "this file currently to re-gain access to this file.\n"
+		  "\n"
+		  "Shall fool gtranslator open this file anyway ?"), 
+		fname);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_NO);
+
+	/*
+	 * Run dialog and process response
+	 */
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+	GTR_FREE(fname);
+
+	return reply;
+}
+
+/* 
+ * Tells the user the file has changed on disk, and ask if they wish
+ * to revert.
+ */
+gint gtranslator_file_revert_dialog(GtkWidget *widget, gpointer filename)
+{
+	GtkWidget *dialog;
+
+	gint reply;
+
+	gchar *fname;
+
+	fname = g_strdup((gchar*)filename);
+
+	dialog=gtk_message_dialog_new(
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_MESSAGE_WARNING,
+		GTK_BUTTONS_YES_NO,
+		_("File %s\nwas changed. Do you want to revert to saved copy?"),
+		fname);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_NO);
+
+	reply = gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(dialog);
+
+	/*
+	 * Run dialog and process response
+	 */
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+	GTR_FREE(fname);
+
+	return reply;
 }
 
 /*
@@ -956,7 +1025,7 @@ void gtranslator_compile_error_dialog(FILE * fs)
 void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 {
 	static GtkWidget *dialog=NULL;
-	GtkWidget *entry;
+	GtkWidget *entry, *subentry;
 	GtkWidget *label;
 
 	if(dialog != NULL) {
@@ -964,28 +1033,32 @@ void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 		return;
 	}
 
-	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
-				_("Open"), GTK_STOCK_CANCEL, 
-				GTK_STOCK_HELP, NULL);
-
-	/* Make Open button the default */
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
+	dialog=gtk_dialog_new_with_buttons(
+		_("gtranslator -- open from URI"),
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
 
 	entry=gnome_entry_new("URI");
+	subentry = gnome_entry_gtk_entry(GNOME_ENTRY(entry));
+	gtk_entry_set_activates_default(GTK_ENTRY(subentry), TRUE);
 
 	label=gtk_label_new(_("Enter URI:"));
 	
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
 		FALSE, FALSE, 0);
 	
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), entry,
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), entry,
 		FALSE, FALSE, 0);
 	gtk_window_set_focus(GTK_WINDOW(dialog),
 		gnome_entry_gtk_entry(GNOME_ENTRY(entry)));
-	gnome_dialog_editable_enters(GNOME_DIALOG(dialog),
-		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(entry))));
+//	gtk_dialog_editable_enters(GTK_DIALOG(dialog),
+//		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(entry))));
 
-	g_signal_connect(G_OBJECT(dialog), "clicked",
+	g_signal_connect(G_OBJECT(dialog), "response",
 		GTK_SIGNAL_FUNC(gtranslator_open_uri_dialog_clicked), entry);
 			
 	gtranslator_dialog_show(&dialog, "gtranslator -- open URI");
@@ -994,12 +1067,12 @@ void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 /*
  * Checks the URI before it's passed to the core functions.
  */ 
-void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
+void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 	gpointer entrydata)
 {
 	GString *uri=g_string_new("");
 
-	if(button==GNOME_OK)
+	if(button==GTK_RESPONSE_OK)
 	{
 		/*
 		 * Get the URI data from the GnomeEntry.
@@ -1021,7 +1094,7 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			 */ 
 			if(gtranslator_utils_uri_supported(uri->str))
 			{
-				gnome_dialog_close(dialog);
+				gtk_widget_destroy(GTK_WIDGET(dialog));
 				gtranslator_open_file(uri->str);
 			}
 			else
@@ -1047,7 +1120,7 @@ http://www.DOMAIN.COM/PO-FILE"));
 	}
 	else
 	{
-		gnome_dialog_close(dialog);
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
 
 	g_string_free(uri, FALSE);
@@ -1060,7 +1133,6 @@ http://www.DOMAIN.COM/PO-FILE"));
 void gtranslator_rescue_file_dialog(void)
 {
 	GtkWidget *dialog;
-	gchar *recovery_message;
 	gchar *original_filename;
 	gint reply;
 	
@@ -1069,28 +1141,23 @@ void gtranslator_rescue_file_dialog(void)
 	 */
 	original_filename=gtranslator_config_get_string("crash/filename");
 
-	recovery_message=g_strdup_printf(_("Open recovery file for `%s'?\n\
+	dialog=gtk_message_dialog_new(
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_MESSAGE_WARNING,
+		GTK_BUTTONS_YES_NO,
+		_("Open recovery file for `%s'?\n\
 It was saved by gtranslator before gtranslator last closed\n\
 and may contain your hard work!\n\
 Saying \"No\" will delete the crash recovery file."),
 		original_filename);
-	
-	dialog=gnome_message_box_new(recovery_message,
-		GNOME_MESSAGE_BOX_WARNING,
-		GTK_STOCK_YES,
-		GTK_STOCK_NO,
-		GTK_STOCK_CANCEL,
-		NULL);
 
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
-	
-	gtranslator_dialog_show(&dialog, "gtranslator -- ask for crash recovery");
-	
-	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
-	
-	GTR_FREE(recovery_message);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
 
-	if(reply==GNOME_YES)
+	reply = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	if(reply==GTK_RESPONSE_YES)
 	{
 		g_message(_("Recovering `%s'..."), original_filename);
 
@@ -1103,7 +1170,7 @@ Saying \"No\" will delete the crash recovery file."),
 
 		gtranslator_open_file(original_filename);
 	}
-	else if(reply==GNOME_NO)
+	else if(reply==GTK_RESPONSE_NO)
 	{
 		/*
 		 * Remove the crash recovery file.
@@ -1134,7 +1201,7 @@ void gtranslator_query_dialog(void)
 	}
 
 	#define add2Box(x); \
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), x, \
 		FALSE, FALSE, 0);
 	#define add2Table(x, y, z); \
 	gtk_table_attach_defaults(GTK_TABLE(innertable), x, y, y+1, z, z+1);
@@ -1144,10 +1211,15 @@ void gtranslator_query_dialog(void)
 	 */
 	label=gtk_label_new(_("Here you can query existing translations from your learn buffer."));
 	
-	dialog=gnome_dialog_new(
+	dialog=gtk_dialog_new_with_buttons(
 		_("gtranslator -- query your personal learn buffer"),
-		_("Query"), _("Query message content"),
-		GTK_STOCK_CLOSE, NULL);
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+		_("Query"), GTR_RESPONSE_QUERY,
+		_("Query message content"), GTR_RESPONSE_QUERY_CONTENT,
+		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTR_RESPONSE_QUERY);
 
 	innertable=gtk_table_new(2, 2, FALSE);
 
@@ -1166,17 +1238,13 @@ void gtranslator_query_dialog(void)
 	add2Table(query_entry_label, 0, 0);
 	add2Table(query_entry, 1, 0);
 
-	/*
-	 * "Query" should be the default button I guess.
-	 */
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	gtranslator_dialog_show(&dialog, "gtranslator -- query dialog");
 
-	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 
 	if(reply==2)
 	{
-		gnome_dialog_close(GNOME_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
 	else if(reply==1 || !reply)
 	{
@@ -1204,7 +1272,7 @@ void gtranslator_query_dialog(void)
 				_("No query string given!"));
 
 			GTR_FREE(query_text);
-			gnome_dialog_close(GNOME_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
 		}
 		else
 		{
@@ -1215,7 +1283,7 @@ void gtranslator_query_dialog(void)
 			/*
 			 * Close the open dialog now.
 			 */
-			gnome_dialog_close(GNOME_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
 
 			if(!result)
 			{
@@ -1245,22 +1313,26 @@ Would you like to insert it into the translation?"),
 				 * Build up another dialog and show up the
 				 *  possible actions.
 				 */
-				condialog=gnome_message_box_new(resulttext,
-					GNOME_MESSAGE_BOX_INFO,
-					GTK_STOCK_YES,
-					GTK_STOCK_NO,
-					NULL);
-				
+				condialog=gtk_message_dialog_new(
+					GTK_WINDOW(gtranslator_application),
+					GTK_DIALOG_DESTROY_WITH_PARENT,
+					GTK_MESSAGE_WARNING,
+					GTK_BUTTONS_YES_NO,
+					resulttext);
+
+				gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
+
 				/*
 				 * Run the dialog and switch the action to take
 				 *  depending on the user's selection.
 				 */
 				gtranslator_dialog_show(&condialog, "gtranslator -- query result");
-				hehue=gnome_dialog_run_and_close(GNOME_DIALOG(condialog));
+				hehue=gtk_dialog_run(GTK_DIALOG(condialog));
+				gtk_widget_destroy(GTK_WIDGET(condialog));
 				
 				GTR_FREE(resulttext);
 				
-				if(hehue==GNOME_YES)
+				if(hehue==GTK_RESPONSE_YES)
 				{
 					gchar *content;
 
@@ -1317,7 +1389,6 @@ Would you like to insert it into the translation?"),
 void gtranslator_auto_translation_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
-    	gchar 	*message_string=NULL;
 	gint 		reply;
 
 	if(dialog != NULL) {
@@ -1325,27 +1396,24 @@ void gtranslator_auto_translation_dialog(void)
 		return;
 	}
 
-	message_string=_("Should gtranslator autotranslate the file using information\n\
-from your personal learn buffer?");
+	dialog=gtk_message_dialog_new(
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_MESSAGE_WARNING,
+		GTK_BUTTONS_YES_NO,
+		_("Should gtranslator autotranslate the file using information\n\
+from your personal learn buffer?"));
 
-	dialog=gnome_message_box_new(message_string,
-		GNOME_MESSAGE_BOX_QUESTION,
-		GTK_STOCK_YES,
-		GTK_STOCK_NO,
-		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
 
-	/*
-	 * Set the default to "Yes" and show/run the dialog.
-	 */
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	gtranslator_dialog_show(&dialog, "gtranslator -- autotranslate?");
-	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 	
 	/*
 	 * Only handle the "Yes" case as we do not think about the "No" case --
 	 *  the user doesn't want any autotranslation.
 	 */
-	if(reply==GNOME_YES)
+	if(reply==GTK_RESPONSE_YES)
 	{
 		/*
 		 * Autotranslate the missing entries.

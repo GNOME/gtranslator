@@ -91,9 +91,9 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 	GtrColorScheme *scheme;
 
 	#define GetData(x, y); \
-	if(!g_strcasecmp(node->name, "color")) \
+	if(!strcmp(node->name, "color")) \
 	{ \
-		if(!g_strcasecmp(xmlGetProp(node, "target"), y)) \
+		if(!strcmp(xmlGetProp(node, "target"), y)) \
 		{ \
 		gchar *string=xmlNodeListGetString(xmldoc, \
 			node->xmlChildrenNode, 1); \
@@ -308,7 +308,7 @@ GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node)
 	/*
 	 * Iterate through the nodes till we got the author tag.
 	 */ 
-	while(*node!=NULL && g_strcasecmp((*node)->name, "author"))
+	while(*node!=NULL && strcmp((*node)->name, "author"))
 	{
 		GTR_ITER(*node);
 	}
@@ -345,7 +345,7 @@ gboolean check_if_color_scheme(xmlNodePtr *node)
 	 */ 
 	#define Malif(x) if(x) { return FALSE; }
 
-	Malif(g_strcasecmp((*node)->name, "colorscheme"));
+	Malif(strcmp((*node)->name, "colorscheme"));
 	Malif(!(*node)->xmlChildrenNode);
 	
 	return TRUE;

@@ -418,7 +418,6 @@ void open_it_anyway_callback( gint reply, gpointer filename )
 	switch( reply ){
 		case 0: /* YES */
 			open_anyway = TRUE;
-			gtranslator_parse_main( (gchar*)filename );
 			break;
 		case 1: /* NO */
 			break;
@@ -427,7 +426,7 @@ void open_it_anyway_callback( gint reply, gpointer filename )
 }
 
 /*
- * Check if the given file is alrady opened by gtranslator.
+ * Check if the given file is already opened by gtranslator.
  */
 gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
 {
@@ -451,34 +450,10 @@ gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
 	if(resultfilename && (!nautilus_strcasecmp(resultfilename, filename)) &&
 		(strlen(resultfilename)==strlen(filename)))
 	{
-		gchar *error_message;
-		gchar *fname;
-		
-		fname = g_strdup( filename );
-
-		error_message=g_strdup_printf(
-		_("The file\n"
-		"\n"
-		"   %s\n"
-		"\n"
-		"is already open in another instance of gtranslator!\n"
-		"Please close the other instance of gtranslator handling\n"
-		"this file currently to re-gain access to this file.\n"
-		"\n"
-		"Shall fool gtranslator open this file anyway ?"), 
-		filename);
-
-		/*
-		 * Return with FALSE if the given file is already open. ???
-		 * +++++
-		 */
-		/* gnome_app_error(GNOME_APP(gtranslator_application), error_message); */
-		gnome_app_question_modal( GNOME_APP(gtranslator_application), error_message,
-			open_it_anyway_callback, (gpointer)fname );
-		
-		GTR_FREE(resultfilename);
-		GTR_FREE(error_message);
-
+		gint reply;
+		reply = gtranslator_already_open_dialog(NULL, (gpointer)filename);
+		if(reply == GTK_RESPONSE_YES)
+			open_anyway = TRUE;
 		return TRUE;
 	}
 	else

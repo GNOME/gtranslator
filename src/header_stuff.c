@@ -99,7 +99,7 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		pos = strstr(pair[1], "\\n");
 		if(pos)
 			*pos = '\0';
-#define if_key_is(str) if (pair[0] && !g_strcasecmp(pair[0],str))
+#define if_key_is(str) if (pair[0] && !strcmp(pair[0],str))
 
 		if_key_is("Project-Id-Version") {
 			gchar *space;
