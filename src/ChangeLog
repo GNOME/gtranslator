@@ -1,3 +1,30 @@
+2002-01-02  Fatih Demir <kabalak@gtranslator.org>
+
+	* message.c: Included formats checking on message update -- it just
+		beeps for now if a failure did occur, ergo the formats are
+		 wrong or any other syntactical error is present.
+
+	* prefs.c/.h: Added `hidden' "toggles/check_formats" preference via
+		which you can enable the current formats checking routine --
+		 it's currently not woven into the prefs dialog as the formats
+		  checking needs some more love -- if you want to see it in
+		   action, simply do:
+		
+		gconftool -t bool -s /apps/gtranslator/toggles/check_formats 1
+
+	* formats.c: Hide the command line error messages/warnings from the
+		user and return a really logical value -- it's the right way
+		 now: it returns TRUE on success and FALSE on failure and not
+		  vice versa.
+
+	* about.c: Small tweak --  the colorscheme author is now "escorted" by
+		"'s (I know, a "super" change ,-)).
+
+	* messages-table.c: Made the default color values for the table entries
+		highlighting being defined by macros -- centralizes their prefs
+		 a bit -- still no clue about the "messages table doesn't show
+		  up" bug .-( Uhmm...
+
 2002-01-01  Fatih Demir <kabalak@gtranslator.org>
 
 	* about.c: The about dialog is now much more well-proportioned then

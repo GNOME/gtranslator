@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
@@ -671,6 +671,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.rambo_function);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      GtrPreferences.check_recent_file);
+	gtranslator_config_set_bool("toggles/check_formats",
+			      GtrPreferences.check_formats);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
 			      GtrPreferences.instant_spell_check);
 	gtranslator_config_set_bool("toggles/use_own_fonts",
@@ -866,6 +868,8 @@ void gtranslator_preferences_read(void)
 		"toggles/load_backends");
 	GtrPreferences.auto_learn = gtranslator_config_get_bool(
 		"toggles/auto_learn");
+	GtrPreferences.check_formats = gtranslator_config_get_bool(
+		"toggles/check_formats");
 	GtrPreferences.match_case = gtranslator_config_get_bool(
 		"find/case_sensitive");
 	GtrPreferences.find_in = gtranslator_config_get_int("find/find_in");

@@ -23,6 +23,7 @@
 
 #include "actions.h"
 #include "comment.h"
+#include "formats.h"
 #include "gtkspell.h"
 #include "gui.h"
 #include "learn.h"
@@ -312,6 +313,18 @@ void gtranslator_message_update(void)
 		po->translated--;
 	}
 	
+	/*
+	 * Check the formats of the now updated GtrMsg -- simply beep in case
+	 *  of an error for now...
+	 */
+	if(GtrPreferences.check_formats)
+	{
+		if(!gtranslator_formats_check(msg))
+		{
+			printf("\007");
+		}
+	}
+
 	message_changed = FALSE;
 	
 	/*

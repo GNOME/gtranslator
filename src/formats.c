@@ -57,7 +57,7 @@ gboolean gtranslator_formats_check(GtrMsg *message)
 		\"Content-Transfer-Encoding: 8bit\\n\"
 		\n\
 		msgid \"%s\"
-		msgstr \"%s\"' | msgfmt -c - -o /dev/null",
+		msgstr \"%s\"' | msgfmt -c - -o /dev/null 2>/dev/null",
 		((GTR_HEADER(po->header)->charset) ? GTR_HEADER(po->header)->charset :
 			po->locale_charset),
 		message->msgid,
@@ -78,10 +78,10 @@ gboolean gtranslator_formats_check(GtrMsg *message)
 
 	if(!result)
 	{
-		return FALSE;
+		return TRUE;
 	}
 	else
 	{
-		return TRUE;
+		return FALSE;
 	}
 }

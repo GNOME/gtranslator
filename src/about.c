@@ -54,31 +54,33 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	gchar 	*bottom_line;
 	
 	const gchar *authors[] = {
-		"Fatih Demir 		<kabalak@gtranslator.org>",
-		"Gediminas Paulauskas 	<menesis@gtranslator.org>",
-		"Thomas Ziehmer 	<thomas@gtranslator.org>",
-		"Peeter Vois 		<peeter@gtranslator.org>",
+		"Fatih Demir		<kabalak@gtranslator.org>",
+		"Gediminas Paulauskas	<menesis@gtranslator.org>",
+		"Thomas Ziehmer		<thomas@gtranslator.org>",
+		"Peeter Vois		<peeter@gtranslator.org>",
 		"",
 		_("Messages table:"),
-		"Kevin Vandersloot 	<kfv101@psu.edu>",
+		"Kevin Vandersloot	<kfv101@psu.edu>",
 		"",
 		_("Documentation:"),
-		"Emese Kovacs 		<emese@gnome.hu>",
+		"Emese Kovacs		<emese@gnome.hu>",
 		NULL
 	};
 	
 	gtranslator_raise_dialog(about);
 
 
-	/* Translators should localize the following string
+	/* 
+	 * Translators should localize the following string
  	 * which will be displayed at the bottom of the about
 	 * box to give credit to the translator(s).
 	 * Translate the "Translation:", add your name and an
 	 * email address. You can span several lines with a
 	 * newline character if needed, but it shouldn't be
 	 * too long; vertical space is limited in the about
-	 * dialog. 
-	 * If you dont translate it nothing will be added 
+	 * dialog.
+	 *
+	 * If you dont translate it, nothing will be added.
 	 */
 	if (strcmp (_("Translation:"), "Translation:") == 0) {
 		bottom_line = g_strdup 
@@ -107,17 +109,18 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	 * This string is displayed in the about box as an information about
 	 *  the currently used colorscheme.
 	 */
-	umfo=g_strdup_printf(_("Current colorscheme: `%s' (version `%s') is brought to you by:"), theme->info->name, theme->info->version);
+	umfo=g_strdup_printf(_("Current colorscheme: \"%s\" (version %s) is brought to you by:"), theme->info->name, theme->info->version);
 	scheme=gtk_label_new(umfo);
 
 	g_free(umfo);
 
 	/*
 	 * Show author name and bind in a GnomeHREF widget for contacting
-	 *  the scheme author directly.
+	 *  the scheme author directly (clicking on it will raise the GNOME
+	 *   EMail handler -- whatever it is in real life then...).
 	 */
-	umfo=g_strdup_printf("%s <%s>",
-		theme->info->author, theme->info->author_email);
+	umfo=g_strdup_printf("\"%s\" <%s>", theme->info->author,
+		theme->info->author_email);
 	url=g_strdup_printf("mailto:%s", theme->info->author_email);
 
 	author=gnome_href_new(url, umfo);

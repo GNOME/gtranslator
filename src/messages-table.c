@@ -1,6 +1,6 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
- *		Kevin Vandersloot <kfv101@psu.edu>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ *			Kevin Vandersloot <kfv101@psu.edu>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -50,6 +50,13 @@
 #include <gal/e-table/e-tree-memory.h>
 #include <gal/e-table/e-tree-scrolled.h>
 #include <gal/e-table/e-tree-memory-callbacks.h>
+
+/*
+ * We're now defining the highlighting colors once here at the top via macros.
+ */
+#define TABLE_FUZZY_COLOR "#ff0000"
+#define TABLE_UNTRANSLATED_COLOR "#a7453e"
+#define TABLE_TRANSLATED_COLOR NULL
 
 /*
  * Create the ETableExtras for our messages table.
@@ -216,7 +223,7 @@ static void read_messages_table_colors()
 		}
 		else
 		{
-			messages_table_colors->untranslated=g_strdup("#a7453e");
+			messages_table_colors->untranslated=g_strdup(TABLE_UNTRANSLATED_COLOR);
 		}
 
 		value=gtranslator_config_get_string("colors/messages_table_fuzzy");
@@ -228,7 +235,7 @@ static void read_messages_table_colors()
 		}
 		else
 		{
-			messages_table_colors->fuzzy=g_strdup("#ff0000");
+			messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
 		}
 
 		value=gtranslator_config_get_string("colors/messages_table_translated");
@@ -240,16 +247,16 @@ static void read_messages_table_colors()
 		}
 		else
 		{
-			messages_table_colors->translated=NULL;
+			messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
 		}
 
 		gtranslator_config_close();
 	}
 	else
 	{
-		messages_table_colors->untranslated=g_strdup("#a7453e");
-		messages_table_colors->fuzzy=g_strdup("#ff0000");
-		messages_table_colors->translated=NULL;
+		messages_table_colors->untranslated=g_strdup(TABLE_UNTRANSLATED_COLOR);
+		messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
+		messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
 	}
 }
 

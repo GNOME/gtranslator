@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
@@ -46,6 +46,7 @@ struct {
 	guint show_messages_table	: 1;
 	guint show_comment		: 1;
 	guint collapse_translated	: 1;
+	guint check_formats		: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.
