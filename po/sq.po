@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-04 21:18+0200\n"
+"POT-Creation-Date: 2004-07-28 04:00+0200\n"
 "PO-Revision-Date: 2004-06-30 13:08+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "Programi i përkthimit për GNOME"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1143
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1141
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -386,56 +386,56 @@ msgstr ""
 "Nuk u gjet\n"
 "\"%s\""
 
-#: src/gui.c:184
+#: src/gui.c:182
 msgid "Edit comment"
 msgstr "Ndrysho komentin"
 
-#: src/gui.c:495
+#: src/gui.c:493
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ %i akoma me gabime (Fuzzy) ]"
 msgstr[1] "%s [ %i akoma me gabime (Fuzzy) ]"
 
-#: src/gui.c:495 src/gui.c:499 src/menus.c:341 src/messages-table.c:324
+#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "Me gabime"
 
-#: src/gui.c:499
+#: src/gui.c:497
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nuk ka më asnjë mesazh me gabime ]"
 
-#: src/gui.c:507
+#: src/gui.c:505
 msgid "Sticky (Message & translation are the same)"
 msgstr "Ngjit (Mesazhi dhe përkthimi i tij janë të njëjtë)"
 
-#: src/gui.c:509 src/messages-table.c:332
+#: src/gui.c:507 src/messages-table.c:332
 msgid "Translated"
 msgstr "Përkthyer"
 
-#: src/gui.c:518
+#: src/gui.c:516
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ %i akoma i papërkthyer ]"
 msgstr[1] "%s [ %i akoma i papërkthyer ]"
 
-#: src/gui.c:518 src/gui.c:520 src/messages-table.c:315
+#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
 msgid "Untranslated"
 msgstr "Papërkthyer"
 
-#: src/gui.c:520
+#: src/gui.c:518
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Nuk ka asnjë mesazh të papërkthyer ]"
 
-#: src/gui.c:539
+#: src/gui.c:537
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Mesazhi %d / %d / Gjendja: %s (Mesazhi përmban forma në shumës)"
 
-#: src/gui.c:543
+#: src/gui.c:541
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Mesazhi %d / %d / Gjendja: %s"
@@ -661,7 +661,6 @@ msgstr "Irlandeze"
 msgid "Japanese"
 msgstr "Japonisht"
 
-#. GRUT modified this item
 #: src/languages.c:185
 msgid "Kannada"
 msgstr "Kanada"
@@ -1158,7 +1157,6 @@ msgstr "Mbrapa"
 msgid "Next"
 msgstr "Vazhdo"
 
-#. GRUT modified this item
 #: src/menus.c:329
 msgid "Last"
 msgstr "E fundit"
@@ -1191,25 +1189,38 @@ msgstr "Gjej një frazë tek file po"
 msgid "Replace string in po file"
 msgstr "Zevëndëso një frazë tek file po"
 
-#: src/message.c:96
+#: src/message.c:95
 msgid "Couldn't get the message!"
 msgstr "Nuk arrij të marr mesazhin!"
 
-#: src/message.c:118
+#: src/message.c:117
 msgid "There are no fuzzy messages left."
 msgstr "Nuk ka më asnjë mesazh me gabime."
 
-#: src/message.c:142
+#: src/message.c:141
 msgid "All messages seem to be translated."
 msgstr "Të gjithë mesazhet janë të përkthyer."
 
-#: src/message.c:328
+#: src/message.c:270
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr ""
+
+#: src/message.c:271
+#, c-format
+msgid ""
+"GtkSpell was unable to initialize.\n"
+" %s"
+msgstr ""
+
+#: src/message.c:311
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "gtranslator -- ndrysho format në shumës tek përkthimi i mesazhit"
 
+#. GRUT modified this item
 #: src/messages-table.c:252
 msgid "Original"
-msgstr "Origjinali"
+msgstr "Orgjinali"
 
 #: src/open.c:144
 #, c-format
@@ -1235,7 +1246,7 @@ msgstr "Nuk arrij të hap file gettext e %s-uar `%s'!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Nuk arrij të hap file e zip-uar po `%s'!"
 
-#: src/parse.c:487
+#: src/parse.c:485
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1246,7 +1257,7 @@ msgstr ""
 "tek rreshti %d.\n"
 "Ju lutem kontrolloni file dhe provoni përsëri."
 
-#: src/parse.c:542
+#: src/parse.c:540
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1255,7 +1266,7 @@ msgstr ""
 "File është bosh:\n"
 "%s"
 
-#: src/parse.c:564
+#: src/parse.c:562
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "File `%s' nuk ekziston fare!"
@@ -1263,16 +1274,16 @@ msgstr "File `%s' nuk ekziston fare!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:696
+#: src/parse.c:694
 msgid "Header record not found - defaulting from preferences"
 msgstr "Regjistrimi i header nuk u gjet - po kopjoj nga preferimet"
 
-#: src/parse.c:712
+#: src/parse.c:710
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:924
+#: src/parse.c:922
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1283,12 +1294,12 @@ msgstr ""
 "Files POT krijohen nga procesi i kompilimit.\n"
 "File juaj duhet të ketë emrin '%s.po'."
 
-#: src/parse.c:986
+#: src/parse.c:984
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nuk arrij të hap në shkrim file `%s'!"
 
-#: src/parse.c:1038
+#: src/parse.c:1036
 #, c-format
 msgid ""
 "File %s\n"
@@ -1303,11 +1314,11 @@ msgstr[1] ""
 "File %s\n"
 "përmban %d mesazh me gabime"
 
-#: src/parse.c:1310
+#: src/parse.c:1308
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Më vjen keq, në sistemin tuaj mungon msgfmt!"
 
-#: src/parse.c:1345
+#: src/parse.c:1343
 #, c-format
 msgid ""
 "Compile successful:\n"
