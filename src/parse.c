@@ -922,7 +922,6 @@ void gtranslator_display_recent(void)
 	{
 		g_free(menu);
 	}
-	g_free(menupath);
 	/*
 	 * At last: free the GnomeHistoryEntry list.
 	 */
