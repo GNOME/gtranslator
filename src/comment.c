@@ -258,27 +258,5 @@ void gtranslator_comment_display(GtrComment *comment)
 	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
 
 	e_entry_set_text(E_ENTRY(extra_content_view), comment->pure_comment);
-
-	if(comment->type==TRANSLATOR_COMMENT)
-	{
-		e_entry_set_editable(E_ENTRY(extra_content_view), TRUE);
-	}
-	else
-	{
-		e_entry_set_editable(E_ENTRY(extra_content_view), FALSE);
-	}
-}
-
-/*
- * Shows eventual references for the current comment.
- */
-void gtranslator_comment_show_references(GtrComment *comment)
-{
-	g_return_if_fail(file_opened==TRUE);
-	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
-
-	if(comment->type==REFERENCE_COMMENT)
-	{
-		g_warning("FIXME: Show references.");
-	}
+	e_entry_set_editable(E_ENTRY(extra_content_view), FALSE);
 }

@@ -91,13 +91,8 @@ void gtranslator_comment_free(GtrComment **comment);
 gboolean gtranslator_comment_is_visible(GtrComment *comment);
 
 /*
- * Popup the comment for the current message.
+ * Display the current comment in it's full beautifulness .-)
  */
 void gtranslator_comment_display(GtrComment *comment); 
-
-/*
- * Shows eventual references for the current comment.
- */
-void gtranslator_comment_show_references(GtrComment *comment);
 
 #endif

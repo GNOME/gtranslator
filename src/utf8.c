@@ -92,6 +92,8 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
  */
 void gtranslator_utf8_convert_po_to_utf8(void)
 {
+	g_return_if_fail(po->messages!=NULL);
+	
 	g_list_foreach(po->messages, 
 		(GFunc) gtranslator_utf8_convert_message_to_utf8, NULL);
 		
@@ -107,6 +109,8 @@ void gtranslator_utf8_convert_po_to_utf8(void)
  */
 void gtranslator_utf8_convert_po_from_utf8(void)
 {
+	g_return_if_fail(po->messages!=NULL);
+	
 	g_list_foreach(po->messages,
 		(GFunc) gtranslator_utf8_convert_message_from_utf8, NULL);
 

@@ -277,7 +277,8 @@ gboolean gtranslator_parse_core(void)
 		check_msg_status(msg);
 		po->messages = g_list_prepend(po->messages, (gpointer) msg);
 	}
-	else if(add_to_obsolete(GTR_COMMENT(msg->comment)->comment))
+	else if(GTR_COMMENT(msg->comment)->comment &&
+		add_to_obsolete(GTR_COMMENT(msg->comment)->comment))
 	{
 		gtranslator_comment_free(&msg->comment);
 		g_free(msg);

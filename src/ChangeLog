@@ -1,3 +1,16 @@
+2001-07-15  Fatih Demir <kabalak@gtranslator.org>
+
+	* learn.c: Small formatting changes.
+
+	* comment.c/.h: Removed the "gtranslator_comment_show_references"
+		function skeletons and made the EEntry not be editable -- ever.
+
+	* parse.c: Another sanity check more -- check the comment before adding
+		it to any obsolete entries string.
+
+	* utf8.c: Two more g_return_if_fail's -- less crashs -- ehm, UTF8 is
+		still not working.
+
 2001-07-14  Fatih Demir <kabalak@gtranslator.org>
 
 	* syntax-elements.h: Added some more standard filenames to the keywords

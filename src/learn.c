@@ -95,7 +95,8 @@ static void gtranslator_learn_hash_from_node(xmlNodePtr node)
 
 	if(original && translation)
 	{
-		g_hash_table_insert(learn_hash, g_strdup(original), g_strdup(translation));
+		g_hash_table_insert(learn_hash, 
+			g_strdup(original), g_strdup(translation));
 
 		g_free(original);
 		g_free(translation);
@@ -178,7 +179,7 @@ void gtranslator_learn_init()
 		g_return_if_fail(node!=NULL);
 
 		/*
-		 * Parse every message entry via the gtranslator_learn_hash_from_node
+		 * Parse the message entry via gtranslator_learn_hash_from_node
 		 *  function.
 		 */
 		while(node)
@@ -195,7 +196,8 @@ void gtranslator_learn_init()
 				if(contentstring)
 				{
 					/*
-					 * Read the serial number in and increment it by one.
+					 * Read the serial number in and 
+					 *  increment it by one.
 					 */
 					sscanf(contentstring, "%i", &serial);
 					g_free(contentstring);
@@ -217,8 +219,8 @@ void gtranslator_learn_init()
 	else
 	{
 		/*
-		 * Setup a foo'sh hash content for the empty cases: Use "gtranslator"
-		 *  as a msgid/msgstr pair ,-)
+		 * Setup a foo'sh hash content for the empty cases: Use 
+		 *  "gtranslator" as a msgid/msgstr pair ,-)
 		 */
 		g_hash_table_insert(learn_hash, 
 			g_strdup("gtranslator"), g_strdup("gtranslator"));
