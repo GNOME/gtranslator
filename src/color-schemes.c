@@ -418,6 +418,8 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 	}
 
 	closedir(dir);
+
+	g_list_sort(schemesinfos, (GCompareFunc) strcmp);
 	
 	return schemesinfos;
 }
