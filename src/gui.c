@@ -84,6 +84,7 @@ GtrExtraContentArea *extra_content_view;
 
 gboolean nothing_changes;
 
+#ifdef NOT_PORTED
 /*
  * Internal text callbacks/handlers.
  */
@@ -93,6 +94,7 @@ static void insert_text_handler (GtkTextBuffer *editable, GtkTextIter *pos,
 
 static void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 				GtkTextIter *end);
+#endif
 
 static void selection_get_handler(GtkWidget *widget,
 	GtkSelectionData *selection_data, guint info,
@@ -294,23 +296,21 @@ void gtranslator_create_main_window(void)
 			 G_CALLBACK(selection_get_handler), NULL);
 	g_signal_connect_after(G_OBJECT(trans_box), "selection-get",
 			 G_CALLBACK(selection_get_handler), NULL);
-/*
+
+#ifdef NOT_PORTED
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(text_box)), 
 			 "insert-text",
 			 G_CALLBACK(insert_text_handler), NULL);
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(text_box)),
 			 "delete-range",
 			 G_CALLBACK(delete_text_handler), NULL);
-*/
-
-/*	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
+	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 			 "insert-text",
 			 G_CALLBACK(insert_text_handler), NULL);
-
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 			 "delete-range",
 			 G_CALLBACK(delete_text_handler), NULL);
-*/
+#endif
 	
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 			 "changed",
@@ -330,6 +330,7 @@ void gtranslator_create_main_window(void)
 			 GUINT_TO_POINTER(dnd_type));
 }
 
+#ifdef NOT_PORTED
 /*
  * An own delete text handler which should work on deletion in the translation
  *  box -- undo is called up here, too.
@@ -357,6 +358,7 @@ void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 	gtranslator_delete_highlighted(textbuf, start, end, NULL);
 	g_signal_stop_emission_by_name (G_OBJECT (textbuf), "delete_text");
 }
+#endif
 
 /*
  * The own quit-code
@@ -620,6 +622,7 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 	}
 }
 
+#ifdef NOT_PORTED
 /*
  * When inserting text, exchange spaces with dot chars 
  */
@@ -650,6 +653,7 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 	g_signal_stop_emission_by_name (G_OBJECT(textbuffer), "insert_text");
 	gtk_text_buffer_place_cursor(textbuffer, pos);
 }
+#endif
 
 void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 			   guint info, guint time_stamp, gpointer data)

@@ -136,7 +136,9 @@ void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer us
  */
 void gtranslator_message_show(GtrMsg *msg)
 {
+#ifdef NOT_PORTED
 	gchar *ispell_command[5];
+#endif
 
 	if(!file_opened)
 	{
@@ -164,7 +166,6 @@ void gtranslator_message_show(GtrMsg *msg)
 	if(GtrPreferences.dot_char)
 	{
 		gchar *temp;
-		gchar *old;
 
 		g_return_if_fail(msg!=NULL);
 		g_return_if_fail(msg->msgid!=NULL);

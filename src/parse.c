@@ -155,10 +155,10 @@ GtrPo *gtranslator_parse(const gchar *filename)
 	gboolean first_is_fuzzy;
 	gchar *base;
 
-	g_return_if_fail(filename!=NULL);
+	g_return_val_if_fail(filename!=NULL, NULL);
 
 	base=g_path_get_basename(filename);
-	g_return_if_fail(base[0]!='\0');
+	g_return_val_if_fail(base[0]!='\0', NULL);
 	g_free(base);
 
 	po = g_new0(GtrPo, 1);
@@ -182,13 +182,13 @@ GtrPo *gtranslator_parse(const gchar *filename)
 	 */
 	if(gtranslator_utils_check_file_permissions(po)==FALSE)
 	{
-		return;
+		return NULL;
 	}
 	
 	if (!gtranslator_parse_core(po))
 	{
 		gtranslator_po_free(po);
-		return;
+		return NULL;
 	}
 
 #define FIRST_MSG GTR_MSG(po->messages->data)
@@ -575,6 +575,8 @@ void gtranslator_parse_main_extra()
 	gchar         *base;
 	gchar 	*title;
 	
+	g_return_if_fail(po!=NULL);
+
 	if(!po->header) {
 		/*
 		 * Provide a default po->header to avoid segfaults (#62244)

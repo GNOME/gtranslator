@@ -26,6 +26,7 @@
 
 #include <glib.h>
 
+#ifdef NOT_PORTED
 /*
  * The keywords which should be highlighted.
  */
@@ -137,5 +138,7 @@ static gchar *prefixes[] =  {
 	"wysiwyg:",
 	NULL
 };
+
+#endif
 
 #endif

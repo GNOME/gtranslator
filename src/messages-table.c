@@ -106,6 +106,7 @@ typedef struct
  */
 static GtkWidget *tree;
 
+#ifdef NOT_PORTED
 static GtrMessagesTableColors *messages_table_colors;
 
 static GtrTranslationRetrieval *retrieval=NULL;
@@ -116,6 +117,7 @@ static GtrTranslationRetrieval *retrieval=NULL;
  * updated
  */
 static GHashTable *hash_table=NULL;
+#endif
 
 /*
  * Pops up on a right click in the messages table -- should show any found 

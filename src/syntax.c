@@ -34,13 +34,16 @@
 
 #include <gtk/gtk.h>
 
+#ifdef NOT_PORTED
 static GString *gtranslator_parse_syntax(GtkTextBuffer *textbuffer);
-
 static gboolean back_match(const gchar *msg, gchar *str, gint pos);
+#endif
+
 void gtranslator_update_highlighted(
 		GtkTextBuffer *textbuffer,
 		gpointer userdata );
 
+#ifdef NOT_PORTED
 /*
  * Check the given string for equivalence with the last characters.
  */
@@ -76,7 +79,7 @@ gboolean back_match(const gchar *msg, gchar *str, gint pos)
 	
 	return TRUE;
 }
-
+#endif
 
 /*
  * Frees text highlighting data
@@ -93,7 +96,9 @@ static void text_data_free(gpointer data)
  */
 void gtranslator_syntax_init(GtkTextView *textview)
 {
+#ifdef NOT_PORTED
 	GString *n;
+#endif
 	GtkTextBuffer *textbuffer = gtk_text_view_get_buffer(textview);
 	g_return_if_fail(textbuffer != NULL);
 	
@@ -120,11 +125,13 @@ void gtranslator_update_highlighted(
 		gpointer userdata )
 {
 	GString *newdata, *olddata;
+#ifdef NOT_PORTED
 	gint i,j;
 	GtkTextIter I, J;
 	guint point;
 	gchar type;
 	//	gtk_text_freeze( GTK_TEXT( textwidget ) );
+#endif
 	
 	olddata = (GString *)g_object_get_data(
 		G_OBJECT(textbuffer), 
@@ -194,7 +201,7 @@ void gtranslator_insert_highlighted(
 		gpointer userdata)
 {
 	GString *olddata;
-	gint i;
+/*	gint i; */
 
 	g_return_if_fail(textbuffer != NULL);
 	g_return_if_fail(text!=NULL);
@@ -237,6 +244,7 @@ void gtranslator_delete_highlighted(
 	olddata = g_string_erase( olddata, gtk_text_iter_get_offset(start), len);
 }
 
+#ifdef NOT_PORTED
 static GString *gtranslator_parse_syntax(GtkTextBuffer *textbuffer)
 {
 	GString *string;
@@ -503,11 +511,14 @@ static GString *gtranslator_parse_syntax(GtkTextBuffer *textbuffer)
 
 	return string;
 }
+#endif
 
 // XXX fix it
 void gtranslator_insert_text(GtkTextView *textview, const gchar *text)
 {
+#ifdef NOT_PORTED
 	GtkTextIter start, end;
+#endif
 	GtkTextBuffer *editable = gtk_text_view_get_buffer(textview);
 	
 //	gtk_text_buffer_get_bounds (editable, &start, &end);
