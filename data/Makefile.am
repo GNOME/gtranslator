@@ -2,20 +2,20 @@
 
 ## the dirs where all the DATA should go ..
 Applicationdir = $(datadir)/gnome/apps/Applications
-ifdef BIND_MIME
+#ifdef BIND_MIME
 mimeinfofilesdir = $(datadir)/mime-info
-else
+#else
 mimeinfofilesdir =
-endif
+#endif
 Applicationicondir = $(datadir)/pixmaps
 Mimeicondir = $(Applicationicondir)/mc
 
 ## the DATA ...
-ifdef BIND_MIME
+#ifdef BIND_MIME
 mimeinfofiles_DATA = gtranslator.mime gtranslator.keys
-else
+#else
 mimeinfofiles_DATA = 
-endif
+#endif
 Application_DATA = gtranslator.desktop
 Applicationicon_DATA = gtranslator.png
 Mimeicon_DATA = application-x-po.png

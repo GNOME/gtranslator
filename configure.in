@@ -58,12 +58,14 @@ dnl Whether to bind the po-files with gtranslator/bind the mime-type ?
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(mime-bind,
 	[  --enable-mime-bind=[yes/no]      Bind the po-files mime-type to gtranslator],,enable_mime_bind=yes)
-AC_MSG_CHECKING([if to bind the po-files with gtranslator ... ])
-if test "x$enable_mime_bin" = "xyes" ; then
+AC_MSG_CHECKING([if to bind the po-files with gtranslator ])
+if test "x$enable_mime_bind" = "xyes" ; then
 	AC_DEFINE(BIND_MIME)
-	AC_MSG_RESULT("Yes, ok. Will install the mime & keys files .")
+	AC_MSG_RESULT(["Ok, "
+"******* Will install the mime and keys files."])
 else
-	AM_MSG_RESULT("Not installing the mime & keys files for the mime-types .")
+	AC_MSG_RESULT(["Ok, "
+"******* Not installing the mime and keys files for the mime-types."])
 fi
 
 dnl -------------------------------------------------------------------
@@ -71,12 +73,14 @@ dnl For Karl and the other (X)EMacs lovers ... [ _I_ love VIm ... ]
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(emacs-lover,
         [  --enable-emacs-lover=[no/yes]    Compile with a more Emacs friendly about-message],,enable_emacs_lover=no)
-AC_MSG_CHECKING([if you're a (X)Emacs lover ...])            
+AC_MSG_CHECKING([if you're a (X)Emacs lover ])            
 if test "x$enable_emacs_lover" = "xyes" ; then
 	AC_DEFINE(EMACS_LOVER)
-        AC_MSG_RESULT("Ha ! You are an _X_Emacs lover ! I will convince you to use gtranslator later on ..")
+        AC_MSG_RESULT(["Ha ! You are an _X_Emacs lover !"
+"I will convince you to use gtranslator later on .."])
 else
-        AC_MSG_RESULT("Well done ! You get the original about message ... ")
+        AC_MSG_RESULT(["Well done !"
+"You get the original about message ... "])
 fi
 
 dnl -------------------------------------------------------------------
