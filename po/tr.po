@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.18\n"
-"POT-Creation-Date: 2000-05-18 16:42+0200\n"
-"PO-Revision-Date: 2000-05-18 16:42+0200\n"
+"POT-Creation-Date: 2000-05-20 17:32+0200\n"
+"PO-Revision-Date: 2000-05-20 17:35+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,15 +29,20 @@ msgstr "Kullanýlcak ileti/tercüme tabaný"
 msgid "Specifies the main-window geometry"
 msgstr "Ana pencere boyutlarýný belirler"
 
+#: src/main.c:124
+#, c-format
+msgid "The geometry string \"%s\" coulnd't be parsed!"
+msgstr "\"%s\" yer metni taranamadý!"
+
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:120
+#: src/main.c:143
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "\"%s\" adýyla bir dosya yok yada o dosya okunamýyor!"
 
-#: src/main.c:121
+#: src/main.c:144
 msgid "Skipping it."
 msgstr "Atlatýyorum."
 
@@ -45,164 +50,164 @@ msgstr "Atlatýyorum."
 msgid "No po-file opened which could be compiled."
 msgstr "Dönüþtürülenecek bir dosya açýk deðil."
 
-#: src/interface.c:116
+#: src/interface.c:125
 msgid "_Compile"
 msgstr "_Dönüþtür"
 
-#: src/interface.c:142
+#: src/interface.c:151
 msgid "Refresh"
 msgstr "Yenile"
 
-#: src/interface.c:154
+#: src/interface.c:163
 msgid "_First"
 msgstr "_Ilk"
 
-#: src/interface.c:161
+#: src/interface.c:170
 msgid "_Back"
 msgstr "_Geri"
 
-#: src/interface.c:169
+#: src/interface.c:178
 msgid "_Next"
 msgstr "I_leri"
 
-#: src/interface.c:176
+#: src/interface.c:185
 msgid "_Last"
 msgstr "_Son"
 
-#: src/interface.c:195
+#: src/interface.c:204
 msgid "_Online help"
 msgstr "_Yardým"
 
-#: src/interface.c:210 src/interface.c:213
+#: src/interface.c:219 src/interface.c:222
 msgid "_Messages"
 msgstr "_Mesajlar"
 
 #. *
 #. * Create the app
 #. *
-#: src/interface.c:236
+#: src/interface.c:245
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gtr_dialogs.c:130 src/interface.c:271
+#: src/gtr_dialogs.c:130 src/interface.c:280
 msgid "Search"
 msgstr "Ara"
 
-#: src/interface.c:272
+#: src/interface.c:281
 msgid "Search for a message"
 msgstr "Bir iletiyi ara"
 
-#: src/interface.c:279
+#: src/interface.c:288
 msgid "ReSearch"
 msgstr "Yen. Ara"
 
-#: src/interface.c:280
+#: src/interface.c:289
 msgid "Search again"
 msgstr "Yeniden Ara"
 
-#: src/interface.c:287
+#: src/interface.c:296
 msgid "Goto"
 msgstr "Git"
 
-#: src/interface.c:288
+#: src/interface.c:297
 msgid "Goto this message"
 msgstr "Bu iletiye git"
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/interface.c:298
+#: src/interface.c:307
 msgid "F/Cat."
 msgstr "Der./B"
 
-#: src/interface.c:299
+#: src/interface.c:308
 msgid "Find in the personal catalog"
 msgstr "Þahsi derlemede bul"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/interface.c:309
+#: src/interface.c:318
 msgid "F/Po."
 msgstr "Po./B"
 
-#: src/interface.c:310
+#: src/interface.c:319
 msgid "Find in the po file "
 msgstr "Po dosyasýnda bul"
 
-#: src/interface.c:321
+#: src/interface.c:330
 msgid "Compile"
 msgstr "Dönüþtür"
 
-#: src/interface.c:322
+#: src/interface.c:331
 msgid "Compile the po-file"
 msgstr "Po dosyasýný dönüþtür"
 
-#: src/interface.c:330
+#: src/interface.c:339
 msgid "Open"
 msgstr "Aç"
 
-#: src/interface.c:331
+#: src/interface.c:340
 msgid "Open File"
 msgstr "Dosyayý aç"
 
-#: src/interface.c:339
+#: src/interface.c:348
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/interface.c:340
+#: src/interface.c:349
 msgid "Save File"
 msgstr "Dosyayý kaydet"
 
-#: src/interface.c:348
+#: src/interface.c:357
 msgid "Save as"
 msgstr "F. kaydet"
 
-#: src/interface.c:349
+#: src/interface.c:358
 msgid "Save file as"
 msgstr "Dosyayý farklý kaydet"
 
-#: src/interface.c:357
+#: src/interface.c:366
 msgid "First"
 msgstr "Ilk"
 
-#: src/interface.c:358
+#: src/interface.c:367
 msgid "Go to the first message"
 msgstr "Ilk iletiye git"
 
-#: src/interface.c:366
+#: src/interface.c:375
 msgid "Back"
 msgstr "Geri"
 
-#: src/interface.c:367
+#: src/interface.c:376
 msgid "Go one message back"
 msgstr "Bir ileti geri git"
 
-#: src/interface.c:375
+#: src/interface.c:384
 msgid "Options"
 msgstr "Ayarlar"
 
-#: src/interface.c:376
+#: src/interface.c:385
 msgid "gtranslator options"
 msgstr "gtranslator seçenekleri"
 
-#: src/interface.c:384
+#: src/interface.c:393
 msgid "Next"
 msgstr "Ileri"
 
-#: src/interface.c:385
+#: src/interface.c:394
 msgid "Go one message forward"
 msgstr "Bir ileti ileri git"
 
-#: src/interface.c:393
+#: src/interface.c:402
 msgid "Last"
 msgstr "Son"
 
-#: src/interface.c:394
+#: src/interface.c:403
 msgid "Go to the last message"
 msgstr "Son iletiye git"
 
-#: src/interface.c:402 src/interface.c:403
+#: src/interface.c:411 src/interface.c:412
 msgid "Exit"
 msgstr "Çýk"
 
@@ -219,7 +224,7 @@ msgstr ""
 "\n"
 "Dosya akýmý kayboldu! Hata no. `%i'"
 
-#: src/parse.c:60
+#: src/parse.c:53
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
@@ -227,7 +232,7 @@ msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
 #. *
 #. * Set up a status message
 #. *
-#: src/parse.c:65
+#: src/parse.c:58
 #, c-format
 msgid "Current file : \"%s\"."
 msgstr "Geçerli dosya : \"%s\"."
@@ -235,14 +240,18 @@ msgstr "Geçerli dosya : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:145
+#: src/parse.c:135
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
-#: src/parse.c:163
+#: src/parse.c:152
 msgid "Parsing has been successfull."
 msgstr "Tarama baþarýlý oldu."
+
+#: src/header_stuff.c:17
+msgid "Error while parsing the header!"
+msgstr "Baþlýdý tararken hata oldu!"
 
 #. *
 #. * 3.1) No list, no fun
@@ -343,6 +352,13 @@ msgstr "Aranacak metni belirle: "
 #: src/gtr_dialogs.c:194
 msgid "GoTo message entry"
 msgstr "Ileti/tercüme birimine git!"
+
+#. *
+#. * Create the buttons, the entry & the label
+#. *
+#: src/gtr_dialogs.c:199
+msgid "Go!"
+msgstr "Git!"
 
 #: src/gtr_dialogs.c:203
 msgid "Goto the specified message entry."

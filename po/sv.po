@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-05-13 14:15+0200\n"
+"POT-Creation-Date: 2000-05-20 17:32+0200\n"
 "PO-Revision-Date: 2000-05-08 12:28+0200\n"
 "Last-Translator: Martin Norbäck <d95mback@dtek.chalmers.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -13,28 +13,37 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.c:34
+#: src/main.c:35
 msgid "Po-file to open at startup"
 msgstr ""
 
-#: src/main.c:38
+#: src/main.c:39
 #, fuzzy
 msgid "A test option"
 msgstr "Alternativ för .po-filer"
 
-#: src/main.c:42
+#: src/main.c:43
 msgid "The msg_db to use"
+msgstr ""
+
+#: src/main.c:47
+msgid "Specifies the main-window geometry"
+msgstr ""
+
+#: src/main.c:124
+#, c-format
+msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr ""
 
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:115
+#: src/main.c:143
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr ""
 
-#: src/main.c:116
+#: src/main.c:144
 msgid "Skipping it."
 msgstr ""
 
@@ -42,165 +51,165 @@ msgstr ""
 msgid "No po-file opened which could be compiled."
 msgstr ""
 
-#: src/interface.c:88
+#: src/interface.c:125
 msgid "_Compile"
 msgstr "_Kompilera"
 
-#: src/interface.c:114
+#: src/interface.c:151
 msgid "Refresh"
 msgstr "Uppdatera"
 
-#: src/interface.c:126
+#: src/interface.c:163
 msgid "_First"
 msgstr "_Första"
 
-#: src/interface.c:133
+#: src/interface.c:170
 msgid "_Back"
 msgstr "_Bakåt"
 
-#: src/interface.c:141
+#: src/interface.c:178
 msgid "_Next"
 msgstr "_Framåt"
 
-#: src/interface.c:148
+#: src/interface.c:185
 msgid "_Last"
 msgstr "_Sista"
 
-#: src/interface.c:167
+#: src/interface.c:204
 msgid "_Online help"
 msgstr "_Direkthjälp"
 
-#: src/interface.c:182 src/interface.c:185
+#: src/interface.c:219 src/interface.c:222
 msgid "_Messages"
 msgstr "_Meddelanden"
 
 #. *
 #. * Create the app
 #. *
-#: src/interface.c:212
+#: src/interface.c:245
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/interface.c:247
+#: src/gtr_dialogs.c:130 src/interface.c:280
 msgid "Search"
 msgstr "Sök"
 
-#: src/interface.c:248
+#: src/interface.c:281
 msgid "Search for a message"
 msgstr "Sök efter meddelande"
 
-#: src/interface.c:255
+#: src/interface.c:288
 msgid "ReSearch"
 msgstr "Sök igen"
 
-#: src/interface.c:256
+#: src/interface.c:289
 msgid "Search again"
 msgstr "Sök igen"
 
-#: src/interface.c:263
+#: src/interface.c:296
 msgid "Goto"
 msgstr "Gå till"
 
-#: src/interface.c:264
+#: src/interface.c:297
 msgid "Goto this message"
 msgstr "Gå till detta meddelande"
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/interface.c:274
+#: src/interface.c:307
 msgid "F/Cat."
 msgstr "S/Kat."
 
-#: src/interface.c:275
+#: src/interface.c:308
 msgid "Find in the personal catalog"
 msgstr "Sök i den personliga katalogen"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/interface.c:285
+#: src/interface.c:318
 msgid "F/Po."
 msgstr "S/Po."
 
-#: src/interface.c:286
+#: src/interface.c:319
 msgid "Find in the po file "
 msgstr "Sök i .po-filen"
 
-#: src/interface.c:297
+#: src/interface.c:330
 msgid "Compile"
 msgstr "Kompilera"
 
-#: src/interface.c:298
+#: src/interface.c:331
 #, fuzzy
 msgid "Compile the po-file"
 msgstr "Sök i .po-filen"
 
-#: src/interface.c:306
+#: src/interface.c:339
 msgid "Open"
 msgstr "Öppna"
 
-#: src/interface.c:307
+#: src/interface.c:340
 msgid "Open File"
 msgstr "Öppna fil"
 
-#: src/interface.c:315
+#: src/interface.c:348
 msgid "Save"
 msgstr "Spara"
 
-#: src/interface.c:316
+#: src/interface.c:349
 msgid "Save File"
 msgstr "Spara fil"
 
-#: src/interface.c:324
+#: src/interface.c:357
 msgid "Save as"
 msgstr "Spara som..."
 
-#: src/interface.c:325
+#: src/interface.c:358
 msgid "Save file as"
 msgstr "Spara fil som"
 
-#: src/interface.c:333
+#: src/interface.c:366
 msgid "First"
 msgstr "Första"
 
-#: src/interface.c:334
+#: src/interface.c:367
 msgid "Go to the first message"
 msgstr "Gå till det första meddelandet"
 
-#: src/interface.c:342
+#: src/interface.c:375
 msgid "Back"
 msgstr "Bakåt"
 
-#: src/interface.c:343
+#: src/interface.c:376
 msgid "Go one message back"
 msgstr "Gå ett meddelande bakåt"
 
-#: src/interface.c:351
+#: src/interface.c:384
 msgid "Options"
 msgstr "Alternativ"
 
-#: src/interface.c:352
+#: src/interface.c:385
 msgid "gtranslator options"
 msgstr "Alternativ för gtranslator"
 
-#: src/interface.c:360
+#: src/interface.c:393
 msgid "Next"
 msgstr "Nästa"
 
-#: src/interface.c:361
+#: src/interface.c:394
 msgid "Go one message forward"
 msgstr "Gå till nästa meddelande"
 
-#: src/interface.c:369
+#: src/interface.c:402
 msgid "Last"
 msgstr "Sista"
 
-#: src/interface.c:370
+#: src/interface.c:403
 msgid "Go to the last message"
 msgstr "Gå till det sista meddelandet"
 
-#: src/interface.c:378 src/interface.c:379
+#: src/interface.c:411 src/interface.c:412
 msgid "Exit"
 msgstr "Avsluta"
 
@@ -233,33 +242,30 @@ msgstr ""
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:94
+#: src/parse.c:135
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr ""
 
-#.
-#. * Set up an informative status message
-#. *
-#: src/parse.c:111
-msgid "Parsing the list entries."
+#: src/parse.c:152
+msgid "Parsing has been successfull."
 msgstr ""
 
-#: src/parse.c:171
-msgid "Parsing has been successfull."
+#: src/header_stuff.c:17
+msgid "Error while parsing the header!"
 msgstr ""
 
 #. *
 #. * 3.1) No list, no fun
 #. *
-#: src/msg_db.c:60
+#: src/msg_db.c:63
 msgid "gtranslator lost the list of translations!\n"
 msgstr "gtranslator tappade bort listan med översättningar!\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:97 src/msg_db.c:154
+#: src/msg_db.c:100 src/msg_db.c:157
 #, c-format
 msgid "The msg_db `%s' seems not to be inited!\n"
 msgstr "Meddelandedatabasen \"%s\" verkar inte vara initierad\n"
@@ -268,11 +274,11 @@ msgstr "Meddelandedatabasen \"%s\" verkar inte vara initierad\n"
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
-#: src/msg_db.c:109
+#: src/msg_db.c:112
 msgid "Got no message entry!\n"
 msgstr "Fick inget meddelandeelement!\n"
 
-#: src/msg_db.c:118
+#: src/msg_db.c:121
 #, c-format
 msgid "New message entry has wrong/non-logical length : %i\n"
 msgstr "Nytt meddelandeelement har fel eller ologisk längd: %i\n"
@@ -280,7 +286,7 @@ msgstr "Nytt meddelandeelement har fel eller ologisk längd: %i\n"
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:158
+#: src/msg_db.c:161
 msgid "Not available"
 msgstr "Ej tillgängligt"
 
@@ -288,11 +294,11 @@ msgstr "Ej tillgängligt"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:166
+#: src/msg_db.c:169
 msgid "No msg_list available for acting on it!\n"
 msgstr "Ingen meddelandelista tillgänglig för aktivering!\n"
 
-#: src/msg_db.c:190
+#: src/msg_db.c:193
 msgid "No entry found in the msg_db."
 msgstr ""
 
@@ -330,6 +336,35 @@ msgstr "gtranslator -- spara filen som..."
 #: src/gtr_dialogs.c:97
 msgid "Select your filename to which the po-file should be saved to."
 msgstr ""
+
+#: src/gtr_dialogs.c:122
+#, fuzzy
+msgid "gtranslator -- search-box"
+msgstr "gtranslator -- öppna en .po-fil"
+
+#. *
+#. * Set up the information label
+#. *
+#: src/gtr_dialogs.c:128
+msgid "Enter your desired search string: "
+msgstr ""
+
+#: src/gtr_dialogs.c:194
+#, fuzzy
+msgid "GoTo message entry"
+msgstr "Fick inget meddelandeelement!\n"
+
+#. *
+#. * Create the buttons, the entry & the label
+#. *
+#: src/gtr_dialogs.c:199
+msgid "Go!"
+msgstr ""
+
+#: src/gtr_dialogs.c:203
+#, fuzzy
+msgid "Goto the specified message entry."
+msgstr "Gå till det första meddelandet"
 
 #: src/support.c:111 src/support.c:151
 #, c-format

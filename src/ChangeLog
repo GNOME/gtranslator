@@ -1,5 +1,29 @@
 2000-05-20  Fatih Demir		( kabalak@gmx.net )
 
+	+	Changed the gtk_main_quit()-calls to 
+		
+		gtranslator_quit()-calls.
+
+	+	A new exit-function: gtranslator_quit.
+		
+		It should ( and does ) save some settings
+		
+		and will make some checks in the future.
+		
+		-> interface.c/h 
+
+	+	Added the widgets & variables needed for
+		
+		the new option.
+
+	+	Making the geometry-string static.
+
+	+	Added another option to the prefs if to
+		
+		save the geometry( string ).
+		
+		-> prefs.c/h
+
 	+	Added a static gchar holding the current
 		
 		po-files name.
@@ -31,7 +55,6 @@
 	+	Print a warning if the geometry-string
 		
 		couldn't be parsed.
-
 
 	+	Parse for a geometry-parameter and set
 		

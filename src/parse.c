@@ -77,6 +77,7 @@ void parse(gchar *po)
         )
         {
 		gtr_msg msg[c];
+		gtr_header *po_header;
 		z++;
 		/**
 		* Try to get the header :
@@ -95,9 +96,9 @@ void parse(gchar *po)
 		)
 		{
 			/**
-			* Add the current header-line
+			* Check what line it could be and fill it into the
+			*  structure place.
 			**/
-			g_print("HEADER : %s",temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{

@@ -89,6 +89,38 @@ void compile(GtkWidget *widget,gpointer useless)
 }
 
 /**
+* The own quit-code
+**/
+gint gtranslator_quit(GtkWidget *widget,gpointer useless)
+{
+	if(if_save_geometry==TRUE)
+	{
+		gchar *gstr;
+		gint x,y,w,h;
+		gstr=gnome_geometry_string(app1->window);
+		if(gnome_parse_geometry(gstr, &x, &y,
+			&w, &h))
+		{
+			gnome_config_push_prefix("/gtranslator/");
+			gnome_config_set_int("Geometry/X",x);
+			gnome_config_set_int("Geometry/Y",y);
+			gnome_config_set_int("Geometry/Width",w);
+			gnome_config_set_int("Geometry/Height",h);
+			gnome_config_pop_prefix();
+			gnome_config_sync();
+		}
+		else
+		{
+			g_warning(_("Couldn't store current geometry!"));
+		}
+	}
+	/**
+	* Call the Gtk+ quit-function
+	**/
+	gtk_main_quit();
+}
+
+/**
 * Disables/greys out the next/... buttons
 **/
 void disable_buttons()
@@ -132,7 +164,7 @@ static GnomeUIInfo the_file_menu[] =
         GNOMEUIINFO_MENU_SAVE_ITEM(NULL, NULL),
         GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
         GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_MENU_EXIT_ITEM(GTK_SIGNAL_FUNC(gtk_main_quit), NULL),
+        GNOMEUIINFO_MENU_EXIT_ITEM(GTK_SIGNAL_FUNC(gtranslator_quit), NULL),
         GNOMEUIINFO_END
 };
 
@@ -445,9 +477,9 @@ create_app1 (void)
 	* The callbacks list
 	**/
 	gtk_signal_connect(GTK_OBJECT(app1),"delete-event",
-		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
+		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);	
 	gtk_signal_connect(GTK_OBJECT(exit_button),"clicked",
-		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
+		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);
 	gtk_signal_connect(GTK_OBJECT(first_button),"clicked",
 		GTK_SIGNAL_FUNC(get_first_msg),NULL);
 	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",

@@ -41,7 +41,7 @@ GList *languages_list,*encodings_list,*lcodes_list,*group_emails_list,*bits_list
 **/
 GtkWidget *use_msg_db,*add_additional_comments,*show_output;
 GtkWidget *warn_if_no_change,*dont_save_unchanged_files,*print_info;
-GtkWidget *warn_if_fuzzy,*warn_if_untranslated;
+GtkWidget *warn_if_fuzzy,*warn_if_untranslated,*save_geometry;
 
 /**
 * The labels are all declared in the sources as they're'nt needed
@@ -54,7 +54,7 @@ GtkWidget *warn_if_fuzzy,*warn_if_untranslated;
 gchar *author,*email,*language,*mime,*enc,*lc,*lg,*comments;
 gboolean if_use_msg_db,if_add_additional_comments,if_warn_if_fuzzy,
 	if_warn_if_no_change,if_dont_save_unchanged_files,
-	if_warn_if_untranslated;
+	if_warn_if_untranslated,if_save_geometry;
 
 /**
 * The first one creates the preferences-box and the others show/hide it

@@ -79,6 +79,16 @@ int main(int argc,char *argv[])
 	**/
 	read_prefs();
 	/**
+	* Set the main window's geometry
+	**/
+	if(!gtranslator_geometry)
+	{
+		if(if_save_geometry==TRUE)
+		{
+
+		}
+	}
+	/**
 	* Get the client
 	**/
 	client=gnome_master_client();
@@ -163,10 +173,6 @@ int main(int argc,char *argv[])
 	* Disable the ReSearch button on startup
 	**/
 	gtk_widget_set_sensitive(search_again_button,FALSE);
-	/**
-	* Get the main window geometry :
- 	**/
-	gtranslator_geometry=gnome_geometry_string(app1->window);
 	/**
 	* Return to the main Gtk+ main-loop
 	**/

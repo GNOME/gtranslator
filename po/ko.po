@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.18\n"
-"POT-Creation-Date: 2000-05-14 23:33+0900\n"
+"POT-Creation-Date: 2000-05-20 17:32+0200\n"
 "PO-Revision-Date: 2000-05-15 00:22+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@dacome.co.kr>\n"
 "Language-Team: korean <ko@li.org>\n"
@@ -12,27 +12,36 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.c:34
+#: src/main.c:35
 msgid "Po-file to open at startup"
 msgstr "시작할때 Po파일 열기"
 
-#: src/main.c:38
+#: src/main.c:39
 msgid "A test option"
 msgstr "시험 옵션"
 
-#: src/main.c:42
+#: src/main.c:43
 msgid "The msg_db to use"
 msgstr "사용할 msg_db"
+
+#: src/main.c:47
+msgid "Specifies the main-window geometry"
+msgstr ""
+
+#: src/main.c:124
+#, c-format
+msgid "The geometry string \"%s\" coulnd't be parsed!"
+msgstr ""
 
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:115
+#: src/main.c:143
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "\"%s\"파일이 없거나 읽을수 없습니다!"
 
-#: src/main.c:116
+#: src/main.c:144
 msgid "Skipping it."
 msgstr "넘어갑니다."
 
@@ -40,164 +49,164 @@ msgstr "넘어갑니다."
 msgid "No po-file opened which could be compiled."
 msgstr "컴파일할 po파일이 열려있지 않습니다."
 
-#: src/interface.c:116
+#: src/interface.c:125
 msgid "_Compile"
 msgstr "컴파일(_C)"
 
-#: src/interface.c:142
+#: src/interface.c:151
 msgid "Refresh"
 msgstr "다시 읽기"
 
-#: src/interface.c:154
+#: src/interface.c:163
 msgid "_First"
 msgstr "처음(_F)"
 
-#: src/interface.c:161
+#: src/interface.c:170
 msgid "_Back"
 msgstr "앞으로(_B)"
 
-#: src/interface.c:169
+#: src/interface.c:178
 msgid "_Next"
 msgstr "다음(_N)"
 
-#: src/interface.c:176
+#: src/interface.c:185
 msgid "_Last"
 msgstr "마지막(_L)"
 
-#: src/interface.c:195
+#: src/interface.c:204
 msgid "_Online help"
 msgstr "온라인 도움말(_O)"
 
-#: src/interface.c:210 src/interface.c:213
+#: src/interface.c:219 src/interface.c:222
 msgid "_Messages"
 msgstr "메세지(_M)"
 
 #. *
 #. * Create the app
 #. *
-#: src/interface.c:236
+#: src/interface.c:245
 msgid "gtranslator"
 msgstr ""
 
-#: src/interface.c:271
+#: src/gtr_dialogs.c:130 src/interface.c:280
 msgid "Search"
 msgstr "찾기"
 
-#: src/interface.c:272
+#: src/interface.c:281
 msgid "Search for a message"
 msgstr "메세지 찾기"
 
-#: src/interface.c:279
+#: src/interface.c:288
 msgid "ReSearch"
 msgstr "다시 찾기"
 
-#: src/interface.c:280
+#: src/interface.c:289
 msgid "Search again"
 msgstr "다시 찾기"
 
-#: src/interface.c:287
+#: src/interface.c:296
 msgid "Goto"
 msgstr "가기"
 
-#: src/interface.c:288
+#: src/interface.c:297
 msgid "Goto this message"
 msgstr "이 메세지로 가기"
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/interface.c:298
+#: src/interface.c:307
 msgid "F/Cat."
 msgstr "찾기/Cat."
 
-#: src/interface.c:299
+#: src/interface.c:308
 msgid "Find in the personal catalog"
 msgstr "개인 목록에서 찾습니다"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/interface.c:309
+#: src/interface.c:318
 msgid "F/Po."
 msgstr "찾기/Po."
 
-#: src/interface.c:310
+#: src/interface.c:319
 msgid "Find in the po file "
 msgstr "po파일에서 찾습니다"
 
-#: src/interface.c:321
+#: src/interface.c:330
 msgid "Compile"
 msgstr "컴파일"
 
-#: src/interface.c:322
+#: src/interface.c:331
 msgid "Compile the po-file"
 msgstr "po파일을 컴파일 합니다"
 
-#: src/interface.c:330
+#: src/interface.c:339
 msgid "Open"
 msgstr "열기"
 
-#: src/interface.c:331
+#: src/interface.c:340
 msgid "Open File"
 msgstr "파일을 엽니다"
 
-#: src/interface.c:339
+#: src/interface.c:348
 msgid "Save"
 msgstr "저장"
 
-#: src/interface.c:340
+#: src/interface.c:349
 msgid "Save File"
 msgstr "파일 저장"
 
-#: src/interface.c:348
+#: src/interface.c:357
 msgid "Save as"
 msgstr "새이름 저장"
 
-#: src/interface.c:349
+#: src/interface.c:358
 msgid "Save file as"
 msgstr "다른이름으로 파일 저장"
 
-#: src/interface.c:357
+#: src/interface.c:366
 msgid "First"
 msgstr "처음"
 
-#: src/interface.c:358
+#: src/interface.c:367
 msgid "Go to the first message"
 msgstr "첫 메세지로 가기"
 
-#: src/interface.c:366
+#: src/interface.c:375
 msgid "Back"
 msgstr "뒤로"
 
-#: src/interface.c:367
+#: src/interface.c:376
 msgid "Go one message back"
 msgstr "한 메세지 뒤로 가기"
 
-#: src/interface.c:375
+#: src/interface.c:384
 msgid "Options"
 msgstr "설정"
 
-#: src/interface.c:376
+#: src/interface.c:385
 msgid "gtranslator options"
 msgstr "gtranslator 설정"
 
-#: src/interface.c:384
+#: src/interface.c:393
 msgid "Next"
 msgstr "다음"
 
-#: src/interface.c:385
+#: src/interface.c:394
 msgid "Go one message forward"
 msgstr "다음 메세지로 가기"
 
-#: src/interface.c:393
+#: src/interface.c:402
 msgid "Last"
 msgstr "마지막"
 
-#: src/interface.c:394
+#: src/interface.c:403
 msgid "Go to the last message"
 msgstr "마지막 메세지로 가기"
 
-#: src/interface.c:402 src/interface.c:403
+#: src/interface.c:411 src/interface.c:412
 msgid "Exit"
 msgstr "종료"
 
@@ -230,21 +239,18 @@ msgstr "현재 파일 : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:86
+#: src/parse.c:135
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\" 읽기 완료, %i 줄."
 
-#.
-#. * Set up an informative status message
-#. *
-#: src/parse.c:103
-msgid "Parsing the list entries."
-msgstr "목록 항목 파싱중."
-
-#: src/parse.c:166
+#: src/parse.c:152
 msgid "Parsing has been successfull."
 msgstr "파싱 완료."
+
+#: src/header_stuff.c:17
+msgid "Error while parsing the header!"
+msgstr ""
 
 #. *
 #. * 3.1) No list, no fun
@@ -330,6 +336,35 @@ msgstr "gtranslator -- 다른 이름으로 저장.."
 #: src/gtr_dialogs.c:97
 msgid "Select your filename to which the po-file should be saved to."
 msgstr "po파일을 저장하려고 하는 파일이름을 선택하십시오"
+
+#: src/gtr_dialogs.c:122
+#, fuzzy
+msgid "gtranslator -- search-box"
+msgstr "gtranslator -- po파일 열기"
+
+#. *
+#. * Set up the information label
+#. *
+#: src/gtr_dialogs.c:128
+msgid "Enter your desired search string: "
+msgstr ""
+
+#: src/gtr_dialogs.c:194
+#, fuzzy
+msgid "GoTo message entry"
+msgstr "메세지 항목 얻을수 없슴!\n"
+
+#. *
+#. * Create the buttons, the entry & the label
+#. *
+#: src/gtr_dialogs.c:199
+msgid "Go!"
+msgstr ""
+
+#: src/gtr_dialogs.c:203
+#, fuzzy
+msgid "Goto the specified message entry."
+msgstr "첫 메세지로 가기"
 
 #: src/support.c:111 src/support.c:151
 #, c-format
@@ -599,3 +634,6 @@ msgstr "왈론어"
 #: src/languages.h:223
 msgid "Welsh"
 msgstr "웨일스어"
+
+#~ msgid "Parsing the list entries."
+#~ msgstr "목록 항목 파싱중."

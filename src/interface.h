@@ -45,9 +45,9 @@ GtkWidget *save_button, *save_as_button;
 GtkWidget *first_button,*back_button,*next_button,*last_button;
 
 /**
-* Necessary for the geometry handling :
+* Necessary for the geometry handling:
 **/
-gchar *gtranslator_geometry;
+static gchar *gtranslator_geometry=NULL;
 
 /**
 * For the status messages
@@ -58,6 +58,11 @@ gchar status[128];
 * Calls the main help for gtranslator
 **/ 
 void call_help_viewer(GtkWidget *widget,gpointer useless);
+
+/**
+* gtranslator's own exit-routine
+**/
+gint gtranslator_quit(GtkWidget *widget,gpointer useless);
 
 /**
 * The text-based callbacks

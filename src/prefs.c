@@ -55,6 +55,7 @@ void prefs_box()
 	additional_comments=gtk_text_new(NULL,NULL);
 	gtk_text_set_editable(GTK_TEXT(additional_comments),TRUE);
 	add_additional_comments=gtk_check_button_new_with_label(_("Add the additional comments to the header"));
+	save_geometry=gtk_check_button_new_with_label(_("Save gtranslator's geometry on exit & restore it on startup"));
 	warn_if_no_change=gtk_check_button_new_with_label(_("Warn me if I'm trying to save an unchanged file"));
 	warn_if_fuzzy=gtk_check_button_new_with_label(_("Warn if the .po-file contains fuzzy translations"));
 	dont_save_unchanged_files=gtk_check_button_new_with_label(_("Don't save unchanged .po-files"));
@@ -103,6 +104,10 @@ void prefs_box()
 	{
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(add_additional_comments),TRUE);
 	}
+	if(if_save_geometry==TRUE)
+	{
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(save_geometry),TRUE);
+	}
 	if(if_warn_if_fuzzy==TRUE)
         {
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(warn_if_fuzzy),TRUE);
@@ -126,7 +131,7 @@ void prefs_box()
 	/**
 	* The third page
 	**/
-	third_page=gtk_table_new(5,1,FALSE);
+	third_page=gtk_table_new(6,1,FALSE);
 	/**
 	* Sets up the languages list
 	**/
@@ -196,13 +201,15 @@ void prefs_box()
 	gtk_table_attach_defaults(GTK_TABLE(third_page),
 		add_additional_comments,0,1,0,1);
 	gtk_table_attach_defaults(GTK_TABLE(third_page),
-		warn_if_no_change,0,1,1,2);
+		save_geometry,0,1,1,2);
 	gtk_table_attach_defaults(GTK_TABLE(third_page),
-		dont_save_unchanged_files,0,1,2,3);
+		warn_if_no_change,0,1,2,3);
 	gtk_table_attach_defaults(GTK_TABLE(third_page),
-		warn_if_fuzzy,0,1,3,4);
+		dont_save_unchanged_files,0,1,3,4);
 	gtk_table_attach_defaults(GTK_TABLE(third_page),
-		use_msg_db,0,1,4,5);				
+		warn_if_fuzzy,0,1,4,5);
+	gtk_table_attach_defaults(GTK_TABLE(third_page),
+		use_msg_db,0,1,5,6);				
 	/**
 	* Add this table to the notebook of the Propertybox ..
 	**/
@@ -238,6 +245,8 @@ void prefs_box()
 	gtk_signal_connect(GTK_OBJECT(GTK_ENTRY(GTK_COMBO(lg_email)->entry)),"changed",
                 GTK_SIGNAL_FUNC(prefs_box_changed),NULL);
 	gtk_signal_connect(GTK_OBJECT(additional_comments),"changed",
+		GTK_SIGNAL_FUNC(prefs_box_changed),NULL);
+	gtk_signal_connect(GTK_OBJECT(save_geometry),"toggled",
 		GTK_SIGNAL_FUNC(prefs_box_changed),NULL);
 	gtk_signal_connect(GTK_OBJECT(dont_save_unchanged_files),"toggled",
 		GTK_SIGNAL_FUNC(prefs_box_changed),NULL);
@@ -334,6 +343,7 @@ void prefs_box_apply(GtkWidget *widget,gpointer more_useless)
 	comments=gtk_editable_get_chars(GTK_EDITABLE(additional_comments),0,gtk_text_get_length(GTK_TEXT(additional_comments)));
 	if_use_msg_db=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(use_msg_db));
 	if_add_additional_comments=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(add_additional_comments));
+	if_save_geometry=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(save_geometry));
 	if_warn_if_fuzzy=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(warn_if_fuzzy));
 	if_warn_if_no_change=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(warn_if_no_change));
 	if_dont_save_unchanged_files=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(dont_save_unchanged_files));
@@ -348,6 +358,7 @@ void prefs_box_apply(GtkWidget *widget,gpointer more_useless)
 	gnome_config_set_string("Extra/Comments",comments);
 	gnome_config_set_bool("Toggles/Use msg_db",if_use_msg_db);
 	gnome_config_set_bool("Toggles/Add comments",if_add_additional_comments);
+	gnome_config_set_bool("Toggles/Save Geometry",if_save_geometry);
 	gnome_config_set_bool("Toggles/Warn if fuzzy",if_warn_if_fuzzy);
 	gnome_config_set_bool("Toggles/Warn if no change",if_warn_if_no_change);
 	gnome_config_set_bool("Toggles/Don't save unchanged files",if_dont_save_unchanged_files);
@@ -369,6 +380,7 @@ void read_prefs()
         comments=gnome_config_get_string("Extra/Comments");
         if_use_msg_db=gnome_config_get_bool("Toggles/Use msg_db");
         if_add_additional_comments=gnome_config_get_bool("Toggles/Add comments");
+	if_save_geometry=gnome_config_get_bool("Toggles/Save Geometry");
         if_warn_if_fuzzy=gnome_config_get_bool("Toggles/Warn if fuzzy");
         if_warn_if_no_change=gnome_config_get_bool("Toggles/Warn if no change");
         if_dont_save_unchanged_files=gnome_config_get_bool("Toggles/Don't save unchanged files");
