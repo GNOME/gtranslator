@@ -1,6 +1,56 @@
-gtranslator (0.38+0.39.20010905-1) unstable; urgency=low
+gtranslator (0.39.1+0.39.2.20020119-3) unstable; urgency=low
 
-  * New upstream CVS snapshot
+  * Remove multiline strings (closes: #130382)
+
+ -- Ryan Murray <rmurray@debian.org>  Sat, 26 Jan 2002 23:39:43 -0800
+
+gtranslator (0.39.1+0.39.2.20020119-2) unstable; urgency=low
+
+  * Run configure with /bin/sh, so it works if configure is not executable.
+
+ -- Ryan Murray <rmurray@debian.org>  Sun, 20 Jan 2002 16:27:20 -0800
+
+gtranslator (0.39.1+0.39.2.20020119-1) unstable; urgency=low
+
+  * New CVS snapshot, requested by upstream
+  * Recompile for libgal19
+  * Add menu hint (closes: #121019)
+
+ -- Ryan Murray <rmurray@debian.org>  Sat, 19 Jan 2002 21:31:10 -0800
+
+gtranslator (0.39.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Use gnome-doc-tools instead of docbook-tools
+  * Change db2html calls to use gnome-db2html
+
+ -- Ryan Murray <rmurray@debian.org>  Sun,  2 Dec 2001 11:26:33 -0800
+
+gtranslator (0.39+0.39.1.20011009-2) unstable; urgency=low
+
+  * Fix build for 64-bit architectures
+  * Take upstream's fix for #117919
+
+ -- Ryan Murray <rmurray@debian.org>  Sun, 11 Nov 2001 11:28:46 -0800
+
+gtranslator (0.39+0.39.1.20011009-1) unstable; urgency=low
+
+  * New upstream CVS snapshot (closes: #117946, #116579)
+  * Update languages.c from latest cvs (closes: #114325)
+  * Change flag value from -1 to '\0' (closes: #117919)
+
+ -- Ryan Murray <rmurray@debian.org>  Fri,  9 Nov 2001 17:23:21 -0800
+
+gtranslator (0.39-2) unstable; urgency=low
+
+  * Apply upstream patch that should allow building on 64-bit archs.
+  * Recompile for libgal14
+
+ -- Ryan Murray <rmurray@debian.org>  Tue, 16 Oct 2001 23:26:38 -0700
+
+gtranslator (0.39-1) unstable; urgency=low
+
+  * New upstream release (closes: #110526)
 
  -- Ryan Murray <rmurray@debian.org>  Sat,  8 Sep 2001 01:29:58 -0700
 

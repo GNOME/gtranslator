@@ -9,7 +9,7 @@ configure: configure-stamp
 configure-stamp:
 	$(checkdir)
 
-	./configure --prefix=/usr			\
+	/bin/sh ./configure --prefix=/usr		\
 		--mandir=\$${prefix}/share/man		\
 		--infodir=\$${prefix}/share/info	\
 		--sysconfdir=/etc
@@ -53,7 +53,7 @@ clean:
 	$(checkroot)
 
 	-$(MAKE) distclean
-	-rm -rf build-stamp configure-stamp install-stamp
+	-rm -rf build-stamp configure-stamp install-stamp xml-i18n-extract xml-i18n-merge xml-i18n-update
 	-rm -rf debian/tmp
 	-rm -rf debian/files debian/substvars
 
