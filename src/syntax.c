@@ -18,6 +18,7 @@
  */
 
 #include "syntax.h"
+#include "parse.h"
 #include "preferences.h"
 
 #include <ctype.h>
@@ -366,4 +367,58 @@ GdkColor *gtranslator_syntax_get_gdk_color(ColorName name)
 	return gdk_color_copy(color);
 
 	gdk_color_free(color);
+}
+
+/*
+ * Gives us the name of the right section for the ColorValueType back.
+ */ 
+gchar *gtranslator_syntax_get_section_name(ColorValueType Type)
+{
+	gchar *section;
+	
+	switch(Type)
+	{
+		case COLOR_VALUE_FG:
+			section="fg";
+			break;
+		case COLOR_VALUE_BG:
+			section="bg";
+			break;	
+		case COLOR_VALUE_DOT_CHAR:
+			section="dot_char";
+			break;
+		case COLOR_VALUE_SELECTION:
+			section="selection";
+			break;
+		case COLOR_VALUE_HOTKEYS:
+			section="hotkeys";
+			break;
+		case COLOR_VALUE_FORMATS:
+			section="formats";
+			break;
+		case COLOR_VALUE_FIGURES:
+			section="figures";
+			break;
+		case COLOR_VALUE_PUNCTUATION:
+			section="punctuation";
+			break;
+		case COLOR_VALUE_QUOTATION:
+			section="quotation";
+			break;
+		case COLOR_VALUE_EMAIL:
+			section="email";
+			break;
+		case COLOR_VALUE_URL:
+			section="url";
+			break;
+		case COLOR_VALUE_KEYWORD:
+			section="keyword";
+			break;
+		
+		default:
+			g_warning(_("No known ColorValueType requested!"));
+			break;
+	}
+	
+	return section;
 }

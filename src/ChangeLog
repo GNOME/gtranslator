@@ -1,3 +1,13 @@
+2001-02-25  Fatih Demir	<kabalak@gtranslator.org>
+
+	* stylistics.c: Use the new function to determine the section names
+		and prepare the customization of the highlight colors.
+
+	* syntax.c/.h: Added a "gtranslator_syntax_get_section_name" function
+		which returns the section name for the given ColorValueType.
+	
+	* dialogs.c: Removed the window-icon setting function really now.
+
 2001-02-24  Fatih Demir <kabalak@gtranslator.org>
 
 	* main.c: Call the window icon setting function at the _right_ time

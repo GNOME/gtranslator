@@ -19,6 +19,7 @@
  */
 
 #include "stylistics.h"
+#include "syntax.h"
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
@@ -32,24 +33,8 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker,
 	gushort red, green, blue, alpha;
 	gchar path[23];
 	gchar *section;
-	switch(Type)
-	{
-		case COLOR_VALUE_FG:
-			section="fg";
-			break;
-		case COLOR_VALUE_BG:
-			section="bg";
-			break;	
-		case COLOR_VALUE_DOT_CHAR:
-			section="dot_char";
-			break;
-		case COLOR_VALUE_SELECTION:
-			section="selection";
-			break;	
-		default:
-			g_warning(_("No color path found!"));
-			return;
-	}
+
+	section=gtranslator_syntax_get_section_name(Type);
 	
 	gnome_color_picker_get_i16(GNOME_COLOR_PICKER(colorpicker),
 		&red, &green, &blue, &alpha);
@@ -76,24 +61,8 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 	gushort red, green, blue, alpha;
 	gchar path[23];
 	gchar *section;
-	switch(Type)
-	{
-		case COLOR_VALUE_FG:
-			section="fg";
-			break;
-		case COLOR_VALUE_BG:
-			section="bg";
-			break;	
-		case COLOR_VALUE_DOT_CHAR:
-			section="dot_char";
-			break;
-		case COLOR_VALUE_SELECTION:
-			section="selection";
-			break;	
-		default:
-			g_warning(_("No color path found!"));
-			return;
-	}
+
+	section=gtranslator_syntax_get_section_name(Type);
 	
 	/*
 	 * Restore the color values from the preferences.

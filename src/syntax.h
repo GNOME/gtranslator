@@ -21,7 +21,7 @@
 #define GTR_SYNTAX_H 1
 
 #include "gui.h"
-#include "parse.h"
+#include "stylistics.h"
 
 /*
  * GdkColors aren't as logical as natural color names I guess.
@@ -54,5 +54,10 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget);
  * Returns the requested GdkColor.
  */
 GdkColor *gtranslator_syntax_get_gdk_color(ColorName name);
+
+/*
+ * Returns the section name for the ColorValueType.
+ */
+gchar *gtranslator_syntax_get_section_name(ColorValueType Type);
 
 #endif
