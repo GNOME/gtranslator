@@ -30,7 +30,6 @@
 #include "handle-db.h"
 #include "parse-db.h"
 #include "preferences.h"
-#include "recent-files.h"
 #include "stylistics.h"
 #include "team-database.h"
 #include "team-handle.h"
