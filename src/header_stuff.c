@@ -513,7 +513,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 				    ph->tr_email, gtranslator_header_edit_changed);
 	language_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 3, _("Language:"),
-				    languages_list, ph->language,
+				    languages_list, _(ph->language),
 				    language_changed, NULL);
 	lg_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 4,

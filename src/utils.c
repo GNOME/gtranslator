@@ -18,6 +18,7 @@
  *
  */
 
+#include <config.h>
 #include "dialogs.h"
 #include "gui.h"
 #include "languages.h"
