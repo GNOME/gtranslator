@@ -26,6 +26,7 @@ nautilus_gtranslator_view_SOURCES = \
 
 nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/about.o \
+	$(srcbuild)/actions.o \
 	$(srcbuild)/color-schemes.o \
 	$(srcbuild)/dialogs.o \
 	$(srcbuild)/dnd.o \
@@ -35,6 +36,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/gui.o \
 	$(srcbuild)/header_stuff.o \
 	$(srcbuild)/history.o \
+	$(srcbuild)/message.o \
 	$(srcbuild)/nautilus-string.o \
 	$(srcbuild)/open-differently.o \
 	$(srcbuild)/parse.o \
@@ -50,6 +52,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/undo-core.o \
 	$(srcbuild)/undo.o \
 	$(srcbuild)/update.o \
+	$(srcbuild)/utils.o \
 	$(srcbuild)/vfs-handle.o \
 	$(srcbuild)/views.o
 
