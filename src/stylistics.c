@@ -48,6 +48,9 @@ gchar* get_path_from_type(ColorType Type)
 		case COLOR_BG:
 			section="bg";
 			break;
+		case COLOR_TEXT_BG:
+			section="text_bg";
+			break;
 		case COLOR_SPECIAL_CHAR:
 			section="special_char";
 			break;
@@ -308,6 +311,16 @@ void gtranslator_colors_initialize(void)
 	
 	gdk_color_parse(theme->fg,		&colors[COLOR_FG]);
 	gdk_color_parse(theme->bg,		&colors[COLOR_BG]);
+
+	/*
+	 * As the "text_bg" field isn't mandatory we've got to check it before
+	 *  acting with it.
+	 */
+	if(theme->text_bg)
+	{
+		gdk_color_parse(theme->text_bg,		&colors[COLOR_TEXT_BG]);
+	}
+	
 	gdk_color_parse(theme->special_char,	&colors[COLOR_SPECIAL_CHAR]);
 	gdk_color_parse(theme->hotkey,		&colors[COLOR_HOTKEY]);
 	gdk_color_parse(theme->c_format,	&colors[COLOR_C_FORMAT]);

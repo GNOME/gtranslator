@@ -1,3 +1,20 @@
+2001-07-18  Fatih Demir <kabalak@gtranslator.org>
+
+	* syntax.c: Integrate the "text_bg" color into the syntax insertion method.
+
+	* stylistics.c/.h: Added the new enumeration value "COLOR_TEXT_BG" and did
+		integrate it into the sources (it's for the new "text_bg" field of
+		 the GtrColorScheme).
+
+	* color-schemes.c/.h: Added "text_bg" field to the GtrColorScheme structure
+		and respected it everywhere in the code -- we don't assume any 
+		 "text_bg" occurence though -- many if's should avoid pre-"text_bg"
+		   age colorschemes crashes.
+
+	* comment.c: Stored & restore the "sane" pane position if an oversized
+		and displayable comment is shown; also made only translator
+		 comments enable the "Edit comment" button.
+
 2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
 
 	* messages-table.[c,h] (gtranslator_messages_table_update_row): New
@@ -10,7 +27,7 @@
 	* messages-table.c (messages_table_new): hook up to 
 	row selected signal of e-tree
 
-	*messages-table.c (row_selected): new function when a row
+	* messages-table.c (row_selected): new function when a row
 	is selected will set the corresponding message to be the
 	current.
 

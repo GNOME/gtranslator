@@ -43,6 +43,7 @@ typedef struct {
 
 	gchar *fg;
 	gchar *bg;
+	gchar *text_bg;
 	gchar *special_char;
 	gchar *hotkey;
 	gchar *c_format;

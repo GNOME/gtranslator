@@ -18,6 +18,7 @@
  *
  */
 
+#include "color-schemes.h"
 #include "gui.h"
 #include "parse.h"
 #include "prefs.h"
@@ -66,14 +67,15 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 	/**********************************************************************/
 	
-	GString *string=g_string_new("");
-	GdkColor *color=NULL;
+	GString 	*string=g_string_new("");
+	GdkColor 	*color=NULL;
+	GdkColor 	*text_bg_color=NULL;
 	
-	gboolean aInserted;
-	gchar specialchar;
+	gboolean 	aInserted;
+	gchar 		specialchar;
 	
-	gint cp;
-	gint z=0;
+	gint 		cp;
+	gint 		z=0;
 	
 	g_return_if_fail(textwidget!=NULL);
 
@@ -282,9 +284,21 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				break;
 		}
 
-		gtk_text_insert(GTK_TEXT(textwidget),
-			NULL, color, NULL,
-			string->str, -1);
+		/*
+		 * Load the background color for the text area -- it's not necessarily existent.
+		 */
+		text_bg_color=gtranslator_get_color_from_type(COLOR_TEXT_BG);
+
+		if(theme->text_bg)
+		{
+			gtk_text_insert(GTK_TEXT(textwidget), NULL,
+				color, text_bg_color, string->str, -1);
+		}
+		else
+		{
+			gtk_text_insert(GTK_TEXT(textwidget), NULL,
+				color, NULL, string->str, -1);
+		}
 	}
 
 	g_string_free(string, TRUE);

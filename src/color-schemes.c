@@ -124,6 +124,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 	{
 		GetData(fg, "fg");
 		GetData(bg, "bg");
+		GetData(text_bg, "text_bg");
 		GetData(special_char, "special_char");
 		GetData(hotkey, "hotkey");
 		GetData(c_format, "c_format");
@@ -169,6 +170,11 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	 */ 
 	gtranslator_config_set_string("colors/fg", theme->fg);
 	gtranslator_config_set_string("colors/bg", theme->bg);
+
+	if(theme->text_bg)
+	{
+		gtranslator_config_set_string("colors/text_bg", theme->text_bg);
+	}
 
 	/*
 	 * And all the syntax colors.
@@ -222,6 +228,7 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
 
 	theme->fg=gtranslator_config_get_string("colors/fg");
 	theme->bg=gtranslator_config_get_string("colors/bg");
+	theme->text_bg=gtranslator_config_get_string("colors/text_bg");
 	theme->special_char=gtranslator_config_get_string("colors/special_char");
 	theme->hotkey=gtranslator_config_get_string("colors/hotkey");
 	theme->c_format=gtranslator_config_get_string("colors/c_format");
@@ -341,6 +348,16 @@ void gtranslator_color_scheme_free(GtrColorScheme **scheme)
 		
 		g_free((*scheme)->fg);
 		g_free((*scheme)->bg);
+
+		/*
+		 * The "text_bg" attribute for the colorschemes is quite new, therefore
+		 *  we don't have it per default -- check for it before free'ing it.
+		 */
+		if((*scheme)->text_bg)
+		{
+			g_free((*scheme)->text_bg);
+		}
+		
 		g_free((*scheme)->special_char);
 		g_free((*scheme)->hotkey);
 		g_free((*scheme)->c_format);
@@ -382,6 +399,12 @@ GtrColorScheme *gtranslator_color_scheme_copy(GtrColorScheme *scheme)
 
 	copy->fg=g_strdup(scheme->fg);
 	copy->bg=g_strdup(scheme->bg);
+
+	if(scheme->text_bg)
+	{
+		copy->text_bg=g_strdup(scheme->text_bg);
+	}
+	
 	copy->special_char=g_strdup(scheme->special_char);
 	copy->hotkey=g_strdup(scheme->hotkey);
 	copy->c_format=g_strdup(scheme->c_format);
