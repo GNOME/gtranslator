@@ -42,7 +42,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "runtime-config.h"
-#include "save-differently.h"
+#include "save.h"
 #include "sidebar.h"
 #include "translator.h"
 #include "undo.h"

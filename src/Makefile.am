@@ -69,7 +69,7 @@ gtranslator_SOURCES = \
 	query.c query.h \
 	replace.c replace.h \
 	runtime-config.c runtime-config.h \
-	save-differently.c save-differently.h \
+	save.c save.h \
 	session.c session.h \
 	sidebar.c sidebar.h \
 	sighandling.c sighandling.h \

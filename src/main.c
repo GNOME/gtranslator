@@ -35,7 +35,7 @@
 #include "prefs.h"
 #include "query.h"
 #include "runtime-config.h"
-#include "save-differently.h"
+#include "save.h"
 #include "session.h"
 #include "sighandling.h"
 #include "translator.h"
