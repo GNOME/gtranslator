@@ -26,7 +26,6 @@
 #include "gui.h"
 #include "history.h"
 #include "nautilus-string.h"
-#include "open.h"
 #include "parse.h"
 #include "prefs.h"
 #include "utils.h"
@@ -173,7 +172,8 @@ GList *gtranslator_history_get(void)
 }
 
 /*
- * The recent menus stuff.
+ * The recent menus stuff. TODO: steal the code that works from the standard
+ * GNOME2 '~/.recently-used' file (libegg/egg-recent-*.[ch]).
  */
 void gtranslator_history_show(void)
 {
@@ -253,12 +253,7 @@ void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filenam
 {
 	GError *error = NULL;
 
-	if (!gtranslator_should_the_file_be_saved_dialog())
-		return;
-	if (po)
-		gtranslator_file_close(NULL, NULL);
-
-	if(!gtranslator_parse_main(filename, &error)) {
+	if(!gtranslator_open(filename, &error)) {
 		gnome_app_warning(GNOME_APP(gtranslator_application),
 				error->message);
 	}
@@ -342,10 +337,9 @@ void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry)
  */
 void gtranslator_history_entry_free(GtrHistoryEntry *e)
 {
-	if(e)
-	{
-		g_free(e->filename);
-		g_free(e->project_id);
-		g_free(e);
-	}
+	g_assert(e != NULL);
+
+	g_free(e->filename);
+	g_free(e->project_id);
+	g_free(e);
 }

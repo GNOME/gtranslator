@@ -79,7 +79,7 @@ void gtranslator_utils_create_gtranslator_directory(void);
 /*
  * The autosave function.
  */
-gboolean gtranslator_utils_autosave(gpointer foo_me_or_die);
+gboolean gtranslator_utils_autosave(gpointer data);
 
 /*
  * Returns whether the given file_uri's prefix is supported.

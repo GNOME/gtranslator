@@ -360,7 +360,7 @@ static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpo
 	/*
 	 * Mark file as having unsaved changes
 	 */
-	po->file_changed = TRUE;
+	current_page->po->file_changed = TRUE;
 	gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);
 	
 	gtk_widget_destroy(GTK_WIDGET(e_header));
@@ -394,7 +394,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	/*
 	 * Grab the header string
 	 */
-	if(!(headerstr = po_file_domain_header(po->gettext_po_file, NULL)))
+	if(!(headerstr = po_file_domain_header(current_page->po->gettext_po_file, NULL)))
 	{
 		GtkWidget *dialog;
 

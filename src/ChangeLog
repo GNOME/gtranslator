@@ -1,3 +1,33 @@
+2004-11-22  Ross Golder  <ross@golder.org>
+
+	* open.[ch]: Removed. Redundant.
+	* page.[ch]: Added to contain information for each notebook page open.
+	Combined the GtrDocumentView into a single GtrPage structure.
+	* Makefile.am/main.c: Removed the 'auto_translate', 'auto_learn' and
+	'export_learn_buffer' stuff - should be built into one or more non-GNOME
+	binaries.
+	* *.c: Replaced last traces of global 'po' pointer with 'current_page->po'.
+	Replaced occurrences of 'd
+	* parse.[ch]: Renamed 'gtranslator_parse_main' as 'gtranslator_open', and
+	re-implemented to add a new page to the 'notebook_widget'.
+	* dialogs.[ch] (gtranslator_should_the_file_be_saved_dialog): Made to operate
+	only on the current page. Use GTK_*_YES and GTK_*_NO instead of GTK_*_ACCEPT
+	and GTK_*_REJECT.
+	* dialogs.[ch] (gtranslator_file_dialogs_set_directory): Removed.
+	* gui.c: Removed 'document_view' (replaced in page.h by 'current_page').
+	Added global 'notebook_widget'.
+	* gui.[ch]: Replaced 'gtranslator_show_file' with
+	'gtranslator_create_main_window'.
+	* main.c: Added 'open_files' list (of GtrPages). Re-arranged execution order.
+	* main.c: Created 'show_build_information' function to make main function
+	clearer.
+	* parse.[ch]: Removed global 'autosave_source_tag' and made a per-page
+	'autosave_timeout' (member of GtrPo).
+	* parse.[ch]: Added 'GtrPo' argument to 'gtranslator_save_file' so as to be
+	specific about which file/page to save.
+	* utils.[ch]: Made 'GtrPage' the data argument for
+	'gtranslator_utils_autosave' so as to be more specific.
+	
 2004-11-09  Ross Golder  <ross@golder.org>
 
 	* Makefile.am: Removed unnecessary subdirectories, 'pixmap' and

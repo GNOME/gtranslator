@@ -28,13 +28,11 @@
 #include "bookmark.h"
 #include "dialogs.h"
 #include "find.h"
-#include "gui.h"
 #include "learn.h"
 #include "message.h"
 #include "messages-table.h"
 #include "nautilus-string.h"
-#include "open.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "replace.h"
 #include "runtime-config.h"
@@ -88,12 +86,8 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
  */
 void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 {
+	gchar *directory;
 	static GtkWidget *dialog = NULL;
-	if (!gtranslator_should_the_file_be_saved_dialog()) {
-		if (dialog)
-			gtk_widget_destroy(dialog);
-		return;
-	}
 	
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -110,7 +104,10 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 				 G_CALLBACK(gtk_widget_destroy),
 				 G_OBJECT(dialog));
 
-	gtranslator_file_dialogs_set_directory(&dialog);
+	if(current_page != NULL) {
+		directory = g_path_get_dirname(current_page->po->filename);
+		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), directory);
+	}
 	
 	/*
 	 * Make the dialog transient, gtranslator_dialog_show does not do it
@@ -125,6 +122,7 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
  */
 void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 {
+	gchar *directory;
 	static GtkWidget *dialog = NULL;
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -147,7 +145,10 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 		G_CALLBACK(gtk_widget_destroy),
 		G_OBJECT(dialog));
 
-	gtranslator_file_dialogs_set_directory(&dialog);
+	if(current_page != NULL) {
+		directory = g_path_get_dirname(current_page->po->filename);
+		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), directory);
+	}
 	
 	/*
 	 * Make the dialog transient.
@@ -161,12 +162,14 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
  *  the file or not, and returns TRUE. If neither of YES and NO was pressed,
  *   returns FALSE.
  */
-gboolean gtranslator_should_the_file_be_saved_dialog(void)
+gboolean gtranslator_should_the_file_be_saved_dialog(GtrPage *page)
 {
 	GtkWidget *dialog;
 	gint reply;
 
-	if (!po || (!po->file_changed))
+	g_assert(page != NULL);
+	g_assert(page->po != NULL);
+	if (!page->po->file_changed)
 		return TRUE;
 	dialog=gtk_message_dialog_new(
 		GTK_WINDOW(gtranslator_application),
@@ -174,27 +177,27 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 		GTK_MESSAGE_WARNING,
 		GTK_BUTTONS_NONE,
 		_("File %s\nwas changed. Save?"),
-		po->filename);
+		page->po->filename);
 	gtk_dialog_add_buttons(
 		GTK_DIALOG(dialog),
 		GTK_STOCK_CANCEL,
 		GTK_RESPONSE_CANCEL,
-		_("Don't save"),
-		GTK_RESPONSE_REJECT,
-		GTK_STOCK_SAVE,
-		GTK_RESPONSE_ACCEPT,
+		GTK_STOCK_NO,
+		GTK_RESPONSE_NO,
+		GTK_STOCK_YES,
+		GTK_RESPONSE_YES,
 		NULL);
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_CANCEL);
 
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 
-	if (reply == GTK_RESPONSE_ACCEPT) {
+	if (reply == GTK_RESPONSE_YES) {
 		gtranslator_save_current_file_dialog(NULL, NULL);
 		return TRUE;
 	}
-	if (reply == GTK_RESPONSE_REJECT) {
-		po->file_changed = FALSE;
+	if (reply == GTK_RESPONSE_NO) {
+		page->po->file_changed = FALSE;
 		return TRUE;
 	}
 	return FALSE;
@@ -233,7 +236,7 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 	/*
 	 * Get the current comment from the current message.
 	 */
-	comment=GTR_COMMENT(GTR_MSG(po->current->data)->comment);
+	comment=GTR_COMMENT(GTR_MSG(current_page->po->current->data)->comment);
 	g_return_if_fail(comment!=NULL);
 
 	/*
@@ -329,7 +332,7 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		/*
 		 * Set the label contents in the GUI.
 		 */
-		gtk_label_set_text(GTK_LABEL(document_view->comment),
+		gtk_label_set_text(GTK_LABEL(current_page->comment),
 			comment->pure_comment);
 	}
 	
@@ -356,7 +359,7 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 		GTK_MESSAGE_WARNING,
 		GTK_BUTTONS_YES_NO,
 		_("Should ALL translations from `%s' be removed?"),
-		po->filename);
+		current_page->po->filename);
 
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
 
@@ -371,45 +374,12 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 		/*
 		 * The user wanted it so, so perform the removal.
 		 */
-		gtranslator_remove_all_translations(po);
+		gtranslator_remove_all_translations(current_page->po);
 	}
 }
 
 /*
- * Set the current/last used directory up for the given file dialog.
- */
-void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
-{
-	gchar *directory;
-	
-	if(po && po->filename)
-	{
-		directory=g_path_get_dirname(po->filename);
-		gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection),
-			directory);
-	}
-	else
-	{
-		directory=gtranslator_config_get_string("informations/last_directory");
-
-		if(directory && g_file_test(directory, G_FILE_TEST_IS_DIR))
-		{
-			gtk_file_selection_complete(
-				GTK_FILE_SELECTION(*fileselection), directory);
-		}
-		else
-		{
-			directory=g_strdup(g_get_home_dir());
-			gtk_file_selection_complete(
-				GTK_FILE_SELECTION(*fileselection), directory);
-		}
-	}
-
-	g_free(directory);
-}
-
-/*
- * Store the given filename's directory for our file dialogs completion-routine.
+  * Store the given filename's directory for our file dialogs completion-routine.
  */
 void gtranslator_file_dialogs_store_directory(const gchar *filename)
 {
@@ -448,7 +418,10 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 	static GtkWidget *dialog = NULL;
 	static GtkObject *adjustment;
 	GtkWidget *spin, *label;
+	GtrPo *po;
 
+	g_assert(current_page != NULL);
+	
 	if (dialog)
 		gtk_adjustment_set_value(GTK_ADJUSTMENT(adjustment),
 					 g_list_position(po->messages,
@@ -766,7 +739,7 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		else
 		{
 			rpl=gtranslator_replace_new(findme, replaceme, FALSE, 
-				g_list_position(po->messages, po->current),
+				g_list_position(current_page->po->messages, current_page->po->current),
 				GtrPreferences.ri_comments, GtrPreferences.ri_english,
 				GtrPreferences.ri_translation);
 		}
@@ -924,7 +897,7 @@ void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 		else
 		{
 				gtk_widget_destroy(GTK_WIDGET(dialog));
-			if(!gtranslator_parse_main(uri->str, &error)) {
+			if(!gtranslator_open(uri->str, &error)) {
 				gtranslator_utils_error_dialog(error->message);
 			}
 		}
@@ -1007,7 +980,7 @@ and may contain your hard work!\n"),
 		rename(gtranslator_runtime_config->crash_filename, 
 			original_filename);
 
-		if(!gtranslator_parse_main(original_filename, &error)) {
+		if(!gtranslator_open(original_filename, &error)) {
 			gnome_app_warning(GNOME_APP(gtranslator_application),
 				error->message);
 		}
@@ -1059,7 +1032,7 @@ from your personal learn buffer?"));
 		/*
 		 * Autotranslate the missing entries.
 		 */
-		if(!gtranslator_learn_autotranslate(po, TRUE, &error))
+		if(!gtranslator_learn_autotranslate(current_page->po, TRUE, &error))
 		{
 			gnome_app_warning(GNOME_APP(gtranslator_application),
 				error->message);

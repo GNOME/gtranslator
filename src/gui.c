@@ -31,7 +31,7 @@
 #include "dialogs.h"
 #include "dnd.h"
 #include "find.h"
-#include "gui.h"
+#include "page.h"
 #include "header_stuff.h"
 #include "history.h"
 #include "learn.h"
@@ -52,12 +52,7 @@
 
 #include <gdk/gdkkeysyms.h>
 
-#include <gtk/gtkdnd.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtktogglebutton.h>
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
@@ -78,7 +73,7 @@ guint trans_box_delete_text_signal_id;
 /*
  * The widgets related to displaying the current document 
  */
-GtrDocumentView *document_view;
+GtkWidget *notebook_widget;
 
 gboolean nothing_changes;
 
@@ -117,10 +112,10 @@ void gtranslator_repack_window(void);
 /*
  * Pane positions storage variables.
  */
-static gint	table_pane_position;
+gint table_pane_position;
 
 /*
- * Creates the main gtranslator window.
+ * Creates the main gtranslator application window.
  */
 void gtranslator_create_main_window(void)
 {
@@ -140,7 +135,7 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Start with no document view
 	 */
-	document_view = NULL;
+	current_page = NULL;
 
 	/*
 	 * Create the tool bar
@@ -165,18 +160,24 @@ void gtranslator_create_main_window(void)
 	 */
 	gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);
-	
+
 	/*
 	 * Make menu hints display on the appbar
 	 */
 	gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), the_menus);
 
+	/*
+	 * Enable the default menubar/toolbar options
+	 */
 	gtranslator_actions_set_up_default();
 
+	/*
+	 * Populate the 'Files/Recent' submenu
+	 */
 	gtranslator_history_show();
 
 	/*
-	 * The callbacks list
+	 * Hook up the 'close window' callback.
 	 */
 	g_signal_connect(G_OBJECT(gtranslator_application), "delete_event",
 			 G_CALLBACK(gtranslator_quit), NULL);
@@ -193,6 +194,13 @@ void gtranslator_create_main_window(void)
 			 G_CALLBACK(gtranslator_dnd),
 			 GUINT_TO_POINTER(dnd_type));
 
+	/*
+	 * Set up the notebook widget
+	 */
+	notebook_widget = GTK_WIDGET(gtk_notebook_new());
+	gnome_app_set_contents(GNOME_APP(gtranslator_application), notebook_widget);
+	
+	gtk_widget_show_all(gtranslator_application);
 }
 
 #ifdef REDUNDANT
@@ -231,21 +239,28 @@ void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless)
 {
+	GList *pagelist;
+	GtrPage *page;
+	
 	/*
-	 * If file was changed, but user pressed Cancel, don't quit
+	 * Iterate the open files for files with changes
 	 */
-	if (!gtranslator_should_the_file_be_saved_dialog())
-		return;
+	pagelist = pages;
+	while(pagelist && pagelist->data) {
+		page = (GtrPage*)pagelist->data;
+		if(page->po->file_changed) {
+			if(!gtranslator_should_the_file_be_saved_dialog(page)) {
+				return;
+			}
+		}
+	}
 
-	if (po)
-		gtranslator_file_close(NULL, NULL);
-
-	if(GtrPreferences.show_messages_table && (document_view != NULL))
+	if(GtrPreferences.show_messages_table && (current_page != NULL))
 	{
 		/*
 		 * Get the EPaned's position offset.
 		 */
-		table_pane_position=gtk_paned_get_position(GTK_PANED(document_view->table_pane));
+		table_pane_position=gtk_paned_get_position(GTK_PANED(current_page->table_pane));
 		/*
 		 * Store the pane position in the preferences.
 		 */
@@ -300,7 +315,7 @@ void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Free our used content area variable on exit .-)
 	 */
-	g_free(document_view);
+	g_free(current_page);
 
 	/*
 	 * Shutdown the eventually (non-)initialized stuff from GnomeVFS.
@@ -322,12 +337,14 @@ void gtranslator_application_bar_update(gint pos)
 {
 	gchar 	*str, *status;
 	GtrMsg 	*msg;
+	GtrPo	*po;
 	const char *msgstr, *msgid_plural;
 	gnome_appbar_pop(GNOME_APPBAR(gtranslator_application_bar));
 
 	/*
-	 * Get the message.
+	 * Get the po file and message.
 	 */
+	po = current_page->po;
 	msg = GTR_MSG(po->current->data);
 	msgstr = po_message_msgstr(msg->message);
 	msgid_plural = po_message_msgid_plural(msg->message);
@@ -339,11 +356,11 @@ void gtranslator_application_bar_update(gint pos)
 	{
 		if(po->fuzzy>0)
 		{
-			status=g_strdup_printf(ngettext("%s [ %i Fuzzy left ]", "%s [ %i Fuzzy left ]", po->fuzzy), _("Fuzzy"), po->fuzzy);
+			status = g_strdup_printf(ngettext("%s [ %i Fuzzy left ]", "%s [ %i Fuzzy left ]", po->fuzzy), _("Fuzzy"), po->fuzzy);
 		}	
 		else
 		{
-			status=g_strdup_printf(_("%s [ No fuzzy left ]"), _("Fuzzy"));
+			status = g_strdup_printf(_("%s [ No fuzzy left ]"), _("Fuzzy"));
 			
 			/*
 			 * Also disable the corresponding button.
@@ -543,13 +560,13 @@ void gtranslator_selection_clear(GtkWidget *widget, gpointer useless)
  */
 void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 {
-	GtrMsg *msg = GTR_MSG(po->current->data);
+	GtrMsg *msg = GTR_MSG(current_page->po->current->data);
 	if (nothing_changes)
 		return;
-	if (!po->file_changed)
+	if (!current_page->po->file_changed)
 	{
-		po->file_changed = TRUE;
-		if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator/"))
+		current_page->po->file_changed = TRUE;
+		if(current_page->po->no_write_perms==FALSE||strstr(current_page->po->filename, "/.gtranslator/"))
 		{
 			gtranslator_actions_enable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
 		}
@@ -566,7 +583,7 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		     && (msg->is_fuzzy))
 		{
 		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
-			po->fuzzy--;
+			current_page->po->fuzzy--;
 			gtk_check_menu_item_set_active(
 				GTK_CHECK_MENU_ITEM(the_edit_menu[17].widget),
 				FALSE
@@ -641,7 +658,7 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 /*
  * Set up the widgets to display the given po file
  */
-void gtranslator_show_file(GtrPo *po)
+GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 {
 	GtkWidget *comments_viewport;
 	GtkWidget *vertical_box;
@@ -650,17 +667,15 @@ void gtranslator_show_file(GtrPo *po)
 	GtkWidget *original_text_scrolled_window;
 	GtkWidget *translation_text_scrolled_window;
 	
-	gchar 	*title;
-	
 	g_return_if_fail(po!=NULL);
 
 	/*
 	 * Set up a document view structure to contain the widgets related
 	 * to this file
 	 */
-	document_view = g_new0(GtrDocumentView, 1);
-	document_view->content_pane = gtk_vpaned_new();
-	document_view->table_pane = gtk_hpaned_new();
+	current_page = g_new0(GtrPage, 1);
+	current_page->content_pane = gtk_vpaned_new();
+	current_page->table_pane = gtk_hpaned_new();
 	
 	/*
 	 * Create the hpane that will hold the messages table and the current
@@ -669,7 +684,7 @@ void gtranslator_show_file(GtrPo *po)
 	 * that requires a program restart! yuk!)
 	 */
 	table_pane_position=gtranslator_config_get_int("interface/table_pane_position");
-	gtk_paned_set_position(GTK_PANED(document_view->table_pane), table_pane_position);
+	gtk_paned_set_position(GTK_PANED(current_page->table_pane), table_pane_position);
 
 	horizontal_box=gtk_hbox_new(FALSE, 1);
 
@@ -686,22 +701,22 @@ void gtranslator_show_file(GtrPo *po)
 	gtk_widget_show(comments_viewport);
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(comments_scrolled_window), comments_viewport);
 	
-	document_view->comment=gtk_label_new("");
-	gtk_container_add(GTK_CONTAINER(comments_viewport), document_view->comment);
+	current_page->comment=gtk_label_new("");
+	gtk_container_add(GTK_CONTAINER(comments_viewport), current_page->comment);
 	
-	document_view->edit_button=gtk_button_new_with_label(_("Edit comment"));
-	gtk_widget_set_sensitive(document_view->edit_button, FALSE);
-	gtk_box_pack_end(GTK_BOX(horizontal_box), document_view->edit_button,
+	current_page->edit_button=gtk_button_new_with_label(_("Edit comment"));
+	gtk_widget_set_sensitive(current_page->edit_button, FALSE);
+	gtk_box_pack_end(GTK_BOX(horizontal_box), current_page->edit_button,
 		FALSE, FALSE, 0);
 	
-	gtk_paned_set_position(GTK_PANED(document_view->content_pane), 0);
+	gtk_paned_set_position(GTK_PANED(current_page->content_pane), 0);
 
 	/*
 	 * Pack the comments pane and the main content
 	 */
 	vertical_box=gtk_vbox_new(FALSE, 0);
-	gtk_paned_pack1(GTK_PANED(document_view->content_pane), horizontal_box, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(document_view->content_pane), vertical_box, FALSE, TRUE);
+	gtk_paned_pack1(GTK_PANED(current_page->content_pane), horizontal_box, TRUE, FALSE);
+	gtk_paned_pack2(GTK_PANED(current_page->content_pane), vertical_box, FALSE, TRUE);
 	
 	/* Message string box is a vbox, containing one textview in most cases,
 	   or two in the case of a plural message */
@@ -711,8 +726,8 @@ void gtranslator_show_file(GtrPo *po)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(original_text_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	document_view->text_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(original_text_scrolled_window), document_view->text_vbox);
+	current_page->text_vbox = gtk_vbox_new(TRUE, 1);
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(original_text_scrolled_window), current_page->text_vbox);
 
 	/* Translation box is a vbox, containing one textview in most cases,
 	   or more in the case of a plural message */
@@ -721,13 +736,13 @@ void gtranslator_show_file(GtrPo *po)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(translation_text_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	document_view->trans_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(translation_text_scrolled_window), document_view->trans_vbox);
+	current_page->trans_vbox = gtk_vbox_new(TRUE, 1);
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(translation_text_scrolled_window), current_page->trans_vbox);
 
 	/*
 	 * Tie up callback for 'comments' button
 	 */
-	g_signal_connect(G_OBJECT(document_view->edit_button), "clicked",
+	g_signal_connect(G_OBJECT(current_page->edit_button), "clicked",
 			 G_CALLBACK(gtranslator_edit_comment_dialog), NULL);
 
 	/*
@@ -736,46 +751,22 @@ void gtranslator_show_file(GtrPo *po)
 	if(GtrPreferences.show_messages_table)
 	{
 		GtkWidget *messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-		document_view->messages_tree = gtranslator_messages_table_new();
-		gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), document_view->messages_tree);
+		current_page->messages_tree = gtranslator_messages_table_new();
+		gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), current_page->messages_tree);
 		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 		
-		gtk_paned_pack1(GTK_PANED(document_view->table_pane), messages_table_scrolled_window, FALSE, TRUE);
-		gtk_paned_pack2(GTK_PANED(document_view->table_pane), document_view->content_pane, FALSE, TRUE);
+		gtk_paned_pack1(GTK_PANED(current_page->table_pane), messages_table_scrolled_window, FALSE, TRUE);
+		gtk_paned_pack2(GTK_PANED(current_page->table_pane), current_page->content_pane, FALSE, TRUE);
 	}
 
 	/*
 	 * Set the main window
 	 */
 	if(GtrPreferences.show_messages_table) {
-		gtk_widget_show(document_view->table_pane);
-		gnome_app_set_contents(GNOME_APP(gtranslator_application), document_view->table_pane);
-	} else {
-		gtk_widget_show(document_view->content_pane);
-		gnome_app_set_contents(GNOME_APP(gtranslator_application), document_view->content_pane);
+		return current_page->table_pane;
 	}
-
-	/*
-	 * Set window title
-	 */
-	title=g_strdup_printf(_("gtranslator -- %s"), po->filename);
-	gtk_window_set_title(GTK_WINDOW(gtranslator_application), title);
-	g_free(title);
-
-	/*
-	 * Show the current message.
-	 */
-	gtranslator_message_show(po->current->data);
-
-	/*
-	 * Enable/disable application bar options
-	 */
-	gtranslator_application_bar_update(0);
-
-	/*
-	 * Update the recent files list.
-	 */
-	gtranslator_history_show();
+	
+	return current_page->content_pane;
 }
 
 /*
@@ -788,7 +779,7 @@ void gtranslator_update_progress_bar(void)
 	/*
 	 * Calculate the percentage.
 	 */
-	percentage = 1.0 * (po->translated / g_list_length(po->messages));
+	percentage = 1.0 * (current_page->po->translated / g_list_length(current_page->po->messages));
 
 	/*
 	 * Set the progress only if the values are reasonable.

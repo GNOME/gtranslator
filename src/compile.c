@@ -27,8 +27,7 @@
 
 #include "compile.h"
 #include "dialogs.h"
-#include "gui.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "utils_gui.h"
 
@@ -147,7 +146,8 @@ void compile(GtkWidget * widget, gpointer useless)
 	gchar 	line[128];
 	gint 	res = 1;
 	FILE 	*fs;
-	
+
+	g_assert(current_page != NULL);
 
 	/*
 	 * Check if msgfmt is available on the system.
@@ -158,15 +158,10 @@ void compile(GtkWidget * widget, gpointer useless)
 		return;
 	}
 
-	if (!po) 
-	{
-		return;
-	}
-
 	gtranslator_utils_get_compile_file_names(&test_file_name, 
 		&output_file_name, &result_file_name);
 
-	if (!gtranslator_save_file(test_file_name, &error)) {
+	if (!gtranslator_save_file(current_page->po, test_file_name, &error)) {
 		GtkWidget *dialog;
 		g_assert(error != NULL);
 		dialog = gtk_message_dialog_new(

@@ -30,8 +30,6 @@
 
 #include <libgnome/gnome-i18n.h>
 
-#include "parse.h"
-
 /*
  * The globally needed widgets
  */
@@ -41,37 +39,20 @@ extern GtkWidget *gtranslator_application_bar;
 extern GtkWidget *sidebar_pane;
 
 /*
- * This class encapsulated all the widgets related to a PO file
+ * A handle on the notebook, for parse.c to add/remove pages
  */
-typedef struct {
-	GtkWidget *content_pane;
-
-	GtkWidget *messages_table;
-	GtkWidget *messages_tree;
-	
-	GtkWidget *comment;
-	GtkWidget *edit_button;
-
-	GtkWidget *text_vbox;
-	GtkWidget *text_msgid;
-	GtkWidget *text_msgid_plural;
-	GtkWidget *trans_vbox;
-	GtkWidget *trans_msgstr[16];
-
-	GtkWidget *table_pane;
-} GtrDocumentView;
-
-extern GtrDocumentView *document_view;
+extern GtkWidget *notebook_widget;
 
 /*
- * Creates the main window ans sets up the environment.
+ * Pane positions storage variables.
+ */
+extern gint	table_pane_position;
+
+
+/*
+ * Creates the main window and sets up the environment.
  */
 void gtranslator_create_main_window(void);
-
-/*
- * Set up the widgets to display the given po file
- */
-void gtranslator_show_file(GtrPo *po);
 
 /*
  * Quits from gtranslator.

@@ -19,11 +19,9 @@
 
 #include "bookmark.h"
 #include "dialogs.h"
-#include "gui.h"
 #include "message.h"
 #include "nautilus-string.h"
-#include "open.h"
-#include "parse.h"
+#include "page.h"
 #include "preferences.h"
 #include "utils.h"
 
@@ -55,10 +53,14 @@ gchar *gtranslator_bookmark_escape(const gchar *str);
 GtrBookmark *gtranslator_bookmark_new()
 {
 	const char *header;
+	GtrPo *po;
 	GtrBookmark *bookmark = g_new0(GtrBookmark, 1);
 
-	g_return_val_if_fail(po!=NULL, NULL);
-	g_return_val_if_fail(po->filename!=NULL, NULL);
+	g_assert(current_page != NULL);
+	g_assert(current_page->po != NULL);
+	g_return_val_if_fail(current_page->po->filename!=NULL, NULL);
+	
+	po = current_page->po;
 
 	header = po_file_domain_header(po->gettext_po_file, NULL);
 	bookmark->file = g_strdup(po->filename);
@@ -207,20 +209,22 @@ gchar *gtranslator_bookmark_new_bookmark_string()
  */
 gboolean gtranslator_bookmark_open(GtrBookmark *bookmark, GError **error)
 {
+	GtrPo *po;
+	
 	g_return_val_if_fail(bookmark!=NULL,FALSE);
 	g_return_val_if_fail(bookmark->file!=NULL,FALSE);
 
 	/*
 	 * Open the po file. Handle error.
 	 */
-	if(!gtranslator_parse_main(bookmark->file, error)) {
+	if(!gtranslator_open(bookmark->file, error)) {
 		return FALSE;
 	}
 
 	/*
 	 * Only re-setup the bookmark if the po file could be opened.
 	 */
-	if(po && bookmark->position!=-1 &&
+	if(current_page->po && bookmark->position!=-1 &&
 	   g_list_length(po->messages) >= bookmark->position)
 	{
 		gtranslator_message_go_to_no(NULL, 
@@ -585,12 +589,7 @@ void gtranslator_open_file_dialog_from_bookmark(GtkWidget *widget, gchar *filena
 {
 	GError *error;
 
-	if (!gtranslator_should_the_file_be_saved_dialog())
-		return;
-	if (po)
-		gtranslator_file_close(NULL, NULL);
-
-	if(!gtranslator_parse_main(filename, &error))
+	if(!gtranslator_open(filename, &error))
 	{
 		gnome_app_warning(GNOME_APP(gtranslator_application),
 			error->message);

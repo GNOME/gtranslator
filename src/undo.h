@@ -20,6 +20,7 @@
 #ifndef GTR_UNDO_H
 #define GTR_UNDO_H 1
 
+#include <gtk/gtktextiter.h>
 
 /*
  * The primitive Undo types we do support -- direct function calls are needed

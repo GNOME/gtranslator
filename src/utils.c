@@ -302,11 +302,14 @@ void gtranslator_utils_create_gtranslator_directory()
 /*
  * The GSourceFunc for the periodic autosaving.
  */
-gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
+gboolean gtranslator_utils_autosave(gpointer data)
 {
 	GError *error = NULL;
+	GtrPo *po;
 	
 	g_return_val_if_fail(po!=NULL,FALSE);
+
+	po = (GtrPo*)data;
 
 	/*
 	 * As the file didn't change, we don't need to autosave it, but
@@ -338,12 +341,12 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 				po->filename);
 		}
 
-		gtranslator_save_file(autosave_filename, &error);
+		gtranslator_save_file(po, autosave_filename, &error);
 		g_free(autosave_filename);
 	}
 	else
 	{
-		gtranslator_save_file(po->filename, &error);
+		gtranslator_save_file(po, po->filename, &error);
 	}
 		
 	if(error != NULL) {

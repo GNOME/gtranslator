@@ -22,10 +22,9 @@
 #endif
 
 #include "actions.h"
-#include "gui.h"
 #include "menus.h"
 #include "message.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "undo.h"
 
@@ -173,6 +172,8 @@ void gtranslator_actions_set_up_file_opened(void)
  */
 void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 {
+	g_debug("Undo called");
+	
 	/*
 	 * If we have registered any internal "cleverer" Undo, run it -- else
 	 *  do what we're doing for more then one year now ,-)
@@ -183,7 +184,7 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 	}
 	else
 	{
-		gtranslator_message_show(po->current->data);
+		gtranslator_message_show(current_page->po->current->data);
 	}
 
 	gtranslator_actions_disable(ACT_UNDO);

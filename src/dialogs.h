@@ -22,6 +22,9 @@
 #define GTR_DIALOGS_H 1
 
 #include <stdio.h>
+
+#include "page.h"
+
 #include <gtk/gtkwidget.h>
 
 /*
@@ -29,12 +32,6 @@
  * and shows it. The dialog should be static or global.
  */
 void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname);
-
-/*
- * Set up the directory parts of the current po file -- or the last stored dir 
- *  or the home dir.
- */
-void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection);
 
 /*
  * Store the current file dialogs directory.
@@ -46,7 +43,7 @@ void gtranslator_file_dialogs_store_directory(const gchar *filename);
  */
 void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless);
 void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless);
-gboolean gtranslator_should_the_file_be_saved_dialog(void);
+gboolean gtranslator_should_the_file_be_saved_dialog(GtrPage *page);
 
 /*
  * The import/export dialogs for the po files.

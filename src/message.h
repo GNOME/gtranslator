@@ -21,9 +21,12 @@
 #ifndef GTR_MESSAGE_H
 #define GTR_MESSAGE_H 1
 
-#include <gtk/gtktreemodel.h>
-#include <gettext-po.h>
 #include "comment.h"
+
+#include <gtk/gtktreemodel.h>
+#include <gtk/gtkwidget.h>
+
+#include <gettext-po.h>
 
 /*
  * The different stati of the messages.

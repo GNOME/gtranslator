@@ -25,9 +25,8 @@
 
 #include "comment.h"
 #include "find.h"
-#include "gui.h"
 #include "message.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "utils.h"
 
@@ -159,15 +158,15 @@ static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
 
 	if (find_in_english && 0 == step) {
 		p = po_message_msgid(message);
-		GTR_SEARCH(p, GTK_TEXT_VIEW(document_view->text_msgid));
+		GTR_SEARCH(p, GTK_TEXT_VIEW(current_page->text_msgid));
 		p = po_message_msgid_plural(message);
-		GTR_SEARCH(p, GTK_TEXT_VIEW(document_view->text_msgid_plural));
+		GTR_SEARCH(p, GTK_TEXT_VIEW(current_page->text_msgid_plural));
 	}
 	if (find_in_translation && 1 == step) {
 		p = po_message_msgstr(message);
-		GTR_SEARCH(p, GTK_TEXT_VIEW(document_view->trans_msgstr[0]));
+		GTR_SEARCH(p, GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
 		while((p = po_message_msgstr_plural(message, i))) {
-			GTR_SEARCH(p, GTK_TEXT_VIEW(document_view->trans_msgstr[i+1]));
+			GTR_SEARCH(p, GTK_TEXT_VIEW(current_page->trans_msgstr[i+1]));
 			i++;
 		}
 	}
@@ -206,9 +205,11 @@ static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
 void gtranslator_find(GtkWidget * widget, gpointer what, gboolean find_in_comments,
 	gboolean find_in_english, gboolean find_in_translation)
 {
+	GtrPo *po;
 	gchar *error;
 	GList *begin;
 	gboolean first = FALSE;
+	po = current_page->po;
 	gtranslator_message_update();
 	if (what) {
 		if (strlen(what) == 0) {

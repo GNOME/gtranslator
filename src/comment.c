@@ -23,9 +23,8 @@
 
 #include "actions.h"
 #include "comment.h"
-#include "gui.h"
+#include "page.h"
 #include "nautilus-string.h"
-#include "parse.h"
 #include "prefs.h"
 #include "utils.h"
 
@@ -299,19 +298,19 @@ void gtranslator_comment_display(GtrComment *comment)
 		}
 	}
 
-	gtk_label_set_text(GTK_LABEL(document_view->comment), 
+	gtk_label_set_text(GTK_LABEL(current_page->comment), 
 		comment_display_str);
 
 	if((GTR_COMMENT(comment)->type & TRANSLATOR_COMMENT ||
 		GTR_COMMENT(comment)->type & SOURCE_COMMENT) &&
 		nautilus_strcasecmp(comment_display_str, " "))
 	{
-		gtk_widget_set_sensitive(document_view->edit_button, TRUE);
+		gtk_widget_set_sensitive(current_page->edit_button, TRUE);
 		gtranslator_actions_enable(ACT_COMMENT);
 	}
 	else
 	{
-		gtk_widget_set_sensitive(document_view->edit_button, FALSE);
+		gtk_widget_set_sensitive(current_page->edit_button, FALSE);
 		gtranslator_actions_disable(ACT_COMMENT);
 	}
 
@@ -323,7 +322,7 @@ void gtranslator_comment_display(GtrComment *comment)
  */
 void gtranslator_comment_hide()
 {
-	gtk_label_set_text(GTK_LABEL(document_view->comment), "");
-	gtk_widget_set_sensitive(document_view->edit_button, FALSE);
-	gtk_paned_set_position(GTK_PANED(document_view->content_pane), 0);
+	gtk_label_set_text(GTK_LABEL(current_page->comment), "");
+	gtk_widget_set_sensitive(current_page->edit_button, FALSE);
+	gtk_paned_set_position(GTK_PANED(current_page->content_pane), 0);
 }

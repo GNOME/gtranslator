@@ -27,12 +27,11 @@
 #include "actions.h"
 #include "comment.h"
 #include "dialogs.h"
-#include "gui.h"
 #include "learn.h"
 #include "menus.h"
 #include "message.h"
 #include "messages-table.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "undo.h"
 #include "utils.h"
@@ -95,11 +94,11 @@ void gtranslator_message_go_to_next_fuzzy(GtkWidget * widget, gpointer useless)
 {
 	GList *begin;
 	
-	g_return_if_fail(po != NULL);
+	g_assert(current_page != NULL);
 	
- 	begin = po->current->next;
+ 	begin = current_page->po->current->next;
 	if (!begin)
-		begin = po->messages;
+		begin = current_page->po->messages;
 	if (gtranslator_message_for_each(begin, (FEFunc)is_fuzzy, NULL) == TRUE)
 		return;
 	gnome_app_message(GNOME_APP(gtranslator_application), 
@@ -119,11 +118,11 @@ void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer us
 {
 	GList *begin;
 	
-	g_return_if_fail(po != NULL);
+	g_assert(current_page != NULL);
 
- 	begin = po->current->next;
+ 	begin = current_page->po->current->next;
 	if (!begin)
-		begin = po->messages;
+		begin = current_page->po->messages;
 	if (gtranslator_message_for_each(begin, (FEFunc)is_untranslated, NULL))
 		return;
 	gnome_app_message(GNOME_APP(gtranslator_application), 
@@ -139,22 +138,21 @@ void gtranslator_message_show(GtrMsg *msg)
 	GtkTextBuffer *buf;
 	const char *msgid, *msgid_plural, *msgstr[15];
 
-	g_assert(po != NULL);		
-	g_assert(msg != NULL);
+	g_assert(current_page != NULL);
 
 	/*
 	 * Clear up previous message widgets from the original/translated
 	 * fields
 	 */
-	while(g_list_length(GTK_BOX(document_view->text_vbox)->children) > 0) {
-		gpointer widget = GTK_BOX(document_view->text_vbox)->children->data;
+	while(g_list_length(GTK_BOX(current_page->text_vbox)->children) > 0) {
+		gpointer widget = GTK_BOX(current_page->text_vbox)->children->data;
 		gtk_widget_destroy(GTK_WIDGET(widget));
-		GTK_BOX(document_view->text_vbox)->children = GTK_BOX(document_view->text_vbox)->children->next;
+		GTK_BOX(current_page->text_vbox)->children = GTK_BOX(current_page->text_vbox)->children->next;
 	}
-	while(g_list_length(GTK_BOX(document_view->trans_vbox)->children) > 0) {
-		gpointer widget = GTK_BOX(document_view->trans_vbox)->children->data;
+	while(g_list_length(GTK_BOX(current_page->trans_vbox)->children) > 0) {
+		gpointer widget = GTK_BOX(current_page->trans_vbox)->children->data;
 		gtk_widget_destroy(GTK_WIDGET(widget));
-		GTK_BOX(document_view->text_vbox)->children = GTK_BOX(document_view->trans_vbox)->children->next;
+		GTK_BOX(current_page->text_vbox)->children = GTK_BOX(current_page->trans_vbox)->children->next;
 	}
 	
 	/*
@@ -171,8 +169,8 @@ void gtranslator_message_show(GtrMsg *msg)
 		else {
 			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 		}
-		document_view->text_msgid = gtk_text_view_new_with_buffer(buf);
-		gtk_box_pack_end(GTK_BOX(document_view->text_vbox), document_view->text_msgid, FALSE, FALSE, 0);
+		current_page->text_msgid = gtk_text_view_new_with_buffer(buf);
+		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid, FALSE, FALSE, 0);
 	}
 	msgid_plural = po_message_msgid_plural(msg->message);
 	if(msgid_plural) {
@@ -185,8 +183,8 @@ void gtranslator_message_show(GtrMsg *msg)
 		else {
 			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 		}
-		document_view->text_msgid = gtk_text_view_new_with_buffer(buf);
-		gtk_box_pack_end(GTK_BOX(document_view->text_vbox), document_view->text_msgid, FALSE, FALSE, 0);
+		current_page->text_msgid = gtk_text_view_new_with_buffer(buf);
+		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid, FALSE, FALSE, 0);
 	}
 	msgstr[0] = po_message_msgstr(msg->message);
 	
@@ -236,8 +234,13 @@ void gtranslator_message_show(GtrMsg *msg)
 
 void gtranslator_message_update(void)
 {
-	GtrMsg *msg = GTR_MSG(po->current->data);
-	if (!msg->changed)
+	GtrMsg *msg;
+	GtrPo *po;
+	
+	g_assert(current_page != NULL);
+	
+	po = current_page->po;
+	if(!(msg = GTR_MSG(po->current->data)))
 		return;
 	
 	/*
@@ -270,7 +273,12 @@ void gtranslator_message_update(void)
 
 void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 {
-	gint flag = GPOINTER_TO_INT(which);
+	GtrPo *po;
+	gint flag;
+	
+	g_assert(current_page != NULL);
+	po = current_page->po;
+	flag = GPOINTER_TO_INT(which);
 	if (nothing_changes)
 		return;
 	gtranslator_translation_changed(NULL, NULL);
@@ -295,9 +303,12 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
  */
 void gtranslator_message_go_to(GList * to_go)
 {
+	GtrPo *po;
 	static gint pos = 0;
  
 	g_return_if_fail (to_go!=NULL);
+	
+	po = current_page->po;
 	
 	gtranslator_message_update();
 	
@@ -343,27 +354,27 @@ void gtranslator_message_go_to(GList * to_go)
  */
 void gtranslator_message_go_to_first(GtkWidget  * widget, gpointer useless)
 {
-	gtranslator_message_go_to(g_list_first(po->messages));
+	gtranslator_message_go_to(g_list_first(current_page->po->messages));
 }
 
 void gtranslator_message_go_to_previous(GtkWidget  * widget, gpointer useless)
 {
-	gtranslator_message_go_to(g_list_previous(po->current));
+	gtranslator_message_go_to(g_list_previous(current_page->po->current));
 }
 
 void gtranslator_message_go_to_next(GtkWidget  * widget, gpointer useless)
 {
-	gtranslator_message_go_to(g_list_next(po->current));
+	gtranslator_message_go_to(g_list_next(current_page->po->current));
 }
 
 void gtranslator_message_go_to_last(GtkWidget  * widget, gpointer useless)
 {
-	gtranslator_message_go_to(g_list_last(po->messages));
+	gtranslator_message_go_to(g_list_last(current_page->po->messages));
 }
 
 void gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number)
 {
-	gtranslator_message_go_to(g_list_nth(po->messages, GPOINTER_TO_UINT(number)));
+	gtranslator_message_go_to(g_list_nth(current_page->po->messages, GPOINTER_TO_UINT(number)));
 }
 
 /*
@@ -426,21 +437,21 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
  */
 void gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
 {
-	g_return_if_fail(po != NULL);
+	g_assert(current_page != NULL);
 
-	msg=GTR_MSG(GTR_PO(po)->current->data);
+	msg=GTR_MSG(GTR_PO(current_page->po)->current->data);
 	g_return_if_fail(msg!=NULL);
 
 	/*
 	 * It is no longer fuzzy.
 	 */
 	gtranslator_message_status_set_fuzzy(msg, FALSE);
-	po->fuzzy--;
+	current_page->po->fuzzy--;
 	msg->status |= GTR_MSG_STATUS_STICK;
 	msg->status |= GTR_MSG_STATUS_TRANSLATED;
 	msg->changed = TRUE;
-	gtranslator_message_show(po->current->data);
-	gtranslator_update_translated_count(po);
+	gtranslator_message_show(current_page->po->current->data);
+	gtranslator_update_translated_count(current_page->po);
 	gtranslator_actions_enable(ACT_REVERT, ACT_SAVE);
 	gtranslator_translation_changed(NULL, NULL);
 	gtranslator_update_progress_bar();
@@ -481,7 +492,7 @@ void gtranslator_message_copy_to_translation(void)
 {
 	const char *msgid;
 
-	po_message_t message = GTR_MSG(po->current->data)->message;
+	po_message_t message = GTR_MSG(current_page->po->current->data)->message;
 
 	msgid = po_message_msgid(message);
 	po_message_set_msgstr(message, msgid);
@@ -492,14 +503,14 @@ void gtranslator_message_copy_to_translation(void)
  * Toggle the sticky status
  */
 void gtranslator_message_status_toggle_fuzzy(GtkWidget *widget, gpointer useless) {
-	GtrMsg *msg = GTR_MSG(po->current->data);
+	GtrMsg *msg = GTR_MSG(current_page->po->current->data);
 	if(msg->is_fuzzy) {
 		msg->is_fuzzy = FALSE;
-		po->fuzzy--;
+		current_page->po->fuzzy--;
 	}
 	else
 	{
 		msg->is_fuzzy = TRUE;
-		po->fuzzy++;
+		current_page->po->fuzzy++;
 	}
 }

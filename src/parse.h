@@ -22,9 +22,12 @@
 #define GTR_PARSE_H 1
 
 #include <stdio.h>
-#include <gtk/gtkwidget.h>
 
-#include "header_stuff.h"
+#include <gettext-po.h>
+
+#include <glib.h>
+
+#include <gtk/gtkwidget.h>
 
 typedef enum
 {
@@ -91,6 +94,11 @@ typedef struct {
 	 */
 	guint fuzzy;
 
+	/*
+	 * Autosave timeout timer
+	 */
+	guint autosave_timeout;
+
 } GtrPo;
 
 #define GTR_PO(x) ((GtrPo *)x)
@@ -116,12 +124,12 @@ gboolean gtranslator_parse_core(GtrPo *po);
 /*
  * Parse the file, and then trigger the setting up of the GUI.
  */
-gboolean gtranslator_parse_main(const gchar *po, GError **error);
+gboolean gtranslator_open(const gchar *po, GError **error);
 
 /*
  * Save the file with the given filename. Set error on failure.
  */
-gboolean gtranslator_save_file(const gchar *name, GError **error);
+gboolean gtranslator_save_file(GtrPo *po, const gchar *name, GError **error);
 
 /*
  * The parts that sets up the GUI after it's been parsed

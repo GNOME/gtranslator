@@ -20,10 +20,9 @@
 #include "actions.h"
 #include "comment.h"
 #include "find.h"
-#include "gui.h"
 #include "message.h"
 #include "nautilus-string.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "replace.h"
 #include "utils.h"
@@ -102,8 +101,8 @@ void gtranslator_replace_free(GtrReplace **replace)
 void gtranslator_replace_run(GtrReplace *replace)
 {
 	g_return_if_fail(replace!=NULL);
-	g_return_if_fail(po!=NULL);
-	g_return_if_fail(po->messages!=NULL);
+	g_return_if_fail(current_page!=NULL);
+	g_return_if_fail(current_page->po->messages!=NULL);
 
 	replaced_count=0;
 	
@@ -115,7 +114,7 @@ void gtranslator_replace_run(GtrReplace *replace)
 		 * Perform the replace actions for all messages from the first
 		 *  till the last message.
 		 */
-		g_list_foreach(po->messages, (GFunc) replace_msg, replace);
+		g_list_foreach(current_page->po->messages, (GFunc) replace_msg, replace);
 	}
 	else
 	{
@@ -124,29 +123,29 @@ void gtranslator_replace_run(GtrReplace *replace)
 		/*
 		 * Rescue the "current" po->current pointer.
 		 */
-		theoriginalchoice=po->current;
+		theoriginalchoice=current_page->po->current;
 			
 		/*
 		 * Replace till we did succeed in doing a replace, then exit this.
 		 */
-		while((po->current->next) && (replaced_count <= 0))
+		while((current_page->po->current->next) && (replaced_count <= 0))
 		{
-			g_list_foreach(po->current, (GFunc) replace_msg, replace);
-			po->current=po->current->next;
+			g_list_foreach(current_page->po->current, (GFunc) replace_msg, replace);
+			current_page->po->current=current_page->po->current->next;
 		}
 			
 		/*
 		 * Now we do go back to the status we had before the replace action;
 		 *  the po->current pointer is right now.
 		 */
-		po->current=theoriginalchoice;
+		current_page->po->current=theoriginalchoice;
 	}
 	
 	/*
 	 * Redisplay the current message to get replaces in the current message
 	 *  on the screen immediately.
 	 */
-	gtranslator_message_show(po->current->data);
+	gtranslator_message_show(current_page->po->current->data);
 
 	if(replaced_count >= 1)
 	{
@@ -154,7 +153,7 @@ void gtranslator_replace_run(GtrReplace *replace)
 		 * Enable the save routines and set the changed
 		 *  new status of the po file.
 		 */
-		po->file_changed=TRUE;
+		current_page->po->file_changed=TRUE;
 		
 		gtranslator_actions_enable(ACT_SAVE);
 	}

@@ -22,9 +22,8 @@
 #include <config.h>
 #endif
 
-#include "gui.h"
 #include "message.h"
-#include "parse.h"
+#include "page.h"
 #include "preferences.h"
 #include "session.h"
 
@@ -58,14 +57,14 @@ gint gtranslator_session_sleep(GnomeClient * client, gint phase,
 	 *  in the preferences.
 	 */
 	gtranslator_config_set_int("state/message_number", 
-			     g_list_position(po->messages, po->current));
+			     g_list_position(current_page->po->messages, current_page->po->current));
 	
 	argv[2] = NULL;
 
 	gnome_client_set_discard_command(client, 3, argv);
 
 	argv[0] = (gchar *) data;
-	argv[1] = po->filename;
+	argv[1] = current_page->po->filename;
 
 	gnome_client_set_restart_command(client, 2, argv);
 

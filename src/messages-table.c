@@ -27,11 +27,10 @@
 #endif
 
 #include "defines.h"
-#include "gui.h"
 #include "learn.h"
 #include "messages-table.h"
 #include "message.h"
-#include "parse.h"
+#include "page.h"
 #include "preferences.h"
 #include "prefs.h"
 #include "runtime-config.h"
@@ -248,13 +247,13 @@ void gtranslator_messages_table_create (void)
 	GtrMsg *msg;
 	const char *msgid, *msgstr;
 
-	g_return_if_fail(po != NULL);
+	g_return_if_fail(current_page->po != NULL);
 	g_return_if_fail(GtrPreferences.show_messages_table);
 	g_assert(messages_table == NULL);
 
-	list = po->messages;
+	list = current_page->po->messages;
 
-	model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(document_view->messages_tree)));
+	model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(current_page->messages_tree)));
 
 	read_messages_table_colors();
 
@@ -320,10 +319,10 @@ void gtranslator_messages_table_create (void)
 	}
 
 	if(GtrPreferences.collapse_all) {
-		gtk_tree_view_collapse_all(GTK_TREE_VIEW(document_view->messages_tree));
+		gtk_tree_view_collapse_all(GTK_TREE_VIEW(current_page->messages_tree));
 	}
 	else {
-		gtk_tree_view_expand_all(GTK_TREE_VIEW(document_view->messages_tree));
+		gtk_tree_view_expand_all(GTK_TREE_VIEW(current_page->messages_tree));
 	}
 }
 
@@ -335,10 +334,10 @@ void gtranslator_messages_table_update_row(GtrMsg *msg)
 	GtkTreeStore *model;
 	const char *msgid, *msgstr;
 
-	g_return_if_fail(po != NULL);
+	g_return_if_fail(current_page->po != NULL);
 	g_return_if_fail(GtrPreferences.show_messages_table);
 
-	model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(document_view->messages_tree)));
+	model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(current_page->messages_tree)));
 
 	msgid = po_message_msgid(msg->message);
 	msgstr = po_message_msgstr(msg->message);
@@ -371,12 +370,12 @@ void gtranslator_messages_table_select_row(GtrMsg *msg)
 {
 	GtkTreeSelection	*selection=NULL;
 
-	if(!po)
+	if(!current_page->po)
 	{
 		return;
 	}
 
-	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(document_view->messages_tree));
+	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(current_page->messages_tree));
 	gtk_tree_selection_select_iter(selection, &msg->iter);
 }
 
@@ -391,7 +390,7 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
   if (gtk_tree_selection_get_selected(selection, &model, &iter) == TRUE) {
     gtk_tree_model_get(model, &iter, MSG_PTR_COLUMN, &msg, -1);
     if (msg != NULL)
-      gtranslator_message_go_to(g_list_find(po->messages, msg));
+      gtranslator_message_go_to(g_list_find(current_page->po->messages, msg));
   }
 
 }

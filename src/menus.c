@@ -29,6 +29,7 @@
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
+#include "header_stuff.h"
 #include "menus.h"
 #include "message.h"
 #include "parse.h"

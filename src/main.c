@@ -25,50 +25,37 @@
 #endif
 #include <gnome.h>
 
-#include "actions.h"
-#include "bookmark.h"
+#include "config.h"
 #include "defines.h"
-#include "dialogs.h"
-#include "gui.h"
 #include "learn.h"
-#include "open.h"
-#include "parse.h"
 #include "prefs.h"
 #include "runtime-config.h"
 #include "session.h"
 #include "sighandling.h"
 #include "translator.h"
-#include "utils.h"
-#include "utils_gui.h"
 
 #include <locale.h>
 #include <libintl.h>
 
 #include <signal.h>
 
-#include <gmodule.h>
-
-#include <gconf/gconf.h>
-
-#include <gtk/gtkmain.h>
-
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-window-icon.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
 
-#include <semerkent.h>
-
 /*
  * The static variables used in the poptTable.
  */
 static gchar 	*gtranslator_geometry=NULL;
-static gchar	*learn_file=NULL;
-static gchar	*auto_translate_file=NULL;
-static gchar	*exporting_po_file=NULL;
 
-static gboolean	build_information=FALSE;
+static gboolean build_information=FALSE;
 static gboolean learn_statistics=FALSE;
+
+/*
+ * List of files that are currently open
+ */
+GSList *open_files;
 
 /*
  * gtranslator's option table.
@@ -79,32 +66,24 @@ static struct poptOption gtranslator_options[] = {
 	 	0, NULL, NULL
 	},
 	{
-		"auto-translate", 'a', POPT_ARG_STRING, &auto_translate_file,
-		0, N_("Auto translate the po file"), N_("FILENAME")
-	},
-	{
 		"build-information", 'b', POPT_ARG_NONE, &build_information,
 		0, N_("Show build specifications"), NULL
-	},
-	{
-		"export-learn-buffer", 'e', POPT_ARG_STRING, &exporting_po_file,
-		0, N_("Export learn buffer to a plain po file"), N_("PO_FILE")
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0, N_("Specify main window geometry"), N_("GEOMETRY")
 	},
-	{
-		"learn", 'l', POPT_ARG_STRING, &learn_file,
-		0, N_("Learn the file completely"), N_("FILENAME")
-	},
-	{
-		"learn-statistics", 's', POPT_ARG_NONE, &learn_statistics,
-		0, N_("Show learn buffer statistics"), NULL
-	},
 	POPT_AUTOHELP {NULL}
 };
 
+/*
+ * Internal function prototypes
+ */
+void show_build_information();
+
+/*
+ * The ubiquitous main function...
+ */
 int main(int argc, char *argv[])
 {
 	GnomeProgram    *program=NULL;
@@ -118,6 +97,8 @@ int main(int argc, char *argv[])
 
 	GError		*error=NULL;
 
+	int			i;
+	
 	/*
 	 * Initialize gettext.
 	 */ 
@@ -151,10 +132,6 @@ int main(int argc, char *argv[])
 	}
 
 	/*
-	 * Grab popt context
-	 */
-
-	/*
 	 * Initialize gtranslator within libgnomeui.
 	 */
 	setlocale(LC_ALL, "");
@@ -171,30 +148,7 @@ int main(int argc, char *argv[])
 	 */
 	if(build_information)
 	{
-		#define NICE_PRINT(x); \
-			g_print("\n\t%s\n", x);
-
-		g_print("\t\n");
-		g_print(_("gtranslator build information/specs:"));
-		g_print("\n\n");
-		g_print(_("Version and build date:"));
-		NICE_PRINT(BUILD_STRING);
-		g_print(_("Build GLib / Gtk+ / GNOME / XML versions:"));
-		NICE_PRINT(BUILD_VERSIONS);
-		g_print(_("Colorschemes directory:"));
-		NICE_PRINT(SCHEMESDIR);
-		g_print(_("Scripts directory:"));
-		NICE_PRINT(SCRIPTSDIR);
-		g_print(_("Window icon:"));
-		NICE_PRINT(WINDOW_ICON);
-		g_print(_("Own locale directory:"));
-		NICE_PRINT(DATADIR "/locale");
-		g_print(_("Default learn buffer file location:"));
-		NICE_PRINT("~/.gtranslator/umtf/personal-learn-buffer.xml");
-		g_print("\n");
-
-		#undef NICE_PRINT
-
+		show_build_information();
 		exit(1);
 	}
 
@@ -210,10 +164,7 @@ int main(int argc, char *argv[])
 	/*
 	 * Show the application window with icon.
 	 */
-	if(!auto_translate_file || !learn_file)
-	{
-		gnome_window_icon_set_default_from_file(WINDOW_ICON);
-	}
+	gnome_window_icon_set_default_from_file(WINDOW_ICON);
 
 	/*
 	 * Create our own .gtranslator directory in the user's home directory.
@@ -224,27 +175,21 @@ int main(int argc, char *argv[])
 	 * Read the translator information/data into our generally used 
 	 *  GtrTranslator structure.
 	 */
-	if(!gtranslator_translator)
-	{
-		gtranslator_translator=gtranslator_translator_new();
-	}
+	gtranslator_translator=gtranslator_translator_new();
 	
-	if(!auto_translate_file || !learn_file)
-	{
-		/*
-		 * Get the master session management client.
-		 */
-		client = gnome_master_client();
+	/*
+	 * Get the master session management client.
+	 */
+	client = gnome_master_client();
 		
-		/*
-		 * Connect the signals needed for session management.
-		 */
-		g_signal_connect(G_OBJECT(client), "save_yourself",
-				 G_CALLBACK(gtranslator_session_sleep),
-				   (gpointer) argv[0]);
-		g_signal_connect(G_OBJECT(client), "die",
-				 G_CALLBACK(gtranslator_session_die), NULL);
-	}
+	/*
+	 * Connect the signals needed for session management.
+	 */
+	g_signal_connect(G_OBJECT(client), "save_yourself",
+			 G_CALLBACK(gtranslator_session_sleep),
+			   (gpointer) argv[0]);
+	g_signal_connect(G_OBJECT(client), "die",
+			 G_CALLBACK(gtranslator_session_die), NULL);
 
 	/*
 	 * Initialize our generally used GtrRuntimeConfig structure.
@@ -254,11 +199,7 @@ int main(int argc, char *argv[])
 	/* 
 	 * Create the main app-window. 
 	 */
-	if(!auto_translate_file || !learn_file || !learn_statistics)
-	{
-		gtranslator_create_main_window();
-		gtranslator_utils_restore_geometry(gtranslator_geometry);
-	}
+	gtranslator_create_main_window();
 
 	/*
 	 * Initialize GnomeVFS right now, if needed.
@@ -266,6 +207,29 @@ int main(int argc, char *argv[])
 	if(!gnome_vfs_initialized())
 	{
 		gnome_vfs_init();
+	}
+
+	/*
+	 * Init the learn buffer and connected stuff.
+	 */
+	gtranslator_learn_init();
+
+
+	/*
+	 * Load our possibly existing bookmarks' list from our preferences
+	 *  settings - shall make easy access to problematic messages
+	 *   possible and make life faster and easier.
+	 */
+	gtranslator_bookmark_load_list();
+	gtranslator_bookmark_show_list();
+	
+	/*
+	 * Check the session client flags, and restore state if needed 
+	 */
+	flags = gnome_client_get_flags(client);
+	if(flags & GNOME_CLIENT_RESTORED)
+	{
+		gtranslator_session_restore(client);
 	}
 
 	/*
@@ -282,97 +246,6 @@ int main(int argc, char *argv[])
 		gtranslator_rescue_file_dialog();
 	}
 
-#ifdef PORT_COLORSCHEMES
-	if(!auto_translate_file || !learn_file || !learn_statistics)
-	{
-		/*
-		 * Load the applied color scheme from the prefs and check it; if it
-		 *  doesn't seem to be right apply the original default colors.
-		 */ 
-		theme=gtranslator_color_scheme_load_from_prefs();
-	
-		if(!theme)
-		{
-			gtranslator_color_scheme_restore_default();
-			theme=gtranslator_color_scheme_load_from_prefs();
-		}
-	}
-#endif
-
-	/*
-	 * Auto translate the given file argument and exit without starting the
-	 *  GUI building routines.
-	 *
-	 * TODO: Move the autolearn stuff to seperate binary tools (that aren't
-	 * linked and tightly integrated with GNOME/GUI libraries)
-	 */
-	if(auto_translate_file)
-	{
-		GtrPo *learnbuffer = NULL;
-
-		/*
-		 * Initialize learn buffer, open file and auto translate all
-		 *  possible strings.
-		 */
-
-		gtranslator_learn_init();
-		if((learnbuffer = gtranslator_parse(auto_translate_file, &error)) == NULL)
-		{
-			g_assert(error!=NULL);
-			fprintf(stderr, _("Error parsing '%s': %s"),
-				auto_translate_file, error->message);
-			g_clear_error(&error);
-			return 1;
-		}
-
-		if(!gtranslator_learn_autotranslate(learnbuffer, FALSE, &error))
-		{
-			g_assert(error!=NULL);
-			fprintf(stderr, _("Autotranslate failed: %s"),
-				error->message);
-			g_clear_error(&error);
-			return 1;
-		}
-		
-		/*
-		 * If any change has been made to the po file: save it.
-		 */
-		if(po->file_changed)
-		{
-			if(!gtranslator_save_file(auto_translate_file, &error))
-			{
-				g_assert(error!=NULL);
-				fprintf(stderr, _("Saving file failed: %s"),
-					error->message);
-				g_clear_error(&error);
-				return 1;
-			}
-		}
-
-		gtranslator_learn_shutdown();
-		
-		/*
-		 * Set up the "runtime/filename" config. key to a sane value.
-		 */
-		gtranslator_config_set_string("runtime/filename", "--- No file ---");
-
-		/*
-		 * Free all till now allocated stuff.
-		 */
-		gtranslator_translator_free(gtranslator_translator);
-		gtranslator_preferences_free();
-
-		/*
-		 * Shutdown GnomeVFS.
-		 */
-		if(gnome_vfs_initialized())
-		{
-			gnome_vfs_shutdown();
-		}
-
-		return 0;
-	}
-
 	/*
 	 * Open up the arguments as files (for now, only the first file is
 	 *  opened).
@@ -383,187 +256,53 @@ int main(int argc, char *argv[])
 	g_value_unset (&value);
 
 	args = poptGetArgs(context);
-	if (args)
+	for (i = 0; args && args[i]; i++)
 	{
 		/*
 		 * Try to open up the supported "special" gettext file types.
 		 */ 
-		if(!gtranslator_parse_main((gchar *)args[0], &error))
+		if(!gtranslator_open((gchar *)args[i], &error))
 		{
 			g_assert(error!=NULL);
 			fprintf(stderr, _("Couldn't open '%s': %s\n"),
-				(gchar *)args[0], error->message);
+				(gchar *)args[i], error->message);
 			g_clear_error(&error);
 			return 1;
 		}
 	}
 	
-	//	poptFreeContext(context);
+	poptFreeContext(context);
 
 	/*
-	 * Disable the buttons if no file is opened.
+	 * Enter main GTK loop
 	 */
-	if (!po)
-	{
-		gtranslator_actions_set_up_state_no_file();
-	}
-	
-	if(!auto_translate_file || !learn_file || !learn_statistics)
-	{
-		/*
-		 * Check the session client flags, and restore state if needed 
-		ge */
-		flags = gnome_client_get_flags(client);
-	
-		if(flags & GNOME_CLIENT_RESTORED)
-		{
-			gtranslator_session_restore(client);
-		}
-	}
-
-	/*
-	 * Init the learn buffer and connected stuff.
-	 */
-	gtranslator_learn_init();
-
-	/*
-	 * If desired, just show a small information tidbit of the learn buffer cakes.
-	 */
-	if(learn_statistics)
-	{
-		gtranslator_learn_statistics();
-		gtranslator_learn_shutdown();
-
-		gtranslator_translator_free(gtranslator_translator);
-		gtranslator_preferences_free();
-
-		if(gnome_vfs_initialized())
-		{
-			gnome_vfs_shutdown();
-		}
-
-		return 0;
-	}
-
-	/*
-	 * Check if any filename for learning was supplied and if yes, learn
-	 *  the file completely, shutdown the learn buffer & exit afterwards.
-	 */
-	if(learn_file)
-	{
-		GtrPo *learnfile = NULL;
-
-		/*
-		 * First parse the file completely.
-		 */
-		if((learnfile = gtranslator_parse(learn_file, &error)) == NULL)
-		{
-			g_assert(error!=NULL);
-			fprintf(stderr, _("Could not parse learn file '%s': %s\n"),
-				learn_file, error->message);
-			g_clear_error(&error);
-		}
-
-		/*
-		 * Now learn the file completely and then shut the
-		 *  learn system down.
-		 */
-		gtranslator_learn_po_file(learnfile);
-		gtranslator_learn_shutdown();
-
-		/*
-		 * Set up the "runtime/filename" config. key to a sane value.
-		 */
-		gtranslator_config_set_string("runtime/filename", "--- No file ---");
-
-		/*
-		 * Free all till now allocated stuff.
-		 */
-		gtranslator_translator_free(gtranslator_translator);
-		gtranslator_preferences_free();
-
-		/*
-		 * Shutdown GnomeVFS.
-		 */
-		if(gnome_vfs_initialized())
-		{
-			gnome_vfs_shutdown();
-		}
-
-		/*
-		 * As everything seemed to went fine, print out a nice
-		 *  message informing the user about the success.
-		 */
-		g_print(_("Learned file `%s' successfully for your learn buffer.\n"), learn_file);
-
-		return 0;
-	}
-	
-	/*
-	 * If we've got the task to export a learn buffer to a plain po file
-	 *  then we should do this now after all the other tasks we could have
-	 *   to have to be done (?!).
-	 */
-	if(exporting_po_file && exporting_po_file[0]!='\0')
-	{
-		gtranslator_learn_export_to_po_file(exporting_po_file);
-
-		/*
-		 * The usual free'ing orgies are now coming along...
-		 */
-		
-		gtranslator_learn_shutdown();
-
-		/*
-		 * Set up the "runtime/filename" config. key to a sane value.
-		 */
-		gtranslator_config_set_string("runtime/filename", "--- No file ---");
-
-		/*
-		 * Free all till now allocated stuff.
-		 */
-		gtranslator_translator_free(gtranslator_translator);
-		gtranslator_preferences_free();
-
-		/*
-		 * Shutdown GnomeVFS.
-		 */
-		if(gnome_vfs_initialized())
-		{
-			gnome_vfs_shutdown();
-		}
-
-		/*
-		 * Give us another small status feedback about the export.
-		 */
-		g_print(_("Exported learn buffer to file `%s'.\n"), exporting_po_file);
-
-		return 0;
-	}
-	
-	gtk_widget_show_all(gtranslator_application);
-
-#ifdef PORT_COLORSCHEMES
-	/*
-	 * Create the list of colorschemes if we are starting up in a GUI.
-	 */
-	gtranslator_color_scheme_create_schemes_list();
-
-	/*
-	 * Now do also show up the full colorschemes list in the "_Settings"
-	 *  main menu.
-	 */
-	gtranslator_color_scheme_show_list();
-#endif
-
-	/*
-	 * Load our possibly existing bookmarks' list from our preferences
-	 *  settings - shall make easy access to problematic messages
-	 *   possible and make life faster and easier.
-	 */
-	gtranslator_bookmark_load_list();
-	gtranslator_bookmark_show_list();
-	
 	gtk_main();
+	
 	return 0;
+}
+
+void show_build_information() {
+	#define NICE_PRINT(x); \
+		g_print("\n\t%s\n", x);
+
+	g_print("\t\n");
+	g_print(_("gtranslator build information/specs:"));
+	g_print("\n\n");
+	g_print(_("Version and build date:"));
+	NICE_PRINT(BUILD_STRING);
+	g_print(_("Build GLib / Gtk+ / GNOME / XML versions:"));
+	NICE_PRINT(BUILD_VERSIONS);
+	g_print(_("Colorschemes directory:"));
+	NICE_PRINT(SCHEMESDIR);
+	g_print(_("Scripts directory:"));
+	NICE_PRINT(SCRIPTSDIR);
+	g_print(_("Window icon:"));
+	NICE_PRINT(WINDOW_ICON);
+	g_print(_("Own locale directory:"));
+	NICE_PRINT(DATADIR "/locale");
+	g_print(_("Default learn buffer file location:"));
+	NICE_PRINT("~/.gtranslator/umtf/personal-learn-buffer.xml");
+	g_print("\n");
+
+	#undef NICE_PRINT
 }

@@ -38,8 +38,7 @@
 #include "message.h"
 #include "messages-table.h"
 #include "nautilus-string.h"
-#include "open.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "runtime-config.h"
 #include "translator.h"
@@ -57,12 +56,6 @@
 #include <libgnomeui/gnome-dialog-util.h>
 #include <libgnomeui/gnome-messagebox.h>
 #include <libgnomeui/gnome-uidefs.h>
-
-#include <gettext-po.h>
-
-/* Global variables */
-GtrPo *po;
-guint autosave_source_tag=1;
 
 /* Error handler stuff */
 GQuark gtranslator_parser_error_quark (void)
@@ -270,12 +263,31 @@ GtrPo *gtranslator_parse(const gchar *filename, GError **error)
 }
 
 /*
- * The main parse function. Calls 'gtranslator_parse' to set the global po.
+ * The main file opening function. Checks that the file isn't already open,
+ * and if not, opens it in a new tab.
  */
-gboolean gtranslator_parse_main(const gchar *filename, GError **error)
+gboolean gtranslator_open(const gchar *filename, GError **error)
 {
 	gchar	*base;
-
+	GList	*pagelist;
+	GtrPage	*page;
+	GtrPo	*po;
+	GtkWidget	*page_label;
+	
+	/*
+	 * Check the file isn't already open
+	 */
+	pagelist = pages;
+	while(pagelist) {
+		page = (GtrPage*)pagelist->data;
+		if(!strcmp(page->po->filename, filename)) {
+			/* Tell user and maybe active that tab */
+			g_warning("File '%s' is already open.", page->po->filename);
+			return TRUE;
+		}
+		pagelist = pagelist->next;
+	}
+	
 	/*
 	 * If the filename can't be opened, pass the error back to the caller
 	 * to handle.
@@ -284,7 +296,7 @@ gboolean gtranslator_parse_main(const gchar *filename, GError **error)
 		return FALSE;
 
 	/*
-	 * Or not a crash/temporary file, add to the history.
+	 * If not a crash/temporary file, add to the history.
 	 */
 	base = g_path_get_basename(po->filename);
 	if(nautilus_strcasecmp(base, gtranslator_runtime_config->temp_filename) || 
@@ -307,9 +319,54 @@ gboolean gtranslator_parse_main(const gchar *filename, GError **error)
 	g_free(base);
 
 	/*
-	 * Display in the GUI
+	 * Create a page to add to our list of open files
 	 */
-	gtranslator_show_file(po);
+	page = gtranslator_page_new(po);
+	g_list_append(pages, (gpointer)page);
+	
+	/*
+	 * Make this our current page
+	 */
+	current_page = page;
+	
+	/*
+	 * Create a notebook page to display it in the GUI
+	 */
+	page_label = gtk_label_new(po->filename);
+	if(GtrPreferences.show_messages_table) {
+		current_page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
+			current_page->table_pane, page_label);
+	}
+	else {
+		current_page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
+			current_page->content_pane, page_label);
+	}
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), current_page->num);
+	gtk_widget_show_all(notebook_widget);	
+	
+/* Maybe this should go in a callback from the tab taking focus */
+#ifdef HOLD_ON_A_SEC
+	/*
+	 * Set window title
+	 */
+	title=g_strdup_printf(_("gtranslator -- %s"), po->filename);
+	gtk_window_set_title(GTK_WINDOW(gtranslator_application), title);
+	g_free(title);
+
+	/*
+	 * Show the current message.
+	 */
+	gtranslator_message_show(po->current->data);
+
+	/*
+	 * Enable/disable application bar options
+	 */
+	gtranslator_application_bar_update(0);
+
+	/*
+	 * Update the recent files list.
+	 */
+	gtranslator_history_show();
 
 	/*
 	 * Iterate to the main GUI thread -- well, no locks for the GUI should
@@ -320,6 +377,8 @@ gboolean gtranslator_parse_main(const gchar *filename, GError **error)
 	{
 		gtk_main_iteration();
 	}
+
+#endif
 
 	gtranslator_actions_set_up_file_opened();
 
@@ -372,11 +431,11 @@ gboolean gtranslator_parse_main(const gchar *filename, GError **error)
 	 */
 	if(GtrPreferences.autosave)
 	{
-		autosave_source_tag=g_timeout_add(
+		po->autosave_timeout = g_timeout_add(
 			(GtrPreferences.autosave_timeout * 60000),
-			(GSourceFunc) gtranslator_utils_autosave, NULL);
+			(GSourceFunc) gtranslator_utils_autosave, po);
 	}
-	
+
 	return TRUE;
 }
 
@@ -388,13 +447,10 @@ void gtranslator_parse_the_file_from_file_dialog(GtkWidget * widget, gpointer of
 
 	gtranslator_file_dialogs_store_directory(po_file);
 
-	if(po)
-		gtranslator_file_close(NULL, NULL);
-
 	/*
 	 * Open the file via our centralized opening function.
 	 */
-	if(!gtranslator_parse_main(po_file, &error)) {
+	if(!gtranslator_open(po_file, &error)) {
 		gnome_app_warning(GNOME_APP(gtranslator_application),
 			error->message);
 	}
@@ -405,7 +461,7 @@ void gtranslator_parse_the_file_from_file_dialog(GtkWidget * widget, gpointer of
 	gtk_widget_destroy(GTK_WIDGET(of_dlg));
 }
 
-gboolean gtranslator_save_file(const gchar *name, GError **error)
+gboolean gtranslator_save_file(GtrPo *po, const gchar *name, GError **error)
 {
 	if(nautilus_istr_has_suffix(name, ".pot"))
 	{
@@ -434,7 +490,7 @@ Your file should likely be named '%s.po'."),
 	 *    equality.
 	 */
 	if((GtrPreferences.autosave && GtrPreferences.autosave_with_suffix &&
-	    	(autosave_source_tag > 1)) ||
+	    	(po->autosave_timeout > 1)) ||
 	    !nautilus_strcmp(po->filename, name))
 	{
 		gtranslator_actions_disable(ACT_SAVE);
@@ -469,7 +525,7 @@ void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 	gchar *po_file;
 	GError *error = NULL;
 	po_file = g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg)));
-	if (!gtranslator_save_file(po_file, &error)) {
+	if (!gtranslator_save_file(current_page->po, po_file, &error)) {
 		GtkWidget *dialog;
 		g_assert(error != NULL);
 		dialog = gtk_message_dialog_new(
@@ -483,8 +539,8 @@ void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 		g_clear_error(&error);
 		return;
 	}
-	g_free(po->filename);
-	po->filename = g_strdup(po_file);
+	g_free(current_page->po->filename);
+	current_page->po->filename = g_strdup(po_file);
 	gtk_widget_destroy(GTK_WIDGET(sfa_dlg));
 }
 
@@ -495,11 +551,9 @@ void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
 {
 	GError *error;
 	
-	if (!po->file_changed) {
-		return;
-	}
+	g_return_if_fail(current_page->po->file_changed);
 
-	if (!gtranslator_save_file(po->filename, &error)) {
+	if (!gtranslator_save_file(current_page->po, current_page->po->filename, &error)) {
 		GtkWidget *dialog;
 		g_assert(error != NULL);
 		dialog = gtk_message_dialog_new(
@@ -535,12 +589,14 @@ void gtranslator_po_free(GtrPo *po)
 
 void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 {
-	g_return_if_fail(po != NULL);
+	GtrPo *po;
+	
+	g_assert(current_page != NULL);
 
 	/*
 	 * If user doesn't know what to do with changed file, return
 	 */
-	if (!gtranslator_should_the_file_be_saved_dialog())
+	if (!gtranslator_should_the_file_be_saved_dialog(current_page))
 		return;
 	
 	gtranslator_po_free(po);
@@ -560,10 +616,10 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	/*
 	 * Remove the source tag and set the source tag to '1'.
 	 */
-	if(autosave_source_tag > 1)
+	if(po->autosave_timeout > 1)
 	{
-		g_source_remove(autosave_source_tag);
-		autosave_source_tag=1;
+		g_source_remove(po->autosave_timeout);
+		po->autosave_timeout = 1;
 	}
 
 	/*
@@ -578,11 +634,11 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 {
 	GError *error;
 	
-	g_assert(po != NULL);
+	g_assert(current_page != NULL);
 	
-	if (po->file_changed) {
+	if (current_page->po->file_changed) {
 		guint reply;
-		reply = gtranslator_file_revert_dialog(NULL, po->filename);
+		reply = gtranslator_file_revert_dialog(NULL, current_page->po->filename);
 		if (reply != GTK_RESPONSE_YES)
 			return;
 	}
@@ -590,13 +646,13 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 	/*
 	 * Close the file (ignore changes)
 	 */
-	po->file_changed = FALSE;
+	current_page->po->file_changed = FALSE;
 	gtranslator_file_close(NULL, NULL);
 	
 	/*
 	 * Re-open the file
 	 */
-	if(!gtranslator_parse_main(po->filename, &error))
+	if(!gtranslator_open(current_page->po->filename, &error))
 	{
 		gnome_app_warning(GNOME_APP(gtranslator_application), error->message);
 		return;
@@ -660,9 +716,9 @@ static void determine_translation_status(gpointer data, gpointer useless_stuff)
 {
 	GtrMsg *message = GTR_MSG(data);
 	if(message->status & GTR_MSG_STATUS_TRANSLATED)
-		po->translated++;
+		current_page->po->translated++;
 	if(message->status & GTR_MSG_STATUS_FUZZY)
-		po->fuzzy++;
+		current_page->po->fuzzy++;
 }
 
 /*

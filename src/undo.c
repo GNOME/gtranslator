@@ -25,8 +25,7 @@
 #include "actions.h"
 #include "comment.h"
 #include "dialogs.h"
-#include "gui.h"
-#include "parse.h"
+#include "page.h"
 #include "prefs.h"
 #include "undo.h"
 #include "utils.h"
@@ -132,7 +131,7 @@ void gtranslator_undo_run_undo()
 	g_return_if_fail(undo->position >= 0);
 	g_return_if_fail(undo->text!=NULL);
 
-	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(document_view->trans_msgstr[0]));
+	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
 	gtk_text_buffer_get_end_iter(buffer, end);
 
 	/*

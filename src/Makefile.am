@@ -15,7 +15,11 @@ INCLUDES = \
 	$(DEPRECATED_FLAGS)                                     \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"
 
-bin_PROGRAMS = gtranslator
+bin_PROGRAMS = \
+	gtranslator
+#	gtranslator-auto-translate \
+#	gtranslator-auto-learn \
+#	gtranslator-export-learn-buffer
 
 GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shell pkg-config --modversion gtk+-2.0) / $(shell pkg-config --modversion libgnomeui-2.0) / $(shell pkg-config --modversion libxml-2.0)"
 
@@ -51,7 +55,8 @@ gtranslator_SOURCES = \
 	message.c message.h \
 	messages-table.c messages-table.h \
 	nautilus-string.c nautilus-string.h \
-	parse.c	parse.h \
+	parse.c parse.h \
+	page.c page.h \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \
 	replace.c replace.h \
@@ -71,6 +76,15 @@ gtranslator_LDADD = \
 gtranslator_LDFLAGS = \
 	-Wall
 
+#gtranslator_auto_learn_SOURCES = \
+#	auto-learn.c
+#	
+#gtranslator_auto_translate_SOURCES = \
+#	auto-translate.c
+#	
+#gtranslator_export_learn_buffer_SOURCES = \
+#	export-learn-buffer.c
+#	
 #CLEANFILES = defines.h
 
 EXTRA_DIST = ChangeLog \

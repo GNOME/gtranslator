@@ -18,6 +18,7 @@
  */
 
 #include "dialogs.h"
+#include "page.h"
 #include "prefs.h"
 #include "runtime-config.h"
 #include "sighandling.h"
@@ -44,8 +45,10 @@ void gtranslator_signal_handler(int signal)
 	}	
 	signalscount = 1;
 
-	if(po && po->file_changed)
+	if(current_page && current_page->po->file_changed)
 	{
+		GtrPo *po = current_page->po;
+		
 		/*
 		 * Store the original filename into the
 		 *  preferences.
@@ -56,7 +59,7 @@ void gtranslator_signal_handler(int signal)
 		/*
 		 * Save the file under the special filename.
 		 */
-		if (!gtranslator_save_file(gtranslator_runtime_config->crash_filename,
+		if (!gtranslator_save_file(po, gtranslator_runtime_config->crash_filename,
 				&error)) {
 			g_assert(error!=NULL);
 			fprintf(stderr, _("Saving file failed: %s"),
