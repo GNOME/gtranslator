@@ -121,6 +121,7 @@ void s_box_create()
 	s_box_dlg=gtk_dialog_new();
 	gtk_window_set_title(GTK_WINDOW(s_box_dlg),_("gtranslator -- search-box"));
 	gtk_window_set_wmclass(GTK_WINDOW(s_box_dlg),"gtranslator -- search-box","gtranslator -- search-box");
+	gtk_widget_set_usize(s_box_dlg,220,90);
 	/**
 	* Set up the information label 
 	**/
@@ -193,6 +194,7 @@ void goto_dlg_create()
 	g_dlg=gtk_dialog_new();
 	gtk_window_set_title(GTK_WINDOW(g_dlg),_("GoTo message entry"));
 	gtk_window_set_wmclass(GTK_WINDOW(g_dlg),"gtranslator -- goto","gtranslator -- goto");
+	gtk_widget_set_usize(g_dlg,180,90);
 	/**
 	* Create the buttons, the entry & the label
 	**/
@@ -236,4 +238,62 @@ void goto_dlg_hide(GtkWidget *widget,gpointer useless)
 void goto_dlg(GtkWidget *widget,gpointer useless)
 {
 	goto_dlg_show();
+}
+
+void find_dialog(GtkWidget *widget,gpointer title_type)
+{
+	gchar *title;
+	/**
+	* Simply define the title via 
+	*  a given argument to the callback.
+	**/
+	switch((int)title_type)
+	{
+		case 10:
+			title=_("gtranslator -- find in the catalogue");
+			break;
+		case 11:
+			title=_("gtranslator -- find in the po-file");
+			break;
+		default:
+			title=_("gtranslator -- find");
+			break;	
+	}
+	/**
+	* Create the widgets.
+	**/
+	find_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
+	find_dlg_ok=gtk_button_new_with_label(_("Find"));
+	/**
+	* Create the dialog.
+	**/
+	find_dlg=gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(find_dlg),title);
+	gtk_window_set_wmclass(GTK_WINDOW(find_dlg),"gtranslator","gtranslator");
+	gtk_widget_set_usize(find_dlg,280,80);
+	/**
+	* .. and add the buttons.
+	**/
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(find_dlg)->action_area),find_dlg_ok);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(find_dlg)->action_area),find_dlg_cancel);
+	/**
+	* Connect the dialogs.
+	**/
+	gtk_signal_connect(GTK_OBJECT(find_dlg),"delete-event",
+		GTK_SIGNAL_FUNC(find_dialog_hide),NULL);
+	gtk_signal_connect(GTK_OBJECT(find_dlg_cancel),"clicked",
+		GTK_SIGNAL_FUNC(find_dialog_hide),NULL);
+	gtk_signal_connect(GTK_OBJECT(find_dlg_ok),"clicked",
+		NULL,NULL);
+	/**
+	* Show the widgtes and finally the box.
+	**/
+	gtk_widget_show(find_dlg_ok);
+	gtk_widget_show(find_dlg_cancel);
+	gtk_widget_show(find_dlg);
+}
+
+void find_dialog_hide(GtkWidget *widget,gpointer useless)
+{
+	gtk_widget_hide(find_dlg);
 }

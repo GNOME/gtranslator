@@ -27,6 +27,16 @@ gchar msg_messages[128];
 
 int init_msg_db()
 {
+	/**
+	* Use the defaul location if no other msg_db
+	*  has been defined.
+	**/
+	if(!msg_db)
+	{
+		gchar *temp_db;
+		sprintf(temp_db,"%s/%s",g_get_home_dir(),"msg.db");
+		msg_db=temp_db;
+	}
 	db_stream=fopen(msg_db,"r+");
 	/**
 	* Have we got a file stream ?
@@ -92,13 +102,13 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 	* Check if we've got a working 
 	* ( inited ) msg_db ?
 	**/
-	if(msg_db_inited==FALSE)
+	if(msg_db_inited!=TRUE)
 	{
 		/**
 		* Show a little warning ...
 		**/
-		g_warning(_("The msg_db `%s' seems not to be inited!\n"),msg_db);
-		return 1;
+		g_warning(_("The msg_db `%s' hasn't been inited yet!\n"),msg_db);
+			return 1;
 	}
 	else
 	{
@@ -184,7 +194,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 			**/
 			if(!g_strncasecmp(msg_messages,get_similar,4))
 			{
-				if(strstr(msg_messages,";;;"))	
+				if(strstr(msg_messages,";;;"))
 				{
 					/** TODO : CUT THEM OFF */
 				}

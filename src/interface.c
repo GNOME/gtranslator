@@ -139,9 +139,52 @@ gint gtranslator_quit(GtkWidget *widget,gpointer useless)
 		}
 	}
 	/**
+	* If the msg_db has been inited, close it.
+	**/
+	if(msg_db_inited==TRUE)
+	{
+		close_msg_db();
+	}    
+	/**
+	* Show a Good Bye!-typo message.
+	**/
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Bye bye!"));
+	/**
 	* Call the Gtk+ quit-function
 	**/
 	gtk_main_quit();
+}
+
+/**
+* Saves the entry in the msg_db.
+**/
+void append_to_msg_db(GtkWidget *widget,gpointer useless)
+{
+	/**
+	* Build two temporary gchar's.
+	**/
+	gchar *tc1=g_new(gchar,1);
+	gchar *tc2=g_new(gchar,1);
+	/**
+	* Get the text-entries.
+	**/
+	tc1=gtk_editable_get_chars(GTK_EDITABLE(trans_box), 0, gtk_text_get_length(GTK_TEXT(trans_box)));
+	tc2=gtk_editable_get_chars(GTK_EDITABLE(text1), 0, gtk_text_get_length(GTK_TEXT(text1)));
+	/**
+	* Call the msg_db-function for adding new entries.
+	**/
+	put_to_msg_db(tc2,tc1);
+	/**
+	* ... and free the gchar's, if possible.
+	**/
+	if(tc1)
+	{
+		g_free(tc1);
+	}
+	if(tc2)
+	{
+		g_free(tc2);
+	}	
 }
 
 /**
@@ -157,6 +200,7 @@ void disable_buttons()
 	gtk_widget_set_sensitive(next_button,FALSE);
 	gtk_widget_set_sensitive(last_button,FALSE);
 	gtk_widget_set_sensitive(goto_button,FALSE);
+	gtk_widget_set_sensitive(add_button,FALSE);
 	gtk_widget_set_sensitive(header_button,FALSE);
 }
 
@@ -173,6 +217,7 @@ void enable_buttons()
         gtk_widget_set_sensitive(next_button,TRUE);
         gtk_widget_set_sensitive(last_button,TRUE);
 	gtk_widget_set_sensitive(goto_button,TRUE);
+	gtk_widget_set_sensitive(add_button,TRUE);
 	gtk_widget_set_sensitive(header_button,TRUE);
 }
 
@@ -379,6 +424,25 @@ create_app1 (void)
 				_("Goto this message"),NULL,
 				tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(goto_button);
+	 /**
+        * Add a spacer element ..
+        **/
+        gtk_toolbar_append_space(GTK_TOOLBAR(search_bar));
+	/**
+	* Add an `Add'-button to the search-bar.
+	**/
+	tmp_toolbar_icon=gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_ADD);
+	add_button=gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
+				GTK_TOOLBAR_CHILD_BUTTON,
+				NULL,
+				_("Add"),
+				_("Add to the msg_db."),NULL,
+				tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(add_button);
+	 /**
+        * Add a spacer element ..
+        **/
+        gtk_toolbar_append_space(GTK_TOOLBAR(search_bar));
 	tmp_toolbar_icon=gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_BOOK_RED);
 	cat_button=gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
 				GTK_TOOLBAR_CHILD_BUTTON,
@@ -405,7 +469,6 @@ create_app1 (void)
 	* Add a spacer element ..
 	**/
 	gtk_toolbar_append_space(GTK_TOOLBAR(search_bar));
-
 	tmp_toolbar_icon=gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_INDEX);
 	header_button=gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
 					GTK_TOOLBAR_CHILD_BUTTON,
@@ -552,6 +615,12 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(search_do),(gpointer)2);
 	gtk_signal_connect(GTK_OBJECT(goto_button),"clicked",
 		GTK_SIGNAL_FUNC(goto_dlg),NULL);
+	gtk_signal_connect(GTK_OBJECT(add_button),"clicked",
+		GTK_SIGNAL_FUNC(append_to_msg_db),NULL);	
+	gtk_signal_connect(GTK_OBJECT(cat_button),"clicked",
+		GTK_SIGNAL_FUNC(find_dialog),(gpointer)10);
+	gtk_signal_connect(GTK_OBJECT(po_button),"clicked",
+		GTK_SIGNAL_FUNC(find_dialog),(gpointer)11);
 	gtk_signal_connect(GTK_OBJECT(header_button),"clicked",
 		GTK_SIGNAL_FUNC(edit_header),NULL);
 	gtk_signal_connect(GTK_OBJECT(open_button),"clicked",

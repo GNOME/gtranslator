@@ -4,8 +4,6 @@
 ## Removed the DEBUG define as it's really useless ..
 ## ------------------------------------------------------
 
-msg_db_dir = $(datadir)/gtranslator/
-
 #ifdef EMACS_LOVER
 extra_flags = -DEMACS_LOVER=2000
 #else
@@ -14,8 +12,7 @@ extra_flags =
 
 INCLUDES = $(extra_flags) \
 	-I$(top_srcdir)/intl \
-	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS) \
-	-DMSG_DB_DIR=\"$(msg_db_dir)\"
+	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS)
 
 bin_PROGRAMS = gtranslator
 

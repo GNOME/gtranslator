@@ -26,6 +26,7 @@
 #include "dnd.h"
 #include "gtr_dialogs.h"
 #include "prefs.h"
+#include "msg_db.h"
 #include "parse.h"
 
 GtkWidget *create_app1 (void);
@@ -40,7 +41,7 @@ GtkWidget *text1;
 GtkWidget *appbar1; 
 GtkWidget *search_bar;
 GtkWidget *search_button, *search_again_button, *goto_button, *goto_line_button;
-GtkWidget *compile_button;
+GtkWidget *compile_button,*add_button;
 GtkWidget *save_button, *save_as_button;
 GtkWidget *first_button,*back_button,*next_button,*last_button;
 GtkWidget *header_button;
@@ -79,7 +80,15 @@ void paste_clipboard(GtkWidget *widget,gpointer useless);
 void clear_selection(GtkWidget *widget,gpointer useless);
 void text_has_got_changed(GtkWidget *widget,gpointer useless);
 void compile(GtkWidget *widget,gpointer useless);
+/**
+* Enable/disable the buttons of the toolbars if a file is opened/
+*  closed.
+**/
 void disable_buttons();
 void enable_buttons();
+/**
+* This is a simple callback for the msg_db-adding method.
+**/
+void append_to_msg_db(GtkWidget *widget,gpointer useless);
 
 #endif // GTR_INTERFACE_H

@@ -1,3 +1,79 @@
+2000-05-30  Fatih Demir         ( kabalak@gmx.net )
+
+	+	Use a temporary gchar* as a bridging
+		
+		variable fro the msg_db location.
+
+	+	Removed the "hard-coded" msg_db stuff.
+		
+		-> msg_db.c/h
+
+	+	Removed the MSG_DB definition as it's
+		
+		now made more pratically with an option
+		
+		or in the user's dir.
+	
+		-> Makefile.am
+
+	+	Print out a string-based error message
+	
+		and not only the error number which isn't
+		
+		quite useful.
+		
+		-> parse.c
+
+	+	Set the widget sizes to be more nice, as we
+		
+		surely want to be able to read the mini-window
+		
+		titles without resizing.
+
+	+	Added a basic search dialog which is really
+		
+		poor in this state.
+		
+		-> gtr_dialogs.c/h
+
+	+	Show a little message before doing the quit.
+
+	+	Connected the additional signals for the 
+		
+		find dialog.
+
+	+	Added another button to the search-bar; an
+			
+		`Add'-button which adds the current message
+		
+		pair to the msg_db.
+
+	+	Connect the corresponding function with the
+	
+		button.
+
+	+	Free the freshly allocated gchar's.
+
+	+	Added another function which is a callback
+	    
+		function in between adding the entries to
+		    
+		the msg_db and the corresponding button.
+		
+	+	Close the msg_db on quit, if the msg_db has
+	    
+		been inited/opened.
+		    
+		-> interface.c
+
+	+	Check for the msg_db option and do some checks.
+
+        +       Init the crappy-but-self-written
+                
+                msg_db-routines on startup.
+                
+                -> main.c
+
 2000-05-28  Fatih Demir		( kabalak@gmx.net )
 
         +       Freed the filenames list and added

@@ -10,6 +10,7 @@
 **/
 
 #include "parse.h"
+#include <error.h>
 #include <errno.h>
 #include <unistd.h>
 
@@ -29,8 +30,7 @@ void check_file(FILE *stream)
 		* If there are any problems , give a
 		*  message ..
 		**/
-		g_error(_("\nThe file stream is lost! Error no. `%i'"),errno);
-		
+		g_error(_("\nThe file stream is lost!\n%s"),strerror(errno));
 	}
 }
 
@@ -126,7 +126,6 @@ void parse(gchar *po)
 			* The msgstr
 			**/
 			msg->msgstr=g_strdup(temp_char);
-			g_print("Data : %s, %s. %i\n",(gchar *)msg->msgid,(gchar *)msg->msgid,(gint)msg->pos);
 		}
 		/**
 		* If a structure is existent, free it.
@@ -192,10 +191,10 @@ gchar *search_do(GtkWidget *widget,gpointer wherefrom)
 	switch((gint)wherefrom)
 	{
 		case 1:
-			g_print("SEARCH!\n");
+			g_print("SEARCH! HAS TO BE DONE!\n");
 			break;
 		case 2:
-			g_print("RESEARCH!\n");
+			g_print("RESEARCH! HAS ALSO TO BE DONE!\n");
 			break;
 		default :
 			break;

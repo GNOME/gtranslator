@@ -21,7 +21,7 @@
 /**
 * The default msg_db location .
 **/
-static gchar *msg_db=MSG_DB_DIR "msg.db";
+static gchar *msg_db;
 
 /**
 * Defines if the msg_db is opened 

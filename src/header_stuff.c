@@ -49,11 +49,15 @@ gtr_header *new_header()
 	/**
 	* Also allocate the parts of it.
 	**/
-	/*th->prj_name=g_new(gchar,1);
+	th->prj_name=g_new(gchar,1);
 	th->prj_version=g_new(gchar,1);
 	th->pot_date=g_new(gchar,1);
 	th->po_date=g_new(gchar,1);
-	th->last_translator=g_new(gchar,1);*/
+	th->last_translator=g_new(gchar,1);
+	th->language_team=g_new(gchar,1);
+	th->mime_version=g_new(gchar,1);
+	th->mime_type=g_new(gchar,1);
+	th->encoding=g_new(gchar,1);
 		return th;
 }
 

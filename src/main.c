@@ -135,6 +135,10 @@ int main(int argc,char *argv[])
 		}
         }
 	gtk_widget_show(app1);
+        /**
+        * Init the msg_db.
+        **/
+	init_msg_db();
 	/**
 	* Is a po-file given to start with ?
 	**/

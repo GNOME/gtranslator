@@ -66,6 +66,11 @@ GtkWidget *g_dlg,*g_dlg_line;
 GtkWidget *g_dlg_ok,*g_dlg_cancel;
 
 /**
+* 8/The basical search dialog widgets
+**/
+GtkWidget *find_dlg,*find_dlg_cancel,*find_dlg_ok;
+
+/**
 * The function prototypes :
 **/
 void compile_error_dialog(GtkWidget *widget,gpointer useless);
@@ -108,5 +113,11 @@ void goto_dlg_create();
 void goto_dlg_show();
 void goto_dlg_hide(GtkWidget *widget,gpointer useless);
 void goto_dlg(GtkWidget *widget,gpointer useless);
+
+/**
+* The basical search dialog
+**/
+void find_dialog(GtkWidget *widget,gpointer title_type);
+void find_dialog_hide(GtkWidget *widget,gpointer useless);
 
 #endif // GTR_GTR_DIALOGS_H
