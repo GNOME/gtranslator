@@ -1127,7 +1127,29 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 	/* FIXME: this function is used no notify that file has changed, not
 	 * just the text, and sometimes widget==NULL */
 	if(widget)
+	{
+		gint selpos=0;
+	
+		/*
+		 * Determine if the translation box owns currently any selection.
+		 */
+		if(GTK_EDITABLE(widget)->has_selection)
+		{
+			selpos=gtk_text_get_point(GTK_TEXT(widget));
+		}
+		
 		gtranslator_syntax_update_text(widget);
+
+		/*
+		 * If there were any position from the selection we can now again go
+		 *  there.
+		 */
+		if(selpos > 0)
+		{
+			gtk_text_set_point(GTK_TEXT(widget), selpos);
+			selpos=0;
+		}
+	}
 }
 
 /* When inserting text, exchange spaces with dot chars */

@@ -351,7 +351,7 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 	if(text && text[0]!='\0')
 	{
 		gint pos=gtk_editable_get_position(GTK_EDITABLE(textwidget));
-		
+
 		gtk_text_freeze(GTK_TEXT(textwidget));
 
 		gtk_editable_delete_text(GTK_EDITABLE(textwidget), 0, -1);
