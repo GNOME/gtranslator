@@ -46,6 +46,7 @@ struct {
 	 */
 	guint match_case		: 1;
 	guint find_in			: 3;
+	guint use_learn_buffer		: 1;
 	guint show_sidebar		: 1;
 
 	/*

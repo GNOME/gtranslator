@@ -72,8 +72,9 @@ void gtranslator_free_query(GtrQuery **query);
 void gtranslator_query_gtr_msg(gpointer data, gpointer yeah);
 
 /*
- * Perform all the queries for the msgid's.
+ * Perform all the queries for the msgid's -- with supplement of the 
+ *  learn buffer if desired.
  */
-void gtranslator_query_accomplish(void);
+void gtranslator_query_accomplish(gboolean use_learn_buffer);
 
 #endif

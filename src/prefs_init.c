@@ -57,6 +57,7 @@ void gtranslator_preferences_init_default_values()
 		gtranslator_config_set_bool("toggles/do_not_save_unchanged_files", TRUE);
 		gtranslator_config_set_bool("toggles/keep_obsolete", TRUE);
 		gtranslator_config_set_bool("toggles/sweep_compile_file", FALSE);
+		gtranslator_config_set_bool("toggles/use_learn_buffer", TRUE);
 		
 		/*
 		 * GUI related default values.

@@ -1,3 +1,15 @@
+2001-07-23  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c: Implemented the extended autoaccomplishment per dialog
+		(yes, the new toggle button there is really useful .-)).
+	
+	* prefs.c/.h & prefs_init.c: Initialize, read and use the new
+		"toggles/use_learn_buffer" preference -- per default it's TRUE.
+
+	* query.c/.h: Use the learn buffer also for the autoaccomplishment
+		routine -- the "use_learn_buffer" argument is now quite
+		 important .-)
+
 2001-07-22  Fatih Demir <kabalak@gtranslator.org>
 
 	* utils.c: Language env. variables order change due to the suggestion

@@ -1110,6 +1110,8 @@ Would you like to insert it into the translation?"),
 void gtranslator_auto_accomplishment_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
+	GtkWidget *use_learn_buffer;
+	
 	gint reply;
 
 	gtranslator_raise_dialog(dialog);
@@ -1121,25 +1123,55 @@ from your default query domain?"),
 		GNOME_STOCK_BUTTON_YES,
 		GNOME_STOCK_BUTTON_NO,
 		NULL);
+	
+	/*
+	 * Determine whether the learn buffer should also be used 
+	 *  as a base for the queries.
+	 */
+	use_learn_buffer=gtk_check_button_new_with_label(
+		_("Also query the personal learn buffer"));
+
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(use_learn_buffer),
+		GtrPreferences.use_learn_buffer);
+	
+	/*
+	 * Put all this into the GnomeDialog.
+	 */
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), 
+		use_learn_buffer, FALSE, FALSE, 0);
 
 	/*
 	 * Set the default to "Yes" and show/run the dialog.
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
-	
 	gtranslator_dialog_show(&dialog, "gtranslator -- accomplish?");
 
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+	
+	/*
+	 * Read in whether the user wanted to have the learn buffer as another
+	 *  base for the queries.
+	 */
+	GtrPreferences.use_learn_buffer=gtk_toggle_button_get_active(
+			GTK_TOGGLE_BUTTON(use_learn_buffer));
 
 	/*
-	 * Only handle the "Yes" case as we do not think about the "No" case -- the
-	 *  user didn't want any accomplishment.
+	 * Only handle the "Yes" case as we do not think about the "No" case --
+	 *  the user didn't want any accomplishment.
 	 */
 	if(reply==GNOME_YES)
 	{
 		/*
-		 * Accomplish the missing entries via the new query function:
+		 * Autoaccomplish the missing entries.
 		 */
-		gtranslator_query_accomplish();
+		gtranslator_query_accomplish(GtrPreferences.use_learn_buffer);
 	}
+	
+	/*
+	 * Store the current setting in the preferences.
+	 */
+	gtranslator_config_init();
+	gtranslator_config_set_bool("toggles/use_learn_buffer", 
+		GtrPreferences.use_learn_buffer);
+	gtranslator_config_close();
 }

@@ -19,6 +19,7 @@
 
 #include "actions.h"
 #include "gui.h"
+#include "learn.h"
 #include "message.h"
 #include "prefs.h"
 #include "query.h"
@@ -226,8 +227,30 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 			 * GUI updates which should be done locally in here.
 			 */
 			po->file_changed=TRUE;
-
 			gtranslator_free_query(&matchingtranslation);
+		}
+		else if(yeah)
+		{
+			/*
+			 * Now use the the learn buffer if enabled to do 
+			 *  the personal TM query.
+			 */
+			gchar	*result;
+			
+			result=gtranslator_learn_get_learned_string(msg->msgid);
+			
+			if(result)
+			{
+				/*
+				 * Set the translation content, status etc. from the learn buffer
+				 *  query result .-)
+				 */
+				msg->msgstr=g_strdup(result);
+				msg->status |= GTR_MSG_STATUS_TRANSLATED;
+				po->file_changed=TRUE;
+				
+				GTR_FREE(result);
+			}
 		}
 	}
 }
@@ -236,9 +259,10 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
  * Simply execute the gtranslator_query_gtr_msg for every message in the
  *  po file.
  */
-void gtranslator_query_accomplish()
+void gtranslator_query_accomplish(gboolean use_learn_buffer)
 {
-	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, NULL);
+	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, 
+		GINT_TO_POINTER(use_learn_buffer));
 
 	/*
 	 * Activate the Save menu/tollbar items on changes.

@@ -604,12 +604,17 @@ void gtranslator_preferences_read(void)
 	GtrPreferences.keep_obsolete =
 		gtranslator_config_get_bool("toggles/keep_obsolete");
 
-	GtrPreferences.match_case = gtranslator_config_get_bool("find/case_sensitive");
+	GtrPreferences.use_learn_buffer = gtranslator_config_get_bool(
+		"toggles/use_learn_buffer");
+	GtrPreferences.match_case = gtranslator_config_get_bool(
+		"find/case_sensitive");
 	GtrPreferences.find_in = gtranslator_config_get_int("find/find_in");
 	gtranslator_update_regex_flags();
 	
-	GtrPreferences.fill_header = gtranslator_config_get_bool("toggles/fill_header");
-	GtrPreferences.show_sidebar = gtranslator_config_get_bool("toggles/show_sidebar");
+	GtrPreferences.fill_header = gtranslator_config_get_bool(
+		"toggles/fill_header");
+	GtrPreferences.show_sidebar = gtranslator_config_get_bool(
+		"toggles/show_sidebar");
 
 	/*
 	 * Check if we'd to use special styles.
