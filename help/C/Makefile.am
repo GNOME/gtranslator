@@ -24,14 +24,12 @@ $(gtranslator_omffile): $(gtranslator_omffile).presetup
 endif		
 
 gtranslator_htmlfiles = \
-	aa.html \
 	authors.html \
-	colorschemes.html \
-	commandlinearguments.html \
-	features.html \
+	bugs.html \
 	index.html \
-	resources.html \
-	thanks.html \
+	license.html \
+	prefs.html \
+	usage.html \
 	docbook.css
 
 if SCROLLKEEPER_PRESENT
