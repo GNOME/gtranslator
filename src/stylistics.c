@@ -1,6 +1,7 @@
 /*
  * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
+ *			Joe Man <trmetal@yahoo.com.hk>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,6 +31,8 @@
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
+
+#include <gdk/gdkx.h>
 
 gchar *get_path_from_type(ColorType Type);
 
@@ -289,7 +292,48 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	 */
 	if(GtrPreferences.use_own_fonts)
 	{
+		XFontStruct *xfs;
+		gchar* default_font;
+		gchar* join_fonts;
+		
+		
 		font=gdk_font_load(fontname);
+		
+		/**********************************************************/
+		/* for multibyte 
+		
+		   we need this header, added at top
+		   #include <gdk/gdkx.h>
+		*/
+		/*  
+		 * Is it multibyte font?
+		 */		
+		xfs = GDK_FONT_XFONT(font);
+		if (xfs->min_byte1 != 0 || xfs->max_byte1 != 0)
+		{
+  
+		    /*
+		    *  if multibyte, use orignial_font and the selected
+		    *  multibyte font to display the translated messages
+		    */
+		
+		    if(foo_us_and_spec_the_widget==1)
+		    {
+			default_font = gtranslator_config_get_string("interface/original_font");
+			join_fonts = g_strjoin(",", default_font, fontname);
+			
+			/*
+			 * This function inform
+			 * editBox to process multibyte character
+			 */
+			font = gdk_fontset_load(join_fonts);
+    
+			GTR_FREE(join_fonts);
+		    }		    
+		    
+		    
+		}
+		/*************************************************************/
 	
 		if(font)
 		{

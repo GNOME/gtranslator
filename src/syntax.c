@@ -1,6 +1,7 @@
 /*
  * (C) 2001		Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
+ *			Joe Man <trmetal@yahoo.com.hk>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -78,6 +79,21 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	gint 		cp;
 	gint 		z=0;
 	
+	
+	/**********************/
+	/*For multibyte       */
+	
+	GdkWChar* 	wc;
+	gchar* 		mb;	
+	
+	GdkWChar 	ch;
+	gint		k;
+	gint		i;
+	
+	/************************/
+	
+	
+	
 	g_return_if_fail(textwidget!=NULL);
 
 	if(!msg)
@@ -94,15 +110,81 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 		specialchar=' ';
 	}
 
+
+
+	/**********************/
+	/*
+	 *  For multibyte        
+	 */
+	
+	wc = g_new (GdkWChar, strlen(msg) + 1);	
+	gdk_mbstowcs(wc, msg, strlen(msg));	
+	
+	k = 0;
+	
+	/**********************/
 	for(cp=0; cp < strlen(msg); ++cp)
 	{
+		
 		clear_string(string);
+		
+		/*****************************************/
+		/*               
+		 *  for multibyte character
+		 */
+		
+		ch = wc[cp + 1 - k];
+		wc[cp + 1 - k] = 0;		
+		mb = gdk_wcstombs(wc + cp - k);		
+		wc[cp + 1 - k] = ch;
+		
+		/*if multibyte character, no highlight*/
+		if (mb && strlen(mb) > 1)
+		{
+		    
+		    
+		    
+		    for (i=0; i < strlen(mb); i++)
+		    {
+			append_char(string, msg[cp]);		    
+			
+			
+			cp++;
+			k++;
+		    }
+		    cp--;
+		    k--;
+		    
+		    color=NULL;
+		    text_bg_color=gtranslator_get_color_from_type(COLOR_TEXT_BG);
+
+		    if(theme->text_bg)
+		    {
+			    gtk_text_insert(GTK_TEXT(textwidget), NULL,
+				    color, text_bg_color, string->str, -1);
+		    }
+		    else
+		    {
+			    gtk_text_insert(GTK_TEXT(textwidget), NULL,
+				    color, NULL, string->str, -1);
+		    }
+		    g_free(mb);
+		    continue;
+		    
+		}
+		g_free(mb);
+		/******************************************/
+		
+		
 
 		/*
 		 * Highlight the found elements in this switch tree.
 		 */
+		
+			
 		switch(msg[cp])
 		{
+			
 			/*
 			 * Hotkeys and comment characters:
 			 */ 
@@ -303,6 +385,15 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	}
 
 	g_string_free(string, TRUE);
+
+	/*******************************/
+	/*               
+	*  for multibyte character, free the memory
+	*/
+	if (wc)
+	    g_free(wc);
+	    
+	/*******************************/
 }
 
 /*

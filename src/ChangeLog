@@ -1,5 +1,19 @@
 2001-08-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* syntax.c: Fix a small error in Joe's multibyte code .-)
+
+2001-08-17 Joe Man <trmetal@yahoo.com.hk>
+ 
+ 	* stylistics.c: Added #include <gdk/gdkx.h>
+ 		If multibyte font is detected, use orignial_font and the 
+		 selected multibyte font to display the translated messages.
+ 	
+ 	* syntax.c: If multibyte character is found, don't perform syntax 
+		highlighting, just append the multibyte character to the
+		 translated message.
+
+2001-08-17  Fatih Demir <kabalak@gtranslator.org>
+
 	* prefs_init.c: Cleaner logic during the language setting routines --
 		directly set the values for "English" if we can't get any 
 		 locale variable; also check some common values for the
