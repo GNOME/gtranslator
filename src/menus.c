@@ -108,7 +108,7 @@ GnomeUIInfo the_file_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE(N_("Recen_t files"), the_last_files_menus),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
+	GNOMEUIINFO_MENU_QUIT_ITEM(gtranslator_menu_quit_cb, NULL),
 	GNOMEUIINFO_END
 };
 

@@ -263,8 +263,10 @@ void gtranslator_create_main_window(void)
 	/*
 	 * The callbacks list
 	 */
-	g_signal_connect(G_OBJECT(gtranslator_application), "delete_event",
-			 G_CALLBACK(gtranslator_quit), NULL);
+	g_signal_connect(G_OBJECT(gtranslator_application),
+			"delete_event",
+			 G_CALLBACK(gtranslator_application_delete_event_cb),
+			 NULL);
 
 	g_signal_connect(G_OBJECT(extra_content_view->edit_button), "clicked",
 			 G_CALLBACK(gtranslator_edit_comment_dialog), NULL);
@@ -328,10 +330,33 @@ void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 }
 
 /*
+ * Callback called when the user closes the main window
+ *
+ * This callback is connected to the delete-event signal on the
+ * gtranslator GnomeApp (ie the main window) and should be called when the user
+ * closes the main window.
+ * It returns true to stop other handlers from being invoked for the event.
+ */
+gboolean gtranslator_application_delete_event_cb(GtkWidget  * widget,
+						 GdkEvent  * event,
+						 gpointer user_data)
+{
+	gtranslator_quit();
+	return TRUE;
+}
+
+/*
+ * Callback called when the user uses the quit command (^Q or Quit in the menu)
+ */
+void gtranslator_menu_quit_cb(void  * data)
+{
+	gtranslator_quit();
+}
+
+/*
  * The own quit-code
  */
-void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
-			     gpointer useless)
+void gtranslator_quit()
 {
 	/*
 	 * If file was changed, but user pressed Cancel, don't quit
