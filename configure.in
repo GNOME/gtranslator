@@ -138,6 +138,13 @@ else
 fi
 
 dnl -------------------------------------------------------------------
+dnl Test for libglade and determine the INTERFACE_DIR define.
+dnl -------------------------------------------------------------------
+AM_PATH_LIBGLADE(,,gnome)
+INTERFACE_DIR="${datadir}/gtranslator/ui"
+AC_SUBST(INTERFACE_DIR)
+
+dnl -------------------------------------------------------------------
 dnl Substitute PACKAGE_LOCALE_DIR in config.h.
 dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
@@ -241,6 +248,7 @@ data/desktop/Makefile
 data/gconf/Makefile
 data/gnome-config/gtranslatorConf.sh
 data/gnome-config/Makefile
+data/ui/Makefile
 data/mime/Makefile
 data/mime/gtranslator.keys
 data/oaf/Makefile
