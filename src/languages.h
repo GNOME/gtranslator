@@ -82,7 +82,7 @@ lang languages[] =
 	},
 	{
 		N_("Czech"), "cs", "iso-8859-2",
-		"", "8bit"
+		"cs@li.org", "8bit"
 	},
         {
 		N_("Danish"), "da", "iso-8859-1",
@@ -145,7 +145,7 @@ lang languages[] =
 		"it@li.org", "8bit"
 	},
 	{
-		N_("Irish"), "ga", "","iso-8859-1",
+		N_("Irish"), "ga", "iso-8859-1",
 		"", "8bit"
 	},
         {
