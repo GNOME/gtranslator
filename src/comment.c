@@ -18,6 +18,7 @@
  */
 
 #include "comment.h"
+#include "nautilus-string.h"
 #include "parse.h"
 
 /*
@@ -128,7 +129,7 @@ gchar *extract_pure_comment(GtrComment *comment)
 	/*
 	 * Strip the first (now last) comment type characters.
 	 */
-	pure_comment=g_strndup(temp, (strlen(temp) - 2));
+	pure_comment=g_strndup(temp, (nautilus_strlen(temp) - 2));
 	g_strreverse(pure_comment);
 
 	g_free(temp);
