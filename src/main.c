@@ -108,7 +108,7 @@ static struct poptOption gtranslator_options[] = {
 
 int main(int argc, char *argv[])
 {
-	GnomeClient 	*client;
+	GnomeClient 	*client=NULL;
 	GnomeClientFlags flags;
 	
 	poptContext 	context;
