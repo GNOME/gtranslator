@@ -88,6 +88,14 @@ void find_do(GtkWidget * widget, gpointer what)
 
 static gboolean is_fuzzy(GList *msg, gpointer useless)
 {
+	/**
+	* Check if we did get any message ..
+	**/
+	if(!(GTR_MSG(msg->data)))
+	{
+		g_warning(_("Couldn't get the message! Grrr...."));
+		return FALSE;
+	}
 	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_FUZZY) {
 		goto_given_msg(msg);
 		return TRUE;
