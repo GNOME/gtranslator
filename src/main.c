@@ -22,6 +22,9 @@
 #include "messages.h"
 #include "prefs.h"
 #include "parse-db.h"
+#include "team-handle.h"
+
+static const gchar *team_string=NULL;
 
 /**
 * The popt-options table
@@ -50,6 +53,10 @@ static struct poptOption gtranslator_options [] = {
 	{
 		"query", 'q', POPT_ARG_STRING, &query_string,
 		0, N_("Query the messages db & exit"),"QUERY_STRING"
+	},
+	{
+		"team", 't', POPT_ARG_STRING, &team_string,
+		0, N_("Team to append"),"TEAMNAME"
 	},
 	POPT_AUTOHELP {NULL}
 };
@@ -137,7 +144,7 @@ int main(int argc,char *argv[])
 		else
 		{
 			/**
-			* It should not crash, so use the example.xml file :)
+			* It should not crash, so use the example.xml file :-)
 			**/
 			parse_db_for_lang("example");
 		}
@@ -148,7 +155,12 @@ int main(int argc,char *argv[])
 		{
 			g_free(langs);
 		}	
-	}	
+	}
+	/* TEMP XXX */
+	if(team_string)
+	{
+		team_handle_new(team_string);
+	}
 	/**
         * Init the msg_db.
         **/
