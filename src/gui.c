@@ -35,6 +35,7 @@
 #include "learn.h"
 #include "menus.h"
 #include "message.h"
+#include "messages-table.h"
 #include "parse.h"
 #include "prefs.h"
 #include "sidebar.h"
@@ -50,7 +51,6 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <gtk/gtkdnd.h>
-#include <gtk/gtklabel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtktogglebutton.h>
@@ -201,7 +201,9 @@ void gtranslator_create_main_window(void)
 	if(GtrPreferences.show_sidebar)
 	{
 		gtranslator_config_init();
-		sidebar_pane_position=gtranslator_config_get_int("interface/sidebar_pane_position");
+		sidebar_pane_position=gtranslator_config_get_int(
+			"interface/sidebar_pane_position");
+		
 		gtranslator_config_close();
 	
 		e_paned_set_position(E_PANED(sidebar_pane), sidebar_pane_position);
@@ -214,7 +216,9 @@ void gtranslator_create_main_window(void)
 	if(GtrPreferences.show_content_pane)
 	{
 		gtranslator_config_init();
-		content_pane_position=gtranslator_config_get_int("interface/content_pane_position");
+		content_pane_position=gtranslator_config_get_int(
+			"interface/content_pane_position");
+		
 		gtranslator_config_close();
 
 		e_paned_set_position(E_PANED(content_pane), content_pane_position);
@@ -242,7 +246,7 @@ void gtranslator_create_main_window(void)
 		"search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 		GNOME_DOCK_TOP, 2, 0, 0);
 
-	extra_content_views=gtk_label_new("FIXME! Togglable extra-content view goes here...");
+	extra_content_views=gtranslator_messages_table_new();
 	vertical_box=gtk_vbox_new(FALSE, 0);
 	
 	e_paned_pack1(E_PANED(content_pane), extra_content_views, TRUE, FALSE);
