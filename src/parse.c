@@ -361,6 +361,19 @@ gboolean gtranslator_parse_core(void)
 				{
 					append_line(&msg->msgstr, line);
 				}
+				else if((comment_ok == FALSE) &&
+					(msgid_ok == FALSE) &&
+					(msgstr_ok == FALSE))
+				{
+					/*
+					 * This might seem to be a nonsense
+					 *  issue/check, but it occurs if a
+					 *   multiple line message features an
+					 *    empty line before the msgstr
+					 *     content parts (b.g.o #68782).
+					 */
+					continue;
+				}
 				else
 				{
 					g_assert_not_reached();
