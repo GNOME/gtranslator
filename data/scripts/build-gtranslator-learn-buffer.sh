@@ -37,7 +37,7 @@ read_po_filename ()  {
 }
 
 build_up_learn_buffer ()  {
-	for i in `find . -type f -name $po_filename`
+	for i in `find . -type f | grep $po_filename | grep -v $po_filename.`
 		do
 
 			[ -f "$i" ] && gtranslator -n -l "$i"
