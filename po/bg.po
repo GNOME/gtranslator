@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-18 14:10+0200\n"
-"PO-Revision-Date: 2005-01-18 14:07+0200\n"
+"POT-Creation-Date: 2005-01-20 15:33+0200\n"
+"PO-Revision-Date: 2005-01-20 15:32+0200\n"
 "Last-Translator: Iassen Pramatarov <turin@fsa-bg.org>\n"
-"Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
+"Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -49,7 +49,7 @@ msgstr "Отваряне на %s (%s)"
 #: src/color-schemes.c:196
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
-msgstr "Не може да бъде приложен файлът на цветовата схема `%s'!"
+msgstr "Не може да бъде приложен файлът на цветовата схема \"%s\"!"
 
 #: src/color-schemes.c:318
 msgid "Couldn't retrieve author information!"
@@ -65,7 +65,7 @@ msgstr "Неизвестно"
 
 #: src/color-schemes.c:325
 msgid "<Not Given>"
-msgstr ""
+msgstr "<Не е зададено>"
 
 #: src/color-schemes.c:472
 msgid "_View/_Colorschemes/"
@@ -124,7 +124,7 @@ msgstr "Коментар:"
 #: src/dialogs.c:361
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
-msgstr "Да бъдат ли премахнати ВСИЧКИ преводи от `%s'?"
+msgstr "Да бъдат ли премахнати ВСИЧКИ преводи от \"%s\"?"
 
 #: src/dialogs.c:434
 msgid "gtranslator -- go to"
@@ -411,11 +411,11 @@ msgstr "Дата на промяна на po файла:"
 
 #: src/header_stuff.c:502
 msgid "Report message string bugs to:"
-msgstr ""
+msgstr "Съобщаване за грешки в превода на:"
 
 #: src/header_stuff.c:516
 msgid "Generator:"
-msgstr ""
+msgstr "Генерирал:"
 
 #: src/header_stuff.c:521
 msgid "Project"
@@ -423,7 +423,7 @@ msgstr "Проект"
 
 #: src/header_stuff.c:527
 msgid "Use my options to complete the following entries:"
-msgstr "Използване на лечнети настройки за попълване на полетата:"
+msgstr "Използване на личнети настройки за попълване на полетата:"
 
 #: src/header_stuff.c:540
 msgid "Translator's name:"
@@ -608,7 +608,7 @@ msgstr "Японски"
 
 #: src/languages.c:185
 msgid "Kannada"
-msgstr "Канадски"
+msgstr "Каннада"
 
 #: src/languages.c:189
 msgid "Korean"
@@ -749,7 +749,7 @@ msgstr "Файл на обучаващата се база: `%s`"
 #: src/learn.c:389
 #, c-format
 msgid "Encoding: `%s'"
-msgstr "Кодиране: `%s'"
+msgstr "Кодиране: \"%s\""
 
 #.
 #. * Translators: "Serial number" of the learn buffer - means # of file updates.
@@ -757,7 +757,7 @@ msgstr "Кодиране: `%s'"
 #: src/learn.c:395
 #, c-format
 msgid "Serial: `%i'"
-msgstr ""
+msgstr "Сериен №: \"%i\""
 
 #.
 #. * Translators: That's the number of message entries in the learn buffer.
@@ -765,11 +765,11 @@ msgstr ""
 #: src/learn.c:401
 #, c-format
 msgid "Number of entries: `%i'"
-msgstr "Брой записи: `%i'"
+msgstr "Брой записи: \"%i\""
 
 #: src/main.c:70
 msgid "Show build specifications"
-msgstr ""
+msgstr "Показване на данни за версията"
 
 #: src/main.c:74
 msgid "Specify main window geometry"
@@ -787,7 +787,7 @@ msgstr "Грешка при зареждането на GConf: %s."
 #: src/main.c:267
 #, c-format
 msgid "Couldn't open '%s': %s\n"
-msgstr "Не може да бъде отворен '%s': %s\n"
+msgstr "Не може да бъде отворен \"%s\": %s\n"
 
 #: src/main.c:289
 msgid "gtranslator build information/specs:"
@@ -799,7 +799,7 @@ msgstr "Версия и дата на компилиране:"
 
 #: src/main.c:293
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-msgstr ""
+msgstr "Версии на GLib / Gtk+ / GNOME / XML"
 
 #: src/main.c:295
 msgid "Colorschemes directory:"
@@ -811,11 +811,11 @@ msgstr "Папка със скриптове:"
 
 #: src/main.c:299
 msgid "Window icon:"
-msgstr ""
+msgstr "Икона на основния прозорец:"
 
 #: src/main.c:301
 msgid "Own locale directory:"
-msgstr ""
+msgstr "Папка за собствените локали:"
 
 #: src/main.c:303
 msgid "Default learn buffer file location:"
@@ -1075,7 +1075,7 @@ msgstr "Замяна на низ в po файла"
 
 #: src/message.c:83
 msgid "Couldn't get the message!"
-msgstr ""
+msgstr "Низът не е открит!"
 
 #: src/message.c:105
 msgid "There are no fuzzy messages left."
@@ -1110,7 +1110,7 @@ msgstr "Изход от анализатора"
 #: src/parse.c:209
 #, c-format
 msgid "Failed opening file '%s': %s"
-msgstr "Грешка при отваряне на файла '%s': %s"
+msgstr "Грешка при отваряне на файла \"%s\": %s"
 
 #: src/parse.c:222
 msgid "Gettext returned a null message domain list."
@@ -1122,7 +1122,7 @@ msgstr "Не са получени съобщения от анализатор�
 
 #: src/parse.c:312 src/parse.c:316
 msgid "N/A"
-msgstr ""
+msgstr "Липсва"
 
 #.
 #. * Set window title
@@ -1219,7 +1219,7 @@ msgstr "Най-голям брой запомнени наскоро зареж�
 
 #: src/prefs.c:366
 msgid "Check recent files before showing in recent files list"
-msgstr ""
+msgstr "Проверка на файловете преди показването им в списъка"
 
 #.
 #. * Editor page
@@ -1234,7 +1234,7 @@ msgstr "Показване на текста"
 
 #: src/prefs.c:378
 msgid "Highlight syntax of the translation message"
-msgstr ""
+msgstr "Оцветяване на изписването на превода"
 
 #: src/prefs.c:383
 msgid "Use special character to indicate white space"
@@ -1349,7 +1349,7 @@ msgstr ""
 
 #: src/prefs.c:514
 msgid "Collapse all entries by default"
-msgstr ""
+msgstr "Свиване на списъка по подразбиране"
 
 #.
 #. * Autotranslate page
@@ -1420,12 +1420,12 @@ msgstr "^"
 #: src/save.c:116
 #, c-format
 msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "Не може да бъде запазен компилираният gettext файл `%s'!"
+msgstr "Не може да бъде запазен компилираният gettext файл \"%s\"!"
 
 #: src/save.c:159
 #, c-format
 msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "Не може да бъде запазен компресираният gettext файл `%s'!"
+msgstr "Не може да бъде запазен компресираният gettext файл \"%s\"!"
 
 #.
 #. * The %s format here stands for the used
@@ -1434,12 +1434,12 @@ msgstr "Не може да бъде запазен компресираният 
 #: src/save.c:169
 #, c-format
 msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "Не може да бъде записан gettext файлът `%s' във формат %s!"
+msgstr "Не може да бъде записан gettext файлът \"%s\" във формат %s!"
 
 #: src/save.c:227
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "Не може да бъде записан po файлът `%s' във формат zip!"
+msgstr "Не може да бъде записан po файлът \"%s\" във формат zip!"
 
 #: src/session.c:85
 msgid "Session restored successfully."
@@ -1460,12 +1460,12 @@ msgstr "Не е зададен шрифт! Използва се шрифтът 
 #.
 #: src/stylistics.c:271
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
+msgstr "-urw-nimbus mono l-medium-r-*-*-*-*-*-*-*-*-iso10646-1"
 
 #: src/utils.c:274 src/utils.c:291
 #, c-format
 msgid "Can't create directory `%s'!"
-msgstr "Не може да бъде създадена папката `%s'!"
+msgstr "Не може да бъде създадена папката \"%s\"!"
 
 #: src/utils.c:359
 #, c-format
@@ -1475,47 +1475,47 @@ msgstr "Грешка при автоматичния запис на файла:
 #: src/utils_gui.c:142
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr ""
+msgstr "Низът за геометрията \"%s\" не може да бъде анализиран!"
 
 #: src/utils_gui.c:356
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
-msgstr "Нужната програма за декомпресиране `%s' не е инсталирана!"
+msgstr "Нужната програма за декомпресиране \"%s\" не е инсталирана!"
 
 #: src/utils_gui.c:361
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
-msgstr "Нужната програма за компресиране `%s' не е инсталирана!"
+msgstr "Нужната програма за компресиране \"%s\" не е инсталирана!"
 
 #: src/vfs-handle.c:121
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
-msgstr "Не може да бъде създадена временната папка `%s'!"
+msgstr "Не може да бъде създадена временната папка \"%s\"!"
 
 #: src/vfs-handle.c:149
 #, c-format
 msgid "File `%s' couldn't be found!"
-msgstr "Файлът `%s' не може да бъде намерен!"
+msgstr "Файлът \"%s\" не може да бъде намерен!"
 
 #: src/vfs-handle.c:154
 #, c-format
 msgid "Malformed URI `%s' entered!"
-msgstr "Въведен е грешен URI `%s'!"
+msgstr "Въведен е грешен URI \"%s\"!"
 
 #: src/vfs-handle.c:159
 #, c-format
 msgid "Host `%s' couldn't be found!"
-msgstr "Адресът `%s' не може да бъде намерен!"
+msgstr "Адресът \"%s\" не може да бъде намерен!"
 
 #: src/vfs-handle.c:164
 #, c-format
 msgid "Hostname `%s' is not valid!"
-msgstr "Името `%s' е невалидно!"
+msgstr "Името \"%s\" е невалидно!"
 
 #: src/vfs-handle.c:169
 #, c-format
 msgid "Host `%s' has no address!"
-msgstr "Името `%s' няма адрес!"
+msgstr "Името \"%s\" няма адрес!"
 
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
