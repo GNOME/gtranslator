@@ -40,7 +40,7 @@ void gtranslator_learn_message(GtrMsg *msg)
 		po->header->po_date,
 		g_list_position(po->messages, foolist));
 
-	if(gtranslator_tm_query_for_message(msg->msgid)==-1)
+	if(gtranslator_tm_query_for_message(msg->msgid, NULL)==-1)
 	{
 		/*
 		 * Add the translated message as a new entry to the current,

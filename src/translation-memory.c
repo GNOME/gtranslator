@@ -24,3 +24,11 @@ void gtranslator_tm_add(const gchar *message, const gchar *translation,
 {
 	g_print("FIXME");
 }
+
+gint gtranslator_tm_query_for_message(const gchar *message,
+        const gchar *eventual_id)
+{
+	g_warning("To be written");
+	
+	return -1;
+}
