@@ -986,9 +986,9 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 		dialog =
 		    gnome_message_box_new(question,
 					  GNOME_MESSAGE_BOX_QUESTION,
-					  GNOME_STOCK_BUTTON_YES,
-					  GNOME_STOCK_BUTTON_NO,
-					  GNOME_STOCK_BUTTON_CANCEL, NULL);
+					  GTK_STOCK_YES,
+					  GTK_STOCK_NO,
+					  GTK_STOCK_CANCEL, NULL);
 		gtranslator_dialog_show(&dialog, "gtranslator -- revert");
 		reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 		GTR_FREE(question);
