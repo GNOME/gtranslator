@@ -118,7 +118,7 @@ GCONF_LIBS=""
 
 try_gconf=true
 AC_ARG_WITH(gconf,
-	[--{with,without}-gconf    Compile with GConf support or without it],
+	[  --{with,without}-gconf    Compile with GConf support or without it],
 	if test x$withval = xno; then
 		try_gconf=false
 	fi
