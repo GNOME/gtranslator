@@ -14,7 +14,8 @@ Applicationicondir = $(datadir)/pixmaps
 
 Applicationicon_DATA = gtranslator.png
 
-EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) $(mimeinfofiles_DATA)
+EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) $(mimeinfofiles_DATA) \
+			kabalak_generate_all_the_files.sh INSTALL.CVS
 
 install-data-local:
 	@$(NORMAL_INSTALL)

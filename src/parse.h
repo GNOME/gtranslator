@@ -28,30 +28,6 @@
 #include <dyndata.h>
 
 /**
- * A structure for the po-files :
- **/
-struct _po_file{
-	const char *filename;
-	unsigned int maximal_position;
-	gboolean db_enabled;	
-};
-
-/**
- * The structure for the translations :	
- **/
-struct _message{
-	_po_file *po;
-	char *msgid;
-	char *msgstr;
-	unsigned int position;
-};
-
-/**
- * A struct-variable :
- **/
-message *msg;
-
-/**
  * This are the global count variables  
  **/
 int count,max_count;
@@ -97,3 +73,8 @@ int get_next_msgid(FILE *,char *);
  * Get next msgstr
  **/
 int get_next_msgstr(FILE *,char *);
+
+/**
+ * A simple compare function
+ **/
+int ka_comp(const void *,const void *);

@@ -23,3 +23,7 @@ GtkWidget* app1;
 GtkWidget* trans_box;
 GtkWidget* text1;
 GtkWidget* appbar1; 
+GtkWidget* search_bar;
+GtkWidget* search_button;
+GtkWidget* search_entry;
+GtkWidget* search_entry_tmp;

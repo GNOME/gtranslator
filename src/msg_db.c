@@ -45,8 +45,7 @@ int init_msg_db()
 	 * to the linked list while reading the file
 	 **/
 	while(
-	fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL
-	)
+	fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL)
 	{
 		/**
  		 * Add it to the linked list
@@ -103,7 +102,7 @@ int put_to_msg_db(const char *new_message)
 		new_message_length=strlen(new_message);
 		if(new_message_length == NULL || new_message_length < 0)
 		{
-			g_warning("New message entry has wrong/non-logical length : %s\n",new_message_length);
+			g_warning("New message entry has wrong/non-logical length : %i\n",new_message_length);
 			return 1;
 		}
 		else

@@ -27,7 +27,8 @@ gtranslator_SOURCES = \
 	callbacks.c callbacks.h \
 	parse.c	parse.h \
 	header_stuff.c header_stuff.h \
-	msg_db.h msg_db.c 
+	msg_db.h msg_db.c \
+	messages.h 
 
 gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS) $(dyndata_libs)
 

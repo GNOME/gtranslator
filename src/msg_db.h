@@ -6,10 +6,13 @@
  * text file as msg[id][str]-base
  **/
 
-#include "header_stuff.h"
-#include "parse.h"
 #include "callbacks.h"
 #include "interface.h"
+
+/**
+ * Include the dyndata header
+ **/
+#include <dyndata.h>
 
 /**
  * The default msg_db location .

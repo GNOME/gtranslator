@@ -29,6 +29,13 @@ static GnomeHelpMenuEntry help_me = { "gtranslator", "index.html" };
 int warn_me,show_me_errors,startup_at_last;
 
 
+void 
+on_search_button_pressed		(GtkButton 	*button,
+					gpointer user_data)
+{
+	
+}
+
 void
 on_open1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)

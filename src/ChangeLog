@@ -1,3 +1,79 @@
+2000-03-07  Fatih Demir		( kabalak@gmx.net )
+
+	+	Adding some new UI-elements ..
+		
+		-> interface.c/.h
+		
+	+	Removing the unnecessary GLADE-
+		style widget_ref's ( they seem not
+		to be needed ... )
+
+		-> interface.c
+
+	+	Removed the fake progress-bar 
+		
+		-> interface.c
+	
+	+	Oh, a too deep inclusion ; removed it
+		
+		-> messages.h
+	
+	+	A misformed format ; also corrected
+	
+		-> msg_db.c
+
+	+	Some other misformed includes which lead
+		to 'multiple definition of ...' ; also
+		corrected ( yes , I compiled it today 
+		:-% ; it compiles ! ) .		
+		
+		-> msg_db.h messages.h
+
+2000-03-06  Fatih Demir		( kabalak@gmx.net )
+
+	+	Added a gnome-entry box for searching
+		some messages in the files ..
+		
+		-> interface.c/.h
+	
+	+	Added the a file which includes the
+		pure message structures
+		
+		-> messages.h
+
+	+	Rearranged the message searches ...
+
+		-> parse.c
+	
+	+	Notified the new widgets ..
+		
+		-> interface.h
+
+	+	Reorganized some header-includes
+		
+		-> parse.h msg_db.h header_stuff.h
+
+	+	Corrected the error within the struct
+
+		-> parse.h
+
+2000-03-05  Fatih Demir		( kabalak@gmx.net )
+
+	+	Adding a new dock-band for message
+		searching and catalog-finding ..
+	
+		-> interface.c callbacks.c/.h
+	
+	+	Adding some new functions ..
+
+2000-03-04  Fatih Demir 	( kabalak@gmx.net )
+
+	+	Added a (void*)-ified compare fucntion
+		ka_comp(const void *,const void *) ,
+		needed for the dyndata routines ..		
+
+		-> parse.c/.h
+
 2000-02-29  Fatih Demir		( kabalak@gmx.net )
 
 	+	Doing the msg_db stuff ( reading the

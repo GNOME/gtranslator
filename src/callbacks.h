@@ -14,6 +14,10 @@ const char *filename;
 /**
  * The long list of cb-functions ...
  **/
+void 
+on_search_button_pressed		(GtkButton 	*button,
+					gpointer user_data);
+
 void
 on_open1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data);

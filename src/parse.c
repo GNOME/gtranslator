@@ -6,6 +6,7 @@
  **/
 
 #include "parse.h"
+#include "messages.h"
 #include <unistd.h>
 
 /**
@@ -40,12 +41,9 @@ void parse()
 	 * Check if the stream is OK
 	 **/
 	check_file(fs,"Couldn't open the po file !");
+	msg->po->opened=TRUE;
+	msg->po->po_filename=filename;
 	count=0;
-	/**
-	 * Just for now , the db-functionability is
-	 * disabled ..
-	 **/
-	msg->po.db_enabled=FALSE;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
 		count++;
@@ -91,6 +89,17 @@ void parse()
 	/**
 	 * Now we know where the maximum length has to be
 	 **/
-	msg->po_file->maximal_position=(count - 1);
+	msg->po->file_length=(count - 1);
 	max_count=((count - 10 ) / 3);
+}
+
+/**
+ * w/o shame stolen from dyntest programm 
+ **/ 
+int ka_comp(const void * first,const void * second)
+{
+	/**
+ 	 * Looks a little bit like lisp ...
+	 **/
+	return(*((int *)first) - *((int *)second));
 }

@@ -7,9 +7,7 @@
  * here .
  **/
 
-#include "msg_db.h"
 #include "callbacks.h"
-#include "header_stuff.h"
 
 /**
  * The structure with general 
