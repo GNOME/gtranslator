@@ -20,8 +20,8 @@
 #include "sighandling.h"
 
 #include "parse.h"
-#include "dialogs.h"
 #include <libgnome/gnome-i18n.h>
+#include <libgnomeui/gnome-dialog.h>
 
 #include <signal.h>
 
@@ -48,7 +48,7 @@ void gtranslator_signal_handler(int signal)
 			 */  
 			if(po->file_changed)
 			{
-				ask_to_save_file();
+				g_warning("rescue from SIGINT et.c -> new g_main possibly");
 			}
 
 			exit(0);
@@ -63,7 +63,7 @@ void gtranslator_signal_handler(int signal)
 
 			if(po->file_changed)
 			{
-				ask_to_save_file();
+				g_warning("ohoh, SEGV");
 			}
 			
 			exit(1);
