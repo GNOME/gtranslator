@@ -2,8 +2,6 @@
 ## gtranslator's docs Makefile.am.
 ##
 
-SUBDIRS = figures
-
 ##
 ## Your language locale -- should work with "ja" here already...
 ##
