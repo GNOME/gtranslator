@@ -33,6 +33,10 @@ cvspack: clean
 	@-rm -f gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz
 	@echo Creating CVS package of gtranslator...
 	@./autogen.sh --help
+	@-rm -f ./config.log ./config.status ./config.cache ./config.h
+	@-rm -f `find . -name 'Makefile'` ./src/.g* `find . -name '.cvsignore'`
+	@-rm -rf `find . -name '.deps'` `find . -name '.libs'` \
+		`find . -name '.sources'` `find . -name 'CVS'`
 	@$(TAR) -C .. -chozf gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz gtranslator
 
 pre-release: cvspack
