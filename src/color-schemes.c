@@ -51,10 +51,9 @@ gboolean check_if_color_scheme(xmlNodePtr *node);
 GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node);
 
 /*
- * Free up the structures with these functions.
+ * Free up the structure with this function.
  */
 void free_color_scheme_infos(GtrColorSchemeInformations **infos);
-void free_color_scheme(GtrColorScheme **scheme);
 
 /*
  * Open the xml file and return the GtrColorScheme equivalent.

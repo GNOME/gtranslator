@@ -102,7 +102,7 @@ gchar *setup_language(gchar *lang)
 		}
 		else
 		{
-			gchar *taillanguage=g_strdup(lang);
+			gchar *taillanguage=lang;
 			GString *language=g_string_new(lang);
 			
 			g_strup(taillanguage);

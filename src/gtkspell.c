@@ -125,8 +125,7 @@ void gtkspell_stop() {
 		kill(spell_pid, SIGQUIT); /* FIXME: is this the correct signal? */
 	}
 	if (highlight) {
-		g_free(highlight);
-		highlight = NULL;
+		highlight=NULL;
 	}
 	spell_pid = 0;
 }

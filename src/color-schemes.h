@@ -64,7 +64,12 @@ typedef struct {
  * The general GtrColorScheme we do use in gtranslator.
  */
 GtrColorScheme *theme; 
-	
+
+/*
+ * Free the given GtrColorScheme.
+ */
+void free_color_scheme(GtrColorScheme **scheme);
+
 /*
  * Returns the GtrColorScheme struct for the given file (a colorscheme) or NULL
  *  if it isn't a colorscheme file.

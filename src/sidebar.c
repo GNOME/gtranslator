@@ -141,8 +141,12 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 					 
 				display_msg(po->current);
 
-				gtk_editable_set_position(
+				if(curpos >= 0 && curpos <=
+					gtk_text_get_length(GTK_TEXT(trans_box)))
+				{
+					gtk_editable_set_position(
 					GTK_EDITABLE(trans_box), curpos);
+				}
 
 				break;
 				

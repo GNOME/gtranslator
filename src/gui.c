@@ -35,6 +35,7 @@
 #include "stylistics.h"
 #include "syntax.h"
 #include "gtkspell.h"
+#include "color-schemes.h"
 
 #include "pixmaps/untrans.xpm"
 
@@ -155,6 +156,13 @@ static GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_FIND_ITEM(find_dialog, NULL),
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(find_do, NULL),
+	{
+		GNOME_APP_UI_ITEM, N_("_Query"),
+		N_("Query for a string"),
+		query_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
+		GDK_F7, 0, NULL
+	},
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("_Header..."),
@@ -319,7 +327,7 @@ static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_END
 };
 
-static GnomeUIInfo the_searchbar[] = {
+static GnomeUIInfo the_navibar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("First"),
 			       N_("Go to the first message"),
 			       goto_first_msg,
@@ -437,7 +445,7 @@ static void insert_action(gint act_num, GnomeUIInfo mi, GnomeUIInfo ti)
 static void create_actions(void)
 {
 	/*
-	 * a unused variable for testing if a toolbar element was provided
+	 * A unused variable for testing if a toolbar element was provided
 	 */
 	GnomeUIInfo NONE;
 
@@ -454,17 +462,18 @@ static void create_actions(void)
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);
 	insert_action(ACT_PASTE, the_edit_menu[4], NONE);
 	insert_action(ACT_CLEAR, the_edit_menu[5], NONE);
-	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[8]);
+	insert_action(ACT_FIND, the_edit_menu[7], the_navibar[8]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
-	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[6]);
+	insert_action(ACT_QUERY, the_edit_menu[9], the_navibar[9]);
+	insert_action(ACT_HEADER, the_edit_menu[11], the_navibar[6]);
 	/*------------------------------------------------*/
-	insert_action(ACT_FIRST, the_messages_menu[0], the_searchbar[0]);
-	insert_action(ACT_BACK, the_messages_menu[1], the_searchbar[1]);
-	insert_action(ACT_NEXT, the_messages_menu[3], the_searchbar[3]);
-	insert_action(ACT_LAST, the_messages_menu[4], the_searchbar[4]);
-	insert_action(ACT_GOTO, the_messages_menu[6], the_searchbar[7]);
-	insert_action(ACT_NEXT_FUZZY, the_messages_menu[7], the_searchbar[6]);
-	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[8], the_searchbar[5]);
+	insert_action(ACT_FIRST, the_messages_menu[0], the_navibar[0]);
+	insert_action(ACT_BACK, the_messages_menu[1], the_navibar[1]);
+	insert_action(ACT_NEXT, the_messages_menu[3], the_navibar[3]);
+	insert_action(ACT_LAST, the_messages_menu[4], the_navibar[4]);
+	insert_action(ACT_GOTO, the_messages_menu[6], the_navibar[7]);
+	insert_action(ACT_NEXT_FUZZY, the_messages_menu[7], the_navibar[6]);
+	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[8], the_navibar[5]);
 	/*------------------------------------------------*/
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
 	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
@@ -478,7 +487,7 @@ void disable_actions_no_file(void)
 	disable_actions(ACT_COMPILE, ACT_UPDATE,
 			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
 			ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
-			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER,
+			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
@@ -489,7 +498,7 @@ void enable_actions_just_opened(void)
 {
 	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
-			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
+			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
 	/*
 	 * If we'd have the option to use the update function set, enable the
@@ -544,7 +553,7 @@ void create_app1(void)
 
 	search_bar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 				     GTK_TOOLBAR_BOTH);
-	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_searchbar, NULL);
+	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_navibar, NULL);
 	gnome_app_add_toolbar(GNOME_APP(app1), GTK_TOOLBAR(search_bar),
 			      "search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 			      GNOME_DOCK_TOP, 2, 0, 0);
@@ -652,13 +661,15 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_config_set_last_run_date();
 	gtranslator_config_close();
 	
-	/*
-	 * Say "Bye, bye" to GnomeVFS... but only if it has been up yet :-)
-	 */
 	if(gnome_vfs_initialized())
 	{
 		gnome_vfs_shutdown();
 	}
+
+	/*
+	 * Free up our used GtrColorScheme "theme".
+	 */
+	free_color_scheme(&theme);
 	
 	/*
 	 * Quit with the normal Gtk+ quit.
@@ -1145,28 +1156,28 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 			switch(event->keyval)
 			{
 				case GDK_Left:
-					IfGood(the_searchbar[1])
+					IfGood(the_navibar[1])
 					{
 						goto_prev_msg(NULL, NULL);
 					}
 					break;
 				
 				case GDK_Right:
-					IfGood(the_searchbar[3])
+					IfGood(the_navibar[3])
 					{
 						goto_next_msg(NULL, NULL);
 					}
 					break;
 
 				case GDK_Up:
-					IfGood(the_searchbar[0])
+					IfGood(the_navibar[0])
 					{
 						goto_first_msg(NULL, NULL);
 					}
 					break;
 					
 				case GDK_Down:
-					IfGood(the_searchbar[4])
+					IfGood(the_navibar[4])
 					{
 						goto_last_msg(NULL, NULL);
 					}

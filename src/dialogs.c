@@ -30,6 +30,7 @@
 #include "query.h"
 #include "open-differently.h"
 #include "color-schemes.h"
+#include "syntax.h"
 
 #include <string.h>
 #include <libgnome/gnome-util.h>
@@ -587,7 +588,7 @@ void query_dialog(void)
 	/*
 	 * A half-baken dialog for the query functionality.
 	 */
-	label=gtk_label_new(_("Here you can query existing gettext domains for an exisiting translation."));
+	label=gtk_label_new(_("Here you can query existing gettext domains for a translation."));
 	
 	dialog=gnome_dialog_new(
 		_("gtranslator -- query existing gettext domains"),
@@ -605,8 +606,8 @@ void query_dialog(void)
 	 * Add the widgets to the dialog.
 	 */
 	add2Box(label);
-	add2Box(query_entry);
 	add2Box(domain);
+	add2Box(query_entry);
 
 	/*
 	 * "Query" should be the default button I guess.
@@ -649,19 +650,20 @@ void query_dialog(void)
 			/*
 			 * Get the domain's name from the combobox.
 			 */
-			domainname=gtk_editable_get_chars(GTK_EDITABLE(GTK_COMBO(
-				domain)->entry), 0, -1);			
-			
+			domainname=gtk_editable_get_chars(GTK_EDITABLE(
+				GTK_COMBO(domain)->entry), 0, -1);
+
 			/*
 			 * Build up and run the query.
 			 */
 			query=gtranslator_new_query(domainname, query_text, lc);
+
 			result=gtranslator_query_simple(query);
 
 			if(!result)
 			{
 				/* 
-				 * No results? CLose down the dialog.
+				 * No results? Close down the dialog.
 				 */
 				gnome_app_warning(GNOME_APP(app1),
 				_("Couldn't find any result for the query!"));
@@ -676,15 +678,66 @@ void query_dialog(void)
 				 *   now and close/exit then.
 				 */
 				gchar *resulttext;
+				GtkWidget *condialog=NULL;
+				gint hehue;
 
-				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\"."),
+				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\".\n\
+Would you like to insert it into the translation?"),
 					result->translation, result->domain);
 				
 				gnome_dialog_close(GNOME_DIALOG(dialog));
 
-				gnome_app_message(GNOME_APP(app1), resulttext);
+				/*
+				 * Build up another dialog and show up the
+				 *  possible actions.
+				 */
+				condialog=gnome_message_box_new(resulttext,
+					GNOME_MESSAGE_BOX_INFO,
+					GNOME_STOCK_BUTTON_YES,
+					GNOME_STOCK_BUTTON_NO,
+					NULL);
 				
 				g_free(resulttext);
+
+				/*
+				 * Run the dialog and switch the action to take
+				 *  depending on the user's selection.
+				 */
+				hehue=gnome_dialog_run(GNOME_DIALOG(condialog));
+				if(hehue==GNOME_YES)
+				{
+					gchar *content;
+
+					/*
+					 * Get the translation box contents.
+					 */
+					content=gtk_editable_get_chars(
+						GTK_EDITABLE(trans_box), 0, -1);
+
+					/*
+					 * See if the query result is already in the
+					 *  translation box; if so print a warning
+					 *   and don't insert the translation.
+					 */
+					if(strcmp(content, result->translation))
+					{
+						gtranslator_syntax_insert_text(trans_box,
+						result->translation);
+					}
+					else
+					{
+						gnome_app_warning(GNOME_APP(app1),
+						/*
+						 * Translators: This means that the queried string
+						 *  is already translated.
+						 */
+						_("Query's result translation is already there!"));
+					}
+
+					g_free(content);
+				}
+
+				gtranslator_free_query_result(&result);
 			}
 			/*
 			 * FIXME: This causes a SEGV.

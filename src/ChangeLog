@@ -1,5 +1,23 @@
 2001-03-04  Fatih Demir	<kabalak@gtranslator.org>
 
+	* dialogs.c: Added successor dialog after the query has succeeded
+		-- it's now possible to let it be pasted into the translation
+		 and check if the string to paste into the translation is
+		  already there -- why insert e.g. "Open" 12x into the
+		   translation box?
+
+	* main.c: Set up the domains list at startup.
+
+	* gui.c: Use the "free_color_scheme" function to free up the used
+		color scheme at quit time, added ACT_QUERY and related stuff
+		 and renamed the_searchbar to the_navibar.
+
+	* color-schemes.c/.h: Declare "free_color_scheme" in the header to
+		make it generally available.
+
+	* gtkspell.c: Don't free up the pointed GdkColor from the color
+		scheme.
+
 	* prefs.c, prefs.h & prefs_init.c: Added a toggle option for
 		keeping the obsolete messages and also changed the prefs_init
 		 function for this.
