@@ -3,7 +3,7 @@
 gtranslator \-\- a comfortable gettext po file editor with many bells and whistles.
 
 .SH "SYNOPSIS"
-.B gtranslator [ \-\-help ] [ \-\-version ] [ \-a filename ] [ \-e po\-file ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-n ] [ \-y ]
+.B gtranslator [ \-\-help ] [ \-\-version ] [ \-a filename ] [ \-e po\-file ] [ \-g geometry\-string  ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-n ] [ \-y ]
 
 .SH "DESCRIPTION"
 gtranslator is a comfortable gettext po file editor with many features like special char featured editing, regular expression based search function, compile/update possiblities.
@@ -21,10 +21,6 @@ Exports the learn buffer contents into the given plain gettext po file and exits
 .TP 
 .I \-g \-\-geometry=geometry
 Let's you specify the geometry of gtranslator's main window.
-.TP 
-.I \-w \-\-webalize=html\-output\-file po\-file
-Creates a given html file output which is an htmlized and syntax highlighted version of the po\-file.
-Especially good for webpages and other nice sites.
 .TP 
 .I \-b \-\-build\-informations
 Shows the build specifications (date, time, versions, directories) of gtranslator.
@@ -97,10 +93,6 @@ Learns the given po file \*(lqpo\-file\-to\-learn\*(rq on the command line witho
 .TP 
 .B gtranslator \-a po\-file
 Autotranslates all missing entries from the learn buffer if possible and exits.
-
-.TP 
-.B gtranslator \-w Evolution.html po/po\-file
-Opens the \*(lqpo/po\-file\*(rq file and creates a html output file in \*(lqEvolution.html\*(rq.
 
 .TP 
 .B gtranslator \-e po\-file\-to\-export

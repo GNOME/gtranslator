@@ -29,7 +29,6 @@
 #include "defines.include"
 #include "dialogs.h"
 #include "gui.h"
-#include "htmlizer.h"
 #include "learn.h"
 #include "open.h"
 #include "parse.h"
@@ -365,15 +364,6 @@ int main(int argc, char *argv[])
 		 * Try to open up the supported "special" gettext file types.
 		 */ 
 		gtranslator_open_file((gchar *)args[0]);
-
-		/*
-		 * Also write the HTML output of the given file if
-		 *  desired.
-		 */  
-		if(save_html_output_file)
-		{
-			gtranslator_htmlizer(save_html_output_file);
-		}
 	}
 	
 	//	poptFreeContext(context);

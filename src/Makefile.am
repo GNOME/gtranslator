@@ -47,7 +47,6 @@ gtranslator_SOURCES = \
 	gui.c gui.h \
 	header_stuff.c header_stuff.h \
 	history.c history.h \
-	htmlizer.c htmlizer.h \
 	languages.c languages.h \
 	learn.c learn.h \
 	main.c \
