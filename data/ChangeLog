@@ -2,8 +2,8 @@
 
 	* mime/Makefile.am: Applied small patch from Maxim Sobolev: use the
 		exported $(XML_I18N_MERGE) stuff and not xml-i18n-merge
-		 directly -- avoids non-buidling on xml-i18n-tools'less
-		  systems.
+		 directly -- avoids problems on machines without xml-i18n-tools
+		  as we don't try to sue the package-internal xml-i18n-merge..
 
 2001-04-06  Fatih Demir <kabalak@gtranslator.org>
 
