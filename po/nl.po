@@ -3,13 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-17 04:20+0200\n"
+"POT-Creation-Date: 2003-10-19 20:23+0200\n"
 "PO-Revision-Date: 2003-10-17 16:29+0200\n"
 "Last-Translator: Vincent van Adrighem <adrighem@gnome.org>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -389,7 +390,9 @@ msgstr "Commentaar bewerken"
 #: src/gui.c:501
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ %i onzeker over ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ %i onzeker over ]"
+msgstr[1] "%s [ %i onzeker over ]"
 
 #: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
@@ -411,7 +414,9 @@ msgstr "Vertaald"
 #: src/gui.c:524
 #, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ %i Onvertaald over ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ %i onvertaald over ]"
+msgstr[1] "%s [ %i onvertaald over ]"
 
 #: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
 msgid "Untranslated"
@@ -1273,11 +1278,15 @@ msgstr "Kan het bestand '%s' niet openen om in te schrijven!"
 #, c-format
 msgid ""
 "File %s\n"
-"contains %d fuzzy messageFile %s\n"
+"contains %d fuzzy message"
+msgid_plural ""
+"File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
 "Bestand %s\n"
-"bevat %d onzeker berichtBestand %s\n"
+"bevat %d onzeker bericht"
+msgstr[1] ""
+"Bestand %s\n"
 "bevat %d onzekere berichten"
 
 #: src/parse.c:1303
