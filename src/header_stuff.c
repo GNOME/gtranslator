@@ -169,15 +169,23 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
  */ 
 const gchar * language_in_english(const gchar *lang)
 {
-	gint c;
-	for(c=0;languages[c].name!=NULL;c++)
+	if(lang)
 	{
-		if(!strcmp(_(languages[c].name), lang))
+		gint c;
+		for(c=0;languages[c].name!=NULL;c++)
 		{
-			return languages[c].name;
+			if(!strcmp(_(languages[c].name), lang))
+			{
+				return languages[c].name;
+			}
 		}
+
+		/*
+		 * Return the original language if no conversion could be made.
+		 */
+		return lang;
 	}
-	return lang;
+	
 }		
 /*
  * Creates new GtrMsg, with all data set to current state of header 
