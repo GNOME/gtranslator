@@ -205,7 +205,7 @@ load_location (NautilusGtranslatorView *view,
 	{
 		GtkWidget *comment;
 
-		comment=gtk_label_new(g_strdup_printf(_("Comments: %s"),
+		comment=gtk_label_new(g_strdup_printf(_("Comments:\n%s"),
 			prepare_comment_for_view(po->header->comment)));
 
 		add_part(comment, 0, 0);
@@ -269,10 +269,6 @@ bonobo_sample_callback (BonoboUIComponent *ui,
 	{
 		open_po_file(NULL, view->details->location);
 	}
-	if(!strcmp(verb, _("Edit Header")))
-	{
-		edit_header(NULL, NULL);
-	}
 }
 
 /* CHANGE: Do your own menu/toolbar merging here. */
@@ -285,7 +281,6 @@ sample_merge_bonobo_items_callback (BonoboControl *control,
 	BonoboUIComponent *ui_component;
 	BonoboUIVerb verbs [] = {
 		BONOBO_UI_VERB(_("Open Po File"), bonobo_sample_callback),
-		BONOBO_UI_VERB(_("Edit Header"), bonobo_sample_callback),
 		BONOBO_UI_VERB_END
 	};
 
