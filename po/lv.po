@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-01-01 04:49+0100\n"
-"PO-Revision-Date: 2003-01-01 18:23+0200\n"
+"POT-Creation-Date: 2003-01-03 04:49+0100\n"
+"PO-Revision-Date: 2003-01-03 21:56+0200\n"
 "Last-Translator: Artis Trops <hornet@navigator.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
 "MIME-Version: 1.0\n"
@@ -20,8 +20,8 @@ msgstr "Artis Trops <hornet@navigator.lv>\n"
 "Pēteris Krišjānis <peteris.krisjanis@os.lv>"
 
 #: src/about.c:78
-msgid "(C) 1999-2002 The Free Software Foundation"
-msgstr "© 1999-2002 The Free Software Foundation"
+msgid "(C) 1999-2003 The Free Software Foundation"
+msgstr "© 1999-2003 The Free Software Foundation"
 
 #: src/about.c:79
 msgid "gtranslator is a po file editing suite with many bells and whistles."
@@ -144,8 +144,8 @@ msgstr "Angļu"
 
 #: src/dialogs.c:713
 #: src/dialogs.c:814
-#: src/gui.c:556
-#: src/messages-table.c:220
+#: src/gui.c:554
+#: src/messages-table.c:212
 msgid "Translated"
 msgstr "Iztulkota"
 
@@ -323,43 +323,43 @@ msgid "Could not find\n"
 msgstr "Nevarēju atrast\n"
 "\"%s\""
 
-#: src/gui.c:228
+#: src/gui.c:229
 msgid "Edit comment"
 msgstr "Rediģēt komentāru"
 
-#: src/gui.c:542
+#: src/gui.c:540
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i Palikušas nepilnīgas ]"
 
-#: src/gui.c:542
-#: src/gui.c:546
+#: src/gui.c:540
+#: src/gui.c:544
 #: src/menus.c:327
-#: src/messages-table.c:214
+#: src/messages-table.c:206
 msgid "Fuzzy"
 msgstr "Nepilnīgs"
 
-#: src/gui.c:546
+#: src/gui.c:544
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nepilnīgo nav ]"
 
-#: src/gui.c:554
+#: src/gui.c:552
 msgid "Sticky (Message & translation are the same)"
 msgstr "Lipīgs (Virke un tulkojums ir vienādi)"
 
-#: src/gui.c:565
+#: src/gui.c:563
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i Palikušas neiztulkotas ]"
 
+#: src/gui.c:563
 #: src/gui.c:565
-#: src/gui.c:567
-#: src/messages-table.c:208
+#: src/messages-table.c:200
 msgid "Untranslated"
 msgstr "Neiztūlkotie"
 
-#: src/gui.c:567
+#: src/gui.c:565
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ neiztulkoto nav ]"
@@ -367,7 +367,7 @@ msgstr "%s [ neiztulkoto nav ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:580
+#: src/gui.c:578
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Virkne %d / %d / Statuss: %s"
@@ -1062,47 +1062,32 @@ msgstr "Atrast virkni po failā"
 msgid "Replace string in po file"
 msgstr "Aizvietot virkni po failā"
 
-#: src/message.c:81
+#: src/message.c:82
 msgid "Couldn't get the message!"
 msgstr "Nevarēju dabūt virkni!"
 
-#: src/message.c:103
+#: src/message.c:104
 msgid "There are no fuzzy messages left."
 msgstr "Nepilnīgo virkņu vairs nav."
 
-#: src/message.c:127
+#: src/message.c:128
 msgid "All messages seem to be translated."
 msgstr "Visas virknes izskatās, ka ir iztulkotas."
 
-#: src/messages-table.c:137
+#: src/messages-table.c:135
 #: data/etspecs/messages-table.etspec.h:5
 msgid "Status"
 msgstr "Statuss"
 
-#: src/messages-table.c:138
-#: data/etspecs/messages-table.etspec.h:3
-msgid "Number"
-msgstr "Numurs"
-
-#: src/messages-table.c:139
-#: data/etspecs/messages-table.etspec.h:2
-msgid "Line"
-msgstr "Rindiņa"
-
-#: src/messages-table.c:140
+#: src/messages-table.c:136
 #: data/etspecs/messages-table.etspec.h:4
 msgid "Original"
 msgstr "Oriģināls"
 
-#: src/messages-table.c:141
+#: src/messages-table.c:137
 #: data/etspecs/messages-table.etspec.h:6
 msgid "Translation"
 msgstr "Tulkojums"
-
-#: src/messages-table.c:142
-#: data/etspecs/messages-table.etspec.h:1
-msgid "Comment"
-msgstr "Komentārs"
 
 #: src/open.c:141
 #, c-format
@@ -1551,17 +1536,17 @@ msgstr "Nevaru izveidot direktoriju `%s'!"
 msgid "iso-8859-1"
 msgstr "iso-8859-13"
 
-#: src/utils_gui.c:134
+#: src/utils_gui.c:142
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Ģeometrijas virkne \"%s\" nevarēja tikt parsēta!"
 
-#: src/utils_gui.c:356
+#: src/utils_gui.c:363
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Jums nav atļauta pieeja failam '%s'."
 
-#: src/utils_gui.c:374
+#: src/utils_gui.c:381
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1572,7 +1557,7 @@ msgstr ""
 "Lūdzu saglabājiet jaunu kopiju no tā jūsu izvēlētā vietā un dabūjiet\n"
 "rakstīšanas tiesības uz šo failu."
 
-#: src/utils_gui.c:444
+#: src/utils_gui.c:451
 #, c-format
 msgid ""
 "The file\n"
@@ -1595,12 +1580,12 @@ msgstr ""
 "\n"
 "Vai gtranslator vienalga ir jātver šis fails ?"
 
-#: src/utils_gui.c:489
+#: src/utils_gui.c:496
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Nepieciešamā dekompresijas programma `%s' nav uzstādīta!"
 
-#: src/utils_gui.c:494
+#: src/utils_gui.c:501
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Nepieciešamā kompresijas programma `%s' nav uzstādīta!"
@@ -1642,6 +1627,18 @@ msgstr "Pārsūtīšana pārtraukta!"
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
 msgstr "Gnome tulkošanas programma"
+
+#: data/etspecs/messages-table.etspec.h:1
+msgid "Comment"
+msgstr "Komentārs"
+
+#: data/etspecs/messages-table.etspec.h:2
+msgid "Line"
+msgstr "Rindiņa"
+
+#: data/etspecs/messages-table.etspec.h:3
+msgid "Number"
+msgstr "Numurs"
 
 #: data/mime/gtranslator.keys.in.h:1
 msgid "Compiled gettext po file"
