@@ -230,8 +230,8 @@ GtrLanguage languages[] = {
 	 "pt@li.org", "8bit"
 	},
 	{
-	 N_("Portuguese/Brazil"), "pt_BR", "iso-8859-1",
-	 "", "8bit"
+	 N_("Portuguese/Brazil"), "pt_BR", "UTF-8",
+	 "gnome-l10n-br@listas.cipsga.org.br", "8bit"
 	},
 	{
 	 N_("Romanian"), "ro", "iso-8859-2",
