@@ -1,0 +1,43 @@
+<!-- The official DTD for UMTF 1.0, use it freely and happily! :-) -->
+<!-- (C) 2003 Fatih Demir <kabalak@gtranslator.org> -->
+
+<!ENTITY umtfversion "1.0">
+<!ENTITY umtfauthor "kabalak@gtranslator.org">
+
+<!ELEMENT umtf (language+, translator*, serial+, index+, resource*, buffer+, message*, translation*, value*, description*, date*)>
+
+<!ELEMENT language EMPTY>
+<!ELEMENT serial (#PCDATA)>
+<!ELEMENT index (resource*)>
+<!ELEMENT resource EMPTY>
+<!ELEMENT buffer ANY>
+<!ELEMENT message (value?, translator?, description?, date?)>
+<!ELEMENT translation (value?, translator?, description?, date?)>
+<!ELEMENT value (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+
+<!ATTLIST umtf version CDATA "1.0">
+
+<!ATTLIST language ename CDATA #REQUIRED>
+<!ATTLIST language name CDATA #REQUIRED>
+<!ATTLIST language email CDATA #REQUIRED>
+<!ATTLIST language code CDATA #REQUIRED>
+<!ATTLIST language href CDATA #IMPLIED>
+
+<!ATTLIST translator name CDATA #REQUIRED>
+<!ATTLIST translator email CDATA #REQUIRED>
+<!ATTLIST translator tid CDATA #IMPLIED>
+
+<!ATTLIST serial date CDATA #REQUIRED>
+
+<!ATTLIST resource package CDATA #REQUIRED>
+<!ATTLIST resource updated CDATA #IMPLIED>
+<!ATTLIST resource index CDATA #REQUIRED>
+<!ATTLIST resource premiereversion CDATA #IMPLIED>
+<!ATTLIST resource href CDATA #IMPLIED>
+
+<!ATTLIST buffer entries CDATA #REQUIRED>
+
+<!ATTLIST value index CDATA #REQUIRED>
+<!ATTLIST value tid CDATA #IMPLIED>

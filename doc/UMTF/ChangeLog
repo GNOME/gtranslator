@@ -1,0 +1,82 @@
+2003-01-19  Fatih Demir <kabalak@gtranslator.org>
+
+	* \* & Makefile.am: Added UMTF specs to gtranslator/doc/ in GNOME CVS
+		for further inclusion and attraction.
+
+	* umtf.dtd: Added official UMTF 1.0 DTD.
+
+	* \*: Brand new views for UMTF and the README file is growing in size:
+		/me hopes this all will get useful for gtranslator in the
+                 nearby time.
+
+	* README.UMTF & *.xml: New version 1.0 of the specification and some
+		updates on the information front regarding KBabel et al. Also
+		 did describe the new stuff for this release in the spec and
+		  the example file.
+		
+		New in this version 1.0 of the specification are:
+
+		* The new version number 1.0 :-)
+		
+		* You can now define "href" URL attributes for two tags via
+			which the user could get more information (there are
+			 the "language" and the "resource" tags).
+			
+		* The "translator" tag can now also get an attribute "tid" (=
+			Translator ID) via which you can ref the translators
+ 			 who are globally listed once in the buffer and then
+			  ref'd by the "tid" attribute on the translator->value
+			   tag.
+		
+		* And the most important piece of news: we have got now a new
+			"buffer" tag which must be present from now on and
+			  encapsulates all the message/translation value pairs
+			   in it; it has got also a mandatory attribute
+			    "entries" which simply defines how many messages
+ 			      entries are present in the buffer.
+
+	* tr.xml: Removed the Turkish base file from here, as it's not needed.
+
+2001-07-11  Fatih Demir <kabalak@gtranslator.org>
+
+	* README.UMTF & *.xml: Version 0.6 has got now a version attribute 
+		for the umtf root node.
+
+2001-07-10  Fatih Demir <kabalak@gtranslator.org>
+
+	* README.UMTF: Updated version number; also corrected the plain version
+		numbers there; updated EMail addresses and pointed Semerkent
+		  to be one of the possible users/supporters of UMTF.
+
+	* example.xml & tr.xml: Corrected closing tag errors and set the 
+		encoding for the tr.xml file.
+
+2000-11-28  Fatih Demir	<kabalak@gmx.net>
+
+	* README.UMTF: Removed an ICQ number.
+
+2000-11-25  Fatih Demir	<kabalak@gmx.net>
+
+	* README.UMTF: This is the "final draft" and is version 0.5 of it -- 
+		some corrections.
+	
+	* example.xml: Put in a comment that the description tag is not
+		mandatory but wished.
+
+2000-11-17  Fatih Demir	<kabalak@gmx.net>
+
+	* tr.xml: Added the example'sh Turkish umtf file.
+
+	* example.xml: Updated the example file to fit the latest version of
+		the UMTF "standard".
+	
+	* README.UMTF: Changed many stuff to accord to the new tags/attributes
+		and set up a UMTF version (this has been set to 0.4 for now).
+
+2000-11-11  Fatih Demir	<kabalak@gmx.net>
+
+	* COMMENTS: Added the COMMENTS file for annotations.
+
+	* README.UMTF: Finished the current working draft.
+
+	* example.xml: Added an example file for the current format.

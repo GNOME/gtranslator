@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+
+<!-- Include the DTD for UMTF 1.0 now inclusively... -->
+<!DOCTYPE umtf SYSTEM "umtf.dtd">
+
+<!--
+	The UMTF format begins with an umtf tag; the version tag is now valuable
+	 to be mandatory as it separates the now a little bit different format
+	  versions from each other (no incompatibilities, but more information
+	   capacity differs the new versions from the old ones.
+-->
+
+<umtf version="1.0">
+
+<!--
+	The database language, e.g. Turkish or German including some more 
+	 information on the language.
+	
+	This should also be an attribute-only tag as a database file should
+	 only include _a_ language.
+
+	Attributes are:
+		ename 	-> English name
+		name	-> Localized own name
+		code	-> The language code, possibly also in long
+				notation, e.g. tr_TR.
+		email	-> The languages translation mailing list.
+		href	-> An URL for more information about the team.
+-->
+
+<language ename="Example'sh" name="Exampleish" code="example" mail="example@gnome.org" href="http://www.example-sh.org"/>
+
+<!--
+	If the whole database is only being maintained by one person, then this
+	 person should be "declared" globally as the translator.
+	
+	If you do declare a translation here, you'd be aware that this tag is 
+	 for now a only-attribute tag and has to be closed immediately.
+	
+	You can also set "id" attributes in here to list up the general list of
+	 translators once on the head of the file and then ref to them via "tid"
+	  as the ref attribute. A small list is provided in here. A reference
+	   via the "name" attribute should also be possible.
+-->
+
+<translator name="Mr. Foo" email="foo@bar.com" tid="1"/>
+<translator name="Mr. Bar" email="bar@bar.com" tid="2"/>
+
+<!--
+	But if this is an "open" database, then we don't declare a global
+	 author as the translators can also be declared on the translation
+	  string level.
+-->
+
+<!--
+	The database serial for version managament and more cleanity.
+	
+	The date field should be in this format which is put out by
+	 "%Y-%m-%d %H:%M:%S" from the standard time function.
+-->
+<serial date="2000-11-17 15:33:55">2</serial>
+
+<!--
+	The resources index for the references by the values.
+-->
+
+<index>
+	<!--
+		Here do follow the possible ref's by the translation entries.
+	
+		They're also olny-attribute tags which take a package name &
+		 the reference index and possibly also a premiereversion
+		  attribute which declares the first translated version of the
+		   according package/resource file.
+	
+		This last premiereversion attribute is only _optional_ and 
+		 should be left out if not known.
+
+		There should be an updated attribute for every resource which
+		 defines the last update of any resource reference update.
+	
+		In case that there hasn't been any update, you should leave
+		 that attribute out of course.
+
+		Another new attribute is the "href" attribute which can be put
+		 on every resource to provide an URL where one could get more
+		  information about this resource (homepage or similar stuff).
+	-->
+	<resource package="gnome-libs" updated="2000-11-17 15:45:33" index="1"/>
+	<resource package="gnome-print" updated="2000-11-17 15:45:33" index="2"/>
+	<resource package="kdelibs" index="3"/>
+	<resource package="kdeutils" index="4"/>
+	<resource package="World Peace" premiereversion="2065" index="5"/>
+	<resource package="gtranslator" premiereversion="0.32" index="6" href="http://www.gtranslator.org"/>
+</index>
+
+<!--
+	The learn buffer/translation memory entries themselfes are now to be
+	 encapsulated by a "buffer" main body tag - this defines the starting
+	  of all the message/translation pairs in the buffer.
+	
+	Also mandatory for the new "buffer" tag is the attribute "entries" which
+	 shows up the count of the included message/translation pairs - should
+	  be no problem to write into the UMTF file, as this file will be
+	   mostly handled by machine handling routines which can surely handle
+	    to count the message count...
+-->
+
+<buffer entries="4">
+
+	<!--
+		Now some example strings and their declarations.
+	-->
+
+	<message>
+	
+		<!--
+			The message string/entry aka. msgid in gettext po files.
+		-->
+		
+		<value>_Open</value>
+		
+		<translation>
+		
+			<!--
+				Here you can see the refer. to the gnome-libs
+				 resouce by the index value 1 & also to the
+				  value 2 for the gnome-print package as both
+				   are using _Open surely.
+	
+				Multiple values are declared seperat. by commas.
+			-->
+			
+			<value index="1,2">_Open</value>
+			
+			<!--
+				A translation based naming of the translator is
+				 also possible and _should_ also usable within
+				  a database file with a globally declared
+				   author/translator.
+			-->
+			
+			<translator name="Mr. Foo" email="foo@bar.com"/>
+			
+			<!--
+				An explaining description which should
+				 enlighten all people about the meaning about
+				  this translation.
+
+				But it's not mandatory.
+			-->
+			
+			<description>Standard menu entry</description>
+			
+			<!--
+				The date of the translation; isn't mandatory
+				 either.
+			-->
+			
+			<date>2000-11-17 15:29:30</date>
+			
+		</translation>
+		
+		<!--
+			Multiple translations ->
+		-->
+		
+		<translation>
+		
+			<value index="1">Open</value>
+			
+			<!-- This isn't mandatory as it's globally declared -->
+			
+			<translator name="Mr. Foo" email="foo@bar.com"/>
+			
+			<description>The normal text use</description>
+			
+			<date>2000-11-17 15:29:30</date>
+			
+		</translation>
+		
+	</message>
+	
+	<!--
+		Another string...
+	-->
+	
+	<message>
+	
+		<value>_Close</value>
+		
+		<translation>
+		
+			<value index="1">_Close</value>
+			
+			<!--
+				Here the translator is ommitted bacause of the
+				 global declaration.
+			-->
+
+			<description>The menu entry "Close"</description>
+			
+			<date>2000-11-17 15:30:00</date>
+			
+		</translation>
+		
+	</message>
+
+	<message>
+
+		<value>_Save</value>
+
+		<translation>
+
+			<!--
+				Here you can now see the "tid" attribute for
+				 the "value" tag for traslation strings; it
+				  gives you the capability to ref translators
+				   even in generally given global translator
+				    context.
+			-->
+			
+			<value index="1" tid="2">_Save</value>
+
+			<description>Another test entry &amp; description in here.</description>
+
+			<date>2003-01-19 15:05:00</date>
+
+		</translation>
+		
+	</message>	
+	
+	<!--
+		And now a format string.
+	-->
+	
+	<message>
+	
+		<!-- The format specifiers -->
+		
+		<value index="6">%Y-%m-%d %H:%M:%s</value>
+		
+		<translation>
+		
+			<value>%d.%m.%Y %H:%M %s</value>
+			
+			<description>The standard serial and other dates format in UMTF</description>
+			
+			<date>2000-11-17 15:33:29</date>
+			
+		</translation>
+		
+	</message>
+	
+<!--
+	The closing tags for the database/buffer and for xml.
+-->
+
+</buffer>
+</umtf>

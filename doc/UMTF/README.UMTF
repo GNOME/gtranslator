@@ -1,0 +1,458 @@
+This is the README for the UMTF format specification VERSION 1.0:
+----------------------------------------------------------------
+
+Index:
+-------------------------------------------------------------------------------
+
+1.  	Introduction:
+1.1.		Definition.
+1.2.		Pre index.
+1.3.		Update.
+
+-------------------------------------------------------------------------------
+
+2.	Document form:
+2.1.		XML header.
+2.2.		Tags/UMTF.
+2.2.1			Language.
+2.2.2			Translator.
+2.2.3			Serial.
+2.2.4			Index.
+2.2.4.1				Resource.
+2.3			Buffer
+2.3.5.				Message.
+2.3.5.1					Value.
+2.3.6.				Translation.
+2.3.6.1.				Value.
+2.3.6.1.1					Index.
+2.3.6.1.2					Tid.
+2.3.6.2.				Translator.
+2.3.6.3.				Description.
+2.3.6.4.				Date.
+
+-------------------------------------------------------------------------------
+
+3.	Programs:
+3.1.		gtranslator.
+[3.2.		KBabel.]
+
+-------------------------------------------------------------------------------
+
+4.	Authors, Contributors
+
+-------------------------------------------------------------------------------
+
+5.	Version
+
+-------------------------------------------------------------------------------
+
+6. Ego perspective/author of the file
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+
+
+1.1 Definition:
+--------------
+
+
+UMTF -> Unified Message/Translation Format
+
+
+
+1.2 Pre index:
+-------------
+
+
+This explains the specifications the gnome-i18n, me  and Matthias (-> KBabel) 
+ have thought to be a sole database format to use for messages/translations.
+
+The base format for the databases is XML and we do work on it without any DTD 
+ yet. Comments on the draft should be added to the "COMMENTS" file in this
+  directory. A sample comment is put there by me.
+ 
+This format will be/is used in gtranslator (and KBabel?), so that it should be 
+ generally usable. Therefore it's based upon XML which is easily readable &
+  writable by many apps due to the open definitions and format specification.
+
+For now the format is quite ready to be used as it includes almost everything 
+ imaginable for a message/translation database format written in xml.
+
+
+
+1.3 Update:
+----------
+
+
+Unfortunately the coordination efforts on gtranslator & KBabel side somehow did
+ drown in the river of history so that currently only gtranslator supports UMTF
+  and I didn't hear anything about UMTF & KBabel for more then a year now.
+
+The previously idea to get a general library which supports UMTF by the means
+ of a GLib level is now thrown away and I'm about to integrate Semerkent sources
+  now completely into gtranslator so that this will get now quite integrated as
+   a "natural part" of gtranslator's learn buffer mechanism.
+
+
+-------------------------------------------------------------------------------
+
+2.1 XML header:
+--------------
+
+Every database is a XML file and has to start with the XML standard header for
+ the current version 1.0:
+ 
+	<?xml version="1.0"?>
+
+
+
+
+2.2 Tags/UMTF:
+-------------
+
+Tags which are used in the database files are the following ones listed here.
+ The xml file starts and ends with the "umtf" tag as the main descriptor for
+  the UMTF format. It should look like this whereas the "...." represents the
+   content :-)
+
+	<?xml version="1.0"?>
+	<umtf version="1.0">
+		....
+	</umtf>
+
+The main umtf node has got only one attribute:
+
+	Attribute:	Example:	Description:
+	---------------------------------------------------------------------
+	version		1.0		The UMTF version of the file.
+
+
+
+
+2.2.1 Language:
+--------------
+
+The database should carry a language tag with itself (in fact
+ it is mandatory to break up any filename dependance for the
+  files) which does have the following attributes:
+
+
+	Attribute:	Example:	Description:
+	---------------------------------------------------------------------
+	ename		Turkish		This attribute describes
+					 the languages name in English
+					  (therefore the _e_).
+	---------------------------------------------------------------------
+	name		Türkçe		This attribute takes the
+					 languages own name in the own
+					  language (here Türkçe for
+					   Turkish).
+	---------------------------------------------------------------------
+	code		tr		Describes the language code in the
+					 ISO 639 format (e.g. tr for Turkish).
+
+					Can also be a long language code like
+					 tr_TR or de_DE.
+	---------------------------------------------------------------------
+	email		tr@li.org	This is the standard mailing list
+					 for the corresponding language.
+	---------------------------------------------------------------------
+	href		tr.li.org	A URL for getting more information 
+					 on the language team - should be a
+					  website, homepage or something alike.
+
+Example:
+
+	<language ename="Turkish" name="T&uuml;rk&ccedil;e" code="tr" email="tr@li.org" href="http://tr.li.org"/>
+
+
+
+2.2.2 Translator:
+----------------
+
+The general translator tags in the beginning of a file gives to define a global
+ translator for the whole file (and therefore no need to set the translator
+  tag on every message/translation pair); you can also set up a list of some
+   translators and ref to them in the translation->"value" tag.
+
+The translator tag doesn't take any data and does only consists of attributes
+ which are listed below:
+
+ 
+	Attribute:      Example:        Description:
+        ----------------------------------------------------------------------
+	name		Mr. Foo		The name of the translator
+        ----------------------------------------------------------------------
+ 	email		foo@bar.com	The EMail address of the translator
+	----------------------------------------------------------------------
+	tid		1		A ref counter for internal refs in the
+					 buffer itself - should be an integer.
+	
+ 
+Example:
+
+	<translator name="Mr. Foo" email="foo@bar.com" tid="1"/>
+	<translator name="Ali Baba" email="sesame@door.com" tid="2"/>
+
+
+
+
+2.2.3 Serial:
+------------
+
+The serial tag defines the databases date and version number. The date of the
+ message database is to be included in the serial tag via the attribute "date"
+  while the date format is mandatorily "%Y-%m-%d %H:%M:%s".
+
+Example:
+	
+	<serial date="2000-11-17 16:22:20">1</serial>
+	
+
+
+
+2.2.4 Index:
+-----------
+
+The index tags enclose a list of resource descriptors which do have several
+ possible attributes. It is an including date carrying tag.
+
+Example:
+
+	<index>
+		....
+	</index>
+
+
+
+
+2.2.4.1 Resource:
+----------------
+
+The resource tags are used within the index tags and do make a translation
+ tracking possible. It has got many attributes which are listed followingly:
+
+        Attribute:      Example:           Description:
+        ----------------------------------------------------------------------
+	package		gnome-libs	   Where the string could be referring
+					    to
+	----------------------------------------------------------------------
+	premiereversion	1.2.8		   (Optionally) this defines the first
+					     version where the resource was
+					      added
+	----------------------------------------------------------------------
+	updated		2000-11-17 16:27:40 The date of the last update.
+	----------------------------------------------------------------------
+	index		1		   Sets the index number, here '1' for
+					    the gnome-libs package.
+	----------------------------------------------------------------------
+	href		http://package.com An information source about the
+					    resource; could be a link to a 
+					     project homepage et al.
+	
+
+Complete example:
+
+	<index>
+		<resource package="gnome-libs" premiereversion="1.2.8" updated="2000-11-17 16:27:40" index="1" href="http://developer.gnome.org"/>
+	</index>
+
+
+
+
+2.3 Buffer:
+---------
+
+The new "buffer" has got to be present within UMTF 1.0 and encapsulates all the
+ message/translation pairs within itself; it has got to have a mandatory attr.
+  called "entries" which shows up the number the following "message" entries.
+
+
+Example:
+
+	<buffer entries="3">
+
+
+
+2.3.5 Message:
+-------------
+
+The message tags sets the informations for which translations are supplied
+ for. This can be a date format, any other kind of format or "simply" strings.
+
+It doesn't have any attributes and is only a "container" tag for the following
+ translations and related tags.
+
+
+
+
+2.3.5.1 Value:
+-------------
+
+The value tags do always include the data (here in case the message tp be
+ translated).
+
+Example:
+
+	<message>
+		<value>Open</value>
+		....
+	</message>
+
+
+
+
+2.3.6 Translation:
+-----------------
+
+The translation tag does include the translation data and some more tags and
+ is also like the message tag only a container tag as it doesn't have got any
+  own attributes.
+
+
+
+
+2.3.6.1 Value:
+-------------
+
+This value tags do also include the data like the value tags in the message
+ tags children nodes but now with the _translated_ entries.
+
+
+
+
+2.3.6.1.1 Index:
+---------------
+
+The index attribute of the value tag defines the resource to which the
+ translated value does refer. The index attribute can also include multiple
+  resources referrals seperated by commas. In the following example there are
+   3 resources referred to 1, 2 and 3 which are defined in the index tag of
+    the database.
+
+
+Example:
+
+	<translation>
+		<value index="1,2,3">Aç</value>
+	</translation>
+
+
+
+2.3.6.1.2 Tid:
+-------------
+
+You can ref the single transaltor by a predefined "tid" attribute which must
+ be already given in the head-section on the <translator> tags. Following the
+  example below, we're ref'ing to the <translator> tag with the `tid="2"' attr.
+   in the header section.
+
+
+Example:
+
+	<translation>
+		<value index="1,2,3" tid="2">Aç</value>
+	</translation>
+
+
+
+2.3.6.2 Translator:
+------------------
+
+The translator tag is only optional and could be used to assign a translation
+ from different authors in the database message entry by message entry. This
+  translator tag is the same like the global tag, so you can simply go seeing
+   section *2.2.2*.
+
+
+
+
+
+2.3.6.3 Description:
+-------------------
+
+The description tag has got the role to crarify the entry's translation and
+ to enlighten the database users with an useful description of the translation.
+
+This tag is not mandatory but should be used to easify team-work for more
+ complicated applications like Gnumeric or GIMP where not everything is under-
+  standable at the first glance.
+
+Example:
+
+	<description>This is used here because the Technical Engineers do say xyz to yxs in certain situations like ...</description>
+
+
+
+
+2.3.6.4 Date:
+------------
+
+The date tag specifies the date of the translation and is also only optional.
+ It uses the same format like the serial tag's date attribute *2.2.3*.
+
+Example:
+
+	<date>2000-11-17 16:47:30</date>
+
+-------------------------------------------------------------------------------
+
+
+3 Programs/Libraries:
+--------------------
+
+
+
+3.1 gtranslator:
+---------------
+
+gtranslator is a very extended gettext po file editing program for the GNOME
+ desktop and offers many useful functions for editing such files and can also
+  handle many subforms of po files (packed, compressed, compiled forms of it and
+   aldo remotely stored forms of it).
+
+It does already use UMTF for it's own implementation of learn buffers (=TM) &
+ will also support this new and updated version 0.7 of the UMTF specs soon.
+
+You can get gtranslator via GNOME CVS from the module "gtranslator" or via the
+ official homepage for gtranslator at:
+
+	http://www.gtranslator.org
+
+
+
+
+3.2 KBabel:
+----------
+
+KBabel will possibly support UMTF through a XML plugin so that this format
+ will be usable between at least two apps -- UPDATE: this didn't happen I guess
+  and I didn' hear any interest in joning UMTF from this site anymore, so I
+   can't comment on this anymore :-/
+
+KBabel is available from KDE's CVS in the "kdesdk" module or via web:
+
+	http://i18n.kde.org/tools/kbabel/
+
+-------------------------------------------------------------------------------
+
+4 Authors & Contributors:
+------------------------
+
+	Fatih Demir 	<kabalak@gtranslator.org>	[ICQ: 64241161]
+	GNOME I18N-list <gnome-i18n@gnome.org>
+
+Previously co-worked on this -- read *1.3* Update section for more information:
+
+	Matthias Kiefer <kiefer@kde.org>
+
+-------------------------------------------------------------------------------
+
+5 Version: UMTF version 1.0 as of 19th January 2003 (2003-01-19 15:15:30).
+---------
+
+-------------------------------------------------------------------------------
+
+6 Ego perspective/author of the file: Fatih Demir <kabalak@gtranslator.org>
+------------------------------------
