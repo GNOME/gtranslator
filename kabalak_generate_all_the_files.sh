@@ -37,8 +37,10 @@ $a "libtoolize -> " && echo "no"|libtoolize --copy --force 2>&1 1>/dev/null
 }
 grep -sq GETTEXT configure.in && {
 $a "gettextize -> " && echo "no"|gettextize --copy --force 2>&1 1>/dev/null
+$a "xml-i18n-toolize -> " && xml-i18n-toolize --copy --force 2>&1 1>/dev/null
 }
 $a "autoheader -> " && autoheader
+echo ""
 $a "automake -> " && automake -a
 $a "autoconf -> :-) " && autoconf
 echo -e "\n\nYou can now do 2 things :\n"

@@ -21,6 +21,11 @@ AM_INIT_AUTOMAKE(gtranslator, $VERSION)
 AM_MAINTAINER_MODE
 
 dnl -------------------------------------------------------------------
+dnl Use xml-i18n-tools.
+dnl -------------------------------------------------------------------
+AM_PROG_XML_I18N_TOOLS
+
+dnl -------------------------------------------------------------------
 dnl Pick up the Gnome macros .
 dnl -------------------------------------------------------------------
 AM_ACLOCAL_INCLUDE(macros)

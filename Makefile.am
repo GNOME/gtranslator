@@ -15,9 +15,13 @@ EXTRA_DIST=\
 		kabalak_generate_all_the_files.sh \
 		DEPENDS \
 		HACKING \
+		po/update.sh \
 		po/update.pl \
 		po/desk.pl \
 		po/README.tools \
+		xml-i18n-extract \
+		xml-i18n-merge \
+		xml-i18n-update \
 		$(Teamdatabase_DATA)
 
 distpacks: distdir
