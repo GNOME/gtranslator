@@ -863,10 +863,11 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 
 	gtranslator_dialog_show(&dialog, "gtranslator -- replace");
-	
+
+ SHOW_DIALOG:
 	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 
-	if(reply==2)
+	if(reply != GTR_REPLACE_ONCE && reply != GTR_REPLACE_ALL)
 	{
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
@@ -891,21 +892,28 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 
 		if(!findme || strlen(findme)<=0)
 		{
-			gnome_app_error(GNOME_APP(gtranslator_application),
+			GtkWidget *message_dlg;
+			
+			message_dlg = gtk_message_dialog_new (
+				GTK_WINDOW (gtranslator_application),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_WARNING,
+				GTK_BUTTONS_OK,
 				_("Please enter a string to replace!"));
+			
+			gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+			
+			gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+			
+			gtk_dialog_run (GTK_DIALOG (message_dlg));
+			gtk_widget_destroy (message_dlg);
 
+			goto SHOW_DIALOG;
+			
 			return;
 		}
 
-		if(!replaceme || strlen(replaceme)<=0)
-		{
-			gnome_app_error(GNOME_APP(gtranslator_application),
-				_("Please enter a string to replace with!"));
-
-			return;
-		}
-
-		if(reply==1)
+		if(reply==GTR_REPLACE_ALL)
 		{
 			rpl=gtranslator_replace_new(findme, replaceme, TRUE, 0,
 				GtrPreferences.ri_comments, GtrPreferences.ri_english,
