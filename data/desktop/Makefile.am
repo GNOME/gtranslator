@@ -3,7 +3,7 @@
 ##
 ## the dirs where all the DATA should go ..
 ##
-Applicationdir = $(datadir)/gnome/apps/Development
+Applicationdir = $(datadir)/applications
 Applicationicondir = $(datadir)/pixmaps
 
 ##
