@@ -4,8 +4,10 @@
 * (C) 2000 Published under GNU GPL V 2.0+
 *
 * Here will be the db-type stuff. 
-* I'm thinking of a pure gzipped
-* text file as msg[id][str]-base
+* 
+* I'm thinking now about a complete
+*  rewrite in order to get it work on top
+*   of GConf.
 *
 * -- the central for the stuff-*
 **/

@@ -4,8 +4,11 @@
 * (C) 2000 Published under GNU GPL V 2.0+
 *
 * Here are the routines which could be very
-* useful if you're think of slightly auto-
-* generated translations ..
+*  useful if you're think of slightly auto-
+*   generated translations ..
+* 
+* Or of globally accesable strings in every 
+*  translation.
 *
 * -- the central-of-interest
 **/

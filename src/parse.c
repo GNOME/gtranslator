@@ -58,14 +58,6 @@ void parse(gchar *po)
         sprintf(status,_("Current file : \"%s\"."),po);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);	
 	gnome_appbar_refresh(GNOME_APPBAR(appbar1));
-	/**
-	* If any previous list is lying around, delete it/them.
-	**/
-	if(temp||head)
-	{
-		g_list_free(head);
-		g_list_free(temp);
-	}
         /**
         * Open the parse fstream
         **/
@@ -103,7 +95,7 @@ void parse(gchar *po)
 	* Wait for a small amount of time while the user can read the status message
 	*  above, if he has got usleep on his machine.
 	**/
-	usleep(75000);
+	usleep(150000);
 	#endif // HAVE_USLEEP
 	/*
 	* Set up an informative status message
@@ -118,17 +110,20 @@ void parse(gchar *po)
 		/**
 		* Get the current data into a temp. char
 		**/
-        	zamane=(gchar *)g_list_nth_data(temp,count);
-		if(!g_strncasecmp(zamane,"msgid \"",7))
+        	(gpointer)zamane=g_list_nth_data(temp,count);
+		g_print("<`%i'> `%s'.\n",count,(gchar *)zamane);
+		if(!g_strcasecmp(zamane,"msgid \""))
 		{
 			message[count]->msgid=zamane;
+			message[count]->pos=count;
+			g_print("Birim `%i' : `%s' .\n",message[count]->pos,message[count]->msgid);
 		}
 		else
 		{
 			/**
 			* If we do get a "^msgstr" :
 			**/
-			if(!g_strncasecmp(zamane,"msgstr \"",8))
+			if(!g_strcasecmp(zamane,"msgstr \""))
 			{
 				/**
 				* Check if a msgid has been already found.
@@ -139,7 +134,6 @@ void parse(gchar *po)
 					* If we've got one set the struct infos
 					**/
 					message[count]->msgstr=zamane;
-					message[count]->pos=count;
 					/**
 					* A fake comment as I'dn't integrated	
 					*  a comments-setting function yet.
@@ -163,8 +157,9 @@ void parse(gchar *po)
 			}
 		}
         }
+		
 	/**
-	* As we've gto finished we can do some nonsense
+	* As we've got finished we can do some nonsense
 	**/
 	apply_header();
 	enable_buttons();
