@@ -9,6 +9,22 @@
 #
 
 #
+# Also feature a small help screen if the user wants to know more about this
+#  script.
+#
+case $1
+--[hH][eE][lL][pP]|-[hH])
+	echo "---------------------------------------------------------------"
+	echo "\"$0\""
+	echo " is a script which does try to semiautomatically set up a learn"
+	echo "  buffer for gtranslator with the data you're entering and with"
+	echo "   po files beneath the current directory."
+	echo "---------------------------------------------------------------"
+		exit 1
+;;
+esac
+
+#
 # The functions used in our little, small script.
 #
 read_po_filename ()  {

@@ -8,6 +8,20 @@
 #    removes all of the corresponding files in the user's home directory.
 #
 
+#
+# We should always show some information on a call with "--help" as the arg.
+#
+case $1 in
+--[hH][eE][lL][pP]|-[hH])
+	echo "---------------------------------------------------------------"
+	echo "\"$0\""
+	echo " does allow you to completely clean up all gtranslator data and"
+	echo "  settings from your home directory. Be careful with it!"
+	echo "---------------------------------------------------------------"
+		exit 1
+;;
+esac
+
 remove_commands ()  {
 	killall gtranslator 2>&1 >/dev/null ; sleep 3 && \
 	gconftool --shutdown 2>&1 >/dev/null && sleep 3 && \
