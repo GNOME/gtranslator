@@ -43,10 +43,10 @@ typedef struct {
 	GList *current;
 	/* Marks if the file was changed; */
 	guint file_changed : 1;
+	/* The translated entries. */
+	guint translated;
 	/* The fuzzy entries. */
-	guint fuzzy : 1;
-	/* The untranslated entries. */
-	guint untranslated : 1;
+	guint fuzzy;
 } GtrPo;
 
 #define GTR_PO(x) ((GtrPo *)x)
@@ -59,6 +59,12 @@ gboolean file_opened;
 
 /* Marks if the current message was changed; */
 gboolean message_changed;
+
+/**
+* The variables which store the count-stuff.
+**/
+gfloat onepercent;
+gfloat percentage;
 
 /* Changes message fuzzy status */
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy);
@@ -97,6 +103,12 @@ void update(GtkWidget *widget, gpointer useless);
 * This shows you the most recent menus.
 **/
 void gtranslator_display_recent(void);
+
+/**
+* This function gets the count of the translated messages
+*  from the given po-file.
+**/
+void get_translated_count(void);
 
 /* A cache for saving regexps */
 GnomeRegexCache *rxc;

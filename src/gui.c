@@ -495,7 +495,7 @@ void create_app1(void)
 	trans_box = gtk_text_new(NULL, NULL);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2), trans_box);
 
-	appbar1 = gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER);
+	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(app1), appbar1);
 	/* Make menu hints display on the appbar */
 	gnome_app_install_menu_hints(GNOME_APP(app1), the_menus);
@@ -686,6 +686,20 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 		mark_msg_fuzzy(GTR_MSG(po->current->data),
 			       GTK_CHECK_MENU_ITEM(item)->active);
 		/**
+		* Test if the fuzzy item is acive.
+		**/	       
+		if(GTK_CHECK_MENU_ITEM(item)->active==TRUE)
+		{
+			/**
+			* And set the fuzzy count.
+			**/
+			po->fuzzy--;
+			/**
+			* And step up with the translated count.
+			**/
+			po->translated++;
+		}	       
+		/**
 		* Also update the status information in the statusbar.
 		**/	       
 		update_appbar(g_list_position(po->messages, po->current));
@@ -733,24 +747,51 @@ static void update_appbar(gint pos)
 	**/
 	if(msg->status & GTR_MSG_STATUS_FUZZY)
 	{
-		str = g_strdup_printf("%s %s", str, _("Fuzzy"));
+		if(po->fuzzy>1)
+		{
+			str=g_strdup_printf(_("%s %s [ %i Fuzzy left ]"), str, _("Fuzzy"), po->fuzzy);
+		}	
+		else
+		{
+			str=g_strdup_printf(_("%s %s [ No fuzzy left ]"), str, _("Fuzzy"));
+		}
 	}
 	if(msg->status & GTR_MSG_STATUS_TRANSLATED)
 	{
-		str = g_strdup_printf("%s %s", str, _("Translated"));
+		str=g_strdup_printf("%s %s", str, _("Translated"));
 	}
 	else
 	{
 		if(msg->status & GTR_MSG_STATUS_STICK)
 		{
-			str = g_strdup_printf("%s %s", str, _("Stick"));
+			str=g_strdup_printf("%s %s", str, _("Stick"));
 		}
 		else
 		{
-			str = g_strdup_printf("%s %s", str, _("Untranslated"));
+			if(((g_list_length(po->messages))-po->translated)>1)
+			{
+				guint missya;
+				missya=((g_list_length(po->messages))-po->translated);
+				str=g_strdup_printf(_("%s %s [ %i Untranslated left ]"), str, _("Untranslated"), missya);
+			}
+			else
+			{
+				str=g_strdup_printf(_("%s %s [ No untranslated left ]"), str, _("Untranslated"));
+			}	
 		}
 	}
+	/**
+	* Set the appbar text.
+	**/
 	gnome_appbar_push(GNOME_APPBAR(appbar1), str);
+	/**
+	* Update the progressbar.
+	**/
+	percentage=(gfloat) ((((gfloat )po->translated/(gfloat) onepercent))*0.01000);
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), percentage);
+	/**
+	* And free the allocated string.
+	**/
 	g_free(str);
 }
 
@@ -856,6 +897,22 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 	if (!po->file_changed) {
 		po->file_changed = TRUE;
 		enable_actions(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+		if((GTR_MSG(po->current->data)->status | GTR_MSG_STATUS_FUZZY)||
+			GTR_MSG(po->current->data)->status | GTR_MSG_STATUS_TRANSLATED)
+		{
+			/**
+			* Increment the translated count.
+			**/
+			po->translated++;
+			/**
+			* Set the translated flag.
+			**/
+			GTR_MSG(po->current->data)->status &= ~GTR_MSG_STATUS_TRANSLATED;
+			/**
+			* Update the appbar.
+			**/
+			update_appbar(g_list_position(po->messages, po->current));
+		}
 	}
 	if (!message_changed) {
 		GtrMsg *msg = GTR_MSG(po->current->data);
@@ -866,6 +923,14 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		     	mark_msg_fuzzy(msg, FALSE);
 			gtk_check_menu_item_set_active(
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
+			/**
+			* Decrement the fuzzy count.
+			**/
+			po->fuzzy--;
+			/**
+			* And increment the translated count.
+			**/ 
+			po->translated++;
 		}
 		/**
 		* Also update the status information in the statusbar.

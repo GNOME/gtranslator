@@ -26,8 +26,9 @@ static void append_line(gchar ** old, const gchar * tail);
 static gchar *restore_msg(gchar * given);
 static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
-static void free_a_message(gpointer data, gpointer useless);
 static void free_po(void);
+static void free_a_message(gpointer data, gpointer useless);
+void determine_translation_status(gpointer data, gpointer useless_stuff);
 
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
@@ -140,6 +141,12 @@ static gboolean actual_parse(void)
 	* Add a GNOME history entry.
 	**/
 	gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");
+	
+	/**
+	* As the po-file seems to exist, set the "count parameters" to 0.
+	**/
+	po->translated=0;
+	po->fuzzy=0;
 	
 	msg = g_new0(GtrMsg, 1);
 	/**
@@ -288,6 +295,7 @@ void parse(const char *filename)
 	/* Set the current message to the first message, and show it */
 	po->current = g_list_first(po->messages);
 	display_msg(po->current);
+	get_translated_count();
 	enable_actions_just_opened();
 	disable_actions(ACT_FIRST, ACT_BACK);
 	/**
@@ -540,8 +548,21 @@ void close_file(GtkWidget * widget, gpointer useless)
 	free_po();
 	file_opened = FALSE;
 	nothing_changes = TRUE;
+	/**
+	* Clean up the text boxes.
+	**/
 	clean_text_boxes();
+	/**
+	* Set a blank appbar status message.
+	**/
 	gnome_appbar_push(GNOME_APPBAR(appbar1), "");
+	/**
+	* Set the progressbar progress.
+	**/
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), 0.00000);
+	/**
+	* Disable the file action buttons.
+	**/
 	disable_actions_no_file();
 }
 
@@ -868,5 +889,58 @@ void update(GtkWidget *widget, gpointer useless)
 	if(newfile)
 	{
 		g_free(newfile);
-	}	
+	}
+}
+
+/**
+* A helper function simply increments the "translated" variable of the
+*  po-file.
+**/
+void determine_translation_status(gpointer data, gpointer useless_stuff)
+{
+	GtrMsg *message;
+	/**
+	* Get the message.
+	**/
+	message=GTR_MSG(data);
+	/**
+	* Is this message translated ?
+	**/
+	if(message->status & GTR_MSG_STATUS_TRANSLATED)
+	{
+		/**
+		* Then increment the translated count.
+		**/
+		po->translated++;
+	}
+	/**
+	* .. or even fuzzy ?
+	**/
+	if(message->status & GTR_MSG_STATUS_FUZZY)
+	{
+		/**
+		* Then increment the fuzzy count.
+		**/
+		po->fuzzy++;
+	}
+}
+
+/**
+* Now get the complete count of the translated entries.
+**/
+void get_translated_count(void)
+{
+	g_list_foreach(po->messages, (GFunc) determine_translation_status, NULL);
+	/**
+	* Determine what's 1 % of the messages count.
+	**/
+	onepercent=(gfloat )(g_list_length(po->messages)*0.01000);
+	/**
+	* Get the total percentage.
+	**/
+	percentage=(gfloat) ((((gfloat )po->translated/(gfloat) onepercent))*0.01000);
+	/**
+	* Set the progressbar status.
+	**/
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), percentage);
 }

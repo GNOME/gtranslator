@@ -1,7 +1,25 @@
 2000-10-17  Fatih Demir <kabalak@gmx.net>
-	
-	* parse.h: Added the "fuzzy" and "untranslated" fields to the
-		GtrPo structure.
+
+	* gui.c: Set the left fuzzy/untranslated messages inside the status
+		text and set the progressbar corresponding to the current
+		 status and hopefully update the fuzzy count in the status
+		  messages and the untranslated messages count is now
+		   updated somehow working =?
+
+	* parse.c: Get the count at the startup and set the progressbar
+		corresponding to the values ( also get the fuzzy count );
+		 on closure of the file set the progressbar value to 0.
+
+	* parse.h: do use "fuzzy" and "translated" fields for the determi-
+		nition of the message status. Include two new functions
+		 which should build the progressbar total and other sources
+		  for status informations ( these are "get_translated_count"
+		   for the list of messages and "determine_translation_status"
+		    for the determinition of the status itself ).
+		Moved the two gfloat values to the header as they're globally
+		 used now.
+
+	* gui.c: Also have a progressbar in the GNOME appbar.	
 
 2000-10-15  Fatih Demir	<kabalak@gmx.net>
 

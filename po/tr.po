@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.30\n"
-"POT-Creation-Date: 2000-10-16 22:05+0200\n"
-"PO-Revision-Date: 2000-10-15 23:44+0200\n"
+"POT-Creation-Date: 2000-10-17 22:53+0200\n"
+"PO-Revision-Date: 2000-10-17 22:54+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "Son _dosyalar"
 
 #: src/gui.c:117
 msgid "_Header..."
-msgstr "_Baþlýk...."
+msgstr "_Baþlýk..."
 
 #: src/gui.c:118 src/gui.c:254
 msgid "Edit the header"
@@ -224,7 +224,7 @@ msgstr "Son"
 msgid "Missing"
 msgstr "Eksik"
 
-#: src/gui.c:290 src/gui.c:737
+#: src/gui.c:290 src/gui.c:752 src/gui.c:756
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -255,29 +255,49 @@ msgstr "Po dosyasýnda bul"
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:549
+#: src/gui.c:548
 msgid "Bye bye!"
 msgstr "Güle Güle!"
 
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:727
+#: src/gui.c:740
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Ileti: %d / %d / Durum:"
 
-#: src/dialogs.c:217 src/gui.c:741
+#: src/gui.c:752
+#, c-format
+msgid "%s %s [ %i Fuzzy left ]"
+msgstr "%s %s [ %i Fuzzy geriye kaldý ]"
+
+#: src/gui.c:756
+#, c-format
+msgid "%s %s [ No fuzzy left ]"
+msgstr "%s %s [ Fuzzy ileti kalmadý ]"
+
+#: src/dialogs.c:217 src/gui.c:761
 msgid "Translated"
 msgstr "Tercüme metinlerinde"
 
-#: src/gui.c:747
+#: src/gui.c:767
 msgid "Stick"
 msgstr "Kalýcý"
 
-#: src/gui.c:751
+#: src/gui.c:775
+#, c-format
+msgid "%s %s [ %i Untranslated left ]"
+msgstr "%s %s [ %i tercüme edilmemiþ ileti geriye kaldý ]"
+
+#: src/gui.c:775 src/gui.c:779
 msgid "Untranslated"
 msgstr "Tercüme edilmemiþ"
+
+#: src/gui.c:779
+#, c-format
+msgid "%s %s [ No untranslated left ]"
+msgstr "%s %s [ Tercümesiz ileti kalmamýþ ]"
 
 #: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
@@ -547,7 +567,7 @@ msgstr "Ana pencere boyutlarýný belirler"
 msgid "Error during GConf initialization: %s."
 msgstr "GConf baþlama hatasý: `%s'."
 
-#: src/parse.c:96
+#: src/parse.c:97
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -556,12 +576,12 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:130 src/parse.c:447
+#: src/parse.c:131 src/parse.c:455
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" hiç yok ki !"
 
-#: src/parse.c:200
+#: src/parse.c:207
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -572,7 +592,7 @@ msgstr ""
 "var; satýr %d.\n"
 "Lütfen dosyayý gözden gecýrip bir deneme daha yap."
 
-#: src/parse.c:229
+#: src/parse.c:236
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -581,25 +601,25 @@ msgstr ""
 "Bu dosya boþtur:\n"
 "%s"
 
-#: src/parse.c:248
+#: src/parse.c:255
 msgid "There's no file to open!\n"
 msgstr "Açilacak dosya yok!\n"
 
-#: src/parse.c:276
+#: src/parse.c:283
 msgid "The file has no header!"
 msgstr "Dosyanýn baþlýðý yok!"
 
-#: src/parse.c:279
+#: src/parse.c:286
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 
-#: src/parse.c:282
+#: src/parse.c:289
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:435
+#: src/parse.c:443
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -611,7 +631,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:492
+#: src/parse.c:500
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -622,11 +642,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:500
+#: src/parse.c:508
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþiksiz"
 
-#: src/parse.c:557
+#: src/parse.c:578
 #, c-format
 msgid ""
 "File %s\n"
@@ -635,11 +655,11 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:594
+#: src/parse.c:615
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
 
-#: src/parse.c:619
+#: src/parse.c:640
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -651,20 +671,20 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:664 src/parse.c:674 src/parse.c:675
+#: src/parse.c:685 src/parse.c:695 src/parse.c:696
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:720
+#: src/parse.c:741
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
 
-#: src/parse.c:840
+#: src/parse.c:861
 msgid "An update would cause no changes."
 msgstr "Bir yenileme hiç bir deðiþikliðe yol açmazdý."
 
-#: src/parse.c:858
+#: src/parse.c:879
 msgid "The update was successfull."
 msgstr "Yenileme baþarýlý oldu."
 
@@ -705,8 +725,7 @@ msgstr "Oturum baþarýyla yeniden yüklendi."
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr "
-"...\n"
+"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
 
 #. *
 #. * Print some more exact informations on the GConf init-error.
@@ -835,55 +854,55 @@ msgstr ""
 "Libgtranslator'de kullanýlan GConf iþlemlerini baþlatýrklen hata oluþtu:\n"
 "%s"
 
-#: libgtranslator/preferences.c:80
+#: libgtranslator/preferences.c:85
 msgid "No path defined where I could get the string from."
 msgstr "Metni alacak bir dizinleme belirtilmedi ki."
 
-#: libgtranslator/preferences.c:103
+#: libgtranslator/preferences.c:108
 #, c-format
 msgid "Can't set the string `%s' for a non-defined path!\n"
 msgstr "Belirtilmemiþ bir dizinlemeye `%s' metnini oturtumam!\n"
 
-#: libgtranslator/preferences.c:110
+#: libgtranslator/preferences.c:115
 #, c-format
 msgid "No string defined for the path `%s'!"
 msgstr "`%s' dizinlemesi için hiç bir metin belirtilmemiþ!"
 
-#: libgtranslator/preferences.c:139
+#: libgtranslator/preferences.c:144
 msgid "No path defined where I could get the integer from!"
 msgstr "Onlu sayýyý alacak dizinleme belirtilmemiþ!"
 
-#: libgtranslator/preferences.c:140
+#: libgtranslator/preferences.c:145
 msgid "Returning `1' for assurance .."
 msgstr "Güvenlik için '1' veriyorum ..."
 
-#: libgtranslator/preferences.c:162
+#: libgtranslator/preferences.c:167
 #, c-format
 msgid "Can't set the value `%i' for a non-defined path!"
 msgstr "Belirtilmemiþ bir dizinlemeye `%i' deðerini oturtamam!"
 
-#: libgtranslator/preferences.c:169
+#: libgtranslator/preferences.c:174
 #, c-format
 msgid "No value defined for the path `%s'!"
 msgstr "`%s' dizinlemesi için bir deðer verilmedi ki !"
 
-#: libgtranslator/preferences.c:196
+#: libgtranslator/preferences.c:201
 msgid "No path defined where I could get the boolean from."
 msgstr "Bool'lu deðeri alacak bir dizinleme belirtilmemiþ ki."
 
-#: libgtranslator/preferences.c:197
+#: libgtranslator/preferences.c:202
 msgid "Returning `FALSE' for assurance ..."
 msgstr "Güvenlik için 'FALSE' veriyorum ..."
 
-#: libgtranslator/preferences.c:215
+#: libgtranslator/preferences.c:220
 msgid "Can't set a boolean value for a non-defined path!"
 msgstr "Belirtilmemiþ bir dizinleme için bir Bool'lu deðer oturtumam!"
 
-#: libgtranslator/preferences.c:242
+#: libgtranslator/preferences.c:247
 msgid "No path defined for gfloat value"
 msgstr "gfloat deðeri için bir dizinleme belirlenmedi"
 
-#: libgtranslator/preferences.c:267
+#: libgtranslator/preferences.c:272
 msgid "No path defined to get the gfloat value from!"
 msgstr "Gfloat deðerini alacak dizinleme belirtilmemiþ!"
 
@@ -891,11 +910,11 @@ msgstr "Gfloat deðerini alacak dizinleme belirtilmemiþ!"
 #. * Set a date identifier; this ought to be also
 #. *  localized!
 #. *
-#: libgtranslator/preferences.c:317
+#: libgtranslator/preferences.c:322
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
-#: libgtranslator/preferences.c:323
+#: libgtranslator/preferences.c:328
 msgid "Couldn't generate the current date!"
 msgstr "Þimdiki tarih metnini belirleyemedim!"
 
@@ -1085,3 +1104,4 @@ msgstr "Gelik"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "Velþ"
+
