@@ -1,5 +1,9 @@
 2001-10-02  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c: Don't convert messages to UTF-8 if the messages are
+		already UTF-8 per se -- should fix the bugzilla.gnome.org bug
+		 #60839.
+
 	* bookmark.c/.h: General re-organization of some parts -- it should be
 		much more practicable now.
 

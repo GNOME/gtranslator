@@ -463,7 +463,14 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	case COL_TRANSLATION:
 		if(message->msgstr)
 		{
-			return gtranslator_utf8_get_utf8_string(&message->msgstr);
+			if(po->utf8)
+			{
+				return message->msgstr;
+			}
+			else
+			{
+				return gtranslator_utf8_get_utf8_string(&message->msgstr);
+			}
 		}
 		else
 		{
