@@ -25,14 +25,14 @@
 
 #include <signal.h>
 
+static gint signalscount=0;
+
 /*
  * Get and enclose the signals that could put much translation work within
  *  gtranslatorinto the trash.
  */ 
 void gtranslator_signal_handler(int signal)
 {
-	static gint signalscount=0;
-
 	if(signalscount > 0)
 	{
 		return;
