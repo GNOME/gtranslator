@@ -22,13 +22,20 @@
 void gtranslator_tm_add(const gchar *message, const gchar *translation,
 	const gchar *language_code, const gchar *eventual_id)
 {
-	g_print("FIXME");
+	g_return_if_fail(message!=NULL);
 }
 
 gint gtranslator_tm_query_for_message(const gchar *message,
         const gchar *eventual_id)
 {
-	g_warning("To be written");
-	
+	g_return_val_if_fail(message!=NULL, -1);
+
+	return -1;
+}
+
+gint gtranslator_tm_query_for_id(const gchar *eventual_id)
+{
+	g_return_val_if_fail(eventual_id!=NULL, -1);
+
 	return -1;
 }

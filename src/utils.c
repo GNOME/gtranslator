@@ -116,11 +116,23 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 		 * Should we use a different suffix for the autosaved files? Should
 		 *  help differing the own-saved/autosaved po files.
 		 */
-		if(GtrPreferences.autosave_with_suffix && 
-			GtrPreferences.autosave_suffix)
+		if(GtrPreferences.autosave_with_suffix) 
 		{
-			gchar *autosave_filename=g_strdup_printf("%s.%s",
-				po->filename, GtrPreferences.autosave_suffix);
+			gchar *autosave_filename;
+		
+			/*
+			 * Take "autosave" as the fallback autosave suffix.
+			 */
+			if(GtrPreferences.autosave_suffix)
+			{
+				autosave_filename=g_strdup_printf("%s.%s",
+					po->filename, GtrPreferences.autosave_suffix);
+			}
+			else
+			{
+				autosave_filename=g_strdup_printf("%s.autosave",
+					po->filename);
+			}
 
 			gtranslator_save_file(autosave_filename);
 			g_free(autosave_filename);

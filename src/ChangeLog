@@ -1,5 +1,12 @@
 2001-05-30  Fatih Demir <kabalak@gtranslator.org>
 
+	* translation-memories.c/.h: Removed any own cruft; these files
+		will handle Semerkent later on.
+
+	* parse.c: Hook up the autosave routine and handle with the source
+		tag on file closure; moved the disabling of the ACT_SAVE
+		 action into "gtranslator_save_file".
+
 	* prefs_init.c: Added sane autosave values to the preferences 
 		initializing function.
 
