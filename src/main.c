@@ -125,6 +125,19 @@ int main(int argc, char *argv[])
 	restore_geometry(gtranslator_geometry);
 
 	/*
+	 * Check if a temporary file from the last session had been
+	 *  left.
+	 */
+	if(g_file_exists(g_strdup_printf("%s/%s",
+				g_get_home_dir(),
+				"gtranslator-temp-po-file")))
+	{
+		unlink(g_strdup_printf("%s/%s",
+				g_get_home_dir(), 
+				"gtranslator-temp-po-file"));
+	}
+	
+	/*
 	 * If there are any files given on command line, open them
 	 * TODO add here loading of all files, when program becomes MDI
 	 */
