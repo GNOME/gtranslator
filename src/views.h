@@ -23,8 +23,9 @@
 #include <glib.h>
 
 /*
- * gtranslator's view atre all part of this enumeration.
- * Order should be kept in sync with gtranslator_sidebar_activate_views()
+ * gtranslator's views are all part of this enumeration.
+ *
+ * Order should be kept in sync with gtranslator_sidebar_activate_views().
  */
 typedef enum {
 	GTR_MESSAGE_VIEW,
