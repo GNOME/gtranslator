@@ -10,14 +10,59 @@
    This function is required for alloca.c support on those systems.  */
 #undef CRAY_STACKSEG_END
 
+#undef ENABLE_NLS
+/* Define to the type of elements in the array set by `getgroups'.
+   Usually this is either `int' or `gid_t'.  */
+#undef GETGROUPS_T
+
+#undef GNOME_ENABLE_DEBUG
+#undef GNOME_ICON
 /* Define if you have alloca, as a function or macro.  */
 #undef HAVE_ALLOCA
 
 /* Define if you have <alloca.h> and it should be used (not on Ultrix).  */
 #undef HAVE_ALLOCA_H
+#undef HAVE_BONOBO
+#undef HAVE_BONOBO_H
+#undef HAVE_CATGETS
+
+#undef HAVE_GETTEXT
+#undef HAVE_GNOME
+#undef HAVE_GNU_REGEXP
+#undef HAVE_GTKTEXT_PATCH
+#undef HAVE_LC_MESSAGES
+
+#undef HAVE_LIBGIF
+#undef HAVE_LIBGNORBA
+#undef HAVE_LIBGUILE
+#undef HAVE_LIBJPEG
+#undef HAVE_LIBPNG
+#undef HAVE_LIBSM
+#undef HAVE_LIBTIFF
+#undef HAVE_LIBUNGIF
+#undef HAVE_LIBUTIL
+#undef HAVE_LIBZ
+#undef HAVE_LOGIN_TTY
+/* Define if the `long double' type works.  */
+#undef HAVE_LONG_DOUBLE
 
 /* Define if you have a working `mmap' system call.  */
 #undef HAVE_MMAP
+#undef HAVE_NANOSLEEP
+#undef HAVE_OPENPTY
+#undef HAVE_PNG
+#undef HAVE_PROGRESSIVE_JPEG
+/* Define if system calls automatically restart after interruption
+   by a signal.  */
+#undef HAVE_REGEX_H
+#undef HAVE_RESTARTABLE_SYSCALLS
+#undef HAVE_SCHED_SETSCHEDULER
+#undef HAVE_SENDMSG
+#undef HAVE_STROPTS_H
+/* Define if your struct stat has st_blksize.  */
+#undef HAVE_ST_BLKSIZE
+
+#undef HAVE_STPCPY
 
 /* Define as __inline if that's what the C compiler calls it.  */
 #undef inline
@@ -44,7 +89,6 @@
 #undef STDC_HEADERS
 
 #undef BIND_MIME
-#undef EMACS_LOVER
 #undef ENABLE_NLS
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT
@@ -99,6 +143,9 @@
 /* Define if you have the strdup function.  */
 #undef HAVE_STRDUP
 
+/* Define if you have the <X11/SM/SMlib.h> header file.  */
+#undef HAVE_X11_SM_SMLIB_H
+
 /* Define if you have the <argz.h> header file.  */
 #undef HAVE_ARGZ_H
 
@@ -114,17 +161,14 @@
 /* Define if you have the <nl_types.h> header file.  */
 #undef HAVE_NL_TYPES_H
 
-/* Define if you have the <sys/param.h> header file.  */
-#undef HAVE_SYS_PARAM_H
-
 /* Define if you have the <string.h> header file.  */
 #undef HAVE_STRING_H
 
+/* Define if you have the <sys/param.h> header file.  */
+#undef HAVE_SYS_PARAM_H
+
 /* Define if you have the <unistd.h> header file.  */
 #undef HAVE_UNISTD_H
-
-/* Define if you have the <X11/SM/SMlib.h> header file.  */
-#undef HAVE_X11_SM_SMLIB_H
 
 /* Define if you have the i library (-li).  */
 #undef HAVE_LIBI
