@@ -170,7 +170,7 @@ load_location (NautilusGtranslatorView *view,
 	/*
 	 * Parse the current location as a po file.
 	 */ 
-	parse_core(
+	gtranslator_parse(
 		gnome_vfs_get_local_path_from_uri(
 			view->details->location));
 
@@ -206,7 +206,7 @@ load_location (NautilusGtranslatorView *view,
 		GtkWidget *comment;
 
 		comment=gtk_label_new(g_strdup_printf(_("Comments:\n%s"),
-			prepare_comment_for_view(po->header->comment)));
+			gtranslator_header_comment_convert_for_view(po->header->comment)));
 
 		add_part(comment, 0, 0);
 		add_part(encoding, 0, 1);
