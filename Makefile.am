@@ -6,10 +6,6 @@ SUBDIRS = macros intl po data libgtranslator src help man
 ## The team database get's installed into gtranslator's main datadir.
 ##
 
-Teamdatabasedir = $(datadir)/gtranslator
-
-Teamdatabase_DATA = teams.xml
-
 EXTRA_DIST= \
 		kabalak_generate_all_the_files.sh \
 		DEPENDS \
@@ -17,8 +13,7 @@ EXTRA_DIST= \
 		po/update.sh \
 		xml-i18n-extract \
 		xml-i18n-merge \
-		xml-i18n-update \
-		$(Teamdatabase_DATA)
+		xml-i18n-update
 
 distpacks: distdir
 	@-rm -f $(distdir).tar.bz2
