@@ -1,5 +1,19 @@
 2000-06-04  Fatih Demir		( kabalak@gmx.net )
 
+	+	Added a msg-db menu with some entries.
+
+	+	Added a separator to the file menu.
+
+	+	Added some more menu entries to be in
+		
+		sync with the toolbar.
+
+	+	Connected the menu entries also with the
+		
+		new functions.
+		
+		-> interface.c
+
 	+	Include "gnome-window-icon.h" only if
 		
 		it's available on the system.
@@ -11,7 +25,19 @@
 		ifdefs as they'ren't ANSI-C conform.
 		
 		-> *.h
+
+	+	Hey, do only get (g_list_length-1)nth
+		
+		data. 
 	
+	+	Disable the corresponding button if we're
+		
+		at the first/last entry.
+
+	+	Implementing the button-callbacks as 
+		
+		functions.
+
 	+	Reverted the recognition of the error-
 		
 		case.
@@ -41,6 +67,12 @@
 	+	Fill out the find dialogs.
 	
 		-> gtr_dialogs.c
+
+	+	Made some text-output non-translatable, e.g. the '\n''s.
+		
+		They'll be printed with another g_print, just to avoid 
+		
+		more work for the translators.. ;)
 
 	+	Made the option working and restructured the init a
 		

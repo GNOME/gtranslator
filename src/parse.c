@@ -44,7 +44,7 @@ void parse(gchar *po)
 	**/
 	gchar temp_char[128];
 	gchar *zamane=NULL;
-        guint lines=1,z=0,msg_pair=0;
+        guint lines=1,z=0;
 	messages=g_list_alloc();
 	messages=NULL;
 	/**
@@ -103,7 +103,7 @@ void parse(gchar *po)
 			* Use the functions defined & used in header_stuff.*
 			*  to rip the header off.
 			**/
-			get_header(temp_char);
+			//->get_header(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
@@ -112,22 +112,22 @@ void parse(gchar *po)
 			*  and set the comment & position.
 			**/
 			msg_pair++;
-			msg->pos=z;
-			msg->comment=g_strdup(temp_char);
+			msg->pos=msg_pair;
+			msg->comment=(gchar *)g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			msg->msgid=g_strdup(temp_char);
+			msg->msgid=(gchar *)g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			msg->msgstr=g_strdup(temp_char);
+			msg->msgstr=(gchar *)g_strdup(temp_char);
 		}
 		/**
 		* Add the current message to the messages list.
@@ -175,10 +175,52 @@ void parse_the_file(GtkWidget *widget,gpointer useless)
 }
 
 /**
+* Cleans up the text boxes.
+**/
+void clean_text_boxes()
+{
+	gtk_text_backward_delete(GTK_TEXT(text1),gtk_text_get_length(GTK_TEXT(text1)));
+	gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
+}
+
+/**
 * Get's the first msg.
 **/
 void get_first_msg(GtkWidget *widget,gpointer useless)
 {
+	gtr_msg *first=g_new(gtr_msg,1);
+	first=(gtr_msg *)g_list_nth_data(messages,0);
+	clean_text_boxes();
+	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)first->msgid,sizeof((gchar *)first->msgid));
+	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)first->msgstr,sizeof((gchar *)first->msgstr));
+	if(first)
+	{
+		gtk_widget_set_sensitive(last_button,TRUE);
+		gtk_widget_set_sensitive(next_button,TRUE);
+		gtk_widget_set_sensitive(first_button,FALSE);
+		gtk_widget_set_sensitive(back_button,FALSE);
+		g_free(first);
+	}
+}
+
+/**
+* Get the last entry.
+**/
+void get_last_msg(GtkWidget *widget,gpointer useless)
+{
+	gtr_msg *last=g_new(gtr_msg,1);
+	last=(gtr_msg *)g_list_nth_data(messages,(g_list_length(messages)-1));
+	clean_text_boxes();
+	gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)last->msgid,sizeof((gchar *)last->msgid));
+	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)last->msgstr,sizeof((gchar *)last->msgstr));
+	if(last)
+	{
+		gtk_widget_set_sensitive(first_button,TRUE);
+		gtk_widget_set_sensitive(back_button,TRUE);
+		gtk_widget_set_sensitive(last_button,FALSE);
+		gtk_widget_set_sensitive(next_button,FALSE);
+		g_free(last);
+	}
 }
 
 /**
@@ -189,10 +231,10 @@ gchar *search_do(GtkWidget *widget,gpointer wherefrom)
 	switch((gint)wherefrom)
 	{
 		case 1:
-			g_print("SEARCH! HAS TO BE DONE!\n");
+			g_print("SEARCH! HAS TO BE DONE! ;)\n");
 			break;
 		case 2:
-			g_print("RESEARCH! HAS ALSO TO BE DONE!\n");
+			g_print("RESEARCH! HAS ALSO TO BE DONE! ;)\n");
 			break;
 		default :
 			break;

@@ -233,6 +233,7 @@ static GnomeUIInfo the_file_menu[] =
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
           GDK_C, GDK_MOD1_MASK, NULL
         },
+	GNOMEUIINFO_SEPARATOR,
         GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
         GNOMEUIINFO_MENU_SAVE_ITEM(NULL, NULL),
         GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
@@ -252,6 +253,30 @@ static GnomeUIInfo the_edit_menu[] =
 		NULL, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TRASH,
 		'K', GDK_CONTROL_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Search"),
+		N_("Search"),
+		s_box, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+		'S', GDK_CONTROL_MASK, NULL	
+	},
+	{
+		GNOME_APP_UI_ITEM, N_("ReSearch"),
+		N_("Search again"),
+		search_do, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,
+		'R', GDK_CONTROL_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Find"),
+		N_("Find"),
+		find_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+		'F', GDK_CONTROL_MASK, NULL
+
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
@@ -281,7 +306,7 @@ static GnomeUIInfo the_messages_menu[] =
         {
           GNOME_APP_UI_ITEM, N_("_First"),
           NULL,
-          NULL, NULL, NULL,
+          get_first_msg, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FIRST,
           GDK_Home, GDK_CONTROL_MASK, NULL
         },
@@ -303,11 +328,31 @@ static GnomeUIInfo the_messages_menu[] =
         {
           GNOME_APP_UI_ITEM, N_("_Last"),
           NULL,
-          NULL, NULL, NULL,
+          get_last_msg, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_LAST,
           GDK_End, GDK_CONTROL_MASK, NULL
         },
         GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_msg_db_menu [] =
+{
+	{
+		GNOME_APP_UI_ITEM, N_("_Add"),
+		N_("Add the current message to the msg_db."),
+		append_to_msg_db, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UP,
+		0, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("_Query"),
+		N_("Query the msg_db for the current msgid."),
+		NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_DOWN,
+		0, 0, NULL
+	},
+	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_settings_menu[] =
@@ -349,6 +394,13 @@ static GnomeUIInfo the_menus[] =
           GNOME_APP_PIXMAP_NONE, N_("_Messages"),
           0, 0, NULL
         },
+	{
+		GNOME_APP_UI_SUBTREE, N_("Msg _db"),
+		NULL,
+		the_msg_db_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, N_("Msg _db"),
+		0, 0, NULL
+	},
         GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
         GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
         GNOMEUIINFO_END
@@ -610,6 +662,8 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);
 	gtk_signal_connect(GTK_OBJECT(first_button),"clicked",
 		GTK_SIGNAL_FUNC(get_first_msg),NULL);
+	gtk_signal_connect(GTK_OBJECT(last_button),"clicked",
+		GTK_SIGNAL_FUNC(get_last_msg),NULL);
 	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",
 		GTK_SIGNAL_FUNC(prefs_box_show),NULL);
 	gtk_signal_connect(GTK_OBJECT(compile_button),"clicked",

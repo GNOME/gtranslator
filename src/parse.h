@@ -37,6 +37,11 @@
 static gchar *i_love_this_file=NULL;
 
 /**
+* The counting variable for the messages.
+**/
+static gint msg_pair=0;
+
+/**
 * A gboolean for the silly question if a file is open ...
 **/
 gboolean file_opened;

@@ -212,7 +212,7 @@ void goto_dlg_create(gint lines)
 	**/
 	g_dlg_ok=gtk_button_new_with_label(_("Go!"));
 	g_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	g_dlg_line_adjustment=gtk_adjustment_new(nb, 1, lines, 1, 2, 2);
+	g_dlg_line_adjustment=gtk_adjustment_new(nb, 1, msg_pair, 1, 2, 2);
 	g_dlg_line=gtk_spin_button_new(GTK_ADJUSTMENT(g_dlg_line_adjustment), 1, 0);
 	g_dlg_label=gtk_label_new(_("Goto the specified message entry."));
 	/**
