@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ETableSpecification cursor-mode="line" draw-grid="true" draw-focus="true" selection-mode="click">
-	<ETableColumn model_col="0" _title="Number" expansion="2.0" minimum_width="2" resizable="false" cell="number" compare="integer" sortable="yes"/>
+<ETableSpecification cursor-mode="line" draw-grid="true" draw-focus="true" selection-mode="single">
+	<ETableColumn model_col="0" _title="Number" expansion="2.0" minimum_width="2" resizable="true" cell="number" compare="integer" sortable="yes"/>
 	<ETableColumn model_col="1" _title="Original" expansion="4.0" minimum_width="8" resizable="true" cell="original" compare="string" sortable="yes"/>
 	<ETableColumn model_col="2" _title="Translation" expansion="4.0" minimum_width="8" resizable="true" cell="translation" compare="string" sortable="yes"/>
 	<ETableColumn model_col="3" _title="Comment" expansion="4.0" minimum_width="8" resizable="true" cell="comment" compare="string" sortable="yes"/>
@@ -11,6 +11,8 @@
 		<column source="2"/>
 		<column source="3"/>
 		<column source="4"/>
-		<grouping/>
+		<grouping>
+		  <leaf column="4" ascending="true"/>
+		</grouping>
 	</ETableState>
 </ETableSpecification>
