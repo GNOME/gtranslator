@@ -34,14 +34,14 @@ void prefs_box()
 	first_page_label=gtk_label_new(_("Personal informations"));
 	second_page_label=gtk_label_new(_("Language options"));
 	third_page_label=gtk_label_new(_("Po file options"));
-	authors_name_label=gtk_label_new(_("Author's name :  "));
-	authors_email_label=gtk_label_new(_("Author's EMail : "));
-	authors_language_label=gtk_label_new(_("Language : "));
-	mime_type_label=gtk_label_new(_("MIME type : "));
-	encoding_label=gtk_label_new(_("Encoding : "));
-	lcode_label=gtk_label_new(_("Language code : "));
-	lg_email_label=gtk_label_new(_("Language group's EMail : "));
-	additional_comments_label=gtk_label_new(_("Comments : "));
+	authors_name_label=gtk_label_new(_("Author's name :"));
+	authors_email_label=gtk_label_new(_("Author's EMail :"));
+	authors_language_label=gtk_label_new(_("Language :"));
+	mime_type_label=gtk_label_new(_("MIME type :"));
+	encoding_label=gtk_label_new(_("Encoding :"));
+	lcode_label=gtk_label_new(_("Language code :"));
+	lg_email_label=gtk_label_new(_("Language group's EMail :"));
+	additional_comments_label=gtk_label_new(_("Comments :"));
 	/**
 	* The entries for that .
 	**/
@@ -55,10 +55,10 @@ void prefs_box()
 	additional_comments=gtk_text_new(NULL,NULL);
 	gtk_text_set_editable(GTK_TEXT(additional_comments),TRUE);
 	add_additional_comments=gtk_check_button_new_with_label(_("Add the additional comments to the header"));
-	warn_if_no_change=gtk_check_button_new_with_label(_("Warn if I'm trying to save an unchanged file"));
+	warn_if_no_change=gtk_check_button_new_with_label(_("Warn me if I'm trying to save an unchanged file"));
 	warn_if_fuzzy=gtk_check_button_new_with_label(_("Warn if the .po-file contains fuzzy translations"));
 	dont_save_unchanged_files=gtk_check_button_new_with_label(_("Don't save unchanged .po-files"));
-	use_msg_db=gtk_check_button_new_with_label(_("Use the msg_db . ( FUTURE_WORK ! )"));
+	use_msg_db=gtk_check_button_new_with_label(_("Use the msg_db"));
 	/**
 	* If previous settings were found they'll be inserted automatically
 	**/
@@ -219,6 +219,7 @@ void prefs_box()
 	/*** FIXME How can I set the first element without this hack ? FIXME ***/
 	gtk_signal_connect(GTK_OBJECT(prefs),"show",
 		GTK_SIGNAL_FUNC(prefs_box_changed),(gpointer)1);
+	/******************************************************************/
 	gtk_signal_connect(GTK_OBJECT(GTK_ENTRY(GTK_COMBO(authors_language)->entry)),"changed",
 		GTK_SIGNAL_FUNC(prefs_box_changed),(gpointer)1);
 	gtk_signal_connect(GTK_OBJECT(GTK_ENTRY(GTK_COMBO(encoding)->entry)),"changed",

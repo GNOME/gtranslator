@@ -18,7 +18,7 @@ void compile_error_dialog(GtkWidget *widget,gpointer useless)
 	*  from msgfmt FILE -o TEST_OUTPUT
 	**/
 	compile_error=gnome_app_error(GNOME_APP(app1),
-		_("An error occured while msgfmt was executed .\nPlease check your .po file again ."));
+		_("An error occured while msgfmt was executed.\nPlease check your .po file again."));
 	gtk_widget_show(compile_error);
 }
 
@@ -30,7 +30,7 @@ void no_changes_dialog(GtkWidget *widget,gpointer useless)
 	*   called ... )
 	**/
 	no_changes=gnome_app_warning(GNOME_APP(app1),
-		_("You didn't change anything in the .po-file !\n"));
+		_("You didn't change anything in the .po-file!\n"));
 	gtk_widget_show(no_changes);
 }
 
@@ -40,7 +40,7 @@ void no_changes_dialog(GtkWidget *widget,gpointer useless)
 void prefs_box_help(GtkWidget *widget,gpointer useless)
 {
 	prefs_box_help_help=_("With the Preferences box you can define some variables\n
-with which you can make gtranslator make more work\n like YOU want it to work !");
+with which you can make gtranslator make more work\nlike YOU want it to work!");
 	prefs_box_help_dlg=gnome_app_message(GNOME_APP(app1),prefs_box_help_help);
 }
 
@@ -80,7 +80,7 @@ void open_file(GtkWidget *widget,gpointer useless)
 **/
 void save_file_as_create()
 {
-	sfa_dlg=gtk_file_selection_new(_("gtranslator -- save file as .. "));
+	sfa_dlg=gtk_file_selection_new(_("gtranslator -- save file as .."));
 	sfa_dlg_ok=GTK_FILE_SELECTION(sfa_dlg)->ok_button;
 	sfa_dlg_cancel=GTK_FILE_SELECTION(sfa_dlg)->cancel_button;
 	gtk_file_selection_show_fileop_buttons(GTK_FILE_SELECTION(sfa_dlg));

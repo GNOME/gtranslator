@@ -58,7 +58,7 @@ int init_msg_db()
 		/**
 		* 3.1) No list, no fun 
 		**/
-		g_error(_("%s lost the list of translations !\n"),PACKAGE);
+		g_error(_("gtranslator lost the list of translations!\n"));
 	}
 	return 0;
 }
@@ -95,7 +95,7 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 		/**
 		* Show a little warning ...
 		**/
-		g_warning(_("The msg_db : %s seems not to be inited !\n"),msg_db);
+		g_warning(_("The msg_db `%s' seems not to be inited!\n"),msg_db);
 		return 1;
 	}
 	else
@@ -107,7 +107,7 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			* Warn if there isn't any message which could be added
 			*  to the msg_db .
 			**/
-			g_warning(_("Got no message entry !\n"));
+			g_warning(_("Got no message entry!\n"));
 			return 1;	
 		}
 		/**
@@ -161,7 +161,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 /**
                  * Show a little warning ...
                  **/
-                g_warning(_("The msg_db : %s seems not to be inited !\n"),msg_db);
+                g_warning(_("The msg_db `%s' seems not to be inited!\n"),msg_db);
 		 /**
 		 * Return a very "explaining" char* ...
 		 **/
@@ -173,7 +173,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 * If there's no msg_list 
 		 *  print an error message
   		 **/
-		g_error(_("No msg_list available for acting on it !\n"));
+		g_error(_("No msg_list available for acting on it!\n"));
 		 /**
 		 * Exit brutally ...
 		 **/

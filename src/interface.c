@@ -253,9 +253,6 @@ create_app1 (void)
 	* Add a spacer element ..
 	**/
 	gtk_toolbar_append_space(GTK_TOOLBAR(search_bar));
-	/**
-	* Now the old ones ( from GLADE-times .. ) :
-	**/
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_CONVERT);
 	compile_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
                                       GTK_TOOLBAR_CHILD_BUTTON,
@@ -288,7 +285,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Save as"),
-                                      NULL, NULL,
+                                      _("Save file as"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (save_as_button);
 
@@ -297,7 +294,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("First"),
-                                      NULL, NULL,
+                                      _("Go to the first message"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (first_button);
 
@@ -306,7 +303,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Back"),
-                                      NULL, NULL,
+                                      _("Go one message back"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (back_button);
 
@@ -315,7 +312,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Options"),
-                                      NULL, NULL,
+                                      _("gtranslator options"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (options_button);
 
@@ -324,7 +321,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Next"),
-                                      NULL, NULL,
+                                      _("Go one message forward"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (next_button);
 
@@ -333,7 +330,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Last"),
-                                      NULL, NULL,
+                                      _("Go to the next message"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (last_button);
 
@@ -342,7 +339,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Exit"),
-                                      NULL, NULL,
+                                      _("Exit"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (exit_button);
 

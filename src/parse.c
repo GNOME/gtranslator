@@ -31,7 +31,8 @@ void check_file(FILE *stream)
 		* If there are any problems , give a
 		*  message ..
 		**/
-		g_error(_("\nThe file stream is lost !\nError No. %i .\n"),errno);
+		g_error(_("\nThe file stream is lost! Error no. `%i'"),errno);
+		
 	}
 }
 
@@ -55,14 +56,14 @@ void parse_the_file(GtkWidget *widget,gpointer filename)
 	**/
 	if((!po_file)||(strlen(po_file)<=0))
 	{
-		g_error(_("There's no file to open or I couldn't understand `%s' !"),po_file);
+		g_error(_("There's no file to open or I couldn't understand `%s'!"),po_file);
 	}	
 	/**
 	* Stat the files
 	**/
 	if(stat(po_file,&file_info))
 	{
-		g_error(_("Couldn't stat the file `%s' !"),po_file);
+		g_error(_("Couldn't stat the file `%s'!"),po_file);
 	}
 	file_size=file_info.st_size;
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),po_file);
@@ -88,7 +89,7 @@ void parse(char *filename)
 	check_file(fs);
 	msg->po->opened=TRUE;
 	msg->po->po_filename=(char *)filename;
-	g_print (_("Got filename  %s \n"),(char *)filename);
+	g_print (_("Got filename  %s\n"),(char *)filename);
 	count=0;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
