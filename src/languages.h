@@ -4,12 +4,12 @@
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or   
+ *   the Free Software Foundation; either version 2 of the License, or
  *    (at your option) any later version.
- *    
+ *
  * gtranslator is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *    GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,7 +25,7 @@
 #include <libgnome/gnome-i18n.h>
 
 /*
- * The language structure with all the essential data for gtranslator: 
+ * The language structure with all the essential data for gtranslator:
  */
 typedef struct {
 	/*
@@ -43,20 +43,20 @@ typedef struct {
 	 */
 	gchar *enc;
 	
-	/* 
+	/*
 	 * 4 - The group's EMail list (e.g. "gnome-turk@gnome.org").
 	 */
 	gchar *group;
 	
 	/*
-	 * 5 - The transfer bit count for the language (e.g. "8bit"
+	 * 5 - The transfer bit count for the language (e.g. "8bit").
 	 */
 	gchar *bits;
 } GtrLanguage;
 
 /*
  * NOTE : I had to use the N() macro as the table must be constant...
- *	  but in the Prefs-box and in the other places where they appear 
+ *	  but in the Prefs-box and in the other places where they appear
  *	   translated because of a gettext()-calls...
  */
 static GtrLanguage languages[] = {

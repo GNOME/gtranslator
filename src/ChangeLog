@@ -3,7 +3,7 @@
 	* open/save-differently.c & utils_gui.c/.h: Changed the programatic
 		"gtranslator_utils_check_program" to be more i18n-friendly --
 		  use 2 different messages for the decompression/compression
-		   message -- fixed #56347.
+		   message -- fixes #56347.
 
 	* languages.h: Changed the copyright notice to include the GNOME I18N
 		mailing list; also re-added examples for the structure fields
@@ -15,7 +15,7 @@
 	* color-schemes.c/.h, gui.c & prefs.c: Renamed the "free_color_scheme_*"
 		functions to "gtranslator_color_scheme_free*" -- more logical.
 
-	* actions.c: Renamed the macro from "SWAP_ACTIONS" to 
+	* actions.c: Renamed the macro from "SWAP_ACTIONS" to
 		"gtranslator_actions_swap" to make it's function more clear.
 
 	* prefs.c: Free up the old used "theme" before applying the new
@@ -26,7 +26,7 @@
 		coming nearer -- though a working "kill_word" would've been
 		 much nicer for us.
 
-	* main.c: Remove a debug g_print -- the warning message is enough; 
+	* main.c: Remove a debug g_print -- the warning message is enough;
 		disabled the possibility to define a runtime colorscheme per
 		 command line, removed all connected stuff.
 
@@ -49,7 +49,7 @@
 		    reviewed later on.
 
 	* prefs.c/.h, stylistics.c: Use the "use_own_colors/fonts" fields instead
-		of a single "use_own_specs" field -- fonts and colors are now 
+		of a single "use_own_specs" field -- fonts and colors are now
 		 appliable independently.
 
 	* main.c: Fix a small fallible colorscheme appliance, don't store the
@@ -75,7 +75,7 @@
 
 2001-06-16  Fatih Demir <kabalak@gtranslator.org>
 
-	* parse.h, parse_core.c & utf8.c: Honor the new "locale_charset" field 
+	* parse.h, parse_core.c & utf8.c: Honor the new "locale_charset" field
 		for the GtrPo structure which holds now the locale charset name
 		 name returned by the "gtranslator_utils_get_locale_name"
 		  function -- no need to let the function work x times in the
@@ -84,15 +84,15 @@
 	* open-differently.c: Added "about:" to the URI detection routines --
 		hm, finally, the about: URIs should work now.
 
-	* convert.c: Disabled an assertion which made the conversion function 
+	* convert.c: Disabled an assertion which made the conversion function
 		moan on non-translated msgstrs -- NULL msgstrs are ok, as
 		 as untranslated messages are "normal".
 
 	* utf8.c: Corrected a really wrong typo _to_utf8 to _from_utf8 to make
-		the function work right and corrected a wrong call of the 
+		the function work right and corrected a wrong call of the
 		 conversion functions to finally fix the UTF-8 support.
 
-	* parse.c: Honor the new function and set up/clean up the 
+	* parse.c: Honor the new function and set up/clean up the
 		"runtime/filename" preferences key used for the instances
 		 detection/recognition.
 
@@ -117,7 +117,7 @@
 
 2001-06-13  Fatih Demir <kabalak@gtranslator.org>
 
-	* utf8.c: Added some more assertions to avoid crashes in the 
+	* utf8.c: Added some more assertions to avoid crashes in the
 		"gtranslator_utf8_po_file_is_utf8" function.
 
 	* utils.c: Include <config.h> only if HAVE_CONFIG_H is defined.
@@ -133,7 +133,7 @@
 2001-06-08  Fatih Demir <kabalak@gtranslator.org>
 
 	* gui.c & main.c: Also change the calls to be now
-		"gtranslator_utils_remove_temp_files" as the function was 
+		"gtranslator_utils_remove_temp_files" as the function was
 		  renamed and "reworked".
 
 	* utils.c/.h: Make the "gtranslator_utils_remove_temp_file" function
@@ -165,7 +165,7 @@
 		 parse time and set the new GtrPo field "utf8"; no need to
 		  call the same function >= 7 times in the sources.
 
-	* open-differently.c: Use the new function for checking for the 
+	* open-differently.c: Use the new function for checking for the
 		needed uncompression programs -- removed the internally used
 		 old "check_for_prog" function.
 
@@ -281,7 +281,7 @@
 		function which should create ~/.gtranslator per GnomeVFS;
 		 include all the necessary GnomeVFS headers for this.
 
-	* dialogs.c, parse.c, main.c & sighandling.c: Use the new 
+	* dialogs.c, parse.c, main.c & sighandling.c: Use the new
 		"gtranslator_utils_get_crash_file_name" function to get the
 		  crash file's filename.
 
@@ -291,8 +291,8 @@
 
 	* utils.c/.h: Added "gtranslator_utils_get_temp_file_name" function
 		which returns the newly temporary filename, which is now:
-		 "~/.gtranslator/gtranslator-temp-po-file"; also added 
-		  a corresponding "gtranslator_utils_get_crash_file_name" 
+		 "~/.gtranslator/gtranslator-temp-po-file"; also added
+		  a corresponding "gtranslator_utils_get_crash_file_name"
 		   function.
 
 	* parse.c: Reordered includes and use once a nautilus_strcmp instead
@@ -359,7 +359,7 @@
 		tag on file closure; moved the disabling of the ACT_SAVE
 		 action into "gtranslator_save_file".
 
-	* prefs_init.c: Added sane autosave values to the preferences 
+	* prefs_init.c: Added sane autosave values to the preferences
 		initializing function.
 
 	* prefs.c: Added option saving/restoring and the autosave corresponding
@@ -371,7 +371,7 @@
 	* \*.*: Renamed "wants" to "GtrPreferences" -- wants would be
 		too easy to mix up.
 
-	* prefs.h: Added several GtrPreferences parts for autosave option: 
+	* prefs.h: Added several GtrPreferences parts for autosave option:
 		"autosave", "autosave_timeout", "autosave_with_suffix"
 		  and "autosave_suffix".
 
@@ -447,7 +447,7 @@
 	* menus.c: Added import, export from/o UTF-8 menu entries and added
 		the hotkey for Autoaccomplish: it's 'o'.
 
-	* actions.c: Implemented enabling/disabling of the import, export 
+	* actions.c: Implemented enabling/disabling of the import, export
 		entries.
 
 2001-05-14  Fatih Demir <kabalak@gtranslator.org>
@@ -488,7 +488,7 @@
 
 2001-05-12  Fatih Demir <kabalak@gtranslator.org>
 
-	* backend.c: Implemented the informations getting routine for the 
+	* backend.c: Implemented the informations getting routine for the
 		backends.
 
 	* query.c & backend.c: Changed the calls of the
@@ -498,7 +498,7 @@
 	* utils.c/.h: Changed the gtranslator_utils_file_names_from_directory
 		funtion to also take a "with_full_path" argument and to take
 		 care of prepending the full path if the argument if TRUE --
-		  also corrected a stupid typo g_list_append instead of 
+		  also corrected a stupid typo g_list_append instead of
 		   g_list_sort -- vim's autocompletion is sometimes making
 		    hell .-)
 
@@ -522,7 +522,7 @@
 2001-05-10  Fatih Demir <kabalak@gtranslator.org>
 
 	* utf8.c: Made the environment/language set/get-ting routines work
-		more intelligently and made the processes not start 
+		more intelligently and made the processes not start
 		 independently whether we're successful or not.
 
 	* Makefile.am: Corrected a stupid error in the "defines.include" rule:
@@ -540,7 +540,7 @@
 
 2001-05-06  Fatih Demir <kabalak@gtranslator.org>
 	
-	* utf8.c & utils.c: Don't free the "old_env" variables and take 
+	* utf8.c & utils.c: Don't free the "old_env" variables and take
 		over the convert_all_messages function from utils.c.
 
 	* main.c: Also show up the build versions of Glib/Gtk+/Gnome libs
@@ -552,7 +552,7 @@
 
 	* about.c/.h & \*.*: Small re-rename to gtranslator_about_dialog.
 
-	* dialogs.c: Also use the nautilus-string functions here; added 
+	* dialogs.c: Also use the nautilus-string functions here; added
 		about: URI support .-)
 
 	* open-differently.c, vfs-handle.c/.h: Arg, made the function again
@@ -609,7 +609,7 @@
 	* parse.c: Made a comment more verbose; flushing fs doesn't help
 		either -- the g_free's had to rest uncommented.
 
-	* utils.c/.h: Added "gtranslator_utils_get_locale_name/_charset" 
+	* utils.c/.h: Added "gtranslator_utils_get_locale_name/_charset"
 		functions to get the language code/charset for the language
 		 of the header; added from/to UTF-8 converting functions.
 
@@ -747,7 +747,7 @@
 
 	* open-differently.c/.h: Added opening function for zip'ed po
 		files and made the extension "parser" use the nautilus-string
-		 methods; also check for the used uncompression programs 
+		 methods; also check for the used uncompression programs
 		  before using them simply and use eventually a warning dialog
 		   to inform the user.
 
@@ -755,8 +755,8 @@
 
 	* Makefile.am: Added BACKENDSDIR define to the CFLAGS.
 
-	* header_stuff.c: Applied a patch from Maxim Sobolev 
-		<sobomax@FreeBSD.org> to avoid a crash when no language 
+	* header_stuff.c: Applied a patch from Maxim Sobolev
+		<sobomax@FreeBSD.org> to avoid a crash when no language
 		 is set in the preferences; also fixed two stupid errors in
 		  the other code.
 
@@ -839,7 +839,7 @@
 
 	* sidebar.c: Changed the "application-x-gmo.png" references to be now
 		"application-x-po.png".
-		
+	
 	* views.c: Added Gediminas to the author(s) of this file.
 
 2001-04-05  Gediminas Paulauskas <menesis@delfi.lt>
@@ -902,9 +902,9 @@
 		current message immediately.
 
 	* gui.c: Count the syntax updates we do perform -- avoid updating
-		the syntax 3x or twice just because of a change and the 
+		the syntax 3x or twice just because of a change and the
 		 syntax functions -- should be less flickering now; also
-		  don't invert the '·' character (or it's translated 
+		  don't invert the '·' character (or it's translated
 		   equivalent) while inserting.
 
 2001-03-31  Fatih Demir <kabalak@gtranslator.org>
@@ -1002,7 +1002,7 @@
 	* query.c/.h: Removed GtrQueryResult's and made all functions work
 		with GtrQuery's -- the results are also queries now.
 
-	* Makefile.am & main.c: We don't need to also define 
+	* Makefile.am & main.c: We don't need to also define
 		"USE_WINDOW_ICON" as we can also use the "WINDOW_ICON"
 		  directive to determine if we can use the window-icon
 		   feature of gnome-libs; removed "USE_WINDOW_ICON" define
@@ -1011,7 +1011,7 @@
 2001-03-22  Fatih Demir <kabalak@gtranslator.org>
 
 	* header_stuff.c/.h: Added "gtranslator_header_fill_up" function
-		which inserts/fills up all informations needed for the 
+		which inserts/fills up all informations needed for the
 		 header and the ehader comment from the preferences and
 		  substitutes the "variables" from the default header comment
 		   like "YEAR" etc.
@@ -1020,7 +1020,7 @@
 
 2001-03-21  Fatih Demir <kabalak@gtranslator.org>
 
-	* sidebar.c: Get the localized names for the icon entries and 
+	* sidebar.c: Get the localized names for the icon entries and
 		the sidebar title, also perform a UTF-8'ification of the
 		 localized title/entries so that this problem should be
 		  solved now.
