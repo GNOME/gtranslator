@@ -344,7 +344,7 @@ GtkWidget *gtranslator_messages_table_new()
 /*
  * Clear the table if it exists and populate with the messages
  */
-void gtranslator_messages_table_update (void)
+void gtranslator_messages_table_create (void)
 {
 	GList *list = g_list_copy (po->messages);
 	gint i=0;
