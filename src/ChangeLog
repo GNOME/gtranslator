@@ -1,10 +1,15 @@
 2001-02-28  Fatih Demir	<kabalak@gtranslator.org>
 
+	* color-schemes.c/h & sighandling.c/h: Corrected header copyright
+		email address of mine.
+
+	* query.c/.h: Added new query sources -- quite simple for now.
+
 	* sighandling.c: Wrote a command line based part which will ask the
 		the user now on the command line if we've got to save the file
-		 or now.
+		 and to do the save task before exiting.
 
-	* Makefile.am: Include the new signal handling routines.
+	* Makefile.am: Include the new signal handling and query sources.
 
 	* main.c: Bind the main signals to the new sources.
 

@@ -17,13 +17,29 @@
  *
  */
 
-#ifndef GTR_SIGHANDLING_H
-#define GTR_SIGHANDLING_H 1
+#include "query.h"
+#include <libgnome/gnome-i18n.h>
 
 /*
- * Catch up every "anormal" and unwanted signal which could lead to
- *  lost translation work without a signal handler.
+ * A simply query method (wraps dgettext).
  */
-void gtranslator_signal_handler(int signal);
+gchar *gtranslator_query_simple(const gchar *domain, const char *message)
+{
+	GString *str=g_string_new("");
+	
+	g_return_val_if_fail(domain!=NULL, NULL);
+	g_return_val_if_fail(message!=NULL, NULL);
 
-#endif
+	str=g_string_append(str, dgettext(domain, message));
+
+	if(str->len > 0)
+	{
+		return str->str;
+	}
+	else
+	{
+		return NULL;
+	}
+
+	g_string_free(str, 1);
+}

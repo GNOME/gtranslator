@@ -54,6 +54,7 @@ gtranslator_SOURCES = \
 	parse.c	parse.h \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \
+	query.c query.h \
 	session.c session.h \
 	sidebar.c sidebar.h \
 	sighandling.c sighandling.h \

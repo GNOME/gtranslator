@@ -17,13 +17,15 @@
  *
  */
 
-#ifndef GTR_SIGHANDLING_H
-#define GTR_SIGHANDLING_H 1
+#ifndef GTR_QUERY_H
+#define GTR_QUERY_H 1
+
+#include "parse.h"
 
 /*
- * Catch up every "anormal" and unwanted signal which could lead to
- *  lost translation work without a signal handler.
- */
-void gtranslator_signal_handler(int signal);
+ * Simply query for the gettext translation for the given message in the
+ *  domain (program/package).
+ */ 
+gchar *gtranslator_query_simple(const gchar *domain, const gchar *message);
 
 #endif

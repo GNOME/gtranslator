@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gmx.net>
+ * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -53,8 +53,9 @@ void gtranslator_signal_handler(int signal)
 			{
 				gchar answer;
 
-				g_warning(_("gtranslator did get a heavy error and crashed.\
-Would you like to save `%s'? [y/n]?"), po->filename);
+				g_print(_("gtranslator is about being closed.\n\
+Would you like to save `%s'?\n[y/n] "),
+					po->filename);
 
 				scanf("%c", &answer);
 
@@ -74,9 +75,9 @@ Would you like to save `%s'? [y/n]?"), po->filename);
 				}
 				else
 				{
-					g_warning(_("Not saving `%s'!"),
+					g_print(_("Not saving `%s'!\n"),
 						po->filename);
-				 }
+				}
 			}
 			
 			exit(1);
