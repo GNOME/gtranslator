@@ -71,7 +71,8 @@ static GtkWidget
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
-	*autosave, *autosave_with_suffix, *sweep_compile_file;
+	*autosave, *autosave_with_suffix, *sweep_compile_file,
+	*use_learn_buffer;
 
 /*
  * The timeout GtkSpinButton:
@@ -111,7 +112,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Personal informations"));
 	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, 
 		_("Language settings"));
-	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 1, 
+	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, 
 		_("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 7, 1, 
 		_("Miscellaneous"));
@@ -191,8 +192,12 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    gtranslator_utils_attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
 		GtrPreferences.warn_if_no_change, gtranslator_preferences_dialog_changed);
-	keep_obsolete =
+	use_learn_buffer =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
+	    	_("Also query the personal learn buffer while auto accomplishing missing entries"),
+		GtrPreferences.use_learn_buffer, gtranslator_preferences_dialog_changed);
+	keep_obsolete =
+	    gtranslator_utils_attach_toggle_with_label(third_page, 5,
 		_("Keep obsolete message in the po files"),
 		GtrPreferences.keep_obsolete, gtranslator_preferences_dialog_changed);
 
@@ -346,6 +351,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
 	GtrPreferences.use_own_colors = if_active(own_colors);
 	GtrPreferences.use_own_dict = if_active(use_own_dict);
+	GtrPreferences.use_learn_buffer = if_active(use_learn_buffer);
 	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
 	GtrPreferences.autosave = if_active(autosave);
 	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
@@ -459,6 +465,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.use_own_colors);
 	gtranslator_config_set_bool("toggles/use_own_dict",
 			      GtrPreferences.use_own_dict);
+	gtranslator_config_set_bool("toggles/use_learn_buffer",
+			      GtrPreferences.use_learn_buffer);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
 			      GtrPreferences.keep_obsolete);
 	gtranslator_config_set_bool("toggles/autosave",

@@ -1,4 +1,13 @@
-2001-07-31  Thomas Ziehmer <thomas@gtranslator.org>
+2001-07-30  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c: We don't need any toggle button in the auto accomplishment
+		dialog -- the corresponding setting has gone into the prefs.
+
+	* prefs.c: Also save the GtrPreferences.use_learn_buffer variable
+		on apply and added another toggle button for the learn buffer
+		 usage preference.
+	
+2001-07-30  Thomas Ziehmer <thomas@gtranslator.org>
 
 	* sighandling.c: Fix bug #58267 and set signalscount to 1 inside
 		gtranslator_signal_handler.

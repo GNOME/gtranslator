@@ -1110,46 +1110,23 @@ Would you like to insert it into the translation?"),
 void gtranslator_auto_accomplishment_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
-	
-	GtkWidget *table;
-	GtkWidget *learn_buffer_toggle;
-	
 	gint reply;
 
 	gtranslator_raise_dialog(dialog);
 
 	dialog=gnome_message_box_new(
-		_("Should gtranslator accomplish all missing strings (if possible)\n\
-from your default query domain?"),
+		_("Should gtranslator auto accomplish all missing strings (if possible)\n\
+from your default query domain (and your personal learn buffer)?"),
 		GNOME_MESSAGE_BOX_QUESTION,
 		GNOME_STOCK_BUTTON_YES,
 		GNOME_STOCK_BUTTON_NO,
 		NULL);
 
 	/*
-	 * Add the contents table.
-	 */
-	table=gtk_table_new(1, 2, FALSE);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox),
-		table, FALSE, FALSE, 0);
-	
-	learn_buffer_toggle=gtranslator_utils_attach_toggle_with_label(table, 1,
-		_("Also query the personal learn buffer"), 
-		GtrPreferences.use_learn_buffer, NULL);
-
-	/*
 	 * Set the default to "Yes" and show/run the dialog.
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	gtranslator_dialog_show(&dialog, "gtranslator -- accomplish?");
-	
-	/*
-	 * Read in whether the user wanted to have the learn buffer as another
-	 *  base for the queries.
-	 */
-	GtrPreferences.use_learn_buffer=gtk_toggle_button_get_active(
-		GTK_TOGGLE_BUTTON(learn_buffer_toggle));
-	
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 	
 	/*
@@ -1163,12 +1140,4 @@ from your default query domain?"),
 		 */
 		gtranslator_query_accomplish(GtrPreferences.use_learn_buffer);
 	}
-	
-	/*
-	 * Store the current setting in the preferences.
-	 */
-	gtranslator_config_init();
-	gtranslator_config_set_bool("toggles/use_learn_buffer", 
-		GtrPreferences.use_learn_buffer);
-	gtranslator_config_close();
 }
