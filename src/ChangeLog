@@ -1,3 +1,11 @@
+2005-03-12  Ross Golder  <ross@golder.org>
+
+	* parser.[ch], dialogs.c: Updated to use GtkFileChooser for open and
+	save operations (thanks to code borrowed from Vital Khilko).
+	* utils_gui.c: Stopped saving 'depht' (misspelled too) to gconf.
+	* gui.c: Respect window geometry config and disable actions that
+	expect an open file when creating the initial application/window.
+
 2005-02-05  Ross Golder  <ross@golder.org>
 
 	* languages.c: Updated Thai and Italian team address. Added 'Tagalog'

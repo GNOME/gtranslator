@@ -104,7 +104,6 @@ void gtranslator_utils_save_geometry(void)
 		gtranslator_config_set_int("geometry/y", y);
 		gtranslator_config_set_int("geometry/width", w);
 		gtranslator_config_set_int("geometry/height", h);
-		gtranslator_config_set_int("geometry/depht", d);
 	}
 }
 

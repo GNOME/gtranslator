@@ -139,8 +139,8 @@ void gtranslator_parse_set_gui_from(GtrPo *po);
 /*
  * Callbacks for the widgets
  */
-void gtranslator_parse_the_file_from_file_dialog(GtkWidget  * widget, gpointer of_dlg);
-void gtranslator_save_file_dialog(GtkWidget  * widget, gpointer sfa_dlg);
+void gtranslator_parse_the_file_from_file_dialog(GtkWidget  * widget);
+void gtranslator_save_file_dialog(GtkWidget  * widget);
 void gtranslator_save_current_file_dialog(GtkWidget  * widget, gpointer useless);
 void gtranslator_file_revert(GtkWidget  * widget, gpointer useless);
 void gtranslator_file_close(GtkWidget  * widget, gpointer useless);

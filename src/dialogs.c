@@ -45,6 +45,11 @@
 #include <gnome.h>
 #include <libgnomeui/libgnomeui.h>
 
+typedef enum {
+	FILESEL_OPEN,
+	FILESEL_SAVE
+} FileselMode;
+
 /*
  * Functions to be used only internally in this file
  */
@@ -82,39 +87,109 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 }
 
 /*
+ * File chooser dialog
+ */
+static GtkWindow *gtranslator_file_chooser_new (GtkWindow *parent,
+									FileselMode mode,
+									gchar *title)
+{
+	GtkWidget *dialog;
+	GtkFileFilter *filter;
+	
+	dialog = gtk_file_chooser_dialog_new(title,
+				      parent,
+				      (mode == FILESEL_SAVE) ? GTK_FILE_CHOOSER_ACTION_SAVE : GTK_FILE_CHOOSER_ACTION_OPEN,
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      (mode == FILESEL_SAVE) ? GTK_STOCK_SAVE : GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+				      NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_ACCEPT);
+	if (mode != FILESEL_SAVE)
+		{
+			filter = gtk_file_filter_new();
+			gtk_file_filter_set_name(filter,_("Gettext translation"));
+			gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation");
+			gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
+	
+			filter = gtk_file_filter_new();
+			gtk_file_filter_set_name(filter,_("Gettext translation template"));
+			gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation-template");
+			gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
+			
+			filter = gtk_file_filter_new();
+			gtk_file_filter_set_name(filter,_("All files"));
+			gtk_file_filter_add_pattern(filter,"*");
+			gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
+			
+//			gtranslator_file_dialogs_set_directory(&dialog);
+		} 
+		
+	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
+	gtk_widget_show_all(GTK_WIDGET(dialog));
+	return GTK_WINDOW(dialog);
+}
+
+/*
+ * Gtkfilechooser response analyser
+ */
+void gtranslator_file_chooser_analyse(gpointer dialog, FileselMode mode)
+{	
+	gint reply;
+
+	gchar *po_file;
+	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
+	
+	do{
+		reply = gtk_dialog_run(GTK_DIALOG (dialog));
+		switch (reply){
+			case GTK_RESPONSE_ACCEPT:
+				if (mode == FILESEL_OPEN){
+					gtranslator_parse_the_file_from_file_dialog(GTK_WIDGET(dialog));
+				} else {
+					gtranslator_save_file_dialog(GTK_WIDGET(dialog));
+				}
+			case GTK_RESPONSE_CANCEL:
+				gtk_widget_hide(GTK_WIDGET(dialog));
+				break;
+			case GTK_RESPONSE_DELETE_EVENT:
+				gtk_widget_hide(GTK_WIDGET(dialog));
+				break;
+			default:
+				break;
+		}
+	} while (GTK_WIDGET_VISIBLE(dialog));
+	
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+}
+
+/*
  * The "Open file" dialog.
  */
 void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 {
-	gchar *directory;
-	static GtkWidget *dialog = NULL;
+	GtkWindow *dialog = NULL;
+	if (current_page && !gtranslator_should_the_file_be_saved_dialog(current_page)) {
+		if (dialog)
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+		return;
+	}
 	
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
-	dialog = gtk_file_selection_new(_("gtranslator -- open po file"));
-	
-	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
-			   "clicked", GTK_SIGNAL_FUNC(gtranslator_parse_the_file_from_file_dialog),
-			   (gpointer) dialog);
-	g_signal_connect_swapped(G_OBJECT
-				 (GTK_FILE_SELECTION(dialog)->cancel_button),
-				 "clicked",
-				 G_CALLBACK(gtk_widget_destroy),
-				 G_OBJECT(dialog));
+	dialog = gtranslator_file_chooser_new (NULL, 
+										FILESEL_OPEN,
+										_("Open file for translation"));	
 
-	if(current_page != NULL) {
-		directory = g_path_get_dirname(current_page->po->filename);
-		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), directory);
-	}
-	
 	/*
-	 * Make the dialog transient, gtranslator_dialog_show does not do it
-	 *  because it is not a GtkDialog.
+	 * With the gettext parser/writer API, we can't currently read/write
+	 * to remote files with gnome-vfs. Eventually, we should intercept
+	 * remote requests and use gnome-vfs to retrieve a temporary file to 
+	 * work on, and transmit it back when saved.
 	 */
-	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
-	gtranslator_dialog_show(&dialog, NULL );
+	gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
+
+	gtranslator_file_chooser_analyse((gpointer) dialog, FILESEL_OPEN);
 }
 
 /*
@@ -122,39 +197,46 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
  */
 void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 {
-	gchar *directory;
-	static GtkWidget *dialog = NULL;
+	GtkWindow *dialog = NULL;
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
-
-	/*
-	 * Let the user use the file selector to decide where to save it
-	 */
-	dialog = gtk_file_selection_new(_("gtranslator -- save file as.."));
-
-	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
-		"clicked",
-		GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
-		(gpointer) dialog);
-
-	g_signal_connect_swapped(G_OBJECT
-		(GTK_FILE_SELECTION(dialog)->cancel_button),
-		"clicked",
-		G_CALLBACK(gtk_widget_destroy),
-		G_OBJECT(dialog));
-
-	if(current_page != NULL) {
-		directory = g_path_get_dirname(current_page->po->filename);
-		gtk_file_selection_complete(GTK_FILE_SELECTION(dialog), directory);
+  
+	if(current_page->po->no_write_perms==FALSE||strstr(current_page->po->filename, "/.gtranslator/"))
+	{
+		dialog = gtranslator_file_chooser_new(NULL, 
+											FILESEL_SAVE,
+											_("Save file as.."));
 	}
-	
+	else
+	{
+		gchar *filename=NULL;
+		
+		dialog = gtranslator_file_chooser_new(NULL, 
+											FILESEL_SAVE,
+											_("Save local copy of file as.."));
+		
+		/*
+		 * Set a local filename in the users home directory with the 
+		 *  same filename as the original but with a project prefix
+		 *   (e.g. "gtranslator-tr.po").
+		 */ 
+		gtk_file_chooser_select_filename(GTK_FILE_CHOOSER(dialog), current_page->po->filename);
+		gtranslator_file_dialogs_store_directory(current_page->po->filename);
+	}
+
 	/*
-	 * Make the dialog transient.
+	 * With the gettext parser/writer API, we can't currently read/write
+	 * to remote files with gnome-vfs. Eventually, we should intercept
+	 * remote requests and use gnome-vfs to retrieve a temporary file to 
+	 * work on, and transmit it back when saved.
 	 */
-	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
-	gtranslator_dialog_show(&dialog, "gtranslator -- save");
+	gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
+
+	gtranslator_file_chooser_analyse((gpointer) dialog, FILESEL_SAVE);
+		
+	//gtranslator_dialog_show(&dialog, "gtranslator -- save");
 }
 
 /* 

@@ -439,11 +439,11 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	return TRUE;
 }
 
-void gtranslator_parse_the_file_from_file_dialog(GtkWidget * widget, gpointer of_dlg)
+void gtranslator_parse_the_file_from_file_dialog(GtkWidget * dialog)
 {
 	gchar *po_file;
 	GError *error;
-	po_file = g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg)));
+	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
 
 	gtranslator_file_dialogs_store_directory(po_file);
 
@@ -458,7 +458,7 @@ void gtranslator_parse_the_file_from_file_dialog(GtkWidget * widget, gpointer of
 	/*
 	 * Destroy the dialog 
 	 */
-	gtk_widget_destroy(GTK_WIDGET(of_dlg));
+	gtk_widget_destroy(dialog);
 }
 
 gboolean gtranslator_save_file(GtrPo *po, const gchar *name, GError **error)
@@ -520,11 +520,11 @@ Your file should likely be named '%s.po'."),
 /*
  * A callback for OK in Save as... dialog 
  */
-void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
+void gtranslator_save_file_dialog(GtkWidget *dialog)
 {
 	gchar *po_file;
 	GError *error = NULL;
-	po_file = g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg)));
+	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
 	if (!gtranslator_save_file(current_page->po, po_file, &error)) {
 		GtkWidget *dialog;
 		g_assert(error != NULL);
@@ -541,7 +541,7 @@ void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 	}
 	g_free(current_page->po->filename);
 	current_page->po->filename = g_strdup(po_file);
-	gtk_widget_destroy(GTK_WIDGET(sfa_dlg));
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
 /*

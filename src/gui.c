@@ -202,6 +202,19 @@ void gtranslator_create_main_window(void)
 	notebook_widget = GTK_WIDGET(gtk_notebook_new());
 	gnome_app_set_contents(GNOME_APP(gtranslator_application), notebook_widget);
 	
+	/*
+	 * Resize the window accordingly
+	 */
+	gtranslator_utils_restore_geometry(NULL);
+
+	/*
+	 * Set most options inactive
+	 */
+	gtranslator_actions_set_up_state_no_file();
+	
+	/*
+	 * Finally, put everything on display
+	 */
 	gtk_widget_show_all(gtranslator_application);
 }
 
