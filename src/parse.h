@@ -9,6 +9,9 @@
 * -- the header
 **/
 
+#ifndef GTR_PARSE_H
+#define GTR_PARSE_H 1
+
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
 #endif // HAVE_CONFIG_H
@@ -94,3 +97,5 @@ gchar *get_next_msgstr();
 **/
 gchar *get_last_msgid();
 gchar *get_last_msgstr();
+
+#endif // GTR_PARSE_H

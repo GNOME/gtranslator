@@ -8,6 +8,9 @@
 * -- the header
 **/
 
+#ifndef GTR_INTERFACE_H 
+#define GTR_INTERFACE_H 1
+
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
 #endif // HAVE_CONFIG_H
@@ -41,3 +44,14 @@ gchar status[128];
 * Calls the main help for gtranslator
 **/ 
 void call_help_viewer(GtkWidget *widget,gpointer useless);
+
+/**
+* The text-based callbacks
+**/
+void cut_clipboard(GtkWidget *widget,gpointer useless);
+void copy_clipboard(GtkWidget *widget,gpointer useless);
+void paste_clipboard(GtkWidget *widget,gpointer useless);
+void clear_selection(GtkWidget *widget,gpointer useless);
+void text_has_got_changed(GtkWidget *widget,gpointer useless);
+
+#endif // GTR_INTERFACE_H

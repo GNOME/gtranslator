@@ -9,6 +9,9 @@
 * -- the header
 **/
 
+#ifndef GTR_ABOUT_H
+#define GTR_ABOUT_H 1
+
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
 #endif // HAVE_CONFIG_H
@@ -25,3 +28,5 @@ GtkWidget *about;
 **/
 void about_box();
 void about_box_show(GtkWidget *widget,gpointer useless);
+
+#endif // GTR_ABOUT_H

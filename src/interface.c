@@ -41,6 +41,40 @@ void call_help_viewer(GtkWidget *widget,gpointer useless)
 	gnome_help_pbox_goto(NULL,0,&help_me);
 }
 
+/**
+* The text-callbacks
+**/
+void cut_clipboard(GtkWidget *widget,gpointer useless)
+{
+	gtk_editable_cut_clipboard(trans_box);
+}
+
+void copy_clipboard(GtkWidget *widget,gpointer useless)
+{
+        gtk_editable_copy_clipboard(trans_box);
+}
+
+void paste_clipboard(GtkWidget *widget,gpointer useless)
+{
+        gtk_editable_paste_clipboard(trans_box);
+}
+
+void clear_selection(GtkWidget *widget,gpointer useless)
+{
+	gtk_editable_clear_selection(trans_box);
+}
+
+/**
+*
+**/
+void text_has_got_changed(GtkWidget *widget,gpointer useless)
+{
+	changed=TRUE;
+}
+
+/**
+* The menu-entries
+**/
 static GnomeUIInfo the_file_menu[] =
 {
         {
@@ -60,10 +94,10 @@ static GnomeUIInfo the_file_menu[] =
 
 static GnomeUIInfo the_edit_menu[] =
 {
-        GNOMEUIINFO_MENU_CUT_ITEM (NULL, NULL),
-        GNOMEUIINFO_MENU_COPY_ITEM (NULL, NULL),
-        GNOMEUIINFO_MENU_PASTE_ITEM (NULL, NULL),
-        GNOMEUIINFO_MENU_CLEAR_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_CUT_ITEM (cut_clipboard, NULL),
+        GNOMEUIINFO_MENU_COPY_ITEM (copy_clipboard, NULL),
+        GNOMEUIINFO_MENU_PASTE_ITEM (paste_clipboard, NULL),
+        GNOMEUIINFO_MENU_CLEAR_ITEM (clear_selection, NULL),
         GNOMEUIINFO_END
 };
 
@@ -384,6 +418,8 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(open_file_show),NULL);	
 	gtk_signal_connect(GTK_OBJECT(save_as_button),"clicked",
 		GTK_SIGNAL_FUNC(save_file_as_show),NULL);
+	gtk_signal_connect(GTK_OBJECT(trans_box),"changed",
+		GTK_SIGNAL_FUNC(text_has_got_changed),NULL);
 	/*****************************************************************/
 	return app1;
 }

@@ -9,6 +9,9 @@
 * -- the header
 **/
 
+#ifndef GTR_PREFS_H
+#define GTR_PREFS_H 1
+
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
 #endif // HAVE_CONFIG_H
@@ -62,3 +65,5 @@ void prefs_box_hide(GtkWidget *widget,gpointer useless);
 void prefs_box_changed(GtkWidget *widget,gpointer chitem);
 void prefs_box_apply(GtkWidget *widget,gpointer more_useless);
 void read_prefs();
+
+#endif // GTR_PREFS_H

@@ -70,14 +70,13 @@ void parse_the_file(GtkWidget *widget,gpointer filename)
 	temp=g_list_alloc();
 	head=g_list_alloc();
 	/**
-	* Parse the file, misusing the status gchar ...
+	* Parse the file ...
 	**/
-	status[0]='\0';
 	while(
-	fgets(status,sizeof(status),fs) != NULL
+	fgets(status,sizeof(temp_char),fs) != NULL
 	)
 	{
-		temp=g_list_append(temp,(gpointer)status);
+		temp=g_list_append(temp,(gpointer)temp_char);
 	}
 	/**
 	* The list length ( aka lines count )

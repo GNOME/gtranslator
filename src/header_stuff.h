@@ -8,6 +8,9 @@
 * -- header
 **/
 
+#ifndef GTR_HEADER_STUFF_H
+#define GTR_HEADER_STUFF_H 1
+
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
 #endif // HAVE_CONFIG_H
@@ -15,4 +18,6 @@
 #include "parse.h"
 #include "interface.h"
 
-void get_header(gpointer a);
+/* XXX header routines have to go here XXX */
+
+#endif // GTR_HEADER_STUFF_H

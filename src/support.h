@@ -6,6 +6,9 @@
 * OK ; I DIDN'T EDIT THIS FILE (what is it good for ? )
 **/
 
+#ifndef GTR_SUPPORT_H
+#define GTR_SUPPORT_H 1
+
 #include <gnome.h>
 
 /**
@@ -40,3 +43,4 @@
 
 	GdkImlibImage* create_image            (const gchar     *filename);
 
+#endif // GTR_SUPPORT_H 

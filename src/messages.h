@@ -9,6 +9,9 @@
 * -- messages are@home->*this;
 **/
 
+#ifndef GTR_MESSAGES_H
+#define GTR_MESSAGES_H 1
+
 #include <glib.h>
 
 /**
@@ -58,3 +61,5 @@ struct gtr_msg
 	unsigned int position;
 	enum gtr_msg_status status;
 };
+
+#endif // GTR_MESSAGES_H

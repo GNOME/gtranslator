@@ -10,6 +10,9 @@
 * -- the central for the stuff-*
 **/
 
+#ifndef GTR_MSG_DB_H
+#define GTR_MSG_DB_H 1
+
 #include "interface.h"
 
 /**
@@ -55,3 +58,5 @@ unsigned int get_msg_db_size();
 * The linked lists :
 **/
 GList *msg_list, *cur_list;
+
+#endif // GTR_MSG_DB_H

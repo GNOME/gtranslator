@@ -9,6 +9,9 @@
 * the header ...
 **/
 
+#ifndef GTR_GTR_DIALOGS_H
+#define GTR_GTR_DIALOGS_H 1
+
 #ifdef HAVE_CONFIG_H	
 	#include <config.h>
 #endif // HAVE_CONFIG_H
@@ -71,3 +74,5 @@ void open_file(GtkWidget *widget,gpointer useless);
 * The help-box for the preferences box
 **/
 void prefs_box_help(GtkWidget *widget,gpointer useless);
+
+#endif // GTR_GTR_DIALOGS_H

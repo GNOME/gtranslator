@@ -9,6 +9,9 @@
 * -- the languages defining header
 **/
 
+#ifndef GTR_LANGUAGES_H 
+#define GTR_LANGUAGES_H 1
+
 #include <glib.h>
 #include <libgnome/gnome-i18n.h>
 
@@ -228,3 +231,5 @@ lang languages[] =
 		NULL,NULL
 	}
 };
+
+#endif // GTR_LANGUAGES_H
