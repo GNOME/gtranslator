@@ -1,3 +1,9 @@
+2003-06-07  Ross Golder  <rossg@golder.org>
+
+	* parse.c, learn.c, header_stuff.c: Removed code that attempted
+	to escape/unescape and reformat messages when loading and saving
+	po files. (#102542)
+
 2003-06-01  Ross Golder  <ross@golder.org>
 
 	* parse.c (restore_msg): Only break line if not in the middle of

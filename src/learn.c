@@ -251,7 +251,7 @@ static gchar *gtranslator_learn_buffer_escape_hash_entry(gchar *hstr)
 	g_return_val_if_fail(hstr!=NULL, NULL);
 
 	escaped_str=nautilus_str_replace_substring(hstr, "\"", "\\\"");
-	escaped_str=nautilus_str_replace_substring(escaped_str, "\n", "\\n\n");
+	escaped_str=nautilus_str_replace_substring(escaped_str, "\n", "\"\n\"");
 
 	return escaped_str;
 }

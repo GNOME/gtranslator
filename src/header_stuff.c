@@ -92,7 +92,7 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		return NULL;
 	
 	ph = g_new0(GtrHeader, 1);
-	lines = g_strsplit(msg->msgstr, "\n", 0);
+	lines = g_strsplit(msg->msgstr, "\\n", 0);
 	while (lines[i] != NULL) {
 		pair = g_strsplit(lines[i], ": ", 2);
 

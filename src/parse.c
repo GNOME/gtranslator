@@ -68,7 +68,7 @@ guint autosave_source_tag=1;
 /*
  * These are to be used only inside this file
  */
-static void append_line(gchar ** old, const gchar * tail);
+static void append_line(gchar ** old, const gchar * tail, gboolean continuation);
 static gboolean add_to_obsolete(gchar *comment);
 static void write_the_message(gpointer data, gpointer fs);
 static gchar *restore_msg(const gchar * given);
@@ -92,32 +92,17 @@ static void check_msg_status(GtrMsg * msg)
  * unneeded \'s and "'s and replaces \\n with real newline.
  * Then appends this to *old and updates the pointer.
  */
-static void append_line(gchar ** old, const gchar * tail)
+static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 {
 	gchar *to_add = g_new(gchar, strlen(tail));
 	gchar *result;
 	gint s, d = 0;
+
+	if (continuation)
+		to_add[d++] = '\n';
+
 	for (s = 1; s < strlen(tail) - 1; s++) {
-		if (tail[s] == '\\') {
-			s++;
-			if (tail[s] == 'n')
-				to_add[d++] = '\n';
-			else if(tail[s] == 'r')
-				to_add[d++] = '\r';
-			else if (tail[s] == 't')
-				to_add[d++] = '\t';
-			else if ((tail[s] == '"') || (tail[s] == '\\'))
-				to_add[d++] = tail[s];
-			else {
-				to_add[d++] = '\\';
-				to_add[d++] = tail[s];
-				g_warning
-				    (_("New escaped char found: \\%c\nAdd this to parse.c, line %i."),
-				     tail[s], __LINE__);
-			}
-		} else {
-			to_add[d++] = tail[s];
-		}
+		to_add[d++] = tail[s];
 	}
 	to_add[d] = 0;
 	if (*old == NULL)
@@ -298,7 +283,10 @@ gboolean gtranslator_parse_core(void)
 	while ((line = gtranslator_utils_getline (fs)) != NULL) {
 		
 		lines++;
-		
+		if(lines == 27567) {
+			g_warning("Oi!");
+		}
+
 		/*
 		 * Warn if not valid UTF-8
 		 */
@@ -348,7 +336,7 @@ gboolean gtranslator_parse_core(void)
 				 */
 				comment_ok = TRUE;
 				if (line[8] != '\0')
-					append_line(&msg->msgid, &line[6]);
+					append_line(&msg->msgid, &line[6], FALSE);
 			} 
 			/*
 			 * If it's a msgstr. 
@@ -360,7 +348,7 @@ gboolean gtranslator_parse_core(void)
 				 */
 				msgid_ok = TRUE;
 				if (line[9] != '\0')
-					append_line(&msg->msgstr, &line[7]);
+					append_line(&msg->msgstr, &line[7], FALSE);
 			}
 			else
 			/*
@@ -370,12 +358,12 @@ gboolean gtranslator_parse_core(void)
 				if((comment_ok == TRUE) &&
 				   (msgid_ok == FALSE))
 				{
-					append_line(&msg->msgid, line);
+					append_line(&msg->msgid, line, TRUE);
 				}
 				else if((msgid_ok == TRUE) &&
 					(msgstr_ok == FALSE))
 				{
-					append_line(&msg->msgstr, line);
+					append_line(&msg->msgstr, line, TRUE);
 				}
 				else if((comment_ok == FALSE) &&
 					(msgid_ok == FALSE) &&
@@ -646,7 +634,7 @@ static gchar *restore_msg(const gchar * given)
 {
 	gchar *result;
 	GString *rest;
-	gint s, lines = 0, here = 8;
+	gint s, lines = 0;
 
 	if(!given)
 	{
@@ -656,46 +644,10 @@ static gchar *restore_msg(const gchar * given)
 	rest = g_string_sized_new(strlen(given));
 	for (s = 0; s < strlen(given); s++) {
 		if (given[s] == '\n') {
-			if ((!lines) && (s + 1 < strlen(given))) {
-				lines++;
-				g_string_prepend(rest, "\"\n\"");
-			}
-			if ((s + 1 < strlen(given)) && (here < 78)) {
-				g_string_append(rest, "\\n\"\n\"");
-				here = 0;
-				lines++;
-			} else
-				g_string_append(rest, "\\n");
-		} else if (given[s] == '\"') {
-			g_string_append(rest, "\\\"");
-			here++;
-		} else if (given[s] == '\t') {
-			g_string_append(rest, "\\t");
-			here++;
-		} else if (given[s] == '\\') {
-			g_string_append(rest, "\\\\");
-			here++;
+			g_string_append(rest, "\"\n\"");
+			lines++;
 		} else {
 			g_string_append_c(rest, given[s]);
-		}
-		here++;
-		if (here > 78) {
-			if (!lines) {
-				g_string_prepend(rest, "\"\n\"");
-				here -= 7;
-			} else {
-				/* Only break line if current line is valid UTF8 */
-				if(rest->str && g_utf8_validate(rest->str, rest->len, NULL))
-				{
-					g_string_insert(rest,
-							(strrchr(rest->str, ' ') -
-							 rest->str) + 1, "\"\n\"");
-					here =
-					    rest->len - (strrchr(rest->str, '"') -
-							 rest->str);
-				}			 
-			}
-			lines++;
 		}
 	}
 	result = rest->str;
