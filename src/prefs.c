@@ -651,8 +651,14 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	 */
 	if(!translator_str || *translator_str=='\0')
 	{
-		gnome_app_error(GNOME_APP(gtranslator_application),
+		GtkWidget *dialog = gtk_message_dialog_new(
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK,
 			_("Please enter your name!"));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 
 		return;
 	}
@@ -665,8 +671,15 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	 */
 	if(!translator_email_str || *translator_email_str=='\0')
 	{
-		gnome_app_error(GNOME_APP(gtranslator_application),
+		GtkWidget *dialog = gtk_message_dialog_new(
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK,
 			_("Please enter your EMail address!"));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
 		return;
 	}
 	else
@@ -678,8 +691,15 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 			!strchr(translator_email_str, '.') || 
 			(strlen(translator_email_str) <= 6))
 		{
-			gnome_app_error(GNOME_APP(gtranslator_application),
+			GtkWidget *dialog = gtk_message_dialog_new(
+				GTK_WINDOW(gtranslator_application),
+				GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_WARNING,
+				GTK_BUTTONS_OK,
 				_("Please enter a valid EMail address!"));
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+			
 			return;
 		}
 	}
