@@ -23,6 +23,7 @@
 #endif
 
 #include "color-schemes.h"
+#include "defines.include"
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"

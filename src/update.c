@@ -27,6 +27,7 @@
 #include <config.h>
 #endif
 
+#include "defines.include"
 #include "gui.h"
 #include "parse.h"
 #include "prefs.h"

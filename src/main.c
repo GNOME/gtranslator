@@ -24,6 +24,7 @@
 
 #include "actions.h"
 #include "color-schemes.h"
+#include "defines.include"
 #include "dialogs.h"
 #include "gui.h"
 #include "htmlizer.h"
@@ -41,10 +42,7 @@
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-init.h>
-
-#ifdef WINDOW_ICON
 #include <libgnomeui/gnome-window-icon.h>
-#endif
 
 #ifdef GCONF_IS_PRESENT
 #include <gconf/gconf.h>
@@ -139,11 +137,9 @@ int main(int argc, char *argv[])
 				   gtranslator_options, 0, &context);
 
 	/*
-	 * Show the application window (with icon, if requested)
+	 * Show the application window with icon.
 	 */
-	#ifdef WINDOW_ICON
 	gnome_window_icon_set_default_from_file(WINDOW_ICON);
-	#endif
 	
 	/* 
 	 * Initialize the regular expression cache 

@@ -28,22 +28,55 @@
  * Backends integration file with all the converting surface.
  */
 
+typedef struct
+{
+	const gchar 	*modulename;
+	const gchar 	*name;
+	const gchar 	*description;
+	const gchar 	*mime_types;
+
+	gboolean	compilable;
+	const gchar	*compile_command;
+} GtrBackendInformations;
+
 typedef struct 
 {
-	const gchar 	*xmldescriptor;
-	const gchar 	*modulename;
-	GModule		*module;
+	GtrBackendInformations	*info;
+	GFunc			open_file;
+	GFunc			save_file;
+	GFunc			save_file_as;
 } GtrBackend;
 
 /*
  * Opening and registering of backends from the given dir -- returns FALSE on
  *  failure.
  */
-gboolean gtranslator_backends_open(const gchar *directory);
+gboolean gtranslator_backend_open_all_backends(const gchar *directory);
 
 /*
  * Registers a single module with the given xml-file descriptor.
  */
-void gtranslator_backends_add(const gchar *filename); 
+void gtranslator_backend_add(const gchar *filename); 
+
+/*
+ * Removed the given xml-file descriptors module.
+ */
+gboolean gtranslator_backend_remove_by_xml_file(const gchar *filename);
+
+/*
+ * Removes the given GtrBackend at all.
+ */
+void gtranslator_backend_remove(GtrBackend *backend); 
+
+/*
+ * Remove all registered modules and clean up our "namespace".
+ */
+gboolean gtranslator_backend_remove_all_backends(void);
+
+/*
+ * Can we open this file via any registered backend? Returns, yes, rightly 
+ *  guessed: TRUE on success.
+ */
+gboolean gtranslator_backend_open(const gchar *filename); 
 
 #endif

@@ -1,3 +1,20 @@
+2001-04-27  Fatih Demir <kabalak@gtranslator.org>
+
+	* syntax-elements: Added more syntax highlighted words.
+
+	* backend.h: Added all the prototypes -- will be implemented soon.
+
+	* .cvsignore: Ignore the generated defines.include file.
+
+	* main.c, prefs.c & update.c: Include the produces "defines.include"
+		file for the includes.
+
+	* defines.config & Makefile.am: Added Makefile.am stuff around
+		this file which holds now the overlong defines -- better
+		 then defining them directly via -D... -- removed these
+		  direct command line defines and added dist/clean commands
+		   for the defines.include/config files.
+
 2001-04-24  Fatih Demir <kabalak@gtranslator.org>
 
 	* Makefile.am: Added new source files to the build and added

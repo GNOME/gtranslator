@@ -3,8 +3,6 @@
 #   and autoconf. 
 # -------------------------------------------------------
 
-backendsdir = $(libdir)/gtranslator/backends
-
 SUBDIRS = . backends pixmaps
 
 INCLUDES = \
@@ -14,15 +12,26 @@ INCLUDES = \
 	$(GAL_CFLAGS) \
 	$(VFS_CFLAGS) \
 	$(GCONF_CFLAGS) \
-	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
-	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
-	-DWINDOW_ICON=\""$(datadir)/pixmaps/gtranslator.png"\" \
-	-DSCHEMESDIR=\""$(datadir)/gtranslator/colorschemes"\" \
-	-DBACKENDSDIR=\""$(backendsdir)"\" \
-	-DBACKENDS_TMDIR=\""$(backendsdir)/translation-memories"\"
+	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"
 
 bin_PROGRAMS = gtranslator
+
+%.include: %.config
+	sed \
+	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
+	-e s,"&BACKENDS_DIR","$(libdir)/backends",g \
+	-e s,"&BACKENDS_TMDIR","$(libdir)/backends/translation-memories",g \
+	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
+	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
+	-e s,"&SCHEMESDIR","$(datadir)/gtranslator/colorschemes",g \
+	-e s,"&SCRIPTSDIR","$(datadir)/gtranslator/scripts",g \
+	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
+		< $< > $@
+
+#
+# This must always be the first file in the sources list!
+#
+about.c: defines.include
 
 gtranslator_SOURCES = \
 	about.c about.h \
@@ -74,4 +83,8 @@ gtranslator_LDADD = \
 	$(VFS_LIBS) \
 	$(GAL_LIBS)
 
-EXTRA_DIST = ChangeLog
+clean-am:
+	-rm -f defines.include
+
+EXTRA_DIST = ChangeLog \
+	defines.config

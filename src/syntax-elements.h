@@ -30,6 +30,7 @@
  * The keywords which should be highlighted.
  */
 static gchar *keywords[] = {
+	"ChangeLog",
 	"COPYING",
 	"COPYING.LIB",
 	"Copying",
@@ -52,16 +53,19 @@ static gchar *keywords[] = {
 	"HEAD",
 	"HTML",
 	"HTTP",
+	"INSTALL",
 	"KDE",
 	"Kde",
 	"LICENSE",
 	"License",
 	"NULL",
+	"README",
 	"TODO",
 	"URI",
 	"URL",
 	"Url",
 	"URN",
+	"XML",
 	"X11",
 	"WWW",
 	"WEB",
