@@ -5,6 +5,10 @@
 
 EXTRA_DIST = $(UMTF_SPEC_FILES)
 
+dtd_directory = $(datadir)/gtranslator/dtd/
+
+dtd__DATA = umtd.dtd
+
 UMTF_VERSION = 1.0
 
 UMTF_SPEC_FILES = \
@@ -12,7 +16,7 @@ UMTF_SPEC_FILES = \
 	ChangeLog \
 	README.UMTF \
 	example.xml \
-	umtf.dtd
+	$(dtd__DATA)
 
 specpack: $(UMTF_SPEC_FILES)
 	@-echo Creating a small specifications pack of UMTF $(UMTF_VERSION)...
