@@ -18,6 +18,7 @@
  *
  */
 
+#include <gdk/gdkkeysyms.h>
 #include "defines.include"
 #include "gui.h"
 #include "messages-table.h"
@@ -297,31 +298,27 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 	}
 }
 
-static gint
-row_selected (ETree *tree, int row, ETreePath node, int column, GdkEvent *event, gpointer data)
+static void
+row_selected (ETree *et, int row, ETreePath node, int column, gpointer data)
 {
-	GtrMsg *message;
+	GtrMsg *message, *old_message;
 	gint model_row;
 	
 	if (!node)
-		return FALSE;
-	
-	message=e_tree_memory_node_get_data (tree_memory, node);
-	/*g_return_val_if_fail(message!=NULL, FALSE);*/
-	/* we can get a NULL message if the user clicks on the status headers */
-	if (!message)
-		return TRUE;
+		return;
 		
-	if (event->button.button != 1)
-		return FALSE;
+	message=e_tree_memory_node_get_data (tree_memory, node);
+	old_message = po->current->data;
 	
-	model_row=message->no - 1;
+	if (message != NULL && message != old_message)
+	{
+		g_print ("cursor activated \n");
+		model_row=message->no - 1;
 	
-	if (model_row<0)
-		return FALSE;
-	gtranslator_message_go_to(g_list_nth(po->messages, model_row));
-	
-	return FALSE;
+		if (model_row<0)
+			return;
+		gtranslator_message_go_to(g_list_nth(po->messages, model_row));
+	}
 }
 
 /*
@@ -431,9 +428,9 @@ GtkWidget *gtranslator_messages_table_new()
 	GTR_FREE(statusfile);
 	
 	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
-	gtk_signal_connect(GTK_OBJECT(tree), "click",
+	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
 		GTK_SIGNAL_FUNC(row_selected), NULL);
-
+	
 	return messages_tree;
 }
 

@@ -1,5 +1,14 @@
 2001-08-10  Kevin Vandersloot <kfv101@psu.edu>
 
+	* messages-table.c (..messages_table_new): change signal connect
+	to "cursor_activated".
+	(row_selected): now check to see if a new message has been selected.
+	If not then don't call ...message_go_to. This means that navigating
+	the tree with keyboard will now change messages. It also fixes 
+	the infinite looping that happened before with "cursor_activated".
+
+2001-08-10  Kevin Vandersloot <kfv101@psu.edu>
+
 	* messages-table.c: slightly ugly hack to display status headers
 	and the messages as child nodes. Add three ETreePaths as global
 	variables for the different status. 
