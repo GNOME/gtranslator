@@ -30,7 +30,6 @@ INCLUDES = \
 	-I$(includedir) \
 	$(vfs_cflags) \
 	$(GAL_CFLAGS) \
-	$(GTKHTML_CFLAGS) \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
@@ -73,8 +72,7 @@ gtranslator_LDADD = \
 	$(gconf_libs) \
 	$(XML_LIBS) \
 	$(vfs_libs) \
-	$(GAL_LIBS) \
-	$(GTKHTML_LIBS)
+	$(GAL_LIBS)
 
 EXTRA_DIST = ChangeLog \
 	vfs-handle.c \

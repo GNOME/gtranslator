@@ -38,8 +38,6 @@
 #include <libgnomevfs/gnome-vfs-init.h>
 #endif
 
-#include <gtkhtml/gtkhtml.h>
-
 #include <gal/e-paned/e-hpaned.h>
 #include "shortcutbar.h"
 
@@ -530,11 +528,11 @@ void create_app1(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	text1=gtk_html_new();
+	text1=gtk_text_new(NULL,NULL);
 	
 	gtk_container_add(GTK_CONTAINER(scrolledwindow1), text1);
 	
-	gtk_html_set_editable(GTK_HTML(text1), FALSE);
+	gtk_text_set_editable(GTK_TEXT(text1), FALSE);
 
 	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow2, TRUE, TRUE, 0);
@@ -673,8 +671,8 @@ void display_msg(GList  * list_item)
 		temp = g_strdup(msg->msgid);
 		invert_dot(temp);
 		
-		temp=gtranslator_htmlizer(temp);
-		gtk_html_load_from_string(GTK_HTML(text1), temp, -1);
+		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
+			temp, -1);
 		
 		g_free(temp);
 
@@ -686,8 +684,8 @@ void display_msg(GList  * list_item)
 			g_free(temp);
 		}
 	} else {
-		gchar *zapit=gtranslator_htmlizer(msg->msgid);
-		gtk_html_load_from_string(GTK_HTML(text1), zapit, -1);
+		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
+				msg->msgid, -1);
 		
 		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
 				msg->msgstr, -1);
@@ -816,7 +814,7 @@ void toggle_msg_status(GtkWidget  * item, gpointer which)
  */
 void clean_text_boxes()
 {
-	gtk_html_load_empty(GTK_HTML(text1));
+	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
 	gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
 }
 
