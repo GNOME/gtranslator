@@ -1,7 +1,21 @@
 2001-08-27  Fatih Demir <kabalak@gtranslator.org>
 
+	* gui.c: Use "gtk_menu_popup" instead of the current (quite "bad")
+		"gnome_popup_dialog_modal" + "gtk_widget_destroy" combination;
+		  the popup menu doesn't get destroyed right after it's display
+		   and also doesn't select "Open" by itself anymore ,-)
+
+	* languages.h: Corrected another typo: "Belorussian" should be more
+		appropriate then the old "Bielorussian".
+
+	* dialogs.c & update.c: Corrected a typo: "occured" is bad, "occurred"
+		is good .-)
+
+	* dialogs.c: Added the real help text for the "Open from URI" help
+		dialog -- it's also translatable now (fixes #59527).
+
 	* color-schemes.c: Don't include <dirent.h> or <sys/types.h> anymore --
-		we have got out own util function for doing the directory work
+		we have got our own util function for doing the directory work
 		 now and don't need these headers directly.
 
 2001-08-26  Fatih Demir <kabalak@gtranslator.org>

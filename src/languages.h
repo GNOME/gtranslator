@@ -77,7 +77,7 @@ static GtrLanguage languages[] = {
 	 "linux-eu@chanae.alphanet.ch", "8bit"
 	},
 	{
-	 N_("Bielorussian"), "be", "windows-1251",
+	 N_("Belorussian"), "be", "windows-1251",
 	 "", "8bit"
 	},
 	{

@@ -171,11 +171,12 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 		if((GtrPreferences.popup_menu) && (file_opened==TRUE))
 		{
 			GtkWidget *popup_menu;
-			popup_menu=gnome_popup_menu_new(the_popup_menu);
-			gnome_popup_menu_do_popup_modal(popup_menu,
-				NULL, NULL, NULL, event);
 
-			gtk_widget_destroy(GTK_WIDGET(popup_menu));
+			popup_menu=gnome_popup_menu_new(the_popup_menu);
+
+			gtk_menu_popup(GTK_MENU(popup_menu), NULL, NULL,
+				NULL, NULL, event->button, event->time);
+
 			return TRUE;
 		}
 	}

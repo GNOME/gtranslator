@@ -887,7 +887,7 @@ void gtranslator_compile_error_dialog(FILE * fs)
 	GtkWidget *dialog, *textbox;
 	GtkWidget *scroll;
 
-	dialog = gtranslator_utils_error_dialog(_("An error occured while msgfmt was executed:\n"));
+	dialog = gtranslator_utils_error_dialog(_("An error occurred while msgfmt was executed:\n"));
 	textbox = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(textbox), FALSE);
 	while (TRUE) {
@@ -985,11 +985,17 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 	}
 	else if(button==2)
 	{
-		/*
-		 * FIXME: What to do here for #59527? We need to decide that.
-		 */
 		gnome_app_message(GNOME_APP(gtranslator_application),
-			"FIXME: Help reference for URIs -- short here or long in help docs?!");
+			_(
+"URIs are used to locate files uniquely on different systems.\n\
+The standard Internet addresses (URLs) are also URIs -- you can\n\
+use them to open remote po files lying on servers with standard protocols\n\
+like \"http\", \"ftp\" or any other access method supported by GnomeVFS."
+"\n"
+"Some example URIs for clarification (these ones are supported):\n\
+http://www.gtranslator.org/remote-po/gtranslator.pot\n\
+ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n\n\
+file:///<PO-FILE>"));
 	}
 	else
 	{

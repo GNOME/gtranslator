@@ -122,7 +122,7 @@ void update(GtkWidget *widget, gpointer useless)
 		else
 		{
 			gnome_app_warning(GNOME_APP(gtranslator_application),
-				_("An error occured while updating the po file."));	
+				_("An error occurred while updating the po file."));	
 		}
 	}
 	
