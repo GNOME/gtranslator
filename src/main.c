@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
 	* The GConf error stuff.
 	**/
 	#ifdef GCONF_IS_PRESENT
+	#error "GConf doesn't work for now, so please use the $NO_GCONF=yes env-var to avoid GConf compilation"
 	GError	*error=NULL;
 	#endif
 	

@@ -278,11 +278,55 @@ static GnomeUIInfo the_searchbar[] = {
 * The popup-menu.
 **/
 static GnomeUIInfo the_popup_menu[] = {
-	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
-	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
-	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
+	{
+	 GNOME_APP_UI_ITEM, N_("_Compile"),
+	 N_("Compile the po-file"),
+	 compile, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
+	 GDK_C, GDK_MOD1_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
+				N_("Save File"),
+				save_current_file,
+				GNOME_STOCK_MENU_SAVE),
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE(N_("Message _status"), the_msg_status_menu),
-	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_UNDO_ITEM(undo_changes, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_CUT_ITEM(cut_clipboard, NULL),
+	GNOMEUIINFO_MENU_COPY_ITEM(copy_clipboard, NULL),
+	GNOMEUIINFO_MENU_PASTE_ITEM(paste_clipboard, NULL),
+	GNOMEUIINFO_MENU_CLEAR_ITEM(clear_selection, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_FIND_ITEM(find_dialog, NULL),
+	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(find_do, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("First"),
+			       N_("Go to the first message"),
+			       goto_first_msg,
+			       GNOME_STOCK_MENU_FIRST),
+	GNOMEUIINFO_ITEM_STOCK(N_("Back"),
+			       N_("Go one message back"),
+			       goto_prev_msg,
+			       GNOME_STOCK_MENU_BACK),
+	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
+			       N_("Go one message forward"),
+			       goto_next_msg,
+			       GNOME_STOCK_MENU_FORWARD),
+	GNOMEUIINFO_ITEM_STOCK(N_("Last"),
+			       N_("Go to the last message"),
+			       goto_last_msg,
+			       GNOME_STOCK_MENU_LAST),
+	GNOMEUIINFO_ITEM_STOCK(N_("Missing"),
+			       N_("Go to next untranslated message"),
+			       goto_next_untranslated,
+			       GNOME_STOCK_MENU_BOOK_OPEN),
+	GNOMEUIINFO_ITEM_STOCK(N_("Fuzzy"),
+			       N_("Go to the next fuzzy translation"),
+			       goto_next_fuzzy,
+			       GNOME_STOCK_MENU_BOOK_RED),
 	GNOMEUIINFO_END
 };
 
@@ -507,19 +551,52 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 void display_msg(GList * list_item)
 {
 	GtrMsg *msg;
+	guint len;
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	clean_text_boxes();
+	/**
+	* Substitute the free spaces in the msgid only if this is
+	*  possible.
+	**/ 
+	if(msg->msgid)
+	{
+		/**
+		* Go through the characters and search for free spaces and replace them
+		*  with '·''s.
+		**/
+		for(len=0;len<strlen(msg->msgid);++len)
+		{
+			/**
+			* Do we have got a free space ?
+			**/
+			if(msg->msgid[len]==' ')
+			{
+				/**
+				* Then substitute it with a '·'.
+				**/
+				msg->msgid[len]='·';
+			}
+		}
+	}
+	/**
+	* And operate in the same way for the msgstr.
+	**/
+	if(msg->msgstr)
+	{	
+		for(len=0;len<strlen(msg->msgstr);++len)
+		{
+			if(msg->msgstr[len]==' ')
+			{
+				msg->msgstr[len]='·';
+			}
+		}
+	}
+	/**
+	* Insert the changed text into the two text-boxes.
+	**/
 	gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL, msg->msgid, -1);
 	gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, msg->msgstr, -1);
-	/*
-	if (wants.show_end_char) {
-		gtk_editable_insert_text(GTK_EDITABLE(text1), '·', 1, 
-					 strlen(msg->msgid), NULL);
-		gtk_editable_insert_text(GTK_EDITABLE(trans_box), '·', 1, 
-					 strlen(msg->msgstr), NULL);
-	}
-	*/
 #define set_active(number,flag) \
 	gtk_check_menu_item_set_active(\
 		(GtkCheckMenuItem *)(the_msg_status_menu[number].widget),\
@@ -725,6 +802,13 @@ static void undo_changes(GtkWidget * widget, gpointer useless)
 **/
 static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 {
+	/**
+	* The gchar for the text in the translation box which can be changed by
+	*  the user and a guint variable for the length of this text.
+	**/
+	gchar *newstr=g_new(gchar,1);
+	guint len;
+	
 	if (nothing_changes)
 		return;
 	if (!po->file_changed) {
@@ -742,5 +826,26 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
 		}
 	}
+	/**
+	* Get the text from the translation box.
+	**/
+	newstr=gtk_editable_get_chars(GTK_EDITABLE(trans_box),0,-1);
+	/**
+	* Parse the characters for a free space and replace them with the '·'.
+	**/
+	for(len=0;len<strlen(newstr);len++)
+	{
+		if(newstr[len]==' ')
+		{
+			newstr[len]='·';
+		}
+	}
+	/**
+	* Clean up the translation box.
+	**/
+	gtk_text_backward_delete(GTK_TEXT(trans_box), gtk_text_get_length(GTK_TEXT(trans_box)));
+	/**
+	* Insert the changed text with the '·''s.
+	**/
+	gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, newstr, -1);
 }
-

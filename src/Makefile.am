@@ -18,6 +18,7 @@ INCLUDES = \
 bin_PROGRAMS = gtranslator
 
 gtranslator_SOURCES = \
+	main.c \
 	gui.c gui.h \
 	parse.c	parse.h \
 	header_stuff.c header_stuff.h \
@@ -30,8 +31,7 @@ gtranslator_SOURCES = \
 	dnd.c dnd.h \
 	messages.h \
 	languages.h \
-	gnome-regex.c gnome-regex.h \
-	main.c 
+	gnome-regex.c gnome-regex.h
 
 gtranslator_LDADD = \
 	$(top_builddir)/libgtranslator/libgtranslator.la \
