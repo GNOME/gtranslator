@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.20\n"
-"POT-Creation-Date: 2000-08-01 17:40+0200\n"
-"PO-Revision-Date: 2000-08-01 17:41+0200\n"
+"POT-Creation-Date: 2000-08-03 11:32+0200\n"
+"PO-Revision-Date: 2000-08-03 11:33+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -616,44 +616,48 @@ msgstr "Galik"
 msgid "Welsh"
 msgstr "Velþ"
 
-#: src/main.c:36
+#: src/main.c:39
 msgid "Sets the minimum match for query"
 msgstr "Sorgula'nýn eþit görülmesi için eþit olacak asgari harf sayýsý"
 
-#: src/main.c:40
+#: src/main.c:43
 msgid "Po-file to open at startup"
 msgstr "Baþlangýçat açýlacak po-dosyasý"
 
-#: src/main.c:44
+#: src/main.c:47
 msgid "Specifies the main-window geometry"
 msgstr "Ana pencere boyutlarýný belirler"
 
-#: src/main.c:48
+#: src/main.c:51
 msgid "The messages db to use"
 msgstr "Kullanýlcak ileti/tercüme tabaný"
 
-#: src/main.c:52
+#: src/main.c:55
 msgid "Query the messages db & exit"
 msgstr "Ileti/tercüme tabanýný sorgula & çýk"
+
+#: src/main.c:59
+msgid "Team to append"
+msgstr "Eklenecek takým"
 
 #. *
 #. * Simply print it out.
 #. *
-#: src/main.c:164
+#: src/main.c:176
 #, c-format
 msgid "Getting results for query: `%s' ...\n"
 msgstr "`%s' için ileti/tercüme tabanýný sorguluyorum...\n"
 
-#: src/main.c:169
+#: src/main.c:181
 #, c-format
 msgid "Result                   :  %s"
 msgstr "Sonuç                    :  %s"
 
-#: src/main.c:171
+#: src/main.c:183
 msgid "End of query.\n"
 msgstr "Sorgulamanýn sonu.\n"
 
-#: src/main.c:231
+#: src/main.c:243
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "\"%s\" yer metni taranamadý!"
@@ -661,12 +665,12 @@ msgstr "\"%s\" yer metni taranamadý!"
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:250
+#: src/main.c:262
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "\"%s\" adýyla bir dosya yok yada o dosya okunamýyor!"
 
-#: src/main.c:251
+#: src/main.c:263
 msgid "Skipping it."
 msgstr "Atlatýyorum."
 
@@ -870,7 +874,7 @@ msgstr "Buna benzer bir þey yok!"
 msgid "No query, no fun."
 msgstr "Sorgulamazsýz cevap yoktur."
 
-#: libgtranslator/parse-db.c:44
+#: libgtranslator/parse-db.c:32
 msgid "No language defined in the query request!"
 msgstr "Istekte istenilen dil tabanýný belirtmedin !"
 
@@ -878,11 +882,11 @@ msgstr "Istekte istenilen dil tabanýný belirtmedin !"
 #. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
 #. * Just show a message that tells this.
 #. *
-#: libgtranslator/parse-db.c:55
+#: libgtranslator/parse-db.c:43
 msgid "FYI: Will also lookup the superclass message db.\n"
 msgstr "Bilgi : Üst sýnýf tercüme tabanýný da tarayacaðým.\n"
 
-#: libgtranslator/parse-db.c:75
+#: libgtranslator/parse-db.c:63
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr "Tercüme tabaný `%s.xml''i %s'de açamadým.\n"
@@ -890,20 +894,33 @@ msgstr "Tercüme tabaný `%s.xml''i %s'de açamadým.\n"
 #. *
 #. * Print some information.
 #. *
-#: libgtranslator/parse-db.c:88
+#: libgtranslator/parse-db.c:76
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr "Altsýnýf dosya `%s.xml''i bulamadým.\n"
 
-#: libgtranslator/parse-db.c:89
+#: libgtranslator/parse-db.c:77
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Üst sýnýf dosya `%s.xml''i deniyorum ...\n"
 
-#: libgtranslator/parse-db.c:131
+#: libgtranslator/parse-db.c:127
 msgid "The message db file is empty!"
 msgstr "Ileti/tercüme tabaný dosyasý boþ!"
 
-#: libgtranslator/parse-db.c:137
+#: libgtranslator/parse-db.c:133
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr "Ileti/tercüme tabaný dosyasý bir ileti/tercüme tabaný dosyasýna benzemiyor."
+
+#: libgtranslator/team-handle.c:32
+msgid "No language/team code defined to register!"
+msgstr "Dil/tercüme takýmý kodunu belirtmedin ki!"
+
+#: libgtranslator/team-handle.c:67
+msgid "Team is already registered!"
+msgstr "Takým zaten kayýtlý"
+
+#: libgtranslator/team-handle.c:100
+#, c-format
+msgid "Teams file `teams.xml` in %s couldn't be opened!"
+msgstr "Takýmlar dosyasý `teams.xml` %s'de açýlamadý!"
