@@ -147,10 +147,11 @@ static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
 		message=e_tree_memory_node_get_data(tree_memory, path);
 
 		/*
-		 * Check if we're on an untranslated message before operating 
-		 *  any further.
+		 * Check if we're on an untranslated or fuzzy message before 
+		 *  operating any further.
 		 */
-		if(message && message->msgid && !message->msgstr)
+		if(message && message->msgid && (!message->msgstr ||
+			message->status & GTR_MSG_STATUS_FUZZY))
 		{
 			GtkWidget	*menu=NULL;
 			GtkWidget 	*menu_item=NULL;
@@ -176,7 +177,9 @@ static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
 			}
 			else
 			{
-				menu_item=gtk_menu_item_new_with_label(_("Found nothing appropriate in the personal learn buffer."));
+				menu_item=gtk_menu_item_new_with_label(
+					_("Found nothing appropriate in\n
+ the personal learn buffer."));
 
 			}
 
