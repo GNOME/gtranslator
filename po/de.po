@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-05-07 06:26+0200\n"
-"PO-Revision-Date: 2000-05-07 14:55+02:00\n"
+"POT-Creation-Date: 2000-05-08 04:30+0200\n"
+"PO-Revision-Date: 2000-05-08 04:42+02:00\n"
 "Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,117 +64,149 @@ msgstr "Nach einer Meldung suchen"
 
 #: src/interface.c:218
 msgid "ReSearch"
-msgstr ""
+msgstr "Erneut Suchen"
 
 #: src/interface.c:219
 msgid "Search again"
-msgstr ""
+msgstr "Suche wiederholen"
 
 #: src/interface.c:226
 msgid "Goto"
-msgstr ""
+msgstr "Gehe zu"
 
 #: src/interface.c:227
 msgid "Goto this message"
-msgstr ""
+msgstr "Gehe zu der angegebenen Meldung"
 
 #. *
 #. * Find in the personal catalogue
 #. *
 #: src/interface.c:237
 msgid "F/Cat."
-msgstr ""
+msgstr "S/Kat."
 
 #: src/interface.c:238
 msgid "Find in the personal catalog"
-msgstr ""
+msgstr "Im persönlichen Katalog suchen"
 
 #. *
 #. * Find in the .po-file
 #. *
 #: src/interface.c:248
 msgid "F/Po."
-msgstr ""
+msgstr "S/PO."
 
 #: src/interface.c:249
 msgid "Find in the po file "
-msgstr ""
+msgstr "In der persönlichen PO-Datei suchen"
 
-#: src/interface.c:263
+#: src/interface.c:260
 msgid "Compile"
-msgstr ""
+msgstr "Compilieren"
 
-#: src/interface.c:264
+#: src/interface.c:261
 msgid "New File"
-msgstr ""
+msgstr "Neue Datei"
 
-#: src/interface.c:272
+#: src/interface.c:269
 msgid "Open"
-msgstr ""
+msgstr "Öffnen"
 
-#: src/interface.c:273
+#: src/interface.c:270
 msgid "Open File"
-msgstr ""
+msgstr "Datei öffnen"
 
-#: src/interface.c:281
+#: src/interface.c:278
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
-#: src/interface.c:282
+#: src/interface.c:279
 msgid "Save File"
-msgstr ""
+msgstr "Datei speichern"
 
-#: src/interface.c:290
+#: src/interface.c:287
 msgid "Save as"
-msgstr ""
+msgstr "Speichern unter"
 
-#: src/interface.c:299
+#: src/interface.c:288
+msgid "Save file as"
+msgstr "Datei speichern unter"
+
+#: src/interface.c:296
 msgid "First"
-msgstr ""
+msgstr "Erste"
 
-#: src/interface.c:308
+#: src/interface.c:297
+msgid "Go to the first message"
+msgstr "Gehe zu der ersten Meldung"
+
+#: src/interface.c:305
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
-#: src/interface.c:317
+#: src/interface.c:306
+msgid "Go one message back"
+msgstr "Gehe eine Meldung zurück"
+
+#: src/interface.c:314
 msgid "Options"
-msgstr ""
+msgstr "Einstellungen"
 
-#: src/interface.c:326
+#: src/interface.c:315
+msgid "gtranslator options"
+msgstr "Einstellungen für gtranslator"
+
+#: src/interface.c:323
 msgid "Next"
-msgstr ""
+msgstr "Weiter"
 
-#: src/interface.c:335
+#: src/interface.c:324
+msgid "Go one message forward"
+msgstr "Gehe zu der nächsten Meldung weiter"
+
+#: src/interface.c:332
 msgid "Last"
-msgstr ""
+msgstr "Letzte"
 
-#: src/interface.c:344
+#: src/interface.c:333
+msgid "Go to the last message"
+msgstr "Gehe zu der letzten Meldung weiter"
+
+#: src/interface.c:341 src/interface.c:342
 msgid "Exit"
-msgstr ""
+msgstr "Beenden"
 
 #. *
 #. * If there are any problems , give a
 #. *  message ..
 #. *
-#: src/parse.c:36
+#: src/parse.c:34
 #, c-format
 msgid ""
 "\n"
-"The file stream is lost !\n"
-"Error No. %i .\n"
+"The file stream is lost! Error no. `%i'"
 msgstr ""
 
-#: src/parse.c:60
+#: src/parse.c:59
 #, c-format
-msgid "Got filename  %s \n"
+msgid "There's no file to open or I couldn't understand `%s'!"
+msgstr ""
+
+#: src/parse.c:66
+#, c-format
+msgid "Couldn't stat the file `%s'!"
+msgstr ""
+
+#: src/parse.c:92
+#, c-format
+msgid "Got filename  %s\n"
 msgstr ""
 
 #. *
 #. * 3.1) No list, no fun
 #. *
 #: src/msg_db.c:61
-#, c-format
-msgid "%s lost the list of translations !\n"
+msgid "gtranslator lost the list of translations!\n"
 msgstr ""
 
 #. *
@@ -182,7 +214,7 @@ msgstr ""
 #. *
 #: src/msg_db.c:98 src/msg_db.c:164
 #, c-format
-msgid "The msg_db : %s seems not to be inited !\n"
+msgid "The msg_db `%s' seems not to be inited!\n"
 msgstr ""
 
 #. *
@@ -190,8 +222,8 @@ msgstr ""
 #. *  to the msg_db .
 #. *
 #: src/msg_db.c:110
-msgid "Got no message entry !\n"
-msgstr ""
+msgid "Got no message entry!\n"
+msgstr "Keine verwertbare Meldung vorhanden!\n"
 
 #: src/msg_db.c:119
 #, c-format
@@ -203,24 +235,24 @@ msgstr ""
 #. *
 #: src/msg_db.c:168
 msgid "Not available"
-msgstr ""
+msgstr "Nicht verfügbar"
 
 #. *
 #. * If there's no msg_list
 #. *  print an error message
 #. *
 #: src/msg_db.c:176
-msgid "No msg_list available for acting on it !\n"
+msgid "No msg_list available for acting on it!\n"
 msgstr ""
 
 #: src/gtr_dialogs.c:21
 msgid ""
-"An error occured while msgfmt was executed .\n"
-"Please check your .po file again ."
+"An error occured while msgfmt was executed.\n"
+"Please check your .po file again."
 msgstr ""
 
 #: src/gtr_dialogs.c:33
-msgid "You didn't change anything in the .po-file !\n"
+msgid "You didn't change anything in the .po-file!\n"
 msgstr ""
 
 #: src/gtr_dialogs.c:42
@@ -232,7 +264,7 @@ msgid "gtranslator -- open a po-file"
 msgstr ""
 
 #: src/gtr_dialogs.c:83
-msgid "gtranslator -- save file as .. "
+msgid "gtranslator -- save file as .."
 msgstr ""
 
 #: src/support.c:111 src/support.c:151
@@ -247,13 +279,20 @@ msgstr ""
 
 #: src/about.c:22
 msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
+msgstr "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
+
+#: src/about.c:28
+msgid ""
+"gtranslator is a Gnome Application for translating .po-files slightly "
+"different than in (X)Emacs.\n"
+"Till now you can't see much, but that will change! At least till R 0.20."
 msgstr ""
 
-#: src/about.c:24
+#: src/about.c:30
 msgid ""
 "gtranslator is a Gnome Application for translating .po-files more "
-"comfortable than in (X)Emacs .\n"
-"Till now you can't see much , but that will change !"
+"comfortable than in (X)Emacs.\n"
+"Till now you can't see much, but that will change! At least till R 0.20."
 msgstr ""
 
 #. *
@@ -272,35 +311,35 @@ msgid "Po file options"
 msgstr ""
 
 #: src/prefs.c:37
-msgid "Author's name :  "
+msgid "Author's name :"
 msgstr ""
 
 #: src/prefs.c:38
-msgid "Author's EMail : "
+msgid "Author's EMail :"
 msgstr ""
 
 #: src/prefs.c:39
-msgid "Language : "
+msgid "Language :"
 msgstr ""
 
 #: src/prefs.c:40
-msgid "MIME type : "
+msgid "MIME type :"
 msgstr ""
 
 #: src/prefs.c:41
-msgid "Encoding : "
+msgid "Encoding :"
 msgstr ""
 
 #: src/prefs.c:42
-msgid "Language code : "
+msgid "Language code :"
 msgstr ""
 
 #: src/prefs.c:43
-msgid "Language group's EMail : "
+msgid "Language group's EMail :"
 msgstr ""
 
 #: src/prefs.c:44
-msgid "Comments : "
+msgid "Comments :"
 msgstr ""
 
 #: src/prefs.c:57
@@ -308,7 +347,7 @@ msgid "Add the additional comments to the header"
 msgstr ""
 
 #: src/prefs.c:58
-msgid "Wanr if trying to save an unchanged file"
+msgid "Warn me if I'm trying to save an unchanged file"
 msgstr ""
 
 #: src/prefs.c:59
@@ -320,173 +359,173 @@ msgid "Don't save unchanged .po-files"
 msgstr ""
 
 #: src/prefs.c:61
-msgid "Use the msg_db . ( FUTURE_WORK ! )"
-msgstr ""
-
-#: src/languages.h:51
-msgid "Arabic"
-msgstr ""
-
-#: src/languages.h:52
-msgid "Basque"
-msgstr ""
-
-#: src/languages.h:53
-msgid "Bulgarian"
-msgstr ""
-
-#: src/languages.h:54
-msgid "Catalan"
-msgstr ""
-
-#: src/languages.h:55
-msgid "Chinese/Simplified"
+msgid "Use the msg_db"
 msgstr ""
 
 #: src/languages.h:56
-msgid "Chinese/Traditional"
-msgstr ""
-
-#: src/languages.h:57
-msgid "Croatian"
-msgstr ""
-
-#: src/languages.h:58
-msgid "Czech"
-msgstr ""
-
-#: src/languages.h:59
-msgid "Danish"
+msgid "Arabic"
 msgstr ""
 
 #: src/languages.h:60
-msgid "English"
-msgstr ""
-
-#: src/languages.h:61
-msgid "English/Canada"
-msgstr ""
-
-#: src/languages.h:62
-msgid "English/GB"
-msgstr ""
-
-#: src/languages.h:63
-msgid "English/USA"
+msgid "Basque"
 msgstr ""
 
 #: src/languages.h:64
-msgid "Estonian"
-msgstr ""
-
-#: src/languages.h:65
-msgid "Farsi"
-msgstr ""
-
-#: src/languages.h:66
-msgid "Finnish"
-msgstr ""
-
-#: src/languages.h:67
-msgid "French"
+msgid "Bulgarian"
 msgstr ""
 
 #: src/languages.h:68
-msgid "Galician"
-msgstr ""
-
-#: src/languages.h:69
-msgid "German"
-msgstr ""
-
-#: src/languages.h:70
-msgid "Greek"
-msgstr ""
-
-#: src/languages.h:71
-msgid "Hungarian"
+msgid "Catalan"
 msgstr ""
 
 #: src/languages.h:72
-msgid "Indonesian"
-msgstr ""
-
-#: src/languages.h:73
-msgid "Italian"
-msgstr ""
-
-#: src/languages.h:74
-msgid "Irish"
-msgstr ""
-
-#: src/languages.h:75
-msgid "Japanese"
+msgid "Chinese/Simplified"
 msgstr ""
 
 #: src/languages.h:76
-msgid "Korean"
-msgstr ""
-
-#: src/languages.h:77
-msgid "Lithuanian"
-msgstr ""
-
-#: src/languages.h:78
-msgid "Norwegian/Bookmal"
-msgstr ""
-
-#: src/languages.h:79
-msgid "Norwegian/Nynorsk"
+msgid "Chinese/Traditional"
 msgstr ""
 
 #: src/languages.h:80
-msgid "Polish"
-msgstr ""
-
-#: src/languages.h:81
-msgid "Portuguese"
-msgstr ""
-
-#: src/languages.h:82
-msgid "Portuguese/Brazil"
-msgstr ""
-
-#: src/languages.h:83
-msgid "Russian"
+msgid "Croatian"
 msgstr ""
 
 #: src/languages.h:84
-msgid "Slovak"
-msgstr ""
-
-#: src/languages.h:85
-msgid "Spanish"
-msgstr ""
-
-#: src/languages.h:86
-msgid "Spanish/Spain"
-msgstr ""
-
-#: src/languages.h:87
-msgid "Spanish/Mexico"
+msgid "Czech"
 msgstr ""
 
 #: src/languages.h:88
-msgid "Swedish"
-msgstr ""
-
-#: src/languages.h:89
-msgid "Turkish"
-msgstr ""
-
-#: src/languages.h:90
-msgid "Ukrainian"
-msgstr ""
-
-#: src/languages.h:91
-msgid "Walloon"
+msgid "Danish"
 msgstr ""
 
 #: src/languages.h:92
+msgid "English"
+msgstr ""
+
+#: src/languages.h:96
+msgid "English/Canada"
+msgstr ""
+
+#: src/languages.h:100
+msgid "English/GB"
+msgstr ""
+
+#: src/languages.h:104
+msgid "English/USA"
+msgstr ""
+
+#: src/languages.h:108
+msgid "Estonian"
+msgstr ""
+
+#: src/languages.h:112
+msgid "Farsi"
+msgstr ""
+
+#: src/languages.h:116
+msgid "Finnish"
+msgstr ""
+
+#: src/languages.h:120
+msgid "French"
+msgstr ""
+
+#: src/languages.h:124
+msgid "Galician"
+msgstr ""
+
+#: src/languages.h:128
+msgid "German"
+msgstr ""
+
+#: src/languages.h:132
+msgid "Greek"
+msgstr ""
+
+#: src/languages.h:136
+msgid "Hungarian"
+msgstr ""
+
+#: src/languages.h:140
+msgid "Indonesian"
+msgstr ""
+
+#: src/languages.h:144
+msgid "Italian"
+msgstr ""
+
+#: src/languages.h:148
+msgid "Irish"
+msgstr ""
+
+#: src/languages.h:152
+msgid "Japanese"
+msgstr ""
+
+#: src/languages.h:156
+msgid "Korean"
+msgstr ""
+
+#: src/languages.h:160
+msgid "Lithuanian"
+msgstr ""
+
+#: src/languages.h:164
+msgid "Norwegian/Bookmal"
+msgstr ""
+
+#: src/languages.h:168
+msgid "Norwegian/Nynorsk"
+msgstr ""
+
+#: src/languages.h:172
+msgid "Polish"
+msgstr ""
+
+#: src/languages.h:176
+msgid "Portuguese"
+msgstr ""
+
+#: src/languages.h:180
+msgid "Portuguese/Brazil"
+msgstr ""
+
+#: src/languages.h:184
+msgid "Russian"
+msgstr ""
+
+#: src/languages.h:188
+msgid "Slovak"
+msgstr ""
+
+#: src/languages.h:192
+msgid "Spanish"
+msgstr ""
+
+#: src/languages.h:196
+msgid "Spanish/Spain"
+msgstr ""
+
+#: src/languages.h:200
+msgid "Spanish/Mexico"
+msgstr ""
+
+#: src/languages.h:204
+msgid "Swedish"
+msgstr ""
+
+#: src/languages.h:208
+msgid "Turkish"
+msgstr ""
+
+#: src/languages.h:212
+msgid "Ukrainian"
+msgstr ""
+
+#: src/languages.h:216
+msgid "Walloon"
+msgstr ""
+
+#: src/languages.h:220
 msgid "Welsh"
 msgstr ""
