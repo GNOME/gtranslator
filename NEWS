@@ -1,6 +1,17 @@
-NEWS from gtranslator R 1.0 "Heat it!" (2003-0Y-XX):
+NEWS from gtranslator R 1.0 "Heat it!" (2003-09-03):
 ---------------------------------------------------
 
+- Compilation fixes for FreeBSD and the (p)make system (hence the removal of
+   more sophisticated, GNU make specific rules out of the Makefiles).
+- Extended the language abilities in form of better display for some stuff
+   and more translations and language entries in the prefs dialog :-)
+- Quite cool new good-looking and useful preferences dialog.
+- Added statistics output about the learn buffer to the commandline options
+   of gtranslator so that you can determine how many entries are in the
+    learn buffer and such...
+- Updated pozilla.sh to version 6.1 to now also work with the newer AC_INIT
+   macros in up-to-date configure.in files.
+- Bug fixes for the man pages and also an updated new version of the docs.
 - L10n works now also on the command line - see b.g.o #120454 for more info.
 - Many, many practical bug fixed within dialogs handling, header parsing etc.
 - Editing dialog for plural forms is also available now, colored messages
@@ -15,7 +26,7 @@ NEWS from gtranslator R 1.0 "Heat it!" (2003-0Y-XX):
 - Dialogs were rewritten to be all Gtk+ 2-alike and rightly ported.
 - Header dialog rewrite and non-usage of deprecated Gtk+/Glib functions anymore
 - More robustness and removal of some stuff.
-- Fixage of many important bugs (<Bug List>)
+- Fixage of many important bugs (<long Bug List with 15+ bugs>)
 - New RPM spec file, new Debian build directories - daily CVS snapshots/Debian
    are now also available.
 - Removed etspec file.
