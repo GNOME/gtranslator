@@ -2,6 +2,8 @@
 #######################################################################
 ### The kabalak'ish answer to ./autogen.sh !
 #######################################################################
+package=gtranslator
+#######################################################################
 echo "I don't check for the stuff I'll use ;-) "
 a="echo -n "
 echo "Starting to process the files ..."
@@ -34,5 +36,8 @@ while [ $t -gt 1 ]
 	t=$[ $t -1 ]
 	done 
 $a " last chance (1) " && sleep 1 && echo ""
-./configure && echo -e "\n\n\tHappy making !\n" && exit 0 
+./configure && \
+echo "Making $package" && make --silent && \
+echo "Installing $package" && make install --silent && \
+echo -e "\n\tHappy $package-ing\n" && exit 0
 #######################################################################
