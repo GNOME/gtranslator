@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			GNOME I18N List <gnome-i18n@gnome.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -22,7 +22,10 @@
 #define GTR_LANGUAGES_H 1
 
 #include <glib.h>
-// #include <libgnome/gnome-defs.h>
+
+/*
+ * #include <libgnome/gnome-defs.h>
+ */
 
 /*
  * The language structure with all the essential data for gtranslator:

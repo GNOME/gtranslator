@@ -3,6 +3,7 @@
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Peeter Vois <peeter@gtranslator.org>
  *			Thomas Ziehmer <thomas@gtranslator.org>
+ *			Ross Golder <ross@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@
 
 #include "about.h"
 #include "actions.h"
+#include "bookmark.h"
 #include "color-schemes.h"
 #include "dialogs.h"
 #include "dnd.h"
@@ -409,6 +411,11 @@ void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	}
 
 	/*
+	 * Now save the bookmarks' list before closing/exiting the application.
+	 */
+	gtranslator_bookmark_save_list();
+
+	/*
 	 * Free the used GtrTranslator structure.
 	 */
 	gtranslator_translator_free(gtranslator_translator);
@@ -733,6 +740,10 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					}
 					break;
 					
+				case GDK_Insert:
+					gtranslator_bookmark_add_direct();
+					break;
+
 				default:
 					break;
 			}

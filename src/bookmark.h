@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -86,6 +86,12 @@ gboolean gtranslator_bookmark_string_equal(GtrBookmark *bookmark, const gchar *s
  * Add the given GtrBookmark to the IDs list.
  */
 void gtranslator_bookmark_add(GtrBookmark *bookmark);
+
+/*
+ * Adds the current position, po file directly to the IDs list without any
+ *  current handling being necessary...
+ */
+void gtranslator_bookmark_add_direct(void);
 
 /*
  * Remove the given GtrBookmark from the IDs list -- the result is

@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -66,9 +66,8 @@ GtrBookmark *gtranslator_bookmark_new()
 GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 {
 	GtrBookmark 	*bookmark=g_new0(GtrBookmark, 1);
-	gchar 	**values;
-	gchar 	*filename,
-		*encoding_area;
+	gchar 		**values;
+	gchar 		*filename, *encoding_area;
 
 	g_return_val_if_fail(string!=NULL, NULL);
 
@@ -88,28 +87,34 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 		gchar *tempzulu;
 		
 		tempzulu=nautilus_str_get_prefix(string, "#");
-		g_strreverse(tempzulu);
-
-		/*
-		 * Some reverse-thinking...
-		 */
-		filename=nautilus_str_get_prefix(tempzulu,
-			":kramkoob_rotalsnartg");
+		filename=nautilus_str_get_after_prefix(tempzulu, ":");
+		filename++;
 		
 		g_free(tempzulu);
 		g_return_val_if_fail(filename!=NULL, NULL);
 	}
 	
 	bookmark->file=g_strdup(filename);
-	g_free(filename);
+	/*
+	 * FIXME: Doesn't work due to the filename++ above, fix needed!
+	 * 
+	 * g_free(filename);
+	 */
 	
 	/*
 	 * Operate on the resting parts of the string-encoded bookmark and
 	 *  split it up into its normally 4 parts.
 	 */
 	encoding_area=nautilus_str_get_after_prefix(string, "#");
+	encoding_area++;
+
 	values=g_strsplit(encoding_area, "/", 2);
-	g_free(encoding_area);
+
+	/*
+	 * FIXME: Again the str++ problem like above with filename++, aaaarg!
+	 * 
+	 * g_free(encoding_area);
+	 */
 
 	bookmark->version = g_strdup(values[0]);
 	
@@ -140,7 +145,7 @@ gchar *gtranslator_bookmark_string_from_bookmark(GtrBookmark *bookmark)
 	g_return_val_if_fail(bookmark!=NULL, NULL);
 
 	string=g_strdup_printf("gtranslator_bookmark:%s#%s/%i",
-		bookmark->file,  bookmark->version, bookmark->position);
+		bookmark->file, bookmark->version, bookmark->position);
 
 	return string;
 }
@@ -341,6 +346,20 @@ void gtranslator_bookmark_add(GtrBookmark *bookmark)
 }
 
 /*
+ * Adding the bookmark directly without any feedback and such but easyness.
+ */
+void gtranslator_bookmark_add_direct()
+{
+	GtrBookmark *bookmark=NULL;
+
+	bookmark=gtranslator_bookmark_new();
+	g_return_if_fail(bookmark!=NULL);
+
+	gtranslator_bookmark_add(GTR_BOOKMARK(bookmark));
+	gtranslator_bookmark_free(bookmark);
+}
+
+/*
  * Remove the given GtrBookmark from our list -- the elements should 
  *  be matching "enough" to apply the removal from the list.
  */
@@ -455,7 +474,7 @@ void gtranslator_bookmark_load_list()
 
 		gtranslator_bookmarks=g_list_prepend(gtranslator_bookmarks,
 			gtranslator_bookmark_copy(bookmark));
-		
+
 		gtranslator_bookmark_free(bookmark);
 	}
 

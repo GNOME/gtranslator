@@ -2,6 +2,7 @@
  * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Peeter Vois <peeter@gtranslator.org>
+ *			Ross Golder <ross@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,6 +26,7 @@
 #include <gnome.h>
 
 #include "actions.h"
+#include "bookmark.h"
 #include "color-schemes.h"
 #include "defines.include"
 #include "dialogs.h"
@@ -494,6 +496,13 @@ int main(int argc, char *argv[])
 	 *  main menu.
 	 */
 	gtranslator_color_scheme_show_list();
+
+	/*
+	 * Load our possibly existing bookmarks' list from our preferences
+	 *  settings - shall make easy access to problematic messages
+	 *   possible and make life faster and easier.
+	 */
+	gtranslator_bookmark_load_list();
 	
 	gtk_main();
 	return 0;

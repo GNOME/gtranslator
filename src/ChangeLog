@@ -1,5 +1,14 @@
 2003-07-13  Fatih Demir <kabalak@gtranslator.org>
 
+	* languages.h & translator.h: Comments shall be pure C and not C++
+		style comments like "//", at least in the headers...
+
+	* bookmark.[ch], gui.[ch] & main.c: Added bookmarks' mechanism to get
+		it working, loading, saving entries works, GUI integration
+		 is not done yet, but Ctrl+Home gets a new bookmark entry in
+		  your preferences to get added. Two fat FIXMEs are waiting
+		   in the bookmark.c file for resolvation of free'ing actions.
+
 	* dialogs.c & prefs.c: Fixed b.g.o #117315 and removed trailing spaces
 		from 2 messages.
 
