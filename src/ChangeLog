@@ -1,5 +1,11 @@
 2002-02-27  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c: Fix the problem with the Untranslated -> Translated
+		status move for the translation insertion; also free up the 
+		 inserted "found_translation" string (the "retrieval->message"
+		  structure part should NOT be free'd as it would lead to a
+		   crash: it's just a pointer to the _real_ message).
+
 	* syntax-elements.h: Small update of the syntax highlighted elements &
 		URL prefixes.
 

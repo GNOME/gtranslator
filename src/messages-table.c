@@ -1,5 +1,6 @@
 /*
  * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Kevin Vandersloot <kfv101@psu.edu>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -282,10 +283,12 @@ static void insert_translation(GtkWidget *widget, gpointer insertion_kind)
 		}
 
 		gtranslator_message_status_set_fuzzy(retrieval->message, FALSE);
+		retrieval->message->status |= GTR_MSG_STATUS_TRANSLATED;
 		gtranslator_message_show(retrieval->message);
 		gtranslator_messages_table_update_message_status(retrieval->message);
 		gtranslator_messages_table_update_row(retrieval->message);
-		/* fixme: leak? */
+
+		GTR_FREE(retrieval->found_translation);
 		GTR_FREE(retrieval);
 	}
 }
