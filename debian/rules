@@ -52,13 +52,13 @@ binary-arch: build install
 
 	install -m 644 -o root -g root README			\
 		debian/tmp/usr/share/doc/gtranslator/README
-	install -m 644 -o root -g root 			\
+	install -m 644 -o root -g root NEWS 			\
 		debian/tmp/usr/share/doc/gtranslator/NEWS
-	install -m 644 -o root -g root 			\
+	install -m 644 -o root -g root AUTHORS			\
 		debian/tmp/usr/share/doc/gtranslator/AUTHORS
-	install -m 644 -o root -g root 			\
+	install -m 644 -o root -g root THANKS			\
 		debian/tmp/usr/share/doc/gtranslator/THANKS
-	install -m 644 -o root -g root 			\
+	install -m 644 -o root -g root TODO			\
 		debian/tmp/usr/share/doc/gtranslator/TODO
 
 	install -m 644 -o root -g root ChangeLog		\
