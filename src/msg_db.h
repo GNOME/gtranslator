@@ -17,7 +17,7 @@
 /**
  * The default msg_db location .
  **/
-const char *msg_db=MSG_DB_DIR "msg.db";
+const gchar *msg_db=MSG_DB_DIR "msg.db";
 
 /**
  * Defines if the msg_db is opened 
@@ -39,13 +39,13 @@ void close_msg_db();
 /**
  * Put this to the db
  **/
-int put_to_msg_db(const char *);
+int put_to_msg_db(const gchar *);
 
 /**
  * Get a similar entry from 
- * the msg-db & return a ´char *´
+ * the msg-db & return a ´gchar *´
  **/
-char *get_from_msg_db(const char *);
+gchar *get_from_msg_db(const gchar *);
 
 /**
  * Returns the length of the msg-db

@@ -9,7 +9,7 @@
 /**
  * A stupid place for a character variable ...
  **/
-const char *filename;
+const gchar *filename;
 
 /**
  * The long list of cb-functions ...

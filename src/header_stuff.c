@@ -17,7 +17,7 @@ int _count=0;
  * Try to catch the header
  **/
 
-void cut_the_header_off_it(FILE *mfs,const char *cutties)
+void cut_the_header_off_it(FILE *mfs,const gchar *cutties)
 {
 	/**
 	 * Go to the start
@@ -26,7 +26,7 @@ void cut_the_header_off_it(FILE *mfs,const char *cutties)
 	/**
 	 * Some stupid search for the end of the header
 	 **/
-	while((fgets(tmp,256,mfs) != NULL) && (are_we_at_the_end((char)tmp,cutties) == 1))
+	while((fgets(tmp,256,mfs) != NULL) && (are_we_at_the_end((gchar)tmp,cutties) == 1))
 	{
 		/**
 		 * Show some more information when build with
@@ -61,7 +61,7 @@ void cut_the_header_off_it(FILE *mfs,const char *cutties)
 	}
 }
 
-int are_we_at_the_end(char test,const char *ends)
+int are_we_at_the_end(char test,const gchar *ends)
 {
 	/**
 	 * Are we at the keylines-end :

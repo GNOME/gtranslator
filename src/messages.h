@@ -15,7 +15,7 @@
  **/
 struct po_file 
 {
-	char *po_filename;
+	gchar *po_filename;
 	unsigned int file_length;
 	gboolean opened;
 };
@@ -27,8 +27,8 @@ struct po_file
 struct message
 {
 	struct po_file *po;
-	char *msgid;
-	char *msgstr;
+	gchar *msgid;
+	gchar *msgstr;
 	unsigned int position;
 	gboolean translated;
 };

@@ -21,7 +21,7 @@ FILE *db_stream;
 /**
  * The message char
  **/
-char msg_messages[128];
+gchar msg_messages[128];
 
 int init_msg_db()
 {
@@ -75,7 +75,7 @@ void close_msg_db()
 	msg_db_inited=FALSE;
 }
 
-int put_to_msg_db(const char *new_message)
+int put_to_msg_db(const gchar *new_message)
 {
 	/**
 	 * Check if we've got a working 
@@ -121,7 +121,7 @@ int put_to_msg_db(const char *new_message)
 	return 0;
 }
 
-char *get_from_msg_db(const char *get_similar)
+gchar *get_from_msg_db(const gchar *get_similar)
 {
 	if(msg_db_inited==TRUE)
 	{

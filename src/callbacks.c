@@ -24,8 +24,8 @@
 /**
  * The variables for all that ....
  **/
-char cmd[256];
-char fname[768];
+gchar cmd[256];
+gchar fname[768];
 static GnomeHelpMenuEntry help_me = { "gtranslator", "index.html" };
 int warn_me,show_me_errors,startup_at_last;
 

@@ -24,7 +24,7 @@
  * Some variables needed for the search-routines ...
  **/
 
-char tmp[256];
+gchar tmp[256];
 
 /**
  * The hoped-to-be-maximal-count-for-headers
@@ -36,7 +36,7 @@ int max_header_lines_count=MAX_HLEN;
  * The char-array for the header-lines :
  **/
 
-char header[128][MAX_HLEN];
+gchar header[128][MAX_HLEN];
 
 /**
  * And some ´delims´ :
@@ -45,24 +45,24 @@ char header[128][MAX_HLEN];
  *  be a ´\n´ .
  **/
 
-const char *last_id="\n\"";
+const gchar *last_id="\n\"";
 
 /**
  * I hope that every .po-file has got
  *  this line at the end .
  **/
 
-const char *cutties="\"Content-Transfer";
+const gchar *cutties="\"Content-Transfer";
 
 /**
  * The routines for header_stuff
  **/
 
-void cut_the_header_off_it(FILE *,const char *);
+void cut_the_header_off_it(FILE *,const gchar *);
 
 /**
  * A function for testing if we're at the end
  * of the header .
  **/
 
-int are_we_at_the_end(char,const char *);
+int are_we_at_the_end(char,const gchar *);

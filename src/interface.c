@@ -236,7 +236,7 @@ create_app1 (void)
                                       _("Compile"),
                                       _("New File"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-       	gtk_widget_show (compile_button);
+       	ka_widget_show (compile_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_OPEN);
 	open_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -245,7 +245,7 @@ create_app1 (void)
                                       _("Open"),
                                       _("Open File"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (open_button);
+	ka_widget_show (open_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_SAVE);
 	save_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -254,7 +254,7 @@ create_app1 (void)
                                       _("Save"),
                                       _("Save File"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (save_button);
+	ka_widget_show (save_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_SAVE_AS);
 	save_as_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -263,7 +263,7 @@ create_app1 (void)
                                       _("Save as"),
                                       NULL, NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (save_as_button);
+	ka_widget_show (save_as_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_FIRST);
 	first_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -272,7 +272,7 @@ create_app1 (void)
                                       _("First"),
                                       NULL, NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (first_button);
+	ka_widget_show (first_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_BACK);
 	back_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -281,7 +281,7 @@ create_app1 (void)
                                       _("Back"),
                                       NULL, NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (back_button);
+	ka_widget_show (back_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_PREFERENCES);
 	options_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -290,7 +290,7 @@ create_app1 (void)
                                       _("Options"),
                                       NULL, NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (options_button);
+	ka_widget_show (options_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_FORWARD);
 	next_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -299,7 +299,7 @@ create_app1 (void)
                                       _("Next"),
                                       NULL, NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (next_button);
+	ka_widget_show (next_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_LAST);
 	last_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -308,7 +308,7 @@ create_app1 (void)
                                       _("Last"),
                                       NULL, NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (last_button);
+	ka_widget_show (last_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_EXIT);
 	exit_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
@@ -317,7 +317,7 @@ create_app1 (void)
                                       _("Exit"),
                                       NULL, NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show (exit_button);
+	ka_widget_show (exit_button);
 
 	vbox1 = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (vbox1);
@@ -343,7 +343,7 @@ create_app1 (void)
 	gtk_text_set_editable (GTK_TEXT (trans_box), TRUE);
 	gtk_widget_realize (trans_box);
 
-	appbar1 = gnome_appbar_new (TRUE, FALSE , GNOME_PREFERENCES_NEVER);
+	appbar1 = gnome_appbar_new (TRUE ,FALSE , GNOME_PREFERENCES_NEVER);
 	gtk_widget_show (appbar1);
 	gnome_app_set_statusbar (GNOME_APP (app1), appbar1);
 

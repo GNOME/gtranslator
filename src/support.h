@@ -17,7 +17,7 @@
  * you want returned.
  **/
 	GtkWidget*  lookup_widget              (GtkWidget       *widget,
-                                        const gchar     *widget_name);
+ 		                                const gchar     *widget_name);
 
 /**
  * get_widget() is deprecated. Use lookup_widget instead. 
