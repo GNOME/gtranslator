@@ -23,6 +23,7 @@ GTRANSLATOR_BUILD_VERSIONS = "$(shell glib-config --version) / $(shell gtk-confi
 	-e s,"&BACKENDS_DIR","$(libdir)/gtranslator/backends",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
 	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
+	-e s,"&ETSPECS_DIR","$(datadir)/gtranslator/etspecs",g \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&SCHEMESDIR","$(datadir)/gtranslator/colorschemes",g \
 	-e s,"&SCRIPTSDIR","$(datadir)/gtranslator/scripts",g \
