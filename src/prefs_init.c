@@ -58,7 +58,6 @@ void gtranslator_preferences_init_default_values()
 		gtranslator_config_set_bool("toggles/sweep_compile_file", FALSE);
 		gtranslator_config_set_bool("toggles/use_learn_buffer", TRUE);
 		gtranslator_config_set_bool("toggles/fuzzy_matching", FALSE);
-		gtranslator_config_set_bool("toggles/load_backends", TRUE);
 		gtranslator_config_set_bool("toggles/highlight", TRUE);
 
 		/*

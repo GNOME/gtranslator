@@ -568,7 +568,6 @@ void gtranslator_parse_main(const gchar *filename)
 	 */
 	base = g_path_get_basename(po->filename);
 	if(nautilus_strcasecmp(base, gtranslator_runtime_config->temp_filename) || 
-	   nautilus_strcasecmp(base, gtranslator_runtime_config->backend_filename) ||
 	   nautilus_strcasecmp(base, gtranslator_runtime_config->crash_filename))
 	{
 		gtranslator_history_add(po->filename,

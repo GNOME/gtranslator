@@ -2,7 +2,7 @@
 # Welcome to the gtranslator-automake-autoconf Wonderland!
 # --------------------------------------------------------
 
-SUBDIRS = backends pixmaps
+SUBDIRS = pixmaps
 
 INCLUDES = \
 	-I$(top_srcdir) \
@@ -22,7 +22,6 @@ GTRANSLATOR_BUILD_VERSIONS = "$(shell glib-config --version) / $(shell gtk-confi
 %.include: %.config
 	sed \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
-	-e s,"&BACKENDS_DIR","$(libdir)/gtranslator/backends",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
 	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
 	-e s,"&ETSPECS_DIR","$(datadir)/gtranslator/etspecs",g \
@@ -37,7 +36,6 @@ $(gtranslator_SOURCES): defines.include
 gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
-	backend.c backend.h \
 	bookmark.c bookmark.h \
 	color-schemes.c color-schemes.h \
 	comment.c comment.h \

@@ -75,7 +75,7 @@ static GtkWidget
 	*autosave_with_suffix, *sweep_compile_file, *use_learn_buffer,
 	*show_messages_table, *rambo_function, *use_own_mt_colors,
 	*collapse_translated_entries, *auto_learn, *fuzzy_matching,
-	*load_backends, *show_comment, *highlight, *check_formats;
+	*show_comment, *highlight, *check_formats;
 
 /*
  * The timeout GtkSpinButton:
@@ -213,14 +213,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page,
 		5, _("Delete compiled files (e.g. \"project.gmo\")"),
 		GtrPreferences.sweep_compile_file, gtranslator_preferences_dialog_changed);
-	load_backends=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		6, _("Load all backends on startup"),
-		GtrPreferences.load_backends, gtranslator_preferences_dialog_changed);
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		7, _("Save geometry on exit & restore it on startup"),
+		6, _("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
 	show_comment=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		8, _("Show instant comment view in the main pane"),
+		7, _("Show instant comment view in the main pane"),
 		GtrPreferences.show_comment, gtranslator_preferences_dialog_changed);
 	
 	/*
@@ -484,7 +481,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.use_own_dict = if_active(use_own_dict);
 	GtrPreferences.use_learn_buffer = if_active(use_learn_buffer);
 	GtrPreferences.fuzzy_matching = if_active(fuzzy_matching);
-	GtrPreferences.load_backends = if_active(load_backends);
 	GtrPreferences.auto_learn = if_active(auto_learn);
 	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
 	GtrPreferences.check_formats = if_active(check_formats);
@@ -635,8 +631,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.use_learn_buffer);
 	gtranslator_config_set_bool("toggles/fuzzy_matching",
 			      GtrPreferences.fuzzy_matching);
-	gtranslator_config_set_bool("toggles/load_backends",
-			      GtrPreferences.load_backends);
 	gtranslator_config_set_bool("toggles/auto_learn",
 			      GtrPreferences.auto_learn);
 	gtranslator_config_set_bool("toggles/show_messages_table",
@@ -804,8 +798,6 @@ void gtranslator_preferences_read(void)
 		"toggles/use_learn_buffer");
 	GtrPreferences.fuzzy_matching = gtranslator_config_get_bool(
 		"toggles/fuzzy_matching");
-	GtrPreferences.load_backends = gtranslator_config_get_bool(
-		"toggles/load_backends");
 	GtrPreferences.auto_learn = gtranslator_config_get_bool(
 		"toggles/auto_learn");
 	GtrPreferences.check_formats = gtranslator_config_get_bool(

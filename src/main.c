@@ -25,7 +25,6 @@
 #include <gnome.h>
 
 #include "actions.h"
-#include "backend.h"
 #include "color-schemes.h"
 #include "defines.include"
 #include "dialogs.h"
@@ -98,10 +97,6 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"learn", 'l', POPT_ARG_STRING, &learn_file,
 		0, N_("Learn the file completely & exit"), N_("FILENAME")
-	},
-	{
-		"no-modules", 'n', POPT_ARG_NONE, &no_modules,
-		0, N_("Don't load any backend modules"), NULL
 	},
 	{
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
@@ -209,34 +204,6 @@ int main(int argc, char *argv[])
 	 *  outsourced into the GtrTranslator structure.
 	 */
 	gtranslator_preferences_read();
-
-	/*
-	 * If the loading of the modules isn't inhibited, try to load all
-	 *  backends.
-	 */
-	if(!GtrPreferences.load_backends || no_modules)
-	{
-		backends=NULL;
-	}
-	else
-	{
-		/*
-		 * Test first if the local libgmodule supports modules at all.
-		 */
-		if(!g_module_supported())
-		{
-			g_warning(_("GModule implementation doesn't support loading dynamic modules!"));
-			backends=NULL;
-		}
-		else
-		{
-			/*
-			 * Load all backends from the default backends 
-			 *  directory.
-			 */
-		  //			 gtranslator_backend_open_all_backends(BACKENDS_DIR);
-		}
-	}
 
 	/*
 	 * Show the application window with icon.

@@ -25,7 +25,6 @@
 
 #include "about.h"
 #include "actions.h"
-#include "backend.h"
 #include "color-schemes.h"
 #include "dialogs.h"
 #include "dnd.h"
@@ -431,11 +430,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	{
 		gtranslator_messages_table_save_state();
 	}
-
-	/*
-	 * Also clean up/free our backend space.
-	 */
-	gtranslator_backend_remove_all_backends();
 
 	/*
 	 * Shutdown our internal learning system.

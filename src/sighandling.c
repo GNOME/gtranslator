@@ -17,7 +17,6 @@
  *
  */
 
-#include "backend.h"
 #include "dialogs.h"
 #include "prefs.h"
 #include "runtime-config.h"
@@ -65,7 +64,6 @@ void gtranslator_signal_handler(int signal)
 	 * Free some other stuff we're definetely using already or whose free/
 	 *  removal functions are smart enough to be used here ,-)
 	 */
-	gtranslator_backend_remove_all_backends();
 	gtranslator_translator_free(gtranslator_translator);
 	gtranslator_preferences_free();
 	gtranslator_runtime_config_free(gtranslator_runtime_config);

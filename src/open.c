@@ -22,7 +22,6 @@
 #endif
 
 #include "about.h"
-#include "backend.h"
 #include "gui.h"
 #include "nautilus-string.h"
 #include "open.h"
@@ -101,7 +100,7 @@ void gtranslator_open_file(gchar *filename)
 	{
 		gtranslator_open_ziped_po_file(filename);
 	}
-	else if(!gtranslator_backend_open(filename))
+	else
 	{
 		gtranslator_parse_main(filename);
 	}

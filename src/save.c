@@ -22,7 +22,6 @@
 #endif
 
 #include "about.h"
-#include "backend.h"
 #include "gui.h"
 #include "nautilus-string.h"
 #include "save.h"

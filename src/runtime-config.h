@@ -32,7 +32,6 @@ typedef struct
 	gchar	*temp_filename;
 	gchar	*check_filename;
 	gchar	*crash_filename;
-	gchar	*backend_filename;
 	
 	gchar	*table_state_filename;
 	gchar	*save_differently_filename;
