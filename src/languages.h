@@ -54,11 +54,11 @@ lang languages[] =
 {
 	{ 
 		N_("Arabic"), "ar", "iso-8859-6",
-		"", ""
+		"", "8bit"
 	},
 	{
 		N_("Basque"), "eu", "iso-8859-1",
-		"linux-eu@chanae.alphanet.ch", ""
+		"linux-eu@chanae.alphanet.ch", "8bit"
 	},
         {
 		N_("Bulgarian"), "bg", "windows-1251",
@@ -69,11 +69,11 @@ lang languages[] =
 		"", "8bit"
 	},
         {
-		N_("Chinese/Simplified"), "zh_CN", "GB2312",
+		N_("Chinese/Simplified"), "zh_CN.GB2312", "GB2312",
 		"cn@linux-mandrake.com", "8bit"
 	},
         {
-		N_("Chinese/Traditional"), "zh_TW", "BIG5",
+		N_("Chinese/Traditional"), "zh_TW.BIG5", "BIG5",
 		"zh@li.org", "8bit"
 	},
 	{
@@ -89,20 +89,20 @@ lang languages[] =
 		"da@li.org", "8bit"
 	},
   	{
-		N_("English"), "en", "ascii",
-		"en@li.org", "7bit"
+		N_("English"), "en", "iso-8859-1",
+		"en@li.org", "8bit"
 	},
 	{
 		N_("English/Canada"), "en_CA", "iso-8859-1",
-		"en@li.org", "7bit"
+		"en@li.org", "8bit"
 	},
 	{
-		N_("English/GB"), "en_GB", "ascii",
-		"en@li.org", "7bit"
+		N_("English/GB"), "en_GB", "iso-8859-1",
+		"en@li.org", "8bit"
 	},
 	{
-		N_("English/USA"), "en", "ascii",
-		"en@li.org", "7bit"
+		N_("English/USA"), "en", "iso-8859-1",
+		"en@li.org", "8bit"
 	},
 	{
 		N_("Estonian"), "et", "iso-8859-15",
@@ -110,10 +110,10 @@ lang languages[] =
 	},
 	{
 		N_("Farsi"), "fa", "isiri-3342",
-		"", ""
+		"", "8bit"
 	},
         {
-		N_("Finnish"), "fi", "iso-8859-1",
+		N_("Finnish"), "fi", "iso-8859-15",
 		"fi@li.org", "8bit"
 	},
         {
