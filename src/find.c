@@ -1,13 +1,21 @@
-/**
-* Gediminas Paulauskas <menesis@delfi.lt>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* The find-routines for gtranslator.
-* This is a regex version
-*
-* -- the source.
-**/
+/*
+ * (C) 2000 	Gediminas Paulauskas <menesis@delfi.lt>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #include "find.h"
 #include "prefs.h"
@@ -24,9 +32,11 @@ static gboolean find_in_msg(GList * msg, gpointer useless);
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
-/* Calls function func on each item in list 'begin'. Starts from 
+/*
+ * Calls function func on each item in list 'begin'. Starts from 
  * item 'begin', loops to first element, and stops at 'begin'.
- * Returns TRUE, if found, FALSE otherwise */
+ * Returns TRUE, if found, FALSE otherwise.
+ */
 gboolean for_each_msg(GList * begin, FEFunc func, gpointer user_data)
 {
 	GList *msg;
@@ -46,7 +56,9 @@ gboolean for_each_msg(GList * begin, FEFunc func, gpointer user_data)
 	return FALSE;
 }
 
-/* Searches for target in msg, and on success, displays that message */
+/*
+ * Searches for target in msg, and on success, displays that message.
+ */
 static gboolean find_in_msg(GList * msg, gpointer useless)
 {
 	regmatch_t pos[1];
@@ -55,7 +67,9 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 	if ((wants.find_in != 0) &&
 	    (!regexec(target, GTR_MSG(msg->data)->msgstr, 1, pos, 0)))
         {
-		/* We found it */
+		/*
+		 * We found it!
+		 */
 		goto_given_msg(msg);
 		gtk_editable_select_region(GTK_EDITABLE(trans_box),
 					   pos->rm_so, pos->rm_eo);
@@ -64,7 +78,9 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 	if ((wants.find_in != 1) &&
 	    (!regexec(target, GTR_MSG(msg->data)->msgid, 1, pos, 0)))
         {
-		/* We found it */
+		/*
+		 * We found it!
+		 */
 		goto_given_msg(msg);
 		gtk_editable_select_region(GTK_EDITABLE(text1),
 					   pos->rm_so, pos->rm_eo);
@@ -73,9 +89,9 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
         return FALSE;	
 }
 
-/**
-* The real search function
-**/
+/*
+ * The real search function
+ */
 void find_do(GtkWidget * widget, gpointer what)
 {
 	gchar *error;
@@ -98,12 +114,12 @@ void find_do(GtkWidget * widget, gpointer what)
 
 static gboolean is_fuzzy(GList *msg, gpointer useless)
 {
-	/**
-	* Check if we did get any message ..
-	**/
+	/* 
+	 * Control if there's any message data.
+	 */
 	if(!(GTR_MSG(msg->data)))
 	{
-		g_warning(_("Couldn't get the message! Grrr...."));
+		g_warning(_("Couldn't get the message!"));
 		return FALSE;
 	}
 	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_FUZZY) {

@@ -1,14 +1,22 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-* Gediminas Paulauskas <menesis@delfi.lt>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* This is the general place for all dialogs
-* used in gtranslator ...
-*
-* the header ...
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ * 
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #ifndef GTR_GTR_DIALOGS_H
 #define GTR_GTR_DIALOGS_H 1
@@ -24,25 +32,27 @@
 		return;\
 	}
 
-/* Sets window name/class, icon for it, connects the destroy signal, */
-/* and shows it. dlg should be static or global */
+/*
+ * Sets window name/class, icon for it, connects the destroy signal,
+ * and shows it. The dialog should be static or global.
+ */
 void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname);
 
-/**
-* The file open/save_as file selections
-**/
+/*
+ * The file open/save (as) file dialogs.
+ */
 void save_file_as(GtkWidget * widget, gpointer useless);
 void open_file(GtkWidget * widget, gpointer useless);
 gboolean ask_to_save_file(void);
 
-/**
-* The GoTo message dialog
-**/
+/*
+ * The "Go to" dialog.
+ */
 void goto_dlg(GtkWidget * widget, gpointer useless);
 
-/**
-* The basical search dialog
-**/
+/*
+ * The find dialog function. 
+ */
 void find_dialog(GtkWidget * widget, gpointer useless);
 
 void compile_error_dialog(FILE * fs);
