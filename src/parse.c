@@ -110,7 +110,6 @@ static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 	for (s = 1; s < strlen(tail) - 1; s++) {
 		if(tail[s] == '\\') {
 			switch(tail[s + 1]) {
-			case '\\':
 			case '\"':
 				s++;
 				break;
@@ -733,9 +732,6 @@ static gchar *restore_msg(const gchar * given)
 	rest = g_string_sized_new(strlen(given));
 	for (s = 0; s < strlen(given); s++) {
 		switch(given[s]) {
-		case '\\':
-			g_string_append(rest, "\\\\");
-			break;
 		case '\"':
 			g_string_append(rest, "\\\"");
 			break;

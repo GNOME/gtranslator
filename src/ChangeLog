@@ -1,3 +1,8 @@
+2003-08-17  Ross Golder <ross@golder.org>
+
+	* parse.c (append_line/restore_msg): Only deal with double quotes, as
+	        dealing with backslashes breaks load/save.
+
 2003-08-16  Ross Golder <ross@golder.org>
 
 	* parse.c (append_line/restore_msg): (Un)escape backslashes and double
