@@ -304,14 +304,13 @@ static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpo
 		return;
 	}
 
-#define update(value,widget) GTR_FREE(value);\
-	value = gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
-
 	buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
-	gtk_text_buffer_get_start_iter(buff, &start);
-	gtk_text_buffer_get_end_iter(buff, &end);
+	gtk_text_buffer_get_bounds(buff, &start, &end);
 	GTR_FREE(ph->comment);
 	ph->comment = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
+
+#define update(value,widget) GTR_FREE(value);\
+	value = gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 
 	update(ph->prj_name, prj_name);
 	update(ph->prj_version, prj_version);
