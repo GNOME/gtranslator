@@ -432,6 +432,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/show_sidebar",
 			      GtrPreferences.show_sidebar);
+	gtranslator_config_set_bool("toggles/show_content_pane",
+			      GtrPreferences.show_content_pane);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      GtrPreferences.check_recent_file);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
@@ -591,6 +593,7 @@ void gtranslator_preferences_read(void)
 	
 	GtrPreferences.fill_header = gtranslator_config_get_bool("toggles/fill_header");
 	GtrPreferences.show_sidebar = gtranslator_config_get_bool("toggles/show_sidebar");
+	GtrPreferences.show_content_pane = gtranslator_config_get_bool("toggles/show_content_pane");
 
 	/*
 	 * Check if we'd to use special styles.

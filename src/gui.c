@@ -50,7 +50,7 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <gtk/gtkdnd.h>
-#include <gtk/gtkcheckmenuitem.h>
+#include <gtk/gtklabel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtktogglebutton.h>
@@ -63,6 +63,7 @@
 #include <libgnomevfs/gnome-vfs-init.h>
 
 #include <gal/e-paned/e-hpaned.h>
+#include <gal/e-paned/e-vpaned.h>
 
 /*
  * Global external variables
@@ -72,6 +73,7 @@ GtkWidget *trans_box;
 GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
 GtkWidget *sidebar_pane;
+GtkWidget *content_pane;
 
 gboolean nothing_changes;
 
@@ -113,9 +115,10 @@ static  GtkTargetEntry dragtypes[] = {
 static gint 	update_count=0;
 
 /*
- * Pane position storage variable.
+ * Pane positions storage variable.
  */
-static gint 	pane_position=82;
+static gint 	sidebar_pane_position=82;
+static gint 	content_pane_position=15;
 
 /*
  * The popup-menu.
@@ -168,10 +171,17 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
  */
 void gtranslator_create_main_window(void)
 {
-	GtkWidget *search_bar, *tool_bar;
-	GtkWidget *vbox1;
-	GtkWidget *scrolledwindow1, *scrolledwindow2;
-	GtkWidget *filebox;
+	GtkWidget *tool_bar;
+	GtkWidget *search_bar;
+	
+	GtkWidget *vertical_box;
+	
+	GtkWidget *original_text_scrolled_window;
+	GtkWidget *translation_text_scrolled_window;
+
+	GtkWidget *extra_content_views;
+	
+	GtkWidget *views_sidebar;
 	
 	/*
 	 * Create the app	
@@ -180,21 +190,38 @@ void gtranslator_create_main_window(void)
 	gnome_app_create_menus(GNOME_APP(gtranslator_application), the_menus);
 
 	sidebar_pane=e_hpaned_new();
-	filebox=gtranslator_sidebar_new();
+	content_pane=e_vpaned_new();
+	views_sidebar=gtranslator_sidebar_new();
 	
-	e_paned_pack1(E_PANED(sidebar_pane), filebox, TRUE, FALSE);
-	
+	e_paned_pack1(E_PANED(sidebar_pane), views_sidebar, TRUE, FALSE);
+
+	/*
+	 * Activate the paned widgets if desired and fill them up with the right positions.
+	 */
 	if(GtrPreferences.show_sidebar)
 	{
 		gtranslator_config_init();
-		pane_position=gtranslator_config_get_int("interface/sidebar_pane_position");
+		sidebar_pane_position=gtranslator_config_get_int("interface/sidebar_pane_position");
 		gtranslator_config_close();
 	
-		e_paned_set_position(E_PANED(sidebar_pane), pane_position);
+		e_paned_set_position(E_PANED(sidebar_pane), sidebar_pane_position);
 	}
 	else
 	{
 		e_paned_set_position(E_PANED(sidebar_pane), 0);
+	}
+
+	if(GtrPreferences.show_content_pane)
+	{
+		gtranslator_config_init();
+		content_pane_position=gtranslator_config_get_int("interface/content_pane_position");
+		gtranslator_config_close();
+
+		e_paned_set_position(E_PANED(content_pane), content_pane_position);
+	}
+	else
+	{
+		e_paned_set_position(E_PANED(content_pane), 0);
 	}
 
 	/*
@@ -215,31 +242,35 @@ void gtranslator_create_main_window(void)
 		"search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 		GNOME_DOCK_TOP, 2, 0, 0);
 
-	vbox1 = gtk_vbox_new(FALSE, 0);
+	extra_content_views=gtk_label_new("FIXME! Togglable extra-content view goes here...");
+	vertical_box=gtk_vbox_new(FALSE, 0);
 	
-	e_paned_pack2(E_PANED(sidebar_pane), vbox1, TRUE, FALSE);
+	e_paned_pack1(E_PANED(content_pane), extra_content_views, TRUE, FALSE);
+	e_paned_pack2(E_PANED(content_pane), vertical_box, TRUE, FALSE);
+	
+	e_paned_pack2(E_PANED(sidebar_pane), content_pane, TRUE, FALSE);
 	gnome_app_set_contents(GNOME_APP(gtranslator_application), sidebar_pane);
 
-	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow1, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow1),
+	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+	gtk_box_pack_start(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(original_text_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
 	text_box=gtk_text_new(NULL,NULL);
 	
-	gtk_container_add(GTK_CONTAINER(scrolledwindow1), text_box);
+	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), text_box);
 	
 	gtk_text_set_editable(GTK_TEXT(text_box), FALSE);
 
-	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow2, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow2),
+	translation_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+	gtk_box_pack_start(GTK_BOX(vertical_box), translation_text_scrolled_window, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(translation_text_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
 	trans_box = gtk_text_new(NULL, NULL);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow2), trans_box);
+	gtk_container_add(GTK_CONTAINER(translation_text_scrolled_window), trans_box);
 
 	gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);
@@ -338,8 +369,14 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 
 	if(GtrPreferences.show_sidebar)
 	{
-		pane_position=e_paned_get_position(E_PANED(sidebar_pane));
-		gtranslator_config_set_int("interface/sidebar_pane_position", pane_position);
+		sidebar_pane_position=e_paned_get_position(E_PANED(sidebar_pane));
+		gtranslator_config_set_int("interface/sidebar_pane_position", sidebar_pane_position);
+	}
+
+	if(GtrPreferences.show_content_pane)
+	{
+		content_pane_position=e_paned_get_position(E_PANED(content_pane));
+		gtranslator_config_set_int("interface/content_pane_position", content_pane_position);
 	}
 	
 	gtranslator_utils_save_geometry();

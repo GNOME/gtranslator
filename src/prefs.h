@@ -47,6 +47,7 @@ struct {
 	guint match_case		: 1;
 	guint find_in			: 3;
 	guint show_sidebar		: 1;
+	guint show_content_pane		: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.

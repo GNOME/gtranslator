@@ -34,6 +34,7 @@ extern GtkWidget *trans_box;
 extern GtkWidget *text_box;
 extern GtkWidget *gtranslator_application_bar;
 extern GtkWidget *sidebar_pane;
+extern GtkWidget *content_pane;
 
 /*
  * Creates the main window ans sets up the environment.
@@ -43,8 +44,8 @@ void gtranslator_create_main_window(void);
 /*
  * Quits from gtranslator.
  */
-gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
-			     gpointer useless);
+gint gtranslator_quit(GtkWidget *widget, GdkEventAny *e,
+	gpointer useless);
 
 /*
  * Various functions for displaying messages 
@@ -55,10 +56,10 @@ void gtranslator_text_boxes_clean(void);
 /*
  * Callbacks for text operations
  */
-void gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless);
-void gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless);
-void gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless);
-void gtranslator_selection_clear(GtkWidget  * widget, gpointer useless);
+void gtranslator_clipboard_cut(GtkWidget  *widget, gpointer useless);
+void gtranslator_clipboard_copy(GtkWidget  *widget, gpointer useless);
+void gtranslator_clipboard_paste(GtkWidget  *widget, gpointer useless);
+void gtranslator_selection_clear(GtkWidget  *widget, gpointer useless);
 
 /*
  * Switch the view to the given view.
@@ -68,7 +69,7 @@ void gtranslator_switch_views(GtkWidget *widget, gpointer view);
 /*
  * A status defining callback -- now generaly defined for instance.
  */
-void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless);
+void gtranslator_translation_changed(GtkWidget  *widget, gpointer useless);
 
 /*
  * If TRUE, means that trans_box is being changed by program, not user
