@@ -7,13 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
 "Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"POT-Creation-Date: 2003-09-09 13:28+0100\n"
-"PO-Revision-Date: 2003-09-09 13:35+0000\n"
+"POT-Creation-Date: 2003-11-11 01:27+0000\n"
+"PO-Revision-Date: 2003-11-11 01:30+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -397,7 +398,9 @@ msgstr "Editar comentário"
 #: src/gui.c:501
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ %i Aproximadas ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ %i Aproximada restante ]"
+msgstr[1] "%s [ %i Aproximadas restantes ]"
 
 #: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
@@ -419,7 +422,9 @@ msgstr "Traduzida"
 #: src/gui.c:524
 #, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ %i por Traduzir ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ %i por Traduzir restante ]"
+msgstr[1] "%s [ %i por Traduzir restantes ]"
 
 #: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
 msgid "Untranslated"
@@ -1284,8 +1289,14 @@ msgstr "Incapaz de abrir ficheiro `%s' para escrita!"
 #, c-format
 msgid ""
 "File %s\n"
+"contains %d fuzzy message"
+msgid_plural ""
+"File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
+"Ficheiro %s\n"
+"contém %d mensagem aproximada"
+msgstr[1] ""
 "Ficheiro %s\n"
 "contém %d mensagens aproximadas"
 
