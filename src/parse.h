@@ -34,12 +34,7 @@
 /**
 * These ones are only count variables
 **/
-int c=0;
-
-/**
-* Create a first structure.
-**/
-gtr_msg msg;
+static gint c=0;
 
 /**
 * A gboolean for the silly question if a file is open ...

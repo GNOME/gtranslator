@@ -47,7 +47,7 @@ void parse(gchar *po)
 	* Allocate the zamane-char
 	**/
 	gchar *zamane=g_new(gchar,4);
-        guint lines=1,z=0;
+        guint lines=1,z=0,msg_pair=0;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
@@ -75,6 +75,7 @@ void parse(gchar *po)
         fgets(temp_char,sizeof(temp_char),fs)!=NULL
         )
         {
+		gtr_msg msg[c];
 		z++;
 		/**
 		* Try to get the header :
@@ -89,7 +90,7 @@ void parse(gchar *po)
 		&&
 		strstr(temp_char,": ")
 		&&
-		(sizeof(msg)/sizeof(msg[0])<=1)
+		(msg_pair<=1)
 		)
 		{
 			/**
@@ -103,6 +104,7 @@ void parse(gchar *po)
 			* Create the gtr_msg structure
 			*  and set the comment & position.
 			**/
+			msg_pair++;
 			msg[c].pos=z;
 			msg[c].comment=temp_char;
 		}
@@ -120,11 +122,18 @@ void parse(gchar *po)
 			**/
 			msg[c].msgstr=temp_char;
 		}
-		/**
-		* As all parsing efforts are finished now, we should
-		*  increase c.
-		**/
-		c++;
+		if(!msg[c].msgid)
+		{
+			g_print("GEEK STUFF!\n");	
+		}
+		else
+		{
+			/**
+			* As all parsing efforts are finished now, we should
+			*  increase C.
+			**/
+			c++;
+		}
         }
         /**
         * Show an updated status
@@ -179,7 +188,7 @@ void parse_the_file(GtkWidget *widget,gpointer filename)
 **/
 void get_first_msg(GtkWidget *widget,gpointer useless)
 {
-	gchar *i,*s;
+/*	gchar *i,*s;
 	gtk_text_freeze(GTK_TEXT(trans_box));
 	gtk_text_freeze(GTK_TEXT(text1));
 	i=msg[0].msgid;
@@ -187,5 +196,5 @@ void get_first_msg(GtkWidget *widget,gpointer useless)
 	gtk_editable_insert_text(GTK_EDITABLE(text1),i,sizeof(i),0);
 	gtk_editable_insert_text(GTK_EDITABLE(trans_box),s,sizeof(s),0);
 	gtk_text_thaw(GTK_TEXT(trans_box));
-	gtk_text_thaw(GTK_TEXT(text1));
+	gtk_text_thaw(GTK_TEXT(text1));*/
 }
