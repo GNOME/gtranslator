@@ -19,17 +19,21 @@
 * The central header for libgtranslator.
 **/
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 /**
 * Include all the other headers.
 **/
-#include <libgtranslator/gtkled.h>
-#include <libgtranslator/gtranslatord.h>
-#include <libgtranslator/handle-db.h>
-#include <libgtranslator/parse-db.h>
-#include <libgtranslator/preferences.h>
-#include <libgtranslator/stylistics.h>
-#include <libgtranslator/team-database.h>
-#include <libgtranslator/team-handle.h>
-#include <libgtranslator/translation-database.h>
+#include "gtkled.h"
+#include "gtranslatord.h"
+#include "handle-db.h"
+#include "parse-db.h"
+#include "preferences.h"
+#include "stylistics.h"
+#include "team-database.h"
+#include "team-handle.h"
+#include "translation-database.h"
 
 #endif

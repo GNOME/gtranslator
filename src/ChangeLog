@@ -1,3 +1,29 @@
+2000-12-07  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gui.c: (str_replace) added function which quickly replaces dots with
+	spaces.
+	Moved NONE declaration into function to avoid misuse.
+	(display_msg, update_msg) substitute spaces with dots in temp variable,
+	leave msg clean. msgid is never altered. Removed unneeded check if
+	string is blank.
+	(update_appbar) do NOT put anything else than ACT_... in call to
+	disable_actions!
+	(text_has_got_changed) optimize a lot drawing with dots. Redraw not
+	all the text, only spaces :) set nothing_changes = TRUE when changing
+	anything. Do NOT initialize variables with empty values! Free newstr (a
+	GREAT leak).
+	* parse.c: (parse) fix disable_actions. Do not activate trans_box.
+	(restore_msg) removed dot char stuff, it is handled elsewhere.
+	(write_the_message) ditto.
+	(determine_translation_status) ditto.
+	(undotchar) removed function.
+	(update) do not initialize empty string. Always close file before
+	updating and restore it later. Free strings.
+	(gtranslator_open_mo_file) ditto.
+	Removed not useful comments and checks for existance of surely allocated
+	strings.
+	* parse.h: removed undotchar declaration.
+
 2000-12-06  Fatih Demir	<kabalak@gmx.net>
 
 	* main.c: Determine if the given file has got 

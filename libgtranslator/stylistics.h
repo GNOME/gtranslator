@@ -18,7 +18,7 @@
 /**
 * Include the preferences headers and the GNOME headers.
 **/
-#include <libgtranslator/preferences.h>
+#include "preferences.h"
 #include <libgnomeui/gnome-color-picker.h>
 
 /**

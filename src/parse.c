@@ -317,7 +317,7 @@ void parse(const gchar *filename)
 		/**
 		* Then enable the Fuzzy buttons/entries in the menus
 		**/
-		enable_actions(ACT_NEXT_FUZZY, NULL);
+		enable_actions(ACT_NEXT_FUZZY);
 	}
 	/**
 	* Is there any untranslated message ?
@@ -327,16 +327,12 @@ void parse(const gchar *filename)
 		/**
 		* Then enable the Untranslated buttons/entries in the menus
 		**/
-		enable_actions(ACT_NEXT_UNTRANSLATED, NULL);
+		enable_actions(ACT_NEXT_UNTRANSLATED);
 	}
 	/**
 	* Disable the actions for the first/back navigation actions.
 	**/
 	disable_actions(ACT_FIRST, ACT_BACK);
-	/**
-	* Activate the translation box widget.
-	**/
-	gtk_widget_activate(GTK_WIDGET(trans_box));
 	
 	/**
 	* Update the recent files list.
@@ -403,27 +399,6 @@ static gchar *restore_msg(gchar * given)
 			} else {
 				if(rest->str)
 				{
-					/**
-					* If we're showing the dot char stuff, we'd
-					*  to remove it here.
-					**/
-					if(wants.dot_char)
-					{
-						/**
-						* The standard string length variable.
-						**/
-						guint length;
-						/**
-						* Substitute all dot chars with free spaces.
-						**/
-						for(length=0;length<(strlen(rest->str));++length)
-						{
-							if(rest->str[length]=='·')
-							{
-								rest->str[length]=' ';
-							}
-						}
-					}
 					g_string_insert(rest,
 							(strrchr(rest->str, ' ') -
 							 rest->str) + 1, "\"\n\"");
@@ -449,19 +424,6 @@ static void write_the_message(gpointer data, gpointer fs)
 	id = restore_msg(msg->msgid);
 	str = restore_msg(msg->msgstr);
 	
-	/**
-	* If the dot char feature was requested, convert the free spaces
-	*  back.
-	**/
-	if(wants.dot_char)
-	{
-		/**
-		* The msgid and the msgstr.
-		**/
-		undotchar(id);
-		undotchar(str);
-	}
-
 	fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
 		msg->comment, id, str);
 }
@@ -514,10 +476,7 @@ static gboolean actual_write(const gchar * name)
 	{
 		gchar *my_error=g_strdup_printf(_("The file `%s' doesn't exist at all!"),name);
 		gnome_app_error(GNOME_APP(app1),my_error);
-		if(my_error)
-		{
-			g_free(my_error);
-		}
+		g_free(my_error);
 		return FALSE;
 	}
 
@@ -608,21 +567,12 @@ void close_file(GtkWidget * widget, gpointer useless)
 	free_po();
 	file_opened = FALSE;
 	nothing_changes = TRUE;
-	/**
-	* Clean up the text boxes.
-	**/
 	clean_text_boxes();
 	/**
 	* Set a blank appbar status message.
 	**/
 	gnome_appbar_push(GNOME_APPBAR(appbar1), "");
-	/**
-	* Set the progressbar progress.
-	**/
 	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), 0.00000);
-	/**
-	* Disable the file action buttons.
-	**/
 	disable_actions_no_file();
 }
 
@@ -840,63 +790,11 @@ void gtranslator_display_recent(void)
 	{
 		g_free(menu);
 	}
-	if(menupath)
-	{	
-		g_free(menupath);
-	}
+	g_free(menupath);
 	/**
 	* At last: free the GnomeHistoryEntry list.
 	**/
 	gnome_history_free_recently_used_list(list);
-}
-
-void undotchar(gchar *text)
-{
-	gint len;
-	/**
-	* Is there any text to undotchar?
-	**/
-	if(!text)
-	{
-		return;
-	}
-	/**
-	* Parse the string.
-	**/
-	for(len=0;len<strlen(text);len++)
-	{
-		/**
-		* We've found a dotchar; but is this a
-		*  quoted or useful dot char =?
-		**/
-		if(text[len]=='·')
-		{
-			/**
-			* Switch according to the previous char.
-			**/
-			switch(text[len-1])
-			{
-				case '\"':
-					break;
-				case '\'':
-					break;
-				case '´':
-					break;
-				case '`':
-					break;
-				case '\\':
-					break;	
-				/**
-				* If it's unquoted and "unspecial",
-				*  make a free space out of the
-				*   dot char.
-				**/
-				default:
-					text[len]=' ';
-					break;		
-			}
-		}
-	}	
 }
 
 /**
@@ -906,9 +804,11 @@ void update(GtkWidget *widget, gpointer useless)
 {
 	gint res=1;
 	gchar *command;
-	gchar *newfile=g_new0(gchar,1);
+	gchar *newfile;
+
 	/**
 	* Build this magical line.
+	* FIXME: use real ./update.pl found in packages
 	**/
 	command=g_strdup_printf("%s %s %s 2>&1 1>/dev/null", SCRIPTSDIR "/update.sh",
 		po->filename, po->header->prj_name);
@@ -917,53 +817,34 @@ void update(GtkWidget *widget, gpointer useless)
 	**/
 	newfile=g_strdup(po->filename);
 	/**
+	* Close the file before updating
+	**/
+	close_file(NULL, NULL);
+	if (file_opened != FALSE) {
+		g_free(newfile);
+		g_free(command);
+		return;
+	}
+
+	/**
 	* Execute the command.
 	**/
 	res=system(command);
-	if(res!=0)
+	/**
+	* If you wish'em, you get'em ..
+	**/
+	if(wants.uzi_dialogs)
 	{
-		/**
-		* Only show the dialogs if wished.
-		**/
-		if(wants.uzi_dialogs)
-		{
-			/**
-			* Inform the user that nothing would change,
-			*  so we don't close and reopen the file in this case.
-			**/
+		if(res!=0)
 			gnome_app_message(GNOME_APP(app1),
 				_("An update would cause no changes."));
-		}		
-	}
-	else
-	{
-		/**
-		* Close the file now temporary.
-		**/
-		close_file(NULL, NULL);
-		/**
-		* If you wish'em, you get'em ..
-		**/
-		if(wants.uzi_dialogs)
-		{
-			/**
-			* Print a nice information dialog.
-			*/
+		else
 			gnome_app_message(GNOME_APP(app1),
 				_("The update was successfull."));
-		}	
-		/**
-		* Reopen the file after the successfull update.
-		**/
-		parse(newfile);
 	}
-	/**
-	* Free the newfile string.
-	**/
-	if(newfile)
-	{
-		g_free(newfile);
-	}
+	parse(newfile);
+	g_free(command);
+	g_free(newfile);
 }
 
 /**
@@ -972,31 +853,11 @@ void update(GtkWidget *widget, gpointer useless)
 **/
 static void determine_translation_status(gpointer data, gpointer useless_stuff)
 {
-	static GtrMsg *message;
-	/**
-	* Get the message.
-	**/
-	message=GTR_MSG(data);
-	/**
-	* Is this message translated ?
-	**/
+	GtrMsg *message = GTR_MSG(data);
 	if(message->status & GTR_MSG_STATUS_TRANSLATED)
-	{
-		/**
-		* Then increment the translated count.
-		**/
 		po->translated++;
-	}
-	/**
-	* .. or even fuzzy ?
-	**/
 	if(message->status & GTR_MSG_STATUS_FUZZY)
-	{
-		/**
-		* Then increment the fuzzy count.
-		**/
 		po->fuzzy++;
-	}
 }
 
 /**
@@ -1006,7 +867,8 @@ void get_translated_count(void)
 {
 	po->translated = 0;
 	po->fuzzy = 0;
-	g_list_foreach(po->messages, (GFunc) determine_translation_status, NULL);
+	g_list_foreach(po->messages, (GFunc) determine_translation_status,
+		       NULL);
 	/**
 	* Update the progress bar.
 	**/
@@ -1030,19 +892,13 @@ void gtranslator_set_progress_bar(void)
 **/
 void gtranslator_open_mo_file(gchar *file)
 {
-	/**
-	* Variables....
-	**/
-	gchar *cmd=g_new0(gchar,1);
-	gchar *tempfilename=g_new0(gchar,1);
+	gchar *cmd;
+	gchar *tempfilename;
 	/**
 	* Set the temporary filename...
 	**/
-	tempfilename=g_strdup_printf("%s/%s",
-		((g_getenv("TMPDIR"))?
-			g_getenv("TMPDIR"):
-			"/tmp"),
-		"temp_po_file");
+	tempfilename=g_strdup_printf("%s/temp_po_file",
+		((g_getenv("TMPDIR")) ? g_getenv("TMPDIR"): "/tmp"));
 	/**
 	* Build up the command to execute in the shell.
 	**/
@@ -1069,18 +925,8 @@ void gtranslator_open_mo_file(gchar *file)
 		/**
 		* Sorry, didn't work...
 		**/
-		gnome_app_warning(GNOME_APP(app1),
-			cmd);
+		gnome_app_warning(GNOME_APP(app1), cmd);
 	}
-	/**
-	* Free the gchars..
-	**/
-	if(cmd)
-	{
-		g_free(cmd);
-	}
-	if(tempfilename)
-	{
-		g_free(tempfilename);
-	}		
+	g_free(cmd);
+	g_free(tempfilename);
 }

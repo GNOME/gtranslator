@@ -15,7 +15,7 @@
 #ifndef TRANSLATION_DATABASE_H
 #define TRANSLATION_DATABASE_H 1
 
-#include <libgtranslator/preferences.h>
+#include "preferences.h"
 
 /**
 * The translation/message database structure definitions and

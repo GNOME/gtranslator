@@ -15,7 +15,7 @@
 #ifndef TEAM_DATABASE_H
 #define TEAM_DATABASE_H 1
 
-#include <libgtranslator/preferences.h>
+#include "preferences.h"
 
 /**
 * This defines the GtranslatorTeamDatabase structure and

@@ -15,9 +15,9 @@
 #ifndef HANDLE_DB_H
 #define HANDLE_DB_H 1
 
-#include <libgtranslator/parse-db.h>
-#include <libgtranslator/translation-database.h>
-#include <libgtranslator/messages.h>
+#include "parse-db.h"
+#include "translation-database.h"
+#include "messages.h"
 
 /**
 * General functions of libgtranslator for the message databases

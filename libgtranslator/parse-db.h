@@ -28,7 +28,7 @@
 /**
 * Include the database header.
 **/
-#include <libgtranslator/translation-database.h>
+#include "translation-database.h"
 
 /* Maybe we have already included this stuff */
 #ifndef __GNOME_I18N_H__

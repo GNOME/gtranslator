@@ -19,7 +19,7 @@
 /**
 * The local includes.
 **/
-#include <gtranslatord.h>
+#include <libgtranslator/gtranslatord.h>
 #include <libgtranslator/libgtranslator.h>
 #include <popt-gnome.h>
 

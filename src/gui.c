@@ -49,6 +49,7 @@ static void clear_selection(GtkWidget * widget, gpointer useless);
 static void undo_changes(GtkWidget * widget, gpointer useless);
 static void text_has_got_changed(GtkWidget * widget, gpointer useless);
 
+static void str_replace(gchar *str, gchar what, gchar with);
 static void update_appbar(gint pos);
 static void call_gtranslator_homepage(GtkWidget * widget, gpointer useless);
 static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
@@ -371,9 +372,6 @@ void change_actions(gboolean state, ...)
 	va_end(ap);
 }
 
-/* a unused variable for testing if a toolbar element was provided */
-static GnomeUIInfo NONE;
-
 static void insert_action(gint act_num, GnomeUIInfo mi, GnomeUIInfo ti)
 {
 	acts[act_num].menu = mi.widget;
@@ -382,6 +380,9 @@ static void insert_action(gint act_num, GnomeUIInfo mi, GnomeUIInfo ti)
 
 static void create_actions(void)
 {
+	/* a unused variable for testing if a toolbar element was provided */
+	GnomeUIInfo NONE;
+
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[4]);
 	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[5]);
@@ -588,6 +589,20 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 	return FALSE;
 }
 
+/**
+* Go through the characters and search for free spaces
+* and replace them with '·''s.
+**/
+static void str_replace(gchar *str, gchar what, gchar with)
+{
+	guint i;
+	g_return_if_fail(str != NULL);
+
+	for(i=0; str[i] != '\0'; i++)
+		if(str[i]==what)
+			str[i]=with;
+}
+
 /* 
  * Display the message in text boxes
  * TODO: add syntax highlighting for %s, numbers, symbols, tabs;
@@ -605,49 +620,27 @@ void display_msg(GList * list_item)
 	**/ 
 	if(wants.dot_char)
 	{
-		/**
-		* A variable for the length of the strings.
-		**/
-		guint len;
-		if(msg->msgid)
-		{
-			/**
-			* Go through the characters and search for free spaces
-			* and replace them with '·''s.
-			**/
-			for(len=0;len<strlen(msg->msgid);++len)
-			{
-				/**
-				* Do we have got a free space ?
-				**/
-				if(msg->msgid[len]==' ')
-				{
-					/**
-					* Then substitute it with a '·'.
-					**/
-					msg->msgid[len]='·';
-				}
-			}
+		gchar *temp;
+
+		temp = g_strdup(msg->msgid);
+		str_replace(temp, ' ', '·');
+		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
+				temp, -1);
+		g_free(temp);
+
+		if (msg->msgstr) {
+			temp = g_strdup(msg->msgstr);
+			str_replace(temp, ' ', '·');
+			gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
+					temp, -1);
+			g_free(temp);
 		}
-		/**
-		* And operate in the same way for the msgstr.
-		**/
-		if(msg->msgstr)
-		{	
-			for(len=0;len<strlen(msg->msgstr);++len)
-			{
-				if(msg->msgstr[len]==' ')
-				{
-					msg->msgstr[len]='·';
-				}
-			}
-		}
-	}	
-	/**
-	* Insert the changed text into the two text-boxes.
-	**/
-	gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL, msg->msgid, -1);
-	gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, msg->msgstr, -1);
+	} else {	
+		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
+				msg->msgid, -1);
+		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
+				msg->msgstr, -1);
+	}
 #define set_active(number,flag) \
 	gtk_check_menu_item_set_active(\
 		(GtkCheckMenuItem *)(the_msg_status_menu[number].widget),\
@@ -668,28 +661,25 @@ void update_msg(void)
 		return;
 	len = gtk_text_get_length(GTK_TEXT(trans_box));
 	if (len) {
-		/**
-		* Do all this only if a STRING is in the boxes, don't operate on
-		*  blank boxes ...
-		**/
-		if(msg->msgid)
-		{
-			if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
-				if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len -1 )
-				    != '\n')
-					gtk_editable_insert_text(
-					    GTK_EDITABLE(trans_box), "\n", 1, &len);
-			} else {
-				if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len - 1)
-				    == '\n') {
-					gtk_editable_delete_text(
-					    GTK_EDITABLE(trans_box), len-1, len);
-					len--;
-				}
+		if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
+			if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len - 1)
+			    != '\n')
+				gtk_editable_insert_text(
+				    GTK_EDITABLE(trans_box), "\n", 1, &len);
+		} else {
+			if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len - 1)
+			    == '\n') {
+				gtk_editable_delete_text(
+				    GTK_EDITABLE(trans_box), len-1, len);
+				len--;
 			}
 		}
 		msg->msgstr = gtk_editable_get_chars(GTK_EDITABLE(trans_box),
 						     0, len);
+
+		/* If spaces were substituted with dots, replace them back */
+		if(wants.dot_char)
+			str_replace(msg->msgstr, '·', ' ');
 		if (!(msg->status & GTR_MSG_STATUS_TRANSLATED)) {
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;
 			po->translated++;
@@ -719,13 +709,9 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 			       GTK_CHECK_MENU_ITEM(item)->active);
 	} else {
 		if (GTK_CHECK_MENU_ITEM(item)->active)
-		{
 			*stat |= flag;
-		}	
 		else
-		{
 			*stat &= ~flag;
-		}
 	}
 	update_msg();
 }
@@ -767,7 +753,7 @@ static void update_appbar(gint pos)
 			/**
 			* Also disable the corresponding button.
 			**/
-			disable_actions(ACT_NEXT_FUZZY,NONE);
+			disable_actions(ACT_NEXT_FUZZY);
 		}
 	}
 	if(msg->status & GTR_MSG_STATUS_TRANSLATED)
@@ -795,7 +781,7 @@ static void update_appbar(gint pos)
 				* Also disable the coressponding buttons for the
 				*  next untranslated message.
 				**/
-				disable_actions(ACT_NEXT_UNTRANSLATED,NONE);
+				disable_actions(ACT_NEXT_UNTRANSLATED);
 			}	
 		}
 	}
@@ -932,20 +918,18 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 	**/
 	if(wants.dot_char)
 	{
-		/**
-		* The gchar for the text in the translation box which can be changed by
-		*  the user and a guint variable for the length of this text.
-		**/
-		gchar *newstr=g_new0(gchar,1);
-		guint len, index=1;
-		/**
-		* Get the current pointer poasition.
-		**/
-		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
+		gchar *newstr;
+		guint len, index;
+
+		nothing_changes = TRUE;
 		/**
 		* Freeze the translation box.
 		**/
 		gtk_text_freeze(GTK_TEXT(trans_box));
+		/**
+		* Get the current pointer position.
+		**/
+		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
 		/**
 		* Get the text from the translation box.
 		**/
@@ -954,27 +938,23 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		* Parse the characters for a free space and replace
 		*  them with the '·'.
 		**/
-		for(len=0;len<=(strlen(newstr));++len)
-		{
-			if(newstr[len]==' ')
-			{
-				newstr[len]='·';
+		for(len=0; newstr[len]!='\0'; len++) {
+			if(newstr[len]==' ') {
+				static gint pos;
+				static gchar dot = '·';
+				pos = len;
+
+				/* Clean the textbox */
+				gtk_editable_delete_text(GTK_EDITABLE(trans_box),
+							 pos, pos+1);
+				/**
+				* Insert the changed text with the '·''s.
+				**/
+				gtk_editable_insert_text(GTK_EDITABLE(trans_box),
+							 &dot, 1, &pos);
 			}
 		}
-		/**
-		* Go to the first index in the box.
-		**/
-		gtk_text_set_point(GTK_TEXT(trans_box), 0); 
-		/**
-		* Clean up the translation box.
-		**/
-		gtk_text_forward_delete(GTK_TEXT(trans_box),
-			gtk_text_get_length(GTK_TEXT(trans_box)));
-		/**
-		* Insert the changed text with the '·''s.
-		**/
-		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-			newstr, -1);
+		g_free(newstr);
 		/**
 		* Go to the old text index.
 		**/
@@ -984,5 +964,6 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
                 *  feature.
                 **/
 		gtk_text_thaw(GTK_TEXT(trans_box));
+		nothing_changes = FALSE;
 	}
 }

@@ -16,7 +16,7 @@
 #define VFS_HANDLE_H 1
 
 #include <glib.h>
-#include <libgtranslator/libgtranslator.h>
+#include "libgtranslator.h"
 #include <libgnomevfs/gnome-vfs.h>
 
 /**

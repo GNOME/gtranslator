@@ -89,11 +89,6 @@ void close_file(GtkWidget * widget, gpointer useless);
 void compile(GtkWidget * widget, gpointer useless);
 
 /**
-* Converts the dot chars to free spaces.
-**/
-void undotchar(gchar *text);
-
-/**
 * Opens the given mo-file....
 **/ 
 void gtranslator_open_mo_file(gchar *file);
