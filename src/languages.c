@@ -171,7 +171,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Italian"), "it", "iso-8859-1",
-	 "it@li.org", "8bit"
+	 "tp@lists.linux.it", "8bit"
 	},
 	{
 	 N_("Irish"), "ga", "iso-8859-1",
@@ -274,6 +274,10 @@ GtrLanguage languages[] = {
 	 "sv@li.org", "8bit"
 	},
 	{
+	 N_("Tagalog"), "tl", "UTF-8",
+	 "debian-tl@banwa.upm.edu.ph", "8bit"
+	},
+	{
 	 N_("Tamil"), "ta", "tscii",
 	 "", "8bit"
 	},
@@ -283,7 +287,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Thai"), "th", "tis-620",
-	 "", "8bit"
+	 "l10n@opentle.org", "8bit"
 	},
 	{
 	 N_("Turkish"), "tr", "ISO-8859-9",
