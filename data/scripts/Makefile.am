@@ -1,7 +1,6 @@
 ## the ./data/scripts/Makefile.am of gtranslator
 
-bindir = $(datadir)/gtranslator/scripts
+scriptdir = $(datadir)/gtranslator/scripts
+script_SCRIPTS = my-update.sh cleanup-gtranslator-settings.sh
 
-bin_SCRIPTS = my-update.sh cleanup-gtranslator-settings.sh
-
-EXTRA_DIST = $(bin_SCRIPTS)
+EXTRA_DIST = $(script_SCRIPTS)
