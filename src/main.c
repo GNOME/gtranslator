@@ -27,6 +27,7 @@
 #include "prefs.h"
 #include "parse.h"
 #include "open-differently.h"
+#include "color-schemes.h"
 #include "htmlizer.h"
 
 #include <gtk/gtkmain.h>
@@ -47,8 +48,9 @@
 /*
  * The static variables used in the poptTable.
  */
-static gchar *gtranslator_geometry = NULL;
-static gchar *save_html_output_file = NULL;
+static gchar *gtranslator_geometry=NULL;
+static gchar *scheme_filename=NULL;
+static gchar *save_html_output_file=NULL;
 
 /*
  * gtranslator's option table.
@@ -61,6 +63,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0, N_("Specifies the main-window geometry"), "GEOMETRY"
+	},
+	{
+		"scheme", 's', POPT_ARG_STRING, &scheme_filename,
+		0, N_("Syntax color scheme to use"), "SCHEMEFILE"
 	},
 	{
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
@@ -155,6 +161,14 @@ int main(int argc, char *argv[])
 		unlink(g_strdup_printf("%s/%s",
 				g_get_home_dir(), 
 				"gtranslator-temp-po-file"));
+	}
+
+	/*
+	 * Load the given color scheme file.
+	 */ 
+	if(scheme_filename)
+	{
+		gtranslator_color_scheme_apply(scheme_filename);
 	}
 	
 	/*

@@ -37,6 +37,7 @@ bin_PROGRAMS = gtranslator
 
 gtranslator_SOURCES = \
 	about.c about.h \
+	color-schemes.c color-schemes.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
