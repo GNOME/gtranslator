@@ -493,7 +493,7 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 				{
 					if(back_match(msg, keywords[z], cp))
 					{
-						gint i = strlen(prefixes[z]);
+						gint i = strlen(keywords[z]);
 						aInserted = TRUE;
 						g_string_truncate(string, string -> len - i);
 						while(i>0)
