@@ -23,8 +23,10 @@
 #include "prefs.h"
 #include "syntax.h"
 
-#include <gtk/gtk.h>
+#include <ctype.h>
 #include <string.h>
+
+#include <gtk/gtk.h>
 
 /*
  * Stored the value of the previous view -- per default at GTR_MESSAGE_VIEW.
@@ -38,6 +40,12 @@ static GtrView current_view=GTR_MESSAGE_VIEW;
 void show_comment(void);
 void show_c_format(void);
 void show_number(void);
+
+/*
+ * A helper function for the number view -- extracts the figures from
+ *  the given parts and displays them -- or not.
+ */
+void show_up_figures(GtkWidget *output_widget, const gchar *string);
 
 /*
  * Set up the given view for the current message.
@@ -117,93 +125,26 @@ void show_comment()
  */
 void show_number()
 {
-	#define delta(x) (pos[x].rm_eo-pos[x].rm_so)
-	
-	regex_t *rx_number;
-	regmatch_t pos[3];
-	
-	gint z=1;
-	
 	GtrMsg  *msg=GTR_MSG(po->current->data);
-	GString *number=g_string_new("");
 
 	g_return_if_fail(msg!=NULL);
 
+	/*
+	 * Set up the view informations and clean up our text boxes.
+	 */
 	current_view=GTR_NUMBER_VIEW;
-
-	rx_number=gnome_regex_cache_compile(rxc, "[0-9]+", 
-		REG_EXTENDED|REG_NEWLINE);
-
 	clean_text_boxes();
 
-	if(!regexec(rx_number, msg->msgid, 3, pos, 0))
-	{
-		while(pos[z].rm_so!=-1)
-		{
-			if(number->len > 0)
-			{
-				if(wants.dot_char)
-				{
-					number=g_string_append(number, 
-						_("·"));
-				}
-				else
-				{
-					number=g_string_append(number, " ");
-				}
-			}
+	/*
+	 * Make the translation box non-editable.
+	 */
+	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 
-			number=g_string_append(number,
-				g_strndup(msg->msgid+pos[z].rm_so, delta(z)));
-		}
-	}
-	
-	if(number->len > 0)
-	{
-		gtranslator_syntax_insert_text(text1, number->str);
-	}
-	else
-	{
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-			_("Couldn't extract figures from message!"), -1);
-	}
-	
-	number=g_string_truncate(number, 0);
-	z=1;
-
-	if(!regexec(rx_number, msg->msgstr, 3, pos, 0))
-	{
-		while(pos[z].rm_so!=-1)
-		{
-			if(number->len > 0)
-			{
-				if(wants.dot_char)
-				{
-					number=g_string_append(number,
-						_("·"));
-				}
-				else
-				{
-					number=g_string_append(number, " ");
-				}
-			}
-
-			number=g_string_append(number,
-				g_strndup(msg->msgstr+pos[z].rm_so, delta(z)));
-		}
-	}
-	
-	if(number->len > 0)
-	{
-		gtranslator_syntax_insert_text(trans_box, number->str);
-	}
-	else
-	{
-		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-			_("Couldn't extract figures from message!"), -1);
-	}
-
-	g_string_free(number, FALSE);
+	/*
+	 * Show the nude figures!
+	 */
+	show_up_figures(text1, msg->msgid);
+	show_up_figures(trans_box, msg->msgstr);
 }
 
 /*
@@ -331,9 +272,62 @@ void show_c_format()
 	
 	/*
 	 * Disable the current save action as the C format function applies 
-	 *  chanegs which shouldn't be saved.
+	 *  changes which shouldn't be saved.
 	 */
 	disable_actions(ACT_SAVE);
+}
+
+/*
+ * Strip off any numbers, show them up or print the corresponding error
+ *  message into the specified text box.
+ */
+void show_up_figures(GtkWidget *output_widget, const gchar *string)
+{
+	GString *figures=g_string_new("");
+	
+	g_return_if_fail(output_widget!=NULL);
+
+	if(!string)
+	{
+		return;
+	}
+	else
+	{
+		gint c;
+
+		for(c=0; c < (strlen(string)-1); ++c)
+		{
+			if(isdigit(string[c]))
+			{
+				figures=g_string_append_c(figures, string[c]);
+			}
+			else if(((c-1) > 0) && (isdigit(string[c-1])))
+			{
+				if(wants.dot_char)
+				{
+					figures=g_string_append(figures, 
+						_("·"));
+				}
+				else
+				{
+					figures=g_string_append(figures,
+						" ");
+				}
+			}
+		}
+	}
+
+	if(figures->len > 0)
+	{
+		gtranslator_syntax_insert_text(output_widget, figures->str);
+	}
+	else
+	{
+		gtk_text_insert(GTK_TEXT(output_widget), NULL, NULL, NULL,
+			_("No numbers found!"), -1);
+	}
+
+	g_string_free(figures, FALSE);
 }
 
 /*
@@ -356,7 +350,12 @@ void gtranslator_views_prepare_for_navigation()
 {
 	if(current_view!=GTR_MESSAGE_VIEW)
 	{
+		/*
+		 * Get the message view before navigating to anywhere and make
+		 *  the translation box editable again.
+		 */
 		display_msg(po->current);
+		gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 	}
 	
 	gtranslator_update_msg();
