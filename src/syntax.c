@@ -59,14 +59,13 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '_':
 				clear_string(string);
 
-				if(msg[cp+1] && isalpha(msg[cp+1]))
+				if(msg[cp] && msg[cp+1] && isalpha(msg[cp+1]))
 				{
 					string=g_string_append_c(string,
 						msg[cp]);
 					
 					string=g_string_append_c(string,
 						msg[cp+1]);	
-				}
 					
 				gtk_text_insert(GTK_TEXT(textwidget),
 					NULL,
@@ -75,7 +74,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					string->str, -1);
 
 				cp++;
-				
+				}
+
 				break;
 		
 			/*
