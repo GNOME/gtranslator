@@ -146,14 +146,3 @@ void gtranslator_utf8_convert_po_from_utf8(GtrPo *po)
 		po->header->charset=g_strdup(po->locale_charset);
 	}
 }
-
-/*
- * Simply saves some typing...
- * [depracated] - I can't find anywhere that uses this
- */
-gchar *gtranslator_utf8_convert_to_utf8(const gchar *orig_enc, const gchar *str)
-{
-	g_return_val_if_fail(str!=NULL, NULL);
-
-	return (g_convert(str, -1, "UTF-8", orig_enc, NULL, NULL, NULL));
-}

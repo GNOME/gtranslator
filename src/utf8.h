@@ -39,9 +39,4 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg, const gchar *orig_e
 void gtranslator_utf8_convert_po_to_utf8(GtrPo *po);
 void gtranslator_utf8_convert_po_from_utf8(GtrPo *po);
 
-/*
- * Simple typing castration is shown in here...
- */
-gchar *gtranslator_utf8_convert_to_utf8(const gchar *encoding, const gchar *str);
-
 #endif
