@@ -171,17 +171,62 @@ int main(int argc, char *argv[])
 				(args[0][strlen(args[0])-2]=='g') &&
 				(args[0][strlen(args[0])-3]=='.'))
 			{
-				gchar *tmpfile=g_new0(gchar,1);
-				gchar *cmd=g_new0(gchar,1);
-				tmpfile=g_basename(args[0]); 
-				cmd=g_strdup_printf("zcat %s > %s/%s", args[0],
-					"/tmp",	tmpfile);
-				system(cmd);
-				parse(g_strdup_printf("%s/%s", "/tmp", tmpfile));
-				if(cmd)
+				/**
+				* Open the file via GnomeVFS -- if it's here or
+				*  complain about it being missing ..
+				**/
+				#ifdef USE_VFS_STUFF
+				/**
+				* The newly used variables.
+				**/
+				gchar *tempfilename=g_new0(gchar,1);
+				GnomeVFSURI *gzipfile, *tempfile;
+				/**
+				* Initialize GnomeVFS.
+				**/
+				gnome_vfs_init();
+				/**
+				* Get the URI for the given gzip'ed file.
+				**/ 
+				gzipfile=gnome_vfs_uri_new(args[0]);
+				/**
+				* Get a temporary filename.
+				**/
+				tempfilename=g_strdup_printf("%s/%s#gzip", 
+					((g_getenv("TMPDIR"))?
+						g_getenv("TMPDIR"):"/tmp"),
+					gnome_vfs_uri_get_basename(gzipfile));
+				tempfile=gnome_vfs_uri_new(tempfilename);
+				/**
+				* If everything went OK, just open the temp-file.
+				**/
+				if(gnome_vfs_xfer_uri(gzipfile, tempfile,
+					GNOME_VFS_XFER_FOLLOW_LINKS,
+					GNOME_VFS_XFER_ERROR_MODE_ABORT,
+					GNOME_VFS_XFER_OVERWRITE_ACTION_REPLACE,
+					NULL,
+					NULL)==GNOME_VFS_OK)
 				{
-					g_free(cmd);
+					parse(tempfilename);
+					/**
+					* Free the used gchar.
+					**/
+					if(tempfilename)
+					{
+						g_free(tempfilename);
+					}
 				}
+				else
+				{
+					/**
+					* Print out a warning that GnomeVFS didn't work somehow.
+					**/
+					g_warning(_("Couldn't open `%s' via GnomeVFS!"), args[0]);
+				}
+				#else
+				g_error(
+				_("Can't open gzipped po-files as gtranslator was compiled without VFS support!"));
+				#endif
 			}
 			else
 			{

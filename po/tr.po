@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.31\n"
-"POT-Creation-Date: 2000-12-03 16:19+0100\n"
+"POT-Creation-Date: 2000-12-05 22:30+0100\n"
 "PO-Revision-Date: 2000-12-03 16:25+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -655,6 +655,20 @@ msgstr "Ana pencere boyutlarýný belirler"
 msgid "Error during GConf initialization: %s."
 msgstr "GConf baþlama hatasý: `%s'."
 
+#. *
+#. * Print out a warning that GnomeVFS didn't work somehow.
+#. *
+#: src/main.c:224
+#, c-format
+msgid "Couldn't open `%s' via GnomeVFS!"
+msgstr "`%s''yi GnomeVFS ile açamadým!"
+
+#: src/main.c:228
+msgid ""
+"Can't open gzipped po-files as gtranslator was compiled without VFS support!"
+msgstr ""
+"Gzip'lenmiþ po-dosyalarýný gtranslator eksik VFS desteðinden dolayý açamýyor!"
+
 #: src/parse.c:98
 #, c-format
 msgid ""
@@ -1006,7 +1020,8 @@ msgstr "dil_kodu"
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
+"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr "
+"...\n"
 
 #. *
 #. * Print some more exact informations on the GConf init-error.
@@ -1136,37 +1151,37 @@ msgstr "Düzenlemesini deðiþtirecek pandýr verilemdi ki"
 msgid "Couldn't open the team database file `%s'!"
 msgstr "Takýmlar dosyasý `%s''yi açamadým!"
 
-#: libgtranslator/vfs-handle.c:68
+#: libgtranslator/vfs-handle.c:63
 #, c-format
 msgid "Couldn't create the temporary directory `%s'."
 msgstr "Geçici dizin `%s''yi yaratamadim."
 
-#: libgtranslator/vfs-handle.c:85
+#: libgtranslator/vfs-handle.c:80
 #, c-format
-msgid "File `%s'·couldn't be found!"
-msgstr "Dosya `%s'·bulunamadi!"
+msgid "File `%s' couldn't be found!"
+msgstr "Dosya `%s' bulunamadi!"
 
-#: libgtranslator/vfs-handle.c:89
+#: libgtranslator/vfs-handle.c:84
 #, c-format
-msgid "Malformed URI `%s'·entered!"
-msgstr "Hatalý adres `%s'!"
+msgid "Malformed URI `%s' entered!"
+msgstr "Hatalý adres `%s' verilmiþ!"
 
-#: libgtranslator/vfs-handle.c:93
+#: libgtranslator/vfs-handle.c:88
 #, c-format
-msgid "Host `%s'·couldn't be found!"
+msgid "Host `%s' couldn't be found!"
 msgstr "Sunucu `%s'·bulunamadý!"
 
-#: libgtranslator/vfs-handle.c:97
+#: libgtranslator/vfs-handle.c:92
 #, c-format
-msgid "Hostname `%s'·is not valid!"
-msgstr "Sunucusu ismi `%s'·geçerli deðildir!"
+msgid "Hostname `%s' is not valid!"
+msgstr "Sunucusu ismi `%s'·geçerli deðil!"
 
-#: libgtranslator/vfs-handle.c:101
+#: libgtranslator/vfs-handle.c:96
 #, c-format
-msgid "Host `%s'·has no address!"
-msgstr "Sunucu `%s''nin adresi yoktur!"
+msgid "Host `%s' has no address!"
+msgstr "Sunucu `%s''nin adresi yok!"
 
-#: libgtranslator/vfs-handle.c:105
+#: libgtranslator/vfs-handle.c:100
 msgid "Transfer interrupted!"
 msgstr "Transfer iptal edildi!"
 
@@ -1293,4 +1308,3 @@ msgstr ""
 "Akýllý sihirbazýmýz bize iþ bitmiþtir diyor..\n"
 "\n"
 "Inþallah bu doðrudur..."
-
