@@ -23,11 +23,15 @@
 #endif
 
 #include "about.h"
+#include "color-schemes.h"
 #include "dialogs.h"
 
+#include <gtk/gtkhbox.h>
+#include <gtk/gtklabel.h>
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-about.h>
+#include <libgnomeui/gnome-href.h>
 
 /*
  * Creates and shows the about box for gtranslator.
@@ -35,11 +39,16 @@
 void gtranslator_create_about_box(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *about = NULL;
+	GtkWidget *hbox;
+	GtkWidget *scheme, *author;
+	gchar *umfo, *url;
+	
 	const gchar *authors[] = {
 		"Fatih Demir <kabalak@gtranslator.org>",
 		"Gediminas Paulauskas <menesis@gtranslator.org>",
 		NULL
 	};
+	
 	gtranslator_raise_dialog(about);
 
 	/*
@@ -47,9 +56,47 @@ void gtranslator_create_about_box(GtkWidget * widget, gpointer useless)
 	 */ 
 	about =
 	    gnome_about_new("gtranslator", VERSION,
-		"(C) 1999-2001 The Free Software Foundation", authors,
+		_("(C) 1999-2001 The Free Software Foundation"), authors,
 		_("gtranslator is a po file editing suite with many bells and whistles."),
 		NULL);
+	
+	hbox=gtk_hbox_new(TRUE, 0);
+	
+	/*
+	 * Print out some colorscheme informations in a label which will be
+	 *  followed by the author name/email address.
+	 */
+	umfo=g_strdup_printf(_("Current colorscheme: \"%s\" (version %s) by"), 
+		theme->info->name, theme->info->version);
+	scheme=gtk_label_new(umfo);
 
+	g_free(umfo);
+
+	/*
+	 * Show author name and bind in a GnomeHREF widget for contacting
+	 *  the scheme author directly.
+	 */
+	umfo=g_strdup_printf("%s <%s>",
+		theme->info->author, theme->info->author_email);
+	url=g_strdup_printf("mailto:%s", theme->info->author_email);
+
+	author=gnome_href_new(url, umfo);
+
+	/*
+	 * Free the used gchars.
+	 */
+	g_free(umfo);
+	g_free(url);
+
+	/*
+	 * Add all the new widgets to the about dialog.
+	 */
+	gtk_box_pack_start(GTK_BOX(hbox), scheme, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), author, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(about)->vbox), hbox,
+		TRUE, TRUE, 0);
+
+	gtk_widget_show_all(hbox);
+	
 	gtranslator_dialog_show(&about, "gtranslator -- about");
 }
