@@ -99,3 +99,4 @@ void gtranslator_translator_save(GtrTranslator *translator);
 void gtranslator_translator_free(GtrTranslator *translator);
 
 #endif
+

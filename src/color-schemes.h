@@ -123,3 +123,4 @@ GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
 
 
 #endif
+

@@ -76,3 +76,4 @@ void gtranslator_learn_autotranslate(gboolean visual_interface);
 void gtranslator_learn_shutdown(void);
 
 #endif
+
