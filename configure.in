@@ -131,6 +131,16 @@ AC_SUBST(SC_OMFDIR)
 AC_SUBST(SC_STATEDIR)
 
 dnl -------------------------------------------------------------------
+dnl Check for gettext >= 0.15-pre1 - uses it's parser/writer functions
+dnl -------------------------------------------------------------------
+AC_CHECK_HEADER([gettext-po.h])
+AC_CHECK_LIB([gettextpo], [po_message_create], [
+	LDFLAGS="$LDFLAGS -lgettextpo"
+],[
+	AC_MSG_ERROR(Missing or inadequate gettext library. Need at least version 0.15.)
+])
+
+dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(debug,
@@ -174,10 +184,7 @@ man/Makefile
 man/gtranslator.1
 po/Makefile.in
 src/Makefile
-src/pixmaps/Makefile
-src/semerkent/Makefile
 ])
-dnl help/ja/Makefile
 
 dnl ------------------------------------------------------------------
 dnl Print an information screen at the end of the process
