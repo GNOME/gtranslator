@@ -15,7 +15,7 @@
 #
 
 print_separator_line ()  {
-	echo "·-=====================================================================-·"
+	echo "<--------------------==============·==============---------------------->"
 }
 
 dry_run_information_message ()  {
@@ -34,7 +34,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=5.5
+export POZILLA_RELEASE=6.0
 
 #
 # Here we do define the corresponding i18n mailing list which should also get
@@ -46,7 +46,7 @@ export MAILING_LIST=${MAILING_LIST:-'GNOME I18N List <gnome-i18n@gnome.org>'}
 #
 # The configuration dir, the mail body & mail.
 #
-export CONFIG_DIR="$HOME/.gtranslator/pozilla"
+export CONFIG_DIR="$HOME/.gtranslator/pozilla.sh"
 export BODY_FILE="$CONFIG_DIR/mail.body"
 
 #
@@ -602,8 +602,9 @@ fi
 # Setup the table-header .-)
 #
 STAT_TABLE="
+<=======--------==============--==========------==========------======>
 Language	Total messages	Translated	Percentage	Missing
-========--------==============--==========------==========------=======
+<=======--------==============--==========------==========------======>
 "
 
 #
@@ -643,14 +644,14 @@ for i in $PO_FILES
 		mv $i.backup $i
 
 		STAT_TABLE="$STAT_TABLE
-$language\t\t------------- Failure due to a warning ------------"
+$language\t\t<------====== Failure due to a warning =====------>"
 
 		continue
 	elif echo $merge_status|grep -sq error ; then
 		mv $i.backup $i
 
 		STAT_TABLE="$STAT_TABLE
-$language\t\t------------- Failure due to an error -------------"
+$language\t\t<------====== Failure due to an error ======------>"
 
 		continue
 	fi
