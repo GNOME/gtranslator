@@ -100,6 +100,7 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 		g_strreverse(tempbazooka);
 
 		*email=nautilus_str_strip_substring_and_after(tempbazooka, " ");
+		g_strreverse(*email);
 		
 		g_free(tempbazooka);
 	}
