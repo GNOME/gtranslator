@@ -75,7 +75,11 @@ void gtranslator_sidebar_add_po(GtrPo *po)
 	/*
 	 * Add the filename to the shortcut bar.
 	 */ 
-	e_shortcut_model_add_item(model, 0, -1, "file:", po->filename);
+	e_shortcut_model_add_item(model, 0, -1, 
+		"file:",
+		g_strdup_printf("%s -- %s",
+		po->header->prj_name,	
+		g_basename(po->filename)));
 }
 
 /*
