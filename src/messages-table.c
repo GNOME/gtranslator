@@ -205,19 +205,19 @@ void gtranslator_messages_table_create (void)
 
   gtk_tree_store_append (model, &unknown_node, NULL);
   gtk_tree_store_set (model, &unknown_node, 
-		      STATUS_COLUMN, _("unknown"), 
+		      STATUS_COLUMN, _("Untranslated"), 
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
   gtk_tree_store_append (model, &fuzzy_node, NULL);
   gtk_tree_store_set (model, &fuzzy_node, 
-		      STATUS_COLUMN, _("fuzzy"), 
+		      STATUS_COLUMN, _("Fuzzy"), 
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
   gtk_tree_store_append (model, &translated_node, NULL);
   gtk_tree_store_set (model, &translated_node, 
-		      STATUS_COLUMN, _("translated"), 
+		      STATUS_COLUMN, _("Translated"), 
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
