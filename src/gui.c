@@ -40,14 +40,12 @@
 #include "parse.h"
 #include "prefs.h"
 #include "runtime-config.h"
-#include "sidebar.h"
 #include "stylistics.h"
 #include "syntax.h"
 #include "translator.h"
 #include "undo.h"
 #include "utils.h"
 #include "utils_gui.h"
-#include "views.h"
 
 #include <string.h>
 
@@ -81,7 +79,6 @@ GtkWidget *trans_box;
 GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
 
-GtkWidget *sidebar_pane;
 GtkWidget *content_pane;
 GtkWidget *table_pane;
 
@@ -89,11 +86,6 @@ GtkWidget *table_pane;
  * The comment/extra content area in the main window.
  */
 GtrExtraContentArea *extra_content_view;
-
-/*
- * Internally used local-global variables
- */
-static GtkWidget *views_sidebar;
 
 gboolean nothing_changes;
 
@@ -137,7 +129,6 @@ static  GtkTargetEntry dragtypes[] = {
 /*
  * Pane positions storage variables.
  */
-static gint 	sidebar_pane_position;
 static gint	table_pane_position;
 
 /*
@@ -191,14 +182,9 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Create all the panes we're using later on.
 	 */
-	sidebar_pane=e_hpaned_new();
 	content_pane=e_vpaned_new();
 	table_pane=e_hpaned_new();
 	
-	/*
-	 * Create the sidebars and/or messages table.
-	 */
-	views_sidebar=gtranslator_sidebar_new();
 
 	if(GtrPreferences.show_messages_table)
 	{
@@ -213,22 +199,6 @@ void gtranslator_create_main_window(void)
 	}
 
 	gtranslator_config_init();
-
-	/*
-	 * Activate the paned widgets if desired and set the pane gutter to
-	 *  the right place.
-	 */
-	if(GtrPreferences.show_sidebar)
-	{
-		sidebar_pane_position=gtranslator_config_get_int(
-			"interface/sidebar_pane_position");
-		
-		e_paned_set_position(E_PANED(sidebar_pane), sidebar_pane_position);
-	}
-	else
-	{
-		e_paned_set_position(E_PANED(sidebar_pane), -1);
-	}
 
 	if(GtrPreferences.show_messages_table)
 	{
@@ -287,9 +257,7 @@ void gtranslator_create_main_window(void)
 	e_paned_pack1(E_PANED(table_pane), gtranslator_messages_table, TRUE, FALSE);
 	e_paned_pack2(E_PANED(table_pane), content_pane, TRUE, FALSE);
 	
-	e_paned_pack1(E_PANED(sidebar_pane), views_sidebar, TRUE, FALSE);
-	e_paned_pack2(E_PANED(sidebar_pane), table_pane, TRUE, FALSE);
-	gnome_app_set_contents(GNOME_APP(gtranslator_application), sidebar_pane);
+	gnome_app_set_contents(GNOME_APP(gtranslator_application), table_pane);
 
 	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
@@ -431,12 +399,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 * Initialize the config and set the pane positions -- if needed.
 	 */
 	gtranslator_config_init();
-
-	if(GtrPreferences.show_sidebar)
-	{
-		sidebar_pane_position=e_paned_get_position(E_PANED(sidebar_pane));
-		gtranslator_config_set_int("interface/sidebar_pane_position", sidebar_pane_position);
-	}
 
 	/*
 	 * Get the EPaned's position offset.
@@ -682,15 +644,15 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 	gchar *result;
 
 	result=g_strdup(text);
-	if (!nothing_changes){
+	if (!nothing_changes)
+	{
 		/*
-		* Do all these steps only if the option to use the '·' is set.
+		* Register the text for an insertion undo action.
 		*/
-		if(GtrPreferences.dot_char){
-			/*
-			* Register the text for an insertion undo action.
-			*/
-			gtranslator_undo_register_insertion(result, *position);
+		gtranslator_undo_register_insertion(result, *position);
+
+		if(GtrPreferences.dot_char)
+		{
 			gtranslator_utils_invert_dot(result);
 		}
 	}
@@ -712,7 +674,7 @@ void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 	gtranslator_utils_invert_dot(text);
 	gtk_selection_data_set(selection_data, selection_data->type,
 			       8, text, strlen(text));
-	GTR_FREE(text);
+	g_free(text);
 }
 
 /*
@@ -781,12 +743,4 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 	}
 	
 	return TRUE;
-}
-
-/*
- * Switch to the given view.
- */
-void gtranslator_switch_views(GtkWidget *widget, gpointer view)
-{
-	gtranslator_views_set(GPOINTER_TO_INT(view));
 }

@@ -98,12 +98,6 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_EXPORT_UTF8, the_file_menu[16], NONE);
 	insert_action(ACT_IMPORT_UTF8, the_file_menu[17], NONE);
 	/*----------------------------------------------------------*/
-	insert_action(ACT_VIEW_MESSAGE, the_views_menu[0], NONE);
-	insert_action(ACT_VIEW_COMMENTS, the_views_menu[1], NONE);
-	insert_action(ACT_VIEW_NUMBER, the_views_menu[2], NONE);
-	insert_action(ACT_VIEW_C_FORMAT, the_views_menu[3], NONE);
-	insert_action(ACT_VIEW_HOTKEY, the_views_menu[4], NONE);
-	/*----------------------------------------------------------*/
 	insert_action(ACT_UNDO, the_edit_menu[0], the_toolbar[8]);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);

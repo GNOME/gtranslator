@@ -43,7 +43,6 @@
 #include "prefs.h"
 #include "runtime-config.h"
 #include "save.h"
-#include "sidebar.h"
 #include "translator.h"
 #include "undo.h"
 #include "utf8.h"
@@ -577,11 +576,6 @@ void gtranslator_parse_main(const gchar *filename)
 	gtranslator_history_show();
 
 	/*
-	 * Add the view for the current file.
-	 */ 
-	gtranslator_sidebar_activate_views();
-
-	/*
 	 * Create and set the messages table/tree up.
 	 */
 	if(GtrPreferences.show_messages_table)
@@ -954,7 +948,6 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	
 	gtranslator_po_free();
 	gtranslator_undo_clean_register();
-	gtranslator_sidebar_clear_views();
 	
 	file_opened = FALSE;
 	nothing_changes = TRUE;

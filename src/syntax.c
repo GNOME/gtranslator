@@ -542,22 +542,19 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 
 void gtranslator_insert_text(GtkText *editable, const gchar *text)
 {
-	static gint length, pos;
-	pos=0;
+	gint pos=0;
 
-	length = gtk_text_get_length(editable);
 	/* First, delete old contents */
 	gtk_signal_emit_by_name(
 		GTK_OBJECT(editable),
 		"delete-text",
 		0,
-		length);
+		-1);
 	/* Second add new context */
-	length = strlen(text);
 	gtk_signal_emit_by_name(
 		GTK_OBJECT(editable),
 		"insert-text",
 		text,
-		length,
+		strlen(text),
 		&pos);
 }

@@ -28,7 +28,6 @@
 #include "message.h"
 #include "parse.h"
 #include "prefs.h"
-#include "sidebar.h"
 #include "utils.h"
 
 #include <string.h>

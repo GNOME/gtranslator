@@ -1,3 +1,12 @@
+2001-12-22  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* views.c, views.h, sidebar.c, sidebar.h: removed views sidebar.
+	* Makefile.am: don't build removed files.
+	* find.c, gui.c, gui.h, parse.c, prefs.c, prefs.h: don't do anything
+	with views sidebar.
+	* menus.c, menus.h, actions.c: remove View menu.
+	* gui.c: Insert undo should work even if dot char isn't used ;)
+
 2001-12-20  Gediminas Paulauskas <menesis@delfi.lt>
 
 	Integrate parts of patch from Peeter Vois <Peeter.Vois@mail.ee>

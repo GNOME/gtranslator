@@ -32,7 +32,6 @@
 #include "nautilus-string.h"
 #include "prefs.h"
 #include "query.h"
-#include "sidebar.h"
 #include "stylistics.h"
 #include "translator.h"
 #include "utils.h"
@@ -70,7 +69,7 @@ static GtkWidget
  */
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
-	*dont_save_unchanged_files, *save_geometry_tb, *show_sidebar,
+	*dont_save_unchanged_files, *save_geometry_tb,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
@@ -243,9 +242,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	show_comment=gtranslator_utils_attach_toggle_with_label(fourth_page,
 		8, _("Show instant comment view in the main pane"),
 		GtrPreferences.show_comment, gtranslator_preferences_dialog_changed);
-	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		9, _("Show the views sidebar"),
-		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
 	
 	/*
 	 * The fifth page with the Recent files options.
@@ -511,7 +507,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.rambo_function = if_active(rambo_function);
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
-	GtrPreferences.show_sidebar = if_active(show_sidebar);
 	GtrPreferences.show_comment = if_active(show_comment);
 	GtrPreferences.show_messages_table = if_active(show_messages_table);
 	GtrPreferences.collapse_translated = if_active(collapse_translated_entries);
@@ -659,8 +654,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.sweep_compile_file);
 	gtranslator_config_set_bool("toggles/enable_popup_menu",
 			      GtrPreferences.popup_menu);
-	gtranslator_config_set_bool("toggles/show_sidebar",
-			      GtrPreferences.show_sidebar);
 	gtranslator_config_set_bool("toggles/show_comment",
 			      GtrPreferences.show_comment);
 	gtranslator_config_set_bool("toggles/rambo_function",
@@ -702,19 +695,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	 * Save our translator data.
 	 */
 	gtranslator_translator_save(gtranslator_translator);
-
-	/*
-	 * Show or hide the sidebar according to the _possibly_ changed
-	 *  setting in the preferences dialog.
-	 */
-	if(GtrPreferences.show_sidebar)
-	{
-		gtranslator_sidebar_show();
-	}
-	else
-	{
-		gtranslator_sidebar_hide();
-	}
 
 	/*
 	 * Hide the comment viewing (area) via our new util function.
@@ -878,8 +858,6 @@ void gtranslator_preferences_read(void)
 	
 	GtrPreferences.fill_header = gtranslator_config_get_bool(
 		"toggles/fill_header");
-	GtrPreferences.show_sidebar = gtranslator_config_get_bool(
-		"toggles/show_sidebar");
 	GtrPreferences.show_comment = gtranslator_config_get_bool(
 		"toggles/show_comment");
 	GtrPreferences.show_messages_table = gtranslator_config_get_bool(

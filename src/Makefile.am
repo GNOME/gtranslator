@@ -70,7 +70,6 @@ gtranslator_SOURCES = \
 	runtime-config.c runtime-config.h \
 	save.c save.h \
 	session.c session.h \
-	sidebar.c sidebar.h \
 	sighandling.c sighandling.h \
 	stylistics.c stylistics.h \
 	syntax.c syntax.h \
@@ -82,8 +81,7 @@ gtranslator_SOURCES = \
 	utf8.c utf8.h \
 	utils.c utils.h \
 	utils_gui.c utils_gui.h \
-	vfs-handle.c vfs-handle.h \
-	views.c views.h
+	vfs-handle.c vfs-handle.h
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \

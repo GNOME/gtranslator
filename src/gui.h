@@ -80,11 +80,6 @@ void gtranslator_clipboard_paste(GtkWidget  *widget, gpointer useless);
 void gtranslator_selection_clear(GtkWidget  *widget, gpointer useless);
 
 /*
- * Switch the view to the given view.
- */
-void gtranslator_switch_views(GtkWidget *widget, gpointer view);
-
-/*
  * A status defining callback -- now generaly defined for instance.
  */
 void gtranslator_translation_changed(GtkWidget  *widget, gpointer useless);

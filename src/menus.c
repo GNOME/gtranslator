@@ -28,9 +28,7 @@
 #include "message.h"
 #include "parse.h"
 #include "prefs.h"
-#include "sidebar.h"
 #include "utils_gui.h"
-#include "views.h"
 
 #include "pixmaps/auto_translation.xpm"
 #include "pixmaps/query.xpm"
@@ -45,7 +43,6 @@
 GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
 	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
-	GNOMEUIINFO_MENU_VIEW_TREE(the_views_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
 	GNOMEUIINFO_SUBTREE(N_("Mess_age status"), the_msg_status_menu),
 	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
@@ -156,22 +153,6 @@ GnomeUIInfo the_edit_menu[] = {
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 		GDK_F8, 0, NULL
 	},
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo the_views_menu[] = {
-	GNOMEUIINFO_RADIOITEM_DATA(N_("_Message"),
-		N_("Standard messages view"),
-		gtranslator_switch_views, GINT_TO_POINTER(GTR_MESSAGE_VIEW), NULL),
-	GNOMEUIINFO_RADIOITEM_DATA(N_("_Numbers"),
-		N_("View numbers in the message"),
-		gtranslator_switch_views, GINT_TO_POINTER(GTR_NUMBER_VIEW), NULL),
-	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Formats"),
-		N_("View C formats of the message"),
-		gtranslator_switch_views, GINT_TO_POINTER(GTR_C_FORMAT_VIEW), NULL),
-	GNOMEUIINFO_RADIOITEM_DATA(N_("_Hotkeys"),
-		N_("View hotkeys in the message"),
-		gtranslator_switch_views, GINT_TO_POINTER(GTR_HOTKEY_VIEW), NULL),
 	GNOMEUIINFO_END
 };
 
