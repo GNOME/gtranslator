@@ -60,5 +60,4 @@ void parse()
 	max_count=((count - 10 ) / 3);
 	old_count=count;
 	count=1;
-	
 }
