@@ -52,7 +52,7 @@ GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
 
 	g_return_val_if_fail(find!=NULL, NULL);
 	g_return_val_if_fail(replace!=NULL, NULL);
-	g_return_val_if_fail(start < 0, NULL);
+	g_return_val_if_fail(start >= 0, NULL);
 	
 	/*
 	 * g_strdup the string informations for the new structure.
@@ -245,20 +245,47 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 				
 				if(!regexec(rex, (*string), 5, pos, 0))
 				{
-					gint i=0;
-					
+					GString *op=g_string_new("");
+										
 					/*
-					 * FIXME copy & op' on the string.
+					 * Operate on the found match and the
+					 *  original string.
 					 */
-					while(pos[i].rm_so >= 0)
+					if(pos[0].rm_so >= 0)
 					{
-						g_print("%i[%s]%i->%i\n",
-							i,
-							(*string), 
-							pos[i].rm_so,
-							pos[i].rm_eo);
+						gint i=0;
 
-						i++;
+						/*
+						 * Copy the real characters to the new
+						 *  string.
+						 */
+						while(i < pos[0].rm_so)
+						{
+							op=g_string_append_c(op, (*string)[i]);
+						}
+
+						/*
+						 * Append the replace string.
+						 */
+						op=g_string_append(op, rstuff->replace_string);
+
+						/*
+						 * Copy the other resting characters into the string.
+						 */
+						for(i=(pos[0].rm_so+pos[0].rm_eo);i < strlen(*string); ++i)
+						{
+							op=g_string_append_c(op, (*string)[i]);
+						}
+
+						if(op->len > 0)
+						{
+							g_free(*string);
+							*string=op->str;
+						}
+						else
+						{
+							g_string_free(op, FALSE);
+						}
 					}
 				}
 				
