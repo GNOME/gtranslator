@@ -25,10 +25,6 @@
  *  po files.
  */
 
-#include "parse.h"
-#include "vfs-handle.h"
-#include "gui.h"
-
 /*
  * Detects if we can open it with our "special" open functions.
  */

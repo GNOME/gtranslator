@@ -43,12 +43,6 @@ typedef struct {
 	gchar *comment;
 	gchar *msgid;
 	gchar *msgstr;
-	/*
-	 * This is the _new_ "msgstr list" which stores
-	 *  a list of possible translations (especially
-	 *   useful for the message databases).
-	 */
-	GList *msgstrlist;
 	gint pos;
 	GtrMsgStatus status;
 } GtrMsg;

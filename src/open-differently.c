@@ -17,8 +17,10 @@
  *
  */
 
+#include "parse.h"
+#include "vfs-handle.h"
+#include "gui.h"
 #include "open-differently.h"
-
 
 /*
  * Detects whether we can open up the given file with the

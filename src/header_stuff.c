@@ -205,9 +205,14 @@ Content-Transfer-Encoding: %s\n",
 	 * TODO: in entry box there should be no #'s
 	 */
 	if(h->comment[strlen(h->comment)-1] == '\n')
+	{
 		msg->comment = g_strdup(h->comment);
+	}
 	else
+	{
 		msg->comment = g_strconcat(h->comment, "\n", NULL);
+	}
+	
 	return msg;
 }
 
@@ -377,6 +382,12 @@ void edit_header(GtkWidget * widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(destroy_lists), NULL);
 
 	show_nice_dialog(&e_header, "gtranslator -- header");
+
+	/*
+	 * Allow resizing of the dialog in growth direction but not in
+	 *  shrink direction.
+	 */  
+	gtk_window_set_policy(GTK_WINDOW(e_header), 0, 1, 1);
 }
 
 static void language_changed(GtkWidget * widget, gpointer useless)
