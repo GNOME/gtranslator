@@ -18,8 +18,8 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GTK_LED_H__
-#define __GTK_LED_H__
+#ifndef LIBGTRANSLATOR_GTK_LED_H
+#define LIBGTRANSLATOR_GTK_LED_H 1
 
 
 #include <gdk/gdk.h>
@@ -79,4 +79,4 @@ void       gtk_led_set_colors  (GtkLed                  *led,
 #endif /* __cplusplus */
 
 
-#endif /* __GTK_LED_H__ */
+#endif

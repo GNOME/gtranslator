@@ -1,3 +1,21 @@
+2000-12-31  Fatih Demir	<kabalak@gmx.net>
+
+	* messages.h, translation-database.h, team-database.h:
+		Reformatted.
+
+	* vfs-handle.c/.h: Reformatted the files and added a
+		FIXME.
+
+	* \*.h: Changed the header directives to the prefixed
+		LIBGTRANSLATOR_DIRECTIVE version (e.g.:
+		 VFS_HANDLE_H -> LIBGTRANSLATOR_VFS_HANDLE_H).
+
+	* libgtranslator.h: Include the new recent-files.h header.
+
+	* Makefile.am: Added the new source files to the build.
+
+	* recent-files.c/.h: Added own recent files code.
+
 2000-12-30  Fatih Demir	<kabalak@gmx.net>
 
 	* main.c: Include "../config.h" and reenable the gettext-binding

@@ -1,222 +1,167 @@
-/**
-*
-* (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
-*
-* This is distributed under the GNU GPL V 2.0 or higher which can be
-*  found in the file COPYING for further studies.
-*
-* Enjoy this piece of software, brain-crack and other nice things.
-*
-* WARNING: Trying to decode the source-code may be hazardous for all your
-*	future development in direction to better IQ-Test rankings!
-*
-* PSC: This has been completely written with vim; the best editor of all.
-*
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *
+ * libgtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *    (at your option) any later version.
+ *
+ * libgtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #include <sys/param.h>
 #include <libgtranslator/team-handle.h>
 
-/**
-* The internally used function which gets all apps etc. for
-*  the current node in the team database.
-**/
+/*
+ * Returns the list of all translated applications for the given node pointer.
+ */
 GList *gtranslator_get_apps_for_node(xmlNodePtr ptr);
 
-/**
-* Open the given file or the default team database.
-**/
-GtranslatorTeamDatabase *gtranslator_open_team_db(gchar *team_db_file)
+/*
+ * Initializes the default team database.
+ */
+GtranslatorTeamDatabase *gtranslator_init_team_db()
 {
-	/**
-	* Some local variables.
-	**/
-	gchar 			filename[MAXPATHLEN+1];
+	/*
+	 * Some local variables.
+	 */
 	xmlDocPtr		doc;
 	xmlNodePtr		node;
 	GtranslatorTeamDatabase *db=g_new(GtranslatorTeamDatabase,1);
-	/**
-	* Test if we've got a different team database
-	*  is given.
-	**/
-	if(!team_db_file)
-	{
-		/**
-		* Then build-up the default team database
-		*  location.
-		**/
-		sprintf(filename, "%s/%s", MESSAGE_DB_DIR,
-			"teams.xml");
-	}
-	else
-	{
-		/**
-		* Or check if the given team database filename
-		*  is an absolute filename.
-		**/
-		if(!g_path_is_absolute(team_db_file))
-		{
-			/**
-			* If not, set up a "absolute-like"
-			*  filename.
-			**/
-			sprintf(filename, "%s/%s",
-				g_get_current_dir(),
-				team_db_file);
-		}		
-	}
-	/**
-	* Now open up the team database file with libxml.
-	**/
-	doc=xmlParseFile(filename);
-	/**
-	* Check if the xml document could be opened.
-	**/
+	/*
+	 * Open up the default team database file.
+	 */
+	doc=xmlParseFile(MESSAGE_DB_DIR "/teams.xml");
+	
 	if(!doc)
 	{
-		/**
-		* This is definitely not Ok... So we do
-		*  exit now...
-		**/
+		/*
+		 * Hm, without the default team database, all
+		 *  the stuff won't work so we do exit here.
+		 */
 		g_warning(
 		_("Couldn't open the team database file `%s'!"),
 			filename);
-		return NULL;	
+		return NULL;
 	}
-	/**
-	* Open the nodes.
-	**/
+	
 	node=doc->xmlRootNode->xmlChildrenNode;
-	/**
-	* Now we can get the serial for the GtranslatorTeamDatabase.
-	**/
+	
+	/*
+	 * Set up the serial number & the date of the team database.
+	 */
 	db->serial=(gint) xmlGetProp(node, "serial");
-	/**
-	* And the date for the team databse file.
-	**/
 	db->date=xmlGetProp(node, "date");
-	/**
-	* So, we are right here now, use our loved functions
-	*  from DV-lib :-)
-	**/
+	
+	/*
+	 * Cruise through the xml file and get all the relevant
+	 *  informations.
+	 **/
 	while(node)
 	{
-		/**
-		* Are we now at a <team> tag?
-		**/
 		if(!strcmp(node->name, "team"))
 		{
-			/**
-			* Create a new GtranslatorTeam structure.
-			**/
 			GtranslatorTeam	*team=g_new(GtranslatorTeam,1);
-			/**
-			* Add this team with it's specs to the list.
-			**/
+			
+			/*
+			 * Append the found team to the list.
+			 */
 			team->name=xmlGetProp(node, "name");
 			team->mailing_list=xmlGetProp(node, "email");
-			/**
-			* Yeah, now get the apps for the team.
-			**/
+		
+			/*
+			 * Get all the translated applications for the
+			 *  language.
+			 */
 			team->apps=gtranslator_get_apps_for_node(
 				node->xmlChildrenNode);
-			/**
-			* And now append this team to the list.
-			**/
-			db->teams=g_list_append(db->teams, (gpointer) team);
+			
+			/*
+			 * Finally append the team to the list.
+			 */
+			db->teams=g_list_append(db->teams,
+				(gpointer) team);
 		}
-		/**
-		* Iterate the node.
-		**/
 		node=node->next;
 	}
-	/**
-	* Return the GtranslatorTeamDatabase.
-	**/
 	return db;
 }
 
-/**
-* A helper function for the internal use.
-**/
+/*
+ * An internally used function.
+ */
 GList *gtranslator_get_apps_for_node(xmlNodePtr ptr)
 {
-	/**
-	* Create a new list.
-	**/
 	GList *apps=g_list_alloc();
-	/**
-	* Now get the apps.
-	**/
+	/*
+	 * Find all corresponding applications for
+	 *  the given node pointer.
+	 */
 	while(ptr)
 	{
-		/**
-		* Test if this is an app tag.
-		**/
+		/*
+		 * Yeah, we're getting all the "app"
+		 *  tags for the language.
+		 */
 		if(!strcmp(ptr->name, "app"))
 		{
-			/**
-			* Create a new GtranslatorTeamApp.
-			**/
 			GtranslatorTeamApp *app=g_new(GtranslatorTeamApp,1);
-			/**
-			* Get the name and the version.
-			**/
+			
+			/*
+			 * Set up the application name and version.
+			 */
 			app->appname=xmlGetProp(ptr, "name");
 			app->appversion=xmlGetProp(ptr, "version");
-			/**
-			* Now do get the translators.
-			**/
+			
+			/*
+			 * Also set up the translators.
+			 */
 			if(ptr->xmlChildrenNode)
 			{
-				/**
-				* The translator node.
-				**/
 				xmlNodePtr translator_node;
-				/**
-				* Assign the node.
-				**/
+				
 				translator_node=ptr->xmlChildrenNode;
-				/**
-				* Cruise through our translators.
-				**/
+				/*
+				 * Cruise through the translator nodes
+				 *  of the application.
+				 */
 				while(translator_node)
 				{
-					/**
-	                                * The GtranslatorTeamAppTranslator.
-	                                **/
 					GtranslatorTeamAppTranslator *translator=g_new0(
 	                                	GtranslatorTeamAppTranslator,1);
-					/**
-					* Get the current ones information.
-					**/
+					
+					/*
+					 * This is the current translator -- he/she
+					 *  is the first in the list of translators.
+					 */
 					translator->name=xmlGetProp(translator_node,
 						"name");
 					translator->email=xmlGetProp(translator_node,
 						"email");
-					/**
-					* Now add the translator to the translators' list.
-					**/
+					
+					/*
+					 * Append the translator to the translators' list.
+					 */
 					app->translators=g_list_append(app->translators,
 						(gpointer) translator);
-					/**
-					* Go to the next translator.
-					**/
+					
 					translator_node=translator_node->next;
-				}		
+				}
 			}
-			/**
-			* Add this to the apps' list.
-			**/
+			/*
+			 * Append the application to the list.
+			 */
 			apps=g_list_append(apps, (gpointer) app);
 		}
-		/**
-		* Go to the next app.
-		**/
 		ptr=ptr->next;
-	}	
-	/**
-	* Return the apps' list.
-	**/
+	}
 	return apps;
 }

@@ -17,20 +17,33 @@
  *
  */
 
-#ifndef LIBGTRANSLATOR_VFS_HANDLE_H
-#define LIBGTRANSLATOR_VFS_HANDLE_H 1
+#ifndef LIBGTRANSLATOR_RECENT_FILES_H
+#define LIBGTRANSLATOR_RECENT_FILES_H 1
 
 /*
- * The GnomeVFS based routines of libgtranslator are here.
- */ 
-
-#include <glib.h>
-#include "libgtranslator.h"
-#include <libgnomevfs/gnome-vfs.h>
-
-/*
- * Opens up the given file via GnomeVFS routines.
+ * These functions are libgtranslator's recent files' menu stub.
  */
-void gtranslator_vfs_handle_open_file(gchar *filestring);
+
+#include <libgtranslator/preferences.h> 
+
+/*
+ * Returns the list of the recent files.
+ */
+GList *gtranslator_get_recent_files(gboolean delete_nonexistent);
+
+/*
+ * Saves the given list of (probably) recent filenames.
+ */
+void gtranslator_set_recent_files(GList *filenames);
+
+/*
+ * Returns the length of the "private" recent files' list.
+ */
+gint gtranslator_get_recent_files_length();
+
+/*
+ * Returns the requested nth element in the recent files' list.
+ */
+gchar *gtranslator_get_recent_files_entry(gint n);
 
 #endif

@@ -1,55 +1,61 @@
-/**
-*
-* (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
-*          Gediminis Paulauskas -- menesis / menesis@delfi.lt
-*
-* This is distributed under the GNU GPL V 2.0 or higher which can be
-*  found in the file COPYING for further studies.
-*
-* Enjoy this piece of software, brain-crack and other nice things.
-*
-* WARNING: Trying to decode the source-code may be hazardous for all your
-*       future development in direction to better IQ-Test rankings!
-*       
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
-#ifndef MESSAGES_H
-#define MESSAGES_H 1
+#ifndef LIBGTRANSLATOR_MESSAGES_H
+#define LIBGTRANSLATOR_MESSAGES_H 1
 
 #include <glib.h>
 
-/**
-* The different stati of the messages.
-**/
+/*
+ * The different stati of the messages.
+ */
 typedef enum {
 	GTR_MSG_STATUS_UNKNOWN		= 0,
 	GTR_MSG_STATUS_TRANSLATED	= 1 << 0,
 	GTR_MSG_STATUS_FUZZY		= 1 << 1,
-	/* If the message shouldn't be translated (web adresses/trade marks) */
+	/*
+	 * If the message shouldn't be translated (web adresses/trade marks) 
+	 */
 	GTR_MSG_STATUS_STICK		= 1 << 2
 } GtrMsgStatus;
 
-/**
-* Again a try to make a commonly usable message-struct
-**/
+/*
+ * The generally used message structure in (lib-)gtranslator.
+ */ 
 typedef struct {
 	gchar *comment;
 	gchar *msgid;
 	gchar *msgstr;
-	/**
-	* This is the _new_ msgstr list which stores
-	*  a list of possible translations (especially
-	*   for the message databases usefull).
-	**/
+	/*
+	 * This is the _new_ "msgstr list" which stores
+	 *  a list of possible translations (especially
+	 *   useful for the message databases).
+	 */
 	GList *msgstrlist;
-	/**
-	* What this pos is used for? 
-	**/
 	gint pos;
 	GtrMsgStatus status;
 } GtrMsg;
 
-/* Defines for easy casting */
+/*
+ * Defines for easy casting 
+ */
 #define GTR_MSG_STATUS(x) ((GtrMsgStatus *)x)
 #define GTR_MSG(x) ((GtrMsg *)x)
 

@@ -32,6 +32,7 @@ libgtranslator_la_SOURCES = \
 	handle-db.c \
 	parse-db.c \
 	preferences.c \
+	recent-files.c \
 	stylistics.c \
 	team-handle.c \
 	$(vfs_source)
@@ -66,6 +67,7 @@ libgtranslator_include__DATA = \
 	messages.h \
 	parse-db.h \
 	preferences.h \
+	recent-files.h \
 	stylistics.h \
 	team-database.h \
 	team-handle.h \

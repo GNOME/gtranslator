@@ -12,8 +12,8 @@
 *
 **/
 
-#ifndef HANDLE_DB_H
-#define HANDLE_DB_H 1
+#ifndef LIBGTRANSLATOR_HANDLE_DB_H
+#define LIBGTRANSLATOR_HANDLE_DB_H 1
 
 #include "parse-db.h"
 #include "translation-database.h"

@@ -12,8 +12,8 @@
 *
 **/
 
-#ifndef PARSE_DB_H
-#define PARSE_DB_H 1
+#ifndef LIBGTRANSLATOR_PARSE_DB_H
+#define LIBGTRANSLATOR_PARSE_DB_H 1
 
 #include <glib.h>
 #include <string.h>

@@ -12,8 +12,8 @@
 *
 **/
 
-#ifndef PREFERENCES_H
-#define PREFERENCES_H 1
+#ifndef LIBGTRANSLATOR_PREFERENCES_H
+#define LIBGTRANSLATOR_PREFERENCES_H 1
 
 #include "parse-db.h"
 #include <time.h>

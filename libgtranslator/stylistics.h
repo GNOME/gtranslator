@@ -12,8 +12,8 @@
 *
 **/
 
-#ifndef STYLISTICS_H
-#define STYLISTICS_H 1
+#ifndef LIBGTRANSLATOR_STYLISTICS_H
+#define LIBGTRANSLATOR_STYLISTICS_H 1
 
 /**
 * Include the preferences headers and the GNOME headers.
