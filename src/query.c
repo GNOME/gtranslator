@@ -77,9 +77,9 @@ GtrQuery *gtranslator_query_simple(GtrQuery *query)
 		return NULL;
 	}
 
-	g_free(str);
-	g_free(original_LC_CTYPE);
-	g_free(original_LC_MESSAGES);
+	GTR_FREE(str);
+	GTR_FREE(original_LC_CTYPE);
+	GTR_FREE(original_LC_MESSAGES);
 	gtranslator_free_query(&query);
 }
 
@@ -120,8 +120,7 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 			matches=g_list_append(matches, result);
 		}
 
-		domainlist=domainlist->next;
-
+		GTR_ITER(domainlist);
 		gtranslator_free_query(&query);
 	}
 
@@ -185,10 +184,10 @@ void gtranslator_free_query(GtrQuery **query)
 {
 	if(*query)
 	{
-		g_free((*query)->message);
-		g_free((*query)->domain);
-		g_free((*query)->language);
-		g_free(*query);
+		GTR_FREE((*query)->message);
+		GTR_FREE((*query)->domain);
+		GTR_FREE((*query)->language);
+		GTR_FREE(*query);
 	}
 }
 

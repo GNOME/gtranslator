@@ -33,12 +33,12 @@
 /*
  * The internal formats checking function.
  */
-static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *string);
+static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *string, gboolean hmpf);
 
 /*
  * Do the hard traversing work -- formats are hard to grep ,-)
  */
-static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *string)
+static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *string, gboolean hmpf)
 {
 	if(!c_string)
 	{
@@ -101,8 +101,20 @@ static void gtranslator_formats_fill_check_data(const gchar *c_string, GString *
 
 				restformat=nautilus_str_get_after_prefix(tuz, "$");
 
-				if(!restformat)
+				/*
+				 * Only try our %POS$FORMAT matching if "hmpf" is TRUE.
+				 *  (msgid's shouldn't contain any formats, so we don't 
+				 *    check for weird things there).
+				 */
+				if(!restformat || !hmpf)
 				{
+					/*
+					 * If there's no further '$' sign, then this must
+					 *  be something like %3 etc. which is used by KDE for
+					 *   some special markup in their po files.
+					 */
+					string=g_string_append_c(string, *tuz);
+					
 					continue;
 				}
 				else
@@ -194,8 +206,8 @@ gboolean gtranslator_formats_check(GtrMsg *message)
 	/*
 	 * Set the GString's to the right format specifiers.
 	 */
-	gtranslator_formats_fill_check_data(GTR_MSG(message)->msgid, id_formats);
-	gtranslator_formats_fill_check_data(GTR_MSG(message)->msgstr, str_formats);
+	gtranslator_formats_fill_check_data(GTR_MSG(message)->msgid, id_formats, FALSE);
+	gtranslator_formats_fill_check_data(GTR_MSG(message)->msgstr, str_formats, TRUE);
 
 	/*
 	 * Check the length's of the two GString's for equality.

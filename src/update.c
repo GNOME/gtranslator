@@ -31,8 +31,10 @@
 #include "gui.h"
 #include "parse.h"
 #include "prefs.h"
+#include "utils.h"
 
 #include <stdlib.h>
+
 #include <libgnomeui/gnome-app-util.h>
 
 /*
@@ -67,8 +69,8 @@ void update(GtkWidget *widget, gpointer useless)
 	gtranslator_file_close(NULL, NULL);
 	
 	if (file_opened != FALSE) {
-		g_free(newfile);
-		g_free(command);
+		GTR_FREE(newfile);
+		GTR_FREE(command);
 		return;
 	}
 
@@ -116,6 +118,6 @@ void update(GtkWidget *widget, gpointer useless)
 	 * Parse the file again.
 	 */
 	gtranslator_parse_main(newfile);
-	g_free(command);
-	g_free(newfile);
+	GTR_FREE(command);
+	GTR_FREE(newfile);
 }

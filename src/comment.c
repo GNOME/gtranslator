@@ -22,6 +22,7 @@
 #include "nautilus-string.h"
 #include "parse.h"
 #include "utf8.h"
+#include "utils.h"
 
 #include <gtk/gtklabel.h>
 
@@ -79,7 +80,7 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	 */
 	if(comment->comment[0]!='#')
 	{
-		g_free(comment->comment);
+		GTR_FREE(comment->comment);
 		return NULL;
 	}
 	else
@@ -226,12 +227,12 @@ void gtranslator_comment_free(GtrComment **comment)
 {
 	if(GTR_COMMENT(*comment)->comment)
 	{
-		g_free(GTR_COMMENT(*comment)->comment);
-		g_free(GTR_COMMENT(*comment)->pure_comment);
-		g_free(GTR_COMMENT(*comment)->utf8_comment);
-		g_free(GTR_COMMENT(*comment)->pure_utf8_comment);
+		GTR_FREE(GTR_COMMENT(*comment)->comment);
+		GTR_FREE(GTR_COMMENT(*comment)->pure_comment);
+		GTR_FREE(GTR_COMMENT(*comment)->utf8_comment);
+		GTR_FREE(GTR_COMMENT(*comment)->pure_utf8_comment);
 		
-		g_free(*comment);
+		GTR_FREE(*comment);
 	}
 }
 

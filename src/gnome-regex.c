@@ -24,6 +24,7 @@
 #include <glib.h>
 
 #include "gnome-regex.h"
+#include "utils.h"
 
 #define DEFAULT_SIZE 96
 
@@ -64,7 +65,7 @@ static void
 free_element (GnomeRegexCache *rxc, int elt)
 {
 	if (rxc->regexs[elt]) {
-		g_free (rxc->regexs[elt]);
+		GTR_FREE (rxc->regexs[elt]);
 
 		/* We only want to try to free a pattern if we know it
 		   has been allocated.  Hence this is inside the
@@ -88,10 +89,10 @@ gnome_regex_cache_destroy (GnomeRegexCache *rxc)
 		free_element (rxc, i);
 	}
 
-	g_free (rxc->regexs);
-	g_free (rxc->patterns);
-	g_free (rxc->flags);
-	g_free (rxc);
+	GTR_FREE (rxc->regexs);
+	GTR_FREE (rxc->patterns);
+	GTR_FREE (rxc->flags);
+	GTR_FREE (rxc);
 }
 
 /**

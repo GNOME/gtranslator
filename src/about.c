@@ -82,9 +82,6 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 
 	author=gnome_href_new(url, umfo);
 
-	/*
-	 * Free the used gchars.
-	 */
 	g_free(umfo);
 	g_free(url);
 

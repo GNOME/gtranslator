@@ -69,7 +69,7 @@ void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
 	(msg)->msgstr=gtranslator_convert_string_to_utf8(msgstr,
 		po->header->charset);
 	
-	g_free(msgstr);
+	GTR_FREE(msgstr);
 }
 
 /*
@@ -85,7 +85,7 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
 	(msg)->msgstr=gtranslator_convert_string_from_utf8(msgstr,
 		po->header->charset);
 	
-	g_free(msgstr);
+	GTR_FREE(msgstr);
 }
 
 /*
@@ -105,16 +105,16 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	 * Convert the author name to UTF-8.
 	 */
 	author=gtranslator_convert_string_to_utf8(po->header->translator, po->header->charset);
-	g_free(po->header->translator);
+	GTR_FREE(po->header->translator);
 
 	po->header->translator=g_strdup(author);
-	g_free(author);
+	GTR_FREE(author);
 
 	/*
 	 * Convert the header comment to a GtrComment and get the UTF-8 version of it.
 	 */
 	header_comment=gtranslator_comment_new(po->header->comment);
-	g_free(po->header->comment);
+	GTR_FREE(po->header->comment);
 
 	po->header->comment=g_strdup(GTR_COMMENT(header_comment)->utf8_comment);
 	gtranslator_comment_free(&header_comment);
@@ -122,7 +122,7 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	/*
 	 * Now assign the new charset name: UTF-8 .-)
 	 */
-	g_free(po->header->charset);
+	GTR_FREE(po->header->charset);
 	po->header->charset=g_strdup("utf-8");
 }
 
@@ -141,7 +141,7 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 	 */
 	if(po->locale_charset)
 	{
-		g_free(po->header->charset);
+		GTR_FREE(po->header->charset);
 		po->header->charset=g_strdup(po->locale_charset);
 	}
 }
@@ -216,7 +216,7 @@ void gtranslator_utf8_set_gtk_entry_from_utf8_string(GtkWidget *entry,
 	plain_string=gtranslator_utf8_get_plain_string(&convert_me);
 	g_return_if_fail(plain_string!=NULL);
 	
-	g_free(convert_me);
+	GTR_FREE(convert_me);
 
 	gtk_entry_set_text(GTK_ENTRY(entry), plain_string);
 }
@@ -251,7 +251,7 @@ void gtranslator_utf8_set_gtk_text_from_utf8_string(GtkWidget *text,
 	plain_string=gtranslator_utf8_get_plain_string(&convert_me);
 	g_return_if_fail(plain_string!=NULL);
 
-	g_free(convert_me);
+	GTR_FREE(convert_me);
 
 	/*
 	 * We'll use our syntax highlighted insertion method also here .-)

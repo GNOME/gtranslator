@@ -30,6 +30,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "preferences.h"
+#include "utils.h"
 
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
@@ -73,7 +74,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 			node->xmlChildrenNode, 1); \
 		g_strstrip(string); \
 		scheme->x=g_strdup(string); \
-		g_free(string); \
+		GTR_FREE(string); \
 		} \
 	}
 
@@ -135,7 +136,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 		GetData(keyword, "keyword");
 		GetData(spell_error, "spell_error");
 				
-		node=node->next;
+		GTR_ITER(node);
 	}
 
 	xmlFreeDoc(xmldoc);
@@ -278,7 +279,7 @@ GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node)
 	 */ 
 	while(*node!=NULL && g_strcasecmp((*node)->name, "author"))
 	{
-		*node=(*node)->next;
+		GTR_ITER(*node);
 	}
 
 	if(!*node)
@@ -326,11 +327,11 @@ void gtranslator_color_scheme_free_infos(GtrColorSchemeInformations **infos)
 {
 	if(*infos)
 	{
-		g_free((*infos)->name);
-		g_free((*infos)->version);
-		g_free((*infos)->author);
-		g_free((*infos)->author_email);
-		g_free(*infos);
+		GTR_FREE((*infos)->name);
+		GTR_FREE((*infos)->version);
+		GTR_FREE((*infos)->author);
+		GTR_FREE((*infos)->author_email);
+		GTR_FREE(*infos);
 	}
 }
 
@@ -346,8 +347,8 @@ void gtranslator_color_scheme_free(GtrColorScheme **scheme)
 			gtranslator_color_scheme_free_infos(&(*scheme)->info);
 		}
 		
-		g_free((*scheme)->fg);
-		g_free((*scheme)->bg);
+		GTR_FREE((*scheme)->fg);
+		GTR_FREE((*scheme)->bg);
 
 		/*
 		 * The "text_bg" attribute for the colorschemes is quite new, therefore
@@ -355,19 +356,19 @@ void gtranslator_color_scheme_free(GtrColorScheme **scheme)
 		 */
 		if((*scheme)->text_bg)
 		{
-			g_free((*scheme)->text_bg);
+			GTR_FREE((*scheme)->text_bg);
 		}
 		
-		g_free((*scheme)->special_char);
-		g_free((*scheme)->hotkey);
-		g_free((*scheme)->c_format);
-		g_free((*scheme)->number);
-		g_free((*scheme)->punctuation);
-		g_free((*scheme)->special);
-		g_free((*scheme)->address);
-		g_free((*scheme)->keyword);
-		g_free((*scheme)->spell_error);
-		g_free(*scheme);
+		GTR_FREE((*scheme)->special_char);
+		GTR_FREE((*scheme)->hotkey);
+		GTR_FREE((*scheme)->c_format);
+		GTR_FREE((*scheme)->number);
+		GTR_FREE((*scheme)->punctuation);
+		GTR_FREE((*scheme)->special);
+		GTR_FREE((*scheme)->address);
+		GTR_FREE((*scheme)->keyword);
+		GTR_FREE((*scheme)->spell_error);
+		GTR_FREE(*scheme);
 	}
 }
 

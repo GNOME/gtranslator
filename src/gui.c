@@ -136,7 +136,7 @@ static gint 	update_count=0;
  */
 static gint 	sidebar_pane_position=82;
 static gint 	content_pane_position=12;
-static gint	table_pane_position=50;
+static gint	table_pane_position=82;
 
 /*
  * The popup-menu.
@@ -432,6 +432,11 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
 
 	/*
+	 * Save the messages table state.
+	 */
+	gtranslator_messages_table_save_state();
+
+	/*
 	 * Shutdown our internal learning system.
 	 */
 	if(gtranslator_learn_initialized())
@@ -459,7 +464,7 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Free our used content area variable on exit .-)
 	 */
-	g_free(extra_content_view);
+	GTR_FREE(extra_content_view);
 
 	/*
 	 * Shutdown the eventually (non-)initialized stuff from GnomeVFS.
@@ -562,12 +567,9 @@ void gtranslator_application_bar_update(gint pos)
 	/*
 	 * And free the allocated string.
 	 */
-	g_free(str);
+	GTR_FREE(str);
 
-	if(status)
-	{
-		g_free(status);
-	}
+	GTR_FREE(status);
 }
 
 /*
@@ -696,7 +698,7 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 	
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
 
-	g_free(result);
+	GTR_FREE(result);
 }
 
 void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
@@ -711,7 +713,7 @@ void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 	gtranslator_utils_invert_dot(text);
 	gtk_selection_data_set(selection_data, selection_data->type,
 			       8, text, strlen(text));
-	g_free(text);
+	GTR_FREE(text);
 }
 
 /*

@@ -23,6 +23,7 @@
 #include "gtkspell.h"
 #include "stylistics.h"
 #include "prefs.h"
+#include "utils.h"
 
 #include <gtk/gtk.h>
 
@@ -352,7 +353,7 @@ static void change_color(GtkText *gtktext,
 	gtk_signal_handler_unblock_by_func(GTK_OBJECT(gtktext), 
 			GTK_SIGNAL_FUNC(entry_insert_cb), NULL);
 	gtk_text_thaw(gtktext);
-	g_free(newtext);
+	GTR_FREE(newtext);
 }
 
 static gboolean check_at(GtkText *gtktext, int from_pos) {
@@ -550,7 +551,7 @@ static void popup_menu(GtkText *gtktext, GdkEventButton *eb) {
 		gtk_menu_popup(make_menu(list, gtktext), NULL, NULL, NULL, NULL,
 				eb->button, eb->time);
 		for (l = list; l != NULL; l = l->next)
-			g_free(l->data);
+			GTR_FREE(l->data);
 		g_list_free(list);
 	}
 }

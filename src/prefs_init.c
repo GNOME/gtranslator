@@ -19,6 +19,7 @@
 
 #include "parse.h"
 #include "prefs.h"
+#include "utils.h"
 
 /*
  * Sets up some useful options as the user runs the first time gtranslator.
@@ -40,42 +41,43 @@ void gtranslator_preferences_init_default_values()
 	if(!date)
 	{
 		/*
-		 * Useful options which shoule be set to TRUE.
+		 * Useful options which should be set to TRUE.
 		 */ 
 		gtranslator_config_init();
+		gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", TRUE);
+		gtranslator_config_set_bool("toggles/check_recent_files", TRUE);
+		gtranslator_config_set_bool("toggles/do_not_save_unchanged_files", TRUE);
+		gtranslator_config_set_bool("toggles/keep_obsolete", TRUE);
+		gtranslator_config_set_bool("toggles/sweep_compile_file", FALSE);
+		
+		/*
+		 * GUI related default values.
+		 */
 		gtranslator_config_set_bool("toggles/save_geometry", TRUE);
-		gtranslator_config_set_bool(
-			"toggles/set_non_fuzzy_if_changed", TRUE);
-		gtranslator_config_set_bool(
-			"toggles/check_recent_files", TRUE);
-		gtranslator_config_set_bool(
-			"toggles/do_not_save_unchanged_files", TRUE);
-		gtranslator_config_set_bool(
-			"toggles/use_dot_char", TRUE);
-		gtranslator_config_set_bool(
-			"toggles/keep_obsolete", FALSE);
-		gtranslator_config_set_bool(
-			"toggles/show_sidebar", TRUE);
-		gtranslator_config_set_bool(
-			"toggles/sweep_compile_file", FALSE);
+		gtranslator_config_set_bool("toggles/use_dot_char", TRUE);
+		gtranslator_config_set_bool("toggles/show_sidebar", TRUE);
+		gtranslator_config_set_bool("toggles/enable_popup_menu", TRUE);
+		gtranslator_config_set_bool("toggles/use_update_function", TRUE);
+		
+		/*
+		 * Startup saneness should set this also to TRUE.
+		 */
+		gtranslator_config_set_bool("toggles/fill_header", TRUE);
+		gtranslator_config_set_bool("find/case_sensitive", FALSE);
 
 		/*
 		 * Autosave options; it should be on, with suffix "autosave" 
 		 *  and timeout on 5 minutes.
 		 */
 		gtranslator_config_set_bool("toggles/autosave", TRUE);
-		gtranslator_config_set_bool("toggles/autosave_with_suffix",
-			TRUE);
-		gtranslator_config_set_string("informations/autosave_suffix", 
-			"autosave");
-		gtranslator_config_set_float("informations/autosave_timeout",
-			5.0);
+		gtranslator_config_set_bool("toggles/autosave_with_suffix", TRUE);
+		gtranslator_config_set_string("informations/autosave_suffix", "autosave");
+		gtranslator_config_set_float("informations/autosave_timeout", 5.0);
 
 		/*
 		 * We do want maximally 10 history entries per default.
 		 */
-		gtranslator_config_set_float("informations/max_history_entries",
-			10.0); 
+		gtranslator_config_set_float("informations/max_history_entries", 10.0); 
 
 		/*
 		 * Initialize the default highlight colors.
@@ -91,7 +93,7 @@ void gtranslator_preferences_init_default_values()
 
 	}
 
-	g_free(date);
+	GTR_FREE(date);
 }
 
 /*

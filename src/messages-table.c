@@ -133,7 +133,7 @@ static void free_value_function(ETreeModel *model, int column,
 	case COL_COMMENT:
 	case COL_STATUS:
 		if (value)
-			g_free (value);
+			GTR_FREE (value);
 		break;
 	case COL_NUM:
 		break;
@@ -365,7 +365,7 @@ GtkWidget *gtranslator_messages_table_new()
 			statusfile)
 		);
 
-	g_free(statusfile);
+	GTR_FREE(statusfile);
 	
 	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
 	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
@@ -460,7 +460,7 @@ void gtranslator_messages_table_save_state()
 	statusfilename=gtranslator_utils_get_messages_table_state_file_name();
 	e_tree_save_state (E_TREE (tree), statusfilename);
 
-	g_free(statusfilename);
+	GTR_FREE(statusfilename);
 }
 
 /*

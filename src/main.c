@@ -275,7 +275,7 @@ int main(int argc, char *argv[])
 		gtranslator_rescue_file_dialog();
 	}
 
-	g_free(sp_file);
+	GTR_FREE(sp_file);
 	
 	/*
 	 * Load the applied color scheme from the prefs and check it; if it

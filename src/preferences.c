@@ -23,6 +23,7 @@
 #endif
 
 #include "preferences.h"
+#include "utils.h"
 
 #include <time.h>
 
@@ -84,7 +85,7 @@ gchar *gtranslator_config_get_string(gchar *path)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	str = gconf_client_get_string(client, private_path, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	str = gnome_config_get_string(path);
 	#endif
@@ -99,7 +100,7 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_string(client, private_path, value, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	gnome_config_set_string(path, value);
 	#endif
@@ -116,7 +117,7 @@ gint gtranslator_config_get_int(gchar *path)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	i = gconf_client_get_int(client, private_path, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	i = gnome_config_get_int(path);
 	#endif
@@ -130,7 +131,7 @@ void gtranslator_config_set_int(gchar *path, gint value)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_int(client, private_path, value, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	gnome_config_set_int(path, value);
 	#endif
@@ -147,7 +148,7 @@ gboolean gtranslator_config_get_bool(gchar *path)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	b = gconf_client_get_bool(client, private_path, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	b = gnome_config_get_bool(path);
 	#endif
@@ -161,7 +162,7 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_bool(client, private_path, value, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	gnome_config_set_bool(path, value);
 	#endif
@@ -178,7 +179,7 @@ gfloat gtranslator_config_get_float(gchar *path)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	f = gconf_client_get_float(client,  private_path, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	f = gnome_config_get_float(path);
 	#endif
@@ -192,7 +193,7 @@ void gtranslator_config_set_float(gchar *path, gfloat value)
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_float(client, private_path, value, NULL);
-	g_free(private_path);
+	GTR_FREE(private_path);
 	#else
 	gnome_config_set_float(path, value);
 	#endif

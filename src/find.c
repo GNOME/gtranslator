@@ -29,6 +29,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "sidebar.h"
+#include "utils.h"
 #include "views.h"
 
 #include <string.h>
@@ -216,11 +217,11 @@ void gtranslator_find(GtkWidget * widget, gpointer what)
 		if (strlen(what) == 0) {
 			error = g_strdup_printf(_("Please enter a search string"));
 			gnome_app_message(GNOME_APP(gtranslator_application), error);
-			g_free(error);
+			GTR_FREE(error);
 			return;
 		}
 		target = gnome_regex_cache_compile(rxc, what, eflags);
-		g_free(pattern);
+		GTR_FREE(pattern);
 		pattern = what;
 	}
 	begin = po->current;
@@ -232,7 +233,7 @@ void gtranslator_find(GtkWidget * widget, gpointer what)
 		return;
 	error = g_strdup_printf(_("Could not find\n\"%s\""), pattern);
 	gnome_app_message(GNOME_APP(gtranslator_application), error);
-	g_free(error);
+	GTR_FREE(error);
 }
 
 void gtranslator_update_regex_flags(void)

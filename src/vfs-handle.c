@@ -18,6 +18,7 @@
  */
 
 #include "nautilus-string.h"
+#include "utils.h"
 #include "vfs-handle.h"
 
 #include <libgnome/gnome-defs.h>
@@ -97,7 +98,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 				break;
 		}
 		
-		g_free(temp);
+		GTR_FREE(temp);
 
 		return localfilename->str;
 	}
@@ -136,7 +137,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 		destination=gnome_vfs_uri_new(g_strdup_printf("%s/%s", destdir,
 			gnome_vfs_uri_get_basename(file)));
 
-		g_free(destdir);
+		GTR_FREE(destdir);
 		
 		/*
 		 * And now the URI/XFER action...

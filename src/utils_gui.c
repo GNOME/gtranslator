@@ -21,6 +21,7 @@
 #include "gui.h"
 #include "nautilus-string.h"
 #include "prefs.h"
+#include "utils.h"
 #include "utils_gui.h"
 
 #include <libgnome/gnome-url.h>
@@ -73,7 +74,7 @@ void gtranslator_utils_save_geometry(void)
 		gint x, y, w, h;
 		gstr = gnome_geometry_string(gtranslator_application->window);
 		gnome_parse_geometry(gstr, &x, &y, &w, &h);
-		g_free(gstr);
+		GTR_FREE(gstr);
 		gtranslator_config_init();
 		gtranslator_config_set_int("geometry/x", x);
 		gtranslator_config_set_int("geometry/y", y);
@@ -391,8 +392,8 @@ gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
 		 */
 		gnome_app_error(GNOME_APP(gtranslator_application), error_message);
 		
-		g_free(resultfilename);
-		g_free(error_message);
+		GTR_FREE(resultfilename);
+		GTR_FREE(error_message);
 
 		return TRUE;
 	}
@@ -426,7 +427,7 @@ gboolean gtranslator_utils_check_program(const gchar *program_name,
 		}
 
 		gnome_app_warning(GNOME_APP(gtranslator_application), warning_message);
-		g_free(warning_message);
+		GTR_FREE(warning_message);
 
 		return FALSE;
 	}

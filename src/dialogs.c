@@ -87,7 +87,7 @@ GtkWidget * gtranslator_error(char *format, ...)
 	error = g_strdup_vprintf(format, ap);
 	va_end(ap);
 	w = gnome_app_error(GNOME_APP(gtranslator_application), error);
-	g_free(error);
+	GTR_FREE(error);
 	return w;
 }
 
@@ -160,7 +160,7 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 		gtk_file_selection_set_filename(GTK_FILE_SELECTION(dialog), filename);
 		gtranslator_file_dialogs_store_directory(filename);
 
-		g_free(filename);
+		GTR_FREE(filename);
 	}
 	
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
@@ -202,7 +202,7 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 				       GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gtranslator_dialog_show(&dialog, "gtranslator -- save the current file?");
 	reply = gnome_dialog_run(GNOME_DIALOG(dialog));
-	g_free(question);
+	GTR_FREE(question);
 	if (reply == GNOME_YES)
 		gtranslator_save_current_file_dialog(NULL, NULL);
 	else if (reply == GNOME_NO)
@@ -336,7 +336,7 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 		}
 	}
 
-	g_free(directory);
+	GTR_FREE(directory);
 }
 
 /*
@@ -354,7 +354,7 @@ void gtranslator_file_dialogs_store_directory(const gchar *filename)
 	gtranslator_config_set_string("informations/last_directory", directory);
 	gtranslator_config_close();
 
-	g_free(directory);
+	GTR_FREE(directory);
 }
 
 /*
@@ -678,8 +678,8 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 				g_list_position(po->messages, po->current));
 		}
 
-		g_free(findme);
-		g_free(replaceme);
+		GTR_FREE(findme);
+		GTR_FREE(replaceme);
 		
 		gtranslator_replace_run(rpl);
 	}
@@ -842,7 +842,7 @@ Saying \"No\" will delete the crash recovery file."),
 	
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 	
-	g_free(recovery_message);
+	GTR_FREE(recovery_message);
 
 	file=gtranslator_utils_get_crash_file_name();
 	
@@ -865,8 +865,8 @@ Saying \"No\" will delete the crash recovery file."),
 		unlink(file);
 	}
 
-	g_free(original_filename);
-	g_free(file);
+	GTR_FREE(original_filename);
+	GTR_FREE(file);
 }
 
 /*
@@ -971,7 +971,7 @@ void gtranslator_query_dialog(void)
 			gnome_app_warning(GNOME_APP(gtranslator_application),
 				_("No query string given!"));
 
-			g_free(query_text);
+			GTR_FREE(query_text);
 			gnome_dialog_close(GNOME_DIALOG(dialog));
 		}
 		else
@@ -1069,7 +1069,7 @@ Would you like to insert it into the translation?"),
 				gtranslator_dialog_show(&condialog, "gtranslator -- query result");
 				hehue=gnome_dialog_run_and_close(GNOME_DIALOG(condialog));
 				
-				g_free(resulttext);
+				GTR_FREE(resulttext);
 				
 				if(hehue==GNOME_YES)
 				{
@@ -1109,7 +1109,7 @@ Would you like to insert it into the translation?"),
 						_("Query's result translation is already there!"));
 					}
 
-					g_free(content);
+					GTR_FREE(content);
 				}
 			}
 		}

@@ -102,7 +102,7 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 		*email=nautilus_str_strip_substring_and_after(tempbazooka, " ");
 		g_strreverse(*email);
 		
-		g_free(tempbazooka);
+		GTR_FREE(tempbazooka);
 	}
 	else
 	{
@@ -277,8 +277,8 @@ Content-Transfer-Encoding: %s\n",
 		h->charset,
 		h->encoding);
 
-	g_free(group);
-	g_free(version);
+	GTR_FREE(group);
+	GTR_FREE(version);
 
 	/*
 	 * Just copy the comment, and make sure it ends with endline
@@ -291,7 +291,7 @@ Content-Transfer-Encoding: %s\n",
 	{
 		gchar *comchar=g_strdup_printf("%s\n", h->comment);
 		msg->comment = gtranslator_comment_new(comchar);
-		g_free(comchar);
+		GTR_FREE(comchar);
 	}
 	
 	return msg;
@@ -312,7 +312,7 @@ void gtranslator_header_update(GtrHeader * h)
 	now = time(NULL);
 	now_here = localtime(&now);
 	strftime(t, 22, "%Y-%m-%d %H:%M%z", now_here);
-	g_free(h->po_date);
+	GTR_FREE(h->po_date);
 	h->po_date = g_strdup(t);
 
 	/*
@@ -329,25 +329,25 @@ void gtranslator_header_free(GtrHeader * h)
 {
 	if (h == NULL)
 		return;
-	g_free(h->comment);
-	g_free(h->prj_name);
-	g_free(h->prj_version);
-	g_free(h->pot_date);
-	g_free(h->po_date);
-	g_free(h->translator);
-	g_free(h->tr_email);
-	g_free(h->language);
-	g_free(h->lg_email);
-	g_free(h->mime_version);
-	g_free(h->charset);
-	g_free(h->encoding);
+	GTR_FREE(h->comment);
+	GTR_FREE(h->prj_name);
+	GTR_FREE(h->prj_version);
+	GTR_FREE(h->pot_date);
+	GTR_FREE(h->po_date);
+	GTR_FREE(h->translator);
+	GTR_FREE(h->tr_email);
+	GTR_FREE(h->language);
+	GTR_FREE(h->lg_email);
+	GTR_FREE(h->mime_version);
+	GTR_FREE(h->charset);
+	GTR_FREE(h->encoding);
 
 	if(h->generator)
 	{
-		g_free(h->generator);
+		GTR_FREE(h->generator);
 	}
 	
-	g_free(h);
+	GTR_FREE(h);
 }
 
 static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpointer useless)
@@ -355,7 +355,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	GtrHeader *ph = po->header;
 	if (page_num != -1)
 		return;
-#define update(value,widget) g_free(value);\
+#define update(value,widget) GTR_FREE(value);\
 	value = gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 	update(ph->prj_name, prj_name);
 	update(ph->prj_version, prj_version);
@@ -375,7 +375,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		{
 			if(ph->translator)
 			{
-				g_free(ph->translator);
+				GTR_FREE(ph->translator);
 			}
 			
 			ph->translator=gtranslator_utf8_get_gtk_entry_as_utf8_string(translator);
@@ -392,14 +392,14 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		update(ph->encoding, GTK_COMBO(enc_combo)->entry);
 #undef update
 	} else {
-#define replace(what,with,entry) g_free(what); what = g_strdup(with);\
+#define replace(what,with,entry) GTR_FREE(what); what = g_strdup(with);\
 	gtk_entry_set_text(GTK_ENTRY(entry), with);
 	
 		if(po->utf8)
 		{
 			if(ph->translator)
 			{
-				g_free(ph->translator);
+				GTR_FREE(ph->translator);
 			}
 			
 			ph->translator=g_strdup(author);
@@ -712,7 +712,7 @@ void substitute(gchar **item, const gchar *bad, const gchar *good)
 	   (!strcmp(*item, bad)))
 	{
 		/* Replace it with copy of good one */
-		g_free(*item);
+		GTR_FREE(*item);
 		*item=g_strdup(good);
 		have_changed=TRUE;
 	}
@@ -723,7 +723,7 @@ void replace_substring(gchar **item, const gchar *bad, const gchar *good)
 {
 	gchar *old=*item;
 	*item=nautilus_str_replace_substring(old, bad, good);
-	g_free(old);
+	GTR_FREE(old);
 }
 
 /*
@@ -763,7 +763,7 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 
 		year = get_current_year();
 		replace_substring(&header->comment, "YEAR", year);
-		g_free(year);
+		GTR_FREE(year);
 
 		/*
 		 * Fill h->po_date with current time 
@@ -787,7 +787,7 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 		
 		replace_substring(&header->comment,
 				"SOME DESCRIPTIVE TITLE.", title);
-		g_free(title);
+		GTR_FREE(title);
 	}
 
 	return have_changed;
@@ -829,7 +829,7 @@ GtrHeader *gtranslator_header_create_from_prefs(void)
 		h->tr_email,
 		year);
 
-	g_free(year);
+	GTR_FREE(year);
 	
 	return h;
 }

@@ -32,6 +32,7 @@
 #include "prefs.h"
 #include "syntax.h"
 #include "utf8.h"
+#include "utils.h"
 #include "utils_gui.h"
 
 #include <string.h>
@@ -157,7 +158,7 @@ void gtranslator_message_show(GList * list_item)
 		
 		gtranslator_syntax_insert_text(text_box, temp);
 		
-		g_free(temp);
+		GTR_FREE(temp);
 
 		if (msg->msgstr) {
 			if(po->utf8)
@@ -173,7 +174,7 @@ void gtranslator_message_show(GList * list_item)
 			
 			gtranslator_syntax_insert_text(trans_box, temp);
 			
-			g_free(temp);
+			GTR_FREE(temp);
 		}
 	} else {
 		gtranslator_syntax_insert_text(text_box, msg->msgid);
@@ -263,7 +264,7 @@ void gtranslator_message_update(void)
 			}
 		}
 		
-		g_free(msg->msgstr);
+		GTR_FREE(msg->msgstr);
 
 		if(po->utf8)
 		{
@@ -416,8 +417,8 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 
 		gtranslator_comment_update(&msg->comment, comchar);
 		
-		g_free(comment);
-		g_free(comchar);
+		GTR_FREE(comment);
+		GTR_FREE(comchar);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
 		po->fuzzy--;
@@ -437,7 +438,7 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 void gtranslator_message_status_set_sticky (GtrMsg * msg, gboolean on)
 {
 	if (on) {
-		g_free(msg->msgstr);
+		GTR_FREE(msg->msgstr);
 		msg->msgstr = g_strdup(msg->msgid);
 		
 		/*
@@ -446,7 +447,7 @@ void gtranslator_message_status_set_sticky (GtrMsg * msg, gboolean on)
 		gtranslator_message_status_set_fuzzy(msg, FALSE);
 		msg->status |= GTR_MSG_STATUS_STICK;
 	} else {
-		g_free(msg->msgstr);
+		GTR_FREE(msg->msgstr);
 		msg->msgstr = g_strdup("");
 		msg->status &= ~GTR_MSG_STATUS_STICK;
 	}
@@ -458,8 +459,8 @@ void gtranslator_message_status_set_sticky (GtrMsg * msg, gboolean on)
  */
 void gtranslator_message_free(gpointer data, gpointer useless)
 {
-	g_free(GTR_MSG(data)->comment);
-	g_free(GTR_MSG(data)->msgid);
-	g_free(GTR_MSG(data)->msgstr);
-	g_free(data);
+	GTR_FREE(GTR_MSG(data)->comment);
+	GTR_FREE(GTR_MSG(data)->msgid);
+	GTR_FREE(GTR_MSG(data)->msgstr);
+	GTR_FREE(data);
 }

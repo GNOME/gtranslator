@@ -118,7 +118,7 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 
 	while(node && nautilus_strcasecmp(node->name, "value"))
 	{
-		node=node->next;
+		GTR_ITER(node);
 	}
 
 	/*
@@ -135,7 +135,7 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 	 */
 	while(node && nautilus_strcasecmp(node->name, "translation"))
 	{
-		node=node->next;
+		GTR_ITER(node);
 	}
 
 	/*
@@ -151,7 +151,7 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 		 */
 		while(node && nautilus_strcasecmp(node->name, "value"))
 		{
-			node=node->next;
+			GTR_ITER(node);
 		}
 
 		/*
@@ -172,8 +172,8 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 		g_hash_table_insert(gtranslator_learn_buffer->hash, 
 			g_strdup(original), g_strdup(translation));
 
-		g_free(original);
-		g_free(translation);
+		GTR_FREE(original);
+		GTR_FREE(translation);
 	}
 }
 
@@ -182,15 +182,8 @@ static void gtranslator_learn_buffer_hash_from_current_node()
  */
 static void gtranslator_learn_buffer_free_hash_entry(gpointer key, gpointer value, gpointer useless)
 {
-	if(key)
-	{
-		g_free(key);
-	}
-	
-	if(value)
-	{
-		g_free(value);
-	}
+	GTR_FREE(key);
+	GTR_FREE(value);
 }
 
 /*
@@ -236,16 +229,10 @@ static void gtranslator_learn_buffer_set_umtf_date()
 	 */
 	strftime(date_string, 20, "%Y-%m-%d %H:%M:%S", time_struct);
 
-	/*
-	 * Free any old serial date in our structure.
-	 */
-	if(gtranslator_learn_buffer->serial_date)
-	{
-		g_free(gtranslator_learn_buffer->serial_date);
-	}
-	
+	GTR_FREE(gtranslator_learn_buffer->serial_date);
 	gtranslator_learn_buffer->serial_date=g_strdup(date_string);
-	g_free(date_string);
+	
+	GTR_FREE(date_string);
 }
 
 /*
@@ -347,7 +334,7 @@ void gtranslator_learn_init()
 					sscanf(contentstring, "%i", 
 						&gtranslator_learn_buffer->serial);
 					
-					g_free(contentstring);
+					GTR_FREE(contentstring);
 				}
 				else
 				{
@@ -396,7 +383,8 @@ void gtranslator_learn_init()
 					 * Increment the index'/resources count of the learn buffer.
 					 */
 					gtranslator_learn_buffer->index++;
-					resources_node=resources_node->next;
+					
+					GTR_ITER(resources_node);
 				}
 			}
 			
@@ -406,7 +394,7 @@ void gtranslator_learn_init()
 				gtranslator_learn_buffer_hash_from_current_node();
 			}
 
-			node=node->next;
+			GTR_ITER(node);
 		}
 
 		xmlFreeDoc(gtranslator_learn_buffer->doc);
@@ -503,7 +491,7 @@ void gtranslator_learn_shutdown()
 	 */
 	serial_node=xmlNewChild(root_node, NULL, "serial", serial_string);
 	xmlSetProp(serial_node, "date", gtranslator_learn_buffer->serial_date);
-	g_free(serial_string);
+	GTR_FREE(serial_string);
 
 	/*
 	 * Write the <index> area -- if possible with contents.
@@ -545,7 +533,7 @@ void gtranslator_learn_shutdown()
 			
 			e_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
 			
-			gtranslator_learn_buffer->resources=gtranslator_learn_buffer->resources->next;
+			GTR_ITER(gtranslator_learn_buffer->resources);
 		}
 	}
 	
@@ -572,9 +560,9 @@ void gtranslator_learn_shutdown()
 
 	g_list_free(gtranslator_learn_buffer->resources);
 
-	g_free(gtranslator_learn_buffer->serial_date);
-	g_free(gtranslator_learn_buffer->filename);
-	g_free(gtranslator_learn_buffer);
+	GTR_FREE(gtranslator_learn_buffer->serial_date);
+	GTR_FREE(gtranslator_learn_buffer->filename);
+	GTR_FREE(gtranslator_learn_buffer);
 }
 
 /*

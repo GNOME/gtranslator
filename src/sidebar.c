@@ -27,6 +27,7 @@
 #include "sidebar.h"
 #include "syntax.h"
 #include "undo.h"
+#include "utils.h"
 #include "views.h"
 
 #include <libgnome/gnome-util.h>
@@ -224,7 +225,7 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 		 */ 
 		gdk_pixbuf_ref(icon);
 		
-		g_free(pixmap_filename);
+		GTR_FREE(pixmap_filename);
 		return icon;
 	}
 	else

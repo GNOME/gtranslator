@@ -22,6 +22,7 @@
 #endif
 
 #include "convert.h"
+#include "utils.h"
 
 #include <iconv.h>
 
@@ -81,7 +82,7 @@ gchar *gtranslator_convert_string(const gchar *string,
 		&output_string, &output_length);
 	#endif
 
-	g_free(input_string_pointer);
+	GTR_FREE(input_string_pointer);
 	
 	iconv_close(iconv_base);
 

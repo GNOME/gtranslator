@@ -26,6 +26,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "replace.h"
+#include "utils.h"
 
 #include <libgnomeui/libgnomeui.h>
 
@@ -89,9 +90,9 @@ void gtranslator_replace_free(GtrReplace **replace)
 {
 	g_return_if_fail(*replace!=NULL);
 
-	g_free((*replace)->string);
-	g_free((*replace)->replace_string);
-	g_free(*replace);
+	GTR_FREE((*replace)->string);
+	GTR_FREE((*replace)->replace_string);
+	GTR_FREE(*replace);
 }
 
 /*
@@ -248,7 +249,7 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 					 * Set the original string to the new form if
 					 *  the replace was successful.
 					 */
-					g_free(*string);
+					GTR_FREE(*string);
 					*string=nstring;
 				}
 				
@@ -256,7 +257,6 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 				 * Hope we'd make a replace, therefore we do 
 				 *  increment the replaced_count.
 				 */
-				
 				replaced_count++;
 			}
 		}

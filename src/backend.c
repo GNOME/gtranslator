@@ -36,17 +36,14 @@
 /*
  * Internal prototypes:
  */
-GtrBackendInformations *read_xml_descriptor(const gchar *filename);
-
-/*
- * Utility function to do all the split up.
- */
-GList *split_up_field(const gchar *content);
+static GtrBackendInformations *gtranslator_backend_read_xml_descriptor(const gchar *filename);
+static void gtranslator_backend_free_informations(GtrBackendInformations *informations);
+static GList *gtranslator_backend_split_up_information_fields(const gchar *content);
 
 /*
  * Break up the plain line content into a list, a sorted list of elements.
  */
-GList *split_up_field(const gchar *content)
+static GList *gtranslator_backend_split_up_information_fields(const gchar *content)
 {
 	GList *list=NULL;
 	gchar **array;
@@ -87,7 +84,7 @@ GList *split_up_field(const gchar *content)
 /*
  * Read in the xml descriptor file from the given file.
  */
-GtrBackendInformations *read_xml_descriptor(const gchar *filename)
+static GtrBackendInformations *gtranslator_backend_read_xml_descriptor(const gchar *filename)
 {
 	GtrBackendInformations *infos=g_new0(GtrBackendInformations, 1);
 	xmlDocPtr doc;
@@ -104,7 +101,7 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 			{ \
 				g_strstrip(value); \
 				infos->field=g_strdup(value); \
-				g_free(value); \
+				GTR_FREE(value); \
 			} \
 			else \
 			{ \
@@ -178,7 +175,7 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 				infos->compilable=FALSE;
 			}
 			
-			g_free(value);
+			GTR_FREE(value);
 		}
 
 		/*
@@ -192,9 +189,9 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 			 * Break up the supplied filenames into the single 
 			 *  elements and set it up as a list.
 			 */
-			infos->filenames=split_up_field(value);
+			infos->filenames=gtranslator_backend_split_up_information_fields(value);
 			
-			g_free(value);
+			GTR_FREE(value);
 		}
 		
 		/*
@@ -207,12 +204,12 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 			/*
 			 * Get the extensions into the corresponding list.
 			 */
-			infos->extensions=split_up_field(value);
+			infos->extensions=gtranslator_backend_split_up_information_fields(value);
 			
-			g_free(value);
+			GTR_FREE(value);
 		}
 		
-		node=node->next;
+		GTR_ITER(node);
 	}
 
 	/*
@@ -223,12 +220,12 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 		gchar *temp;
 
 		temp=g_strdup(infos->modulename);
-		g_free(infos->modulename);
+		GTR_FREE(infos->modulename);
 
 		infos->modulename=g_strdup_printf("%s/%s/%s", 
 			g_dirname(filename), infos->name, temp);
 
-		g_free(temp);
+		GTR_FREE(temp);
 	}
 
 	return infos;
@@ -240,7 +237,6 @@ GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 void gtranslator_backend_add(const gchar *filename)
 {
 	GtrBackend 	*backend;
-	GModule		*module;
 	gpointer	load_function, save_function, save_as_function;
 
 	/*
@@ -251,21 +247,21 @@ void gtranslator_backend_add(const gchar *filename)
 	g_return_if_fail(filename!=NULL);
 
 	backend=g_new0(GtrBackend, 1);
-	backend->info=read_xml_descriptor(filename);
+	backend->info=gtranslator_backend_read_xml_descriptor(filename);
 	g_return_if_fail(backend->info!=NULL);
 
 	/*
 	 * Load the GModule handle for the given file.
 	 */
-	module=g_module_open(backend->info->modulename, G_MODULE_BIND_LAZY);
-	g_return_if_fail(module!=NULL);
+	backend->module=g_module_open(backend->info->modulename, G_MODULE_BIND_LAZY);
+	g_return_if_fail(backend->module!=NULL);
 
 	/*
 	 * Load all the symbols/functions from the backend module.
 	 */
-	if(g_module_symbol(module, "backend_open", &load_function) &&
-		g_module_symbol(module, "backend_save", &save_function) &&
-		g_module_symbol(module, "backend_save_as", &save_as_function))
+	if(g_module_symbol(backend->module, "backend_open", &load_function) &&
+		g_module_symbol(backend->module, "backend_save", &save_function) &&
+		g_module_symbol(backend->module, "backend_save_as", &save_as_function))
 	{
 		/*
 		 * Assign the resolved symbol functions to the backend's own
@@ -320,11 +316,40 @@ gboolean gtranslator_backend_open_all_backends(const gchar *directory)
 }
 
 /*
+ * Free up the informations about the backend.
+ */
+static void gtranslator_backend_free_informations(GtrBackendInformations *informations)
+{
+	g_return_if_fail(informations!=NULL);
+	
+	GTR_FREE(informations->modulename);
+	GTR_FREE(informations->name);
+	GTR_FREE(informations->description);
+	GTR_FREE(informations->compile_command);
+
+	gtranslator_utils_free_list(informations->extensions);
+	gtranslator_utils_free_list(informations->filenames);
+}
+
+/*
  * Remove the given backend module.
  */
-gboolean gtranslator_backend_remove(GtrBackend **backend)
+gboolean gtranslator_backend_free(GtrBackend *backend)
 {
 	g_return_val_if_fail(backend!=NULL, FALSE);
+
+	/*
+	 * Free the backend informations if they've survived till now .-)
+	 */
+	if(GTR_BACKEND(backend)->info)
+	{
+		gtranslator_backend_free_informations(backend->info);
+	}
+	
+	/*
+	 * Close the used GModule.
+	 */
+	g_module_close(backend->module);
 
 	return TRUE;
 }
@@ -345,7 +370,7 @@ gboolean gtranslator_backend_remove_all_backends(void)
 	else
 	{
 		g_list_foreach(backends, (GFunc) 
-			gtranslator_backend_remove, NULL);
+			gtranslator_backend_free, NULL);
 
 		return TRUE;
 	}
@@ -368,9 +393,9 @@ gboolean gtranslator_backend_open(gchar *filename)
 	}
 
 	/*
-	 * Operate on a local copy of the backends list.
+	 * Operate on a local version of the backends list.
 	 */
-	mybackends=g_list_copy(backends);
+	mybackends=backends;
 	
 	while(mybackends!=NULL)
 	{
@@ -378,10 +403,11 @@ gboolean gtranslator_backend_open(gchar *filename)
 		 * Look if the filename matches the filenames supported by the
 		 *  backend module.
 		 */
-		if(GTR_BACKEND(mybackends->data)->info->filenames && 
+		if(mybackends->data && GTR_BACKEND(mybackends->data)->info->filenames &&
 			(gtranslator_utils_stringlist_strcasecmp(
-			GTR_BACKEND(mybackends->data)->info->filenames,
-				g_basename(filename)) !=-1))
+				GTR_BACKEND(mybackends->data)->info->filenames, 
+					g_basename(filename)
+			)!=-1)) 
 		{
 			/*
 			 * Load the file with the corresponding open handle.
@@ -408,11 +434,11 @@ gboolean gtranslator_backend_open(gchar *filename)
 					return TRUE;
 				}
 				 
-				GTR_BACKEND(mybackends->data)->info->extensions=GTR_BACKEND(mybackends->data)->info->extensions->next;
+				GTR_ITER(GTR_BACKEND(mybackends->data)->info->extensions);
 			}
 		}
 		
-		mybackends=mybackends->next;
+		GTR_ITER(mybackends);
 	}
 
 	g_list_free(mybackends);

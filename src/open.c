@@ -166,8 +166,8 @@ void gtranslator_open_compiled_po_file(gchar *file)
 		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 
-	g_free(cmd);
-	g_free(tempfilename);
+	GTR_FREE(cmd);
+	GTR_FREE(tempfilename);
 }
 
 /*
@@ -230,8 +230,8 @@ void open_compressed_po_file(gchar *file, gchar *command)
 		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 	
-	g_free(cmd);
-	g_free(tempfilename);
+	GTR_FREE(cmd);
+	GTR_FREE(tempfilename);
 }
 
 /*
@@ -296,6 +296,6 @@ void gtranslator_open_ziped_po_file(gchar *file)
 		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 
-	g_free(cmd);
-	g_free(tempfilename);
+	GTR_FREE(cmd);
+	GTR_FREE(tempfilename);
 }

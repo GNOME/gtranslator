@@ -316,7 +316,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	 */
 	if (page_num != -1)
 		return;
-#define update(value,widget) g_free(value);\
+#define update(value,widget) GTR_FREE(value);\
 	value=gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 	update(author, authors_name);
 	update(email, authors_email);
@@ -382,8 +382,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_set_float("informations/max_history_entries", 
 		GtrPreferences.max_history_entries);
 	
-	g_free(GtrPreferences.msgid_font);
-	g_free(GtrPreferences.msgstr_font);
+	GTR_FREE(GtrPreferences.msgid_font);
+	GTR_FREE(GtrPreferences.msgstr_font);
 	
 	GtrPreferences.msgid_font=g_strdup(
 		gnome_font_picker_get_font_name(
@@ -401,7 +401,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	/*
 	 * Apply the given color scheme.
 	 */ 
-	g_free(GtrPreferences.scheme);
+	GTR_FREE(GtrPreferences.scheme);
 	
 	selected_scheme_file=gtk_editable_get_chars(GTK_EDITABLE(
 		GTK_COMBO(scheme_file)->entry), 0, -1);
@@ -628,11 +628,11 @@ void gtranslator_preferences_read(void)
 
 void gtranslator_preferences_free(void)
 {
-	g_free(author);
-	g_free(email);
-	g_free(language);
-	g_free(mime);
-	g_free(enc);
-	g_free(lg);
-	g_free(lc);
+	GTR_FREE(author);
+	GTR_FREE(email);
+	GTR_FREE(language);
+	GTR_FREE(mime);
+	GTR_FREE(enc);
+	GTR_FREE(lg);
+	GTR_FREE(lc);
 }

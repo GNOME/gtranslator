@@ -34,13 +34,13 @@
 typedef struct
 {
 	gchar 		*modulename;
-	const gchar 	*name;
-	const gchar 	*description;
+	gchar 		*name;
+	gchar	 	*description;
 	GList		*extensions;
 	GList		*filenames;
 
 	gboolean	compilable;
-	const gchar	*compile_command;
+	gchar		*compile_command;
 } GtrBackendInformations;
 
 /*
@@ -50,9 +50,12 @@ typedef struct
 typedef struct 
 {
 	GtrBackendInformations	*info;
-	GFunc			open_file;
-	GFunc			save_file;
-	GFunc			save_file_as;
+
+	GModule			*module;
+
+	GFunc			 open_file;
+	GFunc			 save_file;
+	GFunc			 save_file_as;
 } GtrBackend;
 
 #define GTR_BACKEND(x) ((GtrBackend *) x)
@@ -77,9 +80,9 @@ gboolean gtranslator_backend_open_all_backends(const gchar *directory);
 void gtranslator_backend_add(const gchar *filename); 
 
 /*
- * Remove the given backend module.
+ * Remove/free up the given backend module.
  */
-gboolean gtranslator_backend_remove(GtrBackend **backend);
+gboolean gtranslator_backend_free(GtrBackend *backend);
 
 /*
  * Remove all registered modules and clean up our "namespace".

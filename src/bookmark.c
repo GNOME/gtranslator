@@ -28,19 +28,6 @@
 #include <libgnome/gnome-util.h>
 
 /*
- * A simple but very useful macro for more safe g_strdup usage:
- */
-#define IF_STRDUP(target, value); \
-	if(value) \
-	{ \
-		target=g_strdup(value); \
-	} \
-	else \
-	{ \
-		target=NULL; \
-	}
-
-/*
  * For the moment 8 bookmarks should be the upper limit.
  */
 #define MAX_BOOKMARKS 8
@@ -64,9 +51,9 @@ GtrBookmark *gtranslator_bookmark_new()
 
 	bookmark->po_file=g_strdup(po->filename);
 	
-	IF_STRDUP(bookmark->po_language, GTR_HEADER(po->header)->language);
-	IF_STRDUP(bookmark->po_version, GTR_HEADER(po->header)->prj_version);
-	IF_STRDUP(bookmark->po_date, GTR_HEADER(po->header)->po_date);
+	GTR_STRDUP(bookmark->po_language, GTR_HEADER(po->header)->language);
+	GTR_STRDUP(bookmark->po_version, GTR_HEADER(po->header)->prj_version);
+	GTR_STRDUP(bookmark->po_date, GTR_HEADER(po->header)->po_date);
 	
 	bookmark->po_position=g_list_position(po->messages, po->current);
 
@@ -109,12 +96,12 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 		filename=nautilus_str_get_prefix(tempzulu,
 			":kramkoob_rotalsnartg");
 		
-		g_free(tempzulu);
+		GTR_FREE(tempzulu);
 		g_return_val_if_fail(filename!=NULL, NULL);
 	}
 	
 	bookmark->po_file=g_strdup(filename);
-	g_free(filename);
+	GTR_FREE(filename);
 	
 	/*
 	 * Operate on the resting parts of the string-encoded bookmark and split it
@@ -122,11 +109,11 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 	 */
 	encoding_area=nautilus_str_get_after_prefix(string, "#");
 	values=g_strsplit(encoding_area, "/", 4);
-	g_free(encoding_area);
+	GTR_FREE(encoding_area);
 
-	IF_STRDUP(bookmark->po_language, values[0]);
-	IF_STRDUP(bookmark->po_version, values[1]);
-	IF_STRDUP(bookmark->po_date, values[2]);
+	GTR_STRDUP(bookmark->po_language, values[0]);
+	GTR_STRDUP(bookmark->po_version, values[1]);
+	GTR_STRDUP(bookmark->po_date, values[2]);
 	
 	/*
 	 * Always be quite safe about the GtrBookmark values assigned in these routines.
@@ -387,7 +374,7 @@ gboolean gtranslator_bookmark_remove(GtrBookmark *bookmark)
 			{
 				GList *removeme=zuper;
 
-				zuper=zuper->next;
+				GTR_ITER(zuper);
 				g_list_remove_link(gtranslator_bookmarks, removeme);
 
 				gtranslator_bookmark_free(GTR_BOOKMARK(removeme->data));
@@ -395,7 +382,7 @@ gboolean gtranslator_bookmark_remove(GtrBookmark *bookmark)
 			}
 			else
 			{
-				zuper=zuper->next;
+				GTR_ITER(zuper);
 			}
 		}
 
@@ -441,7 +428,7 @@ gboolean gtranslator_bookmark_search(GtrBookmark *bookmark)
 			return TRUE;
 		}
 		
-		checklist=checklist->next;
+		GTR_ITER(checklist);
 		gtranslator_bookmark_free(GTR_BOOKMARK(checklist->prev->data));
 	}
 
@@ -476,7 +463,7 @@ void gtranslator_bookmark_load_list()
 
 		path=g_strdup_printf("bookmark%d/bookmark_string", c);
 		content=gtranslator_config_get_string(path);
-		g_free(path);
+		GTR_FREE(path);
 		
 		g_return_if_fail(content!=NULL);
 		bookmark=gtranslator_bookmark_new_from_string(content);
@@ -521,7 +508,7 @@ void gtranslator_bookmark_save_list()
 			plain_string=gtranslator_bookmark_string_from_bookmark(bookmark);
 			
 			gtranslator_config_set_string(path, plain_string);
-			g_free(path);
+			GTR_FREE(path);
 			
 			c++;
 
@@ -530,7 +517,7 @@ void gtranslator_bookmark_save_list()
 				break;
 			}
 			
-			writelist=g_list_next(writelist);
+			GTR_ITER(writelist);
 		}
 
 		gtranslator_config_set_int("bookmark/length", c);
@@ -567,9 +554,9 @@ GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *bookmark)
 	/*
 	 * Copy the string parts safely or set'em to NULL where needed.
 	 */
-	IF_STRDUP(copy->po_language, GTR_BOOKMARK(bookmark)->po_language);
-	IF_STRDUP(copy->po_version, GTR_BOOKMARK(bookmark)->po_version);
-	IF_STRDUP(copy->po_date, GTR_BOOKMARK(bookmark)->po_date);
+	GTR_STRDUP(copy->po_language, GTR_BOOKMARK(bookmark)->po_language);
+	GTR_STRDUP(copy->po_version, GTR_BOOKMARK(bookmark)->po_version);
+	GTR_STRDUP(copy->po_date, GTR_BOOKMARK(bookmark)->po_date);
 	
 	copy->po_position=GTR_BOOKMARK(bookmark)->po_position;
 
@@ -583,9 +570,9 @@ void gtranslator_bookmark_free(GtrBookmark *bookmark)
 {
 	if(GTR_BOOKMARK(bookmark))
 	{
-		g_free(GTR_BOOKMARK(bookmark)->po_file);
-		g_free(GTR_BOOKMARK(bookmark)->po_language);
-		g_free(GTR_BOOKMARK(bookmark)->po_version);
-		g_free(GTR_BOOKMARK(bookmark)->po_date);
+		GTR_FREE(GTR_BOOKMARK(bookmark)->po_file);
+		GTR_FREE(GTR_BOOKMARK(bookmark)->po_language);
+		GTR_FREE(GTR_BOOKMARK(bookmark)->po_version);
+		GTR_FREE(GTR_BOOKMARK(bookmark)->po_date);
 	}
 }

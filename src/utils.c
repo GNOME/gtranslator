@@ -91,7 +91,7 @@ void gtranslator_utils_remove_temp_files()
 		remove(tempfile);
 	}
 
-	g_free(tempfile);
+	GTR_FREE(tempfile);
 	tempfile=gtranslator_utils_get_save_differently_file_name();
 
 	if(g_file_exists(tempfile))
@@ -99,7 +99,7 @@ void gtranslator_utils_remove_temp_files()
 		remove(tempfile);
 	}
 
-	g_free(tempfile);
+	GTR_FREE(tempfile);
 }
 
 /*
@@ -123,7 +123,7 @@ void gtranslator_utils_create_gtranslator_directory()
 		}
 	}
 
-	g_free(dirname);
+	GTR_FREE(dirname);
 }
 
 /*
@@ -173,7 +173,7 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 			}
 
 			gtranslator_save_file(autosave_filename);
-			g_free(autosave_filename);
+			GTR_FREE(autosave_filename);
 		}
 		else
 		{
@@ -263,13 +263,13 @@ void gtranslator_utils_remove_compile_files(gchar **test_file,
 	if(*test_file)
 	{
 		remove(*test_file);
-		g_free(*test_file);
+		GTR_FREE(*test_file);
 	}
 
 	if(*result_file)
 	{
 		remove(*result_file);
-		g_free(*result_file);
+		GTR_FREE(*result_file);
 	}
 	
 	if(*output_file)
@@ -282,7 +282,7 @@ void gtranslator_utils_remove_compile_files(gchar **test_file,
 			remove(*output_file);
 		}
 		
-		g_free(*output_file);
+		GTR_FREE(*output_file);
 	}
 }
 
@@ -359,7 +359,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 
 			files=g_list_prepend(files, g_strdup(file));
 
-			g_free(file);
+			GTR_FREE(file);
 		}
 	}
 
@@ -383,6 +383,35 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 }
 
 /*
+ * Free the list and it's data safely -- NULL cases should be catched here.
+ */
+void gtranslator_utils_free_list(GList *list)
+{
+	if(!list)
+	{
+		/*
+		 * When the list is NULL, don't crash or act, simply
+		 *  return.
+		 */
+		return;
+	}
+	else
+	{
+		/*
+		 * Free the list data as long as possible.
+		 */
+		while(list!=NULL)
+		{
+			GTR_FREE(list->data);
+			GTR_ITER(list);
+		}
+
+		g_list_free(list);
+		list=NULL;
+	}
+}
+
+/*
  * Check for matching of an entry of the list entry and the string -- returns
  *  '-1' on non-matching, else the position in the list.
  */
@@ -398,7 +427,7 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string)
 	 */
 	g_return_val_if_fail(sizeof(gchar *) == sizeof(list->data), -1);
 
-	while(list)
+	while(list!=NULL)
 	{
 		if(!nautilus_strcasecmp(list->data, string))
 		{
@@ -534,17 +563,21 @@ void gtranslator_utils_language_lists_create(void)
 gboolean gtranslator_utils_language_lists_free(GtkWidget  * widget, gpointer useless)
 {
 	list_ref--;
+	
 	/*
 	 * If something needs them, leave.
 	 */
-	if (list_ref != 0) return FALSE;
-#define free_a_list(list) g_list_free(list); list=NULL;
-	free_a_list(languages_list);
-	free_a_list(lcodes_list);
-	free_a_list(group_emails_list);
-	free_a_list(encodings_list);
-	free_a_list(bits_list);
-#undef free_a_list
+	if (list_ref != 0) 
+	{
+		return FALSE;
+	}
+	
+	gtranslator_utils_free_list(languages_list);
+	gtranslator_utils_free_list(lcodes_list);
+	gtranslator_utils_free_list(group_emails_list);
+	gtranslator_utils_free_list(encodings_list);
+	gtranslator_utils_free_list(bits_list);
+	
 	return FALSE;
 }
 
@@ -624,7 +657,7 @@ gtranslator_utils_getline (FILE* stream)
 	}
 
 	if (ret_used == 0) {
-		g_free (ret);
+		GTR_FREE (ret);
 		ret = NULL;
 	} else {
 		ret [ret_used] = '\0';

@@ -24,6 +24,7 @@
 #include "prefs.h"
 #include "syntax.h"
 #include "syntax-elements.h"
+#include "utils.h"
 
 #include <ctype.h>
 #include <string.h>
@@ -331,7 +332,7 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 	}
 	nothing_changes=FALSE;
 
-	g_free(text);
+	GTR_FREE(text);
 }
 
 /*

@@ -28,6 +28,7 @@
 #include "open-differently.h"
 #include "parse.h"
 #include "prefs.h"
+#include "utils.h"
 
 #include <string.h>
 #include <gtk/gtkmenushell.h>
@@ -127,9 +128,9 @@ GList *gtranslator_history_get(void)
 		{
 			if(!g_file_exists(myentry->filename))
 			{
-				g_free(subpath);
-				g_free(myentry->filename);
-				g_free(myentry);
+				GTR_FREE(subpath);
+				GTR_FREE(myentry->filename);
+				GTR_FREE(myentry);
 				continue;
 			}
 		}
@@ -142,7 +143,7 @@ GList *gtranslator_history_get(void)
 
 		hl=g_list_append(hl, myentry);
 
-		g_free(subpath);
+		GTR_FREE(subpath);
 	}
 	
 	gtranslator_config_close();
@@ -219,14 +220,14 @@ void gtranslator_history_show(void)
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
-		g_free(menu->label);
-		g_free(menu);
+		GTR_FREE(menu->label);
+		GTR_FREE(menu);
 	}
 }
 
 void free_userdata(GtkWidget *widget, gpointer userdata)
 {
-	g_free(userdata);
+	GTR_FREE(userdata);
 }
 
 void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filename)
@@ -269,7 +270,7 @@ void gtranslator_history_save(GList *list)
 		gtranslator_config_set_string(path,
 			entry->project_version);
 
-		g_free(subpath);
+		GTR_FREE(subpath);
 		
 		number++;
 	
@@ -281,7 +282,7 @@ void gtranslator_history_save(GList *list)
 			break;
 		}
 
-		rlist=g_list_next(rlist);
+		GTR_ITER(rlist);
 	}
 
 	gtranslator_config_set_int("history/length", number);
@@ -306,13 +307,15 @@ void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry)
 		if(!strcmp(entry->filename, GTR_HISTORY_ENTRY(rest->data)->filename))
 		{
 			GList *r=rest;
-			rest=rest->next;
+			
+			GTR_ITER(rest);
 			g_list_remove_link(list, r);
+
 			gtranslator_history_entry_free(GTR_HISTORY_ENTRY(r->data));
 			g_list_free_1(r);
 		}
 		else
-			rest=rest->next;
+			GTR_ITER(rest);
 	}
 }
 
@@ -323,9 +326,9 @@ void gtranslator_history_entry_free(GtrHistoryEntry *e)
 {
 	if(e)
 	{
-		g_free(e->filename);
-		g_free(e->project_name);
-		g_free(e->project_version);
-		g_free(e);
+		GTR_FREE(e->filename);
+		GTR_FREE(e->project_name);
+		GTR_FREE(e->project_version);
+		GTR_FREE(e);
 	}
 }

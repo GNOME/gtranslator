@@ -28,7 +28,14 @@
 /*
  * Non-GUI utility functions for gtranslator.
  */
- 
+
+/*
+ * Really nasty wrapper macros which should expand to really common constructs.
+ */
+#define GTR_FREE(x) if((x)) { g_free((x)); }
+#define GTR_ITER(x) if((x)->next) { (x)=(x)->next; } else { break; }
+#define GTR_STRDUP(to, from) if(from) { to=g_strdup(from); } else { to=NULL; }
+
 /*
  * Returns the non-prefixed and non-suffixed filename back.
  */
@@ -86,6 +93,11 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die);
  * Returns whether the given file_uri's prefix is supported.
  */
 gboolean gtranslator_utils_uri_supported(const gchar *file_uri);
+
+/*
+ * Free's the list data and the list itself safely.
+ */
+void gtranslator_utils_free_list(GList *list);
 
 /*
  * Returns a list of (full) filenames matching the given parameters in ths

@@ -158,7 +158,7 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 		gdk_color_parse(spec, &color);
 		gnome_color_picker_set_i16(colorpicker, color.red,
 			color.green, color.blue, 0);
-		g_free(spec);
+		GTR_FREE(spec);
 	}
 }		
 
@@ -203,7 +203,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	if(spec)
 	{
 		gdk_color_parse(spec, &style->base[0]);
-		g_free(spec);
+		GTR_FREE(spec);
 	}
 	
 	/*
@@ -221,7 +221,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	if(spec)
 	{
 		gdk_color_parse(spec, &style->text[0]);
-		g_free(spec);
+		GTR_FREE(spec);
 	}
 	
 	/*
@@ -276,7 +276,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	 * Clean up the used style + fontname variable .-)
 	 */
 	gtk_style_unref(style);
-	g_free(fontname);
+	GTR_FREE(fontname);
 }
 
 static gboolean colors_initialized=FALSE;
