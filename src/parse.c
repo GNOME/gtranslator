@@ -45,7 +45,6 @@ void parse(gchar *po)
 	gchar temp_char[128];
         guint lines=1,z=0,msg_pair=0;
 	gboolean msgid_ok=FALSE,msgstr_ok=FALSE,comment_ok=FALSE;
-	gchar *zamane=g_new(gchar,1);
 	messages=g_list_alloc();
 	messages=NULL;
 	/**
@@ -127,16 +126,17 @@ void parse(gchar *po)
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			gint mid,minid;
+			gchar aw[strlen(temp_char)];
 			/**
 			* The msgid itself
 			**/
 			minid=0;
 			for(mid=6;mid<(strlen(temp_char));++mid)
 			{
-				zamane[minid]=temp_char[mid];
+				aw[minid]=temp_char[mid];
 				minid++;
 			}	
-			(gchar *)msg->msgid=(gchar *)g_strdup(zamane);
+			(gchar *)msg->msgid=(gchar *)g_strdup(aw);
 			msgid_ok=TRUE;
 		}
 		/**
@@ -145,16 +145,17 @@ void parse(gchar *po)
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			gint mstr,mistr;
+			gchar aq[strlen(temp_char)];
 			/**
 			* The msgstr
 			**/
 			mistr=0;
 			for(mstr=7;mstr<(strlen(temp_char));++mstr)
 			{
-				zamane[mistr]=temp_char[mstr];
+				aq[mistr]=temp_char[mstr];
 				mistr++;
 			}
-			(gchar *)msg->msgstr=(gchar *)g_strdup(temp_char);
+			(gchar *)msg->msgstr=(gchar *)g_strdup(aq);
 			if(!g_strcasecmp(((gchar *)msg->msgstr),"\"\""))
 			{
 				(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_UNTRANSLATED;
@@ -214,10 +215,6 @@ void parse(gchar *po)
 	* Set the msg_pair count.
 	**/
 	msg_pair_count=msg_pair;
-	if(zamane)
-	{
-		g_free(zamane);
-	}
 }
 
 /**
