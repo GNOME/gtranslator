@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.18\n"
-"POT-Creation-Date: 2000-05-20 17:32+0200\n"
-"PO-Revision-Date: 2000-05-20 17:35+0200\n"
+"POT-Creation-Date: 2000-05-21 14:51+0200\n"
+"PO-Revision-Date: 2000-05-21 14:54+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Kullanýlcak ileti/tercüme tabaný"
 msgid "Specifies the main-window geometry"
 msgstr "Ana pencere boyutlarýný belirler"
 
-#: src/main.c:124
+#: src/main.c:134
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "\"%s\" yer metni taranamadý!"
@@ -37,12 +37,12 @@ msgstr "\"%s\" yer metni taranamadý!"
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:143
+#: src/main.c:153
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "\"%s\" adýyla bir dosya yok yada o dosya okunamýyor!"
 
-#: src/main.c:144
+#: src/main.c:154
 msgid "Skipping it."
 msgstr "Atlatýyorum."
 
@@ -50,164 +50,168 @@ msgstr "Atlatýyorum."
 msgid "No po-file opened which could be compiled."
 msgstr "Dönüþtürülenecek bir dosya açýk deðil."
 
-#: src/interface.c:125
+#: src/interface.c:114
+msgid "Couldn't store current geometry!"
+msgstr "GeÇerli yerleþim ve boyutu kaydedemedim!"
+
+#: src/interface.c:157
 msgid "_Compile"
 msgstr "_Dönüþtür"
 
-#: src/interface.c:151
+#: src/interface.c:183
 msgid "Refresh"
 msgstr "Yenile"
 
-#: src/interface.c:163
+#: src/interface.c:195
 msgid "_First"
 msgstr "_Ilk"
 
-#: src/interface.c:170
+#: src/interface.c:202
 msgid "_Back"
 msgstr "_Geri"
 
-#: src/interface.c:178
+#: src/interface.c:210
 msgid "_Next"
 msgstr "I_leri"
 
-#: src/interface.c:185
+#: src/interface.c:217
 msgid "_Last"
 msgstr "_Son"
 
-#: src/interface.c:204
+#: src/interface.c:236
 msgid "_Online help"
 msgstr "_Yardým"
 
-#: src/interface.c:219 src/interface.c:222
+#: src/interface.c:251 src/interface.c:254
 msgid "_Messages"
 msgstr "_Mesajlar"
 
 #. *
 #. * Create the app
 #. *
-#: src/interface.c:245
+#: src/interface.c:277
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gtr_dialogs.c:130 src/interface.c:280
+#: src/gtr_dialogs.c:130 src/interface.c:312
 msgid "Search"
 msgstr "Ara"
 
-#: src/interface.c:281
+#: src/interface.c:313
 msgid "Search for a message"
 msgstr "Bir iletiyi ara"
 
-#: src/interface.c:288
+#: src/interface.c:320
 msgid "ReSearch"
 msgstr "Yen. Ara"
 
-#: src/interface.c:289
+#: src/interface.c:321
 msgid "Search again"
 msgstr "Yeniden Ara"
 
-#: src/interface.c:296
+#: src/interface.c:328
 msgid "Goto"
 msgstr "Git"
 
-#: src/interface.c:297
+#: src/interface.c:329
 msgid "Goto this message"
 msgstr "Bu iletiye git"
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/interface.c:307
+#: src/interface.c:339
 msgid "F/Cat."
 msgstr "Der./B"
 
-#: src/interface.c:308
+#: src/interface.c:340
 msgid "Find in the personal catalog"
 msgstr "Þahsi derlemede bul"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/interface.c:318
+#: src/interface.c:350
 msgid "F/Po."
 msgstr "Po./B"
 
-#: src/interface.c:319
+#: src/interface.c:351
 msgid "Find in the po file "
 msgstr "Po dosyasýnda bul"
 
-#: src/interface.c:330
+#: src/interface.c:362
 msgid "Compile"
 msgstr "Dönüþtür"
 
-#: src/interface.c:331
+#: src/interface.c:363
 msgid "Compile the po-file"
 msgstr "Po dosyasýný dönüþtür"
 
-#: src/interface.c:339
+#: src/interface.c:371
 msgid "Open"
 msgstr "Aç"
 
-#: src/interface.c:340
+#: src/interface.c:372
 msgid "Open File"
 msgstr "Dosyayý aç"
 
-#: src/interface.c:348
+#: src/interface.c:380
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/interface.c:349
+#: src/interface.c:381
 msgid "Save File"
 msgstr "Dosyayý kaydet"
 
-#: src/interface.c:357
+#: src/interface.c:389
 msgid "Save as"
 msgstr "F. kaydet"
 
-#: src/interface.c:358
+#: src/interface.c:390
 msgid "Save file as"
 msgstr "Dosyayý farklý kaydet"
 
-#: src/interface.c:366
+#: src/interface.c:398
 msgid "First"
 msgstr "Ilk"
 
-#: src/interface.c:367
+#: src/interface.c:399
 msgid "Go to the first message"
 msgstr "Ilk iletiye git"
 
-#: src/interface.c:375
+#: src/interface.c:407
 msgid "Back"
 msgstr "Geri"
 
-#: src/interface.c:376
+#: src/interface.c:408
 msgid "Go one message back"
 msgstr "Bir ileti geri git"
 
-#: src/interface.c:384
+#: src/interface.c:416
 msgid "Options"
 msgstr "Ayarlar"
 
-#: src/interface.c:385
+#: src/interface.c:417
 msgid "gtranslator options"
 msgstr "gtranslator seçenekleri"
 
-#: src/interface.c:393
+#: src/interface.c:425
 msgid "Next"
 msgstr "Ileri"
 
-#: src/interface.c:394
+#: src/interface.c:426
 msgid "Go one message forward"
 msgstr "Bir ileti ileri git"
 
-#: src/interface.c:402
+#: src/interface.c:434
 msgid "Last"
 msgstr "Son"
 
-#: src/interface.c:403
+#: src/interface.c:435
 msgid "Go to the last message"
 msgstr "Son iletiye git"
 
-#: src/interface.c:411 src/interface.c:412
+#: src/interface.c:443 src/interface.c:444
 msgid "Exit"
 msgstr "Çýk"
 
@@ -240,12 +244,12 @@ msgstr "Geçerli dosya : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:135
+#: src/parse.c:141
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
-#: src/parse.c:152
+#: src/parse.c:158
 msgid "Parsing has been successfull."
 msgstr "Tarama baþarýlý oldu."
 
@@ -452,18 +456,22 @@ msgid "Add the additional comments to the header"
 msgstr "Eklentileri dosya baþlýðýna ekle"
 
 #: src/prefs.c:58
+msgid "Save gtranslator's geometry on exit & restore it on startup"
+msgstr "gtranslator'in yerleþimini ve boyutunu kaydet ve sonra uygula"
+
+#: src/prefs.c:59
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Deðiþtirilmemiþ bir dosyayý kaydederken ikaz et"
 
-#: src/prefs.c:59
+#: src/prefs.c:60
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Po-dosyasý `fuzzy' tercümeler içeriyorsa ikaz et"
 
-#: src/prefs.c:60
+#: src/prefs.c:61
 msgid "Don't save unchanged .po-files"
 msgstr "Deðiþtirilmemiþ .po-dosyalarýný kaydetme"
 
-#: src/prefs.c:61
+#: src/prefs.c:62
 msgid "Use the msg_db"
 msgstr "Ileti/tercüme tabanýný kullan"
 

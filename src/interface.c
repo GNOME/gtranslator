@@ -76,7 +76,7 @@ void compile(GtkWidget *widget,gpointer useless)
 		**/
 		gchar *cmd;
 		gint res=1;
-		sprintf(cmd,"msgfmt %s",pf);
+		sprintf(cmd,"msgfmt %s","dummy.po");
 		res=system(cmd);
 		/**
 		* If there has been an error show an error-box
@@ -355,6 +355,16 @@ create_app1 (void)
 	* Add a spacer element ..
 	**/
 	gtk_toolbar_append_space(GTK_TOOLBAR(search_bar));
+
+	tmp_toolbar_icon=gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_INDEX);
+	header_button=gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
+					GTK_TOOLBAR_CHILD_BUTTON,
+					NULL,
+					_("Header"),
+					_("Edit the header informations"),NULL,
+					tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(header_button);
+
 	tmp_toolbar_icon=gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_CONVERT);
 	compile_button=gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
                                       GTK_TOOLBAR_CHILD_BUTTON,

@@ -15,11 +15,6 @@
 #include <glib.h>
 
 /**
-* A static gchar holding the current file name.
-**/
-static gchar *pf;
-
-/**
 * Typedefs for the `new' data-types
 **/
 typedef enum   _gtr_msg_status gtr_msg_status;

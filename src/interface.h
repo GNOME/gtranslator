@@ -43,6 +43,7 @@ GtkWidget *search_button, *search_again_button, *goto_button, *goto_line_button;
 GtkWidget *compile_button;
 GtkWidget *save_button, *save_as_button;
 GtkWidget *first_button,*back_button,*next_button,*last_button;
+GtkWidget *header_button;
 
 /**
 * Necessary for the geometry handling:

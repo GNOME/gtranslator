@@ -66,9 +66,9 @@ void parse(gchar *po)
 	**/
 	check_file(fs);
 	/**
-	* Set the global po-file name
+	* If we're still alive, set the global filename
 	**/
-	pf=po;
+	pf.filename=po;
         /**
         * Parse the file ...
         **/
@@ -76,8 +76,7 @@ void parse(gchar *po)
         fgets(temp_char,sizeof(temp_char),fs)!=NULL
         )
         {
-		gtr_msg msg[c];
-		gtr_header *po_header;
+		gtr_msg msg;
 		z++;
 		/**
 		* Try to get the header :
@@ -96,14 +95,10 @@ void parse(gchar *po)
 		)
 		{
 			/**
-			* Check what line it could be and fill it into the
-			*  structure place.
+			* Use the functions defined & used in header_stuff.*
+			*  to rip the header off.
 			**/
-			/*if(!g_strncasecmp(temp_char,"\"Pro",4))
-			{
-				po_header->project_id=temp_char;
-				g_print("Proj : %s\n",po_header->project_id);
-			}*/
+			get_header(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
@@ -112,28 +107,23 @@ void parse(gchar *po)
 			*  and set the comment & position.
 			**/
 			msg_pair++;
-			msg[c].pos=z;
-			msg[c].comment=temp_char;
+			msg.pos=z;
+			msg.comment=temp_char;
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			msg[c].msgid=temp_char;
+			msg.msgid=temp_char;
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			msg[c].msgstr=temp_char;
+			msg.msgstr=temp_char;
 		}
-		/**
-		* As all parsing efforts are finished now, we should
-		*  increase C.
-		**/
-		c++;
         }
         /**
         * Show an updated status
@@ -180,17 +170,7 @@ void parse_the_file(GtkWidget *widget,gpointer useless)
 **/
 void get_first_msg(GtkWidget *widget,gpointer useless)
 {
-	gchar *i,*s;
-	gtk_text_freeze(GTK_TEXT(trans_box));
-	gtk_text_freeze(GTK_TEXT(text1));
-	/*i=msg[0].msgid;
-	s=msg[0].msgstr;*/
-	i="Hello";
-	s="Merhaba";
-	gtk_editable_insert_text(GTK_EDITABLE(text1),i,sizeof(i),0);
-	gtk_editable_insert_text(GTK_EDITABLE(trans_box),s,sizeof(s),0);
-	gtk_text_thaw(GTK_TEXT(trans_box));
-	gtk_text_thaw(GTK_TEXT(text1));
+	/* TODO */
 }
 
 /**

@@ -32,9 +32,9 @@
 #include "gtr_dialogs.h"
 
 /**
-* These ones are only count variables
+* A global po-file structure.
 **/
-static gint c=0;
+static gtr_po pf= { "", FALSE };
 
 /**
 * A gboolean for the silly question if a file is open ...

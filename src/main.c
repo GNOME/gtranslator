@@ -23,6 +23,9 @@
 #include "messages.h"
 #include "prefs.h" 
 
+/**
+* Some static variables for the poptTable
+**/
 static gchar *file_to_open=NULL;
 static gint yazoo=0;
 
@@ -160,6 +163,7 @@ int main(int argc,char *argv[])
 			**/
 			parse(file_to_open);
 			file_opened=TRUE;
+			pf.filename=file_to_open;
 		}
 	}
 	/**

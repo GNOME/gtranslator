@@ -45,4 +45,6 @@ struct _gtr_header {
 
 void apply_header(gtr_header the_header);
 
+void get_header(gchar *hline);
+
 #endif // GTR_HEADER_STUFF_H
