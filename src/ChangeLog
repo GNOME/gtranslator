@@ -1,35 +1,53 @@
+2000-07-17  Fatih Demir	<kabalak@gmx.net>
+	
+	+	Removed the one debug message and the
+	
+		corresponding ifdefs.
+	
+		-> parse.c
+	
+	+	Call the intl-domain of POPT before showing
+	
+		the options.
+	
+		[ So we're now getting internationalized help
+	
+		  messages :) ]
+
+		-> main.c
+
 2000-07-12  Fatih Demir	<kabalak@gmx.net>
 
 	+	Return a `0' not `NULL' if the challenge
-		
+	
 		length cannot be send.
-		
+	
 		-> msg_db.c
 
 	+	Added these two files to the sources.
-		
+	
 		-> Makefile.am
 
 	+	Added the files for the find routines.
-		
+	
 		-> find.c/h
 
 	+	Reformatted the comments and some blocks.
-		
+	
 		-> main.c
 
 	+	Removed the last rests of these `//' C++
-		
+	
 		comments in these C source files.
-		
+	
 		-> *.c
 
 2000-07-07  Fatih Demir	<kabalak@gmx.net>
 
 	+	Added the G_LOG_DOMAIN define for the build
-		
+	
 		of gtranslator.
-			
+	
 		-> Makefile.am
 
 2000-07-06  Fatih Demir	 <kabalak@gmx.net>
@@ -49,9 +67,9 @@
 	+	Bloat this menu with stock pixmaps.
 
 	+	Extended the menus with a real messages status
-		
+	
 		menu tree which represents the possible stati of
-		
+	
 		a message entry.
 	
 	+	Adding another menu-subtree from where you can

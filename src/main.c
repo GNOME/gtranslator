@@ -26,6 +26,10 @@
 * The popt-options table
 **/
 static struct poptOption gtranslator_options [] = {
+	{ 
+		NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
+		0, NULL, NULL
+	},
 	{
 		"challenge-length", 'c', POPT_ARG_INT, &challen,
 		0, N_("Sets the minimum match for query"), "LENGTH"
