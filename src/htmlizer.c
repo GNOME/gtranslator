@@ -263,7 +263,7 @@ void gtranslator_htmlizer(gchar *save_to)
 	 */ 
 	if(!save_to)
 	{
-		save_to=g_strdup_printf("%s.html", g_basename(po->filename));
+		save_to=g_strdup_printf("%s.html", g_path_get_basename(po->filename));
 	}
 
 	fstream=fopen(save_to, "w");
@@ -301,7 +301,7 @@ void gtranslator_htmlizer(gchar *save_to)
 	 */ 
 	fprintf(fstream, _("%s-%s contains %i messages."),
 		po->header->prj_name,
-		g_basename(po->filename),
+		g_path_get_basename(po->filename),
 		po->length);
 	
 	fprintf(fstream, "</td><td>&nbsp;</td></tr>\n<tr><td>\n");
