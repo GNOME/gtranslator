@@ -681,7 +681,7 @@ void compile(GtkWidget * widget, gpointer useless)
 void gtranslator_display_recent(void)
 {
 	/**
-	* Couldn't we do that better with bonobo 0.20 ?
+	* Couldn't we do that better with bonobo?
 	**/
 	gchar *name;
 	gchar *menupath = g_strdup (_("_File/Recen_t files/"));
@@ -703,8 +703,27 @@ void gtranslator_display_recent(void)
 	/**
 	* Are there any recent files ?
 	**/
-	if(!list->data)
+	if((!list) || (!list->data))
 	{
+		/**
+		* Delete the old entries.
+		**/
+		gnome_app_remove_menus(GNOME_APP(app1), menupath, 1);
+		/**
+		* Create a new GnomeUIInfo widget.
+		**/
+		menu=g_new0(GnomeUIInfo,2);
+		/**
+		* Insert the end point of the menus.
+		**/
+		menu->type=GNOME_APP_UI_ENDOFINFO;
+		/**
+		* Insert this menu into the menupath.
+		**/
+		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
+		/**
+		* Return from the loop.
+		**/
 		return;
 	}
 

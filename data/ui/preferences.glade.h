@@ -5,3 +5,4 @@
  */
 
 gchar *s = N_("gtranslator -- preferences");
+gchar *s = N_("Sections");

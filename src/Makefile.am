@@ -21,10 +21,12 @@ INCLUDES = \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
-	-DSCRIPTSDIR=\""$(datadir)/gtranslator"\" \
+	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
 	$(XML_CFLAGS) \
 	$(gconf_cflags) \
-	$(myicon)
+	$(myicon) \
+	$(LIBGLADE_CFLAGS) \
+	-DINTERFACE_DIR=\"@INTERFACE_DIR@\"
 
 bin_PROGRAMS = gtranslator
 

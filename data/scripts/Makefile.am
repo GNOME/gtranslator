@@ -1,6 +1,6 @@
 ## the ./data/scripts/Makefile.am of gtranslator
 
-bindir = $(datadir)/gtranslator
+bindir = $(datadir)/gtranslator/scripts
 
 bin_SCRIPTS = update.sh
 

@@ -11,6 +11,10 @@
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
   <use_widget_names>True</use_widget_names>
+  <output_main_file>False</output_main_file>
+  <output_support_files>False</output_support_files>
+  <output_build_files>False</output_build_files>
+  <backup_source_files>False</backup_source_files>
   <gnome_help_support>True</gnome_help_support>
   <output_translatable_strings>True</output_translatable_strings>
   <translatable_strings_file>preferences.glade.h</translatable_strings_file>
@@ -19,6 +23,8 @@
 <widget>
   <class>GtkWindow</class>
   <name>gtranslator_preferences_dialog</name>
+  <width>480</width>
+  <height>300</height>
   <signal>
     <name>delete_event</name>
     <handler>gtranslator_preferences_quit</handler>
@@ -46,7 +52,72 @@
     <spacing>0</spacing>
 
     <widget>
-      <class>Placeholder</class>
+      <class>GtkHPaned</class>
+      <name>preferences_pane</name>
+      <handle_size>8</handle_size>
+      <gutter_size>4</gutter_size>
+      <position>160</position>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>preferences_index_scrolled_window</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <shrink>True</shrink>
+	  <resize>False</resize>
+	</child>
+
+	<widget>
+	  <class>GtkCList</class>
+	  <name>index</name>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>select_row</name>
+	    <handler>index_row_is_selected</handler>
+	    <last_modification_time>Sun, 12 Nov 2000 14:38:36 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>click_column</name>
+	    <handler>index_clicked_row</handler>
+	    <last_modification_time>Sun, 12 Nov 2000 14:38:51 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>unselect_all</name>
+	    <handler>index_nothing_selected</handler>
+	    <last_modification_time>Sun, 12 Nov 2000 14:39:10 GMT</last_modification_time>
+	  </signal>
+	  <columns>1</columns>
+	  <column_widths>148</column_widths>
+	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	  <show_titles>True</show_titles>
+	  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>index_sections_label</name>
+	    <label>Sections</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>Placeholder</class>
+      </widget>
     </widget>
 
     <widget>
@@ -54,13 +125,13 @@
       <name>preferences_buttons</name>
       <layout_style>GTK_BUTTONBOX_SPREAD</layout_style>
       <spacing>30</spacing>
-      <child_min_width>85</child_min_width>
-      <child_min_height>27</child_min_height>
-      <child_ipad_x>7</child_ipad_x>
+      <child_min_width>32</child_min_width>
+      <child_min_height>16</child_min_height>
+      <child_ipad_x>2</child_ipad_x>
       <child_ipad_y>0</child_ipad_y>
       <child>
 	<padding>0</padding>
-	<expand>True</expand>
+	<expand>False</expand>
 	<fill>True</fill>
       </child>
 
