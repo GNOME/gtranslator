@@ -13,7 +13,8 @@ INCLUDES = \
         -DDATADIR=\""$(datadir)"\"                              \
         -DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
-	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"
+	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"				\
+	-Werror
 
 bin_PROGRAMS = gtranslator
 
