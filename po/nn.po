@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39.1\n"
-"POT-Creation-Date: 2001-12-12 17:00+0100\n"
+"POT-Creation-Date: 2001-12-14 13:24+0100\n"
 "PO-Revision-Date: 2001-11-02 20:09+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian/Nynorsk <nn@li.org>\n"
@@ -13,32 +13,46 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:51
+#: src/about.c:53
 msgid "Messages table:"
 msgstr "Meldingstabell:"
 
-#: src/about.c:54
+#: src/about.c:56
 msgid "Documentation:"
 msgstr "Dokumentasjon:"
 
-#: src/about.c:66
-msgid "(C) 1999-2001 The Free Software Foundation"
-msgstr "© 1999-2001 The Free Software Foundation"
+#. Translators should localize the following string
+#. * which will be displayed at the bottom of the about
+#. * box to give credit to the translator(s).
+#. * Translate the "Translation:", add your name and an
+#. * email address. You can span several lines with a
+#. * newline character if needed, but it shouldn't be
+#. * too long; vertical space is limited in the about
+#. * dialog.
+#. * If you dont translate it nothing will be added
+#.
+#: src/about.c:74 src/about.c:81
+msgid "Translation:"
+msgstr "Omsetjing: Roy-Magne Mo <rmo@sunnmore.net>"
 
-#: src/about.c:67
+#: src/about.c:79
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gtranslator er eit program for omsetjing av po-filer med mange hjelpemiddel "
 "og funksjonar."
 
+#: src/about.c:89
+msgid "(C) 1999-2001 The Free Software Foundation"
+msgstr "© 1999-2001 The Free Software Foundation"
+
 #.
 #. * This string is displayed in the about box as an information about
 #. *  the currently used colorscheme.
 #.
-#: src/about.c:76
+#: src/about.c:101
 #, c-format
 msgid "Current colorscheme: \"%s\" (version %s) by"
-msgstr "Gjeldane fargeskjema: «%s» (versjon %s) av"
+msgstr "Gjeldande fargeskjema: «%s» (versjon %s) av"
 
 #.
 #. * This is a status report feedback: "Blabla backend\n (filename) loaded.\n".
@@ -139,7 +153,7 @@ msgstr "Go til melding nummer:"
 msgid "Find in the po file"
 msgstr "Finn i po-fil"
 
-#: src/dialogs.c:677 src/menus.c:362
+#: src/dialogs.c:677 src/menus.c:361
 msgid "Find"
 msgstr "Søk etter"
 
@@ -180,7 +194,7 @@ msgstr "Finn i: "
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- bytt ut"
 
-#: src/dialogs.c:779 src/menus.c:366
+#: src/dialogs.c:779 src/menus.c:365
 msgid "Replace"
 msgstr "Byt ut"
 
@@ -208,7 +222,7 @@ msgstr "Ein feil oppstod ved køyring av msgfmt\n"
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- opne frå URI"
 
-#: src/dialogs.c:936 src/menus.c:284
+#: src/dialogs.c:936 src/menus.c:283
 msgid "Open"
 msgstr "Opne"
 
@@ -281,7 +295,7 @@ msgstr "Her kan du spørje eksisterande gettext-domener etter omsetjingar."
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- spør eksisterande gettext-domener"
 
-#: src/dialogs.c:1121 src/menus.c:371
+#: src/dialogs.c:1121 src/menus.c:370
 msgid "Query"
 msgstr "Spørjing"
 
@@ -356,7 +370,7 @@ msgstr "Rediger kommentar"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i uferdige att ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:352 src/messages-table.c:434
+#: src/gui.c:545 src/gui.c:549 src/menus.c:351 src/messages-table.c:434
 #: src/messages-table.c:496
 msgid "Fuzzy"
 msgstr "Uferdig"
@@ -851,7 +865,7 @@ msgstr "Meldingsst_atus"
 msgid "_Compile"
 msgstr "_Kompiler"
 
-#: src/menus.c:62 src/menus.c:298
+#: src/menus.c:62 src/menus.c:297
 msgid "Compile the po file"
 msgstr "Kompiler po-fila"
 
@@ -859,7 +873,7 @@ msgstr "Kompiler po-fila"
 msgid "_Update"
 msgstr "_Oppdater"
 
-#: src/menus.c:69 src/menus.c:302
+#: src/menus.c:69 src/menus.c:301
 msgid "Update the po file"
 msgstr "Oppdater po-fila"
 
@@ -914,7 +928,7 @@ msgstr "Importer ei UTF-8 koda po-fil som enkel teiknkoding"
 msgid "_Query..."
 msgstr "_Spørjing ..."
 
-#: src/menus.c:146 src/menus.c:372
+#: src/menus.c:146 src/menus.c:371
 msgid "Query for a string"
 msgstr "Spør etter streng"
 
@@ -922,7 +936,7 @@ msgstr "Spør etter streng"
 msgid "_Header..."
 msgstr "_Topptekst ..."
 
-#: src/menus.c:154 src/menus.c:306
+#: src/menus.c:154 src/menus.c:305
 msgid "Edit the header"
 msgstr "Rediger topptekst"
 
@@ -962,7 +976,7 @@ msgstr "Vis hurtitastar i meldingar"
 msgid "_First"
 msgstr "_Første"
 
-#: src/menus.c:181 src/menus.c:328
+#: src/menus.c:181 src/menus.c:327
 msgid "Go to the first message"
 msgstr "Gå til første melding"
 
@@ -970,7 +984,7 @@ msgstr "Gå til første melding"
 msgid "_Back"
 msgstr "Til_bake"
 
-#: src/menus.c:188 src/menus.c:332
+#: src/menus.c:188 src/menus.c:331
 msgid "Move back one message"
 msgstr "Gå tilbake ei melding"
 
@@ -978,7 +992,7 @@ msgstr "Gå tilbake ei melding"
 msgid "_Next"
 msgstr "_Neste"
 
-#: src/menus.c:196 src/menus.c:337
+#: src/menus.c:196 src/menus.c:336
 msgid "Move forward one message"
 msgstr "Flytt framover ei melding"
 
@@ -986,7 +1000,7 @@ msgstr "Flytt framover ei melding"
 msgid "_Last"
 msgstr "_Siste"
 
-#: src/menus.c:203 src/menus.c:341
+#: src/menus.c:203 src/menus.c:340
 msgid "Go to the last message"
 msgstr "Gå til siste melding"
 
@@ -1010,7 +1024,7 @@ msgstr "Gå til neste uferdig melding"
 msgid "Next _untranslated"
 msgstr "Nest _uomsett"
 
-#: src/menus.c:225 src/menus.c:346
+#: src/menus.c:225 src/menus.c:345
 msgid "Go to next untranslated message"
 msgstr "Gå til neste uomsette melding"
 
@@ -1038,103 +1052,103 @@ msgstr "_Fest"
 msgid "Stick this message"
 msgstr "Fest denne meldinga"
 
-#: src/menus.c:273
+#: src/menus.c:271
 msgid "gtranslator _website"
 msgstr "gtranslator _nettside"
 
-#: src/menus.c:274
+#: src/menus.c:272
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator si heimeside på nettet"
 
-#: src/menus.c:285
+#: src/menus.c:284
 msgid "Open a po file"
 msgstr "Opne ei po-fil"
 
-#: src/menus.c:288
+#: src/menus.c:287
 msgid "Save"
 msgstr "Lagre"
 
-#: src/menus.c:289
+#: src/menus.c:288
 msgid "Save File"
 msgstr "Lagre fil"
 
-#: src/menus.c:292
+#: src/menus.c:291
 msgid "Save as"
 msgstr "Lagre som"
 
-#: src/menus.c:293
+#: src/menus.c:292
 msgid "Save file with a different name"
 msgstr "Lagre fil med anna namn"
 
-#: src/menus.c:297
+#: src/menus.c:296
 msgid "Compile"
 msgstr "Kompiler"
 
-#: src/menus.c:301
+#: src/menus.c:300
 msgid "Update"
 msgstr "Oppdater"
 
-#: src/menus.c:305
+#: src/menus.c:304
 msgid "Header"
 msgstr "Topptekst"
 
-#: src/menus.c:310
+#: src/menus.c:309
 msgid "Undo"
 msgstr "Angre"
 
-#: src/menus.c:311
+#: src/menus.c:310
 msgid "Undo the last performed action"
 msgstr "Gjer om siste handling"
 
-#: src/menus.c:315
+#: src/menus.c:314
 msgid "Options"
 msgstr "Val"
 
-#: src/menus.c:316
+#: src/menus.c:315
 msgid "gtranslator options"
 msgstr "gtranslator val"
 
-#: src/menus.c:319 src/menus.c:320
+#: src/menus.c:318 src/menus.c:319
 msgid "Exit"
 msgstr "Avslutt"
 
-#: src/menus.c:327
+#: src/menus.c:326
 msgid "First"
 msgstr "Første"
 
-#: src/menus.c:331
+#: src/menus.c:330
 msgid "Back"
 msgstr "Tilbake"
 
-#: src/menus.c:336
+#: src/menus.c:335
 msgid "Next"
 msgstr "Neste"
 
-#: src/menus.c:340
+#: src/menus.c:339
 msgid "Last"
 msgstr "Siste"
 
-#: src/menus.c:345
+#: src/menus.c:344
 msgid "Missing"
 msgstr "Manglande"
 
-#: src/menus.c:353
+#: src/menus.c:352
 msgid "Go to the next fuzzy translation"
 msgstr "Gå til neste uferdige omsetjing"
 
-#: src/menus.c:358
+#: src/menus.c:357
 msgid "Go to"
 msgstr "Gå til"
 
-#: src/menus.c:359
+#: src/menus.c:358
 msgid "Go to specified message number"
 msgstr "Gå til spesifisert meldingsnummer"
 
-#: src/menus.c:363
+#: src/menus.c:362
 msgid "Find string in po file"
 msgstr "Finn streng i po-fil"
 
-#: src/menus.c:367
+#: src/menus.c:366
 msgid "Replace string in po file"
 msgstr "Byt ut streng i po-fil"
 
