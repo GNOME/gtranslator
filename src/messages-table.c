@@ -107,6 +107,18 @@ typedef struct
 } GtrMessagesTableColors;
 
 /*
+ * Another own structure for the translation retrieval.
+ */
+typedef struct
+{
+	GtrMsg		*message;
+
+	gchar		*found_translation;
+
+	gboolean		 replace;
+} GtrTranslationRetrieval;
+
+/*
  * A new kind of popup menu for our beloved messages table.
  */
 static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
@@ -131,6 +143,8 @@ ETreePath unknown_node = NULL;
 ETableExtras *tree_extras;
 
 GtrMessagesTableColors *messages_table_colors;
+
+GtrTranslationRetrieval *retrieval=NULL;
 
 /*
  * Hash table to associate an ETreePath with each message. Used
@@ -201,6 +215,10 @@ static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
 
 				gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu_item), edit_sub_menu);
 
+				retrieval=g_new0(GtrTranslationRetrieval, 1);
+				retrieval->found_translation=found_str;
+				retrieval->message=message;
+
 				gtk_signal_connect(GTK_OBJECT(imt_menu_item), "activate",
 					GTK_SIGNAL_FUNC(insert_translation), GINT_TO_POINTER(1));
 
@@ -241,15 +259,42 @@ static void insert_translation(GtkWidget *widget, gpointer insertion_kind)
 	switch(GPOINTER_TO_INT(insertion_kind))
 	{
 		case 1:
-			g_message("Insert found translation...");
+			retrieval->replace=FALSE;
 				break;
 
 		case 2:
-			g_message("Set found translation...");
+			retrieval->replace=TRUE;
 				break;
 
 		default:
+			retrieval->replace=FALSE;
 				break;
+	}
+
+	if(retrieval->message && retrieval->found_translation)
+	{
+		if(retrieval->replace)
+		{
+			if(GTR_MSG(retrieval->message)->msgstr)
+			{
+				GTR_FREE(GTR_MSG(retrieval->message)->msgstr);
+			}
+
+			GTR_MSG(retrieval->message)->msgstr=g_strdup(retrieval->found_translation);
+		}
+		else
+		{
+			gchar *oldstr=GTR_MSG(retrieval->message)->msgstr;
+
+			GTR_MSG(retrieval->message)->msgstr=g_strconcat(oldstr, retrieval->found_translation, NULL);
+			GTR_FREE(oldstr);
+		}
+
+		gtranslator_translation_changed(NULL, NULL);
+
+		gtranslator_message_update();
+		gtranslator_messages_table_update_message_status(GTR_MSG(retrieval->message));
+		GTR_FREE(retrieval);
 	}
 }
 

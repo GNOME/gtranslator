@@ -30,6 +30,7 @@
 #include "gui.h"
 #include "learn.h"
 #include "message.h"
+#include "messages-table.h"
 #include "nautilus-string.h"
 #include "open.h"
 #include "parse.h"
@@ -1242,7 +1243,15 @@ Would you like to insert it into the translation?"),
 						 * status flags for it.
 						 */
 						gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-							result, strlen(result) );
+							result, strlen(result));
+
+						gtranslator_translation_changed(NULL, NULL);
+
+						gtranslator_message_update();
+						if(GtrPreferences.show_messages_table)
+						{
+							gtranslator_messages_table_update_message_status(GTR_MSG(po->current->data));
+						}
 
 						GTR_FREE(result);
 					}
