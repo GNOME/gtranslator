@@ -14,6 +14,7 @@ INCLUDES = \
         -DDATADIR=\""$(datadir)"\"                              \
         -DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
+	$(DEPRECATED_FLAGS)                                     \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"				\
 	-Wall -Werror
 
