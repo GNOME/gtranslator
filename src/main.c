@@ -172,15 +172,14 @@ int main(int argc, char *argv[])
 	if(build_information)
 	{
 		#define NICE_PRINT(x); \
-			g_print("\n\t\t%s", x); \
-			g_print("\n\t");
+			g_print("\n\t%s\n", x);
 
 		g_print("\t\n");
 		g_print(_("gtranslator build information/specs:"));
-		g_print("\n\n\t");
+		g_print("\n\n");
 		g_print(_("Version and build date:"));
 		NICE_PRINT(BUILD_STRING);
-		g_print(_("Build GLib/Gtk+/GNOME versions:"));
+		g_print(_("Build GLib / Gtk+ / GNOME / XML versions:"));
 		NICE_PRINT(BUILD_VERSIONS);
 		g_print(_("Colorschemes directory:"));
 		NICE_PRINT(SCHEMESDIR);
@@ -190,6 +189,8 @@ int main(int argc, char *argv[])
 		NICE_PRINT(WINDOW_ICON);
 		g_print(_("Own locale directory:"));
 		NICE_PRINT(GNOMELOCALEDIR);
+		g_print(_("Default learn buffer file location:"));
+		NICE_PRINT("~/.gtranslator/umtf/personal-learn-buffer.xml");
 		g_print("\n");
 
 		#undef NICE_PRINT

@@ -1,5 +1,11 @@
 2003-01-12  Fatih Demir <kabalak@gtranslator.org>
 
+	* Makefile.am & main.c: Changed the build information screen a little
+		bit and put also the information about the Libxml 2.0 into the
+		 output screen and the default learn buffer location is now
+		  also shown on the screen following the "-b" switch call of
+		   gtranslator.
+
 	* utf8.[ch]: Added new "gtranslator_utf8_convert_to_utf8" util function
 		which does simply save you some bits of typing, nothing really
 		 interesting...
@@ -13,7 +19,8 @@
 	* learn.c: Smaller modifications to the learn buffer stuff to work now
 		really per UTF-8 and to get the point 'bout the premiereversion
 		 now right - this was causing the probs with the learn buffer
-		  until now - the learn buffer filename has again be changed.
+		  until now - the learn buffer filename has again be changed
+ 		   to "personal-learn-buffer.xml".
 
 	* semerkent/semer-file.[ch]: Added a new "semer_file_save_as_with_type"
 		function which encapsulates some lines of work, yeah! Slight
