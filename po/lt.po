@@ -4,53 +4,86 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.37\n"
-"POT-Creation-Date: 2001-04-05 21:51+0200\n"
-"PO-Revision-Date: 2001-04-05 22:27+0200\n"
-"Last-Translator: Gediminas Paulauskas <menesis@gtranslator.org>\n"
-"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
+"Project-Id-Version: gtranslator 0.39.1\n"
+"POT-Creation-Date: 2001-11-24 23:44+0200\n"
+"PO-Revision-Date: 2001-11-24 23:54+0200\n"
+"Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
+"Language-Team: Your language <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/about.c:51
+msgid "Messages table:"
+msgstr "Uþraðø lentelë:"
+
+#: src/about.c:54
+msgid "Documentation:"
+msgstr "Dokumentacija:"
+
+#: src/about.c:66
+msgid "(C) 1999-2001 The Free Software Foundation"
+msgstr "(C) 1999-2001 The Free Software Foundation"
+
+#: src/about.c:67
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator yra po bylø taisymo programa su daug skambuèiø ir ðvilpukø"
 
-#: src/color-schemes.c:156
+#.
+#. * This string is displayed in the about box as an information about
+#. *  the currently used colorscheme.
+#.
+#: src/about.c:76
+#, c-format
+msgid "Current colorscheme: \"%s\" (version %s) by"
+msgstr "Esama spalvø schema: \"%s\" (versija %s), sukurta"
+
+#.
+#. * This is a status report feedback: "Blabla backend\n (filename) loaded.\n".
+#.
+#: src/backend.c:280
+#, c-format
+msgid ""
+"%s\n"
+" (%s) loaded.\n"
+msgstr ""
+"%s\n"
+" (%s) ákelta.\n"
+
+#: src/color-schemes.c:173
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Negaliu pritaikyti spalvø rinkinio bylos ¥%s´!"
 
-#: src/color-schemes.c:279
-msgid "Couldn't retrieve author informations!"
+#: src/color-schemes.c:302
+msgid "Couldn't retrieve author information!"
 msgstr "Negalëjau gauti informacijos apie autoriø!"
 
 #.
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:285
+#: src/color-schemes.c:308 src/translator.c:329
 msgid "Unknown"
 msgstr "Neþinomas"
 
-#: src/color-schemes.c:286
+#: src/color-schemes.c:309
 msgid "<Not Given>"
 msgstr "<Nenurodyta>"
 
-#: src/dialogs.c:80
-msgid "gtranslator -- open a po-file"
+#: src/dialogs.c:96
+msgid "gtranslator -- open po file"
 msgstr "gtranslator -- atidaryti po bylà"
 
-#: src/dialogs.c:122
+#: src/dialogs.c:135
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- iðsaugoti bylà kaip..."
 
-#: src/dialogs.c:126
+#: src/dialogs.c:155
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- iðsaugoti vietinæ bylos kopijà kaip..."
 
-#: src/dialogs.c:178
+#: src/dialogs.c:199
 #, c-format
 msgid ""
 "File %s\n"
@@ -59,165 +92,203 @@ msgstr ""
 "Byla %s\n"
 "buvo pakeista. Iðsaugoti?"
 
-#: src/dialogs.c:219
+#: src/dialogs.c:236
+msgid "gtranslator -- import po file"
+msgstr "gtranslator -- importuoti po bylà"
+
+#: src/dialogs.c:279
+msgid "gtranslator -- export po file"
+msgstr "gtranslator -- eksportuoti po bylà"
+
+#: src/dialogs.c:325 src/dialogs.c:359
+msgid "gtranslator -- edit comment"
+msgstr "gtranslator -- keisti komentarà"
+
+#: src/dialogs.c:347
+msgid "Comment:"
+msgstr "Komentaras:"
+
+#: src/dialogs.c:463
+#, c-format
+msgid "Should ALL translations from `%s' be removed?"
+msgstr "Ar paðalinti VISUS vertimus ið bylos \"%s\"?"
+
+#: src/dialogs.c:476 src/dialogs.c:501
+msgid "gtranslator -- confirm removal of all translations"
+msgstr "gtranslator -- patvirtinti visø vertimø paðalinimà"
+
+#: src/dialogs.c:490
+msgid "Are you sure you want to remove ALL translations from this po file?"
+msgstr "Ar tu tikrai nori paðalinti VISUS vertimus ið ðios po bylos?"
+
+#: src/dialogs.c:594
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- eiti"
 
-#: src/dialogs.c:219
+#: src/dialogs.c:596
 msgid "Go!"
 msgstr "Eiti"
 
-#: src/dialogs.c:225
+#: src/dialogs.c:605
 msgid "Go to message number:"
 msgstr "Eiti á uþraðà numeriu:"
 
-#: src/dialogs.c:294
-msgid "Find in the po-file"
+#: src/dialogs.c:675
+msgid "Find in the po file"
 msgstr "Ieðkoti po byloje"
 
-#: src/dialogs.c:294 src/gui.c:412
+#: src/dialogs.c:677 src/menus.c:362
 msgid "Find"
 msgstr "Ieðkoti"
 
-#: src/dialogs.c:297
-msgid "Enter your desired search string:"
-msgstr "Ávesk ieðkomà eilutæ"
+#: src/dialogs.c:684
+msgid "Enter search string:"
+msgstr "Ávesk ieðkomà eilutæ:"
 
-#: src/dialogs.c:300
+#: src/dialogs.c:689
 msgid "Case sensitive"
 msgstr "Skirti raidþiø dydá"
 
-#: src/dialogs.c:305 src/languages.h:112
+#: src/dialogs.c:694 src/languages.c:91
 msgid "English"
 msgstr "Angliðkuose"
 
-#: src/dialogs.c:311 src/dialogs.c:409 src/gui.c:963
+#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:559 src/messages-table.c:448
+#: src/messages-table.c:489
 msgid "Translated"
 msgstr "Iðverstuose"
 
-#: src/dialogs.c:317 src/dialogs.c:415
+#: src/dialogs.c:706 src/dialogs.c:804
 msgid "Both"
 msgstr "Visur"
 
-#: src/dialogs.c:323 src/dialogs.c:403
+#: src/dialogs.c:712 src/dialogs.c:792
 msgid "Comments"
-msgstr "Komentarai"
+msgstr "Komentaruose"
 
-#: src/dialogs.c:329
+#: src/dialogs.c:718
 msgid "In all strings"
 msgstr "Visuose uþraðuose"
 
-#: src/dialogs.c:344
+#: src/dialogs.c:733
 msgid "Find in: "
 msgstr "Ieðkoti kur:"
 
-#: src/dialogs.c:389
+#: src/dialogs.c:778
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- pakeisti"
 
-#: src/dialogs.c:390 src/gui.c:416
+#: src/dialogs.c:779 src/menus.c:366
 msgid "Replace"
 msgstr "Pakeisti"
 
-#: src/dialogs.c:391
+#: src/dialogs.c:780
 msgid "Replace all"
 msgstr "Pakeisti visus"
 
-#: src/dialogs.c:395
+#: src/dialogs.c:784
 msgid "String to replace:"
 msgstr "Pakeièiama eilutë:"
 
-#: src/dialogs.c:398
+#: src/dialogs.c:787
 msgid "Replace string:"
 msgstr "Eilutë á kurià pakeisti:"
 
-#: src/dialogs.c:438
+#: src/dialogs.c:827
 msgid "Replace in:"
 msgstr "Pakeisti kur:"
 
-#: src/dialogs.c:517
-msgid "An error occured while msgfmt was executed:\n"
+#: src/dialogs.c:905
+msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Ávyko klaida, vykdant msgfmt:\n"
 
-#: src/dialogs.c:547
+#: src/dialogs.c:935
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- atidaryti ið URI"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:548
-#: src/gui.c:345
+#: src/dialogs.c:936 src/menus.c:284
 msgid "Open"
 msgstr "Atidaryti"
 
-#: src/dialogs.c:554
+#: src/dialogs.c:944
 msgid "Enter URI:"
 msgstr "Ávesk URI:"
 
-#: src/dialogs.c:596
+#: src/dialogs.c:982
 msgid "No URI given!"
 msgstr "Neávestas joks URI!"
 
-#: src/dialogs.c:617
+#: src/dialogs.c:997
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Nenurodytas palaikomas URI protokolas (kaip \"ftp://\")!"
 
-#: src/dialogs.c:648
+#: src/dialogs.c:1005
+msgid ""
+"URIs are used to locate files uniquely on different systems.\n"
+"The standard Internet addresses (URLs) are also URIs -- you can\n"
+"use them to open remote po files lying on servers with standard protocols\n"
+"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
+"Some example URIs for clarification (these ones are supported):\n"
+"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+"\n"
+"file:///<PO-FILE>"
+msgstr ""
+
+#: src/dialogs.c:1041
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator got closed.\n"
-"Possibly it contains hard pieces of work?!\n"
+"It was saved by gtranslator before gtranslator last closed\n"
+"and may contain your hard work!\n"
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
 "Atidaryti iðgelbëtà bylà ¥%s´?\n"
-"Ji buvo iðsaugota prieð nulûþæs gtranslator buvo uþdarytas.\n"
-"Galbût joje yra ádëta daug sunkaus darbo?\n"
+"Ji buvo iðsaugota prieð uþdarant nulûþusá gtranslator,\n"
+"ir á jà turbût buvo ádëta tavo sunkaus darbo!\n"
 "Pasirinkus ¥Ne´, iðgelbëta byla bus iðtrinta."
 
-#: src/dialogs.c:674
+#: src/dialogs.c:1064
 #, c-format
 msgid "Recovering `%s'..."
-msgstr "Iðgelbëjama ¥%s´..."
+msgstr "Gelbstima ¥%s´..."
 
-#: src/dialogs.c:718
+#: src/dialogs.c:1110
 msgid "Couldn't get list of gettext domains!"
 msgstr "Negalëjau gauti gettext domenø sàraðo!"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:726
+#: src/dialogs.c:1117
 msgid "Here you can query existing gettext domains for a translation."
 msgstr "Èia tu gali uþklausti vertimo ið egzistuojanèiø gettext domenø."
 
-#: src/dialogs.c:729
+#: src/dialogs.c:1120
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- uþklausa"
 
-#: src/dialogs.c:730 src/gui.c:420
+#: src/dialogs.c:1121 src/menus.c:371
 msgid "Query"
 msgstr "Uþklausti"
 
-#: src/dialogs.c:730
-msgid "Close"
-msgstr "Uþdaryti"
-
-#: src/dialogs.c:738
+#: src/dialogs.c:1129
 msgid "Query string:"
 msgstr "Uþklausti eilutës:"
 
-#: src/dialogs.c:745
+#: src/dialogs.c:1136
 msgid "Domain to search the translation in:"
 msgstr "Domenas, kuriame ieðkoti vertimo:"
 
-#: src/dialogs.c:795
+#: src/dialogs.c:1186
 msgid "No query string given!"
 msgstr "Neávesta uþklausos eilutë!"
 
-#: src/dialogs.c:829
+#: src/dialogs.c:1227
 msgid "Couldn't find any result for the query!"
 msgstr "Neradau jokio rezultato, tenkinanèio uþklausà!"
 
-#: src/dialogs.c:842
+#: src/dialogs.c:1240
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
@@ -230,23 +301,29 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:915
+#: src/dialogs.c:1330
 msgid "Query's result translation is already there!"
 msgstr "Ið uþklausos gautoji reikðmë jau èia yra!"
 
-#: src/dialogs.c:935
+#: src/dialogs.c:1353
 msgid ""
-"Should gtranslator accomplish all missing strings (if possible)\n"
-"from your default query domain?"
+"Should gtranslator autotranslate the file using information\n"
+"from the default query domain and the personal learn buffer?"
 msgstr ""
-"Ar tikrai uþpildyti visus trûkstamus vertimus (jei ámanoma)\n"
-"ið áprastinio uþklausø domeno?"
 
-#: src/find.c:236
+#: src/dialogs.c:1358
+msgid ""
+"Should gtranslator autotranslate the file using information\n"
+"from the default query domain?"
+msgstr ""
+"Ar gtranslator turëtø automatiðkai iðversti bylà, naudodamasis\n"
+"informacija ið áprastinio uþklausø domeno?"
+
+#: src/find.c:215
 msgid "Please enter a search string"
 msgstr "Ávesk ieðkomà eilutæ"
 
-#: src/find.c:252
+#: src/find.c:231
 #, c-format
 msgid ""
 "Could not find\n"
@@ -255,342 +332,40 @@ msgstr ""
 "Negaliu rasti\n"
 "¥%s´"
 
-#: src/find.c:264
-msgid "Couldn't get the message!"
-msgstr "Negalëjau gauti uþraðo!"
-
-#: src/find.c:286
-msgid "There are no fuzzy messages left."
-msgstr "Daugiau nëra nei vieno fuzzy uþraðo,"
-
-#: src/find.c:310
-msgid "All messages seem to be translated."
-msgstr "Atrodo, jog visi uþraðai iðversti."
-
-#: src/gtkspell.c:607
-msgid "View URL..."
-msgstr "Þiûrëti URL.."
-
-#: src/gui.c:139
-msgid "_Compile"
-msgstr "_Kompiliuoti"
-
-#: src/gui.c:140 src/gui.c:359
-msgid "Compile the po-file"
-msgstr "Kompiliuoti po bylà"
-
-#: src/gui.c:146
-msgid "_Update"
-msgstr "_Atnaujinti"
-
-#: src/gui.c:147 src/gui.c:363
-msgid "Update the po-file"
-msgstr "Atnaujinti po bylà"
-
-#: src/gui.c:154
-msgid "Autoaccomplish"
-msgstr "Uþpildyti trûkstamus"
-
-#: src/gui.c:155
-msgid "Automatically fill missing translations from the default query domain"
-msgstr "Automatiðkai uþpildyti trûkstamus vertimus ið áprasto uþklausø domeno"
-
-#: src/gui.c:163
-msgid "Open from _URI"
-msgstr "Atidaryti ið _URI"
-
-#: src/gui.c:164
-msgid "Open a po file from a given URI"
-msgstr "Atidaryti po bylà ið nurodyto URI"
-
-#: src/gui.c:174
-msgid "Recen_t files"
-msgstr "Pas_tarosios bylos"
-
-#: src/gui.c:181
-msgid "_Message"
-msgstr "_Uþraðas"
-
-#: src/gui.c:182
-msgid "Standard messages view"
-msgstr "Standartinis uþraðo vaizdas"
-
-#: src/gui.c:184
-msgid "_Comments"
-msgstr "_Komentarai"
-
-#: src/gui.c:185
-msgid "View comments for message"
-msgstr "Rodyti komentarus uþraðui"
-
-#: src/gui.c:187
-msgid "_Numbers"
-msgstr "_Skaièiai"
-
-#: src/gui.c:188
-msgid "View numbers in the message"
-msgstr "Rodyti skaièius uþraðe"
-
-#: src/gui.c:190
-msgid "C _Formats"
-msgstr "C _Formatai"
-
-#: src/gui.c:191
-msgid "View C formats of the message"
-msgstr "Rodyti C formatus uþraðe"
-
-#: src/gui.c:193
-msgid "_Hotkeys"
-msgstr "_Karðtieji klaviðai"
-
-#: src/gui.c:194
-msgid "View hotkeys in the message"
-msgstr "Rodyti uþraðe esanèius karðtuosius klaviðus"
-
-#: src/gui.c:211
-msgid "_Query"
-msgstr "_Uþklausa"
-
-#: src/gui.c:212 src/gui.c:421
-msgid "Query for a string"
-msgstr "Uþklausti eilutës"
-
-#: src/gui.c:219
-msgid "_Header..."
-msgstr "_Antraðtë..."
-
-#: src/gui.c:220 src/gui.c:367
-msgid "Edit the header"
-msgstr "Keisti antraðtæ"
-
-#: src/gui.c:230
-msgid "_First"
-msgstr "_Pirmas"
-
-#: src/gui.c:231 src/gui.c:384
-msgid "Go to the first message"
-msgstr "Eiti á pirmà uþraðà"
-
-#: src/gui.c:237
-msgid "_Back"
-msgstr "_Atgal"
-
-#: src/gui.c:238 src/gui.c:388
-msgid "Go one message back"
-msgstr "Eiti vienu uþraðu atgal"
-
-#: src/gui.c:245
-msgid "_Next"
-msgstr "_Kitas"
-
-#: src/gui.c:246 src/gui.c:393
-msgid "Go one message forward"
-msgstr "Eiti vienu uþraðu pirmyn"
-
 #: src/gui.c:252
-msgid "_Last"
-msgstr "_Paskutinis"
+msgid "Edit comment"
+msgstr "Keisti komentarà"
 
-#: src/gui.c:253 src/gui.c:397
-msgid "Go to the last message"
-msgstr "Eiti á paskutiná uþraðà"
-
-#: src/gui.c:260
-msgid "_Go to..."
-msgstr "_Eiti..."
-
-#: src/gui.c:261
-msgid "Goto specified message number"
-msgstr "Eiti á uþraðà nurodytu numeriu"
-
-#: src/gui.c:267
-msgid "Next fuz_zy"
-msgstr "Kitas fu_zzy"
-
-#: src/gui.c:268
-msgid "Go to next fuzzy message"
-msgstr "Eiti á kità fuzzy uþraðà"
-
-#: src/gui.c:274
-msgid "Next _untranslated"
-msgstr "Kitas _neiðverstas"
-
-#: src/gui.c:275 src/gui.c:401
-msgid "Go to next untranslated message"
-msgstr "Eiti á kità neiðverstà uþraðà"
-
-#: src/gui.c:285
-msgid "_Translated"
-msgstr "_Iðverstas"
-
-#: src/gui.c:286
-msgid "Toggle translated status of a message"
-msgstr "Perjungti iðverstà uþraðo bûsenà"
-
-#: src/gui.c:294
-msgid "_Fuzzy"
-msgstr "_Fuzzy"
-
-#: src/gui.c:295
-msgid "Toggle fuzzy status of a message"
-msgstr "Perjungti uþraðo fuzzy bûsenà"
-
-#: src/gui.c:303
-msgid "_Stick"
-msgstr "_Sustingæs"
-
-#: src/gui.c:304
-msgid "Stick this message"
-msgstr "Sustingdyti ðá uþraðà"
-
-#: src/gui.c:323
-msgid "gtranslator _website"
-msgstr "gtranslator _tinklapis"
-
-#: src/gui.c:324
-msgid "gtranslator's homepage on the web"
-msgstr "gtranslator tinklapis internete"
-
-#: src/gui.c:334
-msgid "_Messages"
-msgstr "_Uþraðai"
-
-#: src/gui.c:335
-msgid "Mess_age status"
-msgstr "Uþraðo bû_sena"
-
-#: src/gui.c:346
-msgid "Open a po-file"
-msgstr "Atidaryti po bylà"
-
-#: src/gui.c:349
-msgid "Save"
-msgstr "Iðsaugoti"
-
-#: src/gui.c:350
-msgid "Save File"
-msgstr "Iðsaugoti bylà"
-
-#: src/gui.c:353
-msgid "Save as"
-msgstr "Pavadinti"
-
-#: src/gui.c:354
-msgid "Save file with a different name"
-msgstr "Iðsaugoti bylà kitu vardu"
-
-#: src/gui.c:358
-msgid "Compile"
-msgstr "Kompiliuoti"
-
-#: src/gui.c:362
-msgid "Update"
-msgstr "Atnaujinti"
-
-#: src/gui.c:366
-msgid "Header"
-msgstr "Antraðtë"
-
-#: src/gui.c:371
-msgid "Options"
-msgstr "Nuostatos"
-
-#: src/gui.c:372
-msgid "gtranslator options"
-msgstr "gtransaltor nuostatos"
-
-#: src/gui.c:375 src/gui.c:376
-msgid "Exit"
-msgstr "Iðeiti"
-
-#: src/gui.c:383
-msgid "First"
-msgstr "Pirmas"
-
-#: src/gui.c:387
-msgid "Back"
-msgstr "Atgal"
-
-#: src/gui.c:392
-msgid "Next"
-msgstr "Pirmyn"
-
-#: src/gui.c:396
-msgid "Last"
-msgstr "Galas"
-
-#: src/gui.c:400
-msgid "Missing"
-msgstr "Tuðèias"
-
-#: src/gui.c:404 src/gui.c:950 src/gui.c:954
-msgid "Fuzzy"
-msgstr "Fuzzy"
-
-#: src/gui.c:405
-msgid "Go to the next fuzzy translation"
-msgstr "Eiti á kità fuzzy vertimà"
-
-#: src/gui.c:408
-msgid "Go to"
-msgstr "Eiti"
-
-#: src/gui.c:409
-msgid "Go to specified message number"
-msgstr "Eiti á uþraðà nurodytu numeriu"
-
-#: src/gui.c:413
-msgid "Find string in po-file"
-msgstr "Rasti eilutæ po byloje"
-
-#: src/gui.c:417
-msgid "Replace string in po-file"
-msgstr "Pakeisti eilutæ po byloje"
-
-#.
-#. * Create the app
-#.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:605 src/parse.c:772
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#.
-#. * The "·" is the "middle dot" (00B7), it is
-#. * used by gtranslator as special char to make
-#. * blanks visible.
-#. * If your language uses that char for another
-#. * purpose or if you use another enocoding
-#. * than latin1, feel free to change it to
-#. * whatever you think will be better
-#.
-#: src/gui.c:759 src/gui.c:760 src/syntax.c:88 src/views.c:284 src/views.c:354
-msgid "·"
-msgstr ""
-
-#: src/gui.c:950
+#: src/gui.c:545
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ liko %i fuzzy ]"
 
-#: src/gui.c:954
+#: src/gui.c:545 src/gui.c:549 src/menus.c:352 src/messages-table.c:434
+#: src/messages-table.c:496
+msgid "Fuzzy"
+msgstr "Fuzzy"
+
+#: src/gui.c:549
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ neliko fuzzy ]"
 
-#: src/gui.c:961
+#: src/gui.c:557
 msgid "Stick"
 msgstr "Sustingæs"
 
-#: src/gui.c:972
+#: src/gui.c:568
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ liko %i neiðverstø ]"
 
-#: src/gui.c:972 src/gui.c:974
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:406
+#: src/messages-table.c:486
 msgid "Untranslated"
 msgstr "Iðverstas"
 
-#: src/gui.c:974
+#: src/gui.c:570
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ neliko neiðverstø ]"
@@ -598,81 +373,85 @@ msgstr "%s [ neliko neiðverstø ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:985
+#: src/gui.c:583
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Uþraðas: %d / %d / Bûsena: %s"
 
-#: src/header_stuff.c:340
+#: src/header_stuff.c:430
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- keisti antraðtæ"
 
-#: src/header_stuff.c:344
+#: src/header_stuff.c:437 src/header_stuff.c:442
 msgid "Project"
 msgstr "Projektas"
 
-#: src/header_stuff.c:345
+#: src/header_stuff.c:445
 msgid "Translator and Language"
 msgstr "Vertëjas ir kalba"
 
-#: src/header_stuff.c:356
+#: src/header_stuff.c:456
 msgid "Comments:"
 msgstr "Komentarai:"
 
-#: src/header_stuff.c:362
+#: src/header_stuff.c:462
 msgid "Project name:"
 msgstr "Projekto pavadinimas:"
 
-#: src/header_stuff.c:365
+#: src/header_stuff.c:465
 msgid "Project version:"
 msgstr "Projekto versija:"
 
-#: src/header_stuff.c:368
+#: src/header_stuff.c:468
 msgid "Pot file creation date:"
 msgstr "Pot bylos sukûrimo data:"
 
-#: src/header_stuff.c:372
+#: src/header_stuff.c:473
 msgid "Po file revision date:"
 msgstr "Po bylos pakeitimo data:"
 
-#: src/header_stuff.c:381
-msgid "Use my options to fill the following entries."
-msgstr "Naudoti mano nuostatas uþpildyti þemiau esanèius laukus."
+#: src/header_stuff.c:480
+msgid "Generator:"
+msgstr "Generatorius:"
 
-#: src/header_stuff.c:394
+#: src/header_stuff.c:490
+msgid "Use my options to complete the following entries:"
+msgstr "Naudoti mano nuostatas uþpildyti þemiau esanèius laukus:"
+
+#: src/header_stuff.c:503
 msgid "Translator's name:"
 msgstr "Vertëjo vardas:"
 
-#: src/header_stuff.c:397
+#: src/header_stuff.c:506
 msgid "Translator's e-mail:"
 msgstr "Vertëjo el. paðtas:"
 
-#: src/header_stuff.c:400 src/prefs.c:267
+#: src/header_stuff.c:509 src/prefs.c:171
 msgid "Language:"
 msgstr "Kalba:"
 
-#: src/header_stuff.c:405
+#: src/header_stuff.c:515
 msgid "Language group's e-mail:"
 msgstr "Kalbos grupës el.paðtas:"
 
-#: src/header_stuff.c:409 src/prefs.c:280
+#: src/header_stuff.c:520 src/prefs.c:187
 msgid "Charset:"
 msgstr "Kodø lentelë:"
 
-#: src/header_stuff.c:413 src/prefs.c:284
+#: src/header_stuff.c:525 src/prefs.c:192
 msgid "Encoding:"
 msgstr "Kodavimas:"
 
-#: src/history.c:157
+#: src/history.c:200
 msgid "_File/Recen_t files/"
 msgstr "_Byla/Pas_tarosios bylos/"
 
-#: src/history.c:195
+#: src/history.c:248
 #, c-format
 msgid "Open %s"
 msgstr "Atidaryti %s"
 
-#: src/htmlizer.c:236
+#: src/htmlizer.c:238
 #, c-format
 msgid "Couldn't save html output to %s!"
 msgstr "Negalëjau iðsaugoti html iðvesties á %s!"
@@ -680,7 +459,7 @@ msgstr "Negalëjau iðsaugoti html iðvesties á %s!"
 #.
 #. * Translatable output to a html file which is visible on the pages.
 #.
-#: src/htmlizer.c:254
+#: src/htmlizer.c:256
 #, c-format
 msgid "%s-%s contains %i messages."
 msgstr "%s-%s yra %i uþraðø."
@@ -691,259 +470,707 @@ msgstr "%s-%s yra %i uþraðø."
 #. * NOTE: Please do not forget to also "translate" the <b> tags as the
 #. *  project name should be displayed bold on the output pages.
 #.
-#: src/htmlizer.c:267
+#: src/htmlizer.c:269
 #, c-format
 msgid "Project <b>%s</b> (last po file revision: %s)."
 msgstr "Projektas <b>%s</b> (paskutinis po bylos pataisymas: %s)."
 
-#: src/htmlizer.c:282
+#: src/htmlizer.c:284
 #, c-format
 msgid "Last translator: %s"
 msgstr "Paskutinis vertëjas: %s"
 
-#: src/languages.h:70
+#.
+#. * This is printed at the end of the HTML page and should also include
+#. *  the hyperlink in the translations.
+#. *
+#. * In the output it looks then like "HTML output of "tr.po" produced
+#. *  by gtranslator version 0.39".
+#. *
+#. * Please don't forget to include the HTML tags in the msgid.
+#.
+#: src/htmlizer.c:322
+#, c-format
+msgid ""
+"HTML output of \"%s\" produced by <a "
+"href=\"http://www.gtranslator.org\">gtranslator</a> version %s."
+msgstr ""
+
+#: src/languages.c:35
 msgid "Afrikaans"
 msgstr "Afrikieèiø"
 
-#: src/languages.h:73
+#: src/languages.c:39
 msgid "Arabic"
 msgstr "Arabø"
 
-#: src/languages.h:76
-msgid "Azeri"
-msgstr ""
+#: src/languages.c:43
+msgid "Azerbaijani Turkish"
+msgstr "Azerbaidþano turkø"
 
-#: src/languages.h:79
+#: src/languages.c:47
 msgid "Basque"
 msgstr "Baskø"
 
-#: src/languages.h:82
-msgid "Bielorussian"
+#: src/languages.c:51
+msgid "Belorussian"
 msgstr "Baltarusiø"
 
-#: src/languages.h:85
+#: src/languages.c:55
 msgid "Britton"
 msgstr ""
 
-#: src/languages.h:88
+#: src/languages.c:59
 msgid "Bulgarian"
 msgstr "Bulgarø"
 
-#: src/languages.h:91
+#: src/languages.c:63
 msgid "Catalan"
 msgstr "Katalonø"
 
-#: src/languages.h:94
+#: src/languages.c:67
 msgid "Chinese/Simplified"
-msgstr "Kinø/Supaprastastinta"
+msgstr "Kinø/Supaprastinta"
 
-#: src/languages.h:97
+#: src/languages.c:71
 msgid "Chinese/Traditional"
 msgstr "Kinø/Tradicinë"
 
-#: src/languages.h:100
+#: src/languages.c:75
 msgid "Croatian"
 msgstr "Kroatø"
 
-#: src/languages.h:103
+#: src/languages.c:79
 msgid "Czech"
 msgstr "Èekø"
 
-#: src/languages.h:106
+#: src/languages.c:83
 msgid "Danish"
 msgstr "Danø"
 
-#: src/languages.h:109
+#: src/languages.c:87
 msgid "Dutch"
 msgstr "Olandø"
 
-#: src/languages.h:115
+#: src/languages.c:95
 msgid "English/Canada"
 msgstr "Anglø/Kanada"
 
-#: src/languages.h:118
+#: src/languages.c:99
 msgid "English/GB"
 msgstr "Anglø/D. Britanija"
 
-#: src/languages.h:121
+#: src/languages.c:103
 msgid "English/USA"
 msgstr "Anglø/JAV"
 
-#: src/languages.h:124
+#: src/languages.c:107
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#: src/languages.c:111
 msgid "Estonian"
 msgstr "Estø"
 
-#: src/languages.h:127
+#: src/languages.c:115
 msgid "Farsi"
 msgstr ""
 
-#: src/languages.h:130
+#: src/languages.c:119
 msgid "Finnish"
 msgstr "Suomiø"
 
-#: src/languages.h:133
+#: src/languages.c:123
 msgid "French"
 msgstr "Prancûzø"
 
-#: src/languages.h:136
+#: src/languages.c:127
 msgid "Galician"
 msgstr ""
 
-#: src/languages.h:139
+#: src/languages.c:131
 msgid "German"
 msgstr "Vokieèiø"
 
-#: src/languages.h:142
+#: src/languages.c:135
 msgid "Greek"
 msgstr "Graikø"
 
-#: src/languages.h:145
+#: src/languages.c:139
 msgid "Hungarian"
 msgstr "Bulgarø"
 
-#: src/languages.h:148
+#: src/languages.c:143
 msgid "Indonesian"
 msgstr "Indonezijos"
 
-#: src/languages.h:151
+#: src/languages.c:147
 msgid "Italian"
 msgstr "Italø"
 
-#: src/languages.h:154
+#: src/languages.c:151
 msgid "Irish"
 msgstr "Airiø"
 
-#: src/languages.h:157
+#: src/languages.c:155
 msgid "Japanese"
 msgstr "Japonø"
 
-#: src/languages.h:160
+#: src/languages.c:159
 msgid "Korean"
 msgstr "Korëjieèiø"
 
-#: src/languages.h:163
+#: src/languages.c:163
 msgid "Latvian"
 msgstr "Latviø"
 
-#: src/languages.h:166
+#: src/languages.c:167
 msgid "Lithuanian"
 msgstr "Lietuviø"
 
-#: src/languages.h:169
+#: src/languages.c:171
+msgid "Malay/Bahasa Melayu"
+msgstr ""
+
+#: src/languages.c:175
+msgid "Maltese"
+msgstr ""
+
+#: src/languages.c:179
 msgid "Norwegian/Bokmaal"
 msgstr "Norvegø/Bokmaal"
 
-#: src/languages.h:172
+#: src/languages.c:183
 msgid "Norwegian/Nynorsk"
 msgstr "Norvegø/Nynorsk"
 
-#: src/languages.h:175
+#: src/languages.c:187
 msgid "Polish"
 msgstr "Lenkø"
 
-#: src/languages.h:178
+#: src/languages.c:191
 msgid "Portuguese"
 msgstr "Portugalø"
 
-#: src/languages.h:181
+#: src/languages.c:195
 msgid "Portuguese/Brazil"
 msgstr "Portugalø/Brazilija"
 
-#: src/languages.h:184
+#: src/languages.c:199
 msgid "Romanian"
 msgstr "Rumunø"
 
-#: src/languages.h:187
+#: src/languages.c:203
 msgid "Russian"
 msgstr "Rusø"
 
-#: src/languages.h:190
+#: src/languages.c:207
 msgid "Serbian/Cyrillic"
 msgstr "Serbø/Kirilica"
 
-#: src/languages.h:193
+#: src/languages.c:211
 msgid "Serbian/Latin"
 msgstr "Serbø/Lotyniðka"
 
-#: src/languages.h:196
-msgid "Slovakian"
+#: src/languages.c:215
+msgid "Slovak"
 msgstr "Slovakø"
 
-#: src/languages.h:199
+#: src/languages.c:219
 msgid "Slovenian"
 msgstr "Slovënø"
 
-#: src/languages.h:202
+#: src/languages.c:223
 msgid "Spanish"
 msgstr "Ispanø"
 
-#: src/languages.h:205
+#: src/languages.c:227
 msgid "Spanish/Spain"
 msgstr "Ispanø/Ispanija"
 
-#: src/languages.h:208
+#: src/languages.c:231
 msgid "Spanish/Mexico"
 msgstr "Ispanø/Meksika"
 
-#: src/languages.h:211
+#: src/languages.c:235
 msgid "Swedish"
 msgstr "Ðvedø"
 
-#: src/languages.h:214
+#: src/languages.c:239
 msgid "Tamil"
 msgstr "Tamilø"
 
-#: src/languages.h:217
+#: src/languages.c:243
 msgid "Thai"
 msgstr ""
 
-#: src/languages.h:220
+#: src/languages.c:247
 msgid "Turkish"
 msgstr "Turkø"
 
-#: src/languages.h:223
+#: src/languages.c:251
 msgid "Ukrainian"
 msgstr "Ukrainieèiø"
 
-#: src/languages.h:226
+#: src/languages.c:255
 msgid "Uzbekian"
 msgstr "Uzbekø"
 
-#: src/languages.h:229
+#: src/languages.c:259
 msgid "Vietnamese"
 msgstr "Vietnamieèiø"
 
-#: src/languages.h:232
+#: src/languages.c:263
 msgid "Walloon"
-msgstr "Velsø"
+msgstr "Valonø"
 
-#: src/languages.h:235
+#: src/languages.c:267
 msgid "Welsh"
 msgstr "Velsø"
 
-#: src/main.c:70
-msgid "Specifies the main-window geometry"
-msgstr "Nurodo pagrindinio lango geometrijà"
+#: src/main.c:80
+msgid "Auto translate the po file & exit"
+msgstr "Automatiðkai iðversti po bylà ir iðeiti"
 
-#: src/main.c:74
-msgid "Syntax color scheme to use"
-msgstr "Naudotina sintaksës spalvø schema"
+#: src/main.c:80 src/main.c:92
+msgid "FILENAME"
+msgstr "BYLA"
 
-#: src/main.c:78
+#: src/main.c:84
+msgid "Show build information/specifications"
+msgstr ""
+
+#: src/main.c:88
+msgid "Specify main window geometry"
+msgstr "Nurodyti pagrindinio lango geometrijà"
+
+#: src/main.c:88
+msgid "GEOMETRY"
+msgstr "GEOMETRIJA"
+
+#: src/main.c:92
+msgid "Learn the file completely & exit"
+msgstr "Iðmokti visà bylà ir iðeiti"
+
+#: src/main.c:96
+#, fuzzy
+msgid "Don't load any backend modules"
+msgstr "Neuþkrauti jokiø "
+
+#: src/main.c:100
+msgid "Define another query-domains directory"
+msgstr ""
+
+#: src/main.c:100
+msgid "LOCALEDIR"
+msgstr "LOKALËSKAT"
+
+#: src/main.c:104
 msgid "HTML file to write to"
 msgstr "HTML byla, á kurià raðyti"
 
-#: src/main.c:123
+#: src/main.c:104
+msgid "HTMLFILE"
+msgstr "HTMLBYLA"
+
+#: src/main.c:144
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Klaida inicializuojant GConf: %s."
 
-#: src/open-differently.c:185
+#: src/main.c:167
+msgid "gtranslator build information/specs:"
+msgstr "gtranslator kompiliavimo informacija:"
+
+#: src/main.c:169
+msgid "Version and build date:"
+msgstr "Versija ir kompiliavimo data:"
+
+#: src/main.c:171
+msgid "Build GLib/Gtk+/GNOME versions:"
+msgstr "Kompiliuota su GLib/Gtk+/GNOME versijomis:"
+
+#: src/main.c:173
+msgid "Backends directory:"
+msgstr ""
+
+#: src/main.c:175
+msgid "Colorschemes directory:"
+msgstr "Spalvø schemø katalogas:"
+
+#: src/main.c:177
+msgid "Scripts directory:"
+msgstr "Skriptø katalogas:"
+
+#: src/main.c:179
+msgid "Window icon:"
+msgstr "Lango ikona:"
+
+#: src/main.c:181
+msgid "Own locale directory:"
+msgstr "Savas lokalës katalogas:"
+
+#: src/main.c:211
+msgid "GModule implementation doesn't support loading dynamic modules!"
+msgstr ""
+
+#.
+#. * As everything seemed to went fine, print out a nice
+#. *  message informing the user about the success.
+#.
+#: src/main.c:510
+#, c-format
+msgid "Learned `%s' successfully.\n"
+msgstr "Sëkmingai iðmokta \"%s\".\n"
+
+#: src/menus.c:49
+msgid "_Messages"
+msgstr "_Uþraðai"
+
+#: src/menus.c:50
+msgid "Mess_age status"
+msgstr "Uþraðo bû_sena"
+
+#: src/menus.c:61
+msgid "_Compile"
+msgstr "_Kompiliuoti"
+
+#: src/menus.c:62 src/menus.c:298
+msgid "Compile the po file"
+msgstr "Kompiliuoti po bylà"
+
+#: src/menus.c:68
+msgid "_Update"
+msgstr "_Atnaujinti"
+
+#: src/menus.c:69 src/menus.c:302
+msgid "Update the po file"
+msgstr "Atnaujinti po bylà"
+
+#: src/menus.c:76
+msgid "Aut_otranslate..."
+msgstr "Aut_omatiðkai versti..."
+
+#: src/menus.c:77
+msgid ""
+"Autotranslate the file with information from the default query domain/learn "
+"buffer"
+msgstr ""
+"Automatiðkai iðversti bylà pagal informacijà ið áprasto uþklausø "
+"domeno/mokymosi buferio"
+
+#: src/menus.c:84
+msgid "Remove all translations..."
+msgstr "Paðalinti visus vertimus..."
+
+#: src/menus.c:85
+msgid "Remove all existing translations from the po file"
+msgstr "Paðalinti visus po byloje esanèius vertimus"
+
+#: src/menus.c:93
+msgid "Open from _URI..."
+msgstr "Atidaryti ið _URI..."
+
+#: src/menus.c:94
+msgid "Open a po file from a given URI"
+msgstr "Atidaryti po bylà ið nurodyto URI"
+
+#: src/menus.c:104
+msgid "Recen_t files"
+msgstr "Pas_tarosios bylos"
+
+#: src/menus.c:107
+msgid "_Export to UTF-8..."
+msgstr "_Eksportuoti á UTF-8..."
+
+#: src/menus.c:108
+msgid "Export the current po file to UTF-8"
+msgstr "Eksportuoti esamà po bylà á UTF-8"
+
+#: src/menus.c:114
+msgid "_Import from UTF-8..."
+msgstr "_Importuoti ið UTF-8..."
+
+#: src/menus.c:115
+msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
+msgstr "Importuoti UTF-8 uþkoduotà bylà á jà atitinkanèià paprastà koduotæ"
+
+#: src/menus.c:145
+msgid "_Query..."
+msgstr "_Uþklausa..."
+
+#: src/menus.c:146 src/menus.c:372
+msgid "Query for a string"
+msgstr "Uþklausti eilutës"
+
+#: src/menus.c:153
+msgid "_Header..."
+msgstr "_Antraðtë..."
+
+#: src/menus.c:154 src/menus.c:306
+msgid "Edit the header"
+msgstr "Keisti antraðtæ"
+
+#: src/menus.c:163
+msgid "_Message"
+msgstr "_Uþraðas"
+
+#: src/menus.c:164
+msgid "Standard messages view"
+msgstr "Standartinis uþraðo vaizdas"
+
+#: src/menus.c:166
+msgid "_Numbers"
+msgstr "_Skaièiai"
+
+#: src/menus.c:167
+msgid "View numbers in the message"
+msgstr "Rodyti skaièius uþraðe"
+
+#: src/menus.c:169
+msgid "C _Formats"
+msgstr "C _Formatai"
+
+#: src/menus.c:170
+msgid "View C formats of the message"
+msgstr "Rodyti C formatus uþraðe"
+
+#: src/menus.c:172
+msgid "_Hotkeys"
+msgstr "_Karðtieji klaviðai"
+
+#: src/menus.c:173
+msgid "View hotkeys in the message"
+msgstr "Rodyti uþraðe esanèius karðtuosius klaviðus"
+
+#: src/menus.c:180
+msgid "_First"
+msgstr "_Pirmas"
+
+#: src/menus.c:181 src/menus.c:328
+msgid "Go to the first message"
+msgstr "Eiti á pirmà uþraðà"
+
+#: src/menus.c:187
+msgid "_Back"
+msgstr "_Atgal"
+
+#: src/menus.c:188 src/menus.c:332
+msgid "Move back one message"
+msgstr "Eiti vienu uþraðu atgal"
+
+#: src/menus.c:195
+msgid "_Next"
+msgstr "_Kitas"
+
+#: src/menus.c:196 src/menus.c:337
+msgid "Move forward one message"
+msgstr "Eiti vienu uþraðu pirmyn"
+
+#: src/menus.c:202
+msgid "_Last"
+msgstr "_Paskutinis"
+
+#: src/menus.c:203 src/menus.c:341
+msgid "Go to the last message"
+msgstr "Eiti á paskutiná uþraðà"
+
+#: src/menus.c:210
+msgid "_Go to..."
+msgstr "_Eiti..."
+
+#: src/menus.c:211
+msgid "Goto specified message number"
+msgstr "Eiti á uþraðà nurodytu numeriu"
+
+#: src/menus.c:217
+msgid "Next fuz_zy"
+msgstr "Kitas fu_zzy"
+
+#: src/menus.c:218
+msgid "Go to next fuzzy message"
+msgstr "Eiti á kità fuzzy uþraðà"
+
+#: src/menus.c:224
+msgid "Next _untranslated"
+msgstr "Kitas _neiðverstas"
+
+#: src/menus.c:225 src/menus.c:346
+msgid "Go to next untranslated message"
+msgstr "Eiti á kità neiðverstà uþraðà"
+
+#: src/menus.c:235
+msgid "_Translated"
+msgstr "_Iðverstas"
+
+#: src/menus.c:236
+msgid "Toggle translated status of a message"
+msgstr "Perjungti iðverstà uþraðo bûsenà"
+
+#: src/menus.c:244
+msgid "_Fuzzy"
+msgstr "_Fuzzy"
+
+#: src/menus.c:245
+msgid "Toggle fuzzy status of a message"
+msgstr "Perjungti uþraðo fuzzy bûsenà"
+
+#: src/menus.c:253
+msgid "_Stick"
+msgstr "_Sustingæs"
+
+#: src/menus.c:254
+msgid "Stick this message"
+msgstr "Sustingdyti ðá uþraðà"
+
+#: src/menus.c:273
+msgid "gtranslator _website"
+msgstr "gtranslator _tinklapis"
+
+#: src/menus.c:274
+msgid "gtranslator's homepage on the web"
+msgstr "gtranslator tinklapis internete"
+
+#: src/menus.c:285
+msgid "Open a po file"
+msgstr "Atidaryti po bylà"
+
+#: src/menus.c:288
+msgid "Save"
+msgstr "Iðsaugoti"
+
+#: src/menus.c:289
+msgid "Save File"
+msgstr "Iðsaugoti bylà"
+
+#: src/menus.c:292
+msgid "Save as"
+msgstr "Pavadinti"
+
+#: src/menus.c:293
+msgid "Save file with a different name"
+msgstr "Iðsaugoti bylà kitu vardu"
+
+#: src/menus.c:297
+msgid "Compile"
+msgstr "Kompiliuoti"
+
+#: src/menus.c:301
+msgid "Update"
+msgstr "Atnaujinti"
+
+#: src/menus.c:305
+msgid "Header"
+msgstr "Antraðtë"
+
+#: src/menus.c:310
+msgid "Undo"
+msgstr "Atðaukti"
+
+#: src/menus.c:311
+msgid "Undo the last performed action"
+msgstr "Atðaukti kà tik ávykdytà veiksmà"
+
+#: src/menus.c:315
+msgid "Options"
+msgstr "Nuostatos"
+
+#: src/menus.c:316
+msgid "gtranslator options"
+msgstr "gtranslator nuostatos"
+
+#: src/menus.c:319 src/menus.c:320
+msgid "Exit"
+msgstr "Iðeiti"
+
+#: src/menus.c:327
+msgid "First"
+msgstr "Pirmas"
+
+#: src/menus.c:331
+msgid "Back"
+msgstr "Atgal"
+
+#: src/menus.c:336
+msgid "Next"
+msgstr "Pirmyn"
+
+#: src/menus.c:340
+msgid "Last"
+msgstr "Galas"
+
+#: src/menus.c:345
+msgid "Missing"
+msgstr "Tuðèias"
+
+#: src/menus.c:353
+msgid "Go to the next fuzzy translation"
+msgstr "Eiti á kità fuzzy vertimà"
+
+#: src/menus.c:358
+msgid "Go to"
+msgstr "Eiti"
+
+#: src/menus.c:359
+msgid "Go to specified message number"
+msgstr "Eiti á uþraðà nurodytu numeriu"
+
+#: src/menus.c:363
+msgid "Find string in po file"
+msgstr "Rasti eilutæ po byloje"
+
+#: src/menus.c:367
+msgid "Replace string in po file"
+msgstr "Pakeisti eilutæ po byloje"
+
+#: src/message.c:81
+msgid "Couldn't get the message!"
+msgstr "Negalëjau gauti uþraðo!"
+
+#: src/message.c:103
+msgid "There are no fuzzy messages left."
+msgstr "Daugiau nëra nei vieno fuzzy uþraðo,"
+
+#: src/message.c:127
+msgid "All messages seem to be translated."
+msgstr "Atrodo, jog visi uþraðai iðversti."
+
+#: src/messages-table.c:164
+msgid "Appropriate match:"
+msgstr ""
+
+#: src/messages-table.c:172
+msgid "Found nothing appropriate in the personal learn buffer."
+msgstr ""
+
+#.
+#. * The `%i' format stands for the number of
+#. *  untranslated messages left over.
+#.
+#: src/messages-table.c:401
+#, c-format
+msgid "Untranslated (%i)"
+msgstr "Neiðverstas (%i)"
+
+#.
+#. * The '%i' format stands for the number
+#. *  of fuzzy entries/messages left over.
+#.
+#: src/messages-table.c:429
+#, c-format
+msgid "Fuzzy (%i)"
+msgstr "Fuzzy (%i)"
+
+#: src/messages-table.c:492
+msgid "Sticky"
+msgstr "Sustingæs"
+
+#: src/open.c:142
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Negalëjau atidaryti sukompiliuotos gettext bylos ¥%s´!"
 
-#: src/open-differently.c:235
+#: src/open.c:189
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Negalëjau atidaryti suarchyvuotos gettext bylos ¥%s´!"
@@ -952,12 +1179,17 @@ msgstr "Negalëjau atidaryti suarchyvuotos gettext bylos ¥%s´!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open-differently.c:245
+#: src/open.c:199
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr "Negalëjau atidaryti %s gettext bylos ¥%s´!"
 
-#: src/parse.c:143
+#: src/open.c:267
+#, c-format
+msgid "Couldn't open zip'ed po file `%s'!"
+msgstr "Negalëjau atidaryti zip'uotos gettext bylos ¥%s´!"
+
+#: src/parse.c:121
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -966,7 +1198,7 @@ msgstr ""
 "Rastas naujas specialus þenklas: \\%c\n"
 "Pridëk já á parse.c, eilutë %i."
 
-#: src/parse.c:287
+#: src/parse.c:370
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -977,7 +1209,7 @@ msgstr ""
 "eilutëje %d.\n"
 "Pataisyk bylà, ir bandyk vël."
 
-#: src/parse.c:336
+#: src/parse.c:416
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -986,28 +1218,33 @@ msgstr ""
 "Byla yra tuðèia:\n"
 "%s"
 
-#: src/parse.c:362 src/parse.c:622
+#: src/parse.c:440
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Byla ¥%s´ iðvis neegzistuoja"
 
-#: src/parse.c:441
+#: src/parse.c:569
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:577
+#: src/parse.c:752
 #, c-format
 msgid ""
-"You are trying to save file with *.pot extension.\n"
-"However, such files are generated by program.\n"
-"Your file should be named with *.po extension, most likely %s.po"
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
 msgstr ""
-"Tu bandai iðsaugoti bylà su *.pot plëtiniu.\n"
-"Deja, tokios bylos yra generuojamos programomis.\n"
-"Tavo byla turëtø bûti pavadinta su *.po plëtiniu, tikriausiai %s.po"
+"Tu bandai iðsaugoti bylà su .pot plëtiniu.\n"
+"Tokios bylos yra generuojamos kompiliavimo metu.\n"
+"Tavo byla turëtø bûti pavadinta ¥%s.po´."
 
-#: src/parse.c:656
+#: src/parse.c:814
+#, c-format
+msgid "Could not open file `%s' for writing!"
+msgstr "Negalëjau atidaryti bylos ¥%s´ raðymui!"
+
+#: src/parse.c:860
 #, c-format
 msgid ""
 "File %s\n"
@@ -1016,7 +1253,7 @@ msgstr ""
 "Byloje %s\n"
 "yra %d fuzzy uþraðø"
 
-#: src/parse.c:692
+#: src/parse.c:897
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1027,11 +1264,15 @@ msgstr ""
 "%s\n"
 "Ar nori vis tiek jà iðsaugoti?"
 
-#: src/parse.c:700
+#: src/parse.c:905
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- nepakeistas"
 
-#: src/parse.c:784
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:990
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: src/parse.c:1017
 #, c-format
 msgid ""
 "File %s\n"
@@ -1040,11 +1281,11 @@ msgstr ""
 "Byla %s\n"
 "buvo pakeista. Ar nori atstatyti ið iðsaugotos kopijos?"
 
-#: src/parse.c:823
+#: src/parse.c:1168
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Gaila, bet tavo sistemoje nëra msgfmt!"
 
-#: src/parse.c:848
+#: src/parse.c:1203
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1053,356 +1294,533 @@ msgstr ""
 "Kompiliavimas sëkmingas:\n"
 "%s"
 
-#: src/parse.c:876
-#, c-format
-msgid "You don't have read permissions on file `%s'"
-msgstr "Tu neturi teisës perskaityti bylos ¥%s´"
-
-#: src/parse.c:895
-#, c-format
-msgid ""
-"You don't have write permissions on file `%s'.\n"
-"This means that you should save it as a copy to a local directory\n"
-"of your choice."
-msgstr ""
-"Tu neturi teisës raðyti á bylà ¥%s´.\n"
-"Tai reiðkia, kad tu turëtum iðsaugoti jos kopijà á vietiná katalogà."
-
-#: src/prefs.c:234
+#: src/prefs.c:116
 msgid "gtranslator -- options"
 msgstr "gtranslator -- nuostatos"
 
-#.
-#. * The tables for holding all the entries below.
-#.
-#: src/prefs.c:239
-msgid "Personal informations"
+#: src/prefs.c:122
+msgid "Personal information"
 msgstr "Asmeninë informacija"
 
-#: src/prefs.c:240
+#: src/prefs.c:124
 msgid "Language settings"
 msgstr "Kalbos parinktys"
 
-#: src/prefs.c:241
+#: src/prefs.c:126
 msgid "Po file editing"
 msgstr "Po bylos taisymas"
 
-#: src/prefs.c:242
+#: src/prefs.c:128
 msgid "Miscellaneous"
 msgstr "Ávairûs"
 
-#: src/prefs.c:243
+#: src/prefs.c:130
 msgid "Recent files & spell checking"
 msgstr "Pastarosios bylos & raðyba"
 
-#: src/prefs.c:244
+#: src/prefs.c:132
 msgid "Fonts, colors and color schemes"
 msgstr "Ðriftai ir spalvos"
 
-#: src/prefs.c:250
+#: src/prefs.c:134
+msgid "Autosaving"
+msgstr "Automatinis saugojimas"
+
+#: src/prefs.c:136
+msgid "Messages table"
+msgstr "Uþraðø lentelë"
+
+#: src/prefs.c:138
+msgid "Learn buffer & autotranslation"
+msgstr "Mokymosi buferis ir automatinis vertimas"
+
+#: src/prefs.c:144
 msgid "Author's name:"
 msgstr "Autoriaus vardas:"
 
-#: src/prefs.c:253
+#: src/prefs.c:147
 msgid "Author's EMail:"
 msgstr "Autoriaus el. paðtas:"
 
-#: src/prefs.c:257
+#: src/prefs.c:160
 msgid "Default query domain:"
 msgstr "Áprastinis uþklausos domenas:"
 
-#: src/prefs.c:271
+#: src/prefs.c:176
 msgid "Language code:"
 msgstr "Kalbos kodas:"
 
-#: src/prefs.c:276
+#: src/prefs.c:182
 msgid "Language group's EMail:"
 msgstr "Kalbos grupës el. paðtas:"
 
-#: src/prefs.c:292
-msgid "Set non-fuzzy status, if message was changed"
-msgstr "Atþymëti fuzzy bûsenà, jei uþraðas pakeistas"
+#: src/prefs.c:201
+msgid "Remove fuzzy status if message changed"
+msgstr "Nuimti fuzzy bûsenà uþraðui pasikeitus"
 
-#: src/prefs.c:296
-msgid "Warn if the .po-file contains fuzzy translations"
+#: src/prefs.c:205
+msgid "Warn if the po file contains fuzzy translations"
 msgstr "Áspëti, jei byloje yra fuzzy vertimø"
 
-#: src/prefs.c:300
-msgid "Don't save unchanged .po-files"
+#: src/prefs.c:209
+msgid "Don't save unchanged po files"
 msgstr "Nesaugoti nepakeistø bylø"
 
-#: src/prefs.c:304
+#: src/prefs.c:213
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Áspëti, jei bandoma iðsaugoti nepakeistà bylà"
 
-#: src/prefs.c:308
+#: src/prefs.c:217
 msgid "Keep obsolete message in the po files"
 msgstr "Palikti pasenusius uþraðus po bylose"
 
-#: src/prefs.c:315
-msgid "Use free space indicating special character"
-msgstr "Rodyti specialø simbolá tarpui paþymëti"
+#: src/prefs.c:224
+msgid "Use special character to indicate free space"
+msgstr "Naudoti specialø simbolá tarpams þymëti"
 
-#: src/prefs.c:318
+#: src/prefs.c:227
 msgid "Enable the popup menu"
 msgstr "Leisti iððokantá meniu"
 
-#: src/prefs.c:321
-msgid ""
-"Enable the update function of gtranslator (you need the sources for this)"
+#: src/prefs.c:230
+msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr ""
-"Leisti gtranslator atnaujimo funkcijà (tu turi turëti iðeities tekstus)"
 
-#: src/prefs.c:324
+#: src/prefs.c:233
+msgid "Enable the functionality to remove all translations from a po file"
+msgstr ""
+
+#: src/prefs.c:236
+msgid "Delete compiled files (e.g. \"project.gmo\")"
+msgstr "Iðtrinti kompiliuotas bylas (pvz. \"projektas.gmo\")"
+
+#: src/prefs.c:239
+msgid "Load all backends on startup"
+msgstr ""
+
+#: src/prefs.c:242
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Iðsaugoti geometrijà iðeinant ir atkurti pradþioje"
 
-#: src/prefs.c:327
-msgid "Don't show the update information dialogs"
-msgstr "Nerodyti atnaujinim informacijos dialoguose"
+#: src/prefs.c:245
+msgid "Show instant comment view in the main pane"
+msgstr ""
 
-#: src/prefs.c:333
-msgid "Check every recent file before listing it up"
-msgstr "Prieð parodant sàraðe, patikrinti ar byla egzistuoja"
+#: src/prefs.c:248
+msgid "Show the views sidebar"
+msgstr "Rodyti rodiniø ðoninæ juostà"
 
-#: src/prefs.c:336
+#: src/prefs.c:255
+msgid "Maximum number of entries in the recent files' list:"
+msgstr "Maksimalus pastarøjø bylø sàraðe rodomø áraðø skaièius:"
+
+#: src/prefs.c:259
+msgid "Check recent files before showing in recent files' list"
+msgstr "Prieð parodant pastarøjø bylø sàraðe, patikrinti ar byla egzistuoja"
+
+#: src/prefs.c:262
 msgid "Instant spell checking"
 msgstr "Tikrinti raðybà raðant"
 
-#: src/prefs.c:339
+#: src/prefs.c:265
 msgid "Use special dictionary"
 msgstr "Naudoti ypatingà þodynà"
 
-#: src/prefs.c:342
+#: src/prefs.c:269
 msgid "Dictionary to use:"
 msgstr "Naudojamas þodynas:"
 
-#.
-#. * The sixth page with the special font/color stuff.
-#.
-#: src/prefs.c:348
+#: src/prefs.c:312
 msgid "Syntax color scheme to use:"
 msgstr "Naudotina sintaksës spalvø schema:"
 
-#: src/prefs.c:350
-msgid "gtranslator -- color scheme selection"
-msgstr "gtranslator -- spalvø schemos pasirinkimas"
+#: src/prefs.c:317
+msgid "Apply own fonts:"
+msgstr "Pritaikyti savus ðriftus:"
 
-#: src/prefs.c:356
-msgid "Apply special font/colors"
-msgstr "Naudoti ypatingus ðriftus/spalvas"
+#: src/prefs.c:321
+msgid "Original text font:"
+msgstr "Originalo teksto spalva:"
 
-#: src/prefs.c:359
-msgid "Font:"
-msgstr "Ðriftas:"
+#: src/prefs.c:321
+msgid "gtranslator -- font selection/msgid font"
+msgstr "gtranslator -- ðrifto pasirinkimas/msgid ðriftas"
 
-#: src/prefs.c:360
+#: src/prefs.c:325
+msgid "Translation font:"
+msgstr "Vertimo ðriftas:"
+
+#: src/prefs.c:325
+msgid "gtranslator -- font selection/msgstr font"
+msgstr "gtranslator -- ðrifto pasirinkimas/msgstr ðriftas"
+
+#: src/prefs.c:329
+msgid "Apply own colors:"
+msgstr "Naudoti savas spalvas:"
+
+#: src/prefs.c:333
 msgid "Foreground color:"
 msgstr "Raidþiø spalva:"
 
-#: src/prefs.c:361
-msgid "Background color:"
-msgstr "Fono spalva:"
-
-#: src/prefs.c:364
-msgid "gtranslator -- font selection"
-msgstr "gtranslator -- ðrifto parinktis"
-
-#: src/prefs.c:377
+#: src/prefs.c:333
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- raidþiø spalva"
 
-#: src/prefs.c:380
+#: src/prefs.c:337
+msgid "Background color:"
+msgstr "Fono spalva:"
+
+#: src/prefs.c:337
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- fono spalva"
 
-#: src/prefs.c:539
-msgid ""
-"With the Preferences box you can define some variables\n"
-"with which you can make gtranslator make more work\n"
-"like YOU want it to work!"
+#: src/prefs.c:344
+msgid "Save po files automatically at regular intervals"
+msgstr "Reguliariai automatiðkai iðsaugoti po bylas"
+
+#: src/prefs.c:348
+msgid "Append a special suffix to the automatically saved files"
+msgstr "Pridëti galunæ prie automatiðkai saugomø bylø pavadinimo"
+
+#: src/prefs.c:352
+msgid "Autosave suffix:"
+msgstr "Automatinio saugojimo galunë:"
+
+#: src/prefs.c:356
+msgid "Autosave timeout in minutes:"
+msgstr "Automatinio saugojimo intervalas, minutëmis:"
+
+#: src/prefs.c:363
+msgid "Show the messages table (requires gtranslator restart)"
+msgstr "Rodyti uþraðø lentelæ (reikia ið naujo paleisti programà)"
+
+#: src/prefs.c:367
+msgid "Collapse translated entries by default"
 msgstr ""
-"Ðiame Nuostatø lange tu gali apibrëþti keletà kintamøjø,\n"
-"kurie padarys, kad gtranslator veiktø taip, kaip TU nori,\n"
-"kad jis veiktø!"
 
-#: src/prefs.c:727
+#: src/prefs.c:371
+msgid "Use own colors for the messages table groups"
+msgstr "Naudoti savas spalvas uþraðø lentelës grupëms"
+
+#: src/prefs.c:375
+msgid "Untranslated entries color:"
+msgstr "Neiðverstø áraðø spalva:"
+
+#: src/prefs.c:375
+msgid "gtranslator -- untranslated entries' color"
+msgstr "gtranslator -- neiðverstø áraðø spalva"
+
+#: src/prefs.c:379
+msgid "Fuzzy entries color:"
+msgstr "Fuzzy áraðø spalva:"
+
+#: src/prefs.c:379
+msgid "gtranslator -- fuzzy entries' color"
+msgstr "gtranslator -- fuzzy áraðø spalva"
+
+#: src/prefs.c:383
+msgid "Translated entries color:"
+msgstr "Iðverstø áraðø spalva:"
+
+#: src/prefs.c:383
+msgid "gtranslator -- translated entries' color"
+msgstr "gtranslator -- iðverstø áraðø spalva"
+
+#: src/prefs.c:391
+msgid ""
+"Also query the personal learn buffer while autotranslating untranslated "
+"messages"
+msgstr ""
+
+#: src/prefs.c:395
+msgid "Automatically learn a newly translated message"
+msgstr "Automatiðkai iðmokti naujai iðverstà uþraðà"
+
+#.
+#. * Translators: With "fuzzy" I mean a more enhanced (and more
+#. *  crappy) logic while searching for appropriate translations
+#. *   for a original string.
+#.
+#: src/prefs.c:403
+msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
+msgstr ""
+
+#: src/prefs.c:407
+msgid "Minimal required similarity percentage while doing autotranslation"
+msgstr ""
+
+#: src/prefs.c:453
+msgid "Please enter your name!"
+msgstr "Praðom ávesti savo vardà!"
+
+#: src/prefs.c:467
+msgid "Please enter your EMail address!"
+msgstr "Praðom ávesti savo el.paðto adresà!"
+
+#: src/prefs.c:480
+msgid "Please enter a valid EMail address!"
+msgstr "Praðom ávesti galiojantá el.paðto adresà!"
+
+#: src/prefs.c:749
+msgid ""
+"The Preferences box allows you to customise gtranslator\n"
+"to work in ways you find comfortable and productive."
+msgstr ""
+"Nuostatø langas leidþia tau prisitaikyti gtranslator sau,\n"
+"kad dirbtum patogiau ir prodyktyviau."
+
+#: src/prefs-dialog.c:123
+msgid ""
+"\t\tThe Preferences box allows you to customise gtranslator\n"
+"\t\tto work in ways you find comfortable and productive."
+msgstr ""
+"\t\tNuostatø langas leidþia tau prisitaikyti gtranslator sau,\n"
+"\t\tkad dirbtum patogiau ir prodyktyviau."
+
+#: src/prefs-dialog.c:139
+msgid "Preferences section"
+msgstr "Nuostatø skyrius"
+
+#.
+#. * Now the "simple" widget creation routines are following.
+#.
+#: src/prefs-dialog.c:146 src/prefs-dialog.c:312
+msgid "gtranslator -- preferences"
+msgstr "gtranslator -- nuostatos"
+
+#.
+#. * Build up a quite informative question dialog with the count
+#. *  of changes which are still pending.
+#.
+#: src/prefs-dialog.c:307
 #, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "Geometrijos eilutës ¥%s´ nepavyko iðnagrinëti!"
+msgid ""
+"%i preferences changes have been made.\n"
+"Do you want to discard all of these changes?"
+msgstr ""
+"Buvo atlikta %i nuostatø pakeitimø.\n"
+"Ar tu nori atsisakyti visø ðiø pakeitimø?"
 
-#.
-#. * The generally used date format -- i18n this please,
-#. *  translators ,-)
-#.
-#: src/preferences.c:228
-msgid "%Y-%m-%d %H:%M"
-msgstr "%Y-%m-%d %H:%M"
-
-#: src/preferences.c:235
+#: src/preferences.c:188
 msgid "Couldn't generate the current date!"
 msgstr "Nepavyko sugeneruoti esamos datos!"
 
-#: src/query.c:196
-msgid "No language defined in preferences to query the domains for!"
-msgstr "Nuostatose nenurodyta kalba, kurios domenus uþklausti!"
+#: src/replace.c:173
+msgid "No replacements made!"
+msgstr "Neatlikta jokiø pakeitimø!"
 
-#: src/query.c:208
+#: src/save.c:117
 #, c-format
-msgid "Couldn't open locales directory `%s'!"
-msgstr "Negalëjau atidaryti lokaliø katalogo ¥%s´!"
+msgid "Couldn't save compiled gettext file `%s'!"
+msgstr "Negalëjau iðsaugoti sukompiliuotos gettext bylos ¥%s´!"
 
-#: src/session.c:88
+#: src/save.c:160
+#, c-format
+msgid "Couldn't save compressed gettext file `%s'!"
+msgstr "Negalëjau iðsaugoti suarchyvuotos gettext bylos ¥%s´!"
+
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#: src/save.c:170
+#, c-format
+msgid "Couldn't save %s'd gettext file `%s'!"
+msgstr "Negalëjau iðsaugoti %s gettext bylos ¥%s´!"
+
+#: src/save.c:229
+#, c-format
+msgid "Couldn't save zip'ed po file `%s'!"
+msgstr "Negalëjau iðsaugoti zip'uotos gettext bylos ¥%s´!"
+
+#: src/session.c:90
 msgid "Session restored successfully."
 msgstr "Sesija atkurta sëkmingai."
 
-#.
-#. * What to say else? This signals doesn't seem
-#. *  interesting for us but should still get a
-#. *   warning message.
-#.
-#: src/sighandling.c:84
-#, c-format
-msgid "Uncatched signal %i!"
-msgstr "Nepagautas signalas %i!"
+#: src/sidebar.c:60
+msgid "Message"
+msgstr "Uþraðas"
 
-#: src/stylistics.c:222
+#: data/etspecs/messages-table.etspec.h:3 src/sidebar.c:61
+msgid "Number"
+msgstr "Skaièiai"
+
+#: src/sidebar.c:62
+msgid "Format"
+msgstr "Formatai"
+
+#: src/sidebar.c:63
+msgid "Hotkey"
+msgstr "Karðtieji klaviðai"
+
+#: src/sidebar.c:98
+msgid "Views"
+msgstr "Rodiniai"
+
+#: src/stylistics.c:278
 msgid "No font set! Using default font"
 msgstr "Joks ðriftas nenurodytas! Naudoju áprastà"
 
 #.
-#. * Use gtranslator's font in this case.
+#. * Use gtranslator's font in this case -- should be a fallback font
+#. *  for your language.
 #.
-#: src/stylistics.c:226
+#: src/stylistics.c:284
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-13"
 
-#: src/update.c:87
+#.
+#. * The "·" is the "middle dot" (00B7), it is
+#. * used by gtranslator as special char to make
+#. * blanks visible.
+#. * If your language uses that char for another
+#. * purpose or if you use a charset encoding
+#. * that doesn't have it, feel free to change it
+#. * to whatever you think will be better
+#.
+#: src/syntax.c:106 src/utils_gui.c:77 src/utils_gui.c:78 src/views.c:271
+#: src/views.c:341
+msgid "·"
+msgstr "·"
+
+#: src/update.c:102
 msgid "No POTFILES.in found!"
 msgstr "Nerastas POTFILES.in!"
 
-#: src/update.c:103
-msgid "An update caused no changes."
-msgstr "Atnaujinimas nieko nepakeitë."
+#: src/update.c:113
+msgid "Po file is uptodate."
+msgstr "Po byla ir taip naujausia."
 
-#: src/update.c:110
+#: src/update.c:120
 msgid "The update was successfull."
 msgstr "Atnaujinimas buvo sëkmingas."
 
-#: src/update.c:115
-msgid "An error occured while updating the po file."
+#: src/update.c:125
+msgid "An error occurred while updating the po file."
 msgstr "Ávyko klaida, atnaujinant po bylà."
 
-#: src/vfs-handle.c:112
+#: src/utils.c:314 src/utils.c:331
+#, c-format
+msgid "Can't create directory `%s'!"
+msgstr "Negalëjau sukurti katalogo ¥%s´!"
+
+#: src/utils_gui.c:131
+#, c-format
+msgid "The geometry string \"%s\" couldn't be parsed!"
+msgstr "Geometrijos eilutës ¥%s´ nepavyko iðnagrinëti!"
+
+#: src/utils_gui.c:353
+#, c-format
+msgid "You are not permitted to access file '%s'."
+msgstr "Tu negali prieiti prie bylos ¥%s´."
+
+#: src/utils_gui.c:371
+#, c-format
+msgid ""
+"You do not have permission to modify file '%s'.\n"
+"Please save a new copy in a directory where\n"
+"you have write permission."
+msgstr ""
+"Tu neturi teisës taisyti bylà ¥%s´.\n"
+"Praðau iðsaugoti jos kopijà á katalogà, kuriame\n"
+"tu turi raðymo teisæ."
+
+#: src/utils_gui.c:413
+#, c-format
+msgid "The file `%s' is already open in another instance of gtranslator!"
+msgstr ""
+
+#: src/utils_gui.c:446
+#, c-format
+msgid "The necessary decompression program `%s' is not installed!"
+msgstr "Reikalinga iðarchyvavimo byla ¥%s´ nëra ádiegta!"
+
+#: src/utils_gui.c:451
+#, c-format
+msgid "The necessary compression program `%s' is not installed!"
+msgstr "Reikalinga archyvavimo byla ¥%s´ nëra ádiegta!"
+
+#: src/vfs-handle.c:126
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "Negalëjau sukurti laikino katalogo ¥%s´!"
 
-#: src/vfs-handle.c:138
+#: src/vfs-handle.c:154
 #, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "Negaliu rasti bylos ¥%s´!"
 
-#: src/vfs-handle.c:143
+#: src/vfs-handle.c:159
 #, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr "Ávestas neteisingai suformuotas URI ¥%s´!"
 
-#: src/vfs-handle.c:148
+#: src/vfs-handle.c:164
 #, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "Negaliu rasti hosto ¥%s´!"
 
-#: src/vfs-handle.c:153
+#: src/vfs-handle.c:169
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "Hosto vardas ¥%s´ yra neteisingas!"
 
-#: src/vfs-handle.c:158
+#: src/vfs-handle.c:174
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "Hostas ¥%s´ neturi adreso!"
 
-#: src/vfs-handle.c:163
+#: src/vfs-handle.c:179
 msgid "Transfer interrupted!"
 msgstr "Siuntimas nutrauktas!"
 
-#: src/views.c:138
-msgid "No comments available for this message."
-msgstr "Uþraðui nëra jokiø komentarø."
-
-#: src/views.c:244
+#: src/views.c:231
 msgid "No numbers found."
 msgstr "Nerasta skaièiø."
 
-#: src/views.c:276
+#: src/views.c:263
 msgid " "
-msgstr ""
+msgstr " "
 
-#: src/views.c:300
+#: src/views.c:287
 msgid "No C formats present."
 msgstr "Nëra C formatø."
 
-#: src/views.c:340
+#: src/views.c:327
 msgid "No hotkeys defined in message."
 msgstr "Uþraðe nëra karðtøjø klaviðø."
 
-#: nautilus-view/nautilus-gtranslator-view.c:181
-#, c-format
-msgid "Project: %s"
-msgstr "Projektas: %s"
-
-#: nautilus-view/nautilus-gtranslator-view.c:184
-#, c-format
-msgid "Version: %s"
-msgstr "Versija: %s"
-
-#: nautilus-view/nautilus-gtranslator-view.c:188
-#, c-format
-msgid "Last translator: %s <%s>"
-msgstr "Paskutinis vertëjas: %s <%s>"
-
-#: nautilus-view/nautilus-gtranslator-view.c:192
-#, c-format
-msgid "Language team: %s <%s>"
-msgstr "Kalbos komanda: %s <%s>"
-
-#: nautilus-view/nautilus-gtranslator-view.c:195
-#, c-format
-msgid "Last %s.pot update: %s"
-msgstr "Paskutinis %s.pot atnaujinimas: %s"
-
-#: nautilus-view/nautilus-gtranslator-view.c:198
-#, c-format
-msgid "Last po file update: %s"
-msgstr "Paskutinis·po bylos·atnaujinimas:·%s"
-
-#: nautilus-view/nautilus-gtranslator-view.c:201
-#, c-format
-msgid "Encoding: %s (%s)"
-msgstr "Kodavimas: %s (%s)"
-
-#: nautilus-view/nautilus-gtranslator-view.c:208
-#, c-format
-msgid ""
-"Comments:\n"
-"%s"
+#: src/backends/docbook/docbook.xml.h:1
+msgid "Docbook sgml documents backend"
 msgstr ""
-"Komentarai:\n"
-"%s"
 
-#: nautilus-view/nautilus-gtranslator-view.c:248
-msgid "Loading po file..."
-msgstr "Ákeliama po byla..."
-
-#: nautilus-view/nautilus-gtranslator-view.c:268
-#: nautilus-view/nautilus-gtranslator-view.c:283
-msgid "Open Po File"
-msgstr "Atidaryti po bylà"
+#: src/backends/text/text.xml.h:1
+msgid "Plain text files backend"
+msgstr ""
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
 msgstr "Gnome vertimo árankis"
+
+#: data/etspecs/messages-table.etspec.h:1
+msgid "Comment"
+msgstr "Komentarai"
+
+#: data/etspecs/messages-table.etspec.h:2
+msgid "Line"
+msgstr "Eilutë"
+
+#: data/etspecs/messages-table.etspec.h:4
+msgid "Original"
+msgstr "Originale"
+
+#: data/etspecs/messages-table.etspec.h:5
+msgid "Status"
+msgstr "Bûsena"
+
+#: data/etspecs/messages-table.etspec.h:6
+msgid "Translation"
+msgstr "Vertimas"
 
 #: data/mime/gtranslator.keys.in.h:1
 msgid "Compiled gettext po file"
@@ -1416,94 +1834,85 @@ msgstr "Suarchyvuota gettext po byla"
 msgid "Gettext po file"
 msgstr "Gettext po byla"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
-msgid "Gtranslator Po File"
-msgstr "Gtranslator po byla"
+#~ msgid "View URL..."
+#~ msgstr "Þiûrëti URL.."
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:2
-msgid "Gtranslator Po File View"
-msgstr "Gtranslator po bylø vaizdas"
+#~ msgid "Syntax color scheme to use"
+#~ msgstr "Naudotina sintaksës spalvø schema"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:3
-msgid "Gtranslator Po File Viewer"
-msgstr "Gtranslator po bylø perþiûros programa"
+#~ msgid "Aut_oaccomplish"
+#~ msgstr "Uþpildyti _trûkstamus"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:4
-msgid "Gtranslator Po file viewer component's factory"
-msgstr ""
+#~ msgid "_Comments"
+#~ msgstr "_Komentarai"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:5
-msgid "Nautilus Gtranslator View factory"
-msgstr ""
+#~ msgid "View comments for message"
+#~ msgstr "Rodyti komentarus uþraðui"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:6
-msgid "Nautilus Gtranslator view"
-msgstr ""
+#~ msgid "Go one message forward"
+#~ msgstr "Eiti vienu uþraðu pirmyn"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:7
-msgid "View as Po File"
-msgstr "Rodyti kaip po bylà"
-
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:2
-msgid "Open _po file"
-msgstr "Atidaryti _po bylà"
-
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:3
-msgid "Open po file"
-msgstr "Atidaryti po bylà"
-
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:4
-msgid "_File"
-msgstr "_Byla"
-
-#~ msgid "Successfully parsed the file \"%s\""
-#~ msgstr "Sëkmingai iðnagrinëta byla ¥%s´"
-
-#~ msgid "The file has no header!"
-#~ msgstr "Byla neturi antraðtës!"
+#~ msgid "Use free space indicating special character"
+#~ msgstr "Rodyti specialø simbolá tarpui paþymëti"
 
 #~ msgid ""
-#~ "gtranslator will be a Gnome framework for translating these emminent "
-#~ "important po-files.\n"
-#~ "It will be based upon a gtranslatord and a gtranslator client. Wish the best "
-#~ "for us translators and for me!"
+#~ "Enable the update function of gtranslator (you need the sources for this)"
 #~ msgstr ""
-#~ "gtranslator bus Gnome árankis versti toms gyvybiðkai svarbioms po byloms.\n"
-#~ "Jis turës uþraðø duomenø bazæ gtranslatord. Linkëkit geriausio mums, "
-#~ "vertëjams, ir man!"
+#~ "Leisti gtranslator atnaujimo funkcijà (tu turi turëti iðeities tekstus)"
 
-#~ msgid "Bye bye!"
-#~ msgstr "Iki kito karto!"
+#~ msgid "Don't show the update information dialogs"
+#~ msgstr "Nerodyti atnaujinim informacijos dialoguose"
 
-#~ msgid "There's no file to open!"
-#~ msgstr "Nenurodyta, kokià bylà atidaryti!"
-
-#~ msgid "Fonts & Colors"
-#~ msgstr "Ðriftai ir spalvos"
-
-#~ msgid "gtranslatord daemon"
-#~ msgstr "gtranslatord demonas"
-
-#~ msgid "gtranslatord message database and team management daemon"
-#~ msgstr "gtranslatord uþraðø duomenø bazës ir komandø tvarkymo demonas"
+#~ msgid "Font:"
+#~ msgstr "Ðriftas:"
 
 #~ msgid ""
-#~ "gtranslatord has started successfully and will do some operations now ...\n"
+#~ "With the Preferences box you can define some variables\n"
+#~ "with which you can make gtranslator make more work\n"
+#~ "like YOU want it to work!"
 #~ msgstr ""
-#~ "gtransaltord sëkmingai apsileido, ir dabar atliks kelis veiksmus...\n"
+#~ "Ðiame Nuostatø lange tu gali apibrëþti keletà kintamøjø,\n"
+#~ "kurie padarys, kad gtranslator veiktø taip, kaip TU nori,\n"
+#~ "kad jis veiktø!"
 
-#~ msgid ""
-#~ "GConf initialization error:\n"
-#~ "`%s'"
-#~ msgstr ""
-#~ "GConf inicializavimo klaida:\n"
-#~ "¥%s´"
+#~ msgid "%Y-%m-%d %H:%M"
+#~ msgstr "%Y-%m-%d %H:%M"
 
-#~ msgid "No color path found!"
-#~ msgstr "Nerastas spalvos kelias!"
+#~ msgid "No language defined in preferences to query the domains for!"
+#~ msgstr "Nuostatose nenurodyta kalba, kurios domenus uþklausti!"
 
-#~ msgid "Couldn't even load default font! Using fixed"
-#~ msgstr "Netgi áprastas ðriftas negali bûti uþkrautas! naudoju fixed"
+#~ msgid "Uncatched signal %i!"
+#~ msgstr "Nepagautas signalas %i!"
 
-#~ msgid "Couldn't open the team database file `%s'!"
-#~ msgstr "Negalëjau atidaryti komandø duombazës ¥%s´!"
+#~ msgid "An update caused no changes."
+#~ msgstr "Atnaujinimas nieko nepakeitë."
+
+#~ msgid "You don't have read permissions on file `%s'"
+#~ msgstr "Tu neturi teisës perskaityti bylos ¥%s´"
+
+#~ msgid "No comments available for this message."
+#~ msgstr "Uþraðui nëra jokiø komentarø."
+
+#~ msgid "Loading po file..."
+#~ msgstr "Ákeliama po byla..."
+
+#~ msgid "Open Po File"
+#~ msgstr "Atidaryti po bylà"
+
+#~ msgid "Gtranslator Po File"
+#~ msgstr "Gtranslator po byla"
+
+#~ msgid "Gtranslator Po File View"
+#~ msgstr "Gtranslator po bylø vaizdas"
+
+#~ msgid "Gtranslator Po File Viewer"
+#~ msgstr "Gtranslator po bylø perþiûros programa"
+
+#~ msgid "View as Po File"
+#~ msgstr "Rodyti kaip po bylà"
+
+#~ msgid "Open _po file"
+#~ msgstr "Atidaryti _po bylà"
+
+#~ msgid "_File"
+#~ msgstr "_Byla"
