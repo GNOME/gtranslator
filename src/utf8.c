@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "comment.h"
 #include "convert.h"
 #include "syntax.h"
 #include "utf8.h"
@@ -92,15 +93,36 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
  */
 void gtranslator_utf8_convert_po_to_utf8(void)
 {
+	gchar		*author;
+	GtrComment	*header_comment;
+	
 	g_return_if_fail(po->messages!=NULL);
 	
 	g_list_foreach(po->messages, 
 		(GFunc) gtranslator_utf8_convert_message_to_utf8, NULL);
-		
+
 	/*
-	 * Set the po file charset to UTF-8 as we did convert it now.
+	 * Convert the author name to UTF-8.
 	 */
-	g_free(po->header->charset); 
+	author=gtranslator_convert_string_to_utf8(po->header->translator, po->header->charset);
+	g_free(po->header->translator);
+
+	po->header->translator=g_strdup(author);
+	g_free(author);
+
+	/*
+	 * Convert the header comment to a GtrComment and get the UTF-8 version of it.
+	 */
+	header_comment=gtranslator_comment_new(po->header->comment);
+	g_free(po->header->comment);
+
+	po->header->comment=g_strdup(GTR_COMMENT(header_comment)->utf8_comment);
+	gtranslator_comment_free(&header_comment);
+
+	/*
+	 * Now assign the new charset name: UTF-8 .-)
+	 */
+	g_free(po->header->charset);
 	po->header->charset=g_strdup("utf-8");
 }
 

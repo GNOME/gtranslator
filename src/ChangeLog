@@ -1,5 +1,9 @@
 2001-07-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* utf8.c: Fixed exporting of po files -- the author name and the 
+		eventually existing header comment are now also exported
+		 to UTF-8.
+
 	* learn.c: Added "gtranslator_learn_set_xml_prop" util function to
 		set XML props safely; also respect the found encoding while
 		 writing the XML document and set the encoding attribute 
