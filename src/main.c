@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Peeter Vois <peeter@gtranslator.org>
  * 
@@ -65,6 +65,7 @@ static gchar 	*save_html_output_file=NULL;
 static gchar 	*domains_dir=NULL;
 static gchar	*learn_file=NULL;
 static gchar	*auto_translate_file=NULL;
+static gchar	*exporting_po_file=NULL;
 static gboolean	build_information=FALSE;
 static gboolean	no_modules=FALSE;
 gboolean 	nosyntax=FALSE;
@@ -84,6 +85,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"build-information", 'b', POPT_ARG_NONE, &build_information,
 		0, N_("Show build information/specifications"), NULL
+	},
+	{
+		"export-learn-buffer", 'e', POPT_ARG_STRING, &exporting_po_file,
+		0, N_("Export learn buffer to a plain po file"), N_("PO_FILE")
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
@@ -471,8 +476,8 @@ int main(int argc, char *argv[])
 	gtranslator_learn_init();
 
 	/*
-	 * Check if any filename for learning was supplied and if yes, 
-	 *  learn the file completely, shutdown the learn buffer and exit afterwards.
+	 * Check if any filename for learning was supplied and if yes, learn
+	 *  the file completely, shutdown the learn buffer & exit afterwards.
 	 */
 	if(learn_file)
 	{
@@ -514,6 +519,49 @@ int main(int argc, char *argv[])
 		 *  message informing the user about the success.
 		 */
 		g_print(_("Learned `%s' successfully.\n"), learn_file);
+
+		return 0;
+	}
+	
+	/*
+	 * If we've got the task to export a learn buffer to a plain po file
+	 *  then we should do this now after all the other tasks we could have
+	 *   to have to be done (?!).
+	 */
+	if(exporting_po_file && exporting_po_file[0]!='\0')
+	{
+		gtranslator_learn_export_to_po_file(exporting_po_file);
+
+		/*
+		 * The usual free'ing orgies are now coming along...
+		 */
+		
+		gtranslator_learn_shutdown();
+		/*
+		 * Set up the "runtime/filename" config. key to a sane value.
+		 */
+		gtranslator_config_init();
+		gtranslator_config_set_string("runtime/filename", "--- No file ---");
+		gtranslator_config_close();
+
+		/*
+		 * Free all till now allocated stuff.
+		 */
+		gtranslator_translator_free(gtranslator_translator);
+		gtranslator_preferences_free();
+
+		/*
+		 * Shutdown GnomeVFS.
+		 */
+		if(gnome_vfs_initialized())
+		{
+			gnome_vfs_shutdown();
+		}
+
+		/*
+		 * Give us another small status feedback about the export.
+		 */
+		g_print(_("Exported learn buffer to `%s'."), exporting_po_file);
 
 		return 0;
 	}
