@@ -852,13 +852,17 @@ Your file should likely be named '%s.po'."),
 	/* If user GtrPreferences to, warn it about fuzzy mesages left */
 	if(GtrPreferences.warn_if_fuzzy && po->fuzzy)
 	{
-		gchar *warn;
-		warn = g_strdup_printf(_("File %s\n"
-				       "contains %d fuzzy messages"),
-				       po->filename, po->fuzzy);
-		gnome_warning_dialog_parented(warn, 
-			GTK_WINDOW(gtranslator_application));
-		GTR_FREE(warn);
+		GtkWidget *dialog;
+
+		dialog = gtk_message_dialog_new(
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK,
+			_("File %s\ncontains %d fuzzy messages"),
+			po->filename, po->fuzzy);
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(dialog);
 	}
 
 	return TRUE;
