@@ -25,6 +25,11 @@ AC_CHECK_FUNCS(usleep)
 GNOME_X_CHECKS
 
 dnl -------------------------------------------------------------------
+dnl Libtool for the libgtranslator directory and the directory.
+dnl -------------------------------------------------------------------
+AM_PROG_LIBTOOL
+
+dnl -------------------------------------------------------------------
 dnl Check for the window-icon feature of gnome-libs > 1.0.59.
 dnl -------------------------------------------------------------------
 MY_CFLAGS=$CFLAGS
@@ -53,11 +58,23 @@ AM_PATH_GTK(1.2.4)
 dnl -------------------------------------------------------------------
 dnl Check for libxml >= 1.8.7 and get the cflags and libs.
 dnl -------------------------------------------------------------------
-GNOME_XML_CHECK
-XML_CFLAGS=`xml-config --cflags`
-XML_LIBS=`xml-config --libs`
-AC_SUBST(XML_CFLAGS)
-AC_SUBST(XML_LIBS)
+AC_PATH_PROG(XML_CONFIG, xml-config, nej)
+if test "our$XML_CONFIG" = "ournej" ; then
+	AC_MSG_ERROR([No xml-config found ! Please install libxml first.])
+else
+	AC_MSG_CHECKING([for libxml >= 1.8.6])
+	XML_VERSION=`xml-config --version|sed -e 's/\.//g'`
+	if test "$XML_VERSION" -lt 186 ; then
+		AC_MSG_RESULT("no")
+		AC_MSG_ERROR("Your libxml is too old!")
+	else
+		AC_MSG_RESULT(["yes, version `xml-config --version`"])
+	fi
+	XML_CFLAGS=`xml-config --cflags`
+	XML_LIBS=`xml-config --libs`
+	AC_SUBST(XML_CFLAGS)
+	AC_SUBST(XML_LIBS)
+fi	
 
 dnl -------------------------------------------------------------------
 dnl Our languages caravane has got settled here in place.( add your's )
