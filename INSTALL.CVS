@@ -1,6 +1,24 @@
 Instructions for the CVS people :-)
 -------------------------------
 
+Special notice about the current CVS HEAD - It has been quite dramatically
+altered since the last few stable releases. A bit of collaboration with the
+author of gettext, Bruno Haible, has resulted in him improving the API of
+gettext considerably enough that we can now use the gettext library to parse
+and write back the po file being editted. This obviously results in a
+smaller footprint, and better code redundancy/re-use etc.
+
+Bruno has made a pre-release of gettext-0.15, which you will need to install
+before gtranslator will build. You can find it at:
+
+http://www.haible.de/bruno/gnu/gettext-0.15-pre1.tar.gz
+
+
+
+Stuff you should probably already know
+-----------------------------------
+
+
 As you're used to it, normally every GNU program comes along with a nice
  script named "./configure" which allows us and you to build the programs
   according to the environment or to warn you if you're missing a library/
