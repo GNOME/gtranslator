@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2001-09-06 02:22+0200\n"
-"PO-Revision-Date: 2001-09-06 02:22+0200\n"
+"POT-Creation-Date: 2001-09-10 10:01+0200\n"
+"PO-Revision-Date: 2001-09-10 10:08+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -182,8 +182,8 @@ msgid "English"
 msgstr "Engelska"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:569 src/messages-table.c:376
-#: src/messages-table.c:411
+#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:553 src/messages-table.c:376
+#: src/messages-table.c:410
 msgid "Translated"
 msgstr "Översatt"
 
@@ -282,14 +282,14 @@ msgid ""
 msgstr ""
 "URI:er används för att lokalisera filer unikt på olika system.\n"
 "De vanliga Internetadresserna (URL:er) är också URI:er -- du kan\n"
-"använda dem för att öppna fjärrpofiler som finns på servrar med\n"
+"använda dem för att öppna fjärr-po-filer som finns på servrar med\n"
 "standardprotokoll som \"http\", \"ftp\" eller andra åtkomstmetoder\n"
 "som stöds av GnomeVFS. En del exempel-URI:er för att tydliggöra\n"
 "(dessa stöds):\n"
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<EN-FJÄRRPOFIL>\n"
+"ftp://anonymous@ftp.någonstans.se/<EN-FJÄRR-PO-FIL>\n"
 "\n"
-"file:///<POFIL>"
+"file:///<PO-FIL>"
 
 # src/dialogs.c:826
 #: src/dialogs.c:1041
@@ -312,7 +312,7 @@ msgid "Recovering `%s'..."
 msgstr "Återställer \"%s\"..."
 
 # src/dialogs.c:896
-#: src/dialogs.c:1113
+#: src/dialogs.c:1110
 msgid "Couldn't get list of gettext domains!"
 msgstr "Kunde inte hämta listan med gettext-domäner!"
 
@@ -320,43 +320,43 @@ msgstr "Kunde inte hämta listan med gettext-domäner!"
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1120
+#: src/dialogs.c:1117
 msgid "Here you can query existing gettext domains for a translation."
 msgstr ""
 "Här kan du söka igenom befintliga gettext-domäner efter en översättning."
 
 # src/dialogs.c:906
-#: src/dialogs.c:1123
+#: src/dialogs.c:1120
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- sök igenom befintliga gettext-domäner"
 
 # src/dialogs.c:907 src/menus.c:366
-#: src/dialogs.c:1124 src/menus.c:371
+#: src/dialogs.c:1121 src/menus.c:371
 msgid "Query"
 msgstr "Sök"
 
 # src/dialogs.c:915
-#: src/dialogs.c:1132
+#: src/dialogs.c:1129
 msgid "Query string:"
 msgstr "Söksträng:"
 
 # src/dialogs.c:922
-#: src/dialogs.c:1139
+#: src/dialogs.c:1136
 msgid "Domain to search the translation in:"
 msgstr "Domän att söka efter översättningen i:"
 
 # src/dialogs.c:972
-#: src/dialogs.c:1189
+#: src/dialogs.c:1186
 msgid "No query string given!"
 msgstr "Ingen söksträng angavs!"
 
 # src/dialogs.c:1006
-#: src/dialogs.c:1230
+#: src/dialogs.c:1227
 msgid "Couldn't find any result for the query!"
 msgstr "Kunde inte hitta ett resultat för frågan!"
 
 # src/dialogs.c:1019
-#: src/dialogs.c:1243
+#: src/dialogs.c:1240
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
@@ -370,21 +370,21 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:1333
+#: src/dialogs.c:1330
 msgid "Query's result translation is already there!"
 msgstr "Sökfrågans resulterande översättning finns redan där!"
 
 # src/dialogs.c:1131
-#: src/dialogs.c:1356
+#: src/dialogs.c:1353
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from the default query domain and the personal learn buffer?"
 msgstr ""
 "Ska gtranslator automatiskt översätta filen med information från\n"
-"standardsökdomänen (om möjligt) och din personliga inlärningsbuffert?"
+"standardsökdomänen och din personliga inlärningsbuffert?"
 
 # src/menus.c:73
-#: src/dialogs.c:1361
+#: src/dialogs.c:1358
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from the default query domain?"
@@ -408,47 +408,47 @@ msgstr ""
 "\"%s\""
 
 # src/sidebar.c:107
-#: src/gui.c:266
+#: src/gui.c:250
 msgid "Edit comment"
 msgstr "Redigera kommentar"
 
 # src/gui.c:385
-#: src/gui.c:555
+#: src/gui.c:539
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i luddiga kvar ]"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gui.c:555 src/gui.c:559 src/menus.c:352 src/messages-table.c:362
-#: src/messages-table.c:418
+#: src/gui.c:539 src/gui.c:543 src/menus.c:352 src/messages-table.c:362
+#: src/messages-table.c:417
 msgid "Fuzzy"
 msgstr "Luddig"
 
 # src/gui.c:389
-#: src/gui.c:559
+#: src/gui.c:543
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Inga luddiga kvar ]"
 
 # src/gui.c:396
-#: src/gui.c:567
+#: src/gui.c:551
 msgid "Stick"
 msgstr "Klistra"
 
 # src/gui.c:407
-#: src/gui.c:578
+#: src/gui.c:562
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i oöversatta kvar ]"
 
 # src/gui.c:407 src/gui.c:409
-#: src/gui.c:578 src/gui.c:580 src/messages-table.c:334
-#: src/messages-table.c:408
+#: src/gui.c:562 src/gui.c:564 src/messages-table.c:334
+#: src/messages-table.c:407
 msgid "Untranslated"
 msgstr "Oöversatt"
 
 # src/gui.c:409
-#: src/gui.c:580
+#: src/gui.c:564
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Inga oöversatta kvar ]"
@@ -457,7 +457,7 @@ msgstr "%s [ Inga oöversatta kvar ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:593
+#: src/gui.c:577
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Meddelande %d / %d / Status: %s"
@@ -996,7 +996,7 @@ msgstr "GModule-implementationen stöder inte inläsning av dynamiska moduler!"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:449
+#: src/main.c:440
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "Inlärning av \"%s\" lyckades.\n"
@@ -1410,18 +1410,18 @@ msgid "Fuzzy (%i)"
 msgstr "Luddiga (%i)"
 
 # src/gui.c:396
-#: src/messages-table.c:414
+#: src/messages-table.c:413
 msgid "Sticky"
 msgstr "Klistrig"
 
 # src/open-differently.c:161
-#: src/open-differently.c:159
+#: src/open.c:142
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Kunde inte öppna kompilerade gettext-filen \"%s\"!"
 
 # src/open-differently.c:212
-#: src/open-differently.c:206
+#: src/open.c:189
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Kunde inte öppna komprimerade gettext-filen \"%s\"!"
@@ -1431,16 +1431,16 @@ msgstr "Kunde inte öppna komprimerade gettext-filen \"%s\"!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open-differently.c:216
+#: src/open.c:199
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr "Kunde inte öppna den %s-komprimerade gettext-filen \"%s\"!"
 
 # src/open-differently.c:293
-#: src/open-differently.c:284
+#: src/open.c:267
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
-msgstr "Kunde inte öppna zippade o-filen \"%s\"!"
+msgstr "Kunde inte öppna zippade po-filen \"%s\"!"
 
 # src/parse.c:101
 #: src/parse.c:120
@@ -1453,7 +1453,7 @@ msgstr ""
 "Lägg till detta till parse.c, rad %i."
 
 # src/parse.c:247
-#: src/parse.c:368
+#: src/parse.c:369
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1465,7 +1465,7 @@ msgstr ""
 "Var vänlig och kontrollera filen och försök igen."
 
 # src/parse.c:283
-#: src/parse.c:414
+#: src/parse.c:415
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1475,23 +1475,22 @@ msgstr ""
 "%s"
 
 # src/parse.c:306
-#: src/parse.c:438
+#: src/parse.c:439
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen \"%s\" finns inte alls!"
 
 # src/parse.c:396
-#: src/parse.c:567
+#: src/parse.c:568
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-# src/parse.c:553
-#: src/parse.c:755
+#: src/parse.c:751
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
-"Pot iles are generated by the compilation process.\n"
+"Pot files are generated by the compilation process.\n"
 "Your file should likely be named '%s.po'."
 msgstr ""
 "Du sparar en fil med ändelsen .pot.\n"
@@ -1499,13 +1498,13 @@ msgstr ""
 "Din fil bör troligtvis kallas \"%s.po\"."
 
 # src/parse.c:599
-#: src/parse.c:817
+#: src/parse.c:813
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Kunde inte öppna filen \"%s\" för skrivning!"
 
 # src/parse.c:645
-#: src/parse.c:863
+#: src/parse.c:859
 #, c-format
 msgid ""
 "File %s\n"
@@ -1515,7 +1514,7 @@ msgstr ""
 "innehåller %d luddiga meddelanden"
 
 # src/parse.c:681
-#: src/parse.c:900
+#: src/parse.c:896
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1527,17 +1526,17 @@ msgstr ""
 "Vill du spara den ändå?"
 
 # src/parse.c:689
-#: src/parse.c:908
+#: src/parse.c:904
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- oförändrad"
 
 # data/desktop/gtranslator.desktop.in.h:2 src/gui.c:172 src/parse.c:761
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:993
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:989
 msgid "gtranslator"
 msgstr "gtranslator"
 
 # src/parse.c:786
-#: src/parse.c:1020
+#: src/parse.c:1016
 #, c-format
 msgid ""
 "File %s\n"
@@ -1547,12 +1546,12 @@ msgstr ""
 "har ändrats. Vill du återgå till den sparade kopian?"
 
 # src/parse.c:830
-#: src/parse.c:1171
+#: src/parse.c:1167
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Tyvärr, msgfmt finns inte tillgängligt på ditt system!"
 
 # src/parse.c:859
-#: src/parse.c:1206
+#: src/parse.c:1202
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1890,7 +1889,7 @@ msgstr "Kunde inte spara den %s-komprimerade gettext-filen \"%s\"!"
 #: src/save-differently.c:229
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "Kunde inte spara zippade o-filen \"%s\"!"
+msgstr "Kunde inte spara zippade po-filen \"%s\"!"
 
 # src/session.c:90
 #: src/session.c:90
@@ -1973,7 +1972,7 @@ msgid "An error occurred while updating the po file."
 msgstr "Ett fel inträffade vid uppdatering av po-filen."
 
 # src/utils.c:119
-#: src/utils.c:317 src/utils.c:334
+#: src/utils.c:313 src/utils.c:330
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Kunde inte skapa katalogen \"%s\"!"
@@ -2132,9 +2131,10 @@ msgstr "Komprimerad gettext-po-fil"
 msgid "Gettext po file"
 msgstr "Gettext-po-fil"
 
+# src/parse.c:553
 #~ msgid ""
 #~ "You are saving a file with a .pot extension.\n"
-#~ "Pot files are generated by the compilation process.\n"
+#~ "Pot iles are generated by the compilation process.\n"
 #~ "Your file should likely be named '%s.po'."
 #~ msgstr ""
 #~ "Du sparar en fil med ändelsen .pot.\n"
