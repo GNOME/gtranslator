@@ -244,7 +244,7 @@ GtrLanguage languages[] = {
 	 "", "8bit"
 	},
 	{
-	 N_("Turkish"), "tr", "iso-8859-9",
+	 N_("Turkish"), "tr", "ISO-8859-9",
 	 "gnome-turk@gnome.org", "8bit"
 	},
 	{
