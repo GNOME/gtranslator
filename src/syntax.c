@@ -23,20 +23,29 @@
 #include <ctype.h>
 
 /*
+ * Determine if the current given message contains any format specifier
+ *  in msgid/msgstr parts.
+ */  
+gboolean gtranslator_syntax_get_format(GtrMsg *msg);
+
+/*
  * Insert the syntax highlighted text into the given text widget.
  */ 
 void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 {
+	#define clear_string(x) x=g_string_truncate(x, 0)
 	GString *string=g_string_new("");
 	gint cp;
 	
 	g_return_if_fail(textwidget!=NULL);
-	g_return_if_fail(msg!=NULL);
 
-	#define clear_string(x) x=g_string_truncate(x, 0)
+	if(!msg)
+	{
+		return;
+	}
 
 	gtk_text_freeze(GTK_TEXT(textwidget));
-	
+
 	for(cp=0; cp < strlen(msg); ++cp)
 	{
 		/*
@@ -176,7 +185,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '}':
 			case '<':
 			case '>':
-			case '&':	
+			case '&':
+			case '$':
 			case '/':
 			case '\\':
 			case '|':	
@@ -212,6 +222,31 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	gtk_text_thaw(GTK_TEXT(textwidget));
 	
 	g_string_free(string, 0);
+}
+
+/*
+ * Update the syntax in the given GtkText widget.
+ */ 
+void gtranslator_syntax_update_text(GtkWidget *textwidget)
+{
+	GString *str=g_string_new("");
+	
+	g_return_if_fail(textwidget!=NULL);
+
+	str=g_string_append(str, gtk_editable_get_chars(
+		GTK_EDITABLE(textwidget), 0, -1));
+
+	if(str->len>0)
+	{
+		gint pos;
+		pos=gtk_editable_get_position(GTK_EDITABLE(textwidget));
+		
+		gtk_editable_delete_text(GTK_EDITABLE(textwidget), 0, -1);
+
+		gtranslator_syntax_insert_text(textwidget, str->str);
+		
+		gtk_editable_set_position(GTK_EDITABLE(textwidget), pos);
+	}
 }
 
 /*

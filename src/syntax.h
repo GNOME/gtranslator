@@ -27,17 +27,17 @@
  * GdkColors aren't as logical as natural color names I guess.
  */
 typedef enum {
-	RED,
-	GREEN,
-	BLUE,
-	BLACK,
-	WHITE,
-	YELLOW,
-	ORANGE,
-	NAVY,
-	MAROON,
 	AQUA,
-	BROWN
+	BLACK,
+	BLUE,
+	BROWN,
+	GREEN,
+	MAROON,
+	NAVY,
+	ORANGE,
+	RED,
+	WHITE,
+	YELLOW
 } ColorName;
 
 /*
@@ -46,9 +46,9 @@ typedef enum {
 void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg);
 
 /*
- * Are there any format specifiers in this message? Return TRUE if it's so.
+ * Update the text in the given textwidget.
  */
-gboolean gtranslator_syntax_get_format(GtrMsg *msg);
+void gtranslator_syntax_update_text(GtkWidget *textwidget);
 
 /*
  * Returns the requested GdkColor.

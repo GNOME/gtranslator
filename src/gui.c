@@ -1006,6 +1006,12 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
 		}
 	}
+
+	/*
+	 * Update the syntax highlighting in the translation box.
+	 */ 
+	gtranslator_syntax_update_text(trans_box);
+
 	/*
 	 * Do all these steps only if the option to use the '·' is set.
 	 */
@@ -1019,6 +1025,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		 * Freeze the translation box.
 		 */
 		gtk_text_freeze(GTK_TEXT(trans_box));
+		
 		/*
 		 * Get the current pointer position.
 		 */
@@ -1053,6 +1060,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		 * Go to the old text index.
 		 */
 		gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+
 		/*
                  * Thaw up the translation box to avoid the reverse writing
                  *  feature.

@@ -35,7 +35,10 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 	string=g_string_append_c(string, textstring[x]); \
 	string=g_string_append(string, "</font>");
 	
-	g_return_val_if_fail(textstring!=NULL, NULL);
+	if(!textstring)
+	{
+		return "";
+	}
 
 	len=strlen(textstring);
 	
