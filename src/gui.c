@@ -465,7 +465,7 @@ static void create_actions(void)
 	insert_action(ACT_FIND, the_edit_menu[7], the_navibar[8]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
 	insert_action(ACT_QUERY, the_edit_menu[9], the_navibar[9]);
-	insert_action(ACT_HEADER, the_edit_menu[11], the_navibar[6]);
+	insert_action(ACT_HEADER, the_edit_menu[11], the_toolbar[6]);
 	/*------------------------------------------------*/
 	insert_action(ACT_FIRST, the_messages_menu[0], the_navibar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_navibar[1]);

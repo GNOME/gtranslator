@@ -734,10 +734,9 @@ Would you like to insert it into the translation?"),
 						_("Query's result translation is already there!"));
 					}
 
+					gtranslator_free_query_result(&result);
 					g_free(content);
 				}
-
-				gtranslator_free_query_result(&result);
 			}
 			/*
 			 * FIXME: This causes a SEGV.
