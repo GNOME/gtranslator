@@ -13,14 +13,16 @@ Vendor: 	GNOME Project
 Distribution: 	Any
 Version: 	@VERSION@
 Release: 	%{release}
+Packager:	Roy-Magne Mo <rmo@sunnmore.net>
 Copyright: 	GPL
 Group: 		Development/Tools
 Source:		http://www.gtranslator.org/download/releases/%{version}/%{name}-%{version}.tar.gz
 URL: 		http://www.gtranslator.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 Summary:	gtranslator is a comfortable po file editor with many bells and whistles.
+Prereq:		scrollkeeper >= 0.1.4
 Requires:	glib >= 1.2.8, gtk+ >= 1.2.8, gnome-libs >= 1.2.8, imlib, GConf >= 1.0
-Requires:	gnome-vfs >= 0.4.1, gal >= 0.10.99, scrollkeeper >= 0.1.4
+Requires:	gnome-vfs >= 0.4.1, gal >= 0.10.99
 
 %description
 gtranslator is a comfortable po file editor with many bells and whistles.
@@ -29,8 +31,9 @@ files immenantly.
 
 %changelog
 
-*  Mon Dec 03 2001 Roy-Magne Mo  <rmo@sunnmore.net>
+*  Mon Dec 03 2001 Roy-Magne Mo  <rmo@sunnmore.net>	0.39.2-1
 -  Used rpm4-macros and cleaned up filedefinitions.
+-  Moved scrollkeeper to prereq
 
 *  Tue Aug 21 2001 Fatih Demir	<kabalak@gtranslator.org>
 
