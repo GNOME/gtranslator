@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39.1\n"
-"POT-Creation-Date: 2001-11-02 20:22+0100\n"
+"POT-Creation-Date: 2001-12-12 17:00+0100\n"
 "PO-Revision-Date: 2001-11-02 20:09+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian/Nynorsk <nn@li.org>\n"
@@ -38,12 +38,12 @@ msgstr ""
 #: src/about.c:76
 #, c-format
 msgid "Current colorscheme: \"%s\" (version %s) by"
-msgstr "Gjeldane fargeskjema: \"%s\" (versjon %s) av"
+msgstr "Gjeldane fargeskjema: «%s» (versjon %s) av"
 
 #.
 #. * This is a status report feedback: "Blabla backend\n (filename) loaded.\n".
 #.
-#: src/backend.c:279
+#: src/backend.c:280
 #, c-format
 msgid ""
 "%s\n"
@@ -55,7 +55,7 @@ msgstr ""
 #: src/color-schemes.c:173
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
-msgstr "Klarte ikkje å bruke fargeskjema-fil '%s'!"
+msgstr "Klarte ikkje å ta i bruk fargeskjema-fil «%s»!"
 
 #: src/color-schemes.c:302
 msgid "Couldn't retrieve author information!"
@@ -108,12 +108,12 @@ msgstr "gtranslator -- rediger kommentar"
 
 #: src/dialogs.c:347
 msgid "Comment:"
-msgstr "Kommentar:"
+msgstr "Merknad:"
 
 #: src/dialogs.c:463
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
-msgstr "Skal ALLE omsetjingar frå '%s' slettast?"
+msgstr "Skal ALLE omsetjingar frå «%s» slettast?"
 
 #: src/dialogs.c:476 src/dialogs.c:501
 msgid "gtranslator -- confirm removal of all translations"
@@ -155,7 +155,7 @@ msgstr "Skil mellom små og store bokstavar"
 msgid "English"
 msgstr "Engelsk"
 
-#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:560 src/messages-table.c:448
+#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:559 src/messages-table.c:448
 #: src/messages-table.c:489
 msgid "Translated"
 msgstr "Omsett"
@@ -222,7 +222,7 @@ msgstr "Ingen URI vart gjeven!"
 
 #: src/dialogs.c:997
 msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr "Ingen støtta URI-protokoll (som \"ftp://) vart gitt!"
+msgstr "Ingen støtta URI-protokoll (som «ftp://») vart gitt!"
 
 #: src/dialogs.c:1005
 msgid ""
@@ -264,7 +264,7 @@ msgstr ""
 #: src/dialogs.c:1064
 #, c-format
 msgid "Recovering `%s'..."
-msgstr "Gjenopprettar '%s' ..."
+msgstr "Gjenopprettar «%s» ..."
 
 #: src/dialogs.c:1110
 msgid "Couldn't get list of gettext domains!"
@@ -334,11 +334,11 @@ msgstr ""
 "Skal gtranslator autoomsetje fila ved å bruke informasjonen\n"
 "frå forvald søkedomene?"
 
-#: src/find.c:213
+#: src/find.c:215
 msgid "Please enter a search string"
 msgstr "Tast inn ein søkestreng"
 
-#: src/find.c:229
+#: src/find.c:231
 #, c-format
 msgid ""
 "Could not find\n"
@@ -351,36 +351,36 @@ msgstr ""
 msgid "Edit comment"
 msgstr "Rediger kommentar"
 
-#: src/gui.c:546
+#: src/gui.c:545
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i uferdige att ]"
 
-#: src/gui.c:546 src/gui.c:550 src/menus.c:352 src/messages-table.c:434
+#: src/gui.c:545 src/gui.c:549 src/menus.c:352 src/messages-table.c:434
 #: src/messages-table.c:496
 msgid "Fuzzy"
 msgstr "Uferdig"
 
-#: src/gui.c:550
+#: src/gui.c:549
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Ingen uferdige att ]"
 
-#: src/gui.c:558
+#: src/gui.c:557
 msgid "Stick"
 msgstr "Fest"
 
-#: src/gui.c:569
+#: src/gui.c:568
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i uomsett att ]"
 
-#: src/gui.c:569 src/gui.c:571 src/messages-table.c:406
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:406
 #: src/messages-table.c:486
 msgid "Untranslated"
 msgstr "Ikkje omsett"
 
-#: src/gui.c:571
+#: src/gui.c:570
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ ingen uomsette att ]"
@@ -388,72 +388,72 @@ msgstr "%s [ ingen uomsette att ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:584
+#: src/gui.c:583
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Melding %d / %d / Status: %s"
 
-#: src/header_stuff.c:482
+#: src/header_stuff.c:430
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- rediger topptekst"
 
-#: src/header_stuff.c:489 src/header_stuff.c:494
+#: src/header_stuff.c:437 src/header_stuff.c:442
 msgid "Project"
 msgstr "Prosjekt"
 
-#: src/header_stuff.c:497
+#: src/header_stuff.c:445
 msgid "Translator and Language"
 msgstr "Omsetjar og språk"
 
-#: src/header_stuff.c:508
+#: src/header_stuff.c:456
 msgid "Comments:"
 msgstr "Kommentarar:"
 
-#: src/header_stuff.c:514
+#: src/header_stuff.c:462
 msgid "Project name:"
 msgstr "Prosjektnamn:"
 
-#: src/header_stuff.c:517
+#: src/header_stuff.c:465
 msgid "Project version:"
 msgstr "Prosjekt-versjon:"
 
-#: src/header_stuff.c:520
+#: src/header_stuff.c:468
 msgid "Pot file creation date:"
 msgstr "Pot-fil dato for oppretting:"
 
-#: src/header_stuff.c:525
+#: src/header_stuff.c:473
 msgid "Po file revision date:"
 msgstr "Po-fil revisjonsdato:"
 
-#: src/header_stuff.c:532
+#: src/header_stuff.c:480
 msgid "Generator:"
 msgstr "Generator:"
 
-#: src/header_stuff.c:542
+#: src/header_stuff.c:490
 msgid "Use my options to complete the following entries:"
 msgstr "Bruk mine val for å komplettere dei følgjande oppføringane:"
 
-#: src/header_stuff.c:555
+#: src/header_stuff.c:503
 msgid "Translator's name:"
 msgstr "Omsetjar sitt namn:"
 
-#: src/header_stuff.c:558
+#: src/header_stuff.c:506
 msgid "Translator's e-mail:"
 msgstr "Omsetjar si e-post addresse:"
 
-#: src/header_stuff.c:561 src/prefs.c:166
+#: src/header_stuff.c:509 src/prefs.c:171
 msgid "Language:"
 msgstr "Språk:"
 
-#: src/header_stuff.c:567
+#: src/header_stuff.c:515
 msgid "Language group's e-mail:"
 msgstr "E-post addresse til språkgruppe:"
 
-#: src/header_stuff.c:572 src/prefs.c:182
+#: src/header_stuff.c:520 src/prefs.c:187
 msgid "Charset:"
 msgstr "Teiknsett:"
 
-#: src/header_stuff.c:577 src/prefs.c:187
+#: src/header_stuff.c:525 src/prefs.c:192
 msgid "Encoding:"
 msgstr "Teiknkoding:"
 
@@ -834,10 +834,10 @@ msgstr "GModule-implementasjonen støttar ikkje lastingn av dynmiske modular!"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:517
+#: src/main.c:510
 #, c-format
 msgid "Learned `%s' successfully.\n"
-msgstr "Vellukka læring av '%s'.\n"
+msgstr "Vellukka læring av «%s».\n"
 
 #: src/menus.c:49
 msgid "_Messages"
@@ -1138,15 +1138,15 @@ msgstr "Finn streng i po-fil"
 msgid "Replace string in po file"
 msgstr "Byt ut streng i po-fil"
 
-#: src/message.c:80
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Klarte ikkje å få tak i melding!"
 
-#: src/message.c:102
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "Det er ingen fleire uferdige meldingar."
 
-#: src/message.c:126
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Alle meldingar ser ut til å ha vorte omsett."
 
@@ -1183,12 +1183,12 @@ msgstr "Festa"
 #: src/open.c:142
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
-msgstr "Klarte ikkje å opne kompilert gettext-fil '%s'!"
+msgstr "Klarte ikkje å opne kompilert gettext-fil «%s»!"
 
 #: src/open.c:189
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
-msgstr "Klarte ikkje å opne komprimert gettext-fil '%s'!"
+msgstr "Klarte ikkje å opne komprimert gettext-fil «%s»!"
 
 #.
 #. * The %s format here stands for the used
@@ -1197,14 +1197,14 @@ msgstr "Klarte ikkje å opne komprimert gettext-fil '%s'!"
 #: src/open.c:199
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr "Klarte ikkje å opne %s komprimert gettext-fil '%s'!"
+msgstr "Klarte ikkje å opne %s komprimert gettext-fil «%s»!"
 
 #: src/open.c:267
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
-msgstr "Klarte ikkje å opne zippa po-fil '%s'!"
+msgstr "Klarte ikkje å opne zippa po-fil «%s»!"
 
-#: src/parse.c:122
+#: src/parse.c:121
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1213,7 +1213,7 @@ msgstr ""
 "Nytt spesialteikn oppdaga: \\%c\n"
 "Legg denne til parse.c, linje %i."
 
-#: src/parse.c:371
+#: src/parse.c:370
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1224,7 +1224,7 @@ msgstr ""
 "på linje %d.\n"
 "Sjekk fila og prøv igjen."
 
-#: src/parse.c:417
+#: src/parse.c:416
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1233,17 +1233,17 @@ msgstr ""
 "Fila er tom:\n"
 "%s"
 
-#: src/parse.c:441
+#: src/parse.c:440
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
-msgstr "Fila '%s' eksisterar ikkje!"
+msgstr "Fila «%s» eksisterar ikkje!"
 
-#: src/parse.c:570
+#: src/parse.c:569
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:753
+#: src/parse.c:752
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1254,12 +1254,12 @@ msgstr ""
 "Pot-filer blir oppretta i kompileringsprosessen.\n"
 "Sannsynlegvis bør du kalle fila di for '%s.po'."
 
-#: src/parse.c:815
+#: src/parse.c:814
 #, c-format
 msgid "Could not open file `%s' for writing!"
-msgstr "Klarte ikkje å opne '%s' for skriving!"
+msgstr "Klarte ikkje å opne «%s» for skriving!"
 
-#: src/parse.c:861
+#: src/parse.c:860
 #, c-format
 msgid ""
 "File %s\n"
@@ -1268,7 +1268,7 @@ msgstr ""
 "Fila %s\n"
 "inneheld %d uklare meldingar"
 
-#: src/parse.c:898
+#: src/parse.c:897
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1279,15 +1279,15 @@ msgstr ""
 "%s \n"
 "Vil du lagre den likevel?"
 
-#: src/parse.c:906
+#: src/parse.c:905
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- uendra"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:991
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:990
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/parse.c:1018
+#: src/parse.c:1017
 #, c-format
 msgid ""
 "File %s\n"
@@ -1296,11 +1296,11 @@ msgstr ""
 "Fila %s\n"
 "er endra. Vil gå tilbake til lagra kopi?"
 
-#: src/parse.c:1169
+#: src/parse.c:1168
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "msgfmt er dessverre ikkje tilgjengeleg på systemet ditt!"
 
-#: src/parse.c:1204
+#: src/parse.c:1203
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1309,246 +1309,246 @@ msgstr ""
 "Vellukka kompilering:\n"
 "%s"
 
-#: src/prefs.c:111
+#: src/prefs.c:116
 msgid "gtranslator -- options"
 msgstr "gtranslator -- val"
 
-#: src/prefs.c:117
+#: src/prefs.c:122
 msgid "Personal information"
 msgstr "Personleg informasjon"
 
-#: src/prefs.c:119
+#: src/prefs.c:124
 msgid "Language settings"
 msgstr "Instillingar for språk"
 
-#: src/prefs.c:121
+#: src/prefs.c:126
 msgid "Po file editing"
 msgstr "Po-fil redigering"
 
-#: src/prefs.c:123
+#: src/prefs.c:128
 msgid "Miscellaneous"
 msgstr "Ymse"
 
-#: src/prefs.c:125
+#: src/prefs.c:130
 msgid "Recent files & spell checking"
 msgstr "Nylege filer og stavekontroll"
 
-#: src/prefs.c:127
+#: src/prefs.c:132
 msgid "Fonts, colors and color schemes"
 msgstr "Skrifttyper, fargar og fargeskjema"
 
-#: src/prefs.c:129
+#: src/prefs.c:134
 msgid "Autosaving"
 msgstr "Autolagring"
 
-#: src/prefs.c:131
+#: src/prefs.c:136
 msgid "Messages table"
 msgstr "Meldingstabell"
 
-#: src/prefs.c:133
+#: src/prefs.c:138
 msgid "Learn buffer & autotranslation"
 msgstr "Læringsbuffer og autoomsetjing"
 
-#: src/prefs.c:139
+#: src/prefs.c:144
 msgid "Author's name:"
 msgstr "Forfattaren sitt namn:"
 
-#: src/prefs.c:142
+#: src/prefs.c:147
 msgid "Author's EMail:"
 msgstr "Forfattaren sin e-post:"
 
-#: src/prefs.c:155
+#: src/prefs.c:160
 msgid "Default query domain:"
 msgstr "Forvald spørjingsdomene:"
 
-#: src/prefs.c:171
+#: src/prefs.c:176
 msgid "Language code:"
 msgstr "Språkkode:"
 
-#: src/prefs.c:177
+#: src/prefs.c:182
 msgid "Language group's EMail:"
 msgstr "Språkgruppa sin E-post:"
 
-#: src/prefs.c:196
+#: src/prefs.c:201
 msgid "Remove fuzzy status if message changed"
 msgstr "Fjern uklar status frå meldinga om den blir endra"
 
-#: src/prefs.c:200
+#: src/prefs.c:205
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Åtvar om po-fila inneheld uklare omsetjingar"
 
-#: src/prefs.c:204
+#: src/prefs.c:209
 msgid "Don't save unchanged po files"
 msgstr "Ikkje lagre uendra po-filer"
 
-#: src/prefs.c:208
+#: src/prefs.c:213
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Åtvar om eg prøvar å lagre ei uendra fil"
 
-#: src/prefs.c:212
+#: src/prefs.c:217
 msgid "Keep obsolete message in the po files"
 msgstr "Hald på utdaterte meldingar i po-filene"
 
-#: src/prefs.c:219
+#: src/prefs.c:224
 msgid "Use special character to indicate free space"
 msgstr "Bruk spesialteikn for å vise tom plass"
 
-#: src/prefs.c:222
+#: src/prefs.c:227
 msgid "Enable the popup menu"
 msgstr "Slå på pop-opp-meny"
 
-#: src/prefs.c:225
+#: src/prefs.c:230
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Slå på moglegheita til å oppdatere ei po-file frå gtranslator"
 
-#: src/prefs.c:228
+#: src/prefs.c:233
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Slå på funksjonalitet for å fjerne alle omsetjingar frå po-filer"
 
-#: src/prefs.c:231
+#: src/prefs.c:236
 msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Slett kompilerte filer (t.d. \"project.gmo\")"
+msgstr "Slett kompilerte filer (t.d. «project.gmo»)"
 
-#: src/prefs.c:234
+#: src/prefs.c:239
 msgid "Load all backends on startup"
 msgstr "Last alle bakkant-modular ved oppstart"
 
-#: src/prefs.c:237
+#: src/prefs.c:242
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Lagre geometrien ved avslutning og hent den fram att ved oppstart"
 
-#: src/prefs.c:240
+#: src/prefs.c:245
 msgid "Show instant comment view in the main pane"
 msgstr "Vis kommentarar i hovudruta"
 
-#: src/prefs.c:243
+#: src/prefs.c:248
 msgid "Show the views sidebar"
 msgstr "Vis visningar-sidestolpen"
 
-#: src/prefs.c:250
+#: src/prefs.c:255
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Maksimal tak på oppføringar i nyleg-brukte filer lista:"
 
-#: src/prefs.c:254
+#: src/prefs.c:259
 msgid "Check recent files before showing in recent files' list"
 msgstr "Sjekk nyleg-brukte filer før ei fil viser i nyleg-brukte filer lista"
 
-#: src/prefs.c:257
+#: src/prefs.c:262
 msgid "Instant spell checking"
 msgstr "Umiddelbar stavekontroll"
 
-#: src/prefs.c:260
+#: src/prefs.c:265
 msgid "Use special dictionary"
 msgstr "Bruk spesialordbok"
 
-#: src/prefs.c:264
+#: src/prefs.c:269
 msgid "Dictionary to use:"
 msgstr "Ordbok som skal brukast:"
 
-#: src/prefs.c:307
+#: src/prefs.c:312
 msgid "Syntax color scheme to use:"
 msgstr "Fargeskjema for syntaksmerking som skal brukast:"
 
-#: src/prefs.c:312
+#: src/prefs.c:317
 msgid "Apply own fonts:"
 msgstr "Bruk eigne fargar:"
 
-#: src/prefs.c:316
+#: src/prefs.c:321
 msgid "Original text font:"
 msgstr "Opprinneleg tekstfarge:"
 
-#: src/prefs.c:316
+#: src/prefs.c:321
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- skrfttypeval/msgid skrifttype"
 
-#: src/prefs.c:320
+#: src/prefs.c:325
 msgid "Translation font:"
 msgstr "Omsetjings-skrifttype:"
 
-#: src/prefs.c:320
+#: src/prefs.c:325
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- skrifttypeval/msgstr skrifttype"
 
-#: src/prefs.c:324
+#: src/prefs.c:329
 msgid "Apply own colors:"
 msgstr "Bruk eigne fargar:"
 
-#: src/prefs.c:328
+#: src/prefs.c:333
 msgid "Foreground color:"
 msgstr "Forgrunnsfarge:"
 
-#: src/prefs.c:328
+#: src/prefs.c:333
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- framgrunnsfarge"
 
-#: src/prefs.c:332
+#: src/prefs.c:337
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
-#: src/prefs.c:332
+#: src/prefs.c:337
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- bakgrunnsfarge"
 
-#: src/prefs.c:339
+#: src/prefs.c:344
 msgid "Save po files automatically at regular intervals"
 msgstr "Lagre po-filer automatisk på gitte intervall"
 
-#: src/prefs.c:343
+#: src/prefs.c:348
 msgid "Append a special suffix to the automatically saved files"
 msgstr "Legg til spesielt etternamn på filer som lagra automatisk"
 
-#: src/prefs.c:347
+#: src/prefs.c:352
 msgid "Autosave suffix:"
 msgstr "Autolagrings-etternamn:"
 
-#: src/prefs.c:351
+#: src/prefs.c:356
 msgid "Autosave timeout in minutes:"
 msgstr "Autolagrings tidsintervall i minutt:"
 
-#: src/prefs.c:358
+#: src/prefs.c:363
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Vi meldingstabellen (gtranslator må startast om att)"
 
-#: src/prefs.c:362
+#: src/prefs.c:367
 msgid "Collapse translated entries by default"
 msgstr "Slå saman omsette strengar til vanleg"
 
-#: src/prefs.c:366
+#: src/prefs.c:371
 msgid "Use own colors for the messages table groups"
 msgstr "Bruk eigne fargar for meldingstabell grupper"
 
-#: src/prefs.c:370
+#: src/prefs.c:375
 msgid "Untranslated entries color:"
 msgstr "Uomsette oppføringar farge:"
 
-#: src/prefs.c:370
+#: src/prefs.c:375
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- uomsette oppføringar farge"
 
-#: src/prefs.c:374
+#: src/prefs.c:379
 msgid "Fuzzy entries color:"
 msgstr "Uklare omsetjingar farge:"
 
-#: src/prefs.c:374
+#: src/prefs.c:379
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- uklare oppføringar farge"
 
-#: src/prefs.c:378
+#: src/prefs.c:383
 msgid "Translated entries color:"
 msgstr "Omsette oppføringar farge:"
 
-#: src/prefs.c:378
+#: src/prefs.c:383
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- omsette oppføringar farge"
 
-#: src/prefs.c:386
+#: src/prefs.c:391
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 "Spør også det personleg lærebufferet når ein automsett uomsette meldingar"
 
-#: src/prefs.c:390
+#: src/prefs.c:395
 msgid "Automatically learn a newly translated message"
 msgstr "Automatisk lær nye omsette meldingar"
 
@@ -1557,27 +1557,27 @@ msgstr "Automatisk lær nye omsette meldingar"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:398
+#: src/prefs.c:403
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
-msgstr "Bruk \"fuzzy\" treffrutiner for læringsbufferet"
+msgstr "Bruk «fuzzy» treffrutiner for læringsbufferet"
 
-#: src/prefs.c:401
+#: src/prefs.c:407
 msgid "Minimal required similarity percentage while doing autotranslation"
 msgstr "Minimum krevd likheitsprosent for autoomsetjing"
 
-#: src/prefs.c:446
+#: src/prefs.c:453
 msgid "Please enter your name!"
 msgstr "Tast inn namnet ditt!"
 
-#: src/prefs.c:460
+#: src/prefs.c:467
 msgid "Please enter your EMail address!"
 msgstr "Tast inn E-post addressa di!"
 
-#: src/prefs.c:473
+#: src/prefs.c:480
 msgid "Please enter a valid EMail address!"
 msgstr "Tast inn ei gyldig E-post addresse!"
 
-#: src/prefs.c:738
+#: src/prefs.c:749
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1628,12 +1628,12 @@ msgstr "Utførte ingen erstatningar!"
 #: src/save.c:117
 #, c-format
 msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "Klarte ikkje å lagre kompilert gettext-fil '%s'!"
+msgstr "Klarte ikkje å lagre kompilert gettext-fil «%s»!"
 
 #: src/save.c:160
 #, c-format
 msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "Klarte ikkje å lagre komprimert gettext-fil '%s'!"
+msgstr "Klarte ikkje å lagre komprimert gettext-fil «%s»!"
 
 #.
 #. * The %s format here stands for the used
@@ -1642,34 +1642,34 @@ msgstr "Klarte ikkje å lagre komprimert gettext-fil '%s'!"
 #: src/save.c:170
 #, c-format
 msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "Klarte ikkje å lagre %s komprimert gettext-fil '%s'!"
+msgstr "Klarte ikkje å lagre %s komprimert gettext-fil «%s»!"
 
 #: src/save.c:229
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "Klarte ikkje å lagre zippa po-fil '%s'!"
+msgstr "Klarte ikkje å lagre zippa po-fil «%s»!"
 
 #: src/session.c:90
 msgid "Session restored successfully."
 msgstr "Vellukka framhenting av økt."
 
-#: src/sidebar.c:59
+#: src/sidebar.c:60
 msgid "Message"
 msgstr "Melding"
 
-#: data/etspecs/messages-table.etspec.h:3 src/sidebar.c:60
+#: data/etspecs/messages-table.etspec.h:3 src/sidebar.c:61
 msgid "Number"
 msgstr "Nummer"
 
-#: src/sidebar.c:61
+#: src/sidebar.c:62
 msgid "Format"
 msgstr "Format"
 
-#: src/sidebar.c:62
+#: src/sidebar.c:63
 msgid "Hotkey"
 msgstr "Hurtigtastar"
 
-#: src/sidebar.c:97
+#: src/sidebar.c:98
 msgid "Views"
 msgstr "Visningar"
 
@@ -1718,17 +1718,17 @@ msgstr "Ein feil oppstod under oppdatering av po-fil."
 #: src/utils.c:314 src/utils.c:331
 #, c-format
 msgid "Can't create directory `%s'!"
-msgstr "Klarar ikkje å opprette katalogen '%s'!"
+msgstr "Klarar ikkje å opprette katalogen «%s»!"
 
 #: src/utils_gui.c:131
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "Geometri-strengen \"%s\" kunne ikkje tolkast!"
+msgstr "Geometri-strengen «%s» kunne ikkje tolkast!"
 
 #: src/utils_gui.c:353
 #, c-format
 msgid "You are not permitted to access file '%s'."
-msgstr "Du har ikkje løyve til å akessere fila '%s'."
+msgstr "Du har ikkje løyve til å akessere fila «%s»."
 
 #: src/utils_gui.c:371
 #, c-format
@@ -1744,47 +1744,47 @@ msgstr ""
 #: src/utils_gui.c:413
 #, c-format
 msgid "The file `%s' is already open in another instance of gtranslator!"
-msgstr "Fila '%s' er allereide opna i ein anna instans av gtranslator!"
+msgstr "Fila «%s» er allereide opna i ein anna instans av gtranslator!"
 
 #: src/utils_gui.c:446
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
-msgstr "Det naudsynte dekomprimeringsprogrammet '%s' er ikkje installert!"
+msgstr "Det naudsynte dekomprimeringsprogrammet «%s» er ikkje installert!"
 
 #: src/utils_gui.c:451
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
-msgstr "Det nødvendige kompresjonsprogrammet '%s' er ikkje installert!"
+msgstr "Det nødvendige kompresjonsprogrammet «%s» er ikkje installert!"
 
 #: src/vfs-handle.c:126
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
-msgstr "Klarte ikkje å opprette førebels kataloge '%s'!"
+msgstr "Klarte ikkje å opprette førebels katalog «%s»!"
 
 #: src/vfs-handle.c:154
 #, c-format
 msgid "File `%s' couldn't be found!"
-msgstr "Klarte ikkje å finne fila '%s'!"
+msgstr "Klarte ikkje å finne fila «%s»!"
 
 #: src/vfs-handle.c:159
 #, c-format
 msgid "Malformed URI `%s' entered!"
-msgstr "URIen '%s' er feil samansett!"
+msgstr "URIen «%s» er feil samansett!"
 
 #: src/vfs-handle.c:164
 #, c-format
 msgid "Host `%s' couldn't be found!"
-msgstr "Klarte ikkje å finne fram til verten '%s'!"
+msgstr "Klarte ikkje å finne fram til verten «%s»!"
 
 #: src/vfs-handle.c:169
 #, c-format
 msgid "Hostname `%s' is not valid!"
-msgstr "Vertsnamnet '%s' er ikkje gyldig!"
+msgstr "Vertsnamnet «%s» er ikkje gyldig!"
 
 #: src/vfs-handle.c:174
 #, c-format
 msgid "Host `%s' has no address!"
-msgstr "Vert '%s' har ikkje noko addresse!"
+msgstr "Verten «%s» har ikkje noko addresse!"
 
 #: src/vfs-handle.c:179
 msgid "Transfer interrupted!"
@@ -1820,7 +1820,7 @@ msgstr "Gnome omsetjingsprogrammet"
 
 #: data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
-msgstr "Kommentar"
+msgstr "Merknad"
 
 #: data/etspecs/messages-table.etspec.h:2
 msgid "Line"
