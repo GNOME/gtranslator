@@ -54,7 +54,7 @@ void open_file_create()
 	of_dlg_cancel=GTK_FILE_SELECTION(of_dlg)->cancel_button;
 	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(of_dlg));
 	gtk_signal_connect(GTK_OBJECT(of_dlg_ok),"clicked",
-	GTK_SIGNAL_FUNC(parse),NULL);
+	NULL,NULL);
 	gtk_signal_connect(GTK_OBJECT(of_dlg_cancel),"clicked",
 	GTK_SIGNAL_FUNC(open_file_hide),NULL);
 }
@@ -83,10 +83,9 @@ void save_file_as_create()
 	sfa_dlg=gtk_file_selection_new(_("gtranslator -- save file as .. "));
 	sfa_dlg_ok=GTK_FILE_SELECTION(sfa_dlg)->ok_button;
 	sfa_dlg_cancel=GTK_FILE_SELECTION(sfa_dlg)->cancel_button;
-	gtk_file_selection_show_fileop_button(GTK_FILE_SELECTION(sfa_dlg));
-	/** FIXME FIXME FIXME NOW ! **/
+	gtk_file_selection_show_fileop_buttons(GTK_FILE_SELECTION(sfa_dlg));
 	gtk_signal_connect(GTK_OBJECT(sfa_dlg_ok),"clicked",
-	GTK_SIGNAL_FUNC(save_file_as_hide),NULL);
+	NULL,NULL);
 	gtk_signal_connect(GTK_OBJECT(sfa_dlg_cancel),"clicked",
 	GTK_SIGNAL_FUNC(save_file_as_hide),NULL);
 }

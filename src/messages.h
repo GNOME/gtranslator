@@ -7,8 +7,6 @@
  * here .
  **/
 
-#include "callbacks.h"
-
 /**
  * The structure with general 
  *  informations ...

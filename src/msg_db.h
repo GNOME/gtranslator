@@ -8,7 +8,6 @@
  * text file as msg[id][str]-base
  **/
 
-#include "callbacks.h"
 #include "interface.h"
 
 /**

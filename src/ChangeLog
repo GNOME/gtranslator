@@ -1,3 +1,53 @@
+2000-04-29  Fatih Demir		( kabalak@gmx.net )
+
+	+	Added the ltrace.log file to .cvsignore's
+		
+		list ( I'm using ltrace very often .. )
+		
+		-> .cvsignore
+
+	+	Removed the callbacks.c/h files from
+
+		the SOURCES list .
+		
+		-> Makefile.am
+	
+	+	Corrected a typo in the GnomeUIInfo
+		
+		structures ..
+	
+	+	Readding the most important callbacks here
+		
+		for the main app
+		
+		-> interface.c 
+	
+	+	Removing the callbacks.* files 
+		
+		-> callbacks.c/h
+		
+	+	Changed the widget names for the "Cancel"
+			
+		buttons 
+	
+	+	Corrected some callback errors ..
+	
+		-> gtr_dialogs.h
+	
+	+	Removed all callback-calls from the Preferences-
+		
+		box 
+	
+	+	Rewriting the preferences-box completely new
+
+		-> prefs.c
+
+	+	All callbacks will be handled locally in
+		
+		the files, no extra callbacks file needed 
+			
+		-> *.c/h
+
 2000-04-27  Fatih Demir		( kabalak@gmx.net )
 	
 	+	Changing all the interface elements

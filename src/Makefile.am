@@ -20,7 +20,6 @@ gtranslator_SOURCES = \
 	main.c \
 	support.c support.h \
 	interface.c interface.h \
-	callbacks.c callbacks.h \
 	parse.c	parse.h \
 	header_stuff.c header_stuff.h \
 	msg_db.c msg_db.h \

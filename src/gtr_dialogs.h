@@ -13,7 +13,6 @@
 	#include <config.h>
 #endif // HAVE_CONFIG_H
 
-#include "callbacks.h"
 #include "interface.h"
 #include "support.h"
 
@@ -35,13 +34,13 @@ GtkWidget *no_changes;
  * 3/Open file dialog and the buttons of it
 **/
 GtkWidget *of_dlg;
-GtkWidget *of_dlg_ok,*of_dlg_close;
+GtkWidget *of_dlg_ok,*of_dlg_cancel;
 
 /**
  * 4/Save file as dialog and the buttons for this
 **/
 GtkWidget *sfa_dlg;
-GtkWidget *sfa_dlg_ok,*sfa_dlg_close;
+GtkWidget *sfa_dlg_ok,*sfa_dlg_cancel;
 
 /**
  * 5/Help dialog for the preferences box & the gchar *

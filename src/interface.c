@@ -23,10 +23,22 @@
 
 #include <gnome.h>
 
-#include "callbacks.h"
 #include "interface.h"
 
-static GnomeUIInfo the_file_meni[] =
+/**
+ * The Gnome-help structure
+**/
+static GnomeHelpMenuEntry help_me = { "gtranslator", "index.html" };
+
+void call_help_viewer(GtkWidget *widget,gpointer useless)
+{
+	/**
+	 * Calls ( hopefully ) the Gnome Helpbrowser
+	**/
+	gnome_help_pbox_goto(NULL,0,&help_me);
+}
+
+static GnomeUIInfo the_file_menu[] =
 {
         {
           GNOME_APP_UI_ITEM, N_("_Compile"),
@@ -39,7 +51,7 @@ static GnomeUIInfo the_file_meni[] =
         GNOMEUIINFO_MENU_SAVE_ITEM (NULL, NULL),
         GNOMEUIINFO_MENU_SAVE_AS_ITEM (NULL, NULL),
         GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_MENU_EXIT_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_EXIT_ITEM (GTK_SIGNAL_FUNC(gtk_main_quit), NULL),
         GNOMEUIINFO_END
 };
 
@@ -359,5 +371,13 @@ create_app1 (void)
 	gtk_widget_show (appbar1);
 	gnome_app_set_statusbar (GNOME_APP (app1), appbar1);
 
-	/*** FIXME -> write this now ...! ***/
+	/**
+	 * The callbacks list
+	 **/
+	gtk_signal_connect(GTK_OBJECT(app1),"delete-event",
+	GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
+	gtk_signal_connect(GTK_OBJECT(exit_button),"clicked",
+	GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
+	
+	return app1;
 }

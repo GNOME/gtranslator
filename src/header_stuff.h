@@ -12,7 +12,6 @@
 #endif // HAVE_CONFIG_H
 
 #include "parse.h"
-#include "callbacks.h"
 #include "interface.h"
 
 /**

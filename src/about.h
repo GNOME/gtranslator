@@ -13,7 +13,6 @@
 	#include <config.h>
 #endif // HAVE_CONFIG_H
 
-#include "callbacks.h"
 #include "interface.h"
 #include "support.h"
 
