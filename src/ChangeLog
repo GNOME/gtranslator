@@ -1,5 +1,15 @@
 2001-03-18  Fatih Demir	<kabalak@gtranslator.org>
 
+	* views.c: Made the routines all respect the "special char"
+		selection of the user.
+
+	* syntax.c: Set "aInserted" to FALSE in the loops, corrects
+		the stupid errors introduced with the keywords table
+		 based highlight method; also added some more keywords
+		  and URI prefixes to the tables.
+
+	* color-schemes.c/.h: Removed the list getting function.
+
 	* views.c/.h: Added "gtranslator_views_prepare_for_navigation"
 		function for preparation of navigation, added 2 get
 		 methods for the internal used view name variables
@@ -9,9 +19,11 @@
 	* gui.c/.h: Added ACT_VIEW_NUMBER action and menu item, also
 		made the "goto_given_msg" function use the new
 		 "gtranslator_views_prepare_for_navigation" from
-		   views.c/.h.
+		   views.c/.h; also chanegd the paned position from 75
+		    to 80.
 
-	* sidebar.c: Added number view "icon" and integration.
+	* sidebar.c: Added number view "icon" and integrated it into the
+		creation/deletion methods of the sidebar.
 
 2001-03-17  Fatih Demir	<kabalak@gtranslator.org>
 

@@ -31,6 +31,7 @@
  */
 static gchar *keywords[] = {
 	"CVS",
+	"FAQ",
 	"FDL",
 	"FIXME",
 	"Gdk",
@@ -43,6 +44,7 @@ static gchar *keywords[] = {
 	"KDE",
 	"Kde",
 	"NULL",
+	"TODO",
 	"URI",
 	"URL",
 	"URN",
@@ -62,9 +64,12 @@ static gchar *prefixes[] =  {
 	"https:",
 	"http:",
 	"info:",
+	"mailto:",
 	"man:",
 	"medusa:",
+	"news:",
 	"search:",
+	"urn:",
 	NULL
 };
 
@@ -105,7 +110,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	GString *string=g_string_new("");
 	GdkColor *color;
 	
-	gboolean aInserted=FALSE;
+	gboolean aInserted;
 	
 	gint cp;
 	gint z=0, mindex=0;
@@ -269,6 +274,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				clear_string(string);
 				
 				z=0;
+				aInserted=FALSE;
 				
 				while(prefixes[z]!=NULL)
 				{
@@ -303,6 +309,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				clear_string(string);
 				
 				color=NULL;
+				aInserted=FALSE;
 			
 				z=0;
 				
@@ -342,12 +349,12 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	}
 
 	gtk_text_thaw(GTK_TEXT(textwidget));
-
-	if(mindex >= 0 && mindex < gtk_text_get_length(GTK_TEXT(textwidget)))
+	
+	if(mindex >= 0 && mindex <= gtk_text_get_length(GTK_TEXT(textwidget)))
 	{
 		gtk_editable_set_position(GTK_EDITABLE(textwidget), mindex);
-	}
-
+	}	
+	
 	g_string_free(string, FALSE);
 }
 

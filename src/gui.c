@@ -586,7 +586,7 @@ void create_app1(void)
 	filebox=gtranslator_sidebar_new();
 	
 	e_paned_pack1(E_PANED(pane), filebox, TRUE, FALSE);
-	e_paned_set_position(E_PANED(pane), 75);
+	e_paned_set_position(E_PANED(pane), 80);
 
 	/*
 	 * Create the tool- and search-bar
@@ -1161,6 +1161,8 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 		
 		g_free(newstr);
+
+		gtk_text_thaw(GTK_TEXT(trans_box));
 		
 		/*
 		 * Go to the old text index.
@@ -1181,7 +1183,6 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 						GTK_TEXT(trans_box)));
 			}
 		}
-
 		nothing_changes = FALSE;
 	}
 	

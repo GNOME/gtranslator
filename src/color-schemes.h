@@ -93,12 +93,6 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs(void);
 void gtranslator_color_scheme_restore_default(void);
 
 /*
- * Give a list consisting out of GtrColorSchemeInformations about the color
- *  schemes we've found in SCHEMESDIR -- and in directory if it's given.
- */
-GList *gtranslator_color_scheme_list(const gchar *directory);
-
-/*
  * Copy the given GtrColorScheme(Informations).
  */
 GtrColorScheme *gtranslator_color_scheme_copy(GtrColorScheme *scheme);

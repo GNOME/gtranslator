@@ -120,7 +120,7 @@ void show_number()
 	#define delta(x) (pos[x].rm_eo-pos[x].rm_so)
 	
 	regex_t *rX;
-	regmatch_t pos[5];
+	regmatch_t pos[3];
 	
 	gint z=1;
 	
@@ -131,17 +131,25 @@ void show_number()
 
 	current_view=GTR_NUMBER_VIEW;
 
-	rX=gnome_regex_cache_compile(rxc, "[:digit:]", REG_EXTENDED);
+	rX=gnome_regex_cache_compile(rxc, "[0-9]+", REG_EXTENDED|REG_NEWLINE);
 
 	clean_text_boxes();
 
-	if(!regexec(rX, msg->msgid, 5, pos, 0))
+	if(!regexec(rX, msg->msgid, 3, pos, 0))
 	{
 		while(pos[z].rm_so!=-1)
 		{
 			if(number->len > 0)
 			{
-				number=g_string_append(number, " ");
+				if(wants.dot_char)
+				{
+					number=g_string_append(number, 
+						_("·"));
+				}
+				else
+				{
+					number=g_string_append(number, " ");
+				}
 			}
 
 			number=g_string_append(number,
@@ -162,13 +170,21 @@ void show_number()
 	number=g_string_truncate(number, 0);
 	z=1;
 
-	if(!regexec(rX, msg->msgstr, 5, pos, 0))
+	if(!regexec(rX, msg->msgstr, 3, pos, 0))
 	{
 		while(pos[z].rm_so!=-1)
 		{
 			if(number->len > 0)
 			{
-				number=g_string_append(number, " ");
+				if(wants.dot_char)
+				{
+					number=g_string_append(number,
+						_("·"));
+				}
+				else
+				{
+					number=g_string_append(number, " ");
+				}
 			}
 
 			number=g_string_append(number,
@@ -226,10 +242,12 @@ void show_c_format()
 		#define delta(x) (pos[x].rm_eo-pos[x].rm_so)
 		GString *format=g_string_new("");
 		gint z=1;
+		
 		regex_t *rX;
-		regmatch_t pos[5];
+		regmatch_t pos[3];
 	
-		rX=gnome_regex_cache_compile(rxc, "%%[a-zA-Z0-9.-+]", REG_EXTENDED);
+		rX=gnome_regex_cache_compile(rxc, "\%[a-zA-Z0-9.-+]", 
+			REG_EXTENDED|REG_NEWLINE);
 		
 		/*
 		 * Disable editing of the format view data.
@@ -238,13 +256,22 @@ void show_c_format()
 
 		clean_text_boxes();
 
-		if(msg->msgid && !regexec(rX, msg->msgid, 5, pos, 0))
+		if(msg->msgid && !regexec(rX, msg->msgid, 3, pos, 0))
 		{
 			while(pos[z].rm_so!=-1)
 			{
 				if(format->len > 0)
 				{
-					format=g_string_append(format, " ");
+					if(wants.dot_char)
+					{
+						format=g_string_append(format,
+							_("·"));
+					}
+					else
+					{
+						format=g_string_append(format, 
+							" ");
+					}
 				}
 				
 				format=g_string_append(format,
@@ -265,13 +292,22 @@ void show_c_format()
 		format=g_string_truncate(format, 0);
 		z=1;
 
-		if(msg->msgstr && !regexec(rX, msg->msgstr, 5, pos, 0))
+		if(msg->msgstr && !regexec(rX, msg->msgstr, 3, pos, 0))
 		{
 			while(pos[z].rm_so!=-1)
 			{
 				if(format->len > 0)
 				{
-					format=g_string_append(format, " ");
+					if(wants.dot_char)
+					{
+						format=g_string_append(format,
+							_("·"));
+					}
+					else
+					{
+						format=g_string_append(format, 
+							" ");
+					}
 				}
 
 				format=g_string_append(format,
