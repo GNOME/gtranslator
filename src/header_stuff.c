@@ -1,6 +1,7 @@
 /*
  * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
+ *			Ross Golder <rossg@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -39,21 +40,23 @@
 #include <time.h>
 
 #include <gtk/gtk.h>
-#include <libgnomeui/gnome-uidefs.h>
-#include <libgnomeui/gnome-propertybox.h>
 
 static GtkWidget *e_header = NULL;
+static GtkWidget *e_notebook = NULL;
 
-static GtkWidget *prj_page, *lang_page, *lang_vbox;
+static GtkWidget *prj_page, *lang_page;
+static GtkWidget *lang_vbox;
 
 static GtkWidget *prj_name, *prj_version, *rmbt, *prj_comment, *take_my_options;
 static GtkWidget *translator, *tr_email, *pot_date, *po_date;
 static GtkWidget *language_combo, *charset_combo, *enc_combo, *lg_combo;
 
+static gboolean header_changed;
+
 /*
  * These are defined below 
  */
-static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpointer useless);
+static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpointer useless);
 static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
 static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless);
 static void language_changed(GtkWidget * widget, gpointer useless);
@@ -281,7 +284,7 @@ void gtranslator_header_free(GtrHeader * h)
 	GTR_FREE(h);
 }
 
-static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpointer useless)
+static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpointer useless)
 {
 	GtrHeader 	*ph = po->header;
 	gchar		*prev_translator,
@@ -291,19 +294,27 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 
 	prev_translator=prev_translator_email=NULL;
 
-	if (page_num != -1)
+	/*
+	 * Free the languages list
+	 */
+	gtranslator_utils_language_lists_free(widget, useless);
+
+	if(!header_changed) {
+		gtk_widget_destroy(GTK_WIDGET(e_header));
 		return;
+	}
 
 #define update(value,widget) GTR_FREE(value);\
 	value = gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
-	update(ph->prj_name, prj_name);
-	update(ph->prj_version, prj_version);
 
 	buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
 	gtk_text_buffer_get_start_iter(buff, &start);
 	gtk_text_buffer_get_end_iter(buff, &end);
 	GTR_FREE(ph->comment);
 	ph->comment = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
+
+	update(ph->prj_name, prj_name);
+	update(ph->prj_version, prj_version);
 
 	if (!GtrPreferences.fill_header) {
 		
@@ -397,10 +408,14 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	replace_substring(&ph->comment, "PACKAGE", ph->prj_name);
 	replace_substring(&ph->comment, "VERSION", ph->prj_version);
 	
-	if (!po->file_changed) {
-		po->file_changed = TRUE;
-		gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);
-	}
+	/*
+	 * Mark file as having unsaved changes
+	 */
+	po->file_changed = TRUE;
+	gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);
+	
+	gtk_widget_destroy(GTK_WIDGET(e_header));
+	return;
 }
 
 /*
@@ -409,120 +424,165 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 {
 	GtrHeader *ph = po->header;
-	GtkWidget *label;
 	GtkWidget *foo_me_i_ve_been_wracked;
+	GtkTextBuffer *buffer;
+
+	header_changed = FALSE;
 
 	if(e_header != NULL) {
 		gtk_window_present(GTK_WINDOW(e_header));
 		return;
 	}
 
-	e_header = gnome_property_box_new();
-	gtk_window_set_title(GTK_WINDOW(e_header),
-			     _("gtranslator -- edit header"));
-
-	gtranslator_utils_language_lists_create();
-
-	if(ph->generator)
-	{
-		prj_page=gtranslator_utils_append_page_to_preferences_dialog(
-			e_header, 7, 2, _("Project"));
-	}
-	else
-	{
-		prj_page=gtranslator_utils_append_page_to_preferences_dialog(
-			e_header, 6, 2, _("Project"));
-	}
-	
-	label = gtk_label_new(_("Translator and Language"));
-	lang_vbox = gtk_vbox_new(FALSE, GNOME_PAD);
-	gnome_property_box_append_page(GNOME_PROPERTY_BOX(e_header), lang_vbox,
-				       label);
-	
 	/*
 	 * Prepare the header comment for view and edit in the dialog. 
 	 */
 	ph->comment=gtranslator_header_comment_convert_for_view(ph->comment);
 
-	prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0, _("Comments:"),
-							     ph->comment, G_CALLBACK(gtranslator_header_edit_changed));
-	
-	gtk_widget_set_usize(prj_comment, 360, 90);
-	
-	prj_name =
-	    gtranslator_utils_attach_entry_with_label(prj_page, 1, _("Project name:"),
-	    			    ph->prj_name, G_CALLBACK(gtranslator_header_edit_changed));
-	prj_version =
-	    gtranslator_utils_attach_entry_with_label(prj_page, 2, _("Project version:"),
-	    			    ph->prj_version, G_CALLBACK(gtranslator_header_edit_changed));
-	pot_date =
-	    gtranslator_utils_attach_entry_with_label(prj_page, 3, _("Pot file creation date:"),
-				    ph->pot_date, G_CALLBACK(gtranslator_header_edit_changed));
+	/*
+	 * Prepare the languages list pulldown information
+	 */
+	gtranslator_utils_language_lists_create();
+
+	/*
+	 * The main dialog
+	 */
+	e_header = gtk_dialog_new_with_buttons(
+		_("gtranslator -- edit header"),
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+		NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(e_header), GTK_RESPONSE_CLOSE);
+
+	/*
+	 * The notebook containing the pages
+	 */
+	e_notebook = gtk_notebook_new();
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(e_header)->vbox),
+                      e_notebook);
+
+	/*
+	 * Project page
+	 */
+	prj_page = gtk_table_new(6, 2, FALSE);
+	gtk_table_set_col_spacings(GTK_TABLE(prj_page), 2);
+	gtk_table_set_row_spacings(GTK_TABLE(prj_page), 2);
+
+	prj_comment = gtk_text_view_new();
+	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
+	gtk_text_buffer_set_text(buffer, ph->comment, -1);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Comments:")), 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_comment, 1, 2, 0, 1);
+	gtk_widget_set_size_request(prj_comment, 360, 90);
+	g_signal_connect(buffer, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+
+	prj_name = gtk_entry_new();
+	gtk_entry_set_text(GTK_ENTRY(prj_name), ph->prj_name);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Project name:")), 0, 1, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_name, 1, 2, 1, 2);
+	g_signal_connect(prj_name, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+
+	prj_version = gtk_entry_new();
+	gtk_entry_set_text(GTK_ENTRY(prj_version), ph->prj_version);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Project version:")), 0, 1, 2, 3);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_version, 1, 2, 2, 3);
+	g_signal_connect(prj_version, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+
+	pot_date = gtk_entry_new();
 	gtk_widget_set_sensitive(pot_date, FALSE);
-	
-	po_date =
-	    gtranslator_utils_attach_entry_with_label(prj_page, 4, _("Po file revision date:"),
-				    ph->po_date, G_CALLBACK(gtranslator_header_edit_changed));
+	gtk_entry_set_text(GTK_ENTRY(pot_date), ph->pot_date);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Pot file creation date:")), 0, 1, 3, 4);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), pot_date, 1, 2, 3, 4);
+
+	po_date = gtk_entry_new();
 	gtk_widget_set_sensitive(po_date, FALSE);
+	gtk_entry_set_text(GTK_ENTRY(po_date), ph->po_date);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Po file revision date:")), 0, 1, 4, 5);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), po_date, 1, 2, 4, 5);
+
+	rmbt = gtk_entry_new();
+	gtk_widget_set_sensitive(rmbt, FALSE);
+	gtk_entry_set_text(GTK_ENTRY(rmbt), ph->report_message_bugs_to);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Report message string bugs to:")), 0, 1, 5, 6);
+	gtk_table_attach_defaults(GTK_TABLE(prj_page), rmbt, 1, 2, 5, 6);
 
 	if(ph->generator)
 	{
-		foo_me_i_ve_been_wracked =
-	    		gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Generator:"),
-	    			ph->generator, G_CALLBACK(gtranslator_header_edit_changed));
+		/*
+		 * Resize table, and add 'generator' row
+		 */
+		gtk_table_resize(GTK_TABLE(prj_page), 7, 2);
+
+		foo_me_i_ve_been_wracked = gtk_entry_new();
 		gtk_widget_set_sensitive(foo_me_i_ve_been_wracked, FALSE);
-
-		rmbt = gtranslator_utils_attach_entry_with_label(prj_page, 6, _("Report message string bugs to:"),
-			ph->report_message_bugs_to, NULL);
-	}
-	else
-	{
-		rmbt = gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Report message string bugs to:"),
-		ph->report_message_bugs_to, NULL);
+		gtk_entry_set_text(GTK_ENTRY(foo_me_i_ve_been_wracked), ph->generator);
+		gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Generator:")), 0, 1, 6, 7);
+		gtk_table_attach_defaults(GTK_TABLE(prj_page), foo_me_i_ve_been_wracked, 1, 2, 6, 7);
 	}
 
-	gtk_widget_set_sensitive(rmbt, FALSE);
+	gtk_notebook_append_page(GTK_NOTEBOOK(e_notebook), prj_page, gtk_label_new(_("Project")));
 
 	/*
-	 * Toggles whether personal options or entries are used to fill header
+	 * Translator and language page
 	 */
-	take_my_options = 
-	    gtk_check_button_new_with_label(
+	take_my_options = gtk_check_button_new_with_label(
 		_("Use my options to complete the following entries:"));
-	gtk_box_pack_start(GTK_BOX(lang_vbox), take_my_options, TRUE, TRUE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(take_my_options), 
 				     GtrPreferences.fill_header);
 	g_signal_connect(G_OBJECT(take_my_options), "toggled",
 			 G_CALLBACK(take_my_options_toggled), NULL);
-	/*
-	 * Language and translator options
-	 */
-	lang_page = gtk_table_new(7, 2, FALSE);
+
+	lang_page = gtk_table_new(6, 2, FALSE);
+	gtk_table_set_col_spacings(GTK_TABLE(lang_page), 2);
+	gtk_table_set_row_spacings(GTK_TABLE(lang_page), 2);
 	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
+
+	translator = gtk_entry_new();
+	gtk_entry_set_text(GTK_ENTRY(translator), ph->translator);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Translator's name:")), 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), translator, 1, 2, 0, 1);
+	g_signal_connect(translator, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+
+	tr_email = gtk_entry_new();
+	gtk_entry_set_text(GTK_ENTRY(tr_email), ph->tr_email);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Translator's e-mail:")), 0, 1, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), tr_email, 1, 2, 1, 2);
+	g_signal_connect(tr_email, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	
+	language_combo = gtk_combo_new();
+	gtk_combo_set_popdown_strings(GTK_COMBO(language_combo), languages_list);
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (language_combo)->entry), _(ph->language));
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Language:")), 0, 1, 2, 3);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), language_combo, 1, 2, 2, 3);
+	g_signal_connect(GTK_COMBO(language_combo)->entry, "changed", G_CALLBACK(language_changed), NULL);
+
+	lg_combo = gtk_combo_new();
+	gtk_combo_set_popdown_strings(GTK_COMBO(lg_combo), group_emails_list);
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (lg_combo)->entry), _(ph->lg_email));
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Language group's email:")), 0, 1, 3, 4);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), lg_combo, 1, 2, 3, 4);
+	g_signal_connect(GTK_COMBO(lg_combo)->entry, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+
+	charset_combo = gtk_combo_new();
+	gtk_combo_set_popdown_strings(GTK_COMBO(charset_combo), encodings_list);
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (charset_combo)->entry), _(ph->charset));
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Charset:")), 0, 1, 4, 5);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), charset_combo, 1, 2, 4, 5);
+	g_signal_connect(GTK_COMBO(charset_combo)->entry, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+
+	enc_combo = gtk_combo_new();
+	gtk_combo_set_popdown_strings(GTK_COMBO(enc_combo), bits_list);
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (enc_combo)->entry), _(ph->encoding));
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Encoding:")), 0, 1, 5, 6);
+	gtk_table_attach_defaults(GTK_TABLE(lang_page), enc_combo, 1, 2, 5, 6);
+	g_signal_connect(GTK_COMBO(enc_combo)->entry, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+
+	lang_vbox = gtk_vbox_new(FALSE, GNOME_PAD);
+	gtk_box_pack_start(GTK_BOX(lang_vbox), take_my_options, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(lang_vbox), lang_page, TRUE, TRUE, 0);
 
-	translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
-							     _("Translator's name:"), ph->translator, G_CALLBACK(gtranslator_header_edit_changed));
-
-	tr_email =
-	    gtranslator_utils_attach_entry_with_label(lang_page, 2, _("Translator's e-mail:"),
-				    ph->tr_email, G_CALLBACK(gtranslator_header_edit_changed));
-	language_combo =
-	    gtranslator_utils_attach_combo_with_label(lang_page, 3, _("Language:"),
-				    languages_list, _(ph->language),
-				    FALSE,
-				    G_CALLBACK(language_changed), NULL);
-	lg_combo =
-	    gtranslator_utils_attach_combo_with_label(lang_page, 4,
-				    _("Language group's e-mail:"),
-				    group_emails_list, ph->lg_email,
-				    TRUE,
-				    G_CALLBACK(gtranslator_header_edit_changed), NULL);
-	charset_combo =
-	    gtranslator_utils_attach_combo_with_label(lang_page, 5, _("Charset:"),
-				    encodings_list, ph->charset,
-				    FALSE,
-				    G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	gtk_notebook_append_page(GTK_NOTEBOOK(e_notebook), lang_vbox, gtk_label_new(_("Translator and Language")));
 
 	/*
 	 * Disable any charset changes directly from the header by making the
@@ -530,26 +590,13 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	 */
 	gtk_widget_set_sensitive(GTK_WIDGET(charset_combo), FALSE);
 
-	enc_combo =
-	    gtranslator_utils_attach_combo_with_label(lang_page, 6, _("Encoding:"),
-				    bits_list, ph->encoding,
-				    FALSE,
-				    G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	/*
 	 * Connect the signals
 	 */
-	g_signal_connect(G_OBJECT(e_header), "apply",
-			 G_CALLBACK(gtranslator_header_edit_apply), NULL);
-	g_signal_connect(G_OBJECT(e_header), "close",
-			 G_CALLBACK(gtranslator_utils_language_lists_free), NULL);
+	g_signal_connect(G_OBJECT(e_header), "response",
+			 G_CALLBACK(gtranslator_header_edit_close), NULL);
 
 	gtranslator_dialog_show(&e_header, "gtranslator -- header");
-
-	/*
-	 * Allow resizing of the dialog in growth direction but not in
-	 *  shrink direction.
-	 */  
-	gtk_window_set_policy(GTK_WINDOW(e_header), 0, 1, 1);
 }
 
 static void language_changed(GtkWidget * widget, gpointer useless)
@@ -558,7 +605,7 @@ static void language_changed(GtkWidget * widget, gpointer useless)
 	G_CONST_RETURN gchar *current = gtk_entry_get_text(GTK_ENTRY
 					    (GTK_COMBO(language_combo)->entry));
 	while (languages[c].name != NULL) {
-		if (!g_strcasecmp(current, _(languages[c].name))) {
+		if (!strcmp(current, _(languages[c].name))) {
 #define set_text(widget,field) \
 	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(widget)->entry),\
 			   languages[c].field)
@@ -575,7 +622,7 @@ static void language_changed(GtkWidget * widget, gpointer useless)
 
 static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless)
 {
-	gnome_property_box_changed(GNOME_PROPERTY_BOX(e_header));
+	header_changed = TRUE;
 }
 
 static void take_my_options_toggled(GtkWidget * widget, gpointer useless)
