@@ -1,3 +1,14 @@
+2000-09-13  Robert Brady  <rbrady@suse.de>
+
+	* header-stuff.c: (split_name_email) Don't crash if 
+	str == NULL.  
+
+	(get_header) Deal with Project-Id-Version: lines with
+	missing version numbers.
+
+	* gui.c: Disable the translation string box if
+	to .po is is loaded.
+	
 2000-09-13  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Changed the hotkey for the next fuzzy translation

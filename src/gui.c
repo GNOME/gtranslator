@@ -332,6 +332,7 @@ void disable_actions_no_file(void)
 			ACT_BACK, ACT_NEXT, ACT_LAST, ACT_GOTO,
 			ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_TRANSLATED, ACT_FUZZY, ACT_STICK);
+	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
 void enable_actions_just_opened(void)
@@ -341,6 +342,7 @@ void enable_actions_just_opened(void)
 		       ACT_LAST, ACT_GOTO, ACT_NEXT_FUZZY, 
 		       ACT_NEXT_UNTRANSLATED, ACT_TRANSLATED,
 		       ACT_FUZZY, ACT_STICK);
+	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 }
 
 /*
@@ -396,7 +398,7 @@ void create_app1(void)
 
 	trans_box = gtk_text_new(NULL, NULL);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2), trans_box);
-	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
+	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 
 	appbar1 = gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(app1), appbar1);

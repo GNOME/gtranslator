@@ -35,6 +35,12 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 	regex_t *rx;
 	regmatch_t m[3];
 	
+	if (!str) {
+		*name = g_strdup("");
+		*email = g_strdup("");
+		return;
+	}
+	
 	rx = gnome_regex_cache_compile(rxc,
 		"(.+) <([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+)>", 
 		REG_EXTENDED);
@@ -76,6 +82,9 @@ GtrHeader * get_header(GtrMsg * msg)
 				if (m[2].rm_so != -1)
 					ph->prj_version =
 					    g_strdup(pair[1]+m[2].rm_so);
+			} else {
+		  	  ph->prj_name = g_strdup(pair[1]);
+			  ph->prj_version = g_strdup("");
 			}
 		}
 		else
