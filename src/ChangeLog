@@ -4,11 +4,15 @@
 
 	* find.c & sidebar.c: Switched over to the new sources view
 		via "gtranslator_views_set" and the GTR_COMMENT_VIEW
-		 argument.
+		 argument and removed some old cruft which was used
+		  here to rescue position+contents -- this is now already
+		   done by the views methods.
 
-	* sidebar.c/.h: Removed "show_comment" function from here.
+	* sidebar.c/.h: Removed "show_comment" function from here and added
+		3rd icon for the new C format view.
 
-	* views.c/.h: General views structure and functions are here.
+	* views.c/.h: General views structure and functions are here; added
+		a C format view.
 
 2001-03-16  Fatih Demir <kabalak@gtranslator.org>
 

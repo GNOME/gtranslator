@@ -91,6 +91,10 @@ void gtranslator_sidebar_activate_views()
 	e_shortcut_model_add_item(model, 0, -1,
 		"comment:",
 		"Comment");
+
+	e_shortcut_model_add_item(model, 0, -1,
+		"format:",
+		"Format");
 }
 
 /*
@@ -101,6 +105,7 @@ void gtranslator_sidebar_clear_views()
 	/*
 	 * Remove the view icons/items from the sidebar model.
 	 */
+	e_shortcut_model_remove_item(model, 0, 2);
 	e_shortcut_model_remove_item(model, 0, 1);
 	e_shortcut_model_remove_item(model, 0, 0);
 }
@@ -114,9 +119,6 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 {
 	if(event->button.button==1)
 	{
-		gchar *testcase=NULL;
-		gint curpos;
-		
 		/*
 		 * Switch the icon numbers for the right view.
 		 */ 
@@ -126,53 +128,28 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				/*
 				 * Just show the message.
 				 */
-				curpos=gtk_editable_get_position(
-					GTK_EDITABLE(trans_box));
-				
-				testcase=gtk_editable_get_chars(
-					GTK_EDITABLE(trans_box), 0, -1);
-				
-				if(GTR_MSG(po->current->data)->msgstr &&
-				strcmp(GTR_MSG(po->current->data)->msgstr,
-					testcase))
-				{
-					GTR_MSG(po->current->data)->msgstr=
-						g_strdup(testcase);
-				}
-					 
-				display_msg(po->current);
+				gtranslator_views_set(GTR_MESSAGE_VIEW);
 
-				if(curpos >= 0 && curpos <=
-					gtk_text_get_length(GTK_TEXT(trans_box)))
-				{
-					gtk_editable_set_position(
-					GTK_EDITABLE(trans_box), curpos);
-				}
 					break;
 
 			case 2:
-				 testcase=gtk_editable_get_chars(
-					 GTK_EDITABLE(trans_box), 0, -1);
-				 
-				 if(GTR_MSG(po->current->data)->msgstr && 
-				 strcmp(GTR_MSG(po->current->data)->msgstr,
-					testcase))
-				 {
-					GTR_MSG(po->current->data)->msgstr=
-						g_strdup(testcase);
-				 }
-				 
 				/*
 				 * Display the current comment or
 				 *  show a helping message.
 				 */
 				gtranslator_views_set(GTR_COMMENT_VIEW);
 					break;
+
+			case 3:
+				/*
+				 * Display eventually existing C formats.
+				 */
+				gtranslator_views_set(GTR_C_FORMAT_VIEW);
+					break;
 				
 			default:
 				break;
 		}
-		g_free(testcase);
 	}
 }
 
@@ -199,15 +176,23 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 		case 'm':
 			pixmap_filename=gnome_pixmap_file(
 				"mc/application-x-po.png");
-			break;
-		
+				break;
+	
+		/*
+		 * The C-Format URI type.
+		 */
+		case 'f':
+			pixmap_filename=gnome_pixmap_file(
+				"mc/application-x-gmo.png");
+				break;
+			
 		/*
 		 * The comment: URI case:
 		 */
 		case 'c':
 		default:
 			pixmap_filename=gnome_pixmap_file("gtranslator.png");
-			break;
+				break;
 	}
 	
 	if(pixmap_filename)

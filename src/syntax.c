@@ -69,12 +69,6 @@ static gchar *prefixes[] =  {
 };
 
 /*
- * Determine if the current given message contains any format specifier
- *  in msgid/msgstr parts.
- */  
-gboolean gtranslator_syntax_get_format(GtrMsg *msg);
-
-/*
  * Return if the given string matches our last chars.
  */
 gboolean back_match(const gchar *msg, gchar *str, gint pos);
@@ -393,30 +387,6 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 	}
 
 	g_string_free(str, FALSE);
-}
-
-/*
- * Check if the given message does contain any format specifiers.
- */ 
-gboolean gtranslator_syntax_get_format(GtrMsg *msg)
-{
-	g_return_val_if_fail(msg!=NULL, FALSE);
-
-	/*
-	 * Simply determine if there is any '%' character in the msgid
-	 *  and if existent in the msgstr of the message.
-	 */  
-	if(strchr(GTR_MSG(msg)->msgid, '%'))
-	{
-		return TRUE;
-	}
-	if(GTR_MSG(msg)->msgstr &&
-		strchr(GTR_MSG(msg)->msgstr, '%'))
-	{
-		return TRUE;
-	}
-
-	return FALSE;
 }
 
 /*

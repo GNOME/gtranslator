@@ -37,4 +37,9 @@ typedef enum {
  */
 gboolean gtranslator_views_set(GtrView view);
 
+/*
+ * Updates the menu entries if the views can be used or if not.
+ */
+void gtranslator_views_update_menus(void);
+
 #endif

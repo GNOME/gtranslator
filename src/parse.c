@@ -864,7 +864,7 @@ gboolean gtranslator_check_file_perms(GtrPo *po_file)
 	 * Open the file first for reading.
 	 */
 	file=fopen(po_file->filename, "r");
-	if(!file)
+	if(po_file && !file)
 	{
 		/*
 		 * Create an error box and prevent further reading
@@ -883,7 +883,7 @@ gboolean gtranslator_check_file_perms(GtrPo *po_file)
 		 * Open the same file also for a write-permission check.
 		 */ 
 		file=fopen(po_file->filename, "r+");
-		if(!file)
+		if(po_file && !file)
 		{
 			/*
 			 * Show a warning box to the user and warn him about
