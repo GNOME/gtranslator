@@ -22,12 +22,6 @@
 #include "interface.h"
 
 /**
- * Include the header for the
- * libdyndata library-functions :
- **/
-#include <dyndata.h>
-
-/**
  * This are the global count variables  
  **/
 int count,max_count;
@@ -73,8 +67,3 @@ int get_next_msgid(FILE *,char *);
  * Get next msgstr
  **/
 int get_next_msgstr(FILE *,char *);
-
-/**
- * A simple compare function
- **/
-int ka_comp(const void *,const void *);

@@ -21,58 +21,6 @@ GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 
 dnl -------------------------------------------------------------------
-dnl Check for the dyndata library 
-dnl -------------------------------------------------------------------
-AC_CHECK_LIB(dyndata,create_bt,,AC_MSG_ERROR([
-*----------------------------------------------------------------------
-	
-	Couldn't find the dyndata library !
-
-	Get it from http://gtranslator.sourceforge.net/dyndata.html !	
-
-	( available as tar.gz-source/.deb/.rpm-packages )
-
-*----------------------------------------------------------------------
-]))
-
-dnl -------------------------------------------------------------------
-dnl Check for the dyndata headers
-dnl -------------------------------------------------------------------
-AC_CHECK_HEADERS(/usr/include/dyndata/dyndata.h ,,AC_CHECK_HEADERS(
-/usr/local/include/dyndata/dyndata.h ,,
-AC_MSG_ERROR([
-*----------------------------------------------------------------------
-
-        Couldn't find the header files of dyndata !
-
-        Get it from http://gtranslator.sourceforge.net/dyndata.html !
-
-	( available as tar.gz-source/.deb/.rpm-packages )
-
-*----------------------------------------------------------------------
-])))
-
-dnl -------------------------------------------------------------------
-dnl Get the necessary informations from dyndata-config ..
-dnl -------------------------------------------------------------------
-AC_PATH_PROG(DYNDATA_CONFIG,dyndata-config,no)
-if test a$DYNDATA_CONFIG = ano ; then
-AC_MSG_ERROR([
-*----------------------------------------------------------------------
-
-	Couldn't find the dyndata-config script shipped with all packs
-
-	of libdyndata since version 0.1.18 ...
-
-*----------------------------------------------------------------------
-])
-fi
-DYNDATA_CFLAGS=`dyndata-config --cflags`
-DYNDATA_LIBS=`dyndata-config --libs`
-AC_SUBST(DYNDATA_CFLAGS)
-AC_SUBST(DYNDATA_LIBS)
-
-dnl -------------------------------------------------------------------
 dnl Add the languages which the application supports here
 dnl -------------------------------------------------------------------
 ALL_LINGUAS="no tr"
@@ -97,7 +45,7 @@ dnl -------------------------------------------------------------------
 dnl Simply substitute the icon-location directory
 dnl in gtranslator.keys.in .
 dnl -------------------------------------------------------------------
-PIXMAP_DIR="`gnome-config --datadir`/pixmaps"
+PIXMAP_DIR="`gnome-config --datadir`/pixmaps/mc"
 AC_SUBST(PIXMAP_DIR)
 
 AC_OUTPUT([

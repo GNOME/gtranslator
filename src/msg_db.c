@@ -9,11 +9,6 @@
 #include "msg_db.h"
 
 /**
- * Include the dyndata routines 
- **/
-#include <dyndata.h>
-
-/**
  * The db file-stream
  **/
 FILE *db_stream;
@@ -30,15 +25,6 @@ int init_msg_db()
 	 * Have we got a file stream ?
 	 **/
 	check_file(db_stream,"Couldn't open the msg-db !");
-	/**
-	 * After having checked everything create a binary
-	 * tree for the translation strings ...
-	 **/
-	msg_tree=create_bt();
-	/**
-	 * And a linked list for the single message ids/strs 
-	 **/
-	msg_list=create_ll();
 	msg_db_inited=TRUE;
 	/**
 	 * Get every message from the msg_db as a new member 
@@ -48,9 +34,10 @@ int init_msg_db()
 	fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL)
 	{
 		/**
- 		 * Add it to the linked list
+ 		 * Add it to the linked list 
+		 * FIXME -> glib
 		 **/
-		add_ll(msg_list,&msg_messages[0]);
+		/*add_ll(msg_list,&msg_messages[0]);*/
 	}
 }
 

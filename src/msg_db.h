@@ -10,11 +10,6 @@
 #include "interface.h"
 
 /**
- * Include the dyndata header
- **/
-#include <dyndata.h>
-
-/**
  * The default msg_db location .
  **/
 const gchar *msg_db=MSG_DB_DIR "msg.db";
@@ -52,13 +47,3 @@ gchar *get_from_msg_db(const gchar *);
  * in bytes :
  **/
 unsigned int get_msg_db_size();
-
-/**
- * The binary tree for the messages 
- **/
-BT *msg_tree;
-
-/**
- * The linked list for the messages 
- **/
-LL *msg_list;
