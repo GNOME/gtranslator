@@ -110,6 +110,11 @@ void goto_last_msg(GtkWidget  * widget, gpointer useless);
 void goto_nth_msg(GtkWidget  * widget, gpointer number);
 
 /*
+ * A status defining callback -- now generaly defined for instance.
+ */
+void text_has_got_changed(GtkWidget  * widget, gpointer useless);
+
+/*
  * If TRUE, means that trans_box is being changed by program, not user
  */
 gboolean nothing_changes;

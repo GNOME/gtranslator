@@ -206,7 +206,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 	gtk_text_thaw(GTK_TEXT(textwidget));
 
-	g_string_free(string, 1);
+	g_string_free(string, FALSE);
 }
 
 /*
@@ -244,7 +244,7 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 		}
 	}
 
-	g_string_free(str, 1);
+	g_string_free(str, FALSE);
 }
 
 /*

@@ -121,7 +121,7 @@ gchar *setup_language(gchar *lang)
 				return NULL;
 			}
 
-			g_string_free(language, 1);
+			g_string_free(language, FALSE);
 		}
 	}
 }
@@ -262,7 +262,7 @@ gchar *gtranslator_strip_out(gchar *filename)
 		return NULL;
 	}
 
-	g_string_free(o, 1);
+	g_string_free(o, FALSE);
 }
 
 /*
@@ -311,14 +311,14 @@ void gtranslator_free_query_result(GtrQueryResult **result)
 /*
  * Get all empty msgstr's filled with found msgstr's from the main domain.
  */
-void gtranslator_query_all(gpointer data, gpointer yeah)
+void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 {
 	GtrMsg *msg=GTR_MSG(data);
 
-	if(msg->msgid && !msg->msgstr)
+	if(msg && msg->msgid && !msg->msgstr)
 	{
 		GtrQuery *query;
-		GtrQueryResult *matchingtranslation;
+		GtrQueryResult *matchingtranslation=NULL;
 
 		/*
 		 * Build up the query for the selected default domain and for the
@@ -345,4 +345,13 @@ void gtranslator_query_all(gpointer data, gpointer yeah)
 			gtranslator_free_query_result(&matchingtranslation);
 		}
 	}
+}
+
+/*
+ * Simply execute the gtranslator_query_gtr_msg for every message in the
+ *  po file.
+ */
+void gtranslator_query_accomplish()
+{
+	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, NULL);
 }

@@ -69,7 +69,6 @@ static void copy_clipboard(GtkWidget  * widget, gpointer useless);
 static void paste_clipboard(GtkWidget  * widget, gpointer useless);
 static void clear_selection(GtkWidget  * widget, gpointer useless);
 static void undo_changes(GtkWidget  * widget, gpointer useless);
-static void text_has_got_changed(GtkWidget  * widget, gpointer useless);
 
 /*
  * Pops up a menu if needed
@@ -1040,7 +1039,7 @@ static void undo_changes(GtkWidget  * widget, gpointer useless)
  * Set po->file_changed to TRUE if the text in the translation box has been
  * updated.
  */
-static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
+void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 {
 	if (nothing_changes)
 		return;

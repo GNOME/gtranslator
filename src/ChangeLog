@@ -1,3 +1,21 @@
+2001-03-06  Fatih Demir	<kabalak@gtranslator.org>
+
+	* query.c, dialogs.c & syntax.c: Do not free up the segments of our
+		GStrings.
+
+	* dialogs.c: Call the "text_has_got_changed" function if we could 
+		insert a text into the translation box and do also call only
+		 the new wrapper function "gtranslator_query_accomplish".
+
+	* query.c/.h: Renamed "gtranslator_query_all" to be more logical:
+		"gtranslator_query_gtr_msg" is the new function name and
+		  implemented a toplevel wrapper function named 
+		   "gtranslator_query_accomplish" which performs the 
+		     complete accomplishment actions for every empty msgstr.
+
+	* gui.c/.h: Move the "text_has_got_changed" declaration to the header
+		and made the function non-static.
+
 2001-03-05  Fatih Demir	<kabalak@gtranslator.org>
 
 	* dialogs.c/.h: Added "accomplish_dialog" which asks if gtranslator

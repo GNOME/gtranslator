@@ -78,9 +78,14 @@ void gtranslator_free_query(GtrQuery **query);
 void gtranslator_free_query_result(GtrQueryResult **result);
 
 /*
- * Automatically query for all empty msgstr's the possible translations and
- *  insert them.
+ * Automatically query for an empty msgstr's possible translation and insert
+ *  them (data is the passed GtrMsg structure.
  */
-void gtranslator_query_all(gpointer data, gpointer yeah);
+void gtranslator_query_gtr_msg(gpointer data, gpointer yeah);
+
+/*
+ * Perform all the queries for the msgid's.
+ */
+void gtranslator_query_accomplish(void);
 
 #endif

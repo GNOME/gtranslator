@@ -494,7 +494,7 @@ void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 		gnome_dialog_close(dialog);
 	}
 
-	g_string_free(uri, 0);
+	g_string_free(uri, FALSE);
 	
 }
 
@@ -733,8 +733,14 @@ Would you like to insert it into the translation?"),
 					 */
 					if(content && strcmp(content, result->translation))
 					{
+						/*
+						 * Insert the text and update the
+						 * status flags for it.
+						 */
 						gtranslator_syntax_insert_text(trans_box,
 						result->translation);
+
+						text_has_got_changed(NULL, NULL);
 
 						g_free(result->domain);
 						g_free(result);
@@ -791,6 +797,6 @@ from your default query domain?"),
 		/*
 		 * Accomplish the missing entries via the new query function:
 		 */
-		g_list_foreach(po->messages, (GFunc) gtranslator_query_all, NULL);
+		gtranslator_query_accomplish();
 	}
 }
