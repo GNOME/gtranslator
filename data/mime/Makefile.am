@@ -3,14 +3,14 @@
 ##
 ## The mime dirs
 ## 
-icondir = $(datadir)/pixmaps/mc
+icondir = $(datadir)/pixmaps
 mimedir = $(datadir)/mime-info
 keysdir = $(datadir)/mime-info
 
 ##
 ## And the mime-files
 ##
-icon_DATA = application-x-gmo.png application-x-po.png
+icon_DATA = gnome-application-x-gmo.png gnome-application-x-po.png
 keys_predata = gtranslator.keys.in
 keys_DATA = gtranslator.keys
 mime_DATA = gtranslator.mime
