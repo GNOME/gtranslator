@@ -317,6 +317,15 @@ void gtranslator_message_update(void)
 	{
 		gtranslator_messages_table_update_row(msg);
 	}
+
+	/*
+	 * Enable the remove all translations function if wished and if any
+	 *  translated entries have already landed.
+	 */
+	if(GtrPreferences.rambo_function && (po->translated > 0))
+	{
+		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
+	}
 }
 
 void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
