@@ -150,15 +150,18 @@ gboolean add_to_obsolete(gchar *comment)
 
 gboolean gtranslator_parse_core(void)
 {
-	FILE *fs;
-	char *line;
-	guint lines = 0;
+	GtrMsg 	*msg;
+	
+	FILE 	*fs;
+	char 	*line;
+	
+	guint 	 lines=0;
+	guint	 position=-1;
 	
 	/*
 	 * If TRUE, means that a corresponding part is read
 	 */
 	gboolean msgid_ok = FALSE, msgstr_ok = FALSE, comment_ok = FALSE;
-	GtrMsg *msg;
 
 	fs = fopen(po->filename, "r");
 	
@@ -169,11 +172,14 @@ gboolean gtranslator_parse_core(void)
 	po->fuzzy=0;
 	
 	msg = g_new0(GtrMsg, 1);
+	
 	/*
 	 * Parse the file line by line...
 	 */
 	while ((line = gtranslator_utils_getline (fs)) != NULL) {
+		
 		lines++;
+		
 		/*
 		 * If it's a comment, no matter of what kind. It belongs to
 		 * the message pair below
@@ -261,6 +267,10 @@ gboolean gtranslator_parse_core(void)
 		 */
 		if ((msgid_ok == TRUE) && (msgstr_ok == TRUE)) {
 			check_msg_status(msg);
+			
+			position++;
+			msg->no=position;
+			
 			po->messages =
 			    g_list_prepend(po->messages, (gpointer) msg);
 			/*
@@ -270,12 +280,17 @@ gboolean gtranslator_parse_core(void)
 			msg = g_new0(GtrMsg, 1);
 		}
 	}
+	
 	/*
 	 * If there was no empty line at end of file
 	 */
 	if ((msgid_ok == TRUE) && (msgstr_ok == FALSE))
 	{
 		check_msg_status(msg);
+		
+		position++;
+		msg->no=position;
+		
 		po->messages = g_list_prepend(po->messages, (gpointer) msg);
 	}
 	else if(msg->comment && msg->comment->comment &&

@@ -45,6 +45,7 @@ typedef struct {
 	gchar 		*msgid;
 	gchar 		*msgstr;
 	
+	gint		no;
 	gint 		pos;
 	
 	GtrMsgStatus 	status;

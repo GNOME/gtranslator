@@ -98,7 +98,7 @@ icon_at_function (ETreeModel *model, ETreePath path, void *data)
 
 static gint column_count_function(ETreeModel *model, void *data)
 {
-	return 5;
+	return 6;
 }
 
 static gboolean is_cell_editable_function(ETreeModel *model, ETreePath path, 
@@ -111,10 +111,12 @@ static gboolean is_empty_function(ETreeModel *model, int column,
 	const void *value, void *data)
 {
 	switch (column) {
-	case COL_NUM:
+	case COL_NUMBER:
 		return value == NULL;
-	case COL_ORIG:
-	case COL_TRANS:
+	case COL_LINE:
+		return value == NULL;
+	case COL_ORIGINAL:
+	case COL_TRANSLATION:
 	case COL_COMMENT:
 	case COL_STATUS:
 		return !(value && *(char *)value);
@@ -128,14 +130,16 @@ static void free_value_function(ETreeModel *model, int column,
 	void *value, void *data)
 {
 	switch (column) {
-	case COL_ORIG:
-	case COL_TRANS:
+	case COL_ORIGINAL:
+	case COL_TRANSLATION:
 	case COL_COMMENT:
 	case COL_STATUS:
 		if (value)
 			GTR_FREE (value);
 		break;
-	case COL_NUM:
+	case COL_NUMBER:
+		break;
+	case COL_LINE:
 		break;
 	default:
 		g_assert_not_reached ();
@@ -151,14 +155,17 @@ static void *duplicate_value_function(ETreeModel *model, int column,
 	const void *value, void *data)
 {
 	switch (column) {
-	case COL_ORIG:
-	case COL_TRANS:
+	case COL_ORIGINAL:
+	case COL_TRANSLATION:
 	case COL_COMMENT:
 	case COL_STATUS:
 		return g_strdup (value);
 		break;
-	case COL_NUM:
-		return (void *)value;
+	case COL_NUMBER:
+		return (void *) value;
+		break;
+	case COL_LINE:
+		return (void *) value;
 		break;
 	default:
 		g_assert_not_reached ();
@@ -169,13 +176,16 @@ static void *duplicate_value_function(ETreeModel *model, int column,
 static void *initialize_value_function(ETreeModel *model, int column, void *data)
 {
 	switch (column) {
-	case COL_ORIG:
-	case COL_TRANS:
+	case COL_ORIGINAL:
+	case COL_TRANSLATION:
 	case COL_COMMENT:
 	case COL_STATUS:
 		return g_strdup ("");
 		break;
-	case COL_NUM:
+	case COL_NUMBER:
+		return NULL;
+		break;
+	case COL_LINE:
 		return NULL;
 		break;
 	default:
@@ -190,14 +200,14 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	GtrMsg *message;
 	
 	message = e_tree_memory_node_get_data (tree_memory, path);
-	g_return_val_if_fail(message!=NULL, "");
-	g_return_val_if_fail(file_opened==TRUE, "");
+	g_return_val_if_fail(message!=NULL, NULL);
+	g_return_val_if_fail(file_opened==TRUE, NULL);
 	
 	switch (column) {
-	case COL_ORIG:
+	case COL_ORIGINAL:
 		return message->msgid;
 		break;
-	case COL_TRANS:
+	case COL_TRANSLATION:
 		if(message->msgstr)
 		{
 			return gtranslator_utf8_get_utf8_string(&message->msgstr);
@@ -228,8 +238,11 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 			return NULL;
 		}		
 		break;
-	case COL_NUM:
-		return GINT_TO_POINTER (message->pos);
+	case COL_NUMBER:
+		return GINT_TO_POINTER(message->no);
+		break;
+	case COL_LINE:
+		return GINT_TO_POINTER(message->pos);
 		break;
 	default:
 		g_assert_not_reached ();
@@ -241,14 +254,17 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 	const void *value, void *data)
 {
 	switch (column) {
-	case COL_ORIG:
-	case COL_TRANS:
+	case COL_ORIGINAL:
+	case COL_TRANSLATION:
 	case COL_COMMENT:
 	case COL_STATUS:
 		return g_strdup (value);
 		break;
-	case COL_NUM:
-		return g_strdup_printf ("%d",(int) value);
+	case COL_NUMBER:
+		return g_strdup_printf ("%d", (gint) value);
+		break;
+	case COL_LINE:
+		return g_strdup_printf("%d", (gint) value);
 		break;
 	default:
 		g_assert_not_reached ();
@@ -263,10 +279,12 @@ row_selected (ETree *tree, int row, ETreePath node, gpointer data)
 	gint model_row;
 	
 	message=e_tree_memory_node_get_data (tree_memory, node);
-	g_return_if_fail(message);
+	g_return_if_fail(message!=NULL);
 	
-	/* This sucks. Should use e_tree_view_to_model_row here
-	** but that seems to return the view row. Sigh.*/
+	/*
+	 * This sucks. Should use e_tree_view_to_model_row here
+	 * but that seems to return the view row. Sigh.
+	 */
 	model_row=g_list_index(po->messages, message);
 	
 	if (model_row<0)
@@ -286,6 +304,7 @@ static ETableExtras *table_extras_new()
 	gchar *list_parts[] =
 	{
 		"number",
+		"line",
 		"original",
 		"translation",
 		"comment",
@@ -297,11 +316,14 @@ static ETableExtras *table_extras_new()
 	
 	/*
 	 * Fill the table parts independently here -- just for easification
-	 *  of the process, we do use this loop instead of 4, 5 different calls.
+	 *  of the process, we do use this contructions instead of many calls.
 	 */
-	 
-	cell = e_cell_number_new (NULL, GTK_JUSTIFY_LEFT);
+	cell=e_cell_number_new(NULL, GTK_JUSTIFY_LEFT);
 	e_table_extras_add_cell(extras, list_parts[count], cell); 
+	count++;
+
+	cell=e_cell_number_new(NULL, GTK_JUSTIFY_LEFT);
+	e_table_extras_add_cell(extras, list_parts[count], cell);
 	count++;
 	
 	while(list_parts[count]!=NULL)

@@ -1,5 +1,14 @@
 2001-07-22  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c/.h: Added COL_LINE enumeration value and renamed
+		some enumeration values; integrated the line number display
+		 via "COL_LINE" and "line" cells/enumeration values.
+
+	* messages.h, messages-table.c & parse.c: Added "no" field to GtrMsg 
+		which holds the number of the message in the po file -- set
+		 the entry on parse time and show it in the table instead of
+		  the line number like before.
+
 	* dialogs.c/.h & utils_gui.c/.h: Moved/renamed the "gtranslator_error"
 		function to "gtranslator_utils_error_dialog" and put it into
 		 utils_gui.c/.h.
