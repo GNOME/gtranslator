@@ -1,5 +1,8 @@
 2003-05-24  Ross Golder  <rossg@golder.org>
 
+	* utils_gui.c (gtranslator_utils_invert_dot): Would only run if
+	string was less than 0 characters in length (never?!)
+	
 	* gui.c (gtranslator_keyhandler): Fixed shifted keypresses being
 	blocked
 	* gui.c: Re-instated 'changed' callback.
