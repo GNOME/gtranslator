@@ -340,7 +340,7 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	ph->comment=prepare_comment_for_view(ph->comment);
 	
 	prj_comment =
-	    attach_text_with_label(prj_page, 0, _("Comments :"), ph->comment,
+	    attach_text_with_label(prj_page, 0, _("Comments:"), ph->comment,
 	    			   edit_header_changed);
 	
 	gtk_widget_set_usize(prj_comment, 360, 90);
@@ -352,11 +352,11 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	    attach_entry_with_label(prj_page, 2, _("Project version:"),
 	    			    ph->prj_version, edit_header_changed);
 	pot_date =
-	    attach_entry_with_label(prj_page, 3, _("pot file creation date :"),
+	    attach_entry_with_label(prj_page, 3, _("pot file creation date:"),
 				    ph->pot_date, edit_header_changed);
 	gtk_widget_set_sensitive(pot_date, FALSE);
 	po_date =
-	    attach_entry_with_label(prj_page, 4, _("po file revision date :"),
+	    attach_entry_with_label(prj_page, 4, _("po file revision date:"),
 				    ph->po_date, edit_header_changed);
 	gtk_widget_set_sensitive(po_date, FALSE);
 
@@ -378,26 +378,26 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	gtk_widget_set_sensitive(lang_page, !wants.fill_header);
 	gtk_box_pack_start(GTK_BOX(lang_vbox), lang_page, TRUE, TRUE, 0);
 	translator =
-	    attach_entry_with_label(lang_page, 1, _("Translator's name :"),
+	    attach_entry_with_label(lang_page, 1, _("Translator's name:"),
 				    ph->translator, edit_header_changed);
 	tr_email =
-	    attach_entry_with_label(lang_page, 2, _("Translator's e-mail :"),
+	    attach_entry_with_label(lang_page, 2, _("Translator's e-mail:"),
 				    ph->tr_email, edit_header_changed);
 	language_combo =
-	    attach_combo_with_label(lang_page, 3, _("Language :"),
+	    attach_combo_with_label(lang_page, 3, _("Language:"),
 				    languages_list, ph->language,
 				    language_changed, NULL);
 	lg_combo =
 	    attach_combo_with_label(lang_page, 4,
-				    _("Language group's e-mail :"),
+				    _("Language group's e-mail:"),
 				    group_emails_list, ph->lg_email,
 				    edit_header_changed, NULL);
 	charset_combo =
-	    attach_combo_with_label(lang_page, 5, _("Charset :"),
+	    attach_combo_with_label(lang_page, 5, _("Charset:"),
 				    encodings_list, ph->charset,
 				    edit_header_changed, NULL);
 	enc_combo =
-	    attach_combo_with_label(lang_page, 6, _("Encoding :"),
+	    attach_combo_with_label(lang_page, 6, _("Encoding:"),
 				    bits_list, ph->encoding,
 				    edit_header_changed, NULL);
 	/*
