@@ -13,7 +13,6 @@
 #endif // HAVE_CONFIG_H
 
 #include <gnome.h>
-#include "messages.h"
 
 GtkWidget* create_app1 (void);
 

@@ -13,7 +13,6 @@
 	#include <config.h>
 #endif // HAVE_CONFIG_H
 
-#include "interface.h"
 #include "support.h"
 
 /**
@@ -25,3 +24,4 @@ GtkWidget *about;
 * This creates the about box
 **/
 void about_box();
+void about_box_show(GtkWidget *widget,gpointer useless);

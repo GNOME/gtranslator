@@ -25,13 +25,13 @@ GtkWidget *prefs,*first_page,*second_page,*third_page;
 * The entries
 **/
 GtkWidget *authors_name,*authors_email,*authors_language;
-GtkWidget *authors_language_team,*mime_type,*encoding;
+GtkWidget *mime_type,*encoding,*lcode,*lg_email;
 GtkWidget *additional_comments;
 
 /**
 * Three lists for the combo-boxes ..
 **/
-GList *languages_list,*encodings_list,*mime_types_list;
+GList *languages_list,*encodings_list,*lcodes_list,*group_emails_list;
 
 /**
 * The *-buttons used in the preferences box
@@ -48,7 +48,8 @@ GtkWidget *warn_if_fuzzy,*warn_if_untranslated;
 /**
 * The first one creates the preferences-box and the others show/hide it
 **/
-void prefs_box(GtkWidget *widget,gpointer useless);
+void prefs_box();
 void prefs_box_show(GtkWidget *widget,gpointer useless);
 void prefs_box_hide(GtkWidget *widget,gpointer useless);
+void prefs_box_changed(GtkWidget *widget,gpointer useless);
 void prefs_box_apply(GtkWidget *widget,gpointer more_useless);

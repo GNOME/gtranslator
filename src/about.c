@@ -25,5 +25,10 @@ void about_box()
 		NULL);
 	gtk_window_set_modal (GTK_WINDOW (about), TRUE);
 	gtk_window_set_wmclass (GTK_WINDOW (about), "gtranslator", "gtranslator");
+}
+
+void about_box_show(GtkWidget *widget,gpointer useless)
+{
+	about_box();
 	gtk_widget_show(about);
 }

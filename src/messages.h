@@ -12,41 +12,10 @@
 #include <glib.h>
 
 /**
-* Typedefs for the following structures
-**/
-typedef struct _po_file gtr_po;
-typedef struct _message gtr_msg;
-typedef enum _gtr_msg_status gtr_msg_status;
-
-/**
-* The structure with general 
-*  informations ...
-**/
-struct _po_file 
-{
-	gchar *po_filename;
-	unsigned int file_length;
-	gboolean opened;
-};
-
-/**
-* Every message should be filled
-*  in here .
-**/
-struct _message
-{
-	gtr_po *po;
-	gchar *msgid;
-	gchar *msgstr;
-	unsigned int position;
-	gtr_msg_status *status;
-};
-
-/**
 * The different stati of the translatable
 *  messages .
 **/
-enum _gtr_msg_status
+enum gtr_msg_status
 {
 	GTRANSLATOR_MSG_STATUS_UNTRANSLATED,
 	GTRANSLATOR_MSG_STATUS_TRANSLATED,
@@ -60,5 +29,32 @@ enum _gtr_msg_status
 	* If the entry should be translated as
 	*  fast as possible .
 	**/
-	GTRANSLATOR_MSG_STATUS_FIXME
+	GTRANSLATOR_MSG_STATUS_FIXME,
+	/**
+	* ?!*S?=
+	**/
+	GTRANSLATOR_MSG_ASSIMILATED_BY_THE_BORG
+};
+
+/**
+* The structure with general 
+*  informations ...
+**/
+struct gtr_po 
+{
+	gchar *po_filename;
+	unsigned int file_length;
+	gboolean opened;
+};
+
+/**
+* Every message should be filled
+*  in here .
+**/
+struct gtr_msg
+{
+	gchar *msgid;
+	gchar *msgstr;
+	unsigned int position;
+	enum gtr_msg_status status;
 };

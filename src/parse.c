@@ -10,9 +10,11 @@
 **/
 
 #include "parse.h"
-#include "messages.h"
 #include <errno.h>
 #include <unistd.h>
+#ifdef IT_WORKS
+	#include "messages.h"
+#endif // IT_WORKS
 
 /**
 * The file-stream for the file-check
@@ -42,7 +44,8 @@ void check_file(FILE *stream)
 void parse(char *filename)
 {
 	gchar tmp_l[256];
-	gtr_msg *msg;	
+	#ifdef IT_WORKS	
+	struct gtr_msg *msg;	
 
 	/** 
 	* Open the file got by the open-dialog
@@ -110,4 +113,5 @@ void parse(char *filename)
 	**/
 	msg->po->file_length=(count - 1);
 	max_count=((count - 10 ) / 3);
+	#endif // IT_WORKS
 }

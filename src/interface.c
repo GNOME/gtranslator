@@ -24,6 +24,9 @@
 #include <gnome.h>
 
 #include "interface.h"
+#include "about.h"
+#include "gtr_dialogs.h"
+#include "prefs.h"
 
 /**
 * The Gnome-help structure
@@ -112,13 +115,13 @@ static GnomeUIInfo the_messages_menu[] =
 
 static GnomeUIInfo the_settings_menu[] =
 {
-        GNOMEUIINFO_MENU_PREFERENCES_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_PREFERENCES_ITEM (prefs_box_show, NULL),
         GNOMEUIINFO_END
 };
 
 static GnomeUIInfo the_help_menu[] =
 {
-        GNOMEUIINFO_MENU_ABOUT_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_ABOUT_ITEM (about_box_show, NULL),
         {
           GNOME_APP_UI_ITEM, N_("_Online help"),
           NULL,
@@ -375,9 +378,15 @@ create_app1 (void)
 	* The callbacks list
 	**/
 	gtk_signal_connect(GTK_OBJECT(app1),"delete-event",
-	GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
+		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
 	gtk_signal_connect(GTK_OBJECT(exit_button),"clicked",
-	GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
-	
+		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
+	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",
+		GTK_SIGNAL_FUNC(prefs_box_show),NULL);
+	gtk_signal_connect(GTK_OBJECT(open_button),"clicked",
+		GTK_SIGNAL_FUNC(open_file_show),NULL);	
+	gtk_signal_connect(GTK_OBJECT(save_as_button),"clicked",
+		GTK_SIGNAL_FUNC(save_file_as_show),NULL);
+	/*****************************************************************/
 	return app1;
 }
