@@ -43,6 +43,10 @@ typedef struct {
 	GList *current;
 	/* Marks if the file was changed; */
 	guint file_changed : 1;
+	/* The fuzzy entries. */
+	guint fuzzy : 1;
+	/* The untranslated entries. */
+	guint untranslated : 1;
 } GtrPo;
 
 #define GTR_PO(x) ((GtrPo *)x)

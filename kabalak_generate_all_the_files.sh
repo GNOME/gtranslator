@@ -10,23 +10,13 @@ echo "I don't check for the stuff I'll use ;-) "
 a="echo -n "
 echo "Starting to process the files ..."
 echo ""
-grep -sq LIBTOOL configure.in && {
-$a "libtoolize -> " && echo "no"|libtoolize --force 2>&1 1>/dev/null
-}
-#
-# This is disabled due to a cvs-internal intl/ dir which shouldn't be 
-#  overwritten ;)
-#
-#grep -sq GETTEXT configure.in && {
-#$a "gettextize -> " && echo "no"|gettextize --force 2>&1 1>/dev/null
-#}
 #
 # Set up the $ACLOCAL_FLAGS
 #
 export ACLOCAL_FLAGS=" -I . $ACLOCAL_FLAGS "
 #
 # Test if the ./macros dir is present
-test -d macros 
+test -d macros
 case $? in
 	0)
 	$a "aclocal -> " && aclocal $ACLOCAL_FLAGS -I macros
@@ -35,6 +25,12 @@ case $? in
 	$a "aclocal -> " && aclocal $ACLOCAL_FLAGS
 	;;
 esac
+grep -sq LIBTOOL configure.in && {
+$a "libtoolize -> " && echo "no"|libtoolize --force 2>&1 1>/dev/null
+}
+grep -sq GETTEXT configure.in && {
+$a "gettextize -> " && echo "no"|gettextize --force 2>&1 1>/dev/null
+}
 $a "autoheader -> " && autoheader
 $a "automake -> " && automake -a
 $a "autoconf -> :-) " && autoconf
@@ -46,12 +42,12 @@ echo "    './configure' with the desired flags ."
 echo ""
 t=5
 echo "Waiting for your 'open-mind' decision : "
-while [ $t -gt 1 ] 
+while [ $t -gt 1 ]
 	do
 	$a "$t "
 	sleep 1
 	t=$[ $t -1 ]
-	done 
+	done
 $a " last chance (1) " && sleep 1 && echo ""
 ./configure "$@" && echo -e "\n\tHappy $package-ing\n" && exit 0
 #######################################################################
