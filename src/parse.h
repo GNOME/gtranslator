@@ -58,7 +58,7 @@ void check_file(FILE *);
  * The previous parsing routine
  * ; will be removed soon 
  **/
-void parse(void);
+void parse(char *);
 
 /**
  * Get next msgid 

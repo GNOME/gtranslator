@@ -45,7 +45,7 @@ on_open1_activate                      (GtkMenuItem     *menuitem,
 	GtkWidget* open_my_file;
 	open_my_file=create_open_file();
 	gtk_widget_show(open_my_file);
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),"Open->");
+	// gnome_appbar_set_status(GNOME_APPBAR(appbar1),"Open->");
 }
 
 
@@ -84,7 +84,7 @@ void
 on_cut1_activate                       (GtkMenuItem     *menuitem,
                                         gpointer	user_data)
 {
-	
+		
 }
 
 
@@ -514,8 +514,10 @@ void
 on_ok_button_of_open_file_pressed      (GtkButton       *button,
                                         GtkFileSelection *fsel)	
 {
+	gchar *file;
+	file = gtk_file_selection_get_filename (GTK_FILE_SELECTION(fsel));
 	gtk_widget_hide(GTK_WIDGET(fsel));
-	parse();
+	parse((char *)file);
 	file_opened=TRUE;
 }
 

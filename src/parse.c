@@ -9,6 +9,7 @@
 
 #include "parse.h"
 #include "messages.h"
+#include <errno.h>
 #include <unistd.h>
 
 /**
@@ -28,7 +29,7 @@ void check_file(FILE *stream)
 		 * If there are any problems , give a
 		 *  message ..
 		 **/
-		g_error("\nThe file stream is lost !\n");
+		g_error("\nThe file stream is lost !\nError No. %i .\n",errno);
 	}
 }
 
@@ -36,9 +37,11 @@ void check_file(FILE *stream)
  * This have to be renamed and used in the
  *  msg_*-getting routines ...
  **/
-void parse()
+void parse(char *filename)
 {
 	gchar tmp_l[256];
+	msg = (struct message *) malloc (sizeof (struct message));
+
 	/** 
 	 * Open the file got by the open-dialog
 	 **/
@@ -50,8 +53,8 @@ void parse()
 	msg->po->opened=TRUE;
 	msg->po->po_filename=(char *)filename;
 	#ifdef DEBUG
-	g_print("Got filename  %s \n",filename);
-	g_print("Or : %s\n",msg->po->po_filename);
+	g_print ("Got filename  %s \n",(char *)filename);
+	g_print ("Or : %s\n",(char *)msg->po->po_filename);
 	#endif
 	count=0;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
@@ -61,12 +64,12 @@ void parse()
 		/**
 		 * Are we at a msgid ?
 		 **/
-		if(!strncasecmp(tmp_l,"msgid \"",6))
+		if(strncasecmp("msgid \"",tmp_l,7))
 		{
 			/**
 			 * Copy the current string to a message 
 			 **/
-			msg->msgid=tmp_l;
+			msg->msgid=(char *)tmp_l;
 			/**
 			 * Define the position
 			 **/
@@ -80,18 +83,27 @@ void parse()
 			 * While there's no msgstr ...
 			 * add it to the msgid ...
 			 **/
-			while(strncasecmp(tmp_l,"msgstr \"",7))
-			{	
+			while(!strncasecmp("msgstr \"",tmp_l,8))
+			{
 				/**
 				 * Add it , add it , ... 
 				 **/
-				strcat(msg->msgid,tmp_l);
 				fgets(tmp_l,sizeof(tmp_l),fs);
+				strncat(msg->msgid,tmp_l,sizeof(tmp_l));
 			}
+		} else {
 			/**
 			 * Now we're hopefully at a msgstr
 			 **/
-			msg->msgstr=tmp_l;
+			msg->msgstr=(char *)tmp_l;
+			while(!strncasecmp("msgid \"",tmp_l,7))
+			{
+				/**
+				 * Add it , add it , ... 
+				 **/
+				fgets(tmp_l,sizeof(tmp_l),fs);
+				strncat(msg->msgstr,tmp_l,sizeof(tmp_l));
+			}
 		}
 		
 	}
@@ -100,4 +112,7 @@ void parse()
 	 **/
 	msg->po->file_length=(count - 1);
 	max_count=((count - 10 ) / 3);
+	#ifdef DEBUG
+	g_print ("end of file %s\n", (char *)filename);
+	#endif
 }
