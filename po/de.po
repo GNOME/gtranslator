@@ -1,36 +1,285 @@
 # German message file for gtranslator.
 # Copyright (C) YEAR Free Software Foundation, Inc.
+# Christian Meyer <linux@chrisime.de>, 2000.
 # Kai Lahmann <kl@linuxfaqs.de>, 2000.
 # Karl Eichwalder <ke@suse.de>, 2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.19\n"
-"POT-Creation-Date: 2000-08-04 19:35+0200\n"
-"PO-Revision-Date: 2000-07-16 04:35+02:00\n"
-"Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
+"POT-Creation-Date: 2000-09-11 08:57+0200\n"
+"PO-Revision-Date: 2000-09-11 08:55+0200\n"
+"Last-Translator: Christian Meyer <linux@chrisime.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:27
+#: src/about.c:26
 msgid ""
-"gtranslator will be a GNOME framework for translating and managing the "
-"translation of the important po-files and othe i18/19/20..n issues."
+"gtranslator will be a Gnome framework for translating these emminent "
+"important po-files.\n"
+"It will be based upon a gtranslatord and a gtranslator client. Wish the best "
+"for us translators and for me!"
 msgstr ""
-"gtranslator wird ein GNOME-System für die Übersetzung und Verwaltung der "
-"wichtigen po-Dateien und andere i18/19/20..n Angelegenheiten."
+"gtranslator ist eine GNOME Anwendung, um diese wirklich wichtigen po-Dateien "
+"zu übersetzen.\n"
+"Es basiert auf gtranslatord und einem gtranslator Client. Hoffen wir das "
+"Bestefür uns Übersetzer und für mich!"
 
-#: src/dialogs.c:46
+#: src/gui.c:56
+msgid "_Compile"
+msgstr "_Compilieren"
+
+#: src/gui.c:57 src/gui.c:217
+msgid "Compile the po-file"
+msgstr "PO-Datei compilieren"
+
+#: src/gui.c:83
+msgid "_Header..."
+msgstr "Kopf..."
+
+#: src/gui.c:84 src/gui.c:233
+msgid "Edit the header"
+msgstr "Den Kopf bearbeiten"
+
+#: src/gui.c:87
+msgid "_Spell check..."
+msgstr "Überprüfung der Rech_schreibung"
+
+#: src/gui.c:88
+msgid "Check the spelling of translation"
+msgstr "Die Rechtschreibung der Übersetzung prüfen"
+
+#: src/gui.c:96
+msgid "_First"
+msgstr "_Erste"
+
+#: src/gui.c:97 src/gui.c:250
+msgid "Go to the first message"
+msgstr "Zu der ersten Meldung gehen"
+
+#: src/gui.c:102
+msgid "_Back"
+msgstr "_Zurück"
+
+#: src/gui.c:103 src/gui.c:254
+msgid "Go one message back"
+msgstr "Eine Meldung zurückgehen"
+
+#: src/gui.c:108
+msgid "_Next"
+msgstr "_Weiter"
+
+#: src/gui.c:109 src/gui.c:258
+msgid "Go one message forward"
+msgstr "Zu der nächsten Meldung weitergehen"
+
+#: src/gui.c:114
+msgid "_Last"
+msgstr "_Letzte"
+
+#: src/gui.c:115 src/gui.c:262
+msgid "Go to the last message"
+msgstr "Zur letzten Meldung gehen"
+
+#: src/gui.c:121
+msgid "_Go to..."
+msgstr "_Gehe zu..."
+
+#: src/gui.c:122 src/gui.c:266
+msgid "Goto specified message number"
+msgstr "Zu einer bestimmten Meldung gehen"
+
+#: src/gui.c:127
+msgid "Next fuzz_y"
+msgstr "Nächtes fuzz_y"
+
+#: src/gui.c:128
+msgid "Go to next fuzzy message"
+msgstr "Zu der nächsten ungenauen Meldung gehen"
+
+#: src/gui.c:133
+msgid "Next _untranslated"
+msgstr "Nächste _unübersetzt"
+
+#: src/gui.c:134
+msgid "Go to next untranslated message"
+msgstr "Zur nächsten unübersetzten Meldung gehen"
+
+#: src/gui.c:143
+msgid "_Translated"
+msgstr "Überse_tzt"
+
+#: src/gui.c:144
+msgid "Toggle translated status of a message"
+msgstr "Den Übersetzungsstatus der Meldung umschalten"
+
+#: src/gui.c:151
+msgid "_Fuzzy"
+msgstr "Ungenau"
+
+#: src/gui.c:152
+msgid "Toggle fuzzy status of a message"
+msgstr "Den Fuzzy-Status einer Meldung umschalten"
+
+#: src/gui.c:159
+msgid "_Stick"
+msgstr "Fe_st"
+
+#: src/gui.c:160
+msgid "Stick this message"
+msgstr "Meldung mit festem Text"
+
+#: src/gui.c:170
+msgid "_Add the current message"
+msgstr "_Aktuelle Meldung hinzufügen"
+
+#: src/gui.c:172
+msgid "Add the current message to the message db"
+msgstr "Aktuelle Meldung zur Datenbank hinzufügen"
+
+#: src/gui.c:176
+msgid "_Query for a message..."
+msgstr "Nach einer Meldung suchen..."
+
+#: src/gui.c:178
+msgid "Query the message db for the current msgid"
+msgstr "Die Datenbank nach der aktuellen msgid durchsuchen"
+
+#: src/gui.c:193
+msgid "gtranslator _website"
+msgstr "gtranslator's _Website"
+
+#: src/gui.c:194
+msgid "gtranslator's homepage on the web"
+msgstr "gtranslator's Homepage im Internet"
+
+#: src/gui.c:203
+msgid "_Messages"
+msgstr "_Meldungen"
+
+#: src/gui.c:204
+msgid "Message _status"
+msgstr "Meldungs-_Status"
+
+#: src/gui.c:205
+msgid "Message _db"
+msgstr "Datenbank"
+
+#: src/gui.c:216
+msgid "Compile"
+msgstr "Compilieren"
+
+#: src/gui.c:220
+msgid "Open"
+msgstr "Öffnen"
+
+#: src/gui.c:221
+msgid "Open a po-file"
+msgstr "po-Datei öffnen"
+
+#: src/gui.c:224
+msgid "Save"
+msgstr "Speichern"
+
+#: src/gui.c:225
+msgid "Save File"
+msgstr "Datei speichern"
+
+#: src/gui.c:228
+msgid "Save as"
+msgstr "Speichern unter"
+
+#: src/gui.c:229
+msgid "Save file with a different name"
+msgstr "Datei unter anderem Namen speichern"
+
+#: src/gui.c:232
+msgid "Header"
+msgstr "Kopf"
+
+#: src/gui.c:237
+msgid "Options"
+msgstr "Optionen"
+
+#: src/gui.c:238
+msgid "gtranslator options"
+msgstr "Optionen für gtranslator"
+
+#: src/gui.c:241 src/gui.c:242
+msgid "Exit"
+msgstr "Verlassen"
+
+#: src/gui.c:249
+msgid "First"
+msgstr "Erste"
+
+#: src/gui.c:253
+msgid "Back"
+msgstr "Zurück"
+
+#: src/gui.c:257
+msgid "Next"
+msgstr "Weiter"
+
+#: src/gui.c:261
+msgid "Last"
+msgstr "Letzte"
+
+#: src/gui.c:265
+msgid "GoTo"
+msgstr "Gehe zu"
+
+#: src/dialogs.c:202 src/gui.c:270
+msgid "Find"
+msgstr "Suchen"
+
+#: src/gui.c:271
+msgid "Find string in po-file"
+msgstr "Text In der po-Datei suchen"
+
+#: src/gui.c:274
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: src/gui.c:275
+msgid "Add to the message db"
+msgstr "Zur Datenbank hinzufügen"
+
+#: src/dialogs.c:294 src/gui.c:278
+msgid "Query"
+msgstr "Anfrage"
+
+#: src/gui.c:279
+msgid "Query for a message in db"
+msgstr "Nach einer Meldung in der Datenbank suchen"
+
+#. *
+#. * Create the app
+#. *
+#: src/gui.c:382
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: src/gui.c:461
+msgid "Bye bye!"
+msgstr "Auf Wiedersehen!"
+
+#: src/gui.c:568
+#, c-format
+msgid "Message: %d / %d"
+msgstr "Meldung: %d / %d"
+
+#: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
-msgstr "gtranslator -- öffne eine .po-Datei"
+msgstr "gtranslator -- eine .po-Datei öffnen"
 
-#: src/dialogs.c:70
+#: src/dialogs.c:74
 msgid "gtranslator -- save file as .."
-msgstr "gtranslator -- Datei speichern unter"
+msgstr "gtranslator -- Datei speichern unter .."
 
-#: src/dialogs.c:97
+#: src/dialogs.c:101
 #, c-format
 msgid ""
 "File %s\n"
@@ -39,610 +288,241 @@ msgstr ""
 "Datei %s\n"
 "wurde geändert. Speichern?"
 
-#: src/dialogs.c:134
-msgid "GoTo message entry"
-msgstr "Gehe zu-Nachrichten-Eintrag"
+#: src/dialogs.c:142
+msgid "gtranslator -- go to"
+msgstr "gtranslator -- gehe zu"
 
-#: src/dialogs.c:135
+#: src/dialogs.c:142
 msgid "Go!"
 msgstr "Gehe!"
 
-#: src/dialogs.c:141
-msgid "Goto the specified message entry."
-msgstr "Gehe zu einer bestimmten Meldung"
+#: src/dialogs.c:146
+msgid "Go to message number:"
+msgstr "Gehe zu einer bestimmten Meldung:"
 
-#: src/dialogs.c:190
+#: src/dialogs.c:202
 msgid "Find in the po-file"
 msgstr "In der PO-Datei suchen"
-
-#: src/dialogs.c:191 src/gui.c:301
-msgid "Find"
-msgstr "Suchen"
 
 #. *
 #. * Create the widgets.
 #. *
-#: src/dialogs.c:197
+#: src/dialogs.c:207
 msgid "Enter your desired search string:"
 msgstr "Geben Sie den zu suchenden Text ein:"
 
-#: src/dialogs.c:199
+#: src/dialogs.c:210
 msgid "Case sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
+
+#: src/dialogs.c:216 src/languages.h:84
+msgid "English"
+msgstr "englisch"
+
+#: src/dialogs.c:218
+msgid "Translated"
+msgstr "Übersetzt"
+
+#: src/dialogs.c:220
+msgid "Both"
+msgstr "Beides"
+
+#: src/dialogs.c:223
+msgid "Find in: "
+msgstr "Suchen in: "
 
 #. *
 #. * Create a helping label.
 #. *
-#: src/dialogs.c:244
+#: src/dialogs.c:275
 msgid ""
 "With this query window you can query\n"
 "the message db for an existing entry\n"
 "with your query string."
 msgstr ""
 "Mit diesem Suchfenster kann man\n"
-"die Meldungs-Datenbank nach einer\n"
+"die Datenbank nach einer\n"
 "Meldung durchsuchen."
 
-#: src/dialogs.c:263 src/gui.c:313
-msgid "Query"
-msgstr "Anfrage"
-
-#. *
-#. * Set the window-properties.
-#. *
-#: src/dialogs.c:308
+#: src/dialogs.c:344
 msgid "gtranslator -- query the message db"
-msgstr "gtranslator -- in der Meldungs-Datenbank anfragen"
+msgstr "gtranslator -- in der Datenbank anfragen"
 
-#: src/dialogs.c:340
+#: src/dialogs.c:378
 #, c-format
 msgid "Result: `%s'"
 msgstr "Ergebnis: %s"
 
-#: src/dialogs.c:357
+#: src/dialogs.c:395
 msgid "Insert"
 msgstr "Einfügen"
 
-#. *
-#. * Set the window properties.
-#. *
-#: src/dialogs.c:361
+#: src/dialogs.c:400
 msgid "gtranslator -- result for your query"
 msgstr "gtranslator -- Ergebnis der Anfrage"
 
-#: src/header_stuff.c:117
-msgid "The header doesn't seem to be parsed rightly."
-msgstr "Der Kopf scheint nicht korrekt geparst zu sein."
+#: src/dialogs.c:456
+msgid "An error occured while msgfmt was executed:\n"
+msgstr "Während der Ausführung von msgfmt ist ein Fehler aufgetreten:\n"
 
-#: src/header_stuff.c:120
+#: src/prefs.c:188
+msgid "gtranslator -- options"
+msgstr "gtranslator -- Optionen"
+
+#. *
+#. * The tables for holding all the entries below
+#. *
+#: src/prefs.c:192
+msgid "Personal information"
+msgstr "Persönliche Informationen"
+
+#: src/prefs.c:193
+msgid "Language options"
+msgstr "Sprachoptionen"
+
+#: src/prefs.c:194
+msgid "Po file options"
+msgstr "Optionen der po-Datei"
+
+#: src/prefs.c:200
+msgid "Author's name :"
+msgstr "Name des Autors:"
+
+#: src/prefs.c:203
+msgid "Author's EMail :"
+msgstr "E-Mail des Autors:"
+
+#: src/header_stuff.c:297 src/prefs.c:211
+msgid "Language :"
+msgstr "Sprache:"
+
+#: src/prefs.c:215
+msgid "Language code :"
+msgstr "Sprachkürzel:"
+
+#: src/prefs.c:220
+msgid "Language group's EMail :"
+msgstr "Maillingliste des Übersetzungsteams:"
+
+#: src/header_stuff.c:306 src/prefs.c:224
+msgid "Charset :"
+msgstr "Charset :"
+
+#: src/header_stuff.c:310 src/prefs.c:228
+msgid "Encoding :"
+msgstr "Codierung:"
+
+#: src/prefs.c:236
+msgid "Set non-fuzzy status, if message was changed"
+msgstr "Non-fuzzy Status setzen, wenn Meldung sich verändert hat"
+
+#: src/prefs.c:240
+msgid "Warn if the .po-file contains fuzzy translations"
+msgstr "Warnen, wenn die .po-Daten fuzzy-Übersetzungen beinhaltet"
+
+#: src/prefs.c:244
+msgid "Don't save unchanged .po-files"
+msgstr "Unveränderte .po-Dateien nicht speichern"
+
+#: src/prefs.c:248
+msgid "Warn me if I'm trying to save an unchanged file"
+msgstr "Warnen, wenn man versucht eine unveränderte Datei zu speichern"
+
+#: src/prefs.c:252
+msgid "Use the messages db"
+msgstr "Die Datenbank benutzen"
+
+#: src/prefs.c:256
+msgid "Save geometry on exit & restore it on startup"
+msgstr ""
+"Die Größe von gtranslator beim Verlassen speichern und beim Start "
+"wiederherstellen"
+
+#: src/prefs.c:324
+msgid ""
+"With the Preferences box you can define some variables\n"
+"with which you can make gtranslator make more work\n"
+"like YOU want it to work!"
+msgstr ""
+"In dem Einstellungsdialog können Sie einige Variablen\n"
+"angeben, duch die gtranslator genau so arbeitet,\n"
+"wie SIE es wollen!"
+
+#: src/prefs.c:464
+#, c-format
+msgid "The geometry string \"%s\" couldn't be parsed!"
+msgstr "Der Geometrie-String \"%s\" konnte nicht analysiert werden!"
+
+#: src/header_stuff.c:241
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- Kopf bearbeiten"
 
-#: src/header_stuff.c:125
+#: src/header_stuff.c:245
+msgid "Project"
+msgstr "Projekt"
+
+#: src/header_stuff.c:246
+msgid "Translator and Language"
+msgstr "Übersetzer und Sprache"
+
+#: src/header_stuff.c:255
+msgid "Comments :"
+msgstr "Kommentare:"
+
+#: src/header_stuff.c:259
 msgid "Project name:"
 msgstr "Projektname:"
 
-#: src/header_stuff.c:126
+#: src/header_stuff.c:262
 msgid "Project version:"
 msgstr "Projektversion:"
 
-#: src/header_stuff.c:127
-msgid "Use my personal options to fill out the rest of the header."
+#: src/header_stuff.c:265
+msgid "pot file creation date :"
+msgstr "Erstellungsdatum der po-Datei :"
+
+#: src/header_stuff.c:269
+msgid "po file revision date :"
+msgstr "Revisionsdatum der po-Datei :"
+
+#: src/header_stuff.c:278
+msgid "Use my options to fill the following entries."
 msgstr ""
-"Verwende meine persönlichen Optionen um den Rest des Kopfes auszufüllen"
-
-#: src/gui.c:56
-msgid "_Compile"
-msgstr "_Compilieren"
-
-#: src/gui.c:57 src/gui.c:223
-msgid "Compile the po-file"
-msgstr "PO-Datei compilieren"
-
-#: src/gui.c:84
-msgid "_Header..."
-msgstr "Kopf..."
-
-#: src/gui.c:85 src/gui.c:247
-msgid "Edit the header"
-msgstr "Den Kopf bearbeiten"
-
-#: src/gui.c:95
-msgid "_First"
-msgstr "_Erste"
-
-#: src/gui.c:96 src/gui.c:271
-msgid "Go to the first message"
-msgstr "Gehe zu der ersten Meldung"
-
-#: src/gui.c:102
-msgid "_Back"
-msgstr "_Zurück"
-
-#: src/gui.c:103 src/gui.c:277
-msgid "Go one message back"
-msgstr "Gehe eine Meldung zurück"
-
-#: src/gui.c:109
-msgid "_Next"
-msgstr "_Weiter"
-
-#: src/gui.c:110 src/gui.c:283
-msgid "Go one message forward"
-msgstr "Gehe zu der nächsten Meldung weiter"
-
-#: src/gui.c:116
-msgid "_Last"
-msgstr "_Letzte"
-
-#: src/gui.c:117 src/gui.c:289
-msgid "Go to the Last message"
-msgstr "Gehe zur letzten Meldung"
-
-#: src/gui.c:124
-msgid "_Go to..."
-msgstr "Gehe zu..."
-
-#: src/gui.c:125 src/gui.c:295
-msgid "Goto specified message number"
-msgstr "Gehe zu einer bestimmten Meldung"
-
-#: src/gui.c:136
-msgid "Translated"
-msgstr "Übersetzt"
-
-#: src/gui.c:137
-msgid "Toggle translated status of a message"
-msgstr "Schalte den Übersetzungsstatus der Meldung um"
-
-#: src/gui.c:145
-msgid "Fuzzy"
-msgstr "Ungenau"
-
-#: src/gui.c:146
-msgid "Toggle fuzzy status of a message"
-msgstr "Schalte den Fuzzy-Status einer Meldung um"
-
-#: src/gui.c:154
-msgid "Stick"
-msgstr "Fest"
-
-#: src/gui.c:155
-msgid "Stick this message"
-msgstr "Meldung mit festem Text"
-
-#: src/gui.c:168
-msgid "_Add the current message"
-msgstr "Aktuelle Meldung hinzufügen"
-
-#: src/gui.c:169
-msgid "Add the current message to the messages DB"
-msgstr "Aktuelle Meldung zur Meldungs-Datenbank hinzufügen"
-
-#: src/gui.c:175
-msgid "_Query for a message..."
-msgstr "Nach einer Meldung suchen..."
-
-#: src/gui.c:176
-msgid "Query the messages DB for the current msgid"
-msgstr "Durchsuche die Meldungs-Datenbank nach der aktuellen msgid"
-
-#: src/gui.c:195
-msgid "gtranslator _website"
-msgstr "gtranslator's Website"
-
-#: src/gui.c:196
-msgid "gtranslator's homepage on the web"
-msgstr "gtranslator's Homepage in Internet"
-
-#: src/gui.c:207
-msgid "_Messages"
-msgstr "_Meldungen"
-
-#: src/gui.c:208
-msgid "Message _status"
-msgstr "Meldungs-Status"
-
-#: src/gui.c:209
-msgid "Message _db"
-msgstr "Meldungs-Datenbank"
-
-#: src/gui.c:222
-msgid "Compile"
-msgstr "Compilieren"
-
-#: src/gui.c:228
-msgid "Open"
-msgstr "Öffnen"
-
-#: src/gui.c:229
-msgid "Open a po-file"
-msgstr ".po-Datei öffnen"
-
-#: src/gui.c:234
-msgid "Save"
-msgstr "Speichern"
-
-#: src/gui.c:235
-msgid "Save File"
-msgstr "Datei speichern"
-
-#: src/gui.c:240
-msgid "Save as"
-msgstr "Speichern unter"
-
-#: src/gui.c:241
-msgid "Save file with a different name"
-msgstr "Speichere Datei unter anderem Namen"
-
-#: src/gui.c:246
-msgid "Header"
-msgstr "Kopf"
-
-#: src/gui.c:253
-msgid "Options"
-msgstr "Einstellungen"
-
-#: src/gui.c:254
-msgid "gtranslator options"
-msgstr "Einstellungen für gtranslator"
-
-#: src/gui.c:259 src/gui.c:260
-msgid "Exit"
-msgstr "Beenden"
-
-#: src/gui.c:270
-msgid "First"
-msgstr "Erste"
-
-#: src/gui.c:276
-msgid "Back"
-msgstr "Zurück"
-
-#: src/gui.c:282
-msgid "Next"
-msgstr "Weiter"
-
-#: src/gui.c:288
-msgid "Last"
-msgstr "Letzte"
-
-#: src/gui.c:294
-msgid "Goto"
-msgstr "Gehe zu"
-
-#: src/gui.c:302
-msgid "Find string in po-file"
-msgstr "Suche Text In der PO-Datei"
-
-#: src/gui.c:307
-msgid "Add"
-msgstr "Hinzufügen"
-
-#: src/gui.c:308
-msgid "Add to the messages db"
-msgstr "Füge zum Meldungs-Datenbank hinzu"
-
-#: src/gui.c:314
-msgid "Query for a message in db"
-msgstr "Nach einer Meldung suchen"
-
-#. *
-#. * Create the app
-#. *
-#: src/gui.c:436
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#. *
-#. * Show a Good Bye!-typo message.
-#. *
-#: src/gui.c:560
-msgid "Bye bye!"
-msgstr "Auf Wiedersehen!"
-
-#: src/gui.c:579
-msgid "Couldn't store current geometry!"
-msgstr "Konnte aktuelle GEometrie nicht speichert!"
-
-#: src/gui.c:684
-msgid "You've reached the first message"
-msgstr "Sie haben die erste Meldung erreicht"
-
-#: src/gui.c:704
-msgid "You've reached the last message."
-msgstr "Sie haben die letzte Maldung erreicht"
-
-#: src/gui.c:804
-#, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-"Konnte '%s' nicht\n"
-"finden"
-
-#: src/languages.h:59
-msgid "Arabic"
-msgstr "arabisch"
-
-#: src/languages.h:63
-msgid "Basque"
-msgstr "baskisch"
-
-#: src/languages.h:67
-msgid "Bulgarian"
-msgstr "bulgarisch"
-
-#: src/languages.h:71
-msgid "Catalan"
-msgstr "catalan"
-
-#: src/languages.h:75
-msgid "Chinese/Simplified"
-msgstr "chinesisch/Einfach"
-
-#: src/languages.h:79
-msgid "Chinese/Traditional"
-msgstr "chinesisch/traditionell"
-
-#: src/languages.h:83
-msgid "Croatian"
-msgstr "kroatisch"
-
-#: src/languages.h:87
-msgid "Czech"
-msgstr "tschechisch"
-
-#: src/languages.h:91
-msgid "Danish"
-msgstr "dänisch"
-
-#: src/languages.h:95
-msgid "English"
-msgstr "englisch"
-
-#: src/languages.h:99
-msgid "English/Canada"
-msgstr "englisch/Kanada"
-
-#: src/languages.h:103
-msgid "English/GB"
-msgstr "englisch/GB"
-
-#: src/languages.h:107
-msgid "English/USA"
-msgstr "englisch/USA"
-
-#: src/languages.h:111
-msgid "Estonian"
-msgstr "estnisch"
-
-#: src/languages.h:115
-msgid "Farsi"
-msgstr "farsi"
-
-#: src/languages.h:119
-msgid "Finnish"
-msgstr "finnisch"
-
-#: src/languages.h:123
-msgid "French"
-msgstr "französisch"
-
-#: src/languages.h:127
-msgid "Galician"
-msgstr "galizisch"
-
-#: src/languages.h:131
-msgid "German"
-msgstr "deutsch"
-
-#: src/languages.h:135
-msgid "Greek"
-msgstr "griechisch"
-
-#: src/languages.h:139
-msgid "Hungarian"
-msgstr "ungarisch"
-
-#: src/languages.h:143
-msgid "Indonesian"
-msgstr "indonesisch"
-
-#: src/languages.h:147
-msgid "Italian"
-msgstr "italienisch"
-
-#: src/languages.h:151
-msgid "Irish"
-msgstr "irisch"
-
-#: src/languages.h:155
-msgid "Japanese"
-msgstr "japanisch"
-
-#: src/languages.h:159
-msgid "Korean"
-msgstr "koreanisch"
-
-#: src/languages.h:163
-msgid "Lithuanian"
-msgstr "litauisch"
-
-#: src/languages.h:167
-msgid "Norwegian/Bookmal"
-msgstr "norwegisch/Bookmal"
-
-#: src/languages.h:171
-msgid "Norwegian/Nynorsk"
-msgstr "norwegisch/Nynorsk"
-
-#: src/languages.h:175
-msgid "Polish"
-msgstr "polnisch"
-
-#: src/languages.h:179
-msgid "Portuguese"
-msgstr "portugiesisch"
-
-#: src/languages.h:183
-msgid "Portuguese/Brazil"
-msgstr "portugiesisch/Brasilien"
-
-#: src/languages.h:187
-msgid "Russian"
-msgstr "russisch"
-
-#: src/languages.h:191
-msgid "Slovak"
-msgstr "slovakisch"
-
-#: src/languages.h:195
-msgid "Spanish"
-msgstr "spanisch"
-
-#: src/languages.h:199
-msgid "Spanish/Spain"
-msgstr "spanich/Spanien"
-
-#: src/languages.h:203
-msgid "Spanish/Mexico"
-msgstr "spanisch/Mexico"
-
-#: src/languages.h:207
-msgid "Swedish"
-msgstr "schwedisch"
-
-#: src/languages.h:211
-msgid "Turkish"
-msgstr "türkisch"
-
-#: src/languages.h:215
-msgid "Ukrainian"
-msgstr "ukrainisch"
-
-#: src/languages.h:219
-msgid "Walloon"
-msgstr "wallonisch"
-
-#: src/languages.h:223
-msgid "Welsh"
-msgstr "walisisch"
-
-#: src/main.c:39
-msgid "Sets the minimum match for query"
-msgstr "Setze die minimale Übereinstimmung für eine Suche"
+"Meine persönlichen Optionen benutzen, um die folgenden Einträge auszufüllen"
+
+#: src/header_stuff.c:291
+msgid "Translator's name :"
+msgstr "Name des Übersetzers :"
+
+#: src/header_stuff.c:294
+msgid "Translator's e-mail :"
+msgstr "E-Mail des Übersetzers :"
+
+#: src/header_stuff.c:302
+msgid "Language group's e-mail :"
+msgstr "E-Mail des Übersetzerteams:"
 
 #: src/main.c:43
+msgid "Sets the minimum match for query"
+msgstr "Die minimale Übereinstimmung für eine Suche festlegen"
+
+#: src/main.c:46
 msgid "Specifies the main-window geometry"
 msgstr "Legt die Geometrie des Hauptfensters fest"
 
-#: src/main.c:47
+#: src/main.c:49
 msgid "The messages db to use"
-msgstr "Die Meldungs-Datenbank, die verwendet wird"
+msgstr "Die Datenbank, die verwendet wird"
 
-#: src/main.c:51
+#: src/main.c:52
 msgid "Query the messages db & exit"
-msgstr "Meldungs-Datenbank anfragen und beenden"
+msgstr "Datenbank anfragen und beenden"
 
-#. *
-#. * Simply print it out.
-#. *
-#: src/main.c:110
-#, c-format
-msgid "Getting results for query: `%s' ...\n"
-msgstr "Ergebnisse der Suche: %s...\n"
+#: src/main.c:55
+msgid "Team to append"
+msgstr "Team, das hinzugefügt werden soll"
 
-#: src/main.c:115
-#, c-format
-msgid "Result                   :  %s."
-msgstr "Ergebnis:           :  %s"
-
-#: src/main.c:117
-msgid "End of query.\n"
-msgstr "Ende der Anfrage\n"
-
-#: src/main.c:177
-#, c-format
-msgid "The geometry string \"%s\" coulnd't be parsed!"
-msgstr "der Geometrie-String \"%s\" kann nicht geparst werden."
-
-#: src/msg_db.c:39
-#, c-format
-msgid "No message db found! Creating one in `%s'."
-msgstr "keine Meldungs-Datenbank gefunden! Erstelle eine in %s."
-
-#. *
-#. * 3.1) No list, no fun
-#. *
-#: src/msg_db.c:77
-msgid "gtranslator lost the list of translations!\n"
-msgstr "tgranslator hat die Liste der Übersetzungen verlohren!\n"
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:118
-#, c-format
-msgid "The message db `%s' hasn't been initted yet!\n"
-msgstr "Die Meldungs-Datenbank %s ist noch nicht initialisiert!\n"
-
-#. *
-#. * Warn if there isn't any message which could be added
-#. *  to the msg_db .
-#. *
-#: src/msg_db.c:129
-msgid "Got no message entry!\n"
-msgstr "Keine verwertbare Meldung vorhanden!\n"
-
-#: src/msg_db.c:137
-msgid "New message entry has wrong/non-logical length.\n"
-msgstr "Neuer Meldungseintrag hat falsche/unlogische Länge.\n"
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:208
-#, c-format
-msgid "The message db `%s' seems not to be initted!\n"
-msgstr "Die Meldungs-Datenbank %s scheint nicht initialisiert zu sein!\n"
-
-#. *
-#. * Return a very "explaining" char* ...
-#. *
-#: src/msg_db.c:212
-msgid "Not available"
-msgstr "Nicht verfügbar"
-
-#. *
-#. * If there's no msg_list
-#. *  print an error message
-#. *
-#: src/msg_db.c:220
-msgid "No messages list ( msg_list ) available for acting on it!\n"
-msgstr "Keine Meldungsliste ( msg_list ) für Aktionen verfügbar!\n"
-
-#: src/msg_db.c:260
-msgid "No entry found in the messages db "
-msgstr "Kein Eintrag in der Meldungs-Datenbank gefunden"
-
-#: src/msg_db.c:271
-msgid "The messages db isn't inited."
-msgstr "Die Meldungs-Datenbank ist nicht initialisiert."
-
-#. *
-#. * Gives a warning message.
-#. *
-#: src/msg_db.c:301
-msgid "Trying to set an irregular challange length!"
-msgstr "Versuche eine unregelmäßige Aufrufslänge"
-
-#. *
-#. * If there are any problems , give a
-#. *  message ..
-#. *
-#: src/parse.c:34
+#: src/parse.c:39
 #, c-format
 msgid ""
 "\n"
@@ -653,41 +533,48 @@ msgstr ""
 "Der Dateiverlauf ist verloren!\n"
 "%s"
 
-#: src/parse.c:114
+#: src/parse.c:220
 #, c-format
-msgid "There's no file to open or I couldn't understand `%s'!"
-msgstr "Es gibt keine Datei zum öffnen oder ich verstehe %s nicht!"
+msgid ""
+"The file is empty:\n"
+"%s"
+msgstr ""
+"Die Datei ist leer:\n"
+"%s"
 
-#. *
-#. * Set up a status message
-#. *
-#: src/parse.c:119
+#: src/parse.c:269
 #, c-format
-msgid "Current file : \"%s\"."
-msgstr "Aktuelle Datei: \"%s\"."
+msgid "Successfully parsed the file \"%s\""
+msgstr "Die Datei \"%s\" wurde erfolgreich analysiert"
 
-#. *
-#. * Show an updated status
-#. *
-#: src/parse.c:230
+#: src/parse.c:272
 #, c-format
-msgid "Successfully finished parsing \"%s\", %i lines."
-msgstr "Lesen von \"%s\" beendet, %i Zeilen."
+msgid "gtranslator -- %s"
+msgstr "gtranslator -- %s"
 
-#: src/parse.c:375
+#: src/parse.c:372
+#, c-format
+msgid ""
+"You are trying to save file with *.pot extension.\n"
+"However, such files are generated by program.\n"
+"Your file should be named with *.po extension, most likely %s.po"
+msgstr ""
+"Sie versuchen die Datei mit einer *.pot Endung zu speichern.\n"
+"Diese Dateien werden durch das Programm generiert.\n"
+"Ihre Datei sollte die *.po Endung besitzen, also %s.po"
+
+#: src/parse.c:416
 #, c-format
 msgid ""
 "You didn't change anything in\n"
 "%s\n"
-"!\n"
 "Do you want to save it anyway?"
 msgstr ""
-"Sie haben nichts in der .po-Datei\n"
+"Sie haben nichts in\n"
 "%s verändert\n"
-"!\n"
-"Wolen Sie trotzdem Speichern?"
+"Wollen Sie trotzdem speichern?"
 
-#: src/parse.c:427
+#: src/parse.c:479
 #, c-format
 msgid ""
 "File %s\n"
@@ -696,108 +583,91 @@ msgstr ""
 "Datei %s\n"
 "wurde geändert. Wollen Sie zur gesicherten Kopie zurückkehren?"
 
-#: src/parse.c:475
+#: src/parse.c:531
+#, c-format
 msgid ""
-"An error occured while msgfmt was executed.\n"
-"Please check your .po file again."
+"Compile successful:\n"
+"%s"
 msgstr ""
-"Ein Fehler erschien, als msgfmt ausgeführt wurde.\n"
-"Bitte prüfen Sie ihre .po-Datei noch einmal"
+"Compilierung erfolreich:\n"
+"%s"
 
-#: src/parse.c:479
-msgid "Po-file has been compiled successfully."
-msgstr "po-Date wurde erfolgreich kompiliert."
+#: src/find.c:74
+#, c-format
+msgid ""
+"Could not find\n"
+"\"%s\""
+msgstr ""
+"\"%s\" konnte nicht\n"
+"gefunden werden"
+
+#: src/find.c:94
+msgid "There are no more fuzzy messages"
+msgstr "Es sind keine ungenauen Übersetzungen mehr vorhanden"
+
+#: src/find.c:112
+msgid "All messages seem to be translated"
+msgstr "Alle Meldungen scheinen übersetzt zu sein"
+
+#: src/spell.c:25
+msgid "Check spelling"
+msgstr "Rechtschreibung wird überprüft"
+
+#: src/spell.c:55
+msgid "Spell checking complete!"
+msgstr "Rechtschreibungsüberprüfung abgeschlossen!"
+
+#: src/session.c:68
+msgid "Session restored successfully."
+msgstr "Sitzung erfolgreich wiederhergestellt."
+
+#: src/msg_db.c:49
+#, c-format
+msgid "No message db found! Creating one in `%s'."
+msgstr "Keine Datenbank gefunden! Erstelle eine in `%s'."
 
 #. *
-#. * The tables for holding all the entries below
+#. * 3.1) No list, no fun
 #. *
-#: src/prefs.c:156
-msgid "Personal information"
-msgstr "Persönliche Informationen"
+#: src/msg_db.c:71
+msgid "gtranslator lost the list of translations!\n"
+msgstr "granslator hat die Liste der Übersetzungen verloren!\n"
 
-#: src/prefs.c:157
-msgid "Language options"
-msgstr "Sprachoptionen"
+#. *
+#. * Show a little warning ...
+#. *
+#: src/msg_db.c:95
+#, c-format
+msgid "The message db `%s' hasn't been initted yet!\n"
+msgstr "Die Datenbank `%s' ist noch nicht initialisiert worden!\n"
 
-#: src/prefs.c:158
-msgid "Po file options"
-msgstr "Optionen der po-Datei"
+#. *
+#. * Warn if there isn't any message which could be added
+#. *  to the msg_db .
+#. *
+#: src/msg_db.c:104
+msgid "Got no message entry!\n"
+msgstr "Keine verwertbaren Meldung vorhanden!\n"
 
-#: src/prefs.c:199
-msgid "Language :"
-msgstr "Sprache:"
+#: src/msg_db.c:160
+msgid "The message db seems not to be initted!\n"
+msgstr "Die Datenbank scheint nicht initialisiert zu sein!\n"
 
-#: src/prefs.c:201
-msgid "MIME type :"
-msgstr "MIME-Typ:"
+#: src/msg_db.c:161
+msgid "No message db available!"
+msgstr "Keine Datenbank vorhanden!"
 
-#: src/prefs.c:203
-msgid "Language code :"
-msgstr "Sprachkürzel:"
+#: src/msg_db.c:164
+msgid "The message db is empty!"
+msgstr "Die Datenbank ist leer!"
 
-#: src/prefs.c:205
-msgid "Encoding :"
-msgstr "Codierung:"
+#: src/msg_db.c:167
+msgid "No entry found"
+msgstr "Kein Eintrag gefunden"
 
-#: src/prefs.c:207
-msgid "Language group's EMail :"
-msgstr "Maillingliste des Übersetzungsteams:"
-
-#: src/prefs.c:212
-msgid "Add the additional comments to the header"
-msgstr "Fügt weitere Informationen zum Kopf hinzu"
-
-#: src/prefs.c:215
-msgid "Save geometry on exit & restore it on startup"
-msgstr ""
-"Speichert gtranslators Größe beim Verlassen und stellt sie beim Start wieder "
-"her"
-
-#: src/prefs.c:218
-msgid "Warn me if I'm trying to save an unchanged file"
-msgstr "Warnen, wenn man versucht eine unveränderte Datei zu speichern"
-
-#: src/prefs.c:221
-msgid "Warn if the .po-file contains fuzzy translations"
-msgstr "Warnen, wenn die .po-Daten fuzzy-Übersetzungen beinhaltet"
-
-#: src/prefs.c:224
-msgid "Don't save unchanged .po-files"
-msgstr "Unveränderte .po-Dateien nicht speichern"
-
-#: src/prefs.c:227
-msgid "Use the messages db"
-msgstr "Nutze die Meldungsdatenbank"
-
-#: src/prefs.c:233
-msgid "Author's name :"
-msgstr "Name des Autors:"
-
-#: src/prefs.c:235
-msgid "Author's EMail :"
-msgstr "E-Mail des Autors:"
-
-#: src/prefs.c:237
-msgid "Comments :"
-msgstr "Kommentare:"
-
-#: src/prefs.c:300
-msgid ""
-"With the Preferences box you can define some variables\n"
-"with which you can make gtranslator make more work\n"
-"like YOU want it to work!"
-msgstr ""
-"In dem Einstellungsdialog können Sie einige Variablen\n"
-"angeben, duch die gtranslator mehr so arbeitet,\n"
-"wie SIE es wollen!"
-
-#: src/find.c:32
-msgid "Nothing appropriate found!"
-msgstr "Nichts passendes gefunden!"
-
-#: src/find.c:54
-msgid "No query, no fun."
-msgstr "Keine Anfrage, kein Spass."
+#: src/msg_db.c:176
+msgid "Trying to set an irregular challange length!"
+msgstr "Versuche eine unregelmäßige Aufrufslänge!"
 
 #: libgtranslator/parse-db.c:32
 msgid "No language defined in the query request!"
@@ -809,12 +679,14 @@ msgstr "Keine Sprache in der Suchanfrage angegeben!"
 #. *
 #: libgtranslator/parse-db.c:43
 msgid "FYI: Will also lookup the superclass message db.\n"
-msgstr "FYI: Werde auch in der höheren Meldungsdatenbank nachsehen.\n"
+msgstr "FYI: Auch in der übergeordneten Datenbank wird nachgesehen.\n"
 
 #: libgtranslator/parse-db.c:63
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
-msgstr "Konnte die Sprachbasierense Daten '%s.xml' in %s nicht öffnen.\n"
+msgstr ""
+"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent "
+"werden.\n"
 
 #. *
 #. * Print some information.
@@ -827,15 +699,33 @@ msgstr "Unterklassendatei '%s.xml' nicht gefunden.\n"
 #: libgtranslator/parse-db.c:77
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
-msgstr "Versuche höhere Klasse '%s.xml' ...\n"
+msgstr "Höhere Klasse '%s.xml' wird versucht...\n"
 
 #: libgtranslator/parse-db.c:137
 msgid "The message db file is empty!"
-msgstr "Die Meldungs-Datenbank ist leer!"
+msgstr "Die Datenbank-Datei ist leer!"
 
 #: libgtranslator/parse-db.c:143
 msgid "The message db doesn't seem to be a message db xml file."
-msgstr "Die Meldungsdatenbank scheint keine XML-Datei zu sein."
+msgstr "Die Datenbank scheint keine XML-Datei zu sein."
+
+#: libgtranslator/handle-db.c:35
+msgid "No node name given!"
+msgstr "Kein Knotenname angegeben!"
+
+#: libgtranslator/handle-db.c:43
+#, c-format
+msgid "No content for the node `%s' given! Leaving node empty.."
+msgstr "Kein Inhalt für den Knoten `%s' angegeben! Knoten bleibt leer.."
+
+#: libgtranslator/handle-db.c:51
+#, c-format
+msgid "No document present to add the node `%s'\n"
+msgstr "Kein Dokument verfügbar, um Knoten `%s' hinzuzufügen\n"
+
+#: libgtranslator/handle-db.c:67
+msgid "Couldn't get the nodes!"
+msgstr "Knoten konnten nicht geholt werden!"
 
 #: libgtranslator/team-handle.c:32
 msgid "No language/team code defined to register!"
@@ -852,5 +742,172 @@ msgstr "Teamdatei 'teams.xm' in %s kann nicht geöffnet werden!"
 
 #: libgtranslator/team-handle.c:149
 msgid "Couldn't return the list of the apps."
-msgstr "KOnnte die Liste der Anwendungen nicht erhalten."
+msgstr "Die Liste der Anwendungen konnte nicht zurückgegeben werden."
 
+#: src/languages.h:57
+msgid "Arabic"
+msgstr "arabisch"
+
+#: src/languages.h:60
+msgid "Basque"
+msgstr "baskisch"
+
+#: src/languages.h:63
+msgid "Bulgarian"
+msgstr "bulgarisch"
+
+#: src/languages.h:66
+msgid "Catalan"
+msgstr "catalanisch"
+
+#: src/languages.h:69
+msgid "Chinese/Simplified"
+msgstr "chinesisch/einfach"
+
+#: src/languages.h:72
+msgid "Chinese/Traditional"
+msgstr "chinesisch/traditionell"
+
+#: src/languages.h:75
+msgid "Croatian"
+msgstr "kroatisch"
+
+#: src/languages.h:78
+msgid "Czech"
+msgstr "tschechisch"
+
+#: src/languages.h:81
+msgid "Danish"
+msgstr "dänisch"
+
+#: src/languages.h:87
+msgid "English/Canada"
+msgstr "englisch/Kanada"
+
+#: src/languages.h:90
+msgid "English/GB"
+msgstr "englisch/GB"
+
+#: src/languages.h:93
+msgid "English/USA"
+msgstr "englisch/USA"
+
+#: src/languages.h:96
+msgid "Estonian"
+msgstr "estnisch"
+
+#: src/languages.h:99
+msgid "Farsi"
+msgstr "farsi"
+
+#: src/languages.h:102
+msgid "Finnish"
+msgstr "finnisch"
+
+#: src/languages.h:105
+msgid "French"
+msgstr "französisch"
+
+#: src/languages.h:108
+msgid "Galician"
+msgstr "galizisch"
+
+#: src/languages.h:111
+msgid "German"
+msgstr "deutsch"
+
+#: src/languages.h:114
+msgid "Greek"
+msgstr "griechisch"
+
+#: src/languages.h:117
+msgid "Hungarian"
+msgstr "ungarisch"
+
+#: src/languages.h:120
+msgid "Indonesian"
+msgstr "indonesisch"
+
+#: src/languages.h:123
+msgid "Italian"
+msgstr "italienisch"
+
+#: src/languages.h:126
+msgid "Irish"
+msgstr "irisch"
+
+#: src/languages.h:129
+msgid "Japanese"
+msgstr "japanisch"
+
+#: src/languages.h:132
+msgid "Korean"
+msgstr "koreanisch"
+
+#: src/languages.h:135
+msgid "Latvian"
+msgstr "lateinisch"
+
+#: src/languages.h:138
+msgid "Lithuanian"
+msgstr "litauisch"
+
+#: src/languages.h:141
+msgid "Norwegian/Bookmal"
+msgstr "norwegisch/bookmal"
+
+#: src/languages.h:144
+msgid "Norwegian/Nynorsk"
+msgstr "norwegisch/nynorsk"
+
+#: src/languages.h:147
+msgid "Polish"
+msgstr "polnisch"
+
+#: src/languages.h:150
+msgid "Portuguese"
+msgstr "portugiesisch"
+
+#: src/languages.h:153
+msgid "Portuguese/Brazil"
+msgstr "portugiesisch/Brasilien"
+
+#: src/languages.h:156
+msgid "Russian"
+msgstr "russisch"
+
+#: src/languages.h:159
+msgid "Slovak"
+msgstr "slovakisch"
+
+#: src/languages.h:162
+msgid "Spanish"
+msgstr "spanisch"
+
+#: src/languages.h:165
+msgid "Spanish/Spain"
+msgstr "spanisch/Spanien"
+
+#: src/languages.h:168
+msgid "Spanish/Mexico"
+msgstr "spanisch/Mexico"
+
+#: src/languages.h:171
+msgid "Swedish"
+msgstr "schwedisch"
+
+#: src/languages.h:174
+msgid "Turkish"
+msgstr "türkisch"
+
+#: src/languages.h:177
+msgid "Ukrainian"
+msgstr "ukrainisch"
+
+#: src/languages.h:180
+msgid "Walloon"
+msgstr "wallonisch"
+
+#: src/languages.h:183
+msgid "Welsh"
+msgstr "walisisch"
