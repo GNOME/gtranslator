@@ -198,8 +198,8 @@
               </listitem>
               <listitem>
                 <para>
-                <interface>The toolbars</interface> &mdash; allow you quick 
-                access to often used file managment, navigation and 
+                <interface>The toolbars</interface> &mdash; allow you quick
+                access to often used file managment, navigation and
                 compile functions.
                 </para>
               </listitem>
@@ -234,23 +234,23 @@
             po file you whish to open and click <guibutton>OK</guibutton>.
         </para>
         <para>
-        <application>Gtranslator</application> offers you the possibility to 
-        open po files using the Gnome-VFS subsystem. This means that you may 
-        use URIs to access files on a remote system. 
+        <application>Gtranslator</application> offers you the possibility to
+        open po files using the Gnome-VFS subsystem. This means that you may
+        use URIs to access files on a remote system.
         Currently supported URIs are:
         <itemizedlist>
             <listitem>
-	      <para>the file:// URI, as in 
-              <screen>file://localhost/path_to_file</screen> 
+	      <para>the file:// URI, as in
+              <screen>file://localhost/path_to_file</screen>
               </para>
             </listitem>
             <listitem>
-              <para>the http:// URI as in 
+              <para>the http:// URI as in
               <screen>http://www.gtranslator.org/gtranslator/gtranslator.pot</screen>
               </para>
             </listitem>
             <listitem>
-              <para>the ftp:// URI as in 
+              <para>the ftp:// URI as in
               <screen>ftp://ftp.somewhere.org/pub/tr.po</screen>
               </para>
             </listitem>
@@ -259,11 +259,11 @@
 	<tip>
 	  <title>Opening comressed po files</title>
 	  <para>
-            <application>Gtranslator</application> can open compressed po 
-            files. Click on the <guibutton>Open</guibutton> icon. This brings 
-            up the <interface>Open po file</interface> dialog box. Choose 
-            a compressed po file (can be identified by its .gz extension). 
-            Click on <guibutton>OK</guibutton>. If <command>bzip2</command> 
+            <application>Gtranslator</application> can open compressed po
+            files. Click on the <guibutton>Open</guibutton> icon. This brings
+            up the <interface>Open po file</interface> dialog box. Choose
+            a compressed po file (can be identified by its .gz extension).
+            Click on <guibutton>OK</guibutton>. If <command>bzip2</command>
            is installed on your system, you may open bzip2 compressed files.
           </para>
 	</tip>
@@ -391,7 +391,7 @@
           after the statement you have selected.
         </para>
 
-	
+
       </sect3>
 
 -->
@@ -413,7 +413,7 @@
        </para>
 
         <sect3 id="aa">
-         <title>Autoaccomplish</title>
+         <title>Autotraslate</title>
          <para>
          Autotranslate is a nice feature.
          </para>
@@ -443,6 +443,38 @@
                 <emphasis>--help</emphasis> Shows you a
                 litte help message on the command line.
               </para>
+            </listitem>
+            <listitem>
+			  <para><emphasis>--display</emphasis> Let&apos;s you
+			    define the display to start <application>gtranslator</application> on.
+			  </para>
+		    </listitem>
+		    <listitem>
+			  <para><emphasis>--webalize</emphasis> Prints out a htmlized output file
+			    (you must give the html output filename as the next argument) of the po
+			    file.
+			  </para>
+			  <para>
+			    An example call would be:
+			    <screen><command>gtranslator</command> --webalize=Evolution.html tr.po</screen>
+			  </para>
+		    </listitem>
+		    <listitem>
+			  <para><emphasis>--scheme</emphasis> Sets the syntax color scheme to the
+			    given file	</para>
+			  <para>For example:	<screen><command>gtranslator</command> --scheme=Schemefile</screen>
+			 </para>
+		    </listitem>
+		    <listitem>
+			<para><emphasis>--geometry</emphasis> Let&apos;s you define a standard
+			    geometry string to which the gtranslator window will conform.
+			</para>
+			<para>
+			    An example call would be:
+			    <screen><command>gtranslator</command> --geometry="320x240+0+0" tr.po</screen> 
+                       (This opens gtranslator at "+0+0", the left upper 
+                       corner, with a size of 320x240).
+	         </para>
             </listitem>
             <listitem>
               <para>
@@ -657,7 +689,7 @@
 		  <para>
 	             <guimenuitem>Gtranslator Manual</guimenuitem> &mdash; This
     	              opens the <application>GNOME Help
-    	              Browser</application> (or 
+    	              Browser</application> (or
                       <application>Nautilus</application>)
                        and displays this manual.
 	          </para>
@@ -726,7 +758,7 @@
 	  <term><guilabel>Author's e-mail address</guilabel></term>
 	  <listitem>
 	    <para>
-             Fill in your e-mail address. This information will be saved 
+             Fill in your e-mail address. This information will be saved
              in the po file.
              </para>
 	  </listitem>
@@ -752,8 +784,8 @@
              Choose from the dropdown list the target language.
              <application>Gtranslator</application> fills in the rest of
              the form with default values for the given language. You may
-             modify the preset values, but usually you can safely use 
-             the default settings. 
+             modify the preset values, but usually you can safely use
+             the default settings.
              </para>
 	  </listitem>
 	</varlistentry>
@@ -761,8 +793,8 @@
 	  <term><guilabel>Language code</guilabel></term>
 	  <listitem>
 	    <para>
-             This field displays the ISO 639-2 language code used for the 
-             language chosen above. The name of the PO file will 
+             This field displays the ISO 639-2 language code used for the
+             language chosen above. The name of the PO file will
              be based on this setting.
              </para>
 	  </listitem>
@@ -779,18 +811,18 @@
 	  <term><guilabel>Charset</guilabel></term>
 	  <listitem>
 	    <para>
-             The <guilabel>Charset</guilabel> field displays the encoding used              to store the po file. <application>Gtranslator</application> 
+             The <guilabel>Charset</guilabel> field displays the encoding used              to store the po file. <application>Gtranslator</application>
              offers you a default setting.
              </para>
-             <note>
+         <note>
 	  <title>Using alternate encodings</title>
           <para>
-            Default charset settings offered by 
+            Default charset settings offered by
             <application>Gtranslator</application> can be used safely when
             translating po files for the GNOME 1.4 platform. GNOME 2.0 will use
-            UTF-8 encoding for all languages, thus you need the alter the 
-            defaults when translating  for 2.x platforms. You may also want 
-            to switch encoding to be able to use the <quote>euro</quote> sign. 
+            UTF-8 encoding for all languages, thus you need the alter the
+            defaults when translating  for 2.x platforms. You may also want
+            to switch encoding to be able to use the <quote>euro</quote> sign.
           </para>
 	</note>
 	  </listitem>
@@ -824,7 +856,7 @@
  <sect1 id="bugs">
   <title>Known Bugs and Limitations</title>
   <para>
-   You can query for bugs related to <application>Gtranslator</application> 
+   You can query for bugs related to <application>Gtranslator</application>
    in the <ulink url="http://bugzilla.gnome.org">Gnome Bug Tracker</ulink>.
   </para>
  </sect1>
@@ -838,7 +870,7 @@
   <title>Application Authors</title>
   <para>
    <application>Gtranslator</application> was written by Fatih Demir
-   (<email>kabalak@gtranslator.org</email>) and Gediminas Paulauskas 
+   (<email>kabalak@gtranslator.org</email>) and Gediminas Paulauskas
    (<email>menesis@gtranslator.org</email>). To find more information about
    <application>Gtranslator</application>, please visit the <ulink
    url="http://www.gtranslator.org" type="http">Gtranslator Web
@@ -886,7 +918,7 @@
    </listitem>
    <listitem>
       <para>
-      Josh Jackson 
+      Josh Jackson
       <email>pturing@mailandnews.com</email>
       </para>
    </listitem>
@@ -900,11 +932,11 @@
   </sect2>
   <sect2 id="packagers">
   <title>Packagers</title>
-  <para>We would want to thank those persons for providing packages in the 
+  <para>We would want to thank those persons for providing packages in the
     corresponding formats of <application>Gtranslator</application>.
      <itemizedlist>
      <listitem>
-     <para>Josh Jackshon 
+     <para>Josh Jackshon
      <email>pturing@mailandnews.com</email>
      for his Mandrake packages of
      <application>Gtranslator</application> 0.34
@@ -925,7 +957,7 @@
      </para>
      </listitem>
      <listitem>
-     <para>Maxim Sobolev 
+     <para>Maxim Sobolev
      <email>sobomax@freebsd.org</email>
      for his FreeBSD ports of
      <application>Gtranslator</application>
@@ -934,7 +966,7 @@
       </itemizedlist>
   </para>
   </sect2>
-  
+
   <sect2 id="docauthor">
   <title>Documentation Authors</title>
   <para>
@@ -1095,6 +1127,13 @@
   	</varlistentry>
         <varlistentry>
 	  <term>encoding</term>
+		 <listitem>
+		    <para>
+        	    </para>
+		 </listitem>
+  	</varlistentry>
+  	<varlistentry>
+	  <term>URI</term>
 		 <listitem>
 		    <para>
         	    </para>
