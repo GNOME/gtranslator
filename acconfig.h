@@ -1,4 +1,3 @@
-#undef BIND_MIME
 #undef ENABLE_NLS
 #undef GTK_ENABLE_BROKEN
 #undef HAVE_CATGETS
