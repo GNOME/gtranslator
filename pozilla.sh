@@ -15,7 +15,7 @@
 #
 
 print_separator_line ()  {
-	echo "·-==================================================================-·"
+	echo "·-=====================================================================-·"
 }
 
 dry_run_information_message ()  {
@@ -34,7 +34,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=5.4
+export POZILLA_RELEASE=5.5
 
 #
 # Here we do define the corresponding i18n mailing list which should also get
