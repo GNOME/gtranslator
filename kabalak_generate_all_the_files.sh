@@ -1,9 +1,7 @@
 #!/bin/sh
 #######################################################################
 # The kabalak'sh answer to ./autogen.sh!
-#
 # (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
-#
 #######################################################################
 package=gtranslator
 #######################################################################
@@ -59,5 +57,6 @@ while [ $t -gt 1 ]
 	t=$[ $t -1 ]
 	done
 $a " last chance (1) " && sleep 1 && echo ""
-./configure "$@" && echo -e "\n\tHappy $package-ing\n" && exit 0
+./configure --enable-debug --enable-nautilus-view --enable-mime-bind=yes \
+	"$@" && echo -e "\n\tHappy $package-ing\n" && exit 0
 #######################################################################
