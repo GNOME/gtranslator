@@ -13,6 +13,7 @@ schemes_DATA = \
 	menesis.xml \
 	nizuu.xml \
 	tuey.xml \
+	waliays.xml \
 	zuper.xml
 
 EXTRA_DIST = $(schemes_DATA)
