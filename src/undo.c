@@ -28,5 +28,34 @@
 #include "undo.h"
 
 /*
- * FIXME: Rewrite & redesign.
+ * Internally used variables/structures -- there shouldn't be any need
+ *  to "declare" these items publically.
  */
+
+static GList 	*undolist=NULL;
+
+typedef enum
+{
+	GTR_UNDO_VIEW_CHANGE,
+	GTR_UNDO_REPLACES,
+	GTR_UNDO_REPLACE,
+	GTR_UNDO_INSERT_TEXT,
+	GTR_UNDO_DELETE_TEXT,
+	GTR_UNDO_TYPE_CHANGE,
+	GTR_UNDO_NONE
+} GtrUndoType;
+
+/*
+ * Return if there are any undo items remaining.
+ */
+gboolean gtranslator_undo_is_any_item_remaining()
+{
+	if(undolist && (g_list_length(undolist) >= 1))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}

@@ -93,11 +93,11 @@ gboolean gtranslator_comment_is_visible(GtrComment *comment);
 /*
  * Popup the comment for the current message.
  */
-void gtranslator_comment_pop_up(void); 
+void gtranslator_comment_pop_up(GtrComment *comment); 
 
 /*
  * Shows eventual references for the current comment.
  */
-void gtranslator_comment_show_references(void);
+void gtranslator_comment_show_references(GtrComment *comment);
 
 #endif

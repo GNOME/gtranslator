@@ -20,10 +20,47 @@
 #ifndef GTR_UNDO_H
 #define GTR_UNDO_H 1
 
-#include <glib.h>
+#include "messages.h"
 
 /*
- * FIXME: Redesign.
+ * The primitive Undo types we do support -- direct function calls are needed
+ *  here as there isn't any general handling integrated/possible yet.
  */
+
+/*
+ * Register and get the undo stuff for view changes (the previous/current view can
+ *  be simply get via the gtranslator_views_* interface).
+ */
+void gtranslator_undo_register_view_change(void);
+
+/*
+ * Replaces should point to revert, a single replace in the current message
+ *  should be undoable at place.
+ */
+void gtranslator_undo_register_replace(const gchar *original, const gchar *replace_string);
+void gtranslator_undo_register_replaces(void);
+
+/*
+ * Register type changes (untranslated <-> fuzzy <-> translated) -- must get "hidden"
+ *  when the message is changed.
+ */
+void gtranslator_undo_register_type_change(GtrMsgStatus previous_status);
+
+/*
+ * Register text deletion/insertion into the translation here.
+ */
+void gtranslator_undo_register_insert_text(const gint start_pos, const gchar *new_text);
+void gtranslator_undo_register_delete_text(const gint start_pos, const gint length);
+
+/*
+ * Get if there are any undos remaining.
+ */
+gboolean gtranslator_undo_is_any_item_remaining(void);
+
+/*
+ * Handle the undos/redos opaquely here.
+ */
+void gtranslator_undo_run(void);
+void gtranslator_redo_run(void);
 
 #endif

@@ -249,15 +249,27 @@ gboolean gtranslator_comment_is_visible(GtrComment *comment)
 /*
  * Popup the comment for the current message.
  */
-void gtranslator_comment_pop_up()
+void gtranslator_comment_pop_up(GtrComment *comment)
 {
 	g_return_if_fail(file_opened==TRUE);
+	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
+
+	if(comment->type==TRANSLATOR_COMMENT)
+	{
+		g_warning("FIXME: Comment popup!");
+	}
 }
 
 /*
  * Shows eventual references for the current comment.
  */
-void gtranslator_comment_show_references()
+void gtranslator_comment_show_references(GtrComment *comment)
 {
 	g_return_if_fail(file_opened==TRUE);
+	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
+
+	if(comment->type==REFERENCE_COMMENT)
+	{
+		g_warning("FIXME: Show references.");
+	}
 }
