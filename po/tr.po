@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.40\n"
+"Project-Id-Version: gtranslator 0.41\n"
 "POT-Creation-Date: 2002-03-29 18:22+0100\n"
 "PO-Revision-Date: 2002-02-27 23:55+0200\n"
 "Last-Translator: Ali Pakkan <apakkan@hotmail.com>\n"
@@ -1151,6 +1151,8 @@ msgid ""
 "The translation for message `%s'\n"
 "contains syntactical errors!"
 msgstr ""
+"`%s' iletisi çevirisi\n"
+"sözdizimi hatalarý içermektedir!"
 
 #: src/messages-table.c:197
 msgid "Appropriate match:"
@@ -1381,8 +1383,8 @@ msgid "Highlight syntax of the translation messages"
 msgstr "Çeviri iletilerinin sözdizimini vurgula"
 
 #: src/prefs.c:195
-msgid "Check messages for syntactical correctess"
-msgstr ""
+msgid "Check messages for syntactical correctness"
+msgstr "Ýletilerin sözdizimi doðruluðunu denetle"
 
 #: src/prefs.c:202
 msgid "Use special character to indicate free space"
@@ -1546,9 +1548,8 @@ msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr "Öðrenme daðarcýðý sorgularý için \"fuzzy\" eþleþim yöntemlerini kullan"
 
 #: src/prefs.c:371
-#, fuzzy
 msgid "Minimal required similarity percentage for fuzzy queries"
-msgstr "Otomatik çeviri için gereken en az benzerlik oraný"
+msgstr "Fuzzy sorgularý için gereken en az benzerlik oraný"
 
 #: src/prefs.c:416
 msgid "Please enter your name!"
@@ -1587,7 +1588,7 @@ msgstr "Hiçbir deðiþiklik yapýlmadý!"
 #.
 #: src/runtime-config.c:81
 msgid "Y"
-msgstr ""
+msgstr "I"
 
 #.
 #. * Translators: this character is used if the middle dot
@@ -1678,15 +1679,15 @@ msgid "You are not permitted to access file '%s'."
 msgstr "'%s' dosyasýna eriþim yetkiniz yok."
 
 #: src/utils_gui.c:359
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
 "Please save a new copy of it to a place of your choice and get write\n"
 "permission for it."
 msgstr ""
-"'%s' dosyasýný deðiþtirme hakkýnýz yok.\n"
-"Bu nedenle dosyanýn bir kopyasýný kendi ev dizininizde\n"
-"bulunan baþka bir dizinin altýna kaydetmelisiniz."
+"'%s' dosyasýný deðiþtirme hakkýn yok.\n"
+"Bu nedenle dosyanýn bir kopyasýný, yazma hakkýn olan baþka\n"
+"bir yere kaydet."
 
 #: src/utils_gui.c:401
 #, c-format
@@ -1695,6 +1696,9 @@ msgid ""
 "Please close the other instance of gtranslator handling `%s' currently to\n"
 "re-gain access to this file (also applies for post-crash cases)."
 msgstr ""
+"`%s' dosyasý, baþka bir gtranslator'da zaten açýk.\n "
+"`%s' i kontrol eden gtranslator'ý kapatýn ve böylece dosyaya\n"
+"yeniden eriþim kazanýn (çökme sonrasý durumlar için de geçerlidir)."
 
 #: src/utils_gui.c:437
 #, c-format
@@ -1787,7 +1791,3 @@ msgstr "Sýkýþtýrýlmýþ gettext po dosyasý"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Gettext po dosyasý"
-
-#~ msgid "The file `%s' is already open in another instance of gtranslator!"
-#~ msgstr ""
-#~ "`%s' dosyasý gtranslator uygulamasý tarafýndan zaten açýlmýþ durumda!"
