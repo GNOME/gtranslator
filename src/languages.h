@@ -74,6 +74,7 @@ lang languages[] =
 	{ N_("Irish"),"ga","","iso-8859-1" },
         { N_("Japanese"),"ja","euc-jp","translation@gnome.gr.jp" },
         { N_("Korean"),"ko","euc-kr","" },
+	{ N_("Lithuanian"),"lt","iso-8859-13","komp_lt@konferencijos.lt" },
         { N_("Norwegian/Bookmal"),"no","iso-8859-1","no@li.org" },
 	{ N_("Norwegian/Nynorsk"),"no@nynorsk","iso-8859-1","no@li.org" },
         { N_("Polish"),"pl","iso-8859-2","gnomepl@pandora.info.bielsko.pl" },
