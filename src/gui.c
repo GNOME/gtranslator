@@ -1182,14 +1182,7 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 		return;
 
 	result=g_strdup(text);
-	
-	/*
-	 * If the inserted char is itself an special character, don't invert it.
-	 */
-	if(result[0]!=_("·")[0])
-	{
-		invert_dot(result);
-	}
+	invert_dot(result);
 
 	gtk_signal_handler_block_by_func(GTK_OBJECT(editable),
 					 GTK_SIGNAL_FUNC(insert_text_handler),
