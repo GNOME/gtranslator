@@ -31,6 +31,7 @@
  * ColorTypes.
  */
 typedef enum {
+	COLOR_NONE = 1,
 	COLOR_FG,
 	COLOR_BG,
 	COLOR_TEXT_BG,

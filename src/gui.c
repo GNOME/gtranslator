@@ -383,9 +383,9 @@ void delete_text_handler(GtkEditable *editable, gint start_position,
 		gtranslator_undo_register_deletion(fake_string, start_position);
 		GTR_FREE(fake_string);
 	}
-	gtranslator_delete_highlighted(editable, 
-			start_position, end_position - start_position);
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "delete_text");
+//	gtranslator_delete_highlighted(editable, 
+//			start_position, end_position - start_position);
+//	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "delete_text");
 }
 
 /*
@@ -648,25 +648,25 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 void insert_text_handler (GtkEditable *editable, const gchar *text,
 			  gint length, gint *position, gpointer data)
 {
-	gchar *result;
+//	gchar *result;
 
-	result=g_strdup(text);
+//	result=g_strdup(text);
 	if (!nothing_changes)
 	{
 		/*
 		* Register the text for an insertion undo action.
 		*/
-		gtranslator_undo_register_insertion(result, *position);
+		gtranslator_undo_register_insertion(text, *position);
 
 		if(GtrPreferences.dot_char)
 		{
-			gtranslator_utils_invert_dot(result);
+			gtranslator_utils_invert_dot((gchar*)text);
 		}
 	}
-	gtranslator_insert_highlighted(editable, result, position, length);
-	g_free(result);
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
-	gtk_editable_set_position(GTK_EDITABLE(editable), *position);
+//	gtranslator_insert_highlighted(editable, result, position, length);
+//	g_free(result);
+//	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
+//	gtk_editable_set_position(GTK_EDITABLE(editable), *position);
 }
 
 void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,

@@ -40,8 +40,9 @@ void gtranslator_syntax_init(GtkEditable *textwidget);
 void gtranslator_insert_highlighted(
 		GtkEditable *textwidget,
 		gchar	*text,
+		gint	addlen,
 		gint	*pos,
-		gint	addlen);
+		gpointer userdata);
 
 /*
  * This function will delete text and rehighlight.
@@ -52,8 +53,9 @@ void gtranslator_insert_highlighted(
  */
 void gtranslator_delete_highlighted(
 		GtkEditable *textwidget,
-		gint	pos,
-		gint	len);
+		gint	startpos,
+		gint	endpos,
+		gpointer userdata);
 		
 /*
  * Will check syntax.

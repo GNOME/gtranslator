@@ -32,10 +32,12 @@
 #include <ctype.h>
 #include <string.h>
 
-#include <gtk/gtktext.h>
-#include <gtk/gtksignal.h>
+#include <gtk/gtk.h>
 
 static gboolean back_match(const gchar *msg, gchar *str, gint pos);
+void gtranslator_update_highlighted(
+		GtkEditable *textwidget,
+		gpointer userdata );
 
 /*
  * Check the given string for equivalence with the last characters.
@@ -100,54 +102,30 @@ void gtranslator_syntax_init(GtkEditable *textwidget)
 		"textdata", 
 		n,
 		text_data_free);
+	
+	gtk_signal_connect(GTK_OBJECT(textwidget), "insert_text",
+			   GTK_SIGNAL_FUNC(gtranslator_insert_highlighted), NULL);
+	gtk_signal_connect(GTK_OBJECT(textwidget), "delete_text",
+			   GTK_SIGNAL_FUNC(gtranslator_delete_highlighted), NULL);
+	gtk_signal_connect(GTK_OBJECT(textwidget), "changed",
+			   GTK_SIGNAL_FUNC(gtranslator_update_highlighted), NULL);
 }
 
-/*
- * This function will insert text highlighted into widget.
- * 1. Add characters to the widget
- * 2. Add to characterdata the new entries
- * 3. Let parser create new characterdata
- * 4. Compare new characterdata with old one and update changed chars
- */
-void gtranslator_insert_highlighted(
+void gtranslator_update_highlighted(
 		GtkEditable *textwidget,
-		gchar	*text,
-		gint	*pos,
- 		gint	addlen)
+		gpointer userdata )
 {
 	GString *newdata, *olddata;
 	gint i;
 	guint point;
 	gchar type;
-	
-	g_return_if_fail(textwidget != NULL);
-	g_return_if_fail(text!=NULL);
 
-	gtk_text_freeze(GTK_TEXT(textwidget));
-	gtk_signal_handler_block_by_func(
-		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(insert_text_handler), 
-		NULL);
-	gtk_signal_handler_block_by_func(
-		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(delete_text_handler), 
-		NULL);
-	
+	gtk_text_freeze( GTK_TEXT( textwidget ) );
+
 	olddata = (GString *)gtk_object_get_data(
 		GTK_OBJECT(textwidget), 
 		"textdata");
-	for(i=0; i<addlen; i++)
-	{
-		olddata = g_string_insert_c(olddata, *pos, COLOR_FG);
-	}
-	gtk_text_set_point(GTK_TEXT(textwidget), *pos);
-	gtk_text_insert(
-		GTK_TEXT(textwidget), 
-		NULL,
-		gtranslator_get_color_from_type(COLOR_FG), 
-		gtranslator_get_color_from_type(COLOR_TEXT_BG), 
-		text, 
-		addlen);
+		
 	point = gtk_text_get_point(GTK_TEXT(textwidget));
 	/* Parse highlighting */
 	newdata = gtranslator_parse_syntax(GTK_EDITABLE(textwidget));
@@ -178,105 +156,64 @@ void gtranslator_insert_highlighted(
 		"textdata", 
 		newdata,
 		text_data_free);
-	*pos = point;
+
+	//gtk_text_set_point( GTK_TEXT( textwidget ), point );
+
+	gtk_text_thaw( GTK_TEXT( textwidget ) );
+	gtk_editable_set_position( GTK_EDITABLE( textwidget), point );
+}
+
+/*
+ * This function will update highlightion information for text.
+ */
+void gtranslator_insert_highlighted(
+		GtkEditable *textwidget,
+		gchar	*text,
+		gint	addlen,
+		gint	*pos,
+		gpointer userdata)
+{
+	GString *olddata;
+	gint i;
 	
-	gtk_signal_handler_unblock_by_func(
+	g_return_if_fail(textwidget != NULL);
+	g_return_if_fail(text!=NULL);
+
+	olddata = (GString *)gtk_object_get_data(
 		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(insert_text_handler), 
-		NULL);
-	gtk_signal_handler_unblock_by_func(
-		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(delete_text_handler), 
-		NULL);
-	gtk_text_thaw(GTK_TEXT(textwidget));
+		"textdata");
+	for(i=0; i<addlen; i++)
+	{
+		olddata = g_string_insert_c(olddata, *pos, COLOR_NONE);
+	}
 }
 
 /*
  * This function will delete text and rehighlight.
- * 1. Delete characters from the widget
- * 2. Remove characterdata of deleted chars
- * 3. Let parser create new characterdata
- * 4. Compare new characterdata with old one and update changed chars
  */
 void gtranslator_delete_highlighted(
 		GtkEditable *textwidget,
-		gint	pos,
-		gint	len)
+		gint	startpos,
+		gint	endpos,
+		gpointer	userdata)
 {
-	GString *newdata, *olddata;
-	gint i;
-	guint point;
-	gchar type;
+	GString *olddata;
+	gint len;
 	
 	g_return_if_fail(textwidget != NULL);
-	g_return_if_fail(pos >= 0);
+	g_return_if_fail(startpos >= 0);
 
-	gtk_text_freeze(GTK_TEXT(textwidget));
-	if(len < 1)
-	{
-		len = gtk_text_get_length(GTK_TEXT(textwidget))-pos;
+	if(endpos < 0){
+		len = gtk_text_get_length(GTK_TEXT(textwidget))-startpos;
 	}
-	gtk_signal_handler_block_by_func(
-		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(insert_text_handler), 
-		NULL);
-	gtk_signal_handler_block_by_func(
-		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(delete_text_handler), 
-		NULL);
+	else{
+		len = endpos - startpos;
+	}
 	
 	olddata = (GString *)gtk_object_get_data(
 		GTK_OBJECT(textwidget), 
 		"textdata");
-	olddata = g_string_erase(
-		olddata,
-		pos,
-		len);
-	gtk_text_set_point(GTK_TEXT(textwidget), pos);
-	gtk_text_forward_delete(
-		GTK_TEXT(textwidget), 
-		len);
-	point = gtk_text_get_point(GTK_TEXT(textwidget));
-	/* Parse highlighting */
-	newdata = gtranslator_parse_syntax(GTK_EDITABLE(textwidget));
-	/* Update highlighting */
-	for(i=0; i<newdata->len; i++)
-	{
-		if((type = *(newdata->str+ i)) != 
-			*(olddata->str + i))
-		{
-			static gchar *c;
-
-			gtk_text_set_point(GTK_TEXT(textwidget), i);
-			c = gtk_editable_get_chars(
-				GTK_EDITABLE(textwidget), i, i+1);
-			gtk_text_forward_delete(GTK_TEXT(textwidget), 1);
-			gtk_text_insert(
-				GTK_TEXT(textwidget),
-				NULL,
-				gtranslator_get_color_from_type((gint)type),
-				gtranslator_get_color_from_type(COLOR_TEXT_BG),
-				c, 1);
-			g_free(c);
-		}
-	}
-	/* Free olddata and register newdata */
-	gtk_object_set_data_full(
-		GTK_OBJECT(textwidget), 
-		"textdata", 
-		newdata,
-		text_data_free);
-	gtk_text_set_point(GTK_TEXT(textwidget), point);
-
-	gtk_signal_handler_unblock_by_func(
-		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(insert_text_handler), 
-		NULL);
-	gtk_signal_handler_unblock_by_func(
-		GTK_OBJECT(textwidget), 
-		GTK_SIGNAL_FUNC(delete_text_handler), 
-		NULL);
-	gtk_text_thaw(GTK_TEXT(textwidget));
+	olddata = g_string_erase( olddata, startpos, len);
 }
 
 GString *gtranslator_parse_syntax(GtkEditable *textwidget)
@@ -565,4 +502,7 @@ void gtranslator_insert_text(GtkText *editable, const gchar *text)
 		text,
 		strlen(text),
 		&pos);
+	gtk_signal_emit_by_name(
+		GTK_OBJECT(editable),
+		"changed");
 }
