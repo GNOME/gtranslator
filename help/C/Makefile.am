@@ -81,9 +81,6 @@ uninstall-local:
 	scrollkeeper-update -p $(SC_STATEDIR)
 endif
 
-clean-generic:
-	@-rm -rf gtranslator $(gtranslator_htmlfiles)
-
 EXTRA_DIST = $(gtranslator_sgmlfile) \
 	$(gtranslator_htmlfiles) \
 	$(gtranslator_omffile).presetup \

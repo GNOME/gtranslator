@@ -36,10 +36,6 @@ distclean-generic:
 
 install-data-local: index.html
 
-clean-generic:
-	@-rm -f $(gtranslator_htmlfiles)
-	@-rm -rf gtranslator
-
 EXTRA_DIST = $(gtranslator_sgmlfile) \
 	$(gtranslator_htmlfiles) \
 	topic.dat
