@@ -9,6 +9,7 @@
 **/
 
 #include "session.h"
+#include <libgtranslator/preferences.h>
 
 /**
 * The standard die-method

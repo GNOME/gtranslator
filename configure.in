@@ -115,9 +115,9 @@ AC_PATH_PROG(XML_CONFIG, xml-config, nej)
 if test "our$XML_CONFIG" = "ournej" ; then
 	AC_MSG_ERROR([No xml-config found ! Please install libxml first.])
 else
-	AC_MSG_CHECKING([for libxml >= 1.8.6])
+	AC_MSG_CHECKING([for libxml >= 1.8.7])
 	XML_VERSION=`xml-config --version|sed -e 's/\.//g'`
-	if test "$XML_VERSION" -lt 186 ; then
+	if test "$XML_VERSION" -lt 187 ; then
 		AC_MSG_RESULT("no")
 		AC_MSG_ERROR("Your libxml is too old!")
 	else
@@ -186,6 +186,22 @@ else
 fi
 
 dnl -------------------------------------------------------------------
+dnl Enable debug builds.
+dnl -------------------------------------------------------------------
+AC_ARG_WITH(debug-specs,
+     [  --with-debug-specs		   Build everything with debug informations],,with_debug_specs=no)
+AC_MSG_CHECKING([for a debuggy build ])
+if test "rt$with_debug_specs" = "rtno" ; then
+	AC_MSG_RESULT([" "
+"********** No, building everything without any debugging informations and flags ..."])
+	CFLAGS="`echo $CFLAGS|sed -e 's/-g.//g'`"
+else
+	AC_MSG_RESULT([" "
+"********** Yes, building everything WITH debugging informations and flags ..."])
+	CFLAGS="`echo $CFLAGS|sed -e 's/-O.//g'` -ggdb"
+fi
+
+dnl -------------------------------------------------------------------
 dnl Get the date for the man-page and substitute it there and anywhere.
 dnl -------------------------------------------------------------------
 MY_DATE=`date +%Y-%m-%d`
@@ -240,4 +256,7 @@ use the window-icon
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
+
+if everything should be 
+ compiled debuggy	:	${with_debug_specs:-yes} 
 "

@@ -21,6 +21,10 @@
 #include "parse-db.h"
 #include "team-handle.h"
 
+#ifdef GCONF_IS_PRESENT
+#include <gconf/gconf.h>
+#endif
+
 /**
 * Some static variables for the poptTable in the main routines.
 **/
@@ -57,7 +61,7 @@ int main(int argc, char *argv[])
 	* The GConf error stuff.
 	**/
 	#ifdef GCONF_IS_PRESENT
-	GError	*error;
+	GError	*error=NULL;
 	#endif
 	
 	/**
@@ -72,7 +76,7 @@ int main(int argc, char *argv[])
 	* Do we have GConf ? 
 	**/
 	#ifdef GCONF_IS_PRESENT
-	if(!(gconf_init(argc,argv, error)))
+	if(!(gconf_init(argc,argv, &error)))
 	{
 		g_error(_("Couldn't init the GConf library!"));
 	}

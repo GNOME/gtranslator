@@ -28,15 +28,6 @@ enum {
 guint dnd_type;
 
 /**
-* The target formats
-**/
-static  GtkTargetEntry dragtypes[] = {
-	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/plain", 0, TARGET_NETSCAPE_URL },
-	{ "text/plain", 0, TARGET_TEXT_PLAIN }
-};
-
-/**
 * The D'n'D function
 **/
 void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,

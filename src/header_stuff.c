@@ -13,6 +13,7 @@
 #include "prefs.h"
 #include "dialogs.h"
 #include "languages.h"
+#include <libgtranslator/preferences.h>
 
 #include <time.h>
 

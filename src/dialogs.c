@@ -12,6 +12,7 @@
 
 #include "dialogs.h"
 #include "find.h"
+#include <libgtranslator/preferences.h>
 
 /* Functions to be used only internally in this file */
 static void goto_dlg_clicked(GnomeDialog * dialog, gint button,

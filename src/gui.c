@@ -27,6 +27,15 @@ struct _GtrAction {
 	GtkWidget *tool;
 };
 
+/**
+* The target formats
+**/
+static  GtkTargetEntry dragtypes[] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+	{ "text/plain", 0, TARGET_NETSCAPE_URL },
+	{ "text/plain", 0, TARGET_TEXT_PLAIN }
+};
+
 /* An array holds all defined actions */
 static GtrAction acts[ACT_END];
 

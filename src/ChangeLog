@@ -1,3 +1,20 @@
+2000-09-24  Fatih Demir	<kabalak@gmx.net>
+
+	* dnd.h: Moved the D'n'D types and enumeration to the
+		right places.
+	
+	* gui.c: The GtkTargetEntries are now settled in here.
+
+	* dnd.h: The enumeration of the D'n'D types is now here.
+
+	* dialogs.c, header_stuff.c & session.c : Include the
+		libgtranslator/preferences.h header for the
+		 preferences routines of libgtranslator.
+
+	* main.c: Include the GConf header if necessary and
+		take the right argument style to the 
+		 gconf_init function :)
+
 2000-09-23  Fatih Demir	<kabalak@gmx.net>
 
 	* main.c: Init the GConf library if it's present.

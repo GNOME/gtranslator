@@ -47,7 +47,7 @@ int main(int argc,char *argv[])
 	gtranslator_config_set_int("Year",2000);
 	g_print("This should be true : 2000 == %i\n",gtranslator_config_get_int("Year"));
 	gtranslator_config_close();
-	parse_db_for_lang("ko");
+	parse_db_for_lang("tr");
 	if(ert)
 	{
 		g_free(ert);
