@@ -347,6 +347,10 @@ void create_popup_menu(GtkWidget *widget, GdkEventButton *event)
 		if((file_opened==TRUE) && (wants.popup_menu))
 		{
 			gnome_popup_menu_do_popup_modal(popup_menu, NULL, NULL, NULL, event);
+			/**
+			* Destroy the menu after creation.
+			**/
+			gtk_widget_destroy(popup_menu);
 		}
 	}	
 }
@@ -430,8 +434,7 @@ void enable_actions_just_opened(void)
 {
 	enable_actions(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_CUT, ACT_COPY,
 		       ACT_PASTE, ACT_CLEAR, ACT_FIND, ACT_HEADER, ACT_NEXT,
-		       ACT_LAST, ACT_GOTO, ACT_NEXT_FUZZY, 
-		       ACT_NEXT_UNTRANSLATED, ACT_TRANSLATED,
+		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED,
 		       ACT_FUZZY, ACT_STICK);
 	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 }
@@ -588,10 +591,6 @@ void display_msg(GList * list_item)
 		**/
 		if(msg->msgstr)
 		{	
-			/**
-			* FIXME: Bug #3 || and I can't see why here a 
-			*  crash occurs.
-			**/
 			for(len=0;len<strlen(msg->msgstr);++len)
 			{
 				if(msg->msgstr[len]==' ')
@@ -632,9 +631,6 @@ void update_msg(void)
 		**/
 		if(msg->msgid)
 		{
-			/**
-			* FIXME: Bug #2
-			**/
 			if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
 				if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len -1 )
 				    != '\n')
@@ -670,6 +666,10 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 	if (flag == GTR_MSG_STATUS_FUZZY) {
 		mark_msg_fuzzy(GTR_MSG(po->current->data),
 			       GTK_CHECK_MENU_ITEM(item)->active);
+		/**
+		* Also update the status information in the statusbar.
+		**/	       
+		update_appbar(g_list_position(po->messages, po->current));	       
 	} else {
 		if (GTK_CHECK_MENU_ITEM(item)->active)
 			*stat |= flag;
@@ -725,7 +725,6 @@ static void update_appbar(gint pos)
 	}
 	gnome_appbar_push(GNOME_APPBAR(appbar1), str);
 	g_free(str);
-	g_free(msg);
 }
 
 /* Updates current msg, and shows to_go msg instead, also adjusts actions */
@@ -837,9 +836,13 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		enable_actions(ACT_UNDO);
 		if ((wants.unmark_fuzzy) 
 		     && (msg->status & GTR_MSG_STATUS_FUZZY)) {
-			mark_msg_fuzzy(msg, FALSE);
+		     	mark_msg_fuzzy(msg, FALSE);
 			gtk_check_menu_item_set_active(
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
+			/**
+			* Also update the status information in the statusbar.
+			**/    
+			update_appbar(g_list_position(po->messages, po->current));
 		}
 	}
 	/**

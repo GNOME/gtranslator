@@ -1,10 +1,11 @@
-# Hmm, everything in here could be crash'd by gtranslator ;-)
+#
+# gtranslator really works again :·)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-10-03 23:39+0200\n"
-"PO-Revision-Date: 2000-10-03 23:39+0200\n"
+"POT-Creation-Date: 2000-10-04 18:50+0200\n"
+"PO-Revision-Date: 2000-10-04 19:30+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +22,7 @@ msgstr ""
 "gtranslator çok önemli olan po-dosyalarýnýn tercümesi için bir ortam "
 "olacaktýr.\n"
 "gtranslator, bir gtranslatord sunucusundan ve bir gtranslator uygulamasýndan "
-"oluþacaktýr. Hepimize bol þanslar!"
+"oluþacaktýr.Hepimize bol þanslar!"
 
 #: src/gui.c:65 src/gui.c:282
 msgid "_Compile"
@@ -207,7 +208,7 @@ msgstr "Son"
 msgid "Missing"
 msgstr "Eksik"
 
-#: src/gui.c:262 src/gui.c:324 src/gui.c:709
+#: src/gui.c:262 src/gui.c:324 src/gui.c:707
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -234,31 +235,31 @@ msgstr "Po dosyasýnda bul"
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:451
+#: src/gui.c:456
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:534
+#: src/gui.c:539
 msgid "Bye bye!"
 msgstr "Güle Güle!"
 
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:699
+#: src/gui.c:697
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Ileti: %d / %d / Durum:"
 
-#: src/dialogs.c:217 src/gui.c:713
+#: src/dialogs.c:217 src/gui.c:711
 msgid "Translated"
 msgstr "Tercüme metinlerinde"
 
-#: src/gui.c:719
+#: src/gui.c:717
 msgid "Stick"
 msgstr "Kalýcý"
 
-#: src/gui.c:723
+#: src/gui.c:721
 msgid "Untranslated"
 msgstr "Tercüme edilmemiþ"
 
@@ -482,7 +483,7 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:130 src/parse.c:398
+#: src/parse.c:130 src/parse.c:401
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" hiç yok ki !"
@@ -525,7 +526,7 @@ msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:386
+#: src/parse.c:389
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -537,7 +538,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:443
+#: src/parse.c:446
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -548,11 +549,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:451
+#: src/parse.c:454
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþiksiz"
 
-#: src/parse.c:507
+#: src/parse.c:510
 #, c-format
 msgid ""
 "File %s\n"
@@ -561,12 +562,18 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:559
+#: src/parse.c:547
+msgid "Sorry, msgfmt isn't available on your system!"
+msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
+
+#: src/parse.c:572
 #, c-format
 msgid ""
 "Compile successfull:\n"
 "%s"
-msgstr "%s baþarýyla denetlendi"
+msgstr ""
+"%s baþarýyla\n"
+"denetlendi"
 
 #: src/find.c:84
 #, c-format
@@ -605,8 +612,7 @@ msgstr "Oturum baþarýyla yeniden yüklendi."
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr "
-"...\n"
+"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
 
 #. *
 #. * Print some more exact informations on the GConf init-error.
@@ -779,6 +785,10 @@ msgstr "Güvenlik için 'FALSE' veriyorum ..."
 msgid "Can't set a boolean value for a non-defined path!"
 msgstr "Belirtilmemiþ bir dizinleme için bir Bool'lu deðer oturtumam!"
 
+#: libgtranslator/preferences.c:267
+msgid "Couldn't generate the current date!"
+msgstr "Þimdiki tarih metnini belirleyemedim!"
+
 #: src/languages.h:57
 msgid "Arabic"
 msgstr "Arapça"
@@ -942,3 +952,4 @@ msgstr "Gelik"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "Velþ"
+

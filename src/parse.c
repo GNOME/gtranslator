@@ -343,15 +343,36 @@ static gchar *restore_msg(gchar * given)
 				g_string_prepend(rest, "\"\n\"");
 				here -= 7;
 			} else {
-				/**
-				* FIXME: Crash #1
-				**/
-				g_string_insert(rest,
-						(strrchr(rest->str, ' ') -
-						 rest->str) + 1, "\"\n\"");
-				here =
-				    rest->len - (strrchr(rest->str, '"') -
-						 rest->str);
+				if(rest->str)
+				{
+					/**
+					* If we're showing the dot char stuff, we'd
+					*  to remove it here.
+					**/
+					if(wants.dot_char)
+					{
+						/**
+						* The standard string length variable.
+						**/
+						guint length;
+						/**
+						* Substitute all dot chars with free spaces.
+						**/
+						for(length=0;length<(strlen(rest->str));++length)
+						{
+							if(rest->str[length]=='·')
+							{
+								rest->str[length]=' ';
+							}
+						}
+					}
+					g_string_insert(rest,
+							(strrchr(rest->str, ' ') -
+							 rest->str) + 1, "\"\n\"");
+					here =
+					    rest->len - (strrchr(rest->str, '"') -
+							 rest->str);
+				}			 
 			}
 			lines++;
 		}
@@ -535,9 +556,19 @@ void compile(GtkWidget * widget, gpointer useless)
 	gint res = 1;
 	FILE *fs;
 	gboolean changed = po->file_changed;
-	
+
+	/**
+	* Check if msgfmt is available on the system.
+	**/
+	if(!gnome_is_program_in_path("msgfmt"))
+	{
+		gnome_app_error(GNOME_APP(app1), _("Sorry, msgfmt isn't available on your system!"));
+		return;
+	}
+			
 	if (!file_opened) 
 		return;
+	
 #define RESULT "gtr_result.tmp"
 #define PO_FILE "gtr_po.tmp"
 	actual_write(PO_FILE);

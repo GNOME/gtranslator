@@ -259,12 +259,25 @@ void gtranslator_config_set_last_run_date()
 	* Set a date identifier.
 	**/
 	strftime(date, 17, "%Y-%m-%d %H:%M", timebox);
-	gtranslator_config_init();
-	#ifdef GCONF_IS_PRESENT
-	gconf_client_set_string(client, "/apps/gtranslator/informations/last_run_on",
-		date, &error);
-	#else
-	gnome_config_set_string("informations/last_run_on", date);
-	#endif
-	gtranslator_config_close();
+	/**
+	* Test the date string before trying to store it.
+	**/
+	if(!date)
+	{
+		g_warning(_("Couldn't generate the current date!"));
+	}
+	else
+	{
+		/**
+		* Store the date string.
+		**/
+		gtranslator_config_init();
+		#ifdef GCONF_IS_PRESENT
+		gconf_client_set_string(client, "/apps/gtranslator/informations/last_run_on",
+			date, &error);
+		#else
+		gnome_config_set_string("informations/last_run_on", date);
+		#endif
+		gtranslator_config_close();
+	}	
 }

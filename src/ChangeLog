@@ -1,5 +1,18 @@
 2000-10-04  Fatih Demir	<kabalak@gmx.net>
 
+	* gui.c: Added more "live" statusbar update for the status
+		information on change of a fuzzy message, removed
+		 the now obsolete FIXME entries and corrected some
+		  wrong enable/disable actions.
+
+	* parse.c: Check if msgfmt is installed in $PATH, and show up
+		and gnome_app_error if it can't be found by the
+		 gnome_is_program_in_path routine from libgnome.
+		Don't free a string variable ( "frees" a crash ) and
+		 check if we'd used the new dot char feature and if so
+		  replace the dot chars again with free spaces. This does
+		   solve all FIXME's. Hurray.
+
 	* \*.c: Added 3 FIXME's which are the three places where 
 		gtranslator crashes regularly; these are FIXME's :)
 
