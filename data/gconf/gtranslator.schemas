@@ -38,7 +38,7 @@
 			<applyto>/apps/gtranslator/language/team_email</applyto>
 			<owner>gtranslator</owner>
 			<type>string</type>
-			<default>YourLanguage@li.org</default>
+			<default>YourLanguage@li.org or gnome-YourLanguage@gnome.org</default>
 			<locale name="C">
 			<short>Your language's email list</short>
 			<long>The EMail list of your translation team, e.g. "tr"</long>
@@ -53,6 +53,17 @@
 			<locale name="C">
 			<short>The encoding of your language files.</short>
 			<long>The encoding of your language specific files, e.g. 8bit.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/gtranslator/informations/last_run_on</key>
+			<applyto>/apps/gtranslator/informations/last_run_on</applyto>
+			<owner>gtranslator</owner>
+			<type>string</type>
+			<default>2001-01-25</default>
+			<locale name="C">
+			<short>The last date gtranslator was run on.</short>
+			<long>The date on which gtranslator was run lastly.</long>
 			</locale>
 		</schema>	
 	</schemalist>
