@@ -1,6 +1,9 @@
 /*
  * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
+ *                      Ross Golder <ross@golder.org>
+ *                      Søren Wedel Nielsen <swn@herlevkollegiet.dk>
+ *
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,14 +46,6 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 static void gtranslator_preferences_dialog_close(GtkWidget  * widget, gint page_num,
 			    gpointer useless);
 static void toggle_sensitive(GtkWidget *widget, gpointer data);
-
-/*
- * The notebook page widgets: 
- */
-static GtkWidget 
-	*first_page, *second_page, *third_page, *fourth_page,
-	*fifth_page, *sixth_page, *seventh_page, *eighth_page,
-	*ninth_page;
 
 /*
  * The entries:
@@ -106,21 +101,203 @@ GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(GtkWidget  *noteb
 	return page;
 }
 
+/*
+ * Helper functions
+ */
+
+GtkWidget* gtranslator_preferences_page_new_append(GtkWidget *notebook, const char *caption) {
+	GtkWidget *vbox, *label;
+
+	vbox = gtk_vbox_new (FALSE, 18);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
+
+	label = gtk_label_new (caption);
+
+	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox, label);
+  
+	return vbox;
+}
+
+
+GtkWidget* gtranslator_preferences_category_new_pack_start(GtkWidget *page, const gchar *caption) {
+	GtkWidget *vbox;
+	GtkWidget *label, *hbox, *content_box;
+	gchar *labeltext;
+
+	vbox = gtk_vbox_new (FALSE, 6);
+
+	labeltext = g_strconcat("<span weight=\"bold\">",caption,"</span>",NULL);
+	label = gtk_label_new (labeltext);
+	g_free(labeltext);
+	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);  
+	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
+
+	label = gtk_label_new ("    ");
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+	content_box = gtk_vbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (hbox), content_box, TRUE, TRUE, 0);
+
+	gtk_box_pack_start (GTK_BOX (page), vbox, TRUE, TRUE, 0);
+
+	return content_box;
+}
+
+
+
+void *gtranslator_preferences_pack_start_with_label(GtkWidget *box, 
+						    GtkWidget *widget, 
+						    GtkSizeGroup *label_size_group, 
+						    GtkWidget *depend,
+						    const char *caption)
+{
+	GtkWidget *hbox, *label;
+
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(caption);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	if (label_size_group != NULL)
+		gtk_size_group_add_widget (GTK_SIZE_GROUP (label_size_group), GTK_WIDGET (label));
+
+	gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
+	if (depend != NULL) {
+		gtk_widget_set_sensitive(GTK_WIDGET(label), 
+					 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(depend)));
+		g_signal_connect(G_OBJECT(depend), "toggled",
+				 G_CALLBACK(toggle_sensitive), label); 
+		gtk_widget_set_sensitive(GTK_WIDGET(widget), 
+					 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(depend)));
+		g_signal_connect(G_OBJECT(depend), "toggled",
+				 G_CALLBACK(toggle_sensitive), widget);
+	}
+	return label;
+}
+
+
+
+GtkWidget *gtranslator_preferences_combo_new(GList  * list, 
+					     const char *value,
+					     GtkSizeGroup *size_group, 
+					     GCallback callback,
+					     gpointer user_data)
+{
+	GtkWidget *combo;
+
+	combo= gtk_combo_new();
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo), list);
+	if (value)
+		gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), value);
+	gtk_editable_set_editable(GTK_EDITABLE(GTK_COMBO(combo)->entry), 0);
+	gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), GTK_WIDGET (combo));
+	g_signal_connect(G_OBJECT(GTK_COMBO(combo)->entry), "changed",
+			 G_CALLBACK(callback), user_data);
+	return combo;
+}
+
+
+
+GtkWidget *gtranslator_preferences_entry_new(const char *value,
+					     GtkSizeGroup *size_group, 
+					     GCallback callback)
+{
+	GtkWidget *entry;
+
+	entry = gtk_entry_new();
+	if (value)
+		gtk_entry_set_text(GTK_ENTRY(entry), value);
+	if (size_group != NULL)
+		gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), GTK_WIDGET (entry));
+	g_signal_connect(G_OBJECT(entry), "changed", G_CALLBACK(callback), NULL);
+	return entry;
+}
+
+
+GtkWidget *gtranslator_preferences_toggle_new(const char *label_text,
+					      gboolean value,
+					      GCallback callback)
+{
+	GtkWidget *toggle;
+	toggle = gtk_check_button_new_with_label(label_text);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(toggle), value);
+	if(callback)
+	{
+		g_signal_connect(G_OBJECT(toggle), "toggled",
+				 G_CALLBACK(callback), NULL);
+	}
+  
+	return toggle;
+}
+
+
+
+GtkWidget *gtranslator_preferences_font_picker_new(const gchar *title_text,
+						   const gchar *fontspec,
+						   GtkSizeGroup *size_group, 
+						   GCallback callback)
+{
+	GtkWidget *font_selector;
+
+	font_selector = gnome_font_picker_new();
+	gnome_font_picker_set_title(GNOME_FONT_PICKER(font_selector), title_text);
+	if(fontspec)
+		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font_selector), fontspec);
+	gnome_font_picker_set_mode(GNOME_FONT_PICKER(font_selector),
+				   GNOME_FONT_PICKER_MODE_FONT_INFO);
+	gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), GTK_WIDGET (font_selector));
+	g_signal_connect(G_OBJECT(font_selector), "font_set",
+			 G_CALLBACK(callback), NULL);
+
+	return font_selector;
+}
+
+
+
+GtkWidget *gtranslator_preferences_color_picker_new(const gchar *title_text,
+						    GtkSizeGroup *size_group, 
+						    ColorType color_type,
+						    GCallback callback)
+{
+	GtkWidget *color_selector;
+
+	color_selector = gnome_color_picker_new();
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER(color_selector), title_text);
+
+	gtranslator_color_values_get(GNOME_COLOR_PICKER(color_selector), color_type);
+	if (size_group != NULL)
+		gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), GTK_WIDGET (color_selector));
+	g_signal_connect(G_OBJECT(color_selector), "color_set",
+			 G_CALLBACK(callback), NULL);
+
+	return color_selector;
+}
+
 void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
-	gchar	*old_colorscheme=NULL;
-	GtkObject *adjustment;
+ 	gchar	*old_colorscheme=NULL;
+ 	GtkObject *adjustment;
+
+	GtkWidget *page, *category_box, *hbox;
+	GtkSizeGroup *label_size_group, *control_size_group;
 
 	prefs_changed = FALSE;
 
-	if(prefs != NULL) {
+ 	if(prefs != NULL) {
 		gtk_window_present(GTK_WINDOW(prefs));
 		return;
-	}
-
-	/*
-	 * Create the preferences box... 
-	 */
+ 	}
+ 
+ 	/*
+ 	 * Create the preferences box... 
+ 	 */
 	prefs = gtk_dialog_new_with_buttons(
 		_("gtranslator -- options"),
 		GTK_WINDOW(gtranslator_application),
@@ -128,268 +305,270 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 		NULL);
 	gtk_dialog_set_default_response(GTK_DIALOG(prefs), GTK_RESPONSE_CLOSE);
-
+ 
 	/*
 	 * The notebook containing the pages
 	 */
 	prefs_notebook = gtk_notebook_new();
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(prefs)->vbox),
-                      prefs_notebook);
+			   prefs_notebook);
+ 
 
 	/*
-	 * The tables for holding all the entries below.
+	 * Files page
 	 */
-	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook, 
-		2, 2, _("Personal information")); 
-	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		5, 2, _("Language settings"));
-	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		4, 1, _("Po file editing"));
-	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		9, 1, _("Miscellaneous"));
-	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		3, 2, _("Recent files & spell checking"));
-	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		6, 2, _("Fonts, colors and color schemes"));
-	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		2, 2, _("Autosaving"));
-	eighth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		6, 2, _("Messages table"));
-	ninth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs_notebook,
-		4, 2, _("Learn buffer & autotranslation"));
-	
+	page = gtranslator_preferences_page_new_append(prefs_notebook, _("Files")); 
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("General"));
+	warn_if_fuzzy = gtranslator_preferences_toggle_new(_("Warn if po file contains fuzzy translations"),
+							   GtrPreferences.warn_if_fuzzy,
+							   G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), warn_if_fuzzy, FALSE, FALSE, 0);
+	sweep_compile_file = gtranslator_preferences_toggle_new(_("Delete compiled files (e.g. \"project.gmo\")"),
+								GtrPreferences.sweep_compile_file,
+								G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), sweep_compile_file, FALSE, FALSE, 0);
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("Autosave"));
+        autosave = gtranslator_preferences_toggle_new(_("Automatically save at regular intervals"),
+						      GtrPreferences.autosave,
+						      G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), autosave, FALSE, FALSE, 0);
+	adjustment = gtk_adjustment_new (GtrPreferences.autosave_timeout, 1.0, 30.0, 1.0, 1.0, 1.0);
+	autosave_timeout = gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
+ 	gtk_widget_set_sensitive(GTK_WIDGET(autosave_timeout), GtrPreferences.autosave);
+       	gtranslator_preferences_pack_start_with_label(category_box, autosave_timeout, NULL, 
+						      autosave, _("Autosave interval: "));
+        autosave_with_suffix = gtranslator_preferences_toggle_new(_("Append a suffix to automatically saved files"),
+								  GtrPreferences.autosave_with_suffix,
+								  G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), autosave_with_suffix, FALSE, FALSE, 0);
+	autosave_suffix = gtranslator_preferences_entry_new(GtrPreferences.autosave_suffix, NULL, 
+							    G_CALLBACK(gtranslator_preferences_dialog_changed));
+       	gtranslator_preferences_pack_start_with_label(category_box, autosave_suffix, NULL, 
+						      autosave_with_suffix, _("Suffix:"));
+	category_box =  gtranslator_preferences_category_new_pack_start(page, _("Recent files"));
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (category_box), hbox, FALSE, TRUE, 0);
+	adjustment = gtk_adjustment_new (GtrPreferences.max_history_entries, 3, 15, 1, 10, 10);
+	max_history_entries = gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
+	g_signal_connect(G_OBJECT(max_history_entries), "changed",
+ 			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
+	gtranslator_preferences_pack_start_with_label(category_box, max_history_entries, NULL,  NULL,
+						      _("Maximum number of entries in the recent files list:"));
+	check_recent_files = gtranslator_preferences_toggle_new(_("Check recent files before showing in recent files list"),
+								GtrPreferences.check_recent_file,
+								G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), check_recent_files, FALSE, FALSE, 0);
+ 
 	/*
-	 * Create all the personal entries.
+	 * Editor page
 	 */
-	authors_name =
-	    gtranslator_utils_attach_entry_with_label(first_page, 0, _("Author's name:"),
-		gtranslator_translator->name, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	authors_email =
-	    gtranslator_utils_attach_entry_with_label(first_page, 1, _("Author's EMail:"),
-		gtranslator_translator->email, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	/*
-	 * Create, attach, and connect all the combo boxes with labels. 
-	 */
-	gtranslator_utils_language_lists_create();
-
-	authors_language =
-	    gtranslator_utils_attach_combo_with_label(second_page, 0, _("Language:"),
-				    languages_list, gtranslator_translator->language->name,
-				    FALSE,
-				    G_CALLBACK(gtranslator_preferences_dialog_changed), GINT_TO_POINTER(1));
-	lcode =
-	    gtranslator_utils_attach_combo_with_label(second_page, 1, _("Language code:"),
-				    lcodes_list, gtranslator_translator->language->locale,
-				    FALSE,
-				    G_CALLBACK(gtranslator_preferences_dialog_changed), GINT_TO_POINTER(2));
-	lg_email =
-	    gtranslator_utils_attach_combo_with_label(second_page, 2,
-				    _("Language group's EMail:"),
-				    group_emails_list, gtranslator_translator->language->group_email,
-				    TRUE,
-				    G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
-	mime_type =
-	    gtranslator_utils_attach_combo_with_label(second_page, 3, _("Charset:"),
-				    encodings_list, gtranslator_translator->language->encoding,
-				    FALSE,
-				    G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
-	encoding =
-	    gtranslator_utils_attach_combo_with_label(second_page, 4, _("Encoding:"),
-				    bits_list, gtranslator_translator->language->bits,
-				    FALSE,
-				    G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
-	/*
-	 * Create, attach, and connect the toggle buttons.
-	 */
-	unmark_fuzzy =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 0,
-		_("Remove fuzzy status if message changed"),
-		GtrPreferences.unmark_fuzzy, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	warn_if_fuzzy =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 1,
-		_("Warn if the po file contains fuzzy translations"),
-		GtrPreferences.warn_if_fuzzy, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	keep_obsolete =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 2,
-		_("Keep obsolete messages in the po files"),
-		GtrPreferences.keep_obsolete, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	highlight =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 3,
-	    	_("Highlight syntax of the translation messages"),
-		GtrPreferences.highlight, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	
-	/*
-	 * The fourth page with the popup menu & the dot_char.
-	 */
-	use_dot_char=gtranslator_utils_attach_toggle_with_label(fourth_page, 0,
-		_("Use special character to indicate free space"),
-		GtrPreferences.dot_char, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	use_update_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 3,
-		_("Enable the functionality to update a po file from within gtranslator"),
-		GtrPreferences.update_function, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	rambo_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
-		_("Enable the functionality to remove all translations from a po file"),
-		GtrPreferences.rambo_function, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		5, _("Delete compiled files (e.g. \"project.gmo\")"),
-		GtrPreferences.sweep_compile_file, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		6, _("Save geometry on exit & restore it on startup"),
-		GtrPreferences.save_geometry, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	show_comment=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		7, _("Show instant comment view in the main pane"),
-		GtrPreferences.show_comment, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	
-	/*
-	 * The fifth page with the Recent files options.
-	 */
-	max_history_entries=gtranslator_utils_attach_spin_with_label(fifth_page, 0, 
-		_("Maximum number of entries in the recent files' list:"), 3, 15, 
-		GtrPreferences.max_history_entries, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	
-	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
-		_("Check recent files before showing in recent files' list"),
-		GtrPreferences.check_recent_file, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	instant_spell_checking=gtranslator_utils_attach_toggle_with_label(fifth_page, 2,
-		_("Instant spell checking"),
-		GtrPreferences.instant_spell_check, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	
-	use_own_dict = gtk_check_button_new_with_label(_("Use special dictionary:"));
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(use_own_dict),
-	                             GtrPreferences.use_own_dict);
-	gtk_table_attach_defaults(GTK_TABLE(fifth_page), use_own_dict, 0, 1, 3, 4);
-	
-	dictionary_file = gtk_entry_new();
-	if (GtrPreferences.dictionary)
-		gtk_entry_set_text(GTK_ENTRY(dictionary_file), GtrPreferences.dictionary);
-	gtk_widget_set_sensitive(GTK_WIDGET(dictionary_file), GtrPreferences.use_own_dict);
-	gtk_table_attach_defaults(GTK_TABLE(fifth_page), dictionary_file, 1, 2, 3, 4);
-	
-	g_signal_connect(G_OBJECT(use_own_dict), "toggled",
-			 G_CALLBACK(toggle_sensitive), dictionary_file);
-	g_signal_connect(G_OBJECT(dictionary_file), "changed",
-			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
-	
-	/*
-	 * The sixth page with the special font/color stuff.
-	 */
+ 	page = gtranslator_preferences_page_new_append(prefs_notebook, _("Editor")); 
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	control_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+ 	category_box = gtranslator_preferences_category_new_pack_start(page, _("Text display"));
+        highlight = gtranslator_preferences_toggle_new(_("Highlight syntax of the translation message"),
+						       GtrPreferences.highlight,
+						       G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), highlight, FALSE, FALSE, 0);
 	old_colorscheme=gtranslator_utils_get_raw_file_name(GtrPreferences.scheme);
-	
-	scheme_file=gtranslator_utils_attach_combo_with_label(sixth_page, 0,
-		_("Syntax color scheme to use:"), colorschemes, old_colorscheme,
-		FALSE,
-		G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
-	 
-	own_fonts=gtranslator_utils_attach_toggle_with_label(sixth_page, 1,
-		_("Apply own fonts:"),
-		GtrPreferences.use_own_fonts, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	msgid_font=gtranslator_utils_attach_font_with_label(sixth_page, 2,
-		_("Original text font:"), _("gtranslator -- font selection/msgid font"),
-		GtrPreferences.msgid_font, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	
-	msgstr_font=gtranslator_utils_attach_font_with_label(sixth_page, 3,
-		_("Translation font:"), _("gtranslator -- font selection/msgstr font"),
-		GtrPreferences.msgstr_font, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	own_colors=gtranslator_utils_attach_toggle_with_label(sixth_page, 4,
-		_("Apply own colors:"),
-		GtrPreferences.use_own_colors, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	foreground=gtranslator_utils_attach_color_with_label(sixth_page, 5,
-		_("Foreground color:"), _("gtranslator -- foreground color"),
-		COLOR_FG, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	background=gtranslator_utils_attach_color_with_label(sixth_page, 6,
-		_("Background color:"), _("gtranslator -- background color"),
-		COLOR_BG, G_CALLBACK(gtranslator_preferences_dialog_changed));
+	scheme_file = gtranslator_preferences_combo_new(colorschemes, old_colorscheme,
+							control_size_group, 
+							G_CALLBACK(gtranslator_preferences_dialog_changed),
+							NULL);
+	gtranslator_preferences_pack_start_with_label(category_box, scheme_file, label_size_group, NULL, 
+						      _("Syntax color scheme to use:"));
+        use_dot_char = gtranslator_preferences_toggle_new(_("Use special character to indicate white space"),
+							  GtrPreferences.dot_char,
+							  G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), use_dot_char, FALSE, FALSE, 0);
+        own_fonts = gtranslator_preferences_toggle_new(_("Apply own fonts"),
+						       GtrPreferences.use_own_fonts,
+						       G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), own_fonts, FALSE, FALSE, 0);
+	msgid_font=gtranslator_preferences_font_picker_new(_("gtranslator -- font selection/msgid font"), 
+							   GtrPreferences.msgid_font, control_size_group,
+							   G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, msgid_font, label_size_group, 
+						      own_fonts, _("Original text font:"));
+	msgstr_font = gtranslator_preferences_font_picker_new(_("gtranslator -- font selection/msgstr font"), 
+							      GtrPreferences.msgstr_font, control_size_group,
+							      G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, msgstr_font, label_size_group, 
+						      own_fonts, _("Translation font:"));
+	own_colors = gtranslator_preferences_toggle_new(_("Apply own colors:"),
+							GtrPreferences.use_own_colors,
+							G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), own_colors, FALSE, FALSE, 0);
+	foreground = gtranslator_preferences_color_picker_new(_("gtranslator -- foreground color"), 
+							      control_size_group, COLOR_FG,
+							      G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, foreground, label_size_group, 
+						      own_colors, _("Foreground color:"));
+	background = gtranslator_preferences_color_picker_new(_("gtranslator -- background color"), 
+							      control_size_group, COLOR_BG,
+							      G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, background, label_size_group, 
+						      own_colors, _("Background:"));
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("Contents"));
+	unmark_fuzzy = gtranslator_preferences_toggle_new(_("Remove fuzzy status if message is changed"),
+							  GtrPreferences.unmark_fuzzy,
+							  G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), unmark_fuzzy, FALSE, FALSE, 0);
+        keep_obsolete = gtranslator_preferences_toggle_new(_("Keep obsolete messages in the po files"),
+							   GtrPreferences.keep_obsolete,
+							   G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), keep_obsolete, FALSE, FALSE, 0);
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("Spell checking"));
+	instant_spell_checking = gtranslator_preferences_toggle_new(_("Instant spell checking"),
+								    GtrPreferences.instant_spell_check,
+								    G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), instant_spell_checking, FALSE, FALSE, 0);
+	hbox = gtk_hbox_new (FALSE, 6);
+        gtk_box_pack_start (GTK_BOX (category_box), hbox, FALSE, FALSE, 0);
+        use_own_dict = gtranslator_preferences_toggle_new(_("Use special dictionary:"),
+                                                          GtrPreferences.use_own_dict,
+                                                          G_CALLBACK(gtranslator_preferences_dialog_changed));
+        gtk_size_group_add_widget (GTK_SIZE_GROUP (label_size_group), GTK_WIDGET (use_own_dict));
+        gtk_box_pack_start (GTK_BOX (hbox), use_own_dict, FALSE, FALSE, 0);
+                                                                                
+        dictionary_file = gtranslator_preferences_entry_new(GtrPreferences.dictionary, control_size_group,
+                                                            G_CALLBACK(gtranslator_preferences_dialog_changed));
+        gtk_box_pack_start (GTK_BOX (hbox), dictionary_file, FALSE, TRUE, 0);
+        gtk_widget_set_sensitive(GTK_WIDGET(dictionary_file), GtrPreferences.use_own_dict);
+        g_signal_connect(G_OBJECT(use_own_dict), "toggled",
+                         G_CALLBACK(toggle_sensitive), dictionary_file);
+        g_signal_connect(G_OBJECT(dictionary_file), "changed",
+                         G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
+                                                                                
+	/*
+	 * PO header page
+	 */
+	page = gtranslator_preferences_page_new_append(prefs_notebook, _("PO header")); 
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	control_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("Personal Information"));
+	authors_name = gtranslator_preferences_entry_new(gtranslator_translator->name, control_size_group, 
+							 G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, authors_name, label_size_group, 
+						      NULL, _("Author's name:"));
+	authors_email = gtranslator_preferences_entry_new(gtranslator_translator->email, control_size_group, 
+							  G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, authors_email, label_size_group, 
+						      NULL, _("Author's email:"));
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("Language settings"));
+	gtranslator_utils_language_lists_create();
+	authors_language = gtranslator_preferences_combo_new(languages_list, gtranslator_translator->language->name,
+							     control_size_group,
+							     G_CALLBACK(gtranslator_preferences_dialog_changed),
+							     GINT_TO_POINTER(1));
+	gtranslator_preferences_pack_start_with_label(category_box, authors_language, label_size_group, 
+						      NULL, _("Language:"));
+	lcode = gtranslator_preferences_combo_new(lcodes_list, gtranslator_translator->language->locale,
+						  control_size_group, 
+						  G_CALLBACK(gtranslator_preferences_dialog_changed),
+						  GINT_TO_POINTER(2));
+	gtranslator_preferences_pack_start_with_label(category_box, lcode, label_size_group, 
+						      NULL, _("Language code:"));
+	lg_email = gtranslator_preferences_combo_new(group_emails_list, gtranslator_translator->language->group_email,
+						     control_size_group, 
+						     G_CALLBACK(gtranslator_preferences_dialog_changed),
+						     NULL);
+	gtranslator_preferences_pack_start_with_label(category_box, lg_email, label_size_group,  
+						      NULL,_("Language group's email:"));
+	mime_type = gtranslator_preferences_combo_new(encodings_list, gtranslator_translator->language->encoding,
+						      control_size_group, 
+						      G_CALLBACK(gtranslator_preferences_dialog_changed),
+						      NULL);
+	gtranslator_preferences_pack_start_with_label(category_box, mime_type, label_size_group, 
+						      NULL, _("Charset:"));
+	encoding = gtranslator_preferences_combo_new(bits_list, gtranslator_translator->language->bits,
+						     control_size_group, 
+						     G_CALLBACK(gtranslator_preferences_dialog_changed),
+						     NULL);
+	gtranslator_preferences_pack_start_with_label(category_box, encoding, label_size_group, NULL, _("Encoding:"));
 
 	/*
-	 * The seventh page of the prefs-box: autosaving options.
+	 * Functionality page
 	 */
-	autosave = gtk_check_button_new_with_label(_("Automatically save po files at regular intervals (in minutes):"));
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(autosave),
-	                             GtrPreferences.autosave);
-	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave, 0, 1, 0, 1);
-
-	adjustment=gtk_adjustment_new(GtrPreferences.autosave_timeout, 1.0, 30.0, 1.0, 1.0, 1.0);	
-	autosave_timeout=gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 1, 0);
-	gtk_widget_set_sensitive(GTK_WIDGET(autosave_timeout), GtrPreferences.autosave);
-	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave_timeout, 1, 2, 0, 1);
-	
-	g_signal_connect(G_OBJECT(autosave), "toggled",
-			 G_CALLBACK(toggle_sensitive), autosave_timeout);
-	g_signal_connect(G_OBJECT(autosave_timeout), "changed",
-			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
-
-	autosave_with_suffix = gtk_check_button_new_with_label(_("Append a suffix to automatically saved files:"));
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(autosave_with_suffix),
-	                             GtrPreferences.autosave_with_suffix);
-	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave_with_suffix, 0, 1, 1, 2);
-
-	autosave_suffix = gtk_entry_new();
-	if (GtrPreferences.autosave_suffix)
-		gtk_entry_set_text(GTK_ENTRY(autosave_suffix), GtrPreferences.autosave_suffix);
-	gtk_widget_set_sensitive(GTK_WIDGET(autosave_suffix), GtrPreferences.autosave_with_suffix);
-	gtk_table_attach_defaults(GTK_TABLE(seventh_page), autosave_suffix, 1, 2, 1, 2);
-	
-	g_signal_connect(G_OBJECT(autosave_with_suffix), "toggled",
-			 G_CALLBACK(toggle_sensitive), autosave_suffix);
-	g_signal_connect(G_OBJECT(autosave_suffix), "changed",
-			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
+	page = gtranslator_preferences_page_new_append(prefs_notebook, _("Functionality")); 
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("General"));
+	use_update_function = gtranslator_preferences_toggle_new(_("Enable the functionality to update a po file from within gtranslator"),
+								 GtrPreferences.update_function,
+								 G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), use_update_function, FALSE, FALSE, 0);
+	rambo_function = gtranslator_preferences_toggle_new(_("Enable the functionality to remove all translations from a po file"),
+							    GtrPreferences.rambo_function,
+							    G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), rambo_function, FALSE, FALSE, 0);
+	show_comment = gtranslator_preferences_toggle_new(_("Show instant comment view in main pane"),
+							  GtrPreferences.show_comment,
+							  G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), show_comment, FALSE, FALSE, 0);
+	save_geometry_tb = gtranslator_preferences_toggle_new(_("Save geometry on exit and restore it on startup"),
+							      GtrPreferences.save_geometry,
+							      G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), save_geometry_tb, FALSE, FALSE, 0);
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("Messages table"));
+	show_messages_table = gtranslator_preferences_toggle_new(_("Show the messages table (requires restart)"),
+								 GtrPreferences.show_messages_table,
+								 G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), show_messages_table, FALSE, FALSE, 0);
+	collapse_translated_entries = gtranslator_preferences_toggle_new(_("Collapse translated entries by default"),
+									 GtrPreferences.collapse_translated,
+									 G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), collapse_translated_entries, FALSE, FALSE, 0);
+	use_own_mt_colors = gtranslator_preferences_toggle_new(_("Use own colors for messages table groups"),
+							       GtrPreferences.use_own_mt_colors,
+							       G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), use_own_mt_colors, FALSE, FALSE, 0);
+	mt_untranslated = gtranslator_preferences_color_picker_new("gtranslator -- untranslated entries' color",
+								   NULL,
+								   COLOR_MESSAGES_TABLE_UNTRANSLATED,
+								   G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, mt_untranslated, label_size_group, 
+						      use_own_mt_colors, _("Fuzzy entries color:"));
+	mt_fuzzy = gtranslator_preferences_color_picker_new("gtranslator -- fuzzy entries' color",
+							    NULL,
+							    COLOR_MESSAGES_TABLE_FUZZY,
+							    G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, mt_fuzzy, label_size_group, 
+						      use_own_mt_colors, _("Untranslated entries color:"));
+	mt_translated = gtranslator_preferences_color_picker_new("gtranslator -- translated entries' color",
+								 NULL,
+								 COLOR_MESSAGES_TABLE_TRANSLATED,
+								 G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtranslator_preferences_pack_start_with_label(category_box, mt_translated, label_size_group, 
+						      use_own_mt_colors, _("Translated entries color:"));
 
 	/*
-	 * The eighth page with the messages table concerning settings.
+	 * Autotranslate page
 	 */
-	show_messages_table=gtranslator_utils_attach_toggle_with_label(eighth_page, 0,
-		_("Show the messages table (requires gtranslator restart)"),
-		GtrPreferences.show_messages_table, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	collapse_translated_entries=gtranslator_utils_attach_toggle_with_label(eighth_page, 1,
-		_("Collapse translated entries by default"),
-		GtrPreferences.collapse_translated, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	use_own_mt_colors=gtranslator_utils_attach_toggle_with_label(eighth_page, 2,
-		_("Use own colors for the messages table groups"),
-		GtrPreferences.use_own_mt_colors, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	mt_untranslated=gtranslator_utils_attach_color_with_label(eighth_page, 3,
-		_("Untranslated entries color:"), _("gtranslator -- untranslated entries' color"),
-		COLOR_MESSAGES_TABLE_UNTRANSLATED, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	mt_fuzzy=gtranslator_utils_attach_color_with_label(eighth_page, 4,
-		_("Fuzzy entries color:"), _("gtranslator -- fuzzy entries' color"),
-		COLOR_MESSAGES_TABLE_FUZZY, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
-	mt_translated=gtranslator_utils_attach_color_with_label(eighth_page, 5,
-		_("Translated entries color:"), _("gtranslator -- translated entries' color"),
-		COLOR_MESSAGES_TABLE_TRANSLATED, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
+	page = gtranslator_preferences_page_new_append(prefs_notebook, _("Autotranslation")); 
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("General"));
+	use_learn_buffer = gtranslator_preferences_toggle_new(_("Also query the personal learn buffer while autotranslating untranslated messages"),
+							      GtrPreferences.use_learn_buffer,
+							      G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), use_learn_buffer, FALSE, FALSE, 0);
+	auto_learn = gtranslator_preferences_toggle_new(_("Automatically learn a newly translated message"),
+							GtrPreferences.auto_learn,
+							G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), auto_learn, FALSE, FALSE, 0);
+	category_box = gtranslator_preferences_category_new_pack_start(page, _("Fuzzy matching"));
 	/*
-	 * Learn buffer/auto translation options go now into their own prefs page ,-)
+	 * Translators: With "fuzzy" I mean a more enhanced (and more
+	 *  crappy) logic while searching for appropriate translations
+	 *   for a original string.
 	 */
-	use_learn_buffer =
-	    gtranslator_utils_attach_toggle_with_label(ninth_page, 0,
-	    	_("Also query the personal learn buffer while autotranslating untranslated messages"),
-		GtrPreferences.use_learn_buffer, G_CALLBACK(gtranslator_preferences_dialog_changed));
-    	auto_learn =
-	    gtranslator_utils_attach_toggle_with_label(ninth_page, 1,
-	    	_("Automatically learn a newly translated message"),
-		GtrPreferences.auto_learn, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	fuzzy_matching=gtranslator_utils_attach_toggle_with_label(ninth_page,
-		/*
-		 * Translators: With "fuzzy" I mean a more enhanced (and more
-		 *  crappy) logic while searching for appropriate translations
-		 *   for a original string.
-		 */
-		2, _("Use \"fuzzy\" matching routines for the learn buffer queries"),
-		GtrPreferences.fuzzy_matching, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	min_match_percentage=gtranslator_utils_attach_spin_with_label(ninth_page,
-		3, _("Minimal required similarity percentage for fuzzy queries"),
-		25, 100, GtrPreferences.min_match_percentage, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
+	fuzzy_matching = gtranslator_preferences_toggle_new(		
+		_("Use \"fuzzy\" matching routines for learn buffer queries"),
+		GtrPreferences.fuzzy_matching,
+		G_CALLBACK(gtranslator_preferences_dialog_changed));
+	gtk_box_pack_start (GTK_BOX (category_box), fuzzy_matching, FALSE, FALSE, 0);
+	adjustment = gtk_adjustment_new (75, 0, 100, 1, 10, 10);
+	min_match_percentage = gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
+	gtranslator_preferences_pack_start_with_label(category_box, min_match_percentage, NULL, fuzzy_matching,
+						      _("Minimal required similarity persentage for fuzzy queries:"));
 	/*
 	 * Connect the signals to the preferences box.
 	 */
@@ -398,6 +577,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 
 	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
 }
+ 
 
 /*
  * The actions to take when the user presses "Apply".
