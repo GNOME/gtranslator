@@ -2,54 +2,52 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.39\n"
+"Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-03 22:56+0200\n"
-"PO-Revision-Date: 2001-09-05 19:56+0100\n"
-"Last-Translator: Mike Newman <mike@gtnorthern.demon.co.uk>\n"
+"POT-Creation-Date: 2004-03-30 22:47-0500\n"
+"PO-Revision-Date: 2004-03-30 22:57-0500\n"
+"Last-Translator: Gareth Owen <gowen72@yahoo.com>\n"
 "Language-Team: English <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
-#, fuzzy
 msgid "The GNOME translation program"
-msgstr "The Gnome Translation Program"
+msgstr "The GNOME translation program"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1143
 msgid "gtranslator"
 msgstr "gtranslator"
 
 #. Translator credits
 #: src/about.c:60
-#, fuzzy
 msgid "translator_credits"
-msgstr "gtranslator _website"
+msgstr ""
+"Mike Newman <mike@gtnorthern.demon.co.uk>\n"
+"Gareth Owen <gowen72@yahoo.com>"
 
 #: src/about.c:80
-#, fuzzy
 msgid "(C) 1999 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2001 The Free Software Foundation"
+msgstr "(C) 1999 The Free Software Foundation, Inc."
 
 #: src/about.c:81
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator is a po file editing suite with many bells and whistles."
 
-#: src/bookmark.c:93 src/dialogs.c:1492
-#, fuzzy
+#: src/bookmark.c:93 src/dialogs.c:1497
 msgid "No comment"
-msgstr "Edit comment"
+msgstr "No comment"
 
 #: src/bookmark.c:598
-#, fuzzy
 msgid "_View/_Bookmarks/"
-msgstr "Colourscheme directory:"
+msgstr "_View/_Bookmarks/"
 
 #: src/bookmark.c:635
-#, fuzzy, c-format
+#, c-format
 msgid "Open %s (%s)"
-msgstr "Open %s"
+msgstr "Open %s (%s)"
 
 #: src/color-schemes.c:196
 #, c-format
@@ -73,14 +71,13 @@ msgid "<Not Given>"
 msgstr "<Not Given>"
 
 #: src/color-schemes.c:472
-#, fuzzy
 msgid "_View/_Colorschemes/"
-msgstr "Colourscheme directory:"
+msgstr "_View/_Colourschemes/"
 
 #: src/color-schemes.c:502
-#, fuzzy, c-format
+#, c-format
 msgid "Activate colorscheme %s"
-msgstr "Syntax colour scheme to use:"
+msgstr "Activate colourscheme %s"
 
 #: src/dialogs.c:115
 msgid "gtranslator -- open po file"
@@ -105,7 +102,7 @@ msgstr ""
 
 #: src/dialogs.c:233
 msgid "Don't save"
-msgstr ""
+msgstr "Don't save"
 
 #: src/dialogs.c:277
 msgid "gtranslator -- import po file"
@@ -141,7 +138,6 @@ msgid "Find in the po file"
 msgstr "Find in the .po file"
 
 #: src/dialogs.c:690
-#, fuzzy
 msgid "Enter search string:"
 msgstr "Enter search string:"
 
@@ -150,7 +146,6 @@ msgid "Case sensitive"
 msgstr "Case-sensitive"
 
 #: src/dialogs.c:700
-#, fuzzy
 msgid "Find in:"
 msgstr "Find in:"
 
@@ -158,11 +153,11 @@ msgstr "Find in:"
 msgid "Comments"
 msgstr "Comments"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
+#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:101
 msgid "English"
 msgstr "English"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
+#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:263
 msgid "Translation"
 msgstr "Translation"
 
@@ -172,7 +167,7 @@ msgstr "Translation"
 #.
 #: src/dialogs.c:721
 msgid "Ignore hotkeys"
-msgstr ""
+msgstr "Ignore hotkeys"
 
 #: src/dialogs.c:814
 msgid "gtranslator -- replace"
@@ -198,21 +193,15 @@ msgstr "Replace string:"
 msgid "Replace in:"
 msgstr "Replace in:"
 
-#: src/dialogs.c:895
-#, fuzzy
+#: src/dialogs.c:902
 msgid "Please enter a string to replace!"
-msgstr "Please enter a search string"
+msgstr "Please enter a string to replace!"
 
-#: src/dialogs.c:903
-#, fuzzy
-msgid "Please enter a string to replace with!"
-msgstr "Please enter a search string"
-
-#: src/dialogs.c:945
+#: src/dialogs.c:953
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "An error occurred while executing msgfmt:\n"
 
-#: src/dialogs.c:986
+#: src/dialogs.c:994
 #, c-format
 msgid ""
 "The file\n"
@@ -225,8 +214,17 @@ msgid ""
 "\n"
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
+"The file\n"
+"\n"
+"   %s\n"
+"\n"
+"is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling\n"
+"this file currently to re-gain access to this file.\n"
+"\n"
+"Shall fool gtranslator open this file anyway ?"
 
-#: src/dialogs.c:1027
+#: src/dialogs.c:1035
 #, c-format
 msgid ""
 "File %s\n"
@@ -235,24 +233,23 @@ msgstr ""
 "File %s\n"
 "changed. Revert to saved copy?"
 
-#: src/dialogs.c:1059
+#: src/dialogs.c:1064
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator - open from URI"
 
-#: src/dialogs.c:1071
+#: src/dialogs.c:1076
 msgid "Enter URI:"
 msgstr "Enter URI:"
 
-#: src/dialogs.c:1107
+#: src/dialogs.c:1112
 msgid "No URI given!"
 msgstr "No URI given."
 
-#: src/dialogs.c:1122
+#: src/dialogs.c:1127
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "No supported URI protocol (eg. \"ftp://\") given."
 
-#: src/dialogs.c:1130
-#, fuzzy
+#: src/dialogs.c:1135
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -266,26 +263,26 @@ msgid ""
 "http://www.DOMAIN.COM/PO-FILE"
 msgstr ""
 "URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs - you can\n"
-"use them to open remote .po files hosted on servers with standard protocols\n"
+"The standard Internet addresses (URLs) are also URIs -- you can\n"
+"use them to open remote po files lying on servers with standard protocols\n"
 "like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
 "Some example URIs for clarification (these ones are supported):\n"
-":\n"
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
 "ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"file:///<PO-FILE>"
+"\n"
+"file:///<PO-FILE> or\n"
+"http://www.DOMAIN.COM/PO-FILE"
 
-#: src/dialogs.c:1169
-#, fuzzy, c-format
+#: src/dialogs.c:1174
+#, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
 "It was saved by gtranslator before gtranslator last closed\n"
 "and may contain your hard work!\n"
 msgstr ""
 "Open recovery file for `%s'?\n"
-"It was saved before gtranslator last closed\n"
+"It was saved by gtranslator before gtranslator last closed\n"
 "and may contain your hard work!\n"
-"Saying \"No\" will delete the crash recovery file."
 
 #.
 #. * Translators: All this is about recovering a po file after
@@ -293,87 +290,81 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1181
+#: src/dialogs.c:1186
 msgid "Postpone decision"
-msgstr ""
+msgstr "Postpone decision"
 
-#: src/dialogs.c:1183
+#: src/dialogs.c:1188
 msgid "Ignore recovery file"
-msgstr ""
+msgstr "Ignore recovery file"
 
-#: src/dialogs.c:1185
-#, fuzzy
+#: src/dialogs.c:1190
 msgid "Recover file"
-msgstr "Recen_t files"
+msgstr "Recover file"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1244
-#, fuzzy
+#: src/dialogs.c:1249
 msgid "Here you can query existing translations from your learn buffer."
-msgstr "Query existing gettext domains for a translation."
+msgstr "Here you can query existing translations from your learn buffer."
 
-#: src/dialogs.c:1247
-#, fuzzy
+#: src/dialogs.c:1252
 msgid "gtranslator -- query your personal learn buffer"
-msgstr "gtranslator -export .po file"
+msgstr "gtranslator -- query your personal learn buffer"
 
-#: src/dialogs.c:1251 src/menus.c:360
+#: src/dialogs.c:1256 src/menus.c:360
 msgid "Query"
 msgstr "Query"
 
-#: src/dialogs.c:1252
+#: src/dialogs.c:1257
 msgid "Query message content"
-msgstr ""
+msgstr "Query message content"
 
-#: src/dialogs.c:1262
+#: src/dialogs.c:1267
 msgid "Query string:"
 msgstr "Query string:"
 
-#: src/dialogs.c:1300
+#: src/dialogs.c:1305
 msgid "No query string given!"
 msgstr "No query string entered."
 
-#: src/dialogs.c:1322
-#, fuzzy
+#: src/dialogs.c:1327
 msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr "No result found for your query."
+msgstr "Couldn't find any result for the query in your learn buffer!"
 
-#: src/dialogs.c:1334
-#, fuzzy, c-format
+#: src/dialogs.c:1339
+#, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
-"Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
+"Found \"%s\" as a translation for \"%s\".\n"
 "Would you like to insert it into the translation?"
 
 #.
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1404
+#: src/dialogs.c:1409
 msgid "Query's result translation is already there!"
 msgstr "Query's result translation is already there."
 
-#: src/dialogs.c:1436
-#, fuzzy
+#: src/dialogs.c:1441
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
 msgstr ""
-"Should gtranslator autotranslate all missing strings (if possible)\n"
-"from your default query domain (and your personal learn buffer)?"
+"Should gtranslator autotranslate the file using information\n"
+"from your personal learn buffer?"
 
-#: src/dialogs.c:1472 src/dialogs.c:1500
-#, fuzzy
+#: src/dialogs.c:1477 src/dialogs.c:1505
 msgid "gtranslator -- add bookmark with comment?"
-msgstr "gtranslator - edit comment"
+msgstr "gtranslator -- add bookmark with comment?"
 
-#: src/dialogs.c:1492
+#: src/dialogs.c:1497
 msgid "Comment for the bookmark:"
-msgstr ""
+msgstr "Comment for the bookmark:"
 
 #: src/find.c:217
 msgid "Please enter a search string"
@@ -388,52 +379,56 @@ msgstr ""
 "Could not find\n"
 "\"%s\""
 
-#: src/gui.c:199
+#: src/gui.c:182
 msgid "Edit comment"
 msgstr "Edit comment"
 
-#: src/gui.c:501
+#: src/gui.c:493
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ %i Fuzzy left ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ %i Fuzzy left ]"
+msgstr[1] "%s [ %i Fuzzy left ]"
 
-#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
+#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
-#: src/gui.c:505
+#: src/gui.c:497
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ No fuzzy left ]"
 
-#: src/gui.c:513
+#: src/gui.c:505
 msgid "Sticky (Message & translation are the same)"
-msgstr ""
+msgstr "Sticky (Message & translation are the same)"
 
-#: src/gui.c:515 src/messages-table.c:323
+#: src/gui.c:507 src/messages-table.c:332
 msgid "Translated"
 msgstr "Translated"
 
-#: src/gui.c:524
+#: src/gui.c:516
 #, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ %i Untranslated left ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ %i Untranslated left ]"
+msgstr[1] "%s [ %i Untranslated left ]"
 
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
+#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
 msgid "Untranslated"
 msgstr "Untranslated"
 
-#: src/gui.c:526
+#: src/gui.c:518
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ No untranslated left ]"
 
-#: src/gui.c:545
-#, fuzzy, c-format
+#: src/gui.c:537
+#, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "Message %d / %d / Status: %s"
+msgstr "Message %d / %d / Status: %s (Message contains plural forms)"
 
-#: src/gui.c:549
+#: src/gui.c:541
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Message %d / %d / Status: %s"
@@ -464,7 +459,7 @@ msgstr ".po file revision date:"
 
 #: src/header_stuff.c:559
 msgid "Report message string bugs to:"
-msgstr ""
+msgstr "Report message string bugs to:"
 
 #: src/header_stuff.c:572
 msgid "Generator:"
@@ -475,7 +470,6 @@ msgid "Project"
 msgstr "Project"
 
 #: src/header_stuff.c:582
-#, fuzzy
 msgid "Use my options to complete the following entries:"
 msgstr "Use my options to complete the following entries:"
 
@@ -492,9 +486,8 @@ msgid "Language:"
 msgstr "Language:"
 
 #: src/header_stuff.c:615 src/prefs.c:512
-#, fuzzy
 msgid "Language group's email:"
-msgstr "Language group's e-mail:"
+msgstr "Language group's email:"
 
 #: src/header_stuff.c:622 src/prefs.c:518
 msgid "Charset:"
@@ -522,284 +515,285 @@ msgid "Afrikaans"
 msgstr "Afrikaans"
 
 #: src/languages.c:41
+msgid "Albanian"
+msgstr "Albanian"
+
+#: src/languages.c:45
 msgid "Arabic"
 msgstr "Arabic"
 
-#: src/languages.c:45
+#: src/languages.c:49
 msgid "Azerbaijani Turkish"
 msgstr "Azerbaijani Turkish"
 
-#: src/languages.c:49
+#: src/languages.c:53
 msgid "Basque"
 msgstr "Basque"
 
-#: src/languages.c:53
+#: src/languages.c:57
 msgid "Belorussian"
 msgstr "Bielorussian"
 
-#: src/languages.c:57
-msgid "Bengali"
-msgstr ""
-
 #: src/languages.c:61
+msgid "Bengali"
+msgstr "Bengali"
+
+#: src/languages.c:65
 msgid "Britton"
 msgstr "Breton"
 
-#: src/languages.c:65
+#: src/languages.c:69
 msgid "Bulgarian"
 msgstr "Bulgarian"
 
-#: src/languages.c:69
+#: src/languages.c:73
 msgid "Catalan"
 msgstr "Catalan"
 
-#: src/languages.c:73
+#: src/languages.c:77
 msgid "Chinese/Simplified"
 msgstr "Simplified Chinese"
 
-#: src/languages.c:77
+#: src/languages.c:81
 msgid "Chinese/Traditional"
 msgstr "Traditional Chinese"
 
-#: src/languages.c:81
+#: src/languages.c:85
 msgid "Croatian"
 msgstr "Croatian"
 
-#: src/languages.c:85
+#: src/languages.c:89
 msgid "Czech"
 msgstr "Czech"
 
-#: src/languages.c:89
+#: src/languages.c:93
 msgid "Danish"
 msgstr "Danish"
 
-#: src/languages.c:93
+#: src/languages.c:97
 msgid "Dutch"
 msgstr "Dutch"
 
-#: src/languages.c:101
+#: src/languages.c:105
 msgid "English/Canada"
 msgstr "Candian English"
 
-#: src/languages.c:105
+#: src/languages.c:109
 msgid "English/GB"
 msgstr "British English"
 
-#: src/languages.c:109
+#: src/languages.c:113
 msgid "English/USA"
 msgstr "US English"
 
-#: src/languages.c:113
+#: src/languages.c:117
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: src/languages.c:117
+#: src/languages.c:121
 msgid "Estonian"
 msgstr "Estonian"
 
-#: src/languages.c:121
-#, fuzzy
-msgid "Persian"
-msgstr "Bielorussian"
-
 #: src/languages.c:125
+msgid "Persian"
+msgstr "Persian"
+
+#: src/languages.c:129
 msgid "Finnish"
 msgstr "Finnish"
 
-#: src/languages.c:129
+#: src/languages.c:133
 msgid "French"
 msgstr "French"
 
-#: src/languages.c:133
+#: src/languages.c:137
 msgid "Galician"
 msgstr "Galician"
 
-#: src/languages.c:137
+#: src/languages.c:141
 msgid "German"
 msgstr "German"
 
-#: src/languages.c:141
+#: src/languages.c:145
 msgid "Greek"
 msgstr "Greek"
 
-#: src/languages.c:145
-msgid "Gujarati"
-msgstr ""
-
 #: src/languages.c:149
-#, fuzzy
-msgid "Hindi"
-msgstr "Find"
+msgid "Gujarati"
+msgstr "Gujarati"
 
 #: src/languages.c:153
+msgid "Hindi"
+msgstr "Hindi"
+
+#: src/languages.c:157
 msgid "Hungarian"
 msgstr "Hungarian"
 
-#: src/languages.c:157
-msgid "Icelandic"
-msgstr ""
-
 #: src/languages.c:161
+msgid "Icelandic"
+msgstr "Icelandic"
+
+#: src/languages.c:165
 msgid "Indonesian"
 msgstr "Indonesian"
 
-#: src/languages.c:165
+#: src/languages.c:169
 msgid "Italian"
 msgstr "Italian"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Irish"
 msgstr "Irish"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Japanese"
 msgstr "Japanese"
 
-#: src/languages.c:177
-msgid "Kannada"
-msgstr ""
-
 #: src/languages.c:181
+msgid "Kannada"
+msgstr "Kannada"
+
+#: src/languages.c:185
 msgid "Korean"
 msgstr "Korean"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Latvian"
 msgstr "Latvian"
 
-#: src/languages.c:189
+#: src/languages.c:193
 msgid "Lithuanian"
 msgstr "Lithuanian"
 
-#: src/languages.c:193
+#: src/languages.c:197
 msgid "Malay/Bahasa Melayu"
 msgstr "Malay/Bahasa Melayu"
 
-#: src/languages.c:197
+#: src/languages.c:201
 msgid "Maltese"
 msgstr "Maltese"
 
-#: src/languages.c:201
-msgid "Marathi"
-msgstr ""
-
 #: src/languages.c:205
+msgid "Marathi"
+msgstr "Marathi"
+
+#: src/languages.c:209
 msgid "Norwegian/Bokmaal"
 msgstr "Norwegian/Bokmaal"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Norwegian/Nynorsk"
 msgstr "Norwegian/Nynorsk"
 
-#: src/languages.c:213
-msgid "Punjabi"
-msgstr ""
-
 #: src/languages.c:217
+msgid "Punjabi"
+msgstr "Punjabi"
+
+#: src/languages.c:221
 msgid "Polish"
 msgstr "Polish"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Portuguese"
 msgstr "Native Portuguese"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Portuguese/Brazil"
 msgstr "Brazilian Portuguese"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Romanian"
 msgstr "Romanian"
 
-#: src/languages.c:233
+#: src/languages.c:237
 msgid "Russian"
 msgstr "Russian"
 
-#: src/languages.c:237
+#: src/languages.c:241
 msgid "Serbian/Cyrillic"
 msgstr "Serbian/Cyrillic"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Serbian/Latin"
 msgstr "Serbian/Latin"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Slovak"
 msgstr "Slovak"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Slovenian"
 msgstr "Slovenian"
 
-#: src/languages.c:253
+#: src/languages.c:257
 msgid "Spanish"
 msgstr "Spanish"
 
-#: src/languages.c:257
+#: src/languages.c:261
 msgid "Spanish/Spain"
 msgstr "Native Spanish"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Spanish/Mexico"
 msgstr "Mexican Spanish"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Swedish"
 msgstr "Swedish"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Tamil"
 msgstr "Tamil"
 
-#: src/languages.c:273
-msgid "Telugu"
-msgstr ""
-
 #: src/languages.c:277
+msgid "Telugu"
+msgstr "Telugu"
+
+#: src/languages.c:281
 msgid "Thai"
 msgstr "Thai"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Turkish"
 msgstr "Turkish"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Ukrainian"
 msgstr "Ukrainian"
 
-#: src/languages.c:289
+#: src/languages.c:293
 msgid "Uzbekian"
 msgstr "Uzbekian"
 
-#: src/languages.c:293
+#: src/languages.c:297
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
-#: src/languages.c:297
+#: src/languages.c:301
 msgid "Walloon"
 msgstr "Walloon"
 
-#: src/languages.c:301
+#: src/languages.c:305
 msgid "Welsh"
 msgstr "Welsh"
 
 #: src/learn.c:379
-#, fuzzy
 msgid "gtranslator learn buffer statistics:"
-msgstr "gtranslator build information and specification:"
+msgstr "gtranslator learn buffer statistics:"
 
 #: src/learn.c:382
 #, c-format
 msgid "Learn buffer filename: `%s`"
-msgstr ""
+msgstr "Learn buffer filename: `%s`"
 
 #.
 #. * Translators: This means the encoding of the learn buffer (XML) file.
 #.
 #: src/learn.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "Encoding: `%s'"
-msgstr "Encoding:"
+msgstr "Encoding: `%s'"
 
 #.
 #. * Translators: "Serial number" of the learn buffer - means # of file updates.
@@ -807,7 +801,7 @@ msgstr "Encoding:"
 #: src/learn.c:394
 #, c-format
 msgid "Serial: `%i'"
-msgstr ""
+msgstr "Serial: `%i'"
 
 #.
 #. * Translators: That's the number of message entries in the learn buffer.
@@ -815,29 +809,27 @@ msgstr ""
 #: src/learn.c:400
 #, c-format
 msgid "Number of entries: `%i'"
-msgstr ""
+msgstr "Number of entries: `%i'"
 
 #: src/main.c:85
-#, fuzzy
 msgid "Auto translate the po file"
-msgstr "gtranslator - open .po file"
+msgstr "Auto translate the po file"
 
 #: src/main.c:85 src/main.c:101
 msgid "FILENAME"
 msgstr "FILENAME"
 
 #: src/main.c:89
-#, fuzzy
 msgid "Show build specifications"
-msgstr "Show build information and specification"
+msgstr "Show build specifications"
 
 #: src/main.c:93
 msgid "Export learn buffer to a plain po file"
-msgstr ""
+msgstr "Export learn buffer to a plain po file"
 
 #: src/main.c:93
 msgid "PO_FILE"
-msgstr ""
+msgstr "PO_FILE"
 
 #: src/main.c:97
 msgid "Specify main window geometry"
@@ -848,13 +840,12 @@ msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
 #: src/main.c:101
-#, fuzzy
 msgid "Learn the file completely"
-msgstr "Learn the file completely, then exit"
+msgstr "Learn the file completely"
 
 #: src/main.c:105
 msgid "Show learn buffer statistics"
-msgstr ""
+msgstr "Show learn buffer statistics"
 
 #: src/main.c:148
 #, c-format
@@ -870,9 +861,8 @@ msgid "Version and build date:"
 msgstr "Version and build date:"
 
 #: src/main.c:184
-#, fuzzy
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-msgstr "Build GLib/Gtk+/GNOME versions:"
+msgstr "Build GLib / Gtk+ / GNOME / XML versions:"
 
 #: src/main.c:186
 msgid "Colorschemes directory:"
@@ -891,18 +881,17 @@ msgid "Own locale directory:"
 msgstr "Own locale directory:"
 
 #: src/main.c:194
-#, fuzzy
 msgid "Default learn buffer file location:"
-msgstr "Default query domain:"
+msgstr "Default learn buffer file location:"
 
 #.
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
 #: src/main.c:459
-#, fuzzy, c-format
+#, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
-msgstr "Successfully Learned '%s'.\n"
+msgstr "Learned file `%s' successfully for your learn buffer.\n"
 
 #.
 #. * Give us another small status feedback about the export.
@@ -910,12 +899,11 @@ msgstr "Successfully Learned '%s'.\n"
 #: src/main.c:501
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
-msgstr ""
+msgstr "Exported learn buffer to file `%s'.\n"
 
 #: src/menus.c:48
-#, fuzzy
 msgid "_Go"
-msgstr "Go"
+msgstr "_Go"
 
 #: src/menus.c:58
 msgid "_Compile"
@@ -935,23 +923,19 @@ msgstr "Update the .po file"
 
 #: src/menus.c:73
 msgid "Add bookmark"
-msgstr ""
+msgstr "Add bookmark"
 
 #: src/menus.c:74
-#, fuzzy
 msgid "Add a bookmark for this message in this po file"
-msgstr "Keep obsolote messages in .po files"
+msgstr "Add a bookmark for this message in this po file"
 
 #: src/menus.c:81
 msgid "Aut_otranslate..."
 msgstr "Aut_otranslate"
 
 #: src/menus.c:82
-#, fuzzy
 msgid "Autotranslate the file with information from your learn buffer"
-msgstr ""
-"Automatically complete missing translations from default query domain/learn "
-"buffer"
+msgstr "Autotranslate the file with information from your learn buffer"
 
 #: src/menus.c:89
 msgid "Remove all translations..."
@@ -1002,32 +986,28 @@ msgid "_Header..."
 msgstr "_Header"
 
 #: src/menus.c:162
-#, fuzzy
 msgid "Edit po file header"
-msgstr "Edit the header"
+msgstr "Edit po file header"
 
 #: src/menus.c:169
-#, fuzzy
 msgid "C_omment..."
-msgstr "Comment"
+msgstr "C_omment..."
 
 #: src/menus.c:170
-#, fuzzy
 msgid "Edit message comment"
-msgstr "Edit comment"
+msgstr "Edit message comment"
 
 #: src/menus.c:177
 msgid "Copy _message -> translation"
-msgstr ""
+msgstr "Copy _message -> translation"
 
 #: src/menus.c:178
 msgid "Copy the original message contents and paste them as translation"
-msgstr ""
+msgstr "Copy the original message contents and paste them as translation"
 
 #: src/menus.c:185
-#, fuzzy
 msgid "Fu_zzy"
-msgstr "Fuzzy"
+msgstr "Fu_zzy"
 
 #: src/menus.c:186
 msgid "Toggle fuzzy status of a message"
@@ -1046,7 +1026,6 @@ msgid "_Back"
 msgstr "_Previous"
 
 #: src/menus.c:208 src/menus.c:321
-#, fuzzy
 msgid "Move back one message"
 msgstr "Move back one message"
 
@@ -1055,9 +1034,8 @@ msgid "_Next"
 msgstr "_Next"
 
 #: src/menus.c:216 src/menus.c:326
-#, fuzzy
 msgid "Move forward one message"
-msgstr "View C formats in the message"
+msgstr "Move forward one message"
 
 #: src/menus.c:222
 msgid "_Last"
@@ -1093,12 +1071,11 @@ msgstr "Go to next untranslated message"
 
 #: src/menus.c:255
 msgid "_Bookmarks"
-msgstr ""
+msgstr "_Bookmarks"
 
 #: src/menus.c:256
-#, fuzzy
 msgid "_Colorschemes"
-msgstr "Colourscheme directory:"
+msgstr "_Colourschemes"
 
 #: src/menus.c:270
 msgid "gtranslator _website"
@@ -1213,11 +1190,10 @@ msgid "All messages seem to be translated."
 msgstr "All messages translated."
 
 #: src/message.c:328
-#, fuzzy
 msgid "gtranslator -- edit plural forms of message translation"
-msgstr "gtranslator -- remove all translations from file"
+msgstr "gtranslator -- edit plural forms of message translation"
 
-#: src/messages-table.c:243
+#: src/messages-table.c:252
 msgid "Original"
 msgstr "Original"
 
@@ -1245,7 +1221,7 @@ msgstr "Couldn't open %s'd gettext file '%s'."
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Couldn't open compressed .po file '%s'."
 
-#: src/parse.c:483
+#: src/parse.c:487
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1255,14 +1231,14 @@ msgstr ""
 "Error in file '%s' at line %d.\n"
 "Please check the file and try again."
 
-#: src/parse.c:538
+#: src/parse.c:542
 #, c-format
 msgid ""
 "The file is empty:\n"
 "%s"
 msgstr "File '%s' is empty."
 
-#: src/parse.c:560
+#: src/parse.c:564
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "File '%s' does not exist."
@@ -1270,45 +1246,51 @@ msgstr "File '%s' does not exist."
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:692
+#: src/parse.c:696
 msgid "Header record not found - defaulting from preferences"
-msgstr ""
+msgstr "Header record not found - defaulting from preferences"
 
-#: src/parse.c:708
+#: src/parse.c:712
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator - %s"
 
-#: src/parse.c:920
-#, fuzzy, c-format
+#: src/parse.c:924
+#, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
 "Your file should likely be named '%s.po'."
 msgstr ""
-"You are saving a file with a .pot extension\n"
-".pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'"
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
 
-#: src/parse.c:982
+#: src/parse.c:986
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Could not open file '%s' for writing."
 
-#: src/parse.c:1034
+#: src/parse.c:1038
 #, c-format
 msgid ""
 "File %s\n"
+"contains %d fuzzy message"
+msgid_plural ""
+"File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
+"File %s\n"
+"contains %d fuzzy message"
+msgstr[1] ""
 "File %s\n"
 "contains %d fuzzy messages"
 
-#: src/parse.c:1303
+#: src/parse.c:1310
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Sorry, msgfmt is unavailable on your system."
 
-#: src/parse.c:1338
+#: src/parse.c:1345
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1322,9 +1304,8 @@ msgid "Couldn't generate the current date!"
 msgstr "Could not generate the current date."
 
 #: src/prefs.c:212
-#, fuzzy
 msgid "Hotkey indicating character:"
-msgstr "Use special character to indicate free space"
+msgstr "Hotkey indicating character:"
 
 #: src/prefs.c:332
 msgid "gtranslator -- options"
@@ -1334,78 +1315,67 @@ msgstr "gtranslator - options"
 #. * Files page
 #.
 #: src/prefs.c:350
-#, fuzzy
 msgid "Files"
-msgstr "Views"
+msgstr "Files"
 
 #: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
-#, fuzzy
 msgid "General"
-msgstr "Generator:"
+msgstr "General"
 
 #: src/prefs.c:352
-#, fuzzy
 msgid "Warn if po file contains fuzzy translations"
-msgstr "Warn me if the .po file contains fuzzy translations."
+msgstr "Warn if po file contains fuzzy translations"
 
 #: src/prefs.c:356
-#, fuzzy
 msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Delete compiled files (eg. 'project.gmo')"
+msgstr "Delete compiled files (e.g. \"project.gmo\")"
 
 #: src/prefs.c:360
-#, fuzzy
 msgid "Autosave"
 msgstr "Autosave"
 
 #: src/prefs.c:361
-#, fuzzy
 msgid "Automatically save at regular intervals"
-msgstr "Go to next untranslated message"
+msgstr "Automatically save at regular intervals"
 
 #: src/prefs.c:369
-#, fuzzy
 msgid "Autosave interval:"
-msgstr "Autosave suffix:"
+msgstr "Autosave interval:"
 
 #: src/prefs.c:370
-#, fuzzy
 msgid "Append a suffix to automatically saved files"
-msgstr "Append a special suffix to Autosave files"
+msgstr "Append a suffix to automatically saved files"
 
 #: src/prefs.c:377
 msgid "Suffix:"
-msgstr ""
+msgstr "Suffix:"
 
 #: src/prefs.c:378
-#, fuzzy
 msgid "Recent files"
-msgstr "Recen_t files"
+msgstr "Recent files"
 
 #: src/prefs.c:386
 msgid "Maximum number of entries in the recent files list:"
-msgstr ""
+msgstr "Maximum number of entries in the recent files list:"
 
 #: src/prefs.c:387
-#, fuzzy
 msgid "Check recent files before showing in recent files list"
-msgstr "Check recent files before showing in list"
+msgstr "Check recent files before showing in recent files list"
 
 #.
 #. * Editor page
 #.
 #: src/prefs.c:395
-#, fuzzy
 msgid "Editor"
-msgstr "Exit"
+msgstr "Editor"
 
 #: src/prefs.c:398
 msgid "Text display"
-msgstr ""
+msgstr "Text display"
 
 #: src/prefs.c:399
 msgid "Highlight syntax of the translation message"
-msgstr ""
+msgstr "Highlight syntax of the translation message"
 
 #: src/prefs.c:410
 msgid "Syntax color scheme to use:"
@@ -1413,12 +1383,11 @@ msgstr "Syntax colour scheme to use:"
 
 #: src/prefs.c:411
 msgid "Use special character to indicate white space"
-msgstr ""
+msgstr "Use special character to indicate white space"
 
 #: src/prefs.c:419
-#, fuzzy
 msgid "Apply own fonts"
-msgstr "Apply own fonts:"
+msgstr "Apply own fonts"
 
 #: src/prefs.c:423
 msgid "gtranslator -- font selection/msgid font"
@@ -1453,49 +1422,41 @@ msgid "gtranslator -- background color"
 msgstr "gtranslator - background colour"
 
 #: src/prefs.c:446
-#, fuzzy
 msgid "Background:"
-msgstr "Background colour:"
+msgstr "Background:"
 
 #: src/prefs.c:447
-#, fuzzy
 msgid "Contents"
-msgstr "Comments"
+msgstr "Contents"
 
 #: src/prefs.c:448
-#, fuzzy
 msgid "Remove fuzzy status if message is changed"
-msgstr "Remove fuzzy status if message changed"
+msgstr "Remove fuzzy status if message is changed"
 
 #: src/prefs.c:452
-#, fuzzy
 msgid "Keep obsolete messages in the po files"
-msgstr "Keep obsolote messages in .po files"
+msgstr "Keep obsolete messages in the po files"
 
 #: src/prefs.c:456
-#, fuzzy
 msgid "Spell checking"
-msgstr "Instant spell checking"
+msgstr "Spell checking"
 
 #: src/prefs.c:457
 msgid "Instant spell checking"
 msgstr "Instant spell checking"
 
 #: src/prefs.c:463
-#, fuzzy
 msgid "Use special dictionary:"
-msgstr "Use special dictionary"
+msgstr "Use special dictionary:"
 
 #.
 #. * PO header page
 #.
 #: src/prefs.c:481
-#, fuzzy
 msgid "PO header"
-msgstr "Header"
+msgstr "PO header"
 
 #: src/prefs.c:484
-#, fuzzy
 msgid "Personal Information"
 msgstr "Personal Information"
 
@@ -1504,9 +1465,8 @@ msgid "Author's name:"
 msgstr "Author's name:"
 
 #: src/prefs.c:492
-#, fuzzy
 msgid "Author's email:"
-msgstr "Author's e-mail:"
+msgstr "Author's email:"
 
 #: src/prefs.c:493
 msgid "Language settings"
@@ -1521,7 +1481,7 @@ msgstr "Language code:"
 #.
 #: src/prefs.c:528
 msgid "Functionality"
-msgstr ""
+msgstr "Functionality"
 
 #: src/prefs.c:531
 msgid "Enable the functionality to update a po file from within gtranslator"
@@ -1533,35 +1493,31 @@ msgstr "Enable 'remove all translations from .po file' function"
 
 #: src/prefs.c:539
 msgid "Show instant comment view in main pane"
-msgstr ""
+msgstr "Show instant comment view in main pane"
 
 #: src/prefs.c:543
 msgid "Display special dialog for messages with plural forms"
-msgstr ""
+msgstr "Display special dialogue for messages with plural forms"
 
 #: src/prefs.c:547
-#, fuzzy
 msgid "Save geometry on exit and restore it on startup"
-msgstr "Save window geometry"
+msgstr "Save geometry on exit and restore it on startup"
 
 #: src/prefs.c:551
 msgid "Messages table"
 msgstr "Message table"
 
 #: src/prefs.c:552
-#, fuzzy
 msgid "Show the messages table (requires restart)"
-msgstr "Show the message table (requires gtranslator restart)"
+msgstr "Show the messages table (requires restart)"
 
 #: src/prefs.c:556
-#, fuzzy
 msgid "Collapse all entries by default"
-msgstr "Collapse translated entries by default"
+msgstr "Collapse all entries by default"
 
 #: src/prefs.c:560
-#, fuzzy
 msgid "Use own colors for messages table groups"
-msgstr "User defined colours for message table groups"
+msgstr "Use own colours for messages table groups"
 
 #: src/prefs.c:569
 msgid "Fuzzy entries color:"
@@ -1579,9 +1535,8 @@ msgstr "Translated entries colour:"
 #. * Autotranslate page
 #.
 #: src/prefs.c:586
-#, fuzzy
 msgid "Autotranslation"
-msgstr "Translation"
+msgstr "Autotranslation"
 
 #: src/prefs.c:588
 msgid ""
@@ -1591,38 +1546,36 @@ msgstr ""
 "Also query the personal learn buffer when autotranslating missing entries"
 
 #: src/prefs.c:592
-#, fuzzy
 msgid "Automatically learn a newly translated message"
-msgstr "Go to next untranslated message"
+msgstr "Automatically learn a newly translated message"
 
 #: src/prefs.c:596
 msgid "Fuzzy matching"
-msgstr ""
+msgstr "Fuzzy matching"
 
 #: src/prefs.c:603
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
+msgstr "Use \"fuzzy\" matching routines for learn buffer queries"
 
 #: src/prefs.c:610
 msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr ""
+msgstr "Minimal required similarity persentage for fuzzy queries:"
 
-#: src/prefs.c:655
+#: src/prefs.c:659
 msgid "Please enter your name!"
 msgstr "Please enter your name"
 
-#: src/prefs.c:669
+#: src/prefs.c:679
 msgid "Please enter your EMail address!"
 msgstr "Please enter your e-mail address."
 
-#: src/prefs.c:682
+#: src/prefs.c:699
 msgid "Please enter a valid EMail address!"
 msgstr "Please enter a valid e-mail address."
 
-#: src/replace.c:171
-#, fuzzy
+#: src/replace.c:175
 msgid "No replacements made!"
-msgstr "No replacements made."
+msgstr "No replacements made!"
 
 #.
 #. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
@@ -1633,7 +1586,7 @@ msgstr "No replacements made."
 #.
 #: src/runtime-config.c:72
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #.
 #. * Translators: this character is used if the middle dot
@@ -1641,7 +1594,7 @@ msgstr ""
 #.
 #: src/runtime-config.c:88 src/runtime-config.c:93
 msgid "^"
-msgstr ""
+msgstr "^"
 
 #: src/save.c:116
 #, c-format
@@ -1688,9 +1641,8 @@ msgid "No POTFILES.in found!"
 msgstr "POTFILES.in not found."
 
 #: src/update.c:113
-#, fuzzy
 msgid "Po file is uptodate."
-msgstr ".po file revision date:"
+msgstr "Po file is uptodate."
 
 #: src/update.c:120
 msgid "The update was successfull."
@@ -1710,7 +1662,7 @@ msgstr "Cannot create directory '%s'."
 #.
 #: src/utils.c:794
 msgid "iso-8859-1"
-msgstr ""
+msgstr "iso-8859-1"
 
 #: src/utils_gui.c:144
 #, c-format
@@ -1720,28 +1672,28 @@ msgstr "The geometry string \"%s\" could not be parsed."
 #: src/utils_gui.c:360
 #, c-format
 msgid "You are not permitted to access file '%s'."
-msgstr ""
+msgstr "You are not permitted to access file '%s'."
 
 #: src/utils_gui.c:378
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
 "Please save a new copy of it to a place of your choice and get write\n"
 "permission for it."
 msgstr ""
 "You do not have permission to modify file '%s'.\n"
-"Please save a new copy in a directory where\n"
-"you have write permission."
+"Please save a new copy of it to a place of your choice and get write\n"
+"permission for it."
 
 #: src/utils_gui.c:467
-#, fuzzy, c-format
+#, c-format
 msgid "The necessary decompression program `%s' is not installed!"
-msgstr "The '%s' decompression program is not installed."
+msgstr "The necessary decompression program `%s' is not installed!"
 
 #: src/utils_gui.c:472
-#, fuzzy, c-format
+#, c-format
 msgid "The necessary compression program `%s' is not installed!"
-msgstr "The '%s' compression program is not installed."
+msgstr "The necessary compression program `%s' is not installed!"
 
 #: src/vfs-handle.c:121
 #, c-format
@@ -1776,6 +1728,10 @@ msgstr "No address found for host '%s~'."
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Transfer interrupted."
+
+#, fuzzy
+#~ msgid "Please enter a string to replace with!"
+#~ msgstr "Please enter a search string"
 
 #~ msgid "Both"
 #~ msgstr "Both"
