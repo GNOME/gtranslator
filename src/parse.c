@@ -902,7 +902,7 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 static void remove_translation(gpointer message, gpointer useless)
 {
 	GtrMsg 	*msg=GTR_MSG(message);
-	gboolean internal_change;
+	gboolean internal_change=FALSE;
 	
 	g_return_if_fail(msg!=NULL);
 	g_return_if_fail(msg->msgid!=NULL);

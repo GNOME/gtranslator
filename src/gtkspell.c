@@ -60,7 +60,7 @@ static GdkColor highlight = { 0, 0, 0, 0 };
 
 static void entry_insert_cb(GtkText *gtktext, 
 		gchar *newtext, guint len, guint *ppos, gpointer d);
-static void set_up_signal();
+static void set_up_signal(void);
 
 int gtkspell_running() {
 	return (spell_pid > 0);
@@ -647,7 +647,7 @@ static void sigchld(int param) {
 	}
 }
 
-static void set_up_signal() {
+static void set_up_signal(void) {
 	struct sigaction sigact;
 	memset(&sigact, 0, sizeof(struct sigaction));
 

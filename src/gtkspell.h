@@ -24,7 +24,6 @@
 /* PLEASE NOTE that this API is unstable and subject to change. */
 #define GTKSPELL_VERSION "0.3.2"
 
-extern int gtkspell_start(char *path, char *args[]);
 /* Spawns the spell checking program.
  *
  * Arguments:
@@ -46,14 +45,13 @@ extern int gtkspell_start(char *path, char *args[]);
  *  }
  *
  */
+int gtkspell_start(char *path, char *args[]);
 
-
-extern void gtkspell_stop();
 /* Stop the spellchecking program.
  * This kills the spell checker's process and frees memory.
  */
+void gtkspell_stop(void);
 
-extern int gtkspell_running();
 /* Is gtkspell running?
  *
  * Return:
@@ -64,8 +62,8 @@ extern int gtkspell_running();
  *  if (gtkspell_running())
  *  	printf("gtkspell is running.\n");
  */
+int gtkspell_running(void);
 
-extern void gtkspell_attach(GtkText *text);
 /* Attach GtkSpell to a GtkText Widget.
  * This enables checking as you type and the popup menu.
  *
@@ -78,28 +76,29 @@ extern void gtkspell_attach(GtkText *text);
  *  gtk_text_set_editable(GTK_TEXT(text), TRUE);
  *  gtkspell_attach(GTK_TEXT(text));
  */  
+void gtkspell_attach(GtkText *text);
 
-void gtkspell_detach(GtkText *gtktext);
 /* Detach GtkSpell from a GtkText widget.
  * 
  * Arguments:
  *  - "text" is the widget from which GtkSpell should detach.
  * 
  */ 
+void gtkspell_detach(GtkText *gtktext);
 
-void gtkspell_check_all(GtkText *gtktext);
 /* Check and highlight the misspelled words.
  * Note that the popup menu will not work unless you gtkspell_attach().
  *
  * Arguments:
  *  - "text" is the widget to check.
  */
+void gtkspell_check_all(GtkText *gtktext);
 
-void gtkspell_uncheck_all(GtkText *gtktext);
 /* Remove all of the highlighting from the widget.
  *
  * Arguments:
  *  - "text" is the widget to check.
  */
+void gtkspell_uncheck_all(GtkText *gtktext);
 
 #endif /* __gtkspell_h__ */
