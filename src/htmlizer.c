@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.net>
+ * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
  */
 
 #include "htmlizer.h"
+#include <string.h>
 
 /*
  * Returns a html'ified string of the 'original' textstring.
@@ -110,7 +111,6 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 			 case ',':
 			 case ';':
 			 case '!':
-			 case '\'':	
 			 case '?':
 				
 				string=g_string_append(string,
@@ -122,6 +122,7 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 			 * Text marker characters.
 			 */
 			 case '"':
+			 case '\'':	
 			 case '`':
 				
 				string=g_string_append(string,

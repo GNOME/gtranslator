@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.net>
+ * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
