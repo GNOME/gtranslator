@@ -28,6 +28,7 @@
 #include "learn.h"
 #include "menus.h"
 #include "message.h"
+#include "messages-table.h"
 #include "parse.h"
 #include "prefs.h"
 #include "syntax.h"
@@ -139,6 +140,9 @@ void gtranslator_message_show(GList * list_item)
 	nothing_changes = TRUE;
 	gtranslator_text_boxes_clean();
 
+	/*
+	 * Set up the comment display.
+	 */
 	gtranslator_comment_display(GTR_COMMENT(msg->comment));
 	
 	/*
@@ -304,6 +308,11 @@ void gtranslator_message_update(void)
 	 */
 	gtranslator_application_bar_update(g_list_position(po->messages, 
 		po->current));
+
+	/*
+	 * Go to the corresponding row in the messages table.
+	 */
+	gtranslator_messages_table_update_row(msg);
 }
 
 void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
@@ -342,10 +351,13 @@ void gtranslator_message_go_to(GList * to_go)
 	else if (pos == po->length - 1)
 	{
 		gtranslator_actions_enable(ACT_NEXT, ACT_LAST);
-	}	
+	}
+	
 	po->current = to_go;
 	gtranslator_message_show(po->current);
+	
 	pos = g_list_position(po->messages, po->current);
+	
 	if (pos == 0)
 	{
 		gtranslator_actions_disable(ACT_FIRST, ACT_BACK);

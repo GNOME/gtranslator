@@ -399,20 +399,22 @@ gboolean gtranslator_backend_open(gchar *filename)
 	
 	while(mybackends!=NULL)
 	{
+		GtrBackend	*be=GTR_BACKEND(mybackends->data);
+		g_return_val_if_fail(be!=NULL, FALSE);
+		g_return_val_if_fail(GTR_BACKEND(be)->info!=NULL, FALSE);
+		
 		/*
 		 * Look if the filename matches the filenames supported by the
 		 *  backend module.
 		 */
-		if(mybackends->data && GTR_BACKEND(mybackends->data)->info->filenames &&
+		if(be->info->filenames &&
 			(gtranslator_utils_stringlist_strcasecmp(
-				GTR_BACKEND(mybackends->data)->info->filenames, 
-					g_basename(filename)
-			)!=-1)) 
+				be->info->filenames, g_basename(filename))!=-1))
 		{
 			/*
 			 * Load the file with the corresponding open handle.
 			 */
-			GTR_BACKEND(mybackends->data)->open_file(filename, NULL);
+			be->open_file(filename, NULL);
 			return TRUE;
 		}
 		else
@@ -421,20 +423,19 @@ gboolean gtranslator_backend_open(gchar *filename)
 			 * Check if the filename is of a supported filetype 
 			 *  (extension) of the current backend module.
 			 */
-			while(GTR_BACKEND(mybackends->data)->info->extensions)
+			while(be->info->extensions!=NULL)
 			{
 				/*
 				 * If the extensions do match open the file
 				 *  and return TRUE.
 				 */
-				if(nautilus_istr_has_suffix(filename, 
-					GTR_BACKEND(mybackends->data)->info->extensions->data))
+				if(nautilus_istr_has_suffix(filename, be->info->extensions->data))
 				{
-					GTR_BACKEND(mybackends->data)->open_file(filename, NULL);
+					be->open_file(filename, NULL);
 					return TRUE;
 				}
 				 
-				GTR_ITER(GTR_BACKEND(mybackends->data)->info->extensions);
+				GTR_ITER(be->info->extensions);
 			}
 		}
 		

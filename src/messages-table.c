@@ -431,10 +431,15 @@ void gtranslator_messages_table_create (void)
 void gtranslator_messages_table_update_row(GtrMsg *message)
 {
 	ETreePath node=NULL;
-	
+
+	g_return_if_fail(message!=NULL);
+
 	node=g_hash_table_lookup(hash_table, message);
-	
-	e_tree_model_node_data_changed (tree_model, node);
+
+	if(node)
+	{
+		e_tree_model_node_data_changed (tree_model, node);
+	}
 }
 
 /*
@@ -444,10 +449,14 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 {
 	ETreePath node=NULL;
 	
+	g_return_if_fail(message!=NULL);
+	
 	node=g_hash_table_lookup(hash_table, message);
-	
-	e_tree_set_cursor(E_TREE(tree), node);
-	
+
+	if(node)
+	{
+		e_tree_set_cursor(E_TREE(tree), node);
+	}
 }
 
 /*

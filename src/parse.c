@@ -199,9 +199,10 @@ gboolean gtranslator_parse_core(void)
 				{
 					msgstr_ok = TRUE;
 				}
-				else
+				else if(msg->comment)
 				{
-					if(add_to_obsolete(GTR_COMMENT(msg->comment)->comment)) {
+					if(add_to_obsolete(GTR_COMMENT(msg->comment)->comment))
+					{
 						gtranslator_comment_free(&msg->comment);
 						msg->comment=NULL;
 					}

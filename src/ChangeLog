@@ -1,5 +1,14 @@
 2001-07-21  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c: Make the "gtranslator_messages_table_select|update_row"
+		more sane -- check for the message argument and operate on
+		 the ETree only if there's the ETreePath node determined.
+
+	* parse.c: Update the row contents on "gtranslator_message_update"
+		to get an updated display of the table.
+
+	* backend.c & parse.c: Some more sanity checks and assertions.
+
 	* backend.c/.h: Added "module" GModule pointer to the GtrBackend
 		structure and added it to the handling routines -- needs
 		 still much love.
