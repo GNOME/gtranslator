@@ -56,6 +56,28 @@ dnl -------------------------------------------------------------------
 AM_PATH_GTK(1.2.4)
 
 dnl -------------------------------------------------------------------
+dnl Our languages caravane has got settled here in place.( add your's )
+dnl -------------------------------------------------------------------
+ALL_LINGUAS="da de hu ja ko nl no ru sv tr uk"
+AM_GNOME_GETTEXT
+
+dnl -------------------------------------------------------------------
+dnl Get the idl parameters.
+dnl -------------------------------------------------------------------
+IDL_CFLAGS=`gnome-config --cflags idl`
+IDL_LIBS=`gnome-config --libs idl`
+AC_SUBST(IDL_CFLAGS)
+AC_SUBST(IDL_LIBS)
+
+dnl -------------------------------------------------------------------
+dnl Check for ORBit >= 0.5.1, OAF 0.3 and GConf >= 0.6
+dnl -------------------------------------------------------------------
+AM_PATH_ORBIT(0.5.1)
+AM_PATH_OAF(0.3.0)
+dnl for now it's commented out.
+dnl AM_PATH_GCONF(0.6.0)
+
+dnl -------------------------------------------------------------------
 dnl Check for libxml >= 1.8.7 and get the cflags and libs.
 dnl -------------------------------------------------------------------
 AC_PATH_PROG(XML_CONFIG, xml-config, nej)
@@ -74,27 +96,7 @@ else
 	XML_LIBS=`xml-config --libs`
 	AC_SUBST(XML_CFLAGS)
 	AC_SUBST(XML_LIBS)
-fi	
-
-dnl -------------------------------------------------------------------
-dnl Our languages caravane has got settled here in place.( add your's )
-dnl -------------------------------------------------------------------
-ALL_LINGUAS="da de hu ja ko nl no ru sv tr uk"
-AM_GNOME_GETTEXT
-
-dnl -------------------------------------------------------------------
-dnl Get the idl parameters.
-dnl -------------------------------------------------------------------
-IDL_CFLAGS=`gnome-config --cflags idl`
-IDL_LIBS=`gnome-config --libs idl`
-AC_SUBST(IDL_CFLAGS)
-AC_SUBST(IDL_LIBS)
-
-dnl -------------------------------------------------------------------
-dnl Check for ORBit >= 0.5.1 and OAF 0.3
-dnl -------------------------------------------------------------------
-AM_PATH_ORBIT(0.5.1)
-AM_PATH_OAF(0.3.0)
+fi
 
 dnl -------------------------------------------------------------------
 dnl Substitute PACKAGE_LOCALE_DIR in config.h.
