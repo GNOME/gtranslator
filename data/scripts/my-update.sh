@@ -29,6 +29,7 @@ if test -f "POTFILES.in" -a -n "POTFILES.in" ; then
 	# Now build the updated po-file.
 	#
 	my_tool="`which xml-i18n-update`"
+
 	if test "z$my_tool" != "z" ; then
 		xml-i18n-update --pot
 	else
@@ -39,25 +40,33 @@ if test -f "POTFILES.in" -a -n "POTFILES.in" ; then
 		   || ( rm -f ./$PACKAGE.pot \
 		&& mv $PACKAGE.po ./$PACKAGE.pot );
 	fi 
+
 	#
 	# Now check the updated file for changes.
 	#
 	mv $BASEFILE $BASEFILE.old && \
+
 	#
 	# Merge the file with the new pot file.
 	#
 	msgmerge $BASEFILE.old $PACKAGE.pot -o $BASEFILE 2>&1 1>/dev/null
+
 	#
 	# Is there any difference ?
 	#
 	diff -q -I '^"POT.*' $BASEFILE $BASEFILE.old|grep -sq differ && {
-		rm -f $BASEFILE.old
+		rm -f $BASEFILE
+		mv $BASEFILE.old $BASEFILE
+
 		exit 0
 	}
+
 	#
 	# No change? Return 200.
 	#
-	rm -f $BASEFILE.old
+	rm -f $BASEFILE
+	mv $BASEFILE.old $BASEFILE
+
 	exit 200
 else
 	#
