@@ -24,8 +24,9 @@
 
 /*
  * Simply query for the gettext translation for the given message in the
- *  domain (program/package).
+ *  domain (program/package) and for the given language.
  */ 
-gchar *gtranslator_query_simple(const gchar *domain, const gchar *message);
+gchar *gtranslator_query_simple(const gchar *domain, const gchar *message,
+	const gchar *language);
 
 #endif

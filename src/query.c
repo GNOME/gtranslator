@@ -20,15 +20,22 @@
 #include "query.h"
 #include <libgnome/gnome-i18n.h>
 
+#include <string.h>
+#include <locale.h>
+
 /*
  * A simply query method (wraps dgettext).
  */
-gchar *gtranslator_query_simple(const gchar *domain, const char *message)
+gchar *gtranslator_query_simple(const gchar *domain, const char *message,
+	const gchar *language)
 {
 	GString *str=g_string_new("");
-	
+
+	g_return_val_if_fail(language!=NULL, NULL);
 	g_return_val_if_fail(domain!=NULL, NULL);
 	g_return_val_if_fail(message!=NULL, NULL);
+	
+	setlocale(LC_ALL, language);
 
 	str=g_string_append(str, dgettext(domain, message));
 
