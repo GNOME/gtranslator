@@ -31,8 +31,6 @@
  */
 struct {
 	guint warn_if_fuzzy		: 1;
-	guint warn_if_no_change		: 1;
-	guint dont_save_unchanged_files : 1;
 	guint save_geometry		: 1;
 	guint unmark_fuzzy		: 1;
 	

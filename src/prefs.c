@@ -68,8 +68,7 @@ static GtkWidget
  * The toggle buttons used in the preferences box:
  */
 static GtkWidget
-	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
-	*dont_save_unchanged_files, *save_geometry_tb,
+	*warn_if_fuzzy, *unmark_fuzzy, *save_geometry_tb,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
@@ -202,14 +201,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    gtranslator_utils_attach_toggle_with_label(third_page, 1,
 		_("Warn if the po file contains fuzzy translations"),
 		GtrPreferences.warn_if_fuzzy, gtranslator_preferences_dialog_changed);
-	dont_save_unchanged_files =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 2,
-		_("Don't save unchanged po files"),
-		GtrPreferences.dont_save_unchanged_files, gtranslator_preferences_dialog_changed);
-	warn_if_no_change =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 3,
-		_("Warn me if I'm trying to save an unchanged file"),
-		GtrPreferences.warn_if_no_change, gtranslator_preferences_dialog_changed);
 	keep_obsolete =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
 		_("Keep obsolete message in the po files"),
@@ -500,8 +491,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.save_geometry = if_active(save_geometry_tb);
 	GtrPreferences.unmark_fuzzy = if_active(unmark_fuzzy);
 	GtrPreferences.warn_if_fuzzy = if_active(warn_if_fuzzy);
-	GtrPreferences.warn_if_no_change = if_active(warn_if_no_change);
-	GtrPreferences.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
 	GtrPreferences.dot_char = if_active(use_dot_char);
 	GtrPreferences.update_function = if_active(use_update_function);
 	GtrPreferences.rambo_function = if_active(rambo_function);
@@ -642,10 +631,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", GtrPreferences.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
 			      GtrPreferences.unmark_fuzzy);
-	gtranslator_config_set_bool("toggles/warn_if_no_change",
-			      GtrPreferences.warn_if_no_change);
-	gtranslator_config_set_bool("toggles/do_not_save_unchanged_files",
-			      GtrPreferences.dont_save_unchanged_files);
 	gtranslator_config_set_bool("toggles/use_dot_char",
 			      GtrPreferences.dot_char);
 	gtranslator_config_set_bool("toggles/use_update_function",
@@ -816,10 +801,6 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_bool("toggles/set_non_fuzzy_if_changed"); 
 	GtrPreferences.warn_if_fuzzy =
 		gtranslator_config_get_bool("toggles/warn_if_fuzzy");
-	GtrPreferences.warn_if_no_change =
-		gtranslator_config_get_bool("toggles/warn_if_no_change");
-	GtrPreferences.dont_save_unchanged_files =
-		gtranslator_config_get_bool("toggles/do_not_save_unchanged_files");
 	GtrPreferences.popup_menu =
 		gtranslator_config_get_bool("toggles/enable_popup_menu");
 	GtrPreferences.update_function =

@@ -882,26 +882,7 @@ void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
 {
 	if (!po->file_changed) {
-		if (GtrPreferences.dont_save_unchanged_files)
-			return;
-		if (GtrPreferences.warn_if_no_change) {
-			GtkWidget *dialog;
-			gchar *question;
-			gint reply;
-			question = g_strdup_printf(_("You didn't change anything in\n%s\nDo you want to save it anyway?"),
-					    po->filename);
-			dialog = gnome_message_box_new(question,
-			    GNOME_MESSAGE_BOX_QUESTION,
-			    GNOME_STOCK_BUTTON_YES,
-			    GNOME_STOCK_BUTTON_NO,
-			    GNOME_STOCK_BUTTON_CANCEL,
-			    NULL);
-			gtranslator_dialog_show(&dialog, _("gtranslator -- unchanged"));
-			reply = gnome_dialog_run(GNOME_DIALOG(dialog));
-			GTR_FREE(question);
-			if (reply != GNOME_YES)
-				return;
-		}
+		return;
 	}
 
 	gtranslator_save_file(po->filename);
@@ -925,15 +906,10 @@ void gtranslator_po_free(void)
 		gtranslator_header_free(po->header);
 	}
 	
-	if(po->locale_charset)
-	{
-		GTR_FREE(po->locale_charset);
-	}
-	
+	GTR_FREE(po->locale_charset);
 	GTR_FREE(po->filename);
 	GTR_FREE(po->obsolete);
 	GTR_FREE(po);
-	po = NULL;
 }
 
 void gtranslator_file_close(GtkWidget * widget, gpointer useless)
