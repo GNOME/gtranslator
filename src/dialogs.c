@@ -702,8 +702,13 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	gtk_box_pack_start(GTK_BOX(sbox), GTK_WIDGET(fi_label), FALSE, TRUE, 2);
 
 	fi_comments=gtk_check_button_new_with_label(_("Comments"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(fi_comments), GtrPreferences.fi_comments);
+
 	fi_english=gtk_check_button_new_with_label(_("English"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(fi_english), GtrPreferences.fi_english);
+
 	fi_translation=gtk_check_button_new_with_label(_("Translation"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(fi_translation), GtrPreferences.fi_translation);
 
 	gtk_box_pack_start(GTK_BOX(sbox), GTK_WIDGET(fi_comments), FALSE, FALSE, 2);
 	gtk_box_pack_start(GTK_BOX(sbox), GTK_WIDGET(fi_english), FALSE, FALSE, 2);
@@ -766,10 +771,21 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 			find_text=newstr;
 		}
 
-		gtranslator_find(NULL, find_text,
-			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_comments)),
-			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_english)),
-			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_translation)));
+		GtrPreferences.fi_comments=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_comments));
+		GtrPreferences.fi_english=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_english));
+		GtrPreferences.fi_translation=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_translation));
+
+
+		gtranslator_config_set_bool("find/find_in_comments", GtrPreferences.fi_comments);
+		gtranslator_config_set_bool("find/find_in_english", GtrPreferences.fi_english);
+		gtranslator_config_set_bool("find/find_in_translation", GtrPreferences.fi_translation);
+		
+		/*
+		 * Save the last search settings for a future search.
+		 */
+
+		gtranslator_find(NULL, find_text, GtrPreferences.fi_comments, 
+			GtrPreferences.fi_english, GtrPreferences.fi_translation);
 
 		gtranslator_actions_enable(ACT_FIND_AGAIN, ACT_END);
 
@@ -817,8 +833,13 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 	gtk_box_pack_start(GTK_BOX(rbox), GTK_WIDGET(replace_in_label), FALSE, TRUE, 2);
 
 	ri_comments=gtk_check_button_new_with_label(_("Comments"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ri_comments), GtrPreferences.ri_comments);
+
 	ri_english=gtk_check_button_new_with_label(_("English"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ri_english), GtrPreferences.ri_english);
+
 	ri_translation=gtk_check_button_new_with_label(_("Translation"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ri_translation), GtrPreferences.ri_translation);
 
 	gtk_box_pack_start(GTK_BOX(rbox), GTK_WIDGET(ri_comments), FALSE, FALSE, 2);
 	gtk_box_pack_start(GTK_BOX(rbox), GTK_WIDGET(ri_english), FALSE, FALSE, 2);
@@ -854,6 +875,14 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		gchar *findme, *replaceme;
 		GtrReplace *rpl;
 
+		GtrPreferences.ri_comments=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_comments));
+		GtrPreferences.ri_english=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_english));
+		GtrPreferences.ri_translation=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_translation));
+
+		gtranslator_config_set_bool("replace/replace_in_comments", GtrPreferences.ri_comments);
+		gtranslator_config_set_bool("replace/replace_in_english", GtrPreferences.ri_english);
+		gtranslator_config_set_bool("replace/replace_in_translation", GtrPreferences.ri_translation);
+		
 		findme=gtk_editable_get_chars(GTK_EDITABLE(
 			gnome_entry_gtk_entry(GNOME_ENTRY(findy))), 0, -1);
 
@@ -879,17 +908,15 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		if(reply==1)
 		{
 			rpl=gtranslator_replace_new(findme, replaceme, TRUE, 0,
-				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_comments)),
-				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_english)),
-				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_translation)));
+				GtrPreferences.ri_comments, GtrPreferences.ri_english,
+				GtrPreferences.ri_translation);
 		}
 		else
 		{
 			rpl=gtranslator_replace_new(findme, replaceme, FALSE, 
 				g_list_position(po->messages, po->current),
-				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_comments)),
-				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_english)),
-				gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_translation)));
+				GtrPreferences.ri_comments, GtrPreferences.ri_english,
+				GtrPreferences.ri_translation);
 		}
 
 		gtk_widget_destroy(GTK_WIDGET(dialog));

@@ -1,5 +1,10 @@
 2003-08-28  Fatih Demir <kabalak@gtranslator.org>
 
+	* dialogs.c, prefs.[ch] & prefs_init.c: Introduce 6 new variables for
+		remembering the search and replace categories which're marked
+		 in the corresponding dialogs between the actions and sessions
+		  by saving them in the prefs.
+
 	* defines.config & main.c: Solve that sometimes occuring problem with
 		the GNOMELOCALEDIR define in defines.config/h by setting the
 		 GNOMELOCALEDIR usage in main.c to use DATADIR "/locale" which

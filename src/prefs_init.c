@@ -78,6 +78,9 @@ void gtranslator_preferences_init_default_values()
 		 */
 		gtranslator_config_set_bool("toggles/fill_header", TRUE);
 		gtranslator_config_set_bool("find/case_sensitive", FALSE);
+		gtranslator_config_set_bool("find/find_in_english", TRUE);
+		gtranslator_config_set_bool("find/find_in_translation", TRUE);
+		gtranslator_config_set_bool("replace/replace_in_translation", TRUE);
 
 		/*
 		 * Autosave options; it should be on, with suffix "autosave" 
