@@ -24,6 +24,8 @@
 #include "languages.h"
 #include <libgtranslator/preferences.h>
 
+#include <locale.h>
+
 #include <time.h>
 
 static GtkWidget *e_header = NULL;
@@ -155,9 +157,44 @@ GtrMsg * put_header(GtrHeader * h)
 	msg->comment = g_strdup(h->comment);
 
 	if (h->lg_email)
+	{
+		/*
+		 * Get the non-localized name for the language by
+		 *  the language group's email address and the charset.
+		 */ 
+		gint c=0;
+		while(languages[c].group!=NULL)
+		{
+			if(!strcmp(languages[c].group, h->lg_email)
+				&& !strcmp(languages[c].enc, h->charset))
+			{
+				h->language=languages[c].name;
+			}
+			
+			c++;
+		}
+		
 		group = g_strdup_printf("%s <%s>", h->language, h->lg_email);
+	}
 	else
+	{
+		/*
+		 * The same as above but with only charset and encoding.
+		 */
+		gint c=0;
+		while(languages[c].group!=NULL)
+		{
+			if(!strcmp(languages[c].enc, h->charset)
+				&& !strcmp(languages[c].bits, h->encoding))
+			{
+				h->language=languages[c].name;
+			}
+			
+			c++;
+		}
+		
 		group = g_strdup(h->language);
+	}
 	
 	msg->msgstr = g_strdup_printf("\
 Project-Id-Version: %s %s\n\
