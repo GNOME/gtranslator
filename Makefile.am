@@ -6,9 +6,9 @@ bin_SCRIPTS = pozilla.sh
 
 EXTRA_DIST= \
 		$(bin_SCRIPTS) \
-		kabalak_generate_all_the_files.sh \
 		DEPENDS \
 		HACKING \
+		kabalak_generate_all_the_files.sh \
 		gtranslator.spec.in \
 		xml-i18n-extract.in \
 		xml-i18n-merge.in \
@@ -22,19 +22,3 @@ distpacks: distdir
 	@$(TAR) -chozf $(distdir).tar.gz $(distdir)
 	@echo Cleaning up...
 	@-rm -rf $(distdir)
-
-cvspack:
-	@-rm -f gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz
-	@echo Creating CVS distpackage of gtranslator...
-	@cp -pR po __po
-	@cp configure.in __configure.in
-	@sed -e "s,AM_INIT_AUTOMAKE.*,AM_INIT_AUTOMAKE\(gtranslator\, CVS_$(shell date +%Y-%m-%d)\),g" < configure.in \
-		> configure.in.new && mv configure.in.new configure.in
-	@./autogen.sh --prefix=/usr 
-	@make dist
-	@-rm -rf po
-	@mv __po po
-	@mv __configure.in configure.in
-
-pre-release: cvspack
-	@-./pozilla.sh
