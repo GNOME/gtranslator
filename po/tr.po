@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-04-19 23:36+0200\n"
-"PO-Revision-Date: 2000-04-19 22:39+0100\n"
+"POT-Creation-Date: 2000-04-27 16:54+0200\n"
+"PO-Revision-Date: 2000-04-27 16:56+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -147,52 +147,6 @@ msgstr "Son"
 msgid "Exit"
 msgstr "Çýk"
 
-#: src/interface.c:436
-msgid "Warn me if there are errors in the .po-file"
-msgstr "Po dosyasýnda hatalr varsa beni ikaz et"
-
-#: src/interface.c:441
-msgid "Ask for saving unchanged .po-files "
-msgstr "Deðiþim görmemiþ .po-dosyalarýnda ikaz et"
-
-#: src/interface.c:446
-msgid "gtranslator should start at the last edited file"
-msgstr "Son çalýlýþýlan dosya'da baþla"
-
-#: src/interface.c:451
-msgid "Common settings "
-msgstr "Genel ayarlar"
-
-#: src/interface.c:459
-msgid "Show me the output of msgfmt --statistics"
-msgstr "Bana `msgfmt --statistics''in dýþa-verimini göster"
-
-#: src/interface.c:464
-msgid "Don't  show me any messages of msgfmt "
-msgstr "Msgfmt'dan bana hiç bir ileti gösterme"
-
-#: src/interface.c:470
-msgid "Compiling  points ..."
-msgstr "Dönüþtürme ayarlarý"
-
-#: src/interface.c:509
-msgid "Select your .po-file to open"
-msgstr "Açýlacak .po-dosyasýný seç"
-
-#: src/interface.c:539
-msgid "Select your file to save to"
-msgstr "Kaydedilecek dosyayý seç"
-
-#: src/interface.c:569
-msgid ""
-"Here you can select various options of\n"
-"gtranslator which will make gtranslator\n"
-"more work like you want it to ."
-msgstr ""
-"Burada gtranslator'in deðiþik ayarlarýný\n"
-"kolayca deðiþtirpi gtranslator'i biraz da \n"
-"size göre ayarlayabilirisiniz ."
-
 #: src/callbacks.c:59 src/callbacks.c:171
 msgid "Saving file ..."
 msgstr "Dosya kaydediliyor .."
@@ -221,6 +175,31 @@ msgstr "Dosya deðiþtirildi !"
 #: src/callbacks.c:378
 msgid "Happy translation !"
 msgstr "Hoþ tercümeler !"
+
+#. *
+#. * If there are any problems , give a
+#. *  message ..
+#. *
+#: src/parse.c:32
+#, c-format
+msgid ""
+"\n"
+"The file stream is lost !\n"
+"Error No. %i .\n"
+msgstr ""
+"\n"
+"Dosya akýmý kayboldu !\n"
+"Hata numarasý %i .\n"
+
+#: src/parse.c:56
+#, c-format
+msgid "Got filename  %s \n"
+msgstr "Dosya adýný aldým : %s\n"
+
+#: src/parse.c:116
+#, c-format
+msgid "End of file %s\n"
+msgstr "Dosya soni %s\n"
 
 #. *
 #. * 3.1) No list, no fun
@@ -278,6 +257,18 @@ msgstr ""
 msgid "You didn't change anything in the .po-file !\n"
 msgstr "Po-dosyasýna hiç bir þey deðiþtirmemiþsin ki !\n"
 
+#: src/gtr_dialogs.c:42
+msgid "With the Preferences box you can define some variables\n"
+msgstr "Ayarlama kutusuyla bazý ayarlarý deðiþtirebilirsin\n"
+
+#: src/gtr_dialogs.c:52
+msgid "gtranslator -- open a po-file"
+msgstr "gtranslator -- açýlanacak dosyayý seç"
+
+#: src/gtr_dialogs.c:83
+msgid "gtranslator -- save file as .. "
+msgstr "gtranslator -- kaydedilinecek dosyayý seç ..."
+
 #: src/support.c:111 src/support.c:151
 #, c-format
 msgid "Couldn't find pixmap file: %s"
@@ -288,9 +279,11 @@ msgstr "%s : resim dosyasýný bulamadým"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "%s : resim dosyasýný resim yapamadým"
 
+#: src/about.c:22
 msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 msgstr "Tel'if hakký (C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 
+#: src/about.c:24
 msgid ""
 "gtranslator is a Gnome Application for translating .po-files more "
 "comfortable than in (X)Emacs .\n"
@@ -299,3 +292,31 @@ msgstr ""
 "gtranslator .po dosyalarýnýn tercümesini kolaylaþtýracak bir uygulama "
 "olacaktýr / idir .\n"
 "Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek !"
+
+#: src/prefs.c:36
+msgid "Warn me if there are errors in the .po-file"
+msgstr "Po dosyasýnda hatalr varsa beni ikaz et"
+
+#: src/prefs.c:41
+msgid "Ask for saving unchanged .po-files "
+msgstr "Deðiþim görmemiþ .po-dosyalarýnda ikaz et"
+
+#: src/prefs.c:46
+msgid "gtranslator should start at the last edited file"
+msgstr "Son çalýlýþýlan dosya'da baþla"
+
+#: src/prefs.c:51
+msgid "Common settings "
+msgstr "Genel ayarlar"
+
+#: src/prefs.c:59
+msgid "Show me the output of msgfmt --statistics"
+msgstr "Bana `msgfmt --statistics''in dýþa-verimini göster"
+
+#: src/prefs.c:64
+msgid "Don't  show me any messages of msgfmt "
+msgstr "Msgfmt'dan bana hiç bir ileti gösterme"
+
+#: src/prefs.c:70
+msgid "Compiling  points ..."
+msgstr "Dönüþtürme ayarlarý"
