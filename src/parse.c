@@ -640,8 +640,6 @@ void gtranslator_parse_main_extra()
 	}
   
 	gtranslator_application_bar_update(0);
-	
-	gtranslator_message_show(po->current->data);
 
 	/*
 	 * Test if the filename is NOT equivalent to our temp files' names.
@@ -672,6 +670,12 @@ void gtranslator_parse_main_extra()
 		gtranslator_messages_table_clear();
 		gtranslator_messages_table_create();
 	}
+
+	/*
+	 * Show the current message and avoid a crash with editing plurals
+	 *  without having any active TreeModel present.
+	 */
+	gtranslator_message_show(po->current->data);
 
 	/*
 	 * Hook up the autosaving function if wished.
