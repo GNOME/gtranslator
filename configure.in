@@ -16,6 +16,7 @@ AM_PROG_XML_I18N_TOOLS
 dnl -------------------------------------------------------------------
 dnl Libtool -- needed for backends.
 dnl -------------------------------------------------------------------
+AC_ISC_POSIX
 AC_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
@@ -28,7 +29,6 @@ dnl -------------------------------------------------------------------
 dnl The standard checks for the compiler and the X includes/libs.
 dnl -------------------------------------------------------------------
 
-AC_ISC_POSIX
 AC_HEADER_STDC
 GNOME_INIT
 GNOME_X_CHECKS
