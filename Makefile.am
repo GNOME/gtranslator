@@ -2,19 +2,19 @@
 
 SUBDIRS = intl po help macros src
 
-Appldir = $(datadir)/gnome/apps/Applications
+Applicationdir = $(datadir)/gnome/apps/Applications
 
-mimedir = $(datadir)/mime-info
+mimeinfofilesdir = $(datadir)/mime-info
 
-mime_DATA = gtranslator.mime gtranslator.keys
+mimeinfofiles_DATA = gtranslator.mime gtranslator.keys
 
-Appl_DATA = gtranslator.desktop
+Application_DATA = gtranslator.desktop
 
-Applicondir = $(datadir)/pixmaps
+Applicationicondir = $(datadir)/pixmaps
 
-Applicon_DATA = gtranslator.png
+Applicationicon_DATA = gtranslator.png
 
-EXTRA_DIST=$(Appl_DATA) $(Applicon_DATA) $(mime_DATA)
+EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) $(mimeinfofiles_DATA)
 
 install-data-local:
 	@$(NORMAL_INSTALL)
