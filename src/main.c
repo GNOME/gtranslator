@@ -29,27 +29,33 @@
 #include "prefs.h"
 #include "parse.h"
 #include "open-differently.h"
+#include "htmlizer.h"
 
 #ifdef GCONF_IS_PRESENT
 #include <gconf/gconf.h>
 #endif
 
 /*
- * The static geometry variable used in the poptTable.
+ * The static variables used in the poptTable.
  */
 static gchar *gtranslator_geometry = NULL;
+static gchar *save_html_output_file = NULL;
 
 /*
  * gtranslator's option table.
  */
 static struct poptOption gtranslator_options[] = {
 	{
-	 NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
-	 0, NULL, NULL
+	 	NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
+	 	0, NULL, NULL
 	},
 	{
-	 "geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
-	 0, N_("Specifies the main-window geometry"), "GEOMETRY"
+		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
+		0, N_("Specifies the main-window geometry"), "GEOMETRY"
+	},
+	{
+		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
+		0, N_("HTML file to write to"), "HTMLFILE"
 	},
 	POPT_AUTOHELP {NULL}
 };
@@ -157,6 +163,15 @@ int main(int argc, char *argv[])
 			 * Open the file as a "normal" gettext po file
 			 */ 
 			parse(args[0]);
+			
+			/*
+			 * Also write the HTML output of the given file if
+			 *  desired.
+			 */  
+			if(save_html_output_file)
+			{
+				gtranslator_htmlizer(po, save_html_output_file);
+			}
 		}
 	}
 	

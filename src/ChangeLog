@@ -1,5 +1,21 @@
 2001-02-14  Fatih Demir	<kabalak@gtranslator.org>
 
+	* preferences.h, vfs-handle.h & messages.h: Changed the include
+		directives to use the gtranslator prefix "GTR" instead of
+		 the old "LIBGTRANSLATOR" prefix.
+
+	* main.c: Added an option to use the htmlizer functions and
+		it works, works and works..
+
+	* htmlizer.h/.c: Some reorganization, added recognition of %lx format
+		arguments and added file output stuf around it.
+
+	* gui.c: Do not include htmlizer.h -- we don't use it ever in
+		gui.c.
+
+	* history.c: Set the maximal number of history entries to
+		10 for now.
+
 	* shortcutbar.c: Remove the temporary header call & icon;
 		implemented some kinds of views with the help of the
 		 current GUI. Comments can get displayed now instead of

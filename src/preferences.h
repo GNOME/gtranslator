@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LIBGTRANSLATOR_PREFERENCES_H
-#define LIBGTRANSLATOR_PREFERENCES_H 1
+#ifndef GTR_PREFERENCES_H
+#define GTR_PREFERENCES_H 1
 
 /*
  * libgtranslator's preferences encapsulation of gnome_config or GConf.

@@ -26,7 +26,6 @@
 #include "find.h"
 #include "dnd.h"
 #include "about.h"
-#include "htmlizer.h"
 #include "gtkspell.h"
 #include "history.h"
 

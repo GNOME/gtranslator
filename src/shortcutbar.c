@@ -54,8 +54,7 @@ GtkWidget *gtranslator_sidebar_new()
 		get_shortcut_icon, NULL);
 	
 	/*
-	 * This is the default group "Files" which should always be
-	 *  present.
+	 * Our views sidebar.
 	 */  
 	e_shortcut_model_add_group(E_SHORTCUT_BAR(sidebar)->model,
 		-1, _("Views"));
@@ -77,7 +76,7 @@ void gtranslator_sidebar_add_po(GtrPo *po)
 	 * Add the current view models to the bar.
 	 */ 
 	e_shortcut_model_add_item(model, 0, -1, 
-		"file:",
+		"message:",
 		"Message");
 
 	e_shortcut_model_add_item(model, 0, -1,
@@ -137,7 +136,7 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 						-1);
 					break;
 				}
-			
+				
 			default:
 				break;
 		}
@@ -162,18 +161,17 @@ static GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	switch(url[0])
 	{
 		/*
-		 * For a plain "file://" url we do use the po file icon.
+		 * The simple and normal message: URI case.
 		 */ 
-		case 'f':
+		case 'm':
 			pixmap_filename=gnome_pixmap_file(
 				"mc/application-x-po.png");
 			break;
 		
 		/*
-		 * For a "header://" url we do use also the general icon
-		 *  for now.
+		 * The comment: URI case:
 		 */
-		case 'h':
+		case 'c':
 			pixmap_filename=gnome_pixmap_file("gtranslator.png");
 			break;
 			
@@ -185,6 +183,7 @@ static GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	if(pixmap_filename)
 	{
 		icon=gdk_pixbuf_new_from_file(pixmap_filename);
+		
 		/*
 		 * Ref the icon and return it for our shortcut.
 		 */ 

@@ -38,9 +38,9 @@
  * These are to be used only inside this file
  */
 static void append_line(gchar ** old, const gchar * tail);
-static gchar *restore_msg(const gchar * given);
 static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
+static gchar *restore_msg(const gchar * given);
 static void free_po(void);
 static void free_a_message(gpointer data, gpointer useless);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
@@ -385,7 +385,7 @@ void parse(const gchar *filename)
 		g_list_free_1(header_li);
 	} else
 		g_warning(_("The file has no header!"));
-	
+
 	g_snprintf(status, sizeof(status),
 		   _("Successfully parsed the file \"%s\""), po->filename);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1), status);

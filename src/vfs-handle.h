@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LIBGTRANSLATOR_VFS_HANDLE_H
-#define LIBGTRANSLATOR_VFS_HANDLE_H 1
+#ifndef GTR_VFS_HANDLE_H
+#define GTR_VFS_HANDLE_H 1
 
 /*
  * The GnomeVFS based routines of libgtranslator are here.

@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef LIBGTRANSLATOR_MESSAGES_H
-#define LIBGTRANSLATOR_MESSAGES_H 1
+#ifndef GTR_MESSAGES_H
+#define GTR_MESSAGES_H 1
 
 #include <glib.h>
 

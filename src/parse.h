@@ -125,6 +125,10 @@ void revert_file(GtkWidget  * widget, gpointer useless);
 void close_file(GtkWidget  * widget, gpointer useless);
 
 /*
+ * Restores the original format of the message.
+ */ 
+
+/*
  * The compile function.
  */
 void compile(GtkWidget  * widget, gpointer useless);

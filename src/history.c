@@ -255,8 +255,9 @@ void gtranslator_history_save(GList *list)
 		g_free(subpath);
 		
 		number++;
+		
 		/*
-		 * Save only 8 entries. It could be made configurable
+		 * Save only 10 entries. It could be made configurable.
 		 */
 		if(number>=8)
 			break;

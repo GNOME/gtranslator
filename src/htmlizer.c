@@ -23,7 +23,7 @@
 /*
  * Returns a html'ified string of the 'original' textstring.
  */
-gchar *gtranslator_htmlizer(gchar *textstring)
+gchar *gtranslator_string_htmlizer(gchar *textstring)
 {
 	GString *string;
 	gint len=0, pif;
@@ -42,7 +42,7 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 	/*
 	 * Create the new GString.
 	 */ 
-	string=g_string_new("<html><body>");
+	string=g_string_new("<td>");
 
 	/*
 	 * Parse the single string characters.
@@ -75,10 +75,20 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 			 */ 
 			 case '%':
 				
-				string=g_string_append(string,
-					"<font color=\"red\">%");
-				EndHtml(pif+1);
-				pif++;
+				if(textstring[pif+1]=='l')
+				{
+					string=g_string_append(string,
+						"<font color=\"red\">%");	
+					EndHtml(pif+2);
+					pif=pif+2;
+				}
+				else
+				{
+					string=g_string_append(string,
+						"<font color=\"red\">%");
+					EndHtml(pif+1);
+					pif++;
+				}
 				break;
 		
 			/*
@@ -170,7 +180,111 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 		}
 	}
 
-	string=g_string_append(string, "</body></html>");
+	string=g_string_append(string, "</td>");
 	
 	return string->str;
+}
+
+/*
+ * Convert the given po file to a html document.
+ */ 
+void gtranslator_htmlizer(GtrPo *po, gchar *save_to)
+{
+	FILE *fstream;
+	gint n;
+	
+	g_return_if_fail(po!=NULL);
+	
+	/*
+	 * Ensure a filename.
+	 */ 
+	if(!save_to)
+	{
+		save_to=g_strdup_printf("%s.html",
+			g_basename(po->filename));
+	}
+
+	fstream=fopen(save_to, "w");
+
+	/*
+	 * A last stream check.
+	 */ 
+	if(!fstream)
+	{
+		g_error(_("Couldn't save html output to %s!"), save_to);
+	}
+
+	/*
+	 * Produce a nice HTML header.
+	 */ 
+	fprintf(fstream, "<html>\n<head>\n\t<title>%s</title>\n\t",
+		g_basename(po->filename));
+	
+	fprintf(fstream, "<meta name=\"generator\" content=\"gtranslator\">\n");
+	fprintf(fstream, 
+		"\t<!-- gtranslator %s htmlizer output -->\n", VERSION);
+	
+	fprintf(fstream, "</head>\n<body bgcolor=\"white\" text=\"navy\">\n<table align=\"center\" border=\"0\"><tr><td>");
+	
+	/*
+	 * Translatable output to a html file which is visible on the pages.
+	 */ 
+	fprintf(fstream, _("%s-%s contains %i messages."),
+		po->header->prj_name,
+		g_basename(po->filename),
+		po->length);
+	
+	fprintf(fstream, "</td><td>&nbsp;</td></tr>\n<tr><td>\n");
+	
+	/*
+	 * A translatable information string also displayed on the html pages.
+	 *
+	 * NOTE: Please do not forget to also "translate" the <b> tags as the
+	 *  project name should be displayed bold on the output pages.
+	 */ 
+	fprintf(fstream, _("Project <b>%s<b> (last po file revision: %s)."),
+		po->header->prj_name,
+		po->header->po_date);
+	
+	fprintf(fstream, "</td><td>&nbsp;</td></tr>\n<tr><td>");
+
+	/*
+	 * Hm, surely not all po files do have got a translator field I guess.
+	 */
+	if(po->header->translator)
+	{
+		/*
+		 * Print out informations about the last translator.
+		 */
+		fprintf(fstream,
+			_("Last translator: %s"), po->header->translator);
+
+		fprintf(fstream, " <a href=\"mailto:%s\">&lt;%s&gt;</a>",
+			po->header->tr_email, po->header->tr_email);
+	}
+
+	fprintf(fstream, "</td><td>&nbsp;</td></tr>\n</table>\n<hr color=\"navy\" align=\"center\">\n");
+	fprintf(fstream, "<table border=\"0\" align=\"center\">\n");
+	
+	/*
+	 * Create a table row for every message pair and print them in plain
+	 *  and nice HTML.
+	 */  
+	for(n=0; n < po->length; ++n)
+	{
+		fprintf(fstream,
+			"<tr><td>%i</td><td>%s</td><td>%s</td></tr>\n",
+			n+1,
+			gtranslator_string_htmlizer(
+			GTR_MSG(g_list_nth_data(po->messages, n))->msgid),
+			gtranslator_string_htmlizer(
+			GTR_MSG(g_list_nth_data(po->messages, n))->msgstr));
+	}
+	
+	/*
+	 * Finish the table and the html file.
+	 */ 
+	fprintf(fstream, "</table>\n</body>\n</html>\n");
+
+	fclose(fstream);
 }
