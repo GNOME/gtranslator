@@ -79,5 +79,9 @@ void edit_header_hide(GtkWidget *widget,gpointer useless);
 **/
 void edit_header(GtkWidget *widget,gpointer useless);
 
+/**
+* Allocates a new header.
+**/
+gtr_header *new_header();
 
 #endif // GTR_HEADER_STUFF_H

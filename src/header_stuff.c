@@ -11,9 +11,19 @@
 #include "header_stuff.h"
 
 /**
-* Create a global header structure -- again as a pointer 
+* A structure which will be hopefully used now...
 **/
 gtr_header *ph;
+
+/**
+* This variable is used to recognize the end of the header.
+**/
+gboolean header_finish;
+
+/**
+* A temp-char.
+**/
+gchar *inp;
 
 /**
 * A simple define; .. ok I'm lazy but it avoids many typos ..
@@ -30,10 +40,27 @@ void apply_header(gtr_header *the_header)
 	}
 }
 
+/**
+* Creates and allocates the header.
+**/
+gtr_header *new_header()
+{
+	gtr_header *th=g_new(gtr_header,1);
+	/**
+	* Also allocate the parts of it.
+	**/
+	th->prj_name=g_new(gchar,1);
+	th->prj_version=g_new(gchar,1);
+	th->pot_date=g_new(gchar,1);
+	th->po_date=g_new(gchar,1);
+	th->last_translator=g_new(gchar,1);
+		return th;
+}
+
 void get_header(gchar *hline)
 {
-	gboolean header_finish=FALSE;
-	gchar *inp;
+	(gtr_header *)ph=new_header();
+	header_finish=FALSE;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
 		gchar *temp=g_new(gchar,1);
@@ -90,24 +117,35 @@ void edit_header_create(gtr_header *head)
 	* Some local widgets.
 	**/
 	GtkWidget *prj_name_label,*prj_version_label,*e_table;
+        GtkWidget *take_my_options;
 	/**
 	* Do a simply check.
 	**/
-	if(!ph->prj_name)
+	if(!head->prj_name)
 	{
 		gnome_app_error(GNOME_APP(app1),_("The header doesn't seem to be parsed rightly."));
 	}
 	prj_name_label=gtk_label_new(_("Project name:"));
 	prj_version_label=gtk_label_new(_("Project version:"));
+        take_my_options=gtk_check_button_new_with_label(_("Use my personal options to fill out the rest of the header."));
 	/**
 	* Create the widgets.
 	**/
 	gtr_edit_header_dlg=gtk_dialog_new();
-	e_table=gtk_table_new(8,2,FALSE);
+	e_table=gtk_table_new(2,2,FALSE);
+        /**
+        * Set the window-specs.
+        **/
 	gtk_window_set_title(GTK_WINDOW(gtr_edit_header_dlg),_("gtranslator -- edit header"));
 	gtk_window_set_wmclass(GTK_WINDOW(gtr_edit_header_dlg),"gtranslator","gtranslator");
+        /**
+        * Add the buttons.
+        **/
 	gtr_edit_header_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
 	gtr_edit_header_dlg_apply=gnome_stock_button(GNOME_STOCK_BUTTON_APPLY);
+        /**
+        * Add the GNOME-entry-boxes.
+        **/
 	gtr_prj_name=gnome_entry_new("PROJECT_NAME");
 	gtr_prj_version=gnome_entry_new("PROJECT_VERSION");
 	/**
@@ -116,9 +154,10 @@ void edit_header_create(gtr_header *head)
 	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name))),head->prj_name);
 	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_version))),head->prj_version);
 	/**
-	* Adds the widgets to the dialog.
+	* Adds the main-widgets to the dialog.
 	**/
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->vbox),e_table);
+        gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->vbox),take_my_options);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->action_area),gtr_edit_header_dlg_apply);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->action_area),gtr_edit_header_dlg_cancel);
 	/**
@@ -132,6 +171,7 @@ void edit_header_create(gtr_header *head)
 	* Show the inner-widgets
 	**/
 	gtk_widget_show_all(e_table);
+        gtk_widget_show(take_my_options);
 	gtk_widget_show(gtr_edit_header_dlg_apply);
 	gtk_widget_show(gtr_edit_header_dlg_cancel);
 	/**
