@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator   \n"
-"POT-Creation-Date: 2001-09-25 22:01-0400\n"
+"POT-Creation-Date: 2001-09-29 16:42+0200\n"
 "PO-Revision-Date: 2001-09-26 13:45+0000\n"
 "Last-Translator: Juan Manuel García Molina <juanmagm@mail.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -123,8 +123,8 @@ msgstr "gtranslator -- confirme borrado de todas las traducciones"
 
 #: src/dialogs.c:490
 msgid "Are you sure you want to remove ALL translations from this po file?"
-msgstr "¿Está seguro de que quiere borrar TODAS las traducciones de este"
-"archivo po?"
+msgstr ""
+"¿Está seguro de que quiere borrar TODAS las traducciones de este archivo po?"
 
 #: src/dialogs.c:594
 msgid "gtranslator -- go to"
@@ -1259,7 +1259,7 @@ msgstr ""
 #: src/parse.c:813
 #, c-format
 msgid "Could not open file `%s' for writing!"
-msgstr "¡No se pudo abrir el archivo `%sado' para escritura!"
+msgstr "¡No se pudo abrir el archivo `%s' para escritura!"
 
 #: src/parse.c:859
 #, c-format
@@ -1413,8 +1413,8 @@ msgstr "Activar la funcionalidad de actualizar un archivo po desde gtranslator"
 
 #: src/prefs.c:232
 msgid "Enable the functionality to remove all translations from a po file"
-msgstr "Activar la funcionalidad de borrar todas las traducciones de un "
-"archivo po"
+msgstr ""
+"Activar la funcionalidad de borrar todas las traducciones de un archivo po"
 
 #: src/prefs.c:235
 msgid "Delete compiled files (e.g. \"project.gmo\")"
@@ -1431,8 +1431,9 @@ msgstr "Mostrar la barra lateral de vistas"
 
 #: src/prefs.c:248
 msgid "Maximum number of recent files shown in the recent files' list:"
-msgstr "Número máximo de archivos recientes a mostrar en la lista de "
-"archivos recientes:"
+msgstr ""
+"Número máximo de archivos recientes a mostrar en la lista de archivos "
+"recientes:"
 
 #: src/prefs.c:252
 msgid "Check recent files before showing in recent files' list"
@@ -1566,6 +1567,39 @@ msgstr ""
 "El diálogo de preferencias le permite personalizar gtranslator\n"
 "para trabajar de modo confortable y productivo."
 
+#: src/prefs-dialog.c:116
+#, fuzzy
+msgid ""
+"\t\tThe Preferences box allows you to customise gtranslator\n"
+"\t\tto work in ways you find comfortable and productive."
+msgstr ""
+"El diálogo de preferencias le permite personalizar gtranslator\n"
+"para trabajar de modo confortable y productivo."
+
+#: src/prefs-dialog.c:132
+#, fuzzy
+msgid "Sections"
+msgstr "Opciones"
+
+#.
+#. * Now the "simple" widget creation routines are following.
+#.
+#: src/prefs-dialog.c:139 src/prefs-dialog.c:302
+#, fuzzy
+msgid "gtranslator -- preferences"
+msgstr "gtranslator -- reemplazar"
+
+#.
+#. * Build up a quite informative question dialog with the count
+#. *  of changes which are still pending.
+#.
+#: src/prefs-dialog.c:297
+#, c-format
+msgid ""
+"%i preferences changes have been made.\n"
+"Do you want to discard all of these changes?"
+msgstr ""
+
 #: src/preferences.c:188
 msgid "Couldn't generate the current date!"
 msgstr "¡No se pudo generar el día actual!"
@@ -1591,8 +1625,7 @@ msgstr "¡No se pudo abrir el archivo comprimido de gettext '%s'!"
 #: src/save-differently.c:170
 #, c-format
 msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "¡No se pudo abrir el archivo de gettext '%1$s''%sado' comprimido con "
-"'%2$s'!"
+msgstr ""
 
 #: src/save-differently.c:229
 #, c-format
