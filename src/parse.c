@@ -126,6 +126,7 @@ void parse(gchar *po)
 			* The msgstr
 			**/
 			msg->msgstr=g_strdup(temp_char);
+			g_print("Data : %s, %s. %i\n",(gchar *)msg->msgid,(gchar *)msg->msgid,(gint)msg->pos);
 		}
 		/**
 		* If a structure is existent, free it.
