@@ -1,5 +1,8 @@
 2003-05-24  Ross Golder  <ross@golder.org>
 
+	* messages-table.c: Fix problem causing corruption of po->current
+	and subsequent segfault on next/prev message (#91664).
+
 	* gui.c (gtranslator_text_boxes_clean): Minor optimisation using
 	gtk_text_buffer_get_bounds().
 

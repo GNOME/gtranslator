@@ -298,13 +298,8 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
 
   if (gtk_tree_selection_get_selected(selection, &model, &iter) == TRUE) {
     gtk_tree_model_get(model, &iter, MSG_PTR_COLUMN, &message, -1);
-    if (message != NULL) {
-      GList* to_go = NULL;
-      
-      to_go = g_list_append(to_go, message);
-      gtranslator_message_go_to(to_go);
-      g_list_free(to_go);
-    }
+    if (message != NULL)
+      gtranslator_message_go_to(g_list_find(po->messages, message);
   }
 
 }
