@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.36\n"
-"POT-Creation-Date: 2001-03-13 16:32+0900\n"
+"POT-Creation-Date: 2001-03-16 09:00+0100\n"
 "PO-Revision-Date: 2001-03-13 16:40+09:00\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -46,7 +46,8 @@ msgstr "¿§ÉÕ¤­¥¹¥­¡¼¥Þ¤Î¥Ç¥£¥ì¥¯¥È¥ê '%s' ¤ò³«¤¯¤³¤È¤¬¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡ª"
 #: src/color-schemes.c:416
 #, c-format
 msgid "Couldn't open specific color schemes directory `%s'!"
-msgstr "»ØÄê¤·¤¿¿§¤Ä¤­¥¹¥­¡¼¥Þ¤Î¥Ç¥£¥ì¥¯¥È¥ê '%s' ¤ò³«¤¯¤³¤È¤¬¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡ª"
+msgstr ""
+"»ØÄê¤·¤¿¿§¤Ä¤­¥¹¥­¡¼¥Þ¤Î¥Ç¥£¥ì¥¯¥È¥ê '%s' ¤ò³«¤¯¤³¤È¤¬¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡ª"
 
 #: src/dialogs.c:84
 msgid "gtranslator -- open a po-file"
@@ -93,27 +94,27 @@ msgstr "¥Õ¥¡¥¤¥ë¸¡º÷"
 msgid "Enter your desired search string:"
 msgstr "¸¡º÷¤¹¤ëÊ¸»úÎó¤òÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤:"
 
-#: src/dialogs.c:304 src/dialogs.c:405
+#: src/dialogs.c:304
 msgid "Case sensitive"
 msgstr "Âç¾®Ê¸»ú¤ò¶èÊÌ¤·¤Ê¤¤"
 
-#: src/dialogs.c:309 src/dialogs.c:410 src/languages.h:112
+#: src/dialogs.c:309 src/dialogs.c:406 src/languages.h:112
 msgid "English"
 msgstr "±Ñ¸ì"
 
-#: src/dialogs.c:315 src/dialogs.c:416 src/gui.c:902
+#: src/dialogs.c:315 src/dialogs.c:412 src/gui.c:903
 msgid "Translated"
 msgstr "ËÝÌõºÑ¤ß"
 
-#: src/dialogs.c:321 src/dialogs.c:422
+#: src/dialogs.c:321 src/dialogs.c:418
 msgid "Both"
 msgstr "Î¾Êý"
 
-#: src/dialogs.c:327 src/dialogs.c:428
+#: src/dialogs.c:327 src/dialogs.c:424
 msgid "Comments"
 msgstr "¥³¥á¥ó¥È"
 
-#: src/dialogs.c:333 src/dialogs.c:434
+#: src/dialogs.c:333 src/dialogs.c:430
 msgid "In all strings"
 msgstr "Á´¤Æ¤ÎÊ¸»úÎó¤ÎÃæ¤Ç"
 
@@ -121,7 +122,12 @@ msgstr "Á´¤Æ¤ÎÊ¸»úÎó¤ÎÃæ¤Ç"
 msgid "Find in: "
 msgstr "¸¡º÷¥Õ¥¡¥¤¥ë: "
 
-#: src/dialogs.c:393 src/dialogs.c:394 src/gui.c:372
+#: src/dialogs.c:393
+#, fuzzy
+msgid "gtranslator -- replace"
+msgstr "gtranslator -- %s"
+
+#: src/dialogs.c:394 src/gui.c:372
 msgid "Replace"
 msgstr "ÃÖ´¹"
 
@@ -137,40 +143,41 @@ msgstr "ÃÖ´¹Á°¤ÎÊ¸»úÎó:"
 msgid "Replace string:"
 msgstr "ÃÖ´¹¸å¤ÎÊ¸»úÎó:"
 
-#: src/dialogs.c:464
+#: src/dialogs.c:461
 msgid "Replace in:"
 msgstr "ÃÖ´¹¤¹¤ëÈÏ°Ï:"
 
-#: src/dialogs.c:543
+#: src/dialogs.c:536
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt ¤Î¼Â¹Ô»þ¤Ë¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿:\n"
 
-#: src/dialogs.c:571
+#: src/dialogs.c:564
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- URI ¤«¤é³«¤¯"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:3 src/dialogs.c:572
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:3 src/dialogs.c:565
 #: src/gui.c:301
 msgid "Open"
 msgstr "³«¤¯"
 
-#: src/dialogs.c:572
+#: src/dialogs.c:565
 msgid "Cancel"
 msgstr "¼è¤ê¾Ã¤·"
 
-#: src/dialogs.c:576
+#: src/dialogs.c:569
 msgid "Enter URI:"
 msgstr "URI ¤ÎÆþÎÏ:"
 
-#: src/dialogs.c:618
+#: src/dialogs.c:611
 msgid "No URI given!"
 msgstr "URI ¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡ª"
 
-#: src/dialogs.c:639
+#: src/dialogs.c:632
 msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr "¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Ê¤¤ URI ¥×¥í¥È¥³¥ë (\"ftp://\"¤Î¤è¤¦¤Ê¤â¤Î) ¤¬»ØÄê¤µ¤ì¤Þ¤·¤¿¡ª"
+msgstr ""
+"¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Ê¤¤ URI ¥×¥í¥È¥³¥ë (\"ftp://\"¤Î¤è¤¦¤Ê¤â¤Î) ¤¬»ØÄê¤µ¤ì¤Þ¤·¤¿¡ª"
 
-#: src/dialogs.c:670
+#: src/dialogs.c:663
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -183,51 +190,51 @@ msgstr ""
 "Àµ¤·¤¯Æ°ºî¤·¤Ê¤¤ÉôÊ¬¤ò´Þ¤ó¤Ç¤¤¤ë¶²¤ì¤¬¤¢¤ê¤Þ¤¹¡£\n"
 "\"¤¤¤¤¤¨\" ¤òÁªÂò¤¹¤ë¤È¡¢¤³¤ÎÉüµìÍÑ¥Õ¥¡¥¤¥ë¤òºï½ü¤·¤Þ¤¹¡£"
 
-#: src/dialogs.c:696
+#: src/dialogs.c:689
 #, c-format
 msgid "Recovering `%s'..."
 msgstr "'%s' ¤ÎÉüµìÃæ ..."
 
-#: src/dialogs.c:740
+#: src/dialogs.c:733
 msgid "Couldn't get list of gettext domains!"
 msgstr "gzip ¤µ¤ì¤¿ gettext¥Õ¥¡¥¤¥ë `%s' ¤ò³«¤¯¤³¤È¤¬¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡ª"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:748
+#: src/dialogs.c:741
 msgid "Here you can query existing gettext domains for a translation."
 msgstr "¤³¤³¤ÇËÝÌõÍÑ¤Î´ûÂ¸¤Î gettext ¥É¥á¥¤¥ó¤ÎÌä¤¤¹ç¤ï¤»¤¬²ÄÇ½¤Ç¤¹¡£"
 
-#: src/dialogs.c:751
+#: src/dialogs.c:744
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator - ´ûÂ¸¤Î gettext ¥É¥á¥¤¥ó¤ÎÌä¤¤¹ç¤ï¤»"
 
-#: src/dialogs.c:752 src/gui.c:376
+#: src/dialogs.c:745 src/gui.c:376
 msgid "Query"
 msgstr "Ìä¤¤¹ç¤ï¤»"
 
-#: src/dialogs.c:752
+#: src/dialogs.c:745
 msgid "Close"
 msgstr "ÊÄ¤¸¤ë"
 
-#: src/dialogs.c:760
+#: src/dialogs.c:753
 msgid "Query string:"
 msgstr "Ìä¤¤¹ç¤ï¤»Ê¸»úÎó:"
 
-#: src/dialogs.c:767
+#: src/dialogs.c:760
 msgid "Domain to search the translation in:"
 msgstr "Ìä¤¤¹ç¤ï¤»¤ëËÝÌõ¥É¥á¥¤¥ó:"
 
-#: src/dialogs.c:817
+#: src/dialogs.c:810
 msgid "No query string given!"
 msgstr "¸¡º÷¤¹¤ëÊ¸»úÎó¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡ª"
 
-#: src/dialogs.c:846
+#: src/dialogs.c:839
 msgid "Couldn't find any result for the query!"
 msgstr "¸¡º÷·ë²Ì¤¬¤¢¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡ª"
 
-#: src/dialogs.c:863
+#: src/dialogs.c:856
 #, c-format
 msgid ""
 "Found \"%s\" as a translation in domain \"%s\".\n"
@@ -240,11 +247,11 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:925
+#: src/dialogs.c:918
 msgid "Query's result translation is already there!"
 msgstr "Ìä¤¤¹ç¤ï¤»·ë²Ì¤Ï´û¤ËÈ¿±ÇºÑ¤ß¤Ç¤¹¡ª"
 
-#: src/dialogs.c:945
+#: src/dialogs.c:938
 msgid ""
 "Should gtranslator accomplish all missing strings (if possible)\n"
 "from your default query domain?"
@@ -303,7 +310,9 @@ msgstr "¼«Æ°È¿±Ç"
 
 #: src/gui.c:131
 msgid "Automatically fill missing translations from the default query domain"
-msgstr "¼«Æ°È¿±Ç¤Ï¡¢Ì¤ËÝÌõ¤Î¥á¥Ã¥»¡¼¥¸¤ò¥Ç¥Õ¥©¥ë¥È¤ÎÌä¤¤¹ç¤ï¤»¥É¥á¥¤¥ó¤«¤é¼èÆÀ¤·¤ÆÈ¿±Ç¤·¤Þ¤¹"
+msgstr ""
+"¼«Æ°È¿±Ç¤Ï¡¢Ì¤ËÝÌõ¤Î¥á¥Ã¥»¡¼¥¸¤ò¥Ç¥Õ¥©¥ë¥È¤ÎÌä¤¤¹ç¤ï¤»¥É¥á¥¤¥ó¤«¤é¼èÆÀ¤·¤ÆÈ¿±"
+"Ç¤·¤Þ¤¹"
 
 #: src/gui.c:139
 msgid "Open from _URI"
@@ -493,7 +502,7 @@ msgstr "ºÇ¸å¤Ø"
 msgid "Missing"
 msgstr "ÉÔÌÀ"
 
-#: src/gui.c:360 src/gui.c:889 src/gui.c:893
+#: src/gui.c:360 src/gui.c:890 src/gui.c:894
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -520,34 +529,38 @@ msgstr ".po ¥Õ¥¡¥¤¥ë¤ÎÃæ¤ÎÊ¸»úÎó¤òÃÖ´¹¤·¤Þ¤¹"
 #.
 #. * Create the app
 #.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:549
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:551
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:889
+#: src/gui.c:707 src/gui.c:708 src/gui.c:1120
+msgid "·"
+msgstr ""
+
+#: src/gui.c:890
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ »Ä¤ê %i ¸Ä¤¬ Fuzzy ]"
 
-#: src/gui.c:893
+#: src/gui.c:894
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Fuzzy ¤Î¥á¥Ã¥»¡¼¥¸¤Ï¤¢¤ê¤Þ¤»¤ó ]"
 
-#: src/gui.c:900
+#: src/gui.c:901
 msgid "Stick"
 msgstr "Ä¥¤êÉÕ¤¯"
 
-#: src/gui.c:911
+#: src/gui.c:912
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ »Ä¤ê %i ¸Ä¤¬Ì¤ËÝÌõ ]"
 
-#: src/gui.c:911 src/gui.c:913
+#: src/gui.c:912 src/gui.c:914
 msgid "Untranslated"
 msgstr "Ì¤ËÝÌõ"
 
-#: src/gui.c:913
+#: src/gui.c:914
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Ì¤ËÝÌõ¤Î¥á¥Ã¥»¡¼¥¸¤Ï¤¢¤ê¤Þ¤»¤ó ]"
@@ -555,7 +568,7 @@ msgstr "%s [ Ì¤ËÝÌõ¤Î¥á¥Ã¥»¡¼¥¸¤Ï¤¢¤ê¤Þ¤»¤ó ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:924
+#: src/gui.c:925
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "¥á¥Ã¥»¡¼¥¸¿ô %d / %d / Status: %s"
@@ -923,7 +936,7 @@ msgstr ""
 "¿·µ¬¤Ë¥¨¥¹¥±¡¼¥×Ê¸»ú¤¬¸«¤Ä¤«¤ê¤Þ¤·¤¿: \\%c\n"
 "¤³¤ì¤ò parse.c (%i ¹Ô) ¤ËÄÉ²Ã¤·¤Þ¤¹¡£"
 
-#: src/parse.c:253
+#: src/parse.c:279
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -934,7 +947,7 @@ msgstr ""
 "¹Ô: %d\n"
 "¥Õ¥¡¥¤¥ë¤ò³ÎÇ§¤·ºÆÅÙ¼Â¹Ô¤·¤Æ²¼¤µ¤¤¡£"
 
-#: src/parse.c:302
+#: src/parse.c:328
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -943,22 +956,22 @@ msgstr ""
 "¥Õ¥¡¥¤¥ë¤¬¶õ¤Ç¤¹:\n"
 "%s"
 
-#: src/parse.c:333 src/parse.c:594
+#: src/parse.c:359 src/parse.c:620
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "¥Õ¥¡¥¤¥ë `%s' ¤ÏÂ¸ºß¤·¤Þ¤»¤ó¡ª"
 
-#: src/parse.c:356
+#: src/parse.c:382
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "¥Õ¥¡¥¤¥ë \"%s\" ¤Î²òÀÏ¤¬´°Î»¤·¤Þ¤·¤¿"
 
-#: src/parse.c:359
+#: src/parse.c:385
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:549
+#: src/parse.c:575
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -969,7 +982,7 @@ msgstr ""
 "¤·¤«¤·¤Ê¤¬¤é¡¢¤³¤Î .pot ¥Õ¥¡¥¤¥ë¤Ï¥×¥í¥°¥é¥à¤¬À¸À®¤·¤Þ¤¹¡£\n"
 "¤³¤Î¥Õ¥¡¥¤¥ë¤Ï¡¢%s.po ¤Î¤è¤¦¤Ë³ÈÄ¥»Ò *.po ¤ÇÊÝÂ¸¤¹¤Ù¤­¤Ç¤¹¡£"
 
-#: src/parse.c:628
+#: src/parse.c:654
 #, c-format
 msgid ""
 "File %s\n"
@@ -978,7 +991,7 @@ msgstr ""
 "¥Õ¥¡¥¤¥ë %s ¤Ë¤Ï\n"
 "%d ¸Ä¤Î fuzzy ¤Ê¥á¥Ã¥»¡¼¥¸¤¬¤¢¤ê¤Þ¤¹"
 
-#: src/parse.c:664
+#: src/parse.c:690
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -989,11 +1002,11 @@ msgstr ""
 "%s\n"
 "ÊÝÂ¸¤·¤Þ¤¹¤«?"
 
-#: src/parse.c:672
+#: src/parse.c:698
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- Ì¤ÊÑ¹¹"
 
-#: src/parse.c:753
+#: src/parse.c:780
 #, c-format
 msgid ""
 "File %s\n"
@@ -1002,11 +1015,11 @@ msgstr ""
 "¥Õ¥¡¥¤¥ë %s\n"
 "¤¬ÊÑ¹¹¤µ¤ì¤Þ¤·¤¿¡£ÊÝÂ¸¤µ¤ì¤¿¤â¤Î¤ËÌá¤·¤Þ¤¹¤«?"
 
-#: src/parse.c:793
+#: src/parse.c:820
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "¤¹¤ß¤Þ¤»¤ó¤¬¡¢¤³¤Î¥·¥¹¥Æ¥à¤Ç¤Ï msgfmt ¥³¥Þ¥ó¥É¤¬»È¤¨¤Þ¤»¤ó!"
 
-#: src/parse.c:818
+#: src/parse.c:845
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1015,12 +1028,12 @@ msgstr ""
 "¥³¥ó¥Ñ¥¤¥ë´°Î»:\n"
 "%s"
 
-#: src/parse.c:847
+#: src/parse.c:874
 #, c-format
 msgid "You don't have read permissions on file `%s'"
 msgstr "¥Õ¥¡¥¤¥ë '%s' ¤ËÂÐ¤¹¤ëÆÉ¤ß¹þ¤ß¸¢¸Â¤¬¤¢¤ê¤Þ¤»¤ó¡£"
 
-#: src/parse.c:866
+#: src/parse.c:893
 #, c-format
 msgid ""
 "You don't have write permissions on file `%s'.\n"
@@ -1229,7 +1242,7 @@ msgstr "¥»¥Ã¥·¥ç¥ó¤ÎÉü¸µ¤ËÀ®¸ù¤·¤Þ¤·¤¿¡£"
 msgid "Views"
 msgstr "É½¼¨"
 
-#: src/sidebar.c:255
+#: src/sidebar.c:256
 msgid "No comment available for this message."
 msgstr "¤³¤Î¥á¥Ã¥»¡¼¥¸¤ËÂÐ¤¹¤ë¥³¥á¥ó¥È¤¬Í­¸ú¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£"
 
@@ -1307,7 +1320,7 @@ msgstr "Å¾Á÷¤¬ÃæÃÇ¤µ¤ì¤Þ¤·¤¿¡ª"
 #: nautilus-view/nautilus-gtranslator-view.c:181
 #, c-format
 msgid "Project: %s"
-msgstr "¥×¥í¥¸¥§¥¯¥È"
+msgstr "¥×¥í¥¸¥§¥¯¥È: %s"
 
 #: nautilus-view/nautilus-gtranslator-view.c:184
 #, c-format
@@ -1373,6 +1386,21 @@ msgstr "¥Ø¥Ã¥À¤òÊÔ½¸¤·¤Þ¤¹"
 msgid "The Gnome translation program"
 msgstr "GNOME ËÝÌõ¥×¥í¥°¥é¥à"
 
+#: data/mime/gtranslator.keys.in.h:1
+#, fuzzy
+msgid "Compiled gettext po file"
+msgstr ".po ¥Õ¥¡¥¤¥ë¤ò¥³¥ó¥Ñ¥¤¥ë¤·¤Þ¤¹"
+
+#: data/mime/gtranslator.keys.in.h:2
+#, fuzzy
+msgid "Compressed gettext po file"
+msgstr ".po ¥Õ¥¡¥¤¥ë¤ò¥³¥ó¥Ñ¥¤¥ë¤·¤Þ¤¹"
+
+#: data/mime/gtranslator.keys.in.h:3
+#, fuzzy
+msgid "Gettext po file"
+msgstr ".po ¥Õ¥¡¥¤¥ë¤ò³«¤¯(_P)"
+
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
 msgid "Gtranslator Po File"
 msgstr "Gtranslator PO ¥Õ¥¡¥¤¥ë"
@@ -1420,4 +1448,3 @@ msgstr "¥Õ¥¡¥¤¥ë(_F)"
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:7
 msgid "_Header"
 msgstr "¥Ø¥Ã¥À(_H)"
-

@@ -247,10 +247,10 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	 * Create all the personal entries.
 	 */
 	authors_name =
-	    attach_entry_with_label(first_page, 0, _("Author's name :"),
+	    attach_entry_with_label(first_page, 0, _("Author's name:"),
 				    author, prefs_box_changed);
 	authors_email =
-	    attach_entry_with_label(first_page, 1, _("Author's EMail :"),
+	    attach_entry_with_label(first_page, 1, _("Author's EMail:"),
 				    email, prefs_box_changed);
 
 	defaultdomain =
@@ -264,24 +264,24 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	create_lists();
 
 	authors_language =
-	    attach_combo_with_label(second_page, 0, _("Language :"),
+	    attach_combo_with_label(second_page, 0, _("Language:"),
 				    languages_list, language,
 				    prefs_box_changed, GINT_TO_POINTER(1));
 	lcode =
-	    attach_combo_with_label(second_page, 1, _("Language code :"),
+	    attach_combo_with_label(second_page, 1, _("Language code:"),
 				    lcodes_list, lc, 
 				    prefs_box_changed, GINT_TO_POINTER(2));
 	lg_email =
 	    attach_combo_with_label(second_page, 2,
-				    _("Language group's EMail :"),
+				    _("Language group's EMail:"),
 				    group_emails_list, lg,
 				    prefs_box_changed, NULL);
 	mime_type =
-	    attach_combo_with_label(second_page, 3, _("Charset :"),
+	    attach_combo_with_label(second_page, 3, _("Charset:"),
 				    encodings_list, mime,
 				    prefs_box_changed, NULL);
 	encoding =
-	    attach_combo_with_label(second_page, 4, _("Encoding :"),
+	    attach_combo_with_label(second_page, 4, _("Encoding:"),
 				    bits_list, enc,
 				    prefs_box_changed, NULL);
 	/*
