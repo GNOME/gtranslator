@@ -3,6 +3,8 @@
 #   and autoconf. 
 # -------------------------------------------------------
 
+backendsdir = $(libdir)/gtranslator/backends
+
 SUBDIRS = . backends pixmaps
 
 INCLUDES = \
@@ -15,15 +17,17 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
-	-DWINDOW_ICON=\""${datadir}/pixmaps/gtranslator.png"\" \
+	-DWINDOW_ICON=\""$(datadir)/pixmaps/gtranslator.png"\" \
 	-DSCHEMESDIR=\""$(datadir)/gtranslator/colorschemes"\" \
-	-DBACKENDSDIR=\""$(libdir)/gtranslator/backends"\"
+	-DBACKENDSDIR=\""$(backendsdir)"\" \
+	-DBACKENDS_TMDIR=\""$(backendsdir)/translation-memories"\"
 
 bin_PROGRAMS = gtranslator
 
 gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
+	backend.c backend.h \
 	color-schemes.c color-schemes.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
@@ -35,6 +39,7 @@ gtranslator_SOURCES = \
 	history.c history.h \
 	htmlizer.c htmlizer.h \
 	languages.h \
+	learn.c learn.h \
 	main.c \
 	menus.c menus.h \
 	message.c message.h \
@@ -53,6 +58,7 @@ gtranslator_SOURCES = \
 	stylistics.c stylistics.h \
 	syntax.c syntax.h \
 	syntax-elements.h \
+	translation-memory.c translation-memory.h \
 	undo-core.c undo-core.h \
 	undo.c undo.h \
 	update.c \

@@ -2,4 +2,7 @@
 ## The backends Makefile.am of gtranslator.
 ##
 
-SUBDIRS = docbook text
+SUBDIRS = \
+	docbook \
+	text \
+	translation-memories
