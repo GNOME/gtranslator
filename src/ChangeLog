@@ -1,3 +1,15 @@
+2004-05-28  Ross Golder  <rossg@golder.org>
+
+	* Makefile.am: Remove '-Wall -Werror' for now, as it means the
+	  Debian packager needs local patches. Should be added back
+	  as some kind of configure-time option.
+
+2004-04-08  Ross Golder  <ross@golder.org>
+
+	* menus.c: Changed keyboard accelerators so that Alt-Left/Right
+	  move between messages and Alt-Home/End go to first/last.
+	  (#139357)
+
 2004-04-08  Ross Golder  <ross@golder.org>
 
 	* comment.c (gtranslator_comment_display): Don't truncate
