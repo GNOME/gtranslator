@@ -15,11 +15,6 @@
 **/
 gboolean header_finish;
 
-/**
-* A temp-char.
-**/
-gchar *inp;
-
 void apply_header(gtr_header *the_header)
 {
 	if((the_header->prj_name==NULL))
@@ -62,6 +57,10 @@ void get_header(gchar *hline)
 	if(header_finish==TRUE)
 	{
 		ph->prj_name=a;
+	}
+	if(a)
+	{
+		g_free(a);
 	}
 }
 
