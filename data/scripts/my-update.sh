@@ -1,4 +1,3 @@
-:
 #!/bin/sh
 #
 # (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
