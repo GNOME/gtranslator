@@ -1,5 +1,4 @@
 #undef BIND_MIME
-#undef BUILD_NV
 #undef ENABLE_NLS
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT
@@ -7,5 +6,4 @@
 #undef HAVE_LIBSM
 #undef HAVE_STPCPY
 #undef JW_PRESENT
-#undef NEWER_NV_STANDARD_MAIN
 #undef SCROLLKEEPER_PRESENT
