@@ -51,6 +51,10 @@ GtrLanguage languages[] = {
 	 N_("Belorussian"), "be", "windows-1251",
 	 "", "8bit"
 	},
+        {
+         N_("Bengali"), "bn", "UTF-8",
+         "gnome-translation@bengalinux.org", "8bit"
+        },		
 	{
 	 N_("Britton"), "br", "iso-8859-1",
 	 "", "8bit"
