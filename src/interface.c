@@ -283,8 +283,8 @@ static GnomeUIInfo the_help_menu[] =
         },
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("gtranslator website"),
-		N_("gtranslator homepage on the web"),
+		GNOME_APP_UI_ITEM, N_("gtranslator _website"),
+		N_("gtranslator's homepage on the web"),
 		call_gtranslator_homepage, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_HOME,
 		0, 0, NULL

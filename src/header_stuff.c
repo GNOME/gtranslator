@@ -49,11 +49,11 @@ gtr_header *new_header()
 	/**
 	* Also allocate the parts of it.
 	**/
-	th->prj_name=g_new(gchar,1);
+	/*th->prj_name=g_new(gchar,1);
 	th->prj_version=g_new(gchar,1);
 	th->pot_date=g_new(gchar,1);
 	th->po_date=g_new(gchar,1);
-	th->last_translator=g_new(gchar,1);
+	th->last_translator=g_new(gchar,1);*/
 		return th;
 }
 
@@ -186,7 +186,10 @@ void edit_header_create(gtr_header *head)
 **/
 void edit_header_show()
 {
-	edit_header_create(ph);
+	/**
+	* Give the exisint function as an argument.
+	**/
+	edit_header_create((gtr_header *)ph);
 	gtk_widget_show(gtr_edit_header_dlg);
 }
 
