@@ -18,66 +18,112 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "stylistics.h"
-#include "syntax.h"
+#include "preferences.h"
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
+static gchar* get_path_from_type(ColorType Type);
+static void init_colors(void);
+
+static GdkColor colors[COLOR_END];
+
+/*
+ * Given a color type, returns a configuration path. Must be freed
+ */
+gchar* get_path_from_type(ColorType Type)
+{
+	gchar *section;
+	switch(Type)
+	{
+		case COLOR_FG:
+			section="fg";
+			break;
+		case COLOR_BG:
+			section="bg";
+			break;
+		case COLOR_DOT_CHAR:
+			section="dot_char";
+			break;
+		case COLOR_HOTKEY:
+			section="hotkey";
+			break;
+		case COLOR_C_FORMAT:
+			section="c_format";
+			break;
+		case COLOR_NUMBER:
+			section="number";
+			break;
+		case COLOR_PUNCTUATION:
+			section="punctuation";
+			break;
+		case COLOR_SPECIAL:
+			section="special";
+			break;
+		case COLOR_ADDRESS:
+			section="address";
+			break;
+		case COLOR_KEYWORD:
+			section="keyword";
+			break;
+		default:
+			return NULL;
+	}
+	return g_strdup_printf("colors/%s", section);
+}
+
 /*
  * Saves the colors from the given GnomeColorPicker.
  */
-void gtranslator_color_values_set(GnomeColorPicker *colorpicker,
-	ColorValueType Type)
+void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 {
-	gushort red, green, blue, alpha;
-	gchar path[23];
-	gchar *section;
-
-	section=gtranslator_syntax_get_section_name(Type);
+	guint8 red, green, blue;
+	gchar spec[8];
+	gchar *path;
 	
-	gnome_color_picker_get_i16(GNOME_COLOR_PICKER(colorpicker),
-		&red, &green, &blue, &alpha);
+	path=get_path_from_type(Type);
+	g_return_if_fail(path!=NULL);
+
+	gnome_color_picker_get_i8(GNOME_COLOR_PICKER(colorpicker),
+		&red, &green, &blue, NULL);
 	
 	/*
 	 * Store the color values.
 	 */
-#define set_color(key,val) \
-	g_snprintf(path, 23, "colors/%s_%s", section, key);\
-	gtranslator_config_set_int(path, val);
-	set_color("red", red);
-	set_color("green", green);
-	set_color("blue", blue);
-	set_color("alpha", alpha);
-#undef set_color
+	g_snprintf(spec, 8, "#%02x%02x%02x", red, green, blue);
+	gtranslator_config_set_string(path, spec);
+	g_free(path);
 }
 
 /*
  * Restores the GnomeColorPicker colors.
  */
-void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
-	ColorValueType Type)
+void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 {
-	gushort red, green, blue, alpha;
-	gchar path[23];
-	gchar *section;
-
-	section=gtranslator_syntax_get_section_name(Type);
+	GdkColor color;
+	gchar *spec;
+	gchar *path;
 	
+	path=get_path_from_type(Type);
+	g_return_if_fail(path!=NULL);
+
 	/*
 	 * Restore the color values from the preferences.
 	 */
-#define get_color(key,val) \
-	g_snprintf(path, 23, "colors/%s_%s", section, key);\
-	val = gtranslator_config_get_int(path);
-	get_color("red", red);
-	get_color("green", green);
-	get_color("blue", blue);
-	get_color("alpha", alpha);
-#undef get_color
-	
-	gnome_color_picker_set_i16(colorpicker, red,
-		green, blue, alpha);
+	spec=gtranslator_config_get_string(path);
+	if(spec)
+	{
+		gdk_color_parse(spec, &color);
+		gnome_color_picker_set_i8(colorpicker, color.red,
+			color.green, color.blue, 0);
+		g_free(spec);
+	}
+	g_free(path);
 }		
 
 /*
@@ -87,38 +133,36 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 void gtranslator_set_style(GtkWidget *widget)
 {
 	GtkStyle *style;
-	GdkColor *fg, *bg;
+	gchar *spec;
 	GdkFont *font;
 	gchar *fontname;
 
 	g_return_if_fail(widget != NULL);
 
-	gtranslator_config_init();
-	
 	/*
 	 * Copy the style informations of the given widget.
 	 */
 	style=gtk_style_copy(gtk_widget_get_style(widget));
 	
 	/*
-	 * Get the background informations/values of the widget.
-	 */
-	bg=&style->base[0];
-	
-	/*
 	 * Set up the stored values for the background from the preferences.
 	 */
-	bg->red=gtranslator_config_get_int("colors/bg_red");
-	bg->green=gtranslator_config_get_int("colors/bg_green");
-	bg->blue=gtranslator_config_get_int("colors/bg_blue");
+	spec=gtranslator_config_get_string("colors/bg");
+	if(spec)
+	{
+		gdk_color_parse(spec, &style->base[0]);
+		g_free(spec);
+	}
 	
 	/*
 	 * Do the same for the foreground.
 	 */
-	fg=&style->text[0];
-	fg->red=gtranslator_config_get_int("colors/fg_red");
-	fg->green=gtranslator_config_get_int("colors/fg_green");
-	fg->blue=gtranslator_config_get_int("colors/fg_blue");
+	spec=gtranslator_config_get_string("colors/fg");
+	if(spec)
+	{
+		gdk_color_parse(spec, &style->text[0]);
+		g_free(spec);
+	}
 	
 	/*
 	 * The stored font setting.
@@ -153,9 +197,39 @@ void gtranslator_set_style(GtkWidget *widget)
 	gtk_widget_set_style(widget, style);
 	
 	/*
-	 * Clean up and close gtranslator's config interface.
+	 * Clean up
 	 */
 	gtk_style_unref(style);
 	g_free(fontname);
-	gtranslator_config_close();
 }
+
+static gboolean colors_initialized=FALSE;
+
+/*
+ * Return the requested GdkColor
+ */
+GdkColor *get_color_from_type(ColorType type)
+{
+	g_return_val_if_fail(type<COLOR_END, NULL);
+
+	if(!colors_initialized)
+	{
+		colors_initialized=TRUE;
+		init_colors();
+	}
+
+	return &colors[type];
+}
+
+void init_colors(void)
+{
+	gdk_color_parse("white",	&colors[COLOR_FG]);
+	gdk_color_parse("black",	&colors[COLOR_BG]);
+	gdk_color_parse("gray",		&colors[COLOR_DOT_CHAR]);
+	gdk_color_parse("blue",		&colors[COLOR_HOTKEY]);
+	gdk_color_parse("red",		&colors[COLOR_C_FORMAT]);
+	gdk_color_parse("orange",	&colors[COLOR_NUMBER]);
+	gdk_color_parse("wheat",	&colors[COLOR_PUNCTUATION]);
+	gdk_color_parse("maroon",	&colors[COLOR_SPECIAL]);
+}
+

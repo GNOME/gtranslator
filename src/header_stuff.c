@@ -18,14 +18,24 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "header_stuff.h"
-#include "prefs.h"
 #include "dialogs.h"
+#include "gui.h"
+#include "prefs.h"
+#include "parse.h"
 #include "languages.h"
 
 #include <locale.h>
-
 #include <time.h>
+#include <string.h>
+
+#include <gtk/gtk.h>
+#include <libgnomeui/gnome-uidefs.h>
+#include <libgnomeui/gnome-propertybox.h>
 
 static GtkWidget *e_header = NULL;
 

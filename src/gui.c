@@ -18,22 +18,25 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "dialogs.h"
 #include "gui.h"
 #include "prefs.h"
-#include "dialogs.h"
 #include "parse.h"
 #include "header_stuff.h"
 #include "find.h"
 #include "dnd.h"
 #include "about.h"
-#include "gtkspell.h"
 #include "history.h"
 #include "sidebar.h"
 #include "stylistics.h"
 #include "syntax.h"
+#include "gtkspell.h"
 
 #include "pixmaps/untrans.xpm"
-
 
 #include <libgnomevfs/gnome-vfs-init.h>
 #include <gal/e-paned/e-hpaned.h>
@@ -574,8 +577,10 @@ void create_app1(void)
 		/*
 		 * Set the own specs for colors and for the font.
 		 */
+		gtranslator_config_init();
 		gtranslator_set_style(text1);
 		gtranslator_set_style(trans_box);
+		gtranslator_config_close();
 	}
 	
 	/*
@@ -652,8 +657,8 @@ static void invert_dot(gchar *str)
 
 	for(i=0; str[i] != '\0'; i++) {
 		if(str[i]==' ')
-			str[i]=_('·');
-		else if(str[i]==_('·'))
+			str[i]=(_("·"))[0];
+		else if(str[i]==(_("·"))[0])
 			str[i]=' ';
 	}
 }

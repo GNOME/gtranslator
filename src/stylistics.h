@@ -24,44 +24,42 @@
  * gtranslator specific style functions.
  */ 
 
-#include "prefs.h"
 #include <libgnomeui/gnome-color-picker.h>
 
 /*
- * ColorValueTypes.
+ * ColorTypes.
  */
 typedef enum {
-	COLOR_VALUE_FG,
-	COLOR_VALUE_BG,
-	COLOR_VALUE_DOT_CHAR,
-	COLOR_VALUE_SELECTION,
-	COLOR_VALUE_HOTKEYS,
-	COLOR_VALUE_FORMATS,
-	COLOR_VALUE_FIGURES,
-	COLOR_VALUE_PUNCTUATION,
-	COLOR_VALUE_QUOTATION,
-	COLOR_VALUE_EMAIL,
-	COLOR_VALUE_URL,
-	COLOR_VALUE_KEYWORD
-} ColorValueType;
-
+	COLOR_FG,
+	COLOR_BG,
+	COLOR_DOT_CHAR,
+	COLOR_HOTKEY,
+	COLOR_C_FORMAT,
+	COLOR_NUMBER,
+	COLOR_PUNCTUATION,
+	COLOR_SPECIAL,
+	COLOR_ADDRESS,
+	COLOR_KEYWORD,
+	/* This is a fake color, should be the last */
+	COLOR_END
+} ColorType;
 
 /*
  * Saves the color values from the GnomeColorPicker.
  */
-void 	gtranslator_color_values_set(GnomeColorPicker *colorpicker,
-	ColorValueType Type);
+void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type);
 
 /*
  * Restores the color values for the GnomeColorPicker.
  */
-void 	gtranslator_color_values_get(GnomeColorPicker *colorpicker,
-	ColorValueType Type);
+void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type);
 
 /*
  * Applies the foreground/background/font settings for the given
  *  widget.
  */
-void 	gtranslator_set_style(GtkWidget *widget);
+void gtranslator_set_style(GtkWidget *widget);
+
+GdkColor *get_color_from_type(ColorType type);
 
 #endif

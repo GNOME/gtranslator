@@ -1,3 +1,18 @@
+2001-02-25  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* *.[ch]: #include shuffle to include only what's really needed.
+	* gui.c: fix warning with translation of dot char.
+	* open-differently.c, parse.c, sidebar.c: fix that stupid thing
+	-- *never* initialize char * variables!
+	* parse.h: remove percentage, and condition about regex, and
+	get_translated_count.
+	* pref*, stylistics*, syntax*:: save colors as "#00AA88" instead of
+	three values. Use gdk_color_parse and color names. I have had the same
+	as gtranslator_syntax_get_section_name, but in stylistics.c and with
+	name get_path_from_type... left this one. Use array of GdkColors, not
+	allocate them every time. In syntax use COLOR_ enums, not direct
+	colors. and s/COLOR_VALUE_/COLOR_/ ...
+
 2001-02-25  Fatih Demir	<kabalak@gtranslator.org>
 
 	* stylistics.c: Use the new function to determine the section names

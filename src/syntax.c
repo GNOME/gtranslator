@@ -19,9 +19,12 @@
 
 #include "syntax.h"
 #include "parse.h"
-#include "preferences.h"
+#include "gui.h"
 
 #include <ctype.h>
+#include <string.h>
+
+#include <gtk/gtktext.h>
 
 /*
  * Determine if the current given message contains any format specifier
@@ -78,7 +81,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					append_char(string, msg[cp]);
 				}
 				
-				color = gtranslator_syntax_get_gdk_color(BLUE);
+				color = get_color_from_type(COLOR_HOTKEY);
 
 				break;
 		
@@ -111,7 +114,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					}
 				}
 
-				color = gtranslator_syntax_get_gdk_color(RED);
+				color = get_color_from_type(COLOR_C_FORMAT);
 
 				break;
 				
@@ -132,7 +135,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				
 				append_char(string, msg[cp]);
 				
-				color = gtranslator_syntax_get_gdk_color(ORANGE);
+				color = get_color_from_type(COLOR_NUMBER);
 
 				break;
 		
@@ -150,7 +153,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 				append_char(string, msg[cp]);
 				
-				color = gtranslator_syntax_get_gdk_color(BROWN);
+				color = get_color_from_type(COLOR_PUNCTUATION);
 
 				break;
 			
@@ -179,7 +182,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 				append_char(string, msg[cp]);
 				
-				color = gtranslator_syntax_get_gdk_color(MAROON);
+				color = get_color_from_type(COLOR_SPECIAL);
 				
 				break;
 				
@@ -211,15 +214,13 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
  */ 
 void gtranslator_syntax_update_text(GtkWidget *textwidget)
 {
-	GString *str=g_string_new("");
-	gchar *text=g_new0(gchar,1);
-	
-	text=gtk_editable_get_chars(GTK_EDITABLE(textwidget), 0, -1);
+	GString *str;
+	gchar *text;
 	
 	g_return_if_fail(textwidget!=NULL);
 
-	str=g_string_append(str, text);
-
+	text=gtk_editable_get_chars(GTK_EDITABLE(textwidget), 0, -1);
+	str=g_string_new(text);
 	g_free(text);
 
 	if(str->len>0)
@@ -270,155 +271,3 @@ gboolean gtranslator_syntax_get_format(GtrMsg *msg)
 	return FALSE;
 }
 
-/*
- * Return the requested GdkColor -- it is newly allocated and should
- *  possibly be freed somewhere.
- */
-GdkColor *gtranslator_syntax_get_gdk_color(ColorName name)
-{
-	GdkColor *color;
-	
-	color=g_new0(GdkColor,1);
-
-	switch(name)
-	{
-		case RED:
-			color->red=(gushort) 65535;
-			color->green=color->blue=(gushort) 0;
-			break;
-
-		case GREEN:
-			color->green=(gushort) 65535;
-			color->red=color->blue=(gushort) 0;
-			break;
-		
-		case BLUE:
-			color->blue=(gushort) 65535;
-			color->red=color->green=(gushort) 0;
-			break;
-			
-		case BLACK:
-			color->red=color->green=color->blue=(gushort) 65535;
-			break;
-			
-		case WHITE:
-			color->red=color->green=color->blue=(gushort) 0;
-			break;
-		
-		case YELLOW:
-			color->red=color->green=(gushort) 65535;
-			color->blue=(gushort) 0;
-			break;
-		
-		case ORANGE:
-			color->red=(gushort) 65535;
-			color->green=(gushort) 43954;
-			color->blue=(gushort) 0;
-			break;
-		
-		case NAVY:
-			color->red=(gushort) 9744;
-			color->green=(gushort) 6773;
-			color->blue=(gushort) 65535;
-			break;
-			
-		case MAROON:
-			color->red=(gushort) 41208;
-			color->green=(gushort) 17705;
-			color->blue=(gushort) 39422;
-			break;
-			
-		case AQUA:
-			color->red=(gushort) 0;
-			color->green=color->blue=(gushort) 65535;
-			break;
-		
-		case BROWN:
-			color->red=(gushort) 48655;
-			color->green=(gushort) 22576;
-			color->blue=(gushort) 14757;
-			break;
-			
-		default:
-			/*
-			 * Get the stored default values for the foreground
-			 *  or the user specified ones.
-			 */  
-			gtranslator_config_init();
-			
-			color->red=gtranslator_config_get_int(
-				"colors/fg_red");
-			color->green=gtranslator_config_get_int(
-				"colors/fg_green");
-			color->blue=gtranslator_config_get_int(
-				"colors/fg_blue");
-			
-			gtranslator_config_close();
-			
-			break;
-	}
-
-	
-	color->pixel=(gulong) (
-		(color->red)*65536 + (color->green)*255 + color->blue);
-
-	gdk_color_alloc(gtk_widget_get_colormap(app1), color);
-
-	return gdk_color_copy(color);
-
-	gdk_color_free(color);
-}
-
-/*
- * Gives us the name of the right section for the ColorValueType back.
- */ 
-gchar *gtranslator_syntax_get_section_name(ColorValueType Type)
-{
-	gchar *section;
-	
-	switch(Type)
-	{
-		case COLOR_VALUE_FG:
-			section="fg";
-			break;
-		case COLOR_VALUE_BG:
-			section="bg";
-			break;	
-		case COLOR_VALUE_DOT_CHAR:
-			section="dot_char";
-			break;
-		case COLOR_VALUE_SELECTION:
-			section="selection";
-			break;
-		case COLOR_VALUE_HOTKEYS:
-			section="hotkeys";
-			break;
-		case COLOR_VALUE_FORMATS:
-			section="formats";
-			break;
-		case COLOR_VALUE_FIGURES:
-			section="figures";
-			break;
-		case COLOR_VALUE_PUNCTUATION:
-			section="punctuation";
-			break;
-		case COLOR_VALUE_QUOTATION:
-			section="quotation";
-			break;
-		case COLOR_VALUE_EMAIL:
-			section="email";
-			break;
-		case COLOR_VALUE_URL:
-			section="url";
-			break;
-		case COLOR_VALUE_KEYWORD:
-			section="keyword";
-			break;
-		
-		default:
-			g_warning(_("No known ColorValueType requested!"));
-			break;
-	}
-	
-	return section;
-}

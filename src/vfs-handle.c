@@ -51,7 +51,7 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	 */
 	if(gnome_vfs_uri_is_local(file))
 	{
-		gchar *temp=g_new0(gchar,1);
+		gchar *temp;
 
 		temp=gnome_vfs_uri_to_string(file, 
 			GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
@@ -95,7 +95,7 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 		 * Therefore we do need some extra stuff.
 		 *
 		 */
-		gchar *destdir=g_new0(gchar,1);
+		gchar *destdir;
 		destdir=g_strdup_printf("%s/.gtranslator-%s",
 			g_get_home_dir(),
 			gnome_vfs_uri_get_host_name(file));

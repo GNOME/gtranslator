@@ -17,6 +17,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "sidebar.h"
 #include "syntax.h"
 #include "gui.h"
@@ -109,7 +113,7 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 {
 	if(event->button.button==1)
 	{
-		gchar *testcase=g_new0(gchar,1);
+		gchar *testcase=NULL;
 		gint curpos;
 		
 		/*
@@ -156,8 +160,8 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				 * Display the current comment or
 				 *  show a helping message.
 				 */				 
-				 show_comment(text1);
-				 break;
+				show_comment(text1);
+				break;
 				
 			default:
 				break;
@@ -173,7 +177,7 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	gpointer data)
 {
 	GdkPixbuf *icon;
-	gchar *pixmap_filename=g_new0(gchar,1);
+	gchar *pixmap_filename;
 	
 	g_return_val_if_fail(url!=NULL, NULL);
 
@@ -195,9 +199,6 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 		 * The comment: URI case:
 		 */
 		case 'c':
-			pixmap_filename=gnome_pixmap_file("gtranslator.png");
-			break;
-			
 		default:
 			pixmap_filename=gnome_pixmap_file("gtranslator.png");
 			break;
@@ -212,14 +213,11 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 		 */ 
 		gdk_pixbuf_ref(icon);
 		
+		g_free(pixmap_filename);
 		return icon;
 	}
 	else
-	{
 		return NULL;
-	}
-
-	g_free(pixmap_filename);
 }
 
 /*

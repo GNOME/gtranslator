@@ -21,12 +21,7 @@
 #ifndef GTR_ABOUT_H
 #define GTR_ABOUT_H 1
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include "gui.h"
-#include "dialogs.h"
+#include <gtk/gtkwidget.h>
 
 /*
  * Creates the about box for gtranslator.

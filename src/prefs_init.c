@@ -53,15 +53,8 @@ void prefs_init_default()
 		/*
 		 * Set black on white as default colors.
 		 */ 
-		gtranslator_config_set_int("colors/fg_red", 0);
-		gtranslator_config_set_int("colors/fg_green", 0);
-		gtranslator_config_set_int("colors/fg_blue", 0);
-		gtranslator_config_set_int("colors/fg_alpha", 65535);
-
-		gtranslator_config_set_int("colors/bg_red", 65535);
-		gtranslator_config_set_int("colors/bg_green", 65535);
-		gtranslator_config_set_int("colors/bg_blue", 65535);
-		gtranslator_config_set_int("colors/bg_alpha", 65535);
+		gtranslator_config_set_string("colors/fg", "black");
+		gtranslator_config_set_string("colors/bg", "white");
 
 		/*
 		 * Avoid re-initialization of the default values via setting

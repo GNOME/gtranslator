@@ -21,9 +21,8 @@
 #ifndef GTR_GTR_DIALOGS_H
 #define GTR_GTR_DIALOGS_H 1
 
-#include "prefs.h"
-#include "gui.h"
-#include "parse.h"
+#include <stdio.h>
+#include <gtk/gtkwidget.h>
 
 #define raise_and_return_if_exists(dlg)\
 	if (dlg) {\

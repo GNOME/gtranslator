@@ -18,12 +18,21 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "history.h"
-#include "gui.h"
 #include "dialogs.h"
+#include "gui.h"
 #include "parse.h"
 #include "open-differently.h"
 #include "prefs.h"
+
+#include <gtk/gtkmenushell.h>
+#include <libgnome/gnome-util.h>
+#include <libgnomeui/gnome-app.h>
+#include <libgnomeui/gnome-app-helper.h>
 
 /*
  * From list remove all entries with same filename as entry->filename

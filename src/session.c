@@ -18,8 +18,17 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "session.h"
-#include "prefs.h"
+#include "parse.h"
+#include "preferences.h"
+#include "gui.h"
+
+#include <gtk/gtkmain.h>
+#include <libgnomeui/gnome-appbar.h>
 
 /*
  * Quits via the normal quit.

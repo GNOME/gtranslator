@@ -24,14 +24,15 @@
 
 #include <string.h>
 #include <sys/param.h>
+
+#include "dialogs.h"
 #include "parse.h"
 #include "prefs.h"
-#include "dialogs.h"
 #include "gui.h"
-#include "gtkspell.h"
 #include "open-differently.h"
 #include "history.h"
 #include "sidebar.h"
+#include "gtkspell.h"
 
 /*
  * These are to be used only inside this file
@@ -43,6 +44,7 @@ static gchar *restore_msg(const gchar * given);
 static void free_po(void);
 static void free_a_message(gpointer data, gpointer useless);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
+static void get_translated_count(void);
 
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
@@ -333,7 +335,7 @@ void parse(const gchar *filename)
 	 */
 	if(!g_file_exists(po->filename))
 	{
-		gchar *error=g_new0(gchar,1);
+		gchar *error;
 		error=g_strdup_printf(
 			_("The file `%s' doesn't exist at all!"),
 			po->filename);
@@ -949,11 +951,9 @@ void get_translated_count(void)
 void gtranslator_set_progress_bar(void)
 {
 	/*
-	 * Get the total percentage.
-	 */
-	percentage = 1.0 * po->translated / po->length;
-	/*
 	 * Set the progressbar status.
 	 */
-	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), percentage);
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1),
+				  1.0 * po->translated / po->length);
 }
+

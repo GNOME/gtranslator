@@ -21,11 +21,10 @@
 #ifndef GTR_GUI_H
 #define GTR_GUI_H 1
 
-#include <gnome.h>
+#include <gtk/gtkwidget.h>
 
-#ifdef USE_WINDOW_ICON
-#include <libgnomeui/gnome-window-icon.h>
-#endif
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
 
 /*
  * The globally needed widgets

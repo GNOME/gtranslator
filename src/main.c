@@ -22,14 +22,23 @@
 #include <config.h>
 #endif
 
-#include <popt-gnome.h>
-
 #include "gui.h"
 #include "session.h"
 #include "prefs.h"
 #include "parse.h"
 #include "open-differently.h"
 #include "htmlizer.h"
+
+#include <gtk/gtkmain.h>
+
+#include <libgnome/gnome-util.h>
+#include <libgnomeui/gnome-init.h>
+
+#include <popt-gnome.h>
+
+#ifdef USE_WINDOW_ICON
+#include <libgnomeui/gnome-window-icon.h>
+#endif
 
 #ifdef GCONF_IS_PRESENT
 #include <gconf/gconf.h>

@@ -18,10 +18,24 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "dialogs.h"
+#include "gui.h"
 #include "find.h"
 #include "prefs.h"
+#include "parse.h"
 #include "open-differently.h"
+
+#include <string.h>
+
+#include <libgnomeui/libgnomeui.h>
+
+#ifdef USE_WINDOW_ICON
+#include <libgnomeui/gnome-window-icon.h>
+#endif
 
 /*
  * Functions to be used only internally in this file

@@ -18,12 +18,18 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "prefs.h"
 #include "dialogs.h"
-#include "languages.h"
+#include "gui.h"
 #include "find.h"
-
 #include "stylistics.h"
+#include "languages.h"
+
+#include <libgnomeui/libgnomeui.h>
 
 /*
  * The callbacks:
@@ -356,10 +362,8 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 		_("gtranslator -- background color"));
 
 	gtranslator_config_init();
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(foreground),
-		COLOR_VALUE_FG);
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(background),
-		COLOR_VALUE_BG);
+	gtranslator_color_values_get(GNOME_COLOR_PICKER(foreground), COLOR_FG);
+	gtranslator_color_values_get(GNOME_COLOR_PICKER(background), COLOR_BG);
 	gtranslator_config_close();
 	
 	/*
@@ -448,20 +452,14 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	wants.font=g_strdup(gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
 	gtranslator_config_set_string("font/name", wants.font);
 	
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground),
-		COLOR_VALUE_FG);
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(background),
-		COLOR_VALUE_BG);
+	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
+	gtranslator_color_values_set(GNOME_COLOR_PICKER(background), COLOR_BG);
 
 	/* Change style if text boxes immediately */
 	if(wants.use_own_specs)
 	{
-		/* Need to close because inside set_style config is 
-		 * again opened */
-		gtranslator_config_close();
 		gtranslator_set_style(text1);
 		gtranslator_set_style(trans_box);
-		gtranslator_config_init();
 	}
 	
 	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);

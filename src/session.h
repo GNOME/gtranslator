@@ -21,8 +21,7 @@
 #ifndef GTR_SESSION_H
 #define GTR_SESSION_H 1
 
-#include "gui.h"
-#include "parse.h"
+#include <libgnomeui/gnome-client.h>
 
 /*
  * Quits gtranslator silently because of a closing session.

@@ -18,6 +18,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "find.h"
 #include "prefs.h"
 #include "parse.h"
@@ -32,6 +36,8 @@ static regex_t *target;
 static int eflags = 0;
 static gchar *pattern = NULL;
 
+static gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
+			   gboolean first);
 static gboolean find_in_msg(GList * msg, gpointer useless, gboolean first);
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);

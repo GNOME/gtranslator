@@ -17,10 +17,19 @@
  *
  */
 
-#include "parse.h"
-#include "vfs-handle.h"
-#include "gui.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "open-differently.h"
+#include "parse.h"
+#include "gui.h"
+#include "vfs-handle.h"
+
+#include <string.h>
+#include <stdlib.h>
+
+#include <libgnomeui/gnome-app-util.h>
 
 /*
  * The "backend" for the gzip. bzip2 and uncompress based functions.
@@ -146,8 +155,8 @@ gboolean gtranslator_open_po_file(gchar *file)
  */
 void gtranslator_open_compiled_po_file(gchar *file)
 {
-	gchar *cmd=g_new0(gchar,1);
-	gchar *tempfilename=g_new0(gchar,1);
+	gchar *cmd;
+	gchar *tempfilename;
 	/*
 	 * Set the name of the temporary file we will be using.
 	 */
@@ -191,8 +200,8 @@ void gtranslator_open_compiled_po_file(gchar *file)
  */
 void open_compressed_po_file(gchar *file, gchar *command)
 {
-	gchar *cmd=g_new0(gchar,1);
-	gchar *tempfilename=g_new0(gchar,1);
+	gchar *cmd;
+	gchar *tempfilename;
 
 	/*
 	 * Build the a temporary filename in the same way as for the

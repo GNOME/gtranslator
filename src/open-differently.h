@@ -20,6 +20,8 @@
 #ifndef GTR_OPEN_DIFFERENTLY_H
 #define GTR_OPEN_DIFFERENTLY_H 1
 
+#include <glib.h>
+
 /*
  * These functions are good for opening up compiled gettext/gzipped
  *  po files.

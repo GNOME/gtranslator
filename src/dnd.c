@@ -22,6 +22,9 @@
 #include "gui.h"
 #include "syntax.h"
 
+#include <gtk/gtkdnd.h>
+#include <libgnome/gnome-mime.h>
+
 /*
  * The general D'n'D function.
  */ 

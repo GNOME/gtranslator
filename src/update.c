@@ -23,9 +23,16 @@
  *  my-update.sh script in gtranslator's data directory.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "parse.h"
 #include "prefs.h"
 #include "gui.h"
+
+#include <stdlib.h>
+#include <libgnomeui/gnome-app-util.h>
 
 /*
  * The update function.

@@ -18,20 +18,26 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "preferences.h"
-#include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-i18n.h>
+
 #include <time.h>
 
-#ifdef GCONF_IS_PRESENT
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
 
+#ifdef GCONF_IS_PRESENT
 #include <gconf/gconf-client.h>
 GConfClient	*client=NULL;
 gchar		*private_path=NULL;
-
 #else
 #include <libgnome/libgnome.h>
 #endif
+
+#define CONFIG_PREFIX "/apps/gtranslator/"
 
 /*
  * Initializes the configuration access.
@@ -76,7 +82,7 @@ gchar *gtranslator_config_get_string(gchar *path)
 	g_return_val_if_fail(path != 0, NULL);
 	
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	str = gconf_client_get_string(client, private_path, NULL);
 	g_free(private_path);
 	#else
@@ -91,7 +97,7 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 	g_return_if_fail(value != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_string(client, private_path, value, NULL);
 	g_free(private_path);
 	#else
@@ -108,7 +114,7 @@ gint gtranslator_config_get_int(gchar *path)
 	g_return_val_if_fail(path != NULL, 1);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	i = gconf_client_get_int(client, private_path, NULL);
 	g_free(private_path);
 	#else
@@ -122,7 +128,7 @@ void gtranslator_config_set_int(gchar *path, gint value)
 	g_return_if_fail(path != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_int(client, private_path, value, NULL);
 	g_free(private_path);
 	#else
@@ -139,7 +145,7 @@ gboolean gtranslator_config_get_bool(gchar *path)
 	g_return_val_if_fail(path != NULL, FALSE);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	b = gconf_client_get_bool(client, private_path, NULL);
 	g_free(private_path);
 	#else
@@ -153,7 +159,7 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 	g_return_if_fail(path != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_bool(client, private_path, value, NULL);
 	g_free(private_path);
 	#else
@@ -170,7 +176,7 @@ gfloat gtranslator_config_get_float(gchar *path)
 	g_return_val_if_fail(path != NULL, 0.0);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	f = gconf_client_get_float(client,  private_path, NULL);
 	g_free(private_path);
 	#else
@@ -184,7 +190,7 @@ void gtranslator_config_set_float(gchar *path, gfloat value)
 	g_return_if_fail(path != NULL);
 
 	#ifdef GCONF_IS_PRESENT
-	private_path=g_strconcat("/apps/gtranslator/", path, NULL);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_float(client, private_path, value, NULL);
 	g_free(private_path);
 	#else

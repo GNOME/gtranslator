@@ -21,10 +21,6 @@
 #ifndef GTR_PREFS_H
 #define GTR_PREFS_H 1
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <glib.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtksignal.h>

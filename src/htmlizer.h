@@ -21,7 +21,6 @@
 #define GTR_HTMLIZER_H 1
 
 #include "parse.h"
-#include "gui.h"
 
 /*
  * Converts the given string to a raw html formatted string.

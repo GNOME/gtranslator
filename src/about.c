@@ -18,7 +18,16 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "about.h"
+#include "dialogs.h"
+
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
+#include <libgnomeui/gnome-about.h>
 
 /*
  * Creates and shows the about box for gtranslator.

@@ -27,11 +27,7 @@
 
 #include <stdio.h>
 
-#ifdef HAVE_MY_REGEX_CACHE
-  #include <libgnome/gnome-regex.h>
-#else
-  #include "gnome-regex.h"
-#endif
+#include "gnome-regex.h"
 
 #include "messages.h"
 #include "header_stuff.h"
@@ -96,11 +92,6 @@ gboolean file_opened;
 gboolean message_changed;
 
 /*
- * The variables which store the count-stuff.
- */
-gfloat percentage;
-
-/*
  * Changes message fuzzy status
  */
 void mark_msg_fuzzy(GtrMsg  * msg, gboolean fuzzy);
@@ -125,10 +116,6 @@ void revert_file(GtkWidget  * widget, gpointer useless);
 void close_file(GtkWidget  * widget, gpointer useless);
 
 /*
- * Restores the original format of the message.
- */ 
-
-/*
  * The compile function.
  */
 void compile(GtkWidget  * widget, gpointer useless);
@@ -143,12 +130,6 @@ void update(GtkWidget *widget, gpointer useless);
  *  open/writing the files.
  */
 gboolean gtranslator_check_file_perms(GtrPo *po_file);
-
-/*
- * This function gets the count of the translated messages
- *  from the given po-file.
- */
-void get_translated_count(void);
 
 /*
  * Set the progress bar status.

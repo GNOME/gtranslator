@@ -17,8 +17,16 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "htmlizer.h"
+
 #include <string.h>
+
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
 
 /*
  * Returns a html'ified string of the 'original' textstring.
