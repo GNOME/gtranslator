@@ -6,7 +6,7 @@
 #  Author(s): Kenneth Christiansen
 
 
-$VERSION = "1.2.5 beta 1";
+$VERSION = "1.2.5 alpha-beta-gamma 2";
 $LANG    = $ARGV[0];
 $PACKAGE  = "gtranslator";
 
@@ -153,6 +153,9 @@ elsif(-s "$LANG.po"){
  
     `$d`;
     `$f`;
+    # <hush it, this line is from me, kabalak
+    unlink "messages";
+    # />
     exit;
 }
 

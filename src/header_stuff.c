@@ -39,6 +39,7 @@ void get_header(gchar *hline)
 	if(!g_strncasecmp(hline,"\"Project",8))
 	{
 		myheader=g_strsplit(hline," ",3);
+		ph->prj_name=g_strdup(myheader[1]);
 		/**
 		* Yup, we're finished with the header.
 		**/

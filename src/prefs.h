@@ -51,10 +51,11 @@ GtkWidget *warn_if_fuzzy,*warn_if_untranslated,*save_geometry;
 /**
 * These are the variables set by the prefs-box ( globally ones )
 **/
-gchar *author,*email,*language,*mime,*enc,*lc,*lg,*comments;
+gchar *author,*email,*language,*mime,
+		*enc,*lc,*lg,*comments;
 gboolean if_use_msg_db,if_add_additional_comments,if_warn_if_fuzzy,
-	if_warn_if_no_change,if_dont_save_unchanged_files,
-	if_warn_if_untranslated,if_save_geometry;
+		if_warn_if_no_change,if_dont_save_unchanged_files,
+		if_warn_if_untranslated,if_save_geometry;
 gint gtranslator_geometry_x,gtranslator_geometry_y,
 		gtranslator_geometry_w,gtranslator_geometry_h;
 

@@ -81,7 +81,7 @@ void compile(GtkWidget *widget,gpointer useless)
 {
 	if((file_opened!=TRUE))
 	{
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("No po-file opened which could be compiled."));
+		gnome_app_warning(GNOME_APP(app1),_("No po-file opened which could be compiled."));
 	}
 	else
 	{
@@ -96,11 +96,11 @@ void compile(GtkWidget *widget,gpointer useless)
 		if(gtranslator_get_filename()!=NULL)
 		{
 			sprintf(cmd,"%s %s %s","msgfmt ",gtranslator_get_filename()," -o /tmp/foo.mo");
-			res=system(cmd);
+			res=execlp(cmd);
 			/**
 			* If there has been an error show an error-box
 			**/
-			if(res!=0)
+			if(res==-1)
 			{
 				compile_error_dialog(NULL,NULL);
 			}
