@@ -67,13 +67,14 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string);
 /*
  * Translates the missing msgstr if the msgid string had been already learned.
  */
-void gtranslator_learn_translate(gpointer gtr_msg_gpointer);
+void gtranslator_learn_translate(po_message_t message);
 
 /*
  * Autotranslate the opened po file -- the gboolean arg defines some plays
  *  for the then visible GUI.
  */
-void gtranslator_learn_autotranslate(gboolean visual_interface);
+gboolean gtranslator_learn_autotranslate(GtrPo *po, gboolean visual_interface,
+	GError **error);
 
 /*
  * Shutdown our learn process.

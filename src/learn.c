@@ -22,6 +22,7 @@
 #endif
 
 #include "actions.h"
+#include "gui.h"
 #include "learn.h"
 #include "message.h"
 #include "messages-table.h"
@@ -198,8 +199,8 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 
 		gtranslator_learn_buffer->count++;
 
-		GTR_FREE(original);
-		GTR_FREE(translation);
+		g_free(original);
+		g_free(translation);
 	}
 }
 
@@ -208,8 +209,8 @@ static void gtranslator_learn_buffer_hash_from_current_node()
  */
 static void gtranslator_learn_buffer_free_hash_entry(gpointer key, gpointer value, gpointer useless)
 {
-	GTR_FREE(key);
-	GTR_FREE(value);
+	g_free(key);
+	g_free(value);
 }
 
 /*
@@ -233,7 +234,7 @@ static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer val
 	 */
 	string_to_write=gtranslator_learn_buffer_escape((gchar *) key);
 	value_node=xmlNewChild(new_node, NULL, "value", string_to_write);
-	GTR_FREE(string_to_write);
+	g_free(string_to_write);
 
 	translation_node=xmlNewChild(new_node, NULL, "translation", NULL);
 
@@ -243,7 +244,7 @@ static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer val
 	string_to_write=gtranslator_learn_buffer_escape((gchar *) value);
 	translation_value_node=xmlNewChild(translation_node, NULL, 
 		"value", string_to_write);
-	GTR_FREE(string_to_write);
+	g_free(string_to_write);
 }
 
 /*
@@ -282,13 +283,13 @@ static void gtranslator_learn_buffer_export_hash_entry(gpointer key,
 	g_return_if_fail(wstr!=NULL);
 
 	fprintf(((FILE *) po_filestream), "msgid \"%s\"\n", wstr);
-	GTR_FREE(wstr);
+	g_free(wstr);
 
 	wstr=gtranslator_learn_buffer_escape_hash_entry((gchar *) value);
 	g_return_if_fail(wstr!=NULL);
 
 	fprintf(((FILE *) po_filestream), "msgstr \"%s\"\n\n", wstr);
-	GTR_FREE(wstr);
+	g_free(wstr);
 }
 
 /*
@@ -315,10 +316,10 @@ static void gtranslator_learn_buffer_set_umtf_date()
 	 */
 	strftime(date_string, 20, "%Y-%m-%d %H:%M:%S", time_struct);
 
-	GTR_FREE(gtranslator_learn_buffer->serial_date);
+	g_free(gtranslator_learn_buffer->serial_date);
 	gtranslator_learn_buffer->serial_date=g_strdup(date_string);
 	
-	GTR_FREE(date_string);
+	g_free(date_string);
 }
 
 /*
@@ -407,17 +408,21 @@ void gtranslator_learn_statistics(void)
 static void gtranslator_learn_buffer_learn_function(gpointer data, 
 	gpointer useless)
 {
-	GtrMsg 	*message=GTR_MSG(data);
+	GtrMsg 	*msg=GTR_MSG(data);
+	const char *msgid, *msgstr;
 	
-	g_return_if_fail(message!=NULL);
-	g_return_if_fail(GTR_MSG(message)->msgid!=NULL);
+	g_return_if_fail(msg!=NULL);
+	g_return_if_fail(msg->message!=NULL);
+
+	msgid = po_message_msgid(msg->message);
+	msgstr = po_message_msgstr(msg->message);
 
 	/*
 	 * Learn only translated messages.
 	 */
-	if(message->msgstr && (message->status & GTR_MSG_STATUS_TRANSLATED))
+	if(msgstr[0] != '\0')
 	{
-		gtranslator_learn_string(message->msgid, message->msgstr);
+		gtranslator_learn_string(msgid, msgstr);
 	}
 }
 
@@ -481,7 +486,7 @@ void gtranslator_learn_init()
 					sscanf(contentstring, "%i", 
 						&gtranslator_learn_buffer->serial);
 					
-					GTR_FREE(contentstring);
+					g_free(contentstring);
 				}
 				else
 				{
@@ -602,7 +607,7 @@ void gtranslator_learn_shutdown()
 		if(gtranslator_learn_buffer->encoding)
 		{
 			gtranslator_learn_buffer->doc->encoding=g_strdup(gtranslator_learn_buffer->encoding);
-			GTR_FREE(gtranslator_learn_buffer->encoding);
+			g_free(gtranslator_learn_buffer->encoding);
 		}
 	
 		/*
@@ -659,7 +664,7 @@ void gtranslator_learn_shutdown()
 		 */
 		serial_node=xmlNewChild(root_node, NULL, "serial", serial_string);
 		xmlSetProp(serial_node, "date", gtranslator_learn_buffer->serial_date);
-		GTR_FREE(serial_string);
+		g_free(serial_string);
 	
 		/*
 		 * Write the <index> area -- if possible with contents.
@@ -732,9 +737,9 @@ void gtranslator_learn_shutdown()
 
 	g_list_free(gtranslator_learn_buffer->resources);
 
-	GTR_FREE(gtranslator_learn_buffer->serial_date);
-	GTR_FREE(gtranslator_learn_buffer->filename);
-	GTR_FREE(gtranslator_learn_buffer);
+	g_free(gtranslator_learn_buffer->serial_date);
+	g_free(gtranslator_learn_buffer->filename);
+	g_free(gtranslator_learn_buffer);
 }
 
 /*
@@ -758,20 +763,6 @@ void gtranslator_learn_po_file(GtrPo *po_file)
 	 */
 	resource=g_new0(GtrLearnResource, 1);
 	
-	/*
-	 * Read in the resource informations from the po file's header.
-	 */
-	resource->package=po->header->prj_name;
-	resource->updated=po->header->po_date;
-	if(po->header->prj_version)
-	{
-		resource->premiereversion=po->header->prj_version;
-	}
-	else
-	{
-		resource->premiereversion="0";
-	}
-
 	/*
 	 * Increment the index count by one.
 	 */
@@ -898,20 +889,9 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
  */
 void gtranslator_learn_string(const gchar *id_string, const gchar *str_string)
 {
-	gchar *id_dup, *str_dup;
-	
 	g_return_if_fail(id_string!=NULL);
 	g_return_if_fail(str_string!=NULL);
 
-	/*
-	 * Convert both entries to UTF-8 before adding to the learn buffer.
-	 */
-	id_dup=g_convert(id_string, -1, "UTF-8", po->header->charset,
-		NULL, NULL, NULL);
-
-	str_dup=g_convert(str_string, -1, "UTF-8", po->header->charset,
-		NULL, NULL, NULL);
-	
 	/*
 	 * Insert the id/str_string pair only if there's no entry for the
 	 *  id_string yet.
@@ -1013,38 +993,45 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 
 /*
  * Translate the given GtrMsg if possible.
+ *
+ * TODO: copy plurals too, if available.
  */
-void gtranslator_learn_translate(gpointer gtr_msg_gpointer)
+void gtranslator_learn_translate(po_message_t message)
 {
-	GtrMsg *msg=GTR_MSG(gtr_msg_gpointer);
+	const char *msgid, *msgstr;
+	gchar *result;
 
-	if(msg && msg->msgid && !msg->msgstr)
-	{
-		gchar	*result;
-		
-		result=gtranslator_learn_get_learned_string(msg->msgid);
-		
-		if(result)
-		{
-			/*
-			 * Set the translation content, status etc. from the learn buffer.
-			 */
-			msg->msgstr=g_strdup(result);
-			msg->status |= GTR_MSG_STATUS_TRANSLATED;
-			po->file_changed=TRUE;
-			
-			GTR_FREE(result);
-		}
-	}
+	g_return_if_fail(message!=NULL);
+	
+	msgid = po_message_msgid(message);
+	msgstr = po_message_msgstr(message);
+
+	/*
+	 * If already translated, nothing to do.
+	 */
+	if(msgstr && msgstr[0] != '\0')
+		return;
+
+	/*
+	 * If no translation available, nothing to do.
+	 */
+	result = gtranslator_learn_get_learned_string(msgid);
+	if(!result)
+		return;
+
+	/*
+	 * Learn it
+	 */
+	po_message_set_msgstr(message, result);
 }
 
 /*
  * Autotranslate the opened po file.
  */
-void gtranslator_learn_autotranslate(gboolean visual_interface)
+gboolean gtranslator_learn_autotranslate(GtrPo *po, gboolean visual_interface, GError **error)
 {
-	g_return_if_fail(po!=NULL);
-	g_return_if_fail(po->messages!=NULL);
+	g_return_val_if_fail(po!=NULL, FALSE);
+	g_return_val_if_fail(po->messages!=NULL, FALSE);
 	
 	g_list_foreach(po->messages, (GFunc) gtranslator_learn_translate,
 		NULL);
@@ -1057,14 +1044,15 @@ void gtranslator_learn_autotranslate(gboolean visual_interface)
 	{
 		gtranslator_actions_enable(ACT_SAVE);
 		
-		gtranslator_messages_table_clear();
-		gtranslator_messages_table_create();
-
-		gtranslator_get_translated_count();
+		gtranslator_update_translated_count(po);
+		
+		gtranslator_update_progress_bar();
 	}
 	
 	if(visual_interface)
 	{
 		gtranslator_message_show(po->current->data);
 	}
+	
+	return TRUE;
 }

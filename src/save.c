@@ -98,16 +98,16 @@ void gtranslator_save_compiled_po_file(const gchar *file)
 		return;
 	}
 
-	gtranslator_save_file(
-		gtranslator_runtime_config->save_differently_filename);
+	gtranslator_save_file(gtranslator_runtime_config->	save_filename);
 	
 	/*
 	 * Build up the command to execute in the shell to get the compiled
 	 *  gettext file.
 	 */
 	cmd=g_strdup_printf("msgfmt '%s' -o '%s'",
-		gtranslator_runtime_config->save_differently_filename,
+		gtranslator_runtime_config->save_filename,
 		file);
+
 	/* 
 	 * Execute the command and test the result.
 	 */
@@ -121,7 +121,7 @@ void gtranslator_save_compiled_po_file(const gchar *file)
 		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 
-	GTR_FREE(cmd);
+	g_free(cmd);
 }
 
 /*
@@ -138,14 +138,14 @@ void save_compressed_po_file(const gchar *file, gchar *command)
 	}
 
 	gtranslator_save_file(
-		gtranslator_runtime_config->save_differently_filename);
+		gtranslator_runtime_config->save_filename);
 	
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */
 	cmd=g_strdup_printf("'%s' -c -q < '%s' > '%s'",
 		command,
-		gtranslator_runtime_config->save_differently_filename,
+		gtranslator_runtime_config->save_filename,
 		file);
 
 	/*
@@ -177,7 +177,7 @@ void save_compressed_po_file(const gchar *file, gchar *command)
 		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 	
-	GTR_FREE(cmd);
+	g_free(cmd);
 }
 
 /*
@@ -216,20 +216,19 @@ void gtranslator_save_ziped_po_file(const gchar *file)
 	}
 
 	gtranslator_save_file(
-		gtranslator_runtime_config->save_differently_filename);
+		gtranslator_runtime_config->save_filename);
 
 	cmd=g_strdup_printf("zip -q '%s' '%s'", 
 		file,
-		gtranslator_runtime_config->save_differently_filename);
+		gtranslator_runtime_config->save_filename);
 
 	if(system(cmd))
 	{
-		gtranslator_parse_main(gtranslator_runtime_config->save_differently_filename);
 		cmd=g_strdup_printf(_("Couldn't save zip'ed po file `%s'!"),
 			file);
 
 		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
 	}
 
-	GTR_FREE(cmd);
+	g_free(cmd);
 }

@@ -138,7 +138,7 @@ void gtranslator_preferences_init_default_values()
 		gtranslator_config_set_last_run_date();
 	}
 
-	GTR_FREE(date);
+	g_free(date);
 }
 
 

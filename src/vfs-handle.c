@@ -93,7 +93,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 				break;
 		}
 		
-		GTR_FREE(temp);
+		g_free(temp);
 
 		return localfilename->str;
 	}
@@ -132,7 +132,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 		destination=gnome_vfs_uri_new(g_strdup_printf("%s/%s", destdir,
 							      gnome_vfs_uri_extract_short_path_name(file)));
 			
-		GTR_FREE(destdir);
+		g_free(destdir);
 		
 		/*
 		 * And now the URI/XFER action...

@@ -1,3 +1,81 @@
+2004-11-09  Ross Golder  <ross@golder.org>
+
+	* Makefile.am: Removed unnecessary subdirectories, 'pixmap' and
+	'semerkent'. Removed some other files from the compilation process
+	that are no longer used anywhere.
+	* compile.[ch],parse.[ch],dialogs.[ch]: Moved compile-related functions in from parse.c and
+	dialogs.c.
+	* about.c: Minor tidy-up and use 'translator-credits' (with a hyphen)
+	according to recent gnome-i18n decree.
+	* actions.c,find.c,header_stuff.c: Added #ifdef DONT_FORGET to some code that still
+	needs attention.
+	* bookmark.c,dialogs.c,history.c: Tidy-up and do some basic error handling/reporting
+	(via GError).
+	* bookmark.[ch]: Remove unused 'gtranslator_bookmark_resolvable'
+	function.
+	* *.c: Replaced GTR_FREE with g_free. Lets face our memory
+	management demons.
+	* comment.c,dialogs.c: GUI variable-name updates.
+	* dialogs.c,menus.c: Use PACKAGE_NAME constant.
+	* *.c: Replaced use of 'file_opened' with checks for global po being set.
+	* dialogs.c: Replaced use of po->length with g_list_length(po->messages).
+	* *.c: Replaced use of 'gtranslator_open_file' with
+	'gtranslator_parse_main'.
+	* dialogs.c: Removed 'gtranslator_query_dialog'.
+	* dnd.c: Use new 'gtranslator_parse_main' API.
+	* *.c: Convert to use new gettext-based members of the GtrPo structure.
+	* gui.[ch]: Renamed and re-organised the widget creation code to work from the
+	new gettext-based structures, and to make less use of the global namespace.
+	Now tries to contain document-related widgets in a GtrDocumentView structure.
+	* gui.[ch]: Added 'gtranslator_show_file' to display a given GtrPo.
+	* gui.[ch]: Added 'gtranslator_update_progress_bar' method.
+	* header_stuff.[ch]: Removed 'gtranslator_language_changed' method.
+	* header_stuff.[ch]: Changed 'report_message_bugs_to' to
+	'report_msgid_bugs_to' to closer resemble real headers.
+	* history.[ch]: Use just 'project_id' in history tags, instead of
+	'project_name' and 'project_version'.
+	* learn.[ch]: Change API to add error-handling and use of gettext-based
+	variables instead.
+	* main.c: Added #ifdef PORT_COLORSCHEMES around code that probably isn't
+	used any more. Various API-usage updated and error-handling improvements.
+	Other minor whitespace tidy-ups.
+	* menus.c: Removed reference to redundant pixmaps 'query.xpm' and
+	'query_big.xpm'.
+	* menus.c: Disable connection of Update button to 'update' function.
+	* menus.c: Removed 'query' function - for now.
+	* message.h: Replaced message-related variables with a single 'po_message_t'.
+	Added 'is_fuzzy' and 'changed' flags.
+	* message.c: Removed old-style plural-forms handling. Now handled in the GUI.
+	* message.[ch]: Added 'gtranslator_message_copy_to_translation' method.
+	* message.[ch]: Added 'gtranslator_message_status_toggle_fuzzy' method.
+	* message.[ch]: Added 'gtranslator_message_clear_translation' method.
+	* update.c: Removed for now.
+	* messages.[ch]: Replaced 'unknown_node' with 'untranslated_node'. Other
+	mainly cosmetic tidy-ups.
+	* messages.[ch]: Removed 'gtranslator_messages_table_clear' method.
+	* messages.[ch]: Added 'gtranslator_messages_table_free' method.
+	* open.[ch]: Prefixed internal functions with '_' for clarity. Clearer now?
+	* parse.[ch]: Added 'gettext_po_file' and 'domains' to GtrPo. Removed 'utf8'
+	and 'locale_charset' from GtrPo. Stop assuming 'po' is a global, to allow
+	for editting multiple files in different tabs (like gedit).
+	* parse.[ch]: Added 'gtranslator_save_file' method.
+	* parse.[ch]: Added 'gtranslator_parse_set_gui_from' method.
+	* preferences.c: Use more convenient CONFIG_PREFIX.
+	* prefs.c: Remove references to color schemes.
+	* replace.c: Rework 'gtranslator_replace_run' to use gettext-based
+	structures.
+	* runtime-config.c,save.c: Replaced 'save-differently-file' with just 'save-file'
+	for simplicity.
+	* utils.c: Remove 'gtranslator_utils_get_raw_file_name'.
+	* utils.c: Remove 'gtranslator_utils_get_compile_file_names'.
+	* utils.c: Remove 'gtranslator_utils_get_locale_name'.
+	* utils_gui.c: Tidy up 'gtranslator_utils_invert_dot'.
+	* utils_gui.[ch]: Remove 'gtranslator_utils_attach_color_with_label'.
+	* utils_gui.c: Remove 'gboolean gtranslator_utils_check_file_permissions'.
+	* utils_gui.c: Remove 'open_it_anyway' callback.
+	* utils_gui.c: Rename 'gtranslator_utils_check_file_being_open' as
+	'gtranslator_utils_reopen_if_already_open'.
+	
 2004-09-08  João Paulo Vanzuita  <joaopaulo99@terra.com.br>
 
 	* menus.c: Fixed unresponsive autotranslate shortcut key by

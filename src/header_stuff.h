@@ -22,7 +22,7 @@
 #define GTR_HEADER_STUFF_H 1
 
 #include <gtk/gtkwidget.h>
-#include "message.h"
+#include <gettext-po.h>
 
 /*
  * The header-structure which should hold the header information
@@ -31,7 +31,7 @@ typedef struct {
 	gchar *comment;
 	gchar *prj_name;
 	gchar *prj_version;
-	gchar *report_message_bugs_to;
+	gchar *report_msgid_bugs_to;
 	gchar *pot_date;
 	gchar *po_date;
 	gchar *translator;
@@ -54,20 +54,21 @@ typedef struct {
 #define GTR_HEADER(x) ((GtrHeader *)x)
 
 /*
- * These converts header between GtrMsg and GtrHeader.
+ * These converts header between the string used by gettext's po_header_field
+ * and a GtrHeader structure
  */
-GtrMsg  * gtranslator_header_put(GtrHeader  * h);
-GtrHeader  * gtranslator_header_get(GtrMsg  * msg);
+const char *gtranslator_header_put(GtrHeader *header);
+GtrHeader *gtranslator_header_get(const char *string);
 
 /*
  * Updates PO-Revision-Date and Last-Translator fields 
  */
-void gtranslator_header_update(GtrHeader  * h);
+void gtranslator_header_update(GtrHeader *header);
 
 /*
  * Frees the header structure
  */
-void gtranslator_header_free(GtrHeader  * the_header);
+void gtranslator_header_free(GtrHeader *header);
 
 /*
  * Creates and shows the dialog for editing the header

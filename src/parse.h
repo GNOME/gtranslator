@@ -26,6 +26,17 @@
 
 #include "header_stuff.h"
 
+typedef enum
+{
+	GTR_PARSER_ERROR_GETTEXT,
+	GTR_PARSER_ERROR_FILENAME,
+	GTR_PARSER_ERROR_OTHER,
+} GtrParserError;
+
+#define GTR_PARSER_ERROR gtranslator_parser_error_quark()
+GQuark gtranslator_parser_error_quark (void);
+
+
 /*
  * The general po-file structure
  */
@@ -36,19 +47,19 @@ typedef struct {
 	gchar *filename;
 	
 	/*
-	 * The header 
+	 * Gettext's file handle
 	 */
-	GtrHeader *header;
+	po_file_t gettext_po_file;
+
+	/*
+	 * The message domains in this file
+	 */
+	GList *domains;
 	
 	/*
-	 * All the po->messages are stored here 
+	 * Parsed list of GtrMsgs for the current domains' messagelist
 	 */
 	GList *messages;
-	
-	/*
-	 * The length of messages list 
-	 */
-	guint length;
 	
 	/*
 	 * A pointer to the currently displayed message 
@@ -66,75 +77,56 @@ typedef struct {
 	guint file_changed : 1;
 	
 	/*
-	 * Is the file write-permitted?
+	 * Is the file write-permitted? (read-only)
 	 */
 	gboolean no_write_perms;
 
 	/*
-	 * Did we already create the table for the po file.
-	 */
-	gboolean table_already_created;
-	
-	/*
-	 * The translated entries. 
+	 * Translated entries count
 	 */
 	guint translated;
 	
 	/*
-	 * The fuzzy entries. 
+	 * Fuzzy entries count
 	 */
 	guint fuzzy;
 
-	/*
-	 * Are we editing an UTF-8 po file?
-	 */
-	gboolean utf8;
-
-	/*
-	 * The locale charset name.
-	 */
-	gchar *locale_charset;
 } GtrPo;
 
 #define GTR_PO(x) ((GtrPo *)x)
 
 /*
- * The main variable for storing info about file 
+ * The main global PO file reference. Eventually, I hope gtranslator
+ * becomes an MDI application, like gedit, and this will either become
+ * redundant or will point to the current PO file being editted.
  */
 extern GtrPo *po;
 
 /*
- * Marks if any file was opened 
+ * Parse the given po file, and return a new document handle. Set error
+ * on failure.
  */
-extern gboolean file_opened;
+GtrPo *gtranslator_parse(const gchar *filename, GError **error);
 
-/*
- * Marks if the current message was changed; 
- */
-extern gboolean message_changed;
-
-/*
- * Core backend functions for parsing a po file.
- */ 
+/* We really only want ONE parser function */
+#ifdef REDUNDANT
 gboolean gtranslator_parse_core(GtrPo *po);
-void gtranslator_po_free(GtrPo *po);
-GtrPo *gtranslator_parse(const gchar *po);
+#endif
 
 /*
- * Save the file with the given filename.
+ * Parse the file, and then trigger the setting up of the GUI.
  */
-gboolean gtranslator_save_file(const gchar *name);
+gboolean gtranslator_parse_main(const gchar *po, GError **error);
 
 /*
- * The main granslator parse function which does use the backend
- *  calls from above.
+ * Save the file with the given filename. Set error on failure.
  */
-void gtranslator_parse_main(const gchar *po);
+gboolean gtranslator_save_file(const gchar *name, GError **error);
 
 /*
  * The parts that sets up the GUI after it's been parsed
  */
-void gtranslator_parse_main_extra();
+void gtranslator_parse_set_gui_from(GtrPo *po);
 
 /*
  * Callbacks for the widgets
@@ -148,22 +140,16 @@ void gtranslator_file_close(GtkWidget  * widget, gpointer useless);
 /*
  * Remove all translations from the po file.
  */
-void gtranslator_remove_all_translations(void);
+void gtranslator_remove_all_translations(GtrPo *po);
 
 /*
- * The compile function.
+ * Return the number of translated messages in a PO file
  */
-void compile(GtkWidget  * widget, gpointer useless);
+void gtranslator_update_translated_count(GtrPo *po);
 
 /*
- * The update function (now outsources to update.c).
+ * Finished with a po file
  */
-void update(GtkWidget *widget, gpointer useless);
-
-/*
- * Set the progress bar status/determine the po file status.
- */
-void gtranslator_set_progress_bar(void);
-void gtranslator_get_translated_count(void);
+void gtranslator_po_free(GtrPo *po);
 
 #endif

@@ -79,15 +79,13 @@ gchar *gtranslator_history_escape(const gchar *str)
 /*
  * Adds a history entry.
  */
-void gtranslator_history_add(gchar *filename,
-	gchar *project_name, gchar *project_version)
+void gtranslator_history_add(gchar *filename, gchar *project_id)
 {
 	GtrHistoryEntry *entry;
 	GList *ourhistory=NULL;
 
 	g_return_if_fail(filename!=NULL);
-	g_return_if_fail(project_name!=NULL);
-	g_return_if_fail(project_version!=NULL);
+	g_return_if_fail(project_id!=NULL);
 
 	entry=g_new(GtrHistoryEntry,1);
 
@@ -95,8 +93,7 @@ void gtranslator_history_add(gchar *filename,
 	 * Assign the GtrHistoryEntry informations.
 	 */ 
 	entry->filename=g_strdup(filename);
-	entry->project_name=g_strdup(project_name);
-	entry->project_version=g_strdup(project_version);
+	entry->project_id=g_strdup(project_id);
 
 	/*
 	 * Add the current item to the history list.
@@ -157,22 +154,19 @@ GList *gtranslator_history_get(void)
 			if(!myentry->filename &&
 				!g_file_test(myentry->filename, G_FILE_TEST_EXISTS))
 			{
-				GTR_FREE(subpath);
-				GTR_FREE(myentry->filename);
-				GTR_FREE(myentry);
+				g_free(subpath);
+				g_free(myentry->filename);
+				g_free(myentry);
 				continue;
 			}
 		}
 		
-		g_snprintf(path, 32, "%sproject_name", subpath);
-		myentry->project_name=gtranslator_config_get_string(path);
-		
-		g_snprintf(path, 32, "%sproject_version", subpath);
-		myentry->project_version=gtranslator_config_get_string(path);
+		g_snprintf(path, 32, "%sproject_id", subpath);
+		myentry->project_id=gtranslator_config_get_string(path);
 
 		hl=g_list_append(hl, myentry);
 
-		GTR_FREE(subpath);
+		g_free(subpath);
 	}
 	
 	return hl;
@@ -221,21 +215,10 @@ void gtranslator_history_show(void)
 		/*
 		 * Set the label name.
 		 */
-		if(!entry->project_version || 
-			!nautilus_strcasecmp(entry->project_version, "VERSION"))
-		{
-			menu->label=g_strdup_printf("_%i: %s -- %s", i--,
-				gtranslator_history_escape(entry->project_name),
-				gtranslator_history_escape(g_path_get_basename(entry->filename)));
-		}
-		else
-		{
-			menu->label=g_strdup_printf("_%i: %s %s -- %s", i--,
-				gtranslator_history_escape(entry->project_name),
-				gtranslator_history_escape(entry->project_version),
-				gtranslator_history_escape(g_path_get_basename(entry->filename)));
-		}
-		
+		menu->label=g_strdup_printf("_%i: %s -- %s", i--,
+			gtranslator_history_escape(entry->project_id),
+			gtranslator_history_escape(g_path_get_basename(entry->filename)));
+	
 		/*
 		 * Set the GnomeUIInfo settings and labels.
 		 */
@@ -257,23 +240,28 @@ void gtranslator_history_show(void)
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
-		g_free((gpointer) menu->label);
-		GTR_FREE(menu);
+		g_free(menu);
 	}
 }
 
 void free_userdata(GtkWidget *widget, gpointer userdata)
 {
-	GTR_FREE(userdata);
+	g_free(userdata);
 }
 
 void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filename)
 {
+	GError *error = NULL;
+
 	if (!gtranslator_should_the_file_be_saved_dialog())
 		return;
-	gtranslator_file_close(NULL, NULL);
+	if (po)
+		gtranslator_file_close(NULL, NULL);
 
-	gtranslator_open_file(filename);
+	if(!gtranslator_parse_main(filename, &error)) {
+		gnome_app_warning(GNOME_APP(gtranslator_application),
+				error->message);
+	}
 }
 
 void gtranslator_history_save(GList *list)
@@ -294,15 +282,11 @@ void gtranslator_history_save(GList *list)
 		gtranslator_config_set_string(path,
 			entry->filename);
 
-		g_snprintf(path, 32, "%sproject_name", subpath);
+		g_snprintf(path, 32, "%sproject_id", subpath);
 		gtranslator_config_set_string(path,
-			entry->project_name);	
-		
-		g_snprintf(path, 32, "%sproject_version", subpath);
-		gtranslator_config_set_string(path,
-			entry->project_version);
+			entry->project_id);	
 
-		GTR_FREE(subpath);
+		g_free(subpath);
 		
 		number++;
 	
@@ -360,9 +344,8 @@ void gtranslator_history_entry_free(GtrHistoryEntry *e)
 {
 	if(e)
 	{
-		GTR_FREE(e->filename);
-		GTR_FREE(e->project_name);
-		GTR_FREE(e->project_version);
-		GTR_FREE(e);
+		g_free(e->filename);
+		g_free(e->project_id);
+		g_free(e);
 	}
 }

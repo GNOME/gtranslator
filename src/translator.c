@@ -75,7 +75,7 @@ static void gtranslator_translator_read_value(gchar **destvalue,
 		if(value)
 		{
 			*destvalue=g_strdup(value);
-			GTR_FREE(value);
+			g_free(value);
 		}
 		else
 		{
@@ -100,7 +100,7 @@ static void gtranslator_translator_read_env_value(gchar *envpath,
 	if(value)
 	{
 		*destvalue=g_strdup(value);
-		GTR_FREE(value);
+		g_free(value);
 	}
 	else
 	{
@@ -170,7 +170,7 @@ GtrTranslator *gtranslator_translator_new()
 	if(!nautilus_strcasecmp(new_translator->learn_buffer, "en.xml") &&
 		nautilus_strcasecmp(new_translator->language->name, "English"))
 	{
-		GTR_FREE(new_translator->learn_buffer);
+		g_free(new_translator->learn_buffer);
 
 		new_translator->learn_buffer=g_strdup_printf("%s.xml",
 			(new_translator->language->locale ?
@@ -334,10 +334,10 @@ void gtranslator_translator_set_translator(GtrTranslator *translator,
 	/*
 	 * Free & set the translator name in any case.
 	 */
-	GTR_FREE(GTR_TRANSLATOR(translator)->name);
+	g_free(GTR_TRANSLATOR(translator)->name);
 	translator->name=g_strdup(name);
 
-	GTR_FREE(GTR_TRANSLATOR(translator)->email);
+	g_free(GTR_TRANSLATOR(translator)->email);
 
 	/*
 	 * Check for the given EMail string and also check the given EMail
@@ -381,11 +381,11 @@ void gtranslator_translator_set_language(GtrTranslator *translator,
 			 * As we've found the values to update, free the old
 			 *  values.
 			 */
-			GTR_FREE(translator->language->name);
-			GTR_FREE(translator->language->locale);
-			GTR_FREE(translator->language->encoding);
-			GTR_FREE(translator->language->bits);
-			GTR_FREE(translator->language->group_email);
+			g_free(translator->language->name);
+			g_free(translator->language->locale);
+			g_free(translator->language->encoding);
+			g_free(translator->language->bits);
+			g_free(translator->language->group_email);
 
 			/*
 			 * And assign now the new (found in the list) values.
@@ -455,18 +455,18 @@ void gtranslator_translator_free(GtrTranslator *translator)
 {
 	if(translator)
 	{
-		GTR_FREE(translator->name);
-		GTR_FREE(translator->email);
-		GTR_FREE(translator->learn_buffer);
-		GTR_FREE(translator->tm_buffer);
+		g_free(translator->name);
+		g_free(translator->email);
+		g_free(translator->learn_buffer);
+		g_free(translator->tm_buffer);
 
-		GTR_FREE(translator->language->name);
-		GTR_FREE(translator->language->locale);
-		GTR_FREE(translator->language->encoding);
-		GTR_FREE(translator->language->group_email);
-		GTR_FREE(translator->language->bits);
-		GTR_FREE(translator->language);
+		g_free(translator->language->name);
+		g_free(translator->language->locale);
+		g_free(translator->language->encoding);
+		g_free(translator->language->group_email);
+		g_free(translator->language->bits);
+		g_free(translator->language);
 
-		GTR_FREE(translator);
+		g_free(translator);
 	}
 }

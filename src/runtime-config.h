@@ -33,7 +33,7 @@ typedef struct
 	gchar	*check_filename;
 	gchar	*crash_filename;
 	
-	gchar	*save_differently_filename;
+	gchar	*save_filename;
 
 	gchar	 special_char;
 } GtrRuntimeConfig;

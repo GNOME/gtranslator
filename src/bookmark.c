@@ -54,22 +54,17 @@ gchar *gtranslator_bookmark_escape(const gchar *str);
  */
 GtrBookmark *gtranslator_bookmark_new()
 {
-	GtrBookmark *bookmark=g_new0(GtrBookmark, 1);
+	const char *header;
+	GtrBookmark *bookmark = g_new0(GtrBookmark, 1);
 
-	g_return_val_if_fail(file_opened==TRUE, NULL);
+	g_return_val_if_fail(po!=NULL, NULL);
 	g_return_val_if_fail(po->filename!=NULL, NULL);
 
-	bookmark->file=g_strdup(po->filename);
-	bookmark->version=g_strdup(po->header->prj_version);
-	
-	bookmark->position=g_list_position(po->messages, po->current);
-
-	bookmark->comment=g_strdup(_("No comment"));
-
-	if(bookmark->position < 0)
-	{
-		bookmark->position=0;
-	}
+	header = po_file_domain_header(po->gettext_po_file, NULL);
+	bookmark->file = g_strdup(po->filename);
+	bookmark->version = po_header_field(header, "Project-Id-Version");
+	bookmark->position = g_list_position(po->messages, po->current);
+	bookmark->comment = g_strdup("");
 
 	return bookmark;
 }
@@ -79,21 +74,14 @@ GtrBookmark *gtranslator_bookmark_new()
  */
 GtrBookmark *gtranslator_bookmark_new_with_comment(const gchar *comment)
 {
-	GtrBookmark *nbookmark;
+	GtrBookmark *bookmark;
 
-	nbookmark=gtranslator_bookmark_new();
-	g_return_val_if_fail(nbookmark!=NULL, NULL);
+	g_return_val_if_fail(comment!=NULL, NULL);
+	bookmark = gtranslator_bookmark_new();
 
-	if(comment)
-	{
-		gtranslator_bookmark_set_comment(nbookmark, comment);
-	}
-	else
-	{
-		gtranslator_bookmark_set_comment(nbookmark, _("No comment"));
-	}
+	gtranslator_bookmark_set_comment(bookmark, comment);
 
-	return nbookmark;
+	return bookmark;
 }
 
 /*
@@ -217,94 +205,29 @@ gchar *gtranslator_bookmark_new_bookmark_string()
 /*
  * Open the given bookmark.
  */
-void gtranslator_bookmark_open(GtrBookmark *bookmark)
+gboolean gtranslator_bookmark_open(GtrBookmark *bookmark, GError **error)
 {
-	g_return_if_fail(bookmark!=NULL);
-	g_return_if_fail(bookmark->file!=NULL);
+	g_return_val_if_fail(bookmark!=NULL,FALSE);
+	g_return_val_if_fail(bookmark->file!=NULL,FALSE);
 
 	/*
-	 * Open the po file.
+	 * Open the po file. Handle error.
 	 */
-	gtranslator_open_file(bookmark->file);
+	if(!gtranslator_parse_main(bookmark->file, error)) {
+		return FALSE;
+	}
 
 	/*
 	 * Only re-setup the bookmark if the po file could be opened.
 	 */
 	if(po && bookmark->position!=-1 &&
-	   po->length >= bookmark->position)
+	   g_list_length(po->messages) >= bookmark->position)
 	{
 		gtranslator_message_go_to_no(NULL, 
 			GINT_TO_POINTER(bookmark->position));
 	}
-}
 
-/*
- * Is the given GtrBookmark resolvable at all -- is the file present and do the
- *  other specs also match?!
- */
-gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark)
-{
-	GtrPo *current_po;
-	
-	g_return_val_if_fail(bookmark!=NULL, FALSE);
-
-	/*
-	 * First check if there's a file with that name.
-	 */
-	if(!g_file_test(bookmark->file, G_FILE_TEST_EXISTS))
-	{
-		return FALSE;
-	}
-	else
-	{
-		gint potcom=0;
-		
-		current_po=po;
-		
-		#define CHECK_HEADER_PART(x); \
-			if(!nautilus_strcmp(GTR_HEADER(po->header)->x, \
-				GTR_HEADER(current_po->header)->x)) \
-				{ \
-					potcom++; \
-				}
-				
-		gtranslator_parse_main(bookmark->file);
-
-		/*
-		 * Check the header parts for equality.
-		 */
-		CHECK_HEADER_PART(prj_version);
-		
-		#undef CHECK_HEADER_PART
-
-		/*
-		 * Are the filenames (somehow) equal?
-		 */
-		if(!nautilus_strcmp(
-			gtranslator_utils_get_raw_file_name(po->filename),
-			gtranslator_utils_get_raw_file_name(current_po->filename)))
-		{
-			potcom++;
-		}
-		
-		/*
-		 * At least 2 equalities must have been occured to let the
-		 *  GtrBookmark be resolvable.
-		 */
-		if(potcom >= 2)
-		{
-			/*
-			 * Free the "new-old" po and reassign the saved
-			 *  original po variable.
-			 */
-			gtranslator_po_free(po);
-			po=current_po;
-
-			return TRUE;
-		}
-	}
-
-	return FALSE;
+	return TRUE;
 }
 
 /*
@@ -649,23 +572,29 @@ void gtranslator_bookmark_show_list(void)
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
-		g_free((gpointer)menu->label);
-		GTR_FREE(menu);
+		g_free(menu);
 	}
 }
 
 void free_userdata_bookmark(GtkWidget *widget, gpointer userdata)
 {
-	GTR_FREE(userdata);
+	g_free(userdata);
 }
 
 void gtranslator_open_file_dialog_from_bookmark(GtkWidget *widget, gchar *filename)
 {
+	GError *error;
+
 	if (!gtranslator_should_the_file_be_saved_dialog())
 		return;
-	gtranslator_file_close(NULL, NULL);
+	if (po)
+		gtranslator_file_close(NULL, NULL);
 
-	gtranslator_open_file(filename);
+	if(!gtranslator_parse_main(filename, &error))
+	{
+		gnome_app_warning(GNOME_APP(gtranslator_application),
+			error->message);
+	}
 }
 
 /*
@@ -706,7 +635,7 @@ void gtranslator_bookmark_set_comment(GtrBookmark *bookmark, const gchar *newcom
 
 	if(GTR_BOOKMARK(bookmark)->comment && GTR_BOOKMARK(bookmark)->comment[0]!='\0')
 	{
-		GTR_FREE(GTR_BOOKMARK(bookmark)->comment);
+		g_free(GTR_BOOKMARK(bookmark)->comment);
 	}
 
 	GTR_BOOKMARK(bookmark)->comment=g_strdup(newcomment);

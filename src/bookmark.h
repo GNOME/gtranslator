@@ -70,18 +70,12 @@ gchar *gtranslator_bookmark_string_from_bookmark(GtrBookmark *bookmark);
  * Open the bookmark -- file & position => version and date should be only some
  *  kind of aside-factors.
  */
-void gtranslator_bookmark_open(GtrBookmark *bookmark);
+gboolean gtranslator_bookmark_open(GtrBookmark *bookmark, GError **error);
 
 /*
  * Change the comment of a given bookmark to the given new comment "newcomment"
  */
 void gtranslator_bookmark_set_comment(GtrBookmark *bookmark, const gchar *newcomment);
-
-/*
- * Is the given GtrBookmark resolvable at all -- is the file present and do the
- *  other specs also match?!
- */
-gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark);
 
 /*
  * Return whether the two GtrBookmark's are equal.

@@ -43,7 +43,7 @@ GtkWidget * gtranslator_utils_error_dialog(gchar *format, ...)
 	error = g_strdup_vprintf(format, ap);
 	va_end(ap);
 	w = gnome_app_error(GNOME_APP(gtranslator_application), error);
-	GTR_FREE(error);
+	g_free(error);
 	return w;
 }
 
@@ -63,26 +63,24 @@ gchar *gtranslator_utils_invert_dot(gchar *str)
 {
 	GString *newstr;
 	gunichar middot;
-	gchar *p;
+	const char *p;
 
-	g_return_val_if_fail(str != NULL, str);
+	g_return_val_if_fail(str != NULL, NULL);
 	g_return_val_if_fail(strlen(str) >= 0, str);
 	
 	newstr = g_string_sized_new(strlen(str)+10);
 	middot = g_utf8_get_char("·");
 	p = str;
-	if (*p)	
-		do 
-		{
-			gunichar c = g_utf8_get_char(p);
-			if (c == middot)
-				g_string_append_c(newstr, ' ');
-			else if (g_unichar_break_type(c) == G_UNICODE_BREAK_SPACE)
-				g_string_append_unichar(newstr, middot);
-			else
-				g_string_append_unichar(newstr, c);
-			p = g_utf8_next_char(p);
-		} while (*p);
+	while(*p) {
+		gunichar c = g_utf8_get_char(p);
+		if (c == middot)
+			g_string_append_c(newstr, ' ');
+		else if (g_unichar_break_type(c) == G_UNICODE_BREAK_SPACE)
+			g_string_append_unichar(newstr, middot);
+		else
+			g_string_append_unichar(newstr, c);
+		p = g_utf8_next_char(p);
+	}
 	return(g_string_free(newstr, FALSE));
 }
 
@@ -311,120 +309,11 @@ GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
 }
 
 /*
- * Adds a GnomeColorPicker to the given table.
- */
-GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
-	gint row, const gchar *label_text, const gchar *title_text,
-	ColorType color_type, GCallback callback)
-{
-	GtkWidget *label;
-	GtkWidget *color_selector;
-	
-	label=gtk_label_new(label_text);
-
-	color_selector=gnome_color_picker_new();
-	
-	gnome_color_picker_set_title(GNOME_COLOR_PICKER(color_selector),
-		title_text);
-	
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(color_selector), 
-		color_type);
-	
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), color_selector, 1, 2, 
-		row, row + 1);
-	
-	g_signal_connect(G_OBJECT(color_selector), "color_set",
-		G_CALLBACK(callback), NULL);	
-	
-	return color_selector;
-}
-
-/*
- * Checks the given file for read permissions first and then
- *  for the right write permissions.
- */
-gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
-{
-	FILE *file;
-	gchar *error_message;
-
-	g_return_val_if_fail(po_file != NULL, FALSE);
-	/*
-	 * Open the file first for reading.
-	 */
-	file=fopen(po_file->filename, "r");
-	if(file == NULL)
-	{
-		gtranslator_utils_error_dialog(
-			_("You are not permitted to access file '%s'."),
-				po_file->filename);
-
-		return FALSE;
-	}
-	else
-	{
-		/*
-		 * Open the same file also for a write-permission check.
-		 */ 
-		file=fopen(po_file->filename, "r+");
-		if(file == NULL)
-		{
-			/*
-			 * Show a warning box to the user and warn him about
-			 *  the fact of lacking write permissions.
-			 */  
-			error_message=g_strdup_printf(
-				_("You do not have permission to modify file '%s'.\n\
-Please save a new copy of it to a place of your choice and get write\n\
-permission for it."),
-				po_file->filename);
-			gnome_app_warning(GNOME_APP(gtranslator_application), error_message);
-
-			po_file->no_write_perms=TRUE;
-		
-			return TRUE;
-		}
-		else
-		{
-			po_file->no_write_perms=FALSE;
-		}
-	}
-
-	fclose(file);
-
-	return TRUE;
-}
-
-void open_it_anyway_callback( gint, gpointer );
-
-void open_it_anyway_callback( gint reply, gpointer filename )
-{
-	extern gboolean open_anyway;
-	
-	switch( reply ){
-		case 0: /* YES */
-			open_anyway = TRUE;
-			break;
-		case 1: /* NO */
-			break;
-	}
-	g_free( filename );
-}
-
-/*
  * Check if the given file is already opened by gtranslator.
  */
-gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
+gboolean gtranslator_utils_reopen_if_already_open(const gchar *filename)
 {
 	gchar *resultfilename;
-
-	extern gboolean open_anyway;
-
-	if( open_anyway ){
-		open_anyway = FALSE;
-		return( FALSE );
-	}
 
 	g_return_val_if_fail(filename!=NULL, FALSE);
 
@@ -439,14 +328,14 @@ gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
 	{
 		gint reply;
 		reply = gtranslator_already_open_dialog(NULL, (gpointer)filename);
-		if(reply == GTK_RESPONSE_YES)
-			open_anyway = TRUE;
-		return TRUE;
-	}
-	else
-	{
+		if(reply == GTK_RESPONSE_NO)
 		return FALSE;
 	}
+
+	/*
+	 * Assume we want to open it
+	 */
+	return TRUE;
 }
 
 /*
@@ -473,7 +362,7 @@ gboolean gtranslator_utils_check_program(const gchar *program_name,
 		}
 
 		gnome_app_warning(GNOME_APP(gtranslator_application), warning_message);
-		GTR_FREE(warning_message);
+		g_free(warning_message);
 
 		return FALSE;
 	}

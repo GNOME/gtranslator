@@ -1,8 +1,8 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
- *			Ross Golder <ross@kabalak.net>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,43 +28,50 @@
 
 #include <libgnomeui/libgnomeui.h>
 
-/*
- * #include <libgnome/gnome-defs.h>
- */
-
 #include <libgnome/gnome-i18n.h>
+
+#include "parse.h"
 
 /*
  * The globally needed widgets
  */
 extern GtkWidget *gtranslator_application;
-extern GtkWidget *gtranslator_messages_table;
-extern GtkTextView *trans_box;
-extern GtkTextView *text_box;
 extern GtkWidget *gtranslator_application_bar;
 
 extern GtkWidget *sidebar_pane;
-extern GtkWidget *table_pane;
-extern GtkWidget *content_pane;
 
 /*
- * This is the "extra" content structure for the comment area 
- *  and the corresponding variable .-)
+ * This class encapsulated all the widgets related to a PO file
  */
-typedef struct
-{
-	GtkWidget	*box;
+typedef struct {
+	GtkWidget *content_pane;
 
-	GtkWidget	*comment;
-	GtkWidget	*edit_button;
-} GtrExtraContentArea;
+	GtkWidget *messages_table;
+	GtkWidget *messages_tree;
+	
+	GtkWidget *comment;
+	GtkWidget *edit_button;
 
-extern GtrExtraContentArea *extra_content_view;
+	GtkWidget *text_vbox;
+	GtkWidget *text_msgid;
+	GtkWidget *text_msgid_plural;
+	GtkWidget *trans_vbox;
+	GtkWidget *trans_msgstr[16];
+
+	GtkWidget *table_pane;
+} GtrDocumentView;
+
+extern GtrDocumentView *document_view;
 
 /*
  * Creates the main window ans sets up the environment.
  */
 void gtranslator_create_main_window(void);
+
+/*
+ * Set up the widgets to display the given po file
+ */
+void gtranslator_show_file(GtrPo *po);
 
 /*
  * Quits from gtranslator.
@@ -76,7 +83,6 @@ void gtranslator_quit(GtkWidget *widget, GdkEventAny *e,
  * Various functions for displaying messages 
  */
 void gtranslator_application_bar_update(gint pos);
-void gtranslator_text_boxes_clean(void);
 
 /*
  * Callbacks for text operations
@@ -91,6 +97,12 @@ void gtranslator_selection_set(GtkTextView *text_view, gint start, gint end);
  * A status defining callback -- now generaly defined for instance.
  */
 void gtranslator_translation_changed(GtkWidget  *widget, gpointer useless);
+
+/*
+ * Update the progress bar according to how many messages have been
+ * translated.
+ */
+void gtranslator_update_progress_bar(void);
 
 /*
  * If TRUE, means that trans_box is being changed by program, not user

@@ -97,7 +97,6 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless);
  */
 void gtranslator_find_dialog(GtkWidget * widget, gpointer useless);
 
-void gtranslator_compile_error_dialog(FILE * fs);
 gint gtranslator_already_open_dialog(GtkWidget *widget, gpointer filename);
 gint gtranslator_file_revert_dialog(GtkWidget *widget, gpointer filename);
 void gtranslator_file_is_not_changed_dialog(GtkWidget * widget, gpointer useless);

@@ -56,11 +56,11 @@ void gtranslator_undo_register_insertion(const gchar *text, const GtkTextIter *p
 
 	if(undo)
 	{
-		GTR_FREE(undo->text);
-		GTR_FREE(undo->position);
+		g_free(undo->text);
+		g_free(undo->position);
 	}
 	
-	GTR_FREE(undo);
+	g_free(undo);
 
 	undo=g_new0(GtrUndo, 1);
 
@@ -81,12 +81,12 @@ void gtranslator_undo_register_deletion(const gchar *text, const GtkTextIter *po
 
 	if(undo)
 	{
-		GTR_FREE(undo->text);
-		GTR_FREE(undo->position);
-		GTR_FREE(undo->endposition);
+		g_free(undo->text);
+		g_free(undo->position);
+		g_free(undo->endposition);
 	}
 	
-	GTR_FREE(undo);
+	g_free(undo);
 
 	undo=g_new0(GtrUndo, 1);
 
@@ -113,10 +113,10 @@ void gtranslator_undo_clean_register()
 {
 	if(undo)
 	{
-		GTR_FREE(undo->text);
+		g_free(undo->text);
 	}
 
-	GTR_FREE(undo);
+	g_free(undo);
 }
 
 /*
@@ -132,7 +132,7 @@ void gtranslator_undo_run_undo()
 	g_return_if_fail(undo->position >= 0);
 	g_return_if_fail(undo->text!=NULL);
 
-	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(trans_box));
+	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(document_view->trans_msgstr[0]));
 	gtk_text_buffer_get_end_iter(buffer, end);
 
 	/*

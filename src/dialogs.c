@@ -1,7 +1,7 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
- *			Ross Golder <ross@kabalak.net>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 #include "about.h"
 #include "actions.h"
 #include "bookmark.h"
-#include "color-schemes.h"
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
@@ -77,7 +76,7 @@ void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 {
 	if (wmname != NULL)
-		gtk_window_set_wmclass(GTK_WINDOW(*dlg), wmname, "gtranslator");
+		gtk_window_set_wmclass(GTK_WINDOW(*dlg), wmname, PACKAGE_NAME);
 	g_signal_connect(G_OBJECT(*dlg), "destroy",
 			 G_CALLBACK(gtk_widget_destroyed), dlg);
 
@@ -133,48 +132,10 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	}
 
 	/*
-	 * If we do have write perms for the file we can save it under each
-	 *  filename but if we don't have write perms for it, we'd try to
-	 *   save it in our local directory.
-	 *
-	 * OR: The filename points to a copy-result po file, then we do apply
-	 *  the same dialog tactics.
-	 */   
-	if(po->no_write_perms==FALSE||strstr(po->filename, "/.gtranslator/"))
-	{
-		dialog = gtk_file_selection_new(_("gtranslator -- save file as.."));
-	}
-	else
-	{
-		gchar *filename=NULL;
-		
-		if(po->header->language)
-		{
-			filename=g_strdup_printf("%s/%s.%s.po", 
-				g_get_home_dir(),
-				po->header->prj_name,
-				po->header->language);
-		}
-		else
-		{
-			filename=g_strdup_printf("%s/%s.po",
-				g_get_home_dir(),
-				po->header->prj_name); 
-		}
-		
-		dialog = gtk_file_selection_new(_("gtranslator -- save local copy of file as.."));
+	 * Let the user use the file selector to decide where to save it
+	 */
+	dialog = gtk_file_selection_new(_("gtranslator -- save file as.."));
 
-		/*
-		 * Set a local filename in the users home directory with the 
-		 *  same filename as the original but with a project prefix
-		 *   (e.g. "gtranslator-tr.po").
-		 */ 
-		gtk_file_selection_set_filename(GTK_FILE_SELECTION(dialog), filename);
-		gtranslator_file_dialogs_store_directory(filename);
-
-		GTR_FREE(filename);
-	}
-	
 	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
 		"clicked",
 		GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
@@ -205,7 +166,7 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 	GtkWidget *dialog;
 	gint reply;
 
-	if ((!file_opened) || (!po->file_changed))
+	if (!po || (!po->file_changed))
 		return TRUE;
 	dialog=gtk_message_dialog_new(
 		GTK_WINDOW(gtranslator_application),
@@ -361,14 +322,14 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		/*
 		 * Free all the used stuff here.
 		 */
-		GTR_FREE(comment_dialog_contents);
+		g_free(comment_dialog_contents);
 		g_strfreev(checkarray);
 		g_string_free(comment_string, TRUE);
 		
 		/*
 		 * Set the label contents in the GUI.
 		 */
-		gtk_label_set_text(GTK_LABEL(extra_content_view->comment),
+		gtk_label_set_text(GTK_LABEL(document_view->comment),
 			comment->pure_comment);
 	}
 	
@@ -410,7 +371,7 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 		/*
 		 * The user wanted it so, so perform the removal.
 		 */
-		gtranslator_remove_all_translations();
+		gtranslator_remove_all_translations(po);
 	}
 }
 
@@ -444,7 +405,7 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 		}
 	}
 
-	GTR_FREE(directory);
+	g_free(directory);
 }
 
 /*
@@ -460,7 +421,7 @@ void gtranslator_file_dialogs_store_directory(const gchar *filename)
 	
 	gtranslator_config_set_string("informations/last_directory", directory);
 
-	GTR_FREE(directory);
+	g_free(directory);
 }
 
 /*
@@ -512,7 +473,7 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 	 */
 	adjustment =
 	    gtk_adjustment_new(g_list_position(po->messages, po->current) + 1,
-	    		       1, po->length, 1, 10, 10);
+	    		       1, g_list_length(po->messages), 1, 10, 10);
 	spin = gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 1, 0);
 	gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(spin),
 					  GTK_UPDATE_IF_VALID);
@@ -652,7 +613,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 			gchar   *newstr;
 
 			newstr=nautilus_str_strip_chr(find_text, GtrPreferences.hotkey_char);
-			GTR_FREE(find_text);
+			g_free(find_text);
 			find_text=newstr;
 		}
 
@@ -668,10 +629,8 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 		/*
 		 * Save the last search settings for a future search.
 		 */
-
 		gtranslator_find(NULL, find_text, GtrPreferences.fi_comments, 
 			GtrPreferences.fi_english, GtrPreferences.fi_translation);
-
 		gtranslator_actions_enable(ACT_FIND_AGAIN, ACT_END);
 
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -814,47 +773,12 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 
-		GTR_FREE(findme);
-		GTR_FREE(replaceme);
+		g_free(findme);
+		g_free(replaceme);
 		
 		gtranslator_replace_run(rpl);
 	}
 	
-}
-
-/* 
- * TODO: Jump to the message containing first error. Something strange with
- * line/message numbers, maybe we need to convert between them?
- */
-void gtranslator_compile_error_dialog(FILE * fs)
-{
-	gchar buf[2048];
-	gint len;
-	GtkWidget *dialog, *textbox;
-	GtkWidget *scroll;
-	GtkTextBuffer *buffer;
-	GtkTextIter *iter = NULL;
-
-	dialog = gtranslator_utils_error_dialog(_("An error occurred while msgfmt was executed:\n"));
-	buffer = gtk_text_buffer_new(NULL);
-	while (TRUE) {
-		len = fread(buf, 1, sizeof(buf), fs);
-		if (len == 0)
-			break;
-		gtk_text_buffer_get_end_iter(buffer, iter);
-		gtk_text_buffer_insert(buffer, iter, buf, len);
-	}
-	textbox = gtk_text_view_new_with_buffer(buffer);
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(textbox), FALSE);
-
-	scroll = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_container_add(GTK_CONTAINER(scroll), textbox);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			 scroll, TRUE, TRUE, 0);
-	gtranslator_dialog_show(&dialog, NULL);
 }
 
 /* 
@@ -893,7 +817,7 @@ gint gtranslator_already_open_dialog(GtkWidget *widget, gpointer filename)
 	 */
 	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(GTK_WIDGET(dialog));
-	GTR_FREE(fname);
+	g_free(fname);
 
 	return reply;
 }
@@ -926,7 +850,7 @@ gint gtranslator_file_revert_dialog(GtkWidget *widget, gpointer filename)
 	 */
 	reply=gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(GTK_WIDGET(dialog));
-	GTR_FREE(fname);
+	g_free(fname);
 
 	return reply;
 }
@@ -981,6 +905,7 @@ void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 	gpointer entrydata)
 {
 	GString *uri=g_string_new("");
+	GError *error;
 
 	if(button==GTK_RESPONSE_OK)
 	{
@@ -998,18 +923,9 @@ void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 		}
 		else
 		{
-			/*
-			 * Open the URI via our beloved function; the else case
-			 *  is very logical .-)
-			 */ 
-			if(gtranslator_utils_uri_supported(uri->str))
-			{
 				gtk_widget_destroy(GTK_WIDGET(dialog));
-				gtranslator_open_file(uri->str);
-			}
-			else
-			{
-				gtranslator_utils_error_dialog(_("No supported URI protocol (like \"ftp://\") given!"));
+			if(!gtranslator_parse_main(uri->str, &error)) {
+				gtranslator_utils_error_dialog(error->message);
 			}
 		}
 	}
@@ -1043,6 +959,7 @@ http://www.DOMAIN.COM/PO-FILE"));
 void gtranslator_rescue_file_dialog(void)
 {
 	GtkWidget *dialog;
+	GError *error;
 	gchar *original_filename;
 	gint reply;
 	
@@ -1090,7 +1007,10 @@ and may contain your hard work!\n"),
 		rename(gtranslator_runtime_config->crash_filename, 
 			original_filename);
 
-		gtranslator_open_file(original_filename);
+		if(!gtranslator_parse_main(original_filename, &error)) {
+			gnome_app_warning(GNOME_APP(gtranslator_application),
+				error->message);
+		}
 	}
 	else if(reply==GTK_RESPONSE_REJECT)
 	{
@@ -1100,209 +1020,7 @@ and may contain your hard work!\n"),
 		unlink(gtranslator_runtime_config->crash_filename);
 	}
 
-	GTR_FREE(original_filename);
-}
-
-/*
- * Query for a specific string.
- */
-void gtranslator_query_dialog(void)
-{
-	static GtkWidget *dialog=NULL;
-
-	GtkWidget *innertable;
-	GtkWidget *query_entry;
-	GtkWidget *query_entry_label;
-	GtkWidget *label;
-
-	gint reply;
-	
-	if(dialog != NULL) {
-		gtk_window_present(GTK_WINDOW(dialog));
-		return;
-	}
-
-	#define add2Box(x); \
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), x, \
-		FALSE, FALSE, 0);
-	#define add2Table(x, y, z); \
-	gtk_table_attach_defaults(GTK_TABLE(innertable), x, y, y+1, z, z+1);
-
-	/*
-	 * A half-baken dialog for the query functionality.
-	 */
-	label=gtk_label_new(_("Here you can query existing translations from your learn buffer."));
-	
-	dialog=gtk_dialog_new_with_buttons(
-		_("gtranslator -- query your personal learn buffer"),
-		GTK_WINDOW(gtranslator_application),
-		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-		_("Query"), GTR_RESPONSE_QUERY,
-		_("Query message content"), GTR_RESPONSE_QUERY_CONTENT,
-		NULL);
-	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTR_RESPONSE_QUERY);
-
-	innertable=gtk_table_new(2, 2, FALSE);
-
-	gtk_table_set_row_spacings(GTK_TABLE(innertable), 5);
-	gtk_table_set_col_spacings(GTK_TABLE(innertable), 5);
-	
-	query_entry=gnome_entry_new("QUERY");
-	query_entry_label=gtk_label_new(_("Query string:"));
-
-	/*
-	 * Add the widgets to the dialog.
-	 */
-	add2Box(label);
-	add2Box(innertable);
-
-	add2Table(query_entry_label, 0, 0);
-	add2Table(query_entry, 1, 0);
-
-	gtranslator_dialog_show(&dialog, "gtranslator -- query dialog");
-
-	reply=gtk_dialog_run(GTK_DIALOG(dialog));
-
-	if(reply==1 || !reply)
-	{
-		gchar *query_text;
-	
-		/*
-		 * Get the string to query for from the GnomeEntry.
-		 */
-		if(!reply)
-		{
-			query_text=gtk_editable_get_chars(GTK_EDITABLE(
-				gnome_entry_gtk_entry(GNOME_ENTRY(query_entry))), 0, -1);
-		}
-		else
-		{
-			query_text=g_strdup(GTR_MSG(po->current->data)->msgid);
-		}
-
-		if(!query_text || (strlen(query_text) <= 1))
-		{
-			/*
-			 * Bad case in here.
-			 */
-			gnome_app_warning(GNOME_APP(gtranslator_application),
-				_("No query string given!"));
-
-			GTR_FREE(query_text);
-			gtk_widget_destroy(GTK_WIDGET(dialog));
-		}
-		else
-		{
-			gchar *result;
-
-			result=gtranslator_learn_get_learned_string(query_text);
-			
-			/*
-			 * Close the open dialog now.
-			 */
-			gtk_widget_destroy(GTK_WIDGET(dialog));
-
-			if(!result)
-			{
-				/* 
-				 * No results? Close down the dialog.
-				 */
-				gnome_app_warning(GNOME_APP(gtranslator_application),
-					_("Couldn't find any result for the query in your learn buffer!"));
-			}
-			else
-			{
-				/*
-				 * In the other case simply print out the found
-				 *  translation and exit then.
-				 */
-				gchar *resulttext;
-				GtkWidget *condialog=NULL;
-				gint hehue;
-
-				resulttext=g_strdup_printf(_("Found \"%s\" as a translation for \"%s\".\n\
-Would you like to insert it into the translation?"),
-					result, query_text);
-
-				GTR_FREE(query_text);
-
-				/*
-				 * Build up another dialog and show up the
-				 *  possible actions.
-				 */
-				condialog=gtk_message_dialog_new(
-					GTK_WINDOW(gtranslator_application),
-					GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_WARNING,
-					GTK_BUTTONS_YES_NO,
-					resulttext);
-
-				gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
-
-				/*
-				 * Run the dialog and switch the action to take
-				 *  depending on the user's selection.
-				 */
-				gtranslator_dialog_show(&condialog, "gtranslator -- query result");
-				hehue=gtk_dialog_run(GTK_DIALOG(condialog));
-				gtk_widget_destroy(GTK_WIDGET(condialog));
-				
-				GTR_FREE(resulttext);
-				
-				if(hehue==GTK_RESPONSE_YES)
-				{
-					gchar *content;
-
-					/*
-					 * Get the translation box contents.
-					 */
-					content=gtk_editable_get_chars(
-						GTK_EDITABLE(trans_box), 0, -1);
-
-					/*
-					 * See if the query result is already in the
-					 *  translation box; if so print a warning
-					 *   and don't insert the translation.
-					 */
-					if(content && nautilus_strcasecmp(content, result))
-					{
-						/*
-						 * Insert the text and update the
-						 * status flags for it.
-						 */
-					        gtk_text_buffer_set_text(gtk_text_view_get_buffer(trans_box), result, -1);
-
-						gtranslator_translation_changed(NULL, NULL);
-
-						gtranslator_message_update();
-						if(GtrPreferences.show_messages_table)
-						{
-							gtranslator_messages_table_update_row(GTR_MSG(po->current->data));
-						}
-
-						GTR_FREE(result);
-					}
-					else
-					{
-						gnome_app_warning(GNOME_APP(gtranslator_application),
-
-						/*
-						 * Translators: This means that the query result string is
-						 *  already translated.
-						 */
-						_("Query's result translation is already there!"));
-					}
-
-					GTR_FREE(content);
-				}
-			}
-		}
-	}
-	else
-	{
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-	}
+	g_free(original_filename);
 }
 
 /*
@@ -1312,6 +1030,7 @@ void gtranslator_auto_translation_dialog(void)
 {
 	static GtkWidget *at_dialog=NULL;
 	gint 		reply;
+	GError		*error;
 
 	if(at_dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(at_dialog));
@@ -1340,7 +1059,11 @@ from your personal learn buffer?"));
 		/*
 		 * Autotranslate the missing entries.
 		 */
-		gtranslator_learn_autotranslate(TRUE);
+		if(!gtranslator_learn_autotranslate(po, TRUE, &error))
+		{
+			gnome_app_warning(GNOME_APP(gtranslator_application),
+				error->message);
+		}
 	}
 
 	gtk_widget_destroy(GTK_WIDGET(at_dialog));
@@ -1412,7 +1135,7 @@ void gtranslator_bookmark_adding_dialog(GtkWidget *widget, gpointer useless)
 
 		gtranslator_bookmark_add_direct_with_comment(comment_dialog_contents);
 
-		GTR_FREE(comment_dialog_contents);
+		g_free(comment_dialog_contents);
 	}
 	
 	gtk_widget_destroy(GTK_WIDGET(dialog));

@@ -25,7 +25,6 @@
 #include <config.h>
 #endif
 
-#include "color-schemes.h"
 #include "defines.h"
 #include "dialogs.h"
 #include "find.h"
@@ -53,7 +52,7 @@ static void toggle_sensitive(GtkWidget *widget, gpointer data);
 static GtkWidget
 	*authors_name, *authors_email, *authors_language,
 	*mime_type, *encoding, *lcode, *lg_email, *dictionary_file,
-	*scheme_file, *autosave_suffix, *hotkey_chars;
+	*autosave_suffix, *hotkey_chars;
 
 /*
  * The toggle buttons/labels used in the preferences box:
@@ -77,8 +76,7 @@ static GtkWidget
 /*
  * Font/color specific widgets used in the preferences box.
  */
-static GtkWidget *foreground, *background, *msgid_font, *msgstr_font,
-	*mt_untranslated, *mt_fuzzy, *mt_translated;
+static GtkWidget *msgid_font, *msgstr_font;
 
 /*
  * The preferences dialog widget itself, plus a notebook.
@@ -291,28 +289,8 @@ GtkWidget *gtranslator_preferences_font_picker_new(const gchar *title_text,
 }
 
 
-GtkWidget *gtranslator_preferences_color_picker_new(const gchar *title_text,
-						    GtkSizeGroup *size_group, 
-						    ColorType color_type,
-						    GCallback callback)
-{
-	GtkWidget *color_selector;
-
-	color_selector = gnome_color_picker_new();
-	gnome_color_picker_set_title(GNOME_COLOR_PICKER(color_selector), title_text);
-
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(color_selector), color_type);
-	if (size_group != NULL)
-		gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), GTK_WIDGET (color_selector));
-	g_signal_connect(G_OBJECT(color_selector), "color_set",
-			 G_CALLBACK(callback), NULL);
-
-	return color_selector;
-}
-
 void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 {
- 	gchar	*old_colorscheme=NULL;
  	GtkObject *adjustment;
 
 	GtkWidget *page, *category_box, *hbox;
@@ -402,13 +380,6 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 						       G_CALLBACK(gtranslator_preferences_dialog_changed));
 	gtk_box_pack_start (GTK_BOX (category_box), highlight, FALSE, FALSE, 0);
 
-	old_colorscheme=gtranslator_utils_get_raw_file_name(GtrPreferences.scheme);
-	scheme_file = gtranslator_preferences_combo_new(colorschemes, old_colorscheme,
-							control_size_group, 
-							G_CALLBACK(gtranslator_preferences_dialog_changed),
-							NULL);
-	gtranslator_preferences_pack_start_with_label(category_box, scheme_file, label_size_group, NULL, 
-						      _("Syntax color scheme to use:"));
         use_dot_char = gtranslator_preferences_toggle_new(_("Use special character to indicate white space"),
 							  GtrPreferences.dot_char,
 							  G_CALLBACK(gtranslator_preferences_dialog_changed));
@@ -431,20 +402,6 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 							      G_CALLBACK(gtranslator_preferences_dialog_changed));
 	gtranslator_preferences_pack_start_with_label(category_box, msgstr_font, label_size_group, 
 						      own_fonts, _("Translation font:"));
-	own_colors = gtranslator_preferences_toggle_new(_("Apply own colors:"),
-							GtrPreferences.use_own_colors,
-							G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtk_box_pack_start (GTK_BOX (category_box), own_colors, FALSE, FALSE, 0);
-	foreground = gtranslator_preferences_color_picker_new(_("gtranslator -- foreground color"), 
-							      control_size_group, COLOR_FG,
-							      G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtranslator_preferences_pack_start_with_label(category_box, foreground, label_size_group, 
-						      own_colors, _("Foreground color:"));
-	background = gtranslator_preferences_color_picker_new(_("gtranslator -- background color"), 
-							      control_size_group, COLOR_BG,
-							      G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtranslator_preferences_pack_start_with_label(category_box, background, label_size_group, 
-						      own_colors, _("Background:"));
 	category_box = gtranslator_preferences_category_new_pack_start(page, _("Contents"));
 	unmark_fuzzy = gtranslator_preferences_toggle_new(_("Remove fuzzy status if message is changed"),
 							  GtrPreferences.unmark_fuzzy,
@@ -558,28 +515,6 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 									 GtrPreferences.collapse_all,
 									 G_CALLBACK(gtranslator_preferences_dialog_changed));
 	gtk_box_pack_start (GTK_BOX (category_box), collapse_all_entries, FALSE, FALSE, 0);
-	use_own_mt_colors = gtranslator_preferences_toggle_new(_("Use own colors for messages table groups"),
-							       GtrPreferences.use_own_mt_colors,
-							       G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtk_box_pack_start (GTK_BOX (category_box), use_own_mt_colors, FALSE, FALSE, 0);
-	mt_untranslated = gtranslator_preferences_color_picker_new("gtranslator -- untranslated entries' color",
-								   NULL,
-								   COLOR_MESSAGES_TABLE_UNTRANSLATED,
-								   G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtranslator_preferences_pack_start_with_label(category_box, mt_untranslated, label_size_group, 
-						      use_own_mt_colors, _("Fuzzy entries color:"));
-	mt_fuzzy = gtranslator_preferences_color_picker_new("gtranslator -- fuzzy entries' color",
-							    NULL,
-							    COLOR_MESSAGES_TABLE_FUZZY,
-							    G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtranslator_preferences_pack_start_with_label(category_box, mt_fuzzy, label_size_group, 
-						      use_own_mt_colors, _("Untranslated entries color:"));
-	mt_translated = gtranslator_preferences_color_picker_new("gtranslator -- translated entries' color",
-								 NULL,
-								 COLOR_MESSAGES_TABLE_TRANSLATED,
-								 G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtranslator_preferences_pack_start_with_label(category_box, mt_translated, label_size_group, 
-						      use_own_mt_colors, _("Translated entries color:"));
 
 	/*
 	 * Autotranslate page
@@ -624,7 +559,6 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
  */
 static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint response_id, gpointer useless)
 {
-	gchar	*selected_scheme_file=NULL;
 	gchar	*translator_str=NULL;
 	gchar	*translator_email_str=NULL;
 	
@@ -641,7 +575,7 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 		return;
 	}
 
-#define update(value,widget) GTR_FREE(value); \
+#define update(value,widget) g_free(value); \
 	value=gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 
 	update(translator_str, authors_name);
@@ -711,8 +645,8 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	gtranslator_translator_set_translator(gtranslator_translator,
 		translator_str, translator_email_str);
 
-	GTR_FREE(translator_str);
-	GTR_FREE(translator_email_str);
+	g_free(translator_str);
+	g_free(translator_email_str);
 	
 	update(gtranslator_translator->language->name, GTK_COMBO(authors_language)->entry);
 	update(gtranslator_translator->language->locale, GTK_COMBO(lcode)->entry);
@@ -775,8 +709,8 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	gtranslator_config_set_float("informations/min_match_percentage",
 		GtrPreferences.min_match_percentage);
 	
-	GTR_FREE(GtrPreferences.msgid_font);
-	GTR_FREE(GtrPreferences.msgstr_font);
+	g_free(GtrPreferences.msgid_font);
+	g_free(GtrPreferences.msgstr_font);
 	
 	GtrPreferences.msgid_font=g_strdup(
 		gnome_font_picker_get_font_name(
@@ -795,73 +729,6 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	 * Assign our attended hotkey character from the prefs dialog.
 	 */
 	gtranslator_config_set_int("editor/hotkey_char", GtrPreferences.hotkey_char);
-	
-	/*
-	 * Apply the given color scheme.
-	 */ 
-	GTR_FREE(GtrPreferences.scheme);
-	
-	selected_scheme_file=gtk_editable_get_chars(GTK_EDITABLE(
-		GTK_COMBO(scheme_file)->entry), 0, -1);
-
-	if(selected_scheme_file)
-	{
-		/*
-		 * First check if there's such a colorscheme in 
-		 *  ~/.gtranslator/colorschemes before checking the global 
-		 *   colorschemes directory.
-		 */
-		GtrPreferences.scheme=g_strdup_printf(
-			"%s/.gtranslator/colorschemes/%s.xml",
-				g_get_home_dir(), 
-				selected_scheme_file);
-
-		/*
-		 * If there's no such colorscheme in the 
-		 *  ~/.gtranslator/colorschemes directory, try the global 
-		 *   colorschemes directory.
-		 */
-		if(!g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
-		{
-			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", 
-				SCHEMESDIR, selected_scheme_file);
-		}
-	    
-		if(g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
-		{
-			/*
-			 * Free the old used colorscheme.
-			 */
-			gtranslator_color_scheme_free(&theme);
-			
-			/*
-			 * Read in the new colorscheme, initialize the colors.
-			 */
-			gtranslator_color_scheme_apply(GtrPreferences.scheme);
-			theme=gtranslator_color_scheme_load_from_prefs();
-			
-			gtranslator_colors_initialize();
-		}
-
-		GTR_FREE(selected_scheme_file);
-	}
-
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(background), COLOR_BG);
-
-	/*
-	 * The messages table colors are set up here.
-	 */
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(mt_untranslated), 
-		COLOR_MESSAGES_TABLE_UNTRANSLATED);
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(mt_fuzzy), 
-		COLOR_MESSAGES_TABLE_FUZZY);
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(mt_translated), 
-		COLOR_MESSAGES_TABLE_TRANSLATED);
-
-	gtranslator_set_style(GTK_WIDGET(text_box), 0);
-	gtranslator_set_style(GTK_WIDGET(trans_box), 1);
-
 	gtranslator_config_set_bool("toggles/save_geometry", GtrPreferences.save_geometry);
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", GtrPreferences.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
@@ -1112,18 +979,6 @@ void gtranslator_preferences_read(void)
 		"toggles/collapse_all");
 	GtrPreferences.show_plural_forms = gtranslator_config_get_bool(
 		"toggles/show_plural_forms");
-
-	/*
-	 * Check if we'd to use special styles.
-	 */
-	if(GtrPreferences.use_own_fonts || GtrPreferences.use_own_colors)
-	{
-		/*
-		 * Set the own specs for colors and for the font.
-		 */
-		gtranslator_set_style(GTK_WIDGET(text_box), 0);
-		gtranslator_set_style(GTK_WIDGET(trans_box), 1);
-	}
 }
 
 /*
@@ -1131,10 +986,10 @@ void gtranslator_preferences_read(void)
  */
 void gtranslator_preferences_free()
 {
-	GTR_FREE(GtrPreferences.autosave_suffix);
-	GTR_FREE(GtrPreferences.spell_command);
-	GTR_FREE(GtrPreferences.dictionary);
-	GTR_FREE(GtrPreferences.msgid_font);
-	GTR_FREE(GtrPreferences.msgstr_font);
-	GTR_FREE(GtrPreferences.scheme);
+	g_free(GtrPreferences.autosave_suffix);
+	g_free(GtrPreferences.spell_command);
+	g_free(GtrPreferences.dictionary);
+	g_free(GtrPreferences.msgid_font);
+	g_free(GtrPreferences.msgstr_font);
+	g_free(GtrPreferences.scheme);
 }

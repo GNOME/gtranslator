@@ -29,6 +29,7 @@
 #include "gui.h"
 #include "header_stuff.h"
 #include "languages.h"
+#include "message.h"
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
@@ -59,7 +60,6 @@ static gboolean header_changed;
 static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpointer useless);
 static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
 static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless);
-static void language_changed(GtkWidget * widget, gpointer useless);
 static gchar *get_current_year(void);
 static void substitute(gchar **item, const gchar *bad, const gchar *good);
 static void replace_substring(gchar **item, const gchar *bad, const gchar *good);
@@ -85,17 +85,20 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 	}
 }
 
-GtrHeader * gtranslator_header_get(GtrMsg * msg)
+GtrHeader *gtranslator_header_get(const char *string)
 {
+#ifdef DONTFORGET
 	GtrHeader *ph;
 	gchar **lines, **pair, *pos;
 	gint i = 0;
+#endif
 
-	g_return_val_if_fail(msg != NULL, NULL);
-	g_return_val_if_fail(msg->msgstr != NULL, NULL);
-	
+	g_return_val_if_fail(string != NULL, NULL);
+
+	g_warning("Header: %s", string);
+#ifdef DONTFORGET	
 	ph = g_new0(GtrHeader, 1);
-	lines = g_strsplit(msg->msgstr, "\n", 0);
+	lines = g_strsplit(message->msgstr, "\n", 0);
 	for (i = 0; lines[i] != NULL; i++) {
 		pair = g_strsplit(lines[i], ": ", 2);
 		if(!pair[0] || !pair[1]) continue;
@@ -167,9 +170,9 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 	
 	g_strfreev(lines);
 
-	if(msg->comment && GTR_COMMENT(msg->comment)->comment)
+	if(message->comment)
 	{
-		ph->comment=g_strdup(GTR_COMMENT(msg->comment)->comment);
+		ph->comment=g_strdup(message->comment);
 	}
 	else
 	{
@@ -178,39 +181,42 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 
 	if (ph->prj_name)
 		return ph;
-	else
-		return NULL;
+
+#endif
+	return NULL;
 }
 
+#ifdef PROBABLY_NOT_NEEDED_ANY_MORE
 /*
  * Creates new GtrMsg, with all data set to current state of header 
  */
-GtrMsg * gtranslator_header_put(GtrHeader * h)
+const char *gtranslator_header_put(GtrHeader *header)
 {
 	gchar *group;
 	GtrMsg *msg = g_new0(GtrMsg, 1);
 	gchar *version;
+	gchar *msgstr;
 
-	const gchar *lang=gtranslator_utils_get_english_language_name(h->language);
+	const gchar *lang=gtranslator_utils_get_english_language_name(header->language);
 
-	if (h->lg_email && h->lg_email[0] != '\0')
-		group = g_strdup_printf("%s <%s>", lang, h->lg_email);
+	if (header->lg_email && header->lg_email[0] != '\0')
+		group = g_strdup_printf("%s <%s>", lang, header->lg_email);
 	else
 		group = g_strdup(lang);
 
-	if (h->prj_version && h->prj_version[0] != '\0')
-		version = g_strdup_printf("%s %s", h->prj_name, h->prj_version);
+	if (header->prj_version && header->prj_version[0] != '\0')
+		version = g_strdup_printf("%s %s", header->prj_name, header->prj_version);
 	else
-		version = g_strdup(h->prj_name);
+		version = g_strdup(header->prj_name);
 
-	if(!h->report_message_bugs_to)
+	if(!header->report_message_bugs_to)
 	{
-		h->report_message_bugs_to=g_strdup("");
+		header->report_message_bugs_to=g_strdup("");
 	}
 
-	if(h->plural_forms)
+	if(header->plural_forms)
 	{
-		msg->msgstr = g_strdup_printf("\n"\
+		msgstr = g_strdup_printf("\n"\
 "Project-Id-Version: %s\\n\n"\
 "Report-Msgid-Bugs-To: %s\\n\n"\
 "POT-Creation-Date: %s\\n\n"\
@@ -222,19 +228,19 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 "Content-Transfer-Encoding: %s\\n\n"\
 "Plural-Forms: %s",
 		version,
-		h->report_message_bugs_to,
-		h->pot_date,
-		h->po_date,
-		h->translator, h->tr_email,
+		header->report_message_bugs_to,
+		header->pot_date,
+		header->po_date,
+		header->translator, header->tr_email,
 		group,
-		h->mime_version,
-		h->charset,
-		h->encoding,
-		h->plural_forms);
+		header->mime_version,
+		header->charset,
+		header->encoding,
+		header->plural_forms);
 	}
 	else
 	{
-		msg->msgstr = g_strdup_printf("\n"\
+		msgstr = g_strdup_printf("\n"\
 "Project-Id-Version: %s\\n\n"\
 "Report-Msgid-Bugs-To: %s\\n\n"\
 "POT-Creation-Date: %s\\n\n"\
@@ -245,40 +251,41 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 "Content-Type: text/plain; charset=%s\\n\n"\
 "Content-Transfer-Encoding: %s",
 		version,
-		h->report_message_bugs_to,
-		h->pot_date,
-		h->po_date,
-		h->translator, h->tr_email,
+		header->report_message_bugs_to,
+		header->pot_date,
+		header->po_date,
+		header->translator, header->tr_email,
 		group,
-		h->mime_version,
-		h->charset,
-		h->encoding);
+		header->mime_version,
+		header->charset,
+		header->encoding);
 	}
 
-	GTR_FREE(group);
-	GTR_FREE(version);
+	g_free(group);
+	g_free(version);
 
 	/*
 	 * Just copy the comment, and make sure it ends with endline.
 	 */
-	if(h->comment[strlen(h->comment)-1] == '\n')
+	if(header->comment[strlen(header->comment)-1] == '\n')
 	{
-		msg->comment = gtranslator_comment_new(h->comment);
+		msg->comment = gtranslator_comment_new(header->comment);
 	}
 	else
 	{
-		gchar *comchar=g_strdup_printf("%s\n", h->comment);
+		gchar *comchar=g_strdup_printf("%s\n", header->comment);
 		msg->comment = gtranslator_comment_new(comchar);
-		GTR_FREE(comchar);
+		g_free(comchar);
 	}
 	
-	return msg;
+	return (const char *)msgstr;
 }
+#endif
 
 /*
  * Updates PO-Revision-Date field 
  */
-void gtranslator_header_update(GtrHeader * h)
+void gtranslator_header_update(GtrHeader *header)
 {
 	time_t now;
 	struct tm *now_here;
@@ -290,52 +297,48 @@ void gtranslator_header_update(GtrHeader * h)
 	now = time(NULL);
 	now_here = localtime(&now);
 	strftime(t, 22, "%Y-%m-%d %H:%M%z", now_here);
-	GTR_FREE(h->po_date);
-	h->po_date = g_strdup(t);
+	g_free(header->po_date);
+	header->po_date = g_strdup(t);
 
 	/*
 	 * Convert the header comments back if necessary.
 	 */ 
-	if(h->comment && h->comment[0]!='#')
+	if(header->comment && header->comment[0]!='#')
 	{
-		h->comment=gtranslator_header_comment_convert_for_save(h->comment);
+		header->comment=gtranslator_header_comment_convert_for_save(header->comment);
 	}
 }
 
-void gtranslator_header_free(GtrHeader * h)
+void gtranslator_header_free(GtrHeader *header)
 {
-	if (h == NULL)
-		return;
-	GTR_FREE(h->comment);
-	GTR_FREE(h->prj_name);
-	GTR_FREE(h->prj_version);
-	GTR_FREE(h->report_message_bugs_to);
-	GTR_FREE(h->pot_date);
-	GTR_FREE(h->po_date);
-	GTR_FREE(h->translator);
-	GTR_FREE(h->tr_email);
-	GTR_FREE(h->language);
-	GTR_FREE(h->lg_email);
-	GTR_FREE(h->mime_version);
-	GTR_FREE(h->charset);
-	GTR_FREE(h->encoding);
-	GTR_FREE(h->plural_forms);
+	g_return_if_fail(header!=NULL);
 
-	if(h->generator)
+	g_free(header->comment);
+	g_free(header->prj_name);
+	g_free(header->prj_version);
+	g_free(header->report_msgid_bugs_to);
+	g_free(header->pot_date);
+	g_free(header->po_date);
+	g_free(header->translator);
+	g_free(header->tr_email);
+	g_free(header->language);
+	g_free(header->lg_email);
+	g_free(header->mime_version);
+	g_free(header->charset);
+	g_free(header->encoding);
+	g_free(header->plural_forms);
+
+	if(header->generator)
 	{
-		GTR_FREE(h->generator);
+		g_free(header->generator);
 	}
 	
-	GTR_FREE(h);
+	g_free(header);
 }
 
 static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpointer useless)
 {
-	GtrHeader 	*ph = po->header;
-	gchar		*prev_translator,
-			*prev_translator_email;
-	GtkTextBuffer   *buff;
-	GtkTextIter     start, end;
+	gchar *prev_translator, *prev_translator_email;
 
 	prev_translator=prev_translator_email=NULL;
 
@@ -344,114 +347,16 @@ static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpo
 	 */
 	gtranslator_utils_language_lists_free(widget, useless);
 
-	if(!header_changed) {
+	if(!header_changed || response == GTK_BUTTONS_CANCEL) {
 		gtk_widget_destroy(GTK_WIDGET(e_header));
 		return;
 	}
 
-	buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
-	gtk_text_buffer_get_bounds(buff, &start, &end);
-	GTR_FREE(ph->comment);
-	ph->comment = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
-
-#define update(value,widget) GTR_FREE(value);\
-	value = gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
-
-	update(ph->prj_name, prj_name);
-	update(ph->prj_version, prj_version);
-
-	if (!GtrPreferences.fill_header) {
-		
-		if(ph->translator)
-		{
-			prev_translator=g_strdup(ph->translator);
-			GTR_FREE(ph->translator);
-		}
-		
-		ph->translator = gtk_editable_get_chars(GTK_EDITABLE(translator),0,-1);
-		
-		if(ph->tr_email)
-		{
-			prev_translator_email=g_strdup(ph->tr_email);
-		}
-		
-		update(ph->tr_email, tr_email);
-		update(ph->language, GTK_COMBO(language_combo)->entry);
-		update(ph->lg_email, GTK_COMBO(lg_combo)->entry);
-		update(ph->charset, GTK_COMBO(charset_combo)->entry);
-		update(ph->encoding, GTK_COMBO(enc_combo)->entry);
-#undef update
-	} else {
-#define replace(what,with,entry) g_free(what); what = g_strdup(with);\
-	gtk_entry_set_text(GTK_ENTRY(entry), with);
-	
-		if(ph->translator)
-		{
-			prev_translator=g_strdup(ph->translator);
-		}
-		
-		replace(ph->translator, gtranslator_translator->name, translator);
-
-		if(ph->tr_email)
-		{
-			prev_translator_email=g_strdup(ph->tr_email);
-		}
-
-		replace(ph->tr_email, gtranslator_translator->email, tr_email);
-		replace(ph->language, gtranslator_translator->language->name,
-			GTK_COMBO(language_combo)->entry);
-		replace(ph->lg_email, gtranslator_translator->language->group_email,
-			GTK_COMBO(lg_combo)->entry);
-		replace(ph->charset, gtranslator_translator->language->encoding, 
-			GTK_COMBO(charset_combo)->entry);
-		replace(ph->encoding, gtranslator_translator->language->bits,
-			GTK_COMBO(enc_combo)->entry);
-#undef replace
-	}
-	
 	/*
-	 * Check if the  previous translator data could be get and if the
-	 *  last and previous translator were different persons: but only,
-	 *   if the previously last translator isn't listed there yet.
+	 * TODO: Extract values from editted header fields back into
+	 * the message header. Waiting on a gettext function to handle this.
 	 */
-	if(prev_translator && prev_translator_email && ph->translator &&
-		nautilus_strcasecmp(ph->translator, prev_translator) &&
-		nautilus_strcasecmp(ph->comment, prev_translator))
-	{
-		gchar	*prev_header_comment;
-		gchar	*year;
 
-		/*
-		 * Rescue the old header comment and free it's variable.
-		 */
-		prev_header_comment=g_strdup(ph->comment);
-		GTR_FREE(ph->comment);
-
-		/*
-		 * Eh, what would we do without it ,-)
-		 */
-		year=get_current_year();
-
-		/*
-		 * Now create the "new" header comment from the previously
-		 *  backup'd comment and the previous last translator data.
-		 */
-		ph->comment=g_strdup_printf("%s%s <%s>, %s.\n",
-			prev_header_comment,
-			prev_translator, prev_translator_email, year);
-
-		GTR_FREE(year);
-		GTR_FREE(prev_header_comment);
-	}
-	
-	/*
-	 * Convert the header comment back for save and substitute the
-	 *  PACKAGE and VERSION fields in the header.
-	 */
-	ph->comment=gtranslator_header_comment_convert_for_save(ph->comment);
-	replace_substring(&ph->comment, "PACKAGE", ph->prj_name);
-	replace_substring(&ph->comment, "VERSION", ph->prj_version);
-	
 	/*
 	 * Mark file as having unsaved changes
 	 */
@@ -467,9 +372,17 @@ static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpo
  */
 void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 {
-	GtrHeader *ph = po->header;
-	GtkWidget *foo_me_i_ve_been_wracked;
 	GtkTextBuffer *buffer;
+	gchar *space;
+	const char *headerstr;
+	char *project_id_ver;
+	char *project_name, *project_ver;
+	char *pot_creation_date, *po_revision_date;
+	char *report_msgid_bugs_to;
+	char *last_translator, *last_translator_name, *last_translator_email;
+	char *language_team, *language_name, *language_email;
+	char *content_type, *content_charset;
+	char *content_transfer_encoding;
 
 	header_changed = FALSE;
 
@@ -479,10 +392,47 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	}
 
 	/*
-	 * Prepare the header comment for view and edit in the dialog. 
+	 * Grab the header string
 	 */
-	ph->comment=gtranslator_header_comment_convert_for_view(ph->comment);
+	if(!(headerstr = po_file_domain_header(po->gettext_po_file, NULL)))
+	{
+		GtkWidget *dialog;
 
+		dialog = gtk_message_dialog_new(
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK,
+			_("No header for this file/domain"));
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(dialog);
+	}
+	
+	/*
+	 * Unpack header into values for dialog
+	 */
+	project_id_ver = po_header_field(headerstr, "Project-Id-Version");
+	space = strrchr(project_id_ver, ' ');
+	if (space) {
+		project_name = g_strndup(project_id_ver, space - project_id_ver);
+		project_ver = g_strdup(space + 1);
+	} else {
+		project_name = g_strdup(project_id_ver);
+		project_ver = g_strdup("");
+	}
+	pot_creation_date = po_header_field(headerstr, "POT-Creation-Date");
+	po_revision_date = po_header_field(headerstr, "PO-Revision-Date");
+	report_msgid_bugs_to = po_header_field(headerstr, "Report-Msgid-Bugs-To");
+	last_translator = po_header_field(headerstr, "Last-Translator");
+	language_team = po_header_field(headerstr, "Language-Team");
+	content_type = po_header_field(headerstr, "Content-Type");
+	content_transfer_encoding = po_header_field(headerstr, "Content-Transfer-Encoding");
+
+	/*
+	 * Break up translator name/email
+	 */
+	split_name_email(last_translator, &last_translator_name, &last_translator_email);
+	
 	/*
 	 * Prepare the languages list pulldown information
 	 */
@@ -515,50 +465,44 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 
 	prj_comment = gtk_text_view_new();
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
-	gtk_text_buffer_set_text(buffer, ph->comment, -1);
+	//gtk_text_buffer_set_text(buffer, ph->comment, -1);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Comments:")), 0, 1, 0, 1);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_comment, 1, 2, 0, 1);
 	gtk_widget_set_size_request(prj_comment, 360, 90);
 	g_signal_connect(buffer, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
 	prj_name = gtk_entry_new();
-	gtk_entry_set_text(GTK_ENTRY(prj_name), ph->prj_name);
+	gtk_entry_set_text(GTK_ENTRY(prj_name), project_name);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Project name:")), 0, 1, 1, 2);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_name, 1, 2, 1, 2);
 	g_signal_connect(prj_name, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
 	prj_version = gtk_entry_new();
-	gtk_entry_set_text(GTK_ENTRY(prj_version), ph->prj_version);
+	gtk_entry_set_text(GTK_ENTRY(prj_version), project_ver);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Project version:")), 0, 1, 2, 3);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_version, 1, 2, 2, 3);
 	g_signal_connect(prj_version, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
 	pot_date = gtk_entry_new();
 	gtk_widget_set_sensitive(pot_date, FALSE);
-	gtk_entry_set_text(GTK_ENTRY(pot_date), ph->pot_date);
+	gtk_entry_set_text(GTK_ENTRY(pot_date), pot_creation_date);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Pot file creation date:")), 0, 1, 3, 4);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), pot_date, 1, 2, 3, 4);
 
 	po_date = gtk_entry_new();
 	gtk_widget_set_sensitive(po_date, FALSE);
-	gtk_entry_set_text(GTK_ENTRY(po_date), ph->po_date);
+	gtk_entry_set_text(GTK_ENTRY(po_date), po_revision_date);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Po file revision date:")), 0, 1, 4, 5);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), po_date, 1, 2, 4, 5);
 
 	rmbt = gtk_entry_new();
-	gtk_entry_set_text(GTK_ENTRY(rmbt), ph->report_message_bugs_to);
+	gtk_entry_set_text(GTK_ENTRY(rmbt), report_msgid_bugs_to);
 
-	if(ph->report_message_bugs_to && strchr(ph->report_message_bugs_to, '.'))
-	{
-		gtk_widget_set_sensitive(rmbt, TRUE);
-	}
-	else
-	{
-		gtk_widget_set_sensitive(rmbt, FALSE);
-	}
+	gtk_widget_set_sensitive(rmbt, TRUE);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Report message string bugs to:")), 0, 1, 5, 6);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), rmbt, 1, 2, 5, 6);
 
+#ifdef DONTFORGET
 	if(ph->generator)
 	{
 		/*
@@ -572,6 +516,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 		gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Generator:")), 0, 1, 6, 7);
 		gtk_table_attach_defaults(GTK_TABLE(prj_page), foo_me_i_ve_been_wracked, 1, 2, 6, 7);
 	}
+#endif
 
 	gtk_notebook_append_page(GTK_NOTEBOOK(e_notebook), prj_page, gtk_label_new(_("Project")));
 
@@ -591,44 +536,44 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
 
 	translator = gtk_entry_new();
-	gtk_entry_set_text(GTK_ENTRY(translator), ph->translator);
+	gtk_entry_set_text(GTK_ENTRY(translator), last_translator_name);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Translator's name:")), 0, 1, 0, 1);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), translator, 1, 2, 0, 1);
 	g_signal_connect(translator, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
 	tr_email = gtk_entry_new();
-	gtk_entry_set_text(GTK_ENTRY(tr_email), ph->tr_email);
+	gtk_entry_set_text(GTK_ENTRY(tr_email), last_translator_email);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Translator's e-mail:")), 0, 1, 1, 2);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), tr_email, 1, 2, 1, 2);
 	g_signal_connect(tr_email, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	
-	language_combo = gtk_combo_new();
+	language_combo = gtk_combo_box_entry_new();
 	gtk_combo_set_popdown_strings(GTK_COMBO(language_combo), languages_list);
-	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (language_combo)->entry), _(ph->language));
+	gtk_entry_set_text(GTK_ENTRY(language_combo), language_name);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Language:")), 0, 1, 2, 3);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), language_combo, 1, 2, 2, 3);
-	g_signal_connect(GTK_COMBO(language_combo)->entry, "changed", G_CALLBACK(language_changed), NULL);
-
-	lg_combo = gtk_combo_new();
+	g_signal_connect(language_combo, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	
+	lg_combo = gtk_combo_box_entry_new();
 	gtk_combo_set_popdown_strings(GTK_COMBO(lg_combo), group_emails_list);
-	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (lg_combo)->entry), _(ph->lg_email));
+	gtk_entry_set_text(GTK_ENTRY(lg_combo), language_email);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Language group's email:")), 0, 1, 3, 4);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), lg_combo, 1, 2, 3, 4);
-	g_signal_connect(GTK_COMBO(lg_combo)->entry, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	g_signal_connect(GTK_COMBO(lg_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	charset_combo = gtk_combo_new();
+	charset_combo = gtk_combo_box_entry_new();
 	gtk_combo_set_popdown_strings(GTK_COMBO(charset_combo), encodings_list);
-	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (charset_combo)->entry), _(ph->charset));
+	gtk_entry_set_text(GTK_ENTRY(charset_combo), content_charset);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Charset:")), 0, 1, 4, 5);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), charset_combo, 1, 2, 4, 5);
-	g_signal_connect(GTK_COMBO(charset_combo)->entry, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	g_signal_connect(GTK_COMBO(charset_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	enc_combo = gtk_combo_new();
+	enc_combo = gtk_combo_box_entry_new();
 	gtk_combo_set_popdown_strings(GTK_COMBO(enc_combo), bits_list);
-	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (enc_combo)->entry), _(ph->encoding));
+	gtk_entry_set_text(GTK_ENTRY(enc_combo), content_transfer_encoding);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Encoding:")), 0, 1, 5, 6);
 	gtk_table_attach_defaults(GTK_TABLE(lang_page), enc_combo, 1, 2, 5, 6);
-	g_signal_connect(GTK_COMBO(enc_combo)->entry, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	g_signal_connect(GTK_COMBO(enc_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
 	lang_vbox = gtk_vbox_new(FALSE, GNOME_PAD);
 	gtk_box_pack_start(GTK_BOX(lang_vbox), take_my_options, TRUE, TRUE, 0);
@@ -649,27 +594,6 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 			 G_CALLBACK(gtranslator_header_edit_close), NULL);
 
 	gtranslator_dialog_show(&e_header, "gtranslator -- header");
-}
-
-static void language_changed(GtkWidget * widget, gpointer useless)
-{
-	guint c = 0;
-	G_CONST_RETURN gchar *current = gtk_entry_get_text(GTK_ENTRY
-					    (GTK_COMBO(language_combo)->entry));
-	while (languages[c].name != NULL) {
-		if (!strcmp(current, _(languages[c].name))) {
-#define set_text(widget,field) \
-	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(widget)->entry),\
-			   languages[c].field)
-			set_text(charset_combo, encoding);
-			set_text(enc_combo, bits);
-			set_text(lg_combo, group_email);
-#undef set_text
-			break;
-		}
-		c++;
-	}
-	gtranslator_header_edit_changed(widget, useless);
 }
 
 static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless)
@@ -810,7 +734,7 @@ void replace_substring(gchar **item, const gchar *bad, const gchar *good)
 {
 	gchar *old=*item;
 	*item=nautilus_str_replace_substring(old, bad, good);
-	GTR_FREE(old);
+	g_free(old);
 }
 
 /*
@@ -848,10 +772,10 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 
 		year = get_current_year();
 		replace_substring(&header->comment, "YEAR", year);
-		GTR_FREE(year);
+		g_free(year);
 
 		/*
-		 * Fill h->po_date with current time 
+		 * Fill header->po_date with current time 
 		 */
 		gtranslator_header_update(header);
 
@@ -872,7 +796,7 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 		
 		replace_substring(&header->comment,
 				"SOME DESCRIPTIVE TITLE.", title);
-		GTR_FREE(title);
+		g_free(title);
 	}
 
 	return have_changed;
@@ -880,41 +804,41 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 
 GtrHeader *gtranslator_header_create_from_prefs(void)
 {
-	GtrHeader *h=g_new0(GtrHeader, 1);
+	GtrHeader *header = g_new0(GtrHeader, 1);
 	gchar *year;
 
-	h->prj_name=g_strdup("PACKAGE");
-	h->prj_version=g_strdup("VERSION");
-	h->report_message_bugs_to=g_strdup("");
-	h->plural_forms=g_strdup("");
+	header->prj_name=g_strdup("PACKAGE");
+	header->prj_version=g_strdup("VERSION");
+	header->report_msgid_bugs_to=g_strdup("");
+	header->plural_forms=g_strdup("");
 	
 	/* 
-	 * Fill h->po_date with current time 
+	 * Fill header->po_date with current time 
 	 */
-	gtranslator_header_update(h);
+	gtranslator_header_update(header);
 	
-	h->pot_date=g_strdup(h->po_date);
-	h->translator=g_strdup(gtranslator_translator->name);
-	h->tr_email=g_strdup(gtranslator_translator->email);
-	h->language=g_strdup(gtranslator_translator->language->name);
-	h->lg_email=g_strdup(gtranslator_translator->language->group_email);
-	h->mime_version=g_strdup("1.0");
-	h->charset=g_strdup(gtranslator_translator->language->encoding);
-	h->encoding=g_strdup(gtranslator_translator->language->bits);
+	header->pot_date=g_strdup(header->po_date);
+	header->translator=g_strdup(gtranslator_translator->name);
+	header->tr_email=g_strdup(gtranslator_translator->email);
+	header->language=g_strdup(gtranslator_translator->language->name);
+	header->lg_email=g_strdup(gtranslator_translator->language->group_email);
+	header->mime_version=g_strdup("1.0");
+	header->charset=g_strdup(gtranslator_translator->language->encoding);
+	header->encoding=g_strdup(gtranslator_translator->language->bits);
 
 	year=get_current_year();
 
-	h->comment=g_strdup_printf(
+	header->comment=g_strdup_printf(
 "# %s translation of PACKAGE.\n"
 "# Copyright (C) %s Free Software Foundation, Inc.\n"
 "# %s <%s>, %s.\n"
 "#\n",
-		h->language,
+		header->language,
 		year,
-		h->translator,
-		h->tr_email,
+		header->translator,
+		header->tr_email,
 		year);
 
-	GTR_FREE(year);
-	return h;
+	g_free(year);
+	return header;
 }

@@ -22,6 +22,7 @@
 #define GTR_MESSAGE_H 1
 
 #include <gtk/gtktreemodel.h>
+#include <gettext-po.h>
 #include "comment.h"
 
 /*
@@ -55,30 +56,24 @@ typedef enum {
 typedef struct {
 	GtrComment 	*comment;
 
-	gchar 		*msgid;
-	gchar 		*msgstr;
+	po_message_t message;
 	
 	gint		no;
 	gint 		pos;
 
-	/* Cursor position in translation text box*/
-	gint		cursor_offset;
-	
-	gchar		*msgid_plural;
-
-	/*
-	 * The plural forms msgstrs - the first "msgstr[0]" is stored in the
-	 *  1st message translation equivalent "msgstr" as it should be logical.
-	 */
-	gchar		*msgstr_1;
-	gchar		*msgstr_2;
-	
 	GtrMsgStatus 	status;
 
+	gboolean	is_fuzzy;
+	
 	/*
 	 * GtkTreeIter for when using the messages table
 	 */
 	GtkTreeIter     iter;
+	
+	/*
+	 * Flag to indicate it has changed since being loaded
+	 */
+	gboolean	changed;
 } GtrMsg;
 
 /*
@@ -121,16 +116,23 @@ void gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number);
 void gtranslator_message_update(void);
 void gtranslator_message_show(GtrMsg  * msg);
 void gtranslator_message_change_status(GtkWidget  * widget, gpointer which);
+void gtranslator_message_copy_to_translation(void);
 
 /*
  * Changes message fuzzy status
  */
 void gtranslator_message_status_set_fuzzy(GtrMsg  * msg, gboolean fuzzy);
+void gtranslator_message_status_toggle_fuzzy(GtkWidget *widget, gpointer useless);
 
 /*
  * Copies msgid to msgstr or blanks msgstr 
  */
 void gtranslator_message_status_set_sticky(GtrMsg  *msg, gpointer useless);
+
+/*
+ * Clears the translation (sets msgstr to an empty string)
+ */
+void gtranslator_message_clear_translation(GtrMsg  *msg, gpointer useless);
 
 /*
  * Frees a GtrMsg.

@@ -76,7 +76,7 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	 */
 	if(comment->comment[0]!='#')
 	{
-		GTR_FREE(comment->comment);
+		g_free(comment->comment);
 		return NULL;
 	}
 	else
@@ -232,14 +232,14 @@ void gtranslator_comment_free(GtrComment **comment)
 {
 	if(*comment)
 	{
-		GTR_FREE((*comment)->comment);
-		GTR_FREE((*comment)->pure_comment);
+		g_free((*comment)->comment);
+		g_free((*comment)->pure_comment);
 #ifdef UTF8_COMMENT
-		GTR_FREE((*comment)->utf8_comment);
-		GTR_FREE((*comment)->pure_utf8_comment);
+		g_free((*comment)->utf8_comment);
+		g_free((*comment)->pure_utf8_comment);
 #endif
 		
-		GTR_FREE(*comment);
+		g_free(*comment);
 	}
 }
 
@@ -299,19 +299,19 @@ void gtranslator_comment_display(GtrComment *comment)
 		}
 	}
 
-	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
+	gtk_label_set_text(GTK_LABEL(document_view->comment), 
 		comment_display_str);
 
 	if((GTR_COMMENT(comment)->type & TRANSLATOR_COMMENT ||
 		GTR_COMMENT(comment)->type & SOURCE_COMMENT) &&
 		nautilus_strcasecmp(comment_display_str, " "))
 	{
-		gtk_widget_set_sensitive(extra_content_view->edit_button, TRUE);
+		gtk_widget_set_sensitive(document_view->edit_button, TRUE);
 		gtranslator_actions_enable(ACT_COMMENT);
 	}
 	else
 	{
-		gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
+		gtk_widget_set_sensitive(document_view->edit_button, FALSE);
 		gtranslator_actions_disable(ACT_COMMENT);
 	}
 
@@ -323,7 +323,7 @@ void gtranslator_comment_display(GtrComment *comment)
  */
 void gtranslator_comment_hide()
 {
-	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");
-	gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
-	gtk_paned_set_position(GTK_PANED(content_pane), 0);
+	gtk_label_set_text(GTK_LABEL(document_view->comment), "");
+	gtk_widget_set_sensitive(document_view->edit_button, FALSE);
+	gtk_paned_set_position(GTK_PANED(document_view->content_pane), 0);
 }

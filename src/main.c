@@ -1,8 +1,8 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
- *			Ross Golder <ross@kabalak.net>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@
 
 #include "actions.h"
 #include "bookmark.h"
-#include "color-schemes.h"
 #include "defines.h"
 #include "dialogs.h"
 #include "gui.h"
@@ -36,7 +35,6 @@
 #include "parse.h"
 #include "prefs.h"
 #include "runtime-config.h"
-#include "save.h"
 #include "session.h"
 #include "sighandling.h"
 #include "translator.h"
@@ -141,7 +139,7 @@ int main(int argc, char *argv[])
 	/*
 	 * Initialize the GConf library.
 	 */
-	if(!(gconf_init(argc,argv, &error)))
+	if(!(gconf_init(argc, argv, &error)))
 	{
 		if(error)
 		{
@@ -284,6 +282,7 @@ int main(int argc, char *argv[])
 		gtranslator_rescue_file_dialog();
 	}
 
+#ifdef PORT_COLORSCHEMES
 	if(!auto_translate_file || !learn_file || !learn_statistics)
 	{
 		/*
@@ -298,31 +297,55 @@ int main(int argc, char *argv[])
 			theme=gtranslator_color_scheme_load_from_prefs();
 		}
 	}
-	
-	file_opened = FALSE;
+#endif
 
 	/*
 	 * Auto translate the given file argument and exit without starting the
 	 *  GUI building routines.
+	 *
+	 * TODO: Move the autolearn stuff to seperate binary tools (that aren't
+	 * linked and tightly integrated with GNOME/GUI libraries)
 	 */
 	if(auto_translate_file)
 	{
+		GtrPo *learnbuffer = NULL;
+
 		/*
 		 * Initialize learn buffer, open file and auto translate all
 		 *  possible strings.
 		 */
+
 		gtranslator_learn_init();
-		gtranslator_open_file(auto_translate_file);
-		gtranslator_learn_autotranslate(FALSE);
+		if((learnbuffer = gtranslator_parse(auto_translate_file, &error)) == NULL)
+		{
+			g_assert(error!=NULL);
+			fprintf(stderr, _("Error parsing '%s': %s"),
+				auto_translate_file, error->message);
+			g_clear_error(&error);
+			return 1;
+		}
+
+		if(!gtranslator_learn_autotranslate(learnbuffer, FALSE, &error))
+		{
+			g_assert(error!=NULL);
+			fprintf(stderr, _("Autotranslate failed: %s"),
+				error->message);
+			g_clear_error(&error);
+			return 1;
+		}
 		
 		/*
 		 * If any change has been made to the po file: save it.
 		 */
 		if(po->file_changed)
 		{
-			if(!gtranslator_save_po_file(auto_translate_file))
+			if(!gtranslator_save_file(auto_translate_file, &error))
 			{
-				gtranslator_save_file(auto_translate_file);
+				g_assert(error!=NULL);
+				fprintf(stderr, _("Saving file failed: %s"),
+					error->message);
+				g_clear_error(&error);
+				return 1;
 			}
 		}
 
@@ -365,7 +388,14 @@ int main(int argc, char *argv[])
 		/*
 		 * Try to open up the supported "special" gettext file types.
 		 */ 
-		gtranslator_open_file((gchar *)args[0]);
+		if(!gtranslator_parse_main((gchar *)args[0], &error))
+		{
+			g_assert(error!=NULL);
+			fprintf(stderr, _("Couldn't open '%s': %s\n"),
+				(gchar *)args[0], error->message);
+			g_clear_error(&error);
+			return 1;
+		}
 	}
 	
 	//	poptFreeContext(context);
@@ -373,7 +403,7 @@ int main(int argc, char *argv[])
 	/*
 	 * Disable the buttons if no file is opened.
 	 */
-	if (!file_opened)
+	if (!po)
 	{
 		gtranslator_actions_set_up_state_no_file();
 	}
@@ -382,7 +412,7 @@ int main(int argc, char *argv[])
 	{
 		/*
 		 * Check the session client flags, and restore state if needed 
-		 */
+		ge */
 		flags = gnome_client_get_flags(client);
 	
 		if(flags & GNOME_CLIENT_RESTORED)
@@ -421,16 +451,24 @@ int main(int argc, char *argv[])
 	 */
 	if(learn_file)
 	{
+		GtrPo *learnfile = NULL;
+
 		/*
 		 * First parse the file completely.
 		 */
-		gtranslator_open_file(learn_file);
+		if((learnfile = gtranslator_parse(learn_file, &error)) == NULL)
+		{
+			g_assert(error!=NULL);
+			fprintf(stderr, _("Could not parse learn file '%s': %s\n"),
+				learn_file, error->message);
+			g_clear_error(&error);
+		}
 
 		/*
 		 * Now learn the file completely and then shut the
 		 *  learn system down.
 		 */
-		gtranslator_learn_po_file(po);
+		gtranslator_learn_po_file(learnfile);
 		gtranslator_learn_shutdown();
 
 		/*
@@ -505,6 +543,7 @@ int main(int argc, char *argv[])
 	
 	gtk_widget_show_all(gtranslator_application);
 
+#ifdef PORT_COLORSCHEMES
 	/*
 	 * Create the list of colorschemes if we are starting up in a GUI.
 	 */
@@ -515,6 +554,7 @@ int main(int argc, char *argv[])
 	 *  main menu.
 	 */
 	gtranslator_color_scheme_show_list();
+#endif
 
 	/*
 	 * Load our possibly existing bookmarks' list from our preferences

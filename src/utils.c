@@ -51,40 +51,6 @@ GList *group_emails_list=NULL;
 GList *bits_list=NULL;
 
 /*
- * Strip the filename to get a "raw" enough filename.
- */ 
-gchar *gtranslator_utils_get_raw_file_name(const gchar *filename)
-{
-	GString *o;
-	gint 	count=0;
-
-	g_return_val_if_fail(filename!=NULL, g_strdup(""));
-
-	o=g_string_new("");
-	filename=g_path_get_basename(filename);
-
-	/*
-	 * Strip all extensions after the _first_ point.
-	 */ 
-	while(filename[count] && filename[count]!='.')
-	{
-		o=g_string_append_c(o, filename[count]);
-		count++;
-	}
-
-	if(o->len > 0)
-	{
-		return o->str;
-	}
-	else
-	{
-		return NULL;
-	}
-
-	g_string_free(o, FALSE);
-}
-
-/*
  * Strip all punctuation characters out.
  */
 gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
@@ -315,7 +281,7 @@ void gtranslator_utils_create_gtranslator_directory()
 	 */
 	while(subdirectories[i]!=NULL)
 	{
-		GTR_FREE(dirname);
+		g_free(dirname);
 		dirname=g_strdup_printf("%s/.gtranslator/%s", g_get_home_dir(), subdirectories[i]);
 
 		if(!g_file_test(dirname, G_FILE_TEST_EXISTS))
@@ -330,7 +296,7 @@ void gtranslator_utils_create_gtranslator_directory()
 		i++;
 	}
 
-	GTR_FREE(dirname);
+	g_free(dirname);
 }
 
 /*
@@ -338,105 +304,63 @@ void gtranslator_utils_create_gtranslator_directory()
  */
 gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 {
-	/*
-	 * As long as no file is opened, don't perform any autosave.
-	 */
-	if(!file_opened || !po)
-	{
-		return FALSE;
-	}
-	else if(!po->file_changed)
-	{
-		/*
-		 * As the file didn't change, we don't need to autosave it, but
-		 *  the timeout function must still return TRUE for getting it's
-		 *   periodic sense.
-		 */
-		 return TRUE;
-	}
-	else
-	{
-		/*
-		 * Should we use a different suffix for the autosaved files?
-		 *  (Should help differing the own-saved/autosaved po files.)
-		 */
-		if(GtrPreferences.autosave_with_suffix) 
-		{
-			gchar *autosave_filename;
-		
-			/*
-			 * Take "autosave" as the fallback autosave suffix.
-			 */
-			if(GtrPreferences.autosave_suffix)
-			{
-				autosave_filename=g_strdup_printf("%s.%s",
-					po->filename, 
-					GtrPreferences.autosave_suffix);
-			}
-			else
-			{
-				autosave_filename=g_strdup_printf("%s.autosave",
-					po->filename);
-			}
+	GError *error = NULL;
+	
+	g_return_val_if_fail(po!=NULL,FALSE);
 
-			gtranslator_save_file(autosave_filename);
-			GTR_FREE(autosave_filename);
+	/*
+	 * As the file didn't change, we don't need to autosave it, but
+	 *  the timeout function must still return TRUE for getting it's
+	 *   periodic sense.
+	 */
+	g_return_val_if_fail(po->file_changed,TRUE);
+
+	/*
+	 * Should we use a different suffix for the autosaved files?
+	 *  (Should help differing the own-saved/autosaved po files.)
+	 */
+	if(GtrPreferences.autosave_with_suffix) 
+	{
+		gchar *autosave_filename;
+		
+		/*
+		 * Take "autosave" as the fallback autosave suffix.
+		 */
+		if(GtrPreferences.autosave_suffix)
+		{
+			autosave_filename=g_strdup_printf("%s.%s",
+				po->filename, 
+				GtrPreferences.autosave_suffix);
 		}
 		else
 		{
-			gtranslator_save_file(po->filename);
+			autosave_filename=g_strdup_printf("%s.autosave",
+				po->filename);
 		}
+
+		gtranslator_save_file(autosave_filename, &error);
+		g_free(autosave_filename);
+	}
+	else
+	{
+		gtranslator_save_file(po->filename, &error);
+	}
 		
-		return TRUE;
+	if(error != NULL) {
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new(
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK,
+			_("Error autosaving file: %s"), error->message);
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(dialog);
+		g_clear_error(&error);
+		return FALSE;
 	}
-}
-
-/*
- * Set up and assign the test file names for the compile process.
- */
-void gtranslator_utils_get_compile_file_names(gchar **test_file, 
-	gchar **output_file, gchar **result_file)
-{
-	*test_file=g_strdup_printf("%s/.gtranslator/files/gtranslator-temp-compile-file",
-		g_get_home_dir());
-
-	*result_file=g_strdup_printf("%s/.gtranslator/files/gtranslator-compile-result-file",
-		g_get_home_dir());
-
-	*output_file=g_strdup_printf("%s/%s.gmo",
-		g_get_current_dir(), po->header->prj_name);
-}
-
-/*
- * Clean up after the test compile run.
- */
-void gtranslator_utils_remove_compile_files(gchar **test_file,
-	gchar **output_file, gchar **result_file)
-{
-	if(*test_file)
-	{
-		remove(*test_file);
-		GTR_FREE(*test_file);
-	}
-
-	if(*result_file)
-	{
-		remove(*result_file);
-		GTR_FREE(*result_file);
-	}
-	
-	if(*output_file)
-	{
-		/*
-		 * Only cleanup if this is wished by the user.
-		 */
-		if(GtrPreferences.sweep_compile_file)
-		{
-			remove(*output_file);
-		}
 		
-		GTR_FREE(*output_file);
-	}
+	return TRUE;
 }
 
 /*
@@ -512,8 +436,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 			
 			if(strip_extension && !with_full_path)
 			{
-				file=gtranslator_utils_get_raw_file_name(
-					entry->d_name);
+				file=entry->d_name;
 			}
 			else if(with_full_path)
 			{
@@ -527,7 +450,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 
 			files=g_list_prepend(files, g_strdup(file));
 
-			GTR_FREE(file);
+			g_free(file);
 		}
 	}
 
@@ -567,7 +490,7 @@ void gtranslator_utils_free_list(GList *list, gboolean free_contents)
 		{
 			while(list!=NULL)
 			{
-				GTR_FREE(list->data);
+				g_free(list->data);
 				GTR_ITER(list);
 			}
 		}
@@ -687,39 +610,6 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string)
 
 	return -1;
 }
-
-/*
- * Get the right localename for the language.
- */
-gchar *gtranslator_utils_get_locale_name(GtrPo *po)
-{
-	if((!file_opened) || !(po->header->language))
-	{
-		return NULL;
-	}
-	else
-	{
-		gint c;
-
-		for(c=0; languages[c].name!=NULL; c++)
-		{
-			/*
-			 * Check for the language in the header -- may it be in 
-			 *  English or in the current locale...
-			 */
-			if(!nautilus_strcasecmp(languages[c].name, 
-					po->header->language) ||
-			   !nautilus_strcasecmp(_(languages[c].name),
-					po->header->language))
-			{
-				return languages[c].locale;
-			}
-		}
-
-		return NULL;
-	}
-}
-
 
 /*
  * Set up the lists to use within the combo boxes.
@@ -842,7 +732,7 @@ gtranslator_utils_getline (FILE* stream)
 	}
 
 	if (ret_used == 0) {
-		GTR_FREE (ret);
+		g_free (ret);
 		ret = NULL;
 	} else {
 		ret [ret_used] = '\0';
@@ -938,7 +828,7 @@ void gtranslator_xml_set_integer_prop_by_name (xmlNode *parent, const xmlChar *p
 
 	valuestr=g_strdup_printf("%d", value);
 	xmlSetProp(parent, prop_name, valuestr);
-	GTR_FREE(valuestr);
+	g_free(valuestr);
 }
 
 gchar *gtranslator_xml_get_string_prop_by_name_with_default(const xmlNode *parent,
@@ -996,7 +886,7 @@ int gtranslator_mkdir_hier(const char *path, mode_t mode)
 		{
                         if(mkdir(copy, mode)==-1)
 			{
-                                GTR_FREE(copy);
+                                g_free(copy);
                                 return -1;
                         }
                 }
@@ -1006,6 +896,6 @@ int gtranslator_mkdir_hier(const char *path, mode_t mode)
 		}
         } while(p);
 
-        GTR_FREE(copy);
+        g_free(copy);
         return 0;
 }

@@ -58,8 +58,8 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		"%s/.gtranslator/files/gtranslator-crash-file",
 			g_get_home_dir());
 
-	config->save_differently_filename=g_strdup_printf(
-		"%s/.gtranslator/files/gtranslator-save-differently-file",
+	config->save_filename=g_strdup_printf(
+		"%s/.gtranslator/files/gtranslator-save-file",
 		g_get_home_dir());
 
 	/*
@@ -103,12 +103,12 @@ void gtranslator_runtime_config_free(GtrRuntimeConfig *config)
 {
 	if(config)
 	{
-		GTR_FREE(GTR_RUNTIME_CONFIG(config)->temp_filename);
-		GTR_FREE(GTR_RUNTIME_CONFIG(config)->check_filename);
-		GTR_FREE(GTR_RUNTIME_CONFIG(config)->crash_filename);
+		g_free(GTR_RUNTIME_CONFIG(config)->temp_filename);
+		g_free(GTR_RUNTIME_CONFIG(config)->check_filename);
+		g_free(GTR_RUNTIME_CONFIG(config)->crash_filename);
 		
-		GTR_FREE(GTR_RUNTIME_CONFIG(config)->save_differently_filename);
+		g_free(GTR_RUNTIME_CONFIG(config)->save_filename);
 		
-		GTR_FREE(config);
+		g_free(config);
 	}
 }

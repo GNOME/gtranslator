@@ -48,7 +48,7 @@ void gtranslator_config_init(void)
 		client=gconf_client_get_default();
 		/*
 		 * add_dir is useful only for listeners...
-		gconf_client_add_dir(client, "/apps/gtranslator",
+		gconf_client_add_dir(client, CONFIG_PREFIX,
 			GCONF_CLIENT_PRELOAD_NONE, NULL);
 		 */
 	}
@@ -64,7 +64,7 @@ gchar *gtranslator_config_get_string(gchar *path)
 	
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	str = gconf_client_get_string(client, private_path, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 	return str;
 }
 
@@ -75,7 +75,7 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_string(client, private_path, value, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 }
 
 /*
@@ -88,7 +88,7 @@ gint gtranslator_config_get_int(gchar *path)
 
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	i = gconf_client_get_int(client, private_path, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 	return i;
 }
 
@@ -98,7 +98,7 @@ void gtranslator_config_set_int(gchar *path, gint value)
 
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_int(client, private_path, value, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 }
 
 /*
@@ -111,7 +111,7 @@ gboolean gtranslator_config_get_bool(gchar *path)
 
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	b = gconf_client_get_bool(client, private_path, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 	return b;
 }
 
@@ -121,7 +121,7 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_bool(client, private_path, value, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 }
 
 /*
@@ -134,7 +134,7 @@ gfloat gtranslator_config_get_float(gchar *path)
 
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	f = gconf_client_get_float(client,  private_path, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 	return f;
 }
 
@@ -144,7 +144,7 @@ void gtranslator_config_set_float(gchar *path, gfloat value)
 
 	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
 	gconf_client_set_float(client, private_path, value, NULL);
-	GTR_FREE(private_path);
+	g_free(private_path);
 }
 
 /*

@@ -39,8 +39,10 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	
 	if(dnd_type==TARGET_URI_LIST || dnd_type==TARGET_NETSCAPE_URL)
 	{
-		gtranslator_parse_main(file);
-		gtranslator_parse_main_extra();
+		GError *error = NULL;
+		if(!gtranslator_parse_main(file, &error)) {
+			return;
+		}
 		gtk_drag_finish(context, TRUE, FALSE, time);
 	}
 	else

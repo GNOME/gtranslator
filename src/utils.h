@@ -34,13 +34,10 @@
 /*
  * Really nasty wrapper macros which should expand to really common constructs.
  */
-#define GTR_FREE(x) g_free((x)); (x)=NULL;
+#ifdef REDUNDANT
+#define g_free(x) g_free((x)); (x)=NULL;
+#endif
 #define GTR_ITER(x) if((x)->next) { (x)=(x)->next; } else { break; }
-
-/*
- * Returns the non-prefixed and non-suffixed filename back.
- */
-gchar *gtranslator_utils_get_raw_file_name(const gchar *filename);
 
 /*
  * Removes all punctuation characters from the given string.
@@ -72,18 +69,6 @@ void gtranslator_utils_set_language_values_by_language(const gchar *language);
  * Remove the possibly generated temporary files of gtranslator.
  */
 void gtranslator_utils_remove_temp_files(void); 
-
-/*
- * Set up our temporary file names for the test compile run.
- */
-void gtranslator_utils_get_compile_file_names(gchar **test_file, 
-	gchar **output_file, gchar **result_file);
-
-/*
- * Clean up the temporary files for the test compile run -- also free the variables.
- */
-void gtranslator_utils_remove_compile_files(gchar **test_file,
-	gchar **output_file, gchar **result_file);
 
 /*
  * Initialize and create the gtranslator directory ~/.gtranslator in the user's

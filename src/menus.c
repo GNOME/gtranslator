@@ -18,8 +18,13 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "about.h"
 #include "actions.h"
+#include "compile.h"
 #include "defines.h"
 #include "dialogs.h"
 #include "find.h"
@@ -33,8 +38,6 @@
 #include "pixmaps/auto_translation.xpm"
 #include "pixmaps/copy_msgid2msgstr.xpm"
 #include "pixmaps/edit_comment.xpm"
-#include "pixmaps/query.xpm"
-#include "pixmaps/query_big.xpm"
 
 #include <gdk/gdkkeysyms.h>
 
@@ -64,7 +67,7 @@ GnomeUIInfo the_file_menu[] = {
 	{
 		GNOME_APP_UI_ITEM, N_("_Update"),
 		N_("Update the po file"),
-		update, NULL, NULL,
+		NULL, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_REFRESH,
 		GDK_F5, 0, NULL
 	},
@@ -133,14 +136,6 @@ GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_MENU_REPLACE_ITEM(gtranslator_replace_dialog, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("_Query..."),
-		N_("Query for a string"),
-		gtranslator_query_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_DATA, query_xpm,
-		GDK_F7, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
 		GNOME_APP_UI_ITEM, N_("_Header..."),
 		N_("Edit po file header"),
 		gtranslator_header_edit_dialog, NULL, NULL,
@@ -159,7 +154,7 @@ GnomeUIInfo the_edit_menu[] = {
 	{
 		GNOME_APP_UI_ITEM, N_("Copy _message -> translation"),
 		N_("Copy the original message contents and paste them as translation"),
-		gtranslator_message_status_set_sticky, NULL, NULL,
+		gtranslator_message_copy_to_translation, NULL, NULL,
 		GNOME_APP_PIXMAP_DATA, copy_msgid2msgstr_xpm,
 		GDK_F11, 0, NULL
 	},
@@ -167,9 +162,8 @@ GnomeUIInfo the_edit_menu[] = {
 	{
 		GNOME_APP_UI_TOGGLEITEM, N_("Fu_zzy"),
 		N_("Toggle fuzzy status of a message"),
-		gtranslator_message_change_status,
-		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
-		NULL,
+		gtranslator_message_status_toggle_fuzzy,
+		NULL, NULL,
 		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
 		GDK_2, GDK_MOD1_MASK, NULL
 	},
@@ -249,7 +243,7 @@ GnomeUIInfo the_colorschemes_menu[] = {
 };
 
 GnomeUIInfo the_help_menu[] = {
-	GNOMEUIINFO_HELP("gtranslator"),
+	GNOMEUIINFO_HELP(PACKAGE_NAME),
 	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
 			       N_("gtranslator's homepage on the web"),
 			       gtranslator_utils_show_home_page,
@@ -281,7 +275,7 @@ GnomeUIInfo the_toolbar[] = {
 			       GTK_STOCK_CONVERT),
 	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
 			       N_("Update the po file"),
-			       update,
+			       NULL,
 			       GTK_STOCK_REFRESH),
 	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
 			       N_("Edit the header"),
@@ -339,12 +333,5 @@ GnomeUIInfo the_navibar[] = {
 			       N_("Replace string in po file"),
 			       gtranslator_replace_dialog,
 			       GTK_STOCK_FIND_AND_REPLACE),
-	{
-		GNOME_APP_UI_ITEM, N_("Query"),
-		N_("Query for a string"),
-		gtranslator_query_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_DATA, query_big_xpm,
-		0, 0, NULL
-	},
 	GNOMEUIINFO_END
 };

@@ -56,8 +56,6 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 		"Emese Kovacs <emese@gnome.hu>",
 		NULL
 	};	
-	/* Translator credits */
-	const char *translator_credits = _("translator_credits");
 
 	if (about != NULL)
 	{
@@ -75,14 +73,10 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	} else
 		g_warning (G_STRLOC ": gtranslator.png cannot be found");
 
-	about =
-	    gnome_about_new("gtranslator", VERSION,
+	about = gnome_about_new(PACKAGE_NAME, PACKAGE_VERSION,
 		_("(C) 1999 The Free Software Foundation, Inc."),
 		_("gtranslator is a po file editing suite with many bells and whistles."),
-		authors,
-		documenters,
-		strcmp (translator_credits, "translator_credits") != 0 ? translator_credits : NULL,
-		pixbuf);
+		authors, documenters, _("translator-credits"), pixbuf);
 
 	if (pixbuf) {
 		g_object_unref (pixbuf);

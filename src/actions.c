@@ -132,7 +132,9 @@ void gtranslator_actions_set_up_state_no_file(void)
 				    ACT_FUZZY, ACT_COMMENT, ACT_REMOVE_ALL_TRANSLATIONS,
 				    ACT_COPY_MSGID2MSGSTR, ACT_ADD_BOOKMARK);
 
+#ifdef DONTFORGET
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(trans_box), FALSE);
+#endif
 }
 
 void gtranslator_actions_set_up_file_opened(void)
@@ -153,6 +155,7 @@ void gtranslator_actions_set_up_file_opened(void)
 		gtranslator_actions_enable(ACT_UPDATE);	
 	}
 
+#ifdef DONTFORGET
 	/*
 	 * Enable the editing of the msgstrs :-)
 	 */
@@ -162,6 +165,7 @@ void gtranslator_actions_set_up_file_opened(void)
 	 * Make it focused initially
 	 */
 	gtk_window_set_focus(GTK_WINDOW(gtranslator_application), GTK_WIDGET(trans_box));
+#endif
 }
 
 /*

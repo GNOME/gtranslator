@@ -35,10 +35,12 @@
  */
 static void replace_msg(gpointer data, gpointer replace);
 
+#ifdef DONTFORGET
 /*
  * And this is the core function for the replace task.
  */
 static void replace_core(gchar **string, GtrReplace *rstuff);
+#endif
 
 /*
  * Count the replaces.
@@ -88,9 +90,9 @@ void gtranslator_replace_free(GtrReplace **replace)
 {
 	g_return_if_fail(*replace!=NULL);
 
-	GTR_FREE((*replace)->string);
-	GTR_FREE((*replace)->replace_string);
-	GTR_FREE(*replace);
+	g_free((*replace)->string);
+	g_free((*replace)->replace_string);
+	g_free(*replace);
 }
 
 /*
@@ -100,58 +102,44 @@ void gtranslator_replace_free(GtrReplace **replace)
 void gtranslator_replace_run(GtrReplace *replace)
 {
 	g_return_if_fail(replace!=NULL);
+	g_return_if_fail(po!=NULL);
+	g_return_if_fail(po->messages!=NULL);
 
 	replaced_count=0;
 	
-	/*
-	 * Don't replace anything when there's no file open or if there's
-	 *  no messages list (for whatever reason).
-	 */
-	if((!file_opened) || (!po->messages))
+	/* A great opportunity to update po->current->data */
+	gtranslator_message_update();
+	if(replace->replace_all)
 	{
-		return;
+		/*
+		 * Perform the replace actions for all messages from the first
+		 *  till the last message.
+		 */
+		g_list_foreach(po->messages, (GFunc) replace_msg, replace);
 	}
 	else
 	{
+		GList *theoriginalchoice=NULL;
 
-		/* A great opportunity to update po->current->data */
-		gtranslator_message_update();
-
-		if(replace->replace_all)
+		/*
+		 * Rescue the "current" po->current pointer.
+		 */
+		theoriginalchoice=po->current;
+			
+		/*
+		 * Replace till we did succeed in doing a replace, then exit this.
+		 */
+		while((po->current->next) && (replaced_count <= 0))
 		{
-			/*
-			 * Perform the replace actions for all messages from the first
-			 *  till the last message.
-			 */
-			g_list_foreach(po->messages, (GFunc) replace_msg, replace);
+			g_list_foreach(po->current, (GFunc) replace_msg, replace);
+			po->current=po->current->next;
 		}
-		else
-		{
-			GList *theoriginalchoice=NULL;
-
-			/*
-			 * Rescue the "current" po->current pointer.
-			 */
-			theoriginalchoice=po->current;
 			
-			/*
-			 * Replace till we did succeed in doing a replace, then exit this.
-			 */
-			while((po->current->next) && (replaced_count <= 0))
-			{
-				g_list_foreach(po->current, (GFunc) replace_msg, replace);
-
-				po->current=po->current->next;
-			}
-			
-			/*
-			 * Now we do go back to the status we had before the replace action;
-			 *  the po->current pointer is right now.
-			 */
-			po->current=theoriginalchoice;
-
-			
-		}
+		/*
+		 * Now we do go back to the status we had before the replace action;
+		 *  the po->current pointer is right now.
+		 */
+		po->current=theoriginalchoice;
 	}
 	
 	/*
@@ -185,32 +173,31 @@ static void replace_msg(gpointer data, gpointer replace)
 	GtrReplace *l_replace=GTR_REPLACE(replace);
 
 	g_return_if_fail(msg!=NULL);
+	g_return_if_fail(msg->message!=NULL);
 	g_return_if_fail(l_replace!=NULL);
 
+
+#ifdef DONTFORGET
 	/*
 	 * Perform the replace actions according to the given action class.
 	 */
-	if(l_replace->replace_in_comments)
-	{
-		replace_core(&GTR_COMMENT(msg->comment)->comment, l_replace);
-	}
-
 	if(l_replace->replace_in_english)
 	{
-		replace_core(&msg->msgid, l_replace);
+		replace_core(&msg->message->msgid, l_replace);
 	}
 
 	if(l_replace->replace_in_translation)
 	{
-		replace_core(&msg->msgstr, l_replace);
+		replace_core(&msg->message->msgstr, l_replace);
 	}
-
+#endif
 }
 
+#ifdef DONTFORGET
 /*
  * Core kabalak land -- crazy method I know.
  */
-static void replace_core(gchar **string, GtrReplace *rstuff)
+static void replace_core(char **string, GtrReplace *rstuff)
 {
 	/*
 	 * If any important data is missing, exit from here and don't perform
@@ -251,7 +238,7 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 					 * Set the original string to the new form if
 					 *  the replace was successful.
 					 */
-					GTR_FREE(*string);
+					g_free(*string);
 					*string=nstring;
 				}
 				
@@ -264,3 +251,4 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 		}
 	}
 }
+#endif

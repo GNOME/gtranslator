@@ -29,8 +29,7 @@
 typedef struct 
 {
 	gchar *filename;
-	gchar *project_name;
-	gchar *project_version;
+	gchar *project_id;
 } GtrHistoryEntry;
 
 #define GTR_HISTORY_ENTRY(x) ((GtrHistoryEntry *)x)
@@ -38,8 +37,7 @@ typedef struct
 /*
  * Adds a history entry.
  */
-void gtranslator_history_add(gchar *filename,
-	gchar *project_name, gchar *project_version);
+void gtranslator_history_add(gchar *filename, gchar *project_id);
 
 /*
  * Returns the history as a GList of GtrHistoryEntry's.

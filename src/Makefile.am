@@ -2,8 +2,6 @@
 # Welcome to the gtranslator-automake-autoconf Wonderland!
 # --------------------------------------------------------
 
-SUBDIRS = pixmaps semerkent
-
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
@@ -37,8 +35,8 @@ gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
 	bookmark.c bookmark.h \
-	color-schemes.c color-schemes.h \
 	comment.c comment.h \
+	compile.c compile.h \
 	defines.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
@@ -53,27 +51,25 @@ gtranslator_SOURCES = \
 	message.c message.h \
 	messages-table.c messages-table.h \
 	nautilus-string.c nautilus-string.h \
-	open.c open.h \
 	parse.c	parse.h \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \
 	replace.c replace.h \
 	runtime-config.c runtime-config.h \
-	save.c save.h \
 	session.c session.h \
 	sighandling.c sighandling.h \
-	stylistics.c stylistics.h \
 	translator.c translator.h \
 	undo.c undo.h \
-	update.c \
 	utils.c utils.h \
 	utils_gui.c utils_gui.h \
 	vfs-handle.c vfs-handle.h
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \
-	$(GTRANSLATOR_LIBS) \
-	semerkent/libsemerkent.a
+	$(GTRANSLATOR_LIBS)
+	
+gtranslator_LDFLAGS = \
+	-Wall
 
 #CLEANFILES = defines.h
 

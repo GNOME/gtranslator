@@ -39,130 +39,146 @@
 /*
  * The "backend" for the gzip. bzip2 and uncompress based functions.
  */
-void open_compressed_po_file(gchar *file, gchar *command);
+gboolean _open_compressed_po_file(gchar *file, gchar *command, GError **error);
 
 /*
  * Internally used functions' prototypes.
  */ 
-void gtranslator_open_compiled_po_file(gchar *file);
-void gtranslator_open_gzipped_po_file(gchar *file);
-void gtranslator_open_bzip2ed_po_file(gchar *file);
-void gtranslator_open_compressed_po_file(gchar *file);
-void gtranslator_open_ziped_po_file(gchar *file); 
+gboolean _gtranslator_open_compiled_po_file(gchar *file, GError **error);
+gboolean _gtranslator_open_gzipped_po_file(gchar *file, GError **error);
+gboolean _gtranslator_open_bzip2ed_po_file(gchar *file, GError **error);
+gboolean _gtranslator_open_compressed_po_file(gchar *file, GError **error);
+gboolean _gtranslator_open_ziped_po_file(gchar *file, GError **error); 
 
 /*
- * Open the way to the beautiful land of gtranslator...
+ * Wrapper for a plethora of different file-type handlers.
  */
-void gtranslator_open_file(gchar *filename)
+gboolean gtranslator_open_file(gchar *filename, GError **error)
 {
 	g_return_if_fail(filename!=NULL);
 	
 	/*
-	 * Use conditionally the VFS routines to access
-	 *  remote files.
+	 * Intercept about dialog request
 	 */
-	if(gtranslator_utils_uri_supported(filename))
-	{
-		filename=gtranslator_vfs_handle_open(filename);
-
-		if(filename)
-		{
-			/*
-			 * Here we do open the local representation file
-			 *  of the remote file.
-			 */  
-			gtranslator_parse_main(filename);
-			gtranslator_parse_main_extra();
-		}
-	}
-	else if(nautilus_str_has_prefix(filename, "about:"))
+	if(nautilus_str_has_prefix(filename, "about:"))
 	{
 		gtranslator_about_dialog(NULL, NULL);
+		return TRUE;
 	}
 
+	/*
+	 * Use conditionally the VFS routines to access
+	 *  remote files.
+	 */  
+	if(gtranslator_utils_uri_supported(filename))
+	{
+		filename = gtranslator_vfs_handle_open(filename);
+		if(filename != NULL) {
+			return _gtranslator_read_from(filename, error);
+		}
+	}
+
+	/*
+	 * need to msgunfmt it?
+	 */
 	if(nautilus_istr_has_suffix(filename, ".mo") || 
 		nautilus_istr_has_suffix(filename, ".gmo"))
 	{
-		gtranslator_open_compiled_po_file(filename);
+		return _gtranslator_open_compiled_po_file(filename, error);
 	}
-	else if(nautilus_istr_has_suffix(filename, ".po.gz"))
+
+	/*
+	 * need to decompress it?
+	 */
+	if(nautilus_istr_has_suffix(filename, ".po.gz"))
 	{
-		gtranslator_open_gzipped_po_file(filename);
+		return _gtranslator_open_gzipped_po_file(filename, error);
 	}
 	else if(nautilus_istr_has_suffix(filename, ".po.bz2"))
 	{
-		gtranslator_open_bzip2ed_po_file(filename);
+		return _gtranslator_open_bzip2ed_po_file(filename, error);
 	}
 	else if(nautilus_istr_has_suffix(filename, ".po.z"))
 	{
-		gtranslator_open_compressed_po_file(filename);
+		return _gtranslator_open_compressed_po_file(filename, error);
 	}
 	else if(nautilus_istr_has_suffix(filename, ".po.zip"))
 	{
-		gtranslator_open_ziped_po_file(filename);
+		return _gtranslator_open_ziped_po_file(filename, error);
 	}
-	else
-	{
-		gtranslator_parse_main(filename);
-		gtranslator_parse_main_extra();
-	}
+
+	return _gtranslator_read_from(filename, error);
 }
 
 /*
  * Open up the given compiled gettext file.
  */
-void gtranslator_open_compiled_po_file(gchar *file)
+gboolean _gtranslator_open_compiled_po_file(gchar *file, GError **error)
 {
-	gchar *cmd;
+	gchar *cmd, *warning;
 
 	if(!gtranslator_utils_check_program("msgunfmt", 0))
 	{
-		return;
+		g_set_error(error,
+			GTR_OPEN_FILE_ERROR,
+			GTR_OPEN_FILE_ERROR_MISSING_PROGRAM,
+			_("Couldn't find the '%s' program."),
+			"msgunfmt");
+		return FALSE;
 	}
 
 	/*
 	 * Build up the command to execute in the shell to get the plain
 	 *  gettext file.
 	 */
-	cmd=g_strdup_printf("msgunfmt '%s' -o '%s'",
+	cmd = g_strdup_printf("msgunfmt '%s' -o '%s'",
 		file,
 		gtranslator_runtime_config->temp_filename);
+
 	/* 
 	 * Execute the command and test the result.
 	 */
-	if(!system(cmd))
+	if(system(cmd))
 	{
+		g_set_error(error,
+			GTR_OPEN_FILE_ERROR,
+			GTR_OPEN_FILE_ERROR_OTHER,
+			_("Couldn't open compiled gettext file `%s'!"),
+			file);
+		g_free(cmd);
+		return FALSE;
+	}
+	g_free(cmd);
+
 		/*
 		 * If the command could be executed successfully, open the
 		 *  plain gettext file.
 		 */
-		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
-		gtranslator_parse_main_extra();
-	}
-	else
+	if(!gtranslator_open_file(
+		gtranslator_runtime_config->temp_filename, error))
 	{
-		cmd=g_strdup_printf(_("Couldn't open compiled gettext file `%s'!"),
-			file);
-		/*
-		 * Show a warning to the user.
-		 */
-		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
+		return FALSE;
 	}
 
-	GTR_FREE(cmd);
+	return TRUE;
 }
 
 /*
  * This acts as the backend function for the gzip & bzip2'ed po file
  *  functions.
  */
-void open_compressed_po_file(gchar *file, gchar *command)
+gboolean _open_compressed_po_file(gchar *file, gchar *command, GError **error)
 {
 	gchar *cmd;
 
 	if(!gtranslator_utils_check_program(command, 0))
 	{
-		return;
+		g_set_error(error,
+			GTR_OPEN_FILE_ERROR,
+			GTR_OPEN_FILE_ERROR_MISSING_PROGRAM,
+			_("Couldn't find the '%s' program."),
+			command);
+		return FALSE;
 	}
 
 	/* 
@@ -174,79 +190,66 @@ void open_compressed_po_file(gchar *file, gchar *command)
 		gtranslator_runtime_config->temp_filename);
 
 	/*
-	 * Execute the command and check the result.
+	 * Execute the command and test the result.
 	 */
-	if(!system(cmd))
+	if(system(cmd))
 	{
-		/*
-		 * Open up the "new" plain gettext file.
-		 */
-		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
-		gtranslator_parse_main_extra();
+		g_set_error(error,
+			GTR_OPEN_FILE_ERROR,
+			GTR_OPEN_FILE_ERROR_OTHER,
+			_("Couldn't open compiled gettext file `%s' with '%s'!"),
+			file, command);
+		g_free(cmd);
+		return FALSE;
 	}
-	else
+	g_free(cmd);
+
+	/*
+	 * Open up the "new" plain gettext file.
+	 */
+	if(!gtranslator_parse_main(gtranslator_runtime_config->temp_filename,
+		error))
 	{
-		if(!strcmp(command, "uncompress"))
-		{
-			cmd=g_strdup_printf(
-			_("Couldn't open compressed gettext file `%s'!"),
-			file);
-		}
-		else
-		{
-			cmd=g_strdup_printf(
-				/*
-				 * The %s format here stands for the used
-				 *  compressions program (gzip, bzip2 etc.)
-				 */
-				_("Couldn't open %s'd gettext file `%s'!"),
-				command,	
-				file);
-		}
-		
-		/*
-		 * Display the warning to the user.
-		 */
-		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
+		return FALSE;
 	}
-	
-	GTR_FREE(cmd);
+
+	return TRUE;
 }
 
 /*
  * Open up the gzip'ed po file.
  */ 
-void gtranslator_open_gzipped_po_file(gchar *file)
+gboolean _gtranslator_open_gzipped_po_file(gchar *file, GError **error)
 {
 	g_return_if_fail(file!=NULL);
 
-	open_compressed_po_file(file, "gzip");
+	return _open_compressed_po_file(file, "gzip", error);
 }
 
 /*
  * Open up the bzip2'ed po file.
  */
-void gtranslator_open_bzip2ed_po_file(gchar *file)
+gboolean _gtranslator_open_bzip2ed_po_file(gchar *file, GError **error)
 {
 	g_return_if_fail(file!=NULL);
 
-	open_compressed_po_file(file, "bzip2");
+	return _open_compressed_po_file(file, "bzip2", error);
 }
 
 /*
  * Open up the Z'ed po file.
  */
-void gtranslator_open_compressed_po_file(gchar *file)
+gboolean _gtranslator_open_compressed_po_file(gchar *file, GError **error)
 {
 	g_return_if_fail(file!=NULL);
 
-	open_compressed_po_file(file, "uncompress");
+	return _open_compressed_po_file(file, "uncompress", error);
 }
 
 /*
  * Open up zip'ed po file.
  */
-void gtranslator_open_ziped_po_file(gchar *file)
+gboolean _gtranslator_open_ziped_po_file(gchar *file, GError **error)
 {
 	gchar 	*cmd;
 
@@ -254,25 +257,53 @@ void gtranslator_open_ziped_po_file(gchar *file)
 
 	if(!gtranslator_utils_check_program("unzip", 0))
 	{
-		return;
+		g_set_error(error,
+			GTR_OPEN_FILE_ERROR,
+			GTR_OPEN_FILE_ERROR_MISSING_PROGRAM,
+			_("Couldn't find the '%s' program."),
+			"unzip");
+		return FALSE;
 	}
 
 	cmd=g_strdup_printf("unzip -p '%s' > '%s'", 
 		file,
 		gtranslator_runtime_config->temp_filename);
 
-	if(!system(cmd))
+	if(system(cmd))
 	{
-		gtranslator_parse_main(gtranslator_runtime_config->temp_filename);
-		gtranslator_parse_main_extra();
-	}
-	else
-	{
-		cmd=g_strdup_printf(_("Couldn't open zip'ed po file `%s'!"),
+		g_set_error(error,
+			GTR_OPEN_FILE_ERROR,
+			GTR_OPEN_FILE_ERROR_OTHER,
+			_("Couldn't open compiled gettext file `%s'!"),
 			file);
-
-		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
+		g_free(cmd);
+		return FALSE;
 	}
+	g_free(cmd);
 
-	GTR_FREE(cmd);
+	return _gtranslator_read_from(
+		gtranslator_runtime_config->temp_filename, error);
 }
+
+/*
+ * Common parser code
+ */
+gboolean _gtranslator_read_from(gchar *file, GError **error)
+{
+	if(!gtranslator_parse_main(file, error))
+	{
+		return FALSE;
+	}
+	return TRUE;
+}
+
+GQuark
+gtranslator_open_file_error_quark (void)
+{
+  static GQuark quark = 0;
+  if (!quark)
+    quark = g_quark_from_static_string ("gtranslator_open_file_error");
+
+  return quark;
+}
+

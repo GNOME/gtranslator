@@ -36,6 +36,8 @@ static gint signalscount=0;
  */ 
 void gtranslator_signal_handler(int signal)
 {
+	GError *error;
+	
 	if(signalscount > 0)
 	{
 		return;
@@ -54,8 +56,13 @@ void gtranslator_signal_handler(int signal)
 		/*
 		 * Save the file under the special filename.
 		 */
-		gtranslator_save_file(
-			gtranslator_runtime_config->crash_filename);
+		if (!gtranslator_save_file(gtranslator_runtime_config->crash_filename,
+				&error)) {
+			g_assert(error!=NULL);
+			fprintf(stderr, _("Saving file failed: %s"),
+				error->message);
+			g_clear_error(&error);
+		}
 	}
 
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");

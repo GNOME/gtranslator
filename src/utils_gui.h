@@ -78,10 +78,6 @@ GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, const gchar *title_text,
 	const gchar *fontspec, GCallback callback);
 	
-GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
-	gint row, const gchar *label_text, const gchar *title_text,
-	ColorType color_type, GCallback callback);
-
 /*
  * Checks the given file for the right permissions for
  *  open/writing the files.

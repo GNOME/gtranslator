@@ -1,5 +1,7 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
+ *			Ross Golder <ross@golder.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,27 +19,14 @@
  *
  */
 
-#ifndef GTR_OPEN_H
-#define GTR_OPEN_H 1
+#ifndef GTR_COMPILE_H
+#define GTR_COMPILE_H 1
 
-#include <glib.h>
-
-/*
- * The general file opening action starts from here!
- */
-
-typedef enum 
-{
-  GTR_OPEN_FILE_ERROR_MISSING_PROGRAM,
-  GTR_OPEN_FILE_ERROR_OTHER
-} GtrOpenFileError;
-
-#define GTR_OPEN_FILE_ERROR gtranslator_open_file_error_quark()
-GQuark gtranslator_open_file_error_quark (void);
+#include <gtk/gtkwidget.h>
 
 /*
- * Open the given filename string via all of our supported, available methods.
+ * The compile function.
  */
-gboolean gtranslator_open_file(gchar *filename, GError **error);
+void compile(GtkWidget *widget, gpointer useless);
 
 #endif
