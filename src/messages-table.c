@@ -107,6 +107,8 @@ static GtrMessagesTableColors *messages_table_colors;
  */
 static void read_messages_table_colors()
 {
+	GtkStyle *style=NULL;
+	
 	messages_table_colors=g_new0(GtrMessagesTableColors, 1);
 
 	/*
@@ -164,7 +166,14 @@ static void read_messages_table_colors()
 	 */
 	gdk_color_parse(messages_table_colors->untranslated, &messages_table_colors->untranslated_color);
 	gdk_color_parse(messages_table_colors->fuzzy, &messages_table_colors->fuzzy_color);
-	gdk_color_parse(messages_table_colors->translated, &messages_table_colors->translated_color);
+
+	/* If no custom color is set, use the default style color. */
+	if (messages_table_colors->translated == NULL) {
+		style=gtk_widget_get_style(GTK_WIDGET(trans_box));
+		messages_table_colors->translated_color=style->text[GTK_STATE_NORMAL];
+	} else {
+		gdk_color_parse(messages_table_colors->translated, &messages_table_colors->translated_color);
+	}
 }
 
 /*
