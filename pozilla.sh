@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.5
+export POZILLA_RELEASE=0.6
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -44,23 +44,47 @@ echo -n "" > $CONFIG_DIR/pozilla.output
 
 case $1 in
 -[hH]*|--[hH]*)
-	echo "----------------------------------------------"
-	echo "Pozilla.sh R $POZILLA_RELEASE"
-	echo "----------------------------------------------"
-	echo "Author:  Fatih Demir <kabalak@gmx.net>"
-	echo "----------------------------------------------"
+	echo "<·············································"
+	echo " Pozilla.sh R $POZILLA_RELEASE"
+	echo "<·············································"
+	echo " Author: Fatih Demir <kabalak@gmx.net>"
+	echo "<·············································"
+	echo "-A --additional   Defines an additional mal address to mail to"
+	echo "-M --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
-	echo "----------------------------------------------"
+	echo "<·············································"
 		exit 1
 ;;
 -[vV]*|--[vV]*)
-	echo "----------------------------------------------"
-	echo "Pozilla.sh R $POZILLA_RELEASE"
-	echo "----------------------------------------------"
-        echo "Author:  Fatih Demir <kabalak@gmx.net>"
-	echo "----------------------------------------------"
+	echo "<·············································"
+	echo " Pozilla.sh R $POZILLA_RELEASE"
+	echo "<·············································"
+        echo " Author:  Fatih Demir <kabalak@gmx.net>"
+	echo "<·············································"
 		exit 1
+;;
+-[mM]*|--mailinglist)
+	shift 1
+	if test "hehe$1" = "hehe" ; then
+		echo "No mailing list given, using default:"
+		echo "$MAILING_LIST"
+	else
+		echo "Using special mailing list:"
+		export MAILING_LIST="$1"
+		echo "$MAILING_LIST"
+		shift 1
+	fi
+;;
+-[aA]*|--additional)
+	shift 1
+	if test "hehe$1" = "hehe" ; then
+		echo "No additional mail address given!"
+	else
+		export ADDITIONAL_MAILING_ADDRESS="$1"
+		echo "Using $ADDITIONAL_MAILING_ADDRESS for additional mailing."
+		shift 1
+	fi	
 ;;
 *)
 	true
@@ -108,15 +132,15 @@ export PO_FILES=`ls *.po`
 export SUBJECT="[ Pozilla #$POZILLA_NO ] $PACKAGE R $RELEASE"
 
 #
-# Now get for every po-file the last translator
+# Now get for every po-file the last translator (if you've got the
+#  old GNOME i18n-tools you should uncomment this).
 #
-./update.pl -P
+# ./update.pl -P
 
 #
-# Possibly you want to use the new xml-i18n-tools here,
-#  so you comment out the above call and uncomment the following.
+# Possibly we want to use the new xml-i18n-tools here,
 # 
-# ./update.sh -P
+./update.sh -P
 #
 for i in $PO_FILES
 	do
@@ -170,7 +194,14 @@ echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
 echo "- the po-files - send a mail to Fatih Demir <kabalak@gmx.net>" >> $BODY_FILE
 echo "Thanks." >> $BODY_FILE
-cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST"
+#
+# Send the mail to the address(es).
+#
+if test "my$ADDITIONAL_MAILING_ADDRESS" = "my" ; then
+	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST"
+else
+	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST" -c "$ADDITIONAL_MAILING_ADDRESS"
+fi
 
 #
 # Exit with 0. We're all happy :-0
