@@ -39,7 +39,7 @@ typedef struct {
 *	The structure for the translations :	
 */
 typedef struct {
-	struct po_file *po;
+	po_file *po;
 	char *msgid;
 	char *msgstr;
 	unsigned int position;
@@ -48,7 +48,7 @@ typedef struct {
 /*
 *	A struct-variable :
 */
-struct message *msg;
+message *msg;
 
 /*
 *	This are the global count variables  
