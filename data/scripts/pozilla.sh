@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# (C) 2000-2002 Fatih Demir <kabalak@gtranslator.org>
+# (C) 2000-2003 Fatih Demir <kabalak@gtranslator.org>
 #
 # This script mails the common "oh my god, they're
 #  making a release" messages to the last translators.
@@ -33,7 +33,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=6.0
+export POZILLA_RELEASE=6.1
 
 #
 # Here we do define the corresponding i18n mailing list which should also get
@@ -483,6 +483,11 @@ fi
 if test -f configure.in ; then
 	export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|sed -e 's/^.*(//g' -e 's/,.*$//g'`
 
+	if test "o$PACKAGE" = "oAC_PACKAGE_NAME" ; then
+	
+		export PACKAGE=`grep \^AC_INIT configure.in|sed -e 's/^.*(//g' -e 's/,.*$//g'`
+	fi
+
 	#
 	# Test if we'd get a PACKAGE and try some other plays if we'dn't get it.
 	#
@@ -522,6 +527,10 @@ fi
 if test "y$MY_RELEASE" = "y" ; then
 	export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
 		sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
+
+	if test "r$RELEASE" = "rAC_PACKAGE_VERSION" ; then
+		export RELEASE=`grep \^AC_INIT configure.in|sed -e 's/^.*(//g' -e s/$PACKAGE,//g -e 's/,//g' -e 's/\ //g'`
+	fi
 	
 	if test "r$RELEASE" = "r" ; then
 		print_separator_line
