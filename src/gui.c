@@ -74,7 +74,7 @@ static void undo_changes(GtkWidget  * widget, gpointer useless);
  * Pops up a menu if needed
  */
 static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d);
-	
+
 static void invert_dot(gchar *str);
 static void update_appbar(gint pos);
 static void call_gtranslator_homepage(GtkWidget  * widget, gpointer useless);
@@ -637,7 +637,6 @@ void create_app1(void)
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
-
 	gtk_signal_connect(GTK_OBJECT(app1), "key_press_event",
 			   GTK_SIGNAL_FUNC(gtranslator_keyhandler), NULL);
 	/*

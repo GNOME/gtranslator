@@ -198,48 +198,31 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 		{
 			if(strstr(*string, rstuff->string))
 			{
-				gchar **arr;
 				GString *yummystring=g_string_new("");
-				gint z=0;
+				
+				/*
+				 * This should never happen that the string to
+				 *  search is inside the string is longer then 
+				 *   the string itself.
+				 */
+				if(strlen(rstuff->string) > strlen(*string))
+				{
+					return;
+				}
+				else
+				{
+					gchar  *zup;
+					gchar *i;
+					
+					zup=*string;
+					i=strstr(zup, rstuff->string);
+					/* FIXME TODO FIXME */
+					g_warning("Write Replace Code!");
+				}
+								
+				g_free(*string);
+				*string=yummystring->str;
 
-				/*
-				 * FIXME --> This does not work as the g_strsplit
-				 *  function doesn't work as wished by me .-(
-				 */
-				
-				/*
-				 * Split the string up for all the replace actions.
-				 */
-				arr=g_strsplit((*string), rstuff->replace_string, 0);
-	
-				/*
-				 * Test the array elements and use them for building
-				 *  up the replacement string.
-				 */
-				while(arr[z]!=NULL)
-				{
-					yummystring=g_string_append(yummystring, 
-						arr[z]);
-	
-					yummystring=g_string_append(yummystring,
-						rstuff->replace_string);
-	
-					z++;
-				}
-	
-				g_strfreev(arr);
-	
-				/*
-				 * If we could get a replacement string, free up the
-				 *  old content of "*string" and assign the new, fresh
-				 *   content of yummystring->str.
-				 */
-				if(yummystring->len > 0)
-				{
-					g_free(*string);
-					*string=yummystring->str;
-				}
-				
 				/*
 				 * Hope we'd make a replace, therefore we do increment
 				 *  the replaced_count.
