@@ -14,9 +14,7 @@
 #endif
 
 #include <string.h>
-#include <errno.h>
 #include <sys/param.h>
-
 #include "parse.h"
 #include "prefs.h"
 #include "dialogs.h"
@@ -29,15 +27,6 @@ static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
 static void free_a_message(gpointer data, gpointer useless);
 static void free_po(void);
-
-/**
-* A simple stream-check
-**/
-void check_file(FILE * stream)
-{
-	if (stream == NULL)
-		g_error(_("\nThe file stream is lost!\n%s"), g_strerror(errno));
-}
 
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
@@ -131,7 +120,21 @@ static gboolean actual_parse(void)
 	gchar *error = NULL;
 
 	fs = fopen(po->filename, "r+");
-	check_file(fs);
+	
+	/**
+	* Check if the file exists at all with a libgnome-function.
+	**/
+	if(!g_file_exists(po->filename))
+	{
+		error=g_strdup_printf(_("The file `%s' doesn't exist at all!"),po->filename);
+		gnome_app_error(GNOME_APP(app1),error);
+		if(error)
+		{
+			g_free(error);
+		}
+		return FALSE;
+	}
+	
 	msg = g_new0(GtrMsg, 1);
 	/**
 	* Parse the file line by line...
@@ -375,7 +378,20 @@ static gboolean actual_write(const gchar * name)
 	}
 	
 	fs = fopen(name, "w");
-	check_file(fs);
+
+	/**
+	* Again check if the file exists.
+	**/
+	if(!g_file_exists(name))
+	{
+		gchar *my_error=g_strdup_printf(_("The file `%s' doesn't exist at all!"),name);
+		gnome_app_error(GNOME_APP(app1),my_error);
+		if(my_error)
+		{
+			g_free(my_error);
+		}
+		return FALSE;
+	}
 
 	update_header(po->header);
 	header = put_header(po->header);
@@ -421,7 +437,7 @@ void save_current_file(GtkWidget * widget, gpointer useless)
 			    GNOME_STOCK_BUTTON_NO,
 			    GNOME_STOCK_BUTTON_CANCEL,
 			    NULL);
-			show_nice_dialog(&dialog, "gtranslator -- unchanged");
+			show_nice_dialog(&dialog, _("gtranslator -- unchanged"));
 			reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 			g_free(question);
 			if (reply != GNOME_YES)
@@ -429,6 +445,7 @@ void save_current_file(GtkWidget * widget, gpointer useless)
 		}
 	}
 	actual_write(po->filename);
+	disable_actions(ACT_SAVE);
 }
 
 static void free_a_message(gpointer data, gpointer useless)

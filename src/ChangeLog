@@ -1,9 +1,22 @@
 2000-09-16  Fatih Demir	<kabalak@gmx.net>
 
-	* parse.c: Made some more messages translatable.
+	* parse.c: Made some more messages translatable and removed the
+		check_file function; we're now using the libgnome-function
+		 g_file_exists for that. If there's no such file, it does
+		  now use a gnome_app_error to display the error, doesn't
+		   parse anything and the app is still there ( hehe,
+		    no crash ).
+		 
+		Also disabled the Save button if the file has been saved
+		 and haven't been changed since then.
 
-	* gui.c: Corrected another wrong addiction (icon number was wrong)
-		and added also a fuzzy icon to the searchbar.
+	* parse.h: Removed the check_file prototype as the function
+		isn't used/included anymore.
+
+	* gui.c: Corrected another wrong addiction (icon number was wrong),
+		added also a fuzzy icon to the searchbar and made the Fuzzy
+		 icon react with the same intelligence like the Missing
+		   icon.
 
 2000-09-15  Fatih Demir	<kabalak@gmx.net>
 

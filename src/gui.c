@@ -318,7 +318,7 @@ static void create_actions(void)
 	insert_action(ACT_NEXT, the_messages_menu[2], the_searchbar[2]);
 	insert_action(ACT_LAST, the_messages_menu[3], the_searchbar[3]);
 	insert_action(ACT_GOTO, the_messages_menu[5], the_searchbar[5]);
-	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], NONE);
+	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], the_searchbar[5]);
 	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], the_searchbar[4]);
 	/*------------------------------------------------ */
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);

@@ -56,11 +56,6 @@ gboolean file_opened;
 /* Marks if the current message was changed; */
 gboolean message_changed;
 
-/**
-* A simple file check .
-**/
-void check_file(FILE *);
-
 /* Changes message fuzzy status */
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy);
 
