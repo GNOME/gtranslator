@@ -311,7 +311,7 @@ GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
 }
 
 /*
- * Adds a GnomeColorPicker to the given table.
+ * Adds a GtkColorPicker to the given table.
  */
 GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, const gchar *title_text,
@@ -322,12 +322,12 @@ GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 	
 	label=gtk_label_new(label_text);
 
-	color_selector=gnome_color_picker_new();
+	color_selector=gtk_color_button_new();
 	
-	gnome_color_picker_set_title(GNOME_COLOR_PICKER(color_selector),
+	gtk_color_button_set_title(GTK_COLOR_BUTTON(color_selector),
 		title_text);
 	
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(color_selector), 
+	gtranslator_color_values_get(GTK_COLOR_BUTTON(color_selector), 
 		color_type);
 	
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);

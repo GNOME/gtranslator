@@ -298,10 +298,10 @@ GtkWidget *gtranslator_preferences_color_picker_new(const gchar *title_text,
 {
 	GtkWidget *color_selector;
 
-	color_selector = gnome_color_picker_new();
-	gnome_color_picker_set_title(GNOME_COLOR_PICKER(color_selector), title_text);
+	color_selector = gtk_color_button_new();
+	gtk_color_button_set_title(GTK_COLOR_BUTTON(color_selector), title_text);
 
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(color_selector), color_type);
+	gtranslator_color_values_get(GTK_COLOR_BUTTON(color_selector), color_type);
 	if (size_group != NULL)
 		gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), GTK_WIDGET (color_selector));
 	g_signal_connect(G_OBJECT(color_selector), "color_set",
@@ -825,17 +825,18 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 		GTR_FREE(selected_scheme_file);
 	}
 
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(background), COLOR_BG);
+	gtranslator_color_values_set(GTK_COLOR_BUTTON(foreground), COLOR_FG);
+	gtranslator_color_values_set(GTK_COLOR_BUTTON(background), COLOR_BG);
 
 	/*
 	 * The messages table colors are set up here.
 	 */
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(mt_untranslated), 
+
+	gtranslator_color_values_set(GTK_COLOR_BUTTON(mt_untranslated), 
 		COLOR_MESSAGES_TABLE_UNTRANSLATED);
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(mt_fuzzy), 
+	gtranslator_color_values_set(GTK_COLOR_BUTTON(mt_fuzzy), 
 		COLOR_MESSAGES_TABLE_FUZZY);
-	gtranslator_color_values_set(GNOME_COLOR_PICKER(mt_translated), 
+	gtranslator_color_values_set(GTK_COLOR_BUTTON(mt_translated), 
 		COLOR_MESSAGES_TABLE_TRANSLATED);
 
 	gtranslator_set_style(GTK_WIDGET(text_box), 0);

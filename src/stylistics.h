@@ -25,7 +25,7 @@
  * gtranslator specific style functions.
  */ 
 
-#include <libgnomeui/gnome-color-picker.h>
+#include <gtk/gtk.h>
 
 /*
  * ColorTypes.
@@ -62,14 +62,14 @@ GdkColor colors[COLOR_END];
 void gtranslator_colors_initialize(void);
 
 /*
- * Saves the color values from the GnomeColorPicker.
+ * Saves the color values from the GtkColorButton.
  */
-void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type);
+void gtranslator_color_values_set(GtkColorButton *colorpicker, ColorType Type);
 
 /*
- * Restores the color values for the GnomeColorPicker.
+ * Restores the color values for the GtkColorButton.
  */
-void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type);
+void gtranslator_color_values_get(GtkColorButton *colorpicker, ColorType Type);
 
 /*
  * Applies the foreground/background/font settings for the given
