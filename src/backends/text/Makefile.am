@@ -12,7 +12,8 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
 	-DG_LOG_DOMAIN=\""gtranslator"\" \
-	$(GLIB_CFLAGS)			\
+	$(GLIB_CFLAGS)		\
+	$(GNOME_INCLUDEDIR)	\
 	$(GAL_CFLAGS)
 
 text_la_SOURCES = text.c
