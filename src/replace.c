@@ -143,8 +143,16 @@ void gtranslator_replace_run(GtrReplace *replace)
 			 *  the po->current pointer is right now.
 			 */
 			po->current=theoriginalchoice;
+
+			
 		}
 	}
+	
+	/*
+	 * Redisplay the current message to get replaces in the current message
+	 *  on the screen immediately.
+	 */
+	display_msg(po->current);
 
 	if(replaced_count >= 1)
 	{
