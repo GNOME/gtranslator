@@ -412,9 +412,9 @@ void gtranslator_utils_invert_dot(gchar *str)
 			 * used by gtranslator as special char to make
 			 * blanks visible.
 			 * If your language uses that char for another
-			 * purpose or if you use another enocoding
-			 * than latin1, feel free to change it to
-			 * whatever you think will be better 
+			 * purpose or if you use a charset encoding
+			 * that doesn't have it, feel free to change it
+			 * to whatever you think will be better 
 			 */
 			str[i]=(_("·"))[0];
 		} else if(str[i]==(_("·"))[0]) {

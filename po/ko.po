@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.37\n"
-"POT-Creation-Date: 2001-04-30 12:03+0900\n"
+"POT-Creation-Date: 2001-06-05 01:41+0200\n"
 "PO-Revision-Date: 2001-04-30 12:17+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: korean <ko@li.org>\n"
@@ -52,19 +52,20 @@ msgstr "알수 없음"
 msgid "<Not Given>"
 msgstr "<주어지지 않음>"
 
-#: src/dialogs.c:96
-msgid "gtranslator -- open a po-file"
+#: src/dialogs.c:107
+#, fuzzy
+msgid "gtranslator -- open po file"
 msgstr "gtranslator -- po파일 열기"
 
-#: src/dialogs.c:138
+#: src/dialogs.c:146
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- 다른 이름으로 파일 저장.."
 
-#: src/dialogs.c:142
+#: src/dialogs.c:153
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- 다른 이름으로 사본파일 저장.."
 
-#: src/dialogs.c:194
+#: src/dialogs.c:197
 #, c-format
 msgid ""
 "File %s\n"
@@ -73,96 +74,107 @@ msgstr ""
 "파일 %s\n"
 "가 바뀌었습니다. 저장할까요?"
 
-#: src/dialogs.c:235
+#: src/dialogs.c:234
+#, fuzzy
+msgid "gtranslator -- import po file"
+msgstr "gtranslator -- po파일 열기"
+
+#: src/dialogs.c:277
+#, fuzzy
+msgid "gtranslator -- export po file"
+msgstr "gtranslator -- po파일 열기"
+
+#: src/dialogs.c:390
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- 가기"
 
-#: src/dialogs.c:235
+#: src/dialogs.c:392
 msgid "Go!"
 msgstr "가기!"
 
-#: src/dialogs.c:241
+#: src/dialogs.c:401
 msgid "Go to message number:"
 msgstr "메세지 줄로 가기:"
 
-#: src/dialogs.c:310
-msgid "Find in the po-file"
+#: src/dialogs.c:471
+#, fuzzy
+msgid "Find in the po file"
 msgstr "po파일에서 찾기"
 
-#: src/dialogs.c:310 src/menus.c:326
+#: src/dialogs.c:473 src/menus.c:351
 msgid "Find"
 msgstr "찾기"
 
-#: src/dialogs.c:313
+#: src/dialogs.c:480
 msgid "Enter your desired search string:"
 msgstr "찾기를 원하는 문자열을 입력하세요:"
 
-#: src/dialogs.c:316
+#: src/dialogs.c:485
 msgid "Case sensitive"
 msgstr "대소문자 구별"
 
-#: src/dialogs.c:321 src/languages.h:122
+#: src/dialogs.c:490 src/languages.h:122
 msgid "English"
 msgstr "영어"
 
-#: src/dialogs.c:327 src/dialogs.c:425 src/gui.c:317
+#: src/dialogs.c:496 src/dialogs.c:594 src/gui.c:359
 msgid "Translated"
 msgstr "변역된 문장"
 
-#: src/dialogs.c:333 src/dialogs.c:431
+#: src/dialogs.c:502 src/dialogs.c:600
 msgid "Both"
 msgstr "둘다"
 
-#: src/dialogs.c:339 src/dialogs.c:419
+#: src/dialogs.c:508 src/dialogs.c:588
 msgid "Comments"
 msgstr "주석"
 
-#: src/dialogs.c:345
+#: src/dialogs.c:514
 msgid "In all strings"
 msgstr "모든 문자열에서"
 
-#: src/dialogs.c:360
+#: src/dialogs.c:529
 msgid "Find in: "
 msgstr "찾기: "
 
-#: src/dialogs.c:405
+#: src/dialogs.c:574
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- 바꾸기"
 
-#: src/dialogs.c:406 src/menus.c:330
+#: src/dialogs.c:575 src/menus.c:355
 msgid "Replace"
 msgstr "바꾸기"
 
-#: src/dialogs.c:407
+#: src/dialogs.c:576
 msgid "Replace all"
 msgstr "모두 바꾸기"
 
-#: src/dialogs.c:411
+#: src/dialogs.c:580
 msgid "String to replace:"
 msgstr "바꿀 문자열:"
 
-#: src/dialogs.c:414
+#: src/dialogs.c:583
 msgid "Replace string:"
 msgstr "문자열 바꿈:"
 
-#: src/dialogs.c:454
+#: src/dialogs.c:623
 msgid "Replace in:"
 msgstr ""
 
-#: src/dialogs.c:532
+#: src/dialogs.c:701
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt를 실행하는 도중에 오류가 발생했습니다.\n"
 
-#: src/dialogs.c:562
+#: src/dialogs.c:731
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- URI에서 열기"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:563
-#: src/menus.c:259
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:732
+#: src/menus.c:275
 msgid "Open"
 msgstr "열기"
 
-#: src/dialogs.c:569
+#: src/dialogs.c:738
 msgid "Enter URI:"
 msgstr "URI 입력:"
 
@@ -170,15 +182,15 @@ msgstr "URI 입력:"
 #. * Show an error dialog but don't close down the
 #. *  Open from URI dialog.
 #.
-#: src/dialogs.c:611
+#: src/dialogs.c:780
 msgid "No URI given!"
 msgstr "주어진 URI가 없습니다!"
 
-#: src/dialogs.c:631
+#: src/dialogs.c:795
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "주어진 URI 프로토콜 (\"ftp://\" 같은) 을 지원하지 않습니다!"
 
-#: src/dialogs.c:662
+#: src/dialogs.c:826
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -191,47 +203,47 @@ msgstr ""
 "아마도 작업물의 몇몇 부분이 남아 있을것입니다.\n"
 "\"아니오\"를 선택하면 깨진 복구파일을 지울것입니다."
 
-#: src/dialogs.c:688
+#: src/dialogs.c:851
 #, c-format
 msgid "Recovering `%s'..."
 msgstr "`%s' 복구중 ..."
 
-#: src/dialogs.c:733
+#: src/dialogs.c:896
 msgid "Couldn't get list of gettext domains!"
 msgstr "gettext 원문 목록을 얻을 수 없습니다!"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:740
+#: src/dialogs.c:903
 msgid "Here you can query existing gettext domains for a translation."
 msgstr "기존번역물의 gettext 원문을 질의할수 있습니다."
 
-#: src/dialogs.c:743
+#: src/dialogs.c:906
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- 기존 gettext 원문 질의"
 
-#: src/dialogs.c:744 src/menus.c:334
+#: src/dialogs.c:907 src/menus.c:359
 msgid "Query"
 msgstr "질의"
 
-#: src/dialogs.c:752
+#: src/dialogs.c:915
 msgid "Query string:"
 msgstr "문자열 질의:"
 
-#: src/dialogs.c:759
+#: src/dialogs.c:922
 msgid "Domain to search the translation in:"
 msgstr "번역물에서 찾을 원문:"
 
-#: src/dialogs.c:809
+#: src/dialogs.c:972
 msgid "No query string given!"
 msgstr "주어진 질의 문자열이 없습니다!"
 
-#: src/dialogs.c:843
+#: src/dialogs.c:1006
 msgid "Couldn't find any result for the query!"
 msgstr "질의에 대한 결과를 찾을수 없습니다!"
 
-#: src/dialogs.c:856
+#: src/dialogs.c:1019
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
@@ -244,11 +256,11 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:946
+#: src/dialogs.c:1109
 msgid "Query's result translation is already there!"
 msgstr "질의 결과 번역이 이미 있습니다!"
 
-#: src/dialogs.c:968
+#: src/dialogs.c:1131
 msgid ""
 "Should gtranslator accomplish all missing strings (if possible)\n"
 "from your default query domain?"
@@ -276,38 +288,38 @@ msgstr "URL 보기..."
 #.
 #. * Create the app
 #.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:145 src/parse.c:687
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:159 src/parse.c:728
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:304
+#: src/gui.c:346
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i개의 퍼지메세지 남았슴 ]"
 
-#: src/gui.c:304 src/gui.c:308 src/menus.c:318
+#: src/gui.c:346 src/gui.c:350 src/menus.c:343
 msgid "Fuzzy"
 msgstr "퍼지"
 
-#: src/gui.c:308
+#: src/gui.c:350
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ 남은 퍼지메세지 없음 ]"
 
-#: src/gui.c:315
+#: src/gui.c:357
 msgid "Stick"
 msgstr "고정"
 
-#: src/gui.c:326
+#: src/gui.c:368
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i개의 번역되지 않은 메세지 남았슴 "
 
-#: src/gui.c:326 src/gui.c:328
+#: src/gui.c:368 src/gui.c:370
 msgid "Untranslated"
 msgstr "변역되지 않은 문장"
 
-#: src/gui.c:328
+#: src/gui.c:370
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ 번역되지 않은 문장 없음 ]"
@@ -315,76 +327,76 @@ msgstr "%s [ 번역되지 않은 문장 없음 ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:339
+#: src/gui.c:381
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "메세지: %d / %d / 상태: %s"
 
-#: src/header_stuff.c:358
+#: src/header_stuff.c:422
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- 머릿말 편집"
 
-#: src/header_stuff.c:362
+#: src/header_stuff.c:426
 msgid "Project"
 msgstr "프로젝트"
 
-#: src/header_stuff.c:363
+#: src/header_stuff.c:427
 msgid "Translator and Language"
 msgstr "번역자와 언어"
 
-#: src/header_stuff.c:374
+#: src/header_stuff.c:438
 msgid "Comments:"
 msgstr "주석:"
 
-#: src/header_stuff.c:380
+#: src/header_stuff.c:444
 msgid "Project name:"
 msgstr "프로젝트 이름:"
 
-#: src/header_stuff.c:383
+#: src/header_stuff.c:447
 msgid "Project version:"
 msgstr "프로젝트 판번호:"
 
-#: src/header_stuff.c:386
+#: src/header_stuff.c:450
 msgid "Pot file creation date:"
 msgstr "pot 파일 생성일자:"
 
-#: src/header_stuff.c:390
+#: src/header_stuff.c:454
 msgid "Po file revision date:"
 msgstr "po 파일 개정일자:"
 
-#: src/header_stuff.c:399
+#: src/header_stuff.c:463
 msgid "Use my options to fill the following entries."
 msgstr "나의 옵션을 다음 기재사항에 채웁니다."
 
-#: src/header_stuff.c:412
+#: src/header_stuff.c:476
 msgid "Translator's name:"
 msgstr "번역자의 이름:"
 
-#: src/header_stuff.c:415
+#: src/header_stuff.c:479
 msgid "Translator's e-mail:"
 msgstr "번역자의 전자우편:"
 
-#: src/header_stuff.c:418 src/prefs.c:126
+#: src/header_stuff.c:482 src/prefs.c:139
 msgid "Language:"
 msgstr "언어:"
 
-#: src/header_stuff.c:423
+#: src/header_stuff.c:487
 msgid "Language group's e-mail:"
 msgstr "언어 그룹의 전자우편:"
 
-#: src/header_stuff.c:427 src/prefs.c:139
+#: src/header_stuff.c:491 src/prefs.c:152
 msgid "Charset:"
 msgstr "문자셋:"
 
-#: src/header_stuff.c:431 src/prefs.c:143
+#: src/header_stuff.c:495 src/prefs.c:156
 msgid "Encoding:"
 msgstr "인코딩:"
 
-#: src/history.c:157
+#: src/history.c:158
 msgid "_File/Recen_t files/"
 msgstr "파일(_F)/최근 파일(_t)/"
 
-#: src/history.c:195
+#: src/history.c:196
 #, c-format
 msgid "Open %s"
 msgstr "%s 열기"
@@ -429,11 +441,11 @@ msgstr "최근 번역자: %s"
 #: src/htmlizer.c:318
 #, c-format
 msgid ""
-"HTML output of \"%s\" produced by <a "
-"href=\"http://www.gtranslator.org\">gtranslator</a> version %s."
+"HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
+"\">gtranslator</a> version %s."
 msgstr ""
-"\"%s\"의 HTML 출력은 <a herf=\"http://www.gtranslator.org\">gtranslator</a>"
-"판번호 %s 가 만들었습니다."
+"\"%s\"의 HTML 출력은 <a herf=\"http://www.gtranslator.org\">gtranslator</a>판"
+"번호 %s 가 만들었습니다."
 
 #: src/languages.h:66
 msgid "Afrikaans"
@@ -444,7 +456,7 @@ msgid "Arabic"
 msgstr "아라비아어"
 
 #: src/languages.h:74
-msgid "Azeri"
+msgid "Azerbaijani Turkish"
 msgstr ""
 
 #: src/languages.h:78
@@ -655,85 +667,105 @@ msgstr "와론어"
 msgid "Welsh"
 msgstr "웨일스어"
 
-#: src/main.c:70
-msgid "Shows build informations/specifications"
+#: src/main.c:75
+#, fuzzy
+msgid "Show build informations/specifications"
 msgstr "빌드 정보/내역 보기"
 
-#: src/main.c:74
-msgid "Specifies the main-window geometry"
+#: src/main.c:79
+#, fuzzy
+msgid "Specify main window geometry"
 msgstr "주 윈도우의 위치를 지정"
 
-#: src/main.c:74
+#: src/main.c:79
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/main.c:78
-msgid "Define another query domains directory"
+#: src/main.c:83
+msgid "Don't load any backend modules"
+msgstr ""
+
+#: src/main.c:87
+#, fuzzy
+msgid "Define another query-domains directory"
 msgstr "원문 디렉토리에 다른 질의 정의"
 
-#: src/main.c:78
+#: src/main.c:87
 msgid "LOCALEDIR"
 msgstr ""
 
-#: src/main.c:82
+#: src/main.c:91
 msgid "Syntax color scheme to use"
 msgstr "사용할 색상표 용법"
 
-#: src/main.c:82
+#: src/main.c:91
 msgid "SCHEMEFILE"
 msgstr ""
 
-#: src/main.c:86
+#: src/main.c:95
 msgid "HTML file to write to"
 msgstr "저장할 HTML파일"
 
-#: src/main.c:86
+#: src/main.c:95
 msgid "HTMLFILE"
 msgstr ""
 
-#: src/main.c:131
+#: src/main.c:140
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf 초기화 하는중 오류: %s."
 
-#: src/main.c:150
+#: src/main.c:163
 msgid "gtranslator build informations/specs:"
 msgstr "gtranslator 빌드 정보/명세:"
 
-#: src/main.c:152
-#, c-format
-msgid "Version and build date: %s"
+#: src/main.c:165
+#, fuzzy
+msgid "Version and build date:"
 msgstr "판번호와 만든 날짜:     %s"
 
-#: src/main.c:154
-#, c-format
-msgid "Backends directory:     %s"
+#: src/main.c:167
+msgid "Build-Glib/Gtk+/Gnome versions:"
+msgstr ""
+
+#: src/main.c:169
+#, fuzzy
+msgid "Backends directory:"
 msgstr "백엔드 디렉토리:        %s"
 
-#: src/main.c:156
-#, c-format
-msgid "TM backends directory:  %s"
-msgstr "TM 백엔드 디렉토리:     %s"
-
-#: src/main.c:158
-#, c-format
-msgid "Colorschemes directory: %s"
+#: src/main.c:171
+#, fuzzy
+msgid "Colorschemes directory:"
 msgstr "색상표 디렉토리:        %s "
 
-#: src/main.c:160
-#, c-format
-msgid "Scripts directory:      %s"
+#: src/main.c:173
+#, fuzzy
+msgid "Scripts directory:"
 msgstr "혼잣말 디렉토리:        %s"
 
-#: src/main.c:162
-#, c-format
-msgid "Window icon:            %s"
-msgstr "창 아이콘:              %s"
+#: src/main.c:175
+#, fuzzy
+msgid "Window icon:"
+msgstr "찾기: "
 
-#: src/main.c:164
-#, c-format
-msgid "Own locale directory:   %s"
+#: src/main.c:177
+#, fuzzy
+msgid "Own locale directory:"
 msgstr "로케일 디렉토리:        %s"
+
+#.
+#. * The bad case; print a warning and set our module
+#. *  list to NULL.
+#.
+#: src/main.c:201
+msgid ""
+"Unfortunately your GModule implementation doesn't support loading dynamic "
+"modules!"
+msgstr ""
+
+#: src/main.c:217
+msgid "gtranslator won't load any backend module..."
+msgstr ""
 
 #: src/menus.c:44
 msgid "_Messages"
@@ -747,20 +779,23 @@ msgstr "메세지 상태(_a)"
 msgid "_Compile"
 msgstr "컴파일(_C)"
 
-#: src/menus.c:57 src/menus.c:273
-msgid "Compile the po-file"
+#: src/menus.c:57 src/menus.c:289
+#, fuzzy
+msgid "Compile the po file"
 msgstr "po파일을 컴파일 합니다"
 
 #: src/menus.c:63
 msgid "_Update"
 msgstr "업데이트(_U)"
 
-#: src/menus.c:64 src/menus.c:277
-msgid "Update the po-file"
+#: src/menus.c:64 src/menus.c:293
+#, fuzzy
+msgid "Update the po file"
 msgstr "po파일을 업데이트 합니다"
 
 #: src/menus.c:71
-msgid "Autoaccomplish"
+#, fuzzy
+msgid "Aut_oaccomplish"
 msgstr "자동 완성"
 
 #: src/menus.c:72
@@ -779,257 +814,292 @@ msgstr "주어진 URI에서 po파일을 엽니다"
 msgid "Recen_t files"
 msgstr "최근 파일(_t)"
 
-#: src/menus.c:117
+#: src/menus.c:94
+msgid "_Export to UTF-8"
+msgstr ""
+
+#: src/menus.c:95
+msgid "Export the current po file to UTF-8"
+msgstr ""
+
+#: src/menus.c:101
+msgid "_Import from UTF-8"
+msgstr ""
+
+#: src/menus.c:102
+msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
+msgstr ""
+
+#: src/menus.c:133
 msgid "_Query"
 msgstr "질의(_Q)"
 
-#: src/menus.c:118 src/menus.c:335
+#: src/menus.c:134 src/menus.c:360
 msgid "Query for a string"
 msgstr "문자열 질의"
 
-#: src/menus.c:125
+#: src/menus.c:141
 msgid "_Header..."
 msgstr "머릿말(_H)..."
 
-#: src/menus.c:126 src/menus.c:281
+#: src/menus.c:142 src/menus.c:297
 msgid "Edit the header"
 msgstr "머릿말을 편집합니다"
 
-#: src/menus.c:135
+#: src/menus.c:151
 msgid "_Message"
 msgstr "메세지(_M)"
 
-#: src/menus.c:136
+#: src/menus.c:152
 msgid "Standard messages view"
 msgstr "보통 메세지 보기"
 
-#: src/menus.c:138
+#: src/menus.c:154
 msgid "_Comments"
 msgstr "주석(_C)"
 
-#: src/menus.c:139
+#: src/menus.c:155
 msgid "View comments for message"
 msgstr "메세지의 주석 보기"
 
-#: src/menus.c:141
+#: src/menus.c:157
 msgid "_Numbers"
 msgstr "개수(_N)"
 
-#: src/menus.c:142
+#: src/menus.c:158
 msgid "View numbers in the message"
 msgstr "메세지의 개수 보기"
 
-#: src/menus.c:144
+#: src/menus.c:160
 msgid "C _Formats"
 msgstr "C 형식(_F)"
 
-#: src/menus.c:145
+#: src/menus.c:161
 msgid "View C formats of the message"
 msgstr "메세지의 C 형식 보기"
 
-#: src/menus.c:147
+#: src/menus.c:163
 msgid "_Hotkeys"
 msgstr "단축 글쇠(_H)"
 
-#: src/menus.c:148
+#: src/menus.c:164
 msgid "View hotkeys in the message"
 msgstr "메세지의 단축 글쇠 보기"
 
-#: src/menus.c:155
+#: src/menus.c:171
 msgid "_First"
 msgstr "처음(_F)"
 
-#: src/menus.c:156 src/menus.c:298
+#: src/menus.c:172 src/menus.c:323
 msgid "Go to the first message"
 msgstr "첫 메세지로 가기"
 
-#: src/menus.c:162
+#: src/menus.c:178
 msgid "_Back"
 msgstr "앞으로(_B)"
 
-#: src/menus.c:163 src/menus.c:302
+#: src/menus.c:179 src/menus.c:327
 msgid "Go one message back"
 msgstr "한 메세지 뒤로 가기"
 
-#: src/menus.c:170
+#: src/menus.c:186
 msgid "_Next"
 msgstr "다음(_N)"
 
-#: src/menus.c:171 src/menus.c:307
+#: src/menus.c:187 src/menus.c:332
 msgid "Go one message forward"
 msgstr "다음 메세지로 가기"
 
-#: src/menus.c:177
+#: src/menus.c:193
 msgid "_Last"
 msgstr "마지막(_L)"
 
-#: src/menus.c:178 src/menus.c:311
+#: src/menus.c:194 src/menus.c:336
 msgid "Go to the last message"
 msgstr "마지막 메세지로 가기"
 
-#: src/menus.c:185
+#: src/menus.c:201
 msgid "_Go to..."
 msgstr "가기(_G)..."
 
-#: src/menus.c:186
+#: src/menus.c:202
 msgid "Goto specified message number"
 msgstr "메세지의 지정된 줄로 갑니다"
 
-#: src/menus.c:192
+#: src/menus.c:208
 msgid "Next fuz_zy"
 msgstr "다음 퍼지(_z)"
 
-#: src/menus.c:193
+#: src/menus.c:209
 msgid "Go to next fuzzy message"
 msgstr "다음 퍼지 메세지로 갑니다"
 
-#: src/menus.c:199
+#: src/menus.c:215
 msgid "Next _untranslated"
 msgstr "다음 번역되지않은 문장(_u)"
 
-#: src/menus.c:200 src/menus.c:315
+#: src/menus.c:216 src/menus.c:340
 msgid "Go to next untranslated message"
 msgstr "번역되지 않은 다음 메세지로 갑니다"
 
-#: src/menus.c:210
+#: src/menus.c:226
 msgid "_Translated"
 msgstr "번역됨(_T)"
 
-#: src/menus.c:211
+#: src/menus.c:227
 msgid "Toggle translated status of a message"
 msgstr "메세지의 상태를 번역된것으로 토글 합니다"
 
-#: src/menus.c:219
+#: src/menus.c:235
 msgid "_Fuzzy"
 msgstr "퍼지(_F)"
 
-#: src/menus.c:220
+#: src/menus.c:236
 msgid "Toggle fuzzy status of a message"
 msgstr "메세지의 상태를 퍼지로 토글합니다"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "_Stick"
 msgstr "고정(_S)"
 
-#: src/menus.c:229
+#: src/menus.c:245
 msgid "Stick this message"
 msgstr "이 메세지를 고정합니다"
 
-#: src/menus.c:248
+#: src/menus.c:264
 msgid "gtranslator _website"
 msgstr "gtranslator 웹사이트(_w)"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator의 홈페이지"
 
-#: src/menus.c:260
-msgid "Open a po-file"
+#: src/menus.c:276
+#, fuzzy
+msgid "Open a po file"
 msgstr "po파일을 엽니다"
 
-#: src/menus.c:263
+#: src/menus.c:279
 msgid "Save"
 msgstr "저장"
 
-#: src/menus.c:264
+#: src/menus.c:280
 msgid "Save File"
 msgstr "파일 저장"
 
-#: src/menus.c:267
+#: src/menus.c:283
 msgid "Save as"
 msgstr "새이름 저장"
 
-#: src/menus.c:268
+#: src/menus.c:284
 msgid "Save file with a different name"
 msgstr "파일을 다른이름으로 저장합니다"
 
-#: src/menus.c:272
+#: src/menus.c:288
 msgid "Compile"
 msgstr "컴파일"
 
-#: src/menus.c:276
+#: src/menus.c:292
 msgid "Update"
 msgstr "업데이트"
 
-#: src/menus.c:280
+#: src/menus.c:296
 msgid "Header"
 msgstr "머릿말"
 
-#: src/menus.c:285
+#: src/menus.c:301
+msgid "Undo"
+msgstr ""
+
+#: src/menus.c:302
+msgid "Undo the last performed action"
+msgstr ""
+
+#: src/menus.c:305
+msgid "Redo"
+msgstr ""
+
+#: src/menus.c:306
+msgid "Redo the last undone action"
+msgstr ""
+
+#: src/menus.c:310
 msgid "Options"
 msgstr "설정"
 
-#: src/menus.c:286
+#: src/menus.c:311
 msgid "gtranslator options"
 msgstr "gtranslator 설정"
 
-#: src/menus.c:289 src/menus.c:290
+#: src/menus.c:314 src/menus.c:315
 msgid "Exit"
 msgstr "종료"
 
-#: src/menus.c:297
+#: src/menus.c:322
 msgid "First"
 msgstr "처음"
 
-#: src/menus.c:301
+#: src/menus.c:326
 msgid "Back"
 msgstr "뒤로"
 
-#: src/menus.c:306
+#: src/menus.c:331
 msgid "Next"
 msgstr "다음"
 
-#: src/menus.c:310
+#: src/menus.c:335
 msgid "Last"
 msgstr "마지막"
 
-#: src/menus.c:314
+#: src/menus.c:339
 msgid "Missing"
 msgstr "잊은"
 
-#: src/menus.c:319
+#: src/menus.c:344
 msgid "Go to the next fuzzy translation"
 msgstr "다음 퍼지 번역문으로 갑니다"
 
-#: src/menus.c:322
+#: src/menus.c:347
 msgid "Go to"
 msgstr "가기"
 
-#: src/menus.c:323
+#: src/menus.c:348
 msgid "Go to specified message number"
 msgstr "메세지의 지정된 줄로 갑니다"
 
-#: src/menus.c:327
-msgid "Find string in po-file"
+#: src/menus.c:352
+#, fuzzy
+msgid "Find string in po file"
 msgstr "po파일에서 문자열을 찾습니다"
 
-#: src/menus.c:331
-msgid "Replace string in po-file"
+#: src/menus.c:356
+#, fuzzy
+msgid "Replace string in po file"
 msgstr "po파일에서 문자열을 바꿉니다"
 
-#: src/message.c:68
+#: src/message.c:78
 msgid "Couldn't get the message!"
 msgstr "메세지를 얻을수 없습니다! "
 
-#: src/message.c:90
+#: src/message.c:100
 msgid "There are no fuzzy messages left."
 msgstr "더이상 남아있는 퍼지메세지가 없습니다"
 
-#: src/message.c:114
+#: src/message.c:124
 msgid "All messages seem to be translated."
 msgstr "모든 메세지가 번역이 되었습니다"
 
-#: src/open-differently.c:125
+#: src/open-differently.c:131
 #, c-format
 msgid "The necessary uncompression program `%s' is missing!"
 msgstr "필요한 압축해제 프로그램 `%s'가 없습니다."
 
-#: src/open-differently.c:170
+#: src/open-differently.c:173
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "컴파일된 gettext 파일 `%s'를 열수 없습니다!"
 
-#: src/open-differently.c:222
+#: src/open-differently.c:221
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "압축된 gettext 파일 `%s'를 열수 없습니다!"
@@ -1038,17 +1108,17 @@ msgstr "압축된 gettext 파일 `%s'를 열수 없습니다!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open-differently.c:232
+#: src/open-differently.c:231
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr "%s 으로 묶여있는 gettext 파일 `%s'를 열수 없습니다!"
 
-#: src/open-differently.c:301
+#: src/open-differently.c:299
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "zip으로 묶여있는 gettext 파일 `%s'를 열수 없습니다!"
 
-#: src/parse.c:90
+#: src/parse.c:99
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1057,7 +1127,7 @@ msgstr ""
 "새로운 이스케이프 문자를 찾았습니다: \\%c\n"
 "이것을 parse.c, %i줄에 추가하십시오."
 
-#: src/parse.c:236
+#: src/parse.c:245
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1068,7 +1138,7 @@ msgstr ""
 "%d 줄에 있습니다.\n"
 "파일을 확인하고 다시 시도 하십시오."
 
-#: src/parse.c:272
+#: src/parse.c:281
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1077,17 +1147,17 @@ msgstr ""
 "파일이 비어있습니다:\n"
 "%s"
 
-#: src/parse.c:295
+#: src/parse.c:304
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "\"%s\"파일이 없습니다!"
 
-#: src/parse.c:368
+#: src/parse.c:380
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:503
+#: src/parse.c:537
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -1098,12 +1168,12 @@ msgstr ""
 "하지만, 그런 파일은 프로그램이 생성하는 것입니다.\n"
 "파일의 확장자는 %s.po 처럼 *.po 로 저장되어야 합니다."
 
-#: src/parse.c:546
+#: src/parse.c:579
 #, fuzzy, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "%s 으로 묶여있는 파일 `%s'를 쓸 수 없습니다!"
 
-#: src/parse.c:579
+#: src/parse.c:622
 #, c-format
 msgid ""
 "File %s\n"
@@ -1112,7 +1182,7 @@ msgstr ""
 "파일 %s\n"
 "%d개의 퍼지 메세지를 포함합니다"
 
-#: src/parse.c:615
+#: src/parse.c:658
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1123,11 +1193,11 @@ msgstr ""
 "전혀 변경되지 않았습니다!\n"
 "저장하시겠습니까?"
 
-#: src/parse.c:623
+#: src/parse.c:666
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- 바뀌지않음"
 
-#: src/parse.c:699
+#: src/parse.c:746
 #, c-format
 msgid ""
 "File %s\n"
@@ -1136,11 +1206,11 @@ msgstr ""
 "파일 %s가\n"
 "변경되었습니다. 저장된 복사본으로 되돌아 가겠습니까?"
 
-#: src/parse.c:738
+#: src/parse.c:785
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "msgfmt가 여러분의 시스템에 설치되어있지 않습니다!"
 
-#: src/parse.c:762
+#: src/parse.c:808
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1149,154 +1219,179 @@ msgstr ""
 "컴파일이 성공하였습니다:\n"
 "%s"
 
-#: src/prefs.c:93
+#: src/prefs.c:105
 msgid "gtranslator -- options"
 msgstr "gtranslator -- 설정"
 
 #.
 #. * The tables for holding all the entries below.
 #.
-#: src/prefs.c:98
+#: src/prefs.c:110
 msgid "Personal informations"
 msgstr "개인 정보"
 
-#: src/prefs.c:99
+#: src/prefs.c:111
 msgid "Language settings"
 msgstr "언어 설정"
 
-#: src/prefs.c:100
+#: src/prefs.c:112
 msgid "Po file editing"
 msgstr "Po 파일 편집"
 
-#: src/prefs.c:101
+#: src/prefs.c:113
 msgid "Miscellaneous"
 msgstr "기타사항"
 
-#: src/prefs.c:102
+#: src/prefs.c:114
 msgid "Recent files & spell checking"
 msgstr "최근 파일 메뉴 & 맞춤법 검사"
 
-#: src/prefs.c:103
+#: src/prefs.c:115
 msgid "Fonts, colors and color schemes"
 msgstr "글꼴, 색상과 색상표"
 
-#: src/prefs.c:109
+#: src/prefs.c:116
+msgid "Autosaving"
+msgstr ""
+
+#: src/prefs.c:122
 msgid "Author's name:"
 msgstr "작성자의 이름:"
 
-#: src/prefs.c:112
+#: src/prefs.c:125
 msgid "Author's EMail:"
 msgstr "작성자의 전자우편:"
 
-#: src/prefs.c:116
+#: src/prefs.c:129
 msgid "Default query domain:"
 msgstr "기본 질의 원문:"
 
-#: src/prefs.c:130
+#: src/prefs.c:143
 msgid "Language code:"
 msgstr "언어 코드:"
 
-#: src/prefs.c:135
+#: src/prefs.c:148
 msgid "Language group's EMail:"
 msgstr "언어 그룹의 전자우편:"
 
-#: src/prefs.c:151
+#: src/prefs.c:164
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "메세지가 바뀌면 퍼지상태를 바꾸지 않음"
 
-#: src/prefs.c:155
-msgid "Warn if the .po-file contains fuzzy translations"
+#: src/prefs.c:168
+#, fuzzy
+msgid "Warn if the po file contains fuzzy translations"
 msgstr "po파일에 혼동되는 번역이 포함되어 있으면 경고"
 
-#: src/prefs.c:159
-msgid "Don't save unchanged .po-files"
+#: src/prefs.c:172
+#, fuzzy
+msgid "Don't save unchanged po files"
 msgstr "변경되지 않은 po파일을 저장하지 않음"
 
-#: src/prefs.c:163
+#: src/prefs.c:176
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "변경되지 않을 파일을 저장하려고 하면 경고"
 
-#: src/prefs.c:167
+#: src/prefs.c:180
 msgid "Keep obsolete message in the po files"
 msgstr "po파일에 사용하지 않는 메세지 보관"
 
-#: src/prefs.c:174
+#: src/prefs.c:187
 msgid "Use free space indicating special character"
 msgstr "특수문자 표시를 공백으로 사용"
 
-#: src/prefs.c:177
+#: src/prefs.c:190
 msgid "Enable the popup menu"
 msgstr "팝업메뉴 사용가능"
 
-#: src/prefs.c:180
+#: src/prefs.c:193
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr "gtranslator의 업데이트 기능 사용가능(소스가 있어야 합니다)"
 
-#: src/prefs.c:183
+#: src/prefs.c:196
 msgid "Save geometry on exit & restore it on startup"
 msgstr "종료시 위치저장 & 시작시 위치 지정"
 
-#: src/prefs.c:186
+#: src/prefs.c:199
 msgid "Don't show the update information dialogs"
 msgstr "업데이트 정보 대화상자를 표시하지 않음"
 
-#: src/prefs.c:192
+#: src/prefs.c:205
 msgid "Check every recent file before listing it up"
 msgstr "목록화 하기전에 모든 최근파일 확인"
 
-#: src/prefs.c:195
+#: src/prefs.c:208
 msgid "Instant spell checking"
 msgstr "실시간 맞춤법 검사"
 
-#: src/prefs.c:198
+#: src/prefs.c:211
 msgid "Use special dictionary"
 msgstr "특수 사전파일 사용"
 
-#: src/prefs.c:201
+#: src/prefs.c:214
 msgid "Dictionary to use:"
 msgstr "사용할 사전:"
 
 #.
 #. * The sixth page with the special font/color stuff.
 #.
-#: src/prefs.c:207
+#: src/prefs.c:220
 msgid "Syntax color scheme to use:"
 msgstr "사용할 색상 설정표:"
 
-#: src/prefs.c:209
+#: src/prefs.c:222
 msgid "gtranslator -- color scheme selection"
 msgstr "gtranslator -- 색상표 선택"
 
-#: src/prefs.c:215
+#: src/prefs.c:228
 msgid "Apply special font/colors"
 msgstr "특수 글꼴/색상 적용"
 
-#: src/prefs.c:218
+#: src/prefs.c:231
 msgid "Font:"
 msgstr "글꼴:"
 
-#: src/prefs.c:219
+#: src/prefs.c:232
 msgid "Foreground color:"
 msgstr "전경색:"
 
-#: src/prefs.c:220
+#: src/prefs.c:233
 msgid "Background color:"
 msgstr "배경색"
 
-#: src/prefs.c:223
+#: src/prefs.c:236
 msgid "gtranslator -- font selection"
 msgstr "gtranslator -- 글꼴 선택"
 
-#: src/prefs.c:236
+#: src/prefs.c:249
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- 전경색"
 
-#: src/prefs.c:239
+#: src/prefs.c:252
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- 배경색"
 
-#: src/prefs.c:398
+#.
+#. * The seventh page of the prefs-box: autosaving options.
+#.
+#: src/prefs.c:282
+msgid "Autosave timeout in minutes:"
+msgstr ""
+
+#: src/prefs.c:284
+msgid "Save the po file automatically after a period of time"
+msgstr ""
+
+#: src/prefs.c:288
+msgid "Append a special suffix to the automatically saved files"
+msgstr ""
+
+#: src/prefs.c:292
+msgid "Autosave suffix:"
+msgstr ""
+
+#: src/prefs.c:454
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -1318,20 +1413,53 @@ msgstr "%Y-%m-%d %H:%M"
 msgid "Couldn't generate the current date!"
 msgstr "현재 날짜를 얻을수 없습니다!"
 
-#: src/query.c:198
+#: src/query.c:142
 msgid "No language defined in preferences to query the domains for!"
 msgstr "원문에 질의할 언어가 세부설정에 지정되지 않았습니다!"
+
+#: src/replace.c:171
+msgid "No replace made!"
+msgstr ""
 
 #: src/session.c:90
 msgid "Session restored successfully."
 msgstr "세션이 성공적으로 저장되었습니다."
+
+#: src/sidebar.c:76
+msgid "Views"
+msgstr ""
+
+#: src/sidebar.c:99
+#, fuzzy
+msgid "Message"
+msgstr "메세지(_M)"
+
+#: src/sidebar.c:103
+#, fuzzy
+msgid "Comment"
+msgstr "주석"
+
+#: src/sidebar.c:107
+#, fuzzy
+msgid "Number"
+msgstr "개수(_N)"
+
+#: src/sidebar.c:111
+#, fuzzy
+msgid "Format"
+msgstr "C 형식(_F)"
+
+#: src/sidebar.c:115
+#, fuzzy
+msgid "Hotkey"
+msgstr "단축 글쇠(_H)"
 
 #.
 #. * What to say else? This signals doesn't seem
 #. *  interesting for us but should still get a
 #. *   warning message.
 #.
-#: src/sighandling.c:84
+#: src/sighandling.c:85
 #, c-format
 msgid "Uncatched signal %i!"
 msgstr ""
@@ -1353,13 +1481,13 @@ msgstr ""
 #. * used by gtranslator as special char to make
 #. * blanks visible.
 #. * If your language uses that char for another
-#. * purpose or if you use another enocoding
-#. * than latin1, feel free to change it to
+#. * purpose or if you use a charset enocoding
+#. * that doesn't have it, feel free to change it to
 #. * whatever you think will be better
 #.
-#: src/syntax.c:87 src/utils.c:186 src/utils.c:187 src/views.c:286
+#: src/syntax.c:87 src/utils.c:419 src/utils.c:420 src/views.c:286
 #: src/views.c:356
-msgid "�"
+msgid "."
 msgstr "·"
 
 #: src/update.c:88
@@ -1378,7 +1506,12 @@ msgstr "업데이트가 성공적으로 이루어졌습니다."
 msgid "An error occured while updating the po file."
 msgstr "po파일을 고치는 중 오류가 발생하였습니다."
 
-#: src/utils.c:240
+#: src/utils.c:109
+#, fuzzy, c-format
+msgid "Can't create directory `%s'!"
+msgstr "임시 디렉토리 `%s'를 만들수 없습니다!"
+
+#: src/utils.c:473
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "위치 문자 \"%s\"를 분석할수 없습니다!"
@@ -1387,12 +1520,12 @@ msgstr "위치 문자 \"%s\"를 분석할수 없습니다!"
 #. * Create an error box and prevent further reading
 #. *  of the file.
 #.
-#: src/utils.c:472
+#: src/utils.c:705
 #, c-format
 msgid "You don't have read permissions on file `%s'"
 msgstr "파일 `%s'를 읽을수 있는 권한이 없습니다"
 
-#: src/utils.c:491
+#: src/utils.c:724
 #, c-format
 msgid ""
 "You don't have write permissions on file `%s'.\n"
@@ -1403,37 +1536,37 @@ msgstr ""
 "이것은 여러분의 선택에 따라 로칼 디렉토리에 사본으로 저장해야 하는것을\n"
 "의미합니다."
 
-#: src/vfs-handle.c:113
+#: src/vfs-handle.c:125
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "임시 디렉토리 `%s'를 만들수 없습니다!"
 
-#: src/vfs-handle.c:139
+#: src/vfs-handle.c:153
 #, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "파일 `%s'를 찾을수 없습니다!"
 
-#: src/vfs-handle.c:144
+#: src/vfs-handle.c:158
 #, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr "잘못된 URI `%s'가 입력되었습니다!"
 
-#: src/vfs-handle.c:149
+#: src/vfs-handle.c:163
 #, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "호스트 `%s'를 찾을수 없습니다!"
 
-#: src/vfs-handle.c:154
+#: src/vfs-handle.c:168
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "호스트이름 `%s'가 잘못되었습니다!"
 
-#: src/vfs-handle.c:159
+#: src/vfs-handle.c:173
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "호스트 `%s'의 주소가 없습니다!"
 
-#: src/vfs-handle.c:164
+#: src/vfs-handle.c:178
 msgid "Transfer interrupted!"
 msgstr "전송이 중지되었습니다!"
 
@@ -1464,14 +1597,6 @@ msgstr "Docbook sgml 문서 백엔드"
 #: src/backends/text/text.xml.h:1
 msgid "Plain text files backend"
 msgstr "일반 텍스트 파일 백엔드"
-
-#: src/backends/translation-memories/opentag/opentag.xml.h:1
-msgid "OpenTag (otf) translation memories support"
-msgstr "OpenTag (otf) 번역 기억 지원"
-
-#: src/backends/translation-memories/tmx/tmx.xml.h:1
-msgid "LISA TMX translation memories support"
-msgstr ""
 
 #: nautilus-view/nautilus-gtranslator-view.c:181
 #, c-format
@@ -1582,3 +1707,11 @@ msgstr "po파일 열기"
 msgid "_File"
 msgstr "파일(_F)"
 
+#~ msgid "TM backends directory:  %s"
+#~ msgstr "TM 백엔드 디렉토리:     %s"
+
+#~ msgid "Window icon:            %s"
+#~ msgstr "창 아이콘:              %s"
+
+#~ msgid "OpenTag (otf) translation memories support"
+#~ msgstr "OpenTag (otf) 번역 기억 지원"
