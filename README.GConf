@@ -1,0 +1,21 @@
+gtranslator and GConf issues
+---------------------------
+
+If you don't have got GConf installed on your system or don't want to link
+ gtranslator against GConf, you can easily define the environment variable
+  "NO_GCONF" BEFORE configuring gtranslator.
+
+The environment variable $NO_GCONF has to be set to "yes" to avoid linking
+ compiling with GConf support. you can do this easily through bash with:
+
+ 	export NO_GCONF=yes
+	
+ or on a (t)csh with:
+ 	
+	setenv NO_GCONF yes
+
+After this, you can call ./configure with your desired options and gtranslator
+ will not link/compile with GConf.
+ 
+--
+Fatih Demir, <kabalak@gtranslator.org>

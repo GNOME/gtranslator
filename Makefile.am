@@ -6,6 +6,7 @@ EXTRA_DIST= \
 		kabalak_generate_all_the_files.sh \
 		DEPENDS \
 		HACKING \
+		README.GConf \
 		po/update.sh \
 		xml-i18n-extract.in \
 		xml-i18n-merge.in \
