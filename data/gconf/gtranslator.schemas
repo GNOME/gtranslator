@@ -20,7 +20,6 @@
 			<locale name="C">
 			<short>The EMail address of the author.</short>
 			<long>This is the EMail address of the "Last Translator".</long>
-			</long>
 			</locale>
 		</schema>
 		<schema>
@@ -32,6 +31,28 @@
 			<locale name="C">
 			<short>Your language name</short>
 			<long>The name of your language.</long>
+			</locale>
+		</schema>	
+		<schema>
+			<key>/schemas/apps/gtranslator/language/team_email</key>
+			<applyto>/apps/gtranslator/language/team_email</applyto>
+			<owner>gtranslator</owner>
+			<type>string</type>
+			<default>YourLanguage@li.org</default>
+			<locale name="C">
+			<short>Your language's email list</short>
+			<long>The EMail list of your translation team, e.g. "tr"</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/gtranslator/language/encoding</key>
+			<applyto>/apps/gtranslator/language/encoding</applyto>
+			<owner>gtranslator</owner>
+			<type>string</type>
+			<default>8bit</default>
+			<locale name="C">
+			<short>The encoding of your language files.</short>
+			<long>The encoding of your language specific files, e.g. 8bit.</long>
 			</locale>
 		</schema>	
 	</schemalist>
