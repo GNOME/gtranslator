@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39.1\n"
-"POT-Creation-Date: 2002-01-25 01:35+0100\n"
+"POT-Creation-Date: 2002-02-11 23:09+0100\n"
 "PO-Revision-Date: 2002-01-25 01:42+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian/Nynorsk <nn@li.org>\n"
@@ -523,11 +523,11 @@ msgstr "Siste omsetjar: %s"
 #: src/htmlizer.c:322
 #, c-format
 msgid ""
-"HTML output of \"%s\" produced by <a "
-"href=\"http://www.gtranslator.org\">gtranslator</a> version %s."
+"HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
+"\">gtranslator</a> version %s."
 msgstr ""
-"HTML-versjonen av \"%s\" produsert av <a "
-"href=\"http://www.gtranslator.org\">gtranslator</a> versjon %s."
+"HTML-versjonen av \"%s\" produsert av <a href=\"http://www.gtranslator.org"
+"\">gtranslator</a> versjon %s."
 
 #: src/languages.c:35
 msgid "Afrikaans"
@@ -1370,153 +1370,157 @@ msgstr "Åtvar om po-fila inneheld uklare omsetjingar"
 msgid "Keep obsolete messages in the po files"
 msgstr "Hald på utdaterte meldingar i po-filer"
 
-#: src/prefs.c:215
+#: src/prefs.c:212
+msgid "Highlight syntax of the translation messages"
+msgstr "Lys opp syntaksen på omsette meldingar"
+
+#: src/prefs.c:219
 msgid "Use special character to indicate free space"
 msgstr "Bruk spesialteikn for å vise tom plass"
 
-#: src/prefs.c:218
+#: src/prefs.c:222
 msgid "Enable the popup menu"
 msgstr "Slå på pop-opp-meny"
 
-#: src/prefs.c:221
+#: src/prefs.c:225
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Slå på moglegheita til å oppdatere ei po-file frå gtranslator"
 
-#: src/prefs.c:224
+#: src/prefs.c:228
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Slå på funksjonalitet for å fjerne alle omsetjingar frå po-filer"
 
-#: src/prefs.c:227
+#: src/prefs.c:231
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Slett kompilerte filer (t.d. «project.gmo»)"
 
-#: src/prefs.c:230
+#: src/prefs.c:234
 msgid "Load all backends on startup"
 msgstr "Last alle bakkant-modular ved oppstart"
 
-#: src/prefs.c:233
+#: src/prefs.c:237
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Lagre geometrien ved avslutning og hent den fram att ved oppstart"
 
-#: src/prefs.c:236
+#: src/prefs.c:240
 msgid "Show instant comment view in the main pane"
 msgstr "Vis kommentarar i hovudruta"
 
-#: src/prefs.c:243
+#: src/prefs.c:247
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Maksimal tak på oppføringar i nyleg-brukte filer lista:"
 
-#: src/prefs.c:247
+#: src/prefs.c:251
 msgid "Check recent files before showing in recent files' list"
 msgstr "Sjekk nyleg-brukte filer før ei fil viser i nyleg-brukte filer lista"
 
-#: src/prefs.c:250
+#: src/prefs.c:254
 msgid "Instant spell checking"
 msgstr "Umiddelbar stavekontroll"
 
-#: src/prefs.c:253
+#: src/prefs.c:257
 msgid "Use special dictionary:"
 msgstr "Bruk spesialordbok:"
 
-#: src/prefs.c:309
+#: src/prefs.c:313
 msgid "Syntax color scheme to use:"
 msgstr "Fargeskjema for syntaksmerking som skal brukast:"
 
-#: src/prefs.c:314
+#: src/prefs.c:318
 msgid "Apply own fonts:"
 msgstr "Bruk eigne fargar:"
 
-#: src/prefs.c:318
+#: src/prefs.c:322
 msgid "Original text font:"
 msgstr "Opprinneleg tekstfarge:"
 
-#: src/prefs.c:318
+#: src/prefs.c:322
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- skrfttypeval/msgid skrifttype"
 
-#: src/prefs.c:322
+#: src/prefs.c:326
 msgid "Translation font:"
 msgstr "Omsetjings-skrifttype:"
 
-#: src/prefs.c:322
+#: src/prefs.c:326
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- skrifttypeval/msgstr skrifttype"
 
-#: src/prefs.c:326
+#: src/prefs.c:330
 msgid "Apply own colors:"
 msgstr "Bruk eigne fargar:"
 
-#: src/prefs.c:330
+#: src/prefs.c:334
 msgid "Foreground color:"
 msgstr "Forgrunnsfarge:"
 
-#: src/prefs.c:330
+#: src/prefs.c:334
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- framgrunnsfarge"
 
-#: src/prefs.c:334
+#: src/prefs.c:338
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
-#: src/prefs.c:334
+#: src/prefs.c:338
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- bakgrunnsfarge"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:340
+#: src/prefs.c:344
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "Lagre po-filer automatisk ved gitte intervall (i minutt):"
 
-#: src/prefs.c:355
+#: src/prefs.c:359
 msgid "Append a suffix to automatically saved files:"
 msgstr "Legg til etternamn på filer som lagra automatisk:"
 
-#: src/prefs.c:375
+#: src/prefs.c:379
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Vi meldingstabellen (gtranslator må startast om att)"
 
-#: src/prefs.c:379
+#: src/prefs.c:383
 msgid "Collapse translated entries by default"
 msgstr "Slå saman omsette strengar til vanleg"
 
-#: src/prefs.c:383
+#: src/prefs.c:387
 msgid "Use own colors for the messages table groups"
 msgstr "Bruk eigne fargar for meldingstabell grupper"
 
-#: src/prefs.c:387
+#: src/prefs.c:391
 msgid "Untranslated entries color:"
 msgstr "Uomsette oppføringar farge:"
 
-#: src/prefs.c:387
+#: src/prefs.c:391
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- uomsette oppføringar farge"
 
-#: src/prefs.c:391
+#: src/prefs.c:395
 msgid "Fuzzy entries color:"
 msgstr "Uklare omsetjingar farge:"
 
-#: src/prefs.c:391
+#: src/prefs.c:395
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- uklare oppføringar farge"
 
-#: src/prefs.c:395
+#: src/prefs.c:399
 msgid "Translated entries color:"
 msgstr "Omsette oppføringar farge:"
 
-#: src/prefs.c:395
+#: src/prefs.c:399
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- omsette oppføringar farge"
 
-#: src/prefs.c:403
+#: src/prefs.c:407
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 "Spør også det personleg lærebufferet når ein automsett uomsette meldingar"
 
-#: src/prefs.c:407
+#: src/prefs.c:411
 msgid "Automatically learn a newly translated message"
 msgstr "Automatisk lær nye omsette meldingar"
 
@@ -1525,27 +1529,27 @@ msgstr "Automatisk lær nye omsette meldingar"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:415
+#: src/prefs.c:419
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr "Bruk «fuzzy» treffrutiner for læringsbufferet"
 
-#: src/prefs.c:419
+#: src/prefs.c:423
 msgid "Minimal required similarity percentage while doing autotranslation"
 msgstr "Minimum krevd likheitsprosent for autoomsetjing"
 
-#: src/prefs.c:465
+#: src/prefs.c:469
 msgid "Please enter your name!"
 msgstr "Tast inn namnet ditt!"
 
-#: src/prefs.c:479
+#: src/prefs.c:483
 msgid "Please enter your EMail address!"
 msgstr "Tast inn E-post addressa di!"
 
-#: src/prefs.c:492
+#: src/prefs.c:496
 msgid "Please enter a valid EMail address!"
 msgstr "Tast inn ei gyldig E-post addresse!"
 
-#: src/prefs.c:722
+#: src/prefs.c:729
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
