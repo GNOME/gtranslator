@@ -1151,22 +1151,28 @@ void gtranslator_rescue_file_dialog(void)
 		GTK_WINDOW(gtranslator_application),
 		GTK_DIALOG_DESTROY_WITH_PARENT,
 		GTK_MESSAGE_WARNING,
-		GTK_BUTTONS_YES_NO,
+		GTK_BUTTONS_NONE,
 		_("Open recovery file for `%s'?\n\
 It was saved by gtranslator before gtranslator last closed\n\
-and may contain your hard work!\n\
-Saying \"No\" will delete the crash recovery file."),
+and may contain your hard work!\n"),
 		original_filename);
+	
+	gtk_dialog_add_buttons(GTK_DIALOG(dialog),
+		GTK_STOCK_CANCEL,
+		GTK_RESPONSE_CANCEL,
+		_("Ignore recovery file"),
+		GTK_RESPONSE_REJECT,
+		_("Recover file"),
+		GTK_RESPONSE_ACCEPT,
+		NULL);
 
-	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_YES);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
 
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 
-	if(reply==GTK_RESPONSE_YES)
+	if(reply==GTK_RESPONSE_ACCEPT)
 	{
-		g_message(_("Recovering `%s'..."), original_filename);
-
 		/*
 		 * Move the recovery file to the original filename and re-open
 		 *  it now again.
@@ -1176,7 +1182,7 @@ Saying \"No\" will delete the crash recovery file."),
 
 		gtranslator_open_file(original_filename);
 	}
-	else if(reply==GTK_RESPONSE_NO)
+	else if(reply==GTK_RESPONSE_REJECT)
 	{
 		/*
 		 * Remove the crash recovery file.
