@@ -38,7 +38,7 @@ void about_box(GtkWidget * widget, gpointer useless)
 	 */ 
 	about =
 	    gnome_about_new("gtranslator", VERSION, "(C) 1999-2001", authors,
-			    _("gtranslator will be a Gnome framework for translating these emminent important po-files.\nIt will be based upon a gtranslatord and a gtranslator client. Wish the best for us translators and for me!"),
+			    _("gtranslator is a po file editing suite with many bells and whistles."),
 			    NULL);
 
 	show_nice_dialog(&about, "gtranslator -- about");
