@@ -22,6 +22,7 @@
 #endif
 
 #include "gui.h"
+#include "nautilus-string.h"
 #include "open-differently.h"
 #include "parse.h"
 #include "vfs-handle.h"
@@ -29,12 +30,18 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-app-util.h>
 
 /*
  * The "backend" for the gzip. bzip2 and uncompress based functions.
  */
 void open_compressed_po_file(gchar *file, gchar *command);
+
+/*
+ * Check if the needed uncompressing program is present.
+ */
+void check_for_prog(const gchar *prog); 
 
 /*
  * Detects whether we can open up the given file with the
@@ -75,79 +82,58 @@ gboolean gtranslator_open_po_file(gchar *file)
 			return TRUE;
 		}
 	}
-		
-	/*
-	 * Reverse the filename for an easier catching
-	 *  of the supported suffixes.
-	 */  
-	g_strreverse(file);
 
 	/*
-	 * For the compiled gettext files we do support
-	 *  the "mo" and "gmo" suffixes; detect them.
-	 */  
-	if(!g_strncasecmp(file, "om.", 3)
-		||!g_strncasecmp(file, "omg.", 4))
+	 * Use the nautilus-string.h functions to detect the right extensions
+	 *  case independently for calling the right function in time.
+	 */
+	if(nautilus_istr_has_suffix(file, ".mo") || 
+		nautilus_istr_has_suffix(file, ".gmo"))
 	{
-		/*
-		 * Reverse the filename for the function into
-		 *  the original form again and open them then.
-		 */
-		g_strreverse(file);
 		gtranslator_open_compiled_po_file(file);
 		return TRUE;
 	}
-	
-	/*
-	 * And for the gzip'ed po files we do support
-	 *  the "po.gz" suffixes. detect the suffix if
-	 *   possible.
-	 */  
-	if(!g_strncasecmp(file, "zg.op.", 6))
+	else if(nautilus_istr_has_suffix(file, ".po.gz"))
 	{
-		/*
-		 * This function opens up the gzip'ed gettext file
-		 *  via the special gtranslator function.
-		 */ 
-		g_strreverse(file);
 		gtranslator_open_gzipped_po_file(file);
 		return TRUE;
 	}
-	
-	/*
-	 * Again simply check the suffix for po.bz2 and open it then.
-	 */
-	if(!g_strncasecmp(file, "2zb.op.", 7))
+	else if(nautilus_istr_has_suffix(file, ".po.bz2"))
 	{
-		/*
-		 * Open it via the special function for bzip2.
-		 */ 
-		g_strreverse(file);
 		gtranslator_open_bzip2ed_po_file(file);
 		return TRUE;
 	}
-
-	/*
-	 * Detect compress'ed po files (.po[z|Z]).
-	 */
-	if(!g_strncasecmp(file, "z.op.", 5))
+	else if(nautilus_istr_has_suffix(file, ".po.z"))
 	{
-		/*
-		 * Open this also via the special open function
-		 *  for compress.
-		 */  
-		g_strreverse(file);
 		gtranslator_open_compressed_po_file(file);
 		return TRUE;
 	}
+	else if(nautilus_istr_has_suffix(file, ".po.zip"))
+	{
+		gtranslator_open_ziped_po_file(file);
+		return TRUE;
+	}
 	
-	/*
-	 * Reverse the filename again into the original
-	 *  form to allow the normal parsing routines to
-	 *   work.
-	 */   
-	g_strreverse(file);
 	return FALSE;
+}
+
+/*
+ * Check for the given uncompression program.
+ */
+void check_for_prog(const gchar *prog)
+{
+	if(!gnome_is_program_in_path(prog))
+	{
+		gchar *warn;
+
+		warn=g_strdup_printf(_("The necessary uncompression program `%s' is missing!"), prog);
+
+		gnome_app_warning(GNOME_APP(gtranslator_application), warn);
+
+		g_free(warn);
+		
+		return;
+	}
 }
 
 /*
@@ -157,6 +143,9 @@ void gtranslator_open_compiled_po_file(gchar *file)
 {
 	gchar *cmd;
 	gchar *tempfilename;
+
+	check_for_prog("msgunfmt");
+
 	/*
 	 * Set the name of the temporary file we will be using.
 	 */
@@ -202,6 +191,8 @@ void open_compressed_po_file(gchar *file, gchar *command)
 {
 	gchar *cmd;
 	gchar *tempfilename;
+
+	check_for_prog(command);
 
 	/*
 	 * Build the a temporary filename in the same way as for the
@@ -285,4 +276,38 @@ void gtranslator_open_compressed_po_file(gchar *file)
 	g_return_if_fail(file!=NULL);
 
 	open_compressed_po_file(file, "uncompress");
+}
+
+/*
+ * Open up zip'ed po file.
+ */
+void gtranslator_open_ziped_po_file(gchar *file)
+{
+	gchar *cmd, *tempfilename;
+
+	g_return_if_fail(file!=NULL);
+
+	check_for_prog("unzip");
+
+	tempfilename=g_strdup_printf("%s/gtranslator-temp-po-file",
+		g_get_home_dir());
+
+	cmd=g_strdup_printf("unzip -p %s > %s", 
+		file,
+		tempfilename);
+
+	if(!system(cmd))
+	{
+		gtranslator_parse_main(tempfilename);
+	}
+	else
+	{
+		cmd=g_strdup_printf(_("Couldn't open zip'ed po file `%s'!"),
+			file);
+
+		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
+	}
+
+	g_free(cmd);
+	g_free(tempfilename);
 }

@@ -52,4 +52,9 @@ void gtranslator_open_bzip2ed_po_file(gchar *file);
  */ 
 void gtranslator_open_compressed_po_file(gchar *file);
 
+/*
+ * Open a zip'ed gettext po file (.po.zip).
+ */
+void gtranslator_open_ziped_po_file(gchar *file); 
+
 #endif
