@@ -1,3 +1,20 @@
+2001-05-12  Fatih Demir <kabalak@gtranslator.org>
+
+	* backend.c: Implemented the informations getting routine the backends
+		(a small debug message enlightens us about the state of the 
+		  backends' xml descriptor files' loading).
+
+	* query.c & backend.c: Changed the calls of the
+		gtranslator_utils_file_names_from_directory function to please
+		 the new format.
+
+	* utils.c/.h: Changed the gtranslator_utils_file_names_from_directory
+		funtion to also take a "with_full_path" argument and to take
+		 care of prepending the full path if the argument if TRUE --
+		  also corrected a stupid typo g_list_append instead of 
+		   g_list_sort -- vim's autocompletion is sometimes making
+		    hell .-)
+
 2001-05-10  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* Makefile.am: backends should be compiled before .

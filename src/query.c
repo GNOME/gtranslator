@@ -204,7 +204,7 @@ void gtranslator_query_domains(const gchar *directory)
 		lc);
 	
 	domains=gtranslator_utils_file_names_from_directory(localedirectory,
-		".mo", TRUE, TRUE);
+		".mo", TRUE, TRUE, FALSE);
 }
 
 /*

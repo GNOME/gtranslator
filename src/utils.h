@@ -41,7 +41,8 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
  *  given directory; extension means extension _with_ point (".xml").
  */
 GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
-	const gchar *extension, gboolean sort, gboolean strip_extension);
+	const gchar *extension, gboolean sort, gboolean strip_extension,
+	gboolean with_full_path);
 
 /*
  * Check for matching of an entry of the list entry and the string -- returns

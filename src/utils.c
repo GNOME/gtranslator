@@ -74,7 +74,8 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
  * Should be useful for many cases.
  */
 GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
-	const gchar *extension, gboolean sort, gboolean strip_extension)
+	const gchar *extension, gboolean sort, gboolean strip_extension,
+	gboolean with_full_path)
 {
 	GList		*files=NULL;
 	DIR 		*dir;
@@ -100,26 +101,26 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 			strcmp(entry->d_name, "..") &&
 			nautilus_istr_has_suffix(entry->d_name, extension))
 		{
-			if(strip_extension)
+			gchar *file;
+			
+			if(strip_extension && !with_full_path)
 			{
-				gchar *file;
-
 				file=gtranslator_utils_get_raw_file_name(
 					entry->d_name);
-				
-				if(file)
-				{
-					files=g_list_append(files, 
-						g_strdup(file)); 
-				}
-
-				g_free(file);
+			}
+			else if(with_full_path)
+			{
+				file=g_strdup_printf("%s/%s", directory,
+					entry->d_name);
 			}
 			else
 			{
-				files=g_list_append(files, 
-					g_strdup(entry->d_name));
+				file=entry->d_name;
 			}
+
+			files=g_list_prepend(files, g_strdup(file));
+
+			g_free(file);
 		}
 	}
 
@@ -128,12 +129,14 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 	 */
 	g_return_val_if_fail(files!=NULL, NULL);
 
+	files=g_list_reverse(files);
+
 	/*
 	 * If the according argument is given, then sort the filenames list.
 	 */
 	if(sort)
 	{
-		files=g_list_append(files, (GFunc) nautilus_strcmp);
+		files=g_list_sort(files, (GCompareFunc) nautilus_strcmp);
 	}
 
 	closedir(dir);

@@ -19,44 +19,119 @@
 
 #include "backend.h"
 #include "defines.include"
+#include "nautilus-string.h"
 #include "utils.h"
 
+#include <gal/util/e-xml-utils.h>
 #include <gnome-xml/parser.h>
-#include <gnome-xml/tree.h>
 
 /*
  * Internal prototypes:
  */
-void read_xml_descriptor(const gchar *filename, GtrBackendInformations **info);
+GtrBackendInformations *read_xml_descriptor(const gchar *filename);
 
 /*
  * Read in the xml descriptor file from the given file.
  */
-void read_xml_descriptor(const gchar *filename, GtrBackendInformations **info)
+GtrBackendInformations *read_xml_descriptor(const gchar *filename)
 {
+	GtrBackendInformations *infos=g_new0(GtrBackendInformations, 1);
 	xmlDocPtr doc;
 	xmlNodePtr node;
-	
+
+	/*
+	 * Again a crappy macro for getting the stuff into the struct.
+	 */
+	#define FillUpInformationsForField(field, propname); \
+		if(!nautilus_strcasecmp(node->name, propname)) \
+		{ \
+			gchar *value=xmlNodeListGetString(doc, node->xmlChildrenNode, 1); \
+			if(value) \
+			{ \
+				g_strstrip(value); \
+				infos->field=g_strdup(value); \
+				g_free(value); \
+			} \
+			else \
+			{ \
+				infos->field=NULL; \
+			} \
+		}
+
 	doc=xmlParseFile(filename);
-	g_return_if_fail(doc!=NULL);
+	g_return_val_if_fail(doc!=NULL, NULL);
 
 	node=xmlDocGetRootElement(doc);
 	
+	/*
+	 * Check foo'shly if the xml file is a backend descriptor file
+	 *  (starts with the "<backend>".
+	 */
 	if(g_strcasecmp(node->name, "backend"))
 	{
-		return;
+		return NULL;
+	}
+	else
+	{
+		/*
+		 * Fill up the information structure's informations with the
+		 *  firstwhind values.
+		 */
+		infos->name=xmlGetProp(node, "name");
+
+		/*
+		 * The description field should always be translated, therefore
+		 *  use the gal function to do it so ,-)
+		 */
+		infos->description=e_xml_get_translated_string_prop_by_name(
+			node, "description");
 	}
 
 	node=node->xmlChildrenNode;
-
+			
 	while(node!=NULL)
 	{
-		/*
-		 * FIXME
-		 */
+		FillUpInformationsForField(modulename, "module");
+		FillUpInformationsForField(extensions, "extensions");
+		FillUpInformationsForField(filenames, "filenames");
+		FillUpInformationsForField(compile_command, "compiler");
+
+		if(!nautilus_strcasecmp(node->name, "compilable"))
+		{
+			gchar *value=xmlNodeListGetString(doc, node->xmlChildrenNode, 1);
+			
+			/*
+			 * Don't operate on empty compilable infos at all.
+			 */
+			if(!value)
+			{
+				break;
+			}
+			
+			g_strstrip(value);
+			
+			/*
+			 * Check if the backend allows us to compile it and set
+			 *  the necessary informations to handle this.
+			 */
+			if(!nautilus_strcasecmp(value, "yes") ||
+				!nautilus_strcasecmp(value, "true") ||
+				!nautilus_strcasecmp(value, "1"))
+			{
+				infos->compilable=TRUE;
+			}
+			else
+			{
+				infos->compilable=FALSE;
+			}
+			
+			g_free(value);
+		}
 
 		node=node->next;
 	}
+
+	return infos;
 }
 
 /*
@@ -68,7 +143,14 @@ void gtranslator_backend_add(const gchar *filename)
 	g_return_if_fail(filename!=NULL);
 
 	backend=g_new0(GtrBackend, 1);
-	read_xml_descriptor(filename, &GTR_BACKEND_INFORMATIONS(backend->info));
+	backend->info=read_xml_descriptor(filename);
+
+	g_return_if_fail(backend->info!=NULL);
+
+	/*
+	 * Mr. Debug, never translate such things!
+	 */
+	g_message("%s (%s) descriptor loaded", backend->info->name, backend->info->description);
 }
 
 /*
@@ -83,7 +165,7 @@ gboolean gtranslator_backend_open_all_backends(const gchar *directory)
 	 *  filename list.
 	 */
 	backends=gtranslator_utils_file_names_from_directory(directory,
-		".xml", TRUE, FALSE);
+		".xml", TRUE, FALSE, TRUE);
 
 	g_return_val_if_fail(backends!=NULL, FALSE);
 
