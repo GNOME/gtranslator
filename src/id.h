@@ -42,6 +42,12 @@ typedef struct
 #define GTR_ID(x) ((GtrID *) x)
 
 /*
+ * The used GList for the GtrID's -- a general way to handle with this
+ *  list is supplied by the gtranslator_id_* methods.
+ */
+GList *gtranslator_ids;
+
+/*
  * Create and return a GtrID from the current position & po file -- 
  *  if a file is opened yet.
  */
@@ -79,8 +85,30 @@ gboolean gtranslator_id_equal(GtrID *one, GtrID *two);
 gboolean gtranslator_id_string_equal(GtrID *id, const gchar *string); 
 
 /*
+ * Add the given GtrID to the IDs list.
+ */
+void gtranslator_id_add(GtrID *id);
+
+/*
+ * Remove the given GtrID from the IDs list -- the result is
+ *  passed as the return-value.
+ */
+gboolean gtranslator_id_remove(GtrID *id);
+
+/*
+ * Check whether the given GtrID is already included in 
+ *  our IDs list -- simple return TRUE in this case.
+ */
+gboolean gtranslator_id_search(GtrID *id);
+
+/*
+ * Copy the given GtrID safely.
+ */
+GtrID *gtranslator_id_copy(GtrID *id);
+
+/*
  * Free the given GtrID.
  */
-void gtranslator_id_free(GtrID **id); 
+void gtranslator_id_free(GtrID *id); 
 
 #endif

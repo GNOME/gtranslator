@@ -25,6 +25,19 @@
 #include <libgnome/gnome-util.h>
 
 /*
+ * A simple but very useful macro for more safe g_strdup usage:
+ */
+#define IF_STRDUP(target, value); \
+	if(value) \
+	{ \
+		target=g_strdup(value); \
+	} \
+	else \
+	{ \
+		target=NULL; \
+	}
+
+/*
  * Create and return a GtrID from the current position & po file -- 
  *  if a file is opened yet.
  */
@@ -33,11 +46,14 @@ GtrID *gtranslator_id_new()
 	GtrID *id=g_new0(GtrID, 1);
 
 	g_return_val_if_fail(file_opened==TRUE, NULL);
+	g_return_val_if_fail(po->filename!=NULL, NULL);
 
 	id->po_file=g_strdup(po->filename);
-	id->po_language=g_strdup(GTR_HEADER(po->header)->language);
-	id->po_version=g_strdup(GTR_HEADER(po->header)->prj_version);
-	id->po_date=g_strdup(GTR_HEADER(po->header)->po_date);
+	
+	IF_STRDUP(id->po_language, GTR_HEADER(po->header)->language);
+	IF_STRDUP(id->po_version, GTR_HEADER(po->header)->prj_version);
+	IF_STRDUP(id->po_date, GTR_HEADER(po->header)->po_date);
+	
 	id->po_position=g_list_position(po->messages, po->current);
 
 	return id;
@@ -94,25 +110,10 @@ GtrID *gtranslator_id_new_from_string(const gchar *string)
 	values=g_strsplit(encoding_area, "/", 4);
 	g_free(encoding_area);
 
-	/*
-	 * Assign the "parsed" values.
-	 */
-	#define if_assign(x, y) \
-		if(y) \
-		{ \
-			x=g_strdup(y); \
-		} \
-		else \
-		{ \
-			x=NULL; \
-		}
+	IF_STRDUP(id->po_language, values[0]);
+	IF_STRDUP(id->po_version, values[1]);
+	IF_STRDUP(id->po_date, values[2]);
 	
-	if_assign(id->po_language, values[0]);
-	if_assign(id->po_version, values[1]);
-	if_assign(id->po_date, values[2]);
-	
-	#undef if_assign
-
 	/*
 	 * Always be quite safe about the GtrID values assigned in these routines.
 	 */
@@ -158,7 +159,7 @@ gchar *gtranslator_id_new_id_string()
 	
 	id_string=gtranslator_id_string_from_id(GTR_ID(id));
 	
-	gtranslator_id_free(&id);
+	gtranslator_id_free(id);
 	
 	return id_string;
 }
@@ -298,19 +299,155 @@ gboolean gtranslator_id_string_equal(GtrID *id, const gchar *string)
 	GtrID *new=gtranslator_id_new_from_string(string);
 	return (gtranslator_id_equal(id, new));
 
-	gtranslator_id_free(&new);
+	gtranslator_id_free(new);
+}
+
+/*
+ * Add the given GtrID to the list including checking if it's 
+ *  already in the list.
+ */
+void gtranslator_id_add(GtrID *id)
+{
+	g_return_if_fail(GTR_ID(id)!=NULL);
+
+	/*
+	 * Add the given GtrID to the list but only is our search function
+	 *  does show up that it isn't in the list yet.
+	 */
+	if(!gtranslator_id_search(GTR_ID(id)))
+	{
+		gtranslator_ids=g_list_prepend(gtranslator_ids, gtranslator_id_copy(id));
+		gtranslator_ids=g_list_reverse(gtranslator_ids);
+	}
+}
+
+/*
+ * Remove the given GtrID from our list -- the elements should 
+ *  be matching "enough" to apply the removal from the list.
+ */
+gboolean gtranslator_id_remove(GtrID *id)
+{
+	g_return_val_if_fail(GTR_ID(id)!=NULL, FALSE);
+
+	if(gtranslator_id_search(id))
+	{
+		GList *zuper;
+		
+		zuper=gtranslator_ids;
+		
+		/*
+		 * FIXME:
+		 *
+		 * This is a quite wrong "adaptance" from the history
+		 *  routines to here; there's something surely wrong..
+		 */
+		while(zuper!=NULL)
+		{
+			if(gtranslator_id_equal(id, GTR_ID(zuper->data)))
+			{
+				GList *removeme=zuper;
+
+				zuper=zuper->next;
+				g_list_remove_link(gtranslator_ids, removeme);
+
+				gtranslator_id_free(GTR_ID(removeme->data));
+				g_list_free_1(removeme);
+			}
+			else
+			{
+				zuper=zuper->next;
+			}
+		}
+
+		return FALSE;
+	}
+	else
+	{
+		return FALSE;
+	}
+
+	return FALSE;
+}
+
+/*
+ * Simply search the given GtrID in our IDs list.
+ */
+gboolean gtranslator_id_search(GtrID *id)
+{
+	GList 	*checklist=NULL;
+	
+	g_return_val_if_fail(GTR_ID(id)!=NULL, FALSE);
+
+	/*
+	 * If there's no IDs list yet, return FALSE.
+	 */
+	if(!gtranslator_ids)
+	{
+		return FALSE;
+	}
+
+	checklist=g_list_copy(gtranslator_ids);
+
+	while(checklist!=NULL)
+	{
+		GtrID 	*check_id=GTR_ID(checklist->data);
+
+		/*
+		 * Check if the two GtrIDs are equal -- this should
+		 *  be enough.
+		 */
+		if(gtranslator_id_equal(id, check_id))
+		{
+			return TRUE;
+		}
+		
+		checklist=checklist->next;
+
+		/*
+		 * XXX: This should work as the previous one isn't 
+		 *  needed anylonger, but seems very vague for me.
+		 */
+		gtranslator_id_free(GTR_ID(checklist->prev->data));
+	}
+
+	g_list_free(checklist);
+
+	return FALSE;
+}
+
+/*
+ * A convenience copy function for our GtrIDs.
+ */
+GtrID *gtranslator_id_copy(GtrID *id)
+{
+	GtrID 	*copy=g_new0(GtrID, 1);
+	
+	g_return_val_if_fail(GTR_ID(id)!=NULL, NULL);
+
+	copy->po_file=g_strdup(GTR_ID(id)->po_file);
+	
+	/*
+	 * Copy the string parts safely or set'em to NULL where needed.
+	 */
+	IF_STRDUP(copy->po_language, GTR_ID(id)->po_language);
+	IF_STRDUP(copy->po_version, GTR_ID(id)->po_version);
+	IF_STRDUP(copy->po_date, GTR_ID(id)->po_date);
+	
+	copy->po_position=GTR_ID(id)->po_position;
+
+	return copy;
 }
 
 /*
  * Free the given GtrID.
  */
-void gtranslator_id_free(GtrID **id)
+void gtranslator_id_free(GtrID *id)
 {
-	if(GTR_ID(*id))
+	if(GTR_ID(id))
 	{
-		g_free(GTR_ID(*id)->po_file);
-		g_free(GTR_ID(*id)->po_language);
-		g_free(GTR_ID(*id)->po_version);
-		g_free(GTR_ID(*id)->po_date);
+		g_free(GTR_ID(id)->po_file);
+		g_free(GTR_ID(id)->po_language);
+		g_free(GTR_ID(id)->po_version);
+		g_free(GTR_ID(id)->po_date);
 	}
 }
