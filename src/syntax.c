@@ -79,6 +79,7 @@ gboolean back_match(const gchar *msg, gchar *str, gint pos)
  */
 static void text_data_free(gpointer data)
 {
+	g_return_if_fail(data!=NULL);
 	g_string_free((GString*)data, TRUE);
 }
 
@@ -120,6 +121,8 @@ void gtranslator_insert_highlighted(
 	gchar type;
 	
 	g_return_if_fail(textwidget != NULL);
+	g_return_if_fail(text!=NULL);
+
 	gtk_text_freeze(GTK_TEXT(textwidget));
 	gtk_signal_handler_block_by_func(
 		GTK_OBJECT(textwidget), 
@@ -206,6 +209,8 @@ void gtranslator_delete_highlighted(
 	gchar type;
 	
 	g_return_if_fail(textwidget != NULL);
+	g_return_if_fail(pos >= 0);
+
 	gtk_text_freeze(GTK_TEXT(textwidget));
 	if(len < 1)
 	{
