@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-06 16:26+0100\n"
-"PO-Revision-Date: 2005-02-06 16:24+0100\n"
+"POT-Creation-Date: 2005-03-31 23:07+0200\n"
+"PO-Revision-Date: 2005-03-31 23:10+0200\n"
 "Last-Translator: Hendrik Brandt <heb@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -102,18 +102,31 @@ msgstr ""
 "Kompilierung erfolgreich:\n"
 "%s"
 
-#: src/dialogs.c:96
-msgid "gtranslator -- open po file"
-msgstr "gtranslator -- po-Datei öffnen"
+#: src/dialogs.c:109
+msgid "Gettext translation"
+msgstr "Gettext-Übersetzung"
 
-#.
-#. * Let the user use the file selector to decide where to save it
-#.
-#: src/dialogs.c:135
-msgid "gtranslator -- save file as.."
-msgstr "gtranslator -- Datei speichern unter..."
+#: src/dialogs.c:114
+msgid "Gettext translation template"
+msgstr "Gettext-Übersetzungsvorlage"
 
-#: src/dialogs.c:179
+#: src/dialogs.c:119
+msgid "All files"
+msgstr "Alle Dateien"
+
+#: src/dialogs.c:182
+msgid "Open file for translation"
+msgstr "Datei zum Übersetzen öffnen"
+
+#: src/dialogs.c:210
+msgid "Save file as..."
+msgstr "Datei speichern als..."
+
+#: src/dialogs.c:218
+msgid "Save local copy of file as..."
+msgstr "Lokale Kopie der Datei speichern als..."
+
+#: src/dialogs.c:261
 #, c-format
 msgid ""
 "File %s\n"
@@ -122,52 +135,52 @@ msgstr ""
 "Datei %s\n"
 "wurde geändert. Speichern?"
 
-#: src/dialogs.c:221 src/dialogs.c:254
+#: src/dialogs.c:303 src/dialogs.c:336
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- Kommentar bearbeiten"
 
-#: src/dialogs.c:246
+#: src/dialogs.c:328
 msgid "Comment:"
 msgstr "Kommentar:"
 
-#: src/dialogs.c:361
+#: src/dialogs.c:443
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Sollen ALLE Übersetzungen aus »%s« entfernt werden?"
 
-#: src/dialogs.c:434
+#: src/dialogs.c:516
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- gehe zu"
 
-#: src/dialogs.c:442
+#: src/dialogs.c:524
 msgid "Go to message number:"
 msgstr "Gehe zur Meldung mit Nummer:"
 
-#: src/dialogs.c:500
+#: src/dialogs.c:582
 msgid "Find in the po file"
 msgstr "In der po-Datei suchen"
 
-#: src/dialogs.c:509
+#: src/dialogs.c:591
 msgid "Enter search string:"
 msgstr "Bitte den zu suchenden Text eingeben:"
 
-#: src/dialogs.c:514
+#: src/dialogs.c:596
 msgid "Case sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
 
-#: src/dialogs.c:519
+#: src/dialogs.c:601
 msgid "Find in:"
 msgstr "Suchen in:"
 
-#: src/dialogs.c:523 src/dialogs.c:652
+#: src/dialogs.c:605 src/dialogs.c:734
 msgid "Comments"
 msgstr "Kommentare"
 
-#: src/dialogs.c:526 src/dialogs.c:655 src/languages.c:101
+#: src/dialogs.c:608 src/dialogs.c:737 src/languages.c:101
 msgid "English"
 msgstr "Englisch"
 
-#: src/dialogs.c:529 src/dialogs.c:658 src/messages-table.c:224
+#: src/dialogs.c:611 src/dialogs.c:740 src/messages-table.c:224
 msgid "Translation"
 msgstr "Übersetzung"
 
@@ -175,39 +188,39 @@ msgstr "Übersetzung"
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: src/dialogs.c:540
+#: src/dialogs.c:622
 msgid "Ignore hotkeys"
 msgstr "Tastenkürzel ignorieren"
 
-#: src/dialogs.c:631
+#: src/dialogs.c:713
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- ersetzen"
 
-#: src/dialogs.c:635 src/menus.c:333
+#: src/dialogs.c:717 src/menus.c:333
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: src/dialogs.c:636
+#: src/dialogs.c:718
 msgid "Replace all"
 msgstr "Alle ersetzen"
 
-#: src/dialogs.c:641
+#: src/dialogs.c:723
 msgid "String to replace:"
 msgstr "Zu ersetzender Text:"
 
-#: src/dialogs.c:644
+#: src/dialogs.c:726
 msgid "Replace string:"
 msgstr "Ersetzen durch:"
 
-#: src/dialogs.c:649
+#: src/dialogs.c:731
 msgid "Replace in:"
 msgstr "Ersetzen in:"
 
-#: src/dialogs.c:719
+#: src/dialogs.c:801
 msgid "Please enter a string to replace!"
 msgstr "Bitte geben Sie den zu ersetzenden Text ein!"
 
-#: src/dialogs.c:776
+#: src/dialogs.c:858
 #, c-format
 msgid ""
 "The file\n"
@@ -231,7 +244,7 @@ msgstr ""
 "\n"
 "Soll die Datei dennoch von gtranslator geöffnet werden?"
 
-#: src/dialogs.c:817
+#: src/dialogs.c:899
 #, c-format
 msgid ""
 "File %s\n"
@@ -240,19 +253,19 @@ msgstr ""
 "Datei %s\n"
 "wurde geändert. Wollen Sie zur gesicherten Kopie zurückkehren?"
 
-#: src/dialogs.c:846
+#: src/dialogs.c:928
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- von Adresse öffnen"
 
-#: src/dialogs.c:858
+#: src/dialogs.c:940
 msgid "Enter URI:"
 msgstr "Adresse eingeben:"
 
-#: src/dialogs.c:895
+#: src/dialogs.c:977
 msgid "No URI given!"
 msgstr "Keine Adresse angegeben!"
 
-#: src/dialogs.c:909
+#: src/dialogs.c:991
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -278,7 +291,7 @@ msgstr ""
 "file:///<PO-DATEI> oder\n"
 "http://www.DOMAIN.DE/PO-FILE"
 
-#: src/dialogs.c:949
+#: src/dialogs.c:1031
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -296,19 +309,19 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:961
+#: src/dialogs.c:1043
 msgid "Postpone decision"
 msgstr "Entscheidung aufschieben"
 
-#: src/dialogs.c:963
+#: src/dialogs.c:1045
 msgid "Ignore recovery file"
 msgstr "Sicherheitskopien ignorieren"
 
-#: src/dialogs.c:965
+#: src/dialogs.c:1047
 msgid "Recover file"
 msgstr "Sicherheitskopie"
 
-#: src/dialogs.c:1018
+#: src/dialogs.c:1100
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -316,15 +329,15 @@ msgstr ""
 "Soll gtranslator die Datei unter Verwendung Ihres\n"
 "persönlichen Lernpuffers automatisch übersetzen?"
 
-#: src/dialogs.c:1058 src/dialogs.c:1086
+#: src/dialogs.c:1140 src/dialogs.c:1168
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- Lesezeichen mit Kommentar hinzufügen?"
 
-#: src/dialogs.c:1078
+#: src/dialogs.c:1160
 msgid "Comment for the bookmark:"
 msgstr "Lesezeichenkommentar:"
 
-#: src/dialogs.c:1078
+#: src/dialogs.c:1160
 msgid "No comment"
 msgstr "Kein Kommentar"
 
@@ -341,53 +354,53 @@ msgstr ""
 "»%s«\n"
 "konnte nicht gefunden werden"
 
-#: src/gui.c:384
+#: src/gui.c:397
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ %i ungenaue verblieben ]"
 msgstr[1] "%s [ %i ungenaue verblieben ]"
 
-#: src/gui.c:384 src/gui.c:388 src/menus.c:319 src/messages-table.c:272
+#: src/gui.c:397 src/gui.c:401 src/menus.c:319 src/messages-table.c:272
 msgid "Fuzzy"
 msgstr "Ungenau"
 
-#: src/gui.c:388
+#: src/gui.c:401
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Keine Ungenauen verblieben ]"
 
-#: src/gui.c:397 src/messages-table.c:280
+#: src/gui.c:410 src/messages-table.c:280
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: src/gui.c:405
+#: src/gui.c:418
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ %i Unübersetze verblieben ]"
 msgstr[1] "%s [ %i Unübersetze verblieben ]"
 
-#: src/gui.c:405 src/gui.c:407 src/messages-table.c:264
+#: src/gui.c:418 src/gui.c:420 src/messages-table.c:264
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
-#: src/gui.c:407
+#: src/gui.c:420
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Keine Unübersetzen verblieben ]"
 
-#: src/gui.c:426
+#: src/gui.c:439
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Meldung: %d / %d / Status: %s (Meldung hat Pluralformen)"
 
-#: src/gui.c:430
+#: src/gui.c:443
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Meldung: %d / %d / Status: %s"
 
-#: src/gui.c:733 src/page.c:98
+#: src/gui.c:746 src/page.c:98
 msgid "Edit comment"
 msgstr "Kommentar bearbeiten"
 
@@ -1166,13 +1179,11 @@ msgstr ""
 msgid ""
 "File %s\n"
 "contains %d fuzzy message"
-msgid_plural ""
 "File %s\n"
 "contains %d fuzzy messages"
-msgstr[0] ""
+msgstr ""
 "Datei »%s«\n"
 "enthält %d ungenaue Meldung"
-msgstr[1] ""
 "Datei »%s«\n"
 "enthält %d ungenaue Meldungen"
 
@@ -1497,17 +1508,17 @@ msgstr "Verzeichnis »%s« konnte nicht erstellt werden!"
 msgid "Error autosaving file: %s"
 msgstr "Fehler beim automatischen Abspeichern der Datei: %s"
 
-#: src/utils_gui.c:142
+#: src/utils_gui.c:141
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Der Geometrie-String »%s« konnte nicht analysiert werden!"
 
-#: src/utils_gui.c:356
+#: src/utils_gui.c:355
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Das notwendige Dekompressionsprogramm »%s« ist nicht installiert!"
 
-#: src/utils_gui.c:361
+#: src/utils_gui.c:360
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Das notwendige Kompressionsprogramm »%s« ist nicht installiert!"
@@ -1545,3 +1556,4 @@ msgstr "Rechner »%s« hat keine Addresse!"
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Übertragung unterbrochen!"
+
