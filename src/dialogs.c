@@ -1028,9 +1028,6 @@ gint gtranslator_file_revert_dialog(GtkWidget *widget, gpointer filename)
 		fname);
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_NO);
 
-	reply = gtk_dialog_run(GTK_DIALOG(dialog));
-	gtk_widget_destroy(dialog);
-
 	/*
 	 * Run dialog and process response
 	 */
