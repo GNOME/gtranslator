@@ -39,6 +39,11 @@ gboolean gtranslator_learn_initialized(void);
 void gtranslator_learn_po_file(GtrPo *po_file);
 
 /*
+ * Export the learn buffer into a standard gettext po file.
+ */
+void gtranslator_learn_export_to_po_file(const gchar *po_file);
+
+/*
  * Learn the given strings.
  */
 void gtranslator_learn_string(const gchar *id_string, const gchar *str_string);

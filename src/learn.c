@@ -690,6 +690,20 @@ void gtranslator_learn_po_file(GtrPo *po_file)
 }
 
 /*
+ * Export the learn buffer to a gettext po file -- is really not quite perfect
+ *  but fills it's purpose.
+ */
+void gtranslator_learn_export_to_po_file(const gchar *po_file)
+{
+	g_return_if_fail(po_file!=NULL);
+	g_return_if_fail(gtranslator_learn_buffer->init_status==TRUE);
+
+	/*
+	 * FIXME: Write.
+	 */
+}
+
+/*
  * Add it to our learned list!
  */
 void gtranslator_learn_string(const gchar *id_string, const gchar *str_string)
