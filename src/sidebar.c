@@ -99,7 +99,7 @@ GtkWidget *gtranslator_sidebar_new()
 		-1, e_utf8_from_locale_string(_("Bookmarks")));
 
 	e_shortcut_bar_set_view_type(E_SHORTCUT_BAR(sidebar), 0, 
-		E_ICON_BAR_LARGE_ICONS);
+		E_ICON_BAR_SMALL_ICONS);
 
 	gtk_signal_connect(GTK_OBJECT(sidebar), "item_selected",
 		GTK_SIGNAL_FUNC(select_icon), NULL);	
