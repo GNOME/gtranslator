@@ -26,18 +26,19 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.5FIXME.2
+export POZILLA_RELEASE=5.0
 
 #
-# Here we do define the corresponding i18n mailing list
-#  which should also get a mail message about the coming release.
+# Here we do define the corresponding i18n mailing list which should also get
+#  an EMail message about the coming release -- we do now respect the (heh,
+#   logic hits me again) "MAILING_LIST" env variable.
 #
-export MAILING_LIST='GNOME I18N List <gnome-i18n@gnome.org>'
+export MAILING_LIST=${MAILING_LIST:-'GNOME I18N List <gnome-i18n@gnome.org>'}
 
 #
 # The configuration dir, the mail body & mail.
 #
-export CONFIG_DIR="$HOME/.pozilla"
+export CONFIG_DIR="$HOME/.gtranslator/pozilla"
 export BODY_FILE="$CONFIG_DIR/mail.body"
 
 #
@@ -70,15 +71,6 @@ for app in msgfmt msgmerge make grep sed awk
 	done	
 
 #
-# Temporarily here .-)
-#
-if test "hi$USER" = "hiyaneti" ; then
-	echo "---------------------------------------------------------------"
-	echo "Welcome back Yanko to pozillaistan (there's \"--dry-run\") ,-)"
-	echo "---------------------------------------------------------------"
-fi
-
-#
 # That's Pozilla, guy!
 #
 [ -d $CONFIG_DIR ] || {
@@ -99,8 +91,7 @@ fi
 	#
 	# Make an IP test to avoid unknown use of it.
 	#
-	if test "%$confirmation" = "%n" -o "%$confirmation" = "%N" -o \
-		"%$confirmation" = "%" ; then
+	if test "%$confirmation" != "%y" ; then 
 		echo "---------------------------------------------------------------"
 		echo "!ERROR¡ "
 		echo ""
@@ -118,11 +109,22 @@ fi
 }
 
 #
-# Read out the current "configuration", if there's any.
+# Initialize our own config file -- or touch & echo into it at least if there's
+#  no currently present config file there.
 #
 [ -f $CONFIG_DIR/pozilla.conf ] || {
-	touch $CONFIG_DIR/pozilla.conf
-	echo 0 > $CONFIG_DIR/pozilla.conf
+
+	#
+	# Test if we've got any previous generations of pozilla.sh running --
+	#  move the config file and remove the old directory in these cases.
+	#
+	if test -f "$HOME/.pozilla/pozilla.conf" ; then
+		mv "$HOME/.pozilla/pozilla.conf" $CONFIG_DIR/pozilla.conf
+		rm -rf "$HOME/.pozilla/"
+	else
+		touch $CONFIG_DIR/pozilla.conf
+		echo 0 > $CONFIG_DIR/pozilla.conf
+	fi
 }
 
 while [ ! -z "$1" ]
@@ -423,15 +425,6 @@ do
 done	
 
 #
-# Currently we're broken -- honor this .-)
-#
-echo "---------------------------------------------------------------"
-echo "pozilla.sh is currently broken! Please wait for an again working"
-echo " release of it quite soon..."
-echo "---------------------------------------------------------------"
-	exit 1
-
-#
 # Finally, check for existance of mutt if $RUN_DRY is not defined.
 #
 if test "z`which mutt`" = "z" -a "say_$RUN_DRY" != "say_yes" ; then
@@ -602,7 +595,8 @@ for i in $PO_FILES
 	do
 	AUTHOR=`grep ^\"Last $i|sed -e 's/.*:\ //g' \
 		-e 's/\\\n.*$//g' -e 's/\,//g'`
-	#
+
+		#
 	# Test if the current po file should be ignored.
 	#
 	if test "i$IGNORE_LANGS" != "i" ; then
@@ -655,18 +649,47 @@ $language\t\t------------- Failure due to an error -------------"
 	centil=`awk "{ print $messages / 100 }" $CONFIG_DIR/pozilla.conf`
 	percent=`awk "{ printf \"%.2f\", $translated / $centil }" $CONFIG_DIR/pozilla.conf`
 
+	case $percent in
+	?.*)
+	STAT_TABLE="$STAT_TABLE
+$language\t\t$messages\t\t$translated\t\t  $percent%\t\t$missing"
+	;;
+	??.*)
+	STAT_TABLE="$STAT_TABLE
+$language\t\t$messages\t\t$translated\t\t $percent%\t\t$missing"	
+	;;
+	*)
 	STAT_TABLE="$STAT_TABLE
 $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
+	;;
+	esac
 
 	#
-	# Compile the current merged po file.
+	# Test if the previously parsed author string is valuable at all -- it
+	#  should contain at least an EMail address and therefore '<', '>' and
+	#   '@' characters should be present -- if not, jump to the next file.
 	#
-	$extra_args msgfmt -vv $i 2>/dev/null
+	echo "$AUTHOR"|grep -sq "<" || {
+		continue
+	}
+
+	echo "$AUTHOR"|grep -sq ">" || {
+		continue
+	}
+
+	echo "$AUTHOR"|grep -sq "@" || {
+		continue
+	}
 	
 	#
 	# Only operate if we don't need to run drily or to send personal mails.
 	#
-	if test "say_$RUN_DRY" != "say_yes" -o "say_$NO_PERSONAL" != "say_yes" ; then
+	if test "say_$RUN_DRY" != "say_yes" ; then
+		if test "say_$NO_PERSONAL" != "say_yes" ; then
+	#
+	# Compile the current merged po file.
+	#
+	$extra_args msgfmt -vv $i 2>/dev/null
 	
 	case $? in
 	1)
@@ -680,20 +703,34 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 			echo "" >> $BODY_FILE
 		fi
 		echo "Your po-file $i's statistics are:" >> $BODY_FILE
-		echo "${statistics[*]} [$percent%]" >>$BODY_FILE
+
+		case $percent in
+		?.*)
+			echo "${statistics[*]} [  $percent%]" >>$BODY_FILE
+		;;
+		??.*)
+			echo "${statistics[*]} [ $percent%]" >>$BODY_FILE
+		;;
+		*)
+			echo "${statistics[*]} [$percent%]" >>$BODY_FILE
+		;;
+		esac
+
 		echo "" >> $BODY_FILE
-		if test "q$SEND_TO_ALL_LANGUAGES" != "q" -o "s$SEND_TO_LANGS" != "s" ; then
-			_lang=`echo $i|sed -e 's/.po//g'`
-			if  test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
-				gzip --best -cf < $i > $PACKAGE.$i.gz
-				echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
-				echo " immediately start with your update of $i." >> $BODY_FILE
-				echo "" >> $BODY_FILE
-			elif echo $SEND_TO_LANGS|grep -sq $_lang ; then
-				gzip --best -cf < $i > $PACKAGE.$i.gz
-				echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
-				echo " immediately start with your update of $i." >> $BODY_FILE
-				echo "" >> $BODY_FILE
+		if test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
+			if test "s$SEND_TO_LANGS" != "s" ; then
+				_lang=`echo $i|sed -e 's/.po//g'`
+				if  test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
+					gzip --best -cf < $i > $PACKAGE.$i.gz
+					echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
+					echo " immediately start with your update of $i." >> $BODY_FILE
+					echo "" >> $BODY_FILE
+				elif echo $SEND_TO_LANGS|grep -sq $_lang ; then
+					gzip --best -cf < $i > $PACKAGE.$i.gz
+					echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
+					echo " immediately start with your update of $i." >> $BODY_FILE
+					echo "" >> $BODY_FILE
+				fi
 			fi
 		fi
 		echo "Have fun with po-updating :-)" >> $BODY_FILE
@@ -718,6 +755,7 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 	fi
 	[ -f $PACKAGE.$i.gz ] && rm -f $PACKAGE.$i.gz
 
+		fi
 	fi
 
 	#
@@ -735,7 +773,8 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 #
 # Send a mail to the mailing list -- if we're running in "wet-modus".
 #
-if test "say_$RUN_DRY" != "say_yes" -o "say_$NO_LIST" != "say_yes" ; then
+if test "say_$RUN_DRY" != "say_yes" ; then
+	if test "say_$NO_LIST" != "say_yes" ; then
 
 echo "Dear translators of $PACKAGE:" > $BODY_FILE
 echo "" >> $BODY_FILE
@@ -743,7 +782,7 @@ if test "Z$DAYS_REMAINING" = "Z" ; then
 	echo "The next release of $PACKAGE (R $RELEASE) is coming within the next days" >> $BODY_FILE
 else
 	echo "The next release of $PACKAGE (R $RELEASE) is coming in $DAYS_REMAINING days" >> $BODY_FILE
-fi	
+fi
 echo "and you all should update your translator for it please." >> $BODY_FILE
 echo "" >> $BODY_FILE
 if test "say_$NO_PERSONAL" != "say_yes" ; then
@@ -774,6 +813,7 @@ else
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST" -c "$ADDITIONAL_MAILING_ADDRESS"
 fi
 
+	fi
 fi
 
 #
