@@ -29,73 +29,31 @@
 	_("libgtranslator -- GtranslatorPreferencesDialog")
 
 /**
-* The pane splitting up the index and the
-*  content window.
-**/
-GtkWidget			*pane;
-
-/**
-* The "new" widget.
-**/
-GtranslatorPreferencesDialog	*window;
-
-/**
 * Create and return the new widget.
 **/
-GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
-	gchar *title)
+GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new()
 {
 	/**
-	* Partial, private widgets.
+	* The GladeXML document.
 	**/
-	GtkWidget	*frame;
+	GladeXML	*interface;
 	/**
-	* Check if we'd got a title for the widget and warn the
-	*  user that there's no current title to use, so we use
-	*   our default title :-)
+	* The "new" widget.
 	**/
-	if(!title)
-	{
-		g_warning(_("No title set for a new GtranslatorPreferencesDialog widget!\n\
-Using the default title `%s'..."),
-			GTRANSLATOR_PREFERENCES_DIALOG_DEFAULT_TITLE);
-		/**
-		* Set the title.
-		**/
-		sprintf(window->title, "%s", GTRANSLATOR_PREFERENCES_DIALOG_DEFAULT_TITLE);
-	}
-	else
-	{
-		sprintf(window->title, "%s", title);
-	}
+	GtranslatorPreferencesDialog	*window=g_new0(
+		GtranslatorPreferencesDialog,1);
 	/**
-	* Create the new window.
+	* Now init the libglade for GNOME.
 	**/
-	window->prefs_window=gnome_dialog_new(window->title, 
-		GNOME_STOCK_BUTTON_APPLY,
-		GNOME_STOCK_BUTTON_OK,
-		GNOME_STOCK_BUTTON_CANCEL,
-		NULL);
+	glade_gnome_init();
 	/**
-	* Create the (for now) GtkPane.
+	* Now get the apps' default preferences widget from glade.
 	**/
-	pane=gtk_vpaned_new();	
+	interface=glade_xml_new(INTERFACE_DIR "preferences.glade", NULL);
 	/**
-	* Create the clist, set the options, create the frame and
-	*  insert it into the pane.
+	* And get the main widget.
 	**/
-	window->index=gtk_clist_new(1);
-	frame=gtk_frame_new(_("Default"));
-	gtk_paned_add1(GTK_PANED(pane), window->index);
-	gtk_paned_add2(GTK_PANED(pane), frame);
-	/**
-	* Add the pane to the main window.
-	**/
-	gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(window->prefs_window)->vbox), pane);
-	/**
-	* Check the widget with an assertion..
-	**/
-	g_assert(window!=NULL);
+	window->prefs_window=glade_xml_get_widget(interface, "gtranslator_prefs_window");
 	/**
 	* At least return the new widget.
 	**/

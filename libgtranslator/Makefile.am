@@ -16,7 +16,9 @@ INCLUDES = \
 	$(OAF_CFLAGS) $(XML_CFLAGS) -I../src \
 	-DG_LOG_DOMAIN=\"libgtranslator\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
-	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
+	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\" \
+	$(LIBGLADE_CFLAGS) \
+	-DINTERFACE_DIR=\"@INTERFACE_DIR@\"
 
 libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
 	gtkled.c \
@@ -38,7 +40,8 @@ endif
 
 libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
 	$(XML_LIBS) $(OAF_LIBS) -L/usr/X11R6/lib \
-	$(GNOMEUI_LIBS) $(configstufflibs)
+	$(GNOMEUI_LIBS) $(configstufflibs) \
+	$(LIBGLADE_LIBS)
 
 libgtranslator_include_dir = $(includedir)/libgtranslator
 

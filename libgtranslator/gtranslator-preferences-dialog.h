@@ -15,7 +15,9 @@
 #ifndef GTRANSLATOR_PREFERENCES_DIALOG_H
 #define GTRANSLATOR_PREFERENCES_DIALOG_H 1
 
+#include <libgtranslator/handle-db.h>
 #include <libgtranslator/preferences.h>
+#include <glade/glade.h>
 #include <gtk/gtk.h>
 
 /**
@@ -73,8 +75,7 @@ struct GtranslatorPreferencesDialogInternal
 /**
 * Create a new dialog for us :-)
 **/
-GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
-	gchar *title);
+GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new();
 
 /**
 * Hide the preferences dialog.
