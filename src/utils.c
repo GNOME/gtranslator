@@ -1064,7 +1064,7 @@ gchar *gtranslator_xml_get_string_prop_by_name_with_default(const xmlNode *paren
 	}
 	else
 	{
-		g_return_if_fail(default_string!=NULL);
+		g_return_val_if_fail(default_string!=NULL, NULL);
 		ret_val=g_strdup (default_string);
 	}
 
