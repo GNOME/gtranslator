@@ -124,10 +124,11 @@ void s_box_create()
 	/**
 	* Set up the information label 
 	**/
+	
 	s_box_label=gtk_label_new(_("Enter your desired search string: "));
 	s_box_string=gnome_entry_new("SEARCH");
 	s_box_ok=gtk_button_new_with_label(_("Search"));
-	s_box_cancel=gtk_button_new_with_label(_("Cancel"));
+	s_box_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
 	/**
 	* Add the widgets to the dialog.
 	**/

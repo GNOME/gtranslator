@@ -108,6 +108,18 @@ void enable_buttons()
 }
 
 /**
+* gtranslator's own quit-code ..
+**/
+gint gtranslator_quit(GtkWidget *widget,gpointer useless)
+{
+	/**
+	* Here could have been some checks...
+	**/
+	gtk_main_quit();
+}
+
+
+/**
 * The menu-entries
 **/
 static GnomeUIInfo the_file_menu[] =
@@ -436,9 +448,9 @@ create_app1 (void)
 	* The callbacks list
 	**/
 	gtk_signal_connect(GTK_OBJECT(app1),"delete-event",
-		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
+		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);	
 	gtk_signal_connect(GTK_OBJECT(exit_button),"clicked",
-		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
+		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);
 	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",
 		GTK_SIGNAL_FUNC(prefs_box_show),NULL);
 	gtk_signal_connect(GTK_OBJECT(compile_button),"clicked",

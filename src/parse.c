@@ -47,6 +47,8 @@ void parse(gchar *po)
 	gchar temp_char[128];
 	gchar *zamane;
         guint lines=1,z=0;
+	guint msgid_count,msgstr_count,comments_count;
+	msgid_count=msgstr_count=comments_count=0;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
@@ -70,8 +72,8 @@ void parse(gchar *po)
         /**
         * Allocate the lists
         **/
-        temp=g_list_alloc();
         head=g_list_alloc();
+	temp=g_list_alloc();	
         /**
         * Parse the file ...
         **/
@@ -80,23 +82,51 @@ void parse(gchar *po)
         )
         {
 		z++;
+		/**
+		* Try to get the header :
+		*
+		* 1/If it starts with "
+		* 2/And includes a ": " sequence
+		* 3/And if there has been ONLY one msgid/str-pair yet
+		* 
+		**/
+		if(
+		!g_strncasecmp(temp_char,"\"",1)
+		&&
+		strstr(temp_char,": ")
+		&&
+		(msgid_count<=1)&&(msgstr_count<=1)
+		)
+		{
+			/**
+			* Add the current header-line
+			**/
+			g_print("HEADER : %s",temp_char);
+			head=g_list_prepend(temp,(gpointer)temp_char);
+			temp=head;
+		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
-			g_print("Line descriptor ar line %i\n",z);
+			comments_count++;
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
-			g_print("Msgid at line %i\n",z);
+			msgid_count++;
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
-			g_print("Msgstr at line %i\n",z);
+			msgstr_count++;
 		}
         }
+	g_print("List length : \"%i\"\n",g_list_length(head));
         /**
         * The list length ( aka lines count )
         **/
-        lines=g_list_length(temp);
+        lines=g_list_length(head);
+	for(z=1;z<lines;z++)
+	{
+		g_print("Printing %i. : %s",z,(gchar *)g_list_nth_data(head,z));
+	}
         /**
         * Show an updated status
         **/

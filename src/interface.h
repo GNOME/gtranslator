@@ -67,6 +67,7 @@ void paste_clipboard(GtkWidget *widget,gpointer useless);
 void clear_selection(GtkWidget *widget,gpointer useless);
 void text_has_got_changed(GtkWidget *widget,gpointer useless);
 void compile(GtkWidget *widget,gpointer useless);
+gint gtranslator_quit(GtkWidget *widget,gpointer useless);
 void disable_buttons();
 void enable_buttons();
 
