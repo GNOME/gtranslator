@@ -1,6 +1,6 @@
 # the ./man/Makefile.am for the gtranslator manual page
 
-gtranslator_man_dir = $(prefix)/man/man1
+gtranslator_man_dir = $(mandir)/man1
 
 gtranslator_man__DATA = gtranslator.1
 
