@@ -113,6 +113,12 @@ static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
 	GdkEvent *event);
 
 /*
+ * An own insertion callback for the messages table's popup menu to insert
+ *  the found, fitting translation from the learn buffer.
+ */
+static void insert_translation(GtkWidget *widget, gpointer insertion_kind);
+
+/*
  * Global variables
  */
 GtkWidget *tree;
@@ -127,11 +133,11 @@ ETableExtras *tree_extras;
 GtrMessagesTableColors *messages_table_colors;
 
 /*
- * hash table to associate an ETreePath with each message. Used
+ * Hash table to associate an ETreePath with each message. Used
  * in update_row to determine the node given a message that has been
  * updated
  */
-GHashTable *hash_table=NULL;	
+GHashTable *hash_table=NULL;
 
 /*
  * Pops up on a right click in the messages table -- should show any found 
@@ -168,17 +174,43 @@ static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
 			if(found_str)
 			{
 				GtkWidget	*explanatory_menu_item=NULL;
+				GtkWidget	*edit_sub_menu=NULL;
+				GtkWidget	*imt_menu_item, *separator, *ipmt_menu_item=NULL;
 
 				explanatory_menu_item=gtk_menu_item_new_with_label(_("Appropriate match:"));
+
 				gtk_widget_show(explanatory_menu_item);
 				gtk_menu_append(GTK_MENU(menu), explanatory_menu_item);
 
 				menu_item=gtk_menu_item_new_with_label(found_str);
+
+				edit_sub_menu=gtk_menu_new();
+
+				imt_menu_item=gtk_menu_item_new_with_label(_("Insert matching translation"));
+				separator=gtk_menu_item_new();
+				ipmt_menu_item=gtk_menu_item_new_with_label(_("Take as translation"));
+				
+				gtk_widget_show(imt_menu_item);
+				gtk_menu_append(GTK_MENU(edit_sub_menu), imt_menu_item);
+
+				gtk_widget_show(separator);
+				gtk_menu_append(GTK_MENU(edit_sub_menu), separator);
+
+				gtk_widget_show(ipmt_menu_item);
+				gtk_menu_append(GTK_MENU(edit_sub_menu), ipmt_menu_item);
+
+				gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu_item), edit_sub_menu);
+
+				gtk_signal_connect(GTK_OBJECT(imt_menu_item), "activate",
+					GTK_SIGNAL_FUNC(insert_translation), GINT_TO_POINTER(1));
+
+				gtk_signal_connect(GTK_OBJECT(ipmt_menu_item), "activate",
+					GTK_SIGNAL_FUNC(insert_translation), GINT_TO_POINTER(2));
 			}
 			else
 			{
 				menu_item=gtk_menu_item_new_with_label(
-					_("Found nothing appropriate in\n
+					_("Found nothing appropriate in\n\
  the personal learn buffer."));
 
 			}
@@ -199,6 +231,26 @@ static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
 	}
 
 	return TRUE;
+}
+
+/*
+ * Insert the found translation
+ */
+static void insert_translation(GtkWidget *widget, gpointer insertion_kind)
+{
+	switch(GPOINTER_TO_INT(insertion_kind))
+	{
+		case 1:
+			g_message("Insert found translation...");
+				break;
+
+		case 2:
+			g_message("Set found translation...");
+				break;
+
+		default:
+				break;
+	}
 }
 
 /*
