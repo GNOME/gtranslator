@@ -2,7 +2,7 @@
  * (C) 2001		Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Joe Man <trmetal@yahoo.com.hk>
- *			Peeter Vois <Peeter.Vois@mail.ee>
+ *			Peeter Vois <peeter@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
