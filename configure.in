@@ -4,7 +4,19 @@ dnl -------------------------------------------------------------------
 
 AC_INIT(src/parse.c)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gtranslator, 0.22)
+
+dnl -------------------------------------------------------------------
+dnl Versioning stuff
+dnl -------------------------------------------------------------------
+MAINVERSION=0
+SUBVERSION=22
+VERSION=$MAINVERSION.$SUBVERSION
+AC_SUBST(SUBVERSION)
+
+dnl -------------------------------------------------------------------
+dnl Init automake and the maintainer mode macros.
+dnl -------------------------------------------------------------------
+AM_INIT_AUTOMAKE(gtranslator, $VERSION)
 AM_MAINTAINER_MODE
 
 dnl -------------------------------------------------------------------
@@ -185,7 +197,11 @@ dnl -------------------------------------------------------------------
 AC_OUTPUT([
 Makefile
 data/Makefile
-data/gtranslator.keys
+data/desktop/Makefile
+data/gconf/Makefile
+data/mime/Makefile
+data/mime/gtranslator.keys
+data/oaf/Makefile
 macros/Makefile
 intl/Makefile
 src/Makefile
