@@ -34,7 +34,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=5.3
+export POZILLA_RELEASE=5.4
 
 #
 # Here we do define the corresponding i18n mailing list which should also get
@@ -837,9 +837,9 @@ echo -e "$STAT_TABLE" >> $BODY_FILE
 echo "" >> $BODY_FILE
 echo "--" >> $BODY_FILE
 echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
-echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
-echo "- the po-files - send a mail to Fatih Demir <kabalak@gtranslator.org>" >> $BODY_FILE
-echo "Thanks." >> $BODY_FILE
+echo "For questions concerning Pozilla or your translator's faith -- the po files --" >> $BODY_FILE
+echo "   send an EMail to Fatih Demir <kabalak@gtranslator.org>." >> $BODY_FILE
+echo "Thanks for using Pozilla!" >> $BODY_FILE
 
 #
 # Send the mail to the address(es).
