@@ -377,7 +377,7 @@ GtkWidget *gtranslator_messages_table_new()
  */
 void gtranslator_messages_table_create (void)
 {
-	GList *list;
+	GList *list=po->messages;
 	gint i=0;
 	
 	if(root_node)
@@ -392,8 +392,6 @@ void gtranslator_messages_table_create (void)
 	if(!file_opened)
 		return;
 
-	list=g_list_copy (po->messages);
-	
 	while(list)
 	{
 		GtrMsg *message=list->data;
