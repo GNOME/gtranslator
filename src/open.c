@@ -131,7 +131,7 @@ void gtranslator_open_compiled_po_file(gchar *file)
 	gchar *cmd;
 	gchar *tempfilename;
 
-	if(!gtranslator_utils_check_program("msgunfmt", _("uncompression")))
+	if(!gtranslator_utils_check_program("msgunfmt", 0))
 	{
 		return;
 	}
@@ -179,7 +179,7 @@ void open_compressed_po_file(gchar *file, gchar *command)
 	gchar *cmd;
 	gchar *tempfilename;
 
-	if(!gtranslator_utils_check_program(command, _("uncompression")))
+	if(!gtranslator_utils_check_program(command, 0))
 	{
 		return;
 	}
@@ -273,7 +273,7 @@ void gtranslator_open_ziped_po_file(gchar *file)
 
 	g_return_if_fail(file!=NULL);
 
-	if(!gtranslator_utils_check_program("unzip", _("uncompression")))
+	if(!gtranslator_utils_check_program("unzip", 0))
 	{
 		return;
 	}

@@ -94,7 +94,7 @@ void gtranslator_save_compiled_po_file(const gchar *file)
 	gchar *cmd;
 	gchar *tempfilename;
 
-	if(!gtranslator_utils_check_program("msgfmt", _("compression")))
+	if(!gtranslator_utils_check_program("msgfmt", 1))
 	{
 		return;
 	}
@@ -135,7 +135,7 @@ void save_compressed_po_file(const gchar *file, gchar *command)
 	gchar *cmd;
 	gchar *tempfilename;
 
-	if(!gtranslator_utils_check_program(command, _("compression")))
+	if(!gtranslator_utils_check_program(command, 1))
 	{
 		return;
 	}
@@ -214,7 +214,7 @@ void gtranslator_save_ziped_po_file(const gchar *file)
 
 	g_return_if_fail(file!=NULL);
 
-	if(!gtranslator_utils_check_program("zip", _("compression")))
+	if(!gtranslator_utils_check_program("zip", 1))
 	{
 		return;
 	}

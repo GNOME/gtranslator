@@ -402,26 +402,24 @@ gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
  * Check for a needed program -- returns FALSE on failure (how logical, not ,-)).
  */
 gboolean gtranslator_utils_check_program(const gchar *program_name,
-        const gchar *program_type)
+	const gint type_int)
 {
 	g_return_val_if_fail(program_name!=NULL, FALSE);
-	g_return_val_if_fail(program_type!=NULL, FALSE);
 	
 	if(!gnome_is_program_in_path(program_name))
 	{
 		gchar *warning_message;
 
-		/*
-		 * Translators: The first format stands for a program_type and is something
-		 *  like "uncompression", "compression" or something similar.
-		 *
-		 * An example output would be: 
-		 * The necessary uncompression program `gunzip' is missing!
-		 *               ^^^^^^^^^^^^^          ^^^^^^ 
-		 *               First %s               Second %s
-		 */
-		warning_message=g_strdup_printf(_("The necessary %s program `%s' is missing!"), 
-			program_type, program_name);
+		if(type_int==0)
+		{
+			warning_message=g_strdup_printf(
+				_("The necessary decompression program `%s' is missing!"), program_name);
+		}
+		else
+		{
+			warning_message=g_strdup_printf(
+				_("The necessary compression program `%s' is missing!"), program_name);
+		}
 
 		gnome_app_warning(GNOME_APP(gtranslator_application), warning_message);
 		g_free(warning_message);
