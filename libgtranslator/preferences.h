@@ -17,7 +17,7 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H 1
 
-#include <parse-db.h>
+#include <libgtranslator/parse-db.h>
 #include <time.h>
 
 /**

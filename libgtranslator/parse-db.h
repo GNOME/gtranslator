@@ -27,11 +27,6 @@
 #include <parser.h>
 #include <xmlmemory.h>
 
-/**
-* The messages structure headers.
-**/
-#include <messages.h>
-
 /* Maybe we have already included this stuff */
 #ifndef __GNOME_I18N_H__
 

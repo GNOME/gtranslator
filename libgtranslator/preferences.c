@@ -14,7 +14,7 @@
 *
 **/
 
-#include <preferences.h>
+#include <libgtranslator/preferences.h>
 
 /**
 * Cleanup the namespace. Remove the '_' defines for now ...

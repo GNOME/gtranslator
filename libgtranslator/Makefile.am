@@ -42,6 +42,7 @@ libgtranslator_include_dir = $(includedir)/libgtranslator
 libgtranslator_include__DATA = parse-db.h \
 	gtranslator-preferences-dialog.h \
 	handle-db.h \
+	messages.h \
 	preferences.h \
 	stylistics.h \
 	team-handle.h
@@ -66,4 +67,4 @@ $(GTRANSLATORD_SOURCES): gtranslatord.idl
 clean-am:
 	-rm -f $(GTRANSLATORD_SOURCES)
 
-EXTRA_DIST = $(idl__DATA) $(libgtranslator_include__DATA) foo.xml
+EXTRA_DIST = $(idl__DATA) $(libgtranslator_include__DATA)

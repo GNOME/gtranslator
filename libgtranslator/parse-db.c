@@ -14,7 +14,7 @@
 *
 **/
 
-#include "parse-db.h"
+#include <libgtranslator/parse-db.h>
 
 /**
 * Parses the lang.xml file.

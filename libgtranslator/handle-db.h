@@ -17,7 +17,7 @@
 #ifndef HANDLE_DB_H
 #define HANDLE_DB_H 1
 
-#include <parse-db.h>
+#include <libgtranslator/parse-db.h>
 
 /**
 * Addes a node to the given doc.

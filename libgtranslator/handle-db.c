@@ -14,7 +14,7 @@
 *
 **/
 
-#include "handle-db.h"
+#include <libgtranslator/handle-db.h>
 
 /**
 * Adds a node to the given doc.

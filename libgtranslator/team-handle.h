@@ -17,7 +17,7 @@
 #ifndef TEAM_HANDLE_H
 #define TEAM_HANDLE_H 1
 
-#include <parse-db.h>
+#include <libgtranslator/parse-db.h>
 
 /**
 * These functions are for the team-handling of gtranslatord.

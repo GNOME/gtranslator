@@ -17,7 +17,7 @@
 /**
 * Include the header.
 **/
-#include <stylistics.h>
+#include <libgtranslator/stylistics.h>
 
 /**
 * This routines sets all the nice colors.

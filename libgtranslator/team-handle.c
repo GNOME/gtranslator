@@ -14,7 +14,7 @@
 *
 **/
 
-#include <team-handle.h>
+#include <libgtranslator/team-handle.h>
 
 /**
 * This one inits a new language team.
