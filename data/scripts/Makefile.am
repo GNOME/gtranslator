@@ -8,4 +8,4 @@ script_SCRIPTS = \
 	cleanup-gtranslator-settings.sh \
 	my-update.sh
 
-EXTRA_DIST = $(script_SCRIPTS)
+EXTRA_DIST = $(script_SCRIPTS) $(bin_SCRIPTS)
