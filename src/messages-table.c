@@ -50,7 +50,8 @@
 
 enum
 {
-  STATUS_COLUMN,
+// pv, I want the tree to be in original column
+//  STATUS_COLUMN,
   ORIGINAL_COLUMN,
   TRANSLATION_COLUMN,
   MSG_PTR_COLUMN,
@@ -124,6 +125,26 @@ static GHashTable *hash_table=NULL;
  *  translation from the learn buffer.
  */
 
+void gtranslator_tree_size_allocate( 
+		GtkTreeView *widget, 
+		GtkAllocation *allocation, 
+		gpointer data )
+{
+	/*
+		Here we will change the column widths so that the message table will look nice.
+		This function will be called when the size of treeview widget will be changed.
+	*/
+	GtkTreeViewColumn *col;
+	gint width;
+	width = allocation->width >> 1;
+	col = gtk_tree_view_get_column( widget, ORIGINAL_COLUMN );
+	gtk_tree_view_column_set_min_width( col, width );
+	gtk_tree_view_column_set_max_width( col, width );
+	col = gtk_tree_view_get_column( widget, TRANSLATION_COLUMN );
+	gtk_tree_view_column_set_min_width( col, width );
+	gtk_tree_view_column_set_max_width( col, width );
+}
+
 
 /*
  * Create the new messages table
@@ -136,25 +157,35 @@ GtkWidget *gtranslator_messages_table_new()
   GtkTreeSelection *selection;
   gint i;
 
-  gchar *titles[][2] = {{_("Status"),      "text"},
-			{_("Original"),    "text"},
-			{_("Translation"), "text"}};
+  gchar *titles[][2] = {
+  		// pv, i want the tree to be in original column
+ 		//{_("Status"),      "text"},
+		{_("Original"),    "text"},
+		{_("Translation"), "text"}};
   
-  store = gtk_tree_store_new (N_COLUMNS,
-			      G_TYPE_STRING,
-			      G_TYPE_STRING,
-			      G_TYPE_STRING,
-			      G_TYPE_POINTER);
+  store = gtk_tree_store_new (
+		N_COLUMNS,
+		// pv, i want the tree to be in original column
+		// G_TYPE_STRING,
+		G_TYPE_STRING,
+		G_TYPE_STRING,
+		G_TYPE_POINTER);
   
   tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tree), TRUE);
-  gtk_tree_view_set_search_column (GTK_TREE_VIEW (tree),
-				   STATUS_COLUMN);
+// pv, why is this needed ?
+//  gtk_tree_view_set_search_column (GTK_TREE_VIEW (tree),
+//				   STATUS_COLUMN);
   
   g_object_unref (G_OBJECT (store));
 
+// pv, this for managing column widths
+	g_signal_connect( G_OBJECT( tree ), "size-allocate",
+		G_CALLBACK( gtranslator_tree_size_allocate ), NULL );
+
   //we stop at N_COLUMNS-1 because we don't want to display the GtrMsg* 
   //we store in the GtkTreeStore
+  
   for (i=0; i < N_COLUMNS-1; i++) {
     renderer = gtk_cell_renderer_text_new ();
     column = gtk_tree_view_column_new_with_attributes (titles[i][0], renderer,
@@ -201,19 +232,25 @@ void gtranslator_messages_table_create (void)
 
   gtk_tree_store_append (model, &unknown_node, NULL);
   gtk_tree_store_set (model, &unknown_node, 
-		      STATUS_COLUMN, _("Untranslated"), 
+  // pv, i want the tree to be in original column
+		      ORIGINAL_COLUMN, _("Untranslated"), 
+			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
   gtk_tree_store_append (model, &fuzzy_node, NULL);
   gtk_tree_store_set (model, &fuzzy_node, 
-		      STATUS_COLUMN, _("Fuzzy"), 
+  // pv, i want the tree to be in original column
+		      ORIGINAL_COLUMN, _("Fuzzy"), 
+			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
   gtk_tree_store_append (model, &translated_node, NULL);
   gtk_tree_store_set (model, &translated_node, 
-		      STATUS_COLUMN, _("Translated"), 
+  // pv, i want the tree to be in original column
+		      ORIGINAL_COLUMN, _("Translated"), 
+			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
@@ -224,7 +261,8 @@ void gtranslator_messages_table_create (void)
     case GTR_MSG_STATUS_UNKNOWN:
       gtk_tree_store_append(model, &cur_node, &unknown_node);
       gtk_tree_store_set(model, &cur_node,
-			 STATUS_COLUMN, "",
+	  // pv, i want to three to be in original column
+	  //	 STATUS_COLUMN, "",
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 MSG_PTR_COLUMN, message,
@@ -234,7 +272,8 @@ void gtranslator_messages_table_create (void)
     case GTR_MSG_STATUS_TRANSLATED:
       gtk_tree_store_append(model, &cur_node, &translated_node);
       gtk_tree_store_set(model, &cur_node,
-			 STATUS_COLUMN, "",
+	  // pv, i want to three to be in original column
+	  //	 STATUS_COLUMN, "",
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 MSG_PTR_COLUMN, message,
@@ -248,7 +287,8 @@ void gtranslator_messages_table_create (void)
     default:
       gtk_tree_store_append(model, &cur_node, &fuzzy_node);
       gtk_tree_store_set(model, &cur_node,
-			 STATUS_COLUMN, "",
+	  // pv, i want to three to be in original column
+	  //	 STATUS_COLUMN, "",
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 MSG_PTR_COLUMN, message,
