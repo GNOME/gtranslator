@@ -24,6 +24,7 @@
 
 #include "defines.include"
 #include "gui.h"
+#include "learn.h"
 #include "messages-table.h"
 #include "messages.h"
 #include "message.h"
@@ -99,6 +100,12 @@ typedef struct
 } GtrMessagesTableColors;
 
 /*
+ * A new kind of popup menu for our beloved messages table.
+ */
+static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
+	GdkEvent *event);
+
+/*
  * Global variables
  */
 GtkWidget *tree;
@@ -118,6 +125,71 @@ GtrMessagesTableColors *messages_table_colors;
  * updated
  */
 GHashTable *hash_table=NULL;	
+
+/*
+ * Pops up on a right click in the messages table -- should show any found 
+ *  translation from the learn buffer.
+ */
+static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
+	GdkEvent *event)
+{
+	if(event->button.button==3)
+	{
+		GtrMsg *message=NULL;
+
+		message=e_tree_memory_node_get_data(tree_memory, path);
+
+		/*
+		 * Check if we're on an untranslated message before operating 
+		 *  any further.
+		 */
+		if(message && message->msgid && !message->msgstr)
+		{
+			GtkWidget	*menu=NULL;
+			GtkWidget 	*menu_item=NULL;
+			gchar		*found_str=NULL;
+			
+			/*
+			 * Query our own, personal learn buffer for the 
+			 *  original message string.
+			 */
+			found_str=gtranslator_learn_get_learned_string(message->msgid);
+
+			menu=gtk_menu_new();
+			
+			if(found_str)
+			{
+				GtkWidget	*explanatory_menu_item=NULL;
+
+				explanatory_menu_item=gtk_menu_item_new_with_label(_("Appropriate match:"));
+				gtk_widget_show(explanatory_menu_item);
+				gtk_menu_append(GTK_MENU(menu), explanatory_menu_item);
+
+				menu_item=gtk_menu_item_new_with_label(found_str);
+			}
+			else
+			{
+				menu_item=gtk_menu_item_new_with_label(_("Found nothing appropriate in the personal learn buffer."));
+
+			}
+
+			/*
+			 * Show the menu items.
+			 */
+			gtk_widget_show(menu_item);
+			gtk_menu_append(GTK_MENU(menu), menu_item);
+			
+			/*
+			 * Perform our popup menu action.
+			 */
+			gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
+					NULL, NULL, event->button.button,
+					event->button.time);
+		}
+	}
+
+	return TRUE;
+}
 
 /*
  * Initialize and set up the generally used messages table colors.
@@ -597,6 +669,9 @@ GtkWidget *gtranslator_messages_table_new()
 
 	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
 		GTK_SIGNAL_FUNC(row_selected), NULL);
+	
+	gtk_signal_connect(GTK_OBJECT(tree), "right_click",
+		GTK_SIGNAL_FUNC(tree_popup_menu), NULL);
 	
 	return messages_tree;
 }
