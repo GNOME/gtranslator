@@ -17,6 +17,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "comment.h"
 #include "gui.h"
 #include "nautilus-string.h"

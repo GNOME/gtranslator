@@ -39,7 +39,7 @@ typedef struct {
 	gchar *lcode;
 	
 	/*
-	 * 3 - The encoding preferably used for this language (e.g. "iso-8859-9").
+	 * 3 - The encoding mostly used for the language (e.g. "iso-8859-9").
 	 */
 	gchar *enc;
 	
@@ -55,9 +55,9 @@ typedef struct {
 } GtrLanguage;
 
 /*
- * NOTE : I had to use the N() macro as the table must be constant...
- *	  but in the Prefs-box and in the other places where they appear
- *	   translated because of a gettext()-calls...
+ * This is the main languages list used in gtranslator -- the languages values
+ *  are used in many places in the sources so that this table should be quite
+ *   right.
  */
 static GtrLanguage languages[] = {
 	{

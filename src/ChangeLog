@@ -1,5 +1,7 @@
 2001-08-27  Fatih Demir <kabalak@gtranslator.org>
 
+	* comment.c: Include <config.h> conditionally.
+
 	* gui.c: Use "gtk_menu_popup" instead of the current (quite "bad")
 		"gnome_popup_dialog_modal" + "gtk_widget_destroy" combination;
 		  the popup menu doesn't get destroyed right after it's display
