@@ -18,4 +18,7 @@ Applicationicon_DATA = gtranslator.png
 ##
 @XML_I18N_MERGE_DESKTOP_RULE@
 
-EXTRA_DIST = $(Application_DATA) $(Applicationicon_DATA)
+EXTRA_DIST = $(Application_DATA) \
+	$(Applicationicon_DATA) \
+	$(Application_predata)
+	
