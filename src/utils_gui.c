@@ -74,8 +74,8 @@ void gtranslator_utils_invert_dot(gchar *str)
 			 * that doesn't have it, feel free to change it
 			 * to whatever you think will be better 
 			 */
-			str[i]=(_("·"))[0];
-		} else if(str[i]==(_("·"))[0]) {
+			str[i]=(_("\xb7"))[0];
+		} else if(str[i]==(_("\xb7"))[0]) {
 			str[i]=' ';
 		}
 	}

@@ -564,7 +564,7 @@ void gtranslator_application_bar_update(gint pos)
 		 */
 		if ((po->length - po->translated)>0)
 		{
-			guint missya;
+			gint missya;
 			missya = po->length - po->translated;
 			status=g_strdup_printf(_("%s [ %i Untranslated left ]"), _("Untranslated"), missya);
 		} else {
@@ -764,6 +764,19 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 
 	if(file_opened)
 	{
+		/*
+		 * If we're having a Ctrl+Shift+Arrow Key issue, then respect
+		 *  this to be something another then just Ctrl+Arrow Key.
+		 */
+		if(event->state & GDK_SHIFT_MASK)
+		{
+			return TRUE;
+		}
+
+		/*
+		 * Now handle out "normal" navigation keys consisting out of
+		 *  Ctrl+Arrow Key.
+		 */
 		if(event->state & GDK_CONTROL_MASK)
 		{
 			switch(event->keyval)

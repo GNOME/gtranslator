@@ -109,6 +109,8 @@ static void append_line(gchar ** old, const gchar * tail)
 			s++;
 			if (tail[s] == 'n')
 				to_add[d++] = '\n';
+			else if(tail[s] == 'r')
+				to_add[d++] = '\r';
 			else if (tail[s] == 't')
 				to_add[d++] = '\t';
 			else if ((tail[s] == '"') || (tail[s] == '\\'))

@@ -1,5 +1,16 @@
 2001-10-07  Fatih Demir <kabalak@gtranslator.org>
 
+	* syntax.c, utils_gui.c & views.c: Applied some of Yukihiro's tips for
+		#60350 -- maybe we're getting nearer to the solution of this
+		 bug?!
+
+	* gui.c: Discard the Ctrl+Shift+Arrow Key "key_press" events as these
+		aren't the same like our navigation keys Ctrl+Arrow Key; fixes
+		 #61822.
+
+	* parse.c: Also un-escape the '\r' rightly -- fixes some warnings from
+		badly formed messages in projects like XST.
+
 	* save.h: Comment correction.
 
 	* utils.c: Get the 1% float "gtranslator_utils_calculate_similarity"

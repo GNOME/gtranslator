@@ -103,7 +103,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 	if(GtrPreferences.dot_char)
 	{
-		specialchar=_("·")[0];
+		specialchar=_("\xb7")[0];
 	}
 	else
 	{

@@ -268,7 +268,7 @@ void show_up_formats(GtkWidget *output_widget, const gchar *string)
 			}
 			else
 			{
-				if(string[z]!=_("·")[0] && !ispunct(string[z]) &&
+				if(string[z]!=_("\xb7")[0] && !ispunct(string[z]) &&
 					!iscntrl(string[z]))
 				{
 					formats=g_string_append_c(formats, string[z]);
@@ -338,7 +338,7 @@ void insert_space(GString **string)
 
 	if(GtrPreferences.dot_char)
 	{
-		*string=g_string_append(*string, _("·"));
+		*string=g_string_append(*string, _("\xb7"));
 	}
 	else
 	{
