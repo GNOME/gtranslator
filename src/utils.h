@@ -50,18 +50,6 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string);
 
 /*
- * Convert the msgid & msgstr's to/from UTF-8.
- */
-void gtranslator_utils_convert_message_to_utf8(GtrMsg **msg);
-void gtranslator_utils_convert_message_from_utf8(GtrMsg **msg);
-
-/*
- * Convert the whole messages to/from UTF-8.
- */
-void gtranslator_utils_convert_to_utf8(void);
-void gtranslator_utils_convert_from_utf8(void);
-
-/*
  * Get the right localename/charset for the language.
  */
 gchar *gtranslator_utils_get_locale_name(void); 

@@ -27,23 +27,14 @@
 
 #include <dirent.h>
 
-#include <locale.h>
-
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/libgnomeui.h>
-
-#include <gal/widgets/e-unicode.h>
 
 /*
  * The used ref' count for the language lists.
  */
 static gint list_ref=0; 
-
-/*
- * Internal capsulating function for converting to/from UTF-8.
- */
-void convert_whole_stuff(GList *list, GFreeFunc function);
 
 /*
  * Strip the filename to get a "raw" enough filename.
@@ -80,7 +71,7 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 /*
  * Execute the whole stuff "function" for all list entries.
  */
-void convert_whole_stuff(GList *list, GFreeFunc function)
+void convert_all_messages(GList *list, GFreeFunc function)
 {
 	g_return_if_fail(list!=NULL);
 	
@@ -191,94 +182,6 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string)
 	}
 
 	return -1;
-}
-
-/*
- * Convert the given GtrMsg to UTF-8.
- */
-void gtranslator_utils_convert_message_to_utf8(GtrMsg **msg)
-{
-	gchar *msgstr;
-
-	g_return_if_fail(*msg!=NULL);
-	msgstr=g_strdup(GTR_MSG(*msg)->msgstr);
-
-	if(msgstr)
-	{
-		GTR_MSG(*msg)->msgstr=e_utf8_from_locale_string(msgstr);
-	}
-
-	g_free(msgstr);
-}
-
-/*
- * Convert the given GtrMsg from UTF-8 to a "normal" string.
- */
-void gtranslator_utils_convert_message_from_utf8(GtrMsg **msg)
-{
-	gchar *msgstr;
-
-	g_return_if_fail(*msg!=NULL);
-	msgstr=g_strdup(GTR_MSG(*msg)->msgstr);
-
-	if(msgstr)
-	{
-		GTR_MSG(*msg)->msgstr=e_utf8_to_locale_string(msgstr);
-	}
-
-	g_free(msgstr);
-}
-
-/*
- * Convert all messages completely to UTF-8.
- */
-void gtranslator_utils_convert_to_utf8(void)
-{
-	gchar *old_env;
-	
-	if(!file_opened)
-	{
-		return;
-	}
-
-	old_env=setlocale(LC_ALL, "");
-	
-	setlocale(LC_ALL, 
-		gtranslator_utils_get_locale_name());
-	
-	convert_whole_stuff(po->messages, 
-		(GFreeFunc) gtranslator_utils_convert_message_to_utf8);
-
-	/*
-	 * Set the po file charset to UTF-8 as we did convert it now.
-	 */
-	po->header->charset="UTF-8";
-
-	setlocale(LC_ALL, old_env);
-	g_free(old_env);
-}
-
-/*
- * Convert all messages completely from UTF-8.
- */
-void gtranslator_utils_convert_from_utf8(void)
-{
-	gchar *old_env;
-	
-	if(!file_opened)
-	{
-		return;
-	}
-
-	old_env=setlocale(LC_ALL, "");
-	setlocale(LC_ALL, 
-		gtranslator_utils_get_locale_name());
-
-	convert_whole_stuff(po->messages,
-		(GFreeFunc) gtranslator_utils_convert_message_from_utf8);
-
-	setlocale(LC_ALL, old_env);
-	g_free(old_env);
 }
 
 /*

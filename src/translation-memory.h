@@ -52,9 +52,35 @@ typedef struct
 } GtrTM;
 
 /*
+ * A gtranslator-specific ID container -- is generated out oif the specs for
+ *  the po-file and the message.
+ */
+typedef struct
+{
+	gchar	*po_file;
+	gchar	*po_language;
+	gchar	*po_version;
+	gchar	*po_date;
+
+	gint	 po_position;
+} GtrID;
+
+/*
  * Should be an interface to append a memory entry to the currently used TM.
  */
 void gtranslator_tm_add(const gchar *message, const gchar *translation,
 	const gchar *language_code, const gchar *eventual_id);
+
+/*
+ * Return the pos if there's already such an entry named "message" in the TM,
+ *  or -1 if not.
+ */
+gint gtranslator_tm_query_for_message(const gchar *message, 
+	const gchar *eventual_id);
+
+/*
+ * Query the TM for the ID gtranslator generates internally for the entries.
+ */
+gint gtranslator_tm_query_for_id(const gchar *eventual_id);
 
 #endif

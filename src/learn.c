@@ -40,8 +40,21 @@ void gtranslator_learn_message(GtrMsg *msg)
 		po->header->po_date,
 		g_list_position(po->messages, foolist));
 
-	gtranslator_tm_add(msg->msgid, msg->msgstr,
-		gtranslator_utils_get_locale_name(), id_informations);
+	if(gtranslator_tm_query_for_message(msg->msgid)==-1)
+	{
+		/*
+		 * Add the translated message as a new entry to the current,
+		 *  personal TM.
+		 */
+		gtranslator_tm_add(msg->msgid, msg->msgstr,
+			gtranslator_utils_get_locale_name(), id_informations);
+	}
+	else
+	{
+		/*
+		 * FIXME: Warning/error about it.
+		 */
+	}
 
 	g_free(id_informations);
 }

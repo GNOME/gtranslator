@@ -67,6 +67,7 @@ gtranslator_SOURCES = \
 	undo-core.c undo-core.h \
 	undo.c undo.h \
 	update.c \
+	utf8.c utf8.h \
 	utils.c utils.h \
 	vfs-handle.c vfs-handle.h \
 	views.c views.h
