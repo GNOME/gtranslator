@@ -1,5 +1,6 @@
 #undef BIND_MIME
 #undef ENABLE_NLS
+#undef GCONF_IS_PRESENT
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT
 #undef HAVE_LC_MESSAGES

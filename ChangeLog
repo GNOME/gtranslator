@@ -1,3 +1,19 @@
+2000-09-19  Fatih Demir	<kabalak@gmx.net>
+
+	* README: Updated the version number.
+
+	* configure.in: Uncommented the GConf check and made it
+		check for GConf >= 0.9 and put some stuff around
+		 it.
+
+		Also made some additional substitutions for some
+		 compilation flags and put the information whether
+		  GConf is used onto the output screen of the
+		   ./configure-screen.
+
+	* acconfig.h: Added GCONF_IS_PRESENT to the symbols'
+		list.
+
 2000-09-18  Fatih Demir	<kabalak@gmx.net>
 
 	* man/Makefile.am: Use $(mandir) instead of $(prefix)/man
