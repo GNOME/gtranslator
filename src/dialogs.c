@@ -32,13 +32,13 @@ static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 			     gpointer findy);
 
-void open_uri(GtkWidget *widget, gpointer useless);
 
 /*
- * Generally used two widgets for the URI dialog.
+ * The open URI dialog signal function:
  */ 
-GtkWidget 	*combobox=NULL,
-		*entry=NULL;
+void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
+	gpointer entrydata);
+
 
 void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
 {
@@ -358,6 +358,7 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(match_case_toggled), NULL);
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
+	
 	show_nice_dialog(&dialog, "gtranslator -- find");
 }
 
@@ -398,90 +399,79 @@ void compile_error_dialog(FILE * fs)
  */ 
 void open_uri_dialog(GtkWidget *widget, gpointer useless)
 {
-	GtkWidget 	*dialog=NULL,
-			*table=NULL,
-			*label=NULL;
+	GtkWidget 	*dialog=NULL;
+	GtkWidget	*entry=NULL;
 			
-	GtkWidget 	*open_button=NULL,
-			*close_button=NULL;
-			
-	GList 		*protocols=NULL;
+	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
+		_("Open"), _("Cancel"), NULL);	
 
-	protocols=g_list_append(protocols, (gpointer) "http://");
-	protocols=g_list_append(protocols, (gpointer) "ftp://");
-	protocols=g_list_append(protocols, (gpointer) "file:/");
-	
-	dialog=gtk_dialog_new();
-	gtk_window_set_title(GTK_WINDOW(dialog), 
-		_("gtranslator -- open from URI"));
-
-	label=gtk_label_new(
-	_("Select the URI protocol and the URI you would like to open"));
-	
-	open_button=gnome_stock_button(_("Open"));
-	close_button=gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
-
-	combobox=gtk_combo_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(combobox), protocols);
-
-	table=gtk_table_new(2, 3, FALSE);
-	gtk_table_set_row_spacing(GTK_TABLE(table), 0, 5);
-	gtk_table_set_col_spacing(GTK_TABLE(table), 0, 5);
-	
 	entry=gnome_entry_new("URI");
-
-	gtk_table_attach_defaults(GTK_TABLE(table), combobox, 0, 1, 1, 2);
-	gtk_table_attach_defaults(GTK_TABLE(table), entry, 1, 2, 1, 2);
-
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
-		TRUE, TRUE, 0);
-
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), table,
-		TRUE, FALSE, 0);
 	
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->action_area),
-		open_button,
-		FALSE, FALSE, 0);
-
-	gtk_box_pack_end(GTK_BOX(GTK_DIALOG(dialog)->action_area),
-		close_button,
-		FALSE, FALSE, 0);
-
-	gtk_signal_connect_object(GTK_OBJECT(close_button), "clicked",
-		GTK_SIGNAL_FUNC(gtk_widget_destroy), GTK_OBJECT(dialog));
-
-	gtk_signal_connect(GTK_OBJECT(open_button), "clicked",
-		GTK_SIGNAL_FUNC(open_uri), NULL);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), entry,
+		FALSE, FALSE, 0);	
 	
-	gtk_window_set_default_size(GTK_WINDOW(dialog), 300, 120);
-	
+	gtk_window_set_focus(GTK_WINDOW(dialog),
+		gnome_entry_gtk_entry(GNOME_ENTRY(entry)));
+
+	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
+		GTK_SIGNAL_FUNC(open_uri_dialog_clicked), entry);
+			
 	show_nice_dialog(&dialog, NULL);
 }
 
 /*
  * Checks the URI before it's passed to the core functions.
  */ 
-void open_uri(GtkWidget *widget, gpointer useless)
+void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
+	gpointer entrydata)
 {
-	GString *urilocation=g_string_new(gtk_entry_get_text(
-		GTK_ENTRY(gnome_entry_gtk_entry(
-			GNOME_ENTRY(entry)))));
+	GString *uri=g_string_new("");
 
-	gchar *protocol=gtk_entry_get_text(GTK_ENTRY(
-		GTK_COMBO(combobox)->entry));
-
-	if(urilocation->len <= 0)
+	if(button==GNOME_OK)
 	{
-		gnome_app_error(GNOME_APP(app1), 
-			g_strdup_printf(_("No URI given for protocol %s!"),
-			protocol));
+		/*
+		 * Get the URI data from the GnomeEntry.
+		 */ 
+		uri=g_string_append(uri, gtk_editable_get_chars(
+			GTK_EDITABLE(gnome_entry_gtk_entry(entrydata)),
+				0, -1));
+
+		
+		if(uri->len <= 0)
+		{
+			/*
+			 * Show an error dialog but don't close down the 
+			 *  Open from URI dialog.
+			 */  
+			gnome_app_error(GNOME_APP(app1),
+				_("No URI given!"));	
+		}
+		else
+		{
+			/*
+			 * Check if it's one of our supported URI
+			 *  types or if it's a "hidden" http URI.
+			 */ 
+			if(!g_strncasecmp(uri->str, "http", 4)||
+				!g_strncasecmp(uri->str, "ftp", 3)||
+				!g_strncasecmp(uri->str, "file", 4)||
+				!g_strncasecmp(uri->str, "www.", 4))
+			{
+				gnome_dialog_close(dialog);
+				gtranslator_open_po_file(uri->str);
+			}
+			else
+			{
+				gnome_app_error(GNOME_APP(app1),
+				_("No supported URI protocol (like \"ftp://\") given!"));
+			}
+		}
 	}
 	else
 	{
-		urilocation=g_string_prepend(urilocation, protocol);
-		
-		gtranslator_open_po_file(urilocation->str);
+		gnome_dialog_close(dialog);
 	}
 
-	g_string_free(urilocation, 1);
+	g_string_free(uri, 0);
+	
 }
