@@ -64,6 +64,7 @@ gtranslator_SOURCES = \
 	parse.c	parse.h \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \
+	prefs-dialog.c prefs-dialog.h \
 	query.c query.h \
 	replace.c replace.h \
 	runtime-config.c runtime-config.h \

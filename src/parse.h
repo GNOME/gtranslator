@@ -21,10 +21,6 @@
 #ifndef GTR_PARSE_H
 #define GTR_PARSE_H 1
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <stdio.h>
 
 #include "gnome-regex.h"
