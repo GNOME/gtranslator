@@ -509,7 +509,11 @@ void create_app1(void)
 	**/
 	if(wants.use_own_specs)
 	{
-		gtranslator_set_style(text1, trans_box);
+		/**
+		* Set the own specs for colors and for the font.
+		**/
+		gtranslator_set_style(text1);
+		gtranslator_set_style(trans_box);
 	}
 	
 	/**
