@@ -646,7 +646,7 @@ void query_dialog(void)
 
 			result=gtranslator_query_simple(query);
 
-			if(!result->translation)
+			if(!result)
 			{
 				gnome_app_warning(GNOME_APP(app1),
 				_("Couldn't find any result for the query!"));

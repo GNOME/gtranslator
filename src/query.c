@@ -49,7 +49,7 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 
 	str=dgettext(query->domain, query->message);
 
-	if(str!=query->message)
+	if(strcmp(str, query->message))
 	{
 		GtrQueryResult *result=g_new(GtrQueryResult, 1);
 

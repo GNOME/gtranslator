@@ -3,7 +3,9 @@
 	* dialogs.c/.h: Added a query dialog which does even work now.
 
 	* query.c: Corrected stupid error, do use strcmp for sorting the 
-		domains list.
+		domains list and don't simply check it via !=; use strcmp
+		 for this -- why would've strcmp be invented in C if it would
+		  be as easy as in C++ via str!=query->message...
 
 	* syntax.c: Do also insert syntax highlighted text if only one char
 		is left over.
