@@ -1126,6 +1126,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 	}
 }
 
+#ifdef USE_GAL_GUI
 static GdkPixbuf *get_my_icon(EShortcutBar *bar, const gchar *url, gpointer useless)
 {
 	GdkPixbuf *pix;
@@ -1141,3 +1142,4 @@ static GdkPixbuf *get_my_icon(EShortcutBar *bar, const gchar *url, gpointer usel
 	gdk_pixbuf_ref(pix);
 	return pix;
 }
+#endif
