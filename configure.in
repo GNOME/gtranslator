@@ -8,7 +8,7 @@ AC_INIT(gtranslator, 0.51,
 	http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator)
 
 AC_CONFIG_SRCDIR(src/main.c)
-AM_CONFIG_HEADER(gtranslator-configuration.h)
+AM_CONFIG_HEADER(gtranslator-config.h)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_MAINTAINER_MODE
@@ -60,6 +60,7 @@ dnl
 dnl ==========================================================================
 
 GTK_REQUIRED=2.0.0
+GAL_REQUIRED=2.0.0
 LIBGNOME_REQUIRED=1.105.0
 LIBGNOMEUI_REQUIRED=1.105.0
 LIBBONOBO_REQUIRED=1.107.0
@@ -78,14 +79,21 @@ AC_SUBST(GNOME_BUILD_REQUIRED)
 AC_SUBST(GNOME_VFS_REQUIRED)
 AC_SUBST(LIBXML_REQUIRED)
 
-PKG_CHECK_MODULES(GTRANSLATOR, libgnome-2.0 >= $LIBGNOME_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED libbonobo-2.0 >= $LIBBONOBO_REQUIRED libbonoboui-2.0 >= $LIBBONOBOUI_REQUIRED gnome-vfs-2.0 >= $GNOME_VFS_REQUIRED libxml-2.0 >= $LIBXML_REQUIRED)
+PKG_CHECK_MODULES(GTRANSLATOR, [
+libgnome-2.0 >= $LIBGNOME_REQUIRED 
+libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED 
+libbonobo-2.0 >= $LIBBONOBO_REQUIRED 
+libbonoboui-2.0 >= $LIBBONOBOUI_REQUIRED 
+gnome-vfs-2.0 >= $GNOME_VFS_REQUIRED 
+libxml-2.0 >= $LIBXML_REQUIRED 
+gal-2.0 >= $GAL_REQUIRED
+])
 
 AC_SUBST(GTRANSLATOR_CFLAGS)
 AC_SUBST(GTRANSLATOR_LIBS)
 
 DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
 AC_SUBST(DEPRECATED_FLAGS)
-
 
 dnl -------------------------------------------------------------------
 dnl Whether we use the depricated gtk+ functions
