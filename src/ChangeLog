@@ -1,5 +1,17 @@
 2001-02-24  Fatih Demir <kabalak@gtranslator.org>
 
+	* prefs.c: Show up font informations on the preferences page rather
+		then simply showing the font button.
+
+	* stylistics.c: Removed the COLOR_VALUE_END_CHAR parts of the switch
+		tree as it isn't used anymore/will not be used in the future.
+
+	* stylistics.h: Added the new types which are also used as "classes"
+		in the syntax highlighting code to easify the later 
+		 customization of the syntax highlight colors and removed the
+		  COLOR_VALUE_END_CHAR enum item as it'll never be used
+		   (gtranslator automatically makes the end chars correctly).
+
 	* parse.c: Check if there's any header before using any simple header
 		comment while saving specially opened gettext po file; also
 		 count the sticky messages as translated messages and renew the

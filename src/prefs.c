@@ -338,9 +338,16 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	font=gnome_font_picker_new();
 	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
 		_("gtranslator -- font selection"));
+	
 	if(wants.font)
+	{
 		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
 						wants.font);
+	}
+
+	gnome_font_picker_set_mode(GNOME_FONT_PICKER(font),
+		GNOME_FONT_PICKER_MODE_FONT_INFO);
+
 	foreground=gnome_color_picker_new();
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(foreground),
 		_("gtranslator -- foreground color"));

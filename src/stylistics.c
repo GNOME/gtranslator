@@ -43,9 +43,6 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker,
 		case COLOR_VALUE_DOT_CHAR:
 			section="dot_char";
 			break;
-		case COLOR_VALUE_END_CHAR:
-			section="end_char";
-			break;
 		case COLOR_VALUE_SELECTION:
 			section="selection";
 			break;	
@@ -89,9 +86,6 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 			break;	
 		case COLOR_VALUE_DOT_CHAR:
 			section="dot_char";
-			break;
-		case COLOR_VALUE_END_CHAR:
-			section="end_char";
 			break;
 		case COLOR_VALUE_SELECTION:
 			section="selection";
