@@ -1,3 +1,9 @@
+2003-05-24  Abel Cheung  <maddog@linux.org.hk>
+
+	* src/runtime-config.c(gtranslator_runtime_config_new):
+	  change non-ASCII char in comment to ASCII, xgettext < 0.12 doesn't
+	  like it, and can cause problem in non-UTF-8 translation files.
+
 2003-05-25  Fatih Demir <kabalak@gtranslator.org>
 
 	* AUTHORS: Added Ross Golder as current author to the authors' list.
