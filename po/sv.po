@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-10-16 16:44+0200\n"
-"PO-Revision-Date: 2000-10-16 16:49+0200\n"
+"Project-Id-Version: gtranslator 0.30\n"
+"POT-Creation-Date: 2000-10-18 00:21+0200\n"
+"PO-Revision-Date: 2000-10-18 00:23+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -226,7 +226,7 @@ msgstr "Sista"
 msgid "Missing"
 msgstr "Saknade"
 
-#: src/gui.c:290 src/gui.c:737
+#: src/gui.c:290 src/gui.c:752 src/gui.c:756
 msgid "Fuzzy"
 msgstr "Luddig"
 
@@ -257,29 +257,49 @@ msgstr "Sök sträng i po-filen"
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:549
+#: src/gui.c:548
 msgid "Bye bye!"
 msgstr "Hej då!"
 
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:727
+#: src/gui.c:740
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Meddelande %d / %d / Status:"
 
-#: src/dialogs.c:217 src/gui.c:741
+#: src/gui.c:752
+#, c-format
+msgid "%s %s [ %i Fuzzy left ]"
+msgstr "%s %s [ %i luddiga kvar ]"
+
+#: src/gui.c:756
+#, c-format
+msgid "%s %s [ No fuzzy left ]"
+msgstr "%s %s [ Inga luddiga kvar ]"
+
+#: src/dialogs.c:217 src/gui.c:761
 msgid "Translated"
 msgstr "Översatt"
 
-#: src/gui.c:747
+#: src/gui.c:767
 msgid "Stick"
 msgstr "Klistra"
 
-#: src/gui.c:751
+#: src/gui.c:775
+#, c-format
+msgid "%s %s [ %i Untranslated left ]"
+msgstr "%s %s [ %i oöversatta kvar ]"
+
+#: src/gui.c:775 src/gui.c:779
 msgid "Untranslated"
 msgstr "Oöversatt"
+
+#: src/gui.c:779
+#, c-format
+msgid "%s %s [ No untranslated left ]"
+msgstr "%s %s [ Inga oöversatta kvar ]"
 
 #: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
@@ -550,7 +570,7 @@ msgstr "Anger storlek och placering på huvudfönstret"
 msgid "Error during GConf initialization: %s."
 msgstr "Fel under initiering av GConf: %s."
 
-#: src/parse.c:96
+#: src/parse.c:97
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -559,12 +579,12 @@ msgstr ""
 "Nytt tecken med escape framför hittat: \\%c\n"
 "Lägg till detta till parse.c, rad %i."
 
-#: src/parse.c:130 src/parse.c:447
+#: src/parse.c:131 src/parse.c:455
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen \"%s\" finns inte alls!"
 
-#: src/parse.c:200
+#: src/parse.c:207
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -575,7 +595,7 @@ msgstr ""
 "på rad %d.\n"
 "Var vänlig och kontrollera filen och försök igen."
 
-#: src/parse.c:229
+#: src/parse.c:236
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -584,25 +604,25 @@ msgstr ""
 "Filen är tom:\n"
 "%s"
 
-#: src/parse.c:248
+#: src/parse.c:255
 msgid "There's no file to open!\n"
 msgstr "Det finns ingen fil att öppna!\n"
 
-#: src/parse.c:276
+#: src/parse.c:283
 msgid "The file has no header!"
 msgstr "Filen har inget huvud!"
 
-#: src/parse.c:279
+#: src/parse.c:286
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Tolkade filen \"%s\" utan problem"
 
-#: src/parse.c:282
+#: src/parse.c:289
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:435
+#: src/parse.c:443
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -613,7 +633,7 @@ msgstr ""
 "Sådana filer genereras dock av program.\n"
 "Din fil bör sparas med en *.po-ändelse, troligtvis %s.po"
 
-#: src/parse.c:492
+#: src/parse.c:500
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -624,11 +644,11 @@ msgstr ""
 "%s\n"
 "Vill du spara den ändå?"
 
-#: src/parse.c:500
+#: src/parse.c:508
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- oförändrad"
 
-#: src/parse.c:557
+#: src/parse.c:578
 #, c-format
 msgid ""
 "File %s\n"
@@ -637,11 +657,11 @@ msgstr ""
 "Filen %s\n"
 "har ändrats. Vill du återgå till den sparade kopian?"
 
-#: src/parse.c:594
+#: src/parse.c:615
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Tyvärr, msgfmt finns inte tillgängligt på ditt system!"
 
-#: src/parse.c:619
+#: src/parse.c:640
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -653,20 +673,20 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:664 src/parse.c:674 src/parse.c:675
+#: src/parse.c:685 src/parse.c:695 src/parse.c:696
 msgid "_File/Recen_t files/"
 msgstr "_Arkiv/Senas_te filer/"
 
-#: src/parse.c:720
+#: src/parse.c:741
 #, c-format
 msgid "Open %s"
 msgstr "Öppna %s"
 
-#: src/parse.c:840
+#: src/parse.c:861
 msgid "An update would cause no changes."
 msgstr "En uppdatering hade inte orsakat några ändringar."
 
-#: src/parse.c:858
+#: src/parse.c:879
 msgid "The update was successfull."
 msgstr "Uppdateringen lyckades."
 
@@ -836,55 +856,55 @@ msgstr ""
 "Fel under GConf-initiering genom libgtranslator:\n"
 "%s"
 
-#: libgtranslator/preferences.c:80
+#: libgtranslator/preferences.c:85
 msgid "No path defined where I could get the string from."
 msgstr "Ingen sökväg angiven där jag kunde hämta strängen ifrån."
 
-#: libgtranslator/preferences.c:103
+#: libgtranslator/preferences.c:108
 #, c-format
 msgid "Can't set the string `%s' for a non-defined path!\n"
 msgstr "Kan inte sätta strängen \"%s\" för en sökväg som inte är angiven!\n"
 
-#: libgtranslator/preferences.c:110
+#: libgtranslator/preferences.c:115
 #, c-format
 msgid "No string defined for the path `%s'!"
 msgstr "Ingen sträng angiven för sökvägen \"%s\"!"
 
-#: libgtranslator/preferences.c:139
+#: libgtranslator/preferences.c:144
 msgid "No path defined where I could get the integer from!"
 msgstr "Ingen sökväg angiven där jag kunde hämta heltalet ifrån!"
 
-#: libgtranslator/preferences.c:140
+#: libgtranslator/preferences.c:145
 msgid "Returning `1' for assurance .."
 msgstr "Returnerar \"1\" för sökerhets skull..."
 
-#: libgtranslator/preferences.c:162
+#: libgtranslator/preferences.c:167
 #, c-format
 msgid "Can't set the value `%i' for a non-defined path!"
 msgstr "Kna inte ange värdet \"%i\" för en sökväg som inte är angiven!"
 
-#: libgtranslator/preferences.c:169
+#: libgtranslator/preferences.c:174
 #, c-format
 msgid "No value defined for the path `%s'!"
 msgstr "Inget värde är angivet för sökvägen \"%s\"!"
 
-#: libgtranslator/preferences.c:196
+#: libgtranslator/preferences.c:201
 msgid "No path defined where I could get the boolean from."
 msgstr "Ingen sökväg angiven där jag kunde hämta det boolska värdet ifrån."
 
-#: libgtranslator/preferences.c:197
+#: libgtranslator/preferences.c:202
 msgid "Returning `FALSE' for assurance ..."
 msgstr "Returnerar \"FALSE\" för säkerhets skull..."
 
-#: libgtranslator/preferences.c:215
+#: libgtranslator/preferences.c:220
 msgid "Can't set a boolean value for a non-defined path!"
 msgstr "Kan inte sätta ett booleskt värde för en sökväg som inte är angiven!"
 
-#: libgtranslator/preferences.c:242
+#: libgtranslator/preferences.c:247
 msgid "No path defined for gfloat value"
 msgstr "Ingen sökväg angiven för gloat-värde"
 
-#: libgtranslator/preferences.c:267
+#: libgtranslator/preferences.c:272
 msgid "No path defined to get the gfloat value from!"
 msgstr "Ingen sökväg angiven där jag kan hämta gfloat-värdet ifrån!"
 
@@ -892,11 +912,11 @@ msgstr "Ingen sökväg angiven där jag kan hämta gfloat-värdet ifrån!"
 #. * Set a date identifier; this ought to be also
 #. *  localized!
 #. *
-#: libgtranslator/preferences.c:317
+#: libgtranslator/preferences.c:322
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H.%M"
 
-#: libgtranslator/preferences.c:323
+#: libgtranslator/preferences.c:328
 msgid "Couldn't generate the current date!"
 msgstr "Kunde inte skapa aktuellt datum!"
 
