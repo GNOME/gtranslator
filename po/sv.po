@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2000-11-04 01:04+0100\n"
-"PO-Revision-Date: 2000-11-04 01:32+0100\n"
+"POT-Creation-Date: 2000-11-13 19:21+0100\n"
+"PO-Revision-Date: 2000-11-13 19:21+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -55,42 +55,42 @@ msgstr "Kör!"
 msgid "Go to message number:"
 msgstr "Gå till meddelande nummer:"
 
-#: src/dialogs.c:201
+#: src/dialogs.c:203
 msgid "Find in the po-file"
 msgstr "Sök i po-filen"
 
-#: src/dialogs.c:201 src/gui.c:297
+#: src/dialogs.c:203 src/gui.c:297
 msgid "Find"
 msgstr "Sök"
 
 #. *
 #. * Create the widgets.
 #. *
-#: src/dialogs.c:206
+#: src/dialogs.c:208
 msgid "Enter your desired search string:"
 msgstr "Skriv in din önskade söksträng: "
 
-#: src/dialogs.c:209
+#: src/dialogs.c:211
 msgid "Case sensitive"
 msgstr "Gör skillnad på gemener/VERSALER"
 
-#: src/dialogs.c:215 src/languages.h:99
+#: src/dialogs.c:217 src/languages.h:99
 msgid "English"
 msgstr "Engelska"
 
-#: src/dialogs.c:217 src/gui.c:754
+#: src/dialogs.c:219 src/gui.c:756
 msgid "Translated"
 msgstr "Översatt"
 
-#: src/dialogs.c:219
+#: src/dialogs.c:221
 msgid "Both"
 msgstr "Både och"
 
-#: src/dialogs.c:222
+#: src/dialogs.c:224
 msgid "Find in: "
 msgstr "Sök i: "
 
-#: src/dialogs.c:264
+#: src/dialogs.c:266
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Ett fel inträffade då msgfmt kördes:\n"
 
@@ -315,7 +315,7 @@ msgstr "Sista"
 msgid "Missing"
 msgstr "Saknade"
 
-#: src/gui.c:289 src/gui.c:741 src/gui.c:745
+#: src/gui.c:289 src/gui.c:743 src/gui.c:747
 msgid "Fuzzy"
 msgstr "Luddig"
 
@@ -349,35 +349,35 @@ msgstr "Hej då!"
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:729
+#: src/gui.c:731
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Meddelande %d / %d / Status:"
 
-#: src/gui.c:741
+#: src/gui.c:743
 #, c-format
 msgid "%s %s [ %i Fuzzy left ]"
 msgstr "%s %s [ %i luddiga kvar ]"
 
-#: src/gui.c:745
+#: src/gui.c:747
 #, c-format
 msgid "%s %s [ No fuzzy left ]"
 msgstr "%s %s [ Inga luddiga kvar ]"
 
-#: src/gui.c:760
+#: src/gui.c:762
 msgid "Stick"
 msgstr "Klistra"
 
-#: src/gui.c:768
+#: src/gui.c:770
 #, c-format
 msgid "%s %s [ %i Untranslated left ]"
 msgstr "%s %s [ %i oöversatta kvar ]"
 
-#: src/gui.c:768 src/gui.c:772
+#: src/gui.c:770 src/gui.c:774
 msgid "Untranslated"
 msgstr "Oöversatt"
 
-#: src/gui.c:772
+#: src/gui.c:774
 #, c-format
 msgid "%s %s [ No untranslated left ]"
 msgstr "%s %s [ Inga oöversatta kvar ]"
@@ -755,16 +755,16 @@ msgstr ""
 msgid "_File/Recen_t files/"
 msgstr "_Arkiv/Senas_te filer/"
 
-#: src/parse.c:765
+#: src/parse.c:784
 #, c-format
 msgid "Open %s"
 msgstr "Öppna %s"
 
-#: src/parse.c:885
+#: src/parse.c:904
 msgid "An update would cause no changes."
 msgstr "En uppdatering hade inte orsakat några ändringar."
 
-#: src/parse.c:903
+#: src/parse.c:922
 msgid "The update was successfull."
 msgstr "Uppdateringen lyckades."
 
@@ -893,7 +893,7 @@ msgstr "gtranslator -- förgrundsfärg"
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- bakgrundsfärg"
 
-#: src/prefs.c:466
+#: src/prefs.c:469
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -903,12 +903,12 @@ msgstr ""
 "som får gtranslator att göra de saker som DU vill.\n"
 " "
 
-#: src/prefs.c:618
+#: src/prefs.c:623
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometristrängen \"%s\" kunde inte tolkas!"
 
-#: src/session.c:61
+#: src/session.c:64
 msgid "Session restored successfully."
 msgstr "Sessionen återställdes utan problem."
 
@@ -919,19 +919,6 @@ msgstr "Kontrollera stavning"
 #: src/spell.c:54
 msgid "Spell checking complete!"
 msgstr "Stavningskontrollen färdig!"
-
-#: libgtranslator/gtranslator-preferences-dialog.c:59
-#, c-format
-msgid ""
-"No title set for a new GtranslatorPreferencesDialog widget!\n"
-"Using the default title `%s'..."
-msgstr ""
-"Ingen titel är angiven för en ny GtranslatorPreferencesDialog-widget!\n"
-"Använder standardtiteln \"%s\"..."
-
-#: libgtranslator/gtranslator-preferences-dialog.c:88
-msgid "Default"
-msgstr "Standard"
 
 #. *
 #. * Print out a warning and exit from the
@@ -1039,12 +1026,12 @@ msgstr ""
 #. *
 #. * Print some information to the user.
 #. *
-#: libgtranslator/parse-db.c:59
+#: libgtranslator/parse-db.c:61
 #, c-format
 msgid "Using %s as the message database... \n"
 msgstr "Använder %s som meddelandedatabas... \n"
 
-#: libgtranslator/parse-db.c:71
+#: libgtranslator/parse-db.c:73
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr "Kunde inte öppna språkbasfilen \"%s.xml\" i %s.\n"
@@ -1052,12 +1039,12 @@ msgstr "Kunde inte öppna språkbasfilen \"%s.xml\" i %s.\n"
 #. *
 #. * Print some information.
 #. *
-#: libgtranslator/parse-db.c:85
+#: libgtranslator/parse-db.c:87
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr "Subklassfilen \"%s.xml\" kunde inte hittas.\n"
 
-#: libgtranslator/parse-db.c:86
+#: libgtranslator/parse-db.c:88
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Försöker med superklassfilen \"%s.xml\"...\n"
@@ -1065,7 +1052,7 @@ msgstr "Försöker med superklassfilen \"%s.xml\"...\n"
 #. *
 #. * Print the informations about the message database.
 #. *
-#: libgtranslator/parse-db.c:111
+#: libgtranslator/parse-db.c:118
 #, c-format
 msgid "Database creator/administrator: %s\n"
 msgstr "Databasskapare/administratör: %s\n"
@@ -1073,7 +1060,7 @@ msgstr "Databasskapare/administratör: %s\n"
 #. *
 #. * Again inform the user about some parts of it.
 #. *
-#: libgtranslator/parse-db.c:121
+#: libgtranslator/parse-db.c:127
 #, c-format
 msgid "EMail: %s\n"
 msgstr "E-post: %s\n"
@@ -1082,11 +1069,11 @@ msgstr "E-post: %s\n"
 #. * Print these informations out! We wanna know
 #. *  the contact persons.
 #. *
-#: libgtranslator/parse-db.c:142
+#: libgtranslator/parse-db.c:143
 msgid "Message database informations:\n"
 msgstr "Information om meddelandedatabasen:\n"
 
-#: libgtranslator/parse-db.c:143
+#: libgtranslator/parse-db.c:144
 #, c-format
 msgid ""
 "Date: %s\n"
@@ -1095,7 +1082,7 @@ msgstr ""
 "Datum: %s\n"
 "Serienummer: %s\n"
 
-#: libgtranslator/preferences.c:50
+#: libgtranslator/preferences.c:43
 #, c-format
 msgid ""
 "Error during GConf initialization through libgtranslator:\n"
@@ -1104,67 +1091,15 @@ msgstr ""
 "Fel under GConf-initiering genom libgtranslator:\n"
 "%s"
 
-#: libgtranslator/preferences.c:85
-msgid "No path defined where I could get the string from."
-msgstr "Ingen sökväg angiven där jag kunde hämta strängen ifrån."
-
-#: libgtranslator/preferences.c:108
-#, c-format
-msgid "Can't set the string `%s' for a non-defined path!\n"
-msgstr "Kan inte sätta strängen \"%s\" för en sökväg som inte är angiven!\n"
-
-#: libgtranslator/preferences.c:115
-#, c-format
-msgid "No string defined for the path `%s'!"
-msgstr "Ingen sträng angiven för sökvägen \"%s\"!"
-
-#: libgtranslator/preferences.c:144
-msgid "No path defined where I could get the integer from!"
-msgstr "Ingen sökväg angiven där jag kunde hämta heltalet ifrån!"
-
-#: libgtranslator/preferences.c:145
-msgid "Returning `1' for assurance .."
-msgstr "Returnerar \"1\" för sökerhets skull..."
-
-#: libgtranslator/preferences.c:167
-#, c-format
-msgid "Can't set the value `%i' for a non-defined path!"
-msgstr "Kna inte ange värdet \"%i\" för en sökväg som inte är angiven!"
-
-#: libgtranslator/preferences.c:174
-#, c-format
-msgid "No value defined for the path `%s'!"
-msgstr "Inget värde är angivet för sökvägen \"%s\"!"
-
-#: libgtranslator/preferences.c:201
-msgid "No path defined where I could get the boolean from."
-msgstr "Ingen sökväg angiven där jag kunde hämta det boolska värdet ifrån."
-
-#: libgtranslator/preferences.c:202
-msgid "Returning `FALSE' for assurance ..."
-msgstr "Returnerar \"FALSE\" för säkerhets skull..."
-
-#: libgtranslator/preferences.c:220
-msgid "Can't set a boolean value for a non-defined path!"
-msgstr "Kan inte sätta ett booleskt värde för en sökväg som inte är angiven!"
-
-#: libgtranslator/preferences.c:247
-msgid "No path defined for gfloat value"
-msgstr "Ingen sökväg angiven för gloat-värde"
-
-#: libgtranslator/preferences.c:272
-msgid "No path defined to get the gfloat value from!"
-msgstr "Ingen sökväg angiven där jag kan hämta gfloat-värdet ifrån!"
-
 #. *
 #. * Set a date identifier; this ought to be also
 #. *  localized!
 #. *
-#: libgtranslator/preferences.c:322
+#: libgtranslator/preferences.c:234
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H.%M"
 
-#: libgtranslator/preferences.c:328
+#: libgtranslator/preferences.c:240
 msgid "Couldn't generate the current date!"
 msgstr "Kunde inte skapa aktuellt datum!"
 
@@ -1195,6 +1130,66 @@ msgstr "Inga widgetar angivna för att manipulera deras stil"
 #, c-format
 msgid "Couldn't open the team database file `%s'!"
 msgstr "Kunde inte öppna lagdatabasfilen \"%s\"!"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: data/ui/preferences.glade.h:7
+msgid "gtranslator -- preferences"
+msgstr "gtranslator -- alternativ"
+
+#: data/ui/preferences.glade.h:8
+msgid "Sections"
+msgstr "Sektioner"
+
+#~ msgid ""
+#~ "No title set for a new GtranslatorPreferencesDialog widget!\n"
+#~ "Using the default title `%s'..."
+#~ msgstr ""
+#~ "Ingen titel är angiven för en ny GtranslatorPreferencesDialog-widget!\n"
+#~ "Använder standardtiteln \"%s\"..."
+
+#~ msgid "Default"
+#~ msgstr "Standard"
+
+#~ msgid "No path defined where I could get the string from."
+#~ msgstr "Ingen sökväg angiven där jag kunde hämta strängen ifrån."
+
+#~ msgid "Can't set the string `%s' for a non-defined path!\n"
+#~ msgstr "Kan inte sätta strängen \"%s\" för en sökväg som inte är angiven!\n"
+
+#~ msgid "No string defined for the path `%s'!"
+#~ msgstr "Ingen sträng angiven för sökvägen \"%s\"!"
+
+#~ msgid "No path defined where I could get the integer from!"
+#~ msgstr "Ingen sökväg angiven där jag kunde hämta heltalet ifrån!"
+
+#~ msgid "Returning `1' for assurance .."
+#~ msgstr "Returnerar \"1\" för sökerhets skull..."
+
+#~ msgid "Can't set the value `%i' for a non-defined path!"
+#~ msgstr "Kna inte ange värdet \"%i\" för en sökväg som inte är angiven!"
+
+#~ msgid "No value defined for the path `%s'!"
+#~ msgstr "Inget värde är angivet för sökvägen \"%s\"!"
+
+#~ msgid "No path defined where I could get the boolean from."
+#~ msgstr "Ingen sökväg angiven där jag kunde hämta det boolska värdet ifrån."
+
+#~ msgid "Returning `FALSE' for assurance ..."
+#~ msgstr "Returnerar \"FALSE\" för säkerhets skull..."
+
+#~ msgid "Can't set a boolean value for a non-defined path!"
+#~ msgstr ""
+#~ "Kan inte sätta ett booleskt värde för en sökväg som inte är angiven!"
+
+#~ msgid "No path defined for gfloat value"
+#~ msgstr "Ingen sökväg angiven för gloat-värde"
+
+#~ msgid "No path defined to get the gfloat value from!"
+#~ msgstr "Ingen sökväg angiven där jag kan hämta gfloat-värdet ifrån!"
 
 #~ msgid "Update po-file"
 #~ msgstr "Uppdatera po-fil"
