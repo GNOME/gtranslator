@@ -14,14 +14,9 @@
  **/
 void check_file(FILE *stream,const char *error)
 {
-	if(stream < 0 || stream == NULL)
+	if(stream == NULL)
 	{
 		g_error(error);
-		/**
-		 * FIXME :
-		 * Too sensitive for gtranslator ?
-		 **/
-		/***exit(1);***/
 	}
 }
 
@@ -32,7 +27,6 @@ void parse()
 {
 	FILE *fs;
 	gchar tmp_l[256];
-	int c;
 	/** 
 	 * Open the file got by the open-dialog
 	 **/
@@ -42,7 +36,9 @@ void parse()
 	 **/
 	check_file(fs,"Couldn't open the po file !");
 	msg->po->opened=TRUE;
-	msg->po->po_filename=filename;
+	msg->po->po_filename=(char *)filename;
+	g_warning("Got filename  %s \n",filename);
+	g_warning("Or : %s\n",msg->po->po_filename);
 	count=0;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{

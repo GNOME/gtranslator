@@ -28,6 +28,11 @@ char fname[768];
 static GnomeHelpMenuEntry help_me = { "gtranslator", "index.html" };
 int warn_me,show_me_errors,startup_at_last;
 
+/**
+ * FIXME FIXME FIXME :
+ * why do I have to do this ( or I get NULL-casts to GtkLabel )
+ **/
+#define gnome_appbar_set_status(x,y) /*gnome_appbar_set_status(x,y)*/
 
 void 
 on_search_button_pressed		(GtkButton 	*button,
@@ -398,14 +403,14 @@ on_save_last_file_toggled              (GtkToggleButton *togglebutton,
 	int savelast;
 	gnome_property_box_changed(esas);
 	gnome_config_push_prefix ("/gtranslator/");
-	savelast=gnome_config_get_int("savelast/value");
+	savelast=gnome_config_get_int("savelast");
 	if(savelast==0)
 	{
-		gnome_config_set_int("savelast/value",1);	
+		gnome_config_set_int("savelast",1);	
 	}
 	else
 	{
-		gnome_config_set_int("savelast/value",0);
+		gnome_config_set_int("savelast",0);
 	}
 	gnome_config_sync();
 	gnome_config_pop_prefix();
@@ -419,14 +424,14 @@ on_warn_for_errors_toggled             (GtkToggleButton *togglebutton,
 	gboolean werrors;
 	gnome_property_box_changed(esas);
 	gnome_config_push_prefix ("/gtranslator/");
-	werrors=gnome_config_get_bool("warn_for_errors/value");
+	werrors=gnome_config_get_bool("warn_for_errors");
 	if(werrors==FALSE)
 	{
-		gnome_config_set_bool("warn_for_errors/value",TRUE);
+		gnome_config_set_bool("warn_for_errors",TRUE);
 	}
 	else
 	{
-		gnome_config_set_bool("warn_for_errors/value",FALSE);
+		gnome_config_set_bool("warn_for_errors",FALSE);
 	}
 	gnome_config_sync();
 	gnome_config_pop_prefix();
@@ -440,14 +445,14 @@ on_saving_unchanged_toggled            (GtkToggleButton *togglebutton,
 	gboolean sunch;
         gnome_property_box_changed(esas);
 	gnome_config_push_prefix ("/gtranslator/");
-        sunch=gnome_config_get_bool("save_unchanged/value");
+        sunch=gnome_config_get_bool("save_unchanged");
         if(sunch==FALSE)
         {
-                gnome_config_set_bool("save_unchanged/value",TRUE);
+                gnome_config_set_bool("save_unchanged",TRUE);
         }
         else
         {
-                gnome_config_set_bool("save_unchanged/value",FALSE);
+                gnome_config_set_bool("save_unchanged",FALSE);
         }
         gnome_config_sync();
         gnome_config_pop_prefix();
@@ -461,14 +466,14 @@ on_start_at_last_file_toggled          (GtkToggleButton *togglebutton,
 	gboolean slast;
         gnome_property_box_changed(esas);
         gnome_config_push_prefix ("/gtranslator/");
-        slast=gnome_config_get_bool("start_at_the_last_file/value");
+        slast=gnome_config_get_bool("start_at_the_last_file");
         if(slast==FALSE)
         {
-                gnome_config_set_bool("start_at_the_last_file/value",TRUE);
+                gnome_config_set_bool("start_at_the_last_file",TRUE);
         }
         else
         {
-                gnome_config_set_bool("start_at_the_last_file/value",FALSE);
+                gnome_config_set_bool("start_at_the_last_file",FALSE);
         }
         gnome_config_sync();
         gnome_config_pop_prefix();
@@ -481,7 +486,7 @@ on_verbose_yes_toggled                 (GtkToggleButton *togglebutton,
 {
         gnome_property_box_changed(esas);
 	gnome_config_push_prefix("/gtranslator/");
-	gnome_config_set_bool("verbose/value",TRUE);
+	gnome_config_set_bool("verbose",TRUE);
 	gnome_config_sync();
 	gnome_config_pop_prefix();
 }
@@ -493,7 +498,7 @@ on_verbose_no_toggled                  (GtkToggleButton *togglebutton,
 {
         gnome_property_box_changed(esas);
 	gnome_config_push_prefix("/gtranslator/");
-	gnome_config_set_bool("verbose/value",FALSE);
+	gnome_config_set_bool("verbose",FALSE);
 	gnome_config_sync();
 	gnome_config_pop_prefix();
 }
@@ -511,7 +516,7 @@ void
 on_ok_button_of_open_file_pressed      (GtkButton       *button,
                                         GtkFileSelection *fsel)	
 {
-	gtk_widget_hide(GTK_FILE_SELECTION(fsel));
+	gtk_widget_hide(GTK_WIDGET(fsel));
 	parse();
 	file_opened=TRUE;
 }
@@ -521,7 +526,7 @@ void
 on_cancel_button_of_open_file_pressed  (GtkButton       *button,
                           		GtkFileSelection *fsel)
 {
-	gtk_widget_destroy(GTK_FILE_SELECTION(fsel));
+	gtk_widget_destroy(GTK_WIDGET(fsel));
 }
 
 
@@ -530,7 +535,7 @@ on_ok_button_of_save_as_file_pressed   (GtkButton       *button,
                                         GtkFileSelection *fsel)
 {
 	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fsel));
-	gtk_widget_destroy(GTK_FILE_SELECTION(fsel));
+	gtk_widget_destroy(GTK_WIDGET(fsel));
 }
 
 
@@ -539,7 +544,7 @@ on_cancel_button_of_save_as_file_pressed
                                         (GtkButton       *button,
                                          GtkFileSelection *fsel)
 {
-	gtk_widget_destroy(GTK_FILE_SELECTION(fsel));
+	gtk_widget_destroy(GTK_WIDGET(fsel));
 }
 
 

@@ -37,3 +37,29 @@ struct message
  * The used message structure pointer 
  **/
 struct message *msg;
+
+/**
+ * The typedef for the message stati
+ **/
+typedef enum _gtranslator_msg_status gtranslator_msg_status;
+
+/**
+ * The different stati of the translatable
+ *  messages .
+ **/
+enum _gtranslator_msg_status 
+{
+	GTRANSLATOR_MSG_STATUS_UNTRANSLATED,
+	GTRANSLATOR_MSG_STATUS_TRANSLATED,
+	GTRANSLATOR_MSG_STATUS_UNKNOWN,
+	/**
+ 	 * If the message shouldn't be translated
+ 	 *  ( -> Web-adresses/trade mark names )
+	 **/
+	GTRANSLATOR_MSG_STATUS_STICK,
+	/**
+	 * If the entry should be translated as
+	 *  fast as possible .
+	 **/
+	GTRANSLATOR_MSG_STATUS_FIXME
+};

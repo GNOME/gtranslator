@@ -677,48 +677,6 @@ create_compiling_po (void)
 }
 
 GtkWidget*
-create_wait_for_help (void)
-{
-        GtkWidget *wait_for_help;
-        GtkWidget *dialog_vbox4;
-        GtkWidget *button14;
-        GtkWidget *dialog_action_area4;
-
-        wait_for_help = gnome_message_box_new (_("Please wait for the help system .\n( I'd to learn going along with gtkxmhtml ..)"),
-                                    GNOME_MESSAGE_BOX_GENERIC, NULL);
-        gtk_widget_set_name (wait_for_help, "wait_for_help");
-        gtk_object_set_data (GTK_OBJECT (wait_for_help), "wait_for_help", wait_for_help);
-        GTK_WINDOW (wait_for_help)->type = GTK_WINDOW_DIALOG;
-        gtk_window_set_policy (GTK_WINDOW (wait_for_help), FALSE, FALSE, FALSE);
-        gtk_window_set_wmclass (GTK_WINDOW (wait_for_help), "gtranslator", "gtranslator");
-        gnome_dialog_set_close (GNOME_DIALOG (wait_for_help), TRUE);
-        gnome_dialog_close_hides (GNOME_DIALOG (wait_for_help), TRUE);
-
-        dialog_vbox4 = GNOME_DIALOG (wait_for_help)->vbox;
-        gtk_widget_set_name (dialog_vbox4, "dialog_vbox4");
-        gtk_object_set_data (GTK_OBJECT (wait_for_help), "dialog_vbox4", dialog_vbox4);
-        gtk_widget_show (dialog_vbox4);
-
-        gnome_dialog_append_button (GNOME_DIALOG (wait_for_help), GNOME_STOCK_BUTTON_OK);
-        button14 = g_list_last (GNOME_DIALOG (wait_for_help)->buttons)->data;
-        gtk_widget_set_name (button14, "button14");
-        gtk_widget_ref (button14);
-        gtk_object_set_data_full (GTK_OBJECT (wait_for_help), "button14", button14,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show (button14);
-        GTK_WIDGET_SET_FLAGS (button14, GTK_CAN_DEFAULT);
-
-        dialog_action_area4 = GNOME_DIALOG (wait_for_help)->action_area;
-        if (dialog_action_area4 != NULL)
-          gtk_widget_set_name (dialog_action_area4, "dialog_action_area4");
-        gtk_widget_ref (dialog_action_area4);
-        gtk_object_set_data_full (GTK_OBJECT (wait_for_help), "dialog_action_area4", dialog_action_area4,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-
-        return wait_for_help;
-}
-
-GtkWidget*
 create_help_for_the_propbox1 (void)
 {
         GtkWidget *help_for_the_propbox1;

@@ -13,7 +13,6 @@ GtkWidget* create_save_file_as (void);
 GtkWidget* create_errors_in_the_po (void);
 GtkWidget* create_save_unchanged_po (void);
 GtkWidget* create_compiling_po (void);
-GtkWidget* create_wait_for_help (void);
 GtkWidget* create_help_for_the_propbox1 (void);
 
 /**

@@ -1,3 +1,40 @@
+2000-03-08  Fatih Demir		( kabalak@gmx.net )
+
+	+	Added an enum for the different stati
+		a translation entry could have 
+		
+		-> messages.h
+	
+	+	Changed some macros for producing less
+		warnings because of wrong types .
+		
+	+	Removed the stupid value= pairs ..
+
+		-> callbacks.c
+	
+	+	Corrected a check which caused an 
+		compilation warning
+
+		-> msg_db.c
+	
+	+	Removed unneeded things : 
+		
+		-create_wait_for_help()
+
+		-> interface.c	
+
+		-negative-value check in check_file()
+	
+		-int c
+	
+		-a FIXME ( which wasn't right )
+	
+		-> parse.c
+	
+	+	Made a necessary cast to (char)tmp .
+		
+		-> header_stuff.c
+
 2000-03-07  Fatih Demir		( kabalak@gmx.net )
 
 	+	Adding some new UI-elements ..

@@ -100,7 +100,7 @@ int put_to_msg_db(const char *new_message)
 		 * Get the length of the new entry
 		 **/
 		new_message_length=strlen(new_message);
-		if(new_message_length == NULL || new_message_length < 0)
+		if(( new_message_length < 0 ) || ( ! new_message ))
 		{
 			g_warning("New message entry has wrong/non-logical length : %i\n",new_message_length);
 			return 1;
