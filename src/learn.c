@@ -783,8 +783,8 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
 
 		resources_list=gtranslator_learn_buffer->resources;
 
-		fprintf(file, "
-# The exported learn buffer was build on top of these resource po files:");
+		fprintf(file,
+"\n# The exported learn buffer was build on top of these resource po files:");
 
 		while(resources_list!=NULL)
 		{
@@ -802,13 +802,15 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
 				 */
 				if(resource->updated)
 				{
-					fprintf(file, "
-# %i. %s (dated from \"%s\").", i, resource->package, resource->updated);
+					fprintf(file,
+					"\n# %i. %s (dated from \"%s\").", 
+					i, resource->package, 
+					resource->updated);
 				}
 				else
 				{
-					fprintf(file, "
-# %i. %s.", i, resource->package);					
+					fprintf(file,
+					"\n# %i. %s.", i, resource->package);
 				}
 			}
 
@@ -820,17 +822,16 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
 	 * "Export" a general po file header with values from the translator &
 	 *   the learn buffer/language settings of the user.
 	 */
-	fprintf(file, "
-\"Project-Id-Version: gtranslator-learn-buffer %i\\n\"
-\"POT-Creation-Date: %s\\n\"
-\"PO-Revision-Date: %s\\n\"
-\"Last-Translator: %s <%s>\\n\"
-\"Language-Team: %s <%s>\\n\"
-\"MIME-Version: 1.0\\n\"
-\"Content-Type: text/plain; charset=%s\\n\"
-\"Content-Transfer-Encoding: 8bit\\n\"
-
-",
+	fprintf(file, 
+"\n\"Project-Id-Version: gtranslator-learn-buffer %i\\n\"\n"
+"\"POT-Creation-Date: %s\\n\"\n"
+"\"PO-Revision-Date: %s\\n\"\n"
+"\"Last-Translator: %s <%s>\\n\"\n"
+"\"Language-Team: %s <%s>\\n\"\n"
+"\"MIME-Version: 1.0\\n\"\n"
+"\"Content-Type: text/plain; charset=%s\\n\"\n"
+"\"Content-Transfer-Encoding: 8bit\\n\"\n"
+"\n",
 	gtranslator_learn_buffer->serial,
 	gtranslator_learn_buffer->serial_date,
 	gtranslator_learn_buffer->serial_date,
