@@ -26,37 +26,45 @@ void apply_header(gtr_header *the_header)
 void get_header(gchar *hline)
 {
 	gchar *a=g_new(gchar,1);
+	a[0]='\0';
 	header_finish=FALSE;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
-		a=strtok(hline,(gchar *)strtok(hline,": "));
-		g_print("<<%s>>\n",a);
+		ph->prj_name=a;
+		ph->prj_version=a;
 	}
 	if(!g_strncasecmp(hline,"\"POT-",5))
 	{
+		ph->pot_date=g_strdup(hline);
 	}
 	if(!g_strncasecmp(hline,"\"PO-",4))
 	{
+		ph->po_date=g_strdup(hline);
 	}
 	if(!g_strncasecmp(hline,"\"Las",4))
 	{
+		ph->last_translator=g_strdup(hline);
 	}
 	if(!g_strncasecmp(hline,"\"Lang",5))
 	{
+		ph->language_team=g_strdup(hline);
 	}
 	if(!g_strncasecmp(hline,"\"MIME",5))
 	{
+		ph->mime_version=g_strdup(hline);
 	}
 	if(!g_strncasecmp(hline,"\"Content-Ty",11))
 	{
+		ph->mime_type=g_strdup(hline);
 	}
 	if(!g_strncasecmp(hline,"\"Content-Tr",11))
 	{
+		ph->encoding=g_strdup(hline);
 		header_finish=TRUE;
 	}
 	if(header_finish==TRUE)
 	{
-		ph->prj_name=a;
+		/*** TODO ***/
 	}
 	if(a)
 	{
