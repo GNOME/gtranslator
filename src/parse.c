@@ -166,6 +166,22 @@ static gboolean actual_parse(void)
 	gchar *error = NULL;
 
 	/*
+	 * Test if such a file does exist.
+	 */
+	if(!g_file_exists(po->filename))
+	{
+		error=g_strdup_printf(
+			_("The file `%s' doesn't exist at all!"),
+			po->filename);
+		
+		gnome_app_error(GNOME_APP(app1), error);
+		
+		g_free(error);
+		
+		return FALSE;
+	}	
+	
+	/*
 	 * The write permissions aren't always guaranteed.
 	 */ 
 	if(po->no_write_perms==FALSE)
@@ -177,17 +193,6 @@ static gboolean actual_parse(void)
 		fs = fopen(po->filename, "r");
 	}
 	
-	/*
-	 * Check if the file exists at all with a libgnome-function.
-	 */
-	if(!g_file_exists(po->filename))
-	{
-		error=g_strdup_printf(_("The file `%s' doesn't exist at all!"), po->filename);
-		gnome_app_error(GNOME_APP(app1), error);
-		g_free(error);
-		return FALSE;
-	}
-
 	/*
 	 * As the po-file seems to exist, set the "count parameters" to 0.
 	 */

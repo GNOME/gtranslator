@@ -18,6 +18,7 @@
  */
 
 #include "open-differently.h"
+#include <libgtranslator/vfs-handle.h>
 
 
 /*
@@ -26,6 +27,14 @@
  */
 gboolean gtranslator_open_po_file(gchar *file)
 {
+	/*
+	 * Use conditionally the VFS routines to access
+	 *  remote files.
+	 */
+	#ifdef USE_VFS_STUFF
+	file=gtranslator_vfs_handle_open_file(file);
+	#endif
+		
 	/*
 	 * Reverse the filename for an easier catching
 	 *  of the supported suffixes.
