@@ -17,12 +17,13 @@
  *
  */
 
-#include "replace.h"
+#include "actions.h"
 #include "find.h"
 #include "gui.h"
+#include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
-#include "nautilus-string.h"
+#include "replace.h"
 
 #include <libgnomeui/libgnomeui.h>
 

@@ -269,7 +269,7 @@ int main(int argc, char *argv[])
 	 */
 	if (!file_opened)
 	{
-		gtranslator_actions_setup_state_no_file();
+		gtranslator_actions_set_up_state_no_file();
 	}
 	
 	/*

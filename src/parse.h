@@ -96,21 +96,10 @@ gboolean file_opened;
 gboolean message_changed;
 
 /*
- * Changes message fuzzy status
- */
-void gtranslator_message_status_set_fuzzy(GtrMsg  * msg, gboolean fuzzy);
-
-/*
- * Copies msgid to msgstr or blanks msgstr 
- */
-void gtranslator_message_status_set_sticky(GtrMsg  * msg, gboolean on);
-
-/*
  * Core backend functions for parsing a po file.
  */ 
 gboolean gtranslator_parse_core(void);
 void gtranslator_po_free(void);
-void gtranslator_message_free(gpointer data, gpointer useless);
 void gtranslator_parse(const gchar *po);
 
 /*
@@ -118,10 +107,6 @@ void gtranslator_parse(const gchar *po);
  *  calls from above and also sets up the GUI.
  */
 void gtranslator_parse_main(const gchar *po);
-
-/*
- * The core function for the parse() function above.
- */
 
 /*
  * Callbacks for the widgets

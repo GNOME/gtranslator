@@ -25,14 +25,16 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "actions.h"
 #include "dialogs.h"
+#include "gtkspell.h"
+#include "gui.h"
+#include "history.h"
+#include "message.h"
+#include "open-differently.h"
 #include "parse.h"
 #include "prefs.h"
-#include "gui.h"
-#include "open-differently.h"
-#include "history.h"
 #include "sidebar.h"
-#include "gtkspell.h"
 
 #include <gtk/gtkfilesel.h>
 #include <libgnomeui/gnome-appbar.h>
@@ -51,63 +53,6 @@ static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
 static gchar *restore_msg(const gchar * given);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
-
-void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
-{
-	regex_t *rex;
-	regmatch_t pos[3];
-	gchar *comment = msg->comment;
-	
-	/* 
-	 * If fuzzy status is already correct
-	 */
-	if (((msg->status & GTR_MSG_STATUS_FUZZY) != 0) == fuzzy)
-		return;
-	if (fuzzy) {
-		msg->status |= GTR_MSG_STATUS_FUZZY;
-		po->fuzzy++;
-		rex = gnome_regex_cache_compile(rxc,
-			  "^(#), c-format", 
-			  REG_EXTENDED | REG_NEWLINE);
-		if (!regexec(rex, comment, 3, pos, 0)) {
-			comment[pos[1].rm_so] = '\0';
-			msg->comment = g_strdup_printf("%s#, fuzzy%s", comment, 
-					    comment+pos[1].rm_eo);
-		} else {
-			msg->comment = g_strdup_printf("%s#, fuzzy\n", comment);
-		}
-		g_free(comment);
-	} else {
-		msg->status &= ~GTR_MSG_STATUS_FUZZY;
-		po->fuzzy--;
-		rex = gnome_regex_cache_compile(rxc, 
-			  "(^#, fuzzy$)|^#, (fuzzy,) c-format",
-			  REG_EXTENDED | REG_NEWLINE);
-		if (!regexec(rex, comment, 3, pos, 0)) {
-			gint i = (pos[1].rm_so == -1) ? 2 : 1;
-			strcpy(comment+pos[i].rm_so, comment+pos[i].rm_eo+1);
-		}
-	}
-}
-
-void gtranslator_message_status_set_sticky (GtrMsg * msg, gboolean on)
-{
-	if (on) {
-		g_free(msg->msgstr);
-		msg->msgstr = strdup(msg->msgid);
-		
-		/*
-		 * It is no longer fuzzy
-		 */
-		gtranslator_message_status_set_fuzzy(msg, FALSE);
-		msg->status |= GTR_MSG_STATUS_STICK;
-	} else {
-		g_free(msg->msgstr);
-		msg->msgstr = strdup("");
-		msg->status &= ~GTR_MSG_STATUS_STICK;
-	}
-	gtranslator_get_translated_count();
-}
 
 static void check_msg_status(GtrMsg * msg)
 {
@@ -374,7 +319,7 @@ void gtranslator_parse_main(const gchar *filename)
 	 */
 	gtranslator_parse(filename);
 
-	gtranslator_actions_setup_file_opened();
+	gtranslator_actions_set_up_file_opened();
 
 	gtranslator_get_translated_count();
 	/*
@@ -710,14 +655,6 @@ void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
 	gtranslator_actions_disable(ACT_SAVE);
 }
 
-void gtranslator_message_free(gpointer data, gpointer useless)
-{
-	g_free(GTR_MSG(data)->comment);
-	g_free(GTR_MSG(data)->msgid);
-	g_free(GTR_MSG(data)->msgstr);
-	g_free(data);
-}
-
 /*
  * Frees the po variable
  */
@@ -762,7 +699,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	}
 	
 	gtranslator_text_boxes_clean();
-	gtranslator_actions_setup_state_no_file();
+	gtranslator_actions_set_up_state_no_file();
 
 	/*
 	 * Set blank status, progress and window title

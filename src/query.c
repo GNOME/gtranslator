@@ -17,9 +17,12 @@
  *
  */
 
-#include "query.h"
+#include "actions.h"
 #include "gui.h"
 #include "prefs.h"
+#include "query.h"
+#include "utils.h"
+
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 
@@ -224,7 +227,7 @@ void gtranslator_query_domains(const gchar *directory)
 		{
 			gchar *domainname;
 
-			domainname=gtranslator_strip_out(entry->d_name);
+			domainname=gtranslator_utils_get_raw_file_name(entry->d_name);
 
 			/*
 			 * Check the pure filename before adding it to the
@@ -240,38 +243,6 @@ void gtranslator_query_domains(const gchar *directory)
 	closedir(dir);
 
 	domains=g_list_sort(domains, (GCompareFunc) strcmp);
-}
-
-/*
- * Strip the filename to get a "raw" enough filename.
- */ 
-gchar *gtranslator_strip_out(gchar *filename)
-{
-	GString *o=g_string_new("");
-	gint count=0;
-
-	filename=g_basename(filename);
-
-	/*
-	 * Strip all extensions after the _first_ point.
-	 */ 
-	while(filename[count]!='.')
-	{
-		o=g_string_append_c(o, filename[count]);
-
-		count++;
-	}
-
-	if(o->len > 0)
-	{
-		return o->str;
-	}
-	else
-	{
-		return NULL;
-	}
-
-	g_string_free(o, FALSE);
 }
 
 /*

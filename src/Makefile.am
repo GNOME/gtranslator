@@ -22,6 +22,7 @@ bin_PROGRAMS = gtranslator
 
 gtranslator_SOURCES = \
 	about.c about.h \
+	actions.c actions.h \
 	color-schemes.c color-schemes.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
@@ -34,6 +35,8 @@ gtranslator_SOURCES = \
 	htmlizer.c htmlizer.h \
 	languages.h \
 	main.c \
+	menus.h \
+	message.c message.h \
 	messages.h \
 	nautilus-string.c nautilus-string.h \
 	open-differently.c open-differently.h \
@@ -52,6 +55,7 @@ gtranslator_SOURCES = \
 	undo-core.c undo-core.h \
 	undo.c undo.h \
 	update.c \
+	utils.c utils.h \
 	vfs-handle.c vfs-handle.h \
 	views.c views.h
 

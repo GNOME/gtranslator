@@ -35,87 +35,40 @@ GtkWidget *trans_box;
 GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
 
-void gtranslator_create_main_window(void);
-
 /*
  * For the status messages
  */
 gchar status[128];
 
 /*
- * Actions IDs
+ * Creates the main window ans sets up the environment.
  */
-enum {
-	/*
-	 * FIXME: some time this is disabled
-	 */
-	ACT_NULL,
-	ACT_COMPILE,
-	ACT_SAVE,
-	ACT_UPDATE,
-	ACT_ACCOMPLISH,
-	ACT_SAVE_AS,
-	ACT_REVERT,
-	ACT_CLOSE,
-	/**********/
-	ACT_VIEW_MESSAGE,
-	ACT_VIEW_COMMENTS,
-	ACT_VIEW_NUMBER,
-	ACT_VIEW_C_FORMAT,
-	ACT_VIEW_HOTKEY,
-	/**********/
-	ACT_UNDO,
-	ACT_CUT,
-	ACT_COPY,
-	ACT_PASTE,
-	ACT_CLEAR,
-	ACT_FIND,
-	ACT_FIND_AGAIN,
-	ACT_REPLACE,
-	ACT_QUERY,
-	ACT_HEADER,
-	/**********/
-	ACT_FIRST,
-	ACT_BACK,
-	ACT_NEXT,
-	ACT_LAST,
-	ACT_GOTO,
-	ACT_NEXT_FUZZY,
-	ACT_NEXT_UNTRANSLATED,
-	/**********/
-	ACT_TRANSLATED,
-	ACT_FUZZY,
-	ACT_STICK,
-	/*
-	 * This must always be the last, add new entries above
-	 */
-	ACT_END
-};
+void gtranslator_create_main_window(void);
 
-void gtranslator_actions_set_up(gboolean state, ...);
-#define gtranslator_actions_enable(args...) gtranslator_actions_set_up(TRUE, args, ACT_END)
-#define gtranslator_actions_disable(args...) gtranslator_actions_set_up(FALSE, args, ACT_END)
-void gtranslator_actions_setup_state_no_file(void);
-void gtranslator_actions_setup_file_opened(void);
+/*
+ * Quits from gtranslator.
+ */
+gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
+			     gpointer useless);
 
 /*
  * Various functions for displaying messages 
  */
-void gtranslator_message_update(void);
 void gtranslator_application_bar_update(gint pos);
-void gtranslator_message_show(GList  * list_item);
 void gtranslator_text_boxes_clean(void);
-void gtranslator_message_change_status(GtkWidget  * widget, gpointer which);
 
 /*
- * Shows the needed message in text boxes
+ * Callbacks for text operations
  */
-void gtranslator_message_go_to(GList  * to_go);
-void gtranslator_message_go_to_first(GtkWidget  * widget, gpointer useless);
-void gtranslator_message_go_to_previous(GtkWidget  * widget, gpointer useless);
-void gtranslator_message_go_to_next(GtkWidget  * widget, gpointer useless);
-void gtranslator_message_go_to_last(GtkWidget  * widget, gpointer useless);
-void gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number);
+void gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless);
+void gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless);
+void gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless);
+void gtranslator_selection_clear(GtkWidget  * widget, gpointer useless);
+
+/*
+ * Switch the view to the given view.
+ */
+void gtranslator_switch_views(GtkWidget *widget, gpointer view);
 
 /*
  * A status defining callback -- now generaly defined for instance.

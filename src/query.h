@@ -39,11 +39,6 @@ typedef struct {
 GList *domains;
 
 /*
- * Returns the non-prefixed and non-suffixed filename back.
- */
-gchar *gtranslator_strip_out(gchar *filename);
-
-/*
  * Simply query for the gettext translation for the given message in the
  *  domain (program/package) and for the given language.
  */ 

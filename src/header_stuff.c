@@ -22,13 +22,14 @@
 #include <config.h>
 #endif
 
-#include "header_stuff.h"
+#include "actions.h"
 #include "dialogs.h"
 #include "gui.h"
-#include "prefs.h"
-#include "parse.h"
+#include "header_stuff.h"
 #include "languages.h"
 #include "nautilus-string.h"
+#include "parse.h"
+#include "prefs.h"
 
 #include <locale.h>
 #include <time.h>

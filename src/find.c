@@ -23,11 +23,12 @@
 #endif
 
 #include "find.h"
-#include "prefs.h"
-#include "parse.h"
-#include "views.h"
 #include "gui.h"
+#include "message.h"
+#include "parse.h"
+#include "prefs.h"
 #include "sidebar.h"
+#include "views.h"
 
 #include <string.h>
 #include <gtk/gtkeditable.h>
@@ -42,32 +43,6 @@ static gchar *pattern = NULL;
 static gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
 			   gboolean first);
 static gboolean find_in_msg(GList * msg, gpointer useless, gboolean first);
-static gboolean is_fuzzy(GList *msg, gpointer useless);
-static gboolean is_untranslated(GList *msg, gpointer useless);
-
-/*
- * Calls function func on each item in list 'begin'. Starts from 
- * item 'begin', loops to first element, and stops at 'begin'.
- * Returns TRUE, if found, FALSE otherwise.
- */
-gboolean gtranslator_message_for_each(GList * begin, FEFunc func, gpointer user_data)
-{
-	GList *msg;
-
-	g_return_val_if_fail(begin != NULL, FALSE);
-
-	msg = begin;
-	do {
-		if (msg == NULL) {
-			msg = g_list_first(begin);
-			g_return_val_if_fail(msg != NULL, TRUE);
-		}
-		if (func(msg, user_data))
-			return TRUE;
-		msg = msg->next;
-	} while (msg != begin);
-	return FALSE;
-}
 
 gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
                     gboolean first)
@@ -252,63 +227,6 @@ void gtranslator_find(GtkWidget * widget, gpointer what)
 	error = g_strdup_printf(_("Could not find\n\"%s\""), pattern);
 	gnome_app_message(GNOME_APP(gtranslator_application), error);
 	g_free(error);
-}
-
-static gboolean is_fuzzy(GList *msg, gpointer useless)
-{
-	/* 
-	 * Control if there's any message data.
-	 */
-	if(!(GTR_MSG(msg->data)))
-	{
-		g_warning(_("Couldn't get the message!"));
-		return FALSE;
-	}
-	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_FUZZY) {
-		gtranslator_message_go_to(msg);
-		return TRUE;
-	} else
-		return FALSE;
-}
-
-void gtranslator_message_go_to_next_fuzzy(GtkWidget * widget, gpointer useless)
-{
-	GList *begin;
-	
-	g_return_if_fail(file_opened == TRUE);
-	
- 	begin = po->current->next;
-	if (!begin)
-		begin = po->messages;
-	if (gtranslator_message_for_each(begin, (FEFunc)is_fuzzy, NULL) == TRUE)
-		return;
-	gnome_app_message(GNOME_APP(gtranslator_application), 
-			  _("There are no fuzzy messages left."));
-	gtranslator_actions_disable(ACT_NEXT_FUZZY);
-}
-
-static gboolean is_untranslated(GList *msg, gpointer useless)
-{
-	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_TRANSLATED)
-		return FALSE;
-	gtranslator_message_go_to(msg);
-	return TRUE;
-}
-
-void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer useless)
-{
-	GList *begin;
-	
-	g_return_if_fail(file_opened == TRUE);
-
- 	begin = po->current->next;
-	if (!begin)
-		begin = po->messages;
-	if (gtranslator_message_for_each(begin, (FEFunc)is_untranslated, NULL))
-		return;
-	gnome_app_message(GNOME_APP(gtranslator_application), 
-			  _("All messages seem to be translated."));
-	gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED);
 }
 
 void gtranslator_update_regex_flags(void)

@@ -1,3 +1,19 @@
+2001-04-07  Fatih Demir <kabalak@gtranslator.org>
+
+	* actions.c/.h & gui.c: As we can't directly operate on the
+		acts[] array anymore use the new utility
+		 "gtranslator_actions_disable_fuzzy_menu_item" function.
+
+	* *.c/.h: Include the new headers where needed and
+		reorder almost all includes to be alphabetically -- currently
+		 it doesn't build with -Werror enabled.
+
+	* Makefile.am: Include the new source files.
+
+	* actions.c/.h, message.c/.h & utils.c/.h: Outsourced
+		common stuff from *.* to these new files -- the
+		 consequence of the renaming.
+
 2001-04-06  Fatih Demir <kabalak@gtranslator.org>
 
 	* Makefile.am: Added new sources to the build.

@@ -1,5 +1,6 @@
 /*
- * (C) 2000-2001 	Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ *		Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,27 +18,29 @@
  *
  */
 
-#ifndef GTR_FIND_H
-#define GTR_FIND_H 1
+#ifndef GTR_UTILS_H
+#define GTR_UTILS_H 1
 
+#include <glib.h>
 #include <gtk/gtkwidget.h>
 
 /*
- * find modes
+ * Utility function for use within gtranslator.
  */
-typedef enum {
-  findEnglish    = 1,
-  findTranslated = 2,
-  findBoth       = 3,
-  findComment    = 4,
-  findAll        = 7
-} FindMode;
+ 
+/*
+ * Returns the non-prefixed and non-suffixed filename back.
+ */
+gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 
 /*
- * The generally used find function-
+ * Show the homepage of gtranslator.
  */
-void gtranslator_find(GtkWidget *widget, gpointer target);
+void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);
 
-void gtranslator_update_regex_flags(void);
+/*
+ * Invert the dots in the message.
+ */
+void gtranslator_utils_invert_dot(gchar *str);
 
 #endif

@@ -1,0 +1,342 @@
+/*
+ * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ *		Gediminas Paulauskas <menesis@gtranslator.org>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
+
+#ifndef GTR_MENUS_H
+#define GTR_MENUS_H 1
+
+#include "about.h"
+#include "dialogs.h"
+#include "find.h"
+#include "gui.h"
+#include "message.h"
+#include "parse.h"
+#include "prefs.h"
+#include "utils.h"
+#include "views.h"
+
+#include "pixmaps/untrans.xpm"
+
+#include <gdk/gdkkeysyms.h>
+#include <libgnomeui/gnome-app.h>
+#include <libgnomeui/gnome-app-helper.h>
+#include <libgnomeui/gnome-stock.h>
+
+/*
+ * The recenlty used menu in a little bit different manner ( this is just
+ *  a placeholder.
+ */
+static GnomeUIInfo the_last_files_menus[] = {
+        GNOMEUIINFO_END
+};
+
+/*
+ * The File menu.
+ */
+static GnomeUIInfo the_file_menu[] = {
+	{
+		GNOME_APP_UI_ITEM, N_("_Compile"),
+		N_("Compile the po-file"),
+		compile, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
+		GDK_C, GDK_MOD1_MASK, NULL
+	},
+	{
+		GNOME_APP_UI_ITEM, N_("_Update"),
+		N_("Update the po-file"),
+		update, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
+		GDK_F5, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Autoaccomplish"),
+		N_("Automatically fill missing translations from the default query domain"),
+		gtranslator_auto_accomplishment_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
+		GDK_F10, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
+	{
+		GNOME_APP_UI_ITEM, N_("Open from _URI"),
+		N_("Open a po file from a given URI"),
+		gtranslator_open_uri_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
+		GDK_F3, GDK_MOD1_MASK, NULL
+	},
+	GNOMEUIINFO_MENU_SAVE_ITEM(gtranslator_save_current_file_dialog, NULL),
+	GNOMEUIINFO_MENU_SAVE_AS_ITEM(gtranslator_save_file_as_dialog, NULL),
+	GNOMEUIINFO_MENU_REVERT_ITEM(gtranslator_file_revert, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(gtranslator_file_close, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_SUBTREE( N_("Recen_t files"), the_last_files_menus),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_views_menu[] = {
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Message"), 
+		N_("Standard messages view"),
+		gtranslator_switch_views, (gpointer) GTR_MESSAGE_VIEW, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Comments"), 
+		N_("View comments for message"),
+		gtranslator_switch_views, (gpointer) GTR_COMMENT_VIEW, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Numbers"),
+		N_("View numbers in the message"),
+		gtranslator_switch_views, (gpointer) GTR_NUMBER_VIEW, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Formats"), 
+		N_("View C formats of the message"),
+		gtranslator_switch_views, (gpointer) GTR_C_FORMAT_VIEW, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Hotkeys"),
+		N_("View hotkeys in the message"),
+		gtranslator_switch_views, (gpointer) GTR_HOTKEY_VIEW, NULL),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_edit_menu[] = {
+	GNOMEUIINFO_MENU_UNDO_ITEM(gtranslator_actions_undo, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_CUT_ITEM(gtranslator_clipboard_cut, NULL),
+	GNOMEUIINFO_MENU_COPY_ITEM(gtranslator_clipboard_copy, NULL),
+	GNOMEUIINFO_MENU_PASTE_ITEM(gtranslator_clipboard_paste, NULL),
+	GNOMEUIINFO_MENU_CLEAR_ITEM(gtranslator_selection_clear, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_FIND_ITEM(gtranslator_find_dialog, NULL),
+	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtranslator_find, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM(gtranslator_replace_dialog, NULL),
+	{
+		GNOME_APP_UI_ITEM, N_("_Query"),
+		N_("Query for a string"),
+		gtranslator_query_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
+		GDK_F7, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("_Header..."),
+		N_("Edit the header"),
+		gtranslator_header_edit_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
+		GDK_F8, 0, NULL
+	},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_messages_menu[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("_First"),
+	 N_("Go to the first message"),
+	 gtranslator_message_go_to_first, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FIRST,
+	 GDK_Up, GDK_CONTROL_MASK, NULL
+	},
+	{
+	 GNOME_APP_UI_ITEM, N_("_Back"),
+	 N_("Go one message back"),
+	 gtranslator_message_go_to_previous, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BACK,
+	 GDK_Left, GDK_CONTROL_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("_Next"),
+	 N_("Go one message forward"),
+	 gtranslator_message_go_to_next, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
+	 GDK_Right, GDK_CONTROL_MASK, NULL
+	},
+	{
+	 GNOME_APP_UI_ITEM, N_("_Last"),
+	 N_("Go to the last message"),
+	 gtranslator_message_go_to_last, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_LAST,
+	 GDK_Down, GDK_CONTROL_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("_Go to..."),
+	 N_("Goto specified message number"),
+	 gtranslator_go_to_dialog, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
+	 'G', GDK_CONTROL_MASK, NULL
+	},
+	{
+	 GNOME_APP_UI_ITEM, N_("Next fuz_zy"),
+	 N_("Go to next fuzzy message"),
+	 gtranslator_message_go_to_next_fuzzy, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+	 'Z', GDK_MOD1_MASK, NULL
+	},
+	{
+	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
+	 N_("Go to next untranslated message"),
+	 gtranslator_message_go_to_next_untranslated, NULL, NULL,
+	 GNOME_APP_PIXMAP_DATA, untrans_xpm,
+	 'U', GDK_MOD1_MASK, NULL
+	},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_msg_status_menu[] = {
+	{
+		GNOME_APP_UI_TOGGLEITEM, N_("_Translated"),
+		N_("Toggle translated status of a message"),
+		gtranslator_message_change_status,
+		GINT_TO_POINTER(GTR_MSG_STATUS_TRANSLATED),
+		NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
+		GDK_1, GDK_MOD1_MASK, NULL
+	},
+	{
+		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
+		N_("Toggle fuzzy status of a message"),
+		gtranslator_message_change_status,
+		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
+		NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+		GDK_2, GDK_MOD1_MASK, NULL
+	},
+	{
+		GNOME_APP_UI_TOGGLEITEM, N_("_Stick"),
+		N_("Stick this message"),
+		gtranslator_message_change_status,
+		GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
+		NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
+		GDK_3, GDK_MOD1_MASK, NULL
+	},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_settings_menu[] = {
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gtranslator_preferences_dialog_create, NULL),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_help_menu[] = {
+	GNOMEUIINFO_HELP("gtranslator"),
+	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_create_about_box, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
+			       N_("gtranslator's homepage on the web"),
+			       gtranslator_utils_show_home_page,
+			       GNOME_STOCK_MENU_HOME),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_menus[] = {
+	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
+	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
+	GNOMEUIINFO_MENU_VIEW_TREE(the_views_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
+	GNOMEUIINFO_SUBTREE(N_("Mess_age status"), the_msg_status_menu),
+	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
+	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
+	GNOMEUIINFO_END
+};
+
+/* 
+ * The toolbar buttons
+ */
+static GnomeUIInfo the_toolbar[] = {
+	GNOMEUIINFO_ITEM_STOCK(N_("Open"),
+			       N_("Open a po-file"),
+			       gtranslator_open_file_dialog,
+			       GNOME_STOCK_PIXMAP_OPEN),
+	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
+			       N_("Save File"),
+			       gtranslator_save_current_file_dialog,
+			       GNOME_STOCK_PIXMAP_SAVE),
+	GNOMEUIINFO_ITEM_STOCK(N_("Save as"),
+			       N_("Save file with a different name"),
+			       gtranslator_save_file_as_dialog,
+			       GNOME_STOCK_PIXMAP_SAVE_AS),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
+			       N_("Compile the po-file"),
+			       compile,
+			       GNOME_STOCK_PIXMAP_CONVERT),
+	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
+			       N_("Update the po-file"),
+			       update,
+			       GNOME_STOCK_PIXMAP_REFRESH),		       
+	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
+			       N_("Edit the header"),
+			       gtranslator_header_edit_dialog,
+			       GNOME_STOCK_PIXMAP_PROPERTIES),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("Options"),
+			       N_("gtranslator options"),
+			       gtranslator_preferences_dialog_create,
+			       GNOME_STOCK_PIXMAP_PREFERENCES),
+	GNOMEUIINFO_ITEM_STOCK(N_("Exit"),
+			       N_("Exit"),
+			       gtranslator_quit,
+			       GNOME_STOCK_PIXMAP_EXIT),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo the_navibar[] = {
+	GNOMEUIINFO_ITEM_STOCK(N_("First"),
+			       N_("Go to the first message"),
+			       gtranslator_message_go_to_first,
+			       GNOME_STOCK_PIXMAP_FIRST),
+	GNOMEUIINFO_ITEM_STOCK(N_("Back"),
+			       N_("Go one message back"),
+			       gtranslator_message_go_to_previous,
+			       GNOME_STOCK_PIXMAP_BACK),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
+			       N_("Go one message forward"),
+			       gtranslator_message_go_to_next,
+			       GNOME_STOCK_PIXMAP_FORWARD),
+	GNOMEUIINFO_ITEM_STOCK(N_("Last"),
+			       N_("Go to the last message"),
+			       gtranslator_message_go_to_last,
+			       GNOME_STOCK_PIXMAP_LAST),
+	GNOMEUIINFO_ITEM(N_("Missing"),
+			       N_("Go to next untranslated message"),
+			       gtranslator_message_go_to_next_untranslated,
+			       untrans_xpm),
+	GNOMEUIINFO_ITEM_STOCK(N_("Fuzzy"),
+			       N_("Go to the next fuzzy translation"),
+			       gtranslator_message_go_to_next_fuzzy,
+			       GNOME_STOCK_PIXMAP_BOOK_RED),
+	GNOMEUIINFO_ITEM_STOCK(N_("Go to"),
+			       N_("Go to specified message number"),
+			       gtranslator_go_to_dialog,
+			       GNOME_STOCK_PIXMAP_JUMP_TO),
+	GNOMEUIINFO_ITEM_STOCK(N_("Find"),
+			       N_("Find string in po-file"),
+			       gtranslator_find_dialog,
+			       GNOME_STOCK_PIXMAP_SEARCH),
+	GNOMEUIINFO_ITEM_STOCK(N_("Replace"),
+			       N_("Replace string in po-file"),
+			       gtranslator_replace_dialog,
+			       GNOME_STOCK_PIXMAP_SRCHRPL),
+	GNOMEUIINFO_ITEM_STOCK(N_("Query"),
+			       N_("Query for a string"),
+			       gtranslator_query_dialog,
+			       GNOME_STOCK_PIXMAP_JUMP_TO),
+	GNOMEUIINFO_END
+};
+
+#endif

@@ -22,15 +22,16 @@
 #include <config.h>
 #endif
 
+#include "actions.h"
+#include "color-schemes.h"
 #include "dialogs.h"
-#include "gui.h"
 #include "find.h"
-#include "prefs.h"
+#include "gui.h"
+#include "open-differently.h"
 #include "parse.h"
+#include "prefs.h"
 #include "query.h"
 #include "replace.h"
-#include "open-differently.h"
-#include "color-schemes.h"
 #include "syntax.h"
 
 #include <string.h>
