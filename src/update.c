@@ -1,6 +1,6 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
- * 			Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.net>
+ * 			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

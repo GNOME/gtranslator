@@ -1,4 +1,4 @@
-2001-02-09  Fatih Demir	<kabalak@kabalak.net>
+2001-02-09  Fatih Demir	<kabalak@gtranslator.org>
 
 	* about.c: Changed the about messages as we don't have got any
 		libgtranslator/gtranslatord anylonger.
@@ -29,7 +29,7 @@
 	* stylistics.c/.h: Moved also to here and included the
 		gnome-i18n.h header for problemless build.
 
-2001-02-08  Fatih Demir	<kabalak@kabalak.net>
+2001-02-08  Fatih Demir	<kabalak@gtranslator.org>
 
 	* Makefile.am: Made GAL & GtkHTML flags used by default.
 
@@ -37,12 +37,12 @@
 		use the enhanced GAL & GtkHTML actions by default as they're
 		 now requirements for HEAD.
 
-2001-02-06  Fatih Demir	<kabalak@gmx.net>
+2001-02-06  Fatih Demir	<kabalak@gtranslator.net>
 
 	* shortcutbar.c: Don't show the full filename in the shortcut bar;
 		just show the project name and the base filename.
 
-2001-02-05  Gediminas Paulauskas <menesis@delfi.lt>
+2001-02-05  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c: open working dir in save as dialog also.
 	* header_stuff.c: if no project version is set do not write space after
@@ -53,19 +53,19 @@
 	Implement "warn user about fuzzy mesages left" option.
 	* prefs.c: do not free internal font name.
 
-2001-02-04  Gediminas Paulauskas <menesis@delfi.lt>
+2001-02-04  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c: Open dialog shows the same dir as current file.
 	* parse.c: avoid crash in free_po() if po=NULL.
 	
-2001-02-04  Gediminas Paulauskas <menesis@delfi.lt>
+2001-02-04  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* header_stuff.c: get not-localized language only from language
 	name, not from other fields. Fix a crash. Ensure comment ends with \n.
 	* history.c: show nice menu items: 1. project 3.14 -- lt.po. Install
 	menu hints into appbar.
 
-2001-02-04  Fatih Demir	<kabalak@gmx.net>
+2001-02-04  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c, gui.h, parse.c: Removed the locally defined
 		shortcut bar stuff as we do now have general
@@ -75,7 +75,7 @@
 
 	* shortcutbar.c/.h: New sources for shortcut bar stuff.
 
-2001-02-03  Fatih Demir	<kabalak@gmx.net>
+2001-02-03  Fatih Demir	<kabalak@gtranslator.net>
 
 	* open-differently.c: Corrected the opening of the "special"
 		po files -- don't forget the GnomeVFS case.
@@ -104,14 +104,14 @@
 
 	* history.c: Removed a g_print.
 
-2001-02-03  Gediminas Paulauskas <menesis@delfi.lt>
+2001-02-03  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* history.c: renamed "history_length" to "history/length" for
 	gnome-config. When reading, append to list, so newest entries are 
 	always at top. History works with gnome-config now. Not yet with
 	gconf...
 
-2001-02-03  Gediminas Paulauskas <menesis@delfi.lt>
+2001-02-03  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	Almost fixed history stuff.
 	* gui.c, parse.*, history.*: renamed gtranslator_display_recent() to
@@ -123,7 +123,7 @@
 	removes duplicates of one entry, used only on history_add.
 	* Makefile.am: build ./ before pixmaps/.
 
-2001-02-03  Fatih Demir	<kabalak@gmx.net>
+2001-02-03  Fatih Demir	<kabalak@gtranslator.net>
 
 	* pixmaps/.cvsignore: Added cvs ignore again for HEAD.
 
@@ -131,7 +131,7 @@
 		part if we're working with gtkhtml -- this is like a
 		 preview for the further work for the msgstr part.
 
-2001-02-02  Fatih Demir	<kabalak@gmx.net>
+2001-02-02  Fatih Demir	<kabalak@gtranslator.net>
 
 	* htmlizer.c/.h: Added html making helper sources; very
 		simple though.
@@ -144,7 +144,7 @@
 
 	* gui.c: Changed the webaddress to http://www.gtranslator.org
 
-2001-02-01  Fatih Demir	<kabalak@gmx.net>
+2001-02-01  Fatih Demir	<kabalak@gtranslator.net>
 
 	* dialogs.c: Perhaps the Save as dialog will also detect
 		a previously remote po file and will offer a direct
@@ -157,7 +157,7 @@
 		work for all supported kinds of po files; take the
 		 local copy of the remote file as the 'local' file.
 
-2001-01-31  Fatih Demir	<kabalak@gmx.net>
+2001-01-31  Fatih Demir	<kabalak@gtranslator.net>
 
 	* open-differently.c: Also use the VFS methods to open
 		a remote po file via GnomeVFS -- if present.
@@ -173,7 +173,7 @@
 
 	* history.c, parse.c: fixed list bugs, which generated segv.
 
-2001-01-29  Fatih Demir	<kabalak@gmx.net>
+2001-01-29  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c: Use the new history functions <damn-it/>.
 
@@ -186,12 +186,12 @@
 
 	* history.c/.h: New history sources.
 
-2001-01-28  Fatih Demir	<kabalak@gmx.net>
+2001-01-28  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Changed a hotkey to work (it's the "Message status"
 		menu entry).
 
-2001-01-27  Fatih Demir	<kabalak@gmx.net>
+2001-01-27  Fatih Demir	<kabalak@gtranslator.net>
 
 	* header_stuff.c: Get the language name from the languages
 		list and don't write localized language names to the
@@ -224,7 +224,7 @@
 		  "gettexted", so that it should also be usable
 		    with Japanese/Ukrainian charsets.
 
-2001-01-24  Fatih Demir	<kabalak@gmx.net>
+2001-01-24  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Fiddling with the new multiple dot char stuff.
 
@@ -243,38 +243,38 @@
 	
 	* about.c: Changed the copyright years.
 
-2001-01-21  Fatih Demir	<kabalak@gmx.net>
+2001-01-21  Fatih Demir	<kabalak@gtranslator.net>
 
 	* languages.h: Updated and corrected the Turkish
 		mailing list address.
 
-2001-01-14  Fatih Demir	<kabalak@gmx.net>
+2001-01-14  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Removed the open-po-file-*.c/.h
 		sources.
 	
 	* open-po-file-*.c/.h: Removed these source files.
 
-2001-01-14  Gediminas Paulauskas <menesis@delfi.lt>
+2001-01-14  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* prefs.c: use strcoll instead of strcmp for sorting of languages, and
 	simple strcmp instead of g_strcasecmp for other fields.
 
-2001-01-12  Fatih Demir	<kabalak@gmx.net>
+2001-01-12  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c: Removed the recent-files.h inclusion.
 
-2001-01-11  Fatih Demir	<kabalak@gmx.net>
+2001-01-11  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: Check if an old "gtranslator-temp-po-file" is
 		lungering around in the users home directory and
 		 in this case delete the file.
 
-2001-01-07  Gediminas Paulauskas <menesis@delfi.lt>
+2001-01-07  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c: focus entry when find dialog is opened.
 
-2001-01-07  Fatih Demir	<kabalak@gmx.net>
+2001-01-07  Fatih Demir	<kabalak@gtranslator.net>
 
 	* .cvsignore: Added pixmaps/.xvpics.
 
@@ -283,7 +283,7 @@
 	* gui.c: Changed the hotkeys for message navigation
 		to F9, F10, F11, F12 -- now they do work.
 
-2001-01-06  Gediminas Paulauskas <menesis@delfi.lt>
+2001-01-06  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* pixmaps/untrans.xpm: added this dir and one pixmap for untranslated
 		toolbar button.
@@ -295,7 +295,7 @@
 	does not need to be a file, just name.
 	* prefs.h: whitespace.
 
-2001-01-05  Fatih Demir	<kabalak@gmx.net>
+2001-01-05  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Added code which determines if a special dictionary
 		is desired and then calls the gtkspell ispell process
@@ -319,7 +319,7 @@
 	* open-differently: Allocate the gchars newly before freeing
 		them.
 
-2001-01-04  Gediminas Paulauskas <menesis@delfi.lt>
+2001-01-04  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	Ran gtranslator in memprof. Several memleaks found.
 
@@ -329,7 +329,7 @@
 	(gtranslator_display_recent) "name" was not neccesarry. do not strdup
 	static strings. Free menu->hint.
 
-2001-01-04  Fatih Demir	<kabalak@gmx.net>
+2001-01-04  Fatih Demir	<kabalak@gtranslator.net>
 
 	* open-differently.c: Applied the change of the temporary file name
 		to "gtranslator-temp-po-file".
@@ -347,7 +347,7 @@
 	* parse.c/.h, languages.h, header-stuff.c/.h, gui.c/.h: Reformatted
 		these files simply.
 
-2001-01-03  Gediminas Paulauskas <menesis@delfi.lt>
+2001-01-03  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gtkspell.c: (popup_menu) removed orig_mouse parameter.
 	(button_press_intercept_cb) changed declaration to match prototype. Do
@@ -357,14 +357,14 @@
 	always destroy it. Changed type of function to match prototype, return
 	FALSE/TRUE.
 
-2001-01-03  Gediminas Paulauskas <menesis@delfi.lt>
+2001-01-03  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gtkspell.c: (popup menu) fixed tests for which button is pressed and
 	when to popup spelling menu. Now works with/without popup menu. Merged
 	duplicated blocks.
 	removed extra whitespace and replaced some spaces with tabs.
 
-2001-01-03  Fatih Demir	<kabalak@gmx.net>
+2001-01-03  Fatih Demir	<kabalak@gtranslator.net>
 
 	* open-differently.c/.h: Added a method which detects
 		and returns TRUE if the "special" methods of
@@ -415,17 +415,17 @@
 		right instead of the top -- makes it more
 		 readable.
 
-2001-01-02  Fatih Demir	<kabalak@gmx.net>
+2001-01-02  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: Reformatted and removed any URI/GnomeVFS
 		elements and includes.
 
-2001-01-01  Fatih Demir	<kabalak@gmx.net>
+2001-01-01  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c: Added an out commented call to the new
 		recent files' methods of libgtranslator.
 
-2000-12-31  Fatih Demir	<kabalak@gmx.net>
+2000-12-31  Fatih Demir	<kabalak@gtranslator.net>
 
 	* beginners-druid-*.c/.h & preferences-*.c/.h:
 		Removed these glade-based files.
@@ -457,7 +457,7 @@
 	* update.c & parse.c: Outsourced the update functions to it's
 		own source file.
 
-2000-12-30  Fatih Demir	<kabalak@gmx.net>
+2000-12-30  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Define the necessary USE_VFS_STUFF and
 		GCONF_IS_PRESENT defines also in "src", also in
@@ -465,7 +465,7 @@
 
 	* main.c: Removed the druid call for now.
 
-2000-12-30  Gediminas Paulauskas <menesis@delfi.lt>
+2000-12-30  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gui.c: implemented sticky message status on menu item toggle.
 	* parse.c,parse.h: new mark_msg_sticky function.
@@ -474,13 +474,13 @@
 	* prefs.c: fix size of sixth page table. check if font is saved in
 	preferences, only then set it.
 	
-2000-12-29  Fatih Demir	<kabalak@gmx.net>
+2000-12-29  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Include the new files altogether in a build,
 		removed the "SophInterfaceFiles" from the EXTRA_DIST
 		 and it's targetism.
 
-2000-12-28  Fatih Demir	<kabalak@gmx.net>
+2000-12-28  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Include also the open-po-file-dialog sources.
 
@@ -505,23 +505,23 @@
 		 the previous glade files -- need tuning and coding
 		  here -- they'ren't included in the build for now.
 
-2000-12-17  Fatih Demir	<kabalak@gmx.net>
+2000-12-17  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Disable the Spell checking menu entries on startup.
 
-2000-12-15  Gediminas Paulauskas <menesis@delfi.lt>
+2000-12-15  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* parse.c: if there were no comments, do not print (null).
 	* gui.c: do not replace dots with spaces, exchange them! So now dots are
 	not lost, they just look like spaces. (in show-centered-dot mode).
 
-2000-12-09  Fatih Demir	<kabalak@gmx.net>
+2000-12-09  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c: Hmm, stupid error... Forgot to write the else
 		part of the condition if the filename if "temp_po_file";
 		 now the save part should again work...
 
-2000-12-08  Fatih Demir	<kabalak@gmx.net>
+2000-12-08  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c/.h: Added a gtranslator_open_gzipped_po_file function
 		which does work like gtranslator_open_mo_file but it does
@@ -534,7 +534,7 @@
 	* parse.c: Also allow opening mo/gmo-files from the open file
 		dialog.
 
-2000-12-07  Gediminas Paulauskas <menesis@delfi.lt>
+2000-12-07  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gui.c: (str_replace) added function which quickly replaces dots with
 	spaces.
@@ -560,7 +560,7 @@
 	strings.
 	* parse.h: removed undotchar declaration.
 
-2000-12-06  Fatih Demir	<kabalak@gmx.net>
+2000-12-06  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: Determine if the given file has got
 		the suffix ".mo" and open it with the
@@ -577,13 +577,13 @@
 		   gets it's informations from the "temp_po_file"
 		    name which should only be used temporarily.
 
-2000-12-05  Fatih Demir	<kabalak@gmx.net>
+2000-12-05  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: Added more VFS stuff, so it
 		tries to get the file via GnomeVFS
 		 interface...
 
-2000-12-03  Fatih Demir	<kabalak@gmx.net>
+2000-12-03  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Added the conditional close-down of
 		GnomeVFS if USE_VFS_STUFF is defined and
@@ -598,7 +598,7 @@
 	* Makefile.am: Added the VFS cflags and libs
 		stuff.
 
-2000-12-02  Fatih Demir	<kabalak@gmx.net>
+2000-12-02  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: Enable the spell-checking menu entry.
 
@@ -606,32 +606,32 @@
 
 	* gtkspell.c/.h: Copied these files from gnomeicu ,-)
 
-2000-12-01  Fatih Demir	<kabalak@gmx.net>
+2000-12-01  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Corrected a typo :-)
 
-2000-11-27  Gediminas Paulauskas <menesis@delfi.lt>
+2000-11-27  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* parse.c: do not free the result of g_basename(); do not crash.
 	* gui.*: added ACT_NULL, a FIXME and warning. It is disabled somehow!
 
-2000-11-18  Gediminas Paulauskas <menesis@delfi.lt>
+2000-11-18  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gui.c: grouped toolbar operations into file/po-specific/app groups.
 	* parse.c: (parse) do not crash even if filename is a dir, NULL or "".
 
-2000-11-13 Gediminas Paulauskas <menesis@delfi.lt>
+2000-11-13 Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c, find.c: implement "Find in", now you can search in English
 	and/or translated entries.
 
-2000-11-13 Gediminas Paulauskas <menesis@delfi.lt>
+2000-11-13 Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c, gui.c, header_stuff.c, prefs.c, session.c: call
 	gtranslator_config_init/close (no more called inside of
 	gtranslator_config_*).
 
-2000-11-12  Fatih Demir	<kabalak@gmx.net>
+2000-11-12  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c: Prevent gtranslator from crashing
 		if there aren't any previous files.
@@ -641,7 +641,7 @@
 		 <gtranslator data>/scritps to fit the
 		  data Makefiles.
 
-2000-10-30  Fatih Demir	<kabalak@gmx.net>
+2000-10-30  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Removed the include-dir ../libgtranslator as
 		all libgtranslator headers are now globally declared
@@ -650,7 +650,7 @@
 	* main.c: Also made it include only the <libgtranslator/...>
 		headers instead of simply doing "...".
 
-2000-10-30 Gediminas Paulauskas <menesis@delfi.lt>
+2000-10-30 Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gui.c: moved Update menu item just after Compile. Enable Status/Fuzzy
 		menu entry after Open. Focus translation box during startup.
@@ -663,27 +663,27 @@
 		in get_translated_count. Simplified percentage count, now shows
 		correctly. Removed onepercent variable.
 
-2000-10-29  Fatih Demir	<kabalak@gmx.net>
+2000-10-29  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Change the corresponding calls to the gtranslator_set_style
 		function, as it does only take one argument now; call the
 		 function twice, one time for the text box and one time
 		  for the translation box.
 
-2000-10-25  Fatih Demir	<kabalak@gmx.net>
+2000-10-25  Fatih Demir	<kabalak@gtranslator.net>
 
 	* header_stuff.h, parse.h & spell.c: Changed the includes
 		to <libgtranslator/messages.h> due to the move.
 	
 	* messages.h: Removed it from here. Moved it to libgtranslator.
 
-2000-10-23  Fatih Demir	<kabalak@gmx.net>
+2000-10-23  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Also added here the "/usr/X11R6/lib" to the
 		$LDFLAGS for gtranslator; the source packages should
 		 now again build without problems.
 
-2000-10-20  Fatih Demir	<kabalak@gmx.net>
+2000-10-20  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Also disable the corresponding buttons if no fuzzy/
 		untranslated messages seem to have been residential
@@ -692,7 +692,7 @@
 	* parse.c: Corrected the place of the decrementing statement
 		for the translated count.
 
-2000-10-18  Fatih Demir	<kabalak@gmx.net>
+2000-10-18  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c/h: Added another function which sets up the progress bar
 		status ( gtranslator_set_progress_bar() ).
@@ -702,7 +702,7 @@
 		 start and enable them only if there's a fuzzy, untranslated
 		  message. Another bug has been removed :-)
 
-2000-10-17  Fatih Demir <kabalak@gmx.net>
+2000-10-17  Fatih Demir <kabalak@gtranslator.net>
 
 	* gui.c: Set the left fuzzy/untranslated messages inside the status
 		text and set the progress bar corresponding to the current
@@ -725,7 +725,7 @@
 
 	* gui.c: Also have a progress bar in the GNOME appbar.
 
-2000-10-15  Fatih Demir	<kabalak@gmx.net>
+2000-10-15  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Set the font and the colors on startup via the new
 		gtranslator_set_style() function which should do more
@@ -743,7 +743,7 @@
 		libgtranslator, get/set the font name in the preferences and
 		 the function to set the style.
 
-2000-10-13  Fatih Demir <kabalak@gmx.net>
+2000-10-13  Fatih Demir <kabalak@gtranslator.net>
 
 	* prefs.c: Removed the corresponding check button for the removed
 		option and added a sixth page with the font and color
@@ -760,7 +760,7 @@
  
         * Makefile.am: Also removed the TODO.src file here.
 
-2000-10-12  Fatih Demir	<kabalak@gmx.net>
+2000-10-12  Fatih Demir	<kabalak@gtranslator.net>
 
 	* prefs.c: Changed the description text for the option to delete
 		obsolete recent file menu entries as it does only remove
@@ -776,7 +776,7 @@
 		 functions, handle the translation text box as a GtkEditable;
 		  now the dot char mode works as wished :-)
 
-2000-10-11  Fatih Demir	<kabalak@gmx.net>
+2000-10-11  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c: Call the gtranslator_display_recent() function every
 		time a new file is opened; this function should now really
@@ -797,7 +797,7 @@
 		 this has been corrected and it works now again also in
 		  dot char mode.
 
-2000-10-07  Fatih Demir	<kabalak@gmx.net>
+2000-10-07  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: Removed the error warning about GConf as it works
 		now again.
@@ -825,7 +825,7 @@
 	* prefs.h: Added the delete_obsolete_rfentries value and the
 		uzi_dialogs values to the wants structure.
 
-2000-10-06  Fatih Demir	<kabalak@gmx.net>
+2000-10-06  Fatih Demir	<kabalak@gtranslator.net>
 
 	* languages.h: Corrected the German mailing list address.
 
@@ -868,7 +868,7 @@
 		set the number of entries hold in the Recent files menu
 		( minimum 1, maximum 10 ).
 
-2000-10-05  Fatih Demir	<kabalak@gmx.net>
+2000-10-05  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Added "Recent files" sub menu into the File tree and
 		put some dope stuff around it.
@@ -892,7 +892,7 @@
 		 option set in the preferences and to the case if a
 		  file is opened or not.
 
-2000-10-04  Fatih Demir	<kabalak@gmx.net>
+2000-10-04  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Added more "live" status bar update for the status
 		information on change of a fuzzy message, removed
@@ -910,7 +910,7 @@
 	* \*.c: Added 3 FIXME's which are the three places where
 		gtranslator crashes regularly; these are FIXME's :)
 
-2000-10-03  Fatih Demir	<kabalak@gmx.net>
+2000-10-03  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Added some more conditionals in hope of avoiding more
 		crashes, changed the descriptions of the new page's
@@ -929,7 +929,7 @@
 		so we can later use it in a "Recent files" menu or a favorites
 		 or something-alike menu.
 
-2000-10-02  Fatih Demir	<kabalak@gmx.net>
+2000-10-02  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Put the main.c file at the start of the
 		compilation process.
@@ -944,7 +944,7 @@
 		Added a beta-alpha version of the dot char-stuff
 		 which does cause more crashs... grrrr...
 
-2000-10-01  Fatih Demir	<kabalak@gmx.net>
+2000-10-01  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Only activate the pop up-menu for the two
 		text boxes.
@@ -953,7 +953,7 @@
 		gtranslator_config_close calls as libgtranslator's
 		 functions are doing this now on their own.
 
-2000-09-30  Fatih Demir	<kabalak@gmx.net>
+2000-09-30  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Added the pop up-menu for gtranslator; it
 		reacts only on right click on the text-boxes
@@ -968,11 +968,11 @@
 
 	* session.c: Removed some unneeded stuff.
 
-2000-09-29  Fatih Demir	<kabalak@gmx.net>
+2000-09-29  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: More informations on a GConf error.
 
-2000-09-24  Fatih Demir	<kabalak@gmx.net>
+2000-09-24  Fatih Demir	<kabalak@gtranslator.net>
 
 	* dialogs.c, header_stuff.c, session.c & prefs.c:
 		Adapted the settings variables to GConf-style.
@@ -992,14 +992,14 @@
 		take the right argument style to the
 		 gconf_init function :)
 
-2000-09-23  Fatih Demir	<kabalak@gmx.net>
+2000-09-23  Fatih Demir	<kabalak@gtranslator.net>
 
 	* main.c: Init the GConf library if it's present.
 
 	* find.c: Check if we did get any message before operating
 		on it.
 
-2000-09-21  Fatih Demir	<kabalak@gmx.net>
+2000-09-21  Fatih Demir	<kabalak@gtranslator.net>
 
 	* prefs.c: Include the "libgtranslator/preferences.h" header.
 
@@ -1012,21 +1012,21 @@
 	* prefs.c: Use "Do not..." for "Don't..." in the preferences
 		settings.
 
-2000-09-20  Fatih Demir	<kabalak@gmx.net>
+2000-09-20  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Don't let me say that this correction has got also
 		something to do with the icons in the search bar ...
 
-2000-09-17  Fatih Demir	<kabalak@gmx.net>
+2000-09-17  Fatih Demir	<kabalak@gtranslator.net>
 
-	* \*.c/h: Reformatted my mail appearance from '[ kabalak@gmx.net ]'
-		to '<kabalak@gmx.net>'.
+	* \*.c/h: Reformatted my mail appearance from '[ kabalak@gtranslator.net ]'
+		to '<kabalak@gtranslator.net>'.
 
 	* gui.c: Integrated the status information into the status bar and made
 		some corrections to these weird search bar stuff; it should
 		 now get disabled/enabled the right way.
 
-2000-09-16  Fatih Demir	<kabalak@gmx.net>
+2000-09-16  Fatih Demir	<kabalak@gtranslator.net>
 
 	* parse.c: Made some more messages translatable and removed the
 		check_file function; we're now using the libgnome-function
@@ -1046,7 +1046,7 @@
 		 icon react with the same intelligence like the Missing
 		   icon.
 
-2000-09-15  Fatih Demir	<kabalak@gmx.net>
+2000-09-15  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: The file is now named TODO.src and not only
 		TODO.
@@ -1071,14 +1071,14 @@
 	* gui.c: Disable the translation string box if
 	no .po is loaded.
 	
-2000-09-13  Fatih Demir	<kabalak@gmx.net>
+2000-09-13  Fatih Demir	<kabalak@gtranslator.net>
 
 	* gui.c: Changed the hotkey for the next fuzzy translation
 		to Alt + Z ( slightens the menus a bit ) and changed
 		 the icon-caption to "Missing" as this doesn't break
 		  the look of the tool bar.
 
-2000-09-12  Gediminas Paulauskas <menesis@delfi.lt>
+2000-09-12  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gnome-regex.*: reverted to original files from gnome-libs,
 		just added 'flags' field to GnomeRegexCache, and check for it
@@ -1089,7 +1089,7 @@
 		NULL to this function.
 	* dialogs.c: made find dialog option fit in one line.
 
-2000-09-11  Fatih Demir	<kabalak@gmx.net>
+2000-09-11  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Removed msg_db.* as they'ren't any longer in
 		our sources.
@@ -1107,13 +1107,13 @@
 	* main.c: Removed all msg_db stuff and also cleansed the options
 		and message db inits.
 
-2000-09-10  Fatih Demir	<kabalak@gmx.net>
+2000-09-10  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Added the gnome-regex sources to the build sources
 		without any conditional tests ( libgnome doesn't have got
 		 the gnome_regex_cache_new_with_size ).
 	
-2000-08-23  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-23  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* main.c, parse.c: now absolute file name is got in parse(), wherever
 		it was called from. Added some newline, removed some comments,
@@ -1136,7 +1136,7 @@
 		reached, because of problem when passing first == NULL.
 	* dialogs.c: added fake option menu to select where to find in.
 
-2000-08-22  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-22  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gui.c: in update_msg, make both msgid and msgstr end with or without
 		'\n'.
@@ -1145,7 +1145,7 @@
 	* dialog.c: renamed variables in goto_dlg to shorter ones; added policy
 		set on spin; changed dialog and label titles.
 
-2000-08-21  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-21  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* Makefile.am: some cosmetic changes, use variables instead of simple
 		../. Added -DGNOMELOCALEDIR. Added check for
@@ -1154,14 +1154,14 @@
 	* session.c: gtranslator now opens the same file on session restore.
 		Removed non-interesting comments.
 	
-2000-08-21  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-21  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* header_stuff.c: yeah, at last this works perfectly. Too much changes
 		to list, anyway it's almost complete rewrite. Changed only
 		get_header, put_header and edit_header. Use regexps to parse
 		fields. A VERY enhanced edit dialog.
 
-2000-08-20  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-20  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* parse.*, messages.h, dialogs.c, gui.c, find.c, session.c: at last
 		moved all file-specific stuff to GtrPo structure, in that
@@ -1170,7 +1170,7 @@
 		language and lg_email; also, replaced 'mime_type' with
 		'charset'.
 	
-2000-08-20  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-20  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gnome-regex.h, gnome-regex.c: copied these files here from
 		gnome-libs/libgnome, because I needed to change the cache
@@ -1189,7 +1189,7 @@
 	* find.c: in for_each_msg, get first element of given list, not
 		messages.
 
-2000-08-17  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-17  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* Again big changes. Read below: prefs.h, almost all .c: Instead of
 		many if_* variables for preferences, created one structure
@@ -1212,7 +1212,7 @@
 	* And, while changed much, executable has got only 700 bytes, so it was
 		worth work.
 
-2000-08-17  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-17  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* parse.*: added mark_msg_fuzzy function, which does actual change to
 		message comment. Renamed get_msg_status to update_msg_status
@@ -1224,14 +1224,14 @@
 		updating.
 	* main.c: create rxc and change it's size.
 	
-2000-08-16  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-16  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dnd.*, find.*, parse.*: just another rearrangement of #include's.
 	* dnd.*: removed gtr_dnd_type -- use guint instead. Removed a_counter
 		variable, cleaned up lots of comments.
 	* .cvsignore: added tags & .libs
 
-2000-08-15  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-15  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* prefs.*, header_stuff.c: Lots of changes: moved all language lists to
 		prefs.h, introduced lang_ref reference counting variable,
@@ -1240,7 +1240,7 @@
 		That was done because edit_header now creates GnomePropertyBox,
 		not just dialog, and lets change language properties in header.
 
-2000-08-14  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-14  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* main.c: simplified main() function, by moving geometry stuff to
 		prefs.*. Query now only prints the result, no sick messages.
@@ -1250,12 +1250,12 @@
 		wanted. Added GTR_CONFIG_PREFIX.
 	* gui.c: simplified gtranslator_quit.
 	
-2000-08-10  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-10  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gui.c: initial spell checking support. It does not work well,
 		but works! I was impressed when I found gnome-spell.h!
 	
-2000-08-10  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-10  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* find.*, gui.*: renamed search_do to find_do. Created new
 		for_each_msg function, which works the same as g_list_foreach,
@@ -1269,7 +1269,7 @@
 		update_msg now marks message as untranslated if the
 		translation was removed.
 
-2000-08-09  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-09  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* header_stuff.[ch]: added update_header function, which
 		PO-Revision_Date field.
@@ -1278,7 +1278,7 @@
 		for it, ACT_NEXT_FUZZY action (which is disabled when there are
 		no more fuzzy messages).
 
-2000-08-08  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-08  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* header_stuff.[ch]: added put_header (what a bad name...) function.
 		Also, enriched GtrHeader structure with comment field, filled
@@ -1293,7 +1293,7 @@
 		compile() -- write the po-file to temporary one, and compile
 		this -- so you don't need to save before compile.
 
-2000-08-08  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-08  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gui.c: added update_appbar function and call to it. This shows
 		current message in the status bar. Also connected
@@ -1303,7 +1303,7 @@
 	* dialogs.c: added compile_error_dialog function, which shows error
 		text, which occurred during compiling.
 
-2000-08-07  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-07  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* *.*: reformatted everything with "indent -i8 -kr -l78 -fca -fc1".
 		From now I will use Linux kernel coding style
@@ -1316,7 +1316,7 @@
 	* find.c: optimized search functions, implemented case insensitive
 		search.
 	
-2000-08-06  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-06  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* *.*: got the CVS 2000-08-04 version, today merged them all. I see
 		now, that almost none changes made here by Fatih, only by me.
@@ -1343,13 +1343,13 @@
 	* gui.c: because goto_given_msg(GList *) already existed, simplified
 		all other goto_* to one line with call to it.
 
-2000-08-05  Fatih Demir	<kabalak@gmx.net>
+2000-08-05  Fatih Demir	<kabalak@gtranslator.net>
 
 	* TODO.src: Added some thoughts.
 	
 	* ChangeLog: Reformatted my entries partly.
 
-2000-08-04  Fatih Demir <kabalak@gmx.net>
+2000-08-04  Fatih Demir <kabalak@gtranslator.net>
 
 	* about.c: Updated the about-message.
 
@@ -1359,7 +1359,7 @@
 
 	* session.c: disabled the filename storage for now.
 
-2000-08-04  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-04  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.*: done the SAME :) with find dialog. That is, made gnome
 		dialog with icon/parent/wmclass...
@@ -1370,14 +1370,14 @@
 		Added a function goto_given_msg, which accepts list item as
 		user_data.
 	
-2000-08-03  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-03  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* prefs.c: ended cleanup. Instead of defines, made some functions to
 		simplify creating of many similar entries. Will use soon in
 		edit_header, maybe...
 	* parse.c: fixed the bug with ~ and ! :) now should get correct status.
 
-2000-08-02  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-02  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* prefs.c: a major cleanup. Moved all widgets from .h to .c and made
 		them static, removed unused ones. Added free_prefs(), which
@@ -1390,18 +1390,18 @@
 	* main.c,...: moved some variables used only here from various .h.
 		There's almost no warnings now...
 
-2000-08-01  Fatih Demir <kabalak@gmx.net>
+2000-08-01  Fatih Demir <kabalak@gtranslator.net>
 
 	* Makefile.am: Added the libgtranslator dir to the includes
 		and to the LDFLAFS/LDADD variables.
 
-2000-08-01  Gediminas Paulauskas <menesis@delfi.lt>
+2000-08-01  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* prefs.c: Simplified widget creation and initialization, perhaps just
 		removed lots of whitespace... Sorted items in the lists, and
 		left only unique ones.
 
-2000-07-31  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-31  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c: made a new modal ask_to_save_file dialog, It is more
 		simple and works perfect! Even in open_file, I used this
@@ -1415,7 +1415,7 @@
 		a file. Also, used the nice ask_to_save_file, now saving,
 		opening, closing and reverting is simple, consistent and safe.
 
-2000-07-30  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-30  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* main.c: removed -f option from popt table, instead used context for
 		getting files to load from command line. Now a file can be
@@ -1426,7 +1426,7 @@
 		gnome_config_drop_all() call, because this is done
 		automatically.
 
-2000-07-28  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-28  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c: added ask_to_save function, to be used when closing
 		application, and file is unsaved. It works now.
@@ -1441,7 +1441,7 @@
 	* parse.*: added revert_file and close_file callbacks. Also,
 		free_messages function.
 
-2000-07-24  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-24  Gediminas Paulauskas <menesis@gtranslator.org>
 	
 	* Everywhere: renamed type names to conform with Glib ones:
 		gtr_msg now is GtrMsg, type cast is GTR_MSG(), the same for
@@ -1458,7 +1458,7 @@
 		possible stati: translated, fuzzy, and stick, and they are
 		flags, so message can be translated AND fuzzy.
 
-2000-07-23  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-23  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* Too much changes to list. After all, I see no point in writing this
 		file. Anyway, I have changed EVERYTHING here. Almost. Major
@@ -1484,14 +1484,14 @@
 		not save at all. file_changed should be always in correct
 		state now.
 
-2000-07-23  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-23  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.c: Removed no_changes_dialog. Instead added to
 	* parse.c: Added save_current_file (a callback for save), actual_write,
 		no_reply_callback functions.
 	* gui.c: added callbacks for Save.
 	
-2000-07-22  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-22  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* dialogs.*,../po/POTFILES.in,Makefile.am: renamed from gtr_dialogs.*
 	* gui.c: moved get_*_msg, display_msg, update_msg, reached_*_msg,
@@ -1526,7 +1526,7 @@
 	* *.h: removed lots of unused #include's.
 	* TODO: added lots of ideas.
 
-2000-07-21  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-21  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* gtr_dialogs.[ch]: further gnomefying of dialogs: goto. Related to
 		this removal of all g_dlg* global variables and functions,
@@ -1540,7 +1540,7 @@
 		and callbacks for it, back and next, also changed
 		disable/enable_buttons for this.
 
-2000-07-21  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-21  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* parse.[ch]: added functions: update_message, save_the_file,
 		write_the_message, restore_msg, the latter being quite long.
@@ -1553,7 +1553,7 @@
 		No made to function properly, save as now works. A "save as"
 		copy of unchanged file is identically to the original.
 
-2000-07-20  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-20  Gediminas Paulauskas <menesis@gtranslator.org>
 
 	* Today I consider parsing to be finished. It works!
 	* gtr_dialogs.c: replaced a bunch of gtk_widget_show with one
@@ -1574,7 +1574,7 @@
 	* gui.c: moved options button just before Exit, wrapped moving buttons
 		with separators. Made text1 not editable (really in parse.c).
 
-2000-07-18  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-18  Gediminas Paulauskas <menesis@gtranslator.org>
 	
 	* parse.[ch]: totally rewritten the parse() function -- now reads
 		messages almost correctly (additional characters, something
@@ -1591,7 +1591,7 @@
 		for 0.20, eh?)
 	* Have read 64% of this file (till 200-05-24)... Uh...
 
-2000-07-17  Gediminas Paulauskas <menesis@delfi.lt>
+2000-07-17  Gediminas Paulauskas <menesis@gtranslator.org>
 	
 	* changed all sprintf calls to GLib ones.
 	* header_stuff.[ch]: written the get_header and free_header functions
@@ -1601,7 +1601,7 @@
 	* gui.c: Replaced those crazy gtk_widget_show() with one call at the
 		end... Also added a free_header(ph); call in gtranslator_quit
 
-2000-07-17  Fatih Demir	<kabalak@gmx.net>
+2000-07-17  Fatih Demir	<kabalak@gtranslator.net>
 	
 	* parse.c: Removed the one debug message and the
 		corresponding ifdefs.
@@ -1611,7 +1611,7 @@
 		[ So we're now getting internationalized help
 		   messages :) ]
 
-2000-07-12  Fatih Demir	<kabalak@gmx.net>
+2000-07-12  Fatih Demir	<kabalak@gtranslator.net>
 
 	* msg_db.c: Return a `0' not `NULL' if the challenge
 		length cannot be send.
@@ -1625,12 +1625,12 @@
 	* \*.c: Removed the last rests of these `//' C++
 		comments in these C source files.
 
-2000-07-07  Fatih Demir	<kabalak@gmx.net>
+2000-07-07  Fatih Demir	<kabalak@gtranslator.net>
 
 	* Makefile.am: Added the G_LOG_DOMAIN define for the build
 		of gtranslator.
 
-2000-07-06  Fatih Demir	 <kabalak@gmx.net>
+2000-07-06  Fatih Demir	 <kabalak@gtranslator.net>
 
 	* header_stuff.c: Use the existing static gtr_header and don't
 		allocate, assign etc. the values and structures; don't
@@ -1652,7 +1652,7 @@
 	* main.c: Corrected a typo at the `--challenge-length'
 		option.
 
-2000-07-04  Fatih Demir  <kabalak@gmx.net>
+2000-07-04  Fatih Demir  <kabalak@gtranslator.net>
 
 	* gui.c: Disable the corresponding menu entries
 		also if no file is open.
@@ -1672,7 +1672,7 @@
 	* msg_db.h: Added the variable and the two prototypes for
 		the new functions and the new variable.
 
-2000-06-30  Fatih Demir  <kabalak@gmx.net>
+2000-06-30  Fatih Demir  <kabalak@gtranslator.net>
 
 	* header_stuff.c: Disabled the crashy assignment.
 	
@@ -1680,7 +1680,7 @@
 		 added two pointers to the first and the
 		  last message to the general po-file structure.
 
-2000-06-27  Fatih Demir  <kabalak@gmx.net>
+2000-06-27  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* msg_db.c: Added the size returning function for
 		the messages db handling.
@@ -1688,7 +1688,7 @@
 	* header_stuff.c: Removed the free/malloc stuff from the
 		header routines.
 
-2000-06-14  Fatih Demir  <kabalak@gmx.net>
+2000-06-14  Fatih Demir  <kabalak@gtranslator.net>
 
 	* .cvsignore: Removed dummy.po from the repo and from
 		the .cvsignore.
@@ -1696,7 +1696,7 @@
 	* header_stuff.c: Do the same again like weeks before,
 		fill up the structure.
 
-2000-06-12  Fatih Demir  <kabalak@gmx.net>
+2000-06-12  Fatih Demir  <kabalak@gtranslator.net>
 
 	* header_stuff.c: Removed the ifdef for the header routines.
 		started to work on `real'( TM ;) ) header routines.
@@ -1707,13 +1707,13 @@
 	
 	* parse.c: Hmm, do some more widget work.
 
-2000-06-11  Fatih Demir  <kabalak@gmx.net>
+2000-06-11  Fatih Demir  <kabalak@gtranslator.net>
 
 	* parse.c: Take the string length of the temp_char
 		as array length; ise two gchar's for the
 		 operations (removed the "zamane" gchar.).
 
-2000-06-10  Fatih Demir  <kabalak@gmx.net>
+2000-06-10  Fatih Demir  <kabalak@gtranslator.net>
  
 	* parse.c: Use a generally fresh allocated gchar for
 		the parsing routines; corrected a typo.
@@ -1725,7 +1725,7 @@
 
 	* gtr_dialogs.c:454  typo fixed.
 
-2000-06-10  Fatih Demir  <kabalak@gmx.net>
+2000-06-10  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* EURO 2000 >)>)>)>)>)>)>)>)>)>)>)>)>)>)>)
 
@@ -1749,7 +1749,7 @@
 	
 		-> gtr_dialogs.c
 
-2000-06-09  Fatih Demir  <kabalak@gmx.net>
+2000-06-09  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Highlight the main window during a drop.
 	
@@ -1781,7 +1781,7 @@
 	
 		-> Makefile.am
 
-2000-06-08  Fatih Demir  <kabalak@gmx.net>
+2000-06-08  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Also change the ifdef check to a check
 	
@@ -1841,7 +1841,7 @@
 	
 		-> parse.c
 
-2000-06-06  Fatih Demir  <kabalak@gmx.net>
+2000-06-06  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added the forgotten ifdefs for the
 	
@@ -1881,7 +1881,7 @@
 	
 		-> parse.c
 
-2000-06-05  Fatih Demir  <kabalak@gmx.net>
+2000-06-05  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Removed an also unnecessary gchar.
 	
@@ -1895,7 +1895,7 @@
 	
 		-> msg_db.c
 
-2000-06-04  Fatih Demir  <kabalak@gmx.net>
+2000-06-04  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added a msg-db menu with some entries.
 
@@ -1987,7 +1987,7 @@
 	
 		-> main.c
 
-2000-06-03  Fatih Demir  <kabalak@gmx.net>
+2000-06-03  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Make first a check if it exists yet, and
 	
@@ -2027,7 +2027,7 @@
 	
 		-> parse.c
 	
-2000-06-01  Fatih Demir  <kabalak@gmx.net>
+2000-06-01  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* The same for the header-routines.
 	
@@ -2041,7 +2041,7 @@
 	
 		-> parse.c
 
-2000-05-30  Fatih Demir  <kabalak@gmx.net>
+2000-05-30  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Use a temporary gchar* as a bridging
 	
@@ -2117,7 +2117,7 @@
  
                 -> main.c
 
-2000-05-28  Fatih Demir  <kabalak@gmx.net>
+2000-05-28  Fatih Demir  <kabalak@gtranslator.net>
 
         +       Freed the filenames list and added
  
@@ -2155,7 +2155,7 @@
 
 		-> header_stuff.c/h
 
-2000-05-26  Fatih Demir  <kabalak@gmx.net>
+2000-05-26  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added some other gint's which are
 	
@@ -2199,7 +2199,7 @@
 	
 		-> interface.c
 
-2000-05-25  Fatih Demir  <kabalak@gmx.net>
+2000-05-25  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added the header-button to the list
 	
@@ -2237,7 +2237,7 @@
 	
 		-> header_stuff.c/h
 
-2000-05-24  Fatih Demir  <kabalak@gmx.net>
+2000-05-24  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Again a crash!
 
@@ -2297,7 +2297,7 @@
 	
 		-> main.c/parse.c
 
-2000-05-23  Fatih Demir  <kabalak@gmx.net>
+2000-05-23  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Removed the X-Generator header information
 	
@@ -2329,7 +2329,7 @@
 	
 		-> parse.c
 	
-2000-05-21  Fatih Demir  <kabalak@gmx.net>
+2000-05-21  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Doing all the if's and cut's for the
 	
@@ -2357,7 +2357,7 @@
 
 		-> parse.c
 
-2000-05-20  Fatih Demir  <kabalak@gmx.net>
+2000-05-20  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Changed the gtk_main_quit()-calls to
 	
@@ -2437,7 +2437,7 @@
 	
 		-> parse.c/h
 
-2000-05-18  Fatih Demir  <kabalak@gmx.net>
+2000-05-18  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Doing some stuff.
 	
@@ -2449,7 +2449,7 @@
 	
 		-> interface.c
 
-2000-05-17  Fatih Demir  <kabalak@gmx.net>
+2000-05-17  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* Binding the new dialogs to the buttons.
 	
@@ -2475,7 +2475,7 @@
 	
 	* Reverted the zamane-char stuff.
 
-2000-05-16  Fatih Demir  <kabalak@gmx.net>
+2000-05-16  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added the new files to the Makefile.am.
 	
@@ -2517,7 +2517,7 @@
 
 		-> parse.c
 	
-2000-05-15  Fatih Demir  <kabalak@gmx.net>
+2000-05-15  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Changed the cancel-button to a stock-button.
 	
@@ -2529,7 +2529,7 @@
 	
 		-> parse.c
 
-2000-05-14  Fatih Demir  <kabalak@gmx.net>
+2000-05-14  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Adding the search-box routines & widgets.
 	
@@ -2556,7 +2556,7 @@
 		-> parse.c/h
 
 
-2000-05-13  Fatih Demir  <kabalak@gmx.net>
+2000-05-13  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Disable the buttons at startup and enable
 	
@@ -2588,7 +2588,7 @@
 
 		-> parse.c
 
-2000-05-12  Fatih Demir  <kabalak@gmx.net>
+2000-05-12  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added a function-`skeleton which will
 	
@@ -2646,7 +2646,7 @@
 	
 		-> *.c/h
  
-2000-05-11  Fatih Demir  <kabalak@gmx.net>
+2000-05-11  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* Reformatted for common `assignment-policy'
 	
@@ -2656,7 +2656,7 @@
 	
 		-> messages.h
 
-2000-05-10  Fatih Demir  <kabalak@gmx.net>
+2000-05-10  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added the compile callback and function
 	
@@ -2672,7 +2672,7 @@
 	
 		-> main.c
 
-2000-05-09  Fatih Demir  <kabalak@gmx.net>
+2000-05-09  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added a rough method of getting an entry from
 	
@@ -2778,7 +2778,7 @@
 	
 		-> prefs.c
 
-2000-05-08  Fatih Demir  <kabalak@gmx.net>
+2000-05-08  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Changed `due' to Pablo's Email the English
 	
@@ -2796,7 +2796,7 @@
 
 	* interface.c (create_app1): Correct C'n'P typo (s/next/last/).
 
-2000-05-07  Fatih Demir  <kabalak@gmx.net>
+2000-05-07  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Reformatted all plain-messages to be
 	
@@ -2892,13 +2892,13 @@
 	
 		-> prefs.c/h
 
-2000-05-06  Fatih Demir  <kabalak@gmx.net>
+2000-05-06  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* Include <glib.h>
 	
 		-> messages.h
 
-2000-05-05  Fatih Demir  <kabalak@gmx.net>
+2000-05-05  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Use the new structure and forget the
 	
@@ -2962,7 +2962,7 @@
 	
 		-> languages.h
 	
-2000-05-04  Fatih Demir  <kabalak@gmx.net>
+2000-05-04  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* Added the entries which were told to me ..
 	
@@ -2974,7 +2974,7 @@
 	
 		-> languages.h
 
-2000-05-03  Fatih Demir  <kabalak@gmx.net>
+2000-05-03  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added .*swp files ( vim->my_editor=TRUE )
 	
@@ -2999,7 +2999,7 @@
 	
 		-> prefs.c
 
-2000-05-02  Fatih Demir  <kabalak@gmx.net>
+2000-05-02  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* Added languages.h
 	
@@ -3023,7 +3023,7 @@
 	
 		-> messages.h
 
-2000-05-01  Fatih Demir  <kabalak@gmx.net>
+2000-05-01  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added a table with the language names
 	
@@ -3047,7 +3047,7 @@
 	
 		-> prefs.h
 
-2000-04-30  Fatih Demir  <kabalak@gmx.net>
+2000-04-30  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Began to write the prefs-box ...
 	
@@ -3075,7 +3075,7 @@
 	
 		-> interface.h
 
-2000-04-29  Fatih Demir  <kabalak@gmx.net>
+2000-04-29  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added the ltrace.log file to .cvsignore's
 	
@@ -3125,7 +3125,7 @@
 	
 		-> *.c/h
 
-2000-04-27  Fatih Demir  <kabalak@gmx.net>
+2000-04-27  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* Changing all the interface elements
 	
@@ -3171,7 +3171,7 @@
 	
 		-> interface.c
 
-2000-04-19  Fatih Demir  <kabalak@gmx.net>
+2000-04-19  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Made another messages "gettextable"
 	
@@ -3241,7 +3241,7 @@
 	
 		-> interface.c/h
 
-2000-04-18  Fatih Demir  <kabalak@gmx.net>
+2000-04-18  Fatih Demir  <kabalak@gtranslator.net>
 
 	* As the status bar works now rightly
 	
@@ -3261,7 +3261,7 @@
 	
 		-> interface.c
 	
-2000-04-01  Fatih Demir  <kabalak@gmx.net>
+2000-04-01  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Corrected some return-value mistakes
 	
@@ -3283,7 +3283,7 @@
 	
 		-> Makefile.am
 
-2000-03-31  Fatih Demir  <kabalak@gmx.net>
+2000-03-31  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Removed the tool bar_style definition
 	
@@ -3291,7 +3291,7 @@
 	
 		-> interface.c
 
-2000-03-30  Fatih Demir  <kabalak@gmx.net>
+2000-03-30  Fatih Demir  <kabalak@gtranslator.net>
 
 	* The check_file(FILE *) function was
 	
@@ -3307,7 +3307,7 @@
 	
 		-> interface.c
 
-2000-03-27  Fatih Demir  <kabalak@gmx.net>
+2000-03-27  Fatih Demir  <kabalak@gtranslator.net>
 
 	* A pointer was set wrongly in the are_we*
 	
@@ -3333,7 +3333,7 @@
 	
 		-> *.c
 
-2000-03-21  Fatih Demir  <kabalak@gmx.net>
+2000-03-21  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Fixed an error ; use now strcat for
 	
@@ -3345,7 +3345,7 @@
 	
 		-> parse.c
 
-2000-03-19  Fatih Demir  <kabalak@gmx.net>
+2000-03-19  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Removed the ka_widget_show macro ..
 	
@@ -3357,13 +3357,13 @@
 	
 		-> callbacks.c
 
-2000-03-18  Fatih Demir  <kabalak@gmx.net>
+2000-03-18  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Some better catch of the msgid/str's
 	
 		-> parse.c
 
-2000-03-15  Fatih Demir  <kabalak@gmx.net>
+2000-03-15  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Check if the linked lists have been
 	
@@ -3371,7 +3371,7 @@
 	
 		-> msg_db.c
 	
-2000-03-14  Fatih Demir  <kabalak@gmx.net>
+2000-03-14  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Filled in a missing '*' before
 	
@@ -3395,7 +3395,7 @@
 	
 		-> Makefile.am
 
-2000-03-14  Fatih Demir  <kabalak@gmx.net>
+2000-03-14  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added the linked lists and the addition
 	
@@ -3405,7 +3405,7 @@
 	
 		-> msg_db.h/.c
 
-2000-03-11  Fatih Demir  <kabalak@gmx.net>
+2000-03-11  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Switching over to pure glib , removed
 	
@@ -3413,13 +3413,13 @@
 	
 		-> *.c/*.h
 
-2000-03-10  Fatih Demir  <kabalak@gmx.net>
+2000-03-10  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Removed impossible function
 	
 		-> msg_db.c/.h
 
-2000-03-09  Fatih Demir  <kabalak@gmx.net>
+2000-03-09  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Wrong appbar-type ; CORRECTED .
 	
@@ -3438,7 +3438,7 @@
 	
 		-> interface.h
 
-2000-03-08  Fatih Demir  <kabalak@gmx.net>
+2000-03-08  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added a new toolbar with some extra-
 		funcs ( which will be hopefully created
@@ -3483,7 +3483,7 @@
 	
 		-> header_stuff.c
 
-2000-03-07  Fatih Demir  <kabalak@gmx.net>
+2000-03-07  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Adding some new UI-elements ..
 	
@@ -3514,7 +3514,7 @@
 	
 		-> msg_db.h messages.h
 
-2000-03-06  Fatih Demir  <kabalak@gmx.net>
+2000-03-06  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added a gnome-entry box for searching
 		some messages in the files ..
@@ -3542,7 +3542,7 @@
 
 		-> parse.h
 
-2000-03-05  Fatih Demir  <kabalak@gmx.net>
+2000-03-05  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Adding a new dock-band for message
 		searching and catalog-finding ..
@@ -3551,7 +3551,7 @@
 	
 	* Adding some new functions ..
 
-2000-03-04  Fatih Demir  <kabalak@gmx.net>
+2000-03-04  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Added a (void*)-ified compare function
 		ka_comp(const void *,const void *) ,
@@ -3559,7 +3559,7 @@
 
 		-> parse.c/.h
 
-2000-02-29  Fatih Demir  <kabalak@gmx.net>
+2000-02-29  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Doing the msg_db stuff ( reading the
 		old ones is now implemented ... )
@@ -3571,7 +3571,7 @@
 	
 		-> *.c/*.h
 
-2000-02-26  Fatih Demir  <kabalak@gmx.net>
+2000-02-26  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Changed the string-comparing routines
 		to str(n)casecmp for ignoring the
@@ -3584,7 +3584,7 @@
 	
 		-> msg_db.h/.c
 
-2000-02-25  Fatih Demir  <kabalak@gmx.net>
+2000-02-25  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Repute the support.h/.c files into
 		CVS , as they appear to be needed
@@ -3601,7 +3601,7 @@
 	
 		-> *.c *.h
 
-2000-02-22  Fatih Demir  <kabalak@gmx.net>
+2000-02-22  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Corrected the errors & forgotten
 		variables .
@@ -3623,7 +3623,7 @@
 		-> msg_db.c msg_db.h parse.c
 
 	
-2000-02-20  Fatih Demir  <kabalak@gmx.net>
+2000-02-20  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Made two structures for the po-&
 		message-handling .
@@ -3636,7 +3636,7 @@
 		-> parse.c header_stuff.c header_stuff.h
 
 
-2000-02-17  Fatih Demir  <kabalak@gmx.net>
+2000-02-17  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Put the location of the msg-db to
 		the defines
@@ -3652,7 +3652,7 @@
 
 		-> msg_db.h
 	
-2000-02-16  Fatih Demir  <kabalak@gmx.net>
+2000-02-16  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Made some me-supporting output only
 		compile with -DDEBUG ( by default on )
@@ -3664,7 +3664,7 @@
 	
 		-> *.c *.h
 
-2000-02-13  Fatih Demir  <kabalak@gmx.net>
+2000-02-13  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Removed the shell-script calls from
 		the parser .
@@ -3684,7 +3684,7 @@
 	
 		-> header_stuff.c header_stuff.h
 	
-2000-02-10  Fatih Demir  <kabalak@gmx.net>
+2000-02-10  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Read the TODO , ehem ....
 
@@ -3696,13 +3696,13 @@
 
 		-> parse.h parse.c
 	
-2000-02-09  Fatih Demir  <kabalak@gmx.net>
+2000-02-09  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Some progress in text-parsing ..
 
 		-> parse.h parse.c
 
-2000-02-08  Fatih Demir  <kabalak@gmx.net>
+2000-02-08  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Made a fake-progress bar
 
@@ -3723,7 +3723,7 @@
 	
 		-> callbacks.c
 	
-2000-02-04  Fatih Demir  <kabalak@gmx.net>
+2000-02-04  Fatih Demir  <kabalak@gtranslator.net>
 
 	* Make the build always with -DDEBUGGY
 		to make it more obvious if errors
@@ -3732,7 +3732,7 @@
 		-> Makefile.am
 	
 
-2000-02-03  Fatih Demir  <kabalak@gmx.net>
+2000-02-03  Fatih Demir  <kabalak@gtranslator.net>
 	
 	* Removed the checks temporarily ....
 	

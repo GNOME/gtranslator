@@ -1,6 +1,6 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
- *			Gediminas Paulauskas <menesis@delfi.lt>
+ * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.net>
+ *			Gediminas Paulauskas <menesis@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@ void about_box(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *about = NULL;
 	const gchar *authors[] = {
-		"Fatih Demir <kabalak@gmx.net>",
-		"Gediminas Paulauskas <menesis@delfi.lt>",
+		"Fatih Demir <kabalak@gtranslator.net>",
+		"Gediminas Paulauskas <menesis@gtranslator.org>",
 		NULL
 	};
 	raise_and_return_if_exists(about);

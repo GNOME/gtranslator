@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# (C) 2000-2001 Fatih Demir <kabalak@gmx.net>
+# (C) 2000-2001 Fatih Demir <kabalak@gtranslator.net>
 #
 #
 # This script mails the common "oh my god, they're
@@ -72,7 +72,7 @@ do
 	echo "---------------------------------------------------------------"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	echo "---------------------------------------------------------------"
-	echo " Author: Fatih Demir <kabalak@gmx.net>"
+	echo " Author: Fatih Demir <kabalak@gtranslator.net>"
 	echo "---------------------------------------------------------------"
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-d --days         Days remaining for release"
@@ -87,7 +87,7 @@ do
 	echo "---------------------------------------------------------------"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	echo "---------------------------------------------------------------"
-        echo " Author:  Fatih Demir <kabalak@gmx.net>"
+        echo " Author:  Fatih Demir <kabalak@gtranslator.net>"
 	echo "---------------------------------------------------------------"
 		exit 1
 	;;
@@ -268,7 +268,7 @@ for i in $PO_FILES
 	echo "--" >> $BODY_FILE
 	echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 	echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
-	echo "- the po-files - send a mail to Fatih Demir <kabalak@gmx.net>" >> $BODY_FILE
+	echo "- the po-files - send a mail to Fatih Demir <kabalak@gtranslator.net>" >> $BODY_FILE
 	echo "Thanks." >> $BODY_FILE
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR"
         done
@@ -291,7 +291,7 @@ echo "" >> $BODY_FILE
 echo "--" >> $BODY_FILE
 echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
-echo "- the po-files - send a mail to Fatih Demir <kabalak@gmx.net>" >> $BODY_FILE
+echo "- the po-files - send a mail to Fatih Demir <kabalak@gtranslator.net>" >> $BODY_FILE
 echo "Thanks." >> $BODY_FILE
 #
 # Send the mail to the address(es).
