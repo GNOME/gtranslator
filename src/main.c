@@ -169,6 +169,7 @@ int main(int argc, char *argv[])
 		NICE_PRINT(WINDOW_ICON);
 		g_print(_("Own locale directory:"));
 		NICE_PRINT(GNOMELOCALEDIR);
+		g_print("\n");
 
 		#undef NICE_PRINT
 
