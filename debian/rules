@@ -41,9 +41,6 @@ clean:
 	-rm -rf debian/tmp
 	-rm -rf debian/files debian/substvars
 
-binary-indep:
-	echo "No architecture-independant files to build."
-
 binary-arch: build install
 	$(checkdir)
 	$(checkroot)
@@ -84,6 +81,6 @@ binary-arch: build install
 
 # Build packages (dpkg-deb)
 
-binary:	binary-indep binary-arch
+binary:	binary-arch
 
 .PHONY: configure build binary-indep binary-arch binary clean
