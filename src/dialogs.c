@@ -424,8 +424,7 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		 * Get the comment box contents.
 		 */
 		buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(comment_box));
-		gtk_text_buffer_get_start_iter(buff, &start);
-		gtk_text_buffer_get_end_iter(buff, &end);
+		gtk_text_buffer_get_bounds(buff, &start, &end);
 		comment_dialog_contents = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
 		g_return_if_fail(comment_dialog_contents!=NULL);
 		
