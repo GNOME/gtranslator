@@ -28,6 +28,7 @@ gtranslator_SOURCES = \
 	prefs.c prefs.h \
 	session.c session.h \
 	dnd.c dnd.h \
+	find.c find.h \
 	messages.h \
 	languages.h \
 	main.c 

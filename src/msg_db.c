@@ -279,7 +279,7 @@ void set_challenge_length(int length)
 unsigned int get_challenge_length()
 {
 	/**
-	* Simply returns the challenge length or NULL.
+	* Simply returns the challenge length or 0.
 	**/
 	if(challen<=1)
 	{

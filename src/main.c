@@ -10,7 +10,7 @@
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
-#endif // HAVE_CONFIG_H
+#endif
 
 #include <gnome.h>
 
@@ -66,10 +66,10 @@ int main(int argc,char *argv[])
 	/**
 	* Check whether NLS is requested.
 	**/
-#ifdef ENABLE_NLS
+	#ifdef ENABLE_NLS
 	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain(PACKAGE);
-#endif
+	#endif
 	/**
 	* Init gtranslator.
 	**/
@@ -117,10 +117,10 @@ int main(int argc,char *argv[])
 		g_print(_("Result                   :  %s."),get_from_msg_db(query_string));
 		g_print("\n");
 		g_print(_("End of query.\n"));
-			/**
-			* Exit within the non-GUI circles.
-			**/
-			exit(0);
+		/**
+		* Exit within the non-GUI circles.
+		**/
+		exit(0);
         }
 	/**
 	* Get the client

@@ -28,7 +28,7 @@ void about_box()
 		_("gtranslator is a Gnome Application for translating .po-files slightly different than in (X)Emacs.\nTill now you can't see much, but that will change! At least till R 0.20."),
 		#else
 		_("gtranslator is a Gnome Application for translating .po-files more comfortable than in (X)Emacs.\nTill now you can't see much, but that will change! At least till R 0.20."),
-		#endif // EMACS_LOVER
+		#endif
 		NULL);
 	gtk_window_set_modal(GTK_WINDOW (about), TRUE);
 	gtk_window_set_wmclass(GTK_WINDOW (about), "gtranslator", "gtranslator");

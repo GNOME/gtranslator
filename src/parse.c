@@ -197,6 +197,9 @@ void parse(gchar *po)
 		if((msgid_ok==TRUE) && (msgstr_ok==TRUE))
 		{
 			messages=g_list_append(messages,(gpointer)msg);
+			#ifndef GTR_PRODUCTIVE
+			g_print("DEBUG:: %s, %s, %s.\n",msg->msgid,msg->msgstr,msg->comment);
+			#endif
 		}
 	}
 	/**
@@ -214,7 +217,7 @@ void parse(gchar *po)
 	*  above, if he has got usleep on his machine.
 	**/
 	usleep(500000);
-	#endif // HAVE_USLEEP
+	#endif
 	/**
 	* As we've got finished we can do some nonsense
 	**/
