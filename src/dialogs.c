@@ -274,7 +274,7 @@ static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 
 void find_dialog(GtkWidget * widget, gpointer useless)
 {
-	int findMenu;
+	int findMenu=0;
 	static GtkWidget *dialog = NULL;
 	GtkWidget *label, *findy, *match_case;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
