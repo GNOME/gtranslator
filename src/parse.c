@@ -166,22 +166,6 @@ static gboolean actual_parse(void)
 	gchar *error = NULL;
 
 	/*
-	 * Test if such a file does exist.
-	 */
-	if(!g_file_exists(po->filename))
-	{
-		error=g_strdup_printf(
-			_("The file `%s' doesn't exist at all!"),
-			po->filename);
-		
-		gnome_app_error(GNOME_APP(app1), error);
-		
-		g_free(error);
-		
-		return FALSE;
-	}	
-	
-	/*
 	 * The write permissions aren't always guaranteed.
 	 */ 
 	if(po->no_write_perms==FALSE)
@@ -343,6 +327,23 @@ void parse(const gchar *filename)
 		po->filename = g_strdup(absol);
 	} else
 		po->filename = g_strdup(filename);
+
+	/*
+	 * Test if such a file does exist.
+	 */
+	if(!g_file_exists(po->filename))
+	{
+		gchar *error=g_new0(gchar,1);
+		error=g_strdup_printf(
+			_("The file `%s' doesn't exist at all!"),
+			po->filename);
+		
+		gnome_app_error(GNOME_APP(app1), error);
+		
+		g_free(error);
+		
+		return;
+	}
 
 	/*
 	 * Check the right file access permissions.
