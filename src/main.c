@@ -115,7 +115,6 @@ int main(int argc, char *argv[])
 	 * Initialize gettext.
 	 */ 
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset(PACKAGE, "UTF-8");
 	textdomain(PACKAGE);
 
 	/*
@@ -151,12 +150,14 @@ int main(int argc, char *argv[])
 	/*
 	 * Initialize gtranslator within libgnomeui.
 	 */
+	setlocale(LC_ALL, "");
 	program = gnome_program_init(PACKAGE, VERSION, LIBGNOMEUI_MODULE, 
 			   argc, argv,
 			   GNOME_PARAM_POPT_TABLE, gtranslator_options, 
 			   GNOME_PROGRAM_STANDARD_PROPERTIES,
 			   NULL);
 	context = gnome_program_preinit(program, PACKAGE, VERSION, argc, argv);
+	bind_textdomain_codeset(PACKAGE, "UTF-8");
 
 	/*
 	 * Show up build information if desired.
