@@ -545,9 +545,6 @@ gchar *prepare_comment_for_save(gchar *comment)
  */
 void gtranslator_header_fill_up(GtrHeader *header)
 {
-	/*
-	 * FIXME TODO -- Crashed for now.
-	 */
 	GtrHeader *settings;
 	
 	g_return_if_fail(header!=NULL);
