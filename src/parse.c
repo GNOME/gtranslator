@@ -84,7 +84,8 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 void mark_msg_sticky (GtrMsg * msg, gboolean on)
 {
 	if (on) {
-		msg->msgstr = msg->msgid;
+		g_free(msg->msgstr);
+		msg->msgstr = strdup(msg->msgid);
 		
 		/*
 		 * It is no longer fuzzy
@@ -93,7 +94,7 @@ void mark_msg_sticky (GtrMsg * msg, gboolean on)
 		msg->status |= GTR_MSG_STATUS_STICK;
 	} else {
 		g_free(msg->msgstr);
-		msg->msgstr = NULL;
+		msg->msgstr = strdup("");
 		msg->status &= ~GTR_MSG_STATUS_STICK;
 	}
 	get_translated_count();
