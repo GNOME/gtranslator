@@ -35,6 +35,11 @@ GtkWidget *warn_if_no_change,*dont_save_unchanged_files,*print_info;
 GtkWidget *warn_if_fuzzy,*warn_if_untranslated;
 
 /**
+ * The labels are all declared in the sources as they're'nt needed
+ *  to be here
+ **/
+
+/**
  * This creates the preferences-box
  **/
 void prefs_box(GtkWidget *widget,gpointer useless);
