@@ -525,7 +525,11 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 void gtranslator_message_go_to(GList * to_go)
 {
 	static gint pos = 0;
-
+	GtrMsg *msg = NULL;
+	GtkTextBuffer *buffer = NULL;
+	GtkTextIter iter;
+	GtkTextMark *mark = NULL;
+ 
 	g_return_if_fail (to_go!=NULL);
 
 	gtranslator_message_update();
@@ -538,9 +542,29 @@ void gtranslator_message_go_to(GList * to_go)
 	{
 		gtranslator_actions_enable(ACT_NEXT, ACT_LAST);
 	}
+
+	/* Save cursor position */
+	buffer = gtk_text_view_get_buffer(trans_box);
+	if (buffer != NULL) {
+		mark = gtk_text_buffer_get_insert(buffer);
+		gtk_text_buffer_get_iter_at_mark(buffer, &iter, mark);
+
+		msg = GTR_MSG(po->current->data);
+		msg->cursor_offset = gtk_text_iter_get_offset(&iter);
+	}
 	
 	po->current = to_go;
 	gtranslator_message_show(po->current->data);
+
+	/* Restore cursor position */
+	buffer = gtk_text_view_get_buffer(trans_box);
+	if (buffer != NULL) {
+		msg = GTR_MSG(po->current->data);
+		if (msg->cursor_offset > 0) {
+			gtk_text_buffer_get_iter_at_offset(buffer, &iter, msg->cursor_offset);
+			gtk_text_buffer_place_cursor(buffer, &iter);
+		}
+	}
 
 	if(GtrPreferences.show_messages_table)
 	{

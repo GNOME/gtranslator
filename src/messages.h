@@ -63,6 +63,9 @@ typedef struct {
 	gint		no;
 	gint 		pos;
 
+	/* Cursor position in translation text box*/
+	gint		cursor_offset;
+	
 	gchar		*msgid_plural;
 
 	/*
