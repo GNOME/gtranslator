@@ -562,7 +562,9 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 	/**
 	* Store the current date.
 	**/
+	gtranslator_config_init();
 	gtranslator_config_set_last_run_date();
+	gtranslator_config_close();
 	gtk_main_quit();
 	return FALSE;
 }

@@ -23,11 +23,11 @@
 **/
 GtranslatorDatabase * parse_db_for_lang(gchar *language)
 {
-	gchar 			file[256];
+	gchar 			*file;
 	gboolean 		lusp=FALSE;
 	xmlNodePtr 		node=NULL;
 	xmlDocPtr 		xmldoc;
-	GtranslatorDatabase	*db = g_new(GtranslatorDatabase, 1);
+	GtranslatorDatabase	*db;
 	GList			*messages = NULL;
 	/**
 	* Check if we did get a language to search for ..
@@ -48,7 +48,9 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 		g_print(_("FYI: Will also lookup the superclass message db.\n"));
 		lusp=TRUE;
 	}
-	sprintf(file,"%s/%s.xml",MESSAGE_DB_DIR,language);
+	file=g_strdup_printf("%s/%s.xml",MESSAGE_DB_DIR,language);
+ 	db = g_new(GtranslatorDatabase, 1);
+	db->header = g_new(GtranslatorDatabaseHeader, 1);
 	/**
 	* Set the filename of the DB.
 	**/
@@ -106,24 +108,23 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	**/
 	node=xmldoc->xmlRootNode->xmlChildrenNode;
 	/**
-	* Print the informations about the message database.
-	**/
-	g_print(_("Database creator/administrator: %s\n"),
-		xmlGetProp(xmldoc->xmlRootNode, "author"));
-	/**
 	* Set the author name.
 	**/
 	GTR_DB_AUTHOR(db)=g_strdup(
 		xmlGetProp(xmldoc->xmlRootNode, "author"));
 	/**
-	* Again inform the user about some parts of it.
+	* Print the informations about the message database.
 	**/
-	g_print(_("EMail: %s\n"),xmlGetProp(xmldoc->xmlRootNode, "email"));
+	g_print(_("Database creator/administrator: %s\n"), GTR_DB_AUTHOR(db));
 	/**
 	* And the author email for the DB.
 	**/
 	GTR_DB_AUTHOR_EMAIL(db)=g_strdup(
 		xmlGetProp(xmldoc->xmlRootNode, "email"));
+	/**
+	* Again inform the user about some parts of it.
+	**/
+	g_print(_("EMail: %s\n"), GTR_DB_AUTHOR_EMAIL(db));
 	/**
 	* Get the nodes.
 	**/
@@ -179,7 +180,7 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	/**
 	* Set the database messages list to the current list.
 	**/
-	GTR_DB_LIST(db)=g_list_copy(messages);
+	GTR_DB_LIST(db)=messages;
 	/**
 	* Return the parsed database.
 	**/

@@ -416,6 +416,8 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 #undef if_active
 	
 	wants.recent_files=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(recent_files_number));
+
+	gtranslator_config_init();
 	gtranslator_config_set_int("recent_files/number", wants.recent_files);
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
@@ -456,6 +458,7 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 			      wants.check_recent_file);
 	gtranslator_config_set_bool("toggles/use_own_specs",
 			      wants.use_own_specs);
+	gtranslator_config_close();
 }
 
 /**
@@ -529,6 +532,7 @@ static void prefs_box_changed(GtkWidget * widget, gpointer flag)
 
 void read_prefs(void)
 {
+	gtranslator_config_init();
 	author = gtranslator_config_get_string("translator/name");
 	email = gtranslator_config_get_string("translator/email");
 	language = gtranslator_config_get_string("language/name");
@@ -565,6 +569,7 @@ void read_prefs(void)
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();
 	wants.fill_header = gtranslator_config_get_bool("toggles/fill_header");
+	gtranslator_config_close();
 }
 
 void free_prefs(void)

@@ -1,3 +1,18 @@
+2000-11-13  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* parse-db.c: create db->header and not segfault. Use g_strdup_printf
+	and not fixed size buffer. First assign value and then print it, not
+	again egt it from xml document. Do not copy list (do we need memory
+	leaks?)
+	* preferences.c: interchange places of includes, so that
+	"namespace cleanup" is not needed. Simplify private_path printing and
+	free it after use. Replaced all translatable error stuff with simple
+	g_return_if_fail(). Why be so verbose? In gtranslator_config_get_*
+	return values after #endif, so that we can do something (free). Removed
+	config_init and config_close from every function. Use our routines to
+	*et_last_run_date (is it useful anyway?). Increased size of date buffer
+	in set_last_run_date function -- localized it can be larger.
+
 2000-11-12  Fatih Demir	<kabalak@gmx.net>
 
 	* libgtranslator.h: Removed the 
