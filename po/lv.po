@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-01-03 04:49+0100\n"
-"PO-Revision-Date: 2003-01-03 21:56+0200\n"
+"POT-Creation-Date: 2003-01-12 18:47+0100\n"
+"PO-Revision-Date: 2003-01-12 23:32+0200\n"
 "Last-Translator: Artis Trops <hornet@navigator.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
 "MIME-Version: 1.0\n"
@@ -728,64 +728,89 @@ msgstr "Valloņu"
 msgid "Welsh"
 msgstr "Velsiešu"
 
-#: src/main.c:89
+#: src/main.c:83
+msgid "Auto translate the po file & exit"
+msgstr "Autotulkot po failu un iziet"
+
+#: src/main.c:83
+#: src/main.c:99
+msgid "FILENAME"
+msgstr "FILENAME"
+
+#: src/main.c:87
 msgid "Show build information/specifications"
 msgstr "Parādīt būvējuma informāciju/specifikācijas"
 
-#: src/main.c:103
+#: src/main.c:91
+msgid "Export learn buffer to a plain po file"
+msgstr "Eksportēt mācību buferi tīrā po failā"
+
+#: src/main.c:91
+msgid "PO_FILE"
+msgstr "PO_FAILS"
+
+#: src/main.c:95
+msgid "Specify main window geometry"
+msgstr "Norādiet galvenā loga ģeometriju"
+
+#: src/main.c:95
+msgid "GEOMETRY"
+msgstr "GEOMETRY"
+
+#: src/main.c:99
 msgid "Learn the file completely & exit"
 msgstr "Iemācīties failu pilnībā un iziet"
 
 #: src/main.c:103
-msgid "FILENAME"
-msgstr "FILENAME"
-
-#: src/main.c:107
 msgid "HTML file to write to"
 msgstr "HTML fails, uz kuru rakstīt"
 
-#: src/main.c:107
+#: src/main.c:103
 msgid "HTMLFILE"
 msgstr "HTMLFILE"
 
-#: src/main.c:155
+#: src/main.c:151
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Kļūda inicializējot Gconf: %s."
 
-#: src/main.c:183
+#: src/main.c:178
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator būvējuma informācija/spec.:"
 
-#: src/main.c:185
+#: src/main.c:180
 msgid "Version and build date:"
 msgstr "Versija un būvējuma datums:"
 
-#: src/main.c:187
-msgid "Build GLib/Gtk+/GNOME versions:"
-msgstr "Glib/Gtk+/GNOME versijas:"
+#: src/main.c:182
+msgid "Build GLib / Gtk+ / GNOME / XML versions:"
+msgstr "Būves GLib / Gtk+ / GNOME / XML versijas:"
 
-#: src/main.c:189
+#: src/main.c:184
 msgid "Colorschemes directory:"
 msgstr "Krāsu shēmu direktorija:"
 
-#: src/main.c:191
+#: src/main.c:186
 msgid "Scripts directory:"
 msgstr "Skriptu direktorija:"
 
-#: src/main.c:193
+#: src/main.c:188
 msgid "Window icon:"
 msgstr "Loga ikona:"
 
-#: src/main.c:195
+#: src/main.c:190
 msgid "Own locale directory:"
 msgstr "Pašas lokāles direktorija:"
+
+#: src/main.c:192
+msgid "Default learn buffer file location:"
+msgstr "Noklusētā mācību bufera loikācija:"
 
 #.
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:448
+#: src/main.c:445
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "`%s' veiksmīgi iemācītas.\n"
@@ -793,7 +818,7 @@ msgstr "`%s' veiksmīgi iemācītas.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:490
+#: src/main.c:487
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
 msgstr "Eksportēt mācību buferi `%s'.\n"
@@ -1452,9 +1477,10 @@ msgstr "Nav veikti aizvietojumi!"
 #. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
 #. *
 #. * Translators: you should translate this foo'sh string into something
+#. *  another than a 'Y' to avoid the usage of the mid dot ('�') in the
 #. *   text displaying routines of gtranslator.
 #.
-#: src/runtime-config.c:76
+#: src/runtime-config.c:72
 msgid "Y"
 msgstr "^"
 
@@ -1462,8 +1488,8 @@ msgstr "^"
 #. * Translators: this character is used if the middle dot
 #. *  can't be used under your locale.
 #.
-#: src/runtime-config.c:93
-#: src/runtime-config.c:98
+#: src/runtime-config.c:89
+#: src/runtime-config.c:94
 msgid "^"
 msgstr "^"
 
@@ -1523,8 +1549,8 @@ msgstr "Atjaunināšana bija veiksmīga."
 msgid "An error occurred while updating the po file."
 msgstr "Kļūda atjauninot po failu."
 
-#: src/utils.c:309
-#: src/utils.c:326
+#: src/utils.c:308
+#: src/utils.c:325
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Nevaru izveidot direktoriju `%s'!"
@@ -1532,7 +1558,7 @@ msgstr "Nevaru izveidot direktoriju `%s'!"
 #.
 #. * Again return the fallback default locale value given by the translator.
 #.
-#: src/utils.c:793
+#: src/utils.c:792
 msgid "iso-8859-1"
 msgstr "iso-8859-13"
 
