@@ -12,16 +12,6 @@ AM_CONFIG_HEADER(config.h)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_MAINTAINER_MODE
-if test "x$enable_maintainer_mode" = "xyes"; then
-  AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
-  disable_werror=no
-  DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
-else
-  disable_werror=yes
-  DEPRECATED_FLAGS=
-fi
-AC_SUBST(DEPRECATED_FLAGS)
-
 
 dnl -------------------------------------------------------------------
 dnl Use intltools.
@@ -47,6 +37,21 @@ dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
 GNOME_COMPILE_WARNINGS(maximum)
+
+AC_ARG_ENABLE(deprecations,
+              [AC_HELP_STRING([--enable-deprecations],
+                              [warn about deprecated usages [default=no]])],,
+              [enable_deprecations=no])
+
+if test "x$enable_deprecations" = "xyes"; then
+   DISABLE_DEPRECATED_CFLAGS="\
+-DG_DISABLE_DEPRECATED \
+-DGDK_DISABLE_DEPRECATED \
+-DGTK_DISABLE_DEPRECATED \
+-DGDK_PIXBUF_DISABLE_DEPRECATED \
+-DGNOME_DISABLE_DEPRECATED"
+   AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
+fi
 
 dnl -------------------------------------------------------------------
 dnl Our languages caravane has got settled here in place (add your's).
