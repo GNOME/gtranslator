@@ -2,6 +2,6 @@
 
 bindir = $(datadir)/gtranslator/scripts
 
-bin_SCRIPTS = my-update.sh 
+bin_SCRIPTS = my-update.sh cleanup-gtranslator-settings.sh
 
-EXTRA_DIST = $(bin_SCRIPTS) cleanup-gtranslator-settings.sh
+EXTRA_DIST = $(bin_SCRIPTS)
