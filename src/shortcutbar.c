@@ -57,7 +57,7 @@ GtkWidget *gtranslator_sidebar_new()
 	 *  present.
 	 */  
 	e_shortcut_model_add_group(E_SHORTCUT_BAR(sidebar)->model,
-		-1, _("Files"));
+		-1, _("Views"));
 
 	gtk_signal_connect(GTK_OBJECT(sidebar), "item_selected",
 		GTK_SIGNAL_FUNC(select_icon), NULL);	
