@@ -1110,7 +1110,9 @@ Would you like to insert it into the translation?"),
 void gtranslator_auto_accomplishment_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
-	GtkWidget *use_learn_buffer;
+	
+	GtkWidget *table;
+	GtkWidget *learn_buffer_toggle;
 	
 	gint reply;
 
@@ -1123,38 +1125,33 @@ from your default query domain?"),
 		GNOME_STOCK_BUTTON_YES,
 		GNOME_STOCK_BUTTON_NO,
 		NULL);
-	
-	/*
-	 * Determine whether the learn buffer should also be used 
-	 *  as a base for the queries.
-	 */
-	use_learn_buffer=gtk_check_button_new_with_label(
-		_("Also query the personal learn buffer"));
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(use_learn_buffer),
-		GtrPreferences.use_learn_buffer);
-	
 	/*
-	 * Put all this into the GnomeDialog.
+	 * Add the contents table.
 	 */
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), 
-		use_learn_buffer, FALSE, FALSE, 0);
+	table=gtk_table_new(1, 2, FALSE);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox),
+		table, FALSE, FALSE, 0);
+	
+	learn_buffer_toggle=gtranslator_utils_attach_toggle_with_label(table, 1,
+		_("Also query the personal learn buffer"), 
+		GtrPreferences.use_learn_buffer, NULL);
 
 	/*
 	 * Set the default to "Yes" and show/run the dialog.
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	gtranslator_dialog_show(&dialog, "gtranslator -- accomplish?");
-
-	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 	
 	/*
 	 * Read in whether the user wanted to have the learn buffer as another
 	 *  base for the queries.
 	 */
 	GtrPreferences.use_learn_buffer=gtk_toggle_button_get_active(
-			GTK_TOGGLE_BUTTON(use_learn_buffer));
-
+		GTK_TOGGLE_BUTTON(learn_buffer_toggle));
+	
+	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+	
 	/*
 	 * Only handle the "Yes" case as we do not think about the "No" case --
 	 *  the user didn't want any accomplishment.

@@ -277,7 +277,7 @@ void gtranslator_history_save(GList *list)
 		/*
 		 * Save only as many entries as wished.
 		 */
-		if(number>=GtrPreferences.max_history_entries)
+		if(number > GtrPreferences.max_history_entries)
 		{
 			break;
 		}

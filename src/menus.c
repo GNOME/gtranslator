@@ -32,6 +32,10 @@
 #include "utils_gui.h"
 #include "views.h"
 
+#include "pixmaps/auto_accomplishment.xpm"
+#include "pixmaps/query.xpm"
+#include "pixmaps/query_big.xpm"
+
 #include <gdk/gdkkeysyms.h>
 
 #include <libgnomeui/gnome-app.h>
@@ -72,7 +76,7 @@ GnomeUIInfo the_file_menu[] = {
 		GNOME_APP_UI_ITEM, N_("Aut_oaccomplish"),
 		N_("Automatically fill missing translations from the default query domain"),
 		gtranslator_auto_accomplishment_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
+		GNOME_APP_PIXMAP_DATA, auto_accomplishment_xpm,
 		GDK_F10, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
@@ -134,7 +138,7 @@ GnomeUIInfo the_edit_menu[] = {
 		GNOME_APP_UI_ITEM, N_("_Query"),
 		N_("Query for a string"),
 		gtranslator_query_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
+		GNOME_APP_PIXMAP_DATA, query_xpm,
 		GDK_F7, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
@@ -363,9 +367,12 @@ GnomeUIInfo the_navibar[] = {
 			       N_("Replace string in po file"),
 			       gtranslator_replace_dialog,
 			       GNOME_STOCK_PIXMAP_SRCHRPL),
-	GNOMEUIINFO_ITEM_STOCK(N_("Query"),
-			       N_("Query for a string"),
-			       gtranslator_query_dialog,
-			       GNOME_STOCK_PIXMAP_JUMP_TO),
+	{
+		GNOME_APP_UI_ITEM, N_("Query"),
+		N_("Query for a string"),
+		gtranslator_query_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_DATA, query_big_xpm,
+		0, 0, NULL
+	},
 	GNOMEUIINFO_END
 };
