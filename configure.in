@@ -33,25 +33,9 @@ GNOME_INIT
 GNOME_X_CHECKS
 
 dnl -------------------------------------------------------------------
-dnl Libtool for the libgtranslator directory and the directory.
-dnl -------------------------------------------------------------------
-AM_PROG_LIBTOOL
-
-dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
 GNOME_COMPILE_WARNINGS
-
-dnl -------------------------------------------------------------------
-dnl Check for glib and gtk+ indepententally from the GNOME checks 
-dnl -------------------------------------------------------------------
-AM_PATH_GLIB(1.2.3)
-
-dnl -------------------------------------------------------------------
-dnl We need Gtk+ >= 1.2.4 for D'n'D, do we? I don't know it, but I've 
-dnl  got heard somewhere that proper D'n'D was integrated with 1.2.4.
-dnl -------------------------------------------------------------------
-AM_PATH_GTK(1.2.4)
 
 dnl -------------------------------------------------------------------
 dnl Our languages caravane has got settled here in place.( add your's )
@@ -197,6 +181,12 @@ fi
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 
 dnl -------------------------------------------------------------------
+dnl Use extended compile warn flags per default.
+dnl -------------------------------------------------------------------
+CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts\
+ -Wimplicit -Wreturn-type -Wswitch -Wcomment"
+
+dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(debugspecs,
@@ -210,12 +200,6 @@ else
 fi
 AC_MSG_CHECKING([if a gdb/debug friendly version should be build ])
 AC_MSG_RESULT(${debugpoints})
-
-dnl -------------------------------------------------------------------
-dnl Use extended compile warn flags per default.
-dnl -------------------------------------------------------------------
-CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts\
- -Wimplicit -Wreturn-type -Wswitch -Wcomment"
 
 dnl -------------------------------------------------------------------
 dnl Check for nautilus and try to get out all the flags for the

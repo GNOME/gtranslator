@@ -20,16 +20,10 @@
 #ifndef NAUTILUS_GTRANSLATOR_VIEW_H
 #define NAUTILUS_GTRANSLATOR_VIEW_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <gtk/gtklabel.h>
 #include <libnautilus/nautilus-view.h>
 
-#ifdef ENABLE_NLS
 #include <libgnome/gnome-i18n.h>
-#endif
 
 #define NAUTILUS_TYPE_GTRANSLATOR_VIEW	     (nautilus_gtranslator_view_get_type ())
 #define NAUTILUS_GTRANSLATOR_VIEW(obj)	     (GTK_CHECK_CAST ((obj), NAUTILUS_TYPE_GTRANSLATOR_VIEW, NautilusGtranslatorView))

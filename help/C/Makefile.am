@@ -18,7 +18,7 @@ gtranslator_htmlfiles = \
 gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat
 
 $(gtranslator_htmlfiles):$(gtranslator_sgmlfile)
-	@if [ ! -f gtranslator/index.html ]; then cd $(srcdir) && db2html gtranslator.sgml; fi
+	-@if [ ! -f gtranslator/index.html ]; then cd $(srcdir) && db2html gtranslator.sgml; fi
 	-cd $(srcdir) && cp gtranslator/$@ .
 	
 disthook:

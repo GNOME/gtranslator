@@ -50,6 +50,8 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 	xmldoc=xmlParseFile(filename);
 
 	g_assert(xmldoc);
+
+	scheme = g_new0(GtrColorScheme, 1);
 	
 	scheme->name=xmlGetProp(xmldoc->xmlRootNode, "name");
 	scheme->version=xmlGetProp(xmldoc->xmlRootNode, "version");

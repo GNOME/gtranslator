@@ -22,8 +22,8 @@
 #endif
 
 #include "nautilus-gtranslator-view.h"
-#include <gnome-regex.h>
-#include <parse.h>
+#include "gnome-regex.h"
+#include "parse.h"
 #include <libnautilus/nautilus-view-standard-main.h>
 
 #define FACTORY_IID     \
@@ -40,10 +40,8 @@ main (int argc, char *argv[])
 {
 	rxc=gnome_regex_cache_new_with_size(20);
 	
-	#ifdef ENABLE_NLS
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
-	#endif
 	
 	return nautilus_view_standard_main (EXECUTABLE_NAME, VERSION,
 					    argc, argv,

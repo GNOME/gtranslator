@@ -3,12 +3,12 @@
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or   
+ *   the Free Software Foundation; either version 2 of the License, or
  *    (at your option) any later version.
- *    
+ *
  * gtranslator is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *    GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -17,27 +17,28 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
 #include "nautilus-gtranslator-view.h"
 
-#include <parse.h>
-#include <vfs-handle.h>
-#include <messages.h>
-#include <open-differently.h>
-#include <stylistics.h>
+#include "parse.h"
+#include "vfs-handle.h"
+#include "messages.h"
+#include "open-differently.h"
+#include "stylistics.h"
 
 #include <gtk/gtk.h>
 
 #include <libnautilus/nautilus-bonobo-ui.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <gnome.h>
+#include <libgnomeui/gnome-dialog.h>
+#include <libgnomeui/gnome-entry.h>
+#include <libgnomeui/gnome-uidefs.h>
+#include <libgnomeui/gnome-href.h>
+
 #include <stdlib.h>
-#include <bonobo/bonobo-control.h>
-#include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-stock.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtksignal.h>
 
 struct NautilusGtranslatorViewDetails {
 	char		*location;
@@ -63,10 +64,10 @@ static gpointer parent_class;
 void open_po_file(GtkWidget *widget, gpointer filename)
 {
 	gchar *cmd;
-	
+
 	g_assert(filename);
 
-	cmd=g_strdup_printf("gtranslator --disable-crash-dialog %s", 
+	cmd=g_strdup_printf("gtranslator --disable-crash-dialog %s",
 		(gchar *) filename);
 
 	system(cmd);
@@ -76,10 +77,10 @@ void open_po_file(GtkWidget *widget, gpointer filename)
 
 void mail_po_file(GtkWidget *widget, gpointer filename)
 {
-	GtkWidget *dialog=NULL;
-	GtkWidget *entry=NULL;
-	GtkWidget *label=NULL;
-	gchar *tuz;
+	GtkWidget *dialog;
+	GtkWidget *entry;
+	GtkWidget *label;
+	gchar *tuz=NULL;
 	gchar *mailing;
 
 	dialog=gnome_dialog_new(
@@ -97,43 +98,43 @@ void mail_po_file(GtkWidget *widget, gpointer filename)
 
 	gtk_widget_show(label);
 	gtk_widget_show(entry);
-	
+
 	switch(gnome_dialog_run(GNOME_DIALOG(dialog)))
 	{
 		case GNOME_OK:
-			
+
 			tuz=gtk_editable_get_chars(
 				GTK_EDITABLE(gnome_entry_gtk_entry
 					(GNOME_ENTRY(entry))), 0, -1);
 
 			mailing=g_strdup_printf("echo \"%s\" > /tmp/.ZT && cat /tmp/.ZT|mutt '%s' -s '%s' -a \"%s\"",
-				"Po file for you -- take it or blame it!",	
-				tuz, "Po file for you!", 
+				"Po file for you -- take it or blame it!",
+				tuz, "Po file for you!",
 				gnome_vfs_get_local_path_from_uri(
 					(gchar *) filename));
 
 			system(mailing);
 
 			g_free(mailing);
+			g_free(tuz);
+
 			break;
-		
+
 		default:
-			
+
 			break;
 	}
-	
-	gtk_widget_destroy(dialog);
 
-	g_free(tuz);
+	gtk_widget_destroy(dialog);
 }
 
 GtkType
 nautilus_gtranslator_view_get_type (void)
-{                                                                                                       
-	GtkType parent_type;                                                                            
-	static GtkType type;                                                                            
-                                                                                                        
-	if (type == 0) {                                                                                
+{
+	GtkType parent_type;
+	static GtkType type;
+
+	if (type == 0) {
 		static GtkTypeInfo info = {
 		        "NautilusGtranslatorView",
 			sizeof (NautilusGtranslatorView),
@@ -153,16 +154,16 @@ nautilus_gtranslator_view_get_type (void)
 	return type;
 }
 
-     
+
 static void
 nautilus_gtranslator_view_initialize_class (NautilusGtranslatorViewClass *klass)
 {
 	GtkObjectClass *object_class;
-	
+
 	g_assert (NAUTILUS_IS_GTRANSLATOR_VIEW_CLASS (klass));
 
 	object_class = GTK_OBJECT_CLASS (klass);
-	
+
 	object_class->destroy = nautilus_gtranslator_view_destroy;
 }
 
@@ -172,31 +173,31 @@ nautilus_gtranslator_view_initialize (NautilusGtranslatorView *view)
 	g_assert (NAUTILUS_IS_GTRANSLATOR_VIEW (view));
 
 	view->details = g_new0 (NautilusGtranslatorViewDetails, 1);
-	
+
 	view->details->table=gtk_table_new(6, 2, FALSE);
 
 	gtk_widget_show(view->details->table);
-	
-	nautilus_view_construct(NAUTILUS_VIEW(view), 
+
+	nautilus_view_construct(NAUTILUS_VIEW(view),
 		view->details->table);
 
-	gtk_signal_connect (GTK_OBJECT (view), 
+	gtk_signal_connect (GTK_OBJECT (view),
 			    "load_location",
-			    sample_load_location_callback, 
+			    sample_load_location_callback,
 			    NULL);
 
         gtk_signal_connect (GTK_OBJECT (nautilus_view_get_bonobo_control (NAUTILUS_VIEW (view))),
                             "activate",
                             sample_merge_bonobo_items_callback,
                             view);
-	
+
 }
 
 static void
 nautilus_gtranslator_view_destroy (GtkObject *object)
 {
 	NautilusGtranslatorView *view;
-	
+
 	view = NAUTILUS_GTRANSLATOR_VIEW (object);
 
 	g_free(view->details);
@@ -212,7 +213,7 @@ load_location (NautilusGtranslatorView *view,
 {
 	GtkWidget *name, *version, *translator, *language, *podate, *potdate,
 		*encoding;
-	
+
 	g_assert(NAUTILUS_IS_GTRANSLATOR_VIEW(view));
 
 	g_assert(location!=NULL);
@@ -221,7 +222,7 @@ load_location (NautilusGtranslatorView *view,
 	view->details->location=g_strdup(location);
 
 	parse(gnome_vfs_get_local_path_from_uri(view->details->location));
-	
+
 	#define add_part(x, y, z) \
 	gtk_table_attach_defaults(GTK_TABLE(view->details->table), \
 		x, z, z+1, y, y+1)
@@ -233,7 +234,7 @@ load_location (NautilusGtranslatorView *view,
 		po->header->prj_version));
 
 	translator=gnome_href_new(g_strdup_printf(_("mailto:%s"), po->header->tr_email),
-		g_strdup_printf(_("Last translator: %s <%s>"), po->header->translator, 
+		g_strdup_printf(_("Last translator: %s <%s>"), po->header->translator,
 		po->header->tr_email));
 
 	language=gnome_href_new(g_strdup_printf(_("mailto:%s"), po->header->lg_email),
@@ -242,20 +243,20 @@ load_location (NautilusGtranslatorView *view,
 
 	potdate=gtk_label_new(g_strdup_printf(_("Last %s.pot update: %s"),
 		po->header->prj_name, po->header->pot_date));
-	
+
 	podate=gtk_label_new(g_strdup_printf(_("Last po file update: %s"),
 		po->header->po_date));
-	
+
 	encoding=gtk_label_new(g_strdup_printf(_("Encoding: %s (%s)"),
 		po->header->charset, po->header->encoding));
 
 	if(po->header->comment)
 	{
 		GtkWidget *comment;
-		
-		comment=gtk_label_new(g_strdup_printf(_("Comments: %s"), 
+
+		comment=gtk_label_new(g_strdup_printf(_("Comments: %s"),
 			prepare_comment_for_view(po->header->comment)));
-		
+
 		add_part(comment, 0, 0);
 		add_part(encoding, 0, 1);
 		add_part(name, 1, 0);
@@ -280,17 +281,17 @@ load_location (NautilusGtranslatorView *view,
 }
 
 static void
-sample_load_location_callback (NautilusView *nautilus_view, 
+sample_load_location_callback (NautilusView *nautilus_view,
 			       const char *location,
 			       gpointer user_data)
 {
 	NautilusGtranslatorView *view;
-	
+
 	g_assert (NAUTILUS_IS_VIEW (nautilus_view));
 	g_assert (location != NULL);
-	
+
 	view = NAUTILUS_GTRANSLATOR_VIEW (nautilus_view);
-	
+
 	nautilus_view_report_load_underway (nautilus_view);
 
 	nautilus_view_report_status(nautilus_view, _("Loading po file..."));
@@ -298,16 +299,16 @@ sample_load_location_callback (NautilusView *nautilus_view,
 	load_location (view, location);
 
 	nautilus_view_report_load_complete(NAUTILUS_VIEW(view));
-	
+
 }
 
 static void
-bonobo_sample_callback (BonoboUIComponent *ui, 
-			gpointer           user_data, 
+bonobo_sample_callback (BonoboUIComponent *ui,
+			gpointer           user_data,
 			const char        *verb)
 {
  	NautilusGtranslatorView *view;
-	
+
 	g_assert (BONOBO_IS_UI_COMPONENT (ui));
         g_assert (verb != NULL);
 
@@ -329,8 +330,8 @@ bonobo_sample_callback (BonoboUIComponent *ui,
 
 /* CHANGE: Do your own menu/toolbar merging here. */
 static void
-sample_merge_bonobo_items_callback (BonoboControl *control, 
-				    gboolean       state, 
+sample_merge_bonobo_items_callback (BonoboControl *control,
+				    gboolean       state,
 				    gpointer       user_data)
 {
  	NautilusGtranslatorView *view;
@@ -343,7 +344,7 @@ sample_merge_bonobo_items_callback (BonoboControl *control,
 	};
 
 	g_assert (BONOBO_IS_CONTROL (control));
-	
+
 	view = NAUTILUS_GTRANSLATOR_VIEW (user_data);
 
 	if(state)
@@ -352,7 +353,7 @@ sample_merge_bonobo_items_callback (BonoboControl *control,
 			DATADIR,
 			"nautilus-gtranslator-view-ui.xml",
 			"nautilus-gtranslator-view");
-									
+
 		bonobo_ui_component_add_verb_list_with_data(
 			ui_component, verbs, view);
 	}

@@ -6,7 +6,7 @@ else
 NV_DIR =
 endif
 
-SUBDIRS = data help intl macros man po src $(NV_DIR)
+SUBDIRS = data intl macros src $(NV_DIR) po help man
 
 bin_SCRIPTS = pozilla.sh
 
