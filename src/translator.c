@@ -281,6 +281,69 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 }
 
 /*
+ * Return the well-formed translator string we're using in many places.
+ */
+gchar *gtranslator_translator_get_translator_string(GtrTranslator *translator)
+{
+	gchar	*translator_string=NULL;
+	
+	g_return_val_if_fail(translator!=NULL, NULL);
+
+	if(translator->name && translator->email)
+	{
+		translator_string=g_strdup_printf("%s <%s>",
+			translator->name, translator->email);
+	}
+	else if(translator->name && !translator->email)
+	{
+		translator_string=g_strdup(translator->name);
+	}
+	else if(!translator->name && translator->email)
+	{
+		translator_string=g_strdup(translator->email);
+	}
+	else
+	{
+		translator_string=g_strdup(_("Unknown"));
+	}
+
+	return translator_string;
+}
+
+/*
+ * Set the translator name + Email information of the given GtrTranslator
+ *  safely from the given arguments.
+ */
+void gtranslator_translator_set_translator(GtrTranslator *translator,
+	gchar	*name, gchar	*email)
+{
+	g_return_if_fail(translator!=NULL);
+	g_return_if_fail(name!=NULL);
+
+	/*
+	 * Free & set the translator name in any case.
+	 */
+	GTR_FREE(GTR_TRANSLATOR(translator)->name);
+	translator->name=g_strdup(name);
+
+	GTR_FREE(GTR_TRANSLATOR(translator)->email);
+
+	/*
+	 * Check for the given EMail string and also check the given EMail
+	 *  address for brevity.
+	 */
+	if(email && strlen(email) > 6 && 
+		strchr(email, '@') && strchr(email, '.'))
+	{
+		translator->email=g_strdup(email);
+	}
+	else
+	{
+		translator->email=NULL;
+	}
+}
+
+/*
  * Save the GtrTranslator's data/information into our preferences.
  */
 void gtranslator_translator_save(GtrTranslator *translator)

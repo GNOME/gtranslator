@@ -74,6 +74,19 @@ GtrTranslator *gtranslator_translator_new(void);
 GtrTranslator *gtranslator_translator_new_with_default_values(void);
 
 /*
+ * Change/update/set the translator name + Email safely for the given
+ *  GtrTranslator.
+ */
+void gtranslator_translator_set_translator(GtrTranslator *translator,
+	gchar	*name, gchar	*email);
+
+/*
+ * Returns a standardly formed translator string like "TRANSLATOR <EMAIL>" in
+ *  a normal case.
+ */
+gchar *gtranslator_translator_get_translator_string(GtrTranslator *translator);
+
+/*
  * Saves the values from the GtrTranslator structure in our preferences.
  */
 void gtranslator_translator_save(GtrTranslator *translator);
