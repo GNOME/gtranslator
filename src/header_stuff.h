@@ -1,13 +1,22 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-* Gediminas Paulauskas <menesis@delfi.lt>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* The header for the ´header´-rountines 
-*
-* -- header
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #ifndef GTR_HEADER_STUFF_H
 #define GTR_HEADER_STUFF_H 1
@@ -15,9 +24,9 @@
 #include <gtk/gtkwidget.h>
 #include <libgtranslator/messages.h>
 
-/**
-* The header-structure which should hold the header information
-**/
+/*
+ * The header-structure which should hold the header information
+ */
 typedef struct {
 	gchar *comment;
 	gchar *prj_name;
@@ -35,23 +44,25 @@ typedef struct {
 
 #define GTR_HEADER(x) ((GtrHeader *)x)
 
-/**
-* These converts header between GtrMsg and GtrHeader.
-**/
-GtrMsg * put_header(GtrHeader * h);
-GtrHeader * get_header(GtrMsg * msg);
+/*
+ * These converts header between GtrMsg and GtrHeader.
+ */
+GtrMsg  * put_header(GtrHeader  * h);
+GtrHeader  * get_header(GtrMsg  * msg);
 
-/* Updates PO-Revision-Date and Last-Translator fields */
-void update_header(GtrHeader * h);
+/*
+ * Updates PO-Revision-Date and Last-Translator fields 
+ */
+void update_header(GtrHeader  * h);
 
-/**
-* Frees the header structure
-**/
-void free_header(GtrHeader * the_header);
+/*
+ * Frees the header structure
+ */
+void free_header(GtrHeader  * the_header);
 
-/**
-* Creates and shows the dialog for editing the header
-**/
-void edit_header(GtkWidget * widget, gpointer useless);
+/*
+ * Creates and shows the dialog for editing the header
+ */
+void edit_header(GtkWidget  * widget, gpointer useless);
 
 #endif

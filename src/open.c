@@ -82,7 +82,7 @@ void gtranslator_open_compiled_po_file(gchar *file)
 	/*
 	 * Set the name of the temporary file we will be using.
 	 */
-	tempfilename=g_strdup_printf("%s/gtranslator_temp_po_file",
+	tempfilename=g_strdup_printf("%s/gtranslator-temp-po-file",
 		g_get_home_dir());
 	/*
 	 * Build up the command to execute in the shell to get the plain
@@ -128,7 +128,7 @@ void gtranslator_open_gzipped_po_file(gchar *file)
 	 * Build the a temporary filename in the same way as for the
 	 *  gtranslator_open_compiled_po_file function.
 	 */
-	tempfilename=g_strdup_printf("%s/gtranslator_temp_po_file",
+	tempfilename=g_strdup_printf("%s/gtranslator-temp-po-file",
 		g_get_home_dir());
 	/* 
 	 * Set up the command to execute in the system shell.

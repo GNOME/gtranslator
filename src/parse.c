@@ -1,13 +1,22 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-* Gediminas Paulauskas <menesis@delfi.lt>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* Routines, which work with files and raw messages, or change them, are here
-*
-* -- the source
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -19,24 +28,29 @@
 #include "prefs.h"
 #include "dialogs.h"
 #include "gui.h"
+#include "open-differently.h"
 #include <libgnome/gnome-history.h>
 #include <libgtranslator/recent-files.h>
 
-/* These are to be used only inside this file */
-static void append_line(gchar ** old, const gchar * tail);
-static gchar *restore_msg(gchar * given);
+/*
+ * These are to be used only inside this file
+ */
+static void append_line(gchar * * old, const gchar  * tail);
+static gchar *restore_msg(gchar  * given);
 static void write_the_message(gpointer data, gpointer fs);
-static gboolean actual_write(const gchar * name);
+static gboolean actual_write(const gchar  * name);
 static void free_po(void);
 static void free_a_message(gpointer data, gpointer useless);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
 
-void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
+void mark_msg_fuzzy(GtrMsg  * msg, gboolean fuzzy)
 {
 	regex_t *rex;
 	regmatch_t pos[3];
 	gchar *comment = msg->comment;
-	/* If fuzzy status is already correct */
+	/* 
+	 * If fuzzy status is already correct
+	 */
 	if (((msg->status & GTR_MSG_STATUS_FUZZY) != 0) == fuzzy)
 		return;
 	if (fuzzy) {
@@ -66,12 +80,16 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	}
 }
 
-/* FIXME: check if message counts remain correct */
-void mark_msg_sticky (GtrMsg * msg, gboolean on)
+/* 
+ * FIXME: check if message counts remain correct
+ */
+void mark_msg_sticky (GtrMsg  * msg, gboolean on)
 {
 	if (on) {
 		msg->msgstr = msg->msgid;
-		/* It is no longer fuzzy */
+		/*
+		 * It is no longer fuzzy
+		 */
 		mark_msg_fuzzy(msg, FALSE);
 		msg->status |= GTR_MSG_STATUS_STICK;
 	} else {
@@ -81,7 +99,7 @@ void mark_msg_sticky (GtrMsg * msg, gboolean on)
 	}
 }
 
-static void check_msg_status(GtrMsg * msg)
+static void check_msg_status(GtrMsg  * msg)
 {
 	if (msg->msgstr)
 		msg->status = GTR_MSG_STATUS_TRANSLATED;
@@ -89,11 +107,14 @@ static void check_msg_status(GtrMsg * msg)
 		msg->status |= GTR_MSG_STATUS_FUZZY;
 }
 
-/* Formats tail to look good when displayed and easier to maintain. Removes */
-/* unneeded \'s and "'s and replaces \\n with real newline. */
-/* Then appends this to *old and updates the pointer. */
-/* TODO: make this use GString */
-static void append_line(gchar ** old, const gchar * tail)
+/*
+ * Formats tail to look good when displayed and easier to maintain. Removes/
+ * unneeded \'s and "'s and replaces \\n with real newline.
+ * Then appends this to *old and updates the pointer.
+ * 
+ * TODO: make this use GString
+ */
+static void append_line(gchar * * old, const gchar  * tail)
 {
 	gchar *to_add = g_new(gchar, strlen(tail));
 	gchar *result;
@@ -133,16 +154,18 @@ static gboolean actual_parse(void)
 	FILE *fs;
 	gchar line[256];
 	guint lines = 0;
-	/* if TRUE, means that a corresponding part is read */
+	/*
+	 * if TRUE, means that a corresponding part is read
+	 */
 	gboolean msgid_ok = FALSE, msgstr_ok = FALSE, comment_ok = FALSE;
 	GtrMsg *msg;
 	gchar *error = NULL;
 
 	fs = fopen(po->filename, "r+");
 	
-	/**
-	* Check if the file exists at all with a libgnome-function.
-	**/
+	/*
+	 * Check if the file exists at all with a libgnome-function.
+	 */
 	if(!g_file_exists(po->filename))
 	{
 		error=g_strdup_printf(_("The file `%s' doesn't exist at all!"), po->filename);
@@ -153,25 +176,31 @@ static gboolean actual_parse(void)
 		}
 		return FALSE;
 	}
+
+	/*
+	 * Sorry, but here we can really use the "simple" equivalence check as
+	 *  the two strings should be the same -- really.
+	 */ 
+	if(po->filename==g_strdup_printf("%s/%s",
+		g_get_home_dir(), 
+		"gtranslator-temp-po-file"))
+	{
+		/*
+		 * Add a GNOME history entry.
+		 */
+		gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");
+	}
 	
 	/*
-	 * Add a GNOME history entry.
+	 * As the po-file seems to exist, set the "count parameters" to 0.
 	 */
-	gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");
-	/*
-	 * gtranslator_append_recent_file(po->filename);
-	 */
-	
-	/**
-	* As the po-file seems to exist, set the "count parameters" to 0.
-	**/
 	po->translated=0;
 	po->fuzzy=0;
 	
 	msg = g_new0(GtrMsg, 1);
-	/**
-	* Parse the file line by line...
-	**/
+	/*
+	 * Parse the file line by line...
+	 */
 	while (fgets(line, sizeof(line), fs) != NULL) {
 		lines++;
 		/*
@@ -179,9 +208,9 @@ static gboolean actual_parse(void)
 		 * the message pair below
 		 */
 		if (line[0] == '#') {
-			/**
-			* Set the comment & position.
-			**/
+			/*
+			 * Set the comment & position.
+			 */
 			if (msg->comment == NULL) {
 				msg->pos = lines;
 				msg->comment = g_strdup(line);
@@ -192,26 +221,38 @@ static gboolean actual_parse(void)
 				msg->comment = tmp;
 			}
 		} else {
-			/* get rid of end-of-lines... */
+			/*
+			 * get rid of end-of-lines...
+			 */
 			g_strchomp(line);
 			if (strlen(line) == 0) {
 				msgstr_ok = TRUE;
 			} else
-			/* If it's a msgid */
+			/*
+			 * If it's a msgid
+			 */
 			if (!g_strncasecmp(line, "msgid \"", 7)) {
-				/* This means the comment is completed */
+				/*
+				 * This means the comment is completed
+				 */
 				comment_ok = TRUE;
 				if (strlen(line) - 8 > 0)
 					append_line(&msg->msgid, &line[6]);
 			} else
-			/* If it's a msgstr. */
+			/*
+			 * If it's a msgstr. 
+			 */
 			if (!g_strncasecmp(line, "msgstr \"", 8)) {
-				/* This means the msgid is completed */
+				/*
+				 * This means the msgid is completed
+				 */
 				msgid_ok = TRUE;
 				if (strlen(line) - 9 > 0)
 					append_line(&msg->msgstr, &line[7]);
 			} else
-			/* A continuing msgid or msgstr */
+			/*
+			 * A continuing msgid or msgstr
+			 */
 			if (line[0] == '"') {
 				if ((comment_ok == TRUE)
 				    && (msgid_ok == FALSE))
@@ -231,24 +272,30 @@ static gboolean actual_parse(void)
 				return FALSE;
 			}
 		}
-		/**
-		* we've got both msgid + msgstr
-		**/
+		/*
+		 * we've got both msgid + msgstr
+		 */
 		if ((msgid_ok == TRUE) && (msgstr_ok == TRUE)) {
 			check_msg_status(msg);
 			po->messages =
 			    g_list_prepend(po->messages, (gpointer) msg);
-			/* Reset the status of message */
+			/*
+			 * Reset the status of message
+			 */
 			msgid_ok = msgstr_ok = comment_ok = FALSE;
 			msg = g_new0(GtrMsg, 1);
 		}
 	}
-	/* If there was no newline at end of file */
+	/*
+	 * If there was no newline at end of file
+	 */
 	if ((msgid_ok == TRUE) && (msgstr_ok == FALSE)) {
 		check_msg_status(msg);
 		po->messages = g_list_prepend(po->messages, (gpointer) msg);
 	} else
-		/* not needed allocated structure */
+		/*
+		 * not needed allocated structure
+		 */
 		g_free(msg);
 	fclose(fs);
 
@@ -260,14 +307,16 @@ static gboolean actual_parse(void)
 		return FALSE;
 	}
 	
-	/* We've prepended every message, so let's reverse now */
+	/*
+	 * We've prepended every message, so let's reverse now
+	 */
 	po->messages = g_list_reverse(po->messages);
 	return TRUE;
 }
 
-/**
-* The internally used parse-function
-**/
+/*
+ * The internally used parse-function
+ */
 void parse(const gchar *filename)
 {
 	if (!filename) {
@@ -283,7 +332,9 @@ void parse(const gchar *filename)
 	}
 
 	po = g_new0(GtrPo, 1);
-	/* Get absolute filename. */
+	/*
+	 * Get absolute filename.
+	 */
 	if (!g_path_is_absolute(filename)) {
 		char absol[MAXPATHLEN + 1];
 		realpath(filename, absol);
@@ -296,16 +347,20 @@ void parse(const gchar *filename)
 		return;
 	}
 
-	/**
-	* Disable the special navigation buttons now.
-	**/
+	/*
+	 * Disable the special navigation buttons now.
+	 */
 	disable_actions(ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED);
 
-	/* If the first message is header (it always should be) */
+	/*
+	 * If the first message is header (it always should be)
+	 */
 	po->header = get_header(GTR_MSG(po->messages->data));
 	if (po->header) {
 		GList *header_li;
-		/* Unlink it from messages list */
+		/*
+		 * Unlink it from messages list
+		 */
 		header_li = po->messages;
 		po->messages = g_list_remove_link(po->messages, header_li);
 		free_a_message(header_li->data, NULL);
@@ -323,58 +378,80 @@ void parse(const gchar *filename)
 	file_opened = TRUE;
 	po->file_changed = FALSE;
 	po->length = g_list_length(po->messages);
-	/* Set the current message to the first message, and show it */
+	/*
+	 * Set the current message to the first message, and show it 
+	 */
 	po->current = g_list_first(po->messages);
 	display_msg(po->current);
 	get_translated_count();
 	enable_actions_just_opened();
-	/**
-	* Is there any fuzzy message ?
-	**/
+	/*
+	 * Is there any fuzzy message ?
+	 */
 	if(po->fuzzy>0)
 	{
-		/**
-		* Then enable the Fuzzy buttons/entries in the menus
-		**/
+		/*
+		 * Then enable the Fuzzy buttons/entries in the menus
+		 */
 		enable_actions(ACT_NEXT_FUZZY);
 	}
-	/**
-	* Is there any untranslated message ?
-	**/
+	/*
+	 * Is there any untranslated message ?
+	 */
 	if((po->length - po->translated) > 0)
 	{
-		/**
-		* Then enable the Untranslated buttons/entries in the menus
-		**/
+		/*
+		 * Then enable the Untranslated buttons/entries in the menus
+		 */
 		enable_actions(ACT_NEXT_UNTRANSLATED);
 	}
-	/**
-	* Disable the actions for the first/back navigation actions.
-	**/
+	/*
+	 * Disable the actions for the first/back navigation actions.
+	 */
 	disable_actions(ACT_FIRST, ACT_BACK);
 	
-	/**
-	* Update the recent files list.
-	**/
+	/*
+	 * Update the recent files list.
+	 */
 	gtranslator_display_recent();
 }
 
-void parse_the_file(GtkWidget * widget, gpointer of_dlg)
+void parse_the_file(GtkWidget  * widget, gpointer of_dlg)
 {
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
-	parse(po_file);
-	/* Destroy the dialog */
+
+	/*
+	 * Detect via the new functions the right open function for the file.
+	 */
+	if(!gtranslator_open_po_file(po_file))
+	{
+		/*
+		 * Open it as a "normal" gettext po file.
+		 */ 
+		parse(po_file);
+	}
+	/*
+	 * Destroy the dialog 
+	 */
 	gtk_widget_destroy(GTK_WIDGET(of_dlg));
 }
 
 void parse_the_file_from_the_recent_files_list(GtkWidget *widget, gpointer filepointer)
 {
-	parse((gchar *)filepointer);
+	/*
+	 * Also detect the right open function in the recent files' list.
+	 */
+	if(!gtranslator_open_po_file((gchar *) filepointer))
+	{
+		parse((gchar *) filepointer);
+	}
 }
 
-/* Restores the formatting of a message, done in append_line */
-static gchar *restore_msg(gchar * given)
+/*
+ * Restores the formatting of a message, done in append_line
+ */
+static gchar *restore_msg(gchar  * given)
 {
 	GString *rest;
 	gchar *result;
@@ -434,7 +511,9 @@ static gchar *restore_msg(gchar * given)
 	return result;
 }
 
-/* Writes one message to a file stream */
+/*
+ * Writes one message to a file stream 
+ */
 static void write_the_message(gpointer data, gpointer fs)
 {
 	GtrMsg *msg = GTR_MSG(data);
@@ -451,7 +530,7 @@ static void write_the_message(gpointer data, gpointer fs)
 			id, str);
 }
 
-static gboolean actual_write(const gchar * name)
+static gboolean actual_write(const gchar  * name)
 {
 	GtrMsg *header;
 	FILE *fs;
@@ -465,36 +544,43 @@ static gboolean actual_write(const gchar * name)
 		return FALSE;
 	}
 
-	/**
-	* Check if the filename is equal to our internally
-	*  used "gtranslator_temp_po_file"..
-	**/
-	if(!g_strcasecmp(name, "gtranslator_temp_po_file"))
+	/*
+	 * Check if the filename is equal to our internally
+	 *  used "gtranslator-temp-po-file"..
+	 */
+	if(!g_strcasecmp(name,
+		g_strdup_printf("%s/%s",
+			g_get_home_dir(),
+			"gtranslator-temp-po-file")))
 	{
-		/**
-		* Create a new filename to use instead of the
-		*  oldsome "temp_po_file"...
-		**/  
+		/*
+		 * Create a new filename to use instead of the
+		 *  oldsome "gtranslator-temp-po-file"...
+		 */  
 		gchar *newfilename;
 		newfilename=g_strdup_printf("%s-%s.%s.po",
 			po->header->prj_name,
 			po->header->prj_version,
 			po->header->language);
-		/**
-		* Assign the new name.
-		**/ 
+		/*
+		 * Assign the new name.
+		 */ 
 		name=newfilename;
-		/**
-		* Add a foo'sh header entry.
-		**/ 
+		/*
+		 * Add a foo'sh header entry.
+		 */ 
 		po->header->comment="#   -- edited with gtranslator.\n";
+		/*
+		 * Delete the old file.
+		 */
+		unlink(g_strdup_printf("%s/%s", g_get_home_dir(), "gtranslator-temp-po-file"));
 	}
 	
 	fs = fopen(name, "w");
 
-	/**
-	* Again check if the file exists.
-	**/
+	/*
+	 * Again check if the file exists.
+	 */
 	if(!g_file_exists(name))
 	{
 		gchar *my_error=g_strdup_printf(_("The file `%s' doesn't exist at all!"),name);
@@ -509,7 +595,9 @@ static gboolean actual_write(const gchar * name)
 	free_a_message(header, NULL);
 
 	update_msg();
-	/* Write every message to the file */
+	/*
+	 * Write every message to the file
+	 */
 	g_list_foreach(po->messages, (GFunc) write_the_message, (gpointer) fs);
 
 	fclose(fs);
@@ -517,8 +605,10 @@ static gboolean actual_write(const gchar * name)
 	return TRUE;
 }
 
-/* A callback for OK in Save as... dialog */
-void save_the_file(GtkWidget * widget, gpointer sfa_dlg)
+/*
+ * A callback for OK in Save as... dialog 
+ */
+void save_the_file(GtkWidget  * widget, gpointer sfa_dlg)
 {
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg));
@@ -529,8 +619,10 @@ void save_the_file(GtkWidget * widget, gpointer sfa_dlg)
 	gtk_widget_destroy(GTK_WIDGET(sfa_dlg));
 }
 
-/* A callback for Save */
-void save_current_file(GtkWidget * widget, gpointer useless)
+/*
+ * A callback for Save
+ */
+void save_current_file(GtkWidget  * widget, gpointer useless)
 {
 	if (!po->file_changed) {
 		if (wants.dont_save_unchanged_files)
@@ -566,7 +658,9 @@ static void free_a_message(gpointer data, gpointer useless)
 	g_free(data);
 }
 
-/* Frees the po variable */
+/*
+ * Frees the po variable
+ */
 static void free_po(void)
 {
 	if (po->messages) {
@@ -580,26 +674,28 @@ static void free_po(void)
 	po = NULL;
 }
 
-void close_file(GtkWidget * widget, gpointer useless)
+void close_file(GtkWidget  * widget, gpointer useless)
 {
 	if (!file_opened)
 		return;
-	/* If user doesn't know what to do with changed file, return */
+	/*
+	 * If user doesn't know what to do with changed file, return
+	 */
 	if (!ask_to_save_file)
 		return;
 	free_po();
 	file_opened = FALSE;
 	nothing_changes = TRUE;
 	clean_text_boxes();
-	/**
-	* Set a blank appbar status message.
-	**/
+	/*
+	 * Set a blank appbar status message.
+	 */
 	gnome_appbar_push(GNOME_APPBAR(appbar1), "");
 	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), 0.00000);
 	disable_actions_no_file();
 }
 
-void revert_file(GtkWidget * widget, gpointer useless)
+void revert_file(GtkWidget  * widget, gpointer useless)
 {
 	gchar *save_this;
 	if (po->file_changed) {
@@ -623,26 +719,28 @@ void revert_file(GtkWidget * widget, gpointer useless)
 			return;
 	}
 	save_this = g_strdup(po->filename);
-	/* Let close_file know it doesn't matter if file was changed */
+	/*
+	 * Let close_file know it doesn't matter if file was changed
+	 */
 	po->file_changed = FALSE;
 	close_file(NULL, NULL);
 	parse(save_this);
 	g_free(save_this);
 }
 
-/**
-* The compile function
-**/
-void compile(GtkWidget * widget, gpointer useless)
+/*
+ * The compile function
+ */
+void compile(GtkWidget  * widget, gpointer useless)
 {
 	gchar *cmd;
 	gint res = 1;
 	FILE *fs;
 	gboolean changed = po->file_changed;
 
-	/**
-	* Check if msgfmt is available on the system.
-	**/
+	/*
+	 * Check if msgfmt is available on the system.
+	 */
 	if(!gnome_is_program_in_path("msgfmt"))
 	{
 		gnome_app_error(GNOME_APP(app1), _("Sorry, msgfmt isn't available on your system!"));
@@ -660,9 +758,9 @@ void compile(GtkWidget * widget, gpointer useless)
 			    PO_FILE,RESULT);
 	res = system(cmd);
 	fs=fopen(RESULT,"r");
-	/**
-	* If there has been an error show an error-box
-	**/
+	/*
+	 * If there has been an error show an error-box
+	 */
 	if (res != 0) {
 		compile_error_dialog(fs);
 	} else {
@@ -679,14 +777,14 @@ void compile(GtkWidget * widget, gpointer useless)
 	g_free(cmd);
 }
 
-/**
-* The recent menus stuff.
-**/
+/*
+ * The recent menus stuff.
+ */
 void gtranslator_display_recent(void)
 {
-	/**
-	* Couldn't we do that better with bonobo?
-	**/
+	/*
+	 * Couldn't we do that better with bonobo?
+	 */
 	gchar *name;
 	gchar *menupath = g_strdup (_("_File/Recen_t files/"));
 	gint len;
@@ -694,81 +792,83 @@ void gtranslator_display_recent(void)
 	GnomeHistoryEntry recent;
 	GList *list;
 	
-	/**
-	* Get GNOME's list of the recently used files.
-	**/
+	/*
+	 * Get GNOME's list of the recently used files.
+	 */
 	list=gnome_history_get_recently_used();
-	/**
-	* reverse the list to get the real sequence on
-	*  the routines while parsing the list of recent
-	*   files.
-	**/
+	/*
+	 * reverse the list to get the real sequence on
+	 *  the routines while parsing the list of recent
+	 *   files.
+	 */
 	list=g_list_reverse(list);
-	/**
-	* Are there any recent files ?
-	**/
+	/*
+	 * Are there any recent files ?
+	 */
 	if((!list) || (!list->data))
 	{
-		/**
-		* Delete the old entries.
-		**/
+		/*
+		 * Delete the old entries.
+		 */
 		gnome_app_remove_menus(GNOME_APP(app1), menupath, 1);
-		/**
-		* Create a new GnomeUIInfo widget.
-		**/
+		/*
+		 * Create a new GnomeUIInfo widget.
+		 */
 		menu=g_new0(GnomeUIInfo,2);
-		/**
-		* Insert the end point of the menus.
-		**/
+		/*
+		 * Insert the end point of the menus.
+		 */
 		menu->type=GNOME_APP_UI_ENDOFINFO;
-		/**
-		* Insert this menu into the menupath.
-		**/
+		/*
+		 * Insert this menu into the menupath.
+		 */
 		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-		/**
-		* Return from the loop.
-		**/
+		/*
+		 * Return from the loop.
+		 */
 		return;
 	}
 
-	/**
-	* Delete the old entries.
-	**/
+	/*
+	 * Delete the old entries.
+	 */
 	gnome_app_remove_menus(GNOME_APP(app1), menupath, 1);
 
-	/**
-	* Create a new GnomeUIInfo widget.
-	**/
+	/*
+	 * Create a new GnomeUIInfo widget.
+	 */
 	menu=g_new0(GnomeUIInfo,2);
 
-	/**
-	* Insert the end point of the menus.
-	**/
+	/*
+	 * Insert the end point of the menus.
+	 */
 	menu->type=GNOME_APP_UI_ENDOFINFO;
-	/**
-	* Insert this menu into the menupath.
-	**/
+	/*
+	 * Insert this menu into the menupath.
+	 */
 	gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
 	
-	/**
-	* Parse the list, but maximal as many entries as wished
-	*  in the preferences.
-	**/
+	/*
+	 * Parse the list, but maximal as many entries as wished
+	 *  in the preferences.
+	 */
 	for(len=((g_list_length(list)-1) < (wants.recent_files-1))
 		?(g_list_length(list)-1) : (wants.recent_files-1);
 		len >= 0;len--)
 	{
-		/**
-		* Get the GnomeHistory Entry.
-		**/
+		/*
+		 * Get the GnomeHistory Entry.
+		 */
 		recent=g_list_nth_data(list, len);
-		/**
-		* Copy the filename.
-		**/
+		
+		/*
+		 * Copy the filename.
+		 */
 		name=g_strdup(recent->filename);
-		/**
-		* If the filename should be checked for existence.
-		**/
+		
+		/*
+		 * If the filename should be checked for existence.
+		 */
 		if(wants.check_recent_file)
 		{
 			if(!g_file_exists(name))
@@ -776,14 +876,16 @@ void gtranslator_display_recent(void)
 				continue;
 			}
 		}
-		/**
-		* Set the label name.
-		**/
+		
+		/*
+		 * Set the label name.
+		 */
 		menu->label=g_strdup_printf("_%i:  %s", len+1,
 			recent->filename);
-		/**
-		* Set the GnomeUIInfo settings and labels.
-		**/
+		
+		/*
+		 * Set the GnomeUIInfo settings and labels.
+		 */
 		menu->type=GNOME_APP_UI_ITEM;
 		menu->hint=g_strdup_printf(_("Open %s"), recent->filename);
 		menu->moreinfo=(gpointer)parse_the_file_from_the_recent_files_list;
@@ -792,38 +894,37 @@ void gtranslator_display_recent(void)
 		menu->pixmap_type=0;
 		menu->pixmap_info=NULL;
 		menu->accelerator_key=0;
-		/**
-		* Insert a GNOMEUIINFO_END equivalent.
-		**/
+		
+		/*
+		 * Insert a GNOMEUIINFO_END equivalent.
+		 */
 		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
 
-		/**
-		* Insert it into the menus.
-		**/
+		/*
+		 * Insert it into the menus.
+		 */
 		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-		/**
-		* Free the label.
-		**/	
+		
 		g_free(menu->label);
 	}
-	/**
-	* Free the string and the GnomeUIInfo structure.
-	**/
+	/*
+	 * Free the string and the GnomeUIInfo structure.
+	 */
 	if(menu)
 	{
 		g_free(menu);
 	}
 	g_free(menupath);
-	/**
-	* At last: free the GnomeHistoryEntry list.
-	**/
+	/*
+	 * At last: free the GnomeHistoryEntry list.
+	 */
 	gnome_history_free_recently_used_list(list);
 }
 
-/**
-* A helper function simply increments the "translated" variable of the
-*  po-file.
-**/
+/*
+ * A helper function simply increments the "translated" variable of the
+ *  po-file.
+ */
 static void determine_translation_status(gpointer data, gpointer useless_stuff)
 {
 	GtrMsg *message = GTR_MSG(data);
@@ -833,29 +934,29 @@ static void determine_translation_status(gpointer data, gpointer useless_stuff)
 		po->fuzzy++;
 }
 
-/**
-* Now get the complete count of the translated entries.
-**/
+/*
+ * Now get the complete count of the translated entries.
+ */
 void get_translated_count(void)
 {
 	po->translated = 0;
 	po->fuzzy = 0;
 	g_list_foreach(po->messages, (GFunc) determine_translation_status,
 		       NULL);
-	/**
-	* Update the progress bar.
-	**/
+	/*
+	 * Update the progress bar.
+	 */
 	gtranslator_set_progress_bar();
 }
 
 void gtranslator_set_progress_bar(void)
 {
-	/**
-	* Get the total percentage.
-	**/
-	percentage = 1.0 * po->translated / po->length;
-	/**
-	* Set the progressbar status.
-	**/
+	/*
+	 * Get the total percentage.
+	 */
+	percentage = 1.0  * po->translated / po->length;
+	/*
+	 * Set the progressbar status.
+	 */
 	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), percentage);
 }

@@ -1,13 +1,21 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-*       
-* (C) 2000 Published under GNU GPL V 2.0+
-*       
-* Language structure and different
-*  things related to this ..
-*       
-* -- the languages defining header
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #ifndef GTR_LANGUAGES_H
 #define GTR_LANGUAGES_H 1
@@ -15,43 +23,48 @@
 #include <glib.h>
 #include <libgnome/gnome-i18n.h>
 
-/**
-* A typedef for the language structure
-**/
+/*
+ * A typedef for the language structure
+ */
 typedef struct _lang lang;
 
-/**
-* The language structure 
-**/
+/*
+ * The language structure 
+ */
 struct _lang {
-	/**
-	* The different informations for a language :
-	**/
-	/* 1->The name of the language */
-	/* I hope that's clear ...     */
+	/*
+	 * The different informations for a language :
+	 */
+	/*
+	 * 1 - The name of the language 
+	 */
 	gchar *name;
-	/* 2->The language-code */
-	/* For example `tr'     */
+	/*
+	 * 2 - The language-code 
+	 */
 	gchar *lcode;
-	/* 3->The encoding preferably used for this language */
-	/* For example `iso-8859-9` for Turkish          */
+	/*
+	 * 3 - The encoding preferably used for this language 
+	 */
 	gchar *enc;
-	/* 4->The group's( at LI/somewhere else ) EMail for the language */
-	/* For example `tr@li.org' for the Turkish group             */
+	/* 
+	 * 4 - The group's( at LI/somewhere else ) EMail for the language 
+	 */
 	gchar *group;
-	/* 5->The transfer bit count for the language */
-	/* For example : `8bit' for Turkish           */
+	/*
+	 * 5 - The transfer bit count for the language 
+	 */
 	gchar *bits;
 };
 
-/**
-* Nothing changed here, besides that we've switched to the structure
-*  instead of the gchar*-array ..
-*
-* NOTE : I had to use the N() macro as the table must be constant ...
-*	  but in the Prefs-box and in the other places where they appear 
-*	   translated because of a gettext(S)-call ...
-**/
+/*
+ * Nothing changed here, besides that we've switched to the structure
+ *  instead of the gchar*-array ..
+ *
+ * NOTE : I had to use the N() macro as the table must be constant ...
+ *	  but in the Prefs-box and in the other places where they appear 
+ *	   translated because of a gettext(S)-call ...
+ */
 static lang languages[] = {
 	{
 	 N_("Afrikaans"), "af", "iso-8859-1",
@@ -206,9 +219,9 @@ static lang languages[] = {
 	{
 	 N_("Welsh"), "cy", "iso-8859-14",
 	 "", "8bit"},
-	/**
-        * This structures-list has to be NULL-terminated
-        **/
+	/*
+         * This structures-list has to be NULL-terminated
+         */
 	{
 	 NULL, NULL, NULL,
 	 NULL, NULL}

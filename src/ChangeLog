@@ -1,3 +1,21 @@
+2001-01-04  Fatih Demir	<kabalak@gmx.net>
+
+	* open-differently.c: Applied the change of the temporary file name
+		to "gtranslator-temp-po-file".
+
+	* update.c: Changed the script name also in the comments.
+
+	* parse.c: Delete the temporary file after saving the messages to
+		a new file, build the right name for the files, changed
+		 the name of the temporary file to "gtranslator-temp-po-file"
+		  and made it also possible to open gzip'ed and compiled
+		   gettext po files from the GUI via the open dialog and the
+		    recent files list; don't take the temporary files into
+		     the recent files list.
+		
+	* parse.c/.h, languages.h, header-stuff.c/.h, gui.c/.h: Reformatted
+		these files simply.
+
 2001-01-03  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gtkspell.c: (popup_menu) removed orig_mouse parameter.

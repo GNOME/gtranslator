@@ -4,12 +4,12 @@
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or   
+ *   the Free Software Foundation; either version 2 of the License, or
  *    (at your option) any later version.
- *    
+ *
  * gtranslator is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *    GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -20,8 +20,8 @@
 
 /*
  * The update function of gtranslator's UI is based upon this file and the
- *  update.sh script in gtranslator's data directory.
- */  
+ *  my-update.sh script in gtranslator's data directory.
+ */
 
 #include "parse.h"
 #include "prefs.h"
@@ -34,7 +34,7 @@ void update(GtkWidget *widget, gpointer useless)
 {
 	/*
 	 * The default return value is 200 -- it caused no changes.
-	 */ 
+	 */
 	gint res=200;
 	gchar *command;
 	gchar *newfile;
@@ -72,7 +72,7 @@ void update(GtkWidget *widget, gpointer useless)
 	 * Before doing an update, my-update.sh checks if
 	 *  there's the POTFILE.in file present; if this file
 	 *   is missing it returns 201.
-	 */   
+	 */
 	if(res==201)
 	{
 		gnome_app_error(GNOME_APP(app1),
@@ -88,7 +88,7 @@ void update(GtkWidget *widget, gpointer useless)
 		 * The update.sh script returns 200 if the diff
 		 *  between the old file and the new file is smaller
 		 *   then some lame bits (for the date field).
-		 */   
+		 */
 		if(res==200)
 		{
 			gnome_app_message(GNOME_APP(app1),
@@ -103,7 +103,7 @@ void update(GtkWidget *widget, gpointer useless)
 	
 	/*
 	 * Parse the file again.
-	 */ 
+	 */
 	parse(newfile);
 	g_free(command);
 	g_free(newfile);

@@ -1,13 +1,22 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-* Gediminas Paulauskas <menesis@delfi.lt>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* Completely reorganized header-functions 
-*
-* -- source
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #include "header_stuff.h"
 #include "prefs.h"
@@ -25,13 +34,15 @@ static GtkWidget *prj_name, *prj_version, *prj_comment, *take_my_options;
 static GtkWidget *translator, *tr_email, *pot_date, *po_date;
 static GtkWidget *language_combo, *charset_combo, *enc_combo, *lg_combo;
 
-/* These are defined below */
-static void edit_header_apply(GtkWidget * box, gint page_num, gpointer useless);
-static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
-static void edit_header_changed(GtkWidget * widget, gpointer useless);
-static void language_changed(GtkWidget * widget, gpointer useless);
+/*
+ * These are defined below 
+ */
+static void edit_header_apply(GtkWidget  * box, gint page_num, gpointer useless);
+static void take_my_options_toggled(GtkWidget  * widget, gpointer useless);
+static void edit_header_changed(GtkWidget  * widget, gpointer useless);
+static void language_changed(GtkWidget  * widget, gpointer useless);
 
-static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
+static void split_name_email(const gchar  * str, gchar * * name, gchar * * email)
 {
 	regex_t *rx;
 	regmatch_t m[3];
@@ -55,7 +66,7 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 	}
 }
 
-GtrHeader * get_header(GtrMsg * msg)
+GtrHeader  * get_header(GtrMsg  * msg)
 {
 	GtrHeader *ph;
 	gchar **lines, **pair;
@@ -134,8 +145,10 @@ GtrHeader * get_header(GtrMsg * msg)
 		return NULL;
 }
 
-/* Creates new GtrMsg, with all data set to current state of header */
-GtrMsg * put_header(GtrHeader * h)
+/*
+ * Creates new GtrMsg, with all data set to current state of header 
+ */
+GtrMsg  * put_header(GtrHeader  * h)
 {
 	gchar *group;
 	GtrMsg *msg = g_new0(GtrMsg, 1);
@@ -167,14 +180,18 @@ Content-Transfer-Encoding: %s\n",
 	return msg;
 }
 
-/* Updates PO-Revision-Date field */
-void update_header(GtrHeader * h)
+/*
+ * Updates PO-Revision-Date field 
+ */
+void update_header(GtrHeader  * h)
 {
 	time_t now;
 	struct tm *now_here;
 	char t[22];
 	
-	/* Update the po date */
+	/*
+	 * Update the po date 
+	 */
 	now = time(NULL);
 	now_here = localtime(&now);
 	strftime(t, 22, "%Y-%m-%d %H:%M%z", now_here);
@@ -182,7 +199,7 @@ void update_header(GtrHeader * h)
 	h->po_date = g_strdup(t);
 }
 
-void free_header(GtrHeader * h)
+void free_header(GtrHeader  * h)
 {
 	if (h == NULL)
 		return;
@@ -201,7 +218,7 @@ void free_header(GtrHeader * h)
 	g_free(h);
 }
 
-static void edit_header_apply(GtkWidget * box, gint page_num, gpointer useless)
+static void edit_header_apply(GtkWidget  * box, gint page_num, gpointer useless)
 {
 	GtrHeader *ph = po->header;
 	if (page_num != -1)
@@ -237,10 +254,10 @@ static void edit_header_apply(GtkWidget * box, gint page_num, gpointer useless)
 	}
 }
 
-/**
-* Creates the Header-edit dialog.
-**/
-void edit_header(GtkWidget * widget, gpointer useless)
+/*
+ * Creates the Header-edit dialog.
+ */
+void edit_header(GtkWidget  * widget, gpointer useless)
 {
 	GtrHeader *ph = po->header;
 	GtkWidget *label;
@@ -258,9 +275,9 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	gnome_property_box_append_page(GNOME_PROPERTY_BOX(e_header), lang_vbox,
 				       label);
 	
-	/**
-        * Add the GNOME-entry-boxes.
-        **/
+	/*
+         * Add the GNOME-entry-boxes.
+         */
 	prj_comment =
 	    attach_text_with_label(prj_page, 0, _("Comments :"), ph->comment,
 	    			   edit_header_changed);
@@ -320,9 +337,9 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	    attach_combo_with_label(lang_page, 6, _("Encoding :"),
 				    bits_list, ph->encoding,
 				    edit_header_changed, NULL);
-	/**
-	* Connect the signals
-	**/
+	/*
+	 * Connect the signals
+	 */
 	gtk_signal_connect(GTK_OBJECT(e_header), "apply",
 			   GTK_SIGNAL_FUNC(edit_header_apply), NULL);
 	gtk_signal_connect(GTK_OBJECT(e_header), "close",
@@ -331,7 +348,7 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	show_nice_dialog(&e_header, "gtranslator -- header");
 }
 
-static void language_changed(GtkWidget * widget, gpointer useless)
+static void language_changed(GtkWidget  * widget, gpointer useless)
 {
 	guint c = 0;
 	gchar *current = gtk_entry_get_text(GTK_ENTRY
@@ -352,12 +369,12 @@ static void language_changed(GtkWidget * widget, gpointer useless)
 	edit_header_changed(widget, useless);
 }
 
-static void edit_header_changed(GtkWidget * widget, gpointer useless)
+static void edit_header_changed(GtkWidget  * widget, gpointer useless)
 {
 	gnome_property_box_changed(GNOME_PROPERTY_BOX(e_header));
 }
 
-static void take_my_options_toggled(GtkWidget * widget, gpointer useless)
+static void take_my_options_toggled(GtkWidget  * widget, gpointer useless)
 {
 	wants.fill_header =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(take_my_options));

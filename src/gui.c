@@ -1,13 +1,22 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-* Gediminas Paulauskas <menesis@delfi.lt>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* The interface is created here 
-*
-* -- the source 
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #include "gui.h"
 #include "prefs.h"
@@ -34,54 +43,62 @@ struct _GtrAction {
 	GtkWidget *tool;
 };
 
-/* An array holds all defined actions */
+/*
+ * An array holds all defined actions
+ */
 static GtrAction acts[ACT_END];
 
-/* routines for actions */
+/*
+ * routines for actions
+ */
 static void create_actions(void);
 static void insert_action(gint act_num, GnomeUIInfo mi, GnomeUIInfo ti);
 
-/* Callbacks for text operations */
-static void cut_clipboard(GtkWidget * widget, gpointer useless);
-static void copy_clipboard(GtkWidget * widget, gpointer useless);
-static void paste_clipboard(GtkWidget * widget, gpointer useless);
-static void clear_selection(GtkWidget * widget, gpointer useless);
-static void undo_changes(GtkWidget * widget, gpointer useless);
-static void text_has_got_changed(GtkWidget * widget, gpointer useless);
+/*
+ * Callbacks for text operations
+ */
+static void cut_clipboard(GtkWidget  * widget, gpointer useless);
+static void copy_clipboard(GtkWidget  * widget, gpointer useless);
+static void paste_clipboard(GtkWidget  * widget, gpointer useless);
+static void clear_selection(GtkWidget  * widget, gpointer useless);
+static void undo_changes(GtkWidget  * widget, gpointer useless);
+static void text_has_got_changed(GtkWidget  * widget, gpointer useless);
 
-/* Pops up a menu if needed */
+/*
+ * Pops up a menu if needed
+ */
 static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d);
 	
 static void invert_dot(gchar *str);
 static void update_appbar(gint pos);
-static void call_gtranslator_homepage(GtkWidget * widget, gpointer useless);
-static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
+static void call_gtranslator_homepage(GtkWidget  * widget, gpointer useless);
+static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless);
 
-/**
-* The target formats
-**/
+/*
+ * The target formats
+ */
 static  GtkTargetEntry dragtypes[] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
 	{ "text/plain", 0, TARGET_NETSCAPE_URL },
 	{ "text/plain", 0, TARGET_TEXT_PLAIN }
 };
 
-/**
-* The menu-entries
-**/
+/*
+ * The menu-entries
+ */
 
-/**
-* The recenlty used menu in a little bit different manner ( this is just
-*  a placeholder.
-**/
+/*
+ * The recenlty used menu in a little bit different manner ( this is just
+ *  a placeholder.
+ */
 static GnomeUIInfo the_last_files_menus[] = {
         GNOMEUIINFO_END
 };
 
-/**
-* The File menu.
-**/
+/*
+ * The File menu.
+ */
 static GnomeUIInfo the_file_menu[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_Compile"),
@@ -229,9 +246,9 @@ static GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_END
 };
 
-/** 
-* The toolbar buttons
-**/
+/* 
+ * The toolbar buttons
+ */
 static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("Open"),
 			       N_("Open a po-file"),
@@ -306,9 +323,9 @@ static GnomeUIInfo the_searchbar[] = {
 	GNOMEUIINFO_END
 };
 
-/**
-* The popup-menu.
-**/
+/*
+ * The popup-menu.
+ */
 static GnomeUIInfo the_popup_menu[] = {
 	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
 	GNOMEUIINFO_SEPARATOR,
@@ -322,28 +339,28 @@ static GnomeUIInfo the_popup_menu[] = {
 	GNOMEUIINFO_END
 };
 
-/**
-* Pop's up the curious popup-menu.
-**/
+/*
+ * Pop's up the curious popup-menu.
+ */
 static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d)
 {
-	/**
-	* Only react on rightclick.
-	**/
+	/*
+	 * Only react on rightclick.
+	 */
 	if(event->button==3)
 	{
-		/**
-		* Only respond if a file has been present/opened and if the
-		* corresponding option is set.
-		**/
+		/*
+		 * Only respond if a file has been present/opened and if the
+		 * corresponding option is set.
+		 */
 		if((wants.popup_menu) && (file_opened==TRUE))
 		{
 			GtkWidget *popup_menu;
 			popup_menu=gnome_popup_menu_new(the_popup_menu);
 			gnome_popup_menu_do_popup_modal(popup_menu, NULL, NULL, NULL, event);
-			/**
-			* Destroy the menu after creation.
-			**/
+			/*
+			 * Destroy the menu after creation.
+			 */
 			gtk_widget_destroy(popup_menu);
 			return TRUE;
 		}
@@ -351,9 +368,9 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 	return FALSE;
 }
 
-/*****
- * Actions stuff goes here
- *****/
+/****
+  * Actions stuff goes here
+ ** * */
 void change_actions(gboolean state, ...)
 {
 	va_list ap;
@@ -381,7 +398,9 @@ static void insert_action(gint act_num, GnomeUIInfo mi, GnomeUIInfo ti)
 
 static void create_actions(void)
 {
-	/* a unused variable for testing if a toolbar element was provided */
+	/*
+	 * a unused variable for testing if a toolbar element was provided
+	 */
 	GnomeUIInfo NONE;
 
 	NONE.widget = NULL;
@@ -391,7 +410,7 @@ static void create_actions(void)
 	insert_action(ACT_SAVE_AS, the_file_menu[5], the_toolbar[2]);
 	insert_action(ACT_REVERT, the_file_menu[6], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[7], NONE);
-	/*------------------------------------------------ */
+	/*------------------------------------------------*/
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);
@@ -400,7 +419,7 @@ static void create_actions(void)
 	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[7]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
 	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[6]);
-	/*------------------------------------------------ */
+	/*------------------------------------------------*/
 	insert_action(ACT_FIRST, the_messages_menu[0], the_searchbar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_searchbar[1]);
 	insert_action(ACT_NEXT, the_messages_menu[2], the_searchbar[2]);
@@ -408,11 +427,11 @@ static void create_actions(void)
 	insert_action(ACT_GOTO, the_messages_menu[5], the_searchbar[6]);
 	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], the_searchbar[5]);
 	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], the_searchbar[4]);
-	/*------------------------------------------------ */
+	/*------------------------------------------------*/
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
 	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
 	insert_action(ACT_STICK, the_msg_status_menu[2], NONE);
-	/*------------------------------------------------ */
+	/*------------------------------------------------*/
 	insert_action(ACT_END, NONE, NONE);
 }
 
@@ -434,26 +453,26 @@ void enable_actions_just_opened(void)
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
-	/**
-	* If we'd have the option to use the update function set, enable the
-	*  Update button in the toolbar and in the menu.
-	**/	       
+	/*
+	 * If we'd have the option to use the update function set, enable the
+	 *  Update button in the toolbar and in the menu.
+	 */	       
 	if(wants.update_function)
 	{
 		enable_actions(ACT_UPDATE);	
 	}  
-	/**
-	* Enable the editing of the msgstrs :-)
-	**/
+	/*
+	 * Enable the editing of the msgstrs :-)
+	 */
 	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 	/*
-	* Make it focused initially
-	**/
+	 * Make it focused initially
+	 */
 	gtk_window_set_focus(GTK_WINDOW(app1), trans_box);
 }
 
 /*
- * The main function, which creates the application
+  * The main function, which creates the application
  */
 void create_app1(void)
 {
@@ -461,15 +480,15 @@ void create_app1(void)
 	GtkWidget *vbox1;
 	GtkWidget *scrolledwindow1, *scrolledwindow2;
 
-	/**
-	* Create the app	
-	**/
+	/*
+	 * Create the app	
+	 */
 	app1 = gnome_app_new("gtranslator", _("gtranslator"));
 	gnome_app_create_menus(GNOME_APP(app1), the_menus);
 
-	/**
-	* Create the tool- and search-bar
-	**/
+	/*
+	 * Create the tool- and search-bar
+	 */
 	tool_bar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(tool_bar), the_toolbar, NULL);
@@ -508,28 +527,30 @@ void create_app1(void)
 
 	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(app1), appbar1);
-	/* Make menu hints display on the appbar */
+	/*
+	 * Make menu hints display on the appbar
+	 */
 	gnome_app_install_menu_hints(GNOME_APP(app1), the_menus);
 
 	create_actions();
 
 	gtranslator_display_recent();
 
-	/**
-	* Check if we'd to use special styles.
-	**/
+	/*
+	 * Check if we'd to use special styles.
+	 */
 	if(wants.use_own_specs)
 	{
-		/**
-		* Set the own specs for colors and for the font.
-		**/
+		/*
+		 * Set the own specs for colors and for the font.
+		 */
 		gtranslator_set_style(text1);
 		gtranslator_set_style(trans_box);
 	}
 	
-	/**
-	* The callbacks list
-	**/
+	/*
+	 * The callbacks list
+	 */
 	gtk_signal_connect(GTK_OBJECT(app1), "delete_event",
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
@@ -538,9 +559,9 @@ void create_app1(void)
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
-	/**
-	* The D'n'D signals
-	**/
+	/*
+	 * The D'n'D signals
+	 */
 	gtk_drag_dest_set(GTK_WIDGET(app1),
 			  GTK_DEST_DEFAULT_ALL | GTK_DEST_DEFAULT_HIGHLIGHT,
 			  dragtypes, sizeof(dragtypes) / sizeof(dragtypes[0]),
@@ -550,49 +571,51 @@ void create_app1(void)
 			   GUINT_TO_POINTER(dnd_type));
 }
 
-/**
-* The own quit-code
-**/
-static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
+/*
+ * The own quit-code
+ */
+static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless)
 {
-	/* If file was changed, but user pressed Cancel, don't quit */
+	/*
+	 * If file was changed, but user pressed Cancel, don't quit
+	 */
 	if (!ask_to_save_file())
 		return TRUE;
 	close_file(NULL, NULL);
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1), _("Bye bye!"));
 	save_geometry();
-	/**
-	* Free the preferences stuff.
-	**/
+	/*
+	 * Free the preferences stuff.
+	 */
 	free_prefs();
 	gnome_regex_cache_destroy(rxc);
-	/**
-	* Store the current date.
-	**/
+	/*
+	 * Store the current date.
+	 */
 	gtranslator_config_init();
 	gtranslator_config_set_last_run_date();
 	gtranslator_config_close();
 	#ifdef USE_VFS_STUFF
-	/**
-	* Say "Bye, bye" to GnomeVFS... but only if it has been up yet :-)
-	**/
+	/*
+	 * Say "Bye, bye" to GnomeVFS... but only if it has been up yet :-)
+	 */
 	if(gnome_vfs_initialized())
 	{
 		gnome_vfs_shutdown();
 	}
 	#endif
-	/**
-	* Quit with the normal Gtk+ quit.
-	**/
+	/*
+	 * Quit with the normal Gtk+ quit.
+	 */
 	gtk_main_quit();
 	return FALSE;
 }
 
-/**
-* Go through the characters and search for free spaces
-* and replace them with '·''s.
-**/
+/*
+ * Go through the characters and search for free spaces
+ * and replace them with '·''s.
+ */
 static void invert_dot(gchar *str)
 {
 	guint i;
@@ -608,10 +631,11 @@ static void invert_dot(gchar *str)
 
 /* 
  * Display the message in text boxes
+ * 
  * TODO: add syntax highlighting for %s, numbers, symbols, tabs;
  * append a char at the end of message
  */
-void display_msg(GList * list_item)
+void display_msg(GList  * list_item)
 {
 	GtrMsg *msg;
 	gchar *ispell_command[] = {
@@ -622,10 +646,10 @@ void display_msg(GList * list_item)
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	clean_text_boxes();
-	/**
-	* Substitute the free spaces in the msgid only if this is wished and
-	*  possible.
-	**/ 
+	/*
+	 * Substitute the free spaces in the msgid only if this is wished and
+	 *  possible.
+	 */ 
 	if(wants.dot_char)
 	{
 		gchar *temp;
@@ -651,13 +675,13 @@ void display_msg(GList * list_item)
 	}
 	
 	/*
-	 * Use instant spell checking via gtkspell only if the corresponding
-	 *  setting in the preferences is set.
+	  * Use instant spell checking via gtkspell only if the corresponding
+	  *  setting in the preferences is set.
 	 */
 	if(wants.instant_spell_check)
 	{
 		/*
-		 * Start up gtkspell if not already done.
+		  * Start up gtkspell if not already done.
 		 */ 
 		if(!gtkspell_running())
 		{
@@ -665,7 +689,7 @@ void display_msg(GList * list_item)
 		}
 
 		/*
-		 * Attach it to the translation box for instant spell checking.
+		  * Attach it to the translation box for instant spell checking.
 		 */ 
 		gtkspell_attach(GTK_TEXT(trans_box));
 	}
@@ -705,7 +729,9 @@ void update_msg(void)
 		msg->msgstr = gtk_editable_get_chars(GTK_EDITABLE(trans_box),
 						     0, len);
 
-		/* If spaces were substituted with dots, replace them back */
+		/*
+		 * If spaces were substituted with dots, replace them back
+		 */
 		if(wants.dot_char)
 			invert_dot(msg->msgstr);
 		if (!(msg->status & GTR_MSG_STATUS_TRANSLATED)) {
@@ -718,18 +744,18 @@ void update_msg(void)
 		po->translated--;
 	}
 	message_changed = FALSE;
-	/**
-	* Update the statusbar informations.
-	**/
+	/*
+	 * Update the statusbar informations.
+	 */
 	update_appbar(g_list_position(po->messages, po->current));
 }
 
-void toggle_msg_status(GtkWidget * item, gpointer which)
+void toggle_msg_status(GtkWidget  * item, gpointer which)
 {
-	/**
-	* Hm, this is for now unused, so it's uncommented.
-	* GtrMsgStatus *stat = &(GTR_MSG(po->current->data)->status);
-	**/ 
+	/*
+	 * Hm, this is for now unused, so it's uncommented.
+	 * GtrMsgStatus *stat = &(GTR_MSG(po->current->data)->status);
+	 */ 
 	gint flag = GPOINTER_TO_INT(which);
 	if (nothing_changes)
 		return;
@@ -746,9 +772,9 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 	update_msg();
 }
 	 
-/**
-* Cleans up the text boxes.
-**/
+/*
+ * Cleans up the text boxes.
+ */
 void clean_text_boxes()
 {
 	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
@@ -760,13 +786,13 @@ static void update_appbar(gint pos)
 	gchar *str, *status;
 	GtrMsg *msg;
 	gnome_appbar_pop(GNOME_APPBAR(appbar1));
-	/**
-	* Get the message.
-	**/
+	/*
+	 * Get the message.
+	 */
 	msg=GTR_MSG(po->current->data);
-	/**
-	* And append according to the message status the status name.
-	**/
+	/*
+	 * And append according to the message status the status name.
+	 */
 	if(msg->status & GTR_MSG_STATUS_FUZZY)
 	{
 		if(po->fuzzy>1)
@@ -776,16 +802,19 @@ static void update_appbar(gint pos)
 		else
 		{
 			status=g_strdup_printf(_("%s [ No fuzzy left ]"), _("Fuzzy"));
-			/**
-			* Also disable the corresponding button.
-			**/
+			/*
+			 * Also disable the corresponding button.
+			 */
 			disable_actions(ACT_NEXT_FUZZY);
 		}
 	} else if(msg->status & GTR_MSG_STATUS_STICK) {
 		status=g_strdup(_("Stick"));
 	} else if(msg->status & GTR_MSG_STATUS_TRANSLATED) {
 		status=g_strdup(_("Translated"));
-	} else { /* Message is untranslated */
+	} else { 
+		/*
+		 * Message is untranslated 
+		 */
 		if ((po->length - po->translated)>1)
 		{
 			guint missya;
@@ -793,34 +822,36 @@ static void update_appbar(gint pos)
 			status=g_strdup_printf(_("%s [ %i Untranslated left ]"), _("Untranslated"), missya);
 		} else {
 			status=g_strdup_printf(_("%s [ No untranslated left ]"), _("Untranslated"));
-			/**
-			* Also disable the coressponding buttons for the
-			*  next untranslated message.
-			**/
+			/*
+			 * Also disable the coressponding buttons for the
+			 *  next untranslated message.
+			 */
 			disable_actions(ACT_NEXT_UNTRANSLATED);
 		}	
 	}
-	/**
-	* Assign the first part.
-	**/
+	/*
+	 * Assign the first part.
+	 */
 	str=g_strdup_printf(_("Message %d / %d / Status: %s"), pos + 1, po->length, status);
-	/**
-	* Set the appbar text.
-	**/
+	/*
+	 * Set the appbar text.
+	 */
 	gnome_appbar_push(GNOME_APPBAR(appbar1), str);
-	/**
-	* Update the progressbar.
-	**/
+	/*
+	 * Update the progressbar.
+	 */
 	gtranslator_set_progress_bar();
-	/**
-	* And free the allocated string.
-	**/
+	/*
+	 * And free the allocated string.
+	 */
 	g_free(str);
 	g_free(status);
 }
 
-/* Updates current msg, and shows to_go msg instead, also adjusts actions */
-void goto_given_msg(GList * to_go)
+/*
+ * Updates current msg, and shows to_go msg instead, also adjusts actions
+ */
+void goto_given_msg(GList  * to_go)
 {
 	static gint pos = 0;
 	update_msg();
@@ -846,75 +877,78 @@ void goto_given_msg(GList * to_go)
 	update_appbar(pos);
 }
 
-/**
+/*
  * Callbacks for moving around messages 
- **/
-void goto_first_msg(GtkWidget * widget, gpointer useless)
+ */
+void goto_first_msg(GtkWidget  * widget, gpointer useless)
 {
 	goto_given_msg(g_list_first(po->messages));
 }
 
-void goto_prev_msg(GtkWidget * widget, gpointer useless)
+void goto_prev_msg(GtkWidget  * widget, gpointer useless)
 {
 	goto_given_msg(g_list_previous(po->current));
 }
 
-void goto_next_msg(GtkWidget * widget, gpointer useless)
+void goto_next_msg(GtkWidget  * widget, gpointer useless)
 {
 	goto_given_msg(g_list_next(po->current));
 }
 
-void goto_last_msg(GtkWidget * widget, gpointer useless)
+void goto_last_msg(GtkWidget  * widget, gpointer useless)
 {
 	goto_given_msg(g_list_last(po->messages));
 }
 
-void goto_nth_msg(GtkWidget * widget, gpointer number)
+void goto_nth_msg(GtkWidget  * widget, gpointer number)
 {
 	goto_given_msg(g_list_nth(po->messages, GPOINTER_TO_UINT(number)));
 }
 
-/* Goes to the homepage of gtranslator on the web */
-static void call_gtranslator_homepage(GtkWidget * widget, gpointer useless)
+/*
+ * Goes to the homepage of gtranslator on the web
+ */
+static void call_gtranslator_homepage(GtkWidget  * widget, gpointer useless)
 {
 	gnome_url_show("http://gtranslator.sourceforge.net/");
 }
 
-/**
-* The text oriented callbacks
-**/
-static void cut_clipboard(GtkWidget * widget, gpointer useless)
+/*
+ * The text oriented callbacks
+ */
+static void cut_clipboard(GtkWidget  * widget, gpointer useless)
 {
 	gtk_editable_cut_clipboard(GTK_EDITABLE(trans_box));
 }
 
-static void copy_clipboard(GtkWidget * widget, gpointer useless)
+static void copy_clipboard(GtkWidget  * widget, gpointer useless)
 {
 	gtk_editable_copy_clipboard(GTK_EDITABLE(trans_box));
 }
 
-static void paste_clipboard(GtkWidget * widget, gpointer useless)
+static void paste_clipboard(GtkWidget  * widget, gpointer useless)
 {
 	gtk_editable_paste_clipboard(GTK_EDITABLE(trans_box));
 }
 
-static void clear_selection(GtkWidget * widget, gpointer useless)
+static void clear_selection(GtkWidget  * widget, gpointer useless)
 {
 	gtk_editable_delete_selection(GTK_EDITABLE(trans_box));
 }
 
-static void undo_changes(GtkWidget * widget, gpointer useless)
+static void undo_changes(GtkWidget  * widget, gpointer useless)
 {
 	display_msg(po->current);
 	disable_actions(ACT_UNDO);
 }
 
-/**
-* Set po->file_changed to TRUE if the text in the translation box has been
-* updated.
-* TODO if any syntax highlighting will be added, it should be caled from here
-**/
-static void text_has_got_changed(GtkWidget * widget, gpointer useless)
+/*
+ * Set po->file_changed to TRUE if the text in the translation box has been
+ * updated.
+ * 
+ * TODO if any syntax highlighting will be added, it should be caled from here
+ */
+static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 {
 	if (nothing_changes)
 		return;
@@ -933,56 +967,58 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
 		}
 	}
-	/**
-	* Do all these steps only if the option to use the '·' is set.
-	**/
+	/*
+	 * Do all these steps only if the option to use the '·' is set.
+	 */
 	if(wants.dot_char)
 	{
 		gchar *newstr;
 		guint len, index;
 
 		nothing_changes = TRUE;
-		/**
-		* Freeze the translation box.
-		**/
+		/*
+		 * Freeze the translation box.
+		 */
 		gtk_text_freeze(GTK_TEXT(trans_box));
-		/**
-		* Get the current pointer position.
-		**/
+		/*
+		 * Get the current pointer position.
+		 */
 		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
-		/**
-		* Get the text from the translation box.
-		**/
+		/*
+		 * Get the text from the translation box.
+		 */
 		newstr=gtk_editable_get_chars(GTK_EDITABLE(trans_box), 0, -1);
-		/**
-		* Parse the characters for a free space and replace
-		*  them with the '·'.
-		**/
+		/*
+		 * Parse the characters for a free space and replace
+		 *  them with the '·'.
+		 */
 		for(len=0; newstr[len]!='\0'; len++) {
 			if(newstr[len]==' ') {
 				static gint pos;
 				static gchar dot = '·';
 				pos = len;
 
-				/* Clean the textbox */
+				/*
+				 * Clean the textbox
+				 */
 				gtk_editable_delete_text(GTK_EDITABLE(trans_box),
 							 pos, pos+1);
-				/**
-				* Insert the changed text with the '·''s.
-				**/
+				/*
+				 * Insert the changed text with the '·''s.
+				 */
 				gtk_editable_insert_text(GTK_EDITABLE(trans_box),
 							 &dot, 1, &pos);
 			}
 		}
 		g_free(newstr);
-		/**
-		* Go to the old text index.
-		**/
+		/*
+		 * Go to the old text index.
+		 */
 		gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
-		/**
-                * Thaw up the translation box to avoid the reverse writing
-                *  feature.
-                **/
+		/*
+                 * Thaw up the translation box to avoid the reverse writing
+                 *  feature.
+                 */
 		gtk_text_thaw(GTK_TEXT(trans_box));
 		nothing_changes = FALSE;
 	}
