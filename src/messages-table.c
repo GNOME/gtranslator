@@ -274,6 +274,8 @@ void gtranslator_messages_table_clear(void)
 {
   gtk_tree_store_clear(GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(tree))));
   free_messages_table_colors();
+
+  po->table_already_created=FALSE;
 }		
 
 /*
