@@ -243,7 +243,7 @@ void update_header(GtrHeader * h)
 	/*
 	 * Convert the header comments back if necessary.
 	 */ 
-	if(h->comment[0]!='#')
+	if(h->comment && h->comment[0]!='#')
 	{
 		h->comment=prepare_comment_for_save(h->comment);
 	}

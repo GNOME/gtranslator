@@ -96,8 +96,16 @@ void update(GtkWidget *widget, gpointer useless)
 		}
 		else
 		{
-			gnome_app_message(GNOME_APP(app1),
-				_("The update was successfull."));
+			if(res==0)
+			{
+				gnome_app_message(GNOME_APP(app1),
+					_("The update was successfull."));
+			}
+			else
+			{
+				gnome_app_warning(GNOME_APP(app1),
+					_("An error occured while updating the po file."));	
+			}
 		}
 	}
 	

@@ -419,8 +419,12 @@ void parse(const gchar *filename)
 		gtranslator_history_add(po->filename,
 			po->header->prj_name, po->header->prj_version);
 	
-		gtranslator_sidebar_add_po(po);
 	}
+
+	/*
+	 * Add the view for the current file.
+	 */ 
+	gtranslator_sidebar_add_po(po);
 	
 	file_opened = TRUE;
 	po->file_changed = FALSE;
@@ -810,7 +814,8 @@ void compile(GtkWidget * widget, gpointer useless)
 	 */
 	if(!gnome_is_program_in_path("msgfmt"))
 	{
-		gnome_app_error(GNOME_APP(app1), _("Sorry, msgfmt isn't available on your system!"));
+		gnome_app_error(GNOME_APP(app1), 
+			_("Sorry, msgfmt isn't available on your system!"));
 		return;
 	}
 			
