@@ -104,6 +104,7 @@ GnomeUIInfo the_last_files_menus[] = {
 
 GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_MENU_UNDO_ITEM(gtranslator_actions_undo, NULL),
+	GNOMEUIINFO_MENU_REDO_ITEM(gtranslator_actions_redo, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_CUT_ITEM(gtranslator_clipboard_cut, NULL),
 	GNOMEUIINFO_MENU_COPY_ITEM(gtranslator_clipboard_copy, NULL),
@@ -281,6 +282,15 @@ GnomeUIInfo the_toolbar[] = {
 			       N_("Edit the header"),
 			       gtranslator_header_edit_dialog,
 			       GNOME_STOCK_PIXMAP_PROPERTIES),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("Undo"),
+			       N_("Undo the last performed action"),
+			       gtranslator_actions_undo,
+			       GNOME_STOCK_PIXMAP_UNDO),
+	GNOMEUIINFO_ITEM_STOCK(N_("Redo"),
+			       N_("Redo the last undone action"),
+			       gtranslator_actions_redo,
+			       GNOME_STOCK_PIXMAP_REDO),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Options"),
 			       N_("gtranslator options"),

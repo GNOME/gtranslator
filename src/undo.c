@@ -17,6 +17,7 @@
  *
  */
 
+#include "actions.h"
 #include "dialogs.h"
 #include "gui.h"
 #include "parse.h"
@@ -141,6 +142,8 @@ void gtranslator_undo_add(const gchar *description,
 		function, data);
 
 	g_return_if_fail(undo!=NULL);
+
+	gtranslator_actions_enable(ACT_UNDO);
 }
 
 /*
@@ -286,6 +289,10 @@ void gtranslator_undo()
 		if(core)
 		{
 			gtranslator_undo_core_run(&core, NULL);
+			gtranslator_redo_add("Redo an Undo", 
+				"redo_add", 
+				(GFunc) core->function, core->data);
+			
 		}
 	}
 }

@@ -39,6 +39,7 @@
 #include "sidebar.h"
 #include "stylistics.h"
 #include "syntax.h"
+#include "undo.h"
 #include "utils.h"
 #include "views.h"
 
@@ -164,9 +165,10 @@ void gtranslator_create_main_window(void)
 	search_bar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 				     GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_navibar, NULL);
-	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), GTK_TOOLBAR(search_bar),
-			      "search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
-			      GNOME_DOCK_TOP, 2, 0, 0);
+	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), 
+		GTK_TOOLBAR(search_bar),
+		"search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
+		GNOME_DOCK_TOP, 2, 0, 0);
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	
@@ -247,11 +249,20 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 		return TRUE;
 	gtranslator_file_close(NULL, NULL);
 	gtranslator_utils_save_geometry();
+	
+	/*
+	 * Free the undo/redo lists on exit.
+	 */
+	gtranslator_undo_get_undo_list();
+	gtranslator_redo_get_redo_list();
+	gtranslator_undo_free_lists();
+	
 	/*
 	 * Free the preferences stuff.
 	 */
 	gtranslator_preferences_free();
 	gnome_regex_cache_destroy(rxc);
+	
 	/*
 	 * Store the current date.
 	 */
@@ -541,4 +552,6 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 void gtranslator_switch_views(GtkWidget *widget, gpointer view)
 {
 	gtranslator_views_set(GPOINTER_TO_INT(view));
+	gtranslator_undo_add("Switch view", "gtranslator_switch_views",
+		(GFunc) gtranslator_switch_views, view);
 }
