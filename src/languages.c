@@ -118,7 +118,7 @@ GtrLanguage languages[] = {
 	 "et@li.org", "8bit"
 	},
 	{
-	 N_("Farsi"), "fa", "isiri-3342",
+	 N_("Persian"), "fa", "isiri-3342",
 	 "", "8bit"
 	},
 	{
