@@ -1,5 +1,20 @@
 2001-08-16  Fatih Demir <kabalak@gtranslator.org>
 
+	* update.c: Iterate back to the main thread via "gtk_main_iteration":
+		avoids lock of the main GUI while executing the update script.
+
+	* convert.c: If we can't get an iconv_t base don't spew out any
+		assertion warnings, simply return the given original string
+		 silently.
+
+	* parse.c: Removed the out-commented part about not counting sticky
+		messages (they'ren't any sticky messages in po files yet) and
+		 use "gtk_main_iteration" while using the core parse function
+		  to avoid the GUI lockup.
+
+	* history.c: Before checking the file for existence check the
+		filename itself for existence.
+
 	* messages-table.c: Include <config.h> conditionally.
 
 	* prefs_init.c: After getting a locale, get the corresponding

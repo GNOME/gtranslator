@@ -44,8 +44,9 @@
 #include "utils.h"
 #include "utils_gui.h"
 
-#include <gtk/gtklabel.h>
 #include <gtk/gtkfilesel.h>
+#include <gtk/gtkmain.h>
+#include <gtk/gtklabel.h>
 
 #include <libgnome/gnome-util.h>
 
@@ -334,8 +335,9 @@ void gtranslator_parse_main(const gchar *filename)
 	 */
 	if(!g_file_exists(filename))
 	{
-		gtranslator_utils_error_dialog(_("The file `%s' doesn't exist at all!"),
-			filename);
+		gtranslator_utils_error_dialog(
+			_("The file `%s' doesn't exist at all!"),
+				filename);
 		return;
 	}
 
@@ -349,7 +351,8 @@ void gtranslator_parse_main(const gchar *filename)
 	else
 	{
 		gtranslator_config_init();
-		gtranslator_config_set_string("runtime/filename", (gchar *)filename);
+		gtranslator_config_set_string("runtime/filename", 
+			(gchar *) filename);
 		gtranslator_config_close();
 	}
 
@@ -357,6 +360,13 @@ void gtranslator_parse_main(const gchar *filename)
 	 * Use the new core function.
 	 */
 	gtranslator_parse(filename);
+
+	/*
+	 * Iterate to the main GUI thread -- well, no locks for the GUI should
+	 *  be visible -- avoids "the clean my gtranslator window with dialog"
+	 *   party game ,-)
+	 */
+	gtk_main_iteration();
 
 	if(po==NULL)
 		return;
@@ -419,6 +429,7 @@ void gtranslator_parse_main(const gchar *filename)
 		   !strcmp(po->header->prj_version, "VERSION"))
 		{
 			gtranslator_translation_changed(NULL, NULL);
+
 			/*
 			 * Pop up the "Edit Header" so that user can verify
 			 * automatically done changes and provide PACKAGE name.
@@ -1070,11 +1081,6 @@ static void determine_translation_status(gpointer data, gpointer useless_stuff)
 		po->translated++;
 	if(message->status & GTR_MSG_STATUS_FUZZY)
 		po->fuzzy++;
-	/*
-	 * Sticky messages are always translated, do not count them twice
-	if(message->status & GTR_MSG_STATUS_STICK)
-		po->translated++;
-	*/
 }
 
 /*
@@ -1086,6 +1092,7 @@ void gtranslator_get_translated_count(void)
 	po->fuzzy = 0;
 	g_list_foreach(po->messages, (GFunc) determine_translation_status,
 		       NULL);
+
 	/*
 	 * Update the progress bar.
 	 */

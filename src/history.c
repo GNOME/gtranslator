@@ -126,7 +126,8 @@ GList *gtranslator_history_get(void)
 		 */
 		if(GtrPreferences.check_recent_file)
 		{
-			if(!g_file_exists(myentry->filename))
+			if(!myentry->filename &&
+				!g_file_exists(myentry->filename))
 			{
 				GTR_FREE(subpath);
 				GTR_FREE(myentry->filename);

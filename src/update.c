@@ -35,6 +35,8 @@
 
 #include <stdlib.h>
 
+#include <gtk/gtkmain.h>
+
 #include <libgnomeui/gnome-app-util.h>
 
 /*
@@ -78,6 +80,13 @@ void update(GtkWidget *widget, gpointer useless)
 	 * Execute the command.
 	 */
 	res=system(command);
+
+	/*
+	 * Iterate back to the main thread which draws the application --
+	 *  this way the user still sees the application GUI and not something
+	 *   very unwanted and unnice .-)
+	 */
+	gtk_main_iteration();
 	
 	/*
 	 * Before doing an update, my-update.sh checks if

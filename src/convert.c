@@ -66,7 +66,10 @@ gchar *gtranslator_convert_string(const gchar *string,
 	/*
 	 * Fallback to the pure string if we cannot perform any conversion.
 	 */
-	g_return_val_if_fail(iconv_base != ((iconv_t) -1), g_strdup(string));
+	if(iconv_base==(iconv_t) -1)
+	{
+		return g_strdup(string);
+	}
 
 	input_string=input_string_pointer=g_strdup(string);
 	input_length=(strlen(input_string) + 1);
