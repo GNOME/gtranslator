@@ -242,7 +242,7 @@ static GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
 	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
-	GNOMEUIINFO_SUBTREE(N_("Message _status"), the_msg_status_menu),
+	GNOMEUIINFO_SUBTREE(N_("Mess_age status"), the_msg_status_menu),
 	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
 	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
 	GNOMEUIINFO_END
