@@ -28,6 +28,8 @@
 #include "about.h"
 #include "gtkspell.h"
 
+#include "pixmaps/untrans.xpm"
+
 #include <libgtranslator/preferences.h>
 #include <libgtranslator/stylistics.h>
 
@@ -187,7 +189,7 @@ static GnomeUIInfo the_messages_menu[] = {
 	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
 	 N_("Go to next untranslated message"),
 	 goto_next_untranslated, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+	 GNOME_APP_PIXMAP_DATA, untrans_xpm,
 	 'U', GDK_MOD1_MASK, NULL},
 	GNOMEUIINFO_END
 };
@@ -304,10 +306,10 @@ static GnomeUIInfo the_searchbar[] = {
 			       N_("Go to the last message"),
 			       goto_last_msg,
 			       GNOME_STOCK_PIXMAP_LAST),
-	GNOMEUIINFO_ITEM_STOCK(N_("Missing"),
+	GNOMEUIINFO_ITEM(N_("Missing"),
 			       N_("Go to next untranslated message"),
 			       goto_next_untranslated,
-			       GNOME_STOCK_PIXMAP_BOOK_OPEN),
+			       untrans_xpm),
 	GNOMEUIINFO_ITEM_STOCK(N_("Fuzzy"),
 			       N_("Go to the next fuzzy translation"),
 			       goto_next_fuzzy,
@@ -638,7 +640,7 @@ static void invert_dot(gchar *str)
 void display_msg(GList  * list_item)
 {
 	GtrMsg *msg;
-	gchar *ispell_command[3];
+	gchar *ispell_command[5];
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	clean_text_boxes();
@@ -682,16 +684,19 @@ void display_msg(GList  * list_item)
 		if(!gtkspell_running())
 		{
 			ispell_command[0]="ispell";
-			ispell_command[2]=NULL;
+			ispell_command[1]="-a";
 			
 			/*
 			 * Should we use special dictionary settings?
 			 */ 
 			if(wants.use_own_dict && wants.dictionary)
 			{
-				ispell_command[1]=g_strdup_printf(" %s -d \"%s\" ",
-					"-a",
+				ispell_command[2]="-d";
+				ispell_command[3]=g_strdup_printf("%s",
 					wants.dictionary);
+				ispell_command[4]=NULL;
+			} else {
+				ispell_command[2]=NULL;
 			}
 		
 			/*

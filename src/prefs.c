@@ -47,7 +47,7 @@ static GtkWidget *first_page, *second_page, *third_page, *fourth_page,
  */
 static GtkWidget
 	*authors_name, *authors_email, *authors_language,
-	*mime_type, *encoding, *lcode, *lg_email;
+	*mime_type, *encoding, *lcode, *lg_email, *dictionary_file;
 
 /*
  * The toggle buttons used in the preferences box:
@@ -57,7 +57,7 @@ static GtkWidget
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_specs, *instant_spell_checking,
-	*use_own_dict, *dictionary_file;
+	*use_own_dict;
 	
 /*
  * The preferences dialog widget itself.
@@ -317,13 +317,11 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 		_("Instant spell checking"),
 		wants.instant_spell_check, prefs_box_changed);
 	use_own_dict=attach_toggle_with_label(fifth_page, 2,
-		_("Use special dictionary file"),
+		_("Use special dictionary"),
 		wants.use_own_dict, prefs_box_changed);
-	dictionary_file=gnome_file_entry_new("DICTIONARY_FILE",
-		_("Dictionary to use:"));
-
-	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
-		dictionary_file, 0, 1, 3, 4);
+	dictionary_file=
+	    attach_entry_with_label(fifth_page, 3, _("Dictionary to use:"),
+				    wants.dictionary, prefs_box_changed);
 	
 	/*
 	 * The sixth page with the special font/color stuff.
@@ -411,6 +409,7 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	update(lg, GTK_COMBO(lg_email)->entry);
 	update(mime, GTK_COMBO(mime_type)->entry);
 	update(enc, GTK_COMBO(encoding)->entry);
+	update(wants.dictionary, dictionary_file);
 #undef update
 #define if_active(widget) \
 	gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))
@@ -437,16 +436,11 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	gtranslator_config_set_string("language/encoding", enc);
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
+	gtranslator_config_set_string("dict/file", wants.dictionary);
 	
 	g_free(wants.font);
-	g_free(wants.dictionary);
-	
 	wants.font=gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font));
-	wants.dictionary=gnome_file_entry_get_full_path(
-		GNOME_FILE_ENTRY(dictionary_file), TRUE);
-	
 	gtranslator_config_set_string("font/name", wants.font);
-	gtranslator_config_set_string("dict/file", wants.dictionary);
 	
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground),
 		COLOR_VALUE_FG);

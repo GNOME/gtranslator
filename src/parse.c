@@ -37,7 +37,7 @@
  * These are to be used only inside this file
  */
 static void append_line(gchar ** old, const gchar * tail);
-static gchar *restore_msg(gchar * given);
+static gchar *restore_msg(const gchar * given);
 static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
 static void free_po(void);
@@ -115,7 +115,7 @@ static void check_msg_status(GtrMsg * msg)
  * 
  * TODO: make this use GString
  */
-static void append_line(gchar * * old, const gchar * tail)
+static void append_line(gchar ** old, const gchar * tail)
 {
 	gchar *to_add = g_new(gchar, strlen(tail));
 	gchar *result;
@@ -173,19 +173,14 @@ static gboolean actual_parse(void)
 	{
 		error=g_strdup_printf(_("The file `%s' doesn't exist at all!"), po->filename);
 		gnome_app_error(GNOME_APP(app1), error);
-		if(error)
-		{
-			g_free(error);
-		}
+		g_free(error);
 		return FALSE;
 	}
 
 	/*
 	 * Don't include the temporary file name in the recent files list.
 	 */ 
-	if(strcmp(po->filename, (g_strdup_printf("%s/%s",
-		g_get_home_dir(), 
-		"gtranslator-temp-po-file"))))
+	if(strcmp(g_basename(po->filename), "gtranslator-temp-po-file"))
 	{
 		/*
 		 * Add a GNOME history entry.
@@ -453,10 +448,10 @@ void parse_the_file_from_the_recent_files_list(GtkWidget *widget, gpointer filep
 /*
  * Restores the formatting of a message, done in append_line
  */
-static gchar *restore_msg(gchar * given)
+static gchar *restore_msg(const gchar * given)
 {
-	GString *rest;
 	gchar *result;
+	GString *rest;
 	gint s, lines = 0, here = 8;
 
 	if(!given)
@@ -525,13 +520,26 @@ static void write_the_message(gpointer data, gpointer fs)
 	str = restore_msg(msg->msgstr);
 	
 	if (msg->comment)
+	{
 		fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
 			msg->comment, id, str);
+		g_print("%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
+			msg->comment, id, str);
+	}
 	else
+	{
 		fprintf((FILE *) fs, "msgid \"%s\"\nmsgstr \"%s\"\n\n",
 			id, str);
+		g_print("msgid \"%s\"\nmsgstr \"%s\"\n\n",
+			id, str);
+	}
+	/*
+	g_print("#a");
 	g_free(id);
+	g_print("#b");
 	g_free(msg);
+	g_print("#c");
+	*/
 }
 
 static gboolean actual_write(const gchar * name)
@@ -539,6 +547,7 @@ static gboolean actual_write(const gchar * name)
 	GtrMsg *header;
 	FILE *fs;
 	regex_t *rx;
+	gchar *tempo;
 
 	rx = gnome_regex_cache_compile(rxc, ".pot$", 0);
 	if (!regexec(rx, name, 0, NULL, 0)) {
@@ -547,29 +556,22 @@ static gboolean actual_write(const gchar * name)
 		gnome_app_warning(GNOME_APP(app1), warn);
 		return FALSE;
 	}
-
 	/*
 	 * Check if the filename is equal to our internally
 	 *  used "gtranslator-temp-po-file"..
 	 */
-	if(!g_strcasecmp(name,
-		g_strdup_printf("%s/%s",
-			g_get_home_dir(),
-			"gtranslator-temp-po-file")))
+	tempo=g_strdup_printf("%s/%s", g_get_home_dir(),
+			      "gtranslator-temp-po-file");
+	if(!strcmp(name, tempo))
 	{
 		/*
 		 * Create a new filename to use instead of the
 		 *  oldsome "gtranslator-temp-po-file"...
 		 */  
-		gchar *newfilename;
-		newfilename=g_strdup_printf("%s-%s.%s.po",
+		name=g_strdup_printf("%s-%s.%s.po",
 			po->header->prj_name,
 			po->header->prj_version,
 			po->header->language);
-		/*
-		 * Assign the new name.
-		 */ 
-		name=newfilename;
 		/*
 		 * Add a foo'sh header entry.
 		 */ 
@@ -577,9 +579,10 @@ static gboolean actual_write(const gchar * name)
 		/*
 		 * Delete the old file.
 		 */
-		unlink(g_strdup_printf("%s/%s", g_get_home_dir(), "gtranslator-temp-po-file"));
+		unlink(tempo);
 	}
-	
+	g_free(tempo);
+
 	fs = fopen(name, "w");
 
 	/*
@@ -798,130 +801,71 @@ void gtranslator_display_recent(void)
 	/*
 	 * Couldn't we do that better with bonobo?
 	 */
-	gchar *menupath = _("_File/Recen_t files/");
-	gint len;
+	static gint len = 0;
+	gint i;
 	GnomeUIInfo *menu;
-	GnomeHistoryEntry recent;
-	GList *list;
+	GList *list, *item;
+	gchar *name;
 	
-	/*
-	 * Get GNOME's list of the recently used files.
-	 */
-	list=gnome_history_get_recently_used();
-	/*
-	 * reverse the list to get the real sequence on
-	 *  the routines while parsing the list of recent
-	 *   files.
-	 */
-	list=g_list_reverse(list);
-	/*
-	 * Are there any recent files ?
-	 */
-	if((!list) || (!list->data))
-	{
-		/*
-		 * Delete the old entries.
-		 */
-		gnome_app_remove_menus(GNOME_APP(app1), menupath, 1);
-		/*
-		 * Create a new GnomeUIInfo widget.
-		 */
-		menu=g_new0(GnomeUIInfo,2);
-		/*
-		 * Insert the end point of the menus.
-		 */
-		menu->type=GNOME_APP_UI_ENDOFINFO;
-		/*
-		 * Insert this menu into the menupath.
-		 */
-		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-		/* Free the list if it existed */
-		if(list)
-			gnome_history_free_recently_used_list(list);
-		/*
-		 * Return from the loop.
-		 */
-		return;
-	}
+	gchar *menupath = _("_File/Recen_t files/");
 
 	/*
 	 * Delete the old entries.
 	 */
-	gnome_app_remove_menus(GNOME_APP(app1), menupath, 1);
+	gnome_app_remove_menu_range(GNOME_APP(app1), menupath, 0, len);
 
 	/*
-	 * Create a new GnomeUIInfo widget.
+	 * Get GNOME's list of the recently used files.
 	 */
-	menu=g_new0(GnomeUIInfo,2);
+	list=gnome_history_get_recently_used();
+	len=g_list_length(list);
 
-	/*
-	 * Insert the end point of the menus.
-	 */
-	menu->type=GNOME_APP_UI_ENDOFINFO;
-	/*
-	 * Insert this menu into the menupath.
-	 */
-	gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-	
 	/*
 	 * Parse the list, but maximal as many entries as wished
 	 *  in the preferences.
 	 */
-	for(len=(g_list_length(list)-1);len >= 0;len--)
+	i=len;
+	for(item=list; item!=NULL; item=g_list_next(item))
 	{
 		/*
 		 * Get the GnomeHistory Entry.
 		 */
-		recent=g_list_nth_data(list, len);
+		name=((GnomeHistoryEntry)item->data)->filename;
 		/*
 		 * If the filename should be checked for existence.
 		 */
-		if(wants.check_recent_file)
-		{
-			if(!g_file_exists(recent->filename))
-			{
-				continue;
-			}
-		}
+		if(wants.check_recent_file && !g_file_exists(name))
+			continue;
 		
+		menu=g_new0(GnomeUIInfo,2);
+
 		/*
 		 * Set the label name.
 		 */
-		menu->label=g_strdup_printf("_%i:  %s", len+1,
-			recent->filename);
+		menu->label=g_strdup_printf("_%i: %s", i--, name);
 		
 		/*
 		 * Set the GnomeUIInfo settings and labels.
 		 */
 		menu->type=GNOME_APP_UI_ITEM;
-		menu->hint=g_strdup_printf(_("Open %s"), recent->filename);
+		menu->hint=g_strdup_printf(_("Open %s"), name);
 		menu->moreinfo=(gpointer)parse_the_file_from_the_recent_files_list;
-		menu->user_data=recent->filename;
-		menu->unused_data=NULL;
-		menu->pixmap_type=0;
-		menu->pixmap_info=NULL;
-		menu->accelerator_key=0;
-		
-		/*
-		 * Insert a GNOMEUIINFO_END equivalent.
-		 */
+		menu->user_data=g_strdup(name);
 		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
 
 		/*
-		 * Insert it into the menus.
+		 * Insert this item into menu
 		 */
-		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-		
+		gnome_app_insert_menus (GNOME_APP(app1), menupath, menu);
+
+		/*
+		 * Free the string and the GnomeUIInfo structure.
+		 */
 		g_free(menu->label);
 		g_free(menu->hint);
-	}
-	/*
-	 * Free the string and the GnomeUIInfo structure.
-	 */
-	if(menu)
-	{
 		g_free(menu);
 	}
+	
 	/*
 	 * At last: free the GnomeHistoryEntry list.
 	 */

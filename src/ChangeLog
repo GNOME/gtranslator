@@ -1,3 +1,15 @@
+2001-01-06  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* pixmaps/untrans.xpm: added this dir and one pixmap for untranslated
+		toolbar button.
+	* gui.c: use it. Fixed ispell command constructing.
+	* header_stuff.c: reformatted *'s
+	* parse.c: removed some checks and leaks. Rewritten
+		gtranslator_display_recent completely, now works.
+	* prefs.c: load/save dictionary entry. Made it simple entry, because it
+	does not need to be a file, just name.
+	* prefs.h: whitespace.
+
 2001-01-06  Fatih Demir	<kabalak@gmx.net>
 
 	* parse.c: Don't free the menupath -- or crashes en masse
