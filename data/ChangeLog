@@ -1,7 +1,13 @@
 2001-08-21  Fatih Demir <kabalak@gtranslator.org>
 
-	* scripts/my-update.sh: Fix #59299 -- the po files does get rightly moved
-		in the common states now.
+	* mime/Makefile.am: Set the "-p" argument for xml-i18n-tools > 0.9.
+
+	* colorschemes/arek.xml: Small colors update to make it better in
+		punto readability.
+
+	* scripts/my-update.sh: Fix #59299 -- the po files are now moved
+		in the right order -- no files are deleted unnecessarily
+		 anymore.
 
 2001-08-20  Fatih Demir <kabalak@gtranslator.org>
 
@@ -36,7 +42,7 @@
 
 2001-08-14  Fatih Demir <kabalak@gtranslator.org>
 
-	* colorschemes/Makefile.am: Plugged the new colorscheme into the 
+	* colorschemes/Makefile.am: Plugged the new colorscheme into the
 		Makefile wires.
 
 	* colorschemes/spiffE.xml: Added "spiff"'sh colorscheme (made out of
@@ -51,7 +57,7 @@
 
 2001-08-10  Kevin Vandersloot <kfv101@psu.edu>
 
-	* etspecs/messages-table.etspec: change the default to only show 
+	* etspecs/messages-table.etspec: change the default to only show
 		original and translation columns.
 
 2001-08-08  Fatih Demir <kabalak@gtranslator.org>
@@ -77,7 +83,7 @@
 
 2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
 
-	* etspecs/messages-table.etspec: updated the etspec to 
+	* etspecs/messages-table.etspec: updated the etspec to
 		do the status column by default
 
 2001-07-18  Fatih Demir <kabalak@gtranslator.org>
@@ -159,7 +165,7 @@
 	
 	* mime/application-x-po.png: Committed another new try from me.
 	
-	* mime/gtranslator.keys.in: Do not use the removed 
+	* mime/gtranslator.keys.in: Do not use the removed
 		application-x-gmo.png icon anymore.
 
 2001-04-05  Gediminas Paulauskas <menesis@delfi.lt>
@@ -191,7 +197,7 @@
 
 2001-03-30  Fatih Demir <kabalak@gtranslator.org>
 
-	* mime/Makefile.am: Sorry, Gediminas, but I did revert to the 
+	* mime/Makefile.am: Sorry, Gediminas, but I did revert to the
 		last revision of the mime/Makefile.am as xml-i18n-tools
 		 CANNOT handle .in.in files yet.
 
@@ -206,7 +212,7 @@
 
 2001-03-22  Fatih Demir <kabalak@gtranslator.org>
 
-	* ui/nautilus-gtranslator-view-ui.xml: Removed the header 
+	* ui/nautilus-gtranslator-view-ui.xml: Removed the header
 		edit components.
 
 2001-03-20  Fatih Demir <kabalak@gtranslator.org>
@@ -228,13 +234,13 @@
 	* mime/Makefile.am: Added fake rule for keys file to wrap it
 		around xml-i18n-tools.
 
-	* mime/gtranslator.keys.in.in, mime/gtranslator.keys.in & 
+	* mime/gtranslator.keys.in.in, mime/gtranslator.keys.in &
 		mime/gtranslator.keys: Circular move around -- to crazy
 		 to tell -- a try to overrule xml-i18n-tools.
 
 2001-03-10  Fatih Demir	<kabalak@gtranslator.org>
 
-	* colorschemes/Makefile.am & colorschemes/boom-boom.xml: Added 
+	* colorschemes/Makefile.am & colorschemes/boom-boom.xml: Added
 		"boom-boom" color scheme.
 
 2001-03-09  Fatih Demir	<kabalak@gtranslator.org>
