@@ -354,7 +354,10 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 		**/
 		gtranslator_open_mo_file(po_file);
 	}
-	parse(po_file);
+	else
+	{
+		parse(po_file);
+	}
 	/* Destroy the dialog */
 	gtk_widget_destroy(GTK_WIDGET(of_dlg));
 }

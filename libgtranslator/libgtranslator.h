@@ -19,10 +19,6 @@
 * The central header for libgtranslator.
 **/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 /**
 * Include all the other headers.
 **/

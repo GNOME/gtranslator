@@ -11,7 +11,7 @@ configstuffcflags = $(GNOME_CFLAGS)
 endif
 
 if USE_VFS_STUFF
-vfs_cflags = $(VFS_CFLAGS)
+vfs_cflags = $(VFS_CFLAGS) -DUSE_VFS_STUFF=2000
 vfs_source = vfs-handle.c
 else
 vfs_cflags =

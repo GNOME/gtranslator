@@ -19,6 +19,7 @@
 /**
 * The local includes.
 **/
+
 #include <libgtranslator/gtranslatord.h>
 #include <libgtranslator/libgtranslator.h>
 #include <popt-gnome.h>
@@ -72,10 +73,11 @@ int main(int argc,char *argv[])
 	**/
 	CORBA_exception_init(&env);
 	/**
-	* Init the NLS if it's necessary.
+	* Hm, bind to gettext ... but somehow this results
+	*  in an error "statement with no effect"...
 	**/
-	bindtextdomain("gtranslator", GNOMELOCALEDIR);
-	textdomain("gtranslator");
+	/*bindtextdomain("gtranslator", GNOMELOCALEDIR);
+	textdomain("gtranslator");*/
 	/**
 	* Get the arguments and the context.
 	**/

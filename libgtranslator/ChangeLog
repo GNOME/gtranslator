@@ -1,3 +1,16 @@
+2000-12-09  Fatih Demir	<kabalak@gmx.net>
+
+	* main.c: The gettext actions "bindtextdomain" and "textdomain"
+		are resulting in an error "statement with no effect";
+		 grr, this is now commented out...
+
+	* Makefile.am: Got the USE_VFS_STUFF define to the CFLAGS
+		while compiling...
+
+	* libgtranslator.h: Removed the config.h stuff -- this isn't
+		a global thing, so it shouldn't be in the global header --
+		 or are we installing a config.h also to ${prefix} ? No.
+	
 2000-12-07  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* *.h: changed #include <libgtranslator/...> to #include "..."
