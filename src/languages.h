@@ -106,7 +106,7 @@ static lang languages[] = {
 	 "fr@li.org", "8bit"},
 	{
 	 N_("Galician"), "gl", "iso-8859-1",
-	 "gpul-traduccion@ceu.fi.udc.es", "8bit"},
+	 "trasno@ceu.fi.udc.es", "8bit"},
 	{
 	 N_("German"), "de", "iso-8859-1",
 	 "de@li.org", "8bit"},
