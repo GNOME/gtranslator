@@ -35,8 +35,6 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include "e-xml-utils.h"
-
 /*
  * The GtrLearnBuffer structure which holds all informations/parts of the
  *  learn buffer related stuff -- some say personal translation memory to it..
