@@ -534,9 +534,11 @@ static ETableExtras *table_extras_new()
 	while(list_parts[count]!=NULL)
 	{
 		cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
+
 		gtk_object_set (GTK_OBJECT (cell),
  			"color_column", COL_COLOR,
 			NULL);
+
 		e_table_extras_add_cell(extras, list_parts[count], cell);
 		count++;
 	}
