@@ -1,5 +1,17 @@
 2001-02-09  Fatih Demir	<kabalak@kabalak.net>
 
+	* vfs-handle.c/.h & messages.h: Moved these files from libgtranslator
+		to here.
+
+	* Makefile.am: Don't link against libgtranslator because it isn't
+	 	existent any longer -- removed the cflags and flags for it
+		 and added the vfs handle sources and the message.h file to
+		  the sources.
+
+	* session.c, prefs.c, gui.c, history.c, dialogs.c & main.c:
+		Changed the include dirs to be local as libgtranslator
+		 is dead now.
+
 	* parse.c, gui.c, prefs.c & history.c: Applied the
 		changes from Gediminas for stable also to HEAD.
 

@@ -29,7 +29,6 @@
 #include "prefs.h"
 #include "parse.h"
 #include "open-differently.h"
-#include <libgtranslator/libgtranslator.h>
 
 #ifdef GCONF_IS_PRESENT
 #include <gconf/gconf.h>

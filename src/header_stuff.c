@@ -22,7 +22,7 @@
 #include "prefs.h"
 #include "dialogs.h"
 #include "languages.h"
-#include <libgtranslator/preferences.h>
+#include "preferences.h"
 
 #include <locale.h>
 

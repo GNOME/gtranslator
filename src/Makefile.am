@@ -17,9 +17,11 @@ endif
 
 if USE_VFS_STUFF
 vfs_cflags = $(VFS_CFLAGS) -DUSE_VFS_STUFF=7
+vfs_sources = vfs-handle.c vfs-handle.h
 vfs_libs = $(VFS_LIBS)
 else
 vfs_cflags =
+vfs_sources =
 vfs_libs =
 endif
 
@@ -52,6 +54,7 @@ gtranslator_SOURCES = \
 	htmlizer.c htmlizer.h \
 	languages.h \
 	main.c \
+	messages.h \
 	open-differently.c open-differently.h \
 	parse.c	parse.h \
 	preferences.c preferences.h \
@@ -59,10 +62,10 @@ gtranslator_SOURCES = \
 	session.c session.h \
 	shortcutbar.c shortcutbar.h \
 	stylistics.c stylistics.h \
-	update.c
+	update.c \
+	$(vfs_sources)
 
 gtranslator_LDADD = \
-	$(top_builddir)/libgtranslator/libgtranslator.a \
 	-L/usr/X11R6/lib \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
@@ -73,4 +76,6 @@ gtranslator_LDADD = \
 	$(GAL_LIBS) \
 	$(GTKHTML_LIBS)
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST = ChangeLog \
+	vfs-handle.c \
+	vfs-handle.h

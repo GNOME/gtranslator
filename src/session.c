@@ -19,7 +19,7 @@
  */
 
 #include "session.h"
-#include <libgtranslator/preferences.h>
+#include "preferences.h"
 
 /*
  * Quits via the normal quit.

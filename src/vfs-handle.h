@@ -1,12 +1,12 @@
 /*
  * (C) 2000-2001 	Fatih Demir <kabalak@gmx.net>
  *
- * gtranslator is free software; you can redistribute it and/or modify
+ * libgtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or   
  *    (at your option) any later version.
  *    
- * gtranslator is distributed in the hope that it will be useful,
+ * libgtranslator is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
  *    GNU General Public License for more details.
@@ -17,31 +17,19 @@
  *
  */
 
-#ifndef GTR_OPEN_DIFFERENTLY_H
-#define GTR_OPEN_DIFFERENTLY_H 1
+#ifndef LIBGTRANSLATOR_VFS_HANDLE_H
+#define LIBGTRANSLATOR_VFS_HANDLE_H 1
 
 /*
- * These functions are good for opening up compiled gettext/gzipped
- *  po files.
- */
-
-#include "parse.h"
-#include "vfs-handle.h"
-#include "gui.h"
-
-/*
- * Detects if we can open it with our "special" open functions.
- */
-gboolean gtranslator_open_po_file(gchar *file); 
-
-/*
- * Open up a compiled gettext po file.
+ * The GnomeVFS based routines of libgtranslator are here.
  */ 
-void gtranslator_open_compiled_po_file(gchar *file);
+
+#include <glib.h>
 
 /*
- * Open up a gzipped plain gettext po file.
+ * Opens up the given file via GnomeVFS routines and returns the
+ *  local filename of the transferred file.
  */
-void gtranslator_open_gzipped_po_file(gchar *file);
+gchar 	*gtranslator_vfs_handle_open_file(gchar *filestring);
 
 #endif

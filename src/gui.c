@@ -32,8 +32,8 @@
 
 #include "pixmaps/untrans.xpm"
 
-#include <libgtranslator/preferences.h>
-#include <libgtranslator/stylistics.h>
+#include "preferences.h"
+#include "stylistics.h"
 
 #ifdef USE_VFS_STUFF
 #include <libgnomevfs/gnome-vfs-init.h>

@@ -23,8 +23,8 @@
 #include "languages.h"
 #include "find.h"
 
-#include <libgtranslator/preferences.h>
-#include <libgtranslator/stylistics.h>
+#include "preferences.h"
+#include "stylistics.h"
 
 /*
  * The callbacks:

@@ -33,7 +33,7 @@
   #include "gnome-regex.h"
 #endif
 
-#include <libgtranslator/messages.h>
+#include "messages.h"
 #include "header_stuff.h"
 
 /*

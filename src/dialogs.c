@@ -20,7 +20,7 @@
 
 #include "dialogs.h"
 #include "find.h"
-#include <libgtranslator/preferences.h>
+#include "preferences.h"
 
 /*
  * Functions to be used only internally in this file

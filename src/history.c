@@ -17,7 +17,7 @@
  *
  */
 
-#include <libgtranslator/preferences.h>
+#include "preferences.h"
 #include "history.h"
 #include "gui.h"
 #include "dialogs.h"

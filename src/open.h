@@ -26,6 +26,7 @@
  */
 
 #include "parse.h"
+#include "vfs-handle.h"
 #include "gui.h"
 
 /*

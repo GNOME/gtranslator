@@ -18,7 +18,6 @@
  */
 
 #include "open-differently.h"
-#include <libgtranslator/vfs-handle.h>
 
 
 /*
