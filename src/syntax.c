@@ -157,7 +157,7 @@ void gtranslator_update_highlighted(
 		newdata,
 		text_data_free);
 
-	//gtk_text_set_point( GTK_TEXT( textwidget ), point );
+	/* gtk_text_set_point( GTK_TEXT( textwidget ), point ); */
 
 	gtk_text_thaw( GTK_TEXT( textwidget ) );
 	gtk_editable_set_position( GTK_EDITABLE( textwidget), point );

@@ -1,3 +1,27 @@
+2002-03-09  Fatih Demir <kabalak@gtranslator.org>
+
+	* learn.c: Use the new min. match percentage while performing fuzzy
+		queries in the learn buffer -- we shouldn't get too much away
+		 from the original query string anyway and therefore the min.
+		  match percentage can't be set to less than 25%.
+
+	* syntax.c: Made a C++ style comment a C style comment -- we are using
+		gcc who is quite strict on comment styles, so we should keep it
+		 with the C comment style with '/*' and '*/'.
+
+	* message.c: Show a very nice and make-the-user-happy-kind error window
+		up if the message contains errorneus formats.
+
+	* prefs.c: Added a toggle button for the formats checking voodoo -- the
+		message does also say what you will get if the message has got
+		 syntactical errors -- it will drive you crazy for sure; also
+		  brought the min. match percentage option to daylight.
+
+	* utils_gui.c: Made some small modifications for the instances checking
+		routine of gtranslator -- it should a bit more safe now and the
+		 message presented to the user is also a bit more clear now (at
+		  least I hope so).
+
 2002-02-28  Fatih Demir <kabalak@gtranslator.org>
 
 	* header_stuff.c: Make the charset selection non-changable by the user;

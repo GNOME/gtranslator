@@ -75,18 +75,13 @@ static GtkWidget
 	*autosave_with_suffix, *sweep_compile_file, *use_learn_buffer,
 	*show_messages_table, *rambo_function, *use_own_mt_colors,
 	*collapse_translated_entries, *auto_learn, *fuzzy_matching,
-	*load_backends, *show_comment, *highlight;
+	*load_backends, *show_comment, *highlight, *check_formats;
 
 /*
  * The timeout GtkSpinButton:
  */
-#ifdef YES_WE_ARE_RICH_BEATIFUL_AND_SO_ON
 static GtkWidget
 	*autosave_timeout, *max_history_entries, *min_match_percentage;
-#else
-static GtkWidget
-	*autosave_timeout, *max_history_entries;
-#endif
 
 /*
  * Font/color specific widgets used in the preferences box.
@@ -120,7 +115,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 2, _("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		4, 1, _("Po file editing"));
+		5, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		9, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -194,6 +189,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    gtranslator_utils_attach_toggle_with_label(third_page, 3,
 	    	_("Highlight syntax of the translation messages"),
 		GtrPreferences.highlight, gtranslator_preferences_dialog_changed);
+
+	check_formats =
+	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
+	    	_("Check messages for syntactical correctess"),
+		GtrPreferences.check_formats, gtranslator_preferences_dialog_changed);
 
 	/*
 	 * The fourth page with the popup menu & the dot_char.
@@ -367,11 +367,9 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		 */
 		2, _("Use \"fuzzy\" matching routines for the learn buffer queries"),
 		GtrPreferences.fuzzy_matching, gtranslator_preferences_dialog_changed);
-#ifdef YES_WE_ARE_RICH_BEATIFUL_AND_SO_ON
 	min_match_percentage=gtranslator_utils_attach_spin_with_label(ninth_page,
-		3, _("Minimal required similarity percentage while doing autotranslation"),
+		3, _("Minimal required similarity percentage for fuzzy queries"),
 		25, 100, GtrPreferences.min_match_percentage, gtranslator_preferences_dialog_changed);
-#endif
 
 	/*
 	 * Connect the signals to the preferences box.
@@ -489,6 +487,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.load_backends = if_active(load_backends);
 	GtrPreferences.auto_learn = if_active(auto_learn);
 	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
+	GtrPreferences.check_formats = if_active(check_formats);
 	GtrPreferences.autosave = if_active(autosave);
 	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
 #undef if_active
@@ -501,11 +500,9 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
 			max_history_entries));
 	
-	#ifdef YES_WE_ARE_RICH_BEATIFUL_AND_SO_ON
 	GtrPreferences.min_match_percentage =
 		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
 			min_match_percentage));
-	#endif
 	
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
 	gtranslator_config_set_string("informations/autosave_suffix", 
@@ -517,10 +514,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_set_float("informations/max_history_entries", 
 		GtrPreferences.max_history_entries);
 	
-	#ifdef YES_WE_ARE_RICH_BEATIFUL_AND_SO_ON
 	gtranslator_config_set_float("informations/min_match_percentage",
 		GtrPreferences.min_match_percentage);
-	#endif
 	
 	GTR_FREE(GtrPreferences.msgid_font);
 	GTR_FREE(GtrPreferences.msgstr_font);
@@ -757,21 +752,17 @@ void gtranslator_preferences_read(void)
 
 	GtrPreferences.max_history_entries =
 		gtranslator_config_get_float("informations/max_history_entries");
-	#ifdef YES_WE_ARE_RICH_BEATIFUL_AND_SO_ON
 	GtrPreferences.min_match_percentage =
 		gtranslator_config_get_float("informations/min_match_percentage");
-	#endif
 
 	/*
 	 * Check some prefs values for sanity and set sane values if no really
 	 *  good prefs values have been detected.
 	 */
-	#ifdef YES_WE_ARE_RICH_BEATIFUL_AND_SO_ON
 	if(GtrPreferences.min_match_percentage < 25.0)
 	{
 		GtrPreferences.min_match_percentage=25.0;
 	}
-	#endif
 
 	if(GtrPreferences.autosave_timeout < 1.0)
 	{

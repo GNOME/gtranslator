@@ -357,8 +357,8 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
 			 */  
 			error_message=g_strdup_printf(
 				_("You do not have permission to modify file '%s'.\n\
-Please save a new copy in a directory where\n\
-you have write permission."),
+Please save a new copy of it to a place of your choice and get write\n\
+permission for it."),
 				po_file->filename);
 			gnome_app_warning(GNOME_APP(gtranslator_application), error_message);
 
@@ -389,14 +389,19 @@ gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
 	resultfilename=gtranslator_config_get_string("runtime/filename");
 
 	/*
-	 * Test if we've got a filename and for equality.
+	 * Test if we've got a filename and then test it for equality with our
+	 *  currently in another instance opened po file.
 	 */
-	if(resultfilename && !nautilus_strcasecmp(resultfilename, filename))
+	if(resultfilename && (!nautilus_strcasecmp(resultfilename, filename)) &&
+		(strlen(resultfilename)==strlen(filename)))
 	{
 		gchar *error_message;
 
 		error_message=g_strdup_printf(
-		_("The file `%s' is already open in another instance of gtranslator!"), filename);
+		_("The file `%s' is already open in another instance of gtranslator!\n\
+Please close the other instance of gtranslator handling `%s' currently to\n\
+re-gain access to this file (also applies for post-crash cases)."), 
+			filename, filename);
 
 		/*
 		 * Return with FALSE if the given file is already open.

@@ -933,7 +933,7 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	     	 * Get a new query string without any punctuation characters.
 	    	 */
 		query_string=gtranslator_utils_strip_all_punctuation_chars(search_string);
-	    
+
 		/*
 		 * Try this new query.
 		 */
@@ -942,9 +942,12 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 				(gconstpointer) query_string);
 
 		/*
-		 * Don't trust too short query results .-)
+		 * Don't trust too short query results and also get a small
+		 *  similarity calculation and see if we've moved away too much
+		 *   from the original search_string.
 		 */
-		if(!found_string || strlen(found_string) <= 2)
+		if(!found_string || strlen(found_string) <= 2 ||
+			(gtranslator_utils_calculate_similarity(found_string, search_string) <= GtrPreferences.min_match_percentage))
 		{
 			return NULL;
 		}

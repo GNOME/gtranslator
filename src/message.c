@@ -311,14 +311,16 @@ void gtranslator_message_update(void)
 	}
 	
 	/*
-	 * Check the formats of the now updated GtrMsg -- simply beep in case
-	 *  of an error for now...
+	 * Check the formats of the now updated GtrMsg -- a nerves-killing new
+	 *  feature I know...
 	 */
 	if(GtrPreferences.check_formats)
 	{
 		if(!gtranslator_formats_check(msg))
 		{
-			printf("\007");
+			gtranslator_utils_error_dialog(
+			_("The translation for message `%s'\n\
+contains syntactical errors!"), msg->msgid);
 		}
 	}
 
