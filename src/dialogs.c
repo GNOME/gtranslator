@@ -275,9 +275,7 @@ void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog)
 	 * Parse the file and convert it from UTF-8.
 	 */
 	gtranslator_parse_main(filename);
-#ifdef UTF8_CODE
 	gtranslator_utf8_convert_po_from_utf8(po);
-#endif
 	gtranslator_parse_main_extra();
 
 	gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -323,9 +321,7 @@ void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog)
 	/*
 	 * The same logic as for the import but vice versa .-)
 	 */
-#ifdef UTF_CODE
 	gtranslator_utf8_convert_po_to_utf8(po);
-#endif
 	gtranslator_save_file(filename);
 	
 	gtk_widget_destroy(GTK_WIDGET(dialog));
