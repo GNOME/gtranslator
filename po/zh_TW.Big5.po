@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2001-06-13 14:31+0800\n"
-"PO-Revision-Date: 2001-06-13 15:03+0800\n"
+"POT-Creation-Date: 2001-06-19 15:46+0800\n"
+"PO-Revision-Date: 2001-06-19 15:51+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgid "Find in the po file"
 msgstr "在 po 檔案內尋找"
 
 #: src/dialogs.c:473
-#: src/menus.c:357
+#: src/menus.c:358
 msgid "Find"
 msgstr "尋找"
 
@@ -116,7 +116,7 @@ msgstr "英文"
 
 #: src/dialogs.c:496
 #: src/dialogs.c:594
-#: src/gui.c:359
+#: src/gui.c:367
 msgid "Translated"
 msgstr "翻譯訊息"
 
@@ -143,7 +143,7 @@ msgid "gtranslator -- replace"
 msgstr "gtranslator -- 取代"
 
 #: src/dialogs.c:575
-#: src/menus.c:361
+#: src/menus.c:362
 msgid "Replace"
 msgstr "取代"
 
@@ -177,7 +177,7 @@ msgstr "gtranslator -- 開啟 URI"
 
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:1
 #: src/dialogs.c:732
-#: src/menus.c:275
+#: src/menus.c:276
 msgid "Open"
 msgstr "開啟"
 
@@ -231,7 +231,7 @@ msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- 查詢現存的 gettext domains"
 
 #: src/dialogs.c:907
-#: src/menus.c:365
+#: src/menus.c:366
 msgid "Query"
 msgstr "查詢"
 
@@ -298,41 +298,41 @@ msgstr "檢示 URL..."
 #.
 #: data/desktop/gtranslator.desktop.in.h:2
 #: src/gui.c:164
-#: src/parse.c:736
+#: src/parse.c:761
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:346
+#: src/gui.c:354
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ 剩下 %i 個模糊翻譯 ]"
 
-#: src/gui.c:346
-#: src/gui.c:350
-#: src/menus.c:347
+#: src/gui.c:354
+#: src/gui.c:358
+#: src/menus.c:348
 msgid "Fuzzy"
 msgstr "模糊翻譯"
 
-#: src/gui.c:350
+#: src/gui.c:358
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ 沒有模糊翻譯 ]"
 
-#: src/gui.c:357
+#: src/gui.c:365
 msgid "Stick"
 msgstr "記錄"
 
-#: src/gui.c:368
+#: src/gui.c:376
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ 剩下 %i 個待譯訊息 ]"
 
-#: src/gui.c:368
-#: src/gui.c:370
+#: src/gui.c:376
+#: src/gui.c:378
 msgid "Untranslated"
 msgstr "待譯訊息"
 
-#: src/gui.c:370
+#: src/gui.c:378
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ 沒有待譯訊息 ]"
@@ -340,7 +340,7 @@ msgstr "%s [ 沒有待譯訊息 ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:381
+#: src/gui.c:389
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "訊息 %d / %d / 狀態： %s"
@@ -773,317 +773,317 @@ msgstr "您的 GModule 不支援動態載入模組!"
 msgid "gtranslator won't load any backend module..."
 msgstr "gtranslator 不會載入任何增效模組..."
 
-#: src/menus.c:44
+#: src/menus.c:45
 msgid "_Messages"
 msgstr "訊息 (_M)"
 
-#: src/menus.c:45
+#: src/menus.c:46
 msgid "Mess_age status"
 msgstr "狀態 (_A)"
 
-#: src/menus.c:56
+#: src/menus.c:57
 msgid "_Compile"
 msgstr "編譯 (_C)"
 
-#: src/menus.c:57
-#: src/menus.c:289
+#: src/menus.c:58
+#: src/menus.c:290
 msgid "Compile the po file"
 msgstr "編譯 po 檔案"
 
-#: src/menus.c:63
+#: src/menus.c:64
 msgid "_Update"
 msgstr "更新 (_U)"
 
-#: src/menus.c:64
-#: src/menus.c:293
+#: src/menus.c:65
+#: src/menus.c:294
 msgid "Update the po file"
 msgstr "更新 po 檔案"
 
-#: src/menus.c:71
+#: src/menus.c:72
 msgid "Aut_oaccomplish"
 msgstr "自動完成 (_O)"
 
-#: src/menus.c:72
+#: src/menus.c:73
 msgid "Automatically fill missing translations from the default query domain"
 msgstr "跟據預設的 domain 對待譯的訊息進行自動翻譯"
 
-#: src/menus.c:80
+#: src/menus.c:81
 msgid "Open from _URI"
 msgstr "開啟 _URI"
 
-#: src/menus.c:81
+#: src/menus.c:82
 msgid "Open a po file from a given URI"
 msgstr "使用提供的 URI 開啟 po 檔案"
 
-#: src/menus.c:91
+#: src/menus.c:92
 msgid "Recen_t files"
 msgstr "最近開案記錄 (_T)"
 
-#: src/menus.c:94
+#: src/menus.c:95
 msgid "_Export to UTF-8"
 msgstr "匯出 UTF-8 (_E)"
 
-#: src/menus.c:95
+#: src/menus.c:96
 msgid "Export the current po file to UTF-8"
 msgstr "匯出目前 po 檔案成 UTF-8"
 
-#: src/menus.c:101
+#: src/menus.c:102
 msgid "_Import from UTF-8"
 msgstr "匯入 UTF-8 (_I)"
 
-#: src/menus.c:102
+#: src/menus.c:103
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr "匯入 UTF-8 編碼的 po 檔案成對應的編碼"
 
-#: src/menus.c:133
+#: src/menus.c:134
 msgid "_Query"
 msgstr "查詢 (_Q)"
 
-#: src/menus.c:134
-#: src/menus.c:366
+#: src/menus.c:135
+#: src/menus.c:367
 msgid "Query for a string"
 msgstr "查詢字串"
 
-#: src/menus.c:141
+#: src/menus.c:142
 msgid "_Header..."
 msgstr "檔頭 (_H)"
 
-#: src/menus.c:142
-#: src/menus.c:297
+#: src/menus.c:143
+#: src/menus.c:298
 msgid "Edit the header"
 msgstr "編輯檔頭"
 
-#: src/menus.c:151
+#: src/menus.c:152
 msgid "_Message"
 msgstr "訊息 (_M)"
 
-#: src/menus.c:152
+#: src/menus.c:153
 msgid "Standard messages view"
 msgstr "標準檢視"
 
-#: src/menus.c:154
+#: src/menus.c:155
 msgid "_Comments"
 msgstr "備註 (_C)"
 
-#: src/menus.c:155
+#: src/menus.c:156
 msgid "View comments for message"
 msgstr "檢視訊息的備註"
 
-#: src/menus.c:157
+#: src/menus.c:158
 msgid "_Numbers"
 msgstr "編號 (_N)"
 
-#: src/menus.c:158
+#: src/menus.c:159
 msgid "View numbers in the message"
 msgstr "檢視訊息的編號"
 
-#: src/menus.c:160
+#: src/menus.c:161
 msgid "C _Formats"
 msgstr "C 格式 (_F)"
 
-#: src/menus.c:161
+#: src/menus.c:162
 msgid "View C formats of the message"
 msgstr "檢視訊息的 C 格式 (C formats)"
 
-#: src/menus.c:163
+#: src/menus.c:164
 msgid "_Hotkeys"
 msgstr "熱鍵 (_H)"
 
-#: src/menus.c:164
+#: src/menus.c:165
 msgid "View hotkeys in the message"
 msgstr "檢視訊息的熱鍵 Hotkeys"
 
-#: src/menus.c:171
+#: src/menus.c:172
 msgid "_First"
 msgstr "最前 (_F)"
 
-#: src/menus.c:172
-#: src/menus.c:323
+#: src/menus.c:173
+#: src/menus.c:324
 msgid "Go to the first message"
 msgstr "移至最前的訊息"
 
-#: src/menus.c:178
+#: src/menus.c:179
 msgid "_Back"
 msgstr "上一個 (_B)"
 
-#: src/menus.c:179
-#: src/menus.c:327
+#: src/menus.c:180
+#: src/menus.c:328
 msgid "Go one message back"
 msgstr "移至上一個訊息"
 
-#: src/menus.c:186
+#: src/menus.c:187
 msgid "_Next"
 msgstr "下一個 (_N)"
 
-#: src/menus.c:187
-#: src/menus.c:332
+#: src/menus.c:188
+#: src/menus.c:333
 msgid "Go one message forward"
 msgstr "移至下一個訊息"
 
-#: src/menus.c:193
+#: src/menus.c:194
 msgid "_Last"
 msgstr "最後 (_L)"
 
-#: src/menus.c:194
-#: src/menus.c:336
+#: src/menus.c:195
+#: src/menus.c:337
 msgid "Go to the last message"
 msgstr "移至最後的訊息"
 
-#: src/menus.c:201
+#: src/menus.c:202
 msgid "_Go to..."
 msgstr "移至 (_G)..."
 
-#: src/menus.c:202
+#: src/menus.c:203
 msgid "Goto specified message number"
 msgstr "移至指定訊息編號"
 
-#: src/menus.c:208
+#: src/menus.c:209
 msgid "Next fuz_zy"
 msgstr "下一個模糊翻譯 (_Z)"
 
-#: src/menus.c:209
+#: src/menus.c:210
 msgid "Go to next fuzzy message"
 msgstr "移至下一個模糊翻譯"
 
-#: src/menus.c:215
+#: src/menus.c:216
 msgid "Next _untranslated"
 msgstr "下一個待譯訊息 (_U)"
 
-#: src/menus.c:216
-#: src/menus.c:341
+#: src/menus.c:217
+#: src/menus.c:342
 msgid "Go to next untranslated message"
 msgstr "移至下一個待譯訊息"
 
-#: src/menus.c:226
+#: src/menus.c:227
 msgid "_Translated"
 msgstr "已翻譯 (_T)"
 
-#: src/menus.c:227
+#: src/menus.c:228
 msgid "Toggle translated status of a message"
 msgstr "設換訊息的翻譯狀態"
 
-#: src/menus.c:235
+#: src/menus.c:236
 msgid "_Fuzzy"
 msgstr "模糊翻譯 (_F)"
 
-#: src/menus.c:236
+#: src/menus.c:237
 msgid "Toggle fuzzy status of a message"
 msgstr "設換訊息的模糊翻譯狀態"
 
-#: src/menus.c:244
+#: src/menus.c:245
 msgid "_Stick"
 msgstr "記錄 (_S)"
 
-#: src/menus.c:245
+#: src/menus.c:246
 msgid "Stick this message"
 msgstr "記錄這個訊息"
 
-#: src/menus.c:264
+#: src/menus.c:265
 msgid "gtranslator _website"
 msgstr "gtranslator 網址 (_W)"
 
-#: src/menus.c:265
+#: src/menus.c:266
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator 的網址"
 
-#: src/menus.c:276
+#: src/menus.c:277
 msgid "Open a po file"
 msgstr "開啟 po 檔案"
 
-#: src/menus.c:279
+#: src/menus.c:280
 msgid "Save"
 msgstr "存檔"
 
-#: src/menus.c:280
+#: src/menus.c:281
 msgid "Save File"
 msgstr "儲存檔案"
 
-#: src/menus.c:283
+#: src/menus.c:284
 msgid "Save as"
 msgstr "另存新檔"
 
-#: src/menus.c:284
+#: src/menus.c:285
 msgid "Save file with a different name"
 msgstr "用另一名稱存檔"
 
-#: src/menus.c:288
+#: src/menus.c:289
 msgid "Compile"
 msgstr "編譯"
 
-#: src/menus.c:292
+#: src/menus.c:293
 msgid "Update"
 msgstr "更新"
 
-#: src/menus.c:296
+#: src/menus.c:297
 msgid "Header"
 msgstr "檔頭"
 
-#: src/menus.c:301
+#: src/menus.c:302
 msgid "Undo"
 msgstr "復原"
 
-#: src/menus.c:302
+#: src/menus.c:303
 msgid "Undo the last performed action"
 msgstr "復原最近一次所做的動作"
 
-#: src/menus.c:305
+#: src/menus.c:306
 msgid "Redo"
 msgstr "重做"
 
-#: src/menus.c:306
+#: src/menus.c:307
 msgid "Redo the last undone action"
 msgstr "重做最近一次所做的復原動作"
 
-#: src/menus.c:310
+#: src/menus.c:311
 msgid "Options"
 msgstr "選項"
 
-#: src/menus.c:311
+#: src/menus.c:312
 msgid "gtranslator options"
 msgstr "gtranslator 選項"
 
-#: src/menus.c:314
 #: src/menus.c:315
+#: src/menus.c:316
 msgid "Exit"
 msgstr "離開"
 
-#: src/menus.c:322
+#: src/menus.c:323
 msgid "First"
 msgstr "最前"
 
-#: src/menus.c:326
+#: src/menus.c:327
 msgid "Back"
 msgstr "上一個"
 
-#: src/menus.c:331
+#: src/menus.c:332
 msgid "Next"
 msgstr "下一個"
 
-#: src/menus.c:335
+#: src/menus.c:336
 msgid "Last"
 msgstr "最後"
 
-#: src/menus.c:340
+#: src/menus.c:341
 msgid "Missing"
 msgstr "待譯訊息"
 
-#: src/menus.c:348
+#: src/menus.c:349
 msgid "Go to the next fuzzy translation"
 msgstr "移至下一個模糊翻譯"
 
-#: src/menus.c:353
+#: src/menus.c:354
 msgid "Go to"
 msgstr "移至"
 
-#: src/menus.c:354
+#: src/menus.c:355
 msgid "Go to specified message number"
 msgstr "移至指定訊息編號"
 
-#: src/menus.c:358
+#: src/menus.c:359
 msgid "Find string in po file"
 msgstr "在 po 檔案內找尋字串"
 
-#: src/menus.c:362
+#: src/menus.c:363
 msgid "Replace string in po file"
 msgstr "取代相關字串"
 
@@ -1129,7 +1129,7 @@ msgstr "無法開啟 %s'd gettext 檔案 '%s'!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "無法開啟 zip'ed 壓縮的po 檔案 '%s'!"
 
-#: src/parse.c:100
+#: src/parse.c:101
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1138,7 +1138,7 @@ msgstr ""
 "找到新的 escaped 字元： \\%c\n"
 "新增至 parse.c，第 %i 行。"
 
-#: src/parse.c:246
+#: src/parse.c:247
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1149,7 +1149,7 @@ msgstr ""
 "在第 %d 行。\n"
 "請檢查後再試。"
 
-#: src/parse.c:282
+#: src/parse.c:283
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1158,17 +1158,17 @@ msgstr ""
 "檔案沒有內容：\n"
 "%s"
 
-#: src/parse.c:305
+#: src/parse.c:306
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "檔案 '%s' 不存在!"
 
-#: src/parse.c:381
+#: src/parse.c:396
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:538
+#: src/parse.c:553
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -1179,12 +1179,12 @@ msgstr ""
 "可是，這動格式的檔案應該是由其它程式所產生的。\n"
 "您的檔案應該儲存成 *.po 這動格式，正確名稱應該是 %s.po"
 
-#: src/parse.c:584
+#: src/parse.c:599
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "無法對檔案 '%s' 進行寫入動作!"
 
-#: src/parse.c:630
+#: src/parse.c:645
 #, c-format
 msgid ""
 "File %s\n"
@@ -1193,7 +1193,7 @@ msgstr ""
 "檔案 %s\n"
 "有 %d 個模糊翻譯"
 
-#: src/parse.c:666
+#: src/parse.c:681
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1204,11 +1204,11 @@ msgstr ""
 "%s\n"
 "是否仍要儲存？"
 
-#: src/parse.c:674
+#: src/parse.c:689
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- 沒有更改"
 
-#: src/parse.c:754
+#: src/parse.c:786
 #, c-format
 msgid ""
 "File %s\n"
@@ -1217,11 +1217,11 @@ msgstr ""
 "檔案 %s\n"
 "已改變。是否須要還原已儲存的檔案？"
 
-#: src/parse.c:798
+#: src/parse.c:830
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "抱歉，在本機內找不到 msgfmt 這個程式! "
 
-#: src/parse.c:827
+#: src/parse.c:859
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1345,62 +1345,67 @@ msgstr "使用特別字典"
 msgid "Dictionary to use:"
 msgstr "字典："
 
-#.
-#. * The sixth page with the special font/color stuff.
-#.
-#: src/prefs.c:222
+#: src/prefs.c:227
 msgid "Syntax color scheme to use:"
 msgstr "色彩方案："
 
-#: src/prefs.c:224
-msgid "gtranslator -- color scheme selection"
-msgstr "gtranslator -- 選取色彩方案"
+#: src/prefs.c:231
+msgid "Apply own fonts:"
+msgstr "套用自訂字型："
 
-#: src/prefs.c:230
-msgid "Apply special font/colors"
-msgstr "使用特別的字型 / 顏色"
+#: src/prefs.c:235
+msgid "Original text font:"
+msgstr "原文字型："
 
-#: src/prefs.c:233
-msgid "Font:"
-msgstr "字型："
+#: src/prefs.c:235
+msgid "gtranslator -- font selection/msgid font"
+msgstr "gtranslator -- 字型選擇/msgid 字型"
 
-#: src/prefs.c:234
+#: src/prefs.c:239
+msgid "Translation font:"
+msgstr "翻譯字型："
+
+#: src/prefs.c:239
+msgid "gtranslator -- font selection/msgstr font"
+msgstr "gtranslator -- 字型選擇/msgstr 字型"
+
+#: src/prefs.c:243
+msgid "Apply own colors:"
+msgstr "套用自訂色彩："
+
+#: src/prefs.c:247
 msgid "Foreground color:"
 msgstr "前景顏色："
 
-#: src/prefs.c:235
-msgid "Background color:"
-msgstr "背景顏色："
-
-#: src/prefs.c:238
-msgid "gtranslator -- font selection"
-msgstr "gtranslator -- 選取字型"
-
-#: src/prefs.c:251
+#: src/prefs.c:247
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- 前景顏色"
 
-#: src/prefs.c:254
+#: src/prefs.c:251
+msgid "Background color:"
+msgstr "背景顏色："
+
+#: src/prefs.c:251
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- 背景顏色"
 
-#: src/prefs.c:285
+#: src/prefs.c:258
 msgid "Save the po file automatically after a period of time"
 msgstr "在一定時間後自動儲存 po 檔案"
 
-#: src/prefs.c:289
+#: src/prefs.c:262
 msgid "Append a special suffix to the automatically saved files"
 msgstr "增加前置字於檔案名稱"
 
-#: src/prefs.c:293
+#: src/prefs.c:266
 msgid "Autosave suffix:"
 msgstr "前置字："
 
-#: src/prefs.c:297
+#: src/prefs.c:270
 msgid "Autosave timeout in minutes:"
 msgstr "列為逾時的時閒 (分)："
 
-#: src/prefs.c:460
+#: src/prefs.c:444
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -1434,27 +1439,27 @@ msgstr "沒有做成任何取代動作!"
 msgid "Session restored successfully."
 msgstr "回復成功。"
 
-#: src/sidebar.c:75
+#: src/sidebar.c:80
 msgid "Views"
 msgstr "檢視"
 
-#: src/sidebar.c:98
+#: src/sidebar.c:103
 msgid "Message"
 msgstr "訊息"
 
-#: src/sidebar.c:102
+#: src/sidebar.c:107
 msgid "Comment"
 msgstr "備註"
 
-#: src/sidebar.c:106
+#: src/sidebar.c:111
 msgid "Number"
 msgstr "編號"
 
-#: src/sidebar.c:110
+#: src/sidebar.c:115
 msgid "Format"
 msgstr "格式"
 
-#: src/sidebar.c:114
+#: src/sidebar.c:119
 msgid "Hotkey"
 msgstr "熱鍵"
 
@@ -1468,14 +1473,15 @@ msgstr "熱鍵"
 msgid "Uncatched signal %i!"
 msgstr "沒有捕捉到的信號 %i!"
 
-#: src/stylistics.c:223
+#: src/stylistics.c:237
 msgid "No font set! Using default font"
 msgstr "沒有設定字型! 將會使用預設字型"
 
 #.
-#. * Use gtranslator's font in this case.
+#. * Use gtranslator's font in this case -- should be a fallback font
+#. *  for your language.
 #.
-#: src/stylistics.c:227
+#: src/stylistics.c:243
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
@@ -1489,10 +1495,10 @@ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 #. * to whatever you think will be better
 #.
 #: src/syntax.c:87
-#: src/utils_gui.c:58
 #: src/utils_gui.c:59
-#: src/views.c:286
-#: src/views.c:356
+#: src/utils_gui.c:60
+#: src/views.c:289
+#: src/views.c:359
 msgid "§"
 msgstr "§"
 
@@ -1512,12 +1518,12 @@ msgstr "更新成功。"
 msgid "An error occured while updating the po file."
 msgstr "當更新 po 檔案時發生錯誤。"
 
-#: src/utils.c:117
+#: src/utils.c:119
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "無法建立目錄 '%s'!"
 
-#: src/utils_gui.c:112
+#: src/utils_gui.c:113
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "無法解讀視窗大小及位置的資料 \"%s\"!"
@@ -1526,12 +1532,12 @@ msgstr "無法解讀視窗大小及位置的資料 \"%s\"!"
 #. * Create an error box and prevent further reading
 #. *  of the file.
 #.
-#: src/utils_gui.c:254
+#: src/utils_gui.c:323
 #, c-format
 msgid "You don't have read permissions on file `%s'"
 msgstr "您沒有權限讀取檔案 '%s'"
 
-#: src/utils_gui.c:272
+#: src/utils_gui.c:341
 #, c-format
 msgid ""
 "You don't have write permissions on file `%s'.\n"
@@ -1542,6 +1548,11 @@ msgstr ""
 "請另存檔案至您有\n"
 "存取權限的目錄。"
 
+#: src/utils_gui.c:383
+#, c-format
+msgid "The file `%s' is already open in another instance of gtranslator!"
+msgstr "檔案 `%s' 已經在另一個 gtranslator 行程內開啟！"
+
 #.
 #. * Translators: The first format stands for a program_type and is something
 #. *  like "uncompression", "compression" or something similar.
@@ -1551,7 +1562,7 @@ msgstr ""
 #. *               ^^^^^^^^^^^^^          ^^^^^^
 #. *               First %s               Second %s
 #.
-#: src/utils_gui.c:315
+#: src/utils_gui.c:423
 #, c-format
 msgid "The necessary %s program `%s' is missing!"
 msgstr "找不到必須的 %s 程式 '%s'!"
@@ -1590,23 +1601,23 @@ msgstr "這個主機 '%s' 沒有地址!"
 msgid "Transfer interrupted!"
 msgstr "傳送被中斷!"
 
-#: src/views.c:140
+#: src/views.c:143
 msgid "No comments available for this message."
 msgstr "這段訊息沒有備註。"
 
-#: src/views.c:246
+#: src/views.c:249
 msgid "No numbers found."
 msgstr "找不到編號。"
 
-#: src/views.c:278
+#: src/views.c:281
 msgid " "
 msgstr " "
 
-#: src/views.c:302
+#: src/views.c:305
 msgid "No C formats present."
 msgstr "沒有 C formats 存在。"
 
-#: src/views.c:342
+#: src/views.c:345
 msgid "No hotkeys defined in message."
 msgstr "在訊息內沒有定義熱鍵 HotKeys。"
 
@@ -1682,5 +1693,4 @@ msgstr "開啟 po 檔案"
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:4
 msgid "_File"
 msgstr "檔案 (_F)"
-
 
