@@ -102,12 +102,10 @@ static struct poptOption gtranslator_options[] = {
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
 		0, N_("HTML file to write to"), N_("HTMLFILE")
 	},
-	/* FIXME: Enable when it works again...
 	{
 		"nosyntax", 'y', POPT_ARG_NONE, &nosyntax,
-		0, N_("Don't highlight syntax"), NULL 
+		0, N_("Don't highlight syntax - FIXME: We're always non-syntaxed currently! Sorry..."), NULL 
 	},
-	*/
 	POPT_AUTOHELP {NULL}
 };
 

@@ -258,7 +258,13 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 				 */
 				new_translator->language->name=g_strdup(languages[i].name);
 				new_translator->language->locale=g_strdup(languages[i].locale);
-				new_translator->language->encoding=g_strdup(languages[i].encoding);
+
+				/*
+				 * Here we do now assign UTF-8 as the default
+				 *  encoding for the language of the new translator.
+				 * new_translator->language->encoding=g_strdup(languages[i].encoding);
+				 */
+				new_translator->language->encoding=g_strdup("UTF-8");
 				new_translator->language->bits=g_strdup(languages[i].bits);
 				
 				new_translator->language->group_email=g_strdup(languages[i].group_email);
