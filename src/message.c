@@ -27,9 +27,6 @@
 #include "actions.h"
 #include "comment.h"
 #include "dialogs.h"
-#ifdef NOT_PORTED
-# include "gtkspell.h"
-#endif
 #include "gui.h"
 #include "learn.h"
 #include "menus.h"
@@ -48,12 +45,14 @@
 #include <string.h>
 #include <regex.h>
 #include <gtk/gtk.h>
-
+#include <gtkspell/gtkspell.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-util.h>
 
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
+
+GtkSpell *gtrans_spell = NULL;
 
 /*
  * The callback handling the editing of the plural forms and the correcponding tree handle.
@@ -205,9 +204,6 @@ static void plural_forms_edited(GtkCellRendererText *crtext, gchar *path, gchar 
  */
 void gtranslator_message_show(GtrMsg *msg)
 {
-#ifdef NOT_PORTED
-	gchar *ispell_command[5];
-#endif
 
 	if(!file_opened)
 	{
@@ -255,7 +251,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		gtranslator_insert_text(text_box, msg->msgid);
 		gtranslator_insert_text(trans_box, msg->msgstr);
 	}
-#ifdef NOT_PORTED	
+
 	/*
 	 * Use instant spell checking via gtkspell only if the corresponding
 	 *  setting in the preferences is set.
@@ -265,36 +261,23 @@ void gtranslator_message_show(GtrMsg *msg)
 		/*
 		 * Start up gtkspell if not already done.
 		 */ 
-		if(!gtkspell_running())
-		{
-			ispell_command[0]="ispell";
-			ispell_command[1]="-a";
-			
-			/*
-			 * Should we use special dictionary settings?
-			 */ 
-			if(GtrPreferences.use_own_dict && GtrPreferences.dictionary)
-			{
-				ispell_command[2]="-d";
-				ispell_command[3]=g_strdup_printf("%s",
-					GtrPreferences.dictionary);
-				ispell_command[4]=NULL;
-			} else {
-				ispell_command[2]=NULL;
-			}
+		GError *error = NULL;
+		char *errortext = NULL;
 		
-			/*
-			 * Start the gtkspell process.
-			 */ 
-			gtkspell_start(NULL, ispell_command);
-		}
-
-		/*
-		 * Attach it to the translation box for instant spell checking.
-		 */ 
-		gtkspell_attach(GTK_TEXT(trans_box));
+		if (gtrans_spell == NULL && trans_box != NULL) {
+		    gtrans_spell = gtkspell_new_attach(trans_box, NULL, &error);
+		    if (gtrans_spell == NULL) {
+			g_print(_("gtkspell error: %s\n"), error->message);
+			errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);
+			g_error_free(error);
+		    }
+		} 		
+	} else {
+	    if (gtrans_spell != NULL) {
+		gtkspell_detach(gtrans_spell);
+		gtrans_spell = NULL;
+	    }
 	}
-#endif //NOT_PORTED
 
 	gtk_check_menu_item_set_active(
 		GTK_CHECK_MENU_ITEM(the_edit_menu[19].widget),
@@ -531,7 +514,7 @@ void gtranslator_message_go_to(GList * to_go)
 	GtkTextMark *mark = NULL;
  
 	g_return_if_fail (to_go!=NULL);
-
+	
 	gtranslator_message_update();
 	
 	if (pos == 0)

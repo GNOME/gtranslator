@@ -33,9 +33,6 @@
 #include "actions.h"
 #include "comment.h"
 #include "dialogs.h"
-#ifdef NOT_PORTED
-# include "gtkspell.h"
-#endif
 #include "gui.h"
 #include "history.h"
 #include "message.h"
@@ -57,6 +54,7 @@
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtklabel.h>
+#include <gtkspell/gtkspell.h>
 
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app-util.h>

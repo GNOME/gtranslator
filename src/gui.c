@@ -32,9 +32,6 @@
 #include "dialogs.h"
 #include "dnd.h"
 #include "find.h"
-#ifdef NOT_PORTED
-# include "gtkspell.h"
-#endif
 #include "gui.h"
 #include "header_stuff.h"
 #include "history.h"
@@ -68,6 +65,7 @@
 #include <libgnomeui/gnome-popup-menu.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
+#include <gtkspell/gtkspell.h>
 
 /*
  * Global external variables
