@@ -116,7 +116,7 @@ void gtranslator_update_highlighted(
 		gpointer userdata )
 {
 	GString *newdata, *olddata;
-	gint i;
+	gint i,j;
 	guint point;
 	gchar type;
 
@@ -130,25 +130,31 @@ void gtranslator_update_highlighted(
 	/* Parse highlighting */
 	newdata = gtranslator_parse_syntax(GTK_EDITABLE(textwidget));
 	/* Update highlighting */
-	for(i=0; i<newdata->len; i++)
+	for(i=0; i<newdata->len;)
 	{
 		if((type = *(newdata->str + i)) != 
 			*(olddata->str + i))
 		{
 			static gchar
 				*c;
-			gtk_text_set_point(GTK_TEXT(textwidget), i);
+			for( j=0; newdata->str[i] == newdata->str[i+j]; j++ )
+				if( newdata->len <= (i+j) )
+					break;	
 			c = gtk_editable_get_chars(
-				GTK_EDITABLE(textwidget), i, i+1);
-			gtk_text_forward_delete(GTK_TEXT(textwidget), 1);
+				GTK_EDITABLE(textwidget), i, i+j);
+			gtk_text_set_point(GTK_TEXT(textwidget), i);
+			gtk_text_forward_delete(GTK_TEXT(textwidget), j);
 			gtk_text_insert(
 				GTK_TEXT(textwidget),
 				NULL,
 				gtranslator_get_color_from_type((gint)type),
 				gtranslator_get_color_from_type(COLOR_TEXT_BG),
-				c, 1);
+				c, j);
 			g_free(c);
+			i += j;
 		}
+		else
+			i++;
 	}
 	/* Free olddata and register newdata */
 	gtk_object_set_data_full(
