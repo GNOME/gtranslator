@@ -26,6 +26,10 @@
 #include "syntax.h"
 #include "views.h"
 
+#include <gal/widgets/e-unicode.h>
+
+#define GetLocalString(x) (e_utf8_from_locale_string(_(x)))
+
 /*
  * The internal icon callback method.
  */ 
@@ -66,7 +70,10 @@ GtkWidget *gtranslator_sidebar_new()
 	 * Our views sidebar.
 	 */  
 	e_shortcut_model_add_group(E_SHORTCUT_BAR(sidebar)->model,
-		-1, _("Views"));
+		-1, GetLocalString("Views"));
+
+	e_shortcut_bar_set_view_type(E_SHORTCUT_BAR(sidebar), 0, 
+		E_ICON_BAR_SMALL_ICONS);
 
 	gtk_signal_connect(GTK_OBJECT(sidebar), "item_selected",
 		GTK_SIGNAL_FUNC(select_icon), NULL);	
@@ -86,19 +93,23 @@ void gtranslator_sidebar_activate_views()
 	 */ 
 	e_shortcut_model_add_item(model, 0, -1, 
 		"message:",
-		"Message");
+		GetLocalString("Message"));
 
 	e_shortcut_model_add_item(model, 0, -1,
 		"comment:",
-		"Comment");
+		GetLocalString("Comment"));
 	
 	e_shortcut_model_add_item(model, 0, -1,
 		"number:",
-		"Number");
+		GetLocalString("Number"));
 
 	e_shortcut_model_add_item(model, 0, -1,
 		"format:",
-		"Format");
+		GetLocalString("Format"));
+
+	e_shortcut_model_add_item(model, 0, -1,
+		"hotkey:",
+		GetLocalString("Hotkey"));
 }
 
 /*
@@ -109,6 +120,7 @@ void gtranslator_sidebar_clear_views()
 	/*
 	 * Remove the view icons/items from the sidebar model.
 	 */
+	e_shortcut_model_remove_item(model, 0, 4);
 	e_shortcut_model_remove_item(model, 0, 3);
 	e_shortcut_model_remove_item(model, 0, 2);
 	e_shortcut_model_remove_item(model, 0, 1);
@@ -156,6 +168,13 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				gtranslator_views_set(GTR_C_FORMAT_VIEW);
 					break;
 				
+			case 5:
+				/*
+				 * Show the hotkeys of the message.
+				 */
+				gtranslator_views_set(GTR_HOTKEY_VIEW);
+					break;
+					
 			default:
 				break;
 		}
@@ -196,9 +215,17 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 				break;
 		
 		/*
-		 * Numer URI:
+		 * Number URI:
 		 */
 		case 'n':
+			pixmap_filename=gnome_pixmap_file(
+				"mc/application-x-gmo.png");
+				break;
+
+		/*
+		 * Hotkey URI:
+		 */
+		case 'h':
 			pixmap_filename=gnome_pixmap_file(
 				"mc/application-x-gmo.png");
 				break;
@@ -207,6 +234,12 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 		 * The comment: URI case:
 		 */
 		case 'c':
+			pixmap_filename=gnome_pixmap_file("gtranslator.png");
+				break;
+
+		/*
+		 * Everything else.
+		 */
 		default:
 			pixmap_filename=gnome_pixmap_file("gtranslator.png");
 				break;

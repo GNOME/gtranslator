@@ -40,6 +40,7 @@ static GtrView current_view=GTR_MESSAGE_VIEW;
 void show_comment(void);
 void show_c_format(void);
 void show_number(void);
+void show_hotkey(void);
 
 /*
  * Helper functions for the different views -- extract the content from the
@@ -47,6 +48,13 @@ void show_number(void);
  */
 void show_up_figures(GtkWidget *output_widget, const gchar *string);
 void show_up_formats(GtkWidget *output_widget, const gchar *string);
+void show_up_hotkeys(GtkWidget *output_widget, const gchar *string);
+
+/*
+ * Generally used functions for instance.
+ */
+void insert_space(GString **string);
+void setup_text(GtkWidget *widget, const gchar *string, const gchar *errstring);
 
 /*
  * Set up the given view for the current message.
@@ -73,6 +81,11 @@ gboolean gtranslator_views_set(GtrView view)
 	 */
 	gtranslator_views_prepare_for_navigation();
 
+	/*
+	 * Disable the save and undo actions.
+	 */
+	disable_actions(ACT_SAVE, ACT_UNDO);
+
 	switch(view)
 	{
 		case GTR_C_FORMAT_VIEW:
@@ -85,6 +98,10 @@ gboolean gtranslator_views_set(GtrView view)
 
 		case GTR_NUMBER_VIEW:
 			show_number();
+				break;
+
+		case GTR_HOTKEY_VIEW:
+			show_hotkey();
 				break;
 			
 		case GTR_MESSAGE_VIEW:
@@ -109,16 +126,8 @@ void show_comment()
 	current_view=GTR_COMMENT_VIEW;
 	
 	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
-	
-	if(comment)
-	{
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL, comment, -1);
-	}
-	else
-	{
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-			_("No comment available for this message."), -1);
-	}
+
+	setup_text(text1, comment, _("No comments available for this message."));
 }
 
 /*
@@ -149,12 +158,6 @@ void show_number()
 	 */
 	show_up_figures(text1, msg->msgid);
 	show_up_figures(trans_box, msg->msgstr);
-
-	/*
-	 * Disable saving as the figures view does also make changes
-	 *  which shouldn't be saved.
-	 */
-	disable_actions(ACT_SAVE);
 }
 
 /*
@@ -182,12 +185,36 @@ void show_c_format()
 	 */
 	show_up_formats(text1, msg->msgid);
 	show_up_formats(trans_box, msg->msgstr);
+}
+
+/*
+ * Show the hotkeys of the current message.
+ */
+void show_hotkey()
+{
+	GtrMsg *msg=GTR_MSG(po->current->data);
+
+	g_return_if_fail(msg!=NULL);
 
 	/*
-	 * Disable the current save action as the C format function applies 
-	 *  changes which shouldn't be saved.
+	 * Set the data for our internal use.
 	 */
-	disable_actions(ACT_SAVE);
+	current_view=GTR_HOTKEY_VIEW;
+	clean_text_boxes();
+
+	/*
+	 * Non-editability.
+	 */
+	if(previous_view==GTR_HOTKEY_VIEW)
+	{
+		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
+	}
+
+	/*
+	 * Handle both msgid and msgstr for the hotkeys.
+	 */
+	show_up_hotkeys(text1, msg->msgid);
+	show_up_hotkeys(trans_box, msg->msgstr);
 }
 
 /*
@@ -209,7 +236,7 @@ void show_up_figures(GtkWidget *output_widget, const gchar *string)
 	}
 	else
 	{
-		gint c;
+		gint c, rc=0;
 
 		for(c=0; c < (strlen(string) - 1); ++c)
 		{
@@ -218,36 +245,19 @@ void show_up_figures(GtkWidget *output_widget, const gchar *string)
 			 */
 			if(isdigit(string[c]))
 			{
+				if(rc > 1)
+				{
+					insert_space(&figures);
+				}
+				
 				figures=g_string_append_c(figures, string[c]);
-			}
-			else if(((c-1) >= 0) && (isdigit(string[c-1])))
-			{
-				/*
-				 * If the last char was a number but the current one
-				 *  is not a number we'd insert a free space (or the
-				 *   special char) for better readability.
-				 */
-				if(wants.dot_char)
-				{
-					figures=g_string_append(figures, _("·"));
-				}
-				else
-				{
-					figures=g_string_append(figures, " ");
-				}
+
+				rc++;
 			}
 		}
 	}
 
-	if(figures->len > 0)
-	{
-		gtranslator_syntax_insert_text(output_widget, figures->str);
-	}
-	else
-	{
-		gtk_text_insert(GTK_TEXT(output_widget), NULL, NULL, NULL,
-			_("No numbers found!"), -1);
-	}
+	setup_text(output_widget, figures->str, _("No numbers found."));
 
 	g_string_free(figures, FALSE);
 }
@@ -258,7 +268,7 @@ void show_up_figures(GtkWidget *output_widget, const gchar *string)
 void show_up_formats(GtkWidget *output_widget, const gchar *string)
 {
 	GString *formats=g_string_new("");
-	gint z;
+	gint z, rc=0;
 
 	g_return_if_fail(output_widget!=NULL);
 
@@ -271,6 +281,11 @@ void show_up_formats(GtkWidget *output_widget, const gchar *string)
 	{
 		if(string[z]=='%' && string[z+1])
 		{
+			if(rc > 1)
+			{
+				insert_space(&formats);
+			}
+			
 			formats=g_string_append_c(formats, string[z]);
 
 			/*
@@ -286,31 +301,89 @@ void show_up_formats(GtkWidget *output_widget, const gchar *string)
 				formats=g_string_append_c(formats, string[z+1]);
 			}
 
-			/*
-			 * Insert the special/dot char after a format block.
-			 */
-			if(wants.dot_char)
-			{
-				formats=g_string_append(formats, _("·"));
-			}
-			else
-			{
-				formats=g_string_append(formats, " ");
-			}
+			rc++;
 		}
 	}
 
-	if(formats->len > 0)
+	setup_text(output_widget, formats->str, _("No C formats present."));
+
+	g_string_free(formats, FALSE);
+}
+
+/*
+ * Helper function for the hotkeys view.
+ */
+void show_up_hotkeys(GtkWidget *output_widget, const gchar *string)
+{
+	GString *hotkeys=g_string_new("");
+	gint z, rc=0;
+
+	g_return_if_fail(output_widget!=NULL);
+
+	if(!string)
 	{
-		gtranslator_syntax_insert_text(output_widget, formats->str);
+		return;
+	}
+
+	for(z=0; z < (strlen(string) - 1); ++z)
+	{
+		/*
+		 * Hotkeys are out of _ + character, so recognize it here.
+		 */
+		if(string[z]=='_' && string[z+1] && isalpha(string[z+1]))
+		{
+			if(rc > 1)
+			{
+				insert_space(&hotkeys);
+			}
+			
+			hotkeys=g_string_append_c(hotkeys, string[z]);
+			hotkeys=g_string_append_c(hotkeys, string[z+1]);
+
+			rc++;
+		}
+		
+	}
+
+	setup_text(output_widget, hotkeys->str, _("No hotkeys defined in message."));
+	
+	g_string_free(hotkeys, FALSE);
+}
+
+/*
+ * Inserts a space or a dot/special char.
+ */
+void insert_space(GString **string)
+{
+	g_return_if_fail(*string!=NULL);
+
+	if(wants.dot_char)
+	{
+		*string=g_string_append(*string, _("·"));
 	}
 	else
 	{
-		gtk_text_insert(GTK_TEXT(output_widget), NULL, NULL, NULL,
-			_("No C formats present!"), -1);
+		*string=g_string_append(*string, " ");
 	}
+}
+
+/*
+ * Setup the text for the box or print out the to-use error string.
+ */
+void setup_text(GtkWidget *widget, const gchar *string, const gchar *errstring)
+{
+	g_return_if_fail(widget!=NULL);
+	g_return_if_fail(errstring!=NULL);
 	
-	g_string_free(formats, FALSE);
+	if(string && (strlen(string) >= 1))
+	{
+		gtranslator_syntax_insert_text(widget, string);
+	}
+	else
+	{
+		gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL,
+			errstring, -1);
+	}
 }
 
 /*

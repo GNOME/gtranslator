@@ -1,10 +1,29 @@
 2001-03-21  Fatih Demir <kabalak@gtranslator.org>
 
+	* sidebar.c: Get the localized names for the icon entries and 
+		the sidebar title, also perform a UTF-8'ification of the
+		 localized title/entries so that this problem should be
+		  solved now.
+
+	* sidebar.c & gui.c: Switched over to small sidebar icons and
+		enlarged the default pane position to 85.
+
+	* sidebar.c: Added hotkey view icon, callbacks and integrated
+		it into the "framework"; the "new" icons should be now
+		 easily integrable into the switch for the internally
+		  used "URI" types "comment:", "hotkey:" etc.
+
+	* gui.c: Added hotkey view to the views menu and to the
+		"switch_view" function, added ACT_VIEW_HOTKEY enum value
+		  and added it to the standard switches for the menus.
+
 	* views.h: Added an explanatory comment.
 
 	* views.c: Included <ctype.h> and reworked the number and
 		C format views to work; use new helper functions for
-		 the named view types.
+		 the named view types and easify work with the new
+		  "insert_space" and "setup_text" functions -- also
+		    added hotkey view to our circles.
 
 2001-03-20  Fatih Demir <kabalak@gtranslator.org>
 
@@ -76,7 +95,7 @@
 
 	* syntax.c: Added a new and quite useful "back_match" function
 		and corresponding macro to make the keyword and URL matching
-		 readable -- it's now quite easy to do and working; also 
+		 readable -- it's now quite easy to do and working; also
 		  removed the "eq" and "beq" macros.
 
 	* header_stuff.c, prefs.c: Messages politure.
@@ -91,7 +110,7 @@
 	
 2001-03-15  Pablo Saratxaga <pablo@mandrakesoft.com>
 
-	* header-stuff.c, prefs.c: changed " :" to ":" a English 
+	* header-stuff.c, prefs.c: changed " :" to ":" a English
 	  doesn't use a space before the colon
 	* gui.c: added a comment to explain the meaning of the middle
 	  dot.
@@ -102,7 +121,7 @@
 
 	* replace.c: More output -- still not written yet.
 
-	* syntax.c: Also highlight the special character '·' (not 
+	* syntax.c: Also highlight the special character '·' (not
 		possible with the gettexted translations as it seems for
 		 now to me).
 
@@ -134,12 +153,12 @@
 		corresponding argument to the "gtranslator_replace_new"
 		 function; made some more parts for the replace function.
 
-	* dialogs.c: Only allow general full replacement in all messages 
-		-- no single replace available for now; also removed the 
-		 possibility to change stuff in the comments. Replace should 
+	* dialogs.c: Only allow general full replacement in all messages
+		-- no single replace available for now; also removed the
+		 possibility to change stuff in the comments. Replace should
 		  only work on msgid and msgstr parts.
 
-		Also removed the option to replace case (in-)sensitive; 
+		Also removed the option to replace case (in-)sensitive;
 		 replaces should always be case sensitive.
 
 	* prefs.h: Do not have a "noreplace" field.
@@ -186,7 +205,7 @@
 
 	* query.c: Free up the used gchar's in "gtranslator_query_simple" --
 		also update the GUI when a string was inserted -- activate Save
-		 menu entry/toolbar item and setup the "file_changed" flag for 
+		 menu entry/toolbar item and setup the "file_changed" flag for
 		  the po file; also corrected setlocale calls to not mix up
 		   the language environment of the user.
 
@@ -204,7 +223,7 @@
 
 	* parse.c/.h: Moved the old "get_translated_count" function's own
 		declaeation to the header and renamed it to for cleanse to
-		 "gtranslator_get_translated_count"; also renamed the 
+		 "gtranslator_get_translated_count"; also renamed the
 		  "update_msg" function to "gtranslator_update_msg"; maybe
 		    a complete namespace cleaning action should be really
 		     performed soon.
@@ -212,7 +231,7 @@
 	* query.c/.h: Added a new "gtranslator_new_query_result" function
 		which does what the function's name is like .-) -- use this
 		 new function and also use "g_new0" instead of simple "g_new".
-		
+	
 		Call up and renew the translation count after the internal auto
 		 accomplishment and update the progress bar/status message
 		  according to the new status bit.
@@ -221,7 +240,7 @@
 		up for view/save and return an empty default comment to make the
 		 po file syntactically right -- avoids another nasty crash.
 
-	* prefs_init.c: Commentix.	 
+	* prefs_init.c: Commentix.
 
 2001-03-06  Fatih Demir	<kabalak@gtranslator.org>
 
@@ -232,14 +251,14 @@
 	* query.c, dialogs.c & syntax.c: Do not free up the segments of our
 		GStrings.
 
-	* dialogs.c: Call the "text_has_got_changed" function if we could 
+	* dialogs.c: Call the "text_has_got_changed" function if we could
 		insert a text into the translation box and do also call only
 		 the new wrapper function "gtranslator_query_accomplish".
 
 	* query.c/.h: Renamed "gtranslator_query_all" to be more logical:
 		"gtranslator_query_gtr_msg" is the new function name and
-		  implemented a toplevel wrapper function named 
-		   "gtranslator_query_accomplish" which performs the 
+		  implemented a toplevel wrapper function named
+		   "gtranslator_query_accomplish" which performs the
 		     complete accomplishment actions for every empty msgstr.
 
 	* gui.c/.h: Move the "text_has_got_changed" declaration to the header
@@ -303,14 +322,14 @@
 		  call reasonable and working (only rescue LC_MESSAGES and
 		   reset it).
 
-	* dialogs.c/.h: Added a query dialog which does even work now and 
+	* dialogs.c/.h: Added a query dialog which does even work now and
 		free the variables a little bit up.
 
-	* query.c: Corrected stupid error, do use strcmp for sorting the 
+	* query.c: Corrected stupid error, do use strcmp for sorting the
 		domains list and don't simply check it via !=; use strcmp
 		 for this -- why would've strcmp be invented in C if it would
 		  be as easy as in C++ via str!=query->message...
-		
+	
 		Rescue and reset up the current locale settings after the
 		 query, added free'ing functions for the structures aka.
 		  "gtranslator_free_query(_result)".
@@ -386,7 +405,7 @@
 		 via strcmp before returning it - hmm, leak hunting: changed
 		  much stuff to NOT cause memleaks.
 
-	* prefs_init.c: Arg, blue is nicer then navy for hotkeys, reverted my 
+	* prefs_init.c: Arg, blue is nicer then navy for hotkeys, reverted my
 		change from yesterday.
 
 	* main.c: If a color scheme/theme is given on the comman line take it
@@ -394,7 +413,7 @@
 
 	* stylistics.c: Use the new color scheme based color selection.
 
-	* color-schemes.c/.h: Implemented the new 
+	* color-schemes.c/.h: Implemented the new
 		"gtranslator_color_scheme_load_from_prefs" function which
 		  restores the stored GtrColorScheme from the preferences
 		   "back" as the current theme; also allow spaces around the
@@ -412,7 +431,7 @@
 		which do free the used structures and implemented all
 		 functions for now.
 
-	* Makefile.am: Define SCHEMESDIR on compiletime to be 
+	* Makefile.am: Define SCHEMESDIR on compiletime to be
 		$(datadir)/gtranslator/colorschemes.
 
 	* stylistics.c/.h: Extended the copyright header line and
@@ -423,7 +442,7 @@
 		color schemes -- also check the given file if it's a gtranslator
 		 color scheme at all.
 
-	* prefs.h & prefs_init.c: Set up default syntax colors via the new 
+	* prefs.h & prefs_init.c: Set up default syntax colors via the new
 		prefs_init_syntax_colors function and also declare this
 		 new function in the header.
 
@@ -516,7 +535,7 @@
 		tree as it isn't used anymore/will not be used in the future.
 
 	* stylistics.h: Added the new types which are also used as "classes"
-		in the syntax highlighting code to easify the later 
+		in the syntax highlighting code to easify the later
 		 customization of the syntax highlight colors and removed the
 		  COLOR_VALUE_END_CHAR enum item as it'll never be used
 		   (gtranslator automatically makes the end chars correctly).
@@ -529,7 +548,7 @@
 	* gui.c: Changed the keybindings a bit; the header edit dialog is
 		 also available via a F8 now and the message stati are also
 		  toggleable via Alt+1/2/3 for Translated/Fuzzy/Stick.
-		  
+	
 		 Also removed an commented statement which would be useless
 		  if it would be used -- why leave it there...
 

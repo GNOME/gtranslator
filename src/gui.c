@@ -169,9 +169,12 @@ static GnomeUIInfo the_views_menu[] = {
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Numbers"),
 		N_("View numbers in the message"),
 		switch_view, (gpointer) 3, NULL),
-	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Format"), 
+	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Formats"), 
 		N_("View C formats of the message"),
 		switch_view, (gpointer) 4, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Hotkeys"),
+		N_("View hotkeys in the message"),
+		switch_view, (gpointer) 5, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -497,6 +500,7 @@ static void create_actions(void)
 	insert_action(ACT_VIEW_COMMENTS, the_views_menu[1], NONE);
 	insert_action(ACT_VIEW_NUMBER, the_views_menu[2], NONE);
 	insert_action(ACT_VIEW_C_FORMAT, the_views_menu[3], NONE);
+	insert_action(ACT_VIEW_HOTKEY, the_views_menu[4], NONE);
 	/*----------------------------------------------------------*/
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
@@ -533,7 +537,8 @@ void disable_actions_no_file(void)
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK, ACT_VIEW_MESSAGE, 
-			ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT);
+			ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT,
+			ACT_VIEW_HOTKEY);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
@@ -543,8 +548,8 @@ void enable_actions_just_opened(void)
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR, ACT_REPLACE,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
-			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, 
-			ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT);
+			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, 
+			ACT_VIEW_C_FORMAT, ACT_VIEW_HOTKEY);
 
 	disable_actions(ACT_SAVE, ACT_UNDO);
 	/*
@@ -586,7 +591,7 @@ void create_app1(void)
 	filebox=gtranslator_sidebar_new();
 	
 	e_paned_pack1(E_PANED(pane), filebox, TRUE, FALSE);
-	e_paned_set_position(E_PANED(pane), 80);
+	e_paned_set_position(E_PANED(pane), 85);
 
 	/*
 	 * Create the tool- and search-bar
@@ -1251,6 +1256,10 @@ static void switch_view(GtkWidget *widget, gpointer view)
 {
 	switch(GPOINTER_TO_INT(view))
 	{
+		case 5:
+			gtranslator_views_set(GTR_HOTKEY_VIEW);
+				break;
+		
 		case 4:
 			gtranslator_views_set(GTR_C_FORMAT_VIEW);
 				break;
