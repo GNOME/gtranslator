@@ -54,6 +54,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/undo-core.o \
 	$(srcbuild)/undo.o \
 	$(srcbuild)/update.o \
+	$(srcbuild)/utf8.o \
 	$(srcbuild)/utils.o \
 	$(srcbuild)/vfs-handle.o \
 	$(srcbuild)/views.o
