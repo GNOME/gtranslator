@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
-"POT-Creation-Date: 2002-05-01 23:46-0400\n"
-"PO-Revision-Date: 2002-04-14 19:260100\n"
+"POT-Creation-Date: 2002-05-27 12:42+0200\n"
+"PO-Revision-Date: 2002-05-27 18:25+0100\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: src/about.c:63
 msgid "Messages table:"
@@ -93,12 +93,12 @@ msgstr "<No Dado>"
 
 #: src/color-schemes.c:477
 msgid "_Settings/_Colorschemes/"
-msgstr ""
+msgstr "_Configuración/_Esquemas de color/"
 
 #: src/color-schemes.c:507
-#, fuzzy, c-format
+#, c-format
 msgid "Activate colorscheme %s"
-msgstr "Esquema de colores de sintaxis a usar:"
+msgstr "Esquema de colores activo %s"
 
 #: src/dialogs.c:97
 msgid "gtranslator -- open po file"
@@ -149,8 +149,7 @@ msgstr "gtranslator -- confirme borrado de todas las traducciones"
 
 #: src/dialogs.c:491
 msgid "Are you sure you want to remove ALL translations from this po file?"
-msgstr ""
-"¿Está seguro de que quiere borrar TODAS las traducciones de este archivo po?"
+msgstr "¿Está seguro de que quiere borrar TODAS las traducciones de este archivo po?"
 
 #: src/dialogs.c:594
 msgid "gtranslator -- go to"
@@ -253,7 +252,6 @@ msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "¡Protocolo URI no soportado (como \"ftp://\")!"
 
 #: src/dialogs.c:1001
-#, fuzzy
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -275,7 +273,8 @@ msgstr ""
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
 "ftp://anonymous@ftp.algunsitio.com/<ARCHIVO-PO-REMOTO>\n"
 "\n"
-"file:///<ARCHIVO-PO>"
+"file:///<ARCHIVO-PO> o\n"
+"http://www.DOMINIO.COM/ARCHIVO-PO"
 
 #: src/dialogs.c:1036
 #, c-format
@@ -299,23 +298,20 @@ msgstr "Recuperando `%s'..."
 #. * A half-baken dialog for the query functionality.
 #.
 #: src/dialogs.c:1106
-#, fuzzy
 msgid "Here you can query existing translations from your learn buffer."
-msgstr "Aquí puede consultar dominios gettext existentes para una traducción."
+msgstr "Aquí puede consultar las traducciones existentes en su búfer de aprendizaje."
 
 #: src/dialogs.c:1109
-#, fuzzy
 msgid "gtranslator -- query your personal learn buffer"
-msgstr "gtranslator -- exportar archivo po"
+msgstr "gtranslator -- consultar su búfer de aprendizaje personal"
 
 #: src/dialogs.c:1110 src/menus.c:357
 msgid "Query"
 msgstr "Consulta"
 
 #: src/dialogs.c:1110
-#, fuzzy
 msgid "Query message content"
-msgstr "Editar comentario de mensaje"
+msgstr "Consultar el contenido del mensaje"
 
 #: src/dialogs.c:1119
 msgid "Query string:"
@@ -326,17 +322,18 @@ msgid "No query string given!"
 msgstr "¡No hay cadena de consulta!"
 
 #: src/dialogs.c:1187
-#, fuzzy
 msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr "¡No se pudo encontrar ningún resultado para la consulta!"
+msgstr ""
+"No se pudo encontrar ningún resultado para la consulta en su búfer de "
+"aprendizaje."
 
 #: src/dialogs.c:1199
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
-"Encontrado \"%s\" como traducción para \"%s\" en el dominio \"%s\".\n"
+"Encontrado \"%s\" como traducción para \"%s\".\n"
 "¿Quieres insertarla en la traducción?"
 
 #.
@@ -348,14 +345,12 @@ msgid "Query's result translation is already there!"
 msgstr "¡El resultados de la consulta de traducción ya está allí!"
 
 #: src/dialogs.c:1287
-#, fuzzy
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
 msgstr ""
-"¿Debería gtranslator traducir automáticamente el archivo usando\n"
-"la información del dominio de consulta por defecto y el búfer\n"
-"personal de aprendizaje?"
+"¿Debería gtranslator traducir automáticamente el archivo usando información\n"
+"de su búfer de aprendizaje personal?"
 
 #: src/find.c:214
 msgid "Please enter a search string"
@@ -390,7 +385,7 @@ msgstr "%s [ no quedan difusos ]"
 
 #: src/gui.c:544
 msgid "Sticky (Message & translation are the same)"
-msgstr ""
+msgstr "Pegajoso (mensaje y traducción son lo mismo)"
 
 #: src/gui.c:555
 #, c-format
@@ -901,11 +896,10 @@ msgid "Aut_otranslate..."
 msgstr "Traducir aut_omáticamente..."
 
 #: src/menus.c:76
-#, fuzzy
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr ""
-"Traducir automáticamente el archivo con información del dominio de consulta "
-"por defecto/búfer de aprendizaje"
+"Traducir automáticamente el archivo con información de su búfer de "
+"aprendizaje"
 
 #: src/menus.c:83
 msgid "Remove all translations..."
@@ -971,11 +965,11 @@ msgstr "Editar comentario de mensaje"
 
 #: src/menus.c:168
 msgid "Copy _message -> translation"
-msgstr ""
+msgstr "Copiar _mensaje -> traducción"
 
 #: src/menus.c:169
 msgid "Copy the original message contents and paste them as translation"
-msgstr ""
+msgstr "Copia el contenido del mensaje original y lo pega como traducción"
 
 #: src/menus.c:179
 msgid "_First"
@@ -1050,9 +1044,8 @@ msgid "Toggle fuzzy status of a message"
 msgstr "Intercambiar estado de difuso de un mensaje"
 
 #: src/menus.c:261
-#, fuzzy
 msgid "_Colorschemes"
-msgstr "Directorio de esquemas de color:"
+msgstr "Esquemas de _color"
 
 #: src/menus.c:267
 msgid "gtranslator _website"
@@ -1164,6 +1157,8 @@ msgid ""
 "The translation for message `%s'\n"
 "contains syntactical errors!"
 msgstr ""
+"La traducción para el mensaje \"%s\"\n"
+"contiene errores sintácticos."
 
 #: data/etspecs/messages-table.etspec.h:5 src/messages-table.c:134
 msgid "Status"
@@ -1190,19 +1185,16 @@ msgid "Comment"
 msgstr "Comentario"
 
 #: src/messages-table.c:197
-#, fuzzy
 msgid "unknown"
-msgstr "Desconocido"
+msgstr "desconocido"
 
 #: src/messages-table.c:201
-#, fuzzy
 msgid "fuzzy"
-msgstr "_Difuso"
+msgstr "confuso"
 
 #: src/messages-table.c:205
-#, fuzzy
 msgid "translated"
-msgstr "No traducido"
+msgstr "traducido"
 
 #: src/open.c:142
 #, c-format
@@ -1388,11 +1380,11 @@ msgstr "Mantener mensajes obsoletos en los archivos po"
 
 #: src/prefs.c:190
 msgid "Highlight syntax of the translation messages"
-msgstr ""
+msgstr "Resaltar la sintaxis de los mensajes traducidos"
 
 #: src/prefs.c:195
 msgid "Check messages for syntactical correctness"
-msgstr ""
+msgstr "Verificar la correctitud sintáctica de los mensajes"
 
 #: src/prefs.c:202
 msgid "Use special character to indicate free space"
@@ -1408,8 +1400,7 @@ msgstr "Activar la funcionalidad de actualizar un archivo po desde gtranslator"
 
 #: src/prefs.c:211
 msgid "Enable the functionality to remove all translations from a po file"
-msgstr ""
-"Activar la funcionalidad de borrar todas las traducciones de un archivo po"
+msgstr "Activar la funcionalidad de borrar todas las traducciones de un archivo po"
 
 #: src/prefs.c:214
 msgid "Delete compiled files (e.g. \"project.gmo\")"
@@ -1421,8 +1412,7 @@ msgstr "Cargar todos los dorsales al inicio"
 
 #: src/prefs.c:220
 msgid "Save geometry on exit & restore it on startup"
-msgstr ""
-"Guardar la geometría de gtranslator al salir & restablecerla al iniciar"
+msgstr "Guardar la geometría de gtranslator al salir & restablecerla al iniciar"
 
 #: src/prefs.c:223
 msgid "Show instant comment view in the main pane"
@@ -1493,8 +1483,7 @@ msgstr "gtranslator -- color de fondo"
 #.
 #: src/prefs.c:293
 msgid "Automatically save po files at regular intervals (in minutes):"
-msgstr ""
-"Guardar los archivos po automáticamente a intervalos regulares (en minutos):"
+msgstr "Guardar los archivos po automáticamente a intervalos regulares (en minutos):"
 
 #: src/prefs.c:308
 msgid "Append a suffix to automatically saved files:"
@@ -1560,10 +1549,8 @@ msgstr ""
 "aprendizaje"
 
 #: src/prefs.c:371
-#, fuzzy
 msgid "Minimal required similarity percentage for fuzzy queries"
-msgstr ""
-"Porcentaje de similitud mínimo requerido al hacer la traducción automática"
+msgstr "Porcentaje de similitud mínimo requerido para consultas confusas"
 
 #: src/prefs.c:416
 msgid "Please enter your name!"
@@ -1597,12 +1584,12 @@ msgstr "¡No hubo cambios!"
 #. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
 #. *
 #. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot ('·') in the
+#. *  another than a 'Y' to avoid the usage of the mid dot ('') in the
 #. *   text displaying routines of gtranslator.
 #.
 #: src/runtime-config.c:81
 msgid "Y"
-msgstr ""
+msgstr "E"
 
 #.
 #. * Translators: this character is used if the middle dot
@@ -1610,7 +1597,7 @@ msgstr ""
 #.
 #: src/runtime-config.c:100 src/runtime-config.c:105
 msgid "^"
-msgstr ""
+msgstr "^"
 
 #: src/save.c:117
 #, c-format
@@ -1680,7 +1667,7 @@ msgstr "¡No se pudo crear el directorio `%s'!"
 #.
 #: src/utils.c:499 src/utils.c:503 src/utils.c:838
 msgid "iso-8859-1"
-msgstr ""
+msgstr "iso-8859-1"
 
 #: src/utils_gui.c:124
 #, c-format
@@ -1693,15 +1680,15 @@ msgid "You are not permitted to access file '%s'."
 msgstr "No tiene permisos para acceder al archivo '%s'."
 
 #: src/utils_gui.c:364
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
 "Please save a new copy of it to a place of your choice and get write\n"
 "permission for it."
 msgstr ""
-"No tiene permisos para escribir sobre el fichero '%s'.\n"
-"Por favor, guarde una copia nueva en un directorio donde\n"
-"tenga permisos de escritura."
+"No tiene permisos para escribir sobre el fichero \"%s\".\n"
+"Por favor, guarde una copia nueva en un directorio donde tenga permisos\n"
+"de escritura."
 
 #: src/utils_gui.c:434
 #, c-format
@@ -1716,6 +1703,15 @@ msgid ""
 "\n"
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
+"El archivo\n"
+"\n"
+"   %s\n"
+"\n"
+"ya está abierto en otra instancia de gtranslator.\n"
+"Cierre la otra instancia de gtranslator para que se gestione correctamente\n"
+"este archivo o vuelva a ganar acceso a este archivo.\n"
+"\n"
+"¿Debe ignorar gtranslator la apertura de este archivo?"
 
 #: src/utils_gui.c:479
 #, c-format
@@ -1839,3 +1835,4 @@ msgstr "Archivo po de gettext"
 
 #~ msgid "·"
 #~ msgstr "·"
+
