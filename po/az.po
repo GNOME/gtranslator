@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.35\n"
-"POT-Creation-Date: 2001-03-16 08:58+0100\n"
+"POT-Creation-Date: 2001-03-16 10:05+0100\n"
 "PO-Revision-Date: 2001-03-07 14:13+0100\n"
 "Last-Translator: Vasif Ismailoglu MD <Azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish \n"
@@ -118,7 +118,7 @@ msgid "English"
 msgstr "İngiliscə"
 
 # src/dialogs.c:289 src/gui.c:847
-#: src/dialogs.c:315 src/dialogs.c:412 src/gui.c:903
+#: src/dialogs.c:315 src/dialogs.c:412 src/gui.c:911
 msgid "Translated"
 msgstr "Tercümədə"
 
@@ -570,7 +570,7 @@ msgid "Missing"
 msgstr "Əksik"
 
 # src/gui.c:314 src/gui.c:834 src/gui.c:838
-#: src/gui.c:360 src/gui.c:890 src/gui.c:894
+#: src/gui.c:360 src/gui.c:898 src/gui.c:902
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -608,40 +608,47 @@ msgstr "Po faylında mətn axtar"
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:707 src/gui.c:708 src/gui.c:1120
+#. The "�" is the "middle dot" (00B7), it is
+#. * used by gtranslator as special char to make
+#. * blanks visible.
+#. * If your language uses that char for another
+#. * purpose or if you use another enocoding
+#. * than latin1, feel free to change it to
+#. * whatever you think will be better
+#: src/gui.c:714 src/gui.c:715 src/gui.c:1128
 msgid "�"
-msgstr ""
+msgstr "·"
 
 # src/gui.c:834
-#: src/gui.c:890
+#: src/gui.c:898
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ geriyə %i Fuzzy qaldı ]"
 
 # src/gui.c:838
-#: src/gui.c:894
+#: src/gui.c:902
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Fuzzy ismarıc qalmadı ]"
 
 # src/gui.c:845
-#: src/gui.c:901
+#: src/gui.c:909
 msgid "Stick"
 msgstr "Qalıcı"
 
 # src/gui.c:856
-#: src/gui.c:912
+#: src/gui.c:920
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [geriyə tərcümə edilməmiş %i ismarıc qaldı ]"
 
 # src/gui.c:856 src/gui.c:858
-#: src/gui.c:912 src/gui.c:914
+#: src/gui.c:920 src/gui.c:922
 msgid "Untranslated"
 msgstr "Tərcümə edilməmiş"
 
 # src/gui.c:858
-#: src/gui.c:914
+#: src/gui.c:922
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Tərcümə edilməmiş ismarıc qalmadı ]"
@@ -650,7 +657,7 @@ msgstr "%s [ Tərcümə edilməmiş ismarıc qalmadı ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:925
+#: src/gui.c:933
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "İsmarıc: %d / %d / Hal: %s"
@@ -672,7 +679,7 @@ msgstr "Tərcüməçi və Dil:"
 
 # src/header_stuff.c:313
 #: src/header_stuff.c:343
-msgid "Comments :"
+msgid "Comments:"
 msgstr "Şərhlər:"
 
 # src/header_stuff.c:317
@@ -687,12 +694,12 @@ msgstr "Lahiyə buraxılışı:"
 
 # src/header_stuff.c:323
 #: src/header_stuff.c:355
-msgid "pot file creation date :"
+msgid "pot file creation date:"
 msgstr "Pot faylının yaradılma tarixi:"
 
 # src/header_stuff.c:327
 #: src/header_stuff.c:359
-msgid "po file revision date :"
+msgid "po file revision date:"
 msgstr "Po faylının düzeltilme tarixi:"
 
 # src/header_stuff.c:336
@@ -702,32 +709,32 @@ msgstr "Geri qalanları şəxsi seçənəklərimlə bitir."
 
 # src/header_stuff.c:349
 #: src/header_stuff.c:381
-msgid "Translator's name :"
+msgid "Translator's name:"
 msgstr "Tərcüməçinin adı:"
 
 # src/header_stuff.c:352
 #: src/header_stuff.c:384
-msgid "Translator's e-mail :"
+msgid "Translator's e-mail:"
 msgstr "Tərcüməçinin ePoçt ünvanı:"
 
 # src/header_stuff.c:355 src/prefs.c:251
 #: src/header_stuff.c:387 src/prefs.c:267
-msgid "Language :"
+msgid "Language:"
 msgstr "Dil:"
 
 # src/header_stuff.c:360
 #: src/header_stuff.c:392
-msgid "Language group's e-mail :"
+msgid "Language group's e-mail:"
 msgstr "Dil qrupunun ePoçt ünvanı:"
 
 # src/header_stuff.c:364 src/prefs.c:264
 #: src/header_stuff.c:396 src/prefs.c:280
-msgid "Charset :"
+msgid "Charset:"
 msgstr "Yazı sinifi:"
 
 # src/header_stuff.c:368 src/prefs.c:268
 #: src/header_stuff.c:400 src/prefs.c:284
-msgid "Encoding :"
+msgid "Encoding:"
 msgstr "Kodlama:"
 
 # src/history.c:147
@@ -1275,12 +1282,12 @@ msgstr ""
 
 # src/prefs.c:239
 #: src/prefs.c:250
-msgid "Author's name :"
+msgid "Author's name:"
 msgstr "Müəllifin adı:"
 
 # src/prefs.c:242
 #: src/prefs.c:253
-msgid "Author's EMail :"
+msgid "Author's EMail:"
 msgstr "Müəllifin ePoçtu:"
 
 #: src/prefs.c:257
@@ -1289,12 +1296,12 @@ msgstr ""
 
 # src/prefs.c:255
 #: src/prefs.c:271
-msgid "Language code :"
+msgid "Language code:"
 msgstr "Dil kodu:"
 
 # src/prefs.c:260
 #: src/prefs.c:276
-msgid "Language group's EMail :"
+msgid "Language group's EMail:"
 msgstr "Dil qrupunun ePoçt ünvanı:"
 
 # src/prefs.c:276
