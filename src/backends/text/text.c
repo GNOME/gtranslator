@@ -31,6 +31,7 @@
 #include "../../nautilus-string.h"
 #include "../../parse.h"
 #include "../../prefs.h"
+#include "../../utils.h"
 
 /*
  * The prototypes:
@@ -59,34 +60,40 @@ void write_msg(GList *message, gpointer file)
  */
 gboolean backend_open(const gchar *filename)
 {
-	FILE *f;
-	gchar line[256];
-	gchar *str=NULL;
-	gchar *e;
-	GtrHeader *h;
+	FILE 		*f;
 	
-	h=gtranslator_header_create_from_prefs();
-	h->prj_name=g_strdup(filename);
-	h->prj_version="0.1";
+	gchar 	 	 line[256];
+	gchar 		*str;
+	gchar 		*e;
+	
+	GtrHeader 	*header;
 
+	/*
+	 * Wrong filenames are bad .-(
+	 */
+	g_return_val_if_fail(filename!=NULL, FALSE);
+
+	header=gtranslator_header_create_from_prefs();
+
+	header->prj_name=g_strdup(filename);
+	header->prj_version="1";
+
+	/*
+	 * Open the file via fopen and check the resulting FILE *.
+	 */
 	f=fopen(filename, "r");
+	g_return_val_if_fail(f!=NULL, FALSE);
 
-	if(!f)
-	{
-		/*
-		 * If we couldn't open up the text file return FALSE.
-		 */
-		return FALSE;
-	}
+	str=e=NULL;
 
 	while(fgets(line, sizeof(line), f))
 	{
 		/*
 		 * Every newline should separate a "message".
 		 */
-		g_strstrip(line);
+		g_strchomp(line);
 		
-		if(line[0]=='\n')
+		if(!line[0] || line[0]=='\n')
 		{
 			GtrMsg *msg=g_new0(GtrMsg, 1);
 
@@ -97,12 +104,13 @@ gboolean backend_open(const gchar *filename)
 			msg->msgstr="";
 			msg->comment=gtranslator_comment_new("");
 
-			g_free(str);
+			GTR_FREE(str);
 
 			/*
 			 * Set up our fake'sh messages list.
 			 */
-			po->messages=g_list_append(po->messages, msg);
+			po->messages=g_list_prepend(po->messages, msg);
+			po->messages=g_list_reverse(po->messages);
 		}
 		else
 		{
@@ -112,12 +120,11 @@ gboolean backend_open(const gchar *filename)
 			e=str;
 			str=g_strdup_printf("%s\n%s", e, line);
 
-			g_free(e);
+			GTR_FREE(e);
 		}
 	}
 
 	fclose(f);
-	
 	return TRUE;
 }
 
