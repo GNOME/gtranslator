@@ -1,5 +1,8 @@
 2001-01-03  Fatih Demir	<kabalak@gmx.net>
 
+	* ChangeLog: Applied an aspell spell check on
+		this file.
+
 	* recent-files.c: Corrected some small errors.
 
 	* vfs-handle.c/.h: Reworked the GnomeVFS routine
@@ -7,7 +10,7 @@
 	
 2001-01-01  Fatih Demir	<kabalak@gmx.net>
 
-	* recent-files.c: Corrected more stupidiness.
+	* recent-files.c: Corrected more stupidness.
 
 2000-12-31  Fatih Demir	<kabalak@gmx.net>
 
@@ -31,7 +34,7 @@
 
 2000-12-30  Fatih Demir	<kabalak@gmx.net>
 
-	* main.c: Include "../config.h" and reenable the gettext-binding
+	* main.c: Include "../config.h" and re enable the gettext-binding
 		functions' call.
 
 2000-12-30  Gediminas Paulauskas <menesis@delfi.lt>
@@ -78,10 +81,10 @@
 
 	* parse-db.c: create db->header and not segfault. Use g_strdup_printf
 	and not fixed size buffer. First assign value and then print it, not
-	again egt it from xml document. Do not copy list (do we need memory
+	again egt it from XML document. Do not copy list (do we need memory
 	leaks?)
 	* preferences.c: interchange places of includes, so that
-	"namespace cleanup" is not needed. Simplify private_path printing and
+	"name space cleanup" is not needed. Simplify private_path printing and
 	free it after use. Replaced all translatable error stuff with simple
 	g_return_if_fail(). Why be so verbose? In gtranslator_config_get_*
 	return values after #endif, so that we can do something (free). Removed
@@ -137,7 +140,7 @@
 2000-10-31  Fatih Demir <kabalak@gmx.net>
 
 	* team-database.h: Removed the macros as they'ren't
-		very usefull as it seemed at the first
+		very useful as it seemed at the first
 		 glance.
 
 	* team-handle.c/h: The parsing routines for an
@@ -153,7 +156,7 @@
 		    GtrMsg entry matching this query in a new
 		     GList.
 		 Also added a lookup function which _could_ be
-		  usefull for searching matchinf entries to a
+		  useful for searching matching entries to a
 		   msgid in the database.
 
 	* translation-database.h: Added two monster macros for
@@ -171,7 +174,7 @@
 		   unfortunately the remove function doesn't handle
 		    the the possible "msgstrlist" of the GtrMsgs'.
 		 Also allocate the used GtranslatorDatabase freshly
-		  via g_new0 to avoid an unitialized error.
+		  via g_new0 to avoid an uninitialized error.
 
 2000-10-30  Fatih Demir	<kabalak@gmx.net>
 
@@ -185,7 +188,7 @@
 	* parse-db.c: Copy the GList via g_list_copy instead
 		of assigning it simply, and copy the strings
 		 via g_strdup to avoid programmers' best friends:
-		  crashs.
+		  crashes.
 
 	* gtranslator-preferences.c/h: Did also apply Gtk+-
 		conform structure building and _no_ pointer
@@ -241,7 +244,7 @@
 		 to the disc.
 
 	* stylistics.c/.h: The gtranslator_set_style
-		function now takesonly one widget as
+		function now takes only one widget as
 		 an argument, not two like in previous
 		  times.
 		Do use gushorts and the gnome_color..i16
@@ -356,7 +359,7 @@
  
         * parse-db.h: Removed the <messages.h> include as the
                 content of this file isn't used yet in any
-                 routine of libgtranslator ( and it should'n
+                 routine of libgtranslator ( and it shouldn't
                   do that as long as messages.h belongs to
                    gtranslator; possibly this file should be
                     moved to libgtranslator ).
@@ -372,8 +375,8 @@
 2000-10-23  Fatih Demir <kabalak@gmx.net>
 
 	* Makefile.am: Some Makefile-stuff for getting the sources
-		to build without manual intervenation and included
-		 the enw files in the sources and in the include
+		to build without manual intervention and included
+		 the new files in the sources and in the include
 		  targets.
 
 	* gtranslator-preferences-dialog.c/.h: The new files for an
@@ -390,7 +393,7 @@
 
 	* stylistics.c/h: Put the gtranslator_set_style function
 		here; it's good for manipulating two widgets'
-		 style options ( preferrably for the two text
+		 style options ( preferably for the two text
 		  boxes of gtranslator ).
 
 	* Makefile.am: Removed test-libgtranslator/test-lg.c
@@ -399,7 +402,7 @@
 	* test-lg.c: Removed it due to uselessness.
 
 	* stylistics.c: Added the routines and sources for the
-		color storing/getting fucntions.
+		color storing/getting functions.
 
 	* stylistics.h: Added this header which controls all the
 		color based stuff within libgtranslator and added
@@ -408,10 +411,10 @@
 	* Makefile.am: Added the new "stylistics.c/h" files
 		to the sources and headers list.
 
-	* prefereces.h: Added the gfloat setting/getting
+	* preferences.h: Added the gfloat setting/getting
 		routines.
 	
-	* prefereces.c: Corrected some wrong stuff within the date
+	* preferences.c: Corrected some wrong stuff within the date
 		storing/getting routines, added the gfloat get/set-
 		 methods and added defines to wrap the doubles into
 		  the gfloat routines.
@@ -449,7 +452,7 @@
 	* preferences.c: Changed the logic a bit; every config
 		function now does init/close the preferences
 		 part of libgtranslator itself, no need to do
-		  this in "normal" code anylonger.
+		  this in "normal" code any longer.
 
 2000-09-30  Fatih Demir	<kabalak@gmx.net>
 
@@ -476,13 +479,13 @@
 2000-09-24  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Hmm, the library version should also
-		take the mainversion and add the GCONF_IS_PRESENT
+		take the main version and add the GCONF_IS_PRESENT
 		 define to the cflags.
 
 	* test-lg.c: Also corrected gconf_init call here.
 
 	* preferences.c: Declare the used gchar for the GConf
-		backends outside the function and corrected the
+		back ends outside the function and corrected the
 		 wrong function call for the set-methods of GConf,
 		  removed the 2 debug g_print's.
 
@@ -497,7 +500,7 @@
 		obviously working.
 
 	* handle-db.h: Changed the function name from "add_node"
-		to "gtranslator_add_node_to_doc" for namespace
+		to "gtranslator_add_node_to_doc" for name space
 		 cleanity.
 
 2000-09-21  Fatih Demir	<kabalak@gmx.net>
@@ -512,7 +515,7 @@
 
 	* preferences.c: Integrated the int/string/bool
 		methods of our preferences engine; inserted some
-		 more usefull checks for missing/NULL entries
+		 more useful checks for missing/NULL entries
 		  in the path/value pairs; use the real paths
 		   for the GConf interactions.
 
@@ -529,7 +532,7 @@
 
 	* Makefile.am: Added the new preferences source files
 		to the libgtranslator sources and added the
-		 $(GNOME_LIBS) to the library additionals.
+		 $(GNOME_LIBS) to the library additions.
 
 		Also added some conditionals for the library
 		 chaos caused by our two-way strategy.
@@ -542,14 +545,14 @@
 
 2000-09-18  Fatih Demir	<kabalak@gmx.net>
 
-	* .cvsignore: Added this test-libgtranslator programm :)
+	* .cvsignore: Added this test-libgtranslator program :)
 
 2000-09-17  Fatih Demir	<kabalak@gmx.net>
 
-	* Makefile.am: Changed the name of the test-programm to
+	* Makefile.am: Changed the name of the test-program to
 		test-libgtranslator for more obviousity.
 
-	* main.c: Simply print a foo'sh statement, so we do know
+	* main.c: Simply print a foolish statement, so we do know
 		if it works :)
 
 2000-09-16  Fatih Demir	<kabalak@gmx.net>
@@ -575,11 +578,11 @@
 
 2000-08-05  Fatih Demir	<kabalak@gmx.net>
 
-	* Makefile.am: Added the test-lg programm to the targets
+	* Makefile.am: Added the test-lg program to the targets
 		and added foo.xml to the $(EXTRA_DIST).
 			[ it isn't installed though. ]
 	
-	* test-lg.c: Added a test-programm for the routines.
+	* test-lg.c: Added a test-program for the routines.
 
 	* handle.c: Added a node-adding routines.
 
@@ -602,12 +605,12 @@
 
 2000-08-02  Fatih Demir	<kabalak@gmx.net>
 
-	* .cvsignore: Ignore the sourcenavigator project files.
+	* .cvsignore: Ignore the source navigator project files.
 
 	* Makefile.am: Added the new source files and the headers.
 
 	* parse-db.c/h: Added the gettext-stuff into the header and
-		removed a cast which caused quizzle.
+		removed a cast which caused quizzes.
 
 	* handle-db.c/h: Here will be more intelligent parsing
 		routines.
@@ -653,7 +656,7 @@
 		to the sources and added the
 		 $(XML_CFLAGS) to the INCLUDES.
 	
-	* parse-db.*: These files will conatin the
+	* parse-db.*: These files will contain the
 		message db parsing code.
 	
 2000-07-28  Fatih Demir	<kabalak@gmx.net>
