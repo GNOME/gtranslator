@@ -75,8 +75,8 @@ int main(int argc,char *argv[])
 	/**
 	* Hm, bind to gettext...
 	**/
-	bindtextdomain("gtranslator", GNOMELOCALEDIR);
-	textdomain("gtranslator");
+	(void) bindtextdomain("gtranslator", GNOMELOCALEDIR);
+	(void) textdomain("gtranslator");
 	/**
 	* Get the arguments and the context.
 	**/

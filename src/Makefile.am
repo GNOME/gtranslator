@@ -21,20 +21,6 @@ vfs_cflags =
 cfs_libs =
 endif
 
-SophInterfaceFiles = \
-	beginners-druid-functions.c \
-	beginners-druid-functions.h \
-	beginners-druid-interface.c \
-	beginners-druid-interface.h \
-	open-po-file-dialog-functions.c \
-	open-po-file-dialog-functions.h \
-	open-po-file-dialog-interface.c \
-	open-po-file-dialog-interface.h \
-	preferences-functions.c \
-	preferences-functions.h \
-	preferences-interface.c \
-	preferences-interface.h
-
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
@@ -65,9 +51,17 @@ gtranslator_SOURCES = \
 	languages.h \
 	gnome-regex.c gnome-regex.h \
 	beginners-druid-functions.c \
+	beginners-druid-functions.h \
 	beginners-druid-interface.c \
+	beginners-druid-interface.h \
 	open-po-file-dialog-functions.c \
-	open-po-file-dialog-interface.c
+	open-po-file-dialog-functions.h \
+	open-po-file-dialog-interface.c \
+	open-po-file-dialog-interface.h \
+	preferences-functions.c \
+	preferences-functions.h \
+	preferences-interface.c \
+	preferences-interface.h
 
 gtranslator_LDADD = \
 	$(top_builddir)/libgtranslator/libgtranslator.la \
@@ -79,4 +73,4 @@ gtranslator_LDADD = \
 	$(XML_LIBS) \
 	$(vfs_libs)
 
-EXTRA_DIST = ChangeLog $(SophInterfaceFiles)
+EXTRA_DIST = ChangeLog
