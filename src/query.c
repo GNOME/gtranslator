@@ -22,6 +22,7 @@
 #include "learn.h"
 #include "message.h"
 #include "messages-table.h"
+#include "nautilus-string.h"
 #include "prefs.h"
 #include "query.h"
 #include "translator.h"
@@ -153,6 +154,34 @@ void gtranslator_query_domains(const gchar *directory)
 
 	localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory,
 		gtranslator_translator->language->locale);
+
+	/*
+	 * If we're handling a "minor level" locale (like "tr_TR"), test the
+	 *  query domains directory before operating further.
+	 */
+	if(strchr(gtranslator_translator->language->locale, '_'))
+	{
+		if(!g_file_test(localedirectory, G_FILE_TEST_ISDIR))
+		{
+			gchar	*major_level_locale;
+
+			/*
+			 * Free the old non-valuable locale directory and get
+			 *  the pure, "major level" locale by getting the 
+			 *   prefix from the locale code "tr_TR" -> prefix is
+			 *    "tr".
+			 */
+			GTR_FREE(localedirectory);
+			major_level_locale=nautilus_str_get_prefix(gtranslator_translator->language->locale, "_");
+
+			/*
+			 * Now we do again build up a locale directory -- let's
+			 *  hope that this second try achieves it's aim ,-)
+			 */
+			localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory, major_level_locale);
+			GTR_FREE(major_level_locale);
+		}
+	}
 	
 	domains=gtranslator_utils_file_names_from_directory(localedirectory,
 		".mo", TRUE, TRUE, FALSE);

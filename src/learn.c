@@ -448,22 +448,19 @@ void gtranslator_learn_init()
 		}
 
 		xmlFreeDoc(gtranslator_learn_buffer->doc);
+
+		gtranslator_learn_buffer->changed=FALSE;
 	}
 	else
 	{
 		gtranslator_learn_buffer->encoding=NULL;
+		gtranslator_learn_buffer->changed=TRUE;
 	}
 	
 	/*
 	 * Now we'd be inited after all.
 	 */
 	gtranslator_learn_buffer->init_status=TRUE;
-
-	/*
-	 * After the read-in there shouldn't have been any changes to the
-	 *  learn buffer at all .-)
-	 */
-	gtranslator_learn_buffer->changed=FALSE;
 }
 
 /*
@@ -602,8 +599,7 @@ void gtranslator_learn_shutdown()
 				 */
 				e_xml_set_string_prop_by_name(resource_node, "package", resource->package);
 				e_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
-				e_xml_set_string_prop_by_name(resource_node, "premiereversion", 
-					resource->premiereversion);
+				e_xml_set_string_prop_by_name(resource_node, "premiereversion", resource->premiereversion); 
 				
 				e_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
 				
@@ -669,7 +665,14 @@ void gtranslator_learn_po_file(GtrPo *po_file)
 	 */
 	resource->package=po->header->prj_name;
 	resource->updated=po->header->po_date;
-	resource->premiereversion=po->header->prj_version;
+	if(po->header->prj_version)
+	{
+		resource->premiereversion=po->header->prj_version;
+	}
+	else
+	{
+		resource->premiereversion="0";
+	}
 
 	/*
 	 * Increment the index count by one.

@@ -224,7 +224,10 @@ int main(int argc, char *argv[])
 	/*
 	 * Show the application window with icon.
 	 */
-	gnome_window_icon_set_default_from_file(WINDOW_ICON);
+	if(!auto_translate_file || !learn_file)
+	{
+		gnome_window_icon_set_default_from_file(WINDOW_ICON);
+	}
 
 	/*
 	 * Create our own .gtranslator directory in the user's home directory.
@@ -245,19 +248,22 @@ int main(int argc, char *argv[])
 		gtranslator_translator=gtranslator_translator_new();
 	}
 	
-	/*
-	 * Get the master session management client.
-	 */
-	client = gnome_master_client();
-	
-	/*
-	 * Connect the signals needed for session management.
-	 */
-	gtk_signal_connect(GTK_OBJECT(client), "save_yourself",
-			   GTK_SIGNAL_FUNC(gtranslator_session_sleep),
-			   (gpointer) argv[0]);
-	gtk_signal_connect(GTK_OBJECT(client), "die",
-			   GTK_SIGNAL_FUNC(gtranslator_session_die), NULL);
+	if(!auto_translate_file || !learn_file)
+	{
+		/*
+		 * Get the master session management client.
+		 */
+		client = gnome_master_client();
+		
+		/*
+		 * Connect the signals needed for session management.
+		 */
+		gtk_signal_connect(GTK_OBJECT(client), "save_yourself",
+				   GTK_SIGNAL_FUNC(gtranslator_session_sleep),
+				   (gpointer) argv[0]);
+		gtk_signal_connect(GTK_OBJECT(client), "die",
+				   GTK_SIGNAL_FUNC(gtranslator_session_die), NULL);
+	}
 
 	/*
 	 * Initialize our generally used GtrRuntimeConfig structure.
@@ -267,8 +273,11 @@ int main(int argc, char *argv[])
 	/* 
 	 * Create the main app-window. 
 	 */
-	gtranslator_create_main_window();
-	gtranslator_utils_restore_geometry(gtranslator_geometry);
+	if(!auto_translate_file || !learn_file)
+	{
+		gtranslator_create_main_window();
+		gtranslator_utils_restore_geometry(gtranslator_geometry);
+	}
 
 	/*
 	 * Initialize GnomeVFS right now, if needed.
@@ -292,16 +301,19 @@ int main(int argc, char *argv[])
 		gtranslator_rescue_file_dialog();
 	}
 
-	/*
-	 * Load the applied color scheme from the prefs and check it; if it
-	 *  doesn't seem to be right apply the original default colors.
-	 */ 
-	theme=gtranslator_color_scheme_load_from_prefs();
-
-	if(!theme)
+	if(!auto_translate_file || !learn_file)
 	{
-		gtranslator_color_scheme_restore_default();
+		/*
+		 * Load the applied color scheme from the prefs and check it; if it
+		 *  doesn't seem to be right apply the original default colors.
+		 */ 
 		theme=gtranslator_color_scheme_load_from_prefs();
+	
+		if(!theme)
+		{
+			gtranslator_color_scheme_restore_default();
+			theme=gtranslator_color_scheme_load_from_prefs();
+		}
 	}
 	
 	/*
@@ -397,7 +409,6 @@ int main(int argc, char *argv[])
 		gtranslator_translator_free(gtranslator_translator);
 		gtranslator_preferences_free();
 		gnome_regex_cache_destroy(rxc);
-		gtranslator_color_scheme_free(&theme);
 
 		/*
 		 * Shutdown GnomeVFS.
@@ -441,14 +452,17 @@ int main(int argc, char *argv[])
 		gtranslator_actions_set_up_state_no_file();
 	}
 	
-	/*
-	 * Check the session client flags, and restore state if needed 
-	 */
-	flags = gnome_client_get_flags(client);
-
-	if(flags & GNOME_CLIENT_RESTORED)
+	if(!auto_translate_file || !learn_file)
 	{
-		gtranslator_session_restore(client);
+		/*
+		 * Check the session client flags, and restore state if needed 
+		 */
+		flags = gnome_client_get_flags(client);
+	
+		if(flags & GNOME_CLIENT_RESTORED)
+		{
+			gtranslator_session_restore(client);
+		}
 	}
 
 	/*
@@ -487,7 +501,6 @@ int main(int argc, char *argv[])
 		gtranslator_translator_free(gtranslator_translator);
 		gtranslator_preferences_free();
 		gnome_regex_cache_destroy(rxc);
-		gtranslator_color_scheme_free(&theme);
 
 		/*
 		 * Shutdown GnomeVFS.
@@ -511,4 +524,3 @@ int main(int argc, char *argv[])
 	gtk_main();
 	return 0;
 }
-

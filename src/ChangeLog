@@ -1,3 +1,30 @@
+2001-10-05  Fatih Demir <kabalak@gtranslator.org>
+
+	* main.c: Some small reshuffles for the init/shutdown/free methods in
+		the main() routine -- colorschemes and some other quite GUI
+		 related stuff isn't loaded (and also not freed for this reason)
+		  if we're only working in auto translation/learning modus on
+		   the cmdline -- should give us some seconds and some memory
+		    back for excessive auto translating/learning actions.
+
+	* translator.c: Handle changes of language settings during the creation
+		of the GtrTranslator structure -- a custom learn buffer name
+		 for every language is now guaranteed -- after a restart of
+		  gtranslator of course. Still not weaven into the learn buffer
+		   code as this may cause some confusion ,-)
+
+	* query.c: If we're using a "more detailed" locale like "no_NO" test
+		the query domains directory for existence -- if it doesn't
+		 exist try to fall back to a "major level" locale like "no".
+
+	* learn.c: Set the changed status to TRUE if we're re-creating a new
+		and fresh learn buffer -- else we don't get a new one if no
+		 old learn buffer was previously present; also assign a more
+		  secure premiereversion attribute for the GtrLearnResource
+		   structures.
+
+	* header_stuff.c: Ignore unknown, non-standard header entries silently.
+
 2001-10-04  Fatih Demir <kabalak@gtranslator.org>
 
 	* learn.c: Added "changed" gboolean field to the GtrLearnBuffer struct

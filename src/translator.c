@@ -164,6 +164,21 @@ GtrTranslator *gtranslator_translator_new()
 	new_translator->language=gtranslator_translator_read_language();
 
 	/*
+	 * Test if we're using still the default fallback learn buffer name
+	 *  "en.xml" even though a new (changed) language was specified in
+	 *    the prefs.
+	 */
+	if(!nautilus_strcasecmp(new_translator->learn_buffer, "en.xml") &&
+		nautilus_strcasecmp(new_translator->language->name, "English"))
+	{
+		GTR_FREE(new_translator->learn_buffer);
+
+		new_translator->learn_buffer=g_strdup_printf("%s.xml",
+			(new_translator->language->locale ?
+				new_translator->language->locale : "en"));
+	}
+
+	/*
 	 * Get the default query domain from the preferences.
 	 */
 	gtranslator_translator_read_value(&new_translator->query_domain,

@@ -192,10 +192,6 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		else
 		if_key_is("X-Generator")
 		    ph->generator = g_strdup(pair[1]);
-		else   
-		g_print
-		    ("New header entry found (please add it to header_stuff.c):\n%s\n",
-		     pair[0]);
 
 		g_strfreev(pair);
 		i++;
