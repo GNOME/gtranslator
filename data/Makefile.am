@@ -25,4 +25,5 @@ OAF_DATA = gtranslatord.oafinfo
 ## include these nice pieces into a dist .
 EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) \
 	$(Mimeicon_DATA) gtranslator.keys.in \
-	gtranslator.mime gtranslator.keys
+	gtranslator.mime gtranslator.keys \
+	$(OAF_DATA)
