@@ -19,6 +19,7 @@
 #include "prefs.h"
 #include "dialogs.h"
 #include "gui.h"
+#include <libgnome/gnome-history.h>
 
 /* These are to be used only inside this file */
 static void append_line(gchar ** old, const gchar * tail);
@@ -134,6 +135,11 @@ static gboolean actual_parse(void)
 		}
 		return FALSE;
 	}
+	
+	/**
+	* Add a GNOME history entry.
+	**/
+	gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");
 	
 	msg = g_new0(GtrMsg, 1);
 	/**
@@ -301,7 +307,7 @@ static gchar *restore_msg(gchar * given)
 	gchar *result;
 	gint s, lines = 0, here = 8;
 
-	if(!given||strlen(given)<0)
+	if(!given)
 	{
 		return "";
 	}

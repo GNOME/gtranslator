@@ -26,7 +26,7 @@ static void prefs_box_help(GtkWidget * widget, gpointer useless);
 static gint list_ref = 0;
 
 /* The notebook page widgets  */
-static GtkWidget *first_page, *second_page, *third_page;
+static GtkWidget *first_page, *second_page, *third_page, *fourth_page;
 
 /**
 * The entries
@@ -40,7 +40,8 @@ static GtkWidget
 **/
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
-	*dont_save_unchanged_files, *save_geometry_tb;
+	*dont_save_unchanged_files, *save_geometry_tb,
+	*enable_popup_menu, *use_dot_char;
 
 /* The preferences dialog */
 static GtkWidget *prefs = NULL;
@@ -193,8 +194,8 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	**/
 	first_page = append_page_table(prefs, 2, 2, _("Personal information"));
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
-	third_page = append_page_table(prefs, 6, 1, _("Po file options"));
-
+	third_page = append_page_table(prefs, 4, 1, _("Po file options"));
+	fourth_page = append_page_table(prefs, 3, 1, _("Miscellaneous"));
 	/**
 	* Create all the personal entries
 	**/
@@ -249,10 +250,19 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	    attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
 		wants.warn_if_no_change, prefs_box_changed);
-	save_geometry_tb =
-	    attach_toggle_with_label(third_page, 4,
+
+	/**
+	* The fourth page with the popup menu & the dot_char.
+	**/
+	use_dot_char=attach_toggle_with_label(fourth_page, 0,
+		_("Use the dot char \'·\' instead of free spaces"),
+		wants.dot_char, prefs_box_changed);
+	enable_popup_menu=attach_toggle_with_label(fourth_page, 1,
+		_("Enable popup menu(s)"),
+		wants.popup_menu, prefs_box_changed);	
+	save_geometry_tb=attach_toggle_with_label(fourth_page, 2,
 		_("Save geometry on exit & restore it on startup"),
-		wants.save_geometry, prefs_box_changed);
+		wants.save_geometry, prefs_box_changed);	
 	/**
 	* The basic signal-handlers 
 	**/
@@ -290,6 +300,8 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.warn_if_fuzzy = if_active(warn_if_fuzzy);
 	wants.warn_if_no_change = if_active(warn_if_no_change);
 	wants.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
+	wants.dot_char = if_active(use_dot_char);
+	wants.popup_menu = if_active(enable_popup_menu);
 #undef if_active
 
 	gtranslator_config_set_string("translator/name", author);
@@ -307,7 +319,10 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 			      wants.warn_if_no_change);
 	gtranslator_config_set_bool("toggles/do_not_save_unchanged_files",
 			      wants.dont_save_unchanged_files);
-	
+	gtranslator_config_set_bool("toggles/use_dot_char",
+			      wants.dot_char);
+	gtranslator_config_set_bool("toggles/enable_popup_menu",
+			      wants.popup_menu);		      
 }
 
 /**
@@ -398,6 +413,10 @@ void read_prefs(void)
 	    gtranslator_config_get_bool("toggles/warn_if_no_change");
 	wants.dont_save_unchanged_files =
 	    gtranslator_config_get_bool("toggles/do_not_save_unchanged_files");
+	wants.popup_menu =
+	    gtranslator_config_get_bool("toggles/enable_popup_menu");
+	wants.dot_char = 
+	    gtranslator_config_get_bool("toggles/use_dot_char");    
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();

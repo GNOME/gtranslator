@@ -37,6 +37,14 @@ struct {
 	guint match_case		: 1;
 	guint find_in			: 2;
 	guint fill_header		: 1;
+	/**
+	* The curious dot_char option.
+	**/
+	guint dot_char			: 1;
+	/**
+	* The popup menu enableing/disabling option.
+	**/
+	guint popup_menu		: 1;
 } wants;
 
 /* Preferences-box creation and callbacks */

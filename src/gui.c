@@ -291,8 +291,6 @@ static GnomeUIInfo the_popup_menu[] = {
 				save_current_file,
 				GNOME_STOCK_MENU_SAVE),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_SUBTREE(N_("Message _status"), the_msg_status_menu),
-	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_UNDO_ITEM(undo_changes, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_CUT_ITEM(cut_clipboard, NULL),
@@ -343,9 +341,10 @@ void create_popup_menu(GtkWidget *widget, GdkEventButton *event)
 	{
 		popup_menu=gnome_popup_menu_new(the_popup_menu);
 		/**
-		* Only respond if a file has been present/opened.
+		* Only respond if a file has been present/opened and if the corresponding
+		*  option is set.
 		**/
-		if(file_opened==TRUE)
+		if((file_opened==TRUE) && (wants.popup_menu))
 		{
 			gnome_popup_menu_do_popup_modal(popup_menu, NULL, NULL, NULL, event);
 		}
@@ -551,47 +550,53 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 void display_msg(GList * list_item)
 {
 	GtrMsg *msg;
-	guint len;
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	clean_text_boxes();
 	/**
-	* Substitute the free spaces in the msgid only if this is
+	* Substitute the free spaces in the msgid only if this is wished and
 	*  possible.
 	**/ 
-	if(msg->msgid)
+	if(wants.dot_char)
 	{
 		/**
-		* Go through the characters and search for free spaces and replace them
-		*  with '·''s.
+		* A variable for the length of the strings.
 		**/
-		for(len=0;len<strlen(msg->msgid);++len)
+		guint len;
+		if(msg->msgid)
 		{
 			/**
-			* Do we have got a free space ?
+			* Go through the characters and search for free spaces and replace them
+			*  with '·''s.
 			**/
-			if(msg->msgid[len]==' ')
-			{
+				for(len=0;len<strlen(msg->msgid);++len)
+				{
 				/**
-				* Then substitute it with a '·'.
+				* Do we have got a free space ?
 				**/
-				msg->msgid[len]='·';
+				if(msg->msgid[len]==' ')
+				{
+					/**
+					* Then substitute it with a '·'.
+					**/
+					msg->msgid[len]='·';
+				}
 			}
 		}
-	}
-	/**
-	* And operate in the same way for the msgstr.
-	**/
-	if(msg->msgstr)
-	{	
-		for(len=0;len<strlen(msg->msgstr);++len)
-		{
-			if(msg->msgstr[len]==' ')
+		/**
+		* And operate in the same way for the msgstr.
+		**/
+		if(msg->msgstr)
+		{	
+			for(len=0;len<strlen(msg->msgstr);++len)
 			{
-				msg->msgstr[len]='·';
+				if(msg->msgstr[len]==' ')
+				{
+					msg->msgstr[len]='·';
+				}
 			}
 		}
-	}
+	}	
 	/**
 	* Insert the changed text into the two text-boxes.
 	**/
@@ -719,16 +724,24 @@ void goto_given_msg(GList * to_go)
 	static gint pos = 0;
 	update_msg();
 	if (pos == 0)
+	{
 		enable_actions(ACT_FIRST, ACT_BACK);
+	}	
 	else if (pos == po->length - 1)
+	{
 		enable_actions(ACT_NEXT, ACT_LAST);
+	}	
 	po->current = to_go;
 	display_msg(po->current);
 	pos = g_list_position(po->messages, po->current);
 	if (pos == 0)
+	{
 		disable_actions(ACT_FIRST, ACT_BACK);
+	}	
 	else if (pos == po->length - 1)
+	{
 		disable_actions(ACT_NEXT, ACT_LAST);
+	}	
 	update_appbar(pos);
 }
 
@@ -802,13 +815,6 @@ static void undo_changes(GtkWidget * widget, gpointer useless)
 **/
 static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 {
-	/**
-	* The gchar for the text in the translation box which can be changed by
-	*  the user and a guint variable for the length of this text.
-	**/
-	gchar *newstr=g_new(gchar,1);
-	guint len;
-	
 	if (nothing_changes)
 		return;
 	if (!po->file_changed) {
@@ -827,25 +833,44 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		}
 	}
 	/**
-	* Get the text from the translation box.
+	* Do all these steps only if the option to use the '·' is set.
 	**/
-	newstr=gtk_editable_get_chars(GTK_EDITABLE(trans_box),0,-1);
-	/**
-	* Parse the characters for a free space and replace them with the '·'.
-	**/
-	for(len=0;len<strlen(newstr);len++)
+	if(wants.dot_char)
 	{
-		if(newstr[len]==' ')
+		/**
+		* The gchar for the text in the translation box which can be changed by
+		*  the user and a guint variable for the length of this text.
+		**/
+		gchar *newstr=g_new(gchar,1);
+		guint len;
+		/**
+		* Get the text from the translation box.
+		**/
+		newstr=gtk_editable_get_chars(GTK_EDITABLE(trans_box),0,-1);
+		/**
+		* Parse the characters for a free space and replace them with the '·'.
+		**/
+		for(len=0;len<strlen(newstr);len++)
 		{
-			newstr[len]='·';
+			if(newstr[len]==' ')
+			{
+				newstr[len]='·';
+			}
 		}
-	}
-	/**
-	* Clean up the translation box.
-	**/
-	gtk_text_backward_delete(GTK_TEXT(trans_box), gtk_text_get_length(GTK_TEXT(trans_box)));
-	/**
-	* Insert the changed text with the '·''s.
-	**/
-	gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, newstr, -1);
+		/**
+		* Clean up the translation box.
+		**/
+		gtk_text_backward_delete(GTK_TEXT(trans_box), gtk_text_get_length(GTK_TEXT(trans_box)));
+		/**
+		* Insert the changed text with the '·''s.
+		**/
+		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, newstr, -1);
+		/**
+		* Free the gchar.
+		**/
+		if(newstr)
+		{
+			g_free(newstr);
+		}	
+	}	
 }

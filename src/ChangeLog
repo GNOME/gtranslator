@@ -1,3 +1,19 @@
+2000-10-03  Fatih Demir	<kabalak@gmx.net>
+
+	* gui.c: Removed the Message status part of the popup menu
+		to slighten it a bit and made it only react if it's
+		 activated in the prefs.
+
+	* prefs.c: Added a 4th page with the options to use the dot char
+		feature and to enable/disable the popup menu. Both of them
+		 are working in real-time, you can also immediately see the
+		  changes in the preferences on the next screen; also moved
+		   the save geometry option to the "Miscellaneous" page.
+
+	* parse.c: Add a new GNOME history entry if the file should be parsed,
+		so we can later use it in a "Recent files" menu or a favorites
+		 or something-alike menu.
+
 2000-10-02  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Put the main.c file at the start of the
