@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
 			g_print("\n\t\t%s", x); \
 			g_print("\n\t");
 
-		g_print("\t");
+		g_print("\t\n");
 		g_print(_("gtranslator build information/specs:"));
 		g_print("\n\n\t");
 		g_print(_("Version and build date:"));

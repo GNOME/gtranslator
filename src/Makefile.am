@@ -24,7 +24,6 @@ GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shel
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
 	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
-	-e s,"&ETSPECS_DIR","$(datadir)/gtranslator/etspecs",g \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&SCHEMESDIR","$(datadir)/gtranslator/colorschemes",g \
 	-e s,"&SCRIPTSDIR","$(datadir)/gtranslator/scripts",g \
