@@ -1,4 +1,50 @@
-2000-06-30  Fatih Demir		( kabalak@gmx.net )
+2000-07-04  Fatih Demir  <kabalak@gmx.net>
+
+	+	Disable the corresponding menu entries
+		
+		also if no file is open.
+		
+		-> gui.c
+
+	+	Added another option to specify the
+		
+		desired minimun match length ( aka.
+		
+		challenge length).
+	
+	+	Perform a little check before applying
+		
+		the default challenge length.
+	
+	+	Set the default challenge value on
+		
+		startup to 2.
+		
+		-> main.c
+
+	+	Two new routines which are setting the
+		
+		challenge length ( the length of the 
+		
+		strncasecmp-calls while retrieving the
+		
+		results for the query. ).
+		
+	+	Introduced a new variable which holds the
+		
+		correspending value for the strncasecmp call.
+	
+	+	Use this value for the strncasecmp call.
+
+		-> msg_db.c
+	
+	+	Added the variable and the two prototypes for
+		
+		the new functions and the new variable.
+		
+		-> msg_db.h
+
+2000-06-30  Fatih Demir  <kabalak@gmx.net>
 
 	+	Disabled the crashy assignment.
 	
@@ -12,7 +58,7 @@
 
 		-> messages.h
 
-2000-06-27  Fatih Demir		( kabalak@gmx.net )
+2000-06-27  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Added the size returning function for
 		
@@ -26,7 +72,7 @@
 		
 		-> header_stuff.c
 
-2000-06-14  Fatih Demir		( kabalak@gmx.net )
+2000-06-14  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed dummy.po from the repo and from
 		
@@ -40,7 +86,7 @@
 		
 		-> header_stuff.c
 
-2000-06-12  Fatih Demir		( kabalak@gmx.net )
+2000-06-12  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the ifdef for the header routines.
 	
@@ -62,7 +108,7 @@
 		
 		-> parse.c	
 
-2000-06-11  Fatih Demir		( kabalak@gmx.net )
+2000-06-11  Fatih Demir  <kabalak@gmx.net>
 
 	+	Take the string length of the temp_char
 		
@@ -74,7 +120,7 @@
 
 		-> parse.c
 
-2000-06-10  Fatih Demir         ( kabalak@gmx.net )
+2000-06-10  Fatih Demir  <kabalak@gmx.net>
         
 	+	Use a generally fresh allocated gchar for
 		
@@ -96,7 +142,7 @@
 
 	* gtr_dialogs.c:454  typo fixed.
 
-2000-06-10  Fatih Demir		( kabalak@gmx.net )
+2000-06-10  Fatih Demir  <kabalak@gmx.net>
 	
 	+	EURO 2000 >)>)>)>)>)>)>)>)>)>)>)>)>)>)>)
 
@@ -120,7 +166,7 @@
 		
 		-> gtr_dialogs.c	
 
-2000-06-09  Fatih Demir		( kabalak@gmx.net )
+2000-06-09  Fatih Demir  <kabalak@gmx.net>
 
 	+	Highlight the main window during a drop.
 		
@@ -152,7 +198,7 @@
 		
 		-> Makefile.am		
 
-2000-06-08  Fatih Demir		( kabalak@gmx.net )
+2000-06-08  Fatih Demir  <kabalak@gmx.net>
 
 	+	Also change the ifdef check to a check
 		
@@ -212,7 +258,7 @@
 	
 		-> parse.c
 
-2000-06-06  Fatih Demir		( kabalak@gmx.net )
+2000-06-06  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the forgotten ifdefs for the
 		
@@ -252,7 +298,7 @@
 	
 		-> parse.c
 
-2000-06-05  Fatih Demir		( kabalak@gmx.net )
+2000-06-05  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed an also unnecessary gchar.
 		
@@ -266,7 +312,7 @@
 		
 		-> msg_db.c
 
-2000-06-04  Fatih Demir		( kabalak@gmx.net )
+2000-06-04  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a msg-db menu with some entries.
 
@@ -358,7 +404,7 @@
 		
 		-> main.c
 
-2000-06-03  Fatih Demir		( kabalak@gmx.net )
+2000-06-03  Fatih Demir  <kabalak@gmx.net>
 
 	+	Make first a check if it exists yet, and
 		
@@ -398,7 +444,7 @@
 		
 		-> parse.c
 	
-2000-06-01  Fatih Demir		( kabalak@gmx.net )
+2000-06-01  Fatih Demir  <kabalak@gmx.net>
 	
 	+	The same for the header-routines.
 		
@@ -412,7 +458,7 @@
 	
 		-> parse.c
 
-2000-05-30  Fatih Demir         ( kabalak@gmx.net )
+2000-05-30  Fatih Demir  <kabalak@gmx.net>
 
 	+	Use a temporary gchar* as a bridging
 		
@@ -488,7 +534,7 @@
                 
                 -> main.c
 
-2000-05-28  Fatih Demir		( kabalak@gmx.net )
+2000-05-28  Fatih Demir  <kabalak@gmx.net>
 
         +       Freed the filenames list and added
                 
@@ -526,7 +572,7 @@
 
 		-> header_stuff.c/h
 
-2000-05-26  Fatih Demir		( kabalak@gmx.net )
+2000-05-26  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added some other gint's which are 
 		
@@ -570,7 +616,7 @@
 		
 		-> interface.c
 
-2000-05-25  Fatih Demir		( kabalak@gmx.net )
+2000-05-25  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the header-button to the list
 		
@@ -608,7 +654,7 @@
 	
 		-> header_stuff.c/h
 
-2000-05-24  Fatih Demir		( kabalak@gmx.net )
+2000-05-24  Fatih Demir  <kabalak@gmx.net>
 
 	+	Again a crash!
 
@@ -668,7 +714,7 @@
 		
 		-> main.c/parse.c
 
-2000-05-23  Fatih Demir		( kabalak@gmx.net )
+2000-05-23  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the X-Generator header information
 		
@@ -700,7 +746,7 @@
 		
 		-> parse.c
 	
-2000-05-21  Fatih Demir		( kabalak@gmx.net )
+2000-05-21  Fatih Demir  <kabalak@gmx.net>
 
 	+	Doing all the if's and cut's for the
 		
@@ -728,7 +774,7 @@
 
 		-> parse.c
 
-2000-05-20  Fatih Demir		( kabalak@gmx.net )
+2000-05-20  Fatih Demir  <kabalak@gmx.net>
 
 	+	Changed the gtk_main_quit()-calls to 
 		
@@ -808,7 +854,7 @@
 		
 		-> parse.c/h
 
-2000-05-18  Fatih Demir		( kabalak@gmx.net )
+2000-05-18  Fatih Demir  <kabalak@gmx.net>
 
 	+	Doing some stuff.
 	
@@ -820,7 +866,7 @@
 		
 		-> interface.c
 
-2000-05-17  Fatih Demir		( kabalak@gmx.net )
+2000-05-17  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Binding the new dialogs to the buttons.
 		
@@ -846,7 +892,7 @@
 	
 	+	Reverted the zamane-char stuff.
 
-2000-05-16  Fatih Demir		( kabalak@gmx.net )
+2000-05-16  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the new files to the Makefile.am.
 		
@@ -888,7 +934,7 @@
 
 		-> parse.c
 	
-2000-05-15  Fatih Demir		( kabalak@gmx.net )
+2000-05-15  Fatih Demir  <kabalak@gmx.net>
 
 	+	Changed the cancel-button to a stock-button.
 		
@@ -900,7 +946,7 @@
 			
 		-> parse.c	
 
-2000-05-14  Fatih Demir		( kabalak@gmx.net )
+2000-05-14  Fatih Demir  <kabalak@gmx.net>
 
 	+	Adding the search-box routines & widgets.
 		
@@ -927,7 +973,7 @@
 		-> parse.c/h
 
 
-2000-05-13  Fatih Demir		( kabalak@gmx.net )
+2000-05-13  Fatih Demir  <kabalak@gmx.net>
 
 	+	Disable the buttons at startup and enable
 		
@@ -959,7 +1005,7 @@
 
 		-> parse.c
 
-2000-05-12  Fatih Demir		( kabalak@gmx.net )
+2000-05-12  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a function-`skelleton' which will 
 	
@@ -1017,7 +1063,7 @@
 		
 		-> *.c/h
  
-2000-05-11  Fatih Demir		( kabalak@gmx.net )
+2000-05-11  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Reformatted for common `assignment-policy'
 	
@@ -1027,7 +1073,7 @@
 		
 		-> messages.h
 
-2000-05-10  Fatih Demir		( kabalak@gmx.net )
+2000-05-10  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the compile callback and fucntion
 	
@@ -1043,7 +1089,7 @@
 	
 		-> main.c
 
-2000-05-09  Fatih Demir		( kabalak@gmx.net )
+2000-05-09  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a rough method of getting an entry from
 		
@@ -1149,7 +1195,7 @@
 	
 		-> prefs.c
 
-2000-05-08  Fatih Demir		( kabalak@gmx.net )
+2000-05-08  Fatih Demir  <kabalak@gmx.net>
 
 	+	Changed `due' to Pablo's EMail the English
 		
@@ -1167,7 +1213,7 @@
 
 	* interface.c (create_app1): Correct C'n'P typo (s/next/last/).
 
-2000-05-07  Fatih Demir		( kabalak@gmx.net )
+2000-05-07  Fatih Demir  <kabalak@gmx.net>
 
 	+	Reformatted all plain-messages to be 
 		
@@ -1263,13 +1309,13 @@
 		
 		-> prefs.c/h
 
-2000-05-06  Fatih Demir		( kabalak@gmx.net )
+2000-05-06  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Include <glib.h> 
 		
 		-> messages.h
 
-2000-05-05  Fatih Demir		( kabalak@gmx.net )
+2000-05-05  Fatih Demir  <kabalak@gmx.net>
 
 	+	Use the new structure and forget the 
 		
@@ -1333,7 +1379,7 @@
 		
 		-> languages.h
 	
-2000-05-04  Fatih Demir		( kabalak@gmx.net )
+2000-05-04  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Added the entries which were told to me ..
 	
@@ -1345,7 +1391,7 @@
 		
 		-> languages.h
 
-2000-05-03  Fatih Demir		( kabalak@gmx.net )
+2000-05-03  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added .*swp files ( vim->my_editor=TRUE )
 		
@@ -1371,7 +1417,7 @@
 	
 		-> prefs.c
 
-2000-05-02  Fatih Demir		( kabalak@gmx.net )
+2000-05-02  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Added languages.h 
 	
@@ -1395,7 +1441,7 @@
 		
 		-> messages.h
 
-2000-05-01  Fatih Demir		( kabalak@gmx.net )
+2000-05-01  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a table with the language names 
 	
@@ -1419,7 +1465,7 @@
 		
 		-> prefs.h
 
-2000-04-30  Fatih Demir		( kabalak@gmx.net )
+2000-04-30  Fatih Demir  <kabalak@gmx.net>
 
 	+	Began to write the prefs-box ...
 		
@@ -1447,7 +1493,7 @@
 		
 		-> interface.h
 
-2000-04-29  Fatih Demir		( kabalak@gmx.net )
+2000-04-29  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the ltrace.log file to .cvsignore's
 		
@@ -1497,7 +1543,7 @@
 			
 		-> *.c/h
 
-2000-04-27  Fatih Demir		( kabalak@gmx.net )
+2000-04-27  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Changing all the interface elements
 		
@@ -1543,7 +1589,7 @@
 		
 		-> interface.c
 
-2000-04-19  Fatih Demir		( kabalak@gmx.net )
+2000-04-19  Fatih Demir  <kabalak@gmx.net>
 
 	+	Made another messages "gettextable"
 		
@@ -1613,7 +1659,7 @@
 		
 		-> interface.c/h
 
-2000-04-18  Fatih Demir		( kabalak@gmx.net )
+2000-04-18  Fatih Demir  <kabalak@gmx.net>
 
 	+	As the status bar works now rightly 
 		
@@ -1633,7 +1679,7 @@
 		
 		-> interface.c
 	
-2000-04-01  Fatih Demir		( kabalak@gmx.net )
+2000-04-01  Fatih Demir  <kabalak@gmx.net>
 
 	+	Corrected some return-value mistakes
 	
@@ -1655,7 +1701,7 @@
 		
 		-> Makefile.am
 
-2000-03-31  Fatih Demir		( kabalak@gmx.net )
+2000-03-31  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the toolbar_style definition
 		
@@ -1663,7 +1709,7 @@
 	
 		-> interface.c
 
-2000-03-30  Fatih Demir		( kabalak@gmx.net )
+2000-03-30  Fatih Demir  <kabalak@gmx.net>
 
 	+	The check_file(FILE *) function was
 		
@@ -1679,7 +1725,7 @@
 		
 		-> interface.c
 
-2000-03-27  Fatih Demir		( kabalak@gmx.net )
+2000-03-27  Fatih Demir  <kabalak@gmx.net>
 
 	+	A pointer was set wrongly in the are_we*
 		
@@ -1705,7 +1751,7 @@
 		
 		-> *.c
 
-2000-03-21  Fatih Demir		( kabalak@gmx.net )
+2000-03-21  Fatih Demir  <kabalak@gmx.net>
 
 	+	Fixed an error ; use now strcat for
 		
@@ -1717,7 +1763,7 @@
 		
 		-> parse.c
 
-2000-03-19  Fatih Demir		( kabalak@gmx.net )
+2000-03-19  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the ka_widget_show macro ..
 		
@@ -1729,13 +1775,13 @@
 	
 		-> callbacks.c
 
-2000-03-18  Fatih Demir		( kabalak@gmx.net )
+2000-03-18  Fatih Demir  <kabalak@gmx.net>
 
 	+	Some better catch of the msgid/str's
 	
 		-> parse.c
 
-2000-03-15  Fatih Demir		( kabalak@gmx.net )
+2000-03-15  Fatih Demir  <kabalak@gmx.net>
 
 	+	Check if the linked lists have been 
 		
@@ -1743,7 +1789,7 @@
 		
 		-> msg_db.c
 	
-2000-03-14  Fatih Demir 	( kabalak@gmx.net )
+2000-03-14  Fatih Demir  <kabalak@gmx.net>
 
 	+	Filled in a missing '*' before 
 		
@@ -1767,7 +1813,7 @@
 	
 		-> Makefile.am
 
-2000-03-14  Fatih Demir		( kabalak@gmx.net )
+2000-03-14  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added the linked lists and the addition
 		
@@ -1777,7 +1823,7 @@
 		
 		-> msg_db.h/.c
 
-2000-03-11  Fatih Demir		( kabalak@gmx.net )
+2000-03-11  Fatih Demir  <kabalak@gmx.net>
 
 	+	Switching over to pure glib , removed
 		
@@ -1785,13 +1831,13 @@
 		
 		-> *.c/*.h
 
-2000-03-10  Fatih Demir		( kabalak@gmx.net )
+2000-03-10  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed impossible function
 		
 		-> msg_db.c/.h
 
-2000-03-09  Fatih Demir		( kabalak@gmx.net )
+2000-03-09  Fatih Demir  <kabalak@gmx.net>
 
 	+	Wrong appbar-type ; CORRECTED .
 		
@@ -1810,7 +1856,7 @@
 		
 		-> interface.h
 
-2000-03-08  Fatih Demir		( kabalak@gmx.net )
+2000-03-08  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a new toolbar with some extra-
 		funcs ( which will be hopefully created
@@ -1855,7 +1901,7 @@
 		
 		-> header_stuff.c
 
-2000-03-07  Fatih Demir		( kabalak@gmx.net )
+2000-03-07  Fatih Demir  <kabalak@gmx.net>
 
 	+	Adding some new UI-elements ..
 		
@@ -1886,7 +1932,7 @@
 		
 		-> msg_db.h messages.h
 
-2000-03-06  Fatih Demir		( kabalak@gmx.net )
+2000-03-06  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a gnome-entry box for searching
 		some messages in the files ..
@@ -1914,7 +1960,7 @@
 
 		-> parse.h
 
-2000-03-05  Fatih Demir		( kabalak@gmx.net )
+2000-03-05  Fatih Demir  <kabalak@gmx.net>
 
 	+	Adding a new dock-band for message
 		searching and catalog-finding ..
@@ -1923,7 +1969,7 @@
 	
 	+	Adding some new functions ..
 
-2000-03-04  Fatih Demir 	( kabalak@gmx.net )
+2000-03-04  Fatih Demir  <kabalak@gmx.net>
 
 	+	Added a (void*)-ified compare fucntion
 		ka_comp(const void *,const void *) ,
@@ -1931,7 +1977,7 @@
 
 		-> parse.c/.h
 
-2000-02-29  Fatih Demir		( kabalak@gmx.net )
+2000-02-29  Fatih Demir  <kabalak@gmx.net>
 
 	+	Doing the msg_db stuff ( reading the
 		old ones is now implemented ... )
@@ -1943,7 +1989,7 @@
 		
 		-> *.c/*.h
 
-2000-02-26  Fatih Demir		( kabalak@gmx.net )
+2000-02-26  Fatih Demir  <kabalak@gmx.net>
 
 	+	Changed the string-comparing routines
 		to str(n)casecmp for ignoring the 
@@ -1956,7 +2002,7 @@
 		
 		-> msg_db.h/.c
 
-2000-02-25  Fatih Demir		( kabalak@gmx.net )
+2000-02-25  Fatih Demir  <kabalak@gmx.net>
 
 	+	Reput the support.h/.c files into
 		CVS , as they appear to be needed 
@@ -1973,7 +2019,7 @@
 		
 		-> *.c *.h
 
-2000-02-22  Fatih Demir		( kabalak@gmx.net )
+2000-02-22  Fatih Demir  <kabalak@gmx.net>
 
 	+	Corrected the errors & forgotten 
 		variables .
@@ -1995,7 +2041,7 @@
 		-> msg_db.c msg_db.h parse.c 	
 
 	
-2000-02-20  Fatih Demir 	( kabalak@gmx.net )
+2000-02-20  Fatih Demir  <kabalak@gmx.net>
 
 	+ 	Made two structures for the po-&
 		message-handling .
@@ -2008,7 +2054,7 @@
 		-> parse.c header_stuff.c header_stuff.h
 
 
-2000-02-17  Fatih Demir		( kabalak@gmx.net )
+2000-02-17  Fatih Demir  <kabalak@gmx.net>
 
 	+	Put the location of the msg-db to
 		the defines
@@ -2024,7 +2070,7 @@
 
 		-> msg_db.h 
 		
-2000-02-16  Fatih Demir 	( kabalak@gmx.net )
+2000-02-16  Fatih Demir  <kabalak@gmx.net>
 
 	+	Made some me-supporting output only
 		compile with -DDEBUG ( by default on )
@@ -2036,7 +2082,7 @@
 	
 		-> *.c *.h
 
-2000-02-13  Fatih Demir 	( kabalak@gmx.net )
+2000-02-13  Fatih Demir  <kabalak@gmx.net>
 
 	+	Removed the shell-script calls from
 		the parser .
@@ -2056,7 +2102,7 @@
 	
 		-> header_stuff.c header_stuff.h
 	
-2000-02-10  Fatih Demir		( kabalak@gmx.net )
+2000-02-10  Fatih Demir  <kabalak@gmx.net>
 
 	+	Read the TODO , ehem ....
 
@@ -2068,13 +2114,13 @@
 
 		-> parse.h parse.c
 	
-2000-02-09  Fatih Demir		( kabalak@gmx.net )
+2000-02-09  Fatih Demir  <kabalak@gmx.net>
 
 	+	Some progress in text-parsing ..
 
 		-> parse.h parse.c
 
-2000-02-08  Fatih Demir		( kabalak@gmx.net )
+2000-02-08  Fatih Demir  <kabalak@gmx.net>
 
 	+	Made a fake-progress bar
 
@@ -2095,7 +2141,7 @@
 	
 		-> callbacks.c
 	
-2000-02-04  Fatih Demir 	( kabalak@gmx.net )
+2000-02-04  Fatih Demir  <kabalak@gmx.net>
 
 	+	Make the build always with -DDEBUGGY
 		to make it more obvious if errors 
@@ -2104,7 +2150,7 @@
 		-> Makefile.am
 	
 
-2000-02-03  Fatih Demir 	( kabalak@gmx.net )
+2000-02-03  Fatih Demir  <kabalak@gmx.net>
 	
 	+	Removed the checks temporarily ....
 	

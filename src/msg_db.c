@@ -198,7 +198,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 			/**
 			* Only challenge the first 3 characters
 			**/
-			if(!g_strncasecmp(msg_messages,get_similar,3))
+			if(!g_strncasecmp(msg_messages,get_similar,challen))
 			{
 				if(strstr(msg_messages,";;"))
 				{
@@ -243,5 +243,47 @@ unsigned int get_msg_db_size()
 		* Return the size.
 		**/
 		return (unsigned int )(file->st_size);
+	}
+}
+
+/**
+* Sets the challenge-length ( oh, we're doing checks, yeah ..)
+**/
+void set_challenge_length(int length)
+{
+	/**
+	* Check for a non-logical argument.
+	**/
+	if(length<=1)
+	{
+		/**
+		* Gives a warning message.
+		**/
+		g_warning(_("Trying to set an irregular challange length!"));
+	}
+	else
+	{
+		/**
+		* Set the challen variable.
+		**/
+		challen=length;
+	}
+}
+
+/**
+* Gets the challenge-length.
+**/
+unsigned int get_challenge_length()
+{
+	/**
+	* Simply returns the challenge length or NULL.
+	**/
+	if(challen<=1)
+	{
+		return 0;
+	}
+	else
+	{
+		return challen;
 	}
 }

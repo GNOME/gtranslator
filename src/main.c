@@ -27,9 +27,17 @@
 **/
 static struct poptOption gtranslator_options [] = {
 	{
+		"challenge-lenght", 'c', POPT_ARG_INT, &challen,
+		0, N_("Sets the minimum match for query"), "LENGTH"
+	},
+	{
 		"file", 'f', POPT_ARG_STRING, &file_to_open,
 		0, N_("Po-file to open at startup"), "PO_FILE"
 	},
+	{
+                "geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
+                0, N_("Specifies the main-window geometry"),"GEOMETRY"
+        },
 	{
 		"msg-db", 'm', POPT_ARG_STRING, &msg_db,
 		0, N_("The messages db to use"),"MSG_DB"
@@ -37,10 +45,6 @@ static struct poptOption gtranslator_options [] = {
 	{
 		"query", 'q', POPT_ARG_STRING, &query_string,
 		0, N_("Query the messages db & exit"),"QUERY_STRING"
-	},
-	{
-		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
-		0, N_("Specifies the main-window geometry"),"GEOMETRY"
 	},
 	POPT_AUTOHELP {NULL}
 };
@@ -75,6 +79,20 @@ int main(int argc,char *argv[])
 	* Free the poptContext
 	**/
 	poptFreeContext(context);
+	if(!challen)
+	{
+		/**
+		* Set the default challenge length value.
+		**/
+		set_challenge_length(2);
+	}
+	else
+	{
+		/**
+		* Set the challenge length corresponding to the argument.
+		**/
+		set_challenge_length(challen);
+	}
 	/**
 	* Read the stored preferences
 	**/

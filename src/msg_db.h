@@ -36,6 +36,11 @@ static gchar *msg_db;
 gboolean msg_db_inited;
 
 /**
+* This is the variable which holds the challenge length.
+**/
+unsigned int challen;
+
+/**
 * Init the msg-db ( open & 
 * check the file )
 **/
@@ -63,6 +68,16 @@ gchar *get_from_msg_db(const gchar *);
 * in bytes :
 **/
 unsigned int get_msg_db_size();
+
+/**
+* Sets the challenge-length.
+**/
+void set_challenge_length(int length);
+
+/**
+* Gets the challenge-length.
+**/
+unsigned int get_challenge_length();
 
 /**
 * The linked lists :

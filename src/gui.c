@@ -691,6 +691,13 @@ void disable_buttons()
         gtk_widget_set_sensitive(goto_button,FALSE);
         gtk_widget_set_sensitive(add_button,FALSE);
         gtk_widget_set_sensitive(header_button,FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_file_menu[0].widget),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[0].widget),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[1].widget),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[3].widget),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[4].widget),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_edit_menu[8].widget),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_edit_menu[10].widget),FALSE);
 }
 
 /**
@@ -708,4 +715,11 @@ void enable_buttons()
         gtk_widget_set_sensitive(goto_button,TRUE);
         gtk_widget_set_sensitive(add_button,TRUE);
         gtk_widget_set_sensitive(header_button,TRUE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_file_menu[0].widget),TRUE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[0].widget),TRUE);
+        gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[1].widget),TRUE);
+        gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[3].widget),TRUE);
+        gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[4].widget),TRUE);
+	gtk_widget_set_sensitive(GTK_WIDGET(the_edit_menu[8].widget),TRUE)
+	gtk_widget_set_sensitive(GTK_WIDGET(the_edit_menu[10].widget),TRUE);
 }

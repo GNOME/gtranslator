@@ -26,6 +26,7 @@ void apply_header(gtr_header *the_header)
 void get_header(gchar *hline)
 {
 	header_finish=FALSE;
+	#ifdef IT_WORKS
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
 		ph->prj_name="Project";
@@ -64,6 +65,7 @@ void get_header(gchar *hline)
 	{
 		/*** TODO ***/
 	}
+	#endif
 }
 
 /**
