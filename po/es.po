@@ -14,13 +14,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-04 12:31+0200\n"
-"PO-Revision-Date: 2003-09-04 19:24+0200\n"
+"POT-Creation-Date: 2003-12-14 16:06+0100\n"
+"PO-Revision-Date: 2003-12-14 16:10+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@arrakis.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n == 1)"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -407,7 +408,9 @@ msgstr "Editar comentario"
 #: src/gui.c:501
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ quedan %i vagos ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ queda %i vago ]"
+msgstr[1] "%s [ quedan %i vagos ]"
 
 #: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
@@ -429,7 +432,9 @@ msgstr "Traducido"
 #: src/gui.c:524
 #, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ quedan %i no traducidos ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ queda %i no traducido ]"
+msgstr[1] "%s [ quedan %i no traducidos ]"
 
 #: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
 msgid "Untranslated"
@@ -1295,8 +1300,14 @@ msgstr "No se pudo abrir el archivo «%s» para escritura"
 #, c-format
 msgid ""
 "File %s\n"
+"contains %d fuzzy message"
+msgid_plural ""
+"File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
+"El archivo %s\n"
+"contiene %d mensaje vago"
+msgstr[1] ""
 "El archivo %s\n"
 "contiene %d mensajes vagos"
 
