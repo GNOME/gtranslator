@@ -550,6 +550,8 @@ void gtranslator_insert_text(GtkText *editable, const gchar *text)
 		"delete-text",
 		0,
 		-1);
+	if (!text)
+		return;
 	/* Second add new context */
 	gtk_signal_emit_by_name(
 		GTK_OBJECT(editable),

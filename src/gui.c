@@ -172,6 +172,8 @@ void gtranslator_create_main_window(void)
 	
 	GtkWidget *original_text_scrolled_window;
 	GtkWidget *translation_text_scrolled_window;
+	GtkWidget *comments_scrolled_window;
+	GtkWidget *comments_viewport;
 
 	/*
 	 * Create the app	
@@ -217,15 +219,25 @@ void gtranslator_create_main_window(void)
 	extra_content_view=g_new0(GtrExtraContentArea, 1);
 	
 	extra_content_view->box=gtk_hbox_new(FALSE, 1);
+	
+	comments_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(comments_scrolled_window),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_box_pack_start(GTK_BOX(extra_content_view->box), comments_scrolled_window, TRUE, TRUE, 0);
+	
+	comments_viewport = gtk_viewport_new(NULL, NULL);
+	gtk_widget_show(comments_viewport);
+	gtk_container_add(GTK_CONTAINER(comments_scrolled_window), comments_viewport);
+	
 	extra_content_view->comment=gtk_label_new("");
+	gtk_container_add(GTK_CONTAINER(comments_viewport), extra_content_view->comment);
+	
 	extra_content_view->edit_button=gtk_button_new_with_label(_("Edit comment"));
-
-	gtk_box_pack_start(GTK_BOX(extra_content_view->box), extra_content_view->comment, 
-		FALSE, FALSE, 0);
-	gtk_box_pack_end(GTK_BOX(extra_content_view->box), extra_content_view->edit_button, 
+	gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
+	gtk_box_pack_end(GTK_BOX(extra_content_view->box), extra_content_view->edit_button,
 		FALSE, FALSE, 0);
 	
-	gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
 	e_paned_set_position(E_PANED(content_pane), 0);
 
 	/*

@@ -1,5 +1,12 @@
 2001-12-23  Gediminas Paulauskas <menesis@delfi.lt>
 
+	* gui.c: put comment view in scrolled window so that it doesn't
+	get too high. Taken from patch by Peeter Vois <Peeter.Vois@mail.ee>
+	* syntax.c: don't insert text if it's NULL.
+	Still crashes on untransated messages
+
+2001-12-23  Gediminas Paulauskas <menesis@delfi.lt>
+
 	* prefs.c: Merge toggle button and entry of the following options:
 		+ "Use special dictionary" and "Dictionary to use"
 		+ "Save po files automatically..." and "Autosave timeout..."
