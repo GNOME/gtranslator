@@ -237,7 +237,7 @@ GtrComment *gtranslator_comment_copy(GtrComment **comment)
  */
 void gtranslator_comment_free(GtrComment **comment)
 {
-	if(GTR_COMMENT(*comment)->comment)
+	if(*comment)
 	{
 		GTR_FREE(GTR_COMMENT(*comment)->comment);
 		GTR_FREE(GTR_COMMENT(*comment)->pure_comment);
