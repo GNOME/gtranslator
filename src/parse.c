@@ -1141,8 +1141,11 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	/*
 	 * Remove the source tag and set the source tag to '1'.
 	 */
-	g_source_remove(autosave_source_tag);
-	autosave_source_tag=1;
+	if(autosave_source_tag > 1)
+	{
+		g_source_remove(autosave_source_tag);
+		autosave_source_tag=1;
+	}
 
 	/*
 	 * "Remove" the stored "runtime/filename" key.
