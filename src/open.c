@@ -33,6 +33,11 @@ gboolean gtranslator_open_po_file(gchar *file)
 	 */
 	#ifdef USE_VFS_STUFF
 	file=gtranslator_vfs_handle_open_file(file);
+
+	if(!file)
+	{
+		return FALSE;
+	}
 	#endif
 		
 	/*
