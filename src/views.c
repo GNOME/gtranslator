@@ -42,10 +42,11 @@ void show_c_format(void);
 void show_number(void);
 
 /*
- * A helper function for the number view -- extracts the figures from
- *  the given parts and displays them -- or not.
+ * Helper functions for the different views -- extract the content from the
+ *  the given parts and display them as desired.
  */
 void show_up_figures(GtkWidget *output_widget, const gchar *string);
+void show_up_formats(GtkWidget *output_widget, const gchar *string);
 
 /*
  * Set up the given view for the current message.
@@ -138,13 +139,22 @@ void show_number()
 	/*
 	 * Make the translation box non-editable.
 	 */
-	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
+	if(previous_view==GTR_MESSAGE_VIEW)
+	{
+		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
+	}
 
 	/*
 	 * Show the nude figures!
 	 */
 	show_up_figures(text1, msg->msgid);
 	show_up_figures(trans_box, msg->msgstr);
+
+	/*
+	 * Disable saving as the figures view does also make changes
+	 *  which shouldn't be saved.
+	 */
+	disable_actions(ACT_SAVE);
 }
 
 /*
@@ -153,123 +163,26 @@ void show_number()
 void show_c_format()
 {
 	GtrMsg *msg=GTR_MSG(po->current->data);
-	gboolean activate=TRUE;
 
 	g_return_if_fail(msg!=NULL);
 	
 	current_view=GTR_C_FORMAT_VIEW;
+	clean_text_boxes();
 
-	if(!strstr(msg->msgid, "%"))
+	/*
+	 * Disable editing of pure view data.
+	 */
+	if(previous_view==GTR_MESSAGE_VIEW)
 	{
-		activate=FALSE;
-		
-		gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
-
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-			_("No C format symbols present for this message"), -1);
-	}
-	
-	if(msg->msgstr && !strstr(msg->msgstr, "%"))
-	{
-		activate=FALSE;
-		
-		gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
-
-		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-			_("No C format symbols present for this message"), -1);
-	}
-
-	if(activate)
-	{
-		#define delta(x) (pos[x].rm_eo-pos[x].rm_so)
-		GString *format=g_string_new("");
-		gint z=1;
-		
-		regex_t *rX;
-		regmatch_t pos[3];
-	
-		rX=gnome_regex_cache_compile(rxc, "\%[a-zA-Z0-9.-+]", 
-			REG_EXTENDED|REG_NEWLINE);
-		
-		/*
-		 * Disable editing of the format view data.
-		 */
 		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
-
-		clean_text_boxes();
-
-		if(msg->msgid && !regexec(rX, msg->msgid, 3, pos, 0))
-		{
-			while(pos[z].rm_so!=-1)
-			{
-				if(format->len > 0)
-				{
-					if(wants.dot_char)
-					{
-						format=g_string_append(format,
-							_("·"));
-					}
-					else
-					{
-						format=g_string_append(format, 
-							" ");
-					}
-				}
-				
-				format=g_string_append(format,
-					g_strndup(msg->msgid+pos[z].rm_so, delta(z)));
-			}
-		}
-
-		if(format->len > 0)
-		{
-			gtranslator_syntax_insert_text(text1, format->str);
-		}
-		else
-		{
-			gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-				_("Couldn't extract C format symbols!"), -1);
-		}
-
-		format=g_string_truncate(format, 0);
-		z=1;
-
-		if(msg->msgstr && !regexec(rX, msg->msgstr, 3, pos, 0))
-		{
-			while(pos[z].rm_so!=-1)
-			{
-				if(format->len > 0)
-				{
-					if(wants.dot_char)
-					{
-						format=g_string_append(format,
-							_("·"));
-					}
-					else
-					{
-						format=g_string_append(format, 
-							" ");
-					}
-				}
-
-				format=g_string_append(format,
-					g_strndup(msg->msgstr+pos[z].rm_so, delta(z)));
-			}
-		}
-
-		if(format->len > 0)
-		{
-			gtranslator_syntax_insert_text(trans_box, format->str);
-		}
-		else
-		{
-			gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-				_("Couldn't extract C format symbols!"), -1);
-		}
-
-		g_string_free(format, FALSE);
 	}
-	
+
+	/*
+	 * Use the new helper functions for the real core task.
+	 */
+	show_up_formats(text1, msg->msgid);
+	show_up_formats(trans_box, msg->msgstr);
+
 	/*
 	 * Disable the current save action as the C format function applies 
 	 *  changes which shouldn't be saved.
@@ -287,6 +200,9 @@ void show_up_figures(GtkWidget *output_widget, const gchar *string)
 	
 	g_return_if_fail(output_widget!=NULL);
 
+	/*
+	 * Do not operate on empty strings.
+	 */
 	if(!string)
 	{
 		return;
@@ -295,23 +211,29 @@ void show_up_figures(GtkWidget *output_widget, const gchar *string)
 	{
 		gint c;
 
-		for(c=0; c < (strlen(string)-1); ++c)
+		for(c=0; c < (strlen(string) - 1); ++c)
 		{
+			/*
+			 * Aha, a number has been found!
+			 */
 			if(isdigit(string[c]))
 			{
 				figures=g_string_append_c(figures, string[c]);
 			}
-			else if(((c-1) > 0) && (isdigit(string[c-1])))
+			else if(((c-1) >= 0) && (isdigit(string[c-1])))
 			{
+				/*
+				 * If the last char was a number but the current one
+				 *  is not a number we'd insert a free space (or the
+				 *   special char) for better readability.
+				 */
 				if(wants.dot_char)
 				{
-					figures=g_string_append(figures, 
-						_("·"));
+					figures=g_string_append(figures, _("·"));
 				}
 				else
 				{
-					figures=g_string_append(figures,
-						" ");
+					figures=g_string_append(figures, " ");
 				}
 			}
 		}
@@ -328,6 +250,67 @@ void show_up_figures(GtkWidget *output_widget, const gchar *string)
 	}
 
 	g_string_free(figures, FALSE);
+}
+
+/*
+ * Extract the C format calls from the string and display them.
+ */
+void show_up_formats(GtkWidget *output_widget, const gchar *string)
+{
+	GString *formats=g_string_new("");
+	gint z;
+
+	g_return_if_fail(output_widget!=NULL);
+
+	if(!string)
+	{
+		return;
+	}
+
+	for(z=0; z < (strlen(string) - 1); ++z)
+	{
+		if(string[z]=='%' && string[z+1])
+		{
+			formats=g_string_append_c(formats, string[z]);
+
+			/*
+			 * Recognize and get the formats.
+			 */
+			if(string[z+1]=='l' && string[z+2])
+			{
+				formats=g_string_append_c(formats, 'l');
+				formats=g_string_append_c(formats, string[z+2]);
+			}
+			else
+			{
+				formats=g_string_append_c(formats, string[z+1]);
+			}
+
+			/*
+			 * Insert the special/dot char after a format block.
+			 */
+			if(wants.dot_char)
+			{
+				formats=g_string_append(formats, _("·"));
+			}
+			else
+			{
+				formats=g_string_append(formats, " ");
+			}
+		}
+	}
+
+	if(formats->len > 0)
+	{
+		gtranslator_syntax_insert_text(output_widget, formats->str);
+	}
+	else
+	{
+		gtk_text_insert(GTK_TEXT(output_widget), NULL, NULL, NULL,
+			_("No C formats present!"), -1);
+	}
+	
+	g_string_free(formats, FALSE);
 }
 
 /*

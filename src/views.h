@@ -22,6 +22,9 @@
 
 #include <glib.h>
 
+/*
+ * gtranslator's view atre all part of this enumeration.
+ */
 typedef enum {
 	GTR_C_FORMAT_VIEW,
 	GTR_COMMENT_VIEW,
