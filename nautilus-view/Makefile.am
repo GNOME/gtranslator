@@ -47,6 +47,8 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/sidebar.o \
 	$(srcbuild)/stylistics.o \
 	$(srcbuild)/syntax.o \
+	$(srcbuild)/undo-core.o \
+	$(srcbuild)/undo.o \
 	$(srcbuild)/update.o \
 	$(srcbuild)/vfs-handle.o \
 	$(srcbuild)/views.o
