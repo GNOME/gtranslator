@@ -41,7 +41,7 @@ static GtkWidget
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb,
-	*enable_popup_menu, *use_dot_char;
+	*enable_popup_menu, *use_dot_char, *use_update_function;
 
 /* The preferences dialog */
 static GtkWidget *prefs = NULL;
@@ -194,7 +194,7 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	**/
 	first_page = append_page_table(prefs, 2, 2, _("Personal information"));
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
-	third_page = append_page_table(prefs, 4, 1, _("Po file options"));
+	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 3, 1, _("Miscellaneous"));
 	/**
 	* Create all the personal entries
@@ -260,7 +260,10 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	enable_popup_menu=attach_toggle_with_label(fourth_page, 1,
 		_("Enable the popup menu"),
 		wants.popup_menu, prefs_box_changed);	
-	save_geometry_tb=attach_toggle_with_label(fourth_page, 2,
+	use_update_function=attach_toggle_with_label(fourth_page, 2,
+		_("Enable the update function of gtranslator (you need the sources for this)"),
+		wants.update_function, prefs_box_changed);
+	save_geometry_tb=attach_toggle_with_label(fourth_page, 3,
 		_("Save geometry on exit & restore it on startup"),
 		wants.save_geometry, prefs_box_changed);	
 	/**
@@ -301,6 +304,7 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.warn_if_no_change = if_active(warn_if_no_change);
 	wants.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
 	wants.dot_char = if_active(use_dot_char);
+	wants.update_function = if_active(use_update_function);
 	wants.popup_menu = if_active(enable_popup_menu);
 #undef if_active
 
@@ -321,6 +325,8 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 			      wants.dont_save_unchanged_files);
 	gtranslator_config_set_bool("toggles/use_dot_char",
 			      wants.dot_char);
+	gtranslator_config_set_bool("toggles/use_update_function",
+			      wants.update_function);		      
 	gtranslator_config_set_bool("toggles/enable_popup_menu",
 			      wants.popup_menu);		      
 }
@@ -415,6 +421,8 @@ void read_prefs(void)
 	    gtranslator_config_get_bool("toggles/do_not_save_unchanged_files");
 	wants.popup_menu =
 	    gtranslator_config_get_bool("toggles/enable_popup_menu");
+	wants.update_function =
+	    gtranslator_config_get_bool("toggles/use_update_function");    
 	wants.dot_char = 
 	    gtranslator_config_get_bool("toggles/use_dot_char");    
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");

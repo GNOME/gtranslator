@@ -60,19 +60,50 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 /**
 * The menu-entries
 **/
+
+/**
+* The recenlty used menu in a little bit different manner ( this is just
+*  a placeholder.
+**/
+static GnomeUIInfo the_last_files_menus[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Recent files"),
+	 N_("The list of the last files you've opened."),
+	 NULL, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+	 0, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+        GNOMEUIINFO_END
+};
+
+/**
+* The File menu.
+**/
 static GnomeUIInfo the_file_menu[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_Compile"),
 	 N_("Compile the po-file"),
 	 compile, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
-	 GDK_C, GDK_MOD1_MASK, NULL},
+	 GDK_C, GDK_MOD1_MASK, NULL
+	},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
 	GNOMEUIINFO_MENU_SAVE_ITEM(save_current_file, NULL),
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
 	GNOMEUIINFO_MENU_REVERT_ITEM(revert_file, NULL),
 	GNOMEUIINFO_MENU_CLOSE_ITEM(close_file, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("Update po-file"),
+	 N_("Update the po-file"),
+	 update, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
+	 GDK_F5, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_SUBTREE( N_("Recen_t files"), the_last_files_menus),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(gtranslator_quit, NULL),
 	GNOMEUIINFO_END
@@ -201,10 +232,9 @@ static GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_END
 };
 
-/* 
- * The toolbar buttons
- */
-
+/** 
+* The toolbar buttons
+* */
 static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
 			       N_("Compile the po-file"),
@@ -214,6 +244,10 @@ static GnomeUIInfo the_toolbar[] = {
 			       N_("Open a po-file"),
 			       open_file,
 			       GNOME_STOCK_PIXMAP_OPEN),
+	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
+			       N_("Update the po-file"),
+			       update,
+			       GNOME_STOCK_PIXMAP_REFRESH),		       
 	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
 			       N_("Save File"),
 			       save_current_file,
@@ -389,8 +423,9 @@ static void create_actions(void)
 {
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[0]);
-	insert_action(ACT_SAVE, the_file_menu[3], the_toolbar[2]);
-	insert_action(ACT_SAVE_AS, the_file_menu[4], the_toolbar[3]);
+	insert_action(ACT_SAVE, the_file_menu[3], the_toolbar[3]);
+	insert_action(ACT_UPDATE, the_file_menu[8], the_toolbar[2]);
+	insert_action(ACT_SAVE_AS, the_file_menu[4], the_toolbar[4]);
 	insert_action(ACT_REVERT, the_file_menu[5], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[6], NONE);
 	/*------------------------------------------------ */
@@ -401,7 +436,7 @@ static void create_actions(void)
 	insert_action(ACT_CLEAR, the_edit_menu[5], NONE);
 	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[7]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
-	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[4]);
+	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[5]);
 	insert_action(ACT_SPELL, the_edit_menu[11], NONE);
 	/*------------------------------------------------ */
 	insert_action(ACT_FIRST, the_messages_menu[0], the_searchbar[0]);
@@ -425,7 +460,7 @@ void disable_actions_no_file(void)
 			ACT_CLOSE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_FIRST,
 			ACT_BACK, ACT_NEXT, ACT_LAST, ACT_GOTO, ACT_UNDO,
-			ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
+			ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED, ACT_UPDATE,
 			ACT_TRANSLATED, ACT_FUZZY, ACT_STICK);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
@@ -434,8 +469,16 @@ void enable_actions_just_opened(void)
 {
 	enable_actions(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_CUT, ACT_COPY,
 		       ACT_PASTE, ACT_CLEAR, ACT_FIND, ACT_HEADER, ACT_NEXT,
-		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED,
-		       ACT_FUZZY, ACT_STICK);
+		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED, ACT_FUZZY,
+		       ACT_STICK);
+	/**
+	* If we'd have the option to use the update function set, enable the
+	*  Update button in the toolbar and in the menu.
+	**/	       
+	if(wants.update_function)
+	{
+		enable_actions(ACT_UPDATE);	
+	}	       
 	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 }
 
@@ -500,6 +543,8 @@ void create_app1(void)
 	gnome_app_install_menu_hints(GNOME_APP(app1), the_menus);
 
 	create_actions();
+
+	gtranslator_display_recent();
 
 	/**
 	* The callbacks list

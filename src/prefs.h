@@ -45,6 +45,10 @@ struct {
 	* The popup menu enableing/disabling option.
 	**/
 	guint popup_menu		: 1;
+	/**
+	* If the update function should be disabled all the time.
+	**/
+	guint update_function		: 1;
 } wants;
 
 /* Preferences-box creation and callbacks */

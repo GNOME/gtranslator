@@ -11,3 +11,5 @@ Applicationicondir = $(datadir)/pixmaps
 ##
 Application_DATA = gtranslator.desktop
 Applicationicon_DATA = gtranslator.png
+
+EXTRA_DIST = $(Application_DATA) $(Applicationicon_DATA)

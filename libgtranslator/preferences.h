@@ -37,8 +37,8 @@
 * libgtranslator's preferences routines have to be prepended by
 *  an initialization and a finalization.
 **/
-void gtranslator_config_init();
-void gtranslator_config_close();
+void gtranslator_config_init(void);
+void gtranslator_config_close(void);
 
 /**
 * These routines are good for setting/getting boolean values.
@@ -61,7 +61,7 @@ gchar *gtranslator_config_get_string(gchar *path);
 /**
 * These functions store/recall the last run date of gtranslator.
 **/
-gchar *gtranslator_config_get_last_run_date();
-void gtranslator_config_set_last_run_date();
+gchar *gtranslator_config_get_last_run_date(void);
+void gtranslator_config_set_last_run_date(void);
 
 #endif

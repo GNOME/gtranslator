@@ -11,3 +11,5 @@ Mimeinfofilesdir = $(datadir)/mime-info
 ##
 Mimeicon_DATA = application-x-po.png
 Mimeinfofiles_DATA = gtranslator.mime gtranslator.keys
+
+EXTRA_DIST = $(Mimeicon_DATA) $(Mimeinfofiles_DATA)

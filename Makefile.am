@@ -7,9 +7,10 @@ EXTRA_DIST=INSTALL.CVS kabalak_generate_all_the_files.sh \
 		po/README.tools
 
 distpacks: distdir
-	-chmod -R a+r $(distdir)
-	[ -f $(distdir).tar.gz ] && rm -f $(distdir).tar.gz
-	[ -f $(distdir).tar.bz2 ] && rm -f $(distdir).tar.bz2
-	$(TAR) choIf $(distdir).tar.bz2 $(distdir)
-	$(TAR) chozf $(distdir).tar.gz $(distdir)
-	-rm -rf $(distdir)
+	@-rm -f $(distdir).tar.bz2
+	@-rm -f $(distdir).tar.gz
+	@echo Creating tar gzip/bzip2 packages of $(distdir)...
+	@$(TAR) choIf $(distdir).tar.bz2 $(distdir)
+	@$(TAR) chozf $(distdir).tar.gz $(distdir)
+	@echo Cleaning up...
+	@-rm -rf $(distdir)

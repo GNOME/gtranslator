@@ -43,6 +43,7 @@ gchar status[128];
 enum {
 	ACT_COMPILE,
 	ACT_SAVE,
+	ACT_UPDATE,
 	ACT_SAVE_AS,
 	ACT_REVERT,
 	ACT_CLOSE,

@@ -1,3 +1,27 @@
+2000-10-05  Fatih Demir	<kabalak@gmx.net>
+
+	* gui.c: Added "Recent files" submenu into the File tree and
+		put some dope stuff around it.
+
+	* parse.c/h: Added Recent file menus on top of the libgnome's
+		gnome_history interface. It works! Still needs 
+		 preferences merging...
+
+	* parse.c/h: Added the update function's skeleton -- nothing
+		real has been written yet.
+
+	* prefs.c: Added another option to disable the update function
+		as you need the original package sources for this
+		 ( gtranslator will use the update.pl scripts in the
+		    ./po-dir for this ) and as you need the sources.
+
+	* gui.c: Added an "Update" button to the toolbar and to the
+		menus; till now this hasn't got any use as the function
+		 isn't written yet but that will happen soon....
+		Enable/Disable this entry & button accordingly to the
+		 option set in the preferences and to the case if a
+		  file is opened or not.
+
 2000-10-04  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Added more "live" statusbar update for the status

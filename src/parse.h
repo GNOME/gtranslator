@@ -73,7 +73,20 @@ void save_current_file(GtkWidget * widget, gpointer useless);
 void revert_file(GtkWidget * widget, gpointer useless);
 void close_file(GtkWidget * widget, gpointer useless);
 
+/**
+* The compile function.
+**/
 void compile(GtkWidget * widget, gpointer useless);
+
+/**
+* The update function.
+**/
+void update(GtkWidget *widget, gpointer useless);
+
+/**
+* This shows you the most recent menus.
+**/
+void gtranslator_display_recent(void);
 
 /* A cache for saving regexps */
 GnomeRegexCache *rxc;

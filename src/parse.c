@@ -232,6 +232,7 @@ static gboolean actual_parse(void)
 		g_free(error);
 		return FALSE;
 	}
+	
 	/* We've prepended every message, so let's reverse now */
 	po->messages = g_list_reverse(po->messages);
 	return TRUE;
@@ -596,3 +597,124 @@ void compile(GtkWidget * widget, gpointer useless)
 	g_free(cmd);
 }
 
+/**
+* The recent menus stuff.
+**/
+void gtranslator_display_recent(void)
+{
+	/**
+	* Couldn't we do that better with bonobo 0.19 ?
+	**/
+	gchar *name;
+	gchar *menupath;
+	gint len;
+	GnomeUIInfo *menu;
+	GnomeHistoryEntry recent;
+	GList *list;
+	
+	/**
+	* Get GNOME's list of the recently used files.
+	**/
+	list=gnome_history_get_recently_used();
+	/**
+	* Are there any recent files ?
+	**/
+	if(!list->data)
+	{
+		return;
+	}
+
+	/**
+	* Remove some nice stuff.
+	**/
+	gnome_app_remove_menu_range(GNOME_APP(app1), _("_File/Recen_t files/"), 0, 0);
+	
+	/**
+	* Create a new GnomeUIInfo widget.
+	**/
+	menu=g_new0(GnomeUIInfo,2);
+	
+	/**
+	* Get the menupath etc.
+	**/
+	menupath=g_new(gchar, strlen(_("_File/Recen_t files")) + strlen("<Separator>") + 2 );
+	sprintf(menupath, "%s/%s", _("_File/Recen_t files"), "<Separator>");
+	/**
+	* Insert the end point of the menus.
+	**/
+	menu->type=GNOME_APP_UI_ENDOFINFO;
+	/**
+	* Insert this menu into the menupath.
+	**/
+	gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
+	
+	/**
+	* Parse the list, but maximal 2 entries.
+	**/
+	for(len=((g_list_length(list)-1)<2)?(g_list_length(list)-1):2;len>=0;len--)
+	{
+		/**
+		* Get the GnimeHistory Entry.
+		**/
+		recent=g_list_nth_data(list, len);
+		/**
+		* copy the filename.
+		**/
+		name=g_strdup(recent->filename);
+		
+		/**
+		* Set the label name.
+		**/
+		menu->label=g_strdup_printf("%i. %-s", len+1, recent->filename);
+		/**
+		* Set the GnomeUIInfo settings and labels.
+		**/
+		menu->type=GNOME_APP_UI_ITEM;
+		menu->hint=g_strdup_printf(_("Open %s"), recent->filename);
+		menu->moreinfo=(gpointer)parse;
+		menu->user_data=name;
+		menu->unused_data=NULL;
+		menu->pixmap_type=0;
+		menu->pixmap_info=NULL;
+		menu->accelerator_key=0;
+		/**
+		* Insert a GNOMEUIINFO_END equivalent.
+		**/
+		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
+
+		/**
+		* Insert it into the menus.
+		**/
+		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
+		/**
+		* Free the label.
+		**/	
+		g_free(menu->label);
+	}
+	/**
+	* Free the string and the GnomeUIInfo structure.
+	**/
+	if(menu)
+	{
+		g_free(menu);
+	}
+	if(menupath)
+	{	
+		g_free(menupath);
+	}	
+	/**
+	* At last: free the GnomeHistoryEntry list.
+	**/
+	gnome_history_free_recently_used_list(list);
+}
+
+/**
+* The update function.
+**/
+void update(GtkWidget *widget, gpointer useless)
+{
+	/**
+	* FIXME
+	**/
+	gnome_app_message(GNOME_APP(app1), _("Not written yet!"));
+}
