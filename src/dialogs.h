@@ -1,0 +1,80 @@
+/**
+* Fatih Demir [ kabalak@gmx.net ]
+* Gediminas Paulauskas <menesis@delfi.lt>
+*
+* (C) 2000 Published under GNU GPL V 2.0+
+*
+* This is the general place for all dialogs
+* used in gtranslator ...
+*
+* the header ...
+**/
+
+#ifndef GTR_GTR_DIALOGS_H
+#define GTR_GTR_DIALOGS_H 1
+
+#ifdef HAVE_CONFIG_H	
+	#include <config.h>
+#endif
+
+#include "gui.h"
+#include "parse.h"
+
+#define raise_and_return_if_exists(dlg)\
+	if (dlg) {\
+		gdk_window_show(dlg->window);\
+		gdk_window_raise(dlg->window);\
+		return;\
+	}
+
+// Sets window name/class, icon for it, connects the destroy signal,
+// and shows it. dlg should be static or global
+void show_nice_dialog(GtkWidget **dlg, const gchar *wmname);
+
+/**
+* The widgets for the dialogs & the functions to call them .
+**/
+
+/**
+* 9/The query dialog widgets
+**/
+GtkWidget *q_dlg,*q_dlg_cancel,*q_dlg_query,*q_entry,*q_dlg_spin_button;
+GtkWidget *r_window_dlg,*r_window_apply,*r_window_cancel;
+
+/**
+* The function prototypes :
+**/
+void compile_error_dialog(GtkWidget *widget,gpointer useless);
+void no_changed_dialog(GtkWidget *widget,gpointer useless);
+
+/**
+* The file open/save_as file selections
+**/
+void save_file_as(GtkWidget *widget,gpointer useless);
+void open_file(GtkWidget *widget,gpointer useless);
+gboolean ask_to_save_file(void);
+
+/**
+* The GoTo message dialog
+**/
+void goto_dlg(GtkWidget *widget,gpointer useless);
+
+/**
+* The basical search dialog
+**/
+void find_dialog(GtkWidget *widget,gpointer useless);
+
+/**
+* The query dialog
+**/
+void query_dialog_create();
+void query_dialog(GtkWidget *widget,gpointer useless);
+void query_dialog_hide(GtkWidget *widget,gpointer useless);
+
+/**
+* The result window.
+**/
+void r_window(GtkWidget *widget,gpointer useless);
+void r_window_hide(GtkWidget *widget,gpointer useless);
+
+#endif
