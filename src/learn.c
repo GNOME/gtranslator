@@ -269,10 +269,14 @@ static gchar *gtranslator_learn_buffer_escape(gchar *str)
 	g_return_val_if_fail(str!=NULL, NULL);
 
 	/*
-	 * Replace the "&" characters with their XML entity "&amp;".
+	 * Escape all necessary characters rightly for saving in the XML file.
 	 */
-	write_string=nautilus_str_replace_substring(str,
-		"&", "&amp;");
+	write_string=nautilus_str_replace_substring(str, "&", "&amp;");
+	write_string=nautilus_str_replace_substring(write_string, "<", "&lt;");
+	write_string=nautilus_str_replace_substring(write_string, ">", "&gt;");
+	write_string=nautilus_str_replace_substring(write_string, "'", "&apos;");
+	write_string=nautilus_str_replace_substring(write_string, "\"", "&quot;");
+	
 
 	return write_string;
 }

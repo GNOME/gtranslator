@@ -216,7 +216,8 @@ void gtranslator_create_main_window(void)
 	gtranslator_config_init();
 
 	/*
-	 * Activate the paned widgets if desired and fill them up with the right positions.
+	 * Activate the paned widgets if desired and set the pane gutter to
+	 *  the right place.
 	 */
 	if(GtrPreferences.show_sidebar)
 	{
@@ -227,7 +228,7 @@ void gtranslator_create_main_window(void)
 	}
 	else
 	{
-		e_paned_set_position(E_PANED(sidebar_pane), 0);
+		e_paned_set_position(E_PANED(sidebar_pane), -1);
 	}
 
 	if(GtrPreferences.show_messages_table)
@@ -239,7 +240,7 @@ void gtranslator_create_main_window(void)
 	}
 	else
 	{
-		e_paned_set_position(E_PANED(table_pane), 0);
+		e_paned_set_position(E_PANED(table_pane), -1);
 	}
 	
 	gtranslator_config_close();
