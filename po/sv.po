@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-10-06 20:36+0200\n"
-"PO-Revision-Date: 2000-10-06 20:39+0200\n"
+"POT-Creation-Date: 2000-10-09 00:53+0200\n"
+"PO-Revision-Date: 2000-10-09 00:53+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -226,7 +226,7 @@ msgstr "Sista"
 msgid "Missing"
 msgstr "Saknade"
 
-#: src/gui.c:288 src/gui.c:708
+#: src/gui.c:288 src/gui.c:712
 msgid "Fuzzy"
 msgstr "Luddig"
 
@@ -264,20 +264,20 @@ msgstr "Hej då!"
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:698
+#: src/gui.c:702
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Meddelande %d / %d / Status:"
 
-#: src/dialogs.c:217 src/gui.c:712
+#: src/dialogs.c:217 src/gui.c:716
 msgid "Translated"
 msgstr "Översatt"
 
-#: src/gui.c:718
+#: src/gui.c:722
 msgid "Stick"
 msgstr "Klistra"
 
-#: src/gui.c:722
+#: src/gui.c:726
 msgid "Untranslated"
 msgstr "Oöversatt"
 
@@ -341,105 +341,113 @@ msgstr "Sök i: "
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Ett fel inträffade då msgfmt kördes:\n"
 
-#: src/prefs.c:198
+#: src/prefs.c:199
 msgid "gtranslator -- options"
 msgstr "gtranslator -- alternativ"
 
 #. *
 #. * The tables for holding all the entries below
 #. *
-#: src/prefs.c:202
+#: src/prefs.c:203
 msgid "Personal information"
 msgstr "Personlig information"
 
-#: src/prefs.c:203
+#: src/prefs.c:204
 msgid "Language options"
 msgstr "Språkalternativ"
 
-#: src/prefs.c:204
+#: src/prefs.c:205
 msgid "Po file options"
 msgstr "Alternativ för po-filer"
 
-#: src/prefs.c:205
+#: src/prefs.c:206
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: src/prefs.c:206
+#: src/prefs.c:207
 msgid "Recent files menu"
 msgstr "Meny med senaste filer"
 
-#: src/prefs.c:211
+#: src/prefs.c:212
 msgid "Author's name :"
 msgstr "Författarens namn:"
 
-#: src/prefs.c:214
+#: src/prefs.c:215
 msgid "Author's EMail :"
 msgstr "Författarens e-post:"
 
-#: src/header_stuff.c:307 src/prefs.c:222
+#: src/header_stuff.c:307 src/prefs.c:223
 msgid "Language :"
 msgstr "Språk:"
 
-#: src/prefs.c:226
+#: src/prefs.c:227
 msgid "Language code :"
 msgstr "Språkkod:"
 
-#: src/prefs.c:231
+#: src/prefs.c:232
 msgid "Language group's EMail :"
 msgstr "Språkgruppens e-postadress:"
 
-#: src/header_stuff.c:316 src/prefs.c:235
+#: src/header_stuff.c:316 src/prefs.c:236
 msgid "Charset :"
 msgstr "Teckentabell:"
 
-#: src/header_stuff.c:320 src/prefs.c:239
+#: src/header_stuff.c:320 src/prefs.c:240
 msgid "Encoding :"
 msgstr "Kodning:"
 
-#: src/prefs.c:247
+#: src/prefs.c:248
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Sätt icke-luddig status om meddelandet ändrades"
 
-#: src/prefs.c:251
+#: src/prefs.c:252
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Varna om po-filen innehåller luddiga översättningar"
 
-#: src/prefs.c:255
+#: src/prefs.c:256
 msgid "Don't save unchanged .po-files"
 msgstr "Spara inte po-filer som inte ändrats"
 
-#: src/prefs.c:259
+#: src/prefs.c:260
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Varna vid försök att spara en fil som inte ändrats"
 
-#: src/prefs.c:266
+#: src/prefs.c:267
 msgid "Use the dot char (\"·\") instead of a free space"
 msgstr "Använd punkttecknet (\"·\") istället för blanksteg"
 
-#: src/prefs.c:269
+#: src/prefs.c:270
 msgid "Enable the popup menu"
 msgstr "Aktivera popup-menyn"
 
-#: src/prefs.c:272
+#: src/prefs.c:273
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
 "Aktivera uppdateringsfunktionen i gtranslator (du behöver källkoden för "
 "detta)"
 
-#: src/prefs.c:275
+#: src/prefs.c:276
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Spara gtranslators geometri vid avslut och återställ vid uppstart"
 
-#: src/prefs.c:287
-msgid "Check every file for existence"
-msgstr "Kontrollera varje fils existens"
+#: src/prefs.c:279
+msgid "Don't show the update information dialogs"
+msgstr "Visa inte dialogfönster med uppdateringsinformation"
 
-#: src/prefs.c:293
-msgid "Number of maximal shown entries:"
-msgstr "Största antalet visade poster:"
+#: src/prefs.c:291
+msgid "Check every file in the list for existence"
+msgstr "Kontrollera att varje fil i listan existerar"
 
-#: src/prefs.c:391
+#: src/prefs.c:294
+msgid "Delete obsolete entries in the recent files list"
+msgstr "Ta bort föråldrade poster i listan med senaste filer"
+
+#: src/prefs.c:300
+msgid "Number of maximal shown entries in the recent files list:"
+msgstr "Maximala antalet visade poster i listan över senaste filer:"
+
+#: src/prefs.c:404
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -449,7 +457,7 @@ msgstr ""
 "som får gtranslator att göra de saker som DU vill.\n"
 " "
 
-#: src/prefs.c:546
+#: src/prefs.c:555
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometristrängen \"%s\" kunde inte tolkas!"
@@ -506,7 +514,7 @@ msgstr "Språkgruppens e-post:"
 msgid "Specifies the main-window geometry"
 msgstr "Anger storlek och placering på huvudfönstret"
 
-#: src/main.c:87
+#: src/main.c:86
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Fel under initiering av GConf: %s."
@@ -589,7 +597,7 @@ msgstr ""
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- oförändrad"
 
-#: src/parse.c:547
+#: src/parse.c:548
 #, c-format
 msgid ""
 "File %s\n"
@@ -598,11 +606,11 @@ msgstr ""
 "Filen %s\n"
 "har ändrats. Vill du återgå till den sparade kopian?"
 
-#: src/parse.c:584
+#: src/parse.c:585
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Tyvärr, msgfmt finns inte tillgängligt på ditt system!"
 
-#: src/parse.c:609
+#: src/parse.c:610
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -612,23 +620,24 @@ msgstr ""
 "%s"
 
 #. *
-#. * Get the menupath etc.
+#. * Delete the old entries.
 #. *
-#: src/parse.c:653 src/parse.c:654
+#: src/parse.c:649 src/parse.c:659 src/parse.c:660
 msgid "_File/Recen_t files/"
 msgstr "_Arkiv/Senas_te filer/"
 
-#: src/parse.c:698
+#: src/parse.c:704
 #, c-format
 msgid "Open %s"
 msgstr "Öppna %s"
 
-#. *
-#. * FIXME
-#. *
-#: src/parse.c:793
-msgid "Not written yet!"
-msgstr "Inte skrivet än!"
+#: src/parse.c:826
+msgid "The update caused no changes."
+msgstr "Uppdateringen orsakade inga ändringar."
+
+#: src/parse.c:844
+msgid "The update was successfull."
+msgstr "Uppdateringen lyckades."
 
 #: src/find.c:84
 #, c-format
@@ -1007,6 +1016,9 @@ msgstr "Vallonska"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "Walesiska"
+
+#~ msgid "Not written yet!"
+#~ msgstr "Inte skrivet än!"
 
 #~ msgid "The list of the last files you've opened."
 #~ msgstr "Listan med de senaste filerna som du öppnat."
