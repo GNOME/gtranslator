@@ -44,6 +44,7 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	const gchar *authors[] = {
 		"Ross Golder <ross@gtranslator.org>",
 		"Fatih Demir <kabalak@gtranslator.org>",
+		" -- ",
 		"Gediminas Paulauskas <menesis@delfi.lt>",
 		"Thomas Ziehmer <thomas@gtranslator.org>",
 		"Peeter Vois <peeter@gtranslator.org>",
