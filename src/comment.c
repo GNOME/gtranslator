@@ -31,7 +31,6 @@
 #include "utils.h"
 
 #include <gtk/gtklabel.h>
-
 /*
  * A small new structure table to make the comment type recognition
  *  a bit easier and more convenient.
@@ -297,8 +296,7 @@ void gtranslator_comment_display(GtrComment *comment)
 		}
 		else
 		{
-			comment_display_str=nautilus_str_middle_truncate(
-				comment->pure_comment, 82);
+		        comment_display_str=g_strdup(comment->pure_comment);
 		}
 	}
 
@@ -319,8 +317,6 @@ void gtranslator_comment_display(GtrComment *comment)
 	}
 
 	g_free(comment_display_str);
-
-	gtk_paned_set_position(GTK_PANED(content_pane), 0);
 }
 
 /*
