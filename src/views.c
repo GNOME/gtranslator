@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "comment.h"
 #include "gui.h"
 #include "message.h"
 #include "parse.h"
@@ -134,7 +135,7 @@ gboolean gtranslator_views_set(GtrView view)
  */
 void show_comment()
 {
-	gchar *comment=GTR_MSG(po->current->data)->comment;
+	gchar *comment=GTR_COMMENT(GTR_MSG(po->current->data)->comment)->pure_comment;
 
 	current_view=GTR_COMMENT_VIEW;
 	

@@ -247,16 +247,18 @@ gboolean gtranslator_comment_is_visible(GtrComment *comment)
 }
 
 /*
- * Popup the comment for the current message.
+ * Show the current message's comment.
  */
-void gtranslator_comment_pop_up(GtrComment *comment)
+void gtranslator_comment_display(GtrComment *comment)
 {
 	g_return_if_fail(file_opened==TRUE);
 	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
 
 	if(comment->type==TRANSLATOR_COMMENT)
 	{
-		g_warning("FIXME: Comment popup!");
+	}
+	else
+	{
 	}
 }
 

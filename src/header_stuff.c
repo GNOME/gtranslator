@@ -23,6 +23,7 @@
 #endif
 
 #include "actions.h"
+#include "comment.h"
 #include "dialogs.h"
 #include "gui.h"
 #include "header_stuff.h"
@@ -199,7 +200,7 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		i++;
 	}
 	g_strfreev(lines);
-	ph->comment = g_strdup(msg->comment);
+	ph->comment=g_strdup(GTR_COMMENT(msg->comment)->pure_comment);
 	if (ph->prj_name)
 		return ph;
 	else
@@ -284,11 +285,13 @@ Content-Transfer-Encoding: %s\n",
 	 */
 	if(h->comment[strlen(h->comment)-1] == '\n')
 	{
-		msg->comment = g_strdup(h->comment);
+		msg->comment = gtranslator_comment_new(h->comment);
 	}
 	else
 	{
-		msg->comment = g_strconcat(h->comment, "\n", NULL);
+		gchar *comchar=g_strdup_printf("%s\n", h->comment);
+		msg->comment = gtranslator_comment_new(comchar);
+		g_free(comchar);
 	}
 	
 	return msg;

@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include "comment.h"
 #include "find.h"
 #include "gui.h"
 #include "message.h"
@@ -170,7 +171,12 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 		} else actpos = 0;
 	}
 	if((GtrPreferences.find_in & findComment) && 2 == step) {
-		if (hits >= actpos) SEARCH(comment);
+		if (hits >= actpos)
+		{
+			g_list_free(poslist);
+			poslist = get_find_pos(GTR_COMMENT(GTR_MSG(msg->data)->comment)->comment);
+			hits = g_list_length(poslist);
+		}
 		if (hits > 0 && actpos < hits) {
 			/*
 			 * Hm, we found it in a comment, show it before

@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include "../../comment.h"
 #include "../../header_stuff.h"
 #include "../../message.h"
 #include "../../nautilus-string.h"

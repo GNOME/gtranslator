@@ -27,6 +27,7 @@
 #include <unistd.h>
 
 #include "actions.h"
+#include "comment.h"
 #include "dialogs.h"
 #include "gtkspell.h"
 #include "gui.h"
@@ -71,7 +72,7 @@ static void check_msg_status(GtrMsg * msg)
 {
 	if (msg->msgstr)
 		msg->status = GTR_MSG_STATUS_TRANSLATED;
-	if ((msg->comment) && (strstr(msg->comment, "#, fuzzy")))
+	if ((msg->comment) && GTR_COMMENT(msg->comment)->type==FUZZY_COMMENT)
 		msg->status |= GTR_MSG_STATUS_FUZZY;
 }
 
@@ -129,8 +130,9 @@ gboolean add_to_obsolete(gchar *comment)
 			else
 			{
 				gchar *tmp;
-				tmp=g_strconcat(po->obsolete, "\n", 
-						comment, NULL);
+				
+				tmp=g_strconcat(po->obsolete, "\n", comment, NULL);
+				
 				g_free(po->obsolete);
 				po->obsolete=tmp;
 			}
@@ -175,14 +177,12 @@ gboolean gtranslator_parse_core(void)
 			 * Set the comment & position.
 			 */
 			if (msg->comment == NULL) {
-				/*msg->pos = lines;*/
-				msg->comment = g_strdup(line);
+				msg->pos = lines;
+				msg->comment = gtranslator_comment_new(line);
 			} else {
 				gchar *tmp;
-				tmp = g_strconcat(msg->comment,	line, NULL);
-
-				g_free(msg->comment);
-				msg->comment = tmp;
+				tmp = g_strconcat(GTR_COMMENT(msg->comment)->comment, line, NULL);
+				gtranslator_comment_update(&msg->comment, tmp);
 			}
 		}
 		else {
@@ -195,8 +195,8 @@ gboolean gtranslator_parse_core(void)
 				}
 				else
 				{
-					if(add_to_obsolete(msg->comment)) {
-						g_free(msg->comment);
+					if(add_to_obsolete(GTR_COMMENT(msg->comment)->comment)) {
+						gtranslator_comment_free(&msg->comment);
 						msg->comment=NULL;
 					}
 				}
@@ -271,9 +271,9 @@ gboolean gtranslator_parse_core(void)
 		check_msg_status(msg);
 		po->messages = g_list_prepend(po->messages, (gpointer) msg);
 	}
-	else if(add_to_obsolete(msg->comment))
+	else if(add_to_obsolete(GTR_COMMENT(msg->comment)->comment))
 	{
-		g_free(msg->comment);
+		gtranslator_comment_free(&msg->comment);
 		g_free(msg);
 	}
 
@@ -513,32 +513,56 @@ static gchar *restore_msg(const gchar * given)
  */
 static void write_the_message(gpointer data, gpointer fs)
 {
-	GtrMsg *msg = GTR_MSG(data);
-	gchar *id, *str;
+	GtrMsg 	*msg;
+	GString *string;
+	gchar 	*id;
+	gchar	*str;
+
+	msg=GTR_MSG(data);
 
 	g_return_if_fail(fs!=NULL);
 	g_return_if_fail(msg!=NULL);
 
-	id = restore_msg(msg->msgid);
-	str = restore_msg(msg->msgstr);
-	
+	/*
+	 * Initialize the used GString with the comment of the message -- 
+	 *  if there's any comment for it of course.
+	 */
 	if(msg->comment)
 	{
-		fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
-			msg->comment, id, str);
+		string=g_string_new(GTR_COMMENT(msg->comment)->comment);
 	}
 	else
 	{
-		fprintf((FILE *) fs, "msgid \"%s\"\nmsgstr \"%s\"\n\n",
-			id, str);
+		string=g_string_new("");
 	}
+
+	/*
+	 * Preface for the msgid -- the content follows below.
+	 */
+	string=g_string_append(string,"msgid \"");
 	
 	/*
-	 * Unknown segfault reason causes us to uncomment the two g_free's.
-	 *
-	 * g_free(id);
-	 * g_free(msg);
+	 * Restore the msgid, append it and free it.
 	 */
+	id=restore_msg(msg->msgid);
+	string=g_string_append(string, id);
+	g_free(id);
+
+	/*
+	 * Preface for the msgstr -- the content comes below.
+	 */
+	string=g_string_append(string, "\"\nmsgstr \"");
+	
+	str=restore_msg(msg->msgstr);
+	string=g_string_append(string, str);
+	g_free(str);
+	
+	/*
+	 * Write the string content and the newlines to our write stream.
+	 */
+	fprintf((FILE *) fs, "%s\"\n\n", string->str);
+	
+	g_string_free(string, TRUE);
 }
 
 gboolean gtranslator_save_file(const gchar *name)

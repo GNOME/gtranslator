@@ -21,7 +21,7 @@
 #ifndef GTR_MESSAGES_H
 #define GTR_MESSAGES_H 1
 
-#include <glib.h>
+#include "comment.h"
 
 /*
  * The different stati of the messages.
@@ -40,11 +40,14 @@ typedef enum {
  * The generally used message structure in (lib-)gtranslator.
  */ 
 typedef struct {
-	gchar *comment;
-	gchar *msgid;
-	gchar *msgstr;
-	gint pos;
-	GtrMsgStatus status;
+	GtrComment 	*comment;
+
+	gchar 		*msgid;
+	gchar 		*msgstr;
+	
+	gint 		pos;
+	
+	GtrMsgStatus 	status;
 } GtrMsg;
 
 /*

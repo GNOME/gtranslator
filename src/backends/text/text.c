@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include "../../comment.h"
 #include "../../header_stuff.h"
 #include "../../message.h"
 #include "../../nautilus-string.h"
@@ -94,7 +95,7 @@ gboolean backend_open(const gchar *filename)
 			 */
 			msg->msgid=g_strdup(str);
 			msg->msgstr="";
-			msg->comment="";
+			msg->comment=gtranslator_comment_new("");
 
 			g_free(str);
 

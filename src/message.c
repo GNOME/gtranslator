@@ -22,6 +22,7 @@
 #endif
 
 #include "actions.h"
+#include "comment.h"
 #include "gtkspell.h"
 #include "gui.h"
 #include "learn.h"
@@ -388,7 +389,7 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
 	regex_t *rex;
 	regmatch_t pos[3];
-	gchar *comment = msg->comment;
+	gchar *comment = GTR_COMMENT(msg->comment)->comment;
 	
 	/* 
 	 * If fuzzy status is already correct
@@ -396,6 +397,8 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	if (((msg->status & GTR_MSG_STATUS_FUZZY) != 0) == fuzzy)
 		return;
 	if (fuzzy) {
+		gchar *comchar;
+		
 		msg->status |= GTR_MSG_STATUS_FUZZY;
 		po->fuzzy++;
 		rex = gnome_regex_cache_compile(rxc,
@@ -403,12 +406,16 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 			  REG_EXTENDED | REG_NEWLINE);
 		if (!regexec(rex, comment, 3, pos, 0)) {
 			comment[pos[1].rm_so] = '\0';
-			msg->comment = g_strdup_printf("%s#, fuzzy%s", comment, 
+			comchar = g_strdup_printf("%s#, fuzzy%s", comment, 
 					    comment+pos[1].rm_eo);
 		} else {
-			msg->comment = g_strdup_printf("%s#, fuzzy\n", comment);
+			comchar = g_strdup_printf("%s#, fuzzy\n", comment);
 		}
+
+		gtranslator_comment_update(&msg->comment, comchar);
+		
 		g_free(comment);
+		g_free(comchar);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
 		po->fuzzy--;

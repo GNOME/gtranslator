@@ -18,6 +18,7 @@
  */
 
 #include "actions.h"
+#include "comment.h"
 #include "find.h"
 #include "gui.h"
 #include "message.h"
@@ -189,7 +190,7 @@ static void replace_msg(gpointer data, gpointer replace)
 	switch(GtrPreferences.find_in)
 	{
 		case 4:
-			replace_core(&msg->comment, l_replace);
+			replace_core(&GTR_COMMENT(msg->comment)->comment, l_replace);
 				break;
 
 		case 2:
@@ -197,7 +198,7 @@ static void replace_msg(gpointer data, gpointer replace)
 				break;
 
 		case 3:
-			replace_core(&msg->comment, l_replace);
+			replace_core(&GTR_COMMENT(msg->comment)->comment, l_replace);
 			replace_core(&msg->msgstr, l_replace);
 				break;
 	}
