@@ -23,6 +23,7 @@
 
 int main(int argc,char *argv[])
 {
+	gchar *ert = g_new0(gchar,1);
 	#ifdef GCONF_IS_PRESENT
 	GError	*error;
 	gconf_init(argc,argv,error);
@@ -32,6 +33,10 @@ int main(int argc,char *argv[])
 	gtranslator_config_set_string("Merhaba", "Hello!");
 	g_print("Getting the test string .......");
 	g_print("\n%s\n",gtranslator_config_get_string("Merhaba"));
+	g_print("\nGetting string ... \n");
+	gtranslator_config_set_string("ert/er","ERT");
+	ert=gtranslator_config_get_string("ert/er");
+	g_print("\nLet's look @ %s\n\n",ert);
 	gtranslator_config_set_bool("Gidelim", TRUE);
 	g_print("Getting the stuff for boolean values ...");
 	if(gtranslator_config_get_bool("Gidelim")==TRUE)
@@ -42,5 +47,9 @@ int main(int argc,char *argv[])
 	gtranslator_config_set_int("Year",2000);
 	g_print("This should be true : 2000 == %i\n",gtranslator_config_get_int("Year"));
 	gtranslator_config_close();
+	if(ert)
+	{
+		g_free(ert);
+	}
 	return 0;
 }	
