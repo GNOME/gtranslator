@@ -66,7 +66,6 @@ static gchar	*learn_file=NULL;
 static gchar	*auto_translate_file=NULL;
 static gchar	*exporting_po_file=NULL;
 static gboolean	build_information=FALSE;
-static gboolean	no_modules=FALSE;
 gboolean 	nosyntax=FALSE;
 gboolean	open_anyway=FALSE;
 
@@ -119,8 +118,6 @@ int main(int argc, char *argv[])
 	
 	const char 	**args=NULL;
 	GValue value = { 0, };
-	poptContext ctx;
-	int i;
 
 	GError		*error=NULL;
 

@@ -72,7 +72,6 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 	if (_("Y")[0]=='Y')
 	{
 		gchar *middot=NULL;
-		gchar *encoding=NULL;
 
 		middot=g_locale_from_utf8("·", -1, NULL, NULL, NULL);
 
