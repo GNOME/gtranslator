@@ -1,5 +1,5 @@
 #include <gnome.h>
-
+#include <libgtranslator/preferences.h>
 
 void
 gtranslator_druid_finish               (GnomeDruidPage  *gnomedruidpage,

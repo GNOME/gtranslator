@@ -15,7 +15,6 @@
 
 #include "preferences-functions.h"
 #include "preferences-interface.h"
-#include "support.h"
 
 GtkWidget*
 create_gtranslator_preferences_dialog (void)

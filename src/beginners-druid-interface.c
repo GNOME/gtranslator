@@ -15,7 +15,6 @@
 
 #include "beginners-druid-functions.h"
 #include "beginners-druid-interface.h"
-#include "support.h"
 
 GtkWidget*
 create_gtranslator_druid (void)
@@ -262,6 +261,10 @@ create_gtranslator_druid (void)
   gnome_druid_page_finish_set_title (GNOME_DRUID_PAGE_FINISH (gtranslator_druid_finish), _("gtranslator's beginner's druid says: we're done."));
   gnome_druid_page_finish_set_text (GNOME_DRUID_PAGE_FINISH (gtranslator_druid_finish), _("The wise druid says: we're done :-)\n\nHopefully this is true..."));
 
+  gtranslator_config_init();
+  gtranslator_config_set_bool("informations/finish_config", FALSE);
+  gtranslator_config_close();
+  
   gtk_signal_connect (GTK_OBJECT (gtranslator_druid), "delete_event",
                       GTK_SIGNAL_FUNC (gtk_widget_hide),
                       gtranslator_druid);

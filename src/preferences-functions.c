@@ -6,7 +6,6 @@
 
 #include "preferences-functions.h"
 #include "preferences-interface.h"
-#include "support.h"
 
 
 gboolean

@@ -45,9 +45,7 @@ INCLUDES = \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
 	$(XML_CFLAGS) \
 	$(gconf_cflags) \
-	$(myicon) \
-	$(LIBGLADE_CFLAGS) \
-	-DINTERFACE_DIR=\"@INTERFACE_DIR@\"
+	$(myicon)
 
 bin_PROGRAMS = gtranslator
 
@@ -65,7 +63,11 @@ gtranslator_SOURCES = \
 	session.c session.h \
 	dnd.c dnd.h \
 	languages.h \
-	gnome-regex.c gnome-regex.h
+	gnome-regex.c gnome-regex.h \
+	beginners-druid-functions.c \
+	beginners-druid-interface.c \
+	open-po-file-dialog-functions.c \
+	open-po-file-dialog-interface.c
 
 gtranslator_LDADD = \
 	$(top_builddir)/libgtranslator/libgtranslator.la \
@@ -75,7 +77,6 @@ gtranslator_LDADD = \
 	$(INTLLIBS) \
 	$(gconf_libs) \
 	$(XML_LIBS) \
-	$(LIBGLADE_LIBS) \
 	$(vfs_libs)
 
 EXTRA_DIST = ChangeLog $(SophInterfaceFiles)

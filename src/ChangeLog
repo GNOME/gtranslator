@@ -1,7 +1,22 @@
 2000-12-28  Fatih Demir	<kabalak@gmx.net>
 
+	* Makefile.am: Include also the open-po-file-dialog sources.
+
+	* \*-functions/interface.h: Removed the inclusion of "support.h".
+
+	* beginners-druid-functions.h: Added <libgtranslator/preferences.h>
+		to the includes.
+
+	* beginners-druid-functions.c: Added the finish method which
+		is just a config-row for now.
+
+	* main.c: Try to set up a beginners' druid if there hasn't
+		been any stored configuration yet.
+
 	* Makefile.am: Define the "SophInterfaceFiles" which
-		are the new files.
+		are the new files, removed the LIBGLADE stuff
+		 in the cflags and libs and included the
+		  beginners' druid in the build.
 	
 	* beginners-druid-*.c/h, open-po-file-dialog-*.c/.h,
 		preferences-dialog-*.c/.h: Added the C sources for

@@ -6,7 +6,6 @@
 
 #include "open-po-file-dialog-functions.h"
 #include "open-po-file-dialog-interface.h"
-#include "support.h"
 
 
 void
