@@ -408,7 +408,7 @@ void gtranslator_learn_init()
 		
 		gtranslator_learn_buffer->doc=xmlParseFile(gtranslator_learn_buffer->filename);
 		g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
-		translator_learn_buffer->encoding=gtranslator_xml_get_string_prop_by_name_with_default(gtranslator_learn_buffer->doc->xmlRootNode, "encoding", "UTF-8");
+		gtranslator_learn_buffer->encoding=gtranslator_xml_get_string_prop_by_name_with_default(gtranslator_learn_buffer->doc->xmlRootNode, "encoding", "UTF-8");
 
 		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode->xmlChildrenNode;
 		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);

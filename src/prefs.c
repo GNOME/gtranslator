@@ -72,7 +72,7 @@ static GtkWidget
 	*autosave_with_suffix, *sweep_compile_file, *use_learn_buffer,
 	*show_messages_table, *rambo_function, *use_own_mt_colors,
 	*collapse_translated_entries, *auto_learn, *fuzzy_matching,
-	*show_comment, *highlight, *check_formats;
+	*show_comment, *highlight;
 
 /*
  * The timeout GtkSpinButton:
@@ -117,7 +117,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 2, _("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		5, 1, _("Po file editing"));
+		4, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		9, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -192,11 +192,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    	_("Highlight syntax of the translation messages"),
 		GtrPreferences.highlight, G_CALLBACK(gtranslator_preferences_dialog_changed));
 
-	check_formats =
-	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
-	    	_("Check messages for syntactical correctness"),
-		GtrPreferences.check_formats, G_CALLBACK(gtranslator_preferences_dialog_changed));
-
+	
 	/*
 	 * The fourth page with the popup menu & the dot_char.
 	 */
@@ -482,7 +478,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.fuzzy_matching = if_active(fuzzy_matching);
 	GtrPreferences.auto_learn = if_active(auto_learn);
 	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
-	GtrPreferences.check_formats = if_active(check_formats);
 	GtrPreferences.autosave = if_active(autosave);
 	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
 #undef if_active
@@ -612,8 +607,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.rambo_function);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      GtrPreferences.check_recent_file);
-	gtranslator_config_set_bool("toggles/check_formats",
-			      GtrPreferences.check_formats);
 	gtranslator_config_set_bool("toggles/highlight",
 			      GtrPreferences.highlight);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
@@ -799,8 +792,6 @@ void gtranslator_preferences_read(void)
 		"toggles/fuzzy_matching");
 	GtrPreferences.auto_learn = gtranslator_config_get_bool(
 		"toggles/auto_learn");
-	GtrPreferences.check_formats = gtranslator_config_get_bool(
-		"toggles/check_formats");
 	GtrPreferences.highlight = gtranslator_config_get_bool(
 		"toggles/highlight");
 	GtrPreferences.match_case = gtranslator_config_get_bool(

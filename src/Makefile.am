@@ -42,7 +42,6 @@ gtranslator_SOURCES = \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
-	formats.c formats.h \
 	gtkspell.c gtkspell.h \
 	gui.c gui.h \
 	header_stuff.c header_stuff.h \

@@ -45,7 +45,6 @@ struct {
 	guint show_messages_table	: 1;
 	guint show_comment		: 1;
 	guint collapse_translated	: 1;
-	guint check_formats		: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.

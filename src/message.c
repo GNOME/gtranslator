@@ -23,7 +23,6 @@
 
 #include "actions.h"
 #include "comment.h"
-#include "formats.h"
 #include "gtkspell.h"
 #include "gui.h"
 #include "learn.h"
@@ -310,20 +309,6 @@ void gtranslator_message_update(void)
 		po->translated--;
 	}
 	
-	/*
-	 * Check the formats of the now updated GtrMsg -- a nerves-killing new
-	 *  feature I know...
-	 */
-	if(GtrPreferences.check_formats)
-	{
-		if(!gtranslator_formats_check(msg))
-		{
-			gtranslator_utils_error_dialog(
-			_("The translation for message `%s'\n\
-contains syntactical errors!"), msg->msgid);
-		}
-	}
-
 	message_changed = FALSE;
 	
 	/*
