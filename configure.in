@@ -228,6 +228,42 @@ AC_SUBST(GAL_LIBS)
 AM_CONDITIONAL(USE_GAL_GUI, test z$gal_gui = zyes)
 
 dnl -------------------------------------------------------------------
+dnl Check for gtkhtml > 0.8
+dnl -------------------------------------------------------------------
+gtkhtml_enhancement=no
+GTKHTML_CFLAGS=
+GTKHTML_LIBS=
+AC_MSG_CHECKING(for gtkhtml >= 0.8)
+if gnome-config --modversion gtkhtml 2>&1 >/dev/null ; then
+	dnl -----------------------------------------------------------
+	dnl Check for the right version of it.
+	dnl -----------------------------------------------------------
+	_GTKHTML_VERSION=`gnome-config --modversion gtkhtml|sed -e 's/^.*-0\.//g' -e 's/\.//g'`
+	dnl -----------------------------------------------------------
+	dnl Test for a really recent version.
+	dnl -----------------------------------------------------------
+	if test $_GTKHTML_VERSION -ge 80 ; then
+		AC_MSG_RESULT([found])
+		AC_MSG_RESULT(["+++ Using GtkHTML based editing GUI..."])
+		GTKHTML_CFLAGS=`gnome-config --cflags gtkhtml`
+		GTKHTML_LIBS=`gnome-config --libs gtkhtml`
+		gtkhtml_enhancement=yes
+	else
+		AC_MSG_RESULT([too old for us])
+		AC_MSG_RESULT(["+++ Using standard text based editing GUI..."])
+	fi
+else
+	dnl -----------------------------------------------------------
+	dnl Do use the standard text GUI.
+	dnl -----------------------------------------------------------
+	AC_MSG_RESULT([no gtkhtml found])
+	AC_MSG_RESULT(["+++ Using standard text based editing GUI..."])
+fi
+AC_SUBST(GTKHTML_CFLAGS)
+AC_SUBST(GTKHTML_LIBS)
+AM_CONDITIONAL(USE_GTKHTML, test y$gtkhtml_enhancement = yyes)
+
+dnl -------------------------------------------------------------------
 dnl Substitute PACKAGE_LOCALE_DIR in config.h.
 dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
@@ -258,25 +294,6 @@ else
 "+++ Not installing the mime and keys files for the mime-types."])
 fi
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
-
-
-dnl -------------------------------------------------------------------
-dnl Get the message-db.d directories place.
-dnl -------------------------------------------------------------------
-AC_ARG_WITH(message-db-dir,
-     [  --with-message-db-dir=DIR        Define the message-db.d location],,with_message_db_dir=NONE)
-AC_MSG_CHECKING([where to put the message-db.d directory ])
-if test "z$with_message_db_dir" = "zNONE" ; then
-	AC_MSG_RESULT([" "
-"+++ Will put the message-db.d dir into gtranslators datadir."])
-	MESSAGE_DB_DIR=${datadir}/gtranslator
-	AC_SUBST(MESSAGE_DB_DIR)
-else
-	AC_MSG_RESULT([" "
-"+++ Will put the message-db.d dir to ${with_message_db_dir}."])
-	MESSAGE_DB_DIR=${with_message_db_dir}
-	AC_SUBST(MESSAGE_DB_DIR)
-fi
 
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
@@ -378,7 +395,6 @@ help/tr/index.html
 man/Makefile
 man/gtranslator.1
 libgtranslator/Makefile
-message-db.d/Makefile
 ])
 
 dnl ------------------------------------------------------------------
@@ -398,14 +414,14 @@ gtranslator version	:	${VERSION}
 bind the po-files  
  with gtranslator  	:	${enable_mime_bind:-possibly}	
 
-where to put the
- message-db.d dir  	:	${with_message_db_dir:-gtranslator datadir}
-
 use the window-icon
  feature of gnome-libs  :	${use_window_icon_feature:-no}
 
 use the GAL
  for the interface	:	${gal_gui:-no}
+
+use GtkHTML
+ as editing interface	:	${gtkhtml_enhancement:-no}
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
