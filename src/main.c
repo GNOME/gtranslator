@@ -35,10 +35,6 @@
 #include <gconf/gconf.h>
 #endif
 
-#ifdef USE_VFS_STUFF
-#include <libgtranslator/vfs-handle.h>
-#endif
-
 /*
  * The static geometry variable used in the poptTable.
  */
@@ -140,27 +136,7 @@ int main(int argc, char *argv[])
 	 */
 	if (args)
 	{
-		#ifdef USE_VFS_STUFF
-		GnomeVFSURI *file;
-		if(!gnome_vfs_initialized())
-		{
-			gnome_vfs_init();
-		}
-		file=gnome_vfs_uri_new(args[0]);
-		if(file)
-		{
-			if(gnome_vfs_uri_is_local(file))
-			{
-				parse(args[0]);
-			}
-			else
-			{
-				g_error(("gtranslator can't open remote files for now!"));
-			}
-		}
-		#else
 		parse(args[0]);
-		#endif
 	}
 	
 	poptFreeContext(context);

@@ -52,7 +52,7 @@ void update(GtkWidget *widget, gpointer useless)
 	 */
 	newfile=g_strdup(po->filename);
 	
-	/**
+	/*
 	 * Close the file before updating
 	 */
 	close_file(NULL, NULL);
