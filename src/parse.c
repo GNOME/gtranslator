@@ -111,21 +111,21 @@ void parse(gchar *po)
 			**/
 			msg_pair++;
 			msg->pos=z;
-			msg->comment=g_strdup(temp_char);
+			strcpy(msg->comment,temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			msg->msgid=g_strdup(temp_char);
+			strcpy(msg->msgid,temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			msg->msgstr=g_strdup(temp_char);
+			strcpy(msg->msgstr,temp_char);
 		}
 		/**
 		* If a structure is existent, free it.
