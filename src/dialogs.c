@@ -385,13 +385,12 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 	int findMenu=0;
 	int reply;
 	static GtkWidget *dialog = NULL;
-	GtkWidget *label, *match_case, *sndlabel;
+	GtkWidget *label, *sndlabel;
 	GtkWidget *findy, *replacy;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
 	raise_and_return_if_exists(dialog);
 	dialog=gnome_dialog_new(_("Replace"),
-		_("Replace"),
 		_("Replace all"),
 		GNOME_STOCK_BUTTON_CLOSE, 
 		NULL);
@@ -402,10 +401,6 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 	sndlabel=gtk_label_new(_("Replace string:"));
 	replacy=gnome_entry_new("REPLACE_WITH_THIS");
 	
-	match_case=gtk_check_button_new_with_label(_("Case sensitive"));
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case),
-		wants.match_case);
-
 	menu=gtk_menu_new();
 	menu_item=gtk_menu_item_new_with_label(_("English"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
@@ -425,18 +420,6 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 		GINT_TO_POINTER(findBoth));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
-	menu_item=gtk_menu_item_new_with_label(_("Comments"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-		GTK_SIGNAL_FUNC(find_in_activated),
-		GINT_TO_POINTER(findComment));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
-	
-	menu_item=gtk_menu_item_new_with_label(_("In all strings"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-		GTK_SIGNAL_FUNC(find_in_activated),
-		GINT_TO_POINTER(findAll));
-	gtk_menu_append(GTK_MENU(menu), menu_item);
-	
 	switch (wants.find_in) 
 	{
 		case findEnglish:    
@@ -449,14 +432,6 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 			
 		case findBoth:       
 			findMenu = 2; 
-			break;
-			
-		case findComment:    
-			findMenu = 3; 
-			break;
-			
-		case findAll:        
-			findMenu = 4; 
 			break;
 	}
 	gtk_menu_set_active(GTK_MENU(menu), findMenu);
@@ -478,8 +453,6 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 		FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), 
 		replacy, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), match_case,
-		FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), find_in,
 		FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), option,
@@ -487,8 +460,6 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), hbox,
 		FALSE, FALSE, 0);
 	
-	gtk_signal_connect(GTK_OBJECT(match_case), "toggled",
-		GTK_SIGNAL_FUNC(match_case_toggled), NULL);
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 
@@ -505,21 +476,13 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 		gchar *findme, *replaceme;
 		GtrReplace *rpl;
 
-		findme=gtk_editable_get_chars(GTK_EDITABLE(gnome_entry_gtk_entry(
-			GNOME_ENTRY(findy))), 0, -1);
+		findme=gtk_editable_get_chars(GTK_EDITABLE(
+			gnome_entry_gtk_entry(GNOME_ENTRY(findy))), 0, -1);
 
-		replaceme=gtk_editable_get_chars(GTK_EDITABLE(gnome_entry_gtk_entry(
-			GNOME_ENTRY(replacy))), 0, -1);
+		replaceme=gtk_editable_get_chars(GTK_EDITABLE(
+			gnome_entry_gtk_entry(GNOME_ENTRY(replacy))), 0, -1);
 
-		if(reply==1)
-		{
-			rpl=gtranslator_replace_new(findme, replaceme, TRUE);
-		}
-		else
-		{
-			rpl=gtranslator_replace_new(findme, replaceme, FALSE);
-		}
-
+		rpl=gtranslator_replace_new(findme, replaceme);
 		gtranslator_replace_run(rpl);
 
 		gnome_dialog_close(GNOME_DIALOG(dialog));

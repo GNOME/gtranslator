@@ -25,11 +25,27 @@
 
 #include <string.h>
 
+#include <libgnomeui/libgnomeui.h>
+
+/*
+ * Do the replace task for the given data block.
+ */
+static void replace_msg(gpointer data, gpointer replace);
+
+/*
+ * And this is the core function for the replace task.
+ */
+static void replace_core(gchar **string, gchar *old_string, gchar *new_string);
+
+/*
+ * Did any replace succeed? This variable should be responsible for this duty.
+ */
+static gboolean replaced_anything=FALSE;
+
 /*
  * Create a new GtrReplace object.
  */
-GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
-	gboolean replace_all)
+GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace)
 {
 	GtrReplace *newreplace=g_new0(GtrReplace, 1);
 
@@ -41,15 +57,6 @@ GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
 	 */
 	newreplace->string=g_strdup(find);
 	newreplace->replace_string=g_strdup(replace);
-
-	if(replace_all)
-	{
-		newreplace->replace_all=TRUE;
-	}
-	else
-	{
-		newreplace->replace_all=FALSE;
-	}
 
 	if(newreplace)
 	{
@@ -81,12 +88,91 @@ void gtranslator_replace_run(GtrReplace *replace)
 {
 	g_return_if_fail(replace!=NULL);
 
-	if(!replace->replace_all)
+	/*
+	 * Don't replace anything when there's no file open or if there's
+	 *  no messages list (for whatever reason).
+	 */
+	if((!file_opened) || (!po->messages))
 	{
-		g_warning("WRITE CODE FOR REPLACE A SINGLE STRING HERE: replace.c +86");
+		return;
 	}
 	else
 	{
-		g_warning("WRITE CODE FOR REPLACING ALL STRINGS HERE: replace.c +90");
+		g_list_foreach(po->messages, (GFunc) replace_msg, replace);
+	}
+
+	if(replaced_anything)
+	{
+		enable_actions(ACT_SAVE);
+	}
+	else
+	{
+		gnome_app_warning(GNOME_APP(app1), _("No replace made!"));
+	}
+}
+
+/*
+ * Replace in the given message 
+ */
+static void replace_msg(gpointer data, gpointer replace)
+{
+	GtrMsg *msg=GTR_MSG(data);
+	GtrReplace *l_replace=GTR_REPLACE(replace);
+
+	g_return_if_fail(msg!=NULL);
+	g_return_if_fail(l_replace!=NULL);
+
+	/*
+	 * Perform the replace actions according to the given action class.
+	 */
+	switch(wants.find_in)
+	{
+		case 0:
+			replace_core(&msg->msgid, l_replace->string,
+				l_replace->replace_string);
+			break;
+
+		case 1:
+			replace_core(&msg->msgstr, l_replace->string,
+				l_replace->replace_string);
+			break;
+
+		case 2:
+			replace_core(&msg->msgid, l_replace->string,
+				l_replace->replace_string);
+			
+			replace_core(&msg->msgstr, l_replace->string,
+				l_replace->replace_string);
+			break;
+				
+	}
+}
+
+/*
+ * Core kabalak land -- crazy method I know.
+ */
+static void replace_core(gchar **string, gchar *old_string, gchar *new_string)
+{
+	/*
+	 * If any important data is missing, exit from here and don't perform
+	 *  any action.
+	 */
+	if(!(*string) || (!old_string) || (!new_string))
+	{
+		return;
+	}
+	else
+	{
+		/*
+		 * Test if the string to replace is even in the original string.
+		 */
+		if(!strstr(*string, old_string))
+		{
+			return;
+		}
+		else
+		{
+			g_warning("Replace here!!");
+		}
 	}
 }
