@@ -102,7 +102,7 @@ void compile(GtkWidget *widget,gpointer useless)
 			**/
 			if(res!=0)
 			{
-				compile_error_dialog(widget,NULL);
+				compile_error_dialog(NULL,NULL);
 			}
 			else
 			{
@@ -156,6 +156,7 @@ void disable_buttons()
 	gtk_widget_set_sensitive(back_button,FALSE);
 	gtk_widget_set_sensitive(next_button,FALSE);
 	gtk_widget_set_sensitive(last_button,FALSE);
+	gtk_widget_set_sensitive(goto_button,FALSE);
 	gtk_widget_set_sensitive(header_button,FALSE);
 }
 
@@ -171,6 +172,7 @@ void enable_buttons()
         gtk_widget_set_sensitive(back_button,TRUE);
         gtk_widget_set_sensitive(next_button,TRUE);
         gtk_widget_set_sensitive(last_button,TRUE);
+	gtk_widget_set_sensitive(goto_button,TRUE);
 	gtk_widget_set_sensitive(header_button,TRUE);
 }
 

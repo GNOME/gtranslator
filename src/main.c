@@ -78,16 +78,6 @@ int main(int argc,char *argv[])
 	**/
 	read_prefs();
 	/**
-	* Set the main window's geometry
-	**/
-	if(!gtranslator_geometry)
-	{
-		if(if_save_geometry==TRUE)
-		{
-
-		}
-	}
-	/**
 	* Get the client
 	**/
 	client=gnome_master_client();
@@ -111,9 +101,20 @@ int main(int argc,char *argv[])
 	**/	
 	app1=create_app1();
 	/**
-        * Check if a geometry-definition has been given
+        * Set the main window's geometry from prefs.
         **/
-        if(gtranslator_geometry)
+        if(!gtranslator_geometry)
+        {
+                if(if_save_geometry==TRUE)
+                {
+			gtk_widget_set_uposition(app1,gtranslator_geometry_x,gtranslator_geometry_y);
+			gtk_window_set_default_size(GTK_WINDOW(app1),gtranslator_geometry_w,gtranslator_geometry_h);
+                }
+        }
+	/**
+        * and if a geometry-definition has been given .. parse it.
+        **/
+        else
         {
                 gint x, y, width, height;
                 if(gnome_parse_geometry(gtranslator_geometry, &x, &y,

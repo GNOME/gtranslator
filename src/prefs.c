@@ -384,5 +384,9 @@ void read_prefs()
         if_warn_if_fuzzy=gnome_config_get_bool("Toggles/Warn if fuzzy");
         if_warn_if_no_change=gnome_config_get_bool("Toggles/Warn if no change");
         if_dont_save_unchanged_files=gnome_config_get_bool("Toggles/Don't save unchanged files");
+	gtranslator_geometry_x=gnome_config_get_int("Geometry/X");
+	gtranslator_geometry_y=gnome_config_get_int("Geometry/Y");
+	gtranslator_geometry_w=gnome_config_get_int("Geometry/Width");
+	gtranslator_geometry_h=gnome_config_get_int("Geometry/Height");
 	gnome_config_pop_prefix();
 }

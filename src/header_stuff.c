@@ -13,8 +13,9 @@
 /**
 * A simple define; .. ok I'm lazy but it avoids many typos ..
 **/
-#define kabalak_str(x) inp=strstr(hline, ": ");\
-ph.x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));
+#define kabalak_str(x) inp=NULL; inp=strstr(hline, ": ");\
+ph.x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));\
+g_print("-- %s\n",ph.x);
 
 void apply_header(gtr_header the_header)
 {
@@ -83,11 +84,11 @@ void edit_header_create()
 	/**
 	* Some local widgets.
 	**/
-	GtkWidget *prj_name_label,*prj_version_label;
+	GtkWidget *prj_name_label,*prj_version_label,*e_table;
 	/**
 	* Do a simply check.
 	**/
-	if(ph.prj_name==NULL)
+	if(!ph.prj_name)
 	{
 		gnome_app_error(GNOME_APP(app1),_("The header doesn't seem to be parsed rightly."));
 	}
@@ -97,20 +98,34 @@ void edit_header_create()
 	* Create the widgets.
 	**/
 	gtr_edit_header_dlg=gtk_dialog_new();
+	e_table=gtk_table_new(8,2,FALSE);
 	gtk_window_set_title(GTK_WINDOW(gtr_edit_header_dlg),_("gtranslator -- edit header"));
 	gtk_window_set_wmclass(GTK_WINDOW(gtr_edit_header_dlg),"gtranslator","gtranslator");
 	gtr_edit_header_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
 	gtr_edit_header_dlg_apply=gnome_stock_button(GNOME_STOCK_BUTTON_APPLY);
+	gtr_prj_name=gnome_entry_new("PROJECT_NAME");
+	gtr_prj_version=gnome_entry_new("PROJECT_VERSION");
+	/**
+	* Set the parsed values as standard.
+	**/
+	gtk_entry_set_text(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name)),ph.prj_name);
 	/**
 	* Adds the widgets to the dialog.
 	**/
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->vbox),prj_name_label);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->vbox),prj_version_label);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->vbox),e_table);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->action_area),gtr_edit_header_dlg_apply);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(gtr_edit_header_dlg)->action_area),gtr_edit_header_dlg_cancel);
 	/**
+	* Insert the widgets into the table.
+	**/
+	gtk_table_attach_defaults(GTK_TABLE(e_table),prj_name_label,0,1,0,1);
+	gtk_table_attach_defaults(GTK_TABLE(e_table),gtr_prj_name,1,2,0,1);
+	gtk_table_attach_defaults(GTK_TABLE(e_table),prj_version_label,0,1,1,2);
+	gtk_table_attach_defaults(GTK_TABLE(e_table),gtr_prj_version,1,2,1,2);
+	/**
 	* Show the inner-widgets
 	**/
+	gtk_widget_show_all(e_table);
 	gtk_widget_show(gtr_edit_header_dlg_apply);
 	gtk_widget_show(gtr_edit_header_dlg_cancel);
 	/**
