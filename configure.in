@@ -96,31 +96,22 @@ AC_ARG_ENABLE(gtk_enable_broken, [  --enable-gtk-broken     use depricated gtk f
 AC_DEFINE(GTK_ENABLE_BROKEN)
 
 dnl -------------------------------------------------------------------
-dnl Check for Scrollkeeper and set the corresponding conditional var if
-dnl  it could be found.
+dnl Check for Scrollkeeper - it must be present now...
 dnl -------------------------------------------------------------------
 AC_CHECK_PROG(sc_present, scrollkeeper-config, yes, no)
 if test "z$sc_present" = "zyes" ; then
-	AC_MSG_CHECKING([for scrollkeeper >= 0.1.4])
+	AC_MSG_CHECKING([for scrollkeeper])
 	_VERSION=`scrollkeeper-config --version|sed -e 's/\.//g'`
-	if test $_VERSION -ge 014 -o $_VERSION -ge 02; then
+	if test $_VERSION -ge 0 -o $_VERSION -ge 02; then
 		AC_MSG_RESULT(yes)
 		SC_STATEDIR=`scrollkeeper-config --pkglocalstatedir`
 		SC_OMFDIR=`scrollkeeper-config --omfdir`
 	else
-		AC_MSG_RESULT(no)
-		sc_present=no
+		AC_MSG_ERROR(no bad bad...)
 	fi
 fi
 AC_SUBST(SC_OMFDIR)
 AC_SUBST(SC_STATEDIR)
-AM_CONDITIONAL(SCROLLKEEPER_PRESENT, test z$sc_present = zyes)
-
-dnl -------------------------------------------------------------------
-dnl Check for jw to get the docs building fine with RH 7.1
-dnl -------------------------------------------------------------------
-AC_CHECK_PROG(jw_present, jw, yes, no)
-AM_CONDITIONAL(JW_PRESENT, test e$jw_present = eyes)
 
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
@@ -182,8 +173,6 @@ gtranslator version	  :	${VERSION}
 
 debug friendly build	  :	${enable_debug:-no}
 compilation flags      	  :	${CFLAGS}
-
-Scrollkeeper integration  :	${sc_present:-no}
 
 ------------------------------------------------------------------
 
