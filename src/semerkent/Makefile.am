@@ -1,8 +1,7 @@
 noinst_LIBRARIES = libsemerkent.a
 
 INCLUDES = -I$(top_srcdir) -I$(includedir) \
-	$(GTRANSLATOR_CFLAGS) \
-	-Wall -Wunused -Werror
+	$(GTRANSLATOR_CFLAGS)
 
 libsemerkent_a_SOURCES = \
 	semerkent.c semerkent.h \
