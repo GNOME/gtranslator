@@ -41,7 +41,7 @@
         #include <locale.h>
         #define _(String) gettext(String)
 #else
-	        #define _(String) String
+	#define _(String) String
 #endif
 
 /**

@@ -112,6 +112,10 @@ void parse_db_for_lang(gchar *language)
 			xmlNodePtr newnode;
 			newnode=node->xmlChildrenNode;
 			g_print("Node: %s - %s\n",xmlGetProp(node, "name"),xmlNodeGetContent(newnode));
+			/**
+			* Free the node.
+			**/
+			xmlFreeNode(newnode);
 		}
 		node=node->next;
 	}
@@ -120,7 +124,13 @@ void parse_db_for_lang(gchar *language)
 gint parse_db_check(xmlDocPtr test)
 {
 	xmlNodePtr muhaha;
+	/**
+	* Get the root element.
+	**/
 	muhaha=xmlDocGetRootElement(test);
+	/**
+	* Check it.
+	**/
 	if(!muhaha)
 	{
 		xmlFreeDoc(test);
@@ -133,4 +143,8 @@ gint parse_db_check(xmlDocPtr test)
 			g_error(_("The message db doesn't seem to be a message db xml file."));
 		}
 	}
+	/**
+	* Free it if it's still present.
+	**/
+	xmlFreePtr(muhaha);
 }

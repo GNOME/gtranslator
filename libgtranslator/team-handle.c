@@ -85,6 +85,11 @@ void team_handle_new(gchar *team_code)
 		* Save the file.
 		**/
 		xmlSaveFile(MESSAGE_DB_DIR"/teams.xml",teamlist);
+		/**
+		* Free the node & the attribute pointers.
+		**/
+		xmlFreeNode(newnode);
+		xmlFreeProp(attribute);
 	}
 }
 
@@ -93,6 +98,7 @@ void team_handle_new(gchar *team_code)
 **/
 GList *team_handle_get_all_translations_for_team(gchar *teamname)
 {
+	GList *list;
 	xmlDocPtr teams;
 	xmlNodePtr team;
 	/**
@@ -110,6 +116,42 @@ GList *team_handle_get_all_translations_for_team(gchar *teamname)
 	* Get the elements.
 	**/
 	team=teams->xmlRootNode->xmlChildrenNode;
+	/**
+	* Allocate the GList.
+	**/
+	list=g_list_alloc();
+	/**
+	* Set the list empty.
+	**/
+	list=NULL;
+	/**
+	* Search for all the apps.
+	**/
+	while(team)
+	{
+		if(!strcmp(team->name, "app")
+		{
+			/**
+			* Append the app to the list.
+			**/
+			list=g_list_append(list,(gpointer) g_strdup(xmlGetProp(team, "name")));
+		}
+		/**
+		* Iterate the node.
+		**/
+		team=team->node;	
+	}
+	/**
+	* Check for the list and return it.
+	**/
+	if(!list)
+	{
+		g_error(_("Couldn't return the list of the apps."));
+	}
+	else
+	{
+		return list;
+	}	
 }
 
 gint lookup_in_doc(xmlDocPtr doc,gchar *req)
