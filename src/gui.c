@@ -709,8 +709,9 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		if ((GtrPreferences.unmark_fuzzy) 
 		     && (msg->status & GTR_MSG_STATUS_FUZZY))
 		{
-		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
-			po->fuzzy--;
+			gtranslator_message_status_set_fuzzy(msg, FALSE);
+			/* the callback on this GtkCheckMenuItem will be called
+			 * and the fuzzy count will be correctly decreased */
 			gtk_check_menu_item_set_active(
 				GTK_CHECK_MENU_ITEM(the_edit_menu[19].widget),
 				FALSE
