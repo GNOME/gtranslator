@@ -1,3 +1,13 @@
+2001-08-17  Fatih Demir <kabalak@gtranslator.org>
+
+	* prefs_init.c: Cleaner logic during the language setting routines --
+		directly set the values for "English" if we can't get any 
+		 locale variable; also check some common values for the
+		  translator/author/user name and EMail address and prefill
+		   them in the prefs if any useful value could be found.
+
+	* prefs.c: Some missing initializations of some gchar's to NULL.
+
 2001-08-16  Fatih Demir <kabalak@gtranslator.org>
 
 	* update.c: Iterate back to the main thread via "gtk_main_iteration":

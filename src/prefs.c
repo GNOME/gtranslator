@@ -104,8 +104,8 @@ static GtkWidget *prefs = NULL;
 void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
 	GList 	*colorschemeslist=NULL;
-	gchar	*old_colorscheme;
-	gchar	*personal_schemes_directory;
+	gchar	*old_colorscheme=NULL;
+	gchar	*personal_schemes_directory=NULL;
 	
 	gtranslator_raise_dialog(prefs);
 	
@@ -152,7 +152,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 */
 	if(!domains)
 	{
-		domains=g_list_prepend(domains, g_strdup(" "));
+		domains=g_list_prepend(domains, g_strdup(""));
 		domains=g_list_reverse(domains);
 	}
 
@@ -391,7 +391,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
  */
 static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num, gpointer useless)
 {
-	gchar	*selected_scheme_file;
+	gchar	*selected_scheme_file=NULL;
 	
 	/*
 	 * We need to apply only once. 

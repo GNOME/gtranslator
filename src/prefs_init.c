@@ -22,6 +22,8 @@
 #include "prefs.h"
 #include "utils.h"
 
+#include <string.h>
+
 /*
  * Sets up some useful options as the user runs the first time gtranslator.
  */
@@ -54,18 +56,90 @@ void gtranslator_preferences_init_default_values()
 
 			/*
 			 * Well, if we couldn't determine any locale, assume
-			 *  plain "en" -- should beware us from crashing.
+			 *  plain "English" -- should beware us from crashing.
 			 */
 			if(!lc)
 			{
-				lc=g_strdup("en");
+				gtranslator_utils_set_language_values_by_language("English");
+			}
+			else
+			{
+				language_name_for_prefs_init=gtranslator_utils_get_language_name_by_locale_code(lc);
+				g_return_if_fail(language_name_for_prefs_init!=NULL);
+
+				gtranslator_utils_set_language_values_by_language(language_name_for_prefs_init);
+			}
+		}
+
+		/*
+		 * Also try out some magic for getting the translator name/EMail
+		 *  address pair.
+		 */
+		if(!author || !email)
+		{
+			gchar	*value=NULL;
+			gint	 i=0;
+
+			const gchar *name_env_variables[] =
+			{
+				"GTRANSLATOR_TRANSLATOR_NAME",
+				"TRANSLATOR_NAME",
+				"NAME",
+				"LOGNAME",
+				NULL
+			};
+
+			const gchar *email_env_variables[] =
+			{
+				"GTRANSLATOR_TRANSLATOR_EMAIL_ADDRESS",
+				"GTRANSLATOR_TRANSLATOR_EMAIL",
+				"TRANSLATOR_EMAIL",
+				"EMAIL_ADDRESS",
+				"EMAIL",
+				NULL
+			};
+
+			/*
+			 * Try our defined environment variables for a value.
+			 */
+			while(name_env_variables[i]!=NULL && !value)
+			{
+				value=g_getenv(name_env_variables[i]);
+				i++;
 			}
 
-			language_name_for_prefs_init=gtranslator_utils_get_language_name_by_locale_code(lc);
-			g_return_if_fail(language_name_for_prefs_init!=NULL);
-			
-			gtranslator_utils_set_language_values_by_language(
-				language_name_for_prefs_init);
+			/*
+			 * If we've found a value set it as the initial 
+			 *  translator name in the prefs.
+			 */
+			if(value)
+			{
+				gtranslator_config_set_string("translator/name", value);
+			}
+
+			/*
+			 * Reset the used variables to their initial values.
+			 */
+			i=0;
+			value=NULL;
+
+			/*
+			 * Also check the EMail address environment variables.
+			 */
+			while(email_env_variables[i]!=NULL && !value)
+			{
+				value=g_getenv(email_env_variables[i]);
+				i++;
+			}
+
+			/*
+			 * Well, the EMail address is also filled out if any
+			 *  corresponding environment variable could be found.
+			 */
+			if(value && strchr(value, '@') && strchr(value, '.'))
+			{
+				gtranslator_config_set_string("translator/email", value);
+			}
 		}
 
 		/*
