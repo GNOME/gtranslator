@@ -201,18 +201,35 @@ gboolean actual_parse(void)
 				msg->comment = g_strdup(line);
 			} else {
 				gchar *tmp;
-				tmp = g_strconcat(msg->comment, line, NULL);
+				tmp = g_strconcat(msg->comment,	line, NULL);
+
 				g_free(msg->comment);
 				msg->comment = tmp;
 			}
-		} else {
+		}
+		else if(strstr(msg->comment, "#~ msgstr") && g_strstrip(line))
+		{
 			/*
-			 * get rid of end-of-lines...
+			 * Catch up the extralong obsolete messages and make
+			 *  them stored in the right human-readable format
+			 *   and not without any newlines.
+			 */
+			gchar *zup;
+
+			zup=g_strconcat(msg->comment, "\n", NULL);
+			g_free(msg->comment);
+			msg->comment=zup;
+		}
+		else {
+			/*
+			 * Get rid of end-of-lines...
 			 */
 			g_strchomp(line);
 			if (strlen(line) == 0) {
 				if(msgid_ok==TRUE)
+				{
 					msgstr_ok = TRUE;
+				}
 			} else
 			/*
 			 * If it's a msgid
@@ -224,30 +241,38 @@ gboolean actual_parse(void)
 				comment_ok = TRUE;
 				if (strlen(line) - 8 > 0)
 					append_line(&msg->msgid, &line[6]);
-			} else
+			} 
 			/*
 			 * If it's a msgstr. 
 			 */
-			if (!g_strncasecmp(line, "msgstr \"", 8)) {
+			else if (!g_strncasecmp(line, "msgstr \"", 8))
+			{
 				/*
 				 * This means the msgid is completed
 				 */
 				msgid_ok = TRUE;
 				if (strlen(line) - 9 > 0)
 					append_line(&msg->msgstr, &line[7]);
-			} else
+			}
+			else
 			/*
 			 * A continuing msgid or msgstr
 			 */
 			if (line[0] == '"') {
-				if ((comment_ok == TRUE)
-				    && (msgid_ok == FALSE))
+				if((comment_ok == TRUE) &&
+				   (msgid_ok == FALSE))
+				{
 					append_line(&msg->msgid, line);
-				else if ((msgid_ok == TRUE)
-					 && (msgstr_ok == FALSE))
+				}
+				else if((msgid_ok == TRUE) &&
+					(msgstr_ok == FALSE))
+				{
 					append_line(&msg->msgstr, line);
+				}
 				else
+				{
 					goto ERRR;
+				}
 			} else {
 				ERRR:
 				error = g_strdup_printf(_("Error in file \"%s\"\nat line %d.\nPlease check the file and try again."), po->filename, lines);
@@ -704,6 +729,7 @@ void free_po(void)
 	if (po->header)
 		free_header(po->header);
 	g_free(po->filename);
+	g_free(po->obsolete);
 	g_free(po);
 	po = NULL;
 }

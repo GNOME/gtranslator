@@ -29,6 +29,8 @@ typedef struct
 {
 	gchar *string;
 	gchar *replace_string;
+
+	gboolean replace_all;
 } GtrReplace;
 
 #define GTR_REPLACE(x) ((GtrReplace *) x)
@@ -36,7 +38,8 @@ typedef struct
 /*
  * Creation/deletion of a GtrReplace structure.
  */
-GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace);
+GtrReplace *gtranslator_replace_new(const gchar *find, const gchar *replace,
+	gboolean do_it_for_all);
 
 void gtranslator_replace_free(GtrReplace **replace);
 

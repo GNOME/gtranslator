@@ -514,6 +514,8 @@ void enable_actions_just_opened(void)
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR, ACT_REPLACE,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
+
+	disable_actions(ACT_SAVE);
 	/*
 	 * If we'd have the option to use the update function set, enable the
 	 *  Update button in the toolbar and in the menu.

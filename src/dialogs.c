@@ -390,7 +390,8 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
 	raise_and_return_if_exists(dialog);
-	dialog=gnome_dialog_new(_("Replace"),
+	dialog=gnome_dialog_new(_("gtranslator -- replace"),
+		_("Replace"),
 		_("Replace all"),
 		GNOME_STOCK_BUTTON_CLOSE, 
 		NULL);
@@ -420,20 +421,41 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 		GINT_TO_POINTER(findBoth));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
+	menu_item = gtk_menu_item_new_with_label(_("Comments"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+			   GTK_SIGNAL_FUNC(find_in_activated),
+			   GINT_TO_POINTER(findComment));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
+	menu_item = gtk_menu_item_new_with_label(_("In all strings"));
+	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+			   GTK_SIGNAL_FUNC(find_in_activated),
+			   GINT_TO_POINTER(findAll));
+	gtk_menu_append(GTK_MENU(menu), menu_item);
+	
 	switch (wants.find_in) 
 	{
 		case findEnglish:    
-			findMenu = 0; 
-			break;
+			findMenu=0; 
+				break;
 			
 		case findTranslated: 
-			findMenu = 1; 
-			break;
+			findMenu=1; 
+				break;
 			
 		case findBoth:       
-			findMenu = 2; 
-			break;
+			findMenu=2; 
+				break;
+		
+		case findComment:
+			findMenu=3;
+				break;
+		
+		case findAll:
+			findMenu=4;
+				break;
 	}
+	
 	gtk_menu_set_active(GTK_MENU(menu), findMenu);
 
 	find_in=gtk_label_new(_("Replace in:"));
@@ -482,10 +504,18 @@ void replace_dialog(GtkWidget *widget, gpointer useless)
 		replaceme=gtk_editable_get_chars(GTK_EDITABLE(
 			gnome_entry_gtk_entry(GNOME_ENTRY(replacy))), 0, -1);
 
-		rpl=gtranslator_replace_new(findme, replaceme);
-		gtranslator_replace_run(rpl);
-
 		gnome_dialog_close(GNOME_DIALOG(dialog));
+
+		if(reply==1)
+		{
+			rpl=gtranslator_replace_new(findme, replaceme, TRUE);
+		}
+		else
+		{
+			rpl=gtranslator_replace_new(findme, replaceme, FALSE);
+		}
+		
+		gtranslator_replace_run(rpl);
 	}
 	
 }

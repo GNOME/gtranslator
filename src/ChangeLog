@@ -1,3 +1,22 @@
+2001-03-14  Fatih Demir	<kabalak@gtranslator.org>
+
+	* gui.c: Disable the "Save" entries if the file is opened from the
+		command line (as the file is just being opened there can't be
+		 any changes which could be saved).
+
+	* parse.c: Also keep the obsolete messages in right and nice form
+		with newlines between the messages -- more readability of
+		 the po files and also free up the new "obsolete" field of
+		  the GtrPo structure in "free_po".
+
+	* dialogs.c: Hm, keep up the Replace button as we do now again
+		support a single replace.
+
+	* replace.c/.h: Restore the old method types and functions and
+		made the routines sensitive for the "replace_all" field
+		 of a GtrReplace -- a single replace is now also possible;
+		  the methods are written now.
+
 2001-03-13  Fatih Demir <kabalak@gtranslator.org>
 
 	* replace.c/.h: Removed the "replace_all" field and the
