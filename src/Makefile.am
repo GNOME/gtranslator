@@ -60,7 +60,7 @@ gtranslator_SOURCES = \
 	messages.h \
 	messages-table.c messages-table.h \
 	nautilus-string.c nautilus-string.h \
-	open-differently.c open-differently.h \
+	open.c open.h \
 	parse.c	parse.h \
 	preferences.c preferences.h \
 	prefs.c prefs_init.c prefs.h \

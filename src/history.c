@@ -26,7 +26,7 @@
 #include "gui.h"
 #include "history.h"
 #include "nautilus-string.h"
-#include "open-differently.h"
+#include "open.h"
 #include "parse.h"
 #include "prefs.h"
 #include "utils.h"

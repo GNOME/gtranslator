@@ -20,7 +20,7 @@
 #include "bookmark.h"
 #include "message.h"
 #include "nautilus-string.h"
-#include "open-differently.h"
+#include "open.h"
 #include "parse.h"
 #include "preferences.h"
 #include "utils.h"

@@ -38,7 +38,7 @@
 #include "message.h"
 #include "messages-table.h"
 #include "nautilus-string.h"
-#include "open-differently.h"
+#include "open.h"
 #include "parse.h"
 #include "prefs.h"
 #include "runtime-config.h"

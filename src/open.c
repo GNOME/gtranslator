@@ -25,7 +25,7 @@
 #include "backend.h"
 #include "gui.h"
 #include "nautilus-string.h"
-#include "open-differently.h"
+#include "open.h"
 #include "parse.h"
 #include "runtime-config.h"
 #include "utils.h"

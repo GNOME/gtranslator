@@ -30,7 +30,7 @@
 #include "gui.h"
 #include "htmlizer.h"
 #include "learn.h"
-#include "open-differently.h"
+#include "open.h"
 #include "parse.h"
 #include "prefs.h"
 #include "query.h"
