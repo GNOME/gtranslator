@@ -1,6 +1,6 @@
 ## the main Makefile.am
 
-SUBDIRS = data debian help intl macros man po src
+SUBDIRS = intl macros src po data debian help man
 
 bin_SCRIPTS = pozilla.sh
 
@@ -10,6 +10,7 @@ EXTRA_DIST= \
 		HACKING \
 		kabalak_generate_all_the_files.sh \
 		gtranslator.spec.in \
+		gtranslator.spec \
 		intltool-extract.in \
 		intltool-merge.in \
 		intltool-update.in

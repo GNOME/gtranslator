@@ -12,8 +12,7 @@ gtranslator_htmlfiles = \
 	features.html \
 	index.html \
 	thanks.html \
-	use-of-gtranslator.html \
-	docbook.css
+	use-of-gtranslator.html
 
 gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat
 
