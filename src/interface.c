@@ -4,8 +4,11 @@
  * (C) 2000 Published under GNU GPL V 2.0+
  *
  * The interface file , totally catastrophed by me ...
+ *	but it does only create the main app ..
  * 
  * And reformatted ; so it should be much better to read it
+ *
+ * -- the source 
  **/
 
 #ifdef HAVE_CONFIG_H
@@ -23,57 +26,57 @@
 #include "callbacks.h"
 #include "interface.h"
 
-static GnomeUIInfo file1_menu_uiinfo[] =
+static GnomeUIInfo the_file_meni[] =
 {
         {
           GNOME_APP_UI_ITEM, N_("_Compile"),
           NULL,
-          on_compile1_activate, NULL, NULL,
+          NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
           GDK_C, GDK_MOD1_MASK, NULL
         },
-        GNOMEUIINFO_MENU_OPEN_ITEM (on_open1_activate, NULL),
-        GNOMEUIINFO_MENU_SAVE_ITEM (on_save1_activate, NULL),
-        GNOMEUIINFO_MENU_SAVE_AS_ITEM (on_save_as1_activate, NULL),
+        GNOMEUIINFO_MENU_OPEN_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_SAVE_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_SAVE_AS_ITEM (NULL, NULL),
         GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_MENU_EXIT_ITEM (on_exit1_activate, NULL),
+        GNOMEUIINFO_MENU_EXIT_ITEM (NULL, NULL),
         GNOMEUIINFO_END
 };
 
-static GnomeUIInfo edit1_menu_uiinfo[] =
+static GnomeUIInfo the_edit_menu[] =
 {
-        GNOMEUIINFO_MENU_CUT_ITEM (on_cut1_activate, NULL),
-        GNOMEUIINFO_MENU_COPY_ITEM (on_copy1_activate, NULL),
-        GNOMEUIINFO_MENU_PASTE_ITEM (on_paste1_activate, NULL),
-        GNOMEUIINFO_MENU_CLEAR_ITEM (on_clear1_activate, NULL),
+        GNOMEUIINFO_MENU_CUT_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_COPY_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_PASTE_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_CLEAR_ITEM (NULL, NULL),
         GNOMEUIINFO_END
 };
 
-static GnomeUIInfo view1_menu_uiinfo[] =
+static GnomeUIInfo the_view_menu[] =
 {
         {
           GNOME_APP_UI_ITEM, N_("Refresh"),
           NULL,
-          on_refresh1_activate, NULL, NULL,
+          NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
           GDK_F5, 0, NULL
         },
         GNOMEUIINFO_END
 };
 
-static GnomeUIInfo messages1_menu_uiinfo[] =
+static GnomeUIInfo the_messages_menu[] =
 {
         {
           GNOME_APP_UI_ITEM, N_("_First"),
           NULL,
-          on_first1_activate, NULL, NULL,
+          NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FIRST,
           GDK_Home, GDK_CONTROL_MASK, NULL
         },
         {
           GNOME_APP_UI_ITEM, N_("_Back"),
           NULL,
-          on_back1_activate, NULL, NULL,
+          NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BACK,
           GDK_Page_Up, 0, NULL
         },
@@ -81,53 +84,53 @@ static GnomeUIInfo messages1_menu_uiinfo[] =
         {
           GNOME_APP_UI_ITEM, N_("_Next"),
           NULL,
-          on_next1_activate, NULL, NULL,
+          NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
           GDK_Page_Down, 0, NULL
         },
         {
           GNOME_APP_UI_ITEM, N_("_Last"),
           NULL,
-          on_last1_activate, NULL, NULL,
+          NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_LAST,
           GDK_End, GDK_CONTROL_MASK, NULL
         },
         GNOMEUIINFO_END
 };
 
-static GnomeUIInfo settings1_menu_uiinfo[] =
+static GnomeUIInfo the_settings_menu[] =
 {
-        GNOMEUIINFO_MENU_PREFERENCES_ITEM (on_preferences1_activate, NULL),
+        GNOMEUIINFO_MENU_PREFERENCES_ITEM (NULL, NULL),
         GNOMEUIINFO_END
 };
 
-static GnomeUIInfo help1_menu_uiinfo[] =
+static GnomeUIInfo the_help_menu[] =
 {
-        GNOMEUIINFO_MENU_ABOUT_ITEM (on_about1_activate, NULL),
+        GNOMEUIINFO_MENU_ABOUT_ITEM (NULL, NULL),
         {
           GNOME_APP_UI_ITEM, N_("_Online help"),
           NULL,
-          on_online_help1_activate, NULL, NULL,
+          NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
           GDK_F1, 0, NULL
         },
         GNOMEUIINFO_END
 };
 
-static GnomeUIInfo menubar1_uiinfo[] =
+static GnomeUIInfo the_menus[] =
 {
-        GNOMEUIINFO_MENU_FILE_TREE (file1_menu_uiinfo),
-        GNOMEUIINFO_MENU_EDIT_TREE (edit1_menu_uiinfo),
-        GNOMEUIINFO_MENU_VIEW_TREE (view1_menu_uiinfo),
+        GNOMEUIINFO_MENU_FILE_TREE (the_file_menu),
+        GNOMEUIINFO_MENU_EDIT_TREE (the_edit_menu),
+        GNOMEUIINFO_MENU_VIEW_TREE (the_view_menu),
         {
           GNOME_APP_UI_SUBTREE, N_("_Messages"),
           NULL,
-          messages1_menu_uiinfo, NULL, NULL,
+          the_messages_menu, NULL, NULL,
           GNOME_APP_PIXMAP_NONE, N_("_Messages"),
           0, 0, NULL
         },
-        GNOMEUIINFO_MENU_SETTINGS_TREE (settings1_menu_uiinfo),
-        GNOMEUIINFO_MENU_HELP_TREE (help1_menu_uiinfo),
+        GNOMEUIINFO_MENU_SETTINGS_TREE (the_settings_menu),
+        GNOMEUIINFO_MENU_HELP_TREE (the_help_menu),
         GNOMEUIINFO_END
 };
 
@@ -153,7 +156,7 @@ create_app1 (void)
         dock1 = GNOME_APP (app1)->dock;
         gtk_widget_show (dock1);
 
-        gnome_app_create_menus (GNOME_APP (app1), menubar1_uiinfo);
+        gnome_app_create_menus (GNOME_APP (app1), the_menus);
 
         toolbar1 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
         gtk_widget_set_name (toolbar1, "toolbar1");
@@ -356,247 +359,5 @@ create_app1 (void)
 	gtk_widget_show (appbar1);
 	gnome_app_set_statusbar (GNOME_APP (app1), appbar1);
 
-        gtk_signal_connect (GTK_OBJECT (compile_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_compile_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (search_button), "pressed",
-		            GTK_SIGNAL_FUNC (on_search_button_pressed) ,
-		            NULL);
-        gtk_signal_connect (GTK_OBJECT (open_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_open_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (save_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_save_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (save_as_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_save_as_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (first_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_first_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (back_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_back_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (options_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_options_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (next_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_next_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (last_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_last_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (exit_button), "pressed",
-                            GTK_SIGNAL_FUNC (on_exit_button_pressed),
-                            NULL);
-        gtk_signal_connect (GTK_OBJECT (trans_box), "changed",
-                            GTK_SIGNAL_FUNC (on_trans_box_changed),
-                            GTK_TEXT(trans_box));
-        gtk_signal_connect (GTK_OBJECT (trans_box), "copy_clipboard",
-                            GTK_SIGNAL_FUNC (on_trans_box_copy_clipboard),
-                            GTK_TEXT(trans_box));
-        gtk_signal_connect (GTK_OBJECT (trans_box), "cut_clipboard",
-                            GTK_SIGNAL_FUNC (on_trans_box_cut_clipboard),
-                            GTK_TEXT(trans_box));
-        gtk_signal_connect (GTK_OBJECT (trans_box), "paste_clipboard",
-                            GTK_SIGNAL_FUNC (on_trans_box_paste_clipboard),
-                            GTK_TEXT(trans_box));
-        gtk_signal_connect (GTK_OBJECT (trans_box), "activate",
-                            GTK_SIGNAL_FUNC (on_trans_box_activate),
-                            GTK_TEXT(trans_box));
-
-        return app1;
+	/*** FIXME -> write this now ...! ***/
 }
-
-GtkWidget*
-create_propertybox1 (void)
-{
-        GtkWidget *propertybox1;
-        GtkWidget *notebook1;
-        GtkWidget *vbox3;
-        GtkWidget *warn_for_errors;
-        GtkWidget *saving_unchanged;
-        GtkWidget *start_at_last_file;
-        GtkWidget *label1;
-        GtkWidget *vbox2;
-        GSList *verbose_group = NULL;
-        GtkWidget *verbose_yes;
-        GtkWidget *verbose_no;
-        GtkWidget *label2;
-
-	propertybox1 = gnome_property_box_new ();
-
-	notebook1 = GNOME_PROPERTY_BOX (propertybox1)->notebook;
-	gtk_widget_show (notebook1);
-
-	vbox3 = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show (vbox3);
-	gtk_container_add (GTK_CONTAINER (notebook1), vbox3);
-
-	warn_for_errors = gtk_check_button_new_with_label (_("Warn me if there are errors in the .po-file"));
-	gtk_widget_show (warn_for_errors);
-	gtk_box_pack_start (GTK_BOX (vbox3), warn_for_errors, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (warn_for_errors), TRUE);
-
-	saving_unchanged = gtk_check_button_new_with_label (_("Ask for saving unchanged .po-files "));
-	gtk_widget_show (saving_unchanged);
-	gtk_box_pack_start (GTK_BOX (vbox3), saving_unchanged, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (saving_unchanged), TRUE);
-
-	start_at_last_file = gtk_check_button_new_with_label (_("gtranslator should start at the last edited file"));
-	gtk_widget_show (start_at_last_file);
-	gtk_box_pack_start (GTK_BOX (vbox3), start_at_last_file, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (start_at_last_file), TRUE);
-
-	label1 = gtk_label_new (_("Common settings "));
-	gtk_widget_show (label1);
-	gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 0), label1);
-
-	vbox2 = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show (vbox2);
-	gtk_container_add (GTK_CONTAINER (notebook1), vbox2);
-
-	verbose_yes = gtk_radio_button_new_with_label (verbose_group, _("Show me the output of msgfmt --statistics"));
-	verbose_group = gtk_radio_button_group (GTK_RADIO_BUTTON (verbose_yes));
-	gtk_widget_show (verbose_yes);
-	gtk_box_pack_start (GTK_BOX (vbox2), verbose_yes, FALSE, FALSE, 0);
-
-        verbose_no = gtk_radio_button_new_with_label (verbose_group, _("Don't  show me any messages of msgfmt "));
-        verbose_group = gtk_radio_button_group (GTK_RADIO_BUTTON (verbose_no));
-        gtk_widget_show (verbose_no);
-        gtk_box_pack_start (GTK_BOX (vbox2), verbose_no, FALSE, FALSE, 0);
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (verbose_no), TRUE);
-
-        label2 = gtk_label_new (_("Compiling  points ..."));
-        gtk_widget_show (label2);
-        gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 1), label2);
-
-	gtk_signal_connect (GTK_OBJECT (propertybox1), "apply",
-                            GTK_SIGNAL_FUNC (on_propertybox1_apply),
-                            NULL);
-	gtk_signal_connect (GTK_OBJECT (propertybox1), "help",
-                            GTK_SIGNAL_FUNC (on_propertybox1_help),
-                            propertybox1);
-	gtk_signal_connect (GTK_OBJECT (propertybox1), "close",
-                            GTK_SIGNAL_FUNC (on_propertybox1_close),
-                            propertybox1);
-	gtk_signal_connect (GTK_OBJECT (warn_for_errors), "toggled",
-                            GTK_SIGNAL_FUNC (on_warn_for_errors_toggled),
-                            propertybox1);
-	gtk_signal_connect (GTK_OBJECT (saving_unchanged), "toggled",
-                            GTK_SIGNAL_FUNC (on_saving_unchanged_toggled),
-                            propertybox1);
-	gtk_signal_connect (GTK_OBJECT (start_at_last_file), "toggled",
-                            GTK_SIGNAL_FUNC (on_start_at_last_file_toggled),
-                            propertybox1);
-	gtk_signal_connect (GTK_OBJECT (verbose_yes), "toggled",
-                            GTK_SIGNAL_FUNC (on_verbose_yes_toggled),
-                            propertybox1);
-	gtk_signal_connect (GTK_OBJECT (verbose_no), "toggled",
-                            GTK_SIGNAL_FUNC (on_verbose_no_toggled),
-                            propertybox1);
-
-	return propertybox1;
-}
-
-GtkWidget*
-create_open_file (void)
-{
-	GtkWidget *open_file;
-	GtkWidget *ok_button_of_open_file;
-	GtkWidget *cancel_button_of_open_file;
-
-	open_file = gtk_file_selection_new (_("Select your .po-file to open"));
-	gtk_container_set_border_width (GTK_CONTAINER (open_file), 10);
-	gtk_window_set_wmclass (GTK_WINDOW (open_file), "gtranslator", "gtranslator");
-	gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (open_file));
-
-        ok_button_of_open_file = GTK_FILE_SELECTION (open_file)->ok_button;
-        gtk_widget_show (ok_button_of_open_file);
-        GTK_WIDGET_SET_FLAGS (ok_button_of_open_file, GTK_CAN_DEFAULT);
-
-        cancel_button_of_open_file = GTK_FILE_SELECTION (open_file)->cancel_button;
-        gtk_widget_show (cancel_button_of_open_file);
-        GTK_WIDGET_SET_FLAGS (cancel_button_of_open_file, GTK_CAN_DEFAULT);
-
-        gtk_signal_connect (GTK_OBJECT (ok_button_of_open_file), "pressed",
-                            GTK_SIGNAL_FUNC (on_ok_button_of_open_file_pressed),
-                            open_file);
-        gtk_signal_connect (GTK_OBJECT (cancel_button_of_open_file), "pressed",
-                            GTK_SIGNAL_FUNC (on_cancel_button_of_open_file_pressed),
-                            open_file);
-
-        return open_file;
-}
-
-GtkWidget*
-create_save_file_as (void)
-{
-        GtkWidget *save_file_as;
-        GtkWidget *ok_button_of_save_as_file;
-        GtkWidget *cancel_button_of_save_as_file;
-
-        save_file_as = gtk_file_selection_new (_("Select your file to save to"));
-        gtk_container_set_border_width (GTK_CONTAINER (save_file_as), 10);
-        gtk_window_set_wmclass (GTK_WINDOW (save_file_as), "gtranslator", "gtranslator");
-
-        ok_button_of_save_as_file = GTK_FILE_SELECTION (save_file_as)->ok_button;
-        gtk_widget_show (ok_button_of_save_as_file);
-        GTK_WIDGET_SET_FLAGS (ok_button_of_save_as_file, GTK_CAN_DEFAULT);
-
-        cancel_button_of_save_as_file = GTK_FILE_SELECTION (save_file_as)->cancel_button;
-        gtk_widget_show (cancel_button_of_save_as_file);
-        GTK_WIDGET_SET_FLAGS (cancel_button_of_save_as_file, GTK_CAN_DEFAULT);
-
-        gtk_signal_connect (GTK_OBJECT (ok_button_of_save_as_file), "pressed",
-                            GTK_SIGNAL_FUNC (on_ok_button_of_save_as_file_pressed),
-                            save_file_as);
-        gtk_signal_connect (GTK_OBJECT (cancel_button_of_save_as_file), "pressed",
-                            GTK_SIGNAL_FUNC (on_cancel_button_of_save_as_file_pressed),
-                            save_file_as);
-
-        return save_file_as;
-}
-
-GtkWidget*
-create_help_for_the_propbox1 (void)
-{
-        GtkWidget *help_for_the_propbox1;
-        GtkWidget *dialog_vbox5;
-        GtkWidget *button15;
-        GtkWidget *dialog_action_area5;
-
-        help_for_the_propbox1 = gnome_message_box_new (_("Here you can select various options of\ngtranslator which will make gtranslator\nmore work like you want it to ."),
-                                    GNOME_MESSAGE_BOX_INFO, NULL);
-        gtk_widget_set_name (help_for_the_propbox1, "help_for_the_propbox1");
-        gtk_object_set_data (GTK_OBJECT (help_for_the_propbox1), "help_for_the_propbox1", help_for_the_propbox1);
-        GTK_WINDOW (help_for_the_propbox1)->type = GTK_WINDOW_DIALOG;
-        gtk_window_set_policy (GTK_WINDOW (help_for_the_propbox1), FALSE, FALSE, FALSE);
-        gtk_window_set_wmclass (GTK_WINDOW (help_for_the_propbox1), "gtranslator", "gtranslator");
-        gnome_dialog_set_close (GNOME_DIALOG (help_for_the_propbox1), TRUE);
-        gnome_dialog_close_hides (GNOME_DIALOG (help_for_the_propbox1), TRUE);
-
-        dialog_vbox5 = GNOME_DIALOG (help_for_the_propbox1)->vbox;
-        gtk_widget_set_name (dialog_vbox5, "dialog_vbox5");
-        gtk_object_set_data (GTK_OBJECT (help_for_the_propbox1), "dialog_vbox5", dialog_vbox5);
-        gtk_widget_show (dialog_vbox5);
-
-        gnome_dialog_append_button (GNOME_DIALOG (help_for_the_propbox1), GNOME_STOCK_BUTTON_OK);
-        button15 = g_list_last (GNOME_DIALOG (help_for_the_propbox1)->buttons)->data;
-        gtk_widget_set_name (button15, "button15");
-        gtk_widget_ref (button15);
-        gtk_object_set_data_full (GTK_OBJECT (help_for_the_propbox1), "button15", button15,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show (button15);
-        GTK_WIDGET_SET_FLAGS (button15, GTK_CAN_DEFAULT);
-
-        dialog_action_area5 = GNOME_DIALOG (help_for_the_propbox1)->action_area;
-        if (dialog_action_area5 != NULL)
-          gtk_widget_set_name (dialog_action_area5, "dialog_action_area5");
-        gtk_widget_ref (dialog_action_area5);
-        gtk_object_set_data_full (GTK_OBJECT (help_for_the_propbox1), "dialog_action_area5", dialog_action_area5,
-                                  (GtkDestroyNotify) gtk_widget_unref);
-
-        return help_for_the_propbox1;
-}
-
