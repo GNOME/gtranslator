@@ -19,7 +19,7 @@ specpack: $(UMTF_SPEC_FILES)
 	@-mkdir UMTF-$(UMTF_VERSION)
 	@-cp -f $(UMTF_SPEC_FILES) UMTF-$(UMTF_VERSION)
 	@-tar -czf UMTF-$(UMTF_VERSION).tar.gz UMTF-$(UMTF_VERSION)
-	@-rm -f UMTF-$(UMTF_VERSION)
+	@-rm -rf UMTF-$(UMTF_VERSION)
 
 clean:
 	rm -rf UMTF-$(UMTF_VERSION)
