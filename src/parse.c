@@ -251,10 +251,17 @@ static gboolean actual_parse(void)
 **/
 void parse(const char *filename)
 {
-
-	if ((!filename) || (filename[0] == '\0')) {
+	if (!filename) {
 		g_warning(_("There's no file to open!\n"));
 		return;
+	} else {
+		gchar *base = g_basename(filename);
+
+		if (base[0] == '\0') {
+			g_warning(_("There's no file to open!\n"));
+			return;
+		}
+		g_free(base);
 	}
 
 	po = g_new0(GtrPo, 1);

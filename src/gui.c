@@ -229,18 +229,10 @@ static GnomeUIInfo the_menus[] = {
 * The toolbar buttons
 **/
 static GnomeUIInfo the_toolbar[] = {
-	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
-			       N_("Compile the po-file"),
-			       compile,
-			       GNOME_STOCK_PIXMAP_CONVERT),
 	GNOMEUIINFO_ITEM_STOCK(N_("Open"),
 			       N_("Open a po-file"),
 			       open_file,
 			       GNOME_STOCK_PIXMAP_OPEN),
-	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
-			       N_("Update the po-file"),
-			       update,
-			       GNOME_STOCK_PIXMAP_REFRESH),		       
 	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
 			       N_("Save File"),
 			       save_current_file,
@@ -249,6 +241,15 @@ static GnomeUIInfo the_toolbar[] = {
 			       N_("Save file with a different name"),
 			       save_file_as,
 			       GNOME_STOCK_PIXMAP_SAVE_AS),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
+			       N_("Compile the po-file"),
+			       compile,
+			       GNOME_STOCK_PIXMAP_CONVERT),
+	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
+			       N_("Update the po-file"),
+			       update,
+			       GNOME_STOCK_PIXMAP_REFRESH),		       
 	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
 			       N_("Edit the header"),
 			       edit_header,
@@ -377,10 +378,10 @@ static void insert_action(gint act_num, GnomeUIInfo mi, GnomeUIInfo ti)
 static void create_actions(void)
 {
 	NONE.widget = NULL;
-	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[0]);
-	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[2]);
-	insert_action(ACT_SAVE, the_file_menu[4], the_toolbar[3]);
-	insert_action(ACT_SAVE_AS, the_file_menu[5], the_toolbar[4]);
+	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[4]);
+	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[5]);
+	insert_action(ACT_SAVE, the_file_menu[4], the_toolbar[1]);
+	insert_action(ACT_SAVE_AS, the_file_menu[5], the_toolbar[2]);
 	insert_action(ACT_REVERT, the_file_menu[6], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[7], NONE);
 	/*------------------------------------------------ */
@@ -391,7 +392,7 @@ static void create_actions(void)
 	insert_action(ACT_CLEAR, the_edit_menu[5], NONE);
 	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[7]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
-	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[5]);
+	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[6]);
 	insert_action(ACT_SPELL, the_edit_menu[11], NONE);
 	/*------------------------------------------------ */
 	insert_action(ACT_FIRST, the_messages_menu[0], the_searchbar[0]);
@@ -411,21 +412,22 @@ static void create_actions(void)
 
 void disable_actions_no_file(void)
 {
-	disable_actions(ACT_COMPILE, ACT_SAVE, ACT_SAVE_AS, ACT_REVERT,
-			ACT_CLOSE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
-			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_FIRST,
-			ACT_BACK, ACT_NEXT, ACT_LAST, ACT_GOTO, ACT_UNDO,
-			ACT_NEXT_FUZZY,  ACT_UPDATE, ACT_STICK, ACT_FUZZY,
-			ACT_TRANSLATED, ACT_NEXT_UNTRANSLATED);
+	disable_actions(ACT_COMPILE, ACT_UPDATE,
+			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
+			ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
+			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER,
+			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST,
+			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
+			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
 void enable_actions_just_opened(void)
 {
-	enable_actions(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_CUT, ACT_COPY,
-		       ACT_PASTE, ACT_CLEAR, ACT_FIND, ACT_HEADER, ACT_NEXT,
-		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED, ACT_FUZZY,
-		       ACT_STICK);
+	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
+			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
+			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
+			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
 	/**
 	* If we'd have the option to use the update function set, enable the
 	*  Update button in the toolbar and in the menu.
@@ -571,8 +573,8 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 
 /* 
  * Display the message in text boxes
- * TODO: add syntax highlighting for %s, numbers, symbols, tabs; option to 
- * replace spaces with centered dot; and append a char at the end of message
+ * TODO: add syntax highlighting for %s, numbers, symbols, tabs;
+ * append a char at the end of message
  */
 void display_msg(GList * list_item)
 {
@@ -593,8 +595,8 @@ void display_msg(GList * list_item)
 		if(msg->msgid)
 		{
 			/**
-			* Go through the characters and search for free spaces and replace them
-			*  with '·''s.
+			* Go through the characters and search for free spaces
+			* and replace them with '·''s.
 			**/
 			for(len=0;len<strlen(msg->msgid);++len)
 			{
