@@ -159,8 +159,13 @@ GtrPrefsDialog *gtranslator_prefs_dialog_new(GVoidFunc read_all_options_func)
 	e_paned_pack1(E_PANED(dialog->pane), dialog->sections_list,
 		TRUE, FALSE);
 
+	/*
+	 * Initialization of the "internal" state variables -- we do use these 
+	 *  for all of our changes determination "checks".
+	 */
 	dialog->changed=FALSE;
 	dialog->shown=FALSE;
+	dialog->changes=0;
 
 	dialog->read_all_options_function=read_all_options_func;
 
@@ -249,6 +254,7 @@ void gtranslator_prefs_dialog_changed(GtrPrefsDialog *dialog)
 	g_return_if_fail(GTR_PREFS_DIALOG(dialog)->dialog!=NULL);
 
 	GTR_PREFS_DIALOG(dialog)->changed=TRUE;
+	GTR_PREFS_DIALOG(dialog)->changes++;
 
 	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 0, TRUE);
 	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 1, TRUE);
@@ -279,10 +285,36 @@ void gtranslator_prefs_dialog_close(GtrPrefsDialog *dialog)
 	 */
 	if(GTR_PREFS_DIALOG(dialog)->changed)
 	{
+		gchar		*warning_str=NULL;
+		GtkWidget	*warning_dialog=NULL;
+		GtkWidget	*warning_label=NULL;
+		gint		 retval=-1;
+		
 		/*
-		 * FIXME: More enhancements needed -- question dialog?! Maybe
-		 *  even with pendinbg changes count? Hmm...
+		 * Build up a quite informative question dialog with the count 
+		 *  of changes which are still pending.
 		 */
+		warning_str=g_strdup_printf(_("%i preferences changes have been made.\n\
+Do you want to discard all of these changes?"), 
+			GTR_PREFS_DIALOG(dialog)->changes);
+		
+		warning_label=gtk_label_new(warning_str);
+		warning_dialog=gnome_dialog_new(_("gtranslator -- preferences"),
+			GNOME_STOCK_BUTTON_YES,
+			GNOME_STOCK_BUTTON_NO,
+			GNOME_STOCK_BUTTON_CANCEL,
+			NULL);
+
+		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(warning_dialog)->vbox),
+			warning_label, TRUE, TRUE, 0);
+
+		retval=gnome_dialog_run_and_close(GNOME_DIALOG(warning_dialog));
+		GTR_FREE(warning_str);
+		
+		if(retval!=0)
+		{
+			return;
+		}
 	}
 
 	gnome_dialog_close(GNOME_DIALOG(dialog->dialog));
