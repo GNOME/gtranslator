@@ -205,7 +205,7 @@ dnl -------------------------------------------------------------------
 dnl Whether to bind the po-files with gtranslator/bind the mime-type ?
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(mime-bind,
-	[  --enable-mime-bind=[yes/no]      Bind the po-files mime-type to gtranslator],,enable_mime_bind=yes)
+	[  --enable-mime-bind=[yes/no]      Bind the po-files mime-type to gtranslator],, enable_mime_bind=yes)
 AC_MSG_CHECKING([if to bind the po-files with gtranslator ])
 if test "x$enable_mime_bind" = "xyes" ; then
 	AC_DEFINE(BIND_MIME)
@@ -220,19 +220,17 @@ AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
-with_debug_specs=no
-AC_ARG_WITH(debug-specs,
-     [  --with-debug-specs		   Build everything with debug informations],, with_debug_specs=yes)
-AC_MSG_CHECKING([for a gdb friendly build ])
-if test "rt$with_debug_specs" = "rtno" ; then
-	AC_MSG_RESULT([" "
-"+++ No, building everything WITHOUT any debugging informations and flags..."])
-	CFLAGS="`echo $CFLAGS|sed -e 's/-g.//g'`"
-else
-	AC_MSG_RESULT([" "
-"+++ Yes, building everything WITH debugging informations and flags..."])
+AC_ARG_ENABLE(debugspecs,
+	[  --enable-debugspecs                Enable debug specs and build],
+	debugpoints=no, debugpoints=yes)
+
+if test "%${debugpoints}" != "%yes" ; then
 	CFLAGS="`echo $CFLAGS|sed -e 's/-O.//g'` -ggdb"
+else
+	CFLAGS="`echo $CFLAGS|sed -e 's/-g.//g' -e 's/-ggdb//g'`"
 fi
+AC_MSG_CHECKING([if a gdb/debug friendly version should be build ])
+AC_MSG_RESULT(${debugpoints})
 
 dnl -------------------------------------------------------------------
 dnl Use extended compile warn flags per default.
@@ -326,7 +324,7 @@ if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
 
 if everything should be 
- compiled debuggy	:	${with_debug_specs:-no}
+ compiled debuggy	:	${debugpoints:-no}
 
 ------------------------------------------------------------------
 "
