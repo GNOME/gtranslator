@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-07-02 22:09+0200\n"
-"PO-Revision-Date: 2003-06-28 20:15+0200\n"
+"POT-Creation-Date: 2003-08-25 13:29+0200\n"
+"PO-Revision-Date: 2003-08-25 13:28+0200\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,10 +18,21 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
+#: data/desktop/gtranslator.desktop.in.h:1
+msgid "The Gnome translation program"
+msgstr "Гномов програм за превођење"
+
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1116
+msgid "gtranslator"
+msgstr "гпреводилац"
+
 #. Translator credits
 #: src/about.c:58
 msgid "translator_credits"
-msgstr "V.M.Stanojevic <veljko@vms.homelinux.net> (sr)"
+msgstr ""
+"Вељко М. Станојевић <veljko@vms.homelinux.net>\n"
+"\n"
+"Prevod.org — превод на српски језик."
 
 #: src/about.c:78
 msgid "(C) 1999 The Free Software Foundation, Inc."
@@ -30,7 +41,20 @@ msgstr "(C) 1999 The Free Software Foundation, Inc."
 #: src/about.c:79
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
-"гтранслатор је програм за уређивање ПО датотека са бројним могућностима."
+"гпреводилац је програм за уређивање ПО датотека са бројним могућностима."
+
+#: src/bookmark.c:93 src/dialogs.c:1510
+msgid "No comment"
+msgstr "Нема примедбе"
+
+#: src/bookmark.c:598
+msgid "_View/_Bookmarks/"
+msgstr "П_реглед/_Обележивачи/"
+
+#: src/bookmark.c:635
+#, c-format
+msgid "Open %s (%s)"
+msgstr "Отвори %s (%s)"
 
 #: src/color-schemes.c:196
 #, c-format
@@ -55,166 +79,188 @@ msgstr "<Није дато>"
 
 #: src/color-schemes.c:472
 msgid "_View/_Colorschemes/"
-msgstr "Преглед/шеме"
+msgstr "П_реглед/_Шеме боја/"
 
 #: src/color-schemes.c:502
 #, c-format
 msgid "Activate colorscheme %s"
-msgstr "Активирај шему %s"
+msgstr "Активирај шему боја %s"
 
-#: src/dialogs.c:103
+#: src/dialogs.c:117
 msgid "gtranslator -- open po file"
-msgstr "гтранслатор -- отвори ПО датотеку"
+msgstr "гпреводилац — отвори ПО датотеку"
 
-#: src/dialogs.c:145
+#: src/dialogs.c:159
 msgid "gtranslator -- save file as.."
-msgstr "гтранслатор -- сними датотеку као..."
+msgstr "гпреводилац — сними датотеку као..."
 
-#: src/dialogs.c:165
+#: src/dialogs.c:179
 msgid "gtranslator -- save local copy of file as.."
-msgstr "гтранслатор -- сними локалну копију датотеке као..."
+msgstr "гпреводилац — сними локалну копију датотеке као..."
 
-#: src/dialogs.c:209
+#: src/dialogs.c:229
 #, c-format
 msgid ""
 "File %s\n"
 "was changed. Save?"
 msgstr ""
 "Датотека %s\n"
-"је измењена. Да снимим?"
+"је измењена. Да сачувам?"
 
-#: src/dialogs.c:250
+#: src/dialogs.c:235
+msgid "Don't save"
+msgstr "Немој да сачуваш"
+
+#: src/dialogs.c:279
 msgid "gtranslator -- import po file"
-msgstr "гтранслатор -- увези ПО датотеку"
+msgstr "гпреводилац — увези ПО датотеку"
 
-#: src/dialogs.c:297
+#: src/dialogs.c:326
 msgid "gtranslator -- export po file"
-msgstr "гтранслатор -- извези ПО датотеку"
+msgstr "гпреводилац — извези ПО датотеку"
 
-#: src/dialogs.c:344 src/dialogs.c:379
+#: src/dialogs.c:374 src/dialogs.c:407
 msgid "gtranslator -- edit comment"
-msgstr "гтанслатор -- уреди коментар"
+msgstr "гпреводилац — уреди коментар"
 
-#: src/dialogs.c:367
+#: src/dialogs.c:399
 msgid "Comment:"
 msgstr "Коментар:"
 
-#: src/dialogs.c:488
+#: src/dialogs.c:514
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Да ли треба уклонити СВЕ преводе из „%s“?"
 
-#: src/dialogs.c:501 src/dialogs.c:526
-msgid "gtranslator -- confirm removal of all translations"
-msgstr "гтранслатор -- потврдите улањање свих превода"
-
-#: src/dialogs.c:515
-msgid "Are you sure you want to remove ALL translations from this po file?"
-msgstr ""
-"Да ли сте сигурни да желите да уклоните СВЕ преводе из ове ПО датотеке?"
-
-#: src/dialogs.c:621
+#: src/dialogs.c:617
 msgid "gtranslator -- go to"
-msgstr "гтранслатор -- иди до"
+msgstr "гпреводилац — иди до"
 
-#: src/dialogs.c:623
-msgid "Go!"
-msgstr "Иди!"
-
-#: src/dialogs.c:632
+#: src/dialogs.c:625
 msgid "Go to message number:"
 msgstr "Иди до поруке са бројем:"
 
-#: src/dialogs.c:701
+#: src/dialogs.c:714
 msgid "Find in the po file"
 msgstr "Пронађи у ПО датотеци"
 
-#: src/dialogs.c:703 src/menus.c:339
-msgid "Find"
-msgstr "Пронађи"
-
-#: src/dialogs.c:710
+#: src/dialogs.c:722
 msgid "Enter search string:"
 msgstr "Унесите низ за претрагу:"
 
-#: src/dialogs.c:715
+#: src/dialogs.c:727
 msgid "Case sensitive"
 msgstr "Разликуј мала и велика слова"
 
-#: src/dialogs.c:720 src/languages.c:97
+#: src/dialogs.c:732 src/languages.c:97
 msgid "English"
 msgstr "енглески"
 
-#. pv, i want the tree to be in original column
-#: src/dialogs.c:726 src/dialogs.c:827 src/gui.c:515 src/messages-table.c:252
+#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:319
 msgid "Translated"
 msgstr "Преведено"
 
-#: src/dialogs.c:732 src/dialogs.c:833
+#: src/dialogs.c:744 src/dialogs.c:861
 msgid "Both"
 msgstr "Обоје"
 
-#: src/dialogs.c:738 src/dialogs.c:821
+#: src/dialogs.c:750 src/dialogs.c:849
 msgid "Comments"
 msgstr "Коментари"
 
-#: src/dialogs.c:744
+#: src/dialogs.c:756
 msgid "In all strings"
 msgstr "У свим низовима"
 
-#: src/dialogs.c:759
-msgid "Find in: "
-msgstr "Пронађи у: "
+#: src/dialogs.c:771
+msgid "Find in:"
+msgstr "Пронађи у:"
 
-#: src/dialogs.c:807
+#.
+#. * Translators: this means that the hotkeys ("_" etc.) are ignored
+#. *  during the search action.
+#.
+#: src/dialogs.c:781
+msgid "Ignore hotkeys"
+msgstr "Занемари пречице"
+
+#: src/dialogs.c:832
 msgid "gtranslator -- replace"
-msgstr "гтранслатор -- замени"
+msgstr "гпреводилац — замени"
 
-#: src/dialogs.c:808 src/menus.c:343
+#: src/dialogs.c:836 src/menus.c:355
 msgid "Replace"
 msgstr "Замени"
 
-#: src/dialogs.c:809
+#: src/dialogs.c:837
 msgid "Replace all"
 msgstr "Замени све"
 
-#: src/dialogs.c:813
+#: src/dialogs.c:841
 msgid "String to replace:"
 msgstr "Низ који треба заменити:"
 
-#: src/dialogs.c:816
+#: src/dialogs.c:844
 msgid "Replace string:"
 msgstr "Низ са којим треба заменити:"
 
-#: src/dialogs.c:856
+#: src/dialogs.c:884
 msgid "Replace in:"
 msgstr "Замени у:"
 
-#: src/dialogs.c:934
+#: src/dialogs.c:963
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Дошло је до грешке при извршењу msgfmt наредбе:\n"
 
-#: src/dialogs.c:967
+#: src/dialogs.c:1004
+#, c-format
+msgid ""
+"The file\n"
+"\n"
+"   %s\n"
+"\n"
+"is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling\n"
+"this file currently to re-gain access to this file.\n"
+"\n"
+"Shall fool gtranslator open this file anyway ?"
+msgstr ""
+"Датотека\n"
+"\n"
+"   %s\n"
+"\n"
+"је већ отворена у другом примерку гпреводиoца!\n"
+"Морате затворити други примерак гпреводиoца који\n"
+"тренутно рукује овом датотеком да бисте добили приступ истој.\n"
+"\n"
+"Да ли да овај примерак гпреводиoца ипак отвори датотеку?"
+
+#: src/dialogs.c:1045
+#, c-format
+msgid ""
+"File %s\n"
+"was changed. Do you want to revert to saved copy?"
+msgstr ""
+"Датотека %s\n"
+"је измењена. Да ли желите да се вратите на снимљену копију?"
+
+#: src/dialogs.c:1077
 msgid "gtranslator -- open from URI"
-msgstr "гтранслатор -- отвори са URI-а"
+msgstr "гпреводилац — отвори са URI-а"
 
-#: src/dialogs.c:968 src/menus.c:270
-msgid "Open"
-msgstr "Отвори"
-
-#: src/dialogs.c:976
+#: src/dialogs.c:1089
 msgid "Enter URI:"
 msgstr "Унесите URI:"
 
-#: src/dialogs.c:1014
+#: src/dialogs.c:1127
 msgid "No URI given!"
 msgstr "Није дат URI!"
 
-#: src/dialogs.c:1029
+#: src/dialogs.c:1142
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Није дат ниједан подржани протокол (попут „:ftp://“)!"
 
-#: src/dialogs.c:1037
+#: src/dialogs.c:1150
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -240,56 +286,67 @@ msgstr ""
 "file:///<ПО-ДАТОТЕКА> или\n"
 "http://www.ДОМЕН.COM/ПО-ДАТОТЕКА"
 
-#: src/dialogs.c:1072
+#: src/dialogs.c:1189
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
 "It was saved by gtranslator before gtranslator last closed\n"
 "and may contain your hard work!\n"
-"Saying \"No\" will delete the crash recovery file."
 msgstr ""
 "Да отворим датотеку за опоравак за „%s“?\n"
-"Гтранслатор ју је снимио пре последњег затварања\n"
+"Гпреводилац ју је снимио пре последњег затварања\n"
 "и можда садржи ваш мукотрпни рад!\n"
-"Ако одговорите са „НЕ“ датотека за опоравак од краха ће бити избрисана."
 
-#: src/dialogs.c:1095
-#, c-format
-msgid "Recovering `%s'..."
-msgstr "Опорављам „%s“..."
+#.
+#. * Translators: All this is about recovering a po file after
+#. *  a crash or something; postbone means that the user will
+#. *   get asked the next time he starts up gtranslator again
+#. *    if he/she wants to recover file.
+#.
+#: src/dialogs.c:1201
+msgid "Postpone decision"
+msgstr "Одложи одлуку"
+
+#: src/dialogs.c:1203
+msgid "Ignore recovery file"
+msgstr "Занемари датотеку за опоравак"
+
+#: src/dialogs.c:1205
+msgid "Recover file"
+msgstr "Опорави датотеку"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1145
+#: src/dialogs.c:1264
 msgid "Here you can query existing translations from your learn buffer."
 msgstr "Овде можете претраживати постојеће преводе из вашег складишта знања."
 
-#: src/dialogs.c:1148
+#: src/dialogs.c:1267
 msgid "gtranslator -- query your personal learn buffer"
-msgstr "гтранслатор -- претрага личног складишта знања"
+msgstr "гпреводилац — претрага личног складишта знања"
 
-#: src/dialogs.c:1149 src/menus.c:348
+#: src/dialogs.c:1271 src/menus.c:360
 msgid "Query"
 msgstr "Претрага"
 
-#: src/dialogs.c:1149
+#: src/dialogs.c:1272
 msgid "Query message content"
 msgstr "Претрага садржаја поруке"
 
-#: src/dialogs.c:1158
+#: src/dialogs.c:1282
 msgid "Query string:"
 msgstr "Низ за претрагу:"
 
-#: src/dialogs.c:1204
+#: src/dialogs.c:1324
 msgid "No query string given!"
 msgstr "Није дат низ за претрагу!"
 
-#: src/dialogs.c:1226
+#: src/dialogs.c:1346
 msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr "Претрага вашег складишта знања није дала никакв резултат!"
+msgstr "Претрага вашег складишта знања није дала никакав резултат!"
 
-#: src/dialogs.c:1238
+#: src/dialogs.c:1358
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -302,17 +359,25 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1304
+#: src/dialogs.c:1428
 msgid "Query's result translation is already there!"
 msgstr "Резултат претраге је већ преведен!"
 
-#: src/dialogs.c:1328
+#: src/dialogs.c:1456
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
 msgstr ""
-"Да ли да гтранслатор аутоматски преведе датотеку користећи\n"
+"Да ли да гпреводилац аутоматски преведе датотеку користећи\n"
 "податке из вашег личног складишта знања?"
+
+#: src/dialogs.c:1490 src/dialogs.c:1518
+msgid "gtranslator -- add bookmark with comment?"
+msgstr "гпреводилац — додај обележивач уз коментар?"
+
+#: src/dialogs.c:1510
+msgid "Comment for the bookmark:"
+msgstr "Коментар за обележивач:"
 
 #: src/find.c:211
 msgid "Please enter a search string"
@@ -327,40 +392,38 @@ msgstr ""
 "Нисам пронашао\n"
 "„%s“"
 
-#: src/gui.c:196
+#: src/gui.c:204
 msgid "Edit comment"
 msgstr "Уредите коментар"
 
-#: src/gui.c:501
+#: src/gui.c:508
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ број нејасних %i ]"
 
-#. pv, i want the tree to be in original column
-#: src/gui.c:501 src/gui.c:505 src/menus.c:329 src/messages-table.c:244
+#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:311
 msgid "Fuzzy"
 msgstr "Нејасно"
 
-#: src/gui.c:505
+#: src/gui.c:512
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ нема нејасних ]"
 
-#: src/gui.c:513
+#: src/gui.c:520
 msgid "Sticky (Message & translation are the same)"
 msgstr "Лепљиво (порука и превод су исти)"
 
-#: src/gui.c:524
+#: src/gui.c:531
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ број непреведених %i ]"
 
-#. pv, i want the tree to be in original column
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:236
+#: src/gui.c:531 src/gui.c:533 src/messages-table.c:302
 msgid "Untranslated"
 msgstr "Непреведено"
 
-#: src/gui.c:526
+#: src/gui.c:533
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Нема више непреведених]"
@@ -368,134 +431,87 @@ msgstr "%s [ Нема више непреведених]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:539
+#: src/gui.c:546
 #, c-format
 msgid "Message %d / %d / Status: %s"
-msgstr "Порука %d / %d / Статус: %s"
+msgstr "Порука %d / %d / Стање: %s"
 
-#: src/header_stuff.c:422
+#: src/header_stuff.c:495
 msgid "gtranslator -- edit header"
-msgstr "гтранслатор -- уредите заглавље"
+msgstr "гпреводилац — уредите заглавље"
 
-#: src/header_stuff.c:429 src/header_stuff.c:434
-msgid "Project"
-msgstr "Пројекат"
-
-#: src/header_stuff.c:437
-msgid "Translator and Language"
-msgstr "Преводилац и језик"
-
-#: src/header_stuff.c:447
+#: src/header_stuff.c:519
 msgid "Comments:"
 msgstr "Коментари:"
 
-#: src/header_stuff.c:453
+#: src/header_stuff.c:526
 msgid "Project name:"
 msgstr "Назив пројекта:"
 
-#: src/header_stuff.c:456
+#: src/header_stuff.c:532
 msgid "Project version:"
 msgstr "Верзија пројекта:"
 
-#: src/header_stuff.c:459
+#: src/header_stuff.c:539
 msgid "Pot file creation date:"
 msgstr "Датум стварања ПОТ датотеке:"
 
-#: src/header_stuff.c:464
+#: src/header_stuff.c:545
 msgid "Po file revision date:"
 msgstr "Датум ревизије ПО датотеке:"
 
-#: src/header_stuff.c:471
+#: src/header_stuff.c:559
+msgid "Report message string bugs to:"
+msgstr "Пријави грешке у порукама на:"
+
+#: src/header_stuff.c:572
 msgid "Generator:"
 msgstr "Направио:"
 
-#: src/header_stuff.c:475 src/header_stuff.c:480
-msgid "Report message string bugs to:"
-msgstr ""
+#: src/header_stuff.c:576
+msgid "Project"
+msgstr "Пројекат"
 
-#: src/header_stuff.c:491
+#: src/header_stuff.c:582
 msgid "Use my options to complete the following entries:"
 msgstr "Користи моје опције за довршавање следећих уноса:"
 
-#: src/header_stuff.c:505
+#: src/header_stuff.c:595
 msgid "Translator's name:"
 msgstr "Име преводиоца:"
 
-#: src/header_stuff.c:508
+#: src/header_stuff.c:601
 msgid "Translator's e-mail:"
 msgstr "Е-пошта преводиоца:"
 
-#: src/header_stuff.c:511 src/prefs.c:150
+#: src/header_stuff.c:608 src/prefs.c:466
 msgid "Language:"
 msgstr "Језик:"
 
-#: src/header_stuff.c:517
-msgid "Language group's e-mail:"
-msgstr "Е-пошта групе:"
+#: src/header_stuff.c:615 src/prefs.c:478
+msgid "Language group's email:"
+msgstr "Е-пошта преводилачке групе:"
 
-#: src/header_stuff.c:522 src/prefs.c:166
+#: src/header_stuff.c:622 src/prefs.c:484
 msgid "Charset:"
 msgstr "Скуп знакова:"
 
-#: src/header_stuff.c:534 src/prefs.c:171
+#: src/header_stuff.c:629 src/prefs.c:489
 msgid "Encoding:"
 msgstr "Начин записа:"
 
+#: src/header_stuff.c:637
+msgid "Translator and Language"
+msgstr "Преводилац и језик"
+
 #: src/history.c:195
 msgid "_File/Recen_t files/"
-msgstr "Датотека/Скорашње датотеке/"
+msgstr "_Датотека/С_корашње датотеке/"
 
 #: src/history.c:243
 #, c-format
 msgid "Open %s"
 msgstr "Отвори %s"
-
-#: src/htmlizer.c:276
-#, c-format
-msgid "Couldn't save html output to %s!"
-msgstr "Нисам успео да снимим као хтмл у %s!"
-
-#.
-#. * Translatable output to a html file which is visible on the pages.
-#.
-#: src/htmlizer.c:302
-#, c-format
-msgid "%s-%s contains %i messages."
-msgstr "%s-%s садржи %i порука."
-
-#.
-#. * A translatable information string also displayed on the html pages.
-#. *
-#. * NOTE: Please do not forget to also "translate" the <b> tags as the
-#. *  project name should be displayed bold on the output pages.
-#.
-#: src/htmlizer.c:315
-#, c-format
-msgid "Project <b>%s</b> (last po file revision: %s)."
-msgstr "Пројекат <b>%s</b> (последња ревизија ПО датотеке: %s)."
-
-#: src/htmlizer.c:330
-#, c-format
-msgid "Last translator: %s"
-msgstr "Последњи преводилац: %s"
-
-#.
-#. * This is printed at the end of the HTML page and should also include
-#. *  the hyperlink in the translations.
-#. *
-#. * In the output it looks then like "HTML output of "tr.po" produced
-#. *  by gtranslator version X.YY".
-#. *
-#. * Please don't forget to include the HTML tags in the msgid.
-#.
-#: src/htmlizer.c:369
-#, c-format
-msgid ""
-"HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
-"\">gtranslator</a> version %s."
-msgstr ""
-"ХТМЛ за „%s“ направљен са <a href=\"http://www.gtranslator.org"
-"\">гтранслатор</a> верзија %s."
 
 #: src/languages.c:37
 msgid "Afrikaans"
@@ -615,7 +631,7 @@ msgstr "мађарски"
 
 #: src/languages.c:157
 msgid "Icelandic"
-msgstr ""
+msgstr "исландски"
 
 #: src/languages.c:161
 msgid "Indonesian"
@@ -761,87 +777,72 @@ msgstr "валун"
 msgid "Welsh"
 msgstr "велшки"
 
-#: src/main.c:82
+#: src/main.c:80
 msgid "Auto translate the po file & exit"
 msgstr "Аутоматски преведи ПО датотеку и напусти"
 
-#: src/main.c:82 src/main.c:98
+#: src/main.c:80 src/main.c:96
 msgid "FILENAME"
 msgstr "НАЗИВ ДАТОТЕКЕ"
 
-#: src/main.c:86
+#: src/main.c:84
 msgid "Show build information/specifications"
 msgstr "Прикажи податке/особености издања"
 
-#: src/main.c:90
+#: src/main.c:88
 msgid "Export learn buffer to a plain po file"
 msgstr "Извези складиште знања у обичну ПО датотеку"
 
-#: src/main.c:90
+#: src/main.c:88
 msgid "PO_FILE"
 msgstr "ПО-ДАТОТЕКА"
 
-#: src/main.c:94
+#: src/main.c:92
 msgid "Specify main window geometry"
 msgstr "Одредите геометрију главног прозора"
 
-#: src/main.c:94
+#: src/main.c:92
 msgid "GEOMETRY"
 msgstr "ГЕОМЕТРИЈА"
 
-#: src/main.c:98
+#: src/main.c:96
 msgid "Learn the file completely & exit"
 msgstr "Научи датотеку и напусти"
 
-#: src/main.c:102
-msgid "HTML file to write to"
-msgstr "ХТМЛ датотека у коју треба писати"
-
-#: src/main.c:102
-msgid "HTMLFILE"
-msgstr "ХТМЛ-ДАТОТЕКА"
-
-#: src/main.c:106
-msgid ""
-"Don't highlight syntax - FIXME: We're always non-syntaxed currently! Sorry..."
-msgstr ""
-"Не наглашавај синтаксу - ПОПРАВИМЕ: За сада немамо могућност наглашавања! "
-"Жалим..."
-
-#: src/main.c:150
+#: src/main.c:140
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Грешка током покретања GConf -а: %s."
 
-#: src/main.c:180
+#: src/main.c:170
 msgid "gtranslator build information/specs:"
-msgstr "подаци/особености гтранслатор издања:"
+msgstr "подаци/особености гпреводилац издања:"
 
-#: src/main.c:182
+#: src/main.c:172
 msgid "Version and build date:"
 msgstr "Верзија и датум издања:"
 
-#: src/main.c:184
+#: src/main.c:174
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "GLib / Gtk+ / GNOME / XML верзије издања:"
 
-#: src/main.c:186
+#: src/main.c:176
 msgid "Colorschemes directory:"
 msgstr "Директоријум са шемама:"
 
-#: src/main.c:188
+#: src/main.c:178
 msgid "Scripts directory:"
 msgstr "Директоријум са скриптама:"
 
-#: src/main.c:190
+#: src/main.c:180
 msgid "Window icon:"
 msgstr "Иконица прозора:"
 
-#: src/main.c:192
+#: src/main.c:182
 msgid "Own locale directory:"
 msgstr "Директоријум са властитим локалним подешењима:"
 
-#: src/main.c:194
+#: src/main.c:184
 msgid "Default learn buffer file location:"
 msgstr "Подразумевана локација датотеке са складиштеним знањем:"
 
@@ -849,294 +850,316 @@ msgstr "Подразумевана локација датотеке са скл
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:449
+#: src/main.c:430
 #, c-format
-msgid "Learned `%s' successfully.\n"
-msgstr "Успешно сам научио „%s“.\n"
+msgid "Learned file `%s' successfully for your learn buffer.\n"
+msgstr "Успешно сам савладао „%s“ из ваше базе знања.\n"
 
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:491
+#: src/main.c:472
 #, c-format
-msgid "Exported learn buffer to `%s'.\n"
-msgstr "Складиште знања је извежено у „%s“.\n"
+msgid "Exported learn buffer to file `%s'.\n"
+msgstr "Складиште знања је извежено у датотеку „%s“.\n"
 
-#: src/menus.c:49
+#: src/menus.c:48
 msgid "_Go"
-msgstr "Иди"
+msgstr "_Иди"
 
-#: src/menus.c:59
+#: src/menus.c:58
 msgid "_Compile"
-msgstr "Компајлирај"
+msgstr "_Компајлирај"
 
-#: src/menus.c:60 src/menus.c:284
+#: src/menus.c:59 src/menus.c:296
 msgid "Compile the po file"
 msgstr "Компајлирај ПО датотеку"
 
-#: src/menus.c:66
+#: src/menus.c:65
 msgid "_Update"
-msgstr "Ажурирај"
+msgstr "О_свежи"
 
-#: src/menus.c:67 src/menus.c:288
+#: src/menus.c:66 src/menus.c:300
 msgid "Update the po file"
-msgstr "Ажурирај ПО датотеку"
+msgstr "Освежи и допуни ПО датотеку"
+
+#: src/menus.c:73
+msgid "Add bookmark"
+msgstr "Додај обележивач"
 
 #: src/menus.c:74
-msgid "Aut_otranslate..."
-msgstr "Аутоматско превођење..."
+msgid "Add a bookmark for this message in this po file"
+msgstr "Додај обележивач за ову поруку у ПО датотеци"
 
-#: src/menus.c:75
+#: src/menus.c:81
+msgid "Aut_otranslate..."
+msgstr "Аут_оматско превођење..."
+
+#: src/menus.c:82
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr "Аутоматско превођење датотеке са подацима из вашег складишта знања"
 
-#: src/menus.c:82
+#: src/menus.c:89
 msgid "Remove all translations..."
 msgstr "Уклони све преводе..."
 
-#: src/menus.c:83
+#: src/menus.c:90
 msgid "Remove all existing translations from the po file"
 msgstr "Уклони све постојеће преводе из ПО датотеке"
 
-#: src/menus.c:91
+#: src/menus.c:98
 msgid "Open from _URI..."
 msgstr "Отвори са URI -а..."
 
-#: src/menus.c:92
+#: src/menus.c:99
 msgid "Open a po file from a given URI"
 msgstr "Отвори ПО датотеку са датог URI -а"
 
-#: src/menus.c:102
+#: src/menus.c:109
 msgid "Recen_t files"
 msgstr "Скорашње датотеке"
 
-#: src/menus.c:106
+#: src/menus.c:113
 msgid "_Export to UTF-8..."
 msgstr "Извези у УТФ-8..."
 
-#: src/menus.c:107
+#: src/menus.c:114
 msgid "Export the current po file to UTF-8"
 msgstr "Извези ову ПО датотеку у УТФ-8"
 
-#: src/menus.c:113
+#: src/menus.c:120
 msgid "_Import from UTF-8..."
 msgstr "Увези из УТФ-8..."
 
-#: src/menus.c:114
+#: src/menus.c:121
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr "Увези ПО датотеку у УТФ-8 запису у одговарајући запис"
 
-#: src/menus.c:146
+#: src/menus.c:153
 msgid "_Query..."
 msgstr "Претрага..."
 
-#: src/menus.c:147 src/menus.c:349
+#: src/menus.c:154 src/menus.c:361
 msgid "Query for a string"
 msgstr "Претрага за низ"
 
-#: src/menus.c:154
+#: src/menus.c:161
 msgid "_Header..."
 msgstr "Заглавље..."
 
-#: src/menus.c:155
+#: src/menus.c:162
 msgid "Edit po file header"
 msgstr "Уредите заглавље ПО датотеке"
 
-#: src/menus.c:162
+#: src/menus.c:169
 msgid "C_omment..."
 msgstr "Коментар..."
 
-#: src/menus.c:163
+#: src/menus.c:170
 msgid "Edit message comment"
 msgstr "Уредите коментар поруке"
 
-#: src/menus.c:170
+#: src/menus.c:177
 msgid "Copy _message -> translation"
 msgstr "Препиши поруку у превод"
 
-#: src/menus.c:171
+#: src/menus.c:178
 msgid "Copy the original message contents and paste them as translation"
 msgstr "Умножи садржај првобитне поруке и убаци као превод"
 
-#: src/menus.c:178
+#: src/menus.c:185
 msgid "Fu_zzy"
 msgstr "Нејасно"
 
-#: src/menus.c:179
+#: src/menus.c:186
 msgid "Toggle fuzzy status of a message"
 msgstr "Промени статус нејасне поруке"
 
-#: src/menus.c:193
+#: src/menus.c:200
 msgid "_First"
 msgstr "Прва"
 
-#: src/menus.c:194 src/menus.c:305
+#: src/menus.c:201 src/menus.c:317
 msgid "Go to the first message"
 msgstr "Иди до прве поруке"
 
-#: src/menus.c:200
+#: src/menus.c:207
 msgid "_Back"
 msgstr "Натраг"
 
-#: src/menus.c:201 src/menus.c:309
+#: src/menus.c:208 src/menus.c:321
 msgid "Move back one message"
 msgstr "Иди до претходне поруке"
 
-#: src/menus.c:208
+#: src/menus.c:215
 msgid "_Next"
 msgstr "Следећа"
 
-#: src/menus.c:209 src/menus.c:314
+#: src/menus.c:216 src/menus.c:326
 msgid "Move forward one message"
 msgstr "Иди до следеће поруке"
 
-#: src/menus.c:215
+#: src/menus.c:222
 msgid "_Last"
 msgstr "Последња"
 
-#: src/menus.c:216 src/menus.c:318
+#: src/menus.c:223 src/menus.c:330
 msgid "Go to the last message"
 msgstr "Иди до последње поруке"
 
-#: src/menus.c:223
+#: src/menus.c:230
 msgid "_Go to..."
 msgstr "Иди до..."
 
-#: src/menus.c:224
+#: src/menus.c:231
 msgid "Goto specified message number"
 msgstr "Иди до одређеног броја поруке"
 
-#: src/menus.c:230
+#: src/menus.c:237
 msgid "Next fuz_zy"
 msgstr "Следећа нејасна"
 
-#: src/menus.c:231
+#: src/menus.c:238
 msgid "Go to next fuzzy message"
 msgstr "Иди до следеће нејасне поруке"
 
-#: src/menus.c:237
+#: src/menus.c:244
 msgid "Next _untranslated"
 msgstr "Следећа непреведена"
 
-#: src/menus.c:238 src/menus.c:323
+#: src/menus.c:245 src/menus.c:335
 msgid "Go to next untranslated message"
 msgstr "Иди до следеће непреведене поруке"
 
-#: src/menus.c:248
+#: src/menus.c:255
+msgid "_Bookmarks"
+msgstr "О_бележивачи"
+
+#: src/menus.c:256
 msgid "_Colorschemes"
-msgstr "Шеме"
+msgstr "Шеме б_оја"
 
-#: src/menus.c:258
+#: src/menus.c:270
 msgid "gtranslator _website"
-msgstr "интернет место гтранслатора"
-
-#: src/menus.c:259
-msgid "gtranslator's homepage on the web"
-msgstr "домаћа страна гтранслатора на интернету"
+msgstr "_веб страница гпреводиoца"
 
 #: src/menus.c:271
+msgid "gtranslator's homepage on the web"
+msgstr "домаћа страна гпреводиoца на интернету"
+
+#: src/menus.c:282
+msgid "Open"
+msgstr "Отвори"
+
+#: src/menus.c:283
 msgid "Open a po file"
 msgstr "Отвори по датотеку"
 
-#: src/menus.c:274
+#: src/menus.c:286
 msgid "Save"
 msgstr "Сними"
 
-#: src/menus.c:275
+#: src/menus.c:287
 msgid "Save File"
 msgstr "Сними датотеку"
 
-#: src/menus.c:278
+#: src/menus.c:290
 msgid "Save as"
 msgstr "Сними као"
 
-#: src/menus.c:279
+#: src/menus.c:291
 msgid "Save file with a different name"
 msgstr "Сними датотеку под другим именом"
 
-#: src/menus.c:283
+#: src/menus.c:295
 msgid "Compile"
 msgstr "Компајлирај"
 
-#: src/menus.c:287
+#: src/menus.c:299
 msgid "Update"
 msgstr "Ажурирање"
 
-#: src/menus.c:291
+#: src/menus.c:303
 msgid "Header"
 msgstr "Заглавље"
 
-#: src/menus.c:292
+#: src/menus.c:304
 msgid "Edit the header"
 msgstr "Уредите заглавље"
 
-#: src/menus.c:296
+#: src/menus.c:308
 msgid "Undo"
 msgstr "Поништи"
 
-#: src/menus.c:297
+#: src/menus.c:309
 msgid "Undo the last performed action"
 msgstr "Поништи последњу радњу"
 
-#: src/menus.c:304
+#: src/menus.c:316
 msgid "First"
 msgstr "Прва"
 
-#: src/menus.c:308
+#: src/menus.c:320
 msgid "Back"
 msgstr "Натраг"
 
-#: src/menus.c:313
+#: src/menus.c:325
 msgid "Next"
 msgstr "Следећа"
 
-#: src/menus.c:317
+#: src/menus.c:329
 msgid "Last"
 msgstr "Последња"
 
-#: src/menus.c:322
+#: src/menus.c:334
 msgid "Missing"
 msgstr "Наедостајућа"
 
-#: src/menus.c:330
+#: src/menus.c:342
 msgid "Go to the next fuzzy translation"
 msgstr "Иди до следећег нејасног превода"
 
-#: src/menus.c:335
+#: src/menus.c:347
 msgid "Go to"
 msgstr "Иди до"
 
-#: src/menus.c:336
+#: src/menus.c:348
 msgid "Go to specified message number"
 msgstr "Иди до одређеног броја поруке"
 
-#: src/menus.c:340
+#: src/menus.c:351
+msgid "Find"
+msgstr "Пронађи"
+
+#: src/menus.c:352
 msgid "Find string in po file"
 msgstr "Пронађи низ у ПО датотеци"
 
-#: src/menus.c:344
+#: src/menus.c:356
 msgid "Replace string in po file"
 msgstr "Замени низ у ПО датотеци"
 
-#: src/message.c:84
+#: src/message.c:95
 msgid "Couldn't get the message!"
 msgstr "Нисам успео да добијем поруку!"
 
-#: src/message.c:106
+#: src/message.c:117
 msgid "There are no fuzzy messages left."
 msgstr "Нема више нејасних порука."
 
-#: src/message.c:130
+#: src/message.c:141
 msgid "All messages seem to be translated."
 msgstr "Изгледа да су све поруке преведене."
 
-#. pv, i want the tree to be in original column
-#. {_("Status"),      "text"},
-#: src/messages-table.c:163
+#: src/message.c:327
+msgid "gtranslator -- edit plural forms of message translation"
+msgstr "гпреводилац — уредите облике за множину за преводе порука"
+
+#: src/messages-table.c:243
 msgid "Original"
 msgstr "Оригинал"
 
-#: src/messages-table.c:164
+#: src/messages-table.c:254
 msgid "Translation"
 msgstr "Превод"
 
@@ -1164,7 +1187,7 @@ msgstr "Нисам успео да отворим %s -овану gettext дат�
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Нисам успео да отворим зиповану ПО датотеку „%s“!"
 
-#: src/parse.c:391
+#: src/parse.c:468
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1175,7 +1198,7 @@ msgstr ""
 "у реду %d.\n"
 "Проверите датотеку и покоушајте изнова."
 
-#: src/parse.c:437
+#: src/parse.c:523
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1184,7 +1207,7 @@ msgstr ""
 "Празна датотека:\n"
 "%s"
 
-#: src/parse.c:459
+#: src/parse.c:545
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Датотека „%s“ уопште не постоји!"
@@ -1192,16 +1215,16 @@ msgstr "Датотека „%s“ уопште не постоји!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:584
+#: src/parse.c:669
 msgid "Header record not found - defaulting from preferences"
-msgstr ""
+msgstr "Заглавље није нађено — користи податке из поставки"
 
-#: src/parse.c:602
+#: src/parse.c:685
 #, c-format
 msgid "gtranslator -- %s"
-msgstr "гтранслатор --%s"
+msgstr "гпреводилац — %s"
 
-#: src/parse.c:746
+#: src/parse.c:897
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1212,38 +1235,26 @@ msgstr ""
 "ПОТ датотеке се стварају компајлирањем.\n"
 "Ваша датотека би требала бити названа „%s.po“."
 
-#: src/parse.c:808
+#: src/parse.c:959
 #, c-format
 msgid "Could not open file `%s' for writing!"
-msgstr "Нисам успеода отворим датотеку „%s“ за уписивање!"
+msgstr "Нисам успео да отворим датотеку „%s“ за уписивање!"
 
-#: src/parse.c:854
+# bug: plural-forms
+#: src/parse.c:1011
 #, c-format
 msgid ""
 "File %s\n"
 "contains %d fuzzy messages"
 msgstr ""
 "Датотека %s\n"
-"садрржи %d нејасних порука"
+"садржи %d нејасних порука"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:959
-msgid "gtranslator"
-msgstr "гтранслатор"
-
-#: src/parse.c:984
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
-msgstr ""
-"Датотека %s\n"
-"је измењена. Да ли желите да се вратите на снимљену копију?"
-
-#: src/parse.c:1137
+#: src/parse.c:1280
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Нажалост, „msgfmt“ није доступан на вашем систему!"
 
-#: src/parse.c:1172
+#: src/parse.c:1315
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1252,257 +1263,275 @@ msgstr ""
 "Компајлирање успешно извршено:\n"
 "%s"
 
-#: src/prefs.c:110
+#: src/preferences.c:180
+msgid "Couldn't generate the current date!"
+msgstr "Нисам успео да одредим тренутни датум!"
+
+#: src/prefs.c:302
 msgid "gtranslator -- options"
-msgstr "гтранслатор -- опције"
+msgstr "гпреводилац — опције"
 
-#: src/prefs.c:116
-msgid "Personal information"
-msgstr "Лични подаци"
+#.
+#. * Files page
+#.
+#: src/prefs.c:320
+msgid "Files"
+msgstr "Датотеке"
 
-#: src/prefs.c:118
-msgid "Language settings"
-msgstr "Подешења језика"
+#: src/prefs.c:321 src/prefs.c:496 src/prefs.c:553
+msgid "General"
+msgstr "Опште"
 
-#: src/prefs.c:120
-msgid "Po file editing"
-msgstr "Уређивање ПО датотеке"
-
-#: src/prefs.c:122
-msgid "Miscellaneous"
-msgstr "Разно"
-
-#: src/prefs.c:124
-msgid "Recent files & spell checking"
-msgstr "Скорашње датотеке и провера правописа"
-
-#: src/prefs.c:126
-msgid "Fonts, colors and color schemes"
-msgstr "Слова, боје и шеме"
-
-#: src/prefs.c:128
-msgid "Autosaving"
-msgstr "Аутоматско снимање"
-
-#: src/prefs.c:130
-msgid "Messages table"
-msgstr "Табела са порукама"
-
-#: src/prefs.c:132
-msgid "Learn buffer & autotranslation"
-msgstr "Складиште знања и аутоматско превођење"
-
-#: src/prefs.c:138
-msgid "Author's name:"
-msgstr "Име аутора:"
-
-#: src/prefs.c:141
-msgid "Author's EMail:"
-msgstr "Е-пошта аутора:"
-
-#: src/prefs.c:155
-msgid "Language code:"
-msgstr "Ознака језика:"
-
-#: src/prefs.c:161
-msgid "Language group's EMail:"
-msgstr "Е-пошта групе:"
-
-#: src/prefs.c:180
-msgid "Remove fuzzy status if message changed"
-msgstr "Уклони статус нејасне поруке ако је иста измењена"
-
-#: src/prefs.c:184
-msgid "Warn if the po file contains fuzzy translations"
+#: src/prefs.c:322
+msgid "Warn if po file contains fuzzy translations"
 msgstr "Упозори уколико ПО датотека садржи нејасне преводе"
 
-#: src/prefs.c:188
-msgid "Keep obsolete messages in the po files"
-msgstr "Задржи застареле поруке у ПО датотекама"
-
-#: src/prefs.c:192
-msgid "Highlight syntax of the translation messages"
-msgstr "Нагласи синтаксу порука превода"
-
-#: src/prefs.c:200
-msgid "Use special character to indicate free space"
-msgstr "Користи посебан знак за празан простор"
-
-#: src/prefs.c:203
-msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr "Омогући функцију за ажурирање ПО датотеке из гтранслатора"
-
-#: src/prefs.c:206
-msgid "Enable the functionality to remove all translations from a po file"
-msgstr "Омогући функцију за уклањање свих превода из ПО датотеке"
-
-#: src/prefs.c:209
+#: src/prefs.c:326
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Избриши компајлиране датотеке (нпр „пројекат.gmo“)"
 
-#: src/prefs.c:212
-msgid "Save geometry on exit & restore it on startup"
-msgstr "Сачувај геометрију при изласку и поврати је при покретању"
+#: src/prefs.c:330
+msgid "Autosave"
+msgstr "Аутоматско снимање"
 
-#: src/prefs.c:215
-msgid "Show instant comment view in the main pane"
-msgstr "Прикажи преглед са тренутним коментаром у главном оквиру"
+#: src/prefs.c:331
+msgid "Automatically save at regular intervals"
+msgstr "Аутоматски сними ПО датотеке у редовним размацима"
 
-#: src/prefs.c:222
-msgid "Maximum number of entries in the recent files' list:"
+#: src/prefs.c:339
+msgid "Autosave interval:"
+msgstr "Време између снимања:"
+
+#: src/prefs.c:340
+msgid "Append a suffix to automatically saved files"
+msgstr "Додај суфикс аутоматски снимљеним датотекама"
+
+#: src/prefs.c:347
+msgid "Suffix:"
+msgstr "Суфикс:"
+
+#: src/prefs.c:348
+msgid "Recent files"
+msgstr "Скорашње датотеке"
+
+#: src/prefs.c:356
+msgid "Maximum number of entries in the recent files list:"
 msgstr "Највећи дозвољени број ставки на списку скоријих датотека:"
 
-#: src/prefs.c:226
-msgid "Check recent files before showing in recent files' list"
+#: src/prefs.c:357
+msgid "Check recent files before showing in recent files list"
 msgstr "Провери скорије датотеке пре приказивања списка скоријих датотека"
 
-#: src/prefs.c:229
-msgid "Instant spell checking"
-msgstr "Тренутна провера правописа"
+#.
+#. * Editor page
+#.
+#: src/prefs.c:365
+msgid "Editor"
+msgstr "Уређивач"
 
-#: src/prefs.c:232
-msgid "Use special dictionary:"
-msgstr "Користи посебни речник:"
+#: src/prefs.c:368
+msgid "Text display"
+msgstr "Приказ текста"
 
-#: src/prefs.c:254
+#: src/prefs.c:369
+msgid "Highlight syntax of the translation message"
+msgstr "Нагласи синтаксу порука превода"
+
+#: src/prefs.c:380
 msgid "Syntax color scheme to use:"
-msgstr "Боја шеме за синтаксу која ће се користити:"
+msgstr "Која шема боја за синтаксу ће се користити:"
 
-#: src/prefs.c:259
-msgid "Apply own fonts:"
-msgstr "Примени властита слова:"
+#: src/prefs.c:381
+msgid "Use special character to indicate white space"
+msgstr "Користи посебан знак за празан простор"
 
-#: src/prefs.c:263
-msgid "Original text font:"
-msgstr "Слова оригиналног текста:"
+#: src/prefs.c:385
+msgid "Apply own fonts"
+msgstr "Користи изабране фонтове"
 
-#: src/prefs.c:263
+#: src/prefs.c:389
 msgid "gtranslator -- font selection/msgid font"
-msgstr "гтранслатор -- одбир слова/„msgid“ слова"
+msgstr "гпреводилац — избор фонта за „msgid“"
 
-#: src/prefs.c:267
-msgid "Translation font:"
-msgstr "Слова превода:"
+#: src/prefs.c:393
+msgid "Original text font:"
+msgstr "Фонт изворног текста:"
 
-#: src/prefs.c:267
+#: src/prefs.c:394
 msgid "gtranslator -- font selection/msgstr font"
-msgstr "гтранслатор -- одбир слова/„msgstr“ слова"
+msgstr "гпреводилац — избор фонта за „msgstr“"
 
-#: src/prefs.c:271
+#: src/prefs.c:398
+msgid "Translation font:"
+msgstr "Фонт превода:"
+
+#: src/prefs.c:399
 msgid "Apply own colors:"
 msgstr "Примени властите боје:"
 
-#: src/prefs.c:275
+#: src/prefs.c:403
+msgid "gtranslator -- foreground color"
+msgstr "гпреводилац — боја текста"
+
+#: src/prefs.c:407
 msgid "Foreground color:"
 msgstr "Боја текста:"
 
-#: src/prefs.c:275
-msgid "gtranslator -- foreground color"
-msgstr "гтранслатор -- боја текста"
+#: src/prefs.c:408
+msgid "gtranslator -- background color"
+msgstr "гпреводилац — боја позадине"
 
-#: src/prefs.c:279
-msgid "Background color:"
+#: src/prefs.c:412
+msgid "Background:"
 msgstr "Боја позадине:"
 
-#: src/prefs.c:279
-msgid "gtranslator -- background color"
-msgstr "гтранслатор -- боја позадине"
+#: src/prefs.c:413
+msgid "Contents"
+msgstr "Садржај"
+
+#: src/prefs.c:414
+msgid "Remove fuzzy status if message is changed"
+msgstr "Уклони ознаку нејасне поруке ако је иста измењена"
+
+#: src/prefs.c:418
+msgid "Keep obsolete messages in the po files"
+msgstr "Задржи застареле поруке у ПО датотекама"
+
+#: src/prefs.c:422
+msgid "Spell checking"
+msgstr "Провера правописа"
+
+#: src/prefs.c:423
+msgid "Instant spell checking"
+msgstr "Тренутна провера правописа"
+
+#: src/prefs.c:429
+msgid "Use special dictionary:"
+msgstr "Користи посебни речник:"
 
 #.
-#. * The seventh page of the prefs-box: autosaving options.
+#. * PO header page
 #.
-#: src/prefs.c:285
-msgid "Automatically save po files at regular intervals (in minutes):"
-msgstr "Аутоматски сними ПО датотеке у редовним размацима (у минутима):"
+#: src/prefs.c:447
+msgid "PO header"
+msgstr "ПО заглавље"
 
-#: src/prefs.c:300
-msgid "Append a suffix to automatically saved files:"
-msgstr "Додај суфикс аутоматски снимљеним датотекама:"
+#: src/prefs.c:450
+msgid "Personal Information"
+msgstr "Лични подаци"
 
-#: src/prefs.c:320
-msgid "Show the messages table (requires gtranslator restart)"
-msgstr ""
-"Прикажи табелу са порукама (неопходно је изновно покретање гтранслатора)"
+#: src/prefs.c:454
+msgid "Author's name:"
+msgstr "Име аутора:"
 
-#: src/prefs.c:324
-msgid "Collapse translated entries by default"
-msgstr "Одмотај преведене уносе као подразумевано"
+#: src/prefs.c:458
+msgid "Author's email:"
+msgstr "Е-пошта аутора:"
 
-#: src/prefs.c:328
-msgid "Use own colors for the messages table groups"
-msgstr "Користи властите боје за групе на табели порука"
+#: src/prefs.c:459
+msgid "Language settings"
+msgstr "Подешавања језика"
 
-#: src/prefs.c:332
-msgid "Untranslated entries color:"
-msgstr "Боја непреведених уноса:"
+#: src/prefs.c:472
+msgid "Language code:"
+msgstr "Ознака језика:"
 
-#: src/prefs.c:332
-msgid "gtranslator -- untranslated entries' color"
-msgstr "гтранслатор -- боја непреведених уноса"
+#.
+#. * Functionality page
+#.
+#: src/prefs.c:494
+msgid "Functionality"
+msgstr "Могућности"
 
-#: src/prefs.c:336
+#: src/prefs.c:497
+msgid "Enable the functionality to update a po file from within gtranslator"
+msgstr "Омогући функцију за ажурирање ПО датотеке из гпреводиoца"
+
+#: src/prefs.c:501
+msgid "Enable the functionality to remove all translations from a po file"
+msgstr "Омогући функцију за уклањање свих превода из ПО датотеке"
+
+#: src/prefs.c:505
+msgid "Show instant comment view in main pane"
+msgstr "Прикажи преглед са тренутним коментаром у главном оквиру"
+
+#: src/prefs.c:509
+msgid "Display special dialog for messages with plural forms"
+msgstr "Прикажи нарочито прозорче за поруке са облицима за множину"
+
+#: src/prefs.c:513
+msgid "Save geometry on exit and restore it on startup"
+msgstr "Сачувај димензије при изласку и користи их при покретању"
+
+#: src/prefs.c:517
+msgid "Messages table"
+msgstr "Табела са порукама"
+
+#: src/prefs.c:518
+msgid "Show the messages table (requires restart)"
+msgstr "Прикажи табелу са порукама (неопходно је поновно покретање)"
+
+#: src/prefs.c:522
+msgid "Collapse all entries by default"
+msgstr "Подразумевај скупљање свих уноса"
+
+#: src/prefs.c:526
+msgid "Use own colors for messages table groups"
+msgstr "Користи властите боје за групе у табели порука"
+
+#: src/prefs.c:535
 msgid "Fuzzy entries color:"
 msgstr "Боја нејасних уноса:"
 
-#: src/prefs.c:336
-msgid "gtranslator -- fuzzy entries' color"
-msgstr "гтранслатор -- боја нејасних уноса"
+#: src/prefs.c:541
+msgid "Untranslated entries color:"
+msgstr "Боја непреведених уноса:"
 
-#: src/prefs.c:340
+#: src/prefs.c:547
 msgid "Translated entries color:"
 msgstr "Боја преведених уноса:"
 
-#: src/prefs.c:340
-msgid "gtranslator -- translated entries' color"
-msgstr "гтранслатор -- боја преведених уноса"
+#.
+#. * Autotranslate page
+#.
+#: src/prefs.c:552
+msgid "Autotranslation"
+msgstr "Аутоматски превод"
 
-#: src/prefs.c:348
+#: src/prefs.c:554
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 "Користи и лично складиште знања при аутоматском превођењу непреведених порука"
 
-#: src/prefs.c:352
+#: src/prefs.c:558
 msgid "Automatically learn a newly translated message"
 msgstr "Аутоматски „научи“ новопреведену поруку"
 
-#.
-#. * Translators: With "fuzzy" I mean a more enhanced (and more
-#. *  crappy) logic while searching for appropriate translations
-#. *   for a original string.
-#.
-#: src/prefs.c:360
-msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
-msgstr "Користи „нејасне“ рутине слагања за претраге складишта знања"
+#: src/prefs.c:562
+msgid "Fuzzy matching"
+msgstr "Нејасно поклапање"
 
-#: src/prefs.c:363
-msgid "Minimal required similarity percentage for fuzzy queries"
-msgstr "Најмања неопходна процентуална сличност за претрагу нејасних порука"
+#: src/prefs.c:569
+msgid "Use \"fuzzy\" matching routines for learn buffer queries"
+msgstr "Користи поступак за „нејасно“ поклапање при претрази складишта знања"
 
-#: src/prefs.c:405
+#: src/prefs.c:576
+msgid "Minimal required similarity persentage for fuzzy queries:"
+msgstr "Најмања неопходна процентуална сличност за претрагу нејасних порука:"
+
+#: src/prefs.c:621
 msgid "Please enter your name!"
-msgstr "Унесите ваше име!"
+msgstr "Молим унесите ваше име!"
 
-#: src/prefs.c:419
+#: src/prefs.c:635
 msgid "Please enter your EMail address!"
-msgstr "Унесите вашу е-пошту!"
+msgstr "Молим унесите вашу е-пошту!"
 
-#: src/prefs.c:432
+#: src/prefs.c:648
 msgid "Please enter a valid EMail address!"
-msgstr "Унесите исправну е-пошту!"
-
-#: src/prefs.c:652
-msgid ""
-"The Preferences box allows you to customise gtranslator\n"
-"to work in ways you find comfortable and productive."
-msgstr ""
-"Прозор са поставкама вам омогућава да прилагодите гтранслатор\n"
-"да ради на начин који је за вас погодан и продуктиван."
-
-#: src/preferences.c:180
-msgid "Couldn't generate the current date!"
-msgstr "Нисам успео да одредим тренутни датум!"
+msgstr "Молим унесите исправну е-пошту!"
 
 #: src/replace.c:173
 msgid "No replacements made!"
@@ -1555,7 +1584,7 @@ msgstr "Нисам успео да снимим зиповану ПО датот
 msgid "Session restored successfully."
 msgstr "Сеанса је успешно опорављена."
 
-#: src/stylistics.c:278
+#: src/stylistics.c:265
 msgid "No font set! Using default font"
 msgstr "Није одређена врста слова! Користим подразумевана слова"
 
@@ -1563,7 +1592,7 @@ msgstr "Није одређена врста слова! Користим под
 #. * Use gtranslator's font in this case -- should be a fallback font
 #. *  for your language.
 #.
-#: src/stylistics.c:284
+#: src/stylistics.c:271
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
@@ -1600,12 +1629,12 @@ msgstr "iso-8859-1"
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Геометријски низ „%s“ није могао бити обрађен!"
 
-#: src/utils_gui.c:373
+#: src/utils_gui.c:360
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Немате овлашћења за приступ датотеци „%s“!"
 
-#: src/utils_gui.c:391
+#: src/utils_gui.c:378
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1616,35 +1645,12 @@ msgstr ""
 "Снимите нову копију датотеке на место по вашем избору\n"
 "где ћете имати овлашћење за писање."
 
-#: src/utils_gui.c:460
-#, c-format
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
-"Датотека\n"
-"\n"
-"   %s\n"
-"\n"
-"је већ отворена у другом примерку гтранслатора!\n"
-"Морате затворити други примерак гтранслатора који\n"
-"тренутно рукује овом датотеком да бисте добили приступ истој.\n"
-"\n"
-"Да ли да овај примерак гтранслатора ипак отвори датотеку?"
-
-#: src/utils_gui.c:505
+#: src/utils_gui.c:467
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Неопходни програм за отварање архива „%s“ није инсталиран!"
 
-#: src/utils_gui.c:510
+#: src/utils_gui.c:472
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Неопходни програм за архивирање „%s“ није инсталиран!"
@@ -1683,21 +1689,90 @@ msgstr "Домаћин „%s“ нема адресу!"
 msgid "Transfer interrupted!"
 msgstr "Пренос је прекинут!"
 
-#: data/desktop/gtranslator.desktop.in.h:1
-msgid "The Gnome translation program"
-msgstr "Гномов програм за превођење"
+#~ msgid "Are you sure you want to remove ALL translations from this po file?"
+#~ msgstr ""
+#~ "Да ли сте сигурни да желите да уклоните СВЕ преводе из ове ПО датотеке?"
 
-#: data/mime/gtranslator.keys.in.h:1
-msgid "Compiled gettext po file"
-msgstr "Компајлирана gettext ПО датотека"
+#~ msgid "Go!"
+#~ msgstr "Иди!"
 
-#: data/mime/gtranslator.keys.in.h:2
-msgid "Compressed gettext po file"
-msgstr "Архивирана gettext ПО датотека"
+#~ msgid "Recovering `%s'..."
+#~ msgstr "Опорављам „%s“..."
 
-#: data/mime/gtranslator.keys.in.h:3
-msgid "Gettext po file"
-msgstr "Gettext ПО датотека"
+#~ msgid "Couldn't save html output to %s!"
+#~ msgstr "Нисам успео да снимим као хтмл у %s!"
+
+#~ msgid "%s-%s contains %i messages."
+#~ msgstr "%s-%s садржи %i порука."
+
+#~ msgid "Project <b>%s</b> (last po file revision: %s)."
+#~ msgstr "Пројекат <b>%s</b> (последња ревизија ПО датотеке: %s)."
+
+#~ msgid "Last translator: %s"
+#~ msgstr "Последњи преводилац: %s"
+
+#~ msgid ""
+#~ "HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
+#~ "\">gtranslator</a> version %s."
+#~ msgstr ""
+#~ "ХТМЛ за „%s“ направљен са <a href=\"http://www.gtranslator.org"
+#~ "\">гпреводилац</a> верзија %s."
+
+#~ msgid "HTML file to write to"
+#~ msgstr "ХТМЛ датотека у коју треба писати"
+
+#~ msgid "HTMLFILE"
+#~ msgstr "ХТМЛ-ДАТОТЕКА"
+
+#~ msgid ""
+#~ "Don't highlight syntax - FIXME: We're always non-syntaxed currently! "
+#~ "Sorry..."
+#~ msgstr ""
+#~ "Не наглашавај синтаксу - ПОПРАВИМЕ: За сада немамо могућност наглашавања! "
+#~ "Жалим..."
+
+#~ msgid "Po file editing"
+#~ msgstr "Уређивање ПО датотеке"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Разно"
+
+#~ msgid "Recent files & spell checking"
+#~ msgstr "Скорашње датотеке и провера правописа"
+
+#~ msgid "Fonts, colors and color schemes"
+#~ msgstr "Слова, боје и шеме"
+
+#~ msgid "Learn buffer & autotranslation"
+#~ msgstr "Складиште знања и аутоматско превођење"
+
+#~ msgid "Language group's EMail:"
+#~ msgstr "Е-пошта групе:"
+
+#~ msgid "gtranslator -- untranslated entries' color"
+#~ msgstr "гпреводилац — боја непреведених уноса"
+
+#~ msgid "gtranslator -- fuzzy entries' color"
+#~ msgstr "гпреводилац — боја нејасних уноса"
+
+#~ msgid "gtranslator -- translated entries' color"
+#~ msgstr "гпреводилац — боја преведених уноса"
+
+#~ msgid ""
+#~ "The Preferences box allows you to customise gtranslator\n"
+#~ "to work in ways you find comfortable and productive."
+#~ msgstr ""
+#~ "Прозор са поставкама вам омогућава да прилагодите гпреводилац\n"
+#~ "да ради на начин који је за вас погодан и продуктиван."
+
+#~ msgid "Compiled gettext po file"
+#~ msgstr "Компајлирана gettext ПО датотека"
+
+#~ msgid "Compressed gettext po file"
+#~ msgstr "Архивирана gettext ПО датотека"
+
+#~ msgid "Gettext po file"
+#~ msgstr "Gettext ПО датотека"
 
 #~ msgid "Status"
 #~ msgstr "Статус"
