@@ -31,7 +31,6 @@
 #include "gtkspell.h"
 #include "open-differently.h"
 #include <libgnome/gnome-history.h>
-#include <libgtranslator/recent-files.h>
 
 /*
  * These are to be used only inside this file
