@@ -1,58 +1,42 @@
 #!/bin/sh
-#######################################################################
-package=gtranslator
-version=0.18
-#######################################################################
-build_pot  ()  {
-echo "Building the $package.pot ..."
-xgettext --default-domain=$package --directory=.. \
+
+PACKAGE="gtranslator"
+
+if [ "x$1" = "x--help" ]; then
+
+echo Usage: ./update.sh langcode
+echo --help                  display this help and exit
+echo
+echo Examples of use:
+echo ./update.sh ----- just creates a new pot file from the source
+echo ./update.sh da -- created new pot file and updated the da.po file 
+
+elif [ "x$1" = "x" ]; then 
+
+echo "Building the $PACKAGE.pot ..."
+
+xgettext --default-domain=$PACKAGE --directory=.. \
   --add-comments --keyword=_ --keyword=N_ \
   --files-from=./POTFILES.in \
-&& test ! -f $package.po \
-   || ( rm -f ./$package.pot \
-    && mv $package.po ./$package.pot )
-}
-#######################################################################
-do_it  ()  {
-[ -f $package.pot ] || build_pot
-msgmerge $lang.po $package.pot|sed -e 's/^#~.*$//g' |\
-sed -e s/^\"PO-Revision-.*$/\"PO-Revision-Date:\ "`date +%Y-%m-%d`"\ "`date +%H:%M%z`"'\\n'\"/ |\
-sed -e s/^\"Project-Id.*$/\"Project-Id-Version:\ $package\ $version'\\n'\"/ > $lang.po
-}
-#######################################################################
-case $1 in
--h|--h*)
-echo "
-./update.sh -- gtranslator's dir.
-	
-without arguments only the $package.pot is produced.
+&& test ! -f $PACKAGE.po \
+   || ( rm -f ./$PACKAGE.pot \
+&& mv $PACKAGE.po ./$PACKAGE.pot );
 
-Possible arguments
+else
 
-	-h --help    -- help
-	[LANGUAGE]   -- build the $package.pot, check if there is a
-			 [LANGUAGE].po, merge it, remove unneeded 
-			  entries (#~ ..) and substitute the package
-			   name and the version.
+xgettext --default-domain=$PACKAGE --directory=.. \
+  --add-comments --keyword=_ --keyword=N_ \
+  --files-from=./POTFILES.in \
+&& test ! -f $PACKAGE.po \
+   || ( rm -f ./PACKAGE.pot \
+&& mv $PACKAGE.po ./$PACKAGE.pot );
 
-	Example: ./update.sh tr will produce the $package.pot and merge 
-		the Turkish translation (tr.po) and update the version
-		 number.
-		
+echo "Building the $PACKAGE.pot ..."
+echo "Now merging $1.po with $PACKAGE.pot, and creating an updated $1.po ..." 
 
-"
-	exit 0
-;;
-[a-zA-Z]*)
-lang="$1"
-[ -f $lang.po ] || {
-	echo "No $lang.po file found. No merge will be done."
-	build_pot && exit 0
-}
-do_it
-;;
-*)
-build_pot
-;;
-esac
-#######################################################################
+mv $1.po $1.po.old && msgmerge $1.po.old $PACKAGE.pot -o $1.po \
+&& rm $1.po.old;
+
+msgfmt --statistics $1.po
+
+fi;
