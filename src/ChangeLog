@@ -1,5 +1,8 @@
 2001-04-29  Fatih Demir <kabalak@gtranslator.org>
 
+	* parse.c: Fixed #53829 (crash on editing of dpkg's de.po): added
+		a sanity check while writing -- fixes the crash.
+
 	* actions.c, gui.c & sidebar.c: Added first undo/redo steps in code.
 
 	* actions.c/.h: Added ACT_REDO, it's foo'sh skeleton function and

@@ -476,6 +476,9 @@ static void write_the_message(gpointer data, gpointer fs)
 	GtrMsg *msg = GTR_MSG(data);
 	gchar *id, *str;
 
+	g_return_if_fail(fs!=NULL);
+	g_return_if_fail(msg!=NULL);
+
 	id = restore_msg(msg->msgid);
 	str = restore_msg(msg->msgstr);
 	
