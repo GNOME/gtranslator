@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-29 03:56+0200\n"
+"POT-Creation-Date: 2004-08-18 04:04+0200\n"
 "PO-Revision-Date: 2004-07-29 11:36+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -39,7 +39,7 @@ msgstr ""
 "gtranslator është një suite për të edituar file po dhe ju vë në dispozicion "
 "shumë funksione."
 
-#: src/bookmark.c:93 src/dialogs.c:1497
+#: src/bookmark.c:67 src/bookmark.c:93 src/dialogs.c:1497
 msgid "No comment"
 msgstr "Asnjë koment"
 
@@ -488,19 +488,19 @@ msgstr "Emri i përkthyesit:"
 msgid "Translator's e-mail:"
 msgstr "E-mail i përkthyesit:"
 
-#: src/header_stuff.c:608 src/prefs.c:500
+#: src/header_stuff.c:608 src/prefs.c:501
 msgid "Language:"
 msgstr "Gjuha:"
 
-#: src/header_stuff.c:615 src/prefs.c:512
+#: src/header_stuff.c:615 src/prefs.c:513
 msgid "Language group's email:"
 msgstr "Email për grupin e gjuhës:"
 
-#: src/header_stuff.c:622 src/prefs.c:518
+#: src/header_stuff.c:622 src/prefs.c:519
 msgid "Charset:"
 msgstr "Charset:"
 
-#: src/header_stuff.c:629 src/prefs.c:523
+#: src/header_stuff.c:629 src/prefs.c:524
 msgid "Encoding:"
 msgstr "Kodifikimi:"
 
@@ -785,9 +785,10 @@ msgstr "Vietnameze"
 msgid "Walloon"
 msgstr "Walloon"
 
+#. GRUT modified this item
 #: src/languages.c:309
 msgid "Welsh"
-msgstr "Welsh"
+msgstr "Galeze"
 
 #: src/learn.c:379
 msgid "gtranslator learn buffer statistics:"
@@ -982,7 +983,8 @@ msgstr "_Importo nga UTF-8..."
 
 #: src/menus.c:121
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr "Importon një file po të kodifikuar UTF-8 në kodifikimin korrispondent piatë "
+msgstr ""
+"Importon një file po të kodifikuar UTF-8 në kodifikimin korrispondent piatë "
 
 #: src/menus.c:153
 msgid "_Query..."
@@ -1342,51 +1344,51 @@ msgstr "gtranslator -- opcionet"
 #.
 #. * Files page
 #.
-#: src/prefs.c:350
+#: src/prefs.c:351
 msgid "Files"
 msgstr "Files"
 
-#: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
+#: src/prefs.c:352 src/prefs.c:531 src/prefs.c:588
 msgid "General"
 msgstr "Të përgjithshme"
 
-#: src/prefs.c:352
+#: src/prefs.c:353
 msgid "Warn if po file contains fuzzy translations"
 msgstr "Lajmëro n.q.s. file po përmban përkthime me gabime"
 
-#: src/prefs.c:356
+#: src/prefs.c:357
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Fshi files e kompiluar (p.sh. \"projekti.gmo\")"
 
-#: src/prefs.c:360
+#: src/prefs.c:361
 msgid "Autosave"
 msgstr "Ruaj automatikisht"
 
-#: src/prefs.c:361
+#: src/prefs.c:362
 msgid "Automatically save at regular intervals"
 msgstr "Ruaj automatikisht në intervale të rregullt"
 
-#: src/prefs.c:369
+#: src/prefs.c:370
 msgid "Autosave interval:"
 msgstr "Intervali i ruajtjes automatike:"
 
-#: src/prefs.c:370
+#: src/prefs.c:371
 msgid "Append a suffix to automatically saved files"
 msgstr "Shtoi një prapashtesë files të ruajtur automatikisht  "
 
-#: src/prefs.c:377
+#: src/prefs.c:378
 msgid "Suffix:"
 msgstr "Prapashtesa:"
 
-#: src/prefs.c:378
+#: src/prefs.c:379
 msgid "Recent files"
 msgstr "Files e hapur të fundit"
 
-#: src/prefs.c:386
+#: src/prefs.c:387
 msgid "Maximum number of entries in the recent files list:"
 msgstr "Numri i maksimum i zërave tek lista e files e fundit të hapur:"
 
-#: src/prefs.c:387
+#: src/prefs.c:388
 msgid "Check recent files before showing in recent files list"
 msgstr ""
 "Kontrollo ekzistencën e files të hapur të fundit para se ti shfaqësh tek "
@@ -1395,180 +1397,180 @@ msgstr ""
 #.
 #. * Editor page
 #.
-#: src/prefs.c:395
+#: src/prefs.c:396
 msgid "Editor"
 msgstr "Editori"
 
-#: src/prefs.c:398
+#: src/prefs.c:399
 msgid "Text display"
 msgstr "Text display"
 
-#: src/prefs.c:399
+#: src/prefs.c:400
 msgid "Highlight syntax of the translation message"
 msgstr "Vër në dukje sintaksën e mesazhit të përkthyer"
 
-#: src/prefs.c:410
+#: src/prefs.c:411
 msgid "Syntax color scheme to use:"
 msgstr "Skema e ngjyrave të sintaksës që duhet përdorur:"
 
-#: src/prefs.c:411
+#: src/prefs.c:412
 msgid "Use special character to indicate white space"
 msgstr "Përdor gërma speciale për të treguar hapësirën bosh "
 
-#: src/prefs.c:419
+#: src/prefs.c:420
 msgid "Apply own fonts"
 msgstr "Përdor gërmat e personalizuara"
 
-#: src/prefs.c:423
+#: src/prefs.c:424
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- zgjedhja e gërmave/gërma për msgid"
 
-#: src/prefs.c:427
+#: src/prefs.c:428
 msgid "Original text font:"
 msgstr "Gërmat e tekstit origjinal:"
 
-#: src/prefs.c:428
+#: src/prefs.c:429
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- zgjedhja e gërmave/gërma për msgstr"
 
-#: src/prefs.c:432
+#: src/prefs.c:433
 msgid "Translation font:"
 msgstr "Gërmat për përkthimin:"
 
-#: src/prefs.c:433
+#: src/prefs.c:434
 msgid "Apply own colors:"
 msgstr "Përdor ngjyrat e personalizuara:"
 
-#: src/prefs.c:437
+#: src/prefs.c:438
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- ngjyra e planit të parë"
 
-#: src/prefs.c:441
+#: src/prefs.c:442
 msgid "Foreground color:"
 msgstr "Ngjyra e planit të parë:"
 
-#: src/prefs.c:442
+#: src/prefs.c:443
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- ngjyra e sfondit"
 
-#: src/prefs.c:446
+#: src/prefs.c:447
 msgid "Background:"
 msgstr "Sfondi:"
 
-#: src/prefs.c:447
+#: src/prefs.c:448
 msgid "Contents"
 msgstr "Përmbajtja"
 
-#: src/prefs.c:448
+#: src/prefs.c:449
 msgid "Remove fuzzy status if message is changed"
 msgstr "Hiq gjëndjen me gabime (fuzzy) n.q.s. mesazhi ndryshohet "
 
-#: src/prefs.c:452
+#: src/prefs.c:453
 msgid "Keep obsolete messages in the po files"
 msgstr "Mbaj mesazhet e superuar tek files po"
 
-#: src/prefs.c:456
+#: src/prefs.c:457
 msgid "Spell checking"
 msgstr "Kontrolli i drejtshkrimit"
 
-#: src/prefs.c:457
+#: src/prefs.c:458
 msgid "Instant spell checking"
 msgstr "Kontroll drejtshkrimor në kohë reale"
 
-#: src/prefs.c:463
+#: src/prefs.c:464
 msgid "Use special dictionary:"
 msgstr "Përdor fjalorin special:"
 
 #.
 #. * PO header page
 #.
-#: src/prefs.c:481
+#: src/prefs.c:482
 msgid "PO header"
 msgstr "PO header"
 
-#: src/prefs.c:484
+#: src/prefs.c:485
 msgid "Personal Information"
 msgstr "Informacione personale"
 
-#: src/prefs.c:488
+#: src/prefs.c:489
 msgid "Author's name:"
 msgstr "Emri i autorit:"
 
-#: src/prefs.c:492
+#: src/prefs.c:493
 msgid "Author's email:"
 msgstr "Email i autorit:"
 
-#: src/prefs.c:493
+#: src/prefs.c:494
 msgid "Language settings"
 msgstr "Rregullimet për gjuhën"
 
-#: src/prefs.c:506
+#: src/prefs.c:507
 msgid "Language code:"
 msgstr "Kodi i gjuhës:"
 
 #.
 #. * Functionality page
 #.
-#: src/prefs.c:528
+#: src/prefs.c:529
 msgid "Functionality"
 msgstr "Funksionaliteti"
 
-#: src/prefs.c:531
+#: src/prefs.c:532
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Aktivo funksionin \"rifresko një file po nga gtranslator\""
 
-#: src/prefs.c:535
+#: src/prefs.c:536
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Aktivo funksionin \"hiq të gjithë përkthimet nga një file po\""
 
-#: src/prefs.c:539
+#: src/prefs.c:540
 msgid "Show instant comment view in main pane"
 msgstr "Shfaq paraqitjen e komenteve tek dritarja kryesore"
 
-#: src/prefs.c:543
+#: src/prefs.c:544
 msgid "Display special dialog for messages with plural forms"
 msgstr "Shfaq dialogët specialë për mesazhet me forma në shumës"
 
-#: src/prefs.c:547
+#: src/prefs.c:548
 msgid "Save geometry on exit and restore it on startup"
 msgstr "Ruaj gjeometrinë kur mbyllet programi dhe rikrijoje në hapje"
 
-#: src/prefs.c:551
+#: src/prefs.c:552
 msgid "Messages table"
 msgstr "Tabela e mesazheve"
 
-#: src/prefs.c:552
+#: src/prefs.c:553
 msgid "Show the messages table (requires restart)"
 msgstr "Shfaq tabelën e mesazheve (kërkon rinisjen e programit)"
 
-#: src/prefs.c:556
+#: src/prefs.c:557
 msgid "Collapse all entries by default"
 msgstr "Kollapso të gjithë zërat"
 
-#: src/prefs.c:560
+#: src/prefs.c:561
 msgid "Use own colors for messages table groups"
 msgstr "Përdor ngjyrat në vazhdim për grupet e tabelës së mesazheve"
 
-#: src/prefs.c:569
+#: src/prefs.c:570
 msgid "Fuzzy entries color:"
 msgstr "Ngjyra për zërat me gabime:"
 
-#: src/prefs.c:575
+#: src/prefs.c:576
 msgid "Untranslated entries color:"
 msgstr "Ngjyra për zërat e papërkthyer:"
 
-#: src/prefs.c:581
+#: src/prefs.c:582
 msgid "Translated entries color:"
 msgstr "Ngjyra për mesazhet e përkthyer:"
 
 #.
 #. * Autotranslate page
 #.
-#: src/prefs.c:586
+#: src/prefs.c:587
 msgid "Autotranslation"
 msgstr "Përkthimi automatik"
 
-#: src/prefs.c:588
+#: src/prefs.c:589
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
@@ -1576,31 +1578,32 @@ msgstr ""
 "Kontrollo edhe buffer-in personal mësues kur përkthen automatikisht mesazhet "
 "e paërkthyer"
 
-#: src/prefs.c:592
+#: src/prefs.c:593
 msgid "Automatically learn a newly translated message"
 msgstr "Mëso automatikisht çdo mesazh të ri të përkthyer"
 
-#: src/prefs.c:596
+#: src/prefs.c:597
 msgid "Fuzzy matching"
 msgstr "Fuzzy korrispondues"
 
-#: src/prefs.c:603
+#: src/prefs.c:604
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr "Përdor routine e korrispondimit \"fuzzy\" për pyetjet tek buffer-i mësues"
+msgstr ""
+"Përdor routine e korrispondimit \"fuzzy\" për pyetjet tek buffer-i mësues"
 
-#: src/prefs.c:610
+#: src/prefs.c:611
 msgid "Minimal required similarity persentage for fuzzy queries:"
 msgstr "Përqindja e ngjashmërisë minimum për pyetjet fuzzy:"
 
-#: src/prefs.c:659
+#: src/prefs.c:660
 msgid "Please enter your name!"
 msgstr "Ju lutem shkruani emrin tuaj!"
 
-#: src/prefs.c:679
+#: src/prefs.c:680
 msgid "Please enter your EMail address!"
 msgstr "Ju lutem shkruani adresën tuaj EMail!"
 
-#: src/prefs.c:699
+#: src/prefs.c:700
 msgid "Please enter a valid EMail address!"
 msgstr "Ju lutem shkruani një adresë të vlefshme EMail!"
 
