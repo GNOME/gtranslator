@@ -14,8 +14,7 @@ gtranslator_man__DATA = \
 	gtranslator.1.gz \
 	pozilla.sh.1.gz
 
-clean-am:
-	@-rm -f $(gtranslator_man__DATA)
+CLEANFILES = $(gtranslator_man__DATA)
 
 EXTRA_DIST = \
 	gtranslator.1.in \
