@@ -154,11 +154,13 @@ static gboolean actual_parse(void)
 		return FALSE;
 	}
 	
-	/**
-	* Add a GNOME history entry.
-	**/
-	/*gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");*/
-	gtranslator_append_recent_file(po->filename);
+	/*
+	 * Add a GNOME history entry.
+	 */
+	gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");
+	/*
+	 * gtranslator_append_recent_file(po->filename);
+	 */
 	
 	/**
 	* As the po-file seems to exist, set the "count parameters" to 0.
