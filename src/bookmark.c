@@ -175,6 +175,7 @@ gchar *gtranslator_bookmark_new_bookmark_string()
 void gtranslator_bookmark_open(GtrBookmark *bookmark)
 {
 	g_return_if_fail(bookmark!=NULL);
+	g_return_if_fail(bookmark->file!=NULL);
 
 	/*
 	 * Open the po file.
