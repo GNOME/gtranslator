@@ -84,12 +84,14 @@ void paste_clipboard(GtkWidget *widget,gpointer useless);
 void clear_selection(GtkWidget *widget,gpointer useless);
 void text_has_got_changed(GtkWidget *widget,gpointer useless);
 void compile(GtkWidget *widget,gpointer useless);
+
 /**
 * Enable/disable the buttons of the toolbars if a file is opened/
 *  closed.
 **/
 void disable_buttons();
 void enable_buttons();
+
 /**
 * This is a simple callback for the msg_db-adding method.
 **/

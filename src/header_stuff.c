@@ -114,8 +114,10 @@ void edit_header_create()
 	/**
 	* Set the parsed values as standard.
 	**/
-	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name))),head->prj_name);
-	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_version))),head->prj_version);
+	/*
+gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name))),head->prj_name);
+gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_version))),head->prj_version);*/
+
 	/**
 	* Adds the main-widgets to the dialog.
 	**/

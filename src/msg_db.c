@@ -242,6 +242,6 @@ unsigned int get_msg_db_size()
 		/**
 		* Return the size.
 		**/
-		return (unsigned int )file->st_size;
+		return (unsigned int )(file->st_size);
 	}
 }

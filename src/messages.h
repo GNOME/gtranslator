@@ -39,11 +39,7 @@ enum _gtr_msg_status
 	* If the entry should be translated as
 	*  fast as possible .
 	**/
-	GTRANSLATOR_MSG_STATUS_FIXME,
-	/**
-	* ?!*S?=
-	**/
-	GTRANSLATOR_MSG_ASSIMILATED_BY_THE_BORG_OR_BY_MS
+	GTRANSLATOR_MSG_STATUS_FIXME
 };
 
 /**
@@ -63,8 +59,22 @@ struct _gtr_msg
 **/
 struct _gtr_po
 {
+	/**
+	* The filename
+	**/
 	gchar *filename;
+	/**
+	* If no translated entry has been found this'd set to TRUE.
+	**/
 	gboolean notrans;
+	/**
+	* A pointer to the first message
+	**/
+	gtr_msg *first;
+	/**
+	* A pointer to the last message
+	**/
+	gtr_msg *last;
 };
 
 #endif
