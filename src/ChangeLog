@@ -1,5 +1,12 @@
 2002-02-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* runtime-config.c: Use the new function for the conversion call on
+		the unicode'ified mid dot ('·').
+
+	* utils.c/.h: Added a new "gtranslator_utils_get_environment_charset"
+		function which returns the current environment locale's sane
+		 encoding charset back.
+
 	* syntax.c & utils_gui.c: Adept for the "special char" changes.
 
 	* runtime-config.c/.h: Added a "special_char" field to this structure;

@@ -71,11 +71,11 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 	if (_("")[0]="\0")
 	{
 		gchar *middot=NULL;
+		gchar *encoding=NULL;
 
-		/*
-		 * FIXME: Of course the charset get's inserted here...
-		 */
-		middot=gtranslator_convert_string_from_utf8("·", "iso-8859-1");
+		encoding=gtranslator_utils_get_environment_charset();
+		middot=gtranslator_convert_string_from_utf8("·", encoding);
+		GTR_FREE(encoding);
 
 		if(middot && middot[0]!='\0')
 		{

@@ -111,6 +111,11 @@ void gtranslator_utils_free_list(GList *list, gboolean free_contents);
 gchar *gtranslator_utils_get_environment_locale(void);
 
 /*
+ * Return the current language environment's charset.
+ */
+gchar *gtranslator_utils_get_environment_charset(void);
+
+/*
  * Returns a list of (full) filenames matching the given parameters in ths
  *  given directory; extension means extension _with_ point (".xml").
  */

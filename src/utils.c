@@ -480,6 +480,42 @@ gchar *gtranslator_utils_get_environment_locale()
 }
 
 /*
+ * Returns the "official" charset name for the currently active environment
+ *  locale. */
+gchar *gtranslator_utils_get_environment_charset()
+{
+	gchar	*locale_name=NULL;
+	gchar	*locale_charset=NULL;
+
+	locale_name=gtranslator_utils_get_environment_locale();
+	if(!locale_name)
+	{
+		/*
+		 * Translators: this should be your default fall back encoding
+		 *  which will be used if gtranslator can't get the current env. locale's
+		 *   default sane encoding by itself.
+		 */
+		return _("iso-8859-1");
+	}
+	else
+	{
+		gint c;
+
+		for(c=0; languages[c].name!=NULL; c++)
+		{
+			if(!nautilus_strcasecmp(languages[c].locale, locale_name))
+			{
+				locale_charset=g_strdup(languages[c].encoding);
+			}
+		}
+
+		GTR_FREE(locale_name);
+	}
+
+	return locale_charset;
+}
+
+/*
  * Subsequently filter out all extension containing filename from the directory.
  * 
  * Should be useful for many cases.
@@ -708,7 +744,7 @@ gchar *gtranslator_utils_get_locale_name(void)
 		{
 			/*
 			 * Check for the language in the header -- may it be in 
-			 *  English or in the current locale..
+			 *  English or in the current locale...
 			 */
 			if(!nautilus_strcasecmp(languages[c].name, 
 					po->header->language) ||
