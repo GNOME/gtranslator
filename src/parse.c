@@ -283,9 +283,6 @@ gboolean gtranslator_parse_core(void)
 	while ((line = gtranslator_utils_getline (fs)) != NULL) {
 		
 		lines++;
-		if(lines == 27567) {
-			g_warning("Oi!");
-		}
 
 		/*
 		 * Warn if not valid UTF-8
