@@ -90,7 +90,6 @@ gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
 			break;
 		}
 		first = FALSE;
-g_message("ret: %d %d", retval, next);
 	} while (msg != begin || next);
 	return FALSE;
 }
