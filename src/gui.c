@@ -49,6 +49,9 @@ static void clear_selection(GtkWidget * widget, gpointer useless);
 static void undo_changes(GtkWidget * widget, gpointer useless);
 static void text_has_got_changed(GtkWidget * widget, gpointer useless);
 
+/* Pops up a menu if needed */
+static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d);
+	
 static void invert_dot(gchar *str);
 static void update_appbar(gint pos);
 static void call_gtranslator_homepage(GtkWidget * widget, gpointer useless);
@@ -322,28 +325,30 @@ static GnomeUIInfo the_popup_menu[] = {
 /**
 * Pop's up the curious popup-menu.
 **/
-void create_popup_menu(GtkWidget *widget, GdkEventButton *event)
+static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d)
 {
-	GtkWidget *popup_menu;
 	/**
 	* Only react on rightclick.
 	**/
 	if(event->button==3)
 	{
-		popup_menu=gnome_popup_menu_new(the_popup_menu);
 		/**
-		* Only respond if a file has been present/opened and if the corresponding
-		*  option is set.
+		* Only respond if a file has been present/opened and if the
+		* corresponding option is set.
 		**/
-		if((file_opened==TRUE) && (wants.popup_menu))
+		if((wants.popup_menu) && (file_opened==TRUE))
 		{
+			GtkWidget *popup_menu;
+			popup_menu=gnome_popup_menu_new(the_popup_menu);
 			gnome_popup_menu_do_popup_modal(popup_menu, NULL, NULL, NULL, event);
 			/**
 			* Destroy the menu after creation.
 			**/
 			gtk_widget_destroy(popup_menu);
+			return TRUE;
 		}
-	}	
+	}
+	return FALSE;
 }
 
 /*****

@@ -1,5 +1,15 @@
 2001-01-03  Gediminas Paulauskas <menesis@delfi.lt>
 
+	* gtkspell.c: (popup_menu) removed orig_mouse parameter.
+	(button_press_intercept_cb) changed declaration to match prototype. Do
+	not remember orig_mouse.
+	* gui.c/.h: moved create_popup_menu declaration from .h to .c. Moved
+	check if popup menu is enabled to top -- create a menu only i needed,
+	always destroy it. Changed type of function to match prototype, return
+	FALSE/TRUE.
+
+2001-01-03  Gediminas Paulauskas <menesis@delfi.lt>
+
 	* gtkspell.c: (popup menu) fixed tests for which button is pressed and
 	when to popup spelling menu. Now works with/without popup menu. Merged
 	duplicated blocks.

@@ -605,7 +605,7 @@ static GtkMenu *make_url_menu(GtkText *gtktext, gchar *url) {
 	return GTK_MENU(menu);
 }
 
-static void popup_menu(GtkText *gtktext, GdkEventButton *eb, int orig_mouse) {
+static void popup_menu(GtkText *gtktext, GdkEventButton *eb) {
 	gchar *buf;
 	gchar lstchar;
 	GList *list, *l;
@@ -646,16 +646,13 @@ static void popup_menu(GtkText *gtktext, GdkEventButton *eb, int orig_mouse) {
  * so what do we do?  forge rightclicks as leftclicks, then popup the menu.
  * HACK HACK HACK.
  */
-static gint button_press_intercept_cb(GtkText *gtktext, GdkEvent *e, gpointer d)
+static gboolean button_press_intercept_cb(GtkText *gtktext, GdkEventButton *eb, gpointer d)
 {
-	GdkEventButton *eb;
 	gboolean retval;
-	int orig_mouse;
 
 	if (spell_pid <= 0) return FALSE;
 
-	if (e->type != GDK_BUTTON_PRESS) return FALSE;
-	eb = (GdkEventButton*) e;
+	if (eb->type != GDK_BUTTON_PRESS) return FALSE;
 
 	/*
 	 * Only allow the right-click to be send to gtkspell if
@@ -667,18 +664,17 @@ static gint button_press_intercept_cb(GtkText *gtktext, GdkEvent *e, gpointer d)
 		return FALSE;
 
 	/* forge the leftclick */
-	orig_mouse = eb->button;
 	eb->button = 1;
 
 	gtk_signal_handler_block_by_func(GTK_OBJECT(gtktext),
 					 GTK_SIGNAL_FUNC(button_press_intercept_cb), d);
 	gtk_signal_emit_by_name(GTK_OBJECT(gtktext), "button-press-event",
-				e, &retval);
+				eb, &retval);
 	gtk_signal_handler_unblock_by_func(GTK_OBJECT(gtktext),
 					   GTK_SIGNAL_FUNC(button_press_intercept_cb), d);
 	gtk_signal_emit_stop_by_name(GTK_OBJECT(gtktext), "button-press-event");
 	/* now do the menu wackiness */
-	popup_menu(gtktext, eb, orig_mouse);
+	popup_menu(gtktext, eb);
 	return TRUE;
 }
 
