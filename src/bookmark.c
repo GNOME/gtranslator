@@ -41,7 +41,7 @@
 /*
  * This should also be configurable later on.
  */
-#define MAX_ID_LIST_LENGTH 10
+#define MAX_BOOKMARKS 10
 
 /*
  * Create and return a GtrBookmark from the current position & po file -- 
@@ -427,9 +427,9 @@ void gtranslator_bookmark_load_list()
 	gtranslator_config_init();
 	count=gtranslator_config_get_int("bookmark/length");
 	
-	if(count > MAX_ID_LIST_LENGTH)
+	if(count > MAX_BOOKMARKS)
 	{
-		count=MAX_ID_LIST_LENGTH;
+		count=MAX_BOOKMARKS;
 	}
 
 	/*
@@ -491,7 +491,7 @@ void gtranslator_bookmark_save_list()
 			
 			c++;
 
-			if(c >= MAX_ID_LIST_LENGTH)
+			if(c >= MAX_BOOKMARKS)
 			{
 				break;
 			}
