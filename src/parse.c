@@ -272,6 +272,7 @@ gboolean gtranslator_parse_core(GtrPo *po)
 	
 	guint 	 lines=0;
 	guint	 position=-1;
+	guint	 pluralforms_count=0;
 	
 	/*
 	 * If TRUE, means that a corresponding part is read
@@ -351,8 +352,6 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				if(line[15]!='\0')
 				{
 					append_line(&msg->msgid_plural, &line[13], FALSE);
-
-					g_message("msgid_plural: `%s'", (gchar *) (&msg->msgid_plural));
 				}
 			}
 			/*
@@ -372,7 +371,13 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				/*
 				 * Now we've got a msgstr item in here.
 				 */
-				g_message("msgstr_plural `%s'", line);
+				msgid_ok = TRUE;
+				if(line[13]!='\0')
+				{
+					append_line(&msg->msgstrs[pluralforms_count], &line[11], FALSE);
+				}
+
+				pluralforms_count++;
 			}
 			else
 			/*
@@ -384,10 +389,20 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				{
 					append_line(&msg->msgid, line, TRUE);
 				}
+				else if((comment_ok == TRUE) && msgid_ok == FALSE &&
+				    msg->msgid_plural)
+				{
+					append_line(&msg->msgid_plural, line, TRUE);
+				}
 				else if((msgid_ok == TRUE) &&
 					(msgstr_ok == FALSE))
 				{
 					append_line(&msg->msgstr, line, TRUE);
+				}
+				else if((msgid_ok == TRUE) && (msgstr_ok == FALSE) &&
+					msg->msgstrs[pluralforms_count-1][0]!='\0')
+				{
+					append_line(&msg->msgstrs[pluralforms_count-1], line, TRUE);
 				}
 				else if((comment_ok == FALSE) &&
 					(msgid_ok == FALSE) &&
@@ -427,6 +442,7 @@ gboolean gtranslator_parse_core(GtrPo *po)
 			 * Reset the status of message
 			 */
 			msgid_ok = msgstr_ok = comment_ok = FALSE;
+			pluralforms_count=0;
 			msg = g_new0(GtrMsg, 1);
 		}
 	}
