@@ -15,7 +15,7 @@ INCLUDES = \
         -DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"				\
-	-Werror
+	-Wall -Werror
 
 bin_PROGRAMS = gtranslator
 
