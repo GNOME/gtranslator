@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Roy-Magne Mo <rmo@sunnmore.net>
  * 
@@ -27,13 +27,18 @@
 #include "color-schemes.h"
 #include "dialogs.h"
 
-#include <gtk/gtkhbox.h>
+#include <string.h>
+
+#include <gtk/gtkbox.h>
 #include <gtk/gtklabel.h>
+#include <gtk/gtktable.h>
+
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
+
 #include <libgnomeui/gnome-about.h>
 #include <libgnomeui/gnome-href.h>
-#include <string.h>
+
 
 /*
  * Creates and shows the about box for gtranslator.
@@ -41,10 +46,12 @@
 void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *about = NULL;
-	GtkWidget *hbox;
+	
+	GtkWidget *info_table;
 	GtkWidget *scheme, *author;
-	gchar *umfo, *url;
-	gchar *bottom_line;
+	
+	gchar 	*umfo, *url;
+	gchar 	*bottom_line;
 	
 	const gchar *authors[] = {
 		"Fatih Demir 		<kabalak@gtranslator.org>",
@@ -88,20 +95,19 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	 */ 
 	about =
 	    gnome_about_new("gtranslator", VERSION,
-		_("(C) 1999-2001 The Free Software Foundation"), authors,
+		_("(C) 1999-2002 The Free Software Foundation"), authors,
 		bottom_line,
 		NULL);
 
 	g_free(bottom_line);
 	
-	hbox=gtk_hbox_new(TRUE, 0);
+	info_table=gtk_table_new(2, 1, TRUE);
 	
 	/*
 	 * This string is displayed in the about box as an information about
 	 *  the currently used colorscheme.
 	 */
-	umfo=g_strdup_printf(_("Current colorscheme: \"%s\" (version %s) by"), 
-		theme->info->name, theme->info->version);
+	umfo=g_strdup_printf(_("Current colorscheme: `%s' (version `%s') is brought to you by:"), theme->info->name, theme->info->version);
 	scheme=gtk_label_new(umfo);
 
 	g_free(umfo);
@@ -122,12 +128,14 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	/*
 	 * Add all the new widgets to the about dialog.
 	 */
-	gtk_box_pack_start(GTK_BOX(hbox), scheme, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox), author, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(about)->vbox), hbox,
+	gtk_table_attach_defaults(GTK_TABLE(info_table), GTK_WIDGET(scheme),
+		0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(info_table), GTK_WIDGET(author),
+		0, 1, 1, 2);
+
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(about)->vbox), info_table,
 		TRUE, TRUE, 0);
 
-	gtk_widget_show_all(hbox);
-	
+	gtk_widget_show_all(info_table);
 	gtranslator_dialog_show(&about, "gtranslator -- about");
 }
