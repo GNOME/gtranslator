@@ -57,7 +57,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			 * Hotkeys and comment characters:
 			 */ 
 			case '_':
-			case '#':	
 				clear_string(string);
 
 				if(msg[cp+1] && isalpha(msg[cp+1]))
@@ -67,11 +66,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					
 					string=g_string_append_c(string,
 						msg[cp+1]);	
-				}
-				else
-				{
-					string=g_string_append_c(string,
-						msg[cp]);	
 				}
 					
 				gtk_text_insert(GTK_TEXT(textwidget),
@@ -105,13 +99,15 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				}
 				else
 				{
-					string=g_string_append_c(string,
-						msg[cp]);
+					if(msg[cp] && msg[cp+1])
+					{
+						string=g_string_append_c(string,
+							msg[cp]);
 
-					string=g_string_append_c(string,
-						msg[cp+1]);
-					
-					cp++;
+						string=g_string_append_c(string,
+							msg[cp+1]);
+						cp++;
+					}
 				}
 
 				gtk_text_insert(GTK_TEXT(textwidget),
@@ -187,6 +183,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '>':
 			case '&':
 			case '$':
+			case '#':
 			case '/':
 			case '\\':
 			case '|':	
