@@ -52,6 +52,6 @@ void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
 	}
 	else
 	{
-		gtk_drag_finish(context,TRUE,TRUE,time);
+		gtk_drag_finish(context,FALSE,TRUE,time);
 	}
 }

@@ -43,7 +43,7 @@ void parse(gchar *po)
 	* Some variables
 	**/
 	gchar temp_char[128];
-	gchar *zamane;
+	gchar *zamane=NULL;
         guint lines=1,z=0,msg_pair=0;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
@@ -99,6 +99,11 @@ void parse(gchar *po)
 			* Check what line it could be and fill it into the
 			*  structure place.
 			**/
+			/*if(!g_strncasecmp(temp_char,"\"Pro",4))
+			{
+				po_header->project_id=temp_char;
+				g_print("Proj : %s\n",po_header->project_id);
+			}*/
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
@@ -133,7 +138,7 @@ void parse(gchar *po)
         /**
         * Show an updated status
         **/
-        sprintf(status,_("Finished reading \"%s\", %i lines."),po,z);
+	sprintf(status,_("Finished reading \"%s\", %i lines."),po,z);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	/**
 	* So the other functions can get a point 
