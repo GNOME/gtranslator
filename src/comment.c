@@ -18,6 +18,7 @@
  */
 
 #include "comment.h"
+#include "parse.h"
 
 /*
  * Extract the comment prefix from the comment.
@@ -110,10 +111,43 @@ gboolean gtranslator_comment_is_visible(GtrComment *comment)
 }
 
 /*
- * Extract the pure comment from the GtrComment -- according to the type.
+ * Extract the pure comment from the GtrComment.
  */
 gchar *extract_pure_comment(GtrComment *comment)
 {
+	gchar *pure_comment, *temp;
+	
 	g_return_val_if_fail(comment!=NULL, NULL);
-	g_return_val_if_fail(comment->type!=NO_COMMENT, NULL);
+	
+	/*
+	 * Assign and reverse the comment.
+	 */
+	temp=g_strdup(comment->comment);
+	g_strreverse(temp);
+	
+	/*
+	 * Strip the first (now last) comment type characters.
+	 */
+	pure_comment=g_strndup(temp, (strlen(temp) - 2));
+	g_strreverse(pure_comment);
+
+	g_free(temp);
+	
+	return pure_comment;
+}
+
+/*
+ * Popup the comment for the current message.
+ */
+void gtranslator_comment_pop_up()
+{
+	g_return_if_fail(file_opened==TRUE);
+}
+
+/*
+ * Shows eventual references for the current comment.
+ */
+void gtranslator_comment_show_references()
+{
+	g_return_if_fail(file_opened==TRUE);
 }
