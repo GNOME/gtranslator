@@ -66,13 +66,4 @@ void gtranslator_messages_table_select_row(GtrMsg *message);
  */
 void gtranslator_messages_table_save_state(void);
 
-/*
- * Show/hide and toggle routines accordingly to the 
- *  existing sidebar routines.
- */
-gboolean gtranslator_messages_table_show(void);
-gboolean gtranslator_messages_table_hide(void);
-
-void gtranslator_messages_table_toggle(void);
-
 #endif

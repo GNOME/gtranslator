@@ -1,13 +1,19 @@
-2001-08-18  Fatih Demir <kabalak@gtranslator.org>
+2001-08-20  Fatih Demir <kabalak@gtranslator.org>
+
+	* messages-table.c/.h: Removed the useless hide/show/toggle functions.
+
+2001-08-19  Fatih Demir <kabalak@gtranslator.org>
 
 	* prefs.c: Show the preferences dialog centered via the
-		"gtk_window_set_position" function.
+		"gtk_window_set_position" function (fixes #59201).
 
 	* parse.c & update.c: "Enhanced" the "gtk_main_iteration" calls by
 		conditionalizing them with "gtk_events_pending".
 
 	* query.c: Redraw the messages tree if any autoaccomplishment 
-		could be performed (Fixes #59204).
+		could be performed (fixes #59204).
+
+2001-08-18  Fatih Demir <kabalak@gtranslator.org>
 
 	* prefs_init.c: Initialize the pane positions rightly during the
 		first startup.
