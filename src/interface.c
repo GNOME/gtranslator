@@ -156,6 +156,7 @@ void disable_buttons()
 	gtk_widget_set_sensitive(back_button,FALSE);
 	gtk_widget_set_sensitive(next_button,FALSE);
 	gtk_widget_set_sensitive(last_button,FALSE);
+	gtk_widget_set_sensitive(header_button,FALSE);
 }
 
 /**
@@ -170,6 +171,7 @@ void enable_buttons()
         gtk_widget_set_sensitive(back_button,TRUE);
         gtk_widget_set_sensitive(next_button,TRUE);
         gtk_widget_set_sensitive(last_button,TRUE);
+	gtk_widget_set_sensitive(header_button,TRUE);
 }
 
 /**
@@ -208,7 +210,7 @@ static GnomeUIInfo the_edit_menu[] =
 	{
 		GNOME_APP_UI_ITEM, N_("_Header"),
 		N_("Edit the header"),
-		NULL, NULL, NULL,
+		edit_header, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
 		0, 0, NULL
 	},
@@ -548,6 +550,8 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(search_do),(gpointer)2);
 	gtk_signal_connect(GTK_OBJECT(goto_button),"clicked",
 		GTK_SIGNAL_FUNC(goto_dlg),NULL);
+	gtk_signal_connect(GTK_OBJECT(header_button),"clicked",
+		GTK_SIGNAL_FUNC(edit_header),NULL);
 	gtk_signal_connect(GTK_OBJECT(open_button),"clicked",
 		GTK_SIGNAL_FUNC(open_file),NULL);	
 	gtk_signal_connect(GTK_OBJECT(save_as_button),"clicked",
