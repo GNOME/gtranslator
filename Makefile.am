@@ -19,5 +19,5 @@ cvspack: distdir
 	@-rm -f $(distdir).tar.gz
 	@echo Creating CVS snapshot "$(shell date +%Y-%m-%d)" package...
 	@$(TAR) -chozf $(distdir).tar.gz $(distdir)
-	@mv -f $(distdir).tar.gz "$(distdir)-$(shell date +%Y-%m-%d).tar.gz"
+	@mv -f $(distdir).tar.gz "$(distdir)_CVS-$(shell date +%Y-%m-%d).tar.gz"
 	@-rm -rf $(distdir)
