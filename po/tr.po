@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.31\n"
-"POT-Creation-Date: 2000-10-31 12:41+0100\n"
-"PO-Revision-Date: 2000-10-31 12:43+0100\n"
+"POT-Creation-Date: 2000-11-01 12:48+0100\n"
+"PO-Revision-Date: 2000-11-01 12:52+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -935,29 +935,29 @@ msgstr "Önayarlý"
 #. * Print out a warning and exit from the
 #. *  function.
 #. *
-#: libgtranslator/handle-db.c:41
+#: libgtranslator/handle-db.c:42
 msgid "No file specified!"
 msgstr "Dosya belirtilmemiþ!"
 
-#: libgtranslator/handle-db.c:53
+#: libgtranslator/handle-db.c:54
 msgid "The given filepath isn't absolute!"
 msgstr "Verilen dosya dizinlemesi rölatifdir!"
 
-#: libgtranslator/handle-db.c:65
+#: libgtranslator/handle-db.c:66
 #, c-format
 msgid "Couldn't open database `%s'!"
 msgstr "Tercüme tabaný `%s''yi açamadým!"
 
-#: libgtranslator/handle-db.c:96
+#: libgtranslator/handle-db.c:163
 msgid "No translation database given to store."
 msgstr "Tercüme/ileti tabaný belirtilmemiþ."
 
-#: libgtranslator/handle-db.c:122
+#: libgtranslator/handle-db.c:189
 #, c-format
 msgid "Lost file stream for message database `%s'."
 msgstr "%s''nin dosya kilidini kaybettim."
 
-#: libgtranslator/handle-db.c:201
+#: libgtranslator/handle-db.c:296
 msgid "No filename given to dump the database."
 msgstr "Ileti/tercüme tabanýný kaydedilecek dosya belirtilmemiþ."
 
@@ -965,10 +965,37 @@ msgstr "Ileti/tercüme tabanýný kaydedilecek dosya belirtilmemiþ."
 #. * If the action didn't succeed inform
 #. *  the user about this.
 #. *
-#: libgtranslator/handle-db.c:249
+#: libgtranslator/handle-db.c:344
 #, c-format
 msgid "Couldn't remove database file `%s'!"
 msgstr "Tercüme tabaný `%s''yi silemedim!"
+
+#: libgtranslator/handle-db.c:384
+#, c-format
+msgid "Msgid `%s'·is already in the database."
+msgstr "Ileti `%s'·ileti/tercüme tabanýnda bulunamadý."
+
+#: libgtranslator/handle-db.c:393
+#, c-format
+msgid ""
+"Checking if msgstr `%s'·is already declared in context for msgid `%s'..."
+msgstr "Tercüme `%s'· ileti `%s'·için zaten kaydedilmiþ..."
+
+#. *
+#. * Print out a warning and exit from the function.
+#. *
+#: libgtranslator/handle-db.c:424
+#, c-format
+msgid "Trying to add double msgstr list entry `%s'·for msgid `%s'!"
+msgstr "Çift tercüme birimi `%s''yi ileti `%s'·için eklemeye deneniyor!"
+
+#. *
+#. * Print out an error and exit from this routine.
+#. *
+#: libgtranslator/handle-db.c:449
+#, c-format
+msgid "Trying to add double msgstr `%s'·for msgid `%s'!"
+msgstr "Çift tercüme `%s'·ileti `%s'·için eklenmeye deneniyor!"
 
 #: libgtranslator/main.c:54
 msgid "The language to parse the db for"
@@ -1007,12 +1034,12 @@ msgstr "Bilgi : Üst sýnýf tercüme tabanýný da tarayacaðým.\n"
 #. *
 #. * Print some information to the user.
 #. *
-#: libgtranslator/parse-db.c:60
+#: libgtranslator/parse-db.c:59
 #, c-format
 msgid "Using %s as the message database... \n"
 msgstr "%s'yi tercüme tabaný olarak kullanýyorum... \n"
 
-#: libgtranslator/parse-db.c:72
+#: libgtranslator/parse-db.c:71
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr "Tercüme tabaný `%s.xml''i %s'de açamadým.\n"
@@ -1020,12 +1047,12 @@ msgstr "Tercüme tabaný `%s.xml''i %s'de açamadým.\n"
 #. *
 #. * Print some information.
 #. *
-#: libgtranslator/parse-db.c:86
+#: libgtranslator/parse-db.c:85
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr "Altsýnýf dosya `%s.xml''i bulamadým.\n"
 
-#: libgtranslator/parse-db.c:87
+#: libgtranslator/parse-db.c:86
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Üst sýnýf dosya `%s.xml''i deniyorum ...\n"
@@ -1033,7 +1060,7 @@ msgstr "Üst sýnýf dosya `%s.xml''i deniyorum ...\n"
 #. *
 #. * Print the informations about the message database.
 #. *
-#: libgtranslator/parse-db.c:112
+#: libgtranslator/parse-db.c:111
 #, c-format
 msgid "Database creator/administrator: %s\n"
 msgstr "Tercüme tabaný yaratacýsý/yöneticisi: %s\n"
@@ -1050,11 +1077,11 @@ msgstr "ePosta: %s\n"
 #. * Print these informations out! We wanna know
 #. *  the contact persons.
 #. *
-#: libgtranslator/parse-db.c:141
+#: libgtranslator/parse-db.c:142
 msgid "Message database informations:\n"
 msgstr "Tercüme tabaný bilgileri:\n"
 
-#: libgtranslator/parse-db.c:142
+#: libgtranslator/parse-db.c:143
 #, c-format
 msgid ""
 "Date: %s\n"
