@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Pablo Saratxaga <pablo@mandrakesoft.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -58,12 +58,8 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		"%s/.gtranslator/files/gtranslator-crash-file",
 			g_get_home_dir());
 
-	config->table_state_filename=g_strdup_printf(
-		"%s/.gtranslator/etstates/gtranslator-ui-messages-table-state",
-			g_get_home_dir());
-
 	config->save_differently_filename=g_strdup_printf(
-		"%s/.gtranslator/etstates/gtranslator-save-differently-file",
+		"%s/.gtranslator/files/gtranslator-save-differently-file",
 		g_get_home_dir());
 
 	/*
@@ -112,7 +108,6 @@ void gtranslator_runtime_config_free(GtrRuntimeConfig *config)
 		GTR_FREE(GTR_RUNTIME_CONFIG(config)->check_filename);
 		GTR_FREE(GTR_RUNTIME_CONFIG(config)->crash_filename);
 		
-		GTR_FREE(GTR_RUNTIME_CONFIG(config)->table_state_filename);
 		GTR_FREE(GTR_RUNTIME_CONFIG(config)->save_differently_filename);
 		
 		GTR_FREE(config);

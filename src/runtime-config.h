@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,6 @@ typedef struct
 	gchar	*check_filename;
 	gchar	*crash_filename;
 	
-	gchar	*table_state_filename;
 	gchar	*save_differently_filename;
 
 	gchar	 special_char;

@@ -291,7 +291,6 @@ void gtranslator_utils_create_gtranslator_directory()
 	const	gchar	*subdirectories[] =
 	{
 		"colorschemes",
-		"etstates",
 		"files",
 		"umtf",
 		NULL
