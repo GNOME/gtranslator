@@ -43,46 +43,48 @@ struct _lang
 * Nothing changed here, besides that we've switched to the structure
 *  instead of the gchar*-array ..
 **/
-const lang languages[] =
+lang languages[] =
 {
-	/**
-	* Does someone know a package where almost every
-	*  language has got a translation ( eog/Gtk+ ? ) .. 
-	**/
-	{ _("Arabic"),"ar","","" },
-        { _("Bulgarian"),"bg","iso8859-2","bg@li.org" },
+	{ _("Arabic"),"ar","iso-8859-6","" },
+	{ _("Basque"),"eu","iso-8859-1","linux-eu@chanae.alphanet.ch" },
+        { _("Bulgarian"),"bg","windows-1251","bg@li.org" },
         { _("Catalan"),"ca","iso-8859-1","" },
         { _("Chinese/Simplified"),"zh_CN","GB2312","" },
         { _("Chinese/Traditional"),"zh_TW","BIG5","" },
+	{ _("Croatian"),"hr","iso-8859-2","" },
 	{ _("Czech"),"cs","iso-8859-2","" },
         { _("Danish"),"da","iso-8859-1","da@li.org" },
   	{ _("English"),"en","ascii","en@li.org" },
 	{ _("English/Canada"),"en","iso-8859-1","en@li.org" },
 	{ _("English/UK"),"en","ascii","en@li.org" },
 	{ _("English/USA"),"en","ascii","en@li.org" },
-	{ _("Estonian"),"et","","et@li.org" },
-	{ _("Farsi"),"fa","","" },
+	{ _("Estonian"),"et","iso-8859-15","et@li.org" },
+	{ _("Farsi"),"fa","isiri-3342","" },
         { _("Finnish"),"fi","iso-8859-1","fi@li.org" },
         { _("French"),"fr","iso-8859-1","fr@li.org" },
-        { _("Galician"),"ga","","ga@li.org"},
+        { _("Galician"),"gl","iso-8859-1","gpul-traduccion@ceu.fi.udc.es"},
         { _("German"),"de","iso-8859-1","de@li.org" },
 	{ _("Greek"),"el","iso-8859-7","nls@tux.hellug.gr" },
-        { _("Hungarian"),"hr","","" },
-        { _("Indonesian"),"","","" }, 
+        { _("Hungarian"),"hu","iso-8859-2","" },
+        { _("Indonesian"),"id","iso-8859-1","" }, 
         { _("Italian"),"it","iso-8859-1","it@li.org" },
+	{ _("Irish"),"ga","","iso-8859-1" },
         { _("Japanese"),"ja","euc-jp","translation@gnome.gr.jp" },
-        { _("Korean"),"ko","","" },
-        { _("Norwegian"),"no","iso-8859-1","no@li.org" },
+        { _("Korean"),"ko","euc-kr","" },
+        { _("Norwegian/Bookmal"),"no","iso-8859-1","no@li.org" },
+	{ _("Norwegian/Nynorsk"),"no@nynorsk","iso-8859-1","no@li.org" }
         { _("Polish"),"pl","iso-8859-2","" },
         { _("Portuguese"),"pt","iso-8859-1","pt@li.org" },
         { _("Portuguese/Brazil"),"pt_BR","iso-8859-1","" },
-        { _("Russian"),"ru","koi-8r","ru@li.org" },
+        { _("Russian"),"ru","koi8-r","ru@li.org" },
 	{ _("Slovak"),"sk","iso-8859-2","" },
         { _("Spanish"),"es","iso-8859-1","es@li.org" },
+	{ _("Spanich/Spain"),"es_ES","iso-8859-1","es@li.org" },
         { _("Spanish/Mexico"),"es_MX","iso-8859-1","" },
         { _("Swedish"),"sv","iso-8859-1","sv@li.org" },
         { _("Turkish"),"tr","iso-8859-9","tr@li.org" },
-        { _("Ukrainian"),"uk","","" },
+        { _("Ukrainian"),"uk","koi8-u","" },
+	{ _("Walloon"),"wa","iso-8859-1","linux-wa@chanae.alphanet.ch" },
         /**
         * This structures-list has to be NULL-terminated
         **/
