@@ -190,6 +190,7 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 	
 	msg->msgstr = g_strdup_printf("\n"\
 "Project-Id-Version: %s\\n\n"\
+"Report-Msgid-Bugs-To: %s\\n\n"\
 "POT-Creation-Date: %s\\n\n"\
 "PO-Revision-Date: %s\\n\n"\
 "Last-Translator: %s <%s>\\n\n"\
@@ -474,9 +475,11 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 		rmbt = gtranslator_utils_attach_entry_with_label(prj_page, 6, _("Report message string bugs to:"),
 			ph->report_message_bugs_to, NULL);
 	}
-
-	rmbt = gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Report message string bugs to:"),
+	else
+	{
+		rmbt = gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Report message string bugs to:"),
 		ph->report_message_bugs_to, NULL);
+	}
 
 	gtk_widget_set_sensitive(rmbt, FALSE);
 
