@@ -96,6 +96,12 @@ static void clicked_function(GnomeDialog *dialog, gint button,
 		{
 			GTR_PREFS_DIALOG(interesting)->read_all_options_function();
 		}
+
+		/*
+		 * As we did read all options, pending changes should now be
+		 *  applied -- therefore we have bo change pending. Right? ,-)
+		 */
+		GTR_PREFS_DIALOG(interesting)->changed=FALSE;
 		
 		/*
 		 * If "Ok" was clicked on, then we'd to close the dialog, too.
@@ -267,6 +273,17 @@ void gtranslator_prefs_dialog_close(GtrPrefsDialog *dialog)
 {
 	g_return_if_fail(dialog!=NULL);
 	g_return_if_fail(GTR_PREFS_DIALOG(dialog)->dialog!=NULL);
+
+	/*
+	 * Check if any change is pending.
+	 */
+	if(GTR_PREFS_DIALOG(dialog)->changed)
+	{
+		/*
+		 * FIXME: More enhancements needed -- question dialog?! Maybe
+		 *  even with pendinbg changes count? Hmm...
+		 */
+	}
 
 	gnome_dialog_close(GNOME_DIALOG(dialog->dialog));
 
