@@ -42,7 +42,7 @@
   <!-- translators: uncomment this:
 
   <copyright>
-   <year>2000</year>
+   <year>2001</year>
    <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
   </copyright>
 
@@ -406,14 +406,16 @@
       from the most immediate functions of the application. Make the
       structure logical.
       =============================================================  -->
+    <!-- =========== Advanced features ================== -->
+
     <sect2 id="advanced">
       <title>Advanced features</title>
        <para>
-       Here come the advanced features, autoaccomlish, regexp search, upadte aso...
+       Here come the advanced features, autotranslate, regexp search, upadte...
        </para>
 
         <sect3 id="aa">
-         <title>Autotraslate</title>
+         <title>Autotranslate</title>
          <para>
          Autotranslate is a nice feature.
          </para>
@@ -427,66 +429,12 @@
        <sect3 id="search">
          <title>Regexp search</title>
          <para>
-         Does it work?
+         Not implemented yet
          </para>
         </sect3>
     </sect2>
 
-    <sect2 id="commandline">
-      <title>Available commandline options</title>
-       <para>
-       <application>Gtranslator</application> understands a number of
-       command line options:
-          <itemizedlist>
-            <listitem>
-              <para>
-                <emphasis>--help</emphasis> Shows you a
-                litte help message on the command line.
-              </para>
-            </listitem>
-            <listitem>
-			  <para><emphasis>--display</emphasis> Let&apos;s you
-			    define the display to start <application>gtranslator</application> on.
-			  </para>
-		    </listitem>
-		    <listitem>
-			  <para><emphasis>--webalize</emphasis> Prints out a htmlized output file
-			    (you must give the html output filename as the next argument) of the po
-			    file.
-			  </para>
-			  <para>
-			    An example call would be:
-			    <screen><command>gtranslator</command> --webalize=Evolution.html tr.po</screen>
-			  </para>
-		    </listitem>
-		    <listitem>
-			  <para><emphasis>--scheme</emphasis> Sets the syntax color scheme to the
-			    given file	</para>
-			  <para>For example:	<screen><command>gtranslator</command> --scheme=Schemefile</screen>
-			 </para>
-		    </listitem>
-		    <listitem>
-			<para><emphasis>--geometry</emphasis> Let&apos;s you define a standard
-			    geometry string to which the gtranslator window will conform.
-			</para>
-			<para>
-			    An example call would be:
-			    <screen><command>gtranslator</command> --geometry="320x240+0+0" tr.po</screen> 
-                       (This opens gtranslator at "+0+0", the left upper 
-                       corner, with a size of 320x240).
-	         </para>
-            </listitem>
-            <listitem>
-              <para>
-              <emphasis>--version</emphasis> Tells you
-              the version of <application>Gtranslator</application>
-              you're using.
-              </para>
-            </listitem>
-          </itemizedlist>
-       </para>
-
-    </sect2>
+   <!-- =============== Toolbar ====================== -->
 
     <sect2 id="toolbar">
       <title>Toolbar</title>
@@ -500,9 +448,15 @@
 	    <graphic fileref="figures/toolbar" format="png"></graphic>
 	  </screenshot>
 	</figure>
+       </para>
+      <sect3 id="fileicons">
+       <title>File management toolbar</title>
+       <para>
+       The file management toolbar lets you access often used file 
+       management funcions quickly.
         <variablelist>
 	  <varlistentry>
-	    <term>Open</term>
+	    <term><guiicon>Open</guiicon></term>
 	    <listitem>
 	      <para>
                 Brings up the <interface>Open file dialog</interface>
@@ -510,24 +464,191 @@
               </para>
 	    </listitem>
 	  </varlistentry>
+
 	  <varlistentry>
-	    <term>Save</term>
+	    <term><guiicon>Save</guiicon></term>
 	    <listitem>
 	      <para>
                  Saves the po file.
                </para>
 	    </listitem>
 	  </varlistentry>
+
+          <varlistentry>
+	    <term><guiicon>Save as</guiicon></term>
+	    <listitem>
+	      <para>
+                 Saves the po file under a different name.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
 	  <varlistentry>
-	    <term>Compile</term>
+	    <term><guiicon>Compile</guiicon></term>
 	    <listitem>
 	      <para>
 	         Compiles the po file using msgfmt.
                </para>
 	    </listitem>
 	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Update</guiicon></term>
+	    <listitem>
+	      <para>
+	         Updates the po file from the sources using the 
+                 <command>xml-i18n-update</command> from the xml-i18n-tools 
+                 package.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Header</guiicon></term>
+	    <listitem>
+	      <para>
+	         Brings up the <interface>Header dialog box</interface> with 
+                 a form that lets you fill in the fields of the po files 
+                 header.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Undo</guiicon></term>
+	    <listitem>
+	      <para>
+	         Undoes your last action.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Options</guiicon></term>
+	    <listitem>
+	      <para>
+	         Opens the <interface>Preferences window</interface>.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Exit</guiicon></term>
+	    <listitem>
+	      <para>
+	         Exits the application.
+               </para>
+	    </listitem>
+	  </varlistentry>
 	</variablelist>
        </para>
+      </sect3>
+      <sect3 id="navicons">
+       <title>Navigation toolbar</title>
+       <para>
+       The navigation toolbar allows you to navigate among messages. It also 
+       lets you seach for strings or seach and replace strings in the msgstr 
+       field.
+        <variablelist>
+	  <varlistentry>
+	    <term><guiicon>First</guiicon></term>
+	    <listitem>
+	      <para>
+                Jumps to the first message.
+                dialog.
+              </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Back</guiicon></term>
+	    <listitem>
+	      <para>
+                 Jumps to the previous message.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+          <varlistentry>
+	    <term><guiicon>Next</guiicon></term>
+	    <listitem>
+	      <para>
+                 Jumps to the next message.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Last</guiicon></term>
+	    <listitem>
+	      <para>
+	         Jumps to the last message.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Missing</guiicon></term>
+	    <listitem>
+	      <para>
+	         Jumps to the next untranslated message.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Fuzzy</guiicon></term>
+	    <listitem>
+	      <para>
+	         Jumps to the next fuzzy message.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Go to</guiicon></term>
+	    <listitem>
+	      <para>
+	         Jumps to the specified message number.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Find</guiicon></term>
+	    <listitem>
+	      <para>
+	         Opens the <interface>Find dialog box</interface>. 
+                 This dialog lets you search for strings in the po file.
+               </para>
+	    </listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+	    <term><guiicon>Replace</guiicon></term>
+	    <listitem>
+	      <para>
+	         Opens the <interface>Replace dialog box</interface>. 
+                 This dialog lets you enter a string to search for and a 
+                 string to replace it with.
+              </para>
+	    </listitem>
+	  </varlistentry>
+          
+          <varlistentry>
+	    <term><guiicon>Query</guiicon></term>
+	    <listitem>
+	      <para>
+	         Opens the <interface>Query gettext domain dialog 
+                 box</interface>. 
+                 This dialog alows you to choose a gettext domain and 
+                 look up translations. 
+              </para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+       </para>
+      </sect3>
     </sect2>
     <!-- ========= Menus =========================== -->
 
@@ -565,6 +686,53 @@
 		  <para>
 	             <menuchoice>
 		      <shortcut>
+			<keycap>F5</keycap>
+		      </shortcut>
+		      <guimenuitem>Update</guimenuitem>
+		    </menuchoice>
+	            &mdash; This updates your po file from the sources.
+	          </para>
+		</listitem>
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycap>F10</keycap>
+		      </shortcut>
+		      <guimenuitem>Autotranslate</guimenuitem>
+		    </menuchoice>
+	            &mdash; This translates you po file automagically, 
+                    using the learn buffers and the gettext domain available.
+	          </para>
+		</listitem>
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycap>F3</keycap>
+		      </shortcut>
+		      <guimenuitem>Open</guimenuitem>
+		    </menuchoice>
+	            &mdash; This opens a po file.
+	          </para>
+		</listitem>
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycap>F?</keycap>
+		      </shortcut>
+		      <guimenuitem>Open from URI</guimenuitem>
+		    </menuchoice>
+	            &mdash; This opens a po file via the FTP or the HTTP 
+                    protocol.
+	          </para>
+		</listitem>
+                
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
 			<keycombo><keycap>Ctrl</keycap><keycap>S</keycap></keycombo>
 		      </shortcut>
 		      <guimenuitem>Save</guimenuitem>
@@ -572,7 +740,26 @@
 	            &mdash; This saves your file.
 	          </para>
 		</listitem>
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>S</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Save as...</guimenuitem>
+		    </menuchoice>
+	            &mdash; This saves your po file under a different name.
+	          </para>
+		</listitem>
 		<listitem>
+		  <para>
+	             <menuchoice>
+		      <guimenuitem>Restore</guimenuitem>
+		    </menuchoice>
+	            &mdash; This restores your po file to the last saved state.
+	          </para>
+		</listitem>
+                <listitem>
 		  <para>
 	             <menuchoice>
 		      <shortcut>
@@ -583,7 +770,41 @@
 	            &mdash; This closes your file.
 	          </para>
 		</listitem>
-		<listitem>
+
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <guimenuitem>Recent files</guimenuitem>
+		    </menuchoice>
+	            &mdash; This shows a list of your recently opened po files.
+	          </para>
+		</listitem>
+
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Export to UTF-8</guimenuitem>
+		    </menuchoice>
+	            &mdash; This exports your po file to UTF-8 encoding.
+	          </para>
+		</listitem>
+
+                <listitem>
+		  <para>
+	             <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>I</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Import from UTF-8</guimenuitem>
+		    </menuchoice>
+	            &mdash; This imports a UTF-8 encoded file.
+	          </para>
+		</listitem>
+		
+                <listitem>
 		  <para>
 	            <menuchoice>
 		      <shortcut>
@@ -605,6 +826,17 @@
 	    <para>
 	   This menu contains:
 	   <itemizedlist>
+                <listitem>
+		  <para>
+	            <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Undo</guimenuitem>
+		    </menuchoice>
+	            &mdash; This undoes your last change.
+	          </para>
+		</listitem>
 		<listitem>
 		  <para>
 	            <menuchoice>
@@ -641,16 +873,55 @@
 	            the buffer.
 	        </para>
 		</listitem>
+
+                <listitem>
+		  <para>
+	           <menuchoice>
+		      <shortcut>
+			<keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo>
+		      </shortcut>
+		      <guimenuitem>Delete</guimenuitem>
+		    </menuchoice>
+	            &mdash; This removes the selected text.
+	        </para>
+		</listitem>
+
 		<listitem>
 		  <para>
 	             <guimenuitem>Find&hellip;</guimenuitem>
-	             &mdash; This command opens the find dialog.
+	             &mdash; This command opens the 
+                     <interface>Find dialog</interface>.
 	          </para>
 		</listitem>
 		<listitem>
 		  <para>
-	            <guimenuitem>COMMAND2</guimenuitem>
-	            &mdash; This ....
+	            <guimenuitem>Find Next</guimenuitem>
+	            &mdash; This finds the next occurance of a string you 
+                    have already searched for.
+	          </para>
+		</listitem>
+                
+                <listitem>
+		  <para>
+	            <guimenuitem>Replace&hellip;</guimenuitem>
+	            &mdash; This opens the Replace dialog.
+	          </para>
+		</listitem>
+                
+                <listitem>
+		  <para>
+	            <guimenuitem>Query&hellip;</guimenuitem>
+	            &mdash; This opens the query dialog box. 
+                    The query dialog box allows you to query gettext 
+                    domains for translation.
+	          </para>
+		</listitem>
+
+                <listitem>
+		  <para>
+	            <guimenuitem>Header&hellip;</guimenuitem>
+	            &mdash; This opens a dialog box which allows you to edit
+                    information stored in the po file's header.
 	          </para>
 		</listitem>
 	      </itemizedlist>
@@ -658,6 +929,72 @@
 	  </listitem>
 	</varlistentry>
 
+        <varlistentry>
+	  <term><guimenu>View</guimenu></term>
+	  <listitem>
+	    <para>
+	   This menu contains:
+	   <itemizedlist>
+		<listitem>
+		  <para>
+	      <guimenuitem>Message</guimenuitem>
+	       &mdash; This shows the message in the edit area.
+	     </para>
+		</listitem>
+                <listitem>
+		  <para>
+	      <guimenuitem>Numbers</guimenuitem>
+	       &mdash; This shows the numbers in the edit area.
+	     </para>
+		</listitem>
+                <listitem>
+		  <para>
+	      <guimenuitem>C format</guimenuitem>
+	       &mdash; This shows the C format strings present in the message 
+               in the edit area.
+	     </para>
+		</listitem>
+                <listitem>
+		  <para>
+	      <guimenuitem>Hotkey</guimenuitem>
+	       &mdash; This shows the hotkeys present in the message 
+               in the edit area.
+	     </para>
+		</listitem>
+	      </itemizedlist>
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+
+       	<varlistentry>
+	  <term><guimenu>Message state</guimenu></term>
+	  <listitem>
+	    <para>
+	   This menu contains:
+	   <itemizedlist>
+		<listitem>
+		  <para>
+	      <guimenuitem>Translated</guimenuitem>
+	       &mdash; This ...
+	     </para>
+		</listitem>
+                <listitem>
+		  <para>
+	      <guimenuitem>Fuzzy</guimenuitem>
+	       &mdash; This ...
+	     </para>
+		</listitem>
+              <listitem>
+		  <para>
+	      <guimenuitem>Sticky</guimenuitem>
+	       &mdash; This ...
+	     </para>
+		</listitem>
+	      </itemizedlist>
+	    </para>
+	  </listitem>
+	</varlistentry>
 
 	<varlistentry>
 	  <term><guimenu>Settings</guimenu></term>
@@ -705,13 +1042,108 @@
     	            and the URL for the application's Web page.
 	          </para>
 		</listitem>
+
+                <listitem>
+		  <para>
+	            <guimenuitem>The Gtranslator webpage</guimenuitem> 
+                    &mdash; This
+    	            opens the Gtranslator's webpage.
+	          </para>
+		</listitem>
 	      </itemizedlist>
             </para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
     </sect2>
-  </sect1>
+
+<!-- =================Command line options=================== -->
+     <sect2 id="commandline">
+      <title>Available commandline options</title>
+       <para>
+       <application>Gtranslator</application> understands a number of
+       command line options:
+         <variablelist>
+          <varlistentry>
+           <term><emphasis>--help</emphasis></term>
+	      <listitem>
+	       <para>
+               Shows you a short help message on the command line.
+               </para>
+              </listitem>
+          </varlistentry>
+          <varlistentry>
+           <term><emphasis>--version</emphasis></term>
+	      <listitem>
+	       <para>
+               Shows you the version of <application>Gtranslator</application>.
+               </para>
+              </listitem>
+          </varlistentry>
+         
+         <varlistentry>
+          <term><emphasis>--display</emphasis></term>
+	     <listitem>
+	      <para>
+              Lets you define the display to start 
+              <application>gtranslator</application> on.
+              </para>
+             </listitem>
+         </varlistentry>
+         <varlistentry>
+          <term><emphasis>--webalize</emphasis></term>
+	     <listitem>
+	      <para>
+              Prints out a htmlized output file (you must give the html 
+              output filename as the next argument) of the po file.
+              </para>
+              <para>
+              An example would be:
+              <screen><command>gtranslator</command> --webalize=<filename>Evolution.html</filename> <filename>tr.po</filename></screen>
+              </para>
+             </listitem>
+         </varlistentry>
+         <varlistentry>
+          <term><emphasis>--scheme</emphasis></term>
+	     <listitem>
+	      <para>
+              Sets the syntax color scheme to the given file.
+              </para>
+              <para>For example:
+              <screen><command>gtranslator</command> --scheme=<replaceable>Schemefile</replaceable></screen>
+              </para>
+             </listitem>
+         </varlistentry>
+         <varlistentry>
+          <term><emphasis>--geometry</emphasis></term>
+	     <listitem>
+	      <para>
+              Lets you define a standard geometry string to which the 
+              <interface>gtranslator window</interface> will conform.
+              </para>
+              <para>
+              An example call would be:
+              <screen><command>gtranslator</command> --geometry="320x240+0+0" <filename>tr.po</filename></screen>
+              (This opens gtranslator at "+0+0", the left upper corner, with 
+              a size of 320x240).
+	      </para>
+             </listitem>
+         </varlistentry>
+         <varlistentry>
+          <term><emphasis></emphasis></term>
+	     <listitem>
+	      <para>
+
+              </para>
+             </listitem>
+         </varlistentry>
+        </variablelist>
+       </para>
+
+    </sect2> 
+
+
+ </sect1>
 
 
 
