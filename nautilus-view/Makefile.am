@@ -23,6 +23,7 @@ nautilus_gtranslator_view_SOURCES = \
 
 nautilus_gtranslator_view_DEPENDENCIES = \
 	$(sourcedir)/about.o \
+	$(sourcedir)/color-schemes.o \
 	$(sourcedir)/dialogs.o \
 	$(sourcedir)/dnd.o \
 	$(sourcedir)/find.o \
