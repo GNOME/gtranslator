@@ -42,31 +42,31 @@ typedef struct
 #define GTR_BOOKMARK(x) ((GtrBookmark *) x)
 
 /*
- * The used GList for the GtrBookmark's -- a general way to handle with this
- *  list is supplied by the gtranslator_bookmark_* methods.
- */
-GList *gtranslator_bookmarks;
-
-/*
  * Create and return a GtrBookmark from the current position & po file -- 
  *  if a file is opened yet.
  */
 GtrBookmark *gtranslator_bookmark_new(void);
 
 /*
- * Creates the id from a given gchar-string formatted by gtranslator.
+ * Creates the bookmark from a given gchar-string formatted by gtranslator.
  */
 GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string);
 
 /*
- * Create and convert the generated id to a string.
+ * Create and convert the generated bookmark to a string.
  */
-gchar *gtranslator_bookmark_new_id_string(void);
+gchar *gtranslator_bookmark_new_bookmark_string(void);
 
 /*
  * The otherway conversion: convert a GtrBookmark into a plain string.
  */
-gchar *gtranslator_bookmark_string_from_id(GtrBookmark *bookmark);
+gchar *gtranslator_bookmark_string_from_bookmark(GtrBookmark *bookmark);
+
+/*
+ * Open the bookmark -- file & position => version and date should be only some
+ *  kind of aside-factors.
+ */
+void gtranslator_bookmark_open(GtrBookmark *bookmark);
 
 /*
  * Is the given GtrBookmark resolvable at all -- is the file present and do the
@@ -80,7 +80,7 @@ gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark);
 gboolean gtranslator_bookmark_equal(GtrBookmark *one, GtrBookmark *two);
 
 /*
- * Smally different: compare the GtrBookmark and the id string.
+ * Smally different: compare the GtrBookmark and the bookmark string.
  */
 gboolean gtranslator_bookmark_string_equal(GtrBookmark *bookmark, const gchar *string); 
 

@@ -30,6 +30,7 @@
  * The keywords which should be highlighted.
  */
 static gchar *keywords[] = {
+	"BUGS",
 	"ChangeLog",
 	"COPYING",
 	"COPYING.LIB",
@@ -40,6 +41,7 @@ static gchar *keywords[] = {
 	"FDL",
 	"FIXME",
 	"FTP",
+	"GDK",
 	"Gdk",
 	"Glib",
 	"GLIB",
@@ -58,8 +60,11 @@ static gchar *keywords[] = {
 	"Kde",
 	"LICENSE",
 	"License",
+	"LGPL",
+	"NEWS",
 	"NULL",
 	"README",
+	"THANKS",
 	"TODO",
 	"URI",
 	"URL",
@@ -82,6 +87,7 @@ static gchar *prefixes[] =  {
 	"ghelp:",
 	"gopher:",
 	"gnome-search:",
+	"gtranslator_bookmark:",
 	"https:",
 	"http:",
 	"imap:",
@@ -89,6 +95,7 @@ static gchar *prefixes[] =  {
 	"mailto:",
 	"man:",
 	"medusa:",
+	"my-portal:",
 	"news:",
 	"nfs:",
 	"nntp:",

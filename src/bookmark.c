@@ -18,7 +18,9 @@
  */
 
 #include "bookmark.h"
+#include "message.h"
 #include "nautilus-string.h"
+#include "open-differently.h"
 #include "parse.h"
 #include "preferences.h"
 #include "utils.h"
@@ -43,6 +45,12 @@
  */
 #define MAX_BOOKMARKS 10
 
+/*
+ * The used GList for the GtrBookmark's -- a general way to handle with this
+ *  list is supplied by the gtranslator_bookmark_* methods.
+ */
+GList *gtranslator_bookmarks;
+	
 /*
  * Create and return a GtrBookmark from the current position & po file -- 
  *  if a file is opened yet.
@@ -168,6 +176,32 @@ gchar *gtranslator_bookmark_new_bookmark_string()
 	gtranslator_bookmark_free(bookmark);
 	
 	return bookmark_string;
+}
+
+/*
+ * Open the given bookmark.
+ */
+void gtranslator_bookmark_open(GtrBookmark *bookmark)
+{
+	g_return_if_fail(GTR_BOOKMARK(bookmark)!=NULL);
+
+	/*
+	 * Open the po file.
+	 */
+	if(!gtranslator_open_po_file(GTR_BOOKMARK(bookmark)->po_file))
+	{
+		gtranslator_parse_main(GTR_BOOKMARK(bookmark)->po_file);
+	}
+
+	/*
+	 * Only re-setup the bookmark if the po file could be opened.
+	 */
+	if(GTR_PO(po) && 
+		GTR_PO(po)->length >= GTR_BOOKMARK(bookmark)->po_position)
+	{
+		gtranslator_message_go_to_no(NULL, 
+			(gpointer) GTR_BOOKMARK(bookmark)->po_position);
+	}
 }
 
 /*

@@ -49,7 +49,7 @@ static GHashTable	*learn_hash=NULL;
  */
 static void gtranslator_learn_hash_from_node(xmlNodePtr node);
 static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpointer useless);
-static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer doc);
+static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node);
 
 /*
  * Return an UMTF date string.
@@ -114,15 +114,13 @@ static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpoi
 /*
  * Write the hash entries -- one entry for a msgid/msgstr pair.
  */
-static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer doc)
+static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node)
 {
-	xmlNodePtr node;
 	xmlNodePtr new_node;
 	xmlNodePtr value_node;
 	xmlNodePtr translation_node;
 	xmlNodePtr translation_value_node;
 
-	node=((xmlDocPtr) doc)->xmlRootNode->xmlChildrenNode;
 	g_return_if_fail(node!=NULL);
 
 	new_node=xmlNewChild(node, NULL, "message", NULL);
@@ -188,7 +186,7 @@ void gtranslator_learn_init()
 			/*
 			 * Read in the serial number.
 			 */
-			if(!nautilus_strcasecmp(node->name, "serial"))
+			if(node->name && !nautilus_strcasecmp(node->name, "serial"))
 			{
 				gchar	*contentstring;
 
@@ -206,7 +204,7 @@ void gtranslator_learn_init()
 				}
 			}
 			
-			if(!nautilus_strcasecmp(node->name, "message"))
+			if(node->name && !nautilus_strcasecmp(node->name, "message"))
 			{
 				gtranslator_learn_hash_from_node(node);
 			}
@@ -337,7 +335,7 @@ void gtranslator_learn_shutdown()
 	 * Clean up the hash table we're using, write it's contents, free them and destroy
 	 *  the hash table.
 	 */
-	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_write_hash_entry, doc); 
+	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_write_hash_entry, root_node); 
 	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_free_hash_entry, NULL);
 	g_hash_table_destroy(learn_hash);
 

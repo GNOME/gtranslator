@@ -209,7 +209,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Enable the update function of gtranslator (you need the sources for this)"),
 		GtrPreferences.update_function, gtranslator_preferences_dialog_changed);
 	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
-		_("Delete the compile result file (named \"project-language_code.po\")"),
+		_("Delete the compile result file (named \"project.gmo\")"),
 		GtrPreferences.sweep_compile_file, gtranslator_preferences_dialog_changed);
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
 		_("Save geometry on exit & restore it on startup"),

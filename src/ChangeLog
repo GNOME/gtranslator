@@ -1,8 +1,23 @@
 2001-07-14  Fatih Demir <kabalak@gtranslator.org>
 
+	* syntax-elements.h: Added some more standard filenames to the keywords
+		and 2 other URI types/prefixes to the highlight words' list.
+
+	* parse.c: Clean up any text lungering 'round in the comment entry
+		on file closure.
+
+	* bookmark.c/.h: Small rename fullfillings, move of the bookmarks
+		list "gtranslator_bookmarks" into the source file and addition
+		 of a "gtranslator_bookmark_open" function to open a bookmark.
+
+	* sidebar.c: Added "Bookmarks" category to the sidebar model.
+
+	* prefs.c: Corrected a malformed label (the compile result file is of
+		course "project-name.gmo").
+
 	* learn.c: Properties order change (language code comes before EMail),
-		also write out "name" property for the <language> node and read/write
-		 the serial nodes.
+		also write out "name" property for the <language> node and 
+		 read/write the serial nodes.
 
 2001-07-14  Thomas Ziehmer	<thomas@gtranslator.org>
 

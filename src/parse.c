@@ -50,7 +50,10 @@
 #include <libgnomeui/gnome-messagebox.h>
 #include <libgnomeui/gnome-stock.h>
 #include <libgnomeui/gnome-uidefs.h>
+
 #include <libgnome/gnome-util.h>
+
+#include <gal/e-text/e-entry.h>
 
 /* Global variables */
 GtrPo *po;
@@ -778,6 +781,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	}
 	
 	gtranslator_text_boxes_clean();
+	e_entry_set_text(E_ENTRY(extra_content_view), "");
 	gtranslator_actions_set_up_state_no_file();
 
 	/*
