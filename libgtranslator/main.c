@@ -20,6 +20,10 @@
 * The local includes.
 **/
 
+#ifdef HAVE_CONFIG_H
+#include "../config.h"
+#endif
+
 #include <libgtranslator/gtranslatord.h>
 #include <libgtranslator/libgtranslator.h>
 #include <popt-gnome.h>
@@ -75,8 +79,8 @@ int main(int argc,char *argv[])
 	/**
 	* Hm, bind to gettext...
 	**/
-	(void) bindtextdomain("gtranslator", GNOMELOCALEDIR);
-	(void) textdomain("gtranslator");
+	bindtextdomain("gtranslator", GNOMELOCALEDIR);
+	textdomain("gtranslator");
 	/**
 	* Get the arguments and the context.
 	**/
