@@ -7,5 +7,4 @@ SUBDIRS = \
 	gconf \
 	mime \
 	pixmaps \
-	scripts \
-	ui
+	scripts
