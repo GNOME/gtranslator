@@ -4,7 +4,6 @@
 ## First set the default subdirs.
 ##
 DEFAULT_SUBDIRS = desktop \
-		oaf \
 		scripts
 
 ##
