@@ -111,7 +111,7 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 	 *  because it is not a GnomeDialog.
 	 */
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtranslator_application));
-	gtranslator_dialog_show(&dialog, "gtranslator -- open");
+	gtranslator_dialog_show(&dialog, NULL );
 }
 
 /*
@@ -1313,10 +1313,8 @@ Would you like to insert it into the translation?"),
 						 * Insert the text and update the
 						 * status flags for it.
 						 */
-						gtranslator_syntax_insert_text(trans_box,
-						result->message);
-
-						gtranslator_translation_changed(NULL, NULL);
+						gtk_text_insert( GTK_TEXT(trans_box), NULL, NULL, NULL,
+						result->message, strlen(result->message) );
 
 						gtranslator_free_query(&result);
 					}

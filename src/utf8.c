@@ -27,10 +27,6 @@
 #include "utf8.h"
 #include "utils.h"
 
-#include <locale.h>
-
-#include <libgnome/gnome-i18n.h>
-
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtktext.h>
@@ -45,15 +41,8 @@ gboolean gtranslator_utf8_po_file_is_utf8()
 	g_return_val_if_fail(po->header!=NULL, FALSE);
 	g_return_val_if_fail(po->header->charset!=NULL, FALSE);
 
-	if(!g_strcasecmp(po->header->charset, "utf-8") ||
-		!g_strcasecmp(po->header->charset, "utf8"))
-	{
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
-	}
+	return (!g_strcasecmp(po->header->charset, "utf-8") ||
+		!g_strcasecmp(po->header->charset, "utf8"));	
 }
 
 /*
@@ -256,5 +245,5 @@ void gtranslator_utf8_set_gtk_text_from_utf8_string(GtkWidget *text,
 	/*
 	 * We'll use our syntax highlighted insertion method also here .-)
 	 */
-	gtranslator_syntax_insert_text(text, plain_string);
+	gtranslator_insert_text(GTK_TEXT(text), plain_string);
 }

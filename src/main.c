@@ -66,6 +66,7 @@ static gchar	*learn_file=NULL;
 static gchar	*auto_translate_file=NULL;
 static gboolean	build_information=FALSE;
 static gboolean	no_modules=FALSE;
+gboolean 	nosyntax=FALSE;
 
 /*
  * gtranslator's option table.
@@ -102,6 +103,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
 		0, N_("HTML file to write to"), N_("HTMLFILE")
+	},
+	{
+		"nosyntax", 'y', POPT_ARG_NONE, &nosyntax,
+		0, N_("Don't highlight syntax"), NULL 
 	},
 	POPT_AUTOHELP {NULL}
 };

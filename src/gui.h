@@ -22,6 +22,7 @@
 #define GTR_GUI_H 1
 
 #include <gtk/gtkwidget.h>
+#include <gtk/gtkeditable.h>
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
@@ -87,6 +88,12 @@ void gtranslator_switch_views(GtkWidget *widget, gpointer view);
  * A status defining callback -- now generaly defined for instance.
  */
 void gtranslator_translation_changed(GtkWidget  *widget, gpointer useless);
+
+void insert_text_handler(GtkEditable *editable, const gchar *text,
+			 gint length, gint *position, gpointer data);
+
+void delete_text_handler(GtkEditable *editable, gint start_position,
+                         gint end_position);
 
 /*
  * If TRUE, means that trans_box is being changed by program, not user

@@ -22,6 +22,8 @@
 #include <config.h>
 #endif
 
+#include <gtk/gtk.h>
+
 #include "gui.h"
 #include "preferences.h"
 #include "prefs.h"
@@ -131,7 +133,7 @@ void gtranslator_sidebar_activate_views()
 			e_utf8_from_locale_string(gtranslator_shortcut_view_items[count].name),
 			pixbuf);
 
-		gdk_pixbuf_unref(pixbuf);
+		if(pixbuf!=NULL) gdk_pixbuf_unref(pixbuf);
 		
 		count++;
 	}
@@ -224,16 +226,15 @@ GdkPixbuf *get_shortcut_icon(const gchar *url)
 				break;
 	}
 	
+	if(pixmap_filename == NULL)
+	     pixmap_filename = gnome_pixmap_file("gtranslator.png");
+	
 	if(pixmap_filename)
 	{
 		icon=gdk_pixbuf_new_from_file(pixmap_filename);
-		
-		/*
-		 * Ref the icon and return it for our shortcut.
-		 */ 
-		gdk_pixbuf_ref(icon);
-		
-		GTR_FREE(pixmap_filename);
+		if(icon!=NULL)
+			gdk_pixbuf_ref(icon);
+		g_free(pixmap_filename);
 		return icon;
 	}
 	else

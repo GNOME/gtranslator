@@ -106,10 +106,10 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event,
 /*
  * Internal text callbacks/handlers.
  */
-static void insert_text_handler (GtkEditable *editable, const gchar *text,
+void insert_text_handler (GtkEditable *editable, const gchar *text,
 	gint length, gint *position, gpointer data);
 
-static void delete_text_handler(GtkEditable *editable, gint start_position,
+void delete_text_handler(GtkEditable *editable, gint start_position,
 	gint end_position);
 
 static void selection_get_handler(GtkWidget *widget,
@@ -133,7 +133,6 @@ static  GtkTargetEntry dragtypes[] = {
 /*
  * Counts the already performed update's count for the syntax updating.
  */
-static gint 	update_count=0;
 
 /*
  * Pane positions storage variables.
@@ -333,7 +332,11 @@ void gtranslator_create_main_window(void)
 	gtranslator_set_style(text_box, 0);
 	gtranslator_set_style(trans_box, 1);
 	gtranslator_config_close();
-	
+	/*
+	 *  Initialize highlighting
+	 */
+	 gtranslator_syntax_init(GTK_EDITABLE(trans_box));
+	 gtranslator_syntax_init(GTK_EDITABLE(text_box));
 	/*
 	 * The callbacks list
 	 */
@@ -347,6 +350,12 @@ void gtranslator_create_main_window(void)
 			   GTK_SIGNAL_FUNC(selection_get_handler), NULL);
 	gtk_signal_connect_after(GTK_OBJECT(trans_box), "selection_get",
 			   GTK_SIGNAL_FUNC(selection_get_handler), NULL);
+
+	gtk_signal_connect(GTK_OBJECT(text_box), "insert_text",
+			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
+	gtk_signal_connect(GTK_OBJECT(text_box), "delete_text",
+			   GTK_SIGNAL_FUNC(delete_text_handler), NULL);
+
 
 	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
 			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
@@ -379,7 +388,7 @@ void gtranslator_create_main_window(void)
  * An own delete text handler which should work on deletion in the translation
  *  box -- undo is called up here, too.
  */
-static void delete_text_handler(GtkEditable *editable, gint start_position,
+void delete_text_handler(GtkEditable *editable, gint start_position,
 	gint end_position)
 {
 	/*
@@ -399,6 +408,9 @@ static void delete_text_handler(GtkEditable *editable, gint start_position,
 		gtranslator_undo_register_deletion(fake_string, start_position);
 		GTR_FREE(fake_string);
 	}
+	gtranslator_delete_highlighted(editable, 
+			start_position, end_position - start_position);
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "delete_text");
 }
 
 /*
@@ -659,43 +671,6 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 			gtranslator_actions_disable_fuzzy_menu_item();
 		}
 	}
-
-	if(widget)
-	{
-		gint selpos=0;
-
-		update_count++;
-
-		/*
-		 * Check if there were already made an update -- don't update
-		 *  the syntax 3x for only one reason/change.
-		 */
-		if(update_count >= 2)
-		{
-			update_count=0;
-			return;
-		}
-	
-		/*
-		 * Determine any selections the translation box currently owns.
-		 */
-		if(GTK_EDITABLE(widget)->has_selection)
-		{
-			selpos=gtk_text_get_point(GTK_TEXT(widget));
-		}
-		
-		gtranslator_syntax_update_text(widget);
-
-		/*
-		 * If there were any position from the selection we can 
-		 *  now again go there.
-		 */
-		if(selpos > 0)
-		{
-			gtk_text_set_point(GTK_TEXT(widget), selpos);
-			selpos=0;
-		}
-	}
 }
 
 /*
@@ -706,37 +681,23 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 {
 	gchar *result;
 
-	if (nothing_changes)
-		return;
-		
-	/*
-	 * Do all these steps only if the option to use the '·' is set.
-	 */
-	if(!GtrPreferences.dot_char)
-		return;
-
 	result=g_strdup(text);
-
-	/*
-	 * Register the text for an insertion undo action.
-	 */
-	gtranslator_undo_register_insertion(result, *position);
-	
-	gtranslator_utils_invert_dot(result);
-	
-	gtk_signal_handler_block_by_func(GTK_OBJECT(editable),
-					 GTK_SIGNAL_FUNC(insert_text_handler),
-					 data);
-	
-	gtk_editable_insert_text(editable, result, length, position);
-	
-	gtk_signal_handler_unblock_by_func(GTK_OBJECT(editable),
-					   GTK_SIGNAL_FUNC(insert_text_handler),
-					   data);
-	
+	if (!nothing_changes){
+		/*
+		* Do all these steps only if the option to use the '·' is set.
+		*/
+		if(GtrPreferences.dot_char){
+			/*
+			* Register the text for an insertion undo action.
+			*/
+			gtranslator_undo_register_insertion(result, *position);
+			gtranslator_utils_invert_dot(result);
+		}
+	}
+	gtranslator_insert_highlighted(editable, result, position, length);
+	g_free(result);
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
-
-	GTR_FREE(result);
+	gtk_editable_set_position(GTK_EDITABLE(editable), *position);
 }
 
 void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,

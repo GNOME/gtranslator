@@ -167,7 +167,7 @@ void gtranslator_message_show(GList * list_item)
 		temp = g_strdup(msg->msgid);
 		gtranslator_utils_invert_dot(temp);
 		
-		gtranslator_syntax_insert_text(text_box, temp);
+		gtranslator_insert_text(GTK_TEXT(text_box), temp);
 		
 		GTR_FREE(temp);
 
@@ -183,22 +183,23 @@ void gtranslator_message_show(GList * list_item)
 			
 			gtranslator_utils_invert_dot(temp);
 			
-			gtranslator_syntax_insert_text(trans_box, temp);
+			gtranslator_insert_text(GTK_TEXT(trans_box), temp);
 			
 			GTR_FREE(temp);
 		}
 	} else {
-		gtranslator_syntax_insert_text(text_box, msg->msgid);
+		gtranslator_insert_text(GTK_TEXT(text_box), msg->msgid);
 
 		if(po->utf8)
 		{
 			gchar *text=gtranslator_utf8_get_plain_msgstr(&msg);
 			
-			gtranslator_syntax_insert_text(trans_box, text);
+			gtranslator_insert_text(GTK_TEXT(trans_box), text);
+
 		}
 		else
 		{
-			gtranslator_syntax_insert_text(trans_box, msg->msgstr);
+			gtranslator_insert_text(GTK_TEXT(trans_box), msg->msgstr);
 		}
 	}
 	

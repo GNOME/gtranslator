@@ -104,14 +104,7 @@ void gtranslator_undo_register_deletion(const gchar *text, const gint position)
  */
 gboolean gtranslator_undo_get_if_registered_undo()
 {
-	if(undo && undo->text)
-	{
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
-	}
+	return (undo && undo->text);
 }
 
 /*
@@ -163,9 +156,4 @@ void gtranslator_undo_run_undo()
 				(undo->position + strlen(undo->text)));
 		}
 	}
-
-	/*
-	 * Now update the syntax highlighting.
-	 */
-	gtranslator_syntax_update_text(trans_box);
 }

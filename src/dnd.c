@@ -23,6 +23,7 @@
 #include "syntax.h"
 
 #include <gtk/gtkdnd.h>
+#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-mime.h>
 
 /*
@@ -59,8 +60,7 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 				if (dnd_type == TARGET_TEXT_PLAIN) {
 					file = (char *) (fnp->data);
 
-					gtranslator_syntax_insert_text(
-						trans_box, file);
+					gtranslator_insert_text(GTK_TEXT(trans_box), file);
 					
 					return_value = 1;
 				}

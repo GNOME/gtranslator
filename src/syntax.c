@@ -2,6 +2,7 @@
  * (C) 2001		Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Joe Man <trmetal@yahoo.com.hk>
+ *			Peeter Vois <Peeter.Vois@mail.ee>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,400 +32,9 @@
 #include <string.h>
 
 #include <gtk/gtktext.h>
+#include <gtk/gtksignal.h>
 
-/*
- * Return if the given string matches our last chars.
- */
-gboolean back_match(const gchar *msg, gchar *str, gint pos);
-
-/*
- * Insert the syntax highlighted text into the given text widget.
- */ 
-void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
-{
-	/************************* MACROS *************************************/
-	
-	/*
-	 * Useful macros for making the text easier to understand/write.
-	 */
-	#define clear_string(x) x=g_string_truncate(x, 0)
-	#define append_char(x, y) x=g_string_append_c(x, y)
-	
-	/*
-	 * Delete the previous characters from the string and readd it
-	 *  to the text box.
-	 */
-	#define string_add(x); \
-		if(gtk_text_get_length(GTK_TEXT(textwidget)) > (strlen(x)-1)); \
-		{ \
-			gtk_text_backward_delete(GTK_TEXT(textwidget), \
-				strlen(x)-1); \
-			string=g_string_append(string, x); \
-		}
-
-	/*
-	 * An easifying macro for the new "back_match"function.
-	 */
-	#define match(x) (back_match(msg, x, cp))
-
-	/**********************************************************************/
-	
-	GString 	*string=g_string_new("");
-	GdkColor 	*color=NULL;
-	GdkColor 	*text_bg_color=NULL;
-	
-	gboolean 	aInserted;
-	gchar 		specialchar;
-	
-	gint 		cp;
-	gint 		z=0;
-	
-	
-	/**********************/
-	/*For multibyte       */
-	
-	GdkWChar* 	wc;
-	gchar* 		mb;	
-	
-	GdkWChar 	ch;
-	gint		k;
-	gint		i;
-	
-	/************************/
-	
-	
-	
-	g_return_if_fail(textwidget!=NULL);
-
-	if(!msg)
-	{
-		return;
-	}
-
-	if(GtrPreferences.dot_char)
-	{
-		specialchar=_("\xb7")[0];
-	}
-	else
-	{
-		specialchar=' ';
-	}
-
-
-
-	/**********************/
-	/*
-	 *  For multibyte        
-	 */
-	
-	wc = g_new (GdkWChar, strlen(msg) + 1);	
-	gdk_mbstowcs(wc, msg, strlen(msg));	
-	
-	k = 0;
-	
-	/**********************/
-	for(cp=0; cp < strlen(msg); ++cp)
-	{
-		
-		clear_string(string);
-		
-		/*****************************************/
-		/*               
-		 *  for multibyte character
-		 */
-		
-		ch = wc[cp + 1 - k];
-		wc[cp + 1 - k] = 0;		
-		mb = gdk_wcstombs(wc + cp - k);		
-		wc[cp + 1 - k] = ch;
-		
-		/*if multibyte character, no highlight*/
-		if (mb && strlen(mb) > 1)
-		{
-		    
-		    
-		    
-		    for (i=0; i < strlen(mb); i++)
-		    {
-			append_char(string, msg[cp]);		    
-			
-			
-			cp++;
-			k++;
-		    }
-		    cp--;
-		    k--;
-		    
-		    color=NULL;
-		    text_bg_color=gtranslator_get_color_from_type(COLOR_TEXT_BG);
-
-		    if(theme->text_bg)
-		    {
-			    gtk_text_insert(GTK_TEXT(textwidget), NULL,
-				    color, text_bg_color, string->str, -1);
-		    }
-		    else
-		    {
-			    gtk_text_insert(GTK_TEXT(textwidget), NULL,
-				    color, NULL, string->str, -1);
-		    }
-		    g_free(mb);
-		    continue;
-		    
-		}
-		g_free(mb);
-		/******************************************/
-		
-		
-
-		/*
-		 * Highlight the found elements in this switch tree.
-		 */
-		
-			
-		switch(msg[cp])
-		{
-			
-			/*
-			 * Hotkeys and comment characters:
-			 */ 
-			case '_':
-				append_char(string, '_');
-				
-				if(msg[cp+1] && isalpha(msg[cp+1]))
-				{
-					append_char(string, msg[cp+1]);
-					cp++;
-				}
-				
-				color = gtranslator_get_color_from_type(COLOR_HOTKEY);
-
-				break;
-		
-			/*
-			 * Format specifiers:
-			 */
-			case '%':
-				append_char(string, msg[cp]);
-				cp++;
-			
-				while(msg[cp] && msg[cp]!=specialchar &&
-					!ispunct(msg[cp]) && !iscntrl(msg[cp]))
-				{
-					append_char(string, msg[cp]);
-					cp++;
-				}
-
-				cp--;
-				
-				color = gtranslator_get_color_from_type(COLOR_C_FORMAT);
-
-				break;
-				
-			/*
-			 * Figures:
-			 */ 
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-			case '0':
-				append_char(string, msg[cp]);
-				
-				color = gtranslator_get_color_from_type(COLOR_NUMBER);
-
-				break;
-
-			/*
-			 * Punctuation characters:
-			 */
-			case '.':
-			case ';':
-			case ',':
-			case '!':
-			case '?':
-			case '-':
-				append_char(string, msg[cp]);
-				
-				color = gtranslator_get_color_from_type(COLOR_PUNCTUATION);
-
-				break;
-			
-			/*
-			 * Quotation characters and "special" characters:
-			 */
-			case '"':
-			case '\'':
-			case '`':
-			case '(':
-			case ')':
-			case '[':
-			case ']':
-			case '{':
-			case '}':
-			case '<':
-			case '>':
-			case '&':
-			case '@':
-			case '$':
-			case '#':
-			case '/':
-			case '\\':
-			case '|':
-				append_char(string, msg[cp]);
-				
-				color = gtranslator_get_color_from_type(COLOR_SPECIAL);
-				
-				break;
-
-			/*
-			 * URL/URI prefixes:
-			 */
-			case ':':
-				z=0;
-				aInserted=FALSE;
-				
-				while(prefixes[z]!=NULL)
-				{
-					if(match(prefixes[z]))
-					{
-						aInserted=TRUE;
-						
-						color=gtranslator_get_color_from_type(
-							COLOR_ADDRESS);
-
-						string_add(prefixes[z]);
-						break;
-					}
-					
-					z++;
-				}
-				
-				if(aInserted==FALSE)
-				{
-					append_char(string, msg[cp]);
-
-					color=gtranslator_get_color_from_type(
-						COLOR_PUNCTUATION);
-				}
-				
-				
-				break;
-			
-			/*
-			 * Everything else:
-			 */ 
-			default:
-				aInserted=FALSE;
-			
-				z=0;
-				
-				/*
-				 * Cruise through the keywords list and check for any
-				 *  match.
-				 */
-				while(keywords[z]!=NULL)
-				{
-					if(match(keywords[z]))
-					{
-						aInserted=TRUE;
-
-						string_add(keywords[z]);
-						
-						color=gtranslator_get_color_from_type(COLOR_KEYWORD);
-						break;
-					}
-					
-					z++;
-				}
-				
-				/*
-				 * Insert the single normal characters if there couldn't be
-				 *  any keyword found.
-				 */
-				if(aInserted==FALSE)
-				{
-					/*
-					 * Do we have got a "special character"?
-					 */
-					if(msg[cp]==specialchar)
-					{
-						color=gtranslator_get_color_from_type(COLOR_SPECIAL_CHAR);
-						append_char(string, msg[cp]);
-					}
-					else
-					{
-						color=NULL;
-						append_char(string, msg[cp]);
-					}
-				}
-
-				break;
-		}
-
-		/*
-		 * Load the background color for the text area -- it's not necessarily existent.
-		 */
-		text_bg_color=gtranslator_get_color_from_type(COLOR_TEXT_BG);
-
-		if(theme->text_bg)
-		{
-			gtk_text_insert(GTK_TEXT(textwidget), NULL,
-				color, text_bg_color, string->str, -1);
-		}
-		else
-		{
-			gtk_text_insert(GTK_TEXT(textwidget), NULL,
-				color, NULL, string->str, -1);
-		}
-	}
-
-	g_string_free(string, TRUE);
-
-	/*******************************/
-	/*               
-	*  for multibyte character, free the memory
-	*/
-	if (wc)
-	    g_free(wc);
-	    
-	/*******************************/
-}
-
-/*
- * Update the syntax in the given GtkText widget.
- */ 
-void gtranslator_syntax_update_text(GtkWidget *textwidget)
-{
-	gchar *text;
-	
-	g_return_if_fail(textwidget!=NULL);
-
-	text=gtk_editable_get_chars(GTK_EDITABLE(textwidget), 0, -1);
-
-	nothing_changes=TRUE;
-	if(text && text[0]!='\0')
-	{
-		gint pos=gtk_editable_get_position(GTK_EDITABLE(textwidget));
-
-		gtk_text_freeze(GTK_TEXT(textwidget));
-
-		gtk_editable_delete_text(GTK_EDITABLE(textwidget), 0, -1);
-		gtranslator_syntax_insert_text(textwidget, text);
-		
-		gtk_text_thaw(GTK_TEXT(textwidget));
-
-		gtk_editable_set_position(GTK_EDITABLE(textwidget), pos);
-	}
-	nothing_changes=FALSE;
-
-	GTR_FREE(text);
-}
+static gboolean back_match(const gchar *msg, gchar *str, gint pos);
 
 /*
  * Check the given string for equivalence with the last characters.
@@ -460,4 +70,493 @@ gboolean back_match(const gchar *msg, gchar *str, gint pos)
 	}
 	
 	return TRUE;
+}
+
+
+/*
+ * Frees text highlighting data
+ */
+static void text_data_free(gpointer data)
+{
+	g_string_free((GString*)data, TRUE);
+}
+
+/*
+ * This function initializes the syntax parser for text widget.
+ * The highlighting info will be inside string, so ~250 colors possible
+ */
+void gtranslator_syntax_init(GtkEditable *textwidget)
+{
+	GString *n;
+	
+	g_return_if_fail(textwidget!=NULL);
+	
+	n = g_string_new("");
+	
+	gtk_object_set_data_full(
+		GTK_OBJECT(textwidget), 
+		"textdata", 
+		n,
+		text_data_free);
+}
+
+/*
+ * This function will insert text highlighted into widget.
+ * 1. Add characters to the widget
+ * 2. Add to characterdata the new entries
+ * 3. Let parser create new characterdata
+ * 4. Compare new characterdata with old one and update changed chars
+ */
+void gtranslator_insert_highlighted(
+		GtkEditable *textwidget,
+		gchar	*text,
+		gint	*pos,
+ 		gint	addlen)
+{
+	GString *newdata, *olddata;
+	gint i;
+	guint point;
+	gchar type;
+	
+	g_return_if_fail(textwidget != NULL);
+	gtk_text_freeze(GTK_TEXT(textwidget));
+	gtk_signal_handler_block_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(insert_text_handler), 
+		NULL);
+	gtk_signal_handler_block_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(delete_text_handler), 
+		NULL);
+	
+	olddata = (GString *)gtk_object_get_data(
+		GTK_OBJECT(textwidget), 
+		"textdata");
+	for(i=0; i<addlen; i++)
+	{
+		olddata = g_string_insert_c(olddata, *pos, COLOR_FG);
+	}
+	gtk_text_set_point(GTK_TEXT(textwidget), *pos);
+	gtk_text_insert(
+		GTK_TEXT(textwidget), 
+		NULL,
+		gtranslator_get_color_from_type(COLOR_FG), 
+		gtranslator_get_color_from_type(COLOR_TEXT_BG), 
+		text, 
+		addlen);
+	point = gtk_text_get_point(GTK_TEXT(textwidget));
+	/* Parse highlighting */
+	newdata = gtranslator_parse_syntax(GTK_EDITABLE(textwidget));
+	/* Update highlighting */
+	for(i=0; i<newdata->len; i++)
+	{
+		if((type = *(newdata->str + i)) != 
+			*(olddata->str + i))
+		{
+			static gchar
+				*c;
+			gtk_text_set_point(GTK_TEXT(textwidget), i);
+			c = gtk_editable_get_chars(
+				GTK_EDITABLE(textwidget), i, i+1);
+			gtk_text_forward_delete(GTK_TEXT(textwidget), 1);
+			gtk_text_insert(
+				GTK_TEXT(textwidget),
+				NULL,
+				gtranslator_get_color_from_type((gint)type),
+				gtranslator_get_color_from_type(COLOR_TEXT_BG),
+				c, 1);
+			g_free(c);
+		}
+	}
+	/* Free olddata and register newdata */
+	gtk_object_set_data_full(
+		GTK_OBJECT(textwidget), 
+		"textdata", 
+		newdata,
+		text_data_free);
+	*pos = point;
+	
+	gtk_signal_handler_unblock_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(insert_text_handler), 
+		NULL);
+	gtk_signal_handler_unblock_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(delete_text_handler), 
+		NULL);
+	gtk_text_thaw(GTK_TEXT(textwidget));
+}
+
+/*
+ * This function will delete text and rehighlight.
+ * 1. Delete characters from the widget
+ * 2. Remove characterdata of deleted chars
+ * 3. Let parser create new characterdata
+ * 4. Compare new characterdata with old one and update changed chars
+ */
+void gtranslator_delete_highlighted(
+		GtkEditable *textwidget,
+		gint	pos,
+		gint	len)
+{
+	GString *newdata, *olddata;
+	gint i;
+	guint point;
+	gchar type;
+	
+	g_return_if_fail(textwidget != NULL);
+	gtk_text_freeze(GTK_TEXT(textwidget));
+	if(len < 1)
+	{
+		len = gtk_text_get_length(GTK_TEXT(textwidget))-pos;
+	}
+	gtk_signal_handler_block_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(insert_text_handler), 
+		NULL);
+	gtk_signal_handler_block_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(delete_text_handler), 
+		NULL);
+	
+	olddata = (GString *)gtk_object_get_data(
+		GTK_OBJECT(textwidget), 
+		"textdata");
+	olddata = g_string_erase(
+		olddata,
+		pos,
+		len);
+	gtk_text_set_point(GTK_TEXT(textwidget), pos);
+	gtk_text_forward_delete(
+		GTK_TEXT(textwidget), 
+		len);
+	point = gtk_text_get_point(GTK_TEXT(textwidget));
+	/* Parse highlighting */
+	newdata = gtranslator_parse_syntax(GTK_EDITABLE(textwidget));
+	/* Update highlighting */
+	for(i=0; i<newdata->len; i++)
+	{
+		if((type = *(newdata->str+ i)) != 
+			*(olddata->str + i))
+		{
+			static gchar *c;
+
+			gtk_text_set_point(GTK_TEXT(textwidget), i);
+			c = gtk_editable_get_chars(
+				GTK_EDITABLE(textwidget), i, i+1);
+			gtk_text_forward_delete(GTK_TEXT(textwidget), 1);
+			gtk_text_insert(
+				GTK_TEXT(textwidget),
+				NULL,
+				gtranslator_get_color_from_type((gint)type),
+				gtranslator_get_color_from_type(COLOR_TEXT_BG),
+				c, 1);
+			g_free(c);
+		}
+	}
+	/* Free olddata and register newdata */
+	gtk_object_set_data_full(
+		GTK_OBJECT(textwidget), 
+		"textdata", 
+		newdata,
+		text_data_free);
+	gtk_text_set_point(GTK_TEXT(textwidget), point);
+
+	gtk_signal_handler_unblock_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(insert_text_handler), 
+		NULL);
+	gtk_signal_handler_unblock_by_func(
+		GTK_OBJECT(textwidget), 
+		GTK_SIGNAL_FUNC(delete_text_handler), 
+		NULL);
+	gtk_text_thaw(GTK_TEXT(textwidget));
+}
+
+GString *gtranslator_parse_syntax(GtkEditable *textwidget)
+{
+	GString *string;
+	gboolean aInserted;
+	gchar specialchar, *msg;
+	gint cp;
+	gint z=0;
+
+	/**********************/
+	/*For multibyte       */
+	
+	GdkWChar *wc, ch;
+	gchar* mb;	
+	gint k, i;
+	
+	/************************/
+	
+	extern gboolean nosyntax;
+	
+	g_return_val_if_fail(textwidget!=NULL, NULL);
+
+	msg = gtk_editable_get_chars(
+		GTK_EDITABLE(textwidget),
+		0, -1);
+
+	if(GtrPreferences.dot_char)
+	{
+		specialchar=_("\xb7")[0];
+	}
+	else
+	{
+		specialchar=' ';
+	}
+
+
+	if(nosyntax)
+	{
+		gint i;
+		/* The foreground color is always the same */
+		string = g_string_new("");
+		for(i=0; i<strlen(msg); i++)
+			g_string_append_c(string, COLOR_FG);
+		return(string);
+	}
+
+	/**********************/
+	/*
+	 *  For multibyte        
+	 */
+
+	string = g_string_new("");
+
+	wc = g_new (GdkWChar, strlen(msg) + 1);	
+	gdk_mbstowcs(wc, msg, strlen(msg));	
+	
+	k = 0;
+	
+	/**********************/
+	for(cp=0; cp < strlen(msg); ++cp)
+	{
+		/*****************************************/
+		/*               
+		 *  for multibyte character
+		 */
+		
+		ch = wc[cp + 1 - k];
+		wc[cp + 1 - k] = 0;		
+		mb = gdk_wcstombs(wc + cp - k);		
+		wc[cp + 1 - k] = ch;
+		
+		/*if multibyte character, no highlight*/
+		if (mb && strlen(mb) > 1)
+		{
+			for (i=0; i < strlen(mb); i++)
+			{
+				g_string_append_c(string, COLOR_FG);		    
+				cp++;
+				k++;
+			}
+			cp--;
+			k--;
+
+			g_free(mb);
+			continue;
+		}
+		g_free(mb);
+		/******************************************/
+		/*
+		 * Highlight the found elements in this switch tree.
+		 */
+			
+		switch(msg[cp])
+		{
+			/*
+			 * Hotkeys and comment characters:
+			 */ 
+			case '_':
+				g_string_append_c(string, COLOR_HOTKEY);
+				
+				if(msg[cp+1] && isalpha(msg[cp+1]))
+				{
+					g_string_append_c(string, COLOR_HOTKEY);
+					cp++;
+				}
+				break;
+		
+			/*
+			 * Format specifiers:
+			 */
+			case '%':
+				g_string_append_c(string, COLOR_C_FORMAT);
+				cp++;
+			
+				while(msg[cp] && msg[cp]!=specialchar &&
+					!ispunct(msg[cp]) && !iscntrl(msg[cp]))
+				{
+					g_string_append_c(string, COLOR_C_FORMAT);
+					cp++;
+				}
+				cp--;
+				break;
+				
+			/*
+			 * Figures:
+			 */ 
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case '0':
+				g_string_append_c(string, COLOR_NUMBER);
+				break;
+
+			/*
+			 * Punctuation characters:
+			 */
+			case '.':
+			case ';':
+			case ',':
+			case '!':
+			case '?':
+			case '-':
+				g_string_append_c(string, COLOR_PUNCTUATION);
+				break;
+			
+			/*
+			 * Quotation characters and "special" characters:
+			 */
+			case '"':
+			case '\'':
+			case '`':
+			case '(':
+			case ')':
+			case '[':
+			case ']':
+			case '{':
+			case '}':
+			case '<':
+			case '>':
+			case '&':
+			case '@':
+			case '$':
+			case '#':
+			case '/':
+			case '\\':
+			case '|':
+				g_string_append_c(string, COLOR_SPECIAL);
+				break;
+
+			/*
+			 * URL/URI prefixes:
+			 */
+			case ':':
+				z=0;
+				aInserted=FALSE;
+				while(prefixes[z]!=NULL)
+				{
+					if(back_match(msg, prefixes[z], cp))
+					{
+						gint i = strlen(prefixes[z]);
+						aInserted = TRUE;
+						g_string_truncate(string, string -> len - i);
+						while(i>0)
+						{
+							g_string_append_c(string, COLOR_ADDRESS);
+							i --;
+						}
+					}
+					z++;
+				}
+				
+				if(aInserted==FALSE)
+				{
+					g_string_append_c(string, COLOR_PUNCTUATION);
+				}
+				
+				break;
+			
+			/*
+			 * Everything else:
+			 */ 
+			default:
+				aInserted=FALSE;
+			
+				z=0;
+				
+				/*
+				 * Cruise through the keywords list and check for any
+				 *  match.
+				 */
+				while(keywords[z]!=NULL)
+				{
+					if(back_match(msg, keywords[z], cp))
+					{
+						gint i = strlen(prefixes[z]);
+						aInserted = TRUE;
+						g_string_truncate(string, string -> len - i);
+						while(i>0)
+						{
+							g_string_append_c(string, COLOR_KEYWORD);
+							i --;
+						}
+						break;
+					}
+					
+					z++;
+				}
+				
+				/*
+				 * Insert the single normal characters if there couldn't be
+				 *  any keyword found.
+				 */
+				if(aInserted==FALSE)
+				{
+					/*
+					 * Do we have got a "special character"?
+					 */
+					if(msg[cp]==specialchar)
+					{
+						g_string_append_c(string, COLOR_SPECIAL_CHAR);
+					}
+					else{
+						g_string_append_c(string, COLOR_FG);
+					}
+				}
+
+				break;
+		}
+
+	}
+
+	/*******************************/
+	/*               
+	*  for multibyte character, free the memory
+	*/
+	g_free(wc);
+	    
+	/*******************************/	
+
+	return string;
+}
+
+void gtranslator_insert_text(GtkText *editable, const gchar *text)
+{
+	static gint length, pos=0;
+
+	length = gtk_text_get_length(editable);
+	/* First, delete old contents */
+	gtk_signal_emit_by_name(
+		GTK_OBJECT(editable),
+		"delete-text",
+		0,
+		length);
+	/* Second add new context */
+	length = strlen(text);
+	gtk_signal_emit_by_name(
+		GTK_OBJECT(editable),
+		"insert-text",
+		text,
+		length,
+		&pos);
 }

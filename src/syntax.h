@@ -20,16 +20,49 @@
 #ifndef GTR_SYNTAX_H
 #define GTR_SYNTAX_H 1
 
-#include "stylistics.h"
+#include <gtk/gtktext.h>
 
 /*
- * Insert the given text in the highlighted form into the textwidget.
+ * This function creates syntax textdata and ties it to widget.
+ * Text widget should have 0 characters inside.
  */
-void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg);
+ 
+void gtranslator_syntax_init(GtkEditable *textwidget);
 
 /*
- * Update the text in the given textwidget.
+ * This function will insert text highlighted into widget.
+ * 1. Add characters to the widget
+ * 2. Add to characterdata the new entries
+ * 3. Let parser create new characterdata
+ * 4. Compare new characterdata with old one and update changed chars
  */
-void gtranslator_syntax_update_text(GtkWidget *textwidget);
+void gtranslator_insert_highlighted(
+		GtkEditable *textwidget,
+		gchar	*text,
+		gint	*pos,
+		gint	addlen);
+
+/*
+ * This function will delete text and rehighlight.
+ * 1. Delete characters from the widget
+ * 2. Remove characterdata of deleted chars
+ * 3. Let parser create new characterdata
+ * 4. Compare new characterdata with old one and update changed chars
+ */
+void gtranslator_delete_highlighted(
+		GtkEditable *textwidget,
+		gint	pos,
+		gint	len);
+		
+/*
+ * Will check syntax.
+ * returns new highlight information
+ */
+GString *gtranslator_parse_syntax(GtkEditable *textwidget);
+
+/*
+ *
+ */
+void gtranslator_insert_text(GtkText *editable, const gchar *text);
 
 #endif

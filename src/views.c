@@ -356,12 +356,11 @@ void setup_text(GtkWidget *widget, const gchar *string, const gchar *errstring)
 	
 	if(string && (strlen(string) >= 1))
 	{
-		gtranslator_syntax_insert_text(widget, string);
+		gtranslator_insert_text(GTK_TEXT(widget), string);
 	}
 	else
 	{
-		gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL,
-			errstring, -1);
+		gtranslator_insert_text(GTK_TEXT(widget), errstring);
 	}
 }
 

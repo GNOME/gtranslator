@@ -1,5 +1,16 @@
 2001-12-20  Gediminas Paulauskas <menesis@delfi.lt>
 
+	Integrate parts of patch from Peeter Vois <Peeter.Vois@mail.ee>
+
+	* syntax.c, syntax.h, gui.c, gui.h: rewrite syntax highlighting to be
+	much faster and more correct.
+	* dialogs.c, dnd.c, undo.c, utf8.c, views.c: update for syntax changes.
+	* main.c: new option --nosyntax.
+	* sidebar.c: dont ref/unref a NULL icon.
+	* dialogs.c: don't set wmclass on already realized open dialog.
+
+2001-12-20  Gediminas Paulauskas <menesis@delfi.lt>
+
 	* prefs.c: deal with "show messages table" option the same way as
 	others.
 
