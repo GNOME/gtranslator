@@ -183,6 +183,17 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 					"<font color=\"red\">");
 				EndHtml(pif);
 				break;
+			/*
+			 * Newlines.
+			 */
+			 case '\n':
+
+				string=g_string_append(string,
+					"<br>");	
+				
+				EndHtml(pif);
+				break;
+				
 				
 			default:
 				string=g_string_append_c(string,

@@ -23,7 +23,6 @@
 #endif
 
 #include <string.h>
-#include <sys/param.h>
 
 #include "dialogs.h"
 #include "parse.h"
@@ -41,8 +40,6 @@ static void append_line(gchar ** old, const gchar * tail);
 static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
 static gchar *restore_msg(const gchar * given);
-static void free_po(void);
-static void free_a_message(gpointer data, gpointer useless);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
 static void get_translated_count(void);
 
@@ -154,7 +151,7 @@ static void append_line(gchar ** old, const gchar * tail)
 	*old = result;
 }
 
-static gboolean actual_parse(void)
+gboolean actual_parse(void)
 {
 	FILE *fs;
 	gchar line[256];
@@ -307,29 +304,11 @@ static gboolean actual_parse(void)
  */
 void parse(const gchar *filename)
 {
-	if (!filename) {
-		g_warning(_("There's no file to open!"));
-		return;
-	} else {
-		gchar *base = g_basename(filename);
-
-		if (base[0] == '\0') {
-			g_warning(_("There's no file to open!"));
-			return;
-		}
-	}
-
-	po = g_new0(GtrPo, 1);
 	/*
-	 * Get absolute filename.
+	 * Use the new core function.
 	 */
-	if (!g_path_is_absolute(filename)) {
-		char absol[MAXPATHLEN + 1];
-		realpath(filename, absol);
-		po->filename = g_strdup(absol);
-	} else
-		po->filename = g_strdup(filename);
-
+	parse_core(filename);
+	
 	/*
 	 * Test if such a file does exist.
 	 */
@@ -348,19 +327,6 @@ void parse(const gchar *filename)
 	}
 
 	/*
-	 * Check the right file access permissions.
-	 */
-	if(gtranslator_check_file_perms(po)==FALSE)
-	{
-		return;
-	}
-	
-	if (!actual_parse()) {
-		free_po();
-		return;
-	}
-
-	/*
 	 * Disable the special navigation buttons now.
 	 */
 	disable_actions(ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED);
@@ -371,22 +337,6 @@ void parse(const gchar *filename)
 	{
 		disable_actions(ACT_SAVE);
 	}
-
-	/*
-	 * If the first message is header (it always should be)
-	 */
-	po->header = get_header(GTR_MSG(po->messages->data));
-	if (po->header) {
-		GList *header_li;
-		/*
-		 * Unlink it from messages list
-		 */
-		header_li = po->messages;
-		po->messages = g_list_remove_link(po->messages, header_li);
-		free_a_message(header_li->data, NULL);
-		g_list_free_1(header_li);
-	} else
-		g_warning(_("The file has no header!"));
 
 	g_snprintf(status, sizeof(status),
 		   _("Successfully parsed the file \"%s\""), po->filename);
@@ -428,13 +378,6 @@ void parse(const gchar *filename)
 	 */ 
 	gtranslator_sidebar_activate_views();
 	
-	file_opened = TRUE;
-	po->file_changed = FALSE;
-	po->length = g_list_length(po->messages);
-	/*
-	 * Set the current message to the first message, and show it 
-	 */
-	po->current = g_list_first(po->messages);
 	display_msg(po->current);
 	get_translated_count();
 	enable_actions_just_opened();
@@ -716,7 +659,7 @@ void save_current_file(GtkWidget * widget, gpointer useless)
 	disable_actions(ACT_SAVE);
 }
 
-static void free_a_message(gpointer data, gpointer useless)
+void free_a_message(gpointer data, gpointer useless)
 {
 	g_free(GTR_MSG(data)->comment);
 	g_free(GTR_MSG(data)->msgid);
@@ -727,7 +670,7 @@ static void free_a_message(gpointer data, gpointer useless)
 /*
  * Frees the po variable
  */
-static void free_po(void)
+void free_po(void)
 {
 	if(!po)
 		return;

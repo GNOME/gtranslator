@@ -102,9 +102,22 @@ void mark_msg_fuzzy(GtrMsg  * msg, gboolean fuzzy);
 void mark_msg_sticky(GtrMsg  * msg, gboolean on);
 
 /*
- * The internally used parse-function
+ * Core backend functions for parsing a po file.
+ */ 
+gboolean actual_parse(void);
+void free_po(void);
+void free_a_message(gpointer data, gpointer useless);
+void parse_core(const gchar *po);
+
+/*
+ * The main granslator parse function which does use the backend
+ *  calls from above and also sets up the GUI.
  */
 void parse(const gchar *po);
+
+/*
+ * The core function for the parse() function above.
+ */
 
 /*
  * Callbacks for the widgets

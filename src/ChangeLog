@@ -1,5 +1,14 @@
 2001-03-01  Fatih Demir	<kabalak@gtranslator.org>
 
+	* query.c: Fiddling around in language names & co.
+
+	* parse.c, parse.h & parse_core.c: Outsourced the real parse routine
+		into parse_core.c and named it parse_core -- this makes the
+		 nautilus-gtranslator-view work again.
+
+	* htmlizer.c: Also recognize newlines and convert them to <br>
+		tags.
+
 	* query.c/.h: Extended the function to take also a language
 		parameter.
 
