@@ -1,5 +1,9 @@
 2004-01-13  Dan Damian  <dand@gnome.ro>
 
+	* message.c (gtranslator_message_status_set_fuzzy): Don't free
+	comment. Fixes several crashes and file corruption bugs (#130114,
+	#131230).
+
 	* parse.c (gtranslator_parse_core): Check error value. Fixes a
 	crash on invalid byte sequences.
 
@@ -22,7 +26,7 @@
 
 2004-01-11  Dan Damian  <dand@gnome.ro>
   
- 	* gui.c (gtranslator_create_main_window): Completely hide the
+	* gui.c (gtranslator_create_main_window): Completely hide the
  	panel when messages table is hidden from preferences (also fixes
  	a failed assert).
  

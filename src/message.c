@@ -660,12 +660,10 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		}
 
 		gtranslator_comment_update(&msg->comment, comchar);
+
+		/* No need to free comment. Fixes several crashes and file corruption bugs */
+		/* GTR_FREE(comment); */
 		
-		/*
-		 * FIXME: Crashes currently...
-		 * FIXED?
-		 */
-		GTR_FREE(comment);
 		GTR_FREE(comchar);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
