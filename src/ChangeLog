@@ -1,8 +1,12 @@
-2004-07-26  Vital Khilko <v.khilko@sam-solutions.net>
+2004-07-26  Ross Golder  <ross@golder.org>
+
+	* ChangeLog: Converted to UTF-8
+
+2004-07-26  Віталь Хілько <v.khilko@sam-solutions.net>
 
 	* gui.c/message.c/parse.c: Re-instated gtkspell support.
 
-2004-07-26  Vital Khilko <v.khilko@sam-solutions.net>
+2004-07-26  Віталь Хілько <v.khilko@sam-solutions.net>
 
 	* languages.c: Updated Belorussian details
 
@@ -447,7 +451,7 @@
 	           'Don't save' button.
 
 	* prefs.c: Completely revised tab layout and packing (much nicer).
-	           Thanks to Søren Wedel Nielsen <swn@herlevkollegiet.dk>.
+	           Thanks to SÃÅŸren Wedel Nielsen <swn@herlevkollegiet.dk>.
 	
 	* prefs.c: Converted from GnomePropertyBox to a GnomeDialog
 	           with a GtkNotebook (GTK2-compliant).
@@ -623,7 +627,7 @@
 	* header_stuff.c/.h: Also parse the "Report-Msgid-Bugs-To" item
 		in the po file headers into the GtrHeader structure.
 
-	* languages.c: Added Icelandic entry as suggested by Sam�el J�n
+	* languages.c: Added Icelandic entry as suggested by SamÃºel JÃ³n
 		Gunnarsson <sammi@techattack.nu>.
 
 2003-06-10  Fatih Demir <kabalak@gtranslator.org>
@@ -1133,7 +1137,7 @@
 2002-02-17  Fatih Demir <kabalak@gtranslator.org>
 
 	* runtime-config.c: Use the new function for the conversion call on
-		the unicode'ified mid dot ('�').
+		the unicode'ified mid dot ('Â·').
 
 	* utils.c/.h: Added a new "gtranslator_utils_get_environment_charset"
 		function which returns the current environment locale's sane
@@ -4142,7 +4146,7 @@
 
 2001-04-02  Fatih Demir <kabalak@gtranslator.org>
 
-	* gui.c: Reverted my change from yesterday dealing with '�' insertions,
+	* gui.c: Reverted my change from yesterday dealing with 'Â·' insertions,
 		they're now again inverted.
 
 2001-04-01  Fatih Demir <kabalak@gtranslator.org>
@@ -4153,7 +4157,7 @@
 	* gui.c: Count the syntax updates we do perform -- avoid updating
 		the syntax 3x or twice just because of a change and the
 		 syntax functions -- should be less flickering now; also
-		  don't invert the '�' character (or it's translated
+		  don't invert the 'Â·' character (or it's translated
 		   equivalent) while inserting.
 
 2001-03-31  Fatih Demir <kabalak@gtranslator.org>
@@ -4390,7 +4394,7 @@
 
 	* replace.c: More output -- still not written yet.
 
-	* syntax.c: Also highlight the special character '�' (not
+	* syntax.c: Also highlight the special character 'Â·' (not
 		possible with the gettexted translations as it seems for
 		 now to me).
 
@@ -5914,7 +5918,7 @@
 
 	* parse.c: Added an undotchar function which undotchars
 		the texts _with_ regarding special cases like
-		 quoting or special use with the ",',� etc. chars.
+		 quoting or special use with the ",',Åœ etc. chars.
 
 	* parse.h: Added the prototype for the new parse_the_file
 		function which is used from the "Recent files" menu.
@@ -8517,7 +8521,7 @@
 
 		-> main.c
 	
-	* A new �gchar*� for the geometry
+	* A new Åœgchar*Åœ for the geometry
 	
 		-> interface.h
 
@@ -8762,7 +8766,7 @@
 		routines in gtranslator .
 	
 	* Try to get the header into the 2-dimen=
-		sional �header�-array ( are there any
+		sional ÅœheaderÅœ-array ( are there any
 		headers which have got >=15 lines ? )
 	
 		-> header_stuff.c header_stuff.h
