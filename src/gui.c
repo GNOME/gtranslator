@@ -726,6 +726,7 @@ void update_msg(void)
 				len--;
 			}
 		}
+		g_free(msg->msgstr);
 		msg->msgstr = gtk_editable_get_chars(GTK_EDITABLE(trans_box),
 						     0, len);
 

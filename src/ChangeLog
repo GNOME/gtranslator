@@ -1,3 +1,13 @@
+2001-01-04  Gediminas Paulauskas <menesis@delfi.lt>
+
+	Ran gtranslator in memprof. Several memleaks found.
+
+	* gui.c: free msgstr before getting new text in update_msg 
+	* parse.c: s/  \*/ */
+	(append_line) simplify making result string.
+	(gtranslator_display_recent) "name" was not neccesarry. do not strdup
+	static strings. Free menu->hint.	
+
 2001-01-04  Fatih Demir	<kabalak@gmx.net>
 
 	* open-differently.c: Applied the change of the temporary file name

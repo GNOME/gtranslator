@@ -35,15 +35,15 @@
 /*
  * These are to be used only inside this file
  */
-static void append_line(gchar * * old, const gchar  * tail);
-static gchar *restore_msg(gchar  * given);
+static void append_line(gchar ** old, const gchar * tail);
+static gchar *restore_msg(gchar * given);
 static void write_the_message(gpointer data, gpointer fs);
-static gboolean actual_write(const gchar  * name);
+static gboolean actual_write(const gchar * name);
 static void free_po(void);
 static void free_a_message(gpointer data, gpointer useless);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
 
-void mark_msg_fuzzy(GtrMsg  * msg, gboolean fuzzy)
+void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
 	regex_t *rex;
 	regmatch_t pos[3];
@@ -83,7 +83,7 @@ void mark_msg_fuzzy(GtrMsg  * msg, gboolean fuzzy)
 /* 
  * FIXME: check if message counts remain correct
  */
-void mark_msg_sticky (GtrMsg  * msg, gboolean on)
+void mark_msg_sticky (GtrMsg * msg, gboolean on)
 {
 	if (on) {
 		msg->msgstr = msg->msgid;
@@ -99,7 +99,7 @@ void mark_msg_sticky (GtrMsg  * msg, gboolean on)
 	}
 }
 
-static void check_msg_status(GtrMsg  * msg)
+static void check_msg_status(GtrMsg * msg)
 {
 	if (msg->msgstr)
 		msg->status = GTR_MSG_STATUS_TRANSLATED;
@@ -114,7 +114,7 @@ static void check_msg_status(GtrMsg  * msg)
  * 
  * TODO: make this use GString
  */
-static void append_line(gchar * * old, const gchar  * tail)
+static void append_line(gchar * * old, const gchar * tail)
 {
 	gchar *to_add = g_new(gchar, strlen(tail));
 	gchar *result;
@@ -141,11 +141,13 @@ static void append_line(gchar * * old, const gchar  * tail)
 	}
 	to_add[d] = 0;
 	if (*old == NULL)
-		result = g_strdup(to_add);
+		result = to_add;
 	else
+	{
 		result = g_strconcat(*old, to_add, NULL);
-	g_free(to_add);
-	g_free(*old);
+		g_free(*old);
+		g_free(to_add);
+	}
 	*old = result;
 }
 
@@ -416,7 +418,7 @@ void parse(const gchar *filename)
 	gtranslator_display_recent();
 }
 
-void parse_the_file(GtkWidget  * widget, gpointer of_dlg)
+void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 {
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
@@ -451,7 +453,7 @@ void parse_the_file_from_the_recent_files_list(GtkWidget *widget, gpointer filep
 /*
  * Restores the formatting of a message, done in append_line
  */
-static gchar *restore_msg(gchar  * given)
+static gchar *restore_msg(gchar * given)
 {
 	GString *rest;
 	gchar *result;
@@ -530,7 +532,7 @@ static void write_the_message(gpointer data, gpointer fs)
 			id, str);
 }
 
-static gboolean actual_write(const gchar  * name)
+static gboolean actual_write(const gchar * name)
 {
 	GtrMsg *header;
 	FILE *fs;
@@ -608,7 +610,7 @@ static gboolean actual_write(const gchar  * name)
 /*
  * A callback for OK in Save as... dialog 
  */
-void save_the_file(GtkWidget  * widget, gpointer sfa_dlg)
+void save_the_file(GtkWidget * widget, gpointer sfa_dlg)
 {
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg));
@@ -622,7 +624,7 @@ void save_the_file(GtkWidget  * widget, gpointer sfa_dlg)
 /*
  * A callback for Save
  */
-void save_current_file(GtkWidget  * widget, gpointer useless)
+void save_current_file(GtkWidget * widget, gpointer useless)
 {
 	if (!po->file_changed) {
 		if (wants.dont_save_unchanged_files)
@@ -674,7 +676,7 @@ static void free_po(void)
 	po = NULL;
 }
 
-void close_file(GtkWidget  * widget, gpointer useless)
+void close_file(GtkWidget * widget, gpointer useless)
 {
 	if (!file_opened)
 		return;
@@ -695,7 +697,7 @@ void close_file(GtkWidget  * widget, gpointer useless)
 	disable_actions_no_file();
 }
 
-void revert_file(GtkWidget  * widget, gpointer useless)
+void revert_file(GtkWidget * widget, gpointer useless)
 {
 	gchar *save_this;
 	if (po->file_changed) {
@@ -731,7 +733,7 @@ void revert_file(GtkWidget  * widget, gpointer useless)
 /*
  * The compile function
  */
-void compile(GtkWidget  * widget, gpointer useless)
+void compile(GtkWidget * widget, gpointer useless)
 {
 	gchar *cmd;
 	gint res = 1;
@@ -785,8 +787,7 @@ void gtranslator_display_recent(void)
 	/*
 	 * Couldn't we do that better with bonobo?
 	 */
-	gchar *name;
-	gchar *menupath = g_strdup (_("_File/Recen_t files/"));
+	gchar *menupath = _("_File/Recen_t files/");
 	gint len;
 	GnomeUIInfo *menu;
 	GnomeHistoryEntry recent;
@@ -823,6 +824,9 @@ void gtranslator_display_recent(void)
 		 * Insert this menu into the menupath.
 		 */
 		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
+		/* Free the list if it existed */
+		if(list)
+			gnome_history_free_recently_used_list(list);
 		/*
 		 * Return from the loop.
 		 */
@@ -860,18 +864,12 @@ void gtranslator_display_recent(void)
 		 * Get the GnomeHistory Entry.
 		 */
 		recent=g_list_nth_data(list, len);
-		
-		/*
-		 * Copy the filename.
-		 */
-		name=g_strdup(recent->filename);
-		
 		/*
 		 * If the filename should be checked for existence.
 		 */
 		if(wants.check_recent_file)
 		{
-			if(!g_file_exists(name))
+			if(!g_file_exists(recent->filename))
 			{
 				continue;
 			}
@@ -889,7 +887,7 @@ void gtranslator_display_recent(void)
 		menu->type=GNOME_APP_UI_ITEM;
 		menu->hint=g_strdup_printf(_("Open %s"), recent->filename);
 		menu->moreinfo=(gpointer)parse_the_file_from_the_recent_files_list;
-		menu->user_data=name;
+		menu->user_data=recent->filename;
 		menu->unused_data=NULL;
 		menu->pixmap_type=0;
 		menu->pixmap_info=NULL;
@@ -906,6 +904,7 @@ void gtranslator_display_recent(void)
 		gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
 		
 		g_free(menu->label);
+		g_free(menu->hint);
 	}
 	/*
 	 * Free the string and the GnomeUIInfo structure.
@@ -954,7 +953,7 @@ void gtranslator_set_progress_bar(void)
 	/*
 	 * Get the total percentage.
 	 */
-	percentage = 1.0  * po->translated / po->length;
+	percentage = 1.0 * po->translated / po->length;
 	/*
 	 * Set the progressbar status.
 	 */
