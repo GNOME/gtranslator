@@ -1,5 +1,10 @@
 2002-02-27  Fatih Demir <kabalak@gtranslator.org>
 
+	* main.c: A small condition change for the modules routine (just some
+		kind of "stylistics" action) and also bind the signal handler
+		 to the "SIGKILL" signal created by calling "kill -9" or other
+		  nice commands.
+
 	* messages-table.c: Fix the problem with the Untranslated -> Translated
 		status move for the translation insertion; also free up the 
 		 inserted "found_translation" string (the "retrieval->message"

@@ -132,6 +132,7 @@ int main(int argc, char *argv[])
 	 * Set up the signal handler.
 	 */
 	signal(SIGSEGV, gtranslator_signal_handler);
+	signal(SIGKILL, gtranslator_signal_handler);
 	signal(SIGILL, gtranslator_signal_handler);
 	signal(SIGABRT, gtranslator_signal_handler);
 	signal(SIGINT, gtranslator_signal_handler);
@@ -214,7 +215,7 @@ int main(int argc, char *argv[])
 		/*
 		 * Test first if the local libgmodule supports modules at all.
 		 */
-		if(g_module_supported()==FALSE)
+		if(!g_module_supported())
 		{
 			g_warning(_("GModule implementation doesn't support loading dynamic modules!"));
 			backends=NULL;
@@ -483,6 +484,7 @@ int main(int argc, char *argv[])
 		 */
 		
 		gtranslator_learn_shutdown();
+
 		/*
 		 * Set up the "runtime/filename" config. key to a sane value.
 		 */
