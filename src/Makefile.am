@@ -16,7 +16,8 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
 	-DWINDOW_ICON=\""${datadir}/pixmaps/gtranslator.png"\" \
-	-DSCHEMESDIR=\""$(datadir)/gtranslator/colorschemes"\"
+	-DSCHEMESDIR=\""$(datadir)/gtranslator/colorschemes"\" \
+	-DBACKENDSDIR=\""$(libdir)/gtranslator/backends"\"
 
 bin_PROGRAMS = gtranslator
 
