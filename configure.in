@@ -75,11 +75,11 @@ MY_LIBS=$LIBS
 CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
 LIBS="$LIBS `gnome-config --libs gnomeui`"
 AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, 
-	AC_MSG_RESULT(["·:0 Will use window-icon feature..."])
+	AC_MSG_RESULT(["+++ Will use window-icon feature..."])
 	AC_DEFINE(USE_WINDOW_ICON)
 	,[
 	w
-	AC_MSG_RESULT(["·:0 Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
+	AC_MSG_RESULT(["+++ Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
 CFLAGS=$MY_CFLAGS
 LIBS=$MY_LIBS
 
@@ -103,13 +103,13 @@ dnl -------------------------------------------------------------------
 gconf_is_present=yes
 AM_PATH_GCONF(0.9.0,,gconf_is_present=no,gconf-gtk)
 if test "q$gconf_is_present" = "qno" ; then
-	AC_MSG_RESULT(["·:0 Will NOT use GConf..."])
+	AC_MSG_RESULT(["+++ Will NOT use GConf..."])
 else
 	if test "ENV$NO_GCONF" = "ENVyes" ; then
 	gconf_is_present=no
-	AC_MSG_RESULT(["·:0 Will not use the found GConf as \$NO_GCONF is set to _yes_ ..."])
+	AC_MSG_RESULT(["+++ Will not use the found GConf as \$NO_GCONF is set to _yes_ ..."])
 	else
-	AC_MSG_RESULT(["·:0 Will use GConf..."])
+	AC_MSG_RESULT(["+++ Will use GConf..."])
 	fi
 fi
 GNOME_CFLAGS=`gnome-config --cflags gnome`
@@ -158,11 +158,11 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 	VFS_VERSION=`gnome-config --modversion vfs|sed -e 's/.*-//g' -e 's/\.//g'`
 	if test "$VFS_VERSION" -ge 0410 ; then
 		AC_MSG_RESULT([" "
-"·:0 Right your GnomeVFS is recent enough for us... "])	
+"+++ Right your GnomeVFS is recent enough for us... "])	
 	else
 		vfs_stuff=no
 		AC_MSG_RESULT([" "
-"·:0 Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4"])
+"+++ Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4"])
 	fi
 	dnl -----------------------------------------------------------
 	dnl Get the CFLAGS and the LIBS
@@ -173,7 +173,7 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 	dnl Define the USE_VFS_STUFF directive...
 	dnl -----------------------------------------------------------
 	if test "x$vfs_stuff" = "xyes" ; then
-	AC_MSG_RESULT(["·:0 Defining VFS flags... "])
+	AC_MSG_RESULT(["+++ Defining VFS flags... "])
 		AC_SUBST(VFS_CFLAGS)
 		AC_SUBST(VFS_LIBS)
 	fi	
@@ -182,7 +182,7 @@ else
 	dnl Oh, no GnomeVFS ;-(
 	dnl -----------------------------------------------------------
 	AC_MSG_RESULT([" "
-"·:0 GnomeVFS was not found... Not building, linking with VFS stuff."])	
+"+++ GnomeVFS was not found... Not building, linking with VFS stuff."])	
 fi
 AM_CONDITIONAL(USE_VFS_STUFF, test x$vfs_stuff = xyes)
 
@@ -203,7 +203,7 @@ if gnome-config --modversion gal 2>&1 >/dev/null ; then
 		dnl We've found gal >= 0.4.99, good for us...
 		dnl ---------------------------------------------------
 		AC_MSG_RESULT([found])
-		AC_MSG_RESULT(["·:0 Using gal-enhanced GUI..."])
+		AC_MSG_RESULT(["+++ Using gal-enhanced GUI..."])
 		GAL_CFLAGS=`gnome-config --cflags gal`
 		GAL_LIBS=`gnome-config --libs gal`
 		gal_gui=yes
@@ -213,7 +213,7 @@ if gnome-config --modversion gal 2>&1 >/dev/null ; then
 		dnl  old for us.
 		dnl ---------------------------------------------------
 		AC_MSG_RESULT([found a too old version])
-		AC_MSG_RESULT(["·:0 Using standard GUI..."])
+		AC_MSG_RESULT(["+++ Using standard GUI..."])
 	fi
 else
 	dnl -----------------------------------------------------------
@@ -221,7 +221,7 @@ else
 	dnl  standard GUI.
 	dnl -----------------------------------------------------------
 	AC_MSG_RESULT([no gal found])
-	AC_MSG_RESULT(["·:0 Using standard GUI..."])
+	AC_MSG_RESULT(["+++ Using standard GUI..."])
 fi
 AC_SUBST(GAL_CFLAGS)
 AC_SUBST(GAL_LIBS)
@@ -252,10 +252,10 @@ AC_MSG_CHECKING([if to bind the po-files with gtranslator ])
 if test "x$enable_mime_bind" = "xyes" ; then
 	AC_DEFINE(BIND_MIME)
 	AC_MSG_RESULT([" "
-"·:0 Will install the mime and keys files."])
+"+++ Will install the mime and keys files."])
 else
 	AC_MSG_RESULT([" "
-"·:0 Not installing the mime and keys files for the mime-types."])
+"+++ Not installing the mime and keys files for the mime-types."])
 fi
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 
@@ -268,12 +268,12 @@ AC_ARG_WITH(message-db-dir,
 AC_MSG_CHECKING([where to put the message-db.d directory ])
 if test "z$with_message_db_dir" = "zNONE" ; then
 	AC_MSG_RESULT([" "
-"·:0 Will put the message-db.d dir into gtranslators datadir."])
+"+++ Will put the message-db.d dir into gtranslators datadir."])
 	MESSAGE_DB_DIR=${datadir}/gtranslator
 	AC_SUBST(MESSAGE_DB_DIR)
 else
 	AC_MSG_RESULT([" "
-"·:0 Will put the message-db.d dir to ${with_message_db_dir}."])
+"+++ Will put the message-db.d dir to ${with_message_db_dir}."])
 	MESSAGE_DB_DIR=${with_message_db_dir}
 	AC_SUBST(MESSAGE_DB_DIR)
 fi
@@ -282,15 +282,15 @@ dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_WITH(debug-specs,
-     [  --with-debug-specs		   Build everything with debug informations],,with_debug_specs=no)
+     [  --with-debug-specs		   Build everything with debug informations],,with_debug_specs=yes)
 AC_MSG_CHECKING([for a debuggy build ])
 if test "rt$with_debug_specs" = "rtno" ; then
 	AC_MSG_RESULT([" "
-"·:0 No, building everything without any debugging informations and flags..."])
+"+++ No, building everything without any debugging informations and flags..."])
 	CFLAGS="`echo $CFLAGS|sed -e 's/-g.//g'`"
 else
 	AC_MSG_RESULT([" "
-"·:0 Yes, building everything WITH debugging informations and flags..."])
+"+++ Yes, building everything WITH debugging informations and flags..."])
 	CFLAGS="`echo $CFLAGS|sed -e 's/-O.//g'` -ggdb"
 fi
 
@@ -302,12 +302,12 @@ AC_ARG_WITH(extreme-gcc-flags,
 AC_MSG_CHECKING([for extremists-ala-gcc-Werror ])
 if test "gcc$extreme_gcc_flags" = "gccyes" ; then
 	AC_MSG_RESULT([" "
-"·:0 Yes, you are getting your -Werror -Wformat etc. ..."])
+"+++ Yes, you are getting your -Werror -Wformat etc. ..."])
 	CFLAGS="$CFLAGS -Werror -Wtrigraphs -Wformat -Wchar-subscripts"
 	CFLAGS="$CFLAGS	-Wimplicit -Wreturn-type -Wswitch -Wcomment"
 else
 	AC_MSG_RESULT([" "
-"·:0 Huh, no gcc extremist =?"])
+"+++ Huh, no gcc extremist =?"])
 fi
 
 dnl -------------------------------------------------------------------
@@ -325,7 +325,7 @@ if test "foo${PKG_CONF_CONFFILE_DIR}" = "foo" ; then
 			if test -d "$dirX" ; then
 				PKG_CONF_CONFFILE_DIR="$dirX"
 				AC_MSG_RESULT([" "
-"·:0 Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
+"+++ Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
 			fi
 		done
 	dnl ----------------------------------------------------------
@@ -334,12 +334,12 @@ if test "foo${PKG_CONF_CONFFILE_DIR}" = "foo" ; then
 	dnl ----------------------------------------------------------
 	if test "foo${PKG_CONF_CONFFILE_DIR}" = "foo" ; then
 		AC_MSG_RESULT([" "
-"·:0 No existing pkgconfig directory found, using /usr/lib/pkgconfig ..."])
+"+++ No existing pkgconfig directory found, using /usr/lib/pkgconfig ..."])
 		PKG_CONF_CONFFILE_DIR="/usr/lib/pkgconfig"
 	fi
 else
 	AC_MSG_RESULT([" "
-"·:0 Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
+"+++ Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
 fi
 AC_SUBST(PKG_CONF_CONFFILE_DIR)
 
