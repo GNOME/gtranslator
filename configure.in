@@ -10,7 +10,7 @@ AM_CONFIG_HEADER(config.h)
 dnl -------------------------------------------------------------------
 dnl Init automake and the maintainer mode macros.
 dnl -------------------------------------------------------------------
-AM_INIT_AUTOMAKE(gtranslator, 0.40Amsterdam)
+AM_INIT_AUTOMAKE(gtranslator, 0.35)
 AM_MAINTAINER_MODE
 
 dnl -------------------------------------------------------------------
@@ -133,9 +133,14 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 		AC_MSG_RESULT([" "
 "+++ Right your GnomeVFS is recent enough for us... "])	
 	else
-		vfs_stuff=no
-		AC_MSG_RESULT([" "
+		if test "$VFS_VERSION" -ge 5 ; then
+			AC_MSG_RESULT([" "
+"+++ Right GnomeVFS > 0.5 detected..."])			
+		else
+			vfs_stuff=no
+			AC_MSG_RESULT([" "
 "+++ Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4"])
+		fi	
 	fi
 	dnl -----------------------------------------------------------
 	dnl Define the USE_VFS_STUFF directive...
