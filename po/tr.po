@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.31\n"
-"POT-Creation-Date: 2000-10-25 14:00+0200\n"
-"PO-Revision-Date: 2000-10-25 14:01+0200\n"
+"POT-Creation-Date: 2000-10-28 20:03+0200\n"
+"PO-Revision-Date: 2000-10-28 20:04+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -921,7 +921,7 @@ msgstr "Imla kontrolü"
 msgid "Spell checking complete!"
 msgstr "Imla kontrolü tamamlandý !"
 
-#: libgtranslator/gtranslator-preferences-dialog.c:47
+#: libgtranslator/gtranslator-preferences-dialog.c:59
 #, c-format
 msgid ""
 "No title set for a new GtranslatorPreferencesDialog widget!\n"
@@ -930,45 +930,37 @@ msgstr ""
 "Yeni GtranslatorPreferencesDialog pandýrýnýn üstyazýsý yok!\n"
 "\t\tÖnayarlý üstyazý olarak `%s''yi kullanýyorum..."
 
+#: libgtranslator/gtranslator-preferences-dialog.c:84
+msgid "Default"
+msgstr "Önayarlý"
+
 #: libgtranslator/handle-db.c:29
-msgid "No node name given!"
-msgstr "Birim ismi belirtimedi ki!"
+msgid "No translation database given to store."
+msgstr "Tercüme/ileti tabaný belirtilmemiþ."
 
-#: libgtranslator/handle-db.c:37
-#, c-format
-msgid "No content for the node `%s' given! Leaving node empty.."
-msgstr "Birim `%s' için bir içerik belirtilmemiþ! Birimi boþ býrakýyorum ..."
+#: libgtranslator/main.c:58
+msgid "The language to parse the db for"
+msgstr "Taranacak tercüme/ileti tabaný dili"
 
-#: libgtranslator/handle-db.c:45
-#, c-format
-msgid "No document present to add the node `%s'\n"
-msgstr "`%s' birimini ekleyecek doküman açýk deðil ki\n"
+#: libgtranslator/main.c:58
+msgid "language_code"
+msgstr "dil_kodu"
 
-#: libgtranslator/handle-db.c:63
-msgid "Couldn't get the nodes!"
-msgstr "Birimleri alamadým !"
-
-#: libgtranslator/handle-db.c:75
-#, c-format
-msgid "Couldn't generate node `%s'!"
-msgstr "`%s' birimini yaratamadým!"
-
-#: libgtranslator/main.c:64
+#: libgtranslator/main.c:106
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr "
-"...\n"
+"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
 
 #. *
 #. * Print some more exact informations on the GConf init-error.
 #. *
-#: libgtranslator/main.c:74
+#: libgtranslator/main.c:120
 #, c-format
 msgid "GConf initialization error: `%s'"
 msgstr "GConf baþlama hatasý: `%s'"
 
-#: libgtranslator/parse-db.c:33
+#: libgtranslator/parse-db.c:40
 msgid "No language defined in the query request!"
 msgstr "Istekte istenilen dil tabanýný belirtmedin !"
 
@@ -976,16 +968,19 @@ msgstr "Istekte istenilen dil tabanýný belirtmedin !"
 #. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
 #. * Just show a message that tells this.
 #. *
-#: libgtranslator/parse-db.c:44
+#: libgtranslator/parse-db.c:51
 msgid "FYI: Will also lookup the superclass message db.\n"
 msgstr "Bilgi : Üst sýnýf tercüme tabanýný da tarayacaðým.\n"
 
-#: libgtranslator/parse-db.c:48
+#. *
+#. * Print some information to the user.
+#. *
+#: libgtranslator/parse-db.c:62
 #, c-format
 msgid "Using %s as the message database... \n"
 msgstr "%s'yi tercüme tabaný olarak kullanýyorum... \n"
 
-#: libgtranslator/parse-db.c:60
+#: libgtranslator/parse-db.c:74
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr "Tercüme tabaný `%s.xml''i %s'de açamadým.\n"
@@ -993,12 +988,12 @@ msgstr "Tercüme tabaný `%s.xml''i %s'de açamadým.\n"
 #. *
 #. * Print some information.
 #. *
-#: libgtranslator/parse-db.c:73
+#: libgtranslator/parse-db.c:87
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr "Altsýnýf dosya `%s.xml''i bulamadým.\n"
 
-#: libgtranslator/parse-db.c:74
+#: libgtranslator/parse-db.c:88
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Üst sýnýf dosya `%s.xml''i deniyorum ...\n"
@@ -1006,21 +1001,28 @@ msgstr "Üst sýnýf dosya `%s.xml''i deniyorum ...\n"
 #. *
 #. * Print the informations about the message database.
 #. *
-#: libgtranslator/parse-db.c:96
+#: libgtranslator/parse-db.c:113
 #, c-format
 msgid "Database creator/administrator: %s\n"
 msgstr "Tercüme tabaný yaratacýsý/yöneticisi: %s\n"
 
-#: libgtranslator/parse-db.c:97
+#. *
+#. * Again inform the user about some parts of it.
+#. *
+#: libgtranslator/parse-db.c:122
 #, c-format
 msgid "EMail: %s\n"
 msgstr "ePosta: %s\n"
 
-#: libgtranslator/parse-db.c:105
+#. *
+#. * Print these informations out! We wanna know
+#. *  the contact persons.
+#. *
+#: libgtranslator/parse-db.c:142
 msgid "Message database informations:\n"
 msgstr "Tercüme tabaný bilgileri:\n"
 
-#: libgtranslator/parse-db.c:106
+#: libgtranslator/parse-db.c:143
 #, c-format
 msgid ""
 "Date: %s\n"
@@ -1028,15 +1030,6 @@ msgid ""
 msgstr ""
 "Tarih: %s\n"
 "Seri no: %s\n"
-
-#: libgtranslator/parse-db.c:139
-msgid "The message db file is empty!"
-msgstr "Ileti/tercüme tabaný dosyasý boþ!"
-
-#: libgtranslator/parse-db.c:145
-msgid "The message db doesn't seem to be a message db xml file."
-msgstr ""
-"Ileti/tercüme tabaný dosyasý bir ileti/tercüme tabaný dosyasýna benzemiyor."
 
 #: libgtranslator/preferences.c:50
 #, c-format
@@ -1150,3 +1143,4 @@ msgstr "Takýmlar dosyasý `teams.xml` %s'de açýlamadý!"
 #: libgtranslator/team-handle.c:151
 msgid "Couldn't return the list of the apps."
 msgstr "Uygulamalarýn listesini geri veremedim."
+
