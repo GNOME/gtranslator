@@ -17,6 +17,7 @@
  *
  */
 
+#include "nautilus-string.h"
 #include "vfs-handle.h"
 
 #include <libgnome/gnome-defs.h>
@@ -27,7 +28,7 @@
 /*
  * Open up the given file via GnomeVFS routines.
  */
-gchar	*gtranslator_vfs_handle_gtranslator_open_file_dialog(gchar *filename)
+gchar	*gtranslator_vfs_handle_open(gchar *filename)
 {
 	GnomeVFSURI *file;
 	GnomeVFSURI *destination;

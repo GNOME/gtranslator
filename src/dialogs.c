@@ -22,12 +22,14 @@
 #include <config.h>
 #endif
 
+#include "about.h"
 #include "actions.h"
 #include "color-schemes.h"
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
 #include "message.h"
+#include "nautilus-string.h"
 #include "open-differently.h"
 #include "parse.h"
 #include "prefs.h"
@@ -616,15 +618,27 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			 * Check if it's one of our supported URI
 			 *  types or if it's a "hidden" http URI.
 			 */ 
-			if(!strncmp(uri->str, "http", 4)||
-				!strncmp(uri->str, "https", 5)||
-				!strncmp(uri->str, "ftp", 3)||
-				!strncmp(uri->str, "file", 4)||
-				!strncmp(uri->str, "www.", 4)||
-				!strncmp(uri->str, "ftp.", 4))
+			if(nautilus_str_has_prefix(uri->str, "http") ||
+				nautilus_str_has_prefix(uri->str, "https") ||
+				nautilus_str_has_prefix(uri->str, "ftp")   ||
+				nautilus_str_has_prefix(uri->str, "file")  ||
+				nautilus_str_has_prefix(uri->str, "www.")  ||
+				nautilus_str_has_prefix(uri->str, "ftp.")  ||
+				nautilus_str_has_prefix(uri->str, "about:"))
 			{
 				gnome_dialog_close(dialog);
-				gtranslator_open_po_file(uri->str);
+
+				/*
+				 * Catch the special "prefix" about: ,-)
+				 */
+				if(nautilus_str_has_prefix(uri->str, "about:"))
+				{
+					gtranslator_about_dialog(NULL, NULL);
+				}
+				else
+				{
+					gtranslator_open_po_file(uri->str);
+				}
 			}
 			else
 			{

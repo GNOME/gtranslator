@@ -30,6 +30,6 @@
  * Opens up the given file via GnomeVFS routines and returns the
  *  local filename of the transferred file.
  */
-gchar 	*gtranslator_vfs_handle_gtranslator_open_file_dialog(gchar *filestring);
+gchar 	*gtranslator_vfs_handle_open(gchar *filestring);
 
 #endif

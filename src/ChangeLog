@@ -1,3 +1,22 @@
+2001-05-06  Fatih Demir <kabalak@gtranslator.org>
+
+	* about.c/.h & \*.*: Small re-rename to gtranslator_about_dialog.
+
+	* dialogs.c: Also use the nautilus-string functions here; added 
+		about: URI support .-)
+
+	* open-differently.c, vfs-handle.c/.h: Arg, made the function again
+		be named logically "gtranslator_vfs_handle_open", was a rename
+		 error; also use nautilus_str_has_prefix in prefix getting
+		  functions.
+
+	* Makefile.am: Added the id.c/.h sources.
+
+	* id.c/.h: Added new GtrID sources, almost everything is already
+		implemented there.
+
+	* translation-memory.h: Removed the GtrID stuff from here.
+
 2001-05-05  Fatih Demir <kabalak@gtranslator.org>
 
 	* parse.c/utils.c: Use nautilus_istr_has_suffix instead of

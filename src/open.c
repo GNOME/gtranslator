@@ -53,15 +53,15 @@ gboolean gtranslator_open_po_file(gchar *file)
 	 * Use conditionally the VFS routines to access
 	 *  remote files.
 	 */
-	if(!strncmp(file, "http://", 7)||
-		!strncmp(file, "https://", 7)||	
-		!strncmp(file, "ftp://", 6)||
-		!strncmp(file, "www.", 4)||
-		!strncmp(file, "ftp.", 4)||
-		!strncmp(file, "file:/", 6))
+	if(nautilus_str_has_prefix(file, "http://")       ||
+		nautilus_str_has_prefix(file, "https://") ||	
+		nautilus_str_has_prefix(file, "ftp://")   ||
+		nautilus_str_has_prefix(file, "www.")     ||
+		nautilus_str_has_prefix(file, "ftp.")     ||
+		nautilus_str_has_prefix(file, "file:/"))
 	{
 	
-		file=gtranslator_vfs_handle_gtranslator_open_file_dialog(file);
+		file=gtranslator_vfs_handle_open(file);
 
 		/*
 		 * If we couldn't get a local representation filename

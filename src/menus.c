@@ -244,7 +244,7 @@ GnomeUIInfo the_settings_menu[] = {
 
 GnomeUIInfo the_help_menu[] = {
 	GNOMEUIINFO_HELP("gtranslator"),
-	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_create_about_box, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_about_dialog, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
 			       N_("gtranslator's homepage on the web"),
