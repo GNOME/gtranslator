@@ -1,15 +1,15 @@
 # gtranslator really works again :-)
-# Vasif İsmayılo�~_lu MD <azerb_linux@hotmail.com>, 2001
+# Vasif İsmayılo�_lu MD <azerb_linux@hotmail.com>, 2001
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.35\n"
-"POT-Creation-Date: 2001-06-25 10:20+0200\n"
-"PO-Revision-Date: 2000-06-19 20:28GMT +0200\n"
+"POT-Creation-Date: 2001-07-06 08:20+0200\n"
+"PO-Revision-Date: 2001-06-26 12:10GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
@@ -112,7 +112,7 @@ msgstr "Böyük/kiçik hərfə həssas"
 msgid "English"
 msgstr "İngiliscə"
 
-#: src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#: src/dialogs.c:496 src/dialogs.c:594 src/gui.c:488
 msgid "Translated"
 msgstr "Tercümədə"
 
@@ -277,42 +277,34 @@ msgstr ""
 "\"%s\"i\n"
 "tapa bilmədim"
 
-# data/desktop/gtranslator.desktop.in.h:2 src/gui.c:491
-#.
-#. * Create the app
-#.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:172 src/parse.c:761
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#: src/gui.c:385
+#: src/gui.c:475
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ geriyə %i Fuzzy qaldı ]"
 
-#: src/gui.c:385 src/gui.c:389 src/menus.c:348
+#: src/gui.c:475 src/gui.c:479 src/menus.c:348
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
-#: src/gui.c:389
+#: src/gui.c:479
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Fuzzy ismarıc qalmadı ]"
 
-#: src/gui.c:396
+#: src/gui.c:486
 msgid "Stick"
 msgstr "Qalıcı"
 
-#: src/gui.c:407
+#: src/gui.c:497
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [geriyə tərcümə edilməmiş %i ismarıc qaldı ]"
 
-#: src/gui.c:407 src/gui.c:409
+#: src/gui.c:497 src/gui.c:499
 msgid "Untranslated"
 msgstr "Tərcümə edilməmiş"
 
-#: src/gui.c:409
+#: src/gui.c:499
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Tərcümə edilməmiş ismarıc qalmadı ]"
@@ -320,7 +312,7 @@ msgstr "%s [ Tərcümə edilməmiş ismarıc qalmadı ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:421
+#: src/gui.c:511
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "İsmarıc: %d / %d / Hal: %s"
@@ -359,7 +351,7 @@ msgstr "Po faylının düzəliş tarixi:"
 
 #: src/header_stuff.c:486
 msgid "Generator:"
-msgstr ""
+msgstr "Yaradıcı:"
 
 #: src/header_stuff.c:496
 msgid "Use my options to fill the following entries."
@@ -373,7 +365,7 @@ msgstr "Tərcüməçinin adı:"
 msgid "Translator's e-mail:"
 msgstr "Tərcüməçinin ePoçt ünvanı:"
 
-#: src/header_stuff.c:515 src/prefs.c:137
+#: src/header_stuff.c:515 src/prefs.c:146
 msgid "Language:"
 msgstr "Dil:"
 
@@ -381,11 +373,11 @@ msgstr "Dil:"
 msgid "Language group's e-mail:"
 msgstr "Dil qrupunun ePoçt ünvanı:"
 
-#: src/header_stuff.c:524 src/prefs.c:150
+#: src/header_stuff.c:524 src/prefs.c:159
 msgid "Charset:"
 msgstr "Yazı sinifi:"
 
-#: src/header_stuff.c:528 src/prefs.c:154
+#: src/header_stuff.c:528 src/prefs.c:163
 msgid "Encoding:"
 msgstr "Kodlama:"
 
@@ -514,7 +506,7 @@ msgstr "İngiliscə/ABŞ"
 
 #: src/languages.h:136
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 #: src/languages.h:140
 msgid "Estonian"
@@ -578,11 +570,11 @@ msgstr "Litvaniyaca"
 
 #: src/languages.h:200
 msgid "Malay/Bahasa Melayu"
-msgstr ""
+msgstr "Malay/Bahasa Melayu"
 
 #: src/languages.h:204
 msgid "Maltese"
-msgstr ""
+msgstr "Malta dili"
 
 #: src/languages.h:208
 msgid "Norwegian/Bokmaal"
@@ -621,7 +613,6 @@ msgid "Serbian/Latin"
 msgstr "Serbcə/Latın"
 
 #: src/languages.h:244
-#, fuzzy
 msgid "Slovak"
 msgstr "Slovakca"
 
@@ -1180,6 +1171,11 @@ msgstr ""
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- dəyişiklik yoxdur"
 
+# data/desktop/gtranslator.desktop.in.h:2 src/gui.c:491
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:761
+msgid "gtranslator"
+msgstr "gtranslator"
+
 #: src/parse.c:786
 #, c-format
 msgid ""
@@ -1202,193 +1198,191 @@ msgstr ""
 "Dərləmə müvəffəqiyyətli oldu: \n"
 "%s"
 
-#: src/prefs.c:103
+#: src/prefs.c:105
 msgid "gtranslator -- options"
 msgstr "gtranslator -- seçənəklər"
 
-#.
-#. * The tables for holding all the entries below.
-#.
-#: src/prefs.c:108
+#: src/prefs.c:111
 msgid "Personal informations"
 msgstr "Fərdi verilənlər"
 
-#: src/prefs.c:109
+#: src/prefs.c:113
 msgid "Language settings"
 msgstr "Dil qurǧuları"
 
-#: src/prefs.c:110
+#: src/prefs.c:115
 msgid "Po file editing"
 msgstr "Po fayl düzəlişləri"
 
-#: src/prefs.c:111
+#: src/prefs.c:117
 msgid "Miscellaneous"
 msgstr "Qarışıq"
 
-#: src/prefs.c:112
+#: src/prefs.c:119
 msgid "Recent files & spell checking"
 msgstr "Son fayllar və imla yoxlaması"
 
-#: src/prefs.c:113
+#: src/prefs.c:121
 msgid "Fonts, colors and color schemes"
 msgstr "Yazı növləri, rənglər və rəng sxemləri"
 
-#: src/prefs.c:114
+#: src/prefs.c:123
 msgid "Autosaving"
 msgstr "Öz-özünə Qeyd"
 
-#: src/prefs.c:120
+#: src/prefs.c:129
 msgid "Author's name:"
 msgstr "Müəllifin adı:"
 
-#: src/prefs.c:123
+#: src/prefs.c:132
 msgid "Author's EMail:"
 msgstr "Müəllifin ePoçtu:"
 
-#: src/prefs.c:127
+#: src/prefs.c:136
 msgid "Default query domain:"
 msgstr "Ana sorǧulama domeynï"
 
-#: src/prefs.c:141
+#: src/prefs.c:150
 msgid "Language code:"
 msgstr "Dil kodu:"
 
-#: src/prefs.c:146
+#: src/prefs.c:155
 msgid "Language group's EMail:"
 msgstr "Dil qrupunun ePoçt ünvanı:"
 
-#: src/prefs.c:162
+#: src/prefs.c:171
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "İsmarıc dəyişdirildiyində fuzzy girişərini ortadan qaldır"
 
-#: src/prefs.c:166
+#: src/prefs.c:175
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Po-faylı \"fuzzy\" tərcümələr daxil edirsə bildir"
 
-#: src/prefs.c:170
+#: src/prefs.c:179
 msgid "Don't save unchanged po files"
 msgstr "Dəyişdirilməmiş .po-fayllarını qeyd etmə"
 
-#: src/prefs.c:174
+#: src/prefs.c:183
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr ""
 "Üstündə dəyişiklik edilməmiş bir faylı\n"
 "qeyd etməyə cəhd edərsəm bildir"
 
-#: src/prefs.c:178
+#: src/prefs.c:187
 msgid "Keep obsolete message in the po files"
 msgstr "Po fayldakı dəqiq ismariclara toxunma"
 
-#: src/prefs.c:185
+#: src/prefs.c:194
 msgid "Use free space indicating special character"
 msgstr "Xüsusi xarakteri bildirərək sərbəst böşluqları işlət"
 
-#: src/prefs.c:188
+#: src/prefs.c:197
 msgid "Enable the popup menu"
 msgstr "Sağ tıqlama menyusunu fəallaşdır"
 
-#: src/prefs.c:191
+#: src/prefs.c:200
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
 "gtranslatorun güncəlləmə xüsusiyyətini fəallaşdır \n"
 "(bunun üçün qaynaqlar lazımdır)"
 
-#: src/prefs.c:194
+#: src/prefs.c:203
 msgid "Save geometry on exit & restore it on startup"
 msgstr ""
 "gtranslatorun çoğrafiyasını və böyüklüyünü qeyd et və bir sonrakı açılışda "
 "işlət"
 
-#: src/prefs.c:197
-msgid "Don't show the update information dialogs"
-msgstr "Güncəlləme mə'lumat dialoqlarını göstərmə"
-
-#: src/prefs.c:203
-msgid "Maximally showed recent files:"
+#: src/prefs.c:206
+msgid "Show the views sidebar"
 msgstr ""
 
-#: src/prefs.c:207
+#: src/prefs.c:209
+#, fuzzy
+msgid "Show the messages table"
+msgstr "Bildirilən ismarıca get:"
+
+#: src/prefs.c:216
+msgid "Maximally showed recent files:"
+msgstr "Göstəriləcək ən çox axır fayllar:"
+
+#: src/prefs.c:220
 msgid "Check every recent file before listing it up"
 msgstr "Siyahılamadan əvvəl hər faylı yoxla"
 
-#: src/prefs.c:210
+#: src/prefs.c:223
 msgid "Instant spell checking"
 msgstr "Anında imla yoxlaması"
 
-#: src/prefs.c:213
+#: src/prefs.c:226
 msgid "Use special dictionary"
 msgstr "Xüsusi sözlük işlət"
 
-#: src/prefs.c:216
+#: src/prefs.c:229
 msgid "Dictionary to use:"
 msgstr "İstifadə ediləcək sözlük:"
 
-#: src/prefs.c:227
+#: src/prefs.c:240
 msgid "Syntax color scheme to use:"
 msgstr "İşlədiləcək sintaksis rəng sxemi:"
 
-#: src/prefs.c:231
+#: src/prefs.c:244
 msgid "Apply own fonts:"
-msgstr ""
+msgstr "Öz yazı növlərini əlavə et:"
 
-#: src/prefs.c:235
+#: src/prefs.c:248
 msgid "Original text font:"
-msgstr ""
+msgstr "Əsl mətn yazı növü:"
 
-#: src/prefs.c:235
-#, fuzzy
+#: src/prefs.c:248
 msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- yazı növü seçkisi"
+msgstr "gtranslator -- yazı növü seçkisi/msgid yazı növü"
 
-#: src/prefs.c:239
-#, fuzzy
+#: src/prefs.c:252
 msgid "Translation font:"
-msgstr "Tərcüməçinin adı:"
+msgstr "Tərcümə yazı növü:"
 
-#: src/prefs.c:239
-#, fuzzy
+#: src/prefs.c:252
 msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- yazı növü seçkisi"
+msgstr "gtranslator -- yazı növü seçkisi/msgstr yazı növü"
 
-#: src/prefs.c:243
-#, fuzzy
+#: src/prefs.c:256
 msgid "Apply own colors:"
-msgstr "Xüsusi yazı növləri/rəngləri işlət"
+msgstr "Öz yazı növlərini əlavə et:"
 
-#: src/prefs.c:247
+#: src/prefs.c:260
 msgid "Foreground color:"
 msgstr "Ön plan rəngi:"
 
-#: src/prefs.c:247
+#: src/prefs.c:260
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- ön plan rəngi"
 
-#: src/prefs.c:251
+#: src/prefs.c:264
 msgid "Background color:"
 msgstr "Arxa plan rəngi:"
 
-#: src/prefs.c:251
+#: src/prefs.c:264
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- arxa plan rəngi"
 
-#: src/prefs.c:258
+#: src/prefs.c:271
 msgid "Save the po file automatically after a period of time"
 msgstr "Po fayllarını bəlli müddətlərdə öz-özünə qeyd et"
 
-#: src/prefs.c:262
+#: src/prefs.c:275
 msgid "Append a special suffix to the automatically saved files"
 msgstr "Avtomatik qeyd edilən faylları xüsusi şəkilçi əlavə et"
 
-#: src/prefs.c:266
+#: src/prefs.c:279
 msgid "Autosave suffix:"
 msgstr "Automatik qeyd etmə şəkilçisi:"
 
-#: src/prefs.c:270
+#: src/prefs.c:283
 msgid "Autosave timeout in minutes:"
 msgstr "Dəqiqələrlə öz-özünə qeyd etmə vaxtı:"
 
-#: src/prefs.c:452
+#: src/prefs.c:489
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -1421,27 +1415,27 @@ msgstr "Heç dəyişiklik aparılmadı!"
 msgid "Session restored successfully."
 msgstr "İclas müvəffəqiyyətlə təzədən yükləndi."
 
-#: src/sidebar.c:80
+#: src/sidebar.c:82
 msgid "Views"
 msgstr "Görünüşlər"
 
-#: src/sidebar.c:103
+#: src/sidebar.c:105
 msgid "Message"
 msgstr "İsmarıc"
 
-#: src/sidebar.c:107
+#: src/sidebar.c:109
 msgid "Comment"
 msgstr "Şərh"
 
-#: src/sidebar.c:111
+#: src/sidebar.c:113
 msgid "Number"
 msgstr "Nömrə"
 
-#: src/sidebar.c:115
+#: src/sidebar.c:117
 msgid "Format"
 msgstr "Şəkil"
 
-#: src/sidebar.c:119
+#: src/sidebar.c:121
 msgid "Hotkey"
 msgstr "Qısa Yol Düyməsi"
 
@@ -1475,15 +1469,15 @@ msgstr "·"
 msgid "No POTFILES.in found!"
 msgstr "POTFILES.in faylı tapıla bilmədi!"
 
-#: src/update.c:104
+#: src/update.c:99
 msgid "An update caused no changes."
 msgstr "Güncəlləme heç bir dəyişikliyə yol açmadı."
 
-#: src/update.c:111
+#: src/update.c:106
 msgid "The update was successfull."
 msgstr "Güncəlləme müvəffəqiyyətli oldu."
 
-#: src/update.c:116
+#: src/update.c:111
 msgid "An error occured while updating the po file."
 msgstr "po faylı güncəllənirkən bir xəta oldu."
 
@@ -1519,17 +1513,17 @@ msgstr ""
 #: src/utils_gui.c:383
 #, c-format
 msgid "The file `%s' is already open in another instance of gtranslator!"
-msgstr ""
+msgstr "`%s' faylı başqa bir gtranslator instansiyası tərəfindən açılmişdir!"
 
 #: src/utils_gui.c:416
-#, fuzzy, c-format
+#, c-format
 msgid "The necessary decompression program `%s' is missing!"
 msgstr "Lazımi açma proqramı `%s' əksikdir!"
 
 #: src/utils_gui.c:421
-#, fuzzy, c-format
+#, c-format
 msgid "The necessary compression program `%s' is missing!"
-msgstr "Lazımi açma proqramı `%s' əksikdir!"
+msgstr "Lazımi sıxışdırma proqramı `%s' əksikdir!"
 
 #: src/vfs-handle.c:125
 #, c-format
@@ -1659,48 +1653,5 @@ msgstr "Po fayl aç"
 msgid "_File"
 msgstr "_Fayl"
 
-#~ msgid "View URL..."
-#~ msgstr "Ünvanı göstər..."
-
-#~ msgid "Syntax color scheme to use"
-#~ msgstr "İşlədiləcak sintaksis rəng sxeması"
-
-#~ msgid "SCHEMEFILE"
-#~ msgstr "SXEMFAYLI"
-
-#~ msgid "gtranslator -- color scheme selection"
-#~ msgstr "gtranslator -- rəng sxemi seçkisi"
-
-#~ msgid "Font:"
-#~ msgstr "Yazı növü:"
-
-#~ msgid "Uncatched signal %i!"
-#~ msgstr "Yaxalnamayan siqnal %i!"
-
-#~ msgid "Project: %s"
-#~ msgstr "Lahiyə: %s"
-
-#~ msgid "Version: %s"
-#~ msgstr "Buraxılış: %s"
-
-#~ msgid "Last translator: %s <%s>"
-#~ msgstr "Son tərcüməçi: %s <%s>"
-
-#~ msgid "Language team: %s <%s>"
-#~ msgstr "Dil dəstəsi: %s <%s>"
-
-#~ msgid "Last %s.pot update: %s"
-#~ msgstr "Axırıncı %s.pot güncəlləməsi: %s"
-
-#~ msgid "Last po file update: %s"
-#~ msgstr "Axırıncı po fayl güncəlləməsi: %s"
-
-#~ msgid "Encoding: %s (%s)"
-#~ msgstr "Kodlama: %s (%s)"
-
-#~ msgid ""
-#~ "Comments:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Şərhlər:\n"
-#~ " %s"
+#~ msgid "Don't show the update information dialogs"
+#~ msgstr "Güncəlləme mə'lumat dialoqlarını göstərmə"
