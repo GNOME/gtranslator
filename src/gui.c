@@ -1,7 +1,8 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Peeter Vois <peeter@gtranslator.org>
+ *			Thomas Ziehmer <thomas@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -272,13 +273,10 @@ void gtranslator_create_main_window(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	// XXX
 	text_box = GTK_TEXT_VIEW(gtk_text_view_new ());
 	gtk_text_view_set_editable(text_box, FALSE);
 	gtk_text_view_set_wrap_mode(text_box, GTK_WRAP_CHAR);
 	gtk_text_view_set_cursor_visible(text_box, FALSE);
-	
-//	text_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_box_view));
 
 	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), GTK_WIDGET(text_box));
 

@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,8 +25,6 @@
 
 #include <gtk/gtkdnd.h>
 #include <gtk/gtktext.h>
-//#include <libgnome/gnome-defs.h>
-//#include <libgnome/gnome-mime.h>
 
 /*
  * The general D'n'D function.
@@ -37,48 +35,22 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 {
 	gint return_value = 0;
 	gchar *file;
-	GList *fnames, *fnp;
 
 	dnd_type = GPOINTER_TO_UINT(data);
-	// XXX fix it
-	//	fnames = gnome_uri_list_extract_filenames((char *) seldata->data);
-	/*
-         * First we do obtain, that we even did get any filenames list.
-         */
-	if (g_list_length(fnames) > 0) {
-		/*
-                 * Check the list entries for our supported D'n'D types.
-                 */
-		for (fnp = fnames; fnp; fnp = fnp->next) {
-			if (dnd_type == TARGET_URI_LIST) {
-				file = (char *) (fnp->data);
-				gtranslator_parse_main(file);
-				return_value = 1;
-			} else {
-				if (dnd_type == TARGET_NETSCAPE_URL) {
-					file = (char *) (fnp->data);
-					gtranslator_parse_main(file);
-					return_value = 1;
-				}
-				if (dnd_type == TARGET_TEXT_PLAIN) {
-					file = (char *) (fnp->data);
-
-					gtranslator_insert_text(trans_box, file);
-					
-					return_value = 1;
-				}
-			}
-		}
-	}
-	// XXX fix it
-	//	gnome_uri_list_free_strings(fnames);
+	file=((gchar *) (seldata->data));
 	
-	/*
-         * Displays if the Drop was successfull.
-         */
-	if (return_value == 1) {
+	if(dnd_type==TARGET_URI_LIST || dnd_type==TARGET_NETSCAPE_URL)
+	{
+		gtranslator_parse_main(file);
 		gtk_drag_finish(context, TRUE, FALSE, time);
-	} else {
+	}
+	else if(dnd_type==TARGET_TEXT_PLAIN)
+	{
+		gtranslator_insert_text(trans_box, file);
+		gtk_drag_finish(context, TRUE, FALSE, time);
+	}
+	else
+	{
 		gtk_drag_finish(context, FALSE, TRUE, time);
 	}
 }

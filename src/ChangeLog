@@ -1,3 +1,26 @@
+2003-01-01  Fatih Demir <kabalak@gtranslator.org>
+
+	* \*.[ch]: Updated the years of copyright for some files now awesome
+		and made the authors' list accurent where necessary.
+
+	* dnd.c: Fix the old and outcommented DnD code with new, easier and
+		possibly foolish code, but it should now work and the code
+		 does even also read quite sane now, heyya!
+
+	* messages-table.c: Slicked down the messages' table the the useful
+		and non-doubled party (Status, Message & Translation), all
+		 other columns are now removed as they're already present in
+		  the current GUI in the one or another kind. Should also
+		   make the table faster for navigation.
+
+	* color-schemes.c: Adept the signal connecting functions to the
+		new g_signal_* stuff (just renaming and a bit of casting).
+
+	* gui.c & utils_gui.c: Some more fixing of the old codes 'round
+		there - now the geometry parsing and setting etc. was fixed
+		 and the XXX comments in the GUI creation were removed:
+		  they're currently not needed :-)
+
 2002-12-31  Fatih Demir <kabalak@gtranslator.org>
 
 	* gui.c: Removed the out-commented but also unneeded calls for the

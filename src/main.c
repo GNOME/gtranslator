@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Peeter Vois <peeter@gtranslator.org>
  * 

@@ -1,7 +1,8 @@
 /*
- * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Kevin Vandersloot <kfv101@psu.edu>
+ *			Thomas Ziehmer <thomas@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -48,11 +49,8 @@
 enum
 {
   STATUS_COLUMN,
-  NUMBER_COLUMN,
-  LINE_COLUMN,
   ORIGINAL_COLUMN,
   TRANSLATION_COLUMN,
-  COMMENT_COLUMN,
   MSG_PTR_COLUMN,
   N_COLUMNS
 };
@@ -135,16 +133,10 @@ GtkWidget *gtranslator_messages_table_new()
   gint i;
 
   gchar *titles[][2] = {{_("Status"),      "text"},
-			{_("Number"),      "text"},
-			{_("Line"),        "text"},
 			{_("Original"),    "text"},
-			{_("Translation"), "text"},
-			{_("Comment"),     "text"}};
+			{_("Translation"), "text"}};
   
   store = gtk_tree_store_new (N_COLUMNS,
-			      G_TYPE_STRING,
-			      G_TYPE_INT,
-			      G_TYPE_INT,
 			      G_TYPE_STRING,
 			      G_TYPE_STRING,
 			      G_TYPE_STRING,
@@ -153,7 +145,7 @@ GtkWidget *gtranslator_messages_table_new()
   tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tree), TRUE);
   gtk_tree_view_set_search_column (GTK_TREE_VIEW (tree),
-				   NUMBER_COLUMN);
+				   STATUS_COLUMN);
   
   g_object_unref (G_OBJECT (store));
 
@@ -229,11 +221,8 @@ void gtranslator_messages_table_create (void)
       gtk_tree_store_append(model, &cur_node, &unknown_node);
       gtk_tree_store_set(model, &cur_node,
 			 STATUS_COLUMN, "",
-			 NUMBER_COLUMN, i,
-			 LINE_COLUMN, 42,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
-			 COMMENT_COLUMN, message->comment->pure_comment,
 			 MSG_PTR_COLUMN, message,
 			 -1);
       i++;
@@ -242,11 +231,8 @@ void gtranslator_messages_table_create (void)
       gtk_tree_store_append(model, &cur_node, &translated_node);
       gtk_tree_store_set(model, &cur_node,
 			 STATUS_COLUMN, "",
-			 NUMBER_COLUMN, j,
-			 LINE_COLUMN, 42,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
-			 COMMENT_COLUMN, message->comment->pure_comment,
 			 MSG_PTR_COLUMN, message,
 			 -1);
       j++;
@@ -259,25 +245,14 @@ void gtranslator_messages_table_create (void)
       gtk_tree_store_append(model, &cur_node, &fuzzy_node);
       gtk_tree_store_set(model, &cur_node,
 			 STATUS_COLUMN, "",
-			 NUMBER_COLUMN, k,
-			 LINE_COLUMN, 42,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
-			 COMMENT_COLUMN, message->comment->pure_comment,
 			 MSG_PTR_COLUMN, message,
 			 -1);
       k++;
     }
       list = g_list_next(list);
   }
-  gtk_tree_store_set (model, &unknown_node, 
-		      NUMBER_COLUMN, i, -1);
-  gtk_tree_store_set (model, &translated_node, 
-		      NUMBER_COLUMN, j, -1);
-  gtk_tree_store_set (model, &fuzzy_node, 
-		      NUMBER_COLUMN, k, -1);
-
-
 }
 
 /*

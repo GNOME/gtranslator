@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -91,18 +91,21 @@ gchar *gtranslator_utils_invert_dot(gchar *str)
 void gtranslator_utils_save_geometry(void)
 {
 	if (GtrPreferences.save_geometry == TRUE) {
-		gchar *gstr;
-		gint x, y, w, h;
-		// XXX fix it
+		gint x, y, w, h, d;
+		
 		/*
-		gstr = gnome_geometry_string(gtranslator_application->window);
-		gnome_parse_geometry(gstr, &x, &y, &w, &h);
-		GTR_FREE(gstr);
+		 * Use the Gdk functions to get the window typistics and then
+		 *  store the data - we're currently stumping the silly "depth"
+		 *   data also, but well...
+		 */
+		gdk_window_get_geometry(GDK_WINDOW(gtranslator_application->window),
+			&x, &y, &w, &h, &d);
+		
 		gtranslator_config_set_int("geometry/x", x);
 		gtranslator_config_set_int("geometry/y", y);
 		gtranslator_config_set_int("geometry/width", w);
 		gtranslator_config_set_int("geometry/height", h);
-		*/
+		gtranslator_config_set_int("geometry/depht", d);
 	}
 }
 
@@ -115,24 +118,28 @@ void gtranslator_utils_restore_geometry(gchar  * gstr)
 	/*
 	 * Set the main window's geometry from the preferences.
 	 */
-	if (gstr == NULL) {
-		if (GtrPreferences.save_geometry == TRUE) {
-			x = gtranslator_config_get_int("geometry/x");
-			y = gtranslator_config_get_int("geometry/y");
-			width = gtranslator_config_get_int("geometry/width");
-			height = gtranslator_config_get_int("geometry/height");
+	if (gstr == NULL)
+	{
+		if(GtrPreferences.save_geometry == TRUE)
+		{
+			x=gtranslator_config_get_int("geometry/x");
+			y=gtranslator_config_get_int("geometry/y");
+			width=gtranslator_config_get_int("geometry/width");
+			height=gtranslator_config_get_int("geometry/height");
 		}
-		else return;
+		else
+		{
+			return;
+		}
 	}
 	/*
 	 * If a geometry definition had been defined try to parse it.
 	 */
-	else {
-	  // XXX fix it
-	  if (1 /* !gnome_parse_geometry(gstr, &x, &y, &width, &height)*/) {
-			g_warning(
-			    _("The geometry string \"%s\" couldn't be parsed!"),
-			    gstr);
+	else
+	{
+		if(!gtk_window_parse_geometry(GTK_WINDOW(gtranslator_application->window), gstr))
+		{
+			g_warning(_("The geometry string \"%s\" couldn't be parsed!"), gstr);
 			return;
 		}
 	}

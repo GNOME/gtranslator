@@ -341,11 +341,14 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 		if(font)
 		{
 			/*
-			 * Unref old widget font.
+			 * FIXME: This old widget font unref'ing must now be done
+			 *  inside GtkStyle and the PangoFontDescription structure.
+			 *
+			 * But for now, let's do the old dirty dancing...
+			 *
 			 */
-		  // XXX fix it
-		  //	gdk_font_unref(style->font);
-		  //	style->font=font;
+		    	gdk_font_unref(style->private_font);
+		  	style->private_font=font;
 		}
 	}
 	

@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -510,15 +510,13 @@ void gtranslator_color_scheme_show_list()
 		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
 		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
 
-// XXX convert it
-//		gtk_signal_connect(GTK_OBJECT(menu->widget), "destroy",
-//			   GTK_SIGNAL_FUNC(free_data), menu->hint);
-
+		g_signal_connect(G_OBJECT(menu->widget), "destroy",
+			G_CALLBACK(free_data), (gpointer) menu->hint);
+		
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
-// XXX fix it
-// 		GTR_FREE(menu->label);
+ 		GTR_FREE((gpointer) menu->label);
 		GTR_FREE(menu);
 	}
 }
