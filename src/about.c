@@ -37,9 +37,10 @@ void about_box(GtkWidget * widget, gpointer useless)
 	 * Create the about box via gnome_about_new.
 	 */ 
 	about =
-	    gnome_about_new("gtranslator", VERSION, "(C) 1999-2001", authors,
-			    _("gtranslator is a po file editing suite with many bells and whistles."),
-			    NULL);
+	    gnome_about_new("gtranslator", VERSION,
+		"(C) 1999-2001 The Free Software Foundation", authors,
+		_("gtranslator is a po file editing suite with many bells and whistles."),
+		NULL);
 
 	show_nice_dialog(&about, "gtranslator -- about");
 }
