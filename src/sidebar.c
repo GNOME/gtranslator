@@ -189,7 +189,7 @@ GdkPixbuf *get_shortcut_icon(const gchar *url)
 		 */ 
 		case 'm':
 			pixmap_filename=gnome_pixmap_file(
-				"mc/application-x-po.png");
+				"gnome-application-x-po.png");
 				break;
 
 		/*
@@ -197,7 +197,7 @@ GdkPixbuf *get_shortcut_icon(const gchar *url)
 		 */
 		case 'f':
 			pixmap_filename=gnome_pixmap_file(
-				"mc/application-x-po.png");
+				"gnome-application-x-po.png");
 				break;
 
 		/*
@@ -205,7 +205,7 @@ GdkPixbuf *get_shortcut_icon(const gchar *url)
 		 */
 		case 'n':
 			pixmap_filename=gnome_pixmap_file(
-				"mc/application-x-po.png");
+				"gnome-application-x-po.png");
 				break;
 
 		/*
@@ -213,7 +213,7 @@ GdkPixbuf *get_shortcut_icon(const gchar *url)
 		 */
 		case 'h':
 			pixmap_filename=gnome_pixmap_file(
-				"mc/application-x-po.png");
+				"gnome-application-x-po.png");
 				break;
 
 		/*

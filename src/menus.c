@@ -268,12 +268,11 @@ GnomeUIInfo the_settings_menu[] = {
 
 GnomeUIInfo the_help_menu[] = {
 	GNOMEUIINFO_HELP("gtranslator"),
-	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_about_dialog, NULL),
-	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
 			       N_("gtranslator's homepage on the web"),
 			       gtranslator_utils_show_home_page,
 			       GNOME_STOCK_MENU_HOME),
+	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_about_dialog, NULL),
 	GNOMEUIINFO_END
 };
 
