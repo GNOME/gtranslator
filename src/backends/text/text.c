@@ -31,6 +31,7 @@
 #include "../../nautilus-string.h"
 #include "../../parse.h"
 #include "../../prefs.h"
+#include "../../runtime-config.h"
 #include "../../utils.h"
 
 /*
@@ -65,14 +66,12 @@ gboolean backend_open(const gchar *filename)
 
 	GtrHeader	*header;
 	
-	gchar 	 	*line;
-	gchar 		*string;
-	gchar		*tempfilename;
+	gchar 	 	*line=NULL;
+	gchar 		*string=NULL;
 
 	gint		 lines=0;
 
 	g_return_val_if_fail(filename!=NULL, FALSE);
-	tempfilename=string=line=NULL;
 
 	/*
 	 * Open up the text file for pure reading, parsing in.
@@ -88,8 +87,7 @@ gboolean backend_open(const gchar *filename)
 	/*
 	 * Open the resulting temporary file for gtranslator for writing.
 	 */
-	tempfilename=gtranslator_utils_get_temp_file_name(); 
-	po_file=fopen(tempfilename, "w");
+	po_file=fopen(gtranslator_runtime_config->backend_filename, "w");
 	g_return_val_if_fail(po_file!=NULL, FALSE);
 
 	fprintf(po_file, "\
@@ -144,8 +142,7 @@ msgstr \"\"\n\
 	/*
 	 * Now open the temporary filename.
 	 */
-	gtranslator_parse_main(tempfilename);
-	GTR_FREE(tempfilename);
+	gtranslator_parse_main(gtranslator_runtime_config->backend_filename);
 	
 	return TRUE;
 }
