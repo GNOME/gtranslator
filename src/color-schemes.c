@@ -22,9 +22,7 @@
 #endif
 
 #include <string.h>
-#include <sys/types.h>
 #include <sys/param.h>
-#include <dirent.h>
 
 #include "color-schemes.h"
 #include "parse.h"
