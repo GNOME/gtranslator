@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.9
+export POZILLA_RELEASE=1.0
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -31,10 +31,22 @@ export BODY_FILE="$CONFIG_DIR/mail.body"
 for app in msgfmt msgmerge make grep sed mutt
 	do
 		if test "z`which $app`" = "z" ; then
+			echo "---------------------------------------------------------------"
 			echo "[ERROR: The application \"$app\" is necessary for running pozilla.sh!]"
+			echo "---------------------------------------------------------------"
 				exit 1
 		fi
 	done	
+
+#
+# Check if a po directory is existent.
+#
+if ! test -d ./po ; then
+	echo "---------------------------------------------------------------"
+	echo "[ERROR: There is no \"po\" directory present in this directory! ]"
+	echo "---------------------------------------------------------------"
+		exit 1
+fi
 
 #
 # That's Pozilla, guy!
@@ -57,62 +69,76 @@ do
 	option=`echo "$1"|sed -e 's/-//g' -e 's/--//g'`
 	case "$option" in
 	[hH]*)
-	echo "<·············································"
+	echo "---------------------------------------------------------------"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
-	echo "<·············································"
+	echo "---------------------------------------------------------------"
 	echo " Author: Fatih Demir <kabalak@gmx.net>"
-	echo "<·············································"
+	echo "---------------------------------------------------------------"
 	echo "-a --additional   Defines an additional mail address to mail to"
-	echo "-d --days		Days remaining for release"
-	echo "-r --release	Specifies the coming release's number"
+	echo "-d --days         Days remaining for release"
+	echo "-r --release      Specifies the coming release's number"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
-	echo "<·············································"
+	echo "---------------------------------------------------------------"
 		exit 1
 	;;
 	[vV]*)
-	echo "<·············································"
+	echo "---------------------------------------------------------------"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
-	echo "<·············································"
+	echo "---------------------------------------------------------------"
         echo " Author:  Fatih Demir <kabalak@gmx.net>"
-	echo "<·············································"
+	echo "---------------------------------------------------------------"
 		exit 1
 	;;
 	[mM]*)
 	shift 1
 	if test "hehe$1" = "hehe" ; then
+		echo "---------------------------------------------------------------"
 		echo "No mailing list given, using default:"
 		echo "$MAILING_LIST"
+		echo "---------------------------------------------------------------"
 	else
+		echo "---------------------------------------------------------------"
 		echo "Using special mailing list:"
 		export MAILING_LIST="$1"
 		echo "$MAILING_LIST"
+		echo "---------------------------------------------------------------"
 		shift 1
 	fi
 	;;
 	[aA]*)
 	shift 1
 	if test "hehe$1" = "hehe" ; then
+		echo "---------------------------------------------------------------"
 		echo "No additional mail address given!"
+		echo "---------------------------------------------------------------"
 	else
+		echo "---------------------------------------------------------------"
 		export ADDITIONAL_MAILING_ADDRESS="$1"
 		echo "Using $ADDITIONAL_MAILING_ADDRESS for additional mailing."
+		echo "---------------------------------------------------------------"
 		shift 1
 	fi	
 	;;
 	[dD]*)
 	shift 1
 	if test "days$1" = "days" ; then
+		echo "---------------------------------------------------------------"
 		echo "No number of days given!"
+		echo "---------------------------------------------------------------"
 	else
 		if test $1 -le 3 ; then
+			echo "---------------------------------------------------------------"
 			echo "You're giving your translators only $1 day(s); that's too less!"
-			echo "Please give'm more time to update their translations."
+			echo "Please give them more time to update their translations."
+			echo "---------------------------------------------------------------"
 				exit 1
 		else
 			export DAYS_REMAINING="$1"
+			echo "---------------------------------------------------------------"
 			echo "Days remaining: $DAYS_REMAINING"
+			echo "---------------------------------------------------------------"
 			shift 1
 		fi	
 	fi
@@ -120,10 +146,14 @@ do
 	[rR]*)
 	shift 1
 	if test "r$1" = "r" ; then
+		echo "---------------------------------------------------------------"
 		echo "No release number defined! Trying to figuring it out.."
+		echo "---------------------------------------------------------------"
 	else
+		echo "---------------------------------------------------------------"
 		export MY_RELEASE="$1"
 		echo "Using user-defined release string $MY_RELEASE"
+		echo "---------------------------------------------------------------"
 		shift 1
 	fi	
 	;;
@@ -196,7 +226,9 @@ elif test -x ./update.sh ; then
 elif test -x ./update.pl ; then
 	./update.pl -P
 else
+	echo "---------------------------------------------------------------"
 	echo "[ERROR: No update.(sh|pl) or usable Makefile found!]"
+	echo "---------------------------------------------------------------"
 		exit 1
 fi
 #
