@@ -141,22 +141,6 @@ static gint 	sidebar_pane_position;
 static gint	table_pane_position;
 
 /*
- * The popup-menu.
- */
-static GnomeUIInfo the_popup_menu[] = {
-	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CUT_ITEM(gtranslator_clipboard_cut, NULL),
-	GNOMEUIINFO_MENU_COPY_ITEM(gtranslator_clipboard_copy, NULL),
-	GNOMEUIINFO_MENU_PASTE_ITEM(gtranslator_clipboard_paste, NULL),
-	GNOMEUIINFO_MENU_CLEAR_ITEM(gtranslator_selection_clear, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_ITEM(gtranslator_file_close, NULL),
-	GNOMEUIINFO_MENU_SAVE_AS_ITEM(gtranslator_save_file_as_dialog, NULL),
-	GNOMEUIINFO_END
-};
-
-/*
  * Pop's up the curious popup-menu.
  */
 static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d)
