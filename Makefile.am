@@ -15,11 +15,9 @@ EXTRA_DIST= \
 		intltool-merge.in \
 		intltool-update.in
 
-distpacks: distdir
-	@-rm -f $(distdir).tar.bz2
+cvspack: distdir
 	@-rm -f $(distdir).tar.gz
-	@echo Creating tar gzip/bzip2 packages of $(distdir)...
-	@$(TAR) -choIf $(distdir).tar.bz2 $(distdir)
+	@echo Creating CVS snapshot "$(shell date +%Y-%m-%d)" package...
 	@$(TAR) -chozf $(distdir).tar.gz $(distdir)
-	@echo Cleaning up...
+	@mv -f $(distdir).tar.gz "$(distdir)-$(shell date +%Y-%m-%d).tar.gz"
 	@-rm -rf $(distdir)
