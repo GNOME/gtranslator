@@ -1,3 +1,27 @@
+2001-08-09  Fatih Demir <kabalak@gtranslator.org>
+
+	* header_stuff.c: Fixed header commentless po files' parsing -- we add
+		a "# " header comment to the po file if no header comment is
+		 currently present.
+
+	* message.c: More checks in "gtranslator_message_status_set_fuzzy" --
+		3 more "g_return_if_fail"s.
+
+	* header_stuff.c & utils.c/.h: Moved the "language_in_english" function
+		to "gtranslator_utils_get_english_language_name".
+
+	* actions.c & parse.c: Don't activate the "Remove all translations"
+		menu entry on file opening by itself -- only activate it if
+		 there are any translated or fuzzy messages.
+
+	* parse.c: Check the messages count after the removal of all 
+		translations -- if none has been left, disable the menu entry.
+
+	* learn.c: Use this new function instead of an own local implementation.
+
+	* utils.c/.h: Added new "gtranslator_utils_strip_all_punctuation_chars"
+		function.
+
 2001-08-08  Fatih Demir <kabalak@gtranslator.org>
 
 	* parse.c: Implemented the remove all translations functionality --

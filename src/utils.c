@@ -76,6 +76,81 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 }
 
 /*
+ * Strip all punctuation characters out.
+ */
+gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
+{
+	gchar	*stripped_string;
+	gint	 index=0;
+	
+	/*
+	 * Strip out all common punctuation characters before re-querying.
+	 */
+	const gchar punctuation_characters[] = 
+	{ 
+		',', '.', ':', ';',
+		'?', '!', '(', ')',
+		'[', ']', '{', '}',
+		'`', '\'', '^', '/',
+		'\\', '<', '>', -1
+	};
+
+	g_return_val_if_fail(str!=NULL, NULL);
+	
+	/*
+	 * First strip out all the '´' characters from the string.
+	 */
+	stripped_string=nautilus_str_strip_chr(str, '´');
+
+	/*
+	 * Now strip out all these special characters from the query string 
+	 *  to get a more "raw" string for an eventually better match.
+	 */
+	while(punctuation_characters[index]!=-1)
+	{
+		stripped_string=nautilus_str_strip_chr(stripped_string,
+			punctuation_characters[index]);
+		
+		index++;
+	}
+
+	return stripped_string;
+}
+
+/*
+ * Get the non-localized name for the language, if available.
+ */ 
+const gchar *gtranslator_utils_get_english_language_name(const gchar *lang)
+{
+	if(lang)
+	{
+		gint c;
+		
+		for(c=0;languages[c].name!=NULL;c++)
+		{
+			if(!strcmp(_(languages[c].name), lang))
+			{
+				return languages[c].name;
+			}
+		}
+
+		/*
+		 * Return the original language if no conversion could be made.
+		 */
+		return lang;
+	}
+	else
+	{
+		/*
+		 * Return the language in the preferences it no language was
+		 *  given/defined.
+		 */
+		return language;
+	}
+	
+}
+
+/*
  * Remove the gtranslator-generated temp.-files.
  */
 void gtranslator_utils_remove_temp_files()

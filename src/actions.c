@@ -175,15 +175,6 @@ void gtranslator_actions_set_up_file_opened(void)
 	}
 
 	/*
-	 * Only activate this very dangerous menu entry if the corresponding option
-	 *  is set in the preferences.
-	 */
-	if(GtrPreferences.rambo_function)
-	{
-		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
-	}
-
-	/*
 	 * Check if the current file is UTF-8 -- then disable the export
 	 *  menu entry; it's already in UTF-8.
 	 */

@@ -42,6 +42,16 @@
 gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 
 /*
+ * Removes all punctuation characters from the given string.
+ */
+gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str);
+
+/*
+ * Remove the non-localizeed name of the given language -- if possible.
+ */
+const gchar *gtranslator_utils_get_english_language_name(const gchar *lang);
+
+/*
  * Remove the possibly generated temporary files of gtranslator.
  */
 void gtranslator_utils_remove_temp_files(void); 

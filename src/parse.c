@@ -363,6 +363,7 @@ void gtranslator_parse_main(const gchar *filename)
 	gtranslator_actions_set_up_file_opened();
 
 	gtranslator_get_translated_count();
+	
 	/*
 	 * Is there any fuzzy message ?
 	 */
@@ -372,7 +373,18 @@ void gtranslator_parse_main(const gchar *filename)
 		 * Then enable the Fuzzy buttons/entries in the menus
 		 */
 		gtranslator_actions_enable(ACT_NEXT_FUZZY);
+
+		/*
+		 * If there is the corresponding pref and a fuzzy message, then
+		 *  we'd enable the corresponding menu entries for "remove all
+		 *   translations.
+		 */
+		if(GtrPreferences.rambo_function)
+		{
+			gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
+		}
 	}
+	
 	/*
 	 * Is there any untranslated message ?
 	 */
@@ -382,6 +394,15 @@ void gtranslator_parse_main(const gchar *filename)
 		 * Then enable the Untranslated buttons/entries in the menus
 		 */
 		gtranslator_actions_enable(ACT_NEXT_UNTRANSLATED);
+	}
+
+	/*
+	 * If there are any translated messages, enable the "remove all
+	 *  translations" functionality if needed.
+	 */
+	if((po->translated > 1) && GtrPreferences.rambo_function)
+	{
+		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
 	}
 
 	gtranslator_application_bar_update(0);
@@ -952,6 +973,15 @@ void gtranslator_remove_all_translations()
 	if(!prev_file_changed && po->file_changed)
 	{
 		gtranslator_message_go_to(po->current);
+	}
+
+	/*
+	 * Check if there are any messages left over which could be
+	 *  removed -- enable/disable the menu entry accordingly.
+	 */
+	if(po->translated < 1 || po->fuzzy < 1)
+	{
+		gtranslator_actions_disable(ACT_REMOVE_ALL_TRANSLATIONS);
 	}
 }
 

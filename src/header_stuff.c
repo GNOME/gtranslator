@@ -57,7 +57,6 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
 static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless);
 static void language_changed(GtkWidget * widget, gpointer useless);
-static const gchar * language_in_english(const gchar *lang);
 static void substitute(gchar **item, const gchar *bad, const gchar *good);
 static void replace_substring(gchar **item, const gchar *bad, const gchar *good);
 
@@ -199,45 +198,24 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		g_strfreev(pair);
 		i++;
 	}
+	
 	g_strfreev(lines);
-	ph->comment=g_strdup(GTR_COMMENT(msg->comment)->pure_comment);
+
+	if(msg->comment && GTR_COMMENT(msg->comment)->comment)
+	{
+		ph->comment=g_strdup(GTR_COMMENT(msg->comment)->comment);
+	}
+	else
+	{
+		ph->comment=g_strdup("# ");
+	}
+	
 	if (ph->prj_name)
 		return ph;
 	else
 		return NULL;
 }
 
-/*
- * Get the non-localized name for the language, if available
- */ 
-const gchar * language_in_english(const gchar *lang)
-{
-	if(lang)
-	{
-		gint c;
-		for(c=0;languages[c].name!=NULL;c++)
-		{
-			if(!strcmp(_(languages[c].name), lang))
-			{
-				return languages[c].name;
-			}
-		}
-
-		/*
-		 * Return the original language if no conversion could be made.
-		 */
-		return lang;
-	}
-	else
-	{
-		/*
-		 * Return the language in the preferences it no language was
-		 *  given/defined.
-		 */
-		return language;
-	}
-	
-}		
 /*
  * Creates new GtrMsg, with all data set to current state of header 
  */
@@ -247,7 +225,7 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 	GtrMsg *msg = g_new0(GtrMsg, 1);
 	gchar *version;
 
-	const gchar *lang=language_in_english(h->language);
+	const gchar *lang=gtranslator_utils_get_english_language_name(h->language);
 
 	if (h->lg_email && h->lg_email[0] != '\0')
 		group = g_strdup_printf("%s <%s>", lang, h->lg_email);
@@ -281,7 +259,7 @@ Content-Transfer-Encoding: %s\n",
 	GTR_FREE(version);
 
 	/*
-	 * Just copy the comment, and make sure it ends with endline
+	 * Just copy the comment, and make sure it ends with endline.
 	 */
 	if(h->comment[strlen(h->comment)-1] == '\n')
 	{
@@ -317,7 +295,6 @@ void gtranslator_header_update(GtrHeader * h)
 
 	/*
 	 * Convert the header comments back if necessary.
-	 * FIXME: Why here??
 	 */ 
 	if(h->comment && h->comment[0]!='#')
 	{
@@ -352,7 +329,8 @@ void gtranslator_header_free(GtrHeader * h)
 
 static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpointer useless)
 {
-	GtrHeader *ph = po->header;
+	GtrHeader 	*ph = po->header;
+
 	if (page_num != -1)
 		return;
 #define update(value,widget) GTR_FREE(value);\
@@ -409,7 +387,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		{
 			replace(ph->translator, author, translator);
 		}
-		
+	
 		replace(ph->tr_email, email, tr_email);
 		replace(ph->language, language,
 			GTK_COMBO(language_combo)->entry);
@@ -773,10 +751,10 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 		/*
 		 * Should be a good description line .-)
 		 */
-		if(language_in_english(header->language))
+		if(gtranslator_utils_get_english_language_name(header->language))
 		{
 			title=g_strdup_printf("%s translation of %s.",
-				language_in_english(header->language),
+				gtranslator_utils_get_english_language_name(header->language),
 				header->prj_name);
 		}
 		else
@@ -817,7 +795,6 @@ GtrHeader *gtranslator_header_create_from_prefs(void)
 
 	year=get_current_year();
 
-	/* Let fill_up_header replace YEAR later  */
 	h->comment=g_strdup_printf(
 "# %s translation of PACKAGE.\n"
 "# Copyright (C) %s Free Software Foundation, Inc.\n"
@@ -830,6 +807,5 @@ GtrHeader *gtranslator_header_create_from_prefs(void)
 		year);
 
 	GTR_FREE(year);
-	
 	return h;
 }

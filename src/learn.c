@@ -674,42 +674,18 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	else
 	{
 		gchar	*query_string;
-		gint	 index=0;
 
-		/*
-		 * Strip out all common punctuation characters before re-querying.
-		 */
-		const gchar punctuation_characters[] = 
-		{ 
-			',', '.', ':', ';',
-			'?', '!', '(', ')',
-			'[', ']', '{', '}',
-			'`', '\'', '^', '/',
-			'\\', '<', '>', -1
-		};
-
-		/*
-		 * First strip out all the nice and nifty '´' characters from the string.
-		 */
-		query_string=nautilus_str_strip_chr(search_string, '´');
-
-		/*
-		 * Now strip out all these special characters from the query string 
-		 *  to get a more "raw" string for an eventually better match.
-		 */
-		while(punctuation_characters[index]!=-1)
-		{
-			query_string=nautilus_str_strip_chr(query_string, 
-				punctuation_characters[index]);
-			
-			index++;
-		}
-		
+	    	/*
+	     	 * Get a new query string without any punctuation characters.
+	    	 */
+		query_string=gtranslator_utils_strip_all_punctuation_chars(search_string);
+	    
 		/*
 		 * Try this new query.
 		 */
 		found_string=(gchar *) g_hash_table_lookup(
-			gtranslator_learn_buffer->hash, (gconstpointer) query_string);
+			gtranslator_learn_buffer->hash, 
+				(gconstpointer) query_string);
 
 		return found_string;
 	}

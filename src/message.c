@@ -406,7 +406,13 @@ void gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
 	regex_t *rex;
 	regmatch_t pos[3];
-	gchar *comment = GTR_COMMENT(msg->comment)->comment;
+	gchar *comment;
+	
+	g_return_if_fail(msg!=NULL);
+	g_return_if_fail(msg->comment!=NULL);
+	g_return_if_fail(GTR_COMMENT(msg->comment)->comment!=NULL);
+
+	comment=GTR_COMMENT(msg->comment)->comment;
 	
 	/* 
 	 * If fuzzy status is already correct

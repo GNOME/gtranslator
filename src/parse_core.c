@@ -75,13 +75,16 @@ void gtranslator_parse(const gchar *filename)
 #define FIRST_MSG GTR_MSG(po->messages->data)
 	first_is_fuzzy=(FIRST_MSG->status & GTR_MSG_STATUS_FUZZY) != 0;
 	gtranslator_message_status_set_fuzzy(FIRST_MSG, FALSE);
+	
 	/*
 	 * If the first message is header (it always should be)
 	 */
 	po->header = gtranslator_header_get(FIRST_MSG);
+
 	if (po->header)
 	{
 		GList *header_li;
+		
 		/*
 		 * Unlink it from messages list
 		 */
