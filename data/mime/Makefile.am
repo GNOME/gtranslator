@@ -1,14 +1,25 @@
 ## ./data/mime/Makefile.am of gtranslator
 
-if BIND_MIME
-Mimeicondir = $(PIXMAP_DIR)
+##
+## The mime dirs
+## 
+Mimeicondir = $(datadir)/pixmaps/mc
+Mimeinfofilesdir = $(datadir)/mime-info
+
+##
+## And the mime-files
+##
 Mimeicon_DATA = application-x-po.png application-x-gmo.png
-
-Mimekeysdir = $(datadir)/mime-info
-Mimekeys_predata = gtranslator.keys.in
-Mimekeys_DATA = gtranslator.mime $(Mimekeys_predata:.keys.in=.keys)
+Mimeinfofiles_predata = gtranslator.keys.in
+Mimeinfofiles_DATA = gtranslator.mime $(Mimeinfofiles_predata:.keys.in=.keys)
 	
-@XML_I18N_MERGE_KEYS_RULE@
-endif
+##
+## HACK -- overread this please..
+##
+all-am:
+	@mv $(Mimeinfofiles_predata) $(Mimeinfofiles_predata).backmeup
+	@mv $(Mimeinfofiles_predata:.keys.in=.keys) $(Mimeinfofiles_predata)
+	xml-i18n-merge -k ../../po $(Mimeinfofiles_predata) $(Mimeinfofiles_predata:.keys.in=.keys)
+	@mv $(Mimeinfofiles_predata).backmeup $(Mimeinfofiles_predata)
 
-EXTRA_DIST = application-x-po.png application-x-gmo.png gtranslator.mime
+EXTRA_DIST = $(Mimeicon_DATA) $(Mimeinfofiles_DATA)
