@@ -171,14 +171,14 @@ do
 	shift 1
 	if test "sendto$1" = "sendto" ; then
 		echo "---------------------------------------------------------------"
-		echo "No languages given to send the po file to."
+		echo "No language given to send the po file to."
 		echo "---------------------------------------------------------------"
 	else
 
 		echo "---------------------------------------------------------------"
 		export SENDTO_LANGS="$1 $SENDTO_LANGS"
 		shift 1
-		echo "Sending the merged po files to this lang: $SENDTO_LANGS"
+		echo "Sending the merged po files to this/these lang(s): $SENDTO_LANGS"
 		echo "---------------------------------------------------------------"
 	fi
 	;;
@@ -269,11 +269,11 @@ for i in $PO_FILES
 			echo $SENDTO_LANGS|grep -sq $_lang && {
 				gzip --best -cf < $i > $PACKAGE.$i.gz
 			echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
-			echo " immediately with your update of $i." >> $BODY_FILE
+			echo " immediately with start your update of $i." >> $BODY_FILE
 			echo "" >> $BODY_FILE
 			}
 		fi
-		echo "Have fun within the po-updating :-)" >> $BODY_FILE
+		echo "Have fun with po-updating :-)" >> $BODY_FILE
 	;;
 	*)
 		echo "Congratulations! $PACKAGE is making R $RELEASE and:" > $BODY_FILE
