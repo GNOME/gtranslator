@@ -57,13 +57,6 @@ static GtrCommentPrefixTypeGroup GtrPrefixTypes[] =
 };
 
 /*
- * Store whether the last displayed comment did break out of the normal
- *  pane sizes and the previous size.
- */
-static gint	paned_position=25;
-static gboolean	last_comment_was_oversized=FALSE;
-
-/*
  * Creates and returns a new GtrComment -- the comment type is automatically
  *  determined.
  */
@@ -275,41 +268,17 @@ void gtranslator_comment_display(GtrComment *comment)
 	g_return_if_fail(file_opened==TRUE);
 	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
 
-	switch(GTR_COMMENT(comment)->type)
+	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
+		comment->pure_comment);
+
+	if(GTR_COMMENT(comment)->type==TRANSLATOR_COMMENT)
 	{
-		case TRANSLATOR_COMMENT:
-			gtk_widget_set_sensitive(extra_content_view->edit_button, TRUE);
-		
-		case INTERNAL_COMMENT:
-		case SOURCE_COMMENT:
-			/*
-			 * Store the pane size and set the "last_comment_was_oversized"
-			 *  variable to TRUE.
-			 */
-			paned_position=e_paned_get_position(E_PANED(content_pane));
-			last_comment_was_oversized=TRUE;
-			
-			gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
-				comment->pure_comment);
-			
-			gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
-					break;
-
-		default:
-			/*
-			 * Was the last comment oversized? If so, set last_comment_was_oversized
-			 *  to FALSE and restore the previously stored pane position.
-			 */
-			if(last_comment_was_oversized)
-			{
-				last_comment_was_oversized=FALSE;
-				e_paned_set_position(E_PANED(content_pane), paned_position);
-			}
-			
-			gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
-				_("Invisible comment"));
-
-			gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
-					break;
+		gtk_widget_set_sensitive(extra_content_view->edit_button, TRUE);
 	}
+	else
+	{
+		gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
+	}
+
+	e_paned_set_position(E_PANED(content_pane), 0);
 }

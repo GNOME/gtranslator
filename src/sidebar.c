@@ -108,10 +108,6 @@ void gtranslator_sidebar_activate_views()
 		e_utf8_from_locale_string(_("Message")));
 
 	e_shortcut_model_add_item(model, 0, -1,
-		"comment:",
-		e_utf8_from_locale_string(_("Comment")));
-	
-	e_shortcut_model_add_item(model, 0, -1,
 		"number:",
 		e_utf8_from_locale_string(_("Number")));
 
@@ -132,7 +128,6 @@ void gtranslator_sidebar_clear_views()
 	/*
 	 * Remove the view icons/items from the sidebar model.
 	 */
-	e_shortcut_model_remove_item(model, 0, 4);
 	e_shortcut_model_remove_item(model, 0, 3);
 	e_shortcut_model_remove_item(model, 0, 2);
 	e_shortcut_model_remove_item(model, 0, 1);
@@ -162,6 +157,7 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	gchar *pixmap_filename;
 	
 	g_return_val_if_fail(url!=NULL, NULL);
+	g_return_val_if_fail(url[0]!='\0', NULL);
 
 	/*
 	 * Switch corresponding to the url prefix the icon in the
@@ -176,7 +172,7 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 			pixmap_filename=gnome_pixmap_file(
 				"mc/application-x-po.png");
 				break;
-	
+
 		/*
 		 * The C-Format URI type.
 		 */
@@ -184,7 +180,7 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 			pixmap_filename=gnome_pixmap_file(
 				"mc/application-x-po.png");
 				break;
-		
+
 		/*
 		 * Number URI:
 		 */
@@ -199,13 +195,6 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 		case 'h':
 			pixmap_filename=gnome_pixmap_file(
 				"mc/application-x-po.png");
-				break;
-				
-		/*
-		 * The comment: URI case:
-		 */
-		case 'c':
-			pixmap_filename=gnome_pixmap_file("gtranslator.png");
 				break;
 
 		/*

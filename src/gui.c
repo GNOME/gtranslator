@@ -132,10 +132,9 @@ static  GtkTargetEntry dragtypes[] = {
 static gint 	update_count=0;
 
 /*
- * Pane positions storage variable.
+ * Pane positions storage variables.
  */
 static gint 	sidebar_pane_position=80;
-static gint 	content_pane_position=12;
 static gint	table_pane_position=150;
 
 /*
@@ -216,17 +215,16 @@ void gtranslator_create_main_window(void)
 	views_sidebar=gtranslator_sidebar_new();
 	gtranslator_messages_table=gtranslator_messages_table_new();
 
+	gtranslator_config_init();
+
 	/*
 	 * Activate the paned widgets if desired and fill them up with the right positions.
 	 */
 	if(GtrPreferences.show_sidebar)
 	{
-		gtranslator_config_init();
 		sidebar_pane_position=gtranslator_config_get_int(
 			"interface/sidebar_pane_position");
 		
-		gtranslator_config_close();
-	
 		e_paned_set_position(E_PANED(sidebar_pane), sidebar_pane_position);
 	}
 	else
@@ -234,12 +232,10 @@ void gtranslator_create_main_window(void)
 		e_paned_set_position(E_PANED(sidebar_pane), 0);
 	}
 
-	gtranslator_config_init();
-	content_pane_position=gtranslator_config_get_int(
-		"interface/content_pane_position");
-	
 	table_pane_position=gtranslator_config_get_int(
 		"interface/table_pane_position");
+
+	e_paned_set_position(E_PANED(table_pane), table_pane_position);
 	
 	gtranslator_config_close();
 
@@ -255,7 +251,7 @@ void gtranslator_create_main_window(void)
 		FALSE, FALSE, 0);
 	
 	gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
-	e_paned_set_position(E_PANED(content_pane), content_pane_position);
+	e_paned_set_position(E_PANED(content_pane), 0);
 
 	/*
 	 * Create the tool- and search-bar
@@ -414,15 +410,13 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	}
 
 	/*
-	 * Get the EPaned's position offsets.
+	 * Get the EPaned's position offset.
 	 */
-	content_pane_position=e_paned_get_position(E_PANED(content_pane));
 	table_pane_position=e_paned_get_position(E_PANED(table_pane));
 	
 	/*
-	 * Store the panes position in the preferences.
+	 * Store the pane position in the preferences.
 	 */
-	gtranslator_config_set_int("interface/content_pane_position", content_pane_position);
 	gtranslator_config_set_int("interface/table_pane_position", table_pane_position);
 	gtranslator_utils_save_geometry();
 

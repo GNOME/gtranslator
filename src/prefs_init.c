@@ -65,6 +65,7 @@ void gtranslator_preferences_init_default_values()
 		gtranslator_config_set_bool("toggles/save_geometry", TRUE);
 		gtranslator_config_set_bool("toggles/use_dot_char", TRUE);
 		gtranslator_config_set_bool("toggles/show_sidebar", TRUE);
+		gtranslator_config_set_bool("toggles/show_messages_table", TRUE);
 		gtranslator_config_set_bool("toggles/enable_popup_menu", TRUE);
 		gtranslator_config_set_bool("toggles/use_update_function", TRUE);
 		

@@ -1,3 +1,24 @@
+2001-07-31  Fatih Demir <kabalak@gtranslator.org>
+
+	* comment.c: Always show the comment, always let the pane fit the needed space
+		and simplified the "gtranslator_comment_display" function much.
+
+	* sidebar.c: Adapted for the missing comment view -- less items in the EGroupBar.
+
+	* find.c: Don't try to show the comment as a view -- the comment view
+		is now removed -- simply go to the message where the found text
+		 is in the comment.
+
+	* gui.c, menus.c & views.c/.h: Removed the comment view option and related
+		code -- the comment is already viewed permanently, so there's no
+		 need for an extra view.
+
+	* prefs_init.c: Init the messages table option with TRUE -- the table
+		should be visible on first startup.
+
+	* prefs.c/.h: Added "show_messages_table" option to GtrPrefences and
+		preferences -- not fully integrated into source yet.
+
 2001-07-30  Fatih Demir <kabalak@gtranslator.org>
 
 	* dialogs.c: We don't need any toggle button in the auto accomplishment

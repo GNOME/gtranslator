@@ -46,6 +46,8 @@
 #include <gtk/gtklabel.h>
 #include <gtk/gtkfilesel.h>
 
+#include <libgnome/gnome-util.h>
+
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app-util.h>
 #include <libgnomeui/gnome-dialog-util.h>
@@ -53,7 +55,7 @@
 #include <libgnomeui/gnome-stock.h>
 #include <libgnomeui/gnome-uidefs.h>
 
-#include <libgnome/gnome-util.h>
+#include <gal/e-paned/e-paned.h>
 
 /* Global variables */
 GtrPo *po;
@@ -810,6 +812,8 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	gtranslator_text_boxes_clean();
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");
 	gtk_widget_set_sensitive(GTK_WIDGET(extra_content_view->edit_button), FALSE);
+	e_paned_set_position(E_PANED(content_pane), 0);
+	
 	gtranslator_actions_set_up_state_no_file();
 
 	/*

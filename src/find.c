@@ -30,7 +30,6 @@
 #include "prefs.h"
 #include "sidebar.h"
 #include "utils.h"
-#include "views.h"
 
 #include <string.h>
 #include <gtk/gtkeditable.h>
@@ -184,10 +183,6 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			 *  "hightlighting" it.
 			 */  
 			gtranslator_message_go_to(msg);
-			gtranslator_views_set(GTR_COMMENT_VIEW);
-			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
-			gtk_editable_select_region(GTK_EDITABLE(text_box),
-				pos->rm_so, pos->rm_eo);
 			actpos++;
 		
 			return 1;

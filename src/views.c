@@ -43,7 +43,6 @@ static GtrView current_view=GTR_MESSAGE_VIEW;
 /*
  * The views functions are declared here.
  */
-void show_comment(void);
 void show_c_format(void);
 void show_number(void);
 void show_hotkey(void);
@@ -95,10 +94,6 @@ gboolean gtranslator_views_set(GtrView view)
 			show_c_format();
 			break;
 				
-		case GTR_COMMENT_VIEW:
-			show_comment();
-			break;
-
 		case GTR_NUMBER_VIEW:
 			show_number();
 			break;
@@ -128,20 +123,6 @@ gboolean gtranslator_views_set(GtrView view)
 	nothing_changes=FALSE;
 	
 	return TRUE;
-}
-
-/*
- * Show the messages comment in the upper text widget.
- */
-void show_comment()
-{
-	gchar *comment=GTR_COMMENT(GTR_MSG(po->current->data)->comment)->pure_comment;
-
-	current_view=GTR_COMMENT_VIEW;
-	
-	gtk_editable_delete_text(GTK_EDITABLE(text_box), 0, -1);
-
-	setup_text(text_box, comment, _("No comments available for this message."));
 }
 
 /*

@@ -72,7 +72,7 @@ static GtkWidget
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
 	*autosave, *autosave_with_suffix, *sweep_compile_file,
-	*use_learn_buffer;
+	*use_learn_buffer, *show_messages_table;
 
 /*
  * The timeout GtkSpinButton:
@@ -108,20 +108,20 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The tables for holding all the entries below.
 	 */
-	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 3, 2, 
-		_("Personal informations"));
-	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, 
-		_("Language settings"));
-	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, 
-		_("Po file editing"));
-	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 7, 1, 
-		_("Miscellaneous"));
-	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, 
-		_("Recent files & spell checking"));
-	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 6, 2, 
-		_("Fonts, colors and color schemes"));
-	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, 
-		_("Autosaving"));
+	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 
+		3, 2, _("Personal informations")); 
+	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+		5, 2, _("Language settings"));
+	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+		5, 1, _("Po file editing"));
+	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+		8, 1, ("Miscellaneous"));
+	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+		4, 2, _("Recent files & spell checking"));
+	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+		6, 2, _("Fonts, colors and color schemes"));
+	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
+		4, 2, _("Autosaving"));
 	
 	/*
 	 * Create all the personal entries.
@@ -222,6 +222,9 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 6,
 		_("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
+	show_messages_table=gtranslator_utils_attach_toggle_with_label(fourth_page, 7,
+		_("Show the messages table"),
+		GtrPreferences.show_messages_table, gtranslator_preferences_dialog_changed);
 	
 	/*
 	 * The fifth page with the Recent files options.
@@ -346,6 +349,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
+	GtrPreferences.show_messages_table = if_active(show_messages_table);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
@@ -455,6 +459,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/show_sidebar",
 			      GtrPreferences.show_sidebar);
+	gtranslator_config_set_bool("toggles/show_messages_table",
+			      GtrPreferences.show_messages_table);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      GtrPreferences.check_recent_file);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
@@ -477,7 +483,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_close();
 
 	/*
-	 * Show or hide the views sidebar/content pane according to the preferences.
+	 * Show or hide the sidebar and the table accorsding to the _possibly_ changed
+	 *  settings in the preferences dialog.
 	 */
 	if(GtrPreferences.show_sidebar)
 	{
@@ -623,6 +630,8 @@ void gtranslator_preferences_read(void)
 		"toggles/fill_header");
 	GtrPreferences.show_sidebar = gtranslator_config_get_bool(
 		"toggles/show_sidebar");
+	GtrPreferences.show_messages_table = gtranslator_config_get_bool(
+		"toggles/show_messages_table");
 
 	/*
 	 * Check if we'd to use special styles.
