@@ -605,7 +605,6 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	if (!ask_to_save_file())
 		return TRUE;
 	close_file(NULL, NULL);
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1), _("Bye bye!"));
 	save_geometry();
 	/*
 	 * Free the preferences stuff.

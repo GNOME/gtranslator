@@ -365,7 +365,7 @@ void parse(const gchar *filename)
 	disable_actions(ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED);
 	
 	if(po->no_write_perms==TRUE||
-		!strcmp(po->filename, "gtranslator-temp-po-file")||
+		!strcmp(g_basename(po->filename), "gtranslator-temp-po-file")||
 		strstr(po->filename, "/.gtranslator-"))
 	{
 		disable_actions(ACT_SAVE);
@@ -415,8 +415,7 @@ void parse(const gchar *filename)
 	/*
 	 * Test if the filename is NOT equivalent to our temp file's name
 	 */
-	if(strcmp(po->filename, g_strdup_printf("%s/%s",
-		g_get_home_dir(), "gtranslator-temp-po-file")))
+	if(strcmp(g_basename(po->filename), "gtranslator-temp-po-file"))
 	{
 		gtranslator_history_add(po->filename,
 			po->header->prj_name, po->header->prj_version);
