@@ -22,4 +22,39 @@
 
 #include "messages.h"
 
+/*
+ * The general header informations for the translation memories.
+ */
+typedef struct
+{
+	gchar 	*tool;
+	gchar	*tool_version;
+	gchar	*format;
+	gchar	*encoding;
+
+	gchar	*data_type;
+	gchar	*seg_type;
+	gchar	*adminlang;
+	gchar	*srclang;
+
+	gchar	*id;
+	gchar	*date;
+} GtrTMHeader;
+
+/*
+ * The TM content.
+ */
+typedef struct
+{
+	gchar		*filename;
+	GtrTMHeader	*header;
+	GList		*units;
+} GtrTM;
+
+/*
+ * Should be an interface to append a memory entry to the currently used TM.
+ */
+void gtranslator_tm_add(const gchar *message, const gchar *translation,
+	const gchar *language_code, const gchar *eventual_id);
+
 #endif

@@ -18,11 +18,30 @@
  */
 
 #include "learn.h"
+#include "parse.h"
+#include "translation-memory.h"
+#include "utils.h"
 
 /*
  * Learn the given message specs and put'em into an eventual personal tm.
  */
 void gtranslator_learn_message(GtrMsg *msg)
 {
+	gchar *id_informations;
+	GList *foolist=NULL;
+	
 	g_return_if_fail(msg!=NULL);
+	g_return_if_fail(msg->msgstr!=NULL);
+
+	foolist=g_list_append(foolist, (gpointer) msg);
+
+	id_informations=g_strdup_printf("%s/%s/%s/%s/%i", po->header->prj_name,
+		po->header->language, po->header->prj_version,
+		po->header->po_date,
+		g_list_position(po->messages, foolist));
+
+	gtranslator_tm_add(msg->msgid, msg->msgstr,
+		gtranslator_utils_get_locale_name(), id_informations);
+
+	g_free(id_informations);
 }
