@@ -105,6 +105,13 @@ export SUBJECT="[ Pozilla #$POZILLA_NO ] $PACKAGE R $RELEASE"
 # Now get for every po-file the last translator
 #
 ./update.pl -P
+
+#
+# Possibly you want to use the new xml-i18n-tools here,
+#  so you comment out the above call and uncomment the following.
+# 
+# ./update.sh -P
+#
 for i in $PO_FILES
 	do
 	AUTHOR=`grep ^\"Last $i|sed -e 's/.*:\ //g' \
