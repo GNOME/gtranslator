@@ -50,7 +50,12 @@ GtrID *gtranslator_id_new(void);
 /*
  * Creates the id from a given gchar-string formatted by gtranslator.
  */
-GtrID *gtranslator_id_new_from_string(const gchar *string); 
+GtrID *gtranslator_id_new_from_string(const gchar *string);
+
+/*
+ * Create and convert the generated id to a string.
+ */
+gchar *gtranslator_id_new_id_string(void);
 
 /*
  * The otherway conversion: convert a GtrID into a plain string.

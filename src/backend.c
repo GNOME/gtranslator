@@ -76,15 +76,21 @@ void gtranslator_backend_add(const gchar *filename)
  */
 gboolean gtranslator_backend_open_all_backends(const gchar *directory)
 {
-	if(!directory)
-	{
-		directory=BACKENDS_DIR;
-	}
+	g_return_val_if_fail(directory!=NULL, FALSE);
 	
+	/*
+	 * Get all backend descriptor files from the directory and sort the
+	 *  filename list.
+	 */
 	backends=gtranslator_utils_file_names_from_directory(directory,
 		".xml", TRUE, FALSE);
 
 	g_return_val_if_fail(backends!=NULL, FALSE);
+
+	while(backends!=NULL)
+	{
+		backends=backends->next;
+	}
 
 	return TRUE;
 }

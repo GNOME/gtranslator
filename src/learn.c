@@ -17,6 +17,7 @@
  *
  */
 
+#include "id.h"
 #include "learn.h"
 #include "parse.h"
 #include "translation-memory.h"
@@ -27,18 +28,19 @@
  */
 void gtranslator_learn_message(GtrMsg *msg)
 {
-	gchar *id_informations;
-	GList *foolist=NULL;
+	GtrID *id;
+	gchar *id_string;
 	
 	g_return_if_fail(msg!=NULL);
 	g_return_if_fail(msg->msgstr!=NULL);
 
-	foolist=g_list_append(foolist, (gpointer) msg);
+	/*
+	 * Generate the GtrID and convert it to a plain string.
+	 */
+	id=gtranslator_id_new();
+	id_string=gtranslator_id_string_from_id(GTR_ID(id));
 
-	id_informations=g_strdup_printf("%s/%s/%s/%s/%i", po->header->prj_name,
-		po->header->language, po->header->prj_version,
-		po->header->po_date,
-		g_list_position(po->messages, foolist));
+	gtranslator_id_free(&id);
 
 	if(gtranslator_tm_query_for_message(msg->msgid, NULL)==-1)
 	{
@@ -47,14 +49,13 @@ void gtranslator_learn_message(GtrMsg *msg)
 		 *  personal TM.
 		 */
 		gtranslator_tm_add(msg->msgid, msg->msgstr,
-			gtranslator_utils_get_locale_name(), id_informations);
+			gtranslator_utils_get_locale_name(), id_string);
 	}
 	else
 	{
-		/*
-		 * FIXME: Warning/error about it.
-		 */
+		g_warning("Message `%s' is already in TM (FIXME: write dialog)",
+			msg->msgid);
 	}
 
-	g_free(id_informations);
+	g_free(id_string);
 }

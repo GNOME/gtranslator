@@ -124,7 +124,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 	 */
 	if(sort)
 	{
-		files=g_list_append(files, (GFunc) g_strcasecmp);
+		files=g_list_append(files, (GFunc) nautilus_strcmp);
 	}
 
 	closedir(dir);

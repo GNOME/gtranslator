@@ -103,6 +103,25 @@ gchar *gtranslator_id_string_from_id(GtrID *id)
 }
 
 /*
+ * Encapsulate the calls for creating a new GtrID string.
+ */
+gchar *gtranslator_id_new_id_string()
+{
+	GtrID *id;
+	gchar *id_string;
+
+	id=gtranslator_id_new();
+
+	g_return_val_if_fail(id!=NULL, NULL);
+	
+	id_string=gtranslator_id_string_from_id(GTR_ID(id));
+	
+	gtranslator_id_free(&id);
+	
+	return id_string;
+}
+
+/*
  * Is the given GtrID resolvable at all -- is the file present and do the
  *  other specs also match?!
  */
