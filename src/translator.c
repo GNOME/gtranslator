@@ -38,6 +38,18 @@ static void gtranslator_translator_read_value(gchar **destvalue,
 	gchar	*configpath);
 
 /*
+ * Reads the envpath for sane values and if it finds something useful,
+ *  sets up destvalue.
+ */
+static void gtranslator_translator_read_env_value(gchar *envpath,
+	gchar	**destvalue);
+
+/*
+ * Returns GtrLanguage values from the preferences.
+ */
+static GtrLanguage *gtranslator_translator_read_language(void);
+
+/*
  * Set the values safely from the given configpath's.
  */
 static void gtranslator_translator_read_value(gchar **destvalue,
@@ -71,6 +83,54 @@ static void gtranslator_translator_read_value(gchar **destvalue,
 }
 
 /*
+ * Determine environmental values from the given envpath.
+ */
+static void gtranslator_translator_read_env_value(gchar *envpath,
+	gchar	**destvalue)
+{
+	gchar	*value=NULL;
+
+	g_return_if_fail(envpath!=NULL);
+
+	gtranslator_utils_get_environment_value(envpath,
+		&value);
+
+	if(value)
+	{
+		*destvalue=g_strdup(value);
+		GTR_FREE(value);
+	}
+	else
+	{
+		*destvalue=NULL;
+	}
+}
+
+/*
+ * Return the newly parsed and set up GtrLanguage from the preferences.
+ */
+static GtrLanguage *gtranslator_translator_read_language()
+{
+	GtrLanguage *language=g_new0(GtrLanguage, 1);
+    
+    	/*
+	 * Read the language specs from the preferences.
+	 */
+	gtranslator_translator_read_value(&language->name,
+		"language/name");
+	gtranslator_translator_read_value(&language->lcode,
+		"language/language_code");
+	gtranslator_translator_read_value(&language->group,
+		"language/team_email");
+	gtranslator_translator_read_value(&language->enc,
+		"language/mime_type");
+	gtranslator_translator_read_value(&language->bits,
+		"language/encoding");
+
+	return language;
+}
+
+/*
  * Creates a new GtrTranslator structure with the information/configuration
  *  from the preferences.
  */
@@ -82,7 +142,6 @@ GtrTranslator *gtranslator_translator_new()
 	 * Creathe the new GtrTranslator structure.
 	 */
 	new_translator=g_new0(GtrTranslator, 1);
-	new_translator->language=g_new0(GtrLanguage, 1);
 
 	/*
 	 * Read the translator specific values from the preferences.
@@ -98,18 +157,9 @@ GtrTranslator *gtranslator_translator_new()
 		"translator/translator_memory_buffer");
 
 	/*
-	 * Read the language specs from the preferences.
+	 * Read our already existing language values from the preferences.
 	 */
-	gtranslator_translator_read_value(&new_translator->language->name,
-		"language/name");
-	gtranslator_translator_read_value(&new_translator->language->lcode,
-		"language/language_code");
-	gtranslator_translator_read_value(&new_translator->language->group,
-		"language/team_email");
-	gtranslator_translator_read_value(&new_translator->language->enc,
-		"language/mime_type");
-	gtranslator_translator_read_value(&new_translator->language->bits,
-		"language/encoding");
+	new_translator->language=gtranslator_translator_read_language();
 
 	/*
 	 * Get the default query domain from the preferences.
@@ -129,32 +179,102 @@ GtrTranslator *gtranslator_translator_new()
 GtrTranslator *gtranslator_translator_new_with_default_values()
 {
 	GtrTranslator 	*new_translator;
-	gchar		*env_value;
-	gint		 i;
+
+	gchar		*language_locale=NULL;
+	gchar		*natural_language_name=NULL;
 	
-	env_value=NULL;
 	new_translator=g_new0(GtrTranslator, 1);
 	new_translator->language=g_new0(GtrLanguage, 1);
 
-	gtranslator_utils_get_environment_value("GTRANSLATOR_TRANSLATOR_NAME:\
-		TRANSLATOR_NAME:TRANSLATOR:NAME:LOGNAME:USER", &env_value);
+	/*
+	 * Do our environment dancing for the translator name & EMail address.
+	 */
+	gtranslator_translator_read_env_value(
+		"GTRANSLATOR_TRANSLATOR_NAME:TRANSLATOR_NAME:TRANSLATOR:\
+		NAME:CONTACT_NAME:LOGNAME:USER",
+		&new_translator->name);
 
-	if(env_value)
+	gtranslator_translator_read_env_value(
+		"GTRANSLATOR_TRANSLATOR_EMAIL_ADDRESS:\
+		GTRANSLATOR_TRANSLATOR_EMAIL:TRANSLATOR_EMAIL:\
+		EMAIL_ADDRESS:MAIL_ADDRESS:EMAIL:CONTACT_EMAIL",
+		&new_translator->email);
+
+	/*
+	 * Try to "guess" the default query domain from the environment.
+	 */
+	gtranslator_translator_read_env_value(
+		"GTRANSLATROR_DEFAULT_QUERY_DOMAIN:DEFAULT_QUERY_DOMAIN:\
+		GETTEXT_QUERY_DOMAIN:QUERY_DOMAIN",
+		&new_translator->query_domain);
+
+	/*
+	 * The default learn buffer is set to the current default file
+	 *  name "learn-buffer.xml" which is in the personal UMTF directory
+	 *   in ~/.gtranslator/umtf/.
+	 */
+	new_translator->learn_buffer=g_strdup("learn-buffer.xml");
+	new_translator->tm_buffer=g_strdup("translation-memory.xml");
+
+	/*
+	 * Determine the language locale setting in our environment.
+	 */
+	language_locale=gtranslator_utils_get_environment_locale();
+
+	/*
+	 * If we could determine any sane locale, then we do set up the
+	 *  preferences values accordingly here, if not, we assume English
+	 *   and continue.
+	 */
+	if(!language_locale || strlen(language_locale) < 2)
 	{
-		new_translator->name=g_strdup(env_value);
-		GTR_FREE(env_value);
+		gtranslator_utils_set_language_values_by_language("English");
+	}
+	else
+	{
+		natural_language_name=gtranslator_utils_get_language_name_by_locale_code(language_locale);
+		
+		/*
+		 * If we could get a natural, normal language name for the
+		 *  given locale, set the corresponding values in the prefs, 
+		 *   else set up the default "English" values as if we didn't
+		 *    find any locale environment variables.
+		 */
+		if(!natural_language_name)
+		{
+			natural_language_name="English";
+		}
 	}
 
 	/*
-	 * FIXME: Read in the environment values and set the preferences 
-	 *  accordingly.
+	 * Now operate on our languages list and get the corresponding values
+	 *  for the language.
 	 */
-
-	for(i=0; i < (sizeof(languages) / sizeof(GtrLanguage)); i++)
+	if(natural_language_name)
 	{
-		/*
-		 * FIXME: Read/accomplish the language values.
-		 */
+		gint	i=0;
+
+		while(languages[i].name!=NULL)
+		{
+			if(!nautilus_strcasecmp(languages[i].name, 
+				natural_language_name))
+			{
+				/*
+				 * Assign the values for the language from
+				 *  the languages list here.
+				 */
+				new_translator->language->name=g_strdup(languages[i].name);
+				new_translator->language->lcode=g_strdup(languages[i].lcode);
+				new_translator->language->enc=g_strdup(languages[i].enc);
+				new_translator->language->bits=g_strdup(languages[i].bits);
+				
+				GTR_STRDUP(new_translator->language->group, languages[i].group);
+				
+				break;
+			}
+			
+			i++;
+		}
 	}
 
 	return new_translator;
