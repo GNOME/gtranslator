@@ -12,7 +12,7 @@
 # Also feature a small help screen if the user wants to know more about this
 #  script.
 #
-case $1
+case $1 in
 --[hH][eE][lL][pP]|-[hH])
 	echo "---------------------------------------------------------------"
 	echo "\"$0\""
