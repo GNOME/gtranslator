@@ -67,18 +67,30 @@ gboolean backend_open(const gchar *filename)
 	
 	gchar 	 	*line;
 	gchar 		*string;
+	gchar		*tempfilename;
+
+	gint		 lines=0;
 
 	g_return_val_if_fail(filename!=NULL, FALSE);
+	tempfilename=string=line=NULL;
 
+	/*
+	 * Open up the text file for pure reading, parsing in.
+	 */
 	text_file=fopen(filename, "r");
 	g_return_val_if_fail(text_file!=NULL, FALSE);
 
+	/*
+	 * Get a sane header from the preferences values for the translator.
+	 */
 	header=gtranslator_header_create_from_prefs();
 
-	po_file=fopen("text.po", "w");
+	/*
+	 * Open the resulting temporary file for gtranslator for writing.
+	 */
+	tempfilename=gtranslator_utils_get_temp_file_name(); 
+	po_file=fopen(tempfilename, "w");
 	g_return_val_if_fail(po_file!=NULL, FALSE);
-
-	line=string=NULL;
 
 	fprintf(po_file, "\
 # gtranslator converted text file \"%s\".\n\
@@ -103,6 +115,9 @@ msgstr \"\"\n\
 
 	while((line = gtranslator_utils_getline(text_file)) !=NULL)
 	{
+
+		lines++;
+		
 		/*
 		 * Every newline should separate a "message".
 		 */
@@ -110,8 +125,7 @@ msgstr \"\"\n\
 		
 		if((!line[0] || line[0]=='\n') && string)
 		{
-			fprintf(po_file, "msgid \"%s\"\nmsgstr \"\"\n\n",
-				string);
+			fprintf(po_file, "#: %s:%i\nmsgid \"%s\"\nmsgstr \"\"\n\n", filename, lines, string);
 
 			GTR_FREE(string);
 		}
@@ -121,8 +135,18 @@ msgstr \"\"\n\
 		}
 	}
 
+	/*
+	 * Close the used file streams.
+	 */
 	fclose(text_file);
 	fclose(po_file);
+
+	/*
+	 * Now open the temporary filename.
+	 */
+	gtranslator_parse_main(tempfilename);
+	GTR_FREE(tempfilename);
+	
 	return TRUE;
 }
 
