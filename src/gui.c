@@ -68,6 +68,8 @@
 #include <gal/e-table/e-table.h>
 #include <gal/e-table/e-table-scrolled.h>
 
+#include <gal/e-text/e-entry.h>
+
 /*
  * Global external variables
  */
@@ -77,11 +79,11 @@ GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
 GtkWidget *sidebar_pane;
 GtkWidget *content_pane;
+GtkWidget *extra_content_view;
 
 /*
  * Internally used local-global variables
  */
-static GtkWidget *extra_content_views;
 static GtkWidget *views_sidebar;
 
 gboolean nothing_changes;
@@ -218,22 +220,15 @@ void gtranslator_create_main_window(void)
 		e_paned_set_position(E_PANED(sidebar_pane), 0);
 	}
 
-	if(GtrPreferences.show_content_pane)
-	{
-		gtranslator_config_init();
-		content_pane_position=gtranslator_config_get_int(
-			"interface/content_pane_position");
-		
-		gtranslator_config_close();
+	gtranslator_config_init();
+	content_pane_position=gtranslator_config_get_int(
+		"interface/content_pane_position");
+	gtranslator_config_close();
 
-		extra_content_views=gtranslator_messages_table_new();
-		e_paned_set_position(E_PANED(content_pane), content_pane_position);
-	}
-	else
-	{
-		extra_content_views=gtk_label_new("");
-		e_paned_set_position(E_PANED(content_pane), 0);
-	}
+	extra_content_view=e_entry_new();
+	e_entry_set_editable(E_ENTRY(extra_content_view), FALSE);
+
+	e_paned_set_position(E_PANED(content_pane), content_pane_position);
 
 	/*
 	 * Create the tool- and search-bar
@@ -255,7 +250,7 @@ void gtranslator_create_main_window(void)
 
 	vertical_box=gtk_vbox_new(FALSE, 0);
 	
-	e_paned_pack1(E_PANED(content_pane), extra_content_views, TRUE, FALSE);
+	e_paned_pack1(E_PANED(content_pane), extra_content_view, TRUE, FALSE);
 	e_paned_pack2(E_PANED(content_pane), vertical_box, TRUE, FALSE);
 	
 	e_paned_pack2(E_PANED(sidebar_pane), content_pane, TRUE, FALSE);
@@ -353,8 +348,8 @@ static void delete_text_handler(GtkEditable *editable, gint start_position,
 	 */
 	if(start_position!=0 && end_position!=-1)
 	{
-		/* 
-		 * FIXME: Undo call goes here.
+		/*
+		 * FIXME: Handle this deleted text.
 		 */
 	}
 }
@@ -373,18 +368,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 
 	gtranslator_file_close(NULL, NULL);
 	
-	if(GtrPreferences.show_content_pane)
-	{
-		gchar *messages_table_state_file;
-
-		messages_table_state_file=gtranslator_utils_get_messages_table_state_file_name();
-		#if 0 /* FIXME: SEGV */
-		e_table_save_state(E_TABLE_SCROLLED(extra_content_views)->table, 
-			messages_table_state_file);
-		#endif
-		g_free(messages_table_state_file);
-	}
-	
 	/*
 	 * Initialize the config and set the pane position -- if needed.
 	 */
@@ -396,12 +379,8 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 		gtranslator_config_set_int("interface/sidebar_pane_position", sidebar_pane_position);
 	}
 
-	if(GtrPreferences.show_content_pane)
-	{
-		content_pane_position=e_paned_get_position(E_PANED(content_pane));
-		gtranslator_config_set_int("interface/content_pane_position", content_pane_position);
-	}
-	
+	content_pane_position=e_paned_get_position(E_PANED(content_pane));
+	gtranslator_config_set_int("interface/content_pane_position", content_pane_position);
 	gtranslator_utils_save_geometry();
 	
 	/*
@@ -458,13 +437,16 @@ void gtranslator_text_boxes_clean()
 
 void gtranslator_application_bar_update(gint pos)
 {
-	gchar *str, *status;
-	GtrMsg *msg;
+	gchar 	*str, *status;
+	GtrMsg 	*msg;
+	
 	gnome_appbar_pop(GNOME_APPBAR(gtranslator_application_bar));
+	
 	/*
 	 * Get the message.
 	 */
 	msg=GTR_MSG(po->current->data);
+	
 	/*
 	 * And append according to the message status the status name.
 	 */
@@ -477,6 +459,7 @@ void gtranslator_application_bar_update(gint pos)
 		else
 		{
 			status=g_strdup_printf(_("%s [ No fuzzy left ]"), _("Fuzzy"));
+			
 			/*
 			 * Also disable the corresponding button.
 			 */
@@ -486,7 +469,7 @@ void gtranslator_application_bar_update(gint pos)
 		status=g_strdup(_("Stick"));
 	} else if(msg->status & GTR_MSG_STATUS_TRANSLATED) {
 		status=g_strdup(_("Translated"));
-	} else { 
+	} else {
 		/*
 		 * Message is untranslated 
 		 */
@@ -505,6 +488,7 @@ void gtranslator_application_bar_update(gint pos)
 			gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED, ACT_ACCOMPLISH);
 		}	
 	}
+	
 	/*
 	 * Assign the first part.
 	 */

@@ -49,19 +49,22 @@ static ETableExtras *table_extras_new(void);
 static gint column_count_function(ETableModel *model, void *useless);
 static gint row_count_function(ETableModel *model, void *useless);
 
-static gboolean is_cell_editable_function(ETableModel *model, gint column, gint row,
-	void *useless);
-static gboolean is_empty_function(ETableModel *model, gint column, const void *value,
-	void *useless);
+static gboolean is_cell_editable_function(ETableModel *model, gint column, 
+	gint row, void *useless);
+static gboolean is_empty_function(ETableModel *model, gint column, 
+	const void *value, void *useless);
 
-static void free_value_function(ETableModel *model, gint column, void *value, void *useless);
+static void free_value_function(ETableModel *model, gint column, void *value, 
+	void *useless);
 static void set_value_at_function(ETableModel *model, gint column, gint row,
 	const void *value, void *useless);
 
-static void *duplicate_value_function(ETableModel *model, gint column, const void *value,
+static void *duplicate_value_function(ETableModel *model, gint column, 
+	const void *value, void *useless);
+static void *initialize_value_function(ETableModel *model, gint column, 
 	void *useless);
-static void *initialize_value_function(ETableModel *model, gint column, void *useless);
-static void *value_at_function(ETableModel *model, gint column, gint row, void *useless);
+static void *value_at_function(ETableModel *model, gint column, gint row, 
+	void *useless);
 
 static gchar *return_string_for_value_function(ETableModel *model, gint column, 
 	const void *value, void *useless);
@@ -86,14 +89,14 @@ static gint row_count_function(ETableModel *model, void *useless)
 	}
 }
 
-static gboolean is_cell_editable_function(ETableModel *model, gint column, gint row,
-        void *useless)
+static gboolean is_cell_editable_function(ETableModel *model, gint column, 
+	gint row, void *useless)
 {
-	return TRUE;
+	return FALSE;
 }
 
-static gboolean is_empty_function(ETableModel *model, gint column, const void *value,
-        void *useless)
+static gboolean is_empty_function(ETableModel *model, gint column, 
+	const void *value, void *useless)
 {
 	if(!value || value=='\0')
 	{
@@ -105,7 +108,8 @@ static gboolean is_empty_function(ETableModel *model, gint column, const void *v
 	}
 }
 
-static void free_value_function(ETableModel *model, gint column, void *value, void *useless)
+static void free_value_function(ETableModel *model, gint column, void *value, 
+	void *useless)
 {
 	if(value)
 	{
@@ -116,11 +120,10 @@ static void free_value_function(ETableModel *model, gint column, void *value, vo
 static void set_value_at_function(ETableModel *model, gint column, gint row,
         const void *value, void *useless)
 {
-	g_message("Set value for %i[%i]: %s", row, column, (gchar *) value);
 }
 
-static void *duplicate_value_function(ETableModel *model, gint column, const void *value,
-        void *useless)
+static void *duplicate_value_function(ETableModel *model, gint column, 
+	const void *value, void *useless)
 {
 	if(value)
 	{
@@ -132,18 +135,21 @@ static void *duplicate_value_function(ETableModel *model, gint column, const voi
 	}
 }
 
-static void *initialize_value_function(ETableModel *model, gint column, void *useless)
+static void *initialize_value_function(ETableModel *model, gint column, 
+	void *useless)
 {
 	return g_strdup("");
 }
 
-static void *value_at_function(ETableModel *model, gint column, gint row, void *useless)
+static void *value_at_function(ETableModel *model, gint column, gint row, 
+	void *useless)
 {
 	if(file_opened)
 	{
 		if(row > 0 && row <= (po->length - 1))
 		{
-			return g_strdup(GTR_MSG(g_list_nth_data(po->messages, row))->msgid);
+			return g_strdup(GTR_MSG(
+				g_list_nth_data(po->messages, row))->msgid);
 		}
 		else
 		{

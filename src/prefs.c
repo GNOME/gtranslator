@@ -71,7 +71,7 @@ static GtkWidget
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
-	*autosave, *autosave_with_suffix, *show_content_pane;
+	*autosave, *autosave_with_suffix;
 
 /*
  * The timeout GtkSpinButton:
@@ -132,6 +132,15 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    gtranslator_utils_attach_entry_with_label(first_page, 1, _("Author's EMail:"),
 				    email, gtranslator_preferences_dialog_changed);
 
+	/*
+	 * If no domainslist could be got from the startup routines, build up a foo'sh list.
+	 */
+	if(!domains)
+	{
+		domains=g_list_prepend(domains, g_strdup(" "));
+		domains=g_list_reverse(domains);
+	}
+
 	defaultdomain =
 	    gtranslator_utils_attach_combo_with_label(first_page, 2, _("Default query domain:"),
 			    	    domains, GtrPreferences.defaultdomain,
@@ -148,7 +157,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(1));
 	lcode =
 	    gtranslator_utils_attach_combo_with_label(second_page, 1, _("Language code:"),
-				    lcodes_list, lc, 
+				    lcodes_list, lc,
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(2));
 	lg_email =
 	    gtranslator_utils_attach_combo_with_label(second_page, 2,
@@ -205,9 +214,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
 		_("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
-	show_content_pane=gtranslator_utils_attach_toggle_with_label(fourth_page, 6,
-		_("Show the messages table"),
-		GtrPreferences.show_content_pane, gtranslator_preferences_dialog_changed);
 	
 	/*
 	 * The fifth page with the Recent files options.
@@ -331,7 +337,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.update_function = if_active(use_update_function);
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
-	GtrPreferences.show_content_pane = if_active(show_content_pane);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
@@ -438,8 +443,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/show_sidebar",
 			      GtrPreferences.show_sidebar);
-	gtranslator_config_set_bool("toggles/show_content_pane",
-			      GtrPreferences.show_content_pane);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      GtrPreferences.check_recent_file);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
@@ -469,15 +472,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	else
 	{
 		gtranslator_sidebar_hide();
-	}
-
-	if(GtrPreferences.show_content_pane)
-	{
-		gtranslator_messages_table_show();
-	}
-	else
-	{
-		gtranslator_messages_table_hide();
 	}
 }
 
@@ -608,7 +602,6 @@ void gtranslator_preferences_read(void)
 	
 	GtrPreferences.fill_header = gtranslator_config_get_bool("toggles/fill_header");
 	GtrPreferences.show_sidebar = gtranslator_config_get_bool("toggles/show_sidebar");
-	GtrPreferences.show_content_pane = gtranslator_config_get_bool("toggles/show_content_pane");
 
 	/*
 	 * Check if we'd to use special styles.
@@ -632,6 +625,6 @@ void gtranslator_preferences_free(void)
 	g_free(language);
 	g_free(mime);
 	g_free(enc);
-	g_free(lc);
 	g_free(lg);
+	g_free(lc);
 }

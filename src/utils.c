@@ -46,9 +46,12 @@ static gint list_ref=0;
  */ 
 gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 {
-	GString *o=g_string_new("");
-	gint count=0;
+	GString *o;
+	gint 	count=0;
 
+	g_return_val_if_fail(filename!=NULL, g_strdup(""));
+
+	o=g_string_new("");
 	filename=g_basename(filename);
 
 	/*
@@ -57,7 +60,6 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 	while(filename[count] && filename[count]!='.')
 	{
 		o=g_string_append_c(o, filename[count]);
-
 		count++;
 	}
 
@@ -223,7 +225,8 @@ gchar *gtranslator_utils_get_save_differently_file_name()
 }
 
 /*
- * Get the ETable state specification filename for our messages table. */
+ * Get the ETable state specification filename for our messages table.
+ */
 gchar *gtranslator_utils_get_messages_table_state_file_name()
 {
 	gchar *state_file;
@@ -360,7 +363,6 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 	}
 
 	closedir(dir);
-
 	return files;
 }
 

@@ -18,9 +18,12 @@
  */
 
 #include "comment.h"
+#include "gui.h"
 #include "nautilus-string.h"
 #include "parse.h"
 #include "utf8.h"
+
+#include <gal/e-text/e-entry.h>
 
 /*
  * Creates and returns a new GtrComment -- the comment type is automatically
@@ -254,11 +257,15 @@ void gtranslator_comment_display(GtrComment *comment)
 	g_return_if_fail(file_opened==TRUE);
 	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
 
+	e_entry_set_text(E_ENTRY(extra_content_view), comment->pure_comment);
+
 	if(comment->type==TRANSLATOR_COMMENT)
 	{
+		e_entry_set_editable(E_ENTRY(extra_content_view), TRUE);
 	}
 	else
 	{
+		e_entry_set_editable(E_ENTRY(extra_content_view), FALSE);
 	}
 }
 

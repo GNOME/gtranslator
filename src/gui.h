@@ -35,6 +35,7 @@ extern GtkWidget *text_box;
 extern GtkWidget *gtranslator_application_bar;
 extern GtkWidget *sidebar_pane;
 extern GtkWidget *content_pane;
+extern GtkWidget *extra_content_view;
 
 /*
  * Creates the main window ans sets up the environment.

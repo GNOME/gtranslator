@@ -137,6 +137,8 @@ void gtranslator_message_show(GList * list_item)
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	gtranslator_text_boxes_clean();
+
+	gtranslator_comment_display(GTR_COMMENT(msg->comment));
 	
 	/*
 	 * Substitute the free spaces in the msgid only if this is wished and

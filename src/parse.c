@@ -139,7 +139,10 @@ gboolean add_to_obsolete(gchar *comment)
 		}
 		return TRUE;
 	}
-	return FALSE;
+	else
+	{
+		return FALSE;
+	}
 }
 
 gboolean gtranslator_parse_core(void)
