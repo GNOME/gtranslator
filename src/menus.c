@@ -156,7 +156,7 @@ GnomeUIInfo the_edit_menu[] = {
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("_Comment..."),
+		GNOME_APP_UI_ITEM, N_("C_omment..."),
 		N_("Edit message comment"),
 		gtranslator_edit_comment_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_DATA, edit_comment_xpm,
