@@ -18,6 +18,12 @@
 #include <unistd.h>
 
 /**
+* This is an internally used function, so it's declared
+*  here and _not_ in the header.
+**/
+gboolean gtranslator_matches(GtrMsg *message, gchar *matchme);
+
+/**
 * Opens the given file to the database returned by this
 *  function.
 **/
@@ -541,43 +547,84 @@ void gtranslator_delete_from_db(GtranslatorDatabase *database,
 	**/
 	while(GTR_DB_LIST(database))
 	{
-		/*
-		* Do we have got the same msgid or msgstr?
+		/**
+		* Test if the current GtrMsg contains any
+		*  msgstrlist.
 		**/
-		if(
-			!strcmp(GTR_DB_LIST_MSG(database)->msgid,
-			searchitem)||
-		 	!strcmp(GTR_DB_LIST_MSG(database)->msgstr,
-			searchitem)
-		  )
+		if(GTR_DB_LIST_MSGSTR_LIST(database))
 		{
 			/**
-			* Are we trying to delete the complete
-			*  GtrMsg or the msgid (which does mean
-			*   the same in result, as no msgstr(list)
-			*    can be used without a msgid.)?
+			* Is the searched item a msgstr entry?
 			**/
-			if((remove_complete_gtr_msg) ||
-				(!strcmp(searchitem, message->msgid)))
+			if(!strcmp(searchitem, message->msgstr))
 			{
 				/**
-				* The remove the whole GtrMsg.
+				* Cruise through the list.
 				**/
-				GTR_DB_LIST(database)=g_list_remove(
-					GTR_DB_LIST(database), (gpointer)
-					GTR_DB_LIST_MSG(database));
+				while(GTR_DB_LIST_MSGSTR_LIST(database))
+				{
+					/**
+					* Do we have got a match?
+					**/
+					if(!strcmp(
+						GTR_DB_LIST_MSGSTR_LIST(database)->data,
+						searchitem))
+					{
+						/**
+						* Then remove the entry from
+						*  the list.
+						**/
+						GTR_DB_LIST_MSGSTR_LIST(database)=g_list_remove(
+							GTR_DB_LIST_MSGSTR_LIST(database),
+							(gpointer) searchitem);	
+					}
+					/**
+					* Iterate the list entry.
+					**/
+					GTR_DB_LIST_MSGSTR_LIST_ITERATE(database);
+				}	
+			}
+		}
+		/**
+		* Or do we search for a single msgid or msgstr?
+		**/
+		else
+		{
+			/**
+			* Check if the searched item is a msgid.
+			**/
+			if(!strcmp(searchitem, message->msgid))
+			{
+				/**
+				* Then check the current entry.
+				**/
+				if(!strcmp(GTR_DB_LIST_MSG(database)->msgid,
+					searchitem))
+				{
+					/**
+					* Remove the GtrMsg fully from the
+					*  list.
+					**/
+					GTR_DB_LIST(database)=g_list_remove(
+						GTR_DB_LIST(database),
+						(gpointer) GTR_DB_LIST_MSG(database));
+				}		
 			}
 			/**
-			* Or delete the msgstr.
+			* Then it's a sole msgstr.
 			**/
 			else
 			{
-				/**
-				* Set the msgstr to NULL.
-				**/
-				GTR_DB_LIST_MSG(database)->msgstr=NULL;
+				if(!strcmp(GTR_DB_LIST_MSG(database)->msgstr,
+					searchitem))
+				{
+					/**
+					* Set the msgstr to NULL.
+					**/
+					GTR_DB_LIST_MSG(database)->msgstr=NULL;
+				}		
 			}
-		}	
+		}
 		/**
 		* Iterate the list.
 		**/
@@ -632,3 +679,119 @@ void gtranslator_delete_msgstr_from_db(GtranslatorDatabase *database,
 	**/
 	gtranslator_delete_from_db(database, msg);
 }		
+
+/**
+* This gonna be usefull, I guess...
+**/
+GList *gtranslator_lookup_db(GtranslatorDatabase *database,
+	gchar *searchitem)
+{
+	/**
+	* The returned GList is freshly allocated.
+	**/
+	GList	*result=g_list_alloc();
+	/**
+	* Test if there's any seachitem.
+	**/
+	if(!searchitem)
+	{
+		/**
+		* Then we don't have any sophisticated
+		*  way to get empty strings translated :-)
+		**/
+		return NULL;
+	}
+	/**
+	* Now search for the results.
+	**/
+	while(GTR_DB_LIST(database))
+	{
+		/**
+		* Now test the GtrMsgs.
+		**/
+		if(gtranslator_matches(
+			GTR_DB_LIST_MSG(database),
+			searchitem))
+		{
+			/**
+			* Then prepend the current GtrMsg
+			*  to the list.
+			**/
+			result=g_list_prepend(result,
+				GTR_DB_LIST_MSG(database));
+		}
+		/**
+		* Iterate to the next entry.
+		**/
+		GTR_DB_LIST_ITERATE(database);
+	}
+	/**
+	* Now reverse the results' list.
+	**/
+	result=g_list_reverse(result);
+	/**
+	* Return the build list.
+	**/
+	return result;
+}
+
+/**
+* An utility function to determine if the GtrMsg
+*  contains the given gchar.
+**/
+gboolean gtranslator_matches(GtrMsg *message, gchar *matchme)
+{
+	/**
+	* Test if our GtrMsg and the gchar are matching.
+	**/
+	/**
+	* Simpliest case: The msgid match.
+	**/
+	if(!strcmp(message->msgid, matchme))
+	{
+		return TRUE;
+	}
+	/**
+	* Is there a msgstrlist ?
+	**/
+	if(message->msgstrlist)
+	{
+		/**
+		* Then cruise through the list.
+		**/
+		while(message->msgstrlist)
+		{
+			/**
+			* Is this match-request in the current
+			*  list data (aka. msgstr).
+			**/
+			if(!strcmp(message->msgstrlist->data,
+				matchme))
+			{
+				return TRUE;
+			}	
+			/**
+			* Iterate the list entry.
+			**/
+			message->msgstrlist=message->msgstrlist->next;
+		}	
+	}
+	/**
+	* Or is this only a sole msgstr?
+	**/
+	else
+	{
+		/**
+		* Test if we've got a match and 
+		*  return TRUE.
+		**/
+		if(!strcmp(message->msgstr, matchme))
+		{
+			return TRUE;
+		}	
+	}
+	/**
+	* Huh, is there any case left?
+	**/
+	return FALSE;
+}

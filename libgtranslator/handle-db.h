@@ -78,4 +78,11 @@ void gtranslator_delete_msgid_from_db(GtranslatorDatabase *database,
 void gtranslator_delete_msgstr_from_db(GtranslatorDatabase *database,
 	gchar *msgstr);
 
+/**
+* Search the database for the given searchitem and return a GList
+*  consisting of GtrMsgs.
+**/
+GList *gtranslator_lookup_db(GtranslatorDatabase *database,
+	gchar *searchitem);
+
 #endif

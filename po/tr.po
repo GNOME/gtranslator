@@ -1,11 +1,12 @@
 #
 # gtranslator really works again :-)
 #
+# hehe, this is a _real_ life test!
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.31\n"
-"POT-Creation-Date: 2000-11-01 12:48+0100\n"
-"PO-Revision-Date: 2000-11-01 12:52+0100\n"
+"POT-Creation-Date: 2000-11-01 21:10+0100\n"
+"PO-Revision-Date: 2000-11-01 21:13+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -935,29 +936,29 @@ msgstr "Önayarlý"
 #. * Print out a warning and exit from the
 #. *  function.
 #. *
-#: libgtranslator/handle-db.c:42
+#: libgtranslator/handle-db.c:48
 msgid "No file specified!"
 msgstr "Dosya belirtilmemiþ!"
 
-#: libgtranslator/handle-db.c:54
+#: libgtranslator/handle-db.c:60
 msgid "The given filepath isn't absolute!"
 msgstr "Verilen dosya dizinlemesi rölatifdir!"
 
-#: libgtranslator/handle-db.c:66
+#: libgtranslator/handle-db.c:72
 #, c-format
 msgid "Couldn't open database `%s'!"
 msgstr "Tercüme tabaný `%s''yi açamadým!"
 
-#: libgtranslator/handle-db.c:163
+#: libgtranslator/handle-db.c:169
 msgid "No translation database given to store."
 msgstr "Tercüme/ileti tabaný belirtilmemiþ."
 
-#: libgtranslator/handle-db.c:189
+#: libgtranslator/handle-db.c:195
 #, c-format
 msgid "Lost file stream for message database `%s'."
 msgstr "%s''nin dosya kilidini kaybettim."
 
-#: libgtranslator/handle-db.c:296
+#: libgtranslator/handle-db.c:302
 msgid "No filename given to dump the database."
 msgstr "Ileti/tercüme tabanýný kaydedilecek dosya belirtilmemiþ."
 
@@ -965,34 +966,34 @@ msgstr "Ileti/tercüme tabanýný kaydedilecek dosya belirtilmemiþ."
 #. * If the action didn't succeed inform
 #. *  the user about this.
 #. *
-#: libgtranslator/handle-db.c:344
+#: libgtranslator/handle-db.c:350
 #, c-format
 msgid "Couldn't remove database file `%s'!"
 msgstr "Tercüme tabaný `%s''yi silemedim!"
 
-#: libgtranslator/handle-db.c:384
+#: libgtranslator/handle-db.c:390
 #, c-format
 msgid "Msgid `%s'·is already in the database."
-msgstr "Ileti `%s'·ileti/tercüme tabanýnda bulunamadý."
+msgstr "Ileti `%s'·zaten ileti/tercüme tabanýnda."
 
-#: libgtranslator/handle-db.c:393
+#: libgtranslator/handle-db.c:399
 #, c-format
 msgid ""
 "Checking if msgstr `%s'·is already declared in context for msgid `%s'..."
-msgstr "Tercüme `%s'· ileti `%s'·için zaten kaydedilmiþ..."
+msgstr "Tercüme `%s'·ileti `%s'·için zaten varmý diye kontrol ediliyor..."
 
 #. *
 #. * Print out a warning and exit from the function.
 #. *
-#: libgtranslator/handle-db.c:424
+#: libgtranslator/handle-db.c:430
 #, c-format
 msgid "Trying to add double msgstr list entry `%s'·for msgid `%s'!"
-msgstr "Çift tercüme birimi `%s''yi ileti `%s'·için eklemeye deneniyor!"
+msgstr "Çift tercüme birimi `%s'·ileti `%s'·için eklemeye deneniyor!"
 
 #. *
 #. * Print out an error and exit from this routine.
 #. *
-#: libgtranslator/handle-db.c:449
+#: libgtranslator/handle-db.c:455
 #, c-format
 msgid "Trying to add double msgstr `%s'·for msgid `%s'!"
 msgstr "Çift tercüme `%s'·ileti `%s'·için eklenmeye deneniyor!"
@@ -1186,16 +1187,13 @@ msgstr "Önayarlý yazý tipini bile yükleyemedim!"
 msgid "No widgets defined to manipulate their style"
 msgstr "Düzenlemesini deðiþtirecek pandýr verilemdi ki"
 
-#: libgtranslator/team-handle.c:33
-msgid "No language/team code defined to register!"
-msgstr "Dil/tercüme takýmý kodunu belirtmedin ki!"
-
-#: libgtranslator/team-handle.c:106
+#: libgtranslator/team-handle.c:75
 #, c-format
-msgid "Teams file `teams.xml` in %s couldn't be opened!"
-msgstr "Takýmlar dosyasý `teams.xml` %s'de açýlamadý!"
+msgid "Couldn't open the team database file `%s'!"
+msgstr "Takýmlar dosyasý `%s''yi açamadým!"
 
-#: libgtranslator/team-handle.c:138
-msgid "Couldn't return the list of the apps."
-msgstr "Uygulamalarýn listesini geri veremedim."
+#: libgtranslator/team-handle.c:93
+#, c-format
+msgid "The team database file `%s'·doesn't contain any entries!"
+msgstr "Takým dosyasý `%s'·hiçbir birim içermiyor!"
 

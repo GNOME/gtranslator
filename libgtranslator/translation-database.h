@@ -29,6 +29,9 @@
 #define GTR_DB_LIST(x) ((GList *) (GTR_DB(x)->messages))
 #define GTR_DB_LIST_ITERATE(x) ((GList *) (GTR_DB_LIST(x)=GTR_DB_LIST(x)->next))
 #define GTR_DB_LIST_MSG(x)  ((GtrMsg *) (GTR_DB_LIST(x)->data))
+#define GTR_DB_LIST_MSGSTR_LIST(x) ((GList *) (GTR_DB_LIST_MSG(x)->msgstrlist))
+#define GTR_DB_LIST_MSGSTR_LIST_ITERATE(x) \
+	((GList *) (GTR_DB_LIST_MSGSTR_LIST(x)=GTR_DB_LIST_MSGSTR_LIST(x)->next))
 #define GTR_DB_HEADER(x) ((GtranslatorDatabaseHeader *) (GTR_DB(x)->header))
 #define GTR_DB_FILENAME(x) ((gchar *) (GTR_DB(x)->filename))
 /**

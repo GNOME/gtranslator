@@ -247,8 +247,7 @@ void gtranslator_set_style(GtkWidget *widget)
 	**/
 	style->font=gdk_font_load(fontname);
 	/**
-	* Test for both of the widgets and set then 
-	*  their styles after the conditional.
+	* Test the widget and finally do set the style.
 	**/
 	if(widget)
 	{

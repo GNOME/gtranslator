@@ -1,5 +1,33 @@
 2000-10-31  Fatih Demir <kabalak@gmx.net>
 
+	* team-database.h: Removed the macros as they'ren't
+		very usefull as it seemed at the first
+		 glance.
+
+	* team-handle.c/h: The parsing routines for an
+		existing team database are written now with
+		 a very perfect line length (sorry, a half
+		  screen vim window is too nice at 1024x768).
+
+	* handle-db.c: Also handle the multiple msgstr case
+		with the help of the new macros; the
+		 msgstrlist is now also parsed for "matches"
+		  and there's now a skeleton for looking up
+		   a word in the database and returning any
+		    GtrMsg entry matching this query in a new
+		     GList.
+		 Also added a lookup function which _could_ be
+		  usefull for searching matchinf entries to a
+		   msgid in the database.
+
+	* translation-database.h: Added two monster macros for
+		the handling of the GtrMsgs in the list (even
+		 the macros are really monstrous big!).
+
+	* team-handle.c/h: "Flushed" these files for the new
+		functions in use for the team-handling functions;
+		 added a new function which opens the team database.
+
 	* handle-db.c/h: Added a gtranslator_delete_from_db
 		function which removes the given GtrMsg from
 		 the database, added two encapsulating functions
