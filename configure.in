@@ -201,37 +201,6 @@ AC_SUBST(GAL_CFLAGS)
 AC_SUBST(GAL_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Check for gtkhtml > 0.8
-dnl -------------------------------------------------------------------
-AC_MSG_CHECKING(for gtkhtml >= 0.8)
-if gnome-config --modversion gtkhtml 2>&1 >/dev/null ; then
-	dnl -----------------------------------------------------------
-	dnl Check for the right version of it.
-	dnl -----------------------------------------------------------
-	_GTKHTML_VERSION=`gnome-config --modversion gtkhtml|sed -e 's/^.*-0\.//g' -e 's/\.//g'`
-	dnl -----------------------------------------------------------
-	dnl Test for a really recent version.
-	dnl -----------------------------------------------------------
-	if test $_GTKHTML_VERSION -ge 80 ; then
-		AC_MSG_RESULT([found])
-		AC_MSG_RESULT(["+++ Found GtkHTML."])
-		GTKHTML_CFLAGS=`gnome-config --cflags gtkhtml`
-		GTKHTML_LIBS=`gnome-config --libs gtkhtml`
-	else
-		AC_MSG_RESULT([too old for us])
-		AC_MSG_ERROR(["+++ Could not find a recent GtkHTML on your system."])
-	fi
-else
-	dnl -----------------------------------------------------------
-	dnl Do use the standard text GUI.
-	dnl -----------------------------------------------------------
-	AC_MSG_RESULT([no gtkhtml found])
-	AC_MSG_ERROR(["+++ Could not find any GtkHTML on your system. Please install it..."])
-fi
-AC_SUBST(GTKHTML_CFLAGS)
-AC_SUBST(GTKHTML_LIBS)
-
-dnl -------------------------------------------------------------------
 dnl Substitute PACKAGE_LOCALE_DIR in config.h.
 dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
@@ -377,8 +346,6 @@ use the window-icon
  feature of gnome-libs  :	${use_window_icon_feature:-no}
 
  used GAL version	:	`gnome-config --modversion gal|sed -e 's/.*-//g'`
-
- used GtkHTML version	:	`gnome-config --modversion gtkhtml|sed -e 's/.*-//g'`
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
