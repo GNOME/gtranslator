@@ -125,7 +125,7 @@ msgstr \"\"\n\
 		 */
 		g_strchomp(line);
 		
-		if((!line[0] || line[0]=='\n') && string)
+		if((!line[0] || line[0]=='\n' || line[0]=='\r') && string)
 		{
 			fprintf(po_file, "#: %s:%i\nmsgid \"%s\"\nmsgstr \"\"\n\n", filename, lines, string);
 
@@ -184,6 +184,8 @@ gboolean backend_save(void)
 	fs=fopen(po->filename, "w");
 	gtranslator_message_for_each(po->messages, 
 		(FEFunc) write_msg, (FILE *)fs);
+
+	fclose(fs);
 
 	return TRUE;
 }

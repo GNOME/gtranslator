@@ -403,10 +403,10 @@ gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
 void gtranslator_utils_get_compile_file_names(gchar **test_file, 
 	gchar **output_file, gchar **result_file)
 {
-	*test_file=g_strdup_printf("%s/.gtranslator/gtranslator-temp-compile-file",
+	*test_file=g_strdup_printf("%s/.gtranslator/files/gtranslator-temp-compile-file",
 		g_get_home_dir());
 
-	*result_file=g_strdup_printf("%s/.gtranslator/gtranslator-compile-result-file",
+	*result_file=g_strdup_printf("%s/.gtranslator/files/gtranslator-compile-result-file",
 		g_get_home_dir());
 
 	*output_file=g_strdup_printf("%s/%s.gmo",
