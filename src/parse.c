@@ -20,7 +20,7 @@ FILE *fs;
 /**
  * A simple stream-check (I love the ifstream.good()-func from C++ ....)
  **/
-void check_file(FILE *stream,const char *error)
+void check_file(FILE *stream)
 {
 	if(stream == NULL)
 	{
@@ -28,7 +28,7 @@ void check_file(FILE *stream,const char *error)
 		 * If there are any problems , give a
 		 *  message ..
 		 **/
-		g_warning(error"\n");
+		g_error("\nThe file stream is lost !\n");
 	}
 }
 
@@ -46,7 +46,7 @@ void parse()
 	/**
 	 * Check if the stream is OK
 	 **/
-	check_file(fs,"Couldn't open the po file !");
+	check_file(fs);
 	msg->po->opened=TRUE;
 	msg->po->po_filename=(char *)filename;
 	#ifdef DEBUG
@@ -85,7 +85,7 @@ void parse()
 				/**
 				 * Add it , add it , ... 
 				 **/
-				msg->msgid+=tmp_l;
+				strcat(msg->msgid,tmp_l);
 				fgets(tmp_l,sizeof(tmp_l),fs);
 			}
 			/**

@@ -67,4 +67,4 @@ void cut_the_header_off_it(FILE *,const gchar *);
  * of the header .
  **/
 
-int are_we_at_the_end(char,const gchar *);
+int are_we_at_the_end(gchar *,const gchar *);

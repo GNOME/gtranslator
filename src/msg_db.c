@@ -9,6 +9,7 @@
  **/
 
 #include "msg_db.h"
+#include "parse.h"
 
 /**
  * The db file-stream
@@ -26,7 +27,7 @@ int init_msg_db()
 	/**
 	 * Have we got a file stream ?
 	 **/
-	check_file(db_stream,"Couldn't open the msg-db !");
+	check_file(db_stream);
 	msg_db_inited=TRUE;
 	/**
 	 * Get every message from the msg_db as a new member 
@@ -57,6 +58,7 @@ int init_msg_db()
 		 **/
 		g_error("%s lost the list of translations !\n",PACKAGE);
 	}
+	return 0;
 }
 
 void close_msg_db()
@@ -64,7 +66,7 @@ void close_msg_db()
 	/**
 	 * Have we lost the file stream  
 	 **/
-	check_file(db_stream,"Couldn't close the msg-db !");
+	check_file(db_stream);
 	/**
 	 * Go to the end of the file ..	
 	 **/
@@ -126,7 +128,7 @@ int put_to_msg_db(const gchar *msg_id,const gchar *new_message)
 
 gchar *get_from_msg_db(const gchar *get_similar)
 {
-	if(msg_db_inited==TRUE)
+	if(msg_db_inited!=TRUE)
 	{
 		 /**
                  * Show a little warning ...
@@ -148,4 +150,5 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 * Exit brutally ...
 		 **/
 	}
+	return "";
 }

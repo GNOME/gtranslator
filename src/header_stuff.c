@@ -28,7 +28,7 @@ void cut_the_header_off_it(FILE *mfs,const gchar *cutties)
 	/**
 	 * Some stupid search for the end of the header
 	 **/
-	while((fgets(tmp,256,mfs) != NULL) && (are_we_at_the_end((gchar)tmp,cutties) == 1))
+	while((fgets(tmp,256,mfs) != NULL) && (are_we_at_the_end((gchar *)tmp,cutties) == 1))
 	{
 		/**
 		 * Show some more information when build with
@@ -58,12 +58,12 @@ void cut_the_header_off_it(FILE *mfs,const gchar *cutties)
 		for(i=0;i<=_count;++i)
 		{
 			fgets(tmp,256,mfs);
-			strcpy(header[128][i],tmp);
+			strcpy(&header[128][i],tmp);
 		}	
 	}
 }
 
-int are_we_at_the_end(char test,const gchar *ends)
+int are_we_at_the_end(gchar *test,const gchar *ends)
 {
 	/**
 	 * Are we at the keylines-end :

@@ -1,3 +1,87 @@
+2000-04-01  Fatih Demir		( kabalak@gmx.net )
+
+	+	Corrected some return-value mistakes
+	
+		-> parse.c callbacks.c interface.c
+	
+	+	Include "parse.h" for check_file()
+		
+		-> msg_db.c
+	
+	+	Exit if the file stream is away via
+		
+		g_error() ...
+		
+		-> parse.c
+	
+	+	Put DEBUG to 2001 to get some debug
+		
+		informations ..
+		
+		-> Makefile.am
+
+2000-03-31  Fatih Demir		( kabalak@gmx.net )
+
+	+	Removed the toolbar_style definition
+		
+		from the search bar 
+	
+		-> interface.c
+
+2000-03-30  Fatih Demir		( kabalak@gmx.net )
+
+	+	The check_file(FILE *) function was
+		
+		better than the new one ; reversed 
+		
+		this .
+	
+	+	Corrected all dependencies .
+		
+		-> msg_db.c parse.c/.h
+
+	+	Removed some type of comment .
+		
+		-> interface.c
+
+2000-03-27  Fatih Demir		( kabalak@gmx.net )
+
+	+	A pointer was set wrongly in the are_we*
+		
+		function ; the cast is now hopefully 
+
+		well-formed ....
+	
+	+	Added a &-operand to correct another
+		
+		cast error .
+	
+		-> header_stuff.c
+
+	+	Made the second arg for gnome_help_goto
+		
+		to a '0' ( previously it was 'NULL' ).
+		
+		-> callbacks.c
+	
+	+	Let it produce much less compiling-time
+	
+		warnings ;-))
+		
+		-> *.c
+
+2000-03-21  Fatih Demir		( kabalak@gmx.net )
+
+	+	Fixed an error ; use now strcat for
+		
+		the +=operator ...
+	
+	+	Ooops, no '\n' added in the error 
+		
+		messages anymore .
+		
+		-> parse.c
+
 2000-03-19  Fatih Demir		( kabalak@gmx.net )
 
 	+	Removed the ka_widget_show macro ..

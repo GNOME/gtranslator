@@ -6,8 +6,6 @@
  * The interface file , totally catastrophed by me ...
  * 
  * And reformatted ; so it should be much better to read it
- *	                                  ^^^^^^  
- * Where does the word ´better´ (->German ´besser´) come from ?
  **/
 
 #ifdef HAVE_CONFIG_H
@@ -173,7 +171,6 @@ create_app1 (void)
                                       GNOME_DOCK_TOP, 1, 0, 0);
         gtk_container_set_border_width (GTK_CONTAINER (toolbar1), 1);
         gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar1), 16);
-        gtk_toolbar_set_space_style (GTK_TOOLBAR (toolbar1), GTK_TOOLBAR_SPACE_LINE);
         gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar1), GTK_RELIEF_NONE);
 	/**
 	 * Integrate the search_bar
@@ -598,8 +595,7 @@ create_errors_in_the_po (void)
         GTK_WIDGET_SET_FLAGS (button11, GTK_CAN_DEFAULT);
 
         dialog_action_area1 = GNOME_DIALOG (errors_in_the_po)->action_area;
-        if (dialog_action_area1 != NULL)
-        return errors_in_the_po;
+	return errors_in_the_po;
 }
 
 GtkWidget*

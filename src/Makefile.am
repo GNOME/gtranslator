@@ -7,7 +7,7 @@
 
 msg_db_dir = $(datadir)/gtranslator/
 
-extra_flags = -DDEBUG 
+extra_flags = -DDEBUG=2001 
 
 INCLUDES = \
 	-I$(top_srcdir)/intl \

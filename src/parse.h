@@ -52,7 +52,7 @@ gboolean at_the_last;
 /**
  * A simple file check .
  **/
-void check_file(FILE *,const char *);
+void check_file(FILE *);
 
 /**
  * The previous parsing routine

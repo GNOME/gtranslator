@@ -152,7 +152,7 @@ on_online_help1_activate		(GtkMenuItem	*menuitem,
 					gpointer	user_data)
 {
 	
-	gnome_help_pbox_goto(NULL,NULL,&help_me);	
+	gnome_help_pbox_goto(NULL,0,&help_me);	
 }
 
 void
@@ -506,6 +506,7 @@ on_propertybox1_close                  (GnomeDialog     *gnomedialog,
                                         gpointer         user_data)
 {
 	gtk_widget_destroy(GTK_WIDGET(gnomedialog));
+	return 1;
 }
 
 
