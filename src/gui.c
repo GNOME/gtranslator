@@ -45,19 +45,23 @@
 #include "utils_gui.h"
 #include "views.h"
 
+#include <string.h>
+
 #include <gdk/gdkkeysyms.h>
+
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkcheckmenuitem.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtkvbox.h>
+
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 #include <libgnomeui/gnome-popup-menu.h>
-#include <libgnomevfs/gnome-vfs-init.h>
-#include <gal/e-paned/e-hpaned.h>
 
-#include <string.h>
+#include <libgnomevfs/gnome-vfs-init.h>
+
+#include <gal/e-paned/e-hpaned.h>
 
 /*
  * Global external variables

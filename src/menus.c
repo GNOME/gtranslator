@@ -20,6 +20,7 @@
 
 #include "about.h"
 #include "actions.h"
+#include "defines.include"
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
@@ -30,9 +31,8 @@
 #include "utils_gui.h"
 #include "views.h"
 
-#include "pixmaps/untrans.xpm"
-
 #include <gdk/gdkkeysyms.h>
+
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 #include <libgnomeui/gnome-stock.h>
@@ -208,14 +208,14 @@ GnomeUIInfo the_messages_menu[] = {
 	 GNOME_APP_UI_ITEM, N_("Next fuz_zy"),
 	 N_("Go to next fuzzy message"),
 	 gtranslator_message_go_to_next_fuzzy, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+	 GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
 	 'Z', GDK_MOD1_MASK, NULL
 	},
 	{
 	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
 	 N_("Go to next untranslated message"),
 	 gtranslator_message_go_to_next_untranslated, NULL, NULL,
-	 GNOME_APP_PIXMAP_DATA, untrans_xpm,
+	 GNOME_APP_PIXMAP_FILENAME, "gtranslator/untranslated_small.png",
 	 'U', GDK_MOD1_MASK, NULL
 	},
 	GNOMEUIINFO_END
@@ -237,7 +237,7 @@ GnomeUIInfo the_msg_status_menu[] = {
 		gtranslator_message_change_status,
 		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
 		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
 		GDK_2, GDK_MOD1_MASK, NULL
 	},
 	{
@@ -336,14 +336,20 @@ GnomeUIInfo the_navibar[] = {
 			       N_("Go to the last message"),
 			       gtranslator_message_go_to_last,
 			       GNOME_STOCK_PIXMAP_LAST),
-	GNOMEUIINFO_ITEM(N_("Missing"),
-			       N_("Go to next untranslated message"),
-			       gtranslator_message_go_to_next_untranslated,
-			       untrans_xpm),
-	GNOMEUIINFO_ITEM_STOCK(N_("Fuzzy"),
-			       N_("Go to the next fuzzy translation"),
-			       gtranslator_message_go_to_next_fuzzy,
-			       GNOME_STOCK_PIXMAP_BOOK_RED),
+	{
+		GNOME_APP_UI_ITEM, N_("Missing"),
+		N_("Go to next untranslated message"),
+		gtranslator_message_go_to_next_untranslated, NULL, NULL,
+		GNOME_APP_PIXMAP_FILENAME, "gtranslator/untranslated.png",
+		0, 0, NULL
+	},
+	{
+		GNOME_APP_UI_ITEM, N_("Fuzzy"),
+		N_("Go to the next fuzzy translation"),
+		gtranslator_message_go_to_next_fuzzy, NULL, NULL,
+		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy.png",
+		0, 0, NULL
+	},
 	GNOMEUIINFO_ITEM_STOCK(N_("Go to"),
 			       N_("Go to specified message number"),
 			       gtranslator_go_to_dialog,

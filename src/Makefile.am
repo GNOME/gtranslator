@@ -2,7 +2,7 @@
 # Welcome to the gtranslator-automake-autoconf Wonderland!
 # --------------------------------------------------------
 
-SUBDIRS = backends pixmaps
+SUBDIRS = backends
 
 INCLUDES = \
 	-I$(top_srcdir) \

@@ -1,5 +1,10 @@
 2001-06-06  Fatih Demir <kabalak@gtranslator.org>
 
+	* menus.c: Don't include use the xpm icons, we've moved over to png
+		icons and they're now installed into $(sharedir)/pixmaps/gtranslator.
+
+	* Makefile.am & pixmaps/*: Removed the pixmaps directory from here.
+
 	* \*.c: Changed all includes accordingly for the outsourcing.
 
 	* Makefile.am: Added utils_gui.c/.h to the sources list.
