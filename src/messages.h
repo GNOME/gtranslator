@@ -9,11 +9,14 @@
 * -- messages are@home->*this;
 **/
 
+#include <glib.h>
+
 /**
 * Typedefs for the following structures
 **/
 typedef struct _po_file gtr_po;
 typedef struct _message gtr_msg;
+typedef enum _gtr_msg_status gtr_msg_status;
 
 /**
 * The structure with general 
@@ -43,7 +46,7 @@ struct _message
 * The different stati of the translatable
 *  messages .
 **/
-typedef enum
+enum _gtr_msg_status
 {
 	GTRANSLATOR_MSG_STATUS_UNTRANSLATED,
 	GTRANSLATOR_MSG_STATUS_TRANSLATED,
@@ -58,4 +61,4 @@ typedef enum
 	*  fast as possible .
 	**/
 	GTRANSLATOR_MSG_STATUS_FIXME
-} gtr_msg_status ;
+};

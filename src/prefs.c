@@ -91,9 +91,10 @@ void prefs_box_hide(GtkWidget *widget,gpointer useless)
 **/
 void prefs_box_apply(GtkWidget *widget,gpointer more_useless)
 {
+	/*FAKE_TEST*/
 	gnome_config_push_prefix("/gtranslator/");
 	gnome_config_set_string("Test/Message","Merhaba");
 	gnome_config_pop_prefix();
-	gnome_config_synx();
+	gnome_config_sync();
 	gnome_config_drop_all();	
 }
