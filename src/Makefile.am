@@ -3,7 +3,7 @@
 #   and autoconf. 
 # -------------------------------------------------------
 
-SUBDIRS = . pixmaps
+SUBDIRS = . backends pixmaps
 
 INCLUDES = \
 	-I$(top_srcdir) \
