@@ -38,5 +38,5 @@ while [ $t -gt 1 ]
 	t=$[ $t -1 ]
 	done 
 $a " last chance (1) " && sleep 1 && echo ""
-./configure " $@ $* " && echo -e "\n\tHappy $package-ing\n" && exit 0
+./configure "$@" && echo -e "\n\tHappy $package-ing\n" && exit 0
 #######################################################################

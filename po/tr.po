@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-05-07 13:15+0200\n"
-"PO-Revision-Date: 2000-05-07 13:18+0200\n"
+"POT-Creation-Date: 2000-05-08 22:29+0200\n"
+"PO-Revision-Date: 2000-05-08 22:36+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -95,55 +95,79 @@ msgstr "Po./B"
 msgid "Find in the po file "
 msgstr "Po dosyasýnda bul"
 
-#: src/interface.c:263
+#: src/interface.c:260
 msgid "Compile"
 msgstr "Dönüþtür"
 
-#: src/interface.c:264
+#: src/interface.c:261
 msgid "New File"
 msgstr "Yeni bir dosya"
 
-#: src/interface.c:272
+#: src/interface.c:269
 msgid "Open"
 msgstr "Aç"
 
-#: src/interface.c:273
+#: src/interface.c:270
 msgid "Open File"
 msgstr "Dosyayý aç"
 
-#: src/interface.c:281
+#: src/interface.c:278
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/interface.c:282
+#: src/interface.c:279
 msgid "Save File"
 msgstr "Dosyayý kaydet"
 
-#: src/interface.c:290
+#: src/interface.c:287
 msgid "Save as"
 msgstr "F. kaydet"
 
-#: src/interface.c:299
+#: src/interface.c:288
+msgid "Save file as"
+msgstr "Dosyayý farklý kaydet"
+
+#: src/interface.c:296
 msgid "First"
 msgstr "Ilk"
 
-#: src/interface.c:308
+#: src/interface.c:297
+msgid "Go to the first message"
+msgstr "Ilk iletiye git"
+
+#: src/interface.c:305
 msgid "Back"
 msgstr "Geri"
 
-#: src/interface.c:317
+#: src/interface.c:306
+msgid "Go one message back"
+msgstr "Bir ileti geri git"
+
+#: src/interface.c:314
 msgid "Options"
 msgstr "Ayarlar"
 
-#: src/interface.c:326
+#: src/interface.c:315
+msgid "gtranslator options"
+msgstr "gtranslator seçenekleri"
+
+#: src/interface.c:323
 msgid "Next"
 msgstr "Ileri"
 
-#: src/interface.c:335
+#: src/interface.c:324
+msgid "Go one message forward"
+msgstr "Bir ileti ileri git"
+
+#: src/interface.c:332
 msgid "Last"
 msgstr "Son"
 
-#: src/interface.c:344
+#: src/interface.c:333
+msgid "Go to the last message"
+msgstr "Son iletiye git"
+
+#: src/interface.c:341 src/interface.c:342
 msgid "Exit"
 msgstr "Çýk"
 
@@ -151,45 +175,52 @@ msgstr "Çýk"
 #. * If there are any problems , give a
 #. *  message ..
 #. *
-#: src/parse.c:36
+#: src/parse.c:34
 #, c-format
 msgid ""
 "\n"
-"The file stream is lost !\n"
-"Error No. %i .\n"
+"The file stream is lost! Error no. `%i'"
 msgstr ""
 "\n"
-"Dosya akýmý kayboldu !\n"
-"Hata numarasý %i .\n"
+"Dosya akýmý kayboldu! Hata no. `%i'"
 
-#: src/parse.c:60
+#: src/parse.c:59
 #, c-format
-msgid "Got filename  %s \n"
+msgid "There's no file to open or I couldn't understand `%s'!"
+msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
+
+#: src/parse.c:66
+#, c-format
+msgid "Couldn't stat the file `%s'!"
+msgstr "`%s''yi stat edemedim !"
+
+#: src/parse.c:92
+#, c-format
+msgid "Got filename  %s\n"
 msgstr "Dosya adýný aldým : %s\n"
 
 #. *
 #. * 3.1) No list, no fun
 #. *
 #: src/msg_db.c:61
-#, c-format
-msgid "%s lost the list of translations !\n"
-msgstr "%s tercümelerin listesini kaybettit !\n"
+msgid "gtranslator lost the list of translations!\n"
+msgstr "gtranslator tercümelerin listesini kaybetti!\n"
 
 #. *
 #. * Show a little warning ...
 #. *
 #: src/msg_db.c:98 src/msg_db.c:164
 #, c-format
-msgid "The msg_db : %s seems not to be inited !\n"
-msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor !\n"
+msgid "The msg_db `%s' seems not to be inited!\n"
+msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
 
 #. *
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
 #: src/msg_db.c:110
-msgid "Got no message entry !\n"
-msgstr "Ileti/tercüme birimini alamadým !\n"
+msgid "Got no message entry!\n"
+msgstr "Ileti/tercüme birimini alamadým!\n"
 
 #: src/msg_db.c:119
 #, c-format
@@ -208,20 +239,20 @@ msgstr "Yok be !"
 #. *  print an error message
 #. *
 #: src/msg_db.c:176
-msgid "No msg_list available for acting on it !\n"
-msgstr "Iþlenilecek bir msg_list ( ileti/tercüme listesi ) yok ki !\n"
+msgid "No msg_list available for acting on it!\n"
+msgstr "Iþlenilecek bir msg_list ( ileti/tercüme listesi ) yok ki!\n"
 
 #: src/gtr_dialogs.c:21
 msgid ""
-"An error occured while msgfmt was executed .\n"
-"Please check your .po file again ."
+"An error occured while msgfmt was executed.\n"
+"Please check your .po file again."
 msgstr ""
-"msgfmt çalýþtýrýlýrken bir hata oldu .\n"
-"Lütfen .po-dosyaný bir daha gözden geçir ."
+"msgfmt çalýþtýrýlýrken bir hata oldu.\n"
+"Lütfen .po-dosyaný bir daha gözden geçir."
 
 #: src/gtr_dialogs.c:33
-msgid "You didn't change anything in the .po-file !\n"
-msgstr "Po-dosyasýna hiç bir þey deðiþtirmemiþsin ki !\n"
+msgid "You didn't change anything in the .po-file!\n"
+msgstr "Po-dosyasýna hiç bir þey deðiþtirmemiþsin ki!\n"
 
 #: src/gtr_dialogs.c:42
 msgid "With the Preferences box you can define some variables\n"
@@ -232,8 +263,8 @@ msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- açýlanacak dosyayý seç"
 
 #: src/gtr_dialogs.c:83
-msgid "gtranslator -- save file as .. "
-msgstr "gtranslator -- kaydedilinecek dosyayý seç ..."
+msgid "gtranslator -- save file as .."
+msgstr "gtranslator -- kaydedilinecek dosyayý seç .."
 
 #: src/support.c:111 src/support.c:151
 #, c-format
@@ -249,15 +280,25 @@ msgstr "%s : resim dosyasýný resim yapamadým"
 msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 msgstr "Tel'if hakký (C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 
-#: src/about.c:24
+#: src/about.c:28
 msgid ""
-"gtranslator is a Gnome Application for translating .po-files more "
-"comfortable than in (X)Emacs .\n"
-"Till now you can't see much , but that will change !"
+"gtranslator is a Gnome Application for translating .po-files slightly "
+"different than in (X)Emacs.\n"
+"Till now you can't see much, but that will change! At least till R 0.20."
 msgstr ""
 "gtranslator .po dosyalarýnýn tercümesini kolaylaþtýracak bir uygulama "
 "olacaktýr / idir .\n"
-"Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek !"
+"Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek ! 0.20 nesline kadar iþe yarar hale gelmesi lazým !"
+
+#: src/about.c:30
+msgid ""
+"gtranslator is a Gnome Application for translating .po-files more "
+"comfortable than in (X)Emacs.\n"
+"Till now you can't see much, but that will change! At least till R 0.20."
+msgstr ""
+"gtranslator .po dosyalarýnýn tercümesini kolaylaþtýracak bir uygulama "
+"olacaktýr / idir.\n"
+"Þu ana kadar çok bir þey gözükmüyor , ama bu deðiþecek! 0.20 nesline kadar iþe yarar hale gelmesi lazým !"
 
 #. *
 #. * Create the labels ..
@@ -275,43 +316,43 @@ msgid "Po file options"
 msgstr "Po dosya seçenekleri"
 
 #: src/prefs.c:37
-msgid "Author's name :  "
-msgstr "Yazarýn ismi : "
+msgid "Author's name :"
+msgstr "Yazarýn ismi :"
 
 #: src/prefs.c:38
-msgid "Author's EMail : "
-msgstr "Yazarýn ePostasý : "
+msgid "Author's EMail :"
+msgstr "Yazarýn ePostasý :"
 
 #: src/prefs.c:39
-msgid "Language : "
-msgstr "Dil : "
+msgid "Language :"
+msgstr "Dil :"
 
 #: src/prefs.c:40
-msgid "MIME type : "
-msgstr "MIME türü : "
+msgid "MIME type :"
+msgstr "MIME türü :"
 
 #: src/prefs.c:41
-msgid "Encoding : "
-msgstr "Þekillendirme : "
+msgid "Encoding :"
+msgstr "Þekillendirme :"
 
 #: src/prefs.c:42
-msgid "Language code : "
-msgstr "Dil kodu : "
+msgid "Language code :"
+msgstr "Dil kodu :"
 
 #: src/prefs.c:43
-msgid "Language group's EMail : "
-msgstr "Dil grubunun ePosta adresi : "
+msgid "Language group's EMail :"
+msgstr "Dil grubunun ePosta adresi :"
 
 #: src/prefs.c:44
-msgid "Comments : "
-msgstr "Eklentiler : "
+msgid "Comments :"
+msgstr "Eklentiler :"
 
 #: src/prefs.c:57
 msgid "Add the additional comments to the header"
 msgstr "Eklentileri dosya baþlýðýna ekle"
 
 #: src/prefs.c:58
-msgid "Wanr if trying to save an unchanged file"
+msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Deðiþtirilmemiþ bir dosyayý kaydederken ikaz et"
 
 #: src/prefs.c:59
@@ -323,173 +364,173 @@ msgid "Don't save unchanged .po-files"
 msgstr "Deðiþtirilmemiþ .po-dosyalarýný kaydetme"
 
 #: src/prefs.c:61
-msgid "Use the msg_db . ( FUTURE_WORK ! )"
-msgstr "Tercüme tabanýný kullan . ( GELECEK IÇIN ! )"
+msgid "Use the msg_db"
+msgstr "Ileti/tercüme tabanýný kullan"
 
-#: src/languages.h:51
+#: src/languages.h:56
 msgid "Arabic"
 msgstr "Arapça"
 
-#: src/languages.h:52
+#: src/languages.h:60
 msgid "Basque"
 msgstr "Baskça"
 
-#: src/languages.h:53
+#: src/languages.h:64
 msgid "Bulgarian"
 msgstr "Bulgarca"
 
-#: src/languages.h:54
+#: src/languages.h:68
 msgid "Catalan"
 msgstr "Katalanca"
 
-#: src/languages.h:55
+#: src/languages.h:72
 msgid "Chinese/Simplified"
 msgstr "Çince/Kolaylaþtýrýlmýþ"
 
-#: src/languages.h:56
+#: src/languages.h:76
 msgid "Chinese/Traditional"
 msgstr "Çince/Eski Usül"
 
-#: src/languages.h:57
+#: src/languages.h:80
 msgid "Croatian"
 msgstr "Hýrvatça"
 
-#: src/languages.h:58
+#: src/languages.h:84
 msgid "Czech"
 msgstr "Çekçe"
 
-#: src/languages.h:59
+#: src/languages.h:88
 msgid "Danish"
 msgstr "Danimarkaca"
 
-#: src/languages.h:60
+#: src/languages.h:92
 msgid "English"
 msgstr "Ingilizce"
 
-#: src/languages.h:61
+#: src/languages.h:96
 msgid "English/Canada"
 msgstr "Ingilizce/Kanada"
 
-#: src/languages.h:62
+#: src/languages.h:100
 msgid "English/GB"
 msgstr "Ingilizce/Ing."
 
-#: src/languages.h:63
+#: src/languages.h:104
 msgid "English/USA"
 msgstr "Ingilizce/ABD"
 
-#: src/languages.h:64
+#: src/languages.h:108
 msgid "Estonian"
 msgstr "Estonyaca"
 
-#: src/languages.h:65
+#: src/languages.h:112
 msgid "Farsi"
 msgstr "Farsça"
 
-#: src/languages.h:66
+#: src/languages.h:116
 msgid "Finnish"
 msgstr "Fince"
 
-#: src/languages.h:67
+#: src/languages.h:120
 msgid "French"
 msgstr "Fransýzca"
 
-#: src/languages.h:68
+#: src/languages.h:124
 msgid "Galician"
 msgstr "Gelik"
 
-#: src/languages.h:69
+#: src/languages.h:128
 msgid "German"
 msgstr "Almanca"
 
-#: src/languages.h:70
+#: src/languages.h:132
 msgid "Greek"
 msgstr "Yunanca"
 
-#: src/languages.h:71
+#: src/languages.h:136
 msgid "Hungarian"
 msgstr "Macarca"
 
-#: src/languages.h:72
+#: src/languages.h:140
 msgid "Indonesian"
 msgstr "Endonezce"
 
-#: src/languages.h:73
+#: src/languages.h:144
 msgid "Italian"
 msgstr "Italyanca"
 
-#: src/languages.h:74
+#: src/languages.h:148
 msgid "Irish"
 msgstr "Irlandaca"
 
-#: src/languages.h:75
+#: src/languages.h:152
 msgid "Japanese"
 msgstr "Japonca"
 
-#: src/languages.h:76
+#: src/languages.h:156
 msgid "Korean"
 msgstr "Korece"
 
-#: src/languages.h:77
+#: src/languages.h:160
 msgid "Lithuanian"
 msgstr "Litvanyaca"
 
-#: src/languages.h:78
+#: src/languages.h:164
 msgid "Norwegian/Bookmal"
 msgstr "Norveççe/Bookmal"
 
-#: src/languages.h:79
+#: src/languages.h:168
 msgid "Norwegian/Nynorsk"
 msgstr "Norveççe/Nynorsk"
 
-#: src/languages.h:80
+#: src/languages.h:172
 msgid "Polish"
 msgstr "Polanyaca"
 
-#: src/languages.h:81
+#: src/languages.h:176
 msgid "Portuguese"
 msgstr "Portekiz"
 
-#: src/languages.h:82
+#: src/languages.h:180
 msgid "Portuguese/Brazil"
 msgstr "Portekiz/Brezilya"
 
-#: src/languages.h:83
+#: src/languages.h:184
 msgid "Russian"
 msgstr "Rusça"
 
-#: src/languages.h:84
+#: src/languages.h:188
 msgid "Slovak"
 msgstr "Slovak"
 
-#: src/languages.h:85
+#: src/languages.h:192
 msgid "Spanish"
 msgstr "Ispanyolca"
 
-#: src/languages.h:86
+#: src/languages.h:196
 msgid "Spanish/Spain"
 msgstr "Ispanyolca/Ispanya"
 
-#: src/languages.h:87
+#: src/languages.h:200
 msgid "Spanish/Mexico"
 msgstr "Ispanyolca/Meksika"
 
-#: src/languages.h:88
+#: src/languages.h:204
 msgid "Swedish"
 msgstr "Isveç"
 
-#: src/languages.h:89
+#: src/languages.h:208
 msgid "Turkish"
 msgstr "Türkçe"
 
-#: src/languages.h:90
+#: src/languages.h:212
 msgid "Ukrainian"
 msgstr "Ukraynaca"
 
-#: src/languages.h:91
+#: src/languages.h:216
 msgid "Walloon"
 msgstr "Galik"
 
-#: src/languages.h:92
+#: src/languages.h:220
 msgid "Welsh"
 msgstr "Velþ"

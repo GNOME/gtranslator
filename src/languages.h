@@ -78,7 +78,7 @@ lang languages[] =
 	},
 	{
 		N_("Croatian"), "hr", "iso-8859-2",
-		"", "8bit"
+		"lokalizacija@linux.hr", "8bit"
 	},
 	{
 		N_("Czech"), "cs", "iso-8859-2",
