@@ -49,6 +49,8 @@ gtranslator_SOURCES = \
 	stylistics.c stylistics.h \
 	syntax.c syntax.h \
 	syntax-elements.h \
+	undo-core.c undo-core.h \
+	undo.c undo.h \
 	update.c \
 	vfs-handle.c vfs-handle.h \
 	views.c views.h
