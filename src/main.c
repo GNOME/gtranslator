@@ -125,9 +125,6 @@ int main(int argc, char *argv[])
 	/* Disable the buttons if no file is opened. */
 	if (!file_opened)
 		disable_actions_no_file();
-	/* Disable spell checking, because it's not written yet */
-	disable_actions(ACT_SPELL);
-
 	/* Check the session client flags, and restore state if needed */
 	flags = gnome_client_get_flags(client);
 	if (flags & GNOME_CLIENT_RESTORED)
