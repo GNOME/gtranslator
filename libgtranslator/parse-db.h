@@ -32,14 +32,6 @@
 **/
 #include <messages.h>
 
-/**
-* A try to avoid some libxml chaos.
-**/
-#ifndef xmlRootNode
-#define xmlRootNode root
-#define xmlChildrenNode childs
-#endif
-
 /* Maybe we have already included this stuff */
 #ifndef __GNOME_I18N_H__
 

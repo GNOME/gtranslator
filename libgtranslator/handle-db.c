@@ -27,7 +27,7 @@ gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodeconten
 	if(!nodename)
 	{
 		g_warning(_("No node name given!"));
-			return 0;
+			return 1;
 	}
 	/**
 	* Check for the content.
@@ -43,7 +43,7 @@ gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodeconten
 	if(!doc)
 	{
 		g_warning(_("No document present to add the node `%s'\n"),nodename);
-			return 0;
+			return 1;
 	}
 	else
 	{
@@ -61,12 +61,23 @@ gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodeconten
 		if(!newnode)
 		{
 			g_warning(_("Couldn't get the nodes!"));
-				return 0;
+				/**
+				* This is an I/O error, isn't it ?
+				**/
+				return 1;
 		}
 		/**
 		* Set the node properties with the given parameters.
 		**/
 		addnode=xmlNewDocNode(doc, NULL, nodename, nodecontent);
+		/**
+		* Check if the node could be created.
+		**/
+		if(!addnode)
+		{
+			g_warning(_("Couldn't generate node `%s'!"), nodename);
+				return 1;
+		}
 		xmlAddChild(newnode,addnode);
 		/**
 		* Free all the stuff.
@@ -80,8 +91,8 @@ gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodeconten
 			xmlFreeNode(addnode);
 		}	
 		/**
-		* Return a value != 0.
+		* Return 0
     		**/
-		return 1;
+		return 0;
 	}	
 }
