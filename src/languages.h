@@ -71,7 +71,7 @@ static GtrLanguage languages[] = {
 	 "", "8bit"		
 	},
 	{
-	 N_("Azeri"), "az", "utf-8",
+	 N_("Azerbaijani Turkish"), "az", "utf-8",
 	 "", "8bit"		
 	},
 	{
