@@ -21,6 +21,7 @@
 #define GTR_MESSAGES_TABLE_H 1
 
 #include <gtk/gtkwidget.h>
+#include "messages.h"
 
 enum
 {
@@ -36,11 +37,17 @@ enum
 /*
  * Returns the ready widget with all the specs.
  */
-GtkWidget *gtranslator_messages_table_new(void); 
+GtkWidget *gtranslator_messages_table_new(void);
+ 
 /*
  * Clear the table and populate with the messages
  */
-void gtranslator_messages_table_update (void);
+void gtranslator_messages_table_update(void);
+
+/*
+ * Update the data in a single row
+ */
+void gtranslator_messages_table_update_row(GtrMsg *message); 
 
 /*
  * Show/hide and toggle routines accordingly to the 

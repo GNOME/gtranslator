@@ -181,23 +181,7 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	GtrMsg *message;
 	
 	message = e_tree_memory_node_get_data (tree_memory, path);
-
-	/*if(file_opened)
-	{
-		if(row > 0 && row <= (po->length - 1))
-		{
-			return g_strdup(GTR_MSG(
-				g_list_nth_data(po->messages, row))->msgid);
-		}
-		else
-		{
-			return g_strdup("");
-		}
-	}
-	else
-	{
-		return g_strdup_printf("%i[%i]", column, row);
-	}*/
+	/* FIXME: fill in the columns properly */
 	switch (column) {
 	case COL_ORIG:
 		return message->msgid;
@@ -375,13 +359,30 @@ void gtranslator_messages_table_update (void)
 	while(list)
 	{
 		GtrMsg *message=list->data;
-		e_tree_memory_node_insert(tree_memory, root_node,
-			i, message);
+		gchar *id=g_strdup_printf("%d", message->pos);
+		e_tree_memory_node_insert_id(tree_memory, root_node,
+			i, message, id);
 		list = g_list_next(list);
 		i++;
+		g_free(id);
 	}	
 	
 	
+}
+
+/*
+ * Update the data in a single row
+ */
+void gtranslator_messages_table_update_row(GtrMsg *message)
+{
+	ETreePath node=NULL;
+	
+	/* FIXME: this is not the way to go. Perhaps create a hash
+	table with all the nodes and message->pos entries 
+	node=e_tree_model_get_node_by_id(tree_model, id);
+	if(node) g_print ("%s\n", message->msgid);
+	
+	e_tree_model_node_data_changed (tree_model, node);*/
 }
 
 /*

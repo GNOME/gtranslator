@@ -1,5 +1,12 @@
 2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
 
+	* messages-table.[c,h] (gtranslator_messages_table_update_row): New
+	function to update the e-tree row. Doesn't work right now as
+	I need to find a way to determine the ETreePath associated
+	with a message. Probably a hash table will do.
+
+2001-07-17  Kevin Vandersloot <kfv101@psu.edu>
+
 	* messages-table.c (messages_table_new): hook up to 
 	row selected signal of e-tree
 
