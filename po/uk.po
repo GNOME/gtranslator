@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-09-15 19:27+0200\n"
+"POT-Creation-Date: 2000-09-22 09:54+0300\n"
 "PO-Revision-Date: 2000-05-05 09:45+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
@@ -88,7 +88,6 @@ msgid "Goto specified message number"
 msgstr "Перейти до вказаного пов╕домлення"
 
 #: src/gui.c:126
-#, fuzzy
 msgid "Next fuz_zy"
 msgstr "Ноступне невизначене"
 
@@ -206,41 +205,62 @@ msgstr "Останн╕й"
 
 #: src/gui.c:248
 msgid "Missing"
-msgstr ""
+msgstr "В╕дсутн╓"
 
-#: src/gui.c:252
-#, fuzzy
-msgid "Go to"
-msgstr "Перейти..."
+#: src/gui.c:252 src/gui.c:563
+msgid "Fuzzy"
+msgstr "Невизначено"
 
 #: src/gui.c:253
-#, fuzzy
-msgid "Go to specified message number"
-msgstr "Перейти до вказаного пов╕домлення"
+msgid "Go to the next fuzzy translation"
+msgstr "Перейти до наступного невизначеного перекладу"
 
-#: src/dialogs.c:201 src/gui.c:256
+#: src/gui.c:256
+msgid "Go to"
+msgstr "Перейти"
+
+#: src/gui.c:257
+msgid "Go to specified message number"
+msgstr "Перейти до вказаного номеру пов╕домлення"
+
+#: src/dialogs.c:202 src/gui.c:260
 msgid "Find"
 msgstr "Шукати"
 
-#: src/gui.c:257
+#: src/gui.c:261
 msgid "Find string in po-file"
 msgstr "Пошук рядка у po-файл╕"
 
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:360
+#: src/gui.c:364
 msgid "gtranslator"
 msgstr "Перекладач"
 
-#: src/gui.c:439
+#: src/gui.c:443
 msgid "Bye bye!"
 msgstr "Бувай!"
 
-#: src/gui.c:545
+#. *
+#. * Assign the first part.
+#. *
+#: src/gui.c:553
 #, c-format
-msgid "Message: %d / %d"
-msgstr "Пов╕домлення: %d / %d"
+msgid "Message %d / %d / Status:"
+msgstr "Пов╕домлення: %d / %d / Стан:"
+
+#: src/dialogs.c:218 src/gui.c:567
+msgid "Translated"
+msgstr "Перекладене"
+
+#: src/gui.c:573
+msgid "Stick"
+msgstr "Причепити"
+
+#: src/gui.c:577
+msgid "Untranslated"
+msgstr "Неперекладене"
 
 #: src/dialogs.c:49
 msgid "gtranslator -- open a po-file"
@@ -271,109 +291,105 @@ msgstr "П╕шли!"
 msgid "Go to message number:"
 msgstr "Перейти до пов╕домлення за номером:"
 
-#: src/dialogs.c:201
+#: src/dialogs.c:202
 msgid "Find in the po-file"
 msgstr "Пошук у po-файл╕"
 
 #. *
 #. * Create the widgets.
 #. *
-#: src/dialogs.c:206
+#: src/dialogs.c:207
 msgid "Enter your desired search string:"
 msgstr "Введ╕ть необх╕дний для пошуку рядок:"
 
-#: src/dialogs.c:209
+#: src/dialogs.c:210
 msgid "Case sensitive"
 msgstr "Ре╜╕строва чутливисть"
 
-#: src/dialogs.c:215 src/languages.h:84
+#: src/dialogs.c:216 src/languages.h:84
 msgid "English"
 msgstr "Англ╕йське"
 
-#: src/dialogs.c:217
-msgid "Translated"
-msgstr "Перекладене"
-
-#: src/dialogs.c:219
+#: src/dialogs.c:220
 msgid "Both"
 msgstr "Обидва"
 
-#: src/dialogs.c:222
+#: src/dialogs.c:223
 msgid "Find in: "
 msgstr "Шукати в: "
 
-#: src/dialogs.c:264
+#: src/dialogs.c:265
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Виникла помилка п╕д час виконання msgfmt:\n"
 
-#: src/prefs.c:188
+#: src/prefs.c:190
 msgid "gtranslator -- options"
 msgstr "Перекладач - параметри"
 
 #. *
 #. * The tables for holding all the entries below
 #. *
-#: src/prefs.c:192
+#: src/prefs.c:194
 msgid "Personal information"
 msgstr "Персональна ╕нформац╕я"
 
-#: src/prefs.c:193
+#: src/prefs.c:195
 msgid "Language options"
 msgstr "Параметри мови"
 
-#: src/prefs.c:194
+#: src/prefs.c:196
 msgid "Po file options"
 msgstr "Параметри po-файлу"
 
-#: src/prefs.c:200
+#: src/prefs.c:202
 msgid "Author's name :"
 msgstr "Назва автора:"
 
-#: src/prefs.c:203
+#: src/prefs.c:205
 msgid "Author's EMail :"
 msgstr "Е-пошта автора: "
 
-#: src/header_stuff.c:306 src/prefs.c:211
+#: src/header_stuff.c:306 src/prefs.c:213
 msgid "Language :"
 msgstr "Мова:"
 
-#: src/prefs.c:215
+#: src/prefs.c:217
 msgid "Language code :"
 msgstr "Код мови:"
 
-#: src/prefs.c:220
+#: src/prefs.c:222
 msgid "Language group's EMail :"
 msgstr "Е-пошта мовно╖ групи:"
 
-#: src/header_stuff.c:315 src/prefs.c:224
+#: src/header_stuff.c:315 src/prefs.c:226
 msgid "Charset :"
 msgstr "Наб╕р символ╕в:"
 
-#: src/header_stuff.c:319 src/prefs.c:228
+#: src/header_stuff.c:319 src/prefs.c:230
 msgid "Encoding :"
 msgstr "Кодування:"
 
-#: src/prefs.c:236
+#: src/prefs.c:238
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Забирати невизначений стан, якщо пов╕домлення було зм╕нено"
 
-#: src/prefs.c:240
+#: src/prefs.c:242
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Попереджувати, якщо po-файл м╕стить невизначен╕ переклади"
 
-#: src/prefs.c:244
+#: src/prefs.c:246
 msgid "Don't save unchanged .po-files"
 msgstr "Не збер╕гати незм╕нен╕ po-файли"
 
-#: src/prefs.c:248
+#: src/prefs.c:250
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Попереджувати при спроб╕ зберегти незм╕нений файл"
 
-#: src/prefs.c:252
+#: src/prefs.c:254
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Збер╕гати геометр╕ю на виход╕ та в╕дновлювати ╖╖ на початку"
 
-#: src/prefs.c:318
+#: src/prefs.c:320
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -383,7 +399,7 @@ msgstr ""
 "завдяки чому Перекладач GNOME буде працювати б╕льш схоже на те\n"
 "як вам хочеться!"
 
-#: src/prefs.c:457
+#: src/prefs.c:459
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Неможливо пронанал╕зувати рядок геометр╕╖: \"%s\""
@@ -436,39 +452,59 @@ msgstr "Електронна адреса перекладача:"
 msgid "Language group's e-mail :"
 msgstr "Електронна адреса мовно╖ групи:"
 
-#: src/main.c:38
+#: src/main.c:39
 msgid "Specifies the main-window geometry"
 msgstr "Визнача╓ геометр╕ю головного в╕кна"
 
-#: src/parse.c:39
+#: src/parse.c:95
 #, c-format
 msgid ""
-"\n"
-"The file stream is lost!\n"
-"%s"
+"New escaped char found: \\%c\n"
+"Add this to parse.c, line %i."
 msgstr ""
-"\n"
-"Файловий пот╕к втрачено!\n"
-"%s"
 
-#: src/parse.c:220
+#: src/parse.c:129 src/parse.c:387
+#, c-format
+msgid "The file `%s' doesn't exist at all!"
+msgstr ""
+
+#: src/parse.c:194
+#, c-format
+msgid ""
+"Error in file \"%s\"\n"
+"at line %d.\n"
+"Please check the file and try again."
+msgstr ""
+"Помилка у файл╕ \"%s\"\n"
+"в рядку %d.\n"
+"Перев╕рте файл та спробуйте знову."
+
+#: src/parse.c:223
 #, c-format
 msgid ""
 "The file is empty:\n"
 "%s"
 msgstr "Файл порожн╕й:%s"
 
+#: src/parse.c:241
+msgid "There's no file to open!\n"
+msgstr ""
+
 #: src/parse.c:269
+msgid "The file has no header!"
+msgstr ""
+
+#: src/parse.c:272
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Усп╕шно проанал╕зовано файл \"%s\""
 
-#: src/parse.c:272
+#: src/parse.c:275
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "Перекладач -- %s"
 
-#: src/parse.c:372
+#: src/parse.c:375
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -479,7 +515,7 @@ msgstr ""
 "Однак, так╕ файли ╜енеруються програмою.\n"
 "Ваш файл м╕г би мати розширення *.po, вийшло б %s.po"
 
-#: src/parse.c:416
+#: src/parse.c:432
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -490,7 +526,11 @@ msgstr ""
 "%s\n"
 "Ви всеодно хочете зберегти це?"
 
-#: src/parse.c:479
+#: src/parse.c:440
+msgid "gtranslator -- unchanged"
+msgstr "Перекладач -- не зм╕нено"
+
+#: src/parse.c:496
 #, c-format
 msgid ""
 "File %s\n"
@@ -499,10 +539,10 @@ msgstr ""
 "Файл %s\n"
 "було зм╕нено. Ви хочете повернутись до збережено╖ коп╕╖?"
 
-#: src/parse.c:531
+#: src/parse.c:548
 #, c-format
 msgid ""
-"Compile successful:\n"
+"Compile successfull:\n"
 "%s"
 msgstr ""
 "Скомп╕льовано усп╕шно:\n"
@@ -533,11 +573,11 @@ msgstr "Перев╕рка орфограф╕╖"
 msgid "Spell checking complete!"
 msgstr "Перев╕рку орфограф╕╖ завершено!"
 
-#: src/session.c:68
+#: src/session.c:66
 msgid "Session restored successfully."
 msgstr "Файл сеансу було усп╕шно в╕дновлено."
 
-#: libgtranslator/parse-db.c:32
+#: libgtranslator/parse-db.c:33
 msgid "No language defined in the query request!"
 msgstr "В запит╕ не визначено мову!"
 
@@ -545,11 +585,11 @@ msgstr "В запит╕ не визначено мову!"
 #. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
 #. * Just show a message that tells this.
 #. *
-#: libgtranslator/parse-db.c:43
+#: libgtranslator/parse-db.c:44
 msgid "FYI: Will also lookup the superclass message db.\n"
 msgstr "До в╕дома: буде також переглядати надмножину бази пов╕домлень.\n"
 
-#: libgtranslator/parse-db.c:63
+#: libgtranslator/parse-db.c:64
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr "Неможливо в╕дкрити файл бази мови \"%s.xml\" в %s.\n"
@@ -557,21 +597,21 @@ msgstr "Неможливо в╕дкрити файл бази мови \"%s.xml\" в %s.\n"
 #. *
 #. * Print some information.
 #. *
-#: libgtranslator/parse-db.c:76
+#: libgtranslator/parse-db.c:77
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr "Файл п╕дкласу \"%s.xml\" не знайдено.\n"
 
-#: libgtranslator/parse-db.c:77
+#: libgtranslator/parse-db.c:78
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Спроба використовувати файл суперкласу \"%s.xml\" ...\n"
 
-#: libgtranslator/parse-db.c:133
+#: libgtranslator/parse-db.c:134
 msgid "The message db file is empty!"
 msgstr "Файл бази пов╕домлень порожн╕й!"
 
-#: libgtranslator/parse-db.c:139
+#: libgtranslator/parse-db.c:140
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr "База пов╕домлень не схожа на xml-файл бази пов╕домлень."
 
@@ -609,6 +649,50 @@ msgstr "Файл команди \"teams.xml\" в %s не може бути в╕дкрито!"
 #: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
 msgstr "Неможливо повернути список пов╕домлень."
+
+#: libgtranslator/preferences.c:68
+msgid "No path defined where I could get the string from."
+msgstr ""
+
+#: libgtranslator/preferences.c:91
+#, c-format
+msgid "Can't set the string `%s' for a non-defined path!\n"
+msgstr ""
+
+#: libgtranslator/preferences.c:97
+#, c-format
+msgid "No string defined for the path `%s'!"
+msgstr ""
+
+#: libgtranslator/preferences.c:121
+msgid "No path defined where I could get the integer from!"
+msgstr ""
+
+#: libgtranslator/preferences.c:122
+msgid "Returning `1' for assurance .."
+msgstr ""
+
+#: libgtranslator/preferences.c:141
+#, c-format
+msgid "Can't set the value `%i' for a non-defined path!"
+msgstr ""
+
+#: libgtranslator/preferences.c:147
+#, c-format
+msgid "No value defined for the path `%s'!"
+msgstr ""
+
+#: libgtranslator/preferences.c:169
+msgid "No path defined where I could get the boolean from."
+msgstr ""
+
+#: libgtranslator/preferences.c:170
+msgid "Returning `FALSE' for assurance ..."
+msgstr ""
+
+#: libgtranslator/preferences.c:187
+msgid "Can't set a boolean value for a non-defined path!"
+msgstr ""
 
 #: src/languages.h:57
 msgid "Arabic"
@@ -773,9 +857,3 @@ msgstr "Валонська"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "Уельська"
-
-#~ msgid "GoTo"
-#~ msgstr "Перейти"
-
-#~ msgid "Greek"
-#~ msgstr "Грецька"
