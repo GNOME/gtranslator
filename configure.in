@@ -18,6 +18,11 @@ dnl -------------------------------------------------------------------
 AM_PROG_XML_I18N_TOOLS
 
 dnl -------------------------------------------------------------------
+dnl Libtool -- needed for backends.
+dnl -------------------------------------------------------------------
+AM_PROG_LIBTOOL
+
+dnl -------------------------------------------------------------------
 dnl Pick up the Gnome macros .
 dnl -------------------------------------------------------------------
 AM_ACLOCAL_INCLUDE(macros)
@@ -324,6 +329,7 @@ man/nautilus-gtranslator-view.1
 nautilus-view/Makefile
 po/Makefile.in
 src/Makefile
+src/backends/Makefile
 src/pixmaps/Makefile
 ])
 
