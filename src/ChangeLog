@@ -1,3 +1,10 @@
+2003-08-27  Fatih Demir <kabalak@gtranslator.org>
+
+	* gui.c: Removed our own keypress handler to get the Ctrl+Left/Right
+		and such things going - it works by itself now in the Gtk+ 2.x
+		 days and therefore it has to go now; w/ the keypress handler
+		  the b.g.o #120224 goes too :-)
+
 2003-08-26  Fatih Demir <kabalak@gtranslator.org>
 
 	* main.c: Small bits of string change for the option descriptions.

@@ -109,11 +109,6 @@ static void selection_get_handler(GtkWidget *widget,
 	guint time_stamp, gpointer data);
 
 /*
- * To get the left/right moves from the cursor.
- */ 
-static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event);
-
-/*
  * The target formats
  */
 static  GtkTargetEntry dragtypes[] = {
@@ -328,8 +323,6 @@ void gtranslator_create_main_window(void)
 			 "changed",
 			 G_CALLBACK(gtranslator_translation_changed), NULL);
 	
-	g_signal_connect(G_OBJECT(gtranslator_application), "key-press-event",
-			 G_CALLBACK(gtranslator_keyhandler), NULL);
 	/*
 	 * The D'n'D signals
 	 */
@@ -684,72 +677,4 @@ void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 			       8, undotted_text, strlen(text));
 	g_free(text);
 	g_free(undotted_text);
-}
-
-/*
- * The own keyhandler to get the left/right/up/down actions.
- */ 
-static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
-{
-	g_return_val_if_fail(widget!=NULL, FALSE);
-	g_return_val_if_fail(event!=NULL, FALSE);
-	#define IfGood(x) \
-	if(GTK_WIDGET_SENSITIVE(GTK_WIDGET(((GnomeUIInfo)(x)).widget)))
-
-	if(file_opened)
-	{
-		/*
-		 * If we're having a Ctrl+Shift+Arrow Key issue, then respect
-		 *  this to be something another then just Ctrl+Arrow Key.
-		 */
-		if(event->state & GDK_SHIFT_MASK)
-		{
-			return FALSE;
-		}
-
-		/*
-		 * Now handle out "normal" navigation keys consisting out of
-		 *  Ctrl+Arrow Key.
-		 */
-		if(event->state & GDK_CONTROL_MASK)
-		{
-			switch(event->keyval)
-			{
-				case GDK_Left:
-				case GDK_Up:
-					IfGood(the_navibar[1])
-					{
-						gtranslator_message_go_to_previous(NULL, NULL);
-					}
-					break;
-				
-				case GDK_Right:
-				case GDK_Down:
-					IfGood(the_navibar[3])
-					{
-						gtranslator_message_go_to_next(NULL, NULL);
-					}
-					break;
-
-				case GDK_Page_Up:
-					IfGood(the_navibar[0])
-					{
-						gtranslator_message_go_to_first(NULL, NULL);
-					}
-					break;
-					
-				case GDK_Page_Down:
-					IfGood(the_navibar[4])
-					{
-						gtranslator_message_go_to_last(NULL, NULL);
-					}
-					break;
-					
-				default:
-					break;
-			}
-		}
-	}
-	
-	return FALSE;
 }
