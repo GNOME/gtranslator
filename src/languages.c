@@ -181,7 +181,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Norwegian/Nynorsk"), "nn", "iso-8859-1",
-	 "no@li.org", "8bit"
+	 "nn@li.org", "8bit"
 	},
 	{
 	 N_("Polish"), "pl", "iso-8859-2",
