@@ -292,7 +292,6 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
 #undef if_active
 
-	gtranslator_config_init();
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
 	gtranslator_config_set_string("language/name", language);
@@ -308,7 +307,6 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 			      wants.warn_if_no_change);
 	gtranslator_config_set_bool("toggles/do_not_save_unchanged_files",
 			      wants.dont_save_unchanged_files);
-	gtranslator_config_close();
 	
 }
 
@@ -383,7 +381,6 @@ static void prefs_box_changed(GtkWidget * widget, gpointer flag)
 
 void read_prefs(void)
 {
-	gtranslator_config_init();
 	author = gtranslator_config_get_string("translator/name");
 	email = gtranslator_config_get_string("translator/email");
 	language = gtranslator_config_get_string("language/name");
@@ -405,7 +402,6 @@ void read_prefs(void)
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();
 	wants.fill_header = gtranslator_config_get_bool("toggles/fill_header");
-	gtranslator_config_close();
 }
 
 void free_prefs(void)

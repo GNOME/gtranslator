@@ -49,11 +49,11 @@ void gtranslator_config_init()
 	{
 		g_warning(_("Error during GConf initialization through libgtranslator:\n%s"),
 			error->message);
+		/**
+		* Clean up the error.
+		**/
+		g_clear_error(&error);	
 	}
-	/**
-	* Clean up the error.
-	**/
-	g_clear_error(&error);			
 	#else
 	gnome_config_push_prefix("/gtranslator/");
 	#endif
@@ -85,12 +85,14 @@ gchar *gtranslator_config_get_string(gchar *path)
 		**/
 		return "";
 	}
+	gtranslator_config_init();
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
 	return (gconf_client_get_string(client, private_path, &error));
 	#else
 	return (gnome_config_get_string(path));
 	#endif
+	gtranslator_config_close();
 }
 
 /**
@@ -112,6 +114,7 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 		}
 		else
 		{
+			gtranslator_config_init();
 			#ifdef GCONF_IS_PRESENT
 			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
 				path);
@@ -120,6 +123,7 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 			#else
 			gnome_config_set_string(path, value);
 			#endif
+			gtranslator_config_close();
 		}
 	}	
 }
@@ -137,6 +141,7 @@ gint gtranslator_config_get_int(gchar *path)
 		g_warning(_("Returning `1' for assurance .."));
 		return 1;
 	}
+	gtranslator_config_init();
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strdup_printf("%s/%s","/apps/gtranslator"
 		,path);
@@ -145,6 +150,7 @@ gint gtranslator_config_get_int(gchar *path)
 	#else
 	return (gnome_config_get_int(path));
 	#endif
+	gtranslator_config_close();
 }
 
 /**
@@ -166,6 +172,7 @@ void gtranslator_config_set_int(gchar *path, gint value)
 		}
 		else
 		{
+			gtranslator_config_init();
 			#ifdef GCONF_IS_PRESENT
 			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
 				path);
@@ -174,6 +181,7 @@ void gtranslator_config_set_int(gchar *path, gint value)
 			#else
 			gnome_config_set_int(path, value);
 			#endif
+			gtranslator_config_close();
 		}	
 	}
 }
@@ -189,6 +197,7 @@ gboolean gtranslator_config_get_bool(gchar *path)
 		g_warning(_("Returning `FALSE' for assurance ..."));
 		return FALSE;
 	}
+	gtranslator_config_init();
 	#ifdef GCONF_IS_PRESENT
 	private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
 	return (gconf_client_get_bool(client, private_path,
@@ -196,6 +205,7 @@ gboolean gtranslator_config_get_bool(gchar *path)
 	#else
 	return (gnome_config_get_bool(path));
 	#endif
+	gtranslator_config_close();
 }
 
 void gtranslator_config_set_bool(gchar *path, gboolean value)
@@ -206,6 +216,7 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 	}
 	else
 	{
+		gtranslator_config_init();
 		#ifdef GCONF_IS_PRESENT
 		private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
 			path);
@@ -214,6 +225,7 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 		#else
 		gnome_config_set_bool(path, value);
 		#endif
+		gtranslator_config_close();
 	}	
 }
 
@@ -222,12 +234,14 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 **/
 gchar *gtranslator_config_get_last_run_date()
 {
+	gtranslator_config_init();
 	#ifdef GCONF_IS_PRESENT
 	return (gconf_client_get_string(client, "informations/last_run_on",
 		&error));
 	#else
 	return (gnome_config_get_string("informations/last_run_on"));
 	#endif
+	gtranslator_config_close();
 }
 
 /**
@@ -250,10 +264,12 @@ void gtranslator_config_set_last_run_date()
 	* Set a date identifier.
 	**/
 	strftime(date, 17, "%Y-%m-%d %H:%M", timebox);
+	gtranslator_config_init();
 	#ifdef GCONF_IS_PRESENT
 	gconf_client_set_string(client, "/apps/gtranslator/informations/last_run_on",
 		date, &error);
 	#else
 	gnome_config_set_string("informations/last_run_on", date);
 	#endif
+	gtranslator_config_close();
 }

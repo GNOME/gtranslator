@@ -35,10 +35,8 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 	/**
 	* State-saving ...
 	**/
-	gtranslator_config_init();
 	gtranslator_config_set_int("state/message_number", 
 			     g_list_position(po->messages, po->current));
-	gtranslator_config_close();
 	
 	
 	argv[2] = NULL;
@@ -57,9 +55,7 @@ void restore_session(GnomeClient * client)
 {
 	guint num;
 
-	gtranslator_config_init();
 	num = gtranslator_config_get_int("state/message_number");
-	gtranslator_config_close();
 
 	goto_nth_msg(NULL, GUINT_TO_POINTER(num));
 	g_snprintf(status, sizeof(status), _("Session restored successfully."));

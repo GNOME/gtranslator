@@ -174,10 +174,8 @@ static void match_case_toggled(GtkWidget * widget, gpointer useless)
 	wants.match_case =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 	update_flags();
-	gtranslator_config_init();
 	gtranslator_config_set_bool("find/case_sensitive",
 			      wants.match_case);
-	gtranslator_config_close();
 }
 
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
