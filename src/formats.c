@@ -22,16 +22,66 @@
 #endif
 
 #include "formats.h"
-#include "messages.h"
-#include "nautilus-string.h"
+#include "utils.h"
+
+#include <stdlib.h>
+
+#include <gtk/gtkmain.h>
 
 /*
  * Checks whether the formats are right or wrong .-)
  */
 gboolean gtranslator_formats_check(GtrMsg *message)
 {
+	gint	 result;
+	gchar 	*cmd_str;
+
 	g_return_val_if_fail(GTR_MSG(message)!=NULL, FALSE);
 	g_return_val_if_fail(GTR_MSG(message)->msgid!=NULL, FALSE);
 
-	return TRUE;
+	/*
+	 * A quite backward method to check the messages for correctness -- but
+	 *  this should work as we do "simply" use msgfmt.
+	 */
+	cmd_str=g_strdup_printf("\
+		echo '# Temporary gtranslator formats compiling file.
+		msgid \"\"
+		msgstr \"\"
+		\"Project-Id-Version: TemporaryCompileFile\\n\"
+		\"POT-Creation-Date: 2001-12-27 19:48+0200\\n\"
+		\"PO-Revision-Date: 2001-12-27 19:48+0300\\n\"
+		\"Last-Translator: gtranslator <gtranslator-devel@lists.sourceforge.net>\\n\"
+		\"Language-Team: gtranslator <gtranslator-devel@lists.sourceforge.net>\\n\"
+		\"MIME-Version: 1.0\\n\"
+		\"Content-Type: text/plain; charset=%s\\n\"
+		\"Content-Transfer-Encoding: 8bit\\n\"
+		\n\
+		msgid \"%s\"
+		msgstr \"%s\"' | msgfmt -c - -o /dev/null",
+		((GTR_HEADER(po->header)->charset) ? GTR_HEADER(po->header)->charset :
+			po->locale_charset),
+		message->msgid,
+		((message->msgstr) ? message->msgstr : ""));
+
+	result=system(cmd_str);
+
+	/*
+	 * Iterate for the main loop -- this _should_ avoid some unwated
+	 *  GIMP GUI "blur" effects.
+	 */
+	while(gtk_events_pending())
+	{
+		gtk_main_iteration();
+	}
+
+	GTR_FREE(cmd_str);
+
+	if(!result)
+	{
+		return FALSE;
+	}
+	else
+	{
+		return TRUE;
+	}
 }
