@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-14 15:24+0200\n"
-"PO-Revision-Date: 2004-06-14 19:35+0200\n"
+"POT-Creation-Date: 2004-07-27 15:03+0200\n"
+"PO-Revision-Date: 2004-07-27 16:43+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "Překladatelský nástroj pro GNOME"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1143
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1141
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -385,11 +385,11 @@ msgstr ""
 "Nemohu najít\n"
 "\"%s\""
 
-#: src/gui.c:184
+#: src/gui.c:182
 msgid "Edit comment"
 msgstr "Upravit komentář"
 
-#: src/gui.c:495
+#: src/gui.c:493
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
@@ -397,24 +397,24 @@ msgstr[0] "%s [ Zbývá %i neúplně přeložená ]"
 msgstr[1] "%s [ Zbývají %i neúplně přeložené ]"
 msgstr[2] "%s [ Zbývá %i neúplně přeložených ]"
 
-#: src/gui.c:495 src/gui.c:499 src/menus.c:341 src/messages-table.c:324
+#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "Neúplně přeložené"
 
-#: src/gui.c:499
+#: src/gui.c:497
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Žádné neúplně přeložené zprávy ]"
 
-#: src/gui.c:507
+#: src/gui.c:505
 msgid "Sticky (Message & translation are the same)"
 msgstr "Sticky (Překlad je shodný s původní zprávou)"
 
-#: src/gui.c:509 src/messages-table.c:332
+#: src/gui.c:507 src/messages-table.c:332
 msgid "Translated"
 msgstr "Přeložené"
 
-#: src/gui.c:518
+#: src/gui.c:516
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
@@ -422,21 +422,21 @@ msgstr[0] "%s [ Zbývá %i nepřeložená ]"
 msgstr[1] "%s [ Zbývá %i nepřeložené ]"
 msgstr[2] "%s [ Zbývá %i nepřeložených ]"
 
-#: src/gui.c:518 src/gui.c:520 src/messages-table.c:315
+#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
 msgid "Untranslated"
 msgstr "Nepřeložené"
 
-#: src/gui.c:520
+#: src/gui.c:518
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Žádné nepřeložené zprávy ]"
 
-#: src/gui.c:539
+#: src/gui.c:537
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Zpráva %d z %d. Stav: %s (Zpráva s množnými čísly)"
 
-#: src/gui.c:543
+#: src/gui.c:541
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Zpráva %d z %d. Stav: %s"
@@ -1190,19 +1190,33 @@ msgstr "Najít řetězec v katalogu"
 msgid "Replace string in po file"
 msgstr "Nahradit řetězec v katalogu"
 
-#: src/message.c:96
+#: src/message.c:95
 msgid "Couldn't get the message!"
 msgstr "Nemohu získat zprávu!"
 
-#: src/message.c:118
+#: src/message.c:117
 msgid "There are no fuzzy messages left."
 msgstr "Žádné neúplně přeložené zprávy."
 
-#: src/message.c:142
+#: src/message.c:141
 msgid "All messages seem to be translated."
 msgstr "Všechny zprávy jsou přeloženy"
 
-#: src/message.c:328
+#: src/message.c:270
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr "Chyba gtkspell: %s\n"
+
+#: src/message.c:271
+#, c-format
+msgid ""
+"GtkSpell was unable to initialize.\n"
+" %s"
+msgstr ""
+"Nelze inicializovat GtkSpell.\n"
+" %s"
+
+#: src/message.c:311
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "gtranslator – editace forem množného čísla"
 
@@ -1234,7 +1248,7 @@ msgstr "Nemohu otevřít programem %s komprimovaný soubor gettextu `%s'!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Nemohu otevřít komprimovaný katalog `%s'."
 
-#: src/parse.c:487
+#: src/parse.c:485
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1245,7 +1259,7 @@ msgstr ""
 "na řádku %d.\n"
 "Zkontrolujte, prosím, tento soubor."
 
-#: src/parse.c:542
+#: src/parse.c:540
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1254,7 +1268,7 @@ msgstr ""
 "Soubor je prázdný:\n"
 "%s"
 
-#: src/parse.c:564
+#: src/parse.c:562
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Soubor `%s' neexistuje!"
@@ -1262,16 +1276,16 @@ msgstr "Soubor `%s' neexistuje!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:696
+#: src/parse.c:694
 msgid "Header record not found - defaulting from preferences"
 msgstr "Nebyla nalezena hlavička – používám implicitní nastavení"
 
-#: src/parse.c:712
+#: src/parse.c:710
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator – %s"
 
-#: src/parse.c:924
+#: src/parse.c:922
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1282,12 +1296,12 @@ msgstr ""
 "POT soubory jsou generovány během procesu kompilace.\n"
 "Vhodné jméno pro váš soubor je `%s.po'."
 
-#: src/parse.c:986
+#: src/parse.c:984
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nemohu otevřít soubor `%s' pro zápis!"
 
-#: src/parse.c:1038
+#: src/parse.c:1036
 #, c-format
 msgid ""
 "File %s\n"
@@ -1305,11 +1319,11 @@ msgstr[2] ""
 "Soubor %s\n"
 "obsahuje %d neúplně přeložených zpráv."
 
-#: src/parse.c:1310
+#: src/parse.c:1308
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Lituji, msgfmt není ve vašem systému dostupný!"
 
-#: src/parse.c:1345
+#: src/parse.c:1343
 #, c-format
 msgid ""
 "Compile successful:\n"
