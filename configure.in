@@ -208,14 +208,10 @@ dnl -------------------------------------------------------------------
 MY_DATE=`date +%Y-%m-%d`
 AC_SUBST(MY_DATE)
 
-
 dnl -------------------------------------------------------------------
-dnl Check for the ultimate libraries and their uber-ultimate functions!
+dnl The most important check for a library at all!
 dnl -------------------------------------------------------------------
-AC_CHECK_LIB(kabalak, bermuda_shorts_new_granish,,)
-AC_CHECK_LIB(gnofol, gnofol_order_new,,
-	AC_CHECK_LIB(gnofol, gnome_food_order_pizza,,
-		AC_CHECK_LIB(gnofol, Support_GNOFOL,,)))
+AC_CHECK_LIB(ife, do_ya_think_we_are_just_geeks,,)
 
 dnl -------------------------------------------------------------------
 dnl Put out the configured files.
