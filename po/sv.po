@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-01-04 00:04+0100\n"
-"PO-Revision-Date: 2003-01-04 00:06+0100\n"
+"POT-Creation-Date: 2003-01-13 12:11+0100\n"
+"PO-Revision-Date: 2003-01-13 12:12+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -869,76 +869,104 @@ msgstr "Vallonska"
 msgid "Welsh"
 msgstr "Walesiska"
 
-# src/main.c:77
-#: src/main.c:89
-msgid "Show build information/specifications"
-msgstr "Visa bygginformation/specifikationer"
+# src/dialogs.c:107
+#: src/main.c:83
+msgid "Auto translate the po file & exit"
+msgstr "Översätt po-filen automatiskt och avsluta"
 
-#: src/main.c:103
-msgid "Learn the file completely & exit"
-msgstr "Lär in filen helt och avsluta sedan"
-
-#: src/main.c:103
+#: src/main.c:83 src/main.c:99
 msgid "FILENAME"
 msgstr "FILNAMN"
 
+# src/main.c:77
+#: src/main.c:87
+msgid "Show build information/specifications"
+msgstr "Visa bygginformation/specifikationer"
+
+#: src/main.c:91
+msgid "Export learn buffer to a plain po file"
+msgstr "Exportera inlärningsbuffert till en vanlig po-fil"
+
+#: src/main.c:91
+msgid "PO_FILE"
+msgstr "PO-FIL"
+
+# src/main.c:81
+#: src/main.c:95
+msgid "Specify main window geometry"
+msgstr "Ange geometri för huvudfönstret"
+
+# src/main.c:81
+#: src/main.c:95
+msgid "GEOMETRY"
+msgstr "GEOMETRI"
+
+#: src/main.c:99
+msgid "Learn the file completely & exit"
+msgstr "Lär in filen helt och avsluta sedan"
+
 # src/main.c:93
-#: src/main.c:107
+#: src/main.c:103
 msgid "HTML file to write to"
 msgstr "HTML-fil att skriva till"
 
 # src/main.c:93
-#: src/main.c:107
+#: src/main.c:103
 msgid "HTMLFILE"
 msgstr "HTML-FIL"
 
 # src/main.c:138
-#: src/main.c:155
+#: src/main.c:151
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Fel under initiering av GConf: %s."
 
 # src/main.c:161
-#: src/main.c:183
+#: src/main.c:178
 msgid "gtranslator build information/specs:"
 msgstr "Bygginformation/specifikationer för gtranslator:"
 
 # src/main.c:163
-#: src/main.c:185
+#: src/main.c:180
 msgid "Version and build date:"
 msgstr "Versionsnummer och byggdatum:"
 
 # src/main.c:165
-#: src/main.c:187
-msgid "Build GLib/Gtk+/GNOME versions:"
-msgstr "Glib/Gtk+/GNOME-versioner vid byggandet:"
+#: src/main.c:182
+msgid "Build GLib / Gtk+ / GNOME / XML versions:"
+msgstr "Glib/Gtk+/GNOME/XML-versioner vid byggandet:"
 
 # src/main.c:169
-#: src/main.c:189
+#: src/main.c:184
 msgid "Colorschemes directory:"
 msgstr "Färgschemakatalog:"
 
 # src/main.c:171
-#: src/main.c:191
+#: src/main.c:186
 msgid "Scripts directory:"
 msgstr "Skriptkatalog:"
 
 # src/main.c:173
-#: src/main.c:193
+#: src/main.c:188
 msgid "Window icon:"
 msgstr "Fönsterikon:"
 
 # src/main.c:175
-#: src/main.c:195
+#: src/main.c:190
 msgid "Own locale directory:"
 msgstr "Egen lokalkatalog:"
+
+# src/prefs.c:127
+#: src/main.c:192
+msgid "Default learn buffer file location:"
+msgstr "Plats för standardfrågedomänsfil:"
 
 # src/update.c:111
 #.
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:448
+#: src/main.c:445
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "Inlärning av \"%s\" lyckades.\n"
@@ -946,7 +974,7 @@ msgstr "Inlärning av \"%s\" lyckades.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:490
+#: src/main.c:487
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
 msgstr "Exporterade inlärningsbuffert till \"%s\".\n"
@@ -1736,7 +1764,7 @@ msgstr "Inga ersättningar gjorda!"
 #. *  another than a 'Y' to avoid the usage of the mid dot ('�') in the
 #. *   text displaying routines of gtranslator.
 #.
-#: src/runtime-config.c:76
+#: src/runtime-config.c:72
 msgid "Y"
 msgstr "Y"
 
@@ -1744,7 +1772,7 @@ msgstr "Y"
 #. * Translators: this character is used if the middle dot
 #. *  can't be used under your locale.
 #.
-#: src/runtime-config.c:93 src/runtime-config.c:98
+#: src/runtime-config.c:89 src/runtime-config.c:94
 msgid "^"
 msgstr "^"
 
@@ -1816,7 +1844,7 @@ msgid "An error occurred while updating the po file."
 msgstr "Ett fel inträffade vid uppdatering av po-filen."
 
 # src/utils.c:119
-#: src/utils.c:309 src/utils.c:326
+#: src/utils.c:308 src/utils.c:325
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Kunde inte skapa katalogen \"%s\"!"
@@ -1824,7 +1852,7 @@ msgstr "Kunde inte skapa katalogen \"%s\"!"
 #.
 #. * Again return the fallback default locale value given by the translator.
 #.
-#: src/utils.c:793
+#: src/utils.c:792
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 
@@ -1969,24 +1997,6 @@ msgstr "Gettext-po-fil"
 
 #~ msgid "_Settings/_Colorschemes/"
 #~ msgstr "_Inställningar/_Färgscheman/"
-
-# src/dialogs.c:107
-#~ msgid "Auto translate the po file & exit"
-#~ msgstr "Översätt po-filen automatiskt och avsluta"
-
-#~ msgid "Export learn buffer to a plain po file"
-#~ msgstr "Exportera inlärningsbuffert till en vanlig po-fil"
-
-#~ msgid "PO_FILE"
-#~ msgstr "PO-FIL"
-
-# src/main.c:81
-#~ msgid "Specify main window geometry"
-#~ msgstr "Ange geometri för huvudfönstret"
-
-# src/main.c:81
-#~ msgid "GEOMETRY"
-#~ msgstr "GEOMETRI"
 
 #~ msgid "Don't highlight syntax"
 #~ msgstr "Färgmarkera inte syntax"
@@ -2149,10 +2159,6 @@ msgstr "Gettext-po-fil"
 # src/menus.c:246
 #~ msgid "Stick this message"
 #~ msgstr "Klistra detta meddelande"
-
-# src/prefs.c:127
-#~ msgid "Default query domain:"
-#~ msgstr "Standardfrågedomän:"
 
 #~ msgid ""
 #~ "\t\tThe Preferences box allows you to customise gtranslator\n"
