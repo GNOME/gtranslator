@@ -782,7 +782,8 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
 	node=g_hash_table_lookup(hash_table, message);
 
 	if(node)
-	{
+	{	
+		e_tree_model_pre_change (tree_model);
 		e_tree_model_node_data_changed (tree_model, node);
 	}
 }
