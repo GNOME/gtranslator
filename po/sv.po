@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-10-09 00:53+0200\n"
-"PO-Revision-Date: 2000-10-09 00:53+0200\n"
+"POT-Creation-Date: 2000-10-13 22:01+0200\n"
+"PO-Revision-Date: 2000-10-13 22:06+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -226,7 +226,7 @@ msgstr "Sista"
 msgid "Missing"
 msgstr "Saknade"
 
-#: src/gui.c:288 src/gui.c:712
+#: src/gui.c:288 src/gui.c:724
 msgid "Fuzzy"
 msgstr "Luddig"
 
@@ -264,20 +264,20 @@ msgstr "Hej då!"
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:702
+#: src/gui.c:714
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Meddelande %d / %d / Status:"
 
-#: src/dialogs.c:217 src/gui.c:716
+#: src/dialogs.c:217 src/gui.c:728
 msgid "Translated"
 msgstr "Översatt"
 
-#: src/gui.c:722
+#: src/gui.c:734
 msgid "Stick"
 msgstr "Klistra"
 
-#: src/gui.c:726
+#: src/gui.c:738
 msgid "Untranslated"
 msgstr "Oöversatt"
 
@@ -341,113 +341,144 @@ msgstr "Sök i: "
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Ett fel inträffade då msgfmt kördes:\n"
 
-#: src/prefs.c:199
+#: src/prefs.c:212
 msgid "gtranslator -- options"
 msgstr "gtranslator -- alternativ"
 
 #. *
 #. * The tables for holding all the entries below
 #. *
-#: src/prefs.c:203
+#: src/prefs.c:216
 msgid "Personal information"
 msgstr "Personlig information"
 
-#: src/prefs.c:204
+#: src/prefs.c:217
 msgid "Language options"
 msgstr "Språkalternativ"
 
-#: src/prefs.c:205
+#: src/prefs.c:218
 msgid "Po file options"
 msgstr "Alternativ för po-filer"
 
-#: src/prefs.c:206
+#: src/prefs.c:219
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: src/prefs.c:207
+#: src/prefs.c:220
 msgid "Recent files menu"
 msgstr "Meny med senaste filer"
 
-#: src/prefs.c:212
+#: src/prefs.c:221
+msgid "Fonts & Colors"
+msgstr "Typsnitt och färger"
+
+#: src/prefs.c:226
 msgid "Author's name :"
 msgstr "Författarens namn:"
 
-#: src/prefs.c:215
+#: src/prefs.c:229
 msgid "Author's EMail :"
 msgstr "Författarens e-post:"
 
-#: src/header_stuff.c:307 src/prefs.c:223
+#: src/header_stuff.c:307 src/prefs.c:237
 msgid "Language :"
 msgstr "Språk:"
 
-#: src/prefs.c:227
+#: src/prefs.c:241
 msgid "Language code :"
 msgstr "Språkkod:"
 
-#: src/prefs.c:232
+#: src/prefs.c:246
 msgid "Language group's EMail :"
 msgstr "Språkgruppens e-postadress:"
 
-#: src/header_stuff.c:316 src/prefs.c:236
+#: src/header_stuff.c:316 src/prefs.c:250
 msgid "Charset :"
 msgstr "Teckentabell:"
 
-#: src/header_stuff.c:320 src/prefs.c:240
+#: src/header_stuff.c:320 src/prefs.c:254
 msgid "Encoding :"
 msgstr "Kodning:"
 
-#: src/prefs.c:248
+#: src/prefs.c:262
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Sätt icke-luddig status om meddelandet ändrades"
 
-#: src/prefs.c:252
+#: src/prefs.c:266
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Varna om po-filen innehåller luddiga översättningar"
 
-#: src/prefs.c:256
+#: src/prefs.c:270
 msgid "Don't save unchanged .po-files"
 msgstr "Spara inte po-filer som inte ändrats"
 
-#: src/prefs.c:260
+#: src/prefs.c:274
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Varna vid försök att spara en fil som inte ändrats"
 
-#: src/prefs.c:267
+#: src/prefs.c:281
 msgid "Use the dot char (\"·\") instead of a free space"
 msgstr "Använd punkttecknet (\"·\") istället för blanksteg"
 
-#: src/prefs.c:270
+#: src/prefs.c:284
 msgid "Enable the popup menu"
 msgstr "Aktivera popup-menyn"
 
-#: src/prefs.c:273
+#: src/prefs.c:287
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
 "Aktivera uppdateringsfunktionen i gtranslator (du behöver källkoden för "
 "detta)"
 
-#: src/prefs.c:276
+#: src/prefs.c:290
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Spara gtranslators geometri vid avslut och återställ vid uppstart"
 
-#: src/prefs.c:279
+#: src/prefs.c:293
 msgid "Don't show the update information dialogs"
 msgstr "Visa inte dialogfönster med uppdateringsinformation"
 
-#: src/prefs.c:291
+#: src/prefs.c:305
 msgid "Check every file in the list for existence"
 msgstr "Kontrollera att varje fil i listan existerar"
 
-#: src/prefs.c:294
-msgid "Delete obsolete entries in the recent files list"
-msgstr "Ta bort föråldrade poster i listan med senaste filer"
-
-#: src/prefs.c:300
+#: src/prefs.c:311
 msgid "Number of maximal shown entries in the recent files list:"
 msgstr "Maximala antalet visade poster i listan över senaste filer:"
 
-#: src/prefs.c:404
+#: src/prefs.c:325
+msgid "Apply special font/colors"
+msgstr "Aktivera egna typsnitt/färger"
+
+#. *
+#. * Create the labels.
+#. *
+#: src/prefs.c:330
+msgid "Font:"
+msgstr "Typsnitt:"
+
+#: src/prefs.c:331
+msgid "Foreground color:"
+msgstr "Förgrundsfärg:"
+
+#: src/prefs.c:332
+msgid "Background color:"
+msgstr "Bakgrundsfärg:"
+
+#: src/prefs.c:339
+msgid "gtranslator -- font selection"
+msgstr "gtranslator -- typsnittsval"
+
+#: src/prefs.c:346
+msgid "gtranslator -- foreground color"
+msgstr "gtranslator -- förgrundsfärg"
+
+#: src/prefs.c:349
+msgid "gtranslator -- background color"
+msgstr "gtranslator -- bakgrundsfärg"
+
+#: src/prefs.c:471
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -457,7 +488,7 @@ msgstr ""
 "som får gtranslator att göra de saker som DU vill.\n"
 " "
 
-#: src/prefs.c:555
+#: src/prefs.c:622
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Geometristrängen \"%s\" kunde inte tolkas!"
@@ -528,7 +559,7 @@ msgstr ""
 "Nytt tecken med escape framför hittat: \\%c\n"
 "Lägg till detta till parse.c, rad %i."
 
-#: src/parse.c:130 src/parse.c:438
+#: src/parse.c:130 src/parse.c:442
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen \"%s\" finns inte alls!"
@@ -571,7 +602,7 @@ msgstr "Tolkade filen \"%s\" utan problem"
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:426
+#: src/parse.c:430
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -582,7 +613,7 @@ msgstr ""
 "Sådana filer genereras dock av program.\n"
 "Din fil bör sparas med en *.po-ändelse, troligtvis %s.po"
 
-#: src/parse.c:483
+#: src/parse.c:487
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -593,11 +624,11 @@ msgstr ""
 "%s\n"
 "Vill du spara den ändå?"
 
-#: src/parse.c:491
+#: src/parse.c:495
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- oförändrad"
 
-#: src/parse.c:548
+#: src/parse.c:552
 #, c-format
 msgid ""
 "File %s\n"
@@ -606,11 +637,11 @@ msgstr ""
 "Filen %s\n"
 "har ändrats. Vill du återgå till den sparade kopian?"
 
-#: src/parse.c:585
+#: src/parse.c:589
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Tyvärr, msgfmt finns inte tillgängligt på ditt system!"
 
-#: src/parse.c:610
+#: src/parse.c:614
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -622,24 +653,24 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:649 src/parse.c:659 src/parse.c:660
+#: src/parse.c:659 src/parse.c:669 src/parse.c:670
 msgid "_File/Recen_t files/"
 msgstr "_Arkiv/Senas_te filer/"
 
-#: src/parse.c:704
+#: src/parse.c:715
 #, c-format
 msgid "Open %s"
 msgstr "Öppna %s"
 
-#: src/parse.c:826
-msgid "The update caused no changes."
-msgstr "Uppdateringen orsakade inga ändringar."
+#: src/parse.c:835
+msgid "An update would cause no changes."
+msgstr "En uppdatering hade inte orsakat några ändringar."
 
-#: src/parse.c:844
+#: src/parse.c:853
 msgid "The update was successfull."
 msgstr "Uppdateringen lyckades."
 
-#: src/find.c:84
+#: src/find.c:88
 #, c-format
 msgid ""
 "Could not find\n"
@@ -648,15 +679,15 @@ msgstr ""
 "Kunde inte hitta\n"
 "\"%s\""
 
-#: src/find.c:96
+#: src/find.c:100
 msgid "Couldn't get the message! Grrr...."
 msgstr "Kunde inte hitta meddelandet! Grrr..."
 
-#: src/find.c:118
+#: src/find.c:122
 msgid "There are no more fuzzy messages"
 msgstr "Det finns inga fler luddiga meddelanden"
 
-#: src/find.c:142
+#: src/find.c:146
 msgid "All messages seem to be translated"
 msgstr "Alla meddelanden verkar vara översatta"
 
@@ -664,7 +695,7 @@ msgstr "Alla meddelanden verkar vara översatta"
 msgid "Check spelling"
 msgstr "Kontrollera stavning"
 
-#: src/spell.c:55
+#: src/spell.c:54
 msgid "Spell checking complete!"
 msgstr "Stavningskontrollen färdig!"
 
@@ -805,51 +836,59 @@ msgstr ""
 "Fel under GConf-initiering genom libgtranslator:\n"
 "%s"
 
-#: libgtranslator/preferences.c:77
+#: libgtranslator/preferences.c:80
 msgid "No path defined where I could get the string from."
 msgstr "Ingen sökväg angiven där jag kunde hämta strängen ifrån."
 
-#: libgtranslator/preferences.c:100
+#: libgtranslator/preferences.c:103
 #, c-format
 msgid "Can't set the string `%s' for a non-defined path!\n"
 msgstr "Kan inte sätta strängen \"%s\" för en sökväg som inte är angiven!\n"
 
-#: libgtranslator/preferences.c:107
+#: libgtranslator/preferences.c:110
 #, c-format
 msgid "No string defined for the path `%s'!"
 msgstr "Ingen sträng angiven för sökvägen \"%s\"!"
 
-#: libgtranslator/preferences.c:135
+#: libgtranslator/preferences.c:139
 msgid "No path defined where I could get the integer from!"
 msgstr "Ingen sökväg angiven där jag kunde hämta heltalet ifrån!"
 
-#: libgtranslator/preferences.c:136
+#: libgtranslator/preferences.c:140
 msgid "Returning `1' for assurance .."
 msgstr "Returnerar \"1\" för sökerhets skull..."
 
-#: libgtranslator/preferences.c:158
+#: libgtranslator/preferences.c:162
 #, c-format
 msgid "Can't set the value `%i' for a non-defined path!"
 msgstr "Kna inte ange värdet \"%i\" för en sökväg som inte är angiven!"
 
-#: libgtranslator/preferences.c:165
+#: libgtranslator/preferences.c:169
 #, c-format
 msgid "No value defined for the path `%s'!"
 msgstr "Inget värde är angivet för sökvägen \"%s\"!"
 
-#: libgtranslator/preferences.c:191
+#: libgtranslator/preferences.c:196
 msgid "No path defined where I could get the boolean from."
 msgstr "Ingen sökväg angiven där jag kunde hämta det boolska värdet ifrån."
 
-#: libgtranslator/preferences.c:192
+#: libgtranslator/preferences.c:197
 msgid "Returning `FALSE' for assurance ..."
 msgstr "Returnerar \"FALSE\" för säkerhets skull..."
 
-#: libgtranslator/preferences.c:210
+#: libgtranslator/preferences.c:215
 msgid "Can't set a boolean value for a non-defined path!"
 msgstr "Kan inte sätta ett booleskt värde för en sökväg som inte är angiven!"
 
+#. *
+#. * Set a date identifier; this ought to be also
+#. *  localized!
+#. *
 #: libgtranslator/preferences.c:267
+msgid "%Y-%m-%d %H:%M"
+msgstr "%Y-%m-%d %H.%M"
+
+#: libgtranslator/preferences.c:273
 msgid "Couldn't generate the current date!"
 msgstr "Kunde inte skapa aktuellt datum!"
 
@@ -1016,6 +1055,9 @@ msgstr "Vallonska"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "Walesiska"
+
+#~ msgid "Delete obsolete entries in the recent files list"
+#~ msgstr "Ta bort föråldrade poster i listan med senaste filer"
 
 #~ msgid "Not written yet!"
 #~ msgstr "Inte skrivet än!"
