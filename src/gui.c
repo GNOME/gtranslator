@@ -345,11 +345,11 @@ void gtranslator_create_main_window(void)
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 			 "delete-range",
 			 G_CALLBACK(delete_text_handler), NULL);
+*/
 	
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 			 "changed",
 			 G_CALLBACK(gtranslator_translation_changed), NULL);
-*/
 	g_signal_connect(G_OBJECT(text_box), "button-press-event",
 			 G_CALLBACK(create_popup_menu), NULL);
 	g_signal_connect(G_OBJECT(trans_box), "button-press-event",
@@ -726,7 +726,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 		 */
 		if(event->state & GDK_SHIFT_MASK)
 		{
-			return TRUE;
+			return FALSE;
 		}
 
 		/*
