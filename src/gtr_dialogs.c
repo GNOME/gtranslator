@@ -39,7 +39,7 @@ void no_changes_dialog(GtkWidget *widget,gpointer useless)
 **/
 void prefs_box_help(GtkWidget *widget,gpointer useless)
 {
-	prefs_box_help_help=_("With the Preferences box you can define some variables\n
+	prefs_box_help_help=_("With the Preferences box you can define some variables\n\
 with which you can make gtranslator make more work\nlike YOU want it to work!");
 	prefs_box_help_dlg=gnome_app_message(GNOME_APP(app1),prefs_box_help_help);
 }

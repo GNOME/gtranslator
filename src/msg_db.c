@@ -127,10 +127,8 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			fseek(db_stream,0L,SEEK_END);
 			/**
 			* Add the given parameters to the msg_db .
-			*  Using a '{{' as something like a starting
-			*   tag ....
 			**/
-			fputs("\n{{",db_stream);
+			fputs("\n",db_stream);
 			fputs(msg_id,db_stream);
 			/**
 			* These ';;;' are used as separators and shouldn't
@@ -139,12 +137,11 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			fputs(";;;",db_stream);
 			fputs(msg_translation,db_stream);
 			/**
-			* This is the closing tag '}}' ; at the beginning
-		 	*  and at the end there are always '\n''s appended
-			*   which makes the reading process much slower , but
+		 	*  at the end there are always '\n''s appended
+			*   which make the reading process much slower , but
 			*    which guarantees a better read-ability by the user  
 			**/
-			fputs("}}\n",db_stream);
+			fputs("\n",db_stream);
 			/**
 			* After all this , the story should be at a happy ending 
 			**/
@@ -184,5 +181,19 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		* Go to the beginning of the file
 		**/
 		fseek(db_stream,0L,SEEK_SET);
+		while(fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL)
+		{
+			/**
+			* Only challenge the first 3 characters
+			**/
+			if(!g_strncasecmp(msg_messages,get_similar,4))
+			{
+				if(!strstr(msg_messages,';'))	
+				{
+					continue;
+				}
+			}
+		}	
+		return _("No entry found in the msg_db.");
 	}
 }

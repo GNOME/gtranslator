@@ -39,27 +39,4 @@ enum gtr_msg_status
 	GTRANSLATOR_MSG_ASSIMILATED_BY_THE_BORG
 };
 
-/**
-* The structure with general 
-*  informations ...
-**/
-struct gtr_po 
-{
-	gchar *po_filename;
-	unsigned int file_length;
-	gboolean opened;
-};
-
-/**
-* Every message should be filled
-*  in here .
-**/
-struct gtr_msg
-{
-	gchar *msgid;
-	gchar *msgstr;
-	unsigned int position;
-	enum gtr_msg_status status;
-};
-
 #endif // GTR_MESSAGES_H

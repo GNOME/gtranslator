@@ -1,5 +1,37 @@
 2000-05-09  Fatih Demir		( kabalak@gmx.net )
 
+	+	Added a rough method of getting an entry from
+		
+		the msg_db; nothing big but it should work
+		
+	+	Added some translatable strings
+	
+		-> msg_db.c
+
+	+	Added a forgotten '\' to the help-message for
+		
+		the prefs_box
+	
+		[ while building the gtranslator.pot there 
+		
+		aren't any warning messages any more. And the 
+		
+		message is now also translatable. ]	
+	
+		-> gtr_dialogs.c
+
+	+	Connected the --file= & -f options
+		
+		with the parse()-function.
+		
+		[ Now you can start gtranslator with
+		
+		gtranslator -f xy.po and it reads the 
+		
+		xy.po at the startup ] 
+
+	+	Added short-form options
+
 	+	Added a popt-table with the options for 
 	
 		gtranslator; not quite useful for now but
@@ -45,6 +77,12 @@
 	+	Also a complete rewrite 
 		
 		-> header_stuff.c/h	
+
+	+	Put the parse()-routine to an own function because
+		
+		of the cmd-line option -f/--file= which allows
+		
+		you to specify a startup file.
 
 	+	Remove the get_header()-call.
 

@@ -37,59 +37,73 @@ void check_file(FILE *stream)
 }
 
 /**
+* The internally used parse-function
+**/
+void parse(gchar *po_file)
+{
+	/**
+	* Some variables
+	**/
+	gchar temp_char[126];
+        guint lines=1;
+	/**
+        * If there's no selection ( is this possible within a Gtk+ fileselection ? )
+        **/
+        if((!po_file)||(strlen(po_file)<=0))
+        {
+                g_error(_("There's no file to open or I couldn't understand `%s'!"),po_file);
+        }
+        /**
+        * Set up a status message
+        **/
+        sprintf(status,_("Current file : \"%s\"."),po_file);
+        gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
+        /**
+        * Open the parse fstream
+        **/
+        fs=fopen(po_file,"r+");
+        /**
+        * Allocate the lists
+        **/
+        temp=g_list_alloc();
+        head=g_list_alloc();
+        /**
+        * Parse the file ...
+        **/
+        while(
+        fgets(status,sizeof(temp_char),fs) != NULL
+        )
+        {
+                temp=g_list_append(temp,(gpointer)temp_char);
+        }
+        /**
+        * The list length ( aka lines count )
+        **/
+        lines=g_list_length(temp);
+        /**
+        * Show an updated status
+        **/
+        sprintf(status,_("Finished reading \"%s\", %i lines."),po_file,lines);
+        gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
+        for(count=1;count<lines;count++)
+        {
+                /** TODO **/
+        }
+}
+
+/**
 * The new routine
 **/
 void parse_the_file(GtkWidget *widget,gpointer filename)
 {
 	gchar *po_file;
-	gchar temp_char[126];
-	guint lines=1;
 	/**
-	* Some variables ..
+	* Get the filename from the widget
 	**/
 	po_file=gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
 	gtk_widget_hide(of_dlg);
 	/**
-	* If there's no selection ( is this possible within a Gtk+ fileselection ? )
+	* Call the function above
 	**/
-	if((!po_file)||(strlen(po_file)<=0))
-	{
-		g_error(_("There's no file to open or I couldn't understand `%s'!"),po_file);
-	}	
-	/**
-	* Set up a status message
-	**/
-	sprintf(status,_("Current file : \"%s\"."),po_file);
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
-	/**
-	* Open the parse fstream
-	**/
-	fs=fopen(po_file,"r+");
-	/**
-	* Allocate the lists
-	**/
-	temp=g_list_alloc();
-	head=g_list_alloc();
-	/**
-	* Parse the file ...
-	**/
-	while(
-	fgets(status,sizeof(temp_char),fs) != NULL
-	)
-	{
-		temp=g_list_append(temp,(gpointer)temp_char);
-	}
-	/**
-	* The list length ( aka lines count )
-	**/
-	lines=g_list_length(temp);
-	/**
-	* Show an updated status
-	**/
-	sprintf(status,_("Finished reading \"%s\", %i lines."),po_file,lines);
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
-	for(count=1;count<lines;count++)
-	{
-		/** TODO **/ 
-	}
+	parse(po_file);
 }

@@ -63,7 +63,12 @@ GList *msgids,*msgstrs,*head,*temp;
 void check_file(FILE *);
 
 /**
-* The new method
+* The internally used parse-function
+**/
+void parse(gchar *po_file);
+
+/**
+* The new method for the widgets
 **/
 void parse_the_file(GtkWidget *widget,gpointer filename);
 

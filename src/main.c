@@ -18,6 +18,7 @@
 #include "interface.h"
 #include "support.h"
 #include "session.h"
+#include "messages.h"
 #include "prefs.h" 
 
 static gchar *file_to_open=NULL;
@@ -28,11 +29,11 @@ static gint yazoo=0;
 **/
 static struct poptOption gtranslator_options [] = {
 	{
-		"file", '\0', POPT_ARG_STRING, &file_to_open,
+		"file", 'f', POPT_ARG_STRING, &file_to_open,
 		0,N_("Po-file to open at startup"), "PO-FILE"
 	},
 	{
-		"yazoo-test", '\0', POPT_ARG_INT, &yazoo,
+		"yazoo-test", 'y', POPT_ARG_INT, &yazoo,
 		0,N_("A test option"), "TEST"
 	},
 	POPT_AUTOHELP {NULL}
@@ -91,6 +92,32 @@ int main(int argc,char *argv[])
 	**/	
 	app1 = create_app1 ();
 	gtk_widget_show (app1);
+	/**
+	* Is a po-file given to start with ?
+	**/
+	if((file_to_open) && (strlen(file_to_open)>0))
+	{
+		FILE *test;
+		/**
+		* Test if the file which was specified on the cmd-line exists
+		**/
+		test=fopen(file_to_open,"r+");
+		if(test==NULL)	
+		{
+			/**
+			* If the file isn't openable give a warning
+			**/
+			g_warning(_("The file \"%s\" doesn't exist or isn't readable!"),file_to_open);
+			g_warning(_("Skipping it."));
+		}
+		else
+		{	
+			/**
+			* Parse/open the file
+			**/
+			parse(file_to_open);
+		}
+	}
 	/**
 	* Get the main window geometry :
  	**/
