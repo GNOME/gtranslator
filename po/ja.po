@@ -1,13 +1,13 @@
 # gtranslator ja.po.
-# Copyright (C) 2000-2003 Free Software Foundation, Inc.
-# Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2003.
+# Copyright (C) 2000-2004 Free Software Foundation, Inc.
+# Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-03 22:56+0200\n"
-"PO-Revision-Date: 2003-09-02 21:05+0900\n"
+"POT-Creation-Date: 2004-01-25 12:20+0900\n"
+"PO-Revision-Date: 2004-01-25 12:19+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -18,14 +18,16 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "GNOME 翻訳プログラムです"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1143
 msgid "gtranslator"
 msgstr "gtranslator"
 
 #. Translator credits
 #: src/about.c:60
 msgid "translator_credits"
-msgstr "Takeshi AIHANA <aihana@gnome.gr.jp>"
+msgstr ""
+"相花 毅 <aihana@gnome.gr.jp>\n"
+"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
 
 #: src/about.c:80
 msgid "(C) 1999 The Free Software Foundation, Inc."
@@ -36,7 +38,7 @@ msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gtranslator はたくさんの付加的な特徴を持った .po ファイル編集スウィートです。"
 
-#: src/bookmark.c:93 src/dialogs.c:1492
+#: src/bookmark.c:93 src/dialogs.c:1497
 msgid "No comment"
 msgstr "コメントなし"
 
@@ -64,7 +66,7 @@ msgstr "作者の情報を取得できませんでした！"
 #.
 #: src/color-schemes.c:324 src/translator.c:318
 msgid "Unknown"
-msgstr "未翻訳"
+msgstr "未訳"
 
 #: src/color-schemes.c:325
 msgid "<Not Given>"
@@ -153,11 +155,11 @@ msgstr "検索対象のファイル:"
 msgid "Comments"
 msgstr "コメント"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
+#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:101
 msgid "English"
 msgstr "英語"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
+#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:263
 msgid "Translation"
 msgstr "翻訳"
 
@@ -193,19 +195,15 @@ msgstr "置換後の文字列:"
 msgid "Replace in:"
 msgstr "置換する範囲:"
 
-#: src/dialogs.c:895
+#: src/dialogs.c:902
 msgid "Please enter a string to replace!"
 msgstr "置換前の文字列を入力して下さい！"
 
-#: src/dialogs.c:903
-msgid "Please enter a string to replace with!"
-msgstr "置換後の文字列を入力して下さい！"
-
-#: src/dialogs.c:945
+#: src/dialogs.c:953
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "msgfmt の実行中にエラーが発生しました:\n"
 
-#: src/dialogs.c:986
+#: src/dialogs.c:994
 #, c-format
 msgid ""
 "The file\n"
@@ -228,7 +226,7 @@ msgstr ""
 "\n"
 "このファイルを開いている gtranslator を終了させますか？"
 
-#: src/dialogs.c:1027
+#: src/dialogs.c:1035
 #, c-format
 msgid ""
 "File %s\n"
@@ -237,24 +235,24 @@ msgstr ""
 "ファイル %s\n"
 "が変更されました。保存されたものに戻しますか？"
 
-#: src/dialogs.c:1059
+#: src/dialogs.c:1064
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- URI から開く"
 
-#: src/dialogs.c:1071
+#: src/dialogs.c:1076
 msgid "Enter URI:"
 msgstr "URI の入力:"
 
-#: src/dialogs.c:1107
+#: src/dialogs.c:1112
 msgid "No URI given!"
 msgstr "URI が指定されていません！"
 
-#: src/dialogs.c:1122
+#: src/dialogs.c:1127
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr ""
 "サポートしていない URI プロトコル (\"ftp://\"のようなもの) が指定されました！"
 
-#: src/dialogs.c:1130
+#: src/dialogs.c:1135
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -279,7 +277,7 @@ msgstr ""
 "file:///<PO-FILE> または\n"
 "http://www.DOMAIN.COM/PO-FILE"
 
-#: src/dialogs.c:1169
+#: src/dialogs.c:1174
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -296,52 +294,52 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1181
+#: src/dialogs.c:1186
 msgid "Postpone decision"
 msgstr "あとで決める"
 
-#: src/dialogs.c:1183
+#: src/dialogs.c:1188
 msgid "Ignore recovery file"
 msgstr "復旧ファイルを無視する"
 
-#: src/dialogs.c:1185
+#: src/dialogs.c:1190
 msgid "Recover file"
 msgstr "復旧ファイル"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1244
+#: src/dialogs.c:1249
 msgid "Here you can query existing translations from your learn buffer."
 msgstr ""
 "ここで個人学習バッファに対して既に翻訳されたメッセージの問い合わせが可能で"
 "す。"
 
-#: src/dialogs.c:1247
+#: src/dialogs.c:1252
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "gtranslator -- 個人学習バッファへの問い合わせ"
 
-#: src/dialogs.c:1251 src/menus.c:360
+#: src/dialogs.c:1256 src/menus.c:360
 msgid "Query"
 msgstr "問い合わせ"
 
-#: src/dialogs.c:1252
+#: src/dialogs.c:1257
 msgid "Query message content"
 msgstr "メッセージの内容の問い合わせ"
 
-#: src/dialogs.c:1262
+#: src/dialogs.c:1267
 msgid "Query string:"
 msgstr "問い合わせ文字列:"
 
-#: src/dialogs.c:1300
+#: src/dialogs.c:1305
 msgid "No query string given!"
 msgstr "検索する文字列が指定されていません！"
 
-#: src/dialogs.c:1322
+#: src/dialogs.c:1327
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "個人学習バッファの中に該当するものがありませんでした！"
 
-#: src/dialogs.c:1334
+#: src/dialogs.c:1339
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -354,11 +352,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1404
+#: src/dialogs.c:1409
 msgid "Query's result translation is already there!"
 msgstr "問い合わせ結果は既に反映済みです！"
 
-#: src/dialogs.c:1436
+#: src/dialogs.c:1441
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -366,11 +364,11 @@ msgstr ""
 "個人学習バッファの情報を利用して\n"
 "gtranslator による自動翻訳を実施しますか？"
 
-#: src/dialogs.c:1472 src/dialogs.c:1500
+#: src/dialogs.c:1477 src/dialogs.c:1505
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- コメントつきブックマークの追加"
 
-#: src/dialogs.c:1492
+#: src/dialogs.c:1497
 msgid "Comment for the bookmark:"
 msgstr "ブックマークのコメント:"
 
@@ -387,53 +385,57 @@ msgstr ""
 "見つかりませんでした\n"
 "\"%s\""
 
-#: src/gui.c:199
+#: src/gui.c:182
 msgid "Edit comment"
 msgstr "コメントの編集"
 
-#: src/gui.c:501
+#: src/gui.c:493
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ 残り %i 個が fuzzy ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ 残り %i 個が fuzzy ]"
+msgstr[1] "%s [ 残り %i 個が fuzzy ]"
 
-#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
+#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "fuzzy"
 
-#: src/gui.c:505
+#: src/gui.c:497
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ fuzzy のメッセージはありません ]"
 
-#: src/gui.c:513
+#: src/gui.c:505
 msgid "Sticky (Message & translation are the same)"
 msgstr "貼り付け (原文と翻訳メッセージが同じ場合)"
 
-#: src/gui.c:515 src/messages-table.c:323
+#: src/gui.c:507 src/messages-table.c:332
 msgid "Translated"
 msgstr "翻訳済み"
 
-#: src/gui.c:524
+#: src/gui.c:516
 #, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ 残り %i 個が未翻訳 ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ 残り %i 個が未訳 ]"
+msgstr[1] "%s [ 残り %i 個が未訳 ]"
 
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
+#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
 msgid "Untranslated"
-msgstr "未翻訳"
+msgstr "未訳"
 
-#: src/gui.c:526
+#: src/gui.c:518
 #, c-format
 msgid "%s [ No untranslated left ]"
-msgstr "%s [ 未翻訳のメッセージはありません ]"
+msgstr "%s [ 未訳のメッセージはありません ]"
 
-#: src/gui.c:545
+#: src/gui.c:537
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr ""
 "メッセージ数 %d / %d / ステータス: %s (メッセージに複数形が含まれています)"
 
-#: src/gui.c:549
+#: src/gui.c:541
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "メッセージ数 %d / %d / ステータス: %s"
@@ -520,262 +522,266 @@ msgid "Afrikaans"
 msgstr "南アフリカ語"
 
 #: src/languages.c:41
+msgid "Albanian"
+msgstr "アルバニア語"
+
+#: src/languages.c:45
 msgid "Arabic"
 msgstr "アラビア語"
 
-#: src/languages.c:45
+#: src/languages.c:49
 msgid "Azerbaijani Turkish"
 msgstr "アゼルバイジャン・トルコ語"
 
-#: src/languages.c:49
+#: src/languages.c:53
 msgid "Basque"
 msgstr "バスク語"
 
-#: src/languages.c:53
+#: src/languages.c:57
 msgid "Belorussian"
 msgstr "ベルーシ語"
 
-#: src/languages.c:57
+#: src/languages.c:61
 msgid "Bengali"
 msgstr "ベンガル語"
 
-#: src/languages.c:61
+#: src/languages.c:65
 msgid "Britton"
 msgstr "ブリトン語"
 
-#: src/languages.c:65
+#: src/languages.c:69
 msgid "Bulgarian"
 msgstr "ブルガリア語"
 
-#: src/languages.c:69
+#: src/languages.c:73
 msgid "Catalan"
 msgstr "カタラン語"
 
-#: src/languages.c:73
+#: src/languages.c:77
 msgid "Chinese/Simplified"
 msgstr "中国語 (簡体字)"
 
-#: src/languages.c:77
+#: src/languages.c:81
 msgid "Chinese/Traditional"
 msgstr "中国語 (繁体字)"
 
-#: src/languages.c:81
+#: src/languages.c:85
 msgid "Croatian"
 msgstr "クロアチア語"
 
-#: src/languages.c:85
+#: src/languages.c:89
 msgid "Czech"
 msgstr "チェコ語"
 
-#: src/languages.c:89
+#: src/languages.c:93
 msgid "Danish"
 msgstr "デンマーク語"
 
-#: src/languages.c:93
+#: src/languages.c:97
 msgid "Dutch"
 msgstr "オランダ語"
 
-#: src/languages.c:101
+#: src/languages.c:105
 msgid "English/Canada"
 msgstr "英語 (カナダ)"
 
-#: src/languages.c:105
+#: src/languages.c:109
 msgid "English/GB"
 msgstr "英語 (イギリス)"
 
-#: src/languages.c:109
+#: src/languages.c:113
 msgid "English/USA"
 msgstr "英語 (アメリカ)"
 
-#: src/languages.c:113
+#: src/languages.c:117
 msgid "Esperanto"
 msgstr "エスペラント語"
 
-#: src/languages.c:117
+#: src/languages.c:121
 msgid "Estonian"
 msgstr "エストニア語"
 
-#: src/languages.c:121
+#: src/languages.c:125
 msgid "Persian"
 msgstr "ペルシア語"
 
-#: src/languages.c:125
+#: src/languages.c:129
 msgid "Finnish"
 msgstr "フィンランド語"
 
-#: src/languages.c:129
+#: src/languages.c:133
 msgid "French"
 msgstr "フランス語"
 
-#: src/languages.c:133
+#: src/languages.c:137
 msgid "Galician"
 msgstr "ガルシア語"
 
-#: src/languages.c:137
+#: src/languages.c:141
 msgid "German"
 msgstr "ドイツ語"
 
-#: src/languages.c:141
+#: src/languages.c:145
 msgid "Greek"
 msgstr "ギリシア語"
 
-#: src/languages.c:145
+#: src/languages.c:149
 msgid "Gujarati"
 msgstr "グジャラート語"
 
-#: src/languages.c:149
+#: src/languages.c:153
 msgid "Hindi"
 msgstr "ヒンディー語"
 
-#: src/languages.c:153
+#: src/languages.c:157
 msgid "Hungarian"
 msgstr "ハンガリー語"
 
-#: src/languages.c:157
+#: src/languages.c:161
 msgid "Icelandic"
 msgstr "アイスランド語"
 
-#: src/languages.c:161
+#: src/languages.c:165
 msgid "Indonesian"
 msgstr "インドネシア語"
 
-#: src/languages.c:165
+#: src/languages.c:169
 msgid "Italian"
 msgstr "イタリア語"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Irish"
 msgstr "アイルランド語"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Japanese"
 msgstr "日本語"
 
-#: src/languages.c:177
+#: src/languages.c:181
 msgid "Kannada"
 msgstr "カンナダ語"
 
-#: src/languages.c:181
+#: src/languages.c:185
 msgid "Korean"
 msgstr "韓国語"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Latvian"
 msgstr "ラトビア語"
 
-#: src/languages.c:189
+#: src/languages.c:193
 msgid "Lithuanian"
 msgstr "リトアニア語"
 
-#: src/languages.c:193
+#: src/languages.c:197
 msgid "Malay/Bahasa Melayu"
 msgstr "マレー語 (バハサ・マレー)"
 
-#: src/languages.c:197
+#: src/languages.c:201
 msgid "Maltese"
 msgstr "マルタ語"
 
-#: src/languages.c:201
+#: src/languages.c:205
 msgid "Marathi"
 msgstr "マラッタ語"
 
-#: src/languages.c:205
+#: src/languages.c:209
 msgid "Norwegian/Bokmaal"
 msgstr "ノルウェー語 (ボックマル)"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Norwegian/Nynorsk"
 msgstr "ノルウェー語 (ニーノルスック)"
 
-#: src/languages.c:213
+#: src/languages.c:217
 msgid "Punjabi"
 msgstr "パンジャブ語"
 
-#: src/languages.c:217
+#: src/languages.c:221
 msgid "Polish"
 msgstr "ポーランド語"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Portuguese"
 msgstr "ポルトガル語"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Portuguese/Brazil"
 msgstr "ポルトガル語 (ブラジル)"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Romanian"
 msgstr "ルーマニア語"
 
-#: src/languages.c:233
+#: src/languages.c:237
 msgid "Russian"
 msgstr "ロシア語"
 
-#: src/languages.c:237
+#: src/languages.c:241
 msgid "Serbian/Cyrillic"
 msgstr "セルビア語 (キリール)"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Serbian/Latin"
 msgstr "セルビア語 (ラテン)"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Slovak"
 msgstr "スロベキア語"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Slovenian"
 msgstr "スロベニア語"
 
-#: src/languages.c:253
+#: src/languages.c:257
 msgid "Spanish"
 msgstr "スペイン語"
 
-#: src/languages.c:257
+#: src/languages.c:261
 msgid "Spanish/Spain"
 msgstr "スペイン語 (スペイン)"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Spanish/Mexico"
 msgstr "スペイン語 (メキシコ)"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Swedish"
 msgstr "スウェーデン語"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Tamil"
 msgstr "タミル語"
 
-#: src/languages.c:273
+#: src/languages.c:277
 msgid "Telugu"
 msgstr "テルグ語"
 
-#: src/languages.c:277
+#: src/languages.c:281
 msgid "Thai"
 msgstr "タイ語"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Turkish"
 msgstr "トルコ語"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Ukrainian"
 msgstr "ウクライナ語"
 
-#: src/languages.c:289
+#: src/languages.c:293
 msgid "Uzbekian"
 msgstr "ウズベキスタン語"
 
-#: src/languages.c:293
+#: src/languages.c:297
 msgid "Vietnamese"
 msgstr "ベトナム語"
 
-#: src/languages.c:297
+#: src/languages.c:301
 msgid "Walloon"
 msgstr "ワロン語"
 
-#: src/languages.c:301
+#: src/languages.c:305
 msgid "Welsh"
 msgstr "ウェールズ語"
 
@@ -1066,7 +1072,7 @@ msgstr "次の fuzzy なメッセージにジャンプします"
 
 #: src/menus.c:244
 msgid "Next _untranslated"
-msgstr "次の未翻訳へ(_U)"
+msgstr "次の未訳へ(_U)"
 
 #: src/menus.c:245 src/menus.c:335
 msgid "Go to next untranslated message"
@@ -1154,7 +1160,7 @@ msgstr "最後へ"
 
 #: src/menus.c:334
 msgid "Missing"
-msgstr "未翻訳"
+msgstr "未訳"
 
 #: src/menus.c:342
 msgid "Go to the next fuzzy translation"
@@ -1196,7 +1202,7 @@ msgstr "全てのメッセージが翻訳されたようです。"
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "gtranslator -- 複数形のメッセージ翻訳の編集"
 
-#: src/messages-table.c:243
+#: src/messages-table.c:252
 msgid "Original"
 msgstr "オリジナル"
 
@@ -1224,7 +1230,7 @@ msgstr "%s で圧縮された gettext ファイル '%s' を開けませんでし
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "zip で圧縮された .po ファイル '%s' を開けませんでした！"
 
-#: src/parse.c:483
+#: src/parse.c:487
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1235,7 +1241,7 @@ msgstr ""
 "行: %d\n"
 "ファイルを確認し再度実行して下さい。"
 
-#: src/parse.c:538
+#: src/parse.c:542
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1244,7 +1250,7 @@ msgstr ""
 "ファイルが空です:\n"
 "%s"
 
-#: src/parse.c:560
+#: src/parse.c:564
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "ファイル `%s' は存在しません！"
@@ -1252,16 +1258,16 @@ msgstr "ファイル `%s' は存在しません！"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:692
+#: src/parse.c:696
 msgid "Header record not found - defaulting from preferences"
 msgstr "ヘッダ・レコードが見つかりませんでした - デフォルトの設定を適用します"
 
-#: src/parse.c:708
+#: src/parse.c:712
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:920
+#: src/parse.c:924
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1272,25 +1278,31 @@ msgstr ""
 ".pot ファイルはプログラムのコンパイル時に生成されます。\n"
 "翻訳するファイルは '%s.po' の名前を付ける必要があります。"
 
-#: src/parse.c:982
+#: src/parse.c:986
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "ファイル '%s' を書き込みモードで開けませんでした！"
 
-#: src/parse.c:1034
+#: src/parse.c:1038
 #, c-format
 msgid ""
 "File %s\n"
+"contains %d fuzzy message"
+msgid_plural ""
+"File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
+"ファイル %s には\n"
+"%d 個の fuzzy なメッセージがあります"
+msgstr[1] ""
 "ファイル %s には\n"
 "%d 個の fuzzy なメッセージがあります"
 
-#: src/parse.c:1303
+#: src/parse.c:1310
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "すみませんが、このシステムでは msgfmt コマンドを利用できません！"
 
-#: src/parse.c:1338
+#: src/parse.c:1345
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1525,7 +1537,7 @@ msgstr "fuzzy エントリの色:"
 
 #: src/prefs.c:575
 msgid "Untranslated entries color:"
-msgstr "未翻訳メッセージの色:"
+msgstr "未訳メッセージの色:"
 
 #: src/prefs.c:581
 msgid "Translated entries color:"
@@ -1542,7 +1554,7 @@ msgstr "自動翻訳"
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
-msgstr "未翻訳のメッセージの自動翻訳中に学習バッファにも問い合わせる"
+msgstr "未訳のメッセージの自動翻訳中に学習バッファにも問い合わせる"
 
 #: src/prefs.c:592
 msgid "Automatically learn a newly translated message"
@@ -1572,7 +1584,7 @@ msgstr "E-メール・アドレスを入力してください！"
 msgid "Please enter a valid EMail address!"
 msgstr "正しい E-メール・アドレスを入力して下さい！"
 
-#: src/replace.c:171
+#: src/replace.c:175
 msgid "No replacements made!"
 msgstr "置換するものがありません！"
 
