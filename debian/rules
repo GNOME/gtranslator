@@ -8,7 +8,8 @@ checkroot=test `id -u` -eq 0
 configure: configure-stamp
 configure-stamp:
 	$(checkdir)
-	/bin/sh ./configure --prefix=/usr		\
+	/bin/sh ./configure --disable-debug		\
+		--prefix=/usr 				\
 		--mandir=\$${prefix}/share/man
 	touch configure-stamp
 
