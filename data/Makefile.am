@@ -9,6 +9,7 @@ mimeinfofilesdir =
 endif
 Applicationicondir = $(datadir)/pixmaps
 Mimeicondir = $(Applicationicondir)/mc
+OAFdir = $(datadir)/oaf
 
 ## the DATA ...
 if BIND_MIME
@@ -19,6 +20,7 @@ endif
 Application_DATA = gtranslator.desktop
 Applicationicon_DATA = gtranslator.png
 Mimeicon_DATA = application-x-po.png
+OAF_DATA = gtranslatord.oafinfo
 
 ## include these nice pieces into a dist .
 EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) \
