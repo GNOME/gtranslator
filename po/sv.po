@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.30\n"
-"POT-Creation-Date: 2000-10-18 00:21+0200\n"
+"POT-Creation-Date: 2000-10-18 22:54+0200\n"
 "PO-Revision-Date: 2000-10-18 00:23+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -345,7 +345,7 @@ msgstr "Skriv in din önskade söksträng: "
 msgid "Case sensitive"
 msgstr "Gör skillnad på gemener/VERSALER"
 
-#: src/dialogs.c:215 src/languages.h:84
+#: src/dialogs.c:215 src/languages.h:99
 msgid "English"
 msgstr "Engelska"
 
@@ -570,7 +570,7 @@ msgstr "Anger storlek och placering på huvudfönstret"
 msgid "Error during GConf initialization: %s."
 msgstr "Fel under initiering av GConf: %s."
 
-#: src/parse.c:97
+#: src/parse.c:96
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -579,12 +579,12 @@ msgstr ""
 "Nytt tecken med escape framför hittat: \\%c\n"
 "Lägg till detta till parse.c, rad %i."
 
-#: src/parse.c:131 src/parse.c:455
+#: src/parse.c:130 src/parse.c:483
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen \"%s\" finns inte alls!"
 
-#: src/parse.c:207
+#: src/parse.c:206
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -595,7 +595,7 @@ msgstr ""
 "på rad %d.\n"
 "Var vänlig och kontrollera filen och försök igen."
 
-#: src/parse.c:236
+#: src/parse.c:235
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -604,25 +604,25 @@ msgstr ""
 "Filen är tom:\n"
 "%s"
 
-#: src/parse.c:255
+#: src/parse.c:254
 msgid "There's no file to open!\n"
 msgstr "Det finns ingen fil att öppna!\n"
 
-#: src/parse.c:283
+#: src/parse.c:287
 msgid "The file has no header!"
 msgstr "Filen har inget huvud!"
 
-#: src/parse.c:286
+#: src/parse.c:290
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Tolkade filen \"%s\" utan problem"
 
-#: src/parse.c:289
+#: src/parse.c:293
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:443
+#: src/parse.c:471
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -633,7 +633,7 @@ msgstr ""
 "Sådana filer genereras dock av program.\n"
 "Din fil bör sparas med en *.po-ändelse, troligtvis %s.po"
 
-#: src/parse.c:500
+#: src/parse.c:528
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -644,11 +644,11 @@ msgstr ""
 "%s\n"
 "Vill du spara den ändå?"
 
-#: src/parse.c:508
+#: src/parse.c:536
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- oförändrad"
 
-#: src/parse.c:578
+#: src/parse.c:606
 #, c-format
 msgid ""
 "File %s\n"
@@ -657,11 +657,11 @@ msgstr ""
 "Filen %s\n"
 "har ändrats. Vill du återgå till den sparade kopian?"
 
-#: src/parse.c:615
+#: src/parse.c:643
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Tyvärr, msgfmt finns inte tillgängligt på ditt system!"
 
-#: src/parse.c:640
+#: src/parse.c:668
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -673,20 +673,20 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:685 src/parse.c:695 src/parse.c:696
+#: src/parse.c:713 src/parse.c:723 src/parse.c:724
 msgid "_File/Recen_t files/"
 msgstr "_Arkiv/Senas_te filer/"
 
-#: src/parse.c:741
+#: src/parse.c:769
 #, c-format
 msgid "Open %s"
 msgstr "Öppna %s"
 
-#: src/parse.c:861
+#: src/parse.c:889
 msgid "An update would cause no changes."
 msgstr "En uppdatering hade inte orsakat några ändringar."
 
-#: src/parse.c:879
+#: src/parse.c:907
 msgid "The update was successfull."
 msgstr "Uppdateringen lyckades."
 
@@ -704,11 +704,13 @@ msgid "Couldn't get the message! Grrr...."
 msgstr "Kunde inte hitta meddelandet! Grrr..."
 
 #: src/find.c:122
-msgid "There are no more fuzzy messages"
+#, fuzzy
+msgid "There are no fuzzy messages left."
 msgstr "Det finns inga fler luddiga meddelanden"
 
 #: src/find.c:146
-msgid "All messages seem to be translated"
+#, fuzzy
+msgid "All messages seem to be translated."
 msgstr "Alla meddelanden verkar vara översatta"
 
 #: src/spell.c:25
@@ -944,166 +946,204 @@ msgid "No widgets defined to manipulate their style"
 msgstr "Inga widgetar angivna för att manipulera deras stil"
 
 #: src/languages.h:57
+msgid "Afrikaans"
+msgstr ""
+
+#: src/languages.h:60
 msgid "Arabic"
 msgstr "Arabiska"
 
-#: src/languages.h:60
+#: src/languages.h:63
+msgid "Azeri"
+msgstr ""
+
+#: src/languages.h:66
 msgid "Basque"
 msgstr "Baskiska"
 
-#: src/languages.h:63
+#: src/languages.h:69
+#, fuzzy
+msgid "Bielorussian"
+msgstr "Ryska"
+
+#: src/languages.h:72
+msgid "Britton"
+msgstr ""
+
+#: src/languages.h:75
 msgid "Bulgarian"
 msgstr "Bulgariska"
 
-#: src/languages.h:66
+#: src/languages.h:78
 msgid "Catalan"
 msgstr "Katalanska"
 
-#: src/languages.h:69
+#: src/languages.h:81
 msgid "Chinese/Simplified"
 msgstr "Kinesiska/förenklad"
 
-#: src/languages.h:72
+#: src/languages.h:84
 msgid "Chinese/Traditional"
 msgstr "Kinesiska/traditionell"
 
-#: src/languages.h:75
+#: src/languages.h:87
 msgid "Croatian"
 msgstr "Kroatiska"
 
-#: src/languages.h:78
+#: src/languages.h:90
 msgid "Czech"
 msgstr "Tjeckiska"
 
-#: src/languages.h:81
+#: src/languages.h:93
 msgid "Danish"
 msgstr "Danska"
 
-#: src/languages.h:87
+#: src/languages.h:96
+msgid "Dutch"
+msgstr ""
+
+#: src/languages.h:102
 msgid "English/Canada"
 msgstr "Engelska/Kanada"
 
-#: src/languages.h:90
+#: src/languages.h:105
 msgid "English/GB"
 msgstr "Engelska/brittisk"
 
-#: src/languages.h:93
+#: src/languages.h:108
 msgid "English/USA"
 msgstr "Engelska/USA"
 
-#: src/languages.h:96
+#: src/languages.h:111
 msgid "Estonian"
 msgstr "Estniska"
 
-#: src/languages.h:99
+#: src/languages.h:114
 msgid "Farsi"
 msgstr "Farsi"
 
-#: src/languages.h:102
+#: src/languages.h:117
 msgid "Finnish"
 msgstr "Finska"
 
-#: src/languages.h:105
+#: src/languages.h:120
 msgid "French"
 msgstr "Franska"
 
-#: src/languages.h:108
+#: src/languages.h:123
 msgid "Galician"
 msgstr "Galiciska"
 
-#: src/languages.h:111
+#: src/languages.h:126
 msgid "German"
 msgstr "Tyska"
 
-#: src/languages.h:114
+#: src/languages.h:129
 msgid "Hungarian"
 msgstr "Ungerska"
 
-#: src/languages.h:117
+#: src/languages.h:132
 msgid "Indonesian"
 msgstr "Indonesiska"
 
-#: src/languages.h:120
+#: src/languages.h:135
 msgid "Italian"
 msgstr "Italienska"
 
-#: src/languages.h:123
+#: src/languages.h:138
 msgid "Irish"
 msgstr "Irländska"
 
-#: src/languages.h:126
+#: src/languages.h:141
 msgid "Japanese"
 msgstr "Japanska"
 
-#: src/languages.h:129
+#: src/languages.h:144
 msgid "Korean"
 msgstr "Koreanska"
 
-#: src/languages.h:132
+#: src/languages.h:147
 msgid "Latvian"
 msgstr "Lettiska"
 
-#: src/languages.h:135
+#: src/languages.h:150
 msgid "Lithuanian"
 msgstr "Litauiska"
 
-#: src/languages.h:138
-msgid "Norwegian/Bookmal"
+#: src/languages.h:153
+msgid "Norwegian/Bokmaal"
 msgstr "Norska/bokmål"
 
-#: src/languages.h:141
+#: src/languages.h:156
 msgid "Norwegian/Nynorsk"
 msgstr "Norska/nynorsk"
 
-#: src/languages.h:144
+#: src/languages.h:159
 msgid "Polish"
 msgstr "Polska"
 
-#: src/languages.h:147
+#: src/languages.h:162
 msgid "Portuguese"
 msgstr "Portugisiska"
 
-#: src/languages.h:150
+#: src/languages.h:165
 msgid "Portuguese/Brazil"
 msgstr "Portugisiska/Brasilien"
 
-#: src/languages.h:153
+#: src/languages.h:168
 msgid "Russian"
 msgstr "Ryska"
 
-#: src/languages.h:156
-msgid "Slovak"
+#: src/languages.h:171
+msgid "Serbian/Cyrillic"
+msgstr ""
+
+#: src/languages.h:174
+msgid "Serbian/Latin"
+msgstr ""
+
+#: src/languages.h:177
+#, fuzzy
+msgid "Slovenian"
 msgstr "Slovakiska"
 
-#: src/languages.h:159
+#: src/languages.h:180
 msgid "Spanish"
 msgstr "Spanska"
 
-#: src/languages.h:162
+#: src/languages.h:183
 msgid "Spanish/Spain"
 msgstr "Spanska/Spanien"
 
-#: src/languages.h:165
+#: src/languages.h:186
 msgid "Spanish/Mexico"
 msgstr "Spanska/Mexiko"
 
-#: src/languages.h:168
+#: src/languages.h:189
 msgid "Swedish"
 msgstr "Svenska"
 
-#: src/languages.h:171
+#: src/languages.h:192
+msgid "Thai"
+msgstr ""
+
+#: src/languages.h:195
 msgid "Turkish"
 msgstr "Turkiska"
 
-#: src/languages.h:174
+#: src/languages.h:198
 msgid "Ukrainian"
 msgstr "Ukrainska"
 
-#: src/languages.h:177
+#: src/languages.h:201
+msgid "Vietnamese"
+msgstr ""
+
+#: src/languages.h:204
 msgid "Walloon"
 msgstr "Vallonska"
 
-#: src/languages.h:180
+#: src/languages.h:207
 msgid "Welsh"
 msgstr "Walesiska"
 

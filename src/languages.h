@@ -93,6 +93,9 @@ static lang languages[] = {
 	 N_("Danish"), "da", "iso-8859-1",
 	 "da@li.org", "8bit"},
 	{
+	 N_("Dutch"), "nl", "iso-8859-1",
+	 "", "8bit"},
+	{
 	 N_("English"), "en", "iso-8859-1",
 	 "en@li.org", "8bit"},
 	{
@@ -147,7 +150,7 @@ static lang languages[] = {
 	 N_("Lithuanian"), "lt", "iso-8859-13",
 	 "komp_lt@konferencijos.lt", "8bit"},
 	{
-	 N_("Norwegian/Bookmal"), "no", "iso-8859-1",
+	 N_("Norwegian/Bokmaal"), "no", "iso-8859-1",
 	 "no@li.org", "8bit"},
 	{
 	 N_("Norwegian/Nynorsk"), "no@nynorsk", "iso-8859-1",
@@ -165,10 +168,10 @@ static lang languages[] = {
 	 N_("Russian"), "ru", "koi8-r",
 	 "ru@li.org", "8bit"},
 	{
-	 N_("Serbian (cyrillic)"), "sp", "iso-8859-5",
+	 N_("Serbian/Cyrillic"), "sp", "iso-8859-5",
 	 "", "8bit"},
 	{
-	 N_("Serbian (latin)"), "sr", "iso-8859-2",
+	 N_("Serbian/Latin"), "sr", "iso-8859-2",
 	 "", "8bit"},
 	{
 	 N_("Slovenian"), "sl", "iso-8859-2",

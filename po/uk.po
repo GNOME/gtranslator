@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-10-18 10:08+0300\n"
+"POT-Creation-Date: 2000-10-18 22:54+0200\n"
 "PO-Revision-Date: 2000-05-05 09:45+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
@@ -342,7 +342,7 @@ msgstr "Введ╕ть необх╕дний для пошуку рядок:"
 msgid "Case sensitive"
 msgstr "Ре╜╕строва чутливисть"
 
-#: src/dialogs.c:215 src/languages.h:84
+#: src/dialogs.c:215 src/languages.h:99
 msgid "English"
 msgstr "Англ╕йське"
 
@@ -565,19 +565,19 @@ msgstr "Визнача╓ геометр╕ю головного в╕кна"
 msgid "Error during GConf initialization: %s."
 msgstr "Помилка п╕д час ╕н╕ц╕ал╕зац╕╖ GConf: %s."
 
-#: src/parse.c:97
+#: src/parse.c:96
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
 "Add this to parse.c, line %i."
 msgstr ""
 
-#: src/parse.c:131 src/parse.c:455
+#: src/parse.c:130 src/parse.c:483
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Файл \"%s\" не ╕сну╓!"
 
-#: src/parse.c:207
+#: src/parse.c:206
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -588,32 +588,32 @@ msgstr ""
 "в рядку %d.\n"
 "Перев╕рте файл та спробуйте знову."
 
-#: src/parse.c:236
+#: src/parse.c:235
 #, c-format
 msgid ""
 "The file is empty:\n"
 "%s"
 msgstr "Файл порожн╕й:%s"
 
-#: src/parse.c:255
+#: src/parse.c:254
 msgid "There's no file to open!\n"
 msgstr "Нема╓ файлу для в╕дкривання!\n"
 
-#: src/parse.c:283
+#: src/parse.c:287
 msgid "The file has no header!"
 msgstr "Файл не ма╓ заголовку!"
 
-#: src/parse.c:286
+#: src/parse.c:290
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Усп╕шно проанал╕зовано файл \"%s\""
 
-#: src/parse.c:289
+#: src/parse.c:293
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "Перекладач -- %s"
 
-#: src/parse.c:443
+#: src/parse.c:471
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -624,7 +624,7 @@ msgstr ""
 "Однак, так╕ файли ╜енеруються програмою.\n"
 "Ваш файл м╕г би мати розширення *.po, вийшло б %s.po"
 
-#: src/parse.c:500
+#: src/parse.c:528
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -635,11 +635,11 @@ msgstr ""
 "%s\n"
 "Ви всеодно хочете зберегти це?"
 
-#: src/parse.c:508
+#: src/parse.c:536
 msgid "gtranslator -- unchanged"
 msgstr "Перекладач -- не зм╕нено"
 
-#: src/parse.c:578
+#: src/parse.c:606
 #, c-format
 msgid ""
 "File %s\n"
@@ -648,11 +648,11 @@ msgstr ""
 "Файл %s\n"
 "було зм╕нено. Ви хочете повернутись до збережено╖ коп╕╖?"
 
-#: src/parse.c:615
+#: src/parse.c:643
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr ""
 
-#: src/parse.c:640
+#: src/parse.c:668
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -664,20 +664,20 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:685 src/parse.c:695 src/parse.c:696
+#: src/parse.c:713 src/parse.c:723 src/parse.c:724
 msgid "_File/Recen_t files/"
 msgstr "Файл/Недавн╕ файли/"
 
-#: src/parse.c:741
+#: src/parse.c:769
 #, c-format
 msgid "Open %s"
 msgstr "В╕дкрити %s"
 
-#: src/parse.c:861
+#: src/parse.c:889
 msgid "An update would cause no changes."
 msgstr ""
 
-#: src/parse.c:879
+#: src/parse.c:907
 msgid "The update was successfull."
 msgstr ""
 
@@ -695,11 +695,13 @@ msgid "Couldn't get the message! Grrr...."
 msgstr "Не вдалося отримати пов╕домлення! Гррр..."
 
 #: src/find.c:122
-msgid "There are no more fuzzy messages"
+#, fuzzy
+msgid "There are no fuzzy messages left."
 msgstr "Б╕льше нема╓ неч╕тких пов╕домлень"
 
 #: src/find.c:146
-msgid "All messages seem to be translated"
+#, fuzzy
+msgid "All messages seem to be translated."
 msgstr "Схоже вс╕ пов╕домлення перекладено"
 
 #: src/spell.c:25
@@ -929,165 +931,203 @@ msgid "No widgets defined to manipulate their style"
 msgstr ""
 
 #: src/languages.h:57
+msgid "Afrikaans"
+msgstr ""
+
+#: src/languages.h:60
 msgid "Arabic"
 msgstr "Арабська"
 
-#: src/languages.h:60
+#: src/languages.h:63
+msgid "Azeri"
+msgstr ""
+
+#: src/languages.h:66
 msgid "Basque"
 msgstr "Баскська"
 
-#: src/languages.h:63
+#: src/languages.h:69
+#, fuzzy
+msgid "Bielorussian"
+msgstr "Рос╕йська"
+
+#: src/languages.h:72
+msgid "Britton"
+msgstr ""
+
+#: src/languages.h:75
 msgid "Bulgarian"
 msgstr "Болгарська"
 
-#: src/languages.h:66
+#: src/languages.h:78
 msgid "Catalan"
 msgstr "Каталонська"
 
-#: src/languages.h:69
+#: src/languages.h:81
 msgid "Chinese/Simplified"
 msgstr "Китайська/Спрощена"
 
-#: src/languages.h:72
+#: src/languages.h:84
 msgid "Chinese/Traditional"
 msgstr "Китайська/Традиц╕йна"
 
-#: src/languages.h:75
+#: src/languages.h:87
 msgid "Croatian"
 msgstr "Хорватська"
 
-#: src/languages.h:78
+#: src/languages.h:90
 msgid "Czech"
 msgstr "Чешська"
 
-#: src/languages.h:81
+#: src/languages.h:93
 msgid "Danish"
 msgstr "Датська"
 
-#: src/languages.h:87
+#: src/languages.h:96
+msgid "Dutch"
+msgstr ""
+
+#: src/languages.h:102
 msgid "English/Canada"
 msgstr "Англ╕йська/Канада"
 
-#: src/languages.h:90
+#: src/languages.h:105
 msgid "English/GB"
 msgstr "Англ╕йська/Велика Британ╕я"
 
-#: src/languages.h:93
+#: src/languages.h:108
 msgid "English/USA"
 msgstr "Англ╕йська/США"
 
-#: src/languages.h:96
+#: src/languages.h:111
 msgid "Estonian"
 msgstr "Естонська"
 
-#: src/languages.h:99
+#: src/languages.h:114
 msgid "Farsi"
 msgstr "Фарс╕"
 
-#: src/languages.h:102
+#: src/languages.h:117
 msgid "Finnish"
 msgstr "Ф╕нська"
 
-#: src/languages.h:105
+#: src/languages.h:120
 msgid "French"
 msgstr "Французька"
 
-#: src/languages.h:108
+#: src/languages.h:123
 msgid "Galician"
 msgstr "╫альська"
 
-#: src/languages.h:111
+#: src/languages.h:126
 msgid "German"
 msgstr "Н╕мецька"
 
-#: src/languages.h:114
+#: src/languages.h:129
 msgid "Hungarian"
 msgstr "Угорська"
 
-#: src/languages.h:117
+#: src/languages.h:132
 msgid "Indonesian"
 msgstr "╤ндонез╕йська"
 
-#: src/languages.h:120
+#: src/languages.h:135
 msgid "Italian"
 msgstr "╤тал╕йська"
 
-#: src/languages.h:123
+#: src/languages.h:138
 msgid "Irish"
 msgstr "╤рландська"
 
-#: src/languages.h:126
+#: src/languages.h:141
 msgid "Japanese"
 msgstr "Японська"
 
-#: src/languages.h:129
+#: src/languages.h:144
 msgid "Korean"
 msgstr "Корейська"
 
-#: src/languages.h:132
+#: src/languages.h:147
 msgid "Latvian"
 msgstr "Латв╕йська"
 
-#: src/languages.h:135
+#: src/languages.h:150
 msgid "Lithuanian"
 msgstr "Литовська"
 
-#: src/languages.h:138
-msgid "Norwegian/Bookmal"
+#: src/languages.h:153
+msgid "Norwegian/Bokmaal"
 msgstr "Норвежська/Букмель"
 
-#: src/languages.h:141
+#: src/languages.h:156
 msgid "Norwegian/Nynorsk"
 msgstr "Норвежська/Ньорск"
 
-#: src/languages.h:144
+#: src/languages.h:159
 msgid "Polish"
 msgstr "Польська"
 
-#: src/languages.h:147
+#: src/languages.h:162
 msgid "Portuguese"
 msgstr "Португальська"
 
-#: src/languages.h:150
+#: src/languages.h:165
 msgid "Portuguese/Brazil"
 msgstr "Португальська/Бразил╕я"
 
-#: src/languages.h:153
+#: src/languages.h:168
 msgid "Russian"
 msgstr "Рос╕йська"
 
-#: src/languages.h:156
-msgid "Slovak"
+#: src/languages.h:171
+msgid "Serbian/Cyrillic"
+msgstr ""
+
+#: src/languages.h:174
+msgid "Serbian/Latin"
+msgstr ""
+
+#: src/languages.h:177
+#, fuzzy
+msgid "Slovenian"
 msgstr "Словацька"
 
-#: src/languages.h:159
+#: src/languages.h:180
 msgid "Spanish"
 msgstr "╤спанська"
 
-#: src/languages.h:162
+#: src/languages.h:183
 msgid "Spanish/Spain"
 msgstr "╤спанська/╤спан╕я"
 
-#: src/languages.h:165
+#: src/languages.h:186
 msgid "Spanish/Mexico"
 msgstr "╤спанська/Мексика"
 
-#: src/languages.h:168
+#: src/languages.h:189
 msgid "Swedish"
 msgstr "Шведська"
 
-#: src/languages.h:171
+#: src/languages.h:192
+msgid "Thai"
+msgstr ""
+
+#: src/languages.h:195
 msgid "Turkish"
 msgstr "Турецька"
 
-#: src/languages.h:174
+#: src/languages.h:198
 msgid "Ukrainian"
 msgstr "Укра╖нська"
 
-#: src/languages.h:177
+#: src/languages.h:201
+msgid "Vietnamese"
+msgstr ""
+
+#: src/languages.h:204
 msgid "Walloon"
 msgstr "Валонська"
 
-#: src/languages.h:180
+#: src/languages.h:207
 msgid "Welsh"
 msgstr "Уельська"

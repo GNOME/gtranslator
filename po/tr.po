@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.30\n"
-"POT-Creation-Date: 2000-10-18 13:13+0200\n"
+"POT-Creation-Date: 2000-10-18 22:54+0200\n"
 "PO-Revision-Date: 2000-10-18 13:13+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -343,7 +343,7 @@ msgstr "Aramak istediðin metni belirle :"
 msgid "Case sensitive"
 msgstr "Yazýlýmý gözönüne al"
 
-#: src/dialogs.c:215 src/languages.h:84
+#: src/dialogs.c:215 src/languages.h:99
 msgid "English"
 msgstr "Orjinal metinlerde"
 
@@ -576,7 +576,7 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:130 src/parse.c:491
+#: src/parse.c:130 src/parse.c:483
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" hiç yok ki !"
@@ -605,21 +605,21 @@ msgstr ""
 msgid "There's no file to open!\n"
 msgstr "Açilacak dosya yok!\n"
 
-#: src/parse.c:282
+#: src/parse.c:287
 msgid "The file has no header!"
 msgstr "Dosyanýn baþlýðý yok!"
 
-#: src/parse.c:285
+#: src/parse.c:290
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 
-#: src/parse.c:288
+#: src/parse.c:293
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:479
+#: src/parse.c:471
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -631,7 +631,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:536
+#: src/parse.c:528
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -642,11 +642,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:544
+#: src/parse.c:536
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþiksiz"
 
-#: src/parse.c:614
+#: src/parse.c:606
 #, c-format
 msgid ""
 "File %s\n"
@@ -655,11 +655,11 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:651
+#: src/parse.c:643
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
 
-#: src/parse.c:676
+#: src/parse.c:668
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -671,20 +671,20 @@ msgstr ""
 #. *
 #. * Delete the old entries.
 #. *
-#: src/parse.c:721 src/parse.c:731 src/parse.c:732
+#: src/parse.c:713 src/parse.c:723 src/parse.c:724
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:777
+#: src/parse.c:769
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
 
-#: src/parse.c:897
+#: src/parse.c:889
 msgid "An update would cause no changes."
 msgstr "Bir yenileme hiç bir deðiþikliðe yol açmazdý."
 
-#: src/parse.c:915
+#: src/parse.c:907
 msgid "The update was successfull."
 msgstr "Yenileme baþarýlý oldu."
 
@@ -725,7 +725,8 @@ msgstr "Oturum baþarýyla yeniden yüklendi."
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
+"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr "
+"...\n"
 
 #. *
 #. * Print some more exact informations on the GConf init-error.
@@ -942,166 +943,203 @@ msgid "No widgets defined to manipulate their style"
 msgstr "Düzenlemesini deðiþtirecek pandýr verilemdi ki"
 
 #: src/languages.h:57
+msgid "Afrikaans"
+msgstr ""
+
+#: src/languages.h:60
 msgid "Arabic"
 msgstr "Arapça"
 
-#: src/languages.h:60
+#: src/languages.h:63
+msgid "Azeri"
+msgstr ""
+
+#: src/languages.h:66
 msgid "Basque"
 msgstr "Baskça"
 
-#: src/languages.h:63
+#: src/languages.h:69
+#, fuzzy
+msgid "Bielorussian"
+msgstr "Rusça"
+
+#: src/languages.h:72
+msgid "Britton"
+msgstr ""
+
+#: src/languages.h:75
 msgid "Bulgarian"
 msgstr "Bulgarca"
 
-#: src/languages.h:66
+#: src/languages.h:78
 msgid "Catalan"
 msgstr "Katalanca"
 
-#: src/languages.h:69
+#: src/languages.h:81
 msgid "Chinese/Simplified"
 msgstr "Çince/Kolaylaþtýrýlmýþ"
 
-#: src/languages.h:72
+#: src/languages.h:84
 msgid "Chinese/Traditional"
 msgstr "Çince/Eski Usül"
 
-#: src/languages.h:75
+#: src/languages.h:87
 msgid "Croatian"
 msgstr "Hýrvatça"
 
-#: src/languages.h:78
+#: src/languages.h:90
 msgid "Czech"
 msgstr "Çekçe"
 
-#: src/languages.h:81
+#: src/languages.h:93
 msgid "Danish"
 msgstr "Danimarkaca"
 
-#: src/languages.h:87
+#: src/languages.h:96
+msgid "Dutch"
+msgstr ""
+
+#: src/languages.h:102
 msgid "English/Canada"
 msgstr "Ingilizce/Kanada"
 
-#: src/languages.h:90
+#: src/languages.h:105
 msgid "English/GB"
 msgstr "Ingilizce/Ing."
 
-#: src/languages.h:93
+#: src/languages.h:108
 msgid "English/USA"
 msgstr "Ingilizce/ABD"
 
-#: src/languages.h:96
+#: src/languages.h:111
 msgid "Estonian"
 msgstr "Estonyaca"
 
-#: src/languages.h:99
+#: src/languages.h:114
 msgid "Farsi"
 msgstr "Farsça"
 
-#: src/languages.h:102
+#: src/languages.h:117
 msgid "Finnish"
 msgstr "Fince"
 
-#: src/languages.h:105
+#: src/languages.h:120
 msgid "French"
 msgstr "Fransýzca"
 
-#: src/languages.h:108
+#: src/languages.h:123
 msgid "Galician"
 msgstr "Gelik"
 
-#: src/languages.h:111
+#: src/languages.h:126
 msgid "German"
 msgstr "Almanca"
 
-#: src/languages.h:114
+#: src/languages.h:129
 msgid "Hungarian"
 msgstr "Macarca"
 
-#: src/languages.h:117
+#: src/languages.h:132
 msgid "Indonesian"
 msgstr "Endonezce"
 
-#: src/languages.h:120
+#: src/languages.h:135
 msgid "Italian"
 msgstr "Italyanca"
 
-#: src/languages.h:123
+#: src/languages.h:138
 msgid "Irish"
 msgstr "Irlandaca"
 
-#: src/languages.h:126
+#: src/languages.h:141
 msgid "Japanese"
 msgstr "Japonca"
 
-#: src/languages.h:129
+#: src/languages.h:144
 msgid "Korean"
 msgstr "Korece"
 
-#: src/languages.h:132
+#: src/languages.h:147
 msgid "Latvian"
 msgstr "Litvanyaca"
 
-#: src/languages.h:135
+#: src/languages.h:150
 msgid "Lithuanian"
 msgstr "Litvanyaca"
 
-#: src/languages.h:138
-msgid "Norwegian/Bookmal"
-msgstr "Norveççe/Bookmal"
+#: src/languages.h:153
+msgid "Norwegian/Bokmaal"
+msgstr "Norveççe/Bokmaal"
 
-#: src/languages.h:141
+#: src/languages.h:156
 msgid "Norwegian/Nynorsk"
 msgstr "Norveççe/Nynorsk"
 
-#: src/languages.h:144
+#: src/languages.h:159
 msgid "Polish"
 msgstr "Polanyaca"
 
-#: src/languages.h:147
+#: src/languages.h:162
 msgid "Portuguese"
 msgstr "Portekiz"
 
-#: src/languages.h:150
+#: src/languages.h:165
 msgid "Portuguese/Brazil"
 msgstr "Portekiz/Brezilya"
 
-#: src/languages.h:153
+#: src/languages.h:168
 msgid "Russian"
 msgstr "Rusça"
 
-#: src/languages.h:156
-msgid "Slovak"
+#: src/languages.h:171
+msgid "Serbian/Cyrillic"
+msgstr ""
+
+#: src/languages.h:174
+msgid "Serbian/Latin"
+msgstr ""
+
+#: src/languages.h:177
+#, fuzzy
+msgid "Slovenian"
 msgstr "Slovak"
 
-#: src/languages.h:159
+#: src/languages.h:180
 msgid "Spanish"
 msgstr "Ispanyolca"
 
-#: src/languages.h:162
+#: src/languages.h:183
 msgid "Spanish/Spain"
 msgstr "Ispanyolca/Ispanya"
 
-#: src/languages.h:165
+#: src/languages.h:186
 msgid "Spanish/Mexico"
 msgstr "Ispanyolca/Meksika"
 
-#: src/languages.h:168
+#: src/languages.h:189
 msgid "Swedish"
 msgstr "Isveç"
 
-#: src/languages.h:171
+#: src/languages.h:192
+msgid "Thai"
+msgstr ""
+
+#: src/languages.h:195
 msgid "Turkish"
 msgstr "Türkçe"
 
-#: src/languages.h:174
+#: src/languages.h:198
 msgid "Ukrainian"
 msgstr "Ukraynaca"
 
-#: src/languages.h:177
+#: src/languages.h:201
+msgid "Vietnamese"
+msgstr ""
+
+#: src/languages.h:204
 msgid "Walloon"
 msgstr "Gelik"
 
-#: src/languages.h:180
+#: src/languages.h:207
 msgid "Welsh"
 msgstr "Velþ"
-
