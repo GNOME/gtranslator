@@ -1,7 +1,7 @@
 noinst_LIBRARIES = libsemerkent.a
 
 INCLUDES = -I$(top_srcdir) -I$(includedir) \
-	$(GLIB_CFLAGS) $(XML_CFLAGS) \
+	$(GTRANSLATOR_CFLAGS) \
 	-Wall -Wunused -Werror
 
 libsemerkent_a_SOURCES = \
