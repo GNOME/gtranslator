@@ -20,5 +20,7 @@
 #include "translation-memory.h"
 
 /*
- * FIXME: Redo on top of Semerkent.
+ * FIXME: Wait for Semerkent, integrate it, make it useful, build bug colonies
+ *  on bugzilla.gnome.org and be happy -- but all this after a 1.x release of
+ *   Semerkent and that will take time ,-)
  */

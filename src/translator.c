@@ -27,9 +27,9 @@
 #include "utils.h"
 
 /*
- * Instantate our "external" translator.
+ * Instantate our "external" gtranslator_translator.
  */
-GtrTranslator *translator=NULL;
+GtrTranslator *gtranslator_translator=NULL;
 
 /*
  * A helper function which reads and sets the values easily and safely.
@@ -65,7 +65,7 @@ static void gtranslator_translator_read_value(gchar **destvalue,
 		}
 		else
 		{
-			*destvalue=NULL;
+			*destvalue=g_strdup("");
 		}
 	}
 }
@@ -77,10 +77,16 @@ static void gtranslator_translator_read_value(gchar **destvalue,
 GtrTranslator *gtranslator_translator_new()
 {
 	GtrTranslator 	*new_translator;
-	gchar		*language_name_value=NULL;
-	
-	new_translator=g_new0(GtrTranslator, 1);
 
+	/*
+	 * Creathe the new GtrTranslator structure.
+	 */
+	new_translator=g_new0(GtrTranslator, 1);
+	new_translator->language=g_new0(GtrLanguage, 1);
+
+	/*
+	 * Read the translator specific values from the preferences.
+	 */
 	gtranslator_config_init();
 	gtranslator_translator_read_value(&new_translator->name, 
 		"translator/name");
@@ -92,15 +98,24 @@ GtrTranslator *gtranslator_translator_new()
 		"translator/translator_memory_buffer");
 
 	/*
-	 * Read the language name from the preferences.
+	 * Read the language specs from the preferences.
 	 */
-	language_name_value=gtranslator_config_get_string("language/name");
-	g_return_val_if_fail(language_name_value!=NULL, new_translator);
+	gtranslator_translator_read_value(&new_translator->language->name,
+		"language/name");
+	gtranslator_translator_read_value(&new_translator->language->lcode,
+		"language/language_code");
+	gtranslator_translator_read_value(&new_translator->language->group,
+		"language/team_email");
+	gtranslator_translator_read_value(&new_translator->language->enc,
+		"language/mime_type");
+	gtranslator_translator_read_value(&new_translator->language->bits,
+		"language/encoding");
 
 	/*
-	 * FIXME: Set the language from the list + the group EMail from the
-	 *  prefs.
+	 * Get the default query domain from the preferences.
 	 */
+	gtranslator_translator_read_value(&new_translator->query_domain,
+		"query/defaultdomain");
 
 	gtranslator_config_close();
 	
@@ -113,14 +128,35 @@ GtrTranslator *gtranslator_translator_new()
  */
 GtrTranslator *gtranslator_translator_new_with_default_values()
 {
-	GtrTranslator *new_translator=g_new0(GtrTranslator, 1);
+	GtrTranslator 	*new_translator;
+	gchar		*env_value;
+	gint		 i;
+	
+	env_value=NULL;
+	new_translator=g_new0(GtrTranslator, 1);
+	new_translator->language=g_new0(GtrLanguage, 1);
+
+	gtranslator_utils_get_environment_value("GTRANSLATOR_TRANSLATOR_NAME:\
+		TRANSLATOR_NAME:TRANSLATOR:NAME:LOGNAME:USER", &env_value);
+
+	if(env_value)
+	{
+		new_translator->name=g_strdup(env_value);
+		GTR_FREE(env_value);
+	}
 
 	/*
-	 * FIXME: Is just temporary compiling placeholder.
+	 * FIXME: Read in the environment values and set the preferences 
+	 *  accordingly.
 	 */
-	if(languages[2].name)
+
+	for(i=0; i < (sizeof(languages) / sizeof(GtrLanguage)); i++)
 	{
+		/*
+		 * FIXME: Read/accomplish the language values.
+		 */
 	}
+
 	return new_translator;
 }
 
@@ -129,6 +165,41 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
  */
 void gtranslator_translator_save(GtrTranslator *translator)
 {
+	g_return_if_fail(translator!=NULL);
+	
+	gtranslator_config_init();
+
+	/*
+	 * Save the translator's personal settings.
+	 */
+	gtranslator_config_set_string("translator/name", translator->name);
+	gtranslator_config_set_string("translator/email", translator->email);
+	gtranslator_config_set_string("query/defaultdomain", 
+		translator->query_domain);
+	
+	/*
+	 * Save the language settings.
+	 */
+	gtranslator_config_set_string("language/name", 
+		translator->language->name);
+	gtranslator_config_set_string("language/language_code", 
+		translator->language->lcode);
+	gtranslator_config_set_string("language/team_email", 
+		translator->language->group);
+	gtranslator_config_set_string("language/mime_type", 
+		translator->language->enc);
+	gtranslator_config_set_string("language/encoding", 
+		translator->language->bits);
+
+	/*
+	 * Save the TM/auto translation settings.
+	 */
+	gtranslator_config_set_string("translator/learn_buffer", 
+		translator->learn_buffer);
+	gtranslator_config_set_string("translator/translator_memory_buffer", 
+		translator->tm_buffer);
+
+	gtranslator_config_close();
 }
 
 /*
@@ -142,6 +213,14 @@ void gtranslator_translator_free(GtrTranslator *translator)
 		GTR_FREE(translator->email);
 		GTR_FREE(translator->learn_buffer);
 		GTR_FREE(translator->tm_buffer);
+		GTR_FREE(translator->query_domain);
+
+		GTR_FREE(translator->language->name);
+		GTR_FREE(translator->language->lcode);
+		GTR_FREE(translator->language->enc);
+		GTR_FREE(translator->language->group);
+		GTR_FREE(translator->language->bits);
+		GTR_FREE(translator->language);
 
 		GTR_FREE(translator);
 	}

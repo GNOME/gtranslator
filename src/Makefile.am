@@ -75,6 +75,7 @@ gtranslator_SOURCES = \
 	syntax.c syntax.h \
 	syntax-elements.h \
 	$(translation_memory_sources) \
+	translator.c translator.h \
 	undo.c undo.h \
 	update.c \
 	utf8.c utf8.h \

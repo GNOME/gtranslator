@@ -23,7 +23,14 @@
 #include "messages.h"
 
 /*
- * FIXME: Redo on top of Semerkent.
+ * These source file(s) will handle the translation memory usage/code level
+ *  stuff for Semerkent -- the translation memory handling library.
+ *
+ * For now and for all 0.[3|4]x release of gtranslator, Semerkent won't be 
+ *  directly supported, therefore these source files are empty for now.
+ *
+ * Don't bother why these source files will be empty for the next time OR
+ *  even better for us all: Help us with Semerkent ,-)
  */
 
 #endif
