@@ -1,12 +1,13 @@
 # gtranslator ja.po.
-# Copyright (C) 2000-2001 Free Software Foundation, Inc.
-# Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2001.
+# Copyright (C) 2000-2002 Free Software Foundation, Inc.
+# Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2002.
 #
+#, no-wrap
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.41\n"
-"POT-Creation-Date: 2002-03-29 18:22+0100\n"
-"PO-Revision-Date: 2002-03-13 00:22+0900\n"
+"Project-Id-Version: gtranslator 0.42\n"
+"POT-Creation-Date: 2002-06-12 11:59+0900\n"
+"PO-Revision-Date: 2002-06-12 11:59+0900\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -761,92 +762,92 @@ msgstr "ワロン語"
 msgid "Welsh"
 msgstr "ウェールズ語"
 
-#: src/main.c:81
+#: src/main.c:82
 msgid "Auto translate the po file & exit"
 msgstr ".po ファイルを自動翻訳して終了します"
 
-#: src/main.c:81 src/main.c:97
+#: src/main.c:82 src/main.c:98
 msgid "FILENAME"
 msgstr "ファイル名"
 
-#: src/main.c:85
+#: src/main.c:86
 msgid "Show build information/specifications"
 msgstr "ビルド情報/仕様を表示する"
 
-#: src/main.c:89
+#: src/main.c:90
 msgid "Export learn buffer to a plain po file"
 msgstr ".po ファイルに学習バッファをエキスポートする"
 
-#: src/main.c:89
+#: src/main.c:90
 msgid "PO_FILE"
 msgstr ".po ファイル名"
 
-#: src/main.c:93
+#: src/main.c:94
 msgid "Specify main window geometry"
 msgstr "メインウィンドウの位置を指定する"
 
-#: src/main.c:93
+#: src/main.c:94
 msgid "GEOMETRY"
 msgstr "ウィンドウの位置"
 
-#: src/main.c:97
+#: src/main.c:98
 msgid "Learn the file completely & exit"
 msgstr "ファイルを完全に学習して終了する"
 
-#: src/main.c:101
+#: src/main.c:102
 msgid "Don't load any backend modules"
 msgstr "バックエンド・モジュールを読み込まない"
 
-#: src/main.c:105
+#: src/main.c:106
 msgid "HTML file to write to"
 msgstr "書き込む HTML ファイル"
 
-#: src/main.c:105
+#: src/main.c:106
 msgid "HTMLFILE"
 msgstr "HTMLファイル名"
 
-#: src/main.c:109
+#: src/main.c:110
 msgid "Don't highlight syntax"
 msgstr "文法を強調表示しない"
 
-#: src/main.c:150
+#: src/main.c:151
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf の初期化中にエラー: %s"
 
-#: src/main.c:173
+#: src/main.c:174
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator -- ビルド情報/仕様:"
 
-#: src/main.c:175
+#: src/main.c:176
 msgid "Version and build date:"
 msgstr "バージョンとビルド日時:"
 
-#: src/main.c:177
+#: src/main.c:178
 msgid "Build GLib/Gtk+/GNOME versions:"
 msgstr "使用した GLIB/GTK+/GNOME バージョン:"
 
-#: src/main.c:179
+#: src/main.c:180
 msgid "Backends directory:"
 msgstr "バックエンドのディレクトリ:"
 
-#: src/main.c:181
+#: src/main.c:182
 msgid "Colorschemes directory:"
 msgstr "カラースキームのディレクトリ:"
 
-#: src/main.c:183
+#: src/main.c:184
 msgid "Scripts directory:"
 msgstr "スクリプトのディレクトリ:"
 
-#: src/main.c:185
+#: src/main.c:186
 msgid "Window icon:"
 msgstr "ウィンドウのアイコン:"
 
-#: src/main.c:187
+#: src/main.c:188
 msgid "Own locale directory:"
 msgstr "ローカルディレクトリ:"
 
-#: src/main.c:220
+#: src/main.c:221
 msgid "GModule implementation doesn't support loading dynamic modules!"
 msgstr ""
 "GModule の実装はダイナミック・モジュールの読み込みをサポートしていません！"
@@ -855,7 +856,7 @@ msgstr ""
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:468
+#: src/main.c:469
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "'%s' の学習が完了しました。\n"
@@ -863,7 +864,7 @@ msgstr "'%s' の学習が完了しました。\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:510
+#: src/main.c:511
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
 msgstr "個人学習バッファの内容を '%s' にエキスポートしました。\n"
@@ -1289,7 +1290,7 @@ msgstr ""
 "ファイル %s には\n"
 "%d 個の fuzzy なメッセージがあります"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:970
+#: src/parse.c:970 data/desktop/gtranslator.desktop.in.h:2
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -1388,8 +1389,8 @@ msgid "Highlight syntax of the translation messages"
 msgstr "翻訳メッセージの書式を強調表示する"
 
 #: src/prefs.c:195
-msgid "Check messages for syntactical correctess"
-msgstr "書式が妥当かどうかメッセージをチェックする"
+msgid "Check messages for syntactical correctness"
+msgstr "書式/文法が妥当かどうかメッセージをチェックする"
 
 #: src/prefs.c:202
 msgid "Use special character to indicate free space"
@@ -1412,131 +1413,135 @@ msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "コンパイルしたファイル (例: \"project.gmo\") を削除する"
 
 #: src/prefs.c:217
+msgid "Directory to put compiled po files into"
+msgstr "コンパイルした .po ファイルを格納するディレクトリ"
+
+#: src/prefs.c:220
 msgid "Load all backends on startup"
 msgstr "起動時に全てのバックエンドを読み込む"
 
-#: src/prefs.c:220
+#: src/prefs.c:223
 msgid "Save geometry on exit & restore it on startup"
 msgstr "終了時に gtranslator の位置を保存し、起動時にその位置に表示する"
 
-#: src/prefs.c:223
+#: src/prefs.c:226
 msgid "Show instant comment view in the main pane"
 msgstr "メインペインの中にコメントの簡易ビューを表示する"
 
-#: src/prefs.c:230
+#: src/prefs.c:233
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "最近開いたファイルの一覧に表示する最大数:"
 
-#: src/prefs.c:234
+#: src/prefs.c:237
 msgid "Check recent files before showing in recent files' list"
 msgstr "最近使ったファイルの一覧を表示する前にそれらのファイルをチェックする"
 
-#: src/prefs.c:237
+#: src/prefs.c:240
 msgid "Instant spell checking"
 msgstr "スペルの簡易チェックをする"
 
-#: src/prefs.c:240
+#: src/prefs.c:243
 msgid "Use special dictionary:"
 msgstr "使用する特別な辞書:"
 
-#: src/prefs.c:262
+#: src/prefs.c:265
 msgid "Syntax color scheme to use:"
 msgstr "使用するカラースキームの定義:"
 
-#: src/prefs.c:267
+#: src/prefs.c:270
 msgid "Apply own fonts:"
 msgstr "自分のフォントを使用する:"
 
-#: src/prefs.c:271
+#: src/prefs.c:274
 msgid "Original text font:"
 msgstr "原文メッセージのフォント:"
 
-#: src/prefs.c:271
+#: src/prefs.c:274
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- フォント選択/msgid のフォント"
 
-#: src/prefs.c:275
+#: src/prefs.c:278
 msgid "Translation font:"
 msgstr "翻訳メッセージのフォント:"
 
-#: src/prefs.c:275
+#: src/prefs.c:278
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- フォント選択/msgstr フォント"
 
-#: src/prefs.c:279
+#: src/prefs.c:282
 msgid "Apply own colors:"
 msgstr "自分の色を使用する:"
 
-#: src/prefs.c:283
+#: src/prefs.c:286
 msgid "Foreground color:"
 msgstr "前景色:"
 
-#: src/prefs.c:283
+#: src/prefs.c:286
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- 前景色"
 
-#: src/prefs.c:287
+#: src/prefs.c:290
 msgid "Background color:"
 msgstr "背景色:"
 
-#: src/prefs.c:287
+#: src/prefs.c:290
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- 背景色"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:293
+#: src/prefs.c:296
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr ".po ファイルを自動的に保存する間隔 (分):"
 
-#: src/prefs.c:308
+#: src/prefs.c:311
 msgid "Append a suffix to automatically saved files:"
 msgstr "自動保存するファイルに追加する接頭子:"
 
-#: src/prefs.c:328
+#: src/prefs.c:331
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "メッセージ・テーブルを表示する (要 gtranslator の再起動)"
 
-#: src/prefs.c:332
+#: src/prefs.c:335
 msgid "Collapse translated entries by default"
 msgstr "デフォルトで翻訳済みのエントリを畳む"
 
-#: src/prefs.c:336
+#: src/prefs.c:339
 msgid "Use own colors for the messages table groups"
 msgstr "メッセージ・テーブルのグループに自分の色を使う"
 
-#: src/prefs.c:340
+#: src/prefs.c:343
 msgid "Untranslated entries color:"
 msgstr "未翻訳メッセージの色:"
 
-#: src/prefs.c:340
+#: src/prefs.c:343
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- 未翻訳メッセージの色"
 
-#: src/prefs.c:344
+#: src/prefs.c:347
 msgid "Fuzzy entries color:"
 msgstr "Fuzzy エントリの色:"
 
-#: src/prefs.c:344
+#: src/prefs.c:347
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- fuzzy エントリの色"
 
-#: src/prefs.c:348
+#: src/prefs.c:351
 msgid "Translated entries color:"
 msgstr "翻訳済みエントリの色:"
 
-#: src/prefs.c:348
+#: src/prefs.c:351
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- 翻訳済みエントリの色"
 
-#: src/prefs.c:356
+#: src/prefs.c:359
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr "未翻訳のメッセージの自動翻訳中に個人学習バッファにも問い合わせる"
 
-#: src/prefs.c:360
+#: src/prefs.c:363
 msgid "Automatically learn a newly translated message"
 msgstr "新規に翻訳したメッセージを個人学習バッファに登録する"
 
@@ -1545,28 +1550,28 @@ msgstr "新規に翻訳したメッセージを個人学習バッファに登録する"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:368
+#: src/prefs.c:371
 msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
 "個人学習バッファの問い合わせに対して \"fuzzy\" を検出する方法を使用する"
 
-#: src/prefs.c:371
+#: src/prefs.c:374
 msgid "Minimal required similarity percentage for fuzzy queries"
 msgstr "fuzzy かどうか問い合わせるための最小要求相似率"
 
-#: src/prefs.c:416
+#: src/prefs.c:419
 msgid "Please enter your name!"
 msgstr "名前を入力してください！"
 
-#: src/prefs.c:430
+#: src/prefs.c:433
 msgid "Please enter your EMail address!"
 msgstr "E-メールアドレスを入力してください！"
 
-#: src/prefs.c:443
+#: src/prefs.c:446
 msgid "Please enter a valid EMail address!"
 msgstr "正しい E-メールアドレスを入力して下さい！"
 
-#: src/prefs.c:672
+#: src/prefs.c:678
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1591,7 +1596,7 @@ msgstr "置換するものがありません！"
 #.
 #: src/runtime-config.c:81
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #.
 #. * Translators: this character is used if the middle dot
@@ -1643,19 +1648,27 @@ msgstr "フォントがセットされていません！ デフォルトを使用します"
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-alias-fixed-medium-r-normal-*-*-120-*-*-c-*-jisx0208.1983-0"
 
-#: src/update.c:102
+#: src/update.c:60
+msgid ""
+"The po file was changed and the changes weren't saved yet. Do you still want "
+"to update the po file now?"
+msgstr ""
+".po ファイルが変更されましたが、まだ保存されていません。新たに .po ファイルを"
+"更新しますか？"
+
+#: src/update.c:120
 msgid "No POTFILES.in found!"
 msgstr "POTFILES.in　がありません！"
 
-#: src/update.c:113
+#: src/update.c:131
 msgid "Po file is uptodate."
 msgstr ".po ファイルが更新されました。"
 
-#: src/update.c:120
+#: src/update.c:138
 msgid "The update was successfull."
 msgstr "更新が完了しました。"
 
-#: src/update.c:125
+#: src/update.c:143
 msgid "An error occurred while updating the po file."
 msgstr ".po ファイルの更新中にエラーが発生しました。"
 
@@ -1694,23 +1707,35 @@ msgstr ""
 "どこか書き込み権限があるディレクトリの中に新しくコピーして\n"
 "書き込み権限を与えて下さい。"
 
-#: src/utils_gui.c:401
+#: src/utils_gui.c:429
 #, c-format
 msgid ""
-"The file `%s' is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling `%s' currently to\n"
-"re-gain access to this file (also applies for post-crash cases)."
+"The file\n"
+"\n"
+"   %s\n"
+"\n"
+"is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling\n"
+"this file currently to re-gain access to this file.\n"
+"\n"
+"Shall fool gtranslator open this file anyway ?"
 msgstr ""
-"他の gtranslator プロセスがファイル '%s' を既に開いています！\n"
-"現在 '%s' を編集している他の gtranslator プロセスを閉じて\n"
-"このファイルへのアクセスをやり直して下さい。"
+"次のファイル\n"
+"\n"
+"   %s\n"
+"\n"
+"は既に他の gtranslator でオープンされています！\n"
+"このファイルを扱っている他の gtranslator を閉じて\n"
+"再度、このファイルをオープンして下さい。\n"
+"\n"
+"このファイルを強制的に開きますか？"
 
-#: src/utils_gui.c:437
+#: src/utils_gui.c:474
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "必要とする解凍プログラム '%s' がインストールされていません！"
 
-#: src/utils_gui.c:442
+#: src/utils_gui.c:479
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "必要とする圧縮プログラム '%s' がインストールされていません！"
