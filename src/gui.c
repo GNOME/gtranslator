@@ -281,7 +281,6 @@ void gtranslator_create_main_window(void)
 //	text_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_box_view));
 
 	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), GTK_WIDGET(text_box));
-	//gtk_text_set_editable(GTK_TEXT(text_box), FALSE);
 
 	translation_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vertical_box), translation_text_scrolled_window, TRUE, TRUE, 0);
