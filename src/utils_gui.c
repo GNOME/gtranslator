@@ -115,7 +115,8 @@ void gtranslator_utils_save_geometry(void)
  */
 void gtranslator_utils_restore_geometry(gchar  * gstr)
 {
-	gint x, y, width, height;
+	gint x=0, y=0, width=0, height=0;
+
 	/*
 	 * Set the main window's geometry from the preferences.
 	 */
