@@ -11,11 +11,6 @@
 #include "header_stuff.h"
 
 /**
-* A structure which will be hopefully used now...
-**/
-static gtr_header *ph=NULL;
-
-/**
 * This variable is used to recognize the end of the header.
 **/
 gboolean header_finish;
@@ -24,12 +19,6 @@ gboolean header_finish;
 * A temp-char.
 **/
 gchar *inp;
-
-/**
-* A simple define; .. ok I'm lazy but it avoids many typos ..
-**/
-#define kabalak_str(x) inp=NULL; inp=strstr(hline, ": ");\
-ph->x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));
 
 void apply_header(gtr_header *the_header)
 {
@@ -41,48 +30,39 @@ void apply_header(gtr_header *the_header)
 
 void get_header(gchar *hline)
 {
-	#ifdef IT_WORKS__
+	gchar *a=g_new(gchar,1);
 	header_finish=FALSE;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
-		kabalak_str(prj_name);
-		ph->prj_name=index(ph->prj_name, ' ');
-		ph->prj_version=rindex(ph->prj_name, ' ');
+		a=strtok(hline,(gchar *)strtok(hline,": "));
+		g_print("<<%s>>\n",a);
 	}
 	if(!g_strncasecmp(hline,"\"POT-",5))
 	{
-		kabalak_str(pot_date);
 	}
 	if(!g_strncasecmp(hline,"\"PO-",4))
 	{
-		kabalak_str(po_date);
 	}
 	if(!g_strncasecmp(hline,"\"Las",4))
 	{
-		kabalak_str(last_translator);
 	}
 	if(!g_strncasecmp(hline,"\"Lang",5))
 	{
-		kabalak_str(language_team);
 	}
 	if(!g_strncasecmp(hline,"\"MIME",5))
 	{
-		kabalak_str(mime_version);
 	}
 	if(!g_strncasecmp(hline,"\"Content-Ty",11))
 	{
-		kabalak_str(mime_type);
 	}
 	if(!g_strncasecmp(hline,"\"Content-Tr",11))
 	{
-		kabalak_str(encoding);
 		header_finish=TRUE;
 	}
 	if(header_finish==TRUE)
 	{
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Header has been parsed."));
+		ph->prj_name=a;
 	}
-	#endif
 }
 
 /**

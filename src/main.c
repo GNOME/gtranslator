@@ -28,19 +28,19 @@
 static struct poptOption gtranslator_options [] = {
 	{
 		"file", 'f', POPT_ARG_STRING, &file_to_open,
-		0,N_("Po-file to open at startup"), "PO_FILE"
+		0, N_("Po-file to open at startup"), "PO_FILE"
 	},
 	{
 		"msg-db", 'm', POPT_ARG_STRING, &msg_db,
-		0,N_("The messages db to use"),"MSG_DB"
+		0, N_("The messages db to use"),"MSG_DB"
 	},
 	{
 		"query", 'q', POPT_ARG_STRING, &query_string,
-		0,N_("Query the messages db & exit"),"QUERY_STRING"
+		0, N_("Query the messages db & exit"),"QUERY_STRING"
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
-		0,N_("Specifies the main-window geometry"),"GEOMETRY"
+		0, N_("Specifies the main-window geometry"),"GEOMETRY"
 	},
 	POPT_AUTOHELP {NULL}
 };

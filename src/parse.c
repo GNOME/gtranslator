@@ -188,7 +188,10 @@ void parse(gchar *po)
 		{
 			(gchar *)msg->msgstr=g_strconcat((gchar *)msg->msgstr,(gchar *)g_strdup(temp_char),NULL);
 		}
-		messages=g_list_append(messages,(gpointer)msg);
+		if((msgid_ok==TRUE) && (msgstr_ok==TRUE))
+		{
+			messages=g_list_append(messages,(gpointer)msg);
+		}
 	}
 	/**
 	* Show an updated status
@@ -239,12 +242,8 @@ void parse_the_file(GtkWidget *widget,gpointer useless)
 **/
 void clean_text_boxes()
 {
-	gtk_text_freeze(GTK_TEXT(trans_box));
-	gtk_text_freeze(GTK_TEXT(text1));
 	gtk_text_backward_delete(GTK_TEXT(text1),gtk_text_get_length(GTK_TEXT(text1)));
 	gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
-	gtk_text_thaw(GTK_TEXT(trans_box));
-	gtk_text_thaw(GTK_TEXT(text1));
 	gtk_text_set_editable(GTK_TEXT(text1),TRUE);
 }
 
@@ -290,6 +289,12 @@ void get_prev_msg(GtkWidget *widget,gpointer useless)
 	else
 	{
 		prev=(gtr_msg *)g_list_nth_data(messages,msg_pair);
+		if(g_list_length(messages)>2)
+		{
+			gtk_widget_set_sensitive(next_button,TRUE);
+		}
+		gtk_widget_set_sensitive(back_button,TRUE);
+		gtk_widget_set_sensitive(first_button,TRUE);
 		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)prev->msgid,-1);
                 gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)prev->msgstr,-1);
 	}
@@ -321,6 +326,12 @@ void get_next_msg(GtkWidget *widget,gpointer useless)
 	else
 	{
 		next=(gtr_msg *)g_list_nth_data(messages,msg_pair);
+		if(msg_pair>2)
+		{
+			gtk_widget_set_sensitive(back_button,TRUE);
+		}
+		gtk_widget_set_sensitive(next_button,TRUE);
+                gtk_widget_set_sensitive(last_button,TRUE);
 		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,(gchar *)next->msgid,-1);
                 gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,(gchar *)next->msgstr,-1);
 	}

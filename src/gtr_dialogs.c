@@ -423,7 +423,6 @@ void r_window(GtkWidget *widget,gpointer useless)
         gchar *result;
 	gchar result_string[256];
 	result_string[0]='\0';
-        result=NULL;
 	/**
 	* Get the result.
 	*

@@ -41,6 +41,11 @@ struct _gtr_header {
 };
 
 /**
+* A structure which will be hopefully used now...
+**/
+static gtr_header *ph;
+
+/**
 * The general widgets for the edit-dialog.
 **/
 GtkWidget *gtr_edit_header_dlg,*gtr_edit_header_dlg_cancel,
