@@ -1,3 +1,8 @@
+2001-11-21  Fatih Demir <kabalak@gtranslator.org>
+
+	* prefs.c: #ifdef out the new percentage prefs stuff -- it isn't 
+		working yet and so we just "hide" it from the user for now.
+
 2001-11-12  Fatih Demir <kabalak@gtranslator.org>
 
 	* messages-table.c: Applied a small 64 bit compiling fix as suggested
@@ -7,8 +12,8 @@
 
 	* utils.c: A small PowerPC compiling change -- smally changed version
 		of the proposed patch by Ryan Murray <rmurray@debian.org> after
-		 tge bug report of Stephen R Marenka <stephen@marenka.net> --
-		  gchar is a "unsigned" int on PowerPC: ok, why not..
+		 the bug report of Stephen R Marenka <stephen@marenka.net> --
+		  gchar is an "unsigned" int on PowerPC: ok, why not..
 
 2001-11-03  Fatih Demir <kabalak@gtranslator.org>
 
