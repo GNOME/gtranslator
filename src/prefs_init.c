@@ -110,6 +110,8 @@ void prefs_convert_colors()
 
 	if(value && value[0]=='#')
 	{
+		/* Translators: DO NOT translate these */
+		g_warning("Converting old fg color..");
 		gtranslator_config_set_string("colors/own_fg", value);
 		converted=TRUE;
 	}
@@ -118,6 +120,8 @@ void prefs_convert_colors()
 
 	if(value && value[0]=='#')
 	{
+		/* Translators: DO NOT translate these. */
+		g_warning("Converting old bg color");
 		gtranslator_config_set_string("colors/own_bg", value);
 		converted=TRUE;
 	}

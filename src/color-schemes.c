@@ -133,6 +133,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 		GetData(special, "special");
 		GetData(address, "address");
 		GetData(keyword, "keyword");
+		GetData(spell_error, "spell_error");
 				
 		node=node->next;
 	}
@@ -182,6 +183,7 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	gtranslator_config_set_string("colors/special", theme->special);
 	gtranslator_config_set_string("colors/address", theme->address);
 	gtranslator_config_set_string("colors/keyword", theme->keyword);
+	gtranslator_config_set_string("colors/spell_error", theme->spell_error);
 
 	/*
 	 * Set up the scheme information.
@@ -229,6 +231,7 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
 	theme->special=gtranslator_config_get_string("colors/special");
 	theme->address=gtranslator_config_get_string("colors/address");
 	theme->keyword=gtranslator_config_get_string("colors/keyword");
+	theme->spell_error=gtranslator_config_get_string("colors/spell_error");
 
 	gtranslator_config_close();
 
@@ -347,6 +350,7 @@ void free_color_scheme(GtrColorScheme **scheme)
 		g_free((*scheme)->special);
 		g_free((*scheme)->address);
 		g_free((*scheme)->keyword);
+		g_free((*scheme)->spell_error);
 		g_free(*scheme);
 	}
 }
@@ -485,6 +489,7 @@ GtrColorScheme *gtranslator_color_scheme_copy(GtrColorScheme *scheme)
 	copy->special=scheme->special;
 	copy->address=scheme->address;
 	copy->keyword=scheme->keyword;
+	copy->spell_error=scheme->spell_error;
 
 	return copy;
 }

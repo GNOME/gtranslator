@@ -71,6 +71,9 @@ gchar* get_path_from_type(ColorType Type)
 		case COLOR_KEYWORD:
 			section="keyword";
 			break;
+		case COLOR_SPELL_ERROR:
+			section="spell_error";
+			break;
 		default:
 			return NULL;
 	}
@@ -279,5 +282,6 @@ void init_colors(void)
 	gdk_color_parse(theme->number,		&colors[COLOR_NUMBER]);
 	gdk_color_parse(theme->punctuation,	&colors[COLOR_PUNCTUATION]);
 	gdk_color_parse(theme->special,		&colors[COLOR_SPECIAL]);
+	gdk_color_parse(theme->spell_error,	&colors[COLOR_SPELL_ERROR]);
 }
 

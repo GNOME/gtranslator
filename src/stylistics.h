@@ -41,6 +41,7 @@ typedef enum {
 	COLOR_SPECIAL,
 	COLOR_ADDRESS,
 	COLOR_KEYWORD,
+	COLOR_SPELL_ERROR,
 	/* This is a fake color, should be the last */
 	COLOR_END
 } ColorType;

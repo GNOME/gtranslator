@@ -20,6 +20,7 @@
 #include "sighandling.h"
 
 #include "parse.h"
+#include "preferences.h"
 #include "dialogs.h"
 #include <libgnome/gnome-i18n.h>
 
@@ -51,33 +52,23 @@ void gtranslator_signal_handler(int signal)
 
 			if(po->file_changed)
 			{
-				gchar answer;
-
-				g_print(_("gtranslator is about being closed.\n\
-Would you like to save `%s'?\n[y/n] "),
+				/*
+				 * Store the original filename into the
+				 *  preferences.
+				 */ 
+				gtranslator_config_init();
+				gtranslator_config_set_string("crash/filename",
 					po->filename);
-
-				scanf("%c", &answer);
+				gtranslator_config_close();
+				
+				po->filename=g_strdup_printf("%s/%s",
+					g_get_home_dir(),
+					".gtranslator-crash.po");
 
 				/*
-				 * Translators: Please use here the same
-				 *  characters as in the question where
-				 *   you translated [y/n]!
-				 */  
-				if(answer==_("y")[0] || answer==_("Y")[0])
-				{
-					g_print(_("Saving...\n"));
-
-					save_current_file(NULL, NULL);
-
-					g_print(_("Saved `%s'.\n"),
-						po->filename);
-				}
-				else
-				{
-					g_print(_("Not saving `%s'!\n"),
-						po->filename);
-				}
+				 * Save the file under the special filename.
+				 */
+				save_current_file(NULL, NULL);
 			}
 			
 			exit(1);

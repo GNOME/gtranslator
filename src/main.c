@@ -23,6 +23,7 @@
 #endif
 
 #include "gui.h"
+#include "dialogs.h"
 #include "session.h"
 #include "prefs.h"
 #include "parse.h"
@@ -175,6 +176,16 @@ int main(int argc, char *argv[])
 				"gtranslator-temp-po-file"));
 	}
 
+	/*
+	 * Test if there's a crash recovery file lying around in ~.
+	 */ 
+	if(g_file_exists(g_strdup_printf("%s/%s", 
+				g_get_home_dir(),
+				".gtranslator-crash.po")))
+	{
+		crash_recovery_dialog();
+	}
+	
 	/*
 	 * Load the given color scheme file.
 	 */ 

@@ -494,3 +494,62 @@ void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 	g_string_free(uri, 0);
 	
 }
+
+/*
+ * Possibly rescue the given file.
+ */
+void crash_recovery_dialog(void)
+{
+	GtkWidget *dialog;
+	gchar *recovery_message;
+	gchar *original_filename;
+	gchar *file;
+	gint reply;
+	
+	/*
+	 * Get the original filename for the crash-file from the prefs.
+	 */
+	gtranslator_config_init();
+	original_filename=gtranslator_config_get_string("crash/filename");
+	gtranslator_config_close();
+
+	recovery_message=g_strdup_printf(_("Open recovery file for `%s'?\n\
+It was saved by gtranslator before gtranslator got closed.\n\
+Possibly it contains hard pieces of work?!\n\
+Saying \"No\" will delete the crash recovery file."),
+		original_filename);
+	
+	dialog=gnome_message_box_new(recovery_message,
+		GNOME_MESSAGE_BOX_WARNING,
+		GNOME_STOCK_BUTTON_YES,
+		GNOME_STOCK_BUTTON_NO,
+		GNOME_STOCK_BUTTON_CANCEL, NULL);
+
+	show_nice_dialog(&dialog, "gtranslator -- ask for crash recovery");
+	
+	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+	
+	g_free(recovery_message);
+
+	file=g_strdup_printf("%s/%s", g_get_home_dir(), 
+		".gtranslator-crash.po");
+	
+	if(reply==GNOME_YES)
+	{
+		g_message(_("Recovering `%s'..."), original_filename);
+
+		/*
+		 * Move the recovery file to the original filename and re-open
+		 *  it now again.
+		 */ 
+		rename(file, original_filename);
+		parse(original_filename);
+	}
+	else if(reply==GNOME_NO)
+	{
+		/*
+		 * Remove the crash recovery file.
+		 */
+		unlink(file);
+	}
+}

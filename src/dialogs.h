@@ -45,6 +45,12 @@ void open_file(GtkWidget * widget, gpointer useless);
 gboolean ask_to_save_file(void);
 
 /*
+ * This dialog will pop up if a crash recovery file could be found
+ *  in ~.
+ */
+void crash_recovery_dialog(void);
+
+/*
  * The "Go to" dialog.
  */
 void goto_dlg(GtkWidget * widget, gpointer useless);

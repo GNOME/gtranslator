@@ -19,6 +19,7 @@
 #include <gnome.h>
 
 #include "gtkspell.h"
+#include "stylistics.h"
 
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -56,8 +57,8 @@ static int fd_write[2], fd_read[2];
 static int signal_set_up = 0;
 
 /* FIXME? */
-static GdkColor *highlight = NULL;
-static GdkColor *url_highlight = NULL;
+static GdkColor *highlight = &colors[COLOR_SPELL_ERROR];
+static GdkColor *url_highlight = &colors[COLOR_ADDRESS];
 
 
 static void entry_insert_cb(GtkText *gtktext,

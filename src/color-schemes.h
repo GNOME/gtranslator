@@ -51,6 +51,7 @@ typedef struct {
 	gchar *special;
 	gchar *address;
 	gchar *keyword;
+	gchar *spell_error;
 } GtrColorScheme;
 
 #define GTR_COLOR_SCHEME(x) \
