@@ -308,6 +308,36 @@ gboolean gtranslator_utils_uri_supported(const gchar *file_uri)
 }
 
 /*
+ * Return a good matching language name from the environment variables
+ *  concerning locales.
+ */
+gchar *gtranslator_utils_get_environment_locale()
+{
+	gchar		*localename;
+	gint		 i=0;
+
+	const gchar 	*checkvariables[] =
+	{
+		"GTRANSLATOR_LANGUAGE",
+		"LC_ALL",
+		"LANG",
+		"LANGUAGE",
+		"LC_MESSAGES",
+		NULL
+	};
+
+	localename=NULL;
+
+	while(checkvariables[i]!=NULL && !localename)
+	{
+		localename=g_getenv(checkvariables[i]);
+		i++;
+	}
+
+	return localename;
+}
+
+/*
  * Subsequently filter out all extension containing filename from the directory.
  * 
  * Should be useful for many cases.
@@ -385,7 +415,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 /*
  * Free the list and it's data safely -- NULL cases should be catched here.
  */
-void gtranslator_utils_free_list(GList *list)
+void gtranslator_utils_free_list(GList *list, gboolean free_contents)
 {
 	if(!list)
 	{
@@ -398,12 +428,15 @@ void gtranslator_utils_free_list(GList *list)
 	else
 	{
 		/*
-		 * Free the list data as long as possible.
+		 * Free the list data as long as possible and desired.
 		 */
-		while(list!=NULL)
+		if(free_contents)
 		{
-			GTR_FREE(list->data);
-			GTR_ITER(list);
+			while(list!=NULL)
+			{
+				GTR_FREE(list->data);
+				GTR_ITER(list);
+			}
 		}
 
 		g_list_free(list);
@@ -572,11 +605,11 @@ gboolean gtranslator_utils_language_lists_free(GtkWidget  * widget, gpointer use
 		return FALSE;
 	}
 	
-	gtranslator_utils_free_list(languages_list);
-	gtranslator_utils_free_list(lcodes_list);
-	gtranslator_utils_free_list(group_emails_list);
-	gtranslator_utils_free_list(encodings_list);
-	gtranslator_utils_free_list(bits_list);
+	gtranslator_utils_free_list(languages_list, FALSE);
+	gtranslator_utils_free_list(lcodes_list, FALSE);
+	gtranslator_utils_free_list(group_emails_list, FALSE);
+	gtranslator_utils_free_list(encodings_list, FALSE);
+	gtranslator_utils_free_list(bits_list, FALSE);
 	
 	return FALSE;
 }

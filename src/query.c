@@ -139,16 +139,11 @@ void gtranslator_query_domains(const gchar *directory)
 	if(!lc)
 	{
 		/*
-		 * Try to get the language code from the environment -- too much
-		 *  sanity, I guess, but better then crashes on first startups.
+		 * If no language is set up in the prefs, get it from the
+		 *  environment variables.
 		 */
-		lc=g_getenv("LANGUAGE");
-		
-		if(!lc)
-		{
-			lc=g_getenv("LANG");
-			g_return_if_fail(lc!=NULL);
-		}
+		lc=gtranslator_utils_get_environment_locale();
+		g_return_if_fail(lc!=NULL);
 	}
 
 	localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory,

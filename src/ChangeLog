@@ -1,3 +1,27 @@
+2001-07-22  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c/.h & utils_gui.c/.h: Moved/renamed the "gtranslator_error"
+		function to "gtranslator_utils_error_dialog" and put it into
+		 utils_gui.c/.h.
+
+	* backend.c & utils.c: Supply the additional argument to the changed 
+		function call.
+
+	* utils.c/.h: The "gtranslator_utils_free_list" function now does also
+		take a "free_contents" gboolean argument to determine whether
+		 the contents should also be freed.
+
+	* prefs_init.c: Set the language name on startup from the environment
+		variables if possible.
+
+	* query.c: Use the new function instead of own environment crippling
+		actions...
+
+	* utils.c/.h: Added "gtranslator_utils_get_environment_locale" which
+		returns any found environment locale (searches $LC_ALL, $LANG,
+		 $LANGUAGE and $LC_MESSAGES for this: the special 
+		  $GTRANSLATOR_LANGUAGE is also searched for some crazy cases .-)).
+
 2001-07-21  Fatih Demir <kabalak@gtranslator.org>
 
 	* messages-table.c: Make the "gtranslator_messages_table_select|update_row"

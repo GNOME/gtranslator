@@ -41,6 +41,14 @@ void gtranslator_preferences_init_default_values()
 	if(!date)
 	{
 		/*
+		 * Determine the language name from the environment.
+		 */
+		if(!lc)
+		{
+			lc=gtranslator_utils_get_environment_locale();
+		}
+		
+		/*
 		 * Useful options which should be set to TRUE.
 		 */ 
 		gtranslator_config_init();

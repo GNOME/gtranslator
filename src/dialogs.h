@@ -37,9 +37,6 @@
  */
 void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname);
 
-/* Show error messagebox to the user */
-GtkWidget * gtranslator_error(char *format, ...);
-
 /*
  * Set up the directory parts of the current po file -- or the last stored dir 
  *  or the home dir.

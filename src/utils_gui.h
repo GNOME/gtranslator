@@ -31,6 +31,11 @@
  */
 
 /*
+ * Show an error messagebox to the user. 
+ */
+GtkWidget *gtranslator_utils_error_dialog(gchar *format, ...);
+
+/*
  * Show the homepage of gtranslator.
  */
 void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);

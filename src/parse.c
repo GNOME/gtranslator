@@ -251,7 +251,7 @@ gboolean gtranslator_parse_core(void)
 					g_assert_not_reached();
 				}
 			} else {
-				gtranslator_error(_("Error in file \"%s\"\nat line %d.\nPlease check the file and try again."), po->filename, lines);
+				gtranslator_utils_error_dialog(_("Error in file \"%s\"\nat line %d.\nPlease check the file and try again."), po->filename, lines);
 				GTR_FREE(msg);
 				return FALSE;
 			}
@@ -288,7 +288,7 @@ gboolean gtranslator_parse_core(void)
 	fclose(fs);
 
 	if (po->messages == NULL) {
-		gtranslator_error(_("The file is empty:\n%s"), po->filename);
+		gtranslator_utils_error_dialog(_("The file is empty:\n%s"), po->filename);
 		return FALSE;
 	}
 	
@@ -311,7 +311,7 @@ void gtranslator_parse_main(const gchar *filename)
 	 */
 	if(!g_file_exists(filename))
 	{
-		gtranslator_error(_("The file `%s' doesn't exist at all!"),
+		gtranslator_utils_error_dialog(_("The file `%s' doesn't exist at all!"),
 			filename);
 		return;
 	}
@@ -633,7 +633,7 @@ gboolean gtranslator_save_file(const gchar *name)
 	fs = fopen(name, "w");
 	if(!fs)
 	{
-		gtranslator_error(_("Could not open file `%s' for writing!"),
+		gtranslator_utils_error_dialog(_("Could not open file `%s' for writing!"),
 				  name);
 		
 		return FALSE;
@@ -872,7 +872,7 @@ void compile(GtkWidget * widget, gpointer useless)
 	 */
 	if(!gnome_is_program_in_path("msgfmt"))
 	{
-		gtranslator_error(_("Sorry, msgfmt isn't available on your system!"));
+		gtranslator_utils_error_dialog(_("Sorry, msgfmt isn't available on your system!"));
 		return;
 	}
 			

@@ -30,6 +30,22 @@
 #include <libgnomeui/libgnomeui.h>
 
 /*
+ * Show an error message. */
+GtkWidget * gtranslator_utils_error_dialog(gchar *format, ...)
+{
+	gchar *error;
+	va_list ap;
+	GtkWidget *w;
+	
+	va_start(ap, format);
+	error = g_strdup_vprintf(format, ap);
+	va_end(ap);
+	w = gnome_app_error(GNOME_APP(gtranslator_application), error);
+	GTR_FREE(error);
+	return w;
+}
+
+/*
  * Shows the gtranslator homepage on the web.
  */
 void gtranslator_utils_show_home_page(GtkWidget *widget, gpointer useless)
@@ -325,7 +341,7 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
 		 * Create an error box and prevent further reading
 		 *  of the file.
 		 */  
-		gtranslator_error(_("You don't have read permissions on file `%s'"),
+		gtranslator_utils_error_dialog(_("You don't have read permissions on file `%s'"),
 			po_file->filename);
 
 		return FALSE;

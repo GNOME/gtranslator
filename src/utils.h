@@ -97,7 +97,12 @@ gboolean gtranslator_utils_uri_supported(const gchar *file_uri);
 /*
  * Free's the list data and the list itself safely.
  */
-void gtranslator_utils_free_list(GList *list);
+void gtranslator_utils_free_list(GList *list, gboolean free_contents);
+
+/*
+ * Return the language environmental variable.
+ */
+gchar *gtranslator_utils_get_environment_locale(void);
 
 /*
  * Returns a list of (full) filenames matching the given parameters in ths

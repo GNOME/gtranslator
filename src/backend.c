@@ -327,8 +327,8 @@ static void gtranslator_backend_free_informations(GtrBackendInformations *inform
 	GTR_FREE(informations->description);
 	GTR_FREE(informations->compile_command);
 
-	gtranslator_utils_free_list(informations->extensions);
-	gtranslator_utils_free_list(informations->filenames);
+	gtranslator_utils_free_list(informations->extensions, TRUE);
+	gtranslator_utils_free_list(informations->filenames, TRUE);
 }
 
 /*

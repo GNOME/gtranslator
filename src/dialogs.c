@@ -38,6 +38,7 @@
 #include "syntax.h"
 #include "utf8.h"
 #include "utils.h"
+#include "utils_gui.h"
 
 #include <string.h>
 #include <locale.h>
@@ -75,20 +76,6 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 			   GTK_SIGNAL_FUNC(gtk_widget_destroyed), dlg);
 
 	gtk_widget_show_all(*dlg);
-}
-
-GtkWidget * gtranslator_error(char *format, ...)
-{
-	char *error;
-	va_list ap;
-	GtkWidget *w;
-	
-	va_start(ap, format);
-	error = g_strdup_vprintf(format, ap);
-	va_end(ap);
-	w = gnome_app_error(GNOME_APP(gtranslator_application), error);
-	GTR_FREE(error);
-	return w;
 }
 
 /*
@@ -698,7 +685,7 @@ void gtranslator_compile_error_dialog(FILE * fs)
 	GtkWidget *dialog, *textbox;
 	GtkWidget *scroll;
 
-	dialog = gtranslator_error(_("An error occured while msgfmt was executed:\n"));
+	dialog = gtranslator_utils_error_dialog(_("An error occured while msgfmt was executed:\n"));
 	textbox = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(textbox), FALSE);
 	while (TRUE) {
@@ -777,7 +764,7 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			 * Show an error dialog but don't close down the 
 			 *  Open from URI dialog.
 			 */  
-			gtranslator_error(_("No URI given!"));	
+			gtranslator_utils_error_dialog(_("No URI given!"));	
 		}
 		else
 		{
@@ -792,7 +779,7 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			}
 			else
 			{
-				gtranslator_error(_("No supported URI protocol (like \"ftp://\") given!"));
+				gtranslator_utils_error_dialog(_("No supported URI protocol (like \"ftp://\") given!"));
 			}
 		}
 	}
@@ -893,7 +880,7 @@ void gtranslator_query_dialog(void)
 
 	if(!domains)
 	{
-		gtranslator_error(_("Couldn't get list of gettext domains!"));
+		gtranslator_utils_error_dialog(_("Couldn't get list of gettext domains!"));
 		return;
 	}
 
