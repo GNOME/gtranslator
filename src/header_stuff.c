@@ -43,6 +43,13 @@ static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
 static void edit_header_changed(GtkWidget * widget, gpointer useless);
 static void language_changed(GtkWidget * widget, gpointer useless);
 
+/*
+ * Prepares the comment to be viewed in the header edit dialog/to be saved
+ *  back to "standard" form.
+ */ 
+gchar *prepare_comment_for_view(gchar *comment);
+gchar *prepare_comment_for_save(gchar *comment);
+
 static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 {
 	regex_t *rx;
@@ -202,7 +209,6 @@ Content-Transfer-Encoding: %s\n",
 
 	/*
 	 * Just copy the comment, and make sure it ends with endline
-	 * TODO: in entry box there should be no #'s
 	 */
 	if(h->comment[strlen(h->comment)-1] == '\n')
 	{
@@ -264,6 +270,12 @@ static void edit_header_apply(GtkWidget * box, gint page_num, gpointer useless)
 	update(ph->prj_name, prj_name);
 	update(ph->prj_version, prj_version);
 	update(ph->comment, prj_comment);
+
+	/*
+	 * Convert the header comment back for save.
+	 */ 
+	ph->comment=prepare_comment_for_save(ph->comment);
+	
 	if (!wants.fill_header) {
 		update(ph->translator, translator);
 		update(ph->tr_email, tr_email);
@@ -312,12 +324,16 @@ void edit_header(GtkWidget * widget, gpointer useless)
 				       label);
 	
 	/*
-	 * Add the GNOME-entry-boxes.
+	 * Prepare the header comment for view and edit in the dialog. 
 	 */
+	ph->comment=prepare_comment_for_view(ph->comment);
+	
 	prj_comment =
 	    attach_text_with_label(prj_page, 0, _("Comments :"), ph->comment,
 	    			   edit_header_changed);
-	gtk_widget_set_usize(prj_comment, 280, 70);
+	
+	gtk_widget_set_usize(prj_comment, 360, 90);
+	
 	prj_name =
 	    attach_entry_with_label(prj_page, 1, _("Project name:"),
 	    			    ph->prj_name, edit_header_changed);
@@ -429,3 +445,74 @@ static void take_my_options_toggled(GtkWidget * widget, gpointer useless)
 	edit_header_changed(widget, useless);
 }
 
+/*
+ * Rip off all '#'s and return the right comment string.
+ */ 
+gchar *prepare_comment_for_view(gchar *comment)
+{
+	GString *mystring=g_string_new("");
+	gchar **stringarray;
+	gint count=0;
+
+	/*
+	 * Split up the comment and let's rip off the '#'s from the
+	 *  comments.
+	 */  
+	stringarray=g_strsplit(comment, "#", 0);
+
+	while(stringarray[count]!=NULL)
+	{
+		/*
+		 * Remove all malformed header comment lines which are like
+		 *  "#: smtp" etc.
+		 */
+		if(strncmp(stringarray[count], ":", 1))
+		{
+			/*
+			 * If there were spaced before the next block (like in
+			 *  "# Hello", strip it out.
+			 */ 
+			mystring=g_string_append(mystring,
+				g_strchug(stringarray[count]));
+		}
+		
+		count++;
+	}
+
+	g_strfreev(stringarray);
+	
+	return mystring->str;
+}
+
+/*
+ * Convert the shows comment "back" to the old form.
+ */
+gchar *prepare_comment_for_save(gchar *comment)
+{
+	GString *mystring=g_string_new("");
+	gchar **stringarray;
+	gint count=0;
+
+	stringarray=g_strsplit(comment, "\n", 0);
+	
+	/*
+	 * Split and re-combine the comment and # characters.
+	 */ 
+	while(stringarray[count]!=NULL)
+	{
+		mystring=g_string_append(mystring, "# ");
+		mystring=g_string_append(mystring, stringarray[count]);
+		mystring=g_string_append(mystring, "\n");
+
+		count++;
+	}
+
+	/*
+	 * Add a single empty line per default to improve readability.
+	 */ 
+	mystring=g_string_append(mystring, "# \n");	
+	
+	g_strfreev(stringarray);
+	
+	return mystring->str;
+}

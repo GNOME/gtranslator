@@ -1081,16 +1081,16 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 
 	/*
 	 * Hm, another way to get immediate syntax highlighting; delete the
-	 *  last 3 chars and reinsert them.
+	 *  last 4 chars and reinsert them.
 	 */
 	ourpos=gtk_editable_get_position(GTK_EDITABLE(trans_box));
 
 	gtk_text_freeze(GTK_TEXT(trans_box));
 
-	if((ourpos-3) >= 0)
+	if((ourpos-4) >= 0)
 	{
 		syntaxtext=g_string_new(gtk_editable_get_chars(
-			GTK_EDITABLE(trans_box), (ourpos-3), ourpos));
+			GTK_EDITABLE(trans_box), (ourpos-4), ourpos));
 	}
 	else
 	{
@@ -1100,10 +1100,10 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 
 	if(syntaxtext->len > 0 )
 	{
-		if((ourpos-3) >= 0)
+		if((ourpos-4) >= 0)
 		{
 			gtk_text_backward_delete(
-				GTK_TEXT(trans_box), 3);
+				GTK_TEXT(trans_box), 4);
 		}
 		else
 		{
@@ -1118,7 +1118,6 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 	}
 		
 	gtk_text_thaw(GTK_TEXT(trans_box));
-
 	
 	g_string_free(syntaxtext, 1);
 }
