@@ -336,7 +336,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	autosave_timeout = gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
  	gtk_widget_set_sensitive(GTK_WIDGET(autosave_timeout), GtrPreferences.autosave);
        	gtranslator_preferences_pack_start_with_label(category_box, autosave_timeout, NULL, 
-						      autosave, _("Autosave interval: "));
+						      autosave, _("Autosave interval:"));
         autosave_with_suffix = gtranslator_preferences_toggle_new(_("Append a suffix to automatically saved files"),
 								  GtrPreferences.autosave_with_suffix,
 								  G_CALLBACK(gtranslator_preferences_dialog_changed));

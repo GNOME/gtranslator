@@ -745,7 +745,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	}
 	gtk_menu_set_active(GTK_MENU(menu), findMenu);
 
-	find_in = gtk_label_new(_("Find in: "));
+	find_in = gtk_label_new(_("Find in:"));
 	option = gtk_option_menu_new();
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(option), menu);
 
