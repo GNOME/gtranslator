@@ -330,7 +330,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Last"),
-                                      _("Go to the next message"), NULL,
+                                      _("Go to the last message"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show (last_button);
 
