@@ -242,7 +242,7 @@ void gtranslator_htmlizer(GtrPo *po, gchar *save_to)
 	 * NOTE: Please do not forget to also "translate" the <b> tags as the
 	 *  project name should be displayed bold on the output pages.
 	 */ 
-	fprintf(fstream, _("Project <b>%s<b> (last po file revision: %s)."),
+	fprintf(fstream, _("Project <b>%s</b> (last po file revision: %s)."),
 		po->header->prj_name,
 		po->header->po_date);
 	
