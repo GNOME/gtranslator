@@ -175,19 +175,19 @@ void create_lists(void)
 				   (gpointer) languages[c].lcode);
 		if (g_list_find_custom
 		    (encodings_list, (gpointer) languages[c].enc,
-		     (GCompareFunc) g_strcasecmp) == NULL)
+		     (GCompareFunc) strcmp) == NULL)
 			encodings_list =
 			    g_list_prepend(encodings_list,
 					   (gpointer) languages[c].enc);
 		if (g_list_find_custom
 		    (group_emails_list, (gpointer) languages[c].group,
-		     (GCompareFunc) g_strcasecmp) == NULL)
+		     (GCompareFunc) strcmp) == NULL)
 			group_emails_list =
 			    g_list_prepend(group_emails_list,
 					   (gpointer) languages[c].group);
 		if (g_list_find_custom
 		    (bits_list, (gpointer) languages[c].bits,
-		     (GCompareFunc) g_strcasecmp) == NULL)
+		     (GCompareFunc) strcmp) == NULL)
 			bits_list =
 			    g_list_prepend(bits_list,
 					   (gpointer) languages[c].bits);
@@ -196,13 +196,13 @@ void create_lists(void)
 	/*
 	 * Arrange the resulting lists.
 	 */
-	languages_list = g_list_reverse(languages_list);
+	languages_list = g_list_sort(languages_list, (GCompareFunc) strcoll);
 	lcodes_list = g_list_reverse(lcodes_list);
 	group_emails_list =
-	    g_list_sort(group_emails_list, (GCompareFunc) g_strcasecmp);
+	    g_list_sort(group_emails_list, (GCompareFunc) strcmp);
 	encodings_list =
-	    g_list_sort(encodings_list, (GCompareFunc) g_strcasecmp);
-	bits_list = g_list_sort(bits_list, (GCompareFunc) g_strcasecmp);
+	    g_list_sort(encodings_list, (GCompareFunc) strcmp);
+	bits_list = g_list_sort(bits_list, (GCompareFunc) strcmp);
 }
 
 void prefs_box(GtkWidget  * widget, gpointer useless)
@@ -530,7 +530,7 @@ static void prefs_box_changed(GtkWidget  * widget, gpointer flag)
 		current =
 		    gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(lcode)->entry));
 		while (languages[c].name != NULL) {
-			if (!g_strcasecmp(current, languages[c].lcode)) {
+			if (!strcmp(current, languages[c].lcode)) {
 				set_text(mime_type, enc);
 				set_text(encoding, bits);
 				set_text(lg_email, group);
