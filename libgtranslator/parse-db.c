@@ -87,7 +87,7 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 			/**
 			* Set the language name.
 			**/
-			GTR_DB_LANG(db)=g_strdup(sarr[0]);
+			GTR_DB_LANG(db)=sarr[0];
 			/**
 			* Recurse within the same function with the new language  word ..
 			**/

@@ -14,6 +14,7 @@
 *
 **/
 
+#include <sys/param.h>
 #include <libgtranslator/team-handle.h>
 
 /**
@@ -30,7 +31,7 @@ GtranslatorTeamDatabase *gtranslator_open_team_db(gchar *team_db_file)
 	/**
 	* Some local variables.
 	**/
-	gchar			*filename=g_new0(gchar,1);
+	gchar 			filename[MAXPATHLEN+1];
 	xmlDocPtr		doc;
 	xmlNodePtr		node;
 	GtranslatorTeamDatabase *db=g_new(GtranslatorTeamDatabase,1);
@@ -86,20 +87,6 @@ GtranslatorTeamDatabase *gtranslator_open_team_db(gchar *team_db_file)
 	* Open the nodes.
 	**/
 	node=doc->xmlRootNode->xmlChildrenNode;
-	/**
-	* Did we get any entries?
-	**/
-	if(!node)
-	{
-		/**
-		* Print out a nice warning message and exit
-		*  from here.
-		**/
-		g_warning(
-		_("The team database file `%s' doesn't contain any entries!"),
-			filename);
-		return NULL;
-	}
 	/**
 	* Now we can get the serial for the GtranslatorTeamDatabase.
 	**/

@@ -40,7 +40,7 @@ struct GtranslatorPreferencesDialogInternal
 	/**
 	* The main widget/window title
 	**/
-	const gchar	*title;
+	gchar		*title;
 	/**
 	* The leftern side of the widget,
 	*  named ofter it's purpose :-)
@@ -51,12 +51,6 @@ struct GtranslatorPreferencesDialogInternal
 	*  content.
 	**/
 	GtkWidget	*content;
-	/**
-	* The buttons.
-	**/
-	GtkWidget 	*apply_button,
-			*ok_button,
-			*cancel_button;
 	/**
 	* The different pages as a GList "union".
 	**/
@@ -80,7 +74,7 @@ struct GtranslatorPreferencesDialogInternal
 * Create a new dialog for us :-)
 **/
 GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
-	const gchar *title);
+	gchar *title);
 
 /**
 * Hide the preferences dialog.

@@ -16,6 +16,7 @@
 
 #include <libgtranslator/gtranslator-preferences-dialog.h>
 #include <libgnomeui/gnome-stock.h>
+#include <libgnomeui/gnome-dialog.h>
 
 /**
 * The source for this new GtranslatorPreferencesDialog widget.
@@ -28,27 +29,26 @@
 	_("libgtranslator -- GtranslatorPreferencesDialog")
 
 /**
-* The generally used "new" widget
-**/
-GtranslatorPreferencesDialog 	*window;
-
-/**
 * The pane splitting up the index and the
 *  content window.
 **/
 GtkWidget			*pane;
 
 /**
+* The "new" widget.
+**/
+GtranslatorPreferencesDialog	*window;
+
+/**
 * Create and return the new widget.
 **/
 GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
-	const gchar *title)
+	gchar *title)
 {
 	/**
 	* Partial, private widgets.
 	**/
-	GtkWidget	*button_split,
-			*frame;
+	GtkWidget	*frame;
 	/**
 	* Check if we'd got a title for the widget and warn the
 	*  user that there's no current title to use, so we use
@@ -57,25 +57,29 @@ GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
 	if(!title)
 	{
 		g_warning(_("No title set for a new GtranslatorPreferencesDialog widget!\n\
-		Using the default title `%s'..."),
+Using the default title `%s'..."),
 			GTRANSLATOR_PREFERENCES_DIALOG_DEFAULT_TITLE);
 		/**
 		* Set the title.
 		**/
-		title=GTRANSLATOR_PREFERENCES_DIALOG_DEFAULT_TITLE;
+		sprintf(window->title, "%s", GTRANSLATOR_PREFERENCES_DIALOG_DEFAULT_TITLE);
+	}
+	else
+	{
+		sprintf(window->title, "%s", title);
 	}
 	/**
 	* Create the new window.
 	**/
-	window->prefs_window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	window->prefs_window=gnome_dialog_new(window->title, 
+		GNOME_STOCK_BUTTON_APPLY,
+		GNOME_STOCK_BUTTON_OK,
+		GNOME_STOCK_BUTTON_CANCEL,
+		NULL);
 	/**
-	* Now set up the window title.
+	* Create the (for now) GtkPane.
 	**/
-	gtk_window_set_title(GTK_WINDOW(window->prefs_window), title);
-	/**
-	* Set the modal status.
-	**/
-	gtk_window_set_modal(GTK_WINDOW(window->prefs_window), TRUE);
+	pane=gtk_vpaned_new();	
 	/**
 	* Create the clist, set the options, create the frame and
 	*  insert it into the pane.
@@ -85,33 +89,9 @@ GtranslatorPreferencesDialog *gtranslator_preferences_dialog_new(
 	gtk_paned_add1(GTK_PANED(pane), window->index);
 	gtk_paned_add2(GTK_PANED(pane), frame);
 	/**
-	* Now get the three default buttons.
+	* Add the pane to the main window.
 	**/
-	window->apply_button=gnome_stock_button(GNOME_STOCK_BUTTON_APPLY);
-	window->ok_button=gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	window->cancel_button=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	/**
-	* Create the new vbox.
-	**/
-	button_split=gtk_vbox_new(FALSE, 1);
-	/**
-	* Add the pane and it's contents.
-	**/
-	gtk_box_pack_start(GTK_BOX(button_split), GTK_WIDGET(pane),
-		FALSE, FALSE, 1);
-	/**
-	* Add the buttons to the new vbox.
-	**/
-	gtk_box_pack_end(GTK_BOX(button_split), window->apply_button,
-		FALSE, FALSE, 1);
-	gtk_box_pack_end(GTK_BOX(button_split), window->ok_button,
-		FALSE, FALSE, 1);
-	gtk_box_pack_end(GTK_BOX(button_split), window->cancel_button,
-		FALSE, FALSE, 1);
-	/**
-	* Add the vbox into the main window.
-	**/
-	gtk_container_add(GTK_CONTAINER(window->prefs_window), button_split);
+	gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(window->prefs_window)->vbox), pane);
 	/**
 	* Check the widget with an assertion..
 	**/
