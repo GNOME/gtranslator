@@ -7,7 +7,6 @@ SUBDIRS = backends pixmaps
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
-	$(GNOME_INCLUDEDIR) \
 	$(GAL_CFLAGS) \
 	$(VFS_CFLAGS) \
 	$(GCONF_CFLAGS) \
@@ -85,8 +84,6 @@ gtranslator_SOURCES = \
 	views.c views.h
 
 gtranslator_LDADD = \
-	$(GNOME_LIBDIR) \
-	$(GNOMEUI_LIBS) \
 	$(INTLLIBS) \
 	$(GCONF_LIBS) \
 	$(VFS_LIBS) \

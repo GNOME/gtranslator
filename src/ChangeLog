@@ -1,5 +1,9 @@
 2001-08-20  Fatih Demir <kabalak@gtranslator.org>
 
+	* Makefile.am: Removed the $(GNOMEUI_LIBS) etc. inclusion during the
+		linkage of gtranslator -- the GAL cflags and libs do already
+		 include the GNOME(UI) cflags and libs.
+
 	* messages-table.c/.h: Removed the useless hide/show/toggle functions.
 
 2001-08-19  Fatih Demir <kabalak@gtranslator.org>
