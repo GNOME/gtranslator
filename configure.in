@@ -115,43 +115,24 @@ AC_SUBST(GAL_CFLAGS)
 AC_SUBST(GAL_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Check for GConf >= 0.9 and the stuff around it ..
+dnl Check for GConf >= 1.0 and the stuff around it..
 dnl -------------------------------------------------------------------
-
-GCONF_CFLAGS=""
-GCONF_LIBS=""
-
-try_gconf=true
-AC_ARG_WITH(gconf,
-	[  --{with,without}-gconf    Compile with GConf support or without it],
-	if test x$withval = xno; then
-		try_gconf=false
-	fi
-)
-
 gconf_is_present=yes
 if $try_gconf; then
-	AM_PATH_GCONF(0.9.0,,gconf_is_present=no,gconf-gtk)
+	AM_PATH_GCONF(1.0,,gconf_is_present=no,gconf-gtk)
 	if test "x$gconf_is_present" = "xno" ; then
-		AC_MSG_WARN([
+		AC_MSG_ERROR([
 "-----------------------------------------------------------------------------"
-"No recent enough GConf found."
+"No GConf >= 1.0 found! GConf is now mandatory for gtranslator..."
 "-----------------------------------------------------------------------------"])
 	else
 		GCONF_CFLAGS="$GCONF_CFLAGS -DGCONF_IS_PRESENT"
 	fi
-else
-	echo "-----------------------------------------------------------------------------"
-	echo "Not checking for GConf"
-	echo "-----------------------------------------------------------------------------"
-	gconf_is_present=no
 fi
-
 AC_SUBST(GCONF_CFLAGS)
-AC_SUBST(GCONF_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Check for the window-icon feature of gnome-libs > 1.0.59
+dnl Check for the window-icon feature of gnome-libs >= 1.0.60.
 dnl -------------------------------------------------------------------
 MY_CFLAGS=$CFLAGS
 MY_LIBS=$LIBS
@@ -186,115 +167,6 @@ if test "x$enable_mime_bind" = "xyes" ; then
 fi
 AC_MSG_RESULT($enable_mime_bind)
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
-
-dnl -------------------------------------------------------------------
-dnl Check for nautilus and try to get out all the flags for the
-dnl  nautilus-view.
-dnl -------------------------------------------------------------------
-build_nv=no
-PRE_LIBS="$LIBS"
-NAUTILUS_CFLAGS=
-NAUTILUS_LIBS=
-
-AC_MSG_CHECKING([whether nautilus-gtranslator-view should be build])
-AC_ARG_ENABLE(nautilus-view,
-[  --enable-nautilus-view        Enable nautilus-gtranslator-view], build_nv=yes,)
-
-dnl -------------------------------------------------------------------
-dnl Check if the --enable switch had been given.
-dnl -------------------------------------------------------------------
-
-if test "x${build_nv}" = "xno" ; then
-	AC_MSG_RESULT(no)
-else
-	nautilus_prefix=`which nautilus|sed -e s%/bin/nautilus%%g`
-
-	if test "z${nautilus_prefix}" = "z"; then
-		AC_MSG_RESULT([
-"-----------------------------------------------------------------------------"
-"No Nautilus prefix could be determined -- not building nautilus-gtranslator-view"
-"-----------------------------------------------------------------------------"])
-		build_nv=no
-	else
-		build_nv=no
-		mycheck_function="nautilus_view_standard_main_multi"
-		AC_MSG_RESULT([
-"-----------------------------------------------------------------------------"
-"${nautilus_prefix} as Nautilus prefix determined: checking for Nautilus libraries"
-"-----------------------------------------------------------------------------"])
-		LIBS="`gnome-config --libs gnome gnomeui bonobo bonobox gal vfs` \
-		-L${nautilus_prefix}/lib -lnautilus"
-		AC_CHECK_LIB(nautilus, ${mycheck_function},
-			build_nv=yes,
-			AC_MSG_WARN([
-"-----------------------------------------------------------------------------"
-"libnautilus does not contain ${mycheck_function}: Not building Nautilus view"
-"-----------------------------------------------------------------------------"]))
-	fi
-
-	dnl -------------------------------------------------------------------
-	dnl Get the nautilus compile flags for the view..
-	dnl -------------------------------------------------------------------
-	if test "x$build_nv" = "xyes" ; then
-		AC_MSG_CHECKING([for necessary Nautilus headers in ${nautilus_prefix}/include/libnautilus])
-		if test -f "${nautilus_prefix}/include/libnautilus/nautilus-view.h" -a \
-			-f "${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h" -a \
-			-f "${nautilus_prefix}/include/libnautilus/nautilus-bonobo-ui.h" ; then
-			AC_MSG_RESULT(found)
-			AC_MSG_CHECKING([for nautilus_view_standard_main "version"])
-			dnl ---------------------------------------------------
-			dnl Check for the arguments of the Nautilus view 
-			dnl  creation function from libnautilus.
-			dnl ---------------------------------------------------
-			if grep -sq gettext_package_name \
-				"${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h"; then
-				AC_MSG_RESULT(newer version found)
-				AC_DEFINE(NEWER_NV_STANDARD_MAIN)
-			else
-				AC_MSG_RESULT(older version found)
-			fi	
-		else
-			AC_MSG_WARN([
-"-----------------------------------------------------------------------------"
-"Could not find the necessary headers of nautilus: please install also the headers"
-"dev/devel packages of nautilus and reconfigure gtranslator if you also want to"
-"see the nautilus-gtranslator-view in action."
-"-----------------------------------------------------------------------------"])
-			build_nv=no
-		fi
-	fi
-fi
-
-dnl -------------------------------------------------------------------
-dnl Check for the needed GtkHTML flags if the nautilus-view should be
-dnl  compiled at all and set the options/flags.
-dnl -------------------------------------------------------------------
-if test "%$build_nv" = "%yes" ; then
-	AC_MSG_CHECKING([for GtkHTML])
-	
-	if gnome-config --libs gtkhtml 2>&1 >/dev/null ; then
-		AC_MSG_RESULT([found])
-		
-		NAUTILUS_CFLAGS="`gnome-config --cflags oaf vfs bonobo bonobox gtkhtml` \
-		-I${nautilus_prefix}/include/libnautilus \
-		`gconf-config --cflags gconf-gtk`"
-		NAUTILUS_LIBS="`gnome-config --libs oaf vfs bonobo bonobox gtkhtml` \
-		-L${nautilus_prefix}/lib -lnautilus \
-		`gconf-config --libs gconf-gtk`"
-	else
-		AC_MSG_RESULT([missing])
-		
-		AC_MSG_ERROR([
-"-----------------------------------------------------------------------------"	
-"GtkHTML couldn not be found; it is mandatory for building the nautilus view."
-"-----------------------------------------------------------------------------"])
-	fi
-fi
-
-LIBS="$PRE_LIBS"
-AC_SUBST(NAUTILUS_CFLAGS)
-AC_SUBST(NAUTILUS_LIBS)
-AM_CONDITIONAL(BUILD_NV, test x$build_nv = xyes)
 
 dnl -------------------------------------------------------------------
 dnl Check for Scrollkeeper and set the corresponding conditional var if
@@ -362,8 +234,6 @@ intl/Makefile
 macros/Makefile
 man/Makefile
 man/gtranslator.1
-man/nautilus-gtranslator-view.1
-nautilus-view/Makefile
 po/Makefile.in
 src/Makefile
 src/backends/Makefile
@@ -390,8 +260,6 @@ CFLAGS                 	  :	${CFLAGS}
 GConf based config	  :	${gconf_is_present:-no}
 
 debug friendly build	  :	${enable_debug:-no}
-
-nautilus-gtranslator-view :	${build_nv:-no}
 
 Scrollkeeper integration  :	${sc_present:-no}
 ------------------------------------------------------------------
