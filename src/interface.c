@@ -50,9 +50,9 @@ static GnomeUIInfo the_file_menu[] =
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
           GDK_C, GDK_MOD1_MASK, NULL
         },
-        GNOMEUIINFO_MENU_OPEN_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_OPEN_ITEM (open_file_show, NULL),
         GNOMEUIINFO_MENU_SAVE_ITEM (NULL, NULL),
-        GNOMEUIINFO_MENU_SAVE_AS_ITEM (NULL, NULL),
+        GNOMEUIINFO_MENU_SAVE_AS_ITEM (save_file_as_show, NULL),
         GNOMEUIINFO_SEPARATOR,
         GNOMEUIINFO_MENU_EXIT_ITEM (GTK_SIGNAL_FUNC(gtk_main_quit), NULL),
         GNOMEUIINFO_END
@@ -125,7 +125,7 @@ static GnomeUIInfo the_help_menu[] =
         {
           GNOME_APP_UI_ITEM, N_("_Online help"),
           NULL,
-          NULL, NULL, NULL,
+          call_help_viewer, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
           GDK_F1, 0, NULL
         },

@@ -6,7 +6,13 @@
 
 msg_db_dir = $(datadir)/gtranslator/
 
-INCLUDES = \
+#ifdef EMACS_LOVER
+extra_flags = -DEMACS_LOVER=2000
+#else
+extra_flags = 
+#endif
+
+INCLUDES = $(extra_flags) \
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS) \
 	-DMSG_DB_DIR=\"$(msg_db_dir)\"

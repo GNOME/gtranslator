@@ -16,6 +16,7 @@
 
 #include "interface.h"
 #include "support.h"
+#include "prefs.h" 
 
 int main(int argc,char *argv[])
 {
@@ -25,6 +26,7 @@ int main(int argc,char *argv[])
 	textdomain (PACKAGE);
 #endif
 	gnome_init ("gtranslator", VERSION, argc, argv);
+	read_prefs();
 	/**
 	* The following code was added by Glade to create one of each component
 	* (except popup menus), just so that you see something after building

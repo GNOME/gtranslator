@@ -54,9 +54,9 @@ void open_file_create()
 	of_dlg_cancel=GTK_FILE_SELECTION(of_dlg)->cancel_button;
 	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(of_dlg));
 	gtk_signal_connect(GTK_OBJECT(of_dlg_ok),"clicked",
-	NULL,NULL);
+		GTK_SIGNAL_FUNC(parse_the_file),(gpointer)gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg)));
 	gtk_signal_connect(GTK_OBJECT(of_dlg_cancel),"clicked",
-	GTK_SIGNAL_FUNC(open_file_hide),NULL);
+		GTK_SIGNAL_FUNC(open_file_hide),NULL);
 }
 
 void open_file_show()
@@ -85,9 +85,9 @@ void save_file_as_create()
 	sfa_dlg_cancel=GTK_FILE_SELECTION(sfa_dlg)->cancel_button;
 	gtk_file_selection_show_fileop_buttons(GTK_FILE_SELECTION(sfa_dlg));
 	gtk_signal_connect(GTK_OBJECT(sfa_dlg_ok),"clicked",
-	NULL,NULL);
+		NULL,NULL);
 	gtk_signal_connect(GTK_OBJECT(sfa_dlg_cancel),"clicked",
-	GTK_SIGNAL_FUNC(save_file_as_hide),NULL);
+		GTK_SIGNAL_FUNC(save_file_as_hide),NULL);
 }
 
 void save_file_as_show()

@@ -46,10 +46,19 @@ GtkWidget *warn_if_fuzzy,*warn_if_untranslated;
 **/
 
 /**
+* These are the variables set by the prefs-box ( globally ones )
+**/
+gchar *author,*email,*language,*mime,*enc,*lc,*lg,*comments;
+gboolean if_use_msg_db,if_add_additional_comments,if_warn_if_fuzzy,
+	if_warn_if_no_change,if_dont_save_unchanged_files,
+	if_warn_if_untranslated;
+
+/**
 * The first one creates the preferences-box and the others show/hide it
 **/
 void prefs_box();
 void prefs_box_show(GtkWidget *widget,gpointer useless);
 void prefs_box_hide(GtkWidget *widget,gpointer useless);
-void prefs_box_changed(GtkWidget *widget,gpointer useless);
+void prefs_box_changed(GtkWidget *widget,gpointer chitem);
 void prefs_box_apply(GtkWidget *widget,gpointer more_useless);
+void read_prefs();

@@ -15,6 +15,7 @@
 
 #include "interface.h"
 #include "support.h"
+#include "parse.h"
 
 /**
 * The widgets for the dialogs & the functions to call them .

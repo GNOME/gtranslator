@@ -12,9 +12,7 @@
 #include "parse.h"
 #include <errno.h>
 #include <unistd.h>
-#ifdef IT_WORKS
-	#include "messages.h"
-#endif // IT_WORKS
+#include "gtr_dialogs.h"
 
 /**
 * The file-stream for the file-check
@@ -35,6 +33,39 @@ void check_file(FILE *stream)
 		**/
 		g_error(_("\nThe file stream is lost !\nError No. %i .\n"),errno);
 	}
+}
+
+/**
+* The new routine
+**/
+void parse_the_file(GtkWidget *widget,gpointer filename)
+{
+	/**
+	* A stat-structure ...
+	**/
+	struct stat file_info;
+	/**
+	* Some variables ..
+	**/
+	gint file_size;
+	gtk_widget_hide(of_dlg);
+	po_file=(gchar *)filename;
+	/**
+	* If there's no selection ( is this possible within a Gtk+ fileselection ? )
+	**/
+	if((!po_file)||(strlen(po_file)<=0))
+	{
+		g_error(_("There's no file to open or I couldn't understand `%s' !"),po_file);
+	}	
+	/**
+	* Stat the files
+	**/
+	if(stat(po_file,&file_info))
+	{
+		g_error(_("Couldn't stat the file `%s' !"),po_file);
+	}
+	file_size=file_info.st_size;
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),po_file);
 }
 
 /**

@@ -30,6 +30,11 @@
 int count,max_count;
 
 /**
+* The file's name
+**/
+gchar *po_file;
+
+/**
 * A gboolean for the silly question if a file is open ...
 **/
 
@@ -60,6 +65,11 @@ void check_file(FILE *);
 * ; will be removed soon 
 **/
 void parse(char *);
+
+/**
+* The new method
+**/
+void parse_the_file(GtkWidget *widget,gpointer filename);
 
 /**
 * Get next msgid 
