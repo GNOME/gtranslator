@@ -132,6 +132,10 @@ static GtrLanguage languages[] = {
 	 N_("English/USA"), "en", "iso-8859-1",
 	 "en@li.org", "8bit"
 	},
+	{ 
+	 N_("Esperanto"), "eo", "iso-8859-3",
+	 "eo@li.org", "8bit"
+	},
 	{
 	 N_("Estonian"), "et", "iso-8859-15",
 	 "et@li.org", "8bit"
@@ -234,7 +238,7 @@ static GtrLanguage languages[] = {
 	},
 	{
 	 N_("Slovak"), "sk", "iso-8859-2",
-	 "", "8bit"
+	 "sk-i18n@linux.sk", "8bit"
 	},
 	{
 	 N_("Slovenian"), "sl", "iso-8859-2",
