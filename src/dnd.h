@@ -30,7 +30,7 @@ guint dnd_type;
 /**
 * The target formats
 **/
-static GtkTargetEntry dragtypes[] = {
+static  GtkTargetEntry dragtypes[] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
 	{ "text/plain", 0, TARGET_NETSCAPE_URL },
 	{ "text/plain", 0, TARGET_TEXT_PLAIN }

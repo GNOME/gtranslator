@@ -545,8 +545,38 @@ void clean_text_boxes()
 static void update_appbar(gint pos)
 {
 	gchar *str;
+	GtrMsg *msg;
 	gnome_appbar_pop(GNOME_APPBAR(appbar1));
-	str = g_strdup_printf(_("Message: %d / %d"), pos + 1, po->length);
+	/**
+	* Assign the first part.
+	**/
+	str=g_strdup_printf(_("Message %d / %d / Status:"), pos + 1, po->length);
+	/**
+	* Get the message.
+	**/
+	msg=GTR_MSG(po->current->data);
+	/**
+	* And append according to the message status the status name.
+	**/
+	if(msg->status & GTR_MSG_STATUS_FUZZY)
+	{
+		str = g_strdup_printf("%s %s", str, _("Fuzzy"));
+	}
+	if(msg->status & GTR_MSG_STATUS_TRANSLATED)
+	{
+		str = g_strdup_printf("%s %s", str, _("Translated"));
+	}
+	else
+	{
+		if(msg->status & GTR_MSG_STATUS_STICK)
+		{
+			str = g_strdup_printf("%s %s", str, _("Stick"));
+		}
+		else
+		{
+			str = g_strdup_printf("%s %s", str, _("Untranslated"));
+		}
+	}
 	gnome_appbar_push(GNOME_APPBAR(appbar1), str);
 	g_free(str);
 }

@@ -32,10 +32,12 @@ static gchar *gtranslator_geometry = NULL;
 static struct poptOption gtranslator_options[] = {
 	{
 	 NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
-	 0, NULL, NULL},
+	 0, NULL, NULL
+	},
 	{
 	 "geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
-	 0, N_("Specifies the main-window geometry"), "GEOMETRY"},
+	 0, N_("Specifies the main-window geometry"), "GEOMETRY"
+	},
 	POPT_AUTOHELP {NULL}
 };
 
