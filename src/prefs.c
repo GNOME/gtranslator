@@ -189,7 +189,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 */
 	unmark_fuzzy =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 0,
-		_("Set non-fuzzy status, if message was changed"),
+		_("Remove fuzzy status if message changed"),
 		GtrPreferences.unmark_fuzzy, gtranslator_preferences_dialog_changed);
 	warn_if_fuzzy =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 1,
@@ -216,7 +216,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 * The fourth page with the popup menu & the dot_char.
 	 */
 	use_dot_char=gtranslator_utils_attach_toggle_with_label(fourth_page, 0,
-		_("Use free space indicating special character"),
+		_("Use special character to indicate free space"),
 		GtrPreferences.dot_char, gtranslator_preferences_dialog_changed);
 	enable_popup_menu=gtranslator_utils_attach_toggle_with_label(fourth_page, 2,
 		_("Enable the popup menu"),
@@ -228,7 +228,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Enable the functionality to remove all translations from a po file"),
 		GtrPreferences.rambo_function, gtranslator_preferences_dialog_changed);
 	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
-		_("Delete the compile result file (named \"project.gmo\")"),
+		_("Delete compiled files (e.g. \"project.gmo\")"),
 		GtrPreferences.sweep_compile_file, gtranslator_preferences_dialog_changed);
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 6,
 		_("Save geometry on exit & restore it on startup"),
@@ -241,11 +241,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 * The fifth page with the Recent files options.
 	 */
 	max_history_entries=gtranslator_utils_attach_spin_with_label(fifth_page, 0, 
-		_("Maximally showed recent files:"), 3, 15, 
+		_("Maximum number of recent files shown in the recent files' list:"), 3, 15, 
 		GtrPreferences.max_history_entries, gtranslator_preferences_dialog_changed);
 	
 	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
-		_("Check every recent file before listing it up"),
+		_("Check recent files before showing in recent files' list"),
 		GtrPreferences.check_recent_file, gtranslator_preferences_dialog_changed);
 	instant_spell_checking=gtranslator_utils_attach_toggle_with_label(fifth_page, 2,
 		_("Instant spell checking"),
@@ -329,7 +329,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 * The seventh page of the prefs-box: autosaving options.
 	 */
 	autosave=gtranslator_utils_attach_toggle_with_label(seventh_page, 0,
-		_("Save the po file automatically after a period of time"),
+		_("Save po files automatically at regular intervals"),
 		GtrPreferences.autosave, gtranslator_preferences_dialog_changed);
 	
 	autosave_with_suffix=gtranslator_utils_attach_toggle_with_label(seventh_page, 1,
@@ -352,7 +352,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		GtrPreferences.show_messages_table, gtranslator_preferences_dialog_changed);
 
 	collapse_translated_entries=gtranslator_utils_attach_toggle_with_label(eighth_page, 1,
-		_("Collapse all translated entries per default"),
+		_("Collapse translated entries by default"),
 		GtrPreferences.collapse_translated, gtranslator_preferences_dialog_changed);
 
 	use_own_mt_colors=gtranslator_utils_attach_toggle_with_label(eighth_page, 2,
@@ -675,9 +675,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer useless)
 {
 	gnome_app_message(GNOME_APP(gtranslator_application), _("\
-With the Preferences box you can define some variables\n\
-with which you can make gtranslator make more work\n\
-like YOU want it to work!"));
+The Preferences box allows you to customise gtranslator\n\
+to work in ways you find comfortable and productive."));
 }
 
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)

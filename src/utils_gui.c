@@ -350,7 +350,7 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
 	if(file == NULL)
 	{
 		gtranslator_utils_error_dialog(
-			_("You don't have read permissions on file `%s'"),
+			_("You are not permitted to access file '%s'."),
 				po_file->filename);
 
 		return FALSE;
@@ -368,9 +368,9 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
 			 *  the fact of lacking write permissions.
 			 */  
 			error_message=g_strdup_printf(
-				_("You don't have write permissions on file `%s'.\n\
-This means that you should save it as a copy to a local directory\n\
-of your choice."),
+				_("You do not have permission to modify file '%s'.\n\
+Please save a new copy in a directory where\n\
+you have write permission."),
 				po_file->filename);
 			gnome_app_warning(GNOME_APP(gtranslator_application), error_message);
 
@@ -443,12 +443,12 @@ gboolean gtranslator_utils_check_program(const gchar *program_name,
 		if(type_int==0)
 		{
 			warning_message=g_strdup_printf(
-				_("The necessary decompression program `%s' is missing!"), program_name);
+				_("The necessary decompression program `%s' is not installed!"), program_name);
 		}
 		else
 		{
 			warning_message=g_strdup_printf(
-				_("The necessary compression program `%s' is missing!"), program_name);
+				_("The necessary compression program `%s' is not installed!"), program_name);
 		}
 
 		gnome_app_warning(GNOME_APP(gtranslator_application), warning_message);

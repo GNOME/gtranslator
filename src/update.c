@@ -110,7 +110,7 @@ void update(GtkWidget *widget, gpointer useless)
 	if((res >> 8)==200)
 	{
 		gnome_app_message(GNOME_APP(gtranslator_application),
-			_("An update caused no changes."));
+			_("Po file is uptodate."));
 	}
 	else
 	{

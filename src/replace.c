@@ -170,7 +170,7 @@ void gtranslator_replace_run(GtrReplace *replace)
 	}
 	else
 	{
-		gnome_app_warning(GNOME_APP(gtranslator_application), _("No replace made!"));
+		gnome_app_warning(GNOME_APP(gtranslator_application), _("No replacements made!"));
 	}
 }
 

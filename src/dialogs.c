@@ -473,7 +473,7 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 	 * Here the default should just be 1 -- the "No" button!
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 1);
-	gtranslator_dialog_show(&dialog, _("gtranslator -- remove all translations"));
+	gtranslator_dialog_show(&dialog, _("gtranslator -- confirm removal of all translations"));
 
 	/*
 	 * Run the dialog!
@@ -487,7 +487,7 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 		 *  again for any idiot user input in the previous case.
 		 */
 		dialog=gnome_message_box_new(
-			_("Are you really sure to remove ALL translations from this po file?"),
+			_("Are you sure you want to remove ALL translations from this po file?"),
 				GNOME_MESSAGE_BOX_QUESTION,
 				GNOME_STOCK_BUTTON_YES,
 				GNOME_STOCK_BUTTON_NO,
@@ -498,7 +498,7 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 		 */
 		gnome_dialog_set_default(GNOME_DIALOG(dialog), 1);
 		gtranslator_dialog_show(&dialog, 
-			_("gtranslator -- remove all translations confirmation dialog"));
+			_("gtranslator -- confirm removal of all translations"));
 		reply=gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
 
 		if(reply==GNOME_YES)
@@ -681,7 +681,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	/* Make Find button the default */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	
-	label = gtk_label_new(_("Enter your desired search string:"));
+	label = gtk_label_new(_("Enter search string:"));
 	findy = gnome_entry_new("FINDY");
 	gnome_dialog_editable_enters(GNOME_DIALOG(dialog),
 		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(findy))));
@@ -1039,8 +1039,8 @@ void gtranslator_rescue_file_dialog(void)
 	gtranslator_config_close();
 
 	recovery_message=g_strdup_printf(_("Open recovery file for `%s'?\n\
-It was saved by gtranslator before gtranslator got closed.\n\
-Possibly it contains hard pieces of work?!\n\
+It was saved by gtranslator before gtranslator last closed\n\
+and may contain your hard work!\n\
 Saying \"No\" will delete the crash recovery file."),
 		original_filename);
 	

@@ -543,7 +543,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	 */
 	take_my_options = 
 	    gtk_check_button_new_with_label(
-		_("Use my options to fill the following entries."));
+		_("Use my options to complete the following entries:"));
 	gtk_box_pack_start(GTK_BOX(lang_vbox), take_my_options, TRUE, TRUE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(take_my_options), 
 				     GtrPreferences.fill_header);

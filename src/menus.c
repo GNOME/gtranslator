@@ -185,7 +185,7 @@ GnomeUIInfo the_messages_menu[] = {
 	},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Back"),
-	 N_("Go one message back"),
+	 N_("Move back one message"),
 	 gtranslator_message_go_to_previous, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BACK,
 	 GDK_Left, GDK_CONTROL_MASK, NULL
@@ -193,7 +193,7 @@ GnomeUIInfo the_messages_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_Next"),
-	 N_("Go one message forward"),
+	 N_("Move forward one message"),
 	 gtranslator_message_go_to_next, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
 	 GDK_Right, GDK_CONTROL_MASK, NULL
@@ -329,12 +329,12 @@ GnomeUIInfo the_navibar[] = {
 			       gtranslator_message_go_to_first,
 			       GNOME_STOCK_PIXMAP_FIRST),
 	GNOMEUIINFO_ITEM_STOCK(N_("Back"),
-			       N_("Go one message back"),
+			       N_("Move back one message"),
 			       gtranslator_message_go_to_previous,
 			       GNOME_STOCK_PIXMAP_BACK),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
-			       N_("Go one message forward"),
+			       N_("Move forward one message"),
 			       gtranslator_message_go_to_next,
 			       GNOME_STOCK_PIXMAP_FORWARD),
 	GNOMEUIINFO_ITEM_STOCK(N_("Last"),
