@@ -1,3 +1,15 @@
+2002-02-17  Fatih Demir <kabalak@gtranslator.org>
+
+	* syntax.c & utils_gui.c: Adept for the "special char" changes.
+
+	* runtime-config.c/.h: Added a "special_char" field to this structure;
+		the mid dot or other special char get's defined once on new
+		 creation of the GtrRuntimeConfig structure now; I followed
+		  Pablo's suggestion with small changes.
+
+	* Makefile.am & zpmd.h: Removed this old-style file -- the mid dot or
+		"special char" is now in the "GtrRuntimeConfig" structure.
+
 2002-02-16  Fatih Demir <kabalak@gtranslator.org>
 
 	* zpmd.h: Define the '^' to be translatable via _("^")[0] -- one never
