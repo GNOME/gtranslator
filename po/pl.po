@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2001-09-10 12:24+0200\n"
-"PO-Revision-Date: 2001-09-10 12:54+0200\n"
+"POT-Creation-Date: 2001-10-05 21:44+0200\n"
+"PO-Revision-Date: 2001-10-05 21:55+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -751,6 +751,14 @@ msgid "Welsh"
 msgstr "Walijski"
 
 #: src/main.c:1
+msgid "Auto translate the po file & exit"
+msgstr "Automatycznie t³umaczy plik po i koñczy"
+
+#: src/main.c:1 src/main.c:1
+msgid "FILENAME"
+msgstr "NAZWA"
+
+#: src/main.c:1
 msgid "Show build information/specifications"
 msgstr "Wy¶wietla informacje o wersji"
 
@@ -765,10 +773,6 @@ msgstr "GEOMETRIA"
 #: src/main.c:1
 msgid "Learn the file completely & exit"
 msgstr "Dodaje do bufora t³umaczenia z pliku i koñczy pracê"
-
-#: src/main.c:1
-msgid "FILENAME"
-msgstr "NAZWA"
 
 #: src/main.c:1
 msgid "Don't load any backend modules"
@@ -1154,6 +1158,16 @@ msgstr "Nie ma wiêcej niepewnych t³umaczeñ."
 msgid "All messages seem to be translated."
 msgstr "Wszystkie komunikaty s± przet³umaczone."
 
+#: src/messages-table.c:1
+msgid "Appropriate match:"
+msgstr "Odpowiadaj±ce t³umaczenie:"
+
+#: src/messages-table.c:1
+msgid "Found nothing appropriate in the personal learn buffer."
+msgstr ""
+"Nie znaleziono ¿adnego odpowiednika w osobistym buforze zapamiêtanych "
+"t³umaczeñ."
+
 #.
 #. * The `%i' format stands for the number of
 #. *  untranslated messages left over.
@@ -1388,6 +1402,10 @@ msgstr ""
 "bufora zapamiêtanych t³umaczeñ"
 
 #: src/prefs.c:1
+msgid "Automatically learn a newly translated message"
+msgstr "Automatyczne zapamiêtywanie nowo przet³umaczonych komunikatów"
+
+#: src/prefs.c:1
 msgid "Keep obsolete message in the po files"
 msgstr "Zachowywanie przestarza³ych komunikatów w pliku .po"
 
@@ -1410,6 +1428,20 @@ msgstr "Mo¿liwo¶æ usuniêcia wszystkich t³umaczeñ z pliku po"
 #: src/prefs.c:1
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Usuwanie plików wynikowych kompilacji (np. \"projekt.gmo\")"
+
+#.
+#. * Translators: With "fuzzy" I mean a more enhanced (and more
+#. *  crappy) logic while searching for appropriate translations
+#. *   for a original string.
+#.
+#: src/prefs.c:1
+msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
+msgstr ""
+"U¿ywanie \"rozmytych\" porównañ przy przeszukiwaniu zapamiêtanych t³umaczeñ"
+
+#: src/prefs.c:1
+msgid "Load all backends on startup"
+msgstr "Wczytywanie przy starcie wszystkich modu³ów przetwarzaj±cych"
 
 #: src/prefs.c:1
 msgid "Save geometry on exit & restore it on startup"
@@ -1558,6 +1590,38 @@ msgstr ""
 "Okno preferencji pozwala na dostosowanie gtranslatora do twoich\n"
 "upodobañ i sposobu pracy."
 
+#: src/prefs-dialog.c:1
+msgid ""
+"\t\tThe Preferences box allows you to customise gtranslator\n"
+"\t\tto work in ways you find comfortable and productive."
+msgstr ""
+"\t\tOkno preferencji pozwala na dostosowanie gtranslatora do twoich\n"
+"\t\tupodobañ i sposobu pracy."
+
+#: src/prefs-dialog.c:1
+msgid "Preferences section"
+msgstr "Dzia³ preferencji"
+
+#.
+#. * Now the "simple" widget creation routines are following.
+#.
+#: src/prefs-dialog.c:1 src/prefs-dialog.c:1
+msgid "gtranslator -- preferences"
+msgstr "gtranslator -- preferencje"
+
+#.
+#. * Build up a quite informative question dialog with the count
+#. *  of changes which are still pending.
+#.
+#: src/prefs-dialog.c:1
+#, c-format
+msgid ""
+"%i preferences changes have been made.\n"
+"Do you want to discard all of these changes?"
+msgstr ""
+"Wykonano %i zmian w preferencjach.\n"
+"Czy chcesz porzuciæ wszystkie te zmiany?"
+
 #: src/preferences.c:1
 msgid "Couldn't generate the current date!"
 msgstr "Nie mo¿na wygenerowaæ aktualnej daty!"
@@ -1566,12 +1630,12 @@ msgstr "Nie mo¿na wygenerowaæ aktualnej daty!"
 msgid "No replacements made!"
 msgstr "Nie wykonano zast±pieñ!"
 
-#: src/save-differently.c:1
+#: src/save.c:1
 #, c-format
 msgid "Couldn't save compiled gettext file `%s'!"
 msgstr "Nie mo¿na zapisaæ skompilowanego pliku gettext \"%s\"!"
 
-#: src/save-differently.c:1
+#: src/save.c:1
 #, c-format
 msgid "Couldn't save compressed gettext file `%s'!"
 msgstr "Nie mo¿na zapisaæ skompresowanego pliku gettext \"%s\"!"
@@ -1581,12 +1645,12 @@ msgstr "Nie mo¿na zapisaæ skompresowanego pliku gettext \"%s\"!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/save-differently.c:1
+#: src/save.c:1
 #, c-format
 msgid "Couldn't save %s'd gettext file `%s'!"
 msgstr "Nie mo¿na zapisaæ (skompresowanego programem %s) pliku gettext \"%s\"!"
 
-#: src/save-differently.c:1
+#: src/save.c:1
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
 msgstr "Nie mo¿na zapisaæ pliku po \"%s\", skompresowanego programem zip!"
