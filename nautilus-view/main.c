@@ -31,8 +31,6 @@
 #define VIEW_IID        \
 "OAFIID:Nautilus_Gtranslator_View:569f901f-e30c-46cf-b17e-28a6087701ba"
 
-#define EXECUTABLE_NAME "nautilus-gtranslator-view"
-
 #define GET_TYPE_FUNCTION nautilus_gtranslator_view_get_type
 
 int
@@ -42,10 +40,20 @@ main (int argc, char *argv[])
 	
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
-	
-	return nautilus_view_standard_main (EXECUTABLE_NAME, VERSION,
+
+	#ifdef NEWER_NV_STANDARD_MAIN
+	return nautilus_view_standard_main("nautilus-gtranslator-view", VERSION,
+					    "gtranslator", GNOMELOCALEDIR,
+					    argc, argv,
+					    FACTORY_IID, VIEW_IID,
+					    nautilus_view_create_from_get_type_function,
+					    NULL,
+					    GET_TYPE_FUNCTION);
+	#else
+	return nautilus_view_standard_main("nautilus-gtranslator-view", VERSION,
 					    argc, argv,
 					    FACTORY_IID, VIEW_IID,
 					    nautilus_view_create_from_get_type_function,
 					    GET_TYPE_FUNCTION);
+	#endif
 }
