@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script .
 dnl -------------------------------------------------------------------
 
 AC_INIT(README)
-AM_INIT_AUTOMAKE(gtranslator, 0.19)
+AM_INIT_AUTOMAKE(gtranslator, 0.20)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
@@ -57,6 +57,14 @@ ALL_LINGUAS="da de hu ja ko nl no ru sv tr uk"
 AM_GNOME_GETTEXT
 
 dnl -------------------------------------------------------------------
+dnl Get the idl parameters.
+dnl -------------------------------------------------------------------
+IDL_CFLAGS=`gnome-config --cflags idl`
+IDL_LIBS=`gnome-config --libs idl`
+AC_SUBST(IDL_CFLAGS)
+AC_SUBST(IDL_LIBS)
+
+dnl -------------------------------------------------------------------
 dnl Substitute PACKAGE_LOCALE_DIR in config.h.
 dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
@@ -89,22 +97,6 @@ fi
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 
 dnl -------------------------------------------------------------------
-dnl For Karl and the other (X)EMacs lovers ... [ _I_ love VIm ... ] 
-dnl -------------------------------------------------------------------
-AC_ARG_ENABLE(emacs-lover,
-        [  --enable-emacs-lover=[no/yes]    Compile with a more Emacs friendly about-message],,enable_emacs_lover=no)
-AC_MSG_CHECKING([if you're a (X)Emacs lover ])            
-if test "x$enable_emacs_lover" = "xyes" ; then
-	AC_DEFINE(EMACS_LOVER)
-        AC_MSG_RESULT(["Ha!"
-"********** You are an _X_Emacs lover!"
-"********** I will convince you to use gtranslator later on."])
-else
-        AC_MSG_RESULT(["Well done!"
-"********** You get the original about message ..."])
-fi
-
-dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
 GNOME_COMPILE_WARNINGS
@@ -128,6 +120,7 @@ help/C/Makefile
 help/tr/Makefile
 man/Makefile
 man/gtranslator.1
+libgtranslator/Makefile
 src/Makefile
 intl/Makefile
 po/Makefile.in

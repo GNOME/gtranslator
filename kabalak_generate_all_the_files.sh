@@ -13,6 +13,10 @@ echo ""
 grep -sq LIBTOOL configure.in && {
 $a "libtoolize -> " && echo "no"|libtoolize --force 2>&1 1>/dev/null
 }
+#
+# This is disabled due to a cvs-internal intl/ dir which shouldn't be 
+#  overwritten ;)
+#
 #grep -sq GETTEXT configure.in && {
 #$a "gettextize -> " && echo "no"|gettextize --force 2>&1 1>/dev/null
 #}
