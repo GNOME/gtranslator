@@ -47,11 +47,6 @@ typedef struct
 	 */
 	gchar		*learn_buffer;
 	gchar		*tm_buffer;
-
-	/*
-	 * The default query domain.
-	 */
-	gchar		*query_domain;
 } GtrTranslator;
 
 #define GTR_TRANSLATOR(x) ((GtrTranslator *) x)

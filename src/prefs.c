@@ -72,11 +72,11 @@ static GtkWidget
 	*warn_if_fuzzy, *unmark_fuzzy, *save_geometry_tb,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
-	*instant_spell_checking, *keep_obsolete, *defaultdomain,
-	*autosave, *autosave_with_suffix, *sweep_compile_file,
-	*use_learn_buffer, *show_messages_table, *rambo_function,
-	*use_own_mt_colors, *collapse_translated_entries, *auto_learn,
-	*fuzzy_matching, *load_backends, *show_comment, *highlight;
+	*instant_spell_checking, *keep_obsolete, *autosave,
+	*autosave_with_suffix, *sweep_compile_file, *use_learn_buffer,
+	*show_messages_table, *rambo_function, *use_own_mt_colors,
+	*collapse_translated_entries, *auto_learn, *fuzzy_matching,
+	*load_backends, *show_comment, *highlight;
 
 /*
  * The timeout GtkSpinButton:
@@ -119,7 +119,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 * The tables for holding all the entries below.
 	 */
 	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 
-		3, 2, _("Personal information")); 
+		2, 2, _("Personal information")); 
 	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 2, _("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -147,20 +147,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    gtranslator_utils_attach_entry_with_label(first_page, 1, _("Author's EMail:"),
 		gtranslator_translator->email, gtranslator_preferences_dialog_changed);
 
-	/*
-	 * If no domainslist could be got from the startup routines, build up a foo'sh list.
-	 */
-	if(!domains)
-	{
-		domains=g_list_prepend(domains, g_strdup(""));
-	}
-
-	defaultdomain =
-	    gtranslator_utils_attach_combo_with_label(first_page, 2, _("Default query domain:"),
-			    	    domains, gtranslator_translator->query_domain,
-				    FALSE,
-				    gtranslator_preferences_dialog_changed, NULL);
-	
 	/*
 	 * Create, attach, and connect all the combo boxes with labels. 
 	 */
@@ -512,7 +498,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	update(gtranslator_translator->language->group_email, GTK_COMBO(lg_email)->entry);
 	update(gtranslator_translator->language->encoding, GTK_COMBO(mime_type)->entry);
 	update(gtranslator_translator->language->bits, GTK_COMBO(encoding)->entry);
-	update(gtranslator_translator->query_domain, GTK_COMBO(defaultdomain)->entry);
 	update(GtrPreferences.dictionary, dictionary_file);
 	update(GtrPreferences.autosave_suffix, autosave_suffix);
 #undef update

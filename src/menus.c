@@ -73,7 +73,7 @@ GnomeUIInfo the_file_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("Aut_otranslate..."),
-		N_("Autotranslate the file with information from the default query domain/learn buffer"),
+		N_("Autotranslate the file with information from your learn buffer"),
 		gtranslator_auto_translation_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_DATA, auto_translation_xpm,
 		GDK_F10, 0, NULL

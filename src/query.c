@@ -36,192 +36,8 @@
 #include <locale.h>
 #include <dirent.h>
 
-GList *domains=NULL;
-
 /*
- * A simply query method (wraps dgettext).
- */
-GtrQuery *gtranslator_query_simple(GtrQuery *query)
-{
-	gchar *str;
-	gchar *original_LC_CTYPE, *original_LC_MESSAGES;
-
-	query->language=gtranslator_utils_get_full_language_name(query->language);
-	
-	/*
-	 * Rescue the current locales.
-	 */
-	original_LC_MESSAGES=setlocale(LC_MESSAGES, "");
-	original_LC_CTYPE=setlocale(LC_CTYPE, "");
-
-	/*
-	 * Query the under the preferences' language.
-	 */
-	setlocale(LC_ALL, query->language);
-	
-	str=dgettext(query->domain, query->message);
-
-	/*
-	 * And now reset the locales to the previous settings.
-	 */
-	setlocale(LC_MESSAGES, original_LC_MESSAGES);
-	setlocale(LC_CTYPE, original_LC_CTYPE);
-
-	/*
-	 * Only setup a result if the result from the dgettext()-based
-	 *  query is not the same as the previous message.
-	 */
-	if(str && strcmp(str, query->message))
-	{
-		GtrQuery *result=gtranslator_new_query(
-			query->domain, str, query->language);
-
-		return result;
-	}
-	else
-	{
-		return NULL;
-	}
-
-	GTR_FREE(str);
-	GTR_FREE(original_LC_CTYPE);
-	GTR_FREE(original_LC_MESSAGES);
-	gtranslator_free_query(&query);
-}
-
-/*
- * Return a list of all matching messages from the domainlist.
- */
-GList *gtranslator_query_list(GList *domainlist, const gchar *message,
-	gchar *language)
-{
-	GList *matches=NULL;
-	GtrQuery *query;
-	GtrQuery *result;
-	
-	g_return_val_if_fail(domainlist!=NULL, NULL);
-	
-	/*
-	 * Hm, does the list consist out of gchars or not; test it here.
-	 */ 
-	if(sizeof(domainlist->data)!=sizeof(gchar *))
-	{
-		return NULL;
-	}
-
-	while(domainlist)
-	{
-		query=gtranslator_new_query(domainlist->data,
-			message, language);
-		
-		result=gtranslator_query_simple(query);
-
-		/*
-		 * Only add the result to the list if it's a translation
-		 *  ever -- dgettext returns the queried string if it didn't
-		 *   find anything for it, so that we should drop that cases.
-		 */   
-		if(strcmp(result->message, query->message))
-		{
-			matches=g_list_append(matches, result);
-		}
-
-		GTR_ITER(domainlist);
-		gtranslator_free_query(&query);
-	}
-
-	return matches;
-}
-
-/*
- * Sets up the list of domains.
- */ 
-void gtranslator_query_domains(const gchar *directory)
-{
-	gchar *localedirectory;
-		
-	g_return_if_fail(directory!=NULL);
-
-	if(!gtranslator_translator->language->locale)
-	{
-		/*
-		 * If no language is set up in the prefs, get it from the
-		 *  environment variables.
-		 */
-		gtranslator_translator->language->locale=gtranslator_utils_get_environment_locale();
-		g_return_if_fail(gtranslator_translator->language->locale!=NULL);
-	}
-
-	localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory,
-		gtranslator_translator->language->locale);
-
-	/*
-	 * If we're handling a "minor level" locale (like "tr_TR"), test the
-	 *  query domains directory before operating further.
-	 */
-	if(strchr(gtranslator_translator->language->locale, '_'))
-	{
-		if(!g_file_test(localedirectory, G_FILE_TEST_ISDIR))
-		{
-			gchar	*major_level_locale;
-
-			/*
-			 * Free the old non-valuable locale directory and get
-			 *  the pure, "major level" locale by getting the 
-			 *   prefix from the locale code "tr_TR" -> prefix is
-			 *    "tr".
-			 */
-			GTR_FREE(localedirectory);
-			major_level_locale=nautilus_str_get_prefix(gtranslator_translator->language->locale, "_");
-
-			/*
-			 * Now we do again build up a locale directory -- let's
-			 *  hope that this second try achieves it's aim ,-)
-			 */
-			localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory, major_level_locale);
-			GTR_FREE(major_level_locale);
-		}
-	}
-	
-	domains=gtranslator_utils_file_names_from_directory(localedirectory,
-		".mo", TRUE, TRUE, FALSE);
-}
-
-/*
- * Create a new GtrQuery with the given values.
- */
-GtrQuery *gtranslator_new_query(const gchar *domain,
-	const gchar *message, const gchar *language)
-{
-	GtrQuery *query=g_new0(GtrQuery, 1);
-
-	g_return_val_if_fail(message!=NULL, NULL);
-	g_return_val_if_fail(domain!=NULL, NULL);
-	g_return_val_if_fail(language!=NULL, NULL);
-
-	query->message=g_strdup(message);
-	query->language=g_strdup(language);
-	query->domain=g_strdup(domain);
-
-	return query;
-}
-
-/*
- * Freeing function:
- */
-void gtranslator_free_query(GtrQuery **query)
-{
-	if(*query)
-	{
-		GTR_FREE((*query)->message);
-		GTR_FREE((*query)->domain);
-		GTR_FREE((*query)->language);
-		GTR_FREE(*query);
-	}
-}
-
-/*
- * Get all empty msgstr's filled with found msgstr's from the main domain.
+ * Get all empty msgstr's filled with found translation from the learn buffer.
  */
 void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 {
@@ -229,62 +45,21 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 
 	if(msg && msg->msgid && !msg->msgstr)
 	{
-		GtrQuery *query;
-		GtrQuery *matchingtranslation=NULL;
-
-		/*
-		 * Build up the query for the selected default domain and for the
-		 *  current msgid.
-		 */
-		query=gtranslator_new_query(gtranslator_translator->query_domain, msg->msgid, 
-			gtranslator_translator->language->locale);
-
-		/*
-		 * Get a possible translation for the query and free up the used
-		 *  GtrQuery.
-		 */
-		matchingtranslation=gtranslator_query_simple(query);
-		gtranslator_free_query(&query);
-
-		/*
-		 * If we did find a matching translation for the msgid and there's
-		 *  no msgstr translation yet, copy the found query result into
-		 *   the msgstr field of the GtrMsg and free the GtrQuery.
-		 */
-		if(matchingtranslation && matchingtranslation->message)
+		gchar	*result;
+		
+		result=gtranslator_learn_get_learned_string(msg->msgid);
+		
+		if(result)
 		{
-			msg->msgstr=g_strdup(matchingtranslation->message);
-
+			/*
+			 * Set the translation content, status etc. from the learn buffer
+			 *  query result .-)
+			 */
+			msg->msgstr=g_strdup(result);
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;
-
-			/*
-			 * GUI updates which should be done locally in here.
-			 */
 			po->file_changed=TRUE;
-			gtranslator_free_query(&matchingtranslation);
-		}
-		else if(yeah)
-		{
-			/*
-			 * Now use the the learn buffer if enabled to do 
-			 *  the personal TM query.
-			 */
-			gchar	*result;
 			
-			result=gtranslator_learn_get_learned_string(msg->msgid);
-			
-			if(result)
-			{
-				/*
-				 * Set the translation content, status etc. from the learn buffer
-				 *  query result .-)
-				 */
-				msg->msgstr=g_strdup(result);
-				msg->status |= GTR_MSG_STATUS_TRANSLATED;
-				po->file_changed=TRUE;
-				
-				GTR_FREE(result);
-			}
+			GTR_FREE(result);
 		}
 	}
 }
@@ -293,13 +68,13 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
  * Simply execute the gtranslator_query_gtr_msg for every message in the
  *  po file.
  */
-void gtranslator_query_translate(gboolean use_learn_buffer, gboolean gui)
+void gtranslator_query_translate(gboolean gui)
 {
 	g_return_if_fail(po!=NULL);
 	g_return_if_fail(po->messages!=NULL);
 	
-	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, 
-		GINT_TO_POINTER(use_learn_buffer));
+	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg,
+		NULL);
 
 	/*
 	 * Activate the Save menu/tollbar items on changes.

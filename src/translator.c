@@ -177,12 +177,6 @@ GtrTranslator *gtranslator_translator_new()
 				new_translator->language->locale : "en"));
 	}
 
-	/*
-	 * Get the default query domain from the preferences.
-	 */
-	gtranslator_translator_read_value(&new_translator->query_domain,
-		"query/defaultdomain");
-
 	return new_translator;
 }
 
@@ -213,14 +207,6 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 		GTRANSLATOR_TRANSLATOR_EMAIL:TRANSLATOR_EMAIL:\
 		EMAIL_ADDRESS:MAIL_ADDRESS:EMAIL:CONTACT_EMAIL",
 		&new_translator->email);
-		
-	/*
-	 * Try to "guess" the default query domain from the environment.
-	 */
-	gtranslator_translator_read_env_value(
-		"GTRANSLATROR_DEFAULT_QUERY_DOMAIN:DEFAULT_QUERY_DOMAIN:\
-		GETTEXT_QUERY_DOMAIN:QUERY_DOMAIN",
-		&new_translator->query_domain);
 
 	/*
 	 * Determine the language locale setting in our environment.
@@ -432,8 +418,6 @@ void gtranslator_translator_save(GtrTranslator *translator)
 	 */
 	gtranslator_config_set_string("translator/name", translator->name);
 	gtranslator_config_set_string("translator/email", translator->email);
-	gtranslator_config_set_string("query/defaultdomain", 
-		translator->query_domain);
 	
 	/*
 	 * Save the language settings.
@@ -469,7 +453,6 @@ void gtranslator_translator_free(GtrTranslator *translator)
 		GTR_FREE(translator->email);
 		GTR_FREE(translator->learn_buffer);
 		GTR_FREE(translator->tm_buffer);
-		GTR_FREE(translator->query_domain);
 
 		GTR_FREE(translator->language->name);
 		GTR_FREE(translator->language->locale);

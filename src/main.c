@@ -62,7 +62,6 @@
  */
 static gchar 	*gtranslator_geometry=NULL;
 static gchar 	*save_html_output_file=NULL;
-static gchar 	*domains_dir=NULL;
 static gchar	*learn_file=NULL;
 static gchar	*auto_translate_file=NULL;
 static gchar	*exporting_po_file=NULL;
@@ -101,10 +100,6 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"no-modules", 'n', POPT_ARG_NONE, &no_modules,
 		0, N_("Don't load any backend modules"), NULL
-	},
-	{
-		"querydomaindir", 'q', POPT_ARG_STRING, &domains_dir,
-		0, N_("Define another query-domains directory"), N_("LOCALEDIR")
 	},
 	{
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
@@ -326,53 +321,6 @@ int main(int argc, char *argv[])
 	}
 	
 	/*
-	 * Parse the domains in the given directory or in some other logical
-	 *  manner.
-	 */
-	if(domains_dir)
-	{
-		/*
-		 * Test if the given directory is even a directory.
-		 */
-		if(g_file_test(domains_dir, G_FILE_TEST_ISDIR))
-		{
-			/*
-			 * Parse all entries from this directory.
-			 */
-			gtranslator_query_domains(domains_dir);
-		}
-	}
-	else
-	{
-		/*
-		 * Look into some other environment variables for a sane value
-		 *  for the locale directory where the .mo files are lying
-		 *   'round -- aka. "the gettext domains".
-		 */
-		gchar	*localedirectory=NULL;
-
-		gtranslator_utils_get_environment_value(
-			"GTRANSLATOR_LOCALEDIR:GNOMELOCALEDIR",
-			&localedirectory);
-
-		/*
-		 * If the found localedirectory is a directory, then we can
-		 *  really start querying all existing domains from this 
-		 *   read-in directory.
-		 */
-		if(localedirectory && 
-			g_file_test(localedirectory, G_FILE_TEST_ISDIR))
-		{
-			gtranslator_query_domains(localedirectory);
-			GTR_FREE(localedirectory);
-		}
-		else
-		{
-			gtranslator_query_domains(GNOMELOCALEDIR);
-		}
-	}
-	
-	/*
 	 * If there are any files given on command line, open them
 	 */
 	file_opened = FALSE;
@@ -390,7 +338,7 @@ int main(int argc, char *argv[])
 		 */
 		gtranslator_learn_init();
 		gtranslator_open_file(auto_translate_file);
-		gtranslator_query_translate(GtrPreferences.use_learn_buffer, FALSE);
+		gtranslator_query_translate(FALSE);
 		
 		/*
 		 * If any change has been made to the po file: save it.

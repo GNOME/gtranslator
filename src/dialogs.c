@@ -28,6 +28,7 @@
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
+#include "learn.h"
 #include "message.h"
 #include "nautilus-string.h"
 #include "open.h"
@@ -1005,7 +1006,8 @@ like \"http\", \"ftp\" or any other access method supported by GnomeVFS."
 "Some example URIs for clarification (these ones are supported):\n\
 http://www.gtranslator.org/remote-po/gtranslator.pot\n\
 ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n\n\
-file:///<PO-FILE>"));
+file:///<PO-FILE> or\n\
+http://www.DOMAIN.COM/PO-FILE"));
 	}
 	else
 	{
@@ -1085,8 +1087,6 @@ void gtranslator_query_dialog(void)
 	GtkWidget *innertable;
 	GtkWidget *query_entry;
 	GtkWidget *query_entry_label;
-	GtkWidget *domain;
-	GtkWidget *domain_label;
 	GtkWidget *label;
 	gint reply;
 	
@@ -1098,19 +1098,13 @@ void gtranslator_query_dialog(void)
 	#define add2Table(x, y, z); \
 	gtk_table_attach_defaults(GTK_TABLE(innertable), x, y, y+1, z, z+1);
 
-	if(!domains)
-	{
-		gtranslator_utils_error_dialog(_("Couldn't get list of gettext domains!"));
-		return;
-	}
-
 	/*
 	 * A half-baken dialog for the query functionality.
 	 */
-	label=gtk_label_new(_("Here you can query existing gettext domains for a translation."));
+	label=gtk_label_new(_("Here you can query existing translations from your learn buffer."));
 	
 	dialog=gnome_dialog_new(
-		_("gtranslator -- query existing gettext domains"),
+		_("gtranslator -- query your personal learn buffer"),
 		_("Query"), GNOME_STOCK_BUTTON_CLOSE, NULL);
 
 	innertable=gtk_table_new(2, 2, FALSE);
@@ -1122,22 +1116,6 @@ void gtranslator_query_dialog(void)
 	query_entry_label=gtk_label_new(_("Query string:"));
 
 	/*
-	 * Setup our loved domains list as the stringlist for the combobox.
-	 */
-	domain=gtk_combo_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(domain), domains);
-	domain_label=gtk_label_new(_("Domain to search the translation in:"));
-
-	/*
-	 * Set up the default query domain from the preferences if available.
-	 */
-	if(gtranslator_translator->query_domain)
-	{
-		gtk_entry_set_text(GTK_ENTRY(
-			GTK_COMBO(domain)->entry), gtranslator_translator->query_domain);
-	}
-
-	/*
 	 * Add the widgets to the dialog.
 	 */
 	add2Box(label);
@@ -1145,8 +1123,6 @@ void gtranslator_query_dialog(void)
 
 	add2Table(query_entry_label, 0, 0);
 	add2Table(query_entry, 1, 0);
-	add2Table(domain_label, 0, 1);
-	add2Table(domain, 1, 1);
 
 	/*
 	 * "Query" should be the default button I guess.
@@ -1183,28 +1159,9 @@ void gtranslator_query_dialog(void)
 		}
 		else
 		{
-			GtrQuery *query;
-			GtrQuery *result;
-			gchar *domainname;
+			gchar *result;
 
-			/*
-			 * Get the domain's name from the combobox.
-			 */
-			domainname=gtk_editable_get_chars(GTK_EDITABLE(
-				GTK_COMBO(domain)->entry), 0, -1);
-
-			/*
-			 * Build up and run the query.
-			 */
-			query=gtranslator_new_query(domainname, query_text, 
-				gtranslator_translator->language->locale);
-			result=gtranslator_query_simple(query);
-		
-			/*
-			 * Stop the leaking! Free the used gchars!
-			 */
-			GTR_FREE(query_text);
-			GTR_FREE(domainname);
+			result=gtranslator_learn_get_learned_string(query_text);
 			
 			/*
 			 * Close the open dialog now.
@@ -1217,22 +1174,23 @@ void gtranslator_query_dialog(void)
 				 * No results? Close down the dialog.
 				 */
 				gnome_app_warning(GNOME_APP(gtranslator_application),
-				_("Couldn't find any result for the query!"));
+					_("Couldn't find any result for the query in your learn buffer!"));
 			}
 			else
 			{
 				/*
-				 * In the other case simply print out the
-				 *  found translation with the domain name for 
-				 *   now and close/exit then.
+				 * In the other case simply print out the found
+				 *  translation and exit then.
 				 */
 				gchar *resulttext;
 				GtkWidget *condialog=NULL;
 				gint hehue;
 
-				resulttext=g_strdup_printf(_("Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n\
+				resulttext=g_strdup_printf(_("Found \"%s\" as a translation for \"%s\".\n\
 Would you like to insert it into the translation?"),
-					result->message, query->message, result->domain);
+					result, query_text);
+
+				GTR_FREE(query_text);
 
 				/*
 				 * Set the last query result in the prefs for
@@ -1240,7 +1198,7 @@ Would you like to insert it into the translation?"),
 				 */
 				gtranslator_config_set_string(
 					"query/last_match_filename",
-					po->filename);
+					gtranslator_utf8_get_utf8_string(&(po->filename)));
 				
 				gtranslator_config_set_int(
 					"query/last_match_message_no",
@@ -1248,19 +1206,12 @@ Would you like to insert it into the translation?"),
 						po->current));
 				
 				gtranslator_config_set_string(
-					"query/last_match_domain", 
-					result->domain);
-				
-				gtranslator_config_set_string(
 					"query/last_match_message", 
-					query->message);
+					gtranslator_utf8_get_utf8_string(&query_text));
 				
 				gtranslator_config_set_string(
 					"query/last_match_translation", 
-					result->message);
-				
-				gtranslator_free_query(&query);
-				
+					gtranslator_utf8_get_utf8_string(&result));
 
 				/*
 				 * Build up another dialog and show up the
@@ -1296,23 +1247,24 @@ Would you like to insert it into the translation?"),
 					 *  translation box; if so print a warning
 					 *   and don't insert the translation.
 					 */
-					if(content && strcmp(content, result->message))
+					if(content && nautilus_strcasecmp(content, result))
 					{
 						/*
 						 * Insert the text and update the
 						 * status flags for it.
 						 */
-						gtk_text_insert( GTK_TEXT(trans_box), NULL, NULL, NULL,
-						result->message, strlen(result->message) );
+						gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
+							result, strlen(result) );
 
-						gtranslator_free_query(&result);
+						GTR_FREE(result);
 					}
 					else
 					{
 						gnome_app_warning(GNOME_APP(gtranslator_application),
+
 						/*
-						 * Translators: This means that the queried string
-						 *  is already translated.
+						 * Translators: This means that the query result string is
+						 *  already translated.
 						 */
 						_("Query's result translation is already there!"));
 					}
@@ -1335,16 +1287,8 @@ void gtranslator_auto_translation_dialog(void)
 
 	gtranslator_raise_dialog(dialog);
 
-	if(GtrPreferences.use_learn_buffer)
-	{
-		message_string=_("Should gtranslator autotranslate the file using information\n\
-from the default query domain and the personal learn buffer?");
-	}
-	else
-	{
-		message_string=_("Should gtranslator autotranslate the file using information\n\
-from the default query domain?");
-	}
+	message_string=_("Should gtranslator autotranslate the file using information\n\
+from your personal learn buffer?");
 
 	dialog=gnome_message_box_new(message_string,
 		GNOME_MESSAGE_BOX_QUESTION,
@@ -1369,6 +1313,6 @@ from the default query domain?");
 		/*
 		 * Autotranslate the missing entries.
 		 */
-		gtranslator_query_translate(GtrPreferences.use_learn_buffer, TRUE);
+		gtranslator_query_translate(TRUE);
 	}
 }

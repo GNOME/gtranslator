@@ -23,59 +23,15 @@
 #include "parse.h"
 
 /*
- * Quite simple structure for the queries and results.
- */
-typedef struct {
-	gchar *domain;
-	gchar *message;
-	gchar *language;
-} GtrQuery;
-
-#define GTR_QUERY(x) ((GtrQuery *)(x))
-
-/*
- * The generally used domains list.
- */
-extern GList *domains;
-
-/*
- * Simply query for the gettext translation for the given message in the
- *  domain (program/package) and for the given language.
- */ 
-GtrQuery *gtranslator_query_simple(GtrQuery *query);
-
-/*
- * Get all ocurrences for the message in the given domainlist and return a
- *  GList out of GtrQueryResults.
- */
-GList *gtranslator_query_list(GList *domainlist, const gchar *message,
-	gchar *language);
-
-/*
- * Set up the "domains" GList with all domains in the given directory for
- *  the language which is specified in the preferences.
- */
-void gtranslator_query_domains(const gchar *directory);
-
-/*
- * Creation/deletion of GtrQuery's:
- */
-GtrQuery *gtranslator_new_query(const gchar *domain, 
-	const gchar *message, const gchar *language);
-
-void gtranslator_free_query(GtrQuery **query);
-
-/*
  * Automatically query for an empty msgstr's possible translation and insert
- *  them (data is the passed GtrMsg structure.
+ *  them (data is the passed GtrMsg structure).
  */
 void gtranslator_query_gtr_msg(gpointer data, gpointer yeah);
 
 /*
- * Perform all the queries for the msgid's -- with supplement of the 
- *  learn buffer if desired; the "gui" argument specifies if we're working in
- *   an already started GUI environment.
+ * Perform all the queries for the msgid's; the "gui" argument specifies
+ *  if we're working in an already started GUI environment.
  */
-void gtranslator_query_translate(gboolean use_learn_buffer, gboolean gui);
+void gtranslator_query_translate(gboolean gui);
 
 #endif

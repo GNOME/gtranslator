@@ -85,7 +85,7 @@ void gtranslator_query_dialog(void);
 
 /*
  * A last questioning dialog before we do autotranslate all the missing
- *  strings from the default query domain (& the personal lean buffer).
+ *  strings from the personal lean buffer.
  */
 void gtranslator_auto_translation_dialog(void);
 

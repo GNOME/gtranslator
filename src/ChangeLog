@@ -1,5 +1,26 @@
 2002-02-16  Fatih Demir <kabalak@gtranslator.org>
 
+	* dialogs.c: Save the "query/" prefs/information for now in UTF-8 to
+		get right results and to don't have any problems with GConf;
+		 maybe this should also be deleted soon or integrated into
+		  new learn buffer sources.
+
+	* query.c/.h: Removed the GtrQuery structure and all related stuff;
+		these source files should be obsolete quite soon, but for a
+		 small time of transition they're still present.
+
+	* dialogs.c & menus.c: Some slight textual modifications to reflect
+		the current changes going on in the query field.
+
+	* prefs.c & translator.c/.h: Remove the default query domain field of 
+		the GtrTranslator structure/preferences.
+
+	* dialogs.c, main.c & query.c: Remove the "domains" gettext domains
+		list variable.
+
+	* query.c/.h: Removed some old gettext-binded functions; many functions
+		did go away as we do just work with the learn buffer now.
+
 	* zpmd.h: Just added a "GTRANSLATOR_MIDDLE_DOT_FALLBACK" define which
 		is currently just '^' -- a beginning of a fix for b.g.o #70256.
 
