@@ -1,1 +1,1 @@
-SUBDIRS = C tr
+SUBDIRS = C
