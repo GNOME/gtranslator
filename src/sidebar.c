@@ -131,7 +131,8 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				testcase=gtk_editable_get_chars(
 					GTK_EDITABLE(trans_box), 0, -1);
 				
-				if(strcmp(GTR_MSG(po->current->data)->msgstr,
+				if(GTR_MSG(po->current->data)->msgstr &&
+				strcmp(GTR_MSG(po->current->data)->msgstr,
 					testcase))
 				{
 					GTR_MSG(po->current->data)->msgstr=
@@ -149,7 +150,8 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				 testcase=gtk_editable_get_chars(
 					 GTK_EDITABLE(trans_box), 0, -1);
 				 
-				 if(strcmp(GTR_MSG(po->current->data)->msgstr,
+				 if(GTR_MSG(po->current->data)->msgstr && 
+				 strcmp(GTR_MSG(po->current->data)->msgstr,
 					testcase))
 				 {
 					GTR_MSG(po->current->data)->msgstr=

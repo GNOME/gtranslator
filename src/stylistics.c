@@ -23,12 +23,13 @@
 #endif
 
 #include "stylistics.h"
+#include "color-schemes.h"
 #include "preferences.h"
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
-static gchar* get_path_from_type(ColorType Type);
+static gchar *get_path_from_type(ColorType Type);
 static void init_colors(void);
 
 static GdkColor colors[COLOR_END];
@@ -74,6 +75,7 @@ gchar* get_path_from_type(ColorType Type)
 		default:
 			return NULL;
 	}
+	
 	return g_strdup_printf("colors/%s", section);
 }
 
@@ -224,13 +226,23 @@ GdkColor *get_color_from_type(ColorType type)
 
 void init_colors(void)
 {
-	gdk_color_parse("white",	&colors[COLOR_FG]);
-	gdk_color_parse("black",	&colors[COLOR_BG]);
-	gdk_color_parse("gray",		&colors[COLOR_SPECIAL_CHAR]);
-	gdk_color_parse("blue",		&colors[COLOR_HOTKEY]);
-	gdk_color_parse("red",		&colors[COLOR_C_FORMAT]);
-	gdk_color_parse("orange",	&colors[COLOR_NUMBER]);
-	gdk_color_parse("wheat",	&colors[COLOR_PUNCTUATION]);
-	gdk_color_parse("maroon",	&colors[COLOR_SPECIAL]);
+	/*
+	 * If no theme is specified/given use the default colors.
+	 */ 
+	if(!theme)
+	{
+		gtranslator_color_scheme_restore_default();
+
+		theme=gtranslator_color_scheme_load_from_prefs();
+	}
+	
+	gdk_color_parse(theme->fg,		&colors[COLOR_FG]);
+	gdk_color_parse(theme->bg,		&colors[COLOR_BG]);
+	gdk_color_parse(theme->special_char,	&colors[COLOR_SPECIAL_CHAR]);
+	gdk_color_parse(theme->hotkey,		&colors[COLOR_HOTKEY]);
+	gdk_color_parse(theme->c_format,	&colors[COLOR_C_FORMAT]);
+	gdk_color_parse(theme->number,		&colors[COLOR_NUMBER]);
+	gdk_color_parse(theme->punctuation,	&colors[COLOR_PUNCTUATION]);
+	gdk_color_parse(theme->special,		&colors[COLOR_SPECIAL]);
 }
 

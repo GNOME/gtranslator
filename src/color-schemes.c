@@ -70,6 +70,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 		{ \
 		gchar *string=xmlNodeListGetString(xmldoc, \
 			node->xmlChildrenNode, 1); \
+		g_strstrip(string); \
 		scheme->x=g_strdup(string); \
 		g_free(string); \
 		} \
@@ -108,6 +109,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 		GetData(fg, "fg");
 		GetData(bg, "bg");
 		GetData(special_char, "special_char");
+		GetData(hotkey, "hotkey");
 		GetData(c_format, "c_format");
 		GetData(number, "number");
 		GetData(punctuation, "punctuation");
@@ -176,6 +178,41 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	gtranslator_config_close();
 
 	free_color_scheme(&theme);
+}
+
+/*
+ * Loads the current GtrColorScheme from the preferences.
+ */
+GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
+{
+	GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
+
+	theme->info=g_new0(GtrColorSchemeInformations, 1);
+
+	gtranslator_config_init();
+
+	/*
+	 * Reget the stored color scheme values from the preferences.
+	 */ 
+	theme->info->name=gtranslator_config_get_string("scheme/name");
+	theme->info->version=gtranslator_config_get_string("scheme/version");
+	theme->info->author=gtranslator_config_get_string("scheme/author");
+	theme->info->author_email=gtranslator_config_get_string("scheme/author_email");
+
+	theme->fg=gtranslator_config_get_string("colors/fg");
+	theme->bg=gtranslator_config_get_string("colors/bg");
+	theme->special_char=gtranslator_config_get_string("colors/special_char");
+	theme->hotkey=gtranslator_config_get_string("colors/hotkey");
+	theme->c_format=gtranslator_config_get_string("colors/c_format");
+	theme->number=gtranslator_config_get_string("colors/number");
+	theme->punctuation=gtranslator_config_get_string("colors/punctuation");
+	theme->special=gtranslator_config_get_string("colors/special");
+	theme->address=gtranslator_config_get_string("colors/address");
+	theme->keyword=gtranslator_config_get_string("colors/keyword");
+
+	gtranslator_config_close();
+
+	return theme;
 }
 
 /*
@@ -375,6 +412,8 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 			}
 		}
 	}
+
+	closedir(dir);
 	
 	return schemesinfos;
 }

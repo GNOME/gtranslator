@@ -1,3 +1,23 @@
+2001-03-02  Fatih Demir <kabalak@gtranslator.org>
+
+	* prefs_init.c: Arg, blue is nicer then navy for hotkeys, reverted my 
+		change from yesterday.
+
+	* main.c: If a color scheme/theme is given on the comman line take it
+		as our syntax color scheme -- at least we do try it .-)
+
+	* stylistics.c: Use the new color scheme based color selection.
+
+	* color-schemes.c/.h: Implemented the new 
+		"gtranslator_color_scheme_load_from_prefs" function which
+		  restores the stored GtrColorScheme from the preferences
+		   "back" as the current theme; also allow spaces around the
+		     color names in the color schemes as we do now strip out
+		      the spaces.
+
+	* sidebar.c: Check if there's any msgstr data before using strcmp
+		-- avoids a nasty crash.
+
 2001-03-01  Fatih Demir	<kabalak@gtranslator.org>
 
 	* sighandling.c: Initialize the gint outside the signal handler.

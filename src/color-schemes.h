@@ -58,6 +58,11 @@ typedef struct {
 	((GtrColorSchemeInformations *) x)
 
 /*
+ * The general GtrColorScheme we do use in gtranslator.
+ */
+GtrColorScheme *theme; 
+	
+/*
  * Returns the GtrColorScheme struct for the given file (a colorscheme) or NULL
  *  if it isn't a colorscheme file.
  */
@@ -67,6 +72,11 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename);
  * Applies the given color scheme as the default one.
  */
 void gtranslator_color_scheme_apply(const gchar *filename);
+
+/*
+ * Load the current stored GtrColorScheme from the preferences.
+ */ 
+GtrColorScheme *gtranslator_color_scheme_load_from_prefs(void);
 
 /*
  * Sets up the original hardcoded default syntax highlighting

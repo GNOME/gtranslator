@@ -86,7 +86,7 @@ void prefs_init_syntax_colors()
 	 * The default syntax colors.
 	 */
 	gtranslator_config_set_string("colors/special_char", "grey");
-	gtranslator_config_set_string("colors/hotkey", "navy");
+	gtranslator_config_set_string("colors/hotkey", "blue");
 	gtranslator_config_set_string("colors/c_format", "red");
 	gtranslator_config_set_string("colors/number", "orange");
 	gtranslator_config_set_string("colors/punctuation", "darkblue");

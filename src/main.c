@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 	 */
 	create_app1();
 	restore_geometry(gtranslator_geometry);
-
+	
 	/*
 	 * Check if a temporary file from the last session had been
 	 *  left.
@@ -180,12 +180,34 @@ int main(int argc, char *argv[])
 	 */ 
 	if(scheme_filename)
 	{
+		/*
+		 * Apply the given color scheme if possible.
+		 */ 
 		gtranslator_color_scheme_apply(scheme_filename);
+	
+		theme=gtranslator_color_scheme_load_from_prefs();
+
+		/*
+		 * Also setup the foreground/background colors from the
+		 *  color scheme.
+		 */  
+		gtranslator_set_style(text1);
+		gtranslator_set_style(trans_box);
+
+		/*
+		 * If no theme could be parsed, restore the default values
+		 *  for the syntax highlighting colors.
+		 */  
+		if(!theme)
+		{
+			gtranslator_color_scheme_restore_default();
+
+			theme=gtranslator_color_scheme_load_from_prefs();
+		}
 	}
 	
 	/*
 	 * If there are any files given on command line, open them
-	 * TODO add here loading of all files, when program becomes MDI
 	 */
 	file_opened = FALSE;
 	args = poptGetArgs(context);
