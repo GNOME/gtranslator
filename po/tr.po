@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.19\n"
-"POT-Creation-Date: 2000-07-20 20:46+0200\n"
-"PO-Revision-Date: 2000-07-20 20:47+0200\n"
+"POT-Creation-Date: 2000-07-24 20:22+0200\n"
+"PO-Revision-Date: 2000-07-24 20:19+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -151,19 +151,19 @@ msgstr "Sorgula"
 msgid "gtranslator -- query the message db"
 msgstr "gtranslator -- bilgi/tercüme tabanýný sorgula"
 
-#: src/gtr_dialogs.c:458
+#: src/gtr_dialogs.c:457
 #, c-format
 msgid "Result: `%s'"
 msgstr "Sonuç: `%s'"
 
-#: src/gtr_dialogs.c:475
+#: src/gtr_dialogs.c:474
 msgid "Insert"
 msgstr "Içer"
 
 #. *
 #. * Set the window properties.
 #. *
-#: src/gtr_dialogs.c:479
+#: src/gtr_dialogs.c:478
 msgid "gtranslator -- result for your query"
 msgstr "gtranslator -- sorgulamanýn sonuçlarý"
 
@@ -171,30 +171,30 @@ msgstr "gtranslator -- sorgulamanýn sonuçlarý"
 msgid "Error while applying the header!"
 msgstr "Baþlýdý uygularken hata oldu!"
 
-#: src/header_stuff.c:44
+#: src/header_stuff.c:49
 msgid "Header has been pased successfully."
 msgstr "Po-dosyasýnýn baþlýðýnýn taranmasý baþarýlý oldu."
 
-#: src/header_stuff.c:63
+#: src/header_stuff.c:68
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Baþlýk dodruca taranmamýþ gibi."
 
-#: src/header_stuff.c:65
+#: src/header_stuff.c:70
 msgid "Project name:"
 msgstr "Proje ismi : "
 
-#: src/header_stuff.c:66
+#: src/header_stuff.c:71
 msgid "Project version:"
 msgstr "Proje nesli : "
 
-#: src/header_stuff.c:67
+#: src/header_stuff.c:72
 msgid "Use my personal options to fill out the rest of the header."
-msgstr "þahsi seÇeneklerimi baþlýðý doldurmak için kullan."
+msgstr "Þahsi seçeneklerimi baþlýðý doldurmak için kullan."
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:76
+#: src/header_stuff.c:81
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- baþlýdý deðiþtir"
 
@@ -656,8 +656,8 @@ msgstr "`%s' için ileti/tercüme tabanýný sorguluyorum ...\n"
 
 #: src/main.c:124
 #, c-format
-msgid "Result                   :  %s."
-msgstr "Sonuç                    :  %s."
+msgid "Result                   :  %s"
+msgstr "Sonuç                    :  %s"
 
 #: src/main.c:126
 msgid "End of query.\n"
@@ -776,20 +776,20 @@ msgstr "Geçerli dosya : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:203
+#: src/parse.c:201
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
-#: src/parse.c:220
+#: src/parse.c:218
 msgid "Parsing has been successfull."
 msgstr "Tarama baþarýlý oldu."
 
-#: src/parse.c:291
+#: src/parse.c:289
 msgid "You've reached the first message"
 msgstr "Ilk iletiye vardýn ."
 
-#: src/parse.c:328
+#: src/parse.c:326
 msgid "You've reached the last message."
 msgstr "Son iletiye vardýn ."
 
@@ -864,6 +864,14 @@ msgstr "Deðiþtirilmemiþ .po-dosyalarýný kaydetme"
 msgid "Use the messages db"
 msgstr "Ileti/tercüme tabanýný kullan"
 
+#: src/prefs.c:406
+msgid "Can't store filename!"
+msgstr "Dosya adýný kaydedemedim !"
+
+#: src/prefs.c:434
+msgid "Couldn't recall the file's name."
+msgstr "Dosya adýný alamadým ."
+
 #: src/find.c:32
 msgid "Nothing appropriate found!"
 msgstr "Buna benzer bir þey yok!"
@@ -871,6 +879,3 @@ msgstr "Buna benzer bir þey yok!"
 #: src/find.c:54
 msgid "No query, no fun."
 msgstr "Sorgulamazsýz cevap yoktur."
-
-#~ msgid "New message entry has wrong/non-logical length.\n"
-#~ msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil.\n"
