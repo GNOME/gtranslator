@@ -29,6 +29,11 @@ dnl -------------------------------------------------------------------
 AC_HEADER_STDC
 
 dnl -------------------------------------------------------------------
+dnl The RANLIB macro is necessary to get semerkent sources in the dist.
+dnl -------------------------------------------------------------------
+AC_PROG_RANLIB
+
+dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
 GNOME_COMPILE_WARNINGS(maximum)
