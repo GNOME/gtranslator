@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-26 22:43+0200\n"
+"POT-Creation-Date: 2003-08-28 09:05+0200\n"
 "PO-Revision-Date: 2002-06-23 02:56+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
-msgid "The Gnome translation program"
+#, fuzzy
+msgid "The GNOME translation program"
 msgstr "GNOME 翻译程序"
 
 #: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
@@ -37,7 +38,7 @@ msgstr "(C) 1999-2002 自由软件基金会"
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator 是一个功能丰富的 PO 文件编辑套件。"
 
-#: src/bookmark.c:93 src/dialogs.c:1512
+#: src/bookmark.c:93 src/dialogs.c:1492
 #, fuzzy
 msgid "No comment"
 msgstr "编辑注释"
@@ -83,19 +84,19 @@ msgstr "配色方案(_C)"
 msgid "Activate colorscheme %s"
 msgstr "使用配色方案 %s"
 
-#: src/dialogs.c:117
+#: src/dialogs.c:115
 msgid "gtranslator -- open po file"
 msgstr "gtranslator -- 打开 PO 文件"
 
-#: src/dialogs.c:159
+#: src/dialogs.c:157
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- 保存文件为..."
 
-#: src/dialogs.c:179
+#: src/dialogs.c:177
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- 保存文件的本地复制为..."
 
-#: src/dialogs.c:229
+#: src/dialogs.c:227
 #, c-format
 msgid ""
 "File %s\n"
@@ -104,113 +105,115 @@ msgstr ""
 "文件 %s\n"
 "已被修改。保存吗？"
 
-#: src/dialogs.c:235
+#: src/dialogs.c:233
 msgid "Don't save"
 msgstr ""
 
-#: src/dialogs.c:279
+#: src/dialogs.c:277
 msgid "gtranslator -- import po file"
 msgstr "gtranslator -- 导入 PO 文件"
 
-#: src/dialogs.c:326
+#: src/dialogs.c:324
 msgid "gtranslator -- export po file"
 msgstr "gtranslator -- 导出 PO 文件"
 
-#: src/dialogs.c:374 src/dialogs.c:407
+#: src/dialogs.c:372 src/dialogs.c:405
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- 编辑注释"
 
-#: src/dialogs.c:399
+#: src/dialogs.c:397
 msgid "Comment:"
 msgstr "注释："
 
-#: src/dialogs.c:514
+#: src/dialogs.c:512
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "需要将“%s”的翻译全部删除吗？"
 
-#: src/dialogs.c:617
+#: src/dialogs.c:615
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- 转到"
 
-#: src/dialogs.c:625
+#: src/dialogs.c:623
 msgid "Go to message number:"
 msgstr "转到讯息号："
 
-#: src/dialogs.c:714
+#: src/dialogs.c:681
 msgid "Find in the po file"
 msgstr "在 PO 文件中查找"
 
-#: src/dialogs.c:722
+#: src/dialogs.c:690
 msgid "Enter search string:"
 msgstr "输入查找字符串："
 
-#: src/dialogs.c:727
+#: src/dialogs.c:695
 msgid "Case sensitive"
 msgstr "区分大小写"
 
-#: src/dialogs.c:732 src/languages.c:97
-msgid "English"
-msgstr "英文"
-
-#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:323
-msgid "Translated"
-msgstr "译文"
-
-#: src/dialogs.c:744 src/dialogs.c:861
-msgid "Both"
-msgstr "两者"
-
-#: src/dialogs.c:750 src/dialogs.c:849
-msgid "Comments"
-msgstr "注释"
-
-#: src/dialogs.c:756
-msgid "In all strings"
-msgstr "所有字符串"
-
-#: src/dialogs.c:771
+#: src/dialogs.c:700
 #, fuzzy
 msgid "Find in:"
 msgstr "查找位于："
+
+#: src/dialogs.c:704 src/dialogs.c:835
+msgid "Comments"
+msgstr "注释"
+
+#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
+msgid "English"
+msgstr "英文"
+
+#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
+msgid "Translation"
+msgstr "翻译"
 
 #.
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: src/dialogs.c:781
+#: src/dialogs.c:721
 msgid "Ignore hotkeys"
 msgstr ""
 
-#: src/dialogs.c:832
+#: src/dialogs.c:814
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- 替换"
 
-#: src/dialogs.c:836 src/menus.c:355
+#: src/dialogs.c:818 src/menus.c:355
 msgid "Replace"
 msgstr "替换"
 
-#: src/dialogs.c:837
+#: src/dialogs.c:819
 msgid "Replace all"
 msgstr "全部替换"
 
-#: src/dialogs.c:841
+#: src/dialogs.c:824
 msgid "String to replace:"
 msgstr "要替换的字符串："
 
-#: src/dialogs.c:844
+#: src/dialogs.c:827
 msgid "Replace string:"
 msgstr "替换字符串："
 
-#: src/dialogs.c:884
+#: src/dialogs.c:832
 msgid "Replace in:"
 msgstr "替换位于："
 
-#: src/dialogs.c:963
+#: src/dialogs.c:895
+#, fuzzy
+msgid "Please enter a string to replace!"
+msgstr "请输入要搜索的字符串"
+
+#: src/dialogs.c:903
+#, fuzzy
+msgid "Please enter a string to replace with!"
+msgstr "请输入要搜索的字符串"
+
+#: src/dialogs.c:945
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "执行 msgfmt 时发生错误：\n"
 
-#: src/dialogs.c:1004
+#: src/dialogs.c:986
 #, c-format
 msgid ""
 "The file\n"
@@ -233,7 +236,7 @@ msgstr ""
 "\n"
 "仍然让 gtranslator 打开该文件吗？"
 
-#: src/dialogs.c:1045
+#: src/dialogs.c:1027
 #, c-format
 msgid ""
 "File %s\n"
@@ -242,23 +245,23 @@ msgstr ""
 "文件 %s\n"
 "已被修改。您要还原到原来保存的版本吗？"
 
-#: src/dialogs.c:1077
+#: src/dialogs.c:1059
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- 打开 URI"
 
-#: src/dialogs.c:1089
+#: src/dialogs.c:1071
 msgid "Enter URI:"
 msgstr "输入 URI："
 
-#: src/dialogs.c:1127
+#: src/dialogs.c:1107
 msgid "No URI given!"
 msgstr "没有输入 URI！"
 
-#: src/dialogs.c:1142
+#: src/dialogs.c:1122
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "没有输入支持的 URI 协议(例如“ftp://”)！"
 
-#: src/dialogs.c:1150
+#: src/dialogs.c:1130
 #, fuzzy
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
@@ -282,7 +285,7 @@ msgstr ""
 "\n"
 "file:///<PO-FILE>"
 
-#: src/dialogs.c:1189
+#: src/dialogs.c:1169
 #, fuzzy, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -300,15 +303,15 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1201
+#: src/dialogs.c:1181
 msgid "Postpone decision"
 msgstr ""
 
-#: src/dialogs.c:1203
+#: src/dialogs.c:1183
 msgid "Ignore recovery file"
 msgstr ""
 
-#: src/dialogs.c:1205
+#: src/dialogs.c:1185
 #, fuzzy
 msgid "Recover file"
 msgstr "最近打开的文件(_T)"
@@ -316,35 +319,35 @@ msgstr "最近打开的文件(_T)"
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1264
+#: src/dialogs.c:1244
 msgid "Here you can query existing translations from your learn buffer."
 msgstr "在此您可以从知识库中查询已有的翻译。"
 
-#: src/dialogs.c:1267
+#: src/dialogs.c:1247
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "gtranslator -- 查询您个人的知识库"
 
-#: src/dialogs.c:1271 src/menus.c:360
+#: src/dialogs.c:1251 src/menus.c:360
 msgid "Query"
 msgstr "查询"
 
-#: src/dialogs.c:1272
+#: src/dialogs.c:1252
 msgid "Query message content"
 msgstr "查询讯息内容"
 
-#: src/dialogs.c:1282
+#: src/dialogs.c:1262
 msgid "Query string:"
 msgstr "查询字符串："
 
-#: src/dialogs.c:1320
+#: src/dialogs.c:1300
 msgid "No query string given!"
 msgstr "没有指定查询字符串！"
 
-#: src/dialogs.c:1342
+#: src/dialogs.c:1322
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "无法在您的知识库中找到查询结果！"
 
-#: src/dialogs.c:1354
+#: src/dialogs.c:1334
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -357,11 +360,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1424
+#: src/dialogs.c:1404
 msgid "Query's result translation is already there!"
 msgstr "查询结果已经在那里了！"
 
-#: src/dialogs.c:1456
+#: src/dialogs.c:1436
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -369,20 +372,20 @@ msgstr ""
 "允许gtranslator使用个人知识库中的信息\n"
 "来自动翻译文件吗？"
 
-#: src/dialogs.c:1492 src/dialogs.c:1520
+#: src/dialogs.c:1472 src/dialogs.c:1500
 #, fuzzy
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- 编辑注释"
 
-#: src/dialogs.c:1512
+#: src/dialogs.c:1492
 msgid "Comment for the bookmark:"
 msgstr ""
 
-#: src/find.c:211
+#: src/find.c:217
 msgid "Please enter a search string"
 msgstr "请输入要搜索的字符串"
 
-#: src/find.c:227
+#: src/find.c:233
 #, c-format
 msgid ""
 "Could not find\n"
@@ -391,46 +394,52 @@ msgstr ""
 "无法找到\n"
 "“%s”"
 
-#: src/gui.c:204
+#: src/gui.c:199
 msgid "Edit comment"
 msgstr "编辑注释"
 
-#: src/gui.c:508
+#: src/gui.c:501
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ 还剩 %i 个不确切项 ]"
 
-#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:315
+#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
 msgstr "不确切"
 
-#: src/gui.c:512
+#: src/gui.c:505
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ 没有不确切项 ]"
 
-#: src/gui.c:520
+#: src/gui.c:513
 msgid "Sticky (Message & translation are the same)"
 msgstr "粘附 (讯息和翻译相同)"
 
-#: src/gui.c:531
+#: src/gui.c:515 src/messages-table.c:323
+msgid "Translated"
+msgstr "译文"
+
+#: src/gui.c:524
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ 还剩 %i 个未翻译项 ]"
 
-#: src/gui.c:531 src/gui.c:533 src/messages-table.c:306
+#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
 msgid "Untranslated"
 msgstr "未翻译"
 
-#: src/gui.c:533
+#: src/gui.c:526
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ 没有未翻译项 ]"
 
-#.
-#. * Assign the first part.
-#.
-#: src/gui.c:546
+#: src/gui.c:545
+#, fuzzy, c-format
+msgid "Message %d / %d / Status: %s (Message contains plural forms)"
+msgstr "讯息 %d / %d / 状态：%s"
+
+#: src/gui.c:549
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "讯息 %d / %d / 状态：%s"
@@ -483,20 +492,20 @@ msgstr "翻译者名字："
 msgid "Translator's e-mail:"
 msgstr "翻译者电子邮件："
 
-#: src/header_stuff.c:608 src/prefs.c:466
+#: src/header_stuff.c:608 src/prefs.c:500
 msgid "Language:"
 msgstr "语言："
 
-#: src/header_stuff.c:615 src/prefs.c:478
+#: src/header_stuff.c:615 src/prefs.c:512
 #, fuzzy
 msgid "Language group's email:"
 msgstr "语言小组电子邮件："
 
-#: src/header_stuff.c:622 src/prefs.c:484
+#: src/header_stuff.c:622 src/prefs.c:518
 msgid "Charset:"
 msgstr "字符集："
 
-#: src/header_stuff.c:629 src/prefs.c:489
+#: src/header_stuff.c:629 src/prefs.c:523
 msgid "Encoding:"
 msgstr "编码："
 
@@ -594,8 +603,9 @@ msgid "Estonian"
 msgstr "爱沙尼亚语"
 
 #: src/languages.c:121
-msgid "Farsi"
-msgstr "波斯语"
+#, fuzzy
+msgid "Persian"
+msgstr "白俄罗斯语"
 
 #: src/languages.c:125
 msgid "Finnish"
@@ -778,76 +788,114 @@ msgstr "瓦龙语"
 msgid "Welsh"
 msgstr "威尔士语"
 
-#: src/main.c:80
+#: src/learn.c:379
+#, fuzzy
+msgid "gtranslator learn buffer statistics:"
+msgstr "gtranslator 编译信息和规格："
+
+#: src/learn.c:382
+#, fuzzy, c-format
+msgid "Learn buffer filename: `%s`"
+msgstr "将知识库导出到“%s”。\n"
+
+#.
+#. * Translators: This means the encoding of the learn buffer (XML) file.
+#.
+#: src/learn.c:388
+#, fuzzy, c-format
+msgid "Encoding: `%s'"
+msgstr "编码："
+
+#.
+#. * Translators: "Serial number" of the learn buffer - means # of file updates.
+#.
+#: src/learn.c:394
+#, c-format
+msgid "Serial: `%i'"
+msgstr ""
+
+#.
+#. * Translators: That's the number of message entries in the learn buffer.
+#.
+#: src/learn.c:400
+#, c-format
+msgid "Number of entries: `%i'"
+msgstr ""
+
+#: src/main.c:83
 #, fuzzy
 msgid "Auto translate the po file"
 msgstr "自动翻译 po 文件并退出"
 
-#: src/main.c:80 src/main.c:96
+#: src/main.c:83 src/main.c:99
 msgid "FILENAME"
 msgstr "FILENAME"
 
-#: src/main.c:84
+#: src/main.c:87
 #, fuzzy
 msgid "Show build specifications"
 msgstr "显示编译信息和规格"
 
-#: src/main.c:88
+#: src/main.c:91
 msgid "Export learn buffer to a plain po file"
 msgstr "将知识库导出导普通 PO 文件"
 
-#: src/main.c:88
+#: src/main.c:91
 msgid "PO_FILE"
 msgstr "PO_FILE"
 
-#: src/main.c:92
+#: src/main.c:95
 msgid "Specify main window geometry"
 msgstr "指定主窗口几何属性"
 
-#: src/main.c:92
+#: src/main.c:95
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: src/main.c:96
+#: src/main.c:99
 #, fuzzy
 msgid "Learn the file completely"
 msgstr "学习文件并退出"
 
-#: src/main.c:139
+#: src/main.c:103
+msgid "Show learn buffer statistics"
+msgstr ""
+
+#: src/main.c:146
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf 初始化时出错：%s。"
 
-#: src/main.c:171
+#: src/main.c:178
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator 编译信息和规格："
 
-#: src/main.c:173
+#: src/main.c:180
 msgid "Version and build date:"
 msgstr "版本和编译时间："
 
-#: src/main.c:175
+#: src/main.c:182
 #, fuzzy
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "使用的 Glib/Gtk+/GNOME 版本："
 
-#: src/main.c:177
+#: src/main.c:184
 msgid "Colorschemes directory:"
 msgstr "配色方案目录："
 
-#: src/main.c:179
+#: src/main.c:186
 msgid "Scripts directory:"
 msgstr "脚本目录："
 
-#: src/main.c:181
+#: src/main.c:188
 msgid "Window icon:"
 msgstr "窗口图标："
 
-#: src/main.c:183
+#: src/main.c:190
 msgid "Own locale directory:"
 msgstr "自己的区域数据目录："
 
-#: src/main.c:185
+#: src/main.c:192
 #, fuzzy
 msgid "Default learn buffer file location:"
 msgstr "默认的查询域："
@@ -856,7 +904,7 @@ msgstr "默认的查询域："
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:431
+#: src/main.c:457
 #, fuzzy, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "成功学习“%s”。\n"
@@ -864,7 +912,7 @@ msgstr "成功学习“%s”。\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:473
+#: src/main.c:499
 #, fuzzy, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "将知识库导出到“%s”。\n"
@@ -1148,19 +1196,19 @@ msgstr "在 PO 文件中查找字符串"
 msgid "Replace string in po file"
 msgstr "在 PO 文件中替换字符串"
 
-#: src/message.c:95
+#: src/message.c:96
 msgid "Couldn't get the message!"
 msgstr "无法得到讯息！"
 
-#: src/message.c:117
+#: src/message.c:118
 msgid "There are no fuzzy messages left."
 msgstr "没有不确切的讯息了。"
 
-#: src/message.c:141
+#: src/message.c:142
 msgid "All messages seem to be translated."
 msgstr "已翻译完所有的讯息。"
 
-#: src/message.c:327
+#: src/message.c:328
 #, fuzzy
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "gtranslator -- 确认删除所有的翻译"
@@ -1168,10 +1216,6 @@ msgstr "gtranslator -- 确认删除所有的翻译"
 #: src/messages-table.c:243
 msgid "Original"
 msgstr "初始"
-
-#: src/messages-table.c:254
-msgid "Translation"
-msgstr "翻译"
 
 #: src/open.c:144
 #, c-format
@@ -1276,67 +1320,71 @@ msgstr ""
 msgid "Couldn't generate the current date!"
 msgstr "无法生成当前日期！"
 
-#: src/prefs.c:302
+#: src/prefs.c:212
+msgid "Hotkey indicating character:"
+msgstr ""
+
+#: src/prefs.c:332
 msgid "gtranslator -- options"
 msgstr "gtranslator -- 选项"
 
 #.
 #. * Files page
 #.
-#: src/prefs.c:320
+#: src/prefs.c:350
 #, fuzzy
 msgid "Files"
 msgstr "视图"
 
-#: src/prefs.c:321 src/prefs.c:496 src/prefs.c:553
+#: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
 #, fuzzy
 msgid "General"
 msgstr "生成器："
 
-#: src/prefs.c:322
+#: src/prefs.c:352
 #, fuzzy
 msgid "Warn if po file contains fuzzy translations"
 msgstr "如果 PO 文件包含不确切的翻译则发出警告"
 
-#: src/prefs.c:326
+#: src/prefs.c:356
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "删除编译结果文件(例如“project.gmo”)"
 
-#: src/prefs.c:330
+#: src/prefs.c:360
 #, fuzzy
 msgid "Autosave"
 msgstr "自动保存"
 
-#: src/prefs.c:331
+#: src/prefs.c:361
 #, fuzzy
 msgid "Automatically save at regular intervals"
 msgstr "按照固定间隔自动保存 PO 文件(分钟)："
 
-#: src/prefs.c:339
+#: src/prefs.c:369
 #, fuzzy
 msgid "Autosave interval:"
 msgstr "自动保存后缀："
 
-#: src/prefs.c:340
+#: src/prefs.c:370
 #, fuzzy
 msgid "Append a suffix to automatically saved files"
 msgstr "给自动保存文件添加后缀："
 
-#: src/prefs.c:347
+#: src/prefs.c:377
 msgid "Suffix:"
 msgstr ""
 
-#: src/prefs.c:348
+#: src/prefs.c:378
 #, fuzzy
 msgid "Recent files"
 msgstr "最近打开的文件(_T)"
 
-#: src/prefs.c:356
+#: src/prefs.c:386
 #, fuzzy
 msgid "Maximum number of entries in the recent files list:"
 msgstr "在最近打开文件列表中显示的最大数目："
 
-#: src/prefs.c:357
+#: src/prefs.c:387
 #, fuzzy
 msgid "Check recent files before showing in recent files list"
 msgstr "在显示最近打开文件列表前检测文件"
@@ -1344,233 +1392,233 @@ msgstr "在显示最近打开文件列表前检测文件"
 #.
 #. * Editor page
 #.
-#: src/prefs.c:365
+#: src/prefs.c:395
 #, fuzzy
 msgid "Editor"
 msgstr "退出"
 
-#: src/prefs.c:368
+#: src/prefs.c:398
 msgid "Text display"
 msgstr ""
 
-#: src/prefs.c:369
+#: src/prefs.c:399
 #, fuzzy
 msgid "Highlight syntax of the translation message"
 msgstr "突出显示翻译讯息的语法"
 
-#: src/prefs.c:380
+#: src/prefs.c:410
 msgid "Syntax color scheme to use:"
 msgstr "要使用的语法配色方案："
 
-#: src/prefs.c:381
+#: src/prefs.c:411
 #, fuzzy
 msgid "Use special character to indicate white space"
 msgstr "使用特殊字符来表示空格"
 
-#: src/prefs.c:385
+#: src/prefs.c:419
 #, fuzzy
 msgid "Apply own fonts"
 msgstr "使用自己的字体："
 
-#: src/prefs.c:389
+#: src/prefs.c:423
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- 字体选择/msgid 字体"
 
-#: src/prefs.c:393
+#: src/prefs.c:427
 msgid "Original text font:"
 msgstr "原来的文字字体："
 
-#: src/prefs.c:394
+#: src/prefs.c:428
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- 字体选择/msgstr 字体"
 
-#: src/prefs.c:398
+#: src/prefs.c:432
 msgid "Translation font:"
 msgstr "翻译字体："
 
-#: src/prefs.c:399
+#: src/prefs.c:433
 msgid "Apply own colors:"
 msgstr "使用自己的颜色："
 
-#: src/prefs.c:403
+#: src/prefs.c:437
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- 前景色"
 
-#: src/prefs.c:407
+#: src/prefs.c:441
 msgid "Foreground color:"
 msgstr "前景色："
 
-#: src/prefs.c:408
+#: src/prefs.c:442
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- 背景色"
 
-#: src/prefs.c:412
+#: src/prefs.c:446
 #, fuzzy
 msgid "Background:"
 msgstr "背景色："
 
-#: src/prefs.c:413
+#: src/prefs.c:447
 #, fuzzy
 msgid "Contents"
 msgstr "注释"
 
-#: src/prefs.c:414
+#: src/prefs.c:448
 #, fuzzy
 msgid "Remove fuzzy status if message is changed"
 msgstr "如果讯息被改动，将不确切状态清除"
 
-#: src/prefs.c:418
+#: src/prefs.c:452
 msgid "Keep obsolete messages in the po files"
 msgstr "将失效的讯息保留在 PO 文件中"
 
-#: src/prefs.c:422
+#: src/prefs.c:456
 #, fuzzy
 msgid "Spell checking"
 msgstr "即时拼写检查"
 
-#: src/prefs.c:423
+#: src/prefs.c:457
 msgid "Instant spell checking"
 msgstr "即时拼写检查"
 
-#: src/prefs.c:429
+#: src/prefs.c:463
 msgid "Use special dictionary:"
 msgstr "使用特别的字典："
 
 #.
 #. * PO header page
 #.
-#: src/prefs.c:447
+#: src/prefs.c:481
 #, fuzzy
 msgid "PO header"
 msgstr "文件头"
 
-#: src/prefs.c:450
+#: src/prefs.c:484
 #, fuzzy
 msgid "Personal Information"
 msgstr "个人信息"
 
-#: src/prefs.c:454
+#: src/prefs.c:488
 msgid "Author's name:"
 msgstr "作者的名字："
 
-#: src/prefs.c:458
+#: src/prefs.c:492
 #, fuzzy
 msgid "Author's email:"
 msgstr "作者的电子邮件："
 
-#: src/prefs.c:459
+#: src/prefs.c:493
 msgid "Language settings"
 msgstr "语言设置"
 
-#: src/prefs.c:472
+#: src/prefs.c:506
 msgid "Language code:"
 msgstr "语言代码："
 
 #.
 #. * Functionality page
 #.
-#: src/prefs.c:494
+#: src/prefs.c:528
 msgid "Functionality"
 msgstr ""
 
-#: src/prefs.c:497
+#: src/prefs.c:531
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "启用从 gtranslator 更新 PO 文件的功能"
 
-#: src/prefs.c:501
+#: src/prefs.c:535
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "启用从 PO 文件中删除全部翻译的功能"
 
-#: src/prefs.c:505
+#: src/prefs.c:539
 #, fuzzy
 msgid "Show instant comment view in main pane"
 msgstr "在主面板中显示及时注释视图"
 
-#: src/prefs.c:509
+#: src/prefs.c:543
 msgid "Display special dialog for messages with plural forms"
 msgstr ""
 
-#: src/prefs.c:513
+#: src/prefs.c:547
 #, fuzzy
 msgid "Save geometry on exit and restore it on startup"
 msgstr "退出时保存窗口状态并在启动时恢复"
 
-#: src/prefs.c:517
+#: src/prefs.c:551
 msgid "Messages table"
 msgstr "讯息表"
 
-#: src/prefs.c:518
+#: src/prefs.c:552
 #, fuzzy
 msgid "Show the messages table (requires restart)"
 msgstr "显示讯息表(需要重新启动 gtranslator)"
 
-#: src/prefs.c:522
+#: src/prefs.c:556
 #, fuzzy
 msgid "Collapse all entries by default"
 msgstr "默认折叠已翻译项"
 
-#: src/prefs.c:526
+#: src/prefs.c:560
 #, fuzzy
 msgid "Use own colors for messages table groups"
 msgstr "使用自定义颜色来显示讯息表编组"
 
-#: src/prefs.c:535
+#: src/prefs.c:569
 msgid "Fuzzy entries color:"
 msgstr "不确切项目的颜色："
 
-#: src/prefs.c:541
+#: src/prefs.c:575
 msgid "Untranslated entries color:"
 msgstr "未翻译项目的颜色："
 
-#: src/prefs.c:547
+#: src/prefs.c:581
 msgid "Translated entries color:"
 msgstr "已翻译项目的颜色："
 
 #.
 #. * Autotranslate page
 #.
-#: src/prefs.c:552
+#: src/prefs.c:586
 #, fuzzy
 msgid "Autotranslation"
 msgstr "翻译"
 
-#: src/prefs.c:554
+#: src/prefs.c:588
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr "在自动翻译未翻译的讯息时，查询个人的学习库"
 
-#: src/prefs.c:558
+#: src/prefs.c:592
 msgid "Automatically learn a newly translated message"
 msgstr "自动学习新翻译的讯息"
 
-#: src/prefs.c:562
+#: src/prefs.c:596
 msgid "Fuzzy matching"
 msgstr ""
 
-#: src/prefs.c:569
+#: src/prefs.c:603
 #, fuzzy
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr "使用“fuzzy”匹配例程进行知识库查询"
 
-#: src/prefs.c:576
+#: src/prefs.c:610
 #, fuzzy
 msgid "Minimal required similarity persentage for fuzzy queries:"
 msgstr "模糊查询的最小相似程度"
 
-#: src/prefs.c:621
+#: src/prefs.c:655
 msgid "Please enter your name!"
 msgstr "请输入您的名字！"
 
-#: src/prefs.c:635
+#: src/prefs.c:669
 msgid "Please enter your EMail address!"
 msgstr "请输入您的电子邮件地址！"
 
-#: src/prefs.c:648
+#: src/prefs.c:682
 msgid "Please enter a valid EMail address!"
 msgstr "请输入一个有效的电子邮件地址！"
 
-#: src/replace.c:173
+#: src/replace.c:171
 msgid "No replacements made!"
 msgstr "没有进行替换！"
 
@@ -1726,6 +1774,15 @@ msgstr "主机“%s”没有地址！"
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "传输中断！"
+
+#~ msgid "Both"
+#~ msgstr "两者"
+
+#~ msgid "In all strings"
+#~ msgstr "所有字符串"
+
+#~ msgid "Farsi"
+#~ msgstr "波斯语"
 
 #~ msgid "Are you sure you want to remove ALL translations from this po file?"
 #~ msgstr "您确定要从该 PO 文件中删除所有的翻译吗？"
