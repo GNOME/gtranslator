@@ -865,9 +865,9 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		gchar *newstr=g_new0(gchar,1);
 		guint len, index=1;
 		/**
-		* Get the current pointer.
+		* Get the current pointer poasition.
 		**/
-		index=gtk_text_get_point(GTK_TEXT(trans_box));
+		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
 		/**
 		* Freeze the translation box.
 		**/
@@ -897,11 +897,6 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		gtk_text_forward_delete(GTK_TEXT(trans_box),
 			gtk_text_get_length(GTK_TEXT(trans_box)));
 		/**
-		* Thaw up the translation box to avoid the reverse writing
-		*  feature.
-		**/
-		gtk_text_thaw(GTK_TEXT(trans_box));
-		/**
 		* Insert the changed text with the '·''s.
 		**/
 		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
@@ -909,6 +904,11 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		/**
 		* Go to the old text index.
 		**/
-		gtk_text_set_point(GTK_TEXT(trans_box), index);
+		gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+		/**
+                * Thaw up the translation box to avoid the reverse writing
+                *  feature.
+                **/
+		gtk_text_thaw(GTK_TEXT(trans_box));
 	}
 }
