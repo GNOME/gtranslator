@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2002-06-05 00:32+0200\n"
+"POT-Creation-Date: 2002-06-23 10:57+0200\n"
 "PO-Revision-Date: 2002-06-08 14:38+0200\n"
 "Last-Translator: Martin Lacko <lacko@host.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -297,7 +297,8 @@ msgstr "Zálohujem `%s'..."
 #.
 #: src/dialogs.c:1106
 msgid "Here you can query existing translations from your learn buffer."
-msgstr "Môžete sa dotázať na existujúci preložený reťazec v prekladovom bufferi."
+msgstr ""
+"Môžete sa dotázať na existujúci preložený reťazec v prekladovom bufferi."
 
 #: src/dialogs.c:1109
 msgid "gtranslator -- query your personal learn buffer"
@@ -321,7 +322,8 @@ msgstr "Nebol zadaný žiadny reťazec!"
 
 #: src/dialogs.c:1187
 msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr "Vo vašom prekladovom bufferi som nenašiel pre zadaný dotaz žiadny výsledok!"
+msgstr ""
+"Vo vašom prekladovom bufferi som nenašiel pre zadaný dotaz žiadny výsledok!"
 
 #: src/dialogs.c:1199
 #, c-format
@@ -1286,7 +1288,7 @@ msgstr ""
 "Súbor %s\n"
 "obsahuje %d nepreložených správ"
 
-#: src/parse.c:970 data/desktop/gtranslator.desktop.in.h:2
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:970
 msgid "gtranslator"
 msgstr "gtranslátor"
 
@@ -1409,131 +1411,135 @@ msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Vymazať kompilované súbory (napr.  \"projekt.gmo\")"
 
 #: src/prefs.c:217
+msgid "Directory to put compiled po files into"
+msgstr ""
+
+#: src/prefs.c:220
 msgid "Load all backends on startup"
 msgstr "Pri spustení nahrať všetky zarážky"
 
-#: src/prefs.c:220
+#: src/prefs.c:223
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Uložiť geometriu okna pri ukončení"
 
-#: src/prefs.c:223
+#: src/prefs.c:226
 msgid "Show instant comment view in the main pane"
 msgstr "Uložiť stále zobrazenie komentárov v hlavnom okne"
 
-#: src/prefs.c:230
+#: src/prefs.c:233
 msgid "Maximum number of entries in the recent files' list:"
 msgstr "Maximum nedávnych položiek:"
 
-#: src/prefs.c:234
+#: src/prefs.c:237
 msgid "Check recent files before showing in recent files' list"
 msgstr "Skontrolovať nedávne súbory pred ich zobrazením v zozname nedávnych"
 
-#: src/prefs.c:237
+#: src/prefs.c:240
 msgid "Instant spell checking"
 msgstr "Kontrola pravopisu"
 
-#: src/prefs.c:240
+#: src/prefs.c:243
 msgid "Use special dictionary:"
 msgstr "Používať špeciálny slovník:"
 
-#: src/prefs.c:262
+#: src/prefs.c:265
 msgid "Syntax color scheme to use:"
 msgstr "Použiť farebnú schému syntaxe:"
 
-#: src/prefs.c:267
+#: src/prefs.c:270
 msgid "Apply own fonts:"
 msgstr "Použiť vlastné písmo:"
 
-#: src/prefs.c:271
+#: src/prefs.c:274
 msgid "Original text font:"
 msgstr "Originálny text:"
 
-#: src/prefs.c:271
+#: src/prefs.c:274
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslátor - písmo výberu/msgid písmo"
 
-#: src/prefs.c:275
+#: src/prefs.c:278
 msgid "Translation font:"
 msgstr "Preklad:"
 
-#: src/prefs.c:275
+#: src/prefs.c:278
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslátor - písmo výberu/msgstr písmo"
 
-#: src/prefs.c:279
+#: src/prefs.c:282
 msgid "Apply own colors:"
 msgstr "Použiť vlastné farby:"
 
-#: src/prefs.c:283
+#: src/prefs.c:286
 msgid "Foreground color:"
 msgstr "Popredie:"
 
-#: src/prefs.c:283
+#: src/prefs.c:286
 msgid "gtranslator -- foreground color"
 msgstr "gtranslátor - farba popredia"
 
-#: src/prefs.c:287
+#: src/prefs.c:290
 msgid "Background color:"
 msgstr "Pozadie:"
 
-#: src/prefs.c:287
+#: src/prefs.c:290
 msgid "gtranslator -- background color"
 msgstr "gtranslátor - farba pozadia"
 
 #.
 #. * The seventh page of the prefs-box: autosaving options.
 #.
-#: src/prefs.c:293
+#: src/prefs.c:296
 msgid "Automatically save po files at regular intervals (in minutes):"
 msgstr "minút:"
 
-#: src/prefs.c:308
+#: src/prefs.c:311
 msgid "Append a suffix to automatically saved files:"
 msgstr "Pridať príponu za automaticky ukladané súbory:"
 
-#: src/prefs.c:328
+#: src/prefs.c:331
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Ukázať tabuľku správ (vyžaduje reštart gtranslátora)"
 
-#: src/prefs.c:332
+#: src/prefs.c:335
 msgid "Collapse translated entries by default"
 msgstr "Uzatvoriť preložené položky"
 
-#: src/prefs.c:336
+#: src/prefs.c:339
 msgid "Use own colors for the messages table groups"
 msgstr "Použiť vlastné farby skupín tabuľky správ"
 
-#: src/prefs.c:340
+#: src/prefs.c:343
 msgid "Untranslated entries color:"
 msgstr "Nepreložené položky:"
 
-#: src/prefs.c:340
+#: src/prefs.c:343
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslátor - farba nepreložených položiek"
 
-#: src/prefs.c:344
+#: src/prefs.c:347
 msgid "Fuzzy entries color:"
 msgstr "Nepresné položky:"
 
-#: src/prefs.c:344
+#: src/prefs.c:347
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslátor - farba nepresných položiek"
 
-#: src/prefs.c:348
+#: src/prefs.c:351
 msgid "Translated entries color:"
 msgstr "Preložené položky:"
 
-#: src/prefs.c:348
+#: src/prefs.c:351
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslátor - farba preložených položiek"
 
-#: src/prefs.c:356
+#: src/prefs.c:359
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr "Dotázať sa aj v osobnom prekladovom bufferi pri automatickom preklade"
 
-#: src/prefs.c:360
+#: src/prefs.c:363
 msgid "Automatically learn a newly translated message"
 msgstr "Automaticky pridávať novopreložené správy do prekladového bufferu"
 
@@ -1542,27 +1548,29 @@ msgstr "Automaticky pridávať novopreložené správy do prekladového bufferu"
 #. *  crappy) logic while searching for appropriate translations
 #. *   for a original string.
 #.
-#: src/prefs.c:368
-msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
-msgstr "Použiť označenie \"nepresná\" pre položky doplnené z prekladového bufferu"
-
 #: src/prefs.c:371
-msgid "Minimal required similarity percentage for fuzzy queries"
-msgstr "Minimálna požadovaná percentuálna zhoda v nepresných prekladoch (dotazoch)"
+msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
+msgstr ""
+"Použiť označenie \"nepresná\" pre položky doplnené z prekladového bufferu"
 
-#: src/prefs.c:416
+#: src/prefs.c:374
+msgid "Minimal required similarity percentage for fuzzy queries"
+msgstr ""
+"Minimálna požadovaná percentuálna zhoda v nepresných prekladoch (dotazoch)"
+
+#: src/prefs.c:419
 msgid "Please enter your name!"
 msgstr "Zadajte prosím vaše meno!"
 
-#: src/prefs.c:430
+#: src/prefs.c:433
 msgid "Please enter your EMail address!"
 msgstr "Zadajte prosím vašu EMailovú adresu!"
 
-#: src/prefs.c:443
+#: src/prefs.c:446
 msgid "Please enter a valid EMail address!"
 msgstr "Zadajte prosím správnu EMailovú adresu!"
 
-#: src/prefs.c:672
+#: src/prefs.c:678
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1582,7 +1590,7 @@ msgstr "Nič nebolo nahradené!"
 #. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
 #. *
 #. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot ('') in the
+#. *  another than a 'Y' to avoid the usage of the mid dot ('�') in the
 #. *   text displaying routines of gtranslator.
 #.
 #: src/runtime-config.c:81
@@ -1637,19 +1645,25 @@ msgstr "Nebolo zadané písmo! Použijem predvolené"
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
 
-#: src/update.c:102
+#: src/update.c:60
+msgid ""
+"The po file was changed and the changes weren't saved yet. Do you still want "
+"to update the po file now?"
+msgstr ""
+
+#: src/update.c:120
 msgid "No POTFILES.in found!"
 msgstr "Nebol nájdený žiadny POTSÚBOR.in!"
 
-#: src/update.c:113
+#: src/update.c:131
 msgid "Po file is uptodate."
 msgstr "Po súbor je aktuálny."
 
-#: src/update.c:120
+#: src/update.c:138
 msgid "The update was successfull."
 msgstr "Aktualizácia bola úspešná."
 
-#: src/update.c:125
+#: src/update.c:143
 msgid "An error occurred while updating the po file."
 msgstr "Počas aktualizácie po súboru došlo k chybe."
 
@@ -1802,4 +1816,3 @@ msgstr "Komprimovaný po súbor gettextu"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Po súbor gettextu"
-
