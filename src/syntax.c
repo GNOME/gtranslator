@@ -460,7 +460,7 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 					{
 						gint i = strlen(prefixes[z]);
 						aInserted = TRUE;
-						g_string_truncate(string, string -> len - i);
+						g_string_truncate(string, string -> len - i + 1);
 						while(i>0)
 						{
 							g_string_append_c(string, COLOR_ADDRESS);
@@ -495,7 +495,7 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 					{
 						gint i = strlen(keywords[z]);
 						aInserted = TRUE;
-						g_string_truncate(string, string -> len - i);
+						g_string_truncate(string, string -> len - i + 1);
 						while(i>0)
 						{
 							g_string_append_c(string, COLOR_KEYWORD);
