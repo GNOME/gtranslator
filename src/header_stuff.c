@@ -85,18 +85,22 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 GtrHeader * gtranslator_header_get(GtrMsg * msg)
 {
 	GtrHeader *ph;
-	gchar **lines, **pair;
+	gchar **lines, **pair, *pos;
 	gint i = 0;
 
-	if(!msg->msgstr)
-		return NULL;
+	g_return_val_if_fail(msg != NULL, NULL);
+	g_return_val_if_fail(msg->msgstr != NULL, NULL);
 	
 	ph = g_new0(GtrHeader, 1);
-	lines = g_strsplit(msg->msgstr, "\\n", 0);
-	while (lines[i] != NULL) {
+	lines = g_strsplit(msg->msgstr, "\n", 0);
+	for (i = 0; lines[i] != NULL; i++) {
 		pair = g_strsplit(lines[i], ": ", 2);
-
+		if(!pair[0] || !pair[1]) continue;
+		pos = strstr(pair[1], "\\n");
+		if(pos)
+			*pos = '\0';
 #define if_key_is(str) if (pair[0] && !g_strcasecmp(pair[0],str))
+
 		if_key_is("Project-Id-Version") {
 			gchar *space;
 			space = strrchr (pair[1], ' ');
@@ -144,7 +148,6 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		    ph->generator = g_strdup(pair[1]);
 
 		g_strfreev(pair);
-		i++;
 	}
 	
 	g_strfreev(lines);
@@ -185,16 +188,15 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 	else
 		version = g_strdup(h->prj_name);
 	
-	msg->msgstr = g_strdup_printf("\
-Project-Id-Version: %s\n\
-Report-Msgid-Bugs-To: %s\n\
-POT-Creation-Date: %s\n\
-PO-Revision-Date: %s\n\
-Last-Translator: %s <%s>\n\
-Language-Team: %s\n\
-MIME-Version: %s\n\
-Content-Type: text/plain; charset=%s\n\
-Content-Transfer-Encoding: %s\n",
+	msg->msgstr = g_strdup_printf("\n"\
+"Project-Id-Version: %s\\n\n"\
+"POT-Creation-Date: %s\\n\n"\
+"PO-Revision-Date: %s\\n\n"\
+"Last-Translator: %s <%s>\\n\n"\
+"Language-Team: %s\\n\n"\
+"MIME-Version: %s\\n\n"\
+"Content-Type: text/plain; charset=%s\\n\n"\
+"Content-Transfer-Encoding: %s",
 		version,
 		h->report_message_bugs_to,
 		h->pot_date,
@@ -715,8 +717,7 @@ void replace_substring(gchar **item, const gchar *bad, const gchar *good)
  */
 gboolean gtranslator_header_fill_up(GtrHeader *header)
 {
-	if(header==NULL)
-		return FALSE;
+	g_return_val_if_fail(header!=NULL, FALSE);
 
 	have_changed=FALSE;
 	substitute(&header->translator, "FULL NAME", gtranslator_translator->name);
@@ -724,7 +725,6 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 	
 	substitute(&header->language, "LANGUAGE", gtranslator_translator->language->name);
 	substitute(&header->lg_email, "LL@li.org", gtranslator_translator->language->group_email);
-	
 	substitute(&header->charset, "CHARSET", gtranslator_translator->language->encoding);
 	substitute(&header->encoding, "ENCODING", gtranslator_translator->language->bits);
 

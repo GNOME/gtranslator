@@ -1,3 +1,7 @@
+2003-06-16  Ross Golder  <ross@golder.org>
+
+	* header_stuff.c: Fixed parsing of header (#115248)
+
 2003-06-15  Fatih Demir <kabalak@gtranslator.org>
 
 	* parse.c: Extended authors' lines in the copyright notice :-)
@@ -21,7 +25,7 @@
 	* translator.c: Made the default charset of the new default
 		translators for'd GtrTranslator structure to be "UTF-8".
 
-2003-06-08  Ross Golder  <rossg@golder.org>
+2003-06-08  Ross Golder  <ross@golder.org>
 
 	* gui.c, menus.[ch], prefs.[ch], prefs_init.c: Removed the
 	'main_popup_menu', as it blocks access to the default GTK2
@@ -30,7 +34,7 @@
 	* find.c (find_in_msg): Removed a check that was making the search
 	ignore untranslated messages. (#81218)
 
-2003-06-07  Ross Golder  <rossg@golder.org>
+2003-06-07  Ross Golder  <ross@golder.org>
 
 	* parse.c, learn.c, header_stuff.c: Removed code that attempted
 	to escape/unescape and reformat messages when loading and saving
@@ -49,7 +53,7 @@
 		list and removed Kevin (as he probably wanted it from me
 		 long time ago ;-)) from it.
 
-2003-05-25  Ross Golder  <rossg@golder.org>
+2003-05-25  Ross Golder  <ross@golder.org>
 
 	* about.c (gtranslator_about_dialog): Fix copyright notice, for
 	legal reasons. (#102453)
