@@ -86,7 +86,6 @@ GList *gtranslator_history_get(void)
 	gtranslator_config_init();
 
 	count=gtranslator_config_get_int("history/length");
-	g_print("history/length=%d\n", count);
 
 	for(c=0;c < count; c++)
 	{
