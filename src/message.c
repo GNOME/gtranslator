@@ -55,6 +55,13 @@ static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
 /*
+ * The callback handling the editing of the plural forms and the correcponding tree handle.
+ */
+static void plural_forms_edited(GtkCellRendererText *crtext, gchar *path, gchar *str, gpointer message);
+
+static GtkTreeStore *plural_forms_store;
+
+/*
  * Calls function func on each item in list 'begin'. Starts from 
  * item 'begin', loops to first element, and stops at 'begin'.
  * Returns TRUE, if found, FALSE otherwise.
@@ -133,6 +140,58 @@ void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer us
 	gnome_app_message(GNOME_APP(gtranslator_application), 
 			  _("All messages seem to be translated."));
 	gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED);
+}
+
+/*
+ * The used callback if the user edits a plural form in the plural forms dialog
+ */
+static void plural_forms_edited(GtkCellRendererText *crtext, gchar *path, gchar *str, gpointer message)
+{
+	GtkTreeIter	iter;
+	GtkTreePath	*pathie;
+
+	g_return_if_fail(message!=NULL);
+	g_return_if_fail(path!=NULL);
+
+	/*
+	 * Get a GtkTreePath according to the path string given by the "edited" callback from
+	 *  the GtkCellRendererText which holds all our strings inside it.
+	 */
+	pathie=gtk_tree_path_new_from_string(path);
+	gtk_tree_model_get_iter(GTK_TREE_MODEL(plural_forms_store), &iter, pathie);
+	gtk_tree_path_free(pathie);
+
+	/*
+	 * According to the path which was given to us (as we're using a fixed tree structure we can
+	 *  do the handling via the old and easy way via an if/else if/else tree here :-)
+	 *
+	 * We're freeing the previous string and getting the string from the cell renderer, assigning
+	 *  it and also updating the tree store/view with the new data.
+	 */
+	if(!strcmp(path, "0:1"))
+	{
+		GTR_FREE((GTR_MSG(message)->msgstr_2));
+		GTR_MSG(message)->msgstr_2=g_strdup(str);
+
+		gtk_tree_store_set(GTK_TREE_STORE(plural_forms_store), &iter,
+			1, GTR_MSG(message)->msgstr_2, -1);
+	}
+	else if(!strcmp(path, "0:0"))
+	{
+		GTR_FREE((GTR_MSG(message)->msgstr_1));
+		GTR_MSG(message)->msgstr_1=g_strdup(str);
+
+		gtk_tree_store_set(GTK_TREE_STORE(plural_forms_store), &iter,
+			1, GTR_MSG(message)->msgstr_1, -1);
+	}
+	else
+	{
+		GTR_FREE((GTR_MSG(message)->msgstr));
+		GTR_MSG(message)->msgstr=g_strdup(str);
+
+		gtk_tree_store_set(GTK_TREE_STORE(plural_forms_store), &iter,
+			1, GTR_MSG(message)->msgstr, -1);
+	}
 }
 
 /* 
@@ -254,43 +313,42 @@ void gtranslator_message_show(GtrMsg *msg)
 		GtkWidget	*dialog=NULL;
 		GtkWidget	*tree=NULL;
 
-		GtkTreeStore	*store=NULL;
 		GtkTreeIter	iter_par, iter_ch;
 
 		GtkTreeViewColumn	*col;
 		GtkCellRenderer		*render;
 
 		dialog=gtk_dialog_new_with_buttons(
-			_("gtranslator -- plural forms of the message"),
+			_("gtranslator -- edit plural forms of message translation"),
 			GTK_WINDOW(gtranslator_application),
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 			NULL);
 
-		store=gtk_tree_store_new(N_COL, G_TYPE_STRING, G_TYPE_STRING);
-		gtk_tree_store_append(store, &iter_par, NULL);
+		plural_forms_store=gtk_tree_store_new(N_COL, G_TYPE_STRING, G_TYPE_STRING);
+		gtk_tree_store_append(plural_forms_store, &iter_par, NULL);
 
-		gtk_tree_store_set(store, &iter_par,
+		gtk_tree_store_set(plural_forms_store, &iter_par,
 			MSG_COL, msg->msgid,
 			TRANS_COL, msg->msgstr,
 			-1);
 
-		gtk_tree_store_append(store, &iter_ch, &iter_par);
-		gtk_tree_store_set(store, &iter_ch,
+		gtk_tree_store_append(plural_forms_store, &iter_ch, &iter_par);
+		gtk_tree_store_set(plural_forms_store, &iter_ch,
 			MSG_COL, msg->msgid_plural,
 			TRANS_COL, msg->msgstr_1,
 			-1);
 
 		if(msg->msgstr_2)
 		{
-			gtk_tree_store_append(store, &iter_ch, &iter_par);
-			gtk_tree_store_set(store, &iter_ch,
+			gtk_tree_store_append(plural_forms_store, &iter_ch, &iter_par);
+			gtk_tree_store_set(plural_forms_store, &iter_ch,
 				MSG_COL, "",
 				TRANS_COL, msg->msgstr_2,
 				-1);
 		}
 
-		tree=gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));
+		tree=gtk_tree_view_new_with_model(GTK_TREE_MODEL(plural_forms_store));
 
 		render=gtk_cell_renderer_text_new();
 		col=gtk_tree_view_column_new_with_attributes("Message",
@@ -305,12 +363,14 @@ void gtranslator_message_show(GtrMsg *msg)
 			render, "text", TRANS_COL, NULL);
 
 		gtk_tree_view_append_column(GTK_TREE_VIEW(tree), col);
+
+		g_signal_connect(G_OBJECT(render), "edited", G_CALLBACK(plural_forms_edited), msg);
 		
 		gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), tree,
 			FALSE, FALSE, 0);
 		gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_CANCEL);
 
-		gtranslator_dialog_show(&dialog, "gtranslator -- plural forms");
+		gtranslator_dialog_show(&dialog, "gtranslator -- edit plural forms of message translation");
 
 		if(gtk_dialog_run(GTK_DIALOG(dialog)))
 		{
