@@ -39,7 +39,8 @@ void gtranslator_signal_handler(int signal)
 	{
 		return;
 	}	
-	
+	signalscount = 1;
+
 	if(po && po->file_changed)
 	{
 		gchar *crashfilename;
