@@ -1,0 +1,14 @@
+2001-02-27  Fatih Demir	<kabalak@gtranslator.org>
+
+	* main.c & nautilus-gtranslator-view.c: Made all the includes 
+		absolute as the ../src directory is already included in the
+		 $CFLAGS and enabled i18n and made some messages translatable
+		  -- but not all strings as the Mail interface will surely get
+		    blown away quite soon.
+
+	* .cvsignore: Added all the files which should be ignored (object
+		files, executables, .deps, .libs etcc).
+
+	* nautilus-view/*: Added the nautilus-gtranslator-view sources
+		to gtranslator and added automake/autoconf based build
+		 scheme.
