@@ -23,6 +23,14 @@ vfs_cflags =
 vfs_libs =
 endif
 
+if USE_GAL_GUI
+gal_cflags = $(GAL_CFLAGS) -DUSE_GAL_GUI=7
+gal_libs = $(GAL_LIBS)
+else
+gal_cflags =
+gal_libs = 
+endif
+
 if USE_GTKHTML
 gtkhtml_cflags = $(GTKHTML_CFLAGS) -DUSE_GTKHTML=7
 gtkhtml_libs = $(GTKHTML_LIBS)
@@ -36,6 +44,7 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
 	$(vfs_cflags) \
+	$(gal_cflags) \
 	$(gtkhtml_cflags) \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
@@ -75,6 +84,7 @@ gtranslator_LDADD = \
 	$(gconf_libs) \
 	$(XML_LIBS) \
 	$(vfs_libs) \
+	$(gal_libs) \
 	$(gtkhtml_libs)
 
 EXTRA_DIST = ChangeLog

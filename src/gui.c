@@ -43,6 +43,11 @@
 #include <gtkhtml/gtkhtml.h>
 #endif
 
+#ifdef USE_GAL_GUI
+#include <gal/e-paned/e-hpaned.h>
+#include <gal/shortcut-bar/e-shortcut-bar.h>
+#endif
+
 typedef struct _GtrAction GtrAction;
 #define GTR_ACTION(x) ((GtrAction *)x)
 
@@ -487,12 +492,29 @@ void create_app1(void)
 	GtkWidget *search_bar, *tool_bar;
 	GtkWidget *vbox1;
 	GtkWidget *scrolledwindow1, *scrolledwindow2;
-
+	#ifdef USE_GAL_GUI
+	GtkWidget *pane;
+	GtkWidget *filebox;
+	EShortcutModel *model;
+	#endif
+	
 	/*
 	 * Create the app	
 	 */
 	app1 = gnome_app_new("gtranslator", _("gtranslator"));
 	gnome_app_create_menus(GNOME_APP(app1), the_menus);
+
+	#ifdef USE_GAL_GUI
+	pane=e_hpaned_new();
+	model=e_shortcut_model_new();
+	filebox=e_shortcut_bar_new();
+	
+	e_shortcut_bar_set_model(E_SHORTCUT_BAR(filebox), model);
+	
+	e_paned_pack1(E_PANED(pane), filebox, TRUE, FALSE);
+
+	e_paned_set_position(E_PANED(pane), 75);
+	#endif
 
 	/*
 	 * Create the tool- and search-bar
@@ -512,7 +534,13 @@ void create_app1(void)
 			      GNOME_DOCK_TOP, 2, 0, 0);
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
+	
+	#ifdef USE_GAL_GUI
+	e_paned_pack2(E_PANED(pane), vbox1, TRUE, FALSE);
+	gnome_app_set_contents(GNOME_APP(app1), pane);
+	#else
 	gnome_app_set_contents(GNOME_APP(app1), vbox1);
+	#endif
 
 	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow1, TRUE, TRUE, 0);
@@ -528,7 +556,9 @@ void create_app1(void)
 	
 	gtk_container_add(GTK_CONTAINER(scrolledwindow1), text1);
 	
-	#ifndef USE_GTKHTML
+	#ifdef USE_GTKHTML
+	gtk_html_set_editable(GTK_HTML(text1), FALSE);
+	#else
 	gtk_text_set_editable(GTK_TEXT(text1), FALSE);
 	#endif
 
@@ -543,6 +573,7 @@ void create_app1(void)
 
 	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(app1), appbar1);
+	
 	/*
 	 * Make menu hints display on the appbar
 	 */
