@@ -4,44 +4,371 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.20\n"
-"POT-Creation-Date: 2000-08-04 00:00+0200\n"
-"PO-Revision-Date: 2000-08-02 18:28+09:00\n"
+"Project-Id-Version: gtranslator 0.21\n"
+"POT-Creation-Date: 2000-09-14 15:10+0200\n"
+"PO-Revision-Date: 2000-09-14 23:13+09:00\n"
 "Last-Translator: Takeshi Aihana <aihana@muc.biglobe.ne.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:22
-msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
-msgstr "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
-
-#: src/about.c:24
+#: src/about.c:26
 msgid ""
 "gtranslator will be a Gnome framework for translating these emminent "
 "important po-files.\n"
 "It will be based upon a gtranslatord and a gtranslator client. Wish the best "
 "for us translators and for me!"
 msgstr ""
-"gtranslator は非常に重要な .po ファイルを翻訳するための Gnome "
-"フレームワークです。\n"
-"gtranslatord と gtranslator クライアントがベースとなっている。 "
-"翻訳者は我々にとって最高であると願っています!"
+"gtranslator は非常に重要な .po ファイルを翻訳するための"
+"Gnome フレームワークです。\n"
+"gtranslatord と gtranslator クライアントがベースです。 翻訳者は"
+"我々にとって最高であると願っています!"
 
-#: src/gtr_dialogs.c:21
+#: src/gui.c:55
+msgid "_Compile"
+msgstr "コンパイル(_C)"
+
+#: src/gui.c:56 src/gui.c:200
+msgid "Compile the po-file"
+msgstr ".po ファイルをコンパイルします"
+
+#: src/gui.c:82
+msgid "_Header..."
+msgstr "ヘッダ(_H)..."
+
+#: src/gui.c:83 src/gui.c:216
+msgid "Edit the header"
+msgstr "ヘッダを編集します"
+
+#: src/gui.c:86
+msgid "_Spell check..."
+msgstr "スペルチェック(_S)..."
+
+#: src/gui.c:87
+msgid "Check the spelling of translation"
+msgstr "翻訳のスペルをチェックします"
+
+#: src/gui.c:95
+msgid "_First"
+msgstr "先頭へ(_F)"
+
+#: src/gui.c:96 src/gui.c:233
+msgid "Go to the first message"
+msgstr "メッセージの先頭にジャンプします"
+
+#: src/gui.c:101
+msgid "_Back"
+msgstr "戻る(_B)"
+
+#: src/gui.c:102 src/gui.c:237
+msgid "Go one message back"
+msgstr "1つ前のメッセージに戻ります"
+
+#: src/gui.c:107
+msgid "_Next"
+msgstr "次へ(_N)"
+
+#: src/gui.c:108 src/gui.c:241
+msgid "Go one message forward"
+msgstr "次のメッセージにジャンプします"
+
+#: src/gui.c:113
+msgid "_Last"
+msgstr "最後へ(_L)"
+
+#: src/gui.c:114 src/gui.c:245
+msgid "Go to the last message"
+msgstr "最後のメッセージにジャンプします"
+
+#: src/gui.c:120
+msgid "_Go to..."
+msgstr "ジャンプ(_G)..."
+
+#: src/gui.c:121 src/gui.c:253
+msgid "Goto specified message number"
+msgstr "指定したメッセージ番号にジャンプします"
+
+#: src/gui.c:126
+msgid "Next fuz_zy"
+msgstr "次のfuzzy(_Z)"
+
+#: src/gui.c:127
+msgid "Go to next fuzzy message"
+msgstr "次の fuzzy なメッセージにジャンプします"
+
+#: src/gui.c:132
+msgid "Next _untranslated"
+msgstr "次の未翻訳へ(_U)"
+
+#: src/gui.c:133 src/gui.c:249
+msgid "Go to next untranslated message"
+msgstr "翻訳していない次のメッセージにジャンプします"
+
+#: src/gui.c:142
+msgid "_Translated"
+msgstr "翻訳済み(_T)"
+
+#: src/gui.c:143
+msgid "Toggle translated status of a message"
+msgstr "メッセージを翻訳済みに切り替えます"
+
+#: src/gui.c:150
+msgid "_Fuzzy"
+msgstr "Fuzzy(_F)"
+
+#: src/gui.c:151
+msgid "Toggle fuzzy status of a message"
+msgstr "メッセージを fuzzy に切り替えます"
+
+#: src/gui.c:158
+msgid "_Stick"
+msgstr "張り付く(_S)"
+
+#: src/gui.c:159
+msgid "Stick this message"
+msgstr "このメッセージに張り付きます"
+
+#: src/gui.c:177
+msgid "gtranslator _website"
+msgstr "gtranslator ウェブサイト(_W)"
+
+#: src/gui.c:178
+msgid "gtranslator's homepage on the web"
+msgstr "gtranslator のホームページ開きます"
+
+#: src/gui.c:187
+msgid "_Messages"
+msgstr "メッセージ(_M)"
+
+#: src/gui.c:188
+msgid "Message _status"
+msgstr "メッセージ状況(_S)"
+
+#: src/gui.c:199
+msgid "Compile"
+msgstr "コンパイル"
+
+#: src/gui.c:203
+msgid "Open"
+msgstr "開く"
+
+#: src/gui.c:204
+msgid "Open a po-file"
+msgstr ".po ファイルを開きます"
+
+#: src/gui.c:207
+msgid "Save"
+msgstr "保存"
+
+#: src/gui.c:208
+msgid "Save File"
+msgstr "ファイルを保存します"
+
+#: src/gui.c:211
+msgid "Save as"
+msgstr "名前を付けて保存"
+
+#: src/gui.c:212
+msgid "Save file with a different name"
+msgstr "別の名前でファイルを保存します"
+
+#: src/gui.c:215
+msgid "Header"
+msgstr "ヘッダ"
+
+#: src/gui.c:220
+msgid "Options"
+msgstr "オプション"
+
+#: src/gui.c:221
+msgid "gtranslator options"
+msgstr "gtranslator のオプションです"
+
+#: src/gui.c:224 src/gui.c:225
+msgid "Exit"
+msgstr "終了"
+
+#: src/gui.c:232
+msgid "First"
+msgstr "先頭へ"
+
+#: src/gui.c:236
+msgid "Back"
+msgstr "戻る"
+
+#: src/gui.c:240
+msgid "Next"
+msgstr "次へ"
+
+#: src/gui.c:244
+msgid "Last"
+msgstr "最後へ"
+
+#: src/gui.c:248
+msgid "Missing"
+msgstr "不明"
+
+#: src/gui.c:252
+msgid "GoTo"
+msgstr "ジャンプ"
+
+#: src/dialogs.c:201 src/gui.c:256
+msgid "Find"
+msgstr "ファイル検索"
+
+#: src/gui.c:257
+msgid "Find string in po-file"
+msgstr ".po ファイルの中から文字列を検索します "
+
+#. *
+#. * Create the app
+#. *
+#: src/gui.c:360
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: src/gui.c:439
+msgid "Bye bye!"
+msgstr "バイバイ!"
+
+#: src/gui.c:545
+#, c-format
+msgid "Message: %d / %d"
+msgstr "メッセージ数: %d / %d"
+
+#: src/dialogs.c:49
+msgid "gtranslator -- open a po-file"
+msgstr "gtranslator -- .po ファイルを開く"
+
+#: src/dialogs.c:73
+msgid "gtranslator -- save file as .."
+msgstr "gtranslator -- 名前を付けて保存します.."
+
+#: src/dialogs.c:100
+#, c-format
 msgid ""
-"An error occured while msgfmt was executed.\n"
-"Please check your .po file again."
+"File %s\n"
+"was changed. Save?"
 msgstr ""
-"msgfmt の実行時にエラーが発生しました。\n"
-".po ファイルを再度確認してください。"
+".po ファイル: %s\n"
+"が変更されました。保存しますか?"
 
-#: src/gtr_dialogs.c:33
-msgid "You didn't change anything in the .po-file!\n"
-msgstr ".po ファイルに何も変更がありません!\n"
+#: src/dialogs.c:141
+msgid "gtranslator -- go to"
+msgstr "gtranslator -- ジャンプ"
 
-#: src/gtr_dialogs.c:42
+#: src/dialogs.c:141
+msgid "Go!"
+msgstr "ジャンプ!"
+
+#: src/dialogs.c:145
+msgid "Go to message number:"
+msgstr "メッセージ番号にジャンプ:"
+
+#: src/dialogs.c:201
+msgid "Find in the po-file"
+msgstr ".po ファイルの中から検索します"
+
+#. *
+#. * Create the widgets.
+#. *
+#: src/dialogs.c:206
+msgid "Enter your desired search string:"
+msgstr "検索する文字列を入力してください:"
+
+#: src/dialogs.c:209
+msgid "Case sensitive"
+msgstr "大小文字を区別しない"
+
+#: src/dialogs.c:215 src/languages.h:84
+msgid "English"
+msgstr "英語"
+
+#: src/dialogs.c:217
+msgid "Translated"
+msgstr "翻訳済み"
+
+#: src/dialogs.c:219
+msgid "Both"
+msgstr "両方"
+
+#: src/dialogs.c:222
+msgid "Find in: "
+msgstr "検索ファイル: "
+
+#: src/dialogs.c:264
+msgid "An error occured while msgfmt was executed:\n"
+msgstr "msgfmt の実行時にエラーが発生しました:\n"
+
+#: src/prefs.c:188
+msgid "gtranslator -- options"
+msgstr "gtranslator -- オプション"
+
+#. *
+#. * The tables for holding all the entries below
+#. *
+#: src/prefs.c:192
+msgid "Personal information"
+msgstr "個人情報"
+
+#: src/prefs.c:193
+msgid "Language options"
+msgstr "言語オプション"
+
+#: src/prefs.c:194
+msgid "Po file options"
+msgstr ".po ファイルオプション"
+
+#: src/prefs.c:200
+msgid "Author's name :"
+msgstr "作者の名前 :"
+
+#: src/prefs.c:203
+msgid "Author's EMail :"
+msgstr "作者のE-メールアドレス :"
+
+#: src/header_stuff.c:306 src/prefs.c:211
+msgid "Language :"
+msgstr "言語 :"
+
+#: src/prefs.c:215
+msgid "Language code :"
+msgstr "言語コード :"
+
+#: src/prefs.c:220
+msgid "Language group's EMail :"
+msgstr "翻訳グループのE-メールアドレス :"
+
+#: src/header_stuff.c:315 src/prefs.c:224
+msgid "Charset :"
+msgstr "文字セット :"
+
+#: src/header_stuff.c:319 src/prefs.c:228
+msgid "Encoding :"
+msgstr "エンコード :"
+
+#: src/prefs.c:236
+msgid "Set non-fuzzy status, if message was changed"
+msgstr "メッセージが変更されたら fuzzy を解除する"
+
+#: src/prefs.c:240
+msgid "Warn if the .po-file contains fuzzy translations"
+msgstr ".po ファイルに \"fuzzy\"なメッセージが含まれていたら警告する"
+
+#: src/prefs.c:244
+msgid "Don't save unchanged .po-files"
+msgstr "変更されていない .po ファイルは保存しない"
+
+#: src/prefs.c:248
+msgid "Warn me if I'm trying to save an unchanged file"
+msgstr "変更されていないファイルを保存しようとした場合に警告する"
+
+#: src/prefs.c:252
+msgid "Save geometry on exit & restore it on startup"
+msgstr "終了時に gtranslator の位置を保存し、起動時にその位置に表示"
+
+#: src/prefs.c:318
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -50,700 +377,64 @@ msgstr ""
 "設定ダイアログで gtranslator が貴方のしたいように動作する\n"
 "よう幾つかのパラメータを設定できます!"
 
-#: src/gtr_dialogs.c:52
-msgid "gtranslator -- open a po-file"
-msgstr "gtranslator -- .po ファイルを開く"
-
-#: src/gtr_dialogs.c:71
-msgid "Select your desired po-file to open"
-msgstr "開く .po ファイルを選択してください"
-
-#: src/gtr_dialogs.c:90
-msgid "gtranslator -- save file as .."
-msgstr "gtranslator -- 名前を付けて保存します.."
-
-#: src/gtr_dialogs.c:109
-msgid "Select your filename to which the po-file should be saved to."
-msgstr ".po ファイルを保存するファイル名を選択してください。"
-
-#: src/gtr_dialogs.c:134
-msgid "gtranslator -- search-box"
-msgstr "gtranslator -- 検索ダイアログ"
-
-#. *
-#. * Set up the information label
-#. *
-#: src/gtr_dialogs.c:141
-msgid "Enter your desired search string: "
-msgstr "検索する文字列を入力してください: "
-
-#: src/gtr_dialogs.c:143 src/gui.c:225 src/gui.c:226 src/gui.c:467
-msgid "Search"
-msgstr "検索"
-
-#: src/gtr_dialogs.c:211
-msgid "GoTo message entry"
-msgstr "メッセージエントリにジャンプ"
-
-#. *
-#. * Create the buttons, the entry & the label
-#. *
-#: src/gtr_dialogs.c:217
-msgid "Go!"
-msgstr "ジャンプ!"
-
-#: src/gtr_dialogs.c:221
-msgid "Goto the specified message entry."
-msgstr "指定したメッセージエントリにジャンプします。"
-
-#: src/gtr_dialogs.c:276
-msgid "gtranslator -- find in the catalogue"
-msgstr "gtranslator -- カタログ中の検索"
-
-#: src/gtr_dialogs.c:279
-msgid "gtranslator -- find in the po-file"
-msgstr "gtranslator -- .po ファイルの中の検索"
-
-#: src/gtr_dialogs.c:282
-msgid "gtranslator -- find"
-msgstr "gtranslator -- ファイル検索"
-
-#: src/gtr_dialogs.c:289 src/gui.c:240 src/gui.c:241
-msgid "Find"
-msgstr "ファイル検索"
-
-#: src/gtr_dialogs.c:291
-msgid "Ignore the case"
-msgstr "無視する場合"
-
-#. *
-#. * Create a helping label.
-#. *
-#: src/gtr_dialogs.c:362
-msgid ""
-"With this query window you can query\n"
-"the message db for an existing entry\n"
-"with your query string."
-msgstr ""
-"この問い合わせウィンドウでメッセージ DB\n"
-"に対して、存在するエントリの問い合わせ\n"
-"をする事が可能です。"
-
-#: src/gtr_dialogs.c:381
-msgid "Query"
-msgstr "問い合わせ"
-
-#. *
-#. * Set the window-properties.
-#. *
-#: src/gtr_dialogs.c:426
-msgid "gtranslator -- query the message db"
-msgstr "gtranslator -- メッセージ DB への問い合わせ"
-
-#: src/gtr_dialogs.c:457
+#: src/prefs.c:457
 #, c-format
-msgid "Result: `%s'"
-msgstr "結果: %s"
+msgid "The geometry string \"%s\" couldn't be parsed!"
+msgstr "位置情報 \"%s\" が解析できませんでした!"
 
-#: src/gtr_dialogs.c:474
-msgid "Insert"
-msgstr "挿入"
-
-#. *
-#. * Set the window properties.
-#. *
-#: src/gtr_dialogs.c:478
-msgid "gtranslator -- result for your query"
-msgstr "gtranslator -- 問い合わせの結果"
-
-#: src/header_stuff.c:22
-msgid "Error while applying the header!"
-msgstr "ヘッダの適用中にエラー!"
-
-#: src/header_stuff.c:50
-msgid "Header has been pased successfully."
-msgstr "ヘッダの解析に成功しました。"
-
-#: src/header_stuff.c:69
-msgid "The header doesn't seem to be parsed rightly."
-msgstr "ヘッダは正しく解析されていないようです。"
-
-#: src/header_stuff.c:71
-msgid "Project name:"
-msgstr "プロジェクト名:"
-
-#: src/header_stuff.c:72
-msgid "Project version:"
-msgstr "プロジェクトバージョン:"
-
-#: src/header_stuff.c:73
-msgid "Use my personal options to fill out the rest of the header."
-msgstr "ヘッダの残りの項目を設定するために個人オプションを使用して下さい。"
-
-#. *
-#. * Set the window-specs.
-#. *
-#: src/header_stuff.c:82
+#: src/header_stuff.c:250
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- ヘッダの編集"
 
-#: src/gui.c:84
-msgid "No po-file opened which could be compiled."
-msgstr "コンパイルが可能な開かれた .po ファイルはありません。"
-
-#: src/gui.c:109
-msgid "Po-file has been compiled successfully."
-msgstr ".po ファイルのコンパイルに成功しました。"
-
-#: src/gui.c:138
-msgid "Couldn't store current geometry!"
-msgstr "現在の位置 (ジオメトリ) を保存できませんでした!"
-
-#. *
-#. * Show a Good Bye!-typo message.
-#. *
-#: src/gui.c:151
-msgid "Bye bye!"
-msgstr "バイバイ!"
-
-#: src/gui.c:196
-msgid "_Compile"
-msgstr "コンパイル(_C)"
-
-#: src/gui.c:217
-msgid "C_lear"
-msgstr "クリア(_L)"
-
-#: src/gui.c:218
-msgid "Clears the current selection"
-msgstr "現在のセクションをクリアします"
-
-#: src/gui.c:232 src/gui.c:475
-msgid "ReSearch"
-msgstr "再検索"
-
-#: src/gui.c:233 src/gui.c:476
-msgid "Search again"
-msgstr "再度、検索します"
-
-#: src/gui.c:249
-msgid "_Header"
-msgstr "ヘッダ(_H)"
-
-#: src/gui.c:250
-msgid "Edit the header"
-msgstr "ヘッダを編集します"
-
-#: src/gui.c:261
-msgid "Refresh"
-msgstr "リフレッシュ"
-
-#: src/gui.c:273
-msgid "_First"
-msgstr "先頭へ(_F)"
-
-#: src/gui.c:280
-msgid "_Back"
-msgstr "戻る(_B)"
-
-#: src/gui.c:288
-msgid "_Next"
-msgstr "次へ(_N)"
-
-#: src/gui.c:295
-msgid "_Last"
-msgstr "最後へ(_L)"
-
-#: src/gui.c:307 src/gui.c:309
-msgid "Translated"
-msgstr "翻訳済み"
-
-#: src/gui.c:315 src/gui.c:317
-msgid "Untranslated"
-msgstr "未翻訳"
-
-#: src/gui.c:322 src/gui.c:324
-msgid "FIXME"
-msgstr "実装して!"
-
-#: src/gui.c:330
-msgid "Stick"
-msgstr "張り付く"
-
-#: src/gui.c:332
-msgid "Stick this message"
-msgstr "このメッセージに張り付きます"
-
-#: src/gui.c:342
-msgid "_Add the current message"
-msgstr "現在のメッセージの追加(_A)"
-
-#: src/gui.c:343
-msgid "Add the current message to the messages DB."
-msgstr "このメッセージをメッセージ DB に追加します。"
-
-#: src/gui.c:350
-msgid "_Query for a message"
-msgstr "メッセージの問い合わせ(_Q)"
-
-#: src/gui.c:351
-msgid "Query the messages DB for the current msgid."
-msgstr "この msgid についてメッセージ DB に問い合わせします。"
-
-#: src/gui.c:369
-msgid "_Online help"
-msgstr "オンラインヘルプ(_O)"
-
-#: src/gui.c:377
-msgid "gtranslator _website"
-msgstr "gtranslator ウェブサイト(_W)"
-
-#: src/gui.c:378
-msgid "gtranslator's homepage on the web"
-msgstr "gtranslator のホームページ開きます"
-
-#: src/gui.c:392 src/gui.c:395
-msgid "_Messages"
-msgstr "メッセージ(_M)"
-
-#: src/gui.c:399 src/gui.c:402
-msgid "Message s_tatus"
-msgstr "メッセージ情報(_T)"
-
-#: src/gui.c:406 src/gui.c:409
-msgid "Message _db"
-msgstr "メッセージ DB(_D)"
-
-#. *
-#. * Create the app
-#. *
-#: src/gui.c:432
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#: src/gui.c:468
-msgid "Search for a message"
-msgstr "メッセージを検索します"
-
-#: src/gui.c:483
-msgid "Goto"
-msgstr "ジャンプ"
-
-#: src/gui.c:484
-msgid "Goto this message"
-msgstr "このメッセージにジャンプします"
-
-#: src/gui.c:498
-msgid "Add"
-msgstr "追加"
-
-#: src/gui.c:499
-msgid "Add to the messages db."
-msgstr "メッセージ DB に追加します。"
-
-#. *
-#. * Find in the personal catalogue
-#. *
-#: src/gui.c:513
-msgid "F/DB"
-msgstr "F/DB"
-
-#: src/gui.c:514
-msgid "Find in the personal messages db"
-msgstr "個人メッセージ DB 中から検索します"
-
-#. *
-#. * Find in the .po-file
-#. *
-#: src/gui.c:524
-msgid "F/Po."
-msgstr "F/Po."
-
-#: src/gui.c:525
-msgid "Find in the po file "
-msgstr ".po ファイルの中から検索します "
-
-#: src/gui.c:536
-msgid "Header"
-msgstr "ヘッダ"
-
-#: src/gui.c:537
-msgid "Edit the header informations"
-msgstr "ヘッダ情報を編集します"
-
-#: src/gui.c:545
-msgid "Compile"
-msgstr "コンパイル"
-
-#: src/gui.c:546
-msgid "Compile the po-file"
-msgstr ".po ファイルをコンパイルします"
-
-#: src/gui.c:554
-msgid "Open"
-msgstr "開く"
-
-#: src/gui.c:555
-msgid "Open File"
-msgstr "ファイルを開きます"
-
-#: src/gui.c:563
-msgid "Save"
-msgstr "保存"
-
-#: src/gui.c:564
-msgid "Save File"
-msgstr "ファイルを保存します"
-
-#: src/gui.c:572
-msgid "Save as"
-msgstr "名前を付けて保存"
-
-#: src/gui.c:573
-msgid "Save file as"
-msgstr "ファイルに名前を付けて保存します"
-
-#: src/gui.c:581
-msgid "First"
-msgstr "先頭へ"
-
-#: src/gui.c:582
-msgid "Go to the first message"
-msgstr "メッセージの先頭にジャンプします"
-
-#: src/gui.c:590
-msgid "Back"
-msgstr "戻る"
-
-#: src/gui.c:591
-msgid "Go one message back"
-msgstr "1つ前のメッセージに戻ります"
-
-#: src/gui.c:599
-msgid "Options"
-msgstr "オプション"
-
-#: src/gui.c:600
-msgid "gtranslator options"
-msgstr "gtranslator のオプションです"
-
-#: src/gui.c:608
-msgid "Next"
-msgstr "次へ"
-
-#: src/gui.c:609
-msgid "Go one message forward"
-msgstr "次のメッセージにジャンプします"
-
-#: src/gui.c:617
-msgid "Last"
-msgstr "最後へ"
-
-#: src/gui.c:618
-msgid "Go to the last message"
-msgstr "最後のメッセージにジャンプします"
-
-#: src/gui.c:626 src/gui.c:627
-msgid "Exit"
-msgstr "終了"
-
-#: src/languages.h:59
-msgid "Arabic"
-msgstr "アラビア語"
-
-#: src/languages.h:63
-msgid "Basque"
-msgstr "バスク語"
-
-#: src/languages.h:67
-msgid "Bulgarian"
-msgstr "ブルガリア語"
-
-#: src/languages.h:71
-msgid "Catalan"
-msgstr "カタラン語"
-
-#: src/languages.h:75
-msgid "Chinese/Simplified"
-msgstr "中国語/簡体"
-
-#: src/languages.h:79
-msgid "Chinese/Traditional"
-msgstr "中国語/繁体"
-
-#: src/languages.h:83
-msgid "Croatian"
-msgstr "クロアチア語"
-
-#: src/languages.h:87
-msgid "Czech"
-msgstr "チェコ語"
-
-#: src/languages.h:91
-msgid "Danish"
-msgstr "デンマーク語"
-
-#: src/languages.h:95
-msgid "English"
-msgstr "英語"
-
-#: src/languages.h:99
-msgid "English/Canada"
-msgstr "英語/カナダ"
-
-#: src/languages.h:103
-msgid "English/GB"
-msgstr "英語/イギリス"
-
-#: src/languages.h:107
-msgid "English/USA"
-msgstr "英語/アメリカ"
-
-#: src/languages.h:111
-msgid "Estonian"
-msgstr "エストニア語"
-
-#: src/languages.h:115
-msgid "Farsi"
-msgstr "ペルシア語"
-
-#: src/languages.h:119
-msgid "Finnish"
-msgstr "フィンランド語"
-
-#: src/languages.h:123
-msgid "French"
-msgstr "フランス語"
-
-#: src/languages.h:127
-msgid "Galician"
-msgstr "ガルシア語"
-
-#: src/languages.h:131
-msgid "German"
-msgstr "ドイツ語"
-
-#: src/languages.h:135
-msgid "Greek"
-msgstr "ギリシア語"
-
-#: src/languages.h:139
-msgid "Hungarian"
-msgstr "ハンガリー語"
-
-#: src/languages.h:143
-msgid "Indonesian"
-msgstr "インドネシア語"
-
-#: src/languages.h:147
-msgid "Italian"
-msgstr "イタリア語"
-
-#: src/languages.h:151
-msgid "Irish"
-msgstr "アイルランド語"
-
-#: src/languages.h:155
-msgid "Japanese"
-msgstr "日本語"
-
-#: src/languages.h:159
-msgid "Korean"
-msgstr "韓国語"
-
-#: src/languages.h:163
-msgid "Lithuanian"
-msgstr "リトアニア語"
-
-#: src/languages.h:167
-msgid "Norwegian/Bookmal"
-msgstr "ノルウェー語/ブックマル"
-
-#: src/languages.h:171
-msgid "Norwegian/Nynorsk"
-msgstr "ノルウェー語/"
-
-#: src/languages.h:175
-msgid "Polish"
-msgstr "ポーランド語"
-
-#: src/languages.h:179
-msgid "Portuguese"
-msgstr "ポルトガル語"
-
-#: src/languages.h:183
-msgid "Portuguese/Brazil"
-msgstr "ポルトガル語/ブラジル"
-
-#: src/languages.h:187
-msgid "Russian"
-msgstr "ロシア語"
-
-#: src/languages.h:191
-msgid "Slovak"
-msgstr "スロベキア語"
-
-#: src/languages.h:195
-msgid "Spanish"
-msgstr "スペイン語"
-
-#: src/languages.h:199
-msgid "Spanish/Spain"
-msgstr "スペイン語/スペイン"
-
-#: src/languages.h:203
-msgid "Spanish/Mexico"
-msgstr "スペイン語/メキシコ"
-
-#: src/languages.h:207
-msgid "Swedish"
-msgstr "スウェーデン語"
-
-#: src/languages.h:211
-msgid "Turkish"
-msgstr "トルコ語"
-
-#: src/languages.h:215
-msgid "Ukrainian"
-msgstr "ウクライナ語"
-
-#: src/languages.h:219
-msgid "Walloon"
-msgstr "ワルーン語"
-
-#: src/languages.h:223
-msgid "Welsh"
-msgstr "ウェールズ語"
-
-#: src/main.c:39
-msgid "Sets the minimum match for query"
-msgstr "問い合わせに対して最小で一致させる"
-
-#: src/main.c:43
-msgid "Po-file to open at startup"
-msgstr "起動時に .po ファイルを開く"
-
-#: src/main.c:47
+#: src/header_stuff.c:254
+msgid "Project"
+msgstr "プロジェクト"
+
+#: src/header_stuff.c:255
+msgid "Translator and Language"
+msgstr "翻訳者と言語"
+
+#: src/header_stuff.c:264
+msgid "Comments :"
+msgstr "コメント :"
+
+#: src/header_stuff.c:268
+msgid "Project name:"
+msgstr "プロジェクト名:"
+
+#: src/header_stuff.c:271
+msgid "Project version:"
+msgstr "プロジェクトバージョン:"
+
+#: src/header_stuff.c:274
+msgid "pot file creation date :"
+msgstr "pot ファイルの生成日 :"
+
+#: src/header_stuff.c:278
+msgid "po file revision date :"
+msgstr "po ファイルの修正日 :"
+
+#: src/header_stuff.c:287
+msgid "Use my options to fill the following entries."
+msgstr "以下の項目を設定するために個人オプションを使用して下さい。"
+
+#: src/header_stuff.c:300
+msgid "Translator's name :"
+msgstr "翻訳者の氏名 :"
+
+#: src/header_stuff.c:303
+msgid "Translator's e-mail :"
+msgstr "翻訳者の E-mail アドレス :"
+
+#: src/header_stuff.c:311
+msgid "Language group's e-mail :"
+msgstr "言語グループの E-mailアドレス :"
+
+#: src/main.c:38
 msgid "Specifies the main-window geometry"
 msgstr "メインウィンドウの位置を指定する"
 
-#: src/main.c:51
-msgid "The messages db to use"
-msgstr "メッセージ DB を利用する"
-
-#: src/main.c:55
-msgid "Query the messages db & exit"
-msgstr "メッセージ DB に問い合わせと終了"
-
-#: src/main.c:59
-msgid "Team to append"
-msgstr ""
-
-#. *
-#. * Simply print it out.
-#. *
-#: src/main.c:176
-#, c-format
-msgid "Getting results for query: `%s' ...\n"
-msgstr "問い合わせに対する結果を取得中: '%s' ...\n"
-
-#: src/main.c:181
-#, c-format
-msgid "Result                   :  %s"
-msgstr "結果                  :  %s"
-
-#: src/main.c:183
-msgid "End of query.\n"
-msgstr "問い合わせの終了。\n"
-
-#: src/main.c:243
-#, c-format
-msgid "The geometry string \"%s\" coulnd't be parsed!"
-msgstr "位置情報 \"%s\" が解析できませんでした!"
-
-#. *
-#. * If the file isn't openable give a warning
-#. *
-#: src/main.c:262
-#, c-format
-msgid "The file \"%s\" doesn't exist or isn't readable!"
-msgstr "ファイル \"%s\" は存在しないか、もしくは読み込み可能ではありません!"
-
-#: src/main.c:263
-msgid "Skipping it."
-msgstr "スキップします."
-
-#: src/msg_db.c:42
-#, c-format
-msgid "No message db found! Creating one in `%s'."
-msgstr "メッセージ DB がありません! '%s' の中に作成します。"
-
-#. *
-#. * 3.1) No list, no fun
-#. *
-#: src/msg_db.c:80
-msgid "gtranslator lost the list of translations!\n"
-msgstr "gtranslator は翻訳リストを失いました!\n"
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:117
-#, c-format
-msgid "The message db `%s' hasn't been initted yet!\n"
-msgstr "メッセージ DB `%s' は初期化されていないようです!\n"
-
-#. *
-#. * Warn if there isn't any message which could be added
-#. *  to the msg_db .
-#. *
-#: src/msg_db.c:128
-msgid "Got no message entry!\n"
-msgstr "メッセージエントリが取得できませんでした!\n"
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:167
-#, c-format
-msgid "The message db `%s' seems not to be initted!\n"
-msgstr "msg_db `%s' は初期化されていないようです!\n"
-
-#. *
-#. * Return a very "explaining" char* ...
-#. *
-#: src/msg_db.c:171
-msgid "Not available"
-msgstr "無効"
-
-#. *
-#. * If there's no msg_list
-#. *  print an error message
-#. *
-#: src/msg_db.c:179
-msgid "No messages list ( msg_list ) available for acting on it!\n"
-msgstr "メッセージリスト ( msg_list ) が動作するのに有効ではありません!\n"
-
-#: src/msg_db.c:217
-msgid "No entry found in the messages db "
-msgstr "メッセージ DB の中にエントリが見つかりません。"
-
-#: src/msg_db.c:228
-msgid "The messages db isn't inited."
-msgstr "メッセージ DB が初期化されていません。"
-
-#. *
-#. * Gives a warning message.
-#. *
-#: src/msg_db.c:257
-msgid "Trying to set an irregular challange length!"
-msgstr "不正な長さで設定しようとしています!"
-
-#. *
-#. * If there are any problems , give a
-#. *  message ..
-#. *
-#: src/parse.c:33
+#: src/parse.c:39
 #, c-format
 msgid ""
 "\n"
@@ -754,129 +445,97 @@ msgstr ""
 "ファイルストリームがありません!\n"
 "%s"
 
-#: src/parse.c:55
+#: src/parse.c:220
 #, c-format
-msgid "There's no file to open or I couldn't understand `%s'!"
-msgstr "開くファイルが存在しないか、もしくは `%s' は認識できません!"
+msgid ""
+"The file is empty:\n"
+"%s"
+msgstr ""
+"ファイルが空です:\n"
+"%s"
 
-#. *
-#. * Set up a status message
-#. *
-#: src/parse.c:60
+#: src/parse.c:269
 #, c-format
-msgid "Current file : \"%s\"."
-msgstr "現在のファイル : \"%s\"."
+msgid "Successfully parsed the file \"%s\""
+msgstr "ファイル \"%s\" の解析に成功しました"
 
-#. *
-#. * Show an updated status
-#. *
-#: src/parse.c:201
+#: src/parse.c:272
 #, c-format
-msgid "Finished reading \"%s\", %i lines."
-msgstr "\"%s\"の読み込みが終了しました、%i 行あります。"
+msgid "gtranslator -- %s"
+msgstr "gtranslator -- %s"
 
-#: src/parse.c:218
-msgid "Parsing has been successfull."
-msgstr "構文解析に成功しました。"
+#: src/parse.c:372
+#, c-format
+msgid ""
+"You are trying to save file with *.pot extension.\n"
+"However, such files are generated by program.\n"
+"Your file should be named with *.po extension, most likely %s.po"
+msgstr ""
+"拡張子 *.pot でファイルを保存しようとしています。\n"
+"しかしながら、この .pot ファイルはプログラムが生成します。\n"
+"このファイルは、%s.po のように拡張子 *.po で保存すべきです。"
 
-#: src/parse.c:289
-msgid "You've reached the first message"
-msgstr "メッセージの先頭に達しました。"
+#: src/parse.c:416
+#, c-format
+msgid ""
+"You didn't change anything in\n"
+"%s\n"
+"Do you want to save it anyway?"
+msgstr ""
+"何も変更されていません\n"
+"%s\n"
+"保存しますか?"
 
-#: src/parse.c:326
-msgid "You've reached the last message."
-msgstr "メッセージの最後に達しました。"
+#: src/parse.c:479
+#, c-format
+msgid ""
+"File %s\n"
+"was changed. Do you want to revert to saved copy?"
+msgstr ""
+"ファイル %s\n"
+"が変更されました。保存されたものに戻しますか?"
 
-#. *
-#. * Create the labels ..
-#. *
-#: src/prefs.c:34
-msgid "Personal informations"
-msgstr "個人情報"
+#: src/parse.c:531
+#, c-format
+msgid ""
+"Compile successful:\n"
+"%s"
+msgstr ""
+"コンパイルが完了:\n"
+"%s"
 
-#: src/prefs.c:35
-msgid "Language options"
-msgstr "言語オプション"
+#: src/find.c:84
+#, c-format
+msgid ""
+"Could not find\n"
+"\"%s\""
+msgstr ""
+"見つかりませんでした\n"
+"\"%s\""
 
-#: src/prefs.c:36
-msgid "Po file options"
-msgstr "POファイルオプション"
+#: src/find.c:110
+msgid "There are no more fuzzy messages"
+msgstr "fuzzy なメッセージはありません"
 
-#: src/prefs.c:37
-msgid "Author's name :"
-msgstr "作者の名前 :"
+#: src/find.c:134
+msgid "All messages seem to be translated"
+msgstr "全てのメッセージが翻訳されていないようです"
 
-#: src/prefs.c:38
-msgid "Author's EMail :"
-msgstr "作者のE-メールアドレス :"
+#: src/spell.c:25
+msgid "Check spelling"
+msgstr "スペルチェック"
 
-#: src/prefs.c:39
-msgid "Language :"
-msgstr "言語 :"
+#: src/spell.c:55
+msgid "Spell checking complete!"
+msgstr "スペルチェックが完了しました!"
 
-#: src/prefs.c:40
-msgid "MIME type :"
-msgstr "MIMEタイプ :"
-
-#: src/prefs.c:41
-msgid "Encoding :"
-msgstr "エンコード :"
-
-#: src/prefs.c:42
-msgid "Language code :"
-msgstr "言語コード :"
-
-#: src/prefs.c:43
-msgid "Language group's EMail :"
-msgstr "翻訳グループのE-メールアドレス :"
-
-#: src/prefs.c:44
-msgid "Comments :"
-msgstr "コメント :"
-
-#: src/prefs.c:57
-msgid "Add the additional comments to the header"
-msgstr ".po ファイルのヘッダにコメントを追加する"
-
-#: src/prefs.c:58
-msgid "Save gtranslator's geometry on exit & restore it on startup"
-msgstr "終了時に gtranslator の位置を保存し、起動時にその位置に表示する"
-
-#: src/prefs.c:59
-msgid "Warn me if I'm trying to save an unchanged file"
-msgstr "変更されていないファイルを保存しようとした場合に警告する"
-
-#: src/prefs.c:60
-msgid "Warn if the .po-file contains fuzzy translations"
-msgstr ".po ファイルに \"fuzzy\"なメッセージが含まれていたら警告する"
-
-#: src/prefs.c:61
-msgid "Don't save unchanged .po-files"
-msgstr "変更されていない .po ファイルは保存しない"
-
-#: src/prefs.c:62
-msgid "Use the messages db"
-msgstr "メッセージ DB を使用する"
-
-#: src/prefs.c:406
-msgid "Can't store filename!"
-msgstr "ファイル名が保存できません!"
-
-#: src/prefs.c:434
-msgid "Couldn't recall the file's name."
-msgstr "ファイル名が使えません!"
-
-#: src/find.c:32
-msgid "Nothing appropriate found!"
-msgstr "何も見つかりません!"
-
-#: src/find.c:54
-msgid "No query, no fun."
-msgstr "問い合わせ無し、楽しみがないです。"
+#: src/session.c:68
+msgid "Session restored successfully."
+msgstr "セッションの復元に成功しました。"
 
 #: libgtranslator/parse-db.c:32
 msgid "No language defined in the query request!"
-msgstr ""
+msgstr "問い合わせ要求で言語が定義されていません!"
 
 #. *
 #. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
@@ -884,12 +543,12 @@ msgstr ""
 #. *
 #: libgtranslator/parse-db.c:43
 msgid "FYI: Will also lookup the superclass message db.\n"
-msgstr ""
+msgstr "参考: スーパークラスメッセージ db も検索します。\n"
 
 #: libgtranslator/parse-db.c:63
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
-msgstr ""
+msgstr "言語ベースファイル `%s.xml' (%sの中にある) が開けませんでした。\n"
 
 #. *
 #. * Print some information.
@@ -897,40 +556,438 @@ msgstr ""
 #: libgtranslator/parse-db.c:76
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
-msgstr ""
+msgstr "サブクラスファイル `%s.xml' が見つかりませんでした。\n"
 
 #: libgtranslator/parse-db.c:77
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
-msgstr ""
+msgstr "スーパークラスファイル `%s.xml' にアクセス中...\n"
 
-#: libgtranslator/parse-db.c:137
-#, fuzzy
+#: libgtranslator/parse-db.c:133
 msgid "The message db file is empty!"
-msgstr "メッセージ DB を利用する"
+msgstr "メッセージ db ファイルが空です!"
 
-#: libgtranslator/parse-db.c:143
-#, fuzzy
+#: libgtranslator/parse-db.c:139
 msgid "The message db doesn't seem to be a message db xml file."
-msgstr "ヘッダは正しく解析されていないようです。"
+msgstr "メッセージ db は xml ファイルではないようです。"
 
-#: libgtranslator/team-handle.c:32
+#: libgtranslator/handle-db.c:35
+msgid "No node name given!"
+msgstr "ノード名が指定されていません!"
+
+#: libgtranslator/handle-db.c:43
+#, c-format
+msgid "No content for the node `%s' given! Leaving node empty.."
+msgstr "ノード `%s' の目次が指定されていません! ノードを空にしておきます.."
+
+#: libgtranslator/handle-db.c:51
+#, c-format
+msgid "No document present to add the node `%s'\n"
+msgstr "ノード `%s' に追加する文書がありません\n"
+
+#: libgtranslator/handle-db.c:67
+msgid "Couldn't get the nodes!"
+msgstr "ノードが取得出来ません!"
+
+#: libgtranslator/team-handle.c:31
 msgid "No language/team code defined to register!"
-msgstr ""
+msgstr "登録に必要な言語/翻訳チームのコードが定義されていません!"
 
-#: libgtranslator/team-handle.c:67
+#: libgtranslator/team-handle.c:66
 msgid "Team is already registered!"
-msgstr ""
+msgstr "翻訳チームは既に登録されています!"
 
-#: libgtranslator/team-handle.c:113
+#: libgtranslator/team-handle.c:112
 #, c-format
 msgid "Teams file `teams.xml` in %s couldn't be opened!"
-msgstr ""
+msgstr "%s にある翻訳チームファイル `teams.xml' を開くことが出来ませんでした!"
 
-#: libgtranslator/team-handle.c:149
-#, fuzzy
+#: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
-msgstr "ファイル名が使えません!"
+msgstr "アプリケーションの一覧を返すことが出来ませんでした。"
+
+#: src/languages.h:57
+msgid "Arabic"
+msgstr "アラビア語"
+
+#: src/languages.h:60
+msgid "Basque"
+msgstr "バスク語"
+
+#: src/languages.h:63
+msgid "Bulgarian"
+msgstr "ブルガリア語"
+
+#: src/languages.h:66
+msgid "Catalan"
+msgstr "カタラン語"
+
+#: src/languages.h:69
+msgid "Chinese/Simplified"
+msgstr "中国語/簡体"
+
+#: src/languages.h:72
+msgid "Chinese/Traditional"
+msgstr "中国語/繁体"
+
+#: src/languages.h:75
+msgid "Croatian"
+msgstr "クロアチア語"
+
+#: src/languages.h:78
+msgid "Czech"
+msgstr "チェコ語"
+
+#: src/languages.h:81
+msgid "Danish"
+msgstr "デンマーク語"
+
+#: src/languages.h:87
+msgid "English/Canada"
+msgstr "英語/カナダ"
+
+#: src/languages.h:90
+msgid "English/GB"
+msgstr "英語/イギリス"
+
+#: src/languages.h:93
+msgid "English/USA"
+msgstr "英語/アメリカ"
+
+#: src/languages.h:96
+msgid "Estonian"
+msgstr "エストニア語"
+
+#: src/languages.h:99
+msgid "Farsi"
+msgstr "ペルシア語"
+
+#: src/languages.h:102
+msgid "Finnish"
+msgstr "フィンランド語"
+
+#: src/languages.h:105
+msgid "French"
+msgstr "フランス語"
+
+#: src/languages.h:108
+msgid "Galician"
+msgstr "ガルシア語"
+
+#: src/languages.h:111
+msgid "German"
+msgstr "ドイツ語"
+
+#: src/languages.h:114
+msgid "Hungarian"
+msgstr "ハンガリー語"
+
+#: src/languages.h:117
+msgid "Indonesian"
+msgstr "インドネシア語"
+
+#: src/languages.h:120
+msgid "Italian"
+msgstr "イタリア語"
+
+#: src/languages.h:123
+msgid "Irish"
+msgstr "アイルランド語"
+
+#: src/languages.h:126
+msgid "Japanese"
+msgstr "日本語"
+
+#: src/languages.h:129
+msgid "Korean"
+msgstr "韓国語"
+
+#: src/languages.h:132
+msgid "Latvian"
+msgstr "ラトビア語"
+
+#: src/languages.h:135
+msgid "Lithuanian"
+msgstr "リトアニア語"
+
+#: src/languages.h:138
+msgid "Norwegian/Bookmal"
+msgstr "ノルウェー語/ブックマル"
+
+#: src/languages.h:141
+msgid "Norwegian/Nynorsk"
+msgstr "ノルウェー語/"
+
+#: src/languages.h:144
+msgid "Polish"
+msgstr "ポーランド語"
+
+#: src/languages.h:147
+msgid "Portuguese"
+msgstr "ポルトガル語"
+
+#: src/languages.h:150
+msgid "Portuguese/Brazil"
+msgstr "ポルトガル語/ブラジル"
+
+#: src/languages.h:153
+msgid "Russian"
+msgstr "ロシア語"
+
+#: src/languages.h:156
+msgid "Slovak"
+msgstr "スロベキア語"
+
+#: src/languages.h:159
+msgid "Spanish"
+msgstr "スペイン語"
+
+#: src/languages.h:162
+msgid "Spanish/Spain"
+msgstr "スペイン語/スペイン"
+
+#: src/languages.h:165
+msgid "Spanish/Mexico"
+msgstr "スペイン語/メキシコ"
+
+#: src/languages.h:168
+msgid "Swedish"
+msgstr "スウェーデン語"
+
+#: src/languages.h:171
+msgid "Turkish"
+msgstr "トルコ語"
+
+#: src/languages.h:174
+msgid "Ukrainian"
+msgstr "ウクライナ語"
+
+#: src/languages.h:177
+msgid "Walloon"
+msgstr "ワルーン語"
+
+#: src/languages.h:180
+msgid "Welsh"
+msgstr "ウェールズ語"
+
+#~ msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
+#~ msgstr "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
+
+#~ msgid "Select your desired po-file to open"
+#~ msgstr "開く .po ファイルを選択してください"
+
+#~ msgid "Select your filename to which the po-file should be saved to."
+#~ msgstr ".po ファイルを保存するファイル名を選択してください。"
+
+#~ msgid "gtranslator -- search-box"
+#~ msgstr "gtranslator -- 検索ダイアログ"
+
+#~ msgid "Search"
+#~ msgstr "検索"
+
+#~ msgid "gtranslator -- find in the catalogue"
+#~ msgstr "gtranslator -- カタログ中の検索"
+
+#~ msgid "gtranslator -- find in the po-file"
+#~ msgstr "gtranslator -- .po ファイルの中の検索"
+
+#~ msgid "Ignore the case"
+#~ msgstr "無視する場合"
+
+#~ msgid ""
+#~ "With this query window you can query\n"
+#~ "the message db for an existing entry\n"
+#~ "with your query string."
+#~ msgstr ""
+#~ "この問い合わせウィンドウでメッセージ DB\n"
+#~ "に対して、存在するエントリの問い合わせ\n"
+#~ "をする事が可能です。"
+
+#~ msgid "Query"
+#~ msgstr "問い合わせ"
+
+#~ msgid "gtranslator -- query the message db"
+#~ msgstr "gtranslator -- メッセージ DB への問い合わせ"
+
+#~ msgid "Result: `%s'"
+#~ msgstr "結果: %s"
+
+#~ msgid "Insert"
+#~ msgstr "挿入"
+
+#~ msgid "gtranslator -- result for your query"
+#~ msgstr "gtranslator -- 問い合わせの結果"
+
+#~ msgid "Error while applying the header!"
+#~ msgstr "ヘッダの適用中にエラー!"
+
+#~ msgid "The header doesn't seem to be parsed rightly."
+#~ msgstr "ヘッダは正しく解析されていないようです。"
+
+#~ msgid "No po-file opened which could be compiled."
+#~ msgstr "コンパイルが可能な開かれた .po ファイルはありません。"
+
+#~ msgid "Po-file has been compiled successfully."
+#~ msgstr ".po ファイルのコンパイルに成功しました。"
+
+#~ msgid "Couldn't store current geometry!"
+#~ msgstr "現在の位置 (ジオメトリ) を保存できませんでした!"
+
+#~ msgid "C_lear"
+#~ msgstr "クリア(_L)"
+
+#~ msgid "Clears the current selection"
+#~ msgstr "現在のセクションをクリアします"
+
+#~ msgid "ReSearch"
+#~ msgstr "再検索"
+
+#~ msgid "Search again"
+#~ msgstr "再度、検索します"
+
+#~ msgid "Refresh"
+#~ msgstr "リフレッシュ"
+
+#~ msgid "FIXME"
+#~ msgstr "実装して!"
+
+#~ msgid "_Add the current message"
+#~ msgstr "現在のメッセージの追加(_A)"
+
+#~ msgid "Add the current message to the messages DB."
+#~ msgstr "このメッセージをメッセージ DB に追加します。"
+
+#~ msgid "_Query for a message"
+#~ msgstr "メッセージの問い合わせ(_Q)"
+
+#~ msgid "Query the messages DB for the current msgid."
+#~ msgstr "この msgid についてメッセージ DB に問い合わせします。"
+
+#~ msgid "_Online help"
+#~ msgstr "オンラインヘルプ(_O)"
+
+#~ msgid "Search for a message"
+#~ msgstr "メッセージを検索します"
+
+#~ msgid "Goto this message"
+#~ msgstr "このメッセージにジャンプします"
+
+#~ msgid "Add"
+#~ msgstr "追加"
+
+#~ msgid "Add to the messages db."
+#~ msgstr "メッセージ DB に追加します。"
+
+#~ msgid "F/DB"
+#~ msgstr "F/DB"
+
+#~ msgid "Find in the personal messages db"
+#~ msgstr "個人メッセージ DB 中から検索します"
+
+#~ msgid "F/Po."
+#~ msgstr "F/Po."
+
+#~ msgid "Edit the header informations"
+#~ msgstr "ヘッダ情報を編集します"
+
+#~ msgid "Save file as"
+#~ msgstr "ファイルに名前を付けて保存します"
+
+#~ msgid "Greek"
+#~ msgstr "ギリシア語"
+
+#~ msgid "Sets the minimum match for query"
+#~ msgstr "問い合わせに対して最小で一致させる"
+
+#~ msgid "Po-file to open at startup"
+#~ msgstr "起動時に .po ファイルを開く"
+
+#~ msgid "The messages db to use"
+#~ msgstr "メッセージ DB を利用する"
+
+#~ msgid "Query the messages db & exit"
+#~ msgstr "メッセージ DB に問い合わせと終了"
+
+#~ msgid "Getting results for query: `%s' ...\n"
+#~ msgstr "問い合わせに対する結果を取得中: '%s' ...\n"
+
+#~ msgid "Result                   :  %s"
+#~ msgstr "結果                  :  %s"
+
+#~ msgid "End of query.\n"
+#~ msgstr "問い合わせの終了。\n"
+
+#~ msgid "The file \"%s\" doesn't exist or isn't readable!"
+#~ msgstr "ファイル \"%s\" は存在しないか、もしくは読み込み可能ではありません!"
+
+#~ msgid "Skipping it."
+#~ msgstr "スキップします."
+
+#~ msgid "No message db found! Creating one in `%s'."
+#~ msgstr "メッセージ DB がありません! '%s' の中に作成します。"
+
+#~ msgid "gtranslator lost the list of translations!\n"
+#~ msgstr "gtranslator は翻訳リストを失いました!\n"
+
+#~ msgid "The message db `%s' hasn't been initted yet!\n"
+#~ msgstr "メッセージ DB `%s' は初期化されていないようです!\n"
+
+#~ msgid "Got no message entry!\n"
+#~ msgstr "メッセージエントリが取得できませんでした!\n"
+
+#~ msgid "Not available"
+#~ msgstr "無効"
+
+#~ msgid "No messages list ( msg_list ) available for acting on it!\n"
+#~ msgstr "メッセージリスト ( msg_list ) が動作するのに有効ではありません!\n"
+
+#~ msgid "No entry found in the messages db "
+#~ msgstr "メッセージ DB の中にエントリが見つかりません。"
+
+#~ msgid "The messages db isn't inited."
+#~ msgstr "メッセージ DB が初期化されていません。"
+
+#~ msgid "Trying to set an irregular challange length!"
+#~ msgstr "不正な長さで設定しようとしています!"
+
+#~ msgid "There's no file to open or I couldn't understand `%s'!"
+#~ msgstr "開くファイルが存在しないか、もしくは `%s' は認識できません!"
+
+#~ msgid "Current file : \"%s\"."
+#~ msgstr "現在のファイル : \"%s\"."
+
+#~ msgid "Finished reading \"%s\", %i lines."
+#~ msgstr "\"%s\"の読み込みが終了しました、%i 行あります。"
+
+#~ msgid "Parsing has been successfull."
+#~ msgstr "構文解析に成功しました。"
+
+#~ msgid "You've reached the first message"
+#~ msgstr "メッセージの先頭に達しました。"
+
+#~ msgid "You've reached the last message."
+#~ msgstr "メッセージの最後に達しました。"
+
+#~ msgid "MIME type :"
+#~ msgstr "MIMEタイプ :"
+
+#~ msgid "Add the additional comments to the header"
+#~ msgstr ".po ファイルのヘッダにコメントを追加する"
+
+#~ msgid "Use the messages db"
+#~ msgstr "メッセージ DB を使用する"
+
+#~ msgid "Can't store filename!"
+#~ msgstr "ファイル名が保存できません!"
+
+#~ msgid "Couldn't recall the file's name."
+#~ msgstr "ファイル名が使えません!"
+
+#~ msgid "Nothing appropriate found!"
+#~ msgstr "何も見つかりません!"
+
+#~ msgid "No query, no fun."
+#~ msgstr "問い合わせ無し、楽しみがないです。"
 
 #~ msgid "A test option"
 #~ msgstr "テストオプション"
