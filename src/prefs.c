@@ -45,8 +45,51 @@ void prefs_box(GtkWidget *widget,gpointer useless)
 	authors_name=gnome_entry_new("AUTHOR");
 	authors_email=gnome_entry_new("EMAIL");
 	authors_language=gnome_entry_new("LANGUAGE");
+	authors_language_team=gnome_entry_new("LANGUAGE TEAM");
+	mime_type=gnome_entry_new("MIME TYPE");
+	encoding=gnome_entry_new("ENCODING");
+	additional_comments=gtk_text_new(NULL,NULL);
+	gtk_text_set_editable(GTK_TEXT(additional_comments),TRUE);
 	/**
-	* Set the languages list
- 	**/	
-	gtk_combo_set_popdowm_strings(GTK_COMBO(GNOME_ENTRY(authors_language)->combo),languages_list);
+	* The table holding these entries ..
+	**/
+	first_page=gtk_table_new(7,5,FALSE);
+	/**
+	* Add this table to the notebook of the Propertybox ..
+	**/
+	gnome_property_box_append_page(GNOME_PROPERTY_BOX(prefs),
+		first_page,first_page_label);
+	/**
+	* The basic signal-handlers 
+	**/
+	gtk_signal_connect(GTK_OBJECT(prefs),"close",
+		GTK_SIGNAL_FUNC(prefs_box_hide),NULL);
+	gtk_signal_connect(GTK_OBJECT(prefs),"apply",
+		GTK_SIGNAL_FUNC(prefs_box_apply),NULL);
+	gtk_signal_connect(GTK_OBJECT(prefs),"help",
+		GTK_SIGNAL_FUNC(prefs_box_help),NULL);
+}
+
+/**
+* Shows the prefs-box ..
+**/
+void prefs_box_show(GtkWidget *widget,gpointer useless)
+{
+	gtk_widget_show_all(GNOME_PROPERTY_BOX(prefs));
+}
+
+/**
+* And this one hides it ..
+**/
+void prefs_box_hide(GtkWidget *widget,gpointer useless)
+{
+	gtk_widget_hide(prefs);
+}
+
+/**
+* If it's an apply then do this nice moves ...
+**/
+void prefs_box_apply(GtkWidget *widget,gpointer more_useless)
+{
+	/* FIXME -> This code follows closely this weekend */
 }

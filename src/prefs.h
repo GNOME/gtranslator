@@ -45,6 +45,9 @@ GtkWidget *warn_if_fuzzy,*warn_if_untranslated;
 **/
 
 /**
-* This creates the preferences-box
+* The first one creates the preferences-box and the others show/hide it
 **/
 void prefs_box(GtkWidget *widget,gpointer useless);
+void prefs_box_show(GtkWidget *widget,gpointer useless);
+void prefs_box_hide(GtkWidget *widget,gpointer useless);
+void prefs_box_apply(GtkWidget *widget,gpointer more_useless);
