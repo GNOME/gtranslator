@@ -282,7 +282,7 @@ dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_WITH(debug-specs,
-     [  --with-debug-specs		   Build everything with debug informations],,with_debug_specs=yes)
+     [  --with-debug-specs		   Build everything with debug informations],, with_debug_specs=yes)
 AC_MSG_CHECKING([for a debuggy build ])
 if test "rt$with_debug_specs" = "rtno" ; then
 	AC_MSG_RESULT([" "
@@ -298,7 +298,7 @@ dnl -------------------------------------------------------------------
 dnl For the extremists of the 'gcc-&-Werror-are-friends' department.
 dnl -------------------------------------------------------------------
 AC_ARG_WITH(extreme-gcc-flags,
-     [  --with-extreme-gcc-flags	   Set the CFLAGS to the most extreme values],extreme_gcc_flags=yes,)
+     [  --with-extreme-gcc-flags	   Set the CFLAGS to the most extreme values],, extreme_gcc_flags=yes)
 AC_MSG_CHECKING([for extremists-ala-gcc-Werror ])
 if test "gcc$extreme_gcc_flags" = "gccyes" ; then
 	AC_MSG_RESULT([" "
