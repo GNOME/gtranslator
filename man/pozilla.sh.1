@@ -1,6 +1,6 @@
-.TH "pozilla.sh" "1" "5.2" "Fatih Demir" "Pozilla -- neat i18 stuff"
+.TH "pozilla.sh" "1" "5.4" "Fatih Demir" "Pozilla -- neat i18 stuff"
 .SH "STATUS"
-pozilla.sh is now quite working but has got still some smaller issues \-\- I'd advise to first use everything within the \*(lqdry modus\*(rq to prevent any unwanted mail spamming or similar actions :\-)
+pozilla.sh is now quite working but has got still some smaller issues \-\- I'd advise to first use everything within the \*(lqdry modus\*(rq.
 .SH "NAME"
 .LP 
 pozilla.sh \-\- an i18n and admin helper script for the pre\-release status of a project, awaking/warning the translators to update their translations and to print out neat statistics tables.
@@ -31,6 +31,8 @@ pozilla.sh [\fI\-n\fP | \fI\-\-no\-personal\fP]
 pozilla.sh [\fI\-N\fP | \fI\-\-no\-list\fP]
 .br 
 pozilla.sh [\fI\-o\fP | \fI\-\-output\-file\fP]
+.br
+pozilla.sh [\fI\-t\fP | \fI\-\-timer\-stats\fP]
 .SH "DESCRIPTION"
 .LP 
 pozilla.sh makes i18n and project admins more happy alltogether .\-)
@@ -83,6 +85,9 @@ No EMails are sent to the mailing list or any giving additional mail address.
 .TP 
 \fB\-o\fR \fIOutput_Filename\fP
 Print the eventually requested statistics table into the given \fIOutput_Filename\fR instead of simply printing it out to \fBstdout\fR.
+.TP
+\fB\-t\fR
+Show a small statistic about the time pozilla.sh has run for the current working task.
 .TP 
 \fB\-\-help\fR
 Show a small help screen with all the options.
