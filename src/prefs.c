@@ -15,6 +15,8 @@
 #include "languages.h"
 #include "find.h"
 
+#include <libgtranslator/preferences.h>
+
 /* The callbacks */
 static void prefs_box_changed(GtkWidget * widget, gpointer useless);
 static void prefs_box_apply(GtkWidget * widget, gint page_num,

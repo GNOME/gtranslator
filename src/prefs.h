@@ -22,11 +22,6 @@
 #include <gtk/gtksignal.h>
 
 /**
-* Use libgtranslator's preferences code.
-**/
-#include <libgtranslator/preferences.h>
-
-/**
 * These are the variables set by the prefs-box ( globally ones )
 **/
 gchar *author, *email, *language, *mime, *enc, *lc, *lg;

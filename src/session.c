@@ -26,13 +26,11 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 		       GnomeSaveStyle s_style, gint shutdown,
 		       GnomeInteractStyle i_style, gint fast, gpointer data)
 {
-	gchar *path;
 	gchar *argv[] = {
 		"rm",
 		"-r",
 		NULL
 	};
-	path = gnome_client_get_config_prefix(client);
 	/**
 	* State-saving ...
 	**/
@@ -42,7 +40,7 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 	gtranslator_config_close();
 	
 	
-	argv[2] = gnome_config_get_real_path(path);
+	argv[2] = gtranslator_config_get_absolute_path();
 
 	gnome_client_set_discard_command(client, 3, argv);
 
