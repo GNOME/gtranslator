@@ -104,6 +104,11 @@ static  GtkTargetEntry dragtypes[] = {
 };
 
 /*
+ * Counts the already performed update's count for the syntax updating.
+ */
+gint update_count=0;
+
+/*
  * The menu-entries
  */
 
@@ -1129,6 +1134,18 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 	if(widget)
 	{
 		gint selpos=0;
+
+		update_count++;
+
+		/*
+		 * Check if there were already made an update -- don#t update
+		 *  the syntax 3x for only one reason/change.
+		 */
+		if(update_count >= 2)
+		{
+			update_count=0;
+			return;
+		}
 	
 		/*
 		 * Determine if the translation box owns currently any selection.
