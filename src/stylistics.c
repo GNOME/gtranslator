@@ -29,7 +29,7 @@
 #include "stylistics.h"
 #include "utils.h"
 
-#include <libgnome/gnome-defs.h>
+//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
 #include <gdk/gdkx.h>
@@ -343,8 +343,9 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 			/*
 			 * Unref old widget font.
 			 */
-			gdk_font_unref(style->font);
-			style->font=font;
+		  // XXX fix it
+		  //	gdk_font_unref(style->font);
+		  //	style->font=font;
 		}
 	}
 	

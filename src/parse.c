@@ -59,10 +59,10 @@
 #include <libgnomeui/gnome-app-util.h>
 #include <libgnomeui/gnome-dialog-util.h>
 #include <libgnomeui/gnome-messagebox.h>
-#include <libgnomeui/gnome-stock.h>
+//#include <libgnomeui/gnome-stock.h>
 #include <libgnomeui/gnome-uidefs.h>
 
-#include <gal/e-paned/e-paned.h>
+//#include <gal/e-paned/e-paned.h>
 
 /* Global variables */
 GtrPo *po;
@@ -173,8 +173,9 @@ void gtranslator_parse(const gchar *filename)
 
 	g_return_if_fail(filename!=NULL);
 
-	base=g_basename(filename);
+	base=g_path_get_basename(filename);
 	g_return_if_fail(base[0]!='\0');
+	g_free(base);
 
 	po = g_new0(GtrPo, 1);
 
@@ -441,8 +442,8 @@ gboolean gtranslator_parse_core(void)
  */
 void gtranslator_parse_main(const gchar *filename)
 {
-	gchar 	*title;
-
+  gchar 	*title;
+  gchar         *base;
 	/*
 	 * Test if such a file does exist.
 	 */
@@ -565,13 +566,10 @@ void gtranslator_parse_main(const gchar *filename)
 	/*
 	 * Test if the filename is NOT equivalent to our temp files' names.
 	 */
-	if(nautilus_strcasecmp(g_basename(po->filename), 
-		gtranslator_runtime_config->temp_filename) || 
-	   nautilus_strcasecmp(g_basename(po->filename),
-	   	gtranslator_runtime_config->backend_filename) ||
-	   nautilus_strcasecmp(g_basename(po->filename),
-	   	gtranslator_runtime_config->crash_filename))
-		
+	base = g_path_get_basename(po->filename);
+	if(nautilus_strcasecmp(base, gtranslator_runtime_config->temp_filename) || 
+	   nautilus_strcasecmp(base, gtranslator_runtime_config->backend_filename) ||
+	   nautilus_strcasecmp(base, gtranslator_runtime_config->crash_filename))
 	{
 		gtranslator_history_add(po->filename,
 			po->header->prj_name, po->header->prj_version);
@@ -580,6 +578,7 @@ void gtranslator_parse_main(const gchar *filename)
 		gtk_window_set_title(GTK_WINDOW(gtranslator_application), title);
 		GTR_FREE(title);
 	}
+	g_free(base);
 
 	/*
 	 * Update the recent files list.
@@ -609,7 +608,7 @@ void gtranslator_parse_main(const gchar *filename)
 void gtranslator_parse_the_file_from_file_dialog(GtkWidget * widget, gpointer of_dlg)
 {
 	gchar *po_file;
-	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
+	po_file = g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg)));
 
 	gtranslator_file_dialogs_store_directory(po_file);
 
@@ -879,7 +878,7 @@ Your file should likely be named '%s.po'."),
 void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 {
 	gchar *po_file;
-	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg));
+	po_file = g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg)));
 	if (!gtranslator_save_file(po_file))
 		return;
 	GTR_FREE(po->filename);
@@ -958,7 +957,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	gtranslator_text_boxes_clean();
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");
 	gtk_widget_set_sensitive(GTK_WIDGET(extra_content_view->edit_button), FALSE);
-	e_paned_set_position(E_PANED(content_pane), 0);
+	gtk_paned_set_position(GTK_PANED(content_pane), 0);
 	
 	gtranslator_actions_set_up_state_no_file();
 
@@ -966,7 +965,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	 * Set blank status, progress and window title
 	 */
 	gnome_appbar_clear_stack(GNOME_APPBAR(gtranslator_application_bar));
-	gnome_appbar_set_progress(GNOME_APPBAR(gtranslator_application_bar), 0.00000);
+	gnome_appbar_set_progress_percentage(GNOME_APPBAR(gtranslator_application_bar), 0.00000);
 	gtk_window_set_title(GTK_WINDOW(gtranslator_application), _("gtranslator"));
 
 	/*
@@ -1236,7 +1235,7 @@ void gtranslator_set_progress_bar(void)
 		/*
 		 * Set the progressbar status.
 		 */
-		gnome_appbar_set_progress(
+		gnome_appbar_set_progress_percentage(
 			GNOME_APPBAR(gtranslator_application_bar),
 			percentage);
 	}

@@ -12,9 +12,11 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
 	-DG_LOG_DOMAIN=\""gtranslator"\" \
-	$(GLIB_CFLAGS)		\
-	$(GNOME_INCLUDEDIR)	\
-	$(GAL_CFLAGS)
+        -DPREFIX=\""$(prefix)"\" \
+        -DSYSCONFDIR=\""$(sysconfdir)"\" \
+        -DDATADIR=\""$(datadir)"\" \
+        -DLIBDIR=\""$(libdir)"\" \
+        $(GTRANSLATOR_CFLAGS)
 
 text_la_SOURCES = text.c
 text_la_LDFLAGS = -avoid-version -module

@@ -26,12 +26,13 @@
 #include "nautilus-string.h"
 #include "utils.h"
 
-#include <gnome-xml/parser.h>
+#include <libxml/parser.h>
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomeui/libgnomeui.h>
+//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
-
-#include <gal/util/e-xml-utils.h>
+#include <libxml/xmlmemory.h>
+#include "e-xml-utils.h"
 
 
 GList *backends;
@@ -137,6 +138,7 @@ static GtrBackendInformations *gtranslator_backend_read_xml_descriptor(const gch
 		 * The description field should always be translated, therefore
 		 *  use the gal function to do it so ,-)
 		 */
+// XXX convert it.
 		infos->description=e_xml_get_translated_string_prop_by_name(
 			node, "description");
 	}

@@ -40,7 +40,7 @@
 
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
-#include <libgnomeui/gnome-stock.h>
+//#include <libgnomeui/gnome-stock.h>
 
 GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),

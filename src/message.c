@@ -166,7 +166,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		temp = g_strdup(msg->msgid);
 		gtranslator_utils_invert_dot(temp);
 		
-		gtranslator_insert_text(GTK_TEXT(text_box), temp);
+		gtranslator_insert_text(text_box, temp);
 		
 		GTR_FREE(temp);
 
@@ -182,23 +182,23 @@ void gtranslator_message_show(GtrMsg *msg)
 			
 			gtranslator_utils_invert_dot(temp);
 			
-			gtranslator_insert_text(GTK_TEXT(trans_box), temp);
+			gtranslator_insert_text(trans_box, temp);
 			
 			GTR_FREE(temp);
 		}
 	} else {
-		gtranslator_insert_text(GTK_TEXT(text_box), msg->msgid);
+		gtranslator_insert_text(text_box, msg->msgid);
 
 		if(po->utf8)
 		{
 			gchar *text=gtranslator_utf8_get_plain_msgstr(&msg);
 			
-			gtranslator_insert_text(GTK_TEXT(trans_box), text);
+			gtranslator_insert_text(trans_box, text);
 
 		}
 		else
 		{
-			gtranslator_insert_text(GTK_TEXT(trans_box), msg->msgstr);
+			gtranslator_insert_text(trans_box, msg->msgstr);
 		}
 	}
 	
@@ -253,22 +253,25 @@ void gtranslator_message_show(GtrMsg *msg)
 
 void gtranslator_message_update(void)
 {
-	guint 
-		len,
-		pos;
-		
+  guint len; 
+  //		pos;
+	GtkTextIter start, end;
 	GtrMsg 
 		*msg = GTR_MSG(po->current->data);
 		
 	if (!message_changed)
 		return;
-	pos = gtk_editable_get_position( GTK_EDITABLE(trans_box) );
-	gtk_text_freeze( GTK_TEXT(trans_box) );
-	len = gtk_text_get_length(GTK_TEXT(trans_box));
+	//	pos = gtk_editable_get_position( GTK_EDITABLE(trans_box) );
+	// gtk_text_freeze( GTK_TEXT(trans_box) );
+	len = gtk_text_buffer_get_char_count(trans_box);
 	if (len) {
+		gtk_text_buffer_get_bounds(trans_box, &start, &end);
+
 		/* Make both strings end with or without endline */
+		// XXX fix it
+		/*
 		if (msg->msgid[strlen(msg->msgid) - 1] == '\n') {
-			if (GTK_TEXT_INDEX(GTK_TEXT(trans_box), len - 1)
+			if (GTK_TEXT_INDEX(trans_box), len - 1)
 			    != '\n')
 				gtk_editable_insert_text(
 				    GTK_EDITABLE(trans_box), "\n", 1, &len);
@@ -280,19 +283,24 @@ void gtranslator_message_update(void)
 				len--;
 			}
 		}
-		
-		GTR_FREE(msg->msgstr);
+		*/
 
+		GTR_FREE(msg->msgstr);
+		/*
 		if(po->utf8)
 		{
-			msg->msgstr=gtranslator_utf8_get_gtk_text_as_utf8_string(trans_box);
+			msg->msgstr=gtranslator_utf8_get_gtk_text_as_utf8_string(GTK_WIDGET(trans_box));
 		}
 		else
 		{
 			msg->msgstr=gtk_editable_get_chars(
 				GTK_EDITABLE(trans_box), 0, len);
 		}
+		*/
+		// XXX we always work with utf-8
 
+		msg->msgstr = gtk_text_buffer_get_text(trans_box, &start, &end, FALSE);
+		
 		/*
 		 * If spaces were substituted with dots, replace them back
 		 */
@@ -355,8 +363,8 @@ contains syntactical errors!"), msg->msgid);
 	{
 		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
 	}
-	gtk_text_thaw( GTK_TEXT(trans_box) );
-	gtk_editable_set_position( GTK_EDITABLE(trans_box), pos );
+	//	gtk_text_thaw( GTK_TEXT(trans_box) );
+	//	gtk_editable_set_position( GTK_EDITABLE(trans_box), pos );
 }
 
 void gtranslator_message_change_status(GtkWidget  * item, gpointer which)

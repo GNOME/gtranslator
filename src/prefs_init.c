@@ -126,7 +126,7 @@ void gtranslator_preferences_init_default_values()
 		/*
 		 * Set the default colorscheme name + filename.
 		 */
-		gtranslator_config_set_string("scheme/name", "default.xml");
+		gtranslator_config_set_string("scheme/name", "default");
 		gtranslator_config_set_string("scheme/filename", SCHEMESDIR
 			"/default.xml");
 
@@ -139,6 +139,7 @@ void gtranslator_preferences_init_default_values()
 
 	GTR_FREE(date);
 }
+
 
 /*
  * Setup the default colors.

@@ -25,7 +25,7 @@
 #include "preferences.h"
 #include "utils.h"
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomeui/libgnomeui.h>
 #include <libgnome/gnome-util.h>
 
 /*

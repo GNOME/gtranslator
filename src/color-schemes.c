@@ -36,8 +36,8 @@
 
 #include <gtk/gtkmenushell.h>
 
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
+#include <libxml/tree.h>
+#include <libxml/parser.h>
 
 #ifdef ENABLE_NLS
 #include <libgnome/gnome-i18n.h>
@@ -190,7 +190,8 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
  */
 void gtranslator_color_scheme_apply(const gchar *filename)
 {
-	GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
+  /* GtrColorScheme*/
+        theme=g_new0(GtrColorScheme, 1);
 
 	theme=gtranslator_color_scheme_open(filename);
 
@@ -242,7 +243,7 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	gtranslator_config_set_string("scheme/filename", 
 		theme->info->filename);
 	
-	gtranslator_color_scheme_free(&theme);
+	//	gtranslator_color_scheme_free(&theme);
 }
 
 /*
@@ -250,7 +251,7 @@ void gtranslator_color_scheme_apply(const gchar *filename)
  */
 GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
 {
-	GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
+  /*GtrColorScheme */theme=g_new0(GtrColorScheme, 1);
 
 	theme->info=g_new0(GtrColorSchemeInformations, 1);
 
@@ -306,6 +307,7 @@ GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node)
 	infos->name=xmlGetProp(*node, "name");
 	infos->version=xmlGetProp(*node, "version");
 
+	g_message("name: %s version %s", infos->name, infos->version);
 	*node=(*node)->xmlChildrenNode;
 
 	/*
@@ -513,13 +515,15 @@ void gtranslator_color_scheme_show_list()
 		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
 		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
 
-		gtk_signal_connect(GTK_OBJECT(menu->widget), "destroy",
-			   GTK_SIGNAL_FUNC(free_data), menu->hint);
+// XXX convert it
+//		gtk_signal_connect(GTK_OBJECT(menu->widget), "destroy",
+//			   GTK_SIGNAL_FUNC(free_data), menu->hint);
 
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
-		GTR_FREE(menu->label);
+// XXX fix it
+// 		GTR_FREE(menu->label);
 		GTR_FREE(menu);
 	}
 }
@@ -578,8 +582,8 @@ void apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 		GTR_FREE(scheme_name);
 	}
 
-	gtranslator_set_style(text_box, 0);
-        gtranslator_set_style(trans_box, 1);
+	gtranslator_set_style(GTK_WIDGET(text_box), 0);
+        gtranslator_set_style(GTK_WIDGET(trans_box), 1);
 }
 
 /*

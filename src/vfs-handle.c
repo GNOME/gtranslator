@@ -21,7 +21,7 @@
 #include "utils.h"
 #include "vfs-handle.h"
 
-#include <libgnome/gnome-defs.h>
+//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 
@@ -119,7 +119,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 		 * Test if this directory is already existent and
 		 *  create the directory if it's existent.
 		 */ 
-		if(!g_file_test(destdir, G_FILE_TEST_ISDIR))
+		if(!g_file_test(destdir, G_FILE_TEST_IS_DIR))
 		{
 			if(e_mkdir_hier(destdir, 0755)==-1)
 			{
@@ -135,8 +135,8 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 		 * The destination path.
 		 */
 		destination=gnome_vfs_uri_new(g_strdup_printf("%s/%s", destdir,
-			gnome_vfs_uri_get_basename(file)));
-
+							      gnome_vfs_uri_extract_short_path_name(file)));
+			
 		GTR_FREE(destdir);
 		
 		/*

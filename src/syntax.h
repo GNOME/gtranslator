@@ -21,14 +21,14 @@
 #ifndef GTR_SYNTAX_H
 #define GTR_SYNTAX_H 1
 
-#include <gtk/gtktext.h>
+#include <gtk/gtktextbuffer.h>
 
 /*
  * This function creates syntax textdata and ties it to widget.
  * Text widget should have 0 characters inside.
  */
  
-void gtranslator_syntax_init(GtkEditable *textwidget);
+void gtranslator_syntax_init(GtkTextBuffer *textwidget);
 
 /*
  * This function will insert text highlighted into widget.
@@ -38,7 +38,7 @@ void gtranslator_syntax_init(GtkEditable *textwidget);
  * 4. Compare new characterdata with old one and update changed chars
  */
 void gtranslator_insert_highlighted(
-		GtkEditable *textwidget,
+		GtkTextBuffer *textbuffer,
 		gchar	*text,
 		gint	addlen,
 		gint	*pos,
@@ -52,7 +52,7 @@ void gtranslator_insert_highlighted(
  * 4. Compare new characterdata with old one and update changed chars
  */
 void gtranslator_delete_highlighted(
-		GtkEditable *textwidget,
+		GtkTextBuffer *textbuffer,
 		gint	startpos,
 		gint	endpos,
 		gpointer userdata);
@@ -61,11 +61,11 @@ void gtranslator_delete_highlighted(
  * Will check syntax.
  * returns new highlight information
  */
-GString *gtranslator_parse_syntax(GtkEditable *textwidget);
+GString *gtranslator_parse_syntax(GtkTextBuffer *textbuffer);
 
 /*
  *
  */
-void gtranslator_insert_text(GtkText *editable, const gchar *text);
+void gtranslator_insert_text(GtkTextBuffer *editable, const gchar *text);
 
 #endif

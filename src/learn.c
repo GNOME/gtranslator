@@ -32,13 +32,13 @@
 
 #include <time.h>
 
-#include <gnome-xml/parser.h>
-#include <gnome-xml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
 
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 
-#include <gal/util/e-xml-utils.h>
+#include "e-xml-utils.h"
 
 /*
  * The GtrLearnBuffer structure which holds all informations/parts of the
@@ -407,14 +407,14 @@ void gtranslator_learn_init()
 	/*
 	 * Read in our autolearned xml document.
 	 */
-	if(g_file_test(gtranslator_learn_buffer->filename, G_FILE_TEST_ISFILE))
+	if(g_file_test(gtranslator_learn_buffer->filename, G_FILE_TEST_IS_REGULAR))
 	{
 		xmlNodePtr node;
 		
 		gtranslator_learn_buffer->doc=xmlParseFile(gtranslator_learn_buffer->filename);
 		g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
-
-		gtranslator_learn_buffer->encoding=e_xml_get_string_prop_by_name(gtranslator_learn_buffer->doc->xmlRootNode, "encoding");
+		// XXX convert it
+		//		gtranslator_learn_buffer->encoding=e_xml_get_string_prop_by_name(gtranslator_learn_buffer->doc->xmlRootNode, "encoding");
 
 		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode->xmlChildrenNode;
 		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);

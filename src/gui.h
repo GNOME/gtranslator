@@ -25,7 +25,8 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkeditable.h>
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomeui/libgnomeui.h>
+//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
 /*
@@ -33,8 +34,8 @@
  */
 extern GtkWidget *gtranslator_application;
 extern GtkWidget *gtranslator_messages_table;
-extern GtkWidget *trans_box;
-extern GtkWidget *text_box;
+extern GtkTextBuffer *trans_box;
+extern GtkTextBuffer *text_box;
 extern GtkWidget *gtranslator_application_bar;
 
 extern GtkWidget *sidebar_pane;

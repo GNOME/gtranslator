@@ -255,7 +255,7 @@ void gtranslator_import_dialog_clicked(GtkWidget *widget, gpointer dialog)
 {
 	gchar *filename;
 
-	filename=gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog));
+	filename=g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog)));
 	gtranslator_file_dialogs_store_directory(filename);
 
 	/*
@@ -298,7 +298,7 @@ void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog)
 {
 	gchar *filename;
 
-	filename=gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog));
+	filename=g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(dialog)));
 	gtranslator_file_dialogs_store_directory(filename);
 
 	/*
@@ -529,14 +529,14 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 	{
 		directory=gtranslator_config_get_string("informations/last_directory");
 
-		if(directory && g_file_test(directory, G_FILE_TEST_ISDIR))
+		if(directory && g_file_test(directory, G_FILE_TEST_IS_DIR))
 		{
 			gtk_file_selection_complete(
 				GTK_FILE_SELECTION(*fileselection), directory);
 		}
 		else
 		{
-			directory=g_get_home_dir();
+			directory=g_strdup(g_get_home_dir());
 			gtk_file_selection_complete(
 				GTK_FILE_SELECTION(*fileselection), directory);
 		}
@@ -900,7 +900,7 @@ void gtranslator_compile_error_dialog(FILE * fs)
 
 	dialog = gtranslator_utils_error_dialog(_("An error occurred while msgfmt was executed:\n"));
 	textbox = gtk_text_new(NULL, NULL);
-	gtk_text_set_editable(GTK_TEXT(textbox), FALSE);
+	//	gtk_text_set_editable(GTK_TEXT(textbox), FALSE);
 	while (TRUE) {
 		len = fread(buf, 1, sizeof(buf), fs);
 		if (len == 0)
@@ -1242,8 +1242,8 @@ Would you like to insert it into the translation?"),
 						 * Insert the text and update the
 						 * status flags for it.
 						 */
-						gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-							result, strlen(result));
+					  // XXX correct?
+					        gtk_text_buffer_set_text(trans_box, result, -1);
 
 						gtranslator_translation_changed(NULL, NULL);
 

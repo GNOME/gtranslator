@@ -22,7 +22,7 @@
 #define GTR_LANGUAGES_H 1
 
 #include <glib.h>
-#include <libgnome/gnome-defs.h>
+// #include <libgnome/gnome-defs.h>
 
 /*
  * The language structure with all the essential data for gtranslator:

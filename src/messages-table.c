@@ -38,19 +38,7 @@
 
 #include <gdk/gdkkeysyms.h>
 
-#include <gal/widgets/e-unicode.h>
-
-#include <gal/e-paned/e-paned.h>
-
-#include <gal/e-table/e-cell-combo.h>
-#include <gal/e-table/e-cell-number.h>
-#include <gal/e-table/e-cell-text.h>
-#include <gal/e-table/e-cell-tree.h>
-#include <gal/e-table/e-table-extras.h>
-#include <gal/e-table/e-tree-model.h>
-#include <gal/e-table/e-tree-memory.h>
-#include <gal/e-table/e-tree-scrolled.h>
-#include <gal/e-table/e-tree-memory-callbacks.h>
+//#include <gal/widgets/e-unicode.h>
 
 /*
  * We're now defining the highlighting colors once here at the top via macros.
@@ -59,43 +47,26 @@
 #define TABLE_UNTRANSLATED_COLOR "#a7453e"
 #define TABLE_TRANSLATED_COLOR NULL
 
+enum
+{
+  STATUS_COLUMN,
+  NUMBER_COLUMN,
+  LINE_COLUMN,
+  ORIGINAL_COLUMN,
+  TRANSLATION_COLUMN,
+  COMMENT_COLUMN,
+  N_COLUMNS
+};
+
 /*
  * Create the ETableExtras for our messages table.
  */
-static ETableExtras *table_extras_new(void);
-
-/*
- * Internal ETableModel functions: the names should be self-explanatory.
- *
- * Prototypes:
- */
-static GdkPixbuf *icon_at_function (ETreeModel *model, ETreePath path, void *data); 
-static gint column_count_function(ETreeModel *model, void *data);
-
-static gboolean is_cell_editable_function(ETreeModel *model, ETreePath path, 
-	int column, void *data);
-static gboolean is_empty_function(ETreeModel *model, int column, 
-	const void *value, void *data);
-
-static void free_value_function(ETreeModel *model, int column, 
-	void *value, void *data);
-static void set_value_at_function(ETreeModel *model, ETreePath path, int col, 
-	const void *value, void *data);
-
-static void *duplicate_value_function(ETreeModel *model, int column, 
-	const void *value, void *data);
-static void *initialize_value_function(ETreeModel *model, int column, void *data);
-static void *value_at_function(ETreeModel *model, ETreePath path, int column, 
-	void *data);
-
-static gchar *return_string_for_value_function(ETreeModel *model, int column,
-	const void *value, void *data);
 
 /*
  * Simply sets up/frees the generally used messages table colors.
  */
-static void read_messages_table_colors(void);
-static void free_messages_table_colors(void);
+//static void read_messages_table_colors(void);
+//static void free_messages_table_colors(void);
 
 /*
  * Own messages table color container.
@@ -120,28 +91,17 @@ typedef struct
 /*
  * A new kind of popup menu for our beloved messages table.
  */
-static gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
-	                    GdkEvent *event);
-static void row_selected (ETree *et, int row, ETreePath node, int column,
-		          gpointer data);
 
 /*
  * An own insertion callback for the messages table's popup menu to insert
  *  the found, fitting translation from the learn buffer.
  */
-static void insert_translation(GtkWidget *widget, gpointer insertion_kind);
+//static void insert_translation(GtkWidget *widget, gpointer insertion_kind);
 
 /*
  * Global variables
  */
 GtkWidget *tree;
-ETreeModel *tree_model;
-ETreeMemory *tree_memory;
-ETreePath root_node = NULL;
-ETreePath translated_node = NULL;
-ETreePath fuzzy_node = NULL;
-ETreePath unknown_node = NULL;
-ETableExtras *tree_extras;
 
 GtrMessagesTableColors *messages_table_colors;
 
@@ -158,570 +118,7 @@ GHashTable *hash_table=NULL;
  * Pops up on a right click in the messages table -- should show any found 
  *  translation from the learn buffer.
  */
-gint tree_popup_menu(ETree *tree, int row, ETreePath path, int column,
-	             GdkEvent *event)
-{
-	row_selected(tree, row, path, column, NULL);
-		
-	if(event->button.button==3)
-	{
-		GtrMsg *message=NULL;
 
-		message=e_tree_memory_node_get_data(tree_memory, path);
-
-		/*
-		 * Check if we're on an untranslated or fuzzy message before 
-		 *  operating any further.
-		 */
-		if(message && message->msgid && (!message->msgstr ||
-			message->status & GTR_MSG_STATUS_FUZZY))
-		{
-			GtkWidget	*menu=NULL;
-			GtkWidget 	*menu_item=NULL;
-			gchar		*found_str=NULL;
-			
-			/*
-			 * Query our own, personal learn buffer for the 
-			 *  original message string.
-			 */
-			found_str=gtranslator_learn_get_learned_string(message->msgid);
-
-			menu=gtk_menu_new();
-			
-			if(found_str)
-			{
-				GtkWidget	*explanatory_menu_item=NULL;
-				GtkWidget	*edit_sub_menu=NULL;
-				GtkWidget	*imt_menu_item, *separator, *ipmt_menu_item=NULL;
-
-				explanatory_menu_item=gtk_menu_item_new_with_label(_("Appropriate match:"));
-
-				gtk_widget_show(explanatory_menu_item);
-				gtk_menu_append(GTK_MENU(menu), explanatory_menu_item);
-
-				menu_item=gtk_menu_item_new_with_label(found_str);
-
-				edit_sub_menu=gtk_menu_new();
-
-				imt_menu_item=gtk_menu_item_new_with_label(_("Insert matching translation"));
-				separator=gtk_menu_item_new();
-				ipmt_menu_item=gtk_menu_item_new_with_label(_("Take as translation"));
-				
-				gtk_widget_show(imt_menu_item);
-				gtk_menu_append(GTK_MENU(edit_sub_menu), imt_menu_item);
-
-				gtk_widget_show(separator);
-				gtk_menu_append(GTK_MENU(edit_sub_menu), separator);
-
-				gtk_widget_show(ipmt_menu_item);
-				gtk_menu_append(GTK_MENU(edit_sub_menu), ipmt_menu_item);
-
-				gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu_item), edit_sub_menu);
-
-				retrieval=g_new0(GtrTranslationRetrieval, 1);
-				retrieval->found_translation=found_str;
-				retrieval->message=message;
-
-				gtk_signal_connect(GTK_OBJECT(imt_menu_item), "activate",
-					GTK_SIGNAL_FUNC(insert_translation), GINT_TO_POINTER(1));
-
-				gtk_signal_connect(GTK_OBJECT(ipmt_menu_item), "activate",
-					GTK_SIGNAL_FUNC(insert_translation), GINT_TO_POINTER(2));
-			}
-			else
-			{
-				menu_item=gtk_menu_item_new_with_label(
-					_("Found nothing appropriate in\n\
- the personal learn buffer."));
-
-			}
-
-			/*
-			 * Show the menu items.
-			 */
-			gtk_widget_show(menu_item);
-			gtk_menu_append(GTK_MENU(menu), menu_item);
-			
-			/*
-			 * Perform our popup menu action.
-			 */
-			gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-					NULL, NULL, event->button.button,
-					event->button.time);
-		}
-	}
-
-	return TRUE;
-}
-
-/*
- * Insert the found translation
- */
-static void insert_translation(GtkWidget *widget, gpointer insertion_kind)
-{
-	retrieval->replace=(GPOINTER_TO_INT(insertion_kind) == 2);
-
-	if(retrieval->message && retrieval->found_translation)
-	{
-		if(retrieval->replace)
-		{
-			GTR_FREE(retrieval->message->msgstr);
-			retrieval->message->msgstr=g_strdup(retrieval->found_translation);
-		}
-		else
-		{
-			if(!retrieval->message->msgstr)
-			{
-				retrieval->message->msgstr=g_strdup(retrieval->found_translation);
-			}
-			else
-			{
-				gchar *oldstr=retrieval->message->msgstr;
-				retrieval->message->msgstr=g_strconcat(oldstr, retrieval->found_translation, NULL);
-				GTR_FREE(oldstr);
-			}
-		}
-
-		gtranslator_message_status_set_fuzzy(retrieval->message, FALSE);
-		retrieval->message->status |= GTR_MSG_STATUS_TRANSLATED;
-		gtranslator_message_show(retrieval->message);
-		gtranslator_messages_table_update_message_status(retrieval->message);
-		gtranslator_messages_table_update_row(retrieval->message);
-
-		GTR_FREE(retrieval->found_translation);
-		GTR_FREE(retrieval);
-	}
-}
-
-/*
- * Initialize and set up the generally used messages table colors.
- */
-static void read_messages_table_colors()
-{
-	messages_table_colors=g_new0(GtrMessagesTableColors, 1);
-
-	/*
-	 * Read the values from the prefs in -- but only if desired.
-	 */
-	if(GtrPreferences.use_own_mt_colors)
-	{
-		gchar	*value;
-		
-		value=gtranslator_config_get_string("colors/messages_table_untranslated");
-
-		if(value && value[0]=='#')
-		{
-			messages_table_colors->untranslated=g_strdup(value);
-			GTR_FREE(value);
-		}
-		else
-		{
-			messages_table_colors->untranslated=g_strdup(TABLE_UNTRANSLATED_COLOR);
-		}
-
-		value=gtranslator_config_get_string("colors/messages_table_fuzzy");
-
-		if(value && value[0]=='#')
-		{
-			messages_table_colors->fuzzy=g_strdup(value);
-			GTR_FREE(value);
-		}
-		else
-		{
-			messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
-		}
-
-		value=gtranslator_config_get_string("colors/messages_table_translated");
-
-		if(value && value[0]=='#')
-		{
-			messages_table_colors->translated=g_strdup(value);
-			GTR_FREE(value);
-		}
-		else
-		{
-			messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
-		}
-	}
-	else
-	{
-		messages_table_colors->untranslated=g_strdup(TABLE_UNTRANSLATED_COLOR);
-		messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
-		messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
-	}
-}
-
-/*
- * Frees the internally used GtrMessagesTableColors structure.
- */
-static void free_messages_table_colors()
-{
-	if(messages_table_colors)
-	{
-		GTR_FREE(messages_table_colors->untranslated);
-		GTR_FREE(messages_table_colors->fuzzy);
-		GTR_FREE(messages_table_colors->translated);
-
-		GTR_FREE(messages_table_colors);
-	}
-}
-
-/* 
- * Functions:
- */
-static GdkPixbuf *
-icon_at_function (ETreeModel *model, ETreePath path, void *data)
-{
-	return NULL;
-}
-
-static gint column_count_function(ETreeModel *model, void *data)
-{
-	return 6;
-}
-
-static gboolean is_cell_editable_function(ETreeModel *model, ETreePath path, 
-	int column, void *data)
-{
-	return FALSE;
-}
-
-static gboolean is_empty_function(ETreeModel *model, int column, 
-	const void *value, void *data)
-{
-
-	switch (column) {
-	case COL_NUMBER:
-	case COL_LINE:
-	case COL_BOLD:
-		return value == NULL;
-	case COL_ORIGINAL:
-	case COL_TRANSLATION:
-	case COL_COMMENT:
-	case COL_STATUS:
-		return !(value && *(char *)value);
-	default:
-		g_assert_not_reached ();
-		return FALSE;
-	}
-}
-
-static void free_value_function(ETreeModel *model, int column, 
-	void *value, void *data)
-{
-	switch (column) {
-	case COL_ORIGINAL:
-	case COL_TRANSLATION:
-	case COL_COMMENT:
-	case COL_STATUS:
-		if (value)
-			GTR_FREE (value);
-		break;
-	case COL_BOLD:
-	case COL_NUMBER:
-	case COL_LINE:
-		break;
-	default:
-		g_assert_not_reached ();
-	}
-}
-
-static void set_value_at_function(ETreeModel *model, ETreePath path, int col, 
-	const void *value, void *data)
-{
-}
-
-static void *duplicate_value_function(ETreeModel *model, int column, 
-	const void *value, void *data)
-{
-	switch (column) {
-	case COL_ORIGINAL:
-	case COL_TRANSLATION:
-	case COL_COMMENT:
-	case COL_STATUS:
-		return g_strdup (value);
-		break;
-	case COL_NUMBER:
-	case COL_BOLD:
-	case COL_LINE:
-		return (void *) value;
-		break;
-	default:
-		g_assert_not_reached ();
-		return NULL;
-	}
-}
-
-static void *initialize_value_function(ETreeModel *model, int column, void *data)
-{
-	
-	switch (column) {
-	case COL_ORIGINAL:
-	case COL_TRANSLATION:
-	case COL_COMMENT:
-	case COL_STATUS:
-		return g_strdup ("");
-		break;
-	case COL_NUMBER:
-	case COL_BOLD:
-	case COL_LINE:
-		return NULL;
-		break;
-	default:
-		g_assert_not_reached ();
-		return NULL;
-	}
-}
-
-static void *value_at_function(ETreeModel *model, ETreePath path, int column, 
-	void *data)
-{
-	GtrMsg *message;
-
-	if (path == unknown_node)
-	{
-		if (column == COL_ORIGINAL)
-		{
-			gchar	*display_string;
-			gint	 untranslated_messages=0;
-
-			/*
-			 * Get the number of missing entries/translations.
-			 */
-			untranslated_messages=po->length - po->translated;
-
-			if(untranslated_messages >= 1)
-			{
-				/*
-				 * The `%i' format stands for the number of
-				 *  untranslated messages left over.
-				 */
-				display_string=g_strdup_printf(_("Untranslated (%i)"),
-					untranslated_messages);
-			}
-			else
-			{
-				display_string=g_strdup(_("Untranslated"));
-			}
-				
-			return e_utf8_from_locale_string(display_string);
-			GTR_FREE(display_string);
-		}
-		else if (column == COL_BOLD)
-			return GINT_TO_POINTER (1);
-		else
-			return NULL;
-	}
-	if (path == fuzzy_node)
-	{
-		if (column == COL_ORIGINAL)
-		{
-			gchar	*display_string;
-
-			if(po->fuzzy >= 1)
-			{
-				/*
-				 * The '%i' format stands for the number
-				 *  of fuzzy entries/messages left over.
-				 */
-				display_string=g_strdup_printf(_("Fuzzy (%i)"),
-					po->fuzzy);
-			}
-			else
-			{
-				display_string=g_strdup(_("Fuzzy"));
-			}
-			
-			return e_utf8_from_locale_string(display_string);
-			GTR_FREE(display_string);
-		}
-		else if (column == COL_BOLD)
-			return GINT_TO_POINTER (1);
-		else
-			return NULL;
-	}
-	if (path == translated_node)
-	{
-		if (column == COL_ORIGINAL)
-			return e_utf8_from_locale_string(_("Translated"));
-		else if (column == COL_BOLD)
-			return GINT_TO_POINTER (1);
-		else
-			return NULL;
-	}
-		
-
-	message = e_tree_memory_node_get_data (tree_memory, path);
-	g_return_val_if_fail(message!=NULL, NULL);
-	
-	switch (column) {
-	case COL_ORIGINAL:
-		return message->msgid;
-		break;
-	case COL_TRANSLATION:
-		if(message->msgstr)
-		{
-			if(po->utf8)
-			{
-				return message->msgstr;
-			}
-			else
-			{
-				return gtranslator_utf8_get_utf8_string(&message->msgstr);
-			}
-		}
-		else
-		{
-			return "";
-		}
-		break;
-	case COL_COMMENT:
-		return message->comment->pure_comment;
-		break;
-	case COL_STATUS:
-		switch(message->status) {
-		case GTR_MSG_STATUS_UNKNOWN:
-			return e_utf8_from_locale_string(_("Untranslated"));
-			break;
-		case GTR_MSG_STATUS_TRANSLATED:
-			return e_utf8_from_locale_string(_("Translated"));
-			break;
-		case GTR_MSG_STATUS_STICK:
-			return e_utf8_from_locale_string(_("Sticky"));
-			break;
-		case GTR_MSG_STATUS_FUZZY:
-		default:
-			return e_utf8_from_locale_string(_("Fuzzy"));
-		}		
-		break;
-	case COL_NUMBER:
-		return GINT_TO_POINTER(message->no);
-		break;
-	case COL_LINE:
-		return GINT_TO_POINTER(message->pos);
-		break;
-	case COL_BOLD:
-		return GINT_TO_POINTER(0);
-		break;
-	case COL_COLOR:
-		if(message->status & GTR_MSG_STATUS_FUZZY)
-		{
-			return messages_table_colors->fuzzy;
-		}
-		else if(message->status & GTR_MSG_STATUS_TRANSLATED)
-		{
-			return messages_table_colors->translated;
-		}
-		else
-		{
-			return messages_table_colors->untranslated;
-		}
-	default:
-		g_assert_not_reached ();
-		return NULL;
-	}
-}
-
-static gchar *return_string_for_value_function(ETreeModel *model, int column,
-	const void *value, void *data)
-{
-	switch (column) {
-	case COL_ORIGINAL:
-	case COL_TRANSLATION:
-	case COL_COMMENT:
-	case COL_STATUS:
-		return g_strdup (value);
-		break;
-	case COL_NUMBER:
-	case COL_BOLD:
-	case COL_LINE:
-		return g_strdup_printf("%d", GPOINTER_TO_INT(value));
-		break;
-	default:
-		g_assert_not_reached ();
-		return NULL;
-	}
-}
-
-void
-row_selected (ETree *et, int row, ETreePath node, int column, gpointer data)
-{
-	GtrMsg *message, *old_message;
-	gint model_row;
-	
-	if (!node)
-		return;
-		
-	message=e_tree_memory_node_get_data (tree_memory, node);
-	old_message = po->current->data;
-	
-	if (message != NULL && message != old_message)
-	{
-		model_row=message->no - 1;
-	
-		if (model_row<0)
-			return;
-		gtranslator_message_go_to(g_list_nth(po->messages, model_row));
-	}
-}
-
-/*
- * Creates all the nice and nifty stuff for the ETable.
- */
-static ETableExtras *table_extras_new()
-{
-	ETableExtras 	*extras;
-	ECell		*cell;
-	gint		count=0;
-
-	gchar *list_parts[] =
-	{
-		"number",
-		"line",
-		"original",
-		"translation",
-		"comment",
-		"status",
-		NULL
-	};
-
-	extras=e_table_extras_new();
-	
-	/*
-	 * Fill the table parts independently here -- just for easification
-	 *  of the process, we do use this contructions instead of many calls.
-	 */
-	cell=e_cell_number_new(NULL, GTK_JUSTIFY_RIGHT);
-	e_table_extras_add_cell(extras, list_parts[count], cell); 
-	count++;
-
-	cell=e_cell_number_new(NULL, GTK_JUSTIFY_RIGHT);
-	e_table_extras_add_cell(extras, list_parts[count], cell);
-	count++;
-	
-	cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
-	gtk_object_set (GTK_OBJECT (cell),
- 			"bold_column", COL_BOLD,
- 			"color_column", COL_COLOR,
-			NULL);
-	e_table_extras_add_cell(extras, list_parts[count], 
-				e_cell_tree_new(NULL, NULL, FALSE, cell));
-	count++;
-	
-	while(list_parts[count]!=NULL)
-	{
-		cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
-
-		gtk_object_set (GTK_OBJECT (cell),
- 			"color_column", COL_COLOR,
-			NULL);
-
-		e_table_extras_add_cell(extras, list_parts[count], cell);
-		count++;
-	}
-	
-	return extras;
-}
 
 /*
  * Create the new ETable with all the stuff needed for
@@ -729,48 +126,43 @@ static ETableExtras *table_extras_new()
  */
 GtkWidget *gtranslator_messages_table_new()
 {
-	GtkWidget 	*messages_tree;
-
-	tree_extras=table_extras_new();
-	
-	tree_model=e_tree_memory_callbacks_new(
-		icon_at_function,
-		column_count_function,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		value_at_function,
-		set_value_at_function,
-		is_cell_editable_function,
-		duplicate_value_function,
-		free_value_function,
-		initialize_value_function,
-		is_empty_function,
-		return_string_for_value_function,
-		NULL);
-
-	e_tree_memory_set_expanded_default(E_TREE_MEMORY(tree_model), TRUE);
-	
-	tree_memory=E_TREE_MEMORY(tree_model);
-
-	messages_tree = e_tree_scrolled_new_from_spec_file(
-			tree_model,
-			tree_extras,
-			ETSPECS_DIR "/messages-table.etspec",
-			gtranslator_runtime_config->table_state_filename
-		);
-	
-
-	tree = GTK_WIDGET(e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
-	
-	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
-		GTK_SIGNAL_FUNC(row_selected), NULL);
-	
-	gtk_signal_connect(GTK_OBJECT(tree), "right_click",
-		GTK_SIGNAL_FUNC(tree_popup_menu), NULL);
-	
-	return messages_tree;
+  GtkTreeViewColumn *column;
+  GtkCellRenderer *renderer;
+  GtkTreeStore *store;
+  gint i;
+  
+  gchar *titles[][2] = {{_("Status"),      "text"},
+			{_("Number"),      "text"},
+			{_("Line"),        "text"},
+			{_("Original"),    "text"},
+			{_("Translation"), "text"},
+			{_("Comment"),     "text"}};
+  
+  store = gtk_tree_store_new (N_COLUMNS,
+			      G_TYPE_STRING,
+			      G_TYPE_INT,
+			      G_TYPE_INT,
+			      G_TYPE_STRING,
+			      G_TYPE_STRING,
+			      G_TYPE_STRING);
+  
+  tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tree), TRUE);
+  gtk_tree_view_set_search_column (GTK_TREE_VIEW (tree),
+				   NUMBER_COLUMN);
+  
+  g_object_unref (G_OBJECT (store));
+  
+  for (i=0; i < N_COLUMNS; i++) {
+    renderer = gtk_cell_renderer_text_new ();
+    column = gtk_tree_view_column_new_with_attributes (titles[i][0], renderer,
+						       titles[i][1], i,
+						       NULL);
+    gtk_tree_view_column_set_sort_column_id (column, i);
+    gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+  }
+  
+  return tree;
 }
 
 /*
@@ -778,21 +170,7 @@ GtkWidget *gtranslator_messages_table_new()
  */
 void gtranslator_messages_table_clear(void)
 {
-	if(root_node)
-	{
-		e_tree_memory_node_remove(tree_memory, root_node);
-		/* sadly we seem to need to create a root_node or else mayhem results */
-		root_node=e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
 
-	}
-	
-	if(hash_table)
-	{
-		g_hash_table_destroy(hash_table);
-		hash_table=NULL;
-	}
-
-	free_messages_table_colors();
 }		
 
 /*
@@ -800,74 +178,78 @@ void gtranslator_messages_table_clear(void)
  */
 void gtranslator_messages_table_create (void)
 {
-	GList *list;
-	gint i=0, j=0, k=0;
-	
-	if(!file_opened)
-		return;
-	
-	list=po->messages;
-	
-	/* messages-list already exists so clear it */
-	if (hash_table)
-		gtranslator_messages_table_clear();
-	
-	if (!root_node)
-		root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
-	e_tree_root_node_set_visible (E_TREE(tree), FALSE);
-	
-	read_messages_table_colors();
-	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
-		
-	unknown_node = e_tree_memory_node_insert (tree_memory, root_node, 0, NULL);
-	fuzzy_node = e_tree_memory_node_insert (tree_memory, root_node, 1, NULL);
-	translated_node = e_tree_memory_node_insert (tree_memory, root_node, 2, NULL);
+  GList *list;
+  gint i=0, j=0, k=0;
 
-	/*
-	 * Collapse all translated entries according to the user's preference.
-	 */
-	e_tree_node_set_expanded(E_TREE(tree), translated_node, 
-		!GtrPreferences.collapse_translated);
-	
-	while(list)
-	{
-		GtrMsg *message=list->data;
-		ETreePath *node;
-		
-		switch (message->status){
-		case GTR_MSG_STATUS_UNKNOWN:
-			node=e_tree_memory_node_insert(tree_memory, unknown_node,
-			i, message);
-			i++;
-			break;
-		case GTR_MSG_STATUS_TRANSLATED:
-			node=e_tree_memory_node_insert(tree_memory, translated_node,
-			j, message);
-			j++;
-			break;
-		case GTR_MSG_STATUS_STICK:
-			node=NULL;
-			break;
-		case GTR_MSG_STATUS_FUZZY:
-		default:
-			node=e_tree_memory_node_insert(tree_memory, fuzzy_node,
-			k, message);
-			k++;
-		}
-		/*node=e_tree_memory_node_insert(tree_memory, root_node,
-			i, message);*/
-		if (node)
-			g_hash_table_insert(hash_table, message, node); 
-		list = g_list_next(list);
-	}
+  GtkTreeStore *model; // where to get it from ????
+  GtkTreeIter root, unknown_node, fuzzy_node, translated_node;
 
+  if(!file_opened)
+    return;
+  list=po->messages;
 
-	/*
-	 * Notify the tree_model that we have been 
-	 * reconfiguring
-	 */
-	
-	e_tree_model_node_changed(tree_model, root_node);
+  model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree));
+
+  gtk_tree_store_append (model, &root, NULL);
+
+  gtk_tree_store_append (model, &unknown_node, &root);
+  gtk_tree_store_set (model, &unknown_node, 
+		      STATUS_COLUMN, _("unknown"), -1);
+		      
+  gtk_tree_store_append (model, &fuzzy_node, &root);
+  gtk_tree_store_set (model, &unknown_node, 
+		      STATUS_COLUMN, _("fuzzy"), -1);
+
+  gtk_tree_store_append (model, &translated_node, &root);
+  gtk_tree_store_set (model, &unknown_node, 
+		      STATUS_COLUMN, _("translated"), -1);
+
+  while (list) {
+    GtrMsg *message=list->data;
+    
+    switch (message->status){
+    case GTR_MSG_STATUS_UNKNOWN:
+      gtk_tree_store_append(model, &unknown_node, &unknown_node);
+      gtk_tree_store_set(model, &unknown_node,
+			 STATUS_COLUMN, "",
+			 NUMBER_COLUMN, i,
+			 LINE_COLUMN, 42,
+			 ORIGINAL_COLUMN, message->msgid,
+			 TRANSLATION_COLUMN, message->msgstr,
+			 COMMENT_COLUMN, message->comment->pure_comment,
+			 -1);
+      i++;
+      break;
+    case GTR_MSG_STATUS_TRANSLATED:
+      gtk_tree_store_append(model, &translated_node, &unknown_node);
+      gtk_tree_store_set(model, &translated_node,
+			 STATUS_COLUMN, "",
+			 NUMBER_COLUMN, j,
+			 LINE_COLUMN, 42,
+			 ORIGINAL_COLUMN, message->msgid,
+			 TRANSLATION_COLUMN, message->msgstr,
+			 COMMENT_COLUMN, message->comment->pure_comment,
+			 -1);
+      j++;
+      break;
+    case GTR_MSG_STATUS_STICK:
+      //      node=NULL;
+      break;
+    case GTR_MSG_STATUS_FUZZY:
+    default:
+      gtk_tree_store_append(model, &fuzzy_node, &unknown_node);
+      gtk_tree_store_set(model, &fuzzy_node,
+			 STATUS_COLUMN, "",
+			 NUMBER_COLUMN, k,
+			 LINE_COLUMN, 42,
+			 ORIGINAL_COLUMN, message->msgid,
+			 TRANSLATION_COLUMN, message->msgstr,
+			 COMMENT_COLUMN, message->comment->pure_comment,
+			 -1);
+      k++;
+    }
+      list = g_list_next(list);
+  }
 }
 
 /*
@@ -875,16 +257,7 @@ void gtranslator_messages_table_create (void)
  */
 void gtranslator_messages_table_update_row(GtrMsg *message)
 {
-	ETreePath node=NULL;
 
-	g_return_if_fail(message!=NULL);
-	node=g_hash_table_lookup(hash_table, message);
-
-	if(node)
-	{	
-		e_tree_model_pre_change (tree_model);
-		e_tree_model_node_data_changed (tree_model, node);
-	}
 }
 
 /*
@@ -892,27 +265,7 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
  */
 void gtranslator_messages_table_select_row(GtrMsg *message)
 {
-	ETreePath node=NULL;
-	
-	g_return_if_fail(message!=NULL);
-	
-	node=g_hash_table_lookup(hash_table, message);
 
-	if(node)
-	{
-		/*
-		 * Expand the node if we're calling a translated entry in a
-		 *  translated entry collapsing tree region.
-		 */
-		if((message->status & GTR_MSG_STATUS_TRANSLATED) &&
-			GtrPreferences.collapse_translated)
-		{
-			e_tree_node_set_expanded(E_TREE(tree), 
-				translated_node, TRUE);
-		}
-
-		e_tree_set_cursor(E_TREE(tree), node);
-	}
 }
 
 /*
@@ -920,34 +273,6 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
  */
 void gtranslator_messages_table_update_message_status(GtrMsg *message)
 {
-	ETreePath old_node=NULL, new_node=NULL;
-	
-	g_return_if_fail(message!=NULL);
-	
-	old_node=g_hash_table_lookup(hash_table, message);
-	g_return_if_fail (old_node!=NULL);
-	
-	g_hash_table_remove (hash_table, message);
-	e_tree_memory_node_remove(tree_memory, old_node);
-	
-	switch (message->status){
-		case GTR_MSG_STATUS_UNKNOWN:
-			new_node=e_tree_memory_node_insert(tree_memory, unknown_node,
-			0, message);
-			break;
-		case GTR_MSG_STATUS_STICK:
-		case GTR_MSG_STATUS_TRANSLATED:
-			new_node=e_tree_memory_node_insert(tree_memory, translated_node,
-			0, message);
-			break;
-		case GTR_MSG_STATUS_FUZZY:
-		default:
-			new_node=e_tree_memory_node_insert(tree_memory, fuzzy_node,
-			0, message);
-	}
-	
-	if (new_node)
-		g_hash_table_insert(hash_table, message, new_node);
 	
 }
 
@@ -956,6 +281,5 @@ void gtranslator_messages_table_update_message_status(GtrMsg *message)
  */
 void gtranslator_messages_table_save_state()
 {
-	e_tree_save_state (E_TREE (tree), 
-		gtranslator_runtime_config->table_state_filename);
+
 }

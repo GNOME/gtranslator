@@ -595,6 +595,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
  */
 void gtranslator_utils_free_list(GList *list, gboolean free_contents)
 {
+  g_message("list : %X", (int)list);
 	if(!list)
 	{
 		/*
@@ -1054,4 +1055,29 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang)
 			g_string_free(taillanguage, FALSE);
 		}
 	}
+}
+
+
+int
+e_mkdir_hier(const char *path, mode_t mode)
+{
+        char *copy, *p;
+
+        p = copy = g_strdup (path);
+        do {
+                p = strchr (p + 1, '/');
+                if (p)
+                        *p = '\0';
+                if (access (copy, F_OK) == -1) {
+                        if (mkdir (copy, mode) == -1) {
+                                g_free (copy);
+                                return -1;
+                        }
+                }
+                if (p)
+                        *p = '/';
+        } while (p);
+
+        g_free (copy);
+        return 0;
 }

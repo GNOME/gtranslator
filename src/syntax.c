@@ -36,7 +36,7 @@
 
 static gboolean back_match(const gchar *msg, gchar *str, gint pos);
 void gtranslator_update_highlighted(
-		GtkEditable *textwidget,
+		GtkTextBuffer *textbuffer,
 		gpointer userdata );
 
 /*
@@ -89,67 +89,74 @@ static void text_data_free(gpointer data)
  * This function initializes the syntax parser for text widget.
  * The highlighting info will be inside string, so ~250 colors possible
  */
-void gtranslator_syntax_init(GtkEditable *textwidget)
+void gtranslator_syntax_init(GtkTextBuffer *textbuffer)
 {
 	GString *n;
 	
-	g_return_if_fail(textwidget!=NULL);
+	g_return_if_fail(textbuffer != NULL);
 	
 	n = g_string_new("");
 	
 	gtk_object_set_data_full(
-		GTK_OBJECT(textwidget), 
+		GTK_OBJECT(textbuffer), 
 		"textdata", 
 		n,
 		text_data_free);
 	
-	gtk_signal_connect(GTK_OBJECT(textwidget), "insert_text",
+	gtk_signal_connect(GTK_OBJECT(textbuffer), "insert_text",
 			   GTK_SIGNAL_FUNC(gtranslator_insert_highlighted), NULL);
-	gtk_signal_connect(GTK_OBJECT(textwidget), "delete_text",
+	gtk_signal_connect(GTK_OBJECT(textbuffer), "delete_text",
 			   GTK_SIGNAL_FUNC(gtranslator_delete_highlighted), NULL);
-	gtk_signal_connect(GTK_OBJECT(textwidget), "changed",
+	gtk_signal_connect(GTK_OBJECT(textbuffer), "changed",
 			   GTK_SIGNAL_FUNC(gtranslator_update_highlighted), NULL);
 }
 
 void gtranslator_update_highlighted(
-		GtkEditable *textwidget,
+		GtkTextBuffer *textbuffer,
 		gpointer userdata )
 {
 	GString *newdata, *olddata;
 	gint i,j;
+	GtkTextIter I, J;
 	guint point;
 	gchar type;
 
-	gtk_text_freeze( GTK_TEXT( textwidget ) );
-
+	//	gtk_text_freeze( GTK_TEXT( textwidget ) );
+	
 	olddata = (GString *)gtk_object_get_data(
-		GTK_OBJECT(textwidget), 
+		GTK_OBJECT(textbuffer), 
 		"textdata");
 		
-	point = gtk_text_get_point(GTK_TEXT(textwidget));
+	//	point = gtk_text_get_point(GTK_TEXT(textwidget));
 	/* Parse highlighting */
-	newdata = gtranslator_parse_syntax(GTK_EDITABLE(textwidget));
+	newdata = gtranslator_parse_syntax(textbuffer);
+
+	gtk_text_buffer_get_start_iter(textbuffer, &I);
+	gtk_text_buffer_get_start_iter(textbuffer, &J);
 	/* Update highlighting */
 	for(i=0; i<newdata->len;)
 	{
+	  gtk_text_iter_forward_char(&I);
+	  
 		if((type = *(newdata->str + i)) != 
 			*(olddata->str + i))
 		{
-			static gchar
-				*c;
+		        static gchar   *c;
+
+			gtk_text_iter_set_offset(&J, i);
 			for( j=0; newdata->str[i] == newdata->str[i+j]; j++ )
 				if( newdata->len <= (i+j) )
-					break;	
-			c = gtk_editable_get_chars(
-				GTK_EDITABLE(textwidget), i, i+j);
-			gtk_text_set_point(GTK_TEXT(textwidget), i);
-			gtk_text_forward_delete(GTK_TEXT(textwidget), j);
-			gtk_text_insert(
-				GTK_TEXT(textwidget),
-				NULL,
-				gtranslator_get_color_from_type((gint)type),
-				gtranslator_get_color_from_type(COLOR_TEXT_BG),
-				c, j);
+					break;
+			gtk_text_iter_forward_char(&J);
+			c = gtk_text_iter_get_text(&I, &J);
+			//gtk_text_set_point(GTK_TEXT(textwidget), i);
+			//gtk_text_forward_delete(GTK_TEXT(textwidget), j);
+			//gtk_text_insert(
+			//	GTK_TEXT(textwidget),
+			//	NULL,
+			//	gtranslator_get_color_from_type((gint)type),
+			//	gtranslator_get_color_from_type(COLOR_TEXT_BG),
+			//	c, j);
 			g_free(c);
 			i += j;
 		}
@@ -158,22 +165,22 @@ void gtranslator_update_highlighted(
 	}
 	/* Free olddata and register newdata */
 	gtk_object_set_data_full(
-		GTK_OBJECT(textwidget), 
+		GTK_OBJECT(textbuffer), 
 		"textdata", 
 		newdata,
 		text_data_free);
 
 	/* gtk_text_set_point( GTK_TEXT( textwidget ), point ); */
 
-	gtk_text_thaw( GTK_TEXT( textwidget ) );
-	gtk_editable_set_position( GTK_EDITABLE( textwidget), point );
+	//	gtk_text_thaw( GTK_TEXT( textwidget ) );
+	//gtk_editable_set_position( GTK_EDITABLE( textwidget), point );
 }
 
 /*
  * This function will update highlightion information for text.
  */
 void gtranslator_insert_highlighted(
-		GtkEditable *textwidget,
+		GtkTextBuffer *textbuffer,
 		gchar	*text,
 		gint	addlen,
 		gint	*pos,
@@ -182,11 +189,11 @@ void gtranslator_insert_highlighted(
 	GString *olddata;
 	gint i;
 	
-	g_return_if_fail(textwidget != NULL);
+	g_return_if_fail(textbuffer != NULL);
 	g_return_if_fail(text!=NULL);
 
 	olddata = (GString *)gtk_object_get_data(
-		GTK_OBJECT(textwidget), 
+		GTK_OBJECT(textbuffer), 
 		"textdata");
 	for(i=0; i<addlen; i++)
 	{
@@ -198,7 +205,7 @@ void gtranslator_insert_highlighted(
  * This function will delete text and rehighlight.
  */
 void gtranslator_delete_highlighted(
-		GtkEditable *textwidget,
+		GtkTextBuffer *textbuffer,
 		gint	startpos,
 		gint	endpos,
 		gpointer	userdata)
@@ -206,27 +213,28 @@ void gtranslator_delete_highlighted(
 	GString *olddata;
 	gint len;
 	
-	g_return_if_fail(textwidget != NULL);
+	g_return_if_fail(textbuffer != NULL);
 	g_return_if_fail(startpos >= 0);
 
 	if(endpos < 0){
-		len = gtk_text_get_length(GTK_TEXT(textwidget))-startpos;
+	  len = gtk_text_buffer_get_char_count(textbuffer) - startpos;
 	}
-	else{
+	else {
 		len = endpos - startpos;
 	}
 	
 	olddata = (GString *)gtk_object_get_data(
-		GTK_OBJECT(textwidget), 
+		GTK_OBJECT(textbuffer), 
 		"textdata");
 	olddata = g_string_erase( olddata, startpos, len);
 }
 
-GString *gtranslator_parse_syntax(GtkEditable *textwidget)
+GString *gtranslator_parse_syntax(GtkTextBuffer *textbuffer)
 {
 	GString *string;
 	gboolean aInserted;
 	gchar specialchar, *msg;
+	GtkTextIter start, end;
 	gint cp;
 	gint z=0;
 
@@ -241,12 +249,11 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 
 	extern gboolean nosyntax;
 	
-	g_return_val_if_fail(textwidget!=NULL, NULL);
+	g_return_val_if_fail(textbuffer!=NULL, NULL);
 
-	msg = gtk_editable_get_chars(
-		GTK_EDITABLE(textwidget),
-		0, -1);
-
+	gtk_text_buffer_get_bounds(textbuffer, &start, &end);
+	msg = gtk_text_buffer_get_text(textbuffer, &start, &end, FALSE);
+	       
 	if(GtrPreferences.dot_char)
 	{
 		specialchar=gtranslator_runtime_config->special_char;
@@ -489,11 +496,15 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 	return string;
 }
 
-void gtranslator_insert_text(GtkText *editable, const gchar *text)
+// XXX fix it
+void gtranslator_insert_text(GtkTextBuffer *editable, const gchar *text)
 {
-	gint pos=0;
+  GtkTextIter start, end;
+  gint pos=0;
 
-	/* First, delete old contents */
+  gtk_text_buffer_get_bounds (editable, &start, &end);
+
+  /* First, delete old contents */
 	gtk_signal_emit_by_name(
 		GTK_OBJECT(editable),
 		"delete-text",
@@ -511,4 +522,6 @@ void gtranslator_insert_text(GtkText *editable, const gchar *text)
 	gtk_signal_emit_by_name(
 		GTK_OBJECT(editable),
 		"changed");
+
 }
+

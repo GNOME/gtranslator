@@ -7,9 +7,12 @@ SUBDIRS = backends pixmaps
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
-	$(GAL_CFLAGS) \
-	$(VFS_CFLAGS) \
-	$(GCONF_CFLAGS) \
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"                \
+        -DPREFIX=\""$(prefix)"\"                                \
+        -DSYSCONFDIR=\""$(sysconfdir)"\"                        \
+        -DDATADIR=\""$(datadir)"\"                              \
+        -DLIBDIR=\""$(libdir)"\"                                \
+	$(GTRANSLATOR_CFLAGS)                                   \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"
 
 bin_PROGRAMS = gtranslator
@@ -41,6 +44,7 @@ gtranslator_SOURCES = \
 	convert.c convert.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
+	e-xml-utils.c e-xml-utils.h \
 	find.c find.h \
 	formats.c formats.h \
 	gtkspell.c gtkspell.h \
@@ -78,8 +82,7 @@ gtranslator_SOURCES = \
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \
-	$(GCONF_LIBS) \
-	$(VFS_LIBS) \
+	$(GTRANSLATOR_LIBS) \
 	$(GAL_LIBS)
 
 CLEANFILES = defines.include

@@ -32,7 +32,7 @@
 
 #include <gtk/gtklabel.h>
 
-#include <gal/e-paned/e-paned.h>
+//#include <gal/e-paned/e-paned.h>
 
 /*
  * A small new structure table to make the comment type recognition
@@ -345,7 +345,7 @@ void gtranslator_comment_display(GtrComment *comment)
 
 	g_free(comment_display_str);
 
-	e_paned_set_position(E_PANED(content_pane), 0);
+	gtk_paned_set_position(GTK_PANED(content_pane), 0);
 }
 
 /*
@@ -355,5 +355,5 @@ void gtranslator_comment_hide()
 {
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");
 	gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
-	e_paned_set_position(E_PANED(content_pane), 0);
+	gtk_paned_set_position(GTK_PANED(content_pane), 0);
 }

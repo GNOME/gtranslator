@@ -52,7 +52,9 @@ GtkWidget * gtranslator_utils_error_dialog(gchar *format, ...)
  */
 void gtranslator_utils_show_home_page(GtkWidget *widget, gpointer useless)
 {
-	gnome_url_show("http://www.gtranslator.org");
+  GError **error = NULL;
+	gnome_url_show("http://www.gtranslator.org", error);
+	// XXX cache the error
 }
 
 /*
@@ -81,6 +83,8 @@ void gtranslator_utils_save_geometry(void)
 	if (GtrPreferences.save_geometry == TRUE) {
 		gchar *gstr;
 		gint x, y, w, h;
+		// XXX fix it
+		/*
 		gstr = gnome_geometry_string(gtranslator_application->window);
 		gnome_parse_geometry(gstr, &x, &y, &w, &h);
 		GTR_FREE(gstr);
@@ -88,7 +92,7 @@ void gtranslator_utils_save_geometry(void)
 		gtranslator_config_set_int("geometry/y", y);
 		gtranslator_config_set_int("geometry/width", w);
 		gtranslator_config_set_int("geometry/height", h);
-		
+		*/
 	}
 }
 
@@ -114,7 +118,8 @@ void gtranslator_utils_restore_geometry(gchar  * gstr)
 	 * If a geometry definition had been defined try to parse it.
 	 */
 	else {
-		if (!gnome_parse_geometry(gstr, &x, &y, &width, &height)) {
+	  // XXX fix it
+	  if (1 /* !gnome_parse_geometry(gstr, &x, &y, &width, &height)*/) {
 			g_warning(
 			    _("The geometry string \"%s\" couldn't be parsed!"),
 			    gstr);
@@ -204,10 +209,10 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	widget = gtk_text_new(NULL, NULL);
-	gtk_text_set_editable(GTK_TEXT(widget), TRUE);
+	widget = gtk_text_view_new();
+	//	gtk_text_set_editable(GTK_TEXT(widget), TRUE);
 	if (value)
-		gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL, value, -1);
+	  //		gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL, value, -1);
 	gtk_container_add(GTK_CONTAINER(scroll), widget);
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), scroll, 1, 2, row, row + 1);

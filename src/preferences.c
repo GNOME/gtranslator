@@ -29,7 +29,7 @@
 
 #include <gconf/gconf-client.h>
 
-#include <libgnome/gnome-defs.h>
+//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
 GConfClient	*client=NULL;

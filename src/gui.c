@@ -65,19 +65,19 @@
 
 #include <libgnomevfs/gnome-vfs-init.h>
 
-#include <gal/e-paned/e-hpaned.h>
-#include <gal/e-paned/e-vpaned.h>
+//#include <gal/e-paned/e-hpaned.h>
+//#include <gal/e-paned/e-vpaned.h>
 
-#include <gal/e-table/e-table.h>
-#include <gal/e-table/e-table-scrolled.h>
+//#include <gal/e-table/e-table.h>
+//#include <gal/e-table/e-table-scrolled.h>
 
 /*
  * Global external variables
  */
 GtkWidget *gtranslator_application;
 GtkWidget *gtranslator_messages_table;
-GtkWidget *trans_box;
-GtkWidget *text_box;
+GtkTextBuffer *trans_box;
+GtkTextBuffer *text_box;
 GtkWidget *gtranslator_application_bar;
 
 GtkWidget *content_pane;
@@ -175,6 +175,8 @@ void gtranslator_create_main_window(void)
 	GtkWidget *translation_text_scrolled_window;
 	GtkWidget *comments_scrolled_window;
 	GtkWidget *comments_viewport;
+	GtkWidget *text_box_view;
+	GtkWidget *trans_box_view;
 
 	/*
 	 * Create the app	
@@ -185,8 +187,8 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Create all the panes we're using later on.
 	 */
-	content_pane=e_vpaned_new();
-	table_pane=e_hpaned_new();
+	content_pane=gtk_vpaned_new();
+	table_pane=gtk_hpaned_new();
 	
 
 	if(GtrPreferences.show_messages_table)
@@ -206,11 +208,11 @@ void gtranslator_create_main_window(void)
 		table_pane_position=gtranslator_config_get_int(
 			"interface/table_pane_position");
 
-		e_paned_set_position(E_PANED(table_pane), table_pane_position);
+		gtk_paned_set_position(GTK_PANED(table_pane), table_pane_position);
 	}
 	else
 	{
-		e_paned_set_position(E_PANED(table_pane), -1);
+		gtk_paned_set_position(GTK_PANED(table_pane), -1);
 	}
 	
 	extra_content_view=g_new0(GtrExtraContentArea, 1);
@@ -235,36 +237,36 @@ void gtranslator_create_main_window(void)
 	gtk_box_pack_end(GTK_BOX(extra_content_view->box), extra_content_view->edit_button,
 		FALSE, FALSE, 0);
 	
-	e_paned_set_position(E_PANED(content_pane), 0);
+	gtk_paned_set_position(GTK_PANED(content_pane), 0);
 
 	/*
 	 * Create the tool- and search-bar
 	 */
-	tool_bar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	tool_bar = gtk_toolbar_new(); 
+// XXX // GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(tool_bar), the_toolbar, NULL);
 	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), GTK_TOOLBAR(tool_bar),
-			      "tool_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
-			      GNOME_DOCK_TOP, 1, 0, 0);
+			      "tool_bar", BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
+			      BONOBO_DOCK_TOP, 1, 0, 0);
 
-	search_bar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-				     GTK_TOOLBAR_BOTH);
+	search_bar = gtk_toolbar_new(); 
+// XXX GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_navibar, NULL);
 	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), 
 		GTK_TOOLBAR(search_bar),
-		"search_bar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
-		GNOME_DOCK_TOP, 2, 0, 0);
+		"search_bar", BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
+		BONOBO_DOCK_TOP, 2, 0, 0);
 
 	vertical_box=gtk_vbox_new(FALSE, 0);
 
 	/*
 	 * Perform all the packing action between the EPaneds.
 	 */
-	e_paned_pack1(E_PANED(content_pane), extra_content_view->box, TRUE, FALSE);
-	e_paned_pack2(E_PANED(content_pane), vertical_box, TRUE, FALSE);
+	gtk_paned_pack1(GTK_PANED(content_pane), extra_content_view->box, TRUE, FALSE);
+	gtk_paned_pack2(GTK_PANED(content_pane), vertical_box, TRUE, FALSE);
 
-	e_paned_pack1(E_PANED(table_pane), gtranslator_messages_table, TRUE, FALSE);
-	e_paned_pack2(E_PANED(table_pane), content_pane, TRUE, FALSE);
+	gtk_paned_pack1(GTK_PANED(table_pane), gtranslator_messages_table, TRUE, FALSE);
+	gtk_paned_pack2(GTK_PANED(table_pane), content_pane, TRUE, FALSE);
 	
 	gnome_app_set_contents(GNOME_APP(gtranslator_application), table_pane);
 
@@ -274,11 +276,13 @@ void gtranslator_create_main_window(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	text_box=gtk_text_new(NULL,NULL);
+	// XXX
+	text_box_view = gtk_text_view_new ();
+	text_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_box_view));
+
+	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), text_box_view);
 	
-	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), text_box);
-	
-	gtk_text_set_editable(GTK_TEXT(text_box), FALSE);
+	//gtk_text_set_editable(GTK_TEXT(text_box), FALSE);
 
 	translation_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vertical_box), translation_text_scrolled_window, TRUE, TRUE, 0);
@@ -286,8 +290,10 @@ void gtranslator_create_main_window(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	trans_box = gtk_text_new(NULL, NULL);
-	gtk_container_add(GTK_CONTAINER(translation_text_scrolled_window), trans_box);
+	trans_box_view = gtk_text_view_new();
+	trans_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (trans_box_view));
+
+	gtk_container_add(GTK_CONTAINER(translation_text_scrolled_window), trans_box_view);
 
 	gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);
@@ -305,13 +311,13 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Set up our special styles for the text boxes.
 	 */
-	gtranslator_set_style(text_box, 0);
-	gtranslator_set_style(trans_box, 1);
+	//	gtranslator_set_style(GTK_WIDGET(text_box), 0);
+	//gtranslator_set_style(GTK_WIDGET(trans_box), 1);
 	/*
 	 *  Initialize highlighting
 	 */
-	 gtranslator_syntax_init(GTK_EDITABLE(trans_box));
-	 gtranslator_syntax_init(GTK_EDITABLE(text_box));
+	 gtranslator_syntax_init(trans_box);
+	 gtranslator_syntax_init(text_box);
 	/*
 	 * The callbacks list
 	 */
@@ -405,7 +411,7 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Get the EPaned's position offset.
 	 */
-	table_pane_position=e_paned_get_position(E_PANED(table_pane));
+	table_pane_position=gtk_paned_get_position(GTK_PANED(table_pane));
 	
 	/*
 	 * Store the pane position in the preferences.

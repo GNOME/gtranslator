@@ -17,14 +17,16 @@
  *
  */
 
+#include "config.h"
 #include "dnd.h"
 #include "gui.h"
 #include "parse.h"
 #include "syntax.h"
 
 #include <gtk/gtkdnd.h>
-#include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-mime.h>
+#include <gtk/gtktext.h>
+//#include <libgnome/gnome-defs.h>
+//#include <libgnome/gnome-mime.h>
 
 /*
  * The general D'n'D function.
@@ -38,7 +40,8 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	GList *fnames, *fnp;
 
 	dnd_type = GPOINTER_TO_UINT(data);
-	fnames = gnome_uri_list_extract_filenames((char *) seldata->data);
+	// XXX fix it
+	//	fnames = gnome_uri_list_extract_filenames((char *) seldata->data);
 	/*
          * First we do obtain, that we even did get any filenames list.
          */
@@ -60,14 +63,15 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 				if (dnd_type == TARGET_TEXT_PLAIN) {
 					file = (char *) (fnp->data);
 
-					gtranslator_insert_text(GTK_TEXT(trans_box), file);
+					gtranslator_insert_text(trans_box, file);
 					
 					return_value = 1;
 				}
 			}
 		}
 	}
-	gnome_uri_list_free_strings(fnames);
+	// XXX fix it
+	//	gnome_uri_list_free_strings(fnames);
 	
 	/*
          * Displays if the Drop was successfull.

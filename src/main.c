@@ -22,6 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#include <gnome.h>
 
 #include "actions.h"
 #include "backend.h"
@@ -50,8 +51,9 @@
 
 #include <gtk/gtkmain.h>
 
+#include <libgnome/gnome-program.h>
 #include <libgnome/gnome-util.h>
-#include <libgnomeui/gnome-init.h>
+//#include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-window-icon.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
@@ -119,7 +121,7 @@ int main(int argc, char *argv[])
 	
 	poptContext 	context;
 	
-	const char 	**args;
+	const char 	**args = NULL;
 	
 	GError		*error=NULL;
 
@@ -158,8 +160,13 @@ int main(int argc, char *argv[])
 	/*
 	 * Initialize gtranslator within libgnomeui.
 	 */
-	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv,
-		gtranslator_options, 0, &context);
+	gnome_program_init("gtranslator", VERSION, LIBGNOMEUI_MODULE, 
+			   argc, argv,
+			   GNOME_PARAM_POPT_TABLE, gtranslator_options, 
+			   GNOME_PROGRAM_STANDARD_PROPERTIES,
+			   NULL);
+	/* XXX fix it! */
+	// 0, &context);
 
 	/*
 	 * Show up build information if desired.
@@ -227,7 +234,7 @@ int main(int argc, char *argv[])
 			 * Load all backends from the default backends 
 			 *  directory.
 			 */
-			 gtranslator_backend_open_all_backends(BACKENDS_DIR);
+		  //			 gtranslator_backend_open_all_backends(BACKENDS_DIR);
 		}
 	}
 
@@ -325,7 +332,7 @@ int main(int argc, char *argv[])
 	 * If there are any files given on command line, open them
 	 */
 	file_opened = FALSE;
-	args = poptGetArgs(context);
+	//	args = poptGetArgs(context);
 
 	/*
 	 * Auto translate the given file argument and exit without starting the
@@ -397,7 +404,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	
-	poptFreeContext(context);
+	//	poptFreeContext(context);
 
 	/*
 	 * Disable the buttons if no file is opened.

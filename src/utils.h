@@ -22,6 +22,7 @@
 #define GTR_UTILS_H 1
 
 #include <glib.h>
+#include <sys/types.h>
 
 #include "parse.h"
 
@@ -170,5 +171,7 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang);
  * Own getline implementation to handle very long comments.
  */
 gchar *gtranslator_utils_getline (FILE* stream);
+
+int  e_mkdir_hier (const char *path, mode_t mode);
 	
 #endif

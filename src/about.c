@@ -33,7 +33,8 @@
 #include <gtk/gtklabel.h>
 #include <gtk/gtktable.h>
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomeui/libgnomeui.h>
+//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
 #include <libgnomeui/gnome-about.h>
@@ -54,16 +55,16 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	gchar 	*bottom_line;
 	
 	const gchar *authors[] = {
-		"Fatih Demir		<kabalak@gtranslator.org>",
-		"Gediminas Paulauskas	<menesis@gtranslator.org>",
-		"Thomas Ziehmer		<thomas@gtranslator.org>",
-		"Peeter Vois		<peeter@gtranslator.org>",
+		"Fatih Demir            <kabalak@gtranslator.org>",
+		"Gediminas Paulauskas   <menesis@gtranslator.org>",
+		"Thomas Ziehmer         <thomas@gtranslator.org>",
+		"Peeter Vois            <peeter@gtranslator.org>",
 		"",
 		_("Messages table:"),
-		"Kevin Vandersloot	<kfv101@psu.edu>",
+		"Kevin Vandersloot      <kfv101@psu.edu>",
 		"",
 		_("Documentation:"),
-		"Emese Kovacs		<emese@gnome.hu>",
+		"Emese Kovacs           <emese@gnome.hu>",
 		NULL
 	};
 	
@@ -97,8 +98,11 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	 */ 
 	about =
 	    gnome_about_new("gtranslator", VERSION,
-		_("(C) 1999-2002 The Free Software Foundation"), authors,
+		_("(C) 1999-2002 The Free Software Foundation"),
 		bottom_line,
+		authors,
+		NULL,
+		"",
 		NULL);
 
 	g_free(bottom_line);

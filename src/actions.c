@@ -136,7 +136,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 			ACT_FUZZY, ACT_TRANSLATED, ACT_COMMENT, ACT_EXPORT_UTF8,
 			ACT_REMOVE_ALL_TRANSLATIONS, ACT_COPY_MSGID2MSGSTR);
 
-	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
+	//	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
 void gtranslator_actions_set_up_file_opened(void)
@@ -174,12 +174,12 @@ void gtranslator_actions_set_up_file_opened(void)
 	/*
 	 * Enable the editing of the msgstrs :-)
 	 */
-	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
+	//	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 
 	/*
 	 * Make it focused initially
 	 */
-	gtk_window_set_focus(GTK_WINDOW(gtranslator_application), trans_box);
+	gtk_window_set_focus(GTK_WINDOW(gtranslator_application), GTK_WIDGET(trans_box));
 }
 
 /*
