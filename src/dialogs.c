@@ -473,9 +473,13 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 						GNOME_STOCK_PIXMAP_SEARCH);
 	gnome_dialog_append_button (GNOME_DIALOG (dialog),
 				    GNOME_STOCK_BUTTON_CLOSE);
+	/* Make Find button the default */
+	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	
 	label = gtk_label_new(_("Enter your desired search string:"));
 	findy = gnome_entry_new("FINDY");
+	gnome_dialog_editable_enters(GNOME_DIALOG(dialog),
+		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(findy))));
 	
 	match_case = gtk_check_button_new_with_label(_("Case sensitive"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case),
