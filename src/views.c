@@ -30,12 +30,14 @@
  * Stored the value of the previous view -- per default at GTR_MESSAGE_VIEW.
  */
 static GtrView previous_view=GTR_MESSAGE_VIEW;
+static GtrView current_view=GTR_MESSAGE_VIEW;
 
 /*
  * The views functions are declared here.
  */
 void show_comment(void);
 void show_c_format(void);
+void show_number(void);
 
 /*
  * Set up the given view for the current message.
@@ -51,15 +53,16 @@ gboolean gtranslator_views_set(GtrView view)
 
 	index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
 
-	if(previous_view==GTR_C_FORMAT_VIEW && view!=GTR_C_FORMAT_VIEW)
+	if(view!=current_view)
 	{
-		display_msg(po->current);
+		previous_view=current_view;
 	}
+
 	
 	/*
 	 * First sync the text boxes with the po file data:
 	 */
-	gtranslator_update_msg();
+	gtranslator_views_prepare_for_navigation();
 
 	switch(view)
 	{
@@ -70,10 +73,13 @@ gboolean gtranslator_views_set(GtrView view)
 		case GTR_COMMENT_VIEW:
 			show_comment();
 				break;
+
+		case GTR_NUMBER_VIEW:
+			show_number();
+				break;
 			
 		case GTR_MESSAGE_VIEW:
 		default:
-
 			gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 			display_msg(po->current);
 				break;
@@ -91,7 +97,7 @@ void show_comment()
 {
 	gchar *comment=GTR_MSG(po->current->data)->comment;
 
-	previous_view=GTR_COMMENT_VIEW;
+	current_view=GTR_COMMENT_VIEW;
 	
 	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
 	
@@ -107,6 +113,83 @@ void show_comment()
 }
 
 /*
+ * Show any numbers found in the message.
+ */
+void show_number()
+{
+	#define delta(x) (pos[x].rm_eo-pos[x].rm_so)
+	
+	regex_t *rX;
+	regmatch_t pos[5];
+	
+	gint z=1;
+	
+	GtrMsg  *msg=GTR_MSG(po->current->data);
+	GString *number=g_string_new("");
+
+	g_return_if_fail(msg!=NULL);
+
+	current_view=GTR_NUMBER_VIEW;
+
+	rX=gnome_regex_cache_compile(rxc, "[:digit:]", REG_EXTENDED);
+
+	clean_text_boxes();
+
+	if(!regexec(rX, msg->msgid, 5, pos, 0))
+	{
+		while(pos[z].rm_so!=-1)
+		{
+			if(number->len > 0)
+			{
+				number=g_string_append(number, " ");
+			}
+
+			number=g_string_append(number,
+				g_strndup(msg->msgid+pos[z].rm_so, delta(z)));
+		}
+	}
+	
+	if(number->len > 0)
+	{
+		gtranslator_syntax_insert_text(text1, number->str);
+	}
+	else
+	{
+		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
+			_("Couldn't extract figures from message!"), -1);
+	}
+	
+	number=g_string_truncate(number, 0);
+	z=1;
+
+	if(!regexec(rX, msg->msgstr, 5, pos, 0))
+	{
+		while(pos[z].rm_so!=-1)
+		{
+			if(number->len > 0)
+			{
+				number=g_string_append(number, " ");
+			}
+
+			number=g_string_append(number,
+				g_strndup(msg->msgstr+pos[z].rm_so, delta(z)));
+		}
+	}
+	
+	if(number->len > 0)
+	{
+		gtranslator_syntax_insert_text(trans_box, number->str);
+	}
+	else
+	{
+		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
+			_("Couldn't extract figures from message!"), -1);
+	}
+
+	g_string_free(number, FALSE);
+}
+
+/*
  * Show c format elements in both parts of a message in the text boxes.
  */
 void show_c_format()
@@ -116,9 +199,9 @@ void show_c_format()
 
 	g_return_if_fail(msg!=NULL);
 	
-	previous_view=GTR_C_FORMAT_VIEW;
+	current_view=GTR_C_FORMAT_VIEW;
 
-	if(msg->msgid && !strstr(msg->msgid, "%"))
+	if(!strstr(msg->msgid, "%"))
 	{
 		activate=FALSE;
 		
@@ -140,125 +223,73 @@ void show_c_format()
 
 	if(activate)
 	{
-		#define append_char1(x) \
-			msgidformat=g_string_append_c(msgidformat, x)
-		#define append_char2(x) \
-			msgstrformat=g_string_append_c(msgstrformat,x)
-			
-		GString *msgidformat=g_string_new("");
-		GString *msgstrformat=g_string_new("");
-		gint z=0;
+		#define delta(x) (pos[x].rm_eo-pos[x].rm_so)
+		GString *format=g_string_new("");
+		gint z=1;
+		regex_t *rX;
+		regmatch_t pos[5];
 	
+		rX=gnome_regex_cache_compile(rxc, "%%[a-zA-Z0-9.-+]", REG_EXTENDED);
+		
 		/*
 		 * Disable editing of the format view data.
 		 */
 		gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 
 		clean_text_boxes();
-		
-		while(msg->msgid[z])
+
+		if(msg->msgid && !regexec(rX, msg->msgid, 5, pos, 0))
 		{
-			if(msg->msgid[z]=='%' && msg->msgid[z++])
+			while(pos[z].rm_so!=-1)
 			{
-				/*
-				 * The special char or a white space.
-				 */
-				if(wants.dot_char)
+				if(format->len > 0)
 				{
-					append_char1(_("·")[0]);
+					format=g_string_append(format, " ");
 				}
-				else
-				{
-					append_char1(' ');
-				}
-
-				if(msg->msgid[z++]=='l' && msg->msgid[z+2])
-				{
-					append_char1(msg->msgid[z]);
-					append_char1(msg->msgid[z++]);
-					append_char1(msg->msgid[z+2]);
-
-					z=z+2;
-				}
-				else
-				{
-					append_char1(msg->msgid[z]);
-					append_char1(msg->msgid[z++]);
-					
-					z++;
-				}
-			}
-			else
-			{
-				z++;
+				
+				format=g_string_append(format,
+					g_strndup(msg->msgid+pos[z].rm_so, delta(z)));
 			}
 		}
 
-		if(msgidformat->len > 0)
+		if(format->len > 0)
 		{
-			gtranslator_syntax_insert_text(text1, 
-				msgidformat->str);
+			gtranslator_syntax_insert_text(text1, format->str);
 		}
 		else
 		{
 			gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-				_("Couldn't extract C formats!"), -1);
+				_("Couldn't extract C format symbols!"), -1);
 		}
-	
-		z=0;
-		
-		while(msg->msgstr[z])
+
+		format=g_string_truncate(format, 0);
+		z=1;
+
+		if(msg->msgstr && !regexec(rX, msg->msgstr, 5, pos, 0))
 		{
-			if(msg->msgstr[z]=='%' && msg->msgstr[z++])
+			while(pos[z].rm_so!=-1)
 			{
+				if(format->len > 0)
+				{
+					format=g_string_append(format, " ");
+				}
 
-				/*
-				 * The special char or a white space.
-				 */
-				if(wants.dot_char)
-				{
-					append_char2(_("·")[0]);
-				}
-				else
-				{
-					append_char2(' ');
-				}
-				
-				if(msg->msgid[z++]=='l' && msg->msgid[z+2])
-				{
-					append_char2(msg->msgstr[z]);
-					append_char2(msg->msgstr[z++]);
-					append_char2(msg->msgstr[z+2]);
-
-					z=z+2;
-				}
-				else
-				{
-					append_char2(msg->msgstr[z]);
-					append_char2(msg->msgstr[z++]);
-					
-					z++;
-				}
-			}
-			else
-			{
-				z++;
+				format=g_string_append(format,
+					g_strndup(msg->msgstr+pos[z].rm_so, delta(z)));
 			}
 		}
 
-		if(msgstrformat->len > 0)
+		if(format->len > 0)
 		{
-			gtranslator_syntax_insert_text(trans_box, 
-				msgstrformat->str);
+			gtranslator_syntax_insert_text(trans_box, format->str);
 		}
 		else
 		{
 			gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-				_("Couldn't extract C formats!"), -1);
+				_("Couldn't extract C format symbols!"), -1);
 		}
 
-		g_string_free(msgidformat, FALSE);
-		g_string_free(msgstrformat, FALSE);
+		g_string_free(format, FALSE);
 	}
 	
 	/*
@@ -266,4 +297,30 @@ void show_c_format()
 	 *  chanegs which shouldn't be saved.
 	 */
 	disable_actions(ACT_SAVE);
+}
+
+/*
+ * Return the name of the current/previously used view.
+ */
+GtrView gtranslator_views_get_current()
+{
+	return current_view;
+}
+
+GtrView gtranslator_views_get_previous()
+{
+	return previous_view;
+}
+
+/*
+ * Prepare the message for navigation.
+ */
+void gtranslator_views_prepare_for_navigation()
+{
+	if(current_view!=GTR_MESSAGE_VIEW)
+	{
+		display_msg(po->current);
+	}
+	
+	gtranslator_update_msg();
 }

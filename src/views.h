@@ -37,4 +37,16 @@ typedef enum {
  */
 gboolean gtranslator_views_set(GtrView view);
 
+/*
+ * Return the name of the current/previously used view.
+ */
+GtrView gtranslator_views_get_current(void);
+GtrView gtranslator_views_get_previous(void);
+
+/*
+ * Prepare the message for navigation -- save the contents or
+ *  change the view.
+ */
+void gtranslator_views_prepare_for_navigation(void);
+
 #endif

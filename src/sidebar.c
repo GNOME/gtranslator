@@ -91,6 +91,10 @@ void gtranslator_sidebar_activate_views()
 	e_shortcut_model_add_item(model, 0, -1,
 		"comment:",
 		"Comment");
+	
+	e_shortcut_model_add_item(model, 0, -1,
+		"number:",
+		"Number");
 
 	e_shortcut_model_add_item(model, 0, -1,
 		"format:",
@@ -105,6 +109,7 @@ void gtranslator_sidebar_clear_views()
 	/*
 	 * Remove the view icons/items from the sidebar model.
 	 */
+	e_shortcut_model_remove_item(model, 0, 3);
 	e_shortcut_model_remove_item(model, 0, 2);
 	e_shortcut_model_remove_item(model, 0, 1);
 	e_shortcut_model_remove_item(model, 0, 0);
@@ -141,6 +146,10 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 					break;
 
 			case 3:
+				gtranslator_views_set(GTR_NUMBER_VIEW);
+					break;
+					
+			case 4:
 				/*
 				 * Display eventually existing C formats.
 				 */
@@ -185,7 +194,15 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 			pixmap_filename=gnome_pixmap_file(
 				"mc/application-x-gmo.png");
 				break;
-			
+		
+		/*
+		 * Numer URI:
+		 */
+		case 'n':
+			pixmap_filename=gnome_pixmap_file(
+				"mc/application-x-gmo.png");
+				break;
+				
 		/*
 		 * The comment: URI case:
 		 */

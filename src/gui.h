@@ -60,6 +60,7 @@ enum {
 	/**********/
 	ACT_VIEW_MESSAGE,
 	ACT_VIEW_COMMENTS,
+	ACT_VIEW_NUMBER,
 	ACT_VIEW_C_FORMAT,
 	/**********/
 	ACT_UNDO,

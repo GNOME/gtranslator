@@ -166,9 +166,12 @@ static GnomeUIInfo the_views_menu[] = {
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Comments"), 
 		N_("View comments for message"),
 		switch_view, (gpointer) 2, NULL),
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Numbers"),
+		N_("View numbers in the message"),
+		switch_view, (gpointer) 3, NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Format"), 
 		N_("View C formats of the message"),
-		switch_view, (gpointer) 3, NULL),
+		switch_view, (gpointer) 4, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -489,11 +492,12 @@ static void create_actions(void)
 	insert_action(ACT_SAVE_AS, the_file_menu[8], the_toolbar[2]);
 	insert_action(ACT_REVERT, the_file_menu[9], NONE);
 	insert_action(ACT_CLOSE, the_file_menu[10], NONE);
-	/*------------------------------------------------*/
+	/*----------------------------------------------------------*/
 	insert_action(ACT_VIEW_MESSAGE, the_views_menu[0], NONE);
 	insert_action(ACT_VIEW_COMMENTS, the_views_menu[1], NONE);
-	insert_action(ACT_VIEW_C_FORMAT, the_views_menu[2], NONE);
-	/**************************************************/
+	insert_action(ACT_VIEW_NUMBER, the_views_menu[2], NONE);
+	insert_action(ACT_VIEW_C_FORMAT, the_views_menu[3], NONE);
+	/*----------------------------------------------------------*/
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);
@@ -504,7 +508,7 @@ static void create_actions(void)
 	insert_action(ACT_REPLACE, the_edit_menu[9], the_navibar[9]);
 	insert_action(ACT_QUERY, the_edit_menu[10], the_navibar[10]);
 	insert_action(ACT_HEADER, the_edit_menu[12], the_toolbar[6]);
-	/*------------------------------------------------*/
+	/*-----------------------------------------------------------*/
 	insert_action(ACT_FIRST, the_messages_menu[0], the_navibar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_navibar[1]);
 	insert_action(ACT_NEXT, the_messages_menu[3], the_navibar[3]);
@@ -512,11 +516,11 @@ static void create_actions(void)
 	insert_action(ACT_GOTO, the_messages_menu[6], the_navibar[7]);
 	insert_action(ACT_NEXT_FUZZY, the_messages_menu[7], the_navibar[6]);
 	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[8], the_navibar[5]);
-	/*------------------------------------------------*/
+	/*-----------------------------------------------------------*/
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
 	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
 	insert_action(ACT_STICK, the_msg_status_menu[2], NONE);
-	/*------------------------------------------------*/
+	/*-----------------------------------------------------------*/
 	insert_action(ACT_END, NONE, NONE);
 }
 
@@ -528,8 +532,8 @@ void disable_actions_no_file(void)
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
-			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
-			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_C_FORMAT);
+			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK, ACT_VIEW_MESSAGE, 
+			ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
@@ -539,7 +543,8 @@ void enable_actions_just_opened(void)
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR, ACT_REPLACE,
 			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_QUERY,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
-			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_C_FORMAT);
+			ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, 
+			ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT);
 
 	disable_actions(ACT_SAVE, ACT_UNDO);
 	/*
@@ -985,7 +990,9 @@ static void update_appbar(gint pos)
 void goto_given_msg(GList  * to_go)
 {
 	static gint pos = 0;
-	gtranslator_update_msg();
+
+	gtranslator_views_prepare_for_navigation();
+
 	if (pos == 0)
 	{
 		enable_actions(ACT_FIRST, ACT_BACK);
@@ -1004,7 +1011,7 @@ void goto_given_msg(GList  * to_go)
 	else if (pos == po->length - 1)
 	{
 		disable_actions(ACT_NEXT, ACT_LAST);
-	}	
+	}
 	update_appbar(pos);
 }
 
@@ -1243,8 +1250,12 @@ static void switch_view(GtkWidget *widget, gpointer view)
 {
 	switch(GPOINTER_TO_INT(view))
 	{
-		case 3:
+		case 4:
 			gtranslator_views_set(GTR_C_FORMAT_VIEW);
+				break;
+		
+		case 3:
+			gtranslator_views_set(GTR_NUMBER_VIEW);
 				break;
 				
 		case 2:
