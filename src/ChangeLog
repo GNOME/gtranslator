@@ -1,3 +1,24 @@
+2001-09-05  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c: Eh, be a bit more clever in the save file as dialog:
+		use project name + language if possible, if not use the
+		 "project_name.po" as the prefilled filename for the save file
+		   as dialog.
+
+	* parse.c: Be also careful about the language name being non-existent
+		in the save-temporarily-used file save case.
+
+	* history.c: Escape the project name, version and the filename before
+		showing the menu entries due to the "_" case -- the underscore
+		 needs to be escaped as the they do else occur as hotkeys; also
+		  be more careful about the project version when showing the
+		   "Recent files" menu -- if no version is present or the 
+		     default version "VERSION" is given, don't show any version
+		      information in the "Recent files" menu.
+
+	* about.c: Made the "Documentation:" and "Messages table:" author
+		group labels translatable.
+
 2001-09-04  Fatih Demir <kabalak@gtranslator.org>
 
 	* parse.c: If a message was fuzzy during translation removal set

@@ -25,6 +25,7 @@
 #include "dialogs.h"
 #include "gui.h"
 #include "history.h"
+#include "nautilus-string.h"
 #include "open-differently.h"
 #include "parse.h"
 #include "prefs.h"
@@ -43,8 +44,15 @@ void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry);
 
 void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filename);
 
-/* Utility callback to free userdata */
+/*
+ * Utility callback to free userdata 
+ */
 void free_userdata(GtkWidget *widget, gpointer userdata);
+
+/*
+ * Happens to escape our '_'s in the menu entries.
+ */
+gchar *gtranslator_history_escape(gchar *str);
 
 /*
  * Save the given GList of GtrHistoryEntry's.
@@ -55,6 +63,19 @@ void gtranslator_history_save(GList *list);
  * Frees the GtrHistoryEntry.
  */
 void gtranslator_history_entry_free(GtrHistoryEntry *e);
+
+/*
+ * Escape the menu display items rightly.
+ */
+gchar *gtranslator_history_escape(gchar *str)
+{
+	gchar	*display_str=NULL;
+	
+	g_return_val_if_fail(str!=NULL, NULL);
+
+	display_str=nautilus_str_replace_substring(str, "_", "__");
+	return display_str;
+}
 
 /*
  * Adds a history entry.
@@ -200,15 +221,25 @@ void gtranslator_history_show(void)
 		 */
 		entry=GTR_HISTORY_ENTRY(onelist->data);
 
-		menu=g_new0(GnomeUIInfo,2);
+		menu=g_new0(GnomeUIInfo, 2);
 
 		/*
 		 * Set the label name.
 		 */
-		menu->label=g_strdup_printf("_%i: %s %s -- %s", i--,
-		                            entry->project_name,
-					    entry->project_version,
-					    g_basename(entry->filename));
+		if(!entry->project_version || 
+			!nautilus_strcasecmp(entry->project_version, "VERSION"))
+		{
+			menu->label=g_strdup_printf("_%i: %s -- %s", i--,
+				gtranslator_history_escape(entry->project_name),
+				gtranslator_history_escape(g_basename(entry->filename)));
+		}
+		else
+		{
+			menu->label=g_strdup_printf("_%i: %s %s -- %s", i--,
+				gtranslator_history_escape(entry->project_name),
+				gtranslator_history_escape(entry->project_version),
+				gtranslator_history_escape(g_basename(entry->filename)));
+		}
 		
 		/*
 		 * Set the GnomeUIInfo settings and labels.

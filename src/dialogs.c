@@ -136,8 +136,21 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	}
 	else
 	{
-		gchar *filename=g_strdup_printf("%s/%s-%s", g_get_home_dir(),
-			po->header->prj_name, g_basename(po->filename));
+		gchar *filename=NULL;
+		
+		if(po->header->language)
+		{
+			filename=g_strdup_printf("%s/%s.%s.po", 
+				g_get_home_dir(),
+				po->header->prj_name,
+				po->header->language);
+		}
+		else
+		{
+			filename=g_strdup_printf("%s/%s.po",
+				g_get_home_dir(),
+				po->header->prj_name); 
+		}
 		
 		dialog = gtk_file_selection_new(_("gtranslator -- save local copy of file as.."));
 

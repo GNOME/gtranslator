@@ -763,9 +763,6 @@ gboolean gtranslator_save_file(const gchar *name)
 		return TRUE;
 	}
 	
-	/*
-	 * FIXME: pop up save as... dialog here 
-	 */
 	if(!nautilus_strcmp(name, gtranslator_runtime_config->temp_filename))
 	{
 		/*
@@ -781,9 +778,17 @@ gboolean gtranslator_save_file(const gchar *name)
 		}
 		else
 		{
-			name=g_strdup_printf("%s.%s.po",
-				po->header->prj_name, 
-				po->header->language);
+			if(po->header->language)
+			{
+				name=g_strdup_printf("%s.%s.po",
+					po->header->prj_name, 
+					po->header->language);
+			}
+			else
+			{
+				name=g_strdup_printf("%s.po",
+					po->header->prj_name);
+			}
 		}
 
 		/*
@@ -805,7 +810,8 @@ gboolean gtranslator_save_file(const gchar *name)
 	fs = fopen(name, "w");
 	if(!fs)
 	{
-		gtranslator_utils_error_dialog(_("Could not open file `%s' for writing!"),
+		gtranslator_utils_error_dialog(
+			_("Could not open file `%s' for writing!"),
 				  name);
 		
 		return FALSE;
@@ -854,7 +860,8 @@ gboolean gtranslator_save_file(const gchar *name)
 		warn = g_strdup_printf(_("File %s\n"
 				       "contains %d fuzzy messages"),
 				       po->filename, po->fuzzy);
-		gnome_warning_dialog_parented(warn, GTK_WINDOW(gtranslator_application));
+		gnome_warning_dialog_parented(warn, 
+			GTK_WINDOW(gtranslator_application));
 		GTR_FREE(warn);
 	}
 

@@ -48,10 +48,10 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 		"Gediminas Paulauskas <menesis@gtranslator.org>",
 		"Thomas Ziehmer <thomas@gtranslator.org>",
 		"",
-		"Messages table:",
+		_("Messages table:"),
 		"Kevin Vandersloot <kfv101@psu.edu>",
 		"",
-		"Documentation:",
+		_("Documentation:"),
 		"Emese Kovacs <emese@gnome.hu>",
 		NULL
 	};
