@@ -17,7 +17,8 @@
 
 #include "parse.h"
 #include "interface.h"
+#include <time.h>
 
-/* XXX header routines have to go here XXX */
+void apply_header();
 
 #endif // GTR_HEADER_STUFF_H

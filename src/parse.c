@@ -12,8 +12,6 @@
 #include "parse.h"
 #include <errno.h>
 #include <unistd.h>
-#include "gtr_dialogs.h"
-#include "header_stuff.h"
 
 /**
 * The file-stream for the file-check & the message parsing
@@ -45,13 +43,14 @@ void parse(gchar *po)
 	* Some variables
 	**/
 	gchar temp_char[126];
+	gchar *zamane;
         guint lines=1;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
         if((!po)||(strlen(po)<=0))
         {
-                g_error(_("There's no file to open or I couldn't understand `%s'!"),po_file);
+                g_error(_("There's no file to open or I couldn't understand `%s'!"),po);
         }
         /**
         * Set up a status message
@@ -59,7 +58,7 @@ void parse(gchar *po)
         sprintf(status,_("Current file : \"%s\"."),po);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);	
 	/**
-	* If any previou lists are lying around, delete them.
+	* If any previous list is lying around, delete it/them.
 	**/
 	if(temp||head)
 	{
@@ -94,10 +93,63 @@ void parse(gchar *po)
         sprintf(status,_("Finished reading \"%s\", %i lines."),po,lines);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	file_opened=TRUE;
-        for(count=1;count<lines;count++)
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1),0.2);
+        for(count=1;count<(lines-1);count++)
         {
-                /** TODO **/
+		/**
+		* Create a gtr_msg structure(*)
+		**/	
+		gtr_msg *message[count];
+		/**
+		* Get the current data into temp_char
+		**/
+        	(gpointer)zamane=g_list_nth_data(temp,count);
+		if(!g_strncasecmp(zamane,"msgid \"",7))
+		{
+			message[count]->msgid=zamane;
+		}
+		else
+		{
+			/**
+			* If we do get a "^msgstr" :
+			**/
+			if(!g_strncasecmp(zamane,"msgstr \"",8))
+			{
+				/**
+				* Check if a msgid has been already found.
+				**/
+				if(message[count]->msgid)
+				{
+					/**
+					* If we've got one set the struct infos
+					**/
+					message[count]->msgstr=zamane;
+					message[count]->pos=count;
+					/**
+					* A fake comment as I'dn't integrated	
+					*  a comments-setting function yet.
+					**/
+					message[count]->comment="An example comment";
+					/**
+					* If the msgstr contains more than msgstr ""
+					**/
+					if(strlen(zamane)>8)	
+					{
+						message[count]->msg_status=GTRANSLATOR_MSG_STATUS_TRANSLATED;
+					}
+					/**
+					* If not set the approximiate status.
+					**/
+					else
+					{
+						message[count]->msg_status=GTRANSLATOR_MSG_STATUS_UNTRANSLATED;
+					}
+				}
+			}
+		}
         }
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1),0.5);
+	apply_header();
 }
 
 /**

@@ -10,4 +10,6 @@
 
 #include "header_stuff.h"
 
-/* TODO */
+void apply_header()
+{
+}

@@ -1,5 +1,19 @@
 2000-05-12  Fatih Demir		( kabalak@gmx.net )
 
+	+	Added a function-`skelleton' which will 
+	
+		be important for the next time as it puts 
+		
+		informations to the opened po-file with the
+		
+		necessary format( hopefully ).( 'last update )
+
+	+	A first try to get the time/date and to replace
+		
+		the old entry in the header-list. 
+		
+		-> header_stuff.c/h
+
 	+	Removed the old msgfmt-execution code
 		
 		as I'll integrate the new messages 
@@ -19,7 +33,17 @@
 		work to be done.
 	
 		-> messages.h
+
+	+	Put the header-includes to the header
+		
+		itself
+		
+		-> parse.h
 	
+	+	Implementing a very, very rough way to get
+		
+		the structures filled.
+
 	+	Corrected an error which caused it 
 		
 		to crash on startup.
