@@ -1,3 +1,12 @@
+2003-08-02  Fatih Demir <kabalak@gtranslator.org>
+
+	* .cvsignore, Makefile.am: Change the build rule (and CVS ignore) for
+		out definitions include file - it's now named "defines.h" and
+		 not "defines.include" anymore after the substitution.
+
+	* color-schemes.c, main.c, menus.c, messages-table.c, prefs.c, \
+		prefs_init.c & update.c: Adept for the change to "defines.h".
+
 2003-07-28  Fatih Demir <kabalak@gtranslator.org>
 
 	* messages.h, message.c & parse.c: First preparements for the try to

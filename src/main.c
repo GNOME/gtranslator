@@ -28,7 +28,7 @@
 #include "actions.h"
 #include "bookmark.h"
 #include "color-schemes.h"
-#include "defines.include"
+#include "defines.h"
 #include "dialogs.h"
 #include "gui.h"
 #include "learn.h"

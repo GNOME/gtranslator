@@ -22,7 +22,7 @@ bin_PROGRAMS = gtranslator
 
 GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shell pkg-config --modversion gtk+-2.0) / $(shell pkg-config --modversion libgnomeui-2.0) / $(shell pkg-config --modversion libxml-2.0)"
 
-%.include: %.config
+%.h: %.config
 	sed \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
@@ -33,7 +33,7 @@ GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shel
 	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
 		< $< > $@
 
-$(gtranslator_SOURCES): defines.include
+$(gtranslator_SOURCES): defines.h
 
 gtranslator_SOURCES = \
 	about.c about.h \
@@ -80,7 +80,7 @@ gtranslator_LDADD = \
 	$(GTRANSLATOR_LIBS) \
 	semerkent/libsemerkent.a
 
-CLEANFILES = defines.include
+CLEANFILES = defines.h
 
 EXTRA_DIST = ChangeLog \
 	defines.config

@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include "defines.include"
+#include "defines.h"
 #include "gui.h"
 #include "learn.h"
 #include "messages-table.h"

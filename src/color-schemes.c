@@ -25,7 +25,7 @@
 #include <sys/param.h>
 
 #include "color-schemes.h"
-#include "defines.include"
+#include "defines.h"
 #include "gui.h"
 #include "nautilus-string.h"
 #include "parse.h"

@@ -17,7 +17,7 @@
  *
  */
 
-#include "defines.include"
+#include "defines.h"
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"

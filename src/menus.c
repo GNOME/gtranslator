@@ -20,7 +20,7 @@
 
 #include "about.h"
 #include "actions.h"
-#include "defines.include"
+#include "defines.h"
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
