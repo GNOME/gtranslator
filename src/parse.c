@@ -42,7 +42,7 @@ void check_file(FILE *stream)
 void parse(char *filename)
 {
 	gchar tmp_l[256];
-	msg = (struct message *) malloc (sizeof (struct message));
+	gtr_msg *msg;	
 
 	/** 
 	* Open the file got by the open-dialog
@@ -54,17 +54,11 @@ void parse(char *filename)
 	check_file(fs);
 	msg->po->opened=TRUE;
 	msg->po->po_filename=(char *)filename;
-	#ifdef DEBUG
 	g_print (_("Got filename  %s \n"),(char *)filename);
-	g_print ("Or : %s\n",(char *)msg->po->po_filename);
-	#endif
 	count=0;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
 		count++;
-		/******************************************
-		*FIXME - Code for better catch of the msg's 
-		*******************************************/
 		/**
 		* Are we at a msgid ?
 		**/
@@ -116,7 +110,4 @@ void parse(char *filename)
 	**/
 	msg->po->file_length=(count - 1);
 	max_count=((count - 10 ) / 3);
-	#ifdef DEBUG
-	g_print (_("End of file %s\n"), (char *)filename);
-	#endif
 }

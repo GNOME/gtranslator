@@ -9,13 +9,18 @@
 * -- messages are@home->*this;
 **/
 
-#include "languages.h"
+/**
+* Typedefs for the following structures
+**/
+typedef struct _po_file gtr_po;
+typedef struct _message gtr_msg;
+typedef enum _gtranslator_msg_status gtr_msg_status;
 
 /**
 * The structure with general 
 *  informations ...
 **/
-struct po_file 
+struct _po_file 
 {
 	gchar *po_filename;
 	unsigned int file_length;
@@ -26,24 +31,14 @@ struct po_file
 * Every message should be filled
 *  in here .
 **/
-struct message
+struct _message
 {
-	struct po_file *po;
+	gtr_po *po;
 	gchar *msgid;
 	gchar *msgstr;
 	unsigned int position;
-	gboolean translated;
+	gtr_msg_status *status;
 };
-
-/**
-* The used message structure pointer 
-**/
-struct message *msg;
-
-/**
-* The typedef for the message stati
-**/
-typedef enum _gtranslator_msg_status gtranslator_msg_status;
 
 /**
 * The different stati of the translatable

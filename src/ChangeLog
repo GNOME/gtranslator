@@ -1,6 +1,64 @@
 2000-05-05  Fatih Demir		( kabalak@gmx.net )
+
+	+	Use the new structure and forget the 
+		
+		old one 
+		
+		-> parse.c
+
+	+	Include gtr_dialogs.h for the help-box
+		
+		-> prefs.c
+
+	+	"Disclude" languages.h 
 	
+	+	Added typedefs for the structures
+		
+	+	Use the gtr_msg_status structure instead
+		
+		of a gboolean to define the translation 
+		
+		status ( also changed the variable name )
+		
+		-> messages.h
+		
+	+	Go to the beginning of the file when 
+		
+		trying to get an entry from the msg_db 
+		
+		( SEEK_END -> SEEK_SET )
+	
+	+	Removed some FIXMEs ;) 
+
+		-> msg_db.c
+
+	+	Removing all DEBUG entries
+		
+		-> *.c/h
+
+	+	Removed the definition of DEBUG while
+		
+		building .
+		
+		-> Makefile.am
+	
+	+	Include <config.h> and <gnome.h> 
+		
+		-> interface.h
+
+	+	Added a missing comma ( ehem .. )
+
 	+	Added some group EMail entries
+	
+	+	Corrected the English/* entries ..
+	
+	+	Changed to the N_() macro as the table 
+		
+		has to be const-o-tic .... [ you can 
+		
+		change it to () and see almost 33 ( additional )
+		
+		error messages on the screen ... ] 
 		
 		-> languages.h
 	

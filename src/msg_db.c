@@ -127,24 +127,24 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			fseek(db_stream,0L,SEEK_END);
 			/**
 			* Add the given parameters to the msg_db .
-			*  Using a '+{' as something like a starting
+			*  Using a '{{' as something like a starting
 			*   tag ....
 			**/
-			fputs("\n+{",db_stream);
+			fputs("\n{{",db_stream);
 			fputs(msg_id,db_stream);
 			/**
-			* These ';;' are used as separators and shouldn't
+			* These ';;;' are used as separators and shouldn't
 			*  appear in normal context ...
 			**/
-			fputs(";;",db_stream);
+			fputs(";;;",db_stream);
 			fputs(msg_translation,db_stream);
 			/**
-			* This is the closing tag '}+' ; at the beginning
+			* This is the closing tag '}}' ; at the beginning
 		 	*  and at the end there are always '\n''s appended
 			*   which makes the reading process much slower , but
 			*    which guarantees a better read-ability by the user  
 			**/
-			fputs("}+\n",db_stream);
+			fputs("}}\n",db_stream);
 			/**
 			* After all this , the story should be at a happy ending 
 			**/
@@ -181,8 +181,9 @@ gchar *get_from_msg_db(const gchar *get_similar)
 	else
 	{
 		/**
-		*
+		* Go to the beginning of the file
 		**/
-		fseek(db_stream,0L,SEEK_POS);
+		fseek(db_stream,0L,SEEK_SET);
+		/* .... BORGS_DONT_SLEEP .... */
 	}
 }

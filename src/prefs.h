@@ -14,6 +14,7 @@
 #endif // HAVE_CONFIG_H
 
 #include "about.h"
+#include "gtr_dialogs.h"
 
 /**
 * The widgets 

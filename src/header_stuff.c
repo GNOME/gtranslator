@@ -30,18 +30,8 @@ void cut_the_header_off_it(FILE *mfs,const gchar *cutties)
 	**/
 	while((fgets(tmp,256,mfs) != NULL) && (are_we_at_the_end((gchar *)tmp,cutties) == 1))
 	{
-		/**
-		* Show some more information when build with
-		* debug option ..
-		**/
-		#ifdef DEBUG
-		g_print("Searching for this cutties : %s \n",cutties);
-		#endif DEBUG
 		_count++;
 	}
-	#ifdef DEBUG 
-	g_print("Finished at %i .\n",_count);
-	#endif
 	/**
 	* Have we got any header ?
 	**/
@@ -51,10 +41,6 @@ void cut_the_header_off_it(FILE *mfs,const gchar *cutties)
 		/**
 		* Then copy the lines into ´header´
 		**/
-		#ifdef DEBUG
-		g_print("Got a header !\n");
-		g_print("Copying the lines into the header-array ...\n");
-		#endif
 		for(i=0;i<=_count;++i)
 		{
 			fgets(tmp,256,mfs);

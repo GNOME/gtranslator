@@ -21,10 +21,10 @@ GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 
 dnl -------------------------------------------------------------------
-dnl Check for Gtk+ and glib indepententally from the GNOME checks 
+dnl Check for glib and gtk+ indepententally from the GNOME checks 
 dnl -------------------------------------------------------------------
-AM_PATH_GTK(1.2.3)
 AM_PATH_GLIB(1.2.3)
+AM_PATH_GTK(1.2.3)
 
 dnl -------------------------------------------------------------------
 dnl Add the languages which the application supports here

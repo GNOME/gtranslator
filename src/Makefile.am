@@ -1,18 +1,15 @@
 ## ------------------------------------------------------
 ## Process this file with automake to produce Makefile.in
 ## ------------------------------------------------------
-## Put the -DDEBUG , so on CVS a debuggable version 
-## should be build , too .
+## Removed the DEBUG define as it's really useless ..
 ## ------------------------------------------------------
 
 msg_db_dir = $(datadir)/gtranslator/
 
-extra_flags = -DDEBUG=2001 
-
 INCLUDES = \
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS) \
-	$(extra_flags) -DMSG_DB_DIR=\"$(msg_db_dir)\"
+	-DMSG_DB_DIR=\"$(msg_db_dir)\"
 
 bin_PROGRAMS = gtranslator
 
