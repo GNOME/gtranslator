@@ -53,6 +53,7 @@ typedef struct
 	gint 		index;
 	
 	gboolean	init_status;
+
 	xmlDocPtr	doc;
 	xmlNodePtr	current_node;
 } GtrLearnBuffer;
@@ -626,16 +627,31 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 		gtranslator_learn_buffer->hash, (gconstpointer) search_string);
 
 	/*
-	 * Return it via g_strdup, free it or return NULL in bad case .-(
+	 * Check if there had been any exact match -- if not try other "matching"
+	 *  methods.
 	 */
 	if(found_string)
 	{
-		return g_strdup(found_string);
-		g_free(found_string);
+		return found_string;
 	}
 	else
 	{
-		return NULL;
+		gchar	*query_string;
+		gint	 query_length;
+
+		/*
+		 * Get a 2/3 length string of the search_string.
+		 */
+		query_length=(gint ) ((strlen(search_string) - 1) / 0.6);
+		query_string=g_strndup(search_string, query_length);
+
+		/*
+		 * Try this new query.
+		 */
+		found_string=(gchar *) g_hash_table_lookup(
+			gtranslator_learn_buffer->hash, (gconstpointer) query_string);
+
+		return found_string;
 	}
 }
 

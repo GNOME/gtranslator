@@ -190,7 +190,6 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	
 	message = e_tree_memory_node_get_data (tree_memory, path);
 	
-	/* FIXME: fill in the columns properly */
 	switch (column) {
 	case COL_ORIG:
 		return message->msgid;
@@ -204,16 +203,16 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	case COL_STATUS:
 		switch(message->status) {
 		case GTR_MSG_STATUS_UNKNOWN:
-			return "unknown";
+			return _("Unknown");
 			break;
 		case GTR_MSG_STATUS_TRANSLATED:
-			return "translated";
+			return _("Translated");
 			break;
 		case GTR_MSG_STATUS_FUZZY:
-			return "fuzzy";
+			return _("Fuzzy");
 			break;
 		case GTR_MSG_STATUS_STICK:
-			return "sticky";
+			return _("Sticky");
 			break;
 		default:
 			return NULL;
