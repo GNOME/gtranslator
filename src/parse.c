@@ -1004,12 +1004,14 @@ void gtranslator_remove_all_translations()
 
 	/*
 	 * Check if there are any messages left over which could be
-	 *  removed -- enable/disable the menu entry accordingly.
+	 *  removed -- enable/disable the menu entries accordingly.
 	 */
 	if(po->translated < 1 || po->fuzzy < 1)
 	{
 		gtranslator_actions_disable(ACT_REMOVE_ALL_TRANSLATIONS);
 	}
+
+	gtranslator_actions_enable(ACT_NEXT_UNTRANSLATED);
 }
 
 /*
