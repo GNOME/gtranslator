@@ -12,8 +12,9 @@ build: configure-step build-step
 configure: configure-step
 configure-step:
 	dh_testdir
-	./autogen.sh --prefix=/usr --mandir=/usr/share/man \
-		--sysconfdir=/etc --enable-nautilus-view --enable-mime-bind=yes
+	./configure --prefix=/usr --mandir=/usr/share/man \
+		--sysconfdir=/etc --enable-nautilus-view \
+		--with-gconf --enable-mime-bind=yes
 
 	touch configure-step
 
