@@ -60,7 +60,7 @@ GList *gtranslator_get_recent_files(gboolean delete_nonexistent)
 	/*
 	 * Check the resulting length of the list.
 	 */
-	if(length<0)
+	if(length<=0)
 	{
 		/*
 		 * In this case, we don't have got any recent files.
@@ -72,14 +72,19 @@ GList *gtranslator_get_recent_files(gboolean delete_nonexistent)
 	/*
 	 * Now get every recent filename into the list.
 	 */
-	while(length>=0)
+	while(length>0)
 	{
 		filename=gtranslator_get_recent_files_entry(length);
 		if(filename)
 		{
+			/*
+			 * Check the files conditionally for existence and
+			 *  don't add them to the recent files' list in this
+			 *   case.
+			 */   
 			if(delete_nonexistent==TRUE)
 			{
-				if(!gtranslator_check_file(filename))
+				if(gtranslator_check_file(filename))
 				{
 					g_list_prepend(files, (gpointer) filename);
 				}
@@ -126,6 +131,8 @@ void gtranslator_set_recent_files(GList *filenames)
 	{
 		gchar *request=g_new0(gchar,1);
 		request=g_strdup_printf("recent_files/%i", length);
+		g_warning("Path \"%s\" value \"%s\"", request,
+			(gchar *) g_list_nth_data(filenames, length));
 		gtranslator_config_set_string(request,
 			(gchar *) g_list_nth_data(filenames, length));
 		g_free(request);
@@ -148,12 +155,12 @@ gint gtranslator_get_recent_files_length()
  */
 gchar *gtranslator_get_recent_files_entry(gint n)
 {
-	gint length;
+	gint length=0;
 	
 	gtranslator_config_init();
 	length=gtranslator_get_recent_files_length();
 	
-	if(n<length)
+	if(n<=length)
 	{
 		/*
 		 * Simply get n'th filename stored in the recent files
@@ -192,7 +199,9 @@ void gtranslator_append_recent_file(gchar *filename)
 {
 	GList *list=g_list_alloc();
 	g_return_if_fail(filename!=NULL);
+	
 	list=gtranslator_get_recent_files(TRUE);
+	
 	if(list)
 	{
 		g_list_prepend(list, (gpointer) filename);
