@@ -1,5 +1,5 @@
 /**
-* Fatih Demir [ kabalak@gmx.net ]
+* Fatih Demir <kabalak@gmx.net>
 * Gediminas Paulauskas <menesis@delfi.lt>
 *
 * (C) 2000 Published under GNU GPL V 2.0+
@@ -308,7 +308,7 @@ static void create_actions(void)
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);
 	insert_action(ACT_PASTE, the_edit_menu[4], NONE);
 	insert_action(ACT_CLEAR, the_edit_menu[5], NONE);
-	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[6]);
+	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[7]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
 	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[4]);
 	insert_action(ACT_SPELL, the_edit_menu[11], NONE);
@@ -318,7 +318,7 @@ static void create_actions(void)
 	insert_action(ACT_NEXT, the_messages_menu[2], the_searchbar[2]);
 	insert_action(ACT_LAST, the_messages_menu[3], the_searchbar[3]);
 	insert_action(ACT_GOTO, the_messages_menu[5], the_searchbar[5]);
-	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], the_searchbar[5]);
+	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], the_searchbar[6]);
 	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], the_searchbar[4]);
 	/*------------------------------------------------ */
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
@@ -545,7 +545,7 @@ void clean_text_boxes()
 static void update_appbar(gint pos)
 {
 	gchar *str;
-	GtrMsg *msg;
+	GtrMsg *msg=g_new0(GtrMsg,1);
 	gnome_appbar_pop(GNOME_APPBAR(appbar1));
 	/**
 	* Assign the first part.
@@ -579,6 +579,7 @@ static void update_appbar(gint pos)
 	}
 	gnome_appbar_push(GNOME_APPBAR(appbar1), str);
 	g_free(str);
+	g_free(msg);
 }
 
 /* Updates current msg, and shows to_go msg instead, also adjusts actions */

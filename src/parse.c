@@ -1,5 +1,5 @@
 /**
-* Fatih Demir [ kabalak@gmx.net ]
+* Fatih Demir <kabalak@gmx.net>
 * Gediminas Paulauskas <menesis@delfi.lt>
 *
 * (C) 2000 Published under GNU GPL V 2.0+
