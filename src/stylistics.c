@@ -292,11 +292,10 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	 */
 	if(GtrPreferences.use_own_fonts)
 	{
-		XFontStruct *xfs;
-		gchar* default_font;
-		gchar* join_fonts;
-		
-		
+		XFontStruct *xfs = NULL;
+		gchar* default_font = NULL;
+		gchar* join_fonts = NULL;
+
 		font=gdk_font_load(fontname);
 		
 		/**********************************************************/
@@ -320,7 +319,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 		    if(foo_us_and_spec_the_widget==1)
 		    {
 			default_font = gtranslator_config_get_string("interface/original_font");
-			join_fonts = g_strjoin(",", default_font, fontname);
+			join_fonts = g_strjoin(",", default_font, fontname, NULL);
 			
 			/*
 			 * This function inform
