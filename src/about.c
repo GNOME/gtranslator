@@ -75,7 +75,7 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 
 	about =
 	    gnome_about_new("gtranslator", VERSION,
-		_("(C) 1999-2003 The Free Software Foundation"),
+		_("(C) 1999 The Free Software Foundation, Inc."),
 		_("gtranslator is a po file editing suite with many bells and whistles."),
 		authors,
 		documenters,
