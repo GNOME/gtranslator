@@ -82,7 +82,7 @@ void gtranslator_utils_remove_temp_file()
 	 */
 	if(g_file_exists(tempfile))
 	{
-		unlink(tempfile);
+		remove(tempfile);
 	}
 
 	g_free(tempfile);
@@ -194,6 +194,38 @@ gchar *gtranslator_utils_get_crash_file_name()
 		g_get_home_dir());
 
 	return crashfile;
+}
+
+/*
+ * Set up and assign the test file names for the compile process.
+ */
+void gtranslator_utils_get_compile_file_names(gchar **test_file, 
+	gchar **result_file)
+{
+	*test_file=g_strdup_printf("%s/.gtranslator/gtranslator-temp-compile-file",
+		g_get_home_dir());
+
+	*result_file=g_strdup_printf("%s/.gtranslator/gtranslator-result-log-file",
+		g_get_home_dir());
+}
+
+/*
+ * Clean up after the test compile run.
+ */
+void gtranslator_utils_remove_compile_files(gchar **test_file,
+	gchar **result_file)
+{
+	if(*test_file)
+	{
+		remove(*test_file);
+		g_free(*test_file);
+	}
+	
+	if(*result_file)
+	{
+		remove(*result_file);
+		g_free(*result_file);
+	}
 }
 
 /*

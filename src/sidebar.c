@@ -29,9 +29,8 @@
 #include "views.h"
 
 #include <libgnome/gnome-util.h>
-#include <gal/widgets/e-unicode.h>
 
-#define GetLocalString(x) (e_utf8_from_locale_string(x))
+#include <gal/widgets/e-unicode.h>
 
 /*
  * The internal icon callback method.
@@ -73,7 +72,7 @@ GtkWidget *gtranslator_sidebar_new()
 	 * Our views sidebar.
 	 */  
 	e_shortcut_model_add_group(E_SHORTCUT_BAR(sidebar)->model,
-		-1, GetLocalString(_("Views")));
+		-1, e_utf8_from_locale_string(_("Views")));
 
 	e_shortcut_bar_set_view_type(E_SHORTCUT_BAR(sidebar), 0, 
 		E_ICON_BAR_SMALL_ICONS);
@@ -96,23 +95,23 @@ void gtranslator_sidebar_activate_views()
 	 */ 
 	e_shortcut_model_add_item(model, 0, -1, 
 		"message:",
-		GetLocalString(_("Message")));
+		e_utf8_from_locale_string(_("Message")));
 
 	e_shortcut_model_add_item(model, 0, -1,
 		"comment:",
-		GetLocalString(_("Comment")));
+		e_utf8_from_locale_string(_("Comment")));
 	
 	e_shortcut_model_add_item(model, 0, -1,
 		"number:",
-		GetLocalString(_("Number")));
+		e_utf8_from_locale_string(_("Number")));
 
 	e_shortcut_model_add_item(model, 0, -1,
 		"format:",
-		GetLocalString(_("Format")));
+		e_utf8_from_locale_string(_("Format")));
 
 	e_shortcut_model_add_item(model, 0, -1,
 		"hotkey:",
-		GetLocalString(_("Hotkey")));
+		e_utf8_from_locale_string(_("Hotkey")));
 }
 
 /*

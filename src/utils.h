@@ -50,6 +50,18 @@ gchar *gtranslator_utils_get_temp_file_name(void);
 gchar *gtranslator_utils_get_crash_file_name(void);
 
 /*
+ * Set up our temporary file names for the test compile run.
+ */
+void gtranslator_utils_get_compile_file_names(gchar **test_file, 
+	gchar **result_file);
+
+/*
+ * Clean up the temporary files for the test compile run -- also free the variables.
+ */
+void gtranslator_utils_remove_compile_files(gchar **test_file,
+	gchar **result_file);
+
+/*
  * Initialize and create the gtranslator directory ~/.gtranslator in the user's
  *  home directory.
  */

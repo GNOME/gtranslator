@@ -41,8 +41,6 @@
 #include <libgnomeui/gnome-uidefs.h>
 #include <libgnomeui/gnome-propertybox.h>
 
-#include <gal/widgets/e-unicode.h>
-
 static GtkWidget *e_header = NULL;
 
 static GtkWidget *prj_page, *lang_page, *lang_vbox;
@@ -190,6 +188,9 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		if_key_is("Content-Transfer-Encoding")
 		    ph->encoding = g_strdup(pair[1]);
 		else
+		if_key_is("X-Generator")
+		    ph->generator = g_strdup(pair[1]);
+		else   
 		g_print
 		    ("New header entry found (please add it to header_stuff.c):\n%s\n",
 		     pair[0]);
@@ -337,6 +338,12 @@ void gtranslator_header_free(GtrHeader * h)
 	g_free(h->mime_version);
 	g_free(h->charset);
 	g_free(h->encoding);
+
+	if(h->generator)
+	{
+		g_free(h->generator);
+	}
+	
 	g_free(h);
 }
 
@@ -363,9 +370,12 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		
 		if(gtranslator_utf8_po_file_is_utf8())
 		{
-			g_free(ph->translator);
-			ph->translator=e_utf8_gtk_entry_get_text(
-				GTK_ENTRY(translator));
+			if(ph->translator)
+			{
+				g_free(ph->translator);
+			}
+			
+			ph->translator=gtranslator_utf8_get_gtk_entry_as_utf8_string(translator);
 		}
 		else
 		{
@@ -384,11 +394,13 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	
 		if(gtranslator_utf8_po_file_is_utf8())
 		{
-			g_free(ph->translator);
+			if(ph->translator)
+			{
+				g_free(ph->translator);
+			}
+			
 			ph->translator=g_strdup(author);
-
-			e_utf8_gtk_entry_set_text(GTK_ENTRY(translator), 
-				author);
+			gtranslator_utf8_set_gtk_entry_from_utf8_string(translator, author);
 		}
 		else
 		{
@@ -416,6 +428,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 {
 	GtrHeader *ph = po->header;
 	GtkWidget *label;
+	GtkWidget *foo_me_i_ve_been_wracked;
 
 	gtranslator_raise_dialog(e_header);
 	e_header = gnome_property_box_new();
@@ -424,7 +437,17 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 
 	gtranslator_utils_language_lists_create();
 
-	prj_page = gtranslator_utils_append_page_to_preferences_dialog(e_header, 5, 2, _("Project"));
+	if(ph->generator)
+	{
+		prj_page=gtranslator_utils_append_page_to_preferences_dialog(
+			e_header, 6, 2, _("Project"));
+	}
+	else
+	{
+		prj_page=gtranslator_utils_append_page_to_preferences_dialog(
+			e_header, 5, 2, _("Project"));
+	}
+	
 	label = gtk_label_new(_("Translator and Language"));
 	lang_vbox = gtk_vbox_new(FALSE, GNOME_PAD);
 	gnome_property_box_append_page(GNOME_PROPERTY_BOX(e_header), lang_vbox,
@@ -451,10 +474,19 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	    gtranslator_utils_attach_entry_with_label(prj_page, 3, _("Pot file creation date:"),
 				    ph->pot_date, gtranslator_header_edit_changed);
 	gtk_widget_set_sensitive(pot_date, FALSE);
+	
 	po_date =
 	    gtranslator_utils_attach_entry_with_label(prj_page, 4, _("Po file revision date:"),
 				    ph->po_date, gtranslator_header_edit_changed);
 	gtk_widget_set_sensitive(po_date, FALSE);
+
+	if(ph->generator)
+	{
+		foo_me_i_ve_been_wracked =
+	    		gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Generator:"),
+	    			ph->generator, gtranslator_header_edit_changed);
+		gtk_widget_set_sensitive(foo_me_i_ve_been_wracked, FALSE);
+	}
 
 	/*
 	 * Toggles whether personal options or entries are used to fill header
@@ -730,7 +762,9 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 		replace_substring(&header->comment, "YEAR", year);
 		g_free(year);
 
-		/* Fill h->po_date with current time */
+		/*
+		 * Fill h->po_date with current time 
+		 */
 		gtranslator_header_update(header);
 
 		/*
@@ -756,15 +790,19 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 	return have_changed;
 }
 
-GtrHeader * gtranslator_header_create_from_prefs(void)
+GtrHeader *gtranslator_header_create_from_prefs(void)
 {
 	GtrHeader *h=g_new0(GtrHeader, 1);
 	gchar *year;
 
 	h->prj_name=g_strdup("PACKAGE");
 	h->prj_version=g_strdup("VERSION");
-	/* Fill h->po_date with current time */
+	
+	/* 
+	 * Fill h->po_date with current time 
+	 */
 	gtranslator_header_update(h);
+	
 	h->pot_date=g_strdup(h->po_date);
 	h->translator=g_strdup(author);
 	h->tr_email=g_strdup(email);
@@ -792,4 +830,3 @@ GtrHeader * gtranslator_header_create_from_prefs(void)
 	
 	return h;
 }
-

@@ -39,8 +39,6 @@
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-util.h>
 
-#include <gal/widgets/e-unicode.h>
-
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
@@ -266,8 +264,7 @@ void gtranslator_message_update(void)
 
 		if(gtranslator_utf8_po_file_is_utf8())
 		{
-			msg->msgstr=e_utf8_gtk_editable_get_text(
-				GTK_EDITABLE(trans_box));
+			msg->msgstr=gtranslator_utf8_get_gtk_text_as_utf8_string(trans_box);
 		}
 		else
 		{

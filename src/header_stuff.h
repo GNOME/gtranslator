@@ -40,6 +40,12 @@ typedef struct {
 	gchar *mime_version;
 	gchar *charset;
 	gchar *encoding;
+
+	/*
+	 * Absolutely depreciated by me, but as it's going on my
+	 *  nerves, I'm adding this to our supported tags.
+	 */
+	gchar *generator; 
 } GtrHeader;
 
 #define GTR_HEADER(x) ((GtrHeader *)x)

@@ -1,5 +1,31 @@
 2001-06-07  Fatih Demir <kabalak@gtranslator.org>
 
+	* header_stuff.c/.h: Added "generator" field to the GtrHeader structure;
+		it's parsed in, but we don't save it/add it to new po files; we
+		 just parse it.
+
+	* syntax-elements.h: Added some prefixes to the syntax highlighted
+		prefixes list (mostly EMail protocol prefixes like "pop3:").
+
+	* sidebar.c: Don't use a "GetLocalString" macro -- call the function
+		named "e_utf8_from_locale_string" -- no need to call up macro.
+
+	* header_stuff.c & message.c: Use the new methods from utf8.c/.h and
+		don't use the gal methods -- they're not good for us.
+
+	* utf8.c/.h: New gal-alike convenience function for getting/setting
+		GtkEntry/GtkText contents from/to UTF-8.
+
+	* parse.c: Use the new routines to get safe and sane filenames for the
+		compile process -- don't save the file unasked and unneededly;
+		 also test on every save if the file should be saved under it's
+		  original name -- if not, don't disable the save entries.
+
+	* utils.c/.h: New "gtranslator_utils_get_compile_file_names" function
+		for getting and assigning the compile file names and the new
+		 "gtranslator_utils_remove_compile_files" function for cleaning
+		   up and freeing the stuff afterwards.
+
 	* actions.c, gui.c: Remove any old undo code usage.
 
 	* undo-core.c/.h, undo.c/.h: Starting of a redesign of the undo code.
