@@ -52,7 +52,6 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	/**
 	* Set the filename of the DB.
 	**/
-	/* FIXME */
 	GTR_DB_FILENAME(db)=file;
 	/**
 	* Print some information to the user.
@@ -88,7 +87,7 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 			/**
 			* Set the language name.
 			**/
-			GTR_DB_LANG(db)=sarr[0];
+			GTR_DB_LANG(db)=g_strdup(sarr[0]);
 			/**
 			* Recurse within the same function with the new language  word ..
 			**/
@@ -114,7 +113,8 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	/**
 	* Set the author name.
 	**/
-	GTR_DB_AUTHOR(db)=xmlGetProp(xmldoc->xmlRootNode, "author");
+	GTR_DB_AUTHOR(db)=g_strdup(
+		xmlGetProp(xmldoc->xmlRootNode, "author"));
 	/**
 	* Again inform the user about some parts of it.
 	**/
@@ -122,7 +122,8 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	/**
 	* And the author email for the DB.
 	**/
-	GTR_DB_AUTHOR_EMAIL(db)=xmlGetProp(xmldoc->xmlRootNode, "email");
+	GTR_DB_AUTHOR_EMAIL(db)=g_strdup(
+		xmlGetProp(xmldoc->xmlRootNode, "email"));
 	/**
 	* Get the nodes.
 	**/
@@ -139,7 +140,8 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 			*  the contact persons.
 			**/
 			g_print(_("Message database informations:\n"));
-			g_print(_("Date: %s\nSerial: %s\n"), xmlGetProp(node, "date"),
+			g_print(_("Date: %s\nSerial: %s\n"),
+				xmlGetProp(node, "date"),
 				xmlNodeGetContent(node));
 			/**
 			* Set the serial information of the DB.
@@ -177,7 +179,7 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	/**
 	* Set the database messages list to the current list.
 	**/
-	GTR_DB_LIST(db)=messages;
+	GTR_DB_LIST(db)=g_list_copy(messages);
 	/**
 	* Return the parsed database.
 	**/

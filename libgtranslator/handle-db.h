@@ -53,4 +53,10 @@ void gtranslator_dump_db(GtranslatorDatabase *database,
 void gtranslator_move_db(GtranslatorDatabase *database,
 	char *moveto);
 
+/**
+* Adds the given GtrMsg to the GtranslatorDatabase.
+**/
+void gtranslator_add_to_db(GtranslatorDatabase *database,
+	GtrMsg *message);
+
 #endif

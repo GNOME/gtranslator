@@ -24,6 +24,14 @@
 **/
 
 /**
+* Some convenience macros.
+**/
+#define GTR_TEAM_DB(x) ((GtranslatorTeamDatabase *) x)
+#define GTR_TEAM_DB_SERIAL(x) ((gint) (GTR_TEAM_DB(x)->serial))
+#define GTR_TEAM_DB_DATE(x) ((gchar *) (GTR_TEAM_DB(x)->date))
+#define GTR_TEAM_DB_TEAMS(x) ((GList *) (GTR_TEAM_DB(x)->teams))
+
+/**
 * The translator's structure.
 **/
 typedef struct {

@@ -1,6 +1,18 @@
-2000-10-31  Fatih Demir	<kabalak@gmx.net>
+2000-10-30  Fatih Demir	<kabalak@gmx.net>
 
-	* gtranslator-preferences.c/h: Did also apply Gtk+
+	* handle-db.c: Implemented multiple msgstrs' write
+		in the message database, wrote the corresponding
+		 gtranslator_open_db function (also tested it,
+		  it works ;-) ) and added a gtranslator_add_to_db
+		   function which adds a given MsgStr or parts
+		    of it at appliance to the database.
+
+	* parse-db.c: Copy the GList via g_list_copy instead
+		of assigning it simply, and copy the strings
+		 via g_strdup to avoid programmers' best friends:
+		  crashs.
+
+	* gtranslator-preferences.c/h: Did also apply Gtk+-
 		conform structure building and _no_ pointer
 		 usage in structure definition.
 	
