@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# (C) 2000 kabalak / kabalak@gmx.net
+# (C) 2000-2001 Fatih Demir <kabalak@gmx.net>
 #
 #
 # This script mails the common "oh my god, they're
@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.3
+export POZILLA_RELEASE=0.4
 
 #
 # The configuration dir, the mail body & mail.
@@ -38,22 +38,22 @@ echo -n "" > $CONFIG_DIR/pozilla.output
 
 case $1 in
 -[hH]*|--[hH]*)
-	echo "----------------------------------------"
+	echo "----------------------------------------------"
 	echo "Pozilla.sh R $POZILLA_RELEASE"
-	echo "----------------------------------------"
-	echo "Author: Fatih Demir <kabalak@gmx.net>"
-	echo "----------------------------------------"
+	echo "----------------------------------------------"
+	echo "Author:  Fatih Demir <kabalak@gmx.net>"
+	echo "----------------------------------------------"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
-	echo "----------------------------------------"
+	echo "----------------------------------------------"
 		exit 1
 ;;
 -[vV]*|--[vV]*)
-	echo "----------------------------------------"
+	echo "----------------------------------------------"
 	echo "Pozilla.sh R $POZILLA_RELEASE"
-	echo "----------------------------------------"
-        echo "Author: Fatih Demir <kabalak@gmx.net>"
-	echo "----------------------------------------"
+	echo "----------------------------------------------"
+        echo "Author:  Fatih Demir <kabalak@gmx.net>"
+	echo "----------------------------------------------"
 		exit 1
 ;;
 *)
@@ -66,7 +66,7 @@ esac
 #  it at least into the config-file.
 #
 POZILLA_NO=`cat $CONFIG_DIR/pozilla.conf`
-export POZILLA_NO=$(( $POZILLA_NO + 1 ))
+export POZILLA_NO=$[ $POZILLA_NO + 1 ]
 echo $POZILLA_NO > $CONFIG_DIR/pozilla.conf
 
 #
@@ -80,6 +80,15 @@ export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|\
 export `grep ^MAINVERSION configure.in`
 export `grep ^SUBVERSION configure.in`
 export RELEASE="$MAINVERSION.$SUBVERSION"
+
+#
+# If you're adepting pozilla.sh for your app and have got
+#  a _plain_ version string like "0.5" or "0.32" then you
+#   can comment out the lines above and uncomment the lines
+#    below. Thanks.
+#
+#export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
+#	sed -e 's/^.*(//g' -e 's/.*,\ //g' -e 's/).*//g'`
 
 #
 # Go to the po-dir and get the list of all po-files.
@@ -128,8 +137,8 @@ for i in $PO_FILES
 	echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 	echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
 	echo "- the po-files - send a mail to Fatih Demir <kabalak@gmx.net>" >> $BODY_FILE
-	echo "Please reply to \"Fatih Demir <kabalak@gmx.net>\". Thanks." >> $BODY_FILE
-	mail -s "$SUBJECT" "$AUTHOR" < $BODY_FILE
+	echo "Thanks." >> $BODY_FILE
+	cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR"
         done
 
 #
