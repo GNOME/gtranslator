@@ -4,114 +4,259 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.35\n"
-"POT-Creation-Date: 2001-02-23 14:50+0900\n"
-"PO-Revision-Date: 2001-02-23 14:51+09:00\n"
+"Project-Id-Version: gtranslator 0.36\n"
+"POT-Creation-Date: 2001-03-13 16:32+0900\n"
+"PO-Revision-Date: 2001-03-13 16:40+09:00\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:42
+#: src/about.c:52
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator はベルと笛がたくさん付いた PO ファイル編集スウィートです。"
 
-#: src/dialogs.c:69
+#: src/color-schemes.c:156
+#, c-format
+msgid "Can't apply color scheme file `%s'!"
+msgstr "色つきスキーマファイル '%s' を適用できません！"
+
+#: src/color-schemes.c:279
+msgid "Couldn't retrieve author informations!"
+msgstr "作者情報を取得することができませんでした！"
+
+#.
+#. * Translators: These strings are used as author informations if
+#. *  no author informations could be retrieved:
+#.
+#: src/color-schemes.c:285
+msgid "Unknown"
+msgstr "不明"
+
+#: src/color-schemes.c:286
+msgid "<Not Given>"
+msgstr "<指定なし>"
+
+#: src/color-schemes.c:373
+#, c-format
+msgid "Couldn't open color schemes directory `%s'!"
+msgstr "色付きスキーマのディレクトリ '%s' を開くことができませんでした！"
+
+#: src/color-schemes.c:416
+#, c-format
+msgid "Couldn't open specific color schemes directory `%s'!"
+msgstr "指定した色つきスキーマのディレクトリ '%s' を開くことができませんでした！"
+
+#: src/dialogs.c:84
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- .po ファイルを開く"
 
-#: src/dialogs.c:111
+#: src/dialogs.c:126
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- 名前を付けて保存.."
 
-#: src/dialogs.c:115
+#: src/dialogs.c:130
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- 名前を付けてローカルファイルに保存.."
 
-#: src/dialogs.c:167
+#: src/dialogs.c:182
 #, c-format
 msgid ""
 "File %s\n"
 "was changed. Save?"
 msgstr ""
 ".po ファイル: %s\n"
-"が変更されました。保存しますか?"
+"が変更されました。保存しますか？"
 
-#: src/dialogs.c:208
+#: src/dialogs.c:223
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- ジャンプ"
 
-#: src/dialogs.c:208
+#: src/dialogs.c:223
 msgid "Go!"
 msgstr "ジャンプ!"
 
-#: src/dialogs.c:214
+#: src/dialogs.c:229
 msgid "Go to message number:"
 msgstr "メッセージ番号にジャンプ:"
 
-#: src/dialogs.c:283
+#: src/dialogs.c:298
 msgid "Find in the po-file"
 msgstr ".po ファイルの中から検索します"
 
-#: src/dialogs.c:283 src/gui.c:329
+#: src/dialogs.c:298 src/gui.c:368
 msgid "Find"
 msgstr "ファイル検索"
 
-#: src/dialogs.c:286
+#: src/dialogs.c:301
 msgid "Enter your desired search string:"
 msgstr "検索する文字列を入力してください:"
 
-#: src/dialogs.c:289
+#: src/dialogs.c:304 src/dialogs.c:405
 msgid "Case sensitive"
 msgstr "大小文字を区別しない"
 
-#: src/dialogs.c:294 src/languages.h:112
+#: src/dialogs.c:309 src/dialogs.c:410 src/languages.h:112
 msgid "English"
 msgstr "英語"
 
-#: src/dialogs.c:300 src/gui.c:851
+#: src/dialogs.c:315 src/dialogs.c:416 src/gui.c:902
 msgid "Translated"
 msgstr "翻訳済み"
 
-#: src/dialogs.c:306
+#: src/dialogs.c:321 src/dialogs.c:422
 msgid "Both"
 msgstr "両方"
 
-#: src/dialogs.c:312
+#: src/dialogs.c:327 src/dialogs.c:428
 msgid "Comments"
 msgstr "コメント"
 
-#: src/dialogs.c:318
+#: src/dialogs.c:333 src/dialogs.c:434
 msgid "In all strings"
 msgstr "全ての文字列の中で"
 
-#: src/dialogs.c:333
+#: src/dialogs.c:348
 msgid "Find in: "
 msgstr "検索ファイル: "
 
-#: src/dialogs.c:377
+#: src/dialogs.c:393 src/dialogs.c:394 src/gui.c:372
+msgid "Replace"
+msgstr "置換"
+
+#: src/dialogs.c:395
+msgid "Replace all"
+msgstr "全て置換"
+
+#: src/dialogs.c:399
+msgid "String to replace:"
+msgstr "置換前の文字列:"
+
+#: src/dialogs.c:402
+msgid "Replace string:"
+msgstr "置換後の文字列:"
+
+#: src/dialogs.c:464
+msgid "Replace in:"
+msgstr "置換する範囲:"
+
+#: src/dialogs.c:543
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt の実行時にエラーが発生しました:\n"
 
-#: src/dialogs.c:416
+#: src/dialogs.c:571
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- URI から開く"
 
-#: src/dialogs.c:419
-msgid "Select the URI protocol and the URI you would like to open"
-msgstr "URI プロトコルとお好みの URI を選択して下さい"
-
-#: src/dialogs.c:421 src/gui.c:263
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:3 src/dialogs.c:572
+#: src/gui.c:301
 msgid "Open"
 msgstr "開く"
 
-#: src/dialogs.c:476
-#, c-format
-msgid "No URI given for protocol %s!"
-msgstr "指定した URI はプロトコル %s ではありません！"
+#: src/dialogs.c:572
+msgid "Cancel"
+msgstr "取り消し"
 
-#: src/find.c:127
+#: src/dialogs.c:576
+msgid "Enter URI:"
+msgstr "URI の入力:"
+
+#: src/dialogs.c:618
+msgid "No URI given!"
+msgstr "URI が指定されていません！"
+
+#: src/dialogs.c:639
+msgid "No supported URI protocol (like \"ftp://\") given!"
+msgstr "サポートしていない URI プロトコル (\"ftp://\"のようなもの) が指定されました！"
+
+#: src/dialogs.c:670
+#, c-format
+msgid ""
+"Open recovery file for `%s'?\n"
+"It was saved by gtranslator before gtranslator got closed.\n"
+"Possibly it contains hard pieces of work?!\n"
+"Saying \"No\" will delete the crash recovery file."
+msgstr ""
+"'%s' の復旧用ファイルを開きますか？\n"
+"このファイルは gtranslator が終了する前に保存されたものです。\n"
+"正しく動作しない部分を含んでいる恐れがあります。\n"
+"\"いいえ\" を選択すると、この復旧用ファイルを削除します。"
+
+#: src/dialogs.c:696
+#, c-format
+msgid "Recovering `%s'..."
+msgstr "'%s' の復旧中 ..."
+
+#: src/dialogs.c:740
+msgid "Couldn't get list of gettext domains!"
+msgstr "gzip された gettextファイル `%s' を開くことができませんでした！"
+
+#.
+#. * A half-baken dialog for the query functionality.
+#.
+#: src/dialogs.c:748
+msgid "Here you can query existing gettext domains for a translation."
+msgstr "ここで翻訳用の既存の gettext ドメインの問い合わせが可能です。"
+
+#: src/dialogs.c:751
+msgid "gtranslator -- query existing gettext domains"
+msgstr "gtranslator - 既存の gettext ドメインの問い合わせ"
+
+#: src/dialogs.c:752 src/gui.c:376
+msgid "Query"
+msgstr "問い合わせ"
+
+#: src/dialogs.c:752
+msgid "Close"
+msgstr "閉じる"
+
+#: src/dialogs.c:760
+msgid "Query string:"
+msgstr "問い合わせ文字列:"
+
+#: src/dialogs.c:767
+msgid "Domain to search the translation in:"
+msgstr "問い合わせる翻訳ドメイン:"
+
+#: src/dialogs.c:817
+msgid "No query string given!"
+msgstr "検索する文字列が指定されていません！"
+
+#: src/dialogs.c:846
+msgid "Couldn't find any result for the query!"
+msgstr "検索結果がありませんでした！"
+
+#: src/dialogs.c:863
+#, c-format
+msgid ""
+"Found \"%s\" as a translation in domain \"%s\".\n"
+"Would you like to insert it into the translation?"
+msgstr ""
+"メッセージ \"%s\" がドメイン \"%s\" の中にありました。\n"
+"これを翻訳内容に反映しますか？"
+
+#.
+#. * Translators: This means that the queried string
+#. *  is already translated.
+#.
+#: src/dialogs.c:925
+msgid "Query's result translation is already there!"
+msgstr "問い合わせ結果は既に反映済みです！"
+
+#: src/dialogs.c:945
+msgid ""
+"Should gtranslator accomplish all missing strings (if possible)\n"
+"from your default query domain?"
+msgstr ""
+"不明な全てのメッセージを (可能ならば) デフォルトの問い合わせ\n"
+"ドメインから取得して反映する必要がありますか？"
+
+#: src/find.c:233
+msgid "Please enter a search string"
+msgstr "検索する文字列を入力してください"
+
+#: src/find.c:249
 #, c-format
 msgid ""
 "Could not find\n"
@@ -120,15 +265,15 @@ msgstr ""
 "見つかりませんでした\n"
 "\"%s\""
 
-#: src/find.c:139
+#: src/find.c:261
 msgid "Couldn't get the message!"
 msgstr "メッセージが取得できませんでした！"
 
-#: src/find.c:161
+#: src/find.c:283
 msgid "There are no fuzzy messages left."
 msgstr "fuzzy なメッセージは残っていません。"
 
-#: src/find.c:185
+#: src/find.c:307
 msgid "All messages seem to be translated."
 msgstr "全てのメッセージが翻訳されたようです。"
 
@@ -136,253 +281,273 @@ msgstr "全てのメッセージが翻訳されたようです。"
 msgid "View URL..."
 msgstr "URLの表示..."
 
-#: src/gui.c:107
+#: src/gui.c:115
 msgid "_Compile"
 msgstr "コンパイル(_C)"
 
-#: src/gui.c:108 src/gui.c:277
+#: src/gui.c:116 src/gui.c:315
 msgid "Compile the po-file"
 msgstr ".po ファイルをコンパイルします"
 
-#: src/gui.c:114
+#: src/gui.c:122
 msgid "_Update"
 msgstr "更新(_U)"
 
-#: src/gui.c:115 src/gui.c:281
+#: src/gui.c:123 src/gui.c:319
 msgid "Update the po-file"
 msgstr ".po ファイルを更新します"
 
-#: src/gui.c:123
+#: src/gui.c:130
+msgid "Autoaccomplish"
+msgstr "自動反映"
+
+#: src/gui.c:131
+msgid "Automatically fill missing translations from the default query domain"
+msgstr "自動反映は、未翻訳のメッセージをデフォルトの問い合わせドメインから取得して反映します"
+
+#: src/gui.c:139
 msgid "Open from _URI"
 msgstr "URI から開く(_U)"
 
-#: src/gui.c:124
+#: src/gui.c:140
 msgid "Open a po file from a given URI"
 msgstr "指定した URI から PO ファイルを開きます"
 
-#: src/gui.c:134
+#: src/gui.c:150
 msgid "Recen_t files"
 msgstr "最近開いたファイル(_T)"
 
-#: src/gui.c:151
+#: src/gui.c:168
+msgid "_Query"
+msgstr "問い合わせ(_Q)"
+
+#: src/gui.c:169 src/gui.c:377
+msgid "Query for a string"
+msgstr "メッセージの翻訳内容を問い合わせます"
+
+#: src/gui.c:176
 msgid "_Header..."
 msgstr "ヘッダ(_H)..."
 
-#: src/gui.c:152 src/gui.c:285
+#: src/gui.c:177 src/gui.c:323
 msgid "Edit the header"
 msgstr "ヘッダを編集します"
 
-#: src/gui.c:160
+#: src/gui.c:187
 msgid "_First"
 msgstr "先頭へ(_F)"
 
-#: src/gui.c:161 src/gui.c:302
+#: src/gui.c:188 src/gui.c:340
 msgid "Go to the first message"
 msgstr "メッセージの先頭にジャンプします"
 
-#: src/gui.c:166
+#: src/gui.c:194
 msgid "_Back"
 msgstr "戻る(_B)"
 
-#: src/gui.c:167 src/gui.c:306
+#: src/gui.c:195 src/gui.c:344
 msgid "Go one message back"
 msgstr "1つ前のメッセージに戻ります"
 
-#: src/gui.c:172
+#: src/gui.c:202
 msgid "_Next"
 msgstr "次へ(_N)"
 
-#: src/gui.c:173 src/gui.c:310
+#: src/gui.c:203 src/gui.c:349
 msgid "Go one message forward"
 msgstr "次のメッセージにジャンプします"
 
-#: src/gui.c:178
+#: src/gui.c:209
 msgid "_Last"
 msgstr "最後へ(_L)"
 
-#: src/gui.c:179 src/gui.c:314
+#: src/gui.c:210 src/gui.c:353
 msgid "Go to the last message"
 msgstr "最後のメッセージにジャンプします"
 
-#: src/gui.c:185
+#: src/gui.c:217
 msgid "_Go to..."
 msgstr "ジャンプ(_G)..."
 
-#: src/gui.c:186
+#: src/gui.c:218
 msgid "Goto specified message number"
 msgstr "指定したメッセージ番号にジャンプします"
 
-#: src/gui.c:191
+#: src/gui.c:224
 msgid "Next fuz_zy"
 msgstr "次のfuzzy(_Z)"
 
-#: src/gui.c:192
+#: src/gui.c:225
 msgid "Go to next fuzzy message"
 msgstr "次の fuzzy なメッセージにジャンプします"
 
-#: src/gui.c:197
+#: src/gui.c:231
 msgid "Next _untranslated"
 msgstr "次の未翻訳へ(_U)"
 
-#: src/gui.c:198 src/gui.c:318
+#: src/gui.c:232 src/gui.c:357
 msgid "Go to next untranslated message"
 msgstr "翻訳していない次のメッセージにジャンプします"
 
-#: src/gui.c:207
+#: src/gui.c:242
 msgid "_Translated"
 msgstr "翻訳済み(_T)"
 
-#: src/gui.c:208
+#: src/gui.c:243
 msgid "Toggle translated status of a message"
 msgstr "メッセージを翻訳済みに切り替えます"
 
-#: src/gui.c:215
+#: src/gui.c:251
 msgid "_Fuzzy"
 msgstr "Fuzzy(_F)"
 
-#: src/gui.c:216
+#: src/gui.c:252
 msgid "Toggle fuzzy status of a message"
 msgstr "メッセージを fuzzy に切り替えます"
 
-#: src/gui.c:223
+#: src/gui.c:260
 msgid "_Stick"
 msgstr "張り付く(_S)"
 
-#: src/gui.c:224
+#: src/gui.c:261
 msgid "Stick this message"
 msgstr "このメッセージに張り付きます"
 
-#: src/gui.c:242
+#: src/gui.c:280
 msgid "gtranslator _website"
 msgstr "gtranslator ウェブサイト(_W)"
 
-#: src/gui.c:243
+#: src/gui.c:281
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator のホームページ開きます"
 
-#: src/gui.c:252
+#: src/gui.c:290
 msgid "_Messages"
 msgstr "メッセージ(_M)"
 
-#: src/gui.c:253
+#: src/gui.c:291
 msgid "Mess_age status"
 msgstr "メッセージ状況(_A)"
 
-#: src/gui.c:264
+#: src/gui.c:302
 msgid "Open a po-file"
 msgstr ".po ファイルを開きます"
 
-#: src/gui.c:267
+#: src/gui.c:305
 msgid "Save"
 msgstr "保存"
 
-#: src/gui.c:268
+#: src/gui.c:306
 msgid "Save File"
 msgstr "ファイルを保存します"
 
-#: src/gui.c:271
+#: src/gui.c:309
 msgid "Save as"
 msgstr "名前を付けて保存"
 
-#: src/gui.c:272
+#: src/gui.c:310
 msgid "Save file with a different name"
 msgstr "別の名前でファイルを保存します"
 
-#: src/gui.c:276
+#: src/gui.c:314
 msgid "Compile"
 msgstr "コンパイル"
 
-#: src/gui.c:280
+#: src/gui.c:318
 msgid "Update"
 msgstr "更新"
 
-#: src/gui.c:284
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:2 src/gui.c:322
 msgid "Header"
 msgstr "ヘッダ"
 
-#: src/gui.c:289
+#: src/gui.c:327
 msgid "Options"
 msgstr "オプション"
 
-#: src/gui.c:290
+#: src/gui.c:328
 msgid "gtranslator options"
 msgstr "gtranslator のオプションです"
 
-#: src/gui.c:293 src/gui.c:294
+#: src/gui.c:331 src/gui.c:332
 msgid "Exit"
 msgstr "終了"
 
-#: src/gui.c:301
+#: src/gui.c:339
 msgid "First"
 msgstr "先頭へ"
 
-#: src/gui.c:305
+#: src/gui.c:343
 msgid "Back"
 msgstr "戻る"
 
-#: src/gui.c:309
+#: src/gui.c:348
 msgid "Next"
 msgstr "次へ"
 
-#: src/gui.c:313
+#: src/gui.c:352
 msgid "Last"
 msgstr "最後へ"
 
-#: src/gui.c:317
+#: src/gui.c:356
 msgid "Missing"
 msgstr "不明"
 
-#: src/gui.c:321 src/gui.c:838 src/gui.c:842
+#: src/gui.c:360 src/gui.c:889 src/gui.c:893
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
-#: src/gui.c:322
+#: src/gui.c:361
 msgid "Go to the next fuzzy translation"
 msgstr "次の fuzzy なメッセージにジャンプします"
 
-#: src/gui.c:325
+#: src/gui.c:364
 msgid "Go to"
 msgstr "ジャンプ"
 
-#: src/gui.c:326
+#: src/gui.c:365
 msgid "Go to specified message number"
 msgstr "指定したメッセージ番号にジャンプします"
 
-#: src/gui.c:330
+#: src/gui.c:369
 msgid "Find string in po-file"
 msgstr ".po ファイルの中から文字列を検索します "
+
+#: src/gui.c:373
+msgid "Replace string in po-file"
+msgstr ".po ファイルの中の文字列を置換します"
 
 #.
 #. * Create the app
 #.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:498
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:549
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:838
+#: src/gui.c:889
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ 残り %i 個が Fuzzy ]"
 
-#: src/gui.c:842
+#: src/gui.c:893
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Fuzzy のメッセージはありません ]"
 
-#: src/gui.c:849
+#: src/gui.c:900
 msgid "Stick"
 msgstr "張り付く"
 
-#: src/gui.c:860
+#: src/gui.c:911
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ 残り %i 個が未翻訳 ]"
 
-#: src/gui.c:860 src/gui.c:862
+#: src/gui.c:911 src/gui.c:913
 msgid "Untranslated"
 msgstr "未翻訳"
 
-#: src/gui.c:862
+#: src/gui.c:913
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ 未翻訳のメッセージはありません ]"
@@ -390,81 +555,81 @@ msgstr "%s [ 未翻訳のメッセージはありません ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:873
+#: src/gui.c:924
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "メッセージ数 %d / %d / Status: %s"
 
-#: src/header_stuff.c:316
+#: src/header_stuff.c:327
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- ヘッダの編集"
 
-#: src/header_stuff.c:320
+#: src/header_stuff.c:331
 msgid "Project"
 msgstr "プロジェクト"
 
-#: src/header_stuff.c:321
+#: src/header_stuff.c:332
 msgid "Translator and Language"
 msgstr "翻訳者と言語"
 
-#: src/header_stuff.c:332
+#: src/header_stuff.c:343
 msgid "Comments :"
 msgstr "コメント :"
 
-#: src/header_stuff.c:338
+#: src/header_stuff.c:349
 msgid "Project name:"
 msgstr "プロジェクト名:"
 
-#: src/header_stuff.c:341
+#: src/header_stuff.c:352
 msgid "Project version:"
 msgstr "プロジェクトバージョン:"
 
-#: src/header_stuff.c:344
+#: src/header_stuff.c:355
 msgid "pot file creation date :"
 msgstr "pot ファイルの生成日 :"
 
-#: src/header_stuff.c:348
+#: src/header_stuff.c:359
 msgid "po file revision date :"
 msgstr "po ファイルの修正日 :"
 
-#: src/header_stuff.c:357
+#: src/header_stuff.c:368
 msgid "Use my options to fill the following entries."
 msgstr "以下の項目を設定するために個人オプションを使用して下さい。"
 
-#: src/header_stuff.c:370
+#: src/header_stuff.c:381
 msgid "Translator's name :"
 msgstr "翻訳者の氏名 :"
 
-#: src/header_stuff.c:373
+#: src/header_stuff.c:384
 msgid "Translator's e-mail :"
 msgstr "翻訳者の E-mail アドレス :"
 
-#: src/header_stuff.c:376 src/prefs.c:251
+#: src/header_stuff.c:387 src/prefs.c:267
 msgid "Language :"
 msgstr "言語 :"
 
-#: src/header_stuff.c:381
+#: src/header_stuff.c:392
 msgid "Language group's e-mail :"
 msgstr "言語グループの E-mailアドレス :"
 
-#: src/header_stuff.c:385 src/prefs.c:264
+#: src/header_stuff.c:396 src/prefs.c:280
 msgid "Charset :"
 msgstr "文字セット :"
 
-#: src/header_stuff.c:389 src/prefs.c:268
+#: src/header_stuff.c:400 src/prefs.c:284
 msgid "Encoding :"
 msgstr "エンコード :"
 
-#: src/history.c:147
+#: src/history.c:157
 msgid "_File/Recen_t files/"
 msgstr "ファイル(_F)/最近開いたファイル(_T)/"
 
-#: src/history.c:185
+#: src/history.c:195
 #, c-format
 msgid "Open %s"
 msgstr "%s を開く"
 
-#: src/htmlizer.c:217
+#: src/htmlizer.c:236
 #, c-format
 msgid "Couldn't save html output to %s!"
 msgstr "%s を HTML 形式で保存することが出来ませんでした！"
@@ -472,7 +637,7 @@ msgstr "%s を HTML 形式で保存することが出来ませんでした！"
 #.
 #. * Translatable output to a html file which is visible on the pages.
 #.
-#: src/htmlizer.c:235
+#: src/htmlizer.c:254
 #, c-format
 msgid "%s-%s contains %i messages."
 msgstr "%s-%s には %i 個のメッセージがあります。"
@@ -483,12 +648,12 @@ msgstr "%s-%s には %i 個のメッセージがあります。"
 #. * NOTE: Please do not forget to also "translate" the <b> tags as the
 #. *  project name should be displayed bold on the output pages.
 #.
-#: src/htmlizer.c:248
+#: src/htmlizer.c:267
 #, c-format
 msgid "Project <b>%s</b> (last po file revision: %s)."
 msgstr "プロジェクト <b>%s</b> (PO ファイル最終修正: %s)。"
 
-#: src/htmlizer.c:263
+#: src/htmlizer.c:282
 #, c-format
 msgid "Last translator: %s"
 msgstr "最後の翻訳: %s"
@@ -642,85 +807,114 @@ msgid "Portuguese/Brazil"
 msgstr "ポルトガル語/ブラジル"
 
 #: src/languages.h:184
+msgid "Romanian"
+msgstr "ルーマニア語"
+
+#: src/languages.h:187
 msgid "Russian"
 msgstr "ロシア語"
 
-#: src/languages.h:187
+#: src/languages.h:190
 msgid "Serbian/Cyrillic"
 msgstr "セルビア語/キリール"
 
-#: src/languages.h:190
+#: src/languages.h:193
 msgid "Serbian/Latin"
 msgstr "セルビア語/ラテン"
 
-#: src/languages.h:193
+#: src/languages.h:196
+msgid "Slovakian"
+msgstr "スロベキア語"
+
+#: src/languages.h:199
 msgid "Slovenian"
 msgstr "スロベニア語"
 
-#: src/languages.h:196
+#: src/languages.h:202
 msgid "Spanish"
 msgstr "スペイン語"
 
-#: src/languages.h:199
+#: src/languages.h:205
 msgid "Spanish/Spain"
 msgstr "スペイン語/スペイン"
 
-#: src/languages.h:202
+#: src/languages.h:208
 msgid "Spanish/Mexico"
 msgstr "スペイン語/メキシコ"
 
-#: src/languages.h:205
+#: src/languages.h:211
 msgid "Swedish"
 msgstr "スウェーデン語"
 
-#: src/languages.h:208
+#: src/languages.h:214
+msgid "Tamil"
+msgstr "タミル語"
+
+#: src/languages.h:217
 msgid "Thai"
 msgstr "タイ語"
 
-#: src/languages.h:211
+#: src/languages.h:220
 msgid "Turkish"
 msgstr "トルコ語"
 
-#: src/languages.h:214
+#: src/languages.h:223
 msgid "Ukrainian"
 msgstr "ウクライナ語"
 
-#: src/languages.h:217
+#: src/languages.h:226
+msgid "Uzbekian"
+msgstr "ウズベキスタン語"
+
+#: src/languages.h:229
 msgid "Vietnamese"
 msgstr "ベトナム語"
 
-#: src/languages.h:220
+#: src/languages.h:232
 msgid "Walloon"
 msgstr "ワロン語"
 
-#: src/languages.h:223
+#: src/languages.h:235
 msgid "Welsh"
 msgstr "ウェールズ語"
 
-#: src/main.c:54
+#: src/main.c:70
 msgid "Specifies the main-window geometry"
 msgstr "メインウィンドウの位置を指定する"
 
-#: src/main.c:58
+#: src/main.c:74
+msgid "Syntax color scheme to use"
+msgstr "使用するスキーマの色定義"
+
+#: src/main.c:78
 msgid "HTML file to write to"
 msgstr "書き込む HTML ファイル"
 
-#: src/main.c:92
+#: src/main.c:122
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf の初期化中にエラー: %s"
 
-#: src/open-differently.c:141
+#: src/open-differently.c:185
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
-msgstr "gettextファイル`%s' をコンパイルできませんでした!"
+msgstr "gettext ファイル `%s' をコンパイルできませんでした！"
 
-#: src/open-differently.c:187
+#: src/open-differently.c:235
 #, c-format
-msgid "Couldn't open gzip'd gettext file `%s'!"
-msgstr "gzipされたgettextファイル`%s' を開けませんでした!"
+msgid "Couldn't open compressed gettext file `%s'!"
+msgstr "圧縮済みの gettext ファイル '%s' を開けませんでした！"
 
-#: src/parse.c:136
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#: src/open-differently.c:245
+#, c-format
+msgid "Couldn't open %s'd gettext file `%s'!"
+msgstr "%s で圧縮された gettext ファイル '%s' を開けませんでした！"
+
+#: src/parse.c:135
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -729,7 +923,7 @@ msgstr ""
 "新規にエスケープ文字が見つかりました: \\%c\n"
 "これを parse.c (%i 行) に追加します。"
 
-#: src/parse.c:254
+#: src/parse.c:253
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -740,7 +934,7 @@ msgstr ""
 "行: %d\n"
 "ファイルを確認し再度実行して下さい。"
 
-#: src/parse.c:289
+#: src/parse.c:302
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -749,30 +943,22 @@ msgstr ""
 "ファイルが空です:\n"
 "%s"
 
-#: src/parse.c:309 src/parse.c:315
-msgid "There's no file to open!"
-msgstr "開くファイルが存在しません!"
-
-#: src/parse.c:338 src/parse.c:625
+#: src/parse.c:333 src/parse.c:594
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
-msgstr "ファイル `%s' は存在しません!"
+msgstr "ファイル `%s' は存在しません！"
 
-#: src/parse.c:387
-msgid "The file has no header!"
-msgstr "このファイルにはヘッダがありません!"
-
-#: src/parse.c:390
+#: src/parse.c:356
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "ファイル \"%s\" の解析が完了しました"
 
-#: src/parse.c:393
+#: src/parse.c:359
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:586
+#: src/parse.c:549
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -783,7 +969,7 @@ msgstr ""
 "しかしながら、この .pot ファイルはプログラムが生成します。\n"
 "このファイルは、%s.po のように拡張子 *.po で保存すべきです。"
 
-#: src/parse.c:649
+#: src/parse.c:628
 #, c-format
 msgid ""
 "File %s\n"
@@ -792,7 +978,7 @@ msgstr ""
 "ファイル %s には\n"
 "%d 個の fuzzy なメッセージがあります"
 
-#: src/parse.c:685
+#: src/parse.c:664
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -803,11 +989,11 @@ msgstr ""
 "%s\n"
 "保存しますか?"
 
-#: src/parse.c:693
+#: src/parse.c:672
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- 未変更"
 
-#: src/parse.c:774
+#: src/parse.c:753
 #, c-format
 msgid ""
 "File %s\n"
@@ -816,11 +1002,11 @@ msgstr ""
 "ファイル %s\n"
 "が変更されました。保存されたものに戻しますか?"
 
-#: src/parse.c:813
+#: src/parse.c:793
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "すみませんが、このシステムでは msgfmt コマンドが使えません!"
 
-#: src/parse.c:838
+#: src/parse.c:818
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -829,12 +1015,12 @@ msgstr ""
 "コンパイル完了:\n"
 "%s"
 
-#: src/parse.c:867
+#: src/parse.c:847
 #, c-format
 msgid "You don't have read permissions on file `%s'"
 msgstr "ファイル '%s' に対する読み込み権限がありません。"
 
-#: src/parse.c:886
+#: src/parse.c:866
 #, c-format
 msgid ""
 "You don't have write permissions on file `%s'.\n"
@@ -845,244 +1031,393 @@ msgstr ""
 "どこか別のローカルディレクトリに、そのファイルを\n"
 "保存しておく必要があります。"
 
-#: src/prefs.c:223
+#: src/parse_core.c:36 src/parse_core.c:45
+msgid "There's no file to open!"
+msgstr "開くファイルが存在しません！"
+
+#: src/parse_core.c:96
+msgid "The file has no header!"
+msgstr "このファイルにはヘッダがありません！"
+
+#: src/prefs.c:234
 msgid "gtranslator -- options"
 msgstr "gtranslator -- オプション"
 
 #.
 #. * The tables for holding all the entries below.
 #.
-#: src/prefs.c:228
-msgid "Personal information"
+#: src/prefs.c:239
+msgid "Personal informations"
 msgstr "個人情報"
 
-#: src/prefs.c:229
-msgid "Language options"
-msgstr "言語オプション"
+#: src/prefs.c:240
+msgid "Language"
+msgstr "言語"
 
-#: src/prefs.c:230
-msgid "Po file options"
-msgstr ".po ファイルオプション"
+#: src/prefs.c:241
+msgid "Po file editing"
+msgstr ".po ファイル編集"
 
-#: src/prefs.c:231
+#: src/prefs.c:242
 msgid "Miscellaneous"
 msgstr "その他"
 
-#: src/prefs.c:232
+#: src/prefs.c:243
 msgid "Recent files & spell checking"
 msgstr "最近開いたファイルメニュー&スペルチェック"
 
-#: src/prefs.c:233
-msgid "Fonts & Colors"
-msgstr "フォントとカラー"
+#: src/prefs.c:244
+msgid "Fonts, colors and color schemes"
+msgstr "フォント/カラー/色付きスキーマ"
 
-#: src/prefs.c:239
+#: src/prefs.c:250
 msgid "Author's name :"
 msgstr "作者の名前 :"
 
-#: src/prefs.c:242
+#: src/prefs.c:253
 msgid "Author's EMail :"
 msgstr "作者のE-メールアドレス :"
 
-#: src/prefs.c:255
+#: src/prefs.c:257
+msgid "Default query domain:"
+msgstr "デフォルトの問い合わせドメイン:"
+
+#: src/prefs.c:271
 msgid "Language code :"
 msgstr "言語コード :"
 
-#: src/prefs.c:260
+#: src/prefs.c:276
 msgid "Language group's EMail :"
 msgstr "翻訳グループのE-メールアドレス :"
 
-#: src/prefs.c:276
+#: src/prefs.c:292
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "メッセージが変更されたら fuzzy を解除する"
 
-#: src/prefs.c:280
+#: src/prefs.c:296
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr ".po ファイルに \"fuzzy\"なメッセージが含まれていたら警告する"
 
-#: src/prefs.c:284
+#: src/prefs.c:300
 msgid "Don't save unchanged .po-files"
 msgstr "変更されていない .po ファイルは保存しない"
 
-#: src/prefs.c:288
+#: src/prefs.c:304
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "変更されていないファイルを保存しようとした場合に警告する"
 
-#: src/prefs.c:295
+#: src/prefs.c:308
+msgid "Keep obsolete message in the po files"
+msgstr "PO ファイル内の obsolete (古い)メッセージを残す"
+
+#: src/prefs.c:315
 msgid "Use free space indicating special character"
 msgstr "特殊文字を指定する場合は空白を使用する"
 
-#: src/prefs.c:298
+#: src/prefs.c:318
 msgid "Enable the popup menu"
 msgstr "ポップアップ・メニューを有効にする"
 
-#: src/prefs.c:301
+#: src/prefs.c:321
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr "gtranslator の更新機能を有効にする (更新用のソースが必要です)"
 
-#: src/prefs.c:304
+#: src/prefs.c:324
 msgid "Save geometry on exit & restore it on startup"
 msgstr "終了時に gtranslator の位置を保存し、起動時にその位置に表示"
 
-#: src/prefs.c:307
+#: src/prefs.c:327
 msgid "Don't show the update information dialogs"
 msgstr "更新情報ダイアログを表示しない"
 
-#: src/prefs.c:313
+#: src/prefs.c:333
 msgid "Check every recent file before listing it up"
 msgstr "最近使ったファイルを一覧表示する前にチェックする"
 
-#: src/prefs.c:316
+#: src/prefs.c:336
 msgid "Instant spell checking"
 msgstr "インスタントスペルチェック"
 
-#: src/prefs.c:319
+#: src/prefs.c:339
 msgid "Use special dictionary"
 msgstr "特殊ディレクトリを使う"
 
-#: src/prefs.c:322
+#: src/prefs.c:342
 msgid "Dictionary to use:"
-msgstr "使う辞書:"
+msgstr "使用する辞書:"
 
-#: src/prefs.c:329
+#.
+#. * The sixth page with the special font/color stuff.
+#.
+#: src/prefs.c:348
+msgid "Syntax color scheme to use:"
+msgstr "使用するスキーマの色定義:"
+
+#: src/prefs.c:350
+msgid "gtranslator -- color scheme selection"
+msgstr "gtranslator -- 色つきスキーマの選択"
+
+#: src/prefs.c:356
 msgid "Apply special font/colors"
 msgstr "特別なフォントとカラーを適用する"
 
-#.
-#. * The used labels onn the sixth page.
-#.
-#: src/prefs.c:335
+#: src/prefs.c:359
 msgid "Font:"
 msgstr "フォント:"
 
-#: src/prefs.c:336
+#: src/prefs.c:360
 msgid "Foreground color:"
 msgstr "前景色:"
 
-#: src/prefs.c:337
+#: src/prefs.c:361
 msgid "Background color:"
 msgstr "背景色:"
 
-#: src/prefs.c:340
+#: src/prefs.c:364
 msgid "gtranslator -- font selection"
 msgstr "gtranslator -- フォント選択"
 
-#: src/prefs.c:346
+#: src/prefs.c:377
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- 前景色"
 
-#: src/prefs.c:349
+#: src/prefs.c:380
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- 背景色"
 
-#: src/prefs.c:492
+#: src/prefs.c:539
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
 "like YOU want it to work!"
 msgstr ""
 "設定ダイアログで gtranslator が貴方のしたいように動作する\n"
-"よう幾つかのパラメータを設定できます!"
+"よう幾つかのパラメータを設定できます！"
 
-#: src/prefs.c:663
+#: src/prefs.c:714
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "位置情報 \"%s\" が解析できませんでした!"
+msgstr "位置情報 \"%s\" が解析できませんでした！"
 
 #.
 #. * The generally used date format -- i18n this please,
 #. *  translators ,-)
 #.
-#: src/preferences.c:222
+#: src/preferences.c:228
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
-#: src/preferences.c:229
+#: src/preferences.c:235
 msgid "Couldn't generate the current date!"
-msgstr "今日の日付が作成できませんでした!"
+msgstr "今日の日付が作成できませんでした！"
 
-#: src/sidebar.c:64
-msgid "Views"
-msgstr "表示"
+#: src/query.c:196
+msgid "No language defined in preferences to query the domains for!"
+msgstr "ドメインへ問い合わせる言語が設定されていません！"
 
-#: src/sidebar.c:242
-msgid "No comment available for this message"
-msgstr "このメッセージに対する有効なコメントはありません"
+#: src/query.c:208
+#, c-format
+msgid "Couldn't open locales directory `%s'!"
+msgstr "ローカルディレクトリ `%s' を開けませんでした！"
 
-#: src/session.c:79
+#: src/session.c:88
 msgid "Session restored successfully."
 msgstr "セッションの復元に成功しました。"
 
-#: src/stylistics.c:53 src/stylistics.c:100
-msgid "No color path found!"
-msgstr "色のパスが見つかりません!"
+#: src/sidebar.c:68
+msgid "Views"
+msgstr "表示"
 
-#: src/stylistics.c:167
+#: src/sidebar.c:255
+msgid "No comment available for this message."
+msgstr "このメッセージに対するコメントが有効ではありません。"
+
+#.
+#. * What to say else? This signals doesn't seem
+#. *  interesting for us but should still get a
+#. *   warning message.
+#.
+#: src/sighandling.c:84
+#, c-format
+msgid "Uncatched signal %i!"
+msgstr "シグナル %i を受け取れませんでした！"
+
+#: src/stylistics.c:222
 msgid "No font set! Using default font"
-msgstr "フォントがセットされていません! デフォルトを使用します"
+msgstr "フォントがセットされていません！ デフォルトを使用します"
 
 #.
 #. * Use gtranslator's font in this case.
 #.
-#: src/stylistics.c:171
+#: src/stylistics.c:226
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal--14-*-*-*-c-*-*"
 
-#: src/update.c:79
+#: src/update.c:86
 msgid "No POTFILES.in found!"
-msgstr "POTFILES.inが見つかりません!"
+msgstr "POTFILES.in　がありません！"
 
-#: src/update.c:95
+#: src/update.c:102
 msgid "An update caused no changes."
 msgstr "更新されませんでした。"
 
-#: src/update.c:100
+#: src/update.c:109
 msgid "The update was successfull."
 msgstr "更新が完了しました。"
 
-#: src/vfs-handle.c:84
+#: src/update.c:114
+msgid "An error occured while updating the po file."
+msgstr ".po ファイルの更新中にエラーが発生しました。"
+
+#: src/vfs-handle.c:112
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "作業ディレクトリ `%s' を作成できませんでした！"
 
-#: src/vfs-handle.c:110
+#: src/vfs-handle.c:138
 #, c-format
 msgid "File `%s' couldn't be found!"
-msgstr "ファイル`%s'が見つかりませんでした!"
+msgstr "ファイル `%s' が見つかりませんでした！"
 
-#: src/vfs-handle.c:115
+#: src/vfs-handle.c:143
 #, c-format
 msgid "Malformed URI `%s' entered!"
-msgstr "誤ったURI`%s'が入力されました!"
+msgstr "誤った URI `%s' が入力されました！"
 
-#: src/vfs-handle.c:120
+#: src/vfs-handle.c:148
 #, c-format
 msgid "Host `%s' couldn't be found!"
-msgstr "ホスト`%s'が見つかりませんでした!"
+msgstr "ホスト `%s' が見つかりませんでした！"
 
-#: src/vfs-handle.c:125
+#: src/vfs-handle.c:153
 #, c-format
 msgid "Hostname `%s' is not valid!"
-msgstr "ホスト名`%s'は間違っています!"
+msgstr "ホスト名`%s'は間違っています！"
 
-#: src/vfs-handle.c:130
+#: src/vfs-handle.c:158
 #, c-format
 msgid "Host `%s' has no address!"
-msgstr "ホスト`%s'のアドレスはありません!"
+msgstr "ホスト `%s' のアドレスはありません！"
 
-#: src/vfs-handle.c:135
+#: src/vfs-handle.c:163
 msgid "Transfer interrupted!"
-msgstr "転送が中断されました!"
+msgstr "転送が中断されました！"
+
+#: nautilus-view/nautilus-gtranslator-view.c:181
+#, c-format
+msgid "Project: %s"
+msgstr "プロジェクト"
+
+#: nautilus-view/nautilus-gtranslator-view.c:184
+#, c-format
+msgid "Version: %s"
+msgstr "バージョン: %s"
+
+#.
+#. * These are mailto: hyperlinks so that the mailto: should be
+#. *  mailto: after the translation. Or is there any gnome-url-handler
+#. *   who also recognizes localized mailto: URL's?
+#.
+#: nautilus-view/nautilus-gtranslator-view.c:192
+#: nautilus-view/nautilus-gtranslator-view.c:196
+#, c-format
+msgid "mailto:%s"
+msgstr "メール先: %s"
+
+#: nautilus-view/nautilus-gtranslator-view.c:193
+#, c-format
+msgid "Last translator: %s <%s>"
+msgstr "最終翻訳者: %s <%s>"
+
+#: nautilus-view/nautilus-gtranslator-view.c:197
+#, c-format
+msgid "Language team: %s <%s>"
+msgstr "翻訳チーム : %s <%s>"
+
+#: nautilus-view/nautilus-gtranslator-view.c:200
+#, c-format
+msgid "Last %s.pot update: %s"
+msgstr "%s.pot の最終更新日: %s"
+
+#: nautilus-view/nautilus-gtranslator-view.c:203
+#, c-format
+msgid "Last po file update: %s"
+msgstr ".po ファイルの最終更新日: %s"
+
+#: nautilus-view/nautilus-gtranslator-view.c:206
+#, c-format
+msgid "Encoding: %s (%s)"
+msgstr "エンコーディング: %s (%s)"
+
+#: nautilus-view/nautilus-gtranslator-view.c:213
+#, c-format
+msgid "Comments: %s"
+msgstr "コメント: %s"
+
+#: nautilus-view/nautilus-gtranslator-view.c:253
+msgid "Loading po file..."
+msgstr ".po ファイルの読み込み中..."
+
+#: nautilus-view/nautilus-gtranslator-view.c:273
+#: nautilus-view/nautilus-gtranslator-view.c:292
+msgid "Open Po File"
+msgstr ".po ファイルを開きます"
+
+#: nautilus-view/nautilus-gtranslator-view.c:277
+#: nautilus-view/nautilus-gtranslator-view.c:293
+msgid "Edit Header"
+msgstr "ヘッダを編集します"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
 msgstr "GNOME 翻訳プログラム"
 
-#: data/mime/gtranslator.keys.in.h:1
-msgid "Compiled gettext po files"
-msgstr " PO ファイルのコンパイルが完了しました"
+#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
+msgid "Gtranslator Po File"
+msgstr "Gtranslator PO ファイル"
 
-#: data/mime/gtranslator.keys.in.h:2
-msgid "Gettext po files"
-msgstr "Gettext PO ファイル"
+#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:2
+msgid "Gtranslator Po File View"
+msgstr "Gtranslator PO ファイルビュー"
+
+#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:3
+msgid "Gtranslator Po File Viewer"
+msgstr "Gtranslator PO ファイルビュワー"
+
+#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:4
+msgid "Gtranslator Po file viewer component's factory"
+msgstr "Gtranslator PO ファイル表示コンポーネント用ファクトリ"
+
+#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:5
+msgid "Nautilus Gtranslator View factory"
+msgstr "Nautilus Gtranslator ビューファクトリ"
+
+#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:6
+msgid "Nautilus Gtranslator view"
+msgstr "Nautilus Gtranslator ビュー"
+
+#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:7
+msgid "View as Po File"
+msgstr ".po ファイルとして表示"
+
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:1
+msgid "Edit the header of this po file"
+msgstr "この .po ファイルのヘッダを編集します"
+
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:4
+msgid "Open _po file"
+msgstr ".po ファイルを開く(_P)"
+
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:5
+msgid "Open this po file"
+msgstr "この .po ファイルを開きます"
+
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:6
+msgid "_File"
+msgstr "ファイル(_F)"
+
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:7
+msgid "_Header"
+msgstr "ヘッダ(_H)"
+
