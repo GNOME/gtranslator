@@ -1,3 +1,13 @@
+2002-03-22  Fatih Demir <kabalak@gtranslator.org>
+
+        * header_stuff.c: Fix UTF-8 handling for the header fields -- we do
+		now also show correct header comment and translator names in
+		 the right locale form -- no more crappled text entries.
+
+	* comment.c: Fix the extreme spewage about failed assertions for some
+		parts of the GtrComment structure -- we are now a bit smarter
+		 on comment parts creation.
+
 2002-03-18  Fatih Demir <kabalak@gtranslator.org>
 
 	* formats.c, runtime-config.c/.h: Hide the formats checking routines
