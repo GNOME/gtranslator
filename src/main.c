@@ -102,6 +102,13 @@ int main(int argc, char *argv[])
 	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv,
 				   gtranslator_options, 0, &context);
 
+	/*
+	 * Show the application window (with icon, if requested)
+	 */
+	#ifdef USE_WINDOW_ICON
+	gnome_window_icon_set_default_from_file(WINDOW_ICON);
+	#endif
+	
 	/* 
 	 * Initialize the regular expression cache 
 	 */
@@ -194,13 +201,6 @@ int main(int argc, char *argv[])
 		restore_session(client);
 	}
 	
-	/*
-	 * Show the application window (with icon, if requested)
-	 */
-	#ifdef USE_WINDOW_ICON
-	gnome_window_icon_set_default_from_file(WINDOW_ICON);
-	#endif
-
 	gtk_widget_show_all(app1);
 	
 	/*

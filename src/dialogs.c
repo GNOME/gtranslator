@@ -48,6 +48,9 @@ void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
 		gnome_dialog_set_parent(GNOME_DIALOG(*dlg), GTK_WINDOW(app1));
 	gtk_signal_connect(GTK_OBJECT(*dlg), "destroy",
 			   GTK_SIGNAL_FUNC(gtk_widget_destroyed), dlg);
+
+	gnome_window_icon_set_from_file(GTK_WINDOW(*dlg), WINDOW_ICON);
+	
 	gtk_widget_show_all(*dlg);
 }
 
