@@ -38,12 +38,25 @@ gboolean gtranslator_syntax_get_format(GtrMsg *msg);
 void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 {
 	/*
-	 * Useful macros for making the text easier to understand.
+	 * Useful macros for making the text easier to understand/write.
 	 */
 	#define clear_string(x) x=g_string_truncate(x, 0)
 	#define append_char(x, y) x=g_string_append_c(x, y)
+	
+	/*
+	 * Shell "eq" and his backward equal "beq" alike macros.
+	 */
 	#define eq(x, y) ((msg[cp+x]) && (msg[cp+x]==y))
 	#define beq(x, y) ((msg[cp-x]) && (msg[cp-x]==y))
+
+	/*
+	 * Delete the previous characters from the string and readd it
+	 *  to the text box.
+	 */
+	#define string_add(x); \
+		gtk_text_backward_delete(GTK_TEXT(textwidget), \
+			strlen(x)-1); \
+		string=g_string_append(string, x);
 	
 	GString *string=g_string_new("");
 	GdkColor *color;
@@ -188,6 +201,62 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				
 				break;
 			
+			/*
+			 * Keywords:
+			 */
+			case 'U':
+			case 'L':
+			case 'E':
+			case 'S':
+				clear_string(string);
+
+				color = get_color_from_type(COLOR_KEYWORD);
+				
+				if(beq(0, 'U') && beq(1, 'N') && beq(2, 'G'))
+				{
+					string_add("GNU");
+				}
+				else if(beq(0, 'L') && beq(1, 'P') && beq(2, 'G'))
+				{
+					string_add("GPL");
+				}
+				else if(beq(0, 'E') && beq(1, 'M') && beq(2, 'O') && 
+					beq(3, 'N') && beq(4, 'G'))
+				{
+					string_add("GNOME");
+				}
+				else if(beq(0, 'E') && beq(1, 'D') && beq(2, 'K'))
+				{
+					string_add("KDE");
+				}
+				else if(beq(0, 'L') && beq(1, 'D') && beq(2, 'F'))
+				{
+					string_add("FDL");
+				}
+				else if(beq(0, 'S') && beq(1, 'V') && beq(2, 'C'))
+				{
+					string_add("CVS");
+				}
+				else if(beq(0, 'E') && beq(1, 'M') && beq(2, 'X') &&
+					beq(3, 'I') && beq(4, 'F'))
+				{
+					string_add("FIXME");
+				}
+				else if(beq(0, 'L') && beq(1, 'L') && beq(2, 'U') &&
+					beq(3, 'N'))
+				{
+					string_add("NULL");
+				}
+				else
+				{
+					append_char(string, msg[cp]);
+
+					color=NULL;
+				}
+
+
+				break;
+				
 			/*
 			 * Everything else:
 			 */ 
