@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.30\n"
-"POT-Creation-Date: 2000-10-18 22:54+0200\n"
-"PO-Revision-Date: 2000-10-14 12:51+0200\n"
+"POT-Creation-Date: 2000-10-19 20:22+0200\n"
+"PO-Revision-Date: 2000-10-19 20:28+0200\n"
 "Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -273,12 +273,12 @@ msgstr "Meldung: %d / %d / Status:"
 #: src/gui.c:752
 #, c-format
 msgid "%s %s [ %i Fuzzy left ]"
-msgstr ""
+msgstr "%s %s [ %i Ungenaue verblieben ]"
 
 #: src/gui.c:756
 #, c-format
 msgid "%s %s [ No fuzzy left ]"
-msgstr ""
+msgstr "%s %s [ Keine ungenauen verblieben ]"
 
 #: src/dialogs.c:217 src/gui.c:761
 msgid "Translated"
@@ -291,7 +291,7 @@ msgstr "Fest"
 #: src/gui.c:775
 #, c-format
 msgid "%s %s [ %i Untranslated left ]"
-msgstr ""
+msgstr "%s %s [ %i Unübersetze verblieben ]"
 
 #: src/gui.c:775 src/gui.c:779
 msgid "Untranslated"
@@ -300,7 +300,7 @@ msgstr "Unübersetzt"
 #: src/gui.c:779
 #, c-format
 msgid "%s %s [ No untranslated left ]"
-msgstr ""
+msgstr "%s %s [ Keine unübersetzen verblieben ]"
 
 #: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
@@ -708,14 +708,12 @@ msgid "Couldn't get the message! Grrr...."
 msgstr "Die Nachricht konnte nicht geholt werden! Mist..."
 
 #: src/find.c:122
-#, fuzzy
 msgid "There are no fuzzy messages left."
-msgstr "Es sind keine ungenauen Übersetzungen mehr vorhanden"
+msgstr "Es sind keine ungenauen Übersetzungen mehr vorhanden."
 
 #: src/find.c:146
-#, fuzzy
 msgid "All messages seem to be translated."
-msgstr "Alle Meldungen scheinen übersetzt zu sein"
+msgstr "Alle Meldungen scheinen übersetzt zu sein."
 
 #: src/spell.c:25
 msgid "Check spelling"
@@ -765,8 +763,7 @@ msgstr "Verwende %s als Meldungs-Datenbank...\n"
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr ""
-"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent "
-"werden.\n"
+"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent werden.\n"
 
 #. *
 #. * Print some information.
@@ -911,12 +908,11 @@ msgstr "Boolean-Wert für einen undefinierten Pfad kann nicht gesetzt werden!"
 
 #: libgtranslator/preferences.c:247
 msgid "No path defined for gfloat value"
-msgstr ""
+msgstr "Kein Pfad für den gfloat-Wert definiert"
 
 #: libgtranslator/preferences.c:272
-#, fuzzy
 msgid "No path defined to get the gfloat value from!"
-msgstr "Kein Pfad definiert, von den der Integerwert erhalten werden kann!"
+msgstr "Kein Pfad definiert, von den der gfloat erhalten werden kann!"
 
 #. *
 #. * Set a date identifier; this ought to be also
@@ -932,30 +928,30 @@ msgstr "Das aktuelle Datum konnte nicht erzeugt werden!"
 
 #: libgtranslator/stylistics.c:71 libgtranslator/stylistics.c:143
 msgid "No color path found!"
-msgstr ""
+msgstr "Kein Farb-Pfad gefunden!"
 
 #: libgtranslator/stylistics.c:196
 msgid "No font set! Using default font"
-msgstr ""
+msgstr "Keine Schriftart eingestellt, nutze Standard"
 
 #. *
 #. * The default font for gtranslator.
 #. *
 #: libgtranslator/stylistics.c:200
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
+msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
 #: libgtranslator/stylistics.c:204
 msgid "Couldn't even load default font!"
-msgstr ""
+msgstr "Nicht einmal die Stadard-Schrift kann geladen werden!"
 
 #: libgtranslator/stylistics.c:224
 msgid "No widgets defined to manipulate their style"
-msgstr ""
+msgstr "Kein Element definiert, um seinen Stil zu verändern"
 
 #: src/languages.h:57
 msgid "Afrikaans"
-msgstr ""
+msgstr "Akrikaans"
 
 #: src/languages.h:60
 msgid "Arabic"
@@ -970,9 +966,8 @@ msgid "Basque"
 msgstr "baskisch"
 
 #: src/languages.h:69
-#, fuzzy
 msgid "Bielorussian"
-msgstr "russisch"
+msgstr "Weisrussisch"
 
 #: src/languages.h:72
 msgid "Britton"
@@ -1008,7 +1003,7 @@ msgstr "dänisch"
 
 #: src/languages.h:96
 msgid "Dutch"
-msgstr ""
+msgstr "Niederländisch"
 
 #: src/languages.h:102
 msgid "English/Canada"
@@ -1104,16 +1099,15 @@ msgstr "russisch"
 
 #: src/languages.h:171
 msgid "Serbian/Cyrillic"
-msgstr ""
+msgstr "Serbisch/Kyrillisch"
 
 #: src/languages.h:174
 msgid "Serbian/Latin"
-msgstr ""
+msgstr "Serbisch/Latin"
 
 #: src/languages.h:177
-#, fuzzy
 msgid "Slovenian"
-msgstr "slovakisch"
+msgstr "Slovenisch"
 
 #: src/languages.h:180
 msgid "Spanish"
@@ -1133,7 +1127,7 @@ msgstr "schwedisch"
 
 #: src/languages.h:192
 msgid "Thai"
-msgstr ""
+msgstr "Thai"
 
 #: src/languages.h:195
 msgid "Turkish"
@@ -1145,7 +1139,7 @@ msgstr "ukrainisch"
 
 #: src/languages.h:201
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamesisch"
 
 #: src/languages.h:204
 msgid "Walloon"
@@ -1154,3 +1148,4 @@ msgstr "wallonisch"
 #: src/languages.h:207
 msgid "Welsh"
 msgstr "walisisch"
+
