@@ -19,11 +19,10 @@ dnl -------------------------------------------------------------------
 AC_PROG_INTLTOOL(0.22)
 
 dnl -------------------------------------------------------------------
-dnl Libtool -- needed for backends.
+dnl Standard bla-bla checks.
 dnl -------------------------------------------------------------------
 AC_ISC_POSIX
 AC_DISABLE_STATIC
-AM_PROG_LIBTOOL
 
 dnl -------------------------------------------------------------------
 dnl Use the new GNOME 2.x platform
@@ -178,9 +177,6 @@ man/Makefile
 man/gtranslator.1
 po/Makefile.in
 src/Makefile
-src/backends/Makefile
-src/backends/docbook/Makefile
-src/backends/text/Makefile
 src/pixmaps/Makefile
 ])
 

@@ -34,6 +34,10 @@ files immenantly.
 
 %changelog
 
+*  Fri Jul 26 2002 Fatih Demir	<kabalak@gtranslator.org>
+
+- Remove unused, unneeded stuff.
+
 *  Mon Dec 03 2001 Roy-Magne Mo  <rmo@sunnmore.net>	0.39.2-1
 - Used rpm4-macros and cleaned up filedefinitions.
 - Moved scrollkeeper to prereq
@@ -143,13 +147,7 @@ scrollkeeper-update
 %dir %{_datadir}/gnome/help/gtranslator
 %{_datadir}/gnome/help/gtranslator
 
-%defattr(0755, bin, bin)
-%{_libdir}/gtranslator/backends/*/*.la
-%{_libdir}/gtranslator/backends/*/*.so
-
 %defattr(-, root, root)
-%config(noreplace) %{_sysconfdir}/gconf/schemas/gtranslator.schemas
-%{_libdir}/gtranslator/backends/*.xml
 %{_datadir}/gtranslator/etspecs/*etspec
 %{_datadir}/gnome/apps/Development/gtranslator*
 %{_datadir}/pixmaps/*.png
