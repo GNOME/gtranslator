@@ -35,6 +35,7 @@ typedef struct {
 	gchar *fg;
 	gchar *bg;
 	gchar *special_char;
+	gchar *hotkey;
 	gchar *c_format;
 	gchar *number;
 	gchar *punctuation;

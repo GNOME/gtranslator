@@ -43,8 +43,7 @@ gboolean check_if_scheme(xmlDocPtr doc)
 	#define Malif(x); if(x) { return FALSE; }
 	
 	/*
-	 * Check the various vases where the document is
-	 *  malformed.
+	 * Check the various cases where the document is malformed.
 	 */  
 	Malif(strcmp((doc->xmlRootNode)->name, "colorscheme"));
 	Malif(!xmlNodeGetContent((doc->xmlRootNode)));
@@ -130,17 +129,23 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	gtranslator_config_init();
 
 	/*
-	 * Also set up the scheme specific foreground and background colors
-	 *  if wished.
+	 * Also set up the scheme specific foreground and background colors.
 	 */ 
-	if(wants.use_own_specs)
-	{
-		gtranslator_config_set_string("colors/fg", theme->fg);
-		gtranslator_config_set_string("colors/bg", theme->bg);
-	}
-	
+	gtranslator_config_set_string("colors/fg", theme->fg);
+	gtranslator_config_set_string("colors/bg", theme->bg);
+
+	/*
+	 * And all the syntax colors.
+	 */
 	gtranslator_config_set_string("colors/special_char",
 		theme->special_char);
+	gtranslator_config_set_string("colors/hotkey", theme->hotkey);
+	gtranslator_config_set_string("colors/c_format", theme->c_format);
+	gtranslator_config_set_string("colors/number", theme->number);
+	gtranslator_config_set_string("colors/punctuation", theme->punctuation);
+	gtranslator_config_set_string("colors/special", theme->special);
+	gtranslator_config_set_string("colors/address", theme->address);
+	gtranslator_config_set_string("colors/keyword", theme->keyword);
 	
 	gtranslator_config_close();
 }
