@@ -20,12 +20,198 @@
 #include "syntax.h"
 #include "preferences.h"
 
+#include <ctype.h>
+
 /*
  * Insert the syntax highlighted text into the given text widget.
  */ 
-void gtranslator_syntax_insert_text(GtkWidget *textwidget, GtrMsg *msg)
+void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 {
+	GString *string=g_string_new("");
+	gint cp;
+	
 	g_return_if_fail(textwidget!=NULL);
+	g_return_if_fail(msg!=NULL);
+
+	#define clear_string(x) x=g_string_truncate(x, 0)
+
+	gtk_text_freeze(GTK_TEXT(textwidget));
+	
+	for(cp=0; cp < strlen(msg); ++cp)
+	{
+		/*
+		 * Highlight the found elements in this switch tree.
+		 */ 
+		switch(msg[cp])
+		{
+			/*
+			 * Hotkeys and comment characters:
+			 */ 
+			case '_':
+			case '#':	
+				clear_string(string);
+
+				if(msg[cp+1] && isalpha(msg[cp+1]))
+				{
+					string=g_string_append_c(string,
+						msg[cp]);
+					
+					string=g_string_append_c(string,
+						msg[cp+1]);	
+				}
+				else
+				{
+					string=g_string_append_c(string,
+						msg[cp]);	
+				}
+					
+				gtk_text_insert(GTK_TEXT(textwidget),
+					NULL,
+					gtranslator_syntax_get_gdk_color(BLUE),
+					NULL,
+					string->str, -1);
+
+				cp++;
+				
+				break;
+		
+			/*
+			 * Format specifiers:
+			 */
+			case '%':
+				clear_string(string);
+
+				if(msg[cp+1] && msg[cp+2] && msg[cp+1]=='l')
+				{
+					string=g_string_append_c(string,
+						msg[cp]);
+
+					string=g_string_append_c(string,
+						msg[cp+1]);
+
+					string=g_string_append_c(string,
+						msg[cp+2]);
+
+					cp=cp+2;
+				}
+				else
+				{
+					string=g_string_append_c(string,
+						msg[cp]);
+
+					string=g_string_append_c(string,
+						msg[cp+1]);
+					
+					cp++;
+				}
+
+				gtk_text_insert(GTK_TEXT(textwidget),
+				NULL,
+				gtranslator_syntax_get_gdk_color(RED),
+				NULL,
+				string->str, -1);
+				
+				break;
+				
+			/*
+			 * Figures:
+			 */ 
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case '0':
+				clear_string(string);
+
+				string=g_string_append_c(string,
+					msg[cp]);
+
+				gtk_text_insert(GTK_TEXT(textwidget),
+				NULL, 
+				gtranslator_syntax_get_gdk_color(ORANGE),
+				NULL,
+				string->str, -1);
+				
+				break;
+		
+			/*
+			 * Punctuation characters:
+			 */
+			case '.':
+			case ':':
+			case ';':
+			case ',':
+			case '!':
+			case '?':
+			case '-':
+				clear_string(string);
+
+				string=g_string_append_c(string,
+					msg[cp]);
+				
+				gtk_text_insert(GTK_TEXT(textwidget),
+					NULL,
+					gtranslator_syntax_get_gdk_color(BROWN),
+					NULL,
+					string->str, -1);
+				
+				break;
+			
+			/*
+			 * Quotation characters and "special" characters:
+			 */
+			case '"':
+			case '\'':
+			case '`':
+			case '(':
+			case ')':
+			case '[':
+			case ']':
+			case '{':
+			case '}':
+			case '<':
+			case '>':
+			case '&':	
+			case '/':
+			case '\\':
+			case '|':	
+				clear_string(string);
+
+				string=g_string_append_c(string,
+					msg[cp]);
+				
+				gtk_text_insert(GTK_TEXT(textwidget),
+					NULL,
+					gtranslator_syntax_get_gdk_color(MAROON),
+					NULL,
+					string->str, -1);
+				
+				break;
+				
+			/*
+			 * Everything else:
+			 */ 
+			default:
+				clear_string(string);
+				
+				string=g_string_append_c(string,
+					msg[cp]);
+				
+				gtk_text_insert(GTK_TEXT(textwidget),
+					NULL, NULL, NULL,
+					string->str, -1);
+				break;
+		}
+	}
+
+	gtk_text_thaw(GTK_TEXT(textwidget));
+	
+	g_string_free(string, 0);
 }
 
 /*
@@ -65,22 +251,22 @@ GdkColor *gtranslator_syntax_get_gdk_color(ColorName name)
 	switch(name)
 	{
 		case RED:
-			color->red=(gushort) 65536;
+			color->red=(gushort) 65535;
 			color->green=color->blue=(gushort) 0;
 			break;
 
 		case GREEN:
-			color->green=(gushort) 65536;
+			color->green=(gushort) 65535;
 			color->red=color->blue=(gushort) 0;
 			break;
 		
 		case BLUE:
-			color->blue=(gushort) 65536;
+			color->blue=(gushort) 65535;
 			color->red=color->green=(gushort) 0;
 			break;
 			
 		case BLACK:
-			color->red=color->green=color->blue=(gushort) 65536;
+			color->red=color->green=color->blue=(gushort) 65535;
 			break;
 			
 		case WHITE:
@@ -88,12 +274,12 @@ GdkColor *gtranslator_syntax_get_gdk_color(ColorName name)
 			break;
 		
 		case YELLOW:
-			color->red=color->green=(gushort) 65536;
+			color->red=color->green=(gushort) 65535;
 			color->blue=(gushort) 0;
 			break;
 		
 		case ORANGE:
-			color->red=(gushort) 65536;
+			color->red=(gushort) 65535;
 			color->green=(gushort) 43954;
 			color->blue=(gushort) 0;
 			break;
@@ -101,17 +287,24 @@ GdkColor *gtranslator_syntax_get_gdk_color(ColorName name)
 		case NAVY:
 			color->red=(gushort) 9744;
 			color->green=(gushort) 6773;
-			color->blue=(gushort) 65536;
+			color->blue=(gushort) 65535;
 			break;
 			
 		case MAROON:
-			color->red=color->blue=(gushort) 65536;
-			color->green=(gushort) 0;
+			color->red=(gushort) 41208;
+			color->green=(gushort) 17705;
+			color->blue=(gushort) 39422;
 			break;
 			
 		case AQUA:
 			color->red=(gushort) 0;
-			color->green=color->blue=(gushort) 65536;
+			color->green=color->blue=(gushort) 65535;
+			break;
+		
+		case BROWN:
+			color->red=(gushort) 48655;
+			color->green=(gushort) 22576;
+			color->blue=(gushort) 14757;
 			break;
 			
 		default:
@@ -137,7 +330,7 @@ GdkColor *gtranslator_syntax_get_gdk_color(ColorName name)
 	color->pixel=(gulong) (
 		(color->red)*65536 + (color->green)*255 + color->blue);
 
-	gdk_color_alloc(gtk_widget_get_colormap(trans_box), color);
+	gdk_color_alloc(gtk_widget_get_colormap(app1), color);
 
 	return color;
 }

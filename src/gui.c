@@ -30,6 +30,7 @@
 #include "history.h"
 #include "sidebar.h"
 #include "stylistics.h"
+#include "syntax.h"
 
 #include "pixmaps/untrans.xpm"
 
@@ -667,24 +668,21 @@ void display_msg(GList  * list_item)
 		temp = g_strdup(msg->msgid);
 		invert_dot(temp);
 		
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-			temp, -1);
+		gtranslator_syntax_insert_text(text1, temp);
 		
 		g_free(temp);
 
 		if (msg->msgstr) {
 			temp = g_strdup(msg->msgstr);
 			invert_dot(temp);
-			gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-					temp, -1);
+			
+			gtranslator_syntax_insert_text(trans_box, temp);
+			
 			g_free(temp);
 		}
 	} else {
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-				msg->msgid, -1);
-		
-		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
-				msg->msgstr, -1);
+		gtranslator_syntax_insert_text(text1, msg->msgid);
+		gtranslator_syntax_insert_text(trans_box, msg->msgstr);
 	}
 	
 	/*
@@ -978,8 +976,6 @@ static void undo_changes(GtkWidget  * widget, gpointer useless)
 /*
  * Set po->file_changed to TRUE if the text in the translation box has been
  * updated.
- * 
- * TODO if any syntax highlighting will be added, it should be caled from here
  */
 static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 {
@@ -1043,13 +1039,13 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 				/*
 				 * Clean the textbox.
 				 */
-				gtk_editable_delete_text(GTK_EDITABLE(trans_box),
-							 pos, pos+1);
+				gtk_editable_delete_text(
+					GTK_EDITABLE(trans_box), pos, pos+1);
 				/*
 				 * Insert the changed text with the '·''s.
 				 */
-				gtk_editable_insert_text(GTK_EDITABLE(trans_box),
-							 "·", 1, &pos);
+				gtk_editable_insert_text(
+					GTK_EDITABLE(trans_box), "·", 1, &pos);
 			}
 		}
 		g_free(newstr);

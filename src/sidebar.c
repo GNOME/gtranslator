@@ -18,6 +18,7 @@
  */
 
 #include "sidebar.h"
+#include "syntax.h"
 #include "gui.h"
 
 /*
@@ -199,14 +200,14 @@ void show_comment(GtkWidget *text)
 	{
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
 
-		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
-			GTR_MSG(po->current->data)->comment, -1);
+		gtranslator_syntax_insert_text(text,
+			GTR_MSG(po->current->data)->comment);
 	}
 	else
 	{
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
 
-		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
-			_("No comment available for this message") , -1);
+		gtranslator_syntax_insert_text(text,
+			_("No comment available for this message"));
 	}
 }

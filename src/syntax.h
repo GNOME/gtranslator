@@ -36,13 +36,14 @@ typedef enum {
 	ORANGE,
 	NAVY,
 	MAROON,
-	AQUA
+	AQUA,
+	BROWN
 } ColorName;
 
 /*
  * Insert the given text in the highlighted form into the textwidget.
  */
-void gtranslator_syntax_insert_text(GtkWidget *textwidget, GtrMsg *msg);
+void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg);
 
 /*
  * Are there any format specifiers in this message? Return TRUE if it's so.

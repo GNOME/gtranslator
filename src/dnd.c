@@ -20,6 +20,7 @@
 #include "dnd.h"
 #include "parse.h"
 #include "gui.h"
+#include "syntax.h"
 
 /*
  * The general D'n'D function.
@@ -54,11 +55,10 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 				}
 				if (dnd_type == TARGET_TEXT_PLAIN) {
 					file = (char *) (fnp->data);
-					gtk_editable_insert_text(GTK_EDITABLE
-								 (trans_box),
-								 file,
-								 sizeof(file),
-								 0);
+
+					gtranslator_syntax_insert_text(
+						trans_box, file);
+					
 					return_value = 1;
 				}
 			}

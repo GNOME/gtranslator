@@ -1,5 +1,16 @@
 2001-02-17  Fatih Demir	<kabalak@gtranslator.org>
 
+	* dnd.c: Also use the new syntax enhanced text insertion method.
+
+	* sidebar.c: Use the new gtranslator_syntax_insert_text method to
+		also highlight comments.
+
+	* syntax.c: Implemented color routine and made the syntax highlighting
+		task -- it works great ,-)
+	
+	* gui.c: Use the new syntax routines to insert text instead of the old
+		"gtk_text_insert" calls.
+
 	* Makefile.am: Added syntax.c/.h to the sources.
 
 	* syntax.c/.h: Added these syntax sources which will hold the
