@@ -5,6 +5,7 @@
 schemesdir = $(datadir)/gtranslator/colorschemes
 
 schemes_DATA = \
+	default.xml \
 	extremely-kabalak.xml \
 	kabalak.xml \
 	kbabel.xml \
