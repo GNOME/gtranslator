@@ -416,8 +416,8 @@ void disable_actions_no_file(void)
 			ACT_CLOSE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_FIRST,
 			ACT_BACK, ACT_NEXT, ACT_LAST, ACT_GOTO, ACT_UNDO,
-			ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED, ACT_UPDATE,
-			ACT_TRANSLATED, ACT_FUZZY, ACT_STICK);
+			ACT_NEXT_FUZZY,  ACT_UPDATE, ACT_STICK, ACT_FUZZY,
+			ACT_TRANSLATED, ACT_NEXT_UNTRANSLATED);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
 
@@ -787,8 +787,7 @@ static void update_appbar(gint pos)
 	/**
 	* Update the progressbar.
 	**/
-	percentage=(gfloat) ((((gfloat )po->translated/(gfloat) onepercent))*0.01000);
-	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), percentage);
+	gtranslator_set_progress_bar();
 	/**
 	* And free the allocated string.
 	**/

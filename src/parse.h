@@ -110,6 +110,11 @@ void gtranslator_display_recent(void);
 **/
 void get_translated_count(void);
 
+/**
+* Set the progress bar status.
+**/
+void gtranslator_set_progress_bar(void);
+
 /* A cache for saving regexps */
 GnomeRegexCache *rxc;
 

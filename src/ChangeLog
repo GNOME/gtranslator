@@ -1,3 +1,13 @@
+2000-10-18  Fatih Demir	<kabalak@gmx.net>
+
+	* parse.c/h: Added another function which sets up the progressbar
+		status ( gtranslator_set_progress_bar() ).
+	
+	* parse.c: Use this new function for the progressbar setting routines
+		now, disable the "Fuzzy", "Untranslated" buttons on the parse
+		 start and enable them only if there's a fuzzy, untranslated
+		  message. Another bug has been removed :-)
+
 2000-10-17  Fatih Demir <kabalak@gmx.net>
 
 	* gui.c: Set the left fuzzy/untranslated messages inside the status

@@ -51,7 +51,6 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 			msg->comment = g_strdup_printf("%s#, fuzzy\n", comment);
 		}
 		g_free(comment);
-		enable_actions(ACT_NEXT_FUZZY);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
 		rex = gnome_regex_cache_compile(rxc, 
@@ -270,6 +269,11 @@ void parse(const char *filename)
 		return;
 	}
 
+	/**
+	* Disable the special navigation buttons now.
+	**/
+	disable_actions(ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED);
+
 	/* If the first message is header (it always should be) */
 	po->header = get_header(GTR_MSG(po->messages->data));
 	if (po->header) {
@@ -297,6 +301,30 @@ void parse(const char *filename)
 	display_msg(po->current);
 	get_translated_count();
 	enable_actions_just_opened();
+	/**
+	* Is there any fuzzy message ?
+	**/
+	if(po->fuzzy>1)
+	{
+		/**
+		* Then enable the Fuzzy buttons/entries in the menus
+		**/
+		enable_actions(ACT_NEXT_FUZZY, NULL);
+	}
+	/**
+	* Is there any untranslated message ?
+	**/
+	if((g_list_length(po->messages)-
+		(po->translated+po->fuzzy))>1)
+	{
+		/**
+		* Then enable the Untranslated buttons/entries in the menus
+		**/
+		enable_actions(ACT_NEXT_UNTRANSLATED, NULL);
+	}
+	/**
+	* Disable the actions for the first/back navigation actions.
+	**/
 	disable_actions(ACT_FIRST, ACT_BACK);
 	/**
 	* Activate the translation box widget.
@@ -935,6 +963,14 @@ void get_translated_count(void)
 	* Determine what's 1 % of the messages count.
 	**/
 	onepercent=(gfloat )(g_list_length(po->messages)*0.01000);
+	/**
+	* Update the progress bar.
+	**/
+	gtranslator_set_progress_bar();
+}
+
+void gtranslator_set_progress_bar(void)
+{
 	/**
 	* Get the total percentage.
 	**/

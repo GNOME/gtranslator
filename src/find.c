@@ -119,7 +119,7 @@ void goto_next_fuzzy(GtkWidget * widget, gpointer useless)
 	if (for_each_msg(begin, (FEFunc)is_fuzzy, NULL) == TRUE)
 		return;
 	gnome_app_message(GNOME_APP(app1), 
-			  _("There are no more fuzzy messages"));
+			  _("There are no fuzzy messages left."));
 	disable_actions(ACT_NEXT_FUZZY);
 }
 
@@ -143,7 +143,7 @@ void goto_next_untranslated(GtkWidget * widget, gpointer useless)
 	if (for_each_msg(begin, (FEFunc)is_untranslated, NULL))
 		return;
 	gnome_app_message(GNOME_APP(app1), 
-			  _("All messages seem to be translated"));
+			  _("All messages seem to be translated."));
 	disable_actions(ACT_NEXT_UNTRANSLATED);
 }
 
