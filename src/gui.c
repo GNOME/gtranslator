@@ -53,6 +53,7 @@
 #include <gtk/gtkcheckmenuitem.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtktogglebutton.h>
 #include <gtk/gtkvbox.h>
 
 #include <libgnomeui/gnome-app.h>
@@ -70,6 +71,8 @@ GtkWidget *gtranslator_application;
 GtkWidget *trans_box;
 GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
+GtkWidget *sidebar_pane;
+
 gboolean nothing_changes;
 
 /*
@@ -107,7 +110,12 @@ static  GtkTargetEntry dragtypes[] = {
 /*
  * Counts the already performed update's count for the syntax updating.
  */
-gint update_count=0;
+static gint 	update_count=0;
+
+/*
+ * Pane position storage variable.
+ */
+static gint 	pane_position=82;
 
 /*
  * The popup-menu.
@@ -163,20 +171,31 @@ void gtranslator_create_main_window(void)
 	GtkWidget *search_bar, *tool_bar;
 	GtkWidget *vbox1;
 	GtkWidget *scrolledwindow1, *scrolledwindow2;
-	GtkWidget *pane;
 	GtkWidget *filebox;
 	
 	/*
 	 * Create the app	
 	 */
-	gtranslator_application = gnome_app_new("gtranslator", _("gtranslator"));
+	gtranslator_application = gnome_app_new("gtranslator", "gtranslator");
 	gnome_app_create_menus(GNOME_APP(gtranslator_application), the_menus);
 
-	pane=e_hpaned_new();
+	sidebar_pane=e_hpaned_new();
 	filebox=gtranslator_sidebar_new();
 	
-	e_paned_pack1(E_PANED(pane), filebox, TRUE, FALSE);
-	e_paned_set_position(E_PANED(pane), 85);
+	e_paned_pack1(E_PANED(sidebar_pane), filebox, TRUE, FALSE);
+	
+	if(GtrPreferences.show_sidebar)
+	{
+		gtranslator_config_init();
+		pane_position=gtranslator_config_get_int("interface/sidebar_pane_position");
+		gtranslator_config_close();
+	
+		e_paned_set_position(E_PANED(sidebar_pane), pane_position);
+	}
+	else
+	{
+		e_paned_set_position(E_PANED(sidebar_pane), 0);
+	}
 
 	/*
 	 * Create the tool- and search-bar
@@ -198,8 +217,8 @@ void gtranslator_create_main_window(void)
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	
-	e_paned_pack2(E_PANED(pane), vbox1, TRUE, FALSE);
-	gnome_app_set_contents(GNOME_APP(gtranslator_application), pane);
+	e_paned_pack2(E_PANED(sidebar_pane), vbox1, TRUE, FALSE);
+	gnome_app_set_contents(GNOME_APP(gtranslator_application), sidebar_pane);
 
 	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow1, TRUE, TRUE, 0);
@@ -311,6 +330,18 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	if (!gtranslator_should_the_file_be_saved_dialog())
 		return TRUE;
 	gtranslator_file_close(NULL, NULL);
+	
+	/*
+	 * Initialize the config and set the pane position -- if needed.
+	 */
+	gtranslator_config_init();
+
+	if(GtrPreferences.show_sidebar)
+	{
+		pane_position=e_paned_get_position(E_PANED(sidebar_pane));
+		gtranslator_config_set_int("interface/sidebar_pane_position", pane_position);
+	}
+	
 	gtranslator_utils_save_geometry();
 	
 	/*
@@ -327,7 +358,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Store the current date.
 	 */
-	gtranslator_config_init();
 	gtranslator_config_set_last_run_date();
 	gtranslator_config_close();
 

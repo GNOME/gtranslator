@@ -54,6 +54,8 @@ void gtranslator_preferences_init_default_values()
 			"toggles/use_dot_char", TRUE);
 		gtranslator_config_set_bool(
 			"toggles/keep_obsolete", FALSE);
+		gtranslator_config_set_bool(
+			"toggles/show_sidebar", TRUE);
 
 		/*
 		 * Autosave options; it should be on, with suffix "autosave" 

@@ -23,6 +23,7 @@
 #endif
 
 #include "gui.h"
+#include "preferences.h"
 #include "sidebar.h"
 #include "syntax.h"
 #include "undo.h"
@@ -30,6 +31,7 @@
 
 #include <libgnome/gnome-util.h>
 
+#include <gal/e-paned/e-paned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/widgets/e-unicode.h>
 
@@ -232,17 +234,25 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
  */
 gboolean gtranslator_sidebar_hide()
 {
-	g_return_val_if_fail(sidebar!=NULL, FALSE);
+	gint position=-1;
 	
-	if(GTK_WIDGET_VISIBLE(sidebar))
+	g_return_val_if_fail(sidebar_pane!=NULL, FALSE);
+	
+	position=e_paned_get_position(E_PANED(sidebar_pane));
+	
+	if(position<=0)
 	{
-		gtk_widget_hide(sidebar);
-		
-		return TRUE;
+		return FALSE;
 	}
 	else
 	{
-		return FALSE;
+		gtranslator_config_init();
+		gtranslator_config_set_int("interface/sidebar_pane_position", position);
+		gtranslator_config_set_bool("toggles/show_sidebar", FALSE);
+		gtranslator_config_close();
+		
+		e_paned_set_position(E_PANED(sidebar_pane), 0);
+		return TRUE;
 	}
 }
 
@@ -251,17 +261,27 @@ gboolean gtranslator_sidebar_hide()
  */
 gboolean gtranslator_sidebar_show()
 {
-	g_return_val_if_fail(sidebar!=NULL, FALSE);
+	gint position=-1;
 	
-	if(!GTK_WIDGET_VISIBLE(sidebar))
+	g_return_val_if_fail(sidebar_pane!=NULL, FALSE);
+	
+	gtranslator_config_init();
+	position=gtranslator_config_get_int("interface/sidebar_pane_position");
+	gtranslator_config_close();
+
+	if(position<=0)
 	{
-		gtk_widget_show(sidebar);
-		
-		return TRUE;
+		return FALSE;
 	}
 	else
 	{
-		return FALSE;
+		e_paned_set_position(E_PANED(sidebar_pane), position);
+		
+		gtranslator_config_init();
+		gtranslator_config_set_bool("toggles/show_sidebar", TRUE);
+		gtranslator_config_close();
+		
+		return TRUE;
 	}
 }
 

@@ -30,6 +30,7 @@
 #include "languages.h"
 #include "prefs.h"
 #include "query.h"
+#include "sidebar.h"
 #include "stylistics.h"
 #include "utils.h"
 #include "utils_gui.h"
@@ -65,7 +66,7 @@ static GtkWidget
  */
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
-	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
+	*dont_save_unchanged_files, *save_geometry_tb, *show_sidebar,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
@@ -105,13 +106,20 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The tables for holding all the entries below.
 	 */
-	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 3, 2, _("Personal informations"));
-	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, _("Language settings"));
-	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 1, _("Po file editing"));
-	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, _("Miscellaneous"));
-	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, _("Recent files & spell checking"));
-	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 6, 2, _("Fonts, colors and color schemes"));
-	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, _("Autosaving"));
+	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 3, 2, 
+		_("Personal informations"));
+	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, 
+		_("Language settings"));
+	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 1, 
+		_("Po file editing"));
+	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, 
+		_("Miscellaneous"));
+	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, 
+		_("Recent files & spell checking"));
+	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 6, 2, 
+		_("Fonts, colors and color schemes"));
+	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, 
+		_("Autosaving"));
 	
 	/*
 	 * Create all the personal entries.
@@ -193,9 +201,9 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
 		_("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
-	no_uzis=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
-		_("Don't show the update information dialogs"),
-		GtrPreferences.uzi_dialogs, gtranslator_preferences_dialog_changed);
+	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
+		_("Show the views sidebar"),
+		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
 	/*
 	 * The fifth page with the Recent files options.
 	 */
@@ -317,7 +325,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.dot_char = if_active(use_dot_char);
 	GtrPreferences.update_function = if_active(use_update_function);
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
-	GtrPreferences.uzi_dialogs = if_active(no_uzis);
+	GtrPreferences.show_sidebar = if_active(show_sidebar);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
@@ -422,8 +430,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.update_function);
 	gtranslator_config_set_bool("toggles/enable_popup_menu",
 			      GtrPreferences.popup_menu);
-	gtranslator_config_set_bool("toggles/uzi_dialogs",
-			      GtrPreferences.uzi_dialogs);
+	gtranslator_config_set_bool("toggles/show_sidebar",
+			      GtrPreferences.show_sidebar);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      GtrPreferences.check_recent_file);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
@@ -442,6 +450,18 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.autosave_with_suffix);
 
 	gtranslator_config_close();
+
+	/*
+	 * Show or hide the views sidebar according to the preference.
+	 */
+	if(GtrPreferences.show_sidebar)
+	{
+		gtranslator_sidebar_show();
+	}
+	else
+	{
+		gtranslator_sidebar_hide();
+	}
 }
 
 /*
@@ -554,8 +574,6 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_bool("toggles/use_update_function");    
 	GtrPreferences.dot_char = 
 		gtranslator_config_get_bool("toggles/use_dot_char");
-	GtrPreferences.uzi_dialogs =
-		gtranslator_config_get_bool("toggles/uzi_dialogs");
 	GtrPreferences.check_recent_file = 
 		gtranslator_config_get_bool("toggles/check_recent_files");
 	GtrPreferences.use_own_fonts =
@@ -570,7 +588,9 @@ void gtranslator_preferences_read(void)
 	GtrPreferences.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	GtrPreferences.find_in = gtranslator_config_get_int("find/find_in");
 	gtranslator_update_regex_flags();
+	
 	GtrPreferences.fill_header = gtranslator_config_get_bool("toggles/fill_header");
+	GtrPreferences.show_sidebar = gtranslator_config_get_bool("toggles/show_sidebar");
 
 	/*
 	 * Check if we'd to use special styles.

@@ -89,32 +89,26 @@ void update(GtkWidget *widget, gpointer useless)
 	}
 	
 	/*
-	 * If you wish'em, you get'em ..
+	 * The update.sh script returns 200 if the diff
+	 *  between the old file and the new file is smaller
+	 *   then some lame bits (for the date field).
 	 */
-	if(GtrPreferences.uzi_dialogs)
+	if(res==200)
 	{
-		/*
-		 * The update.sh script returns 200 if the diff
-		 *  between the old file and the new file is smaller
-		 *   then some lame bits (for the date field).
-		 */
-		if(res==200)
+		gnome_app_message(GNOME_APP(gtranslator_application),
+			_("An update caused no changes."));
+	}
+	else
+	{
+		if(res==0)
 		{
 			gnome_app_message(GNOME_APP(gtranslator_application),
-				_("An update caused no changes."));
+				_("The update was successfull."));
 		}
 		else
 		{
-			if(res==0)
-			{
-				gnome_app_message(GNOME_APP(gtranslator_application),
-					_("The update was successfull."));
-			}
-			else
-			{
-				gnome_app_warning(GNOME_APP(gtranslator_application),
-					_("An error occured while updating the po file."));	
-			}
+			gnome_app_warning(GNOME_APP(gtranslator_application),
+				_("An error occured while updating the po file."));	
 		}
 	}
 	

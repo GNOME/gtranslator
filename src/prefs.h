@@ -46,6 +46,7 @@ struct {
 	 */
 	guint match_case		: 1;
 	guint find_in			: 3;
+	guint show_sidebar		: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.
@@ -55,7 +56,6 @@ struct {
 	guint dot_char			: 1;
 	guint popup_menu		: 1;
 	guint check_recent_file		: 1;
-	guint uzi_dialogs		: 1;
 	guint use_own_fonts		: 1;
 	guint use_own_colors		: 1;
 	guint instant_spell_check	: 1;
