@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
@@ -80,6 +80,8 @@ struct {
 	gchar *msgid_font;
 	gchar *msgstr_font;
 	gchar *scheme;
+
+	gchar *hotkey_chars;
 } GtrPreferences;
 
 /*

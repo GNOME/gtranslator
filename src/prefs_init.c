@@ -124,6 +124,11 @@ void gtranslator_preferences_init_default_values()
 			"/default.xml");
 
 		/*
+		 * The default hotkey character in editing @ gtranslator.
+		 */
+		gtranslator_config_set_string("informations/hotkey_chars", "_");
+
+		/*
 		 * Avoid re-initialization of the default values via setting
 		 *  a last run date.
 		 */  

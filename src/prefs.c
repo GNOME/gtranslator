@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *                      Ross Golder <ross@golder.org>
  *                      Søren Wedel Nielsen <swn@herlevkollegiet.dk>
@@ -56,7 +56,7 @@ static GtkWidget
 	*scheme_file, *autosave_suffix;
 
 /*
- * The toggle buttons used in the preferences box:
+ * The toggle buttons/labels used in the preferences box:
  */
 static GtkWidget
 	*warn_if_fuzzy, *unmark_fuzzy, *save_geometry_tb,
@@ -69,7 +69,7 @@ static GtkWidget
 	*show_comment, *highlight;
 
 /*
- * The timeout GtkSpinButton:
+ * The autosave etc. timeout GtkSpinButtons:
  */
 static GtkWidget
 	*autosave_timeout, *max_history_entries, *min_match_percentage;
@@ -370,6 +370,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 						       GtrPreferences.highlight,
 						       G_CALLBACK(gtranslator_preferences_dialog_changed));
 	gtk_box_pack_start (GTK_BOX (category_box), highlight, FALSE, FALSE, 0);
+
 	old_colorscheme=gtranslator_utils_get_raw_file_name(GtrPreferences.scheme);
 	scheme_file = gtranslator_preferences_combo_new(colorschemes, old_colorscheme,
 							control_size_group, 
@@ -705,7 +706,8 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	GtrPreferences.min_match_percentage =
 		gtk_spin_button_get_value(GTK_SPIN_BUTTON(
 			min_match_percentage));
-	
+
+	gtranslator_config_set_string("informations/hotkey_chars", GtrPreferences.hotkey_chars);
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
 	gtranslator_config_set_string("informations/autosave_suffix", 
 		GtrPreferences.autosave_suffix);
@@ -930,7 +932,17 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_string("interface/original_font");
 	GtrPreferences.msgstr_font = 
 		gtranslator_config_get_string("interface/translation_font");
-	
+
+	GtrPreferences.hotkey_chars = gtranslator_config_get_string("informations/hotkey_chars");
+
+	/*
+	 * Beware us of stupid, non-existing hotkey characters please!
+	 */
+	if(!GtrPreferences.hotkey_chars)
+	{
+		GtrPreferences.hotkey_chars=g_strdup("_");
+	}
+
 	GtrPreferences.dictionary = gtranslator_config_get_string("dict/file");
 	GtrPreferences.scheme =  gtranslator_config_get_string("scheme/filename");
 	
@@ -1037,6 +1049,7 @@ void gtranslator_preferences_free()
 {
 	GTR_FREE(GtrPreferences.autosave_suffix);
 	GTR_FREE(GtrPreferences.spell_command);
+	GTR_FREE(GtrPreferences.hotkey_chars);
 	GTR_FREE(GtrPreferences.dictionary);
 	GTR_FREE(GtrPreferences.msgid_font);
 	GTR_FREE(GtrPreferences.msgstr_font);
