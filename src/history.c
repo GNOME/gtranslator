@@ -149,10 +149,10 @@ void gtranslator_history_save(GList *list)
 		gtranslator_config_set_string(subpath,
 			entry->project_name);	
 		
-		/*subpath=g_strdup_printf("%s/project_version", path);
+		subpath=g_strdup_printf("%s/project_version", path);
 
 		gtranslator_config_set_string(subpath,
-			entry->project_version);*/
+			entry->project_version);
 		
 		number++;	
 		list=list->next;
