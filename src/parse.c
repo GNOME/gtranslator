@@ -24,7 +24,11 @@ void check_file(FILE *stream,const char *error)
 {
 	if(stream == NULL)
 	{
-		g_error(error);
+		/**
+		 * If there are any problems , give a
+		 *  message ..
+		 **/
+		g_warning(error"\n");
 	}
 }
 
@@ -52,6 +56,7 @@ void parse()
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
 		count++;
+		/*FIXME - Code for better catch of the msg's */
 		/**
 		 * Are we at a msgid ?
 		 **/

@@ -47,6 +47,16 @@ int init_msg_db()
 		 **/
 		msg_list = g_list_append(cur_list,&msg_messages[0]);
 	}
+	/**
+	 * 3) Check if we had lost the list 
+	 **/
+	if(!msg_list)
+	{
+		/**
+		 * 3.1) No list ,no fun
+		 **/
+		g_error("%s lost the list of translations !\n",PACKAGE);
+	}
 }
 
 void close_msg_db()
