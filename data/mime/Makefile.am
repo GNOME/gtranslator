@@ -15,12 +15,14 @@ keys_predata = gtranslator.keys_template.in
 keys_DATA = gtranslator.keys
 mime_DATA = gtranslator.mime
 
+gtranslator.keys: gtranslator.keys_template
+	$(INTLTOOL_MERGE) -k $(top_srcdir)/po gtranslator.keys_template \
+		gtranslator.keys
+
 ##
 ## HACK -- overread this please..
 ##
-all-am: gtranslator.keys_template
-	$(INTLTOOL_MERGE) -k $(top_srcdir)/po gtranslator.keys_template \
-		gtranslator.keys
+all-am: gtranslator.keys
 
 EXTRA_DIST = $(icon_DATA) $(mime_DATA) $(keys_predata)
 
