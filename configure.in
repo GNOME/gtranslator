@@ -164,10 +164,9 @@ LIBS=$MY_LIBS
 AM_CONDITIONAL(USE_WINDOW_ICON, test z$use_window_icon = zyes)
 
 dnl -------------------------------------------------------------------
-dnl Simply substitute the icon-location directory
-dnl in gtranslator.keys.in .
+dnl Simply substitute the icon-location directory in the keys file.
 dnl -------------------------------------------------------------------
-PIXMAP_DIR="`gnome-config --datadir`/pixmaps/mc"
+PIXMAP_DIR="`gnome-config --datadir`/pixmaps"
 AC_SUBST(PIXMAP_DIR)
 
 dnl -------------------------------------------------------------------
@@ -236,6 +235,18 @@ else
 			-f "${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h" -a \
 			-f "${nautilus_prefix}/include/libnautilus/nautilus-bonobo-ui.h" ; then
 			AC_MSG_RESULT(found)
+			AC_MSG_CHECKING([for nautilus_view_standard_main "version"])
+			dnl ---------------------------------------------------
+			dnl Check for the arguments of the Nautilus view 
+			dnl  creation function from libnautilus.
+			dnl ---------------------------------------------------
+			if grep -sq gettext_package_name \
+				"${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h"; then
+				AC_MSG_RESULT(newer version found)
+				AC_DEFINE(NEWER_NV_STANDARD_MAIN)
+			else
+				AC_MSG_RESULT(older version found)
+			fi	
 			NAUTILUS_CFLAGS="`gnome-config --cflags oaf vfs bonobo bonobox` \
 			-I${nautilus_prefix}/include/libnautilus \
 			`gconf-config --cflags gconf-gtk`"
