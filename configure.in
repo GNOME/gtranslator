@@ -23,8 +23,8 @@ GNOME_X_CHECKS
 dnl -------------------------------------------------------------------
 dnl Check for Gtk+ and glib indepententally from the GNOME checks 
 dnl -------------------------------------------------------------------
-AM_PATH_GTK(1.2.0)
-AM_PATH_GLIB(1.2.0)
+AM_PATH_GTK(1.2.3)
+AM_PATH_GLIB(1.2.3)
 
 dnl -------------------------------------------------------------------
 dnl Add the languages which the application supports here
@@ -56,7 +56,8 @@ AC_SUBST(PIXMAP_DIR)
 
 AC_OUTPUT([
 Makefile
-gtranslator.keys
+data/Makefile
+data/gtranslator.keys
 macros/Makefile
 help/Makefile
 help/C/Makefile

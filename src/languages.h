@@ -79,7 +79,7 @@ lang languages[] =
         { _("Russian"),"ru","koi8-r","ru@li.org" },
 	{ _("Slovak"),"sk","iso-8859-2","" },
         { _("Spanish"),"es","iso-8859-1","es@li.org" },
-	{ _("Spanich/Spain"),"es_ES","iso-8859-1","es@li.org" },
+	{ _("Spanish/Spain"),"es_ES","iso-8859-1","es@li.org" },
         { _("Spanish/Mexico"),"es_MX","iso-8859-1","" },
         { _("Swedish"),"sv","iso-8859-1","sv@li.org" },
         { _("Turkish"),"tr","iso-8859-9","tr@li.org" },

@@ -75,7 +75,7 @@ void prefs_box(GtkWidget *widget,gpointer useless)
 **/
 void prefs_box_show(GtkWidget *widget,gpointer useless)
 {
-	gtk_widget_show_all(GNOME_PROPERTY_BOX(prefs));
+	gtk_widget_show_all(GTK_WIDGET(GNOME_PROPERTY_BOX(prefs)));
 }
 
 /**
@@ -91,5 +91,9 @@ void prefs_box_hide(GtkWidget *widget,gpointer useless)
 **/
 void prefs_box_apply(GtkWidget *widget,gpointer more_useless)
 {
-	/* FIXME -> This code follows closely this weekend */
+	gnome_config_push_prefix("/gtranslator/");
+	gnome_config_set_string("Test/Message","Merhaba");
+	gnome_config_pop_prefix();
+	gnome_config_synx();
+	gnome_config_drop_all();	
 }
