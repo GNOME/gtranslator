@@ -34,6 +34,7 @@ typedef enum {
 } FindMode;
 
 typedef gboolean (*FEFunc) (gpointer list_item, gpointer user_data);
+typedef gboolean (*FEFuncR) (gpointer list_item, gpointer user_data, gboolean first);
 
 gboolean for_each_msg(GList *first, FEFunc func, gpointer user_data);
 

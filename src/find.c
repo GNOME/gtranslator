@@ -1,5 +1,6 @@
 /*
- * (C) 2000-2001 	Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2000-2001 	Gediminas Paulauskas <menesis@gtranslator.org>,
+ *			Thomas Ziehmer <thomas@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,11 +26,13 @@
 
 #include <string.h>
 
+#define MAXHITS 10
+
 static regex_t *target;
 static int eflags = 0;
 static gchar *pattern = NULL;
 
-static gboolean find_in_msg(GList * msg, gpointer useless);
+static gboolean find_in_msg(GList * msg, gpointer useless, gboolean first);
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
@@ -57,54 +60,119 @@ gboolean for_each_msg(GList * begin, FEFunc func, gpointer user_data)
 	return FALSE;
 }
 
+gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
+                    gboolean first)
+{
+	GList *msg;
+	int retval;
+	gboolean next;
+
+	g_return_val_if_fail(begin != NULL, FALSE);
+
+	msg = begin;
+	do {
+		if (msg == NULL) {
+			msg = g_list_first(begin);
+			g_return_val_if_fail(msg != NULL, TRUE);
+		}
+		next = FALSE;
+
+		retval= func(msg, user_data, first);
+		switch (retval) {
+		case 1:
+			return TRUE;
+			break;
+		case 0:
+			next = TRUE;
+			break;
+		case -1:
+			msg = msg->next;
+			break;
+		}
+		first = FALSE;
+g_message("ret: %d %d", retval, next);
+	} while (msg != begin || next);
+	return FALSE;
+}
+
 /*
  * Searches for target in msg, and on success, displays that message.
  */
-static gboolean find_in_msg(GList * msg, gpointer useless)
-{
-	regmatch_t pos[1];
-	if ((wants.find_in != 0) && (GTR_MSG(msg->data)->msgstr == NULL))
-		return FALSE;
-	if ((wants.find_in & findTranslated) &&
-	    (!regexec(target, GTR_MSG(msg->data)->msgstr, 1, pos, 0)))
-        {
-		/*
-		 * We found it!
-		 */
-		goto_given_msg(msg);
-		gtk_editable_select_region(GTK_EDITABLE(trans_box),
-			pos->rm_so, pos->rm_eo);
-		
-		return TRUE;
-	}
-	if ((wants.find_in & findEnglish) &&
-	    (!regexec(target, GTR_MSG(msg->data)->msgid, 1, pos, 0)))
-        {
-		/*
-		 * We found it!
-		 */
-		goto_given_msg(msg);
-		gtk_editable_select_region(GTK_EDITABLE(text1),
-			pos->rm_so, pos->rm_eo);
-		
-		return TRUE;
-	}
-	if((wants.find_in & findComment) &&
-	   (!regexec(target, GTR_MSG(msg->data)->comment, 1, pos, 0)))
-	{
-		/*
-		 * Hm, we found it in a comment, show it before "highlighting"
-		 *  it.
-		 */  
-		goto_given_msg(msg);
-		show_comment(text1);
-		gtk_editable_select_region(GTK_EDITABLE(text1),
-			pos->rm_so, pos->rm_eo);
-		
-		return TRUE;
-	}
-        return FALSE;
+
+#define SEARCH(str)                                                \
+{                                                                  \
+  if (!regexec(target, GTR_MSG(msg->data)->str, MAXHITS, pos, 0)) {\
+    hits = 0;                                                      \
+    while (pos[hits].rm_so != -1 && hits < MAXHITS) hits++;        \
+  } else hits = 0;                                                 \
 }
+
+
+static int find_in_msg(GList * msg, gpointer useless, gboolean first)
+{
+	static int step = 0;
+	static int hits = 0, actpos = 0;
+	regmatch_t pos[MAXHITS];
+
+	if (first) step = 0;
+
+	if ((wants.find_in != 0) && (GTR_MSG(msg->data)->msgstr == NULL))
+		return -1;
+
+	if ((wants.find_in & findTranslated) && 1 == step) {
+		if (hits >= actpos) SEARCH(msgstr);
+		if (hits > 0 && actpos < hits) {
+			/*
+			 * We found it!
+			 */
+			goto_given_msg(msg);
+			gtk_editable_select_region(GTK_EDITABLE(trans_box),
+				pos[actpos].rm_so, pos[actpos].rm_eo);
+			actpos++;
+
+			return 1;
+		} else actpos = 0;
+	}
+	if ((wants.find_in & findEnglish) && 0 == step) {
+		if (hits >= actpos) SEARCH(msgid);
+		if (hits > 0 && actpos < hits) {
+			/*
+			 * We found it!
+			 */
+			goto_given_msg(msg);
+			gtk_editable_select_region(GTK_EDITABLE(text1),
+				pos->rm_so, pos->rm_eo);
+			actpos++;
+		
+			return 1;
+		} else actpos = 0;
+	}
+	if((wants.find_in & findComment) && 2 == step) {
+		if (hits >= actpos) SEARCH(comment);
+		if (hits > 0 && actpos < hits) {
+			/*
+			 * Hm, we found it in a comment, show it before
+			 *  "hightlighting" it.
+			 */  
+			goto_given_msg(msg);
+			show_comment(text1);
+			gtk_editable_select_region(GTK_EDITABLE(text1),
+				pos->rm_so, pos->rm_eo);
+			actpos++;
+		
+			return 1;
+		} else actpos = 0;
+	}
+	step++;
+
+	if (3 == step) {
+		step = 0;
+		return -1;
+	}
+
+        return 0;
+}
+#undef SEARCH
 
 /*
  * The real search function
@@ -113,16 +181,19 @@ void find_do(GtkWidget * widget, gpointer what)
 {
 	gchar *error;
 	GList *begin;
+	gboolean first = FALSE;
 	update_msg();
 	if (what) {
 		target = gnome_regex_cache_compile(rxc, what, eflags);
 		g_free(pattern);
 		pattern = what;
 	}
-	begin = po->current->next;
-	if (!begin) 
+	begin = po->current;
+	if (!begin) {
 		begin = po->messages;
-	if (for_each_msg(begin, (FEFunc)find_in_msg, NULL) == TRUE)
+		first = TRUE;
+	}
+	if (repeat_all(begin, (FEFuncR)find_in_msg, NULL, first) == TRUE)
 		return;
 	error = g_strdup_printf(_("Could not find\n\"%s\""), pattern);
 	gnome_app_message(GNOME_APP(app1), error);
