@@ -25,6 +25,7 @@
 #include "gui.h"
 #include "nautilus-string.h"
 #include "parse.h"
+#include "prefs.h"
 #include "utf8.h"
 #include "utils.h"
 
@@ -292,7 +293,11 @@ void gtranslator_comment_display(GtrComment *comment)
 	}
 	else
 	{
-		if(strlen(comment->pure_comment) > 82)
+		if(!GtrPreferences.show_comment)
+		{
+			comment_display_str=" ";
+		}
+		else if(strlen(comment->pure_comment) > 82)
 		{
 			comment_display_str=nautilus_str_middle_truncate(
 				comment->pure_comment, 82);
@@ -306,8 +311,9 @@ void gtranslator_comment_display(GtrComment *comment)
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
 		comment_display_str);
 
-	if(GTR_COMMENT(comment)->type & TRANSLATOR_COMMENT ||
-		GTR_COMMENT(comment)->type & SOURCE_COMMENT)
+	if((GTR_COMMENT(comment)->type & TRANSLATOR_COMMENT ||
+		GTR_COMMENT(comment)->type & SOURCE_COMMENT) &&
+		nautilus_strcasecmp(comment_display_str, " "))
 	{
 		gtk_widget_set_sensitive(extra_content_view->edit_button, TRUE);
 	}
@@ -316,5 +322,15 @@ void gtranslator_comment_display(GtrComment *comment)
 		gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
 	}
 
+	e_paned_set_position(E_PANED(content_pane), 0);
+}
+
+/*
+ * Hide any currently shown comment (area).
+ */
+void gtranslator_comment_hide()
+{
+	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), "");
+	gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
 	e_paned_set_position(E_PANED(content_pane), 0);
 }

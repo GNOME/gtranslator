@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GTR_SAVE_DIFFERENTLY_H
-#define GTR_SAVE_DIFFERENTLY_H 1
+#ifndef GTR_SAVE_H
+#define GTR_SAVE_H 1
 
 #include <glib.h>
 

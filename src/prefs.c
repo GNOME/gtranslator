@@ -77,7 +77,7 @@ static GtkWidget
 	*autosave, *autosave_with_suffix, *sweep_compile_file,
 	*use_learn_buffer, *show_messages_table, *rambo_function,
 	*use_own_mt_colors, *collapse_translated_entries, *auto_learn,
-	*fuzzy_matching, *load_backends;
+	*fuzzy_matching, *load_backends, *show_comment;
 
 /*
  * The timeout GtkSpinButton:
@@ -120,7 +120,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		4, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		8, 1, _("Miscellaneous"));
+		9, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		4, 2, _("Recent files & spell checking"));
 	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -236,8 +236,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page,
 		7, _("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
+	show_comment=gtranslator_utils_attach_toggle_with_label(fourth_page,
+		8, _("Show comments"),
+		GtrPreferences.show_comment, gtranslator_preferences_dialog_changed);
 	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		8, _("Show the views sidebar"),
+		9, _("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
 	
 	/*
@@ -503,6 +506,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
+	GtrPreferences.show_comment = if_active(show_comment);
 	GtrPreferences.collapse_translated = if_active(collapse_translated_entries);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
@@ -664,6 +668,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/show_sidebar",
 			      GtrPreferences.show_sidebar);
+	gtranslator_config_set_bool("toggles/show_comment",
+			      GtrPreferences.show_comment);
 	gtranslator_config_set_bool("toggles/rambo_function",
 			      GtrPreferences.rambo_function);
 	gtranslator_config_set_bool("toggles/check_recent_files",
@@ -713,6 +719,14 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	else
 	{
 		gtranslator_sidebar_hide();
+	}
+
+	/*
+	 * Hide the comment viewing (area) via our new util function.
+	 */
+	if(!GtrPreferences.show_comment)
+	{
+		gtranslator_comment_hide();
 	}
 }
 
@@ -868,6 +882,8 @@ void gtranslator_preferences_read(void)
 		"toggles/fill_header");
 	GtrPreferences.show_sidebar = gtranslator_config_get_bool(
 		"toggles/show_sidebar");
+	GtrPreferences.show_comment = gtranslator_config_get_bool(
+		"toggles/show_comment");
 	GtrPreferences.show_messages_table = gtranslator_config_get_bool(
 		"toggles/show_messages_table");
 	GtrPreferences.collapse_translated = gtranslator_config_get_bool(

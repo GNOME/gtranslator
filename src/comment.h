@@ -93,4 +93,9 @@ void gtranslator_comment_free(GtrComment **comment);
  */
 void gtranslator_comment_display(GtrComment *comment); 
 
+/*
+ * Clears/hides the comment viewing (area).
+ */
+void gtranslator_comment_hide(void);
+
 #endif
