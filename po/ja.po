@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-09 13:18+0200\n"
-"PO-Revision-Date: 2003-03-23 01:14+0900\n"
+"POT-Creation-Date: 2003-06-15 21:41+0900\n"
+"PO-Revision-Date: 2003-06-15 19:36+0900\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -20,9 +20,8 @@ msgid "translator_credits"
 msgstr "Takeshi AIHANA <aihana@gnome.gr.jp>"
 
 #: src/about.c:78
-#, fuzzy
 msgid "(C) 1999 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2003 フリーソフトウェア財団"
+msgstr "(C) 1999 フリーソフトウェア財団"
 
 #: src/about.c:79
 msgid "gtranslator is a po file editing suite with many bells and whistles."
@@ -42,7 +41,7 @@ msgstr "作者情報を取得することが出来ませんでした！"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:324 src/translator.c:312
+#: src/color-schemes.c:324 src/translator.c:318
 msgid "Unknown"
 msgstr "未翻訳"
 
@@ -788,40 +787,45 @@ msgstr "書き込む HTML ファイル"
 msgid "HTMLFILE"
 msgstr "HTMLファイル名"
 
-#: src/main.c:151
+#: src/main.c:107
+msgid ""
+"Don't highlight syntax - FIXME: We're always non-syntaxed currently! Sorry..."
+msgstr "強調表示しない - FIXME: 現在は常に強調表示が無効です！ すみません.."
+
+#: src/main.c:149
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf の初期化中にエラー: %s"
 
-#: src/main.c:178
+#: src/main.c:176
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator -- ビルド情報/仕様:"
 
-#: src/main.c:180
+#: src/main.c:178
 msgid "Version and build date:"
 msgstr "バージョンとビルド日時:"
 
-#: src/main.c:182
+#: src/main.c:180
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "使用した GLib/GTK+/GNOME/XML バージョン:"
 
-#: src/main.c:184
+#: src/main.c:182
 msgid "Colorschemes directory:"
 msgstr "カラースキームのディレクトリ:"
 
-#: src/main.c:186
+#: src/main.c:184
 msgid "Scripts directory:"
 msgstr "スクリプトのディレクトリ:"
 
-#: src/main.c:188
+#: src/main.c:186
 msgid "Window icon:"
 msgstr "ウィンドウのアイコン:"
 
-#: src/main.c:190
+#: src/main.c:188
 msgid "Own locale directory:"
 msgstr "ローカルディレクトリ:"
 
-#: src/main.c:192
+#: src/main.c:190
 msgid "Default learn buffer file location:"
 msgstr "デフォルトの学習バッファの格納場所:"
 
@@ -829,7 +833,7 @@ msgstr "デフォルトの学習バッファの格納場所:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:445
+#: src/main.c:443
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "'%s' の学習が完了しました。\n"
@@ -837,14 +841,14 @@ msgstr "'%s' の学習が完了しました。\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:487
+#: src/main.c:485
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
 msgstr "個人学習バッファの内容を '%s' にエキスポートしました。\n"
 
 #: src/menus.c:49
 msgid "_Go"
-msgstr "/ジャンプ(_G)"
+msgstr "ジャンプ(_G)"
 
 #: src/menus.c:59
 msgid "_Compile"
@@ -1663,7 +1667,7 @@ msgstr "転送が中断されました！"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
-msgstr "GNOME 翻訳プログラム"
+msgstr "GNOME 翻訳プログラムです"
 
 #: data/etspecs/messages-table.etspec.h:1
 msgid "Comment"
@@ -1688,13 +1692,3 @@ msgstr ".po ファイルの圧縮完了"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr ".po ファイルの Gettext 化"
-
-#~ msgid ""
-#~ "New escaped char found: \\%c\n"
-#~ "Add this to parse.c, line %i."
-#~ msgstr ""
-#~ "新規にエスケープ文字が見つかりました: \\%c\n"
-#~ "これを parse.c (%i 行) に追加します。"
-
-#~ msgid "Enable the popup menu"
-#~ msgstr "ポップアップ・メニューを有効にする"
