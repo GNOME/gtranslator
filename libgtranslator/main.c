@@ -48,7 +48,6 @@
 * The static gchar for the language to parse.
 **/
 static gchar	*lang=NULL;
-static gchar	*tuz=NULL;
 
 /**
 * The poptTable for gtranslatord.
@@ -58,10 +57,6 @@ static struct poptOption gtranslatord_options[] = {
 		"parse-db", 'p', POPT_ARG_STRING, &lang,
 		0, N_("The language to parse the db for"), N_("language_code")
 	},
-	{
-		"save-again", 's', POPT_ARG_STRING, &tuz,
-		0, N_("DEBUG: Foo'sh save-again of the db."), N_("Foo")
-	},	
 	POPT_AUTOHELP{NULL}
 };
 
@@ -112,10 +107,6 @@ int main(int argc,char *argv[])
 		if(lang)
 		{
 			parse_db_for_lang(lang);
-			if(tuz)
-			{
-				parse_db_save(messages);
-			}
 		}
 		/**
 		* Again this preliminary GConf stuff.

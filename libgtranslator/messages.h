@@ -1,11 +1,16 @@
 /**
-* Fatih Demir <kabalak@gmx.net>
-* Gediminas Paulauskas <menesis@delfi.lt>
-* 
-* (C) 2000 Published under GNU GPL V 2.0+
 *
-* The messages-general stuff will be stored here .
+* (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
+*          Gediminis Paulauskas -- menesis / menesis@delfi.lt
 *
+* This is distributed under the GNU GPL V 2.0 or higher which can be
+*  found in the file COPYING for further studies.
+*
+* Enjoy this piece of software, brain-crack and other nice things.
+*
+* WARNING: Trying to decode the source-code may be hazardous for all your
+*       future development in direction to better IQ-Test rankings!
+*       
 **/
 
 #ifndef MESSAGES_H

@@ -17,80 +17,16 @@
 #include <libgtranslator/handle-db.h>
 
 /**
-* Adds a node to the given doc.
+* This function saves the given database.
 **/
-gint gtranslator_add_node_to_doc(xmlDocPtr doc,
-        gchar *nodename, gchar *nodecontent)
+void gtranslator_save_db(GtranslatorDatabase database)
 {
 	/**
-	* Check if a nodename has been defined.
+	* First a check.
 	**/
-	if(!nodename)
+	if(!database)
 	{
-		g_warning(_("No node name given!"));
-			return 1;
+		g_warning(_("No translation database given to store."));
+		return;
 	}
-	/**
-	* Check for the content.
-	**/
-	if(!nodecontent)
-	{
-		g_warning(_("No content for the node `%s' given! Leaving node empty.."),nodename);
-		nodecontent="";	
-	}
-	/**
-	* Check the doc.
-	**/
-	if(!doc)
-	{
-		g_warning(_("No document present to add the node `%s'\n"),nodename);
-			return 1;
-	}
-	else
-	{
-		/**
-		* Hmm, open and add the node.
-		**/
-		xmlNodePtr newnode=NULL, addnode=NULL;
-		/**
-		* Get the nodes.
-		**/
-		newnode=doc->root->childs;
-		/**
-		* Again a simply check.
-		**/
-		if(!newnode)
-		{
-			g_warning(_("Couldn't get the nodes!"));
-				return 1;
-		}
-		/**
-		* Set the node properties with the given parameters.
-		**/
-		addnode=xmlNewDocNode(doc, NULL, nodename, nodecontent);
-		/**
-		* Check if the node could be created.
-		**/
-		if(!addnode)
-		{
-			g_warning(_("Couldn't generate node `%s'!"), nodename);
-				return 1;
-		}
-		xmlAddChild(newnode, addnode);
-		/**
-		* Free all the stuff.
-		**/
-		if(newnode)
-		{
-			xmlFreeNode(newnode);
-		}
-		if(addnode)
-		{	
-			xmlFreeNode(addnode);
-		}	
-		/**
-		* Return 0
-    		**/
-		return 0;
-	}	
 }

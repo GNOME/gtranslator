@@ -43,7 +43,9 @@ libgtranslator_include_dir = $(includedir)/libgtranslator
 
 libgtranslator_include__DATA = \
 	gtranslator-preferences-dialog.h \
+	gtranslatord.h \
 	handle-db.h \
+	libgtranslator.h \
 	messages.h \
 	parse-db.h \
 	preferences.h \

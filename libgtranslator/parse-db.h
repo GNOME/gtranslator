@@ -10,8 +10,6 @@
 * WARNING: Trying to decode the source-code may be hazardous for all your
 *	future development in direction to better IQ-Test rankings!
 *
-* PSC: This has been completely written with vim; the best editor of all.
-*
 **/
 
 #ifndef PARSE_DB_H
@@ -58,11 +56,5 @@ GList *messages;
 * Loads the message database for the specified language.
 **/
 void parse_db_for_lang(gchar *language_code);
-
-/**
-* This saves the given GList as the language's message
-*  database file.
-**/
-void parse_db_save(GList *list);
 
 #endif

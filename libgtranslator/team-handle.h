@@ -10,8 +10,6 @@
 * WARNING: Trying to decode the source-code may be hazardous for all your
 *	future development in direction to better IQ-Test rankings!
 *
-* PSC: This has been completely written with vim; the best editor of all.
-*
 **/
 
 #ifndef TEAM_HANDLE_H

@@ -1,3 +1,48 @@
+2000-10-28  Fatih Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Added gtranslatord.h and the new
+		libgtranslator.h headers to the include
+		 list of libgtranslator.
+	
+	* libgtranslator.h: A central header for 
+		libgtranslator which includes all the other
+		 headers of libgtranslator (like gnome.h
+		  for libgnome/libgnomeui).
+
+	* handle-db.c/h: Added the new gtranslator_save_db
+		function which is for now also a skeleton.
+
+	* translation-database.h: Made the filename
+		part of the structure use a gchar array
+		 and removed the static database declaration.
+
+	* main.c: Removed the pars_db_save function call
+		as this function is now removed; also
+		 removed the option for this previous
+		  function call and the corresponding
+		   static gchar variable.
+
+	* parse-db.c/.h: Removed the parse_db_save function
+		as it hasn't got to do anything with
+		 the parsing of the message database.
+
+	* handle-db.c/.h: Removed the one and lonely
+		function previously stored here;
+		 this file will include the generally
+		  used and important functions for
+		   the message database handling.
+
+	* gtranslator-preferences-dialog.c: Made the 
+		default header title translatable,
+		 added more parts of the creation 
+		  dialog( the pane, clist etc.).
+
+	* *.h/.c: Removed one line from the start
+		notice.
+	
+	* messages.h: Made the header also according to
+		the rest of libgtranslator :-)
+
 2000-10-25  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Also define the G_LOG_DOMAIN as
