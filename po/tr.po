@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.18\n"
-"POT-Creation-Date: 2000-05-14 12:36+0200\n"
-"PO-Revision-Date: 2000-05-13 13:18+0200\n"
+"POT-Creation-Date: 2000-05-14 21:30+0200\n"
+"PO-Revision-Date: 2000-05-14 21:30+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -80,7 +80,7 @@ msgstr "_Mesajlar"
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/interface.c:271
+#: src/gtr_dialogs.c:129 src/interface.c:271
 msgid "Search"
 msgstr "Ara"
 
@@ -206,7 +206,7 @@ msgstr "Çýk"
 #. * If there are any problems , give a
 #. *  message ..
 #. *
-#: src/parse.c:32
+#: src/parse.c:34
 #, c-format
 msgid ""
 "\n"
@@ -215,7 +215,7 @@ msgstr ""
 "\n"
 "Dosya akýmý kayboldu! Hata no. `%i'"
 
-#: src/parse.c:53
+#: src/parse.c:55
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
@@ -223,7 +223,7 @@ msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
 #. *
 #. * Set up a status message
 #. *
-#: src/parse.c:58
+#: src/parse.c:60
 #, c-format
 msgid "Current file : \"%s\"."
 msgstr "Geçerli dosya : \"%s\"."
@@ -231,7 +231,7 @@ msgstr "Geçerli dosya : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:94
+#: src/parse.c:92
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
@@ -239,13 +239,13 @@ msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 #.
 #. * Set up an informative status message
 #. *
-#: src/parse.c:111
+#: src/parse.c:109
 msgid "Parsing the list entries."
-msgstr "Liste birimlerini tar#_iyorum."
+msgstr "Liste birimlerini tarýyorum."
 
-#: src/parse.c:171
+#: src/parse.c:170
 msgid "Parsing has been successfull."
-msgstr "Tarama baþar#_il#_i oldu."
+msgstr "Tarama baþarýlý oldu."
 
 #. *
 #. * 3.1) No list, no fun
@@ -322,7 +322,7 @@ msgstr "gtranslator -- açýlanacak dosyayý seç"
 
 #: src/gtr_dialogs.c:65
 msgid "Select your desired po-file to open"
-msgstr "A#_c#_ilacak po-dosyas#_in#_i belirle"
+msgstr "Açýlacak po-dosyasýný belirle"
 
 #: src/gtr_dialogs.c:84
 msgid "gtranslator -- save file as .."
@@ -330,7 +330,22 @@ msgstr "gtranslator -- kaydedilinecek dosyayý seç .."
 
 #: src/gtr_dialogs.c:97
 msgid "Select your filename to which the po-file should be saved to."
-msgstr "Po-dosyas#_in#_i kaydedilecek dosyay#_i belirle."
+msgstr "Po-dosyasýný kaydedilecek dosyayý belirle."
+
+#: src/gtr_dialogs.c:122
+msgid "gtranslator -- search-box"
+msgstr "gtranslator -- arama-kutusu"
+
+#. *
+#. * Set up the information label
+#. *
+#: src/gtr_dialogs.c:127
+msgid "Enter your desired search string: "
+msgstr "Aranacak metni belirle: "
+
+#: src/gtr_dialogs.c:130
+msgid "Cancel"
+msgstr "Iptal"
 
 #: src/support.c:111 src/support.c:151
 #, c-format

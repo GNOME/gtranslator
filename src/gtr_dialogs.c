@@ -107,3 +107,63 @@ void save_file_as(GtkWidget *widget,gpointer useless)
 {
 	save_file_as_show();
 }
+
+/**
+* The search-box routines
+**/
+void s_box_create()
+{
+	GtkWidget *s_box_label;
+	/**
+	* Create a gtk_dialog. This will be used as a 
+	*  search-box-dialog.	
+	**/
+	s_box_dlg=gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(s_box_dlg),_("gtranslator -- search-box"));
+	gtk_window_set_wmclass(GTK_WINDOW(s_box_dlg),"gtranslator -- search-box","gtranslator -- search-box");
+	/**
+	* Set up the information label 
+	**/
+	s_box_label=gtk_label_new(_("Enter your desired search string: "));
+	s_box_string=gnome_entry_new("SEARCH");
+	s_box_ok=gtk_button_new_with_label(_("Search"));
+	s_box_cancel=gtk_button_new_with_label(_("Cancel"));
+	/**
+	* Add the widgets to the dialog.
+	**/
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(s_box_dlg)->action_area),s_box_ok);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(s_box_dlg)->action_area),s_box_cancel);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(s_box_dlg)->vbox),s_box_label);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(s_box_dlg)->vbox),s_box_string);
+	/**
+	* Show the inserted widgets first
+	**/
+	gtk_widget_show(s_box_ok);
+	gtk_widget_show(s_box_cancel);
+	gtk_widget_show(s_box_label);
+	gtk_widget_show(s_box_string);
+	/**
+	* Connect the widgets to the signals
+	**/
+	gtk_signal_connect(GTK_OBJECT(s_box_cancel),"clicked",
+		GTK_SIGNAL_FUNC(s_box_hide),NULL);
+	gtk_signal_connect(GTK_OBJECT(s_box_ok),"clicked",
+		/* TODO */
+		NULL,NULL);
+}
+
+void s_box_show()
+{
+	s_box_create();
+	gtk_widget_show(s_box_dlg);
+}
+
+void s_box_hide(GtkWidget *widget,gpointer useless)
+{
+	gtk_widget_hide(s_box_dlg);
+}
+
+void s_box(GtkWidget *widget,gpointer useless)
+{
+	s_box_show();
+}

@@ -18,6 +18,8 @@
 **/
 FILE *fs;
 
+GList *a;
+
 /**
 * A simple stream-check (I love the ifstream.good()-func from C++ ....)
 **/
@@ -42,9 +44,9 @@ void parse(gchar *po)
 	/**
 	* Some variables
 	**/
-	gchar temp_char[126];
+	gchar temp_char[128];
 	gchar *zamane;
-        guint lines=1;
+        guint lines=1,z=0;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
@@ -57,11 +59,14 @@ void parse(gchar *po)
         **/
         sprintf(status,_("Current file : \"%s\"."),po);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);	
-	gnome_appbar_refresh(GNOME_APPBAR(appbar1));
         /**
         * Open the parse fstream
         **/
         fs=fopen(po,"r+");
+	/**
+	* Check the file-stream
+	**/
+	check_file(fs);
         /**
         * Allocate the lists
         **/
@@ -71,10 +76,22 @@ void parse(gchar *po)
         * Parse the file ...
         **/
         while(
-        fgets(status,sizeof(temp_char),fs) != NULL
+        fgets(temp_char,sizeof(temp_char),fs)!=NULL
         )
         {
-                temp=g_list_append(temp,(gpointer)temp_char);
+		z++;
+		if(!g_strncasecmp(temp_char,"#: ",3))
+		{
+			g_print("Line descriptor ar line %i\n",z);
+		}
+		if(!g_strncasecmp(temp_char,"msgid \"",7))
+		{
+			g_print("Msgid at line %i\n",z);
+		}
+		if(!g_strncasecmp(temp_char,"msgstr \"",8))
+		{
+			g_print("Msgstr at line %i\n",z);
+		}
         }
         /**
         * The list length ( aka lines count )
@@ -85,7 +102,6 @@ void parse(gchar *po)
         **/
         sprintf(status,_("Finished reading \"%s\", %i lines."),po,lines);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
-	gnome_appbar_refresh(GNOME_APPBAR(appbar1));
 	/**
 	* So the other functions can get a point 
 	**/
@@ -97,67 +113,6 @@ void parse(gchar *po)
 	**/
 	usleep(150000);
 	#endif // HAVE_USLEEP
-	/*
-	* Set up an informative status message
-	**/
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing the list entries."));
-        for(count=1;count<(lines-1);count++)
-        {
-		/**
-                * Create a gtr_msg structure(*)
-                **/
-		gtr_msg *message[count];
-		/**
-		* Get the current data into a temp. char
-		**/
-        	(gpointer)zamane=g_list_nth_data(temp,count);
-		g_print("<`%i'> `%s'.\n",count,(gchar *)zamane);
-		if(!g_strcasecmp(zamane,"msgid \""))
-		{
-			message[count]->msgid=zamane;
-			message[count]->pos=count;
-			g_print("Birim `%i' : `%s' .\n",message[count]->pos,message[count]->msgid);
-		}
-		else
-		{
-			/**
-			* If we do get a "^msgstr" :
-			**/
-			if(!g_strcasecmp(zamane,"msgstr \""))
-			{
-				/**
-				* Check if a msgid has been already found.
-				**/
-				if(message[count]->msgid)
-				{
-					/**
-					* If we've got one set the struct infos
-					**/
-					message[count]->msgstr=zamane;
-					/**
-					* A fake comment as I'dn't integrated	
-					*  a comments-setting function yet.
-					**/
-					message[count]->comment="An example comment";
-					/**
-					* If the msgstr contains more than msgstr ""
-					**/
-					if(strlen(zamane)>8)	
-					{
-						message[count]->msg_status=GTRANSLATOR_MSG_STATUS_TRANSLATED;
-					}
-					/**
-					* If not set the approximiate status.
-					**/
-					else
-					{
-						message[count]->msg_status=GTRANSLATOR_MSG_STATUS_UNTRANSLATED;
-					}
-				}
-			}
-		}
-        }
-		
 	/**
 	* As we've got finished we can do some nonsense
 	**/

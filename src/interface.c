@@ -443,6 +443,8 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(prefs_box_show),NULL);
 	gtk_signal_connect(GTK_OBJECT(compile_button),"clicked",
 		GTK_SIGNAL_FUNC(compile),NULL);
+	gtk_signal_connect(GTK_OBJECT(search_button),"clicked",
+		GTK_SIGNAL_FUNC(s_box),NULL);
 	gtk_signal_connect(GTK_OBJECT(open_button),"clicked",
 		GTK_SIGNAL_FUNC(open_file_show),NULL);	
 	gtk_signal_connect(GTK_OBJECT(save_as_button),"clicked",

@@ -53,6 +53,12 @@ GtkWidget *prefs_box_help_dlg;
 gchar *prefs_box_help_help;
 
 /**
+* 6/The search dialog widgets
+**/
+GtkWidget *s_box_dlg,*s_box_string;
+GtkWidget *s_box_ok,*s_box_cancel;
+
+/**
 * The function prototypes :
 **/
 void compile_error_dialog(GtkWidget *widget,gpointer useless);
@@ -74,5 +80,13 @@ void open_file(GtkWidget *widget,gpointer useless);
 * The help-box for the preferences box
 **/
 void prefs_box_help(GtkWidget *widget,gpointer useless);
+
+/**
+* The search-box routines
+**/
+void s_box_create();
+void s_box_show();
+void s_box_hide(GtkWidget *widget,gpointer useless);
+void s_box(GtkWidget *widget,gpointer useless);
 
 #endif // GTR_GTR_DIALOGS_H
