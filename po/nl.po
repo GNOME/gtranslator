@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gtranslator\n"
-"POT-Creation-Date: 2000-07-13 15:00+0200\n"
+"POT-Creation-Date: 2000-08-04 00:00+0200\n"
 "PO-Revision-Date: 2000-07-13 15:00+0200\n"
 "Last-Translator: Dennis Smit <synap@area101.penguin.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -17,25 +17,13 @@ msgstr ""
 msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 msgstr "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 
-#: src/about.c:28
+#: src/about.c:24
 msgid ""
-"gtranslator is a Gnome Application for translating .po-files slightly "
-"different than in (X)Emacs.\n"
-"Till now you can't see much, but that will change! At least till R 0.20."
+"gtranslator will be a Gnome framework for translating these emminent "
+"important po-files.\n"
+"It will be based upon a gtranslatord and a gtranslator client. Wish the best "
+"for us translators and for me!"
 msgstr ""
-"gtranslator is een Gnome Applicatie voor het vertalen van .po-files "
-"anderes dan in (X)Emacs.\n"
-"Tot nu toe kun je nog niet zoveel zien MAAR DAT GAAT VERANDEREN!"
-
-#: src/about.c:30
-msgid ""
-"gtranslator is a Gnome Application for translating .po-files more "
-"comfortable than in (X)Emacs.\n"
-"Till now you can't see much, but that will change! At least till R 0.20."
-msgstr ""
-"gtranslator is een Gnome Applicatie voor het vertalen van .po-files "
-"het is meer confortabel dan (X)Emacs.\n"
-"tot nu toe kun je nog niet veel zien maar dat gaat veranderen."
 
 #: src/gtr_dialogs.c:21
 msgid ""
@@ -149,19 +137,19 @@ msgstr "Query"
 msgid "gtranslator -- query the message db"
 msgstr "gtranslator -- message db queryen"
 
-#: src/gtr_dialogs.c:458
+#: src/gtr_dialogs.c:457
 #, c-format
 msgid "Result: `%s'"
 msgstr "Resultaten: `%s'"
 
-#: src/gtr_dialogs.c:475
+#: src/gtr_dialogs.c:474
 msgid "Insert"
 msgstr "Invoegen"
 
 #. *
 #. * Set the window properties.
 #. *
-#: src/gtr_dialogs.c:479
+#: src/gtr_dialogs.c:478
 msgid "gtranslator -- result for your query"
 msgstr "gtranslator -- resultaten voor uw query"
 
@@ -169,26 +157,30 @@ msgstr "gtranslator -- resultaten voor uw query"
 msgid "Error while applying the header!"
 msgstr "Fout bij aanmelden van header!"
 
-#: src/header_stuff.c:66
+#: src/header_stuff.c:50
+msgid "Header has been pased successfully."
+msgstr ""
+
+#: src/header_stuff.c:69
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "De header lijkt niet goed geparsed te zijn"
 
-#: src/header_stuff.c:68
+#: src/header_stuff.c:71
 msgid "Project name:"
 msgstr "Project naam:"
 
-#: src/header_stuff.c:69
+#: src/header_stuff.c:72
 msgid "Project version:"
 msgstr "Project versie:"
 
-#: src/header_stuff.c:70
+#: src/header_stuff.c:73
 msgid "Use my personal options to fill out the rest of the header."
 msgstr ""
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:79
+#: src/header_stuff.c:82
 msgid "gtranslator -- edit header"
 msgstr ""
 
@@ -312,7 +304,7 @@ msgid "_Messages"
 msgstr ""
 
 #: src/gui.c:399 src/gui.c:402
-msgid "Message _status"
+msgid "Message s_tatus"
 msgstr ""
 
 #: src/gui.c:406 src/gui.c:409
@@ -620,44 +612,48 @@ msgstr ""
 msgid "Welsh"
 msgstr ""
 
-#: src/main.c:31
+#: src/main.c:39
 msgid "Sets the minimum match for query"
 msgstr ""
 
-#: src/main.c:35
+#: src/main.c:43
 msgid "Po-file to open at startup"
 msgstr ""
 
-#: src/main.c:39
+#: src/main.c:47
 msgid "Specifies the main-window geometry"
 msgstr ""
 
-#: src/main.c:43
+#: src/main.c:51
 msgid "The messages db to use"
 msgstr ""
 
-#: src/main.c:47
+#: src/main.c:55
 msgid "Query the messages db & exit"
+msgstr ""
+
+#: src/main.c:59
+msgid "Team to append"
 msgstr ""
 
 #. *
 #. * Simply print it out.
 #. *
-#: src/main.c:112
+#: src/main.c:176
 #, c-format
 msgid "Getting results for query: `%s' ...\n"
 msgstr ""
 
-#: src/main.c:117
+#: src/main.c:181
 #, c-format
-msgid "Result                   :  %s."
+msgid "Result                   :  %s"
 msgstr ""
 
-#: src/main.c:119
+#: src/main.c:183
 msgid "End of query.\n"
 msgstr ""
 
-#: src/main.c:179
+#: src/main.c:243
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr ""
@@ -665,12 +661,12 @@ msgstr ""
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:198
+#: src/main.c:262
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr ""
 
-#: src/main.c:199
+#: src/main.c:263
 msgid "Skipping it."
 msgstr ""
 
@@ -702,14 +698,10 @@ msgstr ""
 msgid "Got no message entry!\n"
 msgstr ""
 
-#: src/msg_db.c:136
-msgid "New message entry has wrong/non-logical length.\n"
-msgstr ""
-
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:175
+#: src/msg_db.c:167
 #, c-format
 msgid "The message db `%s' seems not to be initted!\n"
 msgstr ""
@@ -717,7 +709,7 @@ msgstr ""
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:179
+#: src/msg_db.c:171
 msgid "Not available"
 msgstr ""
 
@@ -725,22 +717,22 @@ msgstr ""
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:187
+#: src/msg_db.c:179
 msgid "No messages list ( msg_list ) available for acting on it!\n"
 msgstr ""
 
-#: src/msg_db.c:225
+#: src/msg_db.c:217
 msgid "No entry found in the messages db "
 msgstr ""
 
-#: src/msg_db.c:236
+#: src/msg_db.c:228
 msgid "The messages db isn't inited."
 msgstr ""
 
 #. *
 #. * Gives a warning message.
 #. *
-#: src/msg_db.c:265
+#: src/msg_db.c:257
 msgid "Trying to set an irregular challange length!"
 msgstr ""
 
@@ -772,20 +764,20 @@ msgstr ""
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:205
+#: src/parse.c:201
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr ""
 
-#: src/parse.c:222
+#: src/parse.c:218
 msgid "Parsing has been successfull."
 msgstr ""
 
-#: src/parse.c:293
+#: src/parse.c:289
 msgid "You've reached the first message"
 msgstr ""
 
-#: src/parse.c:330
+#: src/parse.c:326
 msgid "You've reached the last message."
 msgstr ""
 
@@ -859,3 +851,93 @@ msgstr ""
 #: src/prefs.c:62
 msgid "Use the messages db"
 msgstr ""
+
+#: src/prefs.c:406
+msgid "Can't store filename!"
+msgstr ""
+
+#: src/prefs.c:434
+msgid "Couldn't recall the file's name."
+msgstr ""
+
+#: src/find.c:32
+msgid "Nothing appropriate found!"
+msgstr ""
+
+#: src/find.c:54
+msgid "No query, no fun."
+msgstr ""
+
+#: libgtranslator/parse-db.c:32
+msgid "No language defined in the query request!"
+msgstr ""
+
+#. *
+#. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
+#. * Just show a message that tells this.
+#. *
+#: libgtranslator/parse-db.c:43
+msgid "FYI: Will also lookup the superclass message db.\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:63
+#, c-format
+msgid "Couldn't open language base file `%s.xml' in %s.\n"
+msgstr ""
+
+#. *
+#. * Print some information.
+#. *
+#: libgtranslator/parse-db.c:76
+#, c-format
+msgid "Subclass file `%s.xml' not found.\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:77
+#, c-format
+msgid "Trying superclass-file `%s.xml' ...\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:137
+msgid "The message db file is empty!"
+msgstr ""
+
+#: libgtranslator/parse-db.c:143
+#, fuzzy
+msgid "The message db doesn't seem to be a message db xml file."
+msgstr "De header lijkt niet goed geparsed te zijn"
+
+#: libgtranslator/team-handle.c:32
+msgid "No language/team code defined to register!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:67
+msgid "Team is already registered!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:113
+#, c-format
+msgid "Teams file `teams.xml` in %s couldn't be opened!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:149
+msgid "Couldn't return the list of the apps."
+msgstr ""
+
+#~ msgid ""
+#~ "gtranslator is a Gnome Application for translating .po-files slightly "
+#~ "different than in (X)Emacs.\n"
+#~ "Till now you can't see much, but that will change! At least till R 0.20."
+#~ msgstr ""
+#~ "gtranslator is een Gnome Applicatie voor het vertalen van .po-files anderes "
+#~ "dan in (X)Emacs.\n"
+#~ "Tot nu toe kun je nog niet zoveel zien MAAR DAT GAAT VERANDEREN!"
+
+#~ msgid ""
+#~ "gtranslator is a Gnome Application for translating .po-files more "
+#~ "comfortable than in (X)Emacs.\n"
+#~ "Till now you can't see much, but that will change! At least till R 0.20."
+#~ msgstr ""
+#~ "gtranslator is een Gnome Applicatie voor het vertalen van .po-files het is "
+#~ "meer confortabel dan (X)Emacs.\n"
+#~ "tot nu toe kun je nog niet veel zien maar dat gaat veranderen."

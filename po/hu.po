@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gtranslator VERSION\n"
-"POT-Creation-Date: 2000-07-23 20:16+0200\n"
+"POT-Creation-Date: 2000-08-04 00:00+0200\n"
 "PO-Revision-Date: 2000-07-23 21:02+0200\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -17,27 +17,13 @@ msgstr ""
 msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 msgstr "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 
-#: src/about.c:28
+#: src/about.c:24
 msgid ""
-"gtranslator is a Gnome Application for translating .po-files slightly "
-"different than in (X)Emacs.\n"
-"Till now you can't see much, but that will change! At least till R 0.20."
+"gtranslator will be a Gnome framework for translating these emminent "
+"important po-files.\n"
+"It will be based upon a gtranslatord and a gtranslator client. Wish the best "
+"for us translators and for me!"
 msgstr ""
-"A gtranslator egy Gnome-os segédalkalmazás .po fájlok fordításához. Kicsit "
-"különbözik az (X)Emacs-tõl.\n"
-"Most még nem látszik sok belõle, de ez változni fog! Az R 0.20-as verziótól "
-"biztosan."
-
-#: src/about.c:30
-msgid ""
-"gtranslator is a Gnome Application for translating .po-files more "
-"comfortable than in (X)Emacs.\n"
-"Till now you can't see much, but that will change! At least till R 0.20."
-msgstr ""
-"A gtranslator egy Gnome-os segédalkalmazás .po fájlok fordításához. Kicsit "
-"kényelmesebb az (X)Emacs-nál.\\n\"\n"
-"\"Most még nem látszik sok belõle, de ez változni fog! Az R 0.20-as "
-"verziótól biztosan."
 
 #: src/gtr_dialogs.c:21
 msgid ""
@@ -149,19 +135,19 @@ msgstr "Lekérdezés"
 msgid "gtranslator -- query the message db"
 msgstr "gtranslator -- lekérdezés az üzenet-adatbázisból"
 
-#: src/gtr_dialogs.c:458
+#: src/gtr_dialogs.c:457
 #, c-format
 msgid "Result: `%s'"
 msgstr "Eredmény: `%s'"
 
-#: src/gtr_dialogs.c:475
+#: src/gtr_dialogs.c:474
 msgid "Insert"
 msgstr "Beszúr"
 
 #. *
 #. * Set the window properties.
 #. *
-#: src/gtr_dialogs.c:479
+#: src/gtr_dialogs.c:478
 msgid "gtranslator -- result for your query"
 msgstr "gtranslator -- lekérdezés eredménye"
 
@@ -169,30 +155,30 @@ msgstr "gtranslator -- lekérdezés eredménye"
 msgid "Error while applying the header!"
 msgstr "Hiba a fejléc alkalmazásakor!"
 
-#: src/header_stuff.c:44
+#: src/header_stuff.c:50
 msgid "Header has been pased successfully."
 msgstr "A fejléc értelmezés sikeresen befejezõdött."
 
-#: src/header_stuff.c:63
+#: src/header_stuff.c:69
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Úgy tünik nem sikerült a fejlécet értelmezni."
 
-#: src/header_stuff.c:65
+#: src/header_stuff.c:71
 msgid "Project name:"
 msgstr "Projekt neve:"
 
-#: src/header_stuff.c:66
+#: src/header_stuff.c:72
 msgid "Project version:"
 msgstr "Projekt verziója:"
 
-#: src/header_stuff.c:67
+#: src/header_stuff.c:73
 msgid "Use my personal options to fill out the rest of the header."
 msgstr "Használd a személyes beálltásokat a fennmaradó rész kitöltéséhez."
 
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:76
+#: src/header_stuff.c:82
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- fejléc szerkesztése"
 
@@ -316,7 +302,8 @@ msgid "_Messages"
 msgstr "Ü_zenetek"
 
 #: src/gui.c:399 src/gui.c:402
-msgid "Message _status"
+#, fuzzy
+msgid "Message s_tatus"
 msgstr "Ü_zenet státusza"
 
 #: src/gui.c:406 src/gui.c:409
@@ -624,44 +611,48 @@ msgstr "Wallon"
 msgid "Welsh"
 msgstr "Velszi"
 
-#: src/main.c:35
+#: src/main.c:39
 msgid "Sets the minimum match for query"
 msgstr "Legalább ekkora egyezés"
 
-#: src/main.c:39
+#: src/main.c:43
 msgid "Po-file to open at startup"
 msgstr "Induláskor megnyitandó po fájl"
 
-#: src/main.c:43
+#: src/main.c:47
 msgid "Specifies the main-window geometry"
 msgstr "Megadja a fõablak geometriáját"
 
-#: src/main.c:47
+#: src/main.c:51
 msgid "The messages db to use"
 msgstr "Használandó üzenet-adatbázis"
 
-#: src/main.c:51
+#: src/main.c:55
 msgid "Query the messages db & exit"
 msgstr "Üzenet-adatbázist lekérdezi és kilép"
+
+#: src/main.c:59
+msgid "Team to append"
+msgstr ""
 
 #. *
 #. * Simply print it out.
 #. *
-#: src/main.c:119
+#: src/main.c:176
 #, c-format
 msgid "Getting results for query: `%s' ...\n"
 msgstr "`%s' lekérdezése folyamatban...\n"
 
-#: src/main.c:124
-#, c-format
-msgid "Result                   :  %s."
+#: src/main.c:181
+#, fuzzy, c-format
+msgid "Result                   :  %s"
 msgstr "Eredmény                 :  %s."
 
-#: src/main.c:126
+#: src/main.c:183
 msgid "End of query.\n"
 msgstr "Lekérdezés vége.\n"
 
-#: src/main.c:186
+#: src/main.c:243
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr ""
@@ -669,12 +660,12 @@ msgstr ""
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:205
+#: src/main.c:262
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "A \"%s\" fájl nem létezik, vagy nem olvasható!"
 
-#: src/main.c:206
+#: src/main.c:263
 msgid "Skipping it."
 msgstr "Átugrom."
 
@@ -775,20 +766,20 @@ msgstr "Aktuális fájl : \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:203
+#: src/parse.c:201
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\" olvasása befejezõdött, %i sort olvastam."
 
-#: src/parse.c:220
+#: src/parse.c:218
 msgid "Parsing has been successfull."
 msgstr "Az értelmezés sikeresen befejezõdött."
 
-#: src/parse.c:291
+#: src/parse.c:289
 msgid "You've reached the first message"
 msgstr "Elétred az elsõ üzenetet."
 
-#: src/parse.c:328
+#: src/parse.c:326
 msgid "You've reached the last message."
 msgstr "Elérted az utolsó üzenetet."
 
@@ -863,6 +854,14 @@ msgstr "Ne mentsd a változatlan po fájlokat"
 msgid "Use the messages db"
 msgstr "Használd az üzenet-adatbázist"
 
+#: src/prefs.c:406
+msgid "Can't store filename!"
+msgstr ""
+
+#: src/prefs.c:434
+msgid "Couldn't recall the file's name."
+msgstr ""
+
 #: src/find.c:32
 msgid "Nothing appropriate found!"
 msgstr "Nem találtam megfelelõ üzenetet!"
@@ -870,6 +869,83 @@ msgstr "Nem találtam megfelelõ üzenetet!"
 #: src/find.c:54
 msgid "No query, no fun."
 msgstr "Nincs lekérdezés, nincs móka."
+
+#: libgtranslator/parse-db.c:32
+msgid "No language defined in the query request!"
+msgstr ""
+
+#. *
+#. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
+#. * Just show a message that tells this.
+#. *
+#: libgtranslator/parse-db.c:43
+msgid "FYI: Will also lookup the superclass message db.\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:63
+#, c-format
+msgid "Couldn't open language base file `%s.xml' in %s.\n"
+msgstr ""
+
+#. *
+#. * Print some information.
+#. *
+#: libgtranslator/parse-db.c:76
+#, c-format
+msgid "Subclass file `%s.xml' not found.\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:77
+#, c-format
+msgid "Trying superclass-file `%s.xml' ...\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:137
+#, fuzzy
+msgid "The message db file is empty!"
+msgstr "Használandó üzenet-adatbázis"
+
+#: libgtranslator/parse-db.c:143
+#, fuzzy
+msgid "The message db doesn't seem to be a message db xml file."
+msgstr "Úgy tünik nem sikerült a fejlécet értelmezni."
+
+#: libgtranslator/team-handle.c:32
+msgid "No language/team code defined to register!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:67
+msgid "Team is already registered!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:113
+#, c-format
+msgid "Teams file `teams.xml` in %s couldn't be opened!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:149
+msgid "Couldn't return the list of the apps."
+msgstr ""
+
+#~ msgid ""
+#~ "gtranslator is a Gnome Application for translating .po-files slightly "
+#~ "different than in (X)Emacs.\n"
+#~ "Till now you can't see much, but that will change! At least till R 0.20."
+#~ msgstr ""
+#~ "A gtranslator egy Gnome-os segédalkalmazás .po fájlok fordításához. Kicsit "
+#~ "különbözik az (X)Emacs-tõl.\n"
+#~ "Most még nem látszik sok belõle, de ez változni fog! Az R 0.20-as verziótól "
+#~ "biztosan."
+
+#~ msgid ""
+#~ "gtranslator is a Gnome Application for translating .po-files more "
+#~ "comfortable than in (X)Emacs.\n"
+#~ "Till now you can't see much, but that will change! At least till R 0.20."
+#~ msgstr ""
+#~ "A gtranslator egy Gnome-os segédalkalmazás .po fájlok fordításához. Kicsit "
+#~ "kényelmesebb az (X)Emacs-nál.\\n\"\n"
+#~ "\"Most még nem látszik sok belõle, de ez változni fog! Az R 0.20-as "
+#~ "verziótól biztosan."
 
 #~ msgid "A test option"
 #~ msgstr "Egy teszt opció"

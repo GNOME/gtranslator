@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.18\n"
-"POT-Creation-Date: 2000-05-20 17:32+0200\n"
+"POT-Creation-Date: 2000-08-04 00:00+0200\n"
 "PO-Revision-Date: 2000-05-15 00:22+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@dacome.co.kr>\n"
 "Language-Team: korean <ko@li.org>\n"
@@ -12,292 +12,17 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.c:35
-msgid "Po-file to open at startup"
-msgstr "시작할때 Po파일 열기"
-
-#: src/main.c:39
-msgid "A test option"
-msgstr "시험 옵션"
-
-#: src/main.c:43
-msgid "The msg_db to use"
-msgstr "사용할 msg_db"
-
-#: src/main.c:47
-msgid "Specifies the main-window geometry"
+#: src/about.c:22
+msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
 msgstr ""
 
-#: src/main.c:124
-#, c-format
-msgid "The geometry string \"%s\" coulnd't be parsed!"
-msgstr ""
-
-#. *
-#. * If the file isn't openable give a warning
-#. *
-#: src/main.c:143
-#, c-format
-msgid "The file \"%s\" doesn't exist or isn't readable!"
-msgstr "\"%s\"파일이 없거나 읽을수 없습니다!"
-
-#: src/main.c:144
-msgid "Skipping it."
-msgstr "넘어갑니다."
-
-#: src/interface.c:70
-msgid "No po-file opened which could be compiled."
-msgstr "컴파일할 po파일이 열려있지 않습니다."
-
-#: src/interface.c:125
-msgid "_Compile"
-msgstr "컴파일(_C)"
-
-#: src/interface.c:151
-msgid "Refresh"
-msgstr "다시 읽기"
-
-#: src/interface.c:163
-msgid "_First"
-msgstr "처음(_F)"
-
-#: src/interface.c:170
-msgid "_Back"
-msgstr "앞으로(_B)"
-
-#: src/interface.c:178
-msgid "_Next"
-msgstr "다음(_N)"
-
-#: src/interface.c:185
-msgid "_Last"
-msgstr "마지막(_L)"
-
-#: src/interface.c:204
-msgid "_Online help"
-msgstr "온라인 도움말(_O)"
-
-#: src/interface.c:219 src/interface.c:222
-msgid "_Messages"
-msgstr "메세지(_M)"
-
-#. *
-#. * Create the app
-#. *
-#: src/interface.c:245
-msgid "gtranslator"
-msgstr ""
-
-#: src/gtr_dialogs.c:130 src/interface.c:280
-msgid "Search"
-msgstr "찾기"
-
-#: src/interface.c:281
-msgid "Search for a message"
-msgstr "메세지 찾기"
-
-#: src/interface.c:288
-msgid "ReSearch"
-msgstr "다시 찾기"
-
-#: src/interface.c:289
-msgid "Search again"
-msgstr "다시 찾기"
-
-#: src/interface.c:296
-msgid "Goto"
-msgstr "가기"
-
-#: src/interface.c:297
-msgid "Goto this message"
-msgstr "이 메세지로 가기"
-
-#. *
-#. * Find in the personal catalogue
-#. *
-#: src/interface.c:307
-msgid "F/Cat."
-msgstr "찾기/Cat."
-
-#: src/interface.c:308
-msgid "Find in the personal catalog"
-msgstr "개인 목록에서 찾습니다"
-
-#. *
-#. * Find in the .po-file
-#. *
-#: src/interface.c:318
-msgid "F/Po."
-msgstr "찾기/Po."
-
-#: src/interface.c:319
-msgid "Find in the po file "
-msgstr "po파일에서 찾습니다"
-
-#: src/interface.c:330
-msgid "Compile"
-msgstr "컴파일"
-
-#: src/interface.c:331
-msgid "Compile the po-file"
-msgstr "po파일을 컴파일 합니다"
-
-#: src/interface.c:339
-msgid "Open"
-msgstr "열기"
-
-#: src/interface.c:340
-msgid "Open File"
-msgstr "파일을 엽니다"
-
-#: src/interface.c:348
-msgid "Save"
-msgstr "저장"
-
-#: src/interface.c:349
-msgid "Save File"
-msgstr "파일 저장"
-
-#: src/interface.c:357
-msgid "Save as"
-msgstr "새이름 저장"
-
-#: src/interface.c:358
-msgid "Save file as"
-msgstr "다른이름으로 파일 저장"
-
-#: src/interface.c:366
-msgid "First"
-msgstr "처음"
-
-#: src/interface.c:367
-msgid "Go to the first message"
-msgstr "첫 메세지로 가기"
-
-#: src/interface.c:375
-msgid "Back"
-msgstr "뒤로"
-
-#: src/interface.c:376
-msgid "Go one message back"
-msgstr "한 메세지 뒤로 가기"
-
-#: src/interface.c:384
-msgid "Options"
-msgstr "설정"
-
-#: src/interface.c:385
-msgid "gtranslator options"
-msgstr "gtranslator 설정"
-
-#: src/interface.c:393
-msgid "Next"
-msgstr "다음"
-
-#: src/interface.c:394
-msgid "Go one message forward"
-msgstr "다음 메세지로 가기"
-
-#: src/interface.c:402
-msgid "Last"
-msgstr "마지막"
-
-#: src/interface.c:403
-msgid "Go to the last message"
-msgstr "마지막 메세지로 가기"
-
-#: src/interface.c:411 src/interface.c:412
-msgid "Exit"
-msgstr "종료"
-
-#. *
-#. * If there are any problems , give a
-#. *  message ..
-#. *
-#: src/parse.c:32
-#, c-format
+#: src/about.c:24
 msgid ""
-"\n"
-"The file stream is lost! Error no. `%i'"
+"gtranslator will be a Gnome framework for translating these emminent "
+"important po-files.\n"
+"It will be based upon a gtranslatord and a gtranslator client. Wish the best "
+"for us translators and for me!"
 msgstr ""
-"\n"
-"파일 스트림을 읽어버렸습니다! 오류 번호. `%i'"
-
-#: src/parse.c:53
-#, c-format
-msgid "There's no file to open or I couldn't understand `%s'!"
-msgstr "파일을 열수 없거나 `%s'를 이해할수 없습니다!"
-
-#. *
-#. * Set up a status message
-#. *
-#: src/parse.c:58
-#, c-format
-msgid "Current file : \"%s\"."
-msgstr "현재 파일 : \"%s\"."
-
-#. *
-#. * Show an updated status
-#. *
-#: src/parse.c:135
-#, c-format
-msgid "Finished reading \"%s\", %i lines."
-msgstr "\"%s\" 읽기 완료, %i 줄."
-
-#: src/parse.c:152
-msgid "Parsing has been successfull."
-msgstr "파싱 완료."
-
-#: src/header_stuff.c:17
-msgid "Error while parsing the header!"
-msgstr ""
-
-#. *
-#. * 3.1) No list, no fun
-#. *
-#: src/msg_db.c:63
-msgid "gtranslator lost the list of translations!\n"
-msgstr "gtranslator가 번역 목록을 잃어버렸습니다!\n"
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:100 src/msg_db.c:157
-#, c-format
-msgid "The msg_db `%s' seems not to be inited!\n"
-msgstr "msb_db `%s' 가 초기화 되지 않았습니다!\n"
-
-#. *
-#. * Warn if there isn't any message which could be added
-#. *  to the msg_db .
-#. *
-#: src/msg_db.c:112
-msgid "Got no message entry!\n"
-msgstr "메세지 항목 얻을수 없슴!\n"
-
-#: src/msg_db.c:121
-#, c-format
-msgid "New message entry has wrong/non-logical length : %i\n"
-msgstr "새 메세지 항목이 잘못되었거나 비 논리적인 길이를 가지고 있슴 : %i\n"
-
-#. *
-#. * Return a very "explaining" char* ...
-#. *
-#: src/msg_db.c:161
-msgid "Not available"
-msgstr "가능하지 않음"
-
-#. *
-#. * If there's no msg_list
-#. *  print an error message
-#. *
-#: src/msg_db.c:169
-msgid "No msg_list available for acting on it!\n"
-msgstr "작용하는 msg_list가 없슴!\n"
-
-#: src/msg_db.c:193
-msgid "No entry found in the msg_db."
-msgstr "msg_db에 항목이 없음."
 
 #: src/gtr_dialogs.c:21
 msgid ""
@@ -325,19 +50,19 @@ msgstr ""
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- po파일 열기"
 
-#: src/gtr_dialogs.c:65
+#: src/gtr_dialogs.c:71
 msgid "Select your desired po-file to open"
 msgstr "열려고 하는 po파일을 선택하십시오"
 
-#: src/gtr_dialogs.c:84
+#: src/gtr_dialogs.c:90
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- 다른 이름으로 저장.."
 
-#: src/gtr_dialogs.c:97
+#: src/gtr_dialogs.c:109
 msgid "Select your filename to which the po-file should be saved to."
 msgstr "po파일을 저장하려고 하는 파일이름을 선택하십시오"
 
-#: src/gtr_dialogs.c:122
+#: src/gtr_dialogs.c:134
 #, fuzzy
 msgid "gtranslator -- search-box"
 msgstr "gtranslator -- po파일 열기"
@@ -345,11 +70,15 @@ msgstr "gtranslator -- po파일 열기"
 #. *
 #. * Set up the information label
 #. *
-#: src/gtr_dialogs.c:128
+#: src/gtr_dialogs.c:141
 msgid "Enter your desired search string: "
 msgstr ""
 
-#: src/gtr_dialogs.c:194
+#: src/gtr_dialogs.c:143 src/gui.c:225 src/gui.c:226 src/gui.c:467
+msgid "Search"
+msgstr "찾기"
+
+#: src/gtr_dialogs.c:211
 #, fuzzy
 msgid "GoTo message entry"
 msgstr "메세지 항목 얻을수 없슴!\n"
@@ -357,115 +86,380 @@ msgstr "메세지 항목 얻을수 없슴!\n"
 #. *
 #. * Create the buttons, the entry & the label
 #. *
-#: src/gtr_dialogs.c:199
+#: src/gtr_dialogs.c:217
 msgid "Go!"
 msgstr ""
 
-#: src/gtr_dialogs.c:203
+#: src/gtr_dialogs.c:221
 #, fuzzy
 msgid "Goto the specified message entry."
 msgstr "첫 메세지로 가기"
 
-#: src/support.c:111 src/support.c:151
-#, c-format
-msgid "Couldn't find pixmap file: %s"
-msgstr "그림 파일을 찾을수 없슴: %s"
+#: src/gtr_dialogs.c:276
+#, fuzzy
+msgid "gtranslator -- find in the catalogue"
+msgstr "gtranslator -- po파일 열기"
 
-#: src/support.c:127
-#, c-format
-msgid "Couldn't create pixmap from file: %s"
-msgstr "그림 파일을 생성할수 없슴: %s"
+#: src/gtr_dialogs.c:279
+#, fuzzy
+msgid "gtranslator -- find in the po-file"
+msgstr "gtranslator -- po파일 열기"
 
-#: src/about.c:22
-msgid "(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"
+#: src/gtr_dialogs.c:282
+#, fuzzy
+msgid "gtranslator -- find"
+msgstr "gtranslator 설정"
+
+#: src/gtr_dialogs.c:289 src/gui.c:240 src/gui.c:241
+msgid "Find"
 msgstr ""
 
-#: src/about.c:28
-msgid ""
-"gtranslator is a Gnome Application for translating .po-files slightly "
-"different than in (X)Emacs.\n"
-"Till now you can't see much, but that will change! At least till R 0.20."
+#: src/gtr_dialogs.c:291
+msgid "Ignore the case"
 msgstr ""
-"gtranslator는 (X)Emacs와 약간 다른 그놈 응용프로그램의 po파일 번역기 "
-"입니다.\n"
-"아직은 많은것이 없지만 R 0.20에서는 변경될것 입니다."
-
-#: src/about.c:30
-msgid ""
-"gtranslator is a Gnome Application for translating .po-files more "
-"comfortable than in (X)Emacs.\n"
-"Till now you can't see much, but that will change! At least till R 0.20."
-msgstr ""
-"gtranslator는 (X)Emacs와 약간 다른 그놈 응용프로그램의 po파일 번역기 "
-"입니다.\n"
-"아직은 많은것이 없지만 R 0.20에서는 변경될것 입니다."
 
 #. *
-#. * Create the labels ..
+#. * Create a helping label.
 #. *
-#: src/prefs.c:34
-msgid "Personal informations"
+#: src/gtr_dialogs.c:362
+msgid ""
+"With this query window you can query\n"
+"the message db for an existing entry\n"
+"with your query string."
+msgstr ""
+
+#: src/gtr_dialogs.c:381
+msgid "Query"
+msgstr ""
+
+#. *
+#. * Set the window-properties.
+#. *
+#: src/gtr_dialogs.c:426
+#, fuzzy
+msgid "gtranslator -- query the message db"
+msgstr "gtranslator -- 다른 이름으로 저장.."
+
+#: src/gtr_dialogs.c:457
+#, c-format
+msgid "Result: `%s'"
+msgstr ""
+
+#: src/gtr_dialogs.c:474
+msgid "Insert"
+msgstr ""
+
+#. *
+#. * Set the window properties.
+#. *
+#: src/gtr_dialogs.c:478
+#, fuzzy
+msgid "gtranslator -- result for your query"
+msgstr "gtranslator -- po파일 열기"
+
+#: src/header_stuff.c:22
+msgid "Error while applying the header!"
+msgstr ""
+
+#: src/header_stuff.c:50
+#, fuzzy
+msgid "Header has been pased successfully."
+msgstr "파싱 완료."
+
+#: src/header_stuff.c:69
+msgid "The header doesn't seem to be parsed rightly."
+msgstr ""
+
+#: src/header_stuff.c:71
+msgid "Project name:"
+msgstr ""
+
+#: src/header_stuff.c:72
+msgid "Project version:"
+msgstr ""
+
+#: src/header_stuff.c:73
+msgid "Use my personal options to fill out the rest of the header."
+msgstr ""
+
+#. *
+#. * Set the window-specs.
+#. *
+#: src/header_stuff.c:82
+#, fuzzy
+msgid "gtranslator -- edit header"
+msgstr "gtranslator -- po파일 열기"
+
+#: src/gui.c:84
+msgid "No po-file opened which could be compiled."
+msgstr "컴파일할 po파일이 열려있지 않습니다."
+
+#: src/gui.c:109
+#, fuzzy
+msgid "Po-file has been compiled successfully."
+msgstr "파싱 완료."
+
+#: src/gui.c:138
+msgid "Couldn't store current geometry!"
+msgstr ""
+
+#. *
+#. * Show a Good Bye!-typo message.
+#. *
+#: src/gui.c:151
+msgid "Bye bye!"
+msgstr ""
+
+#: src/gui.c:196
+msgid "_Compile"
+msgstr "컴파일(_C)"
+
+#: src/gui.c:217
+msgid "C_lear"
+msgstr ""
+
+#: src/gui.c:218
+msgid "Clears the current selection"
+msgstr ""
+
+#: src/gui.c:232 src/gui.c:475
+msgid "ReSearch"
+msgstr "다시 찾기"
+
+#: src/gui.c:233 src/gui.c:476
+msgid "Search again"
+msgstr "다시 찾기"
+
+#: src/gui.c:249
+msgid "_Header"
+msgstr ""
+
+#: src/gui.c:250
+msgid "Edit the header"
+msgstr ""
+
+#: src/gui.c:261
+msgid "Refresh"
+msgstr "다시 읽기"
+
+#: src/gui.c:273
+msgid "_First"
+msgstr "처음(_F)"
+
+#: src/gui.c:280
+msgid "_Back"
+msgstr "앞으로(_B)"
+
+#: src/gui.c:288
+msgid "_Next"
+msgstr "다음(_N)"
+
+#: src/gui.c:295
+msgid "_Last"
+msgstr "마지막(_L)"
+
+#: src/gui.c:307 src/gui.c:309
+msgid "Translated"
+msgstr ""
+
+#: src/gui.c:315 src/gui.c:317
+msgid "Untranslated"
+msgstr ""
+
+#: src/gui.c:322 src/gui.c:324
+msgid "FIXME"
+msgstr ""
+
+#: src/gui.c:330
+msgid "Stick"
+msgstr ""
+
+#: src/gui.c:332
+#, fuzzy
+msgid "Stick this message"
+msgstr "이 메세지로 가기"
+
+#: src/gui.c:342
+#, fuzzy
+msgid "_Add the current message"
+msgstr "첫 메세지로 가기"
+
+#: src/gui.c:343
+msgid "Add the current message to the messages DB."
+msgstr ""
+
+#: src/gui.c:350
+#, fuzzy
+msgid "_Query for a message"
+msgstr "메세지 찾기"
+
+#: src/gui.c:351
+msgid "Query the messages DB for the current msgid."
+msgstr ""
+
+#: src/gui.c:369
+msgid "_Online help"
+msgstr "온라인 도움말(_O)"
+
+#: src/gui.c:377
+#, fuzzy
+msgid "gtranslator _website"
+msgstr "gtranslator 설정"
+
+#: src/gui.c:378
+#, fuzzy
+msgid "gtranslator's homepage on the web"
+msgstr "gtranslator 설정"
+
+#: src/gui.c:392 src/gui.c:395
+msgid "_Messages"
+msgstr "메세지(_M)"
+
+#: src/gui.c:399 src/gui.c:402
+#, fuzzy
+msgid "Message s_tatus"
+msgstr "메세지(_M)"
+
+#: src/gui.c:406 src/gui.c:409
+#, fuzzy
+msgid "Message _db"
+msgstr "메세지(_M)"
+
+#. *
+#. * Create the app
+#. *
+#: src/gui.c:432
+msgid "gtranslator"
+msgstr ""
+
+#: src/gui.c:468
+msgid "Search for a message"
+msgstr "메세지 찾기"
+
+#: src/gui.c:483
+msgid "Goto"
+msgstr "가기"
+
+#: src/gui.c:484
+msgid "Goto this message"
+msgstr "이 메세지로 가기"
+
+#: src/gui.c:498
+msgid "Add"
+msgstr ""
+
+#: src/gui.c:499
+#, fuzzy
+msgid "Add to the messages db."
+msgstr "마지막 메세지로 가기"
+
+#. *
+#. * Find in the personal catalogue
+#. *
+#: src/gui.c:513
+msgid "F/DB"
+msgstr ""
+
+#: src/gui.c:514
+#, fuzzy
+msgid "Find in the personal messages db"
+msgstr "개인 목록에서 찾습니다"
+
+#. *
+#. * Find in the .po-file
+#. *
+#: src/gui.c:524
+msgid "F/Po."
+msgstr "찾기/Po."
+
+#: src/gui.c:525
+msgid "Find in the po file "
+msgstr "po파일에서 찾습니다"
+
+#: src/gui.c:536
+msgid "Header"
+msgstr ""
+
+#: src/gui.c:537
+#, fuzzy
+msgid "Edit the header informations"
 msgstr "개인 정보"
 
-#: src/prefs.c:35
-msgid "Language options"
-msgstr "언어 설정"
+#: src/gui.c:545
+msgid "Compile"
+msgstr "컴파일"
 
-#: src/prefs.c:36
-msgid "Po file options"
-msgstr "Po 파일 설정"
+#: src/gui.c:546
+msgid "Compile the po-file"
+msgstr "po파일을 컴파일 합니다"
 
-#: src/prefs.c:37
-msgid "Author's name :"
-msgstr "작성자의 이름 :"
+#: src/gui.c:554
+msgid "Open"
+msgstr "열기"
 
-#: src/prefs.c:38
-msgid "Author's EMail :"
-msgstr "작성자의 전자우편 :"
+#: src/gui.c:555
+msgid "Open File"
+msgstr "파일을 엽니다"
 
-#: src/prefs.c:39
-msgid "Language :"
-msgstr "언어 :"
+#: src/gui.c:563
+msgid "Save"
+msgstr "저장"
 
-#: src/prefs.c:40
-msgid "MIME type :"
-msgstr "MIME 형식 :"
+#: src/gui.c:564
+msgid "Save File"
+msgstr "파일 저장"
 
-#: src/prefs.c:41
-msgid "Encoding :"
-msgstr "엔코딩 :"
+#: src/gui.c:572
+msgid "Save as"
+msgstr "새이름 저장"
 
-#: src/prefs.c:42
-msgid "Language code :"
-msgstr "언어 코드 :"
+#: src/gui.c:573
+msgid "Save file as"
+msgstr "다른이름으로 파일 저장"
 
-#: src/prefs.c:43
-msgid "Language group's EMail :"
-msgstr "언어 그룹의 전자우편 :"
+#: src/gui.c:581
+msgid "First"
+msgstr "처음"
 
-#: src/prefs.c:44
-msgid "Comments :"
-msgstr "주석 :"
+#: src/gui.c:582
+msgid "Go to the first message"
+msgstr "첫 메세지로 가기"
 
-#: src/prefs.c:57
-msgid "Add the additional comments to the header"
-msgstr "첫머리에 주석 추가"
+#: src/gui.c:590
+msgid "Back"
+msgstr "뒤로"
 
-#: src/prefs.c:58
-msgid "Warn me if I'm trying to save an unchanged file"
-msgstr "변경되지 않을 파일을 저장하려고 하면 경고"
+#: src/gui.c:591
+msgid "Go one message back"
+msgstr "한 메세지 뒤로 가기"
 
-#: src/prefs.c:59
-msgid "Warn if the .po-file contains fuzzy translations"
-msgstr "po파일에 혼동되는 번역이 포함되어 있으면 경고"
+#: src/gui.c:599
+msgid "Options"
+msgstr "설정"
 
-#: src/prefs.c:60
-msgid "Don't save unchanged .po-files"
-msgstr "po파일을 저장하지 않음"
+#: src/gui.c:600
+msgid "gtranslator options"
+msgstr "gtranslator 설정"
 
-#: src/prefs.c:61
-msgid "Use the msg_db"
-msgstr "msg_db 사용"
+#: src/gui.c:608
+msgid "Next"
+msgstr "다음"
+
+#: src/gui.c:609
+msgid "Go one message forward"
+msgstr "다음 메세지로 가기"
+
+#: src/gui.c:617
+msgid "Last"
+msgstr "마지막"
+
+#: src/gui.c:618
+msgid "Go to the last message"
+msgstr "마지막 메세지로 가기"
+
+#: src/gui.c:626 src/gui.c:627
+msgid "Exit"
+msgstr "종료"
 
 #: src/languages.h:59
 msgid "Arabic"
@@ -634,6 +628,358 @@ msgstr "왈론어"
 #: src/languages.h:223
 msgid "Welsh"
 msgstr "웨일스어"
+
+#: src/main.c:39
+msgid "Sets the minimum match for query"
+msgstr ""
+
+#: src/main.c:43
+msgid "Po-file to open at startup"
+msgstr "시작할때 Po파일 열기"
+
+#: src/main.c:47
+msgid "Specifies the main-window geometry"
+msgstr ""
+
+#: src/main.c:51
+#, fuzzy
+msgid "The messages db to use"
+msgstr "사용할 msg_db"
+
+#: src/main.c:55
+msgid "Query the messages db & exit"
+msgstr ""
+
+#: src/main.c:59
+msgid "Team to append"
+msgstr ""
+
+#. *
+#. * Simply print it out.
+#. *
+#: src/main.c:176
+#, c-format
+msgid "Getting results for query: `%s' ...\n"
+msgstr ""
+
+#: src/main.c:181
+#, c-format
+msgid "Result                   :  %s"
+msgstr ""
+
+#: src/main.c:183
+msgid "End of query.\n"
+msgstr ""
+
+#: src/main.c:243
+#, c-format
+msgid "The geometry string \"%s\" coulnd't be parsed!"
+msgstr ""
+
+#. *
+#. * If the file isn't openable give a warning
+#. *
+#: src/main.c:262
+#, c-format
+msgid "The file \"%s\" doesn't exist or isn't readable!"
+msgstr "\"%s\"파일이 없거나 읽을수 없습니다!"
+
+#: src/main.c:263
+msgid "Skipping it."
+msgstr "넘어갑니다."
+
+#: src/msg_db.c:42
+#, c-format
+msgid "No message db found! Creating one in `%s'."
+msgstr ""
+
+#. *
+#. * 3.1) No list, no fun
+#. *
+#: src/msg_db.c:80
+msgid "gtranslator lost the list of translations!\n"
+msgstr "gtranslator가 번역 목록을 잃어버렸습니다!\n"
+
+#. *
+#. * Show a little warning ...
+#. *
+#: src/msg_db.c:117
+#, fuzzy, c-format
+msgid "The message db `%s' hasn't been initted yet!\n"
+msgstr "msb_db `%s' 가 초기화 되지 않았습니다!\n"
+
+#. *
+#. * Warn if there isn't any message which could be added
+#. *  to the msg_db .
+#. *
+#: src/msg_db.c:128
+msgid "Got no message entry!\n"
+msgstr "메세지 항목 얻을수 없슴!\n"
+
+#. *
+#. * Show a little warning ...
+#. *
+#: src/msg_db.c:167
+#, fuzzy, c-format
+msgid "The message db `%s' seems not to be initted!\n"
+msgstr "msb_db `%s' 가 초기화 되지 않았습니다!\n"
+
+#. *
+#. * Return a very "explaining" char* ...
+#. *
+#: src/msg_db.c:171
+msgid "Not available"
+msgstr "가능하지 않음"
+
+#. *
+#. * If there's no msg_list
+#. *  print an error message
+#. *
+#: src/msg_db.c:179
+#, fuzzy
+msgid "No messages list ( msg_list ) available for acting on it!\n"
+msgstr "작용하는 msg_list가 없슴!\n"
+
+#: src/msg_db.c:217
+#, fuzzy
+msgid "No entry found in the messages db "
+msgstr "msg_db에 항목이 없음."
+
+#: src/msg_db.c:228
+msgid "The messages db isn't inited."
+msgstr ""
+
+#. *
+#. * Gives a warning message.
+#. *
+#: src/msg_db.c:257
+msgid "Trying to set an irregular challange length!"
+msgstr ""
+
+#. *
+#. * If there are any problems , give a
+#. *  message ..
+#. *
+#: src/parse.c:33
+#, fuzzy, c-format
+msgid ""
+"\n"
+"The file stream is lost!\n"
+"%s"
+msgstr ""
+"\n"
+"파일 스트림을 읽어버렸습니다! 오류 번호. `%i'"
+
+#: src/parse.c:55
+#, c-format
+msgid "There's no file to open or I couldn't understand `%s'!"
+msgstr "파일을 열수 없거나 `%s'를 이해할수 없습니다!"
+
+#. *
+#. * Set up a status message
+#. *
+#: src/parse.c:60
+#, c-format
+msgid "Current file : \"%s\"."
+msgstr "현재 파일 : \"%s\"."
+
+#. *
+#. * Show an updated status
+#. *
+#: src/parse.c:201
+#, c-format
+msgid "Finished reading \"%s\", %i lines."
+msgstr "\"%s\" 읽기 완료, %i 줄."
+
+#: src/parse.c:218
+msgid "Parsing has been successfull."
+msgstr "파싱 완료."
+
+#: src/parse.c:289
+#, fuzzy
+msgid "You've reached the first message"
+msgstr "첫 메세지로 가기"
+
+#: src/parse.c:326
+#, fuzzy
+msgid "You've reached the last message."
+msgstr "마지막 메세지로 가기"
+
+#. *
+#. * Create the labels ..
+#. *
+#: src/prefs.c:34
+msgid "Personal informations"
+msgstr "개인 정보"
+
+#: src/prefs.c:35
+msgid "Language options"
+msgstr "언어 설정"
+
+#: src/prefs.c:36
+msgid "Po file options"
+msgstr "Po 파일 설정"
+
+#: src/prefs.c:37
+msgid "Author's name :"
+msgstr "작성자의 이름 :"
+
+#: src/prefs.c:38
+msgid "Author's EMail :"
+msgstr "작성자의 전자우편 :"
+
+#: src/prefs.c:39
+msgid "Language :"
+msgstr "언어 :"
+
+#: src/prefs.c:40
+msgid "MIME type :"
+msgstr "MIME 형식 :"
+
+#: src/prefs.c:41
+msgid "Encoding :"
+msgstr "엔코딩 :"
+
+#: src/prefs.c:42
+msgid "Language code :"
+msgstr "언어 코드 :"
+
+#: src/prefs.c:43
+msgid "Language group's EMail :"
+msgstr "언어 그룹의 전자우편 :"
+
+#: src/prefs.c:44
+msgid "Comments :"
+msgstr "주석 :"
+
+#: src/prefs.c:57
+msgid "Add the additional comments to the header"
+msgstr "첫머리에 주석 추가"
+
+#: src/prefs.c:58
+msgid "Save gtranslator's geometry on exit & restore it on startup"
+msgstr ""
+
+#: src/prefs.c:59
+msgid "Warn me if I'm trying to save an unchanged file"
+msgstr "변경되지 않을 파일을 저장하려고 하면 경고"
+
+#: src/prefs.c:60
+msgid "Warn if the .po-file contains fuzzy translations"
+msgstr "po파일에 혼동되는 번역이 포함되어 있으면 경고"
+
+#: src/prefs.c:61
+msgid "Don't save unchanged .po-files"
+msgstr "po파일을 저장하지 않음"
+
+#: src/prefs.c:62
+#, fuzzy
+msgid "Use the messages db"
+msgstr "msg_db 사용"
+
+#: src/prefs.c:406
+msgid "Can't store filename!"
+msgstr ""
+
+#: src/prefs.c:434
+msgid "Couldn't recall the file's name."
+msgstr ""
+
+#: src/find.c:32
+msgid "Nothing appropriate found!"
+msgstr ""
+
+#: src/find.c:54
+msgid "No query, no fun."
+msgstr ""
+
+#: libgtranslator/parse-db.c:32
+msgid "No language defined in the query request!"
+msgstr ""
+
+#. *
+#. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
+#. * Just show a message that tells this.
+#. *
+#: libgtranslator/parse-db.c:43
+msgid "FYI: Will also lookup the superclass message db.\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:63
+#, c-format
+msgid "Couldn't open language base file `%s.xml' in %s.\n"
+msgstr ""
+
+#. *
+#. * Print some information.
+#. *
+#: libgtranslator/parse-db.c:76
+#, c-format
+msgid "Subclass file `%s.xml' not found.\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:77
+#, c-format
+msgid "Trying superclass-file `%s.xml' ...\n"
+msgstr ""
+
+#: libgtranslator/parse-db.c:137
+msgid "The message db file is empty!"
+msgstr ""
+
+#: libgtranslator/parse-db.c:143
+msgid "The message db doesn't seem to be a message db xml file."
+msgstr ""
+
+#: libgtranslator/team-handle.c:32
+msgid "No language/team code defined to register!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:67
+msgid "Team is already registered!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:113
+#, c-format
+msgid "Teams file `teams.xml` in %s couldn't be opened!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:149
+msgid "Couldn't return the list of the apps."
+msgstr ""
+
+#~ msgid "A test option"
+#~ msgstr "시험 옵션"
+
+#~ msgid "F/Cat."
+#~ msgstr "찾기/Cat."
+
+#~ msgid "New message entry has wrong/non-logical length : %i\n"
+#~ msgstr "새 메세지 항목이 잘못되었거나 비 논리적인 길이를 가지고 있슴 : %i\n"
+
+#~ msgid "Couldn't find pixmap file: %s"
+#~ msgstr "그림 파일을 찾을수 없슴: %s"
+
+#~ msgid "Couldn't create pixmap from file: %s"
+#~ msgstr "그림 파일을 생성할수 없슴: %s"
+
+#~ msgid ""
+#~ "gtranslator is a Gnome Application for translating .po-files slightly "
+#~ "different than in (X)Emacs.\n"
+#~ "Till now you can't see much, but that will change! At least till R 0.20."
+#~ msgstr ""
+#~ "gtranslator는 (X)Emacs와 약간 다른 그놈 응용프로그램의 po파일 번역기 "
+#~ "입니다.\n"
+#~ "아직은 많은것이 없지만 R 0.20에서는 변경될것 입니다."
+
+#~ msgid ""
+#~ "gtranslator is a Gnome Application for translating .po-files more "
+#~ "comfortable than in (X)Emacs.\n"
+#~ "Till now you can't see much, but that will change! At least till R 0.20."
+#~ msgstr ""
+#~ "gtranslator는 (X)Emacs와 약간 다른 그놈 응용프로그램의 po파일 번역기 "
+#~ "입니다.\n"
+#~ "아직은 많은것이 없지만 R 0.20에서는 변경될것 입니다."
 
 #~ msgid "Parsing the list entries."
 #~ msgstr "목록 항목 파싱중."

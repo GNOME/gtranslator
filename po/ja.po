@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.20\n"
-"POT-Creation-Date: 2000-08-02 18:22+0900\n"
+"POT-Creation-Date: 2000-08-04 00:00+0200\n"
 "PO-Revision-Date: 2000-08-02 18:28+09:00\n"
 "Last-Translator: Takeshi Aihana <aihana@muc.biglobe.ne.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -615,44 +615,48 @@ msgstr "ワルーン語"
 msgid "Welsh"
 msgstr "ウェールズ語"
 
-#: src/main.c:36
+#: src/main.c:39
 msgid "Sets the minimum match for query"
 msgstr "問い合わせに対して最小で一致させる"
 
-#: src/main.c:40
+#: src/main.c:43
 msgid "Po-file to open at startup"
 msgstr "起動時に .po ファイルを開く"
 
-#: src/main.c:44
+#: src/main.c:47
 msgid "Specifies the main-window geometry"
 msgstr "メインウィンドウの位置を指定する"
 
-#: src/main.c:48
+#: src/main.c:51
 msgid "The messages db to use"
 msgstr "メッセージ DB を利用する"
 
-#: src/main.c:52
+#: src/main.c:55
 msgid "Query the messages db & exit"
 msgstr "メッセージ DB に問い合わせと終了"
+
+#: src/main.c:59
+msgid "Team to append"
+msgstr ""
 
 #. *
 #. * Simply print it out.
 #. *
-#: src/main.c:121
+#: src/main.c:176
 #, c-format
 msgid "Getting results for query: `%s' ...\n"
 msgstr "問い合わせに対する結果を取得中: '%s' ...\n"
 
-#: src/main.c:126
+#: src/main.c:181
 #, c-format
 msgid "Result                   :  %s"
 msgstr "結果                  :  %s"
 
-#: src/main.c:128
+#: src/main.c:183
 msgid "End of query.\n"
 msgstr "問い合わせの終了。\n"
 
-#: src/main.c:188
+#: src/main.c:243
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "位置情報 \"%s\" が解析できませんでした!"
@@ -660,12 +664,12 @@ msgstr "位置情報 \"%s\" が解析できませんでした!"
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:207
+#: src/main.c:262
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "ファイル \"%s\" は存在しないか、もしくは読み込み可能ではありません!"
 
-#: src/main.c:208
+#: src/main.c:263
 msgid "Skipping it."
 msgstr "スキップします."
 
@@ -870,7 +874,7 @@ msgstr "何も見つかりません!"
 msgid "No query, no fun."
 msgstr "問い合わせ無し、楽しみがないです。"
 
-#: libgtranslator/parse-db.c:43
+#: libgtranslator/parse-db.c:32
 msgid "No language defined in the query request!"
 msgstr ""
 
@@ -878,24 +882,55 @@ msgstr ""
 #. * If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
 #. * Just show a message that tells this.
 #. *
-#: libgtranslator/parse-db.c:54
+#: libgtranslator/parse-db.c:43
 msgid "FYI: Will also lookup the superclass message db.\n"
 msgstr ""
 
-#: libgtranslator/parse-db.c:67
+#: libgtranslator/parse-db.c:63
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr ""
 
-#: libgtranslator/parse-db.c:73
+#. *
+#. * Print some information.
+#. *
+#: libgtranslator/parse-db.c:76
 #, c-format
 msgid "Subclass file `%s.xml' not found.\n"
 msgstr ""
 
-#: libgtranslator/parse-db.c:74
+#: libgtranslator/parse-db.c:77
 #, c-format
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr ""
+
+#: libgtranslator/parse-db.c:137
+#, fuzzy
+msgid "The message db file is empty!"
+msgstr "メッセージ DB を利用する"
+
+#: libgtranslator/parse-db.c:143
+#, fuzzy
+msgid "The message db doesn't seem to be a message db xml file."
+msgstr "ヘッダは正しく解析されていないようです。"
+
+#: libgtranslator/team-handle.c:32
+msgid "No language/team code defined to register!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:67
+msgid "Team is already registered!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:113
+#, c-format
+msgid "Teams file `teams.xml` in %s couldn't be opened!"
+msgstr ""
+
+#: libgtranslator/team-handle.c:149
+#, fuzzy
+msgid "Couldn't return the list of the apps."
+msgstr "ファイル名が使えません!"
 
 #~ msgid "A test option"
 #~ msgstr "テストオプション"
