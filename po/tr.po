@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-09-18 21:40+0200\n"
-"PO-Revision-Date: 2000-09-18 21:40+0200\n"
+"POT-Creation-Date: 2000-09-20 16:32+0200\n"
+"PO-Revision-Date: 2000-09-20 16:39+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -225,7 +225,7 @@ msgstr "Git"
 msgid "Go to specified message number"
 msgstr "Belirtilen iletiye git"
 
-#: src/dialogs.c:201 src/gui.c:260
+#: src/dialogs.c:202 src/gui.c:260
 msgid "Find"
 msgstr "Bul"
 
@@ -250,9 +250,9 @@ msgstr "Güle Güle!"
 #: src/gui.c:553
 #, c-format
 msgid "Message %d / %d / Status:"
-msgstr "Ileti %d / %d / Durum:"
+msgstr "Ileti: %d / %d / Durum:"
 
-#: src/dialogs.c:217 src/gui.c:567
+#: src/dialogs.c:218 src/gui.c:567
 msgid "Translated"
 msgstr "Tercüme metinlerinde"
 
@@ -293,101 +293,101 @@ msgstr "Git!"
 msgid "Go to message number:"
 msgstr "Belirtilen iletiye git :"
 
-#: src/dialogs.c:201
+#: src/dialogs.c:202
 msgid "Find in the po-file"
 msgstr "Po dosyasýnda bul"
 
 #. *
 #. * Create the widgets.
 #. *
-#: src/dialogs.c:206
+#: src/dialogs.c:207
 msgid "Enter your desired search string:"
 msgstr "Aramak istediðin metni belirle :"
 
-#: src/dialogs.c:209
+#: src/dialogs.c:210
 msgid "Case sensitive"
 msgstr "Yazýlýmý gözönüne al"
 
-#: src/dialogs.c:215 src/languages.h:84
+#: src/dialogs.c:216 src/languages.h:84
 msgid "English"
 msgstr "Orjinal metinlerde"
 
-#: src/dialogs.c:219
+#: src/dialogs.c:220
 msgid "Both"
 msgstr "Yekin metinlerde"
 
-#: src/dialogs.c:222
+#: src/dialogs.c:223
 msgid "Find in: "
 msgstr "Bulma mahalleri : "
 
-#: src/dialogs.c:264
+#: src/dialogs.c:265
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt çalýþtýrýlýrken bir hata oldu:\n"
 
-#: src/prefs.c:188
+#: src/prefs.c:189
 msgid "gtranslator -- options"
 msgstr "gtranslator -- seçenekler"
 
 #. *
 #. * The tables for holding all the entries below
 #. *
-#: src/prefs.c:192
+#: src/prefs.c:193
 msgid "Personal information"
 msgstr "Þahsi bilgiler"
 
-#: src/prefs.c:193
+#: src/prefs.c:194
 msgid "Language options"
 msgstr "Dil seçenekeleri"
 
-#: src/prefs.c:194
+#: src/prefs.c:195
 msgid "Po file options"
 msgstr "Po dosya seçenekleri"
 
-#: src/prefs.c:200
+#: src/prefs.c:201
 msgid "Author's name :"
 msgstr "Yazarýn ismi :"
 
-#: src/prefs.c:203
+#: src/prefs.c:204
 msgid "Author's EMail :"
 msgstr "Yazarýn ePostasý :"
 
-#: src/header_stuff.c:306 src/prefs.c:211
+#: src/header_stuff.c:306 src/prefs.c:212
 msgid "Language :"
 msgstr "Dil :"
 
-#: src/prefs.c:215
+#: src/prefs.c:216
 msgid "Language code :"
 msgstr "Dil kodu :"
 
-#: src/prefs.c:220
+#: src/prefs.c:221
 msgid "Language group's EMail :"
 msgstr "Dil grubunun ePosta adresi :"
 
-#: src/header_stuff.c:315 src/prefs.c:224
+#: src/header_stuff.c:315 src/prefs.c:225
 msgid "Charset :"
 msgstr "Yazý sýnýfý :"
 
-#: src/header_stuff.c:319 src/prefs.c:228
+#: src/header_stuff.c:319 src/prefs.c:229
 msgid "Encoding :"
 msgstr "Þekillendirme :"
 
-#: src/prefs.c:236
+#: src/prefs.c:237
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Ileti deðiþtirildiyse fuzzy durumunu ortadan kaldýr"
 
-#: src/prefs.c:240
+#: src/prefs.c:241
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Po-dosyasý `fuzzy' tercümeler içeriyorsa ikaz et"
 
-#: src/prefs.c:244
+#: src/prefs.c:245
 msgid "Don't save unchanged .po-files"
 msgstr "Deðiþtirilmemiþ .po-dosyalarýný kaydetme"
 
-#: src/prefs.c:248
+#: src/prefs.c:249
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Deðiþtirilmemiþ bir dosyayý kaydederken ikaz et"
 
-#: src/prefs.c:252
+#: src/prefs.c:253
 msgid "Save geometry on exit & restore it on startup"
 msgstr "gtranslator'in yerleþimini ve boyutunu kaydet ve sonra uygula"
 
@@ -401,10 +401,19 @@ msgstr ""
 "gtranslator'i senin istediðin gibi çalýþtýrabilirsin.\n"
 " "
 
-#: src/prefs.c:457
+#: src/prefs.c:456
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "\"%s\" yer metni taranamadý!"
+
+#: src/header_stuff.c:123
+#, c-format
+msgid ""
+"New header entry found (please add it to header_stuff.c):\n"
+"%s\n"
+msgstr ""
+"Yeni baþlýk birimi bulundu ( lütfen bunu header_stuff.c'ye ekle ):\n"
+"%s\n"
 
 #: src/header_stuff.c:250
 msgid "gtranslator -- edit header"
@@ -457,6 +466,11 @@ msgstr "Dil grubunun ePosta adresi :"
 #: src/main.c:39
 msgid "Specifies the main-window geometry"
 msgstr "Ana pencere boyutlarýný belirler"
+
+#: src/main.c:80
+#, c-format
+msgid "Error during the initialization of GConf: %s"
+msgstr "GConf'u baþlatýrken bu hata oluþtu: %s"
 
 #: src/parse.c:95
 #, c-format
@@ -578,7 +592,7 @@ msgstr "Imla kontrolü"
 msgid "Spell checking complete!"
 msgstr "Imla kontrolü tamamlandý !"
 
-#: src/session.c:68
+#: src/session.c:67
 msgid "Session restored successfully."
 msgstr "Oturum baþarýyla yeniden yüklendi."
 
@@ -655,6 +669,55 @@ msgstr "Takýmlar dosyasý `teams.xml` %s'de açýlamadý!"
 #: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
 msgstr "Uygulamalarýn listesini geri veremedim."
+
+#: libgtranslator/preferences.c:68
+msgid "No path defined where I could get the string from."
+msgstr "Metni alacak bir dizinleme belirtilmedi ki."
+
+#: libgtranslator/preferences.c:94
+#, c-format
+msgid "Can't set the string `%s' for a non-defined path!\n"
+msgstr "Belirtilmemiþ bir dizinlemeye `%s' metnini oturtumam!\n"
+
+#: libgtranslator/preferences.c:100
+#, c-format
+msgid "No string defined for the path `%s'!"
+msgstr "`%s' dizinlemesi için hiç bir metin belirtilmemiþ!"
+
+#: libgtranslator/preferences.c:128
+msgid "No path defined where I could get the integer from!"
+msgstr "Onlu sayýyý alacak dizinleme belirtilmemiþ!"
+
+#: libgtranslator/preferences.c:129
+msgid "Returning `1' for assurance .."
+msgstr "Güvenlik için '1' veriyorum ..."
+
+#: libgtranslator/preferences.c:152
+#, c-format
+msgid "Can't set the value `%i' for a non-defined path!"
+msgstr "Belirtilmemiþ bir dizinlemeye `%i' deðerini oturtamam!"
+
+#: libgtranslator/preferences.c:158
+#, c-format
+msgid "No value defined for the path `%s'!"
+msgstr "`%s' dizinlemesi için bir deðer verilmedi ki !"
+
+#: libgtranslator/preferences.c:184
+msgid "No path defined where I could get the boolean from."
+msgstr "Bool'lu deðeri alacak bir dizinleme belirtilmemiþ ki."
+
+#: libgtranslator/preferences.c:185
+msgid "Returning `FALSE' for assurance ..."
+msgstr "Güvenlik için 'FALSE' veriyorum ..."
+
+#: libgtranslator/preferences.c:205
+msgid "Can't set a boolean value for a non-defined path!"
+msgstr "Belirtilmemiþ bir dizinleme için bir Bool'lu deðer oturtumam!"
+
+#: libgtranslator/preferences.c:211
+#, c-format
+msgid "No boolean value defined for the path `%s'!"
+msgstr "`%s' dizinlemesi için hiç bir Bool'lu deðer verilmemiþ ki!"
 
 #: src/languages.h:57
 msgid "Arabic"
