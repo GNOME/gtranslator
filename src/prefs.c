@@ -237,7 +237,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		7, _("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
 	show_comment=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		8, _("Show comments"),
+		8, _("Show instant comment view in the main pane"),
 		GtrPreferences.show_comment, gtranslator_preferences_dialog_changed);
 	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page,
 		9, _("Show the views sidebar"),
