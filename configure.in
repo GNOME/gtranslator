@@ -12,6 +12,7 @@ MAINVERSION=0
 SUBVERSION=22
 VERSION=$MAINVERSION.$SUBVERSION
 AC_SUBST(SUBVERSION)
+AC_SUBST(MAINVERSION)
 
 dnl -------------------------------------------------------------------
 dnl Init automake and the maintainer mode macros.
@@ -95,7 +96,7 @@ dnl -------------------------------------------------------------------
 dnl Check for GConf >= 0.9 and the stuff around it ..
 dnl -------------------------------------------------------------------
 gconf_is_present=yes
-AM_PATH_GCONF(0.9.0,,gconf_is_present=no)
+AM_PATH_GCONF(0.9.0,,gconf_is_present=no,gconf-gtk)
 if test "q$gconf_is_present" = "qno" ; then
 	AC_MSG_RESULT([********** Will NOT use GConf ...])
 else
