@@ -151,8 +151,8 @@ static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
 			 */
 			gtranslator_message_go_to(msg);
 			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
-			gtk_editable_select_region(GTK_EDITABLE(trans_box),
-				pos->rm_so, pos->rm_eo);
+			gtranslator_selection_set(trans_box,
+						  pos->rm_so, pos->rm_eo);
 			actpos++;
 
 			return 1;
@@ -165,9 +165,9 @@ static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
 			 * We found it!
 			 */
 			gtranslator_message_go_to(msg);
-			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
-			gtk_editable_select_region(GTK_EDITABLE(text_box),
-				pos->rm_so, pos->rm_eo);
+			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);			
+			gtranslator_selection_set(text_box,
+						  pos->rm_so, pos->rm_eo);
 			actpos++;
 		
 			return 1;

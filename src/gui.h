@@ -85,6 +85,7 @@ void gtranslator_clipboard_cut(GtkWidget  *widget, gpointer useless);
 void gtranslator_clipboard_copy(GtkWidget  *widget, gpointer useless);
 void gtranslator_clipboard_paste(GtkWidget  *widget, gpointer useless);
 void gtranslator_selection_clear(GtkWidget  *widget, gpointer useless);
+void gtranslator_selection_set(GtkTextView *text_view, gint start, gint end);
 
 /*
  * A status defining callback -- now generaly defined for instance.

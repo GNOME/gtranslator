@@ -572,18 +572,96 @@ void gtranslator_application_bar_update(gint pos)
  */
 void gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless)
 {
-	gtk_editable_cut_clipboard(GTK_EDITABLE(trans_box));
+	GtkTextBuffer* buffer = NULL;
+
+	/* We're only cutting from the translation box */
+	if (gtk_widget_is_focus(GTK_WIDGET(trans_box)) == FALSE)
+		return;
+
+	buffer = gtk_text_view_get_buffer(trans_box);
+	g_return_if_fail(buffer != NULL);
+
+	/* FIXME: revert dots */
+	gtk_text_buffer_cut_clipboard(buffer,
+				      gtk_clipboard_get(GDK_NONE),
+				      TRUE);
+	
+	gtk_text_view_scroll_mark_onscreen(trans_box,
+					   gtk_text_buffer_get_mark(buffer,
+								    "insert"));
 }
 
 void gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless)
 {
-	gtk_editable_copy_clipboard(GTK_EDITABLE(trans_box));
+	GtkTextView* focused_box = NULL;
+	GtkTextBuffer* buffer = NULL;
+	
+	if (gtk_widget_is_focus(GTK_WIDGET(text_box)))
+		focused_box = text_box;
+	
+	if (gtk_widget_is_focus(GTK_WIDGET(trans_box)))
+		focused_box = trans_box;
+	
+	g_return_if_fail(focused_box != NULL);
+	
+	buffer = gtk_text_view_get_buffer(focused_box);
+	g_return_if_fail(buffer != NULL);
+	
+	/* FIXME: revert dots */
+	gtk_text_buffer_copy_clipboard(buffer, gtk_clipboard_get(GDK_NONE));
+  	
+	gtk_text_view_scroll_mark_onscreen(focused_box,
+					   gtk_text_buffer_get_mark(buffer,
+								    "insert"));
 }
 
 void gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless)
 {
-	gtk_editable_paste_clipboard(GTK_EDITABLE(trans_box));
+	GtkTextBuffer* buffer = NULL;
+
+	/* We're only pasting into the translation box */
+	if (gtk_widget_is_focus(GTK_WIDGET(trans_box)) == FALSE)
+		return;
+
+	buffer = gtk_text_view_get_buffer(trans_box);
+	g_return_if_fail (buffer != NULL);
+
+	/* FIXME: revert dots */
+	gtk_text_buffer_paste_clipboard(buffer,
+					gtk_clipboard_get(GDK_NONE),
+					NULL, TRUE);
+  	
+	gtk_text_view_scroll_mark_onscreen(trans_box,
+					   gtk_text_buffer_get_mark(buffer,
+								    "insert"));
 }
+
+void
+gtranslator_selection_set(GtkTextView *text_view, gint start, gint end)
+{
+	GtkTextBuffer *buffer;
+	GtkTextIter start_iter;
+	GtkTextIter end_iter;
+
+	g_return_if_fail(text_view != NULL);
+	g_return_if_fail(start >= 0);
+	g_return_if_fail((end > start) || (end < 0));
+	
+	buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(text_view));
+	g_return_if_fail(buffer != NULL);	
+
+	gtk_text_buffer_get_iter_at_offset (buffer, &start_iter, start);
+
+	if (end < 0)
+		gtk_text_buffer_get_end_iter(buffer, &end_iter);
+	else
+		gtk_text_buffer_get_iter_at_offset(buffer, &end_iter, end);
+	
+	gtk_text_buffer_place_cursor(buffer, &end_iter);
+
+	gtk_text_buffer_move_mark_by_name(buffer, "selection_bound", &start_iter);
+}
+
 
 void gtranslator_selection_clear(GtkWidget  * widget, gpointer useless)
 {
