@@ -1,28 +1,30 @@
-.TH "pozilla.sh" "1" "4.0" "Fatih Demir" "Pozilla -- neat i18 stuff"
+.TH "pozilla.sh" "1" "4.1" "Fatih Demir" "Pozilla -- neat i18 stuff"
 .SH "NAME"
 .LP 
-pozilla.sh \-\- a i18n and admin helper script for releases and related i18n tasks.
+pozilla.sh \-\- a i18n and admin helper script for the pre\-release status of a project, awaking/warning the translators to update their translations and to print out neat statistics tables.
 .SH "SYNTAX"
 .LP 
-pozilla.sh [\fI\-d | \-\-days days\fP]
+pozilla.sh [\fI\-d\fP | \fI\-\-days days\fP]
 .br 
-pozilla.sh [\fI\-r | \-\-release release\fP]
+pozilla.sh [\fI\-r\fP | \fI\-\-release release\fP]
 .br 
-pozilla.sh [\fI\-s | \-\-send\-to sendto languages\fP]
+pozilla.sh [\fI\-s\fP | \fI\-\-send\-to sendto languages\fP]
 .br 
-pozilla.sh [\fI\-p | \-\-podirectory po directory\fP]
+pozilla.sh [\fI\-p\fP | \fI\-\-podirectory po directory\fP]
 .br 
-pozilla.sh [\fI\-a | \-\-additional additional email address\fP]
+pozilla.sh [\fI\-a\fP | \fI\-\-additional additional email address\fP]
 .br 
-pozilla.sh [\fI\-m | \-\-mailinglist mailing list address\fP]
+pozilla.sh [\fI\-m\fP | \fI\-\-mailinglist mailing list address\fP]
 .br 
-pozilla.sh [\fI\-S | \-\-statistics\fP]
+pozilla.sh [\fI\-S\fP | \fI\-\-statistics\fP]
 .br 
-pozilla.sh [\fI\-A | \-\-send\-to\-all\fP]
+pozilla.sh [\fI\-A\fP | \fI\-\-send\-to\-all\fP]
 .br 
-pozilla.sh [\fI\-D | \-\-dry\-run\fP]
+pozilla.sh [\fI\-D\fP | \fI\-\-dry\-run\fP]
 .br 
-pozilla.sh [\fI\-n | \-\-no\-personal\fP]
+pozilla.sh [\fI\-n\fP | \fI\-\-no\-personal\fP]
+.br 
+pozilla.sh [\fI\-o\fP | \fI\-\-output\-file\fP]
 .SH "DESCRIPTION"
 .LP 
 pozilla.sh makes i18n and project admins more happy alltogether .\-)
@@ -67,6 +69,9 @@ Runs pozilla.sh in dry mode, so that the statistics table is shown at the end bu
 \fB\-n\fR
 Causes pozilla.sh to not send any personal statistics EMail to the last translators, but to send the statistics EMail to the mailing list \-\- avoids the personal EMail spammage for the last translators if not wished.
 .TP 
+\fB\-o\fR \fIOutput_Filename\fP
+Print the eventually requested statistics table into the given \fIOutput_Filename\fR instead of simply printing it out to \fBstdout\fR.
+.TP 
 \fB\-\-help\fR
 Show a small help screen with all the options.
 .TP 
@@ -76,9 +81,9 @@ Show version informations about pozilla.sh.
 .LP 
 Some real life examples for easier understanding how it can work:
 .LP 
-For simply viewing the projects po files statistics and to not send any EMail (=just for preview of the pozilla.sh statistics functions) you can do in the main project directory:
+For simply viewing the projects po files statistics and to not send any EMail (=just for preview of the pozilla.sh statistics functions) you can do in the main project directory (with the "\fB\-o\fR" option you can get the statistics table into the given \fBstatistics_for_all\fR file):
 .LP 
-pozilla.sh \-\-dry\-run
+pozilla.sh \-\-dry\-run (\-o \fBstatistics_for_all\fR)
 .LP 
 Then you can simply run this if the release will be in 6 days and if you're in the main project directory:
 .LP 

@@ -26,7 +26,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.0
+export POZILLA_RELEASE=4.1
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -68,6 +68,15 @@ for app in msgfmt msgmerge make grep sed awk mutt
 				exit 1
 		fi
 	done	
+
+#
+# Temporarily here .-)
+#
+if test "hi$USER" = "hiyaneti" ; then
+	echo "---------------------------------------------------------------"
+	echo "Welcome back Yanko to pozillaistan (there's \"--dry-run\") ,-)"
+	echo "---------------------------------------------------------------"
+fi
 
 #
 # That's Pozilla, guy!
@@ -138,6 +147,7 @@ do
 	echo " await a ':' separated list like \"az:tr:uk\"."
 	echo ""
 	echo "-S --statistics   Print out the statistics table at the end"
+	echo "-o --output-file  Print the eventual statistics table to the given file"
 	echo "-D --dry-run      Don't send any EMails, create statistics (implies -S)"
 	echo "-n --no-personal  Don't send personal EMails to the last translators"
 	echo "-v --version      Version informations"
@@ -174,6 +184,34 @@ do
 		echo "---------------------------------------------------------------"
 		export NO_PERSONAL=yes
 	fi
+	;;
+	-o|--output-file)
+	shift 1
+		if test "file$1" = "file" ; then
+			echo "---------------------------------------------------------------"
+			echo "!WARNING¡"
+			echo ""
+			echo "No output filename given! Will print an eventual statistics"
+			echo " table to stdout."
+			echo "---------------------------------------------------------------"
+		else
+			if test -d "$1" ; then
+				export OUTPUT_FILE="$1.statistics"
+				
+				echo "---------------------------------------------------------------"
+				echo "\"$1\" is a directory! Will take \"$OUTPUT_FILE\" as filename."
+				echo "---------------------------------------------------------------"
+			else
+				export OUTPUT_FILE="$1"
+			fi
+
+			shift 1
+			
+			echo "---------------------------------------------------------------"
+			echo "Will print an eventual statistics table to the following file:"
+			echo "\"$OUTPUT_FILE\""
+			echo "---------------------------------------------------------------"
+		fi
 	;;
 	-m|--mailinglist)
 	shift 1
@@ -710,7 +748,11 @@ fi
 # Print out the statistics table if necessary.
 #
 if test "&$PRINT_TABLE" = "&yes" ; then
-	echo -e "$STAT_TABLE"
+	if test "q$OUTPUT_FILE" != "q" ; then
+		echo -e "$STAT_TABLE" > $OUTPUT_FILE
+	else
+		echo -e "$STAT_TABLE"
+	fi
 fi
 
 #
