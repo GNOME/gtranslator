@@ -2,7 +2,7 @@
 ## The OpenTag translation memory backend for gtranslator.
 ##
 
-tm_backends_xmldir = $(libdir)/gtranslator/backends/translation-memories
+tm_backends_xmldir = $(libdir)/gtranslator/translation-memories
 tm_backendsdir = $(tm_backends_xmldir)/opentag
 
 tm_backends_xml_DATA = opentag.xml
