@@ -9,8 +9,6 @@
 %define release		%{!?CUSTOM_RELEASE:%default_release}
 %define prefix		/usr
 %define	sysconfdir	/etc
-%define mandir		/usr/man
-%define docdir		/usr/doc
 
 Name: 		gtranslator
 Vendor: 	GNOME Project
@@ -22,7 +20,7 @@ Group: 		Development/Tools
 Source:		http://www.gtranslator.org/download/releases/%{version}/gtranslator-%{version}.tar.gz
 URL: 		http://www.gtranslator.org
 BuildRoot:	/var/tmp/gtranslator-%{version}
-Docdir:		%{docdir}
+Docdir:		%{_docdir}
 Summary:	gtranslator is a comfortable po file editor with many bells and whistles.
 Requires:	glib >= 1.2.8, gtk+ >= 1.2.8, gnome-libs >= 1.2.8, imlib, gconf >= 0.9.0
 Requires:	gnome-vfs >= 0.4.1, gal >= 0.5, scrollkeeper >= 0.1.4
@@ -43,6 +41,9 @@ file within nautilus and/or to open the file with gtranslator per a single
 icon/menu entry selection.
 
 %changelog
+*  Thu Apr 19 2001 Fatih Demir  <kabalak@gtranslator.org>
+- Used the _mandir and _docdir macros from RPM instead of locally defining them.
+
 *  Sat Mar 31 2001 Fatih Demir	<kabalak@gtranslator.org>
 - Made this first spec.in file for easifying RPM builders' work.
 
@@ -116,8 +117,8 @@ scrollkeeper-update
 %{prefix}/share/omf/gtranslator/*
 
 %doc AUTHORS COPYING ChangeLog DEPENDS INSTALL NEWS README THANKS TODO
-%{mandir}/man1/gtranslator*
-%{mandir}/man1/pozilla*
+%{_mandir}/man1/gtranslator*
+%{_mandir}/man1/pozilla*
 %{prefix}/share/gnome/help/gtranslator/C/*
 %{prefix}/share/gnome/help/gtranslator/ja/*
 
@@ -139,4 +140,4 @@ scrollkeeper-update
 %defattr(0444, bin, bin)
 %{prefix}/share/oaf/Nautilus_Gtranslator_View.oaf
 %{prefix}/share/gnome/ui/nautilus-gtranslator-view-ui.xml
-%{mandir}/man1/nautilus-gtranslator-view*
+%{_mandir}/man1/nautilus-gtranslator-view*
