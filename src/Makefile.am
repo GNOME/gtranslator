@@ -29,6 +29,7 @@ gtranslator_SOURCES = \
 	gtr_dialogs.c gtr_dialogs.h \
 	about.c about.h \
 	prefs.c prefs.h \
+	session.c session.h \
 	messages.h \
 	languages.h 
 

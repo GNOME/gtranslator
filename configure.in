@@ -67,6 +67,7 @@ else
 	AC_MSG_RESULT(["Ok, "
 "******* Not installing the mime and keys files for the mime-types."])
 fi
+AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 
 dnl -------------------------------------------------------------------
 dnl For Karl and the other (X)EMacs lovers ... [ _I_ love VIm ... ] 
