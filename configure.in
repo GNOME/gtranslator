@@ -9,9 +9,9 @@ AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
 dnl -------------------------------------------------------------------
-dnl Use xml-i18n-tools.
+dnl Use intltools.
 dnl -------------------------------------------------------------------
-AM_PROG_XML_I18N_TOOLS
+AC_PROG_INTLTOOL(0.11)
 
 dnl -------------------------------------------------------------------
 dnl Libtool -- needed for backends.

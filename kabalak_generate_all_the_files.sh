@@ -36,7 +36,7 @@ $a "libtoolize -> " && echo "no"|libtoolize --copy --force 2>&1 1>/dev/null
 }
 grep -sq GETTEXT configure.in && {
 $a "gettextize -> " && echo "no"|gettextize --copy --force 2>&1 1>/dev/null
-$a "xml-i18n-toolize -> " && xml-i18n-toolize --copy --force 2>&1 1>/dev/null
+$a "intltoolize -> " && intltoolize --copy --force 2>&1 1>/dev/null
 }
 $a "autoheader -> " && autoheader
 echo ""

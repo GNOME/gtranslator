@@ -26,7 +26,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.5FIXME
+export POZILLA_RELEASE=4.5FIXME.2
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -554,7 +554,9 @@ export SUBJECT="[ Pozilla #$POZILLA_NO ] $PACKAGE R $RELEASE"
 #
 # Here we build up a recent pot file for the project.
 #
-if test "q`which xml-i18n-update`" != "q" ; then
+if test "q`which intltool-update`" != "q" ; then
+	intltool-update --pot 2>&1 >/dev/null
+elif test "q`which xml-i18n-update`" != "q" ; then
 	xml-i18n-update --pot 2>&1 >/dev/null
 elif test -f Makefile -a -f POTFILES.in ; then
 	[ -f $PACKAGE.pot ] && rm -f $PACKAGE.pot
