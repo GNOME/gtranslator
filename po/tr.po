@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.31\n"
-"POT-Creation-Date: 2000-11-25 11:55+0100\n"
+"POT-Creation-Date: 2000-12-01 22:37+0100\n"
 "PO-Revision-Date: 2000-11-25 11:56+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -77,7 +77,7 @@ msgstr "Yazýlýmý gözönüne al"
 msgid "English"
 msgstr "Orjinal metinlerde"
 
-#: src/dialogs.c:231 src/gui.c:758
+#: src/dialogs.c:231 src/gui.c:759
 msgid "Translated"
 msgstr "Tercüme metinlerinde"
 
@@ -319,7 +319,7 @@ msgstr "Son"
 msgid "Missing"
 msgstr "Eksik"
 
-#: src/gui.c:290 src/gui.c:745 src/gui.c:749
+#: src/gui.c:290 src/gui.c:746 src/gui.c:750
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -342,46 +342,46 @@ msgstr "Po dosyasýnda bul"
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:461
+#: src/gui.c:462
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:557
+#: src/gui.c:558
 msgid "Bye bye!"
 msgstr "Güle Güle!"
 
 #. *
 #. * Assign the first part.
 #. *
-#: src/gui.c:733
+#: src/gui.c:734
 #, c-format
 msgid "Message %d / %d / Status:"
 msgstr "Ileti: %d / %d / Durum:"
 
-#: src/gui.c:745
+#: src/gui.c:746
 #, c-format
 msgid "%s %s [ %i Fuzzy left ]"
 msgstr "%s %s [ %i Fuzzy geriye kaldý ]"
 
-#: src/gui.c:749
+#: src/gui.c:750
 #, c-format
 msgid "%s %s [ No fuzzy left ]"
 msgstr "%s %s [ Fuzzy ileti kalmadý ]"
 
-#: src/gui.c:764
+#: src/gui.c:765
 msgid "Stick"
 msgstr "Kalýcý"
 
-#: src/gui.c:772
+#: src/gui.c:773
 #, c-format
 msgid "%s %s [ %i Untranslated left ]"
 msgstr "%s %s [ %i tercüme edilmemiþ ileti geriye kaldý ]"
 
-#: src/gui.c:772 src/gui.c:776
+#: src/gui.c:773 src/gui.c:777
 msgid "Untranslated"
 msgstr "Tercüme edilmemiþ"
 
-#: src/gui.c:776
+#: src/gui.c:777
 #, c-format
 msgid "%s %s [ No untranslated left ]"
 msgstr "%s %s [ Tercümesiz ileti kalmamýþ ]"
@@ -650,7 +650,7 @@ msgstr "Velþ"
 msgid "Specifies the main-window geometry"
 msgstr "Ana pencere boyutlarýný belirler"
 
-#: src/main.c:86
+#: src/main.c:81
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf baþlama hatasý: `%s'."
@@ -664,7 +664,7 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:132 src/parse.c:491
+#: src/parse.c:132 src/parse.c:490
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" hiç yok ki !"
@@ -690,24 +690,25 @@ msgstr ""
 "%s"
 
 #: src/parse.c:255 src/parse.c:261
-msgid "There's no file to open!\n"
+#, fuzzy
+msgid "There's no file to open!"
 msgstr "Açilacak dosya yok!\n"
 
-#: src/parse.c:296
+#: src/parse.c:295
 msgid "The file has no header!"
 msgstr "Dosyanýn baþlýðý yok!"
 
-#: src/parse.c:299
+#: src/parse.c:298
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 
-#: src/parse.c:302
+#: src/parse.c:301
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:479
+#: src/parse.c:478
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -719,7 +720,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:536
+#: src/parse.c:535
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -730,11 +731,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:544
+#: src/parse.c:543
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþiksiz"
 
-#: src/parse.c:614
+#: src/parse.c:613
 #, c-format
 msgid ""
 "File %s\n"
@@ -743,11 +744,11 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:651
+#: src/parse.c:650
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
 
-#: src/parse.c:676
+#: src/parse.c:675
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -756,20 +757,20 @@ msgstr ""
 "%s baþarýyla\n"
 "denetlendi"
 
-#: src/parse.c:694
+#: src/parse.c:693
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:791
+#: src/parse.c:790
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
 
-#: src/parse.c:911
+#: src/parse.c:910
 msgid "An update would cause no changes."
 msgstr "Bir yenileme hiç bir deðiþikliðe yol açmazdý."
 
-#: src/parse.c:929
+#: src/parse.c:928
 msgid "The update was successfull."
 msgstr "Yenileme baþarýlý oldu."
 
@@ -998,16 +999,17 @@ msgstr "Taranacak tercüme/ileti tabaný dili"
 msgid "language_code"
 msgstr "dil_kodu"
 
-#: libgtranslator/main.c:102
+#: libgtranslator/main.c:100
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr ...\n"
+"gtranslatord baþarýyla baþladý ve þimdilik birtakým birþeyler yapacaktýr "
+"...\n"
 
 #. *
 #. * Print some more exact informations on the GConf init-error.
 #. *
-#: libgtranslator/main.c:120
+#: libgtranslator/main.c:118
 #, c-format
 msgid "GConf initialization error: `%s'"
 msgstr "GConf baþlama hatasý: `%s'"
@@ -1161,3 +1163,89 @@ msgstr "Son deðiþim:"
 msgid "Revision: "
 msgstr "Sürüm:"
 
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: data/ui/beginners_druid.glade.h:7
+#, fuzzy
+msgid "gtranslator -- beginner's druid"
+msgstr "gtranslator -- baþlýdý deðiþtir"
+
+#: data/ui/beginners_druid.glade.h:8
+msgid "gtranslator's beginner's druid -- welcome!"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:9
+msgid ""
+"Welcome to the gtranslator setup druid which will help you to\n"
+"setup gtranslator easily through some questions and help you\n"
+"starting to work with gtranslator.\n"
+"\n"
+"Fatih Demir/kabalak/kabalak@gmx.net"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:14
+msgid "gtranslator's beginner's druid -- data acquirement"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:15
+#, fuzzy
+msgid "Your language:"
+msgstr "Dil :"
+
+#: data/ui/beginners_druid.glade.h:16
+msgid "Your EMail address:"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:17
+msgid "How much featurism is wished?"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:18
+msgid "Update the po-revision date automatically?"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:19
+msgid "Your name"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:20
+#, fuzzy
+msgid "Your name:"
+msgstr "Yazarýn ismi :"
+
+#: data/ui/beginners_druid.glade.h:21
+msgid "Your EMail address"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:22
+msgid ""
+"Hypris! I wanna see it all!\n"
+"Normal level -- not too many stuff please\n"
+"Almost nothing please\n"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:26
+msgid "Hypris! I wanna see it all!"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:27
+msgid "Yes"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:28
+msgid "No"
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:29
+msgid "gtranslator's beginner's druid says: we're done."
+msgstr ""
+
+#: data/ui/beginners_druid.glade.h:30
+msgid ""
+"The wise druid says: we're done :-)\n"
+"\n"
+"Hopefully this is true..."
+msgstr ""

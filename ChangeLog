@@ -1,3 +1,19 @@
+2000-12-01  Fatih Demir	<kabalak@gmx.net>
+
+	* THANKS: Corrected Andrea's name, removed Gediminas
+		from there as he's an AUTHOR now...
+
+	* configure.in: Hehe, did some work.
+		1) Added the data/pkg-config files to
+			the output files' list.
+		2) Added a check for the pkg-config dir
+			which first tries to get a
+			 $PKG_CONFIG_PATH and then cruises
+			  through your candidates for pkgconfig
+			   directories (no, no re-elections possible).
+		3) Put up the requirement of libxml to 1.8.9.
+		4) Install the mime files for gtranslator by default.
+
 2000-11-30  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* src/main.c, libgtranslator/main.c:

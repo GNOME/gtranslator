@@ -117,15 +117,15 @@ AC_SUBST(GNOME_LIB_CONF_DIR)
 AM_CONDITIONAL(GCONF_IS_PRESENT, test x$gconf_is_present = xyes)
 
 dnl -------------------------------------------------------------------
-dnl Check for libxml >= 1.8.7 and get the cflags and libs.
+dnl Check for libxml >= 1.8.9 and get the cflags and libs.
 dnl -------------------------------------------------------------------
 AC_PATH_PROG(XML_CONFIG, xml-config, nej)
 if test "our$XML_CONFIG" = "ournej" ; then
 	AC_MSG_ERROR([No xml-config found ! Please install libxml first.])
 else
-	AC_MSG_CHECKING([for libxml >= 1.8.7])
+	AC_MSG_CHECKING([for libxml >= 1.8.9])
 	XML_VERSION=`xml-config --version|sed -e 's/\.//g'`
-	if test "$XML_VERSION" -lt 187 ; then
+	if test "$XML_VERSION" -lt 189 ; then
 		AC_MSG_RESULT("no")
 		AC_MSG_ERROR("Your libxml is too old!")
 	else
@@ -164,7 +164,7 @@ dnl -------------------------------------------------------------------
 dnl Whether to bind the po-files with gtranslator/bind the mime-type ?
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(mime-bind,
-	[  --enable-mime-bind=[no/yes]      Bind the po-files mime-type to gtranslator],,enable_mime_bind=no)
+	[  --enable-mime-bind=[no/yes]      Bind the po-files mime-type to gtranslator],,enable_mime_bind=yes)
 AC_MSG_CHECKING([if to bind the po-files with gtranslator ])
 if test "x$enable_mime_bind" = "xyes" ; then
 	AC_DEFINE(BIND_MIME)
@@ -228,6 +228,39 @@ else
 fi
 
 dnl -------------------------------------------------------------------
+dnl Try to get a pkg-config directory for us ..
+dnl -------------------------------------------------------------------
+AC_MSG_CHECKING([where the pkg-config file should go in])
+PKG_CONF_CONFFILE_DIR="$PKG_CONFIG_PATH"
+if test "foo${PKG_CONF_CONFFILE_DIR}" = "foo" ; then
+	dnl ----------------------------------------------------------
+	dnl Try the standard locations if no variable $PKG_CONFIG_PATH
+	dnl  has been defined on shell-level.
+	dnl ----------------------------------------------------------
+	for dirX in /usr/lib/pkgconfig /usr/libexec/pkgconfig /usr/local/lib/pkgconfig /usr/local/libexec/pkgconfig
+		do
+			if test -d "$dirX" ; then
+				PKG_CONF_CONFFILE_DIR="$dirX"
+				AC_MSG_RESULT([" "
+"·:0 Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
+			fi
+		done
+	dnl ----------------------------------------------------------
+	dnl Test if we did find any pkgconfig directory and use the 
+	dnl  default pkgconfig dir "/usr/lib/pkgconfig" in this case..
+	dnl ----------------------------------------------------------
+	if test "foo${PKG_CONF_CONFFILE_DIR}" = "foo" ; then
+		AC_MSG_RESULT([" "
+"·:0 No existing pkgconfig directory found, using /usr/lib/pkgconfig ..."])
+		PKG_CONF_CONFFILE_DIR="/usr/lib/pkgconfig"
+	fi
+else
+	AC_MSG_RESULT([" "
+"·:0 Taking ${PKG_CONF_CONFFILE_DIR} as pkg-config supplement files directory"])
+fi
+AC_SUBST(PKG_CONF_CONFFILE_DIR)
+
+dnl -------------------------------------------------------------------
 dnl Get the date for the man-page and substitute it there and anywhere.
 dnl -------------------------------------------------------------------
 MY_DATE=`date +%Y-%m-%d`
@@ -246,6 +279,8 @@ data/gnome-config/Makefile
 data/mime/Makefile
 data/mime/gtranslator.keys
 data/oaf/Makefile
+data/pkg-config/Makefile
+data/pkg-config/gtranslator.pc
 data/scripts/Makefile
 data/ui/Makefile
 macros/Makefile
