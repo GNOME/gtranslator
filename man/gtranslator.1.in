@@ -3,14 +3,16 @@
 gtranslator \-\- a comfortable gettext po file editor with many bells and whistles.
 
 .SH "SYNOPSIS"
-.B gtranslator [ \-\-help ] [ \-\-version ] [ \-a filename ] [ \-e po\-file ] [ \-g geometry\-string  ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-n ] [ \-y ]
+.B gtranslator [ \-\-help ] [ \-\-version ] [ \-a filename ] [ \-e po\-file ] [ \-g geometry\-string  ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-s ]
 
 .SH "DESCRIPTION"
-gtranslator is a comfortable gettext po file editor with many features like special char featured editing, regular expression based search function, compile/update possiblities.
+gtranslator is a comfortable gettext po file editor with many features like special char featured editing, plural forms view, div. charset support, comfortable prefs, list view of messages, regular expression based search function, compile/update possiblities and much much more.
+
 .TP 
-Of course all standard features of a good application like DnD, session support and supplement files for mime types and menu items are present.
+Of course all standard features of a good application like DnD, session support, supplement files for mime types and menu items are present.
+
 .TP 
-Instant comment view, a comfortable quick navigation messages table with customizable colors, colorschemes, UTF\-8 support, a high level of preferences customizable and a personal learn buffer/translation memory with autotranslation capabilities are the main features of gtranslator.
+Instant comment view, a comfortable quick navigation messages table with customizable colors, colorschemes, UTF\-8 support, a high level of preferizabilation and a personal learn buffer/translation memory with autotranslation capabilities are the main features of gtranslator besides the comfortable editing of the translation entries.
 .SH "OPTIONS"
 .TP 
 .I \-a \-\-auto\-translate=po\-file
@@ -25,14 +27,11 @@ Let's you specify the geometry of gtranslator's main window.
 .I \-b \-\-build\-informations
 Shows the build specifications (date, time, versions, directories) of gtranslator.
 .TP 
-.I \-n \-\-no\-modules
-Inhibit the loading of any backend modules.
-.TP 
-.I \-y \-\-no\-syntax
-Disables any kind of syntax highlighting of editable text in gtranslator.
-.TP 
 .I \-l \-\-learn=po\-file\-to\-learn
 Learns the given po file within the command line without starting the GUI. The personal learn buffer is used as a translation memory to autoaccomplish missing translations/entries.
+.TP
+.I \-s \-\-learn\-statistics
+Print out some statistics and information about the learn buffer of gtranslator on the commandline.
 .TP 
 .I \-\-display
 With this option you can select on which screen gtranslator should appear.
@@ -86,9 +85,13 @@ Some examples for the options.
 .B gtranslator \-b
 Shows you the real build specs/dates of gtranslator.
 
+.TP
+.B gtranslator \-s
+Give me statistics about the learn buffer of gtranslator.
+
 .TP 
 .B gtranslator \-n \-l po\-file\-to\-learn
-Learns the given po file \*(lqpo\-file\-to\-learn\*(rq on the command line without starting up the GUI \-\- modules aren't loaded, too (makes startup a bit faster).
+Learns the given po file \*(lqpo\-file\-to\-learn\*(rq on the command line without starting up the GUI.
 
 .TP 
 .B gtranslator \-a po\-file
@@ -99,8 +102,8 @@ Autotranslates all missing entries from the learn buffer if possible and exits.
 Exports your current learn buffer to the given plain gettext po file (\*(lqpo\-file\-to\-export\*(rq).
 
 .TP 
-.B gtranslator \-n \-y po\-file
-Starts gtranslator in it's normal form except that it doesn't load any backends and does also disable any syntax highlighting \-\- maybe this results in a small bit faster gtranslator :\-)
+.B gtranslator po\-file
+Starts gtranslator with the given po\-file loaded on startup.
 
 .TP 
 .B gtranslator \-g \*(lq460x320+0+0\*(rq
@@ -113,7 +116,7 @@ gtranslator is distributed under the
 or greater.
 
 .SH "AUTHORS"
-Ross Golder <ross@gtranslator.org>, Fatih Demir <kabalak@gtranslator.org>, Gediminas Paulauskas <menesis@gtranslator.org>, Thomas Ziehmer <thomas@gtranslator.org>, Kevin Vandersloot <kfv101@psu.edu> and Peeter Vois <peeter@gtranslator.org>.
+Ross Golder <ross@gtranslator.org>, Fatih Demir <kabalak@gtranslator.org> (previously also: Gediminas Paulauskas <menesis@gtranslator.org>, Thomas Ziehmer <thomas@gtranslator.org>, Kevin Vandersloot <kfv101@psu.edu> and Peeter Vois <peeter@gtranslator.org>).
 .SH "WEBSITE"
 .B http://www.gtranslator.org
 
