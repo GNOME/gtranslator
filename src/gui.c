@@ -1129,8 +1129,6 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 	}
 
-	/* FIXME: this function is used no notify that file has changed, not
-	 * just the text, and sometimes widget==NULL */
 	if(widget)
 	{
 		gint selpos=0;
@@ -1138,7 +1136,7 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		update_count++;
 
 		/*
-		 * Check if there were already made an update -- don#t update
+		 * Check if there were already made an update -- don't update
 		 *  the syntax 3x for only one reason/change.
 		 */
 		if(update_count >= 2)
@@ -1148,7 +1146,7 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 	
 		/*
-		 * Determine if the translation box owns currently any selection.
+		 * Determine any selections the translation box currently owns.
 		 */
 		if(GTK_EDITABLE(widget)->has_selection)
 		{
@@ -1158,8 +1156,8 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		gtranslator_syntax_update_text(widget);
 
 		/*
-		 * If there were any position from the selection we can now again go
-		 *  there.
+		 * If there were any position from the selection we can 
+		 *  now again go there.
 		 */
 		if(selpos > 0)
 		{
@@ -1184,7 +1182,14 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 		return;
 
 	result=g_strdup(text);
-	invert_dot(result);
+	
+	/*
+	 * If the inserted char is itself an special character, don't invert it.
+	 */
+	if(result[0]!=_("·")[0])
+	{
+		invert_dot(result);
+	}
 
 	gtk_signal_handler_block_by_func(GTK_OBJECT(editable),
 					 GTK_SIGNAL_FUNC(insert_text_handler),

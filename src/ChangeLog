@@ -2,7 +2,9 @@
 
 	* gui.c: Count the syntax updates we do perform -- avoid updating
 		the syntax 3x or twice just because of a change and the 
-		 syntax functions -- should be less flickering now.
+		 syntax functions -- should be less flickering now; also
+		  don't invert the '·' character (or it's translated 
+		   equivalent) while inserting.
 
 2001-03-31  Fatih Demir <kabalak@gtranslator.org>
 
