@@ -82,33 +82,37 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 		/*
 		 * And now the URI/XFER action...
 		 */
-		switch(gnome_vfs_xfer_uri(file, destination, GNOME_VFS_XFER_FOLLOW_LINKS,
-			GNOME_VFS_XFER_ERROR_MODE_ABORT, GNOME_VFS_XFER_OVERWRITE_ACTION_REPLACE,
-			NULL, NULL))
+		switch(gnome_vfs_xfer_uri(file,
+				destination,
+				GNOME_VFS_XFER_FOLLOW_LINKS,
+				GNOME_VFS_XFER_ERROR_MODE_ABORT,
+				GNOME_VFS_XFER_OVERWRITE_ACTION_REPLACE,
+				NULL,
+				NULL))
 		{
 			case GNOME_VFS_ERROR_NOT_FOUND:
-				g_warning(_("File `%s' couldn't be found!"), gnome_vfs_uri_to_string(
-					file, 0));
+				g_warning(_("File `%s' couldn't be found!"),
+					gnome_vfs_uri_to_string(file, 0));
 				return NULL;
 					break;
 			case GNOME_VFS_ERROR_INVALID_URI:
-				g_warning(_("Malformed URI `%s' entered!"), gnome_vfs_uri_to_string(
-					file, 0));
+				g_warning(_("Malformed URI `%s' entered!"),
+					gnome_vfs_uri_to_string(file, 0));
 				return NULL;
 					break;
 			case GNOME_VFS_ERROR_HOST_NOT_FOUND:
-				g_warning(_("Host `%s' couldn't be found!"), gnome_vfs_uri_get_host_name(
-					file));
+				g_warning(_("Host `%s' couldn't be found!"),
+					gnome_vfs_uri_get_host_name(file));
 				return NULL;
 					break;
 			case GNOME_VFS_ERROR_INVALID_HOST_NAME:
-				g_warning(_("Hostname `%s' is not valid!"), gnome_vfs_uri_get_host_name(
-					file));
+				g_warning(_("Hostname `%s' is not valid!"),
+					gnome_vfs_uri_get_host_name(file));
 				return NULL;
 					break;
 			case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-				g_warning(_("Host `%s' has no address!"), gnome_vfs_uri_get_host_name(
-					file));
+				g_warning(_("Host `%s' has no address!"),
+					gnome_vfs_uri_get_host_name(file));
 				return NULL;
 					break;
 			case GNOME_VFS_ERROR_CANCELLED:
