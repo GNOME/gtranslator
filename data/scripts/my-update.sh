@@ -28,12 +28,16 @@ if test -f "POTFILES.in" -a -n "POTFILES.in" ; then
 	#
 	# Now build the updated po-file.
 	#
-	xgettext --default-domain=$PACKAGE --directory=.. \
-	  --add-comments --keyword=_ --keyword=N_ \
-	  --files-from=./POTFILES.in \
-	&& test ! -f $PACKAGE.po \
-	   || ( rm -f ./PACKAGE.pot \
-	&& mv $PACKAGE.po ./$PACKAGE.pot );
+	if test -x "./update.sh" ; then
+		./update.sh -P
+	else
+		xgettext --default-domain=$PACKAGE --directory=.. \
+		  --add-comments --keyword=_ --keyword=N_ \
+		  --files-from=./POTFILES.in \
+		&& test ! -f $PACKAGE.po \
+		   || ( rm -f ./PACKAGE.pot \
+		&& mv $PACKAGE.po ./$PACKAGE.pot );
+	fi 
 	#
 	# Now check the updated file for changes.
 	#
