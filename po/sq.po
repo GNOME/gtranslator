@@ -7,13 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-17 02:31+0100\n"
-"PO-Revision-Date: 2004-02-17 02:34+0100\n"
+"POT-Creation-Date: 2004-06-30 13:05+0200\n"
+"PO-Revision-Date: 2004-06-30 13:08+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -66,7 +67,7 @@ msgstr "Nuk arrij të tërheq informacionet mbi autorin!"
 #.
 #: src/color-schemes.c:324 src/translator.c:318
 msgid "Unknown"
-msgstr "I panjohur"
+msgstr "Nuk njihet"
 
 #: src/color-schemes.c:325
 msgid "<Not Given>"
@@ -177,7 +178,7 @@ msgstr "gtranslator -- zevëndëso"
 
 #: src/dialogs.c:818 src/menus.c:355
 msgid "Replace"
-msgstr "Zevëndëso"
+msgstr "Zëvendëso"
 
 #: src/dialogs.c:819
 msgid "Replace all"
@@ -321,7 +322,7 @@ msgstr "gtranslator -- pyet buffer-in tuaj personal të mësimit"
 
 #: src/dialogs.c:1256 src/menus.c:360
 msgid "Query"
-msgstr "Pyet"
+msgstr "Kërkesë"
 
 #: src/dialogs.c:1257
 msgid "Query message content"
@@ -385,56 +386,56 @@ msgstr ""
 "Nuk u gjet\n"
 "\"%s\""
 
-#: src/gui.c:182
+#: src/gui.c:184
 msgid "Edit comment"
 msgstr "Ndrysho komentin"
 
-#: src/gui.c:493
+#: src/gui.c:495
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ %i akoma me gabime (Fuzzy) ]"
 msgstr[1] "%s [ %i akoma me gabime (Fuzzy) ]"
 
-#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
+#: src/gui.c:495 src/gui.c:499 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "Me gabime"
 
-#: src/gui.c:497
+#: src/gui.c:499
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nuk ka më asnjë mesazh me gabime ]"
 
-#: src/gui.c:505
+#: src/gui.c:507
 msgid "Sticky (Message & translation are the same)"
 msgstr "Ngjit (Mesazhi dhe përkthimi i tij janë të njëjtë)"
 
-#: src/gui.c:507 src/messages-table.c:332
+#: src/gui.c:509 src/messages-table.c:332
 msgid "Translated"
 msgstr "Përkthyer"
 
-#: src/gui.c:516
+#: src/gui.c:518
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ %i akoma i papërkthyer ]"
 msgstr[1] "%s [ %i akoma i papërkthyer ]"
 
-#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
+#: src/gui.c:518 src/gui.c:520 src/messages-table.c:315
 msgid "Untranslated"
 msgstr "Papërkthyer"
 
-#: src/gui.c:518
+#: src/gui.c:520
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Nuk ka asnjë mesazh të papërkthyer ]"
 
-#: src/gui.c:537
+#: src/gui.c:539
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Mesazhi %d / %d / Gjendja: %s (Mesazhi përmban forma në shumës)"
 
-#: src/gui.c:541
+#: src/gui.c:543
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Mesazhi %d / %d / Gjendja: %s"
@@ -530,7 +531,7 @@ msgstr "Arabe"
 
 #: src/languages.c:49
 msgid "Azerbaijani Turkish"
-msgstr "Turqishte e Azerbaijani"
+msgstr "Turqishte Azerbaixhanit"
 
 #: src/languages.c:53
 msgid "Basque"
@@ -566,7 +567,7 @@ msgstr "Kineze/Tradicionale"
 
 #: src/languages.c:85
 msgid "Croatian"
-msgstr "Kroacisht"
+msgstr "Kroate"
 
 #: src/languages.c:89
 msgid "Czech"
@@ -629,158 +630,162 @@ msgid "Gujarati"
 msgstr "Gujarati"
 
 #: src/languages.c:153
+msgid "Hebrew"
+msgstr "Hebraike"
+
+#: src/languages.c:157
 msgid "Hindi"
 msgstr "Hindi"
 
-#: src/languages.c:157
+#: src/languages.c:161
 msgid "Hungarian"
 msgstr "Hungarisht"
 
-#: src/languages.c:161
-msgid "Icelandic"
-msgstr "Islanda"
-
 #: src/languages.c:165
+msgid "Icelandic"
+msgstr "Islandeze"
+
+#: src/languages.c:169
 msgid "Indonesian"
 msgstr "Indoneziane"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Italian"
 msgstr "Italisht"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Irish"
 msgstr "Irlandeze"
 
-#: src/languages.c:177
+#: src/languages.c:181
 msgid "Japanese"
 msgstr "Japonisht"
 
-#: src/languages.c:181
+#: src/languages.c:185
 msgid "Kannada"
 msgstr "Kanadeze"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Korean"
 msgstr "Koreane"
 
-#: src/languages.c:189
-msgid "Latvian"
-msgstr "Latuane"
-
 #: src/languages.c:193
-msgid "Lithuanian"
-msgstr "Lituane"
+msgid "Latvian"
+msgstr "Letonisht"
 
 #: src/languages.c:197
+msgid "Lithuanian"
+msgstr "Lituaniane"
+
+#: src/languages.c:201
 msgid "Malay/Bahasa Melayu"
 msgstr "Malay/Bahasa Melayu"
 
-#: src/languages.c:201
+#: src/languages.c:205
 msgid "Maltese"
 msgstr "Malteze"
 
-#: src/languages.c:205
+#: src/languages.c:209
 msgid "Marathi"
 msgstr "Marathi"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Norwegian/Bokmaal"
 msgstr "Norvegjisht/Bokmaal"
 
-#: src/languages.c:213
+#: src/languages.c:217
 msgid "Norwegian/Nynorsk"
 msgstr "Norvegjisht/Nynorsk"
 
-#: src/languages.c:217
+#: src/languages.c:221
 msgid "Punjabi"
 msgstr "Punjabi"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Polish"
 msgstr "Polonisht"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Portuguese"
 msgstr "Portugeze"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Portuguese/Brazil"
 msgstr "Portugeze/Brazil"
 
-#: src/languages.c:233
-msgid "Romanian"
-msgstr "Romanisht"
-
 #: src/languages.c:237
+msgid "Romanian"
+msgstr "Rumanisht"
+
+#: src/languages.c:241
 msgid "Russian"
 msgstr "Rusisht"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Serbian/Cyrillic"
 msgstr "Sërbisht/Cyrillic"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Serbian/Latin"
 msgstr "Sërbisht/Latin"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Slovak"
 msgstr "Sllovake"
 
-#: src/languages.c:253
-msgid "Slovenian"
-msgstr "Sllovenisht"
-
 #: src/languages.c:257
+msgid "Slovenian"
+msgstr "Sllovene"
+
+#: src/languages.c:261
 msgid "Spanish"
 msgstr "Spanjisht"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Spanish/Spain"
 msgstr "Spanjisht/Spanjë"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Spanish/Mexico"
 msgstr "Spanjisht/Meksikë"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Swedish"
 msgstr "Suedisht"
 
-#: src/languages.c:273
+#: src/languages.c:277
 msgid "Tamil"
 msgstr "Tamil"
 
-#: src/languages.c:277
+#: src/languages.c:281
 msgid "Telugu"
 msgstr "Telugu"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Thai"
 msgstr "Thai"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Turkish"
 msgstr "Turqisht"
 
-#: src/languages.c:289
-msgid "Ukrainian"
-msgstr "Ukraine"
-
 #: src/languages.c:293
+msgid "Ukrainian"
+msgstr "Ukrahinase"
+
+#: src/languages.c:297
 msgid "Uzbekian"
 msgstr "Uzbekian"
 
-#: src/languages.c:297
-msgid "Vietnamese"
-msgstr "Vietnamisht"
-
 #: src/languages.c:301
+msgid "Vietnamese"
+msgstr "Vietnameze"
+
+#: src/languages.c:305
 msgid "Walloon"
 msgstr "Walloon"
 
-#: src/languages.c:305
+#: src/languages.c:309
 msgid "Welsh"
 msgstr "Welsh"
 
@@ -1029,7 +1034,7 @@ msgstr "Shko tek mesazhi i parë"
 
 #: src/menus.c:207
 msgid "_Back"
-msgstr "_Paraardhësi"
+msgstr "_Mbrapa"
 
 #: src/menus.c:208 src/menus.c:321
 msgid "Move back one message"
@@ -1037,7 +1042,7 @@ msgstr "Kthehesh një mesazh mbrapa"
 
 #: src/menus.c:215
 msgid "_Next"
-msgstr "_Pasardhësi"
+msgstr "_Pasardhëse"
 
 #: src/menus.c:216 src/menus.c:326
 msgid "Move forward one message"
@@ -1077,7 +1082,7 @@ msgstr "Shko tek mesazhi tjetër i papërkthyer"
 
 #: src/menus.c:255
 msgid "_Bookmarks"
-msgstr "_Libërshënues..."
+msgstr "_Libërshënues"
 
 #: src/menus.c:256
 msgid "_Colorschemes"
@@ -1125,7 +1130,7 @@ msgstr "Rifresko"
 
 #: src/menus.c:303
 msgid "Header"
-msgstr "Kreu"
+msgstr "Kreu i faqes"
 
 #: src/menus.c:304
 msgid "Edit the header"
@@ -1141,19 +1146,19 @@ msgstr "Anullo veprimin e fundit të kryer"
 
 #: src/menus.c:316
 msgid "First"
-msgstr "I pari"
+msgstr "E Para"
 
 #: src/menus.c:320
 msgid "Back"
-msgstr "Paraardhës"
+msgstr "Mbrapa"
 
 #: src/menus.c:325
 msgid "Next"
-msgstr "Pasardhës"
+msgstr "Vazhdo"
 
 #: src/menus.c:329
 msgid "Last"
-msgstr "I fundit"
+msgstr "E Fundit"
 
 #: src/menus.c:334
 msgid "Missing"
@@ -1492,7 +1497,7 @@ msgstr "Kodi i gjuhës:"
 #.
 #: src/prefs.c:528
 msgid "Functionality"
-msgstr "Funksione"
+msgstr "Funksionaliteti"
 
 #: src/prefs.c:531
 msgid "Enable the functionality to update a po file from within gtranslator"
