@@ -92,7 +92,10 @@ static void clicked_function(GnomeDialog *dialog, gint button,
 {
 	if(!button || button==1)
 	{
-		GTR_PREFS_DIALOG(interesting)->read_all_options_function();
+		if(GTR_PREFS_DIALOG(interesting)->read_all_options_function)
+		{
+			GTR_PREFS_DIALOG(interesting)->read_all_options_function();
+		}
 		
 		/*
 		 * If "Ok" was clicked on, then we'd to close the dialog, too.
