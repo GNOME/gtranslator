@@ -17,24 +17,14 @@
 #include "interface.h"
 #include "support.h"
 
-#ifdef ENABLE_NLS 
-	#ifndef __GNOME_I18N_H__
-		#include <libgnome/gnome-18n.h>
-	#endif // __GNOME_I18N__
-#endif // ENABLE_NLS
-
-int
-main (int argc, char *argv[])
+int main(int argc,char *argv[])
 {
 	GtkWidget *app1;
-
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain (PACKAGE);
 #endif
-
 	gnome_init ("gtranslator", VERSION, argc, argv);
-
 	/**
 	* The following code was added by Glade to create one of each component
 	* (except popup menus), just so that you see something after building

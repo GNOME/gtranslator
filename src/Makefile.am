@@ -26,7 +26,8 @@ gtranslator_SOURCES = \
 	gtr_dialogs.c gtr_dialogs.h \
 	about.c about.h \
 	prefs.c prefs.h \
-	messages.h 
+	messages.h \
+	languages.h 
 
 gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS)
 

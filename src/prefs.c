@@ -11,47 +11,6 @@
 
 #include "prefs.h"
 
-/**
-* A languages table which should include all the languages
-**/
-const gchar languages[] = 
-{
-	_("Bulgarian"),
-	_("Catalan"),
-	_("Chinese/China"),
-	/**
-	* We want to be political correct
-	**/
-	_("Chinese/\"Taiwan\""),
-	_("Danish"),
-	_("English/Canada"),
-	_("English/UK"),
-	_("English/USA"),
-	_("Finish"),
-	_("French"),
-	_("Galician");/* ?? */
-	_("German"),
-	_("Hungarian"),
-	_("Indonesian"),
-	_("Italian"),
-	_("Japanese"),
-	_("Korean"),
-	_("Norwegian"),
-	_("Polish"),
-	_("Portuguese"),
-	_("Portuguese/Brazil"),
-	_("Russian"),
-	_("Spanish"),
-	_("Spanish/Mexico"),
-	_("Swedish"),
-	_("Turkish"),
-	_("Ukrainic"),/* ?? */
-	/**
-	* This list has to be NULL-terminated
-	**/
-	NULL
-};
-
 void prefs_box(GtkWidget *widget,gpointer useless)
 {
 	/**
