@@ -75,7 +75,7 @@ static GtkWidget
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
 	*autosave, *autosave_with_suffix, *sweep_compile_file,
 	*use_learn_buffer, *show_messages_table, *rambo_function,
-	*use_own_mt_colors, *collapse_translated_entries;
+	*use_own_mt_colors, *collapse_translated_entries, *auto_learn;
 
 /*
  * The timeout GtkSpinButton:
@@ -116,7 +116,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 2, _("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		5, 1, _("Po file editing"));
+		6, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		8, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -207,8 +207,12 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
 	    	_("Also query the personal learn buffer while autotranslating untranslated messages"),
 		GtrPreferences.use_learn_buffer, gtranslator_preferences_dialog_changed);
-	keep_obsolete =
+    	auto_learn =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 5,
+	    	_("Automatically learn a newly translated message"),
+		GtrPreferences.auto_learn, gtranslator_preferences_dialog_changed);
+	keep_obsolete =
+	    gtranslator_utils_attach_toggle_with_label(third_page, 6,
 		_("Keep obsolete message in the po files"),
 		GtrPreferences.keep_obsolete, gtranslator_preferences_dialog_changed);
 
@@ -484,6 +488,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.use_own_mt_colors = if_active(use_own_mt_colors);
 	GtrPreferences.use_own_dict = if_active(use_own_dict);
 	GtrPreferences.use_learn_buffer = if_active(use_learn_buffer);
+	GtrPreferences.auto_learn = if_active(auto_learn);
 	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
 	GtrPreferences.autosave = if_active(autosave);
 	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
@@ -555,19 +560,23 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	{
 		/*
 		 * First check if there's such a colorscheme in 
-		 *  ~/.gtranslator/colorschemes before checking the global directory.
+		 *  ~/.gtranslator/colorschemes before checking the global 
+		 *   colorschemes directory.
 		 */
-		GtrPreferences.scheme=g_strdup_printf("%s/.gtranslator/colorschemes/%s.xml",
-			g_get_home_dir(), selected_scheme_file);
+		GtrPreferences.scheme=g_strdup_printf(
+			"%s/.gtranslator/colorschemes/%s.xml",
+				g_get_home_dir(), 
+				selected_scheme_file);
 
 		/*
-		 * If there's no such colorscheme in the ~/.gtranslator/colorschemes
-		 *  directory try the global directory.
+		 * If there's no such colorscheme in the 
+		 *  ~/.gtranslator/colorschemes directory, try the global 
+		 *   colorschemes directory.
 		 */
 		if(!g_file_exists(GtrPreferences.scheme))
 		{
-			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", SCHEMESDIR,
-				selected_scheme_file);
+			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", 
+				SCHEMESDIR, selected_scheme_file);
 		}
 	    
 		if(g_file_exists(GtrPreferences.scheme))
@@ -639,6 +648,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.use_own_dict);
 	gtranslator_config_set_bool("toggles/use_learn_buffer",
 			      GtrPreferences.use_learn_buffer);
+	gtranslator_config_set_bool("toggles/auto_learn",
+			      GtrPreferences.auto_learn);
 	gtranslator_config_set_bool("toggles/collapse_translated_entries",
 			      GtrPreferences.collapse_translated);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
@@ -789,6 +800,8 @@ void gtranslator_preferences_read(void)
 
 	GtrPreferences.use_learn_buffer = gtranslator_config_get_bool(
 		"toggles/use_learn_buffer");
+	GtrPreferences.auto_learn = gtranslator_config_get_bool(
+		"toggles/auto_learn");
 	GtrPreferences.match_case = gtranslator_config_get_bool(
 		"find/case_sensitive");
 	GtrPreferences.find_in = gtranslator_config_get_int("find/find_in");

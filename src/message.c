@@ -294,7 +294,10 @@ void gtranslator_message_update(void)
 		/*
 		 * Learn the msgstr as a string.
 		 */
-		gtranslator_learn_string(msg->msgid, msg->msgstr);
+		if(GtrPreferences.auto_learn)
+		{
+			gtranslator_learn_string(msg->msgid, msg->msgstr);
+		}
 		
 	} else {
 		msg->msgstr = NULL;
