@@ -64,13 +64,8 @@ int main(int argc, char *argv[])
 	GError	*error=NULL;
 	#endif
 	
-	/**
-	* Is i18n-support wished ?
-	**/
-	#ifdef ENABLE_NLS
 	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain(PACKAGE);
-	#endif
 
 	/**
 	* Do we have GConf? If yes, init it. 

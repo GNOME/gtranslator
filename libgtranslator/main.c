@@ -74,10 +74,8 @@ int main(int argc,char *argv[])
 	/**
 	* Init the NLS if it's necessary.
 	**/
-	#ifdef ENABLE_NLS
 	bindtextdomain("gtranslator", GNOMELOCALEDIR);
 	textdomain("gtranslator");
-	#endif
 	/**
 	* Get the arguments and the context.
 	**/
