@@ -57,6 +57,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
 static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless);
 static void language_changed(GtkWidget * widget, gpointer useless);
+static gchar *get_current_year(void);
 static void substitute(gchar **item, const gchar *bad, const gchar *good);
 static void replace_substring(gchar **item, const gchar *bad, const gchar *good);
 
@@ -330,29 +331,27 @@ void gtranslator_header_free(GtrHeader * h)
 static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpointer useless)
 {
 	GtrHeader 	*ph = po->header;
+	gchar		*prev_translator,
+			*prev_translator_email;
+
+	prev_translator=prev_translator_email=NULL;
 
 	if (page_num != -1)
 		return;
+
 #define update(value,widget) GTR_FREE(value);\
 	value = gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 	update(ph->prj_name, prj_name);
 	update(ph->prj_version, prj_version);
 	update(ph->comment, prj_comment);
 
-	/*
-	 * Convert the header comment back for save and substitute the
-	 *  PACKAGE and VERSION fields in the header.
-	 */
-	ph->comment=gtranslator_header_comment_convert_for_save(ph->comment);
-	replace_substring(&ph->comment, "PACKAGE", ph->prj_name);
-	replace_substring(&ph->comment, "VERSION", ph->prj_version);
-	
 	if (!GtrPreferences.fill_header) {
 		
 		if(po->utf8)
 		{
 			if(ph->translator)
 			{
+				prev_translator=g_strdup(ph->translator);
 				GTR_FREE(ph->translator);
 			}
 			
@@ -360,7 +359,17 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		}
 		else
 		{
+			if(ph->translator)
+			{
+				prev_translator=g_strdup(ph->translator);
+			}
+			
 			update(ph->translator, translator);
+		}
+		
+		if(ph->tr_email)
+		{
+			prev_translator_email=g_strdup(ph->tr_email);
 		}
 		
 		update(ph->tr_email, tr_email);
@@ -377,6 +386,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		{
 			if(ph->translator)
 			{
+				prev_translator=g_strdup(ph->translator);
 				GTR_FREE(ph->translator);
 			}
 			
@@ -385,9 +395,19 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		}
 		else
 		{
+			if(ph->translator)
+			{
+				prev_translator=g_strdup(ph->translator);
+			}
+
 			replace(ph->translator, author, translator);
 		}
-	
+
+		if(ph->tr_email)
+		{
+			prev_translator_email=g_strdup(ph->tr_email);
+		}
+
 		replace(ph->tr_email, email, tr_email);
 		replace(ph->language, language,
 			GTK_COMBO(language_combo)->entry);
@@ -396,6 +416,50 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		replace(ph->encoding, enc, GTK_COMBO(enc_combo)->entry);
 #undef replace
 	}
+	
+	/*
+	 * Check if the  previous translator data could be get and if the
+	 *  last and previous translator were different persons: but only,
+	 *   if the previously last translator isn't listed there yet.
+	 */
+	if(prev_translator && prev_translator_email && ph->translator &&
+		nautilus_strcasecmp(ph->translator, prev_translator) &&
+		nautilus_strcasecmp(ph->comment, prev_translator))
+	{
+		gchar	*prev_header_comment;
+		gchar	*year;
+
+		/*
+		 * Rescue the old header comment and free it's variable.
+		 */
+		GTR_STRDUP(prev_header_comment, ph->comment);
+		GTR_FREE(ph->comment);
+
+		/*
+		 * Eh, what would we do without it ,-)
+		 */
+		year=get_current_year();
+
+		/*
+		 * Now create the "new" header comment from the previously
+		 *  backup'd comment and the previous last translator data.
+		 */
+		ph->comment=g_strdup_printf("%s%s <%s>, %s.\n",
+			prev_header_comment,
+			prev_translator, prev_translator_email, year);
+
+		GTR_FREE(year);
+		GTR_FREE(prev_header_comment);
+	}
+	
+	/*
+	 * Convert the header comment back for save and substitute the
+	 *  PACKAGE and VERSION fields in the header.
+	 */
+	ph->comment=gtranslator_header_comment_convert_for_save(ph->comment);
+	replace_substring(&ph->comment, "PACKAGE", ph->prj_name);
+	replace_substring(&ph->comment, "VERSION", ph->prj_version);
+	
 	if (!po->file_changed) {
 		po->file_changed = TRUE;
 		gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);

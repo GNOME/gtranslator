@@ -1,5 +1,12 @@
 2001-08-09  Fatih Demir <kabalak@gtranslator.org>
 
+	* header_stuff.c: Previous last translator save and holding routine
+		added; if the last translator changes, the previously last
+		 translator's credits go into the header comment in the well-
+		  known standard form TRANSLATOR <EMAIL>, YEAR. -- but only
+		   if the translator's name isn't listed in the header 
+		    comment yet.
+
 	* main.c & preferences.c: Removed the "GCONF_IS_PRESENT" conditionals
 		-- we do now depend on GConf, so no need to conditionalize the
 		 configuration access routines.
