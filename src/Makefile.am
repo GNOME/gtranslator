@@ -52,7 +52,7 @@ gtranslator_SOURCES = \
 	header_stuff.c header_stuff.h \
 	history.c history.h \
 	htmlizer.c htmlizer.h \
-	languages.h \
+	languages.c languages.h \
 	learn.c learn.h \
 	main.c \
 	menus.c menus.h \
