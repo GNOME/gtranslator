@@ -5,7 +5,7 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -23,8 +23,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/poll.h>
-#include <unistd.h>   
-#include <stdio.h>    
+#include <unistd.h>
+#include <stdio.h>
 #include <signal.h>
 #include <ctype.h>
 #include <string.h>
@@ -35,7 +35,7 @@
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif 
+#endif
 
 /* TODO:
  * handle dictionary changes
@@ -48,8 +48,8 @@
 /* number of suggestions to display on each menu. */
 #define MENUCOUNT 10
 
-/* because we keep only one copy of the spell program running, 
- * all ispell-related variables can be static.  
+/* because we keep only one copy of the spell program running,
+ * all ispell-related variables can be static.
  */
 static pid_t spell_pid = -1;
 static int fd_write[2], fd_read[2];
@@ -60,7 +60,7 @@ static GdkColor *highlight = NULL;
 static GdkColor *url_highlight = NULL;
 
 
-static void entry_insert_cb(GtkText *gtktext, 
+static void entry_insert_cb(GtkText *gtktext,
 		gchar *newtext, gint len, gint *ppos, gpointer d);
 static void set_up_signal(void);
 
@@ -127,10 +127,10 @@ void gtkspell_stop() {
 		g_free(highlight);
 		highlight = NULL;
 	}
-        spell_pid = 0;
+	spell_pid = 0;
 }
 
-int gtkspell_start(char *path, char *args[]) {        
+int gtkspell_start(char *path, char *args[]) {
 	if (spell_pid > 0) {
 		error_print("gtkspell_start called while already running.\n");
 		gtkspell_stop();
@@ -143,7 +143,7 @@ int gtkspell_start(char *path, char *args[]) {
 
 	pipe(fd_write);
 	pipe(fd_read);
-        
+
 	spell_pid = fork();
 	if (spell_pid < 0) {
 		error_print("fork: %s\n", strerror(errno));
@@ -155,10 +155,10 @@ int gtkspell_start(char *path, char *args[]) {
 		close(fd_write[1]);
 
 		if (path == NULL) {
-			if (execvp(args[0], args) < 0) 
+			if (execvp(args[0], args) < 0)
 				error_print("execvp('%s'): %s\n", args[0], strerror(errno));
 		} else {
-			if (execv(path, args) < 0) 
+			if (execv(path, args) < 0)
 				error_print("execv('%s'): %s\n", path, strerror(errno));
 		}
 		write(fd_read[1], "!", 1);
@@ -168,7 +168,7 @@ int gtkspell_start(char *path, char *args[]) {
 		char buf[BUFSIZE] = "!\n";
 		struct pollfd fds;
 
-		/* put ispell into terse mode.  
+		/* put ispell into terse mode.
 		 * this makes it not respond on correctly spelled words. */
 		writetext(buf);
 
@@ -218,13 +218,13 @@ static GList* misspelled_suggest(char *word) {
 
 			while ((newword = strtok(NULL, ",")) != NULL) {
 				int len = strlen(newword);
-				if (newword[len-1] == ' ' || newword[len-1] == '\n') 
+				if (newword[len-1] == ' ' || newword[len-1] == '\n')
 					newword[len-1] = 0;
 				if (count == 0) {
 					g_list_append(l, NULL); /* signal the "suggestions" */
 				}
 				/* add it to the list, skipping the initial space. */
-				l = g_list_append(l, 
+				l = g_list_append(l,
 						g_strdup(newword[0] == ' ' ? newword+1 : newword));
 
 				count--;
@@ -269,25 +269,25 @@ static int misspelled_test(char *word) {
 
 static gboolean url_test(char *word) {
 	if (strncasecmp (word, "http:", 5) == 0) {
-            return TRUE;
+	    return TRUE;
 	}
-        else 
-        {
-            return FALSE;
-        }
+	else
+	{
+	    return FALSE;
+	}
 }
 
 static gboolean isurlsep(char c) {
 	return !isalnum(c) && (strchr("/~&.?:=-_+%#", c)==NULL);
 }
 
-static gboolean get_url_from_pos(GtkText* gtktext, int pos, char* buf, 
+static gboolean get_url_from_pos(GtkText* gtktext, int pos, char* buf,
 		int *pstart, int *pend) {
 	int start, end;
 
 	if (isurlsep(GTK_TEXT_INDEX(gtktext, pos))) return FALSE;
 
-	for (start = pos; start >= 0; start--) 
+	for (start = pos; start >= 0; start--)
 		if (isurlsep(GTK_TEXT_INDEX(gtktext, start))) break;
 	start++;
 
@@ -295,20 +295,20 @@ static gboolean get_url_from_pos(GtkText* gtktext, int pos, char* buf,
 		if (isurlsep(GTK_TEXT_INDEX(gtktext, end))) break;
 
 	if (buf) {
-		for (pos = start; pos < end; pos++) 
+		for (pos = start; pos < end; pos++)
 			buf[pos-start] = GTK_TEXT_INDEX(gtktext, pos);
 		buf[pos-start] = 0;
 	}
-        /* g_print("%c\n", buf[strlen(buf)-1]); */
+	/* g_print("%c\n", buf[strlen(buf)-1]); */
 
 	if (pstart) *pstart = start;
 	if (pend) *pend = end;
 
-        if (url_test(buf)) 
-        {
-            return TRUE;
-        }
-            
+	if (url_test(buf))
+	{
+	    return TRUE;
+	}
+
 	return FALSE;
 }
 
@@ -316,18 +316,18 @@ static gboolean iswordsep(char c) {
 	return !isalpha(c) && c != '\'';
 }
 
-static gboolean get_word_from_pos(GtkText* gtktext, int pos, char* buf, 
+static gboolean get_word_from_pos(GtkText* gtktext, int pos, char* buf,
 		int *pstart, int *pend) {
 	int start, end;
 
-        if (get_url_from_pos(gtktext, pos, buf, pstart, pend)) 
-        {
-            return TRUE;
-        }
+	if (get_url_from_pos(gtktext, pos, buf, pstart, pend))
+	{
+	    return TRUE;
+	}
 
 	if (iswordsep(GTK_TEXT_INDEX(gtktext, pos))) return FALSE;
 
-	for (start = pos; start >= 0; start--) 
+	for (start = pos; start >= 0; start--)
 		if (iswordsep(GTK_TEXT_INDEX(gtktext, start))) break;
 	start++;
 
@@ -335,10 +335,10 @@ static gboolean get_word_from_pos(GtkText* gtktext, int pos, char* buf,
 		if (iswordsep(GTK_TEXT_INDEX(gtktext, end))) break;
 
 	if (buf) {
-            for (pos = start; pos < end; pos++)
-            {
-                buf[pos-start] = GTK_TEXT_INDEX(gtktext, pos);
-            }
+	    for (pos = start; pos < end; pos++)
+	    {
+		buf[pos-start] = GTK_TEXT_INDEX(gtktext, pos);
+	    }
 		buf[pos-start] = '\0';
 	}
 
@@ -348,25 +348,25 @@ static gboolean get_word_from_pos(GtkText* gtktext, int pos, char* buf,
 	return TRUE;
 }
 
-static gboolean get_curword(GtkText* gtktext, char* buf, 
+static gboolean get_curword(GtkText* gtktext, char* buf,
 		int *pstart, int *pend) {
 	int pos = gtk_editable_get_position(GTK_EDITABLE(gtktext));
 	return get_word_from_pos(gtktext, pos, buf, pstart, pend);
 }
 
-static void change_color(GtkText *gtktext, 
+static void change_color(GtkText *gtktext,
 		char *newtext, int start, int end, GdkColor *color) {
 	gtk_text_freeze(gtktext);
-	gtk_signal_handler_block_by_func(GTK_OBJECT(gtktext), 
+	gtk_signal_handler_block_by_func(GTK_OBJECT(gtktext),
 			GTK_SIGNAL_FUNC(entry_insert_cb), NULL);
 	
 	gtk_text_set_point(gtktext, start);
-        
+
 	gtk_text_forward_delete(gtktext, end-start);
 
 	gtk_text_insert(gtktext, NULL, color, NULL, newtext, -1);
 
-	gtk_signal_handler_unblock_by_func(GTK_OBJECT(gtktext), 
+	gtk_signal_handler_unblock_by_func(GTK_OBJECT(gtktext),
 			GTK_SIGNAL_FUNC(entry_insert_cb), NULL);
 	gtk_text_thaw(gtktext);
 }
@@ -376,36 +376,36 @@ static gboolean check_at(GtkText *gtktext, int from_pos) {
 	gchar *buf;
 
 	buf = g_new0(gchar, BUFSIZE);
-        
+
 	if (!get_word_from_pos(gtktext, from_pos, buf, &start, &end)) {
 		return FALSE;
 	}
-        
-        if (url_test(buf)) 
-        {
-            if (url_highlight == NULL) {
-                GdkColormap *gc = gtk_widget_get_colormap(GTK_WIDGET(gtktext));
-                url_highlight = g_new0(GdkColor, 1);
-                url_highlight->blue = 255 * 192;
-                gdk_colormap_alloc_color(gc, url_highlight, FALSE, TRUE);
-            }
-            if (buf[strlen(buf)] == '.') 
-                buf[strlen(buf)] = '\0';
-            change_color(gtktext, buf, start, end, url_highlight);
+
+	if (url_test(buf))
+	{
+	    if (url_highlight == NULL) {
+		GdkColormap *gc = gtk_widget_get_colormap(GTK_WIDGET(gtktext));
+		url_highlight = g_new0(GdkColor, 1);
+		url_highlight->blue = 255 * 192;
+		gdk_colormap_alloc_color(gc, url_highlight, FALSE, TRUE);
+	    }
+	    if (buf[strlen(buf)] == '.')
+		buf[strlen(buf)] = '\0';
+	    change_color(gtktext, buf, start, end, url_highlight);
 	    g_free(buf);
-            return TRUE;
-        } else if (misspelled_test(buf)) {
-            if (highlight == NULL) {
-                GdkColormap *gc = gtk_widget_get_colormap(GTK_WIDGET(gtktext));
-                highlight = g_new0(GdkColor, 1);
-                highlight->red = 255 * 256;
-                gdk_colormap_alloc_color(gc, highlight, FALSE, TRUE);
-            }
-            change_color(gtktext, buf, start, end, highlight);
+	    return TRUE;
+	} else if (misspelled_test(buf)) {
+	    if (highlight == NULL) {
+		GdkColormap *gc = gtk_widget_get_colormap(GTK_WIDGET(gtktext));
+		highlight = g_new0(GdkColor, 1);
+		highlight->red = 255 * 256;
+		gdk_colormap_alloc_color(gc, highlight, FALSE, TRUE);
+	    }
+	    change_color(gtktext, buf, start, end, highlight);
 	    g_free(buf);
-            return TRUE;
-        } else {
-		change_color(gtktext, buf, start, end, 
+	    return TRUE;
+	} else {
+		change_color(gtktext, buf, start, end,
 				&(GTK_WIDGET(gtktext)->style->fg[0]));
 		g_free(buf);
 		return FALSE;
@@ -417,27 +417,27 @@ static gboolean check_url_at(GtkText *gtktext, int from_pos) {
 	gchar *buf;
 
 	buf = g_new0(gchar, BUFSIZE);
-        
+
 	if (!get_url_from_pos(gtktext, from_pos, buf, &start, &end)) {
 		g_free(buf);
 		return FALSE;
 	}
-        
-        if (url_test(buf)) 
-        {
-            if (url_highlight == NULL) {
-                GdkColormap *gc = gtk_widget_get_colormap(GTK_WIDGET(gtktext));
-                url_highlight = g_new0(GdkColor, 1);
-                url_highlight->blue = 255 * 192;
-                gdk_colormap_alloc_color(gc, url_highlight, FALSE, TRUE);
-            }
-            if (buf[strlen(buf)] == '.') 
-                buf[strlen(buf)] = '\0';
-            change_color(gtktext, buf, start, end, url_highlight);
+
+	if (url_test(buf))
+	{
+	    if (url_highlight == NULL) {
+		GdkColormap *gc = gtk_widget_get_colormap(GTK_WIDGET(gtktext));
+		url_highlight = g_new0(GdkColor, 1);
+		url_highlight->blue = 255 * 192;
+		gdk_colormap_alloc_color(gc, url_highlight, FALSE, TRUE);
+	    }
+	    if (buf[strlen(buf)] == '.')
+		buf[strlen(buf)] = '\0';
+	    change_color(gtktext, buf, start, end, url_highlight);
 	    g_free(buf);
-            return TRUE;
-        } else {
-		change_color(gtktext, buf, start, end, 
+	    return TRUE;
+	} else {
+		change_color(gtktext, buf, start, end,
 				&(GTK_WIDGET(gtktext)->style->fg[0]));
 		g_free(buf);
 		return FALSE;
@@ -463,21 +463,21 @@ void gtkspell_check_all(GtkText *gtktext) {
 	gtk_editable_set_position(GTK_EDITABLE(gtktext), origpos);
 }
 
-static void entry_insert_cb(GtkText *gtktext, 
+static void entry_insert_cb(GtkText *gtktext,
 		gchar *newtext, gint len, gint *ppos, gpointer d) {
 	int origpos;
 
 	if (spell_pid <= 0) return;
 
 	gtk_signal_handler_block_by_func(GTK_OBJECT(gtktext),
-	                                 GTK_SIGNAL_FUNC(entry_insert_cb),
-	                                 NULL);
+					 GTK_SIGNAL_FUNC(entry_insert_cb),
+					 NULL);
 
 	gtk_text_insert(GTK_TEXT(gtktext), NULL,
 			&(GTK_WIDGET(gtktext)->style->fg[0]), NULL, newtext, len);
 	gtk_signal_handler_unblock_by_func(GTK_OBJECT(gtktext),
-	                                   GTK_SIGNAL_FUNC(entry_insert_cb),
-	                                   NULL);
+					   GTK_SIGNAL_FUNC(entry_insert_cb),
+					   NULL);
 	gtk_signal_emit_stop_by_name(GTK_OBJECT(gtktext), "insert-text");
 	*ppos += len;
 
@@ -509,7 +509,7 @@ static void entry_delete_cb(GtkText *gtktext,
 
 	if (spell_pid <= 0) return;
 
-        // g_print("Whats this shit?\n");
+	// g_print("Whats this shit?\n");
 	origpos = gtk_editable_get_position(GTK_EDITABLE(gtktext));
 	check_at(gtktext, start-1);
 	gtk_editable_set_position(GTK_EDITABLE(gtktext), origpos);
@@ -612,88 +612,45 @@ static void popup_menu(GtkText *gtktext, GdkEventButton *eb, int orig_mouse) {
 
 	buf = g_new0(gchar, BUFSIZE);
 
-        get_curword(gtktext, buf, NULL, NULL);
+	get_curword(gtktext, buf, NULL, NULL);
 
-        if (url_test(buf))
-        {
-	    /*
-	     * Again check for the popup_menu preference and then switch
-	     *  the buttons.
-	     */
-	    if(wants.popup_menu)
-	    {
-                if (orig_mouse == 2) 
-            	{
-            	    lstchar = buf[strlen(buf)-1];
-            	    if (!isalpha(lstchar) && lstchar != '/')
-                	buf[strlen(buf)-1] = '\0';
-		    gtk_menu_popup(make_url_menu(gtktext, buf), NULL, NULL,
-			NULL, NULL, eb->button, eb->time);
-            	    gnome_url_show(buf);
-            	}
-	    }
-	    else
-	    {
-		if (orig_mouse == 3)
-		{
-		    lstchar = buf[strlen(buf)-1];
-		    if (!isalpha(lstchar) && lstchar != '/')
-		    	buf[strlen(buf)-1] = '\0';
-		    gtk_menu_popup(make_url_menu(gtktext, buf), NULL, NULL,
-			NULL, NULL, eb->button, eb->time);
-		    gnome_url_show(buf);
+	if (url_test(buf))
+	{
+		lstchar = buf[strlen(buf)-1];
+		if (!isalpha(lstchar) && lstchar != '/')
+			buf[strlen(buf)-1] = '\0';
+		gtk_menu_popup(make_url_menu(gtktext, buf), NULL, NULL,
+			       NULL, NULL, eb->button, eb->time);
+		gnome_url_show(buf);
+	}
+	else
+	{
+		list = misspelled_suggest(buf);
+		if (list != NULL) {
+			gtk_menu_popup(make_menu(list, gtktext),
+				   NULL, NULL, NULL, NULL,
+				   eb->button, eb->time);
+			for (l = list; l != NULL; l = l->next)
+				g_free(l->data);
+			g_list_free(list);
 		}
-	    }
-	    
-        }
-        else
-        {
-	    if(wants.popup_menu)
-	    {
-        	if (orig_mouse == 2) 
-        	{    
-            	    list = misspelled_suggest(buf);
-        	    if (list != NULL) {
-                	gtk_menu_popup(make_menu(list, gtktext),
-                    	   NULL, NULL, NULL, NULL,
-                           eb->button, eb->time);
-                    for (l = list; l != NULL; l = l->next)
-                            g_free(l->data);
-                    g_list_free(list);
-		    }
-        	}
-	    }
-	    else
-	    {
-		if (orig_mouse == 2) 
-        	{    
-            	    list = misspelled_suggest(buf);
-            	    if (list != NULL) {
-                    gtk_menu_popup(make_menu(list, gtktext),
-                                   NULL, NULL, NULL, NULL,
-                                   eb->button, eb->time);
-                    for (l = list; l != NULL; l = l->next)
-                            g_free(l->data);
-                    g_list_free(list);
-		    }
-                }
-            }
-        }
+	}
 	g_free(buf);
 }
 
 /* ok, this is pretty wacky:
- * we need to let the right-mouse-click go through, so it moves the cursor, 
+ * we need to let the right-mouse-click go through, so it moves the cursor,
  * but we *can't* let it go through, because GtkText interprets rightclicks as
  * weird selection modifiers.
  *
- * so what do we do?  forge rightclicks as leftclicks, then popup the menu. 
- * HACK HACK HACK. 
+ * so what do we do?  forge rightclicks as leftclicks, then popup the menu.
+ * HACK HACK HACK.
  */
-static gint button_press_intercept_cb(GtkText *gtktext, GdkEvent *e, gpointer d) {
+static gint button_press_intercept_cb(GtkText *gtktext, GdkEvent *e, gpointer d)
+{
 	GdkEventButton *eb;
 	gboolean retval;
-        int orig_mouse;
+	int orig_mouse;
 
 	if (spell_pid <= 0) return FALSE;
 
@@ -704,36 +661,25 @@ static gint button_press_intercept_cb(GtkText *gtktext, GdkEvent *e, gpointer d)
 	 * Only allow the right-click to be send to gtkspell if
 	 *  the popup menu if disabled -- in the other case gtkspell
 	 *   takes the middle click.
-	 */   
-	if(wants.popup_menu)
-	{
-		if(eb->button==3)
-		{
-			return FALSE;
-		}
-	}
-	else
-	{
-		if(eb->button==2)
-		{
-			return TRUE;
-		}
-	}
+	 */
+	if(((wants.popup_menu) && (eb->button != 2)) ||
+	   ((!wants.popup_menu) && (eb->button != 3)))
+		return FALSE;
 
-        /* forge the leftclick */
-        orig_mouse = eb->button;
-        eb->button = 1;
-        
-        gtk_signal_handler_block_by_func(GTK_OBJECT(gtktext),
-                                         GTK_SIGNAL_FUNC(button_press_intercept_cb), d);
-        gtk_signal_emit_by_name(GTK_OBJECT(gtktext), "button-press-event",
-                                e, &retval);
-        gtk_signal_handler_unblock_by_func(GTK_OBJECT(gtktext), 
-                                           GTK_SIGNAL_FUNC(button_press_intercept_cb), d);
-        gtk_signal_emit_stop_by_name(GTK_OBJECT(gtktext), "button-press-event");
+	/* forge the leftclick */
+	orig_mouse = eb->button;
+	eb->button = 1;
+
+	gtk_signal_handler_block_by_func(GTK_OBJECT(gtktext),
+					 GTK_SIGNAL_FUNC(button_press_intercept_cb), d);
+	gtk_signal_emit_by_name(GTK_OBJECT(gtktext), "button-press-event",
+				e, &retval);
+	gtk_signal_handler_unblock_by_func(GTK_OBJECT(gtktext),
+					   GTK_SIGNAL_FUNC(button_press_intercept_cb), d);
+	gtk_signal_emit_stop_by_name(GTK_OBJECT(gtktext), "button-press-event");
 	/* now do the menu wackiness */
-        popup_menu(gtktext, eb, orig_mouse);
-        return TRUE;
+	popup_menu(gtktext, eb, orig_mouse);
+	return TRUE;
 }
 
 void gtkspell_uncheck_all(GtkText *gtktext) {
@@ -752,13 +698,13 @@ void gtkspell_uncheck_all(GtkText *gtktext) {
 
 void gtkspell_attach(GtkText *gtktext) {
 
-        if (!gtkspell_running)
-            gtkspell_start(NULL, NULL);
-    
+	if (!gtkspell_running)
+	    gtkspell_start(NULL, NULL);
+
 	gtk_signal_connect(GTK_OBJECT(gtktext), "insert-text",
 		GTK_SIGNAL_FUNC(entry_insert_cb), NULL);
-        gtk_signal_connect_after(GTK_OBJECT(gtktext), "delete-text",
-                                 GTK_SIGNAL_FUNC(entry_delete_cb), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(gtktext), "delete-text",
+				 GTK_SIGNAL_FUNC(entry_delete_cb), NULL);
 	gtk_signal_connect(GTK_OBJECT(gtktext), "button-press-event",
 			GTK_SIGNAL_FUNC(button_press_intercept_cb), NULL);
 
@@ -768,9 +714,9 @@ void gtkspell_attach(GtkText *gtktext) {
 void gtkspell_detach(GtkText *gtktext) {
 	gtk_signal_disconnect_by_func(GTK_OBJECT(gtktext),
 		GTK_SIGNAL_FUNC(entry_insert_cb), NULL);
-        gtk_signal_disconnect_by_func(GTK_OBJECT(gtktext),
-                                      GTK_SIGNAL_FUNC(entry_delete_cb), NULL);
-	gtk_signal_disconnect_by_func(GTK_OBJECT(gtktext), 
+	gtk_signal_disconnect_by_func(GTK_OBJECT(gtktext),
+				      GTK_SIGNAL_FUNC(entry_delete_cb), NULL);
+	gtk_signal_disconnect_by_func(GTK_OBJECT(gtktext),
 			GTK_SIGNAL_FUNC(button_press_intercept_cb), NULL);
 
 	gtkspell_uncheck_all(gtktext);
