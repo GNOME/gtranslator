@@ -97,7 +97,7 @@ void parse_db_for_lang(gchar *language)
 	* Get the nodes.
 	**/
 	node=xmldoc->xmlRootNode->xmlChildrenNode;
-	while(node)
+	while(node!=NULL)
 	{
 		/**
 		* Get the serial.
