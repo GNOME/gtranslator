@@ -4,7 +4,6 @@
 #
 # 2001-12-15, Fatih Demir <kabalak@gtranslator.org>
 #
-%define version		@VERSION@
 %define	default_release	1
 %define release		%{!?CUSTOM_RELEASE:%default_release}
 
@@ -20,12 +19,13 @@ Source:		http://www.gtranslator.org/download/releases/%{version}/%{name}-%{versi
 URL: 		http://www.gtranslator.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 Summary:	gtranslator is a comfortable po file editor with many bells and whistles.
-Buildprereq:	gal-devel >= 0.10.99, gnome-vfs-devel >= 0.4.1, imlib-devel
-Buildprereq:	GConf-devel >= 1.0, glib-devel >= 1.2.8, gtk+-devel >= 1.2.8
-Buildprereq:	gnome-libs-devel >= 1.2.8
 Prereq:		scrollkeeper >= 0.1.4
 Requires:	glib >= 1.2.8, gtk+ >= 1.2.8, gnome-libs >= 1.2.8, imlib, GConf >= 1.0, gettext
-Requires:	gnome-vfs >= 0.4.1, gal >= 0.10.99
+Requires:	gnome-vfs >= 0.4.1, gal >= 0.10.99, ORBit >= 0.5.3, libxml => 1.8.9
+Buildprereq:	gal-devel >= 0.10.99, gnome-vfs-devel >= 0.4.1, imlib-devel
+Buildprereq:	GConf-devel >= 1.0, glib-devel >= 1.2.8, gtk+-devel >= 1.2.8
+Buildprereq:	gnome-libs-devel >= 1.2.8, ORBit-devel >= 0.5.3, libxml-devel => 1.8.9
+Buildprereq:	gnome-doc-tools, docbook-utils, docbook-dtd31-sgml
 
 %description
 gtranslator is a comfortable po file editor with many bells and whistles.
@@ -40,6 +40,8 @@ files immenantly.
 - Added gettext to requirement 
 - Fixed permissions on docs and others
 - Added Buildprereqs
+- Tagged the schema.conf as config file
+- Added ORBit, libxml and documentation tools to requirements
 
 *  Tue Aug 21 2001 Fatih Demir	<kabalak@gtranslator.org>
 
@@ -146,7 +148,7 @@ scrollkeeper-update
 %{_libdir}/gtranslator/backends/*/*.so
 
 %defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/gtranslator.schemas
+%config(noreplace) %{_sysconfdir}/gconf/schemas/gtranslator.schemas
 %{_libdir}/gtranslator/backends/*.xml
 %{_datadir}/gtranslator/etspecs/*etspec
 %{_datadir}/gnome/apps/Development/gtranslator*
