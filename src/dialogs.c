@@ -207,7 +207,7 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	{
 		dialog = gtranslator_file_chooser_new(NULL, 
 											FILESEL_SAVE,
-											_("Save file as.."));
+											_("Save file as..."));
 	}
 	else
 	{
@@ -215,7 +215,7 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 		
 		dialog = gtranslator_file_chooser_new(NULL, 
 											FILESEL_SAVE,
-											_("Save local copy of file as.."));
+											_("Save local copy of file as..."));
 		
 		/*
 		 * Set a local filename in the users home directory with the 
