@@ -20,6 +20,7 @@
 #include "dialogs.h"
 #include "gui.h"
 #include "nautilus-string.h"
+#include "parse.h"
 #include "prefs.h"
 #include "runtime-config.h"
 #include "utils.h"
@@ -405,7 +406,6 @@ permission for it."),
 	return TRUE;
 }
 
-void gtranslator_parse_main(const gchar *filename);
 void open_it_anyway_callback( gint, gpointer );
 
 void open_it_anyway_callback( gint reply, gpointer filename )
