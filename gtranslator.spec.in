@@ -1,154 +1,74 @@
 #
-# The spec file for gtranslator -- originally adapted from Nautilus' and
-#  Gnumeric's spec files, now enhanced and edited by Roy-Magne.
+# The RPM spec file from Dag Wieers <dag@wieers.com> as he done RPMs with it, it shall
+#  work and we have got an updated RPM spec, yeah!
 #
-# 2001-12-15, Fatih Demir <kabalak@gtranslator.org>
-#
-%define	default_release	1
-%define release		%{!?CUSTOM_RELEASE:%default_release}
+Summary: A comfortable po file editor with many bells and whistles.
+Name: gtranslator
+Version: @VERSION@
+Release: 1
+License: GPL
+Group: Development/Tools
+URL: http://www.gtranslator.org
 
-Name: 		gtranslator
-Vendor: 	GNOME Project
-Distribution: 	Any
-Version: 	@VERSION@
-Release: 	%{release}
-Packager:	Roy-Magne Mo <rmo@sunnmore.net>
-Copyright: 	GPL
-Group: 		Development/Tools
-Source:		http://www.gtranslator.org/download/releases/%{version}/%{name}-%{version}.tar.gz
-URL: 		http://www.gtranslator.org
-BuildRoot:	%{_tmppath}/%{name}-%{version}
-Summary:	gtranslator is a comfortable po file editor with many bells and whistles.
-Prereq:		scrollkeeper >= 0.1.4
-Requires:	glib >= 1.2.8, gtk+ >= 1.2.8, gnome-libs >= 1.2.8, imlib, GConf >= 1.0, gettext
-Requires:	gnome-vfs >= 0.4.1, gal >= 0.10.99, ORBit >= 0.5.3, libxml => 1.8.9
-Buildprereq:	gal-devel >= 0.10.99, gnome-vfs-devel >= 0.4.1, imlib-devel
-Buildprereq:	GConf-devel >= 1.0, glib-devel >= 1.2.8, gtk+-devel >= 1.2.8
-Buildprereq:	gnome-libs-devel >= 1.2.8, ORBit-devel >= 0.5.3, libxml-devel => 1.8.9
-Buildprereq:	gnome-doc-tools, docbook-utils, docbook-dtd31-sgml
+Packager: Dag Wieers <dag@wieers.com>
+Vendor: Dag Apt Repository, http://dag.wieers.com/apt/
+
+Source:	http://www.gtranslator.org/download/releases/%{version}/%{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/root-%{name}-%{version}
+Prefix: %{_prefix}
+
+Prereq: scrollkeeper >= 0.1.4
+BuildRequires: gal-devel >= 0.10.99, gnome-vfs-devel >= 0.4.1, imlib-devel
+BuildRequires: GConf-devel >= 1.0, glib-devel >= 1.2.8, gtk+-devel >= 1.2.8
+BuildRequires: gnome-libs-devel >= 1.2.8, ORBit-devel >= 0.5.3, libxml-devel => 1.8.9
+BuildRequires: docbook-utils, docbook-dtd31-sgml
 
 %description
 gtranslator is a comfortable po file editor with many bells and whistles.
 It features many useful function which ease the work of translators of po
 files immenantly.
 
-%changelog
-
-*  Fri Jul 26 2002 Fatih Demir	<kabalak@gtranslator.org>
-
-- Remove unused, unneeded stuff.
-
-*  Mon Dec 03 2001 Roy-Magne Mo  <rmo@sunnmore.net>	0.39.2-1
-- Used rpm4-macros and cleaned up filedefinitions.
-- Moved scrollkeeper to prereq
-- Added gettext to requirement 
-- Fixed permissions on docs and others
-- Added Buildprereqs
-- Tagged the schema.conf as config file
-- Added ORBit, libxml and documentation tools to requirements
-
-*  Tue Aug 21 2001 Fatih Demir	<kabalak@gtranslator.org>
-
-- Applied the future-proofness changes suggested by Mike Newman .-)
-
-*  Sat Aug 18 2001 Mike Newman <mike@gtnorthern.demon.co.uk>
-
-- Changed deps to need GConf rather than gconf.
-- Added etspecs directory, backends, etc.
-- Some general tidying and future-proofing.
-
-*  Wed Aug 08 2001 Fatih Demir	<kabalak@gtranslator.org>
-
-- Removed any nautilus view stuff.
-
-*  Thu Apr 19 2001 Fatih Demir  <kabalak@gtranslator.org>
-
-- Used the _mandir and _docdir macros from RPM instead of locally defining them.
-
-*  Sat Mar 31 2001 Fatih Demir	<kabalak@gtranslator.org>
-
-- Made this first spec.in file for easifying RPM builders' work.
-
 %prep
-%setup -q
+%setup
 
 %build
-%ifarch alpha
-        MYARCH_FLAGS="--host=alpha-redhat-linux"
-%endif
-
-LC_ALL=""
-LINGUAS=""
-LANG=""
-export LC_ALL LINGUAS LANG
-
-if [ ! -f configure ] ; then
-	CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh $MYARCH_FLAGS \
-                --prefix=%{_prefix} --datadir=%{_datadir} \
-                --sysconfdir=%{_sysconfdir} --includedir=%{_includedir} \
-                --libdir=%{_libdir} --bindir=%{_bindir} \
-                --with-gconf
-else
-        CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS \
-                --prefix=%{_prefix} --datadir=%{_datadir} \
-                --sysconfdir=%{_sysconfdir} --includedir=%{_includedir} \
-                --libdir=%{_libdir} --bindir=%{_bindir} \
-                --with-gconf
-fi
-
-if [ "$SMP" != "" ] ; then
-	make -k -j$SMP "MAKE=make -k -j$SMP"
-else
-	make -k
-fi
-
-make check
+%configure \
+	--enable-mime-bind="yes" \
+	--with-gconf
+%{__make} %{?_smp_mflags}
+%{__make} %{?_smp_mflags} check
 
 %install
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
-make -k DESTDIR=$RPM_BUILD_ROOT \
-        prefix=%{_prefix} \
-        sysconfdir=%{_sysconfdir} \
-        datadir=%{_datadir} \
-        includedir=%{_includedir} \
-        mandir=%{_mandir} \
-        libdir=%{_libdir} \
-        bindir=%{_bindir} install
-
-[ -f $RPM_BUILD_ROOT%{_bindir}/gtranslator ] && \
-	strip $RPM_BUILD_ROOT%{_bindir}/gtranslator
-
-%clean
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf %{buildroot}
+%makeinstall \
+	SC_OMFDIR="%{buildroot}%{_datadir}/omf"
+%find_lang %{name}
 
 %post -p /sbin/ldconfig
-scrollkeeper-update
+scrollkeeper-update -q
 
 %postun -p /sbin/ldconfig
-scrollkeeper-update
+scrollkeeper-update -q
 
-%files
+%clean
+%{__rm} -rf %{buildroot}
 
-%defattr(0555, bin, bin)
-%{_bindir}/gtranslator
-%{_bindir}/pozilla.sh
-%{_datadir}/gtranslator/scripts
-
-%defattr(0444, bin, bin, 0555)
-%{_datadir}/gtranslator/colorschemes
-%{_datadir}/omf/gtranslator
-
-%defattr(0444,root,root, 0555)
+%files -f %{name}.lang
+%defattr(-, root, root, 0755)
 %doc AUTHORS COPYING ChangeLog DEPENDS INSTALL NEWS README THANKS TODO
-%{_mandir}/man1/gtranslator*
-%{_mandir}/man1/pozilla*
-%dir %{_datadir}/gnome/help/gtranslator
-%{_datadir}/gnome/help/gtranslator
-
-%defattr(-, root, root)
-%{_datadir}/gtranslator/etspecs/*etspec
-%{_datadir}/gnome/apps/Development/gtranslator*
+%doc %{_datadir}/gnome/help/%{name}/
+%doc %{_mandir}/man1/*
+%{_bindir}/*
+%{_datadir}/%{name}/
+%{_datadir}/gnome/apps/Development/*.desktop
+%{_datadir}/mime-info/*
+%{_datadir}/omf/%{name}/
 %{_datadir}/pixmaps/*.png
-%{_datadir}/pixmaps/gtranslator
-%{_datadir}/mime-info/gtranslator.*
-%{_datadir}/locale/*/LC_MESSAGES/gtranslator.mo
+%{_datadir}/pixmaps/%{name}/
+
+%changelog
+* Sat Jun 14 2003 Dag Wieers <dag@wieers.com> - 0.99-0
+- Updated to release 0.99.
+
+* Tue Mar 18 2003 Dag Wieers <dag@wieers.com> - 0.43-0
+- Initial package. (using DAR)

@@ -3,7 +3,6 @@
 SUBDIRS = \
 	colorschemes \
 	desktop \
-	etspecs \
 	mime \
 	pixmaps \
 	scripts
