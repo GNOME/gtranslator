@@ -96,6 +96,12 @@ static void gtranslator_learn_buffer_learn_function(gpointer date,
 static void gtranslator_learn_buffer_set_umtf_date(void);
 
 /*
+ * Internal GtrLearnResources list sort routine.
+ */
+static gint gtranslator_learn_buffer_sort_learn_resource(
+	gconstpointer one, gconstpointer two);
+
+/*
  * Hash the entries from the given node point.
  */
 static void gtranslator_learn_buffer_hash_from_current_node()
@@ -240,6 +246,30 @@ static void gtranslator_learn_buffer_set_umtf_date()
 	
 	gtranslator_learn_buffer->serial_date=g_strdup(date_string);
 	g_free(date_string);
+}
+
+/*
+ * A sorting function as helper for the g_list_sort calls on the GtrLearnResources
+ *  list in the GtrLearnBuffer.
+ */
+static gint gtranslator_learn_buffer_sort_learn_resource(
+	gconstpointer one, gconstpointer two)
+{
+	/*
+	 * Now catch the cases where index <=> on the two GtrLearnResources.
+	 */
+	if(GTR_LEARN_RESOURCE(one)->index==GTR_LEARN_RESOURCE(two)->index)
+	{
+		return 0;
+	}
+	else if(GTR_LEARN_RESOURCE(one)->index < GTR_LEARN_RESOURCE(two)->index)
+	{
+		return -1;
+	}
+	else
+	{
+		return 1;
+	}
 }
 
 /*
@@ -484,16 +514,35 @@ void gtranslator_learn_shutdown()
 	{
 		xmlNodePtr	resource_node;
 
+		/*
+		 * Sort the resources' list if there's any.
+		 */
+		if(gtranslator_learn_buffer->resources)
+		{
+			gtranslator_learn_buffer->resources=g_list_sort(
+				gtranslator_learn_buffer->resources, 
+					(GCompareFunc) gtranslator_learn_buffer_sort_learn_resource);
+		}
+
+		/*
+		 * Write any resources entry from the list.
+		 */
 		while(gtranslator_learn_buffer->resources!=NULL)
 		{
-			GtrLearnResource *resource=GTR_LEARN_RESOURCE(gtranslator_learn_buffer->resources->data);
+			GtrLearnResource *resource=GTR_LEARN_RESOURCE(
+				gtranslator_learn_buffer->resources->data);
 
 			resource_node=xmlNewChild(index_node, NULL, "resource", NULL);
 			g_return_if_fail(resource_node!=NULL);
 			
+			/*
+			 * Write all the attributes for a resource entry.
+			 */
 			e_xml_set_string_prop_by_name(resource_node, "package", resource->package);
 			e_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
-			e_xml_set_string_prop_by_name(resource_node, "premiereversion", resource->premiereversion);
+			e_xml_set_string_prop_by_name(resource_node, "premiereversion", 
+				resource->premiereversion);
+			
 			e_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
 			
 			gtranslator_learn_buffer->resources=gtranslator_learn_buffer->resources->next;
@@ -637,13 +686,16 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	else
 	{
 		gchar	*query_string;
-		gint	 query_length;
 
 		/*
-		 * Get a 2/3 length string of the search_string.
+		 * Strip out all common punctuation characters before re-querying.
 		 */
-		query_length=(gint ) ((strlen(search_string) - 1) / 0.6);
-		query_string=g_strndup(search_string, query_length);
+		query_string=nautilus_str_strip_chr(search_string, ',');
+		query_string=nautilus_str_strip_chr(query_string, '.');
+		query_string=nautilus_str_strip_chr(query_string, ':');
+		query_string=nautilus_str_strip_chr(query_string, ';');
+		query_string=nautilus_str_strip_chr(query_string, '?');
+		query_string=nautilus_str_strip_chr(query_string, '!');
 
 		/*
 		 * Try this new query.

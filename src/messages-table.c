@@ -78,6 +78,7 @@ GtkWidget *tree;
 ETreeModel *tree_model;
 ETreeMemory *tree_memory;
 ETreePath root_node = NULL;
+
 /*
  * hash table to associate an ETreePath with each message. Used
  * in update_row to dtermine the node given a message that has been
@@ -195,7 +196,14 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 		return message->msgid;
 		break;
 	case COL_TRANS:
-		return gtranslator_utf8_get_utf8_string(&message->msgstr);
+		if(message->msgstr)
+		{
+			return gtranslator_utf8_get_utf8_string(&message->msgstr);
+		}
+		else
+		{
+			return "";
+		}
 		break;
 	case COL_COMMENT:
 		return message->comment->pure_comment;
@@ -203,7 +211,7 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	case COL_STATUS:
 		switch(message->status) {
 		case GTR_MSG_STATUS_UNKNOWN:
-			return _("Unknown");
+			return _("Untranslated");
 			break;
 		case GTR_MSG_STATUS_TRANSLATED:
 			return _("Translated");
@@ -395,8 +403,6 @@ void gtranslator_messages_table_create (void)
 		list = g_list_next(list);
 		i++;
 	}	
-	
-	
 }
 
 /*
@@ -454,7 +460,7 @@ gboolean gtranslator_messages_table_hide()
 	gint position=-1;
 
 	gtranslator_config_init();
-	position=gtranslator_config_get_int("interface/content_pane_position");
+	position=gtranslator_config_get_int("interface/table_pane_position");
 	gtranslator_config_close();
 
 	if(position<=0)

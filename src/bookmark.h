@@ -113,6 +113,11 @@ void gtranslator_bookmark_load_list(void);
 void gtranslator_bookmark_save_list(void);
 
 /*
+ * Get a copy pf the internal bookmarks' list.
+ */
+GList *gtranslator_bookmark_get_list(void);
+
+/*
  * Copy the given GtrBookmark safely.
  */
 GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *bookmark);

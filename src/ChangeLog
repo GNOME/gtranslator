@@ -1,7 +1,23 @@
 2001-07-20  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c: GTR_MSG_STATUS_UNKNOWN => message is
+		untranslated (corrected the display string) and made
+		 the translation returning function respect missing
+		  translations -- no reason to spawn masses of failed
+		   assertions.
+
+	* parse.c: Fill the messages table on parse-time.
+
+	* gui.h/.c: Added messages table widget, pane etc.
+
+	* bookmark.c/.h: Added "gtranslator_bookmark_get_list" function
+		to get a copy of the internally used bookmarks' list.
+
 	* learn.c: Implemented a fallback query modus to get a better
-		matching rate for the searched strings.
+		matching rate for the searched strings; sort the resources
+		 on the <index> part according to their index value:
+		  introduces new "gtranslator_learn_buffer_sort_learn_resource"
+		   GCompareFunc function.
 
 	* messages-table.c: Display the _translated_ status strings
 		capitalized in the messages table .-)

@@ -33,6 +33,7 @@
 #include "gui.h"
 #include "history.h"
 #include "message.h"
+#include "messages-table.h"
 #include "nautilus-string.h"
 #include "open-differently.h"
 #include "parse.h"
@@ -413,6 +414,11 @@ void gtranslator_parse_main(const gchar *filename)
 	 * Add the view for the current file.
 	 */ 
 	gtranslator_sidebar_activate_views();
+
+	/*
+	 * Create and set the messages table/tree up.
+	 */
+	gtranslator_messages_table_create();
 
 	/*
 	 * Hook up the autosaving function if wished.

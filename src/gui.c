@@ -73,11 +73,14 @@
  * Global external variables
  */
 GtkWidget *gtranslator_application;
+GtkWidget *gtranslator_messages_table;
 GtkWidget *trans_box;
 GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
+
 GtkWidget *sidebar_pane;
 GtkWidget *content_pane;
+GtkWidget *table_pane;
 
 /*
  * The comment/extra content area in the main window.
@@ -132,7 +135,8 @@ static gint 	update_count=0;
  * Pane positions storage variable.
  */
 static gint 	sidebar_pane_position=82;
-static gint 	content_pane_position=15;
+static gint 	content_pane_position=12;
+static gint	table_pane_position=50;
 
 /*
  * The popup-menu.
@@ -199,11 +203,18 @@ void gtranslator_create_main_window(void)
 	gtranslator_application = gnome_app_new("gtranslator", "gtranslator");
 	gnome_app_create_menus(GNOME_APP(gtranslator_application), the_menus);
 
+	/*
+	 * Create all the panes we're using later on.
+	 */
 	sidebar_pane=e_hpaned_new();
 	content_pane=e_vpaned_new();
-	views_sidebar=gtranslator_sidebar_new();
+	table_pane=e_hpaned_new();
 	
-	e_paned_pack1(E_PANED(sidebar_pane), views_sidebar, TRUE, FALSE);
+	/*
+	 * Create the sidebars and/or messages table.
+	 */
+	views_sidebar=gtranslator_sidebar_new();
+	gtranslator_messages_table=gtranslator_messages_table_new();
 
 	/*
 	 * Activate the paned widgets if desired and fill them up with the right positions.
@@ -226,6 +237,10 @@ void gtranslator_create_main_window(void)
 	gtranslator_config_init();
 	content_pane_position=gtranslator_config_get_int(
 		"interface/content_pane_position");
+	
+	table_pane_position=gtranslator_config_get_int(
+		"interface/table_pane_position");
+	
 	gtranslator_config_close();
 
 	extra_content_view=g_new0(GtrExtraContentArea, 1);
@@ -261,11 +276,18 @@ void gtranslator_create_main_window(void)
 		GNOME_DOCK_TOP, 2, 0, 0);
 
 	vertical_box=gtk_vbox_new(FALSE, 0);
-	
+
+	/*
+	 * Perform all the packing action between the EPaneds.
+	 */
 	e_paned_pack1(E_PANED(content_pane), extra_content_view->box, TRUE, FALSE);
 	e_paned_pack2(E_PANED(content_pane), vertical_box, TRUE, FALSE);
+
+	e_paned_pack1(E_PANED(table_pane), content_pane, TRUE, FALSE);
+	e_paned_pack2(E_PANED(table_pane), gtranslator_messages_table, TRUE, FALSE);
 	
-	e_paned_pack2(E_PANED(sidebar_pane), content_pane, TRUE, FALSE);
+	e_paned_pack1(E_PANED(sidebar_pane), views_sidebar, TRUE, FALSE);
+	e_paned_pack2(E_PANED(sidebar_pane), table_pane, TRUE, FALSE);
 	gnome_app_set_contents(GNOME_APP(gtranslator_application), sidebar_pane);
 
 	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
@@ -391,8 +413,17 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 		gtranslator_config_set_int("interface/sidebar_pane_position", sidebar_pane_position);
 	}
 
+	/*
+	 * Get the EPaned's position offsets.
+	 */
 	content_pane_position=e_paned_get_position(E_PANED(content_pane));
+	table_pane_position=e_paned_get_position(E_PANED(table_pane));
+	
+	/*
+	 * Store the panes position in the preferences.
+	 */
 	gtranslator_config_set_int("interface/content_pane_position", content_pane_position);
+	gtranslator_config_set_int("interface/table_pane_position", table_pane_position);
 	gtranslator_utils_save_geometry();
 
 	/*

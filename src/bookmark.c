@@ -41,9 +41,9 @@
 	}
 
 /*
- * This should also be configurable later on.
+ * For the moment 8 bookmarks should be the upper limit.
  */
-#define MAX_BOOKMARKS 10
+#define MAX_BOOKMARKS 8
 
 /*
  * The used GList for the GtrBookmark's -- a general way to handle with this
@@ -535,6 +535,21 @@ void gtranslator_bookmark_save_list()
 
 		gtranslator_config_set_int("bookmark/length", c);
 		gtranslator_config_close();
+	}
+}
+
+/*
+ * Return a copy of our internally used bookmarks' list -- or NULL.
+ */
+GList *gtranslator_bookmark_get_list()
+{
+	if(!gtranslator_bookmarks || g_list_length(gtranslator_bookmarks) <= 0)
+	{
+		return NULL;
+	}
+	else
+	{
+		return (g_list_copy(gtranslator_bookmarks));
 	}
 }
 

@@ -30,10 +30,13 @@
  * The globally needed widgets
  */
 extern GtkWidget *gtranslator_application;
+extern GtkWidget *gtranslator_messages_table;
 extern GtkWidget *trans_box;
 extern GtkWidget *text_box;
 extern GtkWidget *gtranslator_application_bar;
+
 extern GtkWidget *sidebar_pane;
+extern GtkWidget *table_pane;
 extern GtkWidget *content_pane;
 
 /*
