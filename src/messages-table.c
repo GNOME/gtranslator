@@ -422,7 +422,7 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
 /*
  * Select given message
  */
-void gtranslator_message_table_select_row(GtrMsg *message)
+void gtranslator_messages_table_select_row(GtrMsg *message)
 {
 	ETreePath node=NULL;
 	
