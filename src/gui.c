@@ -960,6 +960,11 @@ static void copy_clipboard(GtkWidget  * widget, gpointer useless)
 static void paste_clipboard(GtkWidget  * widget, gpointer useless)
 {
 	gtk_editable_paste_clipboard(GTK_EDITABLE(trans_box));
+
+	/*
+	 * Rehighlight the text widget after a paste.
+	 */ 
+	gtranslator_syntax_update_text(trans_box);
 }
 
 static void clear_selection(GtkWidget  * widget, gpointer useless)
