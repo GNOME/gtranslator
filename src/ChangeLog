@@ -1,3 +1,19 @@
+2001-05-14  Fatih Demir <kabalak@gtranslator.org>
+
+	* header_stuff.c: Also tactile with UTF-8 based translator names and
+		comments.
+
+	* query.c, utils.c/.h: Moved the setup_language routine to utils.c/.h,
+		renamed it to gtranslator_utils_get_full_language_name and
+		 changed some parts of it to use a GString to be more robust.
+
+	* message.c: Added UTF-8 support, displaying, editing and saving is
+		working now.
+
+	* utf8.c: Made the environment rescueing/restoring/setting go through
+		functions; also added functions for use within gtranslator to
+		 handle UTF-8 support (gal isn't clever enough for us .-).
+
 2001-05-13  Fatih Demir <kabalak@gtranslator.org>
 
 	* Makefile.am: Changed the TM backends location to be

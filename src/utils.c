@@ -636,3 +636,59 @@ gtranslator_utils_getline (FILE* stream)
 	return ret;
 }
 
+/*
+ * Just accomplish the given language name to it's full beautifulness.
+ */
+gchar *gtranslator_utils_get_full_language_name(gchar *lang)
+{
+	g_return_val_if_fail(lang!=NULL, NULL);
+
+	/*
+	 * If the language name does already include an underscore it will
+	 *  be surely a complete language name.
+	 */  
+	if(strchr(lang, '_'))
+	{
+		return lang;
+	}
+	else
+	{
+		/*
+		 * Longer language names should also be Ok.
+		 */ 
+		if(strlen(lang) > 2)
+		{
+			return lang;
+		}
+		else
+		{
+			GString *taillanguage=g_string_new(lang);
+			GString *language=g_string_new(lang);
+			
+			/*
+			 * The first two characters are converted to small
+			 *  characters, and the last two are capitalized.
+			 */
+			language=g_string_down(language);
+			taillanguage=g_string_up(taillanguage);
+
+			/*
+			 * Append the capilized letters after a '_'.
+			 */
+			language=g_string_append_c(language, '_');
+			language=g_string_append(language, taillanguage->str);
+
+			if(language->len > 0)
+			{
+				return language->str;
+			}
+			else
+			{
+				return NULL;
+			}
+
+			g_string_free(language, FALSE);
+			g_string_free(taillanguage, FALSE);
+		}
+	}
+}

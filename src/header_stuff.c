@@ -30,6 +30,7 @@
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
+#include "utf8.h"
 #include "utils.h"
 
 #include <locale.h>
@@ -38,6 +39,8 @@
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-uidefs.h>
 #include <libgnomeui/gnome-propertybox.h>
+
+#include <gal/widgets/e-unicode.h>
 
 static GtkWidget *e_header = NULL;
 
@@ -319,7 +322,18 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	replace_substring(&ph->comment, "VERSION", ph->prj_version);
 	
 	if (!wants.fill_header) {
-		update(ph->translator, translator);
+		
+		if(gtranslator_utf8_po_file_is_utf8())
+		{
+			g_free(ph->translator);
+			ph->translator=e_utf8_gtk_entry_get_text(
+				GTK_ENTRY(translator));
+		}
+		else
+		{
+			update(ph->translator, translator);
+		}
+		
 		update(ph->tr_email, tr_email);
 		update(ph->language, GTK_COMBO(language_combo)->entry);
 		update(ph->lg_email, GTK_COMBO(lg_combo)->entry);
@@ -329,7 +343,20 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	} else {
 #define replace(what,with,entry) g_free(what); what = g_strdup(with);\
 	gtk_entry_set_text(GTK_ENTRY(entry), with);
-		replace(ph->translator, author, translator);
+	
+		if(gtranslator_utf8_po_file_is_utf8())
+		{
+			g_free(ph->translator);
+			ph->translator=g_strdup(author);
+
+			e_utf8_gtk_entry_set_text(GTK_ENTRY(translator), 
+				author);
+		}
+		else
+		{
+			replace(ph->translator, author, translator);
+		}
+		
 		replace(ph->tr_email, email, tr_email);
 		replace(ph->language, language,
 			GTK_COMBO(language_combo)->entry);
@@ -528,8 +555,15 @@ gchar *gtranslator_header_comment_convert_for_view(gchar *comment)
 	}
 
 	g_strfreev(stringarray);
-	
-	return mystring->str;
+
+	if(gtranslator_utf8_po_file_is_utf8())
+	{
+		return gtranslator_utf8_get_plain_string(&mystring->str);
+	}
+	else
+	{
+		return mystring->str;
+	}
 }
 
 /*
@@ -568,7 +602,14 @@ gchar *gtranslator_header_comment_convert_for_save(gchar *comment)
 	
 	g_strfreev(stringarray);
 	
-	return mystring->str;
+	if(gtranslator_utf8_po_file_is_utf8())
+	{
+		return (gtranslator_utf8_get_utf8_string(&mystring->str));
+	}
+	else
+	{
+		return mystring->str;
+	}
 }
 
 static gchar * get_current_year(void)

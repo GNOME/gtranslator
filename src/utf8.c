@@ -17,6 +17,7 @@
  *
  */
 
+#include "gui.h"
 #include "utf8.h"
 #include "utils.h"
 
@@ -24,6 +25,68 @@
 
 #include <libgnome/gnome-i18n.h>
 #include <gal/widgets/e-unicode.h>
+
+/*
+ * The static old environment variable.
+ */
+static gchar	*old_environment;
+
+/*
+ * Prototypes:
+ */
+void get_old_environment(void);
+void set_old_environment(void);
+void set_new_environment(void);
+
+/*
+ * Get/set up the old environment.
+ */
+void get_old_environment()
+{
+	old_environment=setlocale(LC_ALL, "");
+	g_return_if_fail(old_environment!=NULL);
+}
+
+void set_old_environment()
+{
+	g_return_if_fail(old_environment!=NULL);
+	setlocale(LC_ALL, old_environment);
+}
+
+/*
+ * Set up the new environment, like desired by the functions .-)
+ */
+void set_new_environment()
+{
+	gchar	*localename;
+
+	localename=gtranslator_utils_get_locale_name();
+	g_return_if_fail(localename!=NULL);
+
+	/*
+	 * Get the full-length language name to satisfy our needs.
+	 */
+	localename=gtranslator_utils_get_full_language_name(localename);
+	
+	setlocale(LC_ALL, localename);
+}
+
+/*
+ * Return whether we do have got a UTF-8 file or not.
+ */
+gboolean gtranslator_utf8_po_file_is_utf8()
+{
+	g_return_val_if_fail(po->header->charset!=NULL, FALSE);
+
+	if(!g_strcasecmp(po->header->charset, "UTF-8"))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
 /*
  * Convert the given GtrMsg to UTF-8.
@@ -58,38 +121,19 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg **msg)
  */
 void gtranslator_utf8_convert_po_to_utf8(void)
 {
-	gchar *old_env;
-	gchar *new_env;
-	
-	if(!file_opened)
-	{
-		return;
-	}
+	get_old_environment();
+	set_new_environment();
 
-	old_env=setlocale(LC_ALL, "");
-	new_env=gtranslator_utils_get_locale_name();
-
-	if(new_env)
-	{
-		setlocale(LC_ALL, new_env);
-	
-		g_list_foreach(po->messages, 
-			(GFunc) gtranslator_utf8_convert_message_to_utf8,
-			NULL);
+	g_list_foreach(po->messages, 
+		(GFunc) gtranslator_utf8_convert_message_to_utf8, NULL);
 		
-		/*
-		 * Set the po file charset to UTF-8 as we did convert it now.
-		 */
-		g_free(po->header->charset); 
-		po->header->charset=g_strdup("UTF-8");
-	}
-	else
-	{
-		g_warning(_("Couldn't convert po file `%s' to UTF-8!"),
-			po->filename);
-	}
-	
-	setlocale(LC_ALL, old_env);
+	/*
+	 * Set the po file charset to UTF-8 as we did convert it now.
+	 */
+	g_free(po->header->charset); 
+	po->header->charset=g_strdup("UTF-8");
+
+	set_old_environment();
 }
 
 /*
@@ -97,44 +141,96 @@ void gtranslator_utf8_convert_po_to_utf8(void)
  */
 void gtranslator_utf8_convert_po_from_utf8(void)
 {
-	gchar *old_env;
-	gchar *new_env;
-	
-	if(!file_opened)
+	gchar *charset;
+
+	get_old_environment();
+	set_new_environment();
+
+	charset=gtranslator_utils_get_locale_charset();
+
+	g_list_foreach(po->messages,
+		(GFunc) gtranslator_utf8_convert_message_from_utf8, NULL);
+
+	/*
+	 * Assign the converted charset value.
+	 */
+	if(charset)
 	{
-		return;
+		g_free(po->header->charset);
+		po->header->charset=g_strdup(charset);
+		g_free(charset);
 	}
 
-	old_env=setlocale(LC_ALL, "");
-	new_env=gtranslator_utils_get_locale_name();
-
-	if(new_env)
-	{
-		gchar *charset;
-		charset=gtranslator_utils_get_locale_charset();
-
-		setlocale(LC_ALL, new_env);
-		
-		g_list_foreach(po->messages,
-			(GFunc) gtranslator_utf8_convert_message_from_utf8,
-			NULL);
-
-		/*
-		 * Assign the converted charset value.
-		 */
-		if(charset)
-		{
-			g_free(po->header->charset);
-			po->header->charset=g_strdup(charset);
-			g_free(charset);
-		}
-	}
-	else
-	{
-		g_warning(_("Couldn't convert UTF-8 po file `%s'!"),
-			po->filename);
-	}
-
-	setlocale(LC_ALL, old_env);
+	set_old_environment();
 }
 
+/*
+ * Set the content of the message right from the text boxes.
+ */
+void gtranslator_utf8_get_utf8_for_current_message()
+{
+	gchar *msgstr;
+	GtrMsg *current_message;
+	
+	g_return_if_fail(po->current!=NULL);
+	current_message=GTR_MSG(po->current);
+	
+	get_old_environment();
+	set_new_environment();
+
+	msgstr=e_utf8_gtk_editable_get_text(GTK_EDITABLE(trans_box));
+	g_return_if_fail(msgstr!=NULL);
+
+	current_message->msgstr=g_strdup(msgstr);
+	g_free(msgstr);
+
+	set_old_environment();
+}
+
+/*
+ * Return the plain string from the given UTF-8 string.
+ */
+gchar *gtranslator_utf8_get_plain_string(gchar **string)
+{
+	gchar *plain_string;
+	
+	g_return_val_if_fail(*string!=NULL, NULL);
+
+	get_old_environment();
+	set_new_environment();
+
+	plain_string=e_utf8_to_locale_string(*string);
+
+	set_old_environment();
+
+	return plain_string;
+}
+
+/*
+ * Return a pure UTF-8 string back.
+ */
+gchar *gtranslator_utf8_get_utf8_string(gchar **string)
+{
+	gchar *utf8_string;
+
+	g_return_val_if_fail(*string!=NULL, NULL);
+
+	get_old_environment();
+	set_new_environment();
+
+	utf8_string=e_utf8_from_locale_string(*string);
+
+	set_old_environment();
+
+	return utf8_string;
+}
+
+/*
+ * Return the plain msgstr (uses the function above).
+ */
+gchar *gtranslator_utf8_get_plain_msgstr(GtrMsg **message)
+{
+	g_return_val_if_fail(GTR_MSG(*message)->msgstr!=NULL, NULL);
+
+	return (gtranslator_utf8_get_plain_string(&GTR_MSG(*message)->msgstr));
+}

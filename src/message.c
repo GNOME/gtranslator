@@ -29,12 +29,16 @@
 #include "parse.h"
 #include "prefs.h"
 #include "syntax.h"
+#include "utf8.h"
 #include "utils.h"
 
 #include <string.h>
 #include <gtk/gtk.h>
+
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-util.h>
+
+#include <gal/widgets/e-unicode.h>
 
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
@@ -133,6 +137,7 @@ void gtranslator_message_show(GList * list_item)
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	gtranslator_text_boxes_clean();
+	
 	/*
 	 * Substitute the free spaces in the msgid only if this is wished and
 	 *  possible.
@@ -153,7 +158,15 @@ void gtranslator_message_show(GList * list_item)
 		g_free(temp);
 
 		if (msg->msgstr) {
-			temp = g_strdup(msg->msgstr);
+			if(gtranslator_utf8_po_file_is_utf8())
+			{
+				temp=gtranslator_utf8_get_plain_msgstr(&msg);
+			}
+			else
+			{
+				temp=g_strdup(msg->msgstr);
+			}
+			
 			gtranslator_utils_invert_dot(temp);
 			
 			gtranslator_syntax_insert_text(trans_box, temp);
@@ -162,7 +175,17 @@ void gtranslator_message_show(GList * list_item)
 		}
 	} else {
 		gtranslator_syntax_insert_text(text_box, msg->msgid);
-		gtranslator_syntax_insert_text(trans_box, msg->msgstr);
+
+		if(gtranslator_utf8_po_file_is_utf8())
+		{
+			gchar *text=gtranslator_utf8_get_plain_msgstr(&msg);
+			
+			gtranslator_syntax_insert_text(trans_box, text);
+		}
+		else
+		{
+			gtranslator_syntax_insert_text(trans_box, msg->msgstr);
+		}
 	}
 	
 	/*
@@ -237,9 +260,19 @@ void gtranslator_message_update(void)
 				len--;
 			}
 		}
+		
 		g_free(msg->msgstr);
-		msg->msgstr = gtk_editable_get_chars(GTK_EDITABLE(trans_box),
-						     0, len);
+
+		if(gtranslator_utf8_po_file_is_utf8())
+		{
+			msg->msgstr=e_utf8_gtk_editable_get_text(
+				GTK_EDITABLE(trans_box));
+		}
+		else
+		{
+			msg->msgstr=gtk_editable_get_chars(
+				GTK_EDITABLE(trans_box), 0, len);
+		}
 
 		/*
 		 * If spaces were substituted with dots, replace them back
@@ -255,11 +288,14 @@ void gtranslator_message_update(void)
 		msg->status &= ~GTR_MSG_STATUS_TRANSLATED;
 		po->translated--;
 	}
+	
 	message_changed = FALSE;
+	
 	/*
 	 * Update the statusbar informations.
 	 */
-	gtranslator_application_bar_update(g_list_position(po->messages, po->current));
+	gtranslator_application_bar_update(g_list_position(po->messages, 
+		po->current));
 }
 
 void gtranslator_message_change_status(GtkWidget  * item, gpointer which)

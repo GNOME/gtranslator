@@ -123,6 +123,15 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file);
  */
 void gtranslator_utils_old_colors_to_new_location(void);
 
+/*
+ * Setup the real language names ala "tr_TR" to get the localized values
+ *  for the given "halfwise" language name.
+ */
+gchar *gtranslator_utils_get_full_language_name(gchar *lang);
+
+/*
+ * Own getline implementation to handle very long comments.
+ */
 char * gtranslator_utils_getline (FILE* stream);
 	
 #endif

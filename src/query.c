@@ -33,12 +33,6 @@
 #include <dirent.h>
 
 /*
- * Setup the real language names ala "tr_TR" to get the localized values
- *  for the given "halfwise" language name.
- */
-gchar *setup_language(gchar *lang);
-
-/*
  * A simply query method (wraps dgettext).
  */
 GtrQuery *gtranslator_query_simple(GtrQuery *query)
@@ -46,7 +40,7 @@ GtrQuery *gtranslator_query_simple(GtrQuery *query)
 	gchar *str;
 	gchar *original_LC_CTYPE, *original_LC_MESSAGES;
 
-	query->language=setup_language(query->language);
+	query->language=gtranslator_utils_get_full_language_name(query->language);
 	
 	/*
 	 * Rescue the current locales.
@@ -87,56 +81,6 @@ GtrQuery *gtranslator_query_simple(GtrQuery *query)
 	g_free(original_LC_CTYPE);
 	g_free(original_LC_MESSAGES);
 	gtranslator_free_query(&query);
-}
-
-/*
- * Just accomplish the given language name to it's full beautifulness.
- */
-gchar *setup_language(gchar *lang)
-{
-	g_return_val_if_fail(lang!=NULL, NULL);
-
-	/*
-	 * If the language name does already include an underscore it will
-	 *  be surely a complete language name.
-	 */  
-	if(strchr(lang, '_'))
-	{
-		return lang;
-	}
-	else
-	{
-		/*
-		 * Longer language names should also be Ok.
-		 */ 
-		if(strlen(lang) > 2)
-		{
-			return lang;
-		}
-		else
-		{
-			gchar *taillanguage=lang;
-			GString *language=g_string_new(lang);
-			
-			g_strup(taillanguage);
-
-			language=g_string_down(language);
-
-			language=g_string_append_c(language, '_');
-			language=g_string_append(language, taillanguage);
-
-			if(language->len > 0)
-			{
-				return language->str;
-			}
-			else
-			{
-				return NULL;
-			}
-
-			g_string_free(language, FALSE);
-		}
-	}
 }
 
 /*
