@@ -54,7 +54,7 @@ GtrLanguage languages[] = {
 	 "linux-eu@chanae.alphanet.ch", "8bit"
 	},
 	{
-	 N_("Belorussian"), "be", "UTF-8",
+	 N_("Belarusian"), "be", "UTF-8",
 	 "i18n@mova.org", "8bit"
 	},
         {
