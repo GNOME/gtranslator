@@ -1,21 +1,21 @@
-.TH gtranslator 1 "gtranslator @VERSION@ -- @MY_DATE@" gtranslator "GNOME programms"
+.TH gtranslator 1 "gtranslator @VERSION@ -- @MY_DATE@" gtranslator "GNOME programs"
 .SH NAME
-gtranslator \-\- a translation supporting programm for GNOME
+gtranslator \-\- a translation supporting program for GNOME
 
 .SH SYNOPSIS
-.B gtranslator [ \-\-help ] [ \-\-version ] [ \-c challenge\-length ] [ \-f po-file ] [ \-q expression ] [ \-m msg-db ] [ \-g geometry-string ]
+.B gtranslator [ \-\-help ] [ \-\-version ] [ \-c challenge\-length ] [ \-q expression ] [ \-m msg-db ] [ \-g geometry-string ] [ po-file ]
 
 .SH DESCRIPTION
-gtranslator aims to be a translation programm for the GNOME projects which will
+gtranslator aims to be a translation program for the GNOME project which will
 surely have some more functions than now and will be working better than it does now. It ( will ) have got a message db function which will be extended to a typo of online word-book. You can't think of a translation for this word and you don't have got an idea how to deal it? simply look it up on a message db server in the Net which supports your language and holds the results of hard work contributed by you and the other translator of your language team. And with a mouse click you've got the word you were searching for. A good idea, or ?
 
 .SH OPTIONS
 .TP
-.I \-c \-\-challenge\-length
-Defines the minimum match length for the following query.
+.I po-file
+A po-file to open at the startup of gtranslator.
 .TP
-.I \-f \-\-file=po-file
-Opens a po-file on the startup of gtranslator.
+.I \-c \-\-challenge\-length
+Defines the minimum match length for database queries.
 .TP
 .I \-g \-\-geometry=geometry
 Let's you specify the geometry of gtranslator's main window. 
@@ -49,7 +49,7 @@ Your personal gtranslator settings will be stored there.
 Some examples for the options.
 
 .TP
-.B gtranslator \-f tr.po
+.B gtranslator tr.po
 Opens the file \*(lqtr.po\*(rq on the startup.
 
 .TP
@@ -67,12 +67,11 @@ Performs a similar query as above but challenges the first 3 characters of the w
 
 .TP
 .B gtranslator \-g \*(lq320x240+0+0\*(rq
-Lets gtranslator appear on the leftern edge of the screen \*(lq+0+0\*(rq and gtranslator is
+Lets gtranslator appear on the left upper edge of the screen \*(lq+0+0\*(rq and gtranslator is
 sized to \*(lq320x240\*(rq.
 
 .SH BUGS
-gtranslator has got many many bugs. If I would start counting them, I think I'd reach the # of human beings on our planet very soon.
-Please be aware of this fact if you're using gtranslator.
+Currently there is no working database implementation. Obsolete messages are lost, as well as unknown header entries. Spell checking is useless.
 
 .SH LICENSE
 gtranslator is distributed under the 
@@ -80,8 +79,7 @@ gtranslator is distributed under the
 or greater.
 
 .SH AUTHORS
-Fatih Demir <kabalak@gmx.net>
-Gediminas Paulauskas <menesis@delfi.lt>
+Fatih Demir <kabalak@gmx.net> and Gediminas Paulauskas <menesis@delfi.lt>
 
 .SH WEBSITE
 .B http://gtranslator.sourceforge.net

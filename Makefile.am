@@ -1,4 +1,4 @@
-## the main Makefile.in
+## the main Makefile.am
 
 SUBDIRS = data intl po help macros man libgtranslator message-db.d src
 
