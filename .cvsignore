@@ -4,6 +4,7 @@ Makefile
 Makefile.in
 ABOUT-NLS
 aclocal.m4
+autom4te.cache
 build-step
 confdef*
 config.cache
@@ -16,7 +17,8 @@ config.sub
 configure
 configure-step
 conftest*
-gtranslator-*
+gtranslator-[:digit:]*.*
+gtranslator-config.h
 gtranslator.spec
 intl
 intltool-*
@@ -25,4 +27,3 @@ ltconfig
 ltmain.sh
 stamp-h
 stamp-h.in
-xml-i18n-*

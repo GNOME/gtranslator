@@ -3,9 +3,14 @@ dnl Process this file with autoconf to produce a configure script.
 dnl -------------------------------------------------------------------
 dnl (C) 2000-2002 Fatih Demir <kabalak@gtranslator.org>
 dnl -------------------------------------------------------------------
-AC_INIT(src/main.c)
-AM_INIT_AUTOMAKE(gtranslator, 0.51)
-AM_CONFIG_HEADER(config.h)
+AC_PREREQ(2.52)
+AC_INIT(gtranslator, 0.51,
+	http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator)
+
+AC_CONFIG_SRCDIR(src/main.c)
+AM_CONFIG_HEADER(gtranslator-configuration.h)
+
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_MAINTAINER_MODE
 
 dnl -------------------------------------------------------------------
@@ -21,17 +26,14 @@ AC_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
 dnl -------------------------------------------------------------------
-dnl Pick up the Gnome macros .
+dnl Use the new GNOME 2.x platform
 dnl -------------------------------------------------------------------
-AM_ACLOCAL_INCLUDE(macros)
+GNOME_PLATFORM_GNOME_2(yes, force)
 
 dnl -------------------------------------------------------------------
-dnl The standard checks for the compiler and the X includes/libs.
+dnl The standard checks for the compiler.
 dnl -------------------------------------------------------------------
-
 AC_HEADER_STDC
-dnl GNOME_INIT
-dnl GNOME_X_CHECKS
 
 dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
@@ -42,7 +44,13 @@ dnl -------------------------------------------------------------------
 dnl Our languages caravane has got settled here in place (add your's).
 dnl -------------------------------------------------------------------
 ALL_LINGUAS="az ca da de el en_GB es et eu fi fr gl hu it ja ko lt nl nn no pl pt pt_BR ru sk sv ta tr uk vi wa zh_CN zh_TW"
-AM_GNOME_GETTEXT
+
+GETTEXT_PACKAGE=gtranslator
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+
+AM_GLIB_GNU_GETTEXT
+AC_CHECK_FUNC(bind_textdomain_codeset,,[AC_CHECK_LIB(intl,bind_textdomain_codeset)])
 
 dnl ==========================================================================
 dnl
@@ -51,15 +59,12 @@ dnl it too, or it will never make it into the spec file!
 dnl
 dnl ==========================================================================
 
-GTK_REQUIRED=1.3.9
-LIBGNOME_REQUIRED=1.96.0
-LIBGNOMEUI_REQUIRED=1.96.0
+GTK_REQUIRED=2.0.0
+LIBGNOME_REQUIRED=1.105.0
+LIBGNOMEUI_REQUIRED=1.105.0
 LIBBONOBO_REQUIRED=1.107.0
 LIBBONOBOUI_REQUIRED=1.108.1
-LIBGNOMECANVAS_REQUIRED=1.108.0
-GNOME_BUILD_REQUIRED=0.0.3
-GDL_REQUIRED=0.3.0
-GNOME_VFS_REQUIRED=1.9.4
+LIBGNOMECANVAS_REQUIRED=1.112.0
 GNOME_VFS_REQUIRED=1.9.4
 LIBXML_REQUIRED=2.4.12
 
