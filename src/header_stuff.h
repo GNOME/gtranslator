@@ -15,8 +15,27 @@
 /*
 *	Some variables needed for the search-routines .
 */
+
 char tmp[256];
+
+/*
+*	The hoped-to-be-maximal-count-for-headers
+*/
+
+int max_header_lines_count=15;
+
+/*
+*	The char-array for the header-lines :
+*/
+
+char header[128][max_header_lines_count];
+
+/*
+*	And some ´delims´ 
+*/
+
 const char *last_id="\n\"";
+const char *cutties="\"Content-Transfer";
 
 /*
 *	The routines for header_stuff

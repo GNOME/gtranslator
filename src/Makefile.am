@@ -1,11 +1,11 @@
 ## ------------------------------------------------------
 ## Process this file with automake to produce Makefile.in
 ## ------------------------------------------------------
-## Put the -DDEBUGGY , so on CVS a debuggable version 
+## Put the -DDEBUG , so on CVS a debuggable version 
 ## should be build , too .
 ## ------------------------------------------------------
 
-extra_flags = -DDEBUGGY -g 
+extra_flags = -DDEBUG
 
 INCLUDES = \
 	-I$(top_srcdir)/intl \

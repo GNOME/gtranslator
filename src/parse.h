@@ -22,10 +22,10 @@
 #include "support.h" 
 
 /*
-*	New -> only one-dimensional array for
+*	two-dimensional array for
 *	the char's of msgid & msgstr :
 */
-char iline[256],sline[256],;
+char iline[256][256],sline[256][256],;
 
 /*
 *	This are the dimensioneers for the *line-array ..

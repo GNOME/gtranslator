@@ -6,11 +6,6 @@
 
 #include "parse.h"
 #include <unistd.h>
-/*
-*	The var's keeping the file names ...
-*/
-const char *idf,*strf;
-FILE *is,*os;
 
 /*
 *	A simple stream-check (I love the ifstream.good()-func from C++ ....)
@@ -56,6 +51,7 @@ void parse()
 			*/
 			strcpy(iline,tmp_l);
 		}
+		
 	}
 	max_count=((count - 10 ) / 3);
 	old_count=count;
