@@ -5,19 +5,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gtranslator CVS\n"
-"POT-Creation-Date: 2001-08-27 11:43+0200\n"
-"PO-Revision-Date: 2001-08-27 11:45+0200\n"
+"POT-Creation-Date: 2001-08-30 13:50+0200\n"
+"PO-Revision-Date: 2001-08-30 13:54+0200\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian GNOME team <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:59
+#: src/about.c:61
 msgid "(C) 1999-2001 The Free Software Foundation"
 msgstr "(C) 1999-2001 The Free Software Foundation"
 
-#: src/about.c:60
+#: src/about.c:62
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "A Gtranslator egy po fájl szerkesztõ program, sok extrával."
 
@@ -25,7 +25,7 @@ msgstr "A Gtranslator egy po fájl szerkesztõ program, sok extrával."
 #. * This string is displayed in the about box as an information about
 #. *  the currently used colorscheme.
 #.
-#: src/about.c:69
+#: src/about.c:71
 #, c-format
 msgid "Current colorscheme: \"%s\" (version %s) by"
 msgstr "Jelenlegi színséma: \"%s\" (%s változat), írta"
@@ -42,12 +42,12 @@ msgstr ""
 "%s\n"
 " (%s) betöltve.\n"
 
-#: src/color-schemes.c:175
+#: src/color-schemes.c:173
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Nem sikerült alkalmazni a következõ színsémafájlt: `%s'!"
 
-#: src/color-schemes.c:304
+#: src/color-schemes.c:302
 msgid "Couldn't retrieve author information!"
 msgstr "Nem sikerült betölteni a fordító adatait!"
 
@@ -55,11 +55,11 @@ msgstr "Nem sikerült betölteni a fordító adatait!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:310
+#: src/color-schemes.c:308 src/translator.c:307
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/color-schemes.c:311
+#: src/color-schemes.c:309
 msgid "<Not Given>"
 msgstr "<Nincs megadva>"
 
@@ -149,7 +149,7 @@ msgstr "Kis- és nagybetû megkülönböztetése"
 msgid "English"
 msgstr "Angol"
 
-#: src/dialogs.c:685 src/dialogs.c:783 src/gui.c:556 src/messages-table.c:375
+#: src/dialogs.c:685 src/dialogs.c:783 src/gui.c:557 src/messages-table.c:375
 #: src/messages-table.c:410
 msgid "Translated"
 msgstr "Lefordított"
@@ -195,7 +195,7 @@ msgid "Replace in:"
 msgstr "Csere ebben:"
 
 #: src/dialogs.c:890
-msgid "An error occured while msgfmt was executed:\n"
+msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Hiba történt az msgfmt futtatása közben:\n"
 
 #: src/dialogs.c:920
@@ -218,7 +218,20 @@ msgstr "Nincs URI megadva!"
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Nincs megadva támogatott URI protokoll (pl. \"ftp://\")!"
 
-#: src/dialogs.c:1021
+#: src/dialogs.c:990
+msgid ""
+"URIs are used to locate files uniquely on different systems.\n"
+"The standard Internet addresses (URLs) are also URIs -- you can\n"
+"use them to open remote po files lying on servers with standard protocols\n"
+"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
+"Some example URIs for clarification (these ones are supported):\n"
+"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+"\n"
+"file:///<PO-FILE>"
+msgstr ""
+
+#: src/dialogs.c:1027
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -231,47 +244,47 @@ msgstr ""
 "Lehet, hogy értékes a tartalma?!\n"
 "Ha \"Nem\"-et válaszolsz, a helyreállítófájl letörlõdik."
 
-#: src/dialogs.c:1046
+#: src/dialogs.c:1052
 #, c-format
 msgid "Recovering `%s'..."
 msgstr "`%s' helyreállítása..."
 
-#: src/dialogs.c:1095
+#: src/dialogs.c:1101
 msgid "Couldn't get list of gettext domains!"
 msgstr "Nem sikerült megszerezni a gettext tartományok listáját!"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1102
+#: src/dialogs.c:1108
 msgid "Here you can query existing gettext domains for a translation."
 msgstr "Lekérdezheted a létezõ gettext tartományokat fordításokért."
 
-#: src/dialogs.c:1105
+#: src/dialogs.c:1111
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- létezõ gettext tartományok lekérdezése"
 
-#: src/dialogs.c:1106 src/menus.c:371
+#: src/dialogs.c:1112 src/menus.c:371
 msgid "Query"
 msgstr "Lekérdezés"
 
-#: src/dialogs.c:1114
+#: src/dialogs.c:1120
 msgid "Query string:"
 msgstr "Lekérdezendõ karakterlánc:"
 
-#: src/dialogs.c:1121
+#: src/dialogs.c:1127
 msgid "Domain to search the translation in:"
 msgstr "Tartomány, ahol a fordítást keresed:"
 
-#: src/dialogs.c:1171
+#: src/dialogs.c:1177
 msgid "No query string given!"
 msgstr "Nincs megadva lekérdezendõ karakterlánc!"
 
-#: src/dialogs.c:1205
+#: src/dialogs.c:1211
 msgid "Couldn't find any result for the query!"
 msgstr "A lekérdezés nem adott eredményt!"
 
-#: src/dialogs.c:1218
+#: src/dialogs.c:1224
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
@@ -284,11 +297,11 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:1308
+#: src/dialogs.c:1314
 msgid "Query's result translation is already there!"
 msgstr "A lekérdezés eredménye már eleve ott van!"
 
-#: src/dialogs.c:1330
+#: src/dialogs.c:1336
 msgid ""
 "Should gtranslator auto accomplish all missing strings (if possible)\n"
 "from your default query domain (and your personal learn buffer)?"
@@ -310,40 +323,40 @@ msgstr ""
 "Nem található:\n"
 "\"%s\""
 
-#: src/gui.c:263
+#: src/gui.c:264
 msgid "Edit comment"
 msgstr "Megjegyzés szerkesztése"
 
-#: src/gui.c:542
+#: src/gui.c:543
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i Fuzzy maradt ]"
 
-#: src/gui.c:542 src/gui.c:546 src/menus.c:352 src/messages-table.c:361
+#: src/gui.c:543 src/gui.c:547 src/menus.c:352 src/messages-table.c:361
 #: src/messages-table.c:417
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
-#: src/gui.c:546
+#: src/gui.c:547
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nem maradt fuzzy ]"
 
-#: src/gui.c:554
+#: src/gui.c:555
 msgid "Stick"
 msgstr "Eredeti"
 
-#: src/gui.c:565
+#: src/gui.c:566
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i fordítatlan maradt ]"
 
-#: src/gui.c:565 src/gui.c:567 src/messages-table.c:333
+#: src/gui.c:566 src/gui.c:568 src/messages-table.c:333
 #: src/messages-table.c:407
 msgid "Untranslated"
 msgstr "Fordítatlan"
 
-#: src/gui.c:567
+#: src/gui.c:568
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Nincs fordítatlan ]"
@@ -351,7 +364,7 @@ msgstr "%s [ Nincs fordítatlan ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:580
+#: src/gui.c:581
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "%d / %d üzenet / Állapot: %s"
@@ -493,7 +506,7 @@ msgid "Basque"
 msgstr "Baszk"
 
 #: src/languages.h:80
-msgid "Bielorussian"
+msgid "Belorussian"
 msgstr "Fehérorosz"
 
 #: src/languages.h:84
@@ -1524,6 +1537,30 @@ msgstr "Nem tudtam legenerálni az aktuális dátumot!"
 msgid "No replace made!"
 msgstr "Nem történt csere!"
 
+#: src/save-differently.c:117
+#, c-format
+msgid "Couldn't save compiled gettext file `%s'!"
+msgstr "Nem sikerült menteni a lefordított gettext fájlt: `%s'!"
+
+#: src/save-differently.c:162
+#, c-format
+msgid "Couldn't save compressed gettext file `%s'!"
+msgstr "Nem sikerült menteni a tömörített gettext fájlt: `%s'!"
+
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#: src/save-differently.c:172
+#, c-format
+msgid "Couldn't save %s'd gettext file `%s'!"
+msgstr "Nem sikerült menteni ezt a %s programmal tömörített gettext fájlt: `%s'!"
+
+#: src/save-differently.c:232
+#, c-format
+msgid "Couldn't save zip'ed po file `%s'!"
+msgstr "Nem sikerült menteni ezt a zippelt po fájlt: `%s'!"
+
 #: src/session.c:90
 msgid "Session restored successfully."
 msgstr "A munkafolyamat visszaállítása sikerült."
@@ -1587,7 +1624,7 @@ msgid "The update was successfull."
 msgstr "A frissítés sikeresen befejezõdött."
 
 #: src/update.c:125
-msgid "An error occured while updating the po file."
+msgid "An error occurred while updating the po file."
 msgstr "Hiba történt a po fájl frissítése közben."
 
 #: src/utils.c:323 src/utils.c:340
