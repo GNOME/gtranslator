@@ -27,6 +27,7 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	GnomeVFSURI *file;
 	GnomeVFSURI *destination;
 	gchar *localfilename=g_new0(gchar,1);
+	DIR *dir;
 	
 	/*
 	 * Init GnomeVFS, if that hasn't already be done.
@@ -46,7 +47,13 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	 */
 	if(gnome_vfs_uri_is_local(file))
 	{
-		localfilename=gnome_vfs_uri_to_string(file, 1<<4);
+		localfilename=gnome_vfs_uri_to_string(file, 
+			GNOME_VFS_URI_HIDE_USER_NAME &
+			GNOME_VFS_URI_HIDE_PASSWORD &
+			GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD &
+			GNOME_VFS_URI_HIDE_HOST_NAME &
+			GNOME_VFS_URI_HIDE_HOST_PORT &
+			GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER);
 	}
 	else
 	{
@@ -59,12 +66,28 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 		 */
 		gchar *destdir=g_new0(gchar,1);
 		destdir=g_strdup_printf("%s/.gtranslator-%s",
-			g_get_tmp_dir(),
+			g_get_home_dir(),
 			gnome_vfs_uri_get_host_name(file));
+	
+		/*
+		 * Test if this directory is already existent and
+		 *  delete the directory if it's existent.
+		 */ 
+		dir=opendir(destdir);
+		if(dir)
+		{
+			gnome_vfs_remove_directory(destdir);
+
+			closedir(dir);
+		}
+		
+		
 		/*
 		 * Build this temporary files' dir.
 		 */
-		if(gnome_vfs_make_directory(destdir, 0)!=GNOME_VFS_OK)
+		if(gnome_vfs_make_directory(
+			destdir,
+			GNOME_VFS_PERM_USER_ALL)!=GNOME_VFS_OK)
 		{
 			g_warning(_("Couldn't create the temporary directory `%s'."),
 				destdir);
@@ -126,16 +149,34 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 				/*
 				 * Return the local destination filename.
 				 */
-				localfilename=gnome_vfs_uri_to_string(destination, 1<<4);
+				localfilename=gnome_vfs_uri_to_string(
+					destination, 
+					/*
+					 * Hide all parts of an URI, so that we
+					 *  should get a single plain filename
+					 *   string.
+					 */ 
+					GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD &
+					GNOME_VFS_URI_HIDE_HOST_NAME &
+					GNOME_VFS_URI_HIDE_HOST_PORT &
+					GNOME_VFS_URI_HIDE_USER_NAME &
+					GNOME_VFS_URI_HIDE_PASSWORD &
+					GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER);
 				return localfilename;
 				break;
 		}
 	}
+	
+	/*
+	 * Return the local filename itself; or NULL.
+	 */ 
 	if(localfilename)
 	{
 		return localfilename;
 	}
-	
-	return NULL;
+	else
+	{
+		return NULL;
+	}
 	
 }

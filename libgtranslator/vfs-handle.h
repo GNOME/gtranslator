@@ -27,6 +27,7 @@
 #include <glib.h>
 #include "libgtranslator.h"
 #include <libgnomevfs/gnome-vfs.h>
+#include <dirent.h>
 
 /*
  * Opens up the given file via GnomeVFS routines and returns the
