@@ -80,13 +80,17 @@ typedef struct {
 } GtrMessagesTable;
 
 /*
- * Own messages table color container.
+ * Own messages table color container - contains the defined color strings and the GdkColors.
  */
 typedef struct
 {
 	gchar	*untranslated;
 	gchar	*fuzzy;
 	gchar	*translated;
+
+	GdkColor untranslated_color;
+	GdkColor fuzzy_color;
+	GdkColor translated_color;
 } GtrMessagesTableColors;
 
 /*
@@ -154,6 +158,13 @@ static void read_messages_table_colors()
 		messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
 		messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
 	}
+
+	/*
+	 * Now parse our defined color strings into the GdkColor structs of our messages table colors.
+	 */
+	gdk_color_parse(messages_table_colors->untranslated, &messages_table_colors->untranslated_color);
+	gdk_color_parse(messages_table_colors->fuzzy, &messages_table_colors->fuzzy_color);
+	gdk_color_parse(messages_table_colors->translated, &messages_table_colors->translated_color);
 }
 
 /*
@@ -274,7 +285,6 @@ void gtranslator_messages_table_create (void)
   gint i=0, j=0, k=0;
 
   GtkTreeStore *model;
-  GdkColor	color;
 
   if(!file_opened)
     return;
@@ -287,32 +297,29 @@ void gtranslator_messages_table_create (void)
 
   messages_table=g_new0(GtrMessagesTable, 1);
 
-  gdk_color_parse(messages_table_colors->untranslated, &color);
   gtk_tree_store_append (model, &messages_table->unknown_node, NULL);
   gtk_tree_store_set (model, &messages_table->unknown_node, 
 		      ORIGINAL_COLUMN, _("Untranslated"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
-		      COLOR_COLUMN, &color,
+		      COLOR_COLUMN, &messages_table_colors->untranslated_color,
 		      -1);
 
 
-  gdk_color_parse(messages_table_colors->fuzzy, &color);
   gtk_tree_store_append (model, &messages_table->fuzzy_node, NULL);
   gtk_tree_store_set (model, &messages_table->fuzzy_node, 
 		      ORIGINAL_COLUMN, _("Fuzzy"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
-		      COLOR_COLUMN, &color,
+		      COLOR_COLUMN, &messages_table_colors->fuzzy_color,
 		      -1);
 
-  gdk_color_parse(messages_table_colors->translated, &color);
   gtk_tree_store_append (model, &messages_table->translated_node, NULL);
   gtk_tree_store_set (model, &messages_table->translated_node, 
 		      ORIGINAL_COLUMN, _("Translated"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
-		      COLOR_COLUMN, &color,
+		      COLOR_COLUMN, &messages_table_colors->translated_color,
 		      -1);
 
   while (list) {
@@ -320,25 +327,22 @@ void gtranslator_messages_table_create (void)
 
     switch (message->status){
     case GTR_MSG_STATUS_UNKNOWN:
-      gdk_color_parse(messages_table_colors->untranslated, &color);
-
       gtk_tree_store_append(model, &message->iter, &messages_table->unknown_node);
       gtk_tree_store_set(model, &message->iter,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 MSG_PTR_COLUMN, message,
-			 COLOR_COLUMN, &color,
+			 COLOR_COLUMN, &messages_table_colors->untranslated_color,
 			 -1);
       i++;
       break;
     case GTR_MSG_STATUS_TRANSLATED:
-      gdk_color_parse(messages_table_colors->translated, &color);
       gtk_tree_store_append(model, &message->iter, &messages_table->translated_node);
       gtk_tree_store_set(model, &message->iter,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 MSG_PTR_COLUMN, message,
-			 COLOR_COLUMN, &color,
+			 COLOR_COLUMN, &messages_table_colors->translated_color,
 			 -1);
       j++;
       break;
@@ -347,13 +351,12 @@ void gtranslator_messages_table_create (void)
       break;
     case GTR_MSG_STATUS_FUZZY:
     default:
-      gdk_color_parse(messages_table_colors->fuzzy, &color);
       gtk_tree_store_append(model, &message->iter, &messages_table->fuzzy_node);
       gtk_tree_store_set(model, &message->iter,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 MSG_PTR_COLUMN, message,
-			 COLOR_COLUMN, &color,
+			 COLOR_COLUMN, &messages_table_colors->fuzzy_color,
 			 -1);
       k++;
     }
