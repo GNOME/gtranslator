@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-08-12 14:57+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-26 22:43+0200\n"
 "PO-Revision-Date: 2003-08-12 14:58+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 # data/desktop/gtranslator.desktop.in.h:1
 #: data/desktop/gtranslator.desktop.in.h:1
@@ -23,7 +23,7 @@ msgid "The Gnome translation program"
 msgstr "Gnome-översättningsprogrammet"
 
 # data/desktop/gtranslator.desktop.in.h:2 src/gui.c:172 src/parse.c:761
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1061
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -47,7 +47,7 @@ msgstr ""
 "gtranslator är en programsvit med många finesser för redigering av po-filer."
 
 # src/sidebar.c:107
-#: src/bookmark.c:93 src/dialogs.c:1510
+#: src/bookmark.c:93 src/dialogs.c:1512
 msgid "No comment"
 msgstr "Ingen kommentar"
 
@@ -181,7 +181,7 @@ msgid "English"
 msgstr "Engelska"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:319
+#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:323
 msgid "Translated"
 msgstr "Översatt"
 
@@ -386,17 +386,17 @@ msgid "Query string:"
 msgstr "Söksträng:"
 
 # src/dialogs.c:972
-#: src/dialogs.c:1324
+#: src/dialogs.c:1320
 msgid "No query string given!"
 msgstr "Ingen söksträng angavs!"
 
 # src/dialogs.c:1006
-#: src/dialogs.c:1346
+#: src/dialogs.c:1342
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Kunde inte hitta ett resultat för frågan i din inlärningsbuffert!"
 
 # src/dialogs.c:1019
-#: src/dialogs.c:1358
+#: src/dialogs.c:1354
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -410,7 +410,7 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1428
+#: src/dialogs.c:1424
 msgid "Query's result translation is already there!"
 msgstr "Sökfrågans resulterande översättning finns redan där!"
 
@@ -424,11 +424,11 @@ msgstr ""
 "från din personliga inlärningsbuffert?"
 
 # src/header_stuff.c:436
-#: src/dialogs.c:1490 src/dialogs.c:1518
+#: src/dialogs.c:1492 src/dialogs.c:1520
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- lägga till bokmärke med kommentar?"
 
-#: src/dialogs.c:1510
+#: src/dialogs.c:1512
 msgid "Comment for the bookmark:"
 msgstr "Kommentar för bokmärket:"
 
@@ -459,7 +459,7 @@ msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i luddiga kvar ]"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:311
+#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
 msgstr "Luddig"
 
@@ -480,7 +480,7 @@ msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i oöversatta kvar ]"
 
 # src/gui.c:407 src/gui.c:409
-#: src/gui.c:531 src/gui.c:533 src/messages-table.c:302
+#: src/gui.c:531 src/gui.c:533 src/messages-table.c:306
 msgid "Untranslated"
 msgstr "Oöversatt"
 
@@ -916,7 +916,8 @@ msgstr "Walesiska"
 
 # src/dialogs.c:107
 #: src/main.c:80
-msgid "Auto translate the po file & exit"
+#, fuzzy
+msgid "Auto translate the po file"
 msgstr "Översätt po-filen automatiskt och avsluta"
 
 #: src/main.c:80 src/main.c:96
@@ -925,7 +926,8 @@ msgstr "FILNAMN"
 
 # src/main.c:77
 #: src/main.c:84
-msgid "Show build information/specifications"
+#, fuzzy
+msgid "Show build specifications"
 msgstr "Visa bygginformation/specifikationer"
 
 #: src/main.c:88
@@ -947,52 +949,53 @@ msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
 #: src/main.c:96
-msgid "Learn the file completely & exit"
+#, fuzzy
+msgid "Learn the file completely"
 msgstr "Lär in filen helt och avsluta sedan"
 
 # src/main.c:138
-#: src/main.c:140
+#: src/main.c:139
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Fel under initiering av GConf: %s."
 
 # src/main.c:161
-#: src/main.c:170
+#: src/main.c:171
 msgid "gtranslator build information/specs:"
 msgstr "Bygginformation/specifikationer för gtranslator:"
 
 # src/main.c:163
-#: src/main.c:172
+#: src/main.c:173
 msgid "Version and build date:"
 msgstr "Versionsnummer och byggdatum:"
 
 # src/main.c:165
-#: src/main.c:174
+#: src/main.c:175
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Glib/Gtk+/GNOME/XML-versioner vid byggandet:"
 
 # src/main.c:169
-#: src/main.c:176
+#: src/main.c:177
 msgid "Colorschemes directory:"
 msgstr "Färgschemakatalog:"
 
 # src/main.c:171
-#: src/main.c:178
+#: src/main.c:179
 msgid "Scripts directory:"
 msgstr "Skriptkatalog:"
 
 # src/main.c:173
-#: src/main.c:180
+#: src/main.c:181
 msgid "Window icon:"
 msgstr "Fönsterikon:"
 
 # src/main.c:175
-#: src/main.c:182
+#: src/main.c:183
 msgid "Own locale directory:"
 msgstr "Egen lokalkatalog:"
 
 # src/prefs.c:127
-#: src/main.c:184
+#: src/main.c:185
 msgid "Default learn buffer file location:"
 msgstr "Plats för standardfrågedomänsfil:"
 
@@ -1000,7 +1003,7 @@ msgstr "Plats för standardfrågedomänsfil:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:430
+#: src/main.c:431
 #, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "Lärde in filen \"%s\" till din inlärningsbuffert utan problem.\n"
@@ -1008,7 +1011,7 @@ msgstr "Lärde in filen \"%s\" till din inlärningsbuffert utan problem.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:472
+#: src/main.c:473
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "Exporterade inlärningsbuffert till filen \"%s\".\n"
@@ -1413,7 +1416,7 @@ msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Kunde inte öppna zippade po-filen \"%s\"!"
 
 # src/parse.c:247
-#: src/parse.c:446
+#: src/parse.c:468
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1425,7 +1428,7 @@ msgstr ""
 "Var vänlig och kontrollera filen och försök igen."
 
 # src/parse.c:283
-#: src/parse.c:492
+#: src/parse.c:523
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1435,7 +1438,7 @@ msgstr ""
 "%s"
 
 # src/parse.c:306
-#: src/parse.c:514
+#: src/parse.c:545
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen \"%s\" finns inte alls!"
@@ -1443,17 +1446,17 @@ msgstr "Filen \"%s\" finns inte alls!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:638
+#: src/parse.c:677
 msgid "Header record not found - defaulting from preferences"
 msgstr "Huvudpost hittades inte - använder standardvärde från inställningar"
 
 # src/parse.c:396
-#: src/parse.c:654
+#: src/parse.c:693
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:842
+#: src/parse.c:905
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1465,13 +1468,13 @@ msgstr ""
 "Din fil bör troligtvis kallas \"%s.po\"."
 
 # src/parse.c:599
-#: src/parse.c:904
+#: src/parse.c:967
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Kunde inte öppna filen \"%s\" för skrivning!"
 
 # src/parse.c:645
-#: src/parse.c:956
+#: src/parse.c:1019
 #, c-format
 msgid ""
 "File %s\n"
@@ -1481,12 +1484,12 @@ msgstr ""
 "innehåller %d luddiga meddelanden"
 
 # src/parse.c:830
-#: src/parse.c:1225
+#: src/parse.c:1288
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Tyvärr, msgfmt finns inte tillgängligt på ditt system!"
 
 # src/parse.c:859
-#: src/parse.c:1260
+#: src/parse.c:1323
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1906,7 +1909,7 @@ msgstr "Kunde inte skapa katalogen \"%s\"!"
 #.
 #. * Again return the fallback default locale value given by the translator.
 #.
-#: src/utils.c:793
+#: src/utils.c:794
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 

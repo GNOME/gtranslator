@@ -5,20 +5,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.34\n"
-"POT-Creation-Date: 2003-08-20 22:44+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-26 22:43+0200\n"
 "PO-Revision-Date: 2003-08-20 22:49+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
 msgstr "GNOME oversettingsprogram"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1116
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -36,7 +36,7 @@ msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gtranslator er et program for redigering av po-filer med mange funksjoner."
 
-#: src/bookmark.c:93 src/dialogs.c:1510
+#: src/bookmark.c:93 src/dialogs.c:1512
 msgid "No comment"
 msgstr "Ingen kommentar"
 
@@ -149,7 +149,7 @@ msgstr "Skill mellom store og små bokstaver"
 msgid "English"
 msgstr "Engelsk"
 
-#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:319
+#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:323
 msgid "Translated"
 msgstr "Oversatt"
 
@@ -330,15 +330,15 @@ msgstr "Spør etter meldingsinnhold"
 msgid "Query string:"
 msgstr "Streng i spørring:"
 
-#: src/dialogs.c:1324
+#: src/dialogs.c:1320
 msgid "No query string given!"
 msgstr "Ingen streng oppgitt i spørring!"
 
-#: src/dialogs.c:1346
+#: src/dialogs.c:1342
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Kunne ikke finne resultat av spørringen i læringsbufferen!"
 
-#: src/dialogs.c:1358
+#: src/dialogs.c:1354
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -351,7 +351,7 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1428
+#: src/dialogs.c:1424
 msgid "Query's result translation is already there!"
 msgstr "Resultatet av spørringen er allerede der!"
 
@@ -363,11 +363,11 @@ msgstr ""
 "Skal gtranslator oversette filen automatisk med informasjon fra "
 "innlæringsbuffer?"
 
-#: src/dialogs.c:1490 src/dialogs.c:1518
+#: src/dialogs.c:1492 src/dialogs.c:1520
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- legg til bokmerke med kommentar?"
 
-#: src/dialogs.c:1510
+#: src/dialogs.c:1512
 msgid "Comment for the bookmark:"
 msgstr "Kommentar for bokmerket:"
 
@@ -393,7 +393,7 @@ msgstr "Rediger kommentar"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i uferdige igjen ]"
 
-#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:311
+#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
 msgstr "Uferdig"
 
@@ -411,7 +411,7 @@ msgstr "Klebrig (Melding og oversettelse er lik)"
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i uoversatte igjen ]"
 
-#: src/gui.c:531 src/gui.c:533 src/messages-table.c:302
+#: src/gui.c:531 src/gui.c:533 src/messages-table.c:306
 msgid "Untranslated"
 msgstr "Uoversatt"
 
@@ -770,7 +770,8 @@ msgid "Welsh"
 msgstr "Walisisk"
 
 #: src/main.c:80
-msgid "Auto translate the po file & exit"
+#, fuzzy
+msgid "Auto translate the po file"
 msgstr "Oversett po-fil automatisk og avslutt"
 
 #: src/main.c:80 src/main.c:96
@@ -778,7 +779,8 @@ msgid "FILENAME"
 msgstr "FILNAVN"
 
 #: src/main.c:84
-msgid "Show build information/specifications"
+#, fuzzy
+msgid "Show build specifications"
 msgstr "Vis informasjon/spesifikasjon for bygg og avslutt"
 
 #: src/main.c:88
@@ -798,43 +800,44 @@ msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
 #: src/main.c:96
-msgid "Learn the file completely & exit"
+#, fuzzy
+msgid "Learn the file completely"
 msgstr "Lær hele filen og avslutt"
 
-#: src/main.c:140
+#: src/main.c:139
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Feil under initiering av GConf: %s."
 
-#: src/main.c:170
+#: src/main.c:171
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator informasjon om bygg/spesifikasjoner:"
 
-#: src/main.c:172
+#: src/main.c:173
 msgid "Version and build date:"
 msgstr "Versjon og byggdato:"
 
-#: src/main.c:174
+#: src/main.c:175
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Bygg GLib / Gtk+ / GNOME-versjoner:"
 
-#: src/main.c:176
+#: src/main.c:177
 msgid "Colorschemes directory:"
 msgstr "Katalog for fargeskjema:"
 
-#: src/main.c:178
+#: src/main.c:179
 msgid "Scripts directory:"
 msgstr "Katalog for skript:"
 
-#: src/main.c:180
+#: src/main.c:181
 msgid "Window icon:"
 msgstr "Vindusikon:"
 
-#: src/main.c:182
+#: src/main.c:183
 msgid "Own locale directory:"
 msgstr "Katalog for eget locale:"
 
-#: src/main.c:184
+#: src/main.c:185
 msgid "Default learn buffer file location:"
 msgstr "Forvalgt filplassering for læringsbuffer:"
 
@@ -842,7 +845,7 @@ msgstr "Forvalgt filplassering for læringsbuffer:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:430
+#: src/main.c:431
 #, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "Fullført innlæring av fil «%s» for din læringsbuffer.\n"
@@ -850,7 +853,7 @@ msgstr "Fullført innlæring av fil «%s» for din læringsbuffer.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:472
+#: src/main.c:473
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "Eksporterte læringsbufferen til fil «%s».\n"
@@ -1207,16 +1210,16 @@ msgstr "Filen `%s' eksisterer ikke i det hele tatt!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:669
+#: src/parse.c:677
 msgid "Header record not found - defaulting from preferences"
 msgstr "Topptekstoppføring ikke funnet - bruker forvalg fra brukervalg"
 
-#: src/parse.c:685
+#: src/parse.c:693
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:897
+#: src/parse.c:905
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1227,12 +1230,12 @@ msgstr ""
 ".pot-filer genereres ved kompilering.\n"
 "Din fil bør mest sannsynlig få navnet '%s.po'"
 
-#: src/parse.c:959
+#: src/parse.c:967
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Kunne ikke åpne fil `%s' for skriving!"
 
-#: src/parse.c:1011
+#: src/parse.c:1019
 #, c-format
 msgid ""
 "File %s\n"
@@ -1241,11 +1244,11 @@ msgstr ""
 "Fil %s\n"
 "inneholder %d uferdige meldinger"
 
-#: src/parse.c:1280
+#: src/parse.c:1288
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Beklager, msgfmt er ikke tilgjengelig på ditt system!"
 
-#: src/parse.c:1315
+#: src/parse.c:1323
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1613,7 +1616,7 @@ msgstr "Kan ikke opprette katalog `%s'!"
 #.
 #. * Again return the fallback default locale value given by the translator.
 #.
-#: src/utils.c:793
+#: src/utils.c:794
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 

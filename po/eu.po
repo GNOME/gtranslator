@@ -6,13 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-09 13:18+0200\n"
+"POT-Creation-Date: 2003-08-26 22:43+0200\n"
 "PO-Revision-Date: 2001-09-08 18:45+0200\n"
 "Last-Translator: Xabier Bayon <j.bayon@euskalnet.net>\n"
 "Language-Team: Basque <linux-eu@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: data/desktop/gtranslator.desktop.in.h:1
+msgid "The Gnome translation program"
+msgstr "Gnome itzulpen programa"
+
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
+msgid "gtranslator"
+msgstr "gtranslator"
 
 #. Translator credits
 #: src/about.c:58
@@ -29,6 +37,21 @@ msgstr "(C) 1999-2001 The Free Software Foundation"
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator po fitxategiak editatzeko izugarrizko aplikazioa da."
 
+#: src/bookmark.c:93 src/dialogs.c:1512
+#, fuzzy
+msgid "No comment"
+msgstr "Azalpena Editatu"
+
+#: src/bookmark.c:598
+#, fuzzy
+msgid "_View/_Bookmarks/"
+msgstr "Kolore eskemen direktirioa:"
+
+#: src/bookmark.c:635
+#, fuzzy, c-format
+msgid "Open %s (%s)"
+msgstr "Ireki %s"
+
 #: src/color-schemes.c:196
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
@@ -42,7 +65,7 @@ msgstr "Ezin da egilearen datuak berreskuratu!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:324 src/translator.c:312
+#: src/color-schemes.c:324 src/translator.c:318
 msgid "Unknown"
 msgstr "Ezezaguna"
 
@@ -60,19 +83,19 @@ msgstr "Kolore eskemen direktirioa:"
 msgid "Activate colorscheme %s"
 msgstr ""
 
-#: src/dialogs.c:99
+#: src/dialogs.c:117
 msgid "gtranslator -- open po file"
 msgstr "gtransaltor -- po fitxategia ireki"
 
-#: src/dialogs.c:141
+#: src/dialogs.c:159
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- fitxategia gorde honela..."
 
-#: src/dialogs.c:161
+#: src/dialogs.c:179
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- fitxategiko bertako kopia gorde honela..."
 
-#: src/dialogs.c:205
+#: src/dialogs.c:229
 #, c-format
 msgid ""
 "File %s\n"
@@ -81,138 +104,154 @@ msgstr ""
 "%s fitxategia\n"
 "aldatu da. Gorde?"
 
-#: src/dialogs.c:245
+#: src/dialogs.c:235
+msgid "Don't save"
+msgstr ""
+
+#: src/dialogs.c:279
 msgid "gtranslator -- import po file"
 msgstr "gtranslator -- po fitxategia inportatu"
 
-#: src/dialogs.c:291
+#: src/dialogs.c:326
 msgid "gtranslator -- export po file"
 msgstr "gtrasnlator -- po fitxategia exportatu"
 
-#: src/dialogs.c:337 src/dialogs.c:371
+#: src/dialogs.c:374 src/dialogs.c:407
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- azalpena editatu"
 
-#: src/dialogs.c:359
+#: src/dialogs.c:399
 msgid "Comment:"
 msgstr "Azalpena:"
 
-#: src/dialogs.c:475
+#: src/dialogs.c:514
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "'%s'-ko itzulpen guztiak ezabatu behar dira?"
 
-#: src/dialogs.c:488 src/dialogs.c:513
-msgid "gtranslator -- confirm removal of all translations"
-msgstr "gtranslator -- itzulpen guztiak ezabatuak izan behar direla baieztatu"
-
-#: src/dialogs.c:502
-msgid "Are you sure you want to remove ALL translations from this po file?"
-msgstr "Ziur zaude po fitxategi honen itzulpen GUZTIAK ezabatu nahi dituzula?"
-
-#: src/dialogs.c:608
+#: src/dialogs.c:617
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- nora joan"
 
-#: src/dialogs.c:610
-msgid "Go!"
-msgstr "Joan!"
-
-#: src/dialogs.c:619
+#: src/dialogs.c:625
 msgid "Go to message number:"
 msgstr "Zenbatgarren mezura jo:"
 
-#: src/dialogs.c:688
+#: src/dialogs.c:714
 msgid "Find in the po file"
 msgstr "Po fitxategian bilatu"
 
-#: src/dialogs.c:690 src/menus.c:337
-msgid "Find"
-msgstr "Bilatu"
-
-#: src/dialogs.c:697
+#: src/dialogs.c:722
 msgid "Enter search string:"
 msgstr "Sartu bilatzeko hitza:"
 
-#: src/dialogs.c:702
+#: src/dialogs.c:727
 msgid "Case sensitive"
 msgstr "Hizki larriak konruan hartu"
 
-#: src/dialogs.c:707 src/languages.c:97
+#: src/dialogs.c:732 src/languages.c:97
 msgid "English"
 msgstr "Ingelesa"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:513 src/messages-table.c:212
+#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:323
 msgid "Translated"
 msgstr "Itzulia"
 
-#: src/dialogs.c:719 src/dialogs.c:820
+#: src/dialogs.c:744 src/dialogs.c:861
 msgid "Both"
 msgstr "Biak"
 
-#: src/dialogs.c:725 src/dialogs.c:808
+#: src/dialogs.c:750 src/dialogs.c:849
 msgid "Comments"
 msgstr "Azalpenak"
 
-#: src/dialogs.c:731
+#: src/dialogs.c:756
 msgid "In all strings"
 msgstr "String guztietan"
 
-#: src/dialogs.c:746
-msgid "Find in: "
+#: src/dialogs.c:771
+#, fuzzy
+msgid "Find in:"
 msgstr "Non Bilatu:"
 
-#: src/dialogs.c:794
+#.
+#. * Translators: this means that the hotkeys ("_" etc.) are ignored
+#. *  during the search action.
+#.
+#: src/dialogs.c:781
+msgid "Ignore hotkeys"
+msgstr ""
+
+#: src/dialogs.c:832
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- ordezkatu"
 
-#: src/dialogs.c:795 src/menus.c:341
+#: src/dialogs.c:836 src/menus.c:355
 msgid "Replace"
 msgstr "Ordezkatu"
 
-#: src/dialogs.c:796
+#: src/dialogs.c:837
 msgid "Replace all"
 msgstr "Ordezkatu guztiak"
 
-#: src/dialogs.c:800
+#: src/dialogs.c:841
 msgid "String to replace:"
 msgstr "Ordezkatzeko string-a:"
 
-#: src/dialogs.c:803
+#: src/dialogs.c:844
 msgid "Replace string:"
 msgstr "String-a ordezkatu:"
 
-#: src/dialogs.c:843
+#: src/dialogs.c:884
 msgid "Replace in:"
 msgstr "Non ordezkatu:"
 
-#: src/dialogs.c:921
+#: src/dialogs.c:963
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Msgfmt burutzen zen bitartean okerra gertatu da:\n"
 
-#: src/dialogs.c:954
+#: src/dialogs.c:1004
+#, c-format
+msgid ""
+"The file\n"
+"\n"
+"   %s\n"
+"\n"
+"is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling\n"
+"this file currently to re-gain access to this file.\n"
+"\n"
+"Shall fool gtranslator open this file anyway ?"
+msgstr ""
+
+#: src/dialogs.c:1045
+#, c-format
+msgid ""
+"File %s\n"
+"was changed. Do you want to revert to saved copy?"
+msgstr ""
+"%s fitxategia\n"
+"aldatu da. Itzuli nahi duzu aurretik gordetako kopiara?"
+
+#: src/dialogs.c:1077
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- URI-tik ireki"
 
-#: src/dialogs.c:955 src/menus.c:268
-msgid "Open"
-msgstr "Ireki"
-
-#: src/dialogs.c:963
+#: src/dialogs.c:1089
 msgid "Enter URI:"
 msgstr "URI-a sartu:"
 
-#: src/dialogs.c:1001
+#: src/dialogs.c:1127
 msgid "No URI given!"
 msgstr "Ez da URI-rik eman!!!"
 
-#: src/dialogs.c:1016
+#: src/dialogs.c:1142
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr ""
 "Emandako URI protokoloa (adib. \"ftp://\") ezin da erabili soporterik ez "
 "dagoelako!"
 
-#: src/dialogs.c:1024
+#: src/dialogs.c:1150
 #, fuzzy
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
@@ -237,13 +276,12 @@ msgstr ""
 "\n"
 "file:///<PO-FITXATEGIA>"
 
-#: src/dialogs.c:1059
-#, c-format
+#: src/dialogs.c:1189
+#, fuzzy, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
 "It was saved by gtranslator before gtranslator last closed\n"
 "and may contain your hard work!\n"
-"Saying \"No\" will delete the crash recovery file."
 msgstr ""
 "'%s'-entzako berreskuratze fitxategia ireki?\n"
 "Gtranslator-ek gorde zuen aurreko gtranslator-etik irten\n"
@@ -251,46 +289,60 @@ msgstr ""
 "Ezetz esaten baduzu erorketaren berreskuratze fitxategia\n"
 "ezabatuko da."
 
-#: src/dialogs.c:1082
-#, c-format
-msgid "Recovering `%s'..."
-msgstr "'%s' berreskuratzen ..."
+#.
+#. * Translators: All this is about recovering a po file after
+#. *  a crash or something; postbone means that the user will
+#. *   get asked the next time he starts up gtranslator again
+#. *    if he/she wants to recover file.
+#.
+#: src/dialogs.c:1201
+msgid "Postpone decision"
+msgstr ""
+
+#: src/dialogs.c:1203
+msgid "Ignore recovery file"
+msgstr ""
+
+#: src/dialogs.c:1205
+#, fuzzy
+msgid "Recover file"
+msgstr "Fitxa_tegi berriak"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1132
+#: src/dialogs.c:1264
 #, fuzzy
 msgid "Here you can query existing translations from your learn buffer."
 msgstr "Hemen galde dezakezu zenbat gettext domeinu duzu itzulgarriak direnak."
 
-#: src/dialogs.c:1135
+#: src/dialogs.c:1267
 #, fuzzy
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "gtrasnlator -- po fitxategia exportatu"
 
-#: src/dialogs.c:1136 src/menus.c:346
+#: src/dialogs.c:1271 src/menus.c:360
 msgid "Query"
 msgstr "Galdetu"
 
-#: src/dialogs.c:1136
+#: src/dialogs.c:1272
 msgid "Query message content"
 msgstr ""
 
-#: src/dialogs.c:1145
+#: src/dialogs.c:1282
 msgid "Query string:"
 msgstr ""
 
-#: src/dialogs.c:1191
+#: src/dialogs.c:1320
 msgid "No query string given!"
 msgstr "Ez duzu bilatzen duzun hitza sartu!"
 
-#: src/dialogs.c:1213
+#: src/dialogs.c:1342
 #, fuzzy
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Ezin izan da galderarentzako erantzunik aurkitu!!!"
 
-#: src/dialogs.c:1225
+#: src/dialogs.c:1354
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -301,11 +353,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1291
+#: src/dialogs.c:1424
 msgid "Query's result translation is already there!"
 msgstr ""
 
-#: src/dialogs.c:1315
+#: src/dialogs.c:1456
 #, fuzzy
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
@@ -314,6 +366,15 @@ msgstr ""
 "Gtranslator-ek autoitzulpena erabili beharko luke\n"
 "lehenetsiko domeinutik edo ikasitakoaren buffer pertsonaletik\n"
 "ateratako argibideaz baliatuz?"
+
+#: src/dialogs.c:1492 src/dialogs.c:1520
+#, fuzzy
+msgid "gtranslator -- add bookmark with comment?"
+msgstr "gtranslator -- azalpena editatu"
+
+#: src/dialogs.c:1512
+msgid "Comment for the bookmark:"
+msgstr ""
 
 #: src/find.c:211
 msgid "Please enter a search string"
@@ -328,38 +389,38 @@ msgstr ""
 "\"%s\"\n"
 "ezin izan da aurkitu"
 
-#: src/gui.c:194
+#: src/gui.c:204
 msgid "Edit comment"
 msgstr "Azalpena Editatu"
 
-#: src/gui.c:499
+#: src/gui.c:508
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ Zalantzako %i itzuli gabe ]"
 
-#: src/gui.c:499 src/gui.c:503 src/menus.c:327 src/messages-table.c:206
+#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
 msgstr "Zalantzakoak"
 
-#: src/gui.c:503
+#: src/gui.c:512
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Zalantzako guztiak itzulita ]"
 
-#: src/gui.c:511
+#: src/gui.c:520
 msgid "Sticky (Message & translation are the same)"
 msgstr ""
 
-#: src/gui.c:522
+#: src/gui.c:531
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ Itzuli gabeko %i ]"
 
-#: src/gui.c:522 src/gui.c:524 src/messages-table.c:200
+#: src/gui.c:531 src/gui.c:533 src/messages-table.c:306
 msgid "Untranslated"
 msgstr "Itzuli Gabe"
 
-#: src/gui.c:524
+#: src/gui.c:533
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Guztia itzulita ]"
@@ -367,74 +428,79 @@ msgstr "%s [ Guztia itzulita ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:537
+#: src/gui.c:546
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "%d. Mezua (%d Guztira) Egoera: %s"
 
-#: src/header_stuff.c:413
+#: src/header_stuff.c:495
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- goi-burua editatu"
 
-#: src/header_stuff.c:420 src/header_stuff.c:425
-msgid "Project"
-msgstr "Proiektua"
-
-#: src/header_stuff.c:428
-msgid "Translator and Language"
-msgstr "Itzultzailea eta Hizkuntza"
-
-#: src/header_stuff.c:438
+#: src/header_stuff.c:519
 msgid "Comments:"
 msgstr "Azalpenak:"
 
-#: src/header_stuff.c:444
+#: src/header_stuff.c:526
 msgid "Project name:"
 msgstr "Proiektu izena:"
 
-#: src/header_stuff.c:447
+#: src/header_stuff.c:532
 msgid "Project version:"
 msgstr "Proiektu bertsioa:"
 
-#: src/header_stuff.c:450
+#: src/header_stuff.c:539
 msgid "Pot file creation date:"
 msgstr "Pot fitxategiko sorrera data:"
 
-#: src/header_stuff.c:455
+#: src/header_stuff.c:545
 msgid "Po file revision date:"
 msgstr "Po fitxategiko berraztertze data:"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:559
+msgid "Report message string bugs to:"
+msgstr ""
+
+#: src/header_stuff.c:572
 msgid "Generator:"
 msgstr "Sorgailua:"
 
-#: src/header_stuff.c:472
+#: src/header_stuff.c:576
+msgid "Project"
+msgstr "Proiektua"
+
+#: src/header_stuff.c:582
 msgid "Use my options to complete the following entries:"
 msgstr "Nire aukerar erabili ondorengo sarrerak betetzeko:"
 
-#: src/header_stuff.c:486
+#: src/header_stuff.c:595
 msgid "Translator's name:"
 msgstr "Itzultzailearen izena:"
 
-#: src/header_stuff.c:489
+#: src/header_stuff.c:601
 msgid "Translator's e-mail:"
 msgstr "Itzultzailearen e-posta:"
 
-#: src/header_stuff.c:492 src/prefs.c:150
+#: src/header_stuff.c:608 src/prefs.c:466
 msgid "Language:"
 msgstr "Hizkuntza:"
 
-#: src/header_stuff.c:498
-msgid "Language group's e-mail:"
+#: src/header_stuff.c:615 src/prefs.c:478
+#, fuzzy
+msgid "Language group's email:"
 msgstr "Hizkuntz taldearen e-posta:"
 
-#: src/header_stuff.c:503 src/prefs.c:166
+#: src/header_stuff.c:622 src/prefs.c:484
 msgid "Charset:"
 msgstr "Karaktere multzoa:"
 
-#: src/header_stuff.c:515 src/prefs.c:171
+#: src/header_stuff.c:629 src/prefs.c:489
 msgid "Encoding:"
 msgstr "Kodifikazioa:"
+
+#: src/header_stuff.c:637
+msgid "Translator and Language"
+msgstr "Itzultzailea eta Hizkuntza"
 
 #: src/history.c:195
 msgid "_File/Recen_t files/"
@@ -444,51 +510,6 @@ msgstr "_Fitxategia/Fitxa_tegi berriak/"
 #, c-format
 msgid "Open %s"
 msgstr "Ireki %s"
-
-#: src/htmlizer.c:276
-#, c-format
-msgid "Couldn't save html output to %s!"
-msgstr ""
-
-#.
-#. * Translatable output to a html file which is visible on the pages.
-#.
-#: src/htmlizer.c:302
-#, c-format
-msgid "%s-%s contains %i messages."
-msgstr "%s-%s-(e)k %i mezu ditu."
-
-#.
-#. * A translatable information string also displayed on the html pages.
-#. *
-#. * NOTE: Please do not forget to also "translate" the <b> tags as the
-#. *  project name should be displayed bold on the output pages.
-#.
-#: src/htmlizer.c:315
-#, c-format
-msgid "Project <b>%s</b> (last po file revision: %s)."
-msgstr "<b>%s</b> proiektua (po fitxategiko azkeneko berraztertze: %s)."
-
-#: src/htmlizer.c:330
-#, c-format
-msgid "Last translator: %s"
-msgstr "Azken itzultzailea: %s"
-
-#.
-#. * This is printed at the end of the HTML page and should also include
-#. *  the hyperlink in the translations.
-#. *
-#. * In the output it looks then like "HTML output of "tr.po" produced
-#. *  by gtranslator version X.YY".
-#. *
-#. * Please don't forget to include the HTML tags in the msgid.
-#.
-#: src/htmlizer.c:369
-#, c-format
-msgid ""
-"HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
-"\">gtranslator</a> version %s."
-msgstr ""
 
 #: src/languages.c:37
 msgid "Afrikaans"
@@ -608,225 +629,221 @@ msgid "Hungarian"
 msgstr "Hungariera/Magyarrera"
 
 #: src/languages.c:157
+msgid "Icelandic"
+msgstr ""
+
+#: src/languages.c:161
 msgid "Indonesian"
 msgstr "Indonesiera"
 
-#: src/languages.c:161
+#: src/languages.c:165
 msgid "Italian"
 msgstr "Italiera"
 
-#: src/languages.c:165
+#: src/languages.c:169
 msgid "Irish"
 msgstr "Irlandera"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Japanese"
 msgstr "Japoniera"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Kannada"
 msgstr ""
 
-#: src/languages.c:177
+#: src/languages.c:181
 msgid "Korean"
 msgstr "Koreera"
 
-#: src/languages.c:181
+#: src/languages.c:185
 msgid "Latvian"
 msgstr "Letoniera"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Lithuanian"
 msgstr "Lituaniera"
 
-#: src/languages.c:189
+#: src/languages.c:193
 msgid "Malay/Bahasa Melayu"
 msgstr "Malaysiera/Bahas Melayu"
 
-#: src/languages.c:193
+#: src/languages.c:197
 msgid "Maltese"
 msgstr "Maltera"
 
-#: src/languages.c:197
+#: src/languages.c:201
 msgid "Marathi"
 msgstr ""
 
-#: src/languages.c:201
+#: src/languages.c:205
 msgid "Norwegian/Bokmaal"
 msgstr "Norvegiera/Bokmaal"
 
-#: src/languages.c:205
+#: src/languages.c:209
 msgid "Norwegian/Nynorsk"
 msgstr "Norvegiera/Nynorsk"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Punjabi"
 msgstr ""
 
-#: src/languages.c:213
+#: src/languages.c:217
 msgid "Polish"
 msgstr "Poloniera"
 
-#: src/languages.c:217
+#: src/languages.c:221
 msgid "Portuguese"
 msgstr "Portugalera"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Portuguese/Brazil"
 msgstr "Brasilgo Portugalera"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Romanian"
 msgstr "Errumaniera"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Russian"
 msgstr "Errusiera"
 
-#: src/languages.c:233
+#: src/languages.c:237
 msgid "Serbian/Cyrillic"
 msgstr "Serbiera (Zirilikoa)"
 
-#: src/languages.c:237
+#: src/languages.c:241
 msgid "Serbian/Latin"
 msgstr "Serbiera·(Latina)"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Slovak"
 msgstr "Eslovakiera"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Slovenian"
 msgstr "Esloveniera"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Spanish"
 msgstr "Gaztelera"
 
-#: src/languages.c:253
+#: src/languages.c:257
 msgid "Spanish/Spain"
 msgstr "Espainiako Gastelera"
 
-#: src/languages.c:257
+#: src/languages.c:261
 msgid "Spanish/Mexico"
 msgstr "Mexikoko gaztelera"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Swedish"
 msgstr "Suediera"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Tamil"
 msgstr "Tamilera"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Telugu"
 msgstr ""
 
-#: src/languages.c:273
+#: src/languages.c:277
 msgid "Thai"
 msgstr "Tailandiera"
 
-#: src/languages.c:277
+#: src/languages.c:281
 msgid "Turkish"
 msgstr "Turkiera"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Ukrainian"
 msgstr "Ukraniera"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Uzbekian"
 msgstr "Uzbekera"
 
-#: src/languages.c:289
+#: src/languages.c:293
 msgid "Vietnamese"
 msgstr "Vietnamera"
 
-#: src/languages.c:293
+#: src/languages.c:297
 msgid "Walloon"
 msgstr "Waloiera"
 
-#: src/languages.c:297
+#: src/languages.c:301
 msgid "Welsh"
 msgstr "Galesera"
 
-#: src/main.c:83
+#: src/main.c:80
 #, fuzzy
-msgid "Auto translate the po file & exit"
+msgid "Auto translate the po file"
 msgstr "gtransaltor -- po fitxategia ireki"
 
-#: src/main.c:83 src/main.c:99
+#: src/main.c:80 src/main.c:96
 msgid "FILENAME"
 msgstr "FITXATEGI IZENA"
 
-#: src/main.c:87
-msgid "Show build information/specifications"
+#: src/main.c:84
+msgid "Show build specifications"
 msgstr ""
 
-#: src/main.c:91
+#: src/main.c:88
 msgid "Export learn buffer to a plain po file"
 msgstr ""
 
-#: src/main.c:91
+#: src/main.c:88
 msgid "PO_FILE"
 msgstr ""
 
-#: src/main.c:95
+#: src/main.c:92
 msgid "Specify main window geometry"
 msgstr ""
 
-#: src/main.c:95
+#: src/main.c:92
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: src/main.c:99
-msgid "Learn the file completely & exit"
+#: src/main.c:96
+msgid "Learn the file completely"
 msgstr ""
 
-#: src/main.c:103
-msgid "HTML file to write to"
-msgstr ""
-
-#: src/main.c:103
-msgid "HTMLFILE"
-msgstr "HTMLFITXATEGIA"
-
-#: src/main.c:151
+#: src/main.c:139
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Okerra gertatu da Gconf abiaraztean: %s."
 
-#: src/main.c:178
+#: src/main.c:171
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator-en build argibidea/ezaugarriak:"
 
-#: src/main.c:180
+#: src/main.c:173
 msgid "Version and build date:"
 msgstr "Bertsioa eta eraiki data:"
 
-#: src/main.c:182
+#: src/main.c:175
 #, fuzzy
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Glib/Gtk+/GNOME buil bertsioak:"
 
-#: src/main.c:184
+#: src/main.c:177
 msgid "Colorschemes directory:"
 msgstr "Kolore eskemen direktirioa:"
 
-#: src/main.c:186
+#: src/main.c:179
 msgid "Scripts directory:"
 msgstr "Script-en direktorioa:"
 
-#: src/main.c:188
+#: src/main.c:181
 msgid "Window icon:"
 msgstr "Leiho ikonoa:"
 
-#: src/main.c:190
+#: src/main.c:183
 msgid "Own locale directory:"
 msgstr ""
 
-#: src/main.c:192
+#: src/main.c:185
 #, fuzzy
 msgid "Default learn buffer file location:"
 msgstr "Galdetzeko domeinu lehenetsia:"
@@ -835,45 +852,54 @@ msgstr "Galdetzeko domeinu lehenetsia:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:445
-#, c-format
-msgid "Learned `%s' successfully.\n"
+#: src/main.c:431
+#, fuzzy, c-format
+msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "'%s' ikasi egin da.\n"
 
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:487
+#: src/main.c:473
 #, c-format
-msgid "Exported learn buffer to `%s'.\n"
+msgid "Exported learn buffer to file `%s'.\n"
 msgstr ""
 
-#: src/menus.c:49
+#: src/menus.c:48
 #, fuzzy
 msgid "_Go"
 msgstr "Joan!"
 
-#: src/menus.c:59
+#: src/menus.c:58
 msgid "_Compile"
 msgstr "_Konpilatu"
 
-#: src/menus.c:60 src/menus.c:282
+#: src/menus.c:59 src/menus.c:296
 msgid "Compile the po file"
 msgstr "Po fitxategia konpilatu"
 
-#: src/menus.c:66
+#: src/menus.c:65
 msgid "_Update"
 msgstr "Egunerat_u"
 
-#: src/menus.c:67 src/menus.c:286
+#: src/menus.c:66 src/menus.c:300
 msgid "Update the po file"
 msgstr "Po fitxategia eguneratu"
 
+#: src/menus.c:73
+msgid "Add bookmark"
+msgstr ""
+
 #: src/menus.c:74
+#, fuzzy
+msgid "Add a bookmark for this message in this po file"
+msgstr "Zaharkitutako mezuak po fitxategietan mantendu"
+
+#: src/menus.c:81
 msgid "Aut_otranslate..."
 msgstr "Aut_oitzuli..."
 
-#: src/menus.c:75
+#: src/menus.c:82
 #, fuzzy
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr ""
@@ -881,269 +907,282 @@ msgstr ""
 "lehenetsiko domeinutik edo ikasitakoaren buffer pertsonaletik\n"
 "ateratako argibideaz baliatuz?"
 
-#: src/menus.c:82
+#: src/menus.c:89
 msgid "Remove all translations..."
 msgstr "Ezabatu itzulpen guztiak..."
 
-#: src/menus.c:83
+#: src/menus.c:90
 msgid "Remove all existing translations from the po file"
 msgstr "Po fitxategiak dituen itzulpen guztiak ezabatu"
 
-#: src/menus.c:91
+#: src/menus.c:98
 msgid "Open from _URI..."
 msgstr "_URI-tik ireki..."
 
-#: src/menus.c:92
+#: src/menus.c:99
 msgid "Open a po file from a given URI"
 msgstr "Emandako URI-tik po fitxategia ireki"
 
-#: src/menus.c:102
+#: src/menus.c:109
 msgid "Recen_t files"
 msgstr "Fitxa_tegi berriak"
 
-#: src/menus.c:105
+#: src/menus.c:113
 msgid "_Export to UTF-8..."
 msgstr "UTF-8-ra exportatu..."
 
-#: src/menus.c:106
+#: src/menus.c:114
 msgid "Export the current po file to UTF-8"
 msgstr "Oraingo po fitxategia UTF-8-ra exportatu"
 
-#: src/menus.c:112
+#: src/menus.c:120
 msgid "_Import from UTF-8..."
 msgstr "UTF-8-tik _inportatu..."
 
-#: src/menus.c:113
+#: src/menus.c:121
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr ""
 
-#: src/menus.c:144
+#: src/menus.c:153
 msgid "_Query..."
 msgstr "_Galdetu..."
 
-#: src/menus.c:145 src/menus.c:347
+#: src/menus.c:154 src/menus.c:361
 msgid "Query for a string"
 msgstr ""
 
-#: src/menus.c:152
+#: src/menus.c:161
 msgid "_Header..."
 msgstr "Goi-_burua"
 
-#: src/menus.c:153
+#: src/menus.c:162
 #, fuzzy
 msgid "Edit po file header"
 msgstr "Goi-burua editatu"
 
-#: src/menus.c:160
+#: src/menus.c:169
 #, fuzzy
 msgid "C_omment..."
 msgstr "Azalpena"
 
-#: src/menus.c:161
+#: src/menus.c:170
 #, fuzzy
 msgid "Edit message comment"
 msgstr "Azalpena Editatu"
 
-#: src/menus.c:168
+#: src/menus.c:177
 msgid "Copy _message -> translation"
 msgstr ""
 
-#: src/menus.c:169
+#: src/menus.c:178
 msgid "Copy the original message contents and paste them as translation"
 msgstr ""
 
-#: src/menus.c:176
+#: src/menus.c:185
 #, fuzzy
 msgid "Fu_zzy"
 msgstr "Zalantzakoak"
 
-#: src/menus.c:177
+#: src/menus.c:186
 msgid "Toggle fuzzy status of a message"
 msgstr ""
 
-#: src/menus.c:191
+#: src/menus.c:200
 msgid "_First"
 msgstr "_Lehena"
 
-#: src/menus.c:192 src/menus.c:303
+#: src/menus.c:201 src/menus.c:317
 msgid "Go to the first message"
 msgstr "Lehenengo mezura jo"
 
-#: src/menus.c:198
+#: src/menus.c:207
 msgid "_Back"
 msgstr "_Atzera"
 
-#: src/menus.c:199 src/menus.c:307
+#: src/menus.c:208 src/menus.c:321
 msgid "Move back one message"
 msgstr "Mezu bat atzera jo"
 
-#: src/menus.c:206
+#: src/menus.c:215
 msgid "_Next"
 msgstr "Au_rrera"
 
-#: src/menus.c:207 src/menus.c:312
+#: src/menus.c:216 src/menus.c:326
 msgid "Move forward one message"
 msgstr "Mezu bat aurrera jo"
 
-#: src/menus.c:213
+#: src/menus.c:222
 msgid "_Last"
 msgstr "A_zkena"
 
-#: src/menus.c:214 src/menus.c:316
+#: src/menus.c:223 src/menus.c:330
 msgid "Go to the last message"
 msgstr "Azken mezura jo"
 
-#: src/menus.c:221
+#: src/menus.c:230
 msgid "_Go to..."
 msgstr "Nora _joan..."
 
-#: src/menus.c:222
+#: src/menus.c:231
 msgid "Goto specified message number"
 msgstr "Zehaztutako zenbatgarren mezura jo"
 
-#: src/menus.c:228
+#: src/menus.c:237
 msgid "Next fuz_zy"
 msgstr "_Zalantzako hurrengoa"
 
-#: src/menus.c:229
+#: src/menus.c:238
 msgid "Go to next fuzzy message"
 msgstr "Zalantzako hurrengo mezura jo"
 
-#: src/menus.c:235
+#: src/menus.c:244
 msgid "Next _untranslated"
 msgstr "Itzuli gabeko h_urrengora"
 
-#: src/menus.c:236 src/menus.c:321
+#: src/menus.c:245 src/menus.c:335
 msgid "Go to next untranslated message"
 msgstr "Itzuli gabeko hurrengo mezura jo"
 
-#: src/menus.c:246
+#: src/menus.c:255
+msgid "_Bookmarks"
+msgstr ""
+
+#: src/menus.c:256
 #, fuzzy
 msgid "_Colorschemes"
 msgstr "Kolore eskemen direktirioa:"
 
-#: src/menus.c:256
+#: src/menus.c:270
 msgid "gtranslator _website"
 msgstr "gtranslator _webgunea"
 
-#: src/menus.c:257
+#: src/menus.c:271
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator-en webgunea"
 
-#: src/menus.c:269
+#: src/menus.c:282
+msgid "Open"
+msgstr "Ireki"
+
+#: src/menus.c:283
 msgid "Open a po file"
 msgstr "Po fitxategia ireki"
 
-#: src/menus.c:272
+#: src/menus.c:286
 msgid "Save"
 msgstr "Gorde"
 
-#: src/menus.c:273
+#: src/menus.c:287
 msgid "Save File"
 msgstr "Fitxategia Gorde"
 
-#: src/menus.c:276
+#: src/menus.c:290
 msgid "Save as"
 msgstr "Gorde honela"
 
-#: src/menus.c:277
+#: src/menus.c:291
 msgid "Save file with a different name"
 msgstr "Fitxategia gorde izen ezberdin batekin"
 
-#: src/menus.c:281
+#: src/menus.c:295
 msgid "Compile"
 msgstr "Konpilatu"
 
-#: src/menus.c:285
+#: src/menus.c:299
 msgid "Update"
 msgstr "Eguneratu"
 
-#: src/menus.c:289
+#: src/menus.c:303
 msgid "Header"
 msgstr "Goi-burua"
 
-#: src/menus.c:290
+#: src/menus.c:304
 msgid "Edit the header"
 msgstr "Goi-burua editatu"
 
-#: src/menus.c:294
+#: src/menus.c:308
 msgid "Undo"
 msgstr "Desegin"
 
-#: src/menus.c:295
+#: src/menus.c:309
 msgid "Undo the last performed action"
 msgstr "Desegin burututako azken ekintza"
 
-#: src/menus.c:302
+#: src/menus.c:316
 msgid "First"
 msgstr "Lehena"
 
-#: src/menus.c:306
+#: src/menus.c:320
 msgid "Back"
 msgstr "Atzera"
 
-#: src/menus.c:311
+#: src/menus.c:325
 msgid "Next"
 msgstr "Aurrera"
 
-#: src/menus.c:315
+#: src/menus.c:329
 msgid "Last"
 msgstr "Azkena"
 
-#: src/menus.c:320
+#: src/menus.c:334
 msgid "Missing"
 msgstr ""
 
-#: src/menus.c:328
+#: src/menus.c:342
 msgid "Go to the next fuzzy translation"
 msgstr "Zalantzazko hurrengo itzulpenera jo"
 
-#: src/menus.c:333
+#: src/menus.c:347
 msgid "Go to"
 msgstr "Nora joan"
 
-#: src/menus.c:334
+#: src/menus.c:348
 msgid "Go to specified message number"
 msgstr ""
 
-#: src/menus.c:338
+#: src/menus.c:351
+msgid "Find"
+msgstr "Bilatu"
+
+#: src/menus.c:352
 msgid "Find string in po file"
 msgstr "Bilatu hitza po fitxategian"
 
-#: src/menus.c:342
+#: src/menus.c:356
 msgid "Replace string in po file"
 msgstr "Ordezkatu hitza po fitxategian"
 
-#: src/message.c:82
+#: src/message.c:95
 msgid "Couldn't get the message!"
 msgstr "Ezin izan da mezua lortu!!!"
 
-#: src/message.c:104
+#: src/message.c:117
 msgid "There are no fuzzy messages left."
 msgstr "Ez daude zalantzako mezu gehiagorik."
 
-#: src/message.c:128
+#: src/message.c:141
 msgid "All messages seem to be translated."
 msgstr "Dirudienez mezu guztiak itzuliak izan dira."
 
-#: src/messages-table.c:135 data/etspecs/messages-table.etspec.h:5
-msgid "Status"
-msgstr "Egoera"
+#: src/message.c:327
+#, fuzzy
+msgid "gtranslator -- edit plural forms of message translation"
+msgstr "gtranslator -- itzulpen guztiak ezabatuak izan behar direla baieztatu"
 
-#: src/messages-table.c:136 data/etspecs/messages-table.etspec.h:4
+#: src/messages-table.c:243
 msgid "Original"
 msgstr "Jatorrizkoa"
 
-#: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:6
+#: src/messages-table.c:254
 msgid "Translation"
 msgstr "Itzulpena"
 
-#: src/open.c:141
+#: src/open.c:144
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Ezin izan da '%s' konpilatutako gettext fitxategia ireki!!!"
 
-#: src/open.c:188
+#: src/open.c:192
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Ezin·izan·da·'%s'·konprimitutako·gettext·fitxategia·ireki!!!"
@@ -1152,17 +1191,17 @@ msgstr "Ezin·izan·da·'%s'·konprimitutako·gettext·fitxategia·ireki!!!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open.c:198
+#: src/open.c:202
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr ""
 
-#: src/open.c:266
+#: src/open.c:271
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Ezin izan da '%s' \"zip\"eatutako po fitxategia ireki!!!"
 
-#: src/parse.c:383
+#: src/parse.c:468
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1170,7 +1209,7 @@ msgid ""
 "Please check the file and try again."
 msgstr ""
 
-#: src/parse.c:429
+#: src/parse.c:523
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1179,17 +1218,24 @@ msgstr ""
 "Fitzategia hutsa da:\n"
 "%s"
 
-#: src/parse.c:453
+#: src/parse.c:545
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "'%s' fitxategia ez da existitzen!!!"
 
-#: src/parse.c:576
+#.
+#. * Provide a default po->header to avoid segfaults (#62244)
+#.
+#: src/parse.c:677
+msgid "Header record not found - defaulting from preferences"
+msgstr ""
+
+#: src/parse.c:693
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:720
+#: src/parse.c:905
 #, fuzzy, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1200,12 +1246,12 @@ msgstr ""
 "Pot fitxategiak konpilazio prozesuak sortzen ditu.\n"
 "Zure fitxategiak '%s.po' izena eduki beharko luke."
 
-#: src/parse.c:782
+#: src/parse.c:967
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Ezin izan da '%s' fitxategia ireki bertan idazteko!!!"
 
-#: src/parse.c:828
+#: src/parse.c:1019
 #, c-format
 msgid ""
 "File %s\n"
@@ -1214,24 +1260,11 @@ msgstr ""
 "%s fitxategiak\n"
 "%d mezu ditu zalantzakoak"
 
-#: src/parse.c:933 data/desktop/gtranslator.desktop.in.h:2
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#: src/parse.c:958
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
-msgstr ""
-"%s fitxategia\n"
-"aldatu da. Itzuli nahi duzu aurretik gordetako kopiara?"
-
-#: src/parse.c:1109
+#: src/parse.c:1288
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Barkatu, msgfmt ez dago eskuragarri zure sisteman!!!"
 
-#: src/parse.c:1144
+#: src/parse.c:1323
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1240,256 +1273,293 @@ msgstr ""
 "Konpilazio arrakastatsua:\n"
 "%s"
 
-#: src/prefs.c:110
+#: src/preferences.c:180
+msgid "Couldn't generate the current date!"
+msgstr "Ezin izan da oraingo data sortu!!!"
+
+#: src/prefs.c:302
 msgid "gtranslator -- options"
 msgstr "gtranslator -- aukerak"
 
-#: src/prefs.c:116
-msgid "Personal information"
-msgstr "Argibide pertsonala"
+#.
+#. * Files page
+#.
+#: src/prefs.c:320
+#, fuzzy
+msgid "Files"
+msgstr "Bistak"
 
-#: src/prefs.c:118
-msgid "Language settings"
-msgstr ""
+#: src/prefs.c:321 src/prefs.c:496 src/prefs.c:553
+#, fuzzy
+msgid "General"
+msgstr "Sorgailua:"
 
-#: src/prefs.c:120
-msgid "Po file editing"
-msgstr "Po fitxategia editatzen"
-
-#: src/prefs.c:122
-msgid "Miscellaneous"
-msgstr "Nahastea"
-
-#: src/prefs.c:124
-msgid "Recent files & spell checking"
-msgstr ""
-
-#: src/prefs.c:126
-msgid "Fonts, colors and color schemes"
-msgstr "Iturri, kolore eta kolore eskemak"
-
-#: src/prefs.c:128
-msgid "Autosaving"
-msgstr "Autogorde"
-
-#: src/prefs.c:130
-msgid "Messages table"
-msgstr ""
-
-#: src/prefs.c:132
-msgid "Learn buffer & autotranslation"
-msgstr ""
-
-#: src/prefs.c:138
-msgid "Author's name:"
-msgstr "Egilearen izena:"
-
-#: src/prefs.c:141
-msgid "Author's EMail:"
-msgstr "Egilearen e-posta:"
-
-#: src/prefs.c:155
-msgid "Language code:"
-msgstr "Hizkuntz kodea:"
-
-#: src/prefs.c:161
-msgid "Language group's EMail:"
-msgstr "Hizkuntz taldearen e-posta:"
-
-#: src/prefs.c:180
-msgid "Remove fuzzy status if message changed"
-msgstr "Zalantzazko egoera ezabatu mezua aldatua izan bada"
-
-#: src/prefs.c:184
-msgid "Warn if the po file contains fuzzy translations"
+#: src/prefs.c:322
+#, fuzzy
+msgid "Warn if po file contains fuzzy translations"
 msgstr "Ohartarazi po fitxategiak zalantzazko itzulpenak baldin baditu"
 
-#: src/prefs.c:188
+#: src/prefs.c:326
+msgid "Delete compiled files (e.g. \"project.gmo\")"
+msgstr "Ezabatu konpilatutako fitxategiak (adib. \"proiektu.gmo\")"
+
+#: src/prefs.c:330
+#, fuzzy
+msgid "Autosave"
+msgstr "Autogorde"
+
+#: src/prefs.c:331
+#, fuzzy
+msgid "Automatically save at regular intervals"
+msgstr "Itzuli gabeko hurrengo mezura jo"
+
+#: src/prefs.c:339
+#, fuzzy
+msgid "Autosave interval:"
+msgstr "Autogorde"
+
+#: src/prefs.c:340
+msgid "Append a suffix to automatically saved files"
+msgstr ""
+
+#: src/prefs.c:347
+msgid "Suffix:"
+msgstr ""
+
+#: src/prefs.c:348
+#, fuzzy
+msgid "Recent files"
+msgstr "Fitxa_tegi berriak"
+
+#: src/prefs.c:356
+msgid "Maximum number of entries in the recent files list:"
+msgstr ""
+
+#: src/prefs.c:357
+msgid "Check recent files before showing in recent files list"
+msgstr ""
+
+#.
+#. * Editor page
+#.
+#: src/prefs.c:365
+#, fuzzy
+msgid "Editor"
+msgstr "Irten"
+
+#: src/prefs.c:368
+msgid "Text display"
+msgstr ""
+
+#: src/prefs.c:369
+msgid "Highlight syntax of the translation message"
+msgstr ""
+
+#: src/prefs.c:380
+msgid "Syntax color scheme to use:"
+msgstr ""
+
+#: src/prefs.c:381
+#, fuzzy
+msgid "Use special character to indicate white space"
+msgstr "Karaktere berezia erabili espazio hutsa adierazteko"
+
+#: src/prefs.c:385
+msgid "Apply own fonts"
+msgstr ""
+
+#: src/prefs.c:389
+msgid "gtranslator -- font selection/msgid font"
+msgstr ""
+
+#: src/prefs.c:393
+msgid "Original text font:"
+msgstr "Jatorrizko textuaren iturria:"
+
+#: src/prefs.c:394
+msgid "gtranslator -- font selection/msgstr font"
+msgstr ""
+
+#: src/prefs.c:398
+msgid "Translation font:"
+msgstr "Itzulpenen iturria:"
+
+#: src/prefs.c:399
+msgid "Apply own colors:"
+msgstr ""
+
+#: src/prefs.c:403
+msgid "gtranslator -- foreground color"
+msgstr "gtranslator -- aurrealdeko kolorea"
+
+#: src/prefs.c:407
+msgid "Foreground color:"
+msgstr "Aurrealdeko kolorea:"
+
+#: src/prefs.c:408
+msgid "gtranslator -- background color"
+msgstr "gtranslator -- atzealdeko kolorea"
+
+#: src/prefs.c:412
+#, fuzzy
+msgid "Background:"
+msgstr "Atzealdeko kolorea"
+
+#: src/prefs.c:413
+#, fuzzy
+msgid "Contents"
+msgstr "Azalpenak"
+
+#: src/prefs.c:414
+#, fuzzy
+msgid "Remove fuzzy status if message is changed"
+msgstr "Zalantzazko egoera ezabatu mezua aldatua izan bada"
+
+#: src/prefs.c:418
 #, fuzzy
 msgid "Keep obsolete messages in the po files"
 msgstr "Zaharkitutako mezuak po fitxategietan mantendu"
 
-#: src/prefs.c:192
-msgid "Highlight syntax of the translation messages"
+#: src/prefs.c:422
+msgid "Spell checking"
 msgstr ""
 
-#: src/prefs.c:200
-msgid "Use special character to indicate free space"
-msgstr "Karaktere berezia erabili espazio hutsa adierazteko"
-
-#: src/prefs.c:203
-msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr ""
-
-#: src/prefs.c:206
-msgid "Enable the functionality to remove all translations from a po file"
-msgstr ""
-
-#: src/prefs.c:209
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Ezabatu konpilatutako fitxategiak (adib. \"proiektu.gmo\")"
-
-#: src/prefs.c:212
-msgid "Save geometry on exit & restore it on startup"
-msgstr ""
-
-#: src/prefs.c:215
-msgid "Show instant comment view in the main pane"
-msgstr ""
-
-#: src/prefs.c:222
-msgid "Maximum number of entries in the recent files' list:"
-msgstr ""
-
-#: src/prefs.c:226
-msgid "Check recent files before showing in recent files' list"
-msgstr ""
-
-#: src/prefs.c:229
+#: src/prefs.c:423
 msgid "Instant spell checking"
 msgstr ""
 
-#: src/prefs.c:232
+#: src/prefs.c:429
 #, fuzzy
 msgid "Use special dictionary:"
 msgstr "Hiztegi berezia erabili"
 
-#: src/prefs.c:254
-msgid "Syntax color scheme to use:"
+#.
+#. * PO header page
+#.
+#: src/prefs.c:447
+#, fuzzy
+msgid "PO header"
+msgstr "Goi-burua"
+
+#: src/prefs.c:450
+#, fuzzy
+msgid "Personal Information"
+msgstr "Argibide pertsonala"
+
+#: src/prefs.c:454
+msgid "Author's name:"
+msgstr "Egilearen izena:"
+
+#: src/prefs.c:458
+#, fuzzy
+msgid "Author's email:"
+msgstr "Egilearen e-posta:"
+
+#: src/prefs.c:459
+msgid "Language settings"
 msgstr ""
 
-#: src/prefs.c:259
-msgid "Apply own fonts:"
-msgstr ""
-
-#: src/prefs.c:263
-msgid "Original text font:"
-msgstr "Jatorrizko textuaren iturria:"
-
-#: src/prefs.c:263
-msgid "gtranslator -- font selection/msgid font"
-msgstr ""
-
-#: src/prefs.c:267
-msgid "Translation font:"
-msgstr "Itzulpenen iturria:"
-
-#: src/prefs.c:267
-msgid "gtranslator -- font selection/msgstr font"
-msgstr ""
-
-#: src/prefs.c:271
-msgid "Apply own colors:"
-msgstr ""
-
-#: src/prefs.c:275
-msgid "Foreground color:"
-msgstr "Aurrealdeko kolorea:"
-
-#: src/prefs.c:275
-msgid "gtranslator -- foreground color"
-msgstr "gtranslator -- aurrealdeko kolorea"
-
-#: src/prefs.c:279
-msgid "Background color:"
-msgstr "Atzealdeko kolorea"
-
-#: src/prefs.c:279
-msgid "gtranslator -- background color"
-msgstr "gtranslator -- atzealdeko kolorea"
+#: src/prefs.c:472
+msgid "Language code:"
+msgstr "Hizkuntz kodea:"
 
 #.
-#. * The seventh page of the prefs-box: autosaving options.
+#. * Functionality page
 #.
-#: src/prefs.c:285
-msgid "Automatically save po files at regular intervals (in minutes):"
+#: src/prefs.c:494
+msgid "Functionality"
 msgstr ""
 
-#: src/prefs.c:300
-msgid "Append a suffix to automatically saved files:"
+#: src/prefs.c:497
+msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr ""
 
-#: src/prefs.c:320
-msgid "Show the messages table (requires gtranslator restart)"
+#: src/prefs.c:501
+msgid "Enable the functionality to remove all translations from a po file"
 msgstr ""
 
-#: src/prefs.c:324
-msgid "Collapse translated entries by default"
+#: src/prefs.c:505
+msgid "Show instant comment view in main pane"
 msgstr ""
 
-#: src/prefs.c:328
-msgid "Use own colors for the messages table groups"
+#: src/prefs.c:509
+msgid "Display special dialog for messages with plural forms"
 msgstr ""
 
-#: src/prefs.c:332
-msgid "Untranslated entries color:"
-msgstr "Itzuli gabeko sarreren kolorea:"
+#: src/prefs.c:513
+msgid "Save geometry on exit and restore it on startup"
+msgstr ""
 
-#: src/prefs.c:332
-msgid "gtranslator -- untranslated entries' color"
-msgstr "gtranslator -- itzuli gabeko sarreren kolorea"
+#: src/prefs.c:517
+msgid "Messages table"
+msgstr ""
 
-#: src/prefs.c:336
+#: src/prefs.c:518
+msgid "Show the messages table (requires restart)"
+msgstr ""
+
+#: src/prefs.c:522
+msgid "Collapse all entries by default"
+msgstr ""
+
+#: src/prefs.c:526
+msgid "Use own colors for messages table groups"
+msgstr ""
+
+#: src/prefs.c:535
 msgid "Fuzzy entries color:"
 msgstr "Zalantzazko sareren kolorea:"
 
-#: src/prefs.c:336
-msgid "gtranslator -- fuzzy entries' color"
-msgstr "gtranslator -- zalantzazko sarreren kolorea"
+#: src/prefs.c:541
+msgid "Untranslated entries color:"
+msgstr "Itzuli gabeko sarreren kolorea:"
 
-#: src/prefs.c:340
+#: src/prefs.c:547
 msgid "Translated entries color:"
 msgstr "Itzulitako sareren kolorea:"
 
-#: src/prefs.c:340
-msgid "gtranslator -- translated entries' color"
-msgstr "gtranslator -- itzulitako sarreren kolorea"
+#.
+#. * Autotranslate page
+#.
+#: src/prefs.c:552
+#, fuzzy
+msgid "Autotranslation"
+msgstr "Itzulpena"
 
-#: src/prefs.c:348
+#: src/prefs.c:554
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
 
-#: src/prefs.c:352
+#: src/prefs.c:558
 #, fuzzy
 msgid "Automatically learn a newly translated message"
 msgstr "Itzuli gabeko hurrengo mezura jo"
 
-#.
-#. * Translators: With "fuzzy" I mean a more enhanced (and more
-#. *  crappy) logic while searching for appropriate translations
-#. *   for a original string.
-#.
-#: src/prefs.c:360
-msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
+#: src/prefs.c:562
+msgid "Fuzzy matching"
 msgstr ""
 
-#: src/prefs.c:363
-msgid "Minimal required similarity percentage for fuzzy queries"
+#: src/prefs.c:569
+msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr ""
 
-#: src/prefs.c:405
+#: src/prefs.c:576
+msgid "Minimal required similarity persentage for fuzzy queries:"
+msgstr ""
+
+#: src/prefs.c:621
 msgid "Please enter your name!"
 msgstr "Mesedez, idatzi zure izena!!!"
 
-#: src/prefs.c:419
+#: src/prefs.c:635
 msgid "Please enter your EMail address!"
 msgstr "Mesedez, idatzi zure e-posta!!!"
 
-#: src/prefs.c:432
+#: src/prefs.c:648
 msgid "Please enter a valid EMail address!"
 msgstr "Mesedez, idazti baliodun e-posta!!!"
-
-#: src/prefs.c:652
-msgid ""
-"The Preferences box allows you to customise gtranslator\n"
-"to work in ways you find comfortable and productive."
-msgstr ""
-
-#: src/preferences.c:180
-msgid "Couldn't generate the current date!"
-msgstr "Ezin izan da oraingo data sortu!!!"
 
 #: src/replace.c:173
 msgid "No replacements made!"
@@ -1510,7 +1580,7 @@ msgstr ""
 #. * Translators: this character is used if the middle dot
 #. *  can't be used under your locale.
 #.
-#: src/runtime-config.c:89 src/runtime-config.c:94
+#: src/runtime-config.c:88 src/runtime-config.c:93
 msgid "^"
 msgstr ""
 
@@ -1542,7 +1612,7 @@ msgstr "\"Zip-eatutako\" '%s' po fitxategia ezin izan da gorde!!!"
 msgid "Session restored successfully."
 msgstr ""
 
-#: src/stylistics.c:278
+#: src/stylistics.c:265
 msgid "No font set! Using default font"
 msgstr "Ez da iturririk finkatu! Iturri lehenetsia erabiltzen"
 
@@ -1550,7 +1620,7 @@ msgstr "Ez da iturririk finkatu! Iturri lehenetsia erabiltzen"
 #. * Use gtranslator's font in this case -- should be a fallback font
 #. *  for your language.
 #.
-#: src/stylistics.c:284
+#: src/stylistics.c:271
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
@@ -1578,21 +1648,21 @@ msgstr "Ezin da '%s' direktorioa sortu!!!"
 #.
 #. * Again return the fallback default locale value given by the translator.
 #.
-#: src/utils.c:792
+#: src/utils.c:794
 msgid "iso-8859-1"
 msgstr ""
 
-#: src/utils_gui.c:142
+#: src/utils_gui.c:144
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr ""
 
-#: src/utils_gui.c:369
+#: src/utils_gui.c:360
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Ez duzu baimenik '%s' fitxategian atzitzeko."
 
-#: src/utils_gui.c:387
+#: src/utils_gui.c:378
 #, fuzzy, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1603,26 +1673,12 @@ msgstr ""
 "Mesedez, idazteko baimena duzuneko direktorio\n"
 "batean kopia bat gorde."
 
-#: src/utils_gui.c:457
-#, c-format
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
-
-#: src/utils_gui.c:502
+#: src/utils_gui.c:467
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Beharrezkoa·den·'%s'·dekonpresio·programa·ez·dago·instalatuta!!!"
 
-#: src/utils_gui.c:507
+#: src/utils_gui.c:472
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Beharrezkoa den '%s' konpresio programa ez dago instalatuta!!!"
@@ -1661,33 +1717,69 @@ msgstr "'%s' hostalariak ez dauka helbiderik!!!"
 msgid "Transfer interrupted!"
 msgstr "Transferentzia geldituta!!!"
 
-#: data/desktop/gtranslator.desktop.in.h:1
-msgid "The Gnome translation program"
-msgstr "Gnome itzulpen programa"
+#~ msgid "Are you sure you want to remove ALL translations from this po file?"
+#~ msgstr ""
+#~ "Ziur zaude po fitxategi honen itzulpen GUZTIAK ezabatu nahi dituzula?"
 
-#: data/etspecs/messages-table.etspec.h:1
-msgid "Comment"
-msgstr "Azalpena"
+#~ msgid "Go!"
+#~ msgstr "Joan!"
 
-#: data/etspecs/messages-table.etspec.h:2
-msgid "Line"
-msgstr "Lerroa"
+#~ msgid "Recovering `%s'..."
+#~ msgstr "'%s' berreskuratzen ..."
 
-#: data/etspecs/messages-table.etspec.h:3
-msgid "Number"
-msgstr "Zenbakia"
+#~ msgid "%s-%s contains %i messages."
+#~ msgstr "%s-%s-(e)k %i mezu ditu."
 
-#: data/mime/gtranslator.keys.in.h:1
-msgid "Compiled gettext po file"
-msgstr "Konpilatutako gettext po fitxategia"
+#~ msgid "Project <b>%s</b> (last po file revision: %s)."
+#~ msgstr "<b>%s</b> proiektua (po fitxategiko azkeneko berraztertze: %s)."
 
-#: data/mime/gtranslator.keys.in.h:2
-msgid "Compressed gettext po file"
-msgstr "Konprimitutako gettext po fitxategia"
+#~ msgid "Last translator: %s"
+#~ msgstr "Azken itzultzailea: %s"
 
-#: data/mime/gtranslator.keys.in.h:3
-msgid "Gettext po file"
-msgstr "Gettext po fitxategia"
+#~ msgid "HTMLFILE"
+#~ msgstr "HTMLFITXATEGIA"
+
+#~ msgid "Status"
+#~ msgstr "Egoera"
+
+#~ msgid "Po file editing"
+#~ msgstr "Po fitxategia editatzen"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Nahastea"
+
+#~ msgid "Fonts, colors and color schemes"
+#~ msgstr "Iturri, kolore eta kolore eskemak"
+
+#~ msgid "Language group's EMail:"
+#~ msgstr "Hizkuntz taldearen e-posta:"
+
+#~ msgid "gtranslator -- untranslated entries' color"
+#~ msgstr "gtranslator -- itzuli gabeko sarreren kolorea"
+
+#~ msgid "gtranslator -- fuzzy entries' color"
+#~ msgstr "gtranslator -- zalantzazko sarreren kolorea"
+
+#~ msgid "gtranslator -- translated entries' color"
+#~ msgstr "gtranslator -- itzulitako sarreren kolorea"
+
+#~ msgid "Comment"
+#~ msgstr "Azalpena"
+
+#~ msgid "Line"
+#~ msgstr "Lerroa"
+
+#~ msgid "Number"
+#~ msgstr "Zenbakia"
+
+#~ msgid "Compiled gettext po file"
+#~ msgstr "Konpilatutako gettext po fitxategia"
+
+#~ msgid "Compressed gettext po file"
+#~ msgstr "Konprimitutako gettext po fitxategia"
+
+#~ msgid "Gettext po file"
+#~ msgstr "Gettext po fitxategia"
 
 #~ msgid "_Messages"
 #~ msgstr "_Mezuak"
@@ -1786,9 +1878,6 @@ msgstr "Gettext po fitxategia"
 #~ msgid "gtranslator options"
 #~ msgstr "gtranslator-eko aukerak"
 
-#~ msgid "Exit"
-#~ msgstr "Irten"
-
 #~ msgid ""
 #~ "You didn't change anything in\n"
 #~ "%s\n"
@@ -1815,9 +1904,6 @@ msgstr "Gettext po fitxategia"
 
 #~ msgid "Format"
 #~ msgstr "Formatua"
-
-#~ msgid "Views"
-#~ msgstr "Bistak"
 
 #~ msgid "No numbers found."
 #~ msgstr "Ez dira zenbakirik aurkitu"

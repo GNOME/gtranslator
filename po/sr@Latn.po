@@ -8,21 +8,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-08-25 13:29+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-26 22:43+0200\n"
 "PO-Revision-Date: 2003-08-25 13:28+0200\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
 msgstr "Gnomov program za prevođenje"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1116
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
 msgid "gtranslator"
 msgstr "gprevodilac"
 
@@ -43,7 +43,7 @@ msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gprevodilac je program za uređivanje PO datoteka sa brojnim mogućnostima."
 
-#: src/bookmark.c:93 src/dialogs.c:1510
+#: src/bookmark.c:93 src/dialogs.c:1512
 msgid "No comment"
 msgstr "Nema primedbe"
 
@@ -156,7 +156,7 @@ msgstr "Razlikuj mala i velika slova"
 msgid "English"
 msgstr "engleski"
 
-#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:319
+#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:323
 msgid "Translated"
 msgstr "Prevedeno"
 
@@ -338,15 +338,15 @@ msgstr "Pretraga sadržaja poruke"
 msgid "Query string:"
 msgstr "Niz za pretragu:"
 
-#: src/dialogs.c:1324
+#: src/dialogs.c:1320
 msgid "No query string given!"
 msgstr "Nije dat niz za pretragu!"
 
-#: src/dialogs.c:1346
+#: src/dialogs.c:1342
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Pretraga vašeg skladišta znanja nije dala nikakav rezultat!"
 
-#: src/dialogs.c:1358
+#: src/dialogs.c:1354
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -359,7 +359,7 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1428
+#: src/dialogs.c:1424
 msgid "Query's result translation is already there!"
 msgstr "Rezultat pretrage je već preveden!"
 
@@ -371,11 +371,11 @@ msgstr ""
 "Da li da gprevodilac automatski prevede datoteku koristeći\n"
 "podatke iz vašeg ličnog skladišta znanja?"
 
-#: src/dialogs.c:1490 src/dialogs.c:1518
+#: src/dialogs.c:1492 src/dialogs.c:1520
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gprevodilac — dodaj obeleživač uz komentar?"
 
-#: src/dialogs.c:1510
+#: src/dialogs.c:1512
 msgid "Comment for the bookmark:"
 msgstr "Komentar za obeleživač:"
 
@@ -401,7 +401,7 @@ msgstr "Uredite komentar"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ broj nejasnih %i ]"
 
-#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:311
+#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
 msgstr "Nejasno"
 
@@ -419,7 +419,7 @@ msgstr "Lepljivo (poruka i prevod su isti)"
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ broj neprevedenih %i ]"
 
-#: src/gui.c:531 src/gui.c:533 src/messages-table.c:302
+#: src/gui.c:531 src/gui.c:533 src/messages-table.c:306
 msgid "Untranslated"
 msgstr "Neprevedeno"
 
@@ -778,7 +778,8 @@ msgid "Welsh"
 msgstr "velški"
 
 #: src/main.c:80
-msgid "Auto translate the po file & exit"
+#, fuzzy
+msgid "Auto translate the po file"
 msgstr "Automatski prevedi PO datoteku i napusti"
 
 #: src/main.c:80 src/main.c:96
@@ -786,7 +787,8 @@ msgid "FILENAME"
 msgstr "NAZIV DATOTEKE"
 
 #: src/main.c:84
-msgid "Show build information/specifications"
+#, fuzzy
+msgid "Show build specifications"
 msgstr "Prikaži podatke/osobenosti izdanja"
 
 #: src/main.c:88
@@ -806,43 +808,44 @@ msgid "GEOMETRY"
 msgstr "GEOMETRIJA"
 
 #: src/main.c:96
-msgid "Learn the file completely & exit"
+#, fuzzy
+msgid "Learn the file completely"
 msgstr "Nauči datoteku i napusti"
 
-#: src/main.c:140
+#: src/main.c:139
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Greška tokom pokretanja GConf -a: %s."
 
-#: src/main.c:170
+#: src/main.c:171
 msgid "gtranslator build information/specs:"
 msgstr "podaci/osobenosti gprevodilac izdanja:"
 
-#: src/main.c:172
+#: src/main.c:173
 msgid "Version and build date:"
 msgstr "Verzija i datum izdanja:"
 
-#: src/main.c:174
+#: src/main.c:175
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "GLib / Gtk+ / GNOME / XML verzije izdanja:"
 
-#: src/main.c:176
+#: src/main.c:177
 msgid "Colorschemes directory:"
 msgstr "Direktorijum sa šemama:"
 
-#: src/main.c:178
+#: src/main.c:179
 msgid "Scripts directory:"
 msgstr "Direktorijum sa skriptama:"
 
-#: src/main.c:180
+#: src/main.c:181
 msgid "Window icon:"
 msgstr "Ikonica prozora:"
 
-#: src/main.c:182
+#: src/main.c:183
 msgid "Own locale directory:"
 msgstr "Direktorijum sa vlastitim lokalnim podešenjima:"
 
-#: src/main.c:184
+#: src/main.c:185
 msgid "Default learn buffer file location:"
 msgstr "Podrazumevana lokacija datoteke sa skladištenim znanjem:"
 
@@ -850,7 +853,7 @@ msgstr "Podrazumevana lokacija datoteke sa skladištenim znanjem:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:430
+#: src/main.c:431
 #, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "Uspešno sam savladao „%s“ iz vaše baze znanja.\n"
@@ -858,7 +861,7 @@ msgstr "Uspešno sam savladao „%s“ iz vaše baze znanja.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:472
+#: src/main.c:473
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "Skladište znanja je izveženo u datoteku „%s“.\n"
@@ -1215,16 +1218,16 @@ msgstr "Datoteka „%s“ uopšte ne postoji!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:669
+#: src/parse.c:677
 msgid "Header record not found - defaulting from preferences"
 msgstr "Zaglavlje nije nađeno — koristi podatke iz postavki"
 
-#: src/parse.c:685
+#: src/parse.c:693
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gprevodilac — %s"
 
-#: src/parse.c:897
+#: src/parse.c:905
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1235,13 +1238,13 @@ msgstr ""
 "POT datoteke se stvaraju kompajliranjem.\n"
 "Vaša datoteka bi trebala biti nazvana „%s.po“."
 
-#: src/parse.c:959
+#: src/parse.c:967
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nisam uspeo da otvorim datoteku „%s“ za upisivanje!"
 
 # bug: plural-forms
-#: src/parse.c:1011
+#: src/parse.c:1019
 #, c-format
 msgid ""
 "File %s\n"
@@ -1250,11 +1253,11 @@ msgstr ""
 "Datoteka %s\n"
 "sadrži %d nejasnih poruka"
 
-#: src/parse.c:1280
+#: src/parse.c:1288
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Nažalost, „msgfmt“ nije dostupan na vašem sistemu!"
 
-#: src/parse.c:1315
+#: src/parse.c:1323
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1503,7 +1506,8 @@ msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
-"Koristi i lično skladište znanja pri automatskom prevođenju neprevedenih poruka"
+"Koristi i lično skladište znanja pri automatskom prevođenju neprevedenih "
+"poruka"
 
 #: src/prefs.c:558
 msgid "Automatically learn a newly translated message"
@@ -1620,7 +1624,7 @@ msgstr "Ne mogu da napravim direktorijum „%s“!"
 #.
 #. * Again return the fallback default locale value given by the translator.
 #.
-#: src/utils.c:793
+#: src/utils.c:794
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 
@@ -1728,8 +1732,8 @@ msgstr "Prenos je prekinut!"
 #~ "Don't highlight syntax - FIXME: We're always non-syntaxed currently! "
 #~ "Sorry..."
 #~ msgstr ""
-#~ "Ne naglašavaj sintaksu - POPRAVIME: Za sada nemamo mogućnost naglašavanja! "
-#~ "Žalim..."
+#~ "Ne naglašavaj sintaksu - POPRAVIME: Za sada nemamo mogućnost "
+#~ "naglašavanja! Žalim..."
 
 #~ msgid "Po file editing"
 #~ msgstr "Uređivanje PO datoteke"
