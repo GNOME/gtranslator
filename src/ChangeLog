@@ -1,5 +1,19 @@
 2001-10-02  Fatih Demir <kabalak@gtranslator.org>
 
+	* bookmark.c/.h: General re-organization of some parts -- it should be
+		much more practicable now.
+
+	* main.c: Completed command line auto translation option -- you can
+		now use the auto translation feature without starting the GUI
+		 at all via running "gtranslator -a po_file" -- you'd have got
+		  to have a rich learn buffer for getting this to a really
+		   quite useful state.
+
+	* dialogs.c & query.c/.h: Added a gboolean "gui" argument to the
+		"gtranslator_query_translate" function -- should be set to
+		  TRUE if the functions is being called from the GUI circles
+		   of gtranslator.
+
 	* gui.c: A small correction in the non-visibility routines for the
 		pane conents for the views sidebar and the messages table.
 

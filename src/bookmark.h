@@ -26,17 +26,15 @@
  * A gtranslator-specific ID container -- is generated out of the specs for
  *  the po-file and the message.
  *
- * General format: gtranslator_bookmark:po_file#po_language/po_version/po_date/po_position
+ * General format: gtranslator_bookmark:file#version/position
  *
  */
 typedef struct
 {
-	gchar	*po_file;
-	gchar	*po_language;
-	gchar	*po_version;
-	gchar	*po_date;
+	gchar	*file;
+	gchar	*version;
 
-	gint	 po_position;
+	gint	 position;
 } GtrBookmark;
 
 #define GTR_BOOKMARK(x) ((GtrBookmark *) x)

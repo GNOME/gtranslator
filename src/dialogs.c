@@ -1382,6 +1382,6 @@ from the default query domain?");
 		/*
 		 * Autotranslate the missing entries.
 		 */
-		gtranslator_query_translate(GtrPreferences.use_learn_buffer);
+		gtranslator_query_translate(GtrPreferences.use_learn_buffer, TRUE);
 	}
 }

@@ -28,16 +28,16 @@
 #include <libgnome/gnome-util.h>
 
 /*
- * For the moment 8 bookmarks should be the upper limit.
+ * For the moment 10 bookmarks should be the upper limit.
  */
-#define MAX_BOOKMARKS 8
+#define MAX_BOOKMARKS 10
 
 /*
  * The used GList for the GtrBookmark's -- a general way to handle with this
  *  list is supplied by the gtranslator_bookmark_* methods.
  */
-GList *gtranslator_bookmarks;
-	
+GList *gtranslator_bookmarks=NULL;
+
 /*
  * Create and return a GtrBookmark from the current position & po file -- 
  *  if a file is opened yet.
@@ -49,13 +49,15 @@ GtrBookmark *gtranslator_bookmark_new()
 	g_return_val_if_fail(file_opened==TRUE, NULL);
 	g_return_val_if_fail(po->filename!=NULL, NULL);
 
-	bookmark->po_file=g_strdup(po->filename);
+	bookmark->file=g_strdup(po->filename);
+	GTR_STRDUP(bookmark->version, GTR_HEADER(po->header)->prj_version);
 	
-	GTR_STRDUP(bookmark->po_language, GTR_HEADER(po->header)->language);
-	GTR_STRDUP(bookmark->po_version, GTR_HEADER(po->header)->prj_version);
-	GTR_STRDUP(bookmark->po_date, GTR_HEADER(po->header)->po_date);
-	
-	bookmark->po_position=g_list_position(po->messages, po->current);
+	bookmark->position=g_list_position(po->messages, po->current);
+
+	if(bookmark->position < 0)
+	{
+		bookmark->position=0;
+	}
 
 	return bookmark;
 }
@@ -100,31 +102,30 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 		g_return_val_if_fail(filename!=NULL, NULL);
 	}
 	
-	bookmark->po_file=g_strdup(filename);
+	bookmark->file=g_strdup(filename);
 	GTR_FREE(filename);
 	
 	/*
-	 * Operate on the resting parts of the string-encoded bookmark and split it
-	 *  up into its normally 4 parts.
+	 * Operate on the resting parts of the string-encoded bookmark and
+	 *  split it up into its normally 4 parts.
 	 */
 	encoding_area=nautilus_str_get_after_prefix(string, "#");
-	values=g_strsplit(encoding_area, "/", 4);
+	values=g_strsplit(encoding_area, "/", 2);
 	GTR_FREE(encoding_area);
 
-	GTR_STRDUP(bookmark->po_language, values[0]);
-	GTR_STRDUP(bookmark->po_version, values[1]);
-	GTR_STRDUP(bookmark->po_date, values[2]);
+	GTR_STRDUP(bookmark->version, values[0]);
 	
 	/*
-	 * Always be quite safe about the GtrBookmark values assigned in these routines.
+	 * Always be quite safe about the GtrBookmark values assigned here.
 	 */
-	if(values[3])
+	if(values[1])
 	{
-		nautilus_str_to_int(values[3], &(GTR_BOOKMARK(bookmark)->po_position));
+		nautilus_str_to_int(values[1], 
+			&(GTR_BOOKMARK(bookmark)->position));
 	}
 	else
 	{
-		bookmark->po_position=-1;
+		bookmark->position=-1;
 	}
 
 	g_strfreev(values);
@@ -140,8 +141,8 @@ gchar *gtranslator_bookmark_string_from_bookmark(GtrBookmark *bookmark)
 
 	g_return_val_if_fail(bookmark!=NULL, NULL);
 
-	string=g_strdup_printf("gtranslator_bookmark:%s#%s/%s/%s/%i", bookmark->po_file, 
-		bookmark->po_language, bookmark->po_version, bookmark->po_date, bookmark->po_position);
+	string=g_strdup_printf("gtranslator_bookmark:%s#%s/%i",
+		bookmark->file,  bookmark->version, bookmark->position);
 
 	return string;
 }
@@ -175,16 +176,16 @@ void gtranslator_bookmark_open(GtrBookmark *bookmark)
 	/*
 	 * Open the po file.
 	 */
-	gtranslator_open_file(GTR_BOOKMARK(bookmark)->po_file);
+	gtranslator_open_file(GTR_BOOKMARK(bookmark)->file);
 
 	/*
 	 * Only re-setup the bookmark if the po file could be opened.
 	 */
-	if(GTR_PO(po) && 
-		GTR_PO(po)->length >= GTR_BOOKMARK(bookmark)->po_position)
+	if(GTR_PO(po) && GTR_BOOKMARK(bookmark)->position!=-1 &&
+		GTR_PO(po)->length >= GTR_BOOKMARK(bookmark)->position)
 	{
 		gtranslator_message_go_to_no(NULL, 
-			GINT_TO_POINTER(GTR_BOOKMARK(bookmark)->po_position));
+			GINT_TO_POINTER(GTR_BOOKMARK(bookmark)->position));
 	}
 }
 
@@ -201,7 +202,7 @@ gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark)
 	/*
 	 * First check if there's a file with that name.
 	 */
-	if(!g_file_exists(GTR_BOOKMARK(bookmark)->po_file)) 
+	if(!g_file_exists(GTR_BOOKMARK(bookmark)->file)) 
 	{
 		return FALSE;
 	}
@@ -218,14 +219,12 @@ gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark)
 					potcom++; \
 				}
 				
-		gtranslator_parse_main(GTR_BOOKMARK(bookmark)->po_file);
+		gtranslator_parse_main(GTR_BOOKMARK(bookmark)->file);
 
 		/*
 		 * Check the header parts for equality.
 		 */
-		CHECK_HEADER_PART(language);
 		CHECK_HEADER_PART(prj_version);
-		CHECK_HEADER_PART(po_date);
 		
 		#undef CHECK_HEADER_PART
 
@@ -240,10 +239,10 @@ gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark)
 		}
 		
 		/*
-		 * At least 3 equalities must have been occured to let the
+		 * At least 2 equalities must have been occured to let the
 		 *  GtrBookmark be resolvable.
 		 */
-		if(potcom >= 3)
+		if(potcom >= 2)
 		{
 			/*
 			 * Free the "new-old" po and reassign the saved
@@ -285,15 +284,13 @@ gboolean gtranslator_bookmark_equal(GtrBookmark *one, GtrBookmark *two)
 		 * Check the single string parts for common values and increase
 		 *  the potcom variable in this case.
 		 */
-		CHECK_CASE(po_file);
-		CHECK_CASE(po_language);
-		CHECK_CASE(po_version);
-		CHECK_CASE(po_date);
+		CHECK_CASE(file);
+		CHECK_CASE(version);
 
 		/*
 		 * The position is checked here extra as it's not a string .-)
 		 */
-		if(GTR_BOOKMARK(one)->po_position==GTR_BOOKMARK(two)->po_position)
+		if(GTR_BOOKMARK(one)->position==GTR_BOOKMARK(two)->position)
 		{
 			potcom++;
 		}
@@ -301,9 +298,10 @@ gboolean gtranslator_bookmark_equal(GtrBookmark *one, GtrBookmark *two)
 		#undef CHECK_CASE
 
 		/*
-		 * Have we got more then/equal to 3 common values? Then the bookmark's are equal.
+		 * Have we got more then/equal to 2 common values? 
+		 *  Then these bookmarks are equal.
 		 */
-		if(potcom >= 3)
+		if(potcom >= 2)
 		{
 			return TRUE;
 		}
@@ -546,16 +544,14 @@ GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *bookmark)
 	
 	g_return_val_if_fail(GTR_BOOKMARK(bookmark)!=NULL, NULL);
 
-	copy->po_file=g_strdup(GTR_BOOKMARK(bookmark)->po_file);
+	copy->file=g_strdup(GTR_BOOKMARK(bookmark)->file);
 	
 	/*
 	 * Copy the string parts safely or set'em to NULL where needed.
 	 */
-	GTR_STRDUP(copy->po_language, GTR_BOOKMARK(bookmark)->po_language);
-	GTR_STRDUP(copy->po_version, GTR_BOOKMARK(bookmark)->po_version);
-	GTR_STRDUP(copy->po_date, GTR_BOOKMARK(bookmark)->po_date);
+	GTR_STRDUP(copy->version, GTR_BOOKMARK(bookmark)->version);
 	
-	copy->po_position=GTR_BOOKMARK(bookmark)->po_position;
+	copy->position=GTR_BOOKMARK(bookmark)->position;
 
 	return copy;
 }
@@ -567,9 +563,8 @@ void gtranslator_bookmark_free(GtrBookmark *bookmark)
 {
 	if(GTR_BOOKMARK(bookmark))
 	{
-		GTR_FREE(GTR_BOOKMARK(bookmark)->po_file);
-		GTR_FREE(GTR_BOOKMARK(bookmark)->po_language);
-		GTR_FREE(GTR_BOOKMARK(bookmark)->po_version);
-		GTR_FREE(GTR_BOOKMARK(bookmark)->po_date);
+		GTR_FREE(GTR_BOOKMARK(bookmark)->file);
+		GTR_FREE(GTR_BOOKMARK(bookmark)->version);
+		GTR_FREE(bookmark);
 	}
 }

@@ -264,7 +264,7 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
  * Simply execute the gtranslator_query_gtr_msg for every message in the
  *  po file.
  */
-void gtranslator_query_translate(gboolean use_learn_buffer)
+void gtranslator_query_translate(gboolean use_learn_buffer, gboolean gui)
 {
 	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, 
 		GINT_TO_POINTER(use_learn_buffer));
@@ -272,7 +272,7 @@ void gtranslator_query_translate(gboolean use_learn_buffer)
 	/*
 	 * Activate the Save menu/tollbar items on changes.
 	 */
-	if(po->file_changed)
+	if(po->file_changed && gui)
 	{
 		gtranslator_actions_enable(ACT_SAVE);
 		
@@ -282,5 +282,8 @@ void gtranslator_query_translate(gboolean use_learn_buffer)
 		gtranslator_get_translated_count();
 	}
 	
-	gtranslator_message_show(po->current);
+	if(gui)
+	{
+		gtranslator_message_show(po->current);
+	}
 }

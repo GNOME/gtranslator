@@ -35,6 +35,7 @@
 #include "prefs.h"
 #include "query.h"
 #include "runtime-config.h"
+#include "save-differently.h"
 #include "session.h"
 #include "sighandling.h"
 #include "translator.h"
@@ -363,8 +364,49 @@ int main(int argc, char *argv[])
 	if(auto_translate_file)
 	{
 		/*
-		 * FIXME: Call auto translation routines. 
+		 * Initialize learn buffer, open file and auto translate all
+		 *  possible strings.
 		 */
+		gtranslator_learn_init();
+		gtranslator_open_file(auto_translate_file);
+		gtranslator_query_translate(GtrPreferences.use_learn_buffer, FALSE);
+		
+		/*
+		 * If any change has been made to the po file: save it.
+		 */
+		if(po->file_changed)
+		{
+			if(!gtranslator_save_po_file(auto_translate_file))
+			{
+				gtranslator_save_file(auto_translate_file);
+			}
+		}
+
+		gtranslator_learn_shutdown();
+		
+		/*
+		 * Set up the "runtime/filename" config. key to a sane value.
+		 */
+		gtranslator_config_init();
+		gtranslator_config_set_string("runtime/filename", "--- No file ---");
+		gtranslator_config_close();
+
+		/*
+		 * Free all till now allocated stuff.
+		 */
+		gtranslator_translator_free(gtranslator_translator);
+		gtranslator_preferences_free();
+		gnome_regex_cache_destroy(rxc);
+		gtranslator_color_scheme_free(&theme);
+
+		/*
+		 * Shutdown GnomeVFS.
+		 */
+		if(gnome_vfs_initialized())
+		{
+			gnome_vfs_shutdown();
+		}
+
 		return 0;
 	}
 
@@ -431,6 +473,7 @@ int main(int argc, char *argv[])
 		 */
 		gtranslator_learn_po_file(po);
 		gtranslator_learn_shutdown();
+		gtranslator_po_free();
 
 		/*
 		 * Set up the "runtime/filename" config. key to a sane value.
