@@ -28,6 +28,7 @@
 #endif
 
 #include "defines.include"
+#include "dialogs.h"
 #include "gui.h"
 #include "parse.h"
 #include "prefs.h"
@@ -37,7 +38,7 @@
 
 #include <gtk/gtkmain.h>
 
-#include <libgnomeui/gnome-app-util.h>
+#include <libgnomeui/libgnomeui.h>
 
 /*
  * The update function.
@@ -50,6 +51,23 @@ void update(GtkWidget *widget, gpointer useless)
 	gint res=200;
 	gchar *command;
 	gchar *newfile;
+
+	if(file_opened && po->file_changed)
+	{
+		GtkWidget 	*dialog;
+		gint		reply;
+		
+		dialog=gnome_message_box_new(_("The po file was changed and the changes weren't saved yet. Do you still want to update the po file now?"),
+		GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
+		GNOME_STOCK_BUTTON_CANCEL, NULL);
+		gtranslator_dialog_show(&dialog, "gtranslator -- save the current file before updating?");
+
+		reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+		if(reply!=GNOME_YES)
+		{
+			return;
+		}
+	}
 	
 	/*
 	 * Build this magical line.

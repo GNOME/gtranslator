@@ -1,10 +1,14 @@
 2002-06-09  Fatih Demir <kabalak@gtranslator.org>
 
+	* update.c: Ask the user before updating if he/she wants to save the 
+		edited po file -- should save some string translations in some
+		 cases; this is the salvation for b.g.o #80243.
+
 	* utils.c: Use the new variable holding the output dir name on the nice
 		"gtranslator_utils_get_compile_file_names" function.
 
 	* prefs.c/.h & prefs_init.c: Added a new option to define the output
-		dir where to put the compiled po files: salvation4b.g.o #78425!
+		dir where to put compiled po files: salvation for b.g.o #78425!
 
 2002-04-12  Fatih Demir <kabalak@gtranslator.org>
 
