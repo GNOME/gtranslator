@@ -17,6 +17,7 @@
  *
  */
 
+#include "defines.include"
 #include "parse.h"
 #include "prefs.h"
 #include "utils.h"
@@ -94,7 +95,14 @@ void gtranslator_preferences_init_default_values()
 		/*
 		 * Initialize the default highlight colors.
 		 */
-		gtranslator_colors_init_default_colors(); 
+		gtranslator_colors_init_default_colors();
+
+		/*
+		 * Set the default colorscheme name + filename.
+		 */
+		gtranslator_config_set_string("scheme/name", "default.xml");
+		gtranslator_config_set_string("scheme/filename", SCHEMESDIR
+			"/default.xml");
 
 		/*
 		 * Avoid re-initialization of the default values via setting
@@ -126,6 +134,7 @@ void gtranslator_colors_init_default_colors()
 	 */
 	gtranslator_config_set_string("colors/fg", "black");
 	gtranslator_config_set_string("colors/bg", "white");
+	gtranslator_config_set_string("colors/text_bg", "white");
 	gtranslator_config_set_string("colors/special_char", "grey");
 	gtranslator_config_set_string("colors/hotkey", "blue");
 	gtranslator_config_set_string("colors/c_format", "red");

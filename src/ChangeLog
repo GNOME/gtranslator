@@ -1,13 +1,19 @@
+2001-08-13  Fatih Demir <kabalak@gtranslator.org>
+
+	* prefs_init.c: Initiliaze the colorscheme name + filename with
+		"default.xml" and also init the "text_bg" attribute to
+		 "white" per default like in "default.xml".
+
 2001-08-11  Fatih Demir <kabalak@gtranslator.org>
 
-	* messages-table.c: Corrected the untranslated count bug (thanks to Kevin
-		for pointing this out); also made the tree respect the new option
-		 for collapsing all translated items per default.
+	* messages-table.c: Corrected the untranslated count bug (thanks to 
+		Kevin for pointing this out); also made the ETree respect the
+		 new option for collapsing all translated items per default.
 
 	* prefs_init.c: Set the new option per default to TRUE.
 
-	* prefs.c/.h: Added another option for the messages table to collapse all
-		translated entries per default.
+	* prefs.c/.h: Added another option for collapsing all the translated
+		entries per default.
 
 	* open|save-differently.c, parse.c & update.c: Made the file names all
 		be enclosed in single-ticks (') -- should be more safe and 
