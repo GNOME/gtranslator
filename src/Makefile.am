@@ -46,6 +46,7 @@ gtranslator_SOURCES = \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
+	formats.c formats.h \
 	gnome-regex.c gnome-regex.h \
 	gtkspell.c gtkspell.h \
 	gui.c gui.h \
