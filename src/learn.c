@@ -628,6 +628,7 @@ void gtranslator_learn_shutdown()
 	 */
 	if(gtranslator_learn_buffer->changed)
 	{
+		xmlSetDocCompressMode(gtranslator_learn_buffer->doc, 9);
 		xmlSaveFile(gtranslator_learn_buffer->filename, gtranslator_learn_buffer->doc);
 		xmlFreeDoc(gtranslator_learn_buffer->doc);
 	}
