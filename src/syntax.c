@@ -176,6 +176,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '<':
 			case '>':
 			case '&':
+			case '@':
 			case '$':
 			case '#':
 			case '/':

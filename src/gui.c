@@ -992,7 +992,6 @@ static void undo_changes(GtkWidget  * widget, gpointer useless)
 static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 {
 	GString *syntaxtext;
-	gint textlen=0;
 	gint ourpos=0;
 	
 	if (nothing_changes)
@@ -1082,9 +1081,8 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 
 	/*
 	 * Hm, another way to get immediate syntax highlighting; delete the
-	 *  last char and reinsert it.
+	 *  last 3 chars and reinsert them.
 	 */
-	textlen=gtk_text_get_length(GTK_TEXT(trans_box));
 	ourpos=gtk_editable_get_position(GTK_EDITABLE(trans_box));
 
 	gtk_text_freeze(GTK_TEXT(trans_box));
