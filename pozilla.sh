@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.2
+export POZILLA_RELEASE=1.5
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -48,16 +48,6 @@ for app in msgfmt msgmerge make grep sed mutt
 	done	
 
 #
-# Check if a po directory is existent.
-#
-if ! test -d ./po ; then
-	echo "---------------------------------------------------------------"
-	echo "[ERROR: There is no \"po\" directory present in this directory! ]"
-	echo "---------------------------------------------------------------"
-		exit 1
-fi
-
-#
 # That's Pozilla, guy!
 #
 [ -d $CONFIG_DIR ] || {
@@ -85,6 +75,7 @@ do
 	echo "---------------------------------------------------------------"
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-d --days         Days remaining for release"
+	echo "-p --podirectory  Defines the po directory location (default: ./po"
 	echo "-s --send         Send the merged po files to the given lang" 
 	echo "-r --release      Specifies the coming release's number"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
@@ -182,11 +173,40 @@ do
 		echo "---------------------------------------------------------------"
 	fi
 	;;
+	[pP]*)
+	shift 1
+	if test "po$1" = "po" ; then
+		echo "---------------------------------------------------------------"
+		echo "No po directory location defined. Using default location ./po ..."
+		echo "---------------------------------------------------------------"
+		export PO_DIR="."
+	else
+		echo "---------------------------------------------------------------"
+		export PO_DIR="$1"
+		if ! test -d "$PO_DIR" ; then
+			echo "\"$PO_DIR\" is not a directory; taking default location ./po..."
+		else	
+			echo "Using \"$PO_DIR\" as po directory location..."
+		fi
+		echo "---------------------------------------------------------------"
+		shift 1
+	fi
+	;;
 	*)
 		true
 	;;
 	esac
 done	
+
+#
+# Check if a po directory is existent in the $PO_DIR.
+#
+if ! test -d $PO_DIR/po ; then
+	echo "---------------------------------------------------------------"
+	echo "[ERROR: There is no \"po\" directory present in \"$PO_DIR\"!  ]"
+	echo "---------------------------------------------------------------"
+		exit 1
+fi
 
 #
 # Get the current task no, increment it and write
@@ -195,6 +215,14 @@ done
 POZILLA_NO=`cat $CONFIG_DIR/pozilla.conf`
 export POZILLA_NO=$[ $POZILLA_NO + 1 ]
 echo $POZILLA_NO > $CONFIG_DIR/pozilla.conf
+
+#
+# Change to the basic directory of the po directory (. if ./po is used as po
+#  directory or the real base directory for other po directory locations).
+#
+if test "o$PO_DIR" != "o`pwd`" ; then
+	cd $PO_DIR
+fi	
 
 #
 # Get the common values.
@@ -215,7 +243,7 @@ fi
 #
 # Go to the po-dir and get the list of all po-files.
 #
-cd po
+cd $PO_DIR/po
 export PO_FILES=`ls *.po`
 
 #

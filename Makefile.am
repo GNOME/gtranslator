@@ -2,7 +2,10 @@
 
 SUBDIRS = macros intl po data src help man
 
+bin_SCRIPTS = pozilla.sh
+
 EXTRA_DIST= \
+		$(bin_SCRIPTS) \
 		kabalak_generate_all_the_files.sh \
 		DEPENDS \
 		HACKING \
