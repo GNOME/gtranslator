@@ -17,18 +17,6 @@
 #include "parse-db.h"
 
 /**
-* If NLS is requested include the headers and set the define and if it's
-*  not requested, simply make a foo-define.
-*/
-#ifndef ENABLE_NLS
-        #include <libintl.h>
-        #include <locale.h>
-        #define _(String) gettext(String)
-#else
-	        #define _(String) String
-#endif
-
-/**
 * Parses the lang.xml file.
 **/
 void parse_db_for_lang(gchar *language)
@@ -111,6 +99,14 @@ void parse_db_for_lang(gchar *language)
 	node=xmldoc->xmlRootNode->xmlChildrenNode;
 	while(node)
 	{
+		/**
+		* Get the serial.
+		**/
+		if(!strcmp(node->name, "serial"))
+		{
+			g_print("DEBUG: Serial date : %s # : %s\n",xmlGetProp(node, "date"),xmlNodeGetContent(node));
+			
+		}
 		if(!strcmp(node->name, "msgid"))
 		{
 			xmlNodePtr newnode;

@@ -33,6 +33,18 @@
 #include <messages.h>
 
 /**
+* If NLS is requested include the headers and set the define and if it's
+*  not requested, simply make a foo-define.
+*/
+#ifndef ENABLE_NLS
+        #include <libintl.h>
+        #include <locale.h>
+        #define _(String) gettext(String)
+#else
+	        #define _(String) String
+#endif
+
+/**
 * The message db list.
 **/
 GList *db_list;

@@ -8,7 +8,9 @@ INCLUDES = -I$(includedir) $(IDL_CFLAGS) \
 	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
 
 libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
-	parse-db.c
+	parse-db.c \
+	handle-db.c \
+	team-handle.c
 
 libgtranslator_la_LDFLAGS = -avoid-version
 
@@ -17,7 +19,9 @@ libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
 
 libgtranslator_include_dir = $(includedir)/libgtranslator
 
-libgtranslator_include__DATA = parse-db.h
+libgtranslator_include__DATA = parse-db.h \
+	handle-db.h \
+	team-handle.h
 
 idl_dir = $(datadir)/idl
 
