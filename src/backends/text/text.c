@@ -83,7 +83,9 @@ gboolean backend_open(const gchar *filename)
 		/*
 		 * Every newline should separate a "message".
 		 */
-		if(!g_strstrip(line))
+		g_strstrip(line);
+		
+		if(line[0]=='\n')
 		{
 			GtrMsg *msg=g_new0(GtrMsg, 1);
 
@@ -148,8 +150,8 @@ gboolean backend_save(void)
 	 * Write all the "pairs" as plain text to the output file.
 	 */
 	fs=fopen(po->filename, "w");
-	gtranslator_message_for_each(po->messages, (FEFunc) write_msg, (FILE *)fs);
-	fclose(fs);
+	gtranslator_message_for_each(po->messages, 
+		(FEFunc) write_msg, (FILE *)fs);
 
 	return TRUE;
 }
@@ -167,7 +169,8 @@ gboolean backend_save_as(const gchar *filename)
 	 * Save the strings to another specified output file.
 	 */
 	fs=fopen(filename, "w");
-	gtranslator_message_for_each(po->messages, (FEFunc) write_msg, (FILE *)fs);
+	gtranslator_message_for_each(po->messages, 
+		(FEFunc) write_msg, (FILE *)fs);
 	fclose(fs);
 	
 	return TRUE;
