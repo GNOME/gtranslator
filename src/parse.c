@@ -1052,12 +1052,17 @@ void compile(GtkWidget * widget, gpointer useless)
 	
 	res = system(cmd);
 	fs=fopen(result_file_name,"r");
+
 	/*
-	 * If there has been an error show an error-box
+	 * If there has been an error show an error-box with some kind of
+	 *  cleaned error message.
 	 */
-	if (res != 0) {
+	if (res != 0)
+	{
 		gtranslator_compile_error_dialog(fs);
-	} else {
+	}
+	else
+	{
 		fgets(line, sizeof(line), fs);
 		g_strchomp(line);
 		status=g_strdup_printf(_("Compile successful:\n%s"), line);

@@ -135,8 +135,8 @@ static gint 	update_count=0;
 /*
  * Pane positions storage variables.
  */
-static gint 	sidebar_pane_position=80;
-static gint	table_pane_position=150;
+static gint 	sidebar_pane_position;
+static gint	table_pane_position;
 
 /*
  * The popup-menu.
