@@ -227,7 +227,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Romanian"), "ro", "iso-8859-2",
-	 "", "8bit"
+	 "gnomero-list@lists.sourceforge.net", "8bit"
 	},
 	{
 	 N_("Russian"), "ru", "koi8-r",
