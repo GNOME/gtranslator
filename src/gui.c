@@ -547,11 +547,6 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Up:
 					IfGood(the_navibar[1])
 					{
-						gtranslator_undo_add("Go to previous",
-							"gtranslator_message_go_to_previous",
-							(GFunc) gtranslator_message_go_to_no, 
-							(gpointer) g_list_position(po->messages, po->current));
-						
 						gtranslator_message_go_to_previous(NULL, NULL);
 					}
 					break;
@@ -560,11 +555,6 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Down:
 					IfGood(the_navibar[3])
 					{
-						gtranslator_undo_add("Go to previous",
-							"gtranslator_message_go_to_previous",
-							(GFunc) gtranslator_message_go_to_no, 
-							(gpointer) g_list_position(po->messages, po->current));
-						
 						gtranslator_message_go_to_next(NULL, NULL);
 					}
 					break;
@@ -572,11 +562,6 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Page_Up:
 					IfGood(the_navibar[0])
 					{
-						gtranslator_undo_add("Go to previous",
-							"gtranslator_message_go_to_previous",
-							(GFunc) gtranslator_message_go_to_no, 
-							(gpointer) g_list_position(po->messages, po->current));
-
 						gtranslator_message_go_to_first(NULL, NULL);
 					}
 					break;
@@ -584,11 +569,6 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 				case GDK_Page_Down:
 					IfGood(the_navibar[4])
 					{
-						gtranslator_undo_add("Go to previous",
-							"gtranslator_message_go_to_previous",
-							(GFunc) gtranslator_message_go_to_no, 
-							(gpointer) g_list_position(po->messages, po->current));
-						
 						gtranslator_message_go_to_last(NULL, NULL);
 					}
 					break;
@@ -608,6 +588,4 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 void gtranslator_switch_views(GtkWidget *widget, gpointer view)
 {
 	gtranslator_views_set(GPOINTER_TO_INT(view));
-	gtranslator_undo_add("Switch view", "gtranslator_switch_views",
-		(GFunc) gtranslator_switch_views, view);
 }

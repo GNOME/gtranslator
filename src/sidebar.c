@@ -140,9 +140,6 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 	if(event->button.button==1)
 	{
 		gtranslator_views_set(item);
-		gtranslator_undo_add("Switch view(from sidebar)",
-			"select_icon", (GFunc) gtranslator_views_set, 
-			(gpointer) item);
 	}
 }
 
