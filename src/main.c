@@ -10,13 +10,19 @@
  **/
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+	#include <config.h>
+#endif // HAVE_CONFIG_H
 
 #include <gnome.h>
 
 #include "interface.h"
 #include "support.h"
+
+#ifdef ENABLE_NLS 
+	#ifndef __GNOME_I18N_H__
+		#include <libgnome/gnome-18n.h>
+	#endif // __GNOME_I18N__
+#endif // ENABLE_NLS
 
 int
 main (int argc, char *argv[])

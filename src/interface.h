@@ -8,6 +8,8 @@
  * -- the header
  **/
 
+#include "messages.h"
+
 GtkWidget* create_app1 (void);
 
 /**

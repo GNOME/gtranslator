@@ -8,6 +8,14 @@
  **/
 
 /**
+ * Check if glib.h is included and include it 
+ *  if it isn't included yet ( you never know .. ) 
+ **/
+#ifndef __G_LIB_H__
+	#include <glib.h>
+#endif // __G_LIB_H__
+
+/**
  * The structure with general 
  *  informations ...
  **/

@@ -18,7 +18,7 @@
 /**
  * The widgets 
  **/
-GtkWidget *prefs,*notebook,*first_page,*second_page,*third_page;
+GtkWidget *prefs,*first_page,*second_page,*third_page;
 
 /**
  * The entries
