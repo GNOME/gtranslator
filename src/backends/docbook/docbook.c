@@ -26,12 +26,22 @@
 #include <config.h>
 #endif
 
+#include "../../header_stuff.h"
+#include "../../message.h"
 #include "../../nautilus-string.h"
 #include "../../parse.h"
+#include "../../prefs.h"
+
+#include <gnome-xml/tree.h>
+#include <gnome-xml/parser.h>
+
+xmlDocPtr doc;
 
 gboolean backend_open(const gchar *filename)
 {
-	g_message("Write docbook -> po converting functions..");
+	g_return_val_if_fail(filename!=NULL, FALSE);
+
+	doc=xmlParseFile(filename);
 	return TRUE;
 }
 
@@ -47,17 +57,10 @@ gboolean backend_save_as(const gchar *filename)
 	return TRUE;
 }
 
-gboolean backend_is_compilable(void)
-{
-	return TRUE;
-}
-
-void backend_compile(void)
-{
-	g_message("Compile!");
-}
-
 void backend_close(void)
 {
-	g_message("Closing docbook backend...");
+	if(doc)
+	{
+		xmlFreeDoc(doc);
+	}
 }

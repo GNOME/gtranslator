@@ -26,8 +26,23 @@
 #endif
 
 #include "../../header_stuff.h"
+#include "../../message.h"
 #include "../../nautilus-string.h"
 #include "../../parse.h"
+#include "../../prefs.h"
+
+void write_msg(GList *message, gpointer file)
+{
+	if(message)
+	{
+		/*
+		 * Write the current message to the output file stream.
+		 */
+		GtrMsg *msg=GTR_MSG(message->data);
+
+		fprintf((FILE *) file, "%s", msg->msgstr);
+	}
+}
 
 /*
  * Opens the given filename via it's own stuff.
@@ -46,28 +61,50 @@ gboolean backend_open(const gchar *filename)
 
 	f=fopen(filename, "r");
 
+	if(!f)
+	{
+		/*
+		 * If we couldn't open up the text file return FALSE.
+		 */
+		return FALSE;
+	}
+
 	while(fgets(line, sizeof(line), f))
 	{
+		/*
+		 * Every newline should separate a "message".
+		 */
 		if(!g_strstrip(line))
 		{
 			GtrMsg *msg=g_new0(GtrMsg, 1);
 
+			/*
+			 * Construct a foo'sh message.
+			 */
 			msg->msgid=g_strdup(str);
 			msg->msgstr="";
 			msg->comment="";
 
 			g_free(str);
 
+			/*
+			 * Set up our fake'sh messages list.
+			 */
 			po->messages=g_list_append(po->messages, msg);
 		}
 		else
 		{
+			/*
+			 * Rescue and append all the lines till the next newline.
+			 */
 			e=str;
 			str=g_strdup_printf("%s\n%s", e, line);
 
 			g_free(e);
 		}
 	}
+
+	fclose(f);
 	
 	return TRUE;
 }
@@ -77,7 +114,34 @@ gboolean backend_open(const gchar *filename)
  */
 gboolean backend_save(void)
 {
-	g_message("Write po -> text save functions..");
+	FILE *fs;
+	
+	if(!po)
+	{
+		return FALSE;
+	}
+
+	/*
+	 * If we didn't have got a language code extended filename yet,
+	 *  extend the current filename to be language code extended.
+	 */
+	if(!nautilus_istr_has_suffix(po->filename, lc))
+	{
+		gchar *oldname;
+		
+		oldname=g_strdup_printf("%s.%s", po->filename, lc);
+
+		g_free(po->filename);
+		po->filename=oldname;
+	}
+
+	/*
+	 * Write all the "pairs" as plain text to the output file.
+	 */
+	fs=fopen(po->filename, "w");
+	gtranslator_message_for_each(po->messages, (FEFunc) write_msg, (FILE *)fs);
+	fclose(fs);
+
 	return TRUE;
 }
 
@@ -86,17 +150,18 @@ gboolean backend_save(void)
  */
 gboolean backend_save_as(const gchar *filename)
 {
-	g_message("Save to %s", filename);
-	return TRUE;
-}
+	FILE *fs;
 
-/*
- * Should return TRUE/FALSE to enable/disable the Compile menu entries/toolbar
- *  icons.
- */
-gboolean backend_is_compilable(void)
-{
-	return FALSE;
+	g_return_val_if_fail(filename!=NULL, FALSE);
+
+	/*
+	 * Save the strings to another specified output file.
+	 */
+	fs=fopen(filename, "w");
+	gtranslator_message_for_each(po->messages, (FEFunc) write_msg, (FILE *)fs);
+	fclose(fs);
+	
+	return TRUE;
 }
 
 /*

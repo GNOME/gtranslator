@@ -12,7 +12,8 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
 	-DG_LOG_DOMAIN=\""gtranslator"\" \
-	$(GLIB_CFLAGS)
+	$(GLIB_CFLAGS) \
+	$(GAL_CFLAGS)
 
 docbook_la_SOURCES = docbook.c
 docbook_la_LDFLAGS = -avoid-version -module

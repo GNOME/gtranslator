@@ -1,6 +1,15 @@
 2001-04-10  Fatih Demir <kabalak@gtranslator.org>
 
-	* text/text.c: Started to write first parts.
+	* docbook/Makefile.am: Include the gal cflags in the compile
+		cflags (already includes the xml cflags .-)).
+
+	* docbook/docbook.c: Started off writing some fake'sh starting
+		points -- huh, will be something more complex I guess.
+
+	* text/* & docbook*: Outsource the information about compilability
+		and compile commands into the xml descriptor files.
+
+	* text/text.c: Semi-finished the text backend file.
 
 	* text/text.c & docbook/docbook.c: Changed the call names a bit
 		to get closer to what they should be in future.
