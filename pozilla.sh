@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.5
+export POZILLA_RELEASE=1.6
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -33,6 +33,11 @@ _LANGUAGE="$LANGUAGE"
 
 unset LANG
 unset LANGUAGE
+
+#
+# set the default po directory to ./po
+#
+export PO_DIR="."
 
 #
 # Check for all necessary applications for pozilla.sh.
@@ -76,7 +81,7 @@ do
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-d --days         Days remaining for release"
 	echo "-p --podirectory  Defines the po directory location (default: ./po"
-	echo "-s --send         Send the merged po files to the given lang" 
+	echo "-s --send         Send the merged po files to the given languages (':' separated list)" 
 	echo "-r --release      Specifies the coming release's number"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
@@ -167,7 +172,7 @@ do
 	else
 
 		echo "---------------------------------------------------------------"
-		export SENDTO_LANGS="$1 $SENDTO_LANGS"
+		export SENDTO_LANGS="`echo $1|sed -e 's/:/\ /g'`"
 		shift 1
 		echo "Sending the merged po files to this/these lang(s): $SENDTO_LANGS"
 		echo "---------------------------------------------------------------"

@@ -725,13 +725,12 @@ Would you like to insert it into the translation?"),
 					GNOME_STOCK_BUTTON_NO,
 					NULL);
 				
-				g_free(resulttext);
-
 				/*
 				 * Run the dialog and switch the action to take
 				 *  depending on the user's selection.
 				 */
 				hehue=gnome_dialog_run(GNOME_DIALOG(condialog));
+				g_free(resulttext);
 				if(hehue==GNOME_YES)
 				{
 					gchar *content;
