@@ -137,9 +137,6 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 
 	if (first) step = 0;
 
-	if ((GtrPreferences.find_in != 0) && (GTR_MSG(msg->data)->msgstr == NULL))
-		return -1;
-
 	if ((GtrPreferences.find_in & findTranslated) && 1 == step) {
 		if (hits >= actpos) SEARCH(msgstr);
 
