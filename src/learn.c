@@ -393,7 +393,7 @@ void gtranslator_learn_init()
 	gtranslator_learn_buffer=g_new0(GtrLearnBuffer, 1);
 	
 	gtranslator_learn_buffer->filename=g_strdup_printf(
-		"%s/.gtranslator/umtf/learn-buffer.xml", g_get_home_dir());
+		"%s/.gtranslator/umtf/Standard_Learn_Buffer.xml", g_get_home_dir());
 
 	gtranslator_learn_buffer->hash=g_hash_table_new(g_str_hash, g_str_equal);
 	gtranslator_learn_buffer->resources=NULL;
@@ -822,7 +822,7 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
 	fprintf(file, 
 "\nmsgid \"\"\n"
 "msgstr \"\"\n"
-"\"Project-Id-Version: gtranslator-learn-buffer %i\\n\"\n"
+"\"Project-Id-Version: gtranslator's learn buffer %i\\n\"\n"
 "\"POT-Creation-Date: %s\\n\"\n"
 "\"PO-Revision-Date: %s\\n\"\n"
 "\"Last-Translator: %s <%s>\\n\"\n"
