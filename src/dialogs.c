@@ -209,9 +209,9 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
 	question = g_strdup_printf(_("File %s\nwas changed. Save?"),
 				   po->filename);
 	dialog = gnome_message_box_new(question, GNOME_MESSAGE_BOX_QUESTION,
-				       GNOME_STOCK_BUTTON_YES,
-				       GNOME_STOCK_BUTTON_NO,
-				       GNOME_STOCK_BUTTON_CANCEL, NULL);
+				       GTK_STOCK_YES,
+				       GTK_STOCK_NO,
+				       GTK_STOCK_CANCEL, NULL);
 	gtranslator_dialog_show(&dialog, "gtranslator -- save the current file?");
 	reply = gnome_dialog_run(GNOME_DIALOG(dialog));
 	GTR_FREE(question);
@@ -342,8 +342,9 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 	gint reply=0;
 
 	dialog=gnome_dialog_new(_("gtranslator -- edit comment"), 
-		GNOME_STOCK_BUTTON_APPLY,
-		GNOME_STOCK_BUTTON_CANCEL,
+		GTK_STOCK_APPLY,
+		GTK_STOCK_CANCEL,
+		GTK_STOCK_OK,
 		NULL);
 
 	/*
@@ -391,11 +392,16 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		
 		gint		  array_pos=0;
 
+		GtkTextBuffer   *buff;
+		GtkTextIter     start, end;
+
 		/*
 		 * Get the comment box contents.
 		 */
-		comment_dialog_contents=gtk_editable_get_chars(
-			GTK_EDITABLE(comment_box), 0, -1);
+		buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(comment_box));
+		gtk_text_buffer_get_start_iter(buff, &start);
+		gtk_text_buffer_get_end_iter(buff, &end);
+		comment_dialog_contents = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
 		g_return_if_fail(comment_dialog_contents!=NULL);
 		
 		/*
@@ -483,9 +489,9 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 
 	dialog=gnome_message_box_new(absolute_question_text,
 		GNOME_MESSAGE_BOX_WARNING,
-		GNOME_STOCK_BUTTON_YES,
-		GNOME_STOCK_BUTTON_NO,
-		GNOME_STOCK_BUTTON_CANCEL,
+		GTK_STOCK_YES,
+		GTK_STOCK_NO,
+		GTK_STOCK_CANCEL,
 		NULL);
 
 	/*
@@ -508,8 +514,8 @@ void gtranslator_remove_all_translations_dialog(GtkWidget *widget, gpointer usel
 		dialog=gnome_message_box_new(
 			_("Are you sure you want to remove ALL translations from this po file?"),
 				GNOME_MESSAGE_BOX_QUESTION,
-				GNOME_STOCK_BUTTON_YES,
-				GNOME_STOCK_BUTTON_NO,
+				GTK_STOCK_YES,
+				GTK_STOCK_NO,
 				NULL);
 		
 		/*
@@ -617,7 +623,7 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 						_("Go!"),
 						GNOME_STOCK_PIXMAP_JUMP_TO);
 	gnome_dialog_append_button (GNOME_DIALOG (dialog),
-				    GNOME_STOCK_BUTTON_CANCEL);
+				    GTK_STOCK_CANCEL);
 	/*
 	 * We want the "Go!" button to be the default.
 	 */
@@ -697,7 +703,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 						_("Find"),
 						GNOME_STOCK_PIXMAP_SEARCH);
 	gnome_dialog_append_button (GNOME_DIALOG (dialog),
-				    GNOME_STOCK_BUTTON_CLOSE);
+				    GTK_STOCK_CLOSE);
 	/* Make Find button the default */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 	
@@ -801,7 +807,7 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 	dialog=gnome_dialog_new(_("gtranslator -- replace"),
 		_("Replace"),
 		_("Replace all"),
-		GNOME_STOCK_BUTTON_CLOSE, 
+		GTK_STOCK_CLOSE, 
 		NULL);
 	
 	label=gtk_label_new(_("String to replace:"));
@@ -959,8 +965,8 @@ void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 	}
 
 	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
-				_("Open"), GNOME_STOCK_BUTTON_CANCEL, 
-				GNOME_STOCK_BUTTON_HELP, NULL);
+				_("Open"), GTK_STOCK_CANCEL, 
+				GTK_STOCK_HELP, NULL);
 
 	/* Make Open button the default */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
@@ -1071,9 +1077,9 @@ Saying \"No\" will delete the crash recovery file."),
 	
 	dialog=gnome_message_box_new(recovery_message,
 		GNOME_MESSAGE_BOX_WARNING,
-		GNOME_STOCK_BUTTON_YES,
-		GNOME_STOCK_BUTTON_NO,
-		GNOME_STOCK_BUTTON_CANCEL,
+		GTK_STOCK_YES,
+		GTK_STOCK_NO,
+		GTK_STOCK_CANCEL,
 		NULL);
 
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
@@ -1141,7 +1147,7 @@ void gtranslator_query_dialog(void)
 	dialog=gnome_dialog_new(
 		_("gtranslator -- query your personal learn buffer"),
 		_("Query"), _("Query message content"),
-		GNOME_STOCK_BUTTON_CLOSE, NULL);
+		GTK_STOCK_CLOSE, NULL);
 
 	innertable=gtk_table_new(2, 2, FALSE);
 
@@ -1241,8 +1247,8 @@ Would you like to insert it into the translation?"),
 				 */
 				condialog=gnome_message_box_new(resulttext,
 					GNOME_MESSAGE_BOX_INFO,
-					GNOME_STOCK_BUTTON_YES,
-					GNOME_STOCK_BUTTON_NO,
+					GTK_STOCK_YES,
+					GTK_STOCK_NO,
 					NULL);
 				
 				/*
@@ -1324,8 +1330,8 @@ from your personal learn buffer?");
 
 	dialog=gnome_message_box_new(message_string,
 		GNOME_MESSAGE_BOX_QUESTION,
-		GNOME_STOCK_BUTTON_YES,
-		GNOME_STOCK_BUTTON_NO,
+		GTK_STOCK_YES,
+		GTK_STOCK_NO,
 		NULL);
 
 	/*
