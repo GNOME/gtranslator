@@ -1,29 +1,37 @@
 <gconfschemafile>
 	<schemalist>
 		<schema>
-			<key>/schemas/apps/gtranslator/author_name</key>
-			<applyto>/apps/gtranslator/author_name</applyto>
+			<key>/schemas/apps/gtranslator/translator/name</key>
+			<applyto>/apps/gtranslator/translator/name</applyto>
 			<owner>gtranslator</owner>
 			<type>string</type>
 			<default>Mr(s). I18N</default>
 			<locale name="C">
 			<short>The author's name</short>
-			<long>
-			This defines the name of the "Last Translator" aka. author.
+			<long>This defines the name of the "Last Translator" aka. author.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/gtranslator/translator/email</key>
+			<applyto>/apps/gtranslator/translator/email</applyto>
+			<owner>gtranslator</owner>
+			<type>string</type>
+			<default>myemail@domain.com</default>
+			<locale name="C">
+			<short>The EMail address of the author.</short>
+			<long>This is the EMail address of the "Last Translator".</long>
 			</long>
 			</locale>
 		</schema>
 		<schema>
-			<key>/schemas/apps/gtranslator/author_email</key>
-			<applyto>/apps/gtranslator/author_email</applyto>
+			<key>/schemas/apps/gtranslator/language/name</key>
+			<applyto>/apps/gtranslator/language/name</applyto>
 			<owner>gtranslator</owner>
 			<type>string</type>
-			<default>gnome-i18n@gnome.org</default>
+			<default>Your language</default>
 			<locale name="C">
-			<short>The EMail address of the author.</short>
-			<long>
-			This is the EMail address of the "Last Translator".
-			</long>
+			<short>Your language name</short>
+			<long>The name of your language.</long>
 			</locale>
 		</schema>	
 	</schemalist>

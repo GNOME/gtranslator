@@ -362,7 +362,7 @@ static void take_my_options_toggled(GtkWidget * widget, gpointer useless)
 	wants.fill_header =
 	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(take_my_options));
 	gtranslator_config_init();    
-	gtranslator_config_set_bool("/gtranslator/Toggles/Fill header",
+	gtranslator_config_set_bool("toggles/fill_header",
 			      wants.fill_header);
 	gtranslator_config_close();
 	

@@ -293,20 +293,20 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 #undef if_active
 
 	gtranslator_config_init();
-	gtranslator_config_set_string("Translator/Name", author);
-	gtranslator_config_set_string("Translator/Email", email);
-	gtranslator_config_set_string("Language/Name", language);
-	gtranslator_config_set_string("Language/Mime-type", mime);
-	gtranslator_config_set_string("Language/Encoding", enc);
-	gtranslator_config_set_string("Language/Language-code", lc);
-	gtranslator_config_set_string("Language/Team's EMail address", lg);
-	gtranslator_config_set_bool("Toggles/Save Geometry", wants.save_geometry);
-	gtranslator_config_set_bool("Toggles/Warn if fuzzy", wants.warn_if_fuzzy);
-	gtranslator_config_set_bool("Toggles/Set non-fuzzy if changed", 
+	gtranslator_config_set_string("translator/name", author);
+	gtranslator_config_set_string("translator/email", email);
+	gtranslator_config_set_string("language/name", language);
+	gtranslator_config_set_string("language/mime_type", mime);
+	gtranslator_config_set_string("language/encoding", enc);
+	gtranslator_config_set_string("language/language_code", lc);
+	gtranslator_config_set_string("language/team_email", lg);
+	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);
+	gtranslator_config_set_bool("toggles/warn_if_fuzzy", wants.warn_if_fuzzy);
+	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
 			      wants.unmark_fuzzy);
-	gtranslator_config_set_bool("Toggles/Warn if no change",
+	gtranslator_config_set_bool("toggles/warn_if_no_change",
 			      wants.warn_if_no_change);
-	gtranslator_config_set_bool("Toggles/Do not save unchanged files",
+	gtranslator_config_set_bool("toggles/do_not_save_unchanged_files",
 			      wants.dont_save_unchanged_files);
 	gtranslator_config_close();
 	
@@ -384,27 +384,27 @@ static void prefs_box_changed(GtkWidget * widget, gpointer flag)
 void read_prefs(void)
 {
 	gtranslator_config_init();
-	author = gtranslator_config_get_string("Translator/Name");
-	email = gtranslator_config_get_string("Translator/Email");
-	language = gtranslator_config_get_string("Language/Name");
-	lc = gtranslator_config_get_string("Language/Language-code");
-	lg = gtranslator_config_get_string("Language/Team's EMail address");
-	mime = gtranslator_config_get_string("Language/Mime-type");
-	enc = gtranslator_config_get_string("Language/Encoding");
+	author = gtranslator_config_get_string("translator/name");
+	email = gtranslator_config_get_string("translator/email");
+	language = gtranslator_config_get_string("language/name");
+	lc = gtranslator_config_get_string("language/language_code");
+	lg = gtranslator_config_get_string("language/team_email");
+	mime = gtranslator_config_get_string("language/mime_type");
+	enc = gtranslator_config_get_string("language/encoding");
 	wants.save_geometry =
-	    gtranslator_config_get_bool("Toggles/Save Geometry=true");
+	    gtranslator_config_get_bool("toggles/save_geometry");
 	wants.unmark_fuzzy =
-	    gtranslator_config_get_bool("Toggles/Set non-fuzzy if changed=false"); 
+	    gtranslator_config_get_bool("toggles/set_non_fuzzy_if_changed"); 
 	wants.warn_if_fuzzy =
-	    gtranslator_config_get_bool("Toggles/Warn if fuzzy=true");
+	    gtranslator_config_get_bool("toggles/warn_if_fuzzy");
 	wants.warn_if_no_change =
-	    gtranslator_config_get_bool("Toggles/Warn if no change=true");
+	    gtranslator_config_get_bool("toggles/warn_if_no_change");
 	wants.dont_save_unchanged_files =
-	    gtranslator_config_get_bool("Toggles/Do not save unchanged files=false");
-	wants.match_case = gtranslator_config_get_bool("Find/Case sensitive=false");
-	wants.find_in = gtranslator_config_get_int("Find/Find in=1");
+	    gtranslator_config_get_bool("toggles/do_not_save_unchanged_files");
+	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
+	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();
-	wants.fill_header = gtranslator_config_get_bool("Toggles/Fill header=false");
+	wants.fill_header = gtranslator_config_get_bool("toggles/fill_header");
 	gtranslator_config_close();
 }
 
@@ -428,10 +428,10 @@ void save_geometry(void)
 		gnome_parse_geometry(gstr, &x, &y, &w, &h);
 		g_free(gstr);
 		gtranslator_config_init();
-		gtranslator_config_set_int("Geometry/X", x);
-		gtranslator_config_set_int("Geometry/Y", y);
-		gtranslator_config_set_int("Geometry/Width", w);
-		gtranslator_config_set_int("Geometry/Height", h);
+		gtranslator_config_set_int("geometry/x", x);
+		gtranslator_config_set_int("geometry/y", y);
+		gtranslator_config_set_int("geometry/width", w);
+		gtranslator_config_set_int("geometry/height", h);
 		gtranslator_config_close();
 		
 	}
@@ -444,10 +444,10 @@ void restore_geometry(gchar * gstr)
 	if (gstr == NULL) {
 		if (wants.save_geometry == TRUE) {
 			gtranslator_config_init();
-			x = gtranslator_config_get_int("Geometry/X");
-			y = gtranslator_config_get_int("Geometry/Y");
-			width = gtranslator_config_get_int("Geometry/Width");
-			height = gtranslator_config_get_int("Geometry/Height");
+			x = gtranslator_config_get_int("geometry/x");
+			y = gtranslator_config_get_int("geometry/y");
+			width = gtranslator_config_get_int("geometry/width");
+			height = gtranslator_config_get_int("geometry/height");
 			gtranslator_config_close();
 		}
 		else return;
