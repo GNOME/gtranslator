@@ -53,13 +53,6 @@ static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
 static void edit_header_changed(GtkWidget * widget, gpointer useless);
 static void language_changed(GtkWidget * widget, gpointer useless);
 
-/*
- * Prepares the comment to be viewed in the header edit dialog/to be saved
- *  back to "standard" form.
- */ 
-gchar *prepare_comment_for_view(gchar *comment);
-gchar *prepare_comment_for_save(gchar *comment);
-
 static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 {
 	regex_t *rx;

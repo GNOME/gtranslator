@@ -65,4 +65,10 @@ void free_header(GtrHeader  * the_header);
  */
 void edit_header(GtkWidget  * widget, gpointer useless);
 
+/*
+ * View <-> real form transition.
+ */ 
+gchar *prepare_comment_for_view(gchar *comment);
+gchar *prepare_comment_for_save(gchar *comment);
+
 #endif
