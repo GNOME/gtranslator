@@ -1,3 +1,8 @@
+2003-05-25  Ross Golder  <rossg@golder.org>
+
+	* parse.c (gtranslator_parse): If first message in file is not a
+	header, default po->header to avoid segfaults (bug #62244).
+
 2003-05-25  Fatih Demir <kabalak@gtranslator.org>
 
 	* messages-table.c: +302, Added a missing brace :-)

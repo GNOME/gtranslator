@@ -226,6 +226,11 @@ void gtranslator_parse(const gchar *filename)
 	else
 	{
 		gtranslator_message_status_set_fuzzy(FIRST_MSG, first_is_fuzzy);
+
+		/*
+		 * Provide a default po->header to avoid segfaults (#62244)
+		 */
+		po->header=gtranslator_header_create_from_prefs();
 	}
 	
 	file_opened = TRUE;
