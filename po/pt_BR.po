@@ -1,21 +1,25 @@
+# translation of gtranslator.HEAD.po to Português/Brasil
 # gtranslator translation for Brazilian Portuguese.
-# Copyright (C) 2000 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2004 Free Software Foundation, Inc.
 # Francisco Petrucio <fpetrucioL@mat.ufal.br>, 2000.
 # Francisco Petrucio <fpetrucio@mat.ufal.br>, 2004.
-# João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
+# JoÃ£o Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
+# Raphael Higino <raphaelh@uai.com.br>, 2004.
+# Afonso Celso Medina <medina@maua.br>, 2004.
+#
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.39\n"
+"Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-10 12:58-0500\n"
-"PO-Revision-Date: 2004-03-10 12:57-0500\n"
-"Last-Translator: Raphael Higino <raphaelh@uai.com.br>\n"
+"POT-Creation-Date: 2004-04-09 19:57+0200\n"
+"PO-Revision-Date: 2004-04-09 16:53-0300\n"
+"Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -30,9 +34,7 @@ msgstr "gtranslator"
 #. Translator credits
 #: src/about.c:60
 msgid "translator_credits"
-msgstr ""
-"Traduzido por:\n"
-"João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, e\n"
+msgstr "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>\n"
 "Raphael Higino <raphaelh@uai.com.br>"
 
 #: src/about.c:80
@@ -78,7 +80,7 @@ msgstr "Desconhecido"
 
 #: src/color-schemes.c:325
 msgid "<Not Given>"
-msgstr "<Não foi dado>"
+msgstr "<Não fornecido>"
 
 #: src/color-schemes.c:472
 msgid "_View/_Colorschemes/"
@@ -280,7 +282,7 @@ msgstr "Nenhuma URI especificada!"
 
 #: src/dialogs.c:1127
 msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr "Nenhum protocolo URI suportado (like \"ftp://\") foi dado!"
+msgstr "Nenhum protocolo URI suportado (como \"ftp://\") foi dado!"
 
 #: src/dialogs.c:1135
 msgid ""
@@ -300,7 +302,7 @@ msgstr ""
 "para abrir arquivos po remotos armazenados em servidores com protocolos\n"
 "padrão como \"http\", \"ftp\" ou qualquer outro método de acesso suportado "
 "pelo GnomeVFS.\n"
-"Alguns exemplos de URIs  para esclarecimento (estes são suportados):\n"
+"Alguns exemplos de URIs para esclarecimento (estes são suportados):\n"
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
 "ftp://anonymous@ftp.somewhere.com/<UM-ARQUIVO-PO-REMOTO>\n"
 "\n"
@@ -315,7 +317,7 @@ msgid ""
 "and may contain your hard work!\n"
 msgstr ""
 "Abrir arquivo de recuperação para `%s'?\n"
-"Ele foi salvo pelo gtranslator antes que o gtranslator fose fechado\n"
+"Ele foi salvo pelo gtranslator antes que o gtranslator fosse fechado\n"
 "e possivelmente contenha seu duro trabalho!\n"
 
 #.
@@ -335,15 +337,14 @@ msgstr "Ignorar recuperação de arquivo"
 # src/gui.c:98
 #: src/dialogs.c:1190
 msgid "Recover file"
-msgstr "Arquivo "
+msgstr "Arquivo"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
 #: src/dialogs.c:1249
 msgid "Here you can query existing translations from your learn buffer."
-msgstr ""
-"Aqui você pode consultar traduções existentes do seu buffer de aprendizado."
+msgstr "Aqui você pode consultar traduções existentes do seu buffer de aprendizado."
 
 # src/dialogs.c:50
 #: src/dialogs.c:1252
@@ -369,8 +370,7 @@ msgstr "Nenhum string de consulta foi dada!"
 
 #: src/dialogs.c:1327
 msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr ""
-"Não foi possível encontrar resultados para sua consulta no buffer de "
+msgstr "Não foi possível encontrar resultados para sua consulta no buffer de "
 "aprendizado!"
 
 #: src/dialogs.c:1339
@@ -422,11 +422,11 @@ msgstr ""
 "Impossível localizar\n"
 "\"%s\""
 
-#: src/gui.c:182
+#: src/gui.c:184
 msgid "Edit comment"
 msgstr "Editar comentário"
 
-#: src/gui.c:493
+#: src/gui.c:495
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
@@ -434,49 +434,49 @@ msgstr[0] "%s [ Resta %i aproximada ]"
 msgstr[1] "%s [ Restam %i aproximadas ]"
 
 # src/gui.c:288 src/gui.c:708
-#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
+#: src/gui.c:495 src/gui.c:499 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
 msgstr "Aproximada"
 
-#: src/gui.c:497
+#: src/gui.c:499
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nenhuma aproximada restando ]"
 
-#: src/gui.c:505
+#: src/gui.c:507
 msgid "Sticky (Message & translation are the same)"
 msgstr "Salientar (Mensagem & tradução são o mesmo)"
 
 # src/dialogs.c:217 src/gui.c:712
-#: src/gui.c:507 src/messages-table.c:332
+#: src/gui.c:509 src/messages-table.c:332
 msgid "Translated"
 msgstr "Traduzida"
 
-#: src/gui.c:516
+#: src/gui.c:518
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
-msgstr[0] "%s [ Resta %i nao traduzida ]"
-msgstr[1] "%s [ Restam %i nao traduzidas ]"
+msgstr[0] "%s [ Resta %i não traduzida ]"
+msgstr[1] "%s [ Restam %i não traduzidas ]"
 
 # src/gui.c:722
-#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
+#: src/gui.c:518 src/gui.c:520 src/messages-table.c:315
 msgid "Untranslated"
 msgstr "Não traduzida"
 
-#: src/gui.c:518
+#: src/gui.c:520
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Todas as mensagens estão traduzidas]"
 
 # src/gui.c:698
-#: src/gui.c:537
+#: src/gui.c:539
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Mensagem %d / %d / Estado: %s (Mensagem contém plural)"
 
 # src/gui.c:698
-#: src/gui.c:541
+#: src/gui.c:543
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Mensagem %d / %d / Estado:%s"
@@ -644,7 +644,7 @@ msgstr "Checo"
 # src/languages.h:81
 #: src/languages.c:93
 msgid "Danish"
-msgstr "dinamarquês"
+msgstr "Dinamarquês"
 
 #: src/languages.c:97
 msgid "Dutch"
@@ -960,7 +960,7 @@ msgstr "Aprender o arquivo completamente"
 
 #: src/main.c:105
 msgid "Show learn buffer statistics"
-msgstr "Mostrar estatísticar do buffer de aprendizado"
+msgstr "Mostrar estatísticas do buffer de aprendizado"
 
 # src/main.c:87
 #: src/main.c:148
@@ -992,7 +992,7 @@ msgstr "Diretório de scripts:"
 # src/dialogs.c:222
 #: src/main.c:190
 msgid "Window icon:"
-msgstr "Ícone da janela: "
+msgstr "Ícone da janela:"
 
 #: src/main.c:192
 msgid "Own locale directory:"
@@ -1059,8 +1059,7 @@ msgstr "Aut_o-traduzir..."
 
 #: src/menus.c:82
 msgid "Autotranslate the file with information from your learn buffer"
-msgstr ""
-"Traduzir arquivo automaticamente com informações do seu buffer de aprendizado"
+msgstr "Traduzir arquivo automaticamente com informações do seu buffer de aprendizado"
 
 # src/gui.c:120
 #: src/menus.c:89
@@ -1209,7 +1208,7 @@ msgstr "Ir para a próxima tradução aproximada"
 # src/gui.c:165
 #: src/menus.c:244
 msgid "Next _untranslated"
-msgstr "Proxima nã_o traduzida"
+msgstr "Proxima _não traduzida"
 
 # src/gui.c:166 src/gui.c:285
 #: src/menus.c:245 src/menus.c:335
@@ -1277,7 +1276,7 @@ msgstr "Atualizar"
 # src/gui.c:251
 #: src/menus.c:303
 msgid "Header"
-msgstr "Cabaçalho"
+msgstr "Cabeçalho"
 
 # src/gui.c:116 src/gui.c:252
 #: src/menus.c:304
@@ -1462,13 +1461,11 @@ msgstr "Não foi possível abrir o arquivo `%s' para escrita!"
 msgid ""
 "File %s\n"
 "contains %d fuzzy message"
-msgid_plural ""
 "File %s\n"
 "contains %d fuzzy messages"
-msgstr[0] ""
+msgstr ""
 "Arquivo %s\n"
 "contém %d messagen aproximada."
-msgstr[1] ""
 "Arquivo %s\n"
 "contém %d messagens aproximadas."
 
@@ -1656,7 +1653,7 @@ msgstr "Usar dicionário especial:"
 #.
 #: src/prefs.c:481
 msgid "PO header"
-msgstr "Cabaçalho PO"
+msgstr "Cabeçalho PO"
 
 # src/prefs.c:202
 #: src/prefs.c:484
@@ -1692,8 +1689,7 @@ msgstr "Funcionalidade"
 
 #: src/prefs.c:531
 msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr ""
-"Ativar a funcionalidade de atualizar um arquivo po de dentro do gtranslator"
+msgstr "Ativar a funcionalidade de atualizar um arquivo po de dentro do gtranslator"
 
 #: src/prefs.c:535
 msgid "Enable the functionality to remove all translations from a po file"
@@ -1892,7 +1888,7 @@ msgstr "iso-8859-1"
 #: src/utils_gui.c:144
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "A string de geometria \"%s\" não pôde ser interpretada!"
+msgstr "A string de geometria \"%s\" não pÃ´de ser interpretada!"
 
 #: src/utils_gui.c:360
 #, c-format
@@ -1955,3 +1951,4 @@ msgstr "O computador `%s' não tem endereço!"
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Transferência interrompida!"
+
