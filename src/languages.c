@@ -38,6 +38,10 @@ GtrLanguage languages[] = {
 	 "", "8bit"
 	},
 	{
+	 N_("Albanian"), "sq", "UTF-8",
+	 "gnome-albanian-perkthyesit@lists.sourceforge.net", "8bit"
+	},
+        {
 	 N_("Arabic"), "ar", "iso-8859-6",
 	 "", "8bit"
 	},
