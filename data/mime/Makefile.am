@@ -10,7 +10,7 @@ keysdir = $(datadir)/mime-info
 ##
 ## And the mime-files
 ##
-icon_DATA = application-x-po.png
+icon_DATA = application-x-gmo.png application-x-po.png
 keys_predata = gtranslator.keys.in
 keys_DATA = gtranslator.keys
 mime_DATA = gtranslator.mime
