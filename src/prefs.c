@@ -66,7 +66,7 @@ static GtkWidget
  */
 static GtkWidget
 	*warn_if_fuzzy, *unmark_fuzzy, *save_geometry_tb,
-	*enable_popup_menu, *use_dot_char, *use_update_function,
+	*use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *autosave,
 	*autosave_with_suffix, *sweep_compile_file, *use_learn_buffer,
@@ -199,9 +199,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	use_dot_char=gtranslator_utils_attach_toggle_with_label(fourth_page, 0,
 		_("Use special character to indicate free space"),
 		GtrPreferences.dot_char, G_CALLBACK(gtranslator_preferences_dialog_changed));
-	enable_popup_menu=gtranslator_utils_attach_toggle_with_label(fourth_page, 2,
-		_("Enable the popup menu"),
-		GtrPreferences.popup_menu, G_CALLBACK(gtranslator_preferences_dialog_changed));	
 	use_update_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 3,
 		_("Enable the functionality to update a po file from within gtranslator"),
 		GtrPreferences.update_function, G_CALLBACK(gtranslator_preferences_dialog_changed));
@@ -463,7 +460,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.dot_char = if_active(use_dot_char);
 	GtrPreferences.update_function = if_active(use_update_function);
 	GtrPreferences.rambo_function = if_active(rambo_function);
-	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_comment = if_active(show_comment);
 	GtrPreferences.show_messages_table = if_active(show_messages_table);
@@ -599,8 +595,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.update_function);
 	gtranslator_config_set_bool("toggles/sweep_compile_file",
 			      GtrPreferences.sweep_compile_file);
-	gtranslator_config_set_bool("toggles/enable_popup_menu",
-			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/show_comment",
 			      GtrPreferences.show_comment);
 	gtranslator_config_set_bool("toggles/rambo_function",
@@ -763,8 +757,6 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_bool("toggles/set_non_fuzzy_if_changed"); 
 	GtrPreferences.warn_if_fuzzy =
 		gtranslator_config_get_bool("toggles/warn_if_fuzzy");
-	GtrPreferences.popup_menu =
-		gtranslator_config_get_bool("toggles/enable_popup_menu");
 	GtrPreferences.update_function =
 		gtranslator_config_get_bool("toggles/use_update_function");
 	GtrPreferences.sweep_compile_file =

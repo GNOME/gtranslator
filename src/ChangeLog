@@ -1,5 +1,9 @@
 2003-06-08  Ross Golder  <rossg@golder.org>
 
+	* gui.c, menus.[ch], prefs.[ch], prefs_init.c: Removed the
+	'main_popup_menu', as it blocks access to the default GTK2
+	textview popup menu (with IM options etc). (#114470)
+
 	* find.c (find_in_msg): Removed a check that was making the search
 	ignore untranslated messages. (#81218)
 

@@ -351,20 +351,3 @@ GnomeUIInfo the_navibar[] = {
 	},
 	GNOMEUIINFO_END
 };
-
-/*
- * The popup-menu for the main GUI.
- */
-GnomeUIInfo the_main_popup_menu[] = {
-	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CUT_ITEM(gtranslator_clipboard_cut, NULL),
-	GNOMEUIINFO_MENU_COPY_ITEM(gtranslator_clipboard_copy, NULL),
-	GNOMEUIINFO_MENU_PASTE_ITEM(gtranslator_clipboard_paste, NULL),
-	GNOMEUIINFO_MENU_CLEAR_ITEM(gtranslator_selection_clear, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_ITEM(gtranslator_file_close, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_SAVE_AS_ITEM(gtranslator_save_file_as_dialog, NULL),
-	GNOMEUIINFO_END
-};

@@ -39,6 +39,4 @@ extern GnomeUIInfo the_help_menu[];
 extern GnomeUIInfo the_toolbar[];
 extern GnomeUIInfo the_navibar[];
 
-extern GnomeUIInfo the_main_popup_menu[];
-
 #endif

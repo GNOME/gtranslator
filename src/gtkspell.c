@@ -573,15 +573,6 @@ static gint button_press_intercept_cb(GtkText *gtktext, GdkEvent *e, gpointer d)
 	if (e->type != GDK_BUTTON_PRESS) return FALSE;
 	eb = (GdkEventButton*) e;
 
-	/*
-	 * Only allow the right-click to be send to gtkspell if
-	 *  the popup menu if disabled -- in the other case gtkspell
-	 *   takes the middle click.
-	 */
-	if(((GtrPreferences.popup_menu) && (eb->button != 2)) ||
-	   ((!GtrPreferences.popup_menu) && (eb->button != 3)))
-		return FALSE;
-
 	/* forge the leftclick */
 	eb->button = 1;
 

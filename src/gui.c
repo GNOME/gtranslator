@@ -85,12 +85,6 @@ GtrExtraContentArea *extra_content_view;
 gboolean nothing_changes;
 
 /*
- * Popup menu creation/deletion functions.
- */
-static gint create_popup_menu(GtkText *widget, GdkEventButton *event, 
-	gpointer d);
-
-/*
  * Internal text callbacks/handlers.
  */
 static void insert_text_handler (GtkTextBuffer *editable, GtkTextIter *pos,
@@ -126,35 +120,6 @@ static  GtkTargetEntry dragtypes[] = {
  * Pane positions storage variables.
  */
 static gint	table_pane_position;
-
-/*
- * Pop's up the curious popup-menu.
- */
-static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d)
-{
-	/*
-	 * Only react on rightclick.
-	 */
-	if(event->button==3)
-	{
-		/*
-		 * Only respond if a file has been present/opened and if the
-		 * corresponding option is set.
-		 */
-		if((GtrPreferences.popup_menu) && (file_opened==TRUE))
-		{
-			GtkWidget *popup_menu;
-
-			popup_menu=gnome_popup_menu_new(the_main_popup_menu);
-
-			gtk_menu_popup(GTK_MENU(popup_menu), NULL, NULL,
-				NULL, NULL, event->button, event->time);
-
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
 
 /*
  * Creates the main gtranslator window.
@@ -350,10 +315,6 @@ void gtranslator_create_main_window(void)
 	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
 			 "changed",
 			 G_CALLBACK(gtranslator_translation_changed), NULL);
-	g_signal_connect(G_OBJECT(text_box), "button-press-event",
-			 G_CALLBACK(create_popup_menu), NULL);
-	g_signal_connect(G_OBJECT(trans_box), "button-press-event",
-			 G_CALLBACK(create_popup_menu), NULL);
 	
 	g_signal_connect(G_OBJECT(gtranslator_application), "key-press-event",
 			 G_CALLBACK(gtranslator_keyhandler), NULL);
