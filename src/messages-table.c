@@ -743,6 +743,44 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 }
 
 /*
+ * Update the status grouping of a message
+ */
+void gtranslator_messages_table_update_message_status(GtrMsg *message)
+{
+	ETreePath old_node=NULL, new_node=NULL;
+	
+	g_return_if_fail(message!=NULL);
+	
+	old_node=g_hash_table_lookup(hash_table, message);
+	g_return_if_fail (old_node!=NULL);
+	
+	g_hash_table_remove (hash_table, message);
+	e_tree_memory_node_remove(tree_memory, old_node);
+	
+	switch (message->status){
+		case GTR_MSG_STATUS_UNKNOWN:
+			new_node=e_tree_memory_node_insert(tree_memory, unknown_node,
+			0, message);
+			break;
+		case GTR_MSG_STATUS_TRANSLATED:
+			new_node=e_tree_memory_node_insert(tree_memory, translated_node,
+			0, message);
+			break;
+		case GTR_MSG_STATUS_STICK:
+			new_node=NULL;
+			break;
+		case GTR_MSG_STATUS_FUZZY:
+		default:
+			new_node=e_tree_memory_node_insert(tree_memory, fuzzy_node,
+			0, message);
+	}
+	
+	if (new_node)
+		g_hash_table_insert(hash_table, message, new_node);
+	
+}
+
+/*
  * Save the e-tree state
  */
 void gtranslator_messages_table_save_state()

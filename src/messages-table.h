@@ -62,6 +62,11 @@ void gtranslator_messages_table_update_row(GtrMsg *message);
 void gtranslator_messages_table_select_row(GtrMsg *message);
 
 /*
+ * Update the status grouping of a message
+ */
+void gtranslator_messages_table_update_message_status(GtrMsg *message);
+
+/*
  * Save the e-tree state
  */
 void gtranslator_messages_table_save_state(void);
