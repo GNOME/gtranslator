@@ -57,6 +57,7 @@ static gchar *keywords[] = {
 	"GPL",
 	"Gtk+",
 	"GTK+",
+	"gtranslator",
 	"HEAD",
 	"HTML",
 	"HTTP",
