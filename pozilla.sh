@@ -10,7 +10,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=3.0
+export POZILLA_RELEASE=3.0.1
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -343,7 +343,7 @@ for i in $PO_FILES
 	cp $i $i.backup
 	language=`basename $i .po|sed -e s/\.Big5//g -e s/\.GB2312//g`
 	
-	merge_status=`msgmerge $i $PACKAGE.pot -o $i 2>&1`
+	merge_status=`OLD_PO_FILE_INPUT=yes msgmerge $i $PACKAGE.pot -o $i 2>&1`
 	
 	if echo $merge_status|grep -sq warning ; then
 		mv $i.backup $i
@@ -364,7 +364,7 @@ $language\t\t------------- Failure due to an error -------------"
 	#
 	# Get the values for the messages statistics.
 	#
-	statistics=(`msgfmt -v $i 2>&1`)
+	statistics=(`OLD_PO_FILE_INPUT=yes msgfmt -v $i 2>&1`)
 	translated=${statistics[0]}
 	fuzzy=${statistics[3]:-0}
 	untranslated=${statistics[6]:-0}
