@@ -38,8 +38,10 @@ cvspack:
 		> configure.in.new && mv configure.in.new configure.in
 	@./autogen.sh --prefix=/usr --enable-nautilus-view
 	@make dist
+	@-rm -rf po
 	@mv __po po
 	@mv __configure.in configure.in
+	@[ -f 0.5 ] && rm -f 0.5
 
 pre-release: cvspack
 	@-./pozilla.sh
