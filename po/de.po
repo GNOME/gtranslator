@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.37\n"
-"POT-Creation-Date: 2001-03-14 00:29+0100\n"
+"POT-Creation-Date: 2001-03-16 01:20+0100\n"
 "PO-Revision-Date: 2001-03-14 00:27+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -99,23 +99,23 @@ msgstr "Geben Sie den zu suchenden Text ein:"
 msgid "Case sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
 
-#: src/dialogs.c:309 src/dialogs.c:405 src/languages.h:112
+#: src/dialogs.c:309 src/dialogs.c:406 src/languages.h:112
 msgid "English"
 msgstr "englisch"
 
-#: src/dialogs.c:315 src/dialogs.c:411 src/gui.c:902
+#: src/dialogs.c:315 src/dialogs.c:412 src/gui.c:903
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: src/dialogs.c:321 src/dialogs.c:417
+#: src/dialogs.c:321 src/dialogs.c:418
 msgid "Both"
 msgstr "Beides"
 
-#: src/dialogs.c:327
+#: src/dialogs.c:327 src/dialogs.c:424
 msgid "Comments"
 msgstr "Kommentare"
 
-#: src/dialogs.c:333
+#: src/dialogs.c:333 src/dialogs.c:430
 msgid "In all strings"
 msgstr "in allen Texten"
 
@@ -123,56 +123,60 @@ msgstr "in allen Texten"
 msgid "Find in: "
 msgstr "Suchen in: "
 
-#: src/dialogs.c:393 src/gui.c:372
+#: src/dialogs.c:393
+msgid "gtranslator -- replace"
+msgstr "gtranslator -- ersetzen"
+
+#: src/dialogs.c:394 src/gui.c:372
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: src/dialogs.c:394
+#: src/dialogs.c:395
 msgid "Replace all"
 msgstr "Alle ersetzen"
 
-#: src/dialogs.c:398
+#: src/dialogs.c:399
 msgid "String to replace:"
 msgstr "Zu ersetzender Text:"
 
-#: src/dialogs.c:401
+#: src/dialogs.c:402
 msgid "Replace string:"
 msgstr "Ersatztext:"
 
-#: src/dialogs.c:439
+#: src/dialogs.c:461
 msgid "Replace in:"
 msgstr "Ersetzen in:"
 
-#: src/dialogs.c:506
+#: src/dialogs.c:536
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Während der Ausführung von msgfmt ist ein Fehler aufgetreten:\n"
 
-#: src/dialogs.c:534
+#: src/dialogs.c:564
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- von URI öffnen"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:3 src/dialogs.c:535
+#: data/ui/nautilus-gtranslator-view-ui.xml.h:3 src/dialogs.c:565
 #: src/gui.c:301
 msgid "Open"
 msgstr "Öffnen"
 
-#: src/dialogs.c:535
+#: src/dialogs.c:565
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/dialogs.c:539
+#: src/dialogs.c:569
 msgid "Enter URI:"
 msgstr "URI eingeben:"
 
-#: src/dialogs.c:581
+#: src/dialogs.c:611
 msgid "No URI given!"
 msgstr "Keine URI angegeben!"
 
-#: src/dialogs.c:602
+#: src/dialogs.c:632
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Kein gültiges URI Protokoll (wie ftp://) angegeben!"
 
-#: src/dialogs.c:633
+#: src/dialogs.c:663
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -185,53 +189,53 @@ msgstr ""
 "Vermutlich enthält sie viel harte Arbeit?!\n"
 "Wenn Sie \"Nein\" sagen, wird die Wiederherstellungsdatei gelöscht."
 
-#: src/dialogs.c:659
+#: src/dialogs.c:689
 #, c-format
 msgid "Recovering `%s'..."
 msgstr "Rette '%s'..."
 
-#: src/dialogs.c:703
+#: src/dialogs.c:733
 msgid "Couldn't get list of gettext domains!"
 msgstr "Liste der gettext-Quellen konnte nicht gelesen werden"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:711
+#: src/dialogs.c:741
 msgid "Here you can query existing gettext domains for a translation."
 msgstr ""
 "Hier können Sie Anfragen an bestehende gettext Quellen [=Übersetzungen] "
 "machen."
 
-#: src/dialogs.c:714
+#: src/dialogs.c:744
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- Bestehende gettext-Quellen"
 
-#: src/dialogs.c:715 src/gui.c:376
+#: src/dialogs.c:745 src/gui.c:376
 msgid "Query"
 msgstr "Anfrage"
 
-#: src/dialogs.c:715
+#: src/dialogs.c:745
 msgid "Close"
 msgstr "Schließen"
 
-#: src/dialogs.c:723
+#: src/dialogs.c:753
 msgid "Query string:"
 msgstr "Anfrage-Text:"
 
-#: src/dialogs.c:730
+#: src/dialogs.c:760
 msgid "Domain to search the translation in:"
 msgstr "Quelle in der die Übersetzunge gesucht werden soll:"
 
-#: src/dialogs.c:780
+#: src/dialogs.c:810
 msgid "No query string given!"
 msgstr "Kein Text für die Anfrage eingegeben"
 
-#: src/dialogs.c:809
+#: src/dialogs.c:839
 msgid "Couldn't find any result for the query!"
 msgstr "Konnte kein Ergebnis für die Anfrage finden"
 
-#: src/dialogs.c:826
+#: src/dialogs.c:856
 #, c-format
 msgid ""
 "Found \"%s\" as a translation in domain \"%s\".\n"
@@ -244,11 +248,11 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:888
+#: src/dialogs.c:918
 msgid "Query's result translation is already there!"
 msgstr "Übersetzung wie in der Anfrage ist bereits da"
 
-#: src/dialogs.c:908
+#: src/dialogs.c:938
 msgid ""
 "Should gtranslator accomplish all missing strings (if possible)\n"
 "from your default query domain?"
@@ -497,7 +501,7 @@ msgstr "Letzte"
 msgid "Missing"
 msgstr "Fehlend"
 
-#: src/gui.c:360 src/gui.c:889 src/gui.c:893
+#: src/gui.c:360 src/gui.c:890 src/gui.c:894
 msgid "Fuzzy"
 msgstr "Ungenau"
 
@@ -524,38 +528,38 @@ msgstr "Text In der po-Datei ersetzen"
 #.
 #. * Create the app
 #.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:549
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:551
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:706 src/gui.c:707 src/gui.c:1118
+#: src/gui.c:707 src/gui.c:708 src/gui.c:1120
 msgid "·"
 msgstr "·"
 
-#: src/gui.c:889
+#: src/gui.c:890
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i Ungenaue verblieben ]"
 
-#: src/gui.c:893
+#: src/gui.c:894
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Keine ungenauen verblieben ]"
 
-#: src/gui.c:900
+#: src/gui.c:901
 msgid "Stick"
 msgstr "Fest"
 
-#: src/gui.c:911
+#: src/gui.c:912
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i Unübersetze verblieben ]"
 
-#: src/gui.c:911 src/gui.c:913
+#: src/gui.c:912 src/gui.c:914
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
-#: src/gui.c:913
+#: src/gui.c:914
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Keine unübersetzen verblieben ]"
@@ -563,7 +567,7 @@ msgstr "%s [ Keine unübersetzen verblieben ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:924
+#: src/gui.c:925
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Meldung: %d / %d / Status: %s"
@@ -932,7 +936,7 @@ msgstr ""
 "Neues ESC-Zeichen gefunden: \\%c\n"
 "Dies zu parse.c, Zeile %i hinzufügen."
 
-#: src/parse.c:253
+#: src/parse.c:279
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -943,7 +947,7 @@ msgstr ""
 "in Zeile %d.\n"
 "Bitte schauen Sie sich die Datei nochmal an und versuchen Sie es erneut."
 
-#: src/parse.c:302
+#: src/parse.c:328
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -952,22 +956,22 @@ msgstr ""
 "Die Datei ist leer:\n"
 "%s"
 
-#: src/parse.c:333 src/parse.c:594
+#: src/parse.c:359 src/parse.c:620
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Die Datei `%s' existiert überhaupt nicht!"
 
-#: src/parse.c:356
+#: src/parse.c:382
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Die Datei \"%s\" wurde erfolgreich analysiert"
 
-#: src/parse.c:359
+#: src/parse.c:385
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:549
+#: src/parse.c:575
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -978,7 +982,7 @@ msgstr ""
 "Diese Dateien werden durch das Programm generiert.\n"
 "Ihre Datei sollte die *.po Endung besitzen, also %s.po"
 
-#: src/parse.c:628
+#: src/parse.c:654
 #, c-format
 msgid ""
 "File %s\n"
@@ -987,7 +991,7 @@ msgstr ""
 "Datei %s\n"
 "beinhaltet %d ungenaue Übersetzungen"
 
-#: src/parse.c:664
+#: src/parse.c:690
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -998,11 +1002,11 @@ msgstr ""
 "%s verändert\n"
 "Wollen Sie trotzdem speichern?"
 
-#: src/parse.c:672
+#: src/parse.c:698
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- unverändert"
 
-#: src/parse.c:753
+#: src/parse.c:780
 #, c-format
 msgid ""
 "File %s\n"
@@ -1011,11 +1015,11 @@ msgstr ""
 "Datei %s\n"
 "wurde geändert. Wollen Sie zur gesicherten Kopie zurückkehren?"
 
-#: src/parse.c:793
+#: src/parse.c:820
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "msgfmt ist auf diesem System leider nicht verfügbar!"
 
-#: src/parse.c:818
+#: src/parse.c:845
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1024,12 +1028,12 @@ msgstr ""
 "Compilierung erfolgreich:\n"
 "%s"
 
-#: src/parse.c:847
+#: src/parse.c:874
 #, c-format
 msgid "You don't have read permissions on file `%s'"
 msgstr "Sie haben keine Leserechte für die Datei '%s'"
 
-#: src/parse.c:866
+#: src/parse.c:893
 #, c-format
 msgid ""
 "You don't have write permissions on file `%s'.\n"
@@ -1245,7 +1249,7 @@ msgstr "Sitzung erfolgreich wiederhergestellt."
 msgid "Views"
 msgstr "Ansichten"
 
-#: src/sidebar.c:255
+#: src/sidebar.c:256
 msgid "No comment available for this message."
 msgstr "Kein Kommentar für diese Meldung verfügbar"
 
