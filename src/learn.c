@@ -96,6 +96,12 @@ static void gtranslator_learn_buffer_learn_function(gpointer date,
 static void gtranslator_learn_buffer_set_umtf_date(void);
 
 /*
+ * Escape the characters in the given string to make learning really
+ *  work with all characters.
+ */
+static gchar *gtranslator_learn_buffer_escape(gchar *str);
+
+/*
  * Internal GtrLearnResources list sort routine.
  */
 static gint gtranslator_learn_buffer_sort_learn_resource(
@@ -191,18 +197,33 @@ static void gtranslator_learn_buffer_free_hash_entry(gpointer key, gpointer valu
  */
 static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer value, gpointer useless)
 {
-	xmlNodePtr new_node;
-	xmlNodePtr value_node;
-	xmlNodePtr translation_node;
-	xmlNodePtr translation_value_node;
+	gchar		*string_to_write;
+	xmlNodePtr 	new_node;
+	xmlNodePtr 	value_node;
+	xmlNodePtr 	translation_node;
+	xmlNodePtr 	translation_value_node;
 
 	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 
-	new_node=xmlNewChild(gtranslator_learn_buffer->current_node, NULL, "message", NULL);
-	value_node=xmlNewChild(new_node, NULL, "value", (gchar *) key);
+	new_node=xmlNewChild(gtranslator_learn_buffer->current_node, NULL, 
+		"message", NULL);
+
+	/*
+	 * Escape the string to the right and necessary form before writing it.
+	 */
+	string_to_write=gtranslator_learn_buffer_escape((gchar *) key);
+	value_node=xmlNewChild(new_node, NULL, "value", string_to_write);
+	GTR_FREE(string_to_write);
 
 	translation_node=xmlNewChild(new_node, NULL, "translation", NULL);
-	translation_value_node=xmlNewChild(translation_node, NULL, "value", (gchar *) value);
+
+	/*
+	 * Again escape the values to be given to the libxml routines.
+	 */
+	string_to_write=gtranslator_learn_buffer_escape((gchar *) value);
+	translation_value_node=xmlNewChild(translation_node, NULL, 
+		"value", string_to_write);
+	GTR_FREE(string_to_write);
 }
 
 /*
@@ -236,7 +257,26 @@ static void gtranslator_learn_buffer_set_umtf_date()
 }
 
 /*
- * A sorting function as helper for the g_list_sort calls on the GtrLearnResources
+ * Escape the necessary characters before writing them to the XML
+ *  document.
+ */
+static gchar *gtranslator_learn_buffer_escape(gchar *str)
+{
+	gchar	*write_string=NULL;
+	
+	g_return_val_if_fail(str!=NULL, NULL);
+
+	/*
+	 * Replace the "&" characters with their XML entity "&amp;".
+	 */
+	write_string=nautilus_str_replace_substring(str,
+		"&", "&amp;");
+
+	return write_string;
+}
+
+/*
+ * A sorting function as helper for the g_list_sort calls the GtrLearnResources'
  *  list in the GtrLearnBuffer.
  */
 static gint gtranslator_learn_buffer_sort_learn_resource(
@@ -262,7 +302,8 @@ static gint gtranslator_learn_buffer_sort_learn_resource(
 /*
  * Learn the given data entry (a GtrMsg) automatically.
  */
-static void gtranslator_learn_buffer_learn_function(gpointer data, gpointer useless)
+static void gtranslator_learn_buffer_learn_function(gpointer data, 
+	gpointer useless)
 {
 	GtrMsg 	*message=GTR_MSG(data);
 	
@@ -311,8 +352,8 @@ void gtranslator_learn_init()
 		node=gtranslator_learn_buffer->current_node;
 
 		/*
-		 * Parse the message entry via gtranslator_learn_buffer_hash_from_current_node
-		 *  function.
+		 * Parse the message entry via the
+		 *  "gtranslator_learn_buffer_hash_from_current_node" function.
 		 */
 		while(node!=NULL)
 		{
@@ -436,7 +477,8 @@ void gtranslator_learn_shutdown()
 	gtranslator_learn_buffer->doc=xmlNewDoc("1.0");
 
 	/*
-	 * Set the encoding of the XML file to get a cleanly-structured XML document.
+	 * Set the encoding of the XML file to get a cleanly-structured 
+	 *  and well-formed XML document.
 	 */
 	if(mime)
 	{
@@ -444,9 +486,10 @@ void gtranslator_learn_shutdown()
 	}
 
 	/*
-	 * Set up the main <umtf> document root node and set it's version attribute.
+	 * Set up the main <umtf> document root node.
 	 */
-	root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, "umtf", NULL);
+	root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, 
+		"umtf", NULL);
 	xmlSetProp(root_node, "version", "0.6");
 	xmlDocSetRootElement(gtranslator_learn_buffer->doc, root_node);
 
@@ -474,12 +517,13 @@ void gtranslator_learn_shutdown()
 	g_return_if_fail(gtranslator_learn_buffer->serial_date!=NULL);
 
 	/*
-	 * Build the serial string -- the serial number must be in gchar form to be
-	 *  written by xmlSetProp.
+	 * Build the serial string -- the serial number must be in gchar form 
+	 *  to be written by xmlSetProp.
 	 */
 	if(gtranslator_learn_buffer->serial > 1)
 	{
-		serial_string=g_strdup_printf("%i", gtranslator_learn_buffer->serial);
+		serial_string=g_strdup_printf("%i", 
+			gtranslator_learn_buffer->serial);
 	}
 	else
 	{
@@ -664,8 +708,8 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 		gtranslator_learn_buffer->hash, (gconstpointer) search_string);
 
 	/*
-	 * Check if there had been any exact match -- if not try other "matching"
-	 *  methods.
+	 * Check if there had been any exact match -- if not try other 
+	 *  "matching" methods with somehow more intelligent patterns.
 	 */
 	if(found_string)
 	{

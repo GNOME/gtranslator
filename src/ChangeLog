@@ -1,5 +1,9 @@
 2001-08-20  Fatih Demir <kabalak@gtranslator.org>
 
+	* learn.c: Escape the message and translation value strings into the
+		right form before writing them via the libxml functions (fixes
+		 #59205).
+
 	* Makefile.am: Removed the $(GNOMEUI_LIBS) etc. inclusion during the
 		linkage of gtranslator -- the GAL cflags and libs do already
 		 include the GNOME(UI) cflags and libs.
