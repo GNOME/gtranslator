@@ -1479,7 +1479,6 @@ void gtranslator_bookmark_adding_dialog(GtkWidget *widget, gpointer useless)
 	 */
 	if(reply==GTK_RESPONSE_OK)
 	{
-		GtrBookmark	*bmk;
 		gchar		*comment_dialog_contents;
 
 		GtkTextBuffer   *buff;
@@ -1493,9 +1492,7 @@ void gtranslator_bookmark_adding_dialog(GtkWidget *widget, gpointer useless)
 		gtk_text_buffer_get_end_iter(buff, &end);
 		comment_dialog_contents = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
 
-		bmk=gtranslator_bookmark_new_with_comment(comment_dialog_contents);
-		gtranslator_bookmark_add(bmk);
-		gtranslator_bookmark_free(bmk);
+		gtranslator_bookmark_add_direct_with_comment(comment_dialog_contents);
 
 		GTR_FREE(comment_dialog_contents);
 	}

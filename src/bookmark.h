@@ -100,9 +100,10 @@ void gtranslator_bookmark_add(GtrBookmark *bookmark);
 
 /*
  * Adds the current position, po file directly to the IDs list without any
- *  current handling being necessary...
+ *  current handling being necessary... with/without comment.
  */
 void gtranslator_bookmark_add_direct(void);
+void gtranslator_bookmark_add_direct_with_comment(const gchar *comment);
 
 /*
  * Remove the given GtrBookmark from the IDs list -- the result is

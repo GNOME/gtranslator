@@ -405,6 +405,20 @@ void gtranslator_bookmark_add_direct()
 	gtranslator_bookmark_free(bookmark);
 }
 
+void gtranslator_bookmark_add_direct_with_comment(const gchar *comment)
+{
+	GtrBookmark *bookmark=NULL;
+
+	bookmark=gtranslator_bookmark_new();
+	g_return_if_fail(bookmark!=NULL);
+	g_return_if_fail(comment!=NULL);
+
+	gtranslator_bookmark_set_comment(bookmark, comment);
+
+	gtranslator_bookmark_add(GTR_BOOKMARK(bookmark));
+	gtranslator_bookmark_free(bookmark);
+}
+
 /*
  * Remove the given GtrBookmark from our list -- the elements should 
  *  be matching "enough" to apply the removal from the list.
