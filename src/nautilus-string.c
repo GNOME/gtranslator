@@ -62,8 +62,8 @@ nautilus_strcasecmp (const char *string_a, const char *string_b)
 	 * didn't have code that already relies on 'NULL == ""', I
 	 * would change it right now.
 	 */
-	return g_strcasecmp (string_a == NULL ? "" : string_a,
-		             string_b == NULL ? "" : string_b);
+	return g_ascii_strcasecmp (string_a == NULL ? "" : string_a,
+		                   string_b == NULL ? "" : string_b);
 }
 
 int
