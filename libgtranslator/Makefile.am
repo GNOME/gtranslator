@@ -17,6 +17,7 @@ INCLUDES = \
 	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
 
 libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
+	gtranslator-preferences-dialog.c \
 	parse-db.c \
 	handle-db.c \
 	preferences.c \
@@ -33,12 +34,13 @@ configstufflibs = $(GNOME_LIBS)
 endif
 
 libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
-	$(XML_LIBS) $(OAF_LIBS) $(GNOMEUI_LIBS) \
-	$(configstufflibs)
+	$(XML_LIBS) $(OAF_LIBS) -L/usr/X11R6/lib \
+	$(GNOMEUI_LIBS) $(configstufflibs)
 
 libgtranslator_include_dir = $(includedir)/libgtranslator
 
 libgtranslator_include__DATA = parse-db.h \
+	gtranslator-preferences-dialog.h \
 	handle-db.h \
 	preferences.h \
 	stylistics.h \
@@ -46,8 +48,8 @@ libgtranslator_include__DATA = parse-db.h \
 
 gtranslatord_SOURCES = main.c
 
-gtranslatord_LDADD = libgtranslator.la $(IDL_LIBS) $(OAF_LIBS) \
-	$(XML_LIBS)
+gtranslatord_LDADD = libgtranslator.la $(IDL_LIBS) \
+	-L/usr/X11R6/lib $(OAF_LIBS)  $(XML_LIBS)
 
 idl_dir = $(datadir)/idl/gtranslator
 
