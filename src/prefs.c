@@ -691,10 +691,10 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 				       (GTK_COMBO(authors_language)->entry));
 		while (languages[c].name != NULL) {
 			if (!nautilus_strcasecmp(current, _(languages[c].name))) {
-				set_text(lcode, lcode);
-				set_text(mime_type, enc);
+				set_text(lcode, locale);
+				set_text(mime_type, encoding);
 				set_text(encoding, bits);
-				set_text(lg_email, group);
+				set_text(lg_email, group_email);
 				break;
 			}
 			c++;
@@ -704,10 +704,10 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 		current =
 		    gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(lcode)->entry));
 		while (languages[c].name != NULL) {
-			if (!nautilus_strcmp(current, languages[c].lcode)) {
-				set_text(mime_type, enc);
+			if (!nautilus_strcmp(current, languages[c].locale)) {
+				set_text(mime_type, encoding);
 				set_text(encoding, bits);
-				set_text(lg_email, group);
+				set_text(lg_email, group_email);
 				break;
 			}
 			c++;

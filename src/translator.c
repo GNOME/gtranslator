@@ -35,14 +35,14 @@ GtrTranslator *gtranslator_translator=NULL;
  * A helper function which reads and sets the values easily and safely.
  */
 static void gtranslator_translator_read_value(gchar **destvalue,
-	gchar	*configpath);
+	gchar *configpath);
 
 /*
  * Reads the envpath for sane values and if it finds something useful,
  *  sets up destvalue.
  */
 static void gtranslator_translator_read_env_value(gchar *envpath,
-	gchar	**destvalue);
+	gchar **destvalue);
 
 /*
  * Returns GtrLanguage values from the preferences.
@@ -53,7 +53,7 @@ static GtrLanguage *gtranslator_translator_read_language(void);
  * Set the values safely from the given configpath's.
  */
 static void gtranslator_translator_read_value(gchar **destvalue,
-        gchar	*configpath)
+        gchar *configpath)
 {
 	if(!configpath)
 	{
@@ -86,7 +86,7 @@ static void gtranslator_translator_read_value(gchar **destvalue,
  * Determine environmental values from the given envpath.
  */
 static void gtranslator_translator_read_env_value(gchar *envpath,
-	gchar	**destvalue)
+	gchar **destvalue)
 {
 	gchar	*value=NULL;
 
@@ -118,11 +118,11 @@ static GtrLanguage *gtranslator_translator_read_language()
 	 */
 	gtranslator_translator_read_value(&language->name,
 		"language/name");
-	gtranslator_translator_read_value(&language->lcode,
+	gtranslator_translator_read_value(&language->locale,
 		"language/language_code");
-	gtranslator_translator_read_value(&language->group,
+	gtranslator_translator_read_value(&language->group_email,
 		"language/team_email");
-	gtranslator_translator_read_value(&language->enc,
+	gtranslator_translator_read_value(&language->encoding,
 		"language/mime_type");
 	gtranslator_translator_read_value(&language->bits,
 		"language/encoding");
@@ -264,11 +264,11 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 				 *  the languages list here.
 				 */
 				new_translator->language->name=g_strdup(languages[i].name);
-				new_translator->language->lcode=g_strdup(languages[i].lcode);
-				new_translator->language->enc=g_strdup(languages[i].enc);
+				new_translator->language->locale=g_strdup(languages[i].locale);
+				new_translator->language->encoding=g_strdup(languages[i].encoding);
 				new_translator->language->bits=g_strdup(languages[i].bits);
 				
-				GTR_STRDUP(new_translator->language->group, languages[i].group);
+				GTR_STRDUP(new_translator->language->group_email, languages[i].group_email);
 				
 				break;
 			}
@@ -315,7 +315,7 @@ gchar *gtranslator_translator_get_translator_string(GtrTranslator *translator)
  *  safely from the given arguments.
  */
 void gtranslator_translator_set_translator(GtrTranslator *translator,
-	gchar	*name, gchar	*email)
+	gchar *name, gchar *email)
 {
 	g_return_if_fail(translator!=NULL);
 	g_return_if_fail(name!=NULL);
@@ -344,6 +344,64 @@ void gtranslator_translator_set_translator(GtrTranslator *translator,
 }
 
 /*
+ * Update the language values to match the values for the given "language_name"
+ *  (the special "custom_group_email" string is available as the user can edit
+ *    the group EMail address to a custom value; this is honored here; can be
+ *     safely given as NULL).
+ */
+void gtranslator_translator_set_language(GtrTranslator *translator, 
+	gchar *language_name, gchar *custom_group_email)
+{
+	gint	z=0;
+	
+	g_return_if_fail(translator!=NULL);
+	g_return_if_fail(GTR_TRANSLATOR(translator)->language!=NULL);
+	g_return_if_fail(language_name!=NULL);
+
+	/*
+	 * Cruise through the list, finding the corresponding language entry
+	 *  (hopefully).
+	 */
+	while(languages[z].name!=NULL)
+	{
+		if(!nautilus_strcasecmp(languages[z].name, language_name))
+		{
+			/*
+			 * As we've found the values to update, free the old
+			 *  values.
+			 */
+			GTR_FREE(translator->language->name);
+			GTR_FREE(translator->language->locale);
+			GTR_FREE(translator->language->encoding);
+			GTR_FREE(translator->language->bits);
+			GTR_FREE(translator->language->group_email);
+
+			/*
+			 * And assign now the new (found in the list) values.
+			 */
+			translator->language->name=g_strdup(languages[z].name);
+			translator->language->locale=g_strdup(languages[z].locale);
+			translator->language->encoding=g_strdup(languages[z].encoding);
+			translator->language->bits=g_strdup(languages[z].bits);
+
+			/*
+			 * If we did get a custom EMail address for the 
+			 *  translator, use it here.
+			 */
+			if(custom_group_email)
+			{
+				translator->language->group_email=g_strdup(custom_group_email);
+			}
+			else
+			{
+				GTR_STRDUP(translator->language->group_email, languages[z].group_email);
+			}
+				break;
+		}
+	}
+}
+
+/*
  * Save the GtrTranslator's data/information into our preferences.
  */
 void gtranslator_translator_save(GtrTranslator *translator)
@@ -366,11 +424,11 @@ void gtranslator_translator_save(GtrTranslator *translator)
 	gtranslator_config_set_string("language/name", 
 		translator->language->name);
 	gtranslator_config_set_string("language/language_code", 
-		translator->language->lcode);
+		translator->language->locale);
 	gtranslator_config_set_string("language/team_email", 
-		translator->language->group);
+		translator->language->group_email);
 	gtranslator_config_set_string("language/mime_type", 
-		translator->language->enc);
+		translator->language->encoding);
 	gtranslator_config_set_string("language/encoding", 
 		translator->language->bits);
 
@@ -399,9 +457,9 @@ void gtranslator_translator_free(GtrTranslator *translator)
 		GTR_FREE(translator->query_domain);
 
 		GTR_FREE(translator->language->name);
-		GTR_FREE(translator->language->lcode);
-		GTR_FREE(translator->language->enc);
-		GTR_FREE(translator->language->group);
+		GTR_FREE(translator->language->locale);
+		GTR_FREE(translator->language->encoding);
+		GTR_FREE(translator->language->group_email);
 		GTR_FREE(translator->language->bits);
 		GTR_FREE(translator->language);
 

@@ -604,9 +604,9 @@ static void language_changed(GtkWidget * widget, gpointer useless)
 #define set_text(widget,field) \
 	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(widget)->entry),\
 			   languages[c].field)
-			set_text(charset_combo, enc);
+			set_text(charset_combo, encoding);
 			set_text(enc_combo, bits);
-			set_text(lg_combo, group);
+			set_text(lg_combo, group_email);
 #undef set_text
 			break;
 		}

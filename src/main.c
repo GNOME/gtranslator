@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 		g_print("\n\n\t");
 		g_print(_("Version and build date:"));
 		NICE_PRINT(BUILD_STRING);
-		g_print(_("Build-Glib/Gtk+/Gnome versions:"));
+		g_print(_("Build GLib/Gtk+/GNOME versions:"));
 		NICE_PRINT(BUILD_VERSIONS);
 		g_print(_("Backends directory:"));
 		NICE_PRINT(BACKENDS_DIR);
@@ -191,7 +191,7 @@ int main(int argc, char *argv[])
 		 */
 		if(g_module_supported()==FALSE)
 		{
-			g_warning(_("Unfortunately your GModule implementation doesn't support loading dynamic modules!"));
+			g_warning(_("GModule implementation doesn't support loading dynamic modules!"));
 			backends=NULL;
 		}
 		else
@@ -205,7 +205,6 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		g_print(_("gtranslator won't load any backend module...\n"));
 		backends=NULL;
 	}
 

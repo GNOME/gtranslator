@@ -1,3 +1,22 @@
+2001-08-30  Fatih Demir <kabalak@gtranslator.org>
+
+	* messages-table.c: Sticky messages are automatically also translated
+		messages -- honor this in the message status updating
+		 "gtranslator_messages_table_update_message_status" function.
+
+	* main.c: 2 small typo fixes (taken over from Mike's en_GB.po .-)) and
+		removed the "gtranslator won't load any backends" message --
+		 as we don't get any module loading status messages, this 
+		  should be quite clear to the user.
+
+	* header_stuff.c, prefs.c, translator.c & utils.c: Reflect the member
+		name changes of the GtrLanguage structure in <languages.h>.
+
+	* languages.h: Renamed structure members for more clarity.
+
+	* translator.c/.h: Added "gtranslator_translator_set_language" method
+		for setting/changing the GtrTranslator's language values.
+
 2001-08-29  Fatih Demir <kabalak@gtranslator.org>
 
 	* header_stuff.c: Eh, corrected a long outstanding and crazy bug in

@@ -28,6 +28,7 @@
  * The language structure with all the essential data for gtranslator:
  */
 typedef struct {
+
 	/*
 	 * 1 - The name of the language (e.g. "Turkish").
 	 */
@@ -36,17 +37,17 @@ typedef struct {
 	/*
 	 * 2 - The language-code (e.g. "tr").
 	 */
-	gchar *lcode;
+	gchar *locale;
 	
 	/*
 	 * 3 - The encoding mostly used for the language (e.g. "iso-8859-9").
 	 */
-	gchar *enc;
+	gchar *encoding;
 	
 	/*
 	 * 4 - The group's EMail list (e.g. "gnome-turk@gnome.org").
 	 */
-	gchar *group;
+	gchar *group_email;
 	
 	/*
 	 * 5 - The transfer bit count for the language (e.g. "8bit").

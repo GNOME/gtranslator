@@ -762,12 +762,10 @@ void gtranslator_messages_table_update_message_status(GtrMsg *message)
 			new_node=e_tree_memory_node_insert(tree_memory, unknown_node,
 			0, message);
 			break;
+		case GTR_MSG_STATUS_STICK:
 		case GTR_MSG_STATUS_TRANSLATED:
 			new_node=e_tree_memory_node_insert(tree_memory, translated_node,
 			0, message);
-			break;
-		case GTR_MSG_STATUS_STICK:
-			new_node=NULL;
 			break;
 		case GTR_MSG_STATUS_FUZZY:
 		default:

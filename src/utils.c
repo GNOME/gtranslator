@@ -209,16 +209,16 @@ gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_co
 	/*
 	 * Cruise through the list and return the matching language entries' name.
 	 */
-	for(i=0; languages[i].lcode!=NULL; i++)
+	for(i=0; languages[i].locale!=NULL; i++)
 	{
 		/*
 		 * First check for full equality, then for a 2 char-prefix equality.
 		 */
-		if(!nautilus_strcasecmp(languages[i].lcode, locale_code))
+		if(!nautilus_strcasecmp(languages[i].locale, locale_code))
 		{
 			return _(languages[i].name);
 		}
-		else if(!g_strncasecmp(languages[i].lcode, locale_code, 2))
+		else if(!g_strncasecmp(languages[i].locale, locale_code, 2))
 		{
 			return _(languages[i].name);
 		}
@@ -247,19 +247,19 @@ void gtranslator_utils_set_language_values_by_language(const gchar *language)
 		{
 			gtranslator_config_init();
 			gtranslator_config_set_string("language/name", languages[i].name);
-			gtranslator_config_set_string("language/language_code", languages[i].lcode);
+			gtranslator_config_set_string("language/language_code", languages[i].locale);
 			
 			/*
 			 * Unfortunately not all languages in our languages list have
 			 *  got a group EMail address so that we need to be safety-first checking
 			 *   for a group EMail address before writing it into the prefs.
 			 */
-			if(languages[i].group)
+			if(languages[i].group_email)
 			{
-				gtranslator_config_set_string("language/team_email", languages[i].group);
+				gtranslator_config_set_string("language/team_email", languages[i].group_email);
 			}
 			
-			gtranslator_config_set_string("language/mime_type", languages[i].enc);
+			gtranslator_config_set_string("language/mime_type", languages[i].encoding);
 			gtranslator_config_set_string("language/encoding", languages[i].bits);
 			gtranslator_config_close();
 
@@ -705,7 +705,7 @@ gchar *gtranslator_utils_get_locale_name(void)
 			   !nautilus_strcasecmp(_(languages[c].name),
 					po->header->language))
 			{
-				return languages[c].lcode;
+				return languages[c].locale;
 			}
 		}
 
@@ -731,7 +731,7 @@ gchar *gtranslator_utils_get_locale_charset(void)
 			if(!nautilus_strcmp(languages[c].name, po->header->language) ||
 				!nautilus_strcmp(_(languages[c].name), po->header->language))
 			{
-				return g_strdup(languages[c].enc);
+				return g_strdup(languages[c].encoding);
 			}
 		}
 
@@ -759,19 +759,19 @@ void gtranslator_utils_language_lists_create(void)
 				   (gpointer) _(languages[c].name));
 		lcodes_list =
 		    g_list_prepend(lcodes_list,
-				   (gpointer) languages[c].lcode);
+				   (gpointer) languages[c].locale);
 		if (g_list_find_custom
-		    (encodings_list, (gpointer) languages[c].enc,
+		    (encodings_list, (gpointer) languages[c].encoding,
 		     (GCompareFunc) strcmp) == NULL)
 			encodings_list =
 			    g_list_prepend(encodings_list,
-					   (gpointer) languages[c].enc);
+					   (gpointer) languages[c].encoding);
 		if (g_list_find_custom
-		    (group_emails_list, (gpointer) languages[c].group,
+		    (group_emails_list, (gpointer) languages[c].group_email,
 		     (GCompareFunc) strcmp) == NULL)
 			group_emails_list =
 			    g_list_prepend(group_emails_list,
-					   (gpointer) languages[c].group);
+					   (gpointer) languages[c].group_email);
 		if (g_list_find_custom
 		    (bits_list, (gpointer) languages[c].bits,
 		     (GCompareFunc) strcmp) == NULL)
