@@ -137,11 +137,15 @@ static GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	if(pixmap_filename)
 	{
 		icon=gdk_pixbuf_new_from_file(pixmap_filename);
+		/*
+		 * Ref the icon and return it for our shortcut.
+		 */ 
+		gdk_pixbuf_ref(icon);
+		
+		return icon;
 	}
-	
-	/*
-	 * Ref the icon and return it for our shortcut.
-	 */ 
-	gdk_pixbuf_ref(icon);
-	return icon;
+	else
+	{
+		return NULL;
+	}
 }
