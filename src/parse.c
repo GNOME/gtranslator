@@ -156,6 +156,9 @@ void parse(gchar *po)
 				mistr++;
 			}
 			(gchar *)msg->msgstr=(gchar *)g_strdup(aq);
+			/**
+			* Check the status...
+			**/
 			if(!g_strcasecmp(((gchar *)msg->msgstr),"\"\""))
 			{
 				(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_UNTRANSLATED;

@@ -720,6 +720,6 @@ void enable_buttons()
         gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[1].widget),TRUE);
         gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[3].widget),TRUE);
         gtk_widget_set_sensitive(GTK_WIDGET(the_messages_menu[4].widget),TRUE);
-	gtk_widget_set_sensitive(GTK_WIDGET(the_edit_menu[8].widget),TRUE)
+	gtk_widget_set_sensitive(GTK_WIDGET(the_edit_menu[8].widget),TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(the_edit_menu[10].widget),TRUE);
 }

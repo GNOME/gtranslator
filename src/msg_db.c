@@ -53,13 +53,12 @@ int init_msg_db()
 	msg_db_inited=TRUE;
 	/**
 	* Get every message from the msg_db as a new member 
-	* to the linked list while reading the file ; 
+	*  to the linked list while reading the file ; 
   	*
-	* 1) Allocate the linked lists
+	* 1) Allocate the linked list
 	*
 	**/
 	msg_list=g_list_alloc();
-	cur_list=g_list_alloc();
 	while(
 	(fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL)
 	)
@@ -165,6 +164,9 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 
 gchar *get_from_msg_db(const gchar *get_similar)
 {
+	/**
+	* DO always check if we've got an inited messages db...
+	**/
 	if(msg_db_inited!=TRUE)
 	{
 		 /**
@@ -189,6 +191,9 @@ gchar *get_from_msg_db(const gchar *get_similar)
 	}
 	else
 	{
+		/**
+		* Allocate another list for the query results.
+		**/
 		/**
 		* Go to the beginning of the file
 		**/
@@ -215,6 +220,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 						emp[i]=msg_messages[emp_i];
 						emp_i++;
 					}
+					
 					return (gchar *)emp;
 				}
 			}
