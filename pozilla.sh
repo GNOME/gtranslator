@@ -60,12 +60,13 @@ for app in msgfmt msgmerge make grep sed awk mutt
 	echo ""
 	echo "This utility is extremely useful but you'd know what you can do"
 	echo " with pozilla, so please be aware that pozilla sends emails to"
-	echo "  the net automatically for it's meant purpose"
+	echo "  the net automatically for it's meant purpose."
 	echo ""
 	echo "You'd first read the manual page for pozilla.sh to get an overview"
 	echo " of pozilla.sh -- call \"man pozilla.sh\" for this purpose."
 	echo ""
 	echo "---------------------------------------------------------------"
+	
 	read -p "Are you sure to use pozilla now? [y/N] " confirmation
 
 	#
@@ -76,7 +77,7 @@ for app in msgfmt msgmerge make grep sed awk mutt
 		echo "---------------------------------------------------------------"
 		echo "!ERROR¡ Confirmation not succeeded."
 		echo "---------------------------------------------------------------"
-		exit 1
+			exit 1
 	fi
 	
 	mkdir -p $CONFIG_DIR
