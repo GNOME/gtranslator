@@ -862,11 +862,28 @@ Would you like to insert it into the translation?"),
 				 *  persistence.
 				 */
 				gtranslator_config_init();
-				gtranslator_config_set_int("query/last_match_message",
-					g_list_position(po->messages, po->current));
-				gtranslator_config_set_string("query/last_match_domain", result->domain);
-				gtranslator_config_set_string("query/last_match_message", query->message);
-				gtranslator_config_set_string("query/last_match_translation", result->message);
+				
+				gtranslator_config_set_string(
+					"query/last_match_filename",
+					po->filename);
+				
+				gtranslator_config_set_int(
+					"query/last_match_message_no",
+					g_list_position(po->messages, 
+						po->current));
+				
+				gtranslator_config_set_string(
+					"query/last_match_domain", 
+					result->domain);
+				
+				gtranslator_config_set_string(
+					"query/last_match_message", 
+					query->message);
+				
+				gtranslator_config_set_string(
+					"query/last_match_translation", 
+					result->message);
+				
 				gtranslator_config_close();
 
 				gtranslator_free_query(&query);
