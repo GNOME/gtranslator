@@ -165,7 +165,7 @@ void gtranslator_learn_shutdown()
 	{
 		counter++;
 		
-		fprintf(l_file, "%s", (gchar *)learn_buffer->data);
+		fprintf(l_file, "%s\n", (gchar *)learn_buffer->data);
 
 		g_free(learn_buffer->data);
 		learn_buffer=learn_buffer->next;

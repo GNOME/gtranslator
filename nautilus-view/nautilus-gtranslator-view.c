@@ -271,8 +271,6 @@ nautilus_gtranslator_view_core_load_location (NautilusGtranslatorView *view,
 		htmlpage->str, htmlpage->len);
 
 	g_string_free(htmlpage, FALSE);
-
-	gtk_widget_show(GTK_WIDGET(GTK_TABLE(view->details->html_wonderland)));
 }
 
 static void

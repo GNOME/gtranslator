@@ -272,7 +272,7 @@ dnl -------------------------------------------------------------------
 if test "%$build_nv" = "%yes" ; then
 	AC_MSG_CHECKING([for GtkHTML])
 	
-	if test `gnome-config --libs gtkhtml` 2>&1 >/dev/null ; then
+	if gnome-config --libs gtkhtml 2>&1 >/dev/null ; then
 		AC_MSG_RESULT([found])
 		
 		NAUTILUS_CFLAGS="`gnome-config --cflags oaf vfs bonobo bonobox gtkhtml` \
