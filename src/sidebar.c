@@ -241,11 +241,12 @@ void show_comment(GtkWidget *text)
 		gchar *newtext=GTR_MSG(po->current->data)->comment;
 		
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-	
-		newtext=prepare_comment_for_view(newtext);
-		
-		gtranslator_syntax_insert_text(text, newtext);
-		g_free(newtext);
+
+		/*
+		 * Show the comment as pure text without any syntax 
+		 *  highlighting.
+		 */
+		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, newtext, -1);
 	}
 	else
 	{
