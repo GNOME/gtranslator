@@ -59,8 +59,6 @@
 #include <libgnomeui/gnome-messagebox.h>
 #include <libgnomeui/gnome-uidefs.h>
 
-//#include <gal/e-paned/e-paned.h>
-
 /* Global variables */
 GtrPo *po;
 gboolean file_opened;

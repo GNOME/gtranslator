@@ -32,8 +32,6 @@
 
 #include <gtk/gtklabel.h>
 
-//#include <gal/e-paned/e-paned.h>
-
 /*
  * A small new structure table to make the comment type recognition
  *  a bit easier and more convenient.

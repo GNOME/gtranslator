@@ -38,8 +38,6 @@
 
 #include <gdk/gdkkeysyms.h>
 
-//#include <gal/widgets/e-unicode.h>
-
 /*
  * We're now defining the highlighting colors once here at the top via macros.
  */
@@ -126,8 +124,7 @@ static GHashTable *hash_table=NULL;
 
 
 /*
- * Create the new ETable with all the stuff needed for
- *  gal/gtranslator.
+ * Create the new messages table
  */
 GtkWidget *gtranslator_messages_table_new()
 {

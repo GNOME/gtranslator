@@ -64,12 +64,6 @@
 
 #include <libgnomevfs/gnome-vfs-init.h>
 
-//#include <gal/e-paned/e-hpaned.h>
-//#include <gal/e-paned/e-vpaned.h>
-
-//#include <gal/e-table/e-table.h>
-//#include <gal/e-table/e-table-scrolled.h>
-
 /*
  * Global external variables
  */

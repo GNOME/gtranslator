@@ -34,9 +34,6 @@
 #include <libxml/xmlmemory.h>
 #include <libgnome/gnome-i18n.h>
 
-//#include "gal/util/e-i18n.h"
-//#include "gal/util/e-util.h"
-
 xmlNode *
 e_xml_get_child_by_name (const xmlNode *parent, const xmlChar *child_name)
 {
