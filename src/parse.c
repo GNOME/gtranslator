@@ -300,6 +300,12 @@ gboolean gtranslator_parse_core(void)
 		lines++;
 		
 		/*
+		 * Warn if not valid UTF-8
+		 */
+		if (!g_utf8_validate(line, strlen(line), NULL))
+			g_warning("%s:%d: line contains invalid UTF-8", po->filename, lines);
+
+		/*
 		 * If it's a comment, no matter of what kind. It belongs to
 		 * the message pair below
 		 */
