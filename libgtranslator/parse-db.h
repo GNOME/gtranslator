@@ -17,14 +17,25 @@
 #ifndef PARSE_DB_H
 #define PARSE_DB_H 1
 
-#include <libxml/tree.h>
-#include <libxml/parser.h>
-#include <libxml/xmlmemory.h>
+#include <glib.h>
+#include <string.h>
+
+/**
+* The libxml includes.
+**/
+#include <tree.h>
+#include <parser.h>
+#include <xmlmemory.h>
+
+/**
+* The doc-pointer.
+**/
+static xmlDocPtr xmldoc;
 
 /**
 * Loads the message db base for the specified language.
 **/
-static void parse_db_for_lang(char *language_code);
+void parse_db_for_lang(gchar *language_code);
 
 /**
 * Simply reloads the current message db.
