@@ -26,6 +26,34 @@
 #include <gtk/gtklabel.h>
 
 /*
+ * A small new structure table to make the comment type recognition
+ *  a bit easier and more convenient.
+ */
+typedef struct
+{
+	gchar		*prefix;
+	GtrCommentType	type;
+} GtrCommentPrefixTypeGroup;
+
+/*
+ * The static table with the GtrCommentPrefixTypeGroup definitions.
+ */
+static GtrCommentPrefixTypeGroup GtrPrefixTypes[] =
+{
+	{ "#~", OBSOLETE },
+	{ "#:", REFERENCE_COMMENT },
+	{ "#.", SOURCE_COMMENT },
+	{ "# ", TRANSLATOR_COMMENT },
+	{ "#, fuzzy, c-format", FUZZY_C_FORMAT_COMMENT },
+	{ "#, fuzzy", FUZZY_COMMENT },
+	{ "#, c-format", C_FORMAT_COMMENT },
+	{ "#,", FLAG_COMMENT },
+	{ "#-", INTERNAL_COMMENT },
+	{ "#>", INTERNAL_COMMENT },
+	{ NULL, NO_COMMENT }
+};
+
+/*
  * Creates and returns a new GtrComment -- the comment type is automatically
  *  determined.
  */
@@ -47,65 +75,42 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	}
 	else
 	{
-		if(nautilus_istr_has_prefix(comment->comment, "#~"))
-		{
-			comment->type=OBSOLETE;
-			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#~", "");
-		}
-		else if(nautilus_istr_has_prefix(comment->comment, "#:"))
-		{
-			comment->type=REFERENCE_COMMENT;
-			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#:", "");
-		}
-		else if(nautilus_istr_has_prefix(comment->comment, "#."))
-		{
-			comment->type=SOURCE_COMMENT;
-			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#.", "");
-		}
-		else if(nautilus_istr_has_prefix(comment->comment, "# "))
-		{
-			comment->type=TRANSLATOR_COMMENT;
-			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "# ", "");
-		}
-		else if(nautilus_istr_has_prefix(comment->comment, "#,"))
+		gint	c=0;
+		
+		/*
+		 * Check for any match in our prefix/types table.
+		 */
+		while(GtrPrefixTypes[c].prefix!=NULL)
 		{
 			/*
-			 * Determine all the nice flag-types from the po files.
+			 * If the prefix could be "matched", get type and pure_comment out of
+			 *  the full comment text.
 			 */
-			if(nautilus_istr_has_prefix(comment->comment, "#, c-format"))
+			if(nautilus_istr_has_prefix(comment->comment, GtrPrefixTypes[c].prefix))
 			{
-				comment->type=C_FORMAT_COMMENT;
-				comment->pure_comment=nautilus_str_replace_substring(
-					comment->comment, "#, c-format", "");
+				gint 	i=0;
+				
+				comment->type=GtrPrefixTypes[c].type;
+
+				/*
+				 * Strip the matched prefix out of the string.
+				 */
+				comment->pure_comment=nautilus_str_replace_substring(comment->comment,
+					GtrPrefixTypes[c].prefix, "");
+
+				/*
+				 * Now do also strip all the other prefixes out of the pure_comment.
+				 */
+				while(GtrPrefixTypes[i].prefix!=NULL)
+				{
+					comment->pure_comment=nautilus_str_replace_substring(comment->pure_comment,
+						GtrPrefixTypes[i].prefix, "");
+					
+					i++;
+				}
 			}
-			else if(nautilus_istr_has_prefix(comment->comment, "#, fuzzy, c-format"))
-			{
-				comment->type=FUZZY_C_FORMAT_COMMENT;
-				comment->pure_comment=nautilus_str_replace_substring(
-					comment->comment, "#, fuzzy, c-format", "");
-			}
-			else if(nautilus_istr_has_prefix(comment->comment, "#, fuzzy"))
-			{
-				comment->type=FUZZY_COMMENT;
-				comment->pure_comment=nautilus_str_replace_substring(
-					comment->comment,  "#, fuzzy", "");
-			}
-			else
-			{
-				comment->type=FLAG_COMMENT;
-				comment->pure_comment=nautilus_str_replace_substring(
-					comment->comment, "#,", "");
-			}
-		}
-		else if(nautilus_istr_has_prefix(comment->comment, "#-"))
-		{
-			comment->type=INTERNAL_COMMENT;
-			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#-", "");
-		}
-		else
-		{
-			comment->type=NO_COMMENT;
-			comment->pure_comment=nautilus_str_replace_substring(comment->comment, "#", "");
+			
+			c++;
 		}
 	}
 
