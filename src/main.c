@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		g_message(_("gtranslator won't load any backend module..."));
+		g_print(_("gtranslator won't load any backend module...\n"));
 		backends=NULL;
 	}
 
