@@ -1,0 +1,277 @@
+<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN" [
+<!ENTITY version "0.35">
+<!ENTITY docdate "13 February 2001">
+]>
+
+<article id="index">
+<artheader>
+	<title>gtranslator &version; documentation</title>
+
+	<author>
+		<firstname>Fatih</firstname>
+		<surname>Demir</surname>
+			<affiliation>
+				<address>
+					<email>kabalak@gtranslator.org</email>
+				</address>
+			</affiliation>	
+	</author>
+	
+	<copyright>
+		<year>2001</year>
+		<holder>Fatih Demir</holder>
+	</copyright>
+
+<legalnotice id="license">
+      <para>
+		Permission is granted to make and distribute verbatim copies of
+		this manual provided the copyright notice and this permission
+		notice are preserved on all copies.
+	</para>
+	<para>
+		Permission is granted to copy and distribute modified versions of
+		this manual under the conditions for verbatim copying, provided
+		that the entire resulting derived work is distributed under the
+		terms of a permission notice identical to this one.
+	</para>
+	<para>
+		Permission is granted to copy and distribute translations of this
+		manual into another language, under the above conditions for
+		modified versions, except that this permission notice may be
+		stated in a translation approved by the Free Software Foundation.
+	</para>
+</legalnotice>
+
+<releaseinfo>
+	gtranslator documentation version 0.1
+</releaseinfo>
+
+<pubdate>&docdate;</pubdate>
+
+<abstract>
+	<para>
+		<application>gtranslator</application> is a comfortable editor
+		for the gettext po files which are mostly the basis for i18n
+		in GNOME and other desktop environments.
+	</para>
+</abstract>
+
+</artheader>
+
+<sect1 id="introduction">
+	<title>Introduction</title>
+		<para>
+			<application>gtranslator</application> offers you many 
+			comfortable dialogs to edit the po files fields.
+		</para>
+</sect1>
+
+<sect1 id="features">
+	<title>Major features of <application>gtranslator</application></title>
+		<para>
+			gtranslator has got many features which are 
+			<emphasis>useful</emphasis>
+			for editing the gettext po files. The major features are:
+			<itemizedlist>
+				<listitem>
+					<para>Crashless and quick editing of
+					gettext po files</para>
+				</listitem>	
+				<listitem>
+					<para>Very low memory usage (about only
+					<emphasis>800KB</emphasis>)</para>
+				</listitem>
+				<listitem>
+					<para>Navigation inside the fuzzy,
+					untranslated and translated
+					messages</para>
+				</listitem>
+				<listitem>
+					<para>Regular expressions based
+					find/search function</para>
+				</listitem>
+				<listitem>
+					<para>Compile function for testing
+					your po files</para>
+				</listitem>
+				<listitem>
+					<para>Status indication with detailed
+					information at the statusbar and a
+					<emphasis>useful and correct</emphasis>
+					progress bar</para>
+				</listitem>
+				<listitem>
+					<para>Advanced history list with
+					<emphasis>
+						project name and version
+					</emphasis>
+					instead of only showing
+					the filename</para>
+				</listitem>
+				<listitem>
+					<para>Opening of gzip'ed and compiled
+					(.mo/.gmo) gettext po files</para>
+				</listitem>
+				<listitem>
+					<para>Opening of remote po files via
+					GnomeVFS (and http, ftp, nfs and other
+					access routines of GnomeVFS).</para>
+				</listitem>
+				<listitem>
+					<para>Editing with the help of a
+					"special char" instead of only hardly
+					recognizable free spaces</para>
+				</listitem>
+				<listitem>
+					<para>Update function to update the po
+					file with the (if installed)
+					xml-i18n-tools</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+</sect1>
+
+<sect1 id="use-of-gtranslator">
+	<title>Usual use of <application>gtranslator</application></title>
+		<para>
+			<application>gtranslator</application> is normally used
+			to edit gettext po files (and the various metamorhoses of
+			po files like gzip'ed po files and compiled po files).
+		</para>
+		
+		<para>
+			<application>gtranslator</application> allows you to open
+			a po file directly within the command line as a argument
+			like 
+			<emphasis>
+				gtranslator filename
+			</emphasis>
+			or
+			<emphasis>
+				gtranslator http://remotehost/filename
+			</emphasis>
+			or
+			<emphasis>
+				gtranslator ftp://ftphost/filename
+			</emphasis>.	
+		</para>
+
+		<para>
+			After doing your translation work you can save your file
+			<emphasis>but</emphasis> do not forget that gtranslator
+			is for now vamping your currently not needed translations
+			(these are the strings/lines in the po files starting
+			with #~) before you save it.
+</sect1>
+
+<sect1 id="thanks-to-contributors">
+	<title>Thanks to our contributors</title>
+		<para>
+			Glacious support in different fields were done by these
+			persons:
+			<itemizedlist mark="bullet">
+				<listitem>
+					<para>
+					<emphasis>All</emphasis> translators of
+					<application>gtranslator</application>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					The GNOME I18N list
+					<email>gnome-i18n@gnome.org</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Alexandre Hautequest
+					<email>hquest@fesppr.br</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Denis Pleic'
+					<email>dpleic@linux.hr</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Josh Jackson 
+					<email>pturing@mailandnews.com</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Robert Brady
+					<email>robert@suse.co.uk</email>
+					</para>
+				</listitem>	
+				<listitem>
+					<para>
+					Thomas Ziehmer
+					<email>ziehmer@rhrk.uni-kl.de</email>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+</sect1>
+
+<sect1 id="thanks-to-packagers">
+	<title>Thanks to our packagers</title>
+		<para>
+			We would want to thank those persons for
+			providing packages in the corresponding formats
+			of <application>gtranslator</application>.
+			<itemizedlist mark="bullet">
+				<listitem>
+					<para>Josh Jackshon 
+					<email>pturing@mailandnews.com</email>
+					for his Mandrake packages of
+					<application>gtranslator</application>	
+					</para>
+				</listitem>
+				<listitem>
+					<para>Martijn van de Streek
+					<email>martijn@foodfight.org</email>
+					for his Debian packages of
+					<application>gtranslator</application>	
+					</para>
+				</listitem>
+				<listitem>
+					<para>Maxim Sobolev 
+					<email>sobomax@freebsd.org</email>
+					for his FreeBSD ports of
+					<application>gtranslator</application>	
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+</sect1>
+
+<sect1 id="authors">
+	<title>The authors of <application>gtranslator</application></title>
+		<para>
+			We are at the moment only two people, but you can
+			of course join <application>gtranslator</application>
+			development and support us with your efforts and of
+			course also with money ,-)
+			<itemizedlist>
+				<listitem>
+					<para>
+					Fatih Demir, aka. kabalak, 
+					<email>kabalak@gtranslator.org</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Gediminas Paulauskas, aka. menesis, 
+					<email>menesis@gtranslator.org</email>
+					</para>
+				</listitem>
+			</itemizedlist>
+			More information about the authors can be obtained from
+			<ulink url="http://www.gtranslator.org/authors.html"
+			type="http">gtranslator.org's authors section</ulink>.
+		</para>
+</sect1>
+
+</article>
