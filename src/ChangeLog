@@ -1,3 +1,12 @@
+2002-03-17  Fatih Demir <kabalak@gtranslator.org>
+
+	* learn.c: Also fix the po file exporting error like done in the stable
+		branch.
+
+	* runtime-config.c: Take over patch from stable branch: don't use an
+		empty string for middle dot receiption routines, it's already
+		 reserved by gettext for the po file headers.
+
 2002-03-15 Peeter Vois <peeter@gtranslator.org>
 
 	* message.c: the sudden pointer jump in translation text removed 
