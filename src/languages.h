@@ -109,7 +109,7 @@ static lang languages[] = {
 	 "trasno@ceu.fi.udc.es", "8bit"},
 	{
 	 N_("German"), "de", "iso-8859-1",
-	 "de@li.org", "8bit"},
+	 "gnome-de@gnome.org", "8bit"},
 	{
 	 N_("Hungarian"), "hu", "iso-8859-2",
 	 "", "8bit"},
