@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.40\n"
+"Project-Id-Version: gtranslator 0.39\n"
 "POT-Creation-Date: 2001-07-06 08:20+0200\n"
 "PO-Revision-Date: 1999-06-14 01:14+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
@@ -27,6 +27,7 @@ msgid "Current colorscheme: \"%s\" (version %s) by"
 msgstr "Ensembe di coleurs do moumint: «%s» (modeye %s) pa"
 
 #: src/color-schemes.c:156
+#, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Dji n' sai apliker l' ensembe di coleurs «%s»!"
 
@@ -157,7 +158,7 @@ msgstr "Yåk n' a nén stî tot enondant msgfmt:\n"
 
 #: src/dialogs.c:731
 msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- drovî a pårti d' ene hårdéye"
+msgstr "gtranslator -- drovî a pårti d' ene hårdêye"
 
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:732
 #: src/menus.c:276
@@ -166,7 +167,7 @@ msgstr "Drovî"
 
 #: src/dialogs.c:738
 msgid "Enter URI:"
-msgstr "Intrez li hårdeye (URI):"
+msgstr "Intrez li hårdêye (URI):"
 
 #.
 #. * Show an error dialog but don't close down the
@@ -174,11 +175,11 @@ msgstr "Intrez li hårdeye (URI):"
 #.
 #: src/dialogs.c:780
 msgid "No URI given!"
-msgstr "Nole hårdéye di dnéye!"
+msgstr "Nole hårdêye di dnêye!"
 
 #: src/dialogs.c:795
 msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr ""
+msgstr "Nou protocole sopoirté pol hårdêye k' a stî dnêye (eg: «ftp://...»)!"
 
 #: src/dialogs.c:826
 #, c-format
@@ -188,6 +189,10 @@ msgid ""
 "Possibly it contains hard pieces of work?!\n"
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
+"Drovî l' fitchî di rapexhaedje po «%s»?\n"
+"Il a stî schapé pa gtranslator divant ki gtranslator fuxhe cloyou.\n"
+"Il a mutwè do consecant ovraedje ki pout esse rapexhî?!\n"
+"Si vos djhoz «Neni» ci fitchî srè disfacé."
 
 #: src/dialogs.c:851
 #, c-format
@@ -196,18 +201,18 @@ msgstr "Rapexhant «%s»..."
 
 #: src/dialogs.c:896
 msgid "Couldn't get list of gettext domains!"
-msgstr "Dji n' a savou aveur li djîvéye des dominnes gettext!"
+msgstr "Dji n' a savou aveur li djîvêye des dominnes gettext!"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
 #: src/dialogs.c:903
 msgid "Here you can query existing gettext domains for a translation."
-msgstr ""
+msgstr "Chal vos ploz cweri les dominnes gettext k' i gn a po on ratoûrnaedje."
 
 #: src/dialogs.c:906
 msgid "gtranslator -- query existing gettext domains"
-msgstr ""
+msgstr "gtranslator -- cweri les dominne gettext k' i gn a"
 
 #: src/dialogs.c:907 src/menus.c:366
 msgid "Query"
@@ -223,11 +228,11 @@ msgstr "Dominne wice ki les ratoûrnaedjes sont cwerîs:"
 
 #: src/dialogs.c:972
 msgid "No query string given!"
-msgstr "Nole tchinne di dnéye pol cweraedje!"
+msgstr "Nole tchinne di dnêye pol cweraedje!"
 
 #: src/dialogs.c:1006
 msgid "Couldn't find any result for the query!"
-msgstr ""
+msgstr "Dji n' savou trover nou reszultat pol cweriaedje!"
 
 #: src/dialogs.c:1019
 #, c-format
@@ -235,6 +240,8 @@ msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
+"Dj' a trové «%s» come ratoûrnaedje di «%s» èl dominne «%s».\n"
+"El volez ve sititchî èl ratoûrnaedje do moumint?"
 
 #.
 #. * Translators: This means that the queried string
@@ -242,13 +249,15 @@ msgstr ""
 #.
 #: src/dialogs.c:1109
 msgid "Query's result translation is already there!"
-msgstr ""
+msgstr "Li tchinne pol cweriaedje est ddja ratoûrnêye chal!"
 
 #: src/dialogs.c:1131
 msgid ""
 "Should gtranslator accomplish all missing strings (if possible)\n"
 "from your default query domain?"
 msgstr ""
+"Est-ce ki gtranslator doet sayî di trover totes les tchinnes ki mankèt\n"
+"(si c' est possibe) foû di vosse prémetou dominne?"
 
 #: src/find.c:211
 msgid "Please enter a search string"
@@ -266,7 +275,7 @@ msgstr ""
 #: src/gui.c:475
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ I resse %i intréyes «fuzzy» ]"
+msgstr "%s [ I resse %i intrêyes «fuzzy» ]"
 
 #: src/gui.c:475 src/gui.c:479 src/menus.c:348
 msgid "Fuzzy"
@@ -275,7 +284,7 @@ msgstr "Fuzzy"
 #: src/gui.c:479
 #, c-format
 msgid "%s [ No fuzzy left ]"
-msgstr "%s [ Pus nole intréye «fuzzy» ]"
+msgstr "%s [ Pus nole intrêye «fuzzy» ]"
 
 #: src/gui.c:486
 msgid "Stick"
@@ -325,7 +334,7 @@ msgstr "No do prodjet:"
 
 #: src/header_stuff.c:471
 msgid "Project version:"
-msgstr "Modéye do prodjet:"
+msgstr "Modêye do prodjet:"
 
 #: src/header_stuff.c:474
 msgid "Pot file creation date:"
@@ -337,11 +346,11 @@ msgstr "Date do ramîdraedje do fitchî .po:"
 
 #: src/header_stuff.c:486
 msgid "Generator:"
-msgstr ""
+msgstr "Djenerateu:"
 
 #: src/header_stuff.c:496
 msgid "Use my options to fill the following entries."
-msgstr "Eployî les tchûzes da minne po rimpli les intréyes shûvantes."
+msgstr "Eployî les tchûzes da minne po rimpli les intrêyes shûvantes."
 
 #: src/header_stuff.c:509
 msgid "Translator's name:"
@@ -419,6 +428,8 @@ msgid ""
 "HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
 "\">gtranslator</a> version %s."
 msgstr ""
+"Fitchî «%s» metou è cogne HTML pa <a href=\"http://www.gtranslator.org"
+"\">gtranslator</a> (modêye %s)."
 
 #: src/languages.h:64
 msgid "Afrikaans"
@@ -430,7 +441,7 @@ msgstr "Aråbe"
 
 #: src/languages.h:72
 msgid "Azerbaijani Turkish"
-msgstr ""
+msgstr "Azerbaydjanès"
 
 #: src/languages.h:76
 msgid "Basque"
@@ -490,7 +501,7 @@ msgstr "Inglès/USA"
 
 #: src/languages.h:136
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 #: src/languages.h:140
 msgid "Estonian"
@@ -558,7 +569,7 @@ msgstr ""
 
 #: src/languages.h:204
 msgid "Maltese"
-msgstr ""
+msgstr "Maltès"
 
 #: src/languages.h:208
 msgid "Norwegian/Bokmaal"
@@ -695,7 +706,7 @@ msgstr "gtranslator informåcions pol copilaedje/specs:"
 
 #: src/main.c:163
 msgid "Version and build date:"
-msgstr "Modéye eyèt date di copilaedje:"
+msgstr "Modêye eyèt date di copilaedje:"
 
 #: src/main.c:165
 msgid "Build-Glib/Gtk+/Gnome versions:"
@@ -731,6 +742,8 @@ msgid ""
 "Unfortunately your GModule implementation doesn't support loading dynamic "
 "modules!"
 msgstr ""
+"Målureusmint vosse eplemintåcion di GModule ni sopoite nén li tcherdjaedje "
+"dinamike des modules!"
 
 #: src/main.c:213
 msgid "gtranslator won't load any backend module..."
@@ -770,11 +783,11 @@ msgstr "Rimplijhaedje åtomatike des tchinnes vûdes a pårti do prémetou dominne"
 
 #: src/menus.c:81
 msgid "Open from _URI"
-msgstr "Drovî a pårti d' ene _hårdéye"
+msgstr "Drovî a pårti d' ene _hårdêye"
 
 #: src/menus.c:82
 msgid "Open a po file from a given URI"
-msgstr "Drovî on fitchî .po a pårti del dinéye hårdéye (URI)"
+msgstr "Drovî on fitchî .po a pårti del dinêye hårdêye (URI)"
 
 #: src/menus.c:92
 msgid "Recen_t files"
@@ -846,14 +859,12 @@ msgid "View C formats of the message"
 msgstr "Vey les formats C do messaedje"
 
 #: src/menus.c:164
-#, fuzzy
 msgid "_Hotkeys"
-msgstr "Home"
+msgstr "Tape _rascoûrti"
 
 #: src/menus.c:165
-#, fuzzy
 msgid "View hotkeys in the message"
-msgstr "Vey les limerôs èl messaedje"
+msgstr "Vey les tapes rascoûrti èl messaedje"
 
 #: src/menus.c:172
 msgid "_First"
@@ -916,9 +927,8 @@ msgid "_Translated"
 msgstr "_Ratoûrnés"
 
 #: src/menus.c:228
-#, fuzzy
 msgid "Toggle translated status of a message"
-msgstr "Potchî å messaedje nén co ratoûrné shûvant"
+msgstr "Discandjî l' etat ratoûrné ou nén d' on messaedje"
 
 #: src/menus.c:236
 msgid "_Fuzzy"
@@ -926,7 +936,7 @@ msgstr "_Fuzzy"
 
 #: src/menus.c:237
 msgid "Toggle fuzzy status of a message"
-msgstr ""
+msgstr "Discandjî l' etat «fuzzy» ou nén d' on messaedje"
 
 #: src/menus.c:245
 msgid "_Stick"
@@ -978,19 +988,19 @@ msgstr "Tiestîre"
 
 #: src/menus.c:302
 msgid "Undo"
-msgstr ""
+msgstr "Disfé"
 
 #: src/menus.c:303
 msgid "Undo the last performed action"
-msgstr ""
+msgstr "Disfé li dierinne accion"
 
 #: src/menus.c:306
 msgid "Redo"
-msgstr ""
+msgstr "Rifé"
 
 #: src/menus.c:307
 msgid "Redo the last undone action"
-msgstr ""
+msgstr "Rifé li dierinne accion k' a stî disfwaite"
 
 #: src/menus.c:311
 msgid "Options"
@@ -1051,11 +1061,11 @@ msgstr "Dji n' pou scrire li messaedje"
 
 #: src/message.c:98
 msgid "There are no fuzzy messages left."
-msgstr ""
+msgstr "I n' resse nou messaedje «fuzzy»."
 
 #: src/message.c:122
 msgid "All messages seem to be translated."
-msgstr ""
+msgstr "I sonle ki tos les messaedjes seuye ratoûrnés."
 
 #: src/open-differently.c:161
 #, c-format
@@ -1087,6 +1097,8 @@ msgid ""
 "New escaped char found: \\%c\n"
 "Add this to parse.c, line %i."
 msgstr ""
+"Nou caractere d' escape di trové: \\%c\n"
+"Radjouter çouchal è parse.c, al roye %i."
 
 #: src/parse.c:247
 #, c-format
@@ -1095,6 +1107,9 @@ msgid ""
 "at line %d.\n"
 "Please check the file and try again."
 msgstr ""
+"Aroke èl fitchî «%s»\n"
+"al roye %d.\n"
+"Verifyîz l' fitchî èt sayîz co ene feye s' i vs plait."
 
 #: src/parse.c:283
 #, c-format
@@ -1122,6 +1137,10 @@ msgid ""
 "However, such files are generated by program.\n"
 "Your file should be named with *.po extension, most likely %s.po"
 msgstr ""
+"Vos sayîz di schaper l' fitchî avou l' egztension *.pot.\n"
+"Mins ces fitchîs sont fwaits pal programe xgettext.\n"
+"Li fitchî da vosse divreut esse lomé avou l' egztension *.po;\n"
+"probablumint come %s.po"
 
 #: src/parse.c:599
 #, c-format
@@ -1163,7 +1182,7 @@ msgid ""
 "was changed. Do you want to revert to saved copy?"
 msgstr ""
 "Li fitchî %s\n"
-"a candjî. Volez-ve rimete come divant a pårti del schapéye copeye?"
+"a candjî. Volez-ve rimete come divant a pårti del schapêye copeye?"
 
 #: src/parse.c:830
 msgid "Sorry, msgfmt isn't available on your system!"
@@ -1175,6 +1194,8 @@ msgid ""
 "Compile successful:\n"
 "%s"
 msgstr ""
+"Li copilaedje a stî comufåt:\n"
+"%s"
 
 #: src/prefs.c:105
 msgid "gtranslator -- options"
@@ -1202,11 +1223,11 @@ msgstr ""
 
 #: src/prefs.c:121
 msgid "Fonts, colors and color schemes"
-msgstr ""
+msgstr "Fontes, coleurs eyèt ensembes di coleurs"
 
 #: src/prefs.c:123
 msgid "Autosaving"
-msgstr ""
+msgstr "Schapaedje ôtomatike"
 
 #: src/prefs.c:129
 msgid "Author's name:"
@@ -1300,11 +1321,11 @@ msgstr "Ensembe di coleurs pol sintacse a-z eployî:"
 
 #: src/prefs.c:244
 msgid "Apply own fonts:"
-msgstr ""
+msgstr "Mete èn oûve les fontes da vosse:"
 
 #: src/prefs.c:248
 msgid "Original text font:"
-msgstr ""
+msgstr "Fonte pol tecse d' oridjinne:"
 
 #: src/prefs.c:248
 msgid "gtranslator -- font selection/msgid font"
@@ -1320,7 +1341,7 @@ msgstr "gtranslator -- tchwezi l' fonte po les msgstr"
 
 #: src/prefs.c:256
 msgid "Apply own colors:"
-msgstr ""
+msgstr "Mete èn oûve les coleurs da vosse:"
 
 #: src/prefs.c:260
 msgid "Foreground color:"
@@ -1340,19 +1361,19 @@ msgstr "gtranslator -- coleur di fond"
 
 #: src/prefs.c:271
 msgid "Save the po file automatically after a period of time"
-msgstr ""
+msgstr "Schaper ôtomaticmint les fitchîs po dispôy on tins dné"
 
 #: src/prefs.c:275
 msgid "Append a special suffix to the automatically saved files"
-msgstr ""
+msgstr "Radjouter ene cawate sipeciåle ås fitchîs schapé ôtomaticmint"
 
 #: src/prefs.c:279
 msgid "Autosave suffix:"
-msgstr ""
+msgstr "Cawete pol schapaedje ôtomatike:"
 
 #: src/prefs.c:283
 msgid "Autosave timeout in minutes:"
-msgstr ""
+msgstr "Tårdjaedje è munutes pol schapaedje ôtomatike:"
 
 #: src/prefs.c:489
 msgid ""
@@ -1360,6 +1381,8 @@ msgid ""
 "with which you can make gtranslator make more work\n"
 "like YOU want it to work!"
 msgstr ""
+"Avou l' purnea des preferinces vos ploz defini sacwantès\n"
+"variåves po fé gtranslator ovrer come VOS voloz k' il ovraxhe!"
 
 #.
 #. * The generally used date format -- i18n this please,
@@ -1370,13 +1393,12 @@ msgid "%Y-%m-%d %H:%M"
 msgstr "%d/%m/%Y %H:%M"
 
 #: src/preferences.c:235
-#, fuzzy
 msgid "Couldn't generate the current date!"
-msgstr "Monter li pårtaedje do moumint"
+msgstr "Dji n' sai fé ene tchinne avou l' date do moumint!"
 
 #: src/query.c:142
 msgid "No language defined in preferences to query the domains for!"
-msgstr ""
+msgstr "Nou lingaedje di defini èzès preferinces po poleur cweri les dominnes!"
 
 #: src/replace.c:171
 msgid "No replace made!"
@@ -1384,7 +1406,7 @@ msgstr ""
 
 #: src/session.c:90
 msgid "Session restored successfully."
-msgstr ""
+msgstr "Li session a stî schapêye comufåt."
 
 #: src/sidebar.c:82
 msgid "Views"
@@ -1407,13 +1429,12 @@ msgid "Format"
 msgstr "Format"
 
 #: src/sidebar.c:121
-#, fuzzy
 msgid "Hotkey"
-msgstr "Home"
+msgstr "Tape rascoûrti"
 
 #: src/stylistics.c:238
 msgid "No font set! Using default font"
-msgstr "Nole fonte di dnéye! Dj' eployrè li prémtowe fonte"
+msgstr "Nole fonte di dnêye! Dj' eployrè li prémtowe fonte"
 
 #.
 #. * Use gtranslator's font in this case -- should be a fallback font
@@ -1435,7 +1456,7 @@ msgstr "-misc-fixed-medium-r-normal--*-120-*-*-c-*-iso8859-1,*"
 #: src/syntax.c:87 src/utils_gui.c:59 src/utils_gui.c:60 src/views.c:289
 #: src/views.c:359
 msgid "."
-msgstr ""
+msgstr "."
 
 #: src/update.c:88
 msgid "No POTFILES.in found!"
@@ -1468,9 +1489,9 @@ msgstr ""
 #. *  of the file.
 #.
 #: src/utils_gui.c:323
-#, fuzzy, c-format
+#, c-format
 msgid "You don't have read permissions on file `%s'"
-msgstr "Vos n' avoz nole pårticion!"
+msgstr "Vos n' avoz nén di permission po lere li fitchî «%s»"
 
 #: src/utils_gui.c:341
 #, c-format
@@ -1479,21 +1500,24 @@ msgid ""
 "This means that you should save it as a copy to a local directory\n"
 "of your choice."
 msgstr ""
+"Vos n' avoz nén di permission po scrire èl fitchî «%s».\n"
+"Çoula vout dire ki vos l' divez schaper ene sawice dins on ridant locå\n"
+"di vosse copiutrece."
 
 #: src/utils_gui.c:383
 #, c-format
 msgid "The file `%s' is already open in another instance of gtranslator!"
-msgstr ""
+msgstr "Li fitchî «%s» est ddja drovou dins on ôte purnea di gtranslator!"
 
 #: src/utils_gui.c:416
 #, c-format
 msgid "The necessary decompression program `%s' is missing!"
-msgstr ""
+msgstr "Nou programe di disrastrindaedje «%s» k' i gn ènn a mezåjhe!"
 
 #: src/utils_gui.c:421
 #, c-format
 msgid "The necessary compression program `%s' is missing!"
-msgstr ""
+msgstr "Nou programe di rastrindaedje «%s» k' i gn ènn a mezåjhe!"
 
 #: src/vfs-handle.c:125
 #, c-format
@@ -1508,7 +1532,7 @@ msgstr "Li fitchî «%s» n' a nén stî trové!"
 #: src/vfs-handle.c:158
 #, c-format
 msgid "Malformed URI `%s' entered!"
-msgstr "Måle hårdéye «%s»!"
+msgstr "Måle hårdêye «%s»!"
 
 #: src/vfs-handle.c:163
 #, c-format
@@ -1542,14 +1566,12 @@ msgid " "
 msgstr " "
 
 #: src/views.c:305
-#, fuzzy
 msgid "No C formats present."
-msgstr "Nou ratoûrnaedje del cogne"
+msgstr "Nou messadje è cogne C."
 
 #: src/views.c:345
-#, fuzzy
 msgid "No hotkeys defined in message."
-msgstr "Mostrer les messaedjes di disbugaedje des fitchîs."
+msgstr "Nole tape rascoûrti defineye èl messaedje."
 
 #: src/backends/docbook/docbook.xml.h:1
 msgid "Docbook sgml documents backend"
@@ -1586,32 +1608,28 @@ msgid "Gettext po file"
 msgstr "Fitchî .po di gettext"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
-#, fuzzy
 msgid "Gtranslator Po File"
-msgstr "Tchûzes di gtranslator"
+msgstr "Fitchî *.po di gtranslator"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:2
-#, fuzzy
 msgid "Gtranslator Po File View"
-msgstr "_Waibe di gtranslator"
+msgstr "Vuwe di fitchîs *.po gtranslator"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:3
-#, fuzzy
 msgid "Gtranslator Po File Viewer"
-msgstr "gtranslator -- candjî li tiestîre"
+msgstr "Håyneu di fitchîs *.po gtranslator"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:4
 msgid "Gtranslator Po file viewer component's factory"
-msgstr ""
+msgstr "Oujhene pol håyneu di fitchîs *.po gtranslator"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:5
 msgid "Nautilus Gtranslator View factory"
-msgstr ""
+msgstr "Oujhene pol vuwe gtranslator po Nautilus"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:6
-#, fuzzy
 msgid "Nautilus Gtranslator view"
-msgstr "Dierin ratoûrneu: %s"
+msgstr "Vuwe gtranslator po Nautilus"
 
 #: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:7
 msgid "View as Po File"
@@ -1630,7 +1648,7 @@ msgid "_File"
 msgstr "_Fitchî"
 
 #~ msgid "View URL..."
-#~ msgstr "Vey hårdéye..."
+#~ msgstr "Vey hårdêye..."
 
 #~ msgid "Azeri"
 #~ msgstr "Azeri"
@@ -1645,7 +1663,7 @@ msgstr "_Fitchî"
 #~ msgstr "Prodjet: %s"
 
 #~ msgid "Version: %s"
-#~ msgstr "Modéye: %s"
+#~ msgstr "Modêye: %s"
 
 #~ msgid "Last translator: %s <%s>"
 #~ msgstr "Dierin ratoûrneu: %s <%s>"
