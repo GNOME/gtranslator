@@ -48,6 +48,7 @@ gtranslator_SOURCES = \
 	sighandling.c sighandling.h \
 	stylistics.c stylistics.h \
 	syntax.c syntax.h \
+	syntax-elements.h \
 	update.c \
 	vfs-handle.c vfs-handle.h \
 	views.c views.h

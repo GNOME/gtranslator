@@ -23,74 +23,12 @@
 #include "prefs.h"
 #include "gui.h"
 
+#include "syntax-elements.h"
+
 #include <ctype.h>
 #include <string.h>
 
 #include <gtk/gtktext.h>
-
-/*
- * The keywords table.
- */
-static gchar *keywords[] = {
-	"COPYING",
-	"COPYING.LIB",
-	"Copying",
-	"CVS",
-	"EMAIL",
-	"FAQ",
-	"FDL",
-	"FIXME",
-	"FTP",
-	"Gdk",
-	"Glib",
-	"GLIB",
-	"GNU",
-	"GNOME",
-	"Gnome",
-	"GPL",
-	"Gtk+",
-	"GTK+",
-	"HTML",
-	"HTTP",
-	"KDE",
-	"Kde",
-	"LICENSE",
-	"License",
-	"NULL",
-	"TODO",
-	"URI",
-	"URL",
-	"Url",
-	"URN",
-	"X11",
-	"WWW",
-	"www",
-	NULL
-};
-
-/*
- * The URL/URI prefixes table:
- */
-static gchar *prefixes[] =  {
-	"file:",
-	"ftp:",
-	"ghelp:",
-	"gopher:",
-	"gnome-search:",
-	"https:",
-	"http:",
-	"info:",
-	"mailto:",
-	"man:",
-	"medusa:",
-	"news:",
-	"nntp:",
-	"search:",
-	"uri:",
-	"urn:",
-	"whois:",
-	NULL
-};
 
 /*
  * Return if the given string matches our last chars.
