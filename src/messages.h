@@ -14,7 +14,6 @@
 **/
 typedef struct _po_file gtr_po;
 typedef struct _message gtr_msg;
-typedef enum _gtranslator_msg_status gtr_msg_status;
 
 /**
 * The structure with general 
@@ -44,7 +43,7 @@ struct _message
 * The different stati of the translatable
 *  messages .
 **/
-enum _gtranslator_msg_status 
+typedef enum
 {
 	GTRANSLATOR_MSG_STATUS_UNTRANSLATED,
 	GTRANSLATOR_MSG_STATUS_TRANSLATED,
@@ -59,4 +58,4 @@ enum _gtranslator_msg_status
 	*  fast as possible .
 	**/
 	GTRANSLATOR_MSG_STATUS_FIXME
-};
+} gtr_msg_status ;
