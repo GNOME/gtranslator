@@ -191,6 +191,9 @@ void parse(gchar *po)
 		{
 			(gchar *)msg->msgstr=g_strconcat((gchar *)msg->msgstr,(gchar *)g_strdup(temp_char),NULL);
 		}
+		/**
+		* we've got both msgid + msgstr -> add the gtr_msg structure.
+		**/
 		if((msgid_ok==TRUE) && (msgstr_ok==TRUE))
 		{
 			messages=g_list_append(messages,(gpointer)msg);

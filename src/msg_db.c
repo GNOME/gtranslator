@@ -192,9 +192,6 @@ gchar *get_from_msg_db(const gchar *get_similar)
 	else
 	{
 		/**
-		* Allocate another list for the query results.
-		**/
-		/**
 		* Go to the beginning of the file
 		**/
 		fseek(db_stream,0L,SEEK_SET);

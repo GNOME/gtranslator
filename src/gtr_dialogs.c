@@ -341,6 +341,18 @@ void query_dialog_create()
 {
 	GtkWidget *q_dlg_label;
 	/**
+	* The default challenge length.
+	**/
+	gint default_challen;
+	/**
+	* The GtkAdjustment for the spinbutton.
+	**/
+	GtkObject *fot;
+	/**
+	* The default challen is 2.
+	**/
+	default_challen=2;
+	/**
 	* Create the dialog.
 	**/
 	q_dlg=gtk_dialog_new();
@@ -350,6 +362,14 @@ void query_dialog_create()
 	q_dlg_label=gtk_label_new(_("With this query window you can query\n\
 the message db for an existing entry\n\
 with your query string."));
+	/**
+	* Get the adjustment.
+	**/
+	fot=gtk_adjustment_new(default_challen, 1, 10, 1, 2, 2);
+	/**
+	* Create the spinbutton.
+	**/
+	q_dlg_spin_button=gtk_spin_button_new(GTK_ADJUSTMENT(fot),1,0);
 	/**
 	* Add another GNOME entry.
 	**/
@@ -362,12 +382,13 @@ with your query string."));
 	/**
 	* Set the size.
 	**/
-	gtk_widget_set_usize(q_dlg,240,120);
+	gtk_widget_set_usize(q_dlg,260,150);
 	/**
 	* Add the widgets to the dialog.
 	**/
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->vbox),q_dlg_label);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->vbox),q_entry);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->vbox),q_dlg_spin_button);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->action_area),q_dlg_query);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(q_dlg)->action_area),q_dlg_cancel);
 	/**
@@ -381,6 +402,7 @@ with your query string."));
 	* Show the inner-widgets.
 	**/
 	gtk_widget_show(q_dlg_label);
+	gtk_widget_show(q_dlg_spin_button);
 	gtk_widget_show(q_entry);
 	gtk_widget_show(q_dlg_cancel);
 	gtk_widget_show(q_dlg_query);
@@ -423,6 +445,10 @@ void r_window(GtkWidget *widget,gpointer useless)
         gchar *result;
 	gchar result_string[256];
 	result_string[0]='\0';
+	/**
+	* Set the challenge-length as specified in the query-dialog.
+	**/
+	set_challenge_length(gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(q_dlg_spin_button)));
 	/**
 	* Get the result.
 	*

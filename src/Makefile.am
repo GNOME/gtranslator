@@ -1,6 +1,7 @@
-## ------------------------------------------------------
-## Process this file with automake to produce Makefile.in
-## ------------------------------------------------------
+# -------------------------------------------------------
+# This is the base for the Makefile, produced by automake
+#   and autoconf. 
+# -------------------------------------------------------
 
 #ifdef EMACS_LOVER
 extra_flags = -DEMACS_LOVER=2000

@@ -27,7 +27,7 @@
 **/
 static struct poptOption gtranslator_options [] = {
 	{
-		"challenge-lenght", 'c', POPT_ARG_INT, &challen,
+		"challenge-length", 'c', POPT_ARG_INT, &challen,
 		0, N_("Sets the minimum match for query"), "LENGTH"
 	},
 	{

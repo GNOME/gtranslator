@@ -73,7 +73,7 @@ GtkWidget *find_dlg,*find_dlg_cancel,*find_dlg_ok;
 /**
 * 9/The query dialog widgets
 **/
-GtkWidget *q_dlg,*q_dlg_cancel,*q_dlg_query,*q_entry;
+GtkWidget *q_dlg,*q_dlg_cancel,*q_dlg_query,*q_entry,*q_dlg_spin_button;
 GtkWidget *r_window_dlg,*r_window_apply,*r_window_cancel;
 
 /**

@@ -301,6 +301,25 @@ static GnomeUIInfo the_messages_menu[] =
         GNOMEUIINFO_END
 };
 
+static GnomeUIInfo the_msg_status_menu [] =
+{
+	{
+		GNOME_APP_UI_ITEM, N_("Translated"),
+		NULL,
+		NULL, NULL, N_("Translated"),
+		GNOME_APP_PIXMAP_NONE, NULL,
+		0, 0, NULL
+	},
+	{
+		GNOME_APP_UI_ITEM, N_("Untranslated"),
+                NULL,
+                NULL, NULL, N_("Untranslated"),
+                GNOME_APP_PIXMAP_NONE, NULL,
+                0, 0, NULL
+	},
+	GNOMEUIINFO_END
+};
+
 static GnomeUIInfo the_msg_db_menu [] =
 {
 	{
@@ -360,6 +379,13 @@ static GnomeUIInfo the_menus[] =
 		GNOME_APP_PIXMAP_NONE, N_("_Messages"),
 		0, 0, NULL
         },
+	{
+		GNOME_APP_UI_SUBTREE, N_("Message _status"),
+		NULL,
+		the_msg_status_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, N_("Message _status"),
+		0, 0, NULL
+	},
 	{
 		GNOME_APP_UI_SUBTREE, N_("Message _db"),
 		NULL,
