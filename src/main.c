@@ -37,6 +37,7 @@
 #include "runtime-config.h"
 #include "session.h"
 #include "sighandling.h"
+#include "translator.h"
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -217,6 +218,12 @@ int main(int argc, char *argv[])
 	 * Create our own .gtranslator directory in the user's home directory.
 	 */
 	gtranslator_utils_create_gtranslator_directory();
+
+	/*
+	 * Read the translator information/data into our generally used 
+	 *  GtrTranslator structure.
+	 */
+	gtranslator_translator=gtranslator_translator_new();
 	
 	/* 
 	 * Initialize the regular expression cache 

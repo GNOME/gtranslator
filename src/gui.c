@@ -42,6 +42,7 @@
 #include "sidebar.h"
 #include "stylistics.h"
 #include "syntax.h"
+#include "translator.h"
 #include "undo.h"
 #include "utils.h"
 #include "utils_gui.h"
@@ -470,6 +471,11 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	{
 		gtranslator_learn_shutdown();
 	}
+
+	/*
+	 * Free the used GtrTranslator structure.
+	 */
+	gtranslator_translator_free(gtranslator_translator);
 	
 	/*
 	 * Free the preferences stuff.

@@ -22,6 +22,7 @@
 #include "prefs.h"
 #include "runtime-config.h"
 #include "sighandling.h"
+#include "translator.h"
 #include "utils.h"
 
 #include <signal.h>
@@ -62,6 +63,10 @@ void gtranslator_signal_handler(int signal)
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
 	gtranslator_config_close();
 
+	/*
+	 * Free some other stuff we're definetely using already.
+	 */
+	gtranslator_translator_free(gtranslator_translator);
 	gtranslator_runtime_config_free(gtranslator_runtime_config);
 	gtranslator_preferences_free();
 	gnome_regex_cache_destroy(rxc);
