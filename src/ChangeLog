@@ -1,4 +1,8 @@
-2003-05-25  Ross Golder  <rossg@golder.org>
+2003-05-25  Ross Golder  <ross@golder.org>
+
+	* actions.c (gtranslator_actions_set_up_file_opened): Enable and
+	disable editability of trans box when file open/closed. Prevents
+	an easy segfault.
 
 	* parse.c (gtranslator_parse): If first message in file is not a
 	header, default po->header to avoid segfaults (bug #62244).
