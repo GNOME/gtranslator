@@ -32,12 +32,14 @@ distpacks: distdir
 cvspack:
 	@-rm -f gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz
 	@echo Creating CVS distpackage of gtranslator...
+	@cp -pR po __po
+	@cp configure.in __configure.in
 	@sed -e "s,AM_INIT_AUTOMAKE.*,AM_INIT_AUTOMAKE\(gtranslator\, CVS_$(shell date +%Y-%m-%d)\),g" < configure.in \
 		> configure.in.new && mv configure.in.new configure.in
 	@./autogen.sh --help
-	@cp -pR po __po
 	@make dist
 	@mv __po po
+	@mv __configure.in configure.in
 
 pre-release: cvspack
 	@-./pozilla.sh
