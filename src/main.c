@@ -67,6 +67,7 @@ static gchar	*exporting_po_file=NULL;
 static gboolean	build_information=FALSE;
 static gboolean	no_modules=FALSE;
 gboolean 	nosyntax=FALSE;
+gboolean	open_anyway=FALSE;
 
 /*
  * gtranslator's option table.
