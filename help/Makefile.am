@@ -3,3 +3,4 @@
 ##
 
 SUBDIRS = C ja
+EXTRA_DIST = ChangeLog
