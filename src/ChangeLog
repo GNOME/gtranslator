@@ -1,7 +1,13 @@
 2001-01-05  Fatih Demir	<kabalak@gmx.net>
 
+	* gtkspell.c: Check the position of the text to
+		delete; avoids a crash when instant spell checking
+		 is activated.
+
 	* parse.c: Stop the gtkspell process if it's running &
-		the corresponding preference is set.
+		the corresponding preference is set, corrected
+		 the check for the temporary file name to use
+		  strcmp and work right.
 
 	* open-differently: Allocate the gchars newly before freeing
 		them.
@@ -10,11 +16,11 @@
 
 	Ran gtranslator in memprof. Several memleaks found.
 
-	* gui.c: free msgstr before getting new text in update_msg 
+	* gui.c: free msgstr before getting new text in update_msg
 	* parse.c: s/  \*/ */
 	(append_line) simplify making result string.
 	(gtranslator_display_recent) "name" was not neccesarry. do not strdup
-	static strings. Free menu->hint.	
+	static strings. Free menu->hint.
 
 2001-01-04  Fatih Demir	<kabalak@gmx.net>
 
@@ -30,7 +36,7 @@
 		   gettext po files from the GUI via the open dialog and the
 		    recent files list; don't take the temporary files into
 		     the recent files list.
-		
+	
 	* parse.c/.h, languages.h, header-stuff.c/.h, gui.c/.h: Reformatted
 		these files simply.
 
@@ -74,9 +80,9 @@
 	        Reformatted these files.
 
 	* gtkspell.c: Changed the mouse button on which
-		the gtkspell suggestion list reacts from 
+		the gtkspell suggestion list reacts from
 		 the right one (which is already used by the
-		  eventually enabled pop up menu) to the 
+		  eventually enabled pop up menu) to the
 		   middle one (this is only conditional; if the
 		    po-pup menu is disabled, it's still on the
 		     right mouse button).
@@ -142,7 +148,7 @@
 		functions into these new files.
 	
 	* update.c & parse.c: Outsourced the update functions to it's
-		own source file.	
+		own source file.
 
 2000-12-30  Fatih Demir	<kabalak@gmx.net>
 
@@ -156,7 +162,7 @@
 
 	* gui.c: implemented sticky message status on menu item toggle.
 	* parse.c,parse.h: new mark_msg_sticky function.
-	* gui.c: Fix memory leak in update_appbar (str was not freed). 
+	* gui.c: Fix memory leak in update_appbar (str was not freed).
 	change status logic a bit, to make it simpler.
 	* prefs.c: fix size of sixth page table. check if font is saved in
 	preferences, only then set it.
@@ -249,7 +255,7 @@
 
 2000-12-06  Fatih Demir	<kabalak@gmx.net>
 
-	* main.c: Determine if the given file has got 
+	* main.c: Determine if the given file has got
 		the suffix ".mo" and open it with the
 		 new function.
 

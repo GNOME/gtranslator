@@ -1000,7 +1000,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 				pos = len;
 
 				/*
-				 * Clean the textbox
+				 * Clean the textbox.
 				 */
 				gtk_editable_delete_text(GTK_EDITABLE(trans_box),
 							 pos, pos+1);

@@ -181,12 +181,11 @@ static gboolean actual_parse(void)
 	}
 
 	/*
-	 * Sorry, but here we can really use the "simple" equivalence check as
-	 *  the two strings should be the same -- really.
+	 * Don't include the temporary file name in the recent files list.
 	 */ 
-	if(po->filename==g_strdup_printf("%s/%s",
+	if(strcmp(po->filename, (g_strdup_printf("%s/%s",
 		g_get_home_dir(), 
-		"gtranslator-temp-po-file"))
+		"gtranslator-temp-po-file"))))
 	{
 		/*
 		 * Add a GNOME history entry.

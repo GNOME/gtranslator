@@ -509,10 +509,19 @@ static void entry_delete_cb(GtkText *gtktext,
 
 	if (spell_pid <= 0) return;
 
-	// g_print("Whats this shit?\n");
 	origpos = gtk_editable_get_position(GTK_EDITABLE(gtktext));
 	check_at(gtktext, start-1);
-	gtk_editable_set_position(GTK_EDITABLE(gtktext), origpos);
+	
+	/*
+	 * Check if the "origpos" is accurant and smaller then the
+	 *  length of the text; otherwise it tries to reach a
+	 *   non-existing index in the text widget.
+	 */ 
+	if(origpos > 0 
+		&& origpos < gtk_text_get_length(GTK_TEXT(gtktext)))
+	{
+		gtk_editable_set_position(GTK_EDITABLE(gtktext), origpos);
+	}
 }
 
 static void show_url_cb(GtkWidget *w, gpointer d) {
