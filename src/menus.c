@@ -28,6 +28,7 @@
 #include "message.h"
 #include "parse.h"
 #include "prefs.h"
+#include "sidebar.h"
 #include "utils_gui.h"
 #include "views.h"
 

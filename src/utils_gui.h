@@ -21,6 +21,7 @@
 #define GTR_UTILS_GUI_H 1
 
 #include "parse.h"
+#include "stylistics.h"
 
 #include <gtk/gtkwidget.h>
 #include <gtk/gtksignal.h>
@@ -67,6 +68,14 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget * table,
 GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, gfloat minimum, gfloat maximum,
 	gfloat value, GtkSignalFunc callback);
+	
+GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
+	gint row, const gchar *label_text, const gchar *title_text,
+	const gchar *fontspec, GtkSignalFunc callback);
+	
+GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
+	gint row, const gchar *label_text, const gchar *title_text,
+	ColorType color_type, GtkSignalFunc callback);
 
 /*
  * Returns the added GtkTable to the preferences box.

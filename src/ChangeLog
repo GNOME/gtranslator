@@ -1,23 +1,58 @@
+2001-06-17  Fatih Demir <kabalak@gtranslator.org>
+
+	* sidebar.c/.h: Added "gtranslator_sidebar_show/hide" functions, moved
+		private variables to the source file and added the one any only
+		 "gtranslator_sidebar_toggle" function for toggling the sidebar
+		   -- content changes and menu sensitiveness should also be
+		    reviewed later on.
+
+	* prefs.c/.h, stylistics.c: Use the "use_own_colors/fonts" fields instead
+		of a single "use_own_specs" field -- fonts and colors are now 
+		 appliable independently.
+
+	* main.c: Fix a small fallible colorscheme appliance, don't store the
+		command-line supplied colorscheme data --  a cmd-line colorscheme
+		 should be only applied for the current gtranslator session.
+
+	* stylistics.c: Get the font name from the new locations depending on
+		the widget name; "trans_box" stands for our translation area
+		 and therefore we'd use the "Translation Font" there -- also
+		  corrected a small craziness about applying the fonts also
+		   where the user didn't want this.
+
+	* prefs.c/.h: Move some stuff 'round and use the new utility functions
+		for adding the color/font pickers to the preferences dialog;
+		 use 2 different fonts for the msgid and msgstr parts and also
+		  present 2 font pickers to the user -- should be nice for
+		   Big5 users of gtranslator -- also show the colorschemes in
+		    a GtkComboBox and let the user select the colorscheme from
+		     there.
+
+	* utils_gui.c/.h: Added GnomeColorPicker and GnomeFontPicker adding
+		convenience functions for the preferences tables.
+
 2001-06-16  Fatih Demir <kabalak@gtranslator.org>
 
-	* parse.h, parse_core.c & utf8.c: Honor the new "locale_charset" field for the GtrPo
-		structure which holds now the locale charset name returned by the
-		 "gtranslator_utils_get_locale_name" function -- no need to let the function
-		   work x times in the sources.
+	* parse.h, parse_core.c & utf8.c: Honor the new "locale_charset" field 
+		for the GtrPo structure which holds now the locale charset name
+		 name returned by the "gtranslator_utils_get_locale_name"
+		  function -- no need to let the function work x times in the
+		    sources.
 
-	* open-differently.c: Added "about:" to the URI detection routines -- hmm, finally
-		about: URIs should work now.
+	* open-differently.c: Added "about:" to the URI detection routines --
+		hm, finally, the about: URIs should work now.
 
-	* convert.c: Disabled an assertion which made the conversion function moan on
-		non-translated msgstrs -- NULL msgstrs are ok, as untranslated messages
-		 are "normal".
+	* convert.c: Disabled an assertion which made the conversion function 
+		moan on non-translated msgstrs -- NULL msgstrs are ok, as
+		 as untranslated messages are "normal".
 
-	* utf8.c: Corrected a really wrong typo _to_utf8 to _from_utf8 to make the
-		function work right and corrected a wrong call of the conversion functions
-		 to finally fix the UTF-8 support.
+	* utf8.c: Corrected a really wrong typo _to_utf8 to _from_utf8 to make
+		the function work right and corrected a wrong call of the 
+		 conversion functions to finally fix the UTF-8 support.
 
-	* parse.c: Honor the new function and set up/clean up the "runtime/filename"
-		preferences key used for the instances detection
+	* parse.c: Honor the new function and set up/clean up the 
+		"runtime/filename" preferences key used for the instances
+		 detection/recognition.
 
 	* utils_gui.c/.h: Added "gtranslator_utils_check_file_being_open"
 		function for instances detection to avoid multiple openings

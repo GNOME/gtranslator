@@ -30,7 +30,14 @@
 
 #include <libgnome/gnome-util.h>
 
+#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/widgets/e-unicode.h>
+
+/*
+ * The shortcut bar releated widgets/variables/methods.
+ */ 
+static EShortcutModel	*model;
+static GtkWidget	*sidebar;
 
 /*
  * The internal icon callback method.
@@ -49,8 +56,6 @@ static void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
  */
 GtkWidget *gtranslator_sidebar_new()
 {
-	GtkWidget *sidebar;
-	
 	/*
 	 * Create the EShortcutModel & EShortcutBar.
 	 */ 
@@ -220,4 +225,54 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	}
 	else
 		return NULL;
+}
+
+/*
+ * Hide the sidebar if possible -- should be really sane this way.
+ */
+gboolean gtranslator_sidebar_hide()
+{
+	g_return_val_if_fail(sidebar!=NULL, FALSE);
+	
+	if(GTK_WIDGET_VISIBLE(sidebar))
+	{
+		gtk_widget_hide(sidebar);
+		
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+/*
+ * The show equivalent for the hide function.
+ */
+gboolean gtranslator_sidebar_show()
+{
+	g_return_val_if_fail(sidebar!=NULL, FALSE);
+	
+	if(!GTK_WIDGET_VISIBLE(sidebar))
+	{
+		gtk_widget_show(sidebar);
+		
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+/*
+ * Show or hide the sidebar we're using -- here you can get why
+ *  the show/hide functions were returning gboolean values.
+ */
+void gtranslator_sidebar_toggle()
+{
+	if(!gtranslator_sidebar_hide())
+	{
+		gtranslator_sidebar_show();
+	}
 }

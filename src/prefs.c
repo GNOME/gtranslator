@@ -67,8 +67,8 @@ static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
-	*check_recent_files, *own_specs, *instant_spell_checking,
-	*use_own_dict, *keep_obsolete, *defaultdomain,
+	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
+	*instant_spell_checking, *keep_obsolete, *defaultdomain,
 	*autosave, *autosave_with_suffix;
 
 /*
@@ -78,20 +78,20 @@ static GtkWidget
 	*autosave_timeout, *max_history_entries;
 
 /*
+ * Font/color specific widgets used in the preferences box.
+ */
+static GtkWidget *foreground, *background, *msgid_font, *msgstr_font;
+
+/*
  * The preferences dialog widget itself.
  */
 static GtkWidget *prefs = NULL;
 
 void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
-	/*
-	 * The internally used variables.
-	 */
-	GtkWidget 	*fg_color_label,
-			*bg_color_label,
-			*font_label,
-			*scheme_file_label;
-
+	GList 	*colorschemeslist=NULL;
+	gchar	*old_colorscheme;
+	
 	gtranslator_raise_dialog(prefs);
 	
 	/*
@@ -110,7 +110,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, _("Recent files & spell checking"));
-	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, _("Fonts, colors and color schemes"));
+	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 6, 2, _("Fonts, colors and color schemes"));
 	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, _("Autosaving"));
 	
 	/*
@@ -219,65 +219,38 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The sixth page with the special font/color stuff.
 	 */
-	scheme_file_label=gtk_label_new(_("Syntax color scheme to use:"));
-	scheme_file=gnome_file_entry_new("SCHEME_FILE", 
-		_("gtranslator -- color scheme selection"));
-
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(scheme_file),
-		SCHEMESDIR);
-
-	own_specs=gtranslator_utils_attach_toggle_with_label(sixth_page, 1,
-		_("Apply special font/colors"),
-		GtrPreferences.use_own_specs, gtranslator_preferences_dialog_changed);
+	colorschemeslist=gtranslator_utils_file_names_from_directory(SCHEMESDIR,
+		".xml", TRUE, TRUE, FALSE);
+	old_colorscheme=gtranslator_utils_get_raw_file_name(GtrPreferences.scheme);
 	
-	font_label=gtk_label_new(_("Font:"));
-	fg_color_label=gtk_label_new(_("Foreground color:"));
-	bg_color_label=gtk_label_new(_("Background color:"));
-	font=gnome_font_picker_new();
-	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
-		_("gtranslator -- font selection"));
-	
-	if(GtrPreferences.font)
-	{
-		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
-						GtrPreferences.font);
-	}
+	scheme_file=gtranslator_utils_attach_combo_with_label(sixth_page, 0,
+		_("Syntax color scheme to use:"), colorschemeslist, old_colorscheme,
+		gtranslator_preferences_dialog_changed, NULL);
+	 
+	own_fonts=gtranslator_utils_attach_toggle_with_label(sixth_page, 1,
+		_("Apply own fonts:"),
+		GtrPreferences.use_own_fonts, gtranslator_preferences_dialog_changed);
 
-	gnome_font_picker_set_mode(GNOME_FONT_PICKER(font),
-		GNOME_FONT_PICKER_MODE_FONT_INFO);
-
-	foreground=gnome_color_picker_new();
-	gnome_color_picker_set_title(GNOME_COLOR_PICKER(foreground),
-		_("gtranslator -- foreground color"));
-	background=gnome_color_picker_new();
-	gnome_color_picker_set_title(GNOME_COLOR_PICKER(background),
-		_("gtranslator -- background color"));
-
-	gtranslator_config_init();
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(foreground), COLOR_FG);
-	gtranslator_color_values_get(GNOME_COLOR_PICKER(background), COLOR_BG);
-	gtranslator_config_close();
+	msgid_font=gtranslator_utils_attach_font_with_label(sixth_page, 2,
+		_("Original text font:"), _("gtranslator -- font selection/msgid font"),
+		GtrPreferences.msgid_font, gtranslator_preferences_dialog_changed);
 	
-	/*
-	 * Attach all the widgets to the sixth page.
-	 */
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		scheme_file_label, 0, 1, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		scheme_file, 1, 2, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		font_label, 0, 1, 2, 3);
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		font, 1, 2, 2, 3);
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		fg_color_label, 0, 1, 3, 4);
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		foreground, 1, 2, 3, 4);	
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		bg_color_label, 0, 1, 4, 5);
-	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		background, 1, 2, 4, 5);	
-	
+	msgstr_font=gtranslator_utils_attach_font_with_label(sixth_page, 3,
+		_("Translation font:"), _("gtranslator -- font selection/msgstr font"),
+		GtrPreferences.msgstr_font, gtranslator_preferences_dialog_changed);
+
+	own_colors=gtranslator_utils_attach_toggle_with_label(sixth_page, 4,
+		_("Apply own colors:"),
+		GtrPreferences.use_own_colors, gtranslator_preferences_dialog_changed);
+
+	foreground=gtranslator_utils_attach_color_with_label(sixth_page, 5,
+		_("Foreground color:"), _("gtranslator -- foreground color"),
+		COLOR_FG, gtranslator_preferences_dialog_changed);
+
+	background=gtranslator_utils_attach_color_with_label(sixth_page, 6,
+		_("Background color:"), _("gtranslator -- background color"),
+		COLOR_BG, gtranslator_preferences_dialog_changed);
+
 	/*
 	 * The seventh page of the prefs-box: autosaving options.
 	 */
@@ -300,15 +273,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * Connect the signals to the preferences box.
 	 */
-	gtk_signal_connect(GTK_OBJECT(font), "font_set",
-			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(foreground), "color_set",
-			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(background), "color_set",
-			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(gnome_file_entry_gtk_entry(
-			   GNOME_FILE_ENTRY(scheme_file))), "changed",
-			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_apply), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "help",
@@ -323,6 +287,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
  */
 static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num, gpointer useless)
 {
+	gchar	*selected_scheme_file;
+	
 	/*
 	 * We need to apply only once. 
 	 */
@@ -354,7 +320,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.uzi_dialogs = if_active(no_uzis);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
-	GtrPreferences.use_own_specs = if_active(own_specs);
+	GtrPreferences.use_own_fonts = if_active(own_fonts);
+	GtrPreferences.use_own_colors = if_active(own_colors);
 	GtrPreferences.use_own_dict = if_active(use_own_dict);
 	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
 	GtrPreferences.autosave = if_active(autosave);
@@ -392,31 +359,46 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_set_float("informations/max_history_entries", 
 		GtrPreferences.max_history_entries);
 	
-	g_free(GtrPreferences.font);
-	GtrPreferences.font=g_strdup(gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
-	gtranslator_config_set_string("font/name", GtrPreferences.font);
+	g_free(GtrPreferences.msgid_font);
+	g_free(GtrPreferences.msgstr_font);
+	
+	GtrPreferences.msgid_font=g_strdup(
+		gnome_font_picker_get_font_name(
+			GNOME_FONT_PICKER(msgid_font)));
+	
+	GtrPreferences.msgstr_font=g_strdup(
+		gnome_font_picker_get_font_name(
+			GNOME_FONT_PICKER(msgstr_font)));
+	
+	gtranslator_config_set_string("interface/original_font",
+		GtrPreferences.msgid_font);
+	gtranslator_config_set_string("interface/translation_font",
+		GtrPreferences.msgstr_font);
 
 	/*
 	 * Apply the given color scheme.
 	 */ 
 	g_free(GtrPreferences.scheme);
-	GtrPreferences.scheme=gtk_editable_get_chars(
-		GTK_EDITABLE(gnome_file_entry_gtk_entry(
-		GNOME_FILE_ENTRY(scheme_file))), 0, -1);
+	
+	selected_scheme_file=gtk_editable_get_chars(GTK_EDITABLE(
+		GTK_COMBO(scheme_file)->entry), 0, -1);
 
-	if(GtrPreferences.scheme && g_file_exists(GtrPreferences.scheme))
+	GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", SCHEMESDIR,
+		selected_scheme_file);
+
+	if(g_file_exists(GtrPreferences.scheme))
 	{
 		gtranslator_color_scheme_apply(GtrPreferences.scheme);
 		theme=gtranslator_color_scheme_load_from_prefs();
-
+		
 		gtranslator_colors_initialize();
 	}
 	
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(background), COLOR_BG);
 
-	gtranslator_set_style(text_box);
-	gtranslator_set_style(trans_box);
+	gtranslator_set_style(text_box, 0);
+	gtranslator_set_style(trans_box, 1);
 
 	gtranslator_config_set_bool("toggles/save_geometry", GtrPreferences.save_geometry);
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", GtrPreferences.warn_if_fuzzy);
@@ -438,8 +420,10 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.check_recent_file);
 	gtranslator_config_set_bool("toggles/instant_spell_check",
 			      GtrPreferences.instant_spell_check);
-	gtranslator_config_set_bool("toggles/use_own_specs",
-			      GtrPreferences.use_own_specs);
+	gtranslator_config_set_bool("toggles/use_own_fonts",
+			      GtrPreferences.use_own_fonts);
+	gtranslator_config_set_bool("toggles/use_own_colors",
+			      GtrPreferences.use_own_colors);
 	gtranslator_config_set_bool("toggles/use_own_dict",
 			      GtrPreferences.use_own_dict);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
@@ -523,7 +507,12 @@ void gtranslator_preferences_read(void)
 	lg = gtranslator_config_get_string("language/team_email");
 	mime = gtranslator_config_get_string("language/mime_type");
 	enc = gtranslator_config_get_string("language/encoding");
-	GtrPreferences.font = gtranslator_config_get_string("font/name");
+	
+	GtrPreferences.msgid_font = 
+		gtranslator_config_get_string("interface/original_font");
+	GtrPreferences.msgstr_font = 
+		gtranslator_config_get_string("interface/translation_font");
+	
 	GtrPreferences.dictionary = gtranslator_config_get_string("dict/file");
 	GtrPreferences.scheme =  gtranslator_config_get_string("scheme/filename");
 	
@@ -561,8 +550,10 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_bool("toggles/uzi_dialogs");
 	GtrPreferences.check_recent_file = 
 		gtranslator_config_get_bool("toggles/check_recent_files");
-	GtrPreferences.use_own_specs =
-		gtranslator_config_get_bool("toggles/use_own_specs");
+	GtrPreferences.use_own_fonts =
+		gtranslator_config_get_bool("toggles/use_own_fonts");
+	GtrPreferences.use_own_colors =
+		gtranslator_config_get_bool("toggles/use_own_colors");
 	GtrPreferences.use_own_dict =
 		gtranslator_config_get_bool("toggles/use_own_dict");
 	GtrPreferences.keep_obsolete =
@@ -576,13 +567,13 @@ void gtranslator_preferences_read(void)
 	/*
 	 * Check if we'd to use special styles.
 	 */
-	if(GtrPreferences.use_own_specs)
+	if(GtrPreferences.use_own_fonts || GtrPreferences.use_own_colors)
 	{
 		/*
 		 * Set the own specs for colors and for the font.
 		 */
-		gtranslator_set_style(text_box);
-		gtranslator_set_style(trans_box);
+		gtranslator_set_style(text_box, 0);
+		gtranslator_set_style(trans_box, 1);
 	}
 
 	gtranslator_config_close();

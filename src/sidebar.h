@@ -21,13 +21,6 @@
 #define GTR_SIDEBAR_H 1
 
 #include "parse.h"
-#include <gal/shortcut-bar/e-shortcut-bar.h>
-
-/*
- * The shortcut bar releated widgets/variables/methods.
- */ 
-
-EShortcutModel	*model;
 
 /*
  * Creates the shortcut bar and returns it as a GtkWidget.
@@ -43,5 +36,16 @@ void gtranslator_sidebar_activate_views(void);
  * Clean the sidebar. Remove all the nice icons for the views.
  */
 void gtranslator_sidebar_clear_views(void);
+
+/*
+ * Hide/Show the sidebar and return if the action was successful.
+ */
+gboolean gtranslator_sidebar_hide(void);
+gboolean gtranslator_sidebar_show(void);
+
+/*
+ * Should avtivate the hide/show functions for the sidebar.
+ */
+void gtranslator_sidebar_toggle(void);
 
 #endif

@@ -63,8 +63,11 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
  * Applies the foreground/background/font settings for the given
  *  widget.
  */
-void gtranslator_set_style(GtkWidget *widget);
+void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget);
 
+/*
+ * Utility function for getting the stuff working.
+ */
 GdkColor *gtranslator_get_color_from_type(ColorType type);
 
 #endif

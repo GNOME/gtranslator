@@ -54,7 +54,7 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 	/*
 	 * Strip all extensions after the _first_ point.
 	 */ 
-	while(filename[count]!='.')
+	while(filename[count] && filename[count]!='.')
 	{
 		o=g_string_append_c(o, filename[count]);
 

@@ -290,28 +290,22 @@ int main(int argc, char *argv[])
 		/*
 		 * Apply the given color scheme if possible.
 		 */ 
-		gtranslator_color_scheme_apply(scheme_filename);
+		theme=gtranslator_color_scheme_open(scheme_filename);
 	}
-
-	/*
-	 * Load the applied color scheme from the prefs and check it; if it
-	 *  doesn't seem to be right apply the original default color names.
-	 */ 
-	theme=gtranslator_color_scheme_load_from_prefs();
+	else
+	{
+		/*
+		 * Load the applied color scheme from the prefs and check it; if it
+		 *  doesn't seem to be right apply the original default color names.
+		 */ 
+		theme=gtranslator_color_scheme_load_from_prefs();
+	}
 
 	if(!theme)
 	{
 		gtranslator_color_scheme_restore_default();
 		theme=gtranslator_color_scheme_load_from_prefs();
 	}
-	
-	/*
-	 * Set up the text boxes with the _new_ style.
-	 */ 
-	gtranslator_config_init();
-	gtranslator_set_style(text_box);
-	gtranslator_set_style(trans_box);
-	gtranslator_config_close();
 	
 	/*
 	 * Parse the domains in the given directory or in GNOMELOCALEDIR.
@@ -393,6 +387,14 @@ int main(int argc, char *argv[])
 	
 	gtk_widget_show_all(gtranslator_application);
 	
+	/*
+	 * Set up the text boxes with the _new_ style.
+	 */ 
+	gtranslator_config_init();
+	gtranslator_set_style(text_box, 0);
+	gtranslator_set_style(trans_box, 1);
+	gtranslator_config_close();	
+
 	/*
 	 * Enter the Gtk+ main-loop.
 	 */

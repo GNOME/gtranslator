@@ -163,12 +163,13 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
  * Sets the style informations for the given widget
  *  (foreground, background and font).
  */
-void gtranslator_set_style(GtkWidget *widget)
+void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 {
-	GtkStyle *style;
-	gchar *spec;
-	GdkFont *font;
-	gchar *fontname;
+	GtkStyle 	*style;
+	GdkFont 	*font;
+	
+	gchar 		*spec;
+	gchar	 	*fontname;
 
 	g_return_if_fail(widget != NULL);
 
@@ -180,7 +181,7 @@ void gtranslator_set_style(GtkWidget *widget)
 	/*
 	 * Set up the stored values for the background from the preferences.
 	 */
-	if(GtrPreferences.use_own_specs)
+	if(GtrPreferences.use_own_colors)
 	{
 		spec=gtranslator_config_get_string("colors/own_bg");
 	}
@@ -198,7 +199,7 @@ void gtranslator_set_style(GtkWidget *widget)
 	/*
 	 * Do the same for the foreground.
 	 */
-	if(GtrPreferences.use_own_specs)
+	if(GtrPreferences.use_own_colors)
 	{
 		spec=gtranslator_config_get_string("colors/own_fg");
 	}
@@ -214,31 +215,46 @@ void gtranslator_set_style(GtkWidget *widget)
 	}
 	
 	/*
-	 * The stored font setting.
+	 * The stored font setting -- 1 should be given for the translation box.
 	 */
-	fontname=gtranslator_config_get_string("font/name");
+	if(foo_us_and_spec_the_widget==1)
+	{
+		fontname=gtranslator_config_get_string("interface/translation_font");
+	}
+	else
+	{
+		fontname=gtranslator_config_get_string("interface/original_font");
+	}
 
-	if(!fontname)
+	if(!fontname && GtrPreferences.use_own_fonts)
 	{
 		g_message(_("No font set! Using default font"));
+		
 		/*
-		 * Use gtranslator's font in this case.
+		 * Use gtranslator's font in this case -- should be a fallback font
+		 *  for your language.
 		 */
 		fontname=_("-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1");
 		
-		gtranslator_config_set_string("font/name", fontname);
+		gtranslator_config_set_string("interface/translation_font", fontname);
+		gtranslator_config_set_string("interface/original_font", fontname);
 	}
+	
 	/*
-	 * Set the font for the widget, if possible.
+	 * Set the font for the widget, if possible and wished.
 	 */
-	font=gdk_font_load(fontname);
-	if(font)
+	if(GtrPreferences.use_own_fonts)
 	{
-		/*
-		 * Unref old widget font.
-		 */
-		gdk_font_unref(style->font);
-		style->font=font;
+		font=gdk_font_load(fontname);
+	
+		if(font)
+		{
+			/*
+			 * Unref old widget font.
+			 */
+			gdk_font_unref(style->font);
+			style->font=font;
+		}
 	}
 	
 	/*
@@ -250,6 +266,7 @@ void gtranslator_set_style(GtkWidget *widget)
 	 * Clean up
 	 */
 	gtk_style_unref(style);
+	
 	g_free(fontname);
 }
 

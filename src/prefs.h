@@ -56,7 +56,8 @@ struct {
 	guint popup_menu		: 1;
 	guint check_recent_file		: 1;
 	guint uzi_dialogs		: 1;
-	guint use_own_specs		: 1;
+	guint use_own_fonts		: 1;
+	guint use_own_colors		: 1;
 	guint instant_spell_check	: 1;
 	guint use_own_dict		: 1;
 	guint keep_obsolete		: 1;
@@ -75,7 +76,8 @@ struct {
 	gchar *autosave_suffix; 
 	gchar *spell_command;
 	gchar *dictionary;
-	gchar *font;
+	gchar *msgid_font;
+	gchar *msgstr_font;
 	gchar *scheme;
 	gchar *defaultdomain;
 } GtrPreferences;
@@ -97,10 +99,5 @@ void gtranslator_preferences_init_default_values(void);
  * Initialize the syntax highlighting default colors.
  */
 void gtranslator_colors_init_default_colors(void);
-
-/*
- * Font/color specific widgets used in the preferences box.
- */
-GtkWidget *foreground, *background, *font;
 
 #endif

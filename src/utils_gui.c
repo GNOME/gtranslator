@@ -221,6 +221,74 @@ GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
 	return spin_button;
 }
 
+/*
+ * Adds a GnomeFontPicker to the given table.
+ */
+GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
+	gint row, const gchar *label_text, const gchar *title_text,
+	const gchar *fontspec, GtkSignalFunc callback)
+{
+	GtkWidget *label;
+	GtkWidget *font_selector;
+		
+	label=gtk_label_new(label_text);
+	
+	font_selector=gnome_font_picker_new();
+	
+	gnome_font_picker_set_title(GNOME_FONT_PICKER(font_selector), 
+		title_text);
+	
+	if(fontspec)
+	{
+		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font_selector),
+			fontspec);
+	}
+	
+	gnome_font_picker_set_mode(GNOME_FONT_PICKER(font_selector),
+		GNOME_FONT_PICKER_MODE_FONT_INFO);
+	
+	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), font_selector, 1, 2, 
+		row, row + 1);
+	
+	gtk_signal_connect(GTK_OBJECT(font_selector), "font_set",
+		GTK_SIGNAL_FUNC(callback), NULL);
+	
+	return font_selector;
+}
+
+/*
+ * Adds a GnomeColorPicker to the given table.
+ */
+GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
+	gint row, const gchar *label_text, const gchar *title_text,
+	ColorType color_type, GtkSignalFunc callback)
+{
+	GtkWidget *label;
+	GtkWidget *color_selector;
+	
+	label=gtk_label_new(label_text);
+
+	color_selector=gnome_color_picker_new();
+	
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER(color_selector),
+		title_text);
+	
+	gtranslator_config_init();
+	gtranslator_color_values_get(GNOME_COLOR_PICKER(color_selector), 
+		color_type);
+	gtranslator_config_close();
+	
+	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), color_selector, 1, 2, 
+		row, row + 1);
+	
+	gtk_signal_connect(GTK_OBJECT(color_selector), "color_set",
+		GTK_SIGNAL_FUNC(callback), NULL);	
+	
+	return color_selector;
+}
+
 GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(GtkWidget  * probox, gint rows, gint cols,
 			     const char *label_text)
 {
