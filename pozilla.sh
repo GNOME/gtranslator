@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.2
+export POZILLA_RELEASE=0.21
 
 #
 # The configuration dir, the mail body & mail.
@@ -38,18 +38,22 @@ echo -n "" > $CONFIG_DIR/pozilla.output
 
 case $1 in
 -[hH]*|--[hH]*)
+	echo "----------------------------------------"
 	echo "Pozilla.sh R $POZILLA_RELEASE"
-	echo ""
+	echo "----------------------------------------"
 	echo "Author: Fatih Demir <kabalak@gmx.net>"
-	echo ""
+	echo "----------------------------------------"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
+	echo "----------------------------------------"
 		exit 1
 ;;
 -[vV]*|--[vV]*)
+	echo "----------------------------------------"
 	echo "Pozilla.sh R $POZILLA_RELEASE"
-	echo ""
+	echo "----------------------------------------"
         echo "Author: Fatih Demir <kabalak@gmx.net>"
+	echo "----------------------------------------"
 		exit 1
 ;;
 *)
@@ -95,7 +99,7 @@ export SUBJECT="[ Pozilla #$POZILLA_NO ] $PACKAGE R $RELEASE"
 for i in $PO_FILES
 	do
 	AUTHOR=`grep ^\"Last $i|sed -e 's/.*:\ //g' \
-		-e 's/\\\n.*$//g'`
+		-e 's/\\\n.*$//g' -e 's/\,//g'`
 	#
 	# And evaluate the statistics for the po-file.
 	#
@@ -122,7 +126,7 @@ for i in $PO_FILES
 	echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
 	echo "- the po-files - send a mail to Fatih Demir <kabalak@gmx.net>" >> $BODY_FILE
 	echo "Please reply to \"Fatih Demir <kabalak@gmx.net>\". Thanks." >> $BODY_FILE
-	mail -s $SUBJECT $AUTHOR < $BODY_FILE
+	mail -s "$SUBJECT" "$AUTHOR" < $BODY_FILE
         done
 
 #

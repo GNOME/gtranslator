@@ -110,8 +110,10 @@ else
 fi
 GNOME_CFLAGS=`gnome-config --cflags gnome`
 GNOME_LIBS=`gnome-config --libs gnome`
+GNOME_LIB_CONF_DIR=`gnome-config --libdir`
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
+AC_SUBST(GNOME_LIB_CONF_DIR)
 AM_CONDITIONAL(GCONF_IS_PRESENT, test x$gconf_is_present = xyes)
 
 dnl -------------------------------------------------------------------
@@ -221,6 +223,8 @@ Makefile
 data/Makefile
 data/desktop/Makefile
 data/gconf/Makefile
+data/gnome-config/gtranslatorConf.sh
+data/gnome-config/Makefile
 data/mime/Makefile
 data/mime/gtranslator.keys
 data/oaf/Makefile
