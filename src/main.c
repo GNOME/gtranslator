@@ -123,6 +123,7 @@ int main(int argc, char *argv[])
 	**/
 	file_opened = FALSE;
 	args = poptGetArgs(context);
+
 	if (args)
 		parse(args[0]);
 	poptFreeContext(context);

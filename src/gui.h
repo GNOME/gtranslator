@@ -41,6 +41,8 @@ gchar status[128];
 
 /* Actions IDs */
 enum {
+	/* FIXME: some time this is disabled */
+	ACT_NULL,
 	ACT_COMPILE,
 	ACT_SAVE,
 	ACT_UPDATE,
