@@ -461,7 +461,7 @@ static gchar *restore_msg(gchar * given)
 
 	if(!given)
 	{
-		return "";
+		return g_strdup("");
 	}
 
 	rest = g_string_sized_new(strlen(given));
@@ -508,8 +508,8 @@ static gchar *restore_msg(gchar * given)
 			lines++;
 		}
 	}
-	result = g_strdup(rest->str);
-	g_string_free(rest, TRUE);
+	result = rest->str;
+	g_string_free(rest, FALSE);
 	return result;
 }
 
@@ -530,6 +530,8 @@ static void write_the_message(gpointer data, gpointer fs)
 	else
 		fprintf((FILE *) fs, "msgid \"%s\"\nmsgstr \"%s\"\n\n",
 			id, str);
+	g_free(id);
+	g_free(msg);
 }
 
 static gboolean actual_write(const gchar * name)
