@@ -15,7 +15,7 @@
 #
 
 print_separator_line ()  {
-	echo "·-=============================================================-·"
+	echo "·-==================================================================-·"
 }
 
 dry_run_information_message ()  {
@@ -34,7 +34,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=5.2
+export POZILLA_RELEASE=5.3
 
 #
 # Here we do define the corresponding i18n mailing list which should also get
@@ -64,6 +64,11 @@ export LC_ALL=C
 # Set the default po directory to ./po
 #
 export PO_DIR="."
+
+#
+# Start the pozilla.sh internal timer with the seconds argument by now.
+#
+POZILLA_SH_TIMER_START=`date +%s`
 
 #
 # Check for all necessary applications for pozilla.sh.
@@ -161,6 +166,7 @@ do
 	echo "-D --dry-run      Don't send any EMails, create statistics (implies -S)"
 	echo "-N --no-list      Don't send any EMails to the list"
 	echo "-n --no-personal  Don't send personal EMails to the last translators"
+	echo "-t --timer-stats  Print pozilla.sh working seconds statistic at the end"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
 	print_separator_line
@@ -206,6 +212,10 @@ do
 		print_separator_line
 		export NO_LIST=yes
 	fi
+	;;
+	-t|--timer-stats)
+	shift 1
+		export TIMER_STATS=yes
 	;;
 	-o|--output-file)
 	shift 1
@@ -857,6 +867,23 @@ if test "&$PRINT_TABLE" = "&yes" ; then
 	else
 		echo -e "$STAT_TABLE"
 	fi
+fi
+
+#
+# Stop our internal timer by now -- we should know now how many seconds we did
+#  work for the current call.
+#
+POZILLA_SH_TIMER_STOP=`date +%s`
+POZILLA_SH_WORKING_TIME=$[ $POZILLA_SH_TIMER_STOP - $POZILLA_SH_TIMER_START ]
+
+#
+# If we should print a small working information about our "working seconds"
+#  then it's now the best place to do so.
+#
+if test "say_$TIMER_STATS" = "say_yes" ; then
+	print_separator_line
+	echo "  pozilla.sh R $POZILLA_RELEASE worked $POZILLA_SH_WORKING_TIME seconds long for you."
+	print_separator_line
 fi
 
 #
