@@ -144,3 +144,14 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 	}
 }
 
+/*
+ * Simply saves some typing...
+ */
+gchar *gtranslator_utf8_convert_to_utf8(const gchar *str)
+{
+	g_return_val_if_fail(str!=NULL, NULL);
+	g_return_val_if_fail(GTR_HEADER(po->header)!=NULL, NULL);
+	g_return_val_if_fail(GTR_HEADER(po->header->charset)!=NULL, NULL);
+
+	return (g_convert(str, -1, "UTF-8", po->header->charset, NULL, NULL, NULL));
+}
