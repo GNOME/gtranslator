@@ -4,7 +4,6 @@ SUBDIRS = \
 	colorschemes \
 	desktop \
 	etspecs \
-	gconf \
 	mime \
 	pixmaps \
 	scripts
