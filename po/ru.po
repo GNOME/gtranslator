@@ -1,6 +1,8 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2000.
 #
+# $Id$
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
@@ -447,7 +449,7 @@ msgstr ""
 
 #: src/prefs.c:284
 msgid "Save geometry on exit & restore it on startup"
-msgstr "Сохранять геометирию при выходе и восстанавливать при запуске"
+msgstr "Сохранять геометрию при выходе и восстанавливать при запуске"
 
 #: src/prefs.c:287
 msgid "Don't show the update information dialogs"
@@ -585,14 +587,17 @@ msgid ""
 "Error in file \"%s\"\n"
 "at line %d.\n"
 "Please check the file and try again."
-msgstr ""
+msgstr "Ошибка в файле \"%s\"\n"
+"строка %d.\n"
+"Пожалуйста, проверьте файл и попробуйте еще раз."
 
 #: src/parse.c:235
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The file is empty:\n"
 "%s"
-msgstr "Файл базы данных сообщений пуст!"
+msgstr "Файл пуст:\n"
+"%s"
 
 #: src/parse.c:254
 #, fuzzy
@@ -622,7 +627,7 @@ msgid ""
 msgstr ""
 
 #: src/parse.c:528
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You didn't change anything in\n"
 "%s\n"
@@ -630,7 +635,6 @@ msgid ""
 msgstr ""
 "Вы ничего не изменили в\n"
 "%s\n"
-"!\n"
 "Все равно хотите сохранить?"
 
 #: src/parse.c:536
@@ -703,7 +707,7 @@ msgstr "База данных сообщений \"%s\" видимо не была инициализирована!\n"
 
 #: src/spell.c:25
 msgid "Check spelling"
-msgstr ""
+msgstr "Проверить правописание"
 
 #: src/spell.c:54
 msgid "Spell checking complete!"
