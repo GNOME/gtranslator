@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Roy-Magne Mo <rmo@sunnmore.net>
  * 
@@ -75,7 +75,7 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 
 	about =
 	    gnome_about_new("gtranslator", VERSION,
-		_("(C) 1999-2002 The Free Software Foundation"),
+		_("(C) 1999-2003 The Free Software Foundation"),
 		_("gtranslator is a po file editing suite with many bells and whistles."),
 		authors,
 		documenters,
