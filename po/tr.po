@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.32\n"
-"POT-Creation-Date: 2001-01-07 15:12+0100\n"
-"PO-Revision-Date: 2001-01-10 18:32+0100\n"
+"POT-Creation-Date: 2001-01-14 15:35+0100\n"
+"PO-Revision-Date: 2001-01-14 15:36+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Yekin metinlerde"
 msgid "Find in: "
 msgstr "Bulma mahalleri:"
 
-#: src/dialogs.c:308
+#: src/dialogs.c:309
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt çalýþtýrýlýrken bir hata oldu:\n"
 
@@ -238,7 +238,7 @@ msgstr "Ileti du_rumu"
 msgid "Open"
 msgstr "Aç"
 
-#: src/gui.c:256 src/open-po-file-dialog-interface.c:49
+#: src/gui.c:256
 msgid "Open a po-file"
 msgstr "Bir po-dosyasýný aç"
 
@@ -638,7 +638,7 @@ msgstr "Ana pencere boyutlarýný belirler"
 msgid "Error during GConf initialization: %s."
 msgstr "GConf baþlama hatasý: `%s'."
 
-#: src/parse.c:136
+#: src/parse.c:135
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -647,12 +647,12 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:174 src/parse.c:585
+#: src/parse.c:173 src/parse.c:584
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" yok ki!"
 
-#: src/parse.c:265
+#: src/parse.c:264
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -663,7 +663,7 @@ msgstr ""
 "var (satýr %d).\n"
 "Lütfen dosyayý gözden gecýrip bir deneme daha yap."
 
-#: src/parse.c:300
+#: src/parse.c:299
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -672,25 +672,25 @@ msgstr ""
 "Dosya boþtur:\n"
 "%s"
 
-#: src/parse.c:320 src/parse.c:326
+#: src/parse.c:319 src/parse.c:325
 msgid "There's no file to open!"
 msgstr "Açýlacak dosya yok ki!"
 
-#: src/parse.c:366
+#: src/parse.c:365
 msgid "The file has no header!"
 msgstr "Dosyanýn baþlýðý yok!"
 
-#: src/parse.c:369
+#: src/parse.c:368
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 
-#: src/parse.c:372
+#: src/parse.c:371
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:547
+#: src/parse.c:546
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -702,7 +702,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:633
+#: src/parse.c:632
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -713,11 +713,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya yeniden kaydedilsin mi?"
 
-#: src/parse.c:641
+#: src/parse.c:640
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþik yok"
 
-#: src/parse.c:715
+#: src/parse.c:714
 #, c-format
 msgid ""
 "File %s\n"
@@ -726,11 +726,11 @@ msgstr ""
 "Dosya %s\n"
 "deðiþmiþ. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:754
+#: src/parse.c:753
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
 
-#: src/parse.c:779
+#: src/parse.c:778
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -739,11 +739,11 @@ msgstr ""
 "Denetleme baþarýlý oldu: \n"
 "Rapor: %s"
 
-#: src/parse.c:802
+#: src/parse.c:801
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:843
+#: src/parse.c:842
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
@@ -925,21 +925,13 @@ msgstr "Denetlenmiþ gettext dosyasý `%s''yi açamadým!"
 msgid "Couldn't open gzip'd gettext file `%s'!"
 msgstr "Gzip'lenmiþ gettext dosyasý `%s''yi açamadým!"
 
-#: src/open-po-file-dialog-interface.c:109
-msgid "Filename: "
-msgstr "Dosya ismi:"
+#: data/oaf/Gtranslator_Gtranslatord.oaf.in.h:1
+msgid "gtranslatord daemon"
+msgstr "gtranslatord sunucusu"
 
-#: src/open-po-file-dialog-interface.c:135
-msgid "File size:   "
-msgstr "Dosya boyutu:"
-
-#: src/open-po-file-dialog-interface.c:161
-msgid "Last edit: "
-msgstr "Son deðiþim:"
-
-#: src/open-po-file-dialog-interface.c:187
-msgid "Revision: "
-msgstr "Sürüm:"
+#: data/oaf/Gtranslator_Gtranslatord.oaf.in.h:2
+msgid "gtranslatord message database and team management daemon"
+msgstr "gtranslatord ileti/tercüme tabanýi ve tercüme yönetim sunucusu"
 
 #.
 #. * Print out a warning and exit from the

@@ -14,6 +14,7 @@ SHELL = /bin/sh
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
+top_builddir = ..
 VPATH = @srcdir@
 
 prefix = @prefix@
@@ -33,7 +34,12 @@ GENCAT = @GENCAT@
 GMSGFMT = PATH=../src:$$PATH @GMSGFMT@
 MSGFMT = @MSGFMT@
 XGETTEXT = PATH=../src:$$PATH @XGETTEXT@
-MSGMERGE = PATH=../src:$$PATH msgmerge
+XML_I18N_UPDATE = @XML_I18N_UPDATE@
+XML_I18N_EXTRACT = @XML_I18N_EXTRACT@
+ 
+MSGMERGE = XML_I18N_EXTRACT=$(XML_I18N_EXTRACT) $(XML_I18N_UPDATE) --dist
+GENPOT   = XML_I18N_EXTRACT=$(XML_I18N_EXTRACT) $(XML_I18N_UPDATE) --pot
+
 
 DEFS = @DEFS@
 CFLAGS = @CFLAGS@
@@ -47,7 +53,7 @@ SOURCES = cat-id-tbl.c
 POFILES = @POFILES@
 GMOFILES = @GMOFILES@
 DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(PACKAGE).pot \
-stamp-cat-id $(POFILES) $(GMOFILES) $(SOURCES)
+stamp-cat-id $(POFILES) $(GMOFILES) $(SOURCES) $(XML_I18N_UPDATE) $(XML_I18N_EXTRACT)
 
 POTFILES = \
 
@@ -83,12 +89,7 @@ all-yes: $(srcdir)/cat-id-tbl.c $(CATALOGS)
 all-no:
 
 $(srcdir)/$(PACKAGE).pot: $(POTFILES)
-	$(XGETTEXT) --default-domain=$(PACKAGE) --directory=$(top_srcdir) \
-	  --add-comments --keyword=_ --keyword=N_ \
-	  --files-from=$(srcdir)/POTFILES.in \
-	&& test ! -f $(PACKAGE).po \
-	   || ( rm -f $(srcdir)/$(PACKAGE).pot \
-		&& mv $(PACKAGE).po $(srcdir)/$(PACKAGE).pot )
+	$(GENPOT)
 
 $(srcdir)/cat-id-tbl.c: $(srcdir)/stamp-cat-id; @:
 $(srcdir)/stamp-cat-id: $(srcdir)/$(PACKAGE).pot
@@ -215,16 +216,28 @@ update-po: Makefile
 	for cat in $$catalogs; do \
 	  cat=`basename $$cat`; \
 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
-	  mv $$lang.po $$lang.old.po; \
+	  cp $$lang.po $$lang.old.po; \
 	  echo "$$lang:"; \
-	  if $(MSGMERGE) $$lang.old.po $(PACKAGE).pot -o $$lang.po; then \
+	  if $(MSGMERGE) $$lang; then \
 	    rm -f $$lang.old.po; \
 	  else \
 	    echo "msgmerge for $$cat failed!"; \
-	    rm -f $$lang.po; \
 	    mv $$lang.old.po $$lang.po; \
 	  fi; \
 	done
+
+.po: Makefile
+	$(MAKE)  $(PACKAGE).pot;
+	PATH=`pwd`/../src:$$PATH; \
+	echo; printf "$*: "; \
+	if $(MSGMERGE) $*; then \
+	  rm -f $*.old.po; \
+	  else \
+	    echo "msgmerge for * failed!"; \
+	    mv $*.old.po $*.po; \
+	fi; \
+	msgfmt --statistics $*.po; echo;
+
 
 POTFILES: POTFILES.in
 	( if test 'x$(srcdir)' != 'x.'; then \
