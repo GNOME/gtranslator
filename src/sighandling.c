@@ -63,7 +63,7 @@ void gtranslator_signal_handler(int signal)
 				
 				po->filename=g_strdup_printf("%s/%s",
 					g_get_home_dir(),
-					".gtranslator-crash.po");
+					".crash-gtranslator.po");
 
 				/*
 				 * Save the file under the special filename.

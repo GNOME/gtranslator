@@ -535,7 +535,7 @@ Saying \"No\" will delete the crash recovery file."),
 	g_free(recovery_message);
 
 	file=g_strdup_printf("%s/%s", g_get_home_dir(), 
-		".gtranslator-crash.po");
+		".crash-gtranslator.po");
 	
 	if(reply==GNOME_YES)
 	{

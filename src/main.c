@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
 	 */ 
 	if(g_file_exists(g_strdup_printf("%s/%s", 
 				g_get_home_dir(),
-				".gtranslator-crash.po")))
+				".crash-gtranslator.po")))
 	{
 		crash_recovery_dialog();
 	}
