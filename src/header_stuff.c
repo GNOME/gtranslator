@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -46,7 +46,7 @@ static GtkWidget *e_header = NULL;
 
 static GtkWidget *prj_page, *lang_page, *lang_vbox;
 
-static GtkWidget *prj_name, *prj_version, *prj_comment, *take_my_options;
+static GtkWidget *prj_name, *prj_version, *rmbt, *prj_comment, *take_my_options;
 static GtkWidget *translator, *tr_email, *pot_date, *po_date;
 static GtkWidget *language_combo, *charset_combo, *enc_combo, *lg_combo;
 
@@ -108,6 +108,9 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 			  ph->prj_version = g_strdup("");
 			}
 		}
+		else
+		if_key_is("Report-Msgid-Bugs-To")
+		    ph->report_message_bugs_to = g_strdup(pair[1]);
 		else
 		if_key_is("POT-Creation-Date")
 		    ph->pot_date = g_strdup(pair[1]);
@@ -184,6 +187,7 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 	
 	msg->msgstr = g_strdup_printf("\
 Project-Id-Version: %s\n\
+Report-Msgid-Bugs-To: %s\n\
 POT-Creation-Date: %s\n\
 PO-Revision-Date: %s\n\
 Last-Translator: %s <%s>\n\
@@ -192,6 +196,7 @@ MIME-Version: %s\n\
 Content-Type: text/plain; charset=%s\n\
 Content-Transfer-Encoding: %s\n",
 		version,
+		h->report_message_bugs_to,
 		h->pot_date,
 		h->po_date,
 		h->translator, h->tr_email,
@@ -254,6 +259,7 @@ void gtranslator_header_free(GtrHeader * h)
 	GTR_FREE(h->comment);
 	GTR_FREE(h->prj_name);
 	GTR_FREE(h->prj_version);
+	GTR_FREE(h->report_message_bugs_to);
 	GTR_FREE(h->pot_date);
 	GTR_FREE(h->po_date);
 	GTR_FREE(h->translator);
@@ -417,12 +423,12 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	if(ph->generator)
 	{
 		prj_page=gtranslator_utils_append_page_to_preferences_dialog(
-			e_header, 6, 2, _("Project"));
+			e_header, 7, 2, _("Project"));
 	}
 	else
 	{
 		prj_page=gtranslator_utils_append_page_to_preferences_dialog(
-			e_header, 5, 2, _("Project"));
+			e_header, 6, 2, _("Project"));
 	}
 	
 	label = gtk_label_new(_("Translator and Language"));
@@ -462,7 +468,15 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	    		gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Generator:"),
 	    			ph->generator, G_CALLBACK(gtranslator_header_edit_changed));
 		gtk_widget_set_sensitive(foo_me_i_ve_been_wracked, FALSE);
+
+		rmbt = gtranslator_utils_attach_entry_with_label(prj_page, 6, _("Report message string bugs to:"),
+			ph->report_message_bugs_to, NULL);
 	}
+
+	rmbt = gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Report message string bugs to:"),
+		ph->report_message_bugs_to, NULL);
+
+	gtk_widget_set_sensitive(rmbt, FALSE);
 
 	/*
 	 * Toggles whether personal options or entries are used to fill header
@@ -769,6 +783,7 @@ GtrHeader *gtranslator_header_create_from_prefs(void)
 
 	h->prj_name=g_strdup("PACKAGE");
 	h->prj_version=g_strdup("VERSION");
+	h->report_message_bugs_to=g_strdup("");
 	
 	/* 
 	 * Fill h->po_date with current time 
