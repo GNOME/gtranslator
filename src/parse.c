@@ -373,7 +373,7 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				msgid_ok = TRUE;
 				if(line[12]!='\0')
 				{
-					append_line(&msg->msgstr_0, &line[10], FALSE);
+					append_line(&msg->msgstr, &line[10], FALSE);
 				}
 			}
 			else if(nautilus_str_has_prefix(line, "msgstr[1] \""))
@@ -412,21 +412,17 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				}
 				else if((msgid_ok == TRUE) && (msgstr_ok == FALSE))
 				{
-					if(msg->msgstr_0 && !msg->msgstr_1 && !msg->msgstr_2)
+					if(msg->msgstr && !msg->msgstr_1 && !msg->msgstr_2)
 					{
-						append_line(&msg->msgstr_0, line, TRUE);
+						append_line(&msg->msgstr, line, TRUE);
 					}
-					else if(msg->msgstr_0 && !msg->msgstr_2)
+					else if(msg->msgstr && msg->msgstr_1 && !msg->msgstr_2)
 					{
 						append_line(&msg->msgstr_1, line, TRUE);
 					}
-					else if(msg->msgstr_2)
-					{
-						append_line(&msg->msgstr_2, line, TRUE);
-					}
 					else
 					{
-						g_message("Gnnaaa!");
+						append_line(&msg->msgstr_2, line, TRUE);
 					}
 				}
 				else if((comment_ok == FALSE) &&
@@ -777,13 +773,51 @@ static void write_the_message(gpointer data, gpointer fs)
 	GTR_FREE(id);
 
 	/*
-	 * Preface for the msgstr -- the content comes below.
+	 * Check if we've got a pluram forms message.
 	 */
-	string=g_string_append(string, "\"\nmsgstr \"");
+	if(po->header->plural_forms && msg->msgid_plural && msg->msgstr)
+	{
+		string=g_string_append(string, "\"\nmsgid_plural \"");
+
+		id=restore_msg(msg->msgid_plural);
+		string=g_string_append(string, id);
+		GTR_FREE(id);
+
+		id=restore_msg(msg->msgstr);
+
+		string=g_string_append(string, "\"\nmsgstr[0] \"");
+		string=g_string_append(string, id);
+		GTR_FREE(id);
+
+		if(msg->msgstr_1)
+		{
+			id=restore_msg(msg->msgstr_1);
+
+			string=g_string_append(string, "\"\nmsgstr[1] \"");
+			string=g_string_append(string, id);
+			GTR_FREE(id);
+		}
+
+		if(msg->msgstr_2)
+		{
+			id=restore_msg(msg->msgstr_2);
+
+			string=g_string_append(string, "\"\nmsgstr[1] \"");
+			string=g_string_append(string, id);
+			GTR_FREE(id);
+		}
+	}
+	else
+	{
+		/*
+		 * Preface for the msgstr -- the content comes below.
+		 */
+		string=g_string_append(string, "\"\nmsgstr \"");
 	
-	str=restore_msg(msg->msgstr);
-	string=g_string_append(string, str);
-	GTR_FREE(str);
+		str=restore_msg(msg->msgstr);
+		string=g_string_append(string, str);
+		GTR_FREE(str);
+	}
 	
 	/*
 	 * Write the string content and the newlines to our write stream.

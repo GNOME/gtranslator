@@ -63,7 +63,10 @@ typedef struct {
 
 	gchar		*msgid_plural;
 
-	gchar		*msgstr_0;
+	/*
+	 * The plural forms msgstrs - the first "msgstr[0]" is stored in the
+	 *  1st message translation equivalent "msgstr" as it should be logical.
+	 */
 	gchar		*msgstr_1;
 	gchar		*msgstr_2;
 	

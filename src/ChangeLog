@@ -1,5 +1,13 @@
 2003-08-03  Fatih Demir <kabalak@gtranslator.org>
 
+	* dialogs.c: Fixed the "Save as" dialog callbacks as the signal was
+		connected to the wrong "response" - a change to "clicked" for
+		 the button clicks in the file selection dialog and now the
+		  save as dialog works :-)
+
+	* header_stuff.c: Handle the report msgid bugs to header part more
+		seriously and don't print "(null)" to the po files.
+
 	* message.c, messages.h & parse.c: Implement a studido way of support
 		for the plural forms via simply attaching msgstr_0/_1/_2 to
 		 the GtrMsg structure - is stupid, but shall work and makes

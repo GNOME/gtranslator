@@ -189,13 +189,15 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	}
 	
 	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
-			   "response", GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
-			   (gpointer) dialog);
+		"clicked",
+		GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
+		(gpointer) dialog);
+
 	g_signal_connect_swapped(G_OBJECT
-				 (GTK_FILE_SELECTION(dialog)->cancel_button),
-				 "response",
-				 G_CALLBACK(gtk_widget_destroy),
-				 G_OBJECT(dialog));
+		(GTK_FILE_SELECTION(dialog)->cancel_button),
+		"clicked",
+		G_CALLBACK(gtk_widget_destroy),
+		G_OBJECT(dialog));
 
 	gtranslator_file_dialogs_set_directory(&dialog);
 	

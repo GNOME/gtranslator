@@ -117,7 +117,16 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		}
 		else
 		if_key_is("Report-Msgid-Bugs-To")
-		    ph->report_message_bugs_to = g_strdup(pair[1]);
+		{
+			if(pair[1]!=NULL && pair[1]!='\0' && strchr(pair[1], '.'))
+			{
+				ph->report_message_bugs_to = g_strdup(pair[1]);
+			}
+			else
+			{
+				ph->report_message_bugs_to = g_strdup("");
+			}
+		}
 		else
 		if_key_is("POT-Creation-Date")
 		    ph->pot_date = g_strdup(pair[1]);
@@ -193,7 +202,12 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 		version = g_strdup_printf("%s %s", h->prj_name, h->prj_version);
 	else
 		version = g_strdup(h->prj_name);
-	
+
+	if(!h->report_message_bugs_to)
+	{
+		h->report_message_bugs_to=g_strdup("");
+	}
+
 	if(h->plural_forms)
 	{
 		msg->msgstr = g_strdup_printf("\n"\
