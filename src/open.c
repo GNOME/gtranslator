@@ -19,6 +19,59 @@
 
 #include "open-differently.h"
 
+
+/*
+ * Detects whether we can open up the given file with the
+ *  "special" open functions of gtranslator.
+ */
+gboolean gtranslator_open_po_file(gchar *file)
+{
+	/*
+	 * Reverse the filename for an easier catching
+	 *  of the supported suffixes.
+	 */  
+	g_strreverse(file);
+	
+	/*
+	 * For the compiled gettext files we do support
+	 *  the "mo" and "gmo" suffixes; detect them.
+	 */  
+	if(!g_strncasecmp(file, "om.", 3)
+		||!g_strncasecmp(file, "omg.", 4))
+	{
+		/*
+		 * Reverse the filename for the function into
+		 *  the original form again and open them then.
+		 */
+		g_strreverse(file);
+		gtranslator_open_compiled_po_file(file);
+		return TRUE;
+	}
+	/*
+	 * And for the gzip'ed po files we do support
+	 *  the "po.gz" suffixes. detect the suffix if
+	 *   possible.
+	 */  
+	if(!g_strncasecmp(file, "zg.op.", 6))
+	{
+		/*
+		 * This function opens up the gzip'ed gettext file
+		 *  via the special gtranslator function.
+		 */ 
+		g_strreverse(file);
+		gtranslator_open_gzipped_po_file(file);
+		return TRUE;
+	}
+
+	/*
+	 * Reverse the filename again into the original
+	 *  form to allow the normal parsing routines to
+	 *   work.
+	 */   
+	g_strreverse(file);
+	return FALSE;
+}
+
 /*
  * Open up the given compiled gettext file.
  */
@@ -29,8 +82,8 @@ void gtranslator_open_compiled_po_file(gchar *file)
 	/*
 	 * Set the name of the temporary file we will be using.
 	 */
-	tempfilename=g_strdup_printf("%s/temp_po_file",
-		((g_getenv("TMPDIR")) ? g_getenv("TMPDIR"): "/tmp"));
+	tempfilename=g_strdup_printf("%s/gtranslator_temp_po_file",
+		g_get_home_dir());
 	/*
 	 * Build up the command to execute in the shell to get the plain
 	 *  gettext file.
@@ -75,8 +128,8 @@ void gtranslator_open_gzipped_po_file(gchar *file)
 	 * Build the a temporary filename in the same way as for the
 	 *  gtranslator_open_compiled_po_file function.
 	 */
-	tempfilename=g_strdup_printf("%s/temp_po_file",
-		((g_getenv("TMPDIR")) ? g_getenv("TMPDIR"): "/tmp"));
+	tempfilename=g_strdup_printf("%s/gtranslator_temp_po_file",
+		g_get_home_dir());
 	/* 
 	 * Set up the command to execute in the system shell.
 	 */

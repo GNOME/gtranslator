@@ -28,6 +28,7 @@
 #include "session.h"
 #include "prefs.h"
 #include "parse.h"
+#include "open-differently.h"
 #include <libgtranslator/parse-db.h>
 #include <libgtranslator/team-handle.h>
 
@@ -136,7 +137,16 @@ int main(int argc, char *argv[])
 	 */
 	if (args)
 	{
-		parse(args[0]);
+		/*
+		 * Try to open up the supported "special" gettext file types.
+		 */ 
+		if(!gtranslator_open_po_file((gchar *) args[0]))
+		{
+			/*
+			 * Open the file as a "normal" gettext po file
+			 */ 
+			parse(args[0]);
+		}
 	}
 	
 	poptFreeContext(context);

@@ -29,6 +29,11 @@
 #include "gui.h"
 
 /*
+ * Detects if we can open it with our "special" open functions.
+ */
+gboolean gtranslator_open_po_file(gchar *file); 
+
+/*
  * Open up a compiled gettext po file.
  */ 
 void gtranslator_open_compiled_po_file(gchar *file);

@@ -1,14 +1,31 @@
 2001-01-03  Fatih Demir	<kabalak@gmx.net>
 
+	* open-differently.c/.h: Added a method which detects
+		and returns TRUE if the "special" methods of
+		 gtranslator can open the detected suffixes.
+
+	* parse.c: Filter the new temporary file's name
+		and try to save the file under a different
+		 filename.
+
+	* main.c: Call the new detection method to re-allow
+		opening of compiled and gzip'ed gettext files.
+
+	* open-differently.c: Changed the temporary file
+		directory from "/tmp" to the home directory.
+
+	* ChangeLog: Applied a aspell spell check run
+		on this file.
+
 	* about.c/.h, find.c/.h, dialogs.c/.h & dnd.c/.h:
 	        Reformatted these files.
 
 	* gtkspell.c: Changed the mouse button on which
 		the gtkspell suggestion list reacts from 
 		 the right one (which is already used by the
-		  eventually enabled popup menu) to the 
+		  eventually enabled pop up menu) to the 
 		   middle one (this is only conditional; if the
-		    popup menu is disabled, it's still on the
+		    po-pup menu is disabled, it's still on the
 		     right mouse button).
 
 	* session.c/.h: Reformatted the comments.
@@ -24,7 +41,7 @@
 		 header and added the gtkspell calls conditionally
 		  according to the preferences.
 
-	* spell.c/.h: Removed these oldsome files.
+	* spell.c/.h: Removed these old some files.
 
 	* Makefile.am: Removed spell.c/.h from the sources.
 
@@ -39,7 +56,7 @@
 
 2001-01-01  Fatih Demir	<kabalak@gmx.net>
 
-	* parse.c: Added an outcommented call to the new
+	* parse.c: Added an out commented call to the new
 		recent files' methods of libgtranslator.
 
 2000-12-31  Fatih Demir	<kabalak@gmx.net>
@@ -53,7 +70,7 @@
 		preferences dialog sources.
 
 	* open-differently.c/.h: Changed the comment style,
-		reformatted the code and changed the fucntion
+		reformatted the code and changed the function
 		 names.
 
 	* update.c: Adapted the script name change, also adapted
@@ -84,7 +101,7 @@
 
 2000-12-30  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* gui.c: implemented sticky message status on menuitem toggle.
+	* gui.c: implemented sticky message status on menu item toggle.
 	* parse.c,parse.h: new mark_msg_sticky function.
 	* gui.c: Fix memory leak in update_appbar (str was not freed). 
 	change status logic a bit, to make it simpler.
@@ -93,7 +110,7 @@
 	
 2000-12-29  Fatih Demir	<kabalak@gmx.net>
 
-	* Makefile.am: Include the new files alltogether in a build,
+	* Makefile.am: Include the new files altogether in a build,
 		removed the "SophInterfaceFiles" from the EXTRA_DIST
 		 and it's targetism.
 
@@ -173,7 +190,7 @@
 	(update) do not initialize empty string. Always close file before
 	updating and restore it later. Free strings.
 	(gtranslator_open_mo_file) ditto.
-	Removed not useful comments and checks for existance of surely allocated
+	Removed not useful comments and checks for existence of surely allocated
 	strings.
 	* parse.h: removed undotchar declaration.
 
@@ -186,7 +203,7 @@
 	* parse.c/.h: Added the a new function
 		( gtranslator_open_mo_file ), which opens up
 		   a mo-file ( the compiled gettext files )
-		    by calling msgunfmt and tee'ing it's output
+		    by calling msgunfmt and teeing it's output
 		     to a temporary file...
 		Changed the arguments of a file from being
 		 "const char *" to "const gchar *", added a
@@ -275,7 +292,7 @@
 	* gui.c, parse.c: fixed various places where messages were counted.
 		Removed extra update_appbar calls. Use po->length instead of
 		g_list_length(po->messages).
-	* parse.c: made	determine_translation_status static.  Create menupath
+	* parse.c: made	determine_translation_status static.  Create menu path
 		only once in gtranslator_display_recent. Initialize counts to 0
 		in get_translated_count. Simplified percentage count, now shows
 		correctly. Removed onepercent variable.
@@ -283,7 +300,7 @@
 2000-10-29  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Change the corresponding calls to the gtranslator_set_style
-		function, as it does oly take one argument now; call the
+		function, as it does only take one argument now; call the
 		 function twice, one time for the text box and one time
 		  for the translation box.
 
@@ -303,7 +320,7 @@
 2000-10-20  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Also disable the corresponding buttons if no fuzzy/
-		untranslated messages seem to have been residenting
+		untranslated messages seem to have been residential
 		 in the po-file.
 
 	* parse.c: Corrected the place of the decrementing statement
@@ -311,10 +328,10 @@
 
 2000-10-18  Fatih Demir	<kabalak@gmx.net>
 
-	* parse.c/h: Added another function which sets up the progressbar
+	* parse.c/h: Added another function which sets up the progress bar
 		status ( gtranslator_set_progress_bar() ).
 	
-	* parse.c: Use this new function for the progressbar setting routines
+	* parse.c: Use this new function for the progress bar setting routines
 		now, disable the "Fuzzy", "Untranslated" buttons on the parse
 		 start and enable them only if there's a fuzzy, untranslated
 		  message. Another bug has been removed :-)
@@ -322,25 +339,25 @@
 2000-10-17  Fatih Demir <kabalak@gmx.net>
 
 	* gui.c: Set the left fuzzy/untranslated messages inside the status
-		text and set the progressbar corresponding to the current
+		text and set the progress bar corresponding to the current
 		 status and hopefully update the fuzzy count in the status
 		  messages and the untranslated messages count is now
 		   updated somehow working =?
 
-	* parse.c: Get the count at the startup and set the progressbar
+	* parse.c: Get the count at the startup and set the progress bar
 		corresponding to the values ( also get the fuzzy count );
-		 on closure of the file set the progressbar value to 0.
+		 on closure of the file set the progress bar value to 0.
 
 	* parse.h: do use "fuzzy" and "translated" fields for the determi-
 		nition of the message status. Include two new functions
-		 which should build the progressbar total and other sources
+		 which should build the progress bar total and other sources
 		  for status informations ( these are "get_translated_count"
 		   for the list of messages and "determine_translation_status"
-		    for the determinition of the status itself ).
+		    for the determination of the status itself ).
 		Moved the two gfloat values to the header as they're globally
 		 used now.
 
-	* gui.c: Also have a progressbar in the GNOME appbar.
+	* gui.c: Also have a progress bar in the GNOME appbar.
 
 2000-10-15  Fatih Demir	<kabalak@gmx.net>
 
@@ -350,19 +367,19 @@
 		  "libgtranslator/stylistics.h" header for the function
 		   gtranslator_set_style().
 
-	* parse.c: Activate the translation box on the successfull of a
+	* parse.c: Activate the translation box on the successful of a
 		po-file.
 
 	* prefs.h: Added the "font" gchar as part of the wants structure and
 		added a function to set the style.
 
 	* prefs.c: Use the new color getting/setting routines from
-		libgtranslator, get/set the fontname in the preferences and
+		libgtranslator, get/set the font name in the preferences and
 		 the function to set the style.
 
 2000-10-13  Fatih Demir <kabalak@gmx.net>
 
-	* prefs.c: Removed the corresponding checkbutton for the removed
+	* prefs.c: Removed the corresponding check button for the removed
 		option and added a sixth page with the font and color
 		 settings; added the widgets and labels for this, connected
 		  the signals with the widgets and began to write the stuff
@@ -372,7 +389,7 @@
 		recent file menus and added the option to use own specs
 		 for font and colors.
 
-        * TODO.src: Removed it and added some points of it to the toplevel
+        * TODO.src: Removed it and added some points of it to the top level
                 TODO file.
  
         * Makefile.am: Also removed the TODO.src file here.
@@ -383,7 +400,7 @@
 		obsolete recent file menu entries as it does only remove
 		 double entries following each other.
 
-	* parse.c: Don't reparse the file if no change would be applied
+	* parse.c: Don't re-parse the file if no change would be applied
 		to the po-file, inform the user about the not-existing
 		 change; reverse the list of recent files as we're parsing
 		  it reversely in our routine.
@@ -402,7 +419,7 @@
 		   lines in direction to deleting obsolete multiple commons
 		    of the same file.
 
-	* gui.c: Also update the statusbar information on changing the
+	* gui.c: Also update the status bar information on changing the
 		status from "Untranslated" to "Translated".
 
 	* Makefile.am: Include the necessary GConf cflags for compiling
@@ -436,7 +453,7 @@
 
 	* prefs.c: Changed the update policy of the GtkSpinButton to
 		GTK_UPDATE_ALWAYS, added the toggle button for the new
-		 togglebutton and added another togglebutton to switch
+		 toggle button and added another toggle button to switch
 		  off these nice dialogs within the update function.
 	
 	* prefs.h: Added the delete_obsolete_rfentries value and the
@@ -475,9 +492,9 @@
 		number of files wished to be in the Recent files
 		 menu.
 
-	* gui.c: Changed the popup menu to show only the usefull
-		parts of itself, it's usefull enough for now; the
-		 "Recent" files menu is imporved now for a better
+	* gui.c: Changed the pop up menu to show only the useful
+		parts of itself, it's useful enough for now; the
+		 "Recent" files menu is improved now for a better
 		  style, no useless label widget and separator there
 		   now.
 	
@@ -487,7 +504,7 @@
 
 2000-10-05  Fatih Demir	<kabalak@gmx.net>
 
-	* gui.c: Added "Recent files" submenu into the File tree and
+	* gui.c: Added "Recent files" sub menu into the File tree and
 		put some dope stuff around it.
 
 	* parse.c/h: Added Recent file menus on top of the libgnome's
@@ -511,7 +528,7 @@
 
 2000-10-04  Fatih Demir	<kabalak@gmx.net>
 
-	* gui.c: Added more "live" statusbar update for the status
+	* gui.c: Added more "live" status bar update for the status
 		information on change of a fuzzy message, removed
 		 the now obsolete FIXME entries and corrected some
 		  wrong enable/disable actions.
@@ -537,7 +554,7 @@
 		Only react if the option is set in the preferences.
 
 	* prefs.c: Added a 4th page with the options to use the dot char
-		feature and to enable/disable the popup menu. Both of them
+		feature and to enable/disable the pop up menu. Both of them
 		 are working in real-time, you can also immediately see the
 		  changes in the preferences on the next screen; also moved
 		   the save geometry option to the "Miscellaneous" page.
@@ -554,16 +571,16 @@
 	* main.c: Added an #error define to "avoid" GConf compilations
 		for now.
 
-	* gui.c: Changed the popup menu a bit and integrated some
+	* gui.c: Changed the pop up menu a bit and integrated some
 		 kind of more intelligent menu ( though it's too
 		  big and doesn't have got intelligence like the
-		   toolbar till now ... ).
-		Added a beta-alpha version of the dotchar-stuff
+		   tool bar till now ... ).
+		Added a beta-alpha version of the dot char-stuff
 		 which does cause more crashs... grrrr...
 
 2000-10-01  Fatih Demir	<kabalak@gmx.net>
 
-	* gui.c: Only activate the popup-menu for the two
+	* gui.c: Only activate the pop up-menu for the two
 		text boxes.
 
 	* \*.*: Removed all gtranslator_config_init &
@@ -572,8 +589,8 @@
 
 2000-09-30  Fatih Demir	<kabalak@gmx.net>
 
-	* gui.c: Added the popup-menu for gtranslator; it
-		reacts only on rightclick on the text-boxes
+	* gui.c: Added the pop up-menu for gtranslator; it
+		reacts only on right click on the text-boxes
 		 and should be more expanded later on; also
 		  added another menu which some entries.
 
@@ -632,15 +649,15 @@
 2000-09-20  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Don't let me say that this correction has got also
-		something to do with the icons in the searchbar ...
+		something to do with the icons in the search bar ...
 
 2000-09-17  Fatih Demir	<kabalak@gmx.net>
 
 	* \*.c/h: Reformatted my mail appearance from '[ kabalak@gmx.net ]'
 		to '<kabalak@gmx.net>'.
 
-	* gui.c: Integrated the status informatin into the statusbar and made
-		some corrections to these weird searchbar stuff; it should
+	* gui.c: Integrated the status information into the status bar and made
+		some corrections to these weird search bar stuff; it should
 		 now get disabled/enabled the right way.
 
 2000-09-16  Fatih Demir	<kabalak@gmx.net>
@@ -659,7 +676,7 @@
 		isn't used/included anymore.
 
 	* gui.c: Corrected another wrong addiction (icon number was wrong),
-		added also a fuzzy icon to the searchbar and made the Fuzzy
+		added also a fuzzy icon to the search bar and made the Fuzzy
 		 icon react with the same intelligence like the Missing
 		   icon.
 
@@ -671,7 +688,7 @@
 	* gui.c: Enable the Goto button if a file has been opened and
 		disable the menu entry for "Undo" if no file hasn't
 		 been opened; also corrected the wrong menu entry
-		  behaviour.
+		  behavior.
 
 2000-09-13  Jesus Bravo Alvarez  <jba@pobox.com>
 
@@ -693,7 +710,7 @@
 	* gui.c: Changed the hotkey for the next fuzzy translation
 		to Alt + Z ( slightens the menus a bit ) and changed
 		 the icon-caption to "Missing" as this doesn't break
-		  the look of the toolbar.
+		  the look of the tool bar.
 
 2000-09-12  Gediminas Paulauskas <menesis@delfi.lt>
 
@@ -808,17 +825,17 @@
 
 2000-08-17  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* Again big changes. Read below: prefs.h, allmost all .c: Instead of
+	* Again big changes. Read below: prefs.h, almost all .c: Instead of
 		many if_* variables for preferences, created one structure
 		'wants.*', which uses only one bit for toggles.
 	* prefs.c: new option: if message was fuzzy, when changed, it could be
 		marked non-fuzzy. Changed order of options in dialog. Moved all
 		#defines to where they are used, and inserted #undefs
-		immediatelly after. Authors name & e-mail are now GtkEntry's,
+		immediately after. Authors name & e-mail are now GtkEntry's,
 		not GnomeEntry's.
 	* parse.c, gui.c: made check_msg_status internal, used only for
 		parsing. Other functions (update_msg and mark_msg_fuzzy) change
-		the status theirselves. Rewritten update_msg,
+		the status themselves. Rewritten update_msg,
 		toggle_msg_status. Now all the job with fuzzy entries does
 		mark_msg_fuzzy function. After toggling status, message is
 		updated. In text_has_got_changed, added call to unmark fuzzy,
@@ -883,7 +900,7 @@
 		function enable_actions_just_opened, which is just a statement,
 		for convenience moved from parse.c. ACT_END is now initialized
 		to NULL, I think it introduced a crash before.
-		update_msg now marks message as untransalted if the
+		update_msg now marks message as untranslated if the
 		translation was removed.
 
 2000-08-09  Gediminas Paulauskas <menesis@delfi.lt>
@@ -913,7 +930,7 @@
 2000-08-08  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gui.c: added update_appbar function and call to it. This shows
-		current message in the statusbar. Also connected
+		current message in the status bar. Also connected
 		clear_selection callback.
 	* parse.c: when compiling, show two dialogs, depending on success:
 		a message with message counts, or an error message.
@@ -1077,20 +1094,20 @@
 
 2000-07-23  Gediminas Paulauskas <menesis@delfi.lt>
 
-	* Too much changes to list. After all, I see no pooint in writing this
+	* Too much changes to list. After all, I see no point in writing this
 		file. Anyway, I have changed EVERYTHING here. Almost. Major
 		changes and achievements follows:
-	* gui.c: major revision. Moved all toolbar creation stuff to
-		GnomeUIInfo structure, rearranged all menus and toolbars,
+	* gui.c: major revision. Moved all tool bar creation stuff to
+		GnomeUIInfo structure, rearranged all menus and tool bars,
 		simplified them, made them standard (stock), removed the
 		duplicated find/search entries, changed message status menu to
 		toggles/radio items. Created new "actions" framework for
-		enabling/disabling of menu/toolbar entries. Works very well.
+		enabling/disabling of menu/tool bar entries. Works very well.
 		Before you load a file you can't do much :) Removed lots of
 		stuff from create_app1(), so it looks nice. Of course,
 		goto_*_msg got changed *much*, now they change actions only
 		if needed.
-	* gui.h: respectyvely, changed this file. Removed all global variables,
+	* gui.h: respectively, changed this file. Removed all global variables,
 		except app1, appbar1, text1, trans_box, and
 		gtranslator_geometry. Added actions stuff.
 	* header_stuff.[ch]: finally, made the edit_header dialog like others.
@@ -1164,11 +1181,11 @@
 		They implement writing messages to a file. update_message
 		writes the text, if it was changed (a new variable
 		message_changed), from trans_box to msgstr. This made
-		gtranslator a real and useful apllication.
-	* gtr_dialogs.[ch]: removed the uneeded global variables and lots of
+		gtranslator a real and useful application.
+	* gtr_dialogs.[ch]: removed the unneeded global variables and lots of
 		functions, related to save/open dialogs. There was crap...
 		No made to function properly, save as now works. A "save as"
-		copy of unchanged file is indentical to the original.
+		copy of unchanged file is identically to the original.
 
 2000-07-20  Gediminas Paulauskas <menesis@delfi.lt>
 
@@ -1275,7 +1292,7 @@
 		also if no file is open.
 	
 	* main.c: Added another option to specify the
-		desired minimun match length ( aka.
+		desired minimum match length ( aka.
  	 	 challenge length); perform a little
 		  check before applying the default
 		   challenge length;
@@ -1293,7 +1310,7 @@
 
 	* header_stuff.c: Disabled the crashy assignment.
 	
-	* messages.h: Removed the anormal status of a message;
+	* messages.h: Removed the abnormal status of a message;
 		 added two pointers to the first and the
 		  last message to the general po-file structure.
 
@@ -1352,7 +1369,7 @@
 	
 		to do it, but it seemed possible to me.
 
-	* Use some woohoo to do the strip-off.
+	* Use some voodoo to do the strip-off.
 
 	* Rip the msgid and the msgstr clearly from
 	
@@ -1410,7 +1427,7 @@
 	
 	* ------------------------------------
 
-	* Changed all msg_db printage to message db
+	* Changed all msg_db print age to message db
 	
 		as it should be from the beginning on.
 	
@@ -1452,7 +1469,7 @@
 	
 	* Doing the two additional routines.
 	
-	* Fuzzling with the msgid/str catching
+	* Fizzling with the msgid/str catching
 	
 		routines.
 	
@@ -1484,11 +1501,11 @@
 	
 		methods for multi-line translations.
 
-	* Remvoed the final gboolean; it has been
+	* Removed the final gboolean; it has been
 	
 		replaced by three other gboolean which
 	
-		are also usefull for the recognition of
+		are also useful for the recognition of
 	
 		multi-line translations.
 
@@ -1520,7 +1537,7 @@
 
 	* Added some more menu entries to be in
 	
-		sync with the toolbar.
+		sync with the tool bar.
 
 	* Connected the menu entries also with the
 	
@@ -1670,7 +1687,7 @@
 
 	* Removed the MSG_DB definition as it's
 	
-		now made more pratically with an option
+		now made more practically with an option
 	
 		or in the user's dir.
 	
@@ -1742,7 +1759,7 @@
  
                 -> dnd.c
 
-	* Hooked an accelerator to the website
+	* Hooked an accelerator to the web site
 	
 		menu-entry.
 	
@@ -1776,7 +1793,7 @@
 
 	* Added some other gint's which are
 	
-		holding the stored geometry defitions,
+		holding the stored geometry definitions,
 	
 		if this is wished.
 	
@@ -1788,7 +1805,7 @@
 	
 		the stored place.
 	
-	* Read the stored geometry defitions.
+	* Read the stored geometry devotions.
 
 		-> main.c
 	
@@ -1808,7 +1825,7 @@
 	
 		for the filename is now only done by an
 	
-		assertation (!=NULL), nothing more.
+		assertion (!=NULL), nothing more.
 
 	* Make the Goto button also sensitive;
 	
@@ -1836,7 +1853,7 @@
 	
 	* Do a little check before starting to produce
 	
-		dozains of widgets and the dialog.
+		dozens of widgets and the dialog.
 
 	* Let the buttons be stock buttons.
 
@@ -1882,7 +1899,7 @@
 
 	* Added the `Header' entry to the edit-menu.
 	
-	* Added a help-menu entry for the homepage.
+	* Added a help-menu entry for the home page.
 	
 	* No crashing anymore!
 	
@@ -1896,7 +1913,7 @@
 
 	* Allocate the structure via g_new.
 
-	* Again reverted to NOT produce dozains
+	* Again reverted to NOT produce dozens
 	
 		of structures.
 	
@@ -1942,7 +1959,7 @@
 	
 	* Making the parse-routine again produce
 	
-		dozains of structure's.
+		dozens of structure's.
 	
 		-> parse.c
 	
@@ -2120,7 +2137,7 @@
 	
 		-> parse.h
 
-	* Creation and filling into the strcuture
+	* Creation and filling into the structure
 	
 		fields ( aka "parsing" ) is theoretically
 	
@@ -2185,7 +2202,7 @@
 	
 		-> interface.c/h
 
-	* Set also some statusbar message while
+	* Set also some status bar message while
 	
 		opening dialogs
 	
@@ -2207,7 +2224,7 @@
 
 2000-05-12  Fatih Demir  <kabalak@gmx.net>
 
-	* Added a function-`skelleton' which will
+	* Added a function-`skeleton which will
 	
 		be important for the next time as it puts
 	
@@ -2275,7 +2292,7 @@
 
 2000-05-10  Fatih Demir  <kabalak@gmx.net>
 
-	* Added the compile callback and fucntion
+	* Added the compile callback and function
 	
 	* Connected it with the button and the menu-entry
 	
@@ -2331,11 +2348,11 @@
 
 	* Bind them to the main-function
 	
-	* Connect the new Sessionmanagement-functions
+	* Connect the new Session management-functions
 	
 		-> main.c
 
-	* Added Sessionmanagement functions & files
+	* Added Session management functions & files
 	
 		-> session.c/h
 
@@ -2397,13 +2414,13 @@
 
 2000-05-08  Fatih Demir  <kabalak@gmx.net>
 
-	* Changed `due' to Pablo's EMail the English
+	* Changed `due' to Pablo's Email the English
 	
 		encodings and all other encodings to 8bit.
 
 	* Changed and edited some entries like told.
 	
-	* Added the Croatian group's EMail address
+	* Added the Croatian group's Email address
 	
 		[ `due' to their control-center translation ]
 	
@@ -2419,7 +2436,7 @@
 	
 		more friendly and English ( no spaces
 	
-		before punctuations .. ).
+		before punctuation .. ).
 	
 		-> *.c/h
 	
@@ -2443,7 +2460,7 @@
 	
 	* Began to implement the new routines
 
-		[ in a cmd-line test-programm the new
+		[ in a cmd-line test-program the new
 	
 		header-routines	worked well except that it gets
 	
@@ -2483,7 +2500,7 @@
 	
 		now
 	
-	* Autocompletion of the language specs ..
+	* Auto completion of the language specs ..
 	
 		[ if `Turkish' is selected the other language
 	
@@ -2565,7 +2582,7 @@
 
 	* Added a missing comma ( ehem .. )
 
-	* Added some group EMail entries
+	* Added some group Email entries
 	
 	* Corrected the English/* entries ..
 	
@@ -2610,7 +2627,7 @@
 	* Implemented the first page of the prefs-box
 	
 	* Added the basic-signals
-	* Split the prefs-box into four fucntions like the
+	* Split the prefs-box into four functions like the
 	
 		dialogs in the gtr_dialogs.c/h files ...
 	
@@ -2710,7 +2727,7 @@
 	
 		structures ..
 	
-	* Readding the most important callbacks here
+	* Reading the most important callbacks here
 	
 		for the main app
 	
@@ -2818,7 +2835,7 @@
 	
 		-> about.c/h
 
-	* Added the functionability for adding
+	* Added the functionality for adding
 	
 		entries to the msg_db
 	
@@ -2836,7 +2853,7 @@
 
 	* Add two "new" dialogs :
 	
-		1) Errors occured while exec. msgfmt
+		1) Errors occurred while exec. msgfmt
 	
 		2) No changes were made to the .po-file
 	
@@ -2870,7 +2887,7 @@
 	
 		Corrected a simple error which caused
 	
-		gtranslator to crash everytime
+		gtranslator to crash every time
 	
 	* Added some interface elements
 	
@@ -2902,7 +2919,7 @@
 
 2000-03-31  Fatih Demir  <kabalak@gmx.net>
 
-	* Removed the toolbar_style definition
+	* Removed the tool bar_style definition
 	
 		from the search bar
 	
@@ -3120,11 +3137,11 @@
 	
 		-> messages.h
 	
-	* A misformed format ; also corrected
+	* A malformed format ; also corrected
 	
 		-> msg_db.c
 
-	* Some other misformed includes which lead
+	* Some other misfired includes which lead
 		to 'multiple definition of ...' ; also
 		corrected ( yes , I compiled it today
 		:-% ; it compiles ! ) .
@@ -3170,7 +3187,7 @@
 
 2000-03-04  Fatih Demir  <kabalak@gmx.net>
 
-	* Added a (void*)-ified compare fucntion
+	* Added a (void*)-ified compare function
 		ka_comp(const void *,const void *) ,
 		needed for the dyndata routines ..
 
@@ -3197,13 +3214,13 @@
 		-> parse.c
 	
 	* Pre-Implemented some more db-func-
-		tionability ...
+		tionality ...
 	
 		-> msg_db.h/.c
 
 2000-02-25  Fatih Demir  <kabalak@gmx.net>
 
-	* Reput the support.h/.c files into
+	* Repute the support.h/.c files into
 		CVS , as they appear to be needed
 		for gnome-HEAD ...
 	
@@ -3336,7 +3353,7 @@
 		-> Makefile.am
 
 	* Give the user many informations on
-		the statusbar
+		the status bar
 	
 		-> callbacks.c
 	
@@ -3344,7 +3361,7 @@
 
 	* Make the build always with -DDEBUGGY
 		to make it more obvious if errors
-		occure .
+		occur .
 	
 		-> Makefile.am
 	
@@ -3355,7 +3372,7 @@
 	
 		-> parse.c
 
-	* Removed the unnecassery const's ...
+	* Removed the unnecessary const's ...
 	
 		-> callbacks.c
 

@@ -467,9 +467,9 @@ static gboolean actual_write(const gchar * name)
 
 	/**
 	* Check if the filename is equal to our internally
-	*  used "temp_po_file"..
+	*  used "gtranslator_temp_po_file"..
 	**/
-	if(!strcmp(name, "temp_po_file"))
+	if(!g_strcasecmp(name, "gtranslator_temp_po_file"))
 	{
 		/**
 		* Create a new filename to use instead of the
