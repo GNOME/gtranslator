@@ -31,7 +31,7 @@ static gint signalscount=0;
 
 /*
  * Get and enclose the signals that could put much translation work within
- *  gtranslatorinto the trash.
+ *  gtranslator into the trash.
  */ 
 void gtranslator_signal_handler(int signal)
 {
@@ -40,51 +40,26 @@ void gtranslator_signal_handler(int signal)
 		return;
 	}	
 	
-	switch(signal)
+	if(po->file_changed)
 	{
+		gchar *crashfilename;
+			
 		/*
-		 * Catch all signals in one function.
+		 * Store the original filename into the
+		 *  preferences.
 		 */ 
-		case SIGINT:
-		case SIGQUIT:
-		case SIGTERM:
-		case SIGSEGV:
-		case SIGILL:
+		gtranslator_config_init();
+		gtranslator_config_set_string("crash/filename",
+			po->filename);
+		gtranslator_config_close();
+		
+		crashfilename=gtranslator_utils_get_crash_file_name();
 
-			if(po->file_changed)
-			{
-				gchar *crashfilename;
-				
-				/*
-				 * Store the original filename into the
-				 *  preferences.
-				 */ 
-				gtranslator_config_init();
-				gtranslator_config_set_string("crash/filename",
-					po->filename);
-				gtranslator_config_close();
-				
-				crashfilename=gtranslator_utils_get_crash_file_name();
-
-				/*
-				 * Save the file under the special filename.
-				 */
-				gtranslator_save_file(crashfilename);
-			}
-			
-			exit(1);
-			break;
-			
-		default:
-
-			/*
-			 * What to say else? This signals doesn't seem
-			 *  interesting for us but should still get a
-			 *   warning message.
-			 */   
-			g_warning(_("Uncatched signal %i!"), signal);
-
-			exit(1);
-			break;
+		/*
+		 * Save the file under the special filename.
+		 */
+		gtranslator_save_file(crashfilename);
 	}
+
+	exit(1);
 }

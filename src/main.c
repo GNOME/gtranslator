@@ -122,10 +122,10 @@ int main(int argc, char *argv[])
 	signal(SIGSEGV, gtranslator_signal_handler);
 	signal(SIGILL, gtranslator_signal_handler);
 	signal(SIGABRT, gtranslator_signal_handler);
-	signal(SIGSEGV, gtranslator_signal_handler);
 	signal(SIGINT, gtranslator_signal_handler);
 	signal(SIGHUP, gtranslator_signal_handler);
 	signal(SIGQUIT, gtranslator_signal_handler);
+	signal(SIGTERM, gtranslator_signal_handler);
 
 	/*
 	 * Initialize the GConf library conditionally.

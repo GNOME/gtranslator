@@ -1,11 +1,20 @@
-2001-03-03  Thomas Ziehmer	<thomas@gtranslator.org>
+2001-06-22  Fatih Demir <kabalak@gtranslator.org>
+
+	* main.c: Added some signals handled by the signal handler
+		and removed the double enumeration of SIGSEGV.
+	
+	* sighandler.c: Don't print anything out on an unknown
+		signals -- don't differentialize any signal, simply
+		 backup the file if it's been changed.
+
+2001-06-21  Thomas Ziehmer	<thomas@gtranslator.org>
 
 	* languages.h: fixed typo
 
 2001-06-19  Fatih Demir <kabalak@gtranslator.org>
 
-	* languages.h: Added Esparanto & Malay, updated/corrected mailing addresses
-		for Japanese & Slovak.
+	* languages.h: Added Esparanto & Malay, updated/corrected 
+		mailing list addresses for Japanese & Slovak.
 
 2001-06-18  Gediminas Paulauskas <menesis@delfi.lt>
 
