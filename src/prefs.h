@@ -21,7 +21,10 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtksignal.h>
 
-#define GTR_CONFIG_PREFIX "/gtranslator/"
+/**
+* Use libgtranslator's preferences code.
+**/
+#include <libgtranslator/preferences.h>
 
 /**
 * These are the variables set by the prefs-box ( globally ones )

@@ -290,24 +290,24 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.dont_save_unchanged_files = if_active(dont_save_unchanged_files);
 #undef if_active
 
-	gnome_config_push_prefix(GTR_CONFIG_PREFIX);
-	gnome_config_set_string("Translator/Name", author);
-	gnome_config_set_string("Translator/Email", email);
-	gnome_config_set_string("Language/Name", language);
-	gnome_config_set_string("Language/Mime-type", mime);
-	gnome_config_set_string("Language/Encoding", enc);
-	gnome_config_set_string("Language/Language-code", lc);
-	gnome_config_set_string("Language/Team's EMail address", lg);
-	gnome_config_set_bool("Toggles/Save Geometry", wants.save_geometry);
-	gnome_config_set_bool("Toggles/Warn if fuzzy", wants.warn_if_fuzzy);
-	gnome_config_set_bool("Toggles/Set non-fuzzy if changed", 
+	gtranslator_config_init();
+	gtranslator_config_set_string("Translator/Name", author);
+	gtranslator_config_set_string("Translator/Email", email);
+	gtranslator_config_set_string("Language/Name", language);
+	gtranslator_config_set_string("Language/Mime-type", mime);
+	gtranslator_config_set_string("Language/Encoding", enc);
+	gtranslator_config_set_string("Language/Language-code", lc);
+	gtranslator_config_set_string("Language/Team's EMail address", lg);
+	gtranslator_config_set_bool("Toggles/Save Geometry", wants.save_geometry);
+	gtranslator_config_set_bool("Toggles/Warn if fuzzy", wants.warn_if_fuzzy);
+	gtranslator_config_set_bool("Toggles/Set non-fuzzy if changed", 
 			      wants.unmark_fuzzy);
-	gnome_config_set_bool("Toggles/Warn if no change",
+	gtranslator_config_set_bool("Toggles/Warn if no change",
 			      wants.warn_if_no_change);
-	gnome_config_set_bool("Toggles/Don't save unchanged files",
+	gtranslator_config_set_bool("Toggles/Do not save unchanged files",
 			      wants.dont_save_unchanged_files);
-	gnome_config_pop_prefix();
-	gnome_config_sync();
+	gtranslator_config_close();
+	
 }
 
 /**
@@ -381,29 +381,29 @@ static void prefs_box_changed(GtkWidget * widget, gpointer flag)
 
 void read_prefs(void)
 {
-	gnome_config_push_prefix(GTR_CONFIG_PREFIX);
-	author = gnome_config_get_string("Translator/Name");
-	email = gnome_config_get_string("Translator/Email");
-	language = gnome_config_get_string("Language/Name");
-	lc = gnome_config_get_string("Language/Language-code");
-	lg = gnome_config_get_string("Language/Team's EMail address");
-	mime = gnome_config_get_string("Language/Mime-type");
-	enc = gnome_config_get_string("Language/Encoding");
+	gtranslator_config_init();
+	author = gtranslator_config_get_string("Translator/Name");
+	email = gtranslator_config_get_string("Translator/Email");
+	language = gtranslator_config_get_string("Language/Name");
+	lc = gtranslator_config_get_string("Language/Language-code");
+	lg = gtranslator_config_get_string("Language/Team's EMail address");
+	mime = gtranslator_config_get_string("Language/Mime-type");
+	enc = gtranslator_config_get_string("Language/Encoding");
 	wants.save_geometry =
-	    gnome_config_get_bool("Toggles/Save Geometry=true");
+	    gtranslator_config_get_bool("Toggles/Save Geometry=true");
 	wants.unmark_fuzzy =
-	    gnome_config_get_bool("Toggles/Set non-fuzzy if changed=false"); 
+	    gtranslator_config_get_bool("Toggles/Set non-fuzzy if changed=false"); 
 	wants.warn_if_fuzzy =
-	    gnome_config_get_bool("Toggles/Warn if fuzzy=true");
+	    gtranslator_config_get_bool("Toggles/Warn if fuzzy=true");
 	wants.warn_if_no_change =
-	    gnome_config_get_bool("Toggles/Warn if no change=true");
+	    gtranslator_config_get_bool("Toggles/Warn if no change=true");
 	wants.dont_save_unchanged_files =
-	    gnome_config_get_bool("Toggles/Don't save unchanged files=false");
-	wants.match_case = gnome_config_get_bool("Find/Case sensitive=false");
-	wants.find_in = gnome_config_get_int("Find/Find in=1");
+	    gtranslator_config_get_bool("Toggles/Do not save unchanged files=false");
+	wants.match_case = gtranslator_config_get_bool("Find/Case sensitive=false");
+	wants.find_in = gtranslator_config_get_int("Find/Find in=1");
 	update_flags();
-	wants.fill_header = gnome_config_get_bool("Toggles/Fill header=false");
-	gnome_config_pop_prefix();
+	wants.fill_header = gtranslator_config_get_bool("Toggles/Fill header=false");
+	gtranslator_config_close();
 }
 
 void free_prefs(void)
@@ -425,13 +425,13 @@ void save_geometry(void)
 		gstr = gnome_geometry_string(app1->window);
 		gnome_parse_geometry(gstr, &x, &y, &w, &h);
 		g_free(gstr);
-		gnome_config_push_prefix(GTR_CONFIG_PREFIX);
-		gnome_config_set_int("Geometry/X", x);
-		gnome_config_set_int("Geometry/Y", y);
-		gnome_config_set_int("Geometry/Width", w);
-		gnome_config_set_int("Geometry/Height", h);
-		gnome_config_pop_prefix();
-		gnome_config_sync();
+		gtranslator_config_init();
+		gtranslator_config_set_int("Geometry/X", x);
+		gtranslator_config_set_int("Geometry/Y", y);
+		gtranslator_config_set_int("Geometry/Width", w);
+		gtranslator_config_set_int("Geometry/Height", h);
+		gtranslator_config_close();
+		
 	}
 }
 
@@ -441,12 +441,12 @@ void restore_geometry(gchar * gstr)
 	/* Set the main window's geometry from prefs. */
 	if (gstr == NULL) {
 		if (wants.save_geometry == TRUE) {
-			gnome_config_push_prefix(GTR_CONFIG_PREFIX);
-			x = gnome_config_get_int("Geometry/X");
-			y = gnome_config_get_int("Geometry/Y");
-			width = gnome_config_get_int("Geometry/Width");
-			height = gnome_config_get_int("Geometry/Height");
-			gnome_config_pop_prefix();
+			gtranslator_config_init();
+			x = gtranslator_config_get_int("Geometry/X");
+			y = gtranslator_config_get_int("Geometry/Y");
+			width = gtranslator_config_get_int("Geometry/Width");
+			height = gtranslator_config_get_int("Geometry/Height");
+			gtranslator_config_close();
 		}
 		else return;
 	}
