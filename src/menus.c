@@ -245,7 +245,12 @@ GnomeUIInfo the_go_menu[] = {
 
 
 GnomeUIInfo the_view_menu[] = {
+	GNOMEUIINFO_SUBTREE(N_("_Bookmarks"), the_bookmarks_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Colorschemes"), the_colorschemes_menu),
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo the_bookmarks_menu[] = {
 	GNOMEUIINFO_END
 };
 

@@ -1,5 +1,13 @@
 2003-07-13  Fatih Demir <kabalak@gtranslator.org>
 
+	* bookmark.[ch], gui.c, main.c & menus.[ch]: Added the GUI version of
+		the bookmarks' list under "_View" and it's displayed now
+		 rightly like the history list with the recent files :-) But
+		  is just a hack of the history code to be adepted to the
+		   bookmarks' mechanism and no new innovation unfortunately,
+		    could be done better; removed the cmdline messages and
+		     such now from the code as the GUI works now.
+
 	* messages.h: Added 2 gint entries to the "GtrMsg" structure and a new
 		status enum value - the 2 gints represent the ideas of how to
 		 handle the multiple msgstr translations within newer gettext

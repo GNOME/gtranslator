@@ -503,6 +503,7 @@ int main(int argc, char *argv[])
 	 *   possible and make life faster and easier.
 	 */
 	gtranslator_bookmark_load_list();
+	gtranslator_bookmark_show_list();
 	
 	gtk_main();
 	return 0;

@@ -26,13 +26,14 @@
  * A gtranslator-specific ID container -- is generated out of the specs for
  *  the po-file and the message.
  *
- * General format: gtranslator_bookmark:file#version/position
+ * General format: gtranslator_bookmark:file#version/position/comment
  *
  */
 typedef struct
 {
 	gchar	*file;
 	gchar	*version;
+	gchar	*comment;
 
 	gint	 position;
 } GtrBookmark;
@@ -65,6 +66,11 @@ gchar *gtranslator_bookmark_string_from_bookmark(GtrBookmark *bookmark);
  *  kind of aside-factors.
  */
 void gtranslator_bookmark_open(GtrBookmark *bookmark);
+
+/*
+ * Change the comment of a given bookmark to the given new comment "newcomment"
+ */
+void gtranslator_bookmark_set_comment(GtrBookmark *bookmark, const gchar *newcomment);
 
 /*
  * Is the given GtrBookmark resolvable at all -- is the file present and do the
@@ -120,6 +126,11 @@ void gtranslator_bookmark_save_list(void);
  * Get a copy pf the internal bookmarks' list.
  */
 GList *gtranslator_bookmark_get_list(void);
+
+/*
+ * Shows up the bookmarks' list in the GUI like in the history list of files.
+ */
+void gtranslator_bookmark_show_list(void);
 
 /*
  * Copy the given GtrBookmark safely.

@@ -18,12 +18,16 @@
  */
 
 #include "bookmark.h"
+#include "dialogs.h"
+#include "gui.h"
 #include "message.h"
 #include "nautilus-string.h"
 #include "open.h"
 #include "parse.h"
 #include "preferences.h"
 #include "utils.h"
+
+#include <libgnomeui/gnome-app-helper.h>
 
 /*
  * For the moment 10 bookmarks should be the upper limit.
@@ -35,6 +39,14 @@
  *  list is supplied by the gtranslator_bookmark_* methods.
  */
 GList *gtranslator_bookmarks=NULL;
+
+/*
+ * Shamelessly stolen from our history.c for the moment, it's a duplication of work
+ *  maybe we should concentrate this in a nearby time but for now it shall work.
+ */
+void gtranslator_open_file_dialog_from_bookmark(GtkWidget *widget, gchar *filename);
+void free_userdata_bookmark(GtkWidget *widget, gpointer userdata);
+gchar *gtranslator_bookmark_escape(const gchar *str);
 
 /*
  * Create and return a GtrBookmark from the current position & po file -- 
@@ -51,6 +63,8 @@ GtrBookmark *gtranslator_bookmark_new()
 	bookmark->version=g_strdup(po->header->prj_version);
 	
 	bookmark->position=g_list_position(po->messages, po->current);
+
+	bookmark->comment=g_strdup("No comment");
 
 	if(bookmark->position < 0)
 	{
@@ -108,7 +122,7 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 	encoding_area=nautilus_str_get_after_prefix(string, "#");
 	encoding_area++;
 
-	values=g_strsplit(encoding_area, "/", 2);
+	values=g_strsplit(encoding_area, "/", 3);
 
 	/*
 	 * FIXME: Again the str++ problem like above with filename++, aaaarg!
@@ -131,6 +145,15 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 		bookmark->position=-1;
 	}
 
+	if(values[2])
+	{
+		bookmark->comment=g_strdup(values[2]);
+	}
+	else
+	{
+		bookmark->comment=g_strdup("No comment");
+	}
+
 	g_strfreev(values);
 	return bookmark;
 }
@@ -144,8 +167,8 @@ gchar *gtranslator_bookmark_string_from_bookmark(GtrBookmark *bookmark)
 
 	g_return_val_if_fail(bookmark!=NULL, NULL);
 
-	string=g_strdup_printf("gtranslator_bookmark:%s#%s/%i",
-		bookmark->file, bookmark->version, bookmark->position);
+	string=g_strdup_printf("gtranslator_bookmark:%s#%s/%i/%s",
+		bookmark->file, bookmark->version, bookmark->position, bookmark->comment);
 
 	return string;
 }
@@ -476,9 +499,6 @@ void gtranslator_bookmark_load_list()
 		gtranslator_bookmarks=g_list_prepend(gtranslator_bookmarks,
 			gtranslator_bookmark_copy(bookmark));
 		
-		g_message("Bookmark #%i: File %s,\n\tVersion: %s, message %i\n",
-				(c+1), bookmark->file, bookmark->version, bookmark->position);
-
 		gtranslator_bookmark_free(bookmark);
 	}
 
@@ -525,9 +545,104 @@ void gtranslator_bookmark_save_list()
 		}
 
 		gtranslator_config_set_int("bookmark/length", c);
-
-		g_message("Wrote %i bookmarks to the settings.\n", c);
 	}
+}
+
+/*
+ * Stolen from history.c -> working for the moment but should be reorganised later on.
+ */
+void gtranslator_bookmark_show_list(void)
+{
+	static gint len = 0;
+	gint i;
+	GnomeUIInfo *menu;
+	GList *list, *onelist;
+	GtrBookmark *bookmark;
+	
+	gchar *menupath = _("_View/_Bookmarks/");
+
+	/*
+	 * Delete the old entries.
+	 */
+	gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), menupath, 0, len);
+
+	/*
+	 * Get the old history entries.
+	 */ 
+	list=gtranslator_bookmark_get_list();
+
+	i=len=g_list_length(list);
+
+	/*
+	 * Parse the list.
+	 */
+	for(onelist=g_list_last(list); onelist!=NULL; onelist=g_list_previous(onelist))
+	{
+		/*
+		 * Get the history entry.
+		 */
+		bookmark=GTR_BOOKMARK(onelist->data);
+
+		menu=g_new0(GnomeUIInfo, 2);
+
+		/*
+		 * Set the label name.
+		 */
+		menu->label=g_strdup_printf("_%i: %s (%s, %i)", i--,
+			gtranslator_bookmark_escape(bookmark->file),
+			bookmark->version, bookmark->position);
+		
+		/*
+		 * Set the GnomeUIInfo settings and labels.
+		 */
+		menu->type=GNOME_APP_UI_ITEM;
+		menu->hint=g_strdup_printf(_("Open %s (%s)"), bookmark->file, bookmark->comment);
+		menu->moreinfo=(gpointer)gtranslator_open_file_dialog_from_bookmark;
+		menu->user_data=bookmark->file;
+		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
+
+		/*
+		 * Insert this item into menu
+		 */
+		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
+		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
+
+		g_signal_connect(GTK_OBJECT(menu->widget), "destroy",
+				   GTK_SIGNAL_FUNC(free_userdata_bookmark), (gpointer) menu->hint);
+
+		/*
+		 * Free the string and the GnomeUIInfo structure.
+		 */
+		GTR_FREE((gpointer) menu->label);
+		GTR_FREE(menu);
+	}
+}
+
+void free_userdata_bookmark(GtkWidget *widget, gpointer userdata)
+{
+	GTR_FREE(userdata);
+}
+
+void gtranslator_open_file_dialog_from_bookmark(GtkWidget *widget, gchar *filename)
+{
+	if (!gtranslator_should_the_file_be_saved_dialog())
+		return;
+	gtranslator_file_close(NULL, NULL);
+
+	gtranslator_open_file(filename);
+}
+
+/*
+ * Escape the menu display items rightly.
+ */
+gchar *gtranslator_bookmark_escape(const gchar *str)
+{
+	gchar	*display_str=NULL;
+	
+	g_return_val_if_fail(str!=NULL, NULL);
+
+	display_str=nautilus_str_replace_substring(str, "_", "__");
+	return display_str;
 }
 
 /*
@@ -555,7 +670,8 @@ GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *bookmark)
 	g_return_val_if_fail(bookmark!=NULL, NULL);
 
 	copy->file=g_strdup(bookmark->file);
-	copy->version = g_strdup(bookmark->version);
+	copy->version=g_strdup(bookmark->version);
+	copy->comment=g_strdup(bookmark->comment);
 	copy->position=bookmark->position;
 
 	return copy;
@@ -570,6 +686,7 @@ void gtranslator_bookmark_free(GtrBookmark *bookmark)
 	{
 		g_free(bookmark->file);
 		g_free(bookmark->version);
+		g_free(bookmark->comment);
 		g_free(bookmark);
 	}
 }
