@@ -209,8 +209,7 @@ gboolean gtranslator_utils_uri_supported(const gchar *file_uri)
 		nautilus_istr_has_prefix(file_uri, "file:/") ||
 		nautilus_istr_has_prefix(file_uri, "www.") ||
 		nautilus_istr_has_prefix(file_uri, "ftp.") ||
-		nautilus_istr_has_prefix(file_uri, "nfs:/") ||
-		nautilus_istr_has_prefix(file_uri, "about:"))
+		nautilus_istr_has_prefix(file_uri, "nfs:/"))
 	{
 		return TRUE;
 	}
