@@ -1,9 +1,20 @@
 2001-05-30  Fatih Demir <kabalak@gtranslator.org>
 
+	* prefs_init.c: Added sane autosave values to the preferences 
+		initializing function.
+
+	* prefs.c: Added option saving/restoring and the autosave corresponding
+		widgets/preferences page to the prefs-box.
+
+	* utils.c/.h: Added "gtranslator_utils_autosave" function for handling
+		the periodic autosaving future.
+
 	* \*.*: Renamed "wants" to "GtrPreferences" -- wants would be
 		too easy to mix up.
 
-	* prefs.h: Added "autosave_timeout" option.
+	* prefs.h: Added several GtrPreferences parts for autosave option: 
+		"autosave", "autosave_timeout", "autosave_with_suffix"
+		  and "autosave_suffix".
 
 2001-05-30  Gediminas Paulauskas <menesis@delfi.lt>
 

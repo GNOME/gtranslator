@@ -47,8 +47,9 @@ static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer us
 /*
  * The notebook page widgets: 
  */
-static GtkWidget *first_page, *second_page, *third_page, *fourth_page,
-		*fifth_page, *sixth_page;
+static GtkWidget 
+	*first_page, *second_page, *third_page, *fourth_page,
+	*fifth_page, *sixth_page, *seventh_page;
 
 /*
  * The entries:
@@ -56,7 +57,7 @@ static GtkWidget *first_page, *second_page, *third_page, *fourth_page,
 static GtkWidget
 	*authors_name, *authors_email, *authors_language,
 	*mime_type, *encoding, *lcode, *lg_email, *dictionary_file,
-	*scheme_file;
+	*scheme_file, *autosave_suffix;
 
 /*
  * The toggle buttons used in the preferences box:
@@ -66,8 +67,15 @@ static GtkWidget
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_specs, *instant_spell_checking,
-	*use_own_dict, *keep_obsolete, *defaultdomain;
-	
+	*use_own_dict, *keep_obsolete, *defaultdomain,
+	*autosave, *autosave_with_suffix;
+
+/*
+ * The timeout GtkSpinButton:
+ */
+static GtkWidget
+	*autosave_timeout;
+
 /*
  * The preferences dialog widget itself.
  */
@@ -81,9 +89,13 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	GtkWidget 	*fg_color_label,
 			*bg_color_label,
 			*font_label,
-			*scheme_file_label;
+			*scheme_file_label,
+			*autosave_timeout_label;
+
+	GtkObject	*autosave_adjustment;
 	
 	gtranslator_raise_dialog(prefs);
+	
 	/*
 	 * Create the preferences box... 
 	 */
@@ -101,6 +113,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, _("Recent files & spell checking"));
 	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, _("Fonts, colors and color schemes"));
+	seventh_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, _("Autosaving"));
 	
 	/*
 	 * Create all the personal entries.
@@ -262,7 +275,34 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		bg_color_label, 0, 1, 4, 5);
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
 		background, 1, 2, 4, 5);	
-		
+	
+	/*
+	 * The seventh page of the prefs-box: autosaving options.
+	 */
+	autosave_timeout_label=gtk_label_new(_("Autosave timeout in minutes:"));
+	autosave=gtranslator_utils_attach_toggle_with_label(seventh_page, 0,
+		_("Save the po file automatically after a period of time"),
+		GtrPreferences.autosave, gtranslator_preferences_dialog_changed);
+	
+	autosave_with_suffix=gtranslator_utils_attach_toggle_with_label(seventh_page, 2,
+		_("Append a special suffix to the automatically saved files"),
+		GtrPreferences.autosave_with_suffix, gtranslator_preferences_dialog_changed);
+	
+	autosave_suffix=gtranslator_utils_attach_entry_with_label(seventh_page, 3,
+		_("Autosave suffix:"),
+		GtrPreferences.autosave_suffix, gtranslator_preferences_dialog_changed);
+
+	autosave_adjustment=gtk_adjustment_new(GtrPreferences.autosave_timeout, 1.0, 30.0,
+		1.0, 10.0, 10.0);
+
+	autosave_timeout=gtk_spin_button_new(GTK_ADJUSTMENT(autosave_adjustment), 1, 0);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(autosave_timeout), GtrPreferences.autosave_timeout);
+
+	gtk_table_attach_defaults(GTK_TABLE(seventh_page),
+		autosave_timeout_label, 0, 1, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(seventh_page),
+		autosave_timeout, 1, 2, 1, 2);
+	
 	/*
 	 * Connect the signals to the preferences box.
 	 */
@@ -274,6 +314,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(gnome_file_entry_gtk_entry(
 			   GNOME_FILE_ENTRY(scheme_file))), "changed",
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(autosave_timeout), "changed",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_apply), NULL);
@@ -305,6 +347,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	update(enc, GTK_COMBO(encoding)->entry);
 	update(GtrPreferences.defaultdomain, GTK_COMBO(defaultdomain)->entry);
 	update(GtrPreferences.dictionary, dictionary_file);
+	update(GtrPreferences.autosave_suffix, autosave_suffix);
 #undef update
 #define if_active(widget) \
 	gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))
@@ -322,7 +365,12 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.use_own_specs = if_active(own_specs);
 	GtrPreferences.use_own_dict = if_active(use_own_dict);
 	GtrPreferences.keep_obsolete = if_active(keep_obsolete);
+	GtrPreferences.autosave = if_active(autosave);
+	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
 #undef if_active
+	
+	GtrPreferences.autosave_timeout = 
+		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(autosave_timeout));
 	
 	gtranslator_config_init();
 	gtranslator_config_set_string("translator/name", author);
@@ -334,6 +382,9 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
+	gtranslator_config_set_string("informations/autosave_suffix", GtrPreferences.autosave_suffix);
+	
+	gtranslator_config_set_float("informations/autosave_timeout", GtrPreferences.autosave_timeout);
 	
 	g_free(GtrPreferences.font);
 	GtrPreferences.font=g_strdup(gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
@@ -387,6 +438,11 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.use_own_dict);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
 			      GtrPreferences.keep_obsolete);
+	gtranslator_config_set_bool("toggles/autosave",
+			      GtrPreferences.autosave);
+	gtranslator_config_set_bool("toggles/autosave_with_suffix",
+			      GtrPreferences.autosave_with_suffix);
+
 	gtranslator_config_close();
 }
 
@@ -464,35 +520,44 @@ void gtranslator_preferences_read(void)
 	GtrPreferences.font = gtranslator_config_get_string("font/name");
 	GtrPreferences.dictionary = gtranslator_config_get_string("dict/file");
 	GtrPreferences.scheme =  gtranslator_config_get_string("scheme/filename");
+	
+	GtrPreferences.autosave =
+		gtranslator_config_get_bool("toggles/autosave");
+	GtrPreferences.autosave_timeout = 
+		gtranslator_config_get_float("informations/autosave_timeout");
+	GtrPreferences.autosave_with_suffix =
+		gtranslator_config_get_bool("toggles/autosave_with_suffix");
+	GtrPreferences.autosave_suffix =
+		gtranslator_config_get_string("informations/autosave_suffix");
 
 	GtrPreferences.instant_spell_check = 
-	    gtranslator_config_get_bool("toggles/instant_spell_check");
+		gtranslator_config_get_bool("toggles/instant_spell_check");
 	GtrPreferences.save_geometry =
-	    gtranslator_config_get_bool("toggles/save_geometry");
+		gtranslator_config_get_bool("toggles/save_geometry");
 	GtrPreferences.unmark_fuzzy =
-	    gtranslator_config_get_bool("toggles/set_non_fuzzy_if_changed"); 
+		gtranslator_config_get_bool("toggles/set_non_fuzzy_if_changed"); 
 	GtrPreferences.warn_if_fuzzy =
-	    gtranslator_config_get_bool("toggles/warn_if_fuzzy");
+		gtranslator_config_get_bool("toggles/warn_if_fuzzy");
 	GtrPreferences.warn_if_no_change =
-	    gtranslator_config_get_bool("toggles/warn_if_no_change");
+		gtranslator_config_get_bool("toggles/warn_if_no_change");
 	GtrPreferences.dont_save_unchanged_files =
-	    gtranslator_config_get_bool("toggles/do_not_save_unchanged_files");
+		gtranslator_config_get_bool("toggles/do_not_save_unchanged_files");
 	GtrPreferences.popup_menu =
-	    gtranslator_config_get_bool("toggles/enable_popup_menu");
+		gtranslator_config_get_bool("toggles/enable_popup_menu");
 	GtrPreferences.update_function =
-	    gtranslator_config_get_bool("toggles/use_update_function");    
+		gtranslator_config_get_bool("toggles/use_update_function");    
 	GtrPreferences.dot_char = 
-	    gtranslator_config_get_bool("toggles/use_dot_char");
+		gtranslator_config_get_bool("toggles/use_dot_char");
 	GtrPreferences.uzi_dialogs =
-	    gtranslator_config_get_bool("toggles/uzi_dialogs");
+		gtranslator_config_get_bool("toggles/uzi_dialogs");
 	GtrPreferences.check_recent_file = 
-	    gtranslator_config_get_bool("toggles/check_recent_files");
+		gtranslator_config_get_bool("toggles/check_recent_files");
 	GtrPreferences.use_own_specs =
-	    gtranslator_config_get_bool("toggles/use_own_specs");
+		gtranslator_config_get_bool("toggles/use_own_specs");
 	GtrPreferences.use_own_dict =
-	    gtranslator_config_get_bool("toggles/use_own_dict");
+		gtranslator_config_get_bool("toggles/use_own_dict");
 	GtrPreferences.keep_obsolete =
-	    gtranslator_config_get_bool("toggles/keep_obsolete");
+		gtranslator_config_get_bool("toggles/keep_obsolete");
 
 	GtrPreferences.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	GtrPreferences.find_in = gtranslator_config_get_int("find/find_in");

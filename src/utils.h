@@ -42,6 +42,11 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 void gtranslator_utils_remove_temp_file(void); 
 
 /*
+ * The autosave function.
+ */
+gboolean gtranslator_utils_autosave(gpointer foo_me_or_die);
+
+/*
  * Returns a list of (full) filenames matching the given parameters in ths
  *  given directory; extension means extension _with_ point (".xml").
  */

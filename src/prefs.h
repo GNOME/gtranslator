@@ -60,12 +60,18 @@ struct {
 	guint instant_spell_check	: 1;
 	guint use_own_dict		: 1;
 	guint keep_obsolete		: 1;
+	guint autosave			: 1;
+	guint autosave_with_suffix	: 1;
 
+	/*
+	 * The autosave timeout in minutes.
+	 */
 	gfloat autosave_timeout;
 	
 	/*
 	 * User-specified strings.
 	 */
+	gchar *autosave_suffix; 
 	gchar *spell_command;
 	gchar *dictionary;
 	gchar *font;

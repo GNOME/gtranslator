@@ -88,6 +88,51 @@ void gtranslator_utils_remove_temp_file()
 
 	g_free(tempfile);
 }
+ 
+/*
+ * The GSourceFunc for the periodic autosaving.
+ */
+gboolean gtranslator_utils_autosave(gpointer foo_me_or_die)
+{
+	/*
+	 * As long as no file is opened, don't perform any autosave.
+	 */
+	if(!file_opened || !po)
+	{
+		return FALSE;
+	}
+	else if(!po->file_changed)
+	{
+		/*
+		 * As the file didn't change, we don't need to autosave it, but the
+		 *  timeout function must still return TRUE for getting it's periodic
+		 *   sense.
+		 */
+		 return TRUE;
+	}
+	else
+	{
+		/*
+		 * Should we use a different suffix for the autosaved files? Should
+		 *  help differing the own-saved/autosaved po files.
+		 */
+		if(GtrPreferences.autosave_with_suffix && 
+			GtrPreferences.autosave_suffix)
+		{
+			gchar *autosave_filename=g_strdup_printf("%s.%s",
+				po->filename, GtrPreferences.autosave_suffix);
+
+			gtranslator_save_file(autosave_filename);
+			g_free(autosave_filename);
+		}
+		else
+		{
+			gtranslator_save_file(po->filename);
+		}
+		
+		return TRUE;
+	}
+}
 
 /*
  * Subsequently filter out all extension containing filename from the directory.
