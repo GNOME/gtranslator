@@ -26,6 +26,7 @@
 #include "parse.h"
 #include "preferences.h"
 #include "utils.h"
+#include "utf8.h"
 
 #include <gal/e-paned/e-paned.h>
 
@@ -188,13 +189,14 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	GtrMsg *message;
 	
 	message = e_tree_memory_node_get_data (tree_memory, path);
+	
 	/* FIXME: fill in the columns properly */
 	switch (column) {
 	case COL_ORIG:
 		return message->msgid;
 		break;
 	case COL_TRANS:
-		return message->msgstr;
+		return gtranslator_utf8_get_utf8_string(&message->msgstr);
 		break;
 	case COL_COMMENT:
 		return "comment";
@@ -237,6 +239,7 @@ row_selected (ETree *tree, int row, ETreePath node, gpointer data)
 	gint model_row;
 	
 	message=e_tree_memory_node_get_data (tree_memory, node);
+	
 	/* This sucks. Should use e_tree_view_to_model_row here
 	** but that seems to return the view row. Sigh.*/
 	model_row=g_list_index(po->messages, message);
@@ -366,7 +369,7 @@ void gtranslator_messages_table_create (void)
 	
 	if(hash_table)
 		g_hash_table_destroy(hash_table);
-	hash_table=g_hash_table_new(g_direct_hash,g_direct_equal);
+	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
 	
 	if(!file_opened)
 		return;
@@ -378,7 +381,7 @@ void gtranslator_messages_table_create (void)
 		
 		node=e_tree_memory_node_insert(tree_memory, root_node,
 			i, message);
-		g_hash_table_insert(hash_table,message,node); 
+		g_hash_table_insert(hash_table, message,node); 
 		list = g_list_next(list);
 		i++;
 	}	
@@ -393,7 +396,7 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
 {
 	ETreePath node=NULL;
 	
-	node=g_hash_table_lookup(hash_table,message);
+	node=g_hash_table_lookup(hash_table, message);
 	
 	e_tree_model_node_data_changed (tree_model, node);
 }
