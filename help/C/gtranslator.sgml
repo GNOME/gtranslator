@@ -126,7 +126,7 @@
 	 features loading and saving of compressed po files, opening of remote
 	 files via Gnome-VFS, and regular expression based search. Moreover,
 	 the application makes it possible to merge an outdated po file with
-	 a recent pot file via the xml-i18n-tools backend, all from the 
+	 a recent pot file via the xml-i18n-tools backend, all from the
          graphical interface!
 	</para>
 	<para>
@@ -173,10 +173,10 @@
       <title>Basic usage</title>
       <para>
         This will be about basic functions of gtranslator
-        <!-- Starting <application>MY-GNOME-APP</application> opens the
+        Starting <application>Gtranslator</application> opens the
         <interface>Main window</interface>, shown in <xref
-        linkend="mainwindow-fig">. The window is at first empty.
-        --> 
+        linkend="mainwindow-fig">.
+        -->
         <!-- ==== Figure ==== -->
         <figure id="mainwindow-fig">
 	  <title>Gtranslator Main Window</title>
@@ -188,20 +188,44 @@
 	</figure>
     <!-- ==== End of Figure ==== -->
       </para>
-
+      <para>
+        The <interface>Main window</interface> is divided into three main area:
+          <itemizedlist>
+		              <listitem>
+		                <para>
+		                  <interface>The menubar</interface> &mdash; allows you
+		                  the acces the application's menus.
+		                </para>
+		              </listitem>
+		              <listitem>
+		                <para>
+		                <interface>The toolbars</interface> &mdash; allow you quick access
+		                to often used file managment, navigation and compile functions.
+		                </para>
+		              </listitem>
+		              <listitem>
+		                <para>
+		                <interface>The workspace</interface> &mdash; allows you to
+		                visualize and edit the messages contained in the po file.
+		                </para>
+		              </listitem>
+          </itemizedlist>
+       </para>
 
       <sect3 id="settingup">
-	<title>Configuring at startup</title>
-	<para>
-        Basic configuration stuff comes here,just to get started
-        </para>
+	  	<title>Configuring at startup</title>
+	  	<para>
+	      <application>Gtranslator</application>'s settings can be reached by clicking on the
+	      <menuchoice><guimenu>Settings</guimenu><guimenuitem>Preferences&hellip;</guimenuitem>
+	      </menuchoice> menuitem.
+	          </para>
       </sect3>
 
       <sect3 id="loading">
 	<title>Loading a po file</title>
 	<para>
         How to load a po file.
-        </para>        
+        </para>
         <para>
         The Gnome-VFS way
         </para>
@@ -216,7 +240,7 @@
         Basics on panes, where to click, message status, basic navigation
         </para>
         <para>
-        Tip on on using the tree view. 
+        Tip on on using the tree view.
         </para>
       </sect3>
 
@@ -362,7 +386,7 @@
        <para>
        Here come the advanced features, autoaccomlish, regexp search, upadte aso...
        </para>
-        
+
         <sect3 id="aa">
          <title>Autoaccomplish</title>
          <para>
@@ -382,11 +406,11 @@
          </para>
         </sect3>
     </sect2>
-    
+
     <sect2 id="commandline">
       <title>Available commandline options</title>
        <para>
-       <application>Gtranslator</application> understands a number of 
+       <application>Gtranslator</application> understands a number of
        command line options:
           <itemizedlist>
             <listitem>
@@ -398,13 +422,13 @@
             <listitem>
               <para>
               <emphasis>--version</emphasis> Tells you
-              the version of <application>Gtranslator</application> 
+              the version of <application>Gtranslator</application>
               you're using.
               </para>
             </listitem>
           </itemizedlist>
        </para>
-       
+
     </sect2>
 
     <sect2 id="toolbar">
@@ -824,6 +848,100 @@
    </address>
   </para>
  </sect1>
+
+
+
+ <sect1 id="glossary">
+   <title>Glossary of term related to Gtranlator, gettext and localization</title>
+  <para>
+
+     <!--many people use itemizedlists in cases like this. Variablelists
+     are more appropriate -->
+
+   <variablelist>
+  	<varlistentry>
+  	  <term><command>gettext</command></term>
+  	  <listitem>
+  	    <para>
+
+        </para>
+  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+  	  <term>po file</term>
+  	  <listitem>
+  	    <para>
+
+        </para>
+  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+  	  <term>internationalization</term>
+  	  <listitem>
+  	    <para>
+
+        </para>
+  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+	  	  <term>localization</term>
+	  	  <listitem>
+	  	    <para>
+
+	        </para>
+	  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+	  	  <term>l10n</term>
+	  	  <listitem>
+	  	    <para>
+
+	        </para>
+	  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+	  	  <term>i18n</term>
+	  	  <listitem>
+	  	    <para>
+
+	        </para>
+	  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+	  	  <term>translation memory</term>
+	  	  <listitem>
+	  	    <para>
+
+	        </para>
+	  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+	  	  <term>ISO 3166 coutry code</term>
+	  	  <listitem>
+	  	    <para>
+
+	        </para>
+	  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+		  	  <term>ISO 639-2 language code</term>
+		  	  <listitem>
+		  	    <para>
+
+		        </para>
+		  	  </listitem>
+  	</varlistentry>
+  	<varlistentry>
+			  	  <term>default query domain</term>
+			  	  <listitem>
+			  	    <para>
+
+			        </para>
+			  	  </listitem>
+  	</varlistentry>
+   </variablelist>
+  </para>
+   </sect1>
 </article>
 
 
