@@ -198,7 +198,7 @@ static GtrLanguage languages[] = {
 	},
 	{
 	 N_("Malay/Bahasa Melayu"), "ms", "iso-8859-1",
-	 gabai-penyumbang@lists.sourceforge.net, "8bit"
+	 "gabai-penyumbang@lists.sourceforge.net", "8bit"
 	},
 	{
 	 N_("Maltese"), "mt", "iso-8859-3",
