@@ -51,7 +51,7 @@ void free_userdata(GtkWidget *widget, gpointer userdata);
 /*
  * Happens to escape our '_'s in the menu entries.
  */
-gchar *gtranslator_history_escape(gchar *str);
+gchar *gtranslator_history_escape(const gchar *str);
 
 /*
  * Save the given GList of GtrHistoryEntry's.
@@ -66,7 +66,7 @@ void gtranslator_history_entry_free(GtrHistoryEntry *e);
 /*
  * Escape the menu display items rightly.
  */
-gchar *gtranslator_history_escape(gchar *str)
+gchar *gtranslator_history_escape(const gchar *str)
 {
 	gchar	*display_str=NULL;
 	
@@ -252,12 +252,12 @@ void gtranslator_history_show(void)
 		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
 
 		gtk_signal_connect(GTK_OBJECT(menu->widget), "destroy",
-				   GTK_SIGNAL_FUNC(free_userdata), menu->hint);
+				   GTK_SIGNAL_FUNC(free_userdata), (gpointer) menu->hint);
 
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
-		GTR_FREE(menu->label);
+		GTR_FREE((gpointer) menu->label);
 		GTR_FREE(menu);
 	}
 }

@@ -529,7 +529,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 static void language_changed(GtkWidget * widget, gpointer useless)
 {
 	guint c = 0;
-	gchar *current = gtk_entry_get_text(GTK_ENTRY
+	G_CONST_RETURN gchar *current = gtk_entry_get_text(GTK_ENTRY
 					    (GTK_COMBO(language_combo)->entry));
 	while (languages[c].name != NULL) {
 		if (!g_strcasecmp(current, _(languages[c].name))) {

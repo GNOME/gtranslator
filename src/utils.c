@@ -53,7 +53,7 @@ GList *bits_list=NULL;
 /*
  * Strip the filename to get a "raw" enough filename.
  */ 
-gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
+gchar *gtranslator_utils_get_raw_file_name(const gchar *filename)
 {
 	GString *o;
 	gint 	count=0;
@@ -134,7 +134,7 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
 void gtranslator_utils_get_environment_value(const gchar *envpath, gchar **value)
 {
 	gint	i=0;
-	gchar	*contents=NULL;
+	const gchar	*contents=NULL;
 	gchar	**array=NULL;
 	
 	g_return_if_fail(envpath!=NULL);

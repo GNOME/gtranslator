@@ -39,7 +39,7 @@
 /*
  * Returns the non-prefixed and non-suffixed filename back.
  */
-gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
+gchar *gtranslator_utils_get_raw_file_name(const gchar *filename);
 
 /*
  * Removes all punctuation characters from the given string.
