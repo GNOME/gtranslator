@@ -43,8 +43,7 @@ typedef struct
 	gboolean insertion;
 } GtrUndo;
 
-static GtrUndo *undo=NULL;
-static GtrUndo *redo=NULL;
+GtrUndo *undo=NULL;
 
 /*
  * Register the given text for an insertion step.
@@ -54,8 +53,14 @@ void gtranslator_undo_register_insertion(const gchar *text, const gint position)
 	g_return_if_fail(position!=-1);
 	g_return_if_fail(text!=NULL);
 
-	GTR_FREE(undo->text);
+	if(undo)
+	{
+		GTR_FREE(undo->text);
+	}
+	
 	GTR_FREE(undo);
+
+	undo=g_new0(GtrUndo, 1);
 
 	undo->text=g_strdup(text);
 	undo->position=position;
@@ -70,8 +75,14 @@ void gtranslator_undo_register_deletion(const gchar *text, const gint position)
 	g_return_if_fail(position!=-1);
 	g_return_if_fail(text!=NULL);
 
-	GTR_FREE(undo->text);
+	if(undo)
+	{
+		GTR_FREE(undo->text);
+	}
+	
 	GTR_FREE(undo);
+
+	undo=g_new0(GtrUndo, 1);
 
 	undo->text=g_strdup(text);
 	undo->position=position;
@@ -94,30 +105,16 @@ gboolean gtranslator_undo_get_if_registered_undo()
 }
 
 /*
- * Return whether any redo is registered.
+ * Reset the mainly used GtrUndo.
  */
-gboolean gtranslator_undo_get_if_registered_redo()
+void gtranslator_undo_clean_register()
 {
-	if(redo && redo->text)
+	if(undo)
 	{
-		return TRUE;
+		GTR_FREE(undo->text);
 	}
-	else
-	{
-		return FALSE;
-	}
-}
 
-/*
- * Reset the mainly used GtrUndo's.
- */
-void gtranslator_undo_clean_registers()
-{
-	GTR_FREE(undo->text);
 	GTR_FREE(undo);
-
-	GTR_FREE(redo->text);
-	GTR_FREE(redo);
 }
 
 /*
@@ -142,13 +139,6 @@ void gtranslator_undo_run_undo()
 		{
 			gtk_editable_insert_text(GTK_EDITABLE(trans_box),
 				undo->text, strlen(undo->text), &undo->position);
-
-			/*
-			 * Fill in the redo data as we did an undo now.
-			 */
-			redo->text=g_strdup(undo->text);
-			redo->position=undo->position;
-			redo->insertion=FALSE;
 		}
 	}
 	else
@@ -160,10 +150,6 @@ void gtranslator_undo_run_undo()
 		{
 			gtk_editable_delete_text(GTK_EDITABLE(trans_box),
 				undo->position, strlen(undo->text));
-
-			redo->text=g_strdup(undo->text);
-			redo->position=undo->position;
-			redo->insertion=TRUE;
 		}
 	}
 

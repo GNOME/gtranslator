@@ -226,7 +226,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
 	show_messages_table=gtranslator_utils_attach_toggle_with_label(fourth_page, 8,
-		_("Show the messages table"),
+		_("Show the messages table (requires gtranslator restart for taking effect)"),
 		GtrPreferences.show_messages_table, gtranslator_preferences_dialog_changed);
 	
 	/*
@@ -353,7 +353,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
-	GtrPreferences.show_messages_table = if_active(show_messages_table);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
@@ -364,6 +363,23 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.autosave = if_active(autosave);
 	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
 #undef if_active
+
+	gtranslator_config_init();
+	
+	/*
+	 * Write the messages table setting directly -- so we do always respect
+	 *  changes on a restart.
+	 */
+	if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(show_messages_table)))
+	{
+		gtranslator_config_set_bool("toggles/show_messages_table", 
+			TRUE);
+	}
+	else
+	{
+		gtranslator_config_set_bool("toggles/show_messages_table",
+			FALSE);
+	}
 	
 	/*
 	 * Read out the SpinButton's.
@@ -376,7 +392,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
 			max_history_entries));
 	
-	gtranslator_config_init();
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
 	gtranslator_config_set_string("query/defaultdomain", 
@@ -463,8 +478,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/show_sidebar",
 			      GtrPreferences.show_sidebar);
-	gtranslator_config_set_bool("toggles/show_messages_table",
-			      GtrPreferences.show_messages_table);
 	gtranslator_config_set_bool("toggles/rambo_function",
 			      GtrPreferences.rambo_function);
 	gtranslator_config_set_bool("toggles/check_recent_files",
@@ -489,8 +502,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	gtranslator_config_close();
 
 	/*
-	 * Show or hide the sidebar and the table accorsding to the _possibly_ changed
-	 *  settings in the preferences dialog.
+	 * Show or hide the sidebar according to the _possibly_ changed
+	 *  setting in the preferences dialog.
 	 */
 	if(GtrPreferences.show_sidebar)
 	{

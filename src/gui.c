@@ -212,7 +212,18 @@ void gtranslator_create_main_window(void)
 	 * Create the sidebars and/or messages table.
 	 */
 	views_sidebar=gtranslator_sidebar_new();
-	gtranslator_messages_table=gtranslator_messages_table_new();
+
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table=gtranslator_messages_table_new();
+	}
+	else
+	{
+		/*
+		 * Foo, foo, woo, foo -- really not the right way to do this.
+		 */
+		gtranslator_messages_table=gtk_label_new("");
+	}
 
 	gtranslator_config_init();
 
@@ -231,10 +242,22 @@ void gtranslator_create_main_window(void)
 		e_paned_set_position(E_PANED(sidebar_pane), 0);
 	}
 
-	table_pane_position=gtranslator_config_get_int(
-		"interface/table_pane_position");
+	if(GtrPreferences.show_messages_table)
+	{
+		table_pane_position=gtranslator_config_get_int(
+			"interface/table_pane_position");
 
-	e_paned_set_position(E_PANED(table_pane), table_pane_position);
+		e_paned_set_position(E_PANED(table_pane), table_pane_position);
+	}
+	else
+	{
+		/*
+		 * Well, here you see an example how to NOT do code -- it works
+		 *  though (hope no one is using a 3200x2400 sized gtranslator,
+		 *   else we get problems ,-)).
+		 */
+		e_paned_set_position(E_PANED(table_pane), 2048);
+	}
 	
 	gtranslator_config_close();
 
@@ -430,7 +453,10 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Save the messages table state.
 	 */
-	gtranslator_messages_table_save_state();
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table_save_state();
+	}
 
 	/*
 	 * Shutdown our internal learning system.

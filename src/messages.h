@@ -30,14 +30,19 @@ typedef enum {
 	GTR_MSG_STATUS_UNKNOWN		= 0,
 	GTR_MSG_STATUS_TRANSLATED	= 1 << 0,
 	GTR_MSG_STATUS_FUZZY		= 1 << 1,
+
 	/*
-	 * If the message shouldn't be translated (web adresses/trade marks) 
+	 * "Sticky" is just a virtual state for messages where the
+	 *   original and the translation should be the same.
+	 *
+	 * Currently this is only internally useful but when using extended
+	 *  message comments this status might also get "persistent".
 	 */
 	GTR_MSG_STATUS_STICK		= 1 << 2
 } GtrMsgStatus;
 
 /*
- * The generally used message structure in (lib-)gtranslator.
+ * The generally used message structure in gtranslator.
  */ 
 typedef struct {
 	GtrComment 	*comment;

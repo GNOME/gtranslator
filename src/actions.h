@@ -49,7 +49,6 @@ enum {
 	ACT_VIEW_HOTKEY,
 	/***********************/
 	ACT_UNDO,
-	ACT_REDO,
 	ACT_CUT,
 	ACT_COPY,
 	ACT_PASTE,
@@ -104,7 +103,6 @@ void gtranslator_actions_set_up_file_opened(void);
  * The GUI Undo/Redo callbacks/functions.
  */
 void gtranslator_actions_undo(GtkWidget *widget, gpointer useless);
-void gtranslator_actions_redo(GtkWidget *widget, gpointer useless);
 
 /*
  * A wrapper function for disabling the Fuzzy menu item.

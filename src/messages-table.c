@@ -567,7 +567,7 @@ void gtranslator_messages_table_save_state()
  * Apply a very similar mechanism for hide/show/toggle-ing the
  *  messages table.
  */
-gboolean gtranslator_messages_table_show()
+gboolean gtranslator_messages_table_hide()
 {
 	gint position=-1;
 
@@ -588,7 +588,7 @@ gboolean gtranslator_messages_table_show()
 	}
 }
 
-gboolean gtranslator_messages_table_hide()
+gboolean gtranslator_messages_table_show()
 {
 	gint position=-1;
 

@@ -42,13 +42,6 @@ struct _GtrAction {
 };
 
 /*
- * "Swaps" the given actions; changes the state correspondingly.
- */
-#define gtranslator_actions_swap(x, y); \
-		gtranslator_actions_disable(x); \
-		gtranslator_actions_enable(y);
-
-/*
  * An array holds all defined actions.
  */
 static GtrAction acts[ACT_END];
@@ -112,16 +105,15 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_VIEW_HOTKEY, the_views_menu[4], NONE);
 	/*----------------------------------------------------------*/
 	insert_action(ACT_UNDO, the_edit_menu[0], the_toolbar[8]);
-	insert_action(ACT_REDO, the_edit_menu[1], the_toolbar[9]);
-	insert_action(ACT_CUT, the_edit_menu[3], NONE);
-	insert_action(ACT_COPY, the_edit_menu[4], NONE);
-	insert_action(ACT_PASTE, the_edit_menu[5], NONE);
-	insert_action(ACT_CLEAR, the_edit_menu[6], NONE);
-	insert_action(ACT_FIND, the_edit_menu[8], the_navibar[8]);
-	insert_action(ACT_FIND_AGAIN, the_edit_menu[9], NONE);
-	insert_action(ACT_REPLACE, the_edit_menu[10], the_navibar[9]);
-	insert_action(ACT_QUERY, the_edit_menu[11], the_navibar[10]);
-	insert_action(ACT_HEADER, the_edit_menu[13], the_toolbar[6]);
+	insert_action(ACT_CUT, the_edit_menu[2], NONE);
+	insert_action(ACT_COPY, the_edit_menu[3], NONE);
+	insert_action(ACT_PASTE, the_edit_menu[4], NONE);
+	insert_action(ACT_CLEAR, the_edit_menu[5], NONE);
+	insert_action(ACT_FIND, the_edit_menu[7], the_navibar[8]);
+	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
+	insert_action(ACT_REPLACE, the_edit_menu[9], the_navibar[9]);
+	insert_action(ACT_QUERY, the_edit_menu[10], the_navibar[10]);
+	insert_action(ACT_HEADER, the_edit_menu[12], the_toolbar[6]);
 	/*-----------------------------------------------------------*/
 	insert_action(ACT_FIRST, the_messages_menu[0], the_navibar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_navibar[1]);
@@ -142,13 +134,14 @@ void gtranslator_actions_set_up_state_no_file(void)
 {
 	gtranslator_actions_disable(ACT_COMPILE, ACT_UPDATE, ACT_ACCOMPLISH,
 			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE, ACT_UNDO,
-			ACT_REDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
+			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK, ACT_VIEW_MESSAGE, 
 			ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, ACT_VIEW_C_FORMAT,
-			ACT_VIEW_HOTKEY, ACT_EXPORT_UTF8, ACT_REMOVE_ALL_TRANSLATIONS);
+			ACT_VIEW_HOTKEY, ACT_EXPORT_UTF8, 
+			ACT_REMOVE_ALL_TRANSLATIONS);
 
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
 }
@@ -163,7 +156,7 @@ void gtranslator_actions_set_up_file_opened(void)
 		ACT_VIEW_C_FORMAT, ACT_VIEW_HOTKEY,
 		ACT_IMPORT_UTF8);
 
-	gtranslator_actions_disable(ACT_SAVE, ACT_UNDO, ACT_REDO);
+	gtranslator_actions_disable(ACT_SAVE, ACT_UNDO);
 	
 	/*
 	 * If we'd have the option to use the update function set, enable the
@@ -203,16 +196,20 @@ void gtranslator_actions_set_up_file_opened(void)
  */
 void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 {
-	gtranslator_message_show(po->current);
-	gtranslator_actions_swap(ACT_UNDO, ACT_REDO);
-}
+	/*
+	 * If we have registered any internal "cleverer" Undo, run it -- else
+	 *  do what we're doing for more then one year now ,-)
+	 */
+	if(gtranslator_undo_get_if_registered_undo())
+	{
+		gtranslator_undo_run_undo();
+	}
+	else
+	{
+		gtranslator_message_show(po->current);
+	}
 
-/*
- * The redo callback/function.
- */
-void gtranslator_actions_redo(GtkWidget *widget, gpointer useless)
-{
-	gtranslator_actions_swap(ACT_REDO, ACT_UNDO);
+	gtranslator_actions_disable(ACT_UNDO);
 }
 
 /*

@@ -1,3 +1,27 @@
+2001-08-10  Fatih Demir <kabalak@gtranslator.org>
+
+	* message.c: Clean up "Undo" stuff on message navigation.
+
+	* actions.c: Disable the "Undo" actions on an undo -- also check the
+		new "cleverer" gtranslator_undo_* stuff before using the old
+		 and beloved simple undo mechanism ,-)
+
+	* actions.c/.h & menus.c: Ha, take that, cruel Redo!
+
+	* undo.c/.h: Yes, I did it, I did bring the sources in organization for
+		working Undo: Redo is dropped out of gtranslator sources.
+
+	* prefs.c: Only store the option value directly for the messages table
+		visibility -- changes require a restart to take effect -- 
+		 avoids tons of problems.
+
+	* gui.c, messages-table.c & parse.c: Respect the option for toggling
+		the messages table visibility.
+
+	* messages.h: Comments clarification -- a small explanation for the 
+		sticky "GTR_MSG_STATUS_STICK" enumeration value -- it's just
+		 virtual for now and the comment explains this.
+
 2001-08-10  Kevin Vandersloot <kfv101@psu.edu>
 
 	* messages-table.c (..messages_table_new): change signal connect

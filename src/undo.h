@@ -35,12 +35,11 @@ void gtranslator_undo_register_insertion(const gchar *text, const gint position)
  *  piece of enormous insanity.
  */
 gboolean gtranslator_undo_get_if_registered_undo(void);
-gboolean gtranslator_undo_get_if_registered_redo(void);
 
 /*
  * These functions are quite clearly named I guess .-)
  */
-void gtranslator_undo_clean_registers(void);
+void gtranslator_undo_clean_register(void);
 void gtranslator_undo_run_undo(void);
 
 #endif

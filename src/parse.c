@@ -462,7 +462,10 @@ void gtranslator_parse_main(const gchar *filename)
 	/*
 	 * Create and set the messages table/tree up.
 	 */
-	gtranslator_messages_table_create();
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table_create();
+	}
 
 	/*
 	 * Hook up the autosaving function if wished.
@@ -825,7 +828,10 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	/*
 	 * Clear the messages table.
 	 */
-	gtranslator_messages_table_clear();
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table_clear();
+	}
 
 	/*
 	 * Stop gtkspell.
@@ -964,8 +970,11 @@ void gtranslator_remove_all_translations()
 	/*
 	 * Update (clear and rebuild) the messages table/tree.
 	 */
-	gtranslator_messages_table_clear();
-	gtranslator_messages_table_create();
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table_clear();
+		gtranslator_messages_table_create();
+	}
 
 	/*
 	 * Re-go to the current message if any change has been made.

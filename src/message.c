@@ -32,6 +32,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "syntax.h"
+#include "undo.h"
 #include "utf8.h"
 #include "utils.h"
 #include "utils_gui.h"
@@ -312,7 +313,10 @@ void gtranslator_message_update(void)
 	/*
 	 * Go to the corresponding row in the messages table.
 	 */
-	gtranslator_messages_table_update_row(msg);
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table_update_row(msg);
+	}
 }
 
 void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
@@ -355,7 +359,11 @@ void gtranslator_message_go_to(GList * to_go)
 	
 	po->current = to_go;
 	gtranslator_message_show(po->current);
-	gtranslator_messages_table_select_row(GTR_MSG(po->current->data));
+
+	if(GtrPreferences.show_messages_table)
+	{
+		gtranslator_messages_table_select_row(GTR_MSG(po->current->data));
+	}
 	
 	pos = g_list_position(po->messages, po->current);
 	
@@ -369,6 +377,12 @@ void gtranslator_message_go_to(GList * to_go)
 	}
 	
 	gtranslator_application_bar_update(pos);
+
+	/*
+	 * Clean up any Undo stuff lying 'round.
+	 */
+	gtranslator_undo_clean_register();
+	gtranslator_actions_disable(ACT_UNDO);
 }
 
 /*
