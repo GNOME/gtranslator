@@ -9,9 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-09 13:18+0200\n"
-"PO-Revision-Date: 2003-03-01 01:49+0100\n"
+"POT-Creation-Date: 2003-06-29 21:40+0200\n"
+"PO-Revision-Date: 2003-04-18 20:57+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,9 +23,8 @@ msgid "translator_credits"
 msgstr "GNOME PL Team <translators@gnome.pl>"
 
 #: src/about.c:78
-#, fuzzy
 msgid "(C) 1999 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2003 The Free Software Foundation"
+msgstr "(C) 1999-2003 The Free Software Foundation, Inc."
 
 #: src/about.c:79
 msgid "gtranslator is a po file editing suite with many bells and whistles."
@@ -47,7 +45,7 @@ msgstr "Nie można uzyskać informacji o autorze!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:324 src/translator.c:312
+#: src/color-schemes.c:324 src/translator.c:318
 msgid "Unknown"
 msgstr "Nieznany"
 
@@ -64,20 +62,20 @@ msgstr "_Widok/Schematy _kolorów/"
 msgid "Activate colorscheme %s"
 msgstr "Uaktywnia schemat kolorów %s"
 
-#: src/dialogs.c:99
+#: src/dialogs.c:103
 msgid "gtranslator -- open po file"
 msgstr "gtranslator -- wybór pliku .po do otwarcia"
 
-#: src/dialogs.c:141
+#: src/dialogs.c:145
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- wybór pliku do zapisu..."
 
 # zbyt małe okno na "wybór pliku do zapisu kopii lokalnej"
-#: src/dialogs.c:161
+#: src/dialogs.c:165
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- wybór pliku kopii lokalnej..."
 
-#: src/dialogs.c:205
+#: src/dialogs.c:209
 #, c-format
 msgid ""
 "File %s\n"
@@ -86,137 +84,138 @@ msgstr ""
 "Plik %s\n"
 "został zmieniony. Zapisać?"
 
-#: src/dialogs.c:245
+#: src/dialogs.c:250
 msgid "gtranslator -- import po file"
 msgstr "gtranslator -- wybór pliku do importu"
 
-#: src/dialogs.c:291
+#: src/dialogs.c:297
 msgid "gtranslator -- export po file"
 msgstr "gtranslator -- wybór pliku do eksportu"
 
-#: src/dialogs.c:337 src/dialogs.c:371
+#: src/dialogs.c:344 src/dialogs.c:378
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- redagowanie komentarza"
 
-#: src/dialogs.c:359
+#: src/dialogs.c:366
 msgid "Comment:"
 msgstr "Komentarz:"
 
-#: src/dialogs.c:475
+#: src/dialogs.c:482
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Czy usunąć wszystkie tłumaczenia z \"%s\"?"
 
-#: src/dialogs.c:488 src/dialogs.c:513
+#: src/dialogs.c:495 src/dialogs.c:520
 msgid "gtranslator -- confirm removal of all translations"
 msgstr "gtranslator -- potwierdzenie usunięcia wszystkich tłumaczeń"
 
-#: src/dialogs.c:502
+#: src/dialogs.c:509
 msgid "Are you sure you want to remove ALL translations from this po file?"
 msgstr "Czy na pewno chcesz usunąć wszystkie tłumaczenia z tego pliku po?"
 
 # małe okno dialogowe - "idź do" ledwie się mieści
-#: src/dialogs.c:608
+#: src/dialogs.c:615
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- idź do"
 
-#: src/dialogs.c:610
+#: src/dialogs.c:617
 msgid "Go!"
 msgstr "Przejdź!"
 
-#: src/dialogs.c:619
+#: src/dialogs.c:626
 msgid "Go to message number:"
 msgstr "Przejście do komunikatu o numerze:"
 
-#: src/dialogs.c:688
+#: src/dialogs.c:695
 msgid "Find in the po file"
 msgstr "Wyszukiwanie w pliku .po"
 
-#: src/dialogs.c:690 src/menus.c:337
+#: src/dialogs.c:697 src/menus.c:339
 msgid "Find"
 msgstr "Znajdź"
 
-#: src/dialogs.c:697
+#: src/dialogs.c:704
 msgid "Enter search string:"
 msgstr "Wprowadź poszukiwany napis:"
 
-#: src/dialogs.c:702
+#: src/dialogs.c:709
 msgid "Case sensitive"
 msgstr "Rozróżnianie małych i wielkich liter"
 
-#: src/dialogs.c:707 src/languages.c:97
+#: src/dialogs.c:714 src/languages.c:97
 msgid "English"
 msgstr "Angielski"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:513 src/messages-table.c:212
+#. pv, i want the tree to be in original column
+#: src/dialogs.c:720 src/dialogs.c:821 src/gui.c:515 src/messages-table.c:252
 msgid "Translated"
 msgstr "Przetłumaczony"
 
-#: src/dialogs.c:719 src/dialogs.c:820
+#: src/dialogs.c:726 src/dialogs.c:827
 msgid "Both"
 msgstr "Oba"
 
-#: src/dialogs.c:725 src/dialogs.c:808
+#: src/dialogs.c:732 src/dialogs.c:815
 msgid "Comments"
 msgstr "Komentarze"
 
-#: src/dialogs.c:731
+#: src/dialogs.c:738
 msgid "In all strings"
 msgstr "We wszystkich tekstach"
 
-#: src/dialogs.c:746
+#: src/dialogs.c:753
 msgid "Find in: "
 msgstr "Przeszukiwany język: "
 
-#: src/dialogs.c:794
+#: src/dialogs.c:801
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- zastąpienie"
 
-#: src/dialogs.c:795 src/menus.c:341
+#: src/dialogs.c:802 src/menus.c:343
 msgid "Replace"
 msgstr "Zastąp"
 
-#: src/dialogs.c:796
+#: src/dialogs.c:803
 msgid "Replace all"
 msgstr "Zastąp wszystkie"
 
-#: src/dialogs.c:800
+#: src/dialogs.c:807
 msgid "String to replace:"
 msgstr "Tekst do zastąpienia:"
 
-#: src/dialogs.c:803
+#: src/dialogs.c:810
 msgid "Replace string:"
 msgstr "Tekst zastępujący:"
 
-#: src/dialogs.c:843
+#: src/dialogs.c:850
 msgid "Replace in:"
 msgstr "Zakres zastępowania:"
 
-#: src/dialogs.c:921
+#: src/dialogs.c:928
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Wystąpił błąd w trakcie wykonywania msgfmt:\n"
 
-#: src/dialogs.c:954
+#: src/dialogs.c:961
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- wybór URI do otwarcia"
 
-#: src/dialogs.c:955 src/menus.c:268
+#: src/dialogs.c:962 src/menus.c:270
 msgid "Open"
 msgstr "Otwórz"
 
-#: src/dialogs.c:963
+#: src/dialogs.c:970
 msgid "Enter URI:"
 msgstr "Wprowadź URI:"
 
-#: src/dialogs.c:1001
+#: src/dialogs.c:1008
 msgid "No URI given!"
 msgstr "Nie podano URI!"
 
-#: src/dialogs.c:1016
+#: src/dialogs.c:1023
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Nie podano obsługiwanego protokołu URI (np. \"ftp://\")!"
 
-#: src/dialogs.c:1024
+#: src/dialogs.c:1031
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -239,7 +238,7 @@ msgstr ""
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
 "ftp://anonymous@ftp.somewhere.com/<ZDALNY-PLIK-PO>"
 
-#: src/dialogs.c:1059
+#: src/dialogs.c:1066
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -252,7 +251,7 @@ msgstr ""
 "Kopia ta może zawierać niezapisane fragmenty pracy!\n"
 "Wybranie \"Nie\" spowoduje usunięcie zapasowej kopii pliku."
 
-#: src/dialogs.c:1082
+#: src/dialogs.c:1089
 #, c-format
 msgid "Recovering `%s'..."
 msgstr "Odtwarzanie \"%s\"..."
@@ -260,35 +259,35 @@ msgstr "Odtwarzanie \"%s\"..."
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1132
+#: src/dialogs.c:1139
 msgid "Here you can query existing translations from your learn buffer."
 msgstr "Przeszukiwanie tłumaczeń z bufora zapamiętanych tłumaczeń."
 
-#: src/dialogs.c:1135
+#: src/dialogs.c:1142
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "gtranslator -- przeszukanie osobistego bufora tłumaczeń"
 
-#: src/dialogs.c:1136 src/menus.c:346
+#: src/dialogs.c:1143 src/menus.c:348
 msgid "Query"
 msgstr "Kwerenda"
 
-#: src/dialogs.c:1136
+#: src/dialogs.c:1143
 msgid "Query message content"
 msgstr "Kwerenda - treść komunikatu"
 
-#: src/dialogs.c:1145
+#: src/dialogs.c:1152
 msgid "Query string:"
 msgstr "Wyszukiwany tekst:"
 
-#: src/dialogs.c:1191
+#: src/dialogs.c:1198
 msgid "No query string given!"
 msgstr "Nie podano tekstu do znalezienia!"
 
-#: src/dialogs.c:1213
+#: src/dialogs.c:1220
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Nie znaleziono wyników w buforze dla podanej kwerendy!"
 
-#: src/dialogs.c:1225
+#: src/dialogs.c:1232
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -301,11 +300,11 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1291
+#: src/dialogs.c:1298
 msgid "Query's result translation is already there!"
 msgstr "Wynik kwerendy już się tu znajduje!"
 
-#: src/dialogs.c:1315
+#: src/dialogs.c:1322
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -315,7 +314,7 @@ msgstr ""
 
 #: src/find.c:211
 msgid "Please enter a search string"
-msgstr "Proszę wprowadzić poszukiwany tekst"
+msgstr "Wprowadź poszukiwany tekst"
 
 #: src/find.c:227
 #, c-format
@@ -326,38 +325,40 @@ msgstr ""
 "Nie można znaleźć\n"
 "\"%s\""
 
-#: src/gui.c:194
+#: src/gui.c:196
 msgid "Edit comment"
 msgstr "Zmodyfikuj komentarz"
 
-#: src/gui.c:499
+#: src/gui.c:501
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ Pozostało %i niepewnych. ]"
 
-#: src/gui.c:499 src/gui.c:503 src/menus.c:327 src/messages-table.c:206
+#. pv, i want the tree to be in original column
+#: src/gui.c:501 src/gui.c:505 src/menus.c:329 src/messages-table.c:244
 msgid "Fuzzy"
 msgstr "Niepewny"
 
-#: src/gui.c:503
+#: src/gui.c:505
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nie ma więcej niepewnych. ]"
 
-#: src/gui.c:511
+#: src/gui.c:513
 msgid "Sticky (Message & translation are the same)"
 msgstr "Identyczny (komunikat i tłumaczenie są jednakowe)"
 
-#: src/gui.c:522
+#: src/gui.c:524
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ Pozostało %i nieprzetłumaczonych. ]"
 
-#: src/gui.c:522 src/gui.c:524 src/messages-table.c:200
+#. pv, i want the tree to be in original column
+#: src/gui.c:524 src/gui.c:526 src/messages-table.c:236
 msgid "Untranslated"
 msgstr "Nieprzetłumaczony"
 
-#: src/gui.c:524
+#: src/gui.c:526
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Nie ma więcej nieprzetłumaczonych. ]"
@@ -365,72 +366,76 @@ msgstr "%s [ Nie ma więcej nieprzetłumaczonych. ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:537
+#: src/gui.c:539
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Komunikat %d z %d, stan: %s"
 
-#: src/header_stuff.c:413
+#: src/header_stuff.c:422
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- redagowanie nagłówka"
 
-#: src/header_stuff.c:420 src/header_stuff.c:425
+#: src/header_stuff.c:429 src/header_stuff.c:434
 msgid "Project"
 msgstr "Projekt"
 
-#: src/header_stuff.c:428
+#: src/header_stuff.c:437
 msgid "Translator and Language"
 msgstr "Tłumacz i język"
 
-#: src/header_stuff.c:438
+#: src/header_stuff.c:447
 msgid "Comments:"
 msgstr "Komentarze:"
 
-#: src/header_stuff.c:444
+#: src/header_stuff.c:453
 msgid "Project name:"
 msgstr "Nazwa projektu:"
 
-#: src/header_stuff.c:447
+#: src/header_stuff.c:456
 msgid "Project version:"
 msgstr "Wersja projektu:"
 
-#: src/header_stuff.c:450
+#: src/header_stuff.c:459
 msgid "Pot file creation date:"
 msgstr "Data utworzenia pliku pot:"
 
-#: src/header_stuff.c:455
+#: src/header_stuff.c:464
 msgid "Po file revision date:"
 msgstr "Data modyfikacji pliku po:"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:471
 msgid "Generator:"
 msgstr "Generator:"
 
-#: src/header_stuff.c:472
+#: src/header_stuff.c:475 src/header_stuff.c:480
+msgid "Report message string bugs to:"
+msgstr "Zgłaszanie błędów w komunikatach do:"
+
+#: src/header_stuff.c:491
 msgid "Use my options to complete the following entries:"
 msgstr "Używanie moich opcji do wypełniania następujących pozycji:"
 
-#: src/header_stuff.c:486
+#: src/header_stuff.c:505
 msgid "Translator's name:"
 msgstr "Imię i nazwisko tłumacza:"
 
-#: src/header_stuff.c:489
+#: src/header_stuff.c:508
 msgid "Translator's e-mail:"
 msgstr "Adres e-mail tłumacza:"
 
-#: src/header_stuff.c:492 src/prefs.c:150
+#: src/header_stuff.c:511 src/prefs.c:150
 msgid "Language:"
 msgstr "Język:"
 
-#: src/header_stuff.c:498
+#: src/header_stuff.c:517
 msgid "Language group's e-mail:"
-msgstr "Adres e-mail grupy tłumaczącej"
+msgstr "Adres e-mail grupy tłumaczącej:"
 
-#: src/header_stuff.c:503 src/prefs.c:166
+#: src/header_stuff.c:522 src/prefs.c:166
 msgid "Charset:"
 msgstr "Zestaw znaków:"
 
-#: src/header_stuff.c:515 src/prefs.c:171
+#: src/header_stuff.c:534 src/prefs.c:171
 msgid "Encoding:"
 msgstr "Kodowanie:"
 
@@ -608,223 +613,234 @@ msgid "Hungarian"
 msgstr "Węgierski"
 
 #: src/languages.c:157
+msgid "Icelandic"
+msgstr "Islandzki"
+
+#: src/languages.c:161
 msgid "Indonesian"
 msgstr "Indonezyjski"
 
-#: src/languages.c:161
+#: src/languages.c:165
 msgid "Italian"
 msgstr "Włoski"
 
-#: src/languages.c:165
+#: src/languages.c:169
 msgid "Irish"
 msgstr "Irlandzki"
 
-#: src/languages.c:169
+#: src/languages.c:173
 msgid "Japanese"
 msgstr "Japoński"
 
-#: src/languages.c:173
+#: src/languages.c:177
 msgid "Kannada"
 msgstr "Kannada"
 
-#: src/languages.c:177
+#: src/languages.c:181
 msgid "Korean"
 msgstr "Koreański"
 
-#: src/languages.c:181
+#: src/languages.c:185
 msgid "Latvian"
 msgstr "Łotewski"
 
-#: src/languages.c:185
+#: src/languages.c:189
 msgid "Lithuanian"
 msgstr "Litewski"
 
-#: src/languages.c:189
+#: src/languages.c:193
 msgid "Malay/Bahasa Melayu"
 msgstr "Malajski (Bahasa Melayu)"
 
-#: src/languages.c:193
+#: src/languages.c:197
 msgid "Maltese"
 msgstr "Maltański"
 
-#: src/languages.c:197
+#: src/languages.c:201
 msgid "Marathi"
 msgstr "Marathi"
 
-#: src/languages.c:201
+#: src/languages.c:205
 msgid "Norwegian/Bokmaal"
 msgstr "Norweski (Bokmaal)"
 
-#: src/languages.c:205
+#: src/languages.c:209
 msgid "Norwegian/Nynorsk"
 msgstr "Norweski (Nynorsk)"
 
-#: src/languages.c:209
+#: src/languages.c:213
 msgid "Punjabi"
 msgstr "Pendżabski"
 
-#: src/languages.c:213
+#: src/languages.c:217
 msgid "Polish"
 msgstr "Polski"
 
-#: src/languages.c:217
+#: src/languages.c:221
 msgid "Portuguese"
 msgstr "Portugalski"
 
-#: src/languages.c:221
+#: src/languages.c:225
 msgid "Portuguese/Brazil"
 msgstr "Portugalski (Brazylia)"
 
-#: src/languages.c:225
+#: src/languages.c:229
 msgid "Romanian"
 msgstr "Rumuński"
 
-#: src/languages.c:229
+#: src/languages.c:233
 msgid "Russian"
 msgstr "Rosyjski"
 
-#: src/languages.c:233
+#: src/languages.c:237
 msgid "Serbian/Cyrillic"
 msgstr "Serbski (cyrylica)"
 
-#: src/languages.c:237
+#: src/languages.c:241
 msgid "Serbian/Latin"
 msgstr "Serbski (łaciński)"
 
-#: src/languages.c:241
+#: src/languages.c:245
 msgid "Slovak"
 msgstr "Słowacki"
 
-#: src/languages.c:245
+#: src/languages.c:249
 msgid "Slovenian"
 msgstr "Słoweński"
 
-#: src/languages.c:249
+#: src/languages.c:253
 msgid "Spanish"
 msgstr "Hiszpański"
 
-#: src/languages.c:253
+#: src/languages.c:257
 msgid "Spanish/Spain"
 msgstr "Hiszpański (Hiszpania)"
 
-#: src/languages.c:257
+#: src/languages.c:261
 msgid "Spanish/Mexico"
 msgstr "Hiszpański (Meksyk)"
 
-#: src/languages.c:261
+#: src/languages.c:265
 msgid "Swedish"
 msgstr "Szwedzki"
 
-#: src/languages.c:265
+#: src/languages.c:269
 msgid "Tamil"
 msgstr "Tamilski"
 
-#: src/languages.c:269
+#: src/languages.c:273
 msgid "Telugu"
 msgstr "Telugu"
 
-#: src/languages.c:273
+#: src/languages.c:277
 msgid "Thai"
 msgstr "Tajski"
 
-#: src/languages.c:277
+#: src/languages.c:281
 msgid "Turkish"
 msgstr "Turecki"
 
-#: src/languages.c:281
+#: src/languages.c:285
 msgid "Ukrainian"
 msgstr "Ukraiński"
 
-#: src/languages.c:285
+#: src/languages.c:289
 msgid "Uzbekian"
 msgstr "Uzbecki"
 
-#: src/languages.c:289
+#: src/languages.c:293
 msgid "Vietnamese"
 msgstr "Wietnamski"
 
-#: src/languages.c:293
+#: src/languages.c:297
 msgid "Walloon"
 msgstr "Waloński"
 
-#: src/languages.c:297
+#: src/languages.c:301
 msgid "Welsh"
 msgstr "Walijski"
 
-#: src/main.c:83
+#: src/main.c:82
 msgid "Auto translate the po file & exit"
 msgstr "Automatycznie tłumaczy plik po i kończy"
 
-#: src/main.c:83 src/main.c:99
+#: src/main.c:82 src/main.c:98
 msgid "FILENAME"
 msgstr "NAZWA"
 
-#: src/main.c:87
+#: src/main.c:86
 msgid "Show build information/specifications"
 msgstr "Wyświetla informacje o wersji"
 
-#: src/main.c:91
+#: src/main.c:90
 msgid "Export learn buffer to a plain po file"
 msgstr "Eksportuje bufor tłumaczeń do zwykłego pliku po"
 
-#: src/main.c:91
+#: src/main.c:90
 msgid "PO_FILE"
 msgstr "PLIK_PO"
 
-#: src/main.c:95
+#: src/main.c:94
 msgid "Specify main window geometry"
 msgstr "Określa geometrię okna głównego"
 
-#: src/main.c:95
+#: src/main.c:94
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: src/main.c:99
+#: src/main.c:98
 msgid "Learn the file completely & exit"
 msgstr "Dodaje do bufora tłumaczenia z pliku i kończy pracę"
 
-#: src/main.c:103
+#: src/main.c:102
 msgid "HTML file to write to"
 msgstr "Plik HTML do zapisu"
 
-#: src/main.c:103
+#: src/main.c:102
 msgid "HTMLFILE"
 msgstr "NAZWA"
 
-#: src/main.c:151
+#: src/main.c:106
+msgid ""
+"Don't highlight syntax - FIXME: We're always non-syntaxed currently! Sorry..."
+msgstr ""
+"Bez podświetlania składni - POPRAWKA: aktualnie nigdy nie używamy składni! "
+"Niestety..."
+
+#: src/main.c:150
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Błąd w trakcie inicjalizacji GConf: %s."
 
-#: src/main.c:178
+#: src/main.c:180
 msgid "gtranslator build information/specs:"
 msgstr "Informacje o wersji programu gtranslator:"
 
-#: src/main.c:180
+#: src/main.c:182
 msgid "Version and build date:"
 msgstr "Wersja i data kompilacji:"
 
-#: src/main.c:182
+#: src/main.c:184
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Wersje GLib / GTK+ / GNOME / XML użyte do kompilacji:"
 
-#: src/main.c:184
+#: src/main.c:186
 msgid "Colorschemes directory:"
 msgstr "Katalog schematów kolorów:"
 
-#: src/main.c:186
+#: src/main.c:188
 msgid "Scripts directory:"
 msgstr "Katalog skryptów:"
 
-#: src/main.c:188
-msgid "Window icon:"
-msgstr "Ikona:"
-
 #: src/main.c:190
+msgid "Window icon:"
+msgstr "Ikona okna:"
+
+#: src/main.c:192
 msgid "Own locale directory:"
 msgstr "Używany katalog locale:"
 
-#: src/main.c:192
+#: src/main.c:194
 msgid "Default learn buffer file location:"
 msgstr "Domyślne położenie bufora tłumaczeń:"
 
@@ -832,7 +848,7 @@ msgstr "Domyślne położenie bufora tłumaczeń:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:445
+#: src/main.c:449
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "Nauka \"%s\" przebiegła pomyślnie.\n"
@@ -840,7 +856,7 @@ msgstr "Nauka \"%s\" przebiegła pomyślnie.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:487
+#: src/main.c:491
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
 msgstr "Bufor tłumaczeń został wyeksportowany do \"%s\".\n"
@@ -853,15 +869,15 @@ msgstr "_Przejdź"
 msgid "_Compile"
 msgstr "_Skompiluj"
 
-#: src/menus.c:60 src/menus.c:282
+#: src/menus.c:60 src/menus.c:284
 msgid "Compile the po file"
-msgstr "Kompliluje plik .po"
+msgstr "Kompiluje plik .po"
 
 #: src/menus.c:66
 msgid "_Update"
 msgstr "Akt_ualizuj"
 
-#: src/menus.c:67 src/menus.c:286
+#: src/menus.c:67 src/menus.c:288
 msgid "Update the po file"
 msgstr "Aktualizuje plik .po"
 
@@ -893,245 +909,243 @@ msgstr "Otwiera plik .po z podanego URI"
 msgid "Recen_t files"
 msgstr "Os_tatnio otwarte"
 
-#: src/menus.c:105
+#: src/menus.c:106
 msgid "_Export to UTF-8..."
 msgstr "Wy_eksportuj do UTF-8..."
 
-#: src/menus.c:106
+#: src/menus.c:107
 msgid "Export the current po file to UTF-8"
 msgstr "Eksportuje bieżący plik .po do pliku z kodowaniem UTF-8"
 
-#: src/menus.c:112
+#: src/menus.c:113
 msgid "_Import from UTF-8..."
 msgstr "Za_importuj z UTF-8..."
 
-#: src/menus.c:113
+#: src/menus.c:114
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr "Importuje plik z kodowaniem UTF-8"
 
-#: src/menus.c:144
+#: src/menus.c:146
 msgid "_Query..."
 msgstr "_Kwerenda..."
 
-#: src/menus.c:145 src/menus.c:347
+#: src/menus.c:147 src/menus.c:349
 msgid "Query for a string"
 msgstr "Pozwala znaleźć tłumaczenie w istniejących dziedzinach gettext."
 
-#: src/menus.c:152
+#: src/menus.c:154
 msgid "_Header..."
 msgstr "Nagłów_ek"
 
-#: src/menus.c:153
+#: src/menus.c:155
 msgid "Edit po file header"
 msgstr "Modyfikuje nagłówek pliku .po"
 
-#: src/menus.c:160
+#: src/menus.c:162
 msgid "C_omment..."
 msgstr "_Komentarz..."
 
-#: src/menus.c:161
+#: src/menus.c:163
 msgid "Edit message comment"
 msgstr "Modyfikuje komentarz powiązany z komunikatem"
 
-#: src/menus.c:168
+#: src/menus.c:170
 msgid "Copy _message -> translation"
 msgstr "Skopiuj _komunikat -> tłumaczenie"
 
-#: src/menus.c:169
+#: src/menus.c:171
 msgid "Copy the original message contents and paste them as translation"
 msgstr "Kopiuje treść komunikatu i wstawia ją do tłumaczenia"
 
-#: src/menus.c:176
+#: src/menus.c:178
 msgid "Fu_zzy"
 msgstr "Ni_epewny"
 
-#: src/menus.c:177
+#: src/menus.c:179
 msgid "Toggle fuzzy status of a message"
 msgstr "Oznacza komunikat jako niepewny"
 
-#: src/menus.c:191
+#: src/menus.c:193
 msgid "_First"
 msgstr "_Pierwszy"
 
-#: src/menus.c:192 src/menus.c:303
+#: src/menus.c:194 src/menus.c:305
 msgid "Go to the first message"
 msgstr "Przechodzi do pierwszego komunikatu"
 
-#: src/menus.c:198
+#: src/menus.c:200
 msgid "_Back"
 msgstr "Pop_rzedni"
 
-#: src/menus.c:199 src/menus.c:307
+#: src/menus.c:201 src/menus.c:309
 msgid "Move back one message"
 msgstr "Przechodzi do poprzedniego komunikatu"
 
-#: src/menus.c:206
+#: src/menus.c:208
 msgid "_Next"
 msgstr "_Następny"
 
-#: src/menus.c:207 src/menus.c:312
+#: src/menus.c:209 src/menus.c:314
 msgid "Move forward one message"
 msgstr "Przechodzi do następnego komunikatu"
 
-#: src/menus.c:213
+#: src/menus.c:215
 msgid "_Last"
 msgstr "_Ostatni"
 
-#: src/menus.c:214 src/menus.c:316
+#: src/menus.c:216 src/menus.c:318
 msgid "Go to the last message"
 msgstr "Przechodzi do ostatniego komunikatu"
 
-#: src/menus.c:221
+#: src/menus.c:223
 msgid "_Go to..."
 msgstr "Przej_dź do..."
 
-#: src/menus.c:222
+#: src/menus.c:224
 msgid "Goto specified message number"
 msgstr "Przechodzi do komunikatu o podanym numerze"
 
-#: src/menus.c:228
+#: src/menus.c:230
 msgid "Next fuz_zy"
 msgstr "Następny n_iedokładny"
 
-#: src/menus.c:229
+#: src/menus.c:231
 msgid "Go to next fuzzy message"
 msgstr "Przechodzi do następnego niepewnego komunikatu"
 
-#: src/menus.c:235
+#: src/menus.c:237
 msgid "Next _untranslated"
 msgstr "Następny ni_eprzetłumaczony"
 
-#: src/menus.c:236 src/menus.c:321
+#: src/menus.c:238 src/menus.c:323
 msgid "Go to next untranslated message"
 msgstr "Przechodzi do następnego nieprzetłumaczonego komunikatu"
 
-#: src/menus.c:246
+#: src/menus.c:248
 msgid "_Colorschemes"
 msgstr "Schematy _kolorów"
 
-#: src/menus.c:256
+#: src/menus.c:258
 msgid "gtranslator _website"
 msgstr "_Strona domowa gtranslatora"
 
-#: src/menus.c:257
+#: src/menus.c:259
 msgid "gtranslator's homepage on the web"
 msgstr "Strona domowa gtranslatora w sieci WWW"
 
-#: src/menus.c:269
+#: src/menus.c:271
 msgid "Open a po file"
 msgstr "Otwiera plik .po"
 
-#: src/menus.c:272
+#: src/menus.c:274
 msgid "Save"
 msgstr "Zapisz"
 
-#: src/menus.c:273
+#: src/menus.c:275
 msgid "Save File"
 msgstr "Zapisuje plik .po"
 
-#: src/menus.c:276
+#: src/menus.c:278
 msgid "Save as"
 msgstr "Zapisz jako"
 
-#: src/menus.c:277
+#: src/menus.c:279
 msgid "Save file with a different name"
 msgstr "Zapisuje plik pod inną nazwą"
 
-#: src/menus.c:281
+#: src/menus.c:283
 msgid "Compile"
 msgstr "Skompiluj"
 
-#: src/menus.c:285
+#: src/menus.c:287
 msgid "Update"
 msgstr "Uaktualnij"
 
-#: src/menus.c:289
+#: src/menus.c:291
 msgid "Header"
 msgstr "Nagłówek"
 
-#: src/menus.c:290
+#: src/menus.c:292
 msgid "Edit the header"
 msgstr "Pozwala zmodyfikować nagłówek"
 
-#: src/menus.c:294
+#: src/menus.c:296
 msgid "Undo"
 msgstr "Cofnij"
 
-#: src/menus.c:295
+#: src/menus.c:297
 msgid "Undo the last performed action"
 msgstr "Cofa ostatnią czynność"
 
-#: src/menus.c:302
+#: src/menus.c:304
 msgid "First"
 msgstr "Pierwszy"
 
-#: src/menus.c:306
+#: src/menus.c:308
 msgid "Back"
 msgstr "Poprzedni"
 
-#: src/menus.c:311
+#: src/menus.c:313
 msgid "Next"
 msgstr "Następny"
 
-#: src/menus.c:315
+#: src/menus.c:317
 msgid "Last"
 msgstr "Ostatni"
 
 # Powinno być w zasadzie "Nieprzetłumaczony" ale nie zmieści się.
-#: src/menus.c:320
+#: src/menus.c:322
 msgid "Missing"
 msgstr "Brakujący"
 
-#: src/menus.c:328
+#: src/menus.c:330
 msgid "Go to the next fuzzy translation"
 msgstr "Przechodzi do następnego niepewnego tłumaczenia"
 
-#: src/menus.c:333
+#: src/menus.c:335
 msgid "Go to"
 msgstr "Przejdź do"
 
-#: src/menus.c:334
+#: src/menus.c:336
 msgid "Go to specified message number"
 msgstr "Przechodzi do komunikatu o podanym numerze"
 
-#: src/menus.c:338
+#: src/menus.c:340
 msgid "Find string in po file"
 msgstr "Znajduje tekst w pliku .po"
 
-#: src/menus.c:342
+#: src/menus.c:344
 msgid "Replace string in po file"
 msgstr "Zastępuje tekst w pliku .po"
 
-#: src/message.c:82
+#: src/message.c:84
 msgid "Couldn't get the message!"
 msgstr "Nie można znaleźć komunikatu!"
 
-#: src/message.c:104
+#: src/message.c:106
 msgid "There are no fuzzy messages left."
 msgstr "Nie ma więcej niepewnych tłumaczeń."
 
-#: src/message.c:128
+#: src/message.c:130
 msgid "All messages seem to be translated."
-msgstr "Wszystkie komunikaty są przetłumaczone."
+msgstr "Wszystkie komunikaty zostały przetłumaczone."
 
-#: src/messages-table.c:135 data/etspecs/messages-table.etspec.h:5
-msgid "Status"
-msgstr "Stan"
-
-#: src/messages-table.c:136 data/etspecs/messages-table.etspec.h:4
+#. pv, i want the tree to be in original column
+#. {_("Status"),      "text"},
+#: src/messages-table.c:163
 msgid "Original"
 msgstr "Oryginał"
 
-#: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:6
+#: src/messages-table.c:164
 msgid "Translation"
 msgstr "Tłumaczenie"
 
-#: src/open.c:141
+#: src/open.c:144
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Nie można otworzyć skompilowanego pliku gettext \"%s\"!"
 
-#: src/open.c:188
+#: src/open.c:192
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Nie można otworzyć spakowanego pliku gettext \"%s\"!"
@@ -1140,17 +1154,17 @@ msgstr "Nie można otworzyć spakowanego pliku gettext \"%s\"!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open.c:198
+#: src/open.c:202
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr "Nie można otworzyć spakowanego %s pliku \"%s\"!"
 
-#: src/open.c:266
+#: src/open.c:271
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Nie można otworzyć spakowanego zip-em pliku \"%s\"!"
 
-#: src/parse.c:383
+#: src/parse.c:391
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1161,7 +1175,7 @@ msgstr ""
 "w linii %d.\n"
 "Sprawdź plik i spróbuj ponownie."
 
-#: src/parse.c:429
+#: src/parse.c:437
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1170,17 +1184,25 @@ msgstr ""
 "Plik jest pusty:\n"
 "%s"
 
-#: src/parse.c:453
+#: src/parse.c:459
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Plik \"%s\" nie istnieje!"
 
-#: src/parse.c:576
+#.
+#. * Provide a default po->header to avoid segfaults (#62244)
+#.
+#: src/parse.c:584
+msgid "Header record not found - defaulting from preferences"
+msgstr ""
+"Nie znaleziono wpisu nagłówka - pobranie domyślnych wartości z preferencji"
+
+#: src/parse.c:602
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:720
+#: src/parse.c:746
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1191,12 +1213,12 @@ msgstr ""
 "Pliki .pot są tworzone w procesie kompilacji.\n"
 "Twój plik powinien prawdopodobnie nosić nazwę \"%s.po\""
 
-#: src/parse.c:782
+#: src/parse.c:808
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nie można otworzyć pliku \"%s\" do zapisu!"
 
-#: src/parse.c:828
+#: src/parse.c:854
 #, c-format
 msgid ""
 "File %s\n"
@@ -1205,11 +1227,11 @@ msgstr ""
 "Plik %s\n"
 "zawiera %d niepewnych tłumaczeń"
 
-#: src/parse.c:933 data/desktop/gtranslator.desktop.in.h:2
+#: src/parse.c:959 data/desktop/gtranslator.desktop.in.h:2
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/parse.c:958
+#: src/parse.c:984
 #, c-format
 msgid ""
 "File %s\n"
@@ -1218,11 +1240,11 @@ msgstr ""
 "Plik %s\n"
 "został zmieniony. Czy chcesz przywrócić poprzedni stan?"
 
-#: src/parse.c:1109
+#: src/parse.c:1137
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Niestety, msgfmt nie jest dostępny w Twoim systemie!"
 
-#: src/parse.c:1144
+#: src/parse.c:1172
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1509,7 +1531,7 @@ msgstr "Y"
 #. * Translators: this character is used if the middle dot
 #. *  can't be used under your locale.
 #.
-#: src/runtime-config.c:89 src/runtime-config.c:94
+#: src/runtime-config.c:88 src/runtime-config.c:93
 msgid "^"
 msgstr "^"
 
@@ -1544,7 +1566,7 @@ msgstr "Pomyślnie odtworzono sesję."
 
 #: src/stylistics.c:278
 msgid "No font set! Using default font"
-msgstr "Nie ustawiono czcionek! Użyto domyślnych."
+msgstr "Nie ustawiono czcionki! Użyto domyślnej czcionki."
 
 #.
 #. * Use gtranslator's font in this case -- should be a fallback font
@@ -1556,11 +1578,11 @@ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
 
 #: src/update.c:102
 msgid "No POTFILES.in found!"
-msgstr "Nie znaleziono POTFILES.in!"
+msgstr "Nie znaleziono pliku POTFILES.in!"
 
 #: src/update.c:113
 msgid "Po file is uptodate."
-msgstr "Plik po jest aktualny."
+msgstr "Plik .po jest aktualny."
 
 #: src/update.c:120
 msgid "The update was successfull."
@@ -1578,22 +1600,22 @@ msgstr "Nie można utworzyć katalogu \"%s\"!"
 #.
 #. * Again return the fallback default locale value given by the translator.
 #.
-#: src/utils.c:792
+#: src/utils.c:793
 msgid "iso-8859-1"
 msgstr "ISO-8859-1"
 
-#: src/utils_gui.c:142
+#: src/utils_gui.c:144
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Nie można dokonać rozbioru definicji geometrii \"%s\"!"
 
-#: src/utils_gui.c:369
+#: src/utils_gui.c:371
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Brak uprawnień dostępu do pliku \"%s\"."
 
 # c-format
-#: src/utils_gui.c:387
+#: src/utils_gui.c:389
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1603,7 +1625,7 @@ msgstr ""
 "Brak uprawnień do modyfikacji pliku \"%s\".\n"
 "Zapisz nową kopię w katalogu, w którym posiadasz uprawnienia do zapisu."
 
-#: src/utils_gui.c:457
+#: src/utils_gui.c:458
 #, c-format
 msgid ""
 "The file\n"
@@ -1625,13 +1647,13 @@ msgstr ""
 "\n"
 "Czy pomimo tego chcesz otworzyć ten plik?"
 
-#: src/utils_gui.c:502
+#: src/utils_gui.c:503
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr ""
 "Nie można odnaleźć w systemie wymaganego programu dekompresującego \"%s\"!"
 
-#: src/utils_gui.c:507
+#: src/utils_gui.c:508
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr ""
@@ -1675,18 +1697,6 @@ msgstr "Przerwano przesyłanie!"
 msgid "The Gnome translation program"
 msgstr "Program GNOME do tłumaczeń"
 
-#: data/etspecs/messages-table.etspec.h:1
-msgid "Comment"
-msgstr "Komentarz"
-
-#: data/etspecs/messages-table.etspec.h:2
-msgid "Line"
-msgstr "Wiersz"
-
-#: data/etspecs/messages-table.etspec.h:3
-msgid "Number"
-msgstr "Liczby"
-
 #: data/mime/gtranslator.keys.in.h:1
 msgid "Compiled gettext po file"
 msgstr "Skompilowany plik .po gettext"
@@ -1698,6 +1708,18 @@ msgstr "Skompresowany plik .po gettext"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Plik .po gettext"
+
+#~ msgid "Status"
+#~ msgstr "Stan"
+
+#~ msgid "Comment"
+#~ msgstr "Komentarz"
+
+#~ msgid "Line"
+#~ msgstr "Wiersz"
+
+#~ msgid "Number"
+#~ msgstr "Liczba"
 
 #~ msgid ""
 #~ "New escaped char found: \\%c\n"
