@@ -32,28 +32,33 @@ gboolean gtranslator_open_po_file(gchar *file)
 	 *  remote files.
 	 */
 	#ifdef USE_VFS_STUFF
-	
-	file=gtranslator_vfs_handle_open_file(file);
 
-	/*
-	 * If we couldn't get a local representation filename
-	 *  for the remote file we do return FALSE.
-	 */  
-	if(!file)
+	if(!g_strncasecmp(file, "http://", 7)||
+		!g_strncasecmp(file, "ftp://", 6)||
+		!g_strncasecmp(file, "www.", 4))
 	{
-		return FALSE;
-	}
-	else
-	{
-		/*
-		 * Here we do open the local representation file
-		 *  of the remote file.
-		 */  
-		parse(file);
-		
-		return TRUE;
-	}
 	
+		file=gtranslator_vfs_handle_open_file(file);
+
+		/*
+		 * If we couldn't get a local representation filename
+		 *  for the remote file we do return FALSE.
+		 */  
+		if(!file)
+		{
+			return FALSE;
+		}
+		else
+		{
+			/*
+			 * Here we do open the local representation file
+			 *  of the remote file.
+			 */  
+			parse(file);
+			
+			return TRUE;
+		}
+	}
 	#endif
 		
 	/*
@@ -61,7 +66,7 @@ gboolean gtranslator_open_po_file(gchar *file)
 	 *  of the supported suffixes.
 	 */  
 	g_strreverse(file);
-	
+
 	/*
 	 * For the compiled gettext files we do support
 	 *  the "mo" and "gmo" suffixes; detect them.
