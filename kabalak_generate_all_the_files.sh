@@ -33,10 +33,10 @@ case $? in
 	;;
 esac
 grep -sq LIBTOOL configure.in && {
-$a "libtoolize -> " && echo "no"|libtoolize --force 2>&1 1>/dev/null
+$a "libtoolize -> " && echo "no"|libtoolize --copy --force 2>&1 1>/dev/null
 }
 grep -sq GETTEXT configure.in && {
-$a "gettextize -> " && echo "no"|gettextize --force 2>&1 1>/dev/null
+$a "gettextize -> " && echo "no"|gettextize --copy --force 2>&1 1>/dev/null
 }
 $a "autoheader -> " && autoheader
 $a "automake -> " && automake -a

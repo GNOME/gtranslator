@@ -182,6 +182,47 @@ fi
 AM_CONDITIONAL(USE_VFS_STUFF, test x$vfs_stuff = xyes)
 
 dnl -------------------------------------------------------------------
+dnl Check for gal >= 0.4.99.
+dnl -------------------------------------------------------------------
+gal_gui=no
+GAL_CFLAGS=
+GAL_LIBS=
+AC_MSG_CHECKING(for gal >= 0.4.99)
+if gnome-config --modversion gal 2>&1 >/dev/null ; then
+	dnl -----------------------------------------------------------
+	dnl gal is present; check for the right version numbers.
+	dnl -----------------------------------------------------------
+	_GAL_VERSION=`gnome-config --modversion gal|sed -e 's/^.*-0\.//g' -e 's/\.//g'`
+	if test $_GAL_VERSION -ge 499 ; then
+		dnl ---------------------------------------------------
+		dnl We've found gal >= 0.4.99, good for us...
+		dnl ---------------------------------------------------
+		AC_MSG_RESULT([found])
+		AC_MSG_RESULT(["·:0 Using gal-enhanced GUI..."])
+		GAL_CFLAGS=`gnome-config --cflags gal`
+		GAL_LIBS=`gnome-config --libs gal`
+		gal_gui=yes
+	else
+		dnl ---------------------------------------------------
+		dnl Tell the user that we've found gal, but it's too
+		dnl  old for us.
+		dnl ---------------------------------------------------
+		AC_MSG_RESULT([found a too old version])
+		AC_MSG_RESULT(["·:0 Using standard GUI..."])
+	fi
+else
+	dnl -----------------------------------------------------------
+	dnl No gal found at all? No problem, simply use the current
+	dnl  standard GUI.
+	dnl -----------------------------------------------------------
+	AC_MSG_RESULT([no gal found])
+	AC_MSG_RESULT(["·:0 Using standard GUI..."])
+fi
+AC_SUBST(GAL_CFLAGS)
+AC_SUBST(GAL_LIBS)
+AM_CONDITIONAL(USE_GAL_GUI, test z$gal_gui = zyes)
+
+dnl -------------------------------------------------------------------
 dnl Substitute PACKAGE_LOCALE_DIR in config.h.
 dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
@@ -356,6 +397,9 @@ where to put the
 
 use the window-icon
  feature of gnome-libs  :	${use_window_icon_feature:-no}
+
+use the GAL
+ for the interface	:	${gal_gui:-no}
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}

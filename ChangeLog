@@ -1,5 +1,12 @@
 2000-12-31  Fatih Demir	<kabalak@gmx.net>
 
+	* configure.in: Added a check for GAL; it checks for GAL
+		>= 0.4.99 and defines the GAL_CFLAGS & GAL_LIBS
+		 variables.
+
+	* kabalak_generate_all_the_files.sh: Copy the config files
+		rather than simply linking them.
+
 	* acconfig.h: Removed the USE_VFS_STUFF and GCONF_IS_PRESENT
 		undefs.
 
