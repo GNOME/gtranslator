@@ -23,7 +23,7 @@ libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
 	preferences.c \
 	team-handle.c
 
-libgtranslator_la_LDFLAGS =
+libgtranslator_la_LDFLAGS = -version-info 0:@SUBVERSION@
 
 
 if GCONF_IS_PRESENT

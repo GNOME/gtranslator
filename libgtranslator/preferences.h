@@ -57,4 +57,10 @@ gint gtranslator_config_get_int(gchar *path);
 void gtranslator_config_set_string(gchar *path, gchar *value);
 gchar *gtranslator_config_get_string(gchar *path);
 
+/**
+* This happens to eb an equivalent to the gnome_config_get_real_path
+*  function from libgnome.
+**/
+gchar *gtranslator_config_get_absolute_path();
+
 #endif

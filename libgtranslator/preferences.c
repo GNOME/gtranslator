@@ -188,19 +188,25 @@ void gtranslator_config_set_bool(gchar *path, gboolean value)
 	}
 	else
 	{
-		if(!value)
-		{
-			g_warning(_("No boolean value defined for the path `%s'!"),path);
-		}
-		else
-		{
-			#ifdef GCONF_IS_PRESENT
-			gchar *private_path;
-			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
-			gconf_client_set_bool(client, private_path, value, error);
-			#else
-			gnome_config_set_bool(path, value);
-			#endif
-		}
+		#ifdef GCONF_IS_PRESENT
+		gchar *private_path;
+		private_path=g_strdup_printf("%s/%s","/apps/gtranslator",path);
+		gconf_client_set_bool(client, private_path, value, error);
+		#else
+		gnome_config_set_bool(path, value);
+		#endif
 	}	
+}
+
+/**
+* This returns the config-files location.
+**/
+gchar *gtranslator_config_get_absolute_path()
+{
+	#ifdef GCONF_IS_PRESENT
+	g_warning("Hmm, I'd learn how to get gconf's file location :)");
+		return "HEHE";
+	#else
+	return( g_strdup_printf("%s/%s",g_get_home_dir(),".gnome/gtranslator"));
+	#endif
 }
