@@ -74,6 +74,9 @@ void gtranslator_query_domains(const gchar *directory);
 GtrQuery *gtranslator_new_query(const gchar *domain, 
 	const gchar *message, const gchar *language);
 
+GtrQueryResult *gtranslator_new_query_result(const gchar *domain,
+	const gchar *translation);
+
 void gtranslator_free_query(GtrQuery **query);
 void gtranslator_free_query_result(GtrQueryResult **result);
 

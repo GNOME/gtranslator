@@ -99,6 +99,9 @@ void prefs_init_syntax_colors()
 	gtranslator_config_close();
 }
 
+/*
+ * Try to convert the < 0.37 color preferences to their new location.
+ */
 void prefs_convert_colors()
 {
 	gchar *value;

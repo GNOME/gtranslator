@@ -41,7 +41,6 @@ static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
 static gchar *restore_msg(const gchar * given);
 static void determine_translation_status(gpointer data, gpointer useless_stuff);
-static void get_translated_count(void);
 
 void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
@@ -97,7 +96,7 @@ void mark_msg_sticky (GtrMsg * msg, gboolean on)
 		msg->msgstr = strdup("");
 		msg->status &= ~GTR_MSG_STATUS_STICK;
 	}
-	get_translated_count();
+	gtranslator_get_translated_count();
 }
 
 static void check_msg_status(GtrMsg * msg)
@@ -380,7 +379,7 @@ void parse(const gchar *filename)
 	gtranslator_sidebar_activate_views();
 	
 	display_msg(po->current);
-	get_translated_count();
+	gtranslator_get_translated_count();
 	enable_actions_just_opened();
 	/*
 	 * Is there any fuzzy message ?
@@ -590,7 +589,7 @@ static gboolean actual_write(const gchar * name)
 	write_the_message(header, (gpointer) fs);
 	free_a_message(header, NULL);
 
-	update_msg();
+	gtranslator_update_msg();
 	/*
 	 * Write every message to the file
 	 */
@@ -880,7 +879,7 @@ static void determine_translation_status(gpointer data, gpointer useless_stuff)
 /*
  * Now get the complete count of the translated entries.
  */
-void get_translated_count(void)
+void gtranslator_get_translated_count(void)
 {
 	po->translated = 0;
 	po->fuzzy = 0;

@@ -225,7 +225,7 @@ void find_do(GtkWidget * widget, gpointer what)
 	gchar *error;
 	GList *begin;
 	gboolean first = FALSE;
-	update_msg();
+	gtranslator_update_msg();
 	if (what) {
 		if (strlen(what) == 0) {
 			error = g_strdup_printf(_("Please enter a search string"));

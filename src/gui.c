@@ -791,7 +791,7 @@ void display_msg(GList  * list_item)
 	message_changed = FALSE;
 }
 
-void update_msg(void)
+void gtranslator_update_msg(void)
 {
 	guint len;
 	GtrMsg *msg = GTR_MSG(po->current->data);
@@ -852,7 +852,7 @@ void toggle_msg_status(GtkWidget  * item, gpointer which)
 		display_msg(po->current);
 		message_changed = TRUE;
 	}
-	update_msg();
+	gtranslator_update_msg();
 }
 	 
 /*
@@ -942,7 +942,7 @@ static void update_appbar(gint pos)
 void goto_given_msg(GList  * to_go)
 {
 	static gint pos = 0;
-	update_msg();
+	gtranslator_update_msg();
 	if (pos == 0)
 	{
 		enable_actions(ACT_FIRST, ACT_BACK);

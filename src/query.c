@@ -18,6 +18,7 @@
  */
 
 #include "query.h"
+#include "gui.h"
 #include "prefs.h"
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
@@ -44,36 +45,39 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 	query->language=setup_language(query->language);
 	
 	/*
-	 * Rescue the current locale.
+	 * Rescue the current locales.
 	 */
-	originallang=setlocale(LC_MESSAGES, "");
+	originallang=setlocale(LC_ALL, "");
 
 	/*
 	 * Query the under the preferences' language.
 	 */
-	setlocale(LC_MESSAGES, query->language);
+	setlocale(LC_ALL, query->language);
+	
 	str=dgettext(query->domain, query->message);
 
 	/*
-	 * And now reset the language locale to it's original settings.
+	 * And now reset the locales to the previous settings.
 	 */
-	setlocale(LC_MESSAGES, originallang);
-	
-	if(strcmp(str, query->message))
-	{
-		GtrQueryResult *result=g_new(GtrQueryResult, 1);
+	setlocale(LC_ALL, originallang);
 
-		result->translation=str;
-		result->domain=query->domain;
+	/*
+	 * Only setup a result if the result from the dgettext()-based
+	 *  query is not the same as the previous message.
+	 */
+	if(str && strcmp(str, query->message))
+	{
+		GtrQueryResult *result=gtranslator_new_query_result(
+			query->domain, str);
 
 		return result;
-		gtranslator_free_query(&query);
 	}
 	else
 	{
 		return NULL;
-		gtranslator_free_query(&query);
 	}
+
+	gtranslator_free_query(&query);
 }
 
 /*
@@ -271,7 +275,7 @@ gchar *gtranslator_strip_out(gchar *filename)
 GtrQuery *gtranslator_new_query(const gchar *domain,
 	const gchar *message, const gchar *language)
 {
-	GtrQuery *query=g_new(GtrQuery, 1);
+	GtrQuery *query=g_new0(GtrQuery, 1);
 
 	g_return_val_if_fail(message!=NULL, NULL);
 	g_return_val_if_fail(domain!=NULL, NULL);
@@ -282,6 +286,24 @@ GtrQuery *gtranslator_new_query(const gchar *domain,
 	query->domain=g_strdup(domain);
 
 	return query;
+}
+
+/*
+ * Creates a GtrQueryResult structure -- again with some 
+ *  const arguments like the "gtranslator_new_query" function.
+ */
+GtrQueryResult *gtranslator_new_query_result(const gchar *domain,
+	const gchar *translation)
+{
+	GtrQueryResult *result=g_new0(GtrQueryResult, 1);
+
+	g_return_val_if_fail(domain!=NULL, NULL);
+	g_return_val_if_fail(translation!=NULL, NULL);
+
+	result->domain=g_strdup(domain);
+	result->translation=g_strdup(translation);
+	
+	return result;
 }
 
 /*
@@ -341,7 +363,9 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 		if(matchingtranslation && matchingtranslation->translation)
 		{
 			msg->msgstr=g_strdup(matchingtranslation->translation);
-			
+
+			msg->status |= GTR_MSG_STATUS_TRANSLATED;
+
 			gtranslator_free_query_result(&matchingtranslation);
 		}
 	}
@@ -354,4 +378,7 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 void gtranslator_query_accomplish()
 {
 	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, NULL);
+
+	display_msg(po->current);
+	gtranslator_get_translated_count();
 }

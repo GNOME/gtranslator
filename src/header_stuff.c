@@ -466,6 +466,12 @@ gchar *prepare_comment_for_view(gchar *comment)
 	gint count=0;
 
 	/*
+	 * Avoid NULL stuff in comments -- there should always
+	 *  be a comment in a po file but you never know..
+	 */
+	g_return_val_if_fail(comment!=NULL, "");
+	
+	/*
 	 * Split up the comment and let's rip off the '#'s from the
 	 *  comments.
 	 */  
@@ -503,6 +509,12 @@ gchar *prepare_comment_for_save(gchar *comment)
 	GString *mystring=g_string_new("");
 	gchar **stringarray;
 	gint count=0;
+
+	/*
+	 * Give back a securement free space comment for
+	 *  reasonibility.
+	 */
+	g_return_val_if_fail(comment!=NULL, "");
 
 	stringarray=g_strsplit(comment, "\n", 0);
 	

@@ -94,7 +94,7 @@ void enable_actions_just_opened(void);
 /*
  * Various functions for displaying messages 
  */
-void update_msg(void);
+void gtranslator_update_msg(void);
 void display_msg(GList  * list_item);
 void clean_text_boxes(void);
 void toggle_msg_status(GtkWidget  * widget, gpointer which);
