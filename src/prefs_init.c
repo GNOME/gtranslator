@@ -49,12 +49,13 @@ void prefs_init_default()
 			"toggles/do_not_save_unchanged_files", TRUE);
 		gtranslator_config_set_bool(
 			"toggles/use_dot_char", TRUE);
+		gtranslator_config_set_bool(
+			"toggles/keep_obsolete_messages", TRUE);	
 
 		/*
-		 * Set black on white as default colors.
-		 */ 
-		gtranslator_config_set_string("colors/fg", "black");
-		gtranslator_config_set_string("colors/bg", "white");
+		 * Initialize the default highlight colors.
+		 */
+		prefs_init_syntax_colors(); 
 
 		/*
 		 * Avoid re-initialization of the default values via setting
@@ -66,4 +67,32 @@ void prefs_init_default()
 	}
 
 	g_free(date);
+}
+
+/*
+ * Setup the default colors.
+ */ 
+void prefs_init_syntax_colors()
+{
+	gtranslator_config_init();
+	
+	/*
+	 * Set black on white as default colors.
+	 */ 
+	gtranslator_config_set_string("colors/fg", "black");
+	gtranslator_config_set_string("colors/bg", "white");
+	
+	/*
+	 * The default syntax colors.
+	 */
+	gtranslator_config_set_string("colors/special_char", "grey");
+	gtranslator_config_set_string("colors/hotkey", "navy");
+	gtranslator_config_set_string("colors/c_format", "red");
+	gtranslator_config_set_string("colors/number", "orange");
+	gtranslator_config_set_string("colors/punctuation", "darkblue");
+	gtranslator_config_set_string("colors/special", "maroon");
+	gtranslator_config_set_string("colors/address", "maroon");
+	gtranslator_config_set_string("colors/keyword", "darkred");
+	
+	gtranslator_config_close();
 }

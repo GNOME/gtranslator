@@ -47,8 +47,8 @@ gchar* get_path_from_type(ColorType Type)
 		case COLOR_BG:
 			section="bg";
 			break;
-		case COLOR_DOT_CHAR:
-			section="dot_char";
+		case COLOR_SPECIAL_CHAR:
+			section="special_char";
 			break;
 		case COLOR_HOTKEY:
 			section="hotkey";
@@ -176,6 +176,7 @@ void gtranslator_set_style(GtkWidget *widget)
 		 * Use gtranslator's font in this case.
 		 */
 		fontname=_("-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1");
+		
 		gtranslator_config_set_string("font/name", fontname);
 	}
 	/*
@@ -210,7 +211,7 @@ static gboolean colors_initialized=FALSE;
  */
 GdkColor *get_color_from_type(ColorType type)
 {
-	g_return_val_if_fail(type<COLOR_END, NULL);
+	g_return_val_if_fail(type < COLOR_END, NULL);
 
 	if(!colors_initialized)
 	{
@@ -225,7 +226,7 @@ void init_colors(void)
 {
 	gdk_color_parse("white",	&colors[COLOR_FG]);
 	gdk_color_parse("black",	&colors[COLOR_BG]);
-	gdk_color_parse("gray",		&colors[COLOR_DOT_CHAR]);
+	gdk_color_parse("gray",		&colors[COLOR_SPECIAL_CHAR]);
 	gdk_color_parse("blue",		&colors[COLOR_HOTKEY]);
 	gdk_color_parse("red",		&colors[COLOR_C_FORMAT]);
 	gdk_color_parse("orange",	&colors[COLOR_NUMBER]);

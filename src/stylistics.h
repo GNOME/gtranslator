@@ -1,5 +1,6 @@
 /*
  * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,7 +33,7 @@
 typedef enum {
 	COLOR_FG,
 	COLOR_BG,
-	COLOR_DOT_CHAR,
+	COLOR_SPECIAL_CHAR,
 	COLOR_HOTKEY,
 	COLOR_C_FORMAT,
 	COLOR_NUMBER,

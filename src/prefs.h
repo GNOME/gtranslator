@@ -75,6 +75,11 @@ void free_prefs(void);
 void prefs_init_default(void);
 
 /*
+ * Initialize the syntax highlighting default colors.
+ */
+void prefs_init_syntax_colors(void);
+
+/*
  * Routines for saving/restoring/setting geometry of the main window.
  */
 void save_geometry(void);

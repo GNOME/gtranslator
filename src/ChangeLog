@@ -1,5 +1,24 @@
 2001-03-01  Fatih Demir	<kabalak@gtranslator.org>
 
+	* color-schemes.c/.h: Added own free_color_scheme(_info) functions
+		which do free the used structures and implemented all
+		 functions for now.
+
+	* Makefile.am: Define SCHEMESDIR on compiletime to be 
+		$(datadir)/gtranslator/colorschemes.
+
+	* stylistics.c/.h: Extended the copyright header line and
+		renamed the VALUE_DOT_CHAR etc. all to VALUE_SPECIAL_CHAR
+		 like in the preferences.
+
+	* color-schemes.c: Got it working and parsing the given
+		color schemes -- also check the given file if it's a gtranslator
+		 color scheme at all.
+
+	* prefs.h & prefs_init.c: Set up default syntax colors via the new 
+		prefs_init_syntax_colors function and also declare this
+		 new function in the header.
+
 	* query.c: Fiddling around in language names & co.
 
 	* parse.c, parse.h & parse_core.c: Outsourced the real parse routine

@@ -23,14 +23,21 @@
 #include "stylistics.h"
 
 /*
- * The colorscheme structure with all the colors/informations.
- */ 
+ * A small information structure.
+ */
 typedef struct {
 	gchar *name;
 	gchar *version;
-	
+
 	gchar *author;
 	gchar *author_email;
+} GtrColorSchemeInformations;
+
+/*
+ * The colorscheme structure with all the colors/informations.
+ */ 
+typedef struct {
+	GtrColorSchemeInformations *info;
 
 	gchar *fg;
 	gchar *bg;
@@ -44,6 +51,12 @@ typedef struct {
 	gchar *keyword;
 } GtrColorScheme;
 
+#define GTR_COLOR_SCHEME(x) \
+	((GtrColorScheme *) x)
+
+#define GTR_COLOR_SCHEME_INFORMATIONS(x) \
+	((GtrColorSchemeInformations *) x)
+
 /*
  * Returns the GtrColorScheme struct for the given file (a colorscheme) or NULL
  *  if it isn't a colorscheme file.
@@ -54,5 +67,17 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename);
  * Applies the given color scheme as the default one.
  */
 void gtranslator_color_scheme_apply(const gchar *filename);
+
+/*
+ * Sets up the original hardcoded default syntax highlighting
+ *  colors up.
+ */
+void gtranslator_color_scheme_restore_default(void);
+
+/*
+ * Give a list consisting out of GtrColorSchemeInformations about the color
+ *  schemes we've found in SCHEMESDIR -- and in directory if it's given.
+ */
+GList *gtranslator_color_scheme_list(const gchar *directory);
 
 #endif

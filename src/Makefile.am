@@ -31,7 +31,8 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
 	$(gconf_cflags) \
-	$(myicon)
+	$(myicon) \
+	-DSCHEMESDIR=\""$(datadir)/gtranslator/colorschemes"\"
 
 bin_PROGRAMS = gtranslator
 

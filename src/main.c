@@ -95,7 +95,6 @@ int main(int argc, char *argv[])
 	/*
 	 * Initialize gettext.
 	 */ 
-	
 	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain(PACKAGE);
 
