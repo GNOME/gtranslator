@@ -28,6 +28,7 @@
 #include "about.h"
 #include "htmlizer.h"
 #include "gtkspell.h"
+#include "history.h"
 
 #include "pixmaps/untrans.xpm"
 
@@ -549,7 +550,7 @@ void create_app1(void)
 
 	create_actions();
 
-	gtranslator_display_recent();
+	gtranslator_history_show();
 
 	/*
 	 * Check if we'd to use special styles.

@@ -459,7 +459,7 @@ void parse(const gchar *filename)
 	/*
 	 * Update the recent files list.
 	 */
-	gtranslator_display_recent();
+	gtranslator_history_show();
 }
 
 void parse_the_file(GtkWidget * widget, gpointer of_dlg)
@@ -481,17 +481,6 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 	 * Destroy the dialog 
 	 */
 	gtk_widget_destroy(GTK_WIDGET(of_dlg));
-}
-
-void parse_the_file_from_the_recent_files_list(GtkWidget *widget, gpointer filepointer)
-{
-	/*
-	 * Also detect the right open function in the recent files' list.
-	 */
-	if(!gtranslator_open_po_file((gchar *) filepointer))
-	{
-		parse((gchar *) filepointer);
-	}
 }
 
 /*
@@ -895,74 +884,6 @@ of your choice."),
 	fclose(file);
 
 	return TRUE;
-}
-
-/*
- * The recent menus stuff.
- */
-void gtranslator_display_recent(void)
-{
-	/*
-	 * Couldn't we do that better with bonobo?
-	 */
-	static gint len = 0;
-	gint i;
-	GnomeUIInfo *menu;
-	GList *list, *newlist;
-	gchar *name;
-	
-	gchar *menupath = _("_File/Recen_t files/");
-
-	/*
-	 * Delete the old entries.
-	 */
-	gnome_app_remove_menu_range(GNOME_APP(app1), menupath, 0, len);
-
-	/*
-	 * Get the old history entries.
-	 */ 
-	list=gtranslator_history_get();
-
-	i=len=g_list_length(list);
-
-	/*
-	 * Parse the list.
-	 */
-	for(newlist=list; newlist!=g_list_last(list); newlist=g_list_next(newlist))
-	{
-		/*
-		 * Get the history entry.
-		 */
-		name=g_strdup(GTR_HISTORY_ENTRY(newlist->data)->filename);
-
-		menu=g_new0(GnomeUIInfo,2);
-
-		/*
-		 * Set the label name.
-		 */
-		menu->label=g_strdup_printf("_%i: %s", i--, name);
-		
-		/*
-		 * Set the GnomeUIInfo settings and labels.
-		 */
-		menu->type=GNOME_APP_UI_ITEM;
-		menu->hint=g_strdup_printf(_("Open %s"), name);
-		menu->moreinfo=(gpointer)parse_the_file_from_the_recent_files_list;
-		menu->user_data=g_strdup(name);
-		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
-
-		/*
-		 * Insert this item into menu
-		 */
-		gnome_app_insert_menus (GNOME_APP(app1), menupath, menu);
-
-		/*
-		 * Free the string and the GnomeUIInfo structure.
-		 */
-		g_free(menu->label);
-		g_free(menu->hint);
-		g_free(menu);
-	}
 }
 
 /*

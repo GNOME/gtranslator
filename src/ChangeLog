@@ -1,3 +1,22 @@
+2001-02-03  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* history.c: renamed "history_length" to "history/length" for
+	gnome-config. When reading, append to list, so newest entries are 
+	always at top. History works with gnome-config now. Not yet with
+	gconf...
+
+2001-02-03  Gediminas Paulauskas <menesis@delfi.lt>
+
+	Almost fixed history stuff.
+	* gui.c, parse.*, history.*: renamed gtranslator_display_recent() to
+	gtranslator_history_show() and moved from parse* to history*. the same
+	with parse_the_file_from_the_recent_files_list() ->
+	open_file_from_history().
+	* history.c: removed lots of fake variable initializers and leaks ;).
+	Replaced gtranslator_history_assort with remove_duplicate_entries, which
+	removes duplicates of one entry, used only on history_add.
+	* Makefile.am: build ./ before pixmaps/.
+
 2001-02-03  Fatih Demir	<kabalak@gmx.net>
 
 	* pixmaps/.cvsignore: Added cvs ignore again for HEAD.

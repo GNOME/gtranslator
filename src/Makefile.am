@@ -3,7 +3,7 @@
 #   and autoconf. 
 # -------------------------------------------------------
 
-SUBDIRS = pixmaps
+SUBDIRS = . pixmaps
 
 myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
 

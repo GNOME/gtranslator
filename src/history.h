@@ -20,7 +20,7 @@
 #ifndef GTR_HISTORY_H
 #define GTR_HISTORY_H 1
 
-#include "header_stuff.h"
+#include <glib.h>
 
 /*
  * The history entry structure.
@@ -44,5 +44,7 @@ void gtranslator_history_add(gchar *filename,
  * Returns the history as a GList of GtrHistoryEntry's.
  */
 GList *gtranslator_history_get(void);
+
+void gtranslator_history_show(void);
 
 #endif

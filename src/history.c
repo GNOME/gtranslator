@@ -17,13 +17,18 @@
  *
  */
 
-#include "history.h"
 #include <libgtranslator/preferences.h>
+#include "history.h"
+#include "gui.h"
+#include "parse.h"
+#include "open-differently.h"
 
 /*
- * A helper function which should assort the given list.
+ * From list remove all entries with same filename as entry->filename
  */
-GList *gtranslator_history_assort(GList *list);
+void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry);
+
+void open_file_from_history(GtkWidget *widget, gchar *filename);
 
 /*
  * Save the given GList of GtrHistoryEntry's.
@@ -41,13 +46,14 @@ void gtranslator_history_entry_free(GtrHistoryEntry *e);
 void gtranslator_history_add(gchar *filename,
 	gchar *project_name, gchar *project_version)
 {
-	GtrHistoryEntry *entry=g_new0(GtrHistoryEntry,1);
-	GList *ourhistory=g_list_alloc();
+	GtrHistoryEntry *entry;
+	GList *ourhistory=NULL;
 
 	g_return_if_fail(filename!=NULL);
 	g_return_if_fail(project_name!=NULL);
 	g_return_if_fail(project_version!=NULL);
-	
+
+	entry=g_new(GtrHistoryEntry,1);
 	/*
 	 * Assign the GtrHistoryEntry informations.
 	 */ 
@@ -59,144 +65,195 @@ void gtranslator_history_add(gchar *filename,
 	 * Add the current item to the history list.
 	 */ 
 	ourhistory=gtranslator_history_get();
-	ourhistory=g_list_prepend(ourhistory, (gpointer)entry);
-	ourhistory=gtranslator_history_assort(ourhistory);
+	ourhistory=g_list_prepend(ourhistory, entry);
+	remove_duplicate_entries(ourhistory, entry);
 	gtranslator_history_save(ourhistory);
 
-	if(ourhistory)
-	{
-		g_list_free(ourhistory);
-	}
-
-	gtranslator_history_entry_free(entry);
+	g_list_foreach(ourhistory, (GFunc)gtranslator_history_entry_free, NULL);
+	g_list_free(ourhistory);
 }
 
 /*
- * Returns the list of GtrHistoryEntry's.
+ * Reads the list of GtrHistoryEntry's from configuration.
  */
 GList *gtranslator_history_get(void)
 {
-	gchar *path=g_new0(gchar,1);
-	gchar *subpath=g_new0(gchar,1);
-	GList *hl=g_list_alloc();
-	gint count=0, c;
+	gchar *subpath;
+	gchar path[32];
+	GList *hl=NULL;
+	gint count, c;
 
 	gtranslator_config_init();
 
-	count=gtranslator_config_get_int("history_length");
+	count=gtranslator_config_get_int("history/length");
+	g_print("history/length=%d\n", count);
 
 	for(c=0;c < count; c++)
 	{
 		GtrHistoryEntry *myentry=g_new0(GtrHistoryEntry,1);
 		
-		path=g_strdup_printf("history_entry%d", c);
+		subpath=g_strdup_printf("history_entry%d/", c);
 
-		subpath=g_strdup_printf("%s/filename", path);
-
-		myentry->filename=g_strdup(
-			gtranslator_config_get_string(subpath));
+		g_snprintf(path, 32, "%sfilename", subpath);
+		myentry->filename=gtranslator_config_get_string(path);
 		
-		subpath=g_strdup_printf("%s/project_name", path);
-
-		myentry->project_name=g_strdup(
-			gtranslator_config_get_string(subpath));
+		g_snprintf(path, 32, "%sproject_name", subpath);
+		myentry->project_name=gtranslator_config_get_string(path);
 		
-		subpath=g_strdup_printf("%s/project_version", path);
+		g_snprintf(path, 32, "%sproject_version", subpath);
+		myentry->project_version=gtranslator_config_get_string(path);
 
-		myentry->project_version=g_strdup(
-			gtranslator_config_get_string(subpath));
+		hl=g_list_append(hl, myentry);
 
-		hl=g_list_prepend(hl, (gpointer)myentry);
-
-		gtranslator_history_entry_free(myentry);
+		g_free(subpath);
 	}
 	
 	gtranslator_config_close();
-
-	g_free(path);
-	g_free(subpath);
 
 	return hl;
 }
 
+/*
+ * The recent menus stuff.
+ */
+void gtranslator_history_show(void)
+{
+	/*
+	 * Couldn't we do that better with bonobo?
+	 */
+	static gint len = 0;
+	gint i;
+	GnomeUIInfo *menu;
+	GList *list, *onelist;
+	gchar *name;
+	
+	gchar *menupath = _("_File/Recen_t files/");
+
+	/*
+	 * Delete the old entries.
+	 */
+	gnome_app_remove_menu_range(GNOME_APP(app1), menupath, 0, len);
+
+	/*
+	 * Get the old history entries.
+	 */ 
+	list=gtranslator_history_get();
+
+	i=len=g_list_length(list);
+
+	/*
+	 * Parse the list.
+	 */
+	for(onelist=g_list_last(list); onelist!=NULL; onelist=g_list_previous(onelist))
+	{
+		/*
+		 * Get the history entry.
+		 */
+		name=g_strdup(GTR_HISTORY_ENTRY(onelist->data)->filename);
+
+		menu=g_new0(GnomeUIInfo,2);
+
+		/*
+		 * Set the label name.
+		 */
+		menu->label=g_strdup_printf("_%i: %s", i--, name);
+		
+		/*
+		 * Set the GnomeUIInfo settings and labels.
+		 */
+		menu->type=GNOME_APP_UI_ITEM;
+		menu->hint=g_strdup_printf(_("Open %s"), name);
+		menu->moreinfo=(gpointer)open_file_from_history;
+		menu->user_data=g_strdup(name);
+		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
+
+		/*
+		 * Insert this item into menu
+		 */
+		gnome_app_insert_menus (GNOME_APP(app1), menupath, menu);
+
+		/*
+		 * Free the string and the GnomeUIInfo structure.
+		 */
+		g_free(menu->label);
+		g_free(menu->hint);
+		g_free(menu);
+	}
+}
+
+void open_file_from_history(GtkWidget *widget, gchar *filename)
+{
+	/*
+	 * Also detect the right open function in the recent files' list.
+	 */
+	if(!gtranslator_open_po_file(filename))
+		parse(filename);
+}
+
 void gtranslator_history_save(GList *list)
 {
-	GtrHistoryEntry *entry=g_new0(GtrHistoryEntry,1);
-	gchar *path=g_new0(gchar,1);
-	gchar *subpath=g_new0(gchar,1);
+	GtrHistoryEntry *entry;
+	gchar *subpath;
+	gchar path[32];
 	gint number=0;
+	GList *rlist = g_list_first(list);
 
 	gtranslator_config_init();
-	
-	while(list)
+
+	while(rlist != NULL)
 	{
-		entry=GTR_HISTORY_ENTRY(list->data);
-
-		if(!entry)
-		{
-			break;
-		}
+		entry=GTR_HISTORY_ENTRY(rlist->data);
 		
-		path=g_strdup_printf("history_entry%d", number);
-		
-		subpath=g_strdup_printf("%s/filename", path);
+		subpath=g_strdup_printf("history_entry%d/", number);
 
-		gtranslator_config_set_string(subpath,
+		g_snprintf(path, 32, "%sfilename", subpath);
+		gtranslator_config_set_string(path,
 			entry->filename);
 
-		subpath=g_strdup_printf("%s/project_name", path);
-
-		gtranslator_config_set_string(subpath,
+		g_snprintf(path, 32, "%sproject_name", subpath);
+		gtranslator_config_set_string(path,
 			entry->project_name);	
 		
-		subpath=g_strdup_printf("%s/project_version", path);
-
-		gtranslator_config_set_string(subpath,
+		g_snprintf(path, 32, "%sproject_version", subpath);
+		gtranslator_config_set_string(path,
 			entry->project_version);
+
+		g_free(subpath);
 		
 		number++;	
-		list=list->next;
+		rlist=g_list_next(rlist);
 	}
 
-	gtranslator_config_set_int("history_length", number);
+	gtranslator_config_set_int("history/length", number);
 	
 	gtranslator_config_close();
-	
-	g_free(path);
-	g_free(subpath);
-	
-	gtranslator_history_entry_free(entry);
-	
-	g_return_if_fail(list!=NULL);
 }
 
 /*
  * Assort the list.
  */ 
-GList *gtranslator_history_assort(GList *list)
+void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry)
 {
-	GList *hlist=g_list_alloc();
-	GtrHistoryEntry *entry=g_new0(GtrHistoryEntry,1);
+	GList *rest;
 
-	g_return_val_if_fail(list!=NULL, NULL);
-
-	for(hlist=list; hlist!=NULL; hlist=hlist->next)
+	g_return_if_fail(list!=NULL);
+	
+	/* look from next entry till the end */
+	rest=list->next;
+	while(rest!=NULL)
 	{
-		entry=GTR_HISTORY_ENTRY(hlist->data);
-
-		if(hlist->next)
+		/* if filenames are equal, remove older record */
+		if(!strcmp(entry->filename, GTR_HISTORY_ENTRY(rest->data)->filename))
 		{
-			if(entry==GTR_HISTORY_ENTRY(hlist->next->data))
-			{
-				hlist=g_list_remove_link(hlist, (gpointer)
-					hlist->next->data);
-			}
+			GList *r=rest;
+			rest=rest->next;
+			g_list_remove_link(list, r);
+			gtranslator_history_entry_free(GTR_HISTORY_ENTRY(r->data));
+			g_list_free_1(r);
 		}
+		else
+			rest=rest->next;
 	}
-	
-	gtranslator_history_entry_free(entry);
-	
-	return hlist;
 }
 
 /*
@@ -204,11 +261,7 @@ GList *gtranslator_history_assort(GList *list)
  */
 void gtranslator_history_entry_free(GtrHistoryEntry *e)
 {
-	if(!e)
-	{
-		return;
-	}
-	else
+	if(e)
 	{
 		g_free(e->filename);
 		g_free(e->project_name);

@@ -119,7 +119,6 @@ void parse(const gchar *po);
  * Callbacks for the widgets
  */
 void parse_the_file(GtkWidget  * widget, gpointer of_dlg);
-void parse_the_file_from_the_recent_files_list(GtkWidget *widget, gpointer filepointer);
 void save_the_file(GtkWidget  * widget, gpointer sfa_dlg);
 void save_current_file(GtkWidget  * widget, gpointer useless);
 void revert_file(GtkWidget  * widget, gpointer useless);
@@ -134,11 +133,6 @@ void compile(GtkWidget  * widget, gpointer useless);
  * The update function (now outsources to update.c).
  */
 void update(GtkWidget *widget, gpointer useless);
-
-/*
- * Display the recent files.
- */ 
-void gtranslator_display_recent(void);
 
 /*
  * Checks the given file for the right permissions for
