@@ -54,7 +54,7 @@ gboolean first_entry,last_entry;
 /**
 * Center of interest are these lists -- at least for me
 **/
-GSList *msgids,*msgstrs,*head,*temp;
+GList *msgids,*msgstrs,*head,*temp;
 
 /**
 * A simple file check .

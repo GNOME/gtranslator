@@ -45,7 +45,10 @@ void parse(gchar *po)
 	* Some variables
 	**/
 	gchar temp_char[128];
-	gchar *zamane;
+	/**
+	* Allocate the zamane-char
+	**/
+	gchar *zamane=g_new(gchar,4);
         guint lines=1,z=0;
 	guint msgid_count,msgstr_count,comments_count;
 	msgid_count=msgstr_count=comments_count=0;
@@ -70,10 +73,9 @@ void parse(gchar *po)
 	**/
 	check_file(fs);
         /**
-        * Allocate the lists
+        * Allocate the list(s)
         **/
         head=g_list_alloc();
-	temp=g_list_alloc();	
         /**
         * Parse the file ...
         **/
@@ -102,8 +104,7 @@ void parse(gchar *po)
 			* Add the current header-line
 			**/
 			g_print("HEADER : %s",temp_char);
-			head=g_list_prepend(temp,(gpointer)temp_char);
-			temp=head;
+			head=g_list_append(head,(gpointer)temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
@@ -118,15 +119,10 @@ void parse(gchar *po)
 			msgstr_count++;
 		}
         }
-	g_print("List length : \"%i\"\n",g_list_length(head));
-        /**
+	/**
         * The list length ( aka lines count )
         **/
         lines=g_list_length(head);
-	for(z=1;z<lines;z++)
-	{
-		g_print("Printing %i. : %s",z,(gchar *)g_list_nth_data(head,z));
-	}
         /**
         * Show an updated status
         **/
@@ -146,6 +142,13 @@ void parse(gchar *po)
 	/**
 	* As we've got finished we can do some nonsense
 	**/
+	/**
+	* Free the zamane-char
+	**/
+	if(zamane)
+	{
+		g_free(zamane);
+	}
 	apply_header();
 	enable_buttons();
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));

@@ -30,6 +30,7 @@ gtranslator_SOURCES = \
 	about.c about.h \
 	prefs.c prefs.h \
 	session.c session.h \
+	dnd.c dnd.h \
 	messages.h \
 	languages.h 
 
