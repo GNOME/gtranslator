@@ -319,10 +319,11 @@ dnl -------------------------------------------------------------------
 dnl Check for Scrollkeeper and set the corresponding conditional var if
 dnl  it could be found.
 dnl -------------------------------------------------------------------
-AC_CHECK_PROG(sc_present, scrollkeeper-preinstall, yes, no)
+AC_CHECK_PROG(sc_present, scrollkeeper-config, yes, no)
 if test "z$sc_present" = "zyes" ; then
-	AC_CHECK_PROG(sc_present, scrollkeeper-update, yes, no)
+	SC_OMFDIR=`scrollkeeper-config --omfdir`
 fi
+AC_SUBST(SC_OMFDIR)
 AM_CONDITIONAL(SCROLLKEEPER_PRESENT, test z$sc_present = zyes)
 
 dnl -------------------------------------------------------------------
@@ -384,5 +385,6 @@ debug friendly build	  :	${debugpoints:-no}
 
 nautilus-gtranslator-view :	${build_nv:-no}
 
+Scrollkeeper integration  :	${sc_present:-no}
 ------------------------------------------------------------------
 "

@@ -11,7 +11,7 @@ gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/$(lc)
 
 gtranslator_sgmlfile = gtranslator.sgml
 
-gtranslator_omfdir = $(datadir)/omf/gtranslator
+gtranslator_omfdir = $(DESTDIR)$(SC_OMFDIR)/gtranslator
 
 gtranslator_omf_DATA = $(gtranslator_omffile)
 
@@ -63,6 +63,11 @@ install-data-local: index.html
 	scrollkeeper-update
 else	
 install-data-local: index.html
+endif
+
+if SCROLLKEEPER_PRESENT
+uninstall-local:
+	scrollkeeper-update
 endif
 
 clean-docs:
