@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2001 	Gediminas Paulauskas <menesis@gtranslator.org>,
+ * (C) 2000-2001 	Gediminas Paulauskas <menesis@gtranslator.org>
  *			Thomas Ziehmer <thomas@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
