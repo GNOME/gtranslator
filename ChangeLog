@@ -1,68 +1,64 @@
+2000-07-31  Fatih Demir	<kabalak@gmx.net>
+
+	* ChangeLog: Reformatted this.
+
+	* configure.in: Also check for libxml and
+		changed the configuration output-screen
+		 at the end of the ./configure process.
+
+	* message-db.d: Added the message-db.d
+		directory containing the different
+		 language base files.
+
 2000-07-28  Fatih Demir	<kabalak@gmx.net>
 
-	+	Disabled gettextize for the CVS in
-		
-		the kabalak_generate_all_the_files.sh
+	* kabalak_generate_all_the_files.sh: 
+		Disabled gettextize for the CVS in
+		 script.
 
-		script.
-
-	+	Removed the emacs-lover stuff as
-		
+	* configure.in: Removed the emacs-lover stuff as
 		we're now playing in another league than 
+		 (X)Emacs..
 
-		(X)Emacs..
-
-	+	Include a .cvsignore for the
-		
+	* Include a .cvsignore for the
 		libgtranslator-dir.
 
-	+	Set version number to 0.20.
+	* Set version number to 0.20.
 
-	+	Made the first idl file for gtranslatord.
-
-	+	Reformatted the plain text-files
-		
+	* Reformatted the plain text-files
 		to reflect the coming feature of 
-		
-		gtranslator.
+		 gtranslator.
 
-	+	Why use so much space for such a file
-
+	* INSTALL.CVS: Why use so much space for such a file
 		like INSTALL.CVS; so I made it more
-			
-		compact.	
+		 compact.	
 
-	+	Added libgtranslator to the SUBDIRS
-
+	* Added libgtranslator to the SUBDIRS
 		in the Makefile.am
 
-	+	Added libgtranslator dir.
+	* Added libgtranslator dir.
 
-	+	Added IDL flags catching into the 
-		
+	* Added IDL flags catching into the 
 		configure.in; also put out the
-
-		libgtranslator/Makefile.
+		 libgtranslator/Makefile.
 
 2000-07-24  Fatih Demir	<kabalak@gmx.net>
 
-	+	Updated the icons.
+	* Updated the icons.
 
 2000-07-20  Fatih Demir	<kabalak@gmx.net>
 	
-	+	Install the gtranslator.desktop file
-		
+	* Install the gtranslator.desktop file
 		into the "Development" menu tree.
 
 2000-07-19  Fatih Demir	<kabalak@gmx.net>
 	
-	+	Changed the BUGS part of the man-page
-		
+	* Changed the BUGS part of the man-page
 		to be more truthfull. :)
 	
 2000-07-17  Fatih Demir	<kabalak@gmx.net>
 	
-	+	Corrected a typo in the man-page.
+	* Corrected a typo in the man-page.
 
 2000-07-13  Benedikt Roth  <Benedikt.Roth@gmx.net>
 	
@@ -70,253 +66,197 @@
 
 2000-07-07  Fatih Demir	<kabalak@gmx.net>
 	
-	+	Updated the two icons of me and I
-		
+	* Updated the two icons of me and I
 		think they're looking nice. ;)
 	
-	+	Removed this piece of work from the
-		
+	* Removed this piece of work from the
 		TODO.
 
 2000-07-04  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Updated the manual page for the new
-		
+	* Updated the manual page for the new
 		option.
 
 2000-06-17  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Updated and extended the manual page.	
+	* Updated and extended the manual page.	
 
 2000-06-08  Fatih Demir  <kabalak@gmx.net>
 
-	+	Get the date and substitute it in
-		
+	* Get the date and substitute it in
 		the ./configure process ( needed for
-		
-		the man-page ).
+		 the man-page ).
 
-	+	Adding a manual page for gtranslator.
+	* man/gtranslator.1.in: Adding a manual page
+		for gtranslator.
 
-	+	Added the ./man subdirectory to the
-		
-		Makefile.am.
+	* Makefile.am: Added the ./man subdirectory.
 	
-	+	Also output the ./man/Makefile and the
-		
-		./man/gtranslator.1.in in the ./configure
-		
-		process.
+	* configure.in: Also output the ./man/Makefile and the
+		./man/gtranslator.1.in.
 	
-	+	Added gtranslator.1.in to the EXTRA_DIST
-		
-		of the subdirectory.
+	* man/Makefile.am: Added gtranslator.1.in to
+		the EXTRA_DIST.tory.
 	
-	+	Notifying the removal and the move of
-	
+	* Notifying the removal and the move of
 		the files in the ./src subdir here.
 
 2000-06-04  Fatih Demir  <kabalak@gmx.net>
 
-	+	Save and restore the "old" CFLAGS and
-		
+	* Save and restore the "old" CFLAGS and
 		LIBS variables, so that we don't get a
-		
-		too long compile line. 
+		 too long compile line. 
 
-	+	Hm, version 0.19 is appearing now ...
+	* Hm, version 0.19 is appearing now ...
 	
-	+	Updated all plain text files for the
-		
+	* Updated all plain text files for the
 		new version.
 	
-	+	Updated the NEWS file for the progress.
+	* Updated the NEWS file for the progress.
 	
-	+	Added a nice idea to the TODO file.
+	* Added a nice idea to the TODO file.
 
 2000-06-03  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Check for the window-icon feature.
+	* Check for the window-icon feature.
 		
-	+	Set the according define.
+	* Set the according define.
 	
-	+	Print it also at the compilage-options
-		
+	* Print it also at the compilage-options
 		screen.
 
 2000-05-28  Fatih Demir  <kabalak@gmx.net>
 
-	+	Print a compilage options-screen at the
-		
+	* Print a compilage options-screen at the
 		end of the configuration process.
 
-	+	Made the output-messages of the checks
-		
+	* Made the output-messages of the checks
 		have again be made nicer.
 
-	+	Updated the NEWS file for the updated
-		
+	* Updated the NEWS file for the updated
 		Ukrainian translation and for the added 
-		
-		Japanese translation.
+		 Japanese translation.
 
-	+	Added the .xvpics directory to the
-		
+	* Added the .xvpics directory to the
 		.cvsignore in the ./data subdir.
 
-	+	Made the mime-files better-looking.
+	* Made the mime-files better-looking.
 	
-	+	Changed the mime-type in the ./data
-		
+	* Changed the mime-type in the ./data
 		gtranslator.mime & gtranslator.keys(.in)
-		
-		file to be application/x-po.
+		 file to be application/x-po.
 	
-	+	"Updated" the data/application-x-po.png
-		
+	* "Updated" the data/application-x-po.png
 		icon which is now a little bit nicer, I 
-		
-		think.
+		 think.
 
 2000-05-25  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Changed some comments in the configure.in.
+	* Changed some comments in the configure.in.
 	
 2000-05-23  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Removed ./intl from .cvsignore ...
-		
+	* Removed ./intl from .cvsignore ...
 		and added it again to the repo.
 		
-	+	Removed D'n'D from the TODO-list as 
-		
+	* Removed D'n'D from the TODO-list as 
 		it's actually already done.
 		
-	+	Moved some aims around in the TODO.
+	* Moved some aims around in the TODO.
 	
-	+	WE REALLY need a new application-x-po.png
-		
+	* WE REALLY need a new application-x-po.png
 		icon.
 
-	+	Standardified the outputs of the "checks"
-		
+	* Standardified the outputs of the "checks"
 		in the ./configure(.in).
 
 2000-05-22  Szabolcs BAN <shooby@gnome.hu>
 
-	+	Added lang Hu (Hungarian).
+	* Added lang Hu (Hungarian).
 
 2000-05-21  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added ja to ALL_LINGUAS.
+	* Added ja to ALL_LINGUAS.
 
 2000-05-16  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Corrected a wrong version number in the
-		
+	* Corrected a wrong version number in the
 		README.
 	
-	+	Notifying that `ko' has been added to the 
-		
+	* Notifying that `ko' has been added to the 
 		configure.in's ALL_LINGUAS. Possibly by
-		
-		Young-Ho, Cha ?
+		 Young-Ho, Cha ?
 
 2000-05-14  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Removed the command-line options
-		
+	* Removed the command-line options
 		from the TODO as it's done.
 
-	+	D'n'D should be done till R 0.20.
+	* D'n'D should be done till R 0.20.
 	
-	+	Added a GConf-based msg_db to the TODO
-		
+	* Added a GConf-based msg_db to the TODO
 		list as it would be very useful.	
 
-	+	Cleaned up configure.in, removed the
-		
+	* Cleaned up configure.in, removed the
 		PACKAGE_PIXMAPS_DIR substitute, added
-		
-		a comment and made --enable-mime-bind=no
-		
-		the default action as gtranslator isn't
-		
-		ready to be used till this day.
+		 a comment and made --enable-mime-bind=no
+		  the default action as gtranslator isn't
+		   ready to be used till this day.
 
 2000-05-13  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Check for the usleep(sec)-function
-		
+	* Check for the usleep(sec)-function
 		within the configure(.in).
 	
-	+	Include the ./po/update.sh in a dist.
+	* Include the ./po/update.sh in a dist.
 
 2000-05-12  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Moved the gtranslator.keys.in,
-		
+	* Moved the gtranslator.keys.in,
 		gtranslator.keys and gtranslator.mime
-		
-		files to EXTRA_DIST and removed the _DATA
-		
-		include which caused automake to yell.
+		 files to EXTRA_DIST and removed the _DATA
+		  include which caused automake to yell.
 
-	+	Made the configure-checks for our own
-		
+	* Made the configure-checks for our own
 		options a little bit more beautiful.
 
 2000-05-10  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Changed the ./data/gtranslator.keys.in file to 
-		
-		reflect the new `-f' cmd-line option with which
-		
-		you can open files directly on startup.
+	* Changed the ./data/gtranslator.keys.in file to 
+		 reflect the new `-f' cmd-line option with which
+		  you can open files directly on startup.
 	
 2000-05-09  Fatih Demir  <kabalak@gmx.net>
 
-	+	Set version number to 0.18 -- everything works
-		
+	* Set version number to 0.18 -- everything works
 		-- besides the main point of interest.
 
-	+	Added a missing AM_CONDITIONAL
+	* Added a missing AM_CONDITIONAL
 
-	+	Corrected typos and errors and beautified the
-
+	* Corrected typos and errors and beautified the
 		output of the checks.
 
-	+	Added another option to configure.in ( and to
-		
+	* Added another option to configure.in ( and to
 		the resulting ./configure script ) whether to bind
-		
-		po-files with gtranslator, whether to install the
-		
-		gtranslator.mime & gtranslator.keys files
-
-		[ You'd have bind them to VIm/(X)EMacs for example,
-		
-		and gtranslator is not fully ready to rally with 
+		 po-files with gtranslator, whether to install the
+		  gtranslator.mime & gtranslator.keys files
+		   [ You'd have bind them to VIm/(X)EMacs for example,
+		     and gtranslator is not fully ready to rally with 
+		      these ones. ]
 	
-		these ones. ]
-	
-	+	Removed some previous stuff from the Makefile.am.
+	* Removed some previous stuff from the Makefile.am.
 
-	+	Updated all plain text-files for a more common
-		
-		`outlook'
+	* Updated all plain text-files for a more common
+		`outlook'.
 
-	+	Updated TODO to be more like the plans for 
-		
+	* Updated TODO to be more like the plans for 
 		further releases ..
 	
-	+	Changed NEWS to reflect the current situation
+	* Changed NEWS to reflect the current situation
 	
-	+	Beautified the configure(.in) a little bit
-		
+	* Beautified the configure(.in) a little bit
 		as it checks now for you (X)Emacs lovers
-		
-		without a "checking Checking ..".
+		 without a "checking Checking ..".
 
 2000-05-08  Martin Norbäck  <d95mback@dtek.chalmers.se>
 
@@ -324,16 +264,13 @@
 
 2000-05-07  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added another option to the configure
-		
+	* Added another option to the configure
 		script for you EMacs lovers ..
 	
-	+	Updated acconfig.h for a new synmbol : 
-		
+	* Updated acconfig.h for a new synmbol : 
 		`EMACS_LOVER' ...
 
-	+	Reverted the change in the
-		
+	* Reverted the change in the
 		./kabalak_generate_all_the_files.sh ..
 
 2000-05-07  Karl Eichwalder  <ke@suse.de>
@@ -342,289 +279,253 @@
 
 2000-05-07  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Moved the gtranslator.keys file to
-		
+	* Moved the gtranslator.keys file to
 		the .cvsignore in the ./data subdir
-		
-		which has got now an own .cvsignore ..
+		 which has got now an own .cvsignore ..
 	
-	+	Added uk to ALL_LINGUAS ( has been
-		
+	* Added uk to ALL_LINGUAS ( has been
 		forgotten .. ) 
 	
-	+	Made a little change in 
-		
+	* Made a little change in 
 		./kabalak_generate_all_the_files.sh ..
 
 2000-05-05  Fatih Demir  <kabalak@gmx.net>
 
-	+	Check first for GLIB and then for GTK+
-			
+	* Check first for GLIB and then for GTK			
 		as this would be human-wise logical ..
 
-	+	Reformatted ./data/Makefile.am and included
-		
+	* Reformatted ./data/Makefile.am and included
 		gtranslator.keys.in in EXTRA_DIST .
 	
-	+	Put all the data stuff to the ./data
-	
+	* Put all the data stuff to the ./data
 		subdirectory and changed the Makefile.am
-		
-		and the configure.in to reflect this ..
+		 and the configure.in to reflect this ..
 	
-	+	Check for GLIB >= 1.2.3 and GTK+ >= 1.2.3
-	
+	* Check for GLIB >= 1.2.3 and GTK	
 		in the configure.in ..
 	
-	+	Added the GNOME I18N list to the THANKS file ..
+	* Added the GNOME I18N list to the THANKS file ..
 
 2000-05-03  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Added the .*swp files to the .cvsignore
-		
+	* Added the .*swp files to the .cvsignore
 		file as I'm using VIm ...
 
-	+	Updated README & TODO .
-
+	* Updated README & TODO .
 
 2000-05-01  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Changed to AM_GNOME_GETTEXT macro 
-		
+	* Changed to AM_GNOME_GETTEXT macro 
 		in the configure.in ..
 
 2000-04-30  Fatih Demir  <kabalak@gmx.net>
 
-	+	Corrected an error in my
-		
+	* Corrected an error in my
 		./kabalak_generate_all_the_files.sh
-		
-		script ( it didn't take all arguments )
+		 script ( it didn't take all arguments )
 
-	+	Check for Gtk+ and glib >= 1.2.0 
-		
+	* Check for Gtk	& Glib.	
 		independentally and avoid some 
-		
-		confusion for me in the configure.in 
+		 confusion for me in the configure.in 
 
 2000-04-27  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Finished the big outsourcing action
-	
-		in the ./src subdirectory .		
+	* Finished the big outsourcing action
+		in the ./src subdirectory.
 
 2000-04-20  Fatih Demir  <kabalak@gmx.net>
 
-	+	Forgot to put the version number to
-		
-		0.17 in the README .
+	* Forgot to put the version number to
+		0.17 in the README.
 
 2000-04-19  Fatih Demir  <kabalak@gmx.net>
 
-	+	Put version number to 0.17 ! Tada ..
+	* Put version number to 0.17 ! Tada ..
 
-	+	Changed the NEWS file for actuality .
+	* Changed the NEWS file for actuality .
 	
-	+	"Lightened" the README file a bit .
+	* "Lightened" the README file a bit .
 
-	+	Added a little part about ANY_FLAGS
-		
+	* Added a little part about ANY_FLAGS
 		to INSTALL.CVS so it should be more
-		
-		logical and understandable .
+		 logical and understandable .
 	
-	+	Added a really good idea to the TODO
-		
-		list ( read it there ) .
+	* Added a really good idea to the TODO
+		list ( read it there ).
 
 2000-04-18  Fatih Demir  <kabalak@gmx.net>
 
-	+	Made some changes in the ./src/
-		
-		subdirectory .
+	* Made some changes in the ./src/
+		subdirectory.
 
 2000-04-13  Fatih Demir  <kabalak@gmx.net>
 
-	+	Changed the AC_INIT call of configure.in
-		
+	* Changed the AC_INIT call of configure.in
 		to README ; I didn't get an error but
-	
-		it is unlogical to seek for oneself 
-		
-		while autoconf produces the ./configure
-		
-		script by processing configure.in ...
+		 it is unlogical to seek for oneself 
+		  while autoconf produces the ./configure
+		   script by processing configure.in ...
 
-	+	Reorganized the gtranslator.desktop
-		
+	* Reorganized the gtranslator.desktop
 		file for the language order ( me
-		
-		stupido .. )
+		 stupido .. )
 
-	+	Changed the TODO file to reflect 
-		
+	* Changed the TODO file to reflect 
 		the wishes towards gtranslator
 
-	+	gtranslator.desktop : Removed the 
-		
+	* gtranslator.desktop : Removed the 
 		unnecessary quotes
 
-	+	Applied a patch from Alexandre 
-		
+	* Applied a patch from Alexandre 
 		Hautequest <hquest@fesppr.br> ; it 
+		 solves a problem at opening the files
 		
-		solves a problem at opening the files
-		
-	+	Appended him (^) to the THANKS file
+	* Appended him (^) to the THANKS file
 
 
 2000-04-12  Pablo Saratxaga	( pablo@mandrakesoft.com )
 
-	+	configure.in (ALL_LINGUAS): added Danish
+	* configure.in (ALL_LINGUAS): added Danish
 
 2000-03-16  Fatih Demir  <kabalak@gmx.net>
 
-	+	Put version number to 0.16 .
+	* Put version number to 0.16 .
 	
-	+	Updated the text files for the new
-		
+	* Updated the text files for the new
 		version number .
 	
 2000-03-14  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added some other files to the nice
-		.cvsignore files in the 
-		./po and in the ./src subdirs .
+	* Added some other files to the nice
+		 .cvsignore files in the 
+		 ./po and in the ./src subdirs .
 
-	+	Corrected an error in the 
+	* Corrected an error in the 
 		./kabalak_generate_all_the_files.sh
-		which doesn't gave your OPTIONS to
-		./configure ; this IS corrected .  
+		 which doesn't gave your OPTIONS to
+		 ./configure ; this IS corrected .  
 
 2000-03-12  Fatih Demir  <kabalak@gmx.net>
 
-	+	Updated all text-files .
+	* Updated all text-files .
 	
-	+	Change to glib , won't use libdyndata
-		
+	* Change to glib , won't use libdyndata
 		for now ...
 	
-	+	Changed gtranslator.keys.in for the new
-		
-		icon .
+	* Changed gtranslator.keys.in for the new
+		icon.
 
 2000-03-11  Fatih Demir  <kabalak@gmx.net>
 
-	+	Modified Makefile.am for the new
+	* Modified Makefile.am for the new
 		application-x-po.png icon .
 	
-	+	Modified 
+	* Modified 
 		./kabalak_generate_all_the_files.sh
-		for NOT making nor installing the 
-		package , but simply calling all
-		the progs like ./autogen.sh .
+		 for NOT making nor installing the 
+		  package , but simply calling all
+		   the progs like ./autogen.sh .
 
 2000-03-09  Fatih Demir  <kabalak@gmx.net>
 
-	+	Updated the README for INSTALL.CVS .
+	* Updated the README for INSTALL.CVS .
 
 2000-03-08  Fatih Demir  <kabalak@gmx.net>
 
-	+	Changed the mime-configuration 
+	* Changed the mime-configuration 
 		files for regarding the new icon .
 
 2000-03-07  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added alternative files-generating
-		script : 
+	* Added alternative files-generating script:
 		./kabalak_generate_all_the_files.sh
-		which is more "kabalak" than 
-		./autogen.sh . 
+		 which is more "kabalak" than 
+		  ./autogen.sh . 
 
 2000-03-06  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added another source file
+	* Added another source file
 	
-	+	Adding a new icon for .po-files ..
+	* Adding a new icon for .po-files ..
 
 2000-02-29  Fatih Demir  <kabalak@gmx.net>
 
-	+	Played a little bit with the 
+	* Played a little bit with the 
 		logo ..
 	
-	+	Corrected some typos ...
+	* Corrected some typos ...
 
 2000-02-26  Fatih Demir  <kabalak@gmx.net>
 
-	+	Renewed the README .
+	* Renewed the README .
 
 2000-02-25  Fatih Demir  <kabalak@gmx.net>
 
-	+	Again : added a check for the dyndata-
+	* Again : added a check for the dyndata-
 		config script and let the variables
-		in src/Makefile.am be set ...
+		 in src/Makefile.am be set ...
 	
-	+	Now you get always an URL if you
+	* Now you get always an URL if you
 		haven't got libdyndata ; so be nice
-		and get this library from the project
-		homepage ...
+		 and get this library from the project
+		  homepage ...
 	
-	+	Beautified the text files ( bashier ) . 
+	* Beautified the text files ( bashier ) . 
 
 2000-02-24  Fatih Demir  <kabalak@gmx.net>
 	
-	+	Extended the check a little bit ; 
+	* Extended the check a little bit ; 
 		If the libdyndata isn't found 
-		./configure gives you now an error
-		message . 	
+		 ./configure gives you now an error
+		  message . 	
 
 2000-02-23  Fatih Demir  <kabalak@gmx.net>
 
-	+	Check for the dyndata headers & lib 
+	* Check for the dyndata headers & lib 
 		in the configure.in .
                       
 2000-02-22  Fatih Demir  <kabalak@gmx.net>
 
-	+	Put version to 0.15 .
+	* Put version to 0.15 .
 
-	+	Corrected many errors in the sources
+	* Corrected many errors in the sources
 
-	+	Switching over to libdyndata from
+	* Switching over to libdyndata from
 		Manuel Schiller ( malasch@gmx.net )
 		
-	+	Check for libdyndata in ./configure
+	* Check for libdyndata in ./configure
 	
-	+	Added libdyndata-source to here .
+	* Added libdyndata-source to here .
 
 2000-02-17  Fatih Demir  <kabalak@gmx.net>
 
-	+	Cleaned up the scripts-rests ..
+	* Cleaned up the scripts-rests ..
 
 2000-02-13  Fatih Demir  <kabalak@gmx.net>
 
-	+	Removed all scripts , gtranslator
-		will be C-native .
+	* Removed all scripts, gtranslator
+		will be C-native.
 
-	+	Re-checked gtranslator to Gnome-CVS
+	* Re-checked gtranslator to Gnome-CVS
 
 2000-02-10  Fatih Demir  <kabalak@gmx.net>
 		
-	+	Corrected the split_it_with_awk.sh
+	* Corrected the split_it_with_awk.sh
 		script to work like wished (->TODO) 
 	
-	+	Removed the sed/head searches ( ->
-		using `which sed/head` for that ).
+	* configure.in: Removed the sed/head searches.
+		[ using `which sed/head` for that ]
 	
-	+	Will not use the po.el , as far as
+	* Will not use the po.el, as far as
 		I DO NOT USE emacs/have any info/man
-		pages of it ( I'm using vim ... ) .
+		 pages of it ( I'm using vim ... ).
 	
-	+	The parser-module is been written at
-		the moment , put version to 0.14 .
+	* The parser-module is been written at
+		the moment, put version to 0.14.
 
 2000-02-08  Fatih Demir  <kabalak@gmx.net>
 
-	+	Put version to 0.13 , made changes in
+	* configure.in: Put version to 0.13, made changes in
 		the sources .
 
 2000-02-07  Kjartan Maraas  <kmaraas@online.no>
@@ -639,33 +540,33 @@
 	
 2000-02-04  Fatih Demir  <kabalak@gmx.net>
 
-	+	Put gtranslator to the Gnome CVS-tree 
+	* Put gtranslator to the Gnome CVS-tree.
 
 2000-02-03  Fatih Demir  <kabalak@gmx.net>
 
-	+	Added a separate ChangeLog for the src-subdir 
+	* src/ChangeLog: Added a separate ChangeLog for it.
 
 2000-02-02  Fatih Demir  <kabalak@gmx.net>
     
-	+	Made the parse-module almost finished ( 
-		it does only crash a bit too often .. )
+	* Made the parse-module almost finished  
+		[ it does only crash a bit too often .. ]
 	
 2000-01-31  Fatih Demir  <kabalak@gmx.net>
 
-	+	Decided to make everything a little bit
+	* Decided to make everything a little bit
 		more scripty ....
 
 2000-01-30  Fatih Demir  <kabalak@gmx.net>
 
-	+	Made the config-stuff very roughly and started  
-		to write the parse-module in C ,
-		put Release to 0.12 .
+	* Made the config-stuff very roughly and started  
+		to write the parse-module in C,
+		 put Release to 0.12.
 
 2000-01-21  Fatih Demir  <kabalak@gmx.net>
 
-	+	Put help & prefs-box into work and began 
+	* Put help & prefs-box into work and began 
 		to work on the config ..
 
 2000-01-15  Fatih Demir  <kabalak@gmx.net>
 
-	+	Started working on gtranslator ...
+	* Started working on gtranslator ...

@@ -51,6 +51,11 @@ dnl -------------------------------------------------------------------
 AM_PATH_GTK(1.2.4)
 
 dnl -------------------------------------------------------------------
+dnl Check for libxml >= 1.8.7.
+dnl -------------------------------------------------------------------
+GNOME_XML_CHECK
+
+dnl -------------------------------------------------------------------
 dnl Our languages caravane has got settled here in place.( add your's )
 dnl -------------------------------------------------------------------
 ALL_LINGUAS="da de hu ja ko nl no ru sv tr uk"
@@ -102,6 +107,25 @@ else
 fi
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 
+
+dnl -------------------------------------------------------------------
+dnl Get the message-db.d directories place.
+dnl -------------------------------------------------------------------
+AC_ARG_WITH(message-db-dir,
+     [  --with-message-db-dir=DIR        Define the message-db.d location],,with_message_db_dir=NONE)
+AC_MSG_CHECKING([where to put the message-db.d directory ])
+if test "z$with_message_db_dir" = "zNONE" ; then
+	AC_MSG_RESULT([" "
+"********** Will put the message-db.d dir into gtranslators datadir."])
+	MESSAGE_DB_DIR=${datadir}/gtranslator
+	AC_SUBST(MESSAGE_DB_DIR)
+else
+	AC_MSG_RESULT([" "
+"********** will put the message-db.d dir to ${with_message_db_dir}."])
+	MESSAGE_DB_DIR=${with_message_db_dir}
+	AC_SUBST(MESSAGE_DB_DIR)
+fi
+
 dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
@@ -121,20 +145,24 @@ Makefile
 data/Makefile
 data/gtranslator.keys
 macros/Makefile
+intl/Makefile
+src/Makefile
+po/Makefile.in
 help/Makefile
 help/C/Makefile
 help/tr/Makefile
 man/Makefile
 man/gtranslator.1
 libgtranslator/Makefile
-src/Makefile
-intl/Makefile
-po/Makefile.in
+message-db.d/Makefile
 ])
 
 dnl ------------------------------------------------------------------
 dnl Print an information screen at the end of the process
 dnl ------------------------------------------------------------------
+if test "q${with_message_db_dir}" = "qNONE" ; then
+	with_message_db_dir=
+fi
 grep -sq USE_WINDOW_ICON\ 1  config.h && \
 use_window_icon_feature=yes
 echo "
@@ -146,8 +174,8 @@ gtranslator version	:	${VERSION}
 bind the po-files  
  with gtranslator  	:	${enable_mime_bind:-possibly}	
 
-(X)Emacs-friendly
- about message     	:	${enable_emacs_lover:-possibly}
+where to put the
+ message-db.d dir  	:	${with_message_db_dir:-gtransaltor's datadir}
 
 use the window-icon
  feature of gnome-libs  :	${use_window_icon_feature:-no}
