@@ -520,19 +520,11 @@ static void write_the_message(gpointer data, gpointer fs)
 	str = restore_msg(msg->msgstr);
 	
 	if (msg->comment)
-	{
 		fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
 			msg->comment, id, str);
-		g_print("%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
-			msg->comment, id, str);
-	}
 	else
-	{
 		fprintf((FILE *) fs, "msgid \"%s\"\nmsgstr \"%s\"\n\n",
 			id, str);
-		g_print("msgid \"%s\"\nmsgstr \"%s\"\n\n",
-			id, str);
-	}
 	/*
 	g_print("#a");
 	g_free(id);
