@@ -115,8 +115,7 @@ else
 fi
 
 dnl -------------------------------------------------------------------
-dnl Check for GnomeVFS via this crappy check and get the libs and 
-dnl  compile flags for it or disable USE_VFS_STUFF.
+dnl Check for GnomeVFS via this crappy check.
 dnl -------------------------------------------------------------------
 AC_MSG_CHECKING(for GnomeVFS >= 0.4.1)
 if gnome-config --cflags vfs 2>&1 >/dev/null ; then
@@ -136,6 +135,12 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 "+++ Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4.1"])
 		fi	
 	fi
+else
+	AC_MSG_ERROR([" "
+"+++ Please install GnomeVFS before trying to compile gtranslator."
+"+++"
+"+++ gtranslator now depends on GnomeVFS"])
+fi	
 dnl -------------------------------------------------------------------
 dnl Define the compile flags for gtranslator
 dnl -------------------------------------------------------------------
@@ -327,7 +332,7 @@ use the window-icon
 
 used GAL version	:	`gnome-config --modversion gal|sed -e 's/.*-//g'`
 
-used GnomeVFS version	:	`gnome-config --modversion vfs|sed -e 's/.*-//g`
+used GnomeVFS version	:	`gnome-config --modversion vfs|sed -e 's/.*-//g'`
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
