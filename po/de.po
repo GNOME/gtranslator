@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.35\n"
-"POT-Creation-Date: 2001-02-28 15:34+0100\n"
-"PO-Revision-Date: 2001-02-28 16:02+0100\n"
+"POT-Creation-Date: 2001-02-28 17:05+0100\n"
+"PO-Revision-Date: 2001-02-28 17:09+0100\n"
 "Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: german <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/about.c:52
 msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr ""
+msgstr "gtranslator ist ein po-Bearbeitungsprogramm mit allem Drum und Dran"
 
 #: src/color-schemes.c:93
 #, c-format
@@ -747,10 +747,14 @@ msgstr "Kompilierte gettext Datei '%s' konnte nicht geöffnet werden!"
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "komprimierte gettext Datei '%s' konnte nicht geöffnet werden!"
 
-#: src/open-differently.c:241
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#: src/open-differently.c:245
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr ""
+msgstr "ge%s'te gettext Datei '%s' kann nicht geöffnet werden!"
 
 #: src/parse.c:138
 #, c-format
