@@ -71,10 +71,6 @@ gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
 
 	msg = begin;
 	do {
-		if (msg == NULL) {
-			msg = g_list_first(begin);
-			g_return_val_if_fail(msg != NULL, TRUE);
-		}
 		next = FALSE;
 
 		retval= func(msg, user_data, first);
@@ -90,6 +86,10 @@ gboolean repeat_all(GList * begin, FEFuncR func, gpointer user_data,
 			break;
 		}
 		first = FALSE;
+		if (msg == NULL) {
+			msg = g_list_first(begin);
+			g_return_val_if_fail(msg != NULL, TRUE);
+		}
 	} while (msg != begin || next);
 	return FALSE;
 }
