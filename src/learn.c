@@ -99,6 +99,12 @@ static void gtranslator_learn_buffer_learn_function(gpointer date,
 static void gtranslator_learn_buffer_set_umtf_date(void);
 
 /*
+ * Export the hash entries/translation + original msgid pair(s) to a given po
+ *  po file's messages list. */
+static void gtranslator_learn_buffer_export_hash_entry(gpointer key, 
+	gpointer value, gpointer messages_list);
+
+/*
  * Escape the characters in the given string to make learning really
  *  work with all characters.
  */
@@ -227,6 +233,17 @@ static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer val
 	translation_value_node=xmlNewChild(translation_node, NULL, 
 		"value", string_to_write);
 	GTR_FREE(string_to_write);
+}
+
+/*
+ * Exports a single message/translation pair to the given po file.
+ */
+static void gtranslator_learn_buffer_export_hash_entry(gpointer key, 
+	gpointer value, gpointer messages_list)
+{
+	g_return_if_fail(key!=NULL);
+	g_return_if_fail(value!=NULL);
+	g_return_if_fail(messages_list!=NULL);
 }
 
 /*
@@ -698,9 +715,9 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
 	g_return_if_fail(po_file!=NULL);
 	g_return_if_fail(gtranslator_learn_buffer->init_status==TRUE);
 
-	/*
-	 * FIXME: Write.
-	 */
+	g_hash_table_foreach(gtranslator_learn_buffer->hash,
+		(GHFunc) gtranslator_learn_buffer_export_hash_entry, 
+			(gpointer) po_file);
 }
 
 /*
