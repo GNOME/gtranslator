@@ -38,4 +38,4 @@ $(GTRANSLATORD_SOURCES): gtranslatord.idl
 clean-am:
 	-rm -f $(GTRANSLATORD_SOURCES)
 
-EXTRA_DIST = $(idl__DATA)
+EXTRA_DIST = $(idl__DATA) $(libgtranslator_include__DATA)
