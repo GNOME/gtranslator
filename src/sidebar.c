@@ -109,6 +109,9 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 {
 	if(event->button.button==1)
 	{
+		gchar *testcase=g_new0(gchar,1);
+		gint curpos;
+		
 		/*
 		 * Switch the icon numbers for the right view.
 		 */ 
@@ -117,21 +120,49 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 			case 1:
 				/*
 				 * Just show the message.
-				 */ 
+				 */
+				curpos=gtk_editable_get_position(
+					GTK_EDITABLE(trans_box));
+				
+				testcase=gtk_editable_get_chars(
+					GTK_EDITABLE(trans_box), 0, -1);
+				
+				if(strcmp(GTR_MSG(po->current->data)->msgstr,
+					testcase))
+				{
+					GTR_MSG(po->current->data)->msgstr=
+						g_strdup(testcase);
+				}
+					 
 				display_msg(po->current);
+
+				gtk_editable_set_position(
+					GTK_EDITABLE(trans_box), curpos);
+
 				break;
 				
 			case 2:
+				 testcase=gtk_editable_get_chars(
+					 GTK_EDITABLE(trans_box), 0, -1);
+				 
+				 if(strcmp(GTR_MSG(po->current->data)->msgstr,
+					testcase))
+				 {
+					GTR_MSG(po->current->data)->msgstr=
+						g_strdup(testcase);
+				 }
+				 
 				/*
 				 * Display the current comment or
 				 *  show a helping message.
-				 */  
+				 */				 
 				 show_comment(text1);
 				 break;
 				
 			default:
 				break;
 		}
+		g_free(testcase);
 	}
 }
 
