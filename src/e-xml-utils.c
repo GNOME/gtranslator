@@ -145,7 +145,7 @@ e_xml_get_child_by_name_by_lang_list (const xmlNode *parent,
 	g_return_val_if_fail (name != NULL, NULL);
 
 	if (lang_list == NULL) {
-		lang_list = gnome_i18n_get_language_list ("LC_MESSAGES");
+		lang_list = (GList *)gnome_i18n_get_language_list ("LC_MESSAGES");
 	}
 	return e_xml_get_child_by_name_by_lang_list_with_score
 		(parent,name,
