@@ -23,6 +23,7 @@
 
 #include <glib.h>
 #include <gtk/gtkwidget.h>
+#include <gtk/gtksignal.h>
 
 /*
  * Utility function for use within gtranslator.
@@ -48,5 +49,47 @@ void gtranslator_utils_invert_dot(gchar *str);
  */
 void gtranslator_utils_save_geometry(void);
 void gtranslator_utils_restore_geometry(gchar *gstr);
+
+/*
+ * Convenience functions for adding items 
+ */
+GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget * table, 
+	gint row, const char *label_text, GList * list, const char *value,
+	GtkSignalFunc callback, gpointer user_data);
+
+GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget * table, 
+	gint row, const char *label_text, const char *value,
+	GtkSignalFunc callback);
+
+GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget * table, 
+	gint row, const char *label_text, gboolean value,
+	GtkSignalFunc callback);
+
+GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget * table, 
+	gint row, const char *label_text, const char *value,
+	GtkSignalFunc callback);
+
+/*
+ * Returns the added GtkTable to the preferences box.
+ */ 
+GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(
+	GtkWidget * probox, gint rows, gint cols, const char *label_text);
+
+/*
+ * The lists for the language informations -- are all changed accordingly automatically.
+ */
+GList *languages_list, *encodings_list, *lcodes_list, *group_emails_list, *bits_list;
+	
+
+/*
+ * Creates the lists above and deletes/frees it.
+ */
+void gtranslator_utils_language_lists_create(void);
+gboolean gtranslator_utils_language_lists_free(GtkWidget *widget, gpointer useless);
+
+/*
+ * Convert the fg/bg settings from < 2001-03-03 to the new places.
+ */
+void gtranslator_utils_old_colors_to_new_location(void);
 
 #endif

@@ -1,3 +1,29 @@
+2001-04-08  Fatih Demir <kabalak@gtranslator.org>
+
+	* Makefile.am: Include the new menu files.
+
+	* menus_main.h, menus_message_status.h & menus_misc.h: Put the
+		corresponding parts of the menus into these new files.
+
+	* menus.h: Outsourced some menu parts to gain -Werror enabled build.
+
+	* htmlizer.c: Also print out a small footprint about gtranslator.
+
+	* prefs.h, prefs_init.c & utils.c/.h: Moved the old -> new color
+		location converting function to the util. functions and
+		 named it "gtranslator_utils_old_colors_to_new_location".
+
+	* languages.h: Cosmetic rename "lang" -> "GtrLanguage" and indent
+		changes; I love vim ,-)
+
+	* header_stuff.c: Changed the includes to also include "utils.h"
+		for the GUI util. functions.
+
+	* prefs.c/.h & utils.c/.h: Moved the attach_* functions to
+		gtranslator_utils_attach_* and the gtranslator_create/free_lists
+		 functions to gtranslator_utils_language_lists_create/free
+		  and outsourced them into utils.c/.h.
+
 2001-04-07  Fatih Demir <kabalak@gtranslator.org>
 
 	* utils.c/.h & prefs.c/.h: Moved the gtranslator_geometry_save/restore

@@ -33,6 +33,7 @@
 #include "query.h"
 #include "session.h"
 #include "sighandling.h"
+#include "utils.h"
 
 #include <gtk/gtkmain.h>
 

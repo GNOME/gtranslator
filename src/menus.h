@@ -4,12 +4,12 @@
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or   
+ *   the Free Software Foundation; either version 2 of the License, or
  *    (at your option) any later version.
- *    
+ *
  * gtranslator is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *    GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -21,7 +21,6 @@
 #ifndef GTR_MENUS_H
 #define GTR_MENUS_H 1
 
-#include "about.h"
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
@@ -93,16 +92,16 @@ static GnomeUIInfo the_file_menu[] = {
 };
 
 static GnomeUIInfo the_views_menu[] = {
-	GNOMEUIINFO_RADIOITEM_DATA(N_("_Message"), 
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Message"),
 		N_("Standard messages view"),
 		gtranslator_switch_views, (gpointer) GTR_MESSAGE_VIEW, NULL),
-	GNOMEUIINFO_RADIOITEM_DATA(N_("_Comments"), 
+	GNOMEUIINFO_RADIOITEM_DATA(N_("_Comments"),
 		N_("View comments for message"),
 		gtranslator_switch_views, (gpointer) GTR_COMMENT_VIEW, NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Numbers"),
 		N_("View numbers in the message"),
 		gtranslator_switch_views, (gpointer) GTR_NUMBER_VIEW, NULL),
-	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Formats"), 
+	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Formats"),
 		N_("View C formats of the message"),
 		gtranslator_switch_views, (gpointer) GTR_C_FORMAT_VIEW, NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Hotkeys"),
@@ -195,65 +194,7 @@ static GnomeUIInfo the_messages_menu[] = {
 	GNOMEUIINFO_END
 };
 
-static GnomeUIInfo the_msg_status_menu[] = {
-	{
-		GNOME_APP_UI_TOGGLEITEM, N_("_Translated"),
-		N_("Toggle translated status of a message"),
-		gtranslator_message_change_status,
-		GINT_TO_POINTER(GTR_MSG_STATUS_TRANSLATED),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
-		GDK_1, GDK_MOD1_MASK, NULL
-	},
-	{
-		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
-		N_("Toggle fuzzy status of a message"),
-		gtranslator_message_change_status,
-		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
-		GDK_2, GDK_MOD1_MASK, NULL
-	},
-	{
-		GNOME_APP_UI_TOGGLEITEM, N_("_Stick"),
-		N_("Stick this message"),
-		gtranslator_message_change_status,
-		GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
-		GDK_3, GDK_MOD1_MASK, NULL
-	},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo the_settings_menu[] = {
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gtranslator_preferences_dialog_create, NULL),
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo the_help_menu[] = {
-	GNOMEUIINFO_HELP("gtranslator"),
-	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_create_about_box, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
-			       N_("gtranslator's homepage on the web"),
-			       gtranslator_utils_show_home_page,
-			       GNOME_STOCK_MENU_HOME),
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo the_menus[] = {
-	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
-	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
-	GNOMEUIINFO_MENU_VIEW_TREE(the_views_menu),
-	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
-	GNOMEUIINFO_SUBTREE(N_("Mess_age status"), the_msg_status_menu),
-	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
-	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
-	GNOMEUIINFO_END
-};
-
-/* 
+/*
  * The toolbar buttons
  */
 static GnomeUIInfo the_toolbar[] = {
@@ -277,7 +218,7 @@ static GnomeUIInfo the_toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
 			       N_("Update the po-file"),
 			       update,
-			       GNOME_STOCK_PIXMAP_REFRESH),		       
+			       GNOME_STOCK_PIXMAP_REFRESH),
 	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
 			       N_("Edit the header"),
 			       gtranslator_header_edit_dialog,

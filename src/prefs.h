@@ -23,7 +23,6 @@
 
 #include <glib.h>
 #include <gtk/gtkwidget.h>
-#include <gtk/gtksignal.h>
 
 #include "preferences.h"
 
@@ -83,48 +82,8 @@ void gtranslator_preferences_init_default_values(void);
 void gtranslator_colors_init_default_colors(void);
 
 /*
- * Convert the fg/bg settings from < 2001-03-03 to the new places.
- */
-void gtranslator_colors_convert_to_new_settings(void);
-
-/*
  * Font/color specific widgets used in the preferences box.
  */
 GtkWidget *foreground, *background, *font;
-
-/*
- * The lists for the combo-boxes..
- */
-GList *languages_list, *encodings_list,
-	*lcodes_list, *group_emails_list, *bits_list;
-
-void gtranslator_lists_create(void);
-gboolean gtranslator_lists_free(GtkWidget *widget, gpointer useless);
-
-/*
- * Convenience functions for adding items 
- */
-GtkWidget *attach_combo_with_label(GtkWidget * table, gint row,
-				   const char *label_text,
-				   GList * list, const char *value,
-				   GtkSignalFunc callback,
-				   gpointer user_data);
-GtkWidget *attach_entry_with_label(GtkWidget * table, gint row,
-				   const char *label_text,
-				   const char *value,
-				   GtkSignalFunc callback);
-GtkWidget *attach_toggle_with_label(GtkWidget * table, gint row,
-				    const char *label_text,
-				    gboolean value,
-				    GtkSignalFunc callback);
-GtkWidget *attach_text_with_label(GtkWidget * table, gint row,
-				  const char *label_text,
-				  const char *value,
-				  GtkSignalFunc callback);
-/*
- * Returns the added GtkTable to the preferences box.
- */ 
-GtkWidget *append_page_table(GtkWidget * probox, gint rows, gint cols,
-			     const char *label_text);
 
 #endif

@@ -26,6 +26,7 @@
 #include "prefs.h"
 #include "preferences.h"
 #include "stylistics.h"
+#include "utils.h"
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
@@ -141,7 +142,7 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 		/*
 		 * Possibly convert the old color specs to their new place.
 		 */
-		gtranslator_colors_convert_to_new_settings();
+		gtranslator_utils_old_colors_to_new_location();
 		
 		/*
 		 * And reread the specs from the now correct location.

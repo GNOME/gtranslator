@@ -30,6 +30,7 @@
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
+#include "utils.h"
 
 #include <locale.h>
 #include <time.h>
@@ -340,9 +341,9 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_window_set_title(GTK_WINDOW(e_header),
 			     _("gtranslator -- edit header"));
 
-	gtranslator_lists_create();
+	gtranslator_utils_language_lists_create();
 
-	prj_page = append_page_table(e_header, 5, 2, _("Project"));
+	prj_page = gtranslator_utils_append_page_to_preferences_dialog(e_header, 5, 2, _("Project"));
 	label = gtk_label_new(_("Translator and Language"));
 	lang_vbox = gtk_vbox_new(FALSE, GNOME_PAD);
 	gnome_property_box_append_page(GNOME_PROPERTY_BOX(e_header), lang_vbox,
@@ -354,23 +355,23 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	ph->comment=gtranslator_header_comment_convert_for_view(ph->comment);
 	
 	prj_comment =
-	    attach_text_with_label(prj_page, 0, _("Comments:"), ph->comment,
+	    gtranslator_utils_attach_text_with_label(prj_page, 0, _("Comments:"), ph->comment,
 	    			   gtranslator_header_edit_changed);
 	
 	gtk_widget_set_usize(prj_comment, 360, 90);
 	
 	prj_name =
-	    attach_entry_with_label(prj_page, 1, _("Project name:"),
+	    gtranslator_utils_attach_entry_with_label(prj_page, 1, _("Project name:"),
 	    			    ph->prj_name, gtranslator_header_edit_changed);
 	prj_version =
-	    attach_entry_with_label(prj_page, 2, _("Project version:"),
+	    gtranslator_utils_attach_entry_with_label(prj_page, 2, _("Project version:"),
 	    			    ph->prj_version, gtranslator_header_edit_changed);
 	pot_date =
-	    attach_entry_with_label(prj_page, 3, _("Pot file creation date:"),
+	    gtranslator_utils_attach_entry_with_label(prj_page, 3, _("Pot file creation date:"),
 				    ph->pot_date, gtranslator_header_edit_changed);
 	gtk_widget_set_sensitive(pot_date, FALSE);
 	po_date =
-	    attach_entry_with_label(prj_page, 4, _("Po file revision date:"),
+	    gtranslator_utils_attach_entry_with_label(prj_page, 4, _("Po file revision date:"),
 				    ph->po_date, gtranslator_header_edit_changed);
 	gtk_widget_set_sensitive(po_date, FALSE);
 
@@ -392,26 +393,26 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_widget_set_sensitive(lang_page, !wants.fill_header);
 	gtk_box_pack_start(GTK_BOX(lang_vbox), lang_page, TRUE, TRUE, 0);
 	translator =
-	    attach_entry_with_label(lang_page, 1, _("Translator's name:"),
+	    gtranslator_utils_attach_entry_with_label(lang_page, 1, _("Translator's name:"),
 				    ph->translator, gtranslator_header_edit_changed);
 	tr_email =
-	    attach_entry_with_label(lang_page, 2, _("Translator's e-mail:"),
+	    gtranslator_utils_attach_entry_with_label(lang_page, 2, _("Translator's e-mail:"),
 				    ph->tr_email, gtranslator_header_edit_changed);
 	language_combo =
-	    attach_combo_with_label(lang_page, 3, _("Language:"),
+	    gtranslator_utils_attach_combo_with_label(lang_page, 3, _("Language:"),
 				    languages_list, ph->language,
 				    language_changed, NULL);
 	lg_combo =
-	    attach_combo_with_label(lang_page, 4,
+	    gtranslator_utils_attach_combo_with_label(lang_page, 4,
 				    _("Language group's e-mail:"),
 				    group_emails_list, ph->lg_email,
 				    gtranslator_header_edit_changed, NULL);
 	charset_combo =
-	    attach_combo_with_label(lang_page, 5, _("Charset:"),
+	    gtranslator_utils_attach_combo_with_label(lang_page, 5, _("Charset:"),
 				    encodings_list, ph->charset,
 				    gtranslator_header_edit_changed, NULL);
 	enc_combo =
-	    attach_combo_with_label(lang_page, 6, _("Encoding:"),
+	    gtranslator_utils_attach_combo_with_label(lang_page, 6, _("Encoding:"),
 				    bits_list, ph->encoding,
 				    gtranslator_header_edit_changed, NULL);
 	/*
@@ -420,7 +421,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_signal_connect(GTK_OBJECT(e_header), "apply",
 			   GTK_SIGNAL_FUNC(gtranslator_header_edit_apply), NULL);
 	gtk_signal_connect(GTK_OBJECT(e_header), "close",
-			   GTK_SIGNAL_FUNC(gtranslator_lists_free), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_utils_language_lists_free), NULL);
 
 	gtranslator_dialog_show(&e_header, "gtranslator -- header");
 

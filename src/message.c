@@ -20,11 +20,12 @@
 #include "actions.h"
 #include "gtkspell.h"
 #include "gui.h"
-#include "menus.h"
+#include "menus_message_status.h"
 #include "message.h"
 #include "parse.h"
 #include "prefs.h"
 #include "syntax.h"
+#include "utils.h"
 
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-app.h>

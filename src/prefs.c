@@ -30,6 +30,7 @@
 #include "prefs.h"
 #include "query.h"
 #include "stylistics.h"
+#include "utils.h"
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
@@ -41,8 +42,6 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 static void gtranslator_preferences_dialog_apply(GtkWidget  * widget, gint page_num,
 			    gpointer useless);
 static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer useless);
-
-static gint list_ref = 0;
 
 /*
  * The notebook page widgets: 
@@ -73,147 +72,6 @@ static GtkWidget
  */
 static GtkWidget *prefs = NULL;
 
-GtkWidget *attach_combo_with_label(GtkWidget  * table, gint row,
-				   const char *label_text,
-				   GList  * list, const char *value,
-				   GtkSignalFunc callback,
-				   gpointer user_data)
-{
-	GtkWidget *label;
-	GtkWidget *combo;
-	label = gtk_label_new(label_text);
-	combo = gtk_combo_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo), list);
-	if (value)
-		gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), value);
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), combo, 1, 2, row, row + 1);
-	gtk_signal_connect(GTK_OBJECT(GTK_COMBO(combo)->entry), "changed",
-			   GTK_SIGNAL_FUNC(callback), user_data);
-	return combo;
-}
-
-GtkWidget *attach_toggle_with_label(GtkWidget  * table, gint row,
-				    const char *label_text,
-				    gboolean value,
-				    GtkSignalFunc callback)
-{
-	GtkWidget *toggle;
-	toggle = gtk_check_button_new_with_label(label_text);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(toggle), value);
-	gtk_table_attach_defaults(GTK_TABLE(table), toggle, 0, 1, row, row + 1);
-	gtk_signal_connect(GTK_OBJECT(toggle), "toggled",
-			   GTK_SIGNAL_FUNC(callback), NULL);
-	return toggle;
-}
-
-GtkWidget *attach_entry_with_label(GtkWidget  * table, gint row,
-				   const char *label_text,
-				   const char *value,
-				   GtkSignalFunc callback)
-{
-	GtkWidget *label;
-	GtkWidget *entry;
-	label = gtk_label_new(label_text);
-	entry = gtk_entry_new();
-	if (value)
-		gtk_entry_set_text(GTK_ENTRY(entry), value);
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), entry, 1, 2, row, row + 1);
-	gtk_signal_connect(GTK_OBJECT(entry), "changed",
-			   GTK_SIGNAL_FUNC(callback), NULL);
-	return entry;
-}
-
-GtkWidget *attach_text_with_label(GtkWidget  * table, gint row,
-				  const char *label_text,
-				  const char *value,
-				  GtkSignalFunc callback)
-{
-	GtkWidget *label;
-	GtkWidget *widget;
-	GtkWidget *scroll;
-	label = gtk_label_new(label_text);
-	scroll = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	widget = gtk_text_new(NULL, NULL);
-	gtk_text_set_editable(GTK_TEXT(widget), TRUE);
-	if (value)
-		gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL, value, -1);
-	gtk_container_add(GTK_CONTAINER(scroll), widget);
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), scroll, 1, 2, row, row + 1);
-	gtk_signal_connect(GTK_OBJECT(widget), "changed",
-			   GTK_SIGNAL_FUNC(callback), NULL);
-	return widget;
-}
-
-GtkWidget *append_page_table(GtkWidget  * probox, gint rows, gint cols,
-			     const char *label_text)
-{
-	GtkWidget *label;
-	GtkWidget *page;
-	label = gtk_label_new(label_text);
-	page = gtk_table_new(rows, cols, FALSE);
-	gnome_property_box_append_page(GNOME_PROPERTY_BOX(probox), page, label);
-	return page;
-}
-
-/*
- * Set up the lists to use within the combo boxes.
- */
-void gtranslator_lists_create(void)
-{
-	gint c = 0;
-	list_ref++;
-	/*
-	 * Create only if it's the first call.
-	 */
-	if (list_ref > 1) 
-		return;
-	languages_list = encodings_list = lcodes_list = group_emails_list = 
-		bits_list = NULL;
-	while (languages[c].name != NULL) {
-		languages_list =
-		    g_list_prepend(languages_list,
-				   (gpointer) _(languages[c].name));
-		lcodes_list =
-		    g_list_prepend(lcodes_list,
-				   (gpointer) languages[c].lcode);
-		if (g_list_find_custom
-		    (encodings_list, (gpointer) languages[c].enc,
-		     (GCompareFunc) strcmp) == NULL)
-			encodings_list =
-			    g_list_prepend(encodings_list,
-					   (gpointer) languages[c].enc);
-		if (g_list_find_custom
-		    (group_emails_list, (gpointer) languages[c].group,
-		     (GCompareFunc) strcmp) == NULL)
-			group_emails_list =
-			    g_list_prepend(group_emails_list,
-					   (gpointer) languages[c].group);
-		if (g_list_find_custom
-		    (bits_list, (gpointer) languages[c].bits,
-		     (GCompareFunc) strcmp) == NULL)
-			bits_list =
-			    g_list_prepend(bits_list,
-					   (gpointer) languages[c].bits);
-		c++;
-	}
-	/*
-	 * Arrange the resulting lists.
-	 */
-	languages_list = g_list_sort(languages_list, (GCompareFunc) strcoll);
-	lcodes_list = g_list_reverse(lcodes_list);
-	group_emails_list =
-	    g_list_sort(group_emails_list, (GCompareFunc) strcmp);
-	encodings_list =
-	    g_list_sort(encodings_list, (GCompareFunc) strcmp);
-	bits_list = g_list_sort(bits_list, (GCompareFunc) strcmp);
-}
-
 void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
 	/*
@@ -236,110 +94,110 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The tables for holding all the entries below.
 	 */
-	first_page = append_page_table(prefs, 3, 2, _("Personal informations"));
-	second_page = append_page_table(prefs, 5, 2, _("Language settings"));
-	third_page = append_page_table(prefs, 4, 1, _("Po file editing"));
-	fourth_page = append_page_table(prefs, 5, 1, _("Miscellaneous"));
-	fifth_page = append_page_table(prefs, 4, 2, _("Recent files & spell checking"));
-	sixth_page = append_page_table(prefs, 5, 2, _("Fonts, colors and color schemes"));
+	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 3, 2, _("Personal informations"));
+	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, _("Language settings"));
+	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 1, _("Po file editing"));
+	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 1, _("Miscellaneous"));
+	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, _("Recent files & spell checking"));
+	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 5, 2, _("Fonts, colors and color schemes"));
 	
 	/*
 	 * Create all the personal entries.
 	 */
 	authors_name =
-	    attach_entry_with_label(first_page, 0, _("Author's name:"),
+	    gtranslator_utils_attach_entry_with_label(first_page, 0, _("Author's name:"),
 				    author, gtranslator_preferences_dialog_changed);
 	authors_email =
-	    attach_entry_with_label(first_page, 1, _("Author's EMail:"),
+	    gtranslator_utils_attach_entry_with_label(first_page, 1, _("Author's EMail:"),
 				    email, gtranslator_preferences_dialog_changed);
 
 	defaultdomain =
-	    attach_combo_with_label(first_page, 2, _("Default query domain:"),
+	    gtranslator_utils_attach_combo_with_label(first_page, 2, _("Default query domain:"),
 			    	    domains, wants.defaultdomain,
 				    gtranslator_preferences_dialog_changed, NULL);
 	
 	/*
 	 * Create, attach, and connect all the combo boxes with labels. 
 	 */
-	gtranslator_lists_create();
+	gtranslator_utils_language_lists_create();
 
 	authors_language =
-	    attach_combo_with_label(second_page, 0, _("Language:"),
+	    gtranslator_utils_attach_combo_with_label(second_page, 0, _("Language:"),
 				    languages_list, language,
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(1));
 	lcode =
-	    attach_combo_with_label(second_page, 1, _("Language code:"),
+	    gtranslator_utils_attach_combo_with_label(second_page, 1, _("Language code:"),
 				    lcodes_list, lc, 
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(2));
 	lg_email =
-	    attach_combo_with_label(second_page, 2,
+	    gtranslator_utils_attach_combo_with_label(second_page, 2,
 				    _("Language group's EMail:"),
 				    group_emails_list, lg,
 				    gtranslator_preferences_dialog_changed, NULL);
 	mime_type =
-	    attach_combo_with_label(second_page, 3, _("Charset:"),
+	    gtranslator_utils_attach_combo_with_label(second_page, 3, _("Charset:"),
 				    encodings_list, mime,
 				    gtranslator_preferences_dialog_changed, NULL);
 	encoding =
-	    attach_combo_with_label(second_page, 4, _("Encoding:"),
+	    gtranslator_utils_attach_combo_with_label(second_page, 4, _("Encoding:"),
 				    bits_list, enc,
 				    gtranslator_preferences_dialog_changed, NULL);
 	/*
 	 * Create, attach, and connect the toggle buttons.
 	 */
 	unmark_fuzzy =
-	    attach_toggle_with_label(third_page, 0,
+	    gtranslator_utils_attach_toggle_with_label(third_page, 0,
 		_("Set non-fuzzy status, if message was changed"),
 		wants.unmark_fuzzy, gtranslator_preferences_dialog_changed);
 	warn_if_fuzzy =
-	    attach_toggle_with_label(third_page, 1,
+	    gtranslator_utils_attach_toggle_with_label(third_page, 1,
 		_("Warn if the .po-file contains fuzzy translations"),
 		wants.warn_if_fuzzy, gtranslator_preferences_dialog_changed);
 	dont_save_unchanged_files =
-	    attach_toggle_with_label(third_page, 2,
+	    gtranslator_utils_attach_toggle_with_label(third_page, 2,
 		_("Don't save unchanged .po-files"),
 		wants.dont_save_unchanged_files, gtranslator_preferences_dialog_changed);
 	warn_if_no_change =
-	    attach_toggle_with_label(third_page, 3,
+	    gtranslator_utils_attach_toggle_with_label(third_page, 3,
 		_("Warn me if I'm trying to save an unchanged file"),
 		wants.warn_if_no_change, gtranslator_preferences_dialog_changed);
 	keep_obsolete =
-	    attach_toggle_with_label(third_page, 4,
+	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
 		_("Keep obsolete message in the po files"),
 		wants.keep_obsolete, gtranslator_preferences_dialog_changed);
 
 	/*
 	 * The fourth page with the popup menu & the dot_char.
 	 */
-	use_dot_char=attach_toggle_with_label(fourth_page, 0,
+	use_dot_char=gtranslator_utils_attach_toggle_with_label(fourth_page, 0,
 		_("Use free space indicating special character"),
 		wants.dot_char, gtranslator_preferences_dialog_changed);
-	enable_popup_menu=attach_toggle_with_label(fourth_page, 2,
+	enable_popup_menu=gtranslator_utils_attach_toggle_with_label(fourth_page, 2,
 		_("Enable the popup menu"),
 		wants.popup_menu, gtranslator_preferences_dialog_changed);	
-	use_update_function=attach_toggle_with_label(fourth_page, 3,
+	use_update_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 3,
 		_("Enable the update function of gtranslator (you need the sources for this)"),
 		wants.update_function, gtranslator_preferences_dialog_changed);
-	save_geometry_tb=attach_toggle_with_label(fourth_page, 4,
+	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
 		_("Save geometry on exit & restore it on startup"),
 		wants.save_geometry, gtranslator_preferences_dialog_changed);
-	no_uzis=attach_toggle_with_label(fourth_page, 5,
+	no_uzis=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
 		_("Don't show the update information dialogs"),
 		wants.uzi_dialogs, gtranslator_preferences_dialog_changed);
 	/*
 	 * The fifth page with the Recent files options.
 	 */
-	check_recent_files=attach_toggle_with_label(fifth_page, 0,
+	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 0,
 		_("Check every recent file before listing it up"),
 		wants.check_recent_file, gtranslator_preferences_dialog_changed);
-	instant_spell_checking=attach_toggle_with_label(fifth_page, 1,
+	instant_spell_checking=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
 		_("Instant spell checking"),
 		wants.instant_spell_check, gtranslator_preferences_dialog_changed);
-	use_own_dict=attach_toggle_with_label(fifth_page, 2,
+	use_own_dict=gtranslator_utils_attach_toggle_with_label(fifth_page, 2,
 		_("Use special dictionary"),
 		wants.use_own_dict, gtranslator_preferences_dialog_changed);
 	dictionary_file=
-	    attach_entry_with_label(fifth_page, 3, _("Dictionary to use:"),
+	    gtranslator_utils_attach_entry_with_label(fifth_page, 3, _("Dictionary to use:"),
 				    wants.dictionary, gtranslator_preferences_dialog_changed);
 	
 	/*
@@ -352,7 +210,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(scheme_file),
 		SCHEMESDIR);
 
-	own_specs=attach_toggle_with_label(sixth_page, 1,
+	own_specs=gtranslator_utils_attach_toggle_with_label(sixth_page, 1,
 		_("Apply special font/colors"),
 		wants.use_own_specs, gtranslator_preferences_dialog_changed);
 	
@@ -421,7 +279,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	gtk_signal_connect(GTK_OBJECT(prefs), "help",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_help), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "close",
-			   GTK_SIGNAL_FUNC(gtranslator_lists_free), NULL);
+			   GTK_SIGNAL_FUNC(gtranslator_utils_language_lists_free), NULL);
 	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
 }
 
@@ -540,23 +398,6 @@ static void gtranslator_preferences_dialog_help(GtkWidget  * widget, gpointer us
 With the Preferences box you can define some variables\n\
 with which you can make gtranslator make more work\n\
 like YOU want it to work!"));
-}
-
-gboolean gtranslator_lists_free(GtkWidget  * widget, gpointer useless)
-{
-	list_ref--;
-	/*
-	 * If something needs them, leave.
-	 */
-	if (list_ref != 0) return FALSE;
-#define free_a_list(list) g_list_free(list); list=NULL;
-	free_a_list(languages_list);
-	free_a_list(lcodes_list);
-	free_a_list(group_emails_list);
-	free_a_list(encodings_list);
-	free_a_list(bits_list);
-#undef free_a_list
-	return FALSE;
 }
 
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)
