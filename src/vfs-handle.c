@@ -50,13 +50,9 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	 */
 	if(gnome_vfs_uri_is_local(file))
 	{
-		localfilename=gnome_vfs_uri_to_string(file, 
-			GNOME_VFS_URI_HIDE_USER_NAME |
-			GNOME_VFS_URI_HIDE_PASSWORD  |
-			GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD |
-			GNOME_VFS_URI_HIDE_HOST_NAME |
-			GNOME_VFS_URI_HIDE_HOST_PORT |
-			GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER);
+		localfilename=g_strdup_printf("/%s",
+			gnome_vfs_uri_to_string(file, 
+				GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD));
 	}
 	else
 	{
