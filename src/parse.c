@@ -348,10 +348,11 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				/*
 				 * Now we've got a new msgid_plural tag.
 				 */
-				comment_ok=TRUE;
 				if(line[15]!='\0')
 				{
 					append_line(&msg->msgid_plural, &line[13], FALSE);
+
+					g_message("msgid_plural: `%s'", (&msg->msgid_plural));
 				}
 			}
 			/*
@@ -371,11 +372,7 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				/*
 				 * Now we've got a msgstr item in here.
 				 */
-				if(!msgid_ok)
-				{
-					g_message("Shall parse: %s in here", line);
-					msgid_ok=TRUE;
-				}
+				g_message("msgstr_plural `%s'", line);
 			}
 			else
 			/*

@@ -147,6 +147,9 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		if_key_is("Content-Transfer-Encoding")
 		    ph->encoding = g_strdup(pair[1]);
 		else
+		if_key_is("Plural-Forms")
+		    ph->plural_forms = g_strdup(pair[1]); 
+		else
 		if_key_is("X-Generator")
 		    ph->generator = g_strdup(pair[1]);
 
@@ -163,7 +166,7 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 	{
 		ph->comment=g_strdup("# ");
 	}
-	
+
 	if (ph->prj_name)
 		return ph;
 	else
@@ -275,6 +278,7 @@ void gtranslator_header_free(GtrHeader * h)
 	GTR_FREE(h->mime_version);
 	GTR_FREE(h->charset);
 	GTR_FREE(h->encoding);
+	GTR_FREE(h->plural_forms);
 
 	if(h->generator)
 	{
@@ -833,6 +837,7 @@ GtrHeader *gtranslator_header_create_from_prefs(void)
 	h->prj_name=g_strdup("PACKAGE");
 	h->prj_version=g_strdup("VERSION");
 	h->report_message_bugs_to=g_strdup("");
+	h->plural_forms=g_strdup("");
 	
 	/* 
 	 * Fill h->po_date with current time 

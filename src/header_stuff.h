@@ -42,6 +42,8 @@ typedef struct {
 	gchar *charset;
 	gchar *encoding;
 
+	gchar *plural_forms;
+
 	/*
 	 * Absolutely depreciated by me, but as it's going on my
 	 *  nerves, I'm adding this to our supported tags.
