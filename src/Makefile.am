@@ -82,8 +82,7 @@ gtranslator_SOURCES = \
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \
-	$(GTRANSLATOR_LIBS) \
-	$(GAL_LIBS)
+	$(GTRANSLATOR_LIBS)
 
 CLEANFILES = defines.include
 
