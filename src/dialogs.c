@@ -53,7 +53,6 @@ static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 void open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 	gpointer entrydata);
 
-
 void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
 {
 	if (wmname != NULL)

@@ -29,8 +29,11 @@
 #include "open-differently.h"
 #include "color-schemes.h"
 #include "htmlizer.h"
+#include "sighandling.h"
 
 #include <gtk/gtkmain.h>
+
+#include <signal.h>
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-init.h>
@@ -95,6 +98,16 @@ int main(int argc, char *argv[])
 	
 	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain(PACKAGE);
+
+	/*
+	 * Set up the signal handler.
+	 */
+	signal(SIGSEGV, gtranslator_signal_handler);
+	signal(SIGILL, gtranslator_signal_handler);
+	signal(SIGABRT, gtranslator_signal_handler);
+	signal(SIGINT, gtranslator_signal_handler);
+	signal(SIGHUP, gtranslator_signal_handler);
+	signal(SIGQUIT, gtranslator_signal_handler);
 
 	/*
 	 * Initialize the GConf library conditionally.

@@ -56,6 +56,7 @@ gtranslator_SOURCES = \
 	prefs.c prefs_init.c prefs.h \
 	session.c session.h \
 	sidebar.c sidebar.h \
+	sighandling.c sighandling.h \
 	stylistics.c stylistics.h \
 	syntax.c syntax.h \
 	update.c \
