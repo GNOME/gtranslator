@@ -190,24 +190,25 @@
       <para>
         The <interface>Main window</interface> is divided into three main area:
           <itemizedlist>
-		              <listitem>
-		                <para>
-		                  <interface>The menubar</interface> &mdash; allows you
-		                  the acces the application's menus.
-		                </para>
-		              </listitem>
-		              <listitem>
-		                <para>
-		                <interface>The toolbars</interface> &mdash; allow you quick access
-		                to often used file managment, navigation and compile functions.
-		                </para>
-		              </listitem>
-		              <listitem>
-		                <para>
-		                <interface>The workspace</interface> &mdash; allows you to
-		                visualize and edit the messages contained in the po file.
-		                </para>
-		              </listitem>
+              <listitem>
+                <para>
+                  <interface>The menubar</interface> &mdash; allows you
+                  the acces the application's menus.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                <interface>The toolbars</interface> &mdash; allow you quick 
+                access to often used file managment, navigation and 
+                compile functions.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                <interface>The workspace</interface> &mdash; allows you to
+                visualize and edit the messages contained in the po file.
+                </para>
+              </listitem>
           </itemizedlist>
        </para>
 
@@ -223,14 +224,51 @@
       <sect3 id="loading">
 	<title>Loading a po file</title>
 	<para>
-        How to load a po file.
+        To load a po file, use the <menuchoice>
+	    <guisubmenu>File</guisubmenu>
+	    <guimenuitem>Open...</guimenuitem>
+	  </menuchoice> menuitem.
+            Clicking on <guimenuitem>Open...</guimenuitem> will
+	    bring up the <interface>gtranslator -- open po file</interface>
+            dialog box. Browse through your computer's filesystem, choose the
+            po file you whish to open and click <guibutton>OK</guibutton>.
         </para>
         <para>
-        The Gnome-VFS way
+        <application>Gtranslator</application> offers you the possibility to 
+        open po files using the Gnome-VFS subsystem. This means that you may 
+        use URIs to access files on a remote system. 
+        Currently supported URIs are:
+        <itemizedlist>
+            <listitem>
+	      <para>the file:// URI, as in 
+              <screen>file://localhost/path_to_file</screen> 
+              </para>
+            </listitem>
+            <listitem>
+              <para>the http:// URI as in 
+              <screen>http://www.gtranslator.org/gtranslator/gtranslator.pot</screen>
+              </para>
+            </listitem>
+            <listitem>
+              <para>the ftp:// URI as in 
+              <screen>ftp://ftp.somewhere.org/pub/tr.po</screen>
+              </para>
+            </listitem>
+           </itemizedlist>
+
+	<tip>
+	  <title>Opening comressed po files</title>
+	  <para>
+            <application>Gtranslator</application> can open compressed po 
+            files. Click on the <guibutton>Open</guibutton> icon. This brings 
+            up the <interface>Open po file</interface> dialog box. Choose 
+            a compressed po file (can be identified by its .gz extension). 
+            Click on <guibutton>OK</guibutton>. If <command>bzip2</command> 
+           is installed on your system, you may open bzip2 compressed files.
+          </para>
+	</tip>
         </para>
-        <para>
-        Tip on compressed po  files
-        </para>
+
       </sect3>
 
       <sect3 id="editing">
