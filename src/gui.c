@@ -152,31 +152,14 @@ void gtranslator_create_main_window(void)
 	 * Create all the panes we're using later on.
 	 */
 	content_pane=gtk_vpaned_new();
-	table_pane=gtk_hpaned_new();
 	
-
 	if(GtrPreferences.show_messages_table)
 	{
 		gtranslator_messages_table=gtranslator_messages_table_new();
-	}
-	else
-	{
-		/*
-		 * Foo, foo, woo, foo -- really not the right way to do this.
-		 */
-		gtranslator_messages_table=gtk_label_new("");
-	}
-
-	if(GtrPreferences.show_messages_table)
-	{
 		table_pane_position=gtranslator_config_get_int(
 			"interface/table_pane_position");
-
+		table_pane=gtk_hpaned_new();
 		gtk_paned_set_position(GTK_PANED(table_pane), table_pane_position);
-	}
-	else
-	{
-		gtk_paned_set_position(GTK_PANED(table_pane), -1);
 	}
 	
 	extra_content_view=g_new0(GtrExtraContentArea, 1);
@@ -228,13 +211,19 @@ void gtranslator_create_main_window(void)
 			TRUE, FALSE);
 	gtk_paned_pack2(GTK_PANED(content_pane), vertical_box, FALSE, TRUE);
 
-	messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), gtranslator_messages_table);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_paned_pack1(GTK_PANED(table_pane), messages_table_scrolled_window, FALSE, TRUE);
-	gtk_paned_pack2(GTK_PANED(table_pane), content_pane, FALSE, TRUE);
+	if(GtrPreferences.show_messages_table)
+	{
+		messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+		gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), gtranslator_messages_table);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+		
+		gtk_paned_pack1(GTK_PANED(table_pane), messages_table_scrolled_window, FALSE, TRUE);
+		gtk_paned_pack2(GTK_PANED(table_pane), content_pane, FALSE, TRUE);
 	
-	gnome_app_set_contents(GNOME_APP(gtranslator_application), table_pane);
+		gnome_app_set_contents(GNOME_APP(gtranslator_application), table_pane);
+	} else {
+		gnome_app_set_contents(GNOME_APP(gtranslator_application), content_pane);
+	}
 
 	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
@@ -377,15 +366,18 @@ void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 
 	gtranslator_file_close(NULL, NULL);
 
-	/*
-	 * Get the EPaned's position offset.
-	 */
-	table_pane_position=gtk_paned_get_position(GTK_PANED(table_pane));
+	if(GtrPreferences.show_messages_table)
+	{
+		/*
+		 * Get the EPaned's position offset.
+		 */
+		table_pane_position=gtk_paned_get_position(GTK_PANED(table_pane));
+		/*
+		 * Store the pane position in the preferences.
+		 */
+		gtranslator_config_set_int("interface/table_pane_position", table_pane_position);
+	}
 	
-	/*
-	 * Store the pane position in the preferences.
-	 */
-	gtranslator_config_set_int("interface/table_pane_position", table_pane_position);
 	gtranslator_utils_save_geometry();
 
 	/*

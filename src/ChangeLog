@@ -12,6 +12,12 @@
 	* parse.c (gtranslator_file_close): Fix freeze/crash when autosave
 	is disabled (#131179).
 
+2004-01-11  Dan Damian  <dand@gnome.ro>
+  
+ 	* gui.c (gtranslator_create_main_window): Completely hide the
+ 	panel when messages table is hidden from preferences (also fixes
+ 	a failed assert).
+ 
 2004-01-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* languages.c: Update mailing-list info for norwegian.
