@@ -179,7 +179,6 @@ void goto_dlg(GtkWidget * widget, gpointer useless)
 	gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(spin),
 					  GTK_UPDATE_IF_VALID);
 	gnome_dialog_editable_enters(GNOME_DIALOG(dialog), GTK_EDITABLE(spin));
-	gtk_window_set_focus(GTK_WINDOW(dialog), spin);
 	
 	/*
 	 * Pack the label & the Gnome entry into the dialog.
@@ -191,6 +190,7 @@ void goto_dlg(GtkWidget * widget, gpointer useless)
 	
 	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
 			   GTK_SIGNAL_FUNC(goto_dlg_clicked), adjustment);
+	gtk_window_set_focus(GTK_WINDOW(dialog), spin);
 	show_nice_dialog(&dialog, "gtranslator -- goto");
 }
 
@@ -289,6 +289,7 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(find_dlg_clicked), findy);
 	gtk_signal_connect(GTK_OBJECT(match_case), "toggled",
 			   GTK_SIGNAL_FUNC(match_case_toggled), NULL);
+	gtk_window_set_focus(GTK_WINDOW(dialog), gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 	show_nice_dialog(&dialog, "gtranslator -- find");
 }
 
