@@ -550,7 +550,7 @@ void text_has_got_changed(GtkWidget *widget,gpointer useless)
 static gint 
 gtranslator_quit(GtkWidget *widget, GdkEventAny* e, gpointer useless)
 {
-	// If file was changed, but user pressed Cancel, don't quit
+	/* If file was changed, but user pressed Cancel, don't quit */
 	if (!ask_to_save_file()) return TRUE;
 	// Close the file
 	close_file(NULL,NULL);
@@ -787,7 +787,7 @@ void search_do(GtkWidget *widget,gpointer lost)
 			return;
 		}
 	}
-	// It's not nice, just copy from above here and change were needed
+	/* It's not nice, just copy from above here and change were needed */
 	for (msg=messages;msg!=cur_msg->next;msg=msg->next)
 	{
 		pos=strstr(msgstr_from(msg),search_for);

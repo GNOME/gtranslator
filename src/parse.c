@@ -404,7 +404,7 @@ void free_messages(void)
 void close_file(GtkWidget *widget, gpointer useless)
 {
 	if (!file_opened) return;
-	// If user doesn't know what to do with changed file, return
+	/* If user doesn't know what to do with changed file, return */
 	if (!ask_to_save_file) return;
 	free_messages();
 	free_header(ph);
@@ -436,7 +436,7 @@ void revert_file(GtkWidget *widget, gpointer useless)
 		if (reply!=GNOME_YES) return;
 	}
 	save_this=g_strdup(i_love_this_file);
-	// Let close_file know it doesn't matter if file was changed
+	/* Let close_file know it doesn't matter if file was changed */
 	file_changed=FALSE;
 	close_file(NULL,NULL);
 	parse(save_this);

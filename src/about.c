@@ -24,14 +24,7 @@ void about_box(GtkWidget *widget,gpointer useless)
 	about=gnome_about_new("gtranslator", VERSION,
 		"(C) 1999-2000",
 		authors,
-		/**
-		* For you (X)EMacs-lovers ...
-		**/
-		#ifdef EMACS_LOVER
-		_("gtranslator is a Gnome Application for translating .po-files slightly different than in (X)Emacs."),
-		#else
-		_("gtranslator is a Gnome Application for translating .po-files more comfortable than in (X)Emacs."),
-		#endif // EMACS_LOVER
+		_("gtranslator will be a GNOME framework for translating and managing the translation of the important po-files and othe i18/19/20..n issues."),
 		NULL);
 	show_nice_dialog(&about,"gtranslator -- about");
 }
