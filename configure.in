@@ -90,10 +90,12 @@ DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABL
 AC_SUBST(DEPRECATED_FLAGS)
 
 dnl -------------------------------------------------------------------
-dnl Whether we use the depricated gtk+ functions
+dnl Whether we use the deprecated gtk+ functions
 dnl -------------------------------------------------------------------
-AC_ARG_ENABLE(gtk_enable_broken, [  --enable-gtk-broken     use depricated gtk functions ],,gtk_enable_broken=yes)
-AC_DEFINE(GTK_ENABLE_BROKEN)
+AC_ARG_ENABLE(gtk_enable_broken, [  --enable-gtk-broken     use deprecated gtk functions ],[
+	gtk_enable_broken=yes
+	AC_DEFINE(GTK_ENABLE_BROKEN)
+])
 
 dnl -------------------------------------------------------------------
 dnl Check for Scrollkeeper - it must be present now...
