@@ -1,6 +1,6 @@
 ## the main Makefile.am
 
-SUBDIRS = data debian help man src po
+SUBDIRS = data debian doc help man src po
 
 bin_SCRIPTS = pozilla.sh
 
