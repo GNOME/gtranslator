@@ -253,17 +253,10 @@ void gtranslator_message_show(GtrMsg *msg)
 
 void gtranslator_message_update(void)
 {
-	guint 
-		len,
-		pos;
-		
-	GtrMsg 
-		*msg = GTR_MSG(po->current->data);
-		
+	guint len;
+	GtrMsg *msg = GTR_MSG(po->current->data);
 	if (!message_changed)
 		return;
-	pos = gtk_editable_get_position( GTK_EDITABLE(trans_box) );
-	gtk_text_freeze( GTK_TEXT(trans_box) );
 	len = gtk_text_get_length(GTK_TEXT(trans_box));
 	if (len) {
 		/* Make both strings end with or without endline */
@@ -355,8 +348,6 @@ contains syntactical errors!"), msg->msgid);
 	{
 		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
 	}
-	gtk_text_thaw( GTK_TEXT(trans_box) );
-	gtk_editable_set_position( GTK_EDITABLE(trans_box), pos );
 }
 
 void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
