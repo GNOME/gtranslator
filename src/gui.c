@@ -1060,11 +1060,12 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 				 * Insert the changed text with the '·''s.
 				 */
 				gtk_editable_insert_text(
-					GTK_EDITABLE(trans_box), "·", 1, &pos);
+					GTK_EDITABLE(trans_box), _("·"), 1, &pos);
 			}
 		}
 		
 		g_free(newstr);
+
 		
 		/*
 		 * Go to the old text index.
@@ -1077,7 +1078,7 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 		else
 		{
-			if(index==gtk_text_get_length(GTK_TEXT(trans_box)))
+			if(index >= gtk_text_get_length(GTK_TEXT(trans_box)))
 			{
 				gtk_editable_set_position(
 					GTK_EDITABLE(trans_box), 
@@ -1093,6 +1094,6 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		gtk_text_thaw(GTK_TEXT(trans_box));
 		nothing_changes = FALSE;
 	}
-	
+
 	gtranslator_syntax_update_text(trans_box);
 }

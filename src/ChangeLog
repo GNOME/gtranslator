@@ -1,5 +1,14 @@
 2001-02-20  Fatih Demir	<kabalak@gtranslator.org>
 
+	* gui.c: Made a dot/special char also gettexted for solving some
+		problems on "more special" characters sets and implemented
+		 more checks for the text position.
+
+	* syntax.c: Used a macro instead tons of the g_string_append_c
+		call, makes the source better to read and put the Gtk+
+		 position routines calls into the right order, so that the
+		  syntax update now works as wished.
+
 	* about.c, find.c: Fixed only cosmetical aspects.
 
 	* vfs-handle.c: Made the routines use a GString, handling of
