@@ -86,14 +86,14 @@ gboolean backend_open(const gchar *filename)
 
 	str=e=NULL;
 
-	while(fgets(line, sizeof(line), f))
+	while(fgets(line, sizeof(line), f)!=NULL)
 	{
 		/*
 		 * Every newline should separate a "message".
 		 */
 		g_strchomp(line);
 		
-		if(!line[0] || line[0]=='\n')
+		if((!line[0] || line[0]=='\n') && str)
 		{
 			GtrMsg *msg=g_new0(GtrMsg, 1);
 
@@ -101,9 +101,8 @@ gboolean backend_open(const gchar *filename)
 			 * Construct a foo'sh message.
 			 */
 			msg->msgid=g_strdup(str);
-			msg->msgstr="";
+			msg->msgstr=g_strdup("");
 			msg->comment=gtranslator_comment_new("");
-
 			GTR_FREE(str);
 
 			/*
@@ -117,9 +116,10 @@ gboolean backend_open(const gchar *filename)
 			/*
 			 * Rescue and append all the lines till the next newline.
 			 */
-			e=str;
-			str=g_strdup_printf("%s\n%s", e, line);
+			e=g_strdup(str);
+		    	GTR_FREE(str);
 
+			str=g_strdup_printf("%s\n%s", e, line);
 			GTR_FREE(e);
 		}
 	}

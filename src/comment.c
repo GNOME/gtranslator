@@ -127,6 +127,14 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	 */
 	comment->utf8_comment=gtranslator_utf8_get_utf8_string(&comment->comment);
 	comment->pure_utf8_comment=gtranslator_utf8_get_utf8_string(&comment->pure_comment);
+
+	/*
+	 * Set the fuzzy flag at all if the comment stands for a fuzzy message.
+	 */
+	if(strstr(comment->comment, "#, fuzzy"))
+	{
+		GTR_COMMENT(comment)->type |= FUZZY_COMMENT;
+	}
 	
 	return comment;
 }

@@ -77,7 +77,7 @@ static void check_msg_status(GtrMsg * msg)
 {
 	if (msg->msgstr)
 		msg->status = GTR_MSG_STATUS_TRANSLATED;
-	if ((msg->comment) && GTR_COMMENT(msg->comment)->type==FUZZY_COMMENT)
+	if ((msg->comment) && (GTR_COMMENT(msg->comment)->type & FUZZY_COMMENT))
 		msg->status |= GTR_MSG_STATUS_FUZZY;
 }
 

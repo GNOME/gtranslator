@@ -228,14 +228,12 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 		case GTR_MSG_STATUS_TRANSLATED:
 			return _("Translated");
 			break;
-		case GTR_MSG_STATUS_FUZZY:
-			return _("Fuzzy");
-			break;
 		case GTR_MSG_STATUS_STICK:
 			return _("Sticky");
 			break;
+		case GTR_MSG_STATUS_FUZZY:
 		default:
-			return NULL;
+			return _("Fuzzy");
 		}		
 		break;
 	case COL_NUMBER:
