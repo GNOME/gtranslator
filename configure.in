@@ -3,13 +3,16 @@ dnl Process this file with autoconf to produce a configure script.
 dnl -------------------------------------------------------------------
 dnl (C) 2000-2001 Fatih Demir <kabalak@gtranslator.org>
 dnl -------------------------------------------------------------------
-AC_INIT(src/main.c)
-AM_CONFIG_HEADER(config.h)
+AC_INIT([gtranslator], [0.39], 
+	[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator])
+AC_PREREQ(2.50)
+AC_CONFIG_SRCDIR(src/main.c)
 
 dnl -------------------------------------------------------------------
 dnl Init automake and the maintainer mode macros.
 dnl -------------------------------------------------------------------
-AM_INIT_AUTOMAKE(gtranslator, 0.39)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
 dnl -------------------------------------------------------------------
@@ -60,15 +63,15 @@ if gnome-config --libs vfs 2>&1 >/dev/null ; then
 		AC_MSG_RESULT(found)			
 	else
 		AC_MSG_ERROR([
-"------------------------------------------------------------------------------"
-"Please install GnomeVFS >= 0.4.1 and try again."
-"-----------------------------------------------------------------------------"])
+------------------------------------------------------------------------------
+Please install GnomeVFS >= 0.4.1 and try again.
+-----------------------------------------------------------------------------])
 	fi
 else
 	AC_MSG_ERROR([
-"-----------------------------------------------------------------------------"	
-"Please install GnomeVFS before trying to compile gtranslator."
-"-----------------------------------------------------------------------------"])
+-----------------------------------------------------------------------------	
+Please install GnomeVFS before trying to compile gtranslator.
+-----------------------------------------------------------------------------])
 fi
 
 dnl -------------------------------------------------------------------
@@ -98,15 +101,15 @@ if gnome-config --libs gal 2>&1 >/dev/null ; then
 		dnl  old for us.
 		dnl ---------------------------------------------------
 		AC_MSG_ERROR([
-"-----------------------------------------------------------------------------"
-"Please install gal >= 0.10.99 and try configuring again."
-"-----------------------------------------------------------------------------"])
+-----------------------------------------------------------------------------
+Please install gal >= 0.10.99 and try configuring again.
+-----------------------------------------------------------------------------])
 	fi
 else
 	AC_MSG_ERROR([
-"-----------------------------------------------------------------------------"
-"Please install gal before configuring again."
-"-----------------------------------------------------------------------------"])
+-----------------------------------------------------------------------------
+Please install gal before configuring again.
+-----------------------------------------------------------------------------])
 fi
 
 GAL_CFLAGS=`gnome-config --cflags gal`
@@ -122,9 +125,9 @@ if $try_gconf; then
 	AM_PATH_GCONF(1.0,,gconf_is_present=no,gconf-gtk)
 	if test "x$gconf_is_present" = "xno" ; then
 		AC_MSG_ERROR([
-"-----------------------------------------------------------------------------"
-"No GConf >= 1.0 found! GConf is now mandatory for gtranslator..."
-"-----------------------------------------------------------------------------"])
+-----------------------------------------------------------------------------
+No GConf >= 1.0 found! GConf is now mandatory for gtranslator...
+-----------------------------------------------------------------------------])
 	fi
 fi
 
@@ -142,9 +145,9 @@ LIBS=$MY_LIBS
 
 if test "%${use_window_icon}" != "%yes" ; then
 	AC_MSG_ERROR([
-	"-----------------------------------------------------------------------------"
-	"You need at least gnome-libs 1.0.60 for compiling gtranslator. Please install it."
-	"-----------------------------------------------------------------------------"])
+-----------------------------------------------------------------------------
+You need at least gnome-libs 1.0.60 for compiling gtranslator. Please install it.
+-----------------------------------------------------------------------------])
 fi	
 
 dnl -------------------------------------------------------------------
@@ -169,7 +172,7 @@ dnl -------------------------------------------------------------------
 dnl Check for Scrollkeeper and set the corresponding conditional var if
 dnl  it could be found.
 dnl -------------------------------------------------------------------
-AC_CHECK_PROG(sc_present, scrollkeeper-config, yes, no)
+AC_CHECK_PROG(sc_present, scrollkeeper-config, found, no)
 if test "z$sc_present" = "zyes" ; then
 	AC_MSG_CHECKING([for scrollkeeper >= 0.1.4])
 	_VERSION=`scrollkeeper-config --version|sed -e 's/\.//g'`
@@ -190,8 +193,8 @@ dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(debug,
-	[  --enable-debug                Turn on debugging flags [default=no]],
-	,enable_debug=no)
+	[  --enable-debug                Turn on debugging flags [default=yes]],
+	,enable_debug=yes)
 AC_MSG_CHECKING([if a debug friendly version should be build])
 if test "x$enable_debug" = "xyes" ; then
 	CFLAGS="$CFLAGS -ggdb -Werror"
@@ -205,6 +208,18 @@ dnl Get the date for the man-page and substitute it there and anywhere.
 dnl -------------------------------------------------------------------
 MY_DATE=`date +%Y-%m-%d`
 AC_SUBST(MY_DATE)
+
+
+dnl -------------------------------------------------------------------
+dnl Check for the ultimate library and it's most ultimate function!
+dnl -------------------------------------------------------------------
+AC_CHECK_LIB(kabalak, BermudaShorts, shorts_yeah=yes, shorts_yeah=no)
+if test "%$shorts_yeah" != "%yes" ; then
+	AC_MSG_WARN([
+-----------------------------------------------------------------------------
+Aaarg, your system lacks BermudaShorts in libkabalak... ,-)
+-----------------------------------------------------------------------------])
+fi
 
 dnl -------------------------------------------------------------------
 dnl Put out the configured files.

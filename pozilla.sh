@@ -24,15 +24,6 @@ no_personal_information_message () {
 }
 
 #
-# Currently we're broken -- honor this .-)
-#
-echo "---------------------------------------------------------------"
-echo "pozilla.sh is currently broken! Please wait for an again working"
-echo " release of it quite soon..."
-echo "---------------------------------------------------------------"
-	exit 1
-
-#
 # Pozilla has got also releases :-)
 # 
 export POZILLA_RELEASE=4.5FIXME
@@ -430,6 +421,15 @@ do
 	;;
 	esac
 done	
+
+#
+# Currently we're broken -- honor this .-)
+#
+echo "---------------------------------------------------------------"
+echo "pozilla.sh is currently broken! Please wait for an again working"
+echo " release of it quite soon..."
+echo "---------------------------------------------------------------"
+	exit 1
 
 #
 # Finally, check for existance of mutt if $RUN_DRY is not defined.
