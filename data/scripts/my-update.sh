@@ -8,15 +8,14 @@
 # 
 # Now named my-update.sh to avoid name clashes.
 #
-[ $# -lt 2 ] && {
+[ $# -lt 3 ] && {
 		exit 1
 }
-#
-# Some sed games..
-#
-BASEFILE=`echo $1|sed -e 's/.*\///g'`
-BASEDIR=`echo $1|sed -e s/\\\/$BASEFILE//`
-PACKAGE=$2
+
+BASEFILE="$1"
+BASEDIR="$2"
+PACKAGE="$3"
+
 #
 # Change to the given package directory.
 #
@@ -36,7 +35,7 @@ if test -f "POTFILES.in" -a -n "POTFILES.in" ; then
 		  --add-comments --keyword=_ --keyword=N_ \
 		  --files-from=./POTFILES.in \
 		&& test ! -f $PACKAGE.po \
-		   || ( rm -f ./PACKAGE.pot \
+		   || ( rm -f ./$PACKAGE.pot \
 		&& mv $PACKAGE.po ./$PACKAGE.pot );
 	fi 
 	#
