@@ -41,6 +41,7 @@ nautilus_gtranslator_view_DEPENDENCIES = \
 	$(srcbuild)/learn.o \
 	$(srcbuild)/menus.o \
 	$(srcbuild)/message.o \
+	$(srcbuild)/messages-table.o \
 	$(srcbuild)/nautilus-string.o \
 	$(srcbuild)/open-differently.o \
 	$(srcbuild)/parse.o \
