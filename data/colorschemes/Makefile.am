@@ -8,6 +8,7 @@ schemes_DATA = \
 	arek.xml \
 	boom-boom.xml \
 	clean.xml \
+	curlymonster.xml \
 	default.xml \
 	extremely-kabalak.xml \
 	kabalak.xml \
