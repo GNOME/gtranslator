@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * semerkent is free software; you can redistribute it and/or modify it under
  *  the terms of the GNU Library General Public License as published by the
@@ -20,7 +20,6 @@
  *   close to gtranslator. This shouldn't avoid any use of semerkent from other
  *    applications/packages.
  *
- * The homepage for semerkent is: http://semerkent.sourceforge.net
  */
 
 #include "semer-csv.h"
@@ -105,10 +104,10 @@ gchar *semer_file_get_filename(SemerFile *file)
  * Calls the corresponding save function call for the given SemerFile's
  *  file(-type).
  */
-void semer_file_save(SemerFile *file)
+gboolean semer_file_save(SemerFile *file)
 {
-	g_return_if_fail(SEMER_FILE(file)!=NULL);
-	g_return_if_fail(SEMER_FILE(file)->type!=SEMER_NULL);
+	g_return_val_if_fail(SEMER_FILE(file)!=NULL, FALSE);
+	g_return_val_if_fail(SEMER_FILE(file)->type!=SEMER_NULL, FALSE);
 
 	switch(SEMER_FILE(file)->type)
 	{
@@ -133,8 +132,28 @@ void semer_file_save(SemerFile *file)
 				break;
 
 		default:
-			break;
+			return FALSE;
+				break;
 	}
+
+	return TRUE;
+}
+
+
+/*
+ * Another util call which saves you some typing work... just handles 2-3 calls
+ *  at once.
+ */
+gboolean semer_file_save_as_with_type(SemerFile *file, const gchar *filename,
+	SemerFileType type)
+{
+	g_return_val_if_fail(filename!=NULL, FALSE);
+	g_return_val_if_fail(SEMER_FILE(file)!=NULL, FALSE);
+
+	semer_file_set_filename(SEMER_FILE(file), filename);
+	SEMER_FILE(file)->type=type;
+	
+	return (semer_file_save(SEMER_FILE(file)));
 }
 
 /*

@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * semerkent is free software; you can redistribute it and/or modify it under
  *  the terms of the GNU Library General Public License as published by the
@@ -20,7 +20,6 @@
  *   close to gtranslator. This shouldn't avoid any use of semerkent from other
  *    applications/packages.
  *
- * The homepage for semerkent is: http://semerkent.sourceforge.net
  */
 
 #include "semer-entry.h"

@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
  *
  * semerkent is free software; you can redistribute it and/or modify it under
  *  the terms of the GNU Library General Public License as published by the
@@ -20,7 +20,6 @@
  *   close to gtranslator. This shouldn't avoid any use of semerkent from other
  *    applications/packages.
  *
- * The homepage for semerkent is: http://semerkent.sourceforge.net
  */
 
 #ifndef SEMER_FILE_H
@@ -88,7 +87,14 @@ gchar *semer_file_get_filename(SemerFile *file);
  * Encapsulates the write calls -- calls the right save function for the
  *  given SemerFile's file(-type).
  */
-void semer_file_save(SemerFile *file);
+gboolean semer_file_save(SemerFile *file);
+
+/*
+ * Sets up a new filename for the SemerFile & writes it below the new given
+ *  file type - again just an util stuff...
+ */
+gboolean semer_file_save_as_with_type(SemerFile *file, const gchar *filename,
+	SemerFileType type);
 
 /*
  * Return the file types -- the SemerFile and the gchar based calls.
