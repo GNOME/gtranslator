@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.19\n"
-"POT-Creation-Date: 2000-07-16 17:05+0200\n"
+"POT-Creation-Date: 2000-07-25 18:35+0200\n"
 "PO-Revision-Date: 2000-07-16 04:35+02:00\n"
 "Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -153,19 +153,19 @@ msgstr "Anfrage"
 msgid "gtranslator -- query the message db"
 msgstr "gtranslator -- in der Meldungs-Datenbank anfragen"
 
-#: src/gtr_dialogs.c:458
+#: src/gtr_dialogs.c:457
 #, c-format
 msgid "Result: `%s'"
 msgstr "Ergebnis: %s"
 
-#: src/gtr_dialogs.c:475
+#: src/gtr_dialogs.c:474
 msgid "Insert"
 msgstr "Einfügen"
 
 #. *
 #. * Set the window properties.
 #. *
-#: src/gtr_dialogs.c:479
+#: src/gtr_dialogs.c:478
 msgid "gtranslator -- result for your query"
 msgstr "gtranslator -- Ergebnis der Anfrage"
 
@@ -173,19 +173,23 @@ msgstr "gtranslator -- Ergebnis der Anfrage"
 msgid "Error while applying the header!"
 msgstr "Fehler beim Einfügen des Kopfes!"
 
-#: src/header_stuff.c:66
+#: src/header_stuff.c:49
+msgid "Header has been pased successfully."
+msgstr "Kofp wurde erfolgreich geparst."
+
+#: src/header_stuff.c:68
 msgid "The header doesn't seem to be parsed rightly."
 msgstr "Der Kopf scheint nicht korrekt geparst zu sein."
 
-#: src/header_stuff.c:68
+#: src/header_stuff.c:70
 msgid "Project name:"
 msgstr "Projektname:"
 
-#: src/header_stuff.c:69
+#: src/header_stuff.c:71
 msgid "Project version:"
 msgstr "Projektversion:"
 
-#: src/header_stuff.c:70
+#: src/header_stuff.c:72
 msgid "Use my personal options to fill out the rest of the header."
 msgstr ""
 "Verwende meine persönlichen Optionen um den Rest des Kopfes auszufüllen"
@@ -193,7 +197,7 @@ msgstr ""
 #. *
 #. * Set the window-specs.
 #. *
-#: src/header_stuff.c:79
+#: src/header_stuff.c:81
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- Kopf bearbeiten"
 
@@ -278,11 +282,11 @@ msgstr "FIXME"
 
 #: src/gui.c:330
 msgid "Stick"
-msgstr ""
+msgstr "Fest"
 
 #: src/gui.c:332
 msgid "Stick this message"
-msgstr ""
+msgstr "Meldung mit festem Text"
 
 #: src/gui.c:342
 msgid "_Add the current message"
@@ -317,8 +321,8 @@ msgid "_Messages"
 msgstr "_Meldungen"
 
 #: src/gui.c:399 src/gui.c:402
-msgid "Message _status"
-msgstr "Meldunds-Status"
+msgid "Message s_tatus"
+msgstr "Meldungs-Status"
 
 #: src/gui.c:406 src/gui.c:409
 msgid "Message _db"
@@ -625,44 +629,44 @@ msgstr "wallonisch"
 msgid "Welsh"
 msgstr "walisisch"
 
-#: src/main.c:31
+#: src/main.c:35
 msgid "Sets the minimum match for query"
 msgstr "Setze die minimale Übereinstimmung für eine Suche"
 
-#: src/main.c:35
+#: src/main.c:39
 msgid "Po-file to open at startup"
 msgstr "po-Datei, die beim Start geöffnet wird"
 
-#: src/main.c:39
+#: src/main.c:43
 msgid "Specifies the main-window geometry"
 msgstr "Legt die Geometrie des Hauptfensters fest"
 
-#: src/main.c:43
+#: src/main.c:47
 msgid "The messages db to use"
 msgstr "Die Meldungs-Datenbank, die verwendet wird"
 
-#: src/main.c:47
+#: src/main.c:51
 msgid "Query the messages db & exit"
 msgstr "Meldungs-Datenbank anfragen und beenden"
 
 #. *
 #. * Simply print it out.
 #. *
-#: src/main.c:112
+#: src/main.c:119
 #, c-format
 msgid "Getting results for query: `%s' ...\n"
 msgstr "Ergebnisse der Suche: %s...\n"
 
-#: src/main.c:117
+#: src/main.c:124
 #, c-format
-msgid "Result                   :  %s."
+msgid "Result                   :  %s"
 msgstr "Ergebnis:           :  %s"
 
-#: src/main.c:119
+#: src/main.c:126
 msgid "End of query.\n"
 msgstr "Ende der Anfrage\n"
 
-#: src/main.c:179
+#: src/main.c:186
 #, c-format
 msgid "The geometry string \"%s\" coulnd't be parsed!"
 msgstr "der Geometrie-String \"%s\" kann nicht geparst werden."
@@ -670,12 +674,12 @@ msgstr "der Geometrie-String \"%s\" kann nicht geparst werden."
 #. *
 #. * If the file isn't openable give a warning
 #. *
-#: src/main.c:198
+#: src/main.c:205
 #, c-format
 msgid "The file \"%s\" doesn't exist or isn't readable!"
 msgstr "Die Datei \"%s\" existiert nicht oder ist nicht lesbar."
 
-#: src/main.c:199
+#: src/main.c:206
 msgid "Skipping it."
 msgstr "Bereche es ab."
 
@@ -707,14 +711,10 @@ msgstr "Die Meldungs-Datenbank %s ist noch nicht initialisiert!\n"
 msgid "Got no message entry!\n"
 msgstr "Keine verwertbare Meldung vorhanden!\n"
 
-#: src/msg_db.c:136
-msgid "New message entry has wrong/non-logical length.\n"
-msgstr "Neuer Mendungs-Eintrag hat falsche/unlogische Länge.\n"
-
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:175
+#: src/msg_db.c:167
 #, c-format
 msgid "The message db `%s' seems not to be initted!\n"
 msgstr "Die Meldungs-Datenbank %s scheint nicht initialisiert zu sein!\n"
@@ -722,7 +722,7 @@ msgstr "Die Meldungs-Datenbank %s scheint nicht initialisiert zu sein!\n"
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:179
+#: src/msg_db.c:171
 msgid "Not available"
 msgstr "Nicht verfügbar"
 
@@ -730,22 +730,22 @@ msgstr "Nicht verfügbar"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:187
+#: src/msg_db.c:179
 msgid "No messages list ( msg_list ) available for acting on it!\n"
 msgstr "Keine Meldungsliste ( msg_list ) für Aktionen verfügbar!\n"
 
-#: src/msg_db.c:225
+#: src/msg_db.c:217
 msgid "No entry found in the messages db "
 msgstr "Kein Eintrag in der Meldungs-Datenbank gefunden"
 
-#: src/msg_db.c:236
+#: src/msg_db.c:228
 msgid "The messages db isn't inited."
 msgstr "Die Meldungs-Datenbank ist nicht initialisiert."
 
 #. *
 #. * Gives a warning message.
 #. *
-#: src/msg_db.c:265
+#: src/msg_db.c:257
 msgid "Trying to set an irregular challange length!"
 msgstr ""
 
@@ -760,6 +760,9 @@ msgid ""
 "The file stream is lost!\n"
 "%s"
 msgstr ""
+"\n"
+"Der Dateiverlauf ist verloren!\n"
+"%s"
 
 #: src/parse.c:55
 #, c-format
@@ -777,20 +780,20 @@ msgstr "Aktuelle Datei: \"%s\"."
 #. *
 #. * Show an updated status
 #. *
-#: src/parse.c:208
+#: src/parse.c:201
 #, c-format
 msgid "Finished reading \"%s\", %i lines."
 msgstr "Lesen von \"%s\" beendet, %i Zeilen."
 
-#: src/parse.c:225
+#: src/parse.c:218
 msgid "Parsing has been successfull."
 msgstr "Parsen war erfolgreich"
 
-#: src/parse.c:296
+#: src/parse.c:289
 msgid "You've reached the first message"
 msgstr "Sie haben die erste Meldung erreicht"
 
-#: src/parse.c:333
+#: src/parse.c:326
 msgid "You've reached the last message."
 msgstr "Sie haben die letzte Maldung erreicht"
 
@@ -867,11 +870,19 @@ msgstr "Unveränderte .po-Dateien nicht speichern"
 msgid "Use the messages db"
 msgstr "Nutze die Meldungsdatenbank"
 
-#: src/find.c:22
+#: src/prefs.c:406
+msgid "Can't store filename!"
+msgstr "Kann Dateiname nicht speichern!"
+
+#: src/prefs.c:434
+msgid "Couldn't recall the file's name."
+msgstr "Kann den Namen der Datei nicht wieder aufrufen."
+
+#: src/find.c:32
 msgid "Nothing appropriate found!"
 msgstr "Nichts passendes gefunden!"
 
-#: src/find.c:38
+#: src/find.c:54
 msgid "No query, no fun."
 msgstr "Keine Anfrage, kein Spass."
 
