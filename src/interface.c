@@ -1,15 +1,15 @@
 /**
- * Fatih Demir [ kabalak@gmx.net ]
- *
- * (C) 2000 Published under GNU GPL V 2.0+
- *
- * The interface file , totally catastrophed by me ...
- *	but it does only create the main app ..
- * 
- * And reformatted ; so it should be much better to read it
- *
- * -- the source 
- **/
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* (C) 2000 Published under GNU GPL V 2.0+
+*
+* The interface file , totally catastrophed by me ...
+*	but it does only create the main app ..
+* 
+* And reformatted ; so it should be much better to read it
+*
+* -- the source 
+**/
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
@@ -26,14 +26,14 @@
 #include "interface.h"
 
 /**
- * The Gnome-help structure
+* The Gnome-help structure
 **/
 static GnomeHelpMenuEntry help_me = { "gtranslator", "index.html" };
 
 void call_help_viewer(GtkWidget *widget,gpointer useless)
 {
 	/**
-	 * Calls ( hopefully ) the Gnome Helpbrowser
+	* Calls ( hopefully ) the Gnome Helpbrowser
 	**/
 	gnome_help_pbox_goto(NULL,0,&help_me);
 }
@@ -177,8 +177,8 @@ create_app1 (void)
                                   (GtkDestroyNotify) gtk_widget_unref);
         gtk_widget_show (toolbar1);
 	/**
-	 * Create the search bar
-	 **/
+	* Create the search bar
+	**/
         search_bar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
         gtk_widget_show (search_bar);
         gnome_app_add_toolbar (GNOME_APP (app1), GTK_TOOLBAR (toolbar1), "toolbar1",
@@ -188,8 +188,8 @@ create_app1 (void)
         gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar1), 16);
         gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar1), GTK_RELIEF_NONE);
 	/**
-	 * Integrate the search_bar
-	 **/ 
+	* Integrate the search_bar
+	**/ 
 	gnome_app_add_toolbar (GNOME_APP (app1), GTK_TOOLBAR(search_bar), "search_bar",
 				GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 				GNOME_DOCK_TOP, 2, 0, 0);
@@ -198,8 +198,8 @@ create_app1 (void)
 	gtk_toolbar_set_space_style (GTK_TOOLBAR(search_bar), GTK_TOOLBAR_SPACE_LINE);
 	gtk_toolbar_set_button_relief (GTK_TOOLBAR(search_bar), GTK_RELIEF_NONE);
 	/**
-	 * Now the "new" icons ...
-      	 **/
+	* Now the "new" icons ...
+      	**/
 	tmp_toolbar_icon = gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_SEARCH);
 	search_button = gtk_toolbar_append_element (GTK_TOOLBAR(search_bar),
 				GTK_TOOLBAR_CHILD_BUTTON,
@@ -229,8 +229,8 @@ create_app1 (void)
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
 				/**
-				 * Find in the personal catalogue
-				 **/
+				* Find in the personal catalogue
+				**/
 				_("F/Cat."),
 				_("Find in the personal catalog"),NULL,
 				tmp_toolbar_icon, NULL, NULL);
@@ -240,19 +240,19 @@ create_app1 (void)
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
 				/**
-				 * Find in the .po-file
-				 **/
+				* Find in the .po-file
+				**/
 				_("F/Po."),
 				_("Find in the po file "), NULL,
 				tmp_toolbar_icon , NULL, NULL);
 	gtk_widget_show(po_button);
 	/**
-	 * Add a spacer element ..
-	 **/
+	* Add a spacer element ..
+	**/
 	gtk_toolbar_append_space(GTK_TOOLBAR(search_bar));
 	/**
-	 * Now the old ones ( from GLADE-times .. ) :
-	 **/
+	* Now the old ones ( from GLADE-times .. ) :
+	**/
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_CONVERT);
 	compile_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
                                       GTK_TOOLBAR_CHILD_BUTTON,
@@ -372,8 +372,8 @@ create_app1 (void)
 	gnome_app_set_statusbar (GNOME_APP (app1), appbar1);
 
 	/**
-	 * The callbacks list
-	 **/
+	* The callbacks list
+	**/
 	gtk_signal_connect(GTK_OBJECT(app1),"delete-event",
 	GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
 	gtk_signal_connect(GTK_OBJECT(exit_button),"clicked",

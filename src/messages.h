@@ -1,24 +1,26 @@
 /**
- * Fatih Demir [ kabalak@gmx.net ]
- * 
- * (C) 2000 Published under GNU GPL V 2.0+
- *
- * The messages-general stuff will be stored 
- * here .
- **/
+* Fatih Demir [ kabalak@gmx.net ]
+* 
+* (C) 2000 Published under GNU GPL V 2.0+
+*
+* The messages-general stuff will be stored 
+* here .
+*
+* -- messages are@home->*this;
+**/
 
 /**
- * Check if glib.h is included and include it 
- *  if it isn't included yet ( you never know .. ) 
- **/
+* Check if glib.h is included and include it 
+*  if it isn't included yet ( you never know .. ) 
+**/
 #ifndef __G_LIB_H__
 	#include <glib.h>
 #endif // __G_LIB_H__
 
 /**
- * The structure with general 
- *  informations ...
- **/
+* The structure with general 
+*  informations ...
+**/
 struct po_file 
 {
 	gchar *po_filename;
@@ -27,9 +29,9 @@ struct po_file
 };
 
 /**
- * Every message should be filled
- *  in here .
- **/
+* Every message should be filled
+*  in here .
+**/
 struct message
 {
 	struct po_file *po;
@@ -40,32 +42,32 @@ struct message
 };
 
 /**
- * The used message structure pointer 
- **/
+* The used message structure pointer 
+**/
 struct message *msg;
 
 /**
- * The typedef for the message stati
- **/
+* The typedef for the message stati
+**/
 typedef enum _gtranslator_msg_status gtranslator_msg_status;
 
 /**
- * The different stati of the translatable
- *  messages .
- **/
+* The different stati of the translatable
+*  messages .
+**/
 enum _gtranslator_msg_status 
 {
 	GTRANSLATOR_MSG_STATUS_UNTRANSLATED,
 	GTRANSLATOR_MSG_STATUS_TRANSLATED,
 	GTRANSLATOR_MSG_STATUS_UNKNOWN,
 	/**
- 	 * If the message shouldn't be translated
- 	 *  ( -> Web-adresses/trade mark names )
-	 **/
+ 	* If the message shouldn't be translated
+ 	*  ( -> Web-adresses/trade mark names )
+	**/
 	GTRANSLATOR_MSG_STATUS_STICK,
 	/**
-	 * If the entry should be translated as
-	 *  fast as possible .
-	 **/
+	* If the entry should be translated as
+	*  fast as possible .
+	**/
 	GTRANSLATOR_MSG_STATUS_FIXME
 };

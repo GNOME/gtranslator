@@ -1,55 +1,57 @@
 /**
- * Fatih Demir [ kabalak@gmx.net ]
- *
- * (C) 2000 Published under GNU GPL V 2.0+
- *
- * Here will be the db-type stuff. 
- * I'm thinking of a pure gzipped
- * text file as msg[id][str]-base
- **/
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* (C) 2000 Published under GNU GPL V 2.0+
+*
+* Here will be the db-type stuff. 
+* I'm thinking of a pure gzipped
+* text file as msg[id][str]-base
+*
+* -- the central for the stuff-*
+**/
 
 #include "interface.h"
 
 /**
- * The default msg_db location .
- **/
+* The default msg_db location .
+**/
 const gchar *msg_db=MSG_DB_DIR "msg.db";
 
 /**
- * Defines if the msg_db is opened 
- **/
+* Defines if the msg_db is opened 
+**/
 gboolean msg_db_inited;
 
 /**
- * Init the msg-db ( open & 
- * check the file )
- **/
+* Init the msg-db ( open & 
+* check the file )
+**/
 int init_msg_db();
 
 /**
- * Close the msg-db ( file )
- * & gzip it 
- **/
+* Close the msg-db ( file )
+* & gzip it 
+**/
 void close_msg_db();
 
 /**
- * Put this to the db
- **/
+* Put this to the db
+**/
 int put_to_msg_db(const gchar *,const gchar *);
 
 /**
- * Get a similar entry from 
- * the msg-db & return a ´gchar *´
- **/
+* Get a similar entry from 
+* the msg-db & return a ´gchar *´
+**/
 gchar *get_from_msg_db(const gchar *);
 
 /**
- * Returns the length of the msg-db
- * in bytes :
- **/
+* Returns the length of the msg-db
+* in bytes :
+**/
 unsigned int get_msg_db_size();
 
 /**
- * The linked lists :
- **/
+* The linked lists :
+**/
 GList *msg_list, *cur_list;

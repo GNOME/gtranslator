@@ -1,13 +1,13 @@
 /**
- * Fatih Demir [ kabalak@gmx.net ]
- *
- * (C) 2000 Published under GNU GPL V 2.0+
- *
- * the about-box is now also external-placed
- *  from the interface.c file ...
- *
- * -- the source
- **/
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* (C) 2000 Published under GNU GPL V 2.0+
+*
+* the about-box is now also external-placed
+*  from the interface.c file ...
+*
+* -- the source
+**/
 
 #include "about.h"
 

@@ -1,41 +1,43 @@
 /**
- * Fatih Demir [ kabalak@gmx.net ]
- *
- * (C) 2000 Published under GNU GPL V 2.0+
- *
- * Here are the routines which could be very
- * useful if you're think of slightly auto-
- * generated translations ..
- **/
+* Fatih Demir [ kabalak@gmx.net ]
+*
+* (C) 2000 Published under GNU GPL V 2.0+
+*
+* Here are the routines which could be very
+* useful if you're think of slightly auto-
+* generated translations ..
+*
+* -- the central-of-interest
+**/
 
 #include "msg_db.h"
 #include "parse.h"
 
 /**
- * The db file-stream
- **/
+* The db file-stream
+**/
 FILE *db_stream;
 
 /**
- * The message char
- **/
+* The message char
+**/
 gchar msg_messages[128];
 
 int init_msg_db()
 {
 	db_stream=fopen(msg_db,"r+");
 	/**
-	 * Have we got a file stream ?
-	 **/
+	* Have we got a file stream ?
+	**/
 	check_file(db_stream);
 	msg_db_inited=TRUE;
 	/**
-	 * Get every message from the msg_db as a new member 
-	 * to the linked list while reading the file ; 
-  	 *
-	 * 1) Allocate the linked lists
-	 *
-	 **/
+	* Get every message from the msg_db as a new member 
+	* to the linked list while reading the file ; 
+  	*
+	* 1) Allocate the linked lists
+	*
+	**/
 	msg_list = g_list_alloc();
 	cur_list = g_list_alloc();
 	while(
@@ -43,19 +45,19 @@ int init_msg_db()
 	)
 	{
 		/**
- 		 * 2) Parse the msg_db and add every entry to the
-		 *     the linked lists 
-		 **/
-		msg_list = g_list_append(cur_list,&msg_messages[0]);
+ 		* 2) Parse the msg_db and add every entry to the
+		*     the linked lists 
+		**/
+		msg_list = g_list_append(cur_list,(gpointer)msg_messages);
 	}
 	/**
-	 * 3) Check if we had lost the list 
-	 **/
+	* 3) Check if we had lost the list 
+	**/
 	if(!msg_list)
 	{
 		/**
-		 * 3.1) No list, no fun 
-		 **/
+		* 3.1) No list, no fun 
+		**/
 		g_error(_("%s lost the list of translations !\n"),PACKAGE);
 	}
 	return 0;
@@ -64,35 +66,35 @@ int init_msg_db()
 void close_msg_db()
 {
 	/**
-	 * Have we lost the file stream  
-	 **/
+	* Have we lost the file stream  
+	**/
 	check_file(db_stream);
 	/**
-	 * Go to the end of the file ..	
-	 **/
+	* Go to the end of the file ..	
+	**/
 	fseek(db_stream,0L,SEEK_END);
 	/**
-	 * Close the msg-db file(stream)
-	 **/
+	* Close the msg-db file(stream)
+	**/
 	fclose(db_stream);
 	/**
-	 * Make the closure of the msg_db known
-	 *  to the other routines .
-	 **/
+	* Make the closure of the msg_db known
+	*  to the other routines .
+	**/
 	msg_db_inited=FALSE;
 }
 
 int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 {
 	/**
-	 * Check if we've got a working 
-	 * ( inited ) msg_db ?
-	 **/
+	* Check if we've got a working 
+	* ( inited ) msg_db ?
+	**/
 	if(msg_db_inited==FALSE)
 	{
 		/**
-		 * Show a little warning ...
-		 **/
+		* Show a little warning ...
+		**/
 		g_warning(_("The msg_db : %s seems not to be inited !\n"),msg_db);
 		return 1;
 	}
@@ -102,15 +104,15 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 		if(!msg_translation)
 		{
 			/**
-			 * Warn if there isn't any message which could be added
-			 *  to the msg_db .
-			 **/
+			* Warn if there isn't any message which could be added
+			*  to the msg_db .
+			**/
 			g_warning(_("Got no message entry !\n"));
 			return 1;	
 		}
 		/**
-		 * Get the length of the new entry
-		 **/
+		* Get the length of the new entry
+		**/
 		msg_translation_length=strlen(msg_translation);
 		if(( msg_translation_length < 0 ) || ( ! msg_translation ))
 		{
@@ -120,32 +122,32 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 		else
 		{
 			/**
-			 * Go to the end of the file
-			 **/
+			* Go to the end of the file
+			**/
 			fseek(db_stream,0L,SEEK_END);
 			/**
-			 * Add the given parameters to the msg_db .
-			 *  Using a '+{' as something like a starting
-			 *   tag ....
-			 **/
+			* Add the given parameters to the msg_db .
+			*  Using a '+{' as something like a starting
+			*   tag ....
+			**/
 			fputs("\n+{",db_stream);
 			fputs(msg_id,db_stream);
 			/**
-			 * These ';;' are used as separators and shouldn't
-			 *  appear in normal context ...
-			 **/
+			* These ';;' are used as separators and shouldn't
+			*  appear in normal context ...
+			**/
 			fputs(";;",db_stream);
 			fputs(msg_translation,db_stream);
 			/**
-			 * This is the closing tag '}+' ; at the beginning
-		 	 *  and at the end there are always '\n''s appended
-			 *   which makes the reading process much slower , but
-			 *    which guarantees a better read-ability by the user  
-			 **/
+			* This is the closing tag '}+' ; at the beginning
+		 	*  and at the end there are always '\n''s appended
+			*   which makes the reading process much slower , but
+			*    which guarantees a better read-ability by the user  
+			**/
 			fputs("}+\n",db_stream);
 			/**
-			 * After all this , the story should be at a happy ending 
-			 **/
+			* After all this , the story should be at a happy ending 
+			**/
 				return 0;
 		}
 	}
@@ -176,5 +178,11 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		 * Exit brutally ...
 		 **/
 	}
-	return "";
+	else
+	{
+		/**
+		*
+		**/
+		fseek(db_stream,0L,SEEK_POS);
+	}
 }
