@@ -70,6 +70,7 @@ void gtranslator_history_add(gchar *filename,
 	g_return_if_fail(project_version!=NULL);
 
 	entry=g_new(GtrHistoryEntry,1);
+
 	/*
 	 * Assign the GtrHistoryEntry informations.
 	 */ 
@@ -102,6 +103,15 @@ GList *gtranslator_history_get(void)
 	gtranslator_config_init();
 
 	count=gtranslator_config_get_int("history/length");
+
+	/*
+	 * If we don't have got any history, return simply NULL before playing
+	 *  'round.
+	 */
+	if(count <= 0)
+	{
+		return NULL;
+	}
 	
 	/*
 	 * Test if there are more entries stored then desired in the prefs; set

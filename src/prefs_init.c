@@ -18,6 +18,7 @@
  */
 
 #include "defines.include"
+#include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
 #include "utils.h"
@@ -55,10 +56,12 @@ void gtranslator_preferences_init_default_values()
 			lc=gtranslator_utils_get_environment_locale();
 
 			/*
-			 * Well, if we couldn't determine any locale, assume
-			 *  plain "English" -- should beware us from crashing.
+			 * Well, if we couldn't determine any locale (or the
+			 *  locale consists only out of a single character [
+			 *   like for the posix portable locale "C"]), assume
+			 *    English to be our language.
 			 */
-			if(!lc)
+			if(!lc || (strlen(lc) <= 1))
 			{
 				gtranslator_utils_set_language_values_by_language("English");
 			}
@@ -110,7 +113,8 @@ void gtranslator_preferences_init_default_values()
 			 * Well, the EMail address is also filled out if any
 			 *  corresponding environment variable could be found.
 			 */
-			if(value && strchr(value, '@') && strchr(value, '.'))
+			if(value && strchr(value, '@') && strchr(value, '.') &&
+				strlen(value) > 6)
 			{
 				gtranslator_config_set_string("translator/email", value);
 				GTR_FREE(value);
@@ -165,7 +169,12 @@ void gtranslator_preferences_init_default_values()
 		/*
 		 * We do want maximally 10 history entries per default.
 		 */
-		gtranslator_config_set_float("informations/max_history_entries", 10.0); 
+		gtranslator_config_set_float("informations/max_history_entries", 10.0);
+
+		/*
+		 * On the first startup we don't have got any history yet.
+		 */
+		gtranslator_config_set_int("history/length", 0);
 
 		/*
 		 * Initialize the default highlight colors.

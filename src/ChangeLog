@@ -1,3 +1,34 @@
+2001-08-26  Fatih Demir <kabalak@gtranslator.org>
+
+	* dialogs.c: Added Help button to the Open from URI dialog -- it's
+		also checked in the if/else-tree; we need to decide how to
+		 proceed for #59527.
+
+	* prefs_init.c: Set the history length to 0 per init -- on the first
+		startup gtranslator doesn't have got any recent files entries
+		 yet -- fixes masses of "g_file_exists" assertions spewn out
+		  on the console.
+
+	* history.c: If we did get a <= 0 length for the history list, simply
+		return NULL before operating any further.
+
+	* prefs_init.c: Also assume English to be the default on "single"
+		character locales (there ain't such things, right? Fixes
+		 #59486 assumably); also check the parsed/grepped EMail
+		  address to be longer then 6 characters like also requested
+		   in the prefs dialog.
+
+	* menus.c: Append "..." to dialog opening menu items' labels (fixes 
+		#59529).
+
+	* header_stuff.c & prefs.c: Adapted all the function calls for the new
+		function signature: also let the language's group email be
+		 editable -- everything other should be non-editable (fixes
+		  #59485).
+
+	* utils_gui.c/.h: Added "editable" gboolean argument to the
+		"gtranslator_utils_attach_combo_with_label" util function.
+
 2001-08-25  Fatih Demir <kabalak@gtranslator.org>
 
 	* dialogs.c: Also do the normal "gtranslator_open_po_file" function

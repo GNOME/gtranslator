@@ -918,7 +918,9 @@ void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 	gtranslator_raise_dialog(dialog);
 
 	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
-				_("Open"), GNOME_STOCK_BUTTON_CANCEL, NULL);
+				_("Open"), GNOME_STOCK_BUTTON_CANCEL, 
+				GNOME_STOCK_BUTTON_HELP, NULL);
+
 	/* Make Open button the default */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 
@@ -980,6 +982,14 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 				gtranslator_utils_error_dialog(_("No supported URI protocol (like \"ftp://\") given!"));
 			}
 		}
+	}
+	else if(button==2)
+	{
+		/*
+		 * FIXME: What to do here for #59527? We need to decide that.
+		 */
+		gnome_app_message(GNOME_APP(gtranslator_application),
+			"FIXME: Help reference for URIs -- short here or long in help docs?!");
 	}
 	else
 	{

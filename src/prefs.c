@@ -159,6 +159,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	defaultdomain =
 	    gtranslator_utils_attach_combo_with_label(first_page, 2, _("Default query domain:"),
 			    	    domains, GtrPreferences.defaultdomain,
+				    FALSE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	
 	/*
@@ -169,23 +170,28 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	authors_language =
 	    gtranslator_utils_attach_combo_with_label(second_page, 0, _("Language:"),
 				    languages_list, language,
+				    FALSE,
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(1));
 	lcode =
 	    gtranslator_utils_attach_combo_with_label(second_page, 1, _("Language code:"),
 				    lcodes_list, lc,
+				    FALSE,
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(2));
 	lg_email =
 	    gtranslator_utils_attach_combo_with_label(second_page, 2,
 				    _("Language group's EMail:"),
 				    group_emails_list, lg,
+				    TRUE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	mime_type =
 	    gtranslator_utils_attach_combo_with_label(second_page, 3, _("Charset:"),
 				    encodings_list, mime,
+				    FALSE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	encoding =
 	    gtranslator_utils_attach_combo_with_label(second_page, 4, _("Encoding:"),
 				    bits_list, enc,
+				    FALSE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	/*
 	 * Create, attach, and connect the toggle buttons.
@@ -301,6 +307,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	
 	scheme_file=gtranslator_utils_attach_combo_with_label(sixth_page, 0,
 		_("Syntax color scheme to use:"), colorschemeslist, old_colorscheme,
+		FALSE,
 		gtranslator_preferences_dialog_changed, NULL);
 	 
 	own_fonts=gtranslator_utils_attach_toggle_with_label(sixth_page, 1,

@@ -30,7 +30,8 @@
 #include <libgnomeui/libgnomeui.h>
 
 /*
- * Show an error message. */
+ * Show an error message.
+ */
 GtkWidget * gtranslator_utils_error_dialog(gchar *format, ...)
 {
 	gchar *error;
@@ -141,6 +142,7 @@ void gtranslator_utils_restore_geometry(gchar  * gstr)
 GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint row,
 				   const char *label_text,
 				   GList  * list, const char *value,
+				   gboolean editable,
 				   GtkSignalFunc callback,
 				   gpointer user_data)
 {
@@ -152,7 +154,7 @@ GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint ro
 	if (value)
 		gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), value);
 	
-	gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(combo)->entry), FALSE);
+	gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(combo)->entry), editable);
 	
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), combo, 1, 2, row, row + 1);

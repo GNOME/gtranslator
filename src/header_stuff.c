@@ -559,19 +559,23 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	language_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 3, _("Language:"),
 				    languages_list, _(ph->language),
+				    FALSE,
 				    language_changed, NULL);
 	lg_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 4,
 				    _("Language group's e-mail:"),
 				    group_emails_list, ph->lg_email,
+				    TRUE,
 				    gtranslator_header_edit_changed, NULL);
 	charset_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 5, _("Charset:"),
 				    encodings_list, ph->charset,
+				    FALSE,
 				    gtranslator_header_edit_changed, NULL);
 	enc_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 6, _("Encoding:"),
 				    bits_list, ph->encoding,
+				    FALSE,
 				    gtranslator_header_edit_changed, NULL);
 	/*
 	 * Connect the signals

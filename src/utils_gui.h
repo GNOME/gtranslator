@@ -56,7 +56,7 @@ void gtranslator_utils_restore_geometry(gchar *gstr);
  */
 GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget * table, 
 	gint row, const char *label_text, GList * list, const char *value,
-	GtkSignalFunc callback, gpointer user_data);
+	gboolean editable, GtkSignalFunc callback, gpointer user_data);
 
 GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget * table, 
 	gint row, const char *label_text, const char *value,

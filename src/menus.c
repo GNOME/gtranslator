@@ -73,7 +73,7 @@ GnomeUIInfo the_file_menu[] = {
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("Aut_oaccomplish"),
+		GNOME_APP_UI_ITEM, N_("Aut_oaccomplish..."),
 		N_("Automatically fill missing translations from the default query domain"),
 		gtranslator_auto_accomplishment_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_DATA, auto_accomplishment_xpm,
@@ -81,7 +81,7 @@ GnomeUIInfo the_file_menu[] = {
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("Remove all translations"),
+		GNOME_APP_UI_ITEM, N_("Remove all translations..."),
 		N_("Remove all existing translations from the po file"),
 		gtranslator_remove_all_translations_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
@@ -90,7 +90,7 @@ GnomeUIInfo the_file_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
 	{
-		GNOME_APP_UI_ITEM, N_("Open from _URI"),
+		GNOME_APP_UI_ITEM, N_("Open from _URI..."),
 		N_("Open a po file from a given URI"),
 		gtranslator_open_uri_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
@@ -104,14 +104,14 @@ GnomeUIInfo the_file_menu[] = {
 	GNOMEUIINFO_SUBTREE(N_("Recen_t files"), the_last_files_menus),
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("_Export to UTF-8"),
+		GNOME_APP_UI_ITEM, N_("_Export to UTF-8..."),
 		N_("Export the current po file to UTF-8"),
 		gtranslator_export_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
 		GDK_E, GDK_MOD1_MASK, NULL
 	},
 	{
-		GNOME_APP_UI_ITEM, N_("_Import from UTF-8"),
+		GNOME_APP_UI_ITEM, N_("_Import from UTF-8..."),
 		N_("Import a UTF-8 encoded po file into it's corresponding plain encoding"),
 		gtranslator_import_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
@@ -142,7 +142,7 @@ GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtranslator_find, NULL),
 	GNOMEUIINFO_MENU_REPLACE_ITEM(gtranslator_replace_dialog, NULL),
 	{
-		GNOME_APP_UI_ITEM, N_("_Query"),
+		GNOME_APP_UI_ITEM, N_("_Query..."),
 		N_("Query for a string"),
 		gtranslator_query_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_DATA, query_xpm,
