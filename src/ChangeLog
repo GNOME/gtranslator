@@ -1,3 +1,18 @@
+2001-08-15  Fatih Demir <kabalak@gtranslator.org>
+
+	* prefs.c: Re-use the GTR_FREE macro while updating the prefs contents
+		and also check for the EMail address length to be at least 6
+		 characters long.
+
+	* prefs_init.c: Set the default locale to "en" if nothing another
+		could be determined -- also set the language name from the
+		 locale code via the new utils function (solves #58832).
+
+	* utils.c/.h: Removed 2 internal "g_warning" calls and added a new
+		"gtranslator_utils_get_english_language_name_by_locale_code"
+		  function and changed some "strcmp" calls to 
+		   "nautilus_strcmp" calls.
+
 2001-08-11  Thomas Ziehmer <thomas@gtranslator.org>
 
 	* prefs.c, prefs.h: Code cleanup and fix of a potential bug with global

@@ -363,7 +363,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	 */
 	if (page_num != -1)
 		return;
-#define update(value,widget) if(value) { g_free(value); } value=NULL; \
+#define update(value,widget) GTR_FREE(value); \
 	value=gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 	update(author, authors_name);
 
@@ -397,7 +397,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		 * Also check an eventually given EMail address for brevity.
 		 */
 		if(!strchr(email, '@') || !strchr(email, '.') || 
-			(strlen(email) <= 4))
+			(strlen(email) <= 6))
 		{
 			gnome_app_error(GNOME_APP(gtranslator_application),
 				_("Please enter a valid EMail address!"));

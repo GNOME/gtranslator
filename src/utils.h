@@ -52,6 +52,11 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str);
 const gchar *gtranslator_utils_get_english_language_name(const gchar *lang);
 
 /*
+ * Return the corresponding language name for the given locale.
+ */
+gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_code);
+
+/*
  * Remove the possibly generated temporary files of gtranslator.
  */
 void gtranslator_utils_remove_temp_files(void); 
@@ -131,7 +136,7 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string);
 /*
  * Get the right localename/charset for the language.
  */
-gchar *gtranslator_utils_get_locale_name(void); 
+gchar *gtranslator_utils_get_locale_name(void);
 gchar *gtranslator_utils_get_locale_charset(void);
 
 /*
@@ -163,6 +168,6 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang);
 /*
  * Own getline implementation to handle very long comments.
  */
-char * gtranslator_utils_getline (FILE* stream);
+gchar *gtranslator_utils_getline (FILE* stream);
 	
 #endif

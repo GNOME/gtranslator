@@ -84,7 +84,8 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
 	gint	 index=0;
 	
 	/*
-	 * Strip out all common punctuation characters before re-querying.
+	 * Strip out all common punctuation characters which are defined
+	 *  here locally in this array.
 	 */
 	const gchar punctuation_characters[] = 
 	{ 
@@ -103,8 +104,8 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
 	stripped_string=nautilus_str_strip_chr(str, '´');
 
 	/*
-	 * Now strip out all these special characters from the query string 
-	 *  to get a more "raw" string for an eventually better match.
+	 * Now strip out all these special characters to get a more raw
+	 *  string (could result in better results for matching).
 	 */
 	while(punctuation_characters[index]!=-1)
 	{
@@ -128,7 +129,7 @@ const gchar *gtranslator_utils_get_english_language_name(const gchar *lang)
 		
 		for(c=0;languages[c].name!=NULL;c++)
 		{
-			if(!strcmp(_(languages[c].name), lang))
+			if(!nautilus_strcmp(_(languages[c].name), lang))
 			{
 				return languages[c].name;
 			}
@@ -148,6 +149,29 @@ const gchar *gtranslator_utils_get_english_language_name(const gchar *lang)
 		return language;
 	}
 	
+}
+
+/*
+ * Return the corresponding language name (e.g. "Turkish") for the given locale code (e.g. "tr").
+ */
+gchar *gtranslator_utils_get_language_name_by_locale_code(const gchar *locale_code)
+{
+	gint i;
+	
+	g_return_val_if_fail(locale_code!=NULL, NULL);
+
+	/*
+	 * Cruise through the list and return the matching language entries' name.
+	 */
+	for(i=0; languages[i].lcode!=NULL; i++)
+	{
+		if(!nautilus_strcmp(languages[i].lcode, locale_code))
+		{
+			return _(languages[i].name);
+		}
+	}
+
+	return NULL;
 }
 
 /*
@@ -441,8 +465,8 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 	while((entry=readdir(dir)) != NULL)
 	{
 		if(entry->d_name &&
-			strcmp(entry->d_name, ".") && 
-			strcmp(entry->d_name, "..") &&
+			nautilus_strcmp(entry->d_name, ".") && 
+			nautilus_strcmp(entry->d_name, "..") &&
 			nautilus_istr_has_suffix(entry->d_name, extension))
 		{
 			gchar *file;
@@ -542,7 +566,7 @@ gint gtranslator_utils_stringlist_strcasecmp(GList *list, const gchar *string)
 			return pos;
 		}
 
-		list=list->next;
+		GTR_ITER(list);
 		pos++;
 
 		if(!list)
@@ -601,8 +625,8 @@ gchar *gtranslator_utils_get_locale_charset(void)
 
 		for(c=0; languages[c].name!=NULL; c++)
 		{
-			if(!strcmp(languages[c].name, po->header->language) ||
-				!strcmp(_(languages[c].name), po->header->language))
+			if(!nautilus_strcmp(languages[c].name, po->header->language) ||
+				!nautilus_strcmp(_(languages[c].name), po->header->language))
 			{
 				return languages[c].enc;
 			}
@@ -703,8 +727,6 @@ void gtranslator_utils_old_colors_to_new_location()
 
 	if(value && value[0]=='#')
 	{
-		/* Translators: DO NOT translate these */
-		g_warning("Converting old fg color..");
 		gtranslator_config_set_string("colors/own_fg", value);
 		converted=TRUE;
 	}
@@ -713,8 +735,6 @@ void gtranslator_utils_old_colors_to_new_location()
 
 	if(value && value[0]=='#')
 	{
-		/* Translators: DO NOT translate these. */
-		g_warning("Converting old bg color");
 		gtranslator_config_set_string("colors/own_bg", value);
 		converted=TRUE;
 	}
@@ -736,7 +756,7 @@ void gtranslator_utils_old_colors_to_new_location()
  * copied form nautilus/src/nautilus-first-time-druid.c and modified to return
  * internal buffer
  */
-char * 
+gchar * 
 gtranslator_utils_getline (FILE* stream)
 {
 	static char *ret = NULL;
