@@ -93,7 +93,7 @@ void compile(GtkWidget *widget,gpointer useless)
 		/**
 		* If a filename has been set yet, then we can try to compile it.
 		**/
-		if((i_love_this_file!=NULL)||(strlen(i_love_this_file)>=0))
+		if((i_love_this_file!=NULL))
 		{
 			sprintf(cmd,"%s %s","msgfmt",i_love_this_file);
 			res=system(cmd);

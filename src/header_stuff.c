@@ -11,15 +11,20 @@
 #include "header_stuff.h"
 
 /**
+* Create a global header structure -- again as a pointer 
+**/
+gtr_header *ph;
+
+/**
 * A simple define; .. ok I'm lazy but it avoids many typos ..
 **/
 #define kabalak_str(x) inp=NULL; inp=strstr(hline, ": ");\
-ph.x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));\
-g_print("-- %s\n",ph.x);
+ph->x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));\
+g_print("--  %s\n",ph->x);
 
-void apply_header(gtr_header the_header)
+void apply_header(gtr_header *the_header)
 {
-	if((the_header.prj_name==NULL)||(strlen(the_header.prj_version)<=0))
+	if((the_header->prj_name==NULL))
 	{
 		g_warning(_("Error while parsing the header!"));
 	}
@@ -33,9 +38,9 @@ void get_header(gchar *hline)
 	{
 		gchar *temp=g_new(gchar,1);
 		kabalak_str(prj_name);
-		temp=ph.prj_name;
-		ph.prj_name=index(temp, ' ');
-		ph.prj_version=rindex(temp, ' ');
+		temp=ph->prj_name;
+		ph->prj_name=index(temp, ' ');
+		ph->prj_version=rindex(temp, ' ');
 		if(temp)
 		{
 			g_free(temp);
@@ -79,7 +84,7 @@ void get_header(gchar *hline)
 /**
 * Creates the Header-edit dialog.
 **/
-void edit_header_create()
+void edit_header_create(gtr_header *head)
 {
 	/**
 	* Some local widgets.
@@ -88,7 +93,7 @@ void edit_header_create()
 	/**
 	* Do a simply check.
 	**/
-	if(!ph.prj_name)
+	if(!ph->prj_name)
 	{
 		gnome_app_error(GNOME_APP(app1),_("The header doesn't seem to be parsed rightly."));
 	}
@@ -108,7 +113,8 @@ void edit_header_create()
 	/**
 	* Set the parsed values as standard.
 	**/
-	gtk_entry_set_text(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name)),ph.prj_name);
+	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_name))),head->prj_name);
+	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(gtr_prj_version))),head->prj_version);
 	/**
 	* Adds the widgets to the dialog.
 	**/
@@ -140,7 +146,7 @@ void edit_header_create()
 **/
 void edit_header_show()
 {
-	edit_header_create();
+	edit_header_create(ph);
 	gtk_widget_show(gtr_edit_header_dlg);
 }
 

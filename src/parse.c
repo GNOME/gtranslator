@@ -48,7 +48,7 @@ void parse(gchar *po)
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
-        if((!po)||(strlen(po)<=0))
+        if(!po)
         {
                 g_warning(_("There's no file to open or I couldn't understand `%s'!"),po);
         }
@@ -149,7 +149,7 @@ void parse(gchar *po)
 	* Wait for a small amount of time while the user can read the status message
 	*  above, if he has got usleep on his machine.
 	**/
-	usleep(250000);
+	usleep(500000);
 	#endif // HAVE_USLEEP
 	/**
 	* As we've got finished we can do some nonsense

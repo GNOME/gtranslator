@@ -34,7 +34,7 @@ static gchar *file_to_open=NULL;
 static struct poptOption gtranslator_options [] = {
 	{
 		"file", 'f', POPT_ARG_STRING, &file_to_open,
-		0,N_("Po-file to open at startup"), "PO-FILE"
+		0,N_("Po-file to open at startup"), "PO_FILE"
 	},
 	{
 		"msg-db", 'm', POPT_ARG_STRING, &msg_db,

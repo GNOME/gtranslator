@@ -41,11 +41,6 @@ struct _gtr_header {
 };
 
 /**
-* The general header
-**/
-static gtr_header ph;
-
-/**
 * The general widgets for the edit-dialog.
 **/
 GtkWidget *gtr_edit_header_dlg,*gtr_edit_header_dlg_cancel,
@@ -57,7 +52,7 @@ GtkWidget *gtr_prj_name,*gtr_prj_version,*gtr_po_date,*gtr_pot_date,
 /**
 * Will be useful later on.
 **/
-void apply_header(gtr_header the_header);
+void apply_header(gtr_header *the_header);
 
 /**
 * This is the current recognition routine.
@@ -67,7 +62,7 @@ void get_header(gchar *hline);
 /**
 * Creates the edit_header-dialog.
 **/
-void edit_header_create();
+void edit_header_create(gtr_header *head);
 
 /**
 * Shows the edit_header-dialog.
