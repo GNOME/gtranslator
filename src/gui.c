@@ -313,7 +313,7 @@ static void create_actions(void)
 	insert_action(ACT_BACK, the_messages_menu[1], the_searchbar[1]);
 	insert_action(ACT_NEXT, the_messages_menu[2], the_searchbar[2]);
 	insert_action(ACT_LAST, the_messages_menu[3], the_searchbar[3]);
-	insert_action(ACT_GOTO, the_messages_menu[5], the_searchbar[4]);
+	insert_action(ACT_GOTO, the_messages_menu[4], the_searchbar[4]);
 	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], NONE);
 	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], the_searchbar[5]);
 	/*------------------------------------------------ */
@@ -329,7 +329,7 @@ void disable_actions_no_file(void)
 	disable_actions(ACT_COMPILE, ACT_SAVE, ACT_SAVE_AS, ACT_REVERT,
 			ACT_CLOSE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_FIRST,
-			ACT_BACK, ACT_NEXT, ACT_LAST, ACT_GOTO,
+			ACT_BACK, ACT_NEXT, ACT_LAST, ACT_GOTO, ACT_UNDO,
 			ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_TRANSLATED, ACT_FUZZY, ACT_STICK);
 	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
@@ -640,7 +640,7 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		return;
 	if (!po->file_changed) {
 		po->file_changed = TRUE;
-		enable_actions(ACT_SAVE, ACT_REVERT);
+		enable_actions(ACT_SAVE, ACT_REVERT, ACT_UNDO);
 	}
 	if (!message_changed) {
 		GtrMsg *msg = GTR_MSG(po->current->data);
