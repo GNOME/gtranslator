@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "convert.h"
 #include "preferences.h"
 #include "runtime-config.h"
 #include "utils.h"
@@ -61,6 +62,34 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 	config->save_differently_filename=g_strdup_printf(
 		"%s/.gtranslator/etstates/gtranslator-save-differently-file",
 		g_get_home_dir());
+
+	/*
+	 * Based on a suggestion by Pablo; translator: you should translate
+	 *  this empty string to avoid the usage of the mid dot ('·'). The contents
+	 *   of your translations are irrelevant in this case.
+	 */
+	if (_("")[0]="\0")
+	{
+		gchar *middot=NULL;
+
+		/*
+		 * FIXME: Of course the charset get's inserted here...
+		 */
+		middot=gtranslator_convert_string_from_utf8("Â·", "iso-8859-1");
+
+		if(middot && middot[0]!='\0')
+		{
+			config->special_char=middot[0];
+		}
+		else
+		{
+			config->special_char=_("^")[0];
+		}
+        }
+	else
+	{
+                config->special_char=_("^")[0];
+        }
 
 	return config;
 }

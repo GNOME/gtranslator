@@ -21,6 +21,7 @@
 #include "gui.h"
 #include "nautilus-string.h"
 #include "prefs.h"
+#include "runtime-config.h"
 #include "utils.h"
 #include "utils_gui.h"
 #include "zpmd.h"
@@ -66,8 +67,8 @@ void gtranslator_utils_invert_dot(gchar *str)
 
 	for(i=0; str[i] != '\0'; i++) {
 		if(str[i]==' ') {
-			str[i]=GTRANSLATOR_MIDDLE_DOT;
-		} else if(str[i]==GTRANSLATOR_MIDDLE_DOT) {
+			str[i]=gtranslator_runtime_config->special_char;
+		} else if(str[i]==gtranslator_runtime_config->special_char) {
 			str[i]=' ';
 		}
 	}

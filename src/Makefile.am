@@ -74,8 +74,7 @@ gtranslator_SOURCES = \
 	utf8.c utf8.h \
 	utils.c utils.h \
 	utils_gui.c utils_gui.h \
-	vfs-handle.c vfs-handle.h \
-	zpmd.h
+	vfs-handle.c vfs-handle.h
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \

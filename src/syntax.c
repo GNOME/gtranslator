@@ -24,6 +24,7 @@
 #include "gui.h"
 #include "parse.h"
 #include "prefs.h"
+#include "runtime-config.h"
 #include "syntax.h"
 #include "syntax-elements.h"
 #include "utils.h"
@@ -306,7 +307,7 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 
 	if(GtrPreferences.dot_char)
 	{
-		specialchar=GTRANSLATOR_MIDDLE_DOT;
+		specialchar=gtranslator_runtime_config->special_char;
 	}
 	else
 	{
