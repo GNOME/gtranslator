@@ -10,9 +10,9 @@
 
 #include "spell.h"
 #include "find.h"
-#include "messages.h"
 #include "dialogs.h"
 #include "gui.h"
+#include <libgtranslator/messages.h>
 
 static GtkWidget * spellcheck_create(void)
 {

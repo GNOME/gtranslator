@@ -41,7 +41,6 @@ gtranslator_SOURCES = \
 	prefs.c prefs.h \
 	session.c session.h \
 	dnd.c dnd.h \
-	messages.h \
 	languages.h \
 	gnome-regex.c gnome-regex.h
 

@@ -24,7 +24,7 @@
   #include "gnome-regex.h"
 #endif
 
-#include "messages.h"
+#include <libgtranslator/messages.h>
 #include "header_stuff.h"
 
 /**
