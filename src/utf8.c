@@ -112,7 +112,7 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	 * Now assign the new charset name: UTF-8 .-)
 	 */
 	GTR_FREE(po->header->charset);
-	po->header->charset=g_strdup("utf-8");
+	po->header->charset=g_strdup("UTF-8");
 }
 
 /*

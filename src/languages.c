@@ -40,7 +40,7 @@ GtrLanguage languages[] = {
 	 "", "8bit"
 	},
 	{
-	 N_("Azerbaijani Turkish"), "az", "utf-8",
+	 N_("Azerbaijani Turkish"), "az", "UTF-8",
 	 "linuxaz@azerimal.net", "8bit"
 	},
 	{

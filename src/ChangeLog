@@ -1,8 +1,12 @@
 2001-12-26  Fatih Demir <kabalak@gtranslator.org>
 
+	* utf8.c: The charset after the conversion to UTF-8 is now also "UTF-8"
+		and not "utf-8" like it was previously.
+
 	* languages.c: Change the Turkish encoding to "ISO-8859-9" to solve the
-		problems this could cause with the compiled gettext po files
-		 (follow the GNOME Turk mailing list for more information).
+		problems the previously present string ("iso-8859-9") could 
+		 cause with the compiled gettext po files (results of a long
+		  thread in the GNOME Turk mailing list).
 
 2001-12-25  Fatih Demir <kabalak@gtranslator.org>
 
