@@ -23,31 +23,12 @@ vfs_cflags =
 vfs_libs =
 endif
 
-if USE_GAL_GUI
-gal_cflags = $(GAL_CFLAGS) -DUSE_GAL_GUI=7
-gal_sources = shortcutbar.c shortcutbar.h
-gal_libs = $(GAL_LIBS)
-else
-gal_cflags =
-gal_sources =
-gal_libs = 
-endif
-
-if USE_GTKHTML
-gtkhtml_cflags = $(GTKHTML_CFLAGS) -DUSE_GTKHTML=7
-gtkhtml_libs = $(GTKHTML_LIBS)
-else
-gtkhtml_cflags =
-gtkhtml_libs =
-endif
-		
-
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
 	$(vfs_cflags) \
-	$(gal_cflags) \
-	$(gtkhtml_cflags) \
+	$(GAL_CFLAGS) \
+	$(GTKHTML_CFLAGS) \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
@@ -73,13 +54,15 @@ gtranslator_SOURCES = \
 	main.c \
 	open-differently.c open-differently.h \
 	parse.c	parse.h \
+	preferences.c preferences.h \
 	prefs.c prefs.h \
 	session.c session.h \
-	$(gal_sources) \
+	shortcutbar.c shortcutbar.h \
+	stylistics.c stylistics.h \
 	update.c
 
 gtranslator_LDADD = \
-	$(top_builddir)/libgtranslator/libgtranslator.la \
+	$(top_builddir)/libgtranslator/libgtranslator.a \
 	-L/usr/X11R6/lib \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
@@ -87,7 +70,7 @@ gtranslator_LDADD = \
 	$(gconf_libs) \
 	$(XML_LIBS) \
 	$(vfs_libs) \
-	$(gal_libs) \
-	$(gtkhtml_libs)
+	$(GAL_LIBS) \
+	$(GTKHTML_LIBS)
 
 EXTRA_DIST = ChangeLog

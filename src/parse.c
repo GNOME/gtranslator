@@ -33,9 +33,7 @@
 #include "history.h"
 #include <libgtranslator/preferences.h>
 
-#ifdef USE_GAL_GUI
 #include "shortcutbar.h"
-#endif
 
 /*
  * These are to be used only inside this file
@@ -423,9 +421,7 @@ void parse(const gchar *filename)
 		gtranslator_history_add(po->filename,
 			po->header->prj_name, po->header->prj_version);
 	
-		#ifdef USE_GAL_GUI
 		gtranslator_sidebar_add_po(po);
-		#endif
 	}
 	
 	file_opened = TRUE;

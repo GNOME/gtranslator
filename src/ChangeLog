@@ -1,3 +1,21 @@
+2001-02-09  Fatih Demir	<kabalak@kabalak.net>
+
+	* Makefile.am: Do link against the new static library in 
+		libgtranslator, add all the new sources.
+	
+	* preferences.c/.h: Moved from libgtranslator to here.
+
+	* stylistics.c/.h: Moved also to here and included the
+		gnome-i18n.h header for problemless build.
+
+2001-02-08  Fatih Demir	<kabalak@kabalak.net>
+
+	* Makefile.am: Made GAL & GtkHTML flags used by default.
+
+	* parse.c & gui.c: Made all conditional uses of GAL & GtkHTML
+		use the enhanced GAL & GtkHTML actions by default as they're
+		 now requirements for HEAD.
+
 2001-02-06  Fatih Demir	<kabalak@gmx.net>
 
 	* shortcutbar.c: Don't show the full filename in the shortcut bar;

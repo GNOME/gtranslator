@@ -39,14 +39,10 @@
 #include <libgnomevfs/gnome-vfs-init.h>
 #endif
 
-#ifdef USE_GTKHTML
 #include <gtkhtml/gtkhtml.h>
-#endif
 
-#ifdef USE_GAL_GUI
 #include <gal/e-paned/e-hpaned.h>
 #include "shortcutbar.h"
-#endif
 
 typedef struct _GtrAction GtrAction;
 #define GTR_ACTION(x) ((GtrAction *)x)
@@ -492,10 +488,8 @@ void create_app1(void)
 	GtkWidget *search_bar, *tool_bar;
 	GtkWidget *vbox1;
 	GtkWidget *scrolledwindow1, *scrolledwindow2;
-	#ifdef USE_GAL_GUI
 	GtkWidget *pane;
 	GtkWidget *filebox;
-	#endif
 	
 	/*
 	 * Create the app	
@@ -503,15 +497,11 @@ void create_app1(void)
 	app1 = gnome_app_new("gtranslator", _("gtranslator"));
 	gnome_app_create_menus(GNOME_APP(app1), the_menus);
 
-	#ifdef USE_GAL_GUI
 	pane=e_hpaned_new();
-
 	filebox=gtranslator_sidebar_new();
 	
 	e_paned_pack1(E_PANED(pane), filebox, TRUE, FALSE);
-
 	e_paned_set_position(E_PANED(pane), 75);
-	#endif
 
 	/*
 	 * Create the tool- and search-bar
@@ -532,12 +522,8 @@ void create_app1(void)
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	
-	#ifdef USE_GAL_GUI
 	e_paned_pack2(E_PANED(pane), vbox1, TRUE, FALSE);
 	gnome_app_set_contents(GNOME_APP(app1), pane);
-	#else
-	gnome_app_set_contents(GNOME_APP(app1), vbox1);
-	#endif
 
 	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow1, TRUE, TRUE, 0);
@@ -545,19 +531,11 @@ void create_app1(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	#ifdef USE_GTKHTML
 	text1=gtk_html_new();
-	#else
-	text1 = gtk_text_new(NULL, NULL);
-	#endif
 	
 	gtk_container_add(GTK_CONTAINER(scrolledwindow1), text1);
 	
-	#ifdef USE_GTKHTML
 	gtk_html_set_editable(GTK_HTML(text1), FALSE);
-	#else
-	gtk_text_set_editable(GTK_TEXT(text1), FALSE);
-	#endif
 
 	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow2, TRUE, TRUE, 0);
@@ -697,13 +675,8 @@ void display_msg(GList  * list_item)
 		temp = g_strdup(msg->msgid);
 		invert_dot(temp);
 		
-		#ifdef USE_GTKHTML
 		temp=gtranslator_htmlizer(temp);
 		gtk_html_load_from_string(GTK_HTML(text1), temp, -1);
-		#else
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-				temp, -1);
-		#endif
 		
 		g_free(temp);
 
@@ -715,13 +688,8 @@ void display_msg(GList  * list_item)
 			g_free(temp);
 		}
 	} else {
-		#ifdef USE_GTKHTML
 		gchar *zapit=gtranslator_htmlizer(msg->msgid);
 		gtk_html_load_from_string(GTK_HTML(text1), zapit, -1);
-		#else
-		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
-				msg->msgid, -1);
-		#endif
 		
 		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
 				msg->msgstr, -1);
@@ -850,12 +818,7 @@ void toggle_msg_status(GtkWidget  * item, gpointer which)
  */
 void clean_text_boxes()
 {
-	#ifdef USE_GTKHTML
 	gtk_html_load_empty(GTK_HTML(text1));
-	#else
-	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
-	#endif
-	
 	gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
 }
 
