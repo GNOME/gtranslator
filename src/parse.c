@@ -146,6 +146,7 @@ void parse(gchar *po)
 	**/
 	enable_buttons();
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));
+	print_header();
 }
 
 /**

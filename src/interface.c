@@ -74,9 +74,9 @@ void compile(GtkWidget *widget,gpointer useless)
 		/**
 		* Simply compile the .po-file
 		**/
-		gchar *cmd;
+		gchar *cmd=" ";
 		gint res=1;
-		sprintf(cmd,"msgfmt %s","dummy.po");
+		sprintf(cmd,"%s %s","msgfmt",pf.filename);
 		res=system(cmd);
 		/**
 		* If there has been an error show an error-box
