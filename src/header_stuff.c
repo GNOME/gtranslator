@@ -546,8 +546,16 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), po_date, 1, 2, 4, 5);
 
 	rmbt = gtk_entry_new();
-	gtk_widget_set_sensitive(rmbt, TRUE);
 	gtk_entry_set_text(GTK_ENTRY(rmbt), ph->report_message_bugs_to);
+
+	if(ph->report_message_bugs_to && strchr(ph->report_message_bugs_to, '.'))
+	{
+		gtk_widget_set_sensitive(rmbt, TRUE);
+	}
+	else
+	{
+		gtk_widget_set_sensitive(rmbt, FALSE);
+	}
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Report message string bugs to:")), 0, 1, 5, 6);
 	gtk_table_attach_defaults(GTK_TABLE(prj_page), rmbt, 1, 2, 5, 6);
 
