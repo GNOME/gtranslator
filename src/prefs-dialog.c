@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "gui.h"
 #include "prefs-dialog.h"
 #include "utils.h"
 
@@ -32,6 +33,7 @@
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
+#include <libgnomeui/gnome-app-util.h>
 #include <libgnomeui/gnome-dialog.h>
 #include <libgnomeui/gnome-stock.h>
 
@@ -53,15 +55,28 @@ static void select_row_function(GtkCList	*list,
 	gpointer dialog)
 {
 	g_return_if_fail(list!=NULL);
-	g_return_if_fail(row<=0);
-	
-	if(row <= g_list_length(GTR_PREFS_DIALOG(dialog)->sections))
+	g_return_if_fail(row < 0);
+
+	/*
+	 * Only react onn a left-click on the clist and also check the row
+	 *  value for sanity.
+	 */
+	if(row <= g_list_length(GTR_PREFS_DIALOG(dialog)->sections) &&
+		event->button==1)
 	{
 		GtkWidget	*table;
 
+		/*
+		 * Arg, this shouldn't be seen as a good way to do things -- it
+		 *  isn't by any means.
+		 */
 		table=(GtkWidget *) g_list_nth_data(GTR_PREFS_DIALOG(dialog)->widgets, row);
 		g_return_if_fail(table!=NULL);
 
+		/*
+		 * And as we're already so bad we do simply pack the new widget
+		 *  table into the pane -- what happened to the old one? Uhm.
+		 */
 		e_paned_pack2(E_PANED(GTR_PREFS_DIALOG(dialog)->pane),
 			table, TRUE, FALSE);
 
@@ -77,10 +92,8 @@ static void clicked_function(GnomeDialog *dialog, gint button,
 {
 	if(!button || button==1)
 	{
-		/*
-		 * FIXME: Reading of the stuff.
-		 */
-	
+		GTR_PREFS_DIALOG(interesting)->read_all_options_function();
+		
 		/*
 		 * If "Ok" was clicked on, then we'd to close the dialog, too.
 		 */
@@ -91,9 +104,9 @@ static void clicked_function(GnomeDialog *dialog, gint button,
 	}
 	else if(button==3)
 	{
-		/*
-		 * FIXME: Call a help dialog for the prefs dialog.
-		 */
+		gnome_app_message(GNOME_APP(gtranslator_application), _("\
+		The Preferences box allows you to customise gtranslator\n\
+		to work in ways you find comfortable and productive."));
 	}
 	else
 	{
@@ -104,13 +117,16 @@ static void clicked_function(GnomeDialog *dialog, gint button,
 /*
  * Create the new preferences dialog in memory.
  */
-GtrPrefsDialog *gtranslator_prefs_dialog_new()
+GtrPrefsDialog *gtranslator_prefs_dialog_new(GVoidFunc read_all_options_func)
 {
 	GtrPrefsDialog 	*dialog;
 	gchar		*titles[] = { _("Sections") };
 	
 	dialog=g_new0(GtrPrefsDialog, 1);
 
+	/*
+	 * Now the "simple" widget creation routines are following.
+	 */
 	dialog->dialog=gnome_dialog_new(_("gtranslator -- preferences"),
 		GNOME_STOCK_BUTTON_OK,
 		GNOME_STOCK_BUTTON_APPLY,
@@ -124,6 +140,10 @@ GtrPrefsDialog *gtranslator_prefs_dialog_new()
 	dialog->sections=NULL;
 	dialog->widgets=NULL;
 
+	/*
+	 * We do add the pane to the main dialog and pack the clist already to
+	 *  the left side of the pane.
+	 */
 	gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(dialog->dialog)->vbox), 
 		dialog->pane);
 
@@ -133,14 +153,25 @@ GtrPrefsDialog *gtranslator_prefs_dialog_new()
 	dialog->changed=FALSE;
 	dialog->shown=FALSE;
 
+	dialog->read_all_options_function=read_all_options_func;
+
+	/*
+	 * Disable the "Ok" and "Apply" buttons by default.
+	 */
 	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 0, FALSE);
 	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 1, FALSE);
 
+	/*
+	 * Hook in the generalized callback functions for the dialog.
+	 */
 	gtk_signal_connect(GTK_OBJECT(GTR_PREFS_DIALOG(dialog)->sections_list),
 		"select-row", GTK_SIGNAL_FUNC(select_row_function), dialog);
 
 	gtk_signal_connect(GTK_OBJECT(GTR_PREFS_DIALOG(dialog)->dialog),
 		"clicked", GTK_SIGNAL_FUNC(clicked_function), dialog);
+
+	gtk_signal_connect(GTK_OBJECT(GTR_PREFS_DIALOG(dialog)->dialog),
+		"delete_event", GTK_SIGNAL_FUNC(gtranslator_prefs_dialog_close), dialog);
 	
 	return dialog;
 }

@@ -38,15 +38,18 @@ typedef struct
 
 	gboolean	 changed;
 	gboolean	 shown;
+
+	GVoidFunc	 read_all_options_function;
 } GtrPrefsDialog;
 
 #define GTR_PREFS_DIALOG(x) ((GtrPrefsDialog *) x)
 
 /*
  * Creates a new preferences dialog with all the nice contents and values from
- *  the preferences.
+ *  the preferences -- the supplied "read_all_options_func" should read all of
+ *   the options from the widget and should perform further steps.
  */
-GtrPrefsDialog *gtranslator_prefs_dialog_new(void);
+GtrPrefsDialog *gtranslator_prefs_dialog_new(GVoidFunc read_all_options_func);
 
 /*
  * Append the given preferences page to the preferences dialog.
