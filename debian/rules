@@ -13,8 +13,8 @@ configure: configure-step
 configure-step:
 	dh_testdir
 	./configure --prefix=/usr --mandir=/usr/share/man \
-		--sysconfdir=/etc --enable-nautilus-view \
-		--with-gconf --enable-mime-bind=yes
+		--sysconfdir=/etc \
+		--enable-mime-bind=yes
 
 	touch configure-step
 
@@ -46,37 +46,21 @@ install: build
 	dh_movefiles
 
 binary-arch: build install
-	dh_testdir -pgtranslator
-	dh_testroot -pgtranslator
-	dh_installmenu -pgtranslator
-	dh_installdocs -pgtranslator
-	dh_installchangelogs -pgtranslator ChangeLog
-	dh_link -pgtranslator
-	dh_strip -pgtranslator
-	dh_compress -pgtranslator
-	dh_fixperms -pgtranslator
-	dh_installdeb -pgtranslator
-	dh_makeshlibs -pgtranslator
-	dh_shlibdeps -pgtranslator
-	dh_gencontrol -pgtranslator
-	dh_md5sums -pgtranslator
-	dh_builddeb -pgtranslator
+	dh_testdir 
+	dh_testroot 
+	dh_installmenu 
+	dh_installdocs
+	dh_installchangelogs ChangeLog
+	dh_link 
+	dh_strip 
+	dh_compress 
+	dh_fixperms 
+	dh_installdeb 
+	dh_makeshlibs
+	dh_shlibdeps 
+	dh_gencontrol 
+	dh_md5sums 
+	dh_builddeb
 	
-	dh_testdir -pgtranslator-nautilus
-	dh_testroot -pgtranslator-nautilus
-	dh_installmenu -pgtranslator-nautilus
-	dh_installdocs -pgtranslator-nautilus
-	dh_installchangelogs -pgtranslator-nautilus nautilus-view/ChangeLog
-	dh_link -pgtranslator-nautilus
-	dh_strip -pgtranslator-nautilus
-	dh_compress -pgtranslator-nautilus
-	dh_fixperms -pgtranslator-nautilus
-	dh_installdeb -pgtranslator-nautilus
-	dh_makeshlibs -pgtranslator-nautilus
-	dh_shlibdeps -pgtranslator-nautilus
-	dh_gencontrol -pgtranslator-nautilus
-	dh_md5sums -pgtranslator-nautilus
-	dh_builddeb -pgtranslator-nautilus
-
 binary: binary-arch
 .PHONY: build clean binary-arch binary install

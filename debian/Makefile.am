@@ -9,7 +9,6 @@ EXTRA_DIST = \
 	control \
 	copyright \
 	docs \
-	gtranslator-nautilus.files \
 	menu \
 	postinst \
 	postrm \
