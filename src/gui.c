@@ -697,7 +697,7 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 			/**
 			* And step up with the translated count.
 			**/
-			po->translated++;
+			/*po->translated++;*/
 		}	       
 		/**
 		* Also update the status information in the statusbar.
@@ -754,6 +754,10 @@ static void update_appbar(gint pos)
 		else
 		{
 			str=g_strdup_printf(_("%s %s [ No fuzzy left ]"), str, _("Fuzzy"));
+			/**
+			* Also disable the corresponding button.
+			**/
+			disable_actions(ACT_NEXT_FUZZY,NONE);
 		}
 	}
 	if(msg->status & GTR_MSG_STATUS_TRANSLATED)
@@ -777,6 +781,11 @@ static void update_appbar(gint pos)
 			else
 			{
 				str=g_strdup_printf(_("%s %s [ No untranslated left ]"), str, _("Untranslated"));
+				/**
+				* Also disable the coressponding buttons for the
+				*  next untranslated message.
+				**/
+				disable_actions(ACT_NEXT_UNTRANSLATED,NONE);
 			}	
 		}
 	}
@@ -926,10 +935,6 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 			* Decrement the fuzzy count.
 			**/
 			po->fuzzy--;
-			/**
-			* And increment the translated count.
-			**/ 
-			po->translated++;
 		}
 		/**
 		* Also update the status information in the statusbar.
@@ -937,6 +942,10 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		update_appbar(g_list_position(po->messages,
 			po->current));
 	}
+	/**
+	* And increment the translated count.
+	**/ 
+	po->translated++;
 	/**
 	* Do all these steps only if the option to use the '·' is set.
 	**/
