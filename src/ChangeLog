@@ -1,3 +1,10 @@
+2003-08-28  Fatih Demir <kabalak@gtranslator.org>
+
+	* defines.config & main.c: Solve that sometimes occuring problem with
+		the GNOMELOCALEDIR define in defines.config/h by setting the
+		 GNOMELOCALEDIR usage in main.c to use DATADIR "/locale" which
+		  should be the same :-)
+
 2003-08-27  Ross Golder  <ross@golder.org>
 
 	* main.c: Add #include <locale.h> as per manpage setlocale(3).

@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	/*
 	 * Initialize gettext.
 	 */ 
-	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+	bindtextdomain(PACKAGE, DATADIR "/locale");
 	textdomain(PACKAGE);
 
 	/*
@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
 		g_print(_("Window icon:"));
 		NICE_PRINT(WINDOW_ICON);
 		g_print(_("Own locale directory:"));
-		NICE_PRINT(GNOMELOCALEDIR);
+		NICE_PRINT(DATADIR "/locale");
 		g_print(_("Default learn buffer file location:"));
 		NICE_PRINT("~/.gtranslator/umtf/personal-learn-buffer.xml");
 		g_print("\n");
