@@ -6,5 +6,6 @@ SUBDIRS = \
 	gconf \
 	mime \
 	oaf \
+	pixmaps \
 	scripts \
 	ui
