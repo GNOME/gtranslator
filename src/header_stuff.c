@@ -25,13 +25,11 @@ void apply_header(gtr_header *the_header)
 
 void get_header(gchar *hline)
 {
-	gchar *a=g_new(gchar,1);
-	a[0]='\0';
 	header_finish=FALSE;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
-		ph->prj_name=a;
-		ph->prj_version=a;
+		ph->prj_name="Project";
+		ph->prj_version="Version";
 	}
 	if(!g_strncasecmp(hline,"\"POT-",5))
 	{
@@ -65,10 +63,6 @@ void get_header(gchar *hline)
 	if(header_finish==TRUE)
 	{
 		/*** TODO ***/
-	}
-	if(a)
-	{
-		g_free(a);
 	}
 }
 

@@ -39,7 +39,7 @@ void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
         {
                 /**
                 * Check the types of the entries of the list
-                *  witht he filenames.
+                *  with the filenames.
                 **/
 		for(fnp = fnames; fnp; fnp = fnp->next, a_counter--)
 		{

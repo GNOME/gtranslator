@@ -222,3 +222,26 @@ gchar *get_from_msg_db(const gchar *get_similar)
 		return _("No entry found in the messages db ");
 	}
 }
+
+/**
+* Returns the size of the message-db.
+**/
+unsigned int get_msg_db_size()
+{
+	if(msg_db_inited!=TRUE)
+	{
+		g_warning(_("The messages db isn't inited."));
+	}	
+	else
+	{
+		/**
+		* Stat the file.
+		**/
+		struct stat *file;	
+		stat(msg_db,file);
+		/**
+		* Return the size.
+		**/
+		return (unsigned int )file->st_size;
+	}
+}
