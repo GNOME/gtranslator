@@ -119,7 +119,7 @@ void show_number()
 {
 	#define delta(x) (pos[x].rm_eo-pos[x].rm_so)
 	
-	regex_t *rX;
+	regex_t *rx_number;
 	regmatch_t pos[3];
 	
 	gint z=1;
@@ -131,11 +131,12 @@ void show_number()
 
 	current_view=GTR_NUMBER_VIEW;
 
-	rX=gnome_regex_cache_compile(rxc, "[0-9]+", REG_EXTENDED|REG_NEWLINE);
+	rx_number=gnome_regex_cache_compile(rxc, "[0-9]+", 
+		REG_EXTENDED|REG_NEWLINE);
 
 	clean_text_boxes();
 
-	if(!regexec(rX, msg->msgid, 3, pos, 0))
+	if(!regexec(rx_number, msg->msgid, 3, pos, 0))
 	{
 		while(pos[z].rm_so!=-1)
 		{
@@ -170,7 +171,7 @@ void show_number()
 	number=g_string_truncate(number, 0);
 	z=1;
 
-	if(!regexec(rX, msg->msgstr, 3, pos, 0))
+	if(!regexec(rx_number, msg->msgstr, 3, pos, 0))
 	{
 		while(pos[z].rm_so!=-1)
 		{

@@ -246,12 +246,13 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 				if(!regexec(rex, (*string), 5, pos, 0))
 				{
 					GString *op=g_string_new("");
+					gint f=1;
 										
 					/*
 					 * Operate on the found match and the
 					 *  original string.
 					 */
-					if(pos[0].rm_so >= 0)
+					while(pos[f].rm_so!=-1)
 					{
 						gint i=0;
 
@@ -259,7 +260,7 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 						 * Copy the real characters to the new
 						 *  string.
 						 */
-						while(i < pos[0].rm_so)
+						while(i <= pos[f].rm_so)
 						{
 							op=g_string_append_c(op, (*string)[i]);
 						}
@@ -272,7 +273,7 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 						/*
 						 * Copy the other resting characters into the string.
 						 */
-						for(i=(pos[0].rm_so+pos[0].rm_eo);i < strlen(*string); ++i)
+						for(i=(pos[f].rm_so+pos[f].rm_eo);i < strlen(*string); ++i)
 						{
 							op=g_string_append_c(op, (*string)[i]);
 						}
@@ -286,6 +287,8 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 						{
 							g_string_free(op, FALSE);
 						}
+
+						f++;
 					}
 				}
 				

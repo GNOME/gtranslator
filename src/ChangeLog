@@ -1,5 +1,8 @@
 2001-03-18  Fatih Demir	<kabalak@gtranslator.org>
 
+	* replace.c: Use pos[f] for the position replacements -- avoids an
+		endless loop but it doesn't still work.
+
 	* gui.c & syntax.c: Small shuffle for the gtk_text_thaw calls.
 
 	* views.c: Made the routines all respect the "special char"

@@ -1161,6 +1161,8 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 		
 		g_free(newstr);
+		
+		gtk_text_thaw(GTK_TEXT(trans_box));
 
 		/*
 		 * Go to the old text index.
@@ -1181,9 +1183,6 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 						GTK_TEXT(trans_box)));
 			}
 		}
-		
-		gtk_text_thaw(GTK_TEXT(trans_box));
-		
 		nothing_changes = FALSE;
 	}
 	

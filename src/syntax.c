@@ -348,12 +348,12 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			string->str, -1);
 	}
 
+	gtk_text_thaw(GTK_TEXT(textwidget));
+	
 	if(mindex >= 0 && mindex <= gtk_text_get_length(GTK_TEXT(textwidget)))
 	{
 		gtk_editable_set_position(GTK_EDITABLE(textwidget), mindex);
 	}	
-	
-	gtk_text_thaw(GTK_TEXT(textwidget));
 	
 	g_string_free(string, FALSE);
 }
