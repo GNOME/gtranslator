@@ -84,20 +84,6 @@ CFLAGS=$MY_CFLAGS
 LIBS=$MY_LIBS
 
 dnl -------------------------------------------------------------------
-dnl Get the idl parameters.
-dnl -------------------------------------------------------------------
-IDL_CFLAGS=`gnome-config --cflags idl`
-IDL_LIBS=`gnome-config --libs idl`
-AC_SUBST(IDL_CFLAGS)
-AC_SUBST(IDL_LIBS)
-
-dnl -------------------------------------------------------------------
-dnl Check for ORBit >= 0.5.3, OAF 0.6
-dnl -------------------------------------------------------------------
-AM_PATH_ORBIT(0.5.3)
-AM_PATH_OAF(0.6.0)
-
-dnl -------------------------------------------------------------------
 dnl Check for GConf >= 0.9 and the stuff around it ..
 dnl -------------------------------------------------------------------
 gconf_is_present=yes
@@ -358,13 +344,8 @@ Makefile
 data/Makefile
 data/desktop/Makefile
 data/gconf/Makefile
-data/gnome-config/gtranslatorConf.sh
-data/gnome-config/Makefile
 data/mime/Makefile
 data/mime/gtranslator.keys.in
-data/oaf/Makefile
-data/pkg-config/Makefile
-data/pkg-config/gtranslator.pc
 data/scripts/Makefile
 macros/Makefile
 intl/Makefile
@@ -378,7 +359,6 @@ help/tr/Makefile
 help/tr/index.html
 man/Makefile
 man/gtranslator.1
-libgtranslator/Makefile
 ])
 
 dnl ------------------------------------------------------------------
@@ -405,7 +385,7 @@ use the window-icon
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
 
-if libgtranslator can
+if gtranslator can
  use GnomeVFS stuff	:	${vfs_stuff:-no}
 
 if everything should be 
