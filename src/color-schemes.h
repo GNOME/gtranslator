@@ -31,6 +31,8 @@ typedef struct {
 
 	gchar *author;
 	gchar *author_email;
+
+	gchar *filename;
 } GtrColorSchemeInformations;
 
 /*
@@ -89,5 +91,13 @@ void gtranslator_color_scheme_restore_default(void);
  *  schemes we've found in SCHEMESDIR -- and in directory if it's given.
  */
 GList *gtranslator_color_scheme_list(const gchar *directory);
+
+/*
+ * Copy the given GtrColorScheme(Informations).
+ */
+GtrColorScheme *gtranslator_color_scheme_copy(GtrColorScheme *scheme);
+GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
+	GtrColorSchemeInformations *infos);
+
 
 #endif

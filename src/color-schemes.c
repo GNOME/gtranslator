@@ -21,13 +21,15 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+#include <sys/types.h>
+#include <sys/param.h>
+#include <dirent.h>
+
 #include "color-schemes.h"
 #include "parse.h"
 #include "prefs.h"
 #include "preferences.h"
-
-#include <sys/types.h>
-#include <dirent.h>
 
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
@@ -102,6 +104,21 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 	scheme->info=get_color_scheme_infos(&node);
 
 	/*
+	 * Get the absolute filename.
+	 */
+	if(!g_path_is_absolute(filename))
+	{
+		char realfilename[MAXPATHLEN + 1];
+		realpath(filename, realfilename);
+
+		scheme->info->filename=g_strdup(realfilename);
+	}
+	else
+	{
+		scheme->info->filename=g_strdup(filename);
+	}
+	
+	/*
 	 * Now extract the color informations from the xml document.
 	 */
 	while(node!=NULL)
@@ -174,6 +191,8 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 	gtranslator_config_set_string("scheme/author", theme->info->author);
 	gtranslator_config_set_string("scheme/author_email",
 		theme->info->author_email);
+	gtranslator_config_set_string("scheme/filename", 
+		theme->info->filename);
 	
 	gtranslator_config_close();
 
@@ -198,6 +217,7 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
 	theme->info->version=gtranslator_config_get_string("scheme/version");
 	theme->info->author=gtranslator_config_get_string("scheme/author");
 	theme->info->author_email=gtranslator_config_get_string("scheme/author_email");
+	theme->info->filename=gtranslator_config_get_string("scheme/filename");
 
 	theme->fg=gtranslator_config_get_string("colors/fg");
 	theme->bg=gtranslator_config_get_string("colors/bg");
@@ -358,17 +378,20 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 		/*
 		 * Do not count the "." and ".." directory entries.
 		 */
-		if(strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))
+		if(strcmp(entry->d_name, ".") && 
+			strcmp(entry->d_name, "..") &&
+			strstr(entry->d_name, "xml"))
 		{
-			GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
+			GtrColorScheme *theme;
 			GtrColorSchemeInformations *infos;
 
-			theme=gtranslator_color_scheme_open(g_strdup_printf("%s/%s",
-				SCHEMESDIR, entry->d_name));
+			gchar *na=g_strdup_printf("%s/%s", directory, entry->d_name);
+			
+			theme=gtranslator_color_scheme_open(na);
 
 			if(theme)
 			{
-				infos=theme->info;
+				infos=gtranslator_color_scheme_infos_copy(theme->info);
 
 				schemesinfos=g_list_append(schemesinfos, infos);
 			}
@@ -394,18 +417,20 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 		{
 			while((entry=readdir(dir))!=NULL)
 			{
-				if(strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))
+				if(strcmp(entry->d_name, ".") &&
+					strcmp(entry->d_name, "..") &&
+					strstr(entry->d_name, "xml"))
 				{
-					GtrColorScheme *theme=g_new0(GtrColorScheme, 1);
+					GtrColorScheme *theme;
 					GtrColorSchemeInformations *infos;
 
-					theme=gtranslator_color_scheme_open(
-						g_strdup_printf("%s/%s",
-						directory, entry->d_name));
+					gchar *na=g_strdup_printf("%s/%s", directory, entry->d_name);
+
+					theme=gtranslator_color_scheme_open(na);
 
 					if(theme)
 					{
-						infos=theme->info;
+						infos=gtranslator_color_scheme_infos_copy(theme->info);
 
 						schemesinfos=g_list_append(
 							schemesinfos, infos);
@@ -422,4 +447,44 @@ GList *gtranslator_color_scheme_list(const gchar *directory)
 	g_list_sort(schemesinfos, (GCompareFunc) strcmp);
 	
 	return schemesinfos;
+}
+
+/*
+ * Copy the given GtrColorSchemeInformation.
+ */
+GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
+	GtrColorSchemeInformations *infos)
+{
+	GtrColorSchemeInformations *copy;
+
+	copy->name=infos->name;
+	copy->version=infos->version;
+	copy->author=infos->author;
+	copy->author_email=infos->author_email;
+	copy->filename=infos->filename;
+
+	return copy;
+}
+
+/*
+ * Copy the given GtrColorScheme.
+ */
+GtrColorScheme *gtranslator_color_scheme_copy(GtrColorScheme *scheme)
+{
+	GtrColorScheme *copy;
+
+	copy->info=gtranslator_color_scheme_infos_copy(scheme->info);
+
+	copy->fg=scheme->fg;
+	copy->bg=scheme->bg;
+	copy->special_char=scheme->special_char;
+	copy->hotkey=scheme->hotkey;
+	copy->c_format=scheme->c_format;
+	copy->number=scheme->number;
+	copy->punctuation=scheme->punctuation;
+	copy->special=scheme->special;
+	copy->address=scheme->address;
+	copy->keyword=scheme->keyword;
+
+	return copy;
 }

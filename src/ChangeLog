@@ -2,7 +2,8 @@
 
 	* color-schemes.c: Only add the GtrColorSchemeInformations structure
 		if the structure is complete and non-NULL and sort the list
-		 via strcmp before returning it.
+		 via strcmp before returning it - hmm, leak hunting: changed
+		  much stuff to NOT cause memleaks.
 
 	* prefs_init.c: Arg, blue is nicer then navy for hotkeys, reverted my 
 		change from yesterday.

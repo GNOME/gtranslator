@@ -22,7 +22,7 @@
 
 void prefs_init_default()
 {
-	gchar *date=g_new(gchar,1);
+	gchar *date;
 	
 	/*
 	 * Seee if gtranslator has been run before.
