@@ -39,7 +39,7 @@ void check_file(FILE *stream)
 /**
 * The internally used parse-function
 **/
-void parse(gchar *po_file)
+void parse(gchar *po)
 {
 	/**
 	* Some variables
@@ -49,15 +49,30 @@ void parse(gchar *po_file)
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
-        if((!po_file)||(strlen(po_file)<=0))
+        if((!po)||(strlen(po)<=0))
         {
                 g_error(_("There's no file to open or I couldn't understand `%s'!"),po_file);
         }
+	else
+	{
+		/**
+		* If the file is regular, then assing these ones :
+		**/
+		po_file=po;
+	}
         /**
         * Set up a status message
         **/
         sprintf(status,_("Current file : \"%s\"."),po_file);
-        gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
+        gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);	
+	/**
+	* If any previou lists are lying around, delete them.
+	**/
+	if(temp||head)
+	{
+		g_list_free(head);
+		g_list_free(temp);
+	}
         /**
         * Open the parse fstream
         **/

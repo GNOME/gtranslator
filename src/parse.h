@@ -35,7 +35,7 @@ int count,max_count;
 /**
 * The file's name
 **/
-gchar *po_file=NULL;
+static gchar *po_file=NULL;
 
 /**
 * A gboolean for the silly question if a file is open ...
@@ -65,7 +65,7 @@ void check_file(FILE *);
 /**
 * The internally used parse-function
 **/
-void parse(gchar *po_file);
+void parse(gchar *po);
 
 /**
 * The new method for the widgets

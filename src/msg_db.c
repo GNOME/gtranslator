@@ -137,12 +137,6 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			fputs(";;;",db_stream);
 			fputs(msg_translation,db_stream);
 			/**
-		 	*  at the end there are always '\n''s appended
-			*   which make the reading process much slower , but
-			*    which guarantees a better read-ability by the user  
-			**/
-			fputs("\n",db_stream);
-			/**
 			* After all this , the story should be at a happy ending 
 			**/
 				return 0;
