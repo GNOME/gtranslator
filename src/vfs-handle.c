@@ -30,7 +30,7 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 {
 	GnomeVFSURI *file;
 	GnomeVFSURI *destination;
-	gchar *localfilename=g_new0(gchar,1);
+	GString *localfilename=g_string_new("");
 	
 	/*
 	 * Init GnomeVFS, if that hasn't already be done.
@@ -44,15 +44,47 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	 * Get the corresponding URI for the filename.
 	 */
 	file=gnome_vfs_uri_new(filename);
+	
 	/*
 	 * If an URI is locally available open it with
 	 *  the standard methods.
 	 */
 	if(gnome_vfs_uri_is_local(file))
 	{
-		localfilename=g_strdup_printf("/%s",
-			gnome_vfs_uri_to_string(file, 
-				GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD));
+		gchar *temp=g_new0(gchar,1);
+
+		temp=gnome_vfs_uri_to_string(file, 
+			GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
+
+		g_return_val_if_fail(temp!=NULL, NULL);
+
+		switch(temp[0])
+		{
+			case '.':
+				/*
+				 * Append the current directory + a '/' +
+				 *  the relative filename to a real file
+				 *   path.
+				 */  
+				g_string_sprintf(localfilename,
+					"%s/%s",
+					g_get_current_dir(),
+					temp);
+				break;
+
+			default:
+				/*
+				 * Append the toplevel '/' to the URI.
+				 */ 
+				g_string_sprintf(localfilename,
+					"/%s",
+					temp);
+				break;
+		}
+		
+		g_free(temp);
+
+		return localfilename->str;
 	}
 	else
 	{
@@ -138,8 +170,10 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 				/*
 				 * Return the local destination filename.
 				 */
-				localfilename=gnome_vfs_uri_to_string(
-					destination, 
+				localfilename=g_string_append(localfilename,
+				gnome_vfs_uri_to_string(
+					destination,
+					
 					/*
 					 * Hide all parts of an URI, so that we
 					 *  should get a single plain filename
@@ -150,22 +184,11 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 					GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD |
 					GNOME_VFS_URI_HIDE_USER_NAME |
 					GNOME_VFS_URI_HIDE_PASSWORD  |
-					GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER);
-				return localfilename;
+					GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER));
+				return localfilename->str;
 				break;
 		}
 	}
 	
-	/*
-	 * Return the local filename itself; or NULL.
-	 */ 
-	if(localfilename)
-	{
-		return localfilename;
-	}
-	else
-	{
-		return NULL;
-	}
-	
+	g_string_free(localfilename, 1);
 }
