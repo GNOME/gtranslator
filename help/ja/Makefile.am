@@ -16,10 +16,16 @@ gtranslator_htmlfiles = \
 
 gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat
 
-$(gtranslator_htmlfiles):$(gtranslator_sgmlfile)
-	-@if [ ! -f gtranslator/index.html ]; then cd $(srcdir) && db2html gtranslator.sgml; fi
-	-cd $(srcdir) && cp gtranslator/$@ .
+if JW_PRESENT
+build_command=jw -c /etc/sgml/catalog $(gtranslator_sgmlfile) -o gtranslator
+else
+build_command=db2html $(gtranslator_sgmlfile)
+endif
 	
+$(gtranslator_htmlfiles):$(gtranslator_sgmlfile)
+	-@if [ ! -f gtranslator/index.html ]; then cd $(srcdir) && $(build_command); fi
+	-cd $(srcdir) && cp gtranslator/$@ .
+
 disthook:
 	$(mkinstalldirs) $(distdir)/gtranslator
 	$(mkinstalldirs) $(distdir)/gtranslator/stylesheets-images
