@@ -419,8 +419,10 @@ void parse(const gchar *filename)
 	{
 		gtranslator_history_add(po->filename,
 			po->header->prj_name, po->header->prj_version);
-		
+	
+		#ifdef USE_GAL_GUI
 		e_shortcut_model_add_item(model, 0, -1, "file:", po->filename);
+		#endif
 	}
 	
 	file_opened = TRUE;
