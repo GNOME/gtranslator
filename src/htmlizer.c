@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "color-schemes.h"
 #include "htmlizer.h"
 #include "parse.h"
 
@@ -78,7 +79,11 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 			 case '9':
 				 
 				string=g_string_append(string,
-					"<font color=\"orange\">");
+					"<font color=\"");
+				string=g_string_append(string,
+					theme->number);
+				string=g_string_append(string,
+					"\">");
 				EndHtml(pif);
 				break;
 		
@@ -90,14 +95,22 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 				if(textstring[pif+1]=='l')
 				{
 					string=g_string_append(string,
-						"<font color=\"red\">%");	
+						"<font color=\"");
+					string=g_string_append(string,
+						theme->c_format);
+					string=g_string_append(string,
+						"\">%");	
 					EndHtml(pif+2);
 					pif=pif+2;
 				}
 				else
 				{
 					string=g_string_append(string,
-						"<font color=\"red\">%");
+						"<font color=\"");
+					string=g_string_append(string,
+						theme->c_format);
+					string=g_string_append(string,
+						"\">%");
 					EndHtml(pif+1);
 					pif++;
 				}
@@ -112,7 +125,11 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 					&& textstring[pif+2]=='U')
 				{
 					string=g_string_append(string,
-						"<font color=\"navy\">GNU</font>");
+						"<font color=\"");
+					string=g_string_append(string,
+						theme->keyword);
+					string=g_string_append(string,
+						"\">GNU</font>");
 					pif=pif+2;
 					break;
 				}
@@ -124,7 +141,11 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 						&& textstring[pif+4]=='E')
 					{
 						string=g_string_append(string,
-							"<font color=\"navy\">GNOME</font>");
+							"<font color=\"");
+						string=g_string_append(string,
+							theme->keyword);
+						string=g_string_append(string,
+							"\">GNOME</font>");
 						pif=pif+4;
 						break;
 					}
@@ -142,7 +163,11 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 			 case '_':
 				
 				string=g_string_append(string,
-					"<font color=\"blue\">_");
+					"<font color=\"");
+				string=g_string_append(string,
+					theme->hotkey);
+				string=g_string_append(string,
+					"\">_");
 				EndHtml(pif+1);
 				pif++;
 				break;
@@ -154,7 +179,11 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 			 case '·':
 				
 				string=g_string_append(string,
-					"<font color=\"yellow\">");
+					"<font color=\"");
+				string=g_string_append(string,
+					theme->special_char);
+				string=g_string_append(string,
+					"\">");
 				EndHtml(pif);	
 				break;
 		
@@ -169,7 +198,11 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 			 case '?':
 				
 				string=g_string_append(string,
-					"<font color=\"grey\">");	
+					"<font color=\"");
+				string=g_string_append(string,
+					theme->punctuation);
+				string=g_string_append(string,
+					"\">");
 				EndHtml(pif);
 				break;
 			
@@ -177,11 +210,15 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 			 * Text marker characters.
 			 */
 			 case '"':
-			 case '\'':	
+			 case '\'':
 			 case '`':
 				
 				string=g_string_append(string,
-					"<font color=\"red\">");
+					"<font color=\"");
+				string=g_string_append(string,
+					theme->special);
+				string=g_string_append(string,
+					"\">");
 				EndHtml(pif);
 				break;
 			/*
@@ -190,7 +227,7 @@ gchar *gtranslator_string_htmlizer(gchar *textstring)
 			 case '\n':
 
 				string=g_string_append(string,
-					"<br>");	
+					"<br>");
 				
 				EndHtml(pif);
 				break;
@@ -218,14 +255,15 @@ void gtranslator_htmlizer(gchar *save_to)
 
 	g_return_if_fail(file_opened==TRUE);
 	g_return_if_fail(po!=NULL);
+	g_return_if_fail(po->header!=NULL);
+	g_return_if_fail(theme!=NULL);
 	
 	/*
 	 * Ensure a filename.
 	 */ 
 	if(!save_to)
 	{
-		save_to=g_strdup_printf("%s.html",
-			g_basename(po->filename));
+		save_to=g_strdup_printf("%s.html", g_basename(po->filename));
 	}
 
 	fstream=fopen(save_to, "w");
@@ -243,12 +281,20 @@ void gtranslator_htmlizer(gchar *save_to)
 	 */ 
 	fprintf(fstream, "<html>\n<head>\n\t<title>%s -- %s</title>\n\t",
 		po->header->prj_name, po->header->prj_version);
-	
-	fprintf(fstream, "<meta name=\"generator\" content=\"gtranslator\">\n");
+
+	fprintf(fstream, "<meta http-equiv=\"content-type\" content=\"text/html; charset=%s\">\n", po->header->charset);
+	fprintf(fstream, "\t<meta name=\"generator\" content=\"gtranslator " VERSION "\">\n");
+
+	if(po->header->translator)
+	{
+		fprintf(fstream, "\t<meta name=\"author\" content=\"%s\">\n",
+			po->header->translator);
+	}
+
 	fprintf(fstream, 
 		"\t<!-- gtranslator %s htmlizer output -->\n", VERSION);
 	
-	fprintf(fstream, "</head>\n<body bgcolor=\"white\" text=\"navy\">\n<table align=\"center\" border=\"0\"><tr><td>");
+	fprintf(fstream, "</head>\n<body bgcolor=\"%s\" text=\"%s\">\n<table align=\"center\" border=\"0\"><tr><td>", theme->bg, theme->fg);
 	
 	/*
 	 * Translatable output to a html file which is visible on the pages.
@@ -287,7 +333,8 @@ void gtranslator_htmlizer(gchar *save_to)
 			po->header->tr_email, po->header->tr_email);
 	}
 
-	fprintf(fstream, "</td><td>&nbsp;</td></tr>\n</table>\n<hr color=\"navy\" align=\"center\">\n");
+	fprintf(fstream, "</td><td>&nbsp;</td></tr>\n</table>\n<hr color=\"%s\" align=\"center\">\n",
+		theme->special);
 	fprintf(fstream, "<table border=\"0\" align=\"center\">\n");
 	
 	/*
@@ -297,8 +344,8 @@ void gtranslator_htmlizer(gchar *save_to)
 	for(n=0; n < po->length; ++n)
 	{
 		fprintf(fstream,
-			"<tr><td>%i</td><td>%s</td><td>%s</td></tr>\n",
-			n+1,
+			"<tr><td><font color=\"%s\">%i</font></td><td>%s</td><td>%s</td></tr>\n",
+			theme->number, n+1,
 			gtranslator_string_htmlizer(
 			GTR_MSG(g_list_nth_data(po->messages, n))->msgid),
 			gtranslator_string_htmlizer(
@@ -315,13 +362,12 @@ void gtranslator_htmlizer(gchar *save_to)
 	 *  the hyperlink in the translations.
 	 *
 	 * In the output it looks then like "HTML output of "tr.po" produced
-	 *  by gtranslator version 0.39".
+	 *  by gtranslator version X.YY".
 	 *
 	 * Please don't forget to include the HTML tags in the msgid.
 	 */
-	fprintf(fstream, _("HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org\">gtranslator</a> version %s."), 
-		po->filename, VERSION);
-	fprintf(fstream, "</p></body>\n</html>\n");
+	fprintf(fstream, _("HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org\">gtranslator</a> version %s."), po->filename, VERSION); 
+	fprintf(fstream, "</p></body>\n<!-- End of generated HTML page -->\n</html>\n");
 
 	fclose(fstream);
 }
