@@ -31,13 +31,12 @@ disthook:
 	-cp $(srcdir)/*.html $(distdir)
 	
 distclean-generic:
-	@-rm -f $(gtranslator_htmlfiles)
+	@-rm -f $(gtranslator_htmlfiles) Makefile
 	@-rm -rf gtranslator
-	@-rm -f Makefile
 
 install-data-local: index.html
 
-clean-docs:
+clean-generic:
 	@-rm -f $(gtranslator_htmlfiles)
 	@-rm -rf gtranslator
 

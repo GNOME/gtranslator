@@ -64,11 +64,10 @@ disthook:
 	-cp $(srcdir)/gtranslator/stylesheet-images/*.* \
 		$(distdir)/gtranslator/stylesheet-images
 	-cp $(srcdir)/*.html $(distdir)
-	
-distclean-generic:
-	@-rm -f $(gtranslator_htmlfiles)
-	@-rm -rf gtranslator Makefile $(gtranslator_omffile)
 
+distclean-generic:
+	@-rm -f $(gtranslator_htmlfiles) $(gtranslator_omffile) Makefile
+	@-rm -rf gtranslator 
 
 if SCROLLKEEPER_PRESENT
 install-data-local: index.html
@@ -82,9 +81,8 @@ uninstall-local:
 	scrollkeeper-update -p $(SC_STATEDIR)
 endif
 
-clean-docs:
-	@-rm -f $(gtranslator_htmlfiles)
-	@-rm -rf gtranslator
+clean-generic:
+	@-rm -rf gtranslator $(gtranslator_htmlfiles)
 
 EXTRA_DIST = $(gtranslator_sgmlfile) \
 	$(gtranslator_htmlfiles) \
