@@ -131,9 +131,10 @@ void gtranslator_message_show(GList * list_item)
 	/*
 	 * Substitute the free spaces in the msgid only if this is wished and
 	 *  possible.
-	 *  FIXME: this is also done by insert_text_handler. It does not do
+	 *
+	 * FIXME: this is also done by insert_text_handler. It does not do
 	 *  syntax stuff, but should. Then here only gtk_text_insert should be
-	 *  left.
+	 *   left.
 	 */ 
 	if(wants.dot_char)
 	{

@@ -185,6 +185,14 @@ const gchar * language_in_english(const gchar *lang)
 		 */
 		return lang;
 	}
+	else
+	{
+		/*
+		 * Return the language in the preferences it no language was
+		 *  given/defined.
+		 */
+		return language;
+	}
 	
 }		
 /*
@@ -655,7 +663,7 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 		else
 		{
 			title=g_strdup_printf("Translation of %s.",
-				language_in_english(header->language));	
+				header->prj_name);	
 		}
 		
 		replace_substring(&header->comment,
