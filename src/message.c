@@ -676,6 +676,7 @@ void gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
 	gtranslator_message_show(po->current->data);
 	gtranslator_get_translated_count();
 	gtranslator_actions_enable(ACT_REVERT, ACT_SAVE);
+	gtranslator_translation_changed(NULL, NULL);
 }
 
 /*

@@ -1,5 +1,10 @@
 2003-08-25  Fatih Demir <kabalak@gtranslator.org>
 
+	* message.c: Also update the translation facts if we're copying a
+		msgid to the msgstr - it's now bound to the "Fuzzy" group in
+		 the messages table as it's set to the virtual status "Sticky"
+		  and fixes b.g.o #120575.
+
 	* utils.c: Applied Abel Cheung's patch for the string voodoo
 		comparison routines the b.g.o #120567.
 
