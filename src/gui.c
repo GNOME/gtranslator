@@ -108,6 +108,8 @@ static void selection_get_handler(GtkWidget *widget,
 	GtkSelectionData *selection_data, guint info,
 	guint time_stamp, gpointer data);
 
+static GtkTextBuffer* get_selection_buffer(GtkTextBuffer *buffer);
+
 /*
  * The target formats
  */
@@ -560,11 +562,51 @@ void gtranslator_application_bar_update(gint pos)
 }
 
 /*
+ * Returns a buffer containing the selection contents having dots
+ * properly replaced with spaces.
+ */
+static GtkTextBuffer* get_selection_buffer(GtkTextBuffer *buffer)
+{
+	gchar* result = NULL;
+	GtkTextIter start_iter;
+	GtkTextIter end_iter;
+	static GtkTextBuffer* selection_buffer = NULL;
+	
+	if (!GtrPreferences.dot_char) {
+		return buffer;
+	}
+
+	gtk_text_buffer_get_selection_bounds(buffer, &start_iter, &end_iter);
+	
+	if (!gtk_text_iter_equal(&start_iter, &end_iter)) {	
+		if (selection_buffer != NULL) {		
+			g_free(selection_buffer);
+		}
+    
+		selection_buffer = gtk_text_buffer_new(gtk_text_buffer_get_tag_table(buffer));
+
+		result = gtk_text_buffer_get_text(buffer, &start_iter, &end_iter, FALSE);
+		result = gtranslator_utils_invert_dot(result);
+
+		gtk_text_buffer_set_text(selection_buffer, result, strlen(result));
+    
+		gtk_text_buffer_get_bounds(selection_buffer, &start_iter, &end_iter);
+		gtk_text_buffer_place_cursor(selection_buffer, &end_iter);
+		gtk_text_buffer_move_mark_by_name(selection_buffer, "selection_bound", &start_iter);
+	}
+
+	return selection_buffer;
+}
+
+/*
  * The text oriented callbacks
  */
 void gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless)
 {
 	GtkTextBuffer* buffer = NULL;
+	GtkTextBuffer* selection_buffer = NULL;
+	GtkTextIter start_iter;
+	GtkTextIter end_iter;
 
 	/* We're only cutting from the translation box */
 	if (gtk_widget_is_focus(GTK_WIDGET(trans_box)) == FALSE)
@@ -573,20 +615,24 @@ void gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless)
 	buffer = gtk_text_view_get_buffer(trans_box);
 	g_return_if_fail(buffer != NULL);
 
-	/* FIXME: revert dots */
-	gtk_text_buffer_cut_clipboard(buffer,
-				      gtk_clipboard_get(GDK_NONE),
-				      TRUE);
+	/* Copy text after replacing dots with spaces */
+	selection_buffer = get_selection_buffer(buffer);
+	gtk_text_buffer_copy_clipboard(selection_buffer, gtk_clipboard_get(GDK_NONE));
+	
+	/* Delete the selected text */
+	gtk_text_buffer_get_selection_bounds(buffer, &start_iter, &end_iter);
+	gtk_text_buffer_delete_interactive(buffer, &start_iter, &end_iter, TRUE);
 	
 	gtk_text_view_scroll_mark_onscreen(trans_box,
-					   gtk_text_buffer_get_mark(buffer,
-								    "insert"));
+									   gtk_text_buffer_get_mark(buffer,
+																"insert"));
 }
 
 void gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless)
 {
 	GtkTextView* focused_box = NULL;
 	GtkTextBuffer* buffer = NULL;
+	GtkTextBuffer* selection_buffer = NULL;
 	
 	if (gtk_widget_is_focus(GTK_WIDGET(text_box)))
 		focused_box = text_box;
@@ -598,13 +644,14 @@ void gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless)
 	
 	buffer = gtk_text_view_get_buffer(focused_box);
 	g_return_if_fail(buffer != NULL);
-	
-	/* FIXME: revert dots */
-	gtk_text_buffer_copy_clipboard(buffer, gtk_clipboard_get(GDK_NONE));
+
+	/* Copy text after replacing dots with spaces */
+	selection_buffer = get_selection_buffer(buffer);
+	gtk_text_buffer_copy_clipboard(selection_buffer, gtk_clipboard_get(GDK_NONE));
   	
 	gtk_text_view_scroll_mark_onscreen(focused_box,
-					   gtk_text_buffer_get_mark(buffer,
-								    "insert"));
+									   gtk_text_buffer_get_mark(buffer,
+																"insert"));
 }
 
 void gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless)
@@ -618,7 +665,7 @@ void gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless)
 	buffer = gtk_text_view_get_buffer(trans_box);
 	g_return_if_fail (buffer != NULL);
 
-	/* FIXME: revert dots */
+
 	gtk_text_buffer_paste_clipboard(buffer,
 					gtk_clipboard_get(GDK_NONE),
 					NULL, TRUE);

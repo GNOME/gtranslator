@@ -3,6 +3,13 @@
 	* bookmark.c, color-schemes.c, history.c: Replaced GTR_FREE with
 	  plain g_free to prevent compiler warning.
 
+2004-04-06  Dan Damian  <dand@gnome.ro>
+
+	* gui.c (gtranslator_clipboard_cut):
+	  (gtranslator_clipboard_copy):
+	  (gtranslator_clipboard_cut): Don't copy dots in clipboard
+	    (#138949).
+
 2004-01-28  Ross Golder  <ross@golder.org>
 
 	* prefs.c: Replaced gnome_app_error with gtk_message_dialog.
