@@ -261,9 +261,10 @@ void gtranslator_config_set_last_run_date()
 	present_time=time(NULL);
 	timebox=localtime(&present_time);
 	/**
-	* Set a date identifier.
+	* Set a date identifier; this ought to be also 
+	*  localized!
 	**/
-	strftime(date, 17, "%Y-%m-%d %H:%M", timebox);
+	strftime(date, 17, _("%Y-%m-%d %H:%M"), timebox);
 	/**
 	* Test the date string before trying to store it.
 	**/
