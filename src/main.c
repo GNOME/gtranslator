@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
 	semerkent_init();
 	
 	semerfile=semer_file_new();
-	semer_file_set_filename(semerfile, "Test_TMX.xml");
+	semer_file_set_filename(semerfile, "Gtranslator_Test_TMX.xml");
 	semerfile->type=SEMER_TMX;
 
 	semerentry=semer_entry_new_with_specs(NULL,
@@ -186,15 +186,26 @@ int main(int argc, char *argv[])
 	semer_file_add_entry(semerfile, semerentry);
 	semer_entry_free(semerentry);
 
+	semerentry=semer_entry_new_with_specs(NULL,
+		"Naaaaa, maybe not?!", "EN-US",
+		"Uhm *posw*§§$$!!!", "EN-GTRANSLATOR",
+		"Another test string...");
+	semer_file_add_entry(semerfile, semerentry);
+	semer_entry_free(semerentry);
+
 	semer_tmx_save_file(semerfile);
 
-	semer_file_set_filename(semerfile, "Test_UMTF.xml");
+	semer_file_set_filename(semerfile, "Gtranslator_Test_UMTF.xml");
 	semerfile->type=SEMER_UMTF;
 	semer_umtf_save_file(semerfile);
 
-	semer_file_set_filename(semerfile, "Test_OpenTag.otf");
+	semer_file_set_filename(semerfile, "Gtranslator_Test_OpenTag.otf");
 	semerfile->type=SEMER_OPENTAG;
 	semer_opentag_save_file(semerfile);
+
+	semer_file_set_filename(semerfile, "Gtranslator_Test_CSV.csv");
+	semerfile->type=SEMER_CSV;
+	semer_csv_save_file(semerfile);
 	
 	semer_file_free(semerfile);
 		
