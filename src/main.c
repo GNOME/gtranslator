@@ -229,7 +229,10 @@ int main(int argc, char *argv[])
 	 * Read the translator information/data into our generally used 
 	 *  GtrTranslator structure.
 	 */
-	gtranslator_translator=gtranslator_translator_new();
+	if(!gtranslator_translator)
+	{
+		gtranslator_translator=gtranslator_translator_new();
+	}
 	
 	/*
 	 * Get the master session management client.

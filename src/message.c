@@ -504,7 +504,7 @@ void gtranslator_message_status_set_sticky (GtrMsg * msg, gboolean on)
  */
 void gtranslator_message_free(gpointer data, gpointer useless)
 {
-	GTR_FREE(GTR_MSG(data)->comment);
+	gtranslator_comment_free(&GTR_MSG(data)->comment);
 	GTR_FREE(GTR_MSG(data)->msgid);
 	GTR_FREE(GTR_MSG(data)->msgstr);
 	GTR_FREE(data);

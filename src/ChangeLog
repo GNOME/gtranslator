@@ -1,5 +1,24 @@
 2001-09-04  Fatih Demir <kabalak@gtranslator.org>
 
+	* message.c: Free the comment via "gtranslator_comment_free" and
+		not via a simple "GTR_FREE" in "gtranslator_message_free".
+
+	* translator.c/.h: Small comments play and changing of the default
+		learn buffer file name -- it is now named "Locale.xml";
+		 also set the "natural_language_name" to English in the
+		  "gtranslator_translator_new_with_default_values" function
+		    as a fallback value -- fixes the last first init issues
+		     left over due to the switch to GtrTranslator.
+
+	* main.c: Only call "gtranslator_translator_new" if the general
+		"gtranslator_translator" GtrTranslator structure hasn't been
+		  inited by an eventual call of the first time init functions
+		   yet.
+
+	* prefs_init.c: Only use the new ultimate first time init function
+		"gtranslator_translator_new_with_default_values" for getting
+		  all the nice translator & language values.
+
 	* parse.c: Adapted the "add to history" conditional to be based on
 		the new GtrRuntimeConfig structure and to also ignore crash
 		 and backend filenames.

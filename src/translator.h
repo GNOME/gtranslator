@@ -74,7 +74,7 @@ GtrTranslator *gtranslator_translator_new(void);
 GtrTranslator *gtranslator_translator_new_with_default_values(void);
 
 /*
- * Change/update/set the translator name + Email safely for the given
+ * Change/update/set the translator name & Email safely for the given
  *  GtrTranslator.
  */
 void gtranslator_translator_set_translator(GtrTranslator *translator,

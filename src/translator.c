@@ -31,7 +31,7 @@
 /*
  * Instantate our "external" gtranslator_translator.
  */
-GtrTranslator *gtranslator_translator=NULL;
+GtrTranslator 	*gtranslator_translator=NULL;
 
 /*
  * A helper function which reads and sets the values easily and safely.
@@ -195,13 +195,13 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 		"GTRANSLATOR_TRANSLATOR_NAME:TRANSLATOR_NAME:TRANSLATOR:\
 		NAME:CONTACT_NAME:LOGNAME:USER",
 		&new_translator->name);
-
+	
 	gtranslator_translator_read_env_value(
 		"GTRANSLATOR_TRANSLATOR_EMAIL_ADDRESS:\
 		GTRANSLATOR_TRANSLATOR_EMAIL:TRANSLATOR_EMAIL:\
 		EMAIL_ADDRESS:MAIL_ADDRESS:EMAIL:CONTACT_EMAIL",
 		&new_translator->email);
-
+		
 	/*
 	 * Try to "guess" the default query domain from the environment.
 	 */
@@ -209,14 +209,6 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 		"GTRANSLATROR_DEFAULT_QUERY_DOMAIN:DEFAULT_QUERY_DOMAIN:\
 		GETTEXT_QUERY_DOMAIN:QUERY_DOMAIN",
 		&new_translator->query_domain);
-
-	/*
-	 * The default learn buffer is set to the current default file
-	 *  name "learn-buffer.xml" which is in the personal UMTF directory
-	 *   in ~/.gtranslator/umtf/.
-	 */
-	new_translator->learn_buffer=g_strdup("learn-buffer.xml");
-	new_translator->tm_buffer=g_strdup("translation-memory.xml");
 
 	/*
 	 * Determine the language locale setting in our environment.
@@ -230,6 +222,7 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 	 */
 	if(!language_locale || strlen(language_locale) < 2)
 	{
+		natural_language_name="English";
 		gtranslator_utils_set_language_values_by_language("English");
 	}
 	else
@@ -278,6 +271,18 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 			i++;
 		}
 	}
+	
+	/*
+	 * The default learn buffer name now goes by the language locale (e.g.
+	 *  "tr.xml" for Turkish) -- is better for the future expansion of the
+	 *    learn buffer and translation memory mechanisms.
+	 */
+	new_translator->learn_buffer=g_strdup_printf("%s.xml", new_translator->language->locale);
+
+	/*
+	 * The default translation memory is named "translation-memory.xml".
+	 */
+	new_translator->tm_buffer=g_strdup("translation-memory.xml");
 
 	return new_translator;
 }
