@@ -1,3 +1,11 @@
+2001-10-04  Fatih Demir <kabalak@gtranslator.org>
+
+	* learn.c: Added "changed" gboolean field to the GtrLearnBuffer struct
+		which makes us now a bit cleverer on learn buffer shutdown:
+		 we don't need to save the learn buffer as a XML file, if there 
+		  hasn't been any changes to the learn buffer -- should make
+		   the gtranslator exit much faster in many circumstances.
+
 2001-10-02  Fatih Demir <kabalak@gtranslator.org>
 
 	* messages-table.c: Don't convert messages to UTF-8 if the messages are

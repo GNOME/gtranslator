@@ -55,6 +55,7 @@ typedef struct
 	gint 		index;
 	
 	gboolean	init_status;
+	gboolean	changed;
 
 	xmlDocPtr	doc;
 	xmlNodePtr	current_node;
@@ -457,6 +458,12 @@ void gtranslator_learn_init()
 	 * Now we'd be inited after all.
 	 */
 	gtranslator_learn_buffer->init_status=TRUE;
+
+	/*
+	 * After the read-in there shouldn't have been any changes to the
+	 *  learn buffer at all .-)
+	 */
+	gtranslator_learn_buffer->changed=FALSE;
 }
 
 /*
@@ -484,129 +491,136 @@ void gtranslator_learn_shutdown()
 	g_return_if_fail(gtranslator_learn_buffer->init_status==TRUE);
 
 	/*
-	 * Create the XML document.
+	 * Only build the new XML document if any change in the learn buffer
+	 *  had been performed.
 	 */
-	gtranslator_learn_buffer->doc=xmlNewDoc("1.0");
-
-	/*
-	 * Set the encoding of the XML file to get a cleanly-structured 
-	 *  and well-formed XML document.
-	 */
-	if(gtranslator_learn_buffer->encoding)
+	if(gtranslator_learn_buffer->changed)
 	{
-		gtranslator_learn_buffer->doc->encoding=g_strdup(gtranslator_learn_buffer->encoding);
-		GTR_FREE(gtranslator_learn_buffer->encoding);
-	}
-
-	/*
-	 * Set up the main <umtf> document root node.
-	 */
-	root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, 
-		"umtf", NULL);
-
-	xmlSetProp(root_node, "version", "0.6");
-	xmlDocSetRootElement(gtranslator_learn_buffer->doc, root_node);
-
-	/*
-	 * Set the header <language> tag with language informations.
-	 */
-	language_node=xmlNewChild(root_node, NULL, "language", NULL);
-	
-	e_xml_set_string_prop_by_name(language_node, "ename", 
-		gtranslator_translator->language->name);
-	e_xml_set_string_prop_by_name(language_node, "code", 
-		gtranslator_translator->language->locale);
-	e_xml_set_string_prop_by_name(language_node, "email", 
-		gtranslator_translator->language->group_email);
-
-	/*
-	 * Set <translator> node with translator informations -- if available.
-	 */
-	translator_node=xmlNewChild(root_node, NULL, "translator", NULL);
-	
-	e_xml_set_string_prop_by_name(translator_node, "name", gtranslator_translator->name);
-	e_xml_set_string_prop_by_name(translator_node, "email", gtranslator_translator->email);
-
-	/*
-	 * Set the UMTF date string for our internal GtrLearnBuffer.
-	 */
-	gtranslator_learn_buffer_set_umtf_date();
-	g_return_if_fail(gtranslator_learn_buffer->serial_date!=NULL);
-
-	/*
-	 * Build the serial string -- the serial number must be in gchar form 
-	 *  to be written by xmlSetProp.
-	 */
-	if(gtranslator_learn_buffer->serial > 1)
-	{
-		serial_string=g_strdup_printf("%i", 
-			gtranslator_learn_buffer->serial);
-	}
-	else
-	{
-		serial_string=g_strdup_printf("%i", 1);
-	}
-
-	/*
-	 * Add the <serial> node with the serial string and date.
-	 */
-	serial_node=xmlNewChild(root_node, NULL, "serial", serial_string);
-	xmlSetProp(serial_node, "date", gtranslator_learn_buffer->serial_date);
-	GTR_FREE(serial_string);
-
-	/*
-	 * Write the <index> area -- if possible with contents.
-	 */
-	index_node=xmlNewChild(root_node, NULL, "index", NULL);
-
-	if(index_node)
-	{
-		xmlNodePtr	resource_node;
-
 		/*
-		 * Sort the resources' list if there's any.
+		 * Create the XML document.
 		 */
-		if(gtranslator_learn_buffer->resources)
+		gtranslator_learn_buffer->doc=xmlNewDoc("1.0");
+	
+		/*
+		 * Set the encoding of the XML file to get a cleanly-structured 
+		 *  and well-formed XML document.
+		 */
+		if(gtranslator_learn_buffer->encoding)
 		{
-			gtranslator_learn_buffer->resources=g_list_sort(
-				gtranslator_learn_buffer->resources, 
-					(GCompareFunc) gtranslator_learn_buffer_sort_learn_resource);
+			gtranslator_learn_buffer->doc->encoding=g_strdup(gtranslator_learn_buffer->encoding);
+			GTR_FREE(gtranslator_learn_buffer->encoding);
 		}
-
+	
 		/*
-		 * Write any resources entry from the list.
+		 * Set up the main <umtf> document root node.
 		 */
-		while(gtranslator_learn_buffer->resources!=NULL)
+		root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, 
+			"umtf", NULL);
+	
+		xmlSetProp(root_node, "version", "0.6");
+		xmlDocSetRootElement(gtranslator_learn_buffer->doc, root_node);
+	
+		/*
+		 * Set the header <language> tag with language informations.
+		 */
+		language_node=xmlNewChild(root_node, NULL, "language", NULL);
+		
+		e_xml_set_string_prop_by_name(language_node, "ename", 
+			gtranslator_translator->language->name);
+		e_xml_set_string_prop_by_name(language_node, "code", 
+			gtranslator_translator->language->locale);
+		e_xml_set_string_prop_by_name(language_node, "email", 
+			gtranslator_translator->language->group_email);
+	
+		/*
+		 * Set <translator> node with translator informations -- if available.
+		 */
+		translator_node=xmlNewChild(root_node, NULL, "translator", NULL);
+		
+		e_xml_set_string_prop_by_name(translator_node, "name", gtranslator_translator->name);
+		e_xml_set_string_prop_by_name(translator_node, "email", gtranslator_translator->email);
+	
+		/*
+		 * Set the UMTF date string for our internal GtrLearnBuffer.
+		 */
+		gtranslator_learn_buffer_set_umtf_date();
+		g_return_if_fail(gtranslator_learn_buffer->serial_date!=NULL);
+	
+		/*
+		 * Build the serial string -- the serial number must be in gchar form 
+		 *  to be written by xmlSetProp.
+		 */
+		if(gtranslator_learn_buffer->serial > 1)
 		{
-			GtrLearnResource *resource=GTR_LEARN_RESOURCE(
-				gtranslator_learn_buffer->resources->data);
-
-			resource_node=xmlNewChild(index_node, NULL, "resource", NULL);
-			g_return_if_fail(resource_node!=NULL);
-			
+			serial_string=g_strdup_printf("%i", 
+				gtranslator_learn_buffer->serial);
+		}
+		else
+		{
+			serial_string=g_strdup_printf("%i", 1);
+		}
+	
+		/*
+		 * Add the <serial> node with the serial string and date.
+		 */
+		serial_node=xmlNewChild(root_node, NULL, "serial", serial_string);
+		xmlSetProp(serial_node, "date", gtranslator_learn_buffer->serial_date);
+		GTR_FREE(serial_string);
+	
+		/*
+		 * Write the <index> area -- if possible with contents.
+		 */
+		index_node=xmlNewChild(root_node, NULL, "index", NULL);
+	
+		if(index_node)
+		{
+			xmlNodePtr	resource_node;
+	
 			/*
-			 * Write all the attributes for a resource entry.
+			 * Sort the resources' list if there's any.
 			 */
-			e_xml_set_string_prop_by_name(resource_node, "package", resource->package);
-			e_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
-			e_xml_set_string_prop_by_name(resource_node, "premiereversion", 
-				resource->premiereversion);
-			
-			e_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
-			
-			GTR_ITER(gtranslator_learn_buffer->resources);
+			if(gtranslator_learn_buffer->resources)
+			{
+				gtranslator_learn_buffer->resources=g_list_sort(
+					gtranslator_learn_buffer->resources, 
+						(GCompareFunc) gtranslator_learn_buffer_sort_learn_resource);
+			}
+	
+			/*
+			 * Write any resources entry from the list.
+			 */
+			while(gtranslator_learn_buffer->resources!=NULL)
+			{
+				GtrLearnResource *resource=GTR_LEARN_RESOURCE(
+					gtranslator_learn_buffer->resources->data);
+	
+				resource_node=xmlNewChild(index_node, NULL, "resource", NULL);
+				g_return_if_fail(resource_node!=NULL);
+				
+				/*
+				 * Write all the attributes for a resource entry.
+				 */
+				e_xml_set_string_prop_by_name(resource_node, "package", resource->package);
+				e_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
+				e_xml_set_string_prop_by_name(resource_node, "premiereversion", 
+					resource->premiereversion);
+				
+				e_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
+				
+				GTR_ITER(gtranslator_learn_buffer->resources);
+			}
 		}
+		
+		/*
+		 * Clean up the hash table we're using, write it's contents, 
+		 *  free them and destroy the hash table.
+		 */
+		gtranslator_learn_buffer->current_node=serial_node->parent;
+		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
+	
+		g_hash_table_foreach(gtranslator_learn_buffer->hash, 
+			(GHFunc) gtranslator_learn_buffer_write_hash_entry, NULL);
 	}
-	
-	/*
-	 * Clean up the hash table we're using, write it's contents, free them and destroy
-	 *  the hash table.
-	 */
-	gtranslator_learn_buffer->current_node=serial_node->parent;
-	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
-	
-	g_hash_table_foreach(gtranslator_learn_buffer->hash, 
-		(GHFunc) gtranslator_learn_buffer_write_hash_entry, NULL);
 	
 	g_hash_table_foreach(gtranslator_learn_buffer->hash, 
 		(GHFunc) gtranslator_learn_buffer_free_hash_entry, NULL);
@@ -614,10 +628,13 @@ void gtranslator_learn_shutdown()
 	g_hash_table_destroy(gtranslator_learn_buffer->hash);
 
 	/*
-	 * Save the file and free all our used elements.
+	 * Save the file if necessary due to a learn buffer change.
 	 */
-	xmlSaveFile(gtranslator_learn_buffer->filename, gtranslator_learn_buffer->doc);
-	xmlFreeDoc(gtranslator_learn_buffer->doc);
+	if(gtranslator_learn_buffer->changed)
+	{
+		xmlSaveFile(gtranslator_learn_buffer->filename, gtranslator_learn_buffer->doc);
+		xmlFreeDoc(gtranslator_learn_buffer->doc);
+	}
 
 	g_list_free(gtranslator_learn_buffer->resources);
 
@@ -684,6 +701,12 @@ void gtranslator_learn_string(const gchar *id_string, const gchar *str_string)
 	{
 		g_hash_table_insert(gtranslator_learn_buffer->hash, 
 			g_strdup(id_string), g_strdup(str_string));
+
+		/*
+		 * As we've got now learned a new string we set the "changed"
+		 *  field of the learn buffer.
+		 */
+		gtranslator_learn_buffer->changed=TRUE;
 	}
 }
 
@@ -765,4 +788,3 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 		return NULL;
 	}
 }
-
