@@ -56,6 +56,8 @@ void gtranslator_preferences_init_default_values()
 			"toggles/keep_obsolete", FALSE);
 		gtranslator_config_set_bool(
 			"toggles/show_sidebar", TRUE);
+		gtranslator_config_set_bool(
+			"toggles/sweep_compile_file", FALSE);
 
 		/*
 		 * Autosave options; it should be on, with suffix "autosave" 

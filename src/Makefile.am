@@ -39,6 +39,7 @@ gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
 	backend.c backend.h \
+	bookmark.c bookmark.h \
 	color-schemes.c color-schemes.h \
 	comment.c comment.h \
 	convert.c convert.h \
@@ -51,7 +52,6 @@ gtranslator_SOURCES = \
 	header_stuff.c header_stuff.h \
 	history.c history.h \
 	htmlizer.c htmlizer.h \
-	id.c id.h \
 	languages.h \
 	learn.c learn.h \
 	main.c \

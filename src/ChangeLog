@@ -1,3 +1,32 @@
+2001-07-13  Fatih Demir <kabalak@gtranslator.org>
+
+	* parse.c: Also honor the new option to remove or not remove the compile result
+		file.
+
+	* utils.c/.h: Honor this new option in "gtranslator_utils_remove_compile_files"
+		with a new argument "output_file".
+
+	* prefs_init.c: Init the new option to TRUE on first init.
+
+	* prefs.c/.h: Added toggle item/preference with which you can define whether
+		the compile result file should be cleaned or not.
+
+	* gui.c: Change order in "gtranslator_quit" so that the learning system
+		gets shut down before the preferences are freed -- else we'd
+		 forget using author/language specific informations in the learning
+		  system's shutdown code (which simply saves an UMTF file).
+
+	* message.c: Use the new function call structure for the
+		"gtranslator_learn_string" function.
+
+	* learn.c/.h: Made the learn sources use UMTF files as backends and use
+		GHashTable's internally -- also changed some function signatures
+		 slightly.
+
+	* Makefile.am: Honorize the new source file names.
+
+	* id.c/.h => bookmark.c/.h: Big rename to make it's function clearer.
+
 2001-07-09  Fatih Demir <kabalak@gtranslator.org>
 
 	* Makefile.am: Variable-ize the translation memory sources.

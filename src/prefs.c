@@ -71,7 +71,7 @@ static GtkWidget
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*check_recent_files, *own_fonts, *own_colors, *use_own_dict,
 	*instant_spell_checking, *keep_obsolete, *defaultdomain,
-	*autosave, *autosave_with_suffix;
+	*autosave, *autosave_with_suffix, *sweep_compile_file;
 
 /*
  * The timeout GtkSpinButton:
@@ -113,7 +113,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 1, 
 		_("Po file editing"));
-	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 6, 1, 
+	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 7, 1, 
 		_("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 4, 2, 
 		_("Recent files & spell checking"));
@@ -208,10 +208,13 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	use_update_function=gtranslator_utils_attach_toggle_with_label(fourth_page, 3,
 		_("Enable the update function of gtranslator (you need the sources for this)"),
 		GtrPreferences.update_function, gtranslator_preferences_dialog_changed);
-	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
+	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page, 4,
+		_("Delete the compile result file (named \"project-language_code.po\")"),
+		GtrPreferences.sweep_compile_file, gtranslator_preferences_dialog_changed);
+	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
 		_("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
-	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 5,
+	show_sidebar=gtranslator_utils_attach_toggle_with_label(fourth_page, 6,
 		_("Show the views sidebar"),
 		GtrPreferences.show_sidebar, gtranslator_preferences_dialog_changed);
 	
@@ -336,6 +339,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.dot_char = if_active(use_dot_char);
 	GtrPreferences.update_function = if_active(use_update_function);
 	GtrPreferences.popup_menu = if_active(enable_popup_menu);
+	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_sidebar = if_active(show_sidebar);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
@@ -439,6 +443,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.dot_char);
 	gtranslator_config_set_bool("toggles/use_update_function",
 			      GtrPreferences.update_function);
+	gtranslator_config_set_bool("toggles/sweep_compile_file",
+			      GtrPreferences.sweep_compile_file);
 	gtranslator_config_set_bool("toggles/enable_popup_menu",
 			      GtrPreferences.popup_menu);
 	gtranslator_config_set_bool("toggles/show_sidebar",
@@ -582,7 +588,9 @@ void gtranslator_preferences_read(void)
 	GtrPreferences.popup_menu =
 		gtranslator_config_get_bool("toggles/enable_popup_menu");
 	GtrPreferences.update_function =
-		gtranslator_config_get_bool("toggles/use_update_function");    
+		gtranslator_config_get_bool("toggles/use_update_function");
+	GtrPreferences.sweep_compile_file =
+		gtranslator_config_get_bool("toggles/sweep_compile_file");
 	GtrPreferences.dot_char = 
 		gtranslator_config_get_bool("toggles/use_dot_char");
 	GtrPreferences.check_recent_file = 

@@ -842,6 +842,7 @@ void compile(GtkWidget * widget, gpointer useless)
 	gchar	*cmd,
 		*status,
 		*test_file_name,
+		*output_file_name,
 		*result_file_name;
 		
 	gchar 	line[128];
@@ -863,15 +864,16 @@ void compile(GtkWidget * widget, gpointer useless)
 		return;
 	}
 
-	gtranslator_utils_get_compile_file_names(&test_file_name, &result_file_name);
+	gtranslator_utils_get_compile_file_names(&test_file_name, 
+		&output_file_name, &result_file_name);
 
 	if (!gtranslator_save_file(test_file_name))
 	{
 		return;
 	}
 
-	cmd = g_strdup_printf("msgfmt -v -c -o /dev/null %s >%s 2>&1",
-			    po->filename, result_file_name);
+	cmd = g_strdup_printf("msgfmt -v -c -o %s %s >%s 2>&1",
+			    output_file_name, test_file_name, result_file_name);
 	
 	res = system(cmd);
 	fs=fopen(result_file_name,"r");
@@ -891,7 +893,8 @@ void compile(GtkWidget * widget, gpointer useless)
 	fclose(fs);
 	g_free(cmd);
 
-	gtranslator_utils_remove_compile_files(&test_file_name, &result_file_name);
+	gtranslator_utils_remove_compile_files(&test_file_name, 
+		&output_file_name, &result_file_name);
 }
 
 /*

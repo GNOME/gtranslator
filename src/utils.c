@@ -242,31 +242,47 @@ gchar *gtranslator_utils_get_messages_table_state_file_name()
  * Set up and assign the test file names for the compile process.
  */
 void gtranslator_utils_get_compile_file_names(gchar **test_file, 
-	gchar **result_file)
+	gchar **output_file, gchar **result_file)
 {
 	*test_file=g_strdup_printf("%s/.gtranslator/gtranslator-temp-compile-file",
 		g_get_home_dir());
 
-	*result_file=g_strdup_printf("%s/.gtranslator/gtranslator-result-log-file",
+	*result_file=g_strdup_printf("%s/.gtranslator/gtranslator-compile-result-file",
 		g_get_home_dir());
+
+	*output_file=g_strdup_printf("%s/%s.gmo",
+		g_get_current_dir(), po->header->prj_name);
 }
 
 /*
  * Clean up after the test compile run.
  */
 void gtranslator_utils_remove_compile_files(gchar **test_file,
-	gchar **result_file)
+	gchar **output_file, gchar **result_file)
 {
 	if(*test_file)
 	{
 		remove(*test_file);
 		g_free(*test_file);
 	}
-	
+
 	if(*result_file)
 	{
 		remove(*result_file);
 		g_free(*result_file);
+	}
+	
+	if(*output_file)
+	{
+		/*
+		 * Only cleanup if this is wished by the user.
+		 */
+		if(GtrPreferences.sweep_compile_file)
+		{
+			remove(*output_file);
+		}
+		
+		g_free(*output_file);
 	}
 }
 

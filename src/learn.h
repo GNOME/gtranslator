@@ -33,9 +33,9 @@ void gtranslator_learn_init(void);
 gboolean gtranslator_learn_initialized(void);
 
 /*
- * Learn the given string.
+ * Learn the given strings.
  */
-void gtranslator_learn_string(const gchar *string);
+void gtranslator_learn_string(const gchar *id_string, const gchar *str_string);
 
 /*
  * Return whether the given string was already "learned".

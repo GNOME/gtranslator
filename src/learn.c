@@ -20,86 +20,151 @@
 #include "learn.h"
 #include "nautilus-string.h"
 #include "parse.h"
+#include "prefs.h"
 #include "utils.h"
 
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
 #include <libgnome/gnome-util.h>
+
+#define UMTF_FILENAME "autolearn-umtf.xml"
 
 /*
  * The internally used variables for learning.
  */
 static gboolean 	init_status=FALSE;
-static GList		*learn_buffer=NULL;
-static GCompletion	*completion_buffer=NULL;
+static GHashTable	*learn_hash=NULL;
 
 /*
- * A maximum number of read entries can be specified here; unlimited numbers
- *  could eventually cause too much time-loss.
+ * Do the hard hash work.
  */
-#define MAX_LEARN_ENTRIES 2048
+static void gtranslator_learn_hash_from_node(xmlNodePtr node);
+static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpointer useless);
+static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node);
+
+/*
+ * Hash the entries from the given node point.
+ */
+static void gtranslator_learn_hash_from_node(xmlNodePtr node)
+{
+	gchar	*original, *translation;
+
+	while(node && nautilus_strcasecmp(node->name, "value"))
+	{
+		node=node->next;
+	}
+
+	if(node && !nautilus_strcasecmp(node->name, "value"))
+	{
+		original=xmlNodeGetContent(node);
+	}
+
+	while(node && nautilus_strcasecmp(node->name, "translation"))
+	{
+		node=node->next;
+	}
+
+	if(node)
+	{
+		while(node && nautilus_strcasecmp(node->name, "value"))
+		{
+			node=node->next;
+		}
+
+		if(node && !nautilus_strcasecmp(node->name, "value"))
+		{
+			translation=xmlNodeGetContent(node);
+		}
+	}
+
+	if(original && translation)
+	{
+		g_hash_table_insert(learn_hash, g_strdup(original), g_strdup(translation));
+
+		g_free(original);
+		g_free(translation);
+	}
+}
+
+/*
+ * Free the hash table entry/data.
+ */
+static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpointer useless)
+{
+	g_free(key);
+	g_free(value);
+}
+
+/*
+ * Write the hash entries -- one entry for a msgid/msgstr pair.
+ */
+static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node)
+{
+	xmlNodePtr new_node;
+	xmlNodePtr value_node;
+	xmlNodePtr translation_node;
+	xmlNodePtr translation_value_node;
+
+	new_node=xmlNewChild(node, NULL, "message", NULL);
+	value_node=xmlNewChild(new_node, NULL, "value", (gchar *) key);
+
+	translation_node=xmlNewChild(new_node, NULL, "translation", NULL);
+	translation_value_node=xmlNewChild(translation_node, NULL, "value", (gchar *) value);
+}
 
 /*
  * Initialize our internal learn buffers .-)
  */
 void gtranslator_learn_init()
 {
-	gchar	*learn_base_file;
+	gchar		*learn_base_file;
 	
 	g_return_if_fail(init_status==FALSE);
 
-	learn_base_file=g_strdup_printf("%s/.gtranslator/learned-strings", 
+	learn_base_file=g_strdup_printf("%s/.gtranslator/" UMTF_FILENAME,
 		g_get_home_dir());
 
+	learn_hash=g_hash_table_new(g_str_hash, g_str_equal);
+
 	/*
-	 * If a current "learned-strings" file is present, parse it
-	 *  and set up our "learn_buffer" list.
+	 * Read in our autolearn xml document.
 	 */
 	if(g_file_test(learn_base_file, G_FILE_TEST_ISFILE))
 	{
-		gchar 	*content;
-		FILE 	*l_file;
-		gint	counter=0;
+		xmlDocPtr doc;
+		xmlNodePtr node;
 
-		l_file=fopen(learn_base_file, "r");
+		doc=xmlParseFile(learn_base_file);
+		g_return_if_fail(doc!=NULL);
 
-		while((content=gtranslator_utils_getline(l_file))!=NULL &&
-			counter <= MAX_LEARN_ENTRIES)
+		node=doc->xmlRootNode;
+
+		/*
+		 * Parse every message entry via the gtranslator_learn_hash_from_node
+		 *  function.
+		 */
+		while(node && node->name)
 		{
-			counter++;
-			
-			/*
-			 * Ignore empty lines and lines starting with '#'.
-			 */
-			if(g_strstrip(content) && content[0]!='#')
+			if(!nautilus_strcasecmp(node->name, "message"))
 			{
-				learn_buffer=g_list_prepend(learn_buffer,
-					g_strdup(content));
+				gtranslator_learn_hash_from_node(node);
 			}
+
+			node=node->next;
 		}
 
-		fclose(l_file);
+		xmlFreeDoc(doc);
 	}
 	else
 	{
-		learn_buffer=NULL;
+		/*
+		 * Setup a foo'sh hash content for the empty cases: Use "gtranslator"
+		 *  as a msgid/msgstr pair ,-)
+		 */
+		g_hash_table_insert(learn_hash, 
+			g_strdup("gtranslator"), g_strdup("gtranslator"));
 	}
-
-	/*
-	 * If there's no list yet, setup a minimal list containing one item:
-	 *  "GNOME"; also reverse and sort the list afterwards.
-	 */
-	if(!learn_buffer)
-	{
-		learn_buffer=g_list_prepend(learn_buffer, "GNOME");
-	}
-	
-	learn_buffer=g_list_reverse(learn_buffer);
-	learn_buffer=g_list_sort(learn_buffer, (GCompareFunc) nautilus_strcmp);
-
-	/*
-	 * Setup the completion buffer with our read-in strings.
-	 */
-	completion_buffer=g_completion_new(NULL);
-	g_completion_add_items(completion_buffer, learn_buffer);
 	
 	init_status=TRUE;
 }
@@ -117,87 +182,100 @@ gboolean gtranslator_learn_initialized()
  */
 void gtranslator_learn_shutdown()
 {
+	xmlDocPtr	doc;
+	
+	xmlNodePtr	root_node;
+	xmlNodePtr	language_node;
+	xmlNodePtr	translator_node;
+	
 	gchar 		*filename;
-	FILE		*l_file;
-	gint		counter=0;
 	
 	g_return_if_fail(init_status==TRUE);
 
-	filename=g_strdup_printf("%s/.gtranslator/learned-strings",
+	filename=g_strdup_printf("%s/.gtranslator/" UMTF_FILENAME,
 		g_get_home_dir());
+
+	/*
+	 * Create the XML document.
+	 */
+	doc=xmlNewDoc("1.0");
+
+	/*
+	 * Set up the main <umtf> document root node and set it's version attribute.
+	 */
+	root_node=xmlNewDocNode(doc, NULL, "umtf", NULL);
+	xmlSetProp(root_node, "version", "0.6");
+	xmlDocSetRootElement(doc, root_node);
+
+	/*
+	 * Set the header <language> tag with language informations.
+	 */
+	language_node=xmlNewChild(root_node, NULL, "language", NULL);
+
+	if(language)
+	{
+		xmlSetProp(language_node, "ename", language);
+	}
+
+	if(lg)
+	{
+		xmlSetProp(language_node, "email", lg);
+	}
+
+	if(lc)
+	{
+		xmlSetProp(language_node, "code", lc);
+	}
+
+	/*
+	 * Set <translator> node with translator informations -- if available.
+	 */
+	translator_node=xmlNewChild(root_node, NULL, "translator", NULL);
+
+	if(author)
+	{
+		xmlSetProp(translator_node, "name", author);
+	}
+
+	if(email)
+	{
+		xmlSetProp(translator_node, "email", email);
+	}
 	
 	/*
-	 * Open up the learned-strings file for writing the entries into it.
+	 * Clean up the hash table we're using, write it's contents, free them and destroy
+	 *  the hash table.
 	 */
-	l_file=fopen(filename, "w");
-	g_return_if_fail(l_file!=NULL);
+	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_write_hash_entry, 
+		doc->xmlRootNode);
+
+	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_free_hash_entry, NULL);
+	g_hash_table_destroy(learn_hash);
 
 	/*
-	 * A file identification string -- should be useful for mime-types
-	 *  "magic".
+	 * Save the file and free our used XML document.
 	 */
-	fprintf(l_file, "# gtranslator learned strings file\n");
-
-	/*
-	 * Don't write any further if there isn't any learned strings buffer.
-	 */
-	if(!learn_buffer)
-	{
-		fclose(l_file);
-		g_free(filename);
-		
-		return;
-	}
-
-	/*
-	 * Clean up our completion buffer.
-	 */
-	if(completion_buffer)
-	{
-		g_completion_clear_items(completion_buffer);
-		g_completion_free(completion_buffer);
-	}
-
-	/*
-	 * Clean up our internal learn buffer list.
-	 */
-	while(learn_buffer!=NULL && counter <= MAX_LEARN_ENTRIES)
-	{
-		counter++;
-		
-		fprintf(l_file, "%s\n", (gchar *)learn_buffer->data);
-
-		g_free(learn_buffer->data);
-		learn_buffer=learn_buffer->next;
-	}
-
-	/*
-	 * Free all the used variables.
-	 */
-	g_list_free(learn_buffer);
-
-	fclose(l_file);
-	g_free(filename);
+	xmlSaveFile(filename, doc);
+	xmlFreeDoc(doc);
 }
 
 /*
  * Add it to our learned list!
  */
-void gtranslator_learn_string(const gchar *string)
+void gtranslator_learn_string(const gchar *id_string, const gchar *str_string)
 {
-	gchar 	*learn_string;
-	
-	g_return_if_fail(string!=NULL);
+	g_return_if_fail(id_string!=NULL);
+	g_return_if_fail(str_string!=NULL);
 
-	learn_string=g_strstrip(g_strdup(string));
-
-	if(!gtranslator_learn_learned(learn_string))
+	/*
+	 * Insert the id/str_string pair only if there's no entry for the
+	 *  id_string yet.
+	 */
+	if(!gtranslator_learn_learned(id_string))
 	{
-		learn_buffer=g_list_append(learn_buffer,
-			g_strdup(learn_string));
+		g_hash_table_insert(learn_hash, 
+			g_strdup(id_string), g_strdup(str_string));
 	}
-
-	g_free(learn_string);
 }
 
 /*
@@ -205,22 +283,18 @@ void gtranslator_learn_string(const gchar *string)
  */
 gboolean gtranslator_learn_learned(const gchar *string)
 {
-	gchar 	*result;
-	gchar 	*search_string=g_strdup(string);
-	
 	g_return_val_if_fail(string!=NULL, FALSE);
 
-	result=(gchar *) g_list_find(learn_buffer, search_string);
-	g_free(search_string);
-
-	if(!result)
+	/*
+	 * Simple lookup encapsulation.
+	 */
+	if(g_hash_table_lookup(learn_hash, (gconstpointer) string))
 	{
-		return FALSE;
+		return TRUE;
 	}
 	else
 	{
-		g_free(result);
-		return TRUE;
+		return FALSE;
 	}
 }
 
@@ -234,17 +308,21 @@ gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 	
 	g_return_val_if_fail(search_string!=NULL, NULL);
 
-	g_completion_complete(completion_buffer, (gchar *)search_string, 
-		&found_string);
+	/*
+	 * Look the given search_string up in our internally used hash table.
+	 */
+	found_string=(gchar *) g_hash_table_lookup(learn_hash, (gconstpointer) search_string);
 
 	/*
-	 * Return NULL if no strings could be completed.
+	 * Return it via g_strdup, free it or return NULL in bad case .-(
 	 */
-	if(!found_string)
+	if(found_string)
+	{
+		return g_strdup(found_string);
+		g_free(found_string);
+	}
+	else
 	{
 		return NULL;
 	}
-
-	return g_strdup(found_string);
-	g_free(found_string);
 }

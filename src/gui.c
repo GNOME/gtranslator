@@ -382,6 +382,14 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	content_pane_position=e_paned_get_position(E_PANED(content_pane));
 	gtranslator_config_set_int("interface/content_pane_position", content_pane_position);
 	gtranslator_utils_save_geometry();
+
+	/*
+	 * Shutdown our internal learning system.
+	 */
+	if(gtranslator_learn_initialized())
+	{
+		gtranslator_learn_shutdown();
+	}
 	
 	/*
 	 * Free the preferences stuff.
@@ -401,17 +409,11 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_config_close();
 
 	/*
-	 * Shutdown the eventually (non-)initialized stuff from GnomeVFS and
-	 *  the learn buffer.
+	 * Shutdown the eventually (non-)initialized stuff from GnomeVFS.
 	 */
 	if(gnome_vfs_initialized())
 	{
 		gnome_vfs_shutdown();
-	}
-
-	if(gtranslator_learn_initialized())
-	{
-		gtranslator_learn_shutdown();
 	}
 
 	/*
