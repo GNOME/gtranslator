@@ -1,3 +1,17 @@
+2000-09-20  Fatih Demir	<kabalak@gmx.net>
+
+	* preferences.c: Integrated the int/string/bool
+		methods of our preferences engine :)
+
+	* Makefile.am: Also add the $(GNOME_CFLAGS) to the
+		cflags.
+
+	* preferences.c: Undefine the '_' if it's already defined
+		as it would clash with the '_' from libgnome.
+	
+	* test-lg.c: Removed the xml-routines and integrating the
+		preferences routines ( tests for all sorts ).
+
 2000-09-19  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Added the new preferences source files

@@ -7,7 +7,7 @@ noinst_PROGRAMS = test-libgtranslator
 lib_LTLIBRARIES = libgtranslator.la
 
 if GCONF_IS_PRESENT
-configstuffcflags = $(GCONF_CFLAGS)
+configstuffcflags = $(GCONF_CFLAGS) $(GNOME_CFLAGS)
 else
 configstuffcflags = $(GNOME_CFLAGS)
 endif
