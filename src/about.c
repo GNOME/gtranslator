@@ -38,7 +38,6 @@ void about_box(GtkWidget * widget, gpointer useless)
 	const gchar *authors[] = {
 		"Fatih Demir <kabalak@gtranslator.org>",
 		"Gediminas Paulauskas <menesis@gtranslator.org>",
-		"Thomas Ziehmer <thomas@gtranslator.org>",
 		NULL
 	};
 	raise_and_return_if_exists(about);
