@@ -291,6 +291,11 @@ void parse(const char *filename)
 	enable_actions_just_opened();
 	disable_actions(ACT_FIRST, ACT_BACK);
 	/**
+	* Activate the translation box widget.
+	**/
+	gtk_widget_activate(GTK_WIDGET(trans_box));
+	
+	/**
 	* Update the recent files list.
 	**/
 	gtranslator_display_recent();

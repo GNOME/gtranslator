@@ -1,3 +1,21 @@
+2000-10-15  Fatih Demir	<kabalak@gmx.net>
+
+	* gui.c: Set the font and the colors on startup via the new
+		gtranslator_set_style() function which should do more
+		 work but it's enough for now; include the new
+		  "libgtranslator/stylistics.h" header for the function
+		   gtranslator_set_style().
+
+	* parse.c: Activate the translation box on the successfull of a
+		po-file.
+
+	* prefs.h: Added the "font" gchar as part of the wants structure and
+		added a function to set the style.
+
+	* prefs.c: Use the new color getting/setting routines from
+		libgtranslator, get/set the fontname in the preferences and
+		 the function to set the style.
+
 2000-10-13  Fatih Demir <kabalak@gmx.net>
 
 	* prefs.c: Removed the corresponding checkbutton for the removed

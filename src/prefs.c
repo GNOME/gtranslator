@@ -16,6 +16,7 @@
 #include "find.h"
 
 #include <libgtranslator/preferences.h>
+#include <libgtranslator/stylistics.h>
 
 /* The callbacks */
 static void prefs_box_changed(GtkWidget * widget, gpointer useless);
@@ -45,13 +46,6 @@ static GtkWidget
 	*enable_popup_menu, *use_dot_char, *use_update_function,
 	*recent_files_number, *check_recent_files, *own_specs;
 	
-/**
-* The font dialog and the color settings widgets.
-**/
-static GtkWidget 
-	*foreground, *background, *font;
-		
-
 /* The preferences dialog */
 static GtkWidget *prefs = NULL;
 
@@ -337,7 +331,8 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	font=gnome_font_picker_new();
 	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
 		_("gtranslator -- font selection"));
-		
+	gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
+		wants.font);
 	/**
 	* And the color pickers.
 	**/
@@ -347,7 +342,10 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	background=gnome_color_picker_new();
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(background),
 		_("gtranslator -- background color"));
-		
+	gtranslator_color_values_get(GNOME_COLOR_PICKER(foreground),
+		COLOR_VALUE_FG);
+	gtranslator_color_values_get(GNOME_COLOR_PICKER(background),
+		COLOR_VALUE_BG);
 	/**
 	* Insert the widgets.
 	**/		
@@ -373,8 +371,8 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(foreground), "color_set",
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(background), "color_set",		   
-			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);		   
+	gtk_signal_connect(GTK_OBJECT(background), "color_set",
+			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(prefs_box_apply), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "help",
@@ -389,8 +387,6 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 **/
 static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 {
-	gdouble fg_red, fg_green, fg_blue, fg_alpha;
-	gdouble bg_red, bg_green, bg_blue, bg_alpha;
 	/* We need to apply only once */
 	if (page_num != -1)
 		return;
@@ -420,13 +416,6 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 #undef if_active
 	
 	wants.recent_files=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(recent_files_number));
-	/**
-	* Check if the SpinButton or my brain produces dumpage ..
-	**/
-	if(wants.recent_files<2)
-	{
-		wants.recent_files=2;
-	}
 	gtranslator_config_set_int("recent_files/number", wants.recent_files);
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
@@ -435,12 +424,18 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	gtranslator_config_set_string("language/encoding", enc);
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
-	gtranslator_config_set_string("font/name", 
-		gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
-	gnome_color_picker_get_d(GNOME_COLOR_PICKER(foreground), &fg_red, &fg_green,
-		&fg_blue, &fg_alpha);
-	gnome_color_picker_get_d(GNOME_COLOR_PICKER(background), &bg_red, &bg_green,
-		&bg_blue, &bg_alpha);
+	/**
+	* Get the font and store it.
+	**/
+	wants.font=gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font));
+	gtranslator_config_set_string("font/name", wants.font);
+	/**
+	* Get the colors from the color pickers.
+	**/
+	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground),
+		COLOR_VALUE_FG);
+	gtranslator_color_values_set(GNOME_COLOR_PICKER(background),
+		COLOR_VALUE_BG);
 	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", wants.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
@@ -541,6 +536,7 @@ void read_prefs(void)
 	lg = gtranslator_config_get_string("language/team_email");
 	mime = gtranslator_config_get_string("language/mime_type");
 	enc = gtranslator_config_get_string("language/encoding");
+	wants.font = gtranslator_config_get_string("font/name");
 	wants.recent_files =
 	    gtranslator_config_get_int("recent_files/number");
 	wants.save_geometry =
@@ -564,7 +560,7 @@ void read_prefs(void)
 	wants.check_recent_file = 
 	    gtranslator_config_get_bool("toggles/check_recent_files");
 	wants.use_own_specs =
-	    gtranslator_config_get_bool("toggles/use_own_specs");    
+	    gtranslator_config_get_bool("toggles/use_own_specs");
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();
@@ -629,4 +625,3 @@ void restore_geometry(gchar * gstr)
 	if ((width > 0) && (height > 0))
 		gtk_window_set_default_size(GTK_WINDOW(app1), width, height);
 }
-

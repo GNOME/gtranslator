@@ -11,7 +11,6 @@
 
 #include "gui.h"
 #include "prefs.h"
-#include <libgtranslator/preferences.h>
 #include "dialogs.h"
 #include "parse.h"
 #include "header_stuff.h"
@@ -19,6 +18,9 @@
 #include "spell.h"
 #include "dnd.h"
 #include "about.h"
+
+#include <libgtranslator/preferences.h>
+#include <libgtranslator/stylistics.h>
 
 typedef struct _GtrAction GtrAction;
 #define GTR_ACTION(x) ((GtrAction *)x)
@@ -423,7 +425,7 @@ void enable_actions_just_opened(void)
 {
 	enable_actions(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_CUT, ACT_COPY,
 		       ACT_PASTE, ACT_CLEAR, ACT_FIND, ACT_HEADER, ACT_NEXT,
-		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED, ACT_FUZZY,
+		       ACT_LAST, ACT_GOTO, ACT_TRANSLATED,
 		       ACT_STICK);
 	/**
 	* If we'd have the option to use the update function set, enable the
@@ -432,7 +434,10 @@ void enable_actions_just_opened(void)
 	if(wants.update_function)
 	{
 		enable_actions(ACT_UPDATE);	
-	}	       
+	}  
+	/**
+	* Enable the editing of the msgstrs :-)
+	**/
 	gtk_text_set_editable(GTK_TEXT(trans_box), TRUE);
 }
 
@@ -500,6 +505,14 @@ void create_app1(void)
 
 	gtranslator_display_recent();
 
+	/**
+	* Check if we'd to use special styles.
+	**/
+	if(wants.use_own_specs)
+	{
+		gtranslator_set_style(text1, trans_box);
+	}
+	
 	/**
 	* The callbacks list
 	**/

@@ -65,6 +65,10 @@ struct {
 	* If we'd use the own font and color specifications.
 	**/
 	guint use_own_specs		: 1;
+	/**
+	* The fontname
+	**/
+	gchar				*font;
 } wants;
 
 /* Preferences-box creation and callbacks */
@@ -75,6 +79,11 @@ void free_prefs(void);
 /* Routines for saving/restoring/setting geometry of the main window */
 void save_geometry(void);
 void restore_geometry(gchar * gstr);
+
+/**
+* The widgets for the fonts/colors.
+**/
+GtkWidget *foreground, *background, *font;
 
 /**
 * Lists for the combo-boxes ..
