@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.42\n"
-"POT-Creation-Date: 2002-04-07 16:06+0100\n"
-"PO-Revision-Date: 2002-04-07 16:10+0000\n"
+"POT-Creation-Date: 2002-04-25 03:42+0100\n"
+"PO-Revision-Date: 2002-04-25 03:50+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -764,92 +764,92 @@ msgstr "Walloon"
 msgid "Welsh"
 msgstr "Galês"
 
-#: src/main.c:81
+#: src/main.c:82
 msgid "Auto translate the po file & exit"
 msgstr "Auto traduzir o ficheiro po & sair"
 
-#: src/main.c:81 src/main.c:97
+#: src/main.c:82 src/main.c:98
 msgid "FILENAME"
 msgstr "NOMEFICHEIRO"
 
-#: src/main.c:85
+#: src/main.c:86
 msgid "Show build information/specifications"
 msgstr "Mostrar informação/especificações de compilação"
 
-#: src/main.c:89
+#: src/main.c:90
 msgid "Export learn buffer to a plain po file"
 msgstr "Exportar buffer de aprendizagem para ficheiro po simples"
 
-#: src/main.c:89
+#: src/main.c:90
 msgid "PO_FILE"
 msgstr "FICHEIRO_PO"
 
-#: src/main.c:93
+#: src/main.c:94
 msgid "Specify main window geometry"
 msgstr "Especificar geometria da janela principal"
 
-#: src/main.c:93
+#: src/main.c:94
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: src/main.c:97
+#: src/main.c:98
 msgid "Learn the file completely & exit"
 msgstr "Aprender totalmente o ficheiro & sair"
 
-#: src/main.c:101
+#: src/main.c:102
 msgid "Don't load any backend modules"
 msgstr "Não carregar quaisquer módulos de serviço"
 
-#: src/main.c:105
+#: src/main.c:106
 msgid "HTML file to write to"
 msgstr "Ficheiro HTML para onde escrever"
 
-#: src/main.c:105
+#: src/main.c:106
 msgid "HTMLFILE"
 msgstr "FICHEIROHTML"
 
-#: src/main.c:109
+#: src/main.c:110
 msgid "Don't highlight syntax"
 msgstr "Não realçar sintaxe"
 
-#: src/main.c:150
+#: src/main.c:151
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Erro durante inicialização GConf: %s."
 
-#: src/main.c:173
+#: src/main.c:174
 msgid "gtranslator build information/specs:"
 msgstr "Informação/especificações de compilação gtranslator:"
 
-#: src/main.c:175
+#: src/main.c:176
 msgid "Version and build date:"
 msgstr "Versão e data de compilação:"
 
-#: src/main.c:177
+#: src/main.c:178
 msgid "Build GLib/Gtk+/GNOME versions:"
 msgstr "Versões de compilação da GLib/Gtk+/GNOME:"
 
-#: src/main.c:179
+#: src/main.c:180
 msgid "Backends directory:"
 msgstr "Directório de serviços:"
 
-#: src/main.c:181
+#: src/main.c:182
 msgid "Colorschemes directory:"
 msgstr "Directório de esquemas de cores:"
 
-#: src/main.c:183
+#: src/main.c:184
 msgid "Scripts directory:"
 msgstr "Directório de scripts:"
 
-#: src/main.c:185
+#: src/main.c:186
 msgid "Window icon:"
 msgstr "Ícone de janela:"
 
-#: src/main.c:187
+#: src/main.c:188
 msgid "Own locale directory:"
 msgstr "Directório do próprio locale:"
 
-#: src/main.c:220
+#: src/main.c:221
 msgid "GModule implementation doesn't support loading dynamic modules!"
 msgstr "Implementação GModule não suporta o carregamento de módulos dinâmicos!"
 
@@ -857,7 +857,7 @@ msgstr "Implementação GModule não suporta o carregamento de módulos dinâmicos!"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:468
+#: src/main.c:469
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "Aprendidos com sucesso `%s'.\n"
@@ -865,7 +865,7 @@ msgstr "Aprendidos com sucesso `%s'.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:510
+#: src/main.c:511
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
 msgstr "Exportado buffer de aprendizagem para `%s'.\n"
@@ -1700,23 +1700,35 @@ msgstr ""
 "Grave uma nóva cópia do mesmo para outro local à sua escolha e obtenha\n"
 "as necessárias permissões de escrita."
 
-#: src/utils_gui.c:401
+#: src/utils_gui.c:429
 #, c-format
 msgid ""
-"The file `%s' is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling `%s' currently to\n"
-"re-gain access to this file (also applies for post-crash cases)."
+"The file\n"
+"\n"
+"   %s\n"
+"\n"
+"is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling\n"
+"this file currently to re-gain access to this file.\n"
+"\n"
+"Shall fool gtranslator open this file anyway ?"
 msgstr ""
-"O ficheiro `%s' já está aberto por outra instância do gtranslator!\n"
-"Feche a outra instância do gtranslator que está a mexer em `%s' por\n"
-"forma a obter acesso a este ficheiro (também se aplica a casos pós-crash)."
+"O ficheiro\n"
+"\n"
+"   %s\n"
+"\n"
+"já está aberto por outra instância do gtranslator!\n"
+"Feche a outra instância do gtranslator que está actualmente a\n"
+"gerir o ficheiro por forma a obter acesso novamente a este ficheiro.\n"
+"\n"
+"Deverá ainda assim o gtranslator abrir este ficheiro ?"
 
-#: src/utils_gui.c:437
+#: src/utils_gui.c:474
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "O programa de descompressão necessário (`%s') não está instalado!"
 
-#: src/utils_gui.c:442
+#: src/utils_gui.c:479
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "O programa de compressão necessário (`%s') não está instalado!"
