@@ -353,7 +353,11 @@ gboolean gtranslator_backend_open(gchar *filename)
 	GList *mybackends=NULL;
 	
 	g_return_val_if_fail(filename!=NULL, FALSE);
-	g_return_val_if_fail(backends!=NULL, FALSE);
+
+	if(!backends)
+	{
+		return FALSE;
+	}
 
 	/*
 	 * Operate on a local copy of the backends list.
