@@ -5,6 +5,8 @@
 schemesdir = $(datadir)/gtranslator/colorschemes
 
 schemes_DATA = \
-	kabalak.xml
+	extremely-kabalak.xml \
+	kabalak.xml \
+	menesis.xml
 
 EXTRA_DIST = $(schemes_DATA)
