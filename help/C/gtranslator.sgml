@@ -172,7 +172,6 @@
     <sect2 id="Basic">
       <title>Basic usage</title>
       <para>
-        This will be about basic functions of gtranslator
         Starting <application>Gtranslator</application> opens the
         <interface>Main window</interface>, shown in <xref
         linkend="mainwindow-fig">.
@@ -354,19 +353,7 @@
           after the statement you have selected.
         </para>
 
-	<note>
-	  <title>Altering The Proofs Themselves</title>
-          <para>
-            <application>MY-GNOME-APP</application> does not allow you
-            to alter a proof it has produced itself.  You can, save
-            your proof as a plain text file (using the
-            <guimenuitem>Save as...</guimenuitem> menu), and alter it
-            that way.  Be aware, however, that
-            <application>MY-GNOME-APP</application> uses its own file
-            format for saved proofs, and cannot re-open a file unless
-            it is in the .mga format.
-          </para>
-	</note>
+	
       </sect3>
 
 -->
@@ -440,7 +427,7 @@
 	  <title>Gtranslator Toolbar</title>
 	  <screenshot>
 	    <screeninfo>Gtranslator Toolbar</screeninfo>
-	    <graphic fileref="usage-toolbar" format="png"></graphic>
+	    <graphic fileref="figures/toolbar" format="png"></graphic>
 	  </screenshot>
 	</figure>
         <variablelist>
@@ -675,42 +662,41 @@
    <title>Preferences Dialog</title>
    <screenshot>
     <screeninfo>Preferences Dialog</screeninfo>
-    <graphic fileref="prefs" format="png"
+    <graphic fileref="figures/prefs" format="png"
      srccredit="emese">
     </graphic>
    </screenshot>
   </figure>
 
   <para>
-   The properties in the <guilabel>PREFSTABNAME</guilabel> tab are:
+   The properties in the <guilabel>Personal information</guilabel> tab are:
 
    <!--many people use itemizedlists in cases like this. Variablelists
    are more appropriate -->
 
       <variablelist>
 	<varlistentry>
-	  <term> <guilabel>Default Text Style</guilabel></term>
+	  <term><guilabel>Author's name</guilabel></term>
 	  <listitem>
 	    <para>
-              Select the default text style for statements in your
-              proof.  You can still change the style for individual
-              proofs or sections of a proof at a later date.
+              Fill in your name. This information will be saved in the po file.
             </para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>(Configuration Item Label)</term>
+	  <term><guilabel>Author's e-mail address</guilabel></term>
 	  <listitem>
 	    <para>
-             (Description of Configuration)
+             Fill in your e-mail address. This information will be saved 
+             in the po file.
              </para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>(Configuration Item Label)</term>
+	  <term><guilabel>Default query domain</guilabel></term>
 	  <listitem>
 	    <para>
-             (Description of Configuration)
+             Choose a query domain from the drop down list.
              </para>
 	  </listitem>
 	</varlistentry>
@@ -718,22 +704,56 @@
     </para>
 
     <para>
-     The properties in the <guilabel>SECONDTABNAME</guilabel> tab are:
+     The properties in the <guilabel>Language settings</guilabel> tab are:
        <variablelist>
 	<varlistentry>
-	  <term>(Configuration Item Label)</term>
+	  <term><guilabel>Language</guilabel></term>
 	  <listitem>
 	    <para>
-             (Description of Configuration)
+             Choose from the dropdown list the target language.
+             <application>Gtranslator</application> fills in the rest of
+             the form with default values for the given language. You may
+             modify the preset values, but usually you can safely use 
+             the default settings. 
              </para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>(Configuration Item Label)</term>
+	  <term><guilabel>Language code</guilabel></term>
 	  <listitem>
 	    <para>
-             (Description of Configuration)
+             This field displays the ISO 639-2 language code used for the 
+             language chosen above. The name of the PO file will 
+             be based on this setting.
              </para>
+	  </listitem>
+	</varlistentry>
+        <varlistentry>
+	  <term><guilabel>Language group's Email</guilabel></term>
+	  <listitem>
+	    <para>
+             This field displays the email address used by the language team.
+             </para>
+	  </listitem>
+	</varlistentry>
+        <varlistentry>
+	  <term><guilabel>Charset</guilabel></term>
+	  <listitem>
+	    <para>
+             The <guilabel>Charset</guilabel> field displays the encoding used              to store the po file. <application>Gtranslator</application> 
+             offers you a default setting.
+             </para>
+             <note>
+	  <title>Using alternate encodings</title>
+          <para>
+            Default charset settings offered by 
+            <application>Gtranslator</application> can be used safely when
+            translating po files for the GNOME 1.4 platform. GNOME 2.0 will use
+            UTF-8 encoding for all languages, thus you need the alter the 
+            defaults when translating  for 2.x platforms. You may also want 
+            to switch encoding to be able to use the "euro" sign. 
+          </para>
+	</note>
 	  </listitem>
 	</varlistentry>
       </variablelist>
@@ -852,7 +872,7 @@
 
 
  <sect1 id="glossary">
-   <title>Glossary of term related to Gtranlator, gettext and localization</title>
+   <title>Glossary</title>
   <para>
 
      <!--many people use itemizedlists in cases like this. Variablelists
@@ -892,7 +912,7 @@
 	  	  </listitem>
   	</varlistentry>
   	<varlistentry>
-	  	  <term>l10n</term>
+	  	  <term><acro>l10n</acro></term>
 	  	  <listitem>
 	  	    <para>
 
@@ -924,20 +944,33 @@
 	  	  </listitem>
   	</varlistentry>
   	<varlistentry>
-		  	  <term>ISO 639-2 language code</term>
-		  	  <listitem>
-		  	    <para>
+		 <term>ISO 639-2 language code</term>
+		 <listitem>
+		   <para>
 
-		        </para>
-		  	  </listitem>
+		   </para>
+		 </listitem>
   	</varlistentry>
   	<varlistentry>
-			  	  <term>default query domain</term>
-			  	  <listitem>
-			  	    <para>
-
-			        </para>
-			  	  </listitem>
+	  <term>default query domain</term>
+		 <listitem>
+		    <para>
+        	    </para>
+		 </listitem>
+  	</varlistentry>
+        <varlistentry>
+	  <term>charset</term>
+		 <listitem>
+		    <para>
+        	    </para>
+		 </listitem>
+  	</varlistentry>
+        <varlistentry>
+	  <term>encoding</term>
+		 <listitem>
+		    <para>
+        	    </para>
+		 </listitem>
   	</varlistentry>
    </variablelist>
   </para>
