@@ -6,7 +6,7 @@
 myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
 
 if GCONF_IS_PRESENT
-gconf_cflags = $(GCONF_CFLAGS)
+gconf_cflags = $(GCONF_CFLAGS) -DGCONF_IS_PRESENT=7
 gconf_libs = $(GCONF_LIBS)
 else
 gconf_cflags =
@@ -14,7 +14,7 @@ gconf_libs =
 endif
 
 if USE_VFS_STUFF
-vfs_cflags = $(VFS_CFLAGS)
+vfs_cflags = $(VFS_CFLAGS) -DUSE_VFS_STUFF=2000
 vfs_libs = $(VFS_LIBS)
 else
 vfs_cflags =

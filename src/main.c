@@ -102,19 +102,6 @@ int main(int argc, char *argv[])
 	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv,
 				   gtranslator_options, 0, &context);
 
-	/**
-	* Test if we'd been run before.
-	**/
-	gtranslator_config_init();
-	if(gtranslator_config_get_bool("informations/we_have_been_here")!=TRUE)
-	{
-		GtkWidget *druid;
-		druid=create_gtranslator_druid();
-		gtk_widget_show_all(druid);
-		gtranslator_config_set_bool("informations/we_have_been_here", TRUE);
-	}
-	gtranslator_config_close();
-
 	/* Initialize the regular expression cache */
 	rxc = gnome_regex_cache_new_with_size(20);
 	read_prefs();
