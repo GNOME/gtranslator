@@ -74,7 +74,7 @@ static GtkWidget
  * The timeout GtkSpinButton:
  */
 static GtkWidget
-	*autosave_timeout;
+	*autosave_timeout, *max_history_entries;
 
 /*
  * The preferences dialog widget itself.
@@ -90,9 +90,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 			*bg_color_label,
 			*font_label,
 			*scheme_file_label,
-			*autosave_timeout_label;
+			*autosave_timeout_label,
+			*max_history_entries_label;
 
-	GtkObject	*autosave_adjustment;
+	GtkObject	*autosave_adjustment,
+			*max_history_entries_adjustment;
 	
 	gtranslator_raise_dialog(prefs);
 	
@@ -201,17 +203,31 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The fifth page with the Recent files options.
 	 */
-	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 0,
+	max_history_entries_label=gtk_label_new(_("Maximal history entries:"));
+	max_history_entries_adjustment=gtk_adjustment_new(10.0, 1.0, 15.0, 1.0,
+		1.0, 1.0);
+	
+	max_history_entries=gtk_spin_button_new(GTK_ADJUSTMENT(
+		max_history_entries_adjustment), 1, 0);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(max_history_entries),
+		GtrPreferences.max_history_entries);
+
+	gtk_table_attach_defaults(GTK_TABLE(fifth_page), 
+		max_history_entries_label, 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
+		max_history_entries, 1, 2, 0, 1);
+	
+	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
 		_("Check every recent file before listing it up"),
 		GtrPreferences.check_recent_file, gtranslator_preferences_dialog_changed);
-	instant_spell_checking=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
+	instant_spell_checking=gtranslator_utils_attach_toggle_with_label(fifth_page, 2,
 		_("Instant spell checking"),
 		GtrPreferences.instant_spell_check, gtranslator_preferences_dialog_changed);
-	use_own_dict=gtranslator_utils_attach_toggle_with_label(fifth_page, 2,
+	use_own_dict=gtranslator_utils_attach_toggle_with_label(fifth_page, 3,
 		_("Use special dictionary"),
 		GtrPreferences.use_own_dict, gtranslator_preferences_dialog_changed);
 	dictionary_file=
-	    gtranslator_utils_attach_entry_with_label(fifth_page, 3, _("Dictionary to use:"),
+	    gtranslator_utils_attach_entry_with_label(fifth_page, 4, _("Dictionary to use:"),
 				    GtrPreferences.dictionary, gtranslator_preferences_dialog_changed);
 	
 	/*
@@ -292,11 +308,13 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		_("Autosave suffix:"),
 		GtrPreferences.autosave_suffix, gtranslator_preferences_dialog_changed);
 
-	autosave_adjustment=gtk_adjustment_new(GtrPreferences.autosave_timeout, 1.0, 30.0,
-		1.0, 10.0, 10.0);
+	autosave_adjustment=gtk_adjustment_new(GtrPreferences.autosave_timeout,
+		1.0, 30.0, 1.0, 10.0, 10.0);
 
-	autosave_timeout=gtk_spin_button_new(GTK_ADJUSTMENT(autosave_adjustment), 1, 0);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(autosave_timeout), GtrPreferences.autosave_timeout);
+	autosave_timeout=gtk_spin_button_new(GTK_ADJUSTMENT(
+		autosave_adjustment), 1, 0);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(autosave_timeout),
+		GtrPreferences.autosave_timeout);
 
 	gtk_table_attach_defaults(GTK_TABLE(seventh_page),
 		autosave_timeout_label, 0, 1, 1, 2);
@@ -316,6 +334,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 			   GNOME_FILE_ENTRY(scheme_file))), "changed",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(autosave_timeout), "changed",
+			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(max_history_entries), "changed",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(gtranslator_preferences_dialog_apply), NULL);
@@ -369,22 +389,36 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	GtrPreferences.autosave_with_suffix = if_active(autosave_with_suffix);
 #undef if_active
 	
+	/*
+	 * Read out the SpinButton's.
+	 */
 	GtrPreferences.autosave_timeout = 
-		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(autosave_timeout));
+		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
+			autosave_timeout));
+		
+	GtrPreferences.max_history_entries =
+		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
+			max_history_entries));
 	
 	gtranslator_config_init();
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
-	gtranslator_config_set_string("query/defaultdomain", GtrPreferences.defaultdomain);
+	gtranslator_config_set_string("query/defaultdomain", 
+		GtrPreferences.defaultdomain);
 	gtranslator_config_set_string("language/name", language);
 	gtranslator_config_set_string("language/mime_type", mime);
 	gtranslator_config_set_string("language/encoding", enc);
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
-	gtranslator_config_set_string("informations/autosave_suffix", GtrPreferences.autosave_suffix);
+	gtranslator_config_set_string("informations/autosave_suffix", 
+		GtrPreferences.autosave_suffix);
 	
-	gtranslator_config_set_float("informations/autosave_timeout", GtrPreferences.autosave_timeout);
+	gtranslator_config_set_float("informations/autosave_timeout", 
+		GtrPreferences.autosave_timeout);
+
+	gtranslator_config_set_float("informations/max_history_entries", 
+		GtrPreferences.max_history_entries);
 	
 	g_free(GtrPreferences.font);
 	GtrPreferences.font=g_strdup(gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
@@ -529,6 +563,9 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_bool("toggles/autosave_with_suffix");
 	GtrPreferences.autosave_suffix =
 		gtranslator_config_get_string("informations/autosave_suffix");
+
+	GtrPreferences.max_history_entries =
+		gtranslator_config_get_float("informations/max_history_entries");
 
 	GtrPreferences.instant_spell_check = 
 		gtranslator_config_get_bool("toggles/instant_spell_check");

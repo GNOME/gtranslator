@@ -62,6 +62,7 @@ struct {
 	guint keep_obsolete		: 1;
 	guint autosave			: 1;
 	guint autosave_with_suffix	: 1;
+	guint max_history_entries	: 10;
 
 	/*
 	 * The autosave timeout in minutes.

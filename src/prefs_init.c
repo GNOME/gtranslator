@@ -56,12 +56,22 @@ void gtranslator_preferences_init_default_values()
 			"toggles/keep_obsolete", FALSE);
 
 		/*
-		 * Autosave options; it should be on, with suffix "autosave" and 5 minutes.
+		 * Autosave options; it should be on, with suffix "autosave" 
+		 *  and timeout on 5 minutes.
 		 */
 		gtranslator_config_set_bool("toggles/autosave", TRUE);
-		gtranslator_config_set_bool("toggles/autosave_with_suffix", TRUE);
-		gtranslator_config_set_string("informations/autosave_suffix", "autosave");
-		gtranslator_config_set_float("informations/autosave_timeout", 5.0);
+		gtranslator_config_set_bool("toggles/autosave_with_suffix",
+			TRUE);
+		gtranslator_config_set_string("informations/autosave_suffix", 
+			"autosave");
+		gtranslator_config_set_float("informations/autosave_timeout",
+			5.0);
+
+		/*
+		 * We do want maximally 10 history entries per default.
+		 */
+		gtranslator_config_set_float("informations/max_history_entries",
+			10.0); 
 
 		/*
 		 * Initialize the default highlight colors.

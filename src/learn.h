@@ -43,6 +43,12 @@ void gtranslator_learn_string(const gchar *string);
 gboolean gtranslator_learn_learned(const gchar *string);
 
 /*
+ * Returns a gchar if there are any matches; returns 1st matching gchar or
+ *  NULL.
+ */
+gchar *gtranslator_learn_get_learned_string(const gchar *search_string);
+
+/*
  * Shutdown our learn process.
  */
 void gtranslator_learn_shutdown(void);

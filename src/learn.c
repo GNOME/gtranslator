@@ -29,6 +29,7 @@
  */
 static gboolean 	init_status=FALSE;
 static GList		*learn_buffer=NULL;
+static GCompletion	*completion_buffer=NULL;
 
 /*
  * A maximum number of read entries can be specified here; unlimited numbers
@@ -68,7 +69,7 @@ void gtranslator_learn_init()
 			/*
 			 * Ignore empty lines and lines starting with '#'.
 			 */
-			if(content[0]!='\0' && content[0]!='#')
+			if(content && content[0]!='\0' && content[0]!='#')
 			{
 				learn_buffer=g_list_prepend(learn_buffer,
 					g_strdup(content));
@@ -83,15 +84,23 @@ void gtranslator_learn_init()
 	}
 
 	/*
-	 * Reverse and sort the entries list.
+	 * If there's no list yet, setup a minimal list containing one item:
+	 *  "GNOME"; also reverse and sort the list afterwards.
 	 */
-	if(learn_buffer)
+	if(!learn_buffer)
 	{
-		learn_buffer=g_list_reverse(learn_buffer);
-		learn_buffer=g_list_sort(learn_buffer, (GCompareFunc)
-			nautilus_strcmp);
+		learn_buffer=g_list_prepend(learn_buffer, "GNOME");
 	}
+	
+	learn_buffer=g_list_reverse(learn_buffer);
+	learn_buffer=g_list_sort(learn_buffer, (GCompareFunc) nautilus_strcmp);
 
+	/*
+	 * Setup the completion buffer with our read-in strings.
+	 */
+	completion_buffer=g_completion_new(NULL);
+	g_completion_add_items(completion_buffer, learn_buffer);
+	
 	init_status=TRUE;
 }
 
@@ -140,6 +149,18 @@ void gtranslator_learn_shutdown()
 		return;
 	}
 
+	/*
+	 * Clean up our completion buffer.
+	 */
+	if(completion_buffer)
+	{
+		g_completion_clear_items(completion_buffer);
+		g_completion_free(completion_buffer);
+	}
+
+	/*
+	 * Clean up our internal learn buffer list.
+	 */
 	while(learn_buffer!=NULL && counter <= MAX_LEARN_ENTRIES)
 	{
 		counter++;
@@ -201,4 +222,29 @@ gboolean gtranslator_learn_learned(const gchar *string)
 		g_free(result);
 		return TRUE;
 	}
+}
+
+/*
+ * The "query" function which returns the string found in the learned_buffer;
+ *  or NULL if nothing was found.
+ */
+gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
+{
+	gchar	*found_string;
+	
+	g_return_val_if_fail(search_string!=NULL, NULL);
+
+	g_completion_complete(completion_buffer, (gchar *)search_string, 
+		&found_string);
+
+	/*
+	 * Return NULL if no strings could be completed.
+	 */
+	if(!found_string)
+	{
+		return NULL;
+	}
+
+	return g_strdup(found_string);
+	g_free(found_string);
 }

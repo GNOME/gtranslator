@@ -1,3 +1,19 @@
+2001-06-05  Fatih Demir <kabalak@gtranslator.org>
+
+	* learn.c: Added new "gtranslator_learn_get_learned_string" function
+		for returning the matching string from the learned strings
+		 buffer; use internally a GCompletion and do all the init. and
+		  shutdown/clean up for all parts.
+
+	* actions.c: Removed the "id==0" case -- I never had this and it
+		should never occure.
+
+	* history.c: Respect the new setting from the preferences for the
+		maximum recent files count.
+
+	* prefs.c/h, prefs_init.c: Include another option for the maximum
+		count of the recent files list -- per default set to 10.
+
 2001-06-03  Fatih Demir <kabalak@gtranslator.org>
 
 	* dialogs.c, open-differently.c: Use the new function to determine

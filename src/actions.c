@@ -69,8 +69,6 @@ void gtranslator_actions_set_up(gboolean state, ...)
 			gtk_widget_set_sensitive(acts[id].menu,state); 
 		if (acts[id].tool)
 			gtk_widget_set_sensitive(acts[id].tool,state);
-		if (id==0)
-			g_warning("id==0, it shouldn't be!");
 	} 
 	va_end(ap);
 }

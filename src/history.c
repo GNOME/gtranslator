@@ -101,6 +101,15 @@ GList *gtranslator_history_get(void)
 	gtranslator_config_init();
 
 	count=gtranslator_config_get_int("history/length");
+	
+	/*
+	 * Test if there are more entries stored then desired in the prefs; set
+	 *  the maximal count from the prefs if needed.
+	 */
+	if(count > GtrPreferences.max_history_entries)
+	{
+		count=GtrPreferences.max_history_entries;
+	}
 
 	for(c=0;c < count; c++)
 	{
@@ -204,9 +213,6 @@ void gtranslator_history_show(void)
 		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
 		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
 
-		/*
-		 * FIXME: this is intended to free hint
-		 */
 		gtk_signal_connect(GTK_OBJECT(menu->widget), "destroy",
 				   GTK_SIGNAL_FUNC(free_userdata), menu->hint);
 
@@ -266,12 +272,15 @@ void gtranslator_history_save(GList *list)
 		g_free(subpath);
 		
 		number++;
-		
+	
 		/*
-		 * Save only 10 entries. It could be made configurable.
+		 * Save only as many entries as wished.
 		 */
-		if(number>=8)
+		if(number>=GtrPreferences.max_history_entries)
+		{
 			break;
+		}
+
 		rlist=g_list_next(rlist);
 	}
 
