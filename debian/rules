@@ -8,20 +8,14 @@ checkroot=test `id -u` -eq 0
 configure: configure-stamp
 configure-stamp:
 	$(checkdir)
-
 	/bin/sh ./configure --prefix=/usr		\
-		--mandir=\$${prefix}/share/man		\
-		--infodir=\$${prefix}/share/info	\
-		--sysconfdir=/etc
-
+		--mandir=\$${prefix}/share/man
 	touch configure-stamp
 
 build: configure build-stamp
 build-stamp:
 	$(checkdir)
-
 	$(MAKE)
-
 	touch build-stamp
 
 install: install-stamp
@@ -35,17 +29,7 @@ install-stamp:
 		SC_OMFDIR=`pwd`/debian/tmp/usr/share/omf
 
 	find debian/tmp -type d -print0 | xargs -0 chmod 755
-	find debian/tmp/etc -name '%gconf.xml' -print0 | xargs -0 chmod 644
-
-	strip -R .note -R .comment debian/tmp/usr/bin/gtranslator \
-				   debian/tmp/usr/lib/gtranslator/backends/docbook/docbook.so \
-				   debian/tmp/usr/lib/gtranslator/backends/text/text.so
-
-	chmod 644 debian/tmp/usr/lib/gtranslator/backends/text/text.la \
-		  debian/tmp/usr/lib/gtranslator/backends/text/text.so \
-		  debian/tmp/usr/lib/gtranslator/backends/docbook/docbook.la \
-		  debian/tmp/usr/lib/gtranslator/backends/docbook/docbook.so
-
+	strip -R .note -R .comment debian/tmp/usr/bin/gtranslator
 	touch install-stamp
 
 clean:
@@ -53,7 +37,7 @@ clean:
 	$(checkroot)
 
 	-$(MAKE) distclean
-	-rm -rf build-stamp configure-stamp install-stamp xml-i18n-extract xml-i18n-merge xml-i18n-update
+	-rm -rf build-stamp configure-stamp install-stamp intltool-extract intltool-merge intltool-update
 	-rm -rf debian/tmp
 	-rm -rf debian/files debian/substvars
 
@@ -84,8 +68,6 @@ binary-arch: build install
 
 	install -m 755 -o root -g root debian/postinst		\
 		debian/tmp/DEBIAN/postinst
-	install -m 755 -o root -g root debian/prerm		\
-		debian/tmp/DEBIAN/prerm
 	install -m 755 -o root -g root debian/postrm		\
 		debian/tmp/DEBIAN/postrm
 

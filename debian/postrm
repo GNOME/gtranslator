@@ -5,5 +5,5 @@ if [ -x /usr/bin/update-menus ]; then
 fi
 
 if [ "$1" = "remove" ]; then
-	scrollkeeper-update
+	scrollkeeper-update -q
 fi

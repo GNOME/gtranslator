@@ -1,16 +1,19 @@
 Source: gtranslator
 Section: x11
 Priority: optional
-Maintainer: Ryan Murray <rmurray@debian.org>
-Build-Depends: libgal-dev (>= 0.19), libgnome-vfs-dev (>= 0.4.1), libgconf-dev (>= 1.0), scrollkeeper (>= 0.1.4), gettext, gnome-doc-tools
-Standards-Version: 3.5.2.0
+Maintainer: Fatih Demir <kabalak@gtranslator.org>
+Standards-Version: 3.5.8
+Build-Depends: debmake
 
 Package: gtranslator
 Architecture: any
-Depends: ${shlibs:Depends}, scrollkeeper (>= 0.1.4)
-Description: PO-file editor by the Gnome I18N team
- A 'translation-supporting' program, which makes translating programs easy
- even for non-programmers.
+Depends: ${shlibs:Depends}
+Description: GNOME 2.x desktop's enhanced gettext po files editor
+ gtranslator is one of the very enhanced gettext po file editors under GNOME and
+ features many quite usable functions like autotranslation, learning, search/replace,
+ comfortable GUI handling of all po file details, opening of many subformats of gettext
+ po files etc.
  .
- You might want to subscribe to the gnome-i18n-mailing list (see
- developer.gnome.org for instructions) for more translation information.
+ A mailing list for gtranslator is available at gtranslator-devel@lists.sourceforge.net
+ and can be accessed via http://lists.sourceforge.net/lists/listinfo/gtranslator-devel,
+ the project homepage is at http://www.gtranslator.org.

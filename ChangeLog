@@ -1,5 +1,18 @@
 2003-06-16  Fatih Demir <kabalak@gtranslator.org>
 
+	* Makefile.am: Adepted CVS snapshot rule to produce Debian friendly
+		release date packages like "gtranslator-1.0.DATE-WITHOUT-DASH"
+		 to get Debian building wholly happy now.
+
+	* pozilla.sh: Adapted script for not having ":" as the 1st line but
+		"#!/bin/sh" like Debian does want it - now lintian should be
+		 also happy about our self-build Debian packages.
+
+	* debian/: Did transfer my own and currently working debian/ files
+		into CVS & removed the old ones from CVS from Ryan which I
+		 did use as skeleton for my updated/new files. Now debian
+  		  building should work out of the box.
+
 	* man/gtranslator.1.in: Small corrections as we can't currently simply
 		give a file name as an argument to gtranslator to get opened
 		 directly out of the command line.

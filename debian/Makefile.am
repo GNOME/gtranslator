@@ -3,14 +3,12 @@
 ##
 
 EXTRA_DIST = \
+	README.debian \
 	changelog \
-	conffiles \
 	control \
 	copyright \
 	docs \
 	menu \
 	postinst \
 	postrm \
-	preinst \
-	prerm \
 	rules

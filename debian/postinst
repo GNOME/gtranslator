@@ -5,11 +5,5 @@ if [ "$1" = "configure" -a -x /usr/bin/update-menus ]; then
 fi
 
 if [ "$1" = "configure" ]; then
-	scrollkeeper-update
-fi
-
-if [ "$1" = "configure" ]; then
-        if [ -d /usr/doc -a ! -e /usr/doc/gtranslator -a -d /usr/share/doc/gtranslator ]; then
-                ln -sf ../share/doc/gtranslator /usr/doc/gtranslator
-        fi
+	scrollkeeper-update -q
 fi
