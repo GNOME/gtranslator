@@ -11,6 +11,7 @@ schemes_DATA = \
 	kabalak.xml \
 	kbabel.xml \
 	menesis.xml \
+	mmc.xml \
 	nizuu.xml \
 	tuey.xml \
 	vim.xml \
