@@ -52,7 +52,7 @@ void crash_recovery_dialog(void);
 
 /*
  * Set up an query dialog for the query backend -- search for strings
- *  in compiled mo/gmo files in the specific localedirectory.
+ *  in compiled mo/gmo files in the specific locale directory.
  */
 void query_dialog(void);
 

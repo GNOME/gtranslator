@@ -211,7 +211,7 @@ GList *gtranslator_query_domains(const gchar *directory)
 
 	closedir(dir);
 
-	domains=g_list_sort(domains, (GCompareFunc) domains);
+	domains=g_list_sort(domains, (GCompareFunc) strcmp);
 
 	return domains;
 }

@@ -27,6 +27,7 @@
 #include "find.h"
 #include "prefs.h"
 #include "parse.h"
+#include "query.h"
 #include "open-differently.h"
 #include "color-schemes.h"
 
@@ -433,7 +434,7 @@ void open_uri_dialog(GtkWidget *widget, gpointer useless)
 	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
 		GTK_SIGNAL_FUNC(open_uri_dialog_clicked), entry);
 			
-	show_nice_dialog(&dialog, NULL);
+	show_nice_dialog(&dialog, "gtranslator -- open URI");
 }
 
 /*
@@ -565,8 +566,102 @@ Saying \"No\" will delete the crash recovery file."),
  */
 void query_dialog(void)
 {
-	/*GtkWidget *dialog=NULL;
-	GtrQuery *query;
-	gchar *query_text;*/
+	GtkWidget *dialog=NULL;
+	GtkWidget *query_entry;
+	GtkWidget *domain;
+	GtkWidget *label;
+	gchar *query_text;
+	GList *domains=NULL;
+	gint reply;
+	
+	#define add2Box(x); \
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
+		FALSE, FALSE, 0);
+	
 
+	query_text=g_strdup_printf("%s/%s/%s", GNOMELOCALEDIR, lc,
+		"LC_MESSAGES");
+
+	domains=gtranslator_query_domains(query_text);
+	
+	if(!domains)
+	{
+		gnome_app_error(GNOME_APP(app1), 
+			_("Couldn't get list of gettext domains!"));
+
+		return;
+	}
+
+	g_free(query_text);
+
+	label=gtk_label_new(_("Here you can query existing gettext domains for an exisiting translation."));
+	
+	dialog=gnome_dialog_new(
+		_("gtranslator -- query existing gettext domains"),
+		_("Query"), _("Close"), NULL);
+
+	query_entry=gnome_entry_new("QUERY");
+
+	domain=gtk_combo_new();
+
+	gtk_combo_set_popdown_strings(GTK_COMBO(domain), domains);
+
+	add2Box(label);
+	add2Box(query_entry);
+	add2Box(domain);
+
+	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
+
+	show_nice_dialog(&dialog, "gtranslator -- query dialog");
+
+	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+
+	if(reply==GNOME_NO)
+	{
+		gnome_dialog_close(GNOME_DIALOG(dialog));
+
+		g_list_free(domains);
+	}
+	else if(reply==GNOME_YES)
+	{
+		gchar *text;
+
+		text=gtk_editable_get_chars(GTK_EDITABLE(gnome_entry_gtk_entry(
+			GNOME_ENTRY(query_entry))), 0, -1);
+
+		if(!text)
+		{
+			gnome_app_warning(GNOME_APP(app1),
+				_("No query string given!"));
+		}
+		else
+		{
+			GtrQuery *query;
+			GtrQueryResult *result;
+			
+			query->message=text;
+			query->language=lc;
+			query->domain=gtk_editable_get_chars(GTK_EDITABLE(
+				GTK_COMBO(domain)->entry), 0, -1);
+
+			result=gtranslator_query_simple(query);
+
+			if(!result->translation)
+			{
+				gnome_app_warning(GNOME_APP(app1),
+				_("Couldn't find any result for the query!"));
+			}
+			else
+			{
+				gchar *resulttext;
+
+				resulttext=g_strdup_printf(_("Found \"%s\" as a translation in domain \"%s\"."), result->translation, result->domain);
+
+				gnome_app_message(GNOME_APP(app1), resulttext);
+				g_free(resulttext);
+
+				gnome_dialog_close(GNOME_DIALOG(dialog));
+			}
+		}
+	}
 }

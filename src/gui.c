@@ -353,6 +353,10 @@ static GnomeUIInfo the_searchbar[] = {
 			       N_("Find string in po-file"),
 			       find_dialog,
 			       GNOME_STOCK_PIXMAP_SEARCH),
+	GNOMEUIINFO_ITEM_STOCK(N_("Query"),
+			       N_("Query for a string"),
+			       query_dialog,
+			       GNOME_STOCK_PIXMAP_JUMP_TO),
 	GNOMEUIINFO_END
 };
 
