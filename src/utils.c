@@ -319,10 +319,10 @@ gchar *gtranslator_utils_get_environment_locale()
 	const gchar 	*checkvariables[] =
 	{
 		"GTRANSLATOR_LANGUAGE",
-		"LC_ALL",
-		"LANG",
 		"LANGUAGE",
+		"LC_ALL",
 		"LC_MESSAGES",
+		"LANG",
 		NULL
 	};
 
