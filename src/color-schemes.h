@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -123,4 +123,3 @@ GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
 
 
 #endif
-

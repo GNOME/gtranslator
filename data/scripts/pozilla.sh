@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# (C) 2000-2003 Fatih Demir <kabalak@gtranslator.org>
+# (C) 2000-2003 Fatih Demir <kabalak@kabalak.net>
 #
 # This script mails the common "oh my god, they're
 #  making a release" messages to the last translators.
@@ -146,7 +146,7 @@ do
 	print_separator_line
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	print_separator_line
-	echo " Author: Fatih Demir <kabalak@gtranslator.org>"
+	echo " Author: Fatih Demir <kabalak@kabalak.net>"
 	print_separator_line
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-A --send-to-all  Send the merged po files for all languages"
@@ -178,7 +178,7 @@ do
 	print_separator_line
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	print_separator_line
-        echo " Author:  Fatih Demir <kabalak@gtranslator.org>"
+        echo " Author:  Fatih Demir <kabalak@kabalak.net>"
 	print_separator_line
 		exit 1
 	;;
@@ -792,7 +792,7 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 	echo "--" >> $BODY_FILE
 	echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 	echo " For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
-	echo "  - the po-files - send a mail to Fatih Demir <kabalak@gtranslator.org>" >> $BODY_FILE
+	echo "  - the po-files - send a mail to Fatih Demir <kabalak@kabalak.net>" >> $BODY_FILE
 	echo "   Thanks." >> $BODY_FILE
 	if test -f $PACKAGE.$i.gz ; then
 		cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR" -a $PACKAGE.$i.gz
@@ -847,7 +847,7 @@ echo "" >> $BODY_FILE
 echo "--" >> $BODY_FILE
 echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 echo "For questions concerning Pozilla or your translator's faith -- the po files --" >> $BODY_FILE
-echo "   send an EMail to Fatih Demir <kabalak@gtranslator.org>." >> $BODY_FILE
+echo "   send an EMail to Fatih Demir <kabalak@kabalak.net>." >> $BODY_FILE
 echo "Thanks for using Pozilla!" >> $BODY_FILE
 
 #

@@ -1,7 +1,7 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
- *			Ross Golder <ross@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
+ *			Ross Golder <ross@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

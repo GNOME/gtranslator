@@ -1,6 +1,6 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
  *                      Ross Golder <ross@golder.org>
  *                      Søren Wedel Nielsen <swn@herlevkollegiet.dk>
  *

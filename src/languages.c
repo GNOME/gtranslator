@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
  * 			GNOME I18N List <gnome-i18n@gnome.org>
  * 			Guntupalli Karunakar <karunakar@freedomink.org>
  *

@@ -1,10 +1,10 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Kevin Vandersloot <kfv101@psu.edu>
- *			Thomas Ziehmer <thomas@gtranslator.org>
- *			Peeter Vois <peeter@gtranslator.org>
- *			Ross Golder <ross@gtranslator.org>
+ *			Thomas Ziehmer <thomas@kabalak.net>
+ *			Peeter Vois <peeter@kabalak.net>
+ *			Ross Golder <ross@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -468,4 +468,3 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
   }
 
 }
-

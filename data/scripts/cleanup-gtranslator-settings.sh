@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# (C) 2001-2003 Fatih Demir <kabalak@gtranslator.org>
+# (C) 2001-2003 Fatih Demir <kabalak@kabalak.net>
 #		Juan RP <juan@xtraeme.UnixBSD.org>
 #
 # cleanup-gtranslator-settings.sh -- Cleans up gtranslator's settings and

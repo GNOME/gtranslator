@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
  *
  * semerkent is free software; you can redistribute it and/or modify it under
  *  the terms of the GNU Library General Public License as published by the
@@ -74,7 +74,7 @@ SemerProps *semer_props_new_with_specs(const gchar *id,
 
 /*
  * Gets/sets the translator name and email -- the get function returns a
- *  usual formed string like "Fatih Demir <kabalak@gtranslator.org>".
+ *  usual formed string like "Fatih Demir <kabalak@kabalak.net>".
  */
 gchar *semer_props_get_translator(SemerProps *props);
 

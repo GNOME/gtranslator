@@ -1,6 +1,6 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2000-2001 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -85,4 +85,3 @@ void gtranslator_session_restore(GnomeClient * client)
 	gnome_appbar_set_status(GNOME_APPBAR(gtranslator_application_bar),
 			_("Session restored successfully."));
 }
-

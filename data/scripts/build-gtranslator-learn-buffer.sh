@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# (C) 2002 Fatih Demir <kabalak@gtranslator.org>
+# (C) 2002 Fatih Demir <kabalak@kabalak.net>
 #
 # build-gtranslator-learn-buffer.sh -- Builds a learn buffer within a half-wise
 #  automated process -- if you have got a central CVS checkout dir then you'd

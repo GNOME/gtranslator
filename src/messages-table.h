@@ -1,7 +1,7 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
  *			Kevin Vandersloot <kfv101@psu.edu>
- *			Peeter Vois <peeter@gtranslator.org>
+ *			Peeter Vois <peeter@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

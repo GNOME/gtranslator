@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
  *			GNOME I18N List <gnome-i18n@gnome.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify

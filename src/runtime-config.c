@@ -1,5 +1,5 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
  *			Pablo Saratxaga <pablo@mandrakesoft.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify

@@ -1,7 +1,7 @@
 /*
- * (C) 2000-2003 	Gediminas Paulauskas <menesis@gtranslator.org>
- *			Thomas Ziehmer <thomas@gtranslator.org>
- *			Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Gediminas Paulauskas <menesis@kabalak.net>
+ *			Thomas Ziehmer <thomas@kabalak.net>
+ *			Fatih Demir <kabalak@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -242,4 +242,3 @@ void gtranslator_update_regex_flags(void)
 	else
 		eflags |= REG_ICASE;
 }
-

@@ -1,6 +1,6 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2000-2001 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Joe Man <trmetal@yahoo.com.hk>
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -403,4 +403,3 @@ void gtranslator_colors_initialize(void)
 	gdk_color_parse(theme->special,		&colors[COLOR_SPECIAL]);
 	gdk_color_parse(theme->spell_error,	&colors[COLOR_SPELL_ERROR]);
 }
-

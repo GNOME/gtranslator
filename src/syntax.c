@@ -1,8 +1,8 @@
 /*
- * (C) 2001-2002	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2001-2002	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Joe Man <trmetal@yahoo.com.hk>
- *			Peeter Vois <peeter@gtranslator.org>
+ *			Peeter Vois <peeter@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -545,4 +545,3 @@ void gtranslator_insert_text(GtkTextView *textview, const gchar *text)
 		"changed");
 #endif //NOT_PORTED
 }
-

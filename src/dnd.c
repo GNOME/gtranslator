@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -54,4 +54,3 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 		gtk_drag_finish(context, FALSE, TRUE, time);
 	}
 }
-

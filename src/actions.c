@@ -1,6 +1,6 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
- *			Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -226,4 +226,3 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 
 	gtranslator_actions_disable(ACT_UNDO);
 }
-
