@@ -10,7 +10,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=2.0
+export POZILLA_RELEASE=3.0
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -288,11 +288,11 @@ export SUBJECT="[ Pozilla #$POZILLA_NO ] $PACKAGE R $RELEASE"
 #
 if test -f Makefile -a -f POTFILES ; then
 	[ -f $PACKAGE.pot ] && rm -f $PACKAGE.pot
-	make $PACKAGE.pot
+	make $PACKAGE.pot 2>&1 >/dev/null
 elif test -x ./update.sh ; then
-	./update.sh -P
+	./update.sh -P 2>&1 >/dev/null
 elif test -x ./update.pl ; then
-	./update.pl -P
+	./update.pl -P 2>&1 >/dev/null
 else
 	echo "---------------------------------------------------------------"
 	echo "!ERROR¡: No update.(sh|pl) or usable Makefile found!"
@@ -336,26 +336,45 @@ for i in $PO_FILES
 	fi
 	
 	#
-	# And evaluate the statistics for the po-file.
+	# And evaluate the statistics for the po-file, but be more fail-safe
+	#  then in previous release -- jump over the fallible po file and
+	#   move the file back to it's original right place/name.
 	#
 	cp $i $i.backup
-	msgmerge $i $PACKAGE.pot -o $i
+	language=`basename $i .po|sed -e s/\.Big5//g -e s/\.GB2312//g`
+	
+	merge_status=`msgmerge $i $PACKAGE.pot -o $i 2>&1`
+	
+	if echo $merge_status|grep -sq warning ; then
+		mv $i.backup $i
 
+		STAT_TABLE="$STAT_TABLE
+$language\t\t------------- Failure due to a warning ------------"
+
+		continue
+	elif echo $merge_status|grep -sq error ; then
+		mv $i.backup $i
+
+		STAT_TABLE="$STAT_TABLE
+$language\t\t------------- Failure due to an error -------------"
+
+		continue
+	fi
+	
 	#
 	# Get the values for the messages statistics.
 	#
 	statistics=(`msgfmt -v $i 2>&1`)
-	language=`basename $i .po`
 	translated=${statistics[0]}
 	fuzzy=${statistics[3]:-0}
 	untranslated=${statistics[6]:-0}
 	messages=$[ $translated + $fuzzy + $untranslated ]
 	missing=$[ $fuzzy + $untranslated ]
 	centil=`awk "{ print $messages / 100 }" $CONFIG_DIR/pozilla.conf`
-	percent=`awk "{ print $translated / $centil }" $CONFIG_DIR/pozilla.conf`
+	percent=`awk "{ printf \"%.2f\", $translated / $centil }" $CONFIG_DIR/pozilla.conf`
 
 	STAT_TABLE="$STAT_TABLE
-$language\t\t$messages\t\t$translated\t\t$percent\t\t$missing"
+$language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 
 	#
 	# Compile the current merged po file.
