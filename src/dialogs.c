@@ -359,7 +359,6 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		_("gtranslator -- edit comment"),
 		GTK_WINDOW(gtranslator_application),
 		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL);
@@ -474,13 +473,9 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		 */
 		gtk_label_set_text(GTK_LABEL(extra_content_view->comment),
 			comment->pure_comment);
-		
-		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
-	else
-	{
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-	}
+	
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
 /*
