@@ -48,17 +48,40 @@ GtrID *gtranslator_id_new()
  */
 GtrID *gtranslator_id_new_from_string(const gchar *string)
 {
-	GtrID *id=g_new0(GtrID, 1);
-	gchar **values;
-	gchar *filename;
+	GtrID 	*id=g_new0(GtrID, 1);
+	gchar 	**values;
+	gchar 	*filename,
+		*encoding_area;
 
 	g_return_val_if_fail(string!=NULL, NULL);
 
 	/*
-	 * Strip off the filename which is used as the "prefix".
+	 * Check if the given string is a GtrID "URI" at all.
 	 */
-	filename=nautilus_str_get_prefix(string, ":");
-	g_return_val_if_fail(filename!=NULL, NULL);
+	if(!nautilus_istr_has_prefix(string, "gtranslator_id:") ||
+		!strchr(string, '/') || !strchr(string, '#'))
+	{
+		return NULL;
+	}
+	else
+	{
+		/*
+		 * Strip of the file name from the GtrID.
+		 */
+		gchar *tempzulu;
+		
+		tempzulu=nautilus_str_get_prefix(string, "#");
+		g_strreverse(tempzulu);
+
+		/*
+		 * Some reverse-thinking...
+		 */
+		filename=nautilus_str_get_prefix(tempzulu,
+			":di_rotalsnartg");
+		
+		g_free(tempzulu);
+		g_return_val_if_fail(filename!=NULL, NULL);
+	}
 	
 	id->po_file=g_strdup(filename);
 	g_free(filename);
@@ -67,23 +90,42 @@ GtrID *gtranslator_id_new_from_string(const gchar *string)
 	 * Operate on the resting parts of the string-encoded id and split it
 	 *  up into its normally 4 parts.
 	 */
-	filename=nautilus_str_get_after_prefix(string, ":");
-	values=g_strsplit(filename, "/", 4);
+	encoding_area=nautilus_str_get_after_prefix(string, "#");
+	values=g_strsplit(encoding_area, "/", 4);
+	g_free(encoding_area);
 
 	/*
 	 * Assign the "parsed" values.
 	 */
-	id->po_language=g_strdup(values[0]);
-	id->po_version=g_strdup(values[1]);
-	id->po_date=g_strdup(values[2]);
-	nautilus_str_to_int(values[3], &(GTR_ID(id)->po_position));
+	#define if_assign(x, y) \
+		if(y) \
+		{ \
+			x=g_strdup(y); \
+		} \
+		else \
+		{ \
+			x=NULL; \
+		}
+	
+	if_assign(id->po_language, values[0]);
+	if_assign(id->po_version, values[1]);
+	if_assign(id->po_date, values[2]);
+	
+	#undef if_assign
 
 	/*
-	 * Free the used variables.
+	 * Always be quite safe about the GtrID values assigned in these routines.
 	 */
-	g_free(filename);
-	g_strfreev(values);
+	if(values[3])
+	{
+		nautilus_str_to_int(values[3], &(GTR_ID(id)->po_position));
+	}
+	else
+	{
+		id->po_position=-1;
+	}
 
+	g_strfreev(values);
 	return id;
 }
 
@@ -96,8 +138,8 @@ gchar *gtranslator_id_string_from_id(GtrID *id)
 
 	g_return_val_if_fail(id!=NULL, NULL);
 
-	string=g_strdup_printf("%s:%s/%s/%s/%i", id->po_file, id->po_language,
-		id->po_version, id->po_date, id->po_position);
+	string=g_strdup_printf("gtranslator_id:%s#%s/%s/%s/%i", id->po_file, 
+		id->po_language, id->po_version, id->po_date, id->po_position);
 
 	return string;
 }

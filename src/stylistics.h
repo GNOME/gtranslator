@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef LIBGTRANSLATOR_STYLISTICS_H
-#define LIBGTRANSLATOR_STYLISTICS_H 1
+#ifndef GTR_STYLISTICS_H
+#define GTR_STYLISTICS_H 1
 
 /*
  * gtranslator specific style functions.

@@ -368,7 +368,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	
 	if (!GtrPreferences.fill_header) {
 		
-		if(gtranslator_utf8_po_file_is_utf8())
+		if(po->utf8)
 		{
 			if(ph->translator)
 			{
@@ -392,7 +392,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 #define replace(what,with,entry) g_free(what); what = g_strdup(with);\
 	gtk_entry_set_text(GTK_ENTRY(entry), with);
 	
-		if(gtranslator_utf8_po_file_is_utf8())
+		if(po->utf8)
 		{
 			if(ph->translator)
 			{
@@ -626,7 +626,7 @@ gchar *gtranslator_header_comment_convert_for_view(gchar *comment)
 
 	g_strfreev(stringarray);
 
-	if(gtranslator_utf8_po_file_is_utf8())
+	if(po->utf8)
 	{
 		return gtranslator_utf8_get_plain_string(&mystring->str);
 	}
@@ -672,7 +672,7 @@ gchar *gtranslator_header_comment_convert_for_save(gchar *comment)
 	
 	g_strfreev(stringarray);
 	
-	if(gtranslator_utf8_po_file_is_utf8())
+	if(po->utf8)
 	{
 		return (gtranslator_utf8_get_utf8_string(&mystring->str));
 	}

@@ -23,6 +23,7 @@
 #include "utils_gui.h"
 
 #include <libgnome/gnome-url.h>
+#include <libgnome/gnome-util.h>
 
 #include <libgnomeui/libgnomeui.h>
 
@@ -266,7 +267,6 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
 			/*
 			 * Show a warning box to the user and warn him about
 			 *  the fact of lacking write permissions.
-			 *  FIXME: do this ONLY on file save
 			 */  
 			error_message=g_strdup_printf(
 				_("You don't have write permissions on file `%s'.\n\
@@ -288,4 +288,40 @@ of your choice."),
 	fclose(file);
 
 	return TRUE;
+}
+
+/*
+ * Check for a needed program -- returns FALSE on failure (how logical, not ,-)).
+ */
+gboolean gtranslator_utils_check_program(const gchar *program_name,
+        const gchar *program_type)
+{
+	g_return_val_if_fail(program_name!=NULL, FALSE);
+	g_return_val_if_fail(program_type!=NULL, FALSE);
+	
+	if(!gnome_is_program_in_path(program_name))
+	{
+		gchar *warning_message;
+
+		/*
+		 * Translators: The first format stands for a program_type and is something
+		 *  like "uncompression", "compression" or something similar.
+		 *
+		 * An example output would be: 
+		 * The necessary uncompression program `gunzip' is missing!
+		 *               ^^^^^^^^^^^^^          ^^^^^^ 
+		 *               First %s               Second %s
+		 */
+		warning_message=g_strdup_printf(_("The necessary %s program `%s' is missing!"), 
+			program_type, program_name);
+
+		gnome_app_warning(GNOME_APP(gtranslator_application), warning_message);
+		g_free(warning_message);
+
+		return FALSE;
+	}
+	else
+	{
+		return TRUE;
+	}
 }

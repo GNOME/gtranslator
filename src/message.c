@@ -157,7 +157,7 @@ void gtranslator_message_show(GList * list_item)
 		g_free(temp);
 
 		if (msg->msgstr) {
-			if(gtranslator_utf8_po_file_is_utf8())
+			if(po->utf8)
 			{
 				temp=gtranslator_utf8_get_plain_msgstr(&msg);
 			}
@@ -175,7 +175,7 @@ void gtranslator_message_show(GList * list_item)
 	} else {
 		gtranslator_syntax_insert_text(text_box, msg->msgid);
 
-		if(gtranslator_utf8_po_file_is_utf8())
+		if(po->utf8)
 		{
 			gchar *text=gtranslator_utf8_get_plain_msgstr(&msg);
 			
@@ -262,7 +262,7 @@ void gtranslator_message_update(void)
 		
 		g_free(msg->msgstr);
 
-		if(gtranslator_utf8_po_file_is_utf8())
+		if(po->utf8)
 		{
 			msg->msgstr=gtranslator_utf8_get_gtk_text_as_utf8_string(trans_box);
 		}

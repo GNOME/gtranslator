@@ -170,7 +170,7 @@ void gtranslator_actions_set_up_file_opened(void)
 	 * Check if the current file is UTF-8 -- then disable the export
 	 *  menu entry; it's already in UTF-8.
 	 */
-	if(gtranslator_utf8_po_file_is_utf8())
+	if(po->utf8)
 	{
 		gtranslator_actions_disable(ACT_EXPORT_UTF8);
 	}

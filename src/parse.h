@@ -40,42 +40,56 @@ typedef struct {
 	 * Absolute file name
 	 */
 	gchar *filename;
+	
 	/*
 	 * The header 
 	 */
 	GtrHeader *header;
+	
 	/*
 	 * All the po->messages are stored here 
 	 */
 	GList *messages;
+	
 	/*
 	 * The length of messages list 
 	 */
 	guint length;
+	
 	/*
 	 * A pointer to the currently displayed message 
 	 */
 	GList *current;
+	
 	/*
 	 * The obsolete messages are stored within this gchar.
 	 */
 	gchar *obsolete;
+	
 	/*
 	 * Marks if the file was changed; 
 	 */
 	guint file_changed : 1;
+	
 	/*
 	 * Is the file write-permitted?
 	 */
 	gboolean no_write_perms;
+	
 	/*
 	 * The translated entries. 
 	 */
 	guint translated;
+	
 	/*
 	 * The fuzzy entries. 
 	 */
 	guint fuzzy;
+
+	/*
+	 * Are we editing an UTF-8 po file?
+	 */
+	gboolean utf8;
 } GtrPo;
 
 #define GTR_PO(x) ((GtrPo *)x)

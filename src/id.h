@@ -26,7 +26,7 @@
  * A gtranslator-specific ID container -- is generated out of the specs for
  *  the po-file and the message.
  *
- * General format: po_file:po_language/po_version/po_date/po_position
+ * General format: gtranslator_id:po_file#po_language/po_version/po_date/po_position
  *
  */
 typedef struct
@@ -66,7 +66,7 @@ gchar *gtranslator_id_string_from_id(GtrID *id);
  * Is the given GtrID resolvable at all -- is the file present and do the
  *  other specs also match?!
  */
-gboolean gtranslator_id_resolvable(GtrID *id); 
+gboolean gtranslator_id_resolvable(GtrID *id);
 
 /*
  * Return whether the two GtrID's are equal.

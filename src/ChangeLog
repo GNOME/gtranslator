@@ -1,5 +1,23 @@
 2001-06-07  Fatih Demir <kabalak@gtranslator.org>
 
+	* parse.h, actions.c, header_stuff.c, parse_core.c & message.c: Use
+		the "gtranslator_utf8_po_file_is_utf8" function only once at
+		 parse time and set the new GtrPo field "utf8"; no need to
+		  call the same function >= 7 times in the sources.
+
+	* open-differently.c: Use the new function for checking for the 
+		needed uncompression programs -- removed the internally used
+		 old "check_for_prog" function.
+
+	* utils_gui.c/.h: Added "gtranslator_utils_check_program" function
+		for checking if a defined kind of program is in $PATH --
+		 gives out a warning if the program is missing.
+
+	* id.c/.h: Small changes and enhancements for the GtrID stuff.
+
+	* stylistics.h: The defines are now correctly named "GTR_STYLISTICS_H"
+		and no longer "LIBGTRANSLATOR_STYLISTICS_H".
+
 	* header_stuff.c/.h: Added "generator" field to the GtrHeader structure;
 		it's parsed in, but we don't save it/add it to new po files; we
 		 just parse it.

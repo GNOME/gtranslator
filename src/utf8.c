@@ -38,7 +38,8 @@ gboolean gtranslator_utf8_po_file_is_utf8()
 {
 	g_return_val_if_fail(po->header->charset!=NULL, FALSE);
 
-	if(!g_strcasecmp(po->header->charset, "utf-8"))
+	if(!g_strcasecmp(po->header->charset, "utf-8") ||
+		!g_strcasecmp(po->header->charset, "utf8"))
 	{
 		return TRUE;
 	}
@@ -92,7 +93,7 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	 * Set the po file charset to UTF-8 as we did convert it now.
 	 */
 	g_free(po->header->charset); 
-	po->header->charset=g_strdup("UTF-8");
+	po->header->charset=g_strdup("utf-8");
 }
 
 /*

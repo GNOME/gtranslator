@@ -65,6 +65,17 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string);
 void gtranslator_comment_append(GtrComment **comment, const gchar *comment_string);
 
 /*
+ * Assign the given full_comment (which must be a full comment string _with_ prefix)
+ *  to the comment and update the comment informations/fields.
+ */
+void gtranslator_comment_update(GtrComment **comment, const gchar *full_comment);
+
+/*
+ * Check if the given string is contained in any comment field of the GtrComment.
+ */
+gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_string);
+
+/*
  * Copy the given GtrComment; NULL parts are also set to NULL for the copy.
  */
 GtrComment *gtranslator_comment_copy(GtrComment **comment); 

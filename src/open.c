@@ -28,23 +28,18 @@
 #include "open-differently.h"
 #include "parse.h"
 #include "utils.h"
+#include "utils_gui.h"
 #include "vfs-handle.h"
 
 #include <string.h>
 #include <stdlib.h>
 
-#include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-app-util.h>
 
 /*
  * The "backend" for the gzip. bzip2 and uncompress based functions.
  */
 void open_compressed_po_file(gchar *file, gchar *command);
-
-/*
- * Check if the needed uncompressing program is present.
- */
-void check_for_prog(const gchar *prog); 
 
 /*
  * Detects whether we can open up the given file with the
@@ -120,25 +115,6 @@ gboolean gtranslator_open_po_file(gchar *file)
 }
 
 /*
- * Check for the given uncompression program.
- */
-void check_for_prog(const gchar *prog)
-{
-	if(!gnome_is_program_in_path(prog))
-	{
-		gchar *warn;
-
-		warn=g_strdup_printf(_("The necessary uncompression program `%s' is missing!"), prog);
-
-		gnome_app_warning(GNOME_APP(gtranslator_application), warn);
-
-		g_free(warn);
-		
-		return;
-	}
-}
-
-/*
  * Open up the given compiled gettext file.
  */
 void gtranslator_open_compiled_po_file(gchar *file)
@@ -146,7 +122,10 @@ void gtranslator_open_compiled_po_file(gchar *file)
 	gchar *cmd;
 	gchar *tempfilename;
 
-	check_for_prog("msgunfmt");
+	if(!gtranslator_utils_check_program("msgunfmt", _("uncompression")))
+	{
+		return;
+	}
 
 	tempfilename=gtranslator_utils_get_temp_file_name();
 	
@@ -191,7 +170,10 @@ void open_compressed_po_file(gchar *file, gchar *command)
 	gchar *cmd;
 	gchar *tempfilename;
 
-	check_for_prog(command);
+	if(!gtranslator_utils_check_program(command, _("uncompression")))
+	{
+		return;
+	}
 
 	tempfilename=gtranslator_utils_get_temp_file_name();
 	
@@ -282,7 +264,10 @@ void gtranslator_open_ziped_po_file(gchar *file)
 
 	g_return_if_fail(file!=NULL);
 
-	check_for_prog("unzip");
+	if(!gtranslator_utils_check_program("unzip", _("uncompression")))
+	{
+		return;
+	}
 
 	tempfilename=gtranslator_utils_get_temp_file_name();
 

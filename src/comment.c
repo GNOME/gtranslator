@@ -128,6 +128,19 @@ void gtranslator_comment_append(GtrComment **comment, const gchar *comment_strin
 }
 
 /*
+ * Update the given GtrComment's fields/informations according to the given,
+ *  new full_comment.
+ */
+void gtranslator_comment_update(GtrComment **comment, const gchar *full_comment)
+{
+	g_return_if_fail(GTR_COMMENT(*comment)!=NULL);
+	g_return_if_fail(full_comment!=NULL);
+
+	gtranslator_comment_free(comment);
+	*comment=gtranslator_comment_new(full_comment);
+}
+
+/*
  * Copy the given Gtrcomment pointer.
  */
 GtrComment *gtranslator_comment_copy(GtrComment **comment)
@@ -182,6 +195,37 @@ void gtranslator_comment_free(GtrComment **comment)
 		g_free(GTR_COMMENT(*comment)->pure_comment);
 		g_free(GTR_COMMENT(*comment)->utf8_comment);
 	}
+}
+
+/*
+ * Search for the given string in our comment.
+ */
+gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_string)
+{
+	g_return_val_if_fail(GTR_COMMENT(comment)!=NULL, FALSE);
+	g_return_val_if_fail(GTR_COMMENT(comment)->comment!=NULL, FALSE);
+	g_return_val_if_fail(search_string!=NULL, FALSE);
+
+	/*
+	 * Check for the string in the comment parts according to a kabalak-logic.
+	 */
+	if(search_string[0]=='#')
+	{
+		if(strstr(comment->comment, search_string))
+		{
+			return TRUE;
+		}
+	}
+	else if(strstr(comment->pure_comment, search_string))
+	{
+		return TRUE;
+	}
+	else if(strstr(comment->utf8_comment, search_string))
+	{
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 /*

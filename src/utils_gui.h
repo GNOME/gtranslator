@@ -80,4 +80,14 @@ GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(
  */
 gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file);
 
+/*
+ * Check for a given program being in the user's path -- should be useful
+ *  for the "differently" opening/saving functions...
+ *
+ * Note: "program_name" should be obvious; "program_type" is used in the
+ * 	   warning message generated if the tool/program is missing.
+ */
+gboolean gtranslator_utils_check_program(const gchar *program_name,
+	const gchar *program_type);
+
 #endif

@@ -24,6 +24,7 @@
 
 #include "message.h"
 #include "parse.h"
+#include "utf8.h"
 #include "utils_gui.h"
 
 #include <libgnome/gnome-i18n.h>
@@ -96,7 +97,19 @@ void gtranslator_parse(const gchar *filename)
 	file_opened = TRUE;
 	po->file_changed = FALSE;
 	po->length = g_list_length(po->messages);
-	
+
+	/*
+	 * Set the utf8 field of the GtrPo to TRUE if we are editing an UTF-8 file.
+	 */
+	if(gtranslator_utf8_po_file_is_utf8())
+	{
+		po->utf8=TRUE;
+	}
+	else
+	{
+		po->utf8=FALSE;
+	}
+
 	/*
 	 * Set the current message to the first message.
 	 */
