@@ -108,9 +108,6 @@ int main(int argc, char *argv[])
 	const char **args;
 	gchar *sp_file;
 
-	/*
-	 * GConf error handling variable.
-	 */
 	#ifdef GCONF_IS_PRESENT
 	GError	*error=NULL;
 	#endif
@@ -382,7 +379,7 @@ int main(int argc, char *argv[])
 		{
 			gtranslator_parse_main(learn_file);
 		}
-		
+
 		/*
 		 * Now learn the file completely and then shut the
 		 *  learn system down.
@@ -423,9 +420,6 @@ int main(int argc, char *argv[])
 	
 	gtk_widget_show_all(gtranslator_application);
 	
-	/*
-	 * Enter the Gtk+ main-loop.
-	 */
 	gtk_main();
 	return 0;
 }
