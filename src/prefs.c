@@ -1,14 +1,22 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-* Gediminas Paulauskas <menesis@delfi.lt>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* Here has the preferences box got his own
-*  home file ...
-*
-* -- the source
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ * 
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #include "prefs.h"
 #include "dialogs.h"
@@ -18,40 +26,46 @@
 #include <libgtranslator/preferences.h>
 #include <libgtranslator/stylistics.h>
 
-/* The callbacks */
-static void prefs_box_changed(GtkWidget * widget, gpointer useless);
-static void prefs_box_apply(GtkWidget * widget, gint page_num,
+/*
+ * The callbacks:
+ */
+static void prefs_box_changed(GtkWidget  * widget, gpointer useless);
+static void prefs_box_apply(GtkWidget  * widget, gint page_num,
 			    gpointer useless);
-static void prefs_box_help(GtkWidget * widget, gpointer useless);
+static void prefs_box_help(GtkWidget  * widget, gpointer useless);
 
 static gint list_ref = 0;
 
-/* The notebook page widgets  */
+/*
+ * The notebook page widgets: 
+ */
 static GtkWidget *first_page, *second_page, *third_page, *fourth_page,
 		*fifth_page, *sixth_page;
 
-/**
-* The entries
-**/
+/*
+ * The entries:
+ */
 static GtkWidget
 	*authors_name, *authors_email, *authors_language,
 	*mime_type, *encoding, *lcode, *lg_email;
 
-/**
-* The toggle buttons used in the preferences box
-**/
+/*
+ * The toggle buttons used in the preferences box:
+ */
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
-	*recent_files_number, *check_recent_files, *own_specs;
+	*check_recent_files, *own_specs, *instant_spell_checking;
 	
-/* The preferences dialog */
+/*
+ * The preferences dialog widget itself.
+ */
 static GtkWidget *prefs = NULL;
 
-GtkWidget *attach_combo_with_label(GtkWidget * table, gint row,
+GtkWidget *attach_combo_with_label(GtkWidget  * table, gint row,
 				   const char *label_text,
-				   GList * list, const char *value,
+				   GList  * list, const char *value,
 				   GtkSignalFunc callback,
 				   gpointer user_data)
 {
@@ -69,7 +83,7 @@ GtkWidget *attach_combo_with_label(GtkWidget * table, gint row,
 	return combo;
 }
 
-GtkWidget *attach_toggle_with_label(GtkWidget * table, gint row,
+GtkWidget *attach_toggle_with_label(GtkWidget  * table, gint row,
 				    const char *label_text,
 				    gboolean value,
 				    GtkSignalFunc callback)
@@ -83,7 +97,7 @@ GtkWidget *attach_toggle_with_label(GtkWidget * table, gint row,
 	return toggle;
 }
 
-GtkWidget *attach_entry_with_label(GtkWidget * table, gint row,
+GtkWidget *attach_entry_with_label(GtkWidget  * table, gint row,
 				   const char *label_text,
 				   const char *value,
 				   GtkSignalFunc callback)
@@ -101,7 +115,7 @@ GtkWidget *attach_entry_with_label(GtkWidget * table, gint row,
 	return entry;
 }
 
-GtkWidget *attach_text_with_label(GtkWidget * table, gint row,
+GtkWidget *attach_text_with_label(GtkWidget  * table, gint row,
 				  const char *label_text,
 				  const char *value,
 				  GtkSignalFunc callback)
@@ -126,7 +140,7 @@ GtkWidget *attach_text_with_label(GtkWidget * table, gint row,
 	return widget;
 }
 
-GtkWidget *append_page_table(GtkWidget * probox, gint rows, gint cols,
+GtkWidget *append_page_table(GtkWidget  * probox, gint rows, gint cols,
 			     const char *label_text)
 {
 	GtkWidget *label;
@@ -137,12 +151,16 @@ GtkWidget *append_page_table(GtkWidget * probox, gint rows, gint cols,
 	return page;
 }
 
-/* Set up the lists */
+/*
+ * Set up the lists to use within the combo boxes.
+ */
 void create_lists(void)
 {
 	gint c = 0;
 	list_ref++;
-	/* Create only if it's the first call */
+	/*
+	 * Create only if it's the first call.
+	 */
 	if (list_ref > 1) 
 		return;
 	languages_list = encodings_list = lcodes_list = group_emails_list = 
@@ -174,7 +192,9 @@ void create_lists(void)
 					   (gpointer) languages[c].bits);
 		c++;
 	}
-	/* Arrange resulting lists */
+	/*
+	 * Arrange the resulting lists.
+	 */
 	languages_list = g_list_reverse(languages_list);
 	lcodes_list = g_list_reverse(lcodes_list);
 	group_emails_list =
@@ -184,47 +204,46 @@ void create_lists(void)
 	bits_list = g_list_sort(bits_list, (GCompareFunc) g_strcasecmp);
 }
 
-void prefs_box(GtkWidget * widget, gpointer useless)
+void prefs_box(GtkWidget  * widget, gpointer useless)
 {
-	/**
-	* 2 widgets for the Recent files stuff.
-	**/
-	static GtkObject *recent_files_adjustment;
-	GtkWidget *recent_files_number_label;
-	
-	/**
-	* And some more widgets for the color/fonts
-	*  settings.
-	**/
+	/*
+	 * And some more widgets for the color/fonts
+	 *  settings.
+	 */
 	GtkWidget *fg_color_label, *bg_color_label, *font_label;
 	
 	raise_and_return_if_exists(prefs);
-	/**
-	* Create the prefs-box .. 
-	**/
+	/*
+	 * Create the preferences box... 
+	 */
 	prefs = gnome_property_box_new();
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(
+		GNOME_PROPERTY_BOX(prefs)->notebook), GTK_POS_RIGHT);
 	gtk_window_set_title(GTK_WINDOW(prefs), _("gtranslator -- options"));
-	/**
-	* The tables for holding all the entries below
-	**/
+	
+	/*
+	 * The tables for holding all the entries below.
+	 */
 	first_page = append_page_table(prefs, 2, 2, _("Personal information"));
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 4, 1, _("Miscellaneous"));
-	fifth_page = append_page_table(prefs, 2, 2, _("Recent files menu"));
+	fifth_page = append_page_table(prefs, 3, 2, _("Recent files & spell checking"));
 	sixth_page = append_page_table(prefs, 4, 2, _("Fonts & Colors"));
-	/**
-	* Create all the personal entries
-	**/
+	
+	/*
+	 * Create all the personal entries.
+	 */
 	authors_name =
 	    attach_entry_with_label(first_page, 0, _("Author's name :"),
 				    author, prefs_box_changed);
 	authors_email =
 	    attach_entry_with_label(first_page, 1, _("Author's EMail :"),
 				    email, prefs_box_changed);
-	/**
-	* Create, attach, and connect all the combo boxes with labels 
-	**/
+	
+	/*
+	 * Create, attach, and connect all the combo boxes with labels. 
+	 */
 	create_lists();
 
 	authors_language =
@@ -248,9 +267,9 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	    attach_combo_with_label(second_page, 4, _("Encoding :"),
 				    bits_list, enc,
 				    prefs_box_changed, NULL);
-	/**
-	* Create, attach, and connect the toggle buttons
-	**/
+	/*
+	 * Create, attach, and connect the toggle buttons.
+	 */
 	unmark_fuzzy =
 	    attach_toggle_with_label(third_page, 0,
 		_("Set non-fuzzy status, if message was changed"),
@@ -268,9 +287,9 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 		_("Warn me if I'm trying to save an unchanged file"),
 		wants.warn_if_no_change, prefs_box_changed);
 
-	/**
-	* The fourth page with the popup menu & the dot_char.
-	**/
+	/*
+	 * The fourth page with the popup menu & the dot_char.
+	 */
 	use_dot_char=attach_toggle_with_label(fourth_page, 0,
 		_("Use the dot char (\"·\") instead of a free space"),
 		wants.dot_char, prefs_box_changed);
@@ -286,57 +305,35 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	no_uzis=attach_toggle_with_label(fourth_page, 4,
 		_("Don't show the update information dialogs"),
 		wants.uzi_dialogs, prefs_box_changed);
-	/**
-	* The fifth page with the Recent files options.
-	**/
-	recent_files_adjustment=gtk_adjustment_new(wants.recent_files,
-		1, 12, 1, 10, 10);
-	recent_files_number=gtk_spin_button_new(GTK_ADJUSTMENT(
-		recent_files_adjustment), 1, 0);
-	gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(recent_files_number),
-		GTK_UPDATE_ALWAYS);	
+	/*
+	 * The fifth page with the Recent files options.
+	 */
 	check_recent_files=attach_toggle_with_label(fifth_page, 0,
-		_("Check every file in the list for existence"),
+		_("Check every recent file before listing it up"),
 		wants.check_recent_file, prefs_box_changed);
-	/**
-	* [ GtkSpinButton ] maximal ....., e.g. 7 maximal entries ..
-	**/	
-	recent_files_number_label=gtk_label_new(
-		_("Number of maximal shown entries in the recent files list:"));
-	gtk_label_set_justify(GTK_LABEL(recent_files_number_label),
-		GTK_JUSTIFY_LEFT);
-	/**
-	* Attach the widgets to the fifth page.
-	**/
-	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
-		recent_files_number_label, 0, 1, 2, 3);
-	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
-		recent_files_number, 1, 2, 2, 3);
-	/**
-	* The sixth page.
-	**/
+	instant_spell_checking=attach_toggle_with_label(fifth_page, 1,
+		_("Instant spell checking"),
+		wants.instant_spell_check, prefs_box_changed);
+	
+	/*
+	 * The sixth page with the special font/color stuff.
+	 */
 	own_specs=attach_toggle_with_label(sixth_page, 0,
 		_("Apply special font/colors"),
 		wants.use_own_specs, prefs_box_changed);
-	/**
-	* Create the labels.
-	**/	
+	
+	/*
+	 * The used labels onn the sixth page.
+	 */	
 	font_label=gtk_label_new(_("Font:"));
 	fg_color_label=gtk_label_new(_("Foreground color:"));
 	bg_color_label=gtk_label_new(_("Background color:"));
-	
-	/**
-	* Create the font picker.
-	**/
 	font=gnome_font_picker_new();
 	gnome_font_picker_set_title(GNOME_FONT_PICKER(font),
 		_("gtranslator -- font selection"));
 	if (wants.font)
 		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font),
 						wants.font);
-	/**
-	* And the color pickers.
-	**/
 	foreground=gnome_color_picker_new();
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(foreground),
 		_("gtranslator -- foreground color"));
@@ -350,9 +347,10 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	gtranslator_color_values_get(GNOME_COLOR_PICKER(background),
 		COLOR_VALUE_BG);
 	gtranslator_config_close();
-	/**
-	* Insert the widgets.
-	**/		
+	
+	/*
+	 * Attach all the widgets to the sixth page.
+	 */		
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
 		font_label, 0, 1, 1, 2);
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
@@ -366,11 +364,9 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
 		background, 1, 2, 3, 4);	
 		
-	/**
-	* Connect the signals.
-	**/
-	gtk_signal_connect(GTK_OBJECT(recent_files_number), "changed",
-			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+	/*
+	 * Connect the signals to the preferences box.
+	 */
 	gtk_signal_connect(GTK_OBJECT(font), "font_set",
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(foreground), "color_set",
@@ -386,12 +382,14 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	show_nice_dialog(&prefs, "gtranslator -- prefs");
 }
 
-/**
-* If it's an apply then do this nice moves ...
-**/
-static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
+/*
+ * The actions to take when the user presses "Apply".
+ */
+static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 {
-	/* We need to apply only once */
+	/*
+	 * We need to apply only once. 
+	 */
 	if (page_num != -1)
 		return;
 #define update(value,widget) g_free(value);\
@@ -416,13 +414,11 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.popup_menu = if_active(enable_popup_menu);
 	wants.uzi_dialogs = if_active(no_uzis);
 	wants.check_recent_file = if_active(check_recent_files);
+	wants.instant_spell_check = if_active(instant_spell_checking);
 	wants.use_own_specs = if_active(own_specs);
 #undef if_active
 	
-	wants.recent_files=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(recent_files_number));
-
 	gtranslator_config_init();
-	gtranslator_config_set_int("recent_files/number", wants.recent_files);
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
 	gtranslator_config_set_string("language/name", language);
@@ -430,19 +426,16 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	gtranslator_config_set_string("language/encoding", enc);
 	gtranslator_config_set_string("language/language_code", lc);
 	gtranslator_config_set_string("language/team_email", lg);
-	/**
-	* Get the font and store it.
-	**/
+	
 	g_free(wants.font);
 	wants.font=gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font));
 	gtranslator_config_set_string("font/name", wants.font);
-	/**
-	* Get the colors from the color pickers.
-	**/
+	
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground),
 		COLOR_VALUE_FG);
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(background),
 		COLOR_VALUE_BG);
+	
 	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", wants.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
@@ -461,15 +454,17 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 			      wants.uzi_dialogs);
 	gtranslator_config_set_bool("toggles/check_recent_files",
 			      wants.check_recent_file);
+	gtranslator_config_set_bool("toggles/instant_spell_check",
+			      wants.instant_spell_check);
 	gtranslator_config_set_bool("toggles/use_own_specs",
 			      wants.use_own_specs);
 	gtranslator_config_close();
 }
 
-/**
-* The preferences box help
-**/
-static void prefs_box_help(GtkWidget * widget, gpointer useless)
+/*
+ * The preferences box's help window.
+ */
+static void prefs_box_help(GtkWidget  * widget, gpointer useless)
 {
 	gnome_app_message(GNOME_APP(app1), _("\
 With the Preferences box you can define some variables\n\
@@ -477,10 +472,12 @@ with which you can make gtranslator make more work\n\
 like YOU want it to work!"));
 }
 
-gboolean destroy_lists(GtkWidget * widget, gpointer useless)
+gboolean destroy_lists(GtkWidget  * widget, gpointer useless)
 {
 	list_ref--;
-	/* If something needs them, leave */
+	/*
+	 * If something needs them, leave.
+	 */
 	if (list_ref != 0) return FALSE;
 #define free_a_list(list) g_list_free(list); list=NULL;
 	free_a_list(languages_list);
@@ -492,7 +489,7 @@ gboolean destroy_lists(GtkWidget * widget, gpointer useless)
 	return FALSE;
 }
 
-static void prefs_box_changed(GtkWidget * widget, gpointer flag)
+static void prefs_box_changed(GtkWidget  * widget, gpointer flag)
 {
 	gint c = 0;
 	gchar *current;
@@ -546,8 +543,8 @@ void read_prefs(void)
 	mime = gtranslator_config_get_string("language/mime_type");
 	enc = gtranslator_config_get_string("language/encoding");
 	wants.font = gtranslator_config_get_string("font/name");
-	wants.recent_files =
-	    gtranslator_config_get_int("recent_files/number");
+	wants.instant_spell_check = 
+	    gtranslator_config_get_bool("toggles/instant_spell_check");
 	wants.save_geometry =
 	    gtranslator_config_get_bool("toggles/save_geometry");
 	wants.unmark_fuzzy =
@@ -606,10 +603,12 @@ void save_geometry(void)
 	}
 }
 
-void restore_geometry(gchar * gstr)
+void restore_geometry(gchar  * gstr)
 {
 	gint x, y, width, height;
-	/* Set the main window's geometry from prefs. */
+	/*
+	 * Set the main window's geometry from the preferences.
+	 */
 	if (gstr == NULL) {
 		if (wants.save_geometry == TRUE) {
 			gtranslator_config_init();
@@ -621,7 +620,9 @@ void restore_geometry(gchar * gstr)
 		}
 		else return;
 	}
-	/* And if a geometry-definition has been given .. parse it. */
+	/*
+	 * IF a geometry definition had been defined try to parse it.
+	 */
 	else {
 		if (!gnome_parse_geometry(gstr, &x, &y, &width, &height)) {
 			g_warning(

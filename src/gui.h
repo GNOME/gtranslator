@@ -58,7 +58,6 @@ enum {
 	ACT_FIND,
 	ACT_FIND_AGAIN,
 	ACT_HEADER,
-	ACT_SPELL,
 	/************/
 	ACT_FIRST,
 	ACT_BACK,

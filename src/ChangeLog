@@ -1,3 +1,26 @@
+2001-01-03  Fatih Demir	<kabalak@gmx.net>
+
+	* session.c/.h: Reformatted the comments.
+
+	* gtkspell.h: Change the #ifndef/define pair for the
+		header.
+
+	* prefs.h, prefs.c: Reformatted the files and added
+		the necessary parts for the spell checking page.
+
+	* gui.c/.h: Removed all spell-checking menu entry
+		related stuff, include the gtkspell.h
+		 header and added the gtkspell calls conditionally
+		  according to the preferences.
+
+	* spell.c/.h: Removed these oldsome files.
+
+	* Makefile.am: Removed spell.c/.h from the sources.
+
+	* prefs.c: Show the notebook tabs on the
+		right instead of the top -- makes it more
+		 readable.
+
 2001-01-02  Fatih Demir	<kabalak@gmx.net>
 
 	* main.c: Reformatted and removed any URI/GnomeVFS

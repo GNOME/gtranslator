@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#ifndef __gtkspell_h__
-#define __gtkspell_h__
+#ifndef GTR_GTKSPELL_H
+#define GTR_GTKSPELL_H 1
 
 /* PLEASE NOTE that this API is unstable and subject to change. */
 
@@ -99,4 +99,4 @@ void gtkspell_uncheck_all(GtkText *gtktext);
  *  - "text" is the widget to check.
  */
 
-#endif /* __gtkspell_h__ */
+#endif

@@ -1,28 +1,38 @@
-/**
-* Fatih Demir <kabalak@gmx.net>
-*
-* (C) 2000 Published under GNU GPL V 2.0+
-*
-* The session-functions of gtranslator
-*
-* -- source
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ * 
+ * gtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
+ *    
+ * gtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #include "session.h"
 #include <libgtranslator/preferences.h>
 
-/**
-* The standard die-method
-**/
+/*
+ * Quits via the normal quit.
+ */
 gint gtranslator_dies_for_you(GnomeClient * client, gpointer data)
 {
 	gtk_main_quit();
 	return FALSE;
 }
 
-/**
-* The SaveYourself-function
-**/
+/*
+ * Saves the state of gtranslator before quitting.
+ */
 gint gtranslator_sleep(GnomeClient * client, gint phase,
 		       GnomeSaveStyle s_style, gint shutdown,
 		       GnomeInteractStyle i_style, gint fast, gpointer data)
@@ -32,9 +42,11 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 		"-r",
 		NULL
 	};
-	/**
-	* State-saving ...
-	**/
+	
+	/*
+	 * The state (for now only the current message number) is stored
+	 *  in the preferences.
+	 */
 	gtranslator_config_init();
 	gtranslator_config_set_int("state/message_number", 
 			     g_list_position(po->messages, po->current));
@@ -52,6 +64,9 @@ gint gtranslator_sleep(GnomeClient * client, gint phase,
 	return TRUE;
 }
 
+/*
+ * Restores a previously closed session.
+ */ 
 void restore_session(GnomeClient * client)
 {
 	guint num;

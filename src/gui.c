@@ -15,9 +15,9 @@
 #include "parse.h"
 #include "header_stuff.h"
 #include "find.h"
-#include "spell.h"
 #include "dnd.h"
 #include "about.h"
+#include "gtkspell.h"
 
 #include <libgtranslator/preferences.h>
 #include <libgtranslator/stylistics.h>
@@ -122,10 +122,6 @@ static GnomeUIInfo the_edit_menu[] = {
 			       N_("Edit the header"),
 			       edit_header,
 			       GNOME_STOCK_MENU_PROP),
-	GNOMEUIINFO_ITEM_STOCK(N_("_Spell check..."),
-			       N_("Check the spelling of translation"),
-			       check_spelling,
-			       GNOME_STOCK_MENU_SPELLCHECK),
 	GNOMEUIINFO_END
 };
 
@@ -399,7 +395,6 @@ static void create_actions(void)
 	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[7]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
 	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[6]);
-	insert_action(ACT_SPELL, the_edit_menu[11], NONE);
 	/*------------------------------------------------ */
 	insert_action(ACT_FIRST, the_messages_menu[0], the_searchbar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_searchbar[1]);
@@ -421,7 +416,7 @@ void disable_actions_no_file(void)
 	disable_actions(ACT_COMPILE, ACT_UPDATE,
 			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
 			ACT_UNDO, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
-			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_SPELL,
+			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER,
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 			ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
@@ -432,7 +427,7 @@ void enable_actions_just_opened(void)
 {
 	enable_actions( ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
-			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST, ACT_SPELL,
+			ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
 			ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK);
 	/**
 	* If we'd have the option to use the update function set, enable the
@@ -614,6 +609,11 @@ static void invert_dot(gchar *str)
 void display_msg(GList * list_item)
 {
 	GtrMsg *msg;
+	gchar *ispell_command[] = {
+		"ispell",
+		"-a",
+		NULL
+	};
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	clean_text_boxes();
@@ -643,6 +643,26 @@ void display_msg(GList * list_item)
 				msg->msgid, -1);
 		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
 				msg->msgstr, -1);
+	}
+	
+	/*
+	 * Use instant spell checking via gtkspell only if the corresponding
+	 *  setting in the preferences is set.
+	 */
+	if(wants.instant_spell_check)
+	{
+		/*
+		 * Start up gtkspell if not already done.
+		 */ 
+		if(!gtkspell_running())
+		{
+			gtkspell_start(NULL, ispell_command);
+		}
+
+		/*
+		 * Attach it to the translation box for instant spell checking.
+		 */ 
+		gtkspell_attach(GTK_TEXT(trans_box));
 	}
 #define set_active(number,flag) \
 	gtk_check_menu_item_set_active(\
