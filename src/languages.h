@@ -182,7 +182,7 @@ static GtrLanguage languages[] = {
 	},
 	{
 	 N_("Japanese"), "ja", "euc-jp",
-	 "translation@gnome.gr.jp", "8bit"
+	 "gnome-translation@gnome.gr.jp", "8bit"
 	},
 	{
 	 N_("Korean"), "ko", "euc-kr",
