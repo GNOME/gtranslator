@@ -11,8 +11,7 @@ gtranslator_htmlfiles = \
 	commandlinearguments.html \
 	features.html \
 	index.html \
-	thanks-to-contributors.html \
-	thanks-to-packagers.html \
+	thanks.html \
 	use-of-gtranslator.html \
 	docbook.css
 
