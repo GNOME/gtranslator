@@ -926,10 +926,24 @@ void gtranslator_get_translated_count(void)
 
 void gtranslator_set_progress_bar(void)
 {
+	gfloat percentage;
+	
 	/*
-	 * Set the progressbar status.
+	 * Calculate the percentage.
 	 */
-	gnome_appbar_set_progress(GNOME_APPBAR(gtranslator_application_bar),
-				  1.0 * po->translated / po->length);
+	percentage=1.0 * po->translated / po->length;
+
+	/*
+	 * Set the progress only if the values are reasonable.
+	 */
+	if(percentage > 0.0 || percentage < 1.0)
+	{
+		/*
+		 * Set the progressbar status.
+		 */
+		gnome_appbar_set_progress(
+			GNOME_APPBAR(gtranslator_application_bar),
+			percentage);
+	}
 }
 

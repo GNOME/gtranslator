@@ -134,8 +134,12 @@ GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint ro
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo), list);
 	if (value)
 		gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), value);
+	
+	gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(combo)->entry), FALSE);
+	
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), combo, 1, 2, row, row + 1);
+	
 	gtk_signal_connect(GTK_OBJECT(GTK_COMBO(combo)->entry), "changed",
 			   GTK_SIGNAL_FUNC(callback), user_data);
 	return combo;
