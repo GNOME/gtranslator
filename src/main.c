@@ -18,7 +18,6 @@
 #include "session.h"
 #include "prefs.h"
 #include "parse.h"
-#include "beginners-druid-interface.h"
 #include <libgtranslator/parse-db.h>
 #include <libgtranslator/team-handle.h>
 
