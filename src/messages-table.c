@@ -297,6 +297,15 @@ void gtranslator_messages_table_create (void)
     }
       list = g_list_next(list);
   }
+
+  if(GtrPreferences.collapse_all)
+  {
+	gtk_tree_view_collapse_all(GTK_TREE_VIEW(tree));
+  }
+  else
+  {
+	gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
+  }
 }
 
 /*

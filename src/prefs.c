@@ -65,7 +65,7 @@ static GtkWidget
 	*instant_spell_checking, *keep_obsolete, *autosave,
 	*autosave_with_suffix, *sweep_compile_file, *use_learn_buffer,
 	*show_messages_table, *rambo_function, *use_own_mt_colors,
-	*collapse_translated_entries, *auto_learn, *fuzzy_matching,
+	*collapse_all_entries, *auto_learn, *fuzzy_matching,
 	*show_comment, *highlight;
 
 /*
@@ -514,10 +514,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 								 GtrPreferences.show_messages_table,
 								 G_CALLBACK(gtranslator_preferences_dialog_changed));
 	gtk_box_pack_start (GTK_BOX (category_box), show_messages_table, FALSE, FALSE, 0);
-	collapse_translated_entries = gtranslator_preferences_toggle_new(_("Collapse translated entries by default"),
-									 GtrPreferences.collapse_translated,
+	collapse_all_entries = gtranslator_preferences_toggle_new(_("Collapse all entries by default"),
+									 GtrPreferences.collapse_all,
 									 G_CALLBACK(gtranslator_preferences_dialog_changed));
-	gtk_box_pack_start (GTK_BOX (category_box), collapse_translated_entries, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (category_box), collapse_all_entries, FALSE, FALSE, 0);
 	use_own_mt_colors = gtranslator_preferences_toggle_new(_("Use own colors for messages table groups"),
 							       GtrPreferences.use_own_mt_colors,
 							       G_CALLBACK(gtranslator_preferences_dialog_changed));
@@ -674,7 +674,7 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	GtrPreferences.sweep_compile_file = if_active(sweep_compile_file);
 	GtrPreferences.show_comment = if_active(show_comment);
 	GtrPreferences.show_messages_table = if_active(show_messages_table);
-	GtrPreferences.collapse_translated = if_active(collapse_translated_entries);
+	GtrPreferences.collapse_all = if_active(collapse_all_entries);
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
@@ -832,8 +832,8 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 			      GtrPreferences.auto_learn);
 	gtranslator_config_set_bool("toggles/show_messages_table",
 			      GtrPreferences.show_messages_table);
-	gtranslator_config_set_bool("toggles/collapse_translated_entries",
-			      GtrPreferences.collapse_translated);
+	gtranslator_config_set_bool("toggles/collapse_all",
+			      GtrPreferences.collapse_all);
 	gtranslator_config_set_bool("toggles/keep_obsolete",
 			      GtrPreferences.keep_obsolete);
 	gtranslator_config_set_bool("toggles/autosave",
@@ -1003,8 +1003,8 @@ void gtranslator_preferences_read(void)
 		"toggles/show_comment");
 	GtrPreferences.show_messages_table = gtranslator_config_get_bool(
 		"toggles/show_messages_table");
-	GtrPreferences.collapse_translated = gtranslator_config_get_bool(
-		"toggles/collapse_translated_entries");
+	GtrPreferences.collapse_all = gtranslator_config_get_bool(
+		"toggles/collapse_all");
 
 	/*
 	 * Check if we'd to use special styles.

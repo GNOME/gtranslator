@@ -44,7 +44,7 @@ struct {
 	guint auto_learn		: 1;
 	guint show_messages_table	: 1;
 	guint show_comment		: 1;
-	guint collapse_translated	: 1;
+	guint collapse_all		: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.
