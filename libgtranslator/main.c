@@ -22,14 +22,48 @@
 * The local includes.
 **/
 #include <gtranslatord.h>
-#include <parse-db.h>
-#include <team-handle.h>
-#include <preferences.h>
+#include <libgtranslator/parse-db.h>
+#include <libgtranslator/team-handle.h>
+#include <libgtranslator/preferences.h>
+#include <popt-gnome.h>
 
 /**
 * The OAF includes.
 **/
 #include <liboaf/liboaf.h>
+
+/**
+* Simply undefine and redefine the G_LOG_DOMAIN 
+*  value just for more logicness as gtranslatord
+*   has/will have got also own warning/error
+*    messages which do appear with the G_LOG_DOMAIN
+*     information.
+**/
+#ifdef G_LOG_DOMAIN
+#undef G_LOG_DOMAIN
+#define G_LOG_DOMAIN "gtranslatord"
+#endif
+
+/**
+* The static gchar for the language to parse.
+**/
+static gchar	*lang=NULL;
+static gchar	*tuz=NULL;
+
+/**
+* The poptTable for gtranslatord.
+**/
+static struct poptOption gtranslatord_options[] = {
+	{
+		"parse-db", 'p', POPT_ARG_STRING, &lang,
+		0, N_("The language to parse the db for"), N_("language_code")
+	},
+	{
+		"save-again", 's', POPT_ARG_STRING, &tuz,
+		0, N_("DEBUG: Foo'sh save-again of the db."), N_("Foo")
+	},	
+	POPT_AUTOHELP{NULL}
+};
 
 /**
 * The mainloop.
@@ -38,6 +72,7 @@ int main(int argc,char *argv[])
 {
 	CORBA_ORB		orb;
 	CORBA_Environment	env;
+	poptContext		context;
 	#ifdef GCONF_IS_PRESENT
 	GError			*error=NULL;
 	#endif
@@ -49,9 +84,21 @@ int main(int argc,char *argv[])
 	* Init the NLS if it's necessary.
 	**/
 	#ifdef ENABLE_NLS
-	bindtextdomain("gtranslator", PACKAGE_LOCALE_DIR);
+	bindtextdomain("gtranslator", GNOMELOCALEDIR);
 	textdomain("gtranslator");
 	#endif
+	/**
+	* Get the arguments and the context.
+	**/
+	context=poptGetContext("gtranslatord", argc, argv,
+		gtranslatord_options, 0);
+	while(poptGetNextOpt(context)>=0)
+	{
+	}
+	/**
+	* Free the context.
+	**/
+	poptFreeContext(context);
 	/**
 	* Init OAF.
 	**/
@@ -62,6 +109,14 @@ int main(int argc,char *argv[])
 	if(orb)
 	{
 		g_print(_("gtranslatord has started successfully and will do some operations now ...\n"));
+		if(lang)
+		{
+			parse_db_for_lang(lang);
+			if(tuz)
+			{
+				parse_db_save(messages);
+			}
+		}
 		/**
 		* Again this preliminary GConf stuff.
 		**/

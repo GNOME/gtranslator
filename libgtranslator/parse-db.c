@@ -15,6 +15,7 @@
 **/
 
 #include <libgtranslator/parse-db.h>
+#include <libgtranslator/translation-database.h>
 #include <libgtranslator/messages.h>
 
 /**
@@ -50,6 +51,11 @@ void parse_db_for_lang(gchar *language)
 		lusp=TRUE;
 	}
 	sprintf(file,"%s/%s.xml",MESSAGE_DB_DIR,language);
+	/**
+	* Set the filename of the DB.
+	**/
+	/*strcpy(db->filename, file);*/
+	db->filename="ter";
 	g_print(_("Using %s as the message database... \n"),file);
 	/**
 	* Parse the xml file.
@@ -78,6 +84,10 @@ void parse_db_for_lang(gchar *language)
 			g_print(_("Subclass file `%s.xml' not found.\n"),language);
 			g_print(_("Trying superclass-file `%s.xml' ...\n"),sarr[0]);
 			/**
+			* Set the language name.
+			**/
+			db->header->language=sarr[0];
+			/**
 			* Recurse within the same function with the new language  word ..
 			**/
 			parse_db_for_lang(sarr[0]);
@@ -97,8 +107,17 @@ void parse_db_for_lang(gchar *language)
 	/**
 	* Print the informations about the message database.
 	**/
-	g_print(_("Database creator/administrator: %s\n"),xmlGetProp(xmldoc->xmlRootNode, "author"));
+	g_print(_("Database creator/administrator: %s\n"),
+		xmlGetProp(xmldoc->xmlRootNode, "author"));
+	/**
+	* Set the author name.
+	**/
+	db->header->author=xmlGetProp(xmldoc->xmlRootNode, "author");
 	g_print(_("EMail: %s\n"),xmlGetProp(xmldoc->xmlRootNode, "email"));
+	/**
+	* And the author email for the DB.
+	**/
+	db->header->author_email=xmlGetProp(xmldoc->xmlRootNode, "email");
 	while(node!=NULL)
 	{
                 GtrMsg *msg=g_new0(GtrMsg,1);
@@ -108,7 +127,12 @@ void parse_db_for_lang(gchar *language)
 		if(!strcmp(node->name, "serial"))
 		{
 			g_print(_("Message database informations:\n"));
-			g_print(_("Date: %s\nSerial: %s\n"), xmlGetProp(node, "date"), xmlNodeGetContent(node));
+			g_print(_("Date: %s\nSerial: %s\n"), xmlGetProp(node, "date"),
+				xmlNodeGetContent(node));
+			/**
+			* Set the serial information of the DB.
+			**/
+			db->header->serial=(gint)xmlNodeGetContent(node);
 		}
 		if(!strcmp(node->name, "msgid"))
 		{
@@ -124,7 +148,8 @@ void parse_db_for_lang(gchar *language)
 				/**
 				* Add them to the list.
 				**/
-				messages=g_list_prepend(messages, (gpointer) msg);
+				messages=g_list_prepend(messages,
+					(gpointer) msg);
 				/**
 				* Free the node.
 				**/
@@ -133,4 +158,113 @@ void parse_db_for_lang(gchar *language)
 		}
 		node=node->next;
 	}
+	/**
+	* Now reverse the list.
+	**/
+	messages=g_list_reverse(messages);
+	/**
+	* Set the DB's messages list to the current lisr.
+	**/
+	db->messages=messages;
+}
+
+/**
+* And save the GList as a message database.
+**/
+void parse_db_save(GList *list)
+{
+	/**
+	* The coming variables.
+	**/
+	FILE *file;
+	/**
+	* Fresh-meat :-)
+	**/
+	GtrMsg *msg=g_new0(GtrMsg,1);
+	gchar *temp=g_new0(gchar,1);
+	gchar datestr[10];
+	time_t timetick;
+	struct tm *timezone;
+	/**
+	* Make an assertion for the list.
+	**/
+	g_assert(list!=NULL);
+	/**
+	* Now combine the old filename and the suffix
+	*  to the new filename.
+	**/
+	sprintf(temp, "%s.new", db->filename);
+	/**
+	* Open the file to be written.
+	**/
+	file=fopen(temp, "w");
+	/**
+	* Again do an assertion, but this time on the file.
+	**/
+	g_assert(file!=NULL);
+	/**
+	* Print the file header.
+	**/
+	fprintf(file,"<?xml version=\"1.0\"?>\n");
+	/**
+	* Write the header with all the informations.
+	**/
+	fprintf(file,
+		"<db language=\"%s\" author=\"%s\" email=\"%s\">\n",
+		db->header->language, db->header->author, db->header->author_email);
+	/**
+	* Get the date.
+	**/
+	timetick=time(NULL);
+	timezone=localtime(&timetick);
+	/**
+	* And print it on the line.
+	**/
+	strftime(datestr, sizeof(datestr), "%Y-%m-%d", timezone);
+	/**
+	* Also write the serial date and number.
+	**/
+	fprintf(file,"<serial date=\"%s\">%i</serial>", datestr,
+		db->header->serial);
+	/**
+	* And get every entry from the list.
+	**/
+	while(list!=NULL)
+	{
+		/**
+		* Get the current data from the list.
+		**/
+		msg=(gpointer)list->data;
+		/**
+		* Print out the formatted output of the message entry.
+		**/
+		fprintf(file,"\n\t<msgid name=\"%s\">\n\t\t<msgstr>%s</msgstr>\n\t</msgid>",
+			msg->msgid, msg->msgstr);
+		/**
+		* Iterate to the next node in the list.
+		**/	
+		list=list->next;
+	}
+	/**
+	* Print the last tag.
+	**/
+	fprintf(file,"\n</db>");
+	/**
+	* Free the used variables.
+	**/
+	if(msg)
+	{
+		g_free(msg);
+	}
+	if(temp)
+	{
+		g_free(temp);
+	}		
+	/**
+	* Close the file stream if it's still here :-)
+	**/
+	if(file)
+	{
+		fclose(file);
+	}	
 }

@@ -1,5 +1,28 @@
 2000-10-25  Fatih Demir	<kabalak@gmx.net>
 
+	* Makefile.am: Also define the G_LOG_DOMAIN as
+		"libgtranslator", include the new
+		  translation-database.h file in the
+		   includes and reordered the files
+		    alphabetically.
+		
+	* translation-database.h: Added a new header file
+		which will store the structure data of
+		 a translation/message database.
+
+	* parse-db.c/.h: Added the corresponding save
+		function for the message db ( more
+		 honest: for the list of messages );
+		  it's filled up with some fix-values
+		   for now, as it's not in use and that
+		    piece of sources are only for testing.
+    
+        * main.c: Introduce options and handling of the 
+                --parse-db/-p option to parse the given
+                 message database, also changed the given
+		  textdomain directory to GNOMELOCALEDIR;
+		   undef and redefine the G_LOG_DOMAIN.
+
         * parse-db.*: Removed the checking routine which is
                 obsolete as the other functions do also
                  perform checks; don't print out the node
@@ -10,7 +33,10 @@
  
         * Makefile.am: Removed foo.xml from the dist files and
                 added the messages.h file to libgtranslator;
-                 that's outsourcing!
+                 that's outsourcing! Also define the new
+		  GNOMELOCALEDIR define like in the src-dir,
+		   so that we'd also get now gettextized
+		    messages for libgtranslator/gtranslatord.
 
 	* foo.xml: Removed it as it's useless for us :-)
 

@@ -65,7 +65,7 @@ struct GtranslatorPreferencesDialogInternal
 	GList 		*prefs_pages;
 	/**
 	* The default preferences page ( we're starting
-	*  at '1', not at '0' !!!!
+	*  at '1', not at '0' !!!! )
 	**/
 	guint		default_page : 1;
 	/**
@@ -110,7 +110,7 @@ void gtranslator_preferences_dialog_hide(
 		dialog, FALSE, FALSE, TRUE);
 /**
 * 2) The disable karavane...
-**/		
+**/
 #define gtranslator_preferences_dialog_disable_apply_button(dialog) \
 	gtranslator_preferences_dialog_disable_buttons( \
 		dialog, TRUE, FALSE, FALSE);
@@ -119,7 +119,7 @@ void gtranslator_preferences_dialog_hide(
 		dialog, FALSE, TRUE, FALSE);
 #define gtranslator_preferences_dialog_disable_cancel_button(dialog) \
 	gtranslator_preferences_dialog_disable_buttons( \
-		dialog, FALSE, FALSE, TRUE);		
+		dialog, FALSE, FALSE, TRUE);
 
 /**
 * Enable the buttons defined by the arguments.
@@ -136,7 +136,7 @@ void gtranslator_preferences_dialog_disable_buttons(
 	
 /**
 * Section stuff.
-**/	
+**/
 	
 /**
 * Add another settings section to the dialog.

@@ -59,4 +59,10 @@ GList *messages;
 **/
 void parse_db_for_lang(gchar *language_code);
 
+/**
+* This saves the given GList as the language's message
+*  database file.
+**/
+void parse_db_save(GList *list);
+
 #endif
