@@ -1,4 +1,21 @@
+2000-03-09  Fatih Demir		( kabalak@gmx.net )
+
+	+	Get the geometry of the main window
+		at the startup
+
+		-> main.c
+	
+	+	A new ´gchar*´ for the geometry 
+		
+		-> interface.h
+
 2000-03-08  Fatih Demir		( kabalak@gmx.net )
+
+	+	Added a new toolbar with some extra-
+		funcs ( which will be hopefully created
+		in the next time .. )
+		
+		-> interface.c
 
 	+	Added an enum for the different stati
 		a translation entry could have 
@@ -17,11 +34,13 @@
 
 		-> msg_db.c
 	
-	+	Removed unneeded things : 
+	+	Changed some things : 
 		
 		-create_wait_for_help()
-
-		-> interface.c	
+		
+		-search_entry*
+		
+		-> interface.c/.h	
 
 		-negative-value check in check_file()
 	

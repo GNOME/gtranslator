@@ -68,6 +68,10 @@ void close_msg_db()
 	 * Close the msg-db file(stream)
 	 **/
 	fclose(db_stream);
+	/**
+	 * Make the closure of the msg_db known
+	 *  to the other routines .
+	 **/
 	msg_db_inited=FALSE;
 }
 

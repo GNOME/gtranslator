@@ -162,7 +162,7 @@ create_app1 (void)
                                   (GtkDestroyNotify) gtk_widget_unref);
         gtk_widget_show (toolbar1);
 	/**
-	 * New code for the search bar
+	 * Create the search bar
 	 **/
         search_bar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
         gtk_widget_show (search_bar);
@@ -186,38 +186,46 @@ create_app1 (void)
 	/**
 	 * Now the "new" icons ...
       	 **/
-	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_SEARCH);
-	search_entry_tmp = gnome_entry_new ("SEARCH_ENTRY");
-	search_entry = gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
-				GTK_TOOLBAR_CHILD_BUTTON,
-				NULL,
-				_("Search here"),
-				_("The search element"),NULL,
-				search_entry_tmp, NULL ,NULL);	
-	gtk_widget_show(search_entry);
+	tmp_toolbar_icon = gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_SEARCH);
 	search_button = gtk_toolbar_append_element (GTK_TOOLBAR(search_bar),
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
 				_("Search"),
 				_("Search for a message"),NULL,
 				tmp_toolbar_icon , NULL, NULL);
-	gtk_widget_show(search_button);	
-	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_BOOK_RED);
+	ka_widget_show(search_button);	
+	tmp_toolbar_icon = gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_REDO);
+	search_again_button = gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
+				GTK_TOOLBAR_CHILD_BUTTON,
+				NULL,
+				_("ReSearch"),
+				_("Search again"),NULL,
+				tmp_toolbar_icon , NULL, NULL);
+	ka_widget_show(search_again_button);
+	tmp_toolbar_icon = gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_JUMP_TO);
+	goto_button = gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
+				GTK_TOOLBAR_CHILD_BUTTON,
+				NULL,
+				_("Goto"),
+				_("Goto this message"),NULL,
+				tmp_toolbar_icon, NULL, NULL);
+	ka_widget_show(goto_button);
+	tmp_toolbar_icon = gnome_stock_pixmap_widget(app1, GNOME_STOCK_PIXMAP_BOOK_RED);
 	cat_button = gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
 				_("F/Cat."),
 				_("Find in the personal catalog"),NULL,
 				tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(cat_button);
-	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1,GNOME_STOCK_PIXMAP_BOOK_OPEN);
+	ka_widget_show(cat_button);
+	tmp_toolbar_icon = gnome_stock_pixmap_widget(app1,GNOME_STOCK_PIXMAP_BOOK_OPEN);
 	po_button = gtk_toolbar_append_element(GTK_TOOLBAR(search_bar),
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
 				_("F/Po."),
 				_("Find in the po file "), NULL,
 				tmp_toolbar_icon , NULL, NULL);
-	gtk_widget_show(po_button);
+	ka_widget_show(po_button);
 	/**
 	 * Now the old ones ( from GLADE-times .. ) :
 	 **/
@@ -228,7 +236,7 @@ create_app1 (void)
                                       _("Compile"),
                                       _("New File"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
-        	gtk_widget_show (compile_button);
+       	gtk_widget_show (compile_button);
 
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_OPEN);
 	open_button = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),

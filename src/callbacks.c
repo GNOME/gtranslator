@@ -1,8 +1,9 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
- * A GLADE'd interface's callbacks suite ...
  * It's too anormally written / don't look for many sense in it ...
+ *
+ * Some routines need to be added here in the next days ...
  **/
 
 #ifdef HAVE_CONFIG_H
