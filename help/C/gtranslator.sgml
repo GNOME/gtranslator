@@ -617,9 +617,11 @@
 	       <itemizedlist>
 		<listitem>
 		  <para>
-	             <guimenuitem>Manual</guimenuitem> &mdash; This
+	             <guimenuitem>Gtranslator Manual</guimenuitem> &mdash; This
     	              opens the <application>GNOME Help
-    	              Browser</application> and displays this manual.
+    	              Browser</application> (or 
+                      <application>Nautilus</application>)
+                       and displays this manual.
 	          </para>
 		</listitem>
 
@@ -628,10 +630,9 @@
 	            <guimenuitem>About</guimenuitem> &mdash; This
     	            opens the <interface>About</interface> dialog
     	            which shows basic information about
-    	            <application>MY-GNOME-APP</application>, such as
+    	            <application>Gtranslator</application>, such as
     	            the author's name, the application version number,
-    	            and the URL for the application's Web page if one
-    	            exists.
+    	            and the URL for the application's Web page.
 	          </para>
 		</listitem>
 	      </itemizedlist>
@@ -751,7 +752,7 @@
             translating po files for the GNOME 1.4 platform. GNOME 2.0 will use
             UTF-8 encoding for all languages, thus you need the alter the 
             defaults when translating  for 2.x platforms. You may also want 
-            to switch encoding to be able to use the "euro" sign. 
+            to switch encoding to be able to use the <quote>euro</quote> sign. 
           </para>
 	</note>
 	  </listitem>
@@ -785,7 +786,7 @@
  <sect1 id="bugs">
   <title>Known Bugs and Limitations</title>
   <para>
-   This application has no known bugs.
+   YOu can query for bugs related to <application>Gtranslator</application> in the <ulink url=http://bugzilla.gnome.org>Gnome Bug Tracker</ulink>.
   </para>
  </sect1>
 
@@ -794,9 +795,12 @@
 
  <sect1 id="authors">
   <title>Authors</title>
+  <sect2 id="appauthor">
+  <title>Application Authors</title>
   <para>
    <application>Gtranslator</application> was written by Fatih Demir
-   (<email>kabalak@gtranslator.org</email>). To find more information about
+   (<email>kabalak@gtranslator.org</email>) and Gediminas Paulauskas 
+   (<email>menesis@gtranslator.org</email>). To find more information about
    <application>Gtranslator</application>, please visit the <ulink
    url="http://www.gtranslator.org" type="http">Gtranslator Web
    page</ulink>.  Please send all comments, suggestions, and bug
@@ -809,7 +813,91 @@
    <guisubmenu>Utilities</guisubmenu> submenu of <guimenu>Main
    Menu</guimenu>, for submitting bug reports.
   </para>
-
+  </sect2>
+  <sect2 id="contributors">
+  <title>Contributors</title>
+   <para>People who have contributed to the Gtranslator Project:
+   <itemizedlist>
+   <listitem>
+       <para>
+       Thomas Ziehmer <email>thomas@gtranslator.org</email>
+       for the find dialog implementation
+       </para>
+   </listitem>
+   <listitem>
+       <para>
+        <emphasis>All</emphasis> translators of
+	<application>Gtranslator</application>
+       </para>
+   </listitem>
+   <listitem>
+       <para>
+       The GNOME I18N list <email>gnome-i18n@gnome.org</email>
+       </para>
+   </listitem>
+   <listitem>
+       <para>
+	Alexandre Hautequest <email>hquest@fesppr.br</email>
+       </para>
+   </listitem>
+   <listitem>
+       <para>
+       Denis Pleic&apos; <email>dpleic@linux.hr</email>
+      </para>
+   </listitem>
+   <listitem>
+      <para>
+      Josh Jackson 
+      <email>pturing@mailandnews.com</email>
+      </para>
+   </listitem>
+   <listitem>
+      <para>
+      Robert Brady <email>robert@suse.co.uk</email>
+     </para>
+   </listitem>
+   </itemizedlist>
+   </para>
+  </sect2>
+  <sect2 id="packagers">
+  <title>Packagers</title>
+  <para>
+   <para>We would want to thank those persons for providing packages in the 
+    corresponding formats of <application>Gtranslator</application>.
+     <itemizedlist>
+     <listitem>
+     <para>Josh Jackshon 
+     <email>pturing@mailandnews.com</email>
+     for his Mandrake packages of
+     <application>Gtranslator</application> 0.34
+     </para>
+     </listitem>
+     <listitem>
+     <para>Mike Newman
+     <email>mike@gtnorthern.demon.co.uk</email>
+     for his RH7 (S)RPMs of
+     <application>Gtranslator</application>.
+     </para>
+     </listitem>
+     <listitem>
+     <para>Martijn van de Streek
+     <email>martijn@foodfight.org</email>
+     for his Debian packages of
+     <application>Gtranslator</application>
+     </para>
+     </listitem>
+     <listitem>
+     <para>Maxim Sobolev 
+     <email>sobomax@freebsd.org</email>
+     for his FreeBSD ports of
+     <application>Gtranslator</application>
+     </para>
+     </listitem>
+      </itemizedlist>
+  </para>
+  </sect2>
+  <sect2 id="docauthor">
+  <title>Documentation Authors</title>
   <para>
    This manual was written by Emese Kovacs
    (<email>emese@gnome.hu</email>). Please send all comments and
@@ -831,6 +919,7 @@
   </para>
 
   -->
+  </sect2>
 
  </sect1>
 
