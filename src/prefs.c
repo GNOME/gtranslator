@@ -117,7 +117,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		8, 1, ("Miscellaneous"));
+		8, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		4, 2, _("Recent files & spell checking"));
 	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -356,7 +356,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	 */
 	if (page_num != -1)
 		return;
-#define update(value,widget) if(value) { g_free(value); } \
+#define update(value,widget) if(value) { g_free(value); } value=NULL; \
 	value=gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 	update(author, authors_name);
 
