@@ -10,6 +10,7 @@ schemes_DATA = \
 	kabalak.xml \
 	kbabel.xml \
 	menesis.xml \
+	nizuu.xml \
 	tuey.xml \
 	zuper.xml
 
