@@ -32,8 +32,7 @@ gtranslator_htmlfiles = \
 	index.html \
 	license.html \
 	prefs.html \
-	usage.html \
-	$(css_files)
+	usage.html
 
 if SCROLLKEEPER_PRESENT
 gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat $(gtranslator_sgmlfile)
@@ -43,10 +42,8 @@ endif
 
 if JW_PRESENT
 build_command=jw -c /etc/sgml/catalog $(gtranslator_sgmlfile) -o gtranslator
-css_files=
 else
 build_command=db2html $(gtranslator_sgmlfile)
-css_files=docbook.css
 endif
 
 if SCROLLKEEPER_PRESENT
