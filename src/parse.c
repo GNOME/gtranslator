@@ -49,6 +49,7 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	regex_t *rex;
 	regmatch_t pos[3];
 	gchar *comment = msg->comment;
+	
 	/* 
 	 * If fuzzy status is already correct
 	 */
@@ -81,13 +82,11 @@ void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy)
 	}
 }
 
-/* 
- * FIXME: check if message counts remain correct
- */
 void mark_msg_sticky (GtrMsg * msg, gboolean on)
 {
 	if (on) {
 		msg->msgstr = msg->msgid;
+		
 		/*
 		 * It is no longer fuzzy
 		 */
@@ -98,6 +97,7 @@ void mark_msg_sticky (GtrMsg * msg, gboolean on)
 		msg->msgstr = NULL;
 		msg->status &= ~GTR_MSG_STATUS_STICK;
 	}
+	get_translated_count();
 }
 
 static void check_msg_status(GtrMsg * msg)
@@ -608,10 +608,15 @@ static gboolean actual_write(const gchar * name)
 			po->header->prj_name,
 			po->header->prj_version,
 			po->header->language);
+		
 		/*
-		 * Add a foo'sh header entry.
+		 * Add a foo'sh header entry but only if no header is present.
 		 */ 
-		po->header->comment="#   -- edited with gtranslator.\n";
+		if(!po->header->comment)
+		{
+			po->header->comment="#   -- edited with gtranslator.\n";
+		}
+		
 		/*
 		 * Delete the old file.
 		 */
@@ -626,8 +631,10 @@ static gboolean actual_write(const gchar * name)
 	 */
 	if(!g_file_exists(name))
 	{
-		gchar *my_error=g_strdup_printf(_("The file `%s' doesn't exist at all!"),name);
-		gnome_app_error(GNOME_APP(app1),my_error);
+		gchar *my_error=g_strdup_printf(
+			_("The file `%s' doesn't exist at all!"), name);
+		gnome_app_error(GNOME_APP(app1), my_error);
+		
 		g_free(my_error);
 		return FALSE;
 	}
@@ -920,6 +927,8 @@ static void determine_translation_status(gpointer data, gpointer useless_stuff)
 		po->translated++;
 	if(message->status & GTR_MSG_STATUS_FUZZY)
 		po->fuzzy++;
+	if(message->status & GTR_MSG_STATUS_STICK)
+		po->translated++;
 }
 
 /*

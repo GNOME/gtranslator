@@ -104,18 +104,18 @@ static GnomeUIInfo the_last_files_menus[] = {
  */
 static GnomeUIInfo the_file_menu[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("_Compile"),
-	 N_("Compile the po-file"),
-	 compile, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
-	 GDK_C, GDK_MOD1_MASK, NULL
+		GNOME_APP_UI_ITEM, N_("_Compile"),
+		N_("Compile the po-file"),
+		compile, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
+		GDK_C, GDK_MOD1_MASK, NULL
 	},
 	{
-	 GNOME_APP_UI_ITEM, N_("_Update"),
-	 N_("Update the po-file"),
-	 update, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
-	 GDK_F5, 0, NULL
+		GNOME_APP_UI_ITEM, N_("_Update"),
+		N_("Update the po-file"),
+		update, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REFRESH,
+		GDK_F5, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
@@ -148,10 +148,13 @@ static GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_MENU_FIND_ITEM(find_dialog, NULL),
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(find_do, NULL),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("_Header..."),
-			       N_("Edit the header"),
-			       edit_header,
-			       GNOME_STOCK_MENU_PROP),
+	{
+		GNOME_APP_UI_ITEM, N_("_Header..."),
+		N_("Edit the header"),
+		edit_header, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
+		GDK_F8, 0, NULL
+	},
 	GNOMEUIINFO_END
 };
 
@@ -204,29 +207,32 @@ static GnomeUIInfo the_messages_menu[] = {
 
 static GnomeUIInfo the_msg_status_menu[] = {
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Translated"),
-	 N_("Toggle translated status of a message"),
-	 toggle_msg_status,
-	 GINT_TO_POINTER(GTR_MSG_STATUS_TRANSLATED),
-	 NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
-	 0, 0, NULL},
+		GNOME_APP_UI_TOGGLEITEM, N_("_Translated"),
+		N_("Toggle translated status of a message"),
+		toggle_msg_status,
+		GINT_TO_POINTER(GTR_MSG_STATUS_TRANSLATED),
+		NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
+		GDK_1, GDK_MOD1_MASK, NULL
+	},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
-	 N_("Toggle fuzzy status of a message"),
-	 toggle_msg_status,
-	 GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
-	 NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
-	 0, 0, NULL},
+		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
+		N_("Toggle fuzzy status of a message"),
+		toggle_msg_status,
+		GINT_TO_POINTER(GTR_MSG_STATUS_FUZZY),
+		NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+		GDK_2, GDK_MOD1_MASK, NULL
+	},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Stick"),
-	 N_("Stick this message"),
-	 toggle_msg_status,
-	 GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
-	 NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
-	 GDK_K, GDK_MOD1_MASK, NULL},
+		GNOME_APP_UI_TOGGLEITEM, N_("_Stick"),
+		N_("Stick this message"),
+		toggle_msg_status,
+		GINT_TO_POINTER(GTR_MSG_STATUS_STICK),
+		NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
+		GDK_3, GDK_MOD1_MASK, NULL
+	},
 	GNOMEUIINFO_END
 };
 
@@ -654,9 +660,6 @@ static void invert_dot(gchar *str)
 
 /* 
  * Display the message in text boxes
- * 
- * TODO: add syntax highlighting for %s, numbers, symbols, tabs;
- * append a char at the end of message
  */
 void display_msg(GList  * list_item)
 {
@@ -791,10 +794,6 @@ void update_msg(void)
 
 void toggle_msg_status(GtkWidget  * item, gpointer which)
 {
-	/*
-	 * Hm, this is for now unused, so it's uncommented.
-	 * GtrMsgStatus *stat = &(GTR_MSG(po->current->data)->status);
-	 */ 
 	gint flag = GPOINTER_TO_INT(which);
 	if (nothing_changes)
 		return;
