@@ -11,16 +11,28 @@
 #ifndef GTR_DND_H
 #define GTR_DND_H 1
 
-#include <gnome.h>
-#include <gtk/gtk.h>
-#include <glib.h>
+#include "interface.h"
+#include "parse.h"
+#include "msg_db.h"
+#include "messages.h"
+
+/**
+* The gtranslator's dnd-types enumeration.
+**/
+typedef enum _gtr_dnd_types gtr_dnd_types;
+
+/**
+* The used enumeration
+**/
+gtr_dnd_types dnd_type;
 
 /**
 * The D'n'D types
 **/
-enum gtr_dnd
+enum _gtr_dnd_types
 {
-        GTR_OPEN
+       	TARGET_URI_LIST,
+	TARGET_NETSCAPE_URL 
 };
 
 /**
@@ -28,18 +40,14 @@ enum gtr_dnd
 **/
 static GtkTargetEntry dragtypes[] =
 {
-        { "text/uri-list",0,0 }
+        { "text/uri-list", 0, TARGET_URI_LIST },
+	{ "text/plain", 0, TARGET_NETSCAPE_URL }
 };
 
 /**
 * Another variable
 **/
 gint a_counter;
-
-/**
-* The gtranslator's dnd-types enumeration.
-**/
-enum gtr_dnd func;
 
 /**
 * The D'n'D function

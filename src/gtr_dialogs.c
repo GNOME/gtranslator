@@ -149,22 +149,91 @@ void s_box_create()
 	gtk_signal_connect(GTK_OBJECT(s_box_cancel),"clicked",
 		GTK_SIGNAL_FUNC(s_box_hide),NULL);
 	gtk_signal_connect(GTK_OBJECT(s_box_ok),"clicked",
-		/* TODO */
-		NULL,NULL);
+		GTK_SIGNAL_FUNC(search),NULL);
 }
 
 void s_box_show()
 {
 	s_box_create();
+	gnome_entry_load_history(GNOME_ENTRY(s_box_string));
 	gtk_widget_show(s_box_dlg);
 }
 
 void s_box_hide(GtkWidget *widget,gpointer useless)
 {
+	gnome_entry_save_history(GNOME_ENTRY(s_box_string));
 	gtk_widget_hide(s_box_dlg);
 }
 
 void s_box(GtkWidget *widget,gpointer useless)
 {
 	s_box_show();
+}
+
+/**
+* The search function
+**/
+void search(GtkWidget *widget,gpointer useless)
+{
+	gchar *zoom_into_my_brain;
+	gtk_widget_set_sensitive(search_again_button,TRUE);
+	zoom_into_my_brain=search_do(widget,(gpointer)1);
+}
+
+/**
+* The GoTo methods
+**/
+void goto_dlg_create()
+{
+	GtkWidget *g_dlg_label;
+	gint nb=102;
+	/**
+	* Again create a Gtk+ dialog
+	**/
+	g_dlg=gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(g_dlg),_("GoTo message entry"));
+	gtk_window_set_wmclass(GTK_WINDOW(g_dlg),"gtranslator -- goto","gtranslator -- goto");
+	/**
+	* Create the buttons, the entry & the label
+	**/
+	g_dlg_ok=gnome_stock_button(GNOME_STOCK_BUTTON_OK);
+	g_dlg_cancel=gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
+	g_dlg_line_adjustment=gtk_adjustment_new(nb, 1, 1000, 1, 2, 2);
+	g_dlg_line=gtk_spin_button_new(GTK_ADJUSTMENT(g_dlg_line_adjustment), 1, 0);
+	g_dlg_label=gtk_label_new(_("Goto the specified message entry."));
+	/**
+	* Add'em to the dialog
+	**/
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(g_dlg)->action_area),g_dlg_ok);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(g_dlg)->action_area),g_dlg_cancel);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(g_dlg)->vbox),g_dlg_label);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(g_dlg)->vbox),g_dlg_line);
+	/**
+	* Show the widgets
+	**/
+	gtk_widget_show(g_dlg_ok);
+	gtk_widget_show(g_dlg_cancel);
+	gtk_widget_show(g_dlg_label);
+	gtk_widget_show(g_dlg_line);
+	/**
+	* Connect the signals
+	**/
+	gtk_signal_connect(GTK_OBJECT(g_dlg_cancel),"clicked",
+		GTK_SIGNAL_FUNC(goto_dlg_hide),NULL);
+}
+
+void goto_dlg_show()
+{
+	goto_dlg_create();
+	gtk_widget_show(g_dlg);
+}
+
+void goto_dlg_hide(GtkWidget *widget,gpointer useless)
+{
+	gtk_widget_hide(g_dlg);
+}
+
+void goto_dlg(GtkWidget *widget,gpointer useless)
+{
+	goto_dlg_show();
 }

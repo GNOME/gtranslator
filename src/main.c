@@ -42,6 +42,10 @@ static struct poptOption gtranslator_options [] = {
 		"msg_db", 'm', POPT_ARG_STRING, &msg_db,
 		0,N_("The msg_db to use"),"MSG_DB"
 	},
+	{
+		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
+		0,N_("Specifies the main-window geometry"),"GEOMETRY"
+	},
 	POPT_AUTOHELP {NULL}
 };
 
@@ -132,6 +136,10 @@ int main(int argc,char *argv[])
 	{
 		disable_buttons();
 	}
+	/**
+	* Disable the ReSearch button on startup
+	**/
+	gtk_widget_set_sensitive(search_again_button,FALSE);
 	/**
 	* Get the main window geometry :
  	**/

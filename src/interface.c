@@ -108,18 +108,6 @@ void enable_buttons()
 }
 
 /**
-* gtranslator's own quit-code ..
-**/
-gint gtranslator_quit(GtkWidget *widget,gpointer useless)
-{
-	/**
-	* Here could have been some checks...
-	**/
-	gtk_main_quit();
-}
-
-
-/**
 * The menu-entries
 **/
 static GnomeUIInfo the_file_menu[] =
@@ -448,15 +436,19 @@ create_app1 (void)
 	* The callbacks list
 	**/
 	gtk_signal_connect(GTK_OBJECT(app1),"delete-event",
-		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);	
+		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);	
 	gtk_signal_connect(GTK_OBJECT(exit_button),"clicked",
-		GTK_SIGNAL_FUNC(gtranslator_quit),NULL);
+		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
 	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",
 		GTK_SIGNAL_FUNC(prefs_box_show),NULL);
 	gtk_signal_connect(GTK_OBJECT(compile_button),"clicked",
 		GTK_SIGNAL_FUNC(compile),NULL);
 	gtk_signal_connect(GTK_OBJECT(search_button),"clicked",
 		GTK_SIGNAL_FUNC(s_box),NULL);
+	gtk_signal_connect(GTK_OBJECT(search_again_button),"clicked",
+		GTK_SIGNAL_FUNC(search_do),(gpointer)2);
+	gtk_signal_connect(GTK_OBJECT(goto_button),"clicked",
+		GTK_SIGNAL_FUNC(goto_dlg),NULL);
 	gtk_signal_connect(GTK_OBJECT(open_button),"clicked",
 		GTK_SIGNAL_FUNC(open_file_show),NULL);	
 	gtk_signal_connect(GTK_OBJECT(save_as_button),"clicked",
@@ -476,7 +468,7 @@ create_app1 (void)
 	* Connecting the function
 	**/
 	gtk_signal_connect(GTK_OBJECT(app1), "drag_data_received",
-        	GTK_SIGNAL_FUNC(gtranslator_dnd), (gpointer)func);
+        	GTK_SIGNAL_FUNC(gtranslator_dnd), (gpointer)dnd_type);
 	/*****************************************************************/
 	return app1;
 }

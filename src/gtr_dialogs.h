@@ -59,6 +59,13 @@ GtkWidget *s_box_dlg,*s_box_string;
 GtkWidget *s_box_ok,*s_box_cancel;
 
 /**
+* 7/The GoTo dialog widgets
+**/
+GtkObject *g_dlg_line_adjustment;
+GtkWidget *g_dlg,*g_dlg_line;
+GtkWidget *g_dlg_ok,*g_dlg_cancel;
+
+/**
 * The function prototypes :
 **/
 void compile_error_dialog(GtkWidget *widget,gpointer useless);
@@ -88,5 +95,18 @@ void s_box_create();
 void s_box_show();
 void s_box_hide(GtkWidget *widget,gpointer useless);
 void s_box(GtkWidget *widget,gpointer useless);
+
+/**
+* The search-function(s)
+**/
+void search(GtkWidget *widget,gpointer useless);
+
+/**
+* The GoTo line dialog methods
+**/
+void goto_dlg_create();
+void goto_dlg_show();
+void goto_dlg_hide(GtkWidget *widget,gpointer useless);
+void goto_dlg(GtkWidget *widget,gpointer useless);
 
 #endif // GTR_GTR_DIALOGS_H

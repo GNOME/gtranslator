@@ -92,4 +92,14 @@ void get_next_msg(GtkWidget *widget,gpointer useless);
 **/
 void get_last_msg(GtkWidget *widget,gpointer useless);
 
+/**
+* Nomen est omen, simplicissimus.
+**/
+void geekPrint(gchar *sta);
+
+/**
+* The search function
+**/
+gchar *search_do(GtkWidget *widget,gpointer wherefrom);
+
 #endif // GTR_PARSE_H

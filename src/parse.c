@@ -34,6 +34,13 @@ void check_file(FILE *stream)
 	}
 }
 
+void geekPrint(gchar *sta)
+{
+	g_print("<GEEK>-----------------------------------------------------\n");
+	g_print(" -- (%-s)\n",sta);
+	g_print("------------------------------------------------------</GEEK\n");
+}
+
 /**
 * The internally used parse-function
 **/
@@ -43,10 +50,7 @@ void parse(gchar *po)
 	* Some variables
 	**/
 	gchar temp_char[128];
-	/**
-	* Allocate the zamane-char
-	**/
-	gchar *zamane=g_new(gchar,4);
+	gchar *zamane;
         guint lines=1,z=0,msg_pair=0;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
@@ -122,9 +126,9 @@ void parse(gchar *po)
 			**/
 			msg[c].msgstr=temp_char;
 		}
-		if(!msg[c].msgid)
+		if((!msg[c].msgid)||(strlen(msg[c].msgid)<=0))
 		{
-			g_print("GEEK STUFF!\n");	
+			geekPrint("Yippe!Again anoe");	
 		}
 		else
 		{
@@ -154,13 +158,6 @@ void parse(gchar *po)
 	/**
 	* As we've got finished we can do some nonsense
 	**/
-	/**
-	* Free the zamane-char
-	**/
-	if(zamane)
-	{
-		g_free(zamane);
-	}
 	apply_header();
 	enable_buttons();
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));
@@ -188,13 +185,33 @@ void parse_the_file(GtkWidget *widget,gpointer filename)
 **/
 void get_first_msg(GtkWidget *widget,gpointer useless)
 {
-/*	gchar *i,*s;
+	gchar *i,*s;
 	gtk_text_freeze(GTK_TEXT(trans_box));
 	gtk_text_freeze(GTK_TEXT(text1));
-	i=msg[0].msgid;
-	s=msg[0].msgstr;
+	/*i=msg[0].msgid;
+	s=msg[0].msgstr;*/
+	i="Hello";
+	s="Merhaba";
 	gtk_editable_insert_text(GTK_EDITABLE(text1),i,sizeof(i),0);
 	gtk_editable_insert_text(GTK_EDITABLE(trans_box),s,sizeof(s),0);
 	gtk_text_thaw(GTK_TEXT(trans_box));
-	gtk_text_thaw(GTK_TEXT(text1));*/
+	gtk_text_thaw(GTK_TEXT(text1));
+}
+
+/**
+* The real search function
+**/
+gchar *search_do(GtkWidget *widget,gpointer wherefrom)
+{
+	switch((gint)wherefrom)
+	{
+		case 1:
+			geekPrint("SEARCH!");
+			break;
+		case 2:
+			geekPrint("RESEARCH!");
+			break;
+		default :
+			break;
+	}
 }

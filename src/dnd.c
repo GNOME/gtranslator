@@ -14,17 +14,31 @@ void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
 	int x,int y,GtkSelectionData *seldata, guint info,guint time,
 		gpointer data)
 {
+	gint return_value=0;
+	gchar *file;
 	GList *fnames, *fnp;
-	func=(enum gtr_dnd)data;
+	dnd_type=(gtr_dnd_types)data;
 	fnames=gnome_uri_list_extract_filenames((char *)seldata->data);
 	a_counter=g_list_length(fnames);
 	if (a_counter>0)
 		for (fnp = fnames; fnp; fnp = fnp->next, a_counter--)
 		{
-			if (func==GTR_OPEN) 
+			if (dnd_type==TARGET_URI_LIST) 
 			{
-				parse((char *)(fnp->data));
+				file=(char *)(fnp->data);
+				geekPrint(file);
+				parse(file);
+				geekPrint("Parsing it.");
+				return_value=1;
 			}
 		}	
-	gtk_drag_finish(context,TRUE,FALSE,time);
+	if(return_value==1)
+	{
+		gtk_drag_finish(context,TRUE,FALSE,time);
+	}
+	else
+	{
+		gtk_drag_finish(context,TRUE,TRUE,time);
+	}
+	geekPrint("Finished.");
 }
