@@ -1,9 +1,8 @@
 2001-03-15  Fatih Demir <kabalak@gtranslator.org>
 
-	* Makefile.am: Changed the CVS snapshot target a bit 
-		to be more useful and not to supply local 
-		 Makefile, config.h and other local files into a 
-		  CVS snapshot.
+	* Makefile.am: Changed the CVS snapshot target to use "make dist"
+		and to rescue the po files subdirectory before doing dist;
+		 also did some sed plays for the version number. 
 
 2001-03-13  Fatih Demir <kabalak@gtranslator.org>
 

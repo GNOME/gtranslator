@@ -29,15 +29,15 @@ distpacks: distdir
 	@echo Cleaning up...
 	@-rm -rf $(distdir)
 
-cvspack: clean
+cvspack:
 	@-rm -f gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz
-	@echo Creating CVS package of gtranslator...
+	@echo Creating CVS distpackage of gtranslator...
+	@sed -e "s,AM_INIT_AUTOMAKE.*,AM_INIT_AUTOMAKE\(gtranslator\, CVS_$(shell date +%Y-%m-%d)\),g" < configure.in \
+		> configure.in.new && mv configure.in.new configure.in
 	@./autogen.sh --help
-	@-rm -f ./config.log ./config.status ./config.cache ./config.h
-	@-rm -f `find . -name 'Makefile'` ./src/.g* `find . -name '.cvsignore'`
-	@-rm -rf `find . -name '.deps'` `find . -name '.libs'` \
-		`find . -name '.sources'` `find . -name 'CVS'`
-	@$(TAR) -C .. -chozf gtranslator-CVS_$(shell date +%Y-%m-%d).tar.gz gtranslator
+	@-cp -pR po __po
+	@make dist
+	@-mv __po po
 
 pre-release: cvspack
 	@-./pozilla.sh
