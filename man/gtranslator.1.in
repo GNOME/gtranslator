@@ -3,7 +3,7 @@
 gtranslator \-\- a comfortable gettext po file editor with many features
 
 .SH "SYNOPSIS"
-.B gtranslator [ \-\-help ] [ \-\-version ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-s scheme\-file ] [ \-b ] [ \-n ] [ \-q query\-domains\-dir ] [ po\-file ]
+.B gtranslator [ \-\-help ] [ \-\-version ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-b ] [ \-n ] [ \-q query\-domains\-dir ] [ po\-file ]
 
 .SH "DESCRIPTION"
 gtranslator is a comfortable gettext po file editor with many features like special char featured editing, regular expression based search function, compile/update possiblities.
@@ -22,9 +22,6 @@ Let's you specify the geometry of gtranslator's main window.
 .I \-w \-\-webalize=html\-output\-file po\-file
 Creates a given html file output which is an htmlized and syntax highlighted version of the po\-file.
 Especially good for webpages and other nice sites.
-.TP 
-.I \-s \-\-scheme=scheme\-file
-Allows you to set a colorscheme file on the command line.
 .TP 
 .I \-b \-\-build\-informations
 Shows the build specifications (date, time, versions, directories) of gtranslator.
@@ -53,7 +50,12 @@ Shows you the pill of options without an explanation.
 .B ~/.gconf/apps/gtranslator
 .TP 
 Your personal gtranslator settings will be stored there (if compiled with GConf support, you'll find it in ~/.gconf/apps/gtranslator/, if not in ~/.gnome/gtranslator).
-
+.TP 
+.B ~/.gtranslator
+This directory is used by gtranslator for all it's "private" files (e.g. temporary files).
+.TP 
+.B ~/.gtranslator/learned\-strings
+Your learned strings are stored in this file.
 .SH "USAGE EXAMPLES"
 Some examples for the options.
 
