@@ -10,7 +10,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=3.0.1
+export POZILLA_RELEASE=3.0.2
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -343,7 +343,7 @@ for i in $PO_FILES
 	cp $i $i.backup
 	language=`basename $i .po|sed -e s/\.Big5//g -e s/\.GB2312//g`
 	
-	merge_status=`OLD_PO_FILE_INPUT=yes msgmerge $i $PACKAGE.pot -o $i 2>&1`
+	merge_status=`LANG=C LANGUAGE=C OLD_PO_FILE_INPUT=yes msgmerge $i $PACKAGE.pot -o $i 2>&1`
 	
 	if echo $merge_status|grep -sq warning ; then
 		mv $i.backup $i
@@ -364,7 +364,7 @@ $language\t\t------------- Failure due to an error -------------"
 	#
 	# Get the values for the messages statistics.
 	#
-	statistics=(`OLD_PO_FILE_INPUT=yes msgfmt -v $i 2>&1`)
+	statistics=(`LANG=C LANGUAGE=C OLD_PO_FILE_INPUT=yes msgfmt -v $i 2>&1`)
 	translated=${statistics[0]}
 	fuzzy=${statistics[3]:-0}
 	untranslated=${statistics[6]:-0}
@@ -443,7 +443,7 @@ echo "Possibly you'll also get a \"private\" message from pozilla informing" >> 
 echo "you about the coming release with the specs/status of your po-file." >> $BODY_FILE
 echo "" >> $BODY_FILE
 echo "Current po files statistics table:" >> $BODY_FILE
-echo "$STAT_TABLE" >> $BODY_FILE
+echo -e "$STAT_TABLE" >> $BODY_FILE
 echo "" >> $BODY_FILE
 echo "--" >> $BODY_FILE
 echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
@@ -469,7 +469,7 @@ fi
 # Print out the statistics table if necessary.
 #
 if test "&$PRINT_TABLE" = "&yes" ; then
-	echo "$STAT_TABLE"
+	echo -e "$STAT_TABLE"
 fi
 
 #
