@@ -52,76 +52,59 @@ void gtranslator_open_compressed_po_file(gchar *file);
 void gtranslator_open_ziped_po_file(gchar *file); 
 
 /*
- * Detects whether we can open up the given file with the
- *  "special" open functions of gtranslator.
+ * Open the way to the beautiful land of gtranslator...
  */
-gboolean gtranslator_open_po_file(gchar *file)
+void gtranslator_open_file(gchar *filename)
 {
+	g_return_if_fail(filename!=NULL);
+	
 	/*
 	 * Use conditionally the VFS routines to access
 	 *  remote files.
 	 */
-	if(gtranslator_utils_uri_supported(file))
+	if(gtranslator_utils_uri_supported(filename))
 	{
-		file=gtranslator_vfs_handle_open(file);
+		filename=gtranslator_vfs_handle_open(filename);
 
-		/*
-		 * If we couldn't get a local representation filename
-		 *  for the remote file we do return FALSE.
-		 */  
-		if(!file)
-		{
-			return FALSE;
-		}
-		else
+		if(filename)
 		{
 			/*
 			 * Here we do open the local representation file
 			 *  of the remote file.
 			 */  
-			gtranslator_parse_main(file);
-			
-			return TRUE;
+			gtranslator_parse_main(filename);
 		}
 	}
-	else if(nautilus_str_has_prefix(file, "about:"))
+	else if(nautilus_str_has_prefix(filename, "about:"))
 	{
 		gtranslator_about_dialog(NULL, NULL);
-		return TRUE;
 	}
 
-	if(nautilus_istr_has_suffix(file, ".mo") || 
-		nautilus_istr_has_suffix(file, ".gmo"))
+	if(nautilus_istr_has_suffix(filename, ".mo") || 
+		nautilus_istr_has_suffix(filename, ".gmo"))
 	{
-		gtranslator_open_compiled_po_file(file);
-		return TRUE;
+		gtranslator_open_compiled_po_file(filename);
 	}
-	else if(nautilus_istr_has_suffix(file, ".po.gz"))
+	else if(nautilus_istr_has_suffix(filename, ".po.gz"))
 	{
-		gtranslator_open_gzipped_po_file(file);
-		return TRUE;
+		gtranslator_open_gzipped_po_file(filename);
 	}
-	else if(nautilus_istr_has_suffix(file, ".po.bz2"))
+	else if(nautilus_istr_has_suffix(filename, ".po.bz2"))
 	{
-		gtranslator_open_bzip2ed_po_file(file);
-		return TRUE;
+		gtranslator_open_bzip2ed_po_file(filename);
 	}
-	else if(nautilus_istr_has_suffix(file, ".po.z"))
+	else if(nautilus_istr_has_suffix(filename, ".po.z"))
 	{
-		gtranslator_open_compressed_po_file(file);
-		return TRUE;
+		gtranslator_open_compressed_po_file(filename);
 	}
-	else if(nautilus_istr_has_suffix(file, ".po.zip"))
+	else if(nautilus_istr_has_suffix(filename, ".po.zip"))
 	{
-		gtranslator_open_ziped_po_file(file);
-		return TRUE;
+		gtranslator_open_ziped_po_file(filename);
 	}
-	else if(gtranslator_backend_open(file))
+	else if(!gtranslator_backend_open(filename))
 	{
-		return TRUE;
+		gtranslator_parse_main(filename);
 	}
-	
-	return FALSE;
 }
 
 /*

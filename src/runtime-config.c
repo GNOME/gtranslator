@@ -43,15 +43,15 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 	 *  functions from utils.c/.h.
 	 */
 	config->temp_filename=g_strdup_printf(
-		"%s/.gtranslator/gtranslator-temp-file",
+		"%s/.gtranslator/files/gtranslator-temp-file",
 			g_get_home_dir());
 
 	config->crash_filename=g_strdup_printf(
-		"%s/.gtranslator/gtranslator-crash-file",
+		"%s/.gtranslator/files/gtranslator-crash-file",
 			g_get_home_dir());
 
 	config->backend_filename=g_strdup_printf(
-		"%s/.gtranslator/gtranslator-backend-file",
+		"%s/.gtranslator/files/gtranslator-backend-file",
 			g_get_home_dir());
 
 	config->table_state_filename=g_strdup_printf(

@@ -284,8 +284,10 @@ gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_str
  */
 void gtranslator_comment_display(GtrComment *comment)
 {
-	g_return_if_fail(file_opened==TRUE);
-	g_return_if_fail(GTR_COMMENT(comment)!=NULL);
+	if(!comment)
+	{
+		return;
+	}
 
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
 		comment->pure_comment);

@@ -282,11 +282,6 @@ void gtranslator_utils_remove_temp_files()
 	{
 		remove(gtranslator_runtime_config->temp_filename);
 	}
-
-	if(g_file_exists(gtranslator_runtime_config->crash_filename))
-	{
-		remove(gtranslator_runtime_config->crash_filename);
-	}
 }
 
 /*
@@ -301,6 +296,7 @@ void gtranslator_utils_create_gtranslator_directory()
 	{
 		"colorschemes",
 		"etstates",
+		"files",
 		"umtf",
 		NULL
 	};

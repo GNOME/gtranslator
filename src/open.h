@@ -17,18 +17,18 @@
  *
  */
 
-#ifndef GTR_OPEN_DIFFERENTLY_H
-#define GTR_OPEN_DIFFERENTLY_H 1
+#ifndef GTR_OPEN_H
+#define GTR_OPEN_H 1
 
 #include <glib.h>
 
 /*
- * Opening files differently: opening gzip'ed/bzip2'ed etc. files via utility functions.
+ * The general file opening action starts from here!
  */
 
 /*
- * Detects if we can open it with our "special" open functions.
+ * Open the given filename string via all of our supported, available methods.
  */
-gboolean gtranslator_open_po_file(gchar *file);
+void gtranslator_open_file(gchar *filename);
 
 #endif

@@ -175,10 +175,7 @@ void gtranslator_bookmark_open(GtrBookmark *bookmark)
 	/*
 	 * Open the po file.
 	 */
-	if(!gtranslator_open_po_file(GTR_BOOKMARK(bookmark)->po_file))
-	{
-		gtranslator_parse_main(GTR_BOOKMARK(bookmark)->po_file);
-	}
+	gtranslator_open_file(GTR_BOOKMARK(bookmark)->po_file);
 
 	/*
 	 * Only re-setup the bookmark if the po file could be opened.

@@ -383,7 +383,6 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 
 	message = e_tree_memory_node_get_data (tree_memory, path);
 	g_return_val_if_fail(message!=NULL, NULL);
-	g_return_val_if_fail(file_opened==TRUE, NULL);
 	
 	switch (column) {
 	case COL_ORIGINAL:

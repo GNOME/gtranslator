@@ -277,11 +277,8 @@ void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filenam
 	if (!gtranslator_should_the_file_be_saved_dialog())
 		return;
 	gtranslator_file_close(NULL, NULL);
-	/*
-	 * Also detect the right open function in the recent files' list.
-	 */
-	if(!gtranslator_open_po_file(filename))
-		gtranslator_parse_main(filename);
+
+	gtranslator_open_file(filename);
 }
 
 void gtranslator_history_save(GList *list)

@@ -990,7 +990,7 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 			if(gtranslator_utils_uri_supported(uri->str))
 			{
 				gnome_dialog_close(dialog);
-				gtranslator_open_po_file(uri->str);
+				gtranslator_open_file(uri->str);
 			}
 			else
 			{
@@ -1070,10 +1070,7 @@ Saying \"No\" will delete the crash recovery file."),
 		rename(gtranslator_runtime_config->crash_filename, 
 			original_filename);
 
-		if(!gtranslator_open_po_file(original_filename))
-		{
-			gtranslator_parse_main(original_filename);
-		}
+		gtranslator_open_file(original_filename);
 	}
 	else if(reply==GNOME_NO)
 	{

@@ -177,6 +177,7 @@ void gtranslator_parse(const gchar *filename)
 	g_return_if_fail(base[0]!='\0');
 
 	po = g_new0(GtrPo, 1);
+
 	/*
 	 * Get absolute filename.
 	 */
@@ -609,15 +610,10 @@ void gtranslator_parse_the_file_from_file_dialog(GtkWidget * widget, gpointer of
 	if(file_opened)
 		gtranslator_file_close(NULL, NULL);
 	/*
-	 * Detect via the new functions the right open function for the file.
+	 * Open the file via our centralized opening function.
 	 */
-	if(!gtranslator_open_po_file(po_file))
-	{
-		/*
-		 * Open it as a "normal" gettext po file.
-		 */ 
-		gtranslator_parse_main(po_file);
-	}
+	gtranslator_open_file(po_file);
+
 	/*
 	 * Destroy the dialog 
 	 */

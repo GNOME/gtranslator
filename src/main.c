@@ -355,21 +355,15 @@ int main(int argc, char *argv[])
 		/*
 		 * Try to open up the supported "special" gettext file types.
 		 */ 
-		if(!gtranslator_open_po_file((gchar *)args[0]))
+		gtranslator_open_file((gchar *)args[0]);
+
+		/*
+		 * Also write the HTML output of the given file if
+		 *  desired.
+		 */  
+		if(save_html_output_file)
 		{
-			/*
-			 * Open the file as a "normal" gettext po file
-			 */ 
-			gtranslator_parse_main(args[0]);
-			
-			/*
-			 * Also write the HTML output of the given file if
-			 *  desired.
-			 */  
-			if(save_html_output_file)
-			{
-				gtranslator_htmlizer(save_html_output_file);
-			}
+			gtranslator_htmlizer(save_html_output_file);
 		}
 	}
 	
@@ -407,10 +401,7 @@ int main(int argc, char *argv[])
 		/*
 		 * First parse the file completely.
 		 */
-		if(!gtranslator_open_po_file(learn_file))
-		{
-			gtranslator_parse_main(learn_file);
-		}
+		gtranslator_open_file(learn_file);
 
 		/*
 		 * Now learn the file completely and then shut the

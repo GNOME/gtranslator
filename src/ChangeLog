@@ -1,3 +1,38 @@
+2001-09-08  Fatih Demir <kabalak@gtranslator.org>
+
+	* comment.c: Removed an assertion checking for "file_opened" -- no
+		comment can be shown at all if no file (and therefore no
+		 message) is open/displayed! Also weakened an assertion to be
+		  only a condition -- results in less spew on the console in
+		   the "gtranslator_comment_display" function.
+
+	* messages-table.c: Removed the assertion whether a file is opened in
+		the "value_at" function -- it's not needed at all (fixes bug
+		 #59539).
+
+	* runtime-config.c: Adepted for the new directory: use the new location
+		"~/.gtranslator/files/" for the "special" file(name)s during
+		   converting/opening/saving "special" formats ,-)
+
+	* utils.c: Also create a "files" directory in "~/.gtranslator" where
+		all the temporary files should go; also don't remove the
+		 crash file -- the user has to specify what to do for the crash
+		  files.
+
+	* bookmark.c, dialogs.c, history.c, main.c & parse.c: Adept for the new
+		opening gateway function "gtranslator_open_file" which handles
+		 all opening action now centralized -- no foo'sh constructs
+		  anymore like "if(!gtranslator_open_po_file(filename)) {}"
+		   etc.
+
+	* open.c/.h: Integrate all opening logic into the new generalized
+		"gtranslator_open_file" function -- makes source code
+		  much more logical and replaces the double opening function
+		   constructs used over many places in the code.
+
+	* open.h: Changes comments and adepted the GTR_OPEN_DIFFERENTLY_H 
+		define to follow the new name: GTR_OPEN_H.
+
 2001-09-06  Fatih Demir <kabalak@gtranslator.org>
 
 	* \*.c: Rename "open-differently.h" inclusions to "open.h" inclusions.
