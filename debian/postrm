@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+if [ -x /usr/bin/update-menus ] ; then
+	update-menus
+
+	sc_update_bin=`which scrollkeeper-update`
+
+	if [ "S${sc_update_bin}" != "S" ] ; then
+		scrollkeeper-update
+	fi
+fi	

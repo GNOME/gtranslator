@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+gconftool_bin=`which gconftool`
+
+if [ "Z${gconftool_bin}" != "Z" ] ; then
+	gconftool --shutdown
+fi	

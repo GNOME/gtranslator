@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ] ; then
+	if [ -d /usr/doc -a ! -e /usr/doc/gtranslator -a \
+		-d /usr/share/doc/gtranslator ] ; then
+		ln -sf ../share/doc/gtranslator /usr/doc/gtranslator
+	fi
+fi
+
+if [ "$1" = "configure" -a -x /usr/bin/update-menus ] ; then 
+	update-menus
+
+	sc_update_bin=`which scrollkeeper-update`
+
+	if [ "S${sc_update_bin}" != "S" ] ; then
+		scrollkeeper-update
+	fi
+fi	
