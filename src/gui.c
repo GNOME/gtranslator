@@ -508,13 +508,11 @@ void gtranslator_text_boxes_clean()
 	GtkTextBuffer *buffer;
 
 	buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(text_box));
-	gtk_text_buffer_get_start_iter(buffer, &start);
-	gtk_text_buffer_get_end_iter(buffer, &end);
+	gtk_text_buffer_get_bounds(buffer, &start, &end);
 	gtk_text_buffer_delete(buffer, &start, &end);
 
 	buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(trans_box));
-	gtk_text_buffer_get_start_iter(buffer, &start);
-	gtk_text_buffer_get_end_iter(buffer, &end);
+	gtk_text_buffer_get_bounds(buffer, &start, &end);
 	gtk_text_buffer_delete(buffer, &start, &end);
 }
 
