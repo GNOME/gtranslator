@@ -49,10 +49,6 @@ gtranslator_SOURCES = \
 	dnd.c dnd.h \
 	languages.h \
 	gnome-regex.c gnome-regex.h \
-	open-po-file-dialog-functions.c \
-	open-po-file-dialog-functions.h \
-	open-po-file-dialog-interface.c \
-	open-po-file-dialog-interface.h \
 	open-differently.c \
 	open-differently.h \
 	update.c
