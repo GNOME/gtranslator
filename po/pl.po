@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2001-10-05 21:44+0200\n"
-"PO-Revision-Date: 2001-10-05 21:55+0200\n"
+"POT-Creation-Date: 2001-11-23 23:53+0100\n"
+"PO-Revision-Date: 2001-11-23 23:59+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1358,6 +1358,10 @@ msgid "Messages table"
 msgstr "Tabela komunikatów"
 
 #: src/prefs.c:1
+msgid "Learn buffer & autotranslation"
+msgstr "Bufor zapamiêtanych t³umaczeñ i automatyczne t³umaczenie"
+
+#: src/prefs.c:1
 msgid "Author's name:"
 msgstr "Nazwisko autora:"
 
@@ -1394,18 +1398,6 @@ msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Ostrzeganie przy próbie zapisu niezmienionego pliku"
 
 #: src/prefs.c:1
-msgid ""
-"Also query the personal learn buffer while autotranslating untranslated "
-"messages"
-msgstr ""
-"Przy automatycznym uzupe³nianiu komunikatów korzystanie równie¿ z osobistego "
-"bufora zapamiêtanych t³umaczeñ"
-
-#: src/prefs.c:1
-msgid "Automatically learn a newly translated message"
-msgstr "Automatyczne zapamiêtywanie nowo przet³umaczonych komunikatów"
-
-#: src/prefs.c:1
 msgid "Keep obsolete message in the po files"
 msgstr "Zachowywanie przestarza³ych komunikatów w pliku .po"
 
@@ -1429,16 +1421,6 @@ msgstr "Mo¿liwo¶æ usuniêcia wszystkich t³umaczeñ z pliku po"
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Usuwanie plików wynikowych kompilacji (np. \"projekt.gmo\")"
 
-#.
-#. * Translators: With "fuzzy" I mean a more enhanced (and more
-#. *  crappy) logic while searching for appropriate translations
-#. *   for a original string.
-#.
-#: src/prefs.c:1
-msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
-msgstr ""
-"U¿ywanie \"rozmytych\" porównañ przy przeszukiwaniu zapamiêtanych t³umaczeñ"
-
 #: src/prefs.c:1
 msgid "Load all backends on startup"
 msgstr "Wczytywanie przy starcie wszystkich modu³ów przetwarzaj±cych"
@@ -1449,11 +1431,15 @@ msgstr ""
 "Zapisywanie geometrii okna przed zakoñczeniem i odtwarzanie po uruchomieniu"
 
 #: src/prefs.c:1
+msgid "Show instant comment view in the main pane"
+msgstr "Ci±g³y widok komentarza w g³ównym oknie"
+
+#: src/prefs.c:1
 msgid "Show the views sidebar"
 msgstr "Wy¶wietlanie paska widoków"
 
 #: src/prefs.c:1
-msgid "Maximum number of recent files shown in the recent files' list:"
+msgid "Maximum number of entries in the recent files' list:"
 msgstr "Maksymalna d³ugo¶æ listy ostatnio otwieranych plików:"
 
 #: src/prefs.c:1
@@ -1569,6 +1555,32 @@ msgstr "Kolor przet³umaczonych komunikatów:"
 #: src/prefs.c:1
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- wybór koloru przet³umaczonych komunikatów"
+
+#: src/prefs.c:1
+msgid ""
+"Also query the personal learn buffer while autotranslating untranslated "
+"messages"
+msgstr ""
+"Przy automatycznym uzupe³nianiu komunikatów korzystanie równie¿ z osobistego "
+"bufora zapamiêtanych t³umaczeñ"
+
+#: src/prefs.c:1
+msgid "Automatically learn a newly translated message"
+msgstr "Automatyczne zapamiêtywanie nowo przet³umaczonych komunikatów"
+
+#.
+#. * Translators: With "fuzzy" I mean a more enhanced (and more
+#. *  crappy) logic while searching for appropriate translations
+#. *   for a original string.
+#.
+#: src/prefs.c:1
+msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
+msgstr ""
+"U¿ywanie \"rozmytych\" porównañ przy przeszukiwaniu zapamiêtanych t³umaczeñ"
+
+#: src/prefs.c:1
+msgid "Minimal required similarity percentage while doing autotranslation"
+msgstr "Minimalny wymagany procent podobieñstwa przy automatycznym t³umaczeniu"
 
 #: src/prefs.c:1
 msgid "Please enter your name!"
