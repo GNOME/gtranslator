@@ -420,6 +420,19 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
 }
 
 /*
+ * Select given message
+ */
+void gtranslator_message_table_select_row(GtrMsg *message)
+{
+	ETreePath node=NULL;
+	
+	node=g_hash_table_lookup(hash_table, message);
+	
+	e_tree_set_cursor(E_TREE(tree), node);
+	
+}
+
+/*
  * Save the e-tree state
  */
 void gtranslator_messages_table_save_state()
