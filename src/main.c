@@ -18,8 +18,8 @@
 #include "session.h"
 #include "prefs.h"
 #include "parse.h"
-#include "parse-db.h"
-#include "team-handle.h"
+#include <libgtranslator/parse-db.h>
+#include <libgtranslator/team-handle.h>
 
 #ifdef GCONF_IS_PRESENT
 #include <gconf/gconf.h>

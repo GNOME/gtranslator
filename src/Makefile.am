@@ -17,7 +17,6 @@ endif
 
 INCLUDES = \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/libgtranslator \
 	-I$(includedir) \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \

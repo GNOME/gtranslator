@@ -1,3 +1,12 @@
+2000-10-30  Fatoh Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Removed the include-dir ../libgtranslator as
+		all libgtranslator headers are now globally declared
+		 and the $top_srcdir include-dir is enough for this.
+	
+	* main.c: Also made it include only the <libgtranslator/...>
+		headers instead of simply doing "...".
+
 2000-10-30 Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gui.c: moved Update menu item just after Compile. Enable Status/Fuzzy
