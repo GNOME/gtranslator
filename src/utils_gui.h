@@ -81,6 +81,11 @@ GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(
 gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file);
 
 /*
+ * Checks if we've been started with the given file yet.
+ */
+gboolean gtranslator_utils_check_file_being_open(const gchar *filename);
+
+/*
  * Check for a given program being in the user's path -- should be useful
  *  for the "differently" opening/saving functions...
  *

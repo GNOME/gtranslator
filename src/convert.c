@@ -37,7 +37,11 @@ gchar *gtranslator_convert_string(const gchar *string,
 	gchar	*input_string, *input_string_pointer;
 	gchar	*output_string, *output_string_pointer;
 	
-	g_return_val_if_fail(string!=NULL, NULL);
+	if(!string)
+	{
+		return NULL;
+	}
+	
 	g_return_val_if_fail(to_encoding!=NULL, NULL);
 
 	/*

@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
 
 		exit(1);
 	}
-	
+
 	/*
 	 * If the loading of the modules isn't inhibited, try to load all
 	 *  backends.

@@ -39,6 +39,7 @@
 #include "save-differently.h"
 #include "sidebar.h"
 #include "utils.h"
+#include "utils_gui.h"
 
 #include <gtk/gtkfilesel.h>
 
@@ -295,7 +296,7 @@ gboolean gtranslator_parse_core(void)
  */
 void gtranslator_parse_main(const gchar *filename)
 {
-	gchar *title;
+	gchar 	*title;
 
 	/*
 	 * Test if such a file does exist.
@@ -305,6 +306,20 @@ void gtranslator_parse_main(const gchar *filename)
 		gtranslator_error(_("The file `%s' doesn't exist at all!"),
 			filename);
 		return;
+	}
+
+	/*
+	 * Check if the given is already open within another instance.
+	 */
+	if(gtranslator_utils_check_file_being_open(filename))
+	{
+		return;
+	}
+	else
+	{
+		gtranslator_config_init();
+		gtranslator_config_set_string("runtime/filename", (gchar *)filename);
+		gtranslator_config_close();
 	}
 
 	/*
@@ -740,6 +755,13 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	 */
 	g_source_remove(autosave_source_tag);
 	autosave_source_tag=1;
+
+	/*
+	 * "Remove" the stored "runtime/filename" key.
+	 */
+	gtranslator_config_init();
+	gtranslator_config_set_string("runtime/filename", "--- No file ---");
+	gtranslator_config_close();
 }
 
 void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
@@ -750,8 +772,8 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 		gchar *question;
 		gint reply;
 		question =
-		    g_strdup_printf(_
-				    ("File %s\nwas changed. Do you want to revert to saved copy?"),
+		    g_strdup_printf(
+				    _("File %s\nwas changed. Do you want to revert to saved copy?"),
 				    po->filename);
 		dialog =
 		    gnome_message_box_new(question,

@@ -133,7 +133,7 @@ gchar *gtranslator_utf8_get_plain_string(gchar **string)
 
 	g_return_val_if_fail(*string!=NULL, NULL);
 
-	plain_string=gtranslator_convert_string_to_utf8(*string,
+	plain_string=gtranslator_convert_string_from_utf8(*string,
 		po->header->charset);
 
 	return plain_string;

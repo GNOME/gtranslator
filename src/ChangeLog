@@ -1,5 +1,18 @@
 2001-06-16  Fatih Demir <kabalak@gtranslator.org>
 
+	* convert.c: Disabled an assertion which made the conversion function moan on
+		non-translated msgstrs.
+
+	* utf8.c: Corrected a really wrong typo _to_utf8 to _from_utf8 to make the
+		function work right.
+
+	* parse.c: Honor the new function and set up/clean up the "runtime/filename"
+		preferences key used for the instances detection
+
+	* utils_gui.c/.h: Added "gtranslator_utils_check_file_being_open"
+		function for instances detection to avoid multiple openings
+		 of the same po file.
+
 	* translation-memories.c/.h: Swept out the old sources and made
 		empty foo sources out of them -- we've got to wait for
 		 Semerkent to get this working..

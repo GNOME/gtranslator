@@ -19,6 +19,7 @@
 
 #include "dialogs.h"
 #include "gui.h"
+#include "nautilus-string.h"
 #include "prefs.h"
 #include "utils_gui.h"
 
@@ -288,6 +289,45 @@ of your choice."),
 	fclose(file);
 
 	return TRUE;
+}
+
+/*
+ * Check if the given file is alrady opened by gtranslator.
+ */
+gboolean gtranslator_utils_check_file_being_open(const gchar *filename)
+{
+	gchar *resultfilename;
+
+	g_return_val_if_fail(filename!=NULL, FALSE);
+
+	gtranslator_config_init();
+	resultfilename=gtranslator_config_get_string("runtime/filename");
+	gtranslator_config_close();
+
+	/*
+	 * Test if we've got a filename and for equality.
+	 */
+	if(resultfilename && !nautilus_strcasecmp(resultfilename, filename))
+	{
+		gchar *error_message;
+
+		error_message=g_strdup_printf(
+		_("The file `%s' is already open in another instance of gtranslator!"), filename);
+
+		/*
+		 * Return with FALSE if the given file is already open.
+		 */
+		gnome_app_error(GNOME_APP(gtranslator_application), error_message);
+		
+		g_free(resultfilename);
+		g_free(error_message);
+
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
 }
 
 /*
