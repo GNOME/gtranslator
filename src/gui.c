@@ -58,6 +58,15 @@
 #include <string.h>
 
 /*
+ * Global external variables
+ */
+GtkWidget *gtranslator_application;
+GtkWidget *trans_box;
+GtkWidget *text_box;
+GtkWidget *gtranslator_application_bar;
+gboolean nothing_changes;
+
+/*
  * Pops up a menu if needed
  */
 static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d);

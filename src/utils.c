@@ -585,3 +585,51 @@ of your choice."),
 
 	return TRUE;
 }
+
+
+/* gtranslator_utils_getline
+ *
+ * reads newline (or CR) or EOF terminated line from stream, allocating the
+ * return buffer as appropriate. do not free the returning value!
+ *
+ * copied form nautilus/src/nautilus-first-time-druid.c and modified to return
+ * internal buffer
+ */
+char * 
+gtranslator_utils_getline (FILE* stream)
+{
+	static char *ret = NULL;
+	static size_t ret_size = 0;
+	size_t ret_used;
+	int char_read;
+
+	if (ret == NULL) {
+		ret = g_malloc (80);
+		ret_size = 80;
+	}
+	
+	/* used for terminating 0 */
+	ret_used = 0;
+
+	while ((char_read = fgetc (stream)) != EOF)
+	{
+		if (ret_size == (ret_used + 1)) {
+			ret_size *= 2;
+			ret = g_realloc (ret, ret_size); 
+		}
+		ret [ret_used++] = char_read;
+		if ('\n' == char_read || '\r' == char_read ) {
+			break;
+		}
+	}
+
+	if (ret_used == 0) {
+		g_free (ret);
+		ret = NULL;
+	} else {
+		ret [ret_used] = '\0';
+	}
+
+	return ret;
+}
+

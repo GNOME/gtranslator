@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -36,6 +37,7 @@
 #include "parse.h"
 #include "prefs.h"
 #include "sidebar.h"
+#include "utils.h"
 
 #include <gtk/gtkfilesel.h>
 #include <libgnomeui/gnome-appbar.h>
@@ -45,6 +47,12 @@
 #include <libgnomeui/gnome-stock.h>
 #include <libgnomeui/gnome-uidefs.h>
 #include <libgnome/gnome-util.h>
+
+/* Global variables */
+GtrPo *po;
+gboolean file_opened;
+gboolean message_changed;
+GnomeRegexCache *rxc;
 
 /*
  * These are to be used only inside this file
@@ -132,7 +140,7 @@ gboolean add_to_obsolete(gchar *comment)
 gboolean gtranslator_parse_core(void)
 {
 	FILE *fs;
-	gchar line[256];
+	char *line;
 	guint lines = 0;
 	
 	/*
@@ -153,7 +161,7 @@ gboolean gtranslator_parse_core(void)
 	/*
 	 * Parse the file line by line...
 	 */
-	while (fgets(line, sizeof(line), fs) != NULL) {
+	while ((line = gtranslator_utils_getline (fs)) != NULL) {
 		lines++;
 		/*
 		 * If it's a comment, no matter of what kind. It belongs to
@@ -164,7 +172,7 @@ gboolean gtranslator_parse_core(void)
 			 * Set the comment & position.
 			 */
 			if (msg->comment == NULL) {
-				msg->pos = lines;
+				/*msg->pos = lines;*/
 				msg->comment = g_strdup(line);
 			} else {
 				gchar *tmp;
@@ -301,6 +309,9 @@ void gtranslator_parse_main(const gchar *filename)
 	 * Use the new core function.
 	 */
 	gtranslator_parse(filename);
+
+	if(po==NULL)
+		return;
 
 	gtranslator_actions_set_up_file_opened();
 

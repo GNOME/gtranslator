@@ -29,11 +29,10 @@
 /*
  * The globally needed widgets
  */
-
-GtkWidget *gtranslator_application;
-GtkWidget *trans_box;
-GtkWidget *text_box;
-GtkWidget *gtranslator_application_bar;
+extern GtkWidget *gtranslator_application;
+extern GtkWidget *trans_box;
+extern GtkWidget *text_box;
+extern GtkWidget *gtranslator_application_bar;
 
 /*
  * Creates the main window ans sets up the environment.
@@ -73,6 +72,6 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless);
 /*
  * If TRUE, means that trans_box is being changed by program, not user
  */
-gboolean nothing_changes;
+extern gboolean nothing_changes;
 
 #endif

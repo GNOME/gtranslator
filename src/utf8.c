@@ -26,11 +26,6 @@
 #include <gal/widgets/e-unicode.h>
 
 /*
- * Internal capsulating function for converting to/from UTF-8.
- */
-void convert_all_messages(GList *list, GFreeFunc function);
-
-/*
  * Convert the given GtrMsg to UTF-8.
  */
 void gtranslator_utf8_convert_message_to_utf8(GtrMsg **msg)
@@ -38,13 +33,9 @@ void gtranslator_utf8_convert_message_to_utf8(GtrMsg **msg)
 	gchar *msgstr;
 
 	g_return_if_fail(*msg!=NULL);
-	msgstr=g_strdup(GTR_MSG(*msg)->msgstr);
 
-	if(msgstr)
-	{
-		GTR_MSG(*msg)->msgstr=e_utf8_from_locale_string(msgstr);
-	}
-
+	msgstr=(*msg)->msgstr;
+	(*msg)->msgstr=e_utf8_from_locale_string(msgstr);
 	g_free(msgstr);
 }
 
@@ -56,13 +47,9 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg **msg)
 	gchar *msgstr;
 
 	g_return_if_fail(*msg!=NULL);
-	msgstr=g_strdup(GTR_MSG(*msg)->msgstr);
 
-	if(msgstr)
-	{
-		GTR_MSG(*msg)->msgstr=e_utf8_to_locale_string(msgstr);
-	}
-
+	msgstr=(*msg)->msgstr;
+	(*msg)->msgstr=e_utf8_to_locale_string(msgstr);
 	g_free(msgstr);
 }
 
@@ -86,8 +73,9 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	{
 		setlocale(LC_ALL, new_env);
 	
-		convert_all_messages(po->messages, 
-			(GFreeFunc) gtranslator_utf8_convert_message_to_utf8);
+		g_list_foreach(po->messages, 
+			(GFunc) gtranslator_utf8_convert_message_to_utf8,
+			NULL);
 		
 		/*
 		 * Set the po file charset to UTF-8 as we did convert it now.
@@ -127,8 +115,9 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 
 		setlocale(LC_ALL, new_env);
 		
-		convert_all_messages(po->messages,
-			(GFreeFunc) gtranslator_utf8_convert_message_from_utf8);
+		g_list_foreach(po->messages,
+			(GFunc) gtranslator_utf8_convert_message_from_utf8,
+			NULL);
 
 		/*
 		 * Assign the converted charset value.
@@ -149,19 +138,3 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 	setlocale(LC_ALL, old_env);
 }
 
-/*
- * Execute the whole stuff "function" for all list entries.
- */
-void convert_all_messages(GList *list, GFreeFunc function)
-{
-	g_return_if_fail(list!=NULL);
-	
-	while(list!=NULL)
-	{
-		GtrMsg *message=GTR_MSG(list->data);
-		
-		function(&message);
-		
-		list=list->next;
-	}
-}

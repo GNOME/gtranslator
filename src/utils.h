@@ -122,4 +122,6 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file);
  */
 void gtranslator_utils_old_colors_to_new_location(void);
 
+char * gtranslator_utils_getline (FILE* stream);
+	
 #endif

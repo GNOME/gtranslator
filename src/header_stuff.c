@@ -591,14 +591,11 @@ static gboolean have_changed=FALSE;
 
 void substitute(gchar **item, const gchar *bad, const gchar *good)
 {
-	/*
-	 * Check the values before acting on them.
-	 */
-	g_return_if_fail(*item!=NULL);
 	g_return_if_fail(good!=NULL);
-	
-	/* If string still has standard value */
-	if(!strcmp(*item, bad))
+
+	/* If string still has standard value or nothing */
+	if((*item==NULL) ||
+	   (!strcmp(*item, bad)))
 	{
 		/* Replace it with copy of good one */
 		g_free(*item);

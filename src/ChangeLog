@@ -1,3 +1,20 @@
+2001-05-10  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* Makefile.am: backends should be compiled before .
+
+	* gui.c/h, parse.c/h: made global variables extern.
+
+	* header_stuff.c (substitute): it is OK to get NULL *item. Just set
+	good value.
+
+	* utils.c/h (gtranslator_utils_getline): new function to read a line
+	from file.
+
+	* parse.c (gtranslator_parse_core): removed line length limit, use above
+	function for reading lines from file.
+
+	* utf8.c (convert_all_messages): removed. g_list_foreach does the same!
+
 2001-05-10  Fatih Demir <kabalak@gtranslator.org>
 
 	* utf8.c: Made the environment/language set/get-ting routines work

@@ -83,17 +83,17 @@ typedef struct {
 /*
  * The main variable for storing info about file 
  */
-GtrPo *po;
+extern GtrPo *po;
 
 /*
  * Marks if any file was opened 
  */
-gboolean file_opened;
+extern gboolean file_opened;
 
 /*
  * Marks if the current message was changed; 
  */
-gboolean message_changed;
+extern gboolean message_changed;
 
 /*
  * Core backend functions for parsing a po file.
@@ -136,6 +136,6 @@ void gtranslator_get_translated_count(void);
 /*
  * A cache for saving regexps 
  */
-GnomeRegexCache *rxc;
+extern GnomeRegexCache *rxc;
 
 #endif
