@@ -342,8 +342,12 @@ void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry)
 	rest=list->next;
 	while(rest!=NULL)
 	{
-		/* if filenames are equal, remove older record */
-		if(!strcmp(entry->filename, GTR_HISTORY_ENTRY(rest->data)->filename))
+		/* 
+		 * If filenames are equal, remove older record 
+		 */
+		if(GTR_HISTORY_ENTRY(rest->data)->filename &&
+			!strcmp(entry->filename, 
+				GTR_HISTORY_ENTRY(rest->data)->filename))
 		{
 			GList *r=rest;
 			
