@@ -4,10 +4,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.33\n"
-"POT-Creation-Date: 2001-01-23 19:15+0100\n"
-"PO-Revision-Date: 2001-01-23 19:16+0100\n"
+"POT-Creation-Date: 2001-01-24 23:54+0100\n"
+"PO-Revision-Date: 2001-01-24 22:30+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -413,7 +413,7 @@ msgstr "Tercüman:"
 msgid "Translator's e-mail :"
 msgstr "Tercümanýn ePosta adresi:"
 
-#: src/header_stuff.c:324 src/prefs.c:252
+#: src/header_stuff.c:324 src/prefs.c:259
 msgid "Language :"
 msgstr "Dil :"
 
@@ -421,11 +421,11 @@ msgstr "Dil :"
 msgid "Language group's e-mail :"
 msgstr "Dil grubunun ePosta adresi :"
 
-#: src/header_stuff.c:333 src/prefs.c:265
+#: src/header_stuff.c:333 src/prefs.c:272
 msgid "Charset :"
 msgstr "Yazý sýnýfý :"
 
-#: src/header_stuff.c:337 src/prefs.c:269
+#: src/header_stuff.c:337 src/prefs.c:276
 msgid "Encoding :"
 msgstr "Þekillendirme :"
 
@@ -647,7 +647,7 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:173 src/parse.c:584
+#: src/parse.c:173 src/parse.c:592
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" yok ki!"
@@ -676,21 +676,21 @@ msgstr ""
 msgid "There's no file to open!"
 msgstr "Açýlacak dosya yok ki!"
 
-#: src/parse.c:365
+#: src/parse.c:373
 msgid "The file has no header!"
 msgstr "Dosyanýn baþlýðý yok!"
 
-#: src/parse.c:368
+#: src/parse.c:376
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 
-#: src/parse.c:371
+#: src/parse.c:379
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:546
+#: src/parse.c:554
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -702,7 +702,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:632
+#: src/parse.c:640
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -713,11 +713,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya yeniden kaydedilsin mi?"
 
-#: src/parse.c:640
+#: src/parse.c:648
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþik yok"
 
-#: src/parse.c:714
+#: src/parse.c:722
 #, c-format
 msgid ""
 "File %s\n"
@@ -726,11 +726,11 @@ msgstr ""
 "Dosya %s\n"
 "deðiþmiþ. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:753
+#: src/parse.c:761
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
 
-#: src/parse.c:778
+#: src/parse.c:786
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -739,148 +739,180 @@ msgstr ""
 "Denetleme baþarýlý oldu: \n"
 "Rapor: %s"
 
-#: src/parse.c:801
+#: src/parse.c:815
+#, c-format
+msgid "You don't have read permissions on file `%s'"
+msgstr "`%s' icin gerekli okuma hakkýn yok"
+
+#: src/parse.c:834
+#, c-format
+msgid ""
+"You don't have write permissions on file `%s'.\n"
+"This means that you should save it as a copy\n"
+"to a local dir of your choice."
+msgstr ""
+"`%s' için gerekli yazma haklarýn yok.\n"
+"Dosyadaki deðiþiklikleri kaydetmek için bu\n"
+"dosyanýn yerel bir kopyasýný yaratýp iþine devam edebilirsin."
+
+#: src/parse.c:863
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:842
+#: src/parse.c:904
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
 
-#: src/prefs.c:224
+#: src/prefs.c:220
+msgid "·"
+msgstr "·"
+
+#: src/prefs.c:221
+msgid "°"
+msgstr "°"
+
+#: src/prefs.c:222
+msgid "|"
+msgstr "|"
+
+#: src/prefs.c:231
 msgid "gtranslator -- options"
 msgstr "gtranslator -- seçenekler"
 
 #.
 #. * The tables for holding all the entries below.
 #.
-#: src/prefs.c:229
+#: src/prefs.c:236
 msgid "Personal information"
 msgstr "Þahsi bilgiler"
 
-#: src/prefs.c:230
+#: src/prefs.c:237
 msgid "Language options"
 msgstr "Dil seçenekeleri"
 
-#: src/prefs.c:231
+#: src/prefs.c:238
 msgid "Po file options"
 msgstr "Po dosya seçenekleri"
 
-#: src/prefs.c:232
+#: src/prefs.c:239
 msgid "Miscellaneous"
 msgstr "Karýþýk"
 
-#: src/prefs.c:233
+#: src/prefs.c:240
 msgid "Recent files & spell checking"
 msgstr "Son dosyalar & imla kontrolü"
 
-#: src/prefs.c:234
+#: src/prefs.c:241
 msgid "Fonts & Colors"
 msgstr "Yazý tipi & Renkler"
 
-#: src/prefs.c:240
+#: src/prefs.c:247
 msgid "Author's name :"
 msgstr "Yazarýn ismi :"
 
-#: src/prefs.c:243
+#: src/prefs.c:250
 msgid "Author's EMail :"
 msgstr "Yazarýn ePostasý :"
 
-#: src/prefs.c:256
+#: src/prefs.c:263
 msgid "Language code :"
 msgstr "Dil kodu :"
 
-#: src/prefs.c:261
+#: src/prefs.c:268
 msgid "Language group's EMail :"
 msgstr "Dil grubunun ePosta adresi :"
 
-#: src/prefs.c:277
+#: src/prefs.c:284
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Ileti deðiþtirildiyse fuzzy durumunu ortadan kaldýr"
 
-#: src/prefs.c:281
+#: src/prefs.c:288
 msgid "Warn if the .po-file contains fuzzy translations"
 msgstr "Po-dosyasý `fuzzy' tercümeler içeriyorsa ikaz et"
 
-#: src/prefs.c:285
+#: src/prefs.c:292
 msgid "Don't save unchanged .po-files"
 msgstr "Deðiþtirilmemiþ .po-dosyalarýný kaydetme"
 
-#: src/prefs.c:289
+#: src/prefs.c:296
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Deðiþtirilmemiþ bir dosyayý kaydederken ikaz et"
 
-#: src/prefs.c:296
-msgid "Use the dot char (\"·\") instead of a free space"
-msgstr "Boþluklar yerine (\"·\") harfini kullan"
+#: src/prefs.c:303
+msgid "Use free space indicating special character"
+msgstr "Boþluklar yerine özel harf kullan"
 
-#: src/prefs.c:299
+#: src/prefs.c:306
+msgid "Special character"
+msgstr "Özel harf"
+
+#: src/prefs.c:309
 msgid "Enable the popup menu"
 msgstr "Sað týklama mönüsünü kullan"
 
-#: src/prefs.c:302
+#: src/prefs.c:312
 msgid ""
 "Enable the update function of gtranslator (you need the sources for this)"
 msgstr ""
 "gtranslator'in yenileme özelliðini aç (bunun için kaynaklar gereklidir)"
 
-#: src/prefs.c:305
+#: src/prefs.c:315
 msgid "Save geometry on exit & restore it on startup"
 msgstr "gtranslator'in yerleþimini ve boyutunu kaydet ve sonra uygula"
 
-#: src/prefs.c:308
+#: src/prefs.c:318
 msgid "Don't show the update information dialogs"
 msgstr "Yenileme bilgilendirme diyaloklarýný gösterme"
 
-#: src/prefs.c:314
+#: src/prefs.c:324
 msgid "Check every recent file before listing it up"
 msgstr "Listedeki her dosyayý göstermeden önce kontrol et"
 
-#: src/prefs.c:317
+#: src/prefs.c:327
 msgid "Instant spell checking"
 msgstr "Canlý imla kontrolü"
 
-#: src/prefs.c:320
+#: src/prefs.c:330
 msgid "Use special dictionary"
 msgstr "Özel lugat kullan"
 
-#: src/prefs.c:323
+#: src/prefs.c:333
 msgid "Dictionary to use:"
 msgstr "Kullanýlacak lugat:"
 
-#: src/prefs.c:330
+#: src/prefs.c:340
 msgid "Apply special font/colors"
 msgstr "Özel yazý tipleri/renkleri uygula"
 
 #.
 #. * The used labels onn the sixth page.
 #.
-#: src/prefs.c:336
+#: src/prefs.c:346
 msgid "Font:"
 msgstr "Yazý tipi:"
 
-#: src/prefs.c:337
+#: src/prefs.c:347
 msgid "Foreground color:"
 msgstr "Önalan rengi:"
 
-#: src/prefs.c:338
+#: src/prefs.c:348
 msgid "Background color:"
 msgstr "Ardalan rengi:"
 
-#: src/prefs.c:341
+#: src/prefs.c:351
 msgid "gtranslator -- font selection"
 msgstr "gtranslator -- yazý tipi seçimi"
 
-#: src/prefs.c:347
+#: src/prefs.c:357
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- önalan rengi"
 
-#: src/prefs.c:350
+#: src/prefs.c:360
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- ardalan rengi"
 
-#: src/prefs.c:482
+#: src/prefs.c:494
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -890,7 +922,7 @@ msgstr ""
 "gtranslator'i senin istediðin gibi çalýþtýrabilirsin.\n"
 " "
 
-#: src/prefs.c:646
+#: src/prefs.c:659
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "\"%s\" yer metni taranamadý!"
@@ -1177,4 +1209,3 @@ msgstr "Sunucu `%s''nin adresi yok!"
 #: libgtranslator/vfs-handle.c:119
 msgid "Transfer interrupted!"
 msgstr "Transfer iptal edildi!"
-
