@@ -17,6 +17,7 @@ schemes_DATA = \
 	nizuu.xml \
 	sepia.xml \
 	spiffE.xml \
+	thinice.xml \
 	tuey.xml \
 	vim.xml \
 	waliays.xml \

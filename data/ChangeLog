@@ -1,3 +1,18 @@
+2002-01-13  Fatih Demir <kabalak@gtranslator.org>
+
+	* scripts/cleanup-gtranslator-settings.sh: Changed the internal script
+		structure a bit -- it does now ask the user if he/she does want
+		 to really delete the files which are going to be deleted by the
+		  script now -- could avoid some unwanted prefs/data loss and
+		   the script itself does now again also work like intended :-)
+
+	* colorschemes/Makefile.am: Add "thinice.xml" to the colorschemes' data
+		list -- it's now also included per default in the distribution.
+
+	* colorschemes/thinice.xml: Added "ThinIce" colorscheme -- it's quite
+		clean and uses the colors from the available "ThinIce" Gtk+ 
+		 theme.
+
 2002-01-03  Fatih Demir <kabalak@gtranslator.org>
 
 	* scripts/cleanup-gtranslator-settings.sh: Added two small sleep calls
