@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.8
+export POZILLA_RELEASE=0.9
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -28,7 +28,7 @@ export BODY_FILE="$CONFIG_DIR/mail.body"
 #
 # Check for all necessary applications for pozilla.sh.
 #
-for app in msgfmt msgmerge make grep mutt
+for app in msgfmt msgmerge make grep sed mutt
 	do
 		if test "z`which $app`" = "z" ; then
 			echo "[ERROR: The application \"$app\" is necessary for running pozilla.sh!]"
@@ -50,7 +50,6 @@ for app in msgfmt msgmerge make grep mutt
 	touch $CONFIG_DIR/pozilla.conf
 	echo 0 > $CONFIG_DIR/pozilla.conf
 }
-echo -n "" > $CONFIG_DIR/pozilla.output
 
 
 while [ ! -z "$1" ]
@@ -65,6 +64,7 @@ do
 	echo "<·············································"
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-d --days		Days remaining for release"
+	echo "-r --release	Specifies the coming release's number"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
@@ -117,6 +117,16 @@ do
 		fi	
 	fi
 	;;
+	[rR]*)
+	shift 1
+	if test "r$1" = "r" ; then
+		echo "No release number defined! Trying to figuring it out.."
+	else
+		export MY_RELEASE="$1"
+		echo "Using user-defined release string $MY_RELEASE"
+		shift 1
+	fi	
+	;;
 	*)
 		true
 	;;
@@ -141,9 +151,13 @@ export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|sed -e 's/^.*(//g' -e 's/,.
 #
 case "$PACKAGE"	in
 gtranslator)
-	export `grep ^MAINVERSION configure.in`
-	export `grep ^SUBVERSION configure.in`
-	export RELEASE="$MAINVERSION.$SUBVERSION"
+	if test "y$MY_RELEASE" = "y" ; then
+		export `grep ^MAINVERSION configure.in`
+		export `grep ^SUBVERSION configure.in`
+		export RELEASE="$MAINVERSION.$SUBVERSION"
+	else
+		export RELEASE="$MY_RELEASE"
+	fi	
 ;;
 *)
 
@@ -151,8 +165,12 @@ gtranslator)
 	# Hopefully the other apps are using plain version strings
 	#  like "0.8" or "0.32".
 	#
-	export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
-		sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
+	if test "y$MY_RELEASE" = "y" ; then
+		export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
+			sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
+	else
+		export RELEASE="$MY_RELEASE"
+	fi
 ;;
 esac
 
