@@ -114,7 +114,6 @@ int put_to_msg_db(const gchar *new_message)
 			/**
 			 * FIXME
 			 * Add a leaf to the btree ...
-			 * BUT : where to get an index ???
 			 **/		
 		}
 	}

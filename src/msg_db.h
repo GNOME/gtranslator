@@ -54,13 +54,6 @@ gchar *get_from_msg_db(const gchar *);
 unsigned int get_msg_db_size();
 
 /**
- * FIXME : 
- * Make a fast-index through the msg_db
- * BUT how ?
- **/
-int make_index_of_msg_db();
-
-/**
  * The binary tree for the messages 
  **/
 BT *msg_tree;
