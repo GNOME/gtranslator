@@ -13,6 +13,7 @@ gtranslator_sgmlfile = gtranslator.sgml
 
 gtranslator_omfdir = $(DESTDIR)$(SC_OMFDIR)/gtranslator
 
+if SCROLLKEEPER_PRESENT
 gtranslator_omf_DATA = $(gtranslator_omffile)
 
 gtranslator_omffile = gtranslator-$(lc).omf
@@ -20,6 +21,7 @@ gtranslator_omffile = gtranslator-$(lc).omf
 $(gtranslator_omffile): $(gtranslator_omffile).presetup
 	scrollkeeper-preinstall $(gtranslator_helpdir)/$(gtranslator_sgmlfile) \
 		$(gtranslator_omffile).presetup $(gtranslator_omffile)
+endif		
 
 gtranslator_htmlfiles = \
 	aa.html \
