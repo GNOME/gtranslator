@@ -367,7 +367,8 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 		{
 			GtkWidget *popup_menu;
 			popup_menu=gnome_popup_menu_new(the_popup_menu);
-			gnome_popup_menu_do_popup_modal(popup_menu, NULL, NULL, NULL, event);
+			gnome_popup_menu_do_popup_modal(popup_menu,
+				NULL, NULL, NULL, event);
 			/*
 			 * Destroy the menu after creation.
 			 */
@@ -1062,11 +1063,28 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 					GTK_EDITABLE(trans_box), "·", 1, &pos);
 			}
 		}
+		
 		g_free(newstr);
+		
 		/*
 		 * Go to the old text index.
 		 */
-		gtk_editable_set_position(GTK_EDITABLE(trans_box), index);
+		if(index > 0 &&
+			index < gtk_text_get_length(GTK_TEXT(trans_box)))
+		{
+			gtk_editable_set_position(
+				GTK_EDITABLE(trans_box), index);
+		}
+		else
+		{
+			if(index==gtk_text_get_length(GTK_TEXT(trans_box)))
+			{
+				gtk_editable_set_position(
+					GTK_EDITABLE(trans_box), 
+					gtk_text_get_length(
+						GTK_TEXT(trans_box)));
+			}
+		}
 
 		/*
                  * Thaw up the translation box to avoid the reverse writing

@@ -401,11 +401,17 @@ void open_uri_dialog(GtkWidget *widget, gpointer useless)
 {
 	GtkWidget 	*dialog=NULL;
 	GtkWidget	*entry=NULL;
+	GtkWidget	*label=NULL;
 			
 	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
 		_("Open"), _("Cancel"), NULL);	
 
 	entry=gnome_entry_new("URI");
+
+	label=gtk_label_new(_("Enter URI:"));
+	
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
+		FALSE, FALSE, 0);	
 	
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), entry,
 		FALSE, FALSE, 0);	
