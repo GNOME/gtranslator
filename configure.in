@@ -145,6 +145,51 @@ INTERFACE_DIR="${datadir}/gtranslator/ui"
 AC_SUBST(INTERFACE_DIR)
 
 dnl -------------------------------------------------------------------
+dnl Check for GnomeVFS via this crappy check and get the libs and 
+dnl  compile flags for it or disable GTR_VFS_HANDLE.
+dnl -------------------------------------------------------------------
+vfs_stuff=no
+AC_MSG_CHECKING(for GnomeVFS >= 0.4.1)
+if gnome-config --cflags vfs 2>&1 >/dev/null ; then
+	dnl -----------------------------------------------------------
+	dnl Temporarily we're now happy :-)
+	dnl -----------------------------------------------------------
+	vfs_stuff=yes
+	dnl -----------------------------------------------------------
+	dnl Test the version of GnomeVFS to be >= 0.4.1
+	dnl -----------------------------------------------------------
+	VFS_VERSION=`gnome-config --modversion vfs|sed -e 's/.*-//g' -e 's/\.//g'`
+	if test "$VFS_VERSION" -ge 0410 ; then
+		AC_MSG_RESULT([" "
+"·:0 Right your GnomeVFS is recent enough for us... "])	
+	else
+		vfs_stuff=no
+		AC_MSG_RESULT([" "
+"·:0 Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4"])
+	fi
+	dnl -----------------------------------------------------------
+	dnl Get the CFLAGS and the LIBS
+	dnl -----------------------------------------------------------
+	VFS_CFLAGS=`gnome-config --cflags vfs`
+	VFS_LIBS=`gnome-config --libs vfs`
+	dnl -----------------------------------------------------------
+	dnl Define the USE_VFS_STUFF directive...
+	dnl -----------------------------------------------------------
+	if test "x$vfs_stuff" = "xyes" ; then
+		AC_DEFINE(USE_VFS_STUFF)
+		AC_SUBST(VFS_CFLAGS)
+		AC_SUBST(VFS_LIBS)
+	fi	
+else
+	dnl -----------------------------------------------------------
+	dnl Oh, no GnomeVFS ;-(
+	dnl -----------------------------------------------------------
+	AC_MSG_RESULT([" "
+"·:0 GnomeVFS was not found... Not building, linking with VFS stuff."])	
+fi
+AM_CONDITIONAL(USE_VFS_STUFF, test x$vfs_stuff = xyes)
+
+dnl -------------------------------------------------------------------
 dnl Substitute PACKAGE_LOCALE_DIR in config.h.
 dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
@@ -323,6 +368,9 @@ use the window-icon
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
+
+if libgtranslator can
+ use GnomeVFS stuff	:	${vfs_stuff:-no}
 
 if everything should be 
  compiled debuggy	:	${with_debug_specs:-no}
