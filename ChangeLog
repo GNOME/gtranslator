@@ -1,3 +1,23 @@
+2001-03-24  Fatih Demir <kabalak@gtranslator.org>
+
+	* NEWS: Added news item about Scrollkeeper integration.
+
+	* DEPENDS: Added Scrollkeeper dependency.
+
+	* help/C/.cvsignore: Added "gtranslator-C.omf" to the ignores.
+
+	* help/C/Makefile.am: Integrated conditional Scrollkeeper
+		support and integration.
+
+	* help/C/gtranslator-C.omf.presetup: Added omf file template
+		for the gtranslator docs.
+
+	* acconfig.h: Removed USE_WINDOW_ICON define and added 
+		SCROLLKEEPER_PRESENT define.
+	
+	* configure.in: Added check for Scrollkeeper and conditional
+		integration of the scrollkeeper file(s).
+
 2001-03-23  Fatih Demir <kabalak@gtranslator.org>
 
 	* man/Makefile.am: Remove the gzip'ed man-pages on any

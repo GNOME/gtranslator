@@ -316,6 +316,16 @@ AC_SUBST(NAUTILUS_LIBS)
 AM_CONDITIONAL(BUILD_NV, test a$build_nv = ayes)
 
 dnl -------------------------------------------------------------------
+dnl Check for Scrollkeeper and set the corresponding conditional var if
+dnl  it could be found.
+dnl -------------------------------------------------------------------
+AC_CHECK_PROG(sc_present, scrollkeeper-preinstall, yes, no)
+if test "z$sc_present" = "zyes" ; then
+	AC_CHECK_PROG(sc_present, scrollkeeper-update, yes, no)
+fi
+AM_CONDITIONAL(SCROLLKEEPER_PRESENT, test z$sc_present = zyes)
+
+dnl -------------------------------------------------------------------
 dnl Get the date for the man-page and substitute it there and anywhere.
 dnl -------------------------------------------------------------------
 MY_DATE=`date +%Y-%m-%d`
