@@ -3,13 +3,13 @@
 	* parse.c: Enable the next untranslated menu entries after a remove all
 		translations action (fixes #59301).
 
-	* message.c: Also re-enable the remove all translations menu entries on a
-		messages update (by filling in a translation for example) in
+	* message.c: Also re-enable the remove all translations menu entries on
+		a messages update (by filling in a translation for example) in
 		 "gtranslator_emssages_update" (fixes #59300).
 
 	* parse_core.c: Set the "locale_charset" field also for non-UTF8 files
-		to gain a good result for the messages table translations -- thanks
- 		 to Joe Man for pointing this out.
+		to gain a good result for the messages table translations -- 
+		 thanks to Joe Man for pointing this out.
 
 2001-08-20  Fatih Demir <kabalak@gtranslator.org>
 
