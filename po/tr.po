@@ -5,21 +5,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39\n"
-"POT-Creation-Date: 2001-08-17 18:29+0200\n"
+"POT-Creation-Date: 2001-08-29 14:01+0200\n"
 "PO-Revision-Date: 2001-08-18 23:26+0300\n"
 "Last-Translator: Yýldýrým Karslýoðlu <ykarslioglu@superonline.com>\n"
-"Language-Team: Türkçe <tr@li.org>\n"
+"Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 # src/about.c:59
-#: src/about.c:59
+#: src/about.c:61
 msgid "(C) 1999-2001 The Free Software Foundation"
 msgstr "(C) 1999-2001 Özgür Yazýlým Derneði"
 
 # src/about.c:60
-#: src/about.c:60
+#: src/about.c:62
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator birçok özelliði olan po dosyasý düzenleme ortamýdýr."
 
@@ -28,8 +28,8 @@ msgstr "gtranslator birçok özelliði olan po dosyasý düzenleme ortamýdýr."
 #. * This string is displayed in the about box as an information about
 #. *  the currently used colorscheme.
 #.
-#: src/about.c:69
-
+#: src/about.c:71
+#, c-format
 msgid "Current colorscheme: \"%s\" (version %s) by"
 msgstr "Geçerli renk düzeni: \"%s\" (sürüm %s)"
 
@@ -37,7 +37,7 @@ msgstr "Geçerli renk düzeni: \"%s\" (sürüm %s)"
 #. * This is a status report feedback: "Blabla backend\n (filename) loaded.\n".
 #.
 #: src/backend.c:279
-
+#, c-format
 msgid ""
 "%s\n"
 " (%s) loaded.\n"
@@ -46,13 +46,14 @@ msgstr ""
 " (%s) yüklendi.\n"
 
 # src/color-schemes.c:156
-#: src/color-schemes.c:175
+#: src/color-schemes.c:173
+#, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Renk düzeni dosyasý `%s' uygulanamadý!"
 
 # src/color-schemes.c:279
-#: src/color-schemes.c:304
-msgid "Couldn't retrieve author informations!"
+#: src/color-schemes.c:302
+msgid "Couldn't retrieve author information!"
 msgstr "Çevirmen bilgileri alýnamadý!"
 
 # src/color-schemes.c:285
@@ -60,12 +61,12 @@ msgstr "Çevirmen bilgileri alýnamadý!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:310
+#: src/color-schemes.c:308 src/translator.c:307
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
 # src/color-schemes.c:286
-#: src/color-schemes.c:311
+#: src/color-schemes.c:309
 msgid "<Not Given>"
 msgstr "<Verilmemiþ>"
 
@@ -86,7 +87,7 @@ msgstr "gtranslator -- dosyanýn yerel kopyasýný farklý kaydet"
 
 # src/dialogs.c:197
 #: src/dialogs.c:184
-#, 
+#, c-format
 msgid ""
 "File %s\n"
 "was changed. Save?"
@@ -115,6 +116,7 @@ msgid "Comment:"
 msgstr "Yorum:"
 
 #: src/dialogs.c:448
+#, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "%s' deki çevirilerilerin TÜMÜ geri alýnmalý mý?"
 
@@ -125,11 +127,13 @@ msgstr "gtranslator -- tüm çevirileri geri al"
 
 #: src/dialogs.c:475
 msgid "Are you really sure to remove ALL translations from this po file?"
-msgstr "Bu po dosyasýndaki TÜM çevirilerin geri alýnmasýný gerçekten istiyor musunuz?"
+msgstr ""
+"Bu po dosyasýndaki TÜM çevirilerin geri alýnmasýný gerçekten istiyor musunuz?"
 
 #: src/dialogs.c:486
 msgid "gtranslator -- remove all translations confirmation dialog"
-msgstr "gtranslator -- tüm çevirileri geri alma için doðrulama iletiþim penceresi"
+msgstr ""
+"gtranslator -- tüm çevirileri geri alma için doðrulama iletiþim penceresi"
 
 # src/dialogs.c:390
 #: src/dialogs.c:579
@@ -172,7 +176,7 @@ msgid "English"
 msgstr "Ýngilizce"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/dialogs.c:685 src/dialogs.c:783 src/gui.c:556 src/messages-table.c:375
+#: src/dialogs.c:685 src/dialogs.c:783 src/gui.c:557 src/messages-table.c:375
 #: src/messages-table.c:410
 msgid "Translated"
 msgstr "Çevrilmiþ"
@@ -229,7 +233,7 @@ msgstr "Burada deðiþtir:"
 
 # src/dialogs.c:701
 #: src/dialogs.c:890
-msgid "An error occured while msgfmt was executed:\n"
+msgid "An error occurred while msgfmt was executed:\n"
 msgstr "msgfmt çalýþtýrýlýrken bir hata oldu:\n"
 
 # src/dialogs.c:731
@@ -244,22 +248,45 @@ msgid "Open"
 msgstr "Aç"
 
 # src/dialogs.c:738
-#: src/dialogs.c:927
+#: src/dialogs.c:929
 msgid "Enter URI:"
 msgstr "URI'yi gir:"
 
 # src/dialogs.c:780
-#: src/dialogs.c:965
+#: src/dialogs.c:967
 msgid "No URI given!"
 msgstr "URI verilmemiþ!"
 
 # src/dialogs.c:795
-#: src/dialogs.c:980
+#: src/dialogs.c:982
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Desteklenen URI protokolü verilmemiþ (\"ftp://\" gibi)!"
 
+#: src/dialogs.c:990
+msgid ""
+"URIs are used to locate files uniquely on different systems.\n"
+"The standard Internet addresses (URLs) are also URIs -- you can\n"
+"use them to open remote po files lying on servers with standard protocols\n"
+"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
+"Some example URIs for clarification (these ones are supported):\n"
+"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+"\n"
+"file:///<PO-FILE>"
+msgstr "URI'ler deðiþik sistemlerde dosyalarýn yerini belirlemek\n"
+"için kullanýlýrlar. Standart internet adresleri (URL'ler) ayný\n"
+"zamanda URI'lerdir -- \"http\", \"ftp\" veya GnomeVFS tarafýndan\n"
+"desteklenen diðer eriþim metodlarý ile sunucularda bulunan\n"
+"po dosyalarýný açmak için kullanýlabilirler. Açýklýk getirmek\n" 
+"için bazý örnek URI'ler (bunlar desteklenmektedirler):\n"
+"http://www.gtranslator.org/uzak-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<UZAKTAKÝ-PO-DOSYASI>\n"
+"\n"
+"dosya:///<PO-DOSYASI>"
+
 # src/dialogs.c:826
-#: src/dialogs.c:1011
+#: src/dialogs.c:1027
+#, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
 "It was saved by gtranslator before gtranslator got closed.\n"
@@ -272,13 +299,13 @@ msgstr ""
 "\"Hayýr\" derseniz kurtarýlmýþ dosya silinecektir."
 
 # src/dialogs.c:851
-#: src/dialogs.c:1036
-
+#: src/dialogs.c:1052
+#, c-format
 msgid "Recovering `%s'..."
 msgstr "`%s' kurtarýlýyor ..."
 
 # src/dialogs.c:896
-#: src/dialogs.c:1081
+#: src/dialogs.c:1101
 msgid "Couldn't get list of gettext domains!"
 msgstr "Gettext alanlarýnýn listesi alýnamýyor!"
 
@@ -286,42 +313,44 @@ msgstr "Gettext alanlarýnýn listesi alýnamýyor!"
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1088
+#: src/dialogs.c:1108
 msgid "Here you can query existing gettext domains for a translation."
-msgstr "Burada, çeviri için mevcut olan gettext alanlarýnýn sorgusunu yapabilirsiniz."
+msgstr ""
+"Burada, çeviri için mevcut olan gettext alanlarýnýn sorgusunu yapabilirsiniz."
 
 # src/dialogs.c:906
-#: src/dialogs.c:1091
+#: src/dialogs.c:1111
 msgid "gtranslator -- query existing gettext domains"
 msgstr "gtranslator -- Mevcut gettext alanlarýný sorgula"
 
 # src/dialogs.c:907 src/menus.c:366
-#: src/dialogs.c:1092 src/menus.c:371
+#: src/dialogs.c:1112 src/menus.c:371
 msgid "Query"
 msgstr "Sorgu"
 
 # src/dialogs.c:915
-#: src/dialogs.c:1100
+#: src/dialogs.c:1120
 msgid "Query string:"
 msgstr "Sorgulanacak sözdizisi:"
 
 # src/dialogs.c:922
-#: src/dialogs.c:1107
+#: src/dialogs.c:1127
 msgid "Domain to search the translation in:"
 msgstr "Ýçinde çevirilerin aranacaðý alan:"
 
 # src/dialogs.c:972
-#: src/dialogs.c:1157
+#: src/dialogs.c:1177
 msgid "No query string given!"
 msgstr "Sorgulanacak bir sözdizisi verilmemiþ!"
 
 # src/dialogs.c:1006
-#: src/dialogs.c:1191
+#: src/dialogs.c:1211
 msgid "Couldn't find any result for the query!"
 msgstr "Sorguya herhangi bir cevap bulunamadý!"
 
 # src/dialogs.c:1019
-#: src/dialogs.c:1204
+#: src/dialogs.c:1224
+#, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
 "Would you like to insert it into the translation?"
@@ -334,12 +363,12 @@ msgstr ""
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:1294
+#: src/dialogs.c:1314
 msgid "Query's result translation is already there!"
 msgstr "Sorgunun sonucu olan çeviri orada mevcut!"
 
 # src/dialogs.c:1131
-#: src/dialogs.c:1316
+#: src/dialogs.c:1336
 msgid ""
 "Should gtranslator auto accomplish all missing strings (if possible)\n"
 "from your default query domain (and your personal learn buffer)?"
@@ -354,6 +383,7 @@ msgstr "Lütfen aranmasý için bir sözdizisi yazýnýz"
 
 # src/find.c:227
 #: src/find.c:229
+#, c-format
 msgid ""
 "Could not find\n"
 "\"%s\""
@@ -362,46 +392,48 @@ msgstr ""
 "bulunamadý"
 
 # src/sidebar.c:107
-#: src/gui.c:263
+#: src/gui.c:264
 msgid "Edit comment"
 msgstr "Yorumu deðiþtir"
 
 # src/gui.c:385
-#: src/gui.c:542
+#: src/gui.c:543
+#, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ %i Fuzzy geride kaldý ]"
+msgstr "%s [ Geride %i Fuzzy kaldý ]"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gui.c:542 src/gui.c:546 src/menus.c:352 src/messages-table.c:361
+#: src/gui.c:543 src/gui.c:547 src/menus.c:352 src/messages-table.c:361
 #: src/messages-table.c:417
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
 # src/gui.c:389
-#: src/gui.c:546
-
+#: src/gui.c:547
+#, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Fuzzy ileti kalmadý ]"
 
 # src/gui.c:396
-#: src/gui.c:554
+#: src/gui.c:555
 msgid "Stick"
 msgstr "Kalýcý"
 
 # src/gui.c:407
-#: src/gui.c:565
-
+#: src/gui.c:566
+#, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i Çevrilmemiþ ileti kaldý ]"
 
 # src/gui.c:407 src/gui.c:409
-#: src/gui.c:565 src/gui.c:567 src/messages-table.c:333
+#: src/gui.c:566 src/gui.c:568 src/messages-table.c:333
 #: src/messages-table.c:407
 msgid "Untranslated"
 msgstr "Çevrilmemiþ"
 
 # src/gui.c:409
-#: src/gui.c:567
+#: src/gui.c:568
+#, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Çevrilmemiþ ileti kalmadý ]"
 
@@ -409,7 +441,8 @@ msgstr "%s [ Çevrilmemiþ ileti kalmadý ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:580
+#: src/gui.c:581
+#, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Ýleti: %d / %d / Durum: %s"
 
@@ -471,41 +504,42 @@ msgstr "Çevirmen'in adý:"
 # src/header_stuff.c:512
 #: src/header_stuff.c:557
 msgid "Translator's e-mail:"
-msgstr "Çevirmen' in e-posta adresi:"
+msgstr "Çevirmen'in e-posta adresi:"
 
 # src/header_stuff.c:515 src/prefs.c:137
-#: src/header_stuff.c:560 src/prefs.c:170
+#: src/header_stuff.c:560 src/prefs.c:171
 msgid "Language:"
 msgstr "Dil:"
 
 # src/header_stuff.c:520
-#: src/header_stuff.c:565
+#: src/header_stuff.c:566
 msgid "Language group's e-mail:"
 msgstr "Dil grubunun e-posta adresi:"
 
 # src/header_stuff.c:524 src/prefs.c:150
-#: src/header_stuff.c:569 src/prefs.c:183
+#: src/header_stuff.c:571 src/prefs.c:187
 msgid "Charset:"
 msgstr "Charset:"
 
 # src/header_stuff.c:528 src/prefs.c:154
-#: src/header_stuff.c:573 src/prefs.c:187
+#: src/header_stuff.c:576 src/prefs.c:192
 msgid "Encoding:"
 msgstr "Kodlama:"
 
 # src/history.c:167
-#: src/history.c:169
+#: src/history.c:179
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/_Son kullanýlan dosyalar/"
 
 # src/history.c:205
-#: src/history.c:207
-
+#: src/history.c:217
+#, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
 
 # src/htmlizer.c:236
 #: src/htmlizer.c:236
+#, c-format
 msgid "Couldn't save html output to %s!"
 msgstr "html çýktýsý %s'ye kaydedilemedi!"
 
@@ -514,7 +548,7 @@ msgstr "html çýktýsý %s'ye kaydedilemedi!"
 #. * Translatable output to a html file which is visible on the pages.
 #.
 #: src/htmlizer.c:254
-
+#, c-format
 msgid "%s-%s contains %i messages."
 msgstr "%s-%s, %i ileti içeriyor."
 
@@ -526,11 +560,13 @@ msgstr "%s-%s, %i ileti içeriyor."
 #. *  project name should be displayed bold on the output pages.
 #.
 #: src/htmlizer.c:267
+#, c-format
 msgid "Project <b>%s</b> (last po file revision: %s)."
 msgstr "<b>%s</b> Projesi (po dosyasýnýn son düzeltmesi: %s)."
 
 # src/htmlizer.c:282
 #: src/htmlizer.c:282
+#, c-format
 msgid "Last translator: %s"
 msgstr "Son çevirmen: %s"
 
@@ -545,6 +581,7 @@ msgstr "Son çevirmen: %s"
 #. * Please don't forget to include the HTML tags in the msgid.
 #.
 #: src/htmlizer.c:320
+#, c-format
 msgid ""
 "HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
 "\">gtranslator</a> version %s."
@@ -574,7 +611,7 @@ msgstr "Baskça"
 
 # src/languages.h:80
 #: src/languages.h:80
-msgid "Bielorussian"
+msgid "Belorussian"
 msgstr "Beyaz Rusça"
 
 # src/languages.h:84
@@ -645,7 +682,7 @@ msgstr "Esperanto"
 # src/languages.h:140
 #: src/languages.h:140
 msgid "Estonian"
-msgstr "Estonyaca"
+msgstr "Estonya Dili"
 
 # src/languages.h:144
 #: src/languages.h:144
@@ -685,7 +722,7 @@ msgstr "Macarca"
 # src/languages.h:172
 #: src/languages.h:172
 msgid "Indonesian"
-msgstr "Endonezyaca"
+msgstr "Endonezya Dili"
 
 # src/languages.h:176
 #: src/languages.h:176
@@ -710,12 +747,12 @@ msgstr "Korece"
 # src/languages.h:192
 #: src/languages.h:192
 msgid "Latvian"
-msgstr "Letonyaca"
+msgstr "Letonya Dili"
 
 # src/languages.h:196
 #: src/languages.h:196
 msgid "Lithuanian"
-msgstr "Litvanyaca"
+msgstr "Litvanya Dili"
 
 #: src/languages.h:200
 msgid "Malay/Bahasa Melayu"
@@ -779,7 +816,7 @@ msgstr "Slovakça"
 # src/languages.h:244
 #: src/languages.h:248
 msgid "Slovenian"
-msgstr "Slovence"
+msgstr "Slovenya Dili"
 
 # src/languages.h:248
 #: src/languages.h:252
@@ -843,7 +880,7 @@ msgstr "Galler Dili"
 
 # src/main.c:77
 #: src/main.c:76
-msgid "Show build informations/specifications"
+msgid "Show build information/specifications"
 msgstr "Yapým bilgilerini/özelliklerini göster"
 
 # src/main.c:81
@@ -891,13 +928,13 @@ msgstr "HTMLDOSYASI"
 
 # src/main.c:138
 #: src/main.c:137
-
+#, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf baþlama hatasý: %s."
 
 # src/main.c:161
 #: src/main.c:160
-msgid "gtranslator build informations/specs:"
+msgid "gtranslator build information/specs:"
 msgstr "gtranslator yapým bilgileri/özellikleri:"
 
 # src/main.c:163
@@ -940,7 +977,9 @@ msgstr "Kendi yerel dizininiz:"
 msgid ""
 "Unfortunately your GModule implementation doesn't support loading dynamic "
 "modules!"
-msgstr "Ne yazýk ki GModule uygulamanýz dinamik modüllerin yüklenmesini desteklemiyor!"
+msgstr ""
+"Ne yazýk ki GModule uygulamanýz dinamik modüllerin yüklenmesini "
+"desteklemiyor!"
 
 # src/main.c:213
 #: src/main.c:208
@@ -952,6 +991,7 @@ msgstr "gtranslator herhangi bir backend modülünü yüklemeyecek...\n"
 #. *  message informing the user about the success.
 #.
 #: src/main.c:438
+#, c-format
 msgid "The file `%s' has been successfully learned.\n"
 msgstr "`%s' dosyasý baþarýlý bir þekilde öðrenildi.\n"
 
@@ -987,16 +1027,17 @@ msgstr "Po dosyasýný güncelle"
 
 # src/menus.c:72
 #: src/menus.c:76
-msgid "Aut_oaccomplish"
+msgid "Aut_oaccomplish..."
 msgstr "Ot_omatik olarak yap "
 
 # src/menus.c:73
 #: src/menus.c:77
 msgid "Automatically fill missing translations from the default query domain"
-msgstr "Eksik olan çevirileri öntanýmlý sorgu alanýna bakarak otomatik olarak tamamla"
+msgstr ""
+"Eksik olan çevirileri öntanýmlý sorgu alanýna bakarak otomatik olarak tamamla"
 
 #: src/menus.c:84
-msgid "Remove all translations"
+msgid "Remove all translations..."
 msgstr "Tüm çevirileri geri al"
 
 # src/menus.c:73
@@ -1006,7 +1047,7 @@ msgstr "po dosyasýndaki tüm çevirileri geri al"
 
 # src/menus.c:81
 #: src/menus.c:93
-msgid "Open from _URI"
+msgid "Open from _URI..."
 msgstr "_URI'den aç"
 
 # src/menus.c:82
@@ -1021,27 +1062,28 @@ msgstr "So_n dosyalar"
 
 # src/menus.c:95
 #: src/menus.c:107
-msgid "_Export to UTF-8"
-msgstr "UTF-8 formatýna çevir"
+msgid "_Export to UTF-8..."
+msgstr "UTF-8 formatýna çevir (export et)"
 
 # src/menus.c:96
 #: src/menus.c:108
 msgid "Export the current po file to UTF-8"
-msgstr "Geçerli po dosyasýný UTF-8 formatýna çevir"
+msgstr "Geçerli po dosyasýný UTF-8 formatýna çevir (export et)"
 
 # src/menus.c:102
 #: src/menus.c:114
-msgid "_Import from UTF-8"
-msgstr "UTF-8 formatýndaki dosyayý aç"
+msgid "_Import from UTF-8..."
+msgstr "UTF-8 formatýndaki dosyayý aç (import)"
 
 # src/menus.c:103
 #: src/menus.c:115
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr "UTF-8 ile kodlanmýþ po dosyasýný basit kodlama biçimine çevirerek aç"
+msgstr "UTF-8 ile kodlanmýþ po dosyasýný basit kodlama \n"
+"biçimine çevirerek aç (import)"
 
 # src/menus.c:134
 #: src/menus.c:145
-msgid "_Query"
+msgid "_Query..."
 msgstr "_Sorgu"
 
 # src/menus.c:135 src/menus.c:367
@@ -1197,7 +1239,7 @@ msgstr "_Kalýcý"
 # src/menus.c:246
 #: src/menus.c:254
 msgid "Stick this message"
-msgstr "Bu iletiyi kalýcý kýl"
+msgstr "Bu iletiyi kalýcý yap"
 
 # src/menus.c:265
 #: src/menus.c:273
@@ -1345,7 +1387,7 @@ msgstr "Tüm iletiler çevrilmiþ görünüyor."
 #. *  untranslated messages left over.
 #.
 #: src/messages-table.c:328
-
+#, c-format
 msgid "Untranslated (%i)"
 msgstr "Çevrilmemiþ (%i)"
 
@@ -1355,23 +1397,24 @@ msgstr "Çevrilmemiþ (%i)"
 #. *  of fuzzy entries/messages left over.
 #.
 #: src/messages-table.c:356
-
+#, c-format
 msgid "Fuzzy (%i)"
 msgstr "Fuzzy (%i)"
 
 # src/gui.c:396
 #: src/messages-table.c:413
 msgid "Sticky"
-msgstr "Yapýþkan"
+msgstr "Kalýcý"
 
 # src/open-differently.c:161
 #: src/open-differently.c:161
-
+#, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Derlenmiþ gettext dosyasý `%s' açýlamadý!"
 
 # src/open-differently.c:212
 #: src/open-differently.c:212
+#, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Sýkýþtýrýlmýþ gettext dosyasý `%s' açýlamadý!"
 
@@ -1381,16 +1424,19 @@ msgstr "Sýkýþtýrýlmýþ gettext dosyasý `%s' açýlamadý!"
 #. *  compressions program (gzip, bzip2 etc.)
 #.
 #: src/open-differently.c:222
+#, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr "%s'lenmiþ gettext dosyasý `%s' açýlamadý!"
 
 # src/open-differently.c:293
 #: src/open-differently.c:293
+#, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "ziplenmiþ po dosyasý `%s' açýlamadý!"
 
 # src/parse.c:101
 #: src/parse.c:114
+#, c-format
 msgid ""
 "New escaped char found: \\%c\n"
 "Add this to parse.c, line %i."
@@ -1400,6 +1446,7 @@ msgstr ""
 
 # src/parse.c:247
 #: src/parse.c:269
+#, c-format
 msgid ""
 "Error in file \"%s\"\n"
 "at line %d.\n"
@@ -1411,6 +1458,7 @@ msgstr ""
 
 # src/parse.c:283
 #: src/parse.c:315
+#, c-format
 msgid ""
 "The file is empty:\n"
 "%s"
@@ -1420,16 +1468,19 @@ msgstr ""
 
 # src/parse.c:306
 #: src/parse.c:339
+#, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "`%s' dosyasý yok!"
 
 # src/parse.c:396
-#: src/parse.c:459
+#: src/parse.c:462
+#, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
 # src/parse.c:553
-#: src/parse.c:648
+#: src/parse.c:651
+#, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
 "However, such files are generated by program.\n"
@@ -1437,15 +1488,17 @@ msgid ""
 msgstr ""
 "Dosyayi .pot sonekiyle kaydetmeye çalýþýyorsunuz.\n"
 "Bu soneke sahip dosyalar bir uygulama tarafýndan oluþturulur.\n"
-"Sizin tercüme ettiðiniz dosyanýn soneki po (%s.po)  olmalýdýr."
+"Sizin tercüme ettiðiniz dosyanýn soneki po %s.po)olmalýdýr."
 
 # src/parse.c:599
-#: src/parse.c:694
+#: src/parse.c:708
+#, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "%s' dosyasý yazýlmak üzere açýlamadý!"
 
 # src/parse.c:645
-#: src/parse.c:740
+#: src/parse.c:754
+#, c-format
 msgid ""
 "File %s\n"
 "contains %d fuzzy messages"
@@ -1454,7 +1507,8 @@ msgstr ""
 "%d fuzzy ileti içeriyor."
 
 # src/parse.c:681
-#: src/parse.c:776
+#: src/parse.c:790
+#, c-format
 msgid ""
 "You didn't change anything in\n"
 "%s\n"
@@ -1465,17 +1519,18 @@ msgstr ""
 "Yine de kaydedilmesini istiyor musunuz?"
 
 # src/parse.c:689
-#: src/parse.c:784
+#: src/parse.c:798
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþtirilmemiþ"
 
 # data/desktop/gtranslator.desktop.in.h:2 src/gui.c:172 src/parse.c:761
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:869
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:883
 msgid "gtranslator"
 msgstr "gtranslator"
 
 # src/parse.c:786
-#: src/parse.c:894
+#: src/parse.c:910
+#, c-format
 msgid ""
 "File %s\n"
 "was changed. Do you want to revert to saved copy?"
@@ -1484,12 +1539,13 @@ msgstr ""
 "deðiþtirilmiþ. Kaydedilmiþ kopyaya geri dönmek ister misiniz?"
 
 # src/parse.c:830
-#: src/parse.c:1031
+#: src/parse.c:1061
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Üzgünüm, sisteminizde msgfmt mevcut deðil!"
 
 # src/parse.c:859
-#: src/parse.c:1061
+#: src/parse.c:1096
+#, c-format
 msgid ""
 "Compile successful:\n"
 "%s"
@@ -1504,7 +1560,7 @@ msgstr "gtranslator -- seçenekler"
 
 # src/prefs.c:108
 #: src/prefs.c:124
-msgid "Personal informations"
+msgid "Personal information"
 msgstr "Kiþisel bilgiler"
 
 # src/prefs.c:109
@@ -1558,238 +1614,242 @@ msgid "Default query domain:"
 msgstr "Öntanýmlý sorgu alaný "
 
 # src/prefs.c:141
-#: src/prefs.c:174
+#: src/prefs.c:176
 msgid "Language code:"
 msgstr "Dil kodu:"
 
 # src/prefs.c:146
-#: src/prefs.c:179
+#: src/prefs.c:182
 msgid "Language group's EMail:"
 msgstr "Dil grubunun EPosta adresi:"
 
 # src/prefs.c:162
-#: src/prefs.c:195
+#: src/prefs.c:201
 msgid "Set non-fuzzy status, if message was changed"
 msgstr "Ýleti deðiþtirildiyse fuzzy durumunu ortadan kaldýr"
 
 # src/prefs.c:166
-#: src/prefs.c:199
+#: src/prefs.c:205
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Po-dosyasý fuzzy tercümeler içeriyorsa uyarýda bulun"
 
 # src/prefs.c:170
-#: src/prefs.c:203
+#: src/prefs.c:209
 msgid "Don't save unchanged po files"
 msgstr "Deðiþtirilmemiþ po-dosyalarýný kaydetme"
 
 # src/prefs.c:174
-#: src/prefs.c:207
+#: src/prefs.c:213
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Deðiþtirilmemiþ bir dosyayý kaydetmeye çalýþýrsam beni uyar"
 
-#: src/prefs.c:211
-msgid "Also query the personal learn buffer while auto accomplishing missing entries"
+#: src/prefs.c:217
+msgid ""
+"Also query the personal learn buffer while auto accomplishing missing entries"
 msgstr "Eksik iletileri tamamlarken kiþisel öðrenim buffer'ýmý da sorgula"
 
 # src/prefs.c:178
-#: src/prefs.c:215
+#: src/prefs.c:221
 msgid "Keep obsolete message in the po files"
-msgstr "po dosyasýndaki kullanýlmayan iletileri de sakla "
+msgstr "po dosyalarýndaki kullanýlmayan iletileri sakla "
 
 # src/prefs.c:185
-#: src/prefs.c:222
+#: src/prefs.c:228
 msgid "Use free space indicating special character"
 msgstr "Serbest boþluklarý belirtmek için özel karakter kullan"
 
 # src/prefs.c:188
-#: src/prefs.c:225
+#: src/prefs.c:231
 msgid "Enable the popup menu"
 msgstr "Sað fare tuþu mönüsünü etkinleþtir"
 
-#: src/prefs.c:228
+#: src/prefs.c:234
 msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr "gtranslator' ýn po dosyasý güncelleme fonksiyonunu etkinleþtir"
+msgstr "gtranslator'ýn po dosyasý güncelleme fonksiyonunu etkinleþtir"
 
-#: src/prefs.c:231
+#: src/prefs.c:237
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Po dosyasýndaki tüm çevirileri geri alma fonksiyonunu etkinleþtir"
 
-#: src/prefs.c:234
+#: src/prefs.c:240
 msgid "Delete the compile result file (named \"project.gmo\")"
 msgstr "Derleme sonucu oluþan (\"project.gmo\" adlý) dosyayý sil"
 
 # src/prefs.c:194
-#: src/prefs.c:237
+#: src/prefs.c:243
 msgid "Save geometry on exit & restore it on startup"
-msgstr "gtranslator'ýn yerleþim ve boyut bilgilerini kaydet ve bir sonraki açýlýþta uygula"
+msgstr ""
+"gtranslator'ýn yerleþim ve boyut bilgilerini kaydet ve bir sonraki açýlýþta "
+"uygula"
 
-#: src/prefs.c:240
+#: src/prefs.c:246
 msgid "Show the views sidebar"
 msgstr "Görünüm yan çubuðunu göster"
 
 # src/prefs.c:203
-#: src/prefs.c:247
+#: src/prefs.c:253
 msgid "Maximally showed recent files:"
 msgstr "Gösterilecek son kullanýlan dosya sayýsý:"
 
 # src/prefs.c:207
-#: src/prefs.c:251
+#: src/prefs.c:257
 msgid "Check every recent file before listing it up"
 msgstr "Listelemeden önce son kullanýlan dosyalarý kontrol et"
 
 # src/prefs.c:210
-#: src/prefs.c:254
+#: src/prefs.c:260
 msgid "Instant spell checking"
 msgstr "Anýnda sözdizimi denetlemesi"
 
 # src/prefs.c:213
-#: src/prefs.c:257
+#: src/prefs.c:263
 msgid "Use special dictionary"
 msgstr "Özel sözlük kullan"
 
 # src/prefs.c:216
-#: src/prefs.c:260
+#: src/prefs.c:266
 msgid "Dictionary to use:"
 msgstr "Kullanýlacak sözlük:"
 
 # src/prefs.c:227
-#: src/prefs.c:303
+#: src/prefs.c:309
 msgid "Syntax color scheme to use:"
 msgstr "Kullanýlacak sözdizimi renk düzeni"
 
 # src/prefs.c:231
-#: src/prefs.c:307
+#: src/prefs.c:314
 msgid "Apply own fonts:"
 msgstr "Benim yazý tiplerimi uygula:"
 
 # src/prefs.c:235
-#: src/prefs.c:311
+#: src/prefs.c:318
 msgid "Original text font:"
 msgstr "Özgün metin yazý tipi:"
 
 # src/prefs.c:235
-#: src/prefs.c:311
+#: src/prefs.c:318
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- yazý tipi seçimi/msgid yazý tipi"
 
 # src/prefs.c:239
-#: src/prefs.c:315
+#: src/prefs.c:322
 msgid "Translation font:"
 msgstr "Çeviri yazý tipi:"
 
 # src/prefs.c:239
-#: src/prefs.c:315
+#: src/prefs.c:322
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- yazý tipi seçimi/msgstr yazý tipi"
 
 # src/prefs.c:243
-#: src/prefs.c:319
+#: src/prefs.c:326
 msgid "Apply own colors:"
 msgstr "Benim renklerimi uygula:"
 
 # src/prefs.c:247
-#: src/prefs.c:323
+#: src/prefs.c:330
 msgid "Foreground color:"
 msgstr "Önalan rengi:"
 
 # src/prefs.c:247
-#: src/prefs.c:323
+#: src/prefs.c:330
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- önalan rengi"
 
 # src/prefs.c:251
-#: src/prefs.c:327
+#: src/prefs.c:334
 msgid "Background color:"
 msgstr "Artalan rengi:"
 
 # src/prefs.c:251
-#: src/prefs.c:327
+#: src/prefs.c:334
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- artalan rengi"
 
 # src/prefs.c:258
-#: src/prefs.c:334
+#: src/prefs.c:341
 msgid "Save the po file automatically after a period of time"
 msgstr "Belirli aralýklarla po dosyasýný otomatik olarak kaydet"
 
 # src/prefs.c:262
-#: src/prefs.c:338
+#: src/prefs.c:345
 msgid "Append a special suffix to the automatically saved files"
 msgstr "Otomatik olarak kaydedilen dosyalara özel bir sonek ekle"
 
 # src/prefs.c:266
-#: src/prefs.c:342
+#: src/prefs.c:349
 msgid "Autosave suffix:"
 msgstr "Otomatik kaydetme soneki:"
 
 # src/prefs.c:270
-#: src/prefs.c:346
+#: src/prefs.c:353
 msgid "Autosave timeout in minutes:"
 msgstr "Otomatik kaydetme süresi (dakika):"
 
-#: src/prefs.c:353
+#: src/prefs.c:360
 msgid "Show the messages table (requires gtranslator restart)"
-msgstr "Ýletiler tablosunu göster (gtranslator'ýn yeniden baþlatýlmasý gerekir)"
+msgstr ""
+"Ýletiler tablosunu göster (gtranslator'ýn yeniden baþlatýlmasý gerekir)"
 
-#: src/prefs.c:357
+#: src/prefs.c:364
 msgid "Collapse all translated entries per default"
-msgstr "Öntanýmlý olarak, çevrilmiþ iletilerin tümünü kapat (gösterme)"
+msgstr "Önayarlý olarak, çevrilmiþ iletilerin tümünü kapat (gösterme)"
 
-#: src/prefs.c:361
+#: src/prefs.c:368
 msgid "Use own colors for the messages table groups"
 msgstr "Ýleti tablosu gruplarý için benim belirlediðim renkleri kullan"
 
 # src/gui.c:407 src/gui.c:409
-#: src/prefs.c:365
+#: src/prefs.c:372
 msgid "Untranslated entries color:"
 msgstr "Çevrilmemiþ girdilerin rengi:"
 
 # src/prefs.c:251
-#: src/prefs.c:365
+#: src/prefs.c:372
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- çevrilmemiþ girdilerin rengi"
 
-#: src/prefs.c:369
+#: src/prefs.c:376
 msgid "Fuzzy entries color:"
 msgstr "Fuzzy girdilerin rengi:"
 
 # src/prefs.c:247
-#: src/prefs.c:369
+#: src/prefs.c:376
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- fuzzy girdilerin rengi"
 
-#: src/prefs.c:373
+#: src/prefs.c:380
 msgid "Translated entries color:"
 msgstr "Çevrilmiþ girdilerin rengi:"
 
 # src/prefs.c:251
-#: src/prefs.c:373
+#: src/prefs.c:380
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- çevrilmiþ girdilerin rengi"
 
 # src/find.c:211
-#: src/prefs.c:412
+#: src/prefs.c:420
 msgid "Please enter your name!"
 msgstr "Lütfen adýnýzý yazýnýz!"
 
 # src/find.c:211
-#: src/prefs.c:426
+#: src/prefs.c:434
 msgid "Please enter your EMail address!"
 msgstr "Lütfen EPosta adresinizi yazýnýz!"
 
-#: src/prefs.c:438
+#: src/prefs.c:446
 msgid "Please enter a valid EMail address!"
 msgstr "Lütfen geçerli bir Eosta adresi yazýnýz!"
 
 # src/prefs.c:452
-#: src/prefs.c:665
+#: src/prefs.c:673
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
 "like YOU want it to work!"
 msgstr ""
 "Tercihler bölümündeki seçenekler aracýlýðýyla bazý deðiþkenleri\n"
-"ayarlayabilir ve böylece gtranslator' ýn biraz daha SÝZÝN istediðiniz\n"
+"ayarlayabilir ve böylece gtranslator'ýn biraz daha SÝZÝN istediðiniz\n"
 "gibi çalýþmasýný saðlayabilirsiniz!"
 
 # src/preferences.c:235
@@ -1801,6 +1861,34 @@ msgstr "Þu anki tarih belirlenemedi!"
 #: src/replace.c:173
 msgid "No replace made!"
 msgstr "Deðiþtirme yapýlmadý!"
+
+# src/open-differently.c:161
+#: src/save-differently.c:117
+#, c-format
+msgid "Couldn't save compiled gettext file `%s'!"
+msgstr "Derlenmiþ gettext dosyasý `%s' kaydedilemedi!"
+
+# src/open-differently.c:212
+#: src/save-differently.c:162
+#, c-format
+msgid "Couldn't save compressed gettext file `%s'!"
+msgstr "Sýkýþtýrýlmýþ gettext dosyasý `%s' kaydedilemedi!"
+
+# src/open-differently.c:222
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#: src/save-differently.c:172
+#, c-format
+msgid "Couldn't save %s'd gettext file `%s'!"
+msgstr "%s'lenmiþ gettext dosyasý `%s' kaydedilemedi!"
+
+# src/open-differently.c:293
+#: src/save-differently.c:232
+#, c-format
+msgid "Couldn't save zip'ed po file `%s'!"
+msgstr "ziplenmiþ po dosyasý `%s' kaydedilemedi!"
 
 # src/session.c:90
 #: src/session.c:90
@@ -1857,49 +1945,52 @@ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 #. * that doesn't have it, feel free to change it
 #. * to whatever you think will be better
 #.
-#: src/syntax.c:106 src/utils_gui.c:76 src/utils_gui.c:77 src/views.c:271
+#: src/syntax.c:106 src/utils_gui.c:77 src/utils_gui.c:78 src/views.c:271
 #: src/views.c:341
 msgid "·"
 msgstr "·"
 
 # src/update.c:88
-#: src/update.c:99
+#: src/update.c:102
 msgid "No POTFILES.in found!"
 msgstr "POTFILES.in bulunamadý!"
 
 # src/update.c:104
-#: src/update.c:110
+#: src/update.c:113
 msgid "An update caused no changes."
 msgstr "Güncelleme hiçbir deðiþikliðe yol açmadý."
 
 # src/update.c:111
-#: src/update.c:117
+#: src/update.c:120
 msgid "The update was successfull."
 msgstr "Güncelleme baþarýlý oldu."
 
 # src/update.c:116
-#: src/update.c:122
-msgid "An error occured while updating the po file."
+#: src/update.c:125
+msgid "An error occurred while updating the po file."
 msgstr "po dosyasý güncellenirken bir hata oldu."
 
 # src/utils.c:119
 #: src/utils.c:323 src/utils.c:340
-
+#, c-format
 msgid "Can't create directory `%s'!"
 msgstr "`%s dizini oluþturulamadý!"
 
 # src/utils_gui.c:113
-#: src/utils_gui.c:130
+#: src/utils_gui.c:131
+#, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "\"%s\" geometri sözdizisi incelenemedi!"
 
 # src/utils_gui.c:323
-#: src/utils_gui.c:351
+#: src/utils_gui.c:353
+#, c-format
 msgid "You don't have read permissions on file `%s'"
 msgstr "`%s' dosyasýný okuma yetkiniz yok"
 
 # src/utils_gui.c:341
-#: src/utils_gui.c:369
+#: src/utils_gui.c:371
+#, c-format
 msgid ""
 "You don't have write permissions on file `%s'.\n"
 "This means that you should save it as a copy to a local directory\n"
@@ -1910,47 +2001,56 @@ msgstr ""
 "bulunan baþka bir dizinin altýna kaydetmelisiniz."
 
 # src/utils_gui.c:383
-#: src/utils_gui.c:411
+#: src/utils_gui.c:413
+#, c-format
 msgid "The file `%s' is already open in another instance of gtranslator!"
 msgstr "`%s' dosyasý gtranslator uygulamasý tarafýndan zaten açýlmýþ durumda!"
 
 # src/utils_gui.c:416
-#: src/utils_gui.c:444
+#: src/utils_gui.c:446
+#, c-format
 msgid "The necessary decompression program `%s' is missing!"
 msgstr "Sýkýþtýrýlmýþ dosyalarý açmak için gerekli `%s' programý yok!"
 
 # src/utils_gui.c:421
-#: src/utils_gui.c:449
+#: src/utils_gui.c:451
+#, c-format
 msgid "The necessary compression program `%s' is missing!"
 msgstr "Dosyalarý sýkýþtýrmak için gerekli `%s' programý yok!"
 
 # src/vfs-handle.c:125
 #: src/vfs-handle.c:126
+#, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "Geçici dizin `%s' oluþturulamadý!"
 
 # src/vfs-handle.c:153
 #: src/vfs-handle.c:154
+#, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "Dosya `%s' bulunamadý!"
 
 # src/vfs-handle.c:158
 #: src/vfs-handle.c:159
+#, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr "Hatalý URI `%s' girildi!"
 
 # src/vfs-handle.c:163
 #: src/vfs-handle.c:164
+#, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "`%s' sunucusu/makinesi bulunamadý!"
 
 # src/vfs-handle.c:168
 #: src/vfs-handle.c:169
+#, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "Makine adý `%s' geçerli deðil!"
 
 # src/vfs-handle.c:173
 #: src/vfs-handle.c:174
+#, c-format
 msgid "Host `%s' has no address!"
 msgstr "Makine `%s' nin adresi yok!"
 
@@ -2001,7 +2101,7 @@ msgstr "Yorum"
 
 #: data/etspecs/messages-table.etspec.h:2
 msgid "Line"
-msgstr "Çizgi"
+msgstr "Satýr"
 
 #: data/etspecs/messages-table.etspec.h:4
 msgid "Original"
@@ -2030,5 +2130,4 @@ msgstr "Sýkýþtýrýlmýþ gettext po dosyasý"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr "Gettext po dosyasý"
-
 
