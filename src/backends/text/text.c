@@ -32,6 +32,7 @@
 #include "../../parse.h"
 #include "../../prefs.h"
 #include "../../runtime-config.h"
+#include "../../translator.h"
 #include "../../utils.h"
 
 /*
@@ -104,11 +105,14 @@ msgstr \"\"\n\
 \"MIME-Version: %s\\n\"\n\
 \"Content-Type: text/plain; charset=%s\\n\"\n\
 \"Content-Transfer-Encoding: %s\\n\"\n\n",
-		filename, author, email,
+		filename, 
+		gtranslator_translator->name, gtranslator_translator->email,
 		filename,
 		header->pot_date, header->po_date,
 		header->translator, header->tr_email,
-		language, lg, header->mime_version,
+		gtranslator_translator->language->name, 
+		gtranslator_translator->language->group_email, 
+		header->mime_version,
 		header->charset, header->encoding);
 
 	while((line = gtranslator_utils_getline(text_file)) !=NULL)
@@ -163,11 +167,12 @@ gboolean backend_save(void)
 	 * If we didn't have got a language code extended filename yet,
 	 *  extend the current filename to be language code extended.
 	 */
-	if(!nautilus_istr_has_suffix(po->filename, lc))
+	if(!nautilus_istr_has_suffix(po->filename, gtranslator_translator->language->locale))
 	{
 		gchar *oldname;
 		
-		oldname=g_strdup_printf("%s.%s", po->filename, lc);
+		oldname=g_strdup_printf("%s.%s", 
+			po->filename, gtranslator_translator->language->locale);
 
 		g_free(po->filename);
 		po->filename=oldname;
