@@ -48,6 +48,7 @@ typedef struct
 	GList		*resources;
 	
 	gchar		*filename;
+	gchar		*encoding;
 	gchar		*serial_date;
 
 	gint		serial;
@@ -347,6 +348,8 @@ void gtranslator_learn_init()
 		gtranslator_learn_buffer->doc=xmlParseFile(gtranslator_learn_buffer->filename);
 		g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
 
+		gtranslator_learn_buffer->encoding=e_xml_get_string_prop_by_name(gtranslator_learn_buffer->doc->xmlRootNode, "encoding");
+
 		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode->xmlChildrenNode;
 		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 
@@ -441,6 +444,10 @@ void gtranslator_learn_init()
 
 		xmlFreeDoc(gtranslator_learn_buffer->doc);
 	}
+	else
+	{
+		gtranslator_learn_buffer->encoding=NULL;
+	}
 	
 	/*
 	 * Now we'd be inited after all.
@@ -481,9 +488,10 @@ void gtranslator_learn_shutdown()
 	 * Set the encoding of the XML file to get a cleanly-structured 
 	 *  and well-formed XML document.
 	 */
-	if(gtranslator_translator->language->encoding)
+	if(gtranslator_learn_buffer->encoding)
 	{
-		gtranslator_learn_buffer->doc->encoding=g_strdup(gtranslator_translator->language->encoding);
+		gtranslator_learn_buffer->doc->encoding=g_strdup(gtranslator_learn_buffer->encoding);
+		GTR_FREE(gtranslator_learn_buffer->encoding);
 	}
 
 	/*

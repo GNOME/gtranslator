@@ -39,7 +39,7 @@ typedef struct
 	gboolean	 changed;
 	gboolean	 shown;
 	
-	gint			 changes;
+	gint		 changes;
 
 	GVoidFunc	 read_all_options_function;
 } GtrPrefsDialog;

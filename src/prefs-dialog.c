@@ -55,13 +55,13 @@ static void select_row_function(GtkCList	*list,
 	gpointer dialog)
 {
 	g_return_if_fail(list!=NULL);
-	g_return_if_fail(row < 0);
+	g_return_if_fail(row > 0);
 
 	/*
 	 * Only react onn a left-click on the clist and also check the row
 	 *  value for sanity.
 	 */
-	if(row <= g_list_length(GTR_PREFS_DIALOG(dialog)->sections) &&
+	if(row < g_list_length(GTR_PREFS_DIALOG(dialog)->sections) &&
 		event->button==1)
 	{
 		GtkWidget	*table;
@@ -80,7 +80,7 @@ static void select_row_function(GtkCList	*list,
 		e_paned_pack2(E_PANED(GTR_PREFS_DIALOG(dialog)->pane),
 			table, TRUE, FALSE);
 
-		gtk_widget_show(table);
+		gtk_widget_show_all(table);
 	}
 }
 
@@ -172,8 +172,8 @@ GtrPrefsDialog *gtranslator_prefs_dialog_new(GVoidFunc read_all_options_func)
 	/*
 	 * Disable the "Ok" and "Apply" buttons by default.
 	 */
-	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 0, FALSE);
-	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 1, FALSE);
+	gnome_dialog_set_sensitive(GNOME_DIALOG(GTR_PREFS_DIALOG(dialog)->dialog), 0, FALSE);
+	gnome_dialog_set_sensitive(GNOME_DIALOG(GTR_PREFS_DIALOG(dialog)->dialog), 1, FALSE);
 
 	/*
 	 * Hook in the generalized callback functions for the dialog.
@@ -256,8 +256,8 @@ void gtranslator_prefs_dialog_changed(GtrPrefsDialog *dialog)
 	GTR_PREFS_DIALOG(dialog)->changed=TRUE;
 	GTR_PREFS_DIALOG(dialog)->changes++;
 
-	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 0, TRUE);
-	gnome_dialog_set_sensitive(GNOME_DIALOG(dialog->dialog), 1, TRUE);
+	gnome_dialog_set_sensitive(GNOME_DIALOG(GTR_PREFS_DIALOG(dialog)->dialog), 0, TRUE);
+	gnome_dialog_set_sensitive(GNOME_DIALOG(GTR_PREFS_DIALOG(dialog)->dialog), 1, TRUE);
 }
 
 /*
