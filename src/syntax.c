@@ -35,6 +35,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 {
 	#define clear_string(x) x=g_string_truncate(x, 0)
 	GString *string=g_string_new("");
+	GdkColor *color;
 	gint cp;
 	
 	g_return_if_fail(textwidget!=NULL);
@@ -73,12 +74,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					string=g_string_append_c(string,
 						msg[cp]);
 				}
-					
-				gtk_text_insert(GTK_TEXT(textwidget),
-					NULL,
-					gtranslator_syntax_get_gdk_color(BLUE),
-					NULL,
-					string->str, -1);
+				
+				color = gtranslator_syntax_get_gdk_color(BLUE);
 
 				break;
 		
@@ -119,12 +116,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 					}
 				}
 
-				gtk_text_insert(GTK_TEXT(textwidget),
-				NULL,
-				gtranslator_syntax_get_gdk_color(RED),
-				NULL,
-				string->str, -1);
-				
+				color = gtranslator_syntax_get_gdk_color(RED);
+
 				break;
 				
 			/*
@@ -145,12 +138,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				string=g_string_append_c(string,
 					msg[cp]);
 
-				gtk_text_insert(GTK_TEXT(textwidget),
-				NULL, 
-				gtranslator_syntax_get_gdk_color(ORANGE),
-				NULL,
-				string->str, -1);
-				
+				color = gtranslator_syntax_get_gdk_color(ORANGE);
+
 				break;
 		
 			/*
@@ -168,12 +157,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				string=g_string_append_c(string,
 					msg[cp]);
 				
-				gtk_text_insert(GTK_TEXT(textwidget),
-					NULL,
-					gtranslator_syntax_get_gdk_color(BROWN),
-					NULL,
-					string->str, -1);
-				
+				color = gtranslator_syntax_get_gdk_color(BROWN);
+
 				break;
 			
 			/*
@@ -201,11 +186,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				string=g_string_append_c(string,
 					msg[cp]);
 				
-				gtk_text_insert(GTK_TEXT(textwidget),
-					NULL,
-					gtranslator_syntax_get_gdk_color(MAROON),
-					NULL,
-					string->str, -1);
+				color = gtranslator_syntax_get_gdk_color(MAROON);
 				
 				break;
 				
@@ -218,11 +199,14 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				string=g_string_append_c(string,
 					msg[cp]);
 				
-				gtk_text_insert(GTK_TEXT(textwidget),
-					NULL, NULL, NULL,
-					string->str, -1);
+				color = NULL;
+
 				break;
 		}
+
+		gtk_text_insert(GTK_TEXT(textwidget),
+			NULL, color, NULL,
+			string->str, -1);
 	}
 
 	gtk_text_thaw(GTK_TEXT(textwidget));
