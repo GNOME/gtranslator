@@ -60,6 +60,7 @@ static void gtranslator_go_to_dialog_clicked(GtkDialog * dialog, gint button,
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GtkDialog * dialog, gint button,
 	gpointer findy);
+static void ih_toggled(GtkWidget *widget, gpointer useless);
 
 #ifdef UTF8_CODE
 /*
@@ -657,6 +658,14 @@ static void match_case_toggled(GtkWidget * widget, gpointer useless)
 			      GtrPreferences.match_case);
 }
 
+static void ih_toggled(GtkWidget *widget, gpointer useless)
+{
+	GtrPreferences.ignore_hotkeys =
+	    gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+	gtranslator_config_set_bool("find/ignore_hotkeys",
+			      GtrPreferences.ignore_hotkeys);
+}
+
 static void find_in_activated(GtkWidget * widget, gpointer which)
 {
 	GtrPreferences.find_in = GPOINTER_TO_INT(which);
@@ -673,6 +682,17 @@ static void find_dlg_clicked(GtkDialog * dialog, gint button,
 	if (button == GTK_RESPONSE_OK) {
 		entry = gnome_entry_gtk_entry(findy);
 		find_what = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+		g_return_if_fail(find_what!=NULL);
+
+		if(GtrPreferences.ignore_hotkeys)
+		{
+			gchar	*newstr;
+			
+			newstr=nautilus_str_strip_chr(find_what, '_');
+			GTR_FREE(find_what);
+			find_what=newstr;
+		}
+		
 		gtranslator_find(NULL, find_what);
 		gtranslator_actions_enable(ACT_FIND_AGAIN, ACT_END);
 		return;
@@ -685,7 +705,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	int findMenu=0;
 	static GtkWidget *dialog = NULL;
 	GtkWidget *label, *findy, *subfindy, *match_case;
-	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
+	GtkWidget *find_in, *menu, *menu_item, *option, *hbox, *ih_button;
 
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -755,6 +775,14 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	hbox = gtk_hbox_new(FALSE, 0);
 
 	/*
+	 * Translators: this means that the hotkeys ("_" etc.) are ignored
+	 *  during the search action.
+	 */
+	ih_button=gtk_check_button_new_with_label(_("Ignore hotkeys"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ih_button),
+    			   GtrPreferences.ignore_hotkeys);
+
+	/*
 	 * Pack the single elements into the dialog.
 	 */
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
@@ -767,6 +795,8 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 			   FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), option,
 			   TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), ih_button,
+			   FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
 			   FALSE, FALSE, 0);
 	
@@ -774,6 +804,8 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 			 G_CALLBACK(find_dlg_clicked), findy);
 	g_signal_connect(G_OBJECT(match_case), "toggled",
 			 G_CALLBACK(match_case_toggled), NULL);
+	g_signal_connect(G_OBJECT(ih_button), "toggled",
+			 G_CALLBACK(ih_toggled), NULL);
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 	

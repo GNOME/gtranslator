@@ -36,6 +36,7 @@ struct {
 	
 	guint match_case		: 1;
 	guint find_in			: 3;
+	guint ignore_hotkeys		: 1;
 	guint use_learn_buffer		: 1;
 	guint fuzzy_matching		: 1;
 	guint auto_learn		: 1;

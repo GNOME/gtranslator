@@ -1003,7 +1003,9 @@ void gtranslator_preferences_read(void)
 		"find/case_sensitive");
 	GtrPreferences.find_in = gtranslator_config_get_int("find/find_in");
 	gtranslator_update_regex_flags();
-	
+
+	GtrPreferences.ignore_hotkeys = gtranslator_config_get_bool(
+		"find/ignore_hotkeys");
 	GtrPreferences.fill_header = gtranslator_config_get_bool(
 		"toggles/fill_header");
 	GtrPreferences.show_comment = gtranslator_config_get_bool(
