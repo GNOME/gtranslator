@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-03 22:56+0200\n"
+"POT-Creation-Date: 2003-12-28 21:46+0000\n"
 "PO-Revision-Date: 2003-08-29 15:20+0300\n"
 "Last-Translator: RIDVAN CAN <ridvan@geleceklinux.org>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -393,9 +393,11 @@ msgid "Edit comment"
 msgstr "Yorumu değiştir"
 
 #: src/gui.c:501
-#, c-format
+#, fuzzy, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ Geride %i Fuzzy kaldı ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ Geride %i Fuzzy kaldı ]"
+msgstr[1] "%s [ Geride %i Fuzzy kaldı ]"
 
 #: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
 msgid "Fuzzy"
@@ -415,9 +417,11 @@ msgid "Translated"
 msgstr "Çevrilmiş"
 
 #: src/gui.c:524
-#, c-format
+#, fuzzy, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ %i Çevrilmemiş ileti kaldı ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ %i Çevrilmemiş ileti kaldı ]"
+msgstr[1] "%s [ %i Çevrilmemiş ileti kaldı ]"
 
 #: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
 msgid "Untranslated"
@@ -1276,11 +1280,17 @@ msgid "Could not open file `%s' for writing!"
 msgstr "`%s' dosyası yazılmak üzere açılamadı!"
 
 #: src/parse.c:1034
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "File %s\n"
+"contains %d fuzzy message"
+msgid_plural ""
+"File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
+"%s dosyası\n"
+"%d fuzzy ileti içeriyor."
+msgstr[1] ""
 "%s dosyası\n"
 "%d fuzzy ileti içeriyor."
 
@@ -1624,7 +1634,7 @@ msgstr "Ziplenmiş po dosyası `%s' kaydedilemedi!"
 msgid "Session restored successfully."
 msgstr "Oturum başarıyla yeniden yüklendi."
 
-#: src/stylistics.c:265
+#: src/stylistics.c:267
 msgid "No font set! Using default font"
 msgstr "Yazı tipi belirtilmemiş! Öntanımlı yazı tipi kullanılacak"
 
@@ -1632,7 +1642,7 @@ msgstr "Yazı tipi belirtilmemiş! Öntanımlı yazı tipi kullanılacak"
 #. * Use gtranslator's font in this case -- should be a fallback font
 #. *  for your language.
 #.
-#: src/stylistics.c:271
+#: src/stylistics.c:273
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-ISO8859-9"
 
