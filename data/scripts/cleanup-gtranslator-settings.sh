@@ -1,6 +1,7 @@
 #!/bin/sh
 #
-# (C) 2001-2002 Fatih Demir <kabalak@gtranslator.org>
+# (C) 2001-2003 Fatih Demir <kabalak@gtranslator.org>
+#		Juan RP <juan@xtraeme.UnixBSD.org>
 #
 # cleanup-gtranslator-settings.sh -- Cleans up gtranslator's settings and
 #  "personal data" directories for the user running this script -- it simply
@@ -22,7 +23,24 @@ case $1 in
 esac
 
 remove_commands ()  {
-	killall gtranslator 2>&1 >/dev/null ; sleep 3 && \
+	# Check if we have killall or pkill
+	case `uname` in
+	FreeBSD)
+		KILLALL=/usr/bin/killall
+	;;
+	NetBSD|SunOS)
+		KILLALL=/usr/bin/pkill
+	;;
+	Linux)
+		if [ -x /usr/bin/pkill ]; then
+			KILLALL=/usr/bin/pkill
+		elif [ -x /usr/bin/killall ]; then
+		KILLALL=/usr/bin/killall
+		fi
+	;;
+	esac
+
+	$KILLALL gtranslator 2>&1 >/dev/null ; sleep 3 && \
 	gconftool --shutdown 2>&1 >/dev/null && sleep 3 && \
 	rm -rf ~/.gtranslator ~/.gconf/apps/gtranslator \
 		~/.gnome/gtranslator ~/.gnome/accels/gtranslator
