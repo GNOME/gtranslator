@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-26 22:43+0200\n"
+"POT-Creation-Date: 2003-08-26 12:54+0200\n"
 "PO-Revision-Date: 2003-06-15 15:16+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "The Gnome translation program"
 msgstr "Het Gnome vertaalprogramma"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1116
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -35,7 +35,7 @@ msgstr ""
 "Gtranslator is bewerkingsprogramma voor po bestanden met veel toeters en "
 "bellen."
 
-#: src/bookmark.c:93 src/dialogs.c:1512
+#: src/bookmark.c:93 src/dialogs.c:1510
 #, fuzzy
 msgid "No comment"
 msgstr "Commentaar bewerken"
@@ -150,7 +150,7 @@ msgstr "Hoofdlettergevoelig"
 msgid "English"
 msgstr "Engels"
 
-#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:323
+#: src/dialogs.c:738 src/dialogs.c:855 src/gui.c:522 src/messages-table.c:319
 msgid "Translated"
 msgstr "Vertaald"
 
@@ -334,15 +334,15 @@ msgstr "Berichtinhoud"
 msgid "Query string:"
 msgstr "Tekst:"
 
-#: src/dialogs.c:1320
+#: src/dialogs.c:1324
 msgid "No query string given!"
 msgstr "Geen tekst opgegeven voor de zoekopdracht!"
 
-#: src/dialogs.c:1342
+#: src/dialogs.c:1346
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "Kon geen antwoord vinden in de leerbuffer voor uw zoekopdracht!"
 
-#: src/dialogs.c:1354
+#: src/dialogs.c:1358
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
@@ -355,7 +355,7 @@ msgstr ""
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1424
+#: src/dialogs.c:1428
 msgid "Query's result translation is already there!"
 msgstr "Het resultaat van de vraag is reeds aanwezig!"
 
@@ -367,12 +367,12 @@ msgstr ""
 "Zal gtranslator het bestand automatisch vertalen d.m.v. de\n"
 "informatie uit uw persoonlijke leerbuffer?"
 
-#: src/dialogs.c:1492 src/dialogs.c:1520
+#: src/dialogs.c:1490 src/dialogs.c:1518
 #, fuzzy
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslatior -- commentaar bewerken"
 
-#: src/dialogs.c:1512
+#: src/dialogs.c:1510
 msgid "Comment for the bookmark:"
 msgstr ""
 
@@ -398,7 +398,7 @@ msgstr "Commentaar bewerken"
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i onzeker over ]"
 
-#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:315
+#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:311
 msgid "Fuzzy"
 msgstr "Onzeker"
 
@@ -416,7 +416,7 @@ msgstr "Niet vertalen (Bericht & vertaling zijn hetzelfde)"
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i Onvertaald over ]"
 
-#: src/gui.c:531 src/gui.c:533 src/messages-table.c:306
+#: src/gui.c:531 src/gui.c:533 src/messages-table.c:302
 msgid "Untranslated"
 msgstr "Onvertaald"
 
@@ -541,7 +541,7 @@ msgstr "Brits"
 
 #: src/languages.c:65
 msgid "Bulgarian"
-msgstr "Bulgarisch"
+msgstr "Bulgaars"
 
 #: src/languages.c:69
 msgid "Catalan"
@@ -657,11 +657,11 @@ msgstr "Koreaans"
 
 #: src/languages.c:185
 msgid "Latvian"
-msgstr "Letland"
+msgstr "Lets"
 
 #: src/languages.c:189
 msgid "Lithuanian"
-msgstr "Lithouws"
+msgstr "Litouws"
 
 #: src/languages.c:193
 msgid "Malay/Bahasa Melayu"
@@ -776,17 +776,15 @@ msgid "Welsh"
 msgstr "Welsh"
 
 #: src/main.c:80
-#, fuzzy
-msgid "Auto translate the po file"
+msgid "Auto translate the po file & exit"
 msgstr ".po bestand automatisch vertalen & Afsluiten"
 
 #: src/main.c:80 src/main.c:96
 msgid "FILENAME"
-msgstr "FILENAME"
+msgstr "BESTANDSNAAM"
 
 #: src/main.c:84
-#, fuzzy
-msgid "Show build specifications"
+msgid "Show build information/specifications"
 msgstr "Geef build informatie / specificaties"
 
 #: src/main.c:88
@@ -803,11 +801,10 @@ msgstr "Specificeer de afmetingen van het hoofdvenster"
 
 #: src/main.c:92
 msgid "GEOMETRY"
-msgstr "AFMETINGEN"
+msgstr "GEOMETRIE"
 
 #: src/main.c:96
-#, fuzzy
-msgid "Learn the file completely"
+msgid "Learn the file completely & exit"
 msgstr "Leer het hele bestand & sluit af"
 
 #: src/main.c:139
@@ -995,7 +992,7 @@ msgstr "Ga een bericht terug"
 
 #: src/menus.c:215
 msgid "_Next"
-msgstr "V_olgende"
+msgstr "_Volgende"
 
 #: src/menus.c:216 src/menus.c:326
 msgid "Move forward one message"
@@ -1035,7 +1032,7 @@ msgstr "Ga naar het volgende onvertaalde bericht"
 
 #: src/menus.c:255
 msgid "_Bookmarks"
-msgstr "B_ladwijzers"
+msgstr "Bl_adwijzers"
 
 #: src/menus.c:256
 msgid "_Colorschemes"
@@ -1218,16 +1215,16 @@ msgstr "Het bestand '%s' bestaat helemaal niet!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:677
+#: src/parse.c:669
 msgid "Header record not found - defaulting from preferences"
 msgstr ""
 
-#: src/parse.c:693
+#: src/parse.c:685
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:905
+#: src/parse.c:897
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1238,12 +1235,12 @@ msgstr ""
 "Dit zijn sjablonen die automatisch door programma's worden aangemaakt.\n"
 "Uw bestand hoort de extensie *.po te hebben, waarschijnlijk '%s.po'"
 
-#: src/parse.c:967
+#: src/parse.c:959
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Kon het bestand '%s' niet openen om in te schrijven!"
 
-#: src/parse.c:1019
+#: src/parse.c:1011
 #, c-format
 msgid ""
 "File %s\n"
@@ -1252,11 +1249,11 @@ msgstr ""
 "Bestand %s\n"
 "bevat %d onzekere vertalingen"
 
-#: src/parse.c:1288
+#: src/parse.c:1280
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Sorry, msgfmt is niet op uw systeem aanwezig!"
 
-#: src/parse.c:1323
+#: src/parse.c:1315
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1277,14 +1274,12 @@ msgstr "gtranslator -- voorkeuren"
 #. * Files page
 #.
 #: src/prefs.c:320
-#, fuzzy
 msgid "Files"
-msgstr "Eerste"
+msgstr "Bestanden"
 
 #: src/prefs.c:321 src/prefs.c:496 src/prefs.c:553
-#, fuzzy
 msgid "General"
-msgstr "Generator:"
+msgstr "Algemeen"
 
 #: src/prefs.c:322
 #, fuzzy
@@ -1402,9 +1397,8 @@ msgid "Background:"
 msgstr "Achtergrondkleur:"
 
 #: src/prefs.c:413
-#, fuzzy
 msgid "Contents"
-msgstr "Commentaar"
+msgstr "Inhoud"
 
 #: src/prefs.c:414
 #, fuzzy
