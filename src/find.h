@@ -1,5 +1,5 @@
 /**
-* Fatih Demir [ kabalak@gmx.net ]
+* Gediminas Paulauskas <menesis@delfi.lt>
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
@@ -11,22 +11,23 @@
 #ifndef GTR_FIND_H 
 #define GTR_FIND_H 1
 
-#include "parse.h"
+#include <gtk/gtkwidget.h>
+
+typedef gboolean (*FEFunc) (gpointer list_item, gpointer user_data);
+
+gboolean for_each_msg(GList * first, FEFunc func, gpointer user_data);
 
 /**
-* The results list.
+* The search function
 **/
-GList *results;
+void find_do(GtkWidget * widget, gpointer target);
 
-/**
-* The main search/find-function.
-**/
-gchar *gtr_find(GList *list,char *query);
+/* Finds and shows next fuzzy message */
+void goto_next_fuzzy(GtkWidget * widget, gpointer useless);
 
-/**
-* A simple voodoo-function which always returns something, but 
-*  always something not useful.
-**/
-gchar *gtr_find_get_hastalavista(const char *query);
+/* Finds and shows next untranslated message */
+void goto_next_untranslated(GtkWidget * widget, gpointer useless);
+
+void update_flags(void);
 
 #endif

@@ -1,5 +1,6 @@
 /**
 * Fatih Demir [ kabalak@gmx.net ]
+* Gediminas Paulauskas <menesis@delfi.lt>
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
@@ -11,24 +12,11 @@
 #ifndef GTR_GUI_H
 #define GTR_GUI_H 1
 
-#ifdef HAVE_CONFIG_H
-	#include <config.h>
-#endif
-
 #include <gnome.h>
 
 #ifdef USE_WINDOW_ICON 
 #include <libgnomeui/gnome-window-icon.h>
 #endif
-
-#include "about.h"
-#include "dnd.h"
-#include "dialogs.h"
-#include "prefs.h"
-#include "msg_db.h"
-#include "parse.h"
-
-void create_app1 (void);
 
 /**
 * The globally needed widgets
@@ -39,46 +27,69 @@ GtkWidget *trans_box;
 GtkWidget *text1;
 GtkWidget *appbar1; 
 
+void create_app1(void);
+
 /**
 * For the status messages
 **/
 gchar status[128];
 
-/**
-* Enable/disable the buttons of the toolbars if a file is opened/
-*  closed.
-**/
-void enable_actions(const gchar *first, ...);
-void disable_actions(const gchar *first, ...);
+/* Actions IDs */
+enum {
+	ACT_COMPILE,
+	ACT_SAVE,
+	ACT_SAVE_AS,
+	ACT_REVERT,
+	ACT_CLOSE,
+	/************/
+	ACT_UNDO,
+	ACT_CUT,
+	ACT_COPY,
+	ACT_PASTE,
+	ACT_CLEAR,
+	ACT_FIND,
+	ACT_FIND_AGAIN,
+	ACT_HEADER,
+	/************/
+	ACT_FIRST,
+	ACT_BACK,
+	ACT_NEXT,
+	ACT_LAST,
+	ACT_GOTO,
+	ACT_NEXT_FUZZY,
+	ACT_NEXT_UNTRANSLATED,
+	/************/
+	ACT_TRANSLATED,
+	ACT_FUZZY,
+	ACT_STICK,
+	/************/
+	ACT_ADD,
+	ACT_QUERY,
+	/* This must always be the last, add new entries above */
+	ACT_END
+};
+
+void change_actions(gboolean state, ...);
+#define enable_actions(args...) change_actions(TRUE, args, ACT_END)
+#define disable_actions(args...) change_actions(FALSE, args, ACT_END)
 void disable_actions_no_file(void);
+void enable_actions_just_opened(void);
 
-// Various functions for displaying messages
-void update_msg(GList *li);
-void display_msg(GList *list_item);
+/* Various functions for displaying messages */
+void update_msg(void);
+void display_msg(GList * list_item);
 void clean_text_boxes(void);
-void toggle_msg_status(GtkWidget *widget,gpointer which);
+void toggle_msg_status(GtkWidget * widget, gpointer which);
 
-/** 
- * General functions -- these do operate on the global lists where they get
- * the first/previous/next/last msgid & msgstr's ...
-**/
+/* Shows the needed message in text boxes */
+void goto_given_msg(GList * to_go);
+void goto_first_msg(GtkWidget * widget, gpointer useless);
+void goto_prev_msg(GtkWidget * widget, gpointer useless);
+void goto_next_msg(GtkWidget * widget, gpointer useless);
+void goto_last_msg(GtkWidget * widget, gpointer useless);
+void goto_nth_msg(GtkWidget * widget, gpointer number);
 
-void goto_first_msg(GtkWidget *widget,gpointer useless);
-void goto_prev_msg(GtkWidget *widget,gpointer useless);
-void goto_next_msg(GtkWidget *widget,gpointer useless);
-void goto_last_msg(GtkWidget *widget,gpointer useless);
-void goto_nth_msg(GtkWidget *widget,gpointer adjustment);
-void goto_given_msg(GtkWidget *widget,gpointer to_go);
-
-/**
-* The text-based callbacks
-**/
-
+/* If TRUE, means that trans_box is being changed by program, not user */
 gboolean nothing_changes;
-
-/**
-* The search function
-**/
-void search_do(GtkWidget *widget,gpointer wherefrom);
 
 #endif

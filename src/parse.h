@@ -1,13 +1,10 @@
 /**
 * Fatih Demir [ kabalak@gmx.net ] 
+* Gediminas Paulauskas <menesis@delfi.lt>
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
-* This is the parser header ...
-* Totally written by me ; I think you can see it .
-* 
-* Yes, of course ;) I even could replace half of it's contents...
-* Gediminas Paulauskas <menesis@delfi.lt>
+* Routines, which work with files and raw messages, or change them, are here
 *
 * -- the header
 **/
@@ -16,44 +13,47 @@
 #define GTR_PARSE_H 1
 
 #ifdef HAVE_CONFIG_H
-	#include <config.h>
+#include <config.h>
 #endif
 
-#include <string.h>
 #include <stdio.h>
-#include <errno.h>
+
+#ifdef HAVE_MY_REGEX_CACHE
+  #include <libgnome/gnome-regex.h>
+#else
+  #include "gnome-regex.h"
+#endif
 
 #include "messages.h"
 #include "header_stuff.h"
-#include "gui.h"
 
 /**
-* The new filename
+* The general po-file structure
 **/
-gchar *i_love_this_file;
+typedef struct {
+	/* Absolute file name */
+	gchar *filename;
+	/* The header */
+	GtrHeader *header;
+	/* All the po->messages are stored here */
+	GList *messages;
+	/* The length of messages list */
+	guint length;
+	/* A pointer to the currently displayed message */
+	GList *current;
+	/* Marks if the file was changed; */
+	guint file_changed : 1;
+} GtrPo;
 
-/**
-* A list for the messages.
-**/
-GList *messages;
-void free_messages(void);
+#define GTR_PO(x) ((GtrPo *)x)
 
-/**
-* The currently displayed message
-**/
-GList *cur_msg;
+/* The main variable for storing info about file */
+GtrPo *po;
 
-/**
-* A gboolean for the silly question if a file is open ...
-**/
+/* Marks if any file was opened */
 gboolean file_opened;
 
-/**
-* A silly question wants a silly answer ...
-**/
-gboolean file_changed;
-
-// Marks if the current message was changed;
+/* Marks if the current message was changed; */
 gboolean message_changed;
 
 /**
@@ -61,8 +61,8 @@ gboolean message_changed;
 **/
 void check_file(FILE *);
 
-// Updates and returns message status.
-GtrMsgStatus get_msg_status(GtrMsg *msg);
+/* Changes message fuzzy status */
+void mark_msg_fuzzy(GtrMsg * msg, gboolean fuzzy);
 
 /**
 * The internally used parse-function
@@ -72,12 +72,15 @@ void parse(const char *po);
 /**
 * Callbacks for the widgets
 **/
-void parse_the_file(GtkWidget *widget,gpointer of_dlg);
-void save_the_file(GtkWidget *widget,gpointer sfa_dlg);
-void save_current_file(GtkWidget *widget,gpointer useless);
-void revert_file(GtkWidget *widget, gpointer useless);
-void close_file(GtkWidget *widget, gpointer useless);
+void parse_the_file(GtkWidget * widget, gpointer of_dlg);
+void save_the_file(GtkWidget * widget, gpointer sfa_dlg);
+void save_current_file(GtkWidget * widget, gpointer useless);
+void revert_file(GtkWidget * widget, gpointer useless);
+void close_file(GtkWidget * widget, gpointer useless);
 
-void compile(GtkWidget *widget,gpointer useless);
+void compile(GtkWidget * widget, gpointer useless);
+
+/* A cache for saving regexps */
+GnomeRegexCache *rxc;
 
 #endif

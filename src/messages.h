@@ -1,12 +1,11 @@
 /**
 * Fatih Demir [ kabalak@gmx.net ]
+* Gediminas Paulauskas <menesis@delfi.lt>
 * 
 * (C) 2000 Published under GNU GPL V 2.0+
 *
-* The messages-general stuff will be stored 
-* here .
+* The messages-general stuff will be stored here .
 *
-* -- messages are@home->*this;
 **/
 
 #ifndef GTR_MESSAGES_H
@@ -15,65 +14,30 @@
 #include <glib.h>
 
 /**
-* Typedefs for the `new' data-types
+* The different stati of the messages.
 **/
-typedef enum   _GtrMsgStatus	GtrMsgStatus;
-typedef struct _GtrMsg	GtrMsg;
-typedef struct _GtrPo	GtrPo;
-
-// defines for easy casting
-#define GTR_MSG_STATUS(x) ((GtrMsgStatus *)x)
-#define GTR_MSG(x) ((GtrMsg *)x)
-#define GTR_PO(x) ((GtrPo *)x)
-
-/**
-* The different stati of the translatable
-*  messages .
-**/
-enum _GtrMsgStatus
-{
-	GTRANSLATOR_MSG_STATUS_UNKNOWN		= 0,
-	GTRANSLATOR_MSG_STATUS_TRANSLATED	= 1 << 0,
-	GTRANSLATOR_MSG_STATUS_FUZZY		= 1 << 1,
- 	// If the message shouldn't be translated 
-	// (Web-adresses/trade mark names)
-	GTRANSLATOR_MSG_STATUS_STICK		= 1 << 2
-};
+typedef enum {
+	GTR_MSG_STATUS_UNKNOWN		= 0,
+	GTR_MSG_STATUS_TRANSLATED	= 1 << 0,
+	GTR_MSG_STATUS_FUZZY		= 1 << 1,
+	/* If the message shouldn't be translated (web adresses/trade marks) */
+	GTR_MSG_STATUS_STICK		= 1 << 2
+} GtrMsgStatus;
 
 /**
 * Again a try to make a common usable message-struct
 **/
-struct _GtrMsg
-{
+typedef struct {
+	gchar *comment;
 	gchar *msgid;
 	gchar *msgstr;
-	gchar *comment;
-// What this pos is used for?
+	/* What this pos is used for? */
 	gint pos;
 	GtrMsgStatus status;
-};
+} GtrMsg;
 
-/**
-* The general po-file structure
-**/
-struct _GtrPo
-{
-	/**
-	* The filename
-	**/
-	gchar *filename;
-	/**
-	* If no translated entry has been found this'd set to TRUE.
-	**/
-	gboolean notrans;
-	/**
-	* A pointer to the first message
-	**/
-	GtrMsg *first;
-	/**
-	* A pointer to the last message
-	**/
-	GtrMsg *last;
-};
+/* Defines for easy casting */
+#define GTR_MSG_STATUS(x) ((GtrMsgStatus *)x)
+#define GTR_MSG(x) ((GtrMsg *)x)
 
 #endif

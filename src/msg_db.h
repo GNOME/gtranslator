@@ -6,8 +6,7 @@
 * Here will be the db-type stuff. 
 * 
 * I'm thinking now about a complete
-*  rewrite in order to get it work on top
-*   of GConf.
+*  rewrite in order to get it work with XML
 *
 * -- the central for the stuff-*
 **/
@@ -15,71 +14,33 @@
 #ifndef GTR_MSG_DB_H
 #define GTR_MSG_DB_H 1
 
-#include "gui.h"
-#include "parse.h"
+#include <gtk/gtkwidget.h>
 
-/**
-* The default msg_db location .
-**/
-static gchar *msg_db;
+/* The filename of msg_db */
+gchar *msg_db;
 
-/**
-* Defines if the msg_db is opened 
-**/
+/* Defines if the msg_db is opened */
 gboolean msg_db_inited;
 
-/**
-* This is the variable which holds the challenge length.
-**/
-unsigned int challen;
+/* Init the msg-db ( open & check the file ) */
+int init_msg_db(void);
 
-/**
-* Init the msg-db ( open & 
-* check the file )
-**/
-int init_msg_db();
+/* Close the msg-db ( file ) & gzip it */
+void close_msg_db(void);
 
-/**
-* Close the msg-db ( file )
-* & gzip it 
-**/
-void close_msg_db();
+/* A simple callback for the msg_db-adding method. */
+void append_to_msg_db(GtkWidget * widget, gpointer useless);
 
-/**
-* This is a simple callback for the msg_db-adding method.
-**/
-void append_to_msg_db(GtkWidget *widget,gpointer useless);
+/* Put message pair to the db */
+int put_to_msg_db(const gchar * msg_id, const gchar * msg_translation);
 
-/**
-* Put this to the db
-**/
-int put_to_msg_db(const gchar *,const gchar *);
+/* Get a similar entry from the msg-db */
+gchar * get_from_msg_db(const gchar *);
 
-/**
-* Get a similar entry from 
-* the msg-db & return a ´gchar *´
-**/
-gchar *get_from_msg_db(const gchar *);
-
-/**
-* Returns the length of the msg-db
-* in bytes :
-**/
-unsigned int get_msg_db_size();
-
-/**
-* Sets the challenge-length.
-**/
+/* Sets the challenge-length. */
 void set_challenge_length(int length);
 
-/**
-* Gets the challenge-length.
-**/
-unsigned int get_challenge_length();
-
-/**
-* The linked lists :
-**/
-GList *msg_list, *cur_list;
+/* Gets the challenge-length. */
+unsigned int get_challenge_length(void);
 
 #endif

@@ -1,3 +1,239 @@
+2000-09-10  Fatih Demir	<kabalak@gmx.net>
+
+	* Makefile.am: Added the gnome-regex sources to the build sources
+		without any conditional tests ( libgnome doesn't have got
+		 the gnome_regex_cache_new_with_size ).
+	
+2000-08-23  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* main.c, parse.c: now absolute file name is got in parse(), wherever
+		it was called from. Added some newline, removed some comments,
+		to ease the reading of huge parse() and main() functions.
+		Ensured file_opened is always in sane state and is checked
+		before doing anything with po structure (this avoids
+		segfaults).
+	* ChangeLog: why lose so much space on this file -- reformatted 
+		Fatih's	entries to be like mine. So there's half lines, but
+		size reduced only by 3k...
+	* gui.c: destroy regex cache on quit.
+	* parse.c: created actual_parse function, and moved to it the real
+		parsing from parse() to make it more clean. Change the title
+		of window to contain the filename. In actual_write, check if
+		the file has *.pot extension; if so, warn and do nothing.
+	* spell.h, spell.c, gui.c: moved spelling code from gui.c to new
+		separate files.
+	* Makefile.am: added those two files to sources.
+	* find.c: in for_each_msg, reverted to jump to po->messages when NULL 
+		reached, because of problem when passing first == NULL.
+	* dialogs.c: added fake option menu to select where to find in.
+
+2000-08-22  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gui.c: in update_msg, make both msgid and msgstr end with or without
+		'\n'.
+	* session.*, main.c: added restore_session(), if client is restored. So 
+		now goes to the same file and message number.
+	* dialog.c: renamed variables in goto_dlg to shorter ones; added policy
+		set on spin; changed dialog and label titles.
+
+2000-08-21  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* Makefile.am: some cosmetic changes, use variables instead of simple
+		../. Added -DGNOMELOCALEDIR. Added check for
+		HAVE_MY_REGEX_CACHE, if to compile and link gnome-regex.
+	* main.c: use realpath for getting absolute path.
+	* session.c: gtranslator now opens the same file on session restore.
+		Removed non-interesting comments.
+	
+2000-08-21  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* header_stuff.c: yeah, at last this works perfectly. Too much changes
+		to list, anyway it's almost complete rewrite. Changed only
+		get_header, put_header and edit_header. Use regexps to parse
+		fields. A VERY enhanced edit dialog.
+
+2000-08-20  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* parse.*, messages.h, dialogs.c, gui.c, find.c, session.c: at last
+		moved all file-specific stuff to GtrPo structure, in that
+		inserted new field -- messages list 'length'.
+	* header_stuff.*: in GtrHeader, splitted language_team into two fields:
+		language and lg_email; also, replaced 'mime_type' with 
+		'charset'.
+	
+2000-08-20  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gnome-regex.h, gnome-regex.c: copied these files here from
+		gnome-libs/libgnome, because I needed to change the cache
+		object so that it stored compilation flags along with pattern
+		and regex. Added new type GnomeRegexCacheSlot, for saving all
+		info about one regex. Also, changed everything else to reflect
+		this change. Function API did not change, just added new
+		function: gnome_regex_cache_new_with_size. However, types HAVE
+		changed, although they should be used only internally.
+	* Makefile.am: added above new files, although should be checked if
+		they are needed.
+	* parse.h: added check for gnome library version, which I will
+		commit my above changes to. Use local file, if not found.
+	* msg_db.*: Cleaned up a lot, fixed much errors, got no warnings.
+		Though not needed...
+	* find.c: in for_each_msg, get first element of given list, not
+		messages.
+
+2000-08-17  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* Again big changes. Read below: prefs.h, allmost all .c: Instead of
+		many if_* variables for preferences, created one structure
+		'wants.*', which uses only one bit for toggles.
+	* prefs.c: new option: if message was fuzzy, when changed, it could be
+		marked non-fuzzy. Changed order of options in dialog. Moved all
+		#defines to where they are used, and inserted #undefs
+		immediatelly after. Authors name & e-mail are now GtkEntry's,
+		not GnomeEntry's.
+	* parse.c, gui.c: made check_msg_status internal, used only for
+		parsing. Other functions (update_msg and mark_msg_fuzzy) change
+		the status theirselves. Rewritten update_msg,
+		toggle_msg_status. Now all the job with fuzzy entries does
+		mark_msg_fuzzy function. After toggling status, message is
+		updated. In text_has_got_changed, added call to unmark fuzzy,
+		if wanted.
+	* messages.h: moved all typedefs to struct/enum, so we don't need _Type
+		hacks. Rewritten GtrPo type, to contain entries we actually
+		use.
+	* And, while changed much, executable has got only 700 bytes, so it was
+		worth work.
+
+2000-08-17  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* parse.*: added mark_msg_fuzzy function, which does actual change to
+		message comment. Renamed get_msg_status to update_msg_status
+		and changed return type to void. Added rxc -- a regexp cache.
+	* gui.*: added a simple 'Undo' menuitem, ACT_UNDO action, 
+		undo_changes function. When toggled fuzzy status, call
+		mark_msg_fuzzy.
+	* find.c: use regexps to find. Added update_flags for match case
+		updating.
+	* main.c: create rxc and change it's size.
+	
+2000-08-16  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* dnd.*, find.*, parse.*: just another rearrangement of #include's.
+	* dnd.*: removed gtr_dnd_type -- use guint instead. Removed a_counter
+		variable, cleaned up lots of comments.
+	* .cvsignore: added tags & .libs
+
+2000-08-15  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* prefs.*, header_stuff.c: Lots of changes: moved all language lists to 
+		prefs.h, introduced lang_ref reference counting variable,
+		create_lists() and destroy_lists(). All attach_*_with_label()
+		are now in prefs.h, i.e. can be used with any other dialog.
+		That was done because edit_header now creates GnomePropertyBox,
+		not just dialog, and lets change language properties in header.
+
+2000-08-14  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* main.c: simplified main() function, by moving geometry stuff to
+		prefs.*. Query now only prints the result, no sick messages.
+	* prefs.*: created save_geometry() and restore_geometry(), removed
+		gtranslator_geometry_* variables, so that other files do not
+		have anything to do with geometry. Geometry is loaded only if
+		wanted. Added GTR_CONFIG_PREFIX.
+	* gui.c: simplified gtranslator_quit.
+	
+2000-08-10  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gui.c: initial spell checking support. It does not work well,
+		but works! I was impressed when I found gnome-spell.h!
+	
+2000-08-10  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* find.*, gui.*: renamed search_do to find_do. Created new 
+		for_each_msg function, which works the same as g_list_foreach,
+		except that it starts from specified position, and jumps to
+		first when end reached. All functions in find.h now uses it.
+		Added goto_next_untranslated function, action and callback.
+	* gui.c: fixed toggle_msg_status (rewrite). Created new
+		function enable_actions_just_opened, which is just a statement,
+		for convenience moved from parse.c. ACT_END is now initialized
+		to NULL, I think it introduced a crash before.
+		update_msg now marks message as untransalted if the
+		translation was removed.
+
+2000-08-09  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* header_stuff.[ch]: added update_header function, which
+		PO-Revision_Date field.
+	* parse.c: called above from actual_write().
+	* find.[ch], gui.[ch]: added new menu item -- "Next fuzzy", callback
+		for it, ACT_NEXT_FUZZY action (which is disabled when there are
+		no more fuzzy messages).
+
+2000-08-08  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* header_stuff.[ch]: added put_header (what a bad name...) function.
+		Also, enriched GtrHeader structure with comment field, filled
+		it in get_header and freed in free_header.
+	* parse.c: because of above change, removed header_li variable. Now the
+		header list item is completely destroyed, and created a new
+		message when writing the file. Also, give a warning if file has
+		no header. In parse(), prepend a message to messages, and then
+		reverse - optimization for speed. Removed some comments, where
+		the code was self-explanatory. Added a check if any line was
+		read, if none -- give an error (and do not crash :)). In
+		compile() -- write the po-file to temporary one, and compile
+		this -- so you don't need to save before compile.
+
+2000-08-08  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gui.c: added update_appbar function and call to it. This shows
+		current message in the statusbar. Also connected
+		clear_selection callback.
+	* parse.c: when compiling, show two dialogs, depending on success:
+		a message with message counts, or an error message.
+	* dialogs.c: added compile_error_dialog function, which shows error
+		text, which occurred during compiling.
+
+2000-08-07  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* *.*: reformatted everything with "indent -i8 -kr -l78 -fca -fc1".
+		From now I will use Linux kernel coding style
+		(/usr/src/linux/Documentation/CodingStyle).
+	* gui.[ch]: complete rewrite of "actions" code. Hash table was replaced
+		by a static array, and string identifiers -- by integer IDs.
+		This prevents typos, and saves a lot of memory and time. Also
+		done some reformatting of code and comments (removed some of
+		them).
+	* find.c: optimized search functions, implemented case insensitive
+		search.
+	
+2000-08-06  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* *.*: got the CVS 2000-08-04 version, today merged them all. I see 
+		now, that almost none changes made here by Fatih, only by me.
+		That's good. gui.c, dialogs.c, prefs.c were totally rewritten
+		by me, diff was confused :).
+	* main.c: removed free(langs) because we do not own system environment.
+		init the msg_db and parse-db only if if_use_msg_db is TRUE.
+		Removed pointless pushing - and popping of prefix. Moved query
+		handle to front, because then we do not need anything more.
+		Also, moved parsing of file after creating the app (if there
+		are problems with gui, don't bother with parsing). Because
+		filename setting is done in parse(), removed
+		gtranslator_set_filename from here.
+	* prefs.c: made not use msg db by default, as I could not make program
+		not to crash myself. 
+	* header_stuff.c: fixed that mime_type was not read. Also made new
+		header to be filled with zeroes, in case some header field was
+		not available.
+	* gui.h and so on: moved some #includes to gui.c, this caused
+		more #includes to change in another files. Hope now compiles
+		faster.
+	* find.*: removed crazy stuff (everything :)) and moved search_do
+		function to here.
+	* gui.c: because goto_given_msg(GList *) already existed, simplified
+		all other goto_* to one line with call to it.
+
 2000-08-05  Fatih Demir	<kabalak@gmx.net>
 
 	* TODO.src: Added some thoughts.

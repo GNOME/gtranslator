@@ -12,53 +12,46 @@
 #ifndef GTR_HEADER_STUFF_H
 #define GTR_HEADER_STUFF_H 1
 
-#ifdef HAVE_CONFIG_H
-	#include <config.h>
-#endif
-
-#include "gtk/gtk.h"
+#include <gtk/gtkwidget.h>
+#include "messages.h"
 
 /**
-* A typedef for the new structure.
+* The header-structure which should hold the header information
 **/
-typedef struct _GtrHeader GtrHeader;
-#define GTR_HEADER(x) ((GtrHeader *)x)
-
-/**
-* The header-structure which should hold the
-*  header informations
-**/
-struct _GtrHeader {
+typedef struct {
+	gchar *comment;
 	gchar *prj_name;
 	gchar *prj_version;
 	gchar *pot_date;
 	gchar *po_date;
-	gchar *last_translator;
-	gchar *language_team;
+	gchar *translator;
+	gchar *tr_email;
+	gchar *language;
+	gchar *lg_email;
 	gchar *mime_version;
-	gchar *mime_type;
+	gchar *charset;
 	gchar *encoding;
-};
+} GtrHeader;
+
+#define GTR_HEADER(x) ((GtrHeader *)x)
 
 /**
-* A structure which will be hopefully used now...
+* These converts header between GtrMsg and GtrHeader.
 **/
-GtrHeader *ph;
+GtrMsg * put_header(GtrHeader * h);
+GtrHeader * get_header(GtrMsg * msg);
 
-/**
-* This is the current recognition routine.
-**/
-gboolean get_header(GtrMsg *msg);
+/* Updates PO-Revision-Date and Last-Translator fields */
+void update_header(GtrHeader * h);
 
 /**
 * Frees the header structure
 **/
-void free_header(GtrHeader *the_header);
+void free_header(GtrHeader * the_header);
 
 /**
-* Creates and show the dialog for editing the header
+* Creates and shows the dialog for editing the header
 **/
-void edit_header(GtkWidget *widget,gpointer useless);
+void edit_header(GtkWidget * widget, gpointer useless);
 
 #endif 
-

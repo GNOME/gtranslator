@@ -11,55 +11,36 @@
 #ifndef GTR_DND_H
 #define GTR_DND_H 1
 
-#include "gui.h"
-#include "parse.h"
+#include <gtk/gtkselection.h>
 
 /**
 * The gtranslator's dnd-types enumeration.
 **/
-typedef enum _gtr_dnd_types gtr_dnd_types;
-
-/**
-* The used enumeration
-**/
-gtr_dnd_types dnd_type;
-
-/**
-* The D'n'D types
-**/
-enum _gtr_dnd_types
-{
+enum {
        	TARGET_URI_LIST,
 	TARGET_NETSCAPE_URL,
 	TARGET_TEXT_PLAIN
 };
 
 /**
-* The target formats
+* The used enumeration
 **/
-static GtkTargetEntry dragtypes[] =
-{
-        {
-		"text/uri-list", 0, TARGET_URI_LIST
-	},
-	{
-		"text/plain", 0, TARGET_NETSCAPE_URL
-	},
-	{
-		"text/plain", 0, TARGET_TEXT_PLAIN
-	}
-};
+guint dnd_type;
 
 /**
-* Another variable
+* The target formats
 **/
-gint a_counter;
+static GtkTargetEntry dragtypes[] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+	{ "text/plain", 0, TARGET_NETSCAPE_URL },
+	{ "text/plain", 0, TARGET_TEXT_PLAIN }
+};
 
 /**
 * The D'n'D function
 **/
-void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
-        int x,int y,GtkSelectionData *seldata, guint info,guint time,
-                gpointer data);
+void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
+		     int y, GtkSelectionData * seldata, guint info,
+		     guint time, gpointer data);
 
 #endif

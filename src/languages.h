@@ -23,8 +23,7 @@ typedef struct _lang lang;
 /**
 * The language structure 
 **/
-struct _lang
-{
+struct _lang {
 	/**
 	* The different informations for a language :
 	**/
@@ -53,183 +52,142 @@ struct _lang
 *	  but in the Prefs-box and in the other places where they appear 
 *	   translated because of a gettext(S)-call ...
 **/
-lang languages[] =
-{
+static lang languages[] = {
 	{ 
 		N_("Arabic"), "ar", "iso-8859-6",
-		"", "8bit"
-	},
+	 "", "8bit"},
 	{
 		N_("Basque"), "eu", "iso-8859-1",
-		"linux-eu@chanae.alphanet.ch", "8bit"
-	},
+	 "linux-eu@chanae.alphanet.ch", "8bit"},
         {
 		N_("Bulgarian"), "bg", "windows-1251",
-		"bg@li.org", "8bit"
-	},
+	 "bg@li.org", "8bit"},
         {
 		N_("Catalan"), "ca", "iso-8859-1",
-		"", "8bit"
-	},
+	 "", "8bit"},
         {
 		N_("Chinese/Simplified"), "zh_CN.GB2312", "GB2312",
-		"cn@linux-mandrake.com", "8bit"
-	},
+	 "cn@linux-mandrake.com", "8bit"},
         {
 		N_("Chinese/Traditional"), "zh_TW.BIG5", "BIG5",
-		"zh@li.org", "8bit"
-	},
+	 "zh@li.org", "8bit"},
 	{
 		N_("Croatian"), "hr", "iso-8859-2",
-		"lokalizacija@linux.hr", "8bit"
-	},
+	 "lokalizacija@linux.hr", "8bit"},
 	{
 		N_("Czech"), "cs", "iso-8859-2",
-		"cs@li.org", "8bit"
-	},
+	 "cs@li.org", "8bit"},
         {
 		N_("Danish"), "da", "iso-8859-1",
-		"da@li.org", "8bit"
-	},
+	 "da@li.org", "8bit"},
   	{
 		N_("English"), "en", "iso-8859-1",
-		"en@li.org", "8bit"
-	},
+	 "en@li.org", "8bit"},
 	{
 		N_("English/Canada"), "en_CA", "iso-8859-1",
-		"en@li.org", "8bit"
-	},
+	 "en@li.org", "8bit"},
 	{
 		N_("English/GB"), "en_GB", "iso-8859-1",
-		"en@li.org", "8bit"
-	},
+	 "en@li.org", "8bit"},
 	{
 		N_("English/USA"), "en", "iso-8859-1",
-		"en@li.org", "8bit"
-	},
+	 "en@li.org", "8bit"},
 	{
 		N_("Estonian"), "et", "iso-8859-15",
-		"et@li.org", "8bit"
-	},
+	 "et@li.org", "8bit"},
 	{
 		N_("Farsi"), "fa", "isiri-3342",
-		"", "8bit"
-	},
+	 "", "8bit"},
         {
 		N_("Finnish"), "fi", "iso-8859-15",
-		"fi@li.org", "8bit"
-	},
+	 "fi@li.org", "8bit"},
         {
 		N_("French"), "fr", "iso-8859-1",
-		"fr@li.org", "8bit"
-	},
+	 "fr@li.org", "8bit"},
         {
 		N_("Galician"), "gl", "iso-8859-1",
-		"gpul-traduccion@ceu.fi.udc.es", "8bit"
-	},
+	 "gpul-traduccion@ceu.fi.udc.es", "8bit"},
         {
 		N_("German"), "de", "iso-8859-1",
-		"de@li.org", "8bit"
-	},
+	 "de@li.org", "8bit"},
 	{
 		N_("Greek"), "el", "iso-8859-7",
-		"nls@tux.hellug.gr", "8bit"
-	},
+	 "nls@tux.hellug.gr", "8bit"},
         {
 		N_("Hungarian"), "hu", "iso-8859-2",
-		"", "8bit"
-	},
+	 "", "8bit"},
         {
 		N_("Indonesian"), "id", "iso-8859-1",
-		"", "8bit"
-	}, 
+	 "", "8bit"},
         {
 		N_("Italian"), "it", "iso-8859-1",
-		"it@li.org", "8bit"
-	},
+	 "it@li.org", "8bit"},
 	{
 		N_("Irish"), "ga", "iso-8859-1",
-		"", "8bit"
-	},
+	 "", "8bit"},
         {
-		N_("Japanese"),"ja", "euc-jp",
-		"translation@gnome.gr.jp", "8bit"
-	},
+	 N_("Japanese"), "ja", "euc-jp",
+	 "translation@gnome.gr.jp", "8bit"},
         {
 		N_("Korean"), "ko", "euc-kr",
-		"", "8bit"
-	},
+	 "", "8bit"},
+	{
+	 N_("Latvian"), "lv", "iso-8859-13",
+	 "", "8bit"},
 	{
 		N_("Lithuanian"), "lt", "iso-8859-13",
-		"komp_lt@konferencijos.lt", "8bit"
-	},
+	 "komp_lt@konferencijos.lt", "8bit"},
         {
 		N_("Norwegian/Bookmal"), "no", "iso-8859-1",
-		"no@li.org", "8bit"
-	},
+	 "no@li.org", "8bit"},
 	{
 		N_("Norwegian/Nynorsk"), "no@nynorsk", "iso-8859-1",
-		"no@li.org", "8bit"
-	},
+	 "no@li.org", "8bit"},
         {
 		N_("Polish"), "pl", "iso-8859-2",
-		"gnomepl@pandora.info.bielsko.pl", "8bit"
-	},
+	 "gnomepl@pandora.info.bielsko.pl", "8bit"},
         {
 		N_("Portuguese"), "pt", "iso-8859-1",
-		"pt@li.org", "8bit"
-	},
+	 "pt@li.org", "8bit"},
         {
 		N_("Portuguese/Brazil"), "pt_BR", "iso-8859-1",
-		"", "8bit"
-	},
+	 "", "8bit"},
         {
 		N_("Russian"), "ru", "koi8-r",
-		"ru@li.org", "8bit"
-	},
+	 "ru@li.org", "8bit"},
 	{
 		N_("Slovak"), "sk", "iso-8859-2",
-		"", "8bit"
-	},
+	 "", "8bit"},
         {
 		N_("Spanish"), "es", "iso-8859-1",
-		"es@li.org", "8bit"
-	},
+	 "es@li.org", "8bit"},
 	{
 		N_("Spanish/Spain"), "es_ES", "iso-8859-1",
-		"es@li.org", "8bit"
-	},
+	 "es@li.org", "8bit"},
         {
 		N_("Spanish/Mexico"), "es_MX", "iso-8859-1",
-		"", "8bit"
-	},
+	 "", "8bit"},
         {
 		N_("Swedish"), "sv", "iso-8859-1",
-		"sv@li.org", "8bit"
-	},
+	 "sv@li.org", "8bit"},
         {
 		N_("Turkish"), "tr", "iso-8859-9",
-		"tr@li.org", "8bit"
-	},
+	 "tr@li.org", "8bit"},
         {
 		N_("Ukrainian"), "uk", "koi8-u",
-		"linux@linux.org.ua", "8bit"
-	},
+	 "linux@linux.org.ua", "8bit"},
 	{
 		N_("Walloon"), "wa", "iso-8859-1", 
-		"linux-wa@chanae.alphanet.ch", "8bit"
-	},
+	 "linux-wa@chanae.alphanet.ch", "8bit"},
 	{
 		N_("Welsh"), "cy", "iso-8859-14", 
-		"", "8bit"
-	},
+	 "", "8bit"},
         /**
         * This structures-list has to be NULL-terminated
         **/
         {
-		NULL,NULL,NULL,
-		NULL,NULL
-	}
+	 NULL, NULL, NULL,
+	 NULL, NULL}
 };
 
 #endif

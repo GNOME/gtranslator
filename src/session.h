@@ -17,12 +17,16 @@
 /**
 * The die-function of gtranslator
 **/
-gint gtranslator_dies_for_you(GnomeClient *client,gpointer data);
+gint gtranslator_dies_for_you(GnomeClient * client, gpointer data);
 
 /**
 * The SaveYourself-function of gtranslator
 **/
-gint gtranslator_sleep(GnomeClient *client, gint phase, GnomeSaveStyle s_style,
-	gint shutdown, GnomeInteractStyle i_style,gint fast,gpointer data);
+gint gtranslator_sleep(GnomeClient * client, gint phase,
+		       GnomeSaveStyle s_style, gint shutdown,
+		       GnomeInteractStyle i_style, gint fast, gpointer data);
+
+/* Restores state saved during save_yourself */
+void restore_session(GnomeClient * client);
 
 #endif

@@ -13,12 +13,12 @@
 #define GTR_ABOUT_H 1
 
 #ifdef HAVE_CONFIG_H
-	#include <config.h>
+#include <config.h>
 #endif
 
 #include "gui.h"
 #include "dialogs.h"
 
-void about_box(GtkWidget *widget,gpointer useless);
+void about_box(GtkWidget * widget, gpointer useless);
 
 #endif

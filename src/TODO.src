@@ -6,47 +6,22 @@ More ideas what should be done for gtranslator [ just think of it like a
 	newgroups where we're discussing the stuff for src ... ]
 -----------------------------------------------------------------------------
 
-* next untranslated/fuzzy entry
-* appply/update the header
-* Move all po-file specific stuff to GtrPo structure.
-	(i_love_this_file,messages,cur_msg,file_changed).
-
-* Create another widget for displaying comments.
+* When saving a file, which has standard stuff in any header fields, pop up a
+	header dialog asking for correction of it.
+* Create new icons for next fuzzy, next untranslated.
+* Fix -- write untranslated language to header.
+* Create in find dialog "whole words" and search msgid/msgstr option. 
+* Replace dialog.
+* Create another widget for displaying comments, file positions and 
+	message status.
+* Spell check to really work and update corrections, remember settings.
 * Implement Recent files for convenient opening of edited files.
-* Add more editing facilities:
-
-	Edit
-		Undo
-		Redo
-		Select All
-
-1. enable spell checking -- with ispell, aspell, gaspell...  with command line
-specified in preferences. for this export the messages stuff in a file or stdin,
-like this:
-1) this is a msgstr
-2) another msgstr.
-so spell checking will be easy.
-
-A. This is the duty of the gtranslatord, menesis. It should perform team checks and
-	db updates for every app and also check the spelling without interferring
-	 you when no error occcurs.
-
-2. on loading the file, first try to msgfmt it, and give any results in a
-dialog with Retry, OK, Cancel buttons. Later, if found errors during parsing,
-replace g_assert* stuff with the same error box.
-
-B. Possibly.
-
-3. allow opening of *.pot files for adding new languages. When trying to save a
-pot file, give a warning and explanation what the name should be. After loading
-a pot file or any po file, which has standard stuff in some header fields, pop
-up a header dialog asking for correction of it. Provide the same autocompletion
-like in prefs box, that is, use strings defined in preferences.
-
-C. This ain't do much work, not? so this should be done.
-C2. Even better it would be do have a druid guiding through the first steps
-	with asking some convenient question ala "Which langauge .." ( but 
-	 before this the header apply routines must work ). 
+* Add real Undo/Redo
+* Do actual changes to message status (sticky)
+* Show a mark at the end of message, change it in preferences. Or any 
+	other way to easily distinguish where message ends. Background color?
+* Analyze errors of compile.
+* Support obsolete message entries.
 
 -----------------------------------------------------------------------------
 Make the application MDI.
@@ -61,8 +36,9 @@ Need such menu entries (and appropriate callbacks :)):
 I. The message db. 
 ....
 
-D. No, this wasn't censored, it's just obsolete as I'm now working on libgtranslator
- which will have to handle the xml-files for the team & message db handling.
+D. No, this wasn't censored, it's just obsolete as I'm now working on
+libgtranslator which will have to handle the xml-files for the team & message
+db handling.
 
 -----------------------------------------------------------------------------
 II. The catalog
@@ -79,13 +55,14 @@ Status | File | Total | Untranslated | Fuzzy | Date
 should be such facilities: mark some files. then, edit them all, add to a gzip
 archive, update.sh, msgfmt. Open new file. Remove from list.
 
-G. This is again something which the gtranslatord has to do and not the GUI directly.
-	The GUI should simply be an interactor with gtranslatord.
+G. This is again something which the gtranslatord has to do and not the GUI
+directly. The GUI should simply be an interactor with gtranslatord.
 
 Status can be: fully translated, partially translated, contains fuzzy messages,
 untranslated (and .pot files), non-existing.
 
-Ð. Again gtranslatord has to be a monster-daemon as it also should do this globally
-	without any local dependency ( of course it will also order you a pizza :) ).
+Ð. Again gtranslatord has to be a monster-daemon as it also should do this
+globally without any local dependency ( of course it will also order you a
+pizza :) ).
 
 -----------------------------------------------------------------------------

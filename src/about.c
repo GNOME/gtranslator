@@ -11,9 +11,9 @@
 
 #include "about.h"
 
-void about_box(GtkWidget *widget,gpointer useless)
+void about_box(GtkWidget * widget, gpointer useless)
 {
-	static GtkWidget *about=NULL;
+	static GtkWidget *about = NULL;
 	const gchar *authors[] = {
 		"Fatih Demir <kabalak@gmx.net>",
 		"Gediminas Paulauskas <menesis@delfi.lt>",
@@ -21,11 +21,9 @@ void about_box(GtkWidget *widget,gpointer useless)
 		};
 	raise_and_return_if_exists(about);
 
-	about=gnome_about_new("gtranslator", VERSION,
-		"(C) 1999-2000",
-		authors,
-		_("gtranslator will be a GNOME framework for translating and managing the translation of the important po-files and othe i18/19/20..n issues."),
+	about =
+	    gnome_about_new("gtranslator", VERSION, "(C) 1999-2000", authors,
+			    _("gtranslator will be a Gnome framework for translating these emminent important po-files.\nIt will be based upon a gtranslatord and a gtranslator client. Wish the best for us translators and for me!"),
 		NULL);
-	show_nice_dialog(&about,"gtranslator -- about");
+	show_nice_dialog(&about, "gtranslator -- about");
 }
-
