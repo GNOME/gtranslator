@@ -60,6 +60,9 @@ void gtranslator_config_init()
 void gtranslator_config_close()
 {
 	#ifdef GCONF_IS_PRESENT
+	/**
+	* Synchronize the preferences.
+	**/
 	gconf_client_suggest_sync(client, &error);
 	#else
 	gnome_config_pop_prefix();
@@ -111,7 +114,8 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 		{
 			gtranslator_config_init();
 			#ifdef GCONF_IS_PRESENT
-			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
+			private_path=g_strdup_printf("%s/%s",
+				"/apps/gtranslator",
 				path);
 			gconf_client_set_string(client, private_path, value,
 				&error);
@@ -169,7 +173,8 @@ void gtranslator_config_set_int(gchar *path, gint value)
 		{
 			gtranslator_config_init();
 			#ifdef GCONF_IS_PRESENT
-			private_path=g_strdup_printf("%s/%s","/apps/gtranslator",
+			private_path=g_strdup_printf("%s/%s",
+				"/apps/gtranslator",
 				path);
 			gconf_client_set_int(client, private_path, value,
 				&error);
@@ -273,7 +278,8 @@ void gtranslator_config_set_last_run_date()
 		**/
 		gtranslator_config_init();
 		#ifdef GCONF_IS_PRESENT
-		gconf_client_set_string(client, "/apps/gtranslator/informations/last_run_on",
+		gconf_client_set_string(client, 
+			"/apps/gtranslator/informations/last_run_on",
 			date, &error);
 		#else
 		gnome_config_set_string("informations/last_run_on", date);

@@ -656,6 +656,10 @@ void update_msg(void)
 		msg->status &= ~GTR_MSG_STATUS_TRANSLATED;
 	}
 	message_changed = FALSE;
+	/**
+	* Update the statusbar informations.
+	**/
+	update_appbar(g_list_position(po->messages, po->current));
 }
 
 void toggle_msg_status(GtkWidget * item, gpointer which)
@@ -845,7 +849,8 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 			/**
 			* Also update the status information in the statusbar.
 			**/    
-			update_appbar(g_list_position(po->messages, po->current));
+			update_appbar(g_list_position(po->messages,
+				po->current));
 		}
 	}
 	/**

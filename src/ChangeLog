@@ -1,5 +1,15 @@
 2000-10-11  Fatih Demir	<kabalak@gmx.net>
 
+	* parse.c: Call the gtranslator_display_recent() function every
+		time a new file is opened; this function should now really
+		 remove somehow all previous recent files entries from the
+		  menus and insert the new ones and implemented the first
+		   lines in direction to deleting obsolete multiple commons
+		    of the same file.
+
+	* gui.c: Also update the statusbar information on changing the
+		status from "Untranslated" to "Translated".
+
 	* Makefile.am: Include the necessary GConf cflags for compiling
 		and linking gtranslator.
 

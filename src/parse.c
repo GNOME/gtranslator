@@ -290,6 +290,10 @@ void parse(const char *filename)
 	display_msg(po->current);
 	enable_actions_just_opened();
 	disable_actions(ACT_FIRST, ACT_BACK);
+	/**
+	* Update the recent files list.
+	**/
+	gtranslator_display_recent();
 }
 
 void parse_the_file(GtkWidget * widget, gpointer of_dlg)
@@ -646,7 +650,7 @@ void gtranslator_display_recent(void)
 	/**
 	* Delete the old entries.
 	**/
-	gnome_app_remove_menu_range(GNOME_APP(app1), _("_File/Recen_t files/"), 0, wants.recent_files);
+	gnome_app_remove_menus(GNOME_APP(app1), _("_File/Recen_t files/"), wants.recent_files);
 
 	/**
 	* Create a new GnomeUIInfo widget.
@@ -668,7 +672,8 @@ void gtranslator_display_recent(void)
 	gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
 	
 	/**
-	* Parse the list, but maximal 4 entries.
+	* Parse the list, but maximal as many entries as wished
+	*  in the preferences.
 	**/
 	for(len=((g_list_length(list)-1) < (wants.recent_files-1))
 		?(g_list_length(list)-1) : (wants.recent_files-1);
@@ -688,6 +693,20 @@ void gtranslator_display_recent(void)
 		if(wants.check_recent_file)
 		{
 			if(!g_file_exists(name))
+			{
+				continue;
+			}
+		}
+		/**
+		* If double menu entries should be checked.
+		**/
+		if(wants.delete_obsolete_rfentries)
+		{
+			/**
+			* If 2 files have got the same name, this file
+			*  should be displayed.
+			**/
+			if((menu-1)->user_data==name)
 			{
 				continue;
 			}
@@ -799,7 +818,8 @@ void update(GtkWidget *widget, gpointer useless)
 	/**
 	* Build this magical line.
 	**/
-	command=g_strdup_printf("%s %s %s 2>&1 1>/dev/null", SCRIPTSDIR "/update.sh", po->filename, po->header->prj_name);
+	command=g_strdup_printf("%s %s %s 2>&1 1>/dev/null", SCRIPTSDIR "/update.sh",
+		po->filename, po->header->prj_name);
 	/**
 	* Get the filename.
 	**/
@@ -838,13 +858,13 @@ void update(GtkWidget *widget, gpointer useless)
 		if(wants.uzi_dialogs)
 		{
 			/**
-			 Print a nice information dialog.
+			* Print a nice information dialog.
 			*/
 			gnome_app_message(GNOME_APP(app1),
 				_("The update was successfull."));
 		}	
 		/**
-		* Reopen it after the successfull update.
+		* Reopen the file after the successfull update.
 		**/
 		parse(newfile);
 	}
