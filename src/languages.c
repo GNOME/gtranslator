@@ -140,6 +140,14 @@ GtrLanguage languages[] = {
 	 "nls@tux.hellug.gr", "8bit"
 	},
 	{
+	 N_("Gujarati"), "gu", "UTF-8",
+	 "indlinux-gujarati@lists.sourceforge.net", "8bit"
+	},
+	{
+	 N_("Hindi"), "hi", "UTF-8",
+	 "indlinux-hindi-gnome@lists.sourceforge.net", "8bit"
+	},
+	{
 	 N_("Hungarian"), "hu", "iso-8859-2",
 	 "hu@gnome.hu", "8bit"
 	},
@@ -184,12 +192,20 @@ GtrLanguage languages[] = {
 	 "", "8bit"
 	},
 	{
+	 N_("Marathi"), "mr", "UTF-8",
+	 "indlinux-marathi@lists.sourceforge.net", "8bit"
+	},
+	{
 	 N_("Norwegian/Bokmaal"), "no", "iso-8859-1",
 	 "no@li.org", "8bit"
 	},
 	{
 	 N_("Norwegian/Nynorsk"), "nn", "iso-8859-1",
 	 "nn@li.org", "8bit"
+	},
+	{
+	 N_("Punjabi"), "pa", "UTF-8",
+	 "indlinux-punjabi@lists.sourceforge.net", "8bit"
 	},
 	{
 	 N_("Polish"), "pl", "iso-8859-2",
@@ -246,6 +262,10 @@ GtrLanguage languages[] = {
 	{
 	 N_("Tamil"), "ta", "tscii",
 	 "", "8bit"
+	},
+	{
+	 N_("Telugu"), "te", "UTF-8",
+	 "indlinux-telugu@lists.sourceforge.net", "8bit"
 	},
 	{
 	 N_("Thai"), "th", "tis-620",
