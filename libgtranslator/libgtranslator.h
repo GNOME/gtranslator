@@ -24,7 +24,6 @@
 **/
 #include <libgtranslator/gtkled.h>
 #include <libgtranslator/gtranslatord.h>
-#include <libgtranslator/gtranslator-preferences-dialog.h>
 #include <libgtranslator/handle-db.h>
 #include <libgtranslator/parse-db.h>
 #include <libgtranslator/preferences.h>
