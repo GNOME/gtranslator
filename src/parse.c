@@ -33,7 +33,8 @@ void check_file(FILE *stream,const char *error)
 }
 
 /**
- * The real routine for parsing 
+ * This have to be renamed and used in the
+ *  msg_*-getting routines ...
  **/
 void parse()
 {
@@ -75,24 +76,22 @@ void parse()
 			 * is a msgstr 
 			 **/
 			fgets(tmp_l,sizeof(tmp_l),fs);
-			if(!strncasecmp(tmp_l,"msgstr \"",7))
+			/**
+			 * While there's no msgstr ...
+			 * add it to the msgid ...
+			 **/
+			while(strncasecmp(tmp_l,"msgstr \"",7))
 			{	
 				/**
-				 * If this succeeds , build a msg-block
+				 * Add it , add it , ... 
 				 **/
-				msg->msgstr=tmp_l;
+				msg->msgid+=tmp_l;
+				fgets(tmp_l,sizeof(tmp_l),fs);
 			}
 			/**
-			 * If not , read another line & check it  		
+			 * Now we're hopefully at a msgstr
 			 **/
-			fgets(tmp_l,sizeof(tmp_l),fs);
-			/**
-			 * Again the same
-			 **/
-			if(!strncasecmp(tmp_l,"msgstr \"",7))
-			{
-				msg->msgstr=tmp_l;
-			}
+			msg->msgstr=tmp_l;
 		}
 		
 	}

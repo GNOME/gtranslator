@@ -35,23 +35,3 @@
  **/
 
 gchar *gtranslator_geometry;
-
-/**
- * A simple define since I don't know
- *  if gtk_widget_set_name(x) ,gtk_widget_ref(X) , ....
- *  which glade always have put to the interface files 
- *   are needed .....
- **/
-
-#define ka_widget_show(x) gtk_widget_set_name(x, "x"); \
-gtk_widget_ref(x); \
-gtk_object_set_data_full(GTK_OBJECT(app1), "x", x, \
-			(GtkDestroyNotify) gtk_widget_unref);\
-gtk_widget_show(x)
-
-/**
- * AND : If this #define isn't needed , we 
- *  could simply uncomment the following line :
- **/
-
-/*#define ka_widget_show(x) gtk_widget_show(x)*/

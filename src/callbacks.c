@@ -31,12 +31,6 @@ gchar fname[768];
 static GnomeHelpMenuEntry help_me = { "gtranslator", "index.html" };
 int warn_me,show_me_errors,startup_at_last;
 
-/**
- * FIXME FIXME FIXME :
- * why do I have to do this ( or I get NULL-casts to GtkLabel )
- **/
-#define gnome_appbar_set_status(x,y) /*gnome_appbar_set_status(x,y)*/
-
 void 
 on_search_button_pressed		(GtkButton 	*button,
 					gpointer user_data)
@@ -51,7 +45,7 @@ on_open1_activate                      (GtkMenuItem     *menuitem,
 	GtkWidget* open_my_file;
 	open_my_file=create_open_file();
 	gtk_widget_show(open_my_file);
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),"");
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),"Open->");
 }
 
 
@@ -74,7 +68,7 @@ on_save_as1_activate                   (GtkMenuItem     *menuitem,
 	GtkWidget* save_as_;
 	save_as_=create_save_file_as();
 	gtk_widget_show(save_as_);
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1),"");
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),"Save as->");
 }
 
 
