@@ -43,6 +43,7 @@
 #include "utils.h"
 #include "utils_gui.h"
 
+#include <locale.h>
 #include <signal.h>
 
 #include <gmodule.h>
