@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-05-08 12:28+0200\n"
+"POT-Creation-Date: 2000-05-13 14:15+0200\n"
 "PO-Revision-Date: 2000-05-08 12:28+0200\n"
 "Last-Translator: Martin Norbäck <d95mback@dtek.chalmers.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -13,161 +13,194 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/interface.c:47
+#: src/main.c:34
+msgid "Po-file to open at startup"
+msgstr ""
+
+#: src/main.c:38
+#, fuzzy
+msgid "A test option"
+msgstr "Alternativ för .po-filer"
+
+#: src/main.c:42
+msgid "The msg_db to use"
+msgstr ""
+
+#. *
+#. * If the file isn't openable give a warning
+#. *
+#: src/main.c:115
+#, c-format
+msgid "The file \"%s\" doesn't exist or isn't readable!"
+msgstr ""
+
+#: src/main.c:116
+msgid "Skipping it."
+msgstr ""
+
+#: src/interface.c:70
+msgid "No po-file opened which could be compiled."
+msgstr ""
+
+#: src/interface.c:88
 msgid "_Compile"
 msgstr "_Kompilera"
 
-#: src/interface.c:73
+#: src/interface.c:114
 msgid "Refresh"
 msgstr "Uppdatera"
 
-#: src/interface.c:85
+#: src/interface.c:126
 msgid "_First"
 msgstr "_Första"
 
-#: src/interface.c:92
+#: src/interface.c:133
 msgid "_Back"
 msgstr "_Bakåt"
 
-#: src/interface.c:100
+#: src/interface.c:141
 msgid "_Next"
 msgstr "_Framåt"
 
-#: src/interface.c:107
+#: src/interface.c:148
 msgid "_Last"
 msgstr "_Sista"
 
-#: src/interface.c:126
+#: src/interface.c:167
 msgid "_Online help"
 msgstr "_Direkthjälp"
 
-#: src/interface.c:141 src/interface.c:144
+#: src/interface.c:182 src/interface.c:185
 msgid "_Messages"
 msgstr "_Meddelanden"
 
-#: src/interface.c:168
+#. *
+#. * Create the app
+#. *
+#: src/interface.c:212
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/interface.c:210
+#: src/interface.c:247
 msgid "Search"
 msgstr "Sök"
 
-#: src/interface.c:211
+#: src/interface.c:248
 msgid "Search for a message"
 msgstr "Sök efter meddelande"
 
-#: src/interface.c:218
+#: src/interface.c:255
 msgid "ReSearch"
 msgstr "Sök igen"
 
-#: src/interface.c:219
+#: src/interface.c:256
 msgid "Search again"
 msgstr "Sök igen"
 
-#: src/interface.c:226
+#: src/interface.c:263
 msgid "Goto"
 msgstr "Gå till"
 
-#: src/interface.c:227
+#: src/interface.c:264
 msgid "Goto this message"
 msgstr "Gå till detta meddelande"
 
 #. *
 #. * Find in the personal catalogue
 #. *
-#: src/interface.c:237
+#: src/interface.c:274
 msgid "F/Cat."
 msgstr "S/Kat."
 
-#: src/interface.c:238
+#: src/interface.c:275
 msgid "Find in the personal catalog"
 msgstr "Sök i den personliga katalogen"
 
 #. *
 #. * Find in the .po-file
 #. *
-#: src/interface.c:248
+#: src/interface.c:285
 msgid "F/Po."
 msgstr "S/Po."
 
-#: src/interface.c:249
+#: src/interface.c:286
 msgid "Find in the po file "
 msgstr "Sök i .po-filen"
 
-#: src/interface.c:260
+#: src/interface.c:297
 msgid "Compile"
 msgstr "Kompilera"
 
-#: src/interface.c:261
-msgid "New File"
-msgstr "Ny fil"
+#: src/interface.c:298
+#, fuzzy
+msgid "Compile the po-file"
+msgstr "Sök i .po-filen"
 
-#: src/interface.c:269
+#: src/interface.c:306
 msgid "Open"
 msgstr "Öppna"
 
-#: src/interface.c:270
+#: src/interface.c:307
 msgid "Open File"
 msgstr "Öppna fil"
 
-#: src/interface.c:278
+#: src/interface.c:315
 msgid "Save"
 msgstr "Spara"
 
-#: src/interface.c:279
+#: src/interface.c:316
 msgid "Save File"
 msgstr "Spara fil"
 
-#: src/interface.c:287
+#: src/interface.c:324
 msgid "Save as"
 msgstr "Spara som..."
 
-#: src/interface.c:288
+#: src/interface.c:325
 msgid "Save file as"
 msgstr "Spara fil som"
 
-#: src/interface.c:296
+#: src/interface.c:333
 msgid "First"
 msgstr "Första"
 
-#: src/interface.c:297
+#: src/interface.c:334
 msgid "Go to the first message"
 msgstr "Gå till det första meddelandet"
 
-#: src/interface.c:305
+#: src/interface.c:342
 msgid "Back"
 msgstr "Bakåt"
 
-#: src/interface.c:306
+#: src/interface.c:343
 msgid "Go one message back"
 msgstr "Gå ett meddelande bakåt"
 
-#: src/interface.c:314
+#: src/interface.c:351
 msgid "Options"
 msgstr "Alternativ"
 
-#: src/interface.c:315
+#: src/interface.c:352
 msgid "gtranslator options"
 msgstr "Alternativ för gtranslator"
 
-#: src/interface.c:323
+#: src/interface.c:360
 msgid "Next"
 msgstr "Nästa"
 
-#: src/interface.c:324
+#: src/interface.c:361
 msgid "Go one message forward"
 msgstr "Gå till nästa meddelande"
 
-#: src/interface.c:332
+#: src/interface.c:369
 msgid "Last"
 msgstr "Sista"
 
-#: src/interface.c:333
+#: src/interface.c:370
 msgid "Go to the last message"
 msgstr "Gå till det sista meddelandet"
 
-#: src/interface.c:341 src/interface.c:342
+#: src/interface.c:378 src/interface.c:379
 msgid "Exit"
 msgstr "Avsluta"
 
@@ -175,7 +208,7 @@ msgstr "Avsluta"
 #. * If there are any problems , give a
 #. *  message ..
 #. *
-#: src/parse.c:34
+#: src/parse.c:32
 #, c-format
 msgid ""
 "\n"
@@ -184,32 +217,49 @@ msgstr ""
 "\n"
 "Filströmmen försvunnen! Fel nummer \"%i\""
 
-#: src/parse.c:59
+#: src/parse.c:53
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Det finns ingen fil att öppna eller så förstod jag inte \"%s\"!"
 
-#: src/parse.c:66
+#. *
+#. * Set up a status message
+#. *
+#: src/parse.c:58
 #, c-format
-msgid "Couldn't stat the file `%s'!"
-msgstr "Kunde inte göra \"stat\" på filen \"%s\"!"
+msgid "Current file : \"%s\"."
+msgstr ""
 
-#: src/parse.c:92
+#. *
+#. * Show an updated status
+#. *
+#: src/parse.c:94
 #, c-format
-msgid "Got filename  %s\n"
-msgstr "Fick filnamn \"%s\"\n"
+msgid "Finished reading \"%s\", %i lines."
+msgstr ""
+
+#.
+#. * Set up an informative status message
+#. *
+#: src/parse.c:111
+msgid "Parsing the list entries."
+msgstr ""
+
+#: src/parse.c:171
+msgid "Parsing has been successfull."
+msgstr ""
 
 #. *
 #. * 3.1) No list, no fun
 #. *
-#: src/msg_db.c:61
+#: src/msg_db.c:60
 msgid "gtranslator lost the list of translations!\n"
 msgstr "gtranslator tappade bort listan med översättningar!\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:98 src/msg_db.c:164
+#: src/msg_db.c:97 src/msg_db.c:154
 #, c-format
 msgid "The msg_db `%s' seems not to be inited!\n"
 msgstr "Meddelandedatabasen \"%s\" verkar inte vara initierad\n"
@@ -218,11 +268,11 @@ msgstr "Meddelandedatabasen \"%s\" verkar inte vara initierad\n"
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
-#: src/msg_db.c:110
+#: src/msg_db.c:109
 msgid "Got no message entry!\n"
 msgstr "Fick inget meddelandeelement!\n"
 
-#: src/msg_db.c:119
+#: src/msg_db.c:118
 #, c-format
 msgid "New message entry has wrong/non-logical length : %i\n"
 msgstr "Nytt meddelandeelement har fel eller ologisk längd: %i\n"
@@ -230,7 +280,7 @@ msgstr "Nytt meddelandeelement har fel eller ologisk längd: %i\n"
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:168
+#: src/msg_db.c:158
 msgid "Not available"
 msgstr "Ej tillgängligt"
 
@@ -238,9 +288,13 @@ msgstr "Ej tillgängligt"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:176
+#: src/msg_db.c:166
 msgid "No msg_list available for acting on it!\n"
 msgstr "Ingen meddelandelista tillgänglig för aktivering!\n"
+
+#: src/msg_db.c:190
+msgid "No entry found in the msg_db."
+msgstr ""
 
 #: src/gtr_dialogs.c:21
 msgid ""
@@ -255,16 +309,27 @@ msgid "You didn't change anything in the .po-file!\n"
 msgstr "Du ändrade ingenting i .po-filen!\n"
 
 #: src/gtr_dialogs.c:42
-msgid "With the Preferences box you can define some variables\n"
-msgstr "Med dialogrutan för preferenser kan du definiera vissa variabler\n"
+msgid ""
+"With the Preferences box you can define some variables\n"
+"with which you can make gtranslator make more work\n"
+"like YOU want it to work!"
+msgstr ""
 
 #: src/gtr_dialogs.c:52
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- öppna en .po-fil"
 
-#: src/gtr_dialogs.c:83
+#: src/gtr_dialogs.c:65
+msgid "Select your desired po-file to open"
+msgstr ""
+
+#: src/gtr_dialogs.c:84
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- spara filen som..."
+
+#: src/gtr_dialogs.c:97
+msgid "Select your filename to which the po-file should be saved to."
+msgstr ""
 
 #: src/support.c:111 src/support.c:151
 #, c-format
@@ -365,170 +430,182 @@ msgstr "Spara inte .po-filer som inte ändrats"
 msgid "Use the msg_db"
 msgstr "Använd meddelandedatabasen"
 
-#: src/languages.h:56
+#: src/languages.h:59
 msgid "Arabic"
 msgstr "Arabiska"
 
-#: src/languages.h:60
+#: src/languages.h:63
 msgid "Basque"
 msgstr "Baskiska"
 
-#: src/languages.h:64
+#: src/languages.h:67
 msgid "Bulgarian"
 msgstr "Bulgariska"
 
-#: src/languages.h:68
+#: src/languages.h:71
 msgid "Catalan"
 msgstr "Katalanska"
 
-#: src/languages.h:72
+#: src/languages.h:75
 msgid "Chinese/Simplified"
 msgstr "Kinesiska/förenklad"
 
-#: src/languages.h:76
+#: src/languages.h:79
 msgid "Chinese/Traditional"
 msgstr "Kinesiska/traditionell"
 
-#: src/languages.h:80
+#: src/languages.h:83
 msgid "Croatian"
 msgstr "Kroatiska"
 
-#: src/languages.h:84
+#: src/languages.h:87
 msgid "Czech"
 msgstr "Tjeckiska"
 
-#: src/languages.h:88
+#: src/languages.h:91
 msgid "Danish"
 msgstr "Danska"
 
-#: src/languages.h:92
+#: src/languages.h:95
 msgid "English"
 msgstr "Engelska"
 
-#: src/languages.h:96
+#: src/languages.h:99
 msgid "English/Canada"
 msgstr "Engelska/Kanada"
 
-#: src/languages.h:100
+#: src/languages.h:103
 msgid "English/GB"
 msgstr "Engelska/Brittisk"
 
-#: src/languages.h:104
+#: src/languages.h:107
 msgid "English/USA"
 msgstr "Engelska/USA"
 
-#: src/languages.h:108
+#: src/languages.h:111
 msgid "Estonian"
 msgstr "Estländska"
 
-#: src/languages.h:112
+#: src/languages.h:115
 msgid "Farsi"
 msgstr "Farsi"
 
-#: src/languages.h:116
+#: src/languages.h:119
 msgid "Finnish"
 msgstr "Finska"
 
-#: src/languages.h:120
+#: src/languages.h:123
 msgid "French"
 msgstr "Franska"
 
-#: src/languages.h:124
+#: src/languages.h:127
 msgid "Galician"
 msgstr "Galiciska"
 
-#: src/languages.h:128
+#: src/languages.h:131
 msgid "German"
 msgstr "Tyska"
 
-#: src/languages.h:132
+#: src/languages.h:135
 msgid "Greek"
 msgstr "Grekiska"
 
-#: src/languages.h:136
+#: src/languages.h:139
 msgid "Hungarian"
 msgstr "Ungerska"
 
-#: src/languages.h:140
+#: src/languages.h:143
 msgid "Indonesian"
 msgstr "Indonesiska"
 
-#: src/languages.h:144
+#: src/languages.h:147
 msgid "Italian"
 msgstr "Italienska"
 
-#: src/languages.h:148
+#: src/languages.h:151
 msgid "Irish"
 msgstr "Irländska"
 
-#: src/languages.h:152
+#: src/languages.h:155
 msgid "Japanese"
 msgstr "Japanska"
 
-#: src/languages.h:156
+#: src/languages.h:159
 msgid "Korean"
 msgstr "Koreanska"
 
-#: src/languages.h:160
+#: src/languages.h:163
 msgid "Lithuanian"
 msgstr "Litauiska"
 
-#: src/languages.h:164
+#: src/languages.h:167
 msgid "Norwegian/Bookmal"
 msgstr "Norska/bokmål"
 
-#: src/languages.h:168
+#: src/languages.h:171
 msgid "Norwegian/Nynorsk"
 msgstr "Norska/nynorsk"
 
-#: src/languages.h:172
+#: src/languages.h:175
 msgid "Polish"
 msgstr "Polska"
 
-#: src/languages.h:176
+#: src/languages.h:179
 msgid "Portuguese"
 msgstr "Portugisiska"
 
-#: src/languages.h:180
+#: src/languages.h:183
 msgid "Portuguese/Brazil"
 msgstr "Portugisiska/Brasilien"
 
-#: src/languages.h:184
+#: src/languages.h:187
 msgid "Russian"
 msgstr "Ryska"
 
-#: src/languages.h:188
+#: src/languages.h:191
 msgid "Slovak"
 msgstr "Slovakiska"
 
-#: src/languages.h:192
+#: src/languages.h:195
 msgid "Spanish"
 msgstr "Spanska"
 
-#: src/languages.h:196
+#: src/languages.h:199
 msgid "Spanish/Spain"
 msgstr "Spanska/Spanien"
 
-#: src/languages.h:200
+#: src/languages.h:203
 msgid "Spanish/Mexico"
 msgstr "Spanska/Mexiko"
 
-#: src/languages.h:204
+#: src/languages.h:207
 msgid "Swedish"
 msgstr "Svenska"
 
-#: src/languages.h:208
+#: src/languages.h:211
 msgid "Turkish"
 msgstr "Turkiska"
 
-#: src/languages.h:212
+#: src/languages.h:215
 msgid "Ukrainian"
 msgstr "Ukrainska"
 
-#: src/languages.h:216
+#: src/languages.h:219
 msgid "Walloon"
 msgstr "Walloon"
 
-#: src/languages.h:220
+#: src/languages.h:223
 msgid "Welsh"
 msgstr "Walesiska"
+
+#~ msgid "New File"
+#~ msgstr "Ny fil"
+
+#~ msgid "Couldn't stat the file `%s'!"
+#~ msgstr "Kunde inte göra \"stat\" på filen \"%s\"!"
+
+#~ msgid "Got filename  %s\n"
+#~ msgstr "Fick filnamn \"%s\"\n"
+
+#~ msgid "With the Preferences box you can define some variables\n"
+#~ msgstr "Med dialogrutan för preferenser kan du definiera vissa variabler\n"

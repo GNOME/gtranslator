@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.18\n"
-"POT-Creation-Date: 2000-05-12 15:21+0200\n"
-"PO-Revision-Date: 2000-05-12 14:58+0200\n"
+"POT-Creation-Date: 2000-05-13 14:15+0200\n"
+"PO-Revision-Date: 2000-05-13 13:18+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -131,9 +131,8 @@ msgid "Compile"
 msgstr "Dönüþtür"
 
 #: src/interface.c:298
-#, fuzzy
 msgid "Compile the po-file"
-msgstr "Po dosyasýnda bul"
+msgstr "Po dosyasýný dönüþtür"
 
 #: src/interface.c:306
 msgid "Open"
@@ -207,7 +206,7 @@ msgstr "Çýk"
 #. * If there are any problems , give a
 #. *  message ..
 #. *
-#: src/parse.c:34
+#: src/parse.c:32
 #, c-format
 msgid ""
 "\n"
@@ -216,7 +215,7 @@ msgstr ""
 "\n"
 "Dosya akýmý kayboldu! Hata no. `%i'"
 
-#: src/parse.c:54
+#: src/parse.c:53
 #, c-format
 msgid "There's no file to open or I couldn't understand `%s'!"
 msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
@@ -224,7 +223,7 @@ msgstr "Açýlacak dosya yok yada ben `%s''yi anlayamadým!"
 #. *
 #. * Set up a status message
 #. *
-#: src/parse.c:59
+#: src/parse.c:58
 #, c-format
 msgid "Current file : \"%s\"."
 msgstr "Geçerli dosya : \"%s\"."
@@ -237,17 +236,28 @@ msgstr "Geçerli dosya : \"%s\"."
 msgid "Finished reading \"%s\", %i lines."
 msgstr "\"%s\"'nin okunmasý bitti ( %i satýr )."
 
+#.
+#. * Set up an informative status message
+#. *
+#: src/parse.c:111
+msgid "Parsing the list entries."
+msgstr ""
+
+#: src/parse.c:171
+msgid "Parsing has been successfull."
+msgstr ""
+
 #. *
 #. * 3.1) No list, no fun
 #. *
-#: src/msg_db.c:61
+#: src/msg_db.c:60
 msgid "gtranslator lost the list of translations!\n"
 msgstr "gtranslator tercümelerin listesini kaybetti!\n"
 
 #. *
 #. * Show a little warning ...
 #. *
-#: src/msg_db.c:98 src/msg_db.c:155
+#: src/msg_db.c:97 src/msg_db.c:154
 #, c-format
 msgid "The msg_db `%s' seems not to be inited!\n"
 msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
@@ -256,11 +266,11 @@ msgstr "Ileti ve tercüme tabaný olan `%s' baþlatýlmamýþ gibi gözüküyor!\n"
 #. * Warn if there isn't any message which could be added
 #. *  to the msg_db .
 #. *
-#: src/msg_db.c:110
+#: src/msg_db.c:109
 msgid "Got no message entry!\n"
 msgstr "Ileti/tercüme birimini alamadým!\n"
 
-#: src/msg_db.c:119
+#: src/msg_db.c:118
 #, c-format
 msgid "New message entry has wrong/non-logical length : %i\n"
 msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil : %i\n"
@@ -268,7 +278,7 @@ msgstr "Yeni ileti/tercüme biriminin uzunluðu akýl iþi deðil : %i\n"
 #. *
 #. * Return a very "explaining" char* ...
 #. *
-#: src/msg_db.c:159
+#: src/msg_db.c:158
 msgid "Not available"
 msgstr "Yok be !"
 
@@ -276,11 +286,11 @@ msgstr "Yok be !"
 #. * If there's no msg_list
 #. *  print an error message
 #. *
-#: src/msg_db.c:167
+#: src/msg_db.c:166
 msgid "No msg_list available for acting on it!\n"
 msgstr "Iþlenilecek bir msg_list ( ileti/tercüme listesi ) yok ki!\n"
 
-#: src/msg_db.c:191
+#: src/msg_db.c:190
 msgid "No entry found in the msg_db."
 msgstr "Ileti/tercüme tabanýnda böyle bir birim yoktur."
 
@@ -310,9 +320,17 @@ msgstr ""
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- açýlanacak dosyayý seç"
 
-#: src/gtr_dialogs.c:83
+#: src/gtr_dialogs.c:65
+msgid "Select your desired po-file to open"
+msgstr ""
+
+#: src/gtr_dialogs.c:84
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- kaydedilinecek dosyayý seç .."
+
+#: src/gtr_dialogs.c:97
+msgid "Select your filename to which the po-file should be saved to."
+msgstr ""
 
 #: src/support.c:111 src/support.c:151
 #, c-format

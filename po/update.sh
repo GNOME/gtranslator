@@ -1,7 +1,7 @@
 #!/bin/sh
 #######################################################################
 package=gtranslator
-version=0.17
+version=0.18
 #######################################################################
 build_pot  ()  {
 echo "Building the $package.pot ..."
@@ -14,8 +14,9 @@ xgettext --default-domain=$package --directory=.. \
 }
 #######################################################################
 do_it  ()  {
+[ -f $package.pot ] || build_pot
 msgmerge $lang.po $package.pot|sed -e 's/^#~.*$//g' |\
-sed -e s/^\"PO-Revision-.*$/\"PO-Revision-Date:\ "`date +%Y-%m-%d`"\ "`date +%H:%M:%S`"'\\n'\"/ |\
+sed -e s/^\"PO-Revision-.*$/\"PO-Revision-Date:\ "`date +%Y-%m-%d`"\ "`date +%H:%M%z`"'\\n'\"/ |\
 sed -e s/^\"Project-Id.*$/\"Project-Id-Version:\ $package\ $version'\\n'\"/ > $lang.po
 }
 #######################################################################
@@ -48,7 +49,6 @@ lang="$1"
 	echo "No $lang.po file found. No merge will be done."
 	build_pot && exit 0
 }
-build_pot
 do_it
 ;;
 *)
