@@ -25,8 +25,6 @@ void apply_header(gtr_header *the_header)
 
 void get_header(gchar *hline)
 {
-	ph->prj_name="";
-	ph->prj_version=ph->prj_name;
 	/**
 	* Set the check variable to FALSE.
 	**/
@@ -43,7 +41,7 @@ void get_header(gchar *hline)
 	}
 	if(header_finish==TRUE)
 	{
-					
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Header has been pased successfully."));			
 	}
 }
 

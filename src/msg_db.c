@@ -128,14 +128,6 @@ int put_to_msg_db(const gchar *msg_id,const gchar *msg_translation)
 			g_warning(_("Got no message entry!\n"));
 			return 1;	
 		}
-		/**
-		* Get the length of the new entry
-		**/
-		if(( strlen(msg_translation) < 0 ) || ( ! msg_translation ))
-		{
-			g_warning(_("New message entry has wrong/non-logical length.\n"));
-			return 1;
-		}
 		else
 		{
 			/**

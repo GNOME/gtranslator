@@ -3,9 +3,9 @@
 *
 * (C) 2000 Published under GNU GPL V 2.0+
 *
-* The "initial"-file 
+* The "initial"-file
 *
-* -- only source 
+* -- only source
 **/
 
 #ifdef HAVE_CONFIG_H
@@ -20,13 +20,13 @@
 #include "gui.h"
 #include "session.h"
 #include "messages.h"
-#include "prefs.h" 
+#include "prefs.h"
 
 /**
 * The popt-options table
 **/
 static struct poptOption gtranslator_options [] = {
-	{ 
+	{
 		NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
 		0, NULL, NULL
 	},
@@ -77,12 +77,15 @@ int main(int argc,char *argv[])
 	/**
 	* Init gtranslator.
 	**/
-	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv, 
+	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv,
 		gtranslator_options, 0, &context);
 	/**
 	* Free the poptContext
 	**/
 	poptFreeContext(context);
+	/**
+	* Simply check if we've got already a challenge length value.
+	**/
 	if(!challen)
 	{
 		/**
@@ -144,10 +147,10 @@ int main(int argc,char *argv[])
 	{
 		gnome_config_push_prefix(gnome_client_get_config_prefix(client));
 		gnome_config_pop_prefix();
-	}	
+	}
 	/**
 	* Creates the main app-window
-	**/	
+	**/
 	app1=create_app1();
 	/**
         * Set the main window's geometry from prefs.
@@ -194,7 +197,7 @@ int main(int argc,char *argv[])
 		* Test if the file which was specified on the cmd-line exists
 		**/
 		test=fopen(file_to_open,"r+");
-		if(test==NULL)	
+		if(test==NULL)
 		{
 			/**
 			* If the file isn't openable give a warning
@@ -203,7 +206,7 @@ int main(int argc,char *argv[])
 			g_warning(_("Skipping it."));
 		}
 		else
-		{	
+		{
 			/**
 			* Parse/open the file
 			**/
