@@ -41,12 +41,20 @@ else
 gtranslator_help_DATA=$(gtranslator_htmlfiles) topic.dat
 endif
 
+if JW_PRESENT
+build_command="jw -c /etc/sgml/catalog -o gtranslator"
+else
+build_command=db2html
+endif
+
 if SCROLLKEEPER_PRESENT
 $(gtranslator_htmlfiles):$(gtranslator_sgmlfile) $(gtranslator_omffile)
 else
 $(gtranslator_htmlfiles):$(gtranslator_sgmlfile)
 endif
-	-@if [ ! -f gtranslator/index.html ]; then cd $(srcdir) && db2html gtranslator.sgml; fi
+	-@if [ ! -f gtranslator/index.html ]; then \
+		cd $(srcdir) && $(build_command) $(gtranslator_sgmlfile) ; \
+	fi
 	-cd $(srcdir) && cp gtranslator/$@ .
 	
 disthook:
