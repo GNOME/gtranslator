@@ -61,6 +61,11 @@ gchar status[128];
 void call_help_viewer(GtkWidget *widget,gpointer useless);
 
 /**
+* Display gtranslator's homepage
+**/
+void call_gtranslator_homepage(GtkWidget *widget,gpointer useless);
+
+/**
 * gtranslator's own exit-routine
 **/
 gint gtranslator_quit(GtkWidget *widget,gpointer useless);

@@ -20,12 +20,26 @@ static GnomeHelpMenuEntry help_me = {
 	"gtranslator", "index.html" 
 	};
 
+/**
+* Calls the general help for gtranslator
+**/
 void call_help_viewer(GtkWidget *widget,gpointer useless)
 {
 	/**
 	* Calls ( hopefully ) the Gnome Helpbrowser
 	**/
 	gnome_help_pbox_goto(NULL,0,&help_me);
+}
+
+/**
+* Goes to the homepage of gtranslator on the web
+**/
+void call_gtranslator_homepage(GtkWidget *widget,gpointer useless)
+{
+	/**
+	* Calls your selected webpages-viewer for GNOME.
+	**/
+	gnome_url_show("http://gtranslator.sourceforge.net");
 }
 
 /**
@@ -76,14 +90,24 @@ void compile(GtkWidget *widget,gpointer useless)
 		**/
 		gchar *cmd=" ";
 		gint res=1;
-		sprintf(cmd,"%s %s","msgfmt",i_love_this_file);
-		res=system(cmd);
 		/**
-		* If there has been an error show an error-box
+		* If a filename has been set yet, then we can try to compile it.
 		**/
-		if(res!=0)
+		if((i_love_this_file!=NULL)||(strlen(i_love_this_file)>=0))
 		{
-			compile_error_dialog(widget,NULL);
+			sprintf(cmd,"%s %s","msgfmt",i_love_this_file);
+			res=system(cmd);
+			/**
+			* If there has been an error show an error-box
+			**/
+			if(res!=0)
+			{
+				compile_error_dialog(widget,NULL);
+			}
+			else
+			{
+				gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Po-file has been compiled successfully."));
+			}
 		}
 	}
 }
@@ -173,7 +197,21 @@ static GnomeUIInfo the_edit_menu[] =
         GNOMEUIINFO_MENU_CUT_ITEM(cut_clipboard, NULL),
         GNOMEUIINFO_MENU_COPY_ITEM(copy_clipboard, NULL),
         GNOMEUIINFO_MENU_PASTE_ITEM(paste_clipboard, NULL),
-        GNOMEUIINFO_MENU_CLEAR_ITEM(clear_selection, NULL),
+        {
+		GNOME_APP_UI_ITEM, N_("C_lear"),
+		N_("Clears the current selection"),
+		NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TRASH,
+		'K', GDK_CONTROL_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("_Header"),
+		N_("Edit the header"),
+		NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
+		0, 0, NULL
+	},
         GNOMEUIINFO_END
 };
 
@@ -239,6 +277,14 @@ static GnomeUIInfo the_help_menu[] =
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
           GDK_F1, 0, NULL
         },
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("gtranslator website"),
+		N_("gtranslator homepage on the web"),
+		call_gtranslator_homepage, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_HOME,
+		0, 0, NULL
+	},
         GNOMEUIINFO_END
 };
 

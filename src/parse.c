@@ -65,6 +65,10 @@ void parse(gchar *po)
 	* Check the file-stream
 	**/
 	check_file(fs);
+	/**
+	* Set the global filename
+	**/
+	i_love_this_file=po;
         /**
         * Parse the file ...
         **/
@@ -72,7 +76,10 @@ void parse(gchar *po)
         fgets(temp_char,sizeof(temp_char),fs)!=NULL
         )
         {
-		gtr_msg msg[z];
+		/**
+		* Create a new structure.
+		**/
+		gtr_msg *msg=g_new(gtr_msg,1);
 		z++;
 		/**
 		* Try to get the header :
@@ -83,11 +90,11 @@ void parse(gchar *po)
 		* 
 		**/
 		if(
-		!g_strncasecmp(temp_char,"\"",1)
+		/* 1/ */!g_strncasecmp(temp_char,"\"",1)
 		&&
-		strstr(temp_char,": ")
+		/* 2/ */strstr(temp_char,": ")
 		&&
-		(msg_pair<=1)
+		/* 3/ */(msg_pair<=1)
 		)
 		{
 			/**
@@ -103,22 +110,29 @@ void parse(gchar *po)
 			*  and set the comment & position.
 			**/
 			msg_pair++;
-			msg[z].pos=z;
-			msg[z].comment=temp_char;
+			msg->pos=z;
+			msg->comment=g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			msg[z].msgid=temp_char;
+			msg->msgid=g_strdup(temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			msg[z].msgstr=temp_char;
+			msg->msgstr=g_strdup(temp_char);
+		}
+		/**
+		* If a structure is existent, free it.
+		**/
+		if(msg!=NULL)
+		{
+			g_free(msg);
 		}
         }
         /**
@@ -135,7 +149,7 @@ void parse(gchar *po)
 	* Wait for a small amount of time while the user can read the status message
 	*  above, if he has got usleep on his machine.
 	**/
-	usleep(150000);
+	usleep(250000);
 	#endif // HAVE_USLEEP
 	/**
 	* As we've got finished we can do some nonsense

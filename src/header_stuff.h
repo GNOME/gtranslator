@@ -39,6 +39,11 @@ struct _gtr_header {
 	gchar *encoding;
 };
 
+/**
+* The general header
+**/
+static gtr_header *ph;
+
 void apply_header(gtr_header the_header);
 
 void get_header(gchar *hline);

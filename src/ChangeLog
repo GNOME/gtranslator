@@ -1,3 +1,63 @@
+2000-05-24  Fatih Demir		( kabalak@gmx.net )
+
+	+	Again a crash!
+
+	+	-----------------------------------
+	
+	+	Moved the static gtr_header to the header.
+		
+		-> header_stuff.c/h
+
+	+	Assign the strings via g_strdup().
+
+	+	Make the structure be a structure-pointer.
+	
+	+	Added some g_prints just for my infor-
+		
+		mation what's going on.
+		
+		-> header_stuff.c
+
+	+	Removed the yazoo-test option and 
+		
+		the corresponding variable.
+	
+		-> main.c
+
+	+	Added the `Header' entry to the edit-menu.
+		
+	+	Added a help-menu entry for the homepage.
+	
+	+	No crashing anymore!
+	
+	+	Added an ion for the `Clear' entry in the
+		
+		edit-menu.
+	
+	+	Added Ctrl-K shortcut to the Clear-item.
+		
+		-> interface.c
+
+	+	Allocate the structure via g_new.
+
+	+	Again reverted to NOT produce dozains
+		
+		of structures.
+		
+		-> parse.c
+
+	+	Make a check before executing msgfmt;
+		
+		should avoid a crash.
+		
+		-> interface.c	
+	
+	+	Insert the current filename to the static 
+		
+		gchar variable `i_love_this_file'.
+		
+		-> main.c/parse.c
+
 2000-05-23  Fatih Demir		( kabalak@gmx.net )
 
 	+	Removed the X-Generator header information

@@ -32,7 +32,7 @@
 #include "gtr_dialogs.h"
 
 /**
-*
+* The new filename
 **/
 static gchar *i_love_this_file=NULL;
 

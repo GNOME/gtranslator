@@ -27,7 +27,6 @@
 * Some static variables for the poptTable
 **/
 static gchar *file_to_open=NULL;
-static gint yazoo=0;
 
 /**
 * The popt-options table
@@ -38,11 +37,7 @@ static struct poptOption gtranslator_options [] = {
 		0,N_("Po-file to open at startup"), "PO-FILE"
 	},
 	{
-		"yazoo-test", 'y', POPT_ARG_INT, &yazoo,
-		0,N_("A test option"), "TEST"
-	},
-	{
-		"msg_db", 'm', POPT_ARG_STRING, &msg_db,
+		"msg-db", 'm', POPT_ARG_STRING, &msg_db,
 		0,N_("The msg_db to use"),"MSG_DB"
 	},
 	{

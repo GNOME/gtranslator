@@ -11,23 +11,10 @@
 #include "header_stuff.h"
 
 /**
-* The general header
-**/
-gtr_header ph = {
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL
-};
-
-/**
-* A simple define; ok I'm lazy ..
+* A simple define; .. ok I'm lazy but it avoids many typos ..
 **/
 #define kabalak_str(x) inp=NULL; inp=strstr(hline, ": ");\
-ph.x=g_strchug(strstr(inp, " "));
+ph->x=g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\""));
 
 void apply_header(gtr_header the_header)
 {
@@ -76,10 +63,6 @@ void get_header(gchar *hline)
 	}
 	if(header_finish==TRUE)
 	{
-		/**
-		* Just a think-about-my-output print-command ...
-		**/
-		g_print("Header :\n%s%s%s%s%s%s",ph.project_id,ph.pot_date,ph.po_date,
-			ph.last_translator,ph.language_team,ph.mime_version);
+		g_print("Header info : \n%s, %s, %s\n",ph->project_id,ph->pot_date,ph->po_date);	
 	}
 }
