@@ -1,3 +1,17 @@
+2001-08-10  Kevin Vandersloot <kfv101@psu.edu>
+
+	* messages-table.c: slightly ugly hack to display status headers
+	and the messages as child nodes. Add three ETreePaths as global
+	variables for the different status. 
+	(value_at_function): check if the node is a status header and give
+	to corresponding value
+	(..messages_table_create): create the three status header nodes.
+	Add the messages to the proper status node instead of the root node.
+	Sticky messages do not get added.
+	(row_selected): do not emit warning if message is NULL. Instead
+	that means the user clicked on the status header.
+	(table_extras_new): "original" column is now a tree column.
+
 2001-08-09  Fatih Demir <kabalak@gtranslator.org>
 
 	* header_stuff.c: Previous last translator save and holding routine

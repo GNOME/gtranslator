@@ -33,6 +33,7 @@
 #include <gal/e-table/e-cell-combo.h>
 #include <gal/e-table/e-cell-number.h>
 #include <gal/e-table/e-cell-text.h>
+#include <gal/e-table/e-cell-tree.h>
 #include <gal/e-table/e-table-extras.h>
 #include <gal/e-table/e-tree-model.h>
 #include <gal/e-table/e-tree-memory.h>
@@ -78,6 +79,10 @@ GtkWidget *tree;
 ETreeModel *tree_model;
 ETreeMemory *tree_memory;
 ETreePath root_node = NULL;
+ETreePath translated_node = NULL;
+ETreePath fuzzy_node = NULL;
+ETreePath unknown_node = NULL;
+ETableExtras *tree_extras;
 
 /*
  * hash table to associate an ETreePath with each message. Used
@@ -110,9 +115,9 @@ static gboolean is_cell_editable_function(ETreeModel *model, ETreePath path,
 static gboolean is_empty_function(ETreeModel *model, int column, 
 	const void *value, void *data)
 {
+
 	switch (column) {
 	case COL_NUMBER:
-		return value == NULL;
 	case COL_LINE:
 		return value == NULL;
 	case COL_ORIGINAL:
@@ -175,6 +180,7 @@ static void *duplicate_value_function(ETreeModel *model, int column,
 
 static void *initialize_value_function(ETreeModel *model, int column, void *data)
 {
+	
 	switch (column) {
 	case COL_ORIGINAL:
 	case COL_TRANSLATION:
@@ -198,6 +204,29 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	void *data)
 {
 	GtrMsg *message;
+
+	if (path == unknown_node)
+	{
+		if (column == COL_ORIGINAL)
+			return _("UNTRANSLATED");
+		else
+			return NULL;
+	}
+	if (path == fuzzy_node)
+	{
+		if (column == COL_ORIGINAL)
+			return _("FUZZY");
+		else
+			return NULL;
+	}
+	if (path == translated_node)
+	{
+		if (column == COL_ORIGINAL)
+			return _("TRANSLATED");
+		else
+			return NULL;
+	}
+		
 
 	message = e_tree_memory_node_get_data (tree_memory, path);
 	g_return_val_if_fail(message!=NULL, NULL);
@@ -259,8 +288,6 @@ static gchar *return_string_for_value_function(ETreeModel *model, int column,
 		return g_strdup (value);
 		break;
 	case COL_NUMBER:
-		return g_strdup_printf ("%d", (gint) value);
-		break;
 	case COL_LINE:
 		return g_strdup_printf("%d", (gint) value);
 		break;
@@ -276,13 +303,17 @@ row_selected (ETree *tree, int row, ETreePath node, int column, GdkEvent *event,
 	GtrMsg *message;
 	gint model_row;
 	
-	if (event->button.button != 1)
-		return FALSE;
 	if (!node)
 		return FALSE;
 	
 	message=e_tree_memory_node_get_data (tree_memory, node);
-	g_return_val_if_fail(message!=NULL, FALSE);
+	/*g_return_val_if_fail(message!=NULL, FALSE);*/
+	/* we can get a NULL message if the user clicks on the status headers */
+	if (!message)
+		return TRUE;
+		
+	if (event->button.button != 1)
+		return FALSE;
 	
 	model_row=message->no - 1;
 	
@@ -327,6 +358,14 @@ static ETableExtras *table_extras_new()
 	e_table_extras_add_cell(extras, list_parts[count], cell);
 	count++;
 	
+	cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
+	/*gtk_object_set (GTK_OBJECT (cell),
+ 			"bold_column", 2,
+			NULL);*/
+	e_table_extras_add_cell(extras, list_parts[count], 
+				e_cell_tree_new(NULL, NULL, FALSE, cell));
+	count++;
+	
 	while(list_parts[count]!=NULL)
 	{
 		cell=e_cell_text_new(NULL, GTK_JUSTIFY_LEFT);
@@ -348,8 +387,6 @@ GtkWidget *gtranslator_messages_table_new()
 	
 	GtkWidget 	*messages_tree;
 
-	ETableExtras 	*tree_extras;
-		
 	tree_extras=table_extras_new();
 	
 	tree_model=e_tree_memory_callbacks_new(
@@ -368,6 +405,8 @@ GtkWidget *gtranslator_messages_table_new()
 		is_empty_function,
 		return_string_for_value_function,
 		NULL);
+	
+	e_tree_memory_set_expanded_default(E_TREE_MEMORY(tree_model), TRUE);
 		
 	tree_memory=E_TREE_MEMORY(tree_model);
 
@@ -406,7 +445,7 @@ void gtranslator_messages_table_clear(void)
 	if(root_node)
 	{
 		e_tree_memory_node_remove(tree_memory, root_node);
-		/* sadly we seem to create a root_node or else mayhem results */
+		/* sadly we seem to need to create a root_node or else mayhem results */
 		root_node=e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
 	}
 	
@@ -422,6 +461,7 @@ void gtranslator_messages_table_clear(void)
  */
 void gtranslator_messages_table_create (void)
 {
+	/*ECell *cell;*/
 	GList *list;
 	gint i=0;
 	
@@ -440,14 +480,41 @@ void gtranslator_messages_table_create (void)
 	
 	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
 	
+	unknown_node = e_tree_memory_node_insert (tree_memory, root_node, 0, NULL);
+	fuzzy_node = e_tree_memory_node_insert (tree_memory, root_node, 1, NULL);
+	translated_node = e_tree_memory_node_insert (tree_memory, root_node, 2, NULL);
+	
+	/*cell=e_table_extras_get_cell (tree_extras,"original");
+	gtk_object_set (GTK_OBJECT(cell),
+			"bold_column", 0,
+			NULL);*/
+	
 	while(list)
 	{
 		GtrMsg *message=list->data;
 		ETreePath *node;
 		
-		node=e_tree_memory_node_insert(tree_memory, root_node,
-			i, message);
-		g_hash_table_insert(hash_table, message,node); 
+		switch (message->status){
+		case GTR_MSG_STATUS_UNKNOWN:
+			node=e_tree_memory_node_insert(tree_memory, unknown_node,
+			0, message);
+			break;
+		case GTR_MSG_STATUS_TRANSLATED:
+			node=e_tree_memory_node_insert(tree_memory, translated_node,
+			0, message);
+			break;
+		case GTR_MSG_STATUS_STICK:
+			node=NULL;
+			break;
+		case GTR_MSG_STATUS_FUZZY:
+		default:
+			node=e_tree_memory_node_insert(tree_memory, fuzzy_node,
+			0, message);
+		}
+		/*node=e_tree_memory_node_insert(tree_memory, root_node,
+			i, message);*/
+		if (node)
+			g_hash_table_insert(hash_table, message, node); 
 		list = g_list_next(list);
 		i++;
 	}	
