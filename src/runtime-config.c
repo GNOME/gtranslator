@@ -51,6 +51,10 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		"%s/.gtranslator/files/gtranslator-temp-file",
 			g_get_home_dir());
 
+	config->check_filename=g_strdup_printf(
+		"%s/.gtranslator/files/gtranslator-check-file",
+			g_get_home_dir());
+
 	config->crash_filename=g_strdup_printf(
 		"%s/.gtranslator/files/gtranslator-crash-file",
 			g_get_home_dir());
@@ -112,6 +116,7 @@ void gtranslator_runtime_config_free(GtrRuntimeConfig *config)
 	if(config)
 	{
 		GTR_FREE(GTR_RUNTIME_CONFIG(config)->temp_filename);
+		GTR_FREE(GTR_RUNTIME_CONFIG(config)->check_filename);
 		GTR_FREE(GTR_RUNTIME_CONFIG(config)->crash_filename);
 		GTR_FREE(GTR_RUNTIME_CONFIG(config)->backend_filename);
 		

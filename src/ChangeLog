@@ -1,3 +1,10 @@
+2001-03-18  Fatih Demir <kabalak@gtranslator.org>
+
+	* formats.c, runtime-config.c/.h: Hide the formats checking routines
+		from the command line spamming front -- we do now use another
+		 small temporarily created file for this, should en-quiet'en
+		  the formats checking functionality a bit.
+
 2002-03-17  Fatih Demir <kabalak@gtranslator.org>
 
 	* utils.c: Finally fix the reopened problematic bug with UTF-8 (it's
@@ -9,7 +16,7 @@
 		routines of the learn buffer sources.
 
 	* runtime-config.c: Changed the middle dot receiption routine a bit to
-		be a bit more clever -- Carlos pointer rightly out that the
+		be a bit more clever -- Carlos pointed out rightly that the
 		 empty string "" is already preserved/used by gettext for the
 		  po files' headers so we shouldn't interfere with it.
 

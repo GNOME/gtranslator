@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #endif
 
 #include "formats.h"
+#include "runtime-config.h"
 #include "utils.h"
 
 #include <stdlib.h>
@@ -56,11 +57,11 @@ gboolean gtranslator_formats_check(GtrMsg *message)
 		"\"Content-Transfer-Encoding: 8bit\\n\"\n"
 		"\n"
 		"msgid \"%s\"\n"
-		"msgstr \"%s\"' | msgfmt -c - -o /dev/null 2>/dev/null",
-		((GTR_HEADER(po->header)->charset) ? GTR_HEADER(po->header)->charset :
-			po->locale_charset),
-		message->msgid,
-		((message->msgstr) ? message->msgstr : ""));
+		"msgstr \"%s\"' > '%s' | msgfmt -c '%s' -o /dev/null 2>/dev/null",
+		((GTR_HEADER(po->header)->charset) ? GTR_HEADER(po->header)->charset : po->locale_charset),
+		message->msgid, ((message->msgstr) ? message->msgstr : ""),
+		gtranslator_runtime_config->check_filename,
+		gtranslator_runtime_config->check_filename);
 
 	result=system(cmd_str);
 
