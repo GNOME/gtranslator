@@ -29,7 +29,7 @@ gchar *inp;
 * A simple define; .. ok I'm lazy but it avoids many typos ..
 **/
 #define kabalak_str(x) inp[0]='\0'; inp=strstr(hline, ": ");\
-strcat(ph->x,g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\"")));\
+strcat((char *)ph->x,g_strdup(strtok(g_strchug(strstr(inp, " ")),"\\\"")));\
 g_print("--  %s\n",ph->x);
 
 void apply_header(gtr_header *the_header)
@@ -67,15 +67,11 @@ void get_header(gchar *hline)
 	header_finish=FALSE;
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
-		gchar *temp=g_new(gchar,1);
+		gchar *temp;
 		kabalak_str(prj_name);
 		temp=ph->prj_name;
 		ph->prj_name=index(temp, ' ');
 		ph->prj_version=rindex(temp, ' ');
-		if(temp)
-		{
-			g_free(temp);
-		}
 	}
 	if(!g_strncasecmp(hline,"\"POT-",5))
 	{
@@ -197,7 +193,7 @@ void edit_header_create(gtr_header *head)
 void edit_header_show()
 {
 	/**
-	* Give the exisint function as an argument.
+	* Give the existing header as an argument.
 	**/
 	edit_header_create((gtr_header *)ph);
 	gtk_widget_show(gtr_edit_header_dlg);

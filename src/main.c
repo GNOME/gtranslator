@@ -41,6 +41,10 @@ static struct poptOption gtranslator_options [] = {
 		0,N_("The msg_db to use"),"MSG_DB"
 	},
 	{
+		"query", 'q', POPT_ARG_NONE, NULL,
+		0,N_("Query the msg_db"),""
+	},
+	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0,N_("Specifies the main-window geometry"),"GEOMETRY"
 	},

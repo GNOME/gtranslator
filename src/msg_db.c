@@ -37,7 +37,15 @@ int init_msg_db()
 		sprintf(temp_db,"%s/%s",g_get_home_dir(),"msg.db");
 		msg_db=temp_db;
 	}
-	db_stream=fopen(msg_db,"r+");
+	if(fopen(msg_db,"r+")==NULL)
+	{
+		g_message(_("No msg_db found! Creating one in `%s'."),msg_db);
+		db_stream=fopen(msg_db,"a+");
+	}
+	else
+	{
+		db_stream=fopen(msg_db,"r+");
+	}
 	/**
 	* Have we got a file stream ?
 	**/
@@ -196,7 +204,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 			{
 				if(strstr(msg_messages,";;;"))
 				{
-					/** TODO : CUT THEM OFF */
+					return msg_messages;
 				}
 			}
 		}	

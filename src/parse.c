@@ -45,6 +45,8 @@ void parse(gchar *po)
 	gchar temp_char[128];
 	gchar *zamane=NULL;
         guint lines=1,z=0,msg_pair=0;
+	messages=g_list_alloc();
+	messages=NULL;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
@@ -76,10 +78,11 @@ void parse(gchar *po)
 	fgets(temp_char,sizeof(temp_char),fs)!=NULL
 	)
 	{
+		#ifdef WORKS_X
 		/**
 		* Create a new structure.
 		**/
-		gtr_msg *msg=g_new0(gtr_msg,1);
+		gtr_msg *msg=g_new(gtr_msg,1);
 		z++;
 		/**
 		* Try to get the header :
@@ -103,7 +106,6 @@ void parse(gchar *po)
 			**/
 			get_header(temp_char);
 		}
-		#ifdef NO_X__
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
 			/**
@@ -112,31 +114,24 @@ void parse(gchar *po)
 			**/
 			msg_pair++;
 			msg->pos=z;
-			strcat(msg->comment,temp_char);
+			strcpy(msg->comment,g_strdup(temp_char));
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
 			/**
 			* The msgid itself
 			**/
-			strcat(msg->msgid,temp_char);
+			strcpy(msg->msgid,g_strdup(temp_char));
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
 			/**
 			* The msgstr
 			**/
-			strcat(msg->msgstr,temp_char);
+			strcpy(msg->msgstr,g_strdup(temp_char));
 		}
+		messages=g_list_append(messages,(gpointer)msg);
 		#endif
-		/**
-		* If a structure is existent, free it.
-		**/
-		if(msg!=NULL)
-		{
-			g_free(msg);
-		}
-		
 	}
 	/**
 	* Show an updated status
@@ -183,7 +178,6 @@ void parse_the_file(GtkWidget *widget,gpointer useless)
 **/
 void get_first_msg(GtkWidget *widget,gpointer useless)
 {
-	/* TODO */
 }
 
 /**

@@ -1,10 +1,24 @@
 2000-06-03  Fatih Demir		( kabalak@gmx.net )
 
+	+	Make first a check if it exists yet, and
+		
+		it it doesn't exist, print a message and open	
+		
+		it with creation flags.
+
+	+	Create the msg_db, if necessary.
+	
+		-> msg_db.c
+
 	+	Set the window-icon in every popup-dialog.
 		
 		-> gtr_dialogs.c
 		
 		-> prefs.c
+
+	+	Don't free/alloc a temporary char.
+		
+		[ Avoids another crash. ]
 
 	+	Set the first element to '\0' in inp.
 		
@@ -17,6 +31,8 @@
 	+	Set the default window-icon.
 		
 		-> interface.c
+
+	+	Disable the msg-parsing for today.
 	
 	+	Cat the strings, don't copy them.
 		

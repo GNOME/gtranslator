@@ -97,4 +97,9 @@ void get_last_msg(GtkWidget *widget,gpointer useless);
 **/
 gchar *search_do(GtkWidget *widget,gpointer wherefrom);
 
+/**
+* Two lists for the messages.
+**/
+GList *messages;
+
 #endif // GTR_PARSE_H
