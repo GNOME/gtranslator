@@ -2,19 +2,10 @@
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Martin Lacko <lacko@host.sk>, 2002.
 #
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this empty string to avoid the
-#. *  usage of the mid dot ('�') in the displaying routines.
-#. *
-#. *   The contents of your translation are irrelevant in this case.
-#.
-#: src/runtime-config.c:78
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2002-03-09 15:45+0100\n"
+"POT-Creation-Date: 2002-03-29 18:22+0100\n"
 "PO-Revision-Date: 2002-02-21 22:57CEST\n"
 "Last-Translator: Martin Lacko <lacko@host.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -430,55 +421,55 @@ msgstr "Projekt"
 msgid "Translator and Language"
 msgstr "Prekladateľ a jazyk"
 
-#: src/header_stuff.c:456
+#: src/header_stuff.c:461 src/header_stuff.c:465
 msgid "Comments:"
 msgstr "Komentáre:"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:472
 msgid "Project name:"
 msgstr "Názov projektu:"
 
-#: src/header_stuff.c:465
+#: src/header_stuff.c:475
 msgid "Project version:"
 msgstr "Verzia projektu:"
 
-#: src/header_stuff.c:468
+#: src/header_stuff.c:478
 msgid "Pot file creation date:"
 msgstr "Dátum vytvorenia pot súboru:"
 
-#: src/header_stuff.c:473
+#: src/header_stuff.c:483
 msgid "Po file revision date:"
 msgstr "Dátum revízie po súboru:"
 
-#: src/header_stuff.c:480
+#: src/header_stuff.c:490
 msgid "Generator:"
 msgstr "Generátor:"
 
-#: src/header_stuff.c:490
+#: src/header_stuff.c:500
 msgid "Use my options to complete the following entries:"
 msgstr "Použiť moje nastavenia na dokončenie nasledovných úloh:"
 
-#: src/header_stuff.c:503
+#: src/header_stuff.c:520 src/header_stuff.c:525
 msgid "Translator's name:"
 msgstr "Názov prekladateľa:"
 
-#: src/header_stuff.c:506
+#: src/header_stuff.c:529
 msgid "Translator's e-mail:"
 msgstr "Prekladateľov e-mail:"
 
-#: src/header_stuff.c:509 src/prefs.c:148
+#: src/header_stuff.c:532 src/prefs.c:148
 msgid "Language:"
 msgstr "Jazyk:"
 
-#: src/header_stuff.c:515
+#: src/header_stuff.c:538
 msgid "Language group's e-mail:"
 msgstr "E-mail supiny pre jazyk:"
 
-#: src/header_stuff.c:520 src/prefs.c:164
+#: src/header_stuff.c:543 src/prefs.c:164
 msgid "Charset:"
 msgstr "Znaková stránka:"
 
-#: src/header_stuff.c:532 src/prefs.c:169
+#: src/header_stuff.c:555 src/prefs.c:169
 msgid "Encoding:"
 msgstr "Kódovanie:"
 
@@ -1158,7 +1149,7 @@ msgstr "Neboli upravené žiadne nepresné preklady."
 msgid "All messages seem to be translated."
 msgstr "Všetky správy boli preložené."
 
-#: src/message.c:322
+#: src/message.c:329
 #, c-format
 msgid ""
 "The translation for message `%s'\n"
@@ -1589,7 +1580,22 @@ msgstr "Nemôžem zistiť aktuálny dátum!"
 msgid "No replacements made!"
 msgstr "Nič nebolo nahradené!"
 
-#: src/runtime-config.c:93 src/runtime-config.c:98
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this foo'sh string into something
+#. *  another than a 'Y' to avoid the usage of the mid dot ('�') in the
+#. *   text displaying routines of gtranslator.
+#.
+#: src/runtime-config.c:81
+msgid "Y"
+msgstr ""
+
+#.
+#. * Translators: this character is used if the middle dot
+#. *  can't be used under your locale.
+#.
+#: src/runtime-config.c:100 src/runtime-config.c:105
 msgid "^"
 msgstr "^"
 
@@ -1659,7 +1665,7 @@ msgstr "Nemôžem vytvoriť priečinok `%s'!"
 #. *  which will be used if gtranslator can't get the current env. locale's
 #. *   default sane encoding by itself.
 #.
-#: src/utils.c:499 src/utils.c:503
+#: src/utils.c:499 src/utils.c:503 src/utils.c:837
 msgid "iso-8859-1"
 msgstr "iso-8859-2"
 

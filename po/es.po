@@ -3,19 +3,10 @@
 # Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.
 # Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2001-2002.
 #
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this empty string to avoid the
-#. *  usage of the mid dot ('·') in the displaying routines.
-#. *
-#. *   The contents of your translation are irrelevant in this case.
-#.
-#: src/runtime-config.c:78
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
-"POT-Creation-Date: 2002-03-09 15:45+0100\n"
+"POT-Creation-Date: 2002-03-29 18:22+0100\n"
 "PO-Revision-Date: 2002-01-30 21:36+0100\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -438,55 +429,55 @@ msgstr "Proyecto"
 msgid "Translator and Language"
 msgstr "Traductor y Lengua"
 
-#: src/header_stuff.c:456
+#: src/header_stuff.c:461 src/header_stuff.c:465
 msgid "Comments:"
 msgstr "Comentarios:"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:472
 msgid "Project name:"
 msgstr "Nombre del proyecto:"
 
-#: src/header_stuff.c:465
+#: src/header_stuff.c:475
 msgid "Project version:"
 msgstr "Versión del proyecto:"
 
-#: src/header_stuff.c:468
+#: src/header_stuff.c:478
 msgid "Pot file creation date:"
 msgstr "Fecha de creación del archivo pot:"
 
-#: src/header_stuff.c:473
+#: src/header_stuff.c:483
 msgid "Po file revision date:"
 msgstr "Fecha de revisión del archivo po:"
 
-#: src/header_stuff.c:480
+#: src/header_stuff.c:490
 msgid "Generator:"
 msgstr "Generador:"
 
-#: src/header_stuff.c:490
+#: src/header_stuff.c:500
 msgid "Use my options to complete the following entries:"
 msgstr "Usar mis opciones para completar las siguientes entradas:"
 
-#: src/header_stuff.c:503
+#: src/header_stuff.c:520 src/header_stuff.c:525
 msgid "Translator's name:"
 msgstr "Nombre del Traductor:"
 
-#: src/header_stuff.c:506
+#: src/header_stuff.c:529
 msgid "Translator's e-mail:"
 msgstr "E-mail del Traductor:"
 
-#: src/header_stuff.c:509 src/prefs.c:148
+#: src/header_stuff.c:532 src/prefs.c:148
 msgid "Language:"
 msgstr "Idioma:"
 
-#: src/header_stuff.c:515
+#: src/header_stuff.c:538
 msgid "Language group's e-mail:"
 msgstr "Correo del grupo del idioma:"
 
-#: src/header_stuff.c:520 src/prefs.c:164
+#: src/header_stuff.c:543 src/prefs.c:164
 msgid "Charset:"
 msgstr "Juego de caracteres:"
 
-#: src/header_stuff.c:532 src/prefs.c:169
+#: src/header_stuff.c:555 src/prefs.c:169
 msgid "Encoding:"
 msgstr "Codificación:"
 
@@ -1170,7 +1161,7 @@ msgstr "No hay más mensajes confusos."
 msgid "All messages seem to be translated."
 msgstr "Todos los mensajes parecen estar traducidos."
 
-#: src/message.c:322
+#: src/message.c:329
 #, c-format
 msgid ""
 "The translation for message `%s'\n"
@@ -1609,7 +1600,22 @@ msgstr "¡No se pudo generar el día actual!"
 msgid "No replacements made!"
 msgstr "¡No hubo cambios!"
 
-#: src/runtime-config.c:93 src/runtime-config.c:98
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this foo'sh string into something
+#. *  another than a 'Y' to avoid the usage of the mid dot ('·') in the
+#. *   text displaying routines of gtranslator.
+#.
+#: src/runtime-config.c:81
+msgid "Y"
+msgstr ""
+
+#.
+#. * Translators: this character is used if the middle dot
+#. *  can't be used under your locale.
+#.
+#: src/runtime-config.c:100 src/runtime-config.c:105
 msgid "^"
 msgstr ""
 
@@ -1679,7 +1685,7 @@ msgstr "¡No se pudo crear el directorio `%s'!"
 #. *  which will be used if gtranslator can't get the current env. locale's
 #. *   default sane encoding by itself.
 #.
-#: src/utils.c:499 src/utils.c:503
+#: src/utils.c:499 src/utils.c:503 src/utils.c:837
 msgid "iso-8859-1"
 msgstr ""
 

@@ -3,19 +3,10 @@
 # Young-Ho, Cha<ganadist@tlug.sarang.net>, 2000,2001
 # update by Chideok Hwang <hwang@mizi.co.kr>, 2000-09-15
 #
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this empty string to avoid the
-#. *  usage of the mid dot ('�') in the displaying routines.
-#. *
-#. *   The contents of your translation are irrelevant in this case.
-#.
-#: src/runtime-config.c:78
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
-"POT-Creation-Date: 2002-03-09 15:45+0100\n"
+"POT-Creation-Date: 2002-03-29 18:22+0100\n"
 "PO-Revision-Date: 2001-06-06 20:05+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: korean <ko@li.org>\n"
@@ -425,56 +416,56 @@ msgstr "프로젝트"
 msgid "Translator and Language"
 msgstr "번역자와 언어"
 
-#: src/header_stuff.c:456
+#: src/header_stuff.c:461 src/header_stuff.c:465
 msgid "Comments:"
 msgstr "주석:"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:472
 msgid "Project name:"
 msgstr "프로젝트 이름:"
 
-#: src/header_stuff.c:465
+#: src/header_stuff.c:475
 msgid "Project version:"
 msgstr "프로젝트 판번호:"
 
-#: src/header_stuff.c:468
+#: src/header_stuff.c:478
 msgid "Pot file creation date:"
 msgstr "pot 파일 생성일자:"
 
-#: src/header_stuff.c:473
+#: src/header_stuff.c:483
 msgid "Po file revision date:"
 msgstr "po 파일 개정일자:"
 
-#: src/header_stuff.c:480
+#: src/header_stuff.c:490
 msgid "Generator:"
 msgstr ""
 
-#: src/header_stuff.c:490
+#: src/header_stuff.c:500
 #, fuzzy
 msgid "Use my options to complete the following entries:"
 msgstr "나의 옵션을 다음 기재사항에 채웁니다."
 
-#: src/header_stuff.c:503
+#: src/header_stuff.c:520 src/header_stuff.c:525
 msgid "Translator's name:"
 msgstr "번역자의 이름:"
 
-#: src/header_stuff.c:506
+#: src/header_stuff.c:529
 msgid "Translator's e-mail:"
 msgstr "번역자의 전자우편:"
 
-#: src/header_stuff.c:509 src/prefs.c:148
+#: src/header_stuff.c:532 src/prefs.c:148
 msgid "Language:"
 msgstr "언어:"
 
-#: src/header_stuff.c:515
+#: src/header_stuff.c:538
 msgid "Language group's e-mail:"
 msgstr "언어 그룹의 전자우편:"
 
-#: src/header_stuff.c:520 src/prefs.c:164
+#: src/header_stuff.c:543 src/prefs.c:164
 msgid "Charset:"
 msgstr "문자셋:"
 
-#: src/header_stuff.c:532 src/prefs.c:169
+#: src/header_stuff.c:555 src/prefs.c:169
 msgid "Encoding:"
 msgstr "인코딩:"
 
@@ -1170,7 +1161,7 @@ msgstr "더이상 남아있는 퍼지메세지가 없습니다"
 msgid "All messages seem to be translated."
 msgstr "모든 메세지가 번역이 되었습니다"
 
-#: src/message.c:322
+#: src/message.c:329
 #, c-format
 msgid ""
 "The translation for message `%s'\n"
@@ -1616,7 +1607,22 @@ msgstr "현재 날짜를 얻을수 없습니다!"
 msgid "No replacements made!"
 msgstr ""
 
-#: src/runtime-config.c:93 src/runtime-config.c:98
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this foo'sh string into something
+#. *  another than a 'Y' to avoid the usage of the mid dot ('�') in the
+#. *   text displaying routines of gtranslator.
+#.
+#: src/runtime-config.c:81
+msgid "Y"
+msgstr ""
+
+#.
+#. * Translators: this character is used if the middle dot
+#. *  can't be used under your locale.
+#.
+#: src/runtime-config.c:100 src/runtime-config.c:105
 msgid "^"
 msgstr ""
 
@@ -1689,7 +1695,7 @@ msgstr "로케일 디렉토리:"
 #. *  which will be used if gtranslator can't get the current env. locale's
 #. *   default sane encoding by itself.
 #.
-#: src/utils.c:499 src/utils.c:503
+#: src/utils.c:499 src/utils.c:503 src/utils.c:837
 msgid "iso-8859-1"
 msgstr ""
 

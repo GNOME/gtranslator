@@ -9,19 +9,10 @@
 # Lorint Hendschel, 2001
 # Lucyin Mahin, 2001
 #
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this empty string to avoid the
-#. *  usage of the mid dot ('·') in the displaying routines.
-#. *
-#. *   The contents of your translation are irrelevant in this case.
-#.
-#: src/runtime-config.c:78
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39\n"
-"POT-Creation-Date: 2002-03-09 15:45+0100\n"
+"POT-Creation-Date: 2002-03-29 18:22+0100\n"
 "PO-Revision-Date: 1999-06-14 01:14+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -430,56 +421,56 @@ msgstr "Prodjet"
 msgid "Translator and Language"
 msgstr "Ratoûrneu et lingaedje"
 
-#: src/header_stuff.c:456
+#: src/header_stuff.c:461 src/header_stuff.c:465
 msgid "Comments:"
 msgstr "Rawete:"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:472
 msgid "Project name:"
 msgstr "No do prodjet:"
 
-#: src/header_stuff.c:465
+#: src/header_stuff.c:475
 msgid "Project version:"
 msgstr "Modêye do prodjet:"
 
-#: src/header_stuff.c:468
+#: src/header_stuff.c:478
 msgid "Pot file creation date:"
 msgstr "Date d' askepiaedje do fitchî .pot:"
 
-#: src/header_stuff.c:473
+#: src/header_stuff.c:483
 msgid "Po file revision date:"
 msgstr "Date do ramîdraedje do fitchî .po:"
 
-#: src/header_stuff.c:480
+#: src/header_stuff.c:490
 msgid "Generator:"
 msgstr "Djenerateu:"
 
-#: src/header_stuff.c:490
+#: src/header_stuff.c:500
 #, fuzzy
 msgid "Use my options to complete the following entries:"
 msgstr "Eployî les tchûzes da minne po rimpli les intrêyes shûvantes."
 
-#: src/header_stuff.c:503
+#: src/header_stuff.c:520 src/header_stuff.c:525
 msgid "Translator's name:"
 msgstr "No do ratoûrneu:"
 
-#: src/header_stuff.c:506
+#: src/header_stuff.c:529
 msgid "Translator's e-mail:"
 msgstr "Emile do ratoûrneu:"
 
-#: src/header_stuff.c:509 src/prefs.c:148
+#: src/header_stuff.c:532 src/prefs.c:148
 msgid "Language:"
 msgstr "Lingaedje:"
 
-#: src/header_stuff.c:515
+#: src/header_stuff.c:538
 msgid "Language group's e-mail:"
 msgstr "Emile di l' ekipe do lingaedje:"
 
-#: src/header_stuff.c:520 src/prefs.c:164
+#: src/header_stuff.c:543 src/prefs.c:164
 msgid "Charset:"
 msgstr "Ecôdaedje:"
 
-#: src/header_stuff.c:532 src/prefs.c:169
+#: src/header_stuff.c:555 src/prefs.c:169
 msgid "Encoding:"
 msgstr "Ecôdaedje so 7 ou 8 bits:"
 
@@ -1178,7 +1169,7 @@ msgstr "I n' resse nou messaedje «fuzzy»."
 msgid "All messages seem to be translated."
 msgstr "I sonle ki tos les messaedjes seuye ratoûrnés."
 
-#: src/message.c:322
+#: src/message.c:329
 #, c-format
 msgid ""
 "The translation for message `%s'\n"
@@ -1622,7 +1613,22 @@ msgstr "Dji n' sai fé ene tchinne avou l' date do moumint!"
 msgid "No replacements made!"
 msgstr ""
 
-#: src/runtime-config.c:93 src/runtime-config.c:98
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this foo'sh string into something
+#. *  another than a 'Y' to avoid the usage of the mid dot ('·') in the
+#. *   text displaying routines of gtranslator.
+#.
+#: src/runtime-config.c:81
+msgid "Y"
+msgstr ""
+
+#.
+#. * Translators: this character is used if the middle dot
+#. *  can't be used under your locale.
+#.
+#: src/runtime-config.c:100 src/runtime-config.c:105
 msgid "^"
 msgstr ""
 
@@ -1694,7 +1700,7 @@ msgstr "Dji n' pout askepyî li ridant «%s»!"
 #. *  which will be used if gtranslator can't get the current env. locale's
 #. *   default sane encoding by itself.
 #.
-#: src/utils.c:499 src/utils.c:503
+#: src/utils.c:499 src/utils.c:503 src/utils.c:837
 msgid "iso-8859-1"
 msgstr ""
 

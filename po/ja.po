@@ -2,11 +2,10 @@
 # Copyright (C) 2000-2001 Free Software Foundation, Inc.
 # Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2001.
 #
-#, no-wrap
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.41\n"
-"POT-Creation-Date: 2002-03-13 00:13+0900\n"
+"POT-Creation-Date: 2002-03-29 18:22+0100\n"
 "PO-Revision-Date: 2002-03-13 00:22+0900\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -422,55 +421,55 @@ msgstr "¥×¥í¥¸¥§¥¯¥È"
 msgid "Translator and Language"
 msgstr "ËÝÌõ¼Ô¤È¸À¸ì"
 
-#: src/header_stuff.c:456
+#: src/header_stuff.c:461 src/header_stuff.c:465
 msgid "Comments:"
 msgstr "¥³¥á¥ó¥È:"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:472
 msgid "Project name:"
 msgstr "¥×¥í¥¸¥§¥¯¥ÈÌ¾:"
 
-#: src/header_stuff.c:465
+#: src/header_stuff.c:475
 msgid "Project version:"
 msgstr "¥×¥í¥¸¥§¥¯¥È¥Ð¡¼¥¸¥ç¥ó:"
 
-#: src/header_stuff.c:468
+#: src/header_stuff.c:478
 msgid "Pot file creation date:"
 msgstr "pot ¥Õ¥¡¥¤¥ë¤ÎÀ¸À®Æü:"
 
-#: src/header_stuff.c:473
+#: src/header_stuff.c:483
 msgid "Po file revision date:"
 msgstr "po ¥Õ¥¡¥¤¥ë¤Î½¤ÀµÆü:"
 
-#: src/header_stuff.c:480
+#: src/header_stuff.c:490
 msgid "Generator:"
 msgstr "ºîÀ®¼Ô:"
 
-#: src/header_stuff.c:490
+#: src/header_stuff.c:500
 msgid "Use my options to complete the following entries:"
 msgstr "°Ê²¼¤Î¥¨¥ó¥È¥ê¤ò´°Î»¤¹¤ë¾ì¹ç¤Ë¼«Ê¬¤ÎÀßÄê¤ò»ÈÍÑ¤¹¤ë:"
 
-#: src/header_stuff.c:503
+#: src/header_stuff.c:520 src/header_stuff.c:525
 msgid "Translator's name:"
 msgstr "ËÝÌõ¼Ô¤Î»áÌ¾:"
 
-#: src/header_stuff.c:506
+#: src/header_stuff.c:529
 msgid "Translator's e-mail:"
 msgstr "ËÝÌõ¼Ô¤Î E-mail ¥¢¥É¥ì¥¹:"
 
-#: src/header_stuff.c:509 src/prefs.c:148
+#: src/header_stuff.c:532 src/prefs.c:148
 msgid "Language:"
 msgstr "¸À¸ì:"
 
-#: src/header_stuff.c:515
+#: src/header_stuff.c:538
 msgid "Language group's e-mail:"
 msgstr "¸À¸ì¥°¥ë¡¼¥×¤Î E-mail¥¢¥É¥ì¥¹:"
 
-#: src/header_stuff.c:520 src/prefs.c:164
+#: src/header_stuff.c:543 src/prefs.c:164
 msgid "Charset:"
 msgstr "Ê¸»ú¥»¥Ã¥È:"
 
-#: src/header_stuff.c:532 src/prefs.c:169
+#: src/header_stuff.c:555 src/prefs.c:169
 msgid "Encoding:"
 msgstr "¥¨¥ó¥³¡¼¥É:"
 
@@ -1151,7 +1150,7 @@ msgstr "fuzzy ¤Ê¥á¥Ã¥»¡¼¥¸¤Ï»Ä¤Ã¤Æ¤¤¤Þ¤»¤ó¡£"
 msgid "All messages seem to be translated."
 msgstr "Á´¤Æ¤Î¥á¥Ã¥»¡¼¥¸¤¬ËÝÌõ¤µ¤ì¤¿¤è¤¦¤Ç¤¹¡£"
 
-#: src/message.c:322
+#: src/message.c:329
 #, c-format
 msgid ""
 "The translation for message `%s'\n"
@@ -1290,7 +1289,7 @@ msgstr ""
 "¥Õ¥¡¥¤¥ë %s ¤Ë¤Ï\n"
 "%d ¸Ä¤Î fuzzy ¤Ê¥á¥Ã¥»¡¼¥¸¤¬¤¢¤ê¤Þ¤¹"
 
-#: src/parse.c:970 data/desktop/gtranslator.desktop.in.h:2
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:970
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -1583,7 +1582,22 @@ msgstr "º£Æü¤ÎÆüÉÕ¤¬ºîÀ®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡ª"
 msgid "No replacements made!"
 msgstr "ÃÖ´¹¤¹¤ë¤â¤Î¤¬¤¢¤ê¤Þ¤»¤ó¡ª"
 
-#: src/runtime-config.c:93 src/runtime-config.c:98
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this foo'sh string into something
+#. *  another than a 'Y' to avoid the usage of the mid dot ('·') in the
+#. *   text displaying routines of gtranslator.
+#.
+#: src/runtime-config.c:81
+msgid "Y"
+msgstr ""
+
+#.
+#. * Translators: this character is used if the middle dot
+#. *  can't be used under your locale.
+#.
+#: src/runtime-config.c:100 src/runtime-config.c:105
 msgid "^"
 msgstr "^"
 
@@ -1655,7 +1669,7 @@ msgstr "¥Ç¥£¥ì¥¯¥È¥ê '%s' ¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¡ª"
 #. *  which will be used if gtranslator can't get the current env. locale's
 #. *   default sane encoding by itself.
 #.
-#: src/utils.c:499 src/utils.c:503
+#: src/utils.c:499 src/utils.c:503 src/utils.c:837
 msgid "iso-8859-1"
 msgstr "iso-8859-1"
 
@@ -1782,4 +1796,3 @@ msgstr ".po ¥Õ¥¡¥¤¥ë¤Î°µ½Ì´°Î»"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr ".po ¥Õ¥¡¥¤¥ë¤Î Gettext ²½"
-
