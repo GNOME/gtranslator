@@ -38,21 +38,21 @@ INCLUDES = \
 bin_PROGRAMS = gtranslator
 
 gtranslator_SOURCES = \
-	main.c \
-	gui.c gui.h \
-	parse.c	parse.h \
-	header_stuff.c header_stuff.h \
-	dialogs.c dialogs.h \
-	find.c find.h \
-	gtkspell.c gtkspell.h \
 	about.c about.h \
+	dialogs.c dialogs.h \
+	dnd.c dnd.h \
+	find.c find.h \
+	gnome-regex.c gnome-regex.h \
+	gtkspell.c gtkspell.h \
+	gui.c gui.h \
+	header_stuff.c header_stuff.h \
+	history.c history.h \
+	languages.h \
+	main.c \
+	open-differently.c open-differently.h \
+	parse.c	parse.h \
 	prefs.c prefs.h \
 	session.c session.h \
-	dnd.c dnd.h \
-	languages.h \
-	gnome-regex.c gnome-regex.h \
-	open-differently.c \
-	open-differently.h \
 	update.c
 
 gtranslator_LDADD = \

@@ -136,19 +136,9 @@ void compile(GtkWidget  * widget, gpointer useless);
 void update(GtkWidget *widget, gpointer useless);
 
 /*
- * This shows you the most recent menus.
- */
-void gtranslator_display_recent(void);
-
-/*
- * The recent files list.
- */
-GList *gtranslator_get_history(void);
-
-/*
- * Adds another filename to the recent files list.
+ * Display the recent files.
  */ 
-void gtranslator_add_history_entry(gchar *filename);
+void gtranslator_display_recent(void);
 
 /*
  * Checks the given file for the right permissions for

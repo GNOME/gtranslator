@@ -30,8 +30,8 @@
 #include "gui.h"
 #include "gtkspell.h"
 #include "open-differently.h"
+#include "history.h"
 #include <libgtranslator/preferences.h>
-#include <libgnome/gnome-history.h>
 
 /*
  * These are to be used only inside this file
@@ -188,17 +188,6 @@ static gboolean actual_parse(void)
 		return FALSE;
 	}
 
-	/*
-	 * Don't include the temporary file name in the recent files list.
-	 */ 
-	if(strcmp(g_basename(po->filename), "gtranslator-temp-po-file"))
-	{
-		/*
-		 * Add this file to the history list.
-		 */
-		gtranslator_add_history_entry(po->filename);
-	}
-	
 	/*
 	 * As the po-file seems to exist, set the "count parameters" to 0.
 	 */
@@ -414,6 +403,15 @@ void parse(const gchar *filename)
 		}
 	}
 	
+	/*
+	 * Test if the filename is NOT equivalent to our temp file's name
+	 */
+	if(strcmp(po->filename, g_strdup_printf("%s/%s",
+		g_get_home_dir(), "gtranslator-temp-po-file")))
+	{
+		gtranslator_history_add(po->filename,
+			po->header->prj_name, po->header->prj_version);
+	}
 	
 	file_opened = TRUE;
 	po->file_changed = FALSE;
@@ -901,7 +899,7 @@ void gtranslator_display_recent(void)
 	static gint len = 0;
 	gint i;
 	GnomeUIInfo *menu;
-	GList *list, *item;
+	GList *list, *newlist;
 	gchar *name;
 	
 	gchar *menupath = _("_File/Recen_t files/");
@@ -914,29 +912,20 @@ void gtranslator_display_recent(void)
 	/*
 	 * Get the old history entries.
 	 */ 
-	list=gtranslator_get_history();
+	list=gtranslator_history_get();
 
-	/*
-	 * If there's no list we shouldn't try listing it up.
-	 */ 
-	if(!list->data)
-	{
-		return;
-	}
-	
-	len=g_list_length(list);
+	i=len=g_list_length(list);
 
 	/*
 	 * Parse the list.
 	 */
-	i=len;
-	for(item=list; item!=NULL; item=g_list_next(item))
+	for(newlist=list; newlist!=NULL; newlist=g_list_next(newlist))
 	{
 		/*
 		 * Get the history entry.
 		 */
-		name=item->data;
-		
+		name=g_strdup(GTR_HISTORY_ENTRY(newlist->data)->filename);
+
 		menu=g_new0(GnomeUIInfo,2);
 
 		/*
@@ -964,112 +953,6 @@ void gtranslator_display_recent(void)
 		g_free(menu->label);
 		g_free(menu->hint);
 		g_free(menu);
-	}
-}
-
-/*
- * Returns the history of opened files.
- */ 
-GList *gtranslator_get_history(void)
-{
-	GList *rl=g_list_alloc();
-	gint entries, c;
-	gchar *path=g_new0(gchar,1);
-	gchar *testfile=g_new0(gchar,1);
-	
-	gtranslator_config_init();
-	entries=gtranslator_config_get_int("history/entries");
-	
-	if(entries<0)
-	{
-		return NULL;
-	}
-
-	for(c=0; c < entries; ++c)
-	{
-		path=g_strdup_printf("history/filename%i", c);
-		testfile=gtranslator_config_get_string(path);
-		if(wants.check_recent_file)
-		{
-			if(testfile && g_file_exists(testfile))
-			{
-				rl=g_list_append(rl, (gpointer) testfile);
-			}
-		}	
-		else
-		{
-			rl=g_list_append(rl, (gpointer) testfile);
-		}
-	}
-	
-	gtranslator_config_close();
-
-	if(path)
-	{
-		g_free(path);
-	}
-	
-	if(testfile)
-	{
-		g_free(testfile);
-	}
-
-	return rl;
-}
-
-/*
- * Adds another file to the history list.
- */
-void gtranslator_add_history_entry(gchar *filename)
-{
-	GList *ney=g_list_alloc();
-	gint count=0;
-	gboolean found_it=FALSE;
-
-	g_return_if_fail(filename!=NULL);
-	
-	ney=gtranslator_get_history();
-
-	while(ney && ney->data)
-	{
-		if(!strcmp((gchar *)ney->data, filename))
-		{
-			found_it=TRUE;
-		}
-		
-		ney=ney->next;
-	}
-
-	if(!found_it)
-	{
-		ney=g_list_prepend(ney, (gpointer) filename);
-	}
-
-	count=g_list_length(ney);
-
-	if(count>0)
-	{
-		gchar *path=g_new0(gchar,1);
-		
-		gtranslator_config_init();
-		gtranslator_config_set_int("history/entries", count);
-
-		while(count>0)
-		{
-			path=g_strdup_printf("history/filename%i", count);
-			
-			gtranslator_config_set_string(path,
-				(gchar *)g_list_nth_data(ney, count));	
-			
-			count--;
-		}
-		
-		gtranslator_config_close();
-	}
-
-	if(ney)
-	{
-		g_list_free(ney);
 	}
 }
 
