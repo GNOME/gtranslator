@@ -27,11 +27,6 @@
 #include "preferences.h"
 
 /*
- * Global variables used in the preferences.
- */
-extern gchar *author, *email, *language, *mime, *enc, *lc, *lg;
-
-/*
  * The preferences structure of gtranslator.
  */
 struct {
@@ -85,7 +80,6 @@ struct {
 	gchar *msgid_font;
 	gchar *msgstr_font;
 	gchar *scheme;
-	gchar *defaultdomain;
 } GtrPreferences;
 
 /*

@@ -476,9 +476,9 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 * Free the used GtrTranslator structure.
 	 */
 	gtranslator_translator_free(gtranslator_translator);
-	
+
 	/*
-	 * Free the preferences stuff.
+	 * Free any lungering stuff 'round -- free prefs & regex cache.
 	 */
 	gtranslator_preferences_free();
 	gnome_regex_cache_destroy(rxc);

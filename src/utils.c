@@ -27,6 +27,7 @@
 #include "nautilus-string.h"
 #include "prefs.h"
 #include "runtime-config.h"
+#include "translator.h"
 #include "utils.h"
 
 #include <dirent.h>
@@ -193,9 +194,8 @@ const gchar *gtranslator_utils_get_english_language_name(const gchar *lang)
 		 * Return the language in the preferences it no language was
 		 *  given/defined.
 		 */
-		return language;
+		return gtranslator_translator->language->name;
 	}
-	
 }
 
 /*

@@ -31,6 +31,7 @@
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
+#include "translator.h"
 #include "utf8.h"
 #include "utils.h"
 #include "utils_gui.h"
@@ -390,8 +391,9 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 				GTR_FREE(ph->translator);
 			}
 			
-			ph->translator=g_strdup(author);
-			gtranslator_utf8_set_gtk_entry_from_utf8_string(translator, author);
+			ph->translator=g_strdup(gtranslator_translator->name);
+			gtranslator_utf8_set_gtk_entry_from_utf8_string(translator, 
+				gtranslator_translator->name);
 		}
 		else
 		{
@@ -400,7 +402,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 				prev_translator=g_strdup(ph->translator);
 			}
 
-			replace(ph->translator, author, translator);
+			replace(ph->translator, gtranslator_translator->name, translator);
 		}
 
 		if(ph->tr_email)
@@ -408,12 +410,15 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 			prev_translator_email=g_strdup(ph->tr_email);
 		}
 
-		replace(ph->tr_email, email, tr_email);
-		replace(ph->language, language,
+		replace(ph->tr_email, gtranslator_translator->email, tr_email);
+		replace(ph->language, gtranslator_translator->language->name,
 			GTK_COMBO(language_combo)->entry);
-		replace(ph->lg_email, lg, GTK_COMBO(lg_combo)->entry);
-		replace(ph->charset, mime, GTK_COMBO(charset_combo)->entry);
-		replace(ph->encoding, enc, GTK_COMBO(enc_combo)->entry);
+		replace(ph->lg_email, gtranslator_translator->language->group_email,
+			GTK_COMBO(lg_combo)->entry);
+		replace(ph->charset, gtranslator_translator->language->encoding, 
+			GTK_COMBO(charset_combo)->entry);
+		replace(ph->encoding, gtranslator_translator->language->bits,
+			GTK_COMBO(enc_combo)->entry);
 #undef replace
 	}
 	
@@ -782,14 +787,14 @@ gboolean gtranslator_header_fill_up(GtrHeader *header)
 		return FALSE;
 
 	have_changed=FALSE;
-	substitute(&header->translator, "FULL NAME", author);
-	substitute(&header->tr_email, "EMAIL@ADDRESS", email);
+	substitute(&header->translator, "FULL NAME", gtranslator_translator->name);
+	substitute(&header->tr_email, "EMAIL@ADDRESS", gtranslator_translator->email);
 	
-	substitute(&header->language, "LANGUAGE", language);
-	substitute(&header->lg_email, "LL@li.org", lg);
+	substitute(&header->language, "LANGUAGE", gtranslator_translator->language->name);
+	substitute(&header->lg_email, "LL@li.org", gtranslator_translator->language->group_email);
 	
-	substitute(&header->charset, "CHARSET", mime);
-	substitute(&header->encoding, "ENCODING", enc);
+	substitute(&header->charset, "CHARSET", gtranslator_translator->language->encoding);
+	substitute(&header->encoding, "ENCODING", gtranslator_translator->language->bits);
 
 	/*
 	 * If there's any header comment we should also substitute the 
@@ -853,13 +858,13 @@ GtrHeader *gtranslator_header_create_from_prefs(void)
 	gtranslator_header_update(h);
 	
 	h->pot_date=g_strdup(h->po_date);
-	h->translator=g_strdup(author);
-	h->tr_email=g_strdup(email);
-	h->language=g_strdup(language);
-	h->lg_email=g_strdup(lg);
+	h->translator=g_strdup(gtranslator_translator->name);
+	h->tr_email=g_strdup(gtranslator_translator->email);
+	h->language=g_strdup(gtranslator_translator->language->name);
+	h->lg_email=g_strdup(gtranslator_translator->language->group_email);
 	h->mime_version=g_strdup("1.0");
-	h->charset=g_strdup(mime);
-	h->encoding=g_strdup(enc);
+	h->charset=g_strdup(gtranslator_translator->language->encoding);
+	h->encoding=g_strdup(gtranslator_translator->language->bits);
 
 	year=get_current_year();
 

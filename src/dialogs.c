@@ -37,6 +37,7 @@
 #include "replace.h"
 #include "runtime-config.h"
 #include "syntax.h"
+#include "translator.h"
 #include "utf8.h"
 #include "utils.h"
 #include "utils_gui.h"
@@ -412,7 +413,7 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		/*
 		 * Free all the used stuff here.
 		 */
-		g_free(comment_dialog_contents);
+		GTR_FREE(comment_dialog_contents);
 		g_strfreev(checkarray);
 		g_string_free(comment_string, TRUE);
 		
@@ -1127,10 +1128,10 @@ void gtranslator_query_dialog(void)
 	/*
 	 * Set up the default query domain from the preferences if available.
 	 */
-	if(GtrPreferences.defaultdomain)
+	if(gtranslator_translator->query_domain)
 	{
 		gtk_entry_set_text(GTK_ENTRY(
-			GTK_COMBO(domain)->entry), GtrPreferences.defaultdomain);
+			GTK_COMBO(domain)->entry), gtranslator_translator->query_domain);
 	}
 
 	/*
@@ -1192,8 +1193,15 @@ void gtranslator_query_dialog(void)
 			/*
 			 * Build up and run the query.
 			 */
-			query=gtranslator_new_query(domainname, query_text, lc);
+			query=gtranslator_new_query(domainname, query_text, 
+				gtranslator_translator->language->locale);
 			result=gtranslator_query_simple(query);
+		
+			/*
+			 * Stop the leaking! Free the used gchars!
+			 */
+			GTR_FREE(query_text);
+			GTR_FREE(domainname);
 			
 			/*
 			 * Close the open dialog now.

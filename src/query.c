@@ -24,6 +24,7 @@
 #include "messages-table.h"
 #include "prefs.h"
 #include "query.h"
+#include "translator.h"
 #include "utils.h"
 
 #include <libgnome/gnome-i18n.h>
@@ -140,18 +141,18 @@ void gtranslator_query_domains(const gchar *directory)
 		
 	g_return_if_fail(directory!=NULL);
 
-	if(!lc)
+	if(!gtranslator_translator->language->locale)
 	{
 		/*
 		 * If no language is set up in the prefs, get it from the
 		 *  environment variables.
 		 */
-		lc=gtranslator_utils_get_environment_locale();
-		g_return_if_fail(lc!=NULL);
+		gtranslator_translator->language->locale=gtranslator_utils_get_environment_locale();
+		g_return_if_fail(gtranslator_translator->language->locale!=NULL);
 	}
 
 	localedirectory=g_strdup_printf("%s/%s/LC_MESSAGES", directory,
-		lc);
+		gtranslator_translator->language->locale);
 	
 	domains=gtranslator_utils_file_names_from_directory(localedirectory,
 		".mo", TRUE, TRUE, FALSE);
@@ -206,7 +207,8 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
 		 * Build up the query for the selected default domain and for the
 		 *  current msgid.
 		 */
-		query=gtranslator_new_query(GtrPreferences.defaultdomain, msg->msgid, lc);
+		query=gtranslator_new_query(gtranslator_translator->query_domain, msg->msgid, 
+			gtranslator_translator->language->locale);
 
 		/*
 		 * Get a possible translation for the query and free up the used

@@ -67,8 +67,8 @@ void gtranslator_signal_handler(int signal)
 	 * Free some other stuff we're definetely using already.
 	 */
 	gtranslator_translator_free(gtranslator_translator);
-	gtranslator_runtime_config_free(gtranslator_runtime_config);
 	gtranslator_preferences_free();
+	gtranslator_runtime_config_free(gtranslator_runtime_config);
 	gnome_regex_cache_destroy(rxc);
 
 	exit(1);

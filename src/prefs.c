@@ -34,19 +34,12 @@
 #include "query.h"
 #include "sidebar.h"
 #include "stylistics.h"
+#include "translator.h"
 #include "utils.h"
 #include "utils_gui.h"
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
-
-gchar *author   = NULL;
-gchar *email    = NULL;
-gchar *language = NULL;
-gchar *mime     = NULL;
-gchar *enc      = NULL;
-gchar *lc       = NULL;
-gchar *lg       = NULL;
 
 /*
  * The callbacks:
@@ -142,10 +135,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 */
 	authors_name =
 	    gtranslator_utils_attach_entry_with_label(first_page, 0, _("Author's name:"),
-				    author, gtranslator_preferences_dialog_changed);
+		gtranslator_translator->name, gtranslator_preferences_dialog_changed);
 	authors_email =
 	    gtranslator_utils_attach_entry_with_label(first_page, 1, _("Author's EMail:"),
-				    email, gtranslator_preferences_dialog_changed);
+		gtranslator_translator->email, gtranslator_preferences_dialog_changed);
 
 	/*
 	 * If no domainslist could be got from the startup routines, build up a foo'sh list.
@@ -158,7 +151,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 
 	defaultdomain =
 	    gtranslator_utils_attach_combo_with_label(first_page, 2, _("Default query domain:"),
-			    	    domains, GtrPreferences.defaultdomain,
+			    	    domains, gtranslator_translator->query_domain,
 				    FALSE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	
@@ -169,28 +162,28 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 
 	authors_language =
 	    gtranslator_utils_attach_combo_with_label(second_page, 0, _("Language:"),
-				    languages_list, language,
+				    languages_list, gtranslator_translator->language->name,
 				    FALSE,
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(1));
 	lcode =
 	    gtranslator_utils_attach_combo_with_label(second_page, 1, _("Language code:"),
-				    lcodes_list, lc,
+				    lcodes_list, gtranslator_translator->language->locale,
 				    FALSE,
 				    gtranslator_preferences_dialog_changed, GINT_TO_POINTER(2));
 	lg_email =
 	    gtranslator_utils_attach_combo_with_label(second_page, 2,
 				    _("Language group's EMail:"),
-				    group_emails_list, lg,
+				    group_emails_list, gtranslator_translator->language->group_email,
 				    TRUE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	mime_type =
 	    gtranslator_utils_attach_combo_with_label(second_page, 3, _("Charset:"),
-				    encodings_list, mime,
+				    encodings_list, gtranslator_translator->language->encoding,
 				    FALSE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	encoding =
 	    gtranslator_utils_attach_combo_with_label(second_page, 4, _("Encoding:"),
-				    bits_list, enc,
+				    bits_list, gtranslator_translator->language->bits,
 				    FALSE,
 				    gtranslator_preferences_dialog_changed, NULL);
 	/*
@@ -400,6 +393,8 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num, gpointer useless)
 {
 	gchar	*selected_scheme_file=NULL;
+	gchar	*translator_str=NULL;
+	gchar	*translator_email_str=NULL;
 	
 	/*
 	 * We need to apply only once. 
@@ -408,13 +403,14 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		return;
 #define update(value,widget) GTR_FREE(value); \
 	value=gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
-	update(author, authors_name);
+
+	update(translator_str, authors_name);
 
 	/*
 	 * Check if the user did forget to enter his/her name into the prefs
 	 *  dialog.
 	 */
-	if(!author || '\0' == *author)
+	if(!translator_str || *translator_str=='\0')
 	{
 		gnome_app_error(GNOME_APP(gtranslator_application),
 			_("Please enter your name!"));
@@ -422,13 +418,13 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		return;
 	}
 	
-	update(email, authors_email);
+	update(translator_email_str, authors_email);
 
 	/*
 	 * Also check if the user did forget to enter his/her EMail address
 	 *  into the prefs dialog.
 	 */
-	if(!email)
+	if(!translator_email_str || *translator_email_str=='\0')
 	{
 		gnome_app_error(GNOME_APP(gtranslator_application),
 			_("Please enter your EMail address!"));
@@ -439,21 +435,31 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		/*
 		 * Also check an eventually given EMail address for brevity.
 		 */
-		if(!strchr(email, '@') || !strchr(email, '.') || 
-			(strlen(email) <= 6))
+		if(!strchr(translator_email_str, '@') || 
+			!strchr(translator_email_str, '.') || 
+			(strlen(translator_email_str) <= 6))
 		{
 			gnome_app_error(GNOME_APP(gtranslator_application),
 				_("Please enter a valid EMail address!"));
 			return;
 		}
 	}
+
+	/*
+	 * Now set the translator informations for the "gtranslator_translator".
+	 */
+	gtranslator_translator_set_translator(gtranslator_translator,
+		translator_str, translator_email_str);
+
+	GTR_FREE(translator_str);
+	GTR_FREE(translator_email_str);
 	
-	update(language, GTK_COMBO(authors_language)->entry);
-	update(lc, GTK_COMBO(lcode)->entry);
-	update(lg, GTK_COMBO(lg_email)->entry);
-	update(mime, GTK_COMBO(mime_type)->entry);
-	update(enc, GTK_COMBO(encoding)->entry);
-	update(GtrPreferences.defaultdomain, GTK_COMBO(defaultdomain)->entry);
+	update(gtranslator_translator->language->name, GTK_COMBO(authors_language)->entry);
+	update(gtranslator_translator->language->locale, GTK_COMBO(lcode)->entry);
+	update(gtranslator_translator->language->group_email, GTK_COMBO(lg_email)->entry);
+	update(gtranslator_translator->language->encoding, GTK_COMBO(mime_type)->entry);
+	update(gtranslator_translator->language->bits, GTK_COMBO(encoding)->entry);
+	update(gtranslator_translator->query_domain, GTK_COMBO(defaultdomain)->entry);
 	update(GtrPreferences.dictionary, dictionary_file);
 	update(GtrPreferences.autosave_suffix, autosave_suffix);
 #undef update
@@ -511,15 +517,6 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(
 			max_history_entries));
 	
-	gtranslator_config_set_string("translator/name", author);
-	gtranslator_config_set_string("translator/email", email);
-	gtranslator_config_set_string("query/defaultdomain", 
-		GtrPreferences.defaultdomain);
-	gtranslator_config_set_string("language/name", language);
-	gtranslator_config_set_string("language/mime_type", mime);
-	gtranslator_config_set_string("language/encoding", enc);
-	gtranslator_config_set_string("language/language_code", lc);
-	gtranslator_config_set_string("language/team_email", lg);
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
 	gtranslator_config_set_string("informations/autosave_suffix", 
 		GtrPreferences.autosave_suffix);
@@ -588,6 +585,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			
 			gtranslator_colors_initialize();
 		}
+
+		GTR_FREE(selected_scheme_file);
 	}
 
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
@@ -650,6 +649,11 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			      GtrPreferences.autosave_with_suffix);
 
 	gtranslator_config_close();
+
+	/*
+	 * Save our translator data.
+	 */
+	gtranslator_translator_save(gtranslator_translator);
 
 	/*
 	 * Show or hide the sidebar according to the _possibly_ changed
@@ -728,14 +732,6 @@ void gtranslator_preferences_read(void)
 	gtranslator_preferences_init_default_values();
 
 	gtranslator_config_init();
-	author = gtranslator_config_get_string("translator/name");
-	email = gtranslator_config_get_string("translator/email");
-	GtrPreferences.defaultdomain = gtranslator_config_get_string("query/defaultdomain");
-	language = gtranslator_config_get_string("language/name");
-	lc = gtranslator_config_get_string("language/language_code");
-	lg = gtranslator_config_get_string("language/team_email");
-	mime = gtranslator_config_get_string("language/mime_type");
-	enc = gtranslator_config_get_string("language/encoding");
 	
 	GtrPreferences.msgid_font = 
 		gtranslator_config_get_string("interface/original_font");
@@ -823,13 +819,15 @@ void gtranslator_preferences_read(void)
 	gtranslator_config_close();
 }
 
-void gtranslator_preferences_free(void)
+/*
+ * Free the resting pieces of the configuration.
+ */
+void gtranslator_preferences_free()
 {
-	GTR_FREE(author);
-	GTR_FREE(email);
-	GTR_FREE(language);
-	GTR_FREE(mime);
-	GTR_FREE(enc);
-	GTR_FREE(lg);
-	GTR_FREE(lc);
+	GTR_FREE(GtrPreferences.autosave_suffix);
+	GTR_FREE(GtrPreferences.spell_command);
+	GTR_FREE(GtrPreferences.dictionary);
+	GTR_FREE(GtrPreferences.msgid_font);
+	GTR_FREE(GtrPreferences.msgstr_font);
+	GTR_FREE(GtrPreferences.scheme);
 }

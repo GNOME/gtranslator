@@ -24,6 +24,7 @@
 #include "learn.h"
 #include "nautilus-string.h"
 #include "prefs.h"
+#include "translator.h"
 #include "utils.h"
 
 #include <time.h>
@@ -480,9 +481,9 @@ void gtranslator_learn_shutdown()
 	 * Set the encoding of the XML file to get a cleanly-structured 
 	 *  and well-formed XML document.
 	 */
-	if(mime)
+	if(gtranslator_translator->language->encoding)
 	{
-		gtranslator_learn_buffer->doc->encoding=g_strdup(mime);
+		gtranslator_learn_buffer->doc->encoding=g_strdup(gtranslator_translator->language->encoding);
 	}
 
 	/*
@@ -490,6 +491,7 @@ void gtranslator_learn_shutdown()
 	 */
 	root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, 
 		"umtf", NULL);
+
 	xmlSetProp(root_node, "version", "0.6");
 	xmlDocSetRootElement(gtranslator_learn_buffer->doc, root_node);
 
@@ -498,17 +500,20 @@ void gtranslator_learn_shutdown()
 	 */
 	language_node=xmlNewChild(root_node, NULL, "language", NULL);
 	
-	e_xml_set_string_prop_by_name(language_node, "ename", language);
-	e_xml_set_string_prop_by_name(language_node, "code", lc);
-	e_xml_set_string_prop_by_name(language_node, "email", lg);
+	e_xml_set_string_prop_by_name(language_node, "ename", 
+		gtranslator_translator->language->name);
+	e_xml_set_string_prop_by_name(language_node, "code", 
+		gtranslator_translator->language->locale);
+	e_xml_set_string_prop_by_name(language_node, "email", 
+		gtranslator_translator->language->group_email);
 
 	/*
 	 * Set <translator> node with translator informations -- if available.
 	 */
 	translator_node=xmlNewChild(root_node, NULL, "translator", NULL);
 	
-	e_xml_set_string_prop_by_name(translator_node, "name", author);
-	e_xml_set_string_prop_by_name(translator_node, "email", email);
+	e_xml_set_string_prop_by_name(translator_node, "name", gtranslator_translator->name);
+	e_xml_set_string_prop_by_name(translator_node, "email", gtranslator_translator->email);
 
 	/*
 	 * Set the UMTF date string for our internal GtrLearnBuffer.

@@ -219,17 +219,17 @@ int main(int argc, char *argv[])
 	 */
 	gtranslator_utils_create_gtranslator_directory();
 
-	/*
-	 * Read the translator information/data into our generally used 
-	 *  GtrTranslator structure.
-	 */
-	gtranslator_translator=gtranslator_translator_new();
-	
 	/* 
 	 * Initialize the regular expression cache 
 	 */
 	rxc = gnome_regex_cache_new_with_size(20);
 	gtranslator_preferences_read();
+
+	/*
+	 * Read the translator information/data into our generally used 
+	 *  GtrTranslator structure.
+	 */
+	gtranslator_translator=gtranslator_translator_new();
 	
 	/*
 	 * Get the master session management client.
@@ -426,8 +426,9 @@ int main(int argc, char *argv[])
 		/*
 		 * Free all till now allocated stuff.
 		 */
-		gnome_regex_cache_destroy(rxc);
+		gtranslator_translator_free(gtranslator_translator);
 		gtranslator_preferences_free();
+		gnome_regex_cache_destroy(rxc);
 		gtranslator_color_scheme_free(&theme);
 
 		/*

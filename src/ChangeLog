@@ -1,5 +1,28 @@
 2001-09-02  Fatih Demir <kabalak@gtranslator.org>
 
+	* dialogs.c, gui.c & prefs.c: Some more mem leak hunting! Mainly
+		addicted to "gtk_editable_get_chars" calls.
+
+	* prefs.c: The "gtranslator_preferences_free" function now frees 
+		really the left over gchar's which were all leaking 'round
+		 -- the language, translator name etc. are now free'd by the
+		  "gtranslator_translator_free" function.
+
+	* prefs_init.c: Call up the new GtrTranslator structure based prefs
+		init function "gtranslator_translator_new_with_default_values"
+		 to get the default values for translator name, EMail.
+
+	* dialogs.c, prefs.c/.h & query.c: Also moved the default query domain
+		preference value now into the responsibility area of the 
+		 GtrTranslator structure.
+
+	* header_stuff.c, learn.c, prefs.c/.h, query.c, utils.c: Also switch
+		to GtrTranslator use instead of the previous "mime", "language"
+		 etc. variables for the language values.
+
+	* header_stuff.c, learn.c & prefs.c/.h: Switched over to GtrTranslator
+		use instead of "author" & "email".
+
 	* gui.c, main.c & sighandling.c: Init/free the generally used 
 		GtrTranslator structure "gtranslator_translator".
 

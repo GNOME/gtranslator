@@ -21,6 +21,7 @@
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
+#include "translator.h"
 #include "utils.h"
 
 #include <string.h>
@@ -49,11 +50,11 @@ void gtranslator_preferences_init_default_values()
 		/*
 		 * Determine the language name from the environment.
 		 */
-		if(!lc)
+		if(!gtranslator_translator->language->locale)
 		{
 			gchar	*language_name_for_prefs_init=NULL;
 			
-			lc=gtranslator_utils_get_environment_locale();
+			gtranslator_translator->language->locale=gtranslator_utils_get_environment_locale();
 
 			/*
 			 * Well, if we couldn't determine any locale (or the
@@ -61,13 +62,13 @@ void gtranslator_preferences_init_default_values()
 			 *   like for the posix portable locale "C"]), assume
 			 *    English to be our language.
 			 */
-			if(!lc || (strlen(lc) <= 1))
+			if(!gtranslator_translator->language->locale || (strlen(gtranslator_translator->language->locale) <= 1))
 			{
 				gtranslator_utils_set_language_values_by_language("English");
 			}
 			else
 			{
-				language_name_for_prefs_init=gtranslator_utils_get_language_name_by_locale_code(lc);
+				language_name_for_prefs_init=gtranslator_utils_get_language_name_by_locale_code(gtranslator_translator->language->locale);
 				g_return_if_fail(language_name_for_prefs_init!=NULL);
 
 				gtranslator_utils_set_language_values_by_language(language_name_for_prefs_init);
@@ -78,47 +79,9 @@ void gtranslator_preferences_init_default_values()
 		 * Also try out some magic for getting the translator name/EMail
 		 *  address pair.
 		 */
-		if(!author || !email)
+		if(!gtranslator_translator || !gtranslator_translator->name)
 		{
-			gchar	*value=NULL;
-
-			/*
-			 * Try to get the translator name from this envpath.
-			 */
-			gtranslator_utils_get_environment_value(
-				"GTRANSLATOR_TRANSLATOR_NAME:TRANSLATOR_NAME:\
-				TRANSLATOR:NAME:LOGNAME",
-				&value);
-
-			/*
-			 * If we've found a value set it as the initial 
-			 *  translator name in the prefs.
-			 */
-			if(value)
-			{
-				gtranslator_config_set_string("translator/name", value);
-				GTR_FREE(value);
-			}
-
-			/*
-			 * Now search the envpath for a valuable EMail address.
-			 */
-			gtranslator_utils_get_environment_value(
-				"GTRANSLATOR_TRANSLATOR_EMAIL_ADDRESS:\
-				GTRANSLATOR_TRANSLATOR_EMAIL:TRANSLATOR_EMAIL:\
-				EMAIL_ADDRESS:EMAIL",
-				&value);
-
-			/*
-			 * Well, the EMail address is also filled out if any
-			 *  corresponding environment variable could be found.
-			 */
-			if(value && strchr(value, '@') && strchr(value, '.') &&
-				strlen(value) > 6)
-			{
-				gtranslator_config_set_string("translator/email", value);
-				GTR_FREE(value);
-			}
+			gtranslator_translator=gtranslator_translator_new_with_default_values();
 		}
 
 		/*
