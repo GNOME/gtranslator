@@ -1,11 +1,15 @@
-dnl Process this file with autoconf to produce a configure script.
+dnl -------------------------------------------------------------------
+dnl Process this file with autoconf to produce a configure script .
+dnl -------------------------------------------------------------------
 
 AC_INIT(configure.in)
 AM_INIT_AUTOMAKE(gtranslator, 0.15)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
-dnl Pick up the Gnome macros.
+dnl -------------------------------------------------------------------
+dnl Pick up the Gnome macros .
+dnl -------------------------------------------------------------------
 AM_ACLOCAL_INCLUDE(macros)
 
 GNOME_INIT
@@ -15,22 +19,56 @@ AM_PROG_CC_STDC
 AC_HEADER_STDC
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
-AC_CHECK_LIB(dyndata,create_bt)
-dnl Add the languages which your application supports here
+
+dnl -------------------------------------------------------------------
+dnl Check for the dyndata library 
+dnl -------------------------------------------------------------------
+AC_CHECK_LIB(dyndata,create_bt,,AC_MSG_ERROR([
+*------------------------------------------------------------
+Couldn't find the dyndata library !
+*------------------------------------------------------------
+]))
+
+dnl -------------------------------------------------------------------
+dnl Check for the dyndata headers
+dnl -------------------------------------------------------------------
+AC_CHECK_HEADERS(/usr/include/dyndata/dyndata.h ,,AC_CHECK_HEADERS(
+/usr/local/include/dyndata/dyndata.h ,,
+AC_MSG_ERROR([
+*----------------------------------------------------------------------
+
+        Couldn't find the header files of dyndata !
+
+        Get it from http://gtranslator.sourceforge.net/dyndata.html !
+
+*----------------------------------------------------------------------
+])))
+
+dnl -------------------------------------------------------------------
+dnl Add the languages which the application supports here
+dnl -------------------------------------------------------------------
 ALL_LINGUAS="no tr"
 AM_GNU_GETTEXT
 
-dnl Set PACKAGE_LOCALE_DIR in config.h.
+dnl -------------------------------------------------------------------
+dnl Set PACKAGE_LOCALE_DIR in config.h .
+dnl -------------------------------------------------------------------
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
 else
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
 fi
 
-dnl Subst PACKAGE_PIXMAPS_DIR.
+dnl -------------------------------------------------------------------
+dnl Subst PACKAGE_PIXMAPS_DIR .
+dnl -------------------------------------------------------------------
 PACKAGE_PIXMAPS_DIR="`gnome-config --datadir`/pixmaps/${PACKAGE}"
 AC_SUBST(PACKAGE_PIXMAPS_DIR)
 
+dnl -------------------------------------------------------------------
+dnl Simply substitute the icon-location directory
+dnl in gtranslator.keys.in .
+dnl -------------------------------------------------------------------
 PIXMAP_DIR="`gnome-config --datadir`/pixmaps"
 AC_SUBST(PIXMAP_DIR)
 
