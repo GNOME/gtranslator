@@ -34,8 +34,8 @@
  */
 extern GtkWidget *gtranslator_application;
 extern GtkWidget *gtranslator_messages_table;
-extern GtkTextBuffer *trans_box;
-extern GtkTextBuffer *text_box;
+extern GtkTextView *trans_box;
+extern GtkTextView *text_box;
 extern GtkWidget *gtranslator_application_bar;
 
 extern GtkWidget *sidebar_pane;
@@ -85,12 +85,6 @@ void gtranslator_selection_clear(GtkWidget  *widget, gpointer useless);
  * A status defining callback -- now generaly defined for instance.
  */
 void gtranslator_translation_changed(GtkWidget  *widget, gpointer useless);
-
-void insert_text_handler(GtkEditable *editable, const gchar *text,
-			 gint length, gint *position, gpointer data);
-
-void delete_text_handler(GtkEditable *editable, gint start_position,
-                         gint end_position);
 
 /*
  * If TRUE, means that trans_box is being changed by program, not user

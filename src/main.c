@@ -237,11 +237,11 @@ int main(int argc, char *argv[])
 		/*
 		 * Connect the signals needed for session management.
 		 */
-		gtk_signal_connect(GTK_OBJECT(client), "save_yourself",
-				   GTK_SIGNAL_FUNC(gtranslator_session_sleep),
+		g_signal_connect(G_OBJECT(client), "save_yourself",
+				 G_CALLBACK(gtranslator_session_sleep),
 				   (gpointer) argv[0]);
-		gtk_signal_connect(GTK_OBJECT(client), "die",
-				   GTK_SIGNAL_FUNC(gtranslator_session_die), NULL);
+		g_signal_connect(G_OBJECT(client), "die",
+				 G_CALLBACK(gtranslator_session_die), NULL);
 	}
 
 	/*

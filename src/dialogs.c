@@ -75,8 +75,8 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 		gtk_window_set_wmclass(GTK_WINDOW(*dlg), wmname, "gtranslator");
 	if (GNOME_IS_DIALOG(*dlg))
 		gnome_dialog_set_parent(GNOME_DIALOG(*dlg), GTK_WINDOW(gtranslator_application));
-	gtk_signal_connect(GTK_OBJECT(*dlg), "destroy",
-			   GTK_SIGNAL_FUNC(gtk_widget_destroyed), dlg);
+	g_signal_connect(G_OBJECT(*dlg), "destroy",
+			 G_CALLBACK(gtk_widget_destroyed), dlg);
 
 	gtk_widget_show_all(*dlg);
 }
@@ -96,14 +96,14 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 	gtranslator_raise_dialog(dialog);
 	dialog = gtk_file_selection_new(_("gtranslator -- open po file"));
 	
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
+	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
 			   "clicked", GTK_SIGNAL_FUNC(gtranslator_parse_the_file_from_file_dialog),
 			   (gpointer) dialog);
-	gtk_signal_connect_object(GTK_OBJECT
-				  (GTK_FILE_SELECTION(dialog)->cancel_button),
-				  "clicked",
-				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
-				  GTK_OBJECT(dialog));
+	g_signal_connect_swapped(G_OBJECT
+				 (GTK_FILE_SELECTION(dialog)->cancel_button),
+				 "clicked",
+				 G_CALLBACK(gtk_widget_destroy),
+				 G_OBJECT(dialog));
 
 	gtranslator_file_dialogs_set_directory(&dialog);
 	
@@ -166,14 +166,14 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 		GTR_FREE(filename);
 	}
 	
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
+	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
 			   "clicked", GTK_SIGNAL_FUNC(gtranslator_save_file_dialog),
 			   (gpointer) dialog);
-	gtk_signal_connect_object(GTK_OBJECT
-				  (GTK_FILE_SELECTION(dialog)->cancel_button),
-				  "clicked",
-				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
-				  GTK_OBJECT(dialog));
+	g_signal_connect_swapped(G_OBJECT
+				 (GTK_FILE_SELECTION(dialog)->cancel_button),
+				 "clicked",
+				 G_CALLBACK(gtk_widget_destroy),
+				 G_OBJECT(dialog));
 
 	gtranslator_file_dialogs_set_directory(&dialog);
 	
@@ -236,11 +236,11 @@ void gtranslator_import_dialog(GtkWidget *widget, gpointer useless)
 	gtranslator_raise_dialog(import_dialog);
 	import_dialog=gtk_file_selection_new(_("gtranslator -- import po file"));
 
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(import_dialog)->ok_button),
+	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(import_dialog)->ok_button),
 		"clicked", GTK_SIGNAL_FUNC(gtranslator_import_dialog_clicked), (gpointer) import_dialog);
 
-	gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(import_dialog)->cancel_button), 
-		"clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), GTK_OBJECT(import_dialog));
+	g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(import_dialog)->cancel_button), 
+		"clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(import_dialog));
 
 	gtranslator_file_dialogs_set_directory(&import_dialog);
 	
@@ -279,11 +279,11 @@ void gtranslator_export_dialog(GtkWidget *widget, gpointer useless)
 
 	export_dialog=gtk_file_selection_new(_("gtranslator -- export po file"));
 
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(export_dialog)->ok_button),
+	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(export_dialog)->ok_button),
 		"clicked", GTK_SIGNAL_FUNC(gtranslator_export_dialog_clicked), (gpointer) export_dialog);
 
-	gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(export_dialog)->cancel_button), 
-		"clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), GTK_OBJECT(export_dialog));
+	g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(export_dialog)->cancel_button), 
+		"clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(export_dialog));
 
 	gtranslator_file_dialogs_set_directory(&export_dialog);
 
@@ -623,8 +623,8 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), spin,
 			   FALSE, FALSE, 0);
 	
-	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
-			   GTK_SIGNAL_FUNC(gtranslator_go_to_dialog_clicked),
+	g_signal_connect(G_OBJECT(dialog), "clicked",
+			 G_CALLBACK(gtranslator_go_to_dialog_clicked),
 			   spin);
 	gtk_window_set_focus(GTK_WINDOW(dialog), spin);
 	gtranslator_dialog_show(&dialog, "gtranslator -- goto");
@@ -688,33 +688,33 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 
 	menu = gtk_menu_new();
 	menu_item = gtk_menu_item_new_with_label(_("English"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-			   GTK_SIGNAL_FUNC(find_in_activated),
+	g_signal_connect(G_OBJECT(menu_item), "activate",
+			 G_CALLBACK(find_in_activated),
 			   GINT_TO_POINTER(findEnglish));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Translated"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-			   GTK_SIGNAL_FUNC(find_in_activated),
+	g_signal_connect(G_OBJECT(menu_item), "activate",
+			 G_CALLBACK(find_in_activated),
 			   GINT_TO_POINTER(findTranslated));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Both"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(findBoth));
+	g_signal_connect(G_OBJECT(menu_item), "activate",
+			 G_CALLBACK(find_in_activated),
+			 GINT_TO_POINTER(findBoth));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Comments"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(findComment));
+	g_signal_connect(G_OBJECT(menu_item), "activate",
+			 G_CALLBACK(find_in_activated),
+			 GINT_TO_POINTER(findComment));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("In all strings"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
-			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(findAll));
+	g_signal_connect(G_OBJECT(menu_item), "activate",
+			 G_CALLBACK(find_in_activated),
+			 GINT_TO_POINTER(findAll));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	switch (GtrPreferences.find_in) {
@@ -748,10 +748,10 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), hbox,
 			   FALSE, FALSE, 0);
 	
-	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
-			   GTK_SIGNAL_FUNC(find_dlg_clicked), findy);
-	gtk_signal_connect(GTK_OBJECT(match_case), "toggled",
-			   GTK_SIGNAL_FUNC(match_case_toggled), NULL);
+	g_signal_connect(G_OBJECT(dialog), "clicked",
+			 G_CALLBACK(find_dlg_clicked), findy);
+	g_signal_connect(G_OBJECT(match_case), "toggled",
+			 G_CALLBACK(match_case_toggled), NULL);
 	gtk_window_set_focus(GTK_WINDOW(dialog), 
 		gnome_entry_gtk_entry(GNOME_ENTRY(findy)));
 	
@@ -786,19 +786,19 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 	menu=gtk_menu_new();
 	
 	menu_item = gtk_menu_item_new_with_label(_("Comments"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+	g_signal_connect(G_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
 		GINT_TO_POINTER(findComment));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 
 	menu_item=gtk_menu_item_new_with_label(_("Translated"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+	g_signal_connect(G_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
 		GINT_TO_POINTER(findTranslated));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item=gtk_menu_item_new_with_label(_("Both"));
-	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+	g_signal_connect(G_OBJECT(menu_item), "activate",
 		GTK_SIGNAL_FUNC(find_in_activated),
 		GINT_TO_POINTER(findBoth));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
@@ -949,7 +949,7 @@ void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 	gnome_dialog_editable_enters(GNOME_DIALOG(dialog),
 		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(entry))));
 
-	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
+	g_signal_connect(G_OBJECT(dialog), "clicked",
 		GTK_SIGNAL_FUNC(gtranslator_open_uri_dialog_clicked), entry);
 			
 	gtranslator_dialog_show(&dialog, "gtranslator -- open URI");
@@ -1243,7 +1243,7 @@ Would you like to insert it into the translation?"),
 						 * status flags for it.
 						 */
 					  // XXX correct?
-					        gtk_text_buffer_set_text(trans_box, result, -1);
+					        gtk_text_buffer_set_text(gtk_text_view_get_buffer(trans_box), result, -1);
 
 						gtranslator_translation_changed(NULL, NULL);
 

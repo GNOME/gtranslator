@@ -56,31 +56,31 @@ void gtranslator_utils_restore_geometry(gchar *gstr);
  */
 GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget * table, 
 	gint row, const char *label_text, GList * list, const char *value,
-	gboolean editable, GtkSignalFunc callback, gpointer user_data);
+	gboolean editable, GCallback callback, gpointer user_data);
 
 GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget * table, 
 	gint row, const char *label_text, const char *value,
-	GtkSignalFunc callback);
+	GCallback callback);
 
 GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget * table, 
 	gint row, const char *label_text, gboolean value,
-	GtkSignalFunc callback);
+	GCallback callback);
 
 GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget * table, 
 	gint row, const char *label_text, const char *value,
-	GtkSignalFunc callback);
+	GCallback callback);
 
 GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, gfloat minimum, gfloat maximum,
-	gfloat value, GtkSignalFunc callback);
+	gfloat value, GCallback callback);
 	
 GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, const gchar *title_text,
-	const gchar *fontspec, GtkSignalFunc callback);
+	const gchar *fontspec, GCallback callback);
 	
 GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, const gchar *title_text,
-	ColorType color_type, GtkSignalFunc callback);
+	ColorType color_type, GCallback callback);
 
 /*
  * Returns the added GtkTable to the preferences box.

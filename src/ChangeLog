@@ -1,3 +1,27 @@
+2002-08-04  Christophe Fergeau <teuf@users.sourceforge.net>
+
+	* dialogs.c
+	* gui.c
+	* gui.h
+	* header_stuff.c
+	* main.c
+	* message.c
+	* messages-table.c
+	* parse.c
+	* prefs.c
+	* syntax.c
+	* syntax.h
+	* utils_gui.c
+	* utils_gui.h: more GNOME2 work. gtranslator can now load some po files
+	and allows you to browse through the strings without crashing. 
+	Things to know if you want to work on this port : the various signal
+	callbacks used when some text was inserted/deleted are currently 
+	commented out, and the whole highlighting stuff needs to be rewritten
+	to use GtkTextTag.
+	The loading of the po file also needs to be reworked, at the moment
+	I only go through all the messages after the file is loaded to convert
+	them to UTF8. Maybe that can be improved.
+
 2002-07-30  Fatih Demir <kabalak@gtranslator.org>
 
 	* e-xml-utils.c: Added a stupid assignment to avoid a compilation error.

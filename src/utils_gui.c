@@ -136,7 +136,7 @@ GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint ro
 				   const char *label_text,
 				   GList  * list, const char *value,
 				   gboolean editable,
-				   GtkSignalFunc callback,
+				   GCallback callback,
 				   gpointer user_data)
 {
 	GtkWidget *label;
@@ -152,15 +152,15 @@ GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint ro
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), combo, 1, 2, row, row + 1);
 	
-	gtk_signal_connect(GTK_OBJECT(GTK_COMBO(combo)->entry), "changed",
-			   GTK_SIGNAL_FUNC(callback), user_data);
+	g_signal_connect(G_OBJECT(GTK_COMBO(combo)->entry), "changed",
+			 G_CALLBACK(callback), user_data);
 	return combo;
 }
 
 GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget  * table, gint row,
 				    const char *label_text,
 				    gboolean value,
-				    GtkSignalFunc callback)
+				    GCallback callback)
 {
 	GtkWidget *toggle;
 	toggle = gtk_check_button_new_with_label(label_text);
@@ -171,8 +171,8 @@ GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget  * table, gint r
 
 	if(callback)
 	{
-		gtk_signal_connect(GTK_OBJECT(toggle), "toggled",
-			   GTK_SIGNAL_FUNC(callback), NULL);
+		g_signal_connect(G_OBJECT(toggle), "toggled",
+			         G_CALLBACK(callback), NULL);
 	}
 
 	return toggle;
@@ -181,7 +181,7 @@ GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget  * table, gint r
 GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget  * table, gint row,
 				   const char *label_text,
 				   const char *value,
-				   GtkSignalFunc callback)
+				   GCallback callback)
 {
 	GtkWidget *label;
 	GtkWidget *entry;
@@ -191,15 +191,15 @@ GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget  * table, gint ro
 		gtk_entry_set_text(GTK_ENTRY(entry), value);
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), entry, 1, 2, row, row + 1);
-	gtk_signal_connect(GTK_OBJECT(entry), "changed",
-			   GTK_SIGNAL_FUNC(callback), NULL);
+	g_signal_connect(G_OBJECT(entry), "changed",
+			 G_CALLBACK(callback), NULL);
 	return entry;
 }
 
 GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row,
 				  const char *label_text,
 				  const char *value,
-				  GtkSignalFunc callback)
+				  GCallback callback)
 {
 	GtkWidget *label;
 	GtkWidget *widget;
@@ -219,8 +219,8 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 
 	if(callback)
 	{
-		gtk_signal_connect(GTK_OBJECT(widget), "changed",
-			GTK_SIGNAL_FUNC(callback), NULL);
+		g_signal_connect(G_OBJECT(widget), "changed",
+			         G_CALLBACK(callback), NULL);
 	}
 
 	return widget;
@@ -228,7 +228,7 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 
 GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, gfloat minimum, gfloat maximum,
-	gfloat value, GtkSignalFunc callback)
+	gfloat value, GCallback callback)
 {
 	GtkWidget *label;
 	GtkWidget *spin_button;
@@ -243,8 +243,8 @@ GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), spin_button, 1, 2, row, row + 1);
 
-	gtk_signal_connect(GTK_OBJECT(spin_button), "changed",
-		GTK_SIGNAL_FUNC(callback), NULL);
+	g_signal_connect(G_OBJECT(spin_button), "changed",
+		G_CALLBACK(callback), NULL);
 	
 	return spin_button;
 }
@@ -254,7 +254,7 @@ GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
  */
 GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, const gchar *title_text,
-	const gchar *fontspec, GtkSignalFunc callback)
+	const gchar *fontspec, GCallback callback)
 {
 	GtkWidget *label;
 	GtkWidget *font_selector;
@@ -279,8 +279,8 @@ GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
 	gtk_table_attach_defaults(GTK_TABLE(table), font_selector, 1, 2, 
 		row, row + 1);
 	
-	gtk_signal_connect(GTK_OBJECT(font_selector), "font_set",
-		GTK_SIGNAL_FUNC(callback), NULL);
+	g_signal_connect(G_OBJECT(font_selector), "font_set",
+		G_CALLBACK(callback), NULL);
 	
 	return font_selector;
 }
@@ -290,7 +290,7 @@ GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
  */
 GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 	gint row, const gchar *label_text, const gchar *title_text,
-	ColorType color_type, GtkSignalFunc callback)
+	ColorType color_type, GCallback callback)
 {
 	GtkWidget *label;
 	GtkWidget *color_selector;
@@ -309,8 +309,8 @@ GtkWidget *gtranslator_utils_attach_color_with_label(GtkWidget *table,
 	gtk_table_attach_defaults(GTK_TABLE(table), color_selector, 1, 2, 
 		row, row + 1);
 	
-	gtk_signal_connect(GTK_OBJECT(color_selector), "color_set",
-		GTK_SIGNAL_FUNC(callback), NULL);	
+	g_signal_connect(G_OBJECT(color_selector), "color_set",
+		G_CALLBACK(callback), NULL);	
 	
 	return color_selector;
 }

@@ -55,6 +55,7 @@ enum
   ORIGINAL_COLUMN,
   TRANSLATION_COLUMN,
   COMMENT_COLUMN,
+  MSG_PTR_COLUMN,
   N_COLUMNS
 };
 
@@ -67,6 +68,10 @@ enum
  */
 //static void read_messages_table_colors(void);
 //static void free_messages_table_colors(void);
+static void 
+gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
+					     gpointer data);
+
 
 /*
  * Own messages table color container.
@@ -101,18 +106,18 @@ typedef struct
 /*
  * Global variables
  */
-GtkWidget *tree;
+static GtkWidget *tree;
 
-GtrMessagesTableColors *messages_table_colors;
+static GtrMessagesTableColors *messages_table_colors;
 
-GtrTranslationRetrieval *retrieval=NULL;
+static GtrTranslationRetrieval *retrieval=NULL;
 
 /*
  * Hash table to associate an ETreePath with each message. Used
  * in update_row to determine the node given a message that has been
  * updated
  */
-GHashTable *hash_table=NULL;
+static GHashTable *hash_table=NULL;
 
 /*
  * Pops up on a right click in the messages table -- should show any found 
@@ -129,8 +134,9 @@ GtkWidget *gtranslator_messages_table_new()
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
   GtkTreeStore *store;
+  GtkTreeSelection *selection;
   gint i;
-  
+
   gchar *titles[][2] = {{_("Status"),      "text"},
 			{_("Number"),      "text"},
 			{_("Line"),        "text"},
@@ -144,7 +150,8 @@ GtkWidget *gtranslator_messages_table_new()
 			      G_TYPE_INT,
 			      G_TYPE_STRING,
 			      G_TYPE_STRING,
-			      G_TYPE_STRING);
+			      G_TYPE_STRING,
+			      G_TYPE_POINTER);
   
   tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tree), TRUE);
@@ -152,16 +159,25 @@ GtkWidget *gtranslator_messages_table_new()
 				   NUMBER_COLUMN);
   
   g_object_unref (G_OBJECT (store));
-  
-  for (i=0; i < N_COLUMNS; i++) {
+
+  //we stop at N_COLUMNS-1 because we don't want to display the GtrMsg* 
+  //we store in the GtkTreeStore
+  for (i=0; i < N_COLUMNS-1; i++) {
     renderer = gtk_cell_renderer_text_new ();
     column = gtk_tree_view_column_new_with_attributes (titles[i][0], renderer,
 						       titles[i][1], i,
 						       NULL);
     gtk_tree_view_column_set_sort_column_id (column, i);
+    gtk_tree_view_column_set_resizable(column, TRUE);
     gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
   }
-  
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+  g_signal_connect (G_OBJECT(selection), "changed", 
+		    G_CALLBACK(gtranslator_messages_table_selection_changed), 
+		    NULL);
+
   return tree;
 }
 
@@ -170,7 +186,7 @@ GtkWidget *gtranslator_messages_table_new()
  */
 void gtranslator_messages_table_clear(void)
 {
-
+  gtk_tree_store_clear(GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(tree))));
 }		
 
 /*
@@ -182,53 +198,59 @@ void gtranslator_messages_table_create (void)
   gint i=0, j=0, k=0;
 
   GtkTreeStore *model; // where to get it from ????
-  GtkTreeIter root, unknown_node, fuzzy_node, translated_node;
-
+  GtkTreeIter unknown_node, fuzzy_node, translated_node;
+  GtkTreeIter cur_node;
   if(!file_opened)
     return;
   list=po->messages;
 
-  model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree));
+  model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(tree)));
 
-  gtk_tree_store_append (model, &root, NULL);
+  gtk_tree_store_append (model, &unknown_node, NULL);
+  gtk_tree_store_set (model, &unknown_node, 
+		      STATUS_COLUMN, _("unknown"), 
+		      MSG_PTR_COLUMN, NULL,
+		      -1);
 
-  gtk_tree_store_append (model, &unknown_node, &root);
-  gtk_tree_store_set (model, &unknown_node, 
-		      STATUS_COLUMN, _("unknown"), -1);
-		      
-  gtk_tree_store_append (model, &fuzzy_node, &root);
-  gtk_tree_store_set (model, &unknown_node, 
-		      STATUS_COLUMN, _("fuzzy"), -1);
+  gtk_tree_store_append (model, &fuzzy_node, NULL);
+  gtk_tree_store_set (model, &fuzzy_node, 
+		      STATUS_COLUMN, _("fuzzy"), 
+		      MSG_PTR_COLUMN, NULL,
+		      -1);
 
-  gtk_tree_store_append (model, &translated_node, &root);
-  gtk_tree_store_set (model, &unknown_node, 
-		      STATUS_COLUMN, _("translated"), -1);
+  gtk_tree_store_append (model, &translated_node, NULL);
+  gtk_tree_store_set (model, &translated_node, 
+		      STATUS_COLUMN, _("translated"), 
+		      MSG_PTR_COLUMN, NULL,
+		      -1);
 
   while (list) {
     GtrMsg *message=list->data;
-    
+
     switch (message->status){
     case GTR_MSG_STATUS_UNKNOWN:
-      gtk_tree_store_append(model, &unknown_node, &unknown_node);
-      gtk_tree_store_set(model, &unknown_node,
+      gtk_tree_store_append(model, &cur_node, &unknown_node);
+      gtk_tree_store_set(model, &cur_node,
 			 STATUS_COLUMN, "",
 			 NUMBER_COLUMN, i,
 			 LINE_COLUMN, 42,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 COMMENT_COLUMN, message->comment->pure_comment,
+			 MSG_PTR_COLUMN, message,
 			 -1);
       i++;
       break;
     case GTR_MSG_STATUS_TRANSLATED:
-      gtk_tree_store_append(model, &translated_node, &unknown_node);
-      gtk_tree_store_set(model, &translated_node,
+      gtk_tree_store_append(model, &cur_node, &translated_node);
+      gtk_tree_store_set(model, &cur_node,
 			 STATUS_COLUMN, "",
 			 NUMBER_COLUMN, j,
 			 LINE_COLUMN, 42,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 COMMENT_COLUMN, message->comment->pure_comment,
+			 MSG_PTR_COLUMN, message,
 			 -1);
       j++;
       break;
@@ -237,19 +259,28 @@ void gtranslator_messages_table_create (void)
       break;
     case GTR_MSG_STATUS_FUZZY:
     default:
-      gtk_tree_store_append(model, &fuzzy_node, &unknown_node);
-      gtk_tree_store_set(model, &fuzzy_node,
+      gtk_tree_store_append(model, &cur_node, &fuzzy_node);
+      gtk_tree_store_set(model, &cur_node,
 			 STATUS_COLUMN, "",
 			 NUMBER_COLUMN, k,
 			 LINE_COLUMN, 42,
 			 ORIGINAL_COLUMN, message->msgid,
 			 TRANSLATION_COLUMN, message->msgstr,
 			 COMMENT_COLUMN, message->comment->pure_comment,
+			 MSG_PTR_COLUMN, message,
 			 -1);
       k++;
     }
       list = g_list_next(list);
   }
+  gtk_tree_store_set (model, &unknown_node, 
+		      NUMBER_COLUMN, i, -1);
+  gtk_tree_store_set (model, &translated_node, 
+		      NUMBER_COLUMN, j, -1);
+  gtk_tree_store_set (model, &fuzzy_node, 
+		      NUMBER_COLUMN, k, -1);
+
+
 }
 
 /*
@@ -281,5 +312,27 @@ void gtranslator_messages_table_update_message_status(GtrMsg *message)
  */
 void gtranslator_messages_table_save_state()
 {
+
+}
+
+
+static void 
+gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
+					     gpointer data)
+{
+  GtkTreeIter iter;
+  GtkTreeModel* model;
+  GtrMsg* message;
+
+  if (gtk_tree_selection_get_selected(selection, &model, &iter) == TRUE) {
+    gtk_tree_model_get(model, &iter, MSG_PTR_COLUMN, &message, -1);
+    if (message != NULL) {
+      GList* to_go = NULL;
+      
+      to_go = g_list_append(to_go, message);
+      gtranslator_message_go_to(to_go);
+      g_list_free(to_go);
+    }
+  }
 
 }

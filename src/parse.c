@@ -251,6 +251,21 @@ void gtranslator_parse(const gchar *filename)
 	}
 
 	po->locale_charset=gtranslator_utils_get_locale_charset();
+	
+	/* FIXME: converting the messages to UTF8 there since I don't
+	   know the parsing code, and I don't feel like figuring it out
+	   so I temporarily put this here to ensure all the strings are 
+	   properly encoded. Please fix it...
+	*/
+	if (po->utf8 == FALSE) {
+		GList *tmp = po->messages;
+		while (tmp != NULL) {
+			tmp->data = g_convert(tmp->data, strlen(tmp->data),
+					      "UTF-8", po->locale_charset,
+					      NULL, NULL, NULL);
+			tmp = tmp->next;
+		}				
+	}
 
 	/*
 	 * Set the current message to the first message.

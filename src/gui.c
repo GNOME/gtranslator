@@ -75,8 +75,8 @@
  */
 GtkWidget *gtranslator_application;
 GtkWidget *gtranslator_messages_table;
-GtkTextBuffer *trans_box;
-GtkTextBuffer *text_box;
+GtkTextView *trans_box;
+GtkTextView *text_box;
 GtkWidget *gtranslator_application_bar;
 
 GtkWidget *content_pane;
@@ -98,11 +98,12 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event,
 /*
  * Internal text callbacks/handlers.
  */
-void insert_text_handler (GtkEditable *editable, const gchar *text,
-	gint length, gint *position, gpointer data);
+static void insert_text_handler (GtkTextBuffer *editable, GtkTextIter *pos,
+				 const gchar *text,
+				 gint length, gpointer data);
 
-void delete_text_handler(GtkEditable *editable, gint start_position,
-	gint end_position);
+static void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
+				GtkTextIter *end);
 
 static void selection_get_handler(GtkWidget *widget,
 	GtkSelectionData *selection_data, guint info,
@@ -174,9 +175,8 @@ void gtranslator_create_main_window(void)
 	GtkWidget *translation_text_scrolled_window;
 	GtkWidget *comments_scrolled_window;
 	GtkWidget *comments_viewport;
-	GtkWidget *text_box_view;
-	GtkWidget *trans_box_view;
 
+	GtkWidget *messages_table_scrolled_window;
 	/*
 	 * Create the app	
 	 */
@@ -264,23 +264,27 @@ void gtranslator_create_main_window(void)
 	gtk_paned_pack1(GTK_PANED(content_pane), extra_content_view->box, TRUE, FALSE);
 	gtk_paned_pack2(GTK_PANED(content_pane), vertical_box, TRUE, FALSE);
 
-	gtk_paned_pack1(GTK_PANED(table_pane), gtranslator_messages_table, TRUE, FALSE);
+	messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+	gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), gtranslator_messages_table);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_paned_pack1(GTK_PANED(table_pane), messages_table_scrolled_window, TRUE, FALSE);
 	gtk_paned_pack2(GTK_PANED(table_pane), content_pane, TRUE, FALSE);
 	
 	gnome_app_set_contents(GNOME_APP(gtranslator_application), table_pane);
 
 	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vertical_box), gtk_hseparator_new(), FALSE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(original_text_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
 	// XXX
-	text_box_view = gtk_text_view_new ();
-	text_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_box_view));
+	text_box = GTK_TEXT_VIEW(gtk_text_view_new ());
 
-	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), text_box_view);
-	
+//	text_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_box_view));
+
+	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), GTK_WIDGET(text_box));
 	//gtk_text_set_editable(GTK_TEXT(text_box), FALSE);
 
 	translation_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
@@ -289,10 +293,10 @@ void gtranslator_create_main_window(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	trans_box_view = gtk_text_view_new();
-	trans_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (trans_box_view));
+	trans_box = GTK_TEXT_VIEW(gtk_text_view_new());
+//	trans_box = gtk_text_view_get_buffer (GTK_TEXT_VIEW (trans_box_view));
 
-	gtk_container_add(GTK_CONTAINER(translation_text_scrolled_window), trans_box_view);
+	gtk_container_add(GTK_CONTAINER(translation_text_scrolled_window), GTK_WIDGET(trans_box));
 
 	gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);
@@ -320,38 +324,44 @@ void gtranslator_create_main_window(void)
 	/*
 	 * The callbacks list
 	 */
-	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "delete_event",
-			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
+	g_signal_connect(G_OBJECT(gtranslator_application), "delete_event",
+			 G_CALLBACK(gtranslator_quit), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(extra_content_view->edit_button), "clicked",
-			   GTK_SIGNAL_FUNC(gtranslator_edit_comment_dialog), NULL);
+	g_signal_connect(G_OBJECT(extra_content_view->edit_button), "clicked",
+			 G_CALLBACK(gtranslator_edit_comment_dialog), NULL);
 
-	gtk_signal_connect_after(GTK_OBJECT(text_box), "selection_get",
-			   GTK_SIGNAL_FUNC(selection_get_handler), NULL);
-	gtk_signal_connect_after(GTK_OBJECT(trans_box), "selection_get",
-			   GTK_SIGNAL_FUNC(selection_get_handler), NULL);
+	g_signal_connect_after(G_OBJECT(text_box), "selection-get",
+			 G_CALLBACK(selection_get_handler), NULL);
+	g_signal_connect_after(G_OBJECT(trans_box), "selection-get",
+			 G_CALLBACK(selection_get_handler), NULL);
+/*
+	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(text_box)), 
+			 "insert-text",
+			 G_CALLBACK(insert_text_handler), NULL);
+	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(text_box)),
+			 "delete-range",
+			 G_CALLBACK(delete_text_handler), NULL);
+*/
 
-	gtk_signal_connect(GTK_OBJECT(text_box), "insert_text",
-			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
-	gtk_signal_connect(GTK_OBJECT(text_box), "delete_text",
-			   GTK_SIGNAL_FUNC(delete_text_handler), NULL);
+/*	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
+			 "insert-text",
+			 G_CALLBACK(insert_text_handler), NULL);
 
-
-	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
-			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
-	gtk_signal_connect(GTK_OBJECT(trans_box), "delete_text",
-			   GTK_SIGNAL_FUNC(delete_text_handler), NULL);
+	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
+			 "delete-range",
+			 G_CALLBACK(delete_text_handler), NULL);
 	
-	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
-			   GTK_SIGNAL_FUNC(gtranslator_translation_changed), NULL);
+	g_signal_connect(G_OBJECT(gtk_text_view_get_buffer(trans_box)), 
+			 "changed",
+			 G_CALLBACK(gtranslator_translation_changed), NULL);
+*/
+	g_signal_connect(G_OBJECT(text_box), "button-press-event",
+			 G_CALLBACK(create_popup_menu), NULL);
+	g_signal_connect(G_OBJECT(trans_box), "button-press-event",
+			 G_CALLBACK(create_popup_menu), NULL);
 	
-	gtk_signal_connect(GTK_OBJECT(text_box), "button_press_event",
-			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
-	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
-			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
-	
-	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "key_press_event",
-			   GTK_SIGNAL_FUNC(gtranslator_keyhandler), NULL);
+	g_signal_connect(G_OBJECT(gtranslator_application), "key-press-event",
+			 G_CALLBACK(gtranslator_keyhandler), NULL);
 	/*
 	 * The D'n'D signals
 	 */
@@ -359,38 +369,37 @@ void gtranslator_create_main_window(void)
 			  GTK_DEST_DEFAULT_ALL | GTK_DEST_DEFAULT_HIGHLIGHT,
 			  dragtypes, sizeof(dragtypes) / sizeof(dragtypes[0]),
 			  GDK_ACTION_COPY);
-	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "drag_data_received",
-			   GTK_SIGNAL_FUNC(gtranslator_dnd),
-			   GUINT_TO_POINTER(dnd_type));
+	g_signal_connect(G_OBJECT(gtranslator_application), "drag-data-received",
+			 G_CALLBACK(gtranslator_dnd),
+			 GUINT_TO_POINTER(dnd_type));
 }
 
 /*
  * An own delete text handler which should work on deletion in the translation
  *  box -- undo is called up here, too.
  */
-void delete_text_handler(GtkEditable *editable, gint start_position,
-	gint end_position)
+void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
+			 GtkTextIter *end)
 {
+	return;
 	/*
 	 * Check for dumb values and do only catch real deletions.
 	 */
-	if(start_position >= 0 && end_position >= 1 && 
-		(end_position > start_position))
+	if(gtk_text_iter_compare(start, end)>=0)
 	{
 		gchar	*fake_string;
 
 		/*
 		 * Fill up our fake_string for the strlen() call in undo.c.
 		 */
-		fake_string=gtk_editable_get_chars(GTK_EDITABLE(trans_box),
-			start_position, (end_position - start_position));
+		fake_string=gtk_text_buffer_get_text(textbuf, 
+						     start, end, FALSE);
 		
-		gtranslator_undo_register_deletion(fake_string, start_position);
+//		gtranslator_undo_register_deletion(fake_string, start_position);
 		GTR_FREE(fake_string);
 	}
-//	gtranslator_delete_highlighted(editable, 
-//			start_position, end_position - start_position);
-//	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "delete_text");
+	gtranslator_delete_highlighted(textbuf, start, end, NULL);
+	g_signal_stop_emission_by_name (G_OBJECT (textbuf), "delete_text");
 }
 
 /*
@@ -500,8 +509,18 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
  */
 void gtranslator_text_boxes_clean()
 {
-	gtk_editable_delete_text(GTK_EDITABLE(text_box), 0, -1);
-	gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
+	GtkTextIter start, end;
+	GtkTextBuffer *buffer;
+
+	buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(text_box));
+	gtk_text_buffer_get_start_iter(buffer, &start);
+	gtk_text_buffer_get_end_iter(buffer, &end);
+	gtk_text_buffer_delete(buffer, &start, &end);
+
+	buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(trans_box));
+	gtk_text_buffer_get_start_iter(buffer, &start);
+	gtk_text_buffer_get_end_iter(buffer, &end);
+	gtk_text_buffer_delete(buffer, &start, &end);
 }
 
 void gtranslator_application_bar_update(gint pos)
@@ -601,14 +620,15 @@ void gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless)
 
 void gtranslator_selection_clear(GtkWidget  * widget, gpointer useless)
 {
-	gtk_editable_delete_selection(GTK_EDITABLE(trans_box));
+	GtkTextBuffer *buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(trans_box));
+	gtk_text_buffer_delete_selection(buffer, TRUE, TRUE);
 }
 
 /*
  * Set po->file_changed to TRUE if the text in the translation box has been
  * updated.
  */
-void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
+void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 {
 	if (nothing_changes)
 		return;
@@ -645,28 +665,29 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 /*
  * When inserting text, exchange spaces with dot chars 
  */
-void insert_text_handler (GtkEditable *editable, const gchar *text,
-			  gint length, gint *position, gpointer data)
+void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
+			  const gchar *text,
+			  gint length, gpointer data)
 {
-//	gchar *result;
+	gchar *result;
 
-//	result=g_strdup(text);
+	result=g_strdup(text);
 	if (!nothing_changes)
 	{
 		/*
 		* Register the text for an insertion undo action.
 		*/
-		gtranslator_undo_register_insertion(text, *position);
+//		gtranslator_undo_register_insertion(text, *position);
 
 		if(GtrPreferences.dot_char)
 		{
 			gtranslator_utils_invert_dot((gchar*)text);
 		}
 	}
-//	gtranslator_insert_highlighted(editable, result, position, length);
-//	g_free(result);
-//	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
-//	gtk_editable_set_position(GTK_EDITABLE(editable), *position);
+	gtranslator_insert_highlighted(textbuffer, pos, result, length, NULL);
+	g_free(result);
+	g_signal_stop_emission_by_name (G_OBJECT(textbuffer), "insert_text");
+	gtk_text_buffer_place_cursor(textbuffer, pos);
 }
 
 void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,

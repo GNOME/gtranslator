@@ -171,14 +171,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		GTR_FREE(temp);
 
 		if (msg->msgstr) {
-			if(po->utf8)
-			{
-				temp=gtranslator_utf8_get_plain_msgstr(&msg);
-			}
-			else
-			{
-				temp=g_strdup(msg->msgstr);
-			}
+			temp=g_strdup(msg->msgstr);
 			
 			gtranslator_utils_invert_dot(temp);
 			
@@ -188,20 +181,9 @@ void gtranslator_message_show(GtrMsg *msg)
 		}
 	} else {
 		gtranslator_insert_text(text_box, msg->msgid);
-
-		if(po->utf8)
-		{
-			gchar *text=gtranslator_utf8_get_plain_msgstr(&msg);
-			
-			gtranslator_insert_text(trans_box, text);
-
-		}
-		else
-		{
-			gtranslator_insert_text(trans_box, msg->msgstr);
-		}
+		gtranslator_insert_text(trans_box, msg->msgstr);
 	}
-	
+#ifdef NOT_PORTED	
 	/*
 	 * Use instant spell checking via gtkspell only if the corresponding
 	 *  setting in the preferences is set.
@@ -240,6 +222,8 @@ void gtranslator_message_show(GtrMsg *msg)
 		 */ 
 		gtkspell_attach(GTK_TEXT(trans_box));
 	}
+#endif //NOT_PORTED
+
 #define set_active(number,flag) \
 	gtk_check_menu_item_set_active(\
 		(GtkCheckMenuItem *)(the_msg_status_menu[number].widget),\
@@ -263,9 +247,9 @@ void gtranslator_message_update(void)
 		return;
 	//	pos = gtk_editable_get_position( GTK_EDITABLE(trans_box) );
 	// gtk_text_freeze( GTK_TEXT(trans_box) );
-	len = gtk_text_buffer_get_char_count(trans_box);
+	len = gtk_text_buffer_get_char_count(gtk_text_view_get_buffer(trans_box));
 	if (len) {
-		gtk_text_buffer_get_bounds(trans_box, &start, &end);
+		gtk_text_buffer_get_bounds(gtk_text_view_get_buffer(trans_box), &start, &end);
 
 		/* Make both strings end with or without endline */
 		// XXX fix it
@@ -299,7 +283,7 @@ void gtranslator_message_update(void)
 		*/
 		// XXX we always work with utf-8
 
-		msg->msgstr = gtk_text_buffer_get_text(trans_box, &start, &end, FALSE);
+		msg->msgstr = gtk_text_buffer_get_text(gtk_text_view_get_buffer(trans_box), &start, &end, FALSE);
 		
 		/*
 		 * If spaces were substituted with dots, replace them back

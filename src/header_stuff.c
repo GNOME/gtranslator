@@ -458,37 +458,37 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 
 		plain_comment_string=gtranslator_utf8_get_plain_string(&ph->comment);
 		prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0,
-			plain_comment_string, _("Comments:"), gtranslator_header_edit_changed);
+			plain_comment_string, _("Comments:"), G_CALLBACK(gtranslator_header_edit_changed));
 	}
 	else
 	{
 		prj_comment=gtranslator_utils_attach_text_with_label(prj_page, 0, _("Comments:"),
-			ph->comment, gtranslator_header_edit_changed);
+			ph->comment, G_CALLBACK(gtranslator_header_edit_changed));
 	}
 	
 	gtk_widget_set_usize(prj_comment, 360, 90);
 	
 	prj_name =
 	    gtranslator_utils_attach_entry_with_label(prj_page, 1, _("Project name:"),
-	    			    ph->prj_name, gtranslator_header_edit_changed);
+	    			    ph->prj_name, G_CALLBACK(gtranslator_header_edit_changed));
 	prj_version =
 	    gtranslator_utils_attach_entry_with_label(prj_page, 2, _("Project version:"),
-	    			    ph->prj_version, gtranslator_header_edit_changed);
+	    			    ph->prj_version, G_CALLBACK(gtranslator_header_edit_changed));
 	pot_date =
 	    gtranslator_utils_attach_entry_with_label(prj_page, 3, _("Pot file creation date:"),
-				    ph->pot_date, gtranslator_header_edit_changed);
+				    ph->pot_date, G_CALLBACK(gtranslator_header_edit_changed));
 	gtk_widget_set_sensitive(pot_date, FALSE);
 	
 	po_date =
 	    gtranslator_utils_attach_entry_with_label(prj_page, 4, _("Po file revision date:"),
-				    ph->po_date, gtranslator_header_edit_changed);
+				    ph->po_date, G_CALLBACK(gtranslator_header_edit_changed));
 	gtk_widget_set_sensitive(po_date, FALSE);
 
 	if(ph->generator)
 	{
 		foo_me_i_ve_been_wracked =
 	    		gtranslator_utils_attach_entry_with_label(prj_page, 5, _("Generator:"),
-	    			ph->generator, gtranslator_header_edit_changed);
+	    			ph->generator, G_CALLBACK(gtranslator_header_edit_changed));
 		gtk_widget_set_sensitive(foo_me_i_ve_been_wracked, FALSE);
 	}
 
@@ -501,8 +501,8 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_box_pack_start(GTK_BOX(lang_vbox), take_my_options, TRUE, TRUE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(take_my_options), 
 				     GtrPreferences.fill_header);
-	gtk_signal_connect(GTK_OBJECT(take_my_options), "toggled",
-			   GTK_SIGNAL_FUNC(take_my_options_toggled), NULL);
+	g_signal_connect(G_OBJECT(take_my_options), "toggled",
+			 G_CALLBACK(take_my_options_toggled), NULL);
 	/*
 	 * Language and translator options
 	 */
@@ -517,33 +517,33 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 		plain_author_string=gtranslator_utf8_get_plain_string(&ph->translator);
 
 		translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
-			_("Translator's name:"), plain_author_string, gtranslator_header_edit_changed);
+			_("Translator's name:"), plain_author_string, G_CALLBACK(gtranslator_header_edit_changed));
 	}
 	else
 	{
 		translator=gtranslator_utils_attach_entry_with_label(lang_page, 1, 
-			_("Translator's name:"), ph->translator, gtranslator_header_edit_changed);
+			_("Translator's name:"), ph->translator, G_CALLBACK(gtranslator_header_edit_changed));
 	}
 
 	tr_email =
 	    gtranslator_utils_attach_entry_with_label(lang_page, 2, _("Translator's e-mail:"),
-				    ph->tr_email, gtranslator_header_edit_changed);
+				    ph->tr_email, G_CALLBACK(gtranslator_header_edit_changed));
 	language_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 3, _("Language:"),
 				    languages_list, _(ph->language),
 				    FALSE,
-				    language_changed, NULL);
+				    G_CALLBACK(language_changed), NULL);
 	lg_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 4,
 				    _("Language group's e-mail:"),
 				    group_emails_list, ph->lg_email,
 				    TRUE,
-				    gtranslator_header_edit_changed, NULL);
+				    G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	charset_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 5, _("Charset:"),
 				    encodings_list, ph->charset,
 				    FALSE,
-				    gtranslator_header_edit_changed, NULL);
+				    G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
 	/*
 	 * Disable any charset changes directly from the header by making the
@@ -555,14 +555,14 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	    gtranslator_utils_attach_combo_with_label(lang_page, 6, _("Encoding:"),
 				    bits_list, ph->encoding,
 				    FALSE,
-				    gtranslator_header_edit_changed, NULL);
+				    G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	/*
 	 * Connect the signals
 	 */
-	gtk_signal_connect(GTK_OBJECT(e_header), "apply",
-			   GTK_SIGNAL_FUNC(gtranslator_header_edit_apply), NULL);
-	gtk_signal_connect(GTK_OBJECT(e_header), "close",
-			   GTK_SIGNAL_FUNC(gtranslator_utils_language_lists_free), NULL);
+	g_signal_connect(G_OBJECT(e_header), "apply",
+			 G_CALLBACK(gtranslator_header_edit_apply), NULL);
+	g_signal_connect(G_OBJECT(e_header), "close",
+			 G_CALLBACK(gtranslator_utils_language_lists_free), NULL);
 
 	gtranslator_dialog_show(&e_header, "gtranslator -- header");
 
