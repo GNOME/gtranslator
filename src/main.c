@@ -35,7 +35,7 @@ int main(int argc,char *argv[])
 	/**
 	* Get the main window geometry :
  	**/
-	gtranslator_geometry = gnome_geometry_string(app1->window);
-	gtk_main ();
+	gtranslator_geometry=gnome_geometry_string(app1->window);
+	gtk_main();
 	return 0;
 }

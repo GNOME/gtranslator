@@ -48,7 +48,5 @@ void prefs_box(GtkWidget *widget,gpointer useless)
 	/**
 	* Set the languages list
  	**/	
-	languages_list=g_list_append(languages_list,(gpointer)"Turkish");
-	languages_list=g_list_append(languages_list,(gpointer)"German");
 	gtk_combo_set_popdowm_strings(GTK_COMBO(GNOME_ENTRY(authors_language)->combo),languages_list);
 }
