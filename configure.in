@@ -11,7 +11,7 @@ AC_CONFIG_SRCDIR(src/main.c)
 dnl -------------------------------------------------------------------
 dnl Init automake and the maintainer mode macros.
 dnl -------------------------------------------------------------------
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_INIT_AUTOMAKE(gtranslator, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
@@ -213,13 +213,7 @@ AC_SUBST(MY_DATE)
 dnl -------------------------------------------------------------------
 dnl Check for the ultimate library and it's most ultimate function!
 dnl -------------------------------------------------------------------
-AC_CHECK_LIB(kabalak, BermudaShorts, shorts_yeah=yes, shorts_yeah=no)
-if test "%$shorts_yeah" != "%yes" ; then
-	AC_MSG_WARN([
------------------------------------------------------------------------------
-Aaarg, your system lacks BermudaShorts in libkabalak... ,-)
------------------------------------------------------------------------------])
-fi
+AC_CHECK_LIB(kabalak, BermudaShorts,,)
 
 dnl -------------------------------------------------------------------
 dnl Put out the configured files.
