@@ -108,6 +108,14 @@ static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 		to_add[d++] = '\n';
 
 	for (s = 1; s < strlen(tail) - 1; s++) {
+		if(tail[s] == '\\') {
+			switch(tail[s + 1]) {
+			case '\\':
+			case '\"':
+				s++;
+				break;
+			}
+		}
 		to_add[d++] = tail[s];
 	}
 	to_add[d] = 0;
@@ -724,10 +732,18 @@ static gchar *restore_msg(const gchar * given)
 
 	rest = g_string_sized_new(strlen(given));
 	for (s = 0; s < strlen(given); s++) {
-		if (given[s] == '\n') {
+		switch(given[s]) {
+		case '\\':
+			g_string_append(rest, "\\\\");
+			break;
+		case '\"':
+			g_string_append(rest, "\\\"");
+			break;
+		case '\n':
 			g_string_append(rest, "\"\n\"");
 			lines++;
-		} else {
+			break;
+		default:
 			g_string_append_c(rest, given[s]);
 		}
 	}
