@@ -77,7 +77,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 				 *  the relative filename to a real file
 				 *   path.
 				 */  
-				g_string_sprintf(localfilename,
+				g_string_printf(localfilename,
 					"%s/%s",
 					g_get_current_dir(),
 					temp);
@@ -87,7 +87,7 @@ gchar	*gtranslator_vfs_handle_open(gchar *filename)
 				/*
 				 * Append the toplevel '/' to the URI.
 				 */ 
-				g_string_sprintf(localfilename,
+				g_string_printf(localfilename,
 					"/%s",
 					temp);
 				break;

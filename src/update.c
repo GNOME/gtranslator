@@ -56,8 +56,8 @@ void update(GtkWidget *widget, gpointer useless)
 	 */
 	command=g_strdup_printf("'%s' '%s' '%s' '%s' 2>&1 1>/dev/null",
 		SCRIPTSDIR "/my-update.sh",
-		g_basename(po->filename),
-		g_dirname(po->filename),
+		g_path_get_basename(po->filename),
+		g_path_get_dirname(po->filename),
 		po->header->prj_name);
 	
 	/*
