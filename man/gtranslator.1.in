@@ -1,16 +1,16 @@
 .TH "gtranslator" "1" "gtranslator @VERSION@ -- @MY_DATE@" "gtranslator" "GNOME programs"
 .SH "NAME"
-gtranslator \-\- a comfortable gettext po file editor with many features
+gtranslator \-\- a comfortable gettext po file editor with many features.
 
 .SH "SYNOPSIS"
-.B gtranslator [ \-\-help ] [ \-\-version ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-b ] [ \-n ] [ \-q query\-domains\-dir ] [ po\-file ]
+.B gtranslator [ \-\-help ] [ \-\-version ] [ \-g geometry\-string  ] [ \-w html\-output\-file ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-n ] [ \-q query\-domains\-dir ] [ po\-file ]
 
 .SH "DESCRIPTION"
 gtranslator is a comfortable gettext po file editor with many features like special char featured editing, regular expression based search function, compile/update possiblities.
 .TP 
-Of course all standard features of a good application liek DnD , session support and supplement files for mime types and menu items are present.
+Of course all standard features of a good application like DnD, session support and supplement files for mime types and menu items are present.
 .TP 
-Instant spell checking, excuberant syntax highlighting and a comment view do accomplish its current feature set.
+Instant spell checking, excuberant syntax highlighting, comment view, views sidebar, a very comfortable messages table with customizable colors, colorschemes, a high level of preferences customizable and a personal learn buffer/translation memory feature with auto accomplishment functions are the main features of gtranslator.
 .SH "OPTIONS"
 .TP 
 .I po\-file
@@ -28,6 +28,9 @@ Shows the build specifications (date, time, versions, directories) of gtranslato
 .TP 
 .I \-n \-\-no\-modules
 Inhibit the loading of any backend modules.
+.TP 
+.I \-l \-\-learn=po\-file\-to\-learn
+Learns the given po file within the command line without starting the GUI. The personal learn buffer is used as a translation memory to autoaccomplish missing translations/entries.
 .TP 
 .I \-q \-\-querydomaindir=query\-domains\-dir
 Changes the standard locales directory where gtranslator looks for the available query domains (per default: @prefix@/share/locale).
@@ -54,10 +57,36 @@ Your personal gtranslator settings will be stored there (if compiled with GConf 
 .B ~/.gtranslator
 This directory is used by gtranslator for all it's "private" files (e.g. temporary files).
 .TP 
-.B ~/.gtranslator/learned\-strings
-Your learned strings are stored in this file.
+.B ~/.gtranslator/colorschemes/
+Your personal colorschemes can be placed in this directory \-\- gtranslator does also list the colorschemes in this directory in the colorscheme selection box.
+.TP 
+.B ~/.gtranslator/etstates/
+The state file for the messages table/tree is stored in this directory.
+.TP 
+.B ~/.gtranslator/umtf/learn\-buffer.xml
+Your personal learn buffer (in UMTF format) is stored in this file \-\- it's used for learning and autoaccomplishing.
+.SH "LEARN BUFFER"
+The learn buffer is the implementation of a personal translation memory (TM) in gtranslator. gtranslator uses the human\-readable \fBUMTF\fR XML format for storing it's learned strings.
+.br 
+Your learned strings are then available for the autoaccomplishment feature of gtranslator where gtranslator automatically fills in the corresponding and valuable translations for any message which has already been learned previously. This results in a fairly high percentage of prefilled/pretranslated messages.
+.br 
+The common and good style of working with the learn buffer and with the autoaccomplishment should be to learn the main po/translation files for your language via gtranslator via calling \fBgtranslator \-n \-l po\-file\-to\-learn\fR on the command line; this will put the translated strings from this po file into your personal learn buffer.
+.br 
+You should learn the main po files (for GNOME for example \fBgnumeric\fR, \fBnautilus\fR, \fBevolution\fR or any other bigger, already translated package's po file) for your language).
+.br 
+Afterwards you can simply use the "Autoaccomplishment" menu entry from the GUI or use the "F10" hotkey to let gtranslator autoaccomplish all missing translations from your personal learn buffer. This will ease your translation work and make a big portion of the po files be pre\-translated.
+.br 
+With a fairly big personal learn buffer of about 2 MB you can achive many pre\-translated messages for a new project/translation.
 .SH "USAGE EXAMPLES"
 Some examples for the options.
+
+.TP 
+.B gtranslator \-b
+Shows you the real build specs/dates of gtranslator.
+
+.TP 
+.B gtranslator \-n \-l po\-file\-to\-learn
+Learns the given po file \*(lqpo\-file\-to\-learn\*(rq on the command line without starting up the GUI \-\- modules aren't loaded, too (makes startup a bit faster).
 
 .TP 
 .B gtranslator tr.po
@@ -76,9 +105,9 @@ Opens \*(lq/tmp/mypo.po\*(rq file (as you can see gtranslator now supports local
 \*(lqOpens\*(rq the remote po file (right: gtranslator does also support remote GnomeVFS supported URIs).
 
 .TP 
-.B gtranslator \-g \*(lq320x240+0+0\*(rq
+.B gtranslator \-g \*(lq460x320+0+0\*(rq
 Lets gtranslator appear on the left upper edge of the screen \*(lq+0+0\*(rq and gtranslator is
-sized to \*(lq320x240\*(rq.
+sized to \*(lq460x320\*(rq if possible \-\- if gtranslator needs more size for it's window contents, it'll expand itself to the necessary dimensions \-\- even if you defined a smaller geometry string.
 
 .SH "LICENSE"
 gtranslator is distributed under the 
