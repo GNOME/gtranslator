@@ -18,6 +18,7 @@
  */
 
 #include "vfs-handle.h"
+#include <libgnome/gnome-util.h>
 
 /*
  * Open up the given file via GnomeVFS routines.
@@ -27,7 +28,6 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	GnomeVFSURI *file;
 	GnomeVFSURI *destination;
 	gchar *localfilename=g_new0(gchar,1);
-	DIR *dir;
 	
 	/*
 	 * Init GnomeVFS, if that hasn't already be done.
@@ -48,11 +48,11 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	if(gnome_vfs_uri_is_local(file))
 	{
 		localfilename=gnome_vfs_uri_to_string(file, 
-			GNOME_VFS_URI_HIDE_USER_NAME &
-			GNOME_VFS_URI_HIDE_PASSWORD &
-			GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD &
-			GNOME_VFS_URI_HIDE_HOST_NAME &
-			GNOME_VFS_URI_HIDE_HOST_PORT &
+			GNOME_VFS_URI_HIDE_USER_NAME |
+			GNOME_VFS_URI_HIDE_PASSWORD  |
+			GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD |
+			GNOME_VFS_URI_HIDE_HOST_NAME |
+			GNOME_VFS_URI_HIDE_HOST_PORT |
 			GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER);
 	}
 	else
@@ -71,37 +71,27 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	
 		/*
 		 * Test if this directory is already existent and
-		 *  delete the directory if it's existent.
+		 *  create the directory if it's existent.
 		 */ 
-		dir=opendir(destdir);
-		if(dir)
+		if(!g_file_exists(destdir))
 		{
-			gnome_vfs_remove_directory(destdir);
-
-			closedir(dir);
+			if(gnome_vfs_make_directory(destdir, 0644)
+				!=GNOME_VFS_OK)
+			{
+				g_warning(_("Couldn't create temporary directory `%s'!"),
+					destdir);
+			}
 		}
 		
-		
-		/*
-		 * Build this temporary files' dir.
-		 */
-		if(gnome_vfs_make_directory(
-			destdir,
-			GNOME_VFS_PERM_USER_ALL)!=GNOME_VFS_OK)
-		{
-			g_warning(_("Couldn't create the temporary directory `%s'."),
-				destdir);
-			
-			g_free(destdir);
-			
-			return NULL;
-		}
 		
 		/*
 		 * The destination path.
 		 */
 		destination=gnome_vfs_uri_new(g_strdup_printf("%s/%s", destdir,
 			gnome_vfs_uri_get_basename(file)));
+
+		g_free(destdir);
+		
 		/*
 		 * And now the URI/XFER action...
 		 */
@@ -156,11 +146,11 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 					 *  should get a single plain filename
 					 *   string.
 					 */ 
-					GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD &
-					GNOME_VFS_URI_HIDE_HOST_NAME &
-					GNOME_VFS_URI_HIDE_HOST_PORT &
-					GNOME_VFS_URI_HIDE_USER_NAME &
-					GNOME_VFS_URI_HIDE_PASSWORD &
+					GNOME_VFS_URI_HIDE_HOST_NAME |
+					GNOME_VFS_URI_HIDE_HOST_PORT |
+					GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD |
+					GNOME_VFS_URI_HIDE_USER_NAME |
+					GNOME_VFS_URI_HIDE_PASSWORD  |
 					GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER);
 				return localfilename;
 				break;

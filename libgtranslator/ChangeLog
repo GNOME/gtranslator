@@ -1,3 +1,9 @@
+2001-01-02  Fatih Demir	<kabalak@gmx.net>
+
+	* vfs-handle.c: Use plain old libgnome g_file_exists function
+		for determining if the needed temporary directory is
+		 already existent; free one of the used gchars.
+
 2001-01-31  Fatih Demir	<kabalak@gmx.net>
 
 	* vfs-handle.c: Hide all the parts of the URI within the
