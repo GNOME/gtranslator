@@ -318,11 +318,11 @@ static ETableExtras *table_extras_new()
 	 * Fill the table parts independently here -- just for easification
 	 *  of the process, we do use this contructions instead of many calls.
 	 */
-	cell=e_cell_number_new(NULL, GTK_JUSTIFY_LEFT);
+	cell=e_cell_number_new(NULL, GTK_JUSTIFY_RIGHT);
 	e_table_extras_add_cell(extras, list_parts[count], cell); 
 	count++;
 
-	cell=e_cell_number_new(NULL, GTK_JUSTIFY_LEFT);
+	cell=e_cell_number_new(NULL, GTK_JUSTIFY_RIGHT);
 	e_table_extras_add_cell(extras, list_parts[count], cell);
 	count++;
 	
