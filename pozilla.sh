@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.7
+export POZILLA_RELEASE=0.8
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -53,29 +53,33 @@ for app in msgfmt msgmerge make grep mutt
 echo -n "" > $CONFIG_DIR/pozilla.output
 
 
-case $1 in
--[hH]*|--[hH]*)
+while [ ! -z "$1" ]
+do
+	option=`echo "$1"|sed -e 's/-//g' -e 's/--//g'`
+	case "$option" in
+	[hH]*)
 	echo "<·············································"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	echo "<·············································"
 	echo " Author: Fatih Demir <kabalak@gmx.net>"
 	echo "<·············································"
 	echo "-a --additional   Defines an additional mail address to mail to"
+	echo "-d --days		Days remaining for release"
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
 	echo "<·············································"
 		exit 1
-;;
--[vV]*|--[vV]*)
+	;;
+	[vV]*)
 	echo "<·············································"
 	echo " Pozilla.sh R $POZILLA_RELEASE"
 	echo "<·············································"
         echo " Author:  Fatih Demir <kabalak@gmx.net>"
 	echo "<·············································"
 		exit 1
-;;
--[mM]*|--mailinglist)
+	;;
+	[mM]*)
 	shift 1
 	if test "hehe$1" = "hehe" ; then
 		echo "No mailing list given, using default:"
@@ -86,8 +90,8 @@ case $1 in
 		echo "$MAILING_LIST"
 		shift 1
 	fi
-;;
--[aA]*|--additional)
+	;;
+	[aA]*)
 	shift 1
 	if test "hehe$1" = "hehe" ; then
 		echo "No additional mail address given!"
@@ -96,11 +100,28 @@ case $1 in
 		echo "Using $ADDITIONAL_MAILING_ADDRESS for additional mailing."
 		shift 1
 	fi	
-;;
-*)
-	true
-;;
-esac
+	;;
+	[dD]*)
+	shift 1
+	if test "days$1" = "days" ; then
+		echo "No number of days given!"
+	else
+		if test $1 -le 3 ; then
+			echo "You're giving your translators only $1 day(s); that's too less!"
+			echo "Please give'm more time to update their translations."
+				exit 1
+		else
+			export DAYS_REMAINING="$1"
+			echo "Days remaining: $DAYS_REMAINING"
+			shift 1
+		fi	
+	fi
+	;;
+	*)
+		true
+	;;
+	esac
+done	
 
 #
 # Get the current task no, increment it and write
@@ -177,6 +198,11 @@ for i in $PO_FILES
 		echo "it's containing fuzzy or/and untranslated entries if you get it" >> $BODY_FILE
 		echo "in sync with the recent sources for $PACKAGE." >> $BODY_FILE
 		echo "" >> $BODY_FILE
+		if test "b$DAYS_REMAINING" != "b" ; then
+			echo "$PACKAGE will release R $RELEASE in $DAYS_REMAINING days, so" >> $BODY_FILE
+			echo "that you should update your translation till then." >> $BODY_FILE
+		fi
+		echo "" >> $BODY_FILE
 		echo "Your po-file $i's statistics are:" >> $BODY_FILE
 		msgfmt -v $i 2>>$BODY_FILE
 		echo "" >> $BODY_FILE
@@ -202,7 +228,11 @@ for i in $PO_FILES
 #
 echo "Dear translators of $PACKAGE:" > $BODY_FILE
 echo "" >> $BODY_FILE
-echo "The next release of $PACKAGE (R $RELEASE) is coming within the next days" >> $BODY_FILE
+if test "Z$DAYS_REMAINING" = "Z" ; then
+	echo "The next release of $PACKAGE (R $RELEASE) is coming within the next days" >> $BODY_FILE
+else
+	echo "The next release of $PACKAGE (R $RELEASE) is coming in $DAYS_REMAINING days" >> $BODY_FILE
+fi	
 echo "and you all should update your translator for it please." >> $BODY_FILE
 echo "" >> $BODY_FILE
 echo "Possibly you'll also get a \"private\" message from pozilla informing" >> $BODY_FILE
