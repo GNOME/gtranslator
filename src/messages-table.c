@@ -81,39 +81,11 @@ typedef struct
 } GtrMessagesTableColors;
 
 /*
- * Another own structure for the translation retrieval.
- */
-typedef struct
-{
-	GtrMsg		*message;
-	gchar		*found_translation;
-	gboolean	 replace;
-} GtrTranslationRetrieval;
-
-/*
- * An own insertion callback for the messages table's popup menu to insert
- *  the found, fitting translation from the learn buffer.
- */
-//static void insert_translation(GtkWidget *widget, gpointer insertion_kind);
-
-/*
  * Global variables
  */
 static GtkWidget *tree;
 
 static GtrMessagesTableColors *messages_table_colors;
-
-#ifdef NOT_PORTED
-
-static GtrTranslationRetrieval *retrieval=NULL;
-
-/*
- * Hash table to associate an ETreePath with each message. Used
- * in update_row to determine the node given a message that has been
- * updated
- */
-static GHashTable *hash_table=NULL;
-#endif
 
 /*
  * Initialize and set up the generally used messages table colors.
