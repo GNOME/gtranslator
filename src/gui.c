@@ -274,6 +274,40 @@ static GnomeUIInfo the_searchbar[] = {
 	GNOMEUIINFO_END
 };
 
+/**
+* The popup-menu.
+**/
+static GnomeUIInfo the_popup_menu[] = {
+	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
+	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
+	GNOMEUIINFO_SUBTREE(N_("Message _status"), the_msg_status_menu),
+	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
+	GNOMEUIINFO_END
+};
+
+/**
+* Pop's up the curious popup-menu.
+**/
+void create_popup_menu(GtkWidget *widget, GdkEventButton *event)
+{
+	GtkWidget *popup_menu;
+	/**
+	* Only react on rightclick.
+	**/
+	if(event->button==3)
+	{
+		popup_menu=gnome_popup_menu_new(the_popup_menu);
+		/**
+		* Only respond if a file has been present/opened.
+		**/
+		if(file_opened==TRUE)
+		{
+			gnome_popup_menu_do_popup_modal(popup_menu, NULL, NULL, NULL, event);
+		}
+	}	
+}
+
 /*****
  * Actions stuff goes here
  *****/
@@ -428,6 +462,8 @@ void create_app1(void)
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
 			   GTK_SIGNAL_FUNC(text_has_got_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(vbox1), "button_press_event",
+			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	/**
 	* The D'n'D signals
 	**/

@@ -30,6 +30,11 @@ GtkWidget *appbar1;
 void create_app1(void);
 
 /**
+* This creates the popup-menu.
+**/
+void create_popup_menu(GtkWidget *widget, GdkEventButton *event);
+
+/**
 * For the status messages
 **/
 gchar status[128];

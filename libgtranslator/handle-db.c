@@ -50,20 +50,17 @@ gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodeconten
 		/**
 		* Hmm, open and add the node.
 		**/
-		xmlNodePtr newnode, addnode=NULL;
+		xmlNodePtr newnode=NULL, addnode=NULL;
 		/**
 		* Get the nodes.
 		**/
-		newnode=doc->xmlRootNode->xmlChildrenNode;
+		newnode=doc->root->childs;
 		/**
 		* Again a simply check.
 		**/
 		if(!newnode)
 		{
 			g_warning(_("Couldn't get the nodes!"));
-				/**
-				* This is an I/O error, isn't it ?
-				**/
 				return 1;
 		}
 		/**
