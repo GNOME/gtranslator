@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-08-03 17:49+0200\n"
-"PO-Revision-Date: 2003-08-03 17:50+0200\n"
+"POT-Creation-Date: 2003-08-04 16:14+0200\n"
+"PO-Revision-Date: 2003-08-04 16:15+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -182,7 +182,7 @@ msgstr "Engelska"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
 #. pv, i want the tree to be in original column
-#: src/dialogs.c:718 src/dialogs.c:823 src/gui.c:530 src/messages-table.c:252
+#: src/dialogs.c:718 src/dialogs.c:823 src/gui.c:522 src/messages-table.c:295
 msgid "Translated"
 msgstr "Översatt"
 
@@ -446,41 +446,41 @@ msgid "Edit comment"
 msgstr "Redigera kommentar"
 
 # src/gui.c:385
-#: src/gui.c:516
+#: src/gui.c:508
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i luddiga kvar ]"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
 #. pv, i want the tree to be in original column
-#: src/gui.c:516 src/gui.c:520 src/menus.c:341 src/messages-table.c:244
+#: src/gui.c:508 src/gui.c:512 src/menus.c:341 src/messages-table.c:287
 msgid "Fuzzy"
 msgstr "Luddig"
 
 # src/gui.c:389
-#: src/gui.c:520
+#: src/gui.c:512
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Inga luddiga kvar ]"
 
-#: src/gui.c:528
+#: src/gui.c:520
 msgid "Sticky (Message & translation are the same)"
 msgstr "Klistrig (meddelande och översättning är samma)"
 
 # src/gui.c:407
-#: src/gui.c:539
+#: src/gui.c:531
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i oöversatta kvar ]"
 
 # src/gui.c:407 src/gui.c:409
 #. pv, i want the tree to be in original column
-#: src/gui.c:539 src/gui.c:541 src/messages-table.c:236
+#: src/gui.c:531 src/gui.c:533 src/messages-table.c:279
 msgid "Untranslated"
 msgstr "Oöversatt"
 
 # src/gui.c:409
-#: src/gui.c:541
+#: src/gui.c:533
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Inga oöversatta kvar ]"
@@ -489,7 +489,7 @@ msgstr "%s [ Inga oöversatta kvar ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:554
+#: src/gui.c:546
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Meddelande %d / %d / Status: %s"
@@ -1351,28 +1351,33 @@ msgid "Replace string in po file"
 msgstr "Ersätt sträng i po-fil"
 
 # src/message.c:76
-#: src/message.c:87
+#: src/message.c:88
 msgid "Couldn't get the message!"
 msgstr "Kunde inte hitta meddelandet!"
 
 # src/message.c:98
-#: src/message.c:109
+#: src/message.c:110
 msgid "There are no fuzzy messages left."
 msgstr "Det finns inga fler luddiga meddelanden."
 
 # src/message.c:122
-#: src/message.c:133
+#: src/message.c:134
 msgid "All messages seem to be translated."
 msgstr "Alla meddelanden verkar vara översatta."
 
+# src/dialogs.c:574
+#: src/message.c:264
+msgid "gtranslator -- plural forms of the message"
+msgstr "gtranslator -- pluralformer för meddelandet"
+
 #. pv, i want the tree to be in original column
 #. {_("Status"),      "text"},
-#: src/messages-table.c:163
+#: src/messages-table.c:203
 msgid "Original"
 msgstr "Original"
 
 # src/prefs.c:239
-#: src/messages-table.c:164
+#: src/messages-table.c:204
 msgid "Translation"
 msgstr "Översättning"
 
@@ -1727,8 +1732,8 @@ msgid "Show the messages table (requires restart)"
 msgstr "Visa meddelandetabellen (kräver omstart)"
 
 #: src/prefs.c:517
-msgid "Collapse translated entries by default"
-msgstr "Fäll in översatta poster som standard"
+msgid "Collapse all entries by default"
+msgstr "Fäll in alla poster som standard"
 
 #: src/prefs.c:521
 msgid "Use own colors for messages table groups"
@@ -1973,6 +1978,9 @@ msgstr "Värden \"%s\" har ingen adress!"
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Överföringen avbröts!"
+
+#~ msgid "Plural forms of the message"
+#~ msgstr "Pluralformer för meddelandet"
 
 # src/dialogs.c:851
 #~ msgid "Recovering `%s'..."
@@ -2310,10 +2318,6 @@ msgstr "Överföringen avbröts!"
 
 #~ msgid "Preferences section"
 #~ msgstr "Inställningsavdelningen"
-
-# src/dialogs.c:574
-#~ msgid "gtranslator -- preferences"
-#~ msgstr "gtranslator -- inställningar"
 
 #~ msgid ""
 #~ "%i preferences changes have been made.\n"
