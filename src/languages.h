@@ -193,6 +193,10 @@ static GtrLanguage languages[] = {
 	 "komp_lt@konferencijos.lt", "8bit"
 	},
 	{
+	 N_("Maltese"), "mt", "iso-8859-3",
+	 "", "8bit"
+	},
+	{
 	 N_("Norwegian/Bokmaal"), "no", "iso-8859-1",
 	 "no@li.org", "8bit"
 	},
