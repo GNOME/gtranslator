@@ -50,13 +50,14 @@ void parse(gchar *po)
         **/
         if((!po)||(strlen(po)<=0))
         {
-                g_error(_("There's no file to open or I couldn't understand `%s'!"),po);
+                g_warning(_("There's no file to open or I couldn't understand `%s'!"),po);
         }
         /**
         * Set up a status message
         **/
         sprintf(status,_("Current file : \"%s\"."),po);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);	
+	gnome_appbar_refresh(GNOME_APPBAR(appbar1));
 	/**
 	* If any previous list is lying around, delete it/them.
 	**/
@@ -92,18 +93,32 @@ void parse(gchar *po)
         **/
         sprintf(status,_("Finished reading \"%s\", %i lines."),po,lines);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
+	gnome_appbar_refresh(GNOME_APPBAR(appbar1));
+	/**
+	* So the other functions can get a point 
+	**/
 	file_opened=TRUE;
-	gnome_appbar_set_progress(GNOME_APPBAR(appbar1),0.2);
+	#ifdef HAVE_USLEEP
+	/**
+	* Wait for a small amount of time while the user can read the status message
+	*  above, if he has got usleep on his machine.
+	**/
+	usleep(75000);
+	#endif // HAVE_USLEEP
+	/*
+	* Set up an informative status message
+	**/
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing the list entries."));
         for(count=1;count<(lines-1);count++)
         {
 		/**
-		* Create a gtr_msg structure(*)
-		**/	
+                * Create a gtr_msg structure(*)
+                **/
 		gtr_msg *message[count];
 		/**
-		* Get the current data into temp_char
+		* Get the current data into a temp. char
 		**/
-        	(gpointer)zamane=g_list_nth_data(temp,count);
+        	zamane=(gchar *)g_list_nth_data(temp,count);
 		if(!g_strncasecmp(zamane,"msgid \"",7))
 		{
 			message[count]->msgid=zamane;
@@ -148,8 +163,12 @@ void parse(gchar *po)
 			}
 		}
         }
-	gnome_appbar_set_progress(GNOME_APPBAR(appbar1),0.5);
+	/**
+	* As we've gto finished we can do some nonsense
+	**/
 	apply_header();
+	enable_buttons();
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Parsing has been successfull."));
 }
 
 /**

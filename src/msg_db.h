@@ -14,6 +14,7 @@
 #define GTR_MSG_DB_H 1
 
 #include "interface.h"
+#include "parse.h"
 
 /**
 * The default msg_db location .

@@ -121,7 +121,12 @@ int main(int argc,char *argv[])
 			* Parse/open the file
 			**/
 			parse(file_to_open);
+			file_opened=TRUE;
 		}
+	}
+	if(file_opened!=TRUE)
+	{
+		disable_buttons();
 	}
 	/**
 	* Get the main window geometry :

@@ -80,6 +80,34 @@ void compile(GtkWidget *widget,gpointer useless)
 }
 
 /**
+* Disables/greys out the next/... buttons
+**/
+void disable_buttons()
+{
+	gtk_widget_set_sensitive(compile_button,FALSE);
+	gtk_widget_set_sensitive(save_button,FALSE);
+	gtk_widget_set_sensitive(save_as_button,FALSE);
+	gtk_widget_set_sensitive(first_button,FALSE);
+	gtk_widget_set_sensitive(back_button,FALSE);
+	gtk_widget_set_sensitive(next_button,FALSE);
+	gtk_widget_set_sensitive(last_button,FALSE);
+}
+
+/**
+* Enables the buttons from above
+**/
+void enable_buttons()
+{
+	gtk_widget_set_sensitive(compile_button,TRUE);
+	gtk_widget_set_sensitive(save_button,TRUE);
+        gtk_widget_set_sensitive(save_as_button,TRUE);
+	gtk_widget_set_sensitive(first_button,TRUE);
+        gtk_widget_set_sensitive(back_button,TRUE);
+        gtk_widget_set_sensitive(next_button,TRUE);
+        gtk_widget_set_sensitive(last_button,TRUE);
+}
+
+/**
 * The menu-entries
 **/
 static GnomeUIInfo the_file_menu[] =
@@ -196,11 +224,7 @@ create_app1 (void)
         GtkWidget *dock1;
         GtkWidget *toolbar1;
         GtkWidget *tmp_toolbar_icon;
-        GtkWidget *compile_button;
         GtkWidget *open_button,*cat_button,*po_button;
-        GtkWidget *save_button,*save_as_button;
-        GtkWidget *first_button,*last_button;
-        GtkWidget *back_button,*next_button;
         GtkWidget *options_button;
         GtkWidget *exit_button;
         GtkWidget *vbox1;

@@ -27,18 +27,21 @@
 #include "prefs.h"
 #include "parse.h"
 
-GtkWidget* create_app1 (void);
+GtkWidget *create_app1 (void);
 
 /**
 * The globally needed widgets
 **/
 
-GtkWidget* app1;
-GtkWidget* trans_box;
-GtkWidget* text1;
-GtkWidget* appbar1; 
-GtkWidget* search_bar;
-GtkWidget* search_button,* search_again_button,* goto_button,* goto_line_button;
+GtkWidget *app1;
+GtkWidget *trans_box;
+GtkWidget *text1;
+GtkWidget *appbar1; 
+GtkWidget *search_bar;
+GtkWidget *search_button, *search_again_button, *goto_button, *goto_line_button;
+GtkWidget *compile_button;
+GtkWidget *save_button, *save_as_button;
+GtkWidget *first_button,*back_button,*next_button,*last_button;
 
 /**
 * Necessary for the geometry handling :
@@ -64,5 +67,7 @@ void paste_clipboard(GtkWidget *widget,gpointer useless);
 void clear_selection(GtkWidget *widget,gpointer useless);
 void text_has_got_changed(GtkWidget *widget,gpointer useless);
 void compile(GtkWidget *widget,gpointer useless);
+void disable_buttons();
+void enable_buttons();
 
 #endif // GTR_INTERFACE_H

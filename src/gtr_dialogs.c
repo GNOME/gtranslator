@@ -62,6 +62,7 @@ void open_file_create()
 void open_file_show()
 {
 	open_file_create();
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Select your desired po-file to open"));
 	gtk_widget_show(of_dlg);
 }
 
@@ -93,6 +94,7 @@ void save_file_as_create()
 void save_file_as_show()
 {
 	save_file_as_create();
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Select your filename to which the po-file should be saved to."));
 	gtk_widget_show(sfa_dlg);
 }
 

@@ -11,7 +11,6 @@
 **/
 
 #include "msg_db.h"
-#include "parse.h"
 
 /**
 * The db file-stream
@@ -182,9 +181,9 @@ gchar *get_from_msg_db(const gchar *get_similar)
 			**/
 			if(!g_strncasecmp(msg_messages,get_similar,4))
 			{
-				if(!strstr(msg_messages,";;;"))	
+				if(strstr(msg_messages,";;;"))	
 				{
-					continue;
+					/** TODO : CUT THEM OFF */
 				}
 			}
 		}	
