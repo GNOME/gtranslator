@@ -55,15 +55,11 @@ if gnome-config --libs vfs 2>&1 >/dev/null ; then
 		AC_MSG_RESULT(found)			
 	else
 		AC_MSG_ERROR([
-"+++"		
-"+++ Please install GnomeVFS >= 0.4.1 and try again."
-"+++"])
+"+++ Please install GnomeVFS >= 0.4.1 and try again."])
 	fi
 else
 	AC_MSG_ERROR([
-"+++"		
-"+++ Please install GnomeVFS before trying to compile gtranslator."
-"+++"])
+"+++ Please install GnomeVFS before trying to compile gtranslator."])
 fi
 
 dnl -------------------------------------------------------------------
@@ -93,15 +89,11 @@ if gnome-config --libs gal 2>&1 >/dev/null ; then
 		dnl  old for us.
 		dnl ---------------------------------------------------
 		AC_MSG_ERROR([
-"+++"		
-"+++ Please install gal >= 0.5 and try configuring again."
-"+++"])
+"+++ Please install gal >= 0.5 and try configuring again."])
 	fi
 else
 	AC_MSG_ERROR([
-"+++"	
-"+++ Please install gal before configuring again."
-"+++"])
+"+++ Please install gal before configuring again."])
 fi
 
 GAL_CFLAGS=`gnome-config --cflags gal`
@@ -197,25 +189,19 @@ else
 
 	if test "z${nautilus_prefix}" = "z"; then
 		AC_MSG_RESULT([
-"+++"	
-"+++ No Nautilus prefix could be determined -- not building nautilus-gtranslator-view"
-"+++"])
+"+++ No Nautilus prefix could be determined -- not building nautilus-gtranslator-view"])
 		build_nv=no
 	else
 		build_nv=no
 		mycheck_function="nautilus_view_standard_main_multi"
 		AC_MSG_RESULT([
-"+++"	
-"+++ ${nautilus_prefix} as Nautilus prefix determined: checking for Nautilus libraries"
-"+++"])
+"+++ ${nautilus_prefix} as Nautilus prefix determined: checking for Nautilus libraries"])
 		LIBS="`gnome-config --libs gnome gnomeui bonobo bonobox gal vfs` \
 		-L${nautilus_prefix}/lib -lnautilus"
 		AC_CHECK_LIB(nautilus, ${mycheck_function},
 			build_nv=yes,
 			AC_MSG_WARN([
-"+++"		
-"+++ libnautilus does not contain ${mycheck_function}: Not building Nautilus view"
-"+++"]))
+"+++ libnautilus does not contain ${mycheck_function}: Not building Nautilus view"])
 	fi
 
 	dnl -------------------------------------------------------------------
@@ -234,11 +220,9 @@ else
 			-lnautilus `gconf-config --libs gconf-gtk`"
 		else
 			AC_MSG_WARN([
-"+++"		
 "+++ Could not find the necessary headers of nautilus: please install also the headers"
 "+++ dev/devel packages of nautilus and reconfigure gtranslator if you also want to"
-"+++ see the nautilus-gtranslator-view in action."
-"+++"])
+"+++ see the nautilus-gtranslator-view in action."])
 			build_nv=no
 		fi
 	fi
