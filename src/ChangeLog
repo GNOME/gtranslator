@@ -1,3 +1,11 @@
+2002-12-28  Fatih Demir <kabalak@gtranslator.org>
+
+	* Makefile.am, e-xml-utils.c/.h & utils.c/.h: Moved over the only
+		used 4 funcitons of these GAL source files into our own
+		 source files - makes it saner and less complex to compile;
+		  the GAL source files aren't necessary anymore and were
+		   therefore removed.
+
 2002-12-27  Fatih Demir <kabalak@gtranslator.org>
 
 	* message.c & utils_gui.c: Some smaller assertion fixes to get

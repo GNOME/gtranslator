@@ -41,7 +41,6 @@ gtranslator_SOURCES = \
 	comment.c comment.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
-	e-xml-utils.c e-xml-utils.h \
 	find.c find.h \
 	formats.c formats.h \
 	gtkspell.c gtkspell.h \

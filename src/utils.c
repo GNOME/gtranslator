@@ -1012,9 +1012,71 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang)
 	}
 }
 
+gint
+e_xml_get_integer_prop_by_name_with_default (const xmlNode *parent,
+					     const xmlChar *prop_name,
+					     gint def)
+{
+	xmlChar *prop;
+	gint ret_val = def;
 
-int
-e_mkdir_hier(const char *path, mode_t mode)
+	g_return_val_if_fail (parent != NULL, 0);
+	g_return_val_if_fail (prop_name != NULL, 0);
+
+	prop = xmlGetProp ((xmlNode *) parent, prop_name);
+	if (prop != NULL) {
+		(void) sscanf (prop, "%d", &ret_val);
+		xmlFree (prop);
+	}
+	return ret_val;
+}
+
+void
+e_xml_set_integer_prop_by_name (xmlNode *parent,
+				const xmlChar *prop_name,
+				gint value)
+{
+	gchar *valuestr;
+
+	g_return_if_fail (parent != NULL);
+	g_return_if_fail (prop_name != NULL);
+
+	valuestr = g_strdup_printf ("%d", value);
+	xmlSetProp (parent, prop_name, valuestr);
+	g_free (valuestr);
+}
+
+gchar *
+e_xml_get_string_prop_by_name_with_default (const xmlNode *parent, const xmlChar *prop_name, const gchar *def)
+{
+	xmlChar *prop;
+	gchar *ret_val;
+
+	g_return_val_if_fail (parent != NULL, 0);
+	g_return_val_if_fail (prop_name != NULL, 0);
+
+	prop = xmlGetProp ((xmlNode *) parent, prop_name);
+	if (prop != NULL) {
+		ret_val = g_strdup (prop);
+		xmlFree (prop);
+	} else {
+		ret_val = g_strdup (def);
+	}
+	return ret_val;
+}
+
+void
+e_xml_set_string_prop_by_name (xmlNode *parent, const xmlChar *prop_name, const gchar *value)
+{
+	g_return_if_fail (parent != NULL);
+	g_return_if_fail (prop_name != NULL);
+
+	if (value != NULL) {
+		xmlSetProp (parent, prop_name, value);
+	}
+}
+
+int e_mkdir_hier(const char *path, mode_t mode)
 {
         char *copy, *p;
 

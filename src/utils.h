@@ -23,6 +23,7 @@
 
 #include <glib.h>
 #include <sys/types.h>
+#include <libxml/tree.h>
 
 #include "parse.h"
 
@@ -165,6 +166,22 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang);
  * Own getline implementation to handle very long comments.
  */
 gchar *gtranslator_utils_getline (FILE* stream);
+
+gchar    *e_xml_get_string_prop_by_name_with_default              (const xmlNode *parent,
+                                                      const xmlChar *prop_name,
+						      const gchar   *def);
+
+void      e_xml_set_string_prop_by_name              (xmlNode       *parent,
+                                                      const xmlChar *prop_name,
+                                                      const gchar   *value);
+						      			
+gint     e_xml_get_integer_prop_by_name_with_default              (const xmlNode *parent,
+                                                      const xmlChar *prop_name,
+						      gint           def);
+						      		
+void     e_xml_set_integer_prop_by_name              (xmlNode       *parent,
+                                                      const xmlChar *prop_name,
+                                                      gint           value);						      	      
 
 int  e_mkdir_hier (const char *path, mode_t mode);
 	
