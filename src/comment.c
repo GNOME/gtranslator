@@ -284,13 +284,27 @@ gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_str
  */
 void gtranslator_comment_display(GtrComment *comment)
 {
-	if(!comment)
+	gchar	*comment_display_str=NULL;
+	
+	if(!comment || !comment->pure_comment)
 	{
 		return;
 	}
+	else
+	{
+		if(strlen(comment->pure_comment) > 82)
+		{
+			comment_display_str=nautilus_str_middle_truncate(
+				comment->pure_comment, 82);
+		}
+		else
+		{
+			comment_display_str=comment->pure_comment;
+		}
+	}
 
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
-		comment->pure_comment);
+		comment_display_str);
 
 	if(GTR_COMMENT(comment)->type & TRANSLATOR_COMMENT ||
 		GTR_COMMENT(comment)->type & SOURCE_COMMENT)
