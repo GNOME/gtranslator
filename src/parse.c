@@ -33,7 +33,9 @@
 #include "actions.h"
 #include "comment.h"
 #include "dialogs.h"
-#include "gtkspell.h"
+#ifdef NOT_PORTED
+# include "gtkspell.h"
+#endif
 #include "gui.h"
 #include "history.h"
 #include "message.h"

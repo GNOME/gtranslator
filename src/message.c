@@ -24,7 +24,9 @@
 
 #include "actions.h"
 #include "comment.h"
-#include "gtkspell.h"
+#ifdef NOT_PORTED
+# include "gtkspell.h"
+#endif
 #include "gui.h"
 #include "learn.h"
 #include "menus.h"

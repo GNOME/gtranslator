@@ -30,7 +30,9 @@
 #include "dialogs.h"
 #include "dnd.h"
 #include "find.h"
-#include "gtkspell.h"
+#ifdef NOT_PORTED
+# include "gtkspell.h"
+#endif
 #include "gui.h"
 #include "header_stuff.h"
 #include "history.h"
