@@ -352,7 +352,7 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				{
 					append_line(&msg->msgid_plural, &line[13], FALSE);
 
-					g_message("msgid_plural: `%s'", (&msg->msgid_plural));
+					g_message("msgid_plural: `%s'", (gchar *) (&msg->msgid_plural));
 				}
 			}
 			/*
