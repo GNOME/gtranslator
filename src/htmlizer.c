@@ -80,7 +80,40 @@ gchar *gtranslator_htmlizer(gchar *textstring)
 				EndHtml(pif+1);
 				pif++;
 				break;
-			
+		
+			/*
+			 * Some special words which should be catched;
+			 */
+			 case 'G':
+
+				if(textstring[pif+1]=='N' 
+					&& textstring[pif+2]=='U')
+				{
+					string=g_string_append(string,
+						"<font color=\"navy\">GNU</font>");
+					pif=pif+2;
+					break;
+				}
+				else
+				{
+					if(textstring[pif+1]=='N'
+						&& textstring[pif+2]=='O'
+						&& textstring[pif+3]=='M'
+						&& textstring[pif+4]=='E')
+					{
+						string=g_string_append(string,
+							"<font color=\"navy\">GNOME</font>");
+						pif=pif+4;
+						break;
+					}
+					else
+					{
+						string=g_string_append_c(string,
+							textstring[pif]);
+						break;
+					}
+				}
+				
 			/*
 			 * Underscore; the usual hotkey specifier for GNOME.
 			 */ 
