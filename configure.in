@@ -87,10 +87,10 @@ AC_SUBST(IDL_CFLAGS)
 AC_SUBST(IDL_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Check for ORBit >= 0.5.1, OAF 0.3
+dnl Check for ORBit >= 0.5.3, OAF 0.6
 dnl -------------------------------------------------------------------
-AM_PATH_ORBIT(0.5.1)
-AM_PATH_OAF(0.3.0)
+AM_PATH_ORBIT(0.5.3)
+AM_PATH_OAF(0.6.0)
 
 dnl -------------------------------------------------------------------
 dnl Check for GConf >= 0.9 and the stuff around it ..
@@ -105,7 +105,6 @@ else
 	AC_MSG_RESULT(["·:0 Will not use the found GConf as \$NO_GCONF is set to _yes_ ..."])
 	else
 	AC_MSG_RESULT(["·:0 Will use GConf..."])
-	AC_DEFINE(GCONF_IS_PRESENT)
 	fi
 fi
 GNOME_CFLAGS=`gnome-config --cflags gnome`
@@ -139,7 +138,7 @@ fi
 
 dnl -------------------------------------------------------------------
 dnl Check for GnomeVFS via this crappy check and get the libs and 
-dnl  compile flags for it or disable GTR_VFS_HANDLE.
+dnl  compile flags for it or disable USE_VFS_STUFF.
 dnl -------------------------------------------------------------------
 vfs_stuff=no
 AC_MSG_CHECKING(for GnomeVFS >= 0.4.1)
@@ -169,7 +168,7 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 	dnl Define the USE_VFS_STUFF directive...
 	dnl -----------------------------------------------------------
 	if test "x$vfs_stuff" = "xyes" ; then
-		AC_DEFINE(USE_VFS_STUFF)
+	AC_MSG_RESULT(["·:0 Defining VFS flags... "])
 		AC_SUBST(VFS_CFLAGS)
 		AC_SUBST(VFS_LIBS)
 	fi	
@@ -320,7 +319,6 @@ data/oaf/Makefile
 data/pkg-config/Makefile
 data/pkg-config/gtranslator.pc
 data/scripts/Makefile
-data/ui/Makefile
 macros/Makefile
 intl/Makefile
 src/Makefile
