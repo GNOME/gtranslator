@@ -4,6 +4,7 @@
  *			Kevin Vandersloot <kfv101@psu.edu>
  *			Thomas Ziehmer <thomas@gtranslator.org>
  *			Peeter Vois <peeter@gtranslator.org>
+ *			Ross Golder <ross@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
