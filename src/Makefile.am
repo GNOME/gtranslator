@@ -5,10 +5,11 @@
 
 myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
 
-INCLUDES = $(myicon)\
+INCLUDES = $(myicon) -I../libgtranslator \
 	-I$(top_srcdir)/intl \
 	-DG_LOG_DOMAIN=\"$(PACKAGE)\" \
-	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS)
+	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS) \
+	$(XML_CFLAGS)
 
 bin_PROGRAMS = gtranslator
 
@@ -27,7 +28,8 @@ gtranslator_SOURCES = \
 	languages.h \
 	main.c 
 
-gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS) \
-	../libgtranslator/libgtranslator.a
+gtranslator_LDADD = ../libgtranslator/libgtranslator.a $(GNOME_LIBDIR) \
+		$(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS) \
+		$(XML_LIBS)
 
 EXTRA_DIST = ChangeLog

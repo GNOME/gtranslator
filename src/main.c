@@ -21,6 +21,7 @@
 #include "session.h"
 #include "messages.h"
 #include "prefs.h"
+#include "parse-db.h"
 
 /**
 * The popt-options table
@@ -100,6 +101,7 @@ int main(int argc,char *argv[])
 		**/
 		set_challenge_length(challen);
 	}
+	parse_db_for_lang(getenv("LANG"));
 	/**
 	* Read the stored preferences
 	**/
