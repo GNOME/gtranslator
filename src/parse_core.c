@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <sys/param.h>
 
+#include "message.h"
 #include "parse.h"
 
 #include <libgnome/gnome-i18n.h>

@@ -18,8 +18,8 @@
  */
 
 #include "dnd.h"
-#include "parse.h"
 #include "gui.h"
+#include "parse.h"
 #include "syntax.h"
 
 #include <gtk/gtkdnd.h>

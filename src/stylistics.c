@@ -22,10 +22,10 @@
 #include <config.h>
 #endif
 
-#include "stylistics.h"
 #include "color-schemes.h"
-#include "preferences.h"
 #include "prefs.h"
+#include "preferences.h"
+#include "stylistics.h"
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>

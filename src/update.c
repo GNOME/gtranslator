@@ -27,9 +27,9 @@
 #include <config.h>
 #endif
 
+#include "gui.h"
 #include "parse.h"
 #include "prefs.h"
-#include "gui.h"
 
 #include <stdlib.h>
 #include <libgnomeui/gnome-app-util.h>

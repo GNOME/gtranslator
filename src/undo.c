@@ -17,10 +17,10 @@
  *
  */
 
-#include "undo.h"
-#include "parse.h"
-#include "gui.h"
 #include "dialogs.h"
+#include "gui.h"
+#include "parse.h"
+#include "undo.h"
 
 /*
  * The generally used lists for Redo/Undo.

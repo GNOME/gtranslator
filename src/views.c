@@ -18,11 +18,12 @@
  *
  */
 
-#include "views.h"
 #include "gui.h"
+#include "message.h"
 #include "parse.h"
 #include "prefs.h"
 #include "syntax.h"
+#include "views.h"
 
 #include <ctype.h>
 #include <string.h>

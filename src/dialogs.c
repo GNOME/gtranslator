@@ -27,6 +27,7 @@
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
+#include "message.h"
 #include "open-differently.h"
 #include "parse.h"
 #include "prefs.h"

@@ -18,11 +18,10 @@
  *
  */
 
-#include "syntax.h"
+#include "gui.h"
 #include "parse.h"
 #include "prefs.h"
-#include "gui.h"
-
+#include "syntax.h"
 #include "syntax-elements.h"
 
 #include <ctype.h>

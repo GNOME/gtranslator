@@ -20,7 +20,7 @@
 
 #include "actions.h"
 #include "gui.h"
-#include "menus.h"
+#include "menus_main.h"
 #include "prefs.h"
 
 #include <gtk/gtk.h>

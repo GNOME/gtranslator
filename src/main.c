@@ -22,16 +22,17 @@
 #include <config.h>
 #endif
 
-#include "gui.h"
-#include "dialogs.h"
-#include "session.h"
-#include "prefs.h"
-#include "parse.h"
-#include "open-differently.h"
+#include "actions.h"
 #include "color-schemes.h"
+#include "dialogs.h"
+#include "gui.h"
 #include "htmlizer.h"
-#include "sighandling.h"
+#include "open-differently.h"
+#include "parse.h"
+#include "prefs.h"
 #include "query.h"
+#include "session.h"
+#include "sighandling.h"
 
 #include <gtk/gtkmain.h>
 

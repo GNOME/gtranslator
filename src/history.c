@@ -22,11 +22,11 @@
 #include <config.h>
 #endif
 
-#include "history.h"
 #include "dialogs.h"
 #include "gui.h"
-#include "parse.h"
+#include "history.h"
 #include "open-differently.h"
+#include "parse.h"
 #include "prefs.h"
 
 #include <gtk/gtkmenushell.h>

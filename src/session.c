@@ -22,10 +22,11 @@
 #include <config.h>
 #endif
 
-#include "session.h"
+#include "gui.h"
+#include "message.h"
 #include "parse.h"
 #include "preferences.h"
-#include "gui.h"
+#include "session.h"
 
 #include <gtk/gtkmain.h>
 #include <libgnomeui/gnome-appbar.h>

@@ -22,14 +22,14 @@
 #include <config.h>
 #endif
 
-#include "prefs.h"
-#include "dialogs.h"
-#include "gui.h"
-#include "find.h"
-#include "stylistics.h"
 #include "color-schemes.h"
+#include "dialogs.h"
+#include "find.h"
+#include "gui.h"
 #include "languages.h"
+#include "prefs.h"
 #include "query.h"
+#include "stylistics.h"
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>

@@ -19,6 +19,7 @@
 
 #include "actions.h"
 #include "gui.h"
+#include "message.h"
 #include "prefs.h"
 #include "query.h"
 #include "utils.h"

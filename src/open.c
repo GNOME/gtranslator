@@ -21,9 +21,9 @@
 #include <config.h>
 #endif
 
+#include "gui.h"
 #include "open-differently.h"
 #include "parse.h"
-#include "gui.h"
 #include "vfs-handle.h"
 
 #include <string.h>

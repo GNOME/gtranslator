@@ -17,11 +17,11 @@
  *
  */
 
-#include "sighandling.h"
-
+#include "dialogs.h"
 #include "parse.h"
 #include "preferences.h"
-#include "dialogs.h"
+#include "sighandling.h"
+
 #include <libgnome/gnome-i18n.h>
 
 #include <signal.h>

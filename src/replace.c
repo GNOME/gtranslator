@@ -20,6 +20,7 @@
 #include "actions.h"
 #include "find.h"
 #include "gui.h"
+#include "message.h"
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
