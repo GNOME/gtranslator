@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-28 15:01+0200\n"
-"PO-Revision-Date: 2004-07-28 17:17+0200\n"
+"POT-Creation-Date: 2004-12-19 11:26+0100\n"
+"PO-Revision-Date: 2004-12-19 13:02+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,32 +23,29 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "Překladatelský nástroj pro GNOME"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1141
+#: data/desktop/gtranslator.desktop.in.h:2
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#. Translator credits
-#: src/about.c:60
-msgid "translator_credits"
-msgstr "Jaroslav Jiřička <jiricka@mujbox.cz>"
-
-#: src/about.c:80
+#: src/about.c:77
 msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr "© 1999 The Free Software Foundation, Inc."
 
-#: src/about.c:81
+#: src/about.c:78
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator je editor po souborů zpráv s mnoha podpůrnými funkcemi"
 
-#: src/bookmark.c:93 src/dialogs.c:1497
-msgid "No comment"
-msgstr "Žádný komentář"
+#: src/about.c:79
+msgid "translator-credits"
+msgstr ""
+"Jaroslav Jiřička <jiricka@mujbox.cz>\n"
+"Miloslav Trmač <mitr@volny.cz>"
 
-#: src/bookmark.c:598
+#: src/bookmark.c:525
 msgid "_View/_Bookmarks/"
 msgstr "_Zobrazit/_Záložky/"
 
-#: src/bookmark.c:635
+#: src/bookmark.c:562
 #, c-format
 msgid "Open %s (%s)"
 msgstr "Otevřít %s (%s)"
@@ -83,19 +80,35 @@ msgstr "_Zobrazit/Barevné _schéma/"
 msgid "Activate colorscheme %s"
 msgstr "Použít barevné schéma %s"
 
-#: src/dialogs.c:115
+#: src/compile.c:80
+msgid "An error occurred while msgfmt was executed:\n"
+msgstr "Při spouštění programu msgfmt došlo k chybě:\n"
+
+#: src/compile.c:157
+msgid "Sorry, msgfmt isn't available on your system!"
+msgstr "Lituji, msgfmt není ve vašem systému dostupný!"
+
+#: src/compile.c:197
+#, c-format
+msgid ""
+"Compile successful:\n"
+"%s"
+msgstr ""
+"Kompilace se zdařila:\n"
+"%s"
+
+#: src/dialogs.c:96
 msgid "gtranslator -- open po file"
 msgstr "gtranslator – otevřít katalog"
 
-#: src/dialogs.c:157
+#.
+#. * Let the user use the file selector to decide where to save it
+#.
+#: src/dialogs.c:135
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator – uložit soubor jako..."
 
-#: src/dialogs.c:177
-msgid "gtranslator -- save local copy of file as.."
-msgstr "gtranslator – uložit lokální kopii souboru jako..."
-
-#: src/dialogs.c:227
+#: src/dialogs.c:179
 #, c-format
 msgid ""
 "File %s\n"
@@ -104,64 +117,52 @@ msgstr ""
 "Soubor %s\n"
 "byl změněn. Chcete změny uložit?"
 
-#: src/dialogs.c:233
-msgid "Don't save"
-msgstr "Neukládat"
-
-#: src/dialogs.c:277
-msgid "gtranslator -- import po file"
-msgstr "gtranslator – importovat katalog"
-
-#: src/dialogs.c:324
-msgid "gtranslator -- export po file"
-msgstr "gtranslator – exportovat katalog"
-
-#: src/dialogs.c:372 src/dialogs.c:405
+#: src/dialogs.c:221 src/dialogs.c:254
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator – upravit komentář"
 
-#: src/dialogs.c:397
+#: src/dialogs.c:246
 msgid "Comment:"
 msgstr "Komentář:"
 
-#: src/dialogs.c:512
+#: src/dialogs.c:361
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Chcete smazat VŠECHNY překlady ze souboru `%s'?"
 
-#: src/dialogs.c:615
+#: src/dialogs.c:434
 msgid "gtranslator -- go to"
 msgstr "gtranslator – přejít na"
 
-#: src/dialogs.c:623
+#: src/dialogs.c:442
 msgid "Go to message number:"
 msgstr "Přejít na zprávu číslo:"
 
-#: src/dialogs.c:681
+#: src/dialogs.c:500
 msgid "Find in the po file"
 msgstr "Hledání v katalogu"
 
-#: src/dialogs.c:690
+#: src/dialogs.c:509
 msgid "Enter search string:"
 msgstr "Hledat:"
 
-#: src/dialogs.c:695
+#: src/dialogs.c:514
 msgid "Case sensitive"
 msgstr "Rozlišovat velikost"
 
-#: src/dialogs.c:700
+#: src/dialogs.c:519
 msgid "Find in:"
 msgstr "Prohledat:"
 
-#: src/dialogs.c:704 src/dialogs.c:835
+#: src/dialogs.c:523 src/dialogs.c:652
 msgid "Comments"
 msgstr "Komentáře"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:101
+#: src/dialogs.c:526 src/dialogs.c:655 src/languages.c:101
 msgid "English"
 msgstr "Originál"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:263
+#: src/dialogs.c:529 src/dialogs.c:658 src/messages-table.c:224
 msgid "Translation"
 msgstr "Překlad"
 
@@ -169,43 +170,39 @@ msgstr "Překlad"
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: src/dialogs.c:721
+#: src/dialogs.c:540
 msgid "Ignore hotkeys"
 msgstr "Ignorovat znaky označující horké klávesy"
 
-#: src/dialogs.c:814
+#: src/dialogs.c:631
 msgid "gtranslator -- replace"
 msgstr "gtranslator – nahradit"
 
-#: src/dialogs.c:818 src/menus.c:355
+#: src/dialogs.c:635 src/menus.c:333
 msgid "Replace"
 msgstr "Nahradit"
 
-#: src/dialogs.c:819
+#: src/dialogs.c:636
 msgid "Replace all"
 msgstr "Nahradit vše"
 
-#: src/dialogs.c:824
+#: src/dialogs.c:641
 msgid "String to replace:"
 msgstr "Hledat:"
 
-#: src/dialogs.c:827
+#: src/dialogs.c:644
 msgid "Replace string:"
 msgstr "Nahradit čím:"
 
-#: src/dialogs.c:832
+#: src/dialogs.c:649
 msgid "Replace in:"
 msgstr "Prohledat:"
 
-#: src/dialogs.c:902
+#: src/dialogs.c:719
 msgid "Please enter a string to replace!"
 msgstr "Prosím, zadejte nahrazovaný řetězec"
 
-#: src/dialogs.c:953
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "Při spouštění programu msgfmt došlo k chybě:\n"
-
-#: src/dialogs.c:994
+#: src/dialogs.c:776
 #, c-format
 msgid ""
 "The file\n"
@@ -228,7 +225,7 @@ msgstr ""
 "\n"
 "Má gtranslator přesto tento soubor otevřít?"
 
-#: src/dialogs.c:1035
+#: src/dialogs.c:817
 #, c-format
 msgid ""
 "File %s\n"
@@ -237,23 +234,19 @@ msgstr ""
 "Soubor %s\n"
 "byl změněn. Chcete se vrátit k uložené verzi?"
 
-#: src/dialogs.c:1064
+#: src/dialogs.c:846
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator – otevřít URI"
 
-#: src/dialogs.c:1076
+#: src/dialogs.c:858
 msgid "Enter URI:"
 msgstr "Zadejte URI:"
 
-#: src/dialogs.c:1112
+#: src/dialogs.c:895
 msgid "No URI given!"
 msgstr "Nebylo zadáno URI."
 
-#: src/dialogs.c:1127
-msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr "Byl zadán nepodporovaný protokol URI (např. \"ftp://\")."
-
-#: src/dialogs.c:1135
+#: src/dialogs.c:909
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -278,7 +271,7 @@ msgstr ""
 "file:///<PO-SOUBOR> nebo\n"
 "http://www.DOMENA.COM/PO-SOUBOR"
 
-#: src/dialogs.c:1174
+#: src/dialogs.c:949
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
@@ -295,68 +288,19 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1186
+#: src/dialogs.c:961
 msgid "Postpone decision"
 msgstr "Odložit rozhodnutí"
 
-#: src/dialogs.c:1188
+#: src/dialogs.c:963
 msgid "Ignore recovery file"
 msgstr "Ignorovat záložní soubor"
 
-#: src/dialogs.c:1190
+#: src/dialogs.c:965
 msgid "Recover file"
 msgstr "Obnovit soubor"
 
-#.
-#. * A half-baken dialog for the query functionality.
-#.
-#: src/dialogs.c:1249
-msgid "Here you can query existing translations from your learn buffer."
-msgstr "Zde je možné se dotazovat vaší překladové paměti."
-
-#: src/dialogs.c:1252
-msgid "gtranslator -- query your personal learn buffer"
-msgstr "gtranslator – dotaz na osobní překladovou paměť"
-
-#: src/dialogs.c:1256 src/menus.c:360
-msgid "Query"
-msgstr "Dotaz"
-
-#: src/dialogs.c:1257
-msgid "Query message content"
-msgstr "Dotaz na obsah zprávy"
-
-#: src/dialogs.c:1267
-msgid "Query string:"
-msgstr "Hledat:"
-
-#: src/dialogs.c:1305
-msgid "No query string given!"
-msgstr "Nebyl zadán řetězec, který se má vyhledat!"
-
-#: src/dialogs.c:1327
-msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr ""
-"Pro zadaný dotaz nebyl ve vaší překladové paměti nalezen žádný výsledek."
-
-#: src/dialogs.c:1339
-#, c-format
-msgid ""
-"Found \"%s\" as a translation for \"%s\".\n"
-"Would you like to insert it into the translation?"
-msgstr ""
-"Řetězec \"%s\" byl nalezen jako překlad řetězce \"%s\".\n"
-"Chcete jej vložit do překladu?"
-
-#.
-#. * Translators: This means that the query result string is
-#. *  already translated.
-#.
-#: src/dialogs.c:1409
-msgid "Query's result translation is already there!"
-msgstr "Výsledek dotazu na překlad již existuje!"
-
-#: src/dialogs.c:1441
+#: src/dialogs.c:1018
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -364,19 +308,23 @@ msgstr ""
 "Chcete, aby byl proveden automatický hrubý překlad katalogu\n"
 "na základě informací obsažených ve vaší překladové paměti?"
 
-#: src/dialogs.c:1477 src/dialogs.c:1505
+#: src/dialogs.c:1058 src/dialogs.c:1086
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator – přidat záložku s komentářem?"
 
-#: src/dialogs.c:1497
+#: src/dialogs.c:1078
 msgid "Comment for the bookmark:"
 msgstr "Komentář k záložce:"
 
-#: src/find.c:217
+#: src/dialogs.c:1078
+msgid "No comment"
+msgstr "Žádný komentář"
+
+#: src/find.c:216
 msgid "Please enter a search string"
 msgstr "Prosím, zadejte hledaný řetězec"
 
-#: src/find.c:233
+#: src/find.c:232
 #, c-format
 msgid ""
 "Could not find\n"
@@ -385,11 +333,7 @@ msgstr ""
 "Nemohu najít\n"
 "\"%s\""
 
-#: src/gui.c:182
-msgid "Edit comment"
-msgstr "Upravit komentář"
-
-#: src/gui.c:493
+#: src/gui.c:359
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
@@ -397,24 +341,20 @@ msgstr[0] "%s [ Zbývá %i neúplně přeložená ]"
 msgstr[1] "%s [ Zbývají %i neúplně přeložené ]"
 msgstr[2] "%s [ Zbývá %i neúplně přeložených ]"
 
-#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
+#: src/gui.c:359 src/gui.c:363 src/menus.c:319 src/messages-table.c:272
 msgid "Fuzzy"
 msgstr "Neúplně přeložené"
 
-#: src/gui.c:497
+#: src/gui.c:363
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Žádné neúplně přeložené zprávy ]"
 
-#: src/gui.c:505
-msgid "Sticky (Message & translation are the same)"
-msgstr "Sticky (Překlad je shodný s původní zprávou)"
-
-#: src/gui.c:507 src/messages-table.c:332
+#: src/gui.c:372 src/messages-table.c:280
 msgid "Translated"
 msgstr "Přeložené"
 
-#: src/gui.c:516
+#: src/gui.c:380
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
@@ -422,98 +362,107 @@ msgstr[0] "%s [ Zbývá %i nepřeložená ]"
 msgstr[1] "%s [ Zbývá %i nepřeložené ]"
 msgstr[2] "%s [ Zbývá %i nepřeložených ]"
 
-#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
+#: src/gui.c:380 src/gui.c:382 src/messages-table.c:264
 msgid "Untranslated"
 msgstr "Nepřeložené"
 
-#: src/gui.c:518
+#: src/gui.c:382
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Žádné nepřeložené zprávy ]"
 
-#: src/gui.c:537
+#: src/gui.c:401
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Zpráva %d z %d. Stav: %s (Zpráva s množnými čísly)"
 
-#: src/gui.c:541
+#: src/gui.c:405
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Zpráva %d z %d. Stav: %s"
 
-#: src/header_stuff.c:495
+#: src/gui.c:707 src/page.c:98
+msgid "Edit comment"
+msgstr "Upravit komentář"
+
+#: src/header_stuff.c:406
+msgid "No header for this file/domain"
+msgstr "Žádná hlavička pro tento soubor/doménu"
+
+#: src/header_stuff.c:445
 msgid "gtranslator -- edit header"
 msgstr "gtranslator – upravit hlavičku"
 
-#: src/header_stuff.c:519
+#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
+#: src/header_stuff.c:469
 msgid "Comments:"
 msgstr "Komentáře:"
 
-#: src/header_stuff.c:526
+#: src/header_stuff.c:476
 msgid "Project name:"
 msgstr "Název projektu:"
 
-#: src/header_stuff.c:532
+#: src/header_stuff.c:482
 msgid "Project version:"
 msgstr "Verze projektu:"
 
-#: src/header_stuff.c:539
+#: src/header_stuff.c:489
 msgid "Pot file creation date:"
 msgstr "Datum vytvoření POT souboru:"
 
-#: src/header_stuff.c:545
+#: src/header_stuff.c:495
 msgid "Po file revision date:"
 msgstr "Datum poslední změny PO souboru:"
 
-#: src/header_stuff.c:559
+#: src/header_stuff.c:502
 msgid "Report message string bugs to:"
 msgstr "Chyby v textu zpráv hlásit na adresu:"
 
-#: src/header_stuff.c:572
+#: src/header_stuff.c:516
 msgid "Generator:"
 msgstr "Generátor:"
 
-#: src/header_stuff.c:576
+#: src/header_stuff.c:521
 msgid "Project"
 msgstr "Projekt"
 
-#: src/header_stuff.c:582
+#: src/header_stuff.c:527
 msgid "Use my options to complete the following entries:"
 msgstr "Použít vlastní nastavení pro vyplnění následujících položek:"
 
-#: src/header_stuff.c:595
+#: src/header_stuff.c:540
 msgid "Translator's name:"
 msgstr "Jméno překladatele:"
 
-#: src/header_stuff.c:601
+#: src/header_stuff.c:546
 msgid "Translator's e-mail:"
 msgstr "E-mail překladatele:"
 
-#: src/header_stuff.c:608 src/prefs.c:500
+#: src/header_stuff.c:553 src/prefs.c:458
 msgid "Language:"
 msgstr "Jazyk:"
 
-#: src/header_stuff.c:615 src/prefs.c:512
+#: src/header_stuff.c:560 src/prefs.c:470
 msgid "Language group's email:"
 msgstr "E-mail překladatelské skupiny:"
 
-#: src/header_stuff.c:622 src/prefs.c:518
+#: src/header_stuff.c:567 src/prefs.c:476
 msgid "Charset:"
 msgstr "Znaková sada:"
 
-#: src/header_stuff.c:629 src/prefs.c:523
+#: src/header_stuff.c:574 src/prefs.c:481
 msgid "Encoding:"
 msgstr "Kódování"
 
-#: src/header_stuff.c:637
+#: src/header_stuff.c:582
 msgid "Translator and Language"
 msgstr "Překladatel a Jazyk"
 
-#: src/history.c:195
+#: src/history.c:189
 msgid "_File/Recen_t files/"
 msgstr "_Soubor/_Nedávno otevřené/"
 
-#: src/history.c:243
+#: src/history.c:226
 #, c-format
 msgid "Open %s"
 msgstr "Otevřít %s"
@@ -790,11 +739,11 @@ msgstr "Valonská francouzština"
 msgid "Welsh"
 msgstr "Velština"
 
-#: src/learn.c:379
+#: src/learn.c:380
 msgid "gtranslator learn buffer statistics:"
 msgstr "Statistika překladové paměti:"
 
-#: src/learn.c:382
+#: src/learn.c:383
 #, c-format
 msgid "Learn buffer filename: `%s`"
 msgstr "Jméno souboru překladové paměti: `%s'."
@@ -802,7 +751,7 @@ msgstr "Jméno souboru překladové paměti: `%s'."
 #.
 #. * Translators: This means the encoding of the learn buffer (XML) file.
 #.
-#: src/learn.c:388
+#: src/learn.c:389
 #, c-format
 msgid "Encoding: `%s'"
 msgstr "Kódování: `%s'"
@@ -810,7 +759,7 @@ msgstr "Kódování: `%s'"
 #.
 #. * Translators: "Serial number" of the learn buffer - means # of file updates.
 #.
-#: src/learn.c:394
+#: src/learn.c:395
 #, c-format
 msgid "Serial: `%i'"
 msgstr "Pořadové číslo: `%i'"
@@ -818,396 +767,336 @@ msgstr "Pořadové číslo: `%i'"
 #.
 #. * Translators: That's the number of message entries in the learn buffer.
 #.
-#: src/learn.c:400
+#: src/learn.c:401
 #, c-format
 msgid "Number of entries: `%i'"
 msgstr "Počet záznamů: `%i'"
 
-#: src/main.c:85
-msgid "Auto translate the po file"
-msgstr "Automaticky přeložit katalog"
-
-#: src/main.c:85 src/main.c:101
-msgid "FILENAME"
-msgstr "NÁZEVSOUBORU"
-
-#: src/main.c:89
+#: src/main.c:70
 msgid "Show build specifications"
 msgstr "Zobrazit informace o sestavení"
 
-#: src/main.c:93
-msgid "Export learn buffer to a plain po file"
-msgstr "Exportovat překladovou paměť do PO souboru"
-
-#: src/main.c:93
-msgid "PO_FILE"
-msgstr "SOUBOR_PO"
-
-#: src/main.c:97
+#: src/main.c:74
 msgid "Specify main window geometry"
 msgstr "Nastavení geometrie hlavního okna"
 
-#: src/main.c:97
+#: src/main.c:74
 msgid "GEOMETRY"
 msgstr "GEOMETRIE"
 
-#: src/main.c:101
-msgid "Learn the file completely"
-msgstr "Importovat celý katalog do překladové paměti"
-
-#: src/main.c:105
-msgid "Show learn buffer statistics"
-msgstr "Zobrazit statistické informace o překladové paměti"
-
-#: src/main.c:148
+#: src/main.c:127
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Chyba při inicializaci programu GConf: %s."
 
-#: src/main.c:180
+#: src/main.c:267
+#, c-format
+msgid "Couldn't open '%s': %s\n"
+msgstr "Nemohu otevřít '%s': %s\n"
+
+#: src/main.c:289
 msgid "gtranslator build information/specs:"
 msgstr "Informace o sestavení gtranslatoru:"
 
-#: src/main.c:182
+#: src/main.c:291
 msgid "Version and build date:"
 msgstr "Verze a datum sestavení:"
 
-#: src/main.c:184
+#: src/main.c:293
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Verze GLib / Gtk+ / GNOME / XML použité při sestavení:"
 
-#: src/main.c:186
+#: src/main.c:295
 msgid "Colorschemes directory:"
 msgstr "Adresář barevných schémat:"
 
-#: src/main.c:188
+#: src/main.c:297
 msgid "Scripts directory:"
 msgstr "Adresář skriptů:"
 
-#: src/main.c:190
+#: src/main.c:299
 msgid "Window icon:"
 msgstr "Ikona okna:"
 
-#: src/main.c:192
+#: src/main.c:301
 msgid "Own locale directory:"
 msgstr "Vlastní lokalizační adresář:"
 
-#: src/main.c:194
+#: src/main.c:303
 msgid "Default learn buffer file location:"
 msgstr "Implicitní umístění souboru překladové paměti:"
 
-#.
-#. * As everything seemed to went fine, print out a nice
-#. *  message informing the user about the success.
-#.
-#: src/main.c:459
-#, c-format
-msgid "Learned file `%s' successfully for your learn buffer.\n"
-msgstr "Soubor `%s' byl úspěšně přidán do překladové paměti.\n"
-
-#.
-#. * Give us another small status feedback about the export.
-#.
-#: src/main.c:501
-#, c-format
-msgid "Exported learn buffer to file `%s'.\n"
-msgstr "Překladová paměť byla exportována do souboru `%s'.\n"
-
-#: src/menus.c:48
+#: src/menus.c:52
 msgid "_Go"
 msgstr "Pře_jít na"
 
-#: src/menus.c:58
+#: src/menus.c:62
 msgid "_Compile"
 msgstr "Kompilovat"
 
-#: src/menus.c:59 src/menus.c:296
+#: src/menus.c:63 src/menus.c:274
 msgid "Compile the po file"
 msgstr "Kompilovat PO soubor"
 
-#: src/menus.c:65
+#: src/menus.c:69
 msgid "_Update"
 msgstr "_Aktualizovat"
 
-#: src/menus.c:66 src/menus.c:300
+#: src/menus.c:70 src/menus.c:278
 msgid "Update the po file"
 msgstr "Aktualizovat PO soubor"
 
-#: src/menus.c:73
+#: src/menus.c:77
 msgid "Add bookmark"
 msgstr "Přidat záložku"
 
-#: src/menus.c:74
+#: src/menus.c:78
 msgid "Add a bookmark for this message in this po file"
 msgstr "Přidat záložku k této zprávě v tomto katalogu"
 
-#: src/menus.c:81
+#: src/menus.c:85
 msgid "Aut_otranslate..."
 msgstr "Automatický _překlad"
 
-#: src/menus.c:82
+#: src/menus.c:86
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr ""
 "Provést hrubý překlad katalogu na základě informací z překladové paměti"
 
-#: src/menus.c:89
+#: src/menus.c:93
 msgid "Remove all translations..."
 msgstr "Odstranit všechny překlady"
 
-#: src/menus.c:90
+#: src/menus.c:94
 msgid "Remove all existing translations from the po file"
 msgstr "Odstranit všechny překlady z katalogu"
 
-#: src/menus.c:98
+#: src/menus.c:102
 msgid "Open from _URI..."
 msgstr "Otevřít _URI..."
 
-#: src/menus.c:99
+#: src/menus.c:103
 msgid "Open a po file from a given URI"
 msgstr "Otevřít soubor ze zadaného URI"
 
-#: src/menus.c:109
+#: src/menus.c:113
 msgid "Recen_t files"
 msgstr "_Nedávno otevřené"
 
-#: src/menus.c:113
-msgid "_Export to UTF-8..."
-msgstr "_Exportovat do UTF-8..."
-
-#: src/menus.c:114
-msgid "Export the current po file to UTF-8"
-msgstr "Exportovat aktuální katalog do UTF-8"
-
-#: src/menus.c:120
-msgid "_Import from UTF-8..."
-msgstr "_Importovat z UTF-8..."
-
-#: src/menus.c:121
-msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr "Importovat PO soubor v kódování UTF-8 do národní znakové sady"
-
-#: src/menus.c:153
-msgid "_Query..."
-msgstr "_Dotaz..."
-
-#: src/menus.c:154 src/menus.c:361
-msgid "Query for a string"
-msgstr "Dotaz na řetězec"
-
-#: src/menus.c:161
+#: src/menus.c:140
 msgid "_Header..."
 msgstr "_Hlavička..."
 
-#: src/menus.c:162
+#: src/menus.c:141
 msgid "Edit po file header"
 msgstr "Upravit hlavičku katalogu"
 
-#: src/menus.c:169
+#: src/menus.c:148
 msgid "C_omment..."
 msgstr "_Komentář..."
 
-#: src/menus.c:170
+#: src/menus.c:149
 msgid "Edit message comment"
 msgstr "Upravit komentář ke zprávě"
 
-#: src/menus.c:177
+#: src/menus.c:156
 msgid "Copy _message -> translation"
 msgstr "Kopírovat _originál -> překlad"
 
-#: src/menus.c:178
+#: src/menus.c:157
 msgid "Copy the original message contents and paste them as translation"
 msgstr "Zkopírovat originální zprávu do překladu"
 
-#: src/menus.c:185
+#: src/menus.c:164
 msgid "Fu_zzy"
 msgstr "N_eúplný překlad"
 
-#: src/menus.c:186
+#: src/menus.c:165
 msgid "Toggle fuzzy status of a message"
 msgstr "Zařadit zprávu mezi neúplně přeložené"
 
-#: src/menus.c:200
+#: src/menus.c:178
 msgid "_First"
 msgstr "_První"
 
-#: src/menus.c:201 src/menus.c:317
+#: src/menus.c:179 src/menus.c:295
 msgid "Go to the first message"
 msgstr "Přejít na první zprávu v katalogu"
 
-#: src/menus.c:207
+#: src/menus.c:185
 msgid "_Back"
 msgstr "Pře_dchozí"
 
-#: src/menus.c:208 src/menus.c:321
+#: src/menus.c:186 src/menus.c:299
 msgid "Move back one message"
 msgstr "Zpět na předchozí zprávu"
 
-#: src/menus.c:215
+#: src/menus.c:193
 msgid "_Next"
 msgstr "_Další"
 
-#: src/menus.c:216 src/menus.c:326
+#: src/menus.c:194 src/menus.c:304
 msgid "Move forward one message"
 msgstr "Přejít na následující zprávu"
 
-#: src/menus.c:222
+#: src/menus.c:200
 msgid "_Last"
 msgstr "Pos_lední"
 
-#: src/menus.c:223 src/menus.c:330
+#: src/menus.c:201 src/menus.c:308
 msgid "Go to the last message"
 msgstr "Přejít na poslední zprávu v katalogu"
 
-#: src/menus.c:230
+#: src/menus.c:208
 msgid "_Go to..."
 msgstr "_Zprávu číslo..."
 
-#: src/menus.c:231
+#: src/menus.c:209
 msgid "Goto specified message number"
 msgstr "Přejít na zadanou zprávu"
 
-#: src/menus.c:237
+#: src/menus.c:215
 msgid "Next fuz_zy"
 msgstr "Další n_eúplně přeloženou"
 
-#: src/menus.c:238
+#: src/menus.c:216
 msgid "Go to next fuzzy message"
 msgstr "Přejít na následující neúplně přeloženou zprávu"
 
-#: src/menus.c:244
+#: src/menus.c:222
 msgid "Next _untranslated"
 msgstr "Další _nepřeloženou"
 
-#: src/menus.c:245 src/menus.c:335
+#: src/menus.c:223 src/menus.c:313
 msgid "Go to next untranslated message"
 msgstr "Přejít na následující nepřeloženou zprávu"
 
-#: src/menus.c:255
+#: src/menus.c:233
 msgid "_Bookmarks"
 msgstr "_Záložky"
 
-#: src/menus.c:256
+#: src/menus.c:234
 msgid "_Colorschemes"
 msgstr "Barevné _schéma"
 
-#: src/menus.c:270
+#: src/menus.c:248
 msgid "gtranslator _website"
 msgstr "WWW stránky gtranslatoru"
 
-#: src/menus.c:271
+#: src/menus.c:249
 msgid "gtranslator's homepage on the web"
 msgstr "Domovská stránka gtranslatoru"
 
-#: src/menus.c:282
+#: src/menus.c:260
 msgid "Open"
 msgstr "Otevřít"
 
-#: src/menus.c:283
+#: src/menus.c:261
 msgid "Open a po file"
 msgstr "Otevřít katalog"
 
-#: src/menus.c:286
+#: src/menus.c:264
 msgid "Save"
 msgstr "Uložit"
 
-#: src/menus.c:287
+#: src/menus.c:265
 msgid "Save File"
 msgstr "Uložit soubor"
 
-#: src/menus.c:290
+#: src/menus.c:268
 msgid "Save as"
 msgstr "Uložit jako"
 
-#: src/menus.c:291
+#: src/menus.c:269
 msgid "Save file with a different name"
 msgstr "Uložit soubor pod jiným jménem"
 
-#: src/menus.c:295
+#: src/menus.c:273
 msgid "Compile"
 msgstr "Kompilovat"
 
-#: src/menus.c:299
+#: src/menus.c:277
 msgid "Update"
 msgstr "Aktualizovat"
 
-#: src/menus.c:303
+#: src/menus.c:281
 msgid "Header"
 msgstr "Hlavička"
 
-#: src/menus.c:304
+#: src/menus.c:282
 msgid "Edit the header"
 msgstr "Upravit hlavičku"
 
-#: src/menus.c:308
+#: src/menus.c:286
 msgid "Undo"
 msgstr "Zpět"
 
-#: src/menus.c:309
+#: src/menus.c:287
 msgid "Undo the last performed action"
 msgstr "Vrátit poslední provedenou úpravu"
 
-#: src/menus.c:316
+#: src/menus.c:294
 msgid "First"
 msgstr "První"
 
-#: src/menus.c:320
+#: src/menus.c:298
 msgid "Back"
 msgstr "Předchozí"
 
-#: src/menus.c:325
+#: src/menus.c:303
 msgid "Next"
 msgstr "Další"
 
-#: src/menus.c:329
+#: src/menus.c:307
 msgid "Last"
 msgstr "Poslední"
 
-#: src/menus.c:334
+#: src/menus.c:312
 msgid "Missing"
 msgstr "Nepřeložená"
 
-#: src/menus.c:342
+#: src/menus.c:320
 msgid "Go to the next fuzzy translation"
 msgstr "Přejít na následující neúplně přeloženou zprávu"
 
-#: src/menus.c:347
+#: src/menus.c:325
 msgid "Go to"
 msgstr "Zpráva číslo..."
 
-#: src/menus.c:348
+#: src/menus.c:326
 msgid "Go to specified message number"
 msgstr "Přejít na zadanou zprávu"
 
-#: src/menus.c:351
+#: src/menus.c:329
 msgid "Find"
 msgstr "Najít"
 
-#: src/menus.c:352
+#: src/menus.c:330
 msgid "Find string in po file"
 msgstr "Najít řetězec v katalogu"
 
-#: src/menus.c:356
+#: src/menus.c:334
 msgid "Replace string in po file"
 msgstr "Nahradit řetězec v katalogu"
 
-#: src/message.c:95
+#: src/message.c:83
 msgid "Couldn't get the message!"
 msgstr "Nemohu získat zprávu!"
 
-#: src/message.c:117
+#: src/message.c:105
 msgid "There are no fuzzy messages left."
 msgstr "Žádné neúplně přeložené zprávy."
 
-#: src/message.c:141
+#: src/message.c:129
 msgid "All messages seem to be translated."
 msgstr "Všechny zprávy jsou přeloženy"
 
-#: src/message.c:270
+#: src/message.c:212
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "Chyba gtkspell: %s\n"
 
-#: src/message.c:271
+#: src/message.c:213
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1216,76 +1105,40 @@ msgstr ""
 "Nelze inicializovat GtkSpell.\n"
 " %s"
 
-#: src/message.c:311
-msgid "gtranslator -- edit plural forms of message translation"
-msgstr "gtranslator – editace forem množného čísla"
-
-#: src/messages-table.c:252
+#: src/messages-table.c:213
 msgid "Original"
 msgstr "Originál"
 
-#: src/open.c:144
-#, c-format
-msgid "Couldn't open compiled gettext file `%s'!"
-msgstr "Nemohu otevřít kompilovaný soubor gettextu: `%s'!"
+#: src/parse.c:85
+msgid "Parser output"
+msgstr "Výstup parseru"
 
-#: src/open.c:192
+#: src/parse.c:209
 #, c-format
-msgid "Couldn't open compressed gettext file `%s'!"
-msgstr "Nemohu otevřít komprimovaný soubor gettextu: `%s'!"
+msgid "Failed opening file '%s': %s"
+msgstr "Nemohu otevřít soubor '%s': %s"
+
+#: src/parse.c:222
+msgid "Gettext returned a null message domain list."
+msgstr "Gettext vrátil prázdný seznam domény zpráv."
+
+#: src/parse.c:251
+msgid "No messages obtained from parser."
+msgstr "Z parseru nebyla získána žádná zpráva."
+
+#: src/parse.c:312 src/parse.c:316
+msgid "N/A"
+msgstr "N/A"
 
 #.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
+#. * Set window title
 #.
-#: src/open.c:202
-#, c-format
-msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr "Nemohu otevřít programem %s komprimovaný soubor gettextu `%s'!"
-
-#: src/open.c:271
-#, c-format
-msgid "Couldn't open zip'ed po file `%s'!"
-msgstr "Nemohu otevřít komprimovaný katalog `%s'."
-
-#: src/parse.c:485
-#, c-format
-msgid ""
-"Error in file \"%s\"\n"
-"at line %d.\n"
-"Please check the file and try again."
-msgstr ""
-"Chyba v souboru \"%s\"\n"
-"na řádku %d.\n"
-"Zkontrolujte, prosím, tento soubor."
-
-#: src/parse.c:540
-#, c-format
-msgid ""
-"The file is empty:\n"
-"%s"
-msgstr ""
-"Soubor je prázdný:\n"
-"%s"
-
-#: src/parse.c:562
-#, c-format
-msgid "The file `%s' doesn't exist at all!"
-msgstr "Soubor `%s' neexistuje!"
-
-#.
-#. * Provide a default po->header to avoid segfaults (#62244)
-#.
-#: src/parse.c:694
-msgid "Header record not found - defaulting from preferences"
-msgstr "Nebyla nalezena hlavička – používám implicitní nastavení"
-
-#: src/parse.c:710
+#: src/parse.c:352
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator – %s"
 
-#: src/parse.c:922
+#: src/parse.c:471
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1296,12 +1149,7 @@ msgstr ""
 "POT soubory jsou generovány během procesu kompilace.\n"
 "Vhodné jméno pro váš soubor je `%s.po'."
 
-#: src/parse.c:984
-#, c-format
-msgid "Could not open file `%s' for writing!"
-msgstr "Nemohu otevřít soubor `%s' pro zápis!"
-
-#: src/parse.c:1036
+#: src/parse.c:511
 #, c-format
 msgid ""
 "File %s\n"
@@ -1319,79 +1167,66 @@ msgstr[2] ""
 "Soubor %s\n"
 "obsahuje %d neúplně přeložených zpráv."
 
-#: src/parse.c:1308
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "Lituji, msgfmt není ve vašem systému dostupný!"
-
-#: src/parse.c:1343
-#, c-format
-msgid ""
-"Compile successful:\n"
-"%s"
-msgstr ""
-"Kompilace se zdařila:\n"
-"%s"
-
 #: src/preferences.c:180
 msgid "Couldn't generate the current date!"
 msgstr "Nemohu vygenerovat aktuální datum!"
 
-#: src/prefs.c:212
+#: src/prefs.c:210
 msgid "Hotkey indicating character:"
 msgstr "Znak označující horkou klávesu:"
 
-#: src/prefs.c:332
+#: src/prefs.c:310
 msgid "gtranslator -- options"
 msgstr "gtranslator – Nastavení"
 
 #.
 #. * Files page
 #.
-#: src/prefs.c:350
+#: src/prefs.c:329
 msgid "Files"
 msgstr "Soubory"
 
-#: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
+#: src/prefs.c:330 src/prefs.c:488 src/prefs.c:523
 msgid "General"
 msgstr "Obecné"
 
-#: src/prefs.c:352
+#: src/prefs.c:331
 msgid "Warn if po file contains fuzzy translations"
 msgstr "Zobrazit varování, pokud soubor obsahuje neúplně přeložené zprávy"
 
-#: src/prefs.c:356
+#: src/prefs.c:335
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Odstraňovat kompilované soubory (např. \"project.gmo\")"
 
-#: src/prefs.c:360
+#: src/prefs.c:339
 msgid "Autosave"
 msgstr "Automatické ukládání"
 
-#: src/prefs.c:361
+#: src/prefs.c:340
 msgid "Automatically save at regular intervals"
 msgstr "Automaticky zálohovat katalog v pravidelných intervalech"
 
-#: src/prefs.c:369
+#: src/prefs.c:348
 msgid "Autosave interval:"
 msgstr "Interval automatického ukládání (v minutách):"
 
-#: src/prefs.c:370
+#: src/prefs.c:349
 msgid "Append a suffix to automatically saved files"
 msgstr "Ke jménu záložních souborů připojit příponu"
 
-#: src/prefs.c:377
+#: src/prefs.c:356
 msgid "Suffix:"
 msgstr "Přípona:"
 
-#: src/prefs.c:378
+#: src/prefs.c:357
 msgid "Recent files"
 msgstr "Nedávno otevřené soubory"
 
-#: src/prefs.c:386
+#: src/prefs.c:365
 msgid "Maximum number of entries in the recent files list:"
 msgstr "Nejvyšší počet položek v seznamu nedávno otevřených souborů:"
 
-#: src/prefs.c:387
+#: src/prefs.c:366
 msgid "Check recent files before showing in recent files list"
 msgstr ""
 "Kontrolovat soubory před jejich zobrazením v seznamu naposledy otevřených "
@@ -1400,215 +1235,175 @@ msgstr ""
 #.
 #. * Editor page
 #.
-#: src/prefs.c:395
+#: src/prefs.c:374
 msgid "Editor"
 msgstr "Editor"
 
-#: src/prefs.c:398
+#: src/prefs.c:377
 msgid "Text display"
 msgstr "Zobrazení textu"
 
-#: src/prefs.c:399
+#: src/prefs.c:378
 msgid "Highlight syntax of the translation message"
 msgstr "Zvýrazňovat syntaxi překládaných zpráv"
 
-#: src/prefs.c:410
-msgid "Syntax color scheme to use:"
-msgstr "Použít barevné schéma:"
-
-#: src/prefs.c:411
+#: src/prefs.c:383
 msgid "Use special character to indicate white space"
 msgstr "Vyznačit mezery zobrazením zvláštního znaku"
 
-#: src/prefs.c:419
+#: src/prefs.c:391
 msgid "Apply own fonts"
 msgstr "Použít vlastní písma"
 
-#: src/prefs.c:423
+#: src/prefs.c:395
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator – výběr písma/msgid font"
 
-#: src/prefs.c:427
+#: src/prefs.c:399
 msgid "Original text font:"
 msgstr "Písmo originálu:"
 
-#: src/prefs.c:428
+#: src/prefs.c:400
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator – výběr písma/msgstr font"
 
-#: src/prefs.c:432
+#: src/prefs.c:404
 msgid "Translation font:"
 msgstr "Písmo překladu:"
 
-#: src/prefs.c:433
-msgid "Apply own colors:"
-msgstr "Použit vlastní barvy:"
-
-#: src/prefs.c:437
-msgid "gtranslator -- foreground color"
-msgstr "gtranslator – barva popředí"
-
-#: src/prefs.c:441
-msgid "Foreground color:"
-msgstr "Barva popředí:"
-
-#: src/prefs.c:442
-msgid "gtranslator -- background color"
-msgstr "gtranslator – barva pozadí"
-
-#: src/prefs.c:446
-msgid "Background:"
-msgstr "Barva pozadí:"
-
-#: src/prefs.c:447
+#: src/prefs.c:405
 msgid "Contents"
 msgstr "Obsah"
 
-#: src/prefs.c:448
+#: src/prefs.c:406
 msgid "Remove fuzzy status if message is changed"
 msgstr ""
 "Při změně překladu neúplně přeložené zprávy zařadit tuto mezi přeložené"
 
-#: src/prefs.c:452
+#: src/prefs.c:410
 msgid "Keep obsolete messages in the po files"
 msgstr "Ponechat zastaralé zprávy v katalogu "
 
-#: src/prefs.c:456
+#: src/prefs.c:414
 msgid "Spell checking"
 msgstr "Kontrola pravopisu"
 
-#: src/prefs.c:457
+#: src/prefs.c:415
 msgid "Instant spell checking"
 msgstr "Při psaní kontrolovat pravopis"
 
-#: src/prefs.c:463
+#: src/prefs.c:421
 msgid "Use special dictionary:"
 msgstr "Používat speciální slovník:"
 
 #.
 #. * PO header page
 #.
-#: src/prefs.c:481
+#: src/prefs.c:439
 msgid "PO header"
 msgstr "Hlavička"
 
-#: src/prefs.c:484
+#: src/prefs.c:442
 msgid "Personal Information"
 msgstr "Osobní informace"
 
-#: src/prefs.c:488
+#: src/prefs.c:446
 msgid "Author's name:"
 msgstr "Jméno autora:"
 
-#: src/prefs.c:492
+#: src/prefs.c:450
 msgid "Author's email:"
 msgstr "E-mail autora:"
 
-#: src/prefs.c:493
+#: src/prefs.c:451
 msgid "Language settings"
 msgstr "Jazykové nastavení"
 
-#: src/prefs.c:506
+#: src/prefs.c:464
 msgid "Language code:"
 msgstr "Kód jazyka:"
 
 #.
 #. * Functionality page
 #.
-#: src/prefs.c:528
+#: src/prefs.c:486
 msgid "Functionality"
 msgstr "Funkcionalita"
 
-#: src/prefs.c:531
+#: src/prefs.c:489
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Umožnit aktualizaci katalogů přímo v programu gtranslator"
 
-#: src/prefs.c:535
+#: src/prefs.c:493
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Povolit možnost odstranění všech překladů z katalogu"
 
-#: src/prefs.c:539
+#: src/prefs.c:497
 msgid "Show instant comment view in main pane"
 msgstr "Zobrazovat v hlavním okně náhled komentáře"
 
-#: src/prefs.c:543
+#: src/prefs.c:501
 msgid "Display special dialog for messages with plural forms"
 msgstr "Zobrazit zvláštní dialogové okno pro zprávy s množnými čísly"
 
-#: src/prefs.c:547
+#: src/prefs.c:505
 msgid "Save geometry on exit and restore it on startup"
 msgstr "Při ukončení uložit a při spuštění obnovit geometrii"
 
-#: src/prefs.c:551
+#: src/prefs.c:509
 msgid "Messages table"
 msgstr "Tabulka zpráv"
 
-#: src/prefs.c:552
+#: src/prefs.c:510
 msgid "Show the messages table (requires restart)"
 msgstr "Zobrazit tabulku zpráv (vyžaduje restart programu)"
 
-#: src/prefs.c:556
+#: src/prefs.c:514
 msgid "Collapse all entries by default"
 msgstr "Při otevření katalogu sbalit všechny položky"
-
-#: src/prefs.c:560
-msgid "Use own colors for messages table groups"
-msgstr "Použít vlastní barvy pro rozlišení zpráv podle stavu přeloženosti"
-
-#: src/prefs.c:569
-msgid "Fuzzy entries color:"
-msgstr "Barva neúplně přeložených zpráv:"
-
-#: src/prefs.c:575
-msgid "Untranslated entries color:"
-msgstr "Barva nepřeložených zpráv:"
-
-#: src/prefs.c:581
-msgid "Translated entries color:"
-msgstr "Barva přeložených zpráv:"
 
 #.
 #. * Autotranslate page
 #.
-#: src/prefs.c:586
+#: src/prefs.c:522
 msgid "Autotranslation"
 msgstr "Automatický překlad"
 
-#: src/prefs.c:588
+#: src/prefs.c:524
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr "Při automatickém překladu se dotazovat i v osobní překladové paměti."
 
-#: src/prefs.c:592
+#: src/prefs.c:528
 msgid "Automatically learn a newly translated message"
 msgstr "Nově přeložené zprávy automaticky ukládat do překladové paměti"
 
-#: src/prefs.c:596
+#: src/prefs.c:532
 msgid "Fuzzy matching"
 msgstr "Fuzzy matching"
 
-#: src/prefs.c:603
+#: src/prefs.c:539
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr "Při hledání v překladové paměti používat rutiny hledající \"fuzzy\""
 
-#: src/prefs.c:610
+#: src/prefs.c:546
 msgid "Minimal required similarity persentage for fuzzy queries:"
 msgstr "Minimální požadovaná podobnost pro „fuzzy“ dotazy:"
 
-#: src/prefs.c:659
+#: src/prefs.c:594
 msgid "Please enter your name!"
 msgstr "Zadejte, prosím, vaše jméno."
 
-#: src/prefs.c:679
+#: src/prefs.c:614
 msgid "Please enter your EMail address!"
 msgstr "Zadejte, prosím, vaši e-mailovou adresu."
 
-#: src/prefs.c:699
+#: src/prefs.c:634
 msgid "Please enter a valid EMail address!"
 msgstr "Zadejte, prosím, platnou e-mailovou adresu."
 
-#: src/replace.c:175
+#: src/replace.c:162
 msgid "No replacements made!"
 msgstr "Nebylo provedeny žádné záměny."
 
@@ -1650,14 +1445,19 @@ msgstr "Nemohu uložit komprimovaný soubor gettextu `%s'!"
 msgid "Couldn't save %s'd gettext file `%s'!"
 msgstr "Nemohu uložit programem %s komprimovaný soubor `%s'!"
 
-#: src/save.c:228
+#: src/save.c:227
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
 msgstr "Nemohu uložit programem zip komprimovaný soubor `%s'!"
 
-#: src/session.c:86
+#: src/session.c:85
 msgid "Session restored successfully."
 msgstr "Sezení bylo úspěšně obnoveno."
+
+#: src/sighandling.c:65
+#, c-format
+msgid "Saving file failed: %s"
+msgstr "Ukládání souboru selhalo: %s"
 
 #: src/stylistics.c:265
 msgid "No font set! Using default font"
@@ -1671,61 +1471,27 @@ msgstr "Nebylo nastaveno písmo! Používám implicitní font."
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
 
-#: src/update.c:102
-msgid "No POTFILES.in found!"
-msgstr "Nebyl nalezen soubor POTFILES.in"
-
-#: src/update.c:113
-msgid "Po file is uptodate."
-msgstr "Katalog je aktuální."
-
-#: src/update.c:120
-msgid "The update was successfull."
-msgstr "Aktualizace se zdařila."
-
-#: src/update.c:125
-msgid "An error occurred while updating the po file."
-msgstr "Při aktualizaci katalogu došlo k chybě."
-
-#: src/utils.c:308 src/utils.c:325
+#: src/utils.c:274 src/utils.c:291
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Nemohu vytvořit adresář `%s'!"
 
-#.
-#. * Again return the fallback default locale value given by the translator.
-#.
-#: src/utils.c:794
-msgid "iso-8859-1"
-msgstr "iso-8859-2"
+#: src/utils.c:359
+#, c-format
+msgid "Error autosaving file: %s"
+msgstr "Chyba při automatickém ukládání souboru: %s"
 
-#: src/utils_gui.c:144
+#: src/utils_gui.c:142
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Řetězec \"%s\" určující geometrii není platný."
 
-#: src/utils_gui.c:360
-#, c-format
-msgid "You are not permitted to access file '%s'."
-msgstr "Nemáte oprávnění přistupovat k souboru '%s'."
-
-#: src/utils_gui.c:378
-#, c-format
-msgid ""
-"You do not have permission to modify file '%s'.\n"
-"Please save a new copy of it to a place of your choice and get write\n"
-"permission for it."
-msgstr ""
-"Nemáte oprávnění upravovat soubor '%s'.\n"
-"Vytvořte si prosím kopii tohoto souboru na místě,\n"
-"ke kterému máte potřebná práva zápisu."
-
-#: src/utils_gui.c:467
+#: src/utils_gui.c:356
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Program `%s' potřebný pro dekompresi nebyl nalezen."
 
-#: src/utils_gui.c:472
+#: src/utils_gui.c:361
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Program `%s' potřebný pro komprimaci nebyl nalezen."
@@ -1763,45 +1529,3 @@ msgstr "Počítač `%s' nemá adresu."
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Přenos byl přerušen!"
-
-#~ msgid "Both"
-#~ msgstr "Obojí"
-
-#~ msgid "In all strings"
-#~ msgstr "Vše"
-
-#~ msgid "Are you sure you want to remove ALL translations from this po file?"
-#~ msgstr "Opravdu chcete odstranit VŠECHNY překlady v tomto katalogu?"
-
-#~ msgid "Project <b>%s</b> (last po file revision: %s)."
-#~ msgstr "Projekt <b>%s</b> (poslední změna katalogu: %s)."
-
-#~ msgid "Last translator: %s"
-#~ msgstr "Poslední překladatel: %s"
-
-#~ msgid "HTML file to write to"
-#~ msgstr "Výstupní HTML soubor"
-
-#~ msgid "Status"
-#~ msgstr "Stav:"
-
-#~ msgid "Fonts, colors and color schemes"
-#~ msgstr "Písma, barvy a barevná schémata"
-
-#~ msgid "Comment"
-#~ msgstr "Komentář"
-
-#~ msgid "Line"
-#~ msgstr "Řádek"
-
-#~ msgid "Number"
-#~ msgstr "Číslo"
-
-#~ msgid "Compiled gettext po file"
-#~ msgstr "Kompilovaný katalog zpráv"
-
-#~ msgid "Compressed gettext po file"
-#~ msgstr "Komprimovaný katalog zpráv"
-
-#~ msgid "Gettext po file"
-#~ msgstr "Katalog zpráv"
