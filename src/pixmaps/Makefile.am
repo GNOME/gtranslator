@@ -5,5 +5,6 @@
 
 EXTRA_DIST = \
 	auto_translation.xpm \
+	edit_comment.xpm \
 	query.xpm \
 	query_big.xpm

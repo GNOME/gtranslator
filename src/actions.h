@@ -1,6 +1,6 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
- *		Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -42,12 +42,6 @@ enum {
 	ACT_IMPORT_UTF8,
 	ACT_EXPORT_UTF8,
 	/***********************/
-	ACT_VIEW_MESSAGE,
-	ACT_VIEW_COMMENTS,
-	ACT_VIEW_NUMBER,
-	ACT_VIEW_C_FORMAT,
-	ACT_VIEW_HOTKEY,
-	/***********************/
 	ACT_UNDO,
 	ACT_CUT,
 	ACT_COPY,
@@ -58,6 +52,7 @@ enum {
 	ACT_REPLACE,
 	ACT_QUERY,
 	ACT_HEADER,
+	ACT_COMMENT,
 	/***********************/
 	ACT_FIRST,
 	ACT_BACK,

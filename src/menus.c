@@ -31,6 +31,7 @@
 #include "utils_gui.h"
 
 #include "pixmaps/auto_translation.xpm"
+#include "pixmaps/edit_comment.xpm"
 #include "pixmaps/query.xpm"
 #include "pixmaps/query_big.xpm"
 
@@ -148,10 +149,18 @@ GnomeUIInfo the_edit_menu[] = {
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("_Header..."),
-		N_("Edit the header"),
+		N_("Edit po file header"),
 		gtranslator_header_edit_dialog, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 		GDK_F8, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("_Comment..."),
+		N_("Edit message comment"),
+		gtranslator_edit_comment_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_DATA, edit_comment_xpm,
+		GDK_F9, 0, NULL
 	},
 	GNOMEUIINFO_END
 };

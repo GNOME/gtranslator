@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "actions.h"
 #include "comment.h"
 #include "gui.h"
 #include "nautilus-string.h"
@@ -316,10 +317,12 @@ void gtranslator_comment_display(GtrComment *comment)
 		nautilus_strcasecmp(comment_display_str, " "))
 	{
 		gtk_widget_set_sensitive(extra_content_view->edit_button, TRUE);
+		gtranslator_actions_enable(ACT_COMMENT);
 	}
 	else
 	{
 		gtk_widget_set_sensitive(extra_content_view->edit_button, FALSE);
+		gtranslator_actions_disable(ACT_COMMENT);
 	}
 
 	e_paned_set_position(E_PANED(content_pane), 0);

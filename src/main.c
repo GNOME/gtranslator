@@ -561,7 +561,7 @@ int main(int argc, char *argv[])
 		/*
 		 * Give us another small status feedback about the export.
 		 */
-		g_print(_("Exported learn buffer to `%s'."), exporting_po_file);
+		g_print(_("Exported learn buffer to `%s'.\n"), exporting_po_file);
 
 		return 0;
 	}

@@ -1,3 +1,29 @@
+2002-01-03  Fatih Demir <kabalak@gtranslator.org>
+
+	* main.c: Added newline after the message "Exported learn buffer..." --
+		now the message looks sane on the command line .-)
+
+	* learn.c: Enhanced the learn buffer exporting functionality by also
+		"exporting" the resources list also to the exported po file.
+
+	* menus.c: Added the "Edit comment" pixmap to it's menu entry .-)
+
+	* pixmaps/Makefile.am & pixmaps/edit_comment.xpm: Added "Edit comment" 
+		pixmap -- it was originally the "evolution/art/edit.xpm" from
+		 Evolution.
+
+	* comment.c: Enable/disable the new menu entry correspondingly to the
+		"Edit comment" button in the comment view "component": it's
+		  handled in the same function (& even in the same conditionals)
+		   to be honest :-)
+
+	* actions.c/.h: Added "ACT_COMMENT" action for the new "Edit/Comment..."
+		menu entry; also removed the rests of the views bar: the "old"
+		 ACT_VIEW_* actions are now removed from the sources.
+
+	* menus.c: Added "Edit/Comment..." menu entry with "F9" as the keyboard
+		shortcut.
+
 2002-01-02  Fatih Demir <kabalak@gtranslator.org>
 
 	* message.c: Included formats checking on message update -- it just
