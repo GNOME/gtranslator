@@ -1,5 +1,9 @@
 2001-03-02  Fatih Demir <kabalak@gtranslator.org>
 
+	* gui.c: Hmm, check status before freeing it -- it could also not be
+		used by the update_appbar function, so that we free up a
+		 not used gchar -- another crash less.
+
 	* color-schemes.c: Only add the GtrColorSchemeInformations structure
 		if the structure is complete and non-NULL and sort the list
 		 via strcmp before returning it - hmm, leak hunting: changed

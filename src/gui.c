@@ -884,11 +884,16 @@ static void update_appbar(gint pos)
 	 * Update the progressbar.
 	 */
 	gtranslator_set_progress_bar();
+
 	/*
 	 * And free the allocated string.
 	 */
 	g_free(str);
-	g_free(status);
+
+	if(status)
+	{
+		g_free(status);
+	}
 }
 
 /*

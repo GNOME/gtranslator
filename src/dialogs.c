@@ -28,9 +28,10 @@
 #include "prefs.h"
 #include "parse.h"
 #include "open-differently.h"
+#include "color-schemes.h"
 
 #include <string.h>
-
+#include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
 
 #ifdef USE_WINDOW_ICON
@@ -45,7 +46,6 @@ static void goto_dlg_clicked(GnomeDialog * dialog, gint button,
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 			     gpointer findy);
-
 
 /*
  * The open URI dialog signal function:

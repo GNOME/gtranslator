@@ -52,7 +52,8 @@ static GtkWidget *first_page, *second_page, *third_page, *fourth_page,
  */
 static GtkWidget
 	*authors_name, *authors_email, *authors_language,
-	*mime_type, *encoding, *lcode, *lg_email, *dictionary_file;
+	*mime_type, *encoding, *lcode, *lg_email, *dictionary_file,
+	*scheme_file;
 
 /*
  * The toggle buttons used in the preferences box:
@@ -217,7 +218,8 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	 */
 	GtkWidget 	*fg_color_label,
 			*bg_color_label,
-			*font_label;
+			*font_label,
+			*scheme_file_label;
 	
 	raise_and_return_if_exists(prefs);
 	/*
@@ -236,7 +238,7 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 5, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 4, 2, _("Recent files & spell checking"));
-	sixth_page = append_page_table(prefs, 4, 2, _("Fonts & Colors"));
+	sixth_page = append_page_table(prefs, 5, 2, _("Fonts & Colors"));
 	
 	/*
 	 * Create all the personal entries.
@@ -331,7 +333,14 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	/*
 	 * The sixth page with the special font/color stuff.
 	 */
-	own_specs=attach_toggle_with_label(sixth_page, 0,
+	scheme_file_label=gtk_label_new(_("Syntax color scheme to use:"));
+	scheme_file=gnome_file_entry_new("SCHEME_FILE", 
+		_("gtranslator -- color scheme selection"));
+
+	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(scheme_file),
+		SCHEMESDIR);
+	
+	own_specs=attach_toggle_with_label(sixth_page, 1,
 		_("Apply special font/colors"),
 		wants.use_own_specs, prefs_box_changed);
 	
@@ -368,19 +377,23 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	
 	/*
 	 * Attach all the widgets to the sixth page.
-	 */		
+	 */
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		font_label, 0, 1, 1, 2);
+		scheme_file_label, 0, 1, 0, 1);
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		font, 1, 2, 1, 2);
+		scheme_file, 1, 2, 0, 1);
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		fg_color_label, 0, 1, 2, 3);
+		font_label, 0, 1, 2, 3);
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		foreground, 1, 2, 2, 3);	
+		font, 1, 2, 2, 3);
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		bg_color_label, 0, 1, 3, 4);
+		fg_color_label, 0, 1, 3, 4);
 	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
-		background, 1, 2, 3, 4);	
+		foreground, 1, 2, 3, 4);	
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		bg_color_label, 0, 1, 4, 5);
+	gtk_table_attach_defaults(GTK_TABLE(sixth_page),
+		background, 1, 2, 4, 5);	
 		
 	/*
 	 * Connect the signals to the preferences box.
@@ -390,6 +403,8 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	gtk_signal_connect(GTK_OBJECT(foreground), "color_set",
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(background), "color_set",
+			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(GTK_EDITABLE(scheme_file)), "changed",
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(prefs_box_apply), NULL);
