@@ -1,14 +1,25 @@
+2001-08-11  Fatih Demir <kabalak@gtranslator.org>
+
+	* messages-table.c: Display the count of left fuzzy, untranslated messages
+		in the grouping column; also show the fuzzy entried red and the
+		 untranslated entries in the "evolution important" color.
+
+	* undo.c: On missing "text" don't print out a warning -- simply return.
+
+	* gui.c: Moved the messages table to the middle of the GUI -- should
+		look much better now.
+
 2001-08-10  Kevin Vandersloot <kfv101@psu.edu>
 
-	Add bold text and color to the tree. Edit value at function to change the
-	colors.
+	Add bold text and color to the tree. Edit value at function to change 
+	the colors.
 	
 	* messages-table.h: add enums for bold and color columns
 	
-	* messages-table.c (.table_extras_new ): do the gtk_object_set on the string
-	columns.
-	(value_at_function): show the status headers as bold. Make the entries red if
-	the status is untranslated.
+	* messages-table.c (.table_extras_new ): do the gtk_object_set on the 
+	string columns.
+	(value_at_function): show the status headers as bold. Make the entries 
+	red if the status is untranslated.
 
 2001-08-11  Thomas Ziehmer <thomas@gtranslator.org>
 

@@ -75,7 +75,11 @@ void gtranslator_undo_register_insertion(const gchar *text, const gint position)
 void gtranslator_undo_register_deletion(const gchar *text, const gint position)
 {
 	g_return_if_fail(position!=-1);
-	g_return_if_fail(text!=NULL);
+
+	if(!text)
+	{
+		return;
+	}
 
 	if(undo)
 	{

@@ -251,12 +251,7 @@ void gtranslator_create_main_window(void)
 	}
 	else
 	{
-		/*
-		 * Well, here you see an example how to NOT do code -- it works
-		 *  though (hope no one is using a 3200x2400 sized gtranslator,
-		 *   else we get problems ,-)).
-		 */
-		e_paned_set_position(E_PANED(table_pane), 2048);
+		e_paned_set_position(E_PANED(table_pane), 0);
 	}
 	
 	gtranslator_config_close();
@@ -301,8 +296,8 @@ void gtranslator_create_main_window(void)
 	e_paned_pack1(E_PANED(content_pane), extra_content_view->box, TRUE, FALSE);
 	e_paned_pack2(E_PANED(content_pane), vertical_box, TRUE, FALSE);
 
-	e_paned_pack1(E_PANED(table_pane), content_pane, TRUE, FALSE);
-	e_paned_pack2(E_PANED(table_pane), gtranslator_messages_table, TRUE, FALSE);
+	e_paned_pack1(E_PANED(table_pane), gtranslator_messages_table, TRUE, FALSE);
+	e_paned_pack2(E_PANED(table_pane), content_pane, TRUE, FALSE);
 	
 	e_paned_pack1(E_PANED(sidebar_pane), views_sidebar, TRUE, FALSE);
 	e_paned_pack2(E_PANED(sidebar_pane), table_pane, TRUE, FALSE);

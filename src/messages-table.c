@@ -211,7 +211,32 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	if (path == unknown_node)
 	{
 		if (column == COL_ORIGINAL)
-			return e_utf8_from_locale_string(_("UNTRANSLATED"));
+		{
+			gchar	*display_string;
+			gint	 untranslated_messages=0;
+
+			/*
+			 * Get the number of missing entries/translations.
+			 */
+			untranslated_messages=(po->length - (po->translated + po->fuzzy));
+
+			if(untranslated_messages >= 1)
+			{
+				/*
+				 * The `%i' format stands for the number of
+				 *  untranslated messages left over.
+				 */
+				display_string=g_strdup_printf(_("Untranslated (%i)"),
+					untranslated_messages);
+			}
+			else
+			{
+				display_string=g_strdup(_("Untranslated"));
+			}
+				
+			return e_utf8_from_locale_string(display_string);
+			GTR_FREE(display_string);
+		}
 		else if (column == COL_BOLD)
 			return GINT_TO_POINTER (1);
 		else
@@ -220,7 +245,26 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	if (path == fuzzy_node)
 	{
 		if (column == COL_ORIGINAL)
-			return e_utf8_from_locale_string(_("FUZZY"));
+		{
+			gchar	*display_string;
+
+			if(po->fuzzy >= 1)
+			{
+				/*
+				 * The '%i' format stands for the number
+				 *  of fuzzy entries/messages left over.
+				 */
+				display_string=g_strdup_printf(_("Fuzzy (%i)"),
+					po->fuzzy);
+			}
+			else
+			{
+				display_string=g_strdup(_("Fuzzy"));
+			}
+			
+			return e_utf8_from_locale_string(display_string);
+			GTR_FREE(display_string);
+		}
 		else if (column == COL_BOLD)
 			return GINT_TO_POINTER (1);
 		else
@@ -229,7 +273,7 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	if (path == translated_node)
 	{
 		if (column == COL_ORIGINAL)
-			return e_utf8_from_locale_string(_("TRANSLATED"));
+			return e_utf8_from_locale_string(_("Translated"));
 		else if (column == COL_BOLD)
 			return GINT_TO_POINTER (1);
 		else
@@ -284,13 +328,21 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 		return GINT_TO_POINTER(0);
 		break;
 	case COL_COLOR:
-		switch (message->status) {
-		case GTR_MSG_STATUS_UNKNOWN:
+		if(message->status & GTR_MSG_STATUS_FUZZY)
+		{
 			return "#ff0000";
-			break;
-		default:
+		}
+		else if(message->status & GTR_MSG_STATUS_TRANSLATED)
+		{
 			return NULL;
-			break;
+		}
+		else
+		{
+			/*
+			 * This is the color for the untranslated entries;
+			 *  all other cases have already been handled.
+			 */
+			return "#a7453e";
 		}
 	default:
 		g_assert_not_reached ();
