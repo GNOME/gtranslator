@@ -22,6 +22,7 @@
 #define GTR_MESSAGES_H 1
 
 #include <glib.h>
+#include <gtk/gtktreemodel.h>
 #include "comment.h"
 
 /*
@@ -71,6 +72,11 @@ typedef struct {
 	gchar		*msgstr_2;
 	
 	GtrMsgStatus 	status;
+
+	/*
+	 * GtkTreeIter for when using the messages table
+	 */
+	GtkTreeIter     iter;
 } GtrMsg;
 
 /*

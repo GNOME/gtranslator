@@ -71,6 +71,15 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
 
 
 /*
+ * Message category nodes container.
+ */
+typedef struct {
+	GtkTreeIter unknown_node;
+	GtkTreeIter fuzzy_node;
+	GtkTreeIter translated_node;
+} GtrMessagesTable;
+
+/*
  * Own messages table color container.
  */
 typedef struct
@@ -84,6 +93,8 @@ typedef struct
  * Global variables
  */
 static GtkWidget *tree;
+
+static GtrMessagesTable *messages_table;
 
 static GtrMessagesTableColors *messages_table_colors;
 
@@ -263,8 +274,6 @@ void gtranslator_messages_table_create (void)
   gint i=0, j=0, k=0;
 
   GtkTreeStore *model; // where to get it from ????
-  GtkTreeIter unknown_node, fuzzy_node, translated_node;
-  GtkTreeIter cur_node;
   if(!file_opened)
     return;
   list=po->messages;
@@ -273,24 +282,26 @@ void gtranslator_messages_table_create (void)
 
   read_messages_table_colors();
 
-  gtk_tree_store_append (model, &unknown_node, NULL);
-  gtk_tree_store_set (model, &unknown_node, 
+  messages_table=g_new0(GtrMessagesTable, 1);
+
+  gtk_tree_store_append (model, &messages_table->unknown_node, NULL);
+  gtk_tree_store_set (model, &messages_table->unknown_node, 
   // pv, i want the tree to be in original column
 		      ORIGINAL_COLUMN, _("Untranslated"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
-  gtk_tree_store_append (model, &fuzzy_node, NULL);
-  gtk_tree_store_set (model, &fuzzy_node, 
+  gtk_tree_store_append (model, &messages_table->fuzzy_node, NULL);
+  gtk_tree_store_set (model, &messages_table->fuzzy_node, 
   // pv, i want the tree to be in original column
 		      ORIGINAL_COLUMN, _("Fuzzy"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      -1);
 
-  gtk_tree_store_append (model, &translated_node, NULL);
-  gtk_tree_store_set (model, &translated_node, 
+  gtk_tree_store_append (model, &messages_table->translated_node, NULL);
+  gtk_tree_store_set (model, &messages_table->translated_node, 
   // pv, i want the tree to be in original column
 		      ORIGINAL_COLUMN, _("Translated"), 
 			  TRANSLATION_COLUMN, "",
@@ -302,8 +313,8 @@ void gtranslator_messages_table_create (void)
 
     switch (message->status){
     case GTR_MSG_STATUS_UNKNOWN:
-      gtk_tree_store_append(model, &cur_node, &unknown_node);
-      gtk_tree_store_set(model, &cur_node,
+      gtk_tree_store_append(model, &message->iter, &messages_table->unknown_node);
+      gtk_tree_store_set(model, &message->iter,
 	  // pv, i want to three to be in original column
 	  //	 STATUS_COLUMN, "",
 			 ORIGINAL_COLUMN, message->msgid,
@@ -313,8 +324,8 @@ void gtranslator_messages_table_create (void)
       i++;
       break;
     case GTR_MSG_STATUS_TRANSLATED:
-      gtk_tree_store_append(model, &cur_node, &translated_node);
-      gtk_tree_store_set(model, &cur_node,
+      gtk_tree_store_append(model, &message->iter, &messages_table->translated_node);
+      gtk_tree_store_set(model, &message->iter,
 	  // pv, i want to three to be in original column
 	  //	 STATUS_COLUMN, "",
 			 ORIGINAL_COLUMN, message->msgid,
@@ -328,8 +339,8 @@ void gtranslator_messages_table_create (void)
       break;
     case GTR_MSG_STATUS_FUZZY:
     default:
-      gtk_tree_store_append(model, &cur_node, &fuzzy_node);
-      gtk_tree_store_set(model, &cur_node,
+      gtk_tree_store_append(model, &message->iter, &messages_table->fuzzy_node);
+      gtk_tree_store_set(model, &message->iter,
 	  // pv, i want to three to be in original column
 	  //	 STATUS_COLUMN, "",
 			 ORIGINAL_COLUMN, message->msgid,
@@ -356,7 +367,51 @@ void gtranslator_messages_table_create (void)
  */
 void gtranslator_messages_table_update_row(GtrMsg *message)
 {
+  GtkTreeStore *model; // where to get it from ????
+  if(!file_opened)
+    return;
 
+  model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(tree)));
+
+  if(!gtk_tree_store_remove(model, &message->iter)) {
+	  /* Iter is no longer valid */
+  }
+
+    switch (message->status){
+    case GTR_MSG_STATUS_UNKNOWN:
+      gtk_tree_store_append(model, &message->iter, &messages_table->unknown_node);
+      gtk_tree_store_set(model, &message->iter,
+	  // pv, i want to three to be in original column
+	  //	 STATUS_COLUMN, "",
+			 ORIGINAL_COLUMN, message->msgid,
+			 TRANSLATION_COLUMN, message->msgstr,
+			 MSG_PTR_COLUMN, message,
+			 -1);
+      break;
+    case GTR_MSG_STATUS_TRANSLATED:
+      gtk_tree_store_append(model, &message->iter, &messages_table->translated_node);
+      gtk_tree_store_set(model, &message->iter,
+	  // pv, i want to three to be in original column
+	  //	 STATUS_COLUMN, "",
+			 ORIGINAL_COLUMN, message->msgid,
+			 TRANSLATION_COLUMN, message->msgstr,
+			 MSG_PTR_COLUMN, message,
+			 -1);
+      break;
+    case GTR_MSG_STATUS_STICK:
+      //      node=NULL;
+      break;
+    case GTR_MSG_STATUS_FUZZY:
+    default:
+      gtk_tree_store_append(model, &message->iter, &messages_table->fuzzy_node);
+      gtk_tree_store_set(model, &message->iter,
+	  // pv, i want to three to be in original column
+	  //	 STATUS_COLUMN, "",
+			 ORIGINAL_COLUMN, message->msgid,
+			 TRANSLATION_COLUMN, message->msgstr,
+			 MSG_PTR_COLUMN, message,
+			 -1);
+    }  
 }
 
 /*
@@ -372,7 +427,7 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
  */
 void gtranslator_messages_table_update_message_status(GtrMsg *message)
 {
-	
+
 }
 
 static void 
@@ -390,3 +445,4 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
   }
 
 }
+
