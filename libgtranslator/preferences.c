@@ -40,10 +40,10 @@ void gtranslator_config_init()
 {
 	#ifdef GCONF_IS_PRESENT
 	client=gconf_client_get_default();
-	gconf_client_add_dir(client,"/apps/gtranslator",
+	gconf_client_add_dir(client, "/apps/gtranslator",
 		GCONF_CLIENT_PRELOAD_NONE, &error);
 	/**
-	* Print a more detailted error message.
+	* Print a more detailed error message.
 	**/
 	if(error)	
 	{
@@ -64,6 +64,11 @@ void gtranslator_config_close()
 	* Synchronize the preferences.
 	**/
 	gconf_client_suggest_sync(client, &error);
+        /**
+        * And remove the corresponding dir from the client.
+        **/
+        gconf_client_remove_dir(client, "/apps/gtranslator",
+                &error);
 	#else
 	gnome_config_pop_prefix();
 	gnome_config_sync();
