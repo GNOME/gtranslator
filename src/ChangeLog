@@ -1,5 +1,14 @@
 2000-10-12  Fatih Demir	<kabalak@gmx.net>
 
+	* prefs.c: Changed the description text for the option to delete
+		obsolete recent file menu entries as it does only remove
+		 double entries following each other.
+
+	* parse.c: Don't reparse the file if no change would be applied
+		to the po-file, inform the user about the not-existing
+		 change; reverse the list of recent files as we're parsing
+		  it reversely in our routine.
+
 	* gui.c: Thaw up the translation text at the end of the process,
 		get/set the pointer index by the gtk_editable_(g|s)et_position
 		 functions, handle the translation text box as a GtkEditable;

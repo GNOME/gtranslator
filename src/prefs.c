@@ -291,7 +291,7 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 		_("Check every file in the list for existence"),
 		wants.check_recent_file, prefs_box_changed);
 	delete_obsolete_rfentries=attach_toggle_with_label(fifth_page, 1,
-		_("Delete obsolete entries in the recent files list"),
+		_("Delete double entries following each other"),
 		wants.delete_obsolete_rfentries, prefs_box_changed);
 	/**
 	* [ GtkSpinButton ] maximal ....., e.g. 7 maximal entries ..

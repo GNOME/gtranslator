@@ -676,12 +676,20 @@ void toggle_msg_status(GtkWidget * item, gpointer which)
 		/**
 		* Also update the status information in the statusbar.
 		**/	       
-		update_appbar(g_list_position(po->messages, po->current));	       
+		update_appbar(g_list_position(po->messages, po->current));
 	} else {
 		if (GTK_CHECK_MENU_ITEM(item)->active)
+		{
 			*stat |= flag;
+		}	
 		else
+		{
 			*stat &= ~flag;
+		}
+		/**
+		* Again the appbar update.
+		**/
+		update_appbar(g_list_position(po->messages, po->current));
 	}
 	update_msg();
 }
@@ -846,12 +854,12 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		     	mark_msg_fuzzy(msg, FALSE);
 			gtk_check_menu_item_set_active(
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
-			/**
-			* Also update the status information in the statusbar.
-			**/    
-			update_appbar(g_list_position(po->messages,
-				po->current));
 		}
+		/**
+		* Also update the status information in the statusbar.
+		**/    
+		update_appbar(g_list_position(po->messages,
+			po->current));
 	}
 	/**
 	* Do all these steps only if the option to use the '·' is set.

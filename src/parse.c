@@ -640,6 +640,12 @@ void gtranslator_display_recent(void)
 	**/
 	list=gnome_history_get_recently_used();
 	/**
+	* reverse the list to get the real sequence on
+	*  the routines while parsing the list of recent
+	*   files.
+	**/
+	list=g_list_reverse(list);
+	/**
 	* Are there any recent files ?
 	**/
 	if(!list->data)
@@ -670,7 +676,7 @@ void gtranslator_display_recent(void)
 	* Insert this menu into the menupath.
 	**/
 	gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
-	
+
 	/**
 	* Parse the list, but maximal as many entries as wished
 	*  in the preferences.
@@ -698,13 +704,14 @@ void gtranslator_display_recent(void)
 			}
 		}
 		/**
-		* If double menu entries should be checked.
+		* Try to get double entries following each other and
+		*  delete these ones.
 		**/
 		if(wants.delete_obsolete_rfentries)
 		{
 			/**
-			* If 2 files have got the same name, this file
-			*  should be displayed.
+			* Twice the same logo is an indicator that we've
+			*  got the same files again one after another.
 			**/
 			if((menu-1)->user_data==name)
 			{
@@ -825,10 +832,6 @@ void update(GtkWidget *widget, gpointer useless)
 	**/
 	newfile=g_strdup(po->filename);
 	/**
-	* Close the current file.
-	**/
-	close_file(NULL, NULL);
-	/**
 	* Execute the command.
 	**/
 	res=system(command);
@@ -840,18 +843,19 @@ void update(GtkWidget *widget, gpointer useless)
 		if(wants.uzi_dialogs)
 		{
 			/**
-			* Inform the user that nothing seem to have changed.
+			* Inform the user that nothing would change,
+			*  so we don't close and reopen the file in this case.
 			**/
 			gnome_app_message(GNOME_APP(app1),
-				_("The update caused no changes."));
+				_("An update would cause no changes."));
 		}		
-		/**
-		* Simply parse it again.
-		**/
-		parse(newfile);
 	}
 	else
 	{
+		/**
+		* Close the file now temporary.
+		**/
+		close_file(NULL, NULL);
 		/**
 		* If you wish'em, you get'em ..
 		**/
