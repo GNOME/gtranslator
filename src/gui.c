@@ -26,6 +26,7 @@
 #include "find.h"
 #include "dnd.h"
 #include "about.h"
+#include "htmlizer.h"
 #include "gtkspell.h"
 
 #include "pixmaps/untrans.xpm"
@@ -35,6 +36,10 @@
 
 #ifdef USE_VFS_STUFF
 #include <libgnomevfs/gnome-vfs-init.h>
+#endif
+
+#ifdef USE_GTKHTML
+#include <gtkhtml/gtkhtml.h>
 #endif
 
 typedef struct _GtrAction GtrAction;
@@ -514,9 +519,17 @@ void create_app1(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
+	#ifdef USE_GTKHTML
+	text1=gtk_html_new();
+	#else
 	text1 = gtk_text_new(NULL, NULL);
+	#endif
+	
 	gtk_container_add(GTK_CONTAINER(scrolledwindow1), text1);
+	
+	#ifndef USE_GTKHTML
 	gtk_text_set_editable(GTK_TEXT(text1), FALSE);
+	#endif
 
 	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow2, TRUE, TRUE, 0);
@@ -654,8 +667,15 @@ void display_msg(GList  * list_item)
 
 		temp = g_strdup(msg->msgid);
 		invert_dot(temp);
+		
+		#ifdef USE_GTKHTML
+		temp=gtranslator_htmlizer(temp);
+		gtk_html_load_from_string(GTK_HTML(text1), temp, -1);
+		#else
 		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
 				temp, -1);
+		#endif
+		
 		g_free(temp);
 
 		if (msg->msgstr) {
@@ -665,9 +685,15 @@ void display_msg(GList  * list_item)
 					temp, -1);
 			g_free(temp);
 		}
-	} else {	
+	} else {
+		#ifdef USE_GTKHTML
+		gchar *zapit=gtranslator_htmlizer(msg->msgid);
+		gtk_html_load_from_string(GTK_HTML(text1), zapit, -1);
+		#else
 		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
 				msg->msgid, -1);
+		#endif
+		
 		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
 				msg->msgstr, -1);
 	}
@@ -795,7 +821,12 @@ void toggle_msg_status(GtkWidget  * item, gpointer which)
  */
 void clean_text_boxes()
 {
+	#ifdef USE_GTKHTML
+	gtk_html_load_empty(GTK_HTML(text1));
+	#else
 	gtk_editable_delete_text(GTK_EDITABLE(text1), 0, -1);
+	#endif
+	
 	gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
 }
 
@@ -928,7 +959,7 @@ void goto_nth_msg(GtkWidget  * widget, gpointer number)
  */
 static void call_gtranslator_homepage(GtkWidget  * widget, gpointer useless)
 {
-	gnome_url_show("http://gtranslator.sourceforge.net/");
+	gnome_url_show("http://www.gtranslator.org/");
 }
 
 /*

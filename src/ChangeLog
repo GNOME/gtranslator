@@ -1,3 +1,24 @@
+2001-02-03  Fatih Demir	<kabalak@gmx.net>
+
+	* pixmaps/.cvsignore: Added cvs ignore again for HEAD.
+
+	* gui.c: Use the new htmlizer code and gtkhtml for the msgid
+		part if we're working with gtkhtml -- this is like a
+		 preview for the further work for the msgstr part.
+
+2001-02-02  Fatih Demir	<kabalak@gmx.net>
+
+	* htmlizer.c/.h: Added html making helper sources; very
+		simple though.
+
+	* Makefile.am: Added GtkHTML flags for building linking and
+		the new htmlizer.c/.h sources to the build.
+
+	* main.c: Changed the <libgtranslator/parse-db.h> include to
+		<libgtranslator/libgtranslator.h>.
+
+	* gui.c: Changed the webaddress to http://www.gtranslator.org
+
 2001-02-01  Fatih Demir	<kabalak@gmx.net>
 
 	* dialogs.c: Perhaps the Save as dialog will also detect

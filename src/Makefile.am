@@ -16,17 +16,27 @@ gconf_libs =
 endif
 
 if USE_VFS_STUFF
-vfs_cflags = $(VFS_CFLAGS) -DUSE_VFS_STUFF=2000
+vfs_cflags = $(VFS_CFLAGS) -DUSE_VFS_STUFF=7
 vfs_libs = $(VFS_LIBS)
 else
 vfs_cflags =
-cfs_libs =
+vfs_libs =
 endif
+
+if USE_GTKHTML
+gtkhtml_cflags = $(GTKHTML_CFLAGS) -DUSE_GTKHTML=7
+gtkhtml_libs = $(GTKHTML_LIBS)
+else
+gtkhtml_cflags =
+gtkhtml_libs =
+endif
+		
 
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
 	$(vfs_cflags) \
+	$(gtkhtml_cflags) \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
@@ -47,6 +57,7 @@ gtranslator_SOURCES = \
 	gui.c gui.h \
 	header_stuff.c header_stuff.h \
 	history.c history.h \
+	htmlizer.c htmlizer.h \
 	languages.h \
 	main.c \
 	open-differently.c open-differently.h \
@@ -63,6 +74,7 @@ gtranslator_LDADD = \
 	$(INTLLIBS) \
 	$(gconf_libs) \
 	$(XML_LIBS) \
-	$(vfs_libs)
+	$(vfs_libs) \
+	$(gtkhtml_libs)
 
 EXTRA_DIST = ChangeLog
