@@ -32,7 +32,7 @@
 #include "utils_gui.h"
 #include "views.h"
 
-#include "pixmaps/auto_accomplishment.xpm"
+#include "pixmaps/auto_translation.xpm"
 #include "pixmaps/query.xpm"
 #include "pixmaps/query_big.xpm"
 
@@ -73,10 +73,10 @@ GnomeUIInfo the_file_menu[] = {
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("Aut_oaccomplish..."),
-		N_("Automatically fill missing translations from the default query domain"),
-		gtranslator_auto_accomplishment_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_DATA, auto_accomplishment_xpm,
+		GNOME_APP_UI_ITEM, N_("Aut_otranslate..."),
+		N_("Autotranslate the file with information from the default query domain/learn buffer"),
+		gtranslator_auto_translation_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_DATA, auto_translation_xpm,
 		GDK_F10, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,

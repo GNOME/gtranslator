@@ -262,7 +262,7 @@ void gtranslator_query_gtr_msg(gpointer data, gpointer yeah)
  * Simply execute the gtranslator_query_gtr_msg for every message in the
  *  po file.
  */
-void gtranslator_query_accomplish(gboolean use_learn_buffer)
+void gtranslator_query_translate(gboolean use_learn_buffer)
 {
 	g_list_foreach(po->messages, (GFunc) gtranslator_query_gtr_msg, 
 		GINT_TO_POINTER(use_learn_buffer));

@@ -1322,40 +1322,50 @@ Would you like to insert it into the translation?"),
 }
 
 /*
- * Asks the user if he/she does really want to use autoaccomplishment
- *  and does it if wished.
+ * Asks the user if he/she does really want to use autotranslation.
  */
-void gtranslator_auto_accomplishment_dialog(void)
+void gtranslator_auto_translation_dialog(void)
 {
 	static GtkWidget *dialog=NULL;
-	gint reply;
+    	gchar 	*message_string=NULL;
+	gint 		reply;
 
 	gtranslator_raise_dialog(dialog);
 
-	dialog=gnome_message_box_new(
-		_("Should gtranslator auto accomplish all missing strings (if possible)\n\
-from your default query domain (and your personal learn buffer)?"),
+	if(GtrPreferences.use_learn_buffer)
+	{
+		message_string=_("Should gtranslator autotranslate the file using information\n\
+from the default query domain and the personal learn buffer?");
+	}
+	else
+	{
+		message_string=_("Should gtranslator autotranslate the file using information\n\
+from the default query domain?");
+	}
+
+	dialog=gnome_message_box_new(message_string,
 		GNOME_MESSAGE_BOX_QUESTION,
 		GNOME_STOCK_BUTTON_YES,
 		GNOME_STOCK_BUTTON_NO,
 		NULL);
 
+
 	/*
 	 * Set the default to "Yes" and show/run the dialog.
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
-	gtranslator_dialog_show(&dialog, "gtranslator -- accomplish?");
+	gtranslator_dialog_show(&dialog, "gtranslator -- autotranslate?");
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 	
 	/*
 	 * Only handle the "Yes" case as we do not think about the "No" case --
-	 *  the user didn't want any accomplishment.
+	 *  the user doesn't want any autotranslation.
 	 */
 	if(reply==GNOME_YES)
 	{
 		/*
-		 * Autoaccomplish the missing entries.
+		 * Autotranslate the missing entries.
 		 */
-		gtranslator_query_accomplish(GtrPreferences.use_learn_buffer);
+		gtranslator_query_translate(GtrPreferences.use_learn_buffer);
 	}
 }

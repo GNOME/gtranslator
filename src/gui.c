@@ -571,7 +571,7 @@ void gtranslator_application_bar_update(gint pos)
 			 * Also disable the coressponding buttons for the
 			 *  next untranslated message/accomplish function.
 			 */
-			gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED, ACT_ACCOMPLISH);
+			gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED, ACT_AUTOTRANSLATE);
 		}	
 	}
 	

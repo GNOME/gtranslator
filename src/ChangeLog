@@ -1,5 +1,23 @@
 2001-08-30  Fatih Demir <kabalak@gtranslator.org>
 
+	* actions.c/.h: Renamed the "ACT_ACCOMPLISH" to "ACT_AUTOTRANSLATE" to
+		also fit the new naming scheme.
+
+	* pixmaps/Makefile.am: Adept the Makefile.am for the pixmap filename
+		change.
+
+	* pixmaps/auto_accomplishment|_translation.xpm: Moved the pixmap file
+		also to the new naming scheme "auto_translation."
+
+	* query.c/.h: Rename "gtranslator_query_accomplish" to the new scheme:
+		"gtranslator_query_translate" is the new name.
+	
+	* dialogs.c/.h: Changed the dialog contents accordingly and renamed
+		some dialog function names.
+	
+	* menus.c: Renamed "Autoaccomplish(ment)" to "Autotranslation" and
+		changed the messages accordingly.
+
 	* messages-table.c: Sticky messages are automatically also translated
 		messages -- honor this in the message status updating
 		 "gtranslator_messages_table_update_message_status" function.

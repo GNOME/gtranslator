@@ -88,7 +88,7 @@ void gtranslator_actions_set_up_default()
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[4]);
 	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[5]);
-	insert_action(ACT_ACCOMPLISH, the_file_menu[3], NONE);
+	insert_action(ACT_AUTOTRANSLATE, the_file_menu[3], NONE);
 	insert_action(ACT_REMOVE_ALL_TRANSLATIONS, the_file_menu[5], NONE);
 	insert_action(ACT_SAVE, the_file_menu[9], the_toolbar[1]);
 	insert_action(ACT_SAVE_AS, the_file_menu[10], the_toolbar[2]);
@@ -132,7 +132,7 @@ void gtranslator_actions_set_up_default()
 
 void gtranslator_actions_set_up_state_no_file(void)
 {
-	gtranslator_actions_disable(ACT_COMPILE, ACT_UPDATE, ACT_ACCOMPLISH,
+	gtranslator_actions_disable(ACT_COMPILE, ACT_UPDATE, ACT_AUTOTRANSLATE,
 			ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE, ACT_UNDO,
 			ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
@@ -149,7 +149,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 void gtranslator_actions_set_up_file_opened(void)
 {
 	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
-		ACT_ACCOMPLISH, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
+		ACT_AUTOTRANSLATE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 		ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
 		ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED, ACT_STICK,
 		ACT_VIEW_MESSAGE, ACT_VIEW_COMMENTS, ACT_VIEW_NUMBER, 

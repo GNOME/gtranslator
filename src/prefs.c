@@ -214,7 +214,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		GtrPreferences.warn_if_no_change, gtranslator_preferences_dialog_changed);
 	use_learn_buffer =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
-	    	_("Also query the personal learn buffer while auto accomplishing missing entries"),
+	    	_("Also query the personal learn buffer while autotranslating untranslated messages"),
 		GtrPreferences.use_learn_buffer, gtranslator_preferences_dialog_changed);
 	keep_obsolete =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 5,
