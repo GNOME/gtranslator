@@ -64,15 +64,13 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 		/*
 		 * Build this temporary files' dir.
 		 */
-		if(gnome_vfs_make_directory(destdir, GNOME_VFS_PERM_USER_ALL|
-			GNOME_VFS_PERM_GROUP_ALL)!=GNOME_VFS_OK)
+		if(gnome_vfs_make_directory(destdir, 0)!=GNOME_VFS_OK)
 		{
 			g_warning(_("Couldn't create the temporary directory `%s'."),
 				destdir);
-			if(destdir)
-			{
-				g_free(destdir);
-			}
+			
+			g_free(destdir);
+			
 			return NULL;
 		}
 		/*
@@ -136,6 +134,7 @@ gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 	{
 		return localfilename;
 	}
+	
 	return NULL;
 	
 }
