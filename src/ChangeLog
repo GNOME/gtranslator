@@ -1,5 +1,9 @@
 2003-08-28  Fatih Demir <kabalak@gtranslator.org>
 
+	* main.c: Also "#include <libintl.h>" for the bindtextdomain call so
+		that maybe the FreeBSD compile tries are much successfuller
+		 now :-)
+
 	* Makefile.am: De-sophisticate the rules a bit to make it eventually
 		work on more systems.
 

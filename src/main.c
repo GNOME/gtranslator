@@ -44,6 +44,8 @@
 #include "utils_gui.h"
 
 #include <locale.h>
+#include <libintl.h>
+
 #include <signal.h>
 
 #include <gmodule.h>
