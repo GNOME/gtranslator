@@ -24,9 +24,18 @@ no_personal_information_message () {
 }
 
 #
+# Currently we're broken -- honor this .-)
+#
+echo "---------------------------------------------------------------"
+echo "pozilla.sh is currently broken! Please wait for an again working"
+echo " release of it quite soon..."
+echo "---------------------------------------------------------------"
+	exit 1
+
+#
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.5
+export POZILLA_RELEASE=4.5FIXME
 
 #
 # Here we do define the corresponding i18n mailing list
