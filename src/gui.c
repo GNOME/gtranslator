@@ -64,6 +64,9 @@ static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d
 
 static void insert_text_handler (GtkEditable *editable, const gchar *text,
 				 gint length, gint *position, gpointer data);
+static void selection_get_handler(GtkWidget *widget,
+				  GtkSelectionData *selection_data, guint info,
+				  guint time_stamp, gpointer data);
 /*
  * To get the left/right moves from the cursor.
  */ 
@@ -214,6 +217,12 @@ void gtranslator_create_main_window(void)
 	 */
 	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "delete_event",
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
+
+	gtk_signal_connect_after(GTK_OBJECT(text_box), "selection_get",
+			   GTK_SIGNAL_FUNC(selection_get_handler), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(trans_box), "selection_get",
+			   GTK_SIGNAL_FUNC(selection_get_handler), NULL);
+
 	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
 			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
@@ -490,7 +499,22 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 
 	g_free(result);
 }
-	
+
+void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
+			   guint info, guint time_stamp, gpointer data)
+{
+	gchar *text;
+
+	if(!wants.dot_char)
+		return;
+
+	text = g_strndup(selection_data->data, selection_data->length);
+	gtranslator_utils_invert_dot(text);
+	gtk_selection_data_set(selection_data, selection_data->type,
+			       8, text, strlen(text));
+	g_free(text);
+}
+
 /*
  * The own keyhandler to get the left/right/up/down actions.
  */ 

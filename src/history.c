@@ -29,6 +29,7 @@
 #include "parse.h"
 #include "prefs.h"
 
+#include <string.h>
 #include <gtk/gtkmenushell.h>
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-app.h>

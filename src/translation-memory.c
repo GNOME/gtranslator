@@ -18,3 +18,9 @@
  */
 
 #include "translation-memory.h"
+
+void gtranslator_tm_add(const gchar *message, const gchar *translation,
+	const gchar *language_code, const gchar *eventual_id)
+{
+	g_print("FIXME");
+}

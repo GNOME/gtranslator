@@ -17,6 +17,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "actions.h"
 #include "gtkspell.h"
 #include "gui.h"
@@ -27,6 +31,7 @@
 #include "syntax.h"
 #include "utils.h"
 
+#include <string.h>
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-util.h>

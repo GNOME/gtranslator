@@ -22,9 +22,9 @@
 #include "preferences.h"
 #include "sighandling.h"
 
-#include <libgnome/gnome-i18n.h>
-
 #include <signal.h>
+#include <stdlib.h>
+#include <libgnome/gnome-i18n.h>
 
 static gint signalscount=0;
 

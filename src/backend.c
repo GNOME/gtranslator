@@ -67,6 +67,7 @@ void gtranslator_backend_add(const gchar *filename)
 	GtrBackend *backend;
 	g_return_if_fail(filename!=NULL);
 
+	backend=g_new0(GtrBackend, 1);
 	read_xml_descriptor(filename, &GTR_BACKEND_INFORMATIONS(backend->info));
 }
 
