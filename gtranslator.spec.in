@@ -20,6 +20,9 @@ Source:		http://www.gtranslator.org/download/releases/%{version}/%{name}-%{versi
 URL: 		http://www.gtranslator.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 Summary:	gtranslator is a comfortable po file editor with many bells and whistles.
+Buildprereq:	gal-devel >= 0.10.99, gnome-vfs-devel >= 0.4.1, imlib-devel
+Buildprereq:	GConf-devel >= 1.0, glib-devel >= 1.2.8, gtk+-devel >= 1.2.8
+Buildprereq:	gnome-libs-devel >= 1.2.8
 Prereq:		scrollkeeper >= 0.1.4
 Requires:	glib >= 1.2.8, gtk+ >= 1.2.8, gnome-libs >= 1.2.8, imlib, GConf >= 1.0, gettext
 Requires:	gnome-vfs >= 0.4.1, gal >= 0.10.99
@@ -32,10 +35,11 @@ files immenantly.
 %changelog
 
 *  Mon Dec 03 2001 Roy-Magne Mo  <rmo@sunnmore.net>	0.39.2-1
--  Used rpm4-macros and cleaned up filedefinitions.
--  Moved scrollkeeper to prereq
--  Added gettext to requirement 
--  Fixed permissions on docs and others
+- Used rpm4-macros and cleaned up filedefinitions.
+- Moved scrollkeeper to prereq
+- Added gettext to requirement 
+- Fixed permissions on docs and others
+- Added Buildprereqs
 
 *  Tue Aug 21 2001 Fatih Demir	<kabalak@gtranslator.org>
 
