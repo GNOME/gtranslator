@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.31\n"
-"POT-Creation-Date: 2000-12-28 18:24+0100\n"
-"PO-Revision-Date: 2000-12-28 18:25+0100\n"
+"POT-Creation-Date: 2000-12-31 13:05+0100\n"
+"PO-Revision-Date: 2000-12-31 13:06+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "Yazýlýmý gözönüne al"
 msgid "English"
 msgstr "Orjinal metinlerde"
 
-#: src/dialogs.c:231 src/gui.c:764
+#: src/dialogs.c:231 src/gui.c:759
 msgid "Translated"
 msgstr "Tercüme metinlerinde"
 
@@ -250,7 +250,7 @@ msgstr "Ileti du_rumu"
 msgid "Open"
 msgstr "Aç"
 
-#: src/gui.c:238 src/open-po-file-dialog-interface.c:50
+#: src/gui.c:238 src/open-po-file-dialog-interface.c:49
 msgid "Open a po-file"
 msgstr "Bir po-dosyasýný aç"
 
@@ -314,7 +314,7 @@ msgstr "Son"
 msgid "Missing"
 msgstr "Eksik"
 
-#: src/gui.c:295 src/gui.c:751 src/gui.c:755
+#: src/gui.c:295 src/gui.c:746 src/gui.c:750
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -345,41 +345,41 @@ msgstr "gtranslator"
 msgid "Bye bye!"
 msgstr "Güle Güle!"
 
-#. *
-#. * Assign the first part.
-#. *
-#: src/gui.c:739
+#: src/gui.c:746
 #, c-format
-msgid "Message %d / %d / Status:"
-msgstr "Ileti: %d / %d / Durum:"
+msgid "%s [ %i Fuzzy left ]"
+msgstr "%s [ %i Fuzzy geriye kaldý ]"
 
-#: src/gui.c:751
+#: src/gui.c:750
 #, c-format
-msgid "%s %s [ %i Fuzzy left ]"
-msgstr "%s %s [ %i Fuzzy geriye kaldý ]"
+msgid "%s [ No fuzzy left ]"
+msgstr "%s [ Fuzzy ileti kalmadý ]"
 
-#: src/gui.c:755
-#, c-format
-msgid "%s %s [ No fuzzy left ]"
-msgstr "%s %s [ Fuzzy ileti kalmadý ]"
-
-#: src/gui.c:770
+#: src/gui.c:757
 msgid "Stick"
 msgstr "Kalýcý"
 
-#: src/gui.c:778
+#: src/gui.c:765
 #, c-format
-msgid "%s %s [ %i Untranslated left ]"
-msgstr "%s %s [ %i tercüme edilmemiþ ileti geriye kaldý ]"
+msgid "%s [ %i Untranslated left ]"
+msgstr "%s [ %i tercüme edilmemiþ ileti geriye kaldý ]"
 
-#: src/gui.c:778 src/gui.c:782
+#: src/gui.c:765 src/gui.c:767
 msgid "Untranslated"
 msgstr "Tercüme edilmemiþ"
 
-#: src/gui.c:782
+#: src/gui.c:767
 #, c-format
-msgid "%s %s [ No untranslated left ]"
-msgstr "%s %s [ Tercümesiz ileti kalmamýþ ]"
+msgid "%s [ No untranslated left ]"
+msgstr "%s [ Tercümesiz ileti kalmamýþ ]"
+
+#. *
+#. * Assign the first part.
+#. *
+#: src/gui.c:778
+#, c-format
+msgid "Message %d / %d / Status: %s"
+msgstr "Ileti: %d / %d / Durum: %s"
 
 #: src/header_stuff.c:251
 msgid "gtranslator -- edit header"
@@ -641,16 +641,16 @@ msgstr "Gelik"
 msgid "Welsh"
 msgstr "Velþ"
 
-#: src/main.c:47
+#: src/main.c:48
 msgid "Specifies the main-window geometry"
 msgstr "Ana pencere boyutlarýný belirler"
 
-#: src/main.c:85
+#: src/main.c:90
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf baþlama hatasý: `%s'."
 
-#: src/parse.c:98
+#: src/parse.c:113
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -659,12 +659,12 @@ msgstr ""
 "Yeni bir \\%c harfý bulundu\n"
 "Bunu parse.c dosyasýnda, satýr %i#ye ekle."
 
-#: src/parse.c:132 src/parse.c:494
+#: src/parse.c:147 src/parse.c:496
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Dosya \"%s\" hiç yok ki !"
 
-#: src/parse.c:208
+#: src/parse.c:223
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -675,7 +675,7 @@ msgstr ""
 "var; satýr %d.\n"
 "Lütfen dosyayý gözden gecýrip bir deneme daha yap."
 
-#: src/parse.c:237
+#: src/parse.c:252
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -684,25 +684,25 @@ msgstr ""
 "Bu dosya boþtur:\n"
 "%s"
 
-#: src/parse.c:255 src/parse.c:261
+#: src/parse.c:270 src/parse.c:276
 msgid "There's no file to open!"
 msgstr "Açýlacak dosya yok!"
 
-#: src/parse.c:295
+#: src/parse.c:310
 msgid "The file has no header!"
 msgstr "Dosyanýn baþlýðý yok!"
 
-#: src/parse.c:298
+#: src/parse.c:313
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Dosya \"%s\" baþarýyla taranmýþtýr"
 
-#: src/parse.c:301
+#: src/parse.c:316
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:457
+#: src/parse.c:459
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -714,7 +714,7 @@ msgstr ""
 "Senin tercüme ettiðin dosya ise .po soneðine sahip olsa iyi olur; muhtemelem "
 "%s.po adýný taþýyacaktýr."
 
-#: src/parse.c:536
+#: src/parse.c:538
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -725,11 +725,11 @@ msgstr ""
 "deðiþtirmemiþsin ki!\n"
 "Yine de dosya kaydedilsin mi?"
 
-#: src/parse.c:544
+#: src/parse.c:546
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- deðiþiksiz"
 
-#: src/parse.c:605
+#: src/parse.c:607
 #, c-format
 msgid ""
 "File %s\n"
@@ -738,11 +738,11 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilmiþ kopyaya geri dönmek istermisin ?"
 
-#: src/parse.c:642
+#: src/parse.c:644
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Maalessef bu sistemde msgfmt eriþilir deðildir!"
 
-#: src/parse.c:667
+#: src/parse.c:669
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -751,38 +751,14 @@ msgstr ""
 "%s baþarýyla\n"
 "denetlendi"
 
-#: src/parse.c:685
+#: src/parse.c:687
 msgid "_File/Recen_t files/"
 msgstr "_Dosya/Son _dosyalar/"
 
-#: src/parse.c:782
+#: src/parse.c:784
 #, c-format
 msgid "Open %s"
 msgstr "%s'yi aç"
-
-#: src/parse.c:857
-msgid "An update would cause no changes."
-msgstr "Bir yenileme hiç bir deðiþikliðe yol açmazdý."
-
-#: src/parse.c:860
-msgid "The update was successfull."
-msgstr "Yenileme baþarýlý oldu."
-
-#. *
-#. * "Misuse" cmd
-#. *
-#: src/parse.c:940
-#, c-format
-msgid "Couldn't open mo-file `%s'!"
-msgstr "Mo dosyasý `%s''yi açamadým!"
-
-#. *
-#. * "Misuse" cmd
-#. *
-#: src/parse.c:985
-#, c-format
-msgid "Couldn't open gzipped po-file `%s'!"
-msgstr "Gzip'lenmiþ po-dosyasý `%s''yi açamadým!"
 
 #: src/prefs.c:206
 msgid "gtranslator -- options"
@@ -900,15 +876,15 @@ msgstr "Ardalan rengi:"
 msgid "gtranslator -- font selection"
 msgstr "gtranslator -- yazý tipi seçimi"
 
-#: src/prefs.c:341
+#: src/prefs.c:342
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- önalan rengi"
 
-#: src/prefs.c:344
+#: src/prefs.c:345
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- ardalan rengi"
 
-#: src/prefs.c:469
+#: src/prefs.c:474
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -918,7 +894,7 @@ msgstr ""
 "gtranslator'i senin istediðin gibi çalýþtýrabilirsin.\n"
 " "
 
-#: src/prefs.c:623
+#: src/prefs.c:628
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "\"%s\" yer metni taranamadý!"
@@ -939,15 +915,39 @@ msgstr "Imla kontrolü tamamlandý !"
 msgid "View URL..."
 msgstr "Adresi göster..."
 
-#: src/beginners-druid-interface.c:60
+#: src/update.c:45
+msgid "An update would cause no changes."
+msgstr "Bir yenileme hiç bir deðiþikliðe yol açmazdý."
+
+#: src/update.c:48
+msgid "The update was successfull."
+msgstr "Yenileme baþarýlý oldu."
+
+#. *
+#. * "Misuse" cmd
+#. *
+#: src/open-differently.c:36
+#, c-format
+msgid "Couldn't open mo-file `%s'!"
+msgstr "Mo dosyasý `%s''yi açamadým!"
+
+#. *
+#. * "Misuse" cmd
+#. *
+#: src/open-differently.c:81
+#, c-format
+msgid "Couldn't open gzipped po-file `%s'!"
+msgstr "Gzip'lenmiþ po dosyasý `%s''yi açamadým!"
+
+#: src/beginners-druid-interface.c:59
 msgid "gtranslator -- beginner's druid"
 msgstr "gtranslator -- baþlangýç sihirbazý"
 
-#: src/beginners-druid-interface.c:84
+#: src/beginners-druid-interface.c:83
 msgid "gtranslator's beginner's druid -- welcome!"
 msgstr "gtranslator baþlangýc sihirbazý -- hoþgeldin!"
 
-#: src/beginners-druid-interface.c:85
+#: src/beginners-druid-interface.c:84
 msgid ""
 "Welcome to the gtranslator setup druid which will help you to\n"
 "setup gtranslator easily through some questions and help you\n"
@@ -961,63 +961,63 @@ msgstr ""
 "\n"
 "Fatih Demir/kabalak/kabalak@gmx.net"
 
-#: src/beginners-druid-interface.c:97
+#: src/beginners-druid-interface.c:96
 msgid "gtranslator's beginner's druid -- data acquirement"
 msgstr "gtranslator baþlangýç sihirbazý -- bilgi toplamasý!"
 
-#: src/beginners-druid-interface.c:114
+#: src/beginners-druid-interface.c:113
 msgid "Your language:"
 msgstr "Dilin:"
 
-#: src/beginners-druid-interface.c:124
+#: src/beginners-druid-interface.c:123
 msgid "Your EMail address:"
 msgstr "ePosta adresin:"
 
-#: src/beginners-druid-interface.c:134
+#: src/beginners-druid-interface.c:133
 msgid "How much featurism is wished?"
 msgstr "Ne kadar özellik istersin?"
 
-#: src/beginners-druid-interface.c:144
+#: src/beginners-druid-interface.c:143
 msgid "Update the po-revision date automatically?"
 msgstr "Po dosyasýnýn tarihi otomatikmen yenilensin mi?"
 
-#: src/beginners-druid-interface.c:163
+#: src/beginners-druid-interface.c:162
 msgid "Your name"
 msgstr "Isim"
 
-#: src/beginners-druid-interface.c:165
+#: src/beginners-druid-interface.c:164
 msgid "Your name:"
 msgstr "Ismin:"
 
-#: src/beginners-druid-interface.c:184
+#: src/beginners-druid-interface.c:183
 msgid "Your EMail address"
 msgstr "ePosta adresin"
 
-#: src/beginners-druid-interface.c:196 src/beginners-druid-interface.c:208
+#: src/beginners-druid-interface.c:195 src/beginners-druid-interface.c:207
 msgid "Hypris! I wanna see it all!"
 msgstr "Herþey! Ben her özelliði görmek istiyorum!"
 
-#: src/beginners-druid-interface.c:197
+#: src/beginners-druid-interface.c:196
 msgid "Normal level -- not too many stuff please"
 msgstr "Vasat -- çok fazla özellik olmasýn"
 
-#: src/beginners-druid-interface.c:198
+#: src/beginners-druid-interface.c:197
 msgid "Almost nothing please"
 msgstr "Lütfen yaklaþýk hiçbirþey olmasýn"
 
-#: src/beginners-druid-interface.c:210
+#: src/beginners-druid-interface.c:209
 msgid "Yes"
 msgstr "Evet"
 
-#: src/beginners-druid-interface.c:222
+#: src/beginners-druid-interface.c:221
 msgid "No"
 msgstr "Hayýr"
 
-#: src/beginners-druid-interface.c:262
+#: src/beginners-druid-interface.c:261
 msgid "gtranslator's beginner's druid says: we're done."
 msgstr "gtranslator baþlangýç sihirbazý der ki: biz iþi bitirdik:-)"
 
-#: src/beginners-druid-interface.c:263
+#: src/beginners-druid-interface.c:262
 msgid ""
 "The wise druid says: we're done :-)\n"
 "\n"
@@ -1027,27 +1027,27 @@ msgstr ""
 "\n"
 "Inþallah bu doðrudur..."
 
-#: src/open-po-file-dialog-interface.c:110
+#: src/open-po-file-dialog-interface.c:109
 msgid "Filename: "
 msgstr "Dosya ismi:"
 
-#: src/open-po-file-dialog-interface.c:136
+#: src/open-po-file-dialog-interface.c:135
 msgid "File size:   "
 msgstr "Dosya boyutu:"
 
-#: src/open-po-file-dialog-interface.c:162
+#: src/open-po-file-dialog-interface.c:161
 msgid "Last edit: "
 msgstr "Son deðiþim:"
 
-#: src/open-po-file-dialog-interface.c:188
+#: src/open-po-file-dialog-interface.c:187
 msgid "Revision: "
 msgstr "Sürüm:"
 
-#: src/preferences-interface.c:38
+#: src/preferences-interface.c:37
 msgid "gtranslator -- preferences"
 msgstr "gtranslator -- ayarlar"
 
-#: src/preferences-interface.c:79
+#: src/preferences-interface.c:78
 msgid "Sections"
 msgstr "Bölümler"
 
@@ -1117,15 +1117,15 @@ msgstr "Çift tercüme birimi `%s' ileti `%s' için eklenmeye deneniyor!"
 msgid "Trying to add double msgstr `%s' for msgid `%s'!"
 msgstr "Çift tercüme `%s' ileti `%s' için eklenmeye deneniyor!"
 
-#: libgtranslator/main.c:55
+#: libgtranslator/main.c:59
 msgid "The language to parse the db for"
 msgstr "Taranacak tercüme/ileti tabaný dili"
 
-#: libgtranslator/main.c:55
+#: libgtranslator/main.c:59
 msgid "language_code"
 msgstr "dil_kodu"
 
-#: libgtranslator/main.c:102
+#: libgtranslator/main.c:105
 msgid ""
 "gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
@@ -1134,7 +1134,7 @@ msgstr ""
 #. *
 #. * Print some more exact informations on the GConf init-error.
 #. *
-#: libgtranslator/main.c:120
+#: libgtranslator/main.c:123
 #, c-format
 msgid "GConf initialization error: `%s'"
 msgstr "GConf baþlama hatasý: `%s'"
@@ -1231,28 +1231,24 @@ msgstr "%Y-%m-%d %H:%M"
 msgid "Couldn't generate the current date!"
 msgstr "Þimdiki tarih metnini belirleyemedim!"
 
-#: libgtranslator/stylistics.c:71 libgtranslator/stylistics.c:143
+#: libgtranslator/stylistics.c:49 libgtranslator/stylistics.c:94
 msgid "No color path found!"
 msgstr "Renk dizinlemesi bulunamadý!"
 
-#: libgtranslator/stylistics.c:196
+#: libgtranslator/stylistics.c:138
 msgid "No font set! Using default font"
 msgstr "Yazý tipi yok! Önayarlý yazý tipini kullanýyorum"
 
 #. *
 #. * The default font for gtranslator.
 #. *
-#: libgtranslator/stylistics.c:200
+#: libgtranslator/stylistics.c:142
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-9"
 
-#: libgtranslator/stylistics.c:204
+#: libgtranslator/stylistics.c:184
 msgid "Couldn't even load default font!"
 msgstr "Önayarlý yazý tipini bile yükleyemedim!"
-
-#: libgtranslator/stylistics.c:219
-msgid "No widgets defined to manipulate their style"
-msgstr "Düzenlemesini deðiþtirecek pandýr verilemdi ki"
 
 #: libgtranslator/team-handle.c:82
 #, c-format
