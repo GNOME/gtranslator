@@ -1,6 +1,6 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
- *		Gediminas Paulauskas <menesis@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
+ *			Gediminas Paulauskas <menesis@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ GnomeUIInfo the_file_menu[] = {
 		GNOME_APP_UI_ITEM, N_("Remove all translations..."),
 		N_("Remove all existing translations from the po file"),
 		gtranslator_remove_all_translations_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TRASH,
 		0, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
