@@ -32,8 +32,16 @@ gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 	**/
 	if(!nodename)
 	{
-	g_warning(_("No node name given!"));
-		return 0;
+		g_warning(_("No node name given!"));
+			return 0;
+	}
+	/**
+	* Check for the content.
+	**/
+	if(!nodecontent)
+	{
+		g_warning(_("No content for the node `%s' given! Leaving node empty.."),nodename);
+		nodecontent=" ";	
 	}
 	/**
 	* Check the doc.
@@ -48,7 +56,7 @@ gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 		/**
 		* Hmm, open and add the node.
 		**/
-		xmlNodePtr newnode,addnode,fnode;
+		xmlNodePtr newnode,addnode;
 		xmlAttrPtr attr;
 		/**
 		* Get the nodes.
@@ -59,27 +67,17 @@ gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 			g_warning(_("Couldn't get the nodes!"));
 				return 0;
 		}
-		/**
-		* Get the last child.
-		**/
-		addnode=xmlGetLastChild(newnode);
-		if(!addnode)
-		{
-			g_warning(_("Couldn't get the last node!"));
-				return 0;
-		}
-		fnode=xmlAddChild(newnode,addnode);
-		attr=xmlSetProp(fnode, nodename, nodecontent);
+		addnode=xmlAddChild(newnode,addnode);
+		attr=xmlSetProp(addnode, nodename, nodecontent);
 		/**
 		* Free all the stuff.
 		**/
-		FREE_NODE(fnode);
 		FREE_NODE(addnode);
 		FREE_NODE(newnode);
 		FREE_PROP(attr);
-			/**
-			* Return a value != 0.
-			**/
-			return 1;
+		/**
+		* Return a value != 0.
+    		**/
+		return 1;
 	}	
 }

@@ -44,6 +44,9 @@ up a header dialog asking for correction of it. Provide the same autocompletion
 like in prefs box, that is, use strings defined in preferences.
 
 C. This ain't do much work, not? so this should be done.
+C2. Even better it would be do have a druid guiding through the first steps
+	with asking some convenient question ala "Which langauge .." ( but 
+	 before this the header apply routines must work ). 
 
 -----------------------------------------------------------------------------
 Make the application MDI.
@@ -52,7 +55,7 @@ Need such menu entries (and appropriate callbacks :)):
 		New Window
 	Windows
 
-#_C. MDI is only useful if we'd also allow multiple openings...
+Ç. MDI is only useful if we'd also allow multiple openings...
 
 -----------------------------------------------------------------------------
 I. The message db. 
@@ -68,7 +71,7 @@ Create a po files catalog, like in KBabel. For easy maintaining several
 translations.
 
 F. This will be a personal catalogue, I guess. [ I don't use any KDE stuff,
-	so I don't know what you're meaning with "likein KBabel". ]
+	so I don't know what you're meaning with "like in KBabel". ]
 
 there, just a GtkCList with such columns:
 Status | File | Total | Untranslated | Fuzzy | Date
@@ -83,6 +86,6 @@ Status can be: fully translated, partially translated, contains fuzzy messages,
 untranslated (and .pot files), non-existing.
 
 Ð. Again gtranslatord has to be a monster-daemon as it also should do this globally
-	without any local dependency.
+	without any local dependency ( of course it will also order you a pizza :) ).
 
 -----------------------------------------------------------------------------

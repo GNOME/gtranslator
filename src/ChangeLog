@@ -1,3 +1,9 @@
+2000-08-05  Fatih Demir	<kabalak@gmx.net>
+
+	* TODO.src: Added some thoughts.
+	
+	* ChangeLog: Reformatted my entries partly.
+
 2000-08-04  Fatih Demir <kabalak@gmx.net>
 
 	* about.c: Updated the about-message.
@@ -252,242 +258,123 @@
 
 2000-07-17  Fatih Demir	<kabalak@gmx.net>
 	
-	* Removed the one debug message and the
-	
+	* parse.c: Removed the one debug message and the
 		corresponding ifdefs.
 	
-		-> parse.c
-	
-	* Call the intl-domain of POPT before showing
-	
+	* main.c: Call the intl-domain of POPT before showing
 		the options.
-	
 		[ So we're now getting internationalized help
-	
-		  messages :) ]
-
-		-> main.c
+		   messages :) ]
 
 2000-07-12  Fatih Demir	<kabalak@gmx.net>
 
-	* Return a `0' not `NULL' if the challenge
-	
+	* msg_db.c: Return a `0' not `NULL' if the challenge
 		length cannot be send.
 	
-		-> msg_db.c
-
-	* Added these two files to the sources.
+	* Makefile.am: Added these two files to the sources.
 	
-		-> Makefile.am
-
-	* Added the files for the find routines.
+	* find.c & find.h: Added the files for the find routines.
 	
-		-> find.c/h
-
-	* Reformatted the comments and some blocks.
+	* main.c: Reformatted the comments and some blocks.
 	
-		-> main.c
-
-	* Removed the last rests of these `//' C++
-	
+	* \*.c: Removed the last rests of these `//' C++
 		comments in these C source files.
-	
-		-> *.c
 
 2000-07-07  Fatih Demir	<kabalak@gmx.net>
 
-	* Added the G_LOG_DOMAIN define for the build
-	
+	* Makefile.am: Added the G_LOG_DOMAIN define for the build
 		of gtranslator.
-	
-		-> Makefile.am
 
 2000-07-06  Fatih Demir	 <kabalak@gmx.net>
 
-	* Forget all this long if()-trees, we don't need
-	
-		this ones; removed almost all as we do only need
-	
-		the one which is important.
-	
-	* Use the existing static gtr_header and don't
-	
-		allocate, assign etc. the values and structures.
+	* header_stuff.c: Use the existing static gtr_header and don't
+		allocate, assign etc. the values and structures; don't
+		 use these long if-trees.
 
-		-> header_stuff.c
+	* gui.c: Bloat this menu with stock pixmaps.
 
-	* Bloat this menu with stock pixmaps.
-
-	* Extended the menus with a real messages status
-	
+	* gui.c: Extended the menus with a real messages status
 		menu tree which represents the possible stati of
+		 a message entry.
 	
-		a message entry.
-	
-	* Adding another menu-subtree from where you can
-	
+	* gui.c: Adding another menu-subtree from where you can
 		define the msg_status field of every message.
-	
 		[ Only foo'ish for now .... ]
 	
-		-> gui.c
-	
-	* (null)
-                define the challenge length within the query
-
-                dialog.
-	
-	* Get the challenge-length from the Spinbutton
-	
+	* gtr_dialogs.c: Get the challenge-length from the Spinbutton
 		for querying the messages db.
 	
-		-> gtr_dialogs.c
-	
-	* Corrected a typo at the `--challenge-length'
-	
+	* main.c: Corrected a typo at the `--challenge-length'
 		option.
-	
-		-> main.c
 
 2000-07-04  Fatih Demir  <kabalak@gmx.net>
 
-	* Disable the corresponding menu entries
-	
+	* gui.c: Disable the corresponding menu entries
 		also if no file is open.
 	
-		-> gui.c
-
-	* Added another option to specify the
-	
+	* main.c: Added another option to specify the
 		desired minimun match length ( aka.
+ 	 	 challenge length); perform a little
+		  check before applying the default 
+		   challenge length;
+		    set the default challenge length to 2.
 	
-		challenge length).
-	
-	* Perform a little check before applying
-	
-		the default challenge length.
-	
-	* Set the default challenge value on
-	
-		startup to 2.
-	
-		-> main.c
-
-	* Two new routines which are setting the
-	
+	* msg_db.c: Two new routines which are setting the
 		challenge length ( the length of the
+		 strncasecmp-calls while retrieving the
+ 		  results for the query. ).
 	
-		strncasecmp-calls while retrieving the
-	
-		results for the query. ).
-	
-	* Introduced a new variable which holds the
-	
-		correspending value for the strncasecmp call.
-	
-	* Use this value for the strncasecmp call.
-
-		-> msg_db.c
-	
-	* Added the variable and the two prototypes for
-	
+	* msg_db.h: Added the variable and the two prototypes for
 		the new functions and the new variable.
-	
-		-> msg_db.h
 
 2000-06-30  Fatih Demir  <kabalak@gmx.net>
 
-	* Disabled the crashy assignment.
+	* header_stuff.c: Disabled the crashy assignment.
 	
-		-> header_stuff.c
-
-	* Removed the anormal status of a message.
-	
-	* Added two pointers to the first and the
-	
-		last message to the general po-file structure.
-
-		-> messages.h
+	* messages.h: Removed the anormal status of a message;
+		 added two pointers to the first and the
+		  last message to the general po-file structure.
 
 2000-06-27  Fatih Demir  <kabalak@gmx.net>
 	
-	* Added the size returning function for
-	
+	* msg_db.c: Added the size returning function for
 		the messages db handling.
 	
-		-> msg_db.c
-	
-	* Removed the free/malloc stuff from the
-	
+	* header_stuff.c: Removed the free/malloc stuff from the
 		header routines.
-	
-		-> header_stuff.c
 
 2000-06-14  Fatih Demir  <kabalak@gmx.net>
 
-	* Removed dummy.po from the repo and from
-	
+	* .cvsignore: Removed dummy.po from the repo and from
 		the .cvsignore.
 	
-		-> .cvsignore
-	
-	* Do the same again like weeks before,
-	
+	* header_stuff.c: Do the same again like weeks before,
 		fill up the structure.
-	
-		-> header_stuff.c
 
 2000-06-12  Fatih Demir  <kabalak@gmx.net>
 
-	* Removed the ifdef for the header routines.
+	* header_stuff.c: Removed the ifdef for the header routines.
+		started to work on `real'( TM ;) ) header routines.
+		 get the message only then to the list if it's a
+		  msg-block.
+		   [ I love this font-shadowing from Eterm,
+		     my CPU doesn't but that's another point.]
 	
-	* Started to work on `real'( TM ;) ) header
-	
-		routines.
-	
-		-> header_stuff.c
-
-	* Get the message only then to the list
-	
-		of it's a msg-block.
-	
-		[ I love this font-shadowing from Eterm,
-	
-		 my CPU doesn't but that's another point.]
-	
-	* Hmm, do some more widget work.
-	
-		-> parse.c
+	* parse.c: Hmm, do some more widget work.
 
 2000-06-11  Fatih Demir  <kabalak@gmx.net>
 
-	* Take the string length of the temp_char
-	
-		as array length.
-	
-	* Use two other gchar's for the operations.
-	
-	* Removed the "zamane" gchar.
-
-		-> parse.c
+	* parse.c: Take the string length of the temp_char
+		as array length; ise two gchar's for the
+		 operations (removed the "zamane" gchar.).
 
 2000-06-10  Fatih Demir  <kabalak@gmx.net>
  
-	* Use a generally fresh allocated gchar for
-	
-		the parsing routines.
-	
-	* Corrected a thinking-typo (?).
-	
-		g_strcasecmp -> !g_strcasecmp
+	* parse.c: Use a generally fresh allocated gchar for
+		the parsing routines; corrected a typo.
 
-		-> parse.c
-
-        +       Make the output of '-q' on the cmd-line
-	
+        * main.c: Make the output of '-q' on the cmd-line
 		look a bit better.
-	
-		-> main.c
 
 2000-06-10  Valek Filippov  <frob@df.ru>
 
