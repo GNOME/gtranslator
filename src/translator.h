@@ -20,6 +20,8 @@
 #ifndef GTR_TRANSLATOR_H
 #define GTR_TRANSLATOR_H 1
 
+#include <libgnome/gnome-defs.h>
+
 #include "languages.h"
 
 /*
