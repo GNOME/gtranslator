@@ -22,6 +22,7 @@
 /**
 * Include all the other headers.
 **/
+#include <libgtranslator/gtkled.h>
 #include <libgtranslator/gtranslatord.h>
 #include <libgtranslator/gtranslator-preferences-dialog.h>
 #include <libgtranslator/handle-db.h>

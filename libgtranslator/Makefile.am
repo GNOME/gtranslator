@@ -19,6 +19,7 @@ INCLUDES = \
 	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
 
 libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
+	gtkled.c \
 	gtranslator-preferences-dialog.c \
 	handle-db.c \
 	parse-db.c \
@@ -42,6 +43,7 @@ libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
 libgtranslator_include_dir = $(includedir)/libgtranslator
 
 libgtranslator_include__DATA = \
+	gtkled.h \
 	gtranslator-preferences-dialog.h \
 	gtranslatord.h \
 	handle-db.h \
