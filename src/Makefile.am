@@ -22,12 +22,11 @@ bin_PROGRAMS = gtranslator
 
 GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shell pkg-config --modversion gtk+-2.0) / $(shell pkg-config --modversion libgnomeui-2.0) / $(shell pkg-config --modversion libxml-2.0)"
 
-%.h: %.config
+defines.h: defines.config
 	sed \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
 	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
-	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&SCHEMESDIR","$(datadir)/gtranslator/colorschemes",g \
 	-e s,"&SCRIPTSDIR","$(datadir)/gtranslator/scripts",g \
 	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
