@@ -77,7 +77,7 @@ gchar *gtranslator_utils_invert_dot(gchar *str)
 			gunichar c = g_utf8_get_char(p);
 			if (c == middot)
 				g_string_append_c(newstr, ' ');
-			else if (g_unichar_isspace(c))
+			else if (g_unichar_break_type(c) == G_UNICODE_BREAK_SPACE)
 				g_string_append_unichar(newstr, middot);
 			else
 				g_string_append_unichar(newstr, c);

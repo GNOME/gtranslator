@@ -100,7 +100,7 @@ static void check_msg_status(GtrMsg * msg)
  */
 static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 {
-	gchar *to_add = g_new(gchar, strlen(tail));
+	gchar *to_add = g_new(gchar, strlen(tail) * 2);
 	gchar *result;
 	gint s, d = 0;
 

@@ -5,7 +5,14 @@
 		 GNOMELOCALEDIR usage in main.c to use DATADIR "/locale" which
 		  should be the same :-)
 
-2003-08-27  Ross Golder  <ross@golder.org>
+2003-08-27  Ross Golder <ross@golder.org>
+
+	* utils_gui.c (gtranslator_utils_invert_dots): Do not use middot for
+	        line breaks - looks ugly.
+	
+	* parse.c (append_line): Allocate twice the size of the input line
+	       to allow for conversion to multibyte charsets (can segfault
+	        otherwise)
 
 	* main.c: Add #include <locale.h> as per manpage setlocale(3).
 
