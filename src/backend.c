@@ -87,12 +87,7 @@ gboolean gtranslator_backend_open_all_backends(const gchar *directory)
 
 	g_return_val_if_fail(backends!=NULL, FALSE);
 
-	while(backends!=NULL)
-	{
-		g_message("Load backend `%s'..",  (gchar *) backends->data);
-
-		backends=backends->next;
-	}
+	g_list_foreach(backends, (GFunc) gtranslator_backend_add, NULL);
 
 	return TRUE;
 }
