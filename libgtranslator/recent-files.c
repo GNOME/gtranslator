@@ -72,7 +72,7 @@ GList *gtranslator_get_recent_files(gboolean delete_nonexistent)
 	/*
 	 * Now get every recent filename into the list.
 	 */
-	while(length>0)
+	while(length>=0)
 	{
 		filename=gtranslator_get_recent_files_entry(length);
 		if(filename)

@@ -29,8 +29,9 @@
 #include <libgnomevfs/gnome-vfs.h>
 
 /*
- * Opens up the given file via GnomeVFS routines.
+ * Opens up the given file via GnomeVFS routines and returns the
+ *  local filename of the transferred file.
  */
-void 		gtranslator_vfs_handle_open_file(gchar *filestring);
+gchar 	*gtranslator_vfs_handle_open_file(gchar *filestring);
 
 #endif

@@ -20,16 +20,13 @@
 #include "vfs-handle.h"
 
 /*
- * Open up the given file via GnomeVFs routines.
+ * Open up the given file via GnomeVFS routines.
  */
-void gtranslator_vfs_handle_open_file(gchar *filename)
+gchar	*gtranslator_vfs_handle_open_file(gchar *filename)
 {
 	GnomeVFSURI *file;
 	GnomeVFSURI *destination;
-	/*
-	 * Test the given filename.
-	 */
-	g_return_if_fail(filename!=NULL);
+	gchar *localfilename=g_new0(gchar,1);
 	
 	/*
 	 * Init GnomeVFS, if that hasn't already be done.
@@ -44,14 +41,12 @@ void gtranslator_vfs_handle_open_file(gchar *filename)
 	 */
 	file=gnome_vfs_uri_new(filename);
 	/*
-	 * If an URI couldn't be build or if the file is locally available
-	 *  open it with the standard method.
+	 * If an URI is locally available open it with
+	 *  the standard methods.
 	 */
 	if(gnome_vfs_uri_is_local(file))
 	{
-		/*
-		 * FIXME FIXME FIXME
-		 */
+		localfilename=gnome_vfs_uri_to_string(file, 1<<4);
 	}
 	else
 	{
@@ -73,7 +68,11 @@ void gtranslator_vfs_handle_open_file(gchar *filename)
 		{
 			g_warning(_("Couldn't create the temporary directory `%s'."),
 				destdir);
-			return;
+			if(destdir)
+			{
+				g_free(destdir);
+			}
+			return NULL;
 		}
 		/*
 		 * The destination path.
@@ -90,38 +89,48 @@ void gtranslator_vfs_handle_open_file(gchar *filename)
 			case GNOME_VFS_ERROR_NOT_FOUND:
 				g_warning(_("File `%s' couldn't be found!"), gnome_vfs_uri_to_string(
 					file, 0));
+				return NULL;
 					break;
 			case GNOME_VFS_ERROR_INVALID_URI:
 				g_warning(_("Malformed URI `%s' entered!"), gnome_vfs_uri_to_string(
 					file, 0));
+				return NULL;
 					break;
 			case GNOME_VFS_ERROR_HOST_NOT_FOUND:
 				g_warning(_("Host `%s' couldn't be found!"), gnome_vfs_uri_get_host_name(
 					file));
+				return NULL;
 					break;
 			case GNOME_VFS_ERROR_INVALID_HOST_NAME:
 				g_warning(_("Hostname `%s' is not valid!"), gnome_vfs_uri_get_host_name(
 					file));
+				return NULL;
 					break;
 			case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
 				g_warning(_("Host `%s' has no address!"), gnome_vfs_uri_get_host_name(
 					file));
+				return NULL;
 					break;
 			case GNOME_VFS_ERROR_CANCELLED:
 				g_warning(_("Transfer interrupted!"));
+				return NULL;
+					break;
 			/*
-			 * The last case should be the "OK" case, so we leave it and the
-			 *  irrelevant cases out here.
+			 * The last case should be the "OK" case.
 			 */
 			default:
 				/*
-				 * Now we can again set the name of the file to be opened.
+				 * Return the local destination filename.
 				 */
-				gtranslator_config_init();
-				gtranslator_config_set_string("vfs/file_to_open",
-					gnome_vfs_uri_to_string(destination, 0));
-				gtranslator_config_close();
+				localfilename=gnome_vfs_uri_to_string(destination, 1<<4);
+				return localfilename;
 				break;
 		}
 	}
+	if(localfilename)
+	{
+		return localfilename;
+	}
+	return NULL;
+	
 }
