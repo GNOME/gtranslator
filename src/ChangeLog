@@ -1,3 +1,15 @@
+2001-03-17  Fatih Demir	<kabalak@gtranslator.org>
+
+	* Makefile.am: Added views.c/.h to the sources.
+
+	* find.c & sidebar.c: Switched over to the new sources view
+		via "gtranslator_views_set" and the GTR_COMMENT_VIEW
+		 argument.
+
+	* sidebar.c/.h: Removed "show_comment" function from here.
+
+	* views.c/.h: General views structure and functions are here.
+
 2001-03-16  Fatih Demir <kabalak@gtranslator.org>
 
 	* syntax.c: Added a new and quite useful "back_match" function

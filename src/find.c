@@ -25,6 +25,7 @@
 #include "find.h"
 #include "prefs.h"
 #include "parse.h"
+#include "views.h"
 #include "gui.h"
 #include "sidebar.h"
 
@@ -199,7 +200,7 @@ static int find_in_msg(GList * msg, gpointer useless, gboolean first)
 			 *  "hightlighting" it.
 			 */  
 			goto_given_msg(msg);
-			show_comment(text1);
+			gtranslator_views_set(GTR_COMMENT_VIEW);
 			pos = (regmatch_t *)g_list_nth_data(poslist, actpos);
 			gtk_editable_select_region(GTK_EDITABLE(text1),
 				pos->rm_so, pos->rm_eo);

@@ -21,9 +21,10 @@
 #include <config.h>
 #endif
 
+#include "gui.h"
 #include "sidebar.h"
 #include "syntax.h"
-#include "gui.h"
+#include "views.h"
 
 /*
  * The internal icon callback method.
@@ -147,9 +148,8 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 					gtk_editable_set_position(
 					GTK_EDITABLE(trans_box), curpos);
 				}
+					break;
 
-				break;
-				
 			case 2:
 				 testcase=gtk_editable_get_chars(
 					 GTK_EDITABLE(trans_box), 0, -1);
@@ -165,9 +165,9 @@ void select_icon(EShortcutBar *bar, GdkEvent *event, gint group,
 				/*
 				 * Display the current comment or
 				 *  show a helping message.
-				 */				 
-				show_comment(text1);
-				break;
+				 */
+				gtranslator_views_set(GTR_COMMENT_VIEW);
+					break;
 				
 			default:
 				break;
@@ -224,35 +224,4 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	}
 	else
 		return NULL;
-}
-
-/*
- * Shows the comment of the current message in the given GtkText.
- */
-void show_comment(GtkWidget *text)
-{
-	g_return_if_fail(text!=NULL);
-
-	if(GTR_MSG(po->current->data)->comment)
-	{
-		/*
-		 * Show the comment and only the comment.
-		 */
-		gchar *newtext=GTR_MSG(po->current->data)->comment;
-		
-		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-
-		/*
-		 * Show the comment as pure text without any syntax 
-		 *  highlighting.
-		 */
-		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, newtext, -1);
-	}
-	else
-	{
-		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-
-		gtranslator_syntax_insert_text(text,
-			_("No comment available for this message."));
-	}
 }

@@ -64,7 +64,8 @@ gtranslator_SOURCES = \
 	stylistics.c stylistics.h \
 	syntax.c syntax.h \
 	update.c \
-	vfs-handle.c vfs-handle.h
+	vfs-handle.c vfs-handle.h \
+	views.c views.h
 
 gtranslator_LDADD = \
 	-L/usr/X11R6/lib \

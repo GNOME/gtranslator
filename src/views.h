@@ -17,31 +17,24 @@
  *
  */
 
-#ifndef GTR_SIDEBAR_H
-#define GTR_SIDEBAR_H 1
+#ifndef GTR_VIEWS_H
+#define GTR_VIEWS_H 1
 
-#include "parse.h"
-#include <gal/shortcut-bar/e-shortcut-bar.h>
+#include <glib.h>
+
+typedef enum {
+	GTR_C_FORMAT_VIEW,
+	GTR_COMMENT_VIEW,
+	GTR_HOTKEY_VIEW,
+	GTR_MESSAGE_VIEW,
+	GTR_NUMBER_VIEW,
+	GTR_LAST_VIEW
+} GtrView;
 
 /*
- * The shortcut bar releated widgets/variables/methods.
- */ 
-
-EShortcutModel	*model;
-
-/*
- * Creates the shortcut bar and returns it as a GtkWidget.
+ * Switches to the given view for the current message -- returns FALSE on 
+ *  failure.
  */
-GtkWidget *gtranslator_sidebar_new(void);
-
-/*
- * Adds the given po file to our sidebar.
- */ 
-void gtranslator_sidebar_activate_views(void);
-
-/*
- * Clean the sidebar. Remove all the nice icons for the views.
- */
-void gtranslator_sidebar_clear_views(void);
+gboolean gtranslator_views_set(GtrView view);
 
 #endif
