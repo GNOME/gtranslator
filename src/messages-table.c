@@ -419,15 +419,15 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
  */
 void gtranslator_messages_table_select_row(GtrMsg *message)
 {
+	GtkTreeSelection	*selection=NULL;
 
-}
+	if(!file_opened)
+	{
+		return;
+	}
 
-/*
- * Update the status grouping of a message
- */
-void gtranslator_messages_table_update_message_status(GtrMsg *message)
-{
-
+	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(tree));
+	gtk_tree_selection_select_iter(selection, &message->iter);
 }
 
 static void 

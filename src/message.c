@@ -449,7 +449,7 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	gtranslator_message_update();
 	if(GtrPreferences.show_messages_table)
 	{
-		gtranslator_messages_table_update_message_status(GTR_MSG(po->current->data));
+		gtranslator_messages_table_update_row(GTR_MSG(po->current->data));
 	}
 }
 

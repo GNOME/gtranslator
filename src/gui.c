@@ -624,7 +624,7 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		}
 		if(GtrPreferences.show_messages_table)
 		{
-			gtranslator_messages_table_update_message_status(msg);
+			gtranslator_messages_table_update_row(msg);
 		}
 	}
 }
