@@ -235,15 +235,13 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Create the tool- and search-bar
 	 */
-	tool_bar = gtk_toolbar_new(); 
-// XXX // GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	tool_bar = gtk_toolbar_new();
 	gnome_app_fill_toolbar(GTK_TOOLBAR(tool_bar), the_toolbar, NULL);
 	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), GTK_TOOLBAR(tool_bar),
 			      "tool_bar", BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
 			      BONOBO_DOCK_TOP, 1, 0, 0);
 
-	search_bar = gtk_toolbar_new(); 
-// XXX GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	search_bar = gtk_toolbar_new();
 	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_navibar, NULL);
 	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), 
 		GTK_TOOLBAR(search_bar),

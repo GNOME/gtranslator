@@ -1,5 +1,11 @@
 2002-12-31  Fatih Demir <kabalak@gtranslator.org>
 
+	* gui.c: Removed the out-commented but also unneeded calls for the
+		setting of orientation and style of the toolbars: the
+		 orientation is now per default horizontal in Gtk+ and the
+		  style should also be adaptent to the desktop, therefore
+		   no own setting is set anymore now.
+
 	* learn.c: Rename the default learn buffer file for now to a stupid
 		"Standard_Learn_Buffer.xml" - beware us from taken over
 		  gtranslator 0.4x learn buffers...
