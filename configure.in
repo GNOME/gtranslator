@@ -118,13 +118,8 @@ dnl -------------------------------------------------------------------
 dnl Check for GnomeVFS via this crappy check and get the libs and 
 dnl  compile flags for it or disable USE_VFS_STUFF.
 dnl -------------------------------------------------------------------
-vfs_stuff=no
 AC_MSG_CHECKING(for GnomeVFS >= 0.4.1)
 if gnome-config --cflags vfs 2>&1 >/dev/null ; then
-	dnl -----------------------------------------------------------
-	dnl Temporarily we're now happy :-)
-	dnl -----------------------------------------------------------
-	vfs_stuff=yes
 	dnl -----------------------------------------------------------
 	dnl Test the version of GnomeVFS to be >= 0.4.1
 	dnl -----------------------------------------------------------
@@ -137,32 +132,17 @@ if gnome-config --cflags vfs 2>&1 >/dev/null ; then
 			AC_MSG_RESULT([" "
 "+++ Right GnomeVFS > 0.5 detected..."])			
 		else
-			vfs_stuff=no
-			AC_MSG_RESULT([" "
-"+++ Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4"])
+			AC_MSG_ERROR([" "
+"+++ Your GnomeVFS is too old, it is $VFS_VERSION < gnome-vfs 0.4.1"])
 		fi	
 	fi
-	dnl -----------------------------------------------------------
-	dnl Define the USE_VFS_STUFF directive...
-	dnl -----------------------------------------------------------
-	if test "x$vfs_stuff" = "xyes" ; then
-	AC_MSG_RESULT(["+++ Defining VFS flags... "])
-		dnl ---------------------------------------------------
-		dnl Get the CFLAGS and the LIBS
-		dnl ---------------------------------------------------
-		VFS_CFLAGS=`gnome-config --cflags vfs`
-		VFS_LIBS=`gnome-config --libs vfs`
-		AC_SUBST(VFS_CFLAGS)
-		AC_SUBST(VFS_LIBS)
-	fi	
-else
-	dnl -----------------------------------------------------------
-	dnl Oh, no GnomeVFS ;-(
-	dnl -----------------------------------------------------------
-	AC_MSG_RESULT([" "
-"+++ GnomeVFS was not found... Not building, linking with VFS stuff."])	
-fi
-AM_CONDITIONAL(USE_VFS_STUFF, test x$vfs_stuff = xyes)
+dnl -------------------------------------------------------------------
+dnl Define the compile flags for gtranslator
+dnl -------------------------------------------------------------------
+VFS_CFLAGS=`gnome-config --cflags vfs`
+VFS_LIBS=`gnome-config --libs vfs`
+AC_SUBST(VFS_CFLAGS)
+AC_SUBST(VFS_LIBS)
 
 dnl -------------------------------------------------------------------
 dnl Check for gal >= 0.4.99.
@@ -345,13 +325,12 @@ bind the po-files
 use the window-icon
  feature of gnome-libs  :	${use_window_icon_feature:-no}
 
- used GAL version	:	`gnome-config --modversion gal|sed -e 's/.*-//g'`
+used GAL version	:	`gnome-config --modversion gal|sed -e 's/.*-//g'`
+
+used GnomeVFS version	:	`gnome-config --modversion vfs|sed -e 's/.*-//g`
 
 if we can use GConf
  for the config-stuff	:	${gconf_is_present:-no}
-
-if gtranslator can
- use GnomeVFS stuff	:	${vfs_stuff:-no}
 
 if everything should be 
  compiled debuggy	:	${with_debug_specs:-no}
