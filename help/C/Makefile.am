@@ -11,7 +11,7 @@ gtranslator_helpdir = $(datadir)/gnome/help/gtranslator/$(lc)
 
 gtranslator_sgmlfile = gtranslator.sgml
 
-gtranslator_omfdir = $(DESTDIR)$(SC_OMFDIR)/gtranslator
+gtranslator_omfdir = $(SC_OMFDIR)/gtranslator
 
 if SCROLLKEEPER_PRESENT
 gtranslator_omf_DATA = $(gtranslator_omffile)
@@ -64,14 +64,14 @@ distclean-generic:
 
 if SCROLLKEEPER_PRESENT
 install-data-local: index.html
-	scrollkeeper-update -p $(DESTDIR)$(SC_STATEDIR)
+	scrollkeeper-update -p $(SC_STATEDIR)
 else	
 install-data-local: index.html
 endif
 
 if SCROLLKEEPER_PRESENT
 uninstall-local:
-	scrollkeeper-update -p $(DESTDIR)$(SC_STATEDIR)
+	scrollkeeper-update -p $(SC_STATEDIR)
 endif
 
 clean-docs:
