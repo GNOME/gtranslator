@@ -1158,7 +1158,13 @@ and may contain your hard work!\n"),
 		original_filename);
 	
 	gtk_dialog_add_buttons(GTK_DIALOG(dialog),
-		GTK_STOCK_CANCEL,
+		/*
+		 * Translators: All this is about recovering a po file after
+		 *  a crash or something; postbone means that the user will
+		 *   get asked the next time he starts up gtranslator again
+		 *    if he/she wants to recover file.
+		 */
+		_("Postpone decision"),
 		GTK_RESPONSE_CANCEL,
 		_("Ignore recovery file"),
 		GTK_RESPONSE_REJECT,
