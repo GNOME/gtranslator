@@ -406,7 +406,8 @@ void gtranslator_messages_table_clear(void)
 	if(root_node)
 	{
 		e_tree_memory_node_remove(tree_memory, root_node);
-		root_node=NULL;
+		/* sadly we seem to create a root_node or else mayhem results */
+		root_node=e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
 	}
 	
 	if(hash_table)
@@ -429,9 +430,12 @@ void gtranslator_messages_table_create (void)
 	
 	list=po->messages;
 	
-	gtranslator_messages_table_clear();
+	/* messages-list already exists so clear it */
+	if (hash_table)
+		gtranslator_messages_table_clear();
 	
-	root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
+	if (!root_node)
+		root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
 	e_tree_root_node_set_visible (E_TREE(tree), FALSE);
 	
 	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
