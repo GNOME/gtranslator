@@ -184,16 +184,11 @@ load_location (NautilusGtranslatorView *view,
 	version=gtk_label_new(g_strdup_printf(_("Version: %s"),
 		po->header->prj_version));
 
-	/*
-	 * These are mailto: hyperlinks so that the mailto: should be 
-	 *  mailto: after the translation. Or is there any gnome-url-handler
-	 *   who also recognizes localized mailto: URL's?
-	 */   
-	translator=gnome_href_new(g_strdup_printf(_("mailto:%s"), po->header->tr_email),
+	translator=gnome_href_new(g_strdup_printf("mailto:%s", po->header->tr_email),
 		g_strdup_printf(_("Last translator: %s <%s>"), po->header->translator,
 		po->header->tr_email));
 
-	language=gnome_href_new(g_strdup_printf(_("mailto:%s"), po->header->lg_email),
+	language=gnome_href_new(g_strdup_printf("mailto:%s", po->header->lg_email),
 		g_strdup_printf(_("Language team: %s <%s>"), po->header->language,
 		po->header->lg_email));
 
