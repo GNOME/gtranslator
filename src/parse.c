@@ -43,9 +43,9 @@ void parse(gchar *po)
 	* Some variables
 	**/
 	gchar temp_char[128];
-	gchar *zamane;
         guint lines=1,z=0,msg_pair=0;
 	gboolean msgid_ok=FALSE,msgstr_ok=FALSE,comment_ok=FALSE;
+	gchar *zamane=g_new(gchar,1);
 	messages=g_list_alloc();
 	messages=NULL;
 	/**
@@ -130,7 +130,6 @@ void parse(gchar *po)
 			/**
 			* The msgid itself
 			**/
-			zamane=NULL;
 			minid=0;
 			for(mid=6;mid<(strlen(temp_char));++mid)
 			{
@@ -145,11 +144,10 @@ void parse(gchar *po)
 		**/
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
-			gint mstr,mistr; 
+			gint mstr,mistr;
 			/**
 			* The msgstr
 			**/
-			zamane=NULL;
 			mistr=0;
 			for(mstr=7;mstr<(strlen(temp_char));++mstr)
 			{
@@ -157,19 +155,19 @@ void parse(gchar *po)
 				mistr++;
 			}
 			(gchar *)msg->msgstr=(gchar *)g_strdup(temp_char);
-			if(g_strcasecmp(((gchar *)msg->msgstr),"\"\""))
+			if(!g_strcasecmp(((gchar *)msg->msgstr),"\"\""))
 			{
-				msg->msg_status=GTRANSLATOR_MSG_STATUS_UNTRANSLATED;
+				(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_UNTRANSLATED;
 			}
 			else
 			{
 				if(((gchar *)msg->msgstr)!=NULL)
 				{
-					msg->msg_status=GTRANSLATOR_MSG_STATUS_TRANSLATED;
+					(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_TRANSLATED;
 				}
 				else
 				{
-					msg->msg_status=GTRANSLATOR_MSG_STATUS_UNKNOWN;
+					(gtr_msg_status)msg->msg_status=GTRANSLATOR_MSG_STATUS_UNKNOWN;
 				}
 			}
 			msgstr_ok=TRUE;
@@ -216,6 +214,10 @@ void parse(gchar *po)
 	* Set the msg_pair count.
 	**/
 	msg_pair_count=msg_pair;
+	if(zamane)
+	{
+		g_free(zamane);
+	}
 }
 
 /**

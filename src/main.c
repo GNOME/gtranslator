@@ -96,8 +96,8 @@ int main(int argc,char *argv[])
 		* This should be a clearly sightable separator line.
 		**/
 		g_print("-----------------------------------------------------\n");
-		g_print(_("Result                   : %s."),get_from_msg_db(query_string));
-		g_print("\n\n");
+		g_print(_("Result                   :  %s."),get_from_msg_db(query_string));
+		g_print("\n");
 		g_print(_("End of query.\n"));
 			/**
 			* Exit within the non-GUI circles.
