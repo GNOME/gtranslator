@@ -372,9 +372,10 @@ gboolean gtranslator_parse_core(GtrPo *po)
 				 * Now we've got a msgstr item in here.
 				 */
 				msgid_ok = TRUE;
-				if(line[13]!='\0')
+				if(line[12]!='\0')
 				{
-					append_line(&msg->msgstrs[pluralforms_count], &line[11], FALSE);
+					g_message("Add `%s' to msgstrs[%i]", &line[10], pluralforms_count);
+					append_line(&msg->msgstrs[pluralforms_count], &line[10], FALSE);
 				}
 
 				pluralforms_count++;

@@ -194,7 +194,33 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 	else
 		version = g_strdup(h->prj_name);
 	
-	msg->msgstr = g_strdup_printf("\n"\
+	if(h->plural_forms)
+	{
+		msg->msgstr = g_strdup_printf("\n"\
+"Project-Id-Version: %s\\n\n"\
+"Report-Msgid-Bugs-To: %s\\n\n"\
+"POT-Creation-Date: %s\\n\n"\
+"PO-Revision-Date: %s\\n\n"\
+"Last-Translator: %s <%s>\\n\n"\
+"Language-Team: %s\\n\n"\
+"MIME-Version: %s\\n\n"\
+"Content-Type: text/plain; charset=%s\\n\n"\
+"Content-Transfer-Encoding: %s\\n\n"\
+"Plural-Forms: %s",
+		version,
+		h->report_message_bugs_to,
+		h->pot_date,
+		h->po_date,
+		h->translator, h->tr_email,
+		group,
+		h->mime_version,
+		h->charset,
+		h->encoding,
+		h->plural_forms);
+	}
+	else
+	{
+		msg->msgstr = g_strdup_printf("\n"\
 "Project-Id-Version: %s\\n\n"\
 "Report-Msgid-Bugs-To: %s\\n\n"\
 "POT-Creation-Date: %s\\n\n"\
@@ -213,6 +239,7 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 		h->mime_version,
 		h->charset,
 		h->encoding);
+	}
 
 	GTR_FREE(group);
 	GTR_FREE(version);
