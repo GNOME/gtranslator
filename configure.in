@@ -157,11 +157,17 @@ MY_CFLAGS=$CFLAGS
 MY_LIBS=$LIBS
 CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
 LIBS="$LIBS `gnome-config --libs gnomeui`"
-use_window_icon=no
+use_window_icon=
 AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, use_window_icon=yes)
 CFLAGS=$MY_CFLAGS
 LIBS=$MY_LIBS
-AM_CONDITIONAL(USE_WINDOW_ICON, test z$use_window_icon = zyes)
+
+if test "%${use_window_icon}" != "%yes" ; then
+	AC_MSG_ERROR([
+	"-----------------------------------------------------------------------------"
+	"You need at least gnome-libs 1.0.60 for compiling gtranslator. Please install it."
+	"-----------------------------------------------------------------------------"])
+fi	
 
 dnl -------------------------------------------------------------------
 dnl Simply substitute the icon-location directory in the keys file.
@@ -359,8 +365,6 @@ echo "
 gtranslator version	  :	${VERSION}
 
 bind the po & co. files	  :	${enable_mime_bind:-possibly}	
-
-use window-icon		  :	${use_window_icon:-no}
 
 GAL & GnomeVFS version	  :	`gnome-config --modversion gal|sed -e 's/.*-//g'` & `gnome-config --modversion vfs|sed -e 's/.*-//g'`
 

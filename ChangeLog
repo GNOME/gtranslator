@@ -1,3 +1,12 @@
+2001-04-27  Fatih Demir <kabalak@gtranslator.org>
+
+	* acconfig.h: Removed some old defines. 
+	
+	* configure.in: Make us depend on gnome-libs >= 1.0.60 -- bail out
+		with error if the present gnome-libs doesn't support
+		 window_icon actions (at least 1.2.0 is also mentioned in
+		  DEPENDS so that this shouldn't be a problem).
+
 2001-04-24  Fatih Demir <kabalak@gtranslator.org>
 
 	* TODO: Added current TODO items and removed old stuff.
