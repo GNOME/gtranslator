@@ -1,7 +1,7 @@
 ## the ./data/Makefile.am of gtranslator ..
 
 ## the dirs where all the DATA should go ..
-Applicationdir = $(datadir)/gnome/apps/Applications
+Applicationdir = $(datadir)/gnome/apps/Development
 if BIND_MIME
 mimeinfofilesdir = $(datadir)/mime-info
 else

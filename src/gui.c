@@ -88,14 +88,14 @@ void compile(GtkWidget *widget,gpointer useless)
 		/**
 		* Simply compile the .po-file
 		**/
-		gchar *cmd=" ";
+		gchar cmd[256];
 		gint res=1;
 		/**
 		* If a filename has been set yet, then we can try to compile it.
 		**/
-		if((po->name!=NULL))
+		if(po->filename)
 		{
-			sprintf(cmd,"%s %s","msgfmt",po->name);
+			sprintf(cmd,"%s %s","msgfmt",(gchar *)(po->filename));
 			res=system(cmd);
 			/**
 			* If there has been an error show an error-box

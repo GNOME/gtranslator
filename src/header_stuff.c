@@ -36,7 +36,6 @@ void get_header(gchar *hline)
 	**/
 	if(!g_strncasecmp(hline,"\"Pro",4))
 	{
-		g_print("%% %s %%\n",strstr((strstr(hline,": "))," "));
 		/**
 		* Yup, we're finished with the header.
 		**/

@@ -209,7 +209,7 @@ int main(int argc,char *argv[])
 			**/
 			parse(file_to_open);
 			file_opened=TRUE;
-			po->name=file_to_open;
+			strcpy(po->filename,file_to_open);
 		}
 	}
 	/**
