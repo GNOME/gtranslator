@@ -1,5 +1,9 @@
 2001-03-31  Fatih Demir <kabalak@gtranslator.org>
 
+	* main.c: Also connect the SIGSEGV signal to the own
+		"gtranslator_signal_handler" signal handling function
+		  and free the "sp_file" variable meanwhile (+184).
+
 	* syntax.c: Added some more keywords and prefixes to highlight.
 
 2001-03-30  Fatih Demir <kabalak@gtranslator.org>

@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
 	signal(SIGSEGV, gtranslator_signal_handler);
 	signal(SIGILL, gtranslator_signal_handler);
 	signal(SIGABRT, gtranslator_signal_handler);
+	signal(SIGSEGV, gtranslator_signal_handler);
 	signal(SIGINT, gtranslator_signal_handler);
 	signal(SIGHUP, gtranslator_signal_handler);
 	signal(SIGQUIT, gtranslator_signal_handler);
@@ -176,6 +177,8 @@ int main(int argc, char *argv[])
 	{
 		unlink(sp_file);
 	}
+
+	g_free(sp_file);
 
 	/*
 	 * Test if there's a crash recovery file lying around in ~.
