@@ -219,8 +219,13 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 	gtk_container_add(GTK_CONTAINER(scroll), widget);
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), scroll, 1, 2, row, row + 1);
-	gtk_signal_connect(GTK_OBJECT(widget), "changed",
-			   GTK_SIGNAL_FUNC(callback), NULL);
+
+	if(callback)
+	{
+		gtk_signal_connect(GTK_OBJECT(widget), "changed",
+			GTK_SIGNAL_FUNC(callback), NULL);
+	}
+
 	return widget;
 }
 

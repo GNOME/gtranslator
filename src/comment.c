@@ -92,8 +92,11 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 			if(nautilus_istr_has_prefix(comment->comment, GtrPrefixTypes[c].prefix))
 			{
 				gint 	i=0;
-				
-				comment->type=GtrPrefixTypes[c].type;
+			
+				/*
+				 * Set the current type flag.
+				 */
+				comment->type |= GtrPrefixTypes[c].type;
 
 				/*
 				 * Strip the matched prefix out of the string.
@@ -279,7 +282,8 @@ void gtranslator_comment_display(GtrComment *comment)
 	gtk_label_set_text(GTK_LABEL(extra_content_view->comment), 
 		comment->pure_comment);
 
-	if(GTR_COMMENT(comment)->type==TRANSLATOR_COMMENT)
+	if(GTR_COMMENT(comment)->type & TRANSLATOR_COMMENT ||
+		GTR_COMMENT(comment)->type & SOURCE_COMMENT)
 	{
 		gtk_widget_set_sensitive(extra_content_view->edit_button, TRUE);
 	}

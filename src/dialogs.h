@@ -62,8 +62,13 @@ void gtranslator_import_dialog(GtkWidget *widget, gpointer useless);
 void gtranslator_export_dialog(GtkWidget *widget, gpointer useless);
 
 /*
+ * A small and nifty comment edit dialog -- nothing really big.
+ */
+void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless);
+
+/*
  * This dialog will pop up if a crash recovery file could be found
- *  in ~.
+ *  in ~/.gtranslator.
  */
 void gtranslator_rescue_file_dialog(void);
 

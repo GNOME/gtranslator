@@ -1,3 +1,17 @@
+2001-08-06  Fatih Demir <kabalak@gtranslator.org>
+
+	* comment.c: Corrected the comment type recignition to also use the
+		fields -- source code comments should also be editable.
+
+	* gui.c: Connect the signal for clicking on the "Edit comment" button	
+		to the new edit comment dialog.
+
+	* dialogs.c/.h: Added comment edit dialog -- quite simple and small
+		but working.
+
+	* utils_gui.c: Only connect the "changed" signal for the text box
+		if a callback has been given at all.
+
 2001-08-03  Fatih Demir <kabalak@gtranslator.org>
 
 	* update.c: Rightly catch the return values -- the result of the

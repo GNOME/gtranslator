@@ -295,6 +295,102 @@ void gtranslator_export_dialog_clicked(GtkWidget *widget, gpointer dialog)
 }
 
 /*
+ * Display a small text widget with an editable content.
+ */
+void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
+{
+	static GtkWidget *dialog=NULL;
+
+	GtkWidget 	*inner_table;
+	GtkWidget 	*comment_box;
+	GtrComment 	*comment;
+	
+	gint reply=0;
+
+	dialog=gnome_dialog_new(_("gtranslator -- edit comment"), 
+		GNOME_STOCK_BUTTON_APPLY,
+		GNOME_STOCK_BUTTON_CANCEL,
+		NULL);
+
+	/*
+	 * Create and pack the inner_table into the dialog.
+	 */
+	inner_table=gtk_table_new(1, 2, FALSE);
+	gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(dialog)->vbox), 
+		inner_table);
+
+	/*
+	 * Get the current comment from the current message.
+	 */
+	comment=GTR_COMMENT(GTR_MSG(po->current->data)->comment);
+	g_return_if_fail(comment!=NULL);
+
+	/*
+	 * Use our util. function to get a labeled text box into the dialog.
+	 */
+	comment_box=gtranslator_utils_attach_text_with_label(inner_table, 1,
+		_("Comment:"), comment->comment, NULL);
+
+	/*
+	 * The window should be resizable and somehow bigger then normally.
+	 */
+	gtk_window_set_policy(GTK_WINDOW(dialog), 0, 1, 1);
+	gtk_widget_set_usize(GTK_WIDGET(dialog), 380, 200);
+	
+	/*
+	 * Some usual playing: "Apply" should be the default.
+	 */
+	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
+	gtranslator_dialog_show(&dialog, _("gtranslator -- edit comment"));
+	
+	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
+
+	/*
+	 * Now operate on the contents as the user pressed "Ok".
+	 */
+	if(reply==GNOME_OK)
+	{
+		gchar		*comment_dialog_contents;
+
+		/*
+		 * Get the comment box contents.
+		 */
+		comment_dialog_contents=gtk_editable_get_chars(
+			GTK_EDITABLE(comment_box), 0, -1);
+		g_return_if_fail(comment_dialog_contents!=NULL);
+		
+		/*
+		 * Check if the user did change anything in the comment_box.
+		 */
+		if(!nautilus_strcasecmp(comment_dialog_contents, 
+			GTR_COMMENT(comment)->comment))
+		{
+			/*
+			 * If the contents are still the same simply return.
+			 */
+			gnome_dialog_close(GNOME_DIALOG(dialog));
+			return;
+		}
+
+		/*
+		 * Update the GtrComment contents and type fields. The contents
+		 *  did change therefore we can now save our file .-)
+		 */
+		gtranslator_comment_update(&comment, comment_dialog_contents);
+		gtranslator_actions_enable(ACT_SAVE);
+
+		gtk_label_set_text(GTK_LABEL(extra_content_view->comment),
+			comment->pure_comment);
+		
+		gnome_dialog_close(GNOME_DIALOG(dialog));
+	}
+	else
+	{
+		gnome_dialog_close(GNOME_DIALOG(dialog));
+	}
+}
+
+/*
  * Set the current/last used directory up for the given file dialog.
  */
 void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)

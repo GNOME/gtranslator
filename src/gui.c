@@ -333,6 +333,9 @@ void gtranslator_create_main_window(void)
 	gtk_signal_connect(GTK_OBJECT(gtranslator_application), "delete_event",
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
 
+	gtk_signal_connect(GTK_OBJECT(extra_content_view->edit_button), "clicked",
+			   GTK_SIGNAL_FUNC(gtranslator_edit_comment_dialog), NULL);
+
 	gtk_signal_connect_after(GTK_OBJECT(text_box), "selection_get",
 			   GTK_SIGNAL_FUNC(selection_get_handler), NULL);
 	gtk_signal_connect_after(GTK_OBJECT(trans_box), "selection_get",
