@@ -60,49 +60,69 @@ void write_msg(GList *message, gpointer file)
  */
 gboolean backend_open(const gchar *filename)
 {
-	FILE 		*f;
-	
-	gchar 	 	 line[256];
-	gchar 		*str=NULL;
-	gchar 		*stuff=NULL;
+	FILE 		*text_file;
+	FILE		*po_file;
 
-	/*
-	 * Wrong filenames are bad .-(
-	 */
+	GtrHeader	*header;
+	
+	gchar 	 	*line;
+	gchar 		*string;
+
 	g_return_val_if_fail(filename!=NULL, FALSE);
 
-	/*
-	 * Open the file via fopen and check the resulting FILE *.
-	 */
-	f=fopen(filename, "r");
-	g_return_val_if_fail(f!=NULL, FALSE);
+	text_file=fopen(filename, "r");
+	g_return_val_if_fail(text_file!=NULL, FALSE);
 
-	while(fgets(line, sizeof(line), f)!=NULL)
+	header=gtranslator_header_create_from_prefs();
+
+	po_file=fopen("text.po", "w");
+	g_return_val_if_fail(po_file!=NULL, FALSE);
+
+	line=string=NULL;
+
+	fprintf(po_file, "\
+# gtranslator converted text file \"%s\".\n\
+# %s <%s>.\n\
+#\n\
+msgid \"\"\n\
+msgstr \"\"\n\
+\"Project-Id-Version: %s\\n\"\n\
+\"POT-Creation-Date: %s\\n\"\n\
+\"PO-Revision-Date: %s\\n\"\n\
+\"Last-Translator: %s <%s>\\n\"\n\
+\"Language-Team: %s <%s>\\n\"\n\
+\"MIME-Version: %s\\n\"\n\
+\"Content-Type: text/plain; charset=%s\\n\"\n\
+\"Content-Transfer-Encoding: %s\\n\"\n\n",
+		filename, author, email,
+		filename,
+		header->pot_date, header->po_date,
+		header->translator, header->tr_email,
+		language, lg, header->mime_version,
+		header->charset, header->encoding);
+
+	while((line = gtranslator_utils_getline(text_file)) !=NULL)
 	{
-
 		/*
 		 * Every newline should separate a "message".
 		 */
 		g_strchomp(line);
 		
-		if((!line[0] || line[0]=='\n') && str)
+		if((!line[0] || line[0]=='\n') && string)
 		{
-			g_message("DEBUG>> msgid \"%s\"\nmsgstr \"\"\n", str);
+			fprintf(po_file, "msgid \"%s\"\nmsgstr \"\"\n\n",
+				string);
+
+			GTR_FREE(string);
 		}
 		else
 		{
-			/*
-			 * Rescue & append all the lines till the next newline.
-			 */
-			stuff=g_strdup(str);
-		    	GTR_FREE(str);
-
-			str=g_strdup_printf("%s\n%s", stuff, line);
-			GTR_FREE(stuff);
+			string=g_strdup(line);
 		}
 	}
 
-	fclose(f);
+	fclose(text_file);
+	fclose(po_file);
 	return TRUE;
 }
 
