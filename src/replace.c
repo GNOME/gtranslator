@@ -216,8 +216,8 @@ static void replace_core(gchar **string, GtrReplace *rstuff)
 					
 					zup=*string;
 					i=strstr(zup, rstuff->string);
-					/* FIXME TODO FIXME */
-					g_warning("Write Replace Code!");
+					g_message("For %s (to replace with %s): %s.",
+						zup, rstuff->replace_string, i);
 				}
 								
 				g_free(*string);

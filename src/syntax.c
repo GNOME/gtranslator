@@ -153,7 +153,19 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				color = get_color_from_type(COLOR_NUMBER);
 
 				break;
-		
+
+			/*
+			 * "Special characters":
+			 */
+			case '·':
+				clear_string(string);
+
+				append_char(string, msg[cp]);
+
+				color = get_color_from_type(COLOR_SPECIAL_CHAR);
+
+				break;
+
 			/*
 			 * Punctuation characters:
 			 */

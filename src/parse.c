@@ -207,7 +207,8 @@ gboolean actual_parse(void)
 				msg->comment = tmp;
 			}
 		}
-		else if(strstr(msg->comment, "#~ msgstr") && g_strstrip(line))
+		else if(msg->comment && 
+			strstr(msg->comment, "#~ msgstr") && g_strstrip(line))
 		{
 			/*
 			 * Catch up the extralong obsolete messages and make
@@ -361,7 +362,7 @@ void parse(const gchar *filename)
 		gnome_app_error(GNOME_APP(app1), error);
 		
 		g_free(error);
-		
+
 		return;
 	}
 
@@ -598,7 +599,7 @@ static gboolean actual_write(const gchar * name)
 		 */ 
 		if(!po->header->comment)
 		{
-			po->header->comment="#   -- edited with gtranslator.\n";
+			po->header->comment="#\n#   -- edited with gtranslator.\n#\n";
 		}
 		
 		/*
