@@ -20,6 +20,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include "actions.h"
 #include "comment.h"
 #include "dialogs.h"
