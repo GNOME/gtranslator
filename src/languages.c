@@ -121,7 +121,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("French"), "fr", "iso-8859-1",
-	 "traduc@traduc.org", "8bit"
+	 "gnomefr@traduc.org", "8bit"
 	},
 	{
 	 N_("Galician"), "gl", "iso-8859-1",
