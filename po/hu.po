@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gtranslator 0.30\n"
-"POT-Creation-Date: 2001-06-18 14:49+0200\n"
-"PO-Revision-Date: 2001-06-18 14:58+0200\n"
+"POT-Creation-Date: 2001-06-26 10:26+0200\n"
+"PO-Revision-Date: 2001-06-26 10:28+0200\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian GNOME team <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -108,11 +108,11 @@ msgstr "Add meg a keresendõ karakterláncot: "
 msgid "Case sensitive"
 msgstr "Kis- és nagybetû megkülönböztetése"
 
-#: src/dialogs.c:490 src/languages.h:122
+#: src/dialogs.c:490 src/languages.h:120
 msgid "English"
 msgstr "Angol"
 
-#: src/dialogs.c:496 src/dialogs.c:594 src/gui.c:367
+#: src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
 msgid "Translated"
 msgstr "Lefordított"
 
@@ -276,45 +276,41 @@ msgstr ""
 "Nem található:\n"
 "\"%s\""
 
-#: src/gtkspell.c:606
-msgid "View URL..."
-msgstr "URL megnyitása..."
-
 #.
 #. * Create the app
 #.
-#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:164 src/parse.c:761
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:172 src/parse.c:761
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:354
+#: src/gui.c:385
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i Fuzzy maradt ]"
 
-#: src/gui.c:354 src/gui.c:358 src/menus.c:348
+#: src/gui.c:385 src/gui.c:389 src/menus.c:348
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
-#: src/gui.c:358
+#: src/gui.c:389
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nem maradt fuzzy ]"
 
-#: src/gui.c:365
+#: src/gui.c:396
 msgid "Stick"
 msgstr "Eredeti"
 
-#: src/gui.c:376
+#: src/gui.c:407
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i fordítatlan maradt ]"
 
-#: src/gui.c:376 src/gui.c:378
+#: src/gui.c:407 src/gui.c:409
 msgid "Untranslated"
 msgstr "Fordítatlan"
 
-#: src/gui.c:378
+#: src/gui.c:409
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Nincs fordítatlan ]"
@@ -322,7 +318,7 @@ msgstr "%s [ Nincs fordítatlan ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:389
+#: src/gui.c:421
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "%d / %d üzenet / Állapot: %s"
@@ -446,300 +442,304 @@ msgstr ""
 "\"%s\" HTML kimenete. Létrehozta a <a href=\"http://www.gtranslator.org"
 "\">gtranslator</a> %s változata."
 
-#: src/languages.h:66
+#: src/languages.h:64
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
-#: src/languages.h:70
+#: src/languages.h:68
 msgid "Arabic"
 msgstr "Arab"
 
-#: src/languages.h:74
+#: src/languages.h:72
 msgid "Azerbaijani Turkish"
 msgstr "Azerbajdzsáni török"
 
-#: src/languages.h:78
+#: src/languages.h:76
 msgid "Basque"
 msgstr "Baszk"
 
-#: src/languages.h:82
+#: src/languages.h:80
 msgid "Bielorussian"
 msgstr "Fehérorosz"
 
-#: src/languages.h:86
+#: src/languages.h:84
 msgid "Britton"
 msgstr "Breton"
 
-#: src/languages.h:90
+#: src/languages.h:88
 msgid "Bulgarian"
 msgstr "Bolgár"
 
-#: src/languages.h:94
+#: src/languages.h:92
 msgid "Catalan"
 msgstr "Katalán"
 
-#: src/languages.h:98
+#: src/languages.h:96
 msgid "Chinese/Simplified"
 msgstr "Kínai/Egyszerûsített"
 
-#: src/languages.h:102
+#: src/languages.h:100
 msgid "Chinese/Traditional"
 msgstr "Kínai/Tradícionális"
 
-#: src/languages.h:106
+#: src/languages.h:104
 msgid "Croatian"
 msgstr "Horvát"
 
-#: src/languages.h:110
+#: src/languages.h:108
 msgid "Czech"
 msgstr "Cseh"
 
-#: src/languages.h:114
+#: src/languages.h:112
 msgid "Danish"
 msgstr "Dán"
 
-#: src/languages.h:118
+#: src/languages.h:116
 msgid "Dutch"
 msgstr "Holland"
 
-#: src/languages.h:126
+#: src/languages.h:124
 msgid "English/Canada"
 msgstr "Angol/Kanada"
 
-#: src/languages.h:130
+#: src/languages.h:128
 msgid "English/GB"
 msgstr "Angol/Brit"
 
-#: src/languages.h:134
+#: src/languages.h:132
 msgid "English/USA"
 msgstr "Angol/USA"
 
-#: src/languages.h:138
+#: src/languages.h:136
+msgid "Esperanto"
+msgstr "Eszperantó"
+
+#: src/languages.h:140
 msgid "Estonian"
 msgstr "Észt"
 
-#: src/languages.h:142
+#: src/languages.h:144
 msgid "Farsi"
 msgstr "Farsi"
 
-#: src/languages.h:146
+#: src/languages.h:148
 msgid "Finnish"
 msgstr "Finn"
 
-#: src/languages.h:150
+#: src/languages.h:152
 msgid "French"
 msgstr "Francia"
 
-#: src/languages.h:154
+#: src/languages.h:156
 msgid "Galician"
 msgstr "Galíciai"
 
-#: src/languages.h:158
+#: src/languages.h:160
 msgid "German"
 msgstr "Német"
 
-#: src/languages.h:162
+#: src/languages.h:164
 msgid "Greek"
 msgstr "Görög"
 
-#: src/languages.h:166
+#: src/languages.h:168
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: src/languages.h:170
+#: src/languages.h:172
 msgid "Indonesian"
 msgstr "Indonéz"
 
-#: src/languages.h:174
+#: src/languages.h:176
 msgid "Italian"
 msgstr "Olasz"
 
-#: src/languages.h:178
+#: src/languages.h:180
 msgid "Irish"
 msgstr "Ír"
 
-#: src/languages.h:182
+#: src/languages.h:184
 msgid "Japanese"
 msgstr "Japán"
 
-#: src/languages.h:186
+#: src/languages.h:188
 msgid "Korean"
 msgstr "Koreai"
 
-#: src/languages.h:190
+#: src/languages.h:192
 msgid "Latvian"
 msgstr "Lett"
 
-#: src/languages.h:194
+#: src/languages.h:196
 msgid "Lithuanian"
 msgstr "Litván"
 
-#: src/languages.h:198
+#: src/languages.h:200
+msgid "Malay/Bahasa Melayu"
+msgstr "Maláj/Bahasa Melaju"
+
+#: src/languages.h:204
+msgid "Maltese"
+msgstr "Máltai"
+
+#: src/languages.h:208
 msgid "Norwegian/Bokmaal"
 msgstr "Norvég/Bokmaal"
 
-#: src/languages.h:202
+#: src/languages.h:212
 msgid "Norwegian/Nynorsk"
 msgstr "Norvég/Nynorsk"
 
-#: src/languages.h:206
+#: src/languages.h:216
 msgid "Polish"
 msgstr "Lengyel"
 
-#: src/languages.h:210
+#: src/languages.h:220
 msgid "Portuguese"
 msgstr "Portugál"
 
-#: src/languages.h:214
+#: src/languages.h:224
 msgid "Portuguese/Brazil"
 msgstr "Portugál/Brazil"
 
-#: src/languages.h:218
+#: src/languages.h:228
 msgid "Romanian"
 msgstr "Román"
 
-#: src/languages.h:222
+#: src/languages.h:232
 msgid "Russian"
 msgstr "Orosz"
 
-#: src/languages.h:226
+#: src/languages.h:236
 msgid "Serbian/Cyrillic"
 msgstr "Szerb/Ciril"
 
-#: src/languages.h:230
+#: src/languages.h:240
 msgid "Serbian/Latin"
 msgstr "Szerb/Latin"
 
-#: src/languages.h:234
-msgid "Slovakian"
+#: src/languages.h:244
+msgid "Slovak"
 msgstr "Szlovák"
 
-#: src/languages.h:238
+#: src/languages.h:248
 msgid "Slovenian"
 msgstr "Szlovén"
 
-#: src/languages.h:242
+#: src/languages.h:252
 msgid "Spanish"
 msgstr "Spanyol"
 
-#: src/languages.h:246
+#: src/languages.h:256
 msgid "Spanish/Spain"
 msgstr "Spanyol/Spanyolország"
 
-#: src/languages.h:250
+#: src/languages.h:260
 msgid "Spanish/Mexico"
 msgstr "Spanyol/Mexikó"
 
-#: src/languages.h:254
+#: src/languages.h:264
 msgid "Swedish"
 msgstr "Svéd"
 
-#: src/languages.h:258
+#: src/languages.h:268
 msgid "Tamil"
 msgstr "Tamil"
 
-#: src/languages.h:262
+#: src/languages.h:272
 msgid "Thai"
 msgstr "Thai"
 
-#: src/languages.h:266
+#: src/languages.h:276
 msgid "Turkish"
 msgstr "Török"
 
-#: src/languages.h:270
+#: src/languages.h:280
 msgid "Ukrainian"
 msgstr "Ukrán"
 
-#: src/languages.h:274
+#: src/languages.h:284
 msgid "Uzbekian"
 msgstr "Üzbég"
 
-#: src/languages.h:278
+#: src/languages.h:288
 msgid "Vietnamese"
 msgstr "Vietnámi"
 
-#: src/languages.h:282
+#: src/languages.h:292
 msgid "Walloon"
 msgstr "Vallon"
 
-#: src/languages.h:286
+#: src/languages.h:296
 msgid "Welsh"
 msgstr "Velszi"
 
-#: src/main.c:78
+#: src/main.c:77
 msgid "Show build informations/specifications"
 msgstr "Build információk/specifikációk"
 
-#: src/main.c:82
+#: src/main.c:81
 msgid "Specify main window geometry"
 msgstr "A fõablak geometriájának megadása"
 
-#: src/main.c:82
+#: src/main.c:81
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: src/main.c:86
+#: src/main.c:85
 msgid "Don't load any backend modules"
 msgstr "Nem tölt be elõfeldolgozó modulokat"
 
-#: src/main.c:90
+#: src/main.c:89
 msgid "Define another query-domains directory"
 msgstr "Másik lekérdezési tartomány könyvtárának megadása"
 
-#: src/main.c:90
+#: src/main.c:89
 msgid "LOCALEDIR"
 msgstr "LOCALEDIR"
 
-#: src/main.c:94
-msgid "Syntax color scheme to use"
-msgstr "Nyelvtani elemek kiemeléséhez használt színséma megadása"
-
-#: src/main.c:94
-msgid "SCHEMEFILE"
-msgstr "SCHEMEFILE"
-
-#: src/main.c:98
+#: src/main.c:93
 msgid "HTML file to write to"
 msgstr "A HTML fájl kiírása ide:"
 
-#: src/main.c:98
+#: src/main.c:93
 msgid "HTMLFILE"
 msgstr "HTMLFILE"
 
-#: src/main.c:143
+#: src/main.c:138
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Hiba a GConf inicializálásakor: %s."
 
-#: src/main.c:166
+#: src/main.c:161
 msgid "gtranslator build informations/specs:"
 msgstr "gtranslator build információk/specifikációk"
 
-#: src/main.c:168
+#: src/main.c:163
 msgid "Version and build date:"
 msgstr "Verziószám és a buildelés dátuma:"
 
-#: src/main.c:170
+#: src/main.c:165
 msgid "Build-Glib/Gtk+/Gnome versions:"
 msgstr "Build-Glib/Gtk+/Gnome verziók:"
 
-#: src/main.c:172
+#: src/main.c:167
 msgid "Backends directory:"
 msgstr "Elõfeldolgozók könyvtára:"
 
-#: src/main.c:174
+#: src/main.c:169
 msgid "Colorschemes directory:"
 msgstr "Színsémák könyvtára:"
 
-#: src/main.c:176
+#: src/main.c:171
 msgid "Scripts directory:"
 msgstr "Parancsfájlok könyvtára:"
 
-#: src/main.c:178
+#: src/main.c:173
 msgid "Window icon:"
 msgstr "Ablak ikonja:"
 
-#: src/main.c:180
+#: src/main.c:175
 msgid "Own locale directory:"
 msgstr "Saját locale könyvtára:"
 
@@ -747,14 +747,14 @@ msgstr "Saját locale könyvtára:"
 #. * The bad case; print a warning and set our module
 #. *  list to NULL.
 #.
-#: src/main.c:204
+#: src/main.c:199
 msgid ""
 "Unfortunately your GModule implementation doesn't support loading dynamic "
 "modules!"
 msgstr ""
 "Sajnos a GModule megvalósításod nem támogatja dinamikus modulok betöltését!"
 
-#: src/main.c:220
+#: src/main.c:213
 msgid "gtranslator won't load any backend module..."
 msgstr "A gtranslator nem fog elõfeldolgozó modulokat betölteni..."
 
@@ -1077,11 +1077,6 @@ msgstr "Nincs több fuzzy üzenet."
 msgid "All messages seem to be translated."
 msgstr "Úgy tûnik, minden üzenet le van fordítva."
 
-#: src/open-differently.c:134 src/open-differently.c:182
-#: src/open-differently.c:276
-msgid "uncompression"
-msgstr "kitömörítõ"
-
 #: src/open-differently.c:161
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
@@ -1387,7 +1382,7 @@ msgstr "Automatikus mentés végzõdése:"
 msgid "Autosave timeout in minutes:"
 msgstr "Automatikus mentés ennyi percenként:"
 
-#: src/prefs.c:444
+#: src/prefs.c:452
 msgid ""
 "With the Preferences box you can define some variables\n"
 "with which you can make gtranslator make more work\n"
@@ -1444,17 +1439,7 @@ msgstr "Formátum"
 msgid "Hotkey"
 msgstr "Parancsbillenytû"
 
-#.
-#. * What to say else? This signals doesn't seem
-#. *  interesting for us but should still get a
-#. *   warning message.
-#.
-#: src/sighandling.c:85
-#, c-format
-msgid "Uncatched signal %i!"
-msgstr "El nem kapott jelzés: %i!"
-
-#: src/stylistics.c:237
+#: src/stylistics.c:238
 msgid "No font set! Using default font"
 msgstr "Nincs betûkészlet beállítva, használom az alapértelmezettet."
 
@@ -1462,7 +1447,7 @@ msgstr "Nincs betûkészlet beállítva, használom az alapértelmezettet."
 #. * Use gtranslator's font in this case -- should be a fallback font
 #. *  for your language.
 #.
-#: src/stylistics.c:243
+#: src/stylistics.c:244
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
@@ -1531,19 +1516,15 @@ msgstr ""
 msgid "The file `%s' is already open in another instance of gtranslator!"
 msgstr "`%s' fájl már meg van nyitva egy másik gtranslator példányban!"
 
-#.
-#. * Translators: The first format stands for a program_type and is something
-#. *  like "uncompression", "compression" or something similar.
-#. *
-#. * An example output would be:
-#. * The necessary uncompression program `gunzip' is missing!
-#. *               ^^^^^^^^^^^^^          ^^^^^^
-#. *               First %s               Second %s
-#.
-#: src/utils_gui.c:423
+#: src/utils_gui.c:416
 #, c-format
-msgid "The necessary %s program `%s' is missing!"
-msgstr "Hiányzik a szükséges %s program: `%s'!"
+msgid "The necessary decompression program `%s' is missing!"
+msgstr "Hiányzik a szükséges kitömörítõ program: `%s'!"
+
+#: src/utils_gui.c:421
+#, c-format
+msgid "The necessary compression program `%s' is missing!"
+msgstr "Hiányzik a szükséges tömörítõprogram: `%s'!"
 
 #: src/vfs-handle.c:125
 #, c-format
@@ -1671,6 +1652,21 @@ msgstr "po fájl megnyitása"
 #: data/ui/nautilus-gtranslator-view-ui.xml.h:4
 msgid "_File"
 msgstr "_Fájl"
+
+#~ msgid "View URL..."
+#~ msgstr "URL megnyitása..."
+
+#~ msgid "Syntax color scheme to use"
+#~ msgstr "Nyelvtani elemek kiemeléséhez használt színséma megadása"
+
+#~ msgid "SCHEMEFILE"
+#~ msgstr "SCHEMEFILE"
+
+#~ msgid "uncompression"
+#~ msgstr "kitömörítõ"
+
+#~ msgid "Uncatched signal %i!"
+#~ msgstr "El nem kapott jelzés: %i!"
 
 #~ msgid "gtranslator -- color scheme selection"
 #~ msgstr "gtranslator -- színséma-választó"
