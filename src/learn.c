@@ -64,10 +64,29 @@ GtrLearnBuffer		*gtranslator_learn_buffer;
  * Do the hard internal work -- mostly GHashTable related.
  */
 static void gtranslator_learn_buffer_hash_from_current_node(void);
-static void gtranslator_learn_buffer_free_hash_entry(gpointer key, gpointer value, gpointer useless);
-static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer value, gpointer useless);
+static void gtranslator_learn_buffer_free_hash_entry(gpointer key, 
+	gpointer value, gpointer useless);
+static void gtranslator_learn_buffer_write_hash_entry(gpointer key, 
+	gpointer value, gpointer useless);
 
 static void gtranslator_learn_buffer_set_umtf_date(void);
+static void gtranslator_learn_set_xml_prop(xmlNodePtr node,
+	const gchar *prop, const gchar *prop_content);
+
+/*
+ * Simply sets the given XML property safely.
+ */
+static void gtranslator_learn_set_xml_prop(xmlNodePtr node, 
+        const gchar *prop, const gchar *prop_content)
+{
+	g_return_if_fail(node!=NULL);
+	g_return_if_fail(prop!=NULL);
+
+	if(prop_content && prop_content[0]!='\0')
+	{
+		xmlSetProp(node, prop, prop_content);
+	}
+}
 
 /*
  * Hash the entries from the given node point.
@@ -82,31 +101,49 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 	original = translation = NULL;
 
 	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
-	node=gtranslator_learn_buffer->current_node;
+	node=gtranslator_learn_buffer->current_node->xmlChildrenNode;
 
 	while(node && nautilus_strcasecmp(node->name, "value"))
 	{
 		node=node->next;
 	}
 
+	/*
+	 * Get the original message's value by the <value> node.
+	 */
 	if(node && !nautilus_strcasecmp(node->name, "value"))
 	{
 		original=xmlNodeListGetString(gtranslator_learn_buffer->doc,
 			node->xmlChildrenNode, 1);
 	}
 
+	/*
+	 * Cruise through the nodes searching the next <translation> node.
+	 */
 	while(node && nautilus_strcasecmp(node->name, "translation"))
 	{
 		node=node->next;
 	}
 
-	if(node)
+	/*
+	 * If there's a translation node with content then we can use the node
+	 *  for further extraction.
+	 */
+	if(node && node->xmlChildrenNode)
 	{
+		node=node->xmlChildrenNode;
+		
+		/*
+		 * Now go for the <value> node under the <translation> node.
+		 */
 		while(node && nautilus_strcasecmp(node->name, "value"))
 		{
 			node=node->next;
 		}
 
+		/*
+		 * Here we do get the node contents.
+		 */
 		if(node && !nautilus_strcasecmp(node->name, "value"))
 		{
 			translation=xmlNodeListGetString(gtranslator_learn_buffer->doc,
@@ -114,6 +151,9 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 		}
 	}
 
+	/*
+	 * If we did find both node contents then we can insert'em into "our" hash.
+	 */
 	if(original && translation)
 	{
 		g_hash_table_insert(gtranslator_learn_buffer->hash, 
@@ -220,7 +260,7 @@ void gtranslator_learn_init()
 		gtranslator_learn_buffer->doc=xmlParseFile(gtranslator_learn_buffer->filename);
 		g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
 
-		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode;
+		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode->xmlChildrenNode;
 		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 
 		node=gtranslator_learn_buffer->current_node;
@@ -229,7 +269,7 @@ void gtranslator_learn_init()
 		 * Parse the message entry via gtranslator_learn_buffer_hash_from_current_node
 		 *  function.
 		 */
-		while(node && node->name)
+		while(node!=NULL)
 		{
 			/*
 			 * Read in the serial number.
@@ -318,6 +358,14 @@ void gtranslator_learn_shutdown()
 	gtranslator_learn_buffer->doc=xmlNewDoc("1.0");
 
 	/*
+	 * Set the encoding of the XML file to get a cleanly-structured XML document.
+	 */
+	if(mime)
+	{
+		gtranslator_learn_buffer->doc->encoding=g_strdup(mime);
+	}
+
+	/*
 	 * Set up the main <umtf> document root node and set it's version attribute.
 	 */
 	root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, "umtf", NULL);
@@ -328,37 +376,18 @@ void gtranslator_learn_shutdown()
 	 * Set the header <language> tag with language informations.
 	 */
 	language_node=xmlNewChild(root_node, NULL, "language", NULL);
-
-	if(language)
-	{
-		xmlSetProp(language_node, "ename", language);
-		xmlSetProp(language_node, "name", _(language));
-	}
-
-	if(lc)
-	{
-		xmlSetProp(language_node, "code", lc);
-	}
-
-	if(lg)
-	{
-		xmlSetProp(language_node, "email", lg);
-	}
+	
+	gtranslator_learn_set_xml_prop(language_node, "ename", language);
+	gtranslator_learn_set_xml_prop(language_node, "code", lc);
+	gtranslator_learn_set_xml_prop(language_node, "email", lg);
 
 	/*
 	 * Set <translator> node with translator informations -- if available.
 	 */
 	translator_node=xmlNewChild(root_node, NULL, "translator", NULL);
-
-	if(author)
-	{
-		xmlSetProp(translator_node, "name", author);
-	}
-
-	if(email)
-	{
-		xmlSetProp(translator_node, "email", email);
-	}
+	
+	gtranslator_learn_set_xml_prop(translator_node, "name", author);
+	gtranslator_learn_set_xml_prop(translator_node, "email", email);
 
 	/*
 	 * Set the UMTF date string for our internal GtrLearnBuffer.
