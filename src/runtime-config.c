@@ -70,12 +70,11 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 	/*
 	 * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
 	 *
-	 * Translators: you should translate this empty string to avoid the
-	 *  usage of the mid dot ('·') in the displaying routines.
-	 *
-	 *   The contents of your translation are irrelevant in this case.
+	 * Translators: you should translate this foo'sh string into something
+	 *  another then a 'Y' to avoid the usage of the mid dot ('·') in the
+	 *   text displaying routines of gtranslator.
 	 */
-	if (_("")[0]=='\0')
+	if (_("Y")[0]=='Y')
 	{
 		gchar *middot=NULL;
 		gchar *encoding=NULL;
@@ -90,6 +89,10 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		}
 		else
 		{
+			/*
+			 * Translators: this character is used if the middle dot
+			 *  can't be used under your locale.
+			 */
 			config->special_char=_("^")[0];
 		}
         }

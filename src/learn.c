@@ -826,7 +826,9 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
 	 *   the learn buffer/language settings of the user.
 	 */
 	fprintf(file, 
-"\n\"Project-Id-Version: gtranslator-learn-buffer %i\\n\"\n"
+"\nmsgid \"\"\n"
+"msgstr \"\"\n"
+"\"Project-Id-Version: gtranslator-learn-buffer %i\\n\"\n"
 "\"POT-Creation-Date: %s\\n\"\n"
 "\"PO-Revision-Date: %s\\n\"\n"
 "\"Last-Translator: %s <%s>\\n\"\n"

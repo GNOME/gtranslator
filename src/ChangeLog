@@ -1,3 +1,13 @@
+2002-03-17  Fatih Demir <kabalak@gtranslator.org>
+
+	* learn.c: Grr, corrected a stupido error in the po file exporting
+		routines of the learn buffer sources.
+
+	* runtime-config.c: Changed the middle dot receiption routine a bit to
+		be a bit more clever -- Carlos pointer rightly out that the
+		 empty string "" is already preserved/used by gettext for the
+		  po files' headers so we shouldn't interfere with it.
+
 2002-03-16  Fatih Demir <kabalak@gtranslator.org>
 
 	* message.c: Merged in Peeter's change in HEAD to avoid the pointer
