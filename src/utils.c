@@ -607,10 +607,20 @@ gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
 	 */
 	if(strlen(a) > strlen(b))
 	{
+		if(!g_strncasecmp(a, b, (strlen(a) - 1)))
+		{
+			return 100.0;
+		}
+
 		one_char_percentage=(100 / (strlen(a) - 1));
 	}
 	else
 	{
+		if(!g_strncasecmp(b, a, (strlen(b) - 1)))
+		{
+			return 100.0;
+		}
+
 		one_char_percentage=(100 / (strlen(b) - 1));
 	}
 
@@ -620,11 +630,15 @@ gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
 	 */
 	while(a[i] && b[i] && a[i]!='\0' && b[i]!='\0')
 	{
-		if(a[i]==b[i])
+		if((a[i] <= 32) || (b[i] <= 32))
+		{
+			continue;
+		}
+		else if(a[i]==b[i])
 		{
 			similarity+=one_char_percentage;
 		}
-		else if(tolower(a[i])==tolower(b[i]))
+		else if((tolower(a[i]))==(tolower(b[i])))
 		{
 			similarity+=(one_char_percentage / 2);
 		}
@@ -632,7 +646,14 @@ gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
 		i++;
 	}
 
-	return similarity;
+	if(similarity >= 100.0)
+	{
+		return 100.0;
+	}
+	else
+	{
+		return similarity;
+	}
 }
 
 /*

@@ -59,6 +59,13 @@ void gtranslator_preferences_init_default_values()
 		gtranslator_config_set_bool("toggles/use_learn_buffer", TRUE);
 		gtranslator_config_set_bool("toggles/fuzzy_matching", FALSE);
 		gtranslator_config_set_bool("toggles/load_backends", TRUE);
+		gtranslator_config_set_bool("toggles/highlight", TRUE);
+
+		/*
+		 * And this should be kept FALSE for now -- maybe it'll get
+		 *  also TRUE in future when this works more sanely :-)
+		 */
+		gtranslator_config_set_bool("toggles/check_formats", FALSE);
 		
 		/*
 		 * GUI related default values.

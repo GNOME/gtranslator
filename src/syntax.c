@@ -295,7 +295,7 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 	gint k, i;
 	
 	/************************/
-	
+
 	extern gboolean nosyntax;
 	
 	g_return_val_if_fail(textwidget!=NULL, NULL);
@@ -314,7 +314,7 @@ GString *gtranslator_parse_syntax(GtkEditable *textwidget)
 	}
 
 
-	if(nosyntax)
+	if(nosyntax || !GtrPreferences.highlight)
 	{
 		gint i;
 		/* The foreground color is always the same */

@@ -54,7 +54,9 @@ struct {
 	guint fill_header		: 1;
 	guint update_function		: 1;
 	guint rambo_function		: 1;
+	guint highlight			: 1;
 	guint dot_char			: 1;
+	guint zchar			: 32;
 	guint popup_menu		: 1;
 	guint check_recent_file		: 1;
 	guint use_own_fonts		: 1;

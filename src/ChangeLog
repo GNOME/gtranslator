@@ -1,3 +1,23 @@
+2002-02-11  Fatih Demir <kabalak@gtranslator.org>
+
+	* prefs.c: Break the string freeze -- add a syntax highlighting pref.
+
+	* prefs_init.c: Initialize the new preferences of the last time with
+		sane values for the init process.
+
+	* syntax.c: Also respect the "GtrPreferences.highlight" pref like the
+		"nosyntax" gboolean from main.c in the syntax highlighting
+		  function.
+
+	* prefs.c/.h: Added "toggles/highlight" backend preference -- it's read
+		and saved now, but isn't present in the GUI yet.. hmm.
+
+	* utils.c: Extended the similarity calculating function with another
+		piece of voodoo salt -- perfect taste not guaranteed ;-)
+
+	* syntax-elements.h: Updated the keywords list with some useful words
+		in the field of computing and removed a nonsense prefix.
+
 2002-01-27  Fatih Demir <kabalak@gtranslator.org>
 
 	* formats.c & learn.c: Applied Ryan Murray's multiline message patch
