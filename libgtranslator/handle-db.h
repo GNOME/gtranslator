@@ -20,8 +20,8 @@
 #include <parse-db.h>
 
 /**
-* Addes a node to the doc.
+* Addes a node to the given doc.
 **/
-gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent);
+gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodecontent);
 
 #endif

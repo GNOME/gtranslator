@@ -3,7 +3,7 @@
 ##
 ## The mime dirs
 ## 
-Mimeicondir = $(sharedir)/pixmaps/mc
+Mimeicondir = $(datadir)/pixmaps/mc
 Mimeinfofilesdir = $(datadir)/mime-info
 
 ##

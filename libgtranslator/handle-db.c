@@ -17,15 +17,9 @@
 #include "handle-db.h"
 
 /**
-* Two simple macros.
+* Adds a node to the given doc.
 **/
-#define FREE_NODE(x); if(x!=NULL) { xmlFreeNode(x); }
-#define FREE_PROP(x); if(x!=NULL) { xmlFreeProp(x); }
-
-/**
-* Adds a node to the doc.
-**/
-gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
+gint gtranslator_add_node_to_doc(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 {
 	/**
 	* Check if a nodename has been defined.
@@ -41,7 +35,7 @@ gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 	if(!nodecontent)
 	{
 		g_warning(_("No content for the node `%s' given! Leaving node empty.."),nodename);
-		nodecontent=" ";	
+		nodecontent="";	
 	}
 	/**
 	* Check the doc.
@@ -57,24 +51,34 @@ gint add_node(xmlDocPtr doc,gchar *nodename,gchar *nodecontent)
 		* Hmm, open and add the node.
 		**/
 		xmlNodePtr newnode, addnode=NULL;
-		xmlAttrPtr attr;
 		/**
 		* Get the nodes.
 		**/
 		newnode=doc->xmlRootNode->xmlChildrenNode;
+		/**
+		* Again a simply check.
+		**/
 		if(!newnode)
 		{
 			g_warning(_("Couldn't get the nodes!"));
 				return 0;
 		}
-		attr=xmlSetProp(addnode, nodename, nodecontent);
-		addnode=xmlAddChild(newnode,addnode);
+		/**
+		* Set the node properties with the given parameters.
+		**/
+		addnode=xmlNewDocNode(doc, NULL, nodename, nodecontent);
+		xmlAddChild(newnode,addnode);
 		/**
 		* Free all the stuff.
 		**/
-		FREE_NODE(addnode);
-		FREE_NODE(newnode);
-		FREE_PROP(attr);
+		if(newnode)
+		{
+			xmlFreeNode(newnode);
+		}
+		if(addnode)
+		{	
+			xmlFreeNode(addnode);
+		}	
 		/**
 		* Return a value != 0.
     		**/

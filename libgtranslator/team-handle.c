@@ -45,6 +45,7 @@ void team_handle_new(gchar *team_code)
 		xmlNodePtr root,tmp;
 		root=xmlNewDocNode(teamlist,NULL,"teams",NULL);
 		tmp=xmlDocSetRootElement(teamlist,root);
+		xmlChildNode(root,tmp);
 		/**
 		* Save the file now.
 		**/
@@ -87,8 +88,14 @@ void team_handle_new(gchar *team_code)
 		/**
 		* Free the node & the attribute pointers.
 		**/
-		xmlFreeNode(newnode);
-		xmlFreeProp(attribute);
+		if(newnode)
+		{
+			xmlFreeNode(newnode);
+		}
+		if(attribute)
+		{
+			xmlFreeProp(attribute);
+		}	
 	}
 }
 
