@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.20\n"
-"POT-Creation-Date: 2000-09-11 18:22+0200\n"
-"PO-Revision-Date: 2000-09-11 18:22+0200\n"
+"Project-Id-Version: gtranslator 0.21\n"
+"POT-Creation-Date: 2000-09-13 19:07+0200\n"
+"PO-Revision-Date: 2000-09-13 19:07+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,13 +85,13 @@ msgstr "Son iletiye git"
 msgid "_Go to..."
 msgstr "_Git ..."
 
-#: src/gui.c:121 src/gui.c:249
+#: src/gui.c:121 src/gui.c:253
 msgid "Goto specified message number"
 msgstr "Belirtilen iletiye git"
 
 #: src/gui.c:126
-msgid "Next fuzz_y"
-msgstr "Ilerideki _fuzzy"
+msgid "Next fuz_zy"
+msgstr "Ilerideki fuz_zy"
 
 #: src/gui.c:127
 msgid "Go to next fuzzy message"
@@ -101,7 +101,7 @@ msgstr "Önümüzdeki fuzzy iletiye geç"
 msgid "Next _untranslated"
 msgstr "Ilerideki _tercüme edilmemiþ ileti"
 
-#: src/gui.c:133
+#: src/gui.c:133 src/gui.c:249
 msgid "Go to next untranslated message"
 msgstr "Önümüzdeki tercüme edilmemiþ iletiye git"
 
@@ -206,29 +206,33 @@ msgid "Last"
 msgstr "Son"
 
 #: src/gui.c:248
+msgid "Untranslated"
+msgstr "Tercümesiz"
+
+#: src/gui.c:252
 msgid "GoTo"
 msgstr "Git"
 
-#: src/dialogs.c:201 src/gui.c:253
+#: src/dialogs.c:201 src/gui.c:256
 msgid "Find"
 msgstr "Bul"
 
-#: src/gui.c:254
+#: src/gui.c:257
 msgid "Find string in po-file"
 msgstr "Po dosyasýnda bul"
 
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:354
+#: src/gui.c:358
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gui.c:433
+#: src/gui.c:437
 msgid "Bye bye!"
 msgstr "Güle Güle!"
 
-#: src/gui.c:539
+#: src/gui.c:543
 #, c-format
 msgid "Message: %d / %d"
 msgstr "Ileti: %d / %d"
@@ -293,7 +297,7 @@ msgstr "Ikisindede"
 msgid "Find in: "
 msgstr "Burada bul : "
 
-#: src/dialogs.c:260
+#: src/dialogs.c:264
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt çalýþtýrýlýrken bir hata oldu:\n"
 
@@ -500,7 +504,7 @@ msgid ""
 "%s"
 msgstr "%s baþarýyla denetlendi"
 
-#: src/find.c:74
+#: src/find.c:84
 #, c-format
 msgid ""
 "Could not find\n"
@@ -509,11 +513,11 @@ msgstr ""
 "\"%s\"'yi\n"
 "bulamadým"
 
-#: src/find.c:94
+#: src/find.c:110
 msgid "There are no more fuzzy messages"
 msgstr "Fuzzy ileti kalmamýþ ki"
 
-#: src/find.c:112
+#: src/find.c:134
 msgid "All messages seem to be translated"
 msgstr "Yekin iletileri tercüme edilmiþ gibi"
 
@@ -559,11 +563,11 @@ msgstr "Altsýnýf dosya `%s.xml''i bulamadým.\n"
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Üst sýnýf dosya `%s.xml''i deniyorum ...\n"
 
-#: libgtranslator/parse-db.c:137
+#: libgtranslator/parse-db.c:133
 msgid "The message db file is empty!"
 msgstr "Ileti/tercüme tabaný dosyasý boþ!"
 
-#: libgtranslator/parse-db.c:143
+#: libgtranslator/parse-db.c:139
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr ""
 "Ileti/tercüme tabaný dosyasý bir ileti/tercüme tabaný dosyasýna benzemiyor."
@@ -586,20 +590,20 @@ msgstr "`%s' birimini ekleyecek doküman açýk deðil ki\n"
 msgid "Couldn't get the nodes!"
 msgstr "Birimleri alamadým !"
 
-#: libgtranslator/team-handle.c:32
+#: libgtranslator/team-handle.c:31
 msgid "No language/team code defined to register!"
 msgstr "Dil/tercüme takýmý kodunu belirtmedin ki!"
 
-#: libgtranslator/team-handle.c:67
+#: libgtranslator/team-handle.c:66
 msgid "Team is already registered!"
 msgstr "Takým zaten kayýtlý"
 
-#: libgtranslator/team-handle.c:113
+#: libgtranslator/team-handle.c:112
 #, c-format
 msgid "Teams file `teams.xml` in %s couldn't be opened!"
 msgstr "Takýmlar dosyasý `teams.xml` %s'de açýlamadý!"
 
-#: libgtranslator/team-handle.c:149
+#: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
 msgstr "Uygulamalarýn listesini geri veremedim."
 
@@ -676,100 +680,102 @@ msgid "German"
 msgstr "Almanca"
 
 #: src/languages.h:114
-msgid "Greek"
-msgstr "Yunanca"
-
-#: src/languages.h:117
 msgid "Hungarian"
 msgstr "Macarca"
 
-#: src/languages.h:120
+#: src/languages.h:117
 msgid "Indonesian"
 msgstr "Endonezce"
 
-#: src/languages.h:123
+#: src/languages.h:120
 msgid "Italian"
 msgstr "Italyanca"
 
-#: src/languages.h:126
+#: src/languages.h:123
 msgid "Irish"
 msgstr "Irlandaca"
 
-#: src/languages.h:129
+#: src/languages.h:126
 msgid "Japanese"
 msgstr "Japonca"
 
-#: src/languages.h:132
+#: src/languages.h:129
 msgid "Korean"
 msgstr "Korece"
 
-#: src/languages.h:135
+#: src/languages.h:132
 msgid "Latvian"
 msgstr "Litvanyaca"
 
-#: src/languages.h:138
+#: src/languages.h:135
 msgid "Lithuanian"
 msgstr "Litvanyaca"
 
-#: src/languages.h:141
+#: src/languages.h:138
 msgid "Norwegian/Bookmal"
 msgstr "Norveççe/Bookmal"
 
-#: src/languages.h:144
+#: src/languages.h:141
 msgid "Norwegian/Nynorsk"
 msgstr "Norveççe/Nynorsk"
 
-#: src/languages.h:147
+#: src/languages.h:144
 msgid "Polish"
 msgstr "Polanyaca"
 
-#: src/languages.h:150
+#: src/languages.h:147
 msgid "Portuguese"
 msgstr "Portekiz"
 
-#: src/languages.h:153
+#: src/languages.h:150
 msgid "Portuguese/Brazil"
 msgstr "Portekiz/Brezilya"
 
-#: src/languages.h:156
+#: src/languages.h:153
 msgid "Russian"
 msgstr "Rusça"
 
-#: src/languages.h:159
+#: src/languages.h:156
 msgid "Slovak"
 msgstr "Slovak"
 
-#: src/languages.h:162
+#: src/languages.h:159
 msgid "Spanish"
 msgstr "Ispanyolca"
 
-#: src/languages.h:165
+#: src/languages.h:162
 msgid "Spanish/Spain"
 msgstr "Ispanyolca/Ispanya"
 
-#: src/languages.h:168
+#: src/languages.h:165
 msgid "Spanish/Mexico"
 msgstr "Ispanyolca/Meksika"
 
-#: src/languages.h:171
+#: src/languages.h:168
 msgid "Swedish"
 msgstr "Isveç"
 
-#: src/languages.h:174
+#: src/languages.h:171
 msgid "Turkish"
 msgstr "Türkçe"
 
-#: src/languages.h:177
+#: src/languages.h:174
 msgid "Ukrainian"
 msgstr "Ukraynaca"
 
-#: src/languages.h:180
+#: src/languages.h:177
 msgid "Walloon"
 msgstr "Galik"
 
-#: src/languages.h:183
+#: src/languages.h:180
 msgid "Welsh"
 msgstr "Velþ"
+
+#~ msgid "Missing"
+#~ msgstr "Eksik"
+
+#~ msgid "Greek"
+#~ msgstr "Yunanca"
 
 #~ msgid "_Add the current message"
 #~ msgstr "Ileti/tercüme tabanýna _ekle"
