@@ -1,3 +1,17 @@
+2001-02-08  Fatih Demir	<kabalak@kabalak.net>
+
+	* vfs-handle.c/.h: Moved the defines to the source file
+		and changed the includes.
+
+	* Makefile.am, libgtranslator.h: Do not include the moved/
+		removed files anylonger; build only a static library
+		 to which we should link gtranslator do not install
+		  any stuff from here.
+	
+	* stylistics.c/.h & preferences.c/.h: Moved to src.
+	
+	* gtkled.c/.h & team-*: Removed these sources.
+
 2001-02-05  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* stylistics.c: fixed font loading: if no name given, set ours,

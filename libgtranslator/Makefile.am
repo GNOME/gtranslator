@@ -2,7 +2,7 @@
 
 bin_PROGRAMS = gtranslatord
 
-lib_LTLIBRARIES = libgtranslator.la
+noinst_LIBRARIES = libgtranslator.a
 
 if GCONF_IS_PRESENT
 configstuffcflags = $(GCONF_CFLAGS) $(GNOME_CFLAGS) -DGCONF_IS_PRESENT=7
@@ -25,15 +25,9 @@ INCLUDES = \
 	$(vfs_cflags) -DG_LOG_DOMAIN=\"libgtranslator\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-libgtranslator_la_SOURCES = \
+libgtranslator_a_SOURCES = \
 	$(GTRANSLATORD_SOURCES) \
-	gtkled.c \
-	preferences.c \
-	stylistics.c \
-	team-handle.c \
 	$(vfs_source)
-
-libgtranslator_la_LDFLAGS = -version-info @MAINVERSION@:@SUBVERSION@
 
 
 if GCONF_IS_PRESENT
@@ -48,27 +42,16 @@ else
 vfs_libs =
 endif
 
-libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
-	$(XML_LIBS) $(OAF_LIBS) -L/usr/X11R6/lib \
-	$(GNOMEUI_LIBS) $(configstufflibs) \
-	$(vfs_libs)
-
-libgtranslator_include_dir = $(includedir)/libgtranslator
-
-libgtranslator_include__DATA = \
-	gtkled.h \
+libgtranslatordata = \
 	gtranslatord.h \
 	libgtranslator.h \
-	messages.h \
-	preferences.h \
-	stylistics.h \
-	team-database.h \
-	team-handle.h
+	messages.h
 
 gtranslatord_SOURCES = main.c
 
-gtranslatord_LDADD = libgtranslator.la $(IDL_LIBS) \
-	-L/usr/X11R6/lib $(OAF_LIBS)  $(XML_LIBS)
+gtranslatord_LDADD = libgtranslator.a $(IDL_LIBS) \
+	-L/usr/X11R6/lib $(OAF_LIBS)  $(XML_LIBS) \
+	$(GCONF_LIBS)
 
 idl_dir = $(datadir)/idl/gtranslator
 
@@ -86,6 +69,6 @@ clean-am:
 	-rm -f $(GTRANSLATORD_SOURCES)
 
 EXTRA_DIST = $(idl__DATA) \
-	$(libgtranslator_include__DATA) \
+	$(libgtranslatordata) \
 	vfs-handle.h \
 	vfs-handle.c

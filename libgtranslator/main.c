@@ -25,10 +25,14 @@
 #include <config.h>
 #endif
 
-#include <libgtranslator/gtranslatord.h>
-#include <libgtranslator/libgtranslator.h>
+#include "libgtranslator.h"
+
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
+
 #include <popt-gnome.h>
 #include <liboaf/liboaf.h>
+
 #ifdef GCONF_IS_PRESENT
 #include <gconf/gconf.h>
 #endif

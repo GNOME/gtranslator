@@ -18,7 +18,10 @@
  */
 
 #include "vfs-handle.h"
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 /*
  * Open up the given file via GnomeVFS routines.

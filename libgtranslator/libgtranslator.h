@@ -25,13 +25,6 @@
  * The central header for libgtranslator.
  */ 
 
-#include "gtkled.h"
 #include "gtranslatord.h"
-#include "preferences.h"
-#include "stylistics.h"
-#include "team-database.h"
-#include "team-handle.h"
-
-#include <libgnome/gnome-i18n.h>
 
 #endif
