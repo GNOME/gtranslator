@@ -131,17 +131,17 @@ AC_SUBST(VFS_CFLAGS)
 AC_SUBST(VFS_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Check for gal >= 0.4.99.
+dnl Check for gal >= 0.5.
 dnl -------------------------------------------------------------------
-AC_MSG_CHECKING(for gal >= 0.4.99)
+AC_MSG_CHECKING(for gal >= 0.5)
 if gnome-config --modversion gal 2>&1 >/dev/null ; then
 	dnl -----------------------------------------------------------
 	dnl gal is present; check for the right version numbers.
 	dnl -----------------------------------------------------------
 	_GAL_VERSION=`gnome-config --modversion gal|sed -e 's/^.*-0\.//g' -e 's/\.//g'`
-	if test $_GAL_VERSION -ge 499 -o $_GAL_VERSION -ge 5; then
+	if test $_GAL_VERSION -ge 5 -o $_GAL_VERSION -ge 5; then
 		dnl ---------------------------------------------------
-		dnl We've found gal >= 0.4.99, good for us...
+		dnl We've found gal >= 0.5, good for us...
 		dnl ---------------------------------------------------
 		AC_MSG_RESULT([
 "+++"		
