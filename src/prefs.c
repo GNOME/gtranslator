@@ -62,7 +62,7 @@ static GtkWidget
 static GtkWidget
 	*authors_name, *authors_email, *authors_language,
 	*mime_type, *encoding, *lcode, *lg_email, *dictionary_file,
-	*scheme_file, *autosave_suffix;
+	*scheme_file, *autosave_suffix, *compile_output_dir;
 
 /*
  * The toggle buttons used in the preferences box:
@@ -117,7 +117,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 1, _("Po file editing"));
 	fourth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
-		9, 1, _("Miscellaneous"));
+		10, 1, _("Miscellaneous"));
 	fifth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		3, 2, _("Recent files & spell checking"));
 	sixth_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
@@ -213,14 +213,17 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	sweep_compile_file=gtranslator_utils_attach_toggle_with_label(fourth_page,
 		5, _("Delete compiled files (e.g. \"project.gmo\")"),
 		GtrPreferences.sweep_compile_file, gtranslator_preferences_dialog_changed);
+	compile_output_dir=gtranslator_utils_attach_entry_with_label(fourth_page,
+		6, _("Directory to put compiled po files into"),
+		GtrPreferences.compile_output_dir, gtranslator_preferences_dialog_changed);
 	load_backends=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		6, _("Load all backends on startup"),
+		7, _("Load all backends on startup"),
 		GtrPreferences.load_backends, gtranslator_preferences_dialog_changed);
 	save_geometry_tb=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		7, _("Save geometry on exit & restore it on startup"),
+		8, _("Save geometry on exit & restore it on startup"),
 		GtrPreferences.save_geometry, gtranslator_preferences_dialog_changed);
 	show_comment=gtranslator_utils_attach_toggle_with_label(fourth_page,
-		8, _("Show instant comment view in the main pane"),
+		9, _("Show instant comment view in the main pane"),
 		GtrPreferences.show_comment, gtranslator_preferences_dialog_changed);
 	
 	/*
@@ -461,6 +464,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	update(gtranslator_translator->language->bits, GTK_COMBO(encoding)->entry);
 	update(GtrPreferences.dictionary, dictionary_file);
 	update(GtrPreferences.autosave_suffix, autosave_suffix);
+	update(GtrPreferences.compile_output_dir, compile_output_dir);
 #undef update
 #define if_active(widget) \
 	gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))
@@ -505,6 +509,8 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 			min_match_percentage));
 	
 	gtranslator_config_set_string("dict/file", GtrPreferences.dictionary);
+	gtranslator_config_set_string("misc/compile_output_dir", GtrPreferences.compile_output_dir);
+
 	gtranslator_config_set_string("informations/autosave_suffix", 
 		GtrPreferences.autosave_suffix);
 	
@@ -740,7 +746,14 @@ void gtranslator_preferences_read(void)
 	
 	GtrPreferences.dictionary = gtranslator_config_get_string("dict/file");
 	GtrPreferences.scheme =  gtranslator_config_get_string("scheme/filename");
-	
+
+	GtrPreferences.compile_output_dir = gtranslator_config_get_string("misc/compile_output_dir");
+
+	if(!GtrPreferences.compile_output_dir || !g_file_test(GtrPreferences.compile_output_dir, G_FILE_TEST_ISDIR))
+	{
+		GtrPreferences.compile_output_dir=g_strdup(".");
+	}
+
 	GtrPreferences.autosave =
 		gtranslator_config_get_bool("toggles/autosave");
 	GtrPreferences.autosave_timeout = 
@@ -845,6 +858,7 @@ void gtranslator_preferences_read(void)
 void gtranslator_preferences_free()
 {
 	GTR_FREE(GtrPreferences.autosave_suffix);
+	GTR_FREE(GtrPreferences.compile_output_dir);
 	GTR_FREE(GtrPreferences.spell_command);
 	GTR_FREE(GtrPreferences.dictionary);
 	GTR_FREE(GtrPreferences.msgid_font);

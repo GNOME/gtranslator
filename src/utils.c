@@ -408,7 +408,7 @@ void gtranslator_utils_get_compile_file_names(gchar **test_file,
 		g_get_home_dir());
 
 	*output_file=g_strdup_printf("%s/%s.gmo",
-		g_get_current_dir(), po->header->prj_name);
+		GtrPreferences.compile_output_dir, po->header->prj_name);
 }
 
 /*

@@ -78,7 +78,8 @@ struct {
 	/*
 	 * User-specified strings.
 	 */
-	gchar *autosave_suffix; 
+	gchar *autosave_suffix;
+	gchar *compile_output_dir;
 	gchar *spell_command;
 	gchar *dictionary;
 	gchar *msgid_font;

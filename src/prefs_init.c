@@ -1,5 +1,5 @@
 /*
- * (C) 2001 		Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 		Fatih Demir <kabalak@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -72,7 +72,6 @@ void gtranslator_preferences_init_default_values()
 		 */
 		gtranslator_config_set_bool("toggles/save_geometry", TRUE);
 		gtranslator_config_set_bool("toggles/use_dot_char", TRUE);
-		gtranslator_config_set_bool("toggles/show_sidebar", TRUE);
 		gtranslator_config_set_bool("toggles/show_messages_table", TRUE);
 		gtranslator_config_set_bool("toggles/show_comment", TRUE);
 		gtranslator_config_set_bool("toggles/collapse_translated_entries", TRUE);
@@ -98,10 +97,13 @@ void gtranslator_preferences_init_default_values()
 		/*
 		 * Set the pane positions to sane values.
 		 */
-		gtranslator_config_set_int("interface/sidebar_pane_position",
-			90); 
-		gtranslator_config_set_int("interface/table_pane_position",
-			200); 
+		gtranslator_config_set_int("interface/table_pane_position", 200);
+
+		/*
+		 * Per default we're putting our compiled files into "." (ergo,
+		 *  the current directory).
+		 */
+		gtranslator_config_set_string("misc/compile_output_dir", ".");
 
 		/*
 		 * We do want maximally 10 history entries per default.
