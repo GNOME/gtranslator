@@ -27,28 +27,71 @@
 #include <gtk/gtktext.h>
 
 /*
+ * The keywords table.
+ */
+static gchar *keywords[] = {
+	"CVS",
+	"FDL",
+	"FIXME",
+	"Gdk",
+	"Glib",
+	"GNU",
+	"GNOME",
+	"Gnome",
+	"GPL",
+	"Gtk+",
+	"KDE",
+	"Kde",
+	"NULL",
+	"URI",
+	"URL",
+	"URN",
+	"X11",
+	"WWW",
+	NULL
+};
+
+/*
+ * The URL/URI prefixes table:
+ */
+static gchar *prefixes[] =  {
+	"file:",
+	"ftp:",
+	"ghelp:",
+	"gnome-search:",
+	"https:",
+	"http:",
+	"info:",
+	"man:",
+	"medusa:",
+	"search:",
+	NULL
+};
+
+/*
  * Determine if the current given message contains any format specifier
  *  in msgid/msgstr parts.
  */  
 gboolean gtranslator_syntax_get_format(GtrMsg *msg);
 
 /*
+ * Return if the given string matches our last chars.
+ */
+gboolean back_match(const gchar *msg, gchar *str, gint pos);
+
+/*
  * Insert the syntax highlighted text into the given text widget.
  */ 
 void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 {
+	/************************* MACROS *************************************/
+	
 	/*
 	 * Useful macros for making the text easier to understand/write.
 	 */
 	#define clear_string(x) x=g_string_truncate(x, 0)
 	#define append_char(x, y) x=g_string_append_c(x, y)
 	
-	/*
-	 * Shell "eq" and his backward equal "beq" alike macros.
-	 */
-	#define eq(x, y) ((msg[cp+x]) && (msg[cp+x]==y))
-	#define beq(x, y) ((msg[cp-x]) && (msg[cp-x]==y))
-
 	/*
 	 * Delete the previous characters from the string and readd it
 	 *  to the text box.
@@ -57,10 +100,21 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 		gtk_text_backward_delete(GTK_TEXT(textwidget), \
 			strlen(x)-1); \
 		string=g_string_append(string, x);
+
+	/*
+	 * An easifying macro for the new "back_match"function.
+	 */
+	#define match(x) (back_match(msg, x, cp))
+
+	/**********************************************************************/
 	
 	GString *string=g_string_new("");
 	GdkColor *color;
+	
+	gboolean aInserted=FALSE;
+	
 	gint cp;
+	gint z=0, mindex=0;
 	
 	g_return_if_fail(textwidget!=NULL);
 
@@ -69,13 +123,15 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 		return;
 	}
 
+	mindex=gtk_editable_get_position(GTK_EDITABLE(textwidget));
+	
 	gtk_text_freeze(GTK_TEXT(textwidget));
 
 	for(cp=0; cp < strlen(msg); ++cp)
 	{
 		/*
 		 * Highlight the found elements in this switch tree.
-		 */ 
+		 */
 		switch(msg[cp])
 		{
 			/*
@@ -106,7 +162,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '%':
 				clear_string(string);
 
-				if(eq(1, 'l') && msg[cp+2])
+				if(msg[cp+1] && msg[cp+1]=='l' && msg[cp+2])
 				{
 					append_char(string, msg[cp]);
 					append_char(string, msg[cp+1]);
@@ -170,7 +226,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			 * Punctuation characters:
 			 */
 			case '.':
-			case ':':
 			case ';':
 			case ',':
 			case '!':
@@ -212,72 +267,77 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				color = get_color_from_type(COLOR_SPECIAL);
 				
 				break;
-			
-			/*
-			 * Keywords:
-			 */
-			case 'U':
-			case 'L':
-			case 'E':
-			case 'S':
-				clear_string(string);
 
-				color = get_color_from_type(COLOR_KEYWORD);
+			/*
+			 * URL/URI prefixes:
+			 */
+			case ':':
+				clear_string(string);
 				
-				if(beq(0, 'U') && beq(1, 'N') && beq(2, 'G'))
+				z=0;
+				
+				while(prefixes[z]!=NULL)
 				{
-					string_add("GNU");
+					if(match(prefixes[z]))
+					{
+						aInserted=TRUE;
+						
+						color=get_color_from_type(
+							COLOR_ADDRESS);
+
+						string_add(prefixes[z]);
+					}
+					
+					z++;
 				}
-				else if(beq(0, 'L') && beq(1, 'P') && beq(2, 'G'))
-				{
-					string_add("GPL");
-				}
-				else if(beq(0, 'E') && beq(1, 'M') && beq(2, 'O') && 
-					beq(3, 'N') && beq(4, 'G'))
-				{
-					string_add("GNOME");
-				}
-				else if(beq(0, 'E') && beq(1, 'D') && beq(2, 'K'))
-				{
-					string_add("KDE");
-				}
-				else if(beq(0, 'L') && beq(1, 'D') && beq(2, 'F'))
-				{
-					string_add("FDL");
-				}
-				else if(beq(0, 'S') && beq(1, 'V') && beq(2, 'C'))
-				{
-					string_add("CVS");
-				}
-				else if(beq(0, 'E') && beq(1, 'M') && beq(2, 'X') &&
-					beq(3, 'I') && beq(4, 'F'))
-				{
-					string_add("FIXME");
-				}
-				else if(beq(0, 'L') && beq(1, 'L') && beq(2, 'U') &&
-					beq(3, 'N'))
-				{
-					string_add("NULL");
-				}
-				else
+				
+				if(aInserted!=TRUE)
 				{
 					append_char(string, msg[cp]);
 
-					color=NULL;
+					color=get_color_from_type(
+						COLOR_PUNCTUATION);
 				}
-
-
-				break;
 				
+				
+				break;
+			
 			/*
 			 * Everything else:
 			 */ 
 			default:
 				clear_string(string);
 				
-				append_char(string, msg[cp]);
+				color=NULL;
+			
+				z=0;
 				
-				color = NULL;
+				/*
+				 * Cruise through the keywords list and check for any
+				 *  match.
+				 */
+				while(keywords[z]!=NULL)
+				{
+					if(match(keywords[z]))
+					{
+						aInserted=TRUE;
+
+						string_add(keywords[z]);
+						
+						color=get_color_from_type(COLOR_KEYWORD);
+					}
+					
+					z++;
+				}
+				
+				/*
+				 * Insert the single normal characters if there couldn't be
+				 *  any keyword found.
+				 */
+				if(aInserted!=TRUE)
+				{
+					append_char(string, msg[cp]);
+				}
 
 				break;
 		}
@@ -288,6 +348,11 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	}
 
 	gtk_text_thaw(GTK_TEXT(textwidget));
+
+	if(mindex >= 0 && mindex < gtk_text_get_length(GTK_TEXT(textwidget)))
+	{
+		gtk_editable_set_position(GTK_EDITABLE(textwidget), mindex);
+	}
 
 	g_string_free(string, FALSE);
 }
@@ -354,3 +419,38 @@ gboolean gtranslator_syntax_get_format(GtrMsg *msg)
 	return FALSE;
 }
 
+/*
+ * Check the given string for equivalence with the last characters.
+ */
+gboolean back_match(const gchar *msg, gchar *str, gint pos)
+{
+	gint len=0, i;
+
+	/*
+	 * Check all of our used variables for sanity.
+	 */
+	g_return_val_if_fail(str!=NULL, FALSE);
+	g_return_val_if_fail(msg!=NULL, FALSE);
+
+	if(pos < 0)
+	{
+		return FALSE;
+	}
+
+	len=strlen(str);
+
+	/*
+	 * Control every char in the original string and the given
+	 *  "match" string for equality and return FALSE if this
+	 *    fails.
+	 */
+	for(i=0; i < len; ++i)
+	{
+		if(!msg[pos-i] || msg[pos-i]!=str[(len-1)-i])
+		{
+			return FALSE;
+		}
+	}
+	
+	return TRUE;
+}
