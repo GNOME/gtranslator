@@ -139,6 +139,9 @@ static lang languages[] = {
 	 N_("German"), "de", "iso-8859-1",
 	 "gnome-de@gnome.org", "8bit"},
 	{
+	 N_("Greek"), "el", "iso-8859-7",
+	 "nls@tux.hellug.gr", "8bit"},
+	{
 	 N_("Hungarian"), "hu", "iso-8859-2",
 	 "", "8bit"},
 	{
