@@ -85,7 +85,7 @@ GList *gtranslator_history_get(void)
 
 	count=gtranslator_config_get_int("history_length");
 
-	for(c=0;c <= count; c++)
+	for(c=0;c < count; c++)
 	{
 		GtrHistoryEntry *myentry=g_new0(GtrHistoryEntry,1);
 		

@@ -919,7 +919,7 @@ void gtranslator_display_recent(void)
 	/*
 	 * Parse the list.
 	 */
-	for(newlist=list; newlist!=NULL; newlist=g_list_next(newlist))
+	for(newlist=list; newlist!=g_list_last(list); newlist=g_list_next(newlist))
 	{
 		/*
 		 * Get the history entry.
