@@ -31,10 +31,10 @@
 #include <gal/e-table/e-cell-number.h>
 #include <gal/e-table/e-cell-text.h>
 #include <gal/e-table/e-table-extras.h>
-#include <gal/e-table/e-table-model.h>
-#include <gal/e-table/e-table-memory.h>
-#include <gal/e-table/e-table-scrolled.h>
-#include <gal/e-table/e-table-simple.h>
+#include <gal/e-table/e-tree-model.h>
+#include <gal/e-table/e-tree-memory.h>
+#include <gal/e-table/e-tree-scrolled.h>
+#include <gal/e-table/e-tree-memory-callbacks.h>
 
 /*
  * Create the ETableExtras for our messages table.
@@ -46,57 +46,59 @@ static ETableExtras *table_extras_new(void);
  *
  * Prototypes:
  */
-static gint column_count_function(ETableModel *model, void *useless);
-static gint row_count_function(ETableModel *model, void *useless);
+static GdkPixbuf *icon_at_function (ETreeModel *model, ETreePath path, void *data); 
+static gint column_count_function(ETreeModel *model, void *data);
 
-static gboolean is_cell_editable_function(ETableModel *model, gint column, 
-	gint row, void *useless);
-static gboolean is_empty_function(ETableModel *model, gint column, 
-	const void *value, void *useless);
+static gboolean is_cell_editable_function(ETreeModel *model, ETreePath path, 
+	int column, void *data);
+static gboolean is_empty_function(ETreeModel *model, int column, 
+	const void *value, void *data);
 
-static void free_value_function(ETableModel *model, gint column, void *value, 
-	void *useless);
-static void set_value_at_function(ETableModel *model, gint column, gint row,
-	const void *value, void *useless);
+static void free_value_function(ETreeModel *model, int column, 
+	void *value, void *data);
+static void set_value_at_function(ETreeModel *model, ETreePath path, int col, 
+	const void *value, void *data);
 
-static void *duplicate_value_function(ETableModel *model, gint column, 
-	const void *value, void *useless);
-static void *initialize_value_function(ETableModel *model, gint column, 
-	void *useless);
-static void *value_at_function(ETableModel *model, gint column, gint row, 
-	void *useless);
+static void *duplicate_value_function(ETreeModel *model, int column, 
+	const void *value, void *data);
+static void *initialize_value_function(ETreeModel *model, int column, void *data);
+static void *value_at_function(ETreeModel *model, ETreePath path, int column, 
+	void *data);
 
-static gchar *return_string_for_value_function(ETableModel *model, gint column, 
-	const void *value, void *useless);
+static gchar *return_string_for_value_function(ETreeModel *model, int column,
+	const void *value, void *data);
+	
+/*
+ * Global variables
+ */
+GtkWidget *tree;
+ETreeModel *tree_model;
+ETreeMemory *tree_memory;
+ETreePath root_node = NULL;	
+
 
 /* 
  * Functions:
  */
-static gint column_count_function(ETableModel *model, void *useless)
+static GdkPixbuf *
+icon_at_function (ETreeModel *model, ETreePath path, void *data)
+{
+	return NULL;
+}
+
+static gint column_count_function(ETreeModel *model, void *data)
 {
 	return 5;
 }
 
-static gint row_count_function(ETableModel *model, void *useless)
-{
-	if(file_opened)
-	{
-		return (po->length-1);
-	}
-	else
-	{
-		return 100;
-	}
-}
-
-static gboolean is_cell_editable_function(ETableModel *model, gint column, 
-	gint row, void *useless)
+static gboolean is_cell_editable_function(ETreeModel *model, ETreePath path, 
+	int column, void *data)
 {
 	return FALSE;
 }
 
-static gboolean is_empty_function(ETableModel *model, gint column, 
-	const void *value, void *useless)
+static gboolean is_empty_function(ETreeModel *model, int column, 
+	const void *value, void *data)
 {
 	switch (column) {
 	case COL_NUM:
@@ -112,8 +114,8 @@ static gboolean is_empty_function(ETableModel *model, gint column,
 	}
 }
 
-static void free_value_function(ETableModel *model, gint column, void *value, 
-	void *useless)
+static void free_value_function(ETreeModel *model, int column, 
+	void *value, void *data)
 {
 	switch (column) {
 	case COL_ORIG:
@@ -130,13 +132,13 @@ static void free_value_function(ETableModel *model, gint column, void *value,
 	}
 }
 
-static void set_value_at_function(ETableModel *model, gint column, gint row,
-        const void *value, void *useless)
+static void set_value_at_function(ETreeModel *model, ETreePath path, int col, 
+	const void *value, void *data)
 {
 }
 
-static void *duplicate_value_function(ETableModel *model, gint column, 
-	const void *value, void *useless)
+static void *duplicate_value_function(ETreeModel *model, int column, 
+	const void *value, void *data)
 {
 	switch (column) {
 	case COL_ORIG:
@@ -154,8 +156,7 @@ static void *duplicate_value_function(ETableModel *model, gint column,
 	}
 }
 
-static void *initialize_value_function(ETableModel *model, gint column, 
-	void *useless)
+static void *initialize_value_function(ETreeModel *model, int column, void *data)
 {
 	switch (column) {
 	case COL_ORIG:
@@ -173,14 +174,14 @@ static void *initialize_value_function(ETableModel *model, gint column,
 	}
 }
 
-static void *value_at_function(ETableModel *model, gint column, gint row, 
-	void *useless)
+static void *value_at_function(ETreeModel *model, ETreePath path, int column, 
+	void *data)
 {
-	/*GtrMsg *message;
+	GtrMsg *message;
 	
-	message = g_list_nth_data (po->messages, row);
+	message = e_tree_memory_node_get_data (tree_memory, path);
 
-	if(file_opened)
+	/*if(file_opened)
 	{
 		if(row > 0 && row <= (po->length - 1))
 		{
@@ -198,10 +199,10 @@ static void *value_at_function(ETableModel *model, gint column, gint row,
 	}*/
 	switch (column) {
 	case COL_ORIG:
-		return "original";
+		return message->msgid;
 		break;
 	case COL_TRANS:
-		return "translation";
+		return message->msgstr;
 		break;
 	case COL_COMMENT:
 		return "comment";
@@ -210,7 +211,7 @@ static void *value_at_function(ETableModel *model, gint column, gint row,
 		return "status";
 		break;
 	case COL_NUM:
-		return GINT_TO_POINTER (1);
+		return GINT_TO_POINTER (message->pos);
 		break;
 	default:
 		g_assert_not_reached ();
@@ -218,8 +219,8 @@ static void *value_at_function(ETableModel *model, gint column, gint row,
 	}
 }
 
-static gchar *return_string_for_value_function(ETableModel *model, gint column, 
-        const void *value, void *useless)
+static gchar *return_string_for_value_function(ETreeModel *model, int column,
+	const void *value, void *data)
 {
 	if(value)
 	{
@@ -294,17 +295,19 @@ GtkWidget *gtranslator_messages_table_new()
 {
 	gchar		*statusfile;
 	
-	GtkWidget 	*messages_table;
+	GtkWidget 	*messages_tree;
 
-	ETableExtras 	*table_extras;
-	ETableModel	*table_model;
+	ETableExtras 	*tree_extras;
+		
+	tree_extras=table_extras_new();
 	
-	
-	table_extras=table_extras_new();
-	
-	table_model=e_table_simple_new(
+	tree_model=e_tree_memory_callbacks_new(
+		icon_at_function,
 		column_count_function,
-		row_count_function,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
 		value_at_function,
 		set_value_at_function,
 		is_cell_editable_function,
@@ -314,16 +317,54 @@ GtkWidget *gtranslator_messages_table_new()
 		is_empty_function,
 		return_string_for_value_function,
 		NULL);
+		
+	tree_memory=E_TREE_MEMORY(tree_model);
 
 	statusfile=gtranslator_utils_get_messages_table_state_file_name();
 
-	messages_table=e_table_scrolled_new_from_spec_file(table_model,
-		table_extras,
-		ETSPECS_DIR "/messages-table.etspec", 
-		statusfile);
-
+	/* Calling gtk_widget_new here is to work around a bug in gal
+	** where e_tree_scrolled_new_from_spec is broken */
+	messages_tree=gtk_widget_new(e_tree_scrolled_get_type (),
+        	"hadjustment", NULL,
+        	"vadjustment", NULL,
+        	NULL);
+	
+	messages_tree = GTK_WIDGET(
+		e_tree_scrolled_construct_from_spec_file(
+			E_TREE_SCROLLED(messages_tree),
+			tree_model,
+			tree_extras,
+			ETSPECS_DIR "/messages-table.etspec", 
+			statusfile)
+		);
+	
+	tree = GTK_WIDGET (e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
+	
 	g_free(statusfile);
-	return messages_table;
+	return messages_tree;
+}
+
+void gtranslator_messages_table_update (void)
+{
+	GList *list = g_list_copy (po->messages);
+	
+	if(root_node)
+		e_tree_memory_node_remove (tree_memory, root_node);
+	root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
+	e_tree_root_node_set_visible (E_TREE(tree), FALSE);
+	
+	if(!file_opened)
+		return;
+	
+	while(list)
+	{
+		GtrMsg *message=list->data;
+		e_tree_memory_node_insert(tree_memory, root_node,
+			0, message);
+		list = g_list_next(list);
+	}	
+	
+	
 }
 
 /*
