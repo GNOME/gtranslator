@@ -521,6 +521,13 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 				    encodings_list, ph->charset,
 				    FALSE,
 				    gtranslator_header_edit_changed, NULL);
+
+	/*
+	 * Disable any charset changes directly from the header by making the
+	 *  charset combo non-editable.
+	 */
+	gtk_widget_set_sensitive(GTK_WIDGET(charset_combo), FALSE);
+
 	enc_combo =
 	    gtranslator_utils_attach_combo_with_label(lang_page, 6, _("Encoding:"),
 				    bits_list, ph->encoding,
