@@ -119,6 +119,13 @@ static GnomeUIInfo the_file_menu[] = {
 	},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
+	{
+		GNOME_APP_UI_ITEM, N_("Open from _URI"),
+		N_("Open a po file from a given URI"),
+		open_uri_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
+		GDK_F3, GDK_MOD1_MASK, NULL
+	},
 	GNOMEUIINFO_MENU_SAVE_ITEM(save_current_file, NULL),
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
 	GNOMEUIINFO_MENU_REVERT_ITEM(revert_file, NULL),
@@ -409,10 +416,10 @@ static void create_actions(void)
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[4]);
 	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[5]);
-	insert_action(ACT_SAVE, the_file_menu[4], the_toolbar[1]);
-	insert_action(ACT_SAVE_AS, the_file_menu[5], the_toolbar[2]);
-	insert_action(ACT_REVERT, the_file_menu[6], NONE);
-	insert_action(ACT_CLOSE, the_file_menu[7], NONE);
+	insert_action(ACT_SAVE, the_file_menu[5], the_toolbar[1]);
+	insert_action(ACT_SAVE_AS, the_file_menu[6], the_toolbar[2]);
+	insert_action(ACT_REVERT, the_file_menu[7], NONE);
+	insert_action(ACT_CLOSE, the_file_menu[8], NONE);
 	/*------------------------------------------------*/
 	insert_action(ACT_UNDO, the_edit_menu[0], NONE);
 	insert_action(ACT_CUT, the_edit_menu[2], NONE);
@@ -984,6 +991,10 @@ static void undo_changes(GtkWidget  * widget, gpointer useless)
  */
 static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 {
+	GString *syntaxtext;
+	gint textlen=0;
+	gint ourpos=0;
+	
 	if (nothing_changes)
 		return;
 	if (!po->file_changed)
@@ -1011,11 +1022,6 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 			    (GtkCheckMenuItem *) acts[ACT_FUZZY].menu, FALSE);
 		}
 	}
-
-	/*
-	 * Update the syntax highlighting in the translation box.
-	 */ 
-	gtranslator_syntax_update_text(trans_box);
 
 	/*
 	 * Do all these steps only if the option to use the '·' is set.
@@ -1073,4 +1079,48 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		gtk_text_thaw(GTK_TEXT(trans_box));
 		nothing_changes = FALSE;
 	}
+
+	/*
+	 * Hm, another way to get immediate syntax highlighting; delete the
+	 *  last char and reinsert it.
+	 */
+	textlen=gtk_text_get_length(GTK_TEXT(trans_box));
+	ourpos=gtk_editable_get_position(GTK_EDITABLE(trans_box));
+
+	gtk_text_freeze(GTK_TEXT(trans_box));
+
+	if((ourpos-3) >= 0)
+	{
+		syntaxtext=g_string_new(gtk_editable_get_chars(
+			GTK_EDITABLE(trans_box), (ourpos-3), ourpos));
+	}
+	else
+	{
+		syntaxtext=g_string_new(gtk_editable_get_chars(
+			GTK_EDITABLE(trans_box), ourpos, ourpos));
+	}
+
+	if(syntaxtext->len > 0 )
+	{
+		if((ourpos-3) >= 0)
+		{
+			gtk_text_backward_delete(
+				GTK_TEXT(trans_box), 3);
+		}
+		else
+		{
+			gtk_text_backward_delete(
+				GTK_TEXT(trans_box), 1);
+		}
+	
+		gtranslator_syntax_insert_text(
+			trans_box, syntaxtext->str);
+
+		gtk_editable_set_position(GTK_EDITABLE(trans_box), ourpos);
+	}
+		
+	gtk_text_thaw(GTK_TEXT(trans_box));
+
+	
+	g_string_free(syntaxtext, 1);
 }

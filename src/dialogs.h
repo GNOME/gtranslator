@@ -58,4 +58,9 @@ void find_dialog(GtkWidget * widget, gpointer useless);
 void compile_error_dialog(FILE * fs);
 void no_changed_dialog(GtkWidget * widget, gpointer useless);
 
+/*
+ * Open URI dialog.
+ */
+void open_uri_dialog(GtkWidget *widget, gpointer useless);
+
 #endif

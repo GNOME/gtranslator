@@ -1,4 +1,15 @@
-2001-02-17  Thomas Ziehmer	<ziehmer@rhrk.uni-kl.de>
+2001-02-18  Fatih Demir	<kabalak@gtranslator.org>
+
+	* gui.c: The syntax highlighting does now work instantly without
+		the gtranslator_syntax_update_text function so it doesn't
+		 flicker any more.
+
+	* dialogs.c, dialogs.h & gui.c: Added open from URI menu entry
+		and added the logic around it -- it works.
+
+	* ChangeLog: Changed Thomas' email address also here ,-)
+
+2001-02-17  Thomas Ziehmer	<thomas@gtranslator.org>
 
 	* dialogs.c, find.h, find.c: strings are now found in the right
 		categorie.
@@ -15,7 +26,7 @@
 	* gui.c: Rehighlight the complete widget after pasting something
 		into the translation box.
 
-2001-02-17  Thomas Ziehmer	<ziehmer@rhrk.uni-kl.de>
+2001-02-17  Thomas Ziehmer	<thomas@gtranslator.org>
 
 	* syntax.c: refactoring of the code
 
@@ -313,7 +324,7 @@
 
 	* languages.h: Added entry for the Greek language.
 
-2001-01-30  Thomas Ziehmer <ziehmer@rhrk.uni-kl.de>
+2001-01-30  Thomas Ziehmer <thomas@gtranslator.org>
 
 	* history.c, parse.c: fixed list bugs, which generated segv.
 

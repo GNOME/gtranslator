@@ -21,6 +21,7 @@
 #include "dialogs.h"
 #include "find.h"
 #include "prefs.h"
+#include "open-differently.h"
 
 /*
  * Functions to be used only internally in this file
@@ -30,6 +31,14 @@ static void goto_dlg_clicked(GnomeDialog * dialog, gint button,
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 			     gpointer findy);
+
+void open_uri(GtkWidget *widget, gpointer useless);
+
+/*
+ * Generally used two widgets for the URI dialog.
+ */ 
+GtkWidget 	*combobox=NULL,
+		*entry=NULL;
 
 void show_nice_dialog(GtkWidget ** dlg, const gchar * wmname)
 {
@@ -384,3 +393,95 @@ void compile_error_dialog(FILE * fs)
 	show_nice_dialog(&dialog, NULL);
 }
 
+/*
+ * Requests for an URI to open. Uses pregiven protocol list.
+ */ 
+void open_uri_dialog(GtkWidget *widget, gpointer useless)
+{
+	GtkWidget 	*dialog=NULL,
+			*table=NULL,
+			*label=NULL;
+			
+	GtkWidget 	*open_button=NULL,
+			*close_button=NULL;
+			
+	GList 		*protocols=NULL;
+
+	protocols=g_list_append(protocols, (gpointer) "http://");
+	protocols=g_list_append(protocols, (gpointer) "ftp://");
+	protocols=g_list_append(protocols, (gpointer) "file:/");
+	
+	dialog=gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(dialog), 
+		_("gtranslator -- open from URI"));
+
+	label=gtk_label_new(
+	_("Select the URI protocol and the URI you would like to open"));
+	
+	open_button=gnome_stock_button(_("Open"));
+	close_button=gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
+
+	combobox=gtk_combo_new();
+	gtk_combo_set_popdown_strings(GTK_COMBO(combobox), protocols);
+
+	table=gtk_table_new(2, 3, FALSE);
+	gtk_table_set_row_spacing(GTK_TABLE(table), 0, 5);
+	gtk_table_set_col_spacing(GTK_TABLE(table), 0, 5);
+	
+	entry=gnome_entry_new("URI");
+
+	gtk_table_attach_defaults(GTK_TABLE(table), combobox, 0, 1, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(table), entry, 1, 2, 1, 2);
+
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
+		TRUE, TRUE, 0);
+
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), table,
+		TRUE, FALSE, 0);
+	
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->action_area),
+		open_button,
+		FALSE, FALSE, 0);
+
+	gtk_box_pack_end(GTK_BOX(GTK_DIALOG(dialog)->action_area),
+		close_button,
+		FALSE, FALSE, 0);
+
+	gtk_signal_connect_object(GTK_OBJECT(close_button), "clicked",
+		GTK_SIGNAL_FUNC(gtk_widget_destroy), GTK_OBJECT(dialog));
+
+	gtk_signal_connect(GTK_OBJECT(open_button), "clicked",
+		GTK_SIGNAL_FUNC(open_uri), NULL);
+	
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 300, 120);
+	
+	show_nice_dialog(&dialog, NULL);
+}
+
+/*
+ * Checks the URI before it's passed to the core functions.
+ */ 
+void open_uri(GtkWidget *widget, gpointer useless)
+{
+	GString *urilocation=g_string_new(gtk_entry_get_text(
+		GTK_ENTRY(gnome_entry_gtk_entry(
+			GNOME_ENTRY(entry)))));
+
+	gchar *protocol=gtk_entry_get_text(GTK_ENTRY(
+		GTK_COMBO(combobox)->entry));
+
+	if(urilocation->len <= 0)
+	{
+		gnome_app_error(GNOME_APP(app1), 
+			g_strdup_printf(_("No URI given for protocol %s!"),
+			protocol));
+	}
+	else
+	{
+		urilocation=g_string_prepend(urilocation, protocol);
+		
+		gtranslator_open_po_file(urilocation->str);
+	}
+
+	g_string_free(urilocation, 1);
+}
