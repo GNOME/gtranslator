@@ -299,6 +299,8 @@ void gtranslator_message_show(GtrMsg *msg)
 		gtk_tree_view_append_column(GTK_TREE_VIEW(tree), col);
 
 		render=gtk_cell_renderer_text_new();
+		g_object_set(G_OBJECT(render), "editable", TRUE, NULL);
+
 		col=gtk_tree_view_column_new_with_attributes("Translation",
 			render, "text", TRANS_COL, NULL);
 

@@ -1,5 +1,9 @@
 2003-08-03  Fatih Demir <kabalak@gtranslator.org>
 
+	* message.c: Make the plural forms translations editable via the
+		cell renderer - we do now need to catch changes and parse
+		 them in via a callback.
+
 	* gui.c, message.c, messages-table.[ch] & prefs_init.c: Removed some
 		old unused E/GAL stuff from the table and re-checked in the
 		 old colros reading code, I'll look afetr the coloring of the
