@@ -38,8 +38,8 @@ int init_msg_db()
 	* 1) Allocate the linked lists
 	*
 	**/
-	msg_list = g_list_alloc();
-	cur_list = g_list_alloc();
+	msg_list=g_list_alloc();
+	cur_list=g_list_alloc();
 	while(
 	(fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL)
 	)
@@ -48,7 +48,7 @@ int init_msg_db()
  		* 2) Parse the msg_db and add every entry to the
 		*     the linked lists 
 		**/
-		msg_list = g_list_append(cur_list,(gpointer)msg_messages);
+		msg_list=g_list_append(cur_list,(gpointer)msg_messages);
 	}
 	/**
 	* 3) Check if we had lost the list 

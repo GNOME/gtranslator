@@ -31,19 +31,19 @@ lookup_widget                          (GtkWidget       *widget,
 
 	for (;;)
 	{
-	      if (GTK_IS_MENU (widget))
-	        parent = gtk_menu_get_attach_widget (GTK_MENU (widget));
+	      if(GTK_IS_MENU(widget))
+	        parent=gtk_menu_get_attach_widget(GTK_MENU(widget));
 	      else
-	        parent = widget->parent;
-	      if (parent == NULL)
+	        parent=widget->parent;
+	      if(parent==NULL)
 	        break;
-      	      widget = parent;
+      	      widget=parent;
 	}
 
-	found_widget = (GtkWidget*) gtk_object_get_data (GTK_OBJECT (widget),
+	found_widget=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(widget),
                                                    widget_name);
-	if (!found_widget)
-	g_warning ("Widget not found: %s", widget_name);
+	if(!found_widget)
+	g_warning("Widget not found: %s", widget_name);
 	return found_widget;
 }
 
@@ -75,19 +75,19 @@ create_dummy_pixmap                    (GtkWidget       *widget,
   GdkBitmap *mask;
   GtkWidget *pixmap;
 
-  if (gnome_pixmap)
+  if(gnome_pixmap)
     {
-      return gnome_pixmap_new_from_xpm_d (dummy_pixmap_xpm);
+      return gnome_pixmap_new_from_xpm_d(dummy_pixmap_xpm);
     }
 
-  colormap = gtk_widget_get_colormap (widget);
-  gdkpixmap = gdk_pixmap_colormap_create_from_xpm_d (NULL, colormap, &mask,
-                                                     NULL, dummy_pixmap_xpm);
-  if (gdkpixmap == NULL)
-    g_error ("Couldn't create replacement pixmap.");
-  pixmap = gtk_pixmap_new (gdkpixmap, mask);
-  gdk_pixmap_unref (gdkpixmap);
-  gdk_bitmap_unref (mask);
+  colormap=gtk_widget_get_colormap(widget);
+  gdkpixmap=gdk_pixmap_colormap_create_from_xpm_d(NULL, colormap, &mask,
+                                                    NULL, dummy_pixmap_xpm);
+  if(gdkpixmap==NULL)
+    g_error("Couldn't create replacement pixmap.");
+  pixmap=gtk_pixmap_new(gdkpixmap, mask);
+  gdk_pixmap_unref(gdkpixmap);
+  gdk_bitmap_unref(mask);
   return pixmap;
 }
 
@@ -105,34 +105,34 @@ create_pixmap                          (GtkWidget       *widget,
   GdkBitmap *mask;
   gchar *pathname;
 
-  pathname = gnome_pixmap_file (filename);
-  if (!pathname)
+  pathname=gnome_pixmap_file (filename);
+  if(!pathname)
     {
-      g_warning (_("Couldn't find pixmap file: %s"), filename);
-      return create_dummy_pixmap (widget, gnome_pixmap);
+      g_warning(_("Couldn't find pixmap file: %s"), filename);
+      return create_dummy_pixmap(widget, gnome_pixmap);
     }
 
-  if (gnome_pixmap)
+  if(gnome_pixmap)
     {
-      pixmap = gnome_pixmap_new_from_file (pathname);
-      g_free (pathname);
+      pixmap=gnome_pixmap_new_from_file (pathname);
+      g_free(pathname);
       return pixmap;
     }
 
-  colormap = gtk_widget_get_colormap (widget);
-  gdkpixmap = gdk_pixmap_colormap_create_from_xpm (NULL, colormap, &mask,
+  colormap=gtk_widget_get_colormap(widget);
+  gdkpixmap=gdk_pixmap_colormap_create_from_xpm (NULL, colormap, &mask,
                                                    NULL, pathname);
-  if (gdkpixmap == NULL)
+  if(gdkpixmap==NULL)
     {
-      g_warning (_("Couldn't create pixmap from file: %s"), pathname);
-      g_free (pathname);
+      g_warning(_("Couldn't create pixmap from file: %s"), pathname);
+      g_free(pathname);
       return create_dummy_pixmap (widget, gnome_pixmap);
     }
-  g_free (pathname);
+  g_free(pathname);
 
-  pixmap = gtk_pixmap_new (gdkpixmap, mask);
-  gdk_pixmap_unref (gdkpixmap);
-  gdk_bitmap_unref (mask);
+  pixmap=gtk_pixmap_new(gdkpixmap, mask);
+  gdk_pixmap_unref(gdkpixmap);
+  gdk_bitmap_unref(mask);
   return pixmap;
 }
 
@@ -145,15 +145,15 @@ create_image                           (const gchar     *filename)
   GdkImlibImage *image;
   gchar *pathname;
 
-  pathname = gnome_pixmap_file (filename);
-  if (!pathname)
+  pathname=gnome_pixmap_file (filename);
+  if(!pathname)
     {
-      g_warning (_("Couldn't find pixmap file: %s"), filename);
+      g_warning(_("Couldn't find pixmap file: %s"), filename);
       return NULL;
     }
 
-  image = gdk_imlib_load_image (pathname);
-  g_free (pathname);
+  image=gdk_imlib_load_image (pathname);
+  g_free(pathname);
   return image;
 }
 

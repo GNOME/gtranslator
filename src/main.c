@@ -59,8 +59,8 @@ int main(int argc,char *argv[])
 	**/
 	poptContext context;
 #ifdef ENABLE_NLS
-	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
-	textdomain (PACKAGE);
+	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
+	textdomain(PACKAGE);
 #endif
 	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv, 
 		gtranslator_options, 0, &context);
@@ -82,7 +82,7 @@ int main(int argc,char *argv[])
 	**/
 	gtk_signal_connect(GTK_OBJECT(client), "save_yourself",
 		GTK_SIGNAL_FUNC(gtranslator_sleep), (gpointer) argv[0]);
-	gtk_signal_connect(GTK_OBJECT (client), "die",
+	gtk_signal_connect(GTK_OBJECT(client), "die",
 		GTK_SIGNAL_FUNC(gtranslator_dies_for_you), NULL);
 	/**
 	* Call our stored Sessionmanagement informations now ..
@@ -95,8 +95,8 @@ int main(int argc,char *argv[])
 	/**
 	* Creates the main app-window
 	**/	
-	app1 = create_app1 ();
-	gtk_widget_show (app1);
+	app1=create_app1();
+	gtk_widget_show(app1);
 	/**
 	* Is a po-file given to start with ?
 	**/

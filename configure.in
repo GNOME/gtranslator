@@ -61,11 +61,11 @@ AC_ARG_ENABLE(mime-bind,
 AC_MSG_CHECKING([if to bind the po-files with gtranslator ])
 if test "x$enable_mime_bind" = "xyes" ; then
 	AC_DEFINE(BIND_MIME)
-	AC_MSG_RESULT(["Ok, "
-"******* Will install the mime and keys files."])
+	AC_MSG_RESULT(["Ok,"
+"********** Will install the mime and keys files."])
 else
 	AC_MSG_RESULT(["Ok, "
-"******* Not installing the mime and keys files for the mime-types."])
+"********** Not installing the mime and keys files for the mime-types."])
 fi
 AM_CONDITIONAL(BIND_MIME,test x$enable_mime_bind = xyes)
 
@@ -77,11 +77,11 @@ AC_ARG_ENABLE(emacs-lover,
 AC_MSG_CHECKING([if you're a (X)Emacs lover ])            
 if test "x$enable_emacs_lover" = "xyes" ; then
 	AC_DEFINE(EMACS_LOVER)
-        AC_MSG_RESULT(["Ha !"
-"*· You are an _X_Emacs lover! I will convince you to use gtranslator later on .."])
+        AC_MSG_RESULT(["Ha!"
+"You are an _X_Emacs lover! I will convince you to use gtranslator later on .."])
 else
-        AC_MSG_RESULT(["Well done !"
-"*· You get the original about message ... "])
+        AC_MSG_RESULT(["Well done!"
+"You get the original about message ... "])
 fi
 
 dnl -------------------------------------------------------------------

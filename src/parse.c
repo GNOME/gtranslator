@@ -25,7 +25,7 @@ FILE *fs;
 **/
 void check_file(FILE *stream)
 {
-	if(stream == NULL)
+	if(stream==NULL)
 	{
 		/**
 		* If there are any problems , give a
@@ -53,17 +53,10 @@ void parse(gchar *po)
         {
                 g_error(_("There's no file to open or I couldn't understand `%s'!"),po_file);
         }
-	else
-	{
-		/**
-		* If the file is regular, then assing these ones :
-		**/
-		po_file=po;
-	}
         /**
         * Set up a status message
         **/
-        sprintf(status,_("Current file : \"%s\"."),po_file);
+        sprintf(status,_("Current file : \"%s\"."),po);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);	
 	/**
 	* If any previou lists are lying around, delete them.
@@ -76,7 +69,7 @@ void parse(gchar *po)
         /**
         * Open the parse fstream
         **/
-        fs=fopen(po_file,"r+");
+        fs=fopen(po,"r+");
         /**
         * Allocate the lists
         **/
@@ -98,7 +91,7 @@ void parse(gchar *po)
         /**
         * Show an updated status
         **/
-        sprintf(status,_("Finished reading \"%s\", %i lines."),po_file,lines);
+        sprintf(status,_("Finished reading \"%s\", %i lines."),po,lines);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	file_opened=TRUE;
         for(count=1;count<lines;count++)

@@ -15,10 +15,17 @@
 #include <glib.h>
 
 /**
+* Typedefs for the `new' data-types
+**/
+typedef enum   _gtr_msg_status gtr_msg_status;
+typedef struct _gtr_msg        gtr_msg;
+typedef struct _gtr_po         gtr_po;
+
+/**
 * The different stati of the translatable
 *  messages .
 **/
-enum gtr_msg_status
+enum _gtr_msg_status
 {
 	GTRANSLATOR_MSG_STATUS_UNTRANSLATED,
 	GTRANSLATOR_MSG_STATUS_TRANSLATED,
@@ -36,7 +43,29 @@ enum gtr_msg_status
 	/**
 	* ?!*S?=
 	**/
-	GTRANSLATOR_MSG_ASSIMILATED_BY_THE_BORG
+	GTRANSLATOR_MSG_ASSIMILATED_BY_THE_BORG_OR_BY_MS
+};
+
+/**
+* Again a try to make a common usable message-struct
+**/
+struct _gtr_msg
+{
+	gchar *msgid;
+	gchar *msgstr;
+	gchar *comment;
+	gint pos;
+	gtr_msg_status msg_status;
+};
+
+/**
+* The general po-file structure
+**/
+struct _gtr_po
+{
+	gchar *filename;
+	gboolean notrans;
+	gtr_msg *msg;
 };
 
 #endif // GTR_MESSAGES_H

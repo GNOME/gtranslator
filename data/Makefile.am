@@ -21,6 +21,6 @@ Applicationicon_DATA = gtranslator.png
 Mimeicon_DATA = application-x-po.png
 
 ## include these nice pieces into a dist .
-EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) $(mimeinfofiles_DATA) \
+EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) \
                         $(Mimeicon_DATA) gtranslator.keys.in \
 			gtranslator.mime gtranslator.keys
