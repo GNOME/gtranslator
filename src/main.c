@@ -62,6 +62,7 @@ static gchar 	*gtranslator_geometry=NULL;
 static gchar 	*save_html_output_file=NULL;
 static gchar 	*domains_dir=NULL;
 static gchar	*learn_file=NULL;
+static gchar	*auto_translate_file=NULL;
 static gboolean	build_information=FALSE;
 static gboolean	no_modules=FALSE;
 
@@ -72,6 +73,10 @@ static struct poptOption gtranslator_options[] = {
 	{
 	 	NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
 	 	0, NULL, NULL
+	},
+	{
+		"auto-translate", 'a', POPT_ARG_STRING, &auto_translate_file,
+		0, N_("Auto translate the po file & exit"), N_("FILENAME")
 	},
 	{
 		"build-information", 'b', POPT_ARG_NONE, &build_information,
@@ -350,6 +355,18 @@ int main(int argc, char *argv[])
 	 */
 	file_opened = FALSE;
 	args = poptGetArgs(context);
+
+	/*
+	 * Auto translate the given file argument and exit without starting the
+	 *  GUI building routines.
+	 */
+	if(auto_translate_file)
+	{
+		/*
+		 * FIXME: Call auto translation routines. 
+		 */
+		return 0;
+	}
 
 	/*
 	 * Open up the arguments as files (for now, only the first file is

@@ -135,6 +135,11 @@ void gtranslator_message_show(GList * list_item)
 	GtrMsg *msg;
 	gchar *ispell_command[5];
 
+	if(!file_opened)
+	{
+		return;
+	}
+	
 	g_return_if_fail(list_item!=NULL);
 
 	msg = GTR_MSG(list_item->data);
