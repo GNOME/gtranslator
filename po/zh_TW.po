@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=l10n\n"
-"POT-Creation-Date: 2003-08-29 17:55+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-03 22:56+0200\n"
 "PO-Revision-Date: 2003-08-29 18:01+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -19,12 +19,12 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "GNOME 翻譯程式"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
 msgid "gtranslator"
 msgstr "gtranslator"
 
 #. Translator credits
-#: src/about.c:58
+#: src/about.c:60
 msgid "translator_credits"
 msgstr ""
 "i18n 程式中文化計劃\n"
@@ -33,11 +33,11 @@ msgstr ""
 "Joe Man <trmetal@yahoo.com.hk>, 2002\n"
 "Abel Cheung <maddog@linux.org.hk>, 2003"
 
-#: src/about.c:78
+#: src/about.c:80
 msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr "© 1999 自由軟體基金會"
 
-#: src/about.c:79
+#: src/about.c:81
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator 是一個 po 檔案編輯工具，並擁有許多特別功能。"
 
@@ -808,76 +808,76 @@ msgstr "更新次數：‘%i’"
 msgid "Number of entries: `%i'"
 msgstr "字串數目：‘%i’"
 
-#: src/main.c:83
+#: src/main.c:85
 msgid "Auto translate the po file"
 msgstr "自動翻譯 po 檔"
 
-#: src/main.c:83 src/main.c:99
+#: src/main.c:85 src/main.c:101
 msgid "FILENAME"
 msgstr "檔案名稱"
 
-#: src/main.c:87
+#: src/main.c:89
 msgid "Show build specifications"
 msgstr "顯示編譯程式時的資訊"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "Export learn buffer to a plain po file"
 msgstr "將自學區匯出成為 po 檔案"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "PO_FILE"
 msgstr "PO檔案名稱"
 
-#: src/main.c:95
+#: src/main.c:97
 msgid "Specify main window geometry"
 msgstr "指定主視窗的位置及尺寸"
 
-#: src/main.c:95
+#: src/main.c:97
 msgid "GEOMETRY"
 msgstr "位置大小"
 
-#: src/main.c:99
+#: src/main.c:101
 msgid "Learn the file completely"
 msgstr "將指定檔案匯入自學區"
 
-#: src/main.c:103
+#: src/main.c:105
 msgid "Show learn buffer statistics"
 msgstr "顯示自學區統計數字"
 
-#: src/main.c:146
+#: src/main.c:148
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf 初始化時發生錯誤：%s。"
 
-#: src/main.c:178
+#: src/main.c:180
 msgid "gtranslator build information/specs:"
 msgstr "有關編譯 gtranslator 的資訊："
 
-#: src/main.c:180
+#: src/main.c:182
 msgid "Version and build date:"
 msgstr "版本及編譯日期："
 
-#: src/main.c:182
+#: src/main.c:184
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "編譯時的 GLib / Gtk+ / GNOME / XML 版本："
 
-#: src/main.c:184
+#: src/main.c:186
 msgid "Colorschemes directory:"
 msgstr "色彩方案目錄："
 
-#: src/main.c:186
+#: src/main.c:188
 msgid "Scripts directory:"
 msgstr "描述語言目錄："
 
-#: src/main.c:188
+#: src/main.c:190
 msgid "Window icon:"
 msgstr "視窗圖示："
 
-#: src/main.c:190
+#: src/main.c:192
 msgid "Own locale directory:"
 msgstr "地區設定目錄："
 
-#: src/main.c:192
+#: src/main.c:194
 msgid "Default learn buffer file location:"
 msgstr "預設的自學區檔案位置："
 
@@ -885,7 +885,7 @@ msgstr "預設的自學區檔案位置："
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:457
+#: src/main.c:459
 #, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "已成功將‘%s’檔案匯入您的自學區。\n"
@@ -893,7 +893,7 @@ msgstr "已成功將‘%s’檔案匯入您的自學區。\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:499
+#: src/main.c:501
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "已成功將自學區資料匯出成‘%s’檔案。\n"
@@ -1218,7 +1218,7 @@ msgstr "無法開啟經過 %s 壓縮的 gettext 檔案‘%s’！"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "無法開啟經過 zip 壓縮的 gettext 檔案‘%s’！"
 
-#: src/parse.c:468
+#: src/parse.c:483
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1228,7 +1228,7 @@ msgstr ""
 "檔案“%s”在第 %d 行有錯誤。\n"
 "請檢查後再試。"
 
-#: src/parse.c:523
+#: src/parse.c:538
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1237,7 +1237,7 @@ msgstr ""
 "檔案沒有內容：\n"
 "%s"
 
-#: src/parse.c:545
+#: src/parse.c:560
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "檔案‘%s’不存在!"
@@ -1245,16 +1245,16 @@ msgstr "檔案‘%s’不存在!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:677
+#: src/parse.c:692
 msgid "Header record not found - defaulting from preferences"
 msgstr "沒有檔頭資料 - 使用預設的檔頭資料來代替"
 
-#: src/parse.c:693
+#: src/parse.c:708
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:905
+#: src/parse.c:920
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1265,12 +1265,12 @@ msgstr ""
 "Pot 檔案應該是經編譯過程產生的。\n"
 "您的檔案應該儲存成‘%s.po’。"
 
-#: src/parse.c:967
+#: src/parse.c:982
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "無法開啟‘%s’來寫入資料！"
 
-#: src/parse.c:1019
+#: src/parse.c:1034
 #, c-format
 msgid ""
 "File %s\n"
@@ -1279,11 +1279,11 @@ msgstr ""
 "檔案 %s\n"
 "有 %d 個模糊翻譯字串"
 
-#: src/parse.c:1288
+#: src/parse.c:1303
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "抱歉，在這個系統中找不到 msgfmt 程式！"
 
-#: src/parse.c:1323
+#: src/parse.c:1338
 #, c-format
 msgid ""
 "Compile successful:\n"

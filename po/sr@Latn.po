@@ -8,37 +8,37 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-08-29 03:27+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-03 22:56+0200\n"
 "PO-Revision-Date: 2003-08-29 03:26+0200\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
 msgstr "Gnomov program za prevođenje"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
 msgid "gtranslator"
 msgstr "gprevodilac"
 
 #. Translator credits
-#: src/about.c:58
+#: src/about.c:60
 msgid "translator_credits"
 msgstr ""
 "Veljko M. Stanojević <veljko@vms.homelinux.net>\n"
 "\n"
 "Prevod.org — prevod na srpski jezik."
 
-#: src/about.c:78
+#: src/about.c:80
 msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr "(C) 1999 The Free Software Foundation, Inc."
 
-#: src/about.c:79
+#: src/about.c:81
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gprevodilac je program za uređivanje PO datoteka sa brojnim mogućnostima."
@@ -1226,7 +1226,7 @@ msgstr "Nisam uspeo da otvorim %s -ovanu gettext datoteku „%s“!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Nisam uspeo da otvorim zipovanu PO datoteku „%s“!"
 
-#: src/parse.c:468
+#: src/parse.c:483
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1237,7 +1237,7 @@ msgstr ""
 "u redu %d.\n"
 "Proverite datoteku i pokoušajte iznova."
 
-#: src/parse.c:523
+#: src/parse.c:538
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1246,7 +1246,7 @@ msgstr ""
 "Prazna datoteka:\n"
 "%s"
 
-#: src/parse.c:545
+#: src/parse.c:560
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Datoteka „%s“ uopšte ne postoji!"
@@ -1254,16 +1254,16 @@ msgstr "Datoteka „%s“ uopšte ne postoji!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:677
+#: src/parse.c:692
 msgid "Header record not found - defaulting from preferences"
 msgstr "Zaglavlje nije nađeno — koristi podatke iz postavki"
 
-#: src/parse.c:693
+#: src/parse.c:708
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gprevodilac — %s"
 
-#: src/parse.c:905
+#: src/parse.c:920
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1274,13 +1274,13 @@ msgstr ""
 "POT datoteke se stvaraju kompajliranjem.\n"
 "Vaša datoteka bi trebala biti nazvana „%s.po“."
 
-#: src/parse.c:967
+#: src/parse.c:982
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nisam uspeo da otvorim datoteku „%s“ za upisivanje!"
 
 # bug: plural-forms
-#: src/parse.c:1019
+#: src/parse.c:1034
 #, c-format
 msgid ""
 "File %s\n"
@@ -1289,11 +1289,11 @@ msgstr ""
 "Datoteka %s\n"
 "sadrži %d nejasnih poruka"
 
-#: src/parse.c:1288
+#: src/parse.c:1303
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Nažalost, „msgfmt“ nije dostupan na vašem sistemu!"
 
-#: src/parse.c:1323
+#: src/parse.c:1338
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1547,7 +1547,8 @@ msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
-"Koristi i lično skladište znanja pri automatskom prevođenju neprevedenih poruka"
+"Koristi i lično skladište znanja pri automatskom prevođenju neprevedenih "
+"poruka"
 
 #: src/prefs.c:592
 msgid "Automatically learn a newly translated message"
@@ -1781,8 +1782,8 @@ msgstr "Prenos je prekinut!"
 #~ "Don't highlight syntax - FIXME: We're always non-syntaxed currently! "
 #~ "Sorry..."
 #~ msgstr ""
-#~ "Ne naglašavaj sintaksu - POPRAVIME: Za sada nemamo mogućnost naglašavanja! "
-#~ "Žalim..."
+#~ "Ne naglašavaj sintaksu - POPRAVIME: Za sada nemamo mogućnost "
+#~ "naglašavanja! Žalim..."
 
 #~ msgid "Po file editing"
 #~ msgstr "Uređivanje PO datoteke"

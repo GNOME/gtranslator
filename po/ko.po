@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-28 09:05+0200\n"
+"POT-Creation-Date: 2003-09-03 22:56+0200\n"
 "PO-Revision-Date: 2001-06-06 20:05+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: korean <ko@li.org>\n"
@@ -20,22 +20,22 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "최근 번역자: %s"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
 msgid "gtranslator"
 msgstr "gtranslator"
 
 #. Translator credits
-#: src/about.c:58
+#: src/about.c:60
 #, fuzzy
 msgid "translator_credits"
 msgstr "gtranslator 웹사이트(_w)"
 
-#: src/about.c:78
+#: src/about.c:80
 #, fuzzy
 msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr "(C) 1999-2001 The Free Software Foundation"
 
-#: src/about.c:79
+#: src/about.c:81
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator는 많은 잡음(?)을 들려주는 po파일 편집 도구 모음 입니다."
 
@@ -815,80 +815,80 @@ msgstr ""
 msgid "Number of entries: `%i'"
 msgstr ""
 
-#: src/main.c:83
+#: src/main.c:85
 #, fuzzy
 msgid "Auto translate the po file"
 msgstr "gtranslator -- po파일 열기"
 
-#: src/main.c:83 src/main.c:99
+#: src/main.c:85 src/main.c:101
 msgid "FILENAME"
 msgstr ""
 
-#: src/main.c:87
+#: src/main.c:89
 #, fuzzy
 msgid "Show build specifications"
 msgstr "빌드 정보/내역 보기"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "Export learn buffer to a plain po file"
 msgstr ""
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "PO_FILE"
 msgstr ""
 
-#: src/main.c:95
+#: src/main.c:97
 msgid "Specify main window geometry"
 msgstr "주 윈도우의 위치를 지정"
 
-#: src/main.c:95
+#: src/main.c:97
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/main.c:99
+#: src/main.c:101
 msgid "Learn the file completely"
 msgstr ""
 
-#: src/main.c:103
+#: src/main.c:105
 msgid "Show learn buffer statistics"
 msgstr ""
 
-#: src/main.c:146
+#: src/main.c:148
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf 초기화 하는중 오류: %s."
 
-#: src/main.c:178
+#: src/main.c:180
 #, fuzzy
 msgid "gtranslator build information/specs:"
 msgstr "gtranslator 빌드 정보/명세:"
 
-#: src/main.c:180
+#: src/main.c:182
 msgid "Version and build date:"
 msgstr "판번호와 만든 날짜:"
 
-#: src/main.c:182
+#: src/main.c:184
 #, fuzzy
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Glib/Gtk+/Gnome 빌드 버젼:"
 
-#: src/main.c:184
+#: src/main.c:186
 msgid "Colorschemes directory:"
 msgstr "색상표 디렉토리:"
 
-#: src/main.c:186
+#: src/main.c:188
 msgid "Scripts directory:"
 msgstr "혼잣말 디렉토리:"
 
-#: src/main.c:188
+#: src/main.c:190
 msgid "Window icon:"
 msgstr "윈도 아이콘:"
 
-#: src/main.c:190
+#: src/main.c:192
 msgid "Own locale directory:"
 msgstr "로케일 디렉토리:"
 
-#: src/main.c:192
+#: src/main.c:194
 #, fuzzy
 msgid "Default learn buffer file location:"
 msgstr "기본 질의 원문:"
@@ -897,7 +897,7 @@ msgstr "기본 질의 원문:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:457
+#: src/main.c:459
 #, fuzzy, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "세션이 성공적으로 저장되었습니다."
@@ -905,7 +905,7 @@ msgstr "세션이 성공적으로 저장되었습니다."
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:499
+#: src/main.c:501
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr ""
@@ -1245,7 +1245,7 @@ msgstr "%s 으로 묶여있는 gettext 파일 `%s'를 열수 없습니다!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "zip으로 묶여있는 gettext 파일 `%s'를 열수 없습니다!"
 
-#: src/parse.c:468
+#: src/parse.c:483
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1256,7 +1256,7 @@ msgstr ""
 "%d 줄에 있습니다.\n"
 "파일을 확인하고 다시 시도 하십시오."
 
-#: src/parse.c:523
+#: src/parse.c:538
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1265,7 +1265,7 @@ msgstr ""
 "파일이 비어있습니다:\n"
 "%s"
 
-#: src/parse.c:545
+#: src/parse.c:560
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "\"%s\"파일이 없습니다!"
@@ -1273,16 +1273,16 @@ msgstr "\"%s\"파일이 없습니다!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:677
+#: src/parse.c:692
 msgid "Header record not found - defaulting from preferences"
 msgstr ""
 
-#: src/parse.c:693
+#: src/parse.c:708
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:905
+#: src/parse.c:920
 #, fuzzy, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1293,12 +1293,12 @@ msgstr ""
 "하지만, 그런 파일은 프로그램이 생성하는 것입니다.\n"
 "파일의 확장자는 %s.po 처럼 *.po 로 저장되어야 합니다."
 
-#: src/parse.c:967
+#: src/parse.c:982
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "파일 `%s'를 쓰기위해 열수 없습니다!"
 
-#: src/parse.c:1019
+#: src/parse.c:1034
 #, c-format
 msgid ""
 "File %s\n"
@@ -1307,11 +1307,11 @@ msgstr ""
 "파일 %s\n"
 "%d개의 퍼지 메세지를 포함합니다"
 
-#: src/parse.c:1288
+#: src/parse.c:1303
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "msgfmt가 여러분의 시스템에 설치되어있지 않습니다!"
 
-#: src/parse.c:1323
+#: src/parse.c:1338
 #, c-format
 msgid ""
 "Compile successful:\n"

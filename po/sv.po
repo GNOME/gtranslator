@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2003-08-28 11:38+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-03 22:56+0200\n"
 "PO-Revision-Date: 2003-08-28 11:39+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 # data/desktop/gtranslator.desktop.in.h:1
 #: data/desktop/gtranslator.desktop.in.h:1
@@ -23,25 +23,25 @@ msgid "The GNOME translation program"
 msgstr "GNOME-översättningsprogrammet"
 
 # data/desktop/gtranslator.desktop.in.h:2 src/gui.c:172 src/parse.c:761
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1124
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
 msgid "gtranslator"
 msgstr "gtranslator"
 
 # src/menus.c:265
 #. Translator credits
-#: src/about.c:58
+#: src/about.c:60
 msgid "translator_credits"
 msgstr ""
 "Christian Rose\n"
 "Martin Norbäck\n"
 "Skicka synpunkter på översättningen till sv@li.org"
 
-#: src/about.c:78
+#: src/about.c:80
 msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr "© 1999 The Free Software Foundation, Inc."
 
 # src/about.c:60
-#: src/about.c:79
+#: src/about.c:81
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gtranslator är en programsvit med många finesser för redigering av po-filer."
@@ -958,88 +958,88 @@ msgid "Number of entries: `%i'"
 msgstr "Antal poster: \"%i\""
 
 # src/dialogs.c:107
-#: src/main.c:83
+#: src/main.c:85
 msgid "Auto translate the po file"
 msgstr "Översätt po-filen automatiskt"
 
-#: src/main.c:83 src/main.c:99
+#: src/main.c:85 src/main.c:101
 msgid "FILENAME"
 msgstr "FILNAMN"
 
 # src/main.c:77
-#: src/main.c:87
+#: src/main.c:89
 msgid "Show build specifications"
 msgstr "Visa byggspecifikationer"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "Export learn buffer to a plain po file"
 msgstr "Exportera inlärningsbuffert till en vanlig po-fil"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "PO_FILE"
 msgstr "PO-FIL"
 
 # src/main.c:81
-#: src/main.c:95
+#: src/main.c:97
 msgid "Specify main window geometry"
 msgstr "Ange geometri för huvudfönstret"
 
 # src/main.c:81
-#: src/main.c:95
+#: src/main.c:97
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: src/main.c:99
+#: src/main.c:101
 msgid "Learn the file completely"
 msgstr "Lär in filen helt"
 
-#: src/main.c:103
+#: src/main.c:105
 msgid "Show learn buffer statistics"
 msgstr "Visa statistik för inlärningsbufferten"
 
 # src/main.c:138
-#: src/main.c:146
+#: src/main.c:148
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Fel under initiering av GConf: %s."
 
 # src/main.c:161
-#: src/main.c:178
+#: src/main.c:180
 msgid "gtranslator build information/specs:"
 msgstr "Bygginformation/specifikationer för gtranslator:"
 
 # src/main.c:163
-#: src/main.c:180
+#: src/main.c:182
 msgid "Version and build date:"
 msgstr "Versionsnummer och byggdatum:"
 
 # src/main.c:165
-#: src/main.c:182
+#: src/main.c:184
 msgid "Build GLib / Gtk+ / GNOME / XML versions:"
 msgstr "Glib/Gtk+/GNOME/XML-versioner vid byggandet:"
 
 # src/main.c:169
-#: src/main.c:184
+#: src/main.c:186
 msgid "Colorschemes directory:"
 msgstr "Färgschemakatalog:"
 
 # src/main.c:171
-#: src/main.c:186
+#: src/main.c:188
 msgid "Scripts directory:"
 msgstr "Skriptkatalog:"
 
 # src/main.c:173
-#: src/main.c:188
+#: src/main.c:190
 msgid "Window icon:"
 msgstr "Fönsterikon:"
 
 # src/main.c:175
-#: src/main.c:190
+#: src/main.c:192
 msgid "Own locale directory:"
 msgstr "Egen lokalkatalog:"
 
 # src/prefs.c:127
-#: src/main.c:192
+#: src/main.c:194
 msgid "Default learn buffer file location:"
 msgstr "Plats för standardfrågedomänsfil:"
 
@@ -1047,7 +1047,7 @@ msgstr "Plats för standardfrågedomänsfil:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:457
+#: src/main.c:459
 #, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "Lärde in filen \"%s\" till din inlärningsbuffert utan problem.\n"
@@ -1055,7 +1055,7 @@ msgstr "Lärde in filen \"%s\" till din inlärningsbuffert utan problem.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:499
+#: src/main.c:501
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "Exporterade inlärningsbuffert till filen \"%s\".\n"
@@ -1455,7 +1455,7 @@ msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Kunde inte öppna zippade po-filen \"%s\"!"
 
 # src/parse.c:247
-#: src/parse.c:468
+#: src/parse.c:483
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1467,7 +1467,7 @@ msgstr ""
 "Var vänlig och kontrollera filen och försök igen."
 
 # src/parse.c:283
-#: src/parse.c:523
+#: src/parse.c:538
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1477,7 +1477,7 @@ msgstr ""
 "%s"
 
 # src/parse.c:306
-#: src/parse.c:545
+#: src/parse.c:560
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Filen \"%s\" finns inte alls!"
@@ -1485,17 +1485,17 @@ msgstr "Filen \"%s\" finns inte alls!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:677
+#: src/parse.c:692
 msgid "Header record not found - defaulting from preferences"
 msgstr "Huvudpost hittades inte - använder standardvärde från inställningar"
 
 # src/parse.c:396
-#: src/parse.c:693
+#: src/parse.c:708
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:905
+#: src/parse.c:920
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1507,13 +1507,13 @@ msgstr ""
 "Din fil bör troligtvis kallas \"%s.po\"."
 
 # src/parse.c:599
-#: src/parse.c:967
+#: src/parse.c:982
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Kunde inte öppna filen \"%s\" för skrivning!"
 
 # src/parse.c:645
-#: src/parse.c:1019
+#: src/parse.c:1034
 #, c-format
 msgid ""
 "File %s\n"
@@ -1523,12 +1523,12 @@ msgstr ""
 "innehåller %d luddiga meddelanden"
 
 # src/parse.c:830
-#: src/parse.c:1288
+#: src/parse.c:1303
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Tyvärr, msgfmt finns inte tillgängligt på ditt system!"
 
 # src/parse.c:859
-#: src/parse.c:1323
+#: src/parse.c:1338
 #, c-format
 msgid ""
 "Compile successful:\n"
