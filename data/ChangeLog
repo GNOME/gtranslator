@@ -1,3 +1,17 @@
+2002-02-20  Fatih Demir <kabalak@gtranslator.org>
+
+	* scripts/Makefile.am: Also add the new script to our standard scripts 
+		set which gets installed in "${datadir}/gtranslator/scripts".
+
+	* scripts/build-gtranslator-learn-buffer.sh: Added a new script which
+		easifies the building of a quite big learn buffer somehow;
+		 it's especially useful if you've got a central directory from
+		  which you can gtranslator let learn all po files for your
+		   language (e.g. "tr.po") in subsequent order.
+
+	* colorschemes/Makefile.am|yef.xml: Added new "Yet enhanced fortune"
+		colorscheme.
+
 2002-02-16  Fatih Demir <kabalak@gtranslator.org>
 
 	* colorschemes/Makefile.am|toyfactory.xml: Added new "ToyFactory"
@@ -10,11 +24,8 @@
 
 2002-02-09  Fatih Demir <kabalak@gtranslator.org>
 
-	* colorschemes/Makefile.am: Added the "curlymonster.xml" colorscheme 
-		file to the installed colorschemes' list.
-
-	* colorschemes/curlymonster.xml: Added a "CurlyMonster" Gtk+ theme-like
-		colorscheme (really nice and good for the eyes).
+	* colorschemes/Makefile.am|curlymonster.xml: Added the "CurlyMonster"
+		Gtk+ theme-like colorscheme (really nice & good for the eyes).
 
 2002-01-13  Fatih Demir <kabalak@gtranslator.org>
 

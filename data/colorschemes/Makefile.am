@@ -24,6 +24,7 @@ schemes_DATA = \
 	tuey.xml \
 	vim.xml \
 	waliays.xml \
+	yef.xml \
 	zuper.xml
 
 EXTRA_DIST = $(schemes_DATA)
