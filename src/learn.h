@@ -23,12 +23,28 @@
 #include "messages.h"
 
 /*
- * Learn made translations and add them to the personal default backend.
+ * Learn made translations and store them into a personal file.
  */
 
 /*
- * Learn the given GtrMsg.
+ * Initialize the learn process ,-)
  */
-void gtranslator_learn_message(GtrMsg *msg); 
+void gtranslator_learn_init(void);
+gboolean gtranslator_learn_initialized(void);
+
+/*
+ * Learn the given string.
+ */
+void gtranslator_learn_string(const gchar *string);
+
+/*
+ * Return whether the given string was already "learned".
+ */
+gboolean gtranslator_learn_learned(const gchar *string);
+
+/*
+ * Shutdown our learn process.
+ */
+void gtranslator_learn_shutdown(void);
 
 #endif

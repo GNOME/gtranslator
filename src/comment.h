@@ -59,6 +59,16 @@ typedef struct
 GtrComment *gtranslator_comment_new(const gchar *comment_string);
 
 /*
+ * Append another comment string to the given GtrComment.
+ */
+void gtranslator_comment_append(GtrComment **comment, const gchar *comment_string);
+
+/*
+ * Copy the given GtrComment; NULL parts are also set to NULL for the copy.
+ */
+GtrComment *gtranslator_comment_copy(GtrComment **comment); 
+
+/*
  * Free the GtrComment.
  */
 void gtranslator_comment_free(GtrComment **comment); 

@@ -109,6 +109,57 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 }
 
 /*
+ * Appends the given comment string to the GtrComment.
+ */
+void gtranslator_comment_append(GtrComment **comment, const gchar *comment_string)
+{
+	gchar *comment_core_string;
+	
+	g_return_if_fail(GTR_COMMENT(*comment)!=NULL);
+	g_return_if_fail(comment_string!=NULL);
+
+	comment_core_string=g_strconcat(GTR_COMMENT(*comment)->comment, comment_string, NULL);
+	gtranslator_comment_free(comment);
+
+	*comment=gtranslator_comment_new(comment_core_string);
+}
+
+/*
+ * Copy the given Gtrcomment pointer.
+ */
+GtrComment *gtranslator_comment_copy(GtrComment **comment)
+{
+	GtrComment *copy=g_new0(GtrComment, 1);
+	
+	g_return_val_if_fail(GTR_COMMENT(*comment)!=NULL, NULL);
+
+	/*
+	 * Copy the single elements of the GtrComment.
+	 */
+	if(GTR_COMMENT(*comment)->comment)
+	{
+		copy->comment=g_strdup(GTR_COMMENT(*comment)->comment);
+	}
+	else
+	{
+		copy->comment=NULL;
+	}
+
+	if(GTR_COMMENT(*comment)->pure_comment)
+	{
+		copy->pure_comment=g_strdup(GTR_COMMENT(*comment)->pure_comment);
+	}
+	else
+	{
+		copy->pure_comment=NULL;
+	}
+
+	copy->type=GTR_COMMENT(*comment)->type;	
+
+	return copy;
+}
+
+/*
  * Free the GtrComment.
  */
 void gtranslator_comment_free(GtrComment **comment)
