@@ -7,10 +7,13 @@
 
 scriptsdir = $(datadir)/$(PACKAGE)/scripts/
 
+extra_flags = -DDEBUGGY -g1
+
 INCLUDES = \
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR)  \
-	-DSCRIPTS_DIR=\""$(scriptsdir)"\" -DDEBUGGY
+	-DSCRIPTS_DIR=\""$(scriptsdir)"\" \
+	$(extra_flags)
 
 bin_PROGRAMS = gtranslator
 
