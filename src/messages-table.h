@@ -43,7 +43,7 @@ GtkWidget *gtranslator_messages_table_new(void);
 /*
  * Clear the table and populate with the messages
  */
-void gtranslator_messages_table_creat(void);
+void gtranslator_messages_table_create(void);
 
 /*
  * Update the data in a single row
