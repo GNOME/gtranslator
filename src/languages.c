@@ -61,7 +61,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Catalan"), "ca", "iso-8859-1",
-	 "", "8bit"
+	 "ca@dodds.net", "8bit"
 	},
 	{
 	 N_("Chinese/Simplified"), "zh_CN.GB2312", "GB2312",

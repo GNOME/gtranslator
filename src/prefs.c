@@ -244,7 +244,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 * The fifth page with the Recent files options.
 	 */
 	max_history_entries=gtranslator_utils_attach_spin_with_label(fifth_page, 0, 
-		_("Maximum number of recent files shown in the recent files' list:"), 3, 15, 
+		_("Maximum number of entries in the recent files' list:"), 3, 15, 
 		GtrPreferences.max_history_entries, gtranslator_preferences_dialog_changed);
 	
 	check_recent_files=gtranslator_utils_attach_toggle_with_label(fifth_page, 1,
