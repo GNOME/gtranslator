@@ -65,6 +65,7 @@ gchar *gtranslator_utils_invert_dot(gchar *str)
 	gchar *p;
 
 	g_return_if_fail(str != NULL);
+	g_return_if_fail(strlen(str) <= 0);
 	
 	newstr = g_string_sized_new(strlen(str)+10);
 	middot = g_utf8_get_char("·");

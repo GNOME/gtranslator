@@ -163,6 +163,9 @@ void gtranslator_message_show(GtrMsg *msg)
 	{
 		gchar *temp;
 		gchar *old;
+
+		g_return_if_fail(msg!=NULL);
+		g_return_if_fail(msg->msgid!=NULL);
 		
 		temp = gtranslator_utils_invert_dot(msg->msgid);
 		gtranslator_insert_text(text_box, temp);
