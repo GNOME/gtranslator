@@ -12,6 +12,16 @@ AM_CONFIG_HEADER(config.h)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_MAINTAINER_MODE
+if test "x$enable_maintainer_mode" = "xyes"; then
+  AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
+  disable_werror=no
+  DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
+else
+  disable_werror=yes
+  DEPRECATED_FLAGS=
+fi
+AC_SUBST(DEPRECATED_FLAGS)
+
 
 dnl -------------------------------------------------------------------
 dnl Use intltools.
@@ -127,19 +137,6 @@ fi
 AC_MSG_RESULT($enable_debug)
 
 dnl -------------------------------------------------------------------
-dnl Enable deprecated GTK+/glib stuff
-dnl -------------------------------------------------------------------
-AC_ARG_ENABLE(deprecated,
-	[  --enable-deprecated        Allow compilation of deprecated GTK+/glib stuff (default=no)],
-	,enable_deprecated=no)
-AC_MSG_CHECKING([if building with deprecated GTK+/glib stuff enabled])
-if test "x$enable_deprecated" != "xyes" ; then
-	DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
-	AC_SUBST(DEPRECATED_FLAGS)
-fi
-AC_MSG_RESULT($enable_deprecated)
-
-dnl -------------------------------------------------------------------
 dnl Get the date for the man-page and substitute it there and anywhere.
 dnl -------------------------------------------------------------------
 MY_DATE=`date +%Y-%m-%d`
@@ -165,6 +162,7 @@ doc/Makefile
 doc/UMTF/Makefile
 help/Makefile
 help/C/Makefile
+help/sr/Makefile
 man/Makefile
 man/gtranslator.1
 po/Makefile.in
