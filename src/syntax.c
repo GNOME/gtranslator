@@ -108,12 +108,12 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	/**********************************************************************/
 	
 	GString *string=g_string_new("");
-	GdkColor *color;
+	GdkColor *color=NULL;
 	
 	gboolean aInserted;
 	
 	gint cp;
-	gint z=0, mindex=0;
+	gint z=0;
 	
 	g_return_if_fail(textwidget!=NULL);
 
@@ -122,12 +122,10 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 		return;
 	}
 
-	mindex=gtk_editable_get_position(GTK_EDITABLE(textwidget));
-	
-	gtk_text_freeze(GTK_TEXT(textwidget));
-
 	for(cp=0; cp < strlen(msg); ++cp)
 	{
+		clear_string(string);
+
 		/*
 		 * Highlight the found elements in this switch tree.
 		 */
@@ -137,18 +135,10 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			 * Hotkeys and comment characters:
 			 */ 
 			case '_':
-				clear_string(string);
-
-				if(msg[cp] && msg[cp+1] && isalpha(msg[cp+1]))
+				append_char(string, '_');
+				if(msg[cp+1] && isalpha(msg[cp+1]))
 				{
-					append_char(string, msg[cp]);
-					append_char(string, msg[cp+1]);
-					
-					cp++;
-				}
-				else
-				{
-					append_char(string, msg[cp]);
+					append_char(string, msg[cp++]);
 				}
 				
 				color = get_color_from_type(COLOR_HOTKEY);
@@ -157,30 +147,16 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 		
 			/*
 			 * Format specifiers:
+			 * FIXME: formats can be much more complex
 			 */
 			case '%':
-				clear_string(string);
-
-				if(msg[cp+1] && msg[cp+1]=='l' && msg[cp+2])
+				append_char(string, msg[cp]);
+				if(msg[cp+1])
 				{
-					append_char(string, msg[cp]);
-					append_char(string, msg[cp+1]);
-					append_char(string, msg[cp+2]);
-					
-					cp=cp+2;
-				}
-				else
-				{
-					if(msg[cp] && msg[cp+1])
+					append_char(string, msg[cp++]);
+					if(msg[cp]=='l' && msg[cp+1])
 					{
-						append_char(string, msg[cp]);
-						append_char(string, msg[cp+1]);
-						
-						cp++;
-					}
-					else
-					{
-						append_char(string, msg[cp]);
+						append_char(string, msg[cp++]);
 					}
 				}
 
@@ -201,8 +177,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '8':
 			case '9':
 			case '0':
-				clear_string(string);
-				
 				append_char(string, msg[cp]);
 				
 				color = get_color_from_type(COLOR_NUMBER);
@@ -211,10 +185,9 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 
 			/*
 			 * "Special characters":
+			 * FIXME: it's not localized
 			 */
 			case '·':
-				clear_string(string);
-
 				append_char(string, msg[cp]);
 
 				color = get_color_from_type(COLOR_SPECIAL_CHAR);
@@ -230,8 +203,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '!':
 			case '?':
 			case '-':
-				clear_string(string);
-
 				append_char(string, msg[cp]);
 				
 				color = get_color_from_type(COLOR_PUNCTUATION);
@@ -259,8 +230,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			case '/':
 			case '\\':
 			case '|':
-				clear_string(string);
-
 				append_char(string, msg[cp]);
 				
 				color = get_color_from_type(COLOR_SPECIAL);
@@ -271,8 +240,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			 * URL/URI prefixes:
 			 */
 			case ':':
-				clear_string(string);
-				
 				z=0;
 				aInserted=FALSE;
 				
@@ -286,12 +253,13 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 							COLOR_ADDRESS);
 
 						string_add(prefixes[z]);
+						break;
 					}
 					
 					z++;
 				}
 				
-				if(aInserted!=TRUE)
+				if(aInserted==FALSE)
 				{
 					append_char(string, msg[cp]);
 
@@ -306,9 +274,6 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			 * Everything else:
 			 */ 
 			default:
-				clear_string(string);
-				
-				color=NULL;
 				aInserted=FALSE;
 			
 				z=0;
@@ -326,6 +291,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 						string_add(keywords[z]);
 						
 						color=get_color_from_type(COLOR_KEYWORD);
+						break;
 					}
 					
 					z++;
@@ -335,8 +301,9 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 				 * Insert the single normal characters if there couldn't be
 				 *  any keyword found.
 				 */
-				if(aInserted!=TRUE)
+				if(aInserted==FALSE)
 				{
+					color=NULL;
 					append_char(string, msg[cp]);
 				}
 
@@ -348,14 +315,7 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 			string->str, -1);
 	}
 
-	if(mindex >= 0 && mindex <= gtk_text_get_length(GTK_TEXT(textwidget)))
-	{
-		gtk_editable_set_position(GTK_EDITABLE(textwidget), mindex);
-	}
-
-	gtk_text_thaw(GTK_TEXT(textwidget));
-	
-	g_string_free(string, FALSE);
+	g_string_free(string, TRUE);
 }
 
 /*
@@ -363,37 +323,29 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
  */ 
 void gtranslator_syntax_update_text(GtkWidget *textwidget)
 {
-	GString *str;
 	gchar *text;
 	
 	g_return_if_fail(textwidget!=NULL);
 
 	text=gtk_editable_get_chars(GTK_EDITABLE(textwidget), 0, -1);
-	str=g_string_new(text);
-	g_free(text);
 
-	if(str->len > 0)
+	if(text && text[0]!='\0')
 	{
-		gint pos;
-		
-		pos=gtk_editable_get_position(GTK_EDITABLE(textwidget));
+		gint pos=gtk_editable_get_position(GTK_EDITABLE(textwidget));
 		
 		gtk_text_freeze(GTK_TEXT(textwidget));
 
+		nothing_changes=TRUE;
 		gtk_editable_delete_text(GTK_EDITABLE(textwidget), 0, -1);
+		gtranslator_syntax_insert_text(textwidget, text);
+		nothing_changes=FALSE;
 
-		gtranslator_syntax_insert_text(textwidget, str->str);
-
-		if(pos >= 0 && pos <= gtk_text_get_length(GTK_TEXT(textwidget)))
-		{
-			gtk_editable_set_position(
-				GTK_EDITABLE(textwidget), pos);
-		}
+		gtk_editable_set_position(GTK_EDITABLE(textwidget), pos);
 		
 		gtk_text_thaw(GTK_TEXT(textwidget));
 	}
 
-	g_string_free(str, FALSE);
+	g_free(text);
 }
 
 /*

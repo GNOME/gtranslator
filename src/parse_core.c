@@ -31,21 +31,13 @@
  */ 
 void parse_core(const gchar *filename)
 {
-	if (!filename)
-	{
-		g_warning(_("There's no file to open!"));
-			return;
-	}
-	else
-	{
-		gchar *base = g_basename(filename);
+	gboolean first_is_fuzzy;
+	gchar *base;
 
-		if (base[0] == '\0')
-		{
-			g_warning(_("There's no file to open!"));
-				return;
-		}
-	}
+	g_return_if_fail(filename!=NULL);
+
+	base=g_basename(filename);
+	g_return_if_fail(base[0]!='\0');
 
 	po = g_new0(GtrPo, 1);
 	/*
@@ -75,11 +67,14 @@ void parse_core(const gchar *filename)
 		free_po();
 		return;
 	}
-	
+
+#define FIRST_MSG GTR_MSG(po->messages->data)
+	first_is_fuzzy=(FIRST_MSG->status & GTR_MSG_STATUS_FUZZY) != 0;
+	mark_msg_fuzzy(FIRST_MSG, FALSE);
 	/*
 	 * If the first message is header (it always should be)
 	 */
-	po->header = get_header(GTR_MSG(po->messages->data));
+	po->header = get_header(FIRST_MSG);
 	if (po->header)
 	{
 		GList *header_li;
@@ -94,6 +89,7 @@ void parse_core(const gchar *filename)
 	else
 	{
 		g_warning(_("The file has no header!"));
+		mark_msg_fuzzy(FIRST_MSG, first_is_fuzzy);
 	}
 	
 	file_opened = TRUE;

@@ -52,6 +52,9 @@ static void edit_header_apply(GtkWidget * box, gint page_num, gpointer useless);
 static void take_my_options_toggled(GtkWidget * widget, gpointer useless);
 static void edit_header_changed(GtkWidget * widget, gpointer useless);
 static void language_changed(GtkWidget * widget, gpointer useless);
+static const gchar * language_in_english(const gchar *lang);
+static void substitute(gchar **item, const gchar *bad, const gchar *good);
+static void replace_substring(gchar **item, const gchar *bad, const gchar *good);
 
 static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 {
@@ -157,28 +160,31 @@ GtrHeader * get_header(GtrMsg * msg)
 }
 
 /*
+ * Get the non-localized name for the language, if available
+ */ 
+const gchar * language_in_english(const gchar *lang)
+{
+	gint c;
+	for(c=0;languages[c].name!=NULL;c++)
+	{
+		if(!strcmp(_(languages[c].name), lang))
+		{
+			return languages[c].name;
+		}
+	}
+	return lang;
+}		
+/*
  * Creates new GtrMsg, with all data set to current state of header 
  */
 GtrMsg * put_header(GtrHeader * h)
 {
 	gchar *group;
 	GtrMsg *msg = g_new0(GtrMsg, 1);
-	gint c;
-	gchar *lang=h->language;
 	gchar *version;
 
-	/*
-	 * Get the non-localized name for the language, if available
-	 */ 
-	for(c=0;languages[c].group!=NULL;c++)
-	{
-		if(!strcmp(_(languages[c].name), h->language))
-		{
-			lang=languages[c].name;
-			break;
-		}
-	}
-		
+	const gchar *lang=language_in_english(h->language);
+
 	if (h->lg_email && h->lg_email[0] != '\0')
 		group = g_strdup_printf("%s <%s>", lang, h->lg_email);
 	else
@@ -540,115 +546,79 @@ gchar *prepare_comment_for_save(gchar *comment)
 	return mystring->str;
 }
 
+void substitute(gchar **item, const gchar *bad, const gchar *good)
+{
+	/* If string still has standard value */
+	if(!strcmp(*item, bad))
+	{
+		/* Replace it with copy of good one */
+		g_free(*item);
+		*item=g_strdup(good);
+	}
+}
+
+/* This replaces std with good in item */
+void replace_substring(gchar **item, const gchar *bad, const gchar *good)
+{
+	gchar *old=*item;
+	*item=nautilus_str_replace_substring(old, bad, good);
+	g_free(old);
+}
+
 /*
  * Fill up the header entries which are also set up in the prefs.
  */
 void gtranslator_header_fill_up(GtrHeader *header)
 {
-	GtrHeader *settings;
-	
 	g_return_if_fail(header!=NULL);
 
-	gtranslator_config_init();
-
-	/*
-	 * Get the translator name per default and check for missing name.
-	 */
-	settings->translator=gtranslator_config_get_string("translator/name");
-
-	/*
-	 * We do have got settings from prefs and a default header -- work for us.
-	 */
-	if(settings->translator && !strcmp(header->translator, "FULL NAME"))
-	{
-		/*
-		 * Get all the header fields from the preferences.
-		 */
-		settings->tr_email=gtranslator_config_get_string("translator/email");
-		
-		settings->language=gtranslator_config_get_string("language/name");
-		settings->lg_email=gtranslator_config_get_string("language/team_email");
-		
-		settings->charset=gtranslator_config_get_string("language/mime_type");
-		settings->encoding=gtranslator_config_get_string("language/encoding");
-
-		/*
-		 * Fill up the original header fields.
-		 */
-		header->translator=g_strdup(settings->translator);
-		header->tr_email=g_strdup(settings->tr_email);
-		
-		header->language=g_strdup(settings->language);
-		header->lg_email=g_strdup(settings->lg_email);
-		
-		header->charset=g_strdup(settings->charset);
-		header->encoding=g_strdup(settings->encoding);
-
-		/*
-		 * If there's any header comment we should also substitute the 
-		 *  values there with useful stuff.
-		 */
-		if(header->comment)
-		{
-			gchar 		*comment;
-			gchar 		*title;
-			
-			time_t 		now;
-			struct tm 	*timebox;
-			gchar 		year[4];
-			
-			/*
-			 * Replace the default strings in the header comment with the stored
-			 *  data and useful strings/dates.
-			 */
-			now=time(NULL);
-			timebox=localtime(&now);
-
-			strftime(year, 4, "%Y", timebox);
-
-			/*
-			 * Translator data should be in sync with the header I guess .-)
-			 */
-			comment=nautilus_str_replace_substring(header->comment,
-				"EMAIL@ADDRESS", g_strdup(settings->tr_email));
-
-			comment=nautilus_str_replace_substring(comment, "FIRST AUTHOR",
-				g_strdup(settings->translator));
-			
-			/*
-			 * The YEAR field gets also filled up.
-			 */
-			comment=nautilus_str_replace_substring(comment, "YEAR", 
-				g_strdup(year));
-
-			/*
-			 * Should be a good description line .-)
-			 */
-			title=g_strdup_printf(_("-- %s gettext translation file for %s."),
-				settings->language, header->prj_name);
-			
-			comment=nautilus_str_replace_substring(comment, 
-				"SOME DESCRIPTIVE TITLE.", title);
-
-			/*
-			 * Strip off the "#, fuzzy" header line from the default header.
-			 */
-			comment=nautilus_str_strip_substring_and_after(comment, "#, fuzzy");
-			
-			/*
-			 * Assign the new header comment now.
-			 */
-			if(comment)
-			{
-				g_free(header->comment);
-				header->comment=g_strdup(comment);
-			}
-
-			g_free(comment);
-		}
-
-		free_header(settings);
-	}
+	substitute(&header->translator, "FULL NAME", author);
+	substitute(&header->tr_email, "EMAIL@ADDRESS", email);
 	
-	gtranslator_config_close();
+	substitute(&header->language, "LANGUAGE", language);
+	substitute(&header->lg_email, "LL@li.org", lg);
+	
+	substitute(&header->charset, "CHARSET", lc);
+	substitute(&header->encoding, "ENCODING", enc);
+
+	/*
+	 * If there's any header comment we should also substitute the 
+	 *  values there with useful stuff.
+	 */
+	if(header->comment)
+	{
+		gchar 		*title;
+		
+		time_t 		now;
+		struct tm 	*timebox;
+		gchar 		year[4];
+		
+		/*
+		 * Translator data should be in sync with the header I guess .-)
+		 */
+		replace_substring(&header->comment,
+				"FIRST AUTHOR", header->translator);
+		replace_substring(&header->comment,
+				"EMAIL@ADDRESS", header->tr_email);
+
+		/*
+		 * Substitute YEAR with current year
+		 */
+		now=time(NULL);
+		timebox=localtime(&now);
+
+		strftime(year, 4, "%Y", timebox);
+		replace_substring(&header->comment, "YEAR", year);
+
+		/*
+		 * Should be a good description line .-)
+		 */
+		title=g_strdup_printf("%s translation of %s.",
+			language_in_english(header->language),
+			header->prj_name);
+		replace_substring(&header->comment,
+				"SOME DESCRIPTIVE TITLE.", title);
+		g_free(title);
+	}
 }
+

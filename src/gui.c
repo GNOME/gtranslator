@@ -82,6 +82,8 @@ static void call_gtranslator_homepage(GtkWidget  * widget, gpointer useless);
 static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless);
 
+static void insert_text_handler (GtkEditable *editable, const gchar *text,
+				 gint length, gint *position, gpointer data);
 /*
  * To get the left/right moves from the cursor.
  */ 
@@ -162,19 +164,19 @@ static GnomeUIInfo the_file_menu[] = {
 static GnomeUIInfo the_views_menu[] = {
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Message"), 
 		N_("Standard messages view"),
-		switch_view, (gpointer) 1, NULL),
+		switch_view, (gpointer) GTR_MESSAGE_VIEW, NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Comments"), 
 		N_("View comments for message"),
-		switch_view, (gpointer) 2, NULL),
+		switch_view, (gpointer) GTR_COMMENT_VIEW, NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Numbers"),
 		N_("View numbers in the message"),
-		switch_view, (gpointer) 3, NULL),
+		switch_view, (gpointer) GTR_NUMBER_VIEW, NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Formats"), 
 		N_("View C formats of the message"),
-		switch_view, (gpointer) 4, NULL),
+		switch_view, (gpointer) GTR_C_FORMAT_VIEW, NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Hotkeys"),
 		N_("View hotkeys in the message"),
-		switch_view, (gpointer) 5, NULL),
+		switch_view, (gpointer) GTR_HOTKEY_VIEW, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -648,6 +650,7 @@ void create_app1(void)
 
 	gtranslator_history_show();
 
+	/* FIXME: these are duplicated in main() */
 	/*
 	 * Check if we'd to use special styles.
 	 */
@@ -669,6 +672,8 @@ void create_app1(void)
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
 			   GTK_SIGNAL_FUNC(text_has_got_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(trans_box), "insert_text",
+			   GTK_SIGNAL_FUNC(insert_text_handler), NULL);
 	gtk_signal_connect(GTK_OBJECT(text1), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
@@ -1124,76 +1129,39 @@ void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 		}
 	}
 
-	/*
-	 * Do all these steps only if the option to use the '·' is set.
-	 */
-	if(wants.dot_char)
-	{
-		gchar *newstr;
-		guint len, index;
-
-		nothing_changes = TRUE;
-
-		/*
-		 * Get the current pointer position.
-		 */
-		index=gtk_editable_get_position(GTK_EDITABLE(trans_box));
-		
-		/*
-		 * Get the text from the translation box.
-		 */
-		newstr=gtk_editable_get_chars(GTK_EDITABLE(trans_box), 0, -1);
-		/*
-		 * Parse the characters for a free space and replace
-		 *  them with the '·'.
-		 */
-		for(len=0; newstr[len]!='\0'; len++) {
-			if(newstr[len]==' ') {
-				static gint pos;
-				pos = len;
-
-				/*
-				 * Clean the textbox.
-				 */
-				gtk_editable_delete_text(
-					GTK_EDITABLE(trans_box), pos, pos+1);
-				/*
-				 * Insert the changed text with the '·''s.
-				 */
-				gtk_editable_insert_text(
-					GTK_EDITABLE(trans_box), _("·"), 1, &pos);
-			}
-		}
-		
-		g_free(newstr);
-		
-		/*
-		 * Go to the old text index.
-		 */
-		if(index > 0 &&
-			index < gtk_text_get_length(GTK_TEXT(trans_box)))
-		{
-			gtk_editable_set_position(
-				GTK_EDITABLE(trans_box), index);
-		}
-		else
-		{
-			if(index >= gtk_text_get_length(GTK_TEXT(trans_box)))
-			{
-				gtk_editable_set_position(
-					GTK_EDITABLE(trans_box), 
-					gtk_text_get_length(
-						GTK_TEXT(trans_box)));
-			}
-		}
-		
-		gtk_text_thaw(GTK_TEXT(trans_box));
-		nothing_changes = FALSE;
-	}
-	
+	/* FIXME: this belongs to insert/delete text handlers */
 	gtranslator_syntax_update_text(trans_box);
 }
 
+/* When inserting text, exchange spaces with dot chars */
+void insert_text_handler (GtkEditable *editable, const gchar *text,
+			  gint length, gint *position, gpointer data)
+{
+	gchar *result;
+
+	if (nothing_changes)
+		return;
+	/*
+	 * Do all these steps only if the option to use the '·' is set.
+	 */
+	if(!wants.dot_char)
+		return;
+
+	result=g_strdup(text);
+	invert_dot(result);
+
+	gtk_signal_handler_block_by_func(GTK_OBJECT(editable),
+					 GTK_SIGNAL_FUNC(insert_text_handler),
+					 data);
+	gtk_editable_insert_text(editable, result, length, position);
+	gtk_signal_handler_unblock_by_func(GTK_OBJECT(editable),
+					   GTK_SIGNAL_FUNC(insert_text_handler),
+					   data);
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
+
+	g_free(result);
+}
+	
 /*
  * The own keyhandler to get the left/right/up/down actions.
  */ 
@@ -1254,27 +1222,5 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
  */
 static void switch_view(GtkWidget *widget, gpointer view)
 {
-	switch(GPOINTER_TO_INT(view))
-	{
-		case 5:
-			gtranslator_views_set(GTR_HOTKEY_VIEW);
-				break;
-		
-		case 4:
-			gtranslator_views_set(GTR_C_FORMAT_VIEW);
-				break;
-		
-		case 3:
-			gtranslator_views_set(GTR_NUMBER_VIEW);
-				break;
-				
-		case 2:
-			gtranslator_views_set(GTR_COMMENT_VIEW);
-				break;
-				
-		case 1:
-		default:
-			gtranslator_views_set(GTR_MESSAGE_VIEW);
-				break;
-	}
+	gtranslator_views_set(GPOINTER_TO_INT(view));
 }

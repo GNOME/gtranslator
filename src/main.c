@@ -216,8 +216,10 @@ int main(int argc, char *argv[])
 	/*
 	 * Set up the text boxes with the _new_ style.
 	 */ 
+	gtranslator_config_init();
 	gtranslator_set_style(text1);
 	gtranslator_set_style(trans_box);
+	gtranslator_config_close();
 	
 	/*
 	 * Parse the domains in our GNOMELOCALEDIR.

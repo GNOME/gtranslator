@@ -1,3 +1,22 @@
+2001-03-28  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gui.c: (insert_text_handler): new function. Moved simplified dot char
+	conversion here from text_has_got_changed. So one position set-get pair
+	not needed and works faster as it analyses only inserted text.
+	Pass view type to switch_view and do not switch {}.
+	* header_stuff.c: (language_in_english): new function.
+	(substitute), (replace_substring): new simple functions.
+	(gtranslator_header_fill_up): simplify. Do not query config, use
+	variables from prefs.h. Substitute values only if they are standard
+	ones. Fix lots of memleaks.
+	* main.c: wrap set_style with config_init/close.
+	* parse_core.c: replaced translated warnings with g_return_if_fail.
+	Take fuzzy status off the first message, if it is the header.
+	* syntax.c: (gtranslator_syntax_insert_text): initialize variables.
+	Move clear_string from every case to the top. Removed set_position from
+	this func.
+	(gtranslator_syntax_update_text): use simple char * instead of GString.
+
 2001-03-25  Fatih Demir <kabalak@gtranslator.org>
 
 	* about.c: Removed Thomas from the authors' list.
