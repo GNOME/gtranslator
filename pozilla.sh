@@ -26,7 +26,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=5.0
+export POZILLA_RELEASE=5.1
 
 #
 # Here we do define the corresponding i18n mailing list which should also get
@@ -644,7 +644,26 @@ $language\t\t------------- Failure due to an error -------------"
 	translated=${statistics[0]}
 	fuzzy=${statistics[3]:-0}
 	untranslated=${statistics[6]:-0}
-	messages=$[ $translated + $fuzzy + $untranslated ]
+
+	#
+	# Arg, I'm really insane without any doubt -- also act for the case
+	#  where the output of msgmerge etc. doesn't look very good -- happening
+	#   to the "az.po" of gtranslator; well, as I dunno why, I just try to
+	#    get it slaned-by.
+	#
+	if `echo "$translated"|grep -sq "[[:alpha:]]"` ; then
+		continue
+	elif `echo "$fuzzy"|grep -sq "[[:alpha:]]"` ; then
+		continue
+	elif `echo "$untranslated"|grep -sq "[[:alpha:]]"` ; then
+		continue
+	else
+		#
+		# Hurray! A working case .-)
+		#
+		messages=$[ $translated + $fuzzy + $untranslated ]
+	fi
+
 	missing=$[ $fuzzy + $untranslated ]
 	centil=`awk "{ print $messages / 100 }" $CONFIG_DIR/pozilla.conf`
 	percent=`awk "{ printf \"%.2f\", $translated / $centil }" $CONFIG_DIR/pozilla.conf`
