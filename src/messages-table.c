@@ -654,29 +654,21 @@ GtkWidget *gtranslator_messages_table_new()
 		is_empty_function,
 		return_string_for_value_function,
 		NULL);
-	
-	e_tree_memory_set_expanded_default(E_TREE_MEMORY(tree_model), TRUE);
 
+	e_tree_memory_set_expanded_default(E_TREE_MEMORY(tree_model), TRUE);
+	
 	tree_memory=E_TREE_MEMORY(tree_model);
 
-	/* Calling gtk_widget_new here is to work around a bug in gal
-	** where e_tree_scrolled_new_from_spec is broken */
-	messages_tree=gtk_widget_new(e_tree_scrolled_get_type (),
-        	"hadjustment", NULL,
-        	"vadjustment", NULL,
-        	NULL);
-	
-	messages_tree = GTK_WIDGET(
-		e_tree_scrolled_construct_from_spec_file(
-			E_TREE_SCROLLED(messages_tree),
+	messages_tree = e_tree_scrolled_new_from_spec_file(
 			tree_model,
 			tree_extras,
-			ETSPECS_DIR "/messages-table.etspec", 
-			gtranslator_runtime_config->table_state_filename)
+			ETSPECS_DIR "/messages-table.etspec",
+			gtranslator_runtime_config->table_state_filename
 		);
+	
 
 	tree = GTK_WIDGET(e_tree_scrolled_get_tree (E_TREE_SCROLLED (messages_tree)));
-
+	
 	gtk_signal_connect(GTK_OBJECT(tree), "cursor_activated",
 		GTK_SIGNAL_FUNC(row_selected), NULL);
 	
@@ -696,6 +688,7 @@ void gtranslator_messages_table_clear(void)
 		e_tree_memory_node_remove(tree_memory, root_node);
 		/* sadly we seem to need to create a root_node or else mayhem results */
 		root_node=e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
+
 	}
 	
 	if(hash_table)
@@ -730,7 +723,7 @@ void gtranslator_messages_table_create (void)
 	
 	read_messages_table_colors();
 	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
-	
+		
 	unknown_node = e_tree_memory_node_insert (tree_memory, root_node, 0, NULL);
 	fuzzy_node = e_tree_memory_node_insert (tree_memory, root_node, 1, NULL);
 	translated_node = e_tree_memory_node_insert (tree_memory, root_node, 2, NULL);
@@ -738,7 +731,7 @@ void gtranslator_messages_table_create (void)
 	/*
 	 * Collapse all translated entries according to the user's preference.
 	 */
-	e_tree_node_set_expanded_recurse(E_TREE(tree), translated_node, 
+	e_tree_node_set_expanded(E_TREE(tree), translated_node, 
 		!GtrPreferences.collapse_translated);
 	
 	while(list)
@@ -772,6 +765,14 @@ void gtranslator_messages_table_create (void)
 			g_hash_table_insert(hash_table, message, node); 
 		list = g_list_next(list);
 	}
+
+
+	/*
+	 * Notify the tree_model that we have been 
+	 * reconfiguring
+	 */
+	
+	e_tree_model_node_changed(tree_model, root_node);
 }
 
 /*
@@ -811,10 +812,10 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 		if((message->status & GTR_MSG_STATUS_TRANSLATED) &&
 			GtrPreferences.collapse_translated)
 		{
-			e_tree_node_set_expanded_recurse(E_TREE(tree), 
+			e_tree_node_set_expanded(E_TREE(tree), 
 				translated_node, TRUE);
 		}
-		
+
 		e_tree_set_cursor(E_TREE(tree), node);
 	}
 }
