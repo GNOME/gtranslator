@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "about.h"
 #include "backend.h"
 #include "gui.h"
 #include "nautilus-string.h"
@@ -82,6 +83,11 @@ gboolean gtranslator_open_po_file(gchar *file)
 			
 			return TRUE;
 		}
+	}
+	else if(nautilus_str_has_prefix(file, "about:"))
+	{
+		gtranslator_about_dialog(NULL, NULL);
+		return TRUE;
 	}
 
 	if(nautilus_istr_has_suffix(file, ".mo") || 
