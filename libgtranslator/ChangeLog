@@ -1,3 +1,13 @@
+2000-12-03  Fatih Demir	<kabalak@gmx.net>
+
+	* vfs-handle.c: "Flush" the old stored filename.
+
+	* Makefile.am: Added conditionally compilation of the new
+		vfs-handle.c source (it's only integrated if GnomeVFS
+		 is present).
+
+	* vfs-handle.c/.h: Added GnomeVFS based remote file-methods.
+
 2000-11-18  Fatih Demir	<kabalak@gmx.net>
 
 	* parse-db.c: Changed the macro calls accordingly.

@@ -10,11 +10,19 @@ else
 configstuffcflags = $(GNOME_CFLAGS)
 endif
 
+if USE_VFS_STUFF
+vfs_cflags = $(VFS_CFLAGS)
+vfs_source = vfs-handle.c
+else
+vfs_cflags =
+vfs_source =
+endif
+
 INCLUDES = \
 	-I$(includedir) $(IDL_CFLAGS) \
 	$(GLIB_CFLAGS) $(configstuffcflags) \
 	$(OAF_CFLAGS) $(XML_CFLAGS) -I../src \
-	-DG_LOG_DOMAIN=\"libgtranslator\" \
+	$(vfs_cflags) -DG_LOG_DOMAIN=\"libgtranslator\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
 
@@ -25,7 +33,8 @@ libgtranslator_la_SOURCES = \
 	parse-db.c \
 	preferences.c \
 	stylistics.c \
-	team-handle.c
+	team-handle.c \
+	$(vfs_source)
 
 libgtranslator_la_LDFLAGS = -version-info @MAINVERSION@:@SUBVERSION@
 
@@ -36,9 +45,16 @@ else
 configstufflibs = $(GNOME_LIBS)
 endif
 
+if USE_VFS_STUFF
+vfs_libs = $(VFS_LIBS)
+else
+vfs_libs =
+endif
+
 libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
 	$(XML_LIBS) $(OAF_LIBS) -L/usr/X11R6/lib \
-	$(GNOMEUI_LIBS) $(configstufflibs)
+	$(GNOMEUI_LIBS) $(configstufflibs) \
+	$(vfs_libs)
 
 libgtranslator_include_dir = $(includedir)/libgtranslator
 
@@ -76,4 +92,5 @@ clean-am:
 	-rm -f $(GTRANSLATORD_SOURCES)
 
 EXTRA_DIST = $(idl__DATA) \
-	$(libgtranslator_include__DATA)
+	$(libgtranslator_include__DATA) \
+	vfs-handle.h
