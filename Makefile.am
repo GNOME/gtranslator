@@ -10,7 +10,9 @@ EXTRA_DIST= \
 		gtranslator.spec \
 		intltool-extract.in \
 		intltool-merge.in \
-		intltool-update.in
+		intltool-update.in \
+		omf.make \
+		xmldocs.make
 
 cvspack: distdir
 	@-rm -f $(distdir).tar.gz

@@ -5,8 +5,8 @@ gtranslator_man_dir = $(mandir)/man1
 gtranslator.1.gz: gtranslator.1
 	gzip -9 < gtranslator.1 > gtranslator.1.gz
 
-pozilla.sh.1.gz: pozilla.sh.1
-	gzip -9 < pozilla.sh.1 > pozilla.sh.1.gz
+pozilla.sh.1.gz: $(srcdir)/pozilla.sh.1
+	gzip -9 < $(srcdir)/pozilla.sh.1 > pozilla.sh.1.gz
 
 gtranslator_man__DATA = \
 	gtranslator.1.gz \

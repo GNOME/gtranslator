@@ -7,7 +7,7 @@ SUBDIRS = pixmaps semerkent
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
-	-Isemerkent/ \
+	-I$(srcdir)/semerkent \
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
         -DPREFIX=\""$(prefix)"\"                                \
         -DSYSCONFDIR=\""$(sysconfdir)"\"                        \
@@ -22,7 +22,7 @@ bin_PROGRAMS = gtranslator
 
 GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shell pkg-config --modversion gtk+-2.0) / $(shell pkg-config --modversion libgnomeui-2.0) / $(shell pkg-config --modversion libxml-2.0)"
 
-defines.h: defines.config
+defines.h: $(srcdir)/defines.config
 	sed \
 	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
 	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
@@ -32,7 +32,7 @@ defines.h: defines.config
 	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
 		< $< > $@
 
-$(gtranslator_SOURCES): defines.h
+BUILT_SOURCES = defines.h
 
 gtranslator_SOURCES = \
 	about.c about.h \
@@ -40,6 +40,7 @@ gtranslator_SOURCES = \
 	bookmark.c bookmark.h \
 	color-schemes.c color-schemes.h \
 	comment.c comment.h \
+	defines.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
@@ -79,7 +80,7 @@ gtranslator_LDADD = \
 	$(GTRANSLATOR_LIBS) \
 	semerkent/libsemerkent.a
 
-CLEANFILES = defines.h
+#CLEANFILES = defines.h
 
 EXTRA_DIST = ChangeLog \
 	defines.config
