@@ -6,19 +6,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"POT-Creation-Date: 2001-08-14 11:17+0400\n"
-"PO-Revision-Date: 2001-08-14 13:22+0400\n"
+"POT-Creation-Date: 2001-11-24 20:06+0300\n"
+"PO-Revision-Date: 2001-11-24 20:23+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:59
+#: src/about.c:51
+msgid "Messages table:"
+msgstr "Таблица сообщений:"
+
+#: src/about.c:54
+msgid "Documentation:"
+msgstr "Документация:"
+
+#: src/about.c:66
 msgid "(C) 1999-2001 The Free Software Foundation"
 msgstr "(C) 1999-2001 The Free Software Foundation"
 
-#: src/about.c:60
+#: src/about.c:67
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gtranslator - средство для редактирования po-файлов со множеством свисточков "
@@ -28,7 +36,7 @@ msgstr ""
 #. * This string is displayed in the about box as an information about
 #. *  the currently used colorscheme.
 #.
-#: src/about.c:69
+#: src/about.c:76
 #, c-format
 msgid "Current colorscheme: \"%s\" (version %s) by"
 msgstr "Текущая цветовая схема: \"%s\" (версия %s) автор"
@@ -36,47 +44,49 @@ msgstr "Текущая цветовая схема: \"%s\" (версия %s) автор"
 #.
 #. * This is a status report feedback: "Blabla backend\n (filename) loaded.\n".
 #.
-#: src/backend.c:279
+#: src/backend.c:280
 #, c-format
 msgid ""
 "%s\n"
 " (%s) loaded.\n"
 msgstr ""
+"%s\n"
+" (%s) загружен.\n"
 
-#: src/color-schemes.c:170
+#: src/color-schemes.c:173
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Невозможно применить файл цветовой схемы \"%s\"!"
 
-#: src/color-schemes.c:299
-msgid "Couldn't retrieve author informations!"
+#: src/color-schemes.c:302
+msgid "Couldn't retrieve author information!"
 msgstr "Невозможно получить информацию об авторе!"
 
 #.
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:305
+#: src/color-schemes.c:308 src/translator.c:329
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: src/color-schemes.c:306
+#: src/color-schemes.c:309
 msgid "<Not Given>"
 msgstr "<Не задано>"
 
-#: src/dialogs.c:94
+#: src/dialogs.c:96
 msgid "gtranslator -- open po file"
 msgstr "gtranslator -- открытие po-файла"
 
-#: src/dialogs.c:133
+#: src/dialogs.c:135
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- сохранить файл как.."
 
-#: src/dialogs.c:140
+#: src/dialogs.c:155
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- сохранить локальную копию файла как.."
 
-#: src/dialogs.c:184
+#: src/dialogs.c:199
 #, c-format
 msgid ""
 "File %s\n"
@@ -85,215 +95,232 @@ msgstr ""
 "Файл %s\n"
 "был изменен. Сохранить?"
 
-#: src/dialogs.c:221
+#: src/dialogs.c:236
 msgid "gtranslator -- import po file"
 msgstr "gtranslator -- импорт po-файла"
 
-#: src/dialogs.c:264
+#: src/dialogs.c:279
 msgid "gtranslator -- export po file"
 msgstr "gtranslator -- экспорт po-файла"
 
-#: src/dialogs.c:310 src/dialogs.c:344
+#: src/dialogs.c:325 src/dialogs.c:359
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- правка комментария"
 
-#: src/dialogs.c:332
+#: src/dialogs.c:347
 msgid "Comment:"
 msgstr "Комментарий:"
 
-#: src/dialogs.c:448
+#: src/dialogs.c:463
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Надо ли удалить ВСЕ переводы из \"%s\"?"
 
-#: src/dialogs.c:461
-msgid "gtranslator -- remove all translations"
-msgstr "gtranslator -- удалить все переводы"
+#: src/dialogs.c:476 src/dialogs.c:501
+msgid "gtranslator -- confirm removal of all translations"
+msgstr "gtranslator -- подтвердить удаление всех переводов"
 
-#: src/dialogs.c:475
-msgid "Are you really sure to remove ALL translations from this po file?"
+#: src/dialogs.c:490
+msgid "Are you sure you want to remove ALL translations from this po file?"
 msgstr "Вы действительно хотите удалить ВСЕ переводы из этого po-файла?"
 
-#: src/dialogs.c:486
-msgid "gtranslator -- remove all translations confirmation dialog"
-msgstr "gtranslator -- диалог подтверждения удаления всех переводов"
-
-#: src/dialogs.c:579
+#: src/dialogs.c:594
 msgid "gtranslator -- go to"
 msgstr "Переводчик -- перейти"
 
-#: src/dialogs.c:581
+#: src/dialogs.c:596
 msgid "Go!"
 msgstr "Перейти!"
 
-#: src/dialogs.c:590
+#: src/dialogs.c:605
 msgid "Go to message number:"
 msgstr "Перейти к указанному сообщению:"
 
-#: src/dialogs.c:660
+#: src/dialogs.c:675
 msgid "Find in the po file"
 msgstr "Поиск в po-файле"
 
-#: src/dialogs.c:662 src/menus.c:362
+#: src/dialogs.c:677 src/menus.c:362
 msgid "Find"
 msgstr "Поиск"
 
-#: src/dialogs.c:669
-msgid "Enter your desired search string:"
+#: src/dialogs.c:684
+msgid "Enter search string:"
 msgstr "Введите строку для поиска:"
 
-#: src/dialogs.c:674
+#: src/dialogs.c:689
 msgid "Case sensitive"
 msgstr "Регистрозависимый"
 
-#: src/dialogs.c:679 src/languages.h:120
+#: src/dialogs.c:694 src/languages.c:91
 msgid "English"
 msgstr "Английский"
 
-#: src/dialogs.c:685 src/dialogs.c:783 src/gui.c:556 src/messages-table.c:371
-#: src/messages-table.c:406
+#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:559 src/messages-table.c:448
+#: src/messages-table.c:489
 msgid "Translated"
 msgstr "Переведенное"
 
-#: src/dialogs.c:691 src/dialogs.c:789
+#: src/dialogs.c:706 src/dialogs.c:804
 msgid "Both"
 msgstr "Оба"
 
-#: src/dialogs.c:697 src/dialogs.c:777
+#: src/dialogs.c:712 src/dialogs.c:792
 msgid "Comments"
 msgstr "Комментарии"
 
-#: src/dialogs.c:703
+#: src/dialogs.c:718
 msgid "In all strings"
 msgstr "Во всех строках"
 
-#: src/dialogs.c:718
+#: src/dialogs.c:733
 msgid "Find in: "
 msgstr "Поиск в: "
 
-#: src/dialogs.c:763
+#: src/dialogs.c:778
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- замена"
 
-#: src/dialogs.c:764 src/menus.c:366
+#: src/dialogs.c:779 src/menus.c:366
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/dialogs.c:765
+#: src/dialogs.c:780
 msgid "Replace all"
 msgstr "Заменить все"
 
-#: src/dialogs.c:769
+#: src/dialogs.c:784
 msgid "String to replace:"
 msgstr "Строка для замены:"
 
-#: src/dialogs.c:772
+#: src/dialogs.c:787
 msgid "Replace string:"
 msgstr "Заменить строку:"
 
-#: src/dialogs.c:812
+#: src/dialogs.c:827
 msgid "Replace in:"
-msgstr ""
+msgstr "Заменить в:"
 
-#: src/dialogs.c:890
-msgid "An error occured while msgfmt was executed:\n"
+#: src/dialogs.c:905
+msgid "An error occurred while msgfmt was executed:\n"
 msgstr "При выполнении msgfmt возникла ошибка:\n"
 
-#: src/dialogs.c:920
+#: src/dialogs.c:935
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- открыть URI"
 
-#: src/dialogs.c:921 src/menus.c:284
+#: src/dialogs.c:936 src/menus.c:284
 msgid "Open"
 msgstr "Открыть"
 
-#: src/dialogs.c:927
+#: src/dialogs.c:944
 msgid "Enter URI:"
 msgstr "Ввод URI:"
 
-#: src/dialogs.c:965
+#: src/dialogs.c:982
 msgid "No URI given!"
 msgstr "URI не задан!"
 
-#: src/dialogs.c:980
+#: src/dialogs.c:997
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Задан не поддерживаемый протокол для URI (как \"ftp://\")"
 
-#: src/dialogs.c:1011
+#: src/dialogs.c:1005
+msgid ""
+"URIs are used to locate files uniquely on different systems.\n"
+"The standard Internet addresses (URLs) are also URIs -- you can\n"
+"use them to open remote po files lying on servers with standard protocols\n"
+"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
+"Some example URIs for clarification (these ones are supported):\n"
+"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+"\n"
+"file:///<PO-FILE>"
+msgstr ""
+
+#: src/dialogs.c:1041
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator got closed.\n"
-"Possibly it contains hard pieces of work?!\n"
+"It was saved by gtranslator before gtranslator last closed\n"
+"and may contain your hard work!\n"
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
 
-#: src/dialogs.c:1036
+#: src/dialogs.c:1064
 #, c-format
 msgid "Recovering `%s'..."
 msgstr "Восстановление \"%s\"..."
 
-#: src/dialogs.c:1081
+#: src/dialogs.c:1110
 msgid "Couldn't get list of gettext domains!"
 msgstr "Невозможно получить список доменов gettext!"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1088
+#: src/dialogs.c:1117
 msgid "Here you can query existing gettext domains for a translation."
 msgstr ""
 
-#: src/dialogs.c:1091
+#: src/dialogs.c:1120
 msgid "gtranslator -- query existing gettext domains"
 msgstr ""
 
-#: src/dialogs.c:1092 src/menus.c:371
+#: src/dialogs.c:1121 src/menus.c:371
 msgid "Query"
 msgstr "Запрос"
 
-#: src/dialogs.c:1100
+#: src/dialogs.c:1129
 msgid "Query string:"
 msgstr "Строка запроса:"
 
-#: src/dialogs.c:1107
+#: src/dialogs.c:1136
 msgid "Domain to search the translation in:"
 msgstr ""
 
-#: src/dialogs.c:1157
+#: src/dialogs.c:1186
 msgid "No query string given!"
 msgstr "Не задана строка запроса!"
 
-#: src/dialogs.c:1191
+#: src/dialogs.c:1227
 msgid "Couldn't find any result for the query!"
-msgstr ""
+msgstr "Не удалось найти никаких результатов для этого запроса!"
 
-#: src/dialogs.c:1204
+#: src/dialogs.c:1240
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
+"Найдено \"%s\" в качестве перевода для \"%s\" в домене \"%s\".\n"
+"Хотите вставить в перевод?"
 
 #.
 #. * Translators: This means that the queried string
 #. *  is already translated.
 #.
-#: src/dialogs.c:1294
+#: src/dialogs.c:1330
 msgid "Query's result translation is already there!"
 msgstr ""
 
-#: src/dialogs.c:1316
+#: src/dialogs.c:1353
 msgid ""
-"Should gtranslator auto accomplish all missing strings (if possible)\n"
-"from your default query domain (and your personal learn buffer)?"
+"Should gtranslator autotranslate the file using information\n"
+"from the default query domain and the personal learn buffer?"
 msgstr ""
 
-#: src/find.c:213
+#: src/dialogs.c:1358
+msgid ""
+"Should gtranslator autotranslate the file using information\n"
+"from the default query domain?"
+msgstr ""
+
+#: src/find.c:215
 msgid "Please enter a search string"
 msgstr "Введите строку для поиска:"
 
-#: src/find.c:229
+#: src/find.c:231
 #, c-format
 msgid ""
 "Could not find\n"
@@ -302,40 +329,40 @@ msgstr ""
 "Не удалось найти\n"
 "\"%s\""
 
-#: src/gui.c:263
+#: src/gui.c:252
 msgid "Edit comment"
 msgstr "Правка комментария"
 
-#: src/gui.c:542
+#: src/gui.c:545
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ Осталось %i нечетких ]"
 
-#: src/gui.c:542 src/gui.c:546 src/menus.c:352 src/messages-table.c:357
-#: src/messages-table.c:413
+#: src/gui.c:545 src/gui.c:549 src/menus.c:352 src/messages-table.c:434
+#: src/messages-table.c:496
 msgid "Fuzzy"
 msgstr "Нечеткое"
 
-#: src/gui.c:546
+#: src/gui.c:549
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [Нечетких не осталось]"
 
-#: src/gui.c:554
+#: src/gui.c:557
 msgid "Stick"
 msgstr "Прицепить"
 
-#: src/gui.c:565
+#: src/gui.c:568
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ Осталось %i непереведенных ]"
 
-#: src/gui.c:565 src/gui.c:567 src/messages-table.c:329
-#: src/messages-table.c:403
+#: src/gui.c:568 src/gui.c:570 src/messages-table.c:406
+#: src/messages-table.c:486
 msgid "Untranslated"
 msgstr "Непереведенное"
 
-#: src/gui.c:567
+#: src/gui.c:570
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Не осталось непереведенных ]"
@@ -343,85 +370,85 @@ msgstr "%s [ Не осталось непереведенных ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:580
+#: src/gui.c:583
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "CСообщение %d / %d / Состояние: %s"
 
-#: src/header_stuff.c:481
+#: src/header_stuff.c:430
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- правка заголовка"
 
-#: src/header_stuff.c:488 src/header_stuff.c:493
+#: src/header_stuff.c:437 src/header_stuff.c:442
 msgid "Project"
 msgstr "Проект"
 
-#: src/header_stuff.c:496
+#: src/header_stuff.c:445
 msgid "Translator and Language"
 msgstr "Переводчик и язык"
 
-#: src/header_stuff.c:507
+#: src/header_stuff.c:456
 msgid "Comments:"
 msgstr "Комментарии:"
 
-#: src/header_stuff.c:513
+#: src/header_stuff.c:462
 msgid "Project name:"
 msgstr "Название проекта:"
 
-#: src/header_stuff.c:516
+#: src/header_stuff.c:465
 msgid "Project version:"
 msgstr "Версия проекта:"
 
-#: src/header_stuff.c:519
+#: src/header_stuff.c:468
 msgid "Pot file creation date:"
 msgstr "Дата создания pot-файла:"
 
-#: src/header_stuff.c:524
+#: src/header_stuff.c:473
 msgid "Po file revision date:"
 msgstr "Дата обновления po-файла:"
 
-#: src/header_stuff.c:531
+#: src/header_stuff.c:480
 msgid "Generator:"
-msgstr ""
+msgstr "Генератор:"
 
-#: src/header_stuff.c:541
-msgid "Use my options to fill the following entries."
-msgstr "Использовать мои настройки для заполнения следующих записей."
+#: src/header_stuff.c:490
+msgid "Use my options to complete the following entries:"
+msgstr "Использовать мои настройки для заполнения следующих записей:"
 
-#: src/header_stuff.c:554
+#: src/header_stuff.c:503
 msgid "Translator's name:"
 msgstr "Имя переводчика:"
 
-#: src/header_stuff.c:557
+#: src/header_stuff.c:506
 msgid "Translator's e-mail:"
 msgstr "Эл.адрес переводчика:"
 
-#: src/header_stuff.c:560 src/prefs.c:160
+#: src/header_stuff.c:509 src/prefs.c:171
 msgid "Language:"
 msgstr "Язык:"
 
-#: src/header_stuff.c:565
+#: src/header_stuff.c:515
 msgid "Language group's e-mail:"
 msgstr "Эл.адрес языковой группы:"
 
-#: src/header_stuff.c:569 src/prefs.c:173
+#: src/header_stuff.c:520 src/prefs.c:187
 msgid "Charset:"
 msgstr "Набор символов:"
 
-#: src/header_stuff.c:573 src/prefs.c:177
+#: src/header_stuff.c:525 src/prefs.c:192
 msgid "Encoding:"
 msgstr "Кодировка:"
 
-#: src/history.c:168
+#: src/history.c:200
 msgid "_File/Recen_t files/"
 msgstr "Файл/Недавние файлы/"
 
-#: src/history.c:206
+#: src/history.c:248
 #, c-format
 msgid "Open %s"
 msgstr "Открыть %s"
 
-#: src/htmlizer.c:236
+#: src/htmlizer.c:238
 #, c-format
 msgid "Couldn't save html output to %s!"
 msgstr "Не удалось сохранить html-вывод в %s!"
@@ -429,7 +456,7 @@ msgstr "Не удалось сохранить html-вывод в %s!"
 #.
 #. * Translatable output to a html file which is visible on the pages.
 #.
-#: src/htmlizer.c:254
+#: src/htmlizer.c:256
 #, c-format
 msgid "%s-%s contains %i messages."
 msgstr "%s-%s содержит %i сообщений."
@@ -440,12 +467,12 @@ msgstr "%s-%s содержит %i сообщений."
 #. * NOTE: Please do not forget to also "translate" the <b> tags as the
 #. *  project name should be displayed bold on the output pages.
 #.
-#: src/htmlizer.c:267
+#: src/htmlizer.c:269
 #, c-format
 msgid "Project <b>%s</b> (last po file revision: %s)."
 msgstr "Проект <b>%s</b> (последнее обновление po-файла: %s)."
 
-#: src/htmlizer.c:282
+#: src/htmlizer.c:284
 #, c-format
 msgid "Last translator: %s"
 msgstr "Последний переводчик: %s"
@@ -459,340 +486,338 @@ msgstr "Последний переводчик: %s"
 #. *
 #. * Please don't forget to include the HTML tags in the msgid.
 #.
-#: src/htmlizer.c:320
+#: src/htmlizer.c:322
 #, c-format
 msgid ""
 "HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
 "\">gtranslator</a> version %s."
 msgstr ""
 
-#: src/languages.h:64
+#: src/languages.c:35
 msgid "Afrikaans"
 msgstr "Африкаанс"
 
-#: src/languages.h:68
+#: src/languages.c:39
 msgid "Arabic"
 msgstr "Арабский"
 
-#: src/languages.h:72
+#: src/languages.c:43
 msgid "Azerbaijani Turkish"
 msgstr "Азербайджанский турецкий"
 
-#: src/languages.h:76
+#: src/languages.c:47
 msgid "Basque"
 msgstr "Баскский"
 
-#: src/languages.h:80
-msgid "Bielorussian"
+#: src/languages.c:51
+msgid "Belorussian"
 msgstr "Белорусский"
 
-#: src/languages.h:84
+#: src/languages.c:55
 msgid "Britton"
 msgstr "Британский"
 
-#: src/languages.h:88
+#: src/languages.c:59
 msgid "Bulgarian"
 msgstr "Болгарский"
 
-#: src/languages.h:92
+#: src/languages.c:63
 msgid "Catalan"
 msgstr "Каталонский"
 
-#: src/languages.h:96
+#: src/languages.c:67
 msgid "Chinese/Simplified"
 msgstr "Китайский упрощенный"
 
-#: src/languages.h:100
+#: src/languages.c:71
 msgid "Chinese/Traditional"
 msgstr "Китайский традиционный"
 
-#: src/languages.h:104
+#: src/languages.c:75
 msgid "Croatian"
 msgstr "Хорватский"
 
-#: src/languages.h:108
+#: src/languages.c:79
 msgid "Czech"
 msgstr "Чешский"
 
-#: src/languages.h:112
+#: src/languages.c:83
 msgid "Danish"
 msgstr "Датский"
 
-#: src/languages.h:116
+#: src/languages.c:87
 msgid "Dutch"
 msgstr "Голландский"
 
-#: src/languages.h:124
+#: src/languages.c:95
 msgid "English/Canada"
 msgstr "Канадский английский"
 
-#: src/languages.h:128
+#: src/languages.c:99
 msgid "English/GB"
 msgstr "Великобританский английский"
 
-#: src/languages.h:132
+#: src/languages.c:103
 msgid "English/USA"
 msgstr "Американский английский"
 
-#: src/languages.h:136
+#: src/languages.c:107
 msgid "Esperanto"
 msgstr "Эсперанто"
 
-#: src/languages.h:140
+#: src/languages.c:111
 msgid "Estonian"
 msgstr "Эстонский"
 
-#: src/languages.h:144
+#: src/languages.c:115
 msgid "Farsi"
 msgstr "Фарси"
 
-#: src/languages.h:148
+#: src/languages.c:119
 msgid "Finnish"
 msgstr "Финский"
 
-#: src/languages.h:152
+#: src/languages.c:123
 msgid "French"
 msgstr "Французский"
 
-#: src/languages.h:156
+#: src/languages.c:127
 msgid "Galician"
 msgstr "Галльский"
 
-#: src/languages.h:160
+#: src/languages.c:131
 msgid "German"
 msgstr "Немецкий"
 
-#: src/languages.h:164
+#: src/languages.c:135
 msgid "Greek"
 msgstr "Греческий"
 
-#: src/languages.h:168
+#: src/languages.c:139
 msgid "Hungarian"
 msgstr "Венгерский"
 
-#: src/languages.h:172
+#: src/languages.c:143
 msgid "Indonesian"
 msgstr "Индонезийский"
 
-#: src/languages.h:176
+#: src/languages.c:147
 msgid "Italian"
 msgstr "Итальянский"
 
-#: src/languages.h:180
+#: src/languages.c:151
 msgid "Irish"
 msgstr "Ирландский"
 
-#: src/languages.h:184
+#: src/languages.c:155
 msgid "Japanese"
 msgstr "Японский"
 
-#: src/languages.h:188
+#: src/languages.c:159
 msgid "Korean"
 msgstr "Корейский"
 
-#: src/languages.h:192
+#: src/languages.c:163
 msgid "Latvian"
 msgstr "Латвийский"
 
-#: src/languages.h:196
+#: src/languages.c:167
 msgid "Lithuanian"
 msgstr "Литовский"
 
-#: src/languages.h:200
+#: src/languages.c:171
 msgid "Malay/Bahasa Melayu"
 msgstr ""
 
-#: src/languages.h:204
+#: src/languages.c:175
 msgid "Maltese"
-msgstr ""
+msgstr "Мальтийский"
 
-#: src/languages.h:208
+#: src/languages.c:179
 msgid "Norwegian/Bokmaal"
 msgstr "Норвежский/Bokmaal"
 
-#: src/languages.h:212
+#: src/languages.c:183
 msgid "Norwegian/Nynorsk"
 msgstr "Норвежский/Nynorsk"
 
-#: src/languages.h:216
+#: src/languages.c:187
 msgid "Polish"
 msgstr "Польский"
 
-#: src/languages.h:220
+#: src/languages.c:191
 msgid "Portuguese"
 msgstr "Португальский"
 
-#: src/languages.h:224
+#: src/languages.c:195
 msgid "Portuguese/Brazil"
 msgstr "Бразильский португальский"
 
-#: src/languages.h:228
+#: src/languages.c:199
 msgid "Romanian"
 msgstr "Румынский"
 
-#: src/languages.h:232
+#: src/languages.c:203
 msgid "Russian"
 msgstr "Русский"
 
-#: src/languages.h:236
+#: src/languages.c:207
 msgid "Serbian/Cyrillic"
 msgstr "Сербский/Кириллица"
 
-#: src/languages.h:240
+#: src/languages.c:211
 msgid "Serbian/Latin"
 msgstr "Сербский/Латиница"
 
-#: src/languages.h:244
+#: src/languages.c:215
 msgid "Slovak"
 msgstr "Словацкий"
 
-#: src/languages.h:248
+#: src/languages.c:219
 msgid "Slovenian"
 msgstr "Словацкий"
 
-#: src/languages.h:252
+#: src/languages.c:223
 msgid "Spanish"
 msgstr "Испанский"
 
-#: src/languages.h:256
+#: src/languages.c:227
 msgid "Spanish/Spain"
 msgstr "Испанский/Испания"
 
-#: src/languages.h:260
+#: src/languages.c:231
 msgid "Spanish/Mexico"
 msgstr "Мексиканский испанский"
 
-#: src/languages.h:264
+#: src/languages.c:235
 msgid "Swedish"
 msgstr "Шведский"
 
-#: src/languages.h:268
+#: src/languages.c:239
 msgid "Tamil"
 msgstr "Тамильский"
 
-#: src/languages.h:272
+#: src/languages.c:243
 msgid "Thai"
 msgstr "Тайваньский китайский"
 
-#: src/languages.h:276
+#: src/languages.c:247
 msgid "Turkish"
 msgstr "Турецкий"
 
-#: src/languages.h:280
+#: src/languages.c:251
 msgid "Ukrainian"
 msgstr "Украинский"
 
-#: src/languages.h:284
+#: src/languages.c:255
 msgid "Uzbekian"
 msgstr "Узбекский"
 
-#: src/languages.h:288
+#: src/languages.c:259
 msgid "Vietnamese"
 msgstr "Вьетнамский"
 
-#: src/languages.h:292
+#: src/languages.c:263
 msgid "Walloon"
 msgstr "Валунский"
 
-#: src/languages.h:296
+#: src/languages.c:267
 msgid "Welsh"
 msgstr "Валлийский"
 
-#: src/main.c:76
-msgid "Show build informations/specifications"
-msgstr ""
-
 #: src/main.c:80
+msgid "Auto translate the po file & exit"
+msgstr "Автоперевод po-файла и выход"
+
+#: src/main.c:80 src/main.c:92
+msgid "FILENAME"
+msgstr "НАЗВАНИЕ ФАЙЛА"
+
+#: src/main.c:84
+msgid "Show build information/specifications"
+msgstr "Показать информацию/спецификации сборки"
+
+#: src/main.c:88
 msgid "Specify main window geometry"
 msgstr "Указать геометрию главного окна"
 
-#: src/main.c:80
+#: src/main.c:88
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: src/main.c:84
+#: src/main.c:92
 msgid "Learn the file completely & exit"
-msgstr ""
+msgstr "Полностью заучить файл и выйти"
 
-#: src/main.c:84
-msgid "FILENAME"
-msgstr ""
-
-#: src/main.c:88
+#: src/main.c:96
 msgid "Don't load any backend modules"
 msgstr ""
 
-#: src/main.c:92
+#: src/main.c:100
 msgid "Define another query-domains directory"
 msgstr ""
 
-#: src/main.c:92
+#: src/main.c:100
 msgid "LOCALEDIR"
 msgstr ""
 
-#: src/main.c:96
+#: src/main.c:104
 msgid "HTML file to write to"
 msgstr "HTML-файл для записи"
 
-#: src/main.c:96
+#: src/main.c:104
 msgid "HTMLFILE"
 msgstr ""
 
-#: src/main.c:137
+#: src/main.c:144
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Ошибка при инициализации GConf: %s."
 
-#: src/main.c:159
-msgid "gtranslator build informations/specs:"
+#: src/main.c:167
+msgid "gtranslator build information/specs:"
 msgstr "gtranslator -- информация о сборке:"
 
-#: src/main.c:161
+#: src/main.c:169
 msgid "Version and build date:"
 msgstr "Версия и дата сборки:"
 
-#: src/main.c:163
-msgid "Build-Glib/Gtk+/Gnome versions:"
+#: src/main.c:171
+msgid "Build GLib/Gtk+/GNOME versions:"
 msgstr ""
 
-#: src/main.c:165
+#: src/main.c:173
 msgid "Backends directory:"
 msgstr ""
 
-#: src/main.c:167
+#: src/main.c:175
 msgid "Colorschemes directory:"
 msgstr "Каталог цветовых схем:"
 
-#: src/main.c:169
+#: src/main.c:177
 msgid "Scripts directory:"
 msgstr "Каталог скриптов:"
 
-#: src/main.c:171
+#: src/main.c:179
 msgid "Window icon:"
 msgstr "Пиктограмма окна:"
 
-#: src/main.c:173
+#: src/main.c:181
 msgid "Own locale directory:"
 msgstr "Собственный каталог локали:"
 
-#: src/main.c:193
-msgid ""
-"Unfortunately your GModule implementation doesn't support loading dynamic "
-"modules!"
-msgstr "К сожалению ваша реализация GModule не поддерживает загрузку динамических модулей!"
-
-#: src/main.c:207
-msgid "gtranslator won't load any backend module...\n"
-msgstr ""
+#: src/main.c:211
+msgid "GModule implementation doesn't support loading dynamic modules!"
+msgstr "Реализация GModule не поддерживает загрузку динамических модулей!"
 
 #.
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:408
+#: src/main.c:510
 #, c-format
-msgid "The file `%s' has been successfully learned.\n"
-msgstr ""
+msgid "Learned `%s' successfully.\n"
+msgstr "\"%s\" успешно изучено.\n"
 
 #: src/menus.c:49
 msgid "_Messages"
@@ -819,24 +844,26 @@ msgid "Update the po file"
 msgstr "Обновить po-файл"
 
 #: src/menus.c:76
-msgid "Aut_oaccomplish"
-msgstr ""
+msgid "Aut_otranslate..."
+msgstr "Автоперевод..."
 
 #: src/menus.c:77
-msgid "Automatically fill missing translations from the default query domain"
+msgid ""
+"Autotranslate the file with information from the default query domain/learn "
+"buffer"
 msgstr ""
 
 #: src/menus.c:84
-msgid "Remove all translations"
-msgstr "Удалить все переводы"
+msgid "Remove all translations..."
+msgstr "Удалить все переводы..."
 
 #: src/menus.c:85
 msgid "Remove all existing translations from the po file"
 msgstr "Удалить все существующие переводы из po-файла"
 
 #: src/menus.c:93
-msgid "Open from _URI"
-msgstr "Открыть URI"
+msgid "Open from _URI..."
+msgstr "Открыть URI..."
 
 #: src/menus.c:94
 msgid "Open a po file from a given URI"
@@ -847,24 +874,24 @@ msgid "Recen_t files"
 msgstr "Недавние файлы"
 
 #: src/menus.c:107
-msgid "_Export to UTF-8"
-msgstr "Экспорт в UTF-8"
+msgid "_Export to UTF-8..."
+msgstr "Экспорт в UTF-8..."
 
 #: src/menus.c:108
 msgid "Export the current po file to UTF-8"
 msgstr "Экспорт текущего po-файла в UTF-8"
 
 #: src/menus.c:114
-msgid "_Import from UTF-8"
-msgstr "Импорт из UTF-8"
+msgid "_Import from UTF-8..."
+msgstr "Импорт из UTF-8..."
 
 #: src/menus.c:115
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr "Импорт файла из UTF-8 в соответствующую кодировку po-файла"
 
 #: src/menus.c:145
-msgid "_Query"
-msgstr "Запрос"
+msgid "_Query..."
+msgstr "Запрос..."
 
 #: src/menus.c:146 src/menus.c:372
 msgid "Query for a string"
@@ -884,7 +911,7 @@ msgstr "Сообщение"
 
 #: src/menus.c:164
 msgid "Standard messages view"
-msgstr ""
+msgstr "Окно стандартных сообщений"
 
 #: src/menus.c:166
 msgid "_Numbers"
@@ -892,19 +919,19 @@ msgstr "Числа"
 
 #: src/menus.c:167
 msgid "View numbers in the message"
-msgstr ""
+msgstr "Просмотр чисел в сообщении"
 
 #: src/menus.c:169
 msgid "C _Formats"
-msgstr ""
+msgstr "C-форматирование"
 
 #: src/menus.c:170
 msgid "View C formats of the message"
-msgstr ""
+msgstr "Просмотр C-форматирования сообщения"
 
 #: src/menus.c:172
 msgid "_Hotkeys"
-msgstr ""
+msgstr "Горячие клавиши"
 
 #: src/menus.c:173
 msgid "View hotkeys in the message"
@@ -923,7 +950,7 @@ msgid "_Back"
 msgstr "Назад"
 
 #: src/menus.c:188 src/menus.c:332
-msgid "Go one message back"
+msgid "Move back one message"
 msgstr "Перейти на одно сообщение назад"
 
 #: src/menus.c:195
@@ -931,8 +958,8 @@ msgid "_Next"
 msgstr "След."
 
 #: src/menus.c:196 src/menus.c:337
-msgid "Go one message forward"
-msgstr "Перейти на одно сообщение вперед"
+msgid "Move forward one message"
+msgstr "Перейти на одно сообщение вперёд"
 
 #: src/menus.c:202
 msgid "_Last"
@@ -1032,11 +1059,11 @@ msgstr "Заголовок"
 
 #: src/menus.c:310
 msgid "Undo"
-msgstr ""
+msgstr "Откат"
 
 #: src/menus.c:311
 msgid "Undo the last performed action"
-msgstr ""
+msgstr "Отмена последнего выполненого действия"
 
 #: src/menus.c:315
 msgid "Options"
@@ -1090,23 +1117,31 @@ msgstr "Поиск строки в po-файле"
 msgid "Replace string in po file"
 msgstr "Замена строки в po-файле"
 
-#: src/message.c:80
+#: src/message.c:81
 msgid "Couldn't get the message!"
 msgstr "Невозможно получить сообщение!"
 
-#: src/message.c:102
+#: src/message.c:103
 msgid "There are no fuzzy messages left."
 msgstr "Не осталось нечетких сообщений."
 
-#: src/message.c:126
+#: src/message.c:127
 msgid "All messages seem to be translated."
 msgstr "Похоже все сообщения переведены."
+
+#: src/messages-table.c:164
+msgid "Appropriate match:"
+msgstr "Подходящее совпадение:"
+
+#: src/messages-table.c:172
+msgid "Found nothing appropriate in the personal learn buffer."
+msgstr ""
 
 #.
 #. * The `%i' format stands for the number of
 #. *  untranslated messages left over.
 #.
-#: src/messages-table.c:324
+#: src/messages-table.c:401
 #, c-format
 msgid "Untranslated (%i)"
 msgstr "Непереведенное (%i)"
@@ -1115,21 +1150,21 @@ msgstr "Непереведенное (%i)"
 #. * The '%i' format stands for the number
 #. *  of fuzzy entries/messages left over.
 #.
-#: src/messages-table.c:352
+#: src/messages-table.c:429
 #, c-format
 msgid "Fuzzy (%i)"
 msgstr "Нечеткое (%i)"
 
-#: src/messages-table.c:409
+#: src/messages-table.c:492
 msgid "Sticky"
 msgstr "Прицепить"
 
-#: src/open-differently.c:161
+#: src/open.c:142
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Невозможно открыть скомпилированный gettext файл \"%s\"!"
 
-#: src/open-differently.c:212
+#: src/open.c:189
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Невозможно открыть сжатый gettext файл \"%s\"!"
@@ -1138,17 +1173,17 @@ msgstr "Невозможно открыть сжатый gettext файл \"%s\"!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open-differently.c:222
+#: src/open.c:199
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr "Невозможно открыть %s-нутый файл gettext \"%s\"!"
 
-#: src/open-differently.c:293
+#: src/open.c:267
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Невозможно открыть сжатый zip po-файл \"%s\"!"
 
-#: src/parse.c:113
+#: src/parse.c:121
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1157,7 +1192,7 @@ msgstr ""
 "Найден новый управляющий символ: \\%c\n"
 "Добавьте его к parse.c, строка %i"
 
-#: src/parse.c:268
+#: src/parse.c:370
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1168,7 +1203,7 @@ msgstr ""
 "строка %d.\n"
 "Пожалуйста, проверьте файл и попробуйте еще раз."
 
-#: src/parse.c:314
+#: src/parse.c:416
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1177,33 +1212,33 @@ msgstr ""
 "Файл пуст:\n"
 "%s"
 
-#: src/parse.c:337
+#: src/parse.c:440
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Файл \"%s\" не существует!"
 
-#: src/parse.c:448
+#: src/parse.c:569
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "Переводчик -- %s"
 
-#: src/parse.c:637
+#: src/parse.c:752
 #, c-format
 msgid ""
-"You are trying to save file with *.pot extension.\n"
-"However, such files are generated by program.\n"
-"Your file should be named with *.po extension, most likely %s.po"
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
 msgstr ""
 "Вы пытаетесь сохранить файл с расширением \"pot\".\n"
-"Однако такие файлы создаются программой.\n"
+"Однако такие файлы создаются при компиляции.\n"
 "Ваш файл возможно должен иметь расширение \"po\", скорее всего %s.po"
 
-#: src/parse.c:683
+#: src/parse.c:814
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Невозможно открыть файл \"%s\" для записи!"
 
-#: src/parse.c:729
+#: src/parse.c:860
 #, c-format
 msgid ""
 "File %s\n"
@@ -1212,7 +1247,7 @@ msgstr ""
 "Файл %s\n"
 "содержит %d нечетких сообщений"
 
-#: src/parse.c:765
+#: src/parse.c:897
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1223,15 +1258,15 @@ msgstr ""
 "%s\n"
 "Все равно хотите сохранить?"
 
-#: src/parse.c:773
+#: src/parse.c:905
 msgid "gtranslator -- unchanged"
 msgstr "Переводчик -- неизмененное"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:858
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:990
 msgid "gtranslator"
 msgstr "Переводчик"
 
-#: src/parse.c:883
+#: src/parse.c:1017
 #, c-format
 msgid ""
 "File %s\n"
@@ -1240,11 +1275,11 @@ msgstr ""
 "Файл %s\n"
 "был изменен. Вы хотите восстановить сохраненную копию?"
 
-#: src/parse.c:1020
+#: src/parse.c:1168
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Извините, msgfmt недоступен на вашей системе!"
 
-#: src/parse.c:1050
+#: src/parse.c:1203
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1253,282 +1288,364 @@ msgstr ""
 "Компиляция успешна:\n"
 "%s"
 
-#: src/prefs.c:108
+#: src/prefs.c:116
 msgid "gtranslator -- options"
 msgstr "Переводчик -- параметры"
 
-#: src/prefs.c:114
-msgid "Personal informations"
+#: src/prefs.c:122
+msgid "Personal information"
 msgstr "Персональная информация"
 
-#: src/prefs.c:116
+#: src/prefs.c:124
 msgid "Language settings"
 msgstr "Параметры языка"
 
-#: src/prefs.c:118
+#: src/prefs.c:126
 msgid "Po file editing"
 msgstr "Правка po-файла"
 
-#: src/prefs.c:122
+#: src/prefs.c:128
+msgid "Miscellaneous"
+msgstr "Разное"
+
+#: src/prefs.c:130
 msgid "Recent files & spell checking"
 msgstr "Меню недавних файлов и проверка правописания"
 
-#: src/prefs.c:124
+#: src/prefs.c:132
 msgid "Fonts, colors and color schemes"
 msgstr "Шрифты, цвета и цветовые схемы"
 
-#: src/prefs.c:126
+#: src/prefs.c:134
 msgid "Autosaving"
 msgstr "Автосохранение"
 
-#: src/prefs.c:128
+#: src/prefs.c:136
 msgid "Messages table"
 msgstr "Таблица сообщений"
 
-#: src/prefs.c:134
+#: src/prefs.c:138
+msgid "Learn buffer & autotranslation"
+msgstr "Заученный буфер и автоперевод"
+
+#: src/prefs.c:144
 msgid "Author's name:"
 msgstr "Имя автора:"
 
-#: src/prefs.c:137
+#: src/prefs.c:147
 msgid "Author's EMail:"
 msgstr "Эл.адрес автора:"
 
-#: src/prefs.c:150
+#: src/prefs.c:160
 msgid "Default query domain:"
 msgstr ""
 
-#: src/prefs.c:164
+#: src/prefs.c:176
 msgid "Language code:"
 msgstr "Код языка:"
 
-#: src/prefs.c:169
+#: src/prefs.c:182
 msgid "Language group's EMail:"
 msgstr "Эл.адрес языковой группы:"
 
-#: src/prefs.c:185
-msgid "Set non-fuzzy status, if message was changed"
+#: src/prefs.c:201
+msgid "Remove fuzzy status if message changed"
 msgstr "Отключить нечеткое состояние сообщения, если оно было изменено"
 
-#: src/prefs.c:189
+#: src/prefs.c:205
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Предупреждать если po-файл содержит нечеткие (fuzzy) переводы"
 
-#: src/prefs.c:193
+#: src/prefs.c:209
 msgid "Don't save unchanged po files"
 msgstr "Не сохранять неизмененные po-файлы"
 
-#: src/prefs.c:197
+#: src/prefs.c:213
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Предупреждать при попытке сохранения не измененного файла"
 
-#: src/prefs.c:201
-msgid ""
-"Also query the personal learn buffer while auto accomplishing missing entries"
-msgstr ""
-
-#: src/prefs.c:205
+#: src/prefs.c:217
 msgid "Keep obsolete message in the po files"
 msgstr "Сохранять устаревшие сообщения в po-файле"
 
-#: src/prefs.c:212
-msgid "Use free space indicating special character"
-msgstr "Использовать специальный символ для отображения пробелов"
+#: src/prefs.c:224
+msgid "Use special character to indicate free space"
+msgstr "Использовать специальный символ для обозначения пробела"
 
-#: src/prefs.c:215
+#: src/prefs.c:227
 msgid "Enable the popup menu"
 msgstr "Включить всплывающие меню"
 
-#: src/prefs.c:218
+#: src/prefs.c:230
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "Включить возможность обновления po-файла из gtranslator"
 
-#: src/prefs.c:221
+#: src/prefs.c:233
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "Включить возможность удаления всех переводов из po-файла"
 
-#: src/prefs.c:224
-msgid "Delete the compile result file (named \"project.gmo\")"
-msgstr "Удалить файл результата компиляции (называется \"project.gmo\")"
+#: src/prefs.c:236
+msgid "Delete compiled files (e.g. \"project.gmo\")"
+msgstr "Удалить файл результата компиляции (например \"project.gmo\")"
 
-#: src/prefs.c:227
+#: src/prefs.c:239
+msgid "Load all backends on startup"
+msgstr "Загружать все серверные модули при запуске"
+
+#: src/prefs.c:242
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Сохранять геометрию при выходе и восстанавливать при запуске"
 
-#: src/prefs.c:230
+#: src/prefs.c:245
+msgid "Show instant comment view in the main pane"
+msgstr ""
+
+#: src/prefs.c:248
 msgid "Show the views sidebar"
 msgstr "Показать боковую панель окон"
 
-#: src/prefs.c:237
-msgid "Maximally showed recent files:"
+#: src/prefs.c:255
+msgid "Maximum number of entries in the recent files' list:"
 msgstr ""
 
-#: src/prefs.c:241
-msgid "Check every recent file before listing it up"
-msgstr "Проверять существование каждого файла до включения в список"
+#: src/prefs.c:259
+msgid "Check recent files before showing in recent files' list"
+msgstr ""
 
-#: src/prefs.c:244
+#: src/prefs.c:262
 msgid "Instant spell checking"
 msgstr "Быстрая проверка правописания"
 
-#: src/prefs.c:247
+#: src/prefs.c:265
 msgid "Use special dictionary"
 msgstr "Использовать специальный словарь"
 
-#: src/prefs.c:250
+#: src/prefs.c:269
 msgid "Dictionary to use:"
 msgstr "Используемый словарь:"
 
-#: src/prefs.c:261
+#: src/prefs.c:312
 msgid "Syntax color scheme to use:"
 msgstr "Используемая схема выделения синтаксиса:"
 
-#: src/prefs.c:265
+#: src/prefs.c:317
 msgid "Apply own fonts:"
 msgstr "Применить собственные шрифты:"
 
-#: src/prefs.c:269
+#: src/prefs.c:321
 msgid "Original text font:"
 msgstr "Исходный шрифт текста:"
 
-#: src/prefs.c:269
+#: src/prefs.c:321
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- выбор шрифта/шрифт msgid"
 
-#: src/prefs.c:273
+#: src/prefs.c:325
 msgid "Translation font:"
 msgstr "Шрифт перевода:"
 
-#: src/prefs.c:273
+#: src/prefs.c:325
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- выбор шрифта/шрифт msgstr"
 
-#: src/prefs.c:277
+#: src/prefs.c:329
 msgid "Apply own colors:"
 msgstr "Применить свои цвета:"
 
-#: src/prefs.c:281
+#: src/prefs.c:333
 msgid "Foreground color:"
 msgstr "Цвет текста:"
 
-#: src/prefs.c:281
+#: src/prefs.c:333
 msgid "gtranslator -- foreground color"
 msgstr "Переводчик -- цвет текста"
 
-#: src/prefs.c:285
+#: src/prefs.c:337
 msgid "Background color:"
 msgstr "Цвет фона:"
 
-#: src/prefs.c:285
+#: src/prefs.c:337
 msgid "gtranslator -- background color"
 msgstr "Переводчик -- цвет фона"
 
-#: src/prefs.c:292
-msgid "Save the po file automatically after a period of time"
+#: src/prefs.c:344
+msgid "Save po files automatically at regular intervals"
 msgstr "Автоматически сохранять po-файл через заданный промежуток времени"
 
-#: src/prefs.c:296
+#: src/prefs.c:348
 msgid "Append a special suffix to the automatically saved files"
 msgstr "Добавлять специальный суффикс к автосохранённым файлам"
 
-#: src/prefs.c:300
+#: src/prefs.c:352
 msgid "Autosave suffix:"
 msgstr "Суффикс автосохранения:"
 
-#: src/prefs.c:304
+#: src/prefs.c:356
 msgid "Autosave timeout in minutes:"
 msgstr "Период автосохранения в минутах:"
 
-#: src/prefs.c:311
+#: src/prefs.c:363
 msgid "Show the messages table (requires gtranslator restart)"
 msgstr "Показать таблицу сообщений (требуется перезапуск gtranslator)"
 
-#: src/prefs.c:315
-msgid "Collapse all translated entries per default"
-msgstr ""
+#: src/prefs.c:367
+msgid "Collapse translated entries by default"
+msgstr "По умолчанию сворачивать переведённые сообщения"
 
-#: src/prefs.c:319
+#: src/prefs.c:371
 msgid "Use own colors for the messages table groups"
-msgstr ""
+msgstr "Использовать собстенные цвета для групп таблицы сообщений"
 
-#: src/prefs.c:323
+#: src/prefs.c:375
 msgid "Untranslated entries color:"
 msgstr "Цвет непереведенных сообщений:"
 
-#: src/prefs.c:323
+#: src/prefs.c:375
 msgid "gtranslator -- untranslated entries' color"
 msgstr "gtranslator -- цвет непереведенных сообщений"
 
-#: src/prefs.c:327
+#: src/prefs.c:379
 msgid "Fuzzy entries color:"
 msgstr "Цвет нечётких сообщений:"
 
-#: src/prefs.c:327
+#: src/prefs.c:379
 msgid "gtranslator -- fuzzy entries' color"
 msgstr "gtranslator -- цвет нечётких сообщений"
 
-#: src/prefs.c:331
+#: src/prefs.c:383
 msgid "Translated entries color:"
 msgstr "Цвет переведённых сообщений:"
 
-#: src/prefs.c:331
+#: src/prefs.c:383
 msgid "gtranslator -- translated entries' color"
 msgstr "gtranslator -- цвет переведённых сообщений"
 
-#: src/prefs.c:370
+#: src/prefs.c:391
+msgid ""
+"Also query the personal learn buffer while autotranslating untranslated "
+"messages"
+msgstr ""
+
+#: src/prefs.c:395
+msgid "Automatically learn a newly translated message"
+msgstr "Автоматически заучивать новые переведённые сообщения"
+
+#.
+#. * Translators: With "fuzzy" I mean a more enhanced (and more
+#. *  crappy) logic while searching for appropriate translations
+#. *   for a original string.
+#.
+#: src/prefs.c:403
+msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
+msgstr ""
+
+#: src/prefs.c:407
+msgid "Minimal required similarity percentage while doing autotranslation"
+msgstr "Процент минимально необходимой похожести для выполнения автоперевода"
+
+#: src/prefs.c:453
 msgid "Please enter your name!"
 msgstr "Пожалуйста, введите ваше имя!"
 
-#: src/prefs.c:384
+#: src/prefs.c:467
 msgid "Please enter your EMail address!"
 msgstr "Пожалуйста, введите ваш эл. адрес!"
 
-#: src/prefs.c:396
+#: src/prefs.c:480
 msgid "Please enter a valid EMail address!"
 msgstr "Пожалуйста, введите правильный эл.адрес!"
 
-#: src/prefs.c:609
+#: src/prefs.c:749
 msgid ""
-"With the Preferences box you can define some variables\n"
-"with which you can make gtranslator make more work\n"
-"like YOU want it to work!"
+"The Preferences box allows you to customise gtranslator\n"
+"to work in ways you find comfortable and productive."
 msgstr ""
-"С помощью окна настроек вы можете определить некоторые переменные,\n"
-"благодаря чему Переводчик Gnome будет работать в большей степени\n"
-"так как Вы хотите!"
+
+#: src/prefs-dialog.c:123
+msgid ""
+"\t\tThe Preferences box allows you to customise gtranslator\n"
+"\t\tto work in ways you find comfortable and productive."
+msgstr ""
+
+#: src/prefs-dialog.c:139
+msgid "Preferences section"
+msgstr "Раздел настроек"
+
+#.
+#. * Now the "simple" widget creation routines are following.
+#.
+#: src/prefs-dialog.c:146 src/prefs-dialog.c:312
+msgid "gtranslator -- preferences"
+msgstr "gtranslator -- настройки"
+
+#.
+#. * Build up a quite informative question dialog with the count
+#. *  of changes which are still pending.
+#.
+#: src/prefs-dialog.c:307
+#, c-format
+msgid ""
+"%i preferences changes have been made.\n"
+"Do you want to discard all of these changes?"
+msgstr ""
 
 #: src/preferences.c:188
 msgid "Couldn't generate the current date!"
 msgstr "Невозможно создать текущую дату!"
 
 #: src/replace.c:173
-msgid "No replace made!"
-msgstr "Замена не выполнена!"
+msgid "No replacements made!"
+msgstr "Замен не было!"
+
+#: src/save.c:117
+#, c-format
+msgid "Couldn't save compiled gettext file `%s'!"
+msgstr "Невозможно сохранить скомпилированный gettext файл \"%s\"!"
+
+#: src/save.c:160
+#, c-format
+msgid "Couldn't save compressed gettext file `%s'!"
+msgstr "Невозможно сохранить сжатый gettext файл \"%s\"!"
+
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#: src/save.c:170
+#, c-format
+msgid "Couldn't save %s'd gettext file `%s'!"
+msgstr "Невозможно сохранить %s-нутый файл gettext \"%s\"!"
+
+#: src/save.c:229
+#, c-format
+msgid "Couldn't save zip'ed po file `%s'!"
+msgstr "Невозможно сохранить сжатый zip po-файл \"%s\"!"
 
 #: src/session.c:90
 msgid "Session restored successfully."
 msgstr "Сеанс успешно восстановлен."
 
-#: src/sidebar.c:59
+#: src/sidebar.c:60
 msgid "Message"
 msgstr "Сообщение"
 
-#: src/sidebar.c:60
+#: src/sidebar.c:61
 msgid "Number"
 msgstr "Число"
 
-#: src/sidebar.c:61
+#: src/sidebar.c:62
 msgid "Format"
 msgstr "Формат"
 
-#: src/sidebar.c:62
+#: src/sidebar.c:63
 msgid "Hotkey"
 msgstr "Горячая клавиша"
 
-#: src/sidebar.c:97
+#: src/sidebar.c:98
 msgid "Views"
 msgstr "Окна"
 
-#: src/stylistics.c:275
+#: src/stylistics.c:278
 msgid "No font set! Using default font"
 msgstr "Шрифт не установлен! Используется шрифт по умолчанию"
 
@@ -1536,12 +1653,12 @@ msgstr "Шрифт не установлен! Используется шрифт по умолчанию"
 #. * Use gtranslator's font in this case -- should be a fallback font
 #. *  for your language.
 #.
-#: src/stylistics.c:281
+#: src/stylistics.c:284
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-koi8-r"
 
 #.
-#. * The " " is the "middle dot" (00B7), it is
+#. * The "╥" is the "middle dot" (00B7), it is
 #. * used by gtranslator as special char to make
 #. * blanks visible.
 #. * If your language uses that char for another
@@ -1549,67 +1666,67 @@ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-koi8-r"
 #. * that doesn't have it, feel free to change it
 #. * to whatever you think will be better
 #.
-#: src/syntax.c:90 src/utils_gui.c:76 src/utils_gui.c:77 src/views.c:271
+#: src/syntax.c:106 src/utils_gui.c:77 src/utils_gui.c:78 src/views.c:271
 #: src/views.c:341
-msgid " "
-msgstr " "
+msgid "╥"
+msgstr "."
 
-#: src/update.c:90
+#: src/update.c:102
 msgid "No POTFILES.in found!"
 msgstr "Не найден POTFILES.in!"
 
-#: src/update.c:101
-msgid "An update caused no changes."
-msgstr "Обновление не вызовет изменений."
+#: src/update.c:113
+msgid "Po file is uptodate."
+msgstr "po-файл свеж."
 
-#: src/update.c:108
+#: src/update.c:120
 msgid "The update was successfull."
 msgstr "Обновление было успешно."
 
-#: src/update.c:113
-msgid "An error occured while updating the po file."
+#: src/update.c:125
+msgid "An error occurred while updating the po file."
 msgstr "При обновлении po-файла возникла ошибка."
 
-#: src/utils.c:196
+#: src/utils.c:314 src/utils.c:331
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Невозможно создать каталог \"%s\"!"
 
-#: src/utils_gui.c:130
+#: src/utils_gui.c:131
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Невозможно проанализировать строку геометрии \"%s\"!"
 
-#: src/utils_gui.c:351
+#: src/utils_gui.c:353
 #, c-format
-msgid "You don't have read permissions on file `%s'"
-msgstr "У вас нет прав для чтения файла \"%s\""
+msgid "You are not permitted to access file '%s'."
+msgstr "У вас нет доступа к файлу \"%s\"."
 
-#: src/utils_gui.c:369
+#: src/utils_gui.c:371
 #, c-format
 msgid ""
-"You don't have write permissions on file `%s'.\n"
-"This means that you should save it as a copy to a local directory\n"
-"of your choice."
+"You do not have permission to modify file '%s'.\n"
+"Please save a new copy in a directory where\n"
+"you have write permission."
 msgstr ""
-"У вас нет прав для записи в файл \"%s\".\n"
-"Это значит, что вам придется сохранить копию в локальном\n"
-"каталоге по вашему выбору."
+"У вас нет прав для изменения файла \"%s\".\n"
+"Это значит, что вам придется сохранить копию в каталоге\n"
+"в котором у вас есть права на запись."
 
-#: src/utils_gui.c:411
+#: src/utils_gui.c:413
 #, c-format
 msgid "The file `%s' is already open in another instance of gtranslator!"
 msgstr "Файл \"%s\" уже открыт в другом окне gtranslator!"
 
-#: src/utils_gui.c:444
+#: src/utils_gui.c:446
 #, c-format
-msgid "The necessary decompression program `%s' is missing!"
-msgstr ""
+msgid "The necessary decompression program `%s' is not installed!"
+msgstr "Необходимая для декомпрессии программ \"%s\" не установлена!"
 
-#: src/utils_gui.c:449
+#: src/utils_gui.c:451
 #, c-format
-msgid "The necessary compression program `%s' is missing!"
-msgstr ""
+msgid "The necessary compression program `%s' is not installed!"
+msgstr "Необходимая программа сжатия \"%s\" не установлена!"
 
 #: src/vfs-handle.c:126
 #, c-format
