@@ -184,7 +184,7 @@ void gtranslator_bookmark_open(GtrBookmark *bookmark)
 		GTR_PO(po)->length >= GTR_BOOKMARK(bookmark)->po_position)
 	{
 		gtranslator_message_go_to_no(NULL, 
-			(gpointer) GTR_BOOKMARK(bookmark)->po_position);
+			GINT_TO_POINTER(GTR_BOOKMARK(bookmark)->po_position));
 	}
 }
 

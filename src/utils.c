@@ -715,11 +715,11 @@ void gtranslator_utils_language_lists_create(void)
 			    g_list_prepend(group_emails_list,
 					   (gpointer) languages[c].group_email);
 		if (g_list_find_custom
-		    (bits_list, (gpointer) languages[c].bits,
+		    (bits_list, GINT_TO_POINTER(languages[c].bits),
 		     (GCompareFunc) strcmp) == NULL)
 			bits_list =
 			    g_list_prepend(bits_list,
-					   (gpointer) languages[c].bits);
+					   GINT_TO_POINTER(languages[c].bits));
 		c++;
 	}
 	/*

@@ -162,16 +162,16 @@ GnomeUIInfo the_edit_menu[] = {
 GnomeUIInfo the_views_menu[] = {
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Message"),
 		N_("Standard messages view"),
-		gtranslator_switch_views, (gpointer) GTR_MESSAGE_VIEW, NULL),
+		gtranslator_switch_views, GINT_TO_POINTER(GTR_MESSAGE_VIEW), NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Numbers"),
 		N_("View numbers in the message"),
-		gtranslator_switch_views, (gpointer) GTR_NUMBER_VIEW, NULL),
+		gtranslator_switch_views, GINT_TO_POINTER(GTR_NUMBER_VIEW), NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("C _Formats"),
 		N_("View C formats of the message"),
-		gtranslator_switch_views, (gpointer) GTR_C_FORMAT_VIEW, NULL),
+		gtranslator_switch_views, GINT_TO_POINTER(GTR_C_FORMAT_VIEW), NULL),
 	GNOMEUIINFO_RADIOITEM_DATA(N_("_Hotkeys"),
 		N_("View hotkeys in the message"),
-		gtranslator_switch_views, (gpointer) GTR_HOTKEY_VIEW, NULL),
+		gtranslator_switch_views, GINT_TO_POINTER(GTR_HOTKEY_VIEW), NULL),
 	GNOMEUIINFO_END
 };
 
