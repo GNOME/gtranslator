@@ -282,13 +282,22 @@ static void insert_translation(GtkWidget *widget, gpointer insertion_kind)
 		}
 		else
 		{
-			gchar *oldstr=GTR_MSG(retrieval->message)->msgstr;
-
-			GTR_MSG(retrieval->message)->msgstr=g_strconcat(oldstr, retrieval->found_translation, NULL);
-			GTR_FREE(oldstr);
+			gchar *oldstr=NULL;
+			
+			if(!GTR_MSG(retrieval->message)->msgstr)
+			{
+				GTR_MSG(retrieval->message)->msgstr=g_strdup(retrieval->found_translation);
+			}
+			else
+			{
+				oldstr=GTR_MSG(retrieval->message)->msgstr;
+				GTR_MSG(retrieval->message)->msgstr=g_strconcat(oldstr, retrieval->found_translation, NULL);
+				GTR_FREE(oldstr);
+			}
 		}
 
 		gtranslator_translation_changed(NULL, NULL);
+		gtranslator_messages_table_update_row(GTR_MSG(retrieval->message));
 		gtranslator_messages_table_update_message_status(GTR_MSG(retrieval->message));
 		GTR_FREE(retrieval);
 	}
