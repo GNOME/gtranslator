@@ -110,7 +110,7 @@ static GtrLanguage languages[] = {
 	},
 	{
 	 N_("Danish"), "da", "iso-8859-1",
-	 "da@li.org", "8bit"
+	 "dansk@klid.dk", "8bit"
 	},
 	{
 	 N_("Dutch"), "nl", "iso-8859-15",
