@@ -523,8 +523,11 @@ Saying \"No\" will delete the crash recovery file."),
 		GNOME_MESSAGE_BOX_WARNING,
 		GNOME_STOCK_BUTTON_YES,
 		GNOME_STOCK_BUTTON_NO,
-		GNOME_STOCK_BUTTON_CANCEL, NULL);
+		GNOME_STOCK_BUTTON_CANCEL,
+		NULL);
 
+	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
+	
 	show_nice_dialog(&dialog, "gtranslator -- ask for crash recovery");
 	
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
