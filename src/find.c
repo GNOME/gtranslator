@@ -222,7 +222,7 @@ void find_do(GtkWidget * widget, gpointer what)
 	update_msg();
 	if (what) {
 		if (strlen(what) == 0) {
-			error = g_strdup_printf(_("Empty search is not allowed"));
+			error = g_strdup_printf(_("Please enter a search string"));
 			gnome_app_message(GNOME_APP(app1), error);
 			g_free(error);
 			return;
