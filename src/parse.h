@@ -35,7 +35,7 @@ int count,max_count;
 /**
 * The file's name
 **/
-gchar *po_file;
+gchar *po_file=NULL;
 
 /**
 * A gboolean for the silly question if a file is open ...

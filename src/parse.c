@@ -85,6 +85,7 @@ void parse(gchar *po_file)
         **/
         sprintf(status,_("Finished reading \"%s\", %i lines."),po_file,lines);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
+	file_opened=TRUE;
         for(count=1;count<lines;count++)
         {
                 /** TODO **/

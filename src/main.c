@@ -15,6 +15,7 @@
 #include <gnome.h>
 
 #include <popt-gnome.h>
+#include "msg_db.h"
 #include "interface.h"
 #include "support.h"
 #include "session.h"
@@ -35,6 +36,10 @@ static struct poptOption gtranslator_options [] = {
 	{
 		"yazoo-test", 'y', POPT_ARG_INT, &yazoo,
 		0,N_("A test option"), "TEST"
+	},
+	{
+		"msg_db", 'm', POPT_ARG_STRING, &msg_db,
+		0,N_("The msg_db to use"),"MSG_DB"
 	},
 	POPT_AUTOHELP {NULL}
 };

@@ -11,22 +11,7 @@
 * -- the source 
 **/
 
-#ifdef HAVE_CONFIG_H
-	#include <config.h>
-#endif
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <string.h>
-#include <glib.h>
-
-#include <gnome.h>
-
 #include "interface.h"
-#include "about.h"
-#include "gtr_dialogs.h"
-#include "prefs.h"
 
 /**
 * The Gnome-help structure
@@ -65,11 +50,30 @@ void clear_selection(GtkWidget *widget,gpointer useless)
 }
 
 /**
-*
+* Set file_changed to TRUE if the text in the translation box has
+*  been updated.
 **/
 void text_has_got_changed(GtkWidget *widget,gpointer useless)
 {
 	file_changed=TRUE;
+}
+
+/**
+* The compile function
+**/
+void compile(GtkWidget *widget,gpointer useless)
+{
+	if((file_opened!=TRUE))
+	{
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("No po-file opened which could be compiled."));
+	}
+	else
+	{
+		gchar *cmd;
+		gint ret=0;
+		sprintf(cmd,"msgfmt %s",po_file);
+		ret=gnome_execute_shell(NULL,cmd);
+	}
 }
 
 /**
@@ -80,7 +84,7 @@ static GnomeUIInfo the_file_menu[] =
         {
           GNOME_APP_UI_ITEM, N_("_Compile"),
           NULL,
-          NULL, NULL, NULL,
+          compile, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
           GDK_C, GDK_MOD1_MASK, NULL
         },
@@ -292,7 +296,7 @@ create_app1 (void)
                                       GTK_TOOLBAR_CHILD_BUTTON,
                                       NULL,
                                       _("Compile"),
-                                      _("New File"), NULL,
+                                      _("Compile the po-file"), NULL,
                                       tmp_toolbar_icon, NULL, NULL);
        	gtk_widget_show (compile_button);
 
@@ -414,6 +418,8 @@ create_app1 (void)
 		GTK_SIGNAL_FUNC(gtk_main_quit),NULL);
 	gtk_signal_connect(GTK_OBJECT(options_button),"clicked",
 		GTK_SIGNAL_FUNC(prefs_box_show),NULL);
+	gtk_signal_connect(GTK_OBJECT(compile_button),"clicked",
+		GTK_SIGNAL_FUNC(compile),NULL);
 	gtk_signal_connect(GTK_OBJECT(open_button),"clicked",
 		GTK_SIGNAL_FUNC(open_file_show),NULL);	
 	gtk_signal_connect(GTK_OBJECT(save_as_button),"clicked",

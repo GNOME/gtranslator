@@ -15,7 +15,16 @@
 	#include <config.h>
 #endif // HAVE_CONFIG_H
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string.h>
+#include <glib.h>
 #include <gnome.h>
+#include "interface.h"
+#include "about.h"
+#include "gtr_dialogs.h"
+#include "prefs.h"
 #include "parse.h"
 
 GtkWidget* create_app1 (void);
@@ -54,5 +63,6 @@ void copy_clipboard(GtkWidget *widget,gpointer useless);
 void paste_clipboard(GtkWidget *widget,gpointer useless);
 void clear_selection(GtkWidget *widget,gpointer useless);
 void text_has_got_changed(GtkWidget *widget,gpointer useless);
+void compile(GtkWidget *widget,gpointer useless);
 
 #endif // GTR_INTERFACE_H
