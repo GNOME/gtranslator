@@ -28,5 +28,5 @@ diff -q $BASEFILE $BASEFILE.old|grep -sq differ && {
 	rm -f $BASEFILE.old
 	exit 0
 }
-mv $BASEFILE.old $BASEFILE
+rm -f $BASEFILE.old
 exit 1
