@@ -726,11 +726,6 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 			e_tree_node_set_expanded_recurse(E_TREE(tree), 
 				translated_node, TRUE);
 		}
-		else
-		{
-			e_tree_node_set_expanded_recurse(E_TREE(tree),
-				translated_node, FALSE);
-		}
 		
 		e_tree_set_cursor(E_TREE(tree), node);
 	}

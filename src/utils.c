@@ -659,7 +659,7 @@ gchar *gtranslator_utils_get_locale_charset(void)
 		return NULL;
 	}
 	else if(po->header->charset && 
-		(nautilus_strcasecmp(po->header->charset, "utf-8") ||
+		(nautilus_strcasecmp(po->header->charset, "utf-8") && 
 		 nautilus_strcasecmp(po->header->charset, "utf8")))
 	{
 		return g_strdup(po->header->charset);

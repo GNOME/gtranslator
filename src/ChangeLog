@@ -1,5 +1,12 @@
 2001-09-08  Fatih Demir <kabalak@gtranslator.org>
 
+	* messages-table.c: Don't re-collapse the translated messages if we're
+		on a untranslated message -- solves bug #60167 -- according
+		 to the preference we're still collapsing the translated 
+		  entries per default, but if we've uncollapsed the translated
+		   entries once, we don't want to re-collapse the translated
+		    entries again -- makes gtranslator slow on big po files.
+
 	* utils.c: Applied an enhanced and changed version of Joe Man's patch
 		(http://bugzilla.gnome.org/showattachment.cgi?attach_id=5071):
 		  the logic is now kept and includes the enhancements from Joe
