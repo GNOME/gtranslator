@@ -36,7 +36,7 @@ typedef struct
 	gchar 		*modulename;
 	const gchar 	*name;
 	const gchar 	*description;
-	GList	 	*extensions;
+	GList		*extensions;
 	GList		*filenames;
 
 	gboolean	compilable;

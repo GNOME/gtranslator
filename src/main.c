@@ -69,19 +69,19 @@ static struct poptOption gtranslator_options[] = {
 	},
 	{
 		"build-informations", 'b', POPT_ARG_NONE, &build_informations,
-		0, N_("Shows build informations/specifications"), NULL
+		0, N_("Show build informations/specifications"), NULL
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
-		0, N_("Specifies the main-window geometry"), N_("GEOMETRY")
+		0, N_("Specify main window geometry"), N_("GEOMETRY")
 	},
 	{
 		"no-modules", 'n', POPT_ARG_NONE, &no_modules,
-		0, N_("Don't load'/use any backend modules"), NULL
+		0, N_("Don't load any backend modules"), NULL
 	},
 	{
 		"querydomaindir", 'q', POPT_ARG_STRING, &domains_dir,
-		0, N_("Define another query domains directory"), N_("LOCALEDIR")
+		0, N_("Define another query-domains directory"), N_("LOCALEDIR")
 	},
 	{
 		"scheme", 's', POPT_ARG_STRING, &scheme_filename,
