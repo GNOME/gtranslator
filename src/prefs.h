@@ -29,7 +29,7 @@
 /*
  * Global variables used in the preferences.
  */
-gchar *author, *email, *language, *mime, *enc, *lc, *lg;
+extern gchar *author, *email, *language, *mime, *enc, *lc, *lg;
 
 /*
  * The preferences structure of gtranslator.

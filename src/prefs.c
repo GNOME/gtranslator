@@ -39,6 +39,13 @@
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
 
+gchar *author   = NULL;
+gchar *email    = NULL;
+gchar *language = NULL;
+gchar *mime     = NULL;
+gchar *enc      = NULL;
+gchar *lc       = NULL;
+gchar *lg       = NULL;
 /*
  * The callbacks:
  */
@@ -364,7 +371,7 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 	 * Check if the user did forget to enter his/her name into the prefs
 	 *  dialog.
 	 */
-	if(!author)
+	if(!author || '\0' == *author)
 	{
 		gnome_app_error(GNOME_APP(gtranslator_application),
 			_("Please enter your name!"));
