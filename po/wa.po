@@ -12,65 +12,70 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.39\n"
-"POT-Creation-Date: 2001-07-06 08:20+0200\n"
-"PO-Revision-Date: 2002-04-29 05:56MET\n"
+"POT-Creation-Date: 2002-08-31 15:00+0200\n"
+"PO-Revision-Date: 2002-08-31 14:33+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
-"Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
+"Language-Team: Walloon <linux-wa@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:59
-msgid "(C) 1999-2001 The Free Software Foundation"
-msgstr "© 1999-2001 li Free Software Foundation"
+#. Translator credits
+#: src/about.c:58
+msgid "translator_credits"
+msgstr "Pablo Saratxaga <pablo@mandrakesoft.com>"
 
-#: src/about.c:60
+#: src/about.c:78
+msgid "(C) 1999-2002 The Free Software Foundation"
+msgstr "© 1999-2002 li Free Software Foundation"
+
+#: src/about.c:79
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator est on poûxhant programe po-z aspougnî les fitchîs po"
 
-#.
-#. * Print out some colorscheme informations in a label which will be
-#. *  followed by the author name/email address.
-#.
-#: src/about.c:69
-#, c-format
-msgid "Current colorscheme: \"%s\" (version %s) by"
-msgstr "Énsembe di coleurs do moumint: «%s» (modêye %s) pa"
-
-#: src/color-schemes.c:156
+#: src/color-schemes.c:196
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
 msgstr "Dji n' sai apliker l' énsembe di coleurs «%s»!"
 
-#: src/color-schemes.c:279
-msgid "Couldn't retrieve author informations!"
+#: src/color-schemes.c:319
+msgid "Couldn't retrieve author information!"
 msgstr "Dji n' trove nén d' informåcions so l' oteur!"
 
 #.
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:285
+#: src/color-schemes.c:325 src/translator.c:312
 msgid "Unknown"
 msgstr "Nén cnoxhou"
 
-#: src/color-schemes.c:286
+#: src/color-schemes.c:326
 msgid "<Not Given>"
 msgstr "<Nén dné>"
 
-#: src/dialogs.c:107
+#: src/color-schemes.c:473
+msgid "_Settings/_Colorschemes/"
+msgstr ""
+
+#: src/color-schemes.c:503
+#, fuzzy, c-format
+msgid "Activate colorscheme %s"
+msgstr "Énsembe di coleurs pol sintacse a-z eployî:"
+
+#: src/dialogs.c:99
 msgid "gtranslator -- open po file"
 msgstr "gtranslator -- drovi on fitchî .po"
 
-#: src/dialogs.c:146
+#: src/dialogs.c:141
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- schaper et rlomer fitchî.."
 
-#: src/dialogs.c:153
+#: src/dialogs.c:161
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- schaper et rlomer locålmint on fitchî.."
 
-#: src/dialogs.c:197
+#: src/dialogs.c:205
 #, c-format
 msgid ""
 "File %s\n"
@@ -79,202 +84,230 @@ msgstr ""
 "Li fitchî %s\n"
 "a stî candjî. El fåt i schaper?"
 
-#: src/dialogs.c:234
+#: src/dialogs.c:245
 msgid "gtranslator -- import po file"
 msgstr "gtranslator -- abaguer on fitchî .po"
 
-#: src/dialogs.c:277
+#: src/dialogs.c:291
 msgid "gtranslator -- export po file"
 msgstr "gtranslator -- ebaguer on fitchî .po"
 
-#: src/dialogs.c:390
+#: src/dialogs.c:337 src/dialogs.c:371
+msgid "gtranslator -- edit comment"
+msgstr "gtranslator -- candjî li rawete"
+
+#: src/dialogs.c:359
+msgid "Comment:"
+msgstr "Rawete:"
+
+#: src/dialogs.c:475
+#, c-format
+msgid "Should ALL translations from `%s' be removed?"
+msgstr "Fåt i oister TOS les ratournaedjes foû di «%s»?"
+
+#: src/dialogs.c:488 src/dialogs.c:513
+msgid "gtranslator -- confirm removal of all translations"
+msgstr ""
+
+#: src/dialogs.c:502
+msgid "Are you sure you want to remove ALL translations from this po file?"
+msgstr ""
+
+#: src/dialogs.c:608
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- potchî a"
 
-#: src/dialogs.c:392
+#: src/dialogs.c:610
 msgid "Go!"
 msgstr "Evoye!"
 
-#: src/dialogs.c:401
+#: src/dialogs.c:619
 msgid "Go to message number:"
-msgstr "Potchî å messaedje limerô:"
+msgstr "Potchî å messaedje limero:"
 
-#: src/dialogs.c:471
+#: src/dialogs.c:688
 msgid "Find in the po file"
-msgstr "Trover el fitchî .po"
+msgstr "Trover e l' fitchî .po"
 
-#: src/dialogs.c:473 src/menus.c:358
+#: src/dialogs.c:690 src/menus.c:339
 msgid "Find"
 msgstr "Trover"
 
-#: src/dialogs.c:480
-msgid "Enter your desired search string:"
+#: src/dialogs.c:697
+msgid "Enter search string:"
 msgstr "Tapez li tchinne a cweri après:"
 
-#: src/dialogs.c:485
+#: src/dialogs.c:702
 msgid "Case sensitive"
 msgstr "Diferince po ptitès et grandès letes"
 
-#: src/dialogs.c:490 src/languages.h:120
+#: src/dialogs.c:707 src/languages.c:91
 msgid "English"
 msgstr "Inglès"
 
-#: src/dialogs.c:496 src/dialogs.c:594 src/gui.c:488
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559
 msgid "Translated"
 msgstr "Ratourné"
 
-#: src/dialogs.c:502 src/dialogs.c:600
+#: src/dialogs.c:719 src/dialogs.c:820
 msgid "Both"
 msgstr "Les deus"
 
-#: src/dialogs.c:508 src/dialogs.c:588
+#: src/dialogs.c:725 src/dialogs.c:808
 msgid "Comments"
 msgstr "Rawete"
 
-#: src/dialogs.c:514
+#: src/dialogs.c:731
 msgid "In all strings"
-msgstr "Dins totes les tchinnes"
+msgstr "totes les tchinnes"
 
-#: src/dialogs.c:529
+#: src/dialogs.c:746
 msgid "Find in: "
-msgstr "Trover è: "
+msgstr "Trover dins: "
 
-#: src/dialogs.c:574
+#: src/dialogs.c:794
 msgid "gtranslator -- replace"
-msgstr "gtranslator -- mete el plaece"
+msgstr "gtranslator -- replaecî"
 
-#: src/dialogs.c:575 src/menus.c:362
+#: src/dialogs.c:795 src/menus.c:343
 msgid "Replace"
-msgstr "Mete el plaece"
+msgstr "Replaecî"
 
-#: src/dialogs.c:576
+#: src/dialogs.c:796
 msgid "Replace all"
-msgstr "Mete el plaece tot costé"
+msgstr "Replaecî tot costé"
 
-#: src/dialogs.c:580
+#: src/dialogs.c:800
 msgid "String to replace:"
-msgstr "Li tchinne a mete el plaece:"
+msgstr "Li tchinne a replaecî:"
 
-#: src/dialogs.c:583
+#: src/dialogs.c:803
 msgid "Replace string:"
 msgstr "Tchinne a mete el plaece:"
 
-#: src/dialogs.c:623
+#: src/dialogs.c:843
 msgid "Replace in:"
-msgstr "Mete el plaece di:"
+msgstr "Reaplaecî dins:"
 
-#: src/dialogs.c:701
-msgid "An error occured while msgfmt was executed:\n"
-msgstr "Åk n' a nén stî tot enondant msgfmt:\n"
+#: src/dialogs.c:921
+msgid "An error occurred while msgfmt was executed:\n"
+msgstr "Åk n' a nén stî tot-z enondant msgfmt:\n"
 
-#: src/dialogs.c:731
+#: src/dialogs.c:954
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- drovi a pårti d' ene hårdêye"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:732
-#: src/menus.c:276
+#: src/dialogs.c:955 src/menus.c:270
 msgid "Open"
 msgstr "Drovi"
 
-#: src/dialogs.c:738
+#: src/dialogs.c:963
 msgid "Enter URI:"
 msgstr "Intrez li hårdêye (URI):"
 
-#.
-#. * Show an error dialog but don't close down the
-#. *  Open from URI dialog.
-#.
-#: src/dialogs.c:780
+#: src/dialogs.c:1001
 msgid "No URI given!"
 msgstr "Nole hårdêye di dnêye!"
 
-#: src/dialogs.c:795
+#: src/dialogs.c:1016
 msgid "No supported URI protocol (like \"ftp://\") given!"
 msgstr "Nou protocole sopoirté pol hårdêye k' a stî dnêye (eg: «ftp://...»)!"
 
-#: src/dialogs.c:826
+#: src/dialogs.c:1024
+msgid ""
+"URIs are used to locate files uniquely on different systems.\n"
+"The standard Internet addresses (URLs) are also URIs -- you can\n"
+"use them to open remote po files lying on servers with standard protocols\n"
+"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
+"Some example URIs for clarification (these ones are supported):\n"
+"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+"\n"
+"file:///<PO-FILE> or\n"
+"http://www.DOMAIN.COM/PO-FILE"
+msgstr ""
+
+#: src/dialogs.c:1059
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator got closed.\n"
-"Possibly it contains hard pieces of work?!\n"
+"It was saved by gtranslator before gtranslator last closed\n"
+"and may contain your hard work!\n"
 "Saying \"No\" will delete the crash recovery file."
 msgstr ""
 "Drovi l' fitchî di rapexhaedje po «%s»?\n"
 "Il a stî schapé pa gtranslator divant ki gtranslator fuxhe cloyou.\n"
-"Il a motoit do consecant ovraedje ki pout esse rapexhî?!\n"
+"Il a motoit do consecant ovraedje ki pout esse rapexhî!\n"
 "Si vos djhoz «Neni» ci fitchî srè disfacé."
 
-#: src/dialogs.c:851
+#: src/dialogs.c:1082
 #, c-format
 msgid "Recovering `%s'..."
 msgstr "Rapexhant «%s»..."
 
-#: src/dialogs.c:896
-msgid "Couldn't get list of gettext domains!"
-msgstr "Dji n' a savou aveur li djivêye des dominnes gettext!"
-
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:903
-msgid "Here you can query existing gettext domains for a translation."
-msgstr "Chal vos ploz cweri les dominnes gettext k' i gn a po on ratournaedje."
+#: src/dialogs.c:1132
+msgid "Here you can query existing translations from your learn buffer."
+msgstr ""
+"Chal vos ploz cweri les ratournaedjes k' i gn a dins vosse båze di "
+"ratournaedjes."
 
-#: src/dialogs.c:906
-msgid "gtranslator -- query existing gettext domains"
-msgstr "gtranslator -- cweri les dominne gettext k' i gn a"
+#: src/dialogs.c:1135
+msgid "gtranslator -- query your personal learn buffer"
+msgstr "gtranslator -- cweri dins l' båze di ratournaedjes da vosse"
 
-#: src/dialogs.c:907 src/menus.c:366
+#: src/dialogs.c:1136 src/menus.c:348
 msgid "Query"
 msgstr "Cweri"
 
-#: src/dialogs.c:915
+#: src/dialogs.c:1136
+msgid "Query message content"
+msgstr ""
+
+#: src/dialogs.c:1145
 msgid "Query string:"
 msgstr "Tchinne pol cweraedje:"
 
-#: src/dialogs.c:922
-msgid "Domain to search the translation in:"
-msgstr "Dominne wice ki les ratournaedjes sont cwerîs:"
-
-#: src/dialogs.c:972
+#: src/dialogs.c:1191
 msgid "No query string given!"
 msgstr "Nole tchinne di dnêye pol cweraedje!"
 
-#: src/dialogs.c:1006
-msgid "Couldn't find any result for the query!"
-msgstr "Dji n' a trové nou rzultat pol cweraedje!"
+#: src/dialogs.c:1213
+msgid "Couldn't find any result for the query in your learn buffer!"
+msgstr ""
+"Dji n' a trové nou rzultat pol cweraedje dins l' båze di ratournaedjes da "
+"vosse!"
 
-#: src/dialogs.c:1019
+#: src/dialogs.c:1225
 #, c-format
 msgid ""
-"Found \"%s\" as a translation for \"%s\" in domain \"%s\".\n"
+"Found \"%s\" as a translation for \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
-"Dj' a trové «%s» come ratournaedje di «%s» el dominne «%s».\n"
-"El volez vs sititchî el ratournaedje do moumint?"
+"Dj' a trové «%s» come ratournaedje di «%s».\n"
+"El voloz vs sititchî el ratournaedje do moumint?"
 
 #.
-#. * Translators: This means that the queried string
-#. *  is already translated.
+#. * Translators: This means that the query result string is
+#. *  already translated.
 #.
-#: src/dialogs.c:1109
+#: src/dialogs.c:1292
 msgid "Query's result translation is already there!"
 msgstr "Li tchinne pol cweraedje est ddja ratournêye chal!"
 
-#: src/dialogs.c:1131
+#: src/dialogs.c:1316
 msgid ""
-"Should gtranslator accomplish all missing strings (if possible)\n"
-"from your default query domain?"
+"Should gtranslator autotranslate the file using information\n"
+"from your personal learn buffer?"
 msgstr ""
-"Est-ce ki gtranslator doet sayî di trover totes les tchinnes ki mankèt\n"
-"(si c' est possibe) foû di vosse prémetou dominne?"
 
-#: src/find.c:211
+#: src/find.c:214
 msgid "Please enter a search string"
 msgstr "Dinez li tchinne a cweri après s' i vs plait"
 
-#: src/find.c:227
+#: src/find.c:230
 #, c-format
 msgid ""
 "Could not find\n"
@@ -283,34 +316,38 @@ msgstr ""
 "Dji n' trove nén\n"
 "«%s»"
 
-#: src/gui.c:475
+#: src/gui.c:228
+msgid "Edit comment"
+msgstr "Candjî l' rawete"
+
+#: src/gui.c:545
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ I resse %i intrêyes «fuzzy» ]"
 
-#: src/gui.c:475 src/gui.c:479 src/menus.c:348
+#: src/gui.c:545 src/gui.c:549 src/menus.c:329
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
-#: src/gui.c:479
+#: src/gui.c:549
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Pus nole intrêye «fuzzy» ]"
 
-#: src/gui.c:486
-msgid "Stick"
-msgstr "Aclaper"
+#: src/gui.c:557
+msgid "Sticky (Message & translation are the same)"
+msgstr ""
 
-#: src/gui.c:497
+#: src/gui.c:568
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ I resse %i nén co ratournés ]"
 
-#: src/gui.c:497 src/gui.c:499
+#: src/gui.c:568 src/gui.c:570
 msgid "Untranslated"
 msgstr "Nén ratourné"
 
-#: src/gui.c:499
+#: src/gui.c:570
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Pus rén a ratourner ]"
@@ -318,85 +355,85 @@ msgstr "%s [ Pus rén a ratourner ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:511
+#: src/gui.c:583
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Messaedje %d / %d / Etat: %s"
 
-#: src/header_stuff.c:436
+#: src/header_stuff.c:406
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- candjî li tiestire"
 
-#: src/header_stuff.c:443 src/header_stuff.c:448
+#: src/header_stuff.c:413 src/header_stuff.c:418
 msgid "Project"
 msgstr "Prodjet"
 
-#: src/header_stuff.c:451
+#: src/header_stuff.c:421
 msgid "Translator and Language"
 msgstr "Ratourneu et lingaedje"
 
-#: src/header_stuff.c:462
+#: src/header_stuff.c:431
 msgid "Comments:"
 msgstr "Rawete:"
 
-#: src/header_stuff.c:468
+#: src/header_stuff.c:437
 msgid "Project name:"
 msgstr "No do prodjet:"
 
-#: src/header_stuff.c:471
+#: src/header_stuff.c:440
 msgid "Project version:"
 msgstr "Modêye do prodjet:"
 
-#: src/header_stuff.c:474
+#: src/header_stuff.c:443
 msgid "Pot file creation date:"
 msgstr "Date d' askepiaedje do fitchî .pot:"
 
-#: src/header_stuff.c:479
+#: src/header_stuff.c:448
 msgid "Po file revision date:"
 msgstr "Date do ramîdraedje do fitchî .po:"
 
-#: src/header_stuff.c:486
+#: src/header_stuff.c:455
 msgid "Generator:"
 msgstr "Djenerateu:"
 
-#: src/header_stuff.c:496
-msgid "Use my options to fill the following entries."
-msgstr "Eployî les tchuzes da minne po rimpli les intrêyes shuvantes."
+#: src/header_stuff.c:465
+msgid "Use my options to complete the following entries:"
+msgstr "Eployî les tchuzes da minne po rimpli les intrêyes shuvantes:"
 
-#: src/header_stuff.c:509
+#: src/header_stuff.c:479
 msgid "Translator's name:"
 msgstr "No do ratourneu:"
 
-#: src/header_stuff.c:512
+#: src/header_stuff.c:482
 msgid "Translator's e-mail:"
 msgstr "Emile do ratourneu:"
 
-#: src/header_stuff.c:515 src/prefs.c:146
+#: src/header_stuff.c:485 src/prefs.c:150
 msgid "Language:"
 msgstr "Lingaedje:"
 
-#: src/header_stuff.c:520
+#: src/header_stuff.c:491
 msgid "Language group's e-mail:"
 msgstr "Emile di l' ekipe do lingaedje:"
 
-#: src/header_stuff.c:524 src/prefs.c:159
+#: src/header_stuff.c:496 src/prefs.c:166
 msgid "Charset:"
 msgstr "Ecôdaedje:"
 
-#: src/header_stuff.c:528 src/prefs.c:163
+#: src/header_stuff.c:508 src/prefs.c:171
 msgid "Encoding:"
 msgstr "Ecôdaedje so 7 ou 8 bits:"
 
-#: src/history.c:167
+#: src/history.c:195
 msgid "_File/Recen_t files/"
 msgstr "_Fitchî/_Dierins fitchîs/"
 
-#: src/history.c:205
+#: src/history.c:243
 #, c-format
 msgid "Open %s"
 msgstr "Drovi %s"
 
-#: src/htmlizer.c:236
+#: src/htmlizer.c:276
 #, c-format
 msgid "Couldn't save html output to %s!"
 msgstr "Dji n' a nén savou schaper li rexhowe html dins %s!"
@@ -404,7 +441,7 @@ msgstr "Dji n' a nén savou schaper li rexhowe html dins %s!"
 #.
 #. * Translatable output to a html file which is visible on the pages.
 #.
-#: src/htmlizer.c:254
+#: src/htmlizer.c:302
 #, c-format
 msgid "%s-%s contains %i messages."
 msgstr "%s-%s a å dvins %i messaedjes."
@@ -415,12 +452,12 @@ msgstr "%s-%s a å dvins %i messaedjes."
 #. * NOTE: Please do not forget to also "translate" the <b> tags as the
 #. *  project name should be displayed bold on the output pages.
 #.
-#: src/htmlizer.c:267
+#: src/htmlizer.c:315
 #, c-format
 msgid "Project <b>%s</b> (last po file revision: %s)."
 msgstr "Prodjet <b>%s</b> (dierin ramîdraedje do fitchî po: %s)."
 
-#: src/htmlizer.c:282
+#: src/htmlizer.c:330
 #, c-format
 msgid "Last translator: %s"
 msgstr "Dierin ratourneu: %s"
@@ -430,10 +467,11 @@ msgstr "Dierin ratourneu: %s"
 #. *  the hyperlink in the translations.
 #. *
 #. * In the output it looks then like "HTML output of "tr.po" produced
-#. *  by gtranslator version 0.39".
+#. *  by gtranslator version X.YY".
 #. *
+#. * Please don't forget to include the HTML tags in the msgid.
 #.
-#: src/htmlizer.c:318
+#: src/htmlizer.c:369
 #, c-format
 msgid ""
 "HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org"
@@ -442,645 +480,660 @@ msgstr ""
 "Fitchî «%s» metou e cogne HTML pa <a href=\"http://www.gtranslator.org"
 "\">gtranslator</a> (modêye %s)."
 
-#: src/languages.h:64
+#: src/languages.c:35
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
-#: src/languages.h:68
+#: src/languages.c:39
 msgid "Arabic"
 msgstr "Aråbe"
 
-#: src/languages.h:72
+#: src/languages.c:43
 msgid "Azerbaijani Turkish"
 msgstr "Azerbaydjanès"
 
-#: src/languages.h:76
+#: src/languages.c:47
 msgid "Basque"
 msgstr "Basse"
 
-#: src/languages.h:80
-msgid "Bielorussian"
-msgstr "Bielorusse"
+#: src/languages.c:51
+msgid "Belorussian"
+msgstr "Bielorûsse"
 
-#: src/languages.h:84
+#: src/languages.c:55
 msgid "Britton"
 msgstr "Burton"
 
-#: src/languages.h:88
+#: src/languages.c:59
 msgid "Bulgarian"
 msgstr "Bulgåre"
 
-#: src/languages.h:92
+#: src/languages.c:63
 msgid "Catalan"
 msgstr "Catalan"
 
-#: src/languages.h:96
+#: src/languages.c:67
 msgid "Chinese/Simplified"
 msgstr "Chinwès/Simplifyî"
 
-#: src/languages.h:100
+#: src/languages.c:71
 msgid "Chinese/Traditional"
 msgstr "Chinwès/tradicionel"
 
-#: src/languages.h:104
+#: src/languages.c:75
 msgid "Croatian"
 msgstr "Crowåte"
 
-#: src/languages.h:108
+#: src/languages.c:79
 msgid "Czech"
 msgstr "Tcheke"
 
-#: src/languages.h:112
+#: src/languages.c:83
 msgid "Danish"
 msgstr "Danwès"
 
-#: src/languages.h:116
+#: src/languages.c:87
 msgid "Dutch"
 msgstr "Neyerlandès"
 
-#: src/languages.h:124
+#: src/languages.c:95
 msgid "English/Canada"
 msgstr "Inglès/Canada"
 
-#: src/languages.h:128
+#: src/languages.c:99
 msgid "English/GB"
 msgstr "Inglès/GB"
 
-#: src/languages.h:132
+#: src/languages.c:103
 msgid "English/USA"
 msgstr "Inglès/USA"
 
-#: src/languages.h:136
+#: src/languages.c:107
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: src/languages.h:140
+#: src/languages.c:111
 msgid "Estonian"
 msgstr "Estonyin"
 
-#: src/languages.h:144
+#: src/languages.c:115
 msgid "Farsi"
 msgstr "Iranyin"
 
-#: src/languages.h:148
+#: src/languages.c:119
 msgid "Finnish"
 msgstr "Finwès"
 
-#: src/languages.h:152
+#: src/languages.c:123
 msgid "French"
 msgstr "Francès"
 
-#: src/languages.h:156
+#: src/languages.c:127
 msgid "Galician"
 msgstr "Itålyin"
 
-#: src/languages.h:160
+#: src/languages.c:131
 msgid "German"
 msgstr "Almand"
 
-#: src/languages.h:164
+#: src/languages.c:135
 msgid "Greek"
 msgstr "Grek"
 
-#: src/languages.h:168
+#: src/languages.c:139
 msgid "Hungarian"
 msgstr "Hongrwès"
 
-#: src/languages.h:172
+#: src/languages.c:143
 msgid "Indonesian"
 msgstr "Indonesyin"
 
-#: src/languages.h:176
+#: src/languages.c:147
 msgid "Italian"
 msgstr "Itålyinne"
 
-#: src/languages.h:180
+#: src/languages.c:151
 msgid "Irish"
 msgstr "Gayel irlandès"
 
-#: src/languages.h:184
+#: src/languages.c:155
 msgid "Japanese"
 msgstr "Djaponès"
 
-#: src/languages.h:188
+#: src/languages.c:159
 msgid "Korean"
 msgstr "Coreyin"
 
-#: src/languages.h:192
+#: src/languages.c:163
 msgid "Latvian"
 msgstr "Leton"
 
-#: src/languages.h:196
+#: src/languages.c:167
 msgid "Lithuanian"
 msgstr "Litwanyin"
 
-#: src/languages.h:200
+#: src/languages.c:171
 msgid "Malay/Bahasa Melayu"
 msgstr "Malay"
 
-#: src/languages.h:204
+#: src/languages.c:175
 msgid "Maltese"
 msgstr "Maltès"
 
-#: src/languages.h:208
+#: src/languages.c:179
 msgid "Norwegian/Bokmaal"
 msgstr "Norvedjyin/Bokmål"
 
-#: src/languages.h:212
+#: src/languages.c:183
 msgid "Norwegian/Nynorsk"
 msgstr "Norvedjyin/Nynorsk"
 
-#: src/languages.h:216
+#: src/languages.c:187
 msgid "Polish"
 msgstr "Polonès"
 
-#: src/languages.h:220
+#: src/languages.c:191
 msgid "Portuguese"
 msgstr "Portuguès"
 
-#: src/languages.h:224
+#: src/languages.c:195
 msgid "Portuguese/Brazil"
 msgstr "Portuguès/Braezi"
 
-#: src/languages.h:228
+#: src/languages.c:199
 msgid "Romanian"
 msgstr "Roumin"
 
-#: src/languages.h:232
+#: src/languages.c:203
 msgid "Russian"
-msgstr "Russe"
+msgstr "Rûsse"
 
-#: src/languages.h:236
+#: src/languages.c:207
 msgid "Serbian/Cyrillic"
 msgstr "Serbe/Cirilike"
 
-#: src/languages.h:240
+#: src/languages.c:211
 msgid "Serbian/Latin"
 msgstr "Serbe/Latén"
 
-#: src/languages.h:244
+#: src/languages.c:215
 msgid "Slovak"
 msgstr "Slovake"
 
-#: src/languages.h:248
+#: src/languages.c:219
 msgid "Slovenian"
 msgstr "Slovenyin"
 
-#: src/languages.h:252
+#: src/languages.c:223
 msgid "Spanish"
 msgstr "Castiyan"
 
-#: src/languages.h:256
+#: src/languages.c:227
 msgid "Spanish/Spain"
 msgstr "Castiyan/Espagne"
 
-#: src/languages.h:260
+#: src/languages.c:231
 msgid "Spanish/Mexico"
 msgstr "Castiyan/Mecsike"
 
-#: src/languages.h:264
+#: src/languages.c:235
 msgid "Swedish"
 msgstr "Suwedwès"
 
-#: src/languages.h:268
+#: src/languages.c:239
 msgid "Tamil"
 msgstr "Tamoul"
 
-#: src/languages.h:272
+#: src/languages.c:243
 msgid "Thai"
 msgstr "Tai"
 
-#: src/languages.h:276
+#: src/languages.c:247
 msgid "Turkish"
 msgstr "Turk"
 
-#: src/languages.h:280
+#: src/languages.c:251
 msgid "Ukrainian"
 msgstr "Ucrainyin"
 
-#: src/languages.h:284
+#: src/languages.c:255
 msgid "Uzbekian"
 msgstr "Ouzbeke"
 
-#: src/languages.h:288
+#: src/languages.c:259
 msgid "Vietnamese"
 msgstr "Vietnamyin"
 
-#: src/languages.h:292
+#: src/languages.c:263
 msgid "Walloon"
 msgstr "Walon"
 
-#: src/languages.h:296
+#: src/languages.c:267
 msgid "Welsh"
 msgstr "Walès"
 
-#: src/main.c:77
-msgid "Show build informations/specifications"
-msgstr "Mostrer les informåcions/specs pol copilaedje"
-
 #: src/main.c:81
-msgid "Specify main window geometry"
-msgstr "Diner l' djeometreye do mwaisse purnea"
+#, fuzzy
+msgid "Auto translate the po file & exit"
+msgstr "gtranslator -- drovi on fitchî .po"
 
-#: src/main.c:81
-msgid "GEOMETRY"
-msgstr "DJEOMETREYE"
+#: src/main.c:81 src/main.c:97
+msgid "FILENAME"
+msgstr ""
 
 #: src/main.c:85
-msgid "Don't load any backend modules"
+#, fuzzy
+msgid "Show build information/specifications"
+msgstr "Mostrer les informåcions/specs pol copilaedje"
+
+#: src/main.c:89
+msgid "Export learn buffer to a plain po file"
 msgstr ""
 
 #: src/main.c:89
-msgid "Define another query-domains directory"
-msgstr "Defini on ôte ridant wice ki les dominnes sont cwerîs"
-
-#: src/main.c:89
-msgid "LOCALEDIR"
-msgstr "RIDANTLOCÅLES"
+msgid "PO_FILE"
+msgstr "FITCHÎ_PO"
 
 #: src/main.c:93
+msgid "Specify main window geometry"
+msgstr "Diner l' djeometreye do mwaisse purnea"
+
+#: src/main.c:93
+msgid "GEOMETRY"
+msgstr "DJEOMETREYE"
+
+#: src/main.c:97
+msgid "Learn the file completely & exit"
+msgstr ""
+
+#: src/main.c:101
 msgid "HTML file to write to"
 msgstr "Fitchî HTML a scrire å dvins"
 
-#: src/main.c:93
+#: src/main.c:101
 msgid "HTMLFILE"
 msgstr "FITCHÎHTML"
 
-#: src/main.c:138
+#: src/main.c:105
+msgid "Don't highlight syntax"
+msgstr ""
+
+#: src/main.c:147
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Åk n' a nén tot inicialijhant GConf: %s"
 
-#: src/main.c:161
-msgid "gtranslator build informations/specs:"
+#: src/main.c:175
+#, fuzzy
+msgid "gtranslator build information/specs:"
 msgstr "gtranslator informåcions/specs pol copilaedje:"
 
-#: src/main.c:163
+#: src/main.c:177
 msgid "Version and build date:"
 msgstr "Modêye eyet date di copilaedje:"
 
-#: src/main.c:165
-msgid "Build-Glib/Gtk+/Gnome versions:"
+#: src/main.c:179
+#, fuzzy
+msgid "Build GLib/Gtk+/GNOME versions:"
 msgstr "Modêyes di Glib/Gtk+/Gnome å copilaedje:"
 
-#: src/main.c:167
-msgid "Backends directory:"
-msgstr ""
-
-#: src/main.c:169
+#: src/main.c:181
 msgid "Colorschemes directory:"
 msgstr "Ridant po les énsembes di coleurs:"
 
-#: src/main.c:171
+#: src/main.c:183
 msgid "Scripts directory:"
 msgstr "Ridant po les scripes:"
 
-#: src/main.c:173
+#: src/main.c:185
 msgid "Window icon:"
 msgstr "Imådjete do purnea:"
 
-#: src/main.c:175
+#: src/main.c:187
 msgid "Own locale directory:"
 msgstr "Ridant da sinne po les locåles:"
 
 #.
-#. * The bad case; print a warning and set our module
-#. *  list to NULL.
+#. * As everything seemed to went fine, print out a nice
+#. *  message informing the user about the success.
 #.
-#: src/main.c:199
-msgid ""
-"Unfortunately your GModule implementation doesn't support loading dynamic "
-"modules!"
-msgstr ""
-"Målureuzmint vosse eplemintåcion di GModule ni sopoite nén li tcherdjaedje "
-"dinamike des modules!"
+#: src/main.c:440
+#, fuzzy, c-format
+msgid "Learned `%s' successfully.\n"
+msgstr "Li metaedje a djoû a stî comufåt."
 
-#: src/main.c:213
-msgid "gtranslator won't load any backend module..."
+#.
+#. * Give us another small status feedback about the export.
+#.
+#: src/main.c:482
+#, c-format
+msgid "Exported learn buffer to `%s'.\n"
 msgstr ""
 
-#: src/menus.c:45
+#: src/menus.c:48
 msgid "_Messages"
 msgstr "_Messaedjes"
 
-#: src/menus.c:46
+#: src/menus.c:49
 msgid "Mess_age status"
 msgstr "E_tat des messaedjes"
 
-#: src/menus.c:57
+#: src/menus.c:60
 msgid "_Compile"
 msgstr "_Copiler"
 
-#: src/menus.c:58 src/menus.c:290
+#: src/menus.c:61 src/menus.c:284
 msgid "Compile the po file"
 msgstr "Copiler li fitchî .po"
 
-#: src/menus.c:64
+#: src/menus.c:67
 msgid "_Update"
 msgstr "_Mete a djoû"
 
-#: src/menus.c:65 src/menus.c:294
+#: src/menus.c:68 src/menus.c:288
 msgid "Update the po file"
 msgstr "Mete a djoû li fitchî .po"
 
-#: src/menus.c:72
-msgid "Aut_oaccomplish"
-msgstr "Oto_rimplixhaedje"
+#: src/menus.c:75
+msgid "Aut_otranslate..."
+msgstr "Oto_ratournaedje..."
 
-#: src/menus.c:73
-msgid "Automatically fill missing translations from the default query domain"
-msgstr "Rimpli otomaticmint les les tchinnes ki mankèt a pårti do prémetou dominne di cweraedje"
+#: src/menus.c:76
+msgid "Autotranslate the file with information from your learn buffer"
+msgstr ""
 
-#: src/menus.c:81
-msgid "Open from _URI"
-msgstr "Drovi a pårti d' ene _hårdêye"
+#: src/menus.c:83
+msgid "Remove all translations..."
+msgstr "Oister tos les ratournaedjes..."
 
-#: src/menus.c:82
+#: src/menus.c:84
+msgid "Remove all existing translations from the po file"
+msgstr "Oister tos les ratournaedjes k' i gn a foû do fitchî .po"
+
+#: src/menus.c:92
+msgid "Open from _URI..."
+msgstr "Drovi a pårti d' ene _hårdêye..."
+
+#: src/menus.c:93
 msgid "Open a po file from a given URI"
 msgstr "Drovi on fitchî .po a pårti del dinêye hårdêye (URI)"
 
-#: src/menus.c:92
+#: src/menus.c:103
 msgid "Recen_t files"
 msgstr "_Dierins fitchîs"
 
-#: src/menus.c:95
-msgid "_Export to UTF-8"
-msgstr "_Ebaguer en UTF-8"
+#: src/menus.c:106
+msgid "_Export to UTF-8..."
+msgstr "_Ebaguer en UTF-8..."
 
-#: src/menus.c:96
+#: src/menus.c:107
 msgid "Export the current po file to UTF-8"
 msgstr "Ebaguer li fitchî po do moumint en UTF-8"
 
-#: src/menus.c:102
-msgid "_Import from UTF-8"
-msgstr "_Abaguer en UTF-8"
+#: src/menus.c:113
+msgid "_Import from UTF-8..."
+msgstr "_Abaguer en UTF-8..."
 
-#: src/menus.c:103
+#: src/menus.c:114
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr "Abaguer on fitchî po ecôdé en UTF-8 et covierti a l' ecôdaedje del locåle"
+msgstr ""
+"Abaguer on fitchî po ecôdé en UTF-8 et covierti a l' ecôdaedje del locåle"
 
-#: src/menus.c:134
-msgid "_Query"
-msgstr "C_eri"
+#: src/menus.c:144
+msgid "_Query..."
+msgstr "C_weri..."
 
-#: src/menus.c:135 src/menus.c:367
+#: src/menus.c:145 src/menus.c:349
 msgid "Query for a string"
 msgstr "Cweri après ene tchinne"
 
-#: src/menus.c:142
+#: src/menus.c:152
 msgid "_Header..."
 msgstr "_Tiestire..."
 
-#: src/menus.c:143 src/menus.c:298
-msgid "Edit the header"
-msgstr "Candjî li tiestire"
-
-#: src/menus.c:152
-msgid "_Message"
-msgstr "_Messaedje"
-
 #: src/menus.c:153
-msgid "Standard messages view"
-msgstr "Vuwe des messaedjes standård"
+msgid "Edit po file header"
+msgstr "Candjî li tiestire do fitchî .po"
 
-#: src/menus.c:155
-msgid "_Comments"
-msgstr "_Rawetes"
-
-#: src/menus.c:156
-msgid "View comments for message"
-msgstr "Vey les rawetes pol messaedje."
-
-#: src/menus.c:158
-msgid "_Numbers"
-msgstr "_Limerôs"
-
-#: src/menus.c:159
-msgid "View numbers in the message"
-msgstr "Vey les limerôs el messaedje"
+#: src/menus.c:160
+msgid "C_omment..."
+msgstr "R_awete..."
 
 #: src/menus.c:161
-msgid "C _Formats"
-msgstr "_Format C"
+msgid "Edit message comment"
+msgstr "Candjî l' rawete do messaedje"
 
-#: src/menus.c:162
-msgid "View C formats of the message"
-msgstr "Vey les formataedjes C do messaedje"
+#: src/menus.c:168
+msgid "Copy _message -> translation"
+msgstr "Copyî l' _messaedje come ratournaedje"
 
-#: src/menus.c:164
-msgid "_Hotkeys"
-msgstr "Tape _rascourti"
+#: src/menus.c:169
+msgid "Copy the original message contents and paste them as translation"
+msgstr ""
+"Copyî li messaedje d' oridjinne et l' aclaper dins l' tchamp ratournaedje"
 
-#: src/menus.c:165
-msgid "View hotkeys in the message"
-msgstr "Vey les tapes rascourti el messaedje"
-
-#: src/menus.c:172
+#: src/menus.c:179
 msgid "_First"
 msgstr "_Prumî"
 
-#: src/menus.c:173 src/menus.c:324
+#: src/menus.c:180 src/menus.c:305
 msgid "Go to the first message"
 msgstr "Potchî å prumî messaedje"
 
-#: src/menus.c:179
+#: src/menus.c:186
 msgid "_Back"
 msgstr "En _erî"
 
-#: src/menus.c:180 src/menus.c:328
-msgid "Go one message back"
-msgstr "Potchî on messaedje en erî"
+#: src/menus.c:187 src/menus.c:309
+msgid "Move back one message"
+msgstr "Potchî å messaedje di dvant"
 
-#: src/menus.c:187
+#: src/menus.c:194
 msgid "_Next"
 msgstr "_Shuvant"
 
-#: src/menus.c:188 src/menus.c:333
-msgid "Go one message forward"
-msgstr "Potchî on messaedje en avant"
+#: src/menus.c:195 src/menus.c:314
+msgid "Move forward one message"
+msgstr "Potchî å messaedje shuvant"
 
-#: src/menus.c:194
+#: src/menus.c:201
 msgid "_Last"
 msgstr "_Dierin"
 
-#: src/menus.c:195 src/menus.c:337
+#: src/menus.c:202 src/menus.c:318
 msgid "Go to the last message"
 msgstr "Potchî å dierin messaedje"
 
-#: src/menus.c:202
+#: src/menus.c:209
 msgid "_Go to..."
 msgstr "_Potchî a..."
 
-#: src/menus.c:203
+#: src/menus.c:210
 msgid "Goto specified message number"
-msgstr "Potchî å limerô di messaedje specifyî"
+msgstr "Potchî å limero di messaedje specifyî"
 
-#: src/menus.c:209
+#: src/menus.c:216
 msgid "Next fuz_zy"
 msgstr "Fu_zzy shuvant"
 
-#: src/menus.c:210
+#: src/menus.c:217
 msgid "Go to next fuzzy message"
 msgstr "Potchî å messaedje «fuzzy» shuvant"
 
-#: src/menus.c:216
+#: src/menus.c:223
 msgid "Next _untranslated"
 msgstr "_Nén ratourné shuvant"
 
-#: src/menus.c:217 src/menus.c:342
+#: src/menus.c:224 src/menus.c:323
 msgid "Go to next untranslated message"
 msgstr "Potchî å messaedje nén co ratourné shuvant"
 
-#: src/menus.c:227
-msgid "_Translated"
-msgstr "_Ratournés"
-
-#: src/menus.c:228
-msgid "Toggle translated status of a message"
-msgstr "Discandjî l' etat ratourné ou nén d' on messaedje"
-
-#: src/menus.c:236
+#: src/menus.c:234
 msgid "_Fuzzy"
 msgstr "_Fuzzy"
 
-#: src/menus.c:237
+#: src/menus.c:235
 msgid "Toggle fuzzy status of a message"
 msgstr "Discandjî l' etat «fuzzy» ou nén d' on messaedje"
 
-#: src/menus.c:245
-msgid "_Stick"
-msgstr "_Aclaper"
+#: src/menus.c:252
+#, fuzzy
+msgid "_Colorschemes"
+msgstr "Ridant po les énsembes di coleurs:"
 
-#: src/menus.c:246
-msgid "Stick this message"
-msgstr "Aclaper ci messaedje chal"
-
-#: src/menus.c:265
+#: src/menus.c:258
 msgid "gtranslator _website"
 msgstr "_Waibe di gtranslator"
 
-#: src/menus.c:266
+#: src/menus.c:259
 msgid "gtranslator's homepage on the web"
 msgstr "Li waibe do programe gtranslator"
 
-#: src/menus.c:277
+#: src/menus.c:271
 msgid "Open a po file"
 msgstr "Drovi on fitchî .po"
 
-#: src/menus.c:280
+#: src/menus.c:274
 msgid "Save"
 msgstr "Schaper"
 
-#: src/menus.c:281
+#: src/menus.c:275
 msgid "Save File"
 msgstr "Schaper fitchî"
 
-#: src/menus.c:284
+#: src/menus.c:278
 msgid "Save as"
-msgstr "Schaper eyet rlomer"
+msgstr "Schap. et rlomer"
 
-#: src/menus.c:285
+#: src/menus.c:279
 msgid "Save file with a different name"
 msgstr "Schaper ci fitchî ci dzo on novea no"
 
-#: src/menus.c:289
+#: src/menus.c:283
 msgid "Compile"
 msgstr "Copiler"
 
-#: src/menus.c:293
+#: src/menus.c:287
 msgid "Update"
 msgstr "Mete a djoû"
 
-#: src/menus.c:297
+#: src/menus.c:291
 msgid "Header"
 msgstr "Tiestire"
 
-#: src/menus.c:302
+#: src/menus.c:292
+msgid "Edit the header"
+msgstr "Candjî li tiestire"
+
+#: src/menus.c:296
 msgid "Undo"
 msgstr "Disfé"
 
-#: src/menus.c:303
+#: src/menus.c:297
 msgid "Undo the last performed action"
 msgstr "Disfé li dierinne accion"
 
-#: src/menus.c:306
-msgid "Redo"
-msgstr "Rifé"
-
-#: src/menus.c:307
-msgid "Redo the last undone action"
-msgstr "Rifé li dierinne accion k' a stî disfwaite"
-
-#: src/menus.c:311
-msgid "Options"
-msgstr "Tchuzes"
-
-#: src/menus.c:312
-msgid "gtranslator options"
-msgstr "Tchuzes di gtranslator"
-
-#: src/menus.c:315 src/menus.c:316
-msgid "Exit"
-msgstr "Moussî foû"
-
-#: src/menus.c:323
+#: src/menus.c:304
 msgid "First"
 msgstr "Prumî"
 
-#: src/menus.c:327
+#: src/menus.c:308
 msgid "Back"
 msgstr "En erî"
 
-#: src/menus.c:332
+#: src/menus.c:313
 msgid "Next"
 msgstr "Shuvant"
 
-#: src/menus.c:336
+#: src/menus.c:317
 msgid "Last"
 msgstr "Dierin"
 
-#: src/menus.c:341
+#: src/menus.c:322
 msgid "Missing"
 msgstr "Ki mankèt:"
 
-#: src/menus.c:349
+#: src/menus.c:330
 msgid "Go to the next fuzzy translation"
 msgstr "Potchî å ratournaedje «fuzzy» shuvant"
 
-#: src/menus.c:354
+#: src/menus.c:335
 msgid "Go to"
 msgstr "Potchî a"
 
-#: src/menus.c:355
+#: src/menus.c:336
 msgid "Go to specified message number"
-msgstr "Potchî å limerô di messaedje specifyî"
+msgstr "Potchî å limero di messaedje specifyî"
 
-#: src/menus.c:359
+#: src/menus.c:340
 msgid "Find string in po file"
 msgstr "Trover ene tchinne el fitchî .po"
 
-#: src/menus.c:363
+#: src/menus.c:344
 msgid "Replace string in po file"
 msgstr "Mete ene tchinne el plaece d' ene ôte el fitchî .po"
 
-#: src/message.c:76
+#: src/message.c:82
 msgid "Couldn't get the message!"
 msgstr "Dji n' a savou aveur li messaedje!"
 
-#: src/message.c:98
+#: src/message.c:104
 msgid "There are no fuzzy messages left."
 msgstr "I n' resse nou messaedje «fuzzy»."
 
-#: src/message.c:122
+#: src/message.c:128
 msgid "All messages seem to be translated."
 msgstr "I shonne ki tos les messaedjes seuye ratournés."
 
-#: src/open-differently.c:161
+#: src/message.c:318
+#, c-format
+msgid ""
+"The translation for message `%s'\n"
+"contains syntactical errors!"
+msgstr ""
+
+#: data/etspecs/messages-table.etspec.h:5 src/messages-table.c:137
+msgid "Status"
+msgstr ""
+
+#: data/etspecs/messages-table.etspec.h:3 src/messages-table.c:138
+msgid "Number"
+msgstr "Limero"
+
+#: data/etspecs/messages-table.etspec.h:2 src/messages-table.c:139
+msgid "Line"
+msgstr ""
+
+#: data/etspecs/messages-table.etspec.h:4 src/messages-table.c:140
+msgid "Original"
+msgstr "Oridjinå"
+
+#: data/etspecs/messages-table.etspec.h:6 src/messages-table.c:141
+msgid "Translation"
+msgstr "Ratournaedje"
+
+#: data/etspecs/messages-table.etspec.h:1 src/messages-table.c:142
+msgid "Comment"
+msgstr "Rawete"
+
+#: src/messages-table.c:208
+msgid "unknown"
+msgstr "nén cnoxhou"
+
+#: src/messages-table.c:214
+msgid "fuzzy"
+msgstr "fuzzy"
+
+#: src/messages-table.c:220
+msgid "translated"
+msgstr "ratourné"
+
+#: src/open.c:141
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Dji n' a savou drovi li fitchî gettext copilé «%s»!"
 
-#: src/open-differently.c:212
+#: src/open.c:188
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Dji n' a savou drovi li fitchî gettext zip-sipotchî «%s»!"
@@ -1089,17 +1142,17 @@ msgstr "Dji n' a savou drovi li fitchî gettext zip-sipotchî «%s»!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open-differently.c:222
+#: src/open.c:198
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr "Dji n' a savou drovi li fitchî gettext %s-sipotchî «%s»!"
 
-#: src/open-differently.c:293
+#: src/open.c:266
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Dji n' a savou drovi li fitchî .po zip-sipotchî «%s»!"
 
-#: src/parse.c:101
+#: src/parse.c:115
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1108,7 +1161,7 @@ msgstr ""
 "Nou caractere d' escape di trové: \\%c\n"
 "Radjouter çouchal e parse.c, al roye %i."
 
-#: src/parse.c:247
+#: src/parse.c:387
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1119,7 +1172,7 @@ msgstr ""
 "al roye %d.\n"
 "Verifyîz l' fitchî et sayîz co ene feye s' i vs plait."
 
-#: src/parse.c:283
+#: src/parse.c:433
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1128,34 +1181,34 @@ msgstr ""
 "Li fitchî est vude:\n"
 "%s"
 
-#: src/parse.c:306
+#: src/parse.c:457
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Li fitchî «%s» n' egzisteye dedja nén!"
 
-#: src/parse.c:396
+#: src/parse.c:580
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:553
+#: src/parse.c:759
 #, c-format
 msgid ""
-"You are trying to save file with *.pot extension.\n"
-"However, such files are generated by program.\n"
-"Your file should be named with *.po extension, most likely %s.po"
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
 msgstr ""
 "Vos sayîz di schaper l' fitchî avou l' egzténsion *.pot.\n"
 "Mins ces fitchîs sont fwaits pal programe xgettext.\n"
 "Li fitchî da vosse duvreut esse lomé avou l' egzténsion *.po;\n"
 "probablumint come %s.po"
 
-#: src/parse.c:599
+#: src/parse.c:821
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Dji n' a savou drovi li fitchî «%s» po-z î scrire!"
 
-#: src/parse.c:645
+#: src/parse.c:867
 #, c-format
 msgid ""
 "File %s\n"
@@ -1164,26 +1217,11 @@ msgstr ""
 "Li fitchî %s\n"
 "a %d messaedjes ki sont metous come «fuzzy»"
 
-#: src/parse.c:681
-#, c-format
-msgid ""
-"You didn't change anything in\n"
-"%s\n"
-"Do you want to save it anyway?"
-msgstr ""
-"Vos n' avoz rén candjî è\n"
-"%s\n"
-"El voloz cwand minme schaper?"
-
-#: src/parse.c:689
-msgid "gtranslator -- unchanged"
-msgstr "gtranslator -- nén candjî"
-
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:761
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:972
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/parse.c:786
+#: src/parse.c:997
 #, c-format
 msgid ""
 "File %s\n"
@@ -1192,11 +1230,11 @@ msgstr ""
 "Li fitchî %s\n"
 "a candjî. Volez-ve rimete come divant a pårti del schapêye copeye?"
 
-#: src/parse.c:830
+#: src/parse.c:1148
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Mande escuzes, mins i gn a pont di msgfmt so voste éndjole!"
 
-#: src/parse.c:859
+#: src/parse.c:1183
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1205,240 +1243,318 @@ msgstr ""
 "Li copilaedje a stî comufåt:\n"
 "%s"
 
-#: src/prefs.c:105
+#: src/prefs.c:110
 msgid "gtranslator -- options"
 msgstr "gtranslator -- tchuzes"
 
-#: src/prefs.c:111
-msgid "Personal informations"
+#: src/prefs.c:116
+msgid "Personal information"
 msgstr "Informåcion da vosse"
 
-#: src/prefs.c:113
+#: src/prefs.c:118
 msgid "Language settings"
 msgstr "Apontiaedje do lingaedje"
 
-#: src/prefs.c:115
+#: src/prefs.c:120
 msgid "Po file editing"
 msgstr "Aspougnaedje do fitchî .po"
 
-#: src/prefs.c:117
+#: src/prefs.c:122
 msgid "Miscellaneous"
-msgstr "Totes sôrtes"
+msgstr "Totes sôres"
 
-#: src/prefs.c:119
+#: src/prefs.c:124
 msgid "Recent files & spell checking"
-msgstr ""
+msgstr "Dierins fitchîs & coridjaedje del ortografeye"
 
-#: src/prefs.c:121
+#: src/prefs.c:126
 msgid "Fonts, colors and color schemes"
 msgstr "Fontes, coleurs eyet énsembes di coleurs"
 
-#: src/prefs.c:123
+#: src/prefs.c:128
 msgid "Autosaving"
 msgstr "Schapaedje otomatike"
 
-#: src/prefs.c:129
+#: src/prefs.c:130
+msgid "Messages table"
+msgstr "Tåvlea des messaedjes"
+
+#: src/prefs.c:132
+msgid "Learn buffer & autotranslation"
+msgstr ""
+
+#: src/prefs.c:138
 msgid "Author's name:"
 msgstr "No di l' oteur:"
 
-#: src/prefs.c:132
+#: src/prefs.c:141
 msgid "Author's EMail:"
-msgstr "Emiles di l' oteur:"
+msgstr "Emile di l' oteur:"
 
-#: src/prefs.c:136
-msgid "Default query domain:"
-msgstr "Prémetou dominne di cweraedje:"
-
-#: src/prefs.c:150
+#: src/prefs.c:155
 msgid "Language code:"
 msgstr "Côde do lingaedje"
 
-#: src/prefs.c:155
+#: src/prefs.c:161
 msgid "Language group's EMail:"
 msgstr "Emile di l' ekipe do lingaedje:"
 
-#: src/prefs.c:171
-msgid "Set non-fuzzy status, if message was changed"
+#: src/prefs.c:180
+msgid "Remove fuzzy status if message changed"
 msgstr "Bodjî l' etikete «fuzzy» si l' messaedje a stî candjî"
 
-#: src/prefs.c:175
+#: src/prefs.c:184
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Advierti si l' fitchî po a des ratournaedjes «fuzzy»"
 
-#: src/prefs.c:179
-msgid "Don't save unchanged po files"
-msgstr "Nén schaper les fitchîs .po ki n' ont nén stî candjîs"
-
-#: src/prefs.c:183
-msgid "Warn me if I'm trying to save an unchanged file"
-msgstr "M' advierti si dji saye di schaper on fitchî ki n' a nén stî candjî"
-
-#: src/prefs.c:187
-msgid "Keep obsolete message in the po files"
+#: src/prefs.c:188
+msgid "Keep obsolete messages in the po files"
 msgstr "Wårder les vîs messaedjes ezès fitchîs po"
 
-#: src/prefs.c:194
-msgid "Use free space indicating special character"
-msgstr "Mostrer les blancs avou on caractere sipeciål"
+#: src/prefs.c:192
+msgid "Highlight syntax of the translation messages"
+msgstr ""
 
 #: src/prefs.c:197
+msgid "Check messages for syntactical correctness"
+msgstr ""
+
+#: src/prefs.c:204
+msgid "Use special character to indicate free space"
+msgstr "Mostrer les blancs avou on caractere sipeciål"
+
+#: src/prefs.c:207
 msgid "Enable the popup menu"
 msgstr ""
 
-#: src/prefs.c:200
-msgid "Enable the update function of gtranslator (you need the sources for this)"
+#: src/prefs.c:210
+msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr ""
 
-#: src/prefs.c:203
+#: src/prefs.c:213
+msgid "Enable the functionality to remove all translations from a po file"
+msgstr ""
+
+#: src/prefs.c:216
+msgid "Delete compiled files (e.g. \"project.gmo\")"
+msgstr "Disfacer les fitchîs copilés (eg: «prodjet.gmo»)"
+
+#: src/prefs.c:219
 msgid "Save geometry on exit & restore it on startup"
 msgstr "Schaper li djeometreye cwand on cwite, et l' rapexhî cwand on enonde"
 
-#: src/prefs.c:206
-msgid "Show the views sidebar"
-msgstr "Mostrer li bår di costé des vuwes"
-
-#: src/prefs.c:209
-msgid "Show the messages table"
-msgstr "Mostrer li tåvlea des messaedjes"
-
-#: src/prefs.c:216
-msgid "Maximally showed recent files:"
+#: src/prefs.c:222
+msgid "Show instant comment view in the main pane"
 msgstr ""
 
-#: src/prefs.c:220
-msgid "Check every recent file before listing it up"
-msgstr ""
+#: src/prefs.c:229
+msgid "Maximum number of entries in the recent files' list:"
+msgstr "Intrêyes macsimom pol djivêye des dierins fitchîs:"
 
-#: src/prefs.c:223
+#: src/prefs.c:233
+msgid "Check recent files before showing in recent files' list"
+msgstr "Verifyîz l' fitchî dvant del mete e l' djivêye des dierins fitchîs"
+
+#: src/prefs.c:236
 msgid "Instant spell checking"
 msgstr "Coridjaedje tot tapant"
 
-#: src/prefs.c:226
-msgid "Use special dictionary"
-msgstr "Eployî on motî speciål"
+#: src/prefs.c:239
+msgid "Use special dictionary:"
+msgstr "Eployî on motî speciål:"
 
-#: src/prefs.c:229
-msgid "Dictionary to use:"
-msgstr "Motî a-z eployî:"
-
-#: src/prefs.c:240
+#: src/prefs.c:261
 msgid "Syntax color scheme to use:"
 msgstr "Énsembe di coleurs pol sintacse a-z eployî:"
 
-#: src/prefs.c:244
+#: src/prefs.c:266
 msgid "Apply own fonts:"
 msgstr "Mete en ouve les fontes da vosse:"
 
-#: src/prefs.c:248
+#: src/prefs.c:270
 msgid "Original text font:"
 msgstr "Fonte pol tecse d' oridjinne:"
 
-#: src/prefs.c:248
+#: src/prefs.c:270
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- tchoezi l' fonte po les msgid"
 
-#: src/prefs.c:252
+#: src/prefs.c:274
 msgid "Translation font:"
 msgstr "Fonte po les ratournaedjes:"
 
-#: src/prefs.c:252
+#: src/prefs.c:274
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- tchoezi l' fonte po les msgstr"
 
-#: src/prefs.c:256
+#: src/prefs.c:278
 msgid "Apply own colors:"
 msgstr "Mete en ouve les coleurs da vosse:"
 
-#: src/prefs.c:260
+#: src/prefs.c:282
 msgid "Foreground color:"
 msgstr "Coleur di dvant:"
 
-#: src/prefs.c:260
+#: src/prefs.c:282
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- coleur di dvant"
 
-#: src/prefs.c:264
+#: src/prefs.c:286
 msgid "Background color:"
 msgstr "Coleur di fond:"
 
-#: src/prefs.c:264
+#: src/prefs.c:286
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- coleur di fond"
 
-#: src/prefs.c:271
-msgid "Save the po file automatically after a period of time"
-msgstr "Schaper otomaticmint les fitchîs po dispoy on tins dné"
+#.
+#. * The seventh page of the prefs-box: autosaving options.
+#.
+#: src/prefs.c:292
+msgid "Automatically save po files at regular intervals (in minutes):"
+msgstr "Schaper otomaticmint les fitchîs *.po totes les (e munutes):"
 
-#: src/prefs.c:275
-msgid "Append a special suffix to the automatically saved files"
-msgstr "Radjouter ene cawete sipeciåle ås fitchîs schapés otomaticmint"
+#: src/prefs.c:307
+msgid "Append a suffix to automatically saved files:"
+msgstr "Radjouter ene cawete ås fitchîs schapés otomaticmint:"
 
-#: src/prefs.c:279
-msgid "Autosave suffix:"
-msgstr "Cawete pol schapaedje otomatike:"
+#: src/prefs.c:327
+msgid "Show the messages table (requires gtranslator restart)"
+msgstr "Mostrer li tåvlea des messaedjes (i vs fåt renonder gtranslator)"
 
-#: src/prefs.c:283
-msgid "Autosave timeout in minutes:"
-msgstr "Tårdjaedje e munutes pol schapaedje otomatike:"
+#: src/prefs.c:331
+#, fuzzy
+msgid "Collapse translated entries by default"
+msgstr "Coleur po ls intrêyes nén ratournêyes:"
 
-#: src/prefs.c:489
+#: src/prefs.c:335
+msgid "Use own colors for the messages table groups"
+msgstr "Eployî des coleurs da vosse po les groupes des tåvleas d' messaedjes"
+
+#: src/prefs.c:339
+msgid "Untranslated entries color:"
+msgstr "Coleur po ls intrêyes nén ratournêyes:"
+
+#: src/prefs.c:339
+msgid "gtranslator -- untranslated entries' color"
+msgstr "gtranslator -- coleur po ls intrêyes nén ratournêyes"
+
+#: src/prefs.c:343
+msgid "Fuzzy entries color:"
+msgstr "Coleur po ls intrêyes fuzzy:"
+
+#: src/prefs.c:343
+msgid "gtranslator -- fuzzy entries' color"
+msgstr "gtranslator -- coleur po ls intrêyes fuzzy"
+
+#: src/prefs.c:347
+msgid "Translated entries color:"
+msgstr "Coleur po ls intrêyes ratournêyes:"
+
+#: src/prefs.c:347
+msgid "gtranslator -- translated entries' color"
+msgstr "gtranslator -- coleur po ls intrêyes ratournêyes"
+
+#: src/prefs.c:355
 msgid ""
-"With the Preferences box you can define some variables\n"
-"with which you can make gtranslator make more work\n"
-"like YOU want it to work!"
+"Also query the personal learn buffer while autotranslating untranslated "
+"messages"
 msgstr ""
-"Avou l' purnea des preferinces vos ploz defini sacwantès\n"
-"variåves po fé gtranslator ovrer come VOS voloz k' il ovraxhe!"
+
+#: src/prefs.c:359
+#, fuzzy
+msgid "Automatically learn a newly translated message"
+msgstr "Potchî å messaedje nén co ratourné shuvant"
 
 #.
-#. * The generally used date format -- i18n this please,
-#. *  translators ,-)
+#. * Translators: With "fuzzy" I mean a more enhanced (and more
+#. *  crappy) logic while searching for appropriate translations
+#. *   for a original string.
 #.
-#: src/preferences.c:228
-msgid "%Y-%m-%d %H:%M"
-msgstr "%d/%m/%Y %H:%M"
+#: src/prefs.c:367
+msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
+msgstr ""
 
-#: src/preferences.c:235
+#: src/prefs.c:370
+msgid "Minimal required similarity percentage for fuzzy queries"
+msgstr ""
+
+#: src/prefs.c:412
+#, fuzzy
+msgid "Please enter your name!"
+msgstr "Dinez li tchinne a cweri après s' i vs plait"
+
+#: src/prefs.c:426
+#, fuzzy
+msgid "Please enter your EMail address!"
+msgstr "Dinez li tchinne a cweri après s' i vs plait"
+
+#: src/prefs.c:439
+msgid "Please enter a valid EMail address!"
+msgstr ""
+
+#: src/prefs.c:665
+msgid ""
+"The Preferences box allows you to customise gtranslator\n"
+"to work in ways you find comfortable and productive."
+msgstr ""
+
+#: src/preferences.c:180
 msgid "Couldn't generate the current date!"
 msgstr "Dji n' sai fé ene tchinne avou l' date do moumint!"
 
-#: src/query.c:142
-msgid "No language defined in preferences to query the domains for!"
-msgstr "Nou lingaedje di defini ezès preferinces po poleur cweri les dominnes!"
-
-#: src/replace.c:171
-msgid "No replace made!"
+#: src/replace.c:173
+msgid "No replacements made!"
 msgstr ""
 
-#: src/session.c:90
+#.
+#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
+#. *
+#. * Translators: you should translate this foo'sh string into something
+#. *  another than a 'Y' to avoid the usage of the mid dot ('·') in the
+#. *   text displaying routines of gtranslator.
+#.
+#: src/runtime-config.c:76
+msgid "Y"
+msgstr "Y"
+
+#.
+#. * Translators: this character is used if the middle dot
+#. *  can't be used under your locale.
+#.
+#: src/runtime-config.c:93 src/runtime-config.c:98
+msgid "^"
+msgstr "^"
+
+#: src/save.c:116
+#, fuzzy, c-format
+msgid "Couldn't save compiled gettext file `%s'!"
+msgstr "Dji n' a savou drovi li fitchî gettext copilé «%s»!"
+
+#: src/save.c:159
+#, fuzzy, c-format
+msgid "Couldn't save compressed gettext file `%s'!"
+msgstr "Dji n' a savou drovi li fitchî gettext zip-sipotchî «%s»!"
+
+#.
+#. * The %s format here stands for the used
+#. *  compressions program (gzip, bzip2 etc.)
+#.
+#: src/save.c:169
+#, c-format
+msgid "Couldn't save %s'd gettext file `%s'!"
+msgstr "Dji n' a savou schaper li fitchî gettext %s-sipotchî «%s»!"
+
+#: src/save.c:228
+#, c-format
+msgid "Couldn't save zip'ed po file `%s'!"
+msgstr "Dji n' a savou schaper li fitchî .po zip-sipotchî «%s»!"
+
+#: src/session.c:86
 msgid "Session restored successfully."
 msgstr "Li session a stî schapêye comufåt."
 
-#: src/sidebar.c:82
-msgid "Views"
-msgstr "Vuwes"
-
-#: src/sidebar.c:105
-msgid "Message"
-msgstr "Messaedje"
-
-#: src/sidebar.c:109
-msgid "Comment"
-msgstr "Rawete"
-
-#: src/sidebar.c:113
-msgid "Number"
-msgstr "Limerô"
-
-#: src/sidebar.c:117
-msgid "Format"
-msgstr "Format"
-
-#: src/sidebar.c:121
-msgid "Hotkey"
-msgstr "Tape rascourti"
-
-#: src/stylistics.c:238
+#: src/stylistics.c:278
 msgid "No font set! Using default font"
 msgstr "Nole fonte di dnêye! Dj' eployrè li prémetowe fonte"
 
@@ -1446,152 +1562,113 @@ msgstr "Nole fonte di dnêye! Dj' eployrè li prémetowe fonte"
 #. * Use gtranslator's font in this case -- should be a fallback font
 #. *  for your language.
 #.
-#: src/stylistics.c:244
+#: src/stylistics.c:284
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal--*-120-*-*-c-*-iso8859-1,*"
 
-#.
-#. * The "·" is the "middle dot" (00B7), it is
-#. * used by gtranslator as special char to make
-#. * blanks visible.
-#. * If your language uses that char for another
-#. * purpose or if you use a charset encoding
-#. * that doesn't have it, feel free to change it
-#. * to whatever you think will be better
-#.
-#: src/syntax.c:87 src/utils_gui.c:59 src/utils_gui.c:60 src/views.c:289
-#: src/views.c:359
-msgid "."
-msgstr "."
-
-#: src/update.c:88
+#: src/update.c:102
 msgid "No POTFILES.in found!"
 msgstr "Nou fitchî POTFILES.in di trové!"
 
-#: src/update.c:99
-msgid "An update caused no changes."
-msgstr "On metaedje a djoû ni candje rén."
+#: src/update.c:113
+msgid "Po file is uptodate."
+msgstr "Li fitchî .po e-st a djoû."
 
-#: src/update.c:106
+#: src/update.c:120
 msgid "The update was successfull."
 msgstr "Li metaedje a djoû a stî comufåt."
 
-#: src/update.c:111
-msgid "An error occured while updating the po file."
+#: src/update.c:125
+msgid "An error occurred while updating the po file."
 msgstr "Åk n' a nén stî tot metant a djoû l' fitchî .po."
 
-#: src/utils.c:119
+#: src/utils.c:309 src/utils.c:326
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Dji n' pout askepyî li ridant «%s»!"
 
-#: src/utils_gui.c:113
+#.
+#. * Again return the fallback default locale value given by the translator.
+#.
+#: src/utils.c:794
+msgid "iso-8859-1"
+msgstr "iso-8859-1"
+
+#: src/utils_gui.c:121
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr ""
 
-#.
-#. * Create an error box and prevent further reading
-#. *  of the file.
-#.
-#: src/utils_gui.c:323
+#: src/utils_gui.c:343
 #, c-format
-msgid "You don't have read permissions on file `%s'"
-msgstr "Vos n' avoz nén di permission po lere li fitchî «%s»"
-
-#: src/utils_gui.c:341
-#, c-format
-msgid ""
-"You don't have write permissions on file `%s'.\n"
-"This means that you should save it as a copy to a local directory\n"
-"of your choice."
+msgid "You are not permitted to access file '%s'."
 msgstr ""
 
-#: src/utils_gui.c:383
+#: src/utils_gui.c:361
 #, c-format
-msgid "The file `%s' is already open in another instance of gtranslator!"
-msgstr "Li fitchî «%s» est ddja drovou dins on ôte purnea di gtranslator!"
+msgid ""
+"You do not have permission to modify file '%s'.\n"
+"Please save a new copy of it to a place of your choice and get write\n"
+"permission for it."
+msgstr ""
 
-#: src/utils_gui.c:416
+#: src/utils_gui.c:431
 #, c-format
-msgid "The necessary decompression program `%s' is missing!"
+msgid ""
+"The file\n"
+"\n"
+"   %s\n"
+"\n"
+"is already open in another instance of gtranslator!\n"
+"Please close the other instance of gtranslator handling\n"
+"this file currently to re-gain access to this file.\n"
+"\n"
+"Shall fool gtranslator open this file anyway ?"
+msgstr ""
+
+#: src/utils_gui.c:476
+#, fuzzy, c-format
+msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Nou programe di disrastrindaedje «%s» k' i gn end a mezåjhe!"
 
-#: src/utils_gui.c:421
-#, c-format
-msgid "The necessary compression program `%s' is missing!"
+#: src/utils_gui.c:481
+#, fuzzy, c-format
+msgid "The necessary compression program `%s' is not installed!"
 msgstr "Nou programe di rastrindaedje «%s» k' i gn end a mezåjhe!"
 
-#: src/vfs-handle.c:125
+#: src/vfs-handle.c:121
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "Dji n' pout askepyî li ridant timporaire «%s»!"
 
-#: src/vfs-handle.c:153
+#: src/vfs-handle.c:149
 #, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "Li fitchî «%s» n' a nén stî trové!"
 
-#: src/vfs-handle.c:158
+#: src/vfs-handle.c:154
 #, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr "Måle hårdêye «%s»!"
 
-#: src/vfs-handle.c:163
+#: src/vfs-handle.c:159
 #, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "Li lodjeu «%s» n' a nén stî trové!"
 
-#: src/vfs-handle.c:168
+#: src/vfs-handle.c:164
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "Li no di lodjeu «%s» n' est nén valåbe!"
 
-#: src/vfs-handle.c:173
+#: src/vfs-handle.c:169
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "Li lodjeu «%s» n' a nole adresse!"
 
-#: src/vfs-handle.c:178
+#: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Transfer djoké!"
-
-#: src/views.c:143
-msgid "No comments available for this message."
-msgstr "I gn a nole rawete po ci messaedje chal."
-
-#: src/views.c:249
-msgid "No numbers found."
-msgstr "Nou limerô di trové."
-
-#: src/views.c:281
-msgid " "
-msgstr " "
-
-#: src/views.c:305
-msgid "No C formats present."
-msgstr "Nou messaedje e cogne C."
-
-#: src/views.c:345
-msgid "No hotkeys defined in message."
-msgstr "Nole tape rascourti defineye el messaedje."
-
-#: src/backends/docbook/docbook.xml.h:1
-msgid "Docbook sgml documents backend"
-msgstr ""
-
-#: src/backends/text/text.xml.h:1
-msgid "Plain text files backend"
-msgstr ""
-
-#: nautilus-view/nautilus-gtranslator-view.c:291
-msgid "Loading po file..."
-msgstr "Dji tchedje li fitchî .po..."
-
-#: nautilus-view/nautilus-gtranslator-view.c:311
-#: nautilus-view/nautilus-gtranslator-view.c:325
-msgid "Open Po File"
-msgstr "Drovi fitchî .po"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The Gnome translation program"
@@ -1609,43 +1686,283 @@ msgstr "Fitchî .po di gettext zip-sipotchî"
 msgid "Gettext po file"
 msgstr "Fitchî .po di gettext"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:1
-msgid "Gtranslator Po File"
-msgstr "Fitchî *.po di gtranslator"
+#~ msgid "Current colorscheme: \"%s\" (version %s) by"
+#~ msgstr "Énsembe di coleurs do moumint: «%s» (modêye %s) pa"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:2
-msgid "Gtranslator Po File View"
-msgstr "Vuwe di fitchîs *.po gtranslator"
+#~ msgid "Enter your desired search string:"
+#~ msgstr "Tapez li tchinne a cweri après:"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:3
-msgid "Gtranslator Po File Viewer"
-msgstr "Håyneu di fitchîs *.po gtranslator"
+#~ msgid "_Replace..."
+#~ msgstr "_Replaecî..."
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:4
-msgid "Gtranslator Po file viewer component's factory"
-msgstr "Oujhene pol håyneu di fitchîs *.po gtranslator"
+#~ msgid "Couldn't get list of gettext domains!"
+#~ msgstr "Dji n' a savou aveur li djivêye des dominnes gettext!"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:5
-msgid "Nautilus Gtranslator View factory"
-msgstr "Oujhene pol vuwe gtranslator po Nautilus"
+#~ msgid "gtranslator -- query existing gettext domains"
+#~ msgstr "gtranslator -- cweri les dominne gettext k' i gn a"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:6
-msgid "Nautilus Gtranslator view"
-msgstr "Vuwe gtranslator po Nautilus"
+#~ msgid "Domain to search the translation in:"
+#~ msgstr "Dominne wice ki les ratournaedjes sont cwerîs:"
 
-#: data/oaf/Nautilus_Gtranslator_View.oaf.in.h:7
-msgid "View as Po File"
-msgstr "Vey come on fitchî .po"
+#~ msgid ""
+#~ "Should gtranslator accomplish all missing strings (if possible)\n"
+#~ "from your default query domain?"
+#~ msgstr ""
+#~ "Est-ce ki gtranslator doet sayî di trover totes les tchinnes ki mankèt\n"
+#~ "(si c' est possibe) foû di vosse prémetou dominne?"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:2
-msgid "Open _po file"
-msgstr "Drovi on fitchî ._po"
+#~ msgid "Stick"
+#~ msgstr "Aclaper"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:3
-msgid "Open po file"
-msgstr "Drovi on fitchî .po"
+#~ msgid "Untranslated (%d)"
+#~ msgstr "Nén ratourné (%d)"
 
-#: data/ui/nautilus-gtranslator-view-ui.xml.h:4
-msgid "_File"
-msgstr "_Fitchî"
+#~ msgid "Define another query-domains directory"
+#~ msgstr "Defini on ôte ridant wice ki les dominnes sont cwerîs"
 
+#~ msgid "LOCALEDIR"
+#~ msgstr "RIDANTLOCÅLES"
+
+#~ msgid ""
+#~ "Unfortunately your GModule implementation doesn't support loading dynamic "
+#~ "modules!"
+#~ msgstr ""
+#~ "Målureuzmint vosse eplemintåcion di GModule ni sopoite nén li "
+#~ "tcherdjaedje dinamike des modules!"
+
+#~ msgid "Aut_oaccomplish"
+#~ msgstr "Oto_rimplixhaedje"
+
+#~ msgid ""
+#~ "Automatically fill missing translations from the default query domain"
+#~ msgstr ""
+#~ "Rimpli otomaticmint les les tchinnes ki mankèt a pårti do prémetou "
+#~ "dominne di cweraedje"
+
+#~ msgid "Open from _URI"
+#~ msgstr "Drovi a pårti d' ene _hårdêye"
+
+#~ msgid "_Export to UTF-8"
+#~ msgstr "_Ebaguer en UTF-8"
+
+#~ msgid "_Import from UTF-8"
+#~ msgstr "_Abaguer en UTF-8"
+
+#~ msgid "_Query"
+#~ msgstr "C_weri"
+
+#~ msgid "_Message"
+#~ msgstr "_Messaedje"
+
+#~ msgid "Standard messages view"
+#~ msgstr "Vuwe des messaedjes standård"
+
+#~ msgid "_Comments"
+#~ msgstr "_Rawetes"
+
+#~ msgid "View comments for message"
+#~ msgstr "Vey les rawetes pol messaedje."
+
+#~ msgid "_Numbers"
+#~ msgstr "_Limeros"
+
+#~ msgid "View numbers in the message"
+#~ msgstr "Vey les limeros el messaedje"
+
+#~ msgid "C _Formats"
+#~ msgstr "_Format C"
+
+#~ msgid "View C formats of the message"
+#~ msgstr "Vey les formataedjes C do messaedje"
+
+#~ msgid "_Hotkeys"
+#~ msgstr "Tape _rascourti"
+
+#~ msgid "View hotkeys in the message"
+#~ msgstr "Vey les tapes rascourti el messaedje"
+
+#~ msgid "Go one message back"
+#~ msgstr "Potchî on messaedje en erî"
+
+#~ msgid "Go one message forward"
+#~ msgstr "Potchî on messaedje en avant"
+
+#~ msgid "_Translated"
+#~ msgstr "_Ratournés"
+
+#~ msgid "Toggle translated status of a message"
+#~ msgstr "Discandjî l' etat ratourné ou nén d' on messaedje"
+
+#~ msgid "_Stick"
+#~ msgstr "_Aclaper"
+
+#~ msgid "Stick this message"
+#~ msgstr "Aclaper ci messaedje chal"
+
+#~ msgid "Redo"
+#~ msgstr "Rifé"
+
+#~ msgid "Redo the last undone action"
+#~ msgstr "Rifé li dierinne accion k' a stî disfwaite"
+
+#~ msgid "Options"
+#~ msgstr "Tchuzes"
+
+#~ msgid "gtranslator options"
+#~ msgstr "Tchuzes di gtranslator"
+
+#~ msgid "Exit"
+#~ msgstr "Moussî foû"
+
+#~ msgid ""
+#~ "You didn't change anything in\n"
+#~ "%s\n"
+#~ "Do you want to save it anyway?"
+#~ msgstr ""
+#~ "Vos n' avoz rén candjî è\n"
+#~ "%s\n"
+#~ "El voloz cwand minme schaper?"
+
+#~ msgid "gtranslator -- unchanged"
+#~ msgstr "gtranslator -- nén candjî"
+
+#~ msgid "Personal informations"
+#~ msgstr "Informåcion da vosse"
+
+#~ msgid "Default query domain:"
+#~ msgstr "Prémetou dominne di cweraedje:"
+
+#~ msgid "Set non-fuzzy status, if message was changed"
+#~ msgstr "Bodjî l' etikete «fuzzy» si l' messaedje a stî candjî"
+
+#~ msgid "Don't save unchanged po files"
+#~ msgstr "Nén schaper les fitchîs .po ki n' ont nén stî candjîs"
+
+#~ msgid "Warn me if I'm trying to save an unchanged file"
+#~ msgstr "M' advierti si dji saye di schaper on fitchî ki n' a nén stî candjî"
+
+#~ msgid "Keep obsolete message in the po files"
+#~ msgstr "Wårder les vîs messaedjes ezès fitchîs po"
+
+#~ msgid "Use free space indicating special character"
+#~ msgstr "Mostrer les blancs avou on caractere sipeciål"
+
+#~ msgid "Show the views sidebar"
+#~ msgstr "Mostrer li bår di costé des vuwes"
+
+#~ msgid "Show the messages table"
+#~ msgstr "Mostrer li tåvlea des messaedjes"
+
+#~ msgid "Maximally showed recent files:"
+#~ msgstr "Intrêyes macsimom pol djivêye des dierins fitchîs:"
+
+#~ msgid "Check every recent file before listing it up"
+#~ msgstr "Verifyîz l' fitchî dvant del mete e l' djivêye des dierins fitchîs"
+
+#~ msgid "Use special dictionary"
+#~ msgstr "Eployî on motî speciål"
+
+#~ msgid "Dictionary to use:"
+#~ msgstr "Motî a-z eployî:"
+
+#~ msgid "Save the po file automatically after a period of time"
+#~ msgstr "Schaper otomaticmint les fitchîs *.po dispoy on tins dné"
+
+#~ msgid "Append a special suffix to the automatically saved files"
+#~ msgstr "Radjouter ene cawete sipeciåle ås fitchîs schapés otomaticmint"
+
+#~ msgid "Autosave suffix:"
+#~ msgstr "Cawete pol schapaedje otomatike:"
+
+#~ msgid "Autosave timeout in minutes:"
+#~ msgstr "Tårdjaedje e munutes pol schapaedje otomatike:"
+
+#~ msgid ""
+#~ "With the Preferences box you can define some variables\n"
+#~ "with which you can make gtranslator make more work\n"
+#~ "like YOU want it to work!"
+#~ msgstr ""
+#~ "Avou l' purnea des preferinces vos ploz defini sacwantès\n"
+#~ "variåves po fé gtranslator ovrer come VOS voloz k' il ovraxhe!"
+
+#~ msgid "%Y-%m-%d %H:%M"
+#~ msgstr "%d/%m/%Y %H:%M"
+
+#~ msgid "No language defined in preferences to query the domains for!"
+#~ msgstr ""
+#~ "Nou lingaedje di defini ezès preferinces po poleur cweri les dominnes!"
+
+#~ msgid "Views"
+#~ msgstr "Vuwes"
+
+#~ msgid "Message"
+#~ msgstr "Messaedje"
+
+#~ msgid "Format"
+#~ msgstr "Format"
+
+#~ msgid "Hotkey"
+#~ msgstr "Tape rascourti"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "An update caused no changes."
+#~ msgstr "On metaedje a djoû ni candje rén."
+
+#~ msgid "You don't have read permissions on file `%s'"
+#~ msgstr "Vos n' avoz nén di permission po lere li fitchî «%s»"
+
+#~ msgid "The file `%s' is already open in another instance of gtranslator!"
+#~ msgstr "Li fitchî «%s» est ddja drovou dins on ôte purnea di gtranslator!"
+
+#~ msgid "No comments available for this message."
+#~ msgstr "I gn a nole rawete po ci messaedje chal."
+
+#~ msgid "No numbers found."
+#~ msgstr "Nou limero di trové."
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "No C formats present."
+#~ msgstr "Nou messaedje e cogne C."
+
+#~ msgid "No hotkeys defined in message."
+#~ msgstr "Nole tape rascourti defineye el messaedje."
+
+#~ msgid "Loading po file..."
+#~ msgstr "Dji tchedje li fitchî .po..."
+
+#~ msgid "Open Po File"
+#~ msgstr "Drovi fitchî .po"
+
+#~ msgid "Gtranslator Po File"
+#~ msgstr "Fitchî *.po di gtranslator"
+
+#~ msgid "Gtranslator Po File View"
+#~ msgstr "Vuwe di fitchîs *.po gtranslator"
+
+#~ msgid "Gtranslator Po File Viewer"
+#~ msgstr "Håyneu di fitchîs *.po gtranslator"
+
+#~ msgid "Gtranslator Po file viewer component's factory"
+#~ msgstr "Oujhene pol håyneu di fitchîs *.po gtranslator"
+
+#~ msgid "Nautilus Gtranslator View factory"
+#~ msgstr "Oujhene pol vuwe gtranslator po Nautilus"
+
+#~ msgid "Nautilus Gtranslator view"
+#~ msgstr "Vuwe gtranslator po Nautilus"
+
+#~ msgid "View as Po File"
+#~ msgstr "Vey come on fitchî .po"
+
+#~ msgid "Open _po file"
+#~ msgstr "Drovi on fitchî ._po"
+
+#~ msgid "Open po file"
+#~ msgstr "Drovi on fitchî .po"
+
+#~ msgid "_File"
+#~ msgstr "_Fitchî"
