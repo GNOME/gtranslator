@@ -22,7 +22,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include "../config.h"
+#include <config.h>
 #endif
 
 #include <libgtranslator/gtranslatord.h>
@@ -31,17 +31,12 @@
 #include <liboaf/liboaf.h>
 
 /*
- * The static variable used for the popt argument.
- */
-static gchar	*lang=NULL;
-
-/*
  * gtranslatord's options as a poptTable.
  */
 static struct poptOption gtranslatord_options[] = {
 	{
-		"parse-db", 'p', POPT_ARG_STRING, &lang,
-		0, N_("The language to parse the db for"), N_("language_code")
+		NULL, '\0', POPT_ARG_INTL_DOMAIN, "gtranslator",
+		0, NULL, NULL
 	},
 	POPT_AUTOHELP{NULL}
 };
@@ -87,16 +82,6 @@ int main(int argc,char *argv[])
 	if(orb)
 	{
 		g_print(_("gtranslatord has started successfully and will do some operations now ...\n"));
-		
-		if(lang)
-		{
-			/*
-			 * Now parse the requested language's database via the old
-			 *  parse_db interface.
-			 */
-			GtranslatorDatabase *db;
-			db=parse_db_for_lang(lang);
-		}
 		
 		/*
 		 * Initialize GConf or print out the occured error.

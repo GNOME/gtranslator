@@ -24,7 +24,6 @@
  * libgtranslator's preferences encapsulation of gnome_config or GConf.
  */
 
-#include "parse-db.h"
 #include <time.h>
 
 #ifdef GCONF_IS_PRESENT

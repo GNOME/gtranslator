@@ -18,7 +18,7 @@
  */
 
 #include <sys/param.h>
-#include <libgtranslator/team-handle.h>
+#include <libgtranslator/libgtranslator.h>
 
 /*
  * Returns the list of all translated applications for the given node pointer.
@@ -39,7 +39,7 @@ GtranslatorTeamDatabase *gtranslator_init_team_db(void)
 	/*
 	 * Open up the default team database file.
 	 */
-	doc=xmlParseFile(MESSAGE_DB_DIR "/teams.xml");
+	doc=xmlParseFile("/teams.xml");
 	
 	if(!doc)
 	{
@@ -49,7 +49,7 @@ GtranslatorTeamDatabase *gtranslator_init_team_db(void)
 		 */
 		g_warning(
 		_("Couldn't open the team database file `%s'!"),
-			MESSAGE_DB_DIR "/teams.xml");
+			"/teams.xml");
 		return NULL;
 	}
 	

@@ -1,5 +1,24 @@
 2001-01-02  Fatih Demir	<kabalak@gmx.net>
 
+	* team-handle.c, stylistics.c: Include the general header
+		<libgtranslator/libgtranslator.h> instead of sole
+		 headers -- not clean style, but solves any i18n
+		  problems.
+
+	* libgtranslator.h: Added <libgnome/gnome-i18n.h> to the
+		library includes.
+
+	* main.c: No option for parse-db stuff etc. as the stuff is
+		not here anylonger.
+
+	* Makefile.am, parse-db.c/.h, translation-database.h &
+		handle-db.c/.h:
+		
+		Removed these old message db source files.
+	
+	* main.c, libgtranslator.h, preferences.h: Remove any
+		message database stuff.
+
 	* vfs-handle.c: Use plain old libgnome g_file_exists function
 		for determining if the needed temporary directory is
 		 already existent; free one of the used gchars.

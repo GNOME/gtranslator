@@ -24,7 +24,10 @@
  * Team database/handling parts of libgtranslator.
  */
 
-#include "preferences.h"
+#include <libgtranslator/preferences.h>
+
+#include <gnome-xml/parser.h>
+#include <gnome-xml/tree.h>
 
 /*
  * A single application translator is stored in this

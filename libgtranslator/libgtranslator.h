@@ -27,12 +27,11 @@
 
 #include "gtkled.h"
 #include "gtranslatord.h"
-#include "handle-db.h"
-#include "parse-db.h"
 #include "preferences.h"
 #include "stylistics.h"
 #include "team-database.h"
 #include "team-handle.h"
-#include "translation-database.h"
+
+#include <libgnome/gnome-i18n.h>
 
 #endif

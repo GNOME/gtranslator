@@ -24,7 +24,6 @@
  * The team management functions of gtranslator(d).
  */ 
 
-#include "parse-db.h"
 #include "team-database.h"
 
 /*

@@ -18,7 +18,7 @@
  *
  */
 
-#include <libgtranslator/stylistics.h>
+#include <libgtranslator/libgtranslator.h>
 
 /*
  * Saves the colors from the given GnomeColorPicker.
