@@ -11,7 +11,13 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.4
+export POZILLA_RELEASE=0.5
+
+#
+# Here we do define the corresponding i18n mailing list
+#  which should also get a mail message about the coming release.
+#
+export MAILING_LIST='GNOME I18N List <gnome-i18n@gnome.org>'
 
 #
 # The configuration dir, the mail body & mail.
@@ -147,6 +153,24 @@ for i in $PO_FILES
 	echo "Thanks." >> $BODY_FILE
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$AUTHOR"
         done
+
+#
+# Send a mail to the mailing list.
+#
+echo "Dear translators of $PACKAGE:" > $BODY_FILE
+echo "" >> $BODY_FILE
+echo "The next release of $PACKAGE (R $RELEASE) is coming within the next days" >> $BODY_FILE
+echo "and you all should update your translator for it please." >> $BODY_FILE
+echo "" >> $BODY_FILE
+echo "Possibly you'll also get a \"private\" message from pozilla informing" >> $BODY_FILE
+echo "you about the coming release with the specs/status of your po-file." >> $BODY_FILE
+echo "" >> $BODY_FILE
+echo "--" >> $BODY_FILE
+echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
+echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
+echo "- the po-files - send a mail to Fatih Demir <kabalak@gmx.net>" >> $BODY_FILE
+echo "Thanks." >> $BODY_FILE
+cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST"
 
 #
 # Exit with 0. We're all happy :-0
