@@ -110,21 +110,21 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	/**
 	* Set the author name.
 	**/
-	GTR_DB_AUTHOR(db)=g_strdup(
+	GTR_DB_TRANSLATOR(db)=g_strdup(
 		xmlGetProp(xmldoc->xmlRootNode, "author"));
 	/**
 	* Print the informations about the message database.
 	**/
-	g_print(_("Database creator/administrator: %s\n"), GTR_DB_AUTHOR(db));
+	g_print(_("Database creator/administrator: %s\n"), GTR_DB_TRANSLATOR(db));
 	/**
 	* And the author email for the DB.
 	**/
-	GTR_DB_AUTHOR_EMAIL(db)=g_strdup(
+	GTR_DB_TRANSLATOR_EMAIL(db)=g_strdup(
 		xmlGetProp(xmldoc->xmlRootNode, "email"));
 	/**
 	* Again inform the user about some parts of it.
 	**/
-	g_print(_("EMail: %s\n"), GTR_DB_AUTHOR_EMAIL(db));
+	g_print(_("EMail: %s\n"), GTR_DB_TRANSLATOR_EMAIL(db));
 	/**
 	* Get the nodes.
 	**/

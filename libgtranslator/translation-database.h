@@ -28,18 +28,28 @@
 #define GTR_DB(x) ((GtranslatorDatabase *) x)
 #define GTR_DB_LIST(x) ((GList *) (GTR_DB(x)->messages))
 #define GTR_DB_LIST_ITERATE(x) ((GList *) (GTR_DB_LIST(x)=GTR_DB_LIST(x)->next))
+/**
+* Sorry, monster macros .. 
+**/
 #define GTR_DB_LIST_MSG(x)  ((GtrMsg *) (GTR_DB_LIST(x)->data))
 #define GTR_DB_LIST_MSGSTR_LIST(x) ((GList *) (GTR_DB_LIST_MSG(x)->msgstrlist))
+/**
+* Ok, ai may be going to protest against this macro ,-)
+**/
 #define GTR_DB_LIST_MSGSTR_LIST_ITERATE(x) \
 	((GList *) (GTR_DB_LIST_MSGSTR_LIST(x)=GTR_DB_LIST_MSGSTR_LIST(x)->next))
 #define GTR_DB_HEADER(x) ((GtranslatorDatabaseHeader *) (GTR_DB(x)->header))
 #define GTR_DB_FILENAME(x) ((gchar *) (GTR_DB(x)->filename))
 /**
-* The header part-concerning macros.
+* The author/translator macros.
 **/
-#define GTR_DB_AUTHOR(x) ((gchar *) (GTR_DB_HEADER(x)->author))
-#define GTR_DB_LANG(x) ((gchar *) (GTR_DB_HEADER(x)->language))
-#define GTR_DB_AUTHOR_EMAIL(x) ((gchar *) (GTR_DB_HEADER(x)->author_email))
+#define GTR_DB_TRANSLATOR(x) ((gchar *) (GTR_DB_HEADER(x)->translator))
+#define GTR_DB_TRANSLATOR_EMAIL(x) ((gchar *) (GTR_DB_HEADER(x)->translator_email))
+/**
+* The rest...
+**/
+#define GTR_DB_LANG(x) ((gchar *) (GTR_DB_HEADER(x)->language_ename))
+#define GTR_DB_LANG_EMAIL(x) ((gchar *) (GTR_DB_HEADER(x)->language_email))
 #define GTR_DB_SERIAL(x) ((gint) (GTR_DB_HEADER(x)->serial))
 
 /**
@@ -47,19 +57,33 @@
 **/
 typedef struct {
 	/**
-	* The author informations.
+	* The main translator informations.
+	*
+	* Note: these are optional in UMTF.
+	*
 	**/
-	gchar *author;
-	gchar *author_email;
+	gchar *translator;
+	gchar *translator_email;
 	/**
-	* The base language.
+	* The base language name:
 	**/
-	gchar *language;
+	/**
+	* 1) In English.
+	**/
+	gchar *language_ename;
+	/**
+	* 2) In the own language.
+	**/
+	gchar *language_name;
 	/**
 	* The detailed language version/
 	*  specificiers.
 	**/
 	gchar *language_code;
+	/**
+	* The language's mailing address.
+	**/
+	gchar *language_email;
 	/**
 	* The serial number.
 	**/

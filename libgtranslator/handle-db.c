@@ -205,8 +205,8 @@ void gtranslator_save_db(GtranslatorDatabase *database)
 	*  etc.
 	**/
 	fprintf(file, "<db language=\"%s\" author=\"%s\" email=\"%s\">\n",
-		GTR_DB_LANG(database), GTR_DB_AUTHOR(database), 
-		GTR_DB_AUTHOR_EMAIL(database));
+		GTR_DB_LANG(database), GTR_DB_TRANSLATOR(database), 
+		GTR_DB_TRANSLATOR_EMAIL(database));
 	/**
 	* The serial fields with the current date and an iterated serial
 	*  number.
