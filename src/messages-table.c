@@ -112,10 +112,8 @@ typedef struct
 typedef struct
 {
 	GtrMsg		*message;
-
 	gchar		*found_translation;
-
-	gboolean		 replace;
+	gboolean	 replace;
 } GtrTranslationRetrieval;
 
 /*
