@@ -1,5 +1,6 @@
 /*
  * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
+ * 			Gediminas Paulauskas <menesis@gtranslator.org>
  * 			Thomas Ziehmer <thomas@gtranslator.org>
  * 			Ross Golder <ross@gtranslator.org>
  *
