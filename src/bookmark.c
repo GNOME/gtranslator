@@ -413,7 +413,7 @@ void gtranslator_bookmark_add_direct_with_comment(const gchar *comment)
 	g_return_if_fail(bookmark!=NULL);
 	g_return_if_fail(comment!=NULL);
 
-	gtranslator_bookmark_set_comment(bookmark, comment);
+	gtranslator_bookmark_set_comment(GTR_BOOKMARK(bookmark), comment);
 
 	gtranslator_bookmark_add(GTR_BOOKMARK(bookmark));
 	gtranslator_bookmark_free(bookmark);

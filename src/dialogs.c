@@ -1491,6 +1491,7 @@ void gtranslator_bookmark_adding_dialog(GtkWidget *widget, gpointer useless)
 		gtk_text_buffer_get_start_iter(buff, &start);
 		gtk_text_buffer_get_end_iter(buff, &end);
 		comment_dialog_contents = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
+		g_return_if_fail(comment_dialog_contents!=NULL);
 
 		gtranslator_bookmark_add_direct_with_comment(comment_dialog_contents);
 
