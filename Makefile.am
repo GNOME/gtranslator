@@ -6,7 +6,7 @@ SUBDIRS = data intl po help macros man libgtranslator message-db.d src
 ## The team database get's installed into gtranslator's main datadir.
 ##
 
-TeamdatabaseDir = $(datadir)/gtranslator
+Teamdatabasedir = $(datadir)/gtranslator
 
 Teamdatabase_DATA = teams.xml
 
