@@ -68,6 +68,7 @@ void parse(const char *po);
 * Callbacks for the widgets
 **/
 void parse_the_file(GtkWidget * widget, gpointer of_dlg);
+void parse_the_file_from_recent_files_list(GtkWidget *widget, gpointer filepointer);
 void save_the_file(GtkWidget * widget, gpointer sfa_dlg);
 void save_current_file(GtkWidget * widget, gpointer useless);
 void revert_file(GtkWidget * widget, gpointer useless);
@@ -77,6 +78,11 @@ void close_file(GtkWidget * widget, gpointer useless);
 * The compile function.
 **/
 void compile(GtkWidget * widget, gpointer useless);
+
+/**
+* Converts the dot chars to free spaces.
+**/
+void undotchar(gchar *text);
 
 /**
 * The update function.

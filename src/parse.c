@@ -127,7 +127,7 @@ static gboolean actual_parse(void)
 	**/
 	if(!g_file_exists(po->filename))
 	{
-		error=g_strdup_printf(_("The file `%s' doesn't exist at all!"),po->filename);
+		error=g_strdup_printf(_("The file `%s' doesn't exist at all!"), po->filename);
 		gnome_app_error(GNOME_APP(app1), error);
 		if(error)
 		{
@@ -301,6 +301,11 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 	gtk_widget_destroy(GTK_WIDGET(of_dlg));
 }
 
+void parse_the_file_from_the_recent_files_list(GtkWidget *widget, gpointer filepointer)
+{
+	parse((gchar *)filepointer);
+}
+
 /* Restores the formatting of a message, done in append_line */
 static gchar *restore_msg(gchar * given)
 {
@@ -391,6 +396,19 @@ static void write_the_message(gpointer data, gpointer fs)
 
 	id = restore_msg(msg->msgid);
 	str = restore_msg(msg->msgstr);
+	
+	/**
+	* If the dot char feature was requested, convert the free spaces
+	*  back.
+	**/
+	if(wants.dot_char)
+	{
+		/**
+		* The msgid and the msgstr.
+		**/
+		undotchar(id);
+		undotchar(str);
+	}
 
 	fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
 		msg->comment, id, str);
@@ -603,7 +621,7 @@ void compile(GtkWidget * widget, gpointer useless)
 void gtranslator_display_recent(void)
 {
 	/**
-	* Couldn't we do that better with bonobo 0.19 ?
+	* Couldn't we do that better with bonobo 0.20 ?
 	**/
 	gchar *name;
 	gchar *menupath;
@@ -625,11 +643,6 @@ void gtranslator_display_recent(void)
 	}
 
 	/**
-	* Remove some nice stuff.
-	**/
-	gnome_app_remove_menu_range(GNOME_APP(app1), _("_File/Recen_t files/"), 0, 0);
-	
-	/**
 	* Create a new GnomeUIInfo widget.
 	**/
 	menu=g_new0(GnomeUIInfo,2);
@@ -637,8 +650,8 @@ void gtranslator_display_recent(void)
 	/**
 	* Get the menupath etc.
 	**/
-	menupath=g_new(gchar, strlen(_("_File/Recen_t files")) + strlen("<Separator>") + 2 );
-	sprintf(menupath, "%s/%s", _("_File/Recen_t files"), "<Separator>");
+	menupath=g_new(gchar, strlen(_("_File/Recen_t files/")) + 2 );
+	sprintf(menupath, "%s", _("_File/Recen_t files/"));
 	/**
 	* Insert the end point of the menus.
 	**/
@@ -649,29 +662,41 @@ void gtranslator_display_recent(void)
 	gnome_app_insert_menus(GNOME_APP(app1), menupath, menu);
 	
 	/**
-	* Parse the list, but maximal 2 entries.
+	* Parse the list, but maximal 4 entries.
 	**/
-	for(len=((g_list_length(list)-1)<2)?(g_list_length(list)-1):2;len>=0;len--)
+	for(len=((g_list_length(list)-1) < (wants.recent_files-1))
+		?(g_list_length(list)-1) : (wants.recent_files-1);
+		len >= 0;len--)
 	{
 		/**
-		* Get the GnimeHistory Entry.
+		* Get the GnomeHistory Entry.
 		**/
 		recent=g_list_nth_data(list, len);
 		/**
-		* copy the filename.
+		* Copy the filename.
 		**/
-		name=g_strdup(recent->filename);
-		
+		name=g_strdup((gchar *) (recent->filename));
+		/**
+		* If the filename should be checked for existence.
+		**/
+		if(wants.check_recent_file)
+		{
+			if(!g_file_exists(name))
+			{
+				continue;
+			}
+		}
 		/**
 		* Set the label name.
 		**/
-		menu->label=g_strdup_printf("%i. %-s", len+1, recent->filename);
+		menu->label=g_strdup_printf("_%i:  %s", len+1,
+			recent->filename);
 		/**
 		* Set the GnomeUIInfo settings and labels.
 		**/
 		menu->type=GNOME_APP_UI_ITEM;
 		menu->hint=g_strdup_printf(_("Open %s"), recent->filename);
-		menu->moreinfo=(gpointer)parse;
+		menu->moreinfo=(gpointer)parse_the_file_from_the_recent_files_list;
 		menu->user_data=name;
 		menu->unused_data=NULL;
 		menu->pixmap_type=0;
@@ -701,11 +726,60 @@ void gtranslator_display_recent(void)
 	if(menupath)
 	{	
 		g_free(menupath);
-	}	
+	}
 	/**
 	* At last: free the GnomeHistoryEntry list.
 	**/
 	gnome_history_free_recently_used_list(list);
+}
+
+void undotchar(gchar *text)
+{
+	gint len;
+	/**
+	* Is there any text to undotchar?
+	**/
+	if(!text)
+	{
+		return;
+	}
+	/**
+	* Parse the string.
+	**/
+	for(len=0;len<strlen(text);len++)
+	{
+		/**
+		* We've found a dotchar; but is this a
+		*  quoted or useful dot char =?
+		**/
+		if(text[len]=='·')
+		{
+			/**
+			* Switch according to the previous char.
+			**/
+			switch(text[len-1])
+			{
+				case '\"':
+					break;
+				case '\'':
+					break;
+				case '´':
+					break;
+				case '`':
+					break;
+				case '\\':
+					break;	
+				/**
+				* If it's unquoted and "unspecial",
+				*  make a free space out of the
+				*   dot char.
+				**/
+				default:
+					text[len]=' ';
+					break;		
+			}
+		}
+	}	
 }
 
 /**

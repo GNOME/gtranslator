@@ -66,14 +66,6 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 *  a placeholder.
 **/
 static GnomeUIInfo the_last_files_menus[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Recent files"),
-	 N_("The list of the last files you've opened."),
-	 NULL, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
-	 0, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
         GNOMEUIINFO_END
 };
 
@@ -312,53 +304,15 @@ static GnomeUIInfo the_searchbar[] = {
 * The popup-menu.
 **/
 static GnomeUIInfo the_popup_menu[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("_Compile"),
-	 N_("Compile the po-file"),
-	 compile, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
-	 GDK_C, GDK_MOD1_MASK, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
-				N_("Save File"),
-				save_current_file,
-				GNOME_STOCK_MENU_SAVE),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_UNDO_ITEM(undo_changes, NULL),
+	GNOMEUIINFO_MENU_OPEN_ITEM(open_file, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_CUT_ITEM(cut_clipboard, NULL),
 	GNOMEUIINFO_MENU_COPY_ITEM(copy_clipboard, NULL),
 	GNOMEUIINFO_MENU_PASTE_ITEM(paste_clipboard, NULL),
 	GNOMEUIINFO_MENU_CLEAR_ITEM(clear_selection, NULL),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_FIND_ITEM(find_dialog, NULL),
-	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(find_do, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("First"),
-			       N_("Go to the first message"),
-			       goto_first_msg,
-			       GNOME_STOCK_MENU_FIRST),
-	GNOMEUIINFO_ITEM_STOCK(N_("Back"),
-			       N_("Go one message back"),
-			       goto_prev_msg,
-			       GNOME_STOCK_MENU_BACK),
-	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
-			       N_("Go one message forward"),
-			       goto_next_msg,
-			       GNOME_STOCK_MENU_FORWARD),
-	GNOMEUIINFO_ITEM_STOCK(N_("Last"),
-			       N_("Go to the last message"),
-			       goto_last_msg,
-			       GNOME_STOCK_MENU_LAST),
-	GNOMEUIINFO_ITEM_STOCK(N_("Missing"),
-			       N_("Go to next untranslated message"),
-			       goto_next_untranslated,
-			       GNOME_STOCK_MENU_BOOK_OPEN),
-	GNOMEUIINFO_ITEM_STOCK(N_("Fuzzy"),
-			       N_("Go to the next fuzzy translation"),
-			       goto_next_fuzzy,
-			       GNOME_STOCK_MENU_BOOK_RED),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(close_file, NULL),
+	GNOMEUIINFO_MENU_SAVE_AS_ITEM(save_file_as, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -923,5 +877,5 @@ static void text_has_got_changed(GtkWidget * widget, gpointer useless)
 		* Insert the changed text with the '·''s.
 		**/
 		gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL, newstr, -1);
-	}	
+	}
 }

@@ -1,3 +1,44 @@
+2000-10-06  Fatih Demir	<kabalak@gmx.net>
+
+	* parse.c: Added an undotchar function which undotchars
+		the texts _with_ regarding special cases like
+		 quoting or special use with the ",',´ etc. chars.
+
+	* parse.h: Added the prototype for the new parse_the_file
+		function which is used from the "Recent files" menu.
+
+	* parse.c: Use the new option to determine how many entries
+		should go into this nice "Recent files" menu; added
+		 hotkeys in front of the numbers, check for existence
+		  of the file and call the corresponding new function
+		   which is only intended to be used from this point
+		    ( ->parse_the_file_from_recent_files_list ).
+
+	* prefs.c: Added a fifth page with a GtkSpinButton with
+		which you can define now how many recent files should
+		 be in the "Recent files" menu and added an option
+		  with which you can let gtranslator check every file
+		   in the "Recent files" list for existence and if
+		    it doesn't exist, then it isn't shown up in the
+		     list.
+		Perform two checks for the value of the recent files
+		 number, if it's below 2 set it to 2 ( or it wouldn't
+		  be named "Recent file_s_" :)).
+
+	* prefs.h: Added the recent_files guint variable for the
+		number of files wished to be in the Recent files
+		 menu.
+
+	* gui.c: Changed the popup menu to show only the usefull
+		parts of itself, it's usefull enough for now; the
+		 "Recent" files menu is imporved now for a better
+		  style, no useless label widget and separator there
+		   now.
+	
+	* parse.c: Changed the routines a bit, and added the option to
+		set the number of entries hold in the Recent files menu
+		( minimum 1, maximum 10 ).
+
 2000-10-05  Fatih Demir	<kabalak@gmx.net>
 
 	* gui.c: Added "Recent files" submenu into the File tree and

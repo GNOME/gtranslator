@@ -49,6 +49,14 @@ struct {
 	* If the update function should be disabled all the time.
 	**/
 	guint update_function		: 1;
+	/**
+	* The number of entries in the Recent files menu.
+	**/
+	guint recent_files		: 3;
+	/**
+	* If the recent files should be checked.
+	**/
+	guint check_recent_file		: 1;
 } wants;
 
 /* Preferences-box creation and callbacks */

@@ -26,7 +26,8 @@ static void prefs_box_help(GtkWidget * widget, gpointer useless);
 static gint list_ref = 0;
 
 /* The notebook page widgets  */
-static GtkWidget *first_page, *second_page, *third_page, *fourth_page;
+static GtkWidget *first_page, *second_page, *third_page, *fourth_page,
+		*fifth_page;
 
 /**
 * The entries
@@ -41,7 +42,8 @@ static GtkWidget
 static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb,
-	*enable_popup_menu, *use_dot_char, *use_update_function;
+	*enable_popup_menu, *use_dot_char, *use_update_function,
+	*recent_files_number, *check_recent_files;
 
 /* The preferences dialog */
 static GtkWidget *prefs = NULL;
@@ -183,6 +185,11 @@ void create_lists(void)
 
 void prefs_box(GtkWidget * widget, gpointer useless)
 {
+	/**
+	* 2 widgets for the Recent files stuff.
+	**/
+	static GtkObject *recent_files_adjustment;
+	GtkWidget *recent_files_number_label;
 	raise_and_return_if_exists(prefs);
 	/**
 	* Create the prefs-box .. 
@@ -196,6 +203,7 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 3, 1, _("Miscellaneous"));
+	fifth_page = append_page_table(prefs, 2, 2, _("Recent files menu"));
 	/**
 	* Create all the personal entries
 	**/
@@ -265,7 +273,39 @@ void prefs_box(GtkWidget * widget, gpointer useless)
 		wants.update_function, prefs_box_changed);
 	save_geometry_tb=attach_toggle_with_label(fourth_page, 3,
 		_("Save geometry on exit & restore it on startup"),
-		wants.save_geometry, prefs_box_changed);	
+		wants.save_geometry, prefs_box_changed);
+	/**
+	* The fifth page with the Recent files options.
+	**/
+	recent_files_adjustment=gtk_adjustment_new(wants.recent_files,
+		1, 10, 1, 10, 10);
+	recent_files_number=gtk_spin_button_new(GTK_ADJUSTMENT(
+		recent_files_adjustment), 1, 0);
+	gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(recent_files_number),
+		GTK_UPDATE_IF_VALID);
+	check_recent_files=attach_toggle_with_label(fifth_page, 0,
+		_("Check every file for existence"),
+		wants.check_recent_file, prefs_box_changed);
+	/**
+	* [ GtkSpinButton ] maximal ....., e.g. 7 maximal entries ..
+	**/	
+	recent_files_number_label=gtk_label_new(
+		_("Number of maximal shown entries:"));
+	gtk_label_set_justify(GTK_LABEL(recent_files_number_label),
+		GTK_JUSTIFY_LEFT);
+	/**
+	* Attach the widgets to the fifth page.
+	**/
+	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
+		recent_files_number_label, 0, 1, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
+		recent_files_number, 1, 2, 1, 2);
+	/**
+	* Connect the signal with the GtkSpinButton.
+	**/
+	gtk_signal_connect(GTK_OBJECT(recent_files_number), "changed",
+			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
+			
 	/**
 	* The basic signal-handlers 
 	**/
@@ -306,8 +346,18 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	wants.dot_char = if_active(use_dot_char);
 	wants.update_function = if_active(use_update_function);
 	wants.popup_menu = if_active(enable_popup_menu);
+	wants.check_recent_file = if_active(check_recent_files);
 #undef if_active
-
+	
+	wants.recent_files=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(recent_files_number));
+	/**
+	* Check if the SpinButton or my brain produces dumpage ..
+	**/
+	if(wants.recent_files<2)
+	{
+		wants.recent_files=2;
+	}
+	gtranslator_config_set_int("recent_files/number", wants.recent_files);
 	gtranslator_config_set_string("translator/name", author);
 	gtranslator_config_set_string("translator/email", email);
 	gtranslator_config_set_string("language/name", language);
@@ -328,7 +378,9 @@ static void prefs_box_apply(GtkWidget * box, gint page_num, gpointer useless)
 	gtranslator_config_set_bool("toggles/use_update_function",
 			      wants.update_function);		      
 	gtranslator_config_set_bool("toggles/enable_popup_menu",
-			      wants.popup_menu);		      
+			      wants.popup_menu);
+	gtranslator_config_set_bool("toggles/check_recent_files",
+			      wants.check_recent_file);
 }
 
 /**
@@ -409,6 +461,8 @@ void read_prefs(void)
 	lg = gtranslator_config_get_string("language/team_email");
 	mime = gtranslator_config_get_string("language/mime_type");
 	enc = gtranslator_config_get_string("language/encoding");
+	wants.recent_files =
+	    gtranslator_config_get_int("recent_files/number");
 	wants.save_geometry =
 	    gtranslator_config_get_bool("toggles/save_geometry");
 	wants.unmark_fuzzy =
@@ -424,7 +478,17 @@ void read_prefs(void)
 	wants.update_function =
 	    gtranslator_config_get_bool("toggles/use_update_function");    
 	wants.dot_char = 
-	    gtranslator_config_get_bool("toggles/use_dot_char");    
+	    gtranslator_config_get_bool("toggles/use_dot_char");
+	wants.check_recent_file = 
+	    gtranslator_config_get_bool("toggles/check_recent_files");
+	/**
+	* Check for some kind of the-programmer-didn't-understand-what-he-
+	*  had-written-in-the-prefs.c-file-syndrom..
+	**/    
+	if(wants.check_recent_file<2)
+	{
+		wants.check_recent_file=2;
+	}    
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();
