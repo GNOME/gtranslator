@@ -2,15 +2,17 @@
 ## The nautilus-gtranslator-view component.
 ##
 
-sourcedir=./../src
+srcbuild=$(top_builddir)/src
 
+if BUILD_NV
 bin_PROGRAMS = nautilus-gtranslator-view
+endif
 
 INCLUDES = \
 	-DG_LOG_DOMAIN=\""Nautilus-Gtranslator-View"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DICON_DIR=\""$(datadir)/pixmaps/nautilus"\" \
-	-I$(sourcedir) \
+	-I$(top_srcdir)/src \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	$(GNOMEUI_CFLAGS) \
 	$(GAL_CFLAGS) \
@@ -23,31 +25,31 @@ nautilus_gtranslator_view_SOURCES = \
 	nautilus-gtranslator-view.h
 
 nautilus_gtranslator_view_DEPENDENCIES = \
-	$(sourcedir)/about.o \
-	$(sourcedir)/color-schemes.o \
-	$(sourcedir)/dialogs.o \
-	$(sourcedir)/dnd.o \
-	$(sourcedir)/find.o \
-	$(sourcedir)/gnome-regex.o \
-	$(sourcedir)/gtkspell.o \
-	$(sourcedir)/gui.o \
-	$(sourcedir)/header_stuff.o \
-	$(sourcedir)/history.o \
-	$(sourcedir)/nautilus-string.o \
-	$(sourcedir)/open-differently.o \
-	$(sourcedir)/parse.o \
-	$(sourcedir)/parse_core.o \
-	$(sourcedir)/prefs.o \
-	$(sourcedir)/prefs_init.o \
-	$(sourcedir)/preferences.o \
-	$(sourcedir)/query.o \
-	$(sourcedir)/replace.o \
-	$(sourcedir)/sidebar.o \
-	$(sourcedir)/stylistics.o \
-	$(sourcedir)/syntax.o \
-	$(sourcedir)/update.o \
-	$(sourcedir)/vfs-handle.o \
-	$(sourcedir)/views.o
+	$(srcbuild)/about.o \
+	$(srcbuild)/color-schemes.o \
+	$(srcbuild)/dialogs.o \
+	$(srcbuild)/dnd.o \
+	$(srcbuild)/find.o \
+	$(srcbuild)/gnome-regex.o \
+	$(srcbuild)/gtkspell.o \
+	$(srcbuild)/gui.o \
+	$(srcbuild)/header_stuff.o \
+	$(srcbuild)/history.o \
+	$(srcbuild)/nautilus-string.o \
+	$(srcbuild)/open-differently.o \
+	$(srcbuild)/parse.o \
+	$(srcbuild)/parse_core.o \
+	$(srcbuild)/prefs.o \
+	$(srcbuild)/prefs_init.o \
+	$(srcbuild)/preferences.o \
+	$(srcbuild)/query.o \
+	$(srcbuild)/replace.o \
+	$(srcbuild)/sidebar.o \
+	$(srcbuild)/stylistics.o \
+	$(srcbuild)/syntax.o \
+	$(srcbuild)/update.o \
+	$(srcbuild)/vfs-handle.o \
+	$(srcbuild)/views.o
 
 nautilus_gtranslator_view_LDADD = \
 	$(GNOMEUI_LIBS) \

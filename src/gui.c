@@ -38,10 +38,22 @@
 #include "color-schemes.h"
 #include "views.h"
 
-#include "pixmaps/untrans.xpm"
-
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtkdnd.h>
+#include <gtk/gtkcheckmenuitem.h>
+#include <gtk/gtkmain.h>
+#include <gtk/gtkscrolledwindow.h>
+#include <libgnomeui/gnome-app.h>
+#include <libgnomeui/gnome-app-helper.h>
+#include <libgnomeui/gnome-popup-menu.h>
+#include <libgnomeui/gnome-stock.h>
+#include <libgnome/gnome-url.h>
 #include <libgnomevfs/gnome-vfs-init.h>
 #include <gal/e-paned/e-hpaned.h>
+
+#include <string.h>
+
+#include "pixmaps/untrans.xpm"
 
 typedef struct _GtrAction GtrAction;
 #define GTR_ACTION(x) ((GtrAction *)x)
@@ -77,7 +89,6 @@ static void undo_changes(GtkWidget  * widget, gpointer useless);
 static gint create_popup_menu(GtkText *widget, GdkEventButton *event, gpointer d);
 
 static void invert_dot(gchar *str);
-static void update_appbar(gint pos);
 static void call_gtranslator_homepage(GtkWidget  * widget, gpointer useless);
 static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless);
@@ -318,8 +329,8 @@ static GnomeUIInfo the_help_menu[] = {
 
 static GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
-	GNOMEUIINFO_SUBTREE(N_("_Views"), the_views_menu),
 	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
+	GNOMEUIINFO_MENU_VIEW_TREE(the_views_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Messages"), the_messages_menu),
 	GNOMEUIINFO_SUBTREE(N_("Mess_age status"), the_msg_status_menu),
 	GNOMEUIINFO_MENU_SETTINGS_TREE(the_settings_menu),
@@ -652,22 +663,9 @@ void create_app1(void)
 	gnome_app_install_menu_hints(GNOME_APP(app1), the_menus);
 
 	create_actions();
+	disable_actions_no_file();
 
 	gtranslator_history_show();
-
-	/*
-	 * Check if we'd to use special styles.
-	 */
-	if(wants.use_own_specs)
-	{
-		/*
-		 * Set the own specs for colors and for the font.
-		 */
-		gtranslator_config_init();
-		gtranslator_set_style(text1);
-		gtranslator_set_style(trans_box);
-		gtranslator_config_close();
-	}
 	
 	/*
 	 * The callbacks list
@@ -768,16 +766,22 @@ static void invert_dot(gchar *str)
 /* 
  * Display the message in text boxes
  */
-void display_msg(GList  * list_item)
+void display_msg(GList * list_item)
 {
 	GtrMsg *msg;
 	gchar *ispell_command[5];
+	
+	g_return_if_fail(list_item!=NULL);
+
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	clean_text_boxes();
 	/*
 	 * Substitute the free spaces in the msgid only if this is wished and
 	 *  possible.
+	 *  FIXME: this is also done by insert_text_handler. It does not do
+	 *  syntax stuff, but should. Then here only gtk_text_insert should be
+	 *  left.
 	 */ 
 	if(wants.dot_char)
 	{
@@ -927,7 +931,7 @@ void clean_text_boxes()
 	gtk_editable_delete_text(GTK_EDITABLE(trans_box), 0, -1);
 }
 
-static void update_appbar(gint pos)
+void update_appbar(gint pos)
 {
 	gchar *str, *status;
 	GtrMsg *msg;
@@ -1002,9 +1006,11 @@ static void update_appbar(gint pos)
 /*
  * Updates current msg, and shows to_go msg instead, also adjusts actions
  */
-void goto_given_msg(GList  * to_go)
+void goto_given_msg(GList * to_go)
 {
 	static gint pos = 0;
+
+	g_return_if_fail (to_go!=NULL);
 
 	gtranslator_update_msg();
 	

@@ -74,6 +74,11 @@ gchar *prepare_comment_for_save(gchar *comment);
 /*
  * Fill up some fields of the header if possible.
  */
-void gtranslator_header_fill_up(GtrHeader *header);
+gboolean gtranslator_header_fill_up(GtrHeader *header);
+
+/*
+ * Create new header with good values
+ */
+GtrHeader * create_header_from_prefs(void);
 
 #endif

@@ -1,3 +1,28 @@
+2001-04-05  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* dialogs.c: use raise_and_return_if_exists() for dialogs which should
+	be unique. Use stock buttons for cancel/close.
+	(open_uri_dialog): set default button to Open and pressing Enter in
+	entry presses that button.
+	* gui.c: include fixes related to CVS gal cleanup. Move Views menu after
+	Edit and rename to View -- as sugegstions.txt says.
+	(create_app1): disable actions because no files is opened. Moved
+	set_style to prefs.c.
+	(display_msg, goto_given_msg): fail if message == NULL, not crash.
+	* gui.h: made update_appbar public.
+	* header_stuff.c (get_header): better detect non-existing header.
+	(gtranslator_header_fill_up): return if anything has beend changed or
+	not.
+	(create_header_from_prefs): new function.
+	* header_stuff.h: reflect above changes.
+	* parse.c: fix includes.
+	(parse): Check for file existance before calling parse_core.
+	removed "Successfully parsed" status message -- it is obvious :)
+	Do not set winow title to temporary name. If header does not exist --
+	create one! Always fill missing values in header. Cleanup disable stuff.
+	(close_file): set default window title.
+	(compile): compile real file, not a copy.
+
 2001-04-04  Fatih Demir <kabalak@gtranslator.org>
 
 	* main.c: Corrected a define bug -- it's WINDOW_ICON for which we

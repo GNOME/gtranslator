@@ -30,6 +30,8 @@
 #include "sidebar.h"
 
 #include <string.h>
+#include <gtk/gtkeditable.h>
+#include <libgnomeui/gnome-app-util.h>
 
 #define MAXHITS 10
 

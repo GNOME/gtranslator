@@ -23,6 +23,7 @@
 #endif
 
 #include <string.h>
+#include <unistd.h>
 
 #include "dialogs.h"
 #include "parse.h"
@@ -32,6 +33,15 @@
 #include "history.h"
 #include "sidebar.h"
 #include "gtkspell.h"
+
+#include <gtk/gtkfilesel.h>
+#include <libgnomeui/gnome-appbar.h>
+#include <libgnomeui/gnome-app-util.h>
+#include <libgnomeui/gnome-dialog-util.h>
+#include <libgnomeui/gnome-messagebox.h>
+#include <libgnomeui/gnome-stock.h>
+#include <libgnomeui/gnome-uidefs.h>
+#include <libgnome/gnome-util.h>
 
 /*
  * These are to be used only inside this file
@@ -343,19 +353,14 @@ gboolean actual_parse(void)
 void parse(const gchar *filename)
 {
 	/*
-	 * Use the new core function.
-	 */
-	parse_core(filename);
-	
-	/*
 	 * Test if such a file does exist.
 	 */
-	if(!g_file_exists(po->filename))
+	if(!g_file_exists(filename))
 	{
 		gchar *error;
 		error=g_strdup_printf(
 			_("The file `%s' doesn't exist at all!"),
-			po->filename);
+			filename);
 		
 		gnome_app_error(GNOME_APP(app1), error);
 		
@@ -365,64 +370,13 @@ void parse(const gchar *filename)
 	}
 
 	/*
-	 * Disable the special navigation buttons now.
+	 * Use the new core function.
 	 */
-	disable_actions(ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED);
-	
-	if(po->no_write_perms==TRUE||
-		!strcmp(g_basename(po->filename), "gtranslator-temp-po-file")||
-		strstr(po->filename, "/.gtranslator-"))
-	{
-		disable_actions(ACT_SAVE);
-	}
+	parse_core(filename);
 
-	g_snprintf(status, sizeof(status),
-		   _("Successfully parsed the file \"%s\""), po->filename);
-	gnome_appbar_set_status(GNOME_APPBAR(appbar1), status);
-	g_snprintf(status, sizeof(status),
-		   _("gtranslator -- %s"), po->filename);
-	gtk_window_set_title(GTK_WINDOW(app1), status);
-
-	/*
-	 * Test if the file has got a header and then check if the header
-	 *  is still in a virginary form or not.
-	 */  
-	if(po->header)
-	{
-		/*
-		 * If we've got still the default values for project
-		 *  and version the "Edit Header" dialog pops up and
-		 *   makes it possible to enter the missing informations.
-		 */   
-		if(!strcmp(po->header->prj_name, "PACKAGE")
-			&& !strcmp(po->header->prj_version, "VERSION"))
-		{
-			/*
-			 * Substitute the values for the header fields.
-			 */
-			gtranslator_header_fill_up(po->header);
-			edit_header(NULL, NULL);
-		}
-	}
-	
-	/*
-	 * Test if the filename is NOT equivalent to our temp file's name
-	 */
-	if(strcmp(g_basename(po->filename), "gtranslator-temp-po-file"))
-	{
-		gtranslator_history_add(po->filename,
-			po->header->prj_name, po->header->prj_version);
-	
-	}
-
-	/*
-	 * Add the view for the current file.
-	 */ 
-	gtranslator_sidebar_activate_views();
-	
-	display_msg(po->current);
-	gtranslator_get_translated_count();
 	enable_actions_just_opened();
+
+	gtranslator_get_translated_count();
 	/*
 	 * Is there any fuzzy message ?
 	 */
@@ -443,15 +397,61 @@ void parse(const gchar *filename)
 		 */
 		enable_actions(ACT_NEXT_UNTRANSLATED);
 	}
-	/*
-	 * Disable the actions for the first/back navigation actions.
-	 */
-	disable_actions(ACT_FIRST, ACT_BACK);
+
+	update_appbar(0);
 	
+	if(po->header)
+	{
+		/*
+		 * If we've got still some default values,
+		 * substitute with values from preferences,
+		 */
+		if(gtranslator_header_fill_up(po->header) ||
+		   !strcmp(po->header->prj_name, "PACKAGE") ||
+		   !strcmp(po->header->prj_version, "VERSION"))
+		{
+			text_has_got_changed(NULL, NULL);
+			/*
+			 * Pop up the "Edit Header" so that user can verify
+			 * automatically done changes and provide PACKAGE name.
+			 */   
+			edit_header(NULL, NULL);
+		}
+	}
+	else
+	{
+		text_has_got_changed(NULL, NULL);
+		/* Create good header */
+		po->header=create_header_from_prefs();
+		/* But PACKAGE and VERSION should be entered by user */
+		edit_header(NULL, NULL);
+	}
+	
+	display_msg(po->current);
+
+	/*
+	 * Test if the filename is NOT equivalent to our temp file's name
+	 */
+	if(strcmp(g_basename(po->filename), "gtranslator-temp-po-file"))
+	{
+		gtranslator_history_add(po->filename,
+			po->header->prj_name, po->header->prj_version);
+	
+		g_snprintf(status, sizeof(status),
+			   _("gtranslator -- %s"), po->filename);
+		gtk_window_set_title(GTK_WINDOW(app1), status);
+	}
+
 	/*
 	 * Update the recent files list.
 	 */
 	gtranslator_history_show();
+
+	/*
+	 * Add the view for the current file.
+	 */ 
+	gtranslator_sidebar_activate_views();
+	
 }
 
 void parse_the_file(GtkWidget * widget, gpointer of_dlg)
@@ -762,12 +762,14 @@ void close_file(GtkWidget * widget, gpointer useless)
 	}
 	
 	clean_text_boxes();
-	/*
-	 * Set a blank appbar status message.
-	 */
-	gnome_appbar_push(GNOME_APPBAR(appbar1), "");
-	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), 0.00000);
 	disable_actions_no_file();
+
+	/*
+	 * Set blank status, progress and window title
+	 */
+	gnome_appbar_clear_stack(GNOME_APPBAR(appbar1));
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), 0.00000);
+	gtk_window_set_title(GTK_WINDOW(app1), _("gtranslator"));
 }
 
 void revert_file(GtkWidget * widget, gpointer useless)
@@ -811,7 +813,6 @@ void compile(GtkWidget * widget, gpointer useless)
 	gchar *cmd;
 	gint res = 1;
 	FILE *fs;
-	gboolean changed = po->file_changed;
 
 	/*
 	 * Check if msgfmt is available on the system.
@@ -827,11 +828,11 @@ void compile(GtkWidget * widget, gpointer useless)
 		return;
 	
 #define RESULT "gtr_result.tmp"
-#define PO_FILE "gtr_po.tmp"
-	actual_write(PO_FILE);
-	po->file_changed = changed;
+	actual_write(po->filename);
+	disable_actions(ACT_SAVE);
+
 	cmd = g_strdup_printf("msgfmt -v -c -o /dev/null %s >%s 2>&1",
-			    PO_FILE,RESULT);
+			    po->filename, RESULT);
 	res = system(cmd);
 	fs=fopen(RESULT,"r");
 	/*
@@ -849,7 +850,6 @@ void compile(GtkWidget * widget, gpointer useless)
 	}
 	fclose(fs);
 	remove(RESULT);
-	remove(PO_FILE);
 	g_free(cmd);
 }
 
@@ -924,8 +924,11 @@ static void determine_translation_status(gpointer data, gpointer useless_stuff)
 		po->translated++;
 	if(message->status & GTR_MSG_STATUS_FUZZY)
 		po->fuzzy++;
+	/*
+	 * Sticky messages are always translated, do not count them twice
 	if(message->status & GTR_MSG_STATUS_STICK)
 		po->translated++;
+	*/
 }
 
 /*

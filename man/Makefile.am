@@ -14,9 +14,9 @@ $(gtranslator_man):gtranslator.1
 	fi
 	
 
-$(pozilla_man):pozilla.sh.1
+$(pozilla_man):$(srcdir)/pozilla.sh.1
 	@if [ ! -f $(pozilla_man) ]; then \
-		echo y|gzip -9 < pozilla.sh.1 > $(pozilla_man); \
+		echo y|gzip -9 < $(srcdir)/pozilla.sh.1 > $(pozilla_man); \
 	fi
 
 $(nv_man):nautilus-gtranslator-view.1

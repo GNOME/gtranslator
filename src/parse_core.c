@@ -88,7 +88,6 @@ void parse_core(const gchar *filename)
 	}
 	else
 	{
-		g_warning(_("The file has no header!"));
 		mark_msg_fuzzy(FIRST_MSG, first_is_fuzzy);
 	}
 	

@@ -656,6 +656,19 @@ void read_prefs(void)
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();
 	wants.fill_header = gtranslator_config_get_bool("toggles/fill_header");
+
+	/*
+	 * Check if we'd to use special styles.
+	 */
+	if(wants.use_own_specs)
+	{
+		/*
+		 * Set the own specs for colors and for the font.
+		 */
+		gtranslator_set_style(text1);
+		gtranslator_set_style(trans_box);
+	}
+
 	gtranslator_config_close();
 }
 

@@ -1,12 +1,6 @@
 ## the main Makefile.am
 
-if BUILD_NV
-NV_DIR = nautilus-view
-else
-NV_DIR =
-endif
-
-SUBDIRS = data intl macros src $(NV_DIR) po help man
+SUBDIRS = data intl macros src nautilus-view po man help
 
 bin_SCRIPTS = pozilla.sh
 

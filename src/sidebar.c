@@ -27,6 +27,7 @@
 #include "syntax.h"
 #include "views.h"
 
+#include <libgnome/gnome-util.h>
 #include <gal/widgets/e-unicode.h>
 
 #define GetLocalString(x) (e_utf8_from_locale_string(_(x)))

@@ -86,8 +86,10 @@ GtrHeader * get_header(GtrMsg * msg)
 	gchar **lines, **pair;
 	gint i = 0;
 
+	if(!msg->msgstr)
+		return NULL;
+	
 	ph = g_new0(GtrHeader, 1);
-	ph->comment = g_strdup(msg->comment);
 	lines = g_strsplit(msg->msgstr, "\n", 0);
 	while (lines[i] != NULL) {
 		pair = g_strsplit(lines[i], ": ", 2);
@@ -153,6 +155,7 @@ GtrHeader * get_header(GtrMsg * msg)
 		i++;
 	}
 	g_strfreev(lines);
+	ph->comment = g_strdup(msg->comment);
 	if (ph->prj_name)
 		return ph;
 	else
@@ -251,6 +254,7 @@ void update_header(GtrHeader * h)
 
 	/*
 	 * Convert the header comments back if necessary.
+	 * FIXME: Why here??
 	 */ 
 	if(h->comment && h->comment[0]!='#')
 	{
@@ -549,6 +553,24 @@ gchar *prepare_comment_for_save(gchar *comment)
 	return mystring->str;
 }
 
+static gchar * get_current_year(void)
+{
+	time_t now;
+	struct tm *timebox;
+	gchar *year=g_malloc(5);
+	
+	/*
+	 * Substitute YEAR with current year
+	 */
+	now=time(NULL);
+	timebox=localtime(&now);
+
+	strftime(year, 5, "%Y", timebox);
+	return year;
+}
+
+static gboolean have_changed=FALSE;
+
 void substitute(gchar **item, const gchar *bad, const gchar *good)
 {
 	/* If string still has standard value */
@@ -557,6 +579,7 @@ void substitute(gchar **item, const gchar *bad, const gchar *good)
 		/* Replace it with copy of good one */
 		g_free(*item);
 		*item=g_strdup(good);
+		have_changed=TRUE;
 	}
 }
 
@@ -570,11 +593,14 @@ void replace_substring(gchar **item, const gchar *bad, const gchar *good)
 
 /*
  * Fill up the header entries which are also set up in the prefs.
+ * return TRUE if any changes have been done.
  */
-void gtranslator_header_fill_up(GtrHeader *header)
+gboolean gtranslator_header_fill_up(GtrHeader *header)
 {
-	g_return_if_fail(header!=NULL);
+	if(header==NULL)
+		return FALSE;
 
+	have_changed=FALSE;
 	substitute(&header->translator, "FULL NAME", author);
 	substitute(&header->tr_email, "EMAIL@ADDRESS", email);
 	
@@ -590,11 +616,7 @@ void gtranslator_header_fill_up(GtrHeader *header)
 	 */
 	if(header->comment)
 	{
-		gchar 		*title;
-		
-		time_t 		now;
-		struct tm 	*timebox;
-		gchar 		year[4];
+		gchar *title, *year;
 		
 		/*
 		 * Translator data should be in sync with the header I guess .-)
@@ -604,14 +626,12 @@ void gtranslator_header_fill_up(GtrHeader *header)
 		replace_substring(&header->comment,
 				"EMAIL@ADDRESS", header->tr_email);
 
-		/*
-		 * Substitute YEAR with current year
-		 */
-		now=time(NULL);
-		timebox=localtime(&now);
-
-		strftime(year, 5, "%Y", timebox);
+		year = get_current_year();
 		replace_substring(&header->comment, "YEAR", year);
+		g_free(year);
+
+		/* Fill h->po_date with current time */
+		update_header(header);
 
 		/*
 		 * Should be a good description line .-)
@@ -632,5 +652,44 @@ void gtranslator_header_fill_up(GtrHeader *header)
 				"SOME DESCRIPTIVE TITLE.", title);
 		g_free(title);
 	}
+
+	return have_changed;
+}
+
+GtrHeader * create_header_from_prefs(void)
+{
+	GtrHeader *h=g_new0(GtrHeader, 1);
+	gchar *year;
+
+	h->prj_name=g_strdup("PACKAGE");
+	h->prj_version=g_strdup("VERSION");
+	/* Fill h->po_date with current time */
+	update_header(h);
+	h->pot_date=g_strdup(h->po_date);
+	h->translator=g_strdup(author);
+	h->tr_email=g_strdup(email);
+	h->language=g_strdup(language);
+	h->lg_email=g_strdup(lg);
+	h->mime_version=g_strdup("1.0");
+	h->charset=g_strdup(lc);
+	h->encoding=g_strdup(enc);
+
+	year=get_current_year();
+
+	/* Let fill_up_header replace YEAR later  */
+	h->comment=g_strdup_printf(
+"# %s translation of PACKAGE.\n"
+"# Copyright (C) %s Free Software Foundation, Inc.\n"
+"# %s <%s>, %s.\n"
+"#\n",
+		h->language,
+		year,
+		h->translator,
+		h->tr_email,
+		year);
+
+	g_free(year);
+	
+	return h;
 }
 

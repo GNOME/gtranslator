@@ -538,25 +538,30 @@ void compile_error_dialog(FILE * fs)
  */ 
 void open_uri_dialog(GtkWidget *widget, gpointer useless)
 {
-	GtkWidget 	*dialog=NULL;
-	GtkWidget	*entry=NULL;
-	GtkWidget	*label=NULL;
-			
+	static GtkWidget *dialog=NULL;
+	GtkWidget *entry;
+	GtkWidget *label;
+
+	raise_and_return_if_exists(dialog);
+
 	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
-		_("Open"), _("Cancel"), NULL);	
+				_("Open"), GNOME_STOCK_BUTTON_CANCEL, NULL);
+	/* Make Open button the default */
+	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
 
 	entry=gnome_entry_new("URI");
 
 	label=gtk_label_new(_("Enter URI:"));
 	
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), label,
-		FALSE, FALSE, 0);	
+		FALSE, FALSE, 0);
 	
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), entry,
-		FALSE, FALSE, 0);	
-	
+		FALSE, FALSE, 0);
 	gtk_window_set_focus(GTK_WINDOW(dialog),
 		gnome_entry_gtk_entry(GNOME_ENTRY(entry)));
+	gnome_dialog_editable_enters(GNOME_DIALOG(dialog),
+		GTK_EDITABLE(gnome_entry_gtk_entry(GNOME_ENTRY(entry))));
 
 	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
 		GTK_SIGNAL_FUNC(open_uri_dialog_clicked), entry);
@@ -693,7 +698,7 @@ Saying \"No\" will delete the crash recovery file."),
  */
 void query_dialog(void)
 {
-	GtkWidget *dialog=NULL;
+	static GtkWidget *dialog=NULL;
 	GtkWidget *innertable;
 	GtkWidget *query_entry;
 	GtkWidget *query_entry_label;
@@ -702,6 +707,8 @@ void query_dialog(void)
 	GtkWidget *label;
 	gint reply;
 	
+	raise_and_return_if_exists(dialog);
+
 	#define add2Box(x); \
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
 		FALSE, FALSE, 0);
@@ -723,7 +730,7 @@ void query_dialog(void)
 	
 	dialog=gnome_dialog_new(
 		_("gtranslator -- query existing gettext domains"),
-		_("Query"), _("Close"), NULL);
+		_("Query"), GNOME_STOCK_BUTTON_CLOSE, NULL);
 
 	innertable=gtk_table_new(2, 2, FALSE);
 
@@ -924,8 +931,10 @@ Would you like to insert it into the translation?"),
  */
 void accomplish_dialog(void)
 {
-	GtkWidget *dialog=NULL;
+	static GtkWidget *dialog=NULL;
 	gint reply;
+
+	raise_and_return_if_exists(dialog);
 
 	dialog=gnome_message_box_new(
 		_("Should gtranslator accomplish all missing strings (if possible)\n\
