@@ -20,6 +20,7 @@
 #include "comment.h"
 #include "nautilus-string.h"
 #include "parse.h"
+#include "utf8.h"
 
 /*
  * Creates and returns a new GtrComment -- the comment type is automatically
@@ -104,6 +105,8 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 			comment->pure_comment=nautilus_str_get_after_prefix(comment->comment, "#");
 		}
 	}
+
+	comment->utf8_comment=gtranslator_utf8_get_utf8_string(&comment->pure_comment);
 	
 	return comment;
 }
@@ -154,6 +157,15 @@ GtrComment *gtranslator_comment_copy(GtrComment **comment)
 		copy->pure_comment=NULL;
 	}
 
+	if(GTR_COMMENT(*comment)->utf8_comment)
+	{
+		copy->utf8_comment=g_strdup(GTR_COMMENT(*comment)->utf8_comment);
+	}
+	else
+	{
+		copy->utf8_comment=NULL;
+	}
+
 	copy->type=GTR_COMMENT(*comment)->type;	
 
 	return copy;
@@ -168,6 +180,7 @@ void gtranslator_comment_free(GtrComment **comment)
 	{
 		g_free(GTR_COMMENT(*comment)->comment);
 		g_free(GTR_COMMENT(*comment)->pure_comment);
+		g_free(GTR_COMMENT(*comment)->utf8_comment);
 	}
 }
 

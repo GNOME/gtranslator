@@ -46,6 +46,7 @@ typedef struct
 {
 	gchar		*comment;
 	gchar		*pure_comment;
+	gchar		*utf8_comment;
 	
 	GtrCommentType	type;
 } GtrComment;
