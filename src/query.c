@@ -21,6 +21,7 @@
 #include "gui.h"
 #include "learn.h"
 #include "message.h"
+#include "messages-table.h"
 #include "prefs.h"
 #include "query.h"
 #include "utils.h"
@@ -272,8 +273,12 @@ void gtranslator_query_accomplish(gboolean use_learn_buffer)
 	if(po->file_changed)
 	{
 		gtranslator_actions_enable(ACT_SAVE);
+		
+		gtranslator_messages_table_clear();
+		gtranslator_messages_table_create();
+
+		gtranslator_get_translated_count();
 	}
 	
 	gtranslator_message_show(po->current);
-	gtranslator_get_translated_count();
 }
