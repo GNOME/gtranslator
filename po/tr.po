@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.22\n"
-"POT-Creation-Date: 2000-09-16 15:49+0200\n"
-"PO-Revision-Date: 2000-09-16 15:50+0200\n"
+"POT-Creation-Date: 2000-09-17 21:59+0200\n"
+"PO-Revision-Date: 2000-09-17 21:24+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: src/gui.c:55
 msgid "_Compile"
-msgstr "_Dönüþtür"
+msgstr "_Dönüþtürf"
 
 #: src/gui.c:56 src/gui.c:200
 msgid "Compile the po-file"
@@ -209,7 +209,7 @@ msgstr "Son"
 msgid "Missing"
 msgstr "Eksik"
 
-#: src/gui.c:252
+#: src/gui.c:252 src/gui.c:563
 msgid "Fuzzy"
 msgstr "Fuzzy"
 
@@ -244,10 +244,25 @@ msgstr "gtranslator"
 msgid "Bye bye!"
 msgstr "Güle Güle!"
 
-#: src/gui.c:549
+#. *
+#. * Assign the first part.
+#. *
+#: src/gui.c:553
 #, c-format
-msgid "Message: %d / %d"
-msgstr "Ileti: %d / %d"
+msgid "Message %d / %d / Status:"
+msgstr "Ileti %d / %d / Durum:"
+
+#: src/dialogs.c:217 src/gui.c:567
+msgid "Translated"
+msgstr "Tercüme metinlerinde"
+
+#: src/gui.c:573
+msgid "Stick"
+msgstr "Kalýcý"
+
+#: src/gui.c:577
+msgid "Untranslated"
+msgstr "Tercüme edilmemiþ"
 
 #: src/dialogs.c:49
 msgid "gtranslator -- open a po-file"
@@ -296,10 +311,6 @@ msgstr "Yazýlýmý gözönüne al"
 #: src/dialogs.c:215 src/languages.h:84
 msgid "English"
 msgstr "Orjinal metinlerde"
-
-#: src/dialogs.c:217
-msgid "Translated"
-msgstr "Tercüme metinlerinde"
 
 #: src/dialogs.c:219
 msgid "Both"
