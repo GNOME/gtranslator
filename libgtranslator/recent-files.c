@@ -129,6 +129,7 @@ void gtranslator_set_recent_files(GList *filenames)
 		gtranslator_config_set_string(request,
 			(gchar *) g_list_nth_data(filenames, length));
 		g_free(request);
+		length--;
 	}
 	
 	gtranslator_config_close();
