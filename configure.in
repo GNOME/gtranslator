@@ -80,7 +80,7 @@ if gnome-config --libs gal 2>&1 >/dev/null ; then
 	awk -F. '{ print $1 * 10000 + $2 * 100 + $3;}'`
 	
 	if test "$GAL_VERSION" -ge 500 ; then
-		AC_MSG_RESULT(found)			
+		AC_MSG_RESULT(found)
 	else
 		dnl ---------------------------------------------------
 		dnl Tell the user that we've found gal, but it's too
@@ -200,7 +200,7 @@ else
 	dnl Get the nautilus compile flags for the view..
 	dnl -------------------------------------------------------------------
 	if test "x$build_nv" = "xyes" ; then
-		AC_MSG_CHECKING([for necessary Nautilus headers in ${nautilus_prefix}/include/libnautilus])	
+		AC_MSG_CHECKING([for necessary Nautilus headers in ${nautilus_prefix}/include/libnautilus])
 		if test -f "${nautilus_prefix}/include/libnautilus/nautilus-view.h" -a \
 			-f "${nautilus_prefix}/include/libnautilus/nautilus-view-standard-main.h" -a \
 			-f "${nautilus_prefix}/include/libnautilus/nautilus-bonobo-ui.h" ; then
