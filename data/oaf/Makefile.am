@@ -2,6 +2,6 @@
 
 OAF_dir = $(datadir)/oaf
 
-OAF__data = gtranslatord.oafinfo
+OAF__DATA = gtranslatord.oafinfo
 
-EXTRA_DIST = $(OAF__data)
+EXTRA_DIST = $(OAF__DATA)
