@@ -865,9 +865,7 @@ void gtranslator_display_recent(void)
 	 * Parse the list, but maximal as many entries as wished
 	 *  in the preferences.
 	 */
-	for(len=((g_list_length(list)-1) < (wants.recent_files-1))
-		?(g_list_length(list)-1) : (wants.recent_files-1);
-		len >= 0;len--)
+	for(len=(g_list_length(list)-1);len >= 0;len--)
 	{
 		/*
 		 * Get the GnomeHistory Entry.

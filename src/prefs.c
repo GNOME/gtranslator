@@ -56,7 +56,8 @@ static GtkWidget
 	*warn_if_no_change, *warn_if_fuzzy, *unmark_fuzzy,
 	*dont_save_unchanged_files, *save_geometry_tb, *no_uzis,
 	*enable_popup_menu, *use_dot_char, *use_update_function,
-	*check_recent_files, *own_specs, *instant_spell_checking;
+	*check_recent_files, *own_specs, *instant_spell_checking,
+	*use_own_dict, *dictionary_file;
 	
 /*
  * The preferences dialog widget itself.
@@ -207,10 +208,11 @@ void create_lists(void)
 void prefs_box(GtkWidget  * widget, gpointer useless)
 {
 	/*
-	 * And some more widgets for the color/fonts
-	 *  settings.
+	 * the internally used labels.
 	 */
-	GtkWidget *fg_color_label, *bg_color_label, *font_label;
+	GtkWidget 	*fg_color_label,
+			*bg_color_label,
+			*font_label;
 	
 	raise_and_return_if_exists(prefs);
 	/*
@@ -228,7 +230,7 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	second_page = append_page_table(prefs, 5, 2, _("Language options"));
 	third_page = append_page_table(prefs, 3, 1, _("Po file options"));
 	fourth_page = append_page_table(prefs, 4, 1, _("Miscellaneous"));
-	fifth_page = append_page_table(prefs, 3, 2, _("Recent files & spell checking"));
+	fifth_page = append_page_table(prefs, 4, 2, _("Recent files & spell checking"));
 	sixth_page = append_page_table(prefs, 4, 2, _("Fonts & Colors"));
 	
 	/*
@@ -314,6 +316,14 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	instant_spell_checking=attach_toggle_with_label(fifth_page, 1,
 		_("Instant spell checking"),
 		wants.instant_spell_check, prefs_box_changed);
+	use_own_dict=attach_toggle_with_label(fifth_page, 2,
+		_("Use special dictionary file"),
+		wants.use_own_dict, prefs_box_changed);
+	dictionary_file=gnome_file_entry_new("DICTIONARY_FILE",
+		_("Dictionary to use:"));
+
+	gtk_table_attach_defaults(GTK_TABLE(fifth_page),
+		dictionary_file, 0, 1, 3, 4);
 	
 	/*
 	 * The sixth page with the special font/color stuff.
@@ -416,6 +426,7 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	wants.check_recent_file = if_active(check_recent_files);
 	wants.instant_spell_check = if_active(instant_spell_checking);
 	wants.use_own_specs = if_active(own_specs);
+	wants.use_own_dict = if_active(use_own_dict);
 #undef if_active
 	
 	gtranslator_config_init();
@@ -428,8 +439,14 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	gtranslator_config_set_string("language/team_email", lg);
 	
 	g_free(wants.font);
+	g_free(wants.dictionary);
+	
 	wants.font=gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font));
+	wants.dictionary=gnome_file_entry_get_full_path(
+		GNOME_FILE_ENTRY(dictionary_file), TRUE);
+	
 	gtranslator_config_set_string("font/name", wants.font);
+	gtranslator_config_set_string("dict/file", wants.dictionary);
 	
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground),
 		COLOR_VALUE_FG);
@@ -458,6 +475,8 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 			      wants.instant_spell_check);
 	gtranslator_config_set_bool("toggles/use_own_specs",
 			      wants.use_own_specs);
+	gtranslator_config_set_bool("toggles/use_own_dict",
+			      wants.use_own_dict);
 	gtranslator_config_close();
 }
 
@@ -543,6 +562,8 @@ void read_prefs(void)
 	mime = gtranslator_config_get_string("language/mime_type");
 	enc = gtranslator_config_get_string("language/encoding");
 	wants.font = gtranslator_config_get_string("font/name");
+	wants.dictionary = gtranslator_config_get_string("dict/file");
+	
 	wants.instant_spell_check = 
 	    gtranslator_config_get_bool("toggles/instant_spell_check");
 	wants.save_geometry =
@@ -567,6 +588,8 @@ void read_prefs(void)
 	    gtranslator_config_get_bool("toggles/check_recent_files");
 	wants.use_own_specs =
 	    gtranslator_config_get_bool("toggles/use_own_specs");
+	wants.use_own_dict =
+	    gtranslator_config_get_bool("toggles/use_own_dict");
 	wants.match_case = gtranslator_config_get_bool("find/case_sensitive");
 	wants.find_in = gtranslator_config_get_int("find/find_in");
 	update_flags();

@@ -1,5 +1,15 @@
 2001-01-05  Fatih Demir	<kabalak@gmx.net>
 
+	* gui.c: Added code which determines if a special dictionary
+		is desired and then calls the gtkspell ispell process
+		 with the corresponding options (or not).
+
+	* prefs.c/.h: Added the dictionary holding entry for the
+		ispell process of gtkspell.
+
+	* prefs.h, parse.c: Removed the recent files entries from the
+		preferences and from the code.
+
 	* gtkspell.c: Check the position of the text to
 		delete; avoids a crash when instant spell checking
 		 is activated.

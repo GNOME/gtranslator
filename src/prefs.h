@@ -49,46 +49,16 @@ struct {
 	guint match_case		: 1;
 	guint find_in			: 2;
 	guint fill_header		: 1;
-	/*
-	 * Specifies the use of the "dot char".
-	 */
-	guint dot_char			: 1;
-	/* 
-	 * Whether we'd use popup menus.
-	 */
-	guint popup_menu		: 1;
-	/*
-	 * Defines if the update function of gtranslator is enabled.
-	 */
 	guint update_function		: 1;
-	/*
-	 * The maximal number of entries in the recent files menu.
-	 */
-	guint recent_files		: 3;
-	/*
-	 * Whether to check every recent file for existence.
-	 */
+	guint dot_char			: 1;
+	guint popup_menu		: 1;
 	guint check_recent_file		: 1;
-	/*
-	 * Really unuseful dialogs which can be enabled/disabled.
-	 */
 	guint uzi_dialogs		: 1;
-	/*
-	 * Defines if gtranslator should use his own font/color settings.
-	 */
 	guint use_own_specs		: 1;
-	/*
-	 * Specifies if the instant spelling check via gtkspell should be
-	 *  enabled.
-	 */
 	guint instant_spell_check	: 1;
-	/*
-	 * The ispell command to use for the instant spelling check.
-	 */
+	guint use_own_dict		: 1;
 	gchar				*spell_command;
-	/*
-	 * The special font to be used within gtranslator.
-	 */
+	gchar				*dictionary;
 	gchar				*font;
 } wants;
 

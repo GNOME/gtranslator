@@ -638,11 +638,7 @@ static void invert_dot(gchar *str)
 void display_msg(GList  * list_item)
 {
 	GtrMsg *msg;
-	gchar *ispell_command[] = {
-		"ispell",
-		"-a",
-		NULL
-	};
+	gchar *ispell_command[3];
 	msg = GTR_MSG(list_item->data);
 	nothing_changes = TRUE;
 	clean_text_boxes();
@@ -675,21 +671,37 @@ void display_msg(GList  * list_item)
 	}
 	
 	/*
-	  * Use instant spell checking via gtkspell only if the corresponding
-	  *  setting in the preferences is set.
+	 * Use instant spell checking via gtkspell only if the corresponding
+	 *  setting in the preferences is set.
 	 */
 	if(wants.instant_spell_check)
 	{
 		/*
-		  * Start up gtkspell if not already done.
+		 * Start up gtkspell if not already done.
 		 */ 
 		if(!gtkspell_running())
 		{
+			ispell_command[0]="ispell";
+			ispell_command[2]=NULL;
+			
+			/*
+			 * Should we use special dictionary settings?
+			 */ 
+			if(wants.use_own_dict && wants.dictionary)
+			{
+				ispell_command[1]=g_strdup_printf(" %s -d \"%s\" ",
+					"-a",
+					wants.dictionary);
+			}
+		
+			/*
+			 * Start the gtkspell process.
+			 */ 
 			gtkspell_start(NULL, ispell_command);
 		}
 
 		/*
-		  * Attach it to the translation box for instant spell checking.
+		 * Attach it to the translation box for instant spell checking.
 		 */ 
 		gtkspell_attach(GTK_TEXT(trans_box));
 	}
