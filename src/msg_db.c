@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * Here are the routines which could be very
  * useful if you're think of slightly auto-
  * generated translations ..
@@ -28,16 +30,22 @@ int init_msg_db()
 	msg_db_inited=TRUE;
 	/**
 	 * Get every message from the msg_db as a new member 
-	 * to the linked list while reading the file
+	 * to the linked list while reading the file ; 
+  	 *
+	 * 1) Allocate the linked lists
+	 *
 	 **/
+	msg_list = g_list_alloc();
+	cur_list = g_list_alloc();
 	while(
-	fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL)
+	(fgets(msg_messages,sizeof(msg_messages),db_stream) != NULL)
+	)
 	{
 		/**
- 		 * Add it to the linked list 
-		 * FIXME -> glib
+ 		 * 2) Parse the msg_db and add every entry to the
+		 *     the linked lists 
 		 **/
-		/*add_ll(msg_list,&msg_messages[0]);*/
+		msg_list = g_list_append(cur_list,&msg_messages[0]);
 	}
 }
 
@@ -62,7 +70,7 @@ void close_msg_db()
 	msg_db_inited=FALSE;
 }
 
-int put_to_msg_db(const gchar *new_message)
+int put_to_msg_db(const gchar *msg_id,const gchar *new_message)
 {
 	/**
 	 * Check if we've got a working 
@@ -84,7 +92,7 @@ int put_to_msg_db(const gchar *new_message)
 			/**
 			 * Warn if there isn't any message
 			 **/
-			g_warning("No message entry got !\n");
+			g_warning("Got no message entry !\n");
 			return 1;	
 		}
 		/**
@@ -98,10 +106,9 @@ int put_to_msg_db(const gchar *new_message)
 		}
 		else
 		{
-			/**
-			 * FIXME
-			 * Add a leaf to the btree ...
-			 **/		
+			/** FIXME 
+			 * Where to add this ?
+			 **/	
 		}
 	}
 	return 0;
@@ -123,8 +130,8 @@ gchar *get_from_msg_db(const gchar *get_similar)
 	if(!msg_list)
 	{
 		 /**
-		 * If there's no LL* msg_list 
-		 * print an error message
+		 * If there's no msg_list 
+		 *  print an error message
   		 **/
 		g_error("No msg_list available for acting on it !\n");
 		 /**

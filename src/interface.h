@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * A header for all the nice click-and-rushed dialogs ..
  *
  **/

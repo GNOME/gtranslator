@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * Here will be the db-type stuff. 
  * I'm thinking of a pure gzipped
  * text file as msg[id][str]-base
@@ -34,7 +36,7 @@ void close_msg_db();
 /**
  * Put this to the db
  **/
-int put_to_msg_db(const gchar *);
+int put_to_msg_db(const gchar *,const gchar *);
 
 /**
  * Get a similar entry from 
@@ -47,3 +49,8 @@ gchar *get_from_msg_db(const gchar *);
  * in bytes :
  **/
 unsigned int get_msg_db_size();
+
+/**
+ * The linked lists :
+ **/
+GList *msg_list, *cur_list;

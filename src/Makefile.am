@@ -12,7 +12,7 @@ extra_flags = -DDEBUG
 INCLUDES = \
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR)  \
-	$(extra_flags) $(GLIB_CFLAGS) -DMSG_DB_DIR=\"$(msg_db_dir)\"
+	$(extra_flags) -DMSG_DB_DIR=\"$(msg_db_dir)\"
 
 bin_PROGRAMS = gtranslator
 
@@ -26,6 +26,6 @@ gtranslator_SOURCES = \
 	msg_db.h msg_db.c \
 	messages.h 
 
-gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS)
+gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 
 EXTRA_DIST = ChangeLog

@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * The header for the ´header´-rountines 
  *
  **/

@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ] 
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * This is the parser header ...
  * Totally written by me ; I think you can see it .
  **/

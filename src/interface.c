@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * The interface file , totally catastrophed by me ...
  * 
  * And reformatted ; so it should be much better to read it

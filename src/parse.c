@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * Here will be some useful parts of gtranslator 
  * next periods of time ....
  **/
@@ -8,6 +10,12 @@
 #include "parse.h"
 #include "messages.h"
 #include <unistd.h>
+
+/**
+ * The file-stream for the file-check
+ **/
+
+FILE *fs;
 
 /**
  * A simple stream-check (I love the ifstream.good()-func from C++ ....)
@@ -25,7 +33,6 @@ void check_file(FILE *stream,const char *error)
  **/
 void parse()
 {
-	FILE *fs;
 	gchar tmp_l[256];
 	/** 
 	 * Open the file got by the open-dialog
@@ -37,8 +44,10 @@ void parse()
 	check_file(fs,"Couldn't open the po file !");
 	msg->po->opened=TRUE;
 	msg->po->po_filename=(char *)filename;
-	g_warning("Got filename  %s \n",filename);
-	g_warning("Or : %s\n",msg->po->po_filename);
+	#ifdef DEBUG
+	g_print("Got filename  %s \n",filename);
+	g_print("Or : %s\n",msg->po->po_filename);
+	#endif
 	count=0;
 	while((fgets(tmp_l,sizeof(tmp_l),fs)) != NULL)
 	{
@@ -87,15 +96,4 @@ void parse()
 	 **/
 	msg->po->file_length=(count - 1);
 	max_count=((count - 10 ) / 3);
-}
-
-/**
- * w/o shame stolen from dyntest programm 
- **/ 
-int ka_comp(const void * first,const void * second)
-{
-	/**
- 	 * Looks a little bit like lisp ...
-	 **/
-	return(*((int *)first) - *((int *)second));
 }

@@ -1,6 +1,8 @@
 /**
  * Fatih Demir [ kabalak@gmx.net ]
  *
+ * (C) 2000 Published under GNU GPL V 2.0+
+ *
  * It's too anormally written / don't look for many sense in it ...
  *
  * Some routines need to be added here in the next days ...
