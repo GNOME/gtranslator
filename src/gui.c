@@ -328,7 +328,7 @@ void gtranslator_application_bar_update(gint pos)
 	 */
 	if(msg->status & GTR_MSG_STATUS_FUZZY)
 	{
-		if(po->fuzzy>1)
+		if(po->fuzzy>0)
 		{
 			status=g_strdup_printf(_("%s [ %i Fuzzy left ]"), _("Fuzzy"), po->fuzzy);
 		}	
@@ -348,7 +348,7 @@ void gtranslator_application_bar_update(gint pos)
 		/*
 		 * Message is untranslated 
 		 */
-		if ((po->length - po->translated)>1)
+		if ((po->length - po->translated)>0)
 		{
 			guint missya;
 			missya = po->length - po->translated;

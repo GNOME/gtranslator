@@ -46,7 +46,7 @@
  * Functions to be used only internally in this file
  */
 static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
-			     gpointer adjustment);
+					     gpointer data);
 static void match_case_toggled(GtkWidget * widget, gpointer useless);
 static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 	gpointer findy);
@@ -215,11 +215,18 @@ gboolean gtranslator_should_the_file_be_saved_dialog(void)
  * The "Go to" functions.
  */
 static void gtranslator_go_to_dialog_clicked(GnomeDialog * dialog, gint button,
-			     gpointer adjustment)
+					     gpointer data)
 {
-	guint number = GTK_ADJUSTMENT(adjustment)->value - 1;
 	if (button == GNOME_OK)
-		gtranslator_message_go_to_no(GTK_WIDGET(dialog), GUINT_TO_POINTER(number));
+	{
+		GtkSpinButton *spin = GTK_SPIN_BUTTON(data);
+		guint number;
+		
+		gtk_spin_button_update(spin);
+		number = gtk_spin_button_get_value_as_int(spin) - 1;
+		gtranslator_message_go_to_no(GTK_WIDGET(dialog),
+					     GUINT_TO_POINTER(number));
+	}
 	gnome_dialog_close(dialog);
 }
 
@@ -234,12 +241,17 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 					 g_list_position(po->messages,
 							 po->current) + 1);
 	gtranslator_raise_dialog(dialog);
-	dialog = gnome_dialog_new(_("gtranslator -- go to"), _("Go!"),
-			     GNOME_STOCK_BUTTON_CANCEL, NULL);
+	dialog = gnome_dialog_new(_("gtranslator -- go to"), NULL);
+	gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dialog),
+						_("Go!"),
+						GNOME_STOCK_PIXMAP_JUMP_TO);
+	gnome_dialog_append_button (GNOME_DIALOG (dialog),
+				    GNOME_STOCK_BUTTON_CANCEL);
 	/*
 	 * We want the "Go!" button to be the default.
 	 */
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 0);
+
 	label = gtk_label_new(_("Go to message number:"));
 	
 	/*
@@ -262,7 +274,8 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 			   FALSE, FALSE, 0);
 	
 	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
-			   GTK_SIGNAL_FUNC(gtranslator_go_to_dialog_clicked), adjustment);
+			   GTK_SIGNAL_FUNC(gtranslator_go_to_dialog_clicked),
+			   spin);
 	gtk_window_set_focus(GTK_WINDOW(dialog), spin);
 	gtranslator_dialog_show(&dialog, "gtranslator -- goto");
 }
@@ -309,8 +322,12 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
 	gtranslator_raise_dialog(dialog);
-	dialog = gnome_dialog_new(_("Find in the po-file"), _("Find"),
-				  GNOME_STOCK_BUTTON_CLOSE, NULL);
+	dialog = gnome_dialog_new(_("Find in the po-file"), NULL);
+	gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dialog),
+						_("Find"),
+						GNOME_STOCK_PIXMAP_SEARCH);
+	gnome_dialog_append_button (GNOME_DIALOG (dialog),
+				    GNOME_STOCK_BUTTON_CLOSE);
 	
 	label = gtk_label_new(_("Enter your desired search string:"));
 	findy = gnome_entry_new("FINDY");
