@@ -25,6 +25,7 @@
 
 #include "actions.h"
 #include "comment.h"
+#include "dialogs.h"
 #ifdef NOT_PORTED
 # include "gtkspell.h"
 #endif
@@ -237,6 +238,83 @@ void gtranslator_message_show(GtrMsg *msg)
 
 	nothing_changes = FALSE;
 	message_changed = FALSE;
+
+	/*
+	 * Form an informative plural forms displaying dialog.
+	 */
+	if(po->header->plural_forms && msg->msgid_plural)
+	{
+		enum
+		{ 
+			MSG_COL,
+			TRANS_COL,
+			N_COL
+		};
+
+		GtkWidget	*dialog=NULL;
+		GtkWidget	*tree=NULL;
+
+		GtkTreeStore	*store=NULL;
+		GtkTreeIter	iter_par, iter_ch;
+
+		GtkTreeViewColumn	*col;
+		GtkCellRenderer		*render;
+
+		dialog=gtk_dialog_new_with_buttons(
+			_("gtranslator -- plural forms of the message"),
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+			NULL);
+
+		store=gtk_tree_store_new(N_COL, G_TYPE_STRING, G_TYPE_STRING);
+		gtk_tree_store_append(store, &iter_par, NULL);
+
+		gtk_tree_store_set(store, &iter_par,
+			MSG_COL, msg->msgid,
+			TRANS_COL, msg->msgstr,
+			-1);
+
+		gtk_tree_store_append(store, &iter_ch, &iter_par);
+		gtk_tree_store_set(store, &iter_ch,
+			MSG_COL, msg->msgid_plural,
+			TRANS_COL, msg->msgstr_1,
+			-1);
+
+		if(msg->msgstr_2)
+		{
+			gtk_tree_store_append(store, &iter_ch, &iter_par);
+			gtk_tree_store_set(store, &iter_ch,
+				MSG_COL, "",
+				TRANS_COL, msg->msgstr_2,
+				-1);
+		}
+
+		tree=gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));
+
+		render=gtk_cell_renderer_text_new();
+		col=gtk_tree_view_column_new_with_attributes("Message",
+			render, "text", MSG_COL, NULL);
+
+		gtk_tree_view_append_column(GTK_TREE_VIEW(tree), col);
+
+		render=gtk_cell_renderer_text_new();
+		col=gtk_tree_view_column_new_with_attributes("Translation",
+			render, "text", TRANS_COL, NULL);
+
+		gtk_tree_view_append_column(GTK_TREE_VIEW(tree), col);
+		
+		gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), tree,
+			FALSE, FALSE, 0);
+		gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_CANCEL);
+
+		gtranslator_dialog_show(&dialog, "gtranslator -- plural forms");
+
+		if(gtk_dialog_run(GTK_DIALOG(dialog)))
+		{
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+		}
+	}
 }
 
 void gtranslator_message_update(void)

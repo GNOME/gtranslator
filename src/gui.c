@@ -401,14 +401,6 @@ void gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
 
 	/*
-	 * Save the messages table state.
-	 */
-	if(GtrPreferences.show_messages_table)
-	{
-		gtranslator_messages_table_save_state();
-	}
-
-	/*
 	 * Shutdown our internal learning system.
 	 */
 	if(gtranslator_learn_initialized())

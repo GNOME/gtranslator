@@ -93,7 +93,7 @@ void gtranslator_preferences_init_default_values()
 		gtranslator_config_set_int("interface/sidebar_pane_position",
 			90); 
 		gtranslator_config_set_int("interface/table_pane_position",
-			200); 
+			150); 
 
 		/*
 		 * We do want maximally 10 history entries per default.

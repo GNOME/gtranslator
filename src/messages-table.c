@@ -3,6 +3,7 @@
  *			Gediminas Paulauskas <menesis@gtranslator.org>
  *			Kevin Vandersloot <kfv101@psu.edu>
  *			Thomas Ziehmer <thomas@gtranslator.org>
+ *			Peeter Vois <peeter@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -59,14 +60,11 @@ enum
 };
 
 /*
- * Create the ETableExtras for our messages table.
- */
-
-/*
  * Simply sets up/frees the generally used messages table colors.
  */
-//static void read_messages_table_colors(void);
-//static void free_messages_table_colors(void);
+static void read_messages_table_colors(void);
+static void free_messages_table_colors(void);
+
 static void 
 gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
 					     gpointer data);
@@ -93,10 +91,6 @@ typedef struct
 } GtrTranslationRetrieval;
 
 /*
- * A new kind of popup menu for our beloved messages table.
- */
-
-/*
  * An own insertion callback for the messages table's popup menu to insert
  *  the found, fitting translation from the learn buffer.
  */
@@ -107,8 +101,9 @@ typedef struct
  */
 static GtkWidget *tree;
 
-#ifdef NOT_PORTED
 static GtrMessagesTableColors *messages_table_colors;
+
+#ifdef NOT_PORTED
 
 static GtrTranslationRetrieval *retrieval=NULL;
 
@@ -119,6 +114,79 @@ static GtrTranslationRetrieval *retrieval=NULL;
  */
 static GHashTable *hash_table=NULL;
 #endif
+
+/*
+ * Initialize and set up the generally used messages table colors.
+ */
+static void read_messages_table_colors()
+{
+	messages_table_colors=g_new0(GtrMessagesTableColors, 1);
+
+	/*
+	 * Read the values from the prefs in -- but only if desired.
+	 */
+	if(GtrPreferences.use_own_mt_colors)
+	{
+		gchar	*value;
+		
+		value=gtranslator_config_get_string("colors/messages_table_untranslated");
+
+		if(value && value[0]=='#')
+		{
+			messages_table_colors->untranslated=g_strdup(value);
+			GTR_FREE(value);
+		}
+		else
+		{
+			messages_table_colors->untranslated=g_strdup(TABLE_UNTRANSLATED_COLOR);
+		}
+
+		value=gtranslator_config_get_string("colors/messages_table_fuzzy");
+
+		if(value && value[0]=='#')
+		{
+			messages_table_colors->fuzzy=g_strdup(value);
+			GTR_FREE(value);
+		}
+		else
+		{
+			messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
+		}
+
+		value=gtranslator_config_get_string("colors/messages_table_translated");
+
+		if(value && value[0]=='#')
+		{
+			messages_table_colors->translated=g_strdup(value);
+			GTR_FREE(value);
+		}
+		else
+		{
+			messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
+		}
+	}
+	else
+	{
+		messages_table_colors->untranslated=g_strdup(TABLE_UNTRANSLATED_COLOR);
+		messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
+		messages_table_colors->translated=TABLE_TRANSLATED_COLOR;
+	}
+}
+
+/*
+ * Frees the internally used GtrMessagesTableColors structure.
+ */
+static void free_messages_table_colors()
+{
+	if(messages_table_colors)
+	{
+		GTR_FREE(messages_table_colors->untranslated);
+		GTR_FREE(messages_table_colors->fuzzy);
+		GTR_FREE(messages_table_colors->translated);
+
+		GTR_FREE(messages_table_colors);
+	}
+}
 
 /*
  * Pops up on a right click in the messages table -- should show any found 
@@ -211,6 +279,7 @@ GtkWidget *gtranslator_messages_table_new()
 void gtranslator_messages_table_clear(void)
 {
   gtk_tree_store_clear(GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(tree))));
+  free_messages_table_colors();
 }		
 
 /*
@@ -229,6 +298,8 @@ void gtranslator_messages_table_create (void)
   list=po->messages;
 
   model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(tree)));
+
+  read_messages_table_colors();
 
   gtk_tree_store_append (model, &unknown_node, NULL);
   gtk_tree_store_set (model, &unknown_node, 
@@ -331,15 +402,6 @@ void gtranslator_messages_table_update_message_status(GtrMsg *message)
 {
 	
 }
-
-/*
- * Save the e-tree state
- */
-void gtranslator_messages_table_save_state()
-{
-
-}
-
 
 static void 
 gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,

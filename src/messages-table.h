@@ -1,6 +1,7 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
- *		Kevin Vandersloot <kfv101@psu.edu>
+ * (C) 2001-2003 	Fatih Demir <kabalak@gtranslator.org>
+ *			Kevin Vandersloot <kfv101@psu.edu>
+ *			Peeter Vois <peeter@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -65,10 +66,5 @@ void gtranslator_messages_table_select_row(GtrMsg *message);
  * Update the status grouping of a message
  */
 void gtranslator_messages_table_update_message_status(GtrMsg *message);
-
-/*
- * Save the e-tree state
- */
-void gtranslator_messages_table_save_state(void);
 
 #endif
