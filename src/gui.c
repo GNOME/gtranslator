@@ -649,6 +649,7 @@ void gtranslator_translation_changed(GtkWidget  * widget, gpointer useless)
 		     && (msg->status & GTR_MSG_STATUS_FUZZY))
 		{
 		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
+			gtranslator_messages_table_update_message_status(msg);
 			gtranslator_actions_disable_fuzzy_menu_item();
 		}
 	}

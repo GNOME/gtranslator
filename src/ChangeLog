@@ -1,7 +1,21 @@
+2001-08-22  Fatih Demir <kabalak@gtranslator.org>
+
+	* gui.c: Also update the status of a message in the messages tree on
+		a message change on a fuzzy message where the status gets
+		 "Translated" afterwards (according to the user preference).
+
+	* message.c: Update the status in the messages tree according to the
+		updated/changed status from the status setting menu entries.
+
+	* parse.c: While constructing a more useful filename for a temporarily
+		opened file check whether a project version is present before
+		 using it in our filename construcing calls -- else use
+		  "Project.Language.po".
+
 2001-08-21  Kevin Vandersloot <kfv101@psu.edu>
 
 	* messages-table.c (_update_message_status): new function to
-	move a message from its old status group to its new one
+	move a message from its old status group to its new one.
 
 2001-08-21  Fatih Demir <kabalak@gtranslator.org>
 

@@ -343,7 +343,9 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 		gtranslator_message_show(po->current);
 		message_changed = TRUE;
 	}
+	
 	gtranslator_message_update();
+	gtranslator_messages_table_update_message_status(GTR_MSG(po->current->data));
 }
 
 /*

@@ -661,17 +661,28 @@ gboolean gtranslator_save_file(const gchar *name)
 	
 	tempo=gtranslator_utils_get_temp_file_name();
 
-	/* FIXME: pop up save as... dialog here */
+	/*
+	 * FIXME: pop up save as... dialog here 
+	 */
 	if(!nautilus_strcmp(name, tempo))
 	{
 		/*
 		 * Create a new filename to use instead of the
 		 *  oldsome "gtranslator-temp-po-file"...
-		 */  
-		name=g_strdup_printf("%s-%s.%s.po",
-			po->header->prj_name,
-			po->header->prj_version,
-			po->header->language);
+		 */
+		if(po->header->prj_version)
+		{
+			name=g_strdup_printf("%s-%s.%s.po",
+				po->header->prj_name,
+				po->header->prj_version,
+				po->header->language);
+		}
+		else
+		{
+			name=g_strdup_printf("%s.%s.po",
+				po->header->prj_name, 
+				po->header->language);
+		}
 
 		/*
 		 * Add a foo'sh header entry but only if no header is present.
