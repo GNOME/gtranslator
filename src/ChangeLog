@@ -2,7 +2,7 @@
 
 	* learn.c: Restructeral, use a new GtrLearnBuffer structure and data
 		for all operations; changes to almost all functions to make
-		 them usable with the new structure, more sanity checks 
+		 them usable with the new structure, more sanity checks
 		  throughout the whole code.
 
 2001-07-15  Fatih Demir <kabalak@gtranslator.org>
@@ -36,7 +36,7 @@
 		course "project-name.gmo").
 
 	* learn.c: Properties order change (language code comes before EMail),
-		also write out "name" property for the <language> node and 
+		also write out "name" property for the <language> node and
 		 read/write the serial nodes.
 
 2001-07-14  Thomas Ziehmer	<thomas@gtranslator.org>
@@ -82,13 +82,13 @@
 
 2001-07-08  Fatih Demir <kabalak@gtranslator.org>
 
-	* message.c: Show the comments via the "gtranslator_comment_display" 
+	* message.c: Show the comments via the "gtranslator_comment_display"
 		function.
 
 	* comment.c: Implemented "gtranslator_comment_display" function.
 
 	* query.c: Try to get the locale environment if no language is set yet
-		in the preferences; check for "LANGUAGE" first and then for 
+		in the preferences; check for "LANGUAGE" first and then for
 		 "LANG" if no "LANGUAGE" is set; if even that doesn't succeed
 		   then we're lost.
 
@@ -120,7 +120,7 @@
 	* messages.h: Use GtrComment as comment structure instead of a simple
 		gchar.
 
-	* find.c, header_stuff.c, message.c, replace.c & views.c: Changes 
+	* find.c, header_stuff.c, message.c, replace.c & views.c: Changes
 		according to the usage of GtrComment.
 
 2001-07-03  Fatih Demir <kabalak@gtranslator.org>
@@ -149,7 +149,7 @@
 
 	* prefs_init.c: Enable the sidebar/content pane per default.
 
-	* gui.c/.h: Sidebar/Content pane enabling/disabling, position saving 
+	* gui.c/.h: Sidebar/Content pane enabling/disabling, position saving
 		& restoring are now implemented; renamed some wrongly named
 		 widgets and added the content pane widget with a temporarily
 		  label .-)
@@ -192,7 +192,7 @@
 
 2001-06-19  Fatih Demir <kabalak@gtranslator.org>
 
-	* languages.h: Added Esparanto & Malay, updated/corrected 
+	* languages.h: Added Esparanto & Malay, updated/corrected
 		mailing list addresses for Japanese & Slovak.
 
 2001-06-18  Gediminas Paulauskas <menesis@delfi.lt>
@@ -216,7 +216,7 @@
 	* languages.h: Changed the copyright notice to include the GNOME I18N
 		mailing list; also re-added examples for the structure fields
 		 and integrated all corrections, suggestions, updates for
-		  Chinese, Dutch, Maltese and Slovak from others and for 
+		  Chinese, Dutch, Maltese and Slovak from others and for
 		   Turkish, Hungarian and Korean according to the po files
 		    for gtranslator by me.
 

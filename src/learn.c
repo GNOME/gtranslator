@@ -390,7 +390,7 @@ void gtranslator_learn_shutdown()
 	 * Clean up the hash table we're using, write it's contents, free them and destroy
 	 *  the hash table.
 	 */
-	gtranslator_learn_buffer->current_node=serial_node->xmlChildrenNode;
+	gtranslator_learn_buffer->current_node=serial_node->parent;
 	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 	
 	g_hash_table_foreach(gtranslator_learn_buffer->hash, 
@@ -406,7 +406,6 @@ void gtranslator_learn_shutdown()
 	 */
 	xmlSaveFile(gtranslator_learn_buffer->filename, gtranslator_learn_buffer->doc);
 	xmlFreeDoc(gtranslator_learn_buffer->doc);
-	xmlFreeNode(gtranslator_learn_buffer->current_node);
 
 	g_free(gtranslator_learn_buffer->serial_date);
 	g_free(gtranslator_learn_buffer->filename);
