@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=0.21
+export POZILLA_RELEASE=0.3
 
 #
 # The configuration dir, the mail body & mail.
@@ -111,6 +111,9 @@ for i in $PO_FILES
 		echo "You should update your $i po-file for $PACKAGE," > $BODY_FILE
 		echo "it's containg fuzzy or/and untranslated entries if you get it" >> $BODY_FILE
 		echo "in sync with the recent sources for $PACKAGE." >> $BODY_FILE
+		echo "" >> $BODY_FILE
+		echo "Your po-file $i's statistics are:" >> $BODY_FILE
+		msgfmt -v $i 2>>$BODY_FILE
 		echo "" >> $BODY_FILE
 		echo "Have fun within the po-updating :-)" >> $BODY_FILE
 	;;
