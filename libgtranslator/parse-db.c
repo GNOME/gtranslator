@@ -19,19 +19,16 @@
 #include <libgtranslator/messages.h>
 
 /**
-* Parses the lang.xml file.
+* Parses the lang.xml file into a GtranslatorDatabase.
 **/
-void parse_db_for_lang(gchar *language)
+GtranslatorDatabase parse_db_for_lang(gchar *language)
 {
-	gchar file[256];
-	gboolean lusp=FALSE;
-	xmlNodePtr node=NULL;
-	xmlDocPtr xmldoc;
-	GtranslatorDatabase db;
-	/**
-	* Initialize the list.
-	**/
-	messages=NULL;
+	gchar 			file[256];
+	gboolean 		lusp=FALSE;
+	xmlNodePtr 		node=NULL;
+	xmlDocPtr 		xmldoc;
+	GtranslatorDatabase 	db;
+	GList			*messages;
 	/**
 	* Check if we did get a language to search for ..
 	**/
@@ -55,11 +52,12 @@ void parse_db_for_lang(gchar *language)
 	/**
 	* Set the filename of the DB.
 	**/
-	strcpy(db->filename, file);
+	/* FIXME */
+	GTR_DB_FILENAME(db)=file;
 	/**
 	* Print some information to the user.
 	**/
-	g_print(_("Using %s as the message database... \n"),file);
+	g_print(_("Using %s as the message database... \n"), file);
 	/**
 	* Parse the xml file.
 	**/
@@ -71,7 +69,8 @@ void parse_db_for_lang(gchar *language)
 	{
 		if(lusp==FALSE)
 		{
-			g_error(_("Couldn't open language base file `%s.xml' in %s.\n"),language,MESSAGE_DB_DIR);
+			g_error(_("Couldn't open language base file `%s.xml' in %s.\n"),
+				language, MESSAGE_DB_DIR);
 		}
 		else
 		{
@@ -89,7 +88,7 @@ void parse_db_for_lang(gchar *language)
 			/**
 			* Set the language name.
 			**/
-			db->header->language=sarr[0];
+			GTR_DB_LANG(db)=sarr[0];
 			/**
 			* Recurse within the same function with the new language  word ..
 			**/
@@ -115,7 +114,7 @@ void parse_db_for_lang(gchar *language)
 	/**
 	* Set the author name.
 	**/
-	db->header->author=xmlGetProp(xmldoc->xmlRootNode, "author");
+	GTR_DB_AUTHOR(db)=xmlGetProp(xmldoc->xmlRootNode, "author");
 	/**
 	* Again inform the user about some parts of it.
 	**/
@@ -123,7 +122,7 @@ void parse_db_for_lang(gchar *language)
 	/**
 	* And the author email for the DB.
 	**/
-	db->header->author_email=xmlGetProp(xmldoc->xmlRootNode, "email");
+	GTR_DB_AUTHOR_EMAIL(db)=xmlGetProp(xmldoc->xmlRootNode, "email");
 	/**
 	* Get the nodes.
 	**/
@@ -145,7 +144,7 @@ void parse_db_for_lang(gchar *language)
 			/**
 			* Set the serial information of the DB.
 			**/
-			db->header->serial=(gint)xmlNodeGetContent(node);
+			GTR_DB_SERIAL(db)=(gint)xmlNodeGetContent(node);
 		}
 		if(!strcmp(node->name, "msgid"))
 		{
@@ -176,7 +175,11 @@ void parse_db_for_lang(gchar *language)
 	**/
 	messages=g_list_reverse(messages);
 	/**
-	* Set the DB's messages list to the current lisr.
+	* Set the database messages list to the current list.
 	**/
-	db->messages=messages;
+	GTR_DB_LIST(db)=messages;
+	/**
+	* Return the parsed database.
+	**/
+	return db;
 }

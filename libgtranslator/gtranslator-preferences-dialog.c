@@ -30,13 +30,13 @@
 /**
 * The generally used "new" widget
 **/
-GtranslatorPreferencesDialog window;
+GtranslatorPreferencesDialog 	window;
 
 /**
 * The pane splitting up the index and the
 *  content window.
 **/
-GtkPaned	*pane;
+GtkWidget			*pane;
 
 /**
 * Create and return the new widget.
@@ -82,8 +82,8 @@ GtranslatorPreferencesDialog gtranslator_preferences_dialog_new(
 	**/
 	window->index=gtk_clist_new(1);
 	frame=gtk_frame_new(_("Default"));
-	gtk_paned_add1(pane, window->index);
-	gtk_paned_add2(pane, frame);
+	gtk_paned_add1(GTK_PANED(pane), window->index);
+	gtk_paned_add2(GTK_PANED(pane), frame);
 	/**
 	* Now get the three default buttons.
 	**/

@@ -17,6 +17,7 @@
 
 #include <libgtranslator/parse-db.h>
 #include <libgtranslator/translation-database.h>
+#include <libgtranslator/messages.h>
 
 /**
 * General functions of libgtranslator for the message databases

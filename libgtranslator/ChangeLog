@@ -1,10 +1,41 @@
+2000-10-29  Fatih Demir <kabalak@gmx.net>
+
+	* messages.h: Added a msgstrlist field which is
+		a list of possible translations for a msgid,
+		 so you guessed it right, this is a feature for
+		  the message database features.
+
+	* handle-db.c/h: Wrote the gtranslator_dave_db
+		function which stores the given database
+		 to the disc.
+
+	* stylistics.c/.h: The gtranslator_set_style
+		function now takesonly one widget as
+		 an argument, not two like in previous
+		  times.
+		Do use gushorts and the gnome_color..i16
+		 methods to set/get the color values to avoid
+		  rounding errors; also changed the edited
+		   gtranslator_set_style method to get/set
+		    integer values as we're now string int's
+		     and no longer gfloats.
+
+	* parse-db.c: Use the new macros and a FIXME is now
+		also included in this file as it does always
+		 _crash_ gtranslatord trying to parse a message
+		  database at the line 55.
+
+	* translation-database.h: Added some crappy
+		macros for less typing ( :-) ) and made
+		 the filename again a normal gchar.
+	
 2000-10-28  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Added gtranslatord.h and the new
 		libgtranslator.h headers to the include
 		 list of libgtranslator.
 	
-	* libgtranslator.h: A central header for 
+	* libgtranslator.h: A central header for
 		libgtranslator which includes all the other
 		 headers of libgtranslator (like gnome.h
 		  for libgnome/libgnomeui).
@@ -32,9 +63,9 @@
 		  used and important functions for
 		   the message database handling.
 
-	* gtranslator-preferences-dialog.c: Made the 
+	* gtranslator-preferences-dialog.c: Made the
 		default header title translatable,
-		 added more parts of the creation 
+		 added more parts of the creation
 		  dialog( the pane, clist etc.).
 
 	* *.h/.c: Removed one line from the start
@@ -50,7 +81,7 @@
 		  translation-database.h file in the
 		   includes and reorder the files
 		    alphabetically.
-		
+	
 	* translation-database.h: Added a new header file
 		which will store the structure data of
 		 a translation/message database.
@@ -61,8 +92,8 @@
 		  it's filled up with some fix-values
 		   for now, as it's not in use and that
 		    piece of sources are only for testing.
-    
-        * main.c: Introduce options and handling of the 
+ 
+        * main.c: Introduce options and handling of the
                 --parse-db/-p option to parse the given
                  message database, also changed the given
 		  textdomain directory to GNOMELOCALEDIR;

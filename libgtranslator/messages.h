@@ -30,13 +30,21 @@ typedef enum {
 } GtrMsgStatus;
 
 /**
-* Again a try to make a common usable message-struct
+* Again a try to make a commonly usable message-struct
 **/
 typedef struct {
 	gchar *comment;
 	gchar *msgid;
 	gchar *msgstr;
-	/* What this pos is used for? */
+	/**
+	* This is the _new_ msgstr list which stores
+	*  a list of possible translations (especially
+	*   for the message databases usefull).
+	**/
+	GList *msgstrlist;
+	/**
+	* What this pos is used for? 
+	**/
 	gint pos;
 	GtrMsgStatus status;
 } GtrMsg;

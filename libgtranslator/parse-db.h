@@ -25,6 +25,11 @@
 #include <parser.h>
 #include <xmlmemory.h>
 
+/**
+* Include the database header.
+**/
+#include <libgtranslator/translation-database.h>
+
 /* Maybe we have already included this stuff */
 #ifndef __GNOME_I18N_H__
 
@@ -48,13 +53,9 @@
 #endif
 
 /**
-* The message database list.
+* Loads the message database for the specified language
+*  and returns the loaded database.
 **/
-GList *messages;
-
-/**
-* Loads the message database for the specified language.
-**/
-void parse_db_for_lang(gchar *language_code);
+GtranslatorDatabase parse_db_for_lang(gchar *language_code);
 
 #endif

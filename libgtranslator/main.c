@@ -10,8 +10,6 @@
 * WARNING: Trying to decode the source-code may be hazardous for all your
 *	future development in direction to better IQ-Test rankings!
 *
-* PSC: This has been completely written with vim; the best editor of all.
-*
 **/
 
 /**
@@ -33,7 +31,7 @@
 #include <liboaf/liboaf.h>
 
 /**
-* Simply undefine and redefine the G_LOG_DOMAIN 
+* Simply undefine and redefine the G_LOG_DOMAIN
 *  value just for more logicness as gtranslatord
 *   has/will have got also own warning/error
 *    messages which do appear with the G_LOG_DOMAIN
@@ -106,7 +104,11 @@ int main(int argc,char *argv[])
 		g_print(_("gtranslatord has started successfully and will do some operations now ...\n"));
 		if(lang)
 		{
-			parse_db_for_lang(lang);
+			/**
+			* Parse the requested language database.
+			**/
+			GtranslatorDatabase db;
+			db=parse_db_for_lang(lang);
 		}
 		/**
 		* Again this preliminary GConf stuff.
@@ -126,4 +128,4 @@ int main(int argc,char *argv[])
 		#endif
 	}
 	exit(0);
-}	
+}

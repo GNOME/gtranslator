@@ -23,6 +23,23 @@
 **/
 
 /**
+* The general macros for the database fields.
+**/
+#define GTR_DB(x) ((GtranslatorDatabase) x)
+#define GTR_DB_LIST(x) ((GList *) (GTR_DB(x)->messages))
+#define GTR_DB_LIST_ITERATE(x) ((GList *) (GTR_DB_LIST(x)=GTR_DB_LIST(x)->next))
+#define GTR_DB_LIST_MSG(x)  ((GtrMsg *) (GTR_DB_LIST(x)->data))
+#define GTR_DB_HEADER(x) ((GtranslatorDatabaseHeader) (GTR_DB(x)->header))
+#define GTR_DB_FILENAME(x) ((gchar *) (GTR_DB(x)->filename))
+/**
+* The header part-concerning macros.
+**/
+#define GTR_DB_AUTHOR(x) ((gchar *) (GTR_DB_HEADER(x)->author))
+#define GTR_DB_LANG(x) ((gchar *) (GTR_DB_HEADER(x)->language))
+#define GTR_DB_AUTHOR_EMAIL(x) ((gchar *) (GTR_DB_HEADER(x)->author_email))
+#define GTR_DB_SERIAL(x) ((gint) (GTR_DB_HEADER(x)->serial))
+
+/**
 * The facts of a database header.
 **/
 typedef struct {
@@ -61,7 +78,7 @@ typedef struct {
 	/**
 	* The "real" filename of the database.
 	**/
-	gchar				filename[256];
+	gchar				*filename;
 } *GtranslatorDatabase;
 
 #endif

@@ -53,9 +53,8 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 	ColorValueType Type);
 
 /**
-* This function let's all your special font/color wishes
-*  come true ( at least for 2 widgets :-) ).
+* This function applies the stored values for fg/bg and font.
 **/
-void gtranslator_set_style(GtkWidget *one, GtkWidget *two);
+void gtranslator_set_style(GtkWidget *widget);
 
 #endif
