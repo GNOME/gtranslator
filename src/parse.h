@@ -79,7 +79,7 @@ gboolean at_the_last;
 /*
 *	A simple file check .
 */
-void check_file(FILE *);
+void check_file(FILE *,const char *);
 
 /*
 *	The previous parseing routine

@@ -22,4 +22,6 @@ int init_msg_db()
 	*/
 	BT *msg_tree;
 	msg_tree=create_bt();
+	LL *msg_list;
+	msg_list=create_ll();
 }

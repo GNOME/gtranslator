@@ -10,14 +10,15 @@
 /*
 *	A simple stream-check (I love the ifstream.good()-func from C++ ....)
 */
-void check_file(FILE *stream)
+void check_file(FILE *stream,const char *error)
 {
 	if(stream < 0 || stream == NULL)
 	{
-		g_warning("\nError opening the file stream !\n");
-		#ifdef SINIR_ET_BENI
-		exit(1);
-		#endif
+		g_warning(error);
+		/*
+		* Too sensitive for gtranslator ?
+		*exit(1);
+		*/
 	}
 }
 
@@ -36,7 +37,7 @@ void parse()
 	/*
 	* Check if the stream is OK
 	*/
-	check_file(fs);
+	check_file(fs,"Couldn't open the po file !");
 	count=0;
 	/*
 	* Just for now , the db-functionability is
