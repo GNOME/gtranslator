@@ -437,8 +437,12 @@ static void write_the_message(gpointer data, gpointer fs)
 	id = restore_msg(msg->msgid);
 	str = restore_msg(msg->msgstr);
 	
-	fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
-		msg->comment, id, str);
+	if (msg->comment)
+		fprintf((FILE *) fs, "%smsgid \"%s\"\nmsgstr \"%s\"\n\n",
+			msg->comment, id, str);
+	else
+		fprintf((FILE *) fs, "msgid \"%s\"\nmsgstr \"%s\"\n\n",
+			id, str);
 }
 
 static gboolean actual_write(const gchar * name)

@@ -49,7 +49,7 @@ static void clear_selection(GtkWidget * widget, gpointer useless);
 static void undo_changes(GtkWidget * widget, gpointer useless);
 static void text_has_got_changed(GtkWidget * widget, gpointer useless);
 
-static void str_replace(gchar *str, gchar what, gchar with);
+static void invert_dot(gchar *str);
 static void update_appbar(gint pos);
 static void call_gtranslator_homepage(GtkWidget * widget, gpointer useless);
 static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
@@ -593,14 +593,17 @@ static gint gtranslator_quit(GtkWidget * widget, GdkEventAny * e,
 * Go through the characters and search for free spaces
 * and replace them with '·''s.
 **/
-static void str_replace(gchar *str, gchar what, gchar with)
+static void invert_dot(gchar *str)
 {
 	guint i;
 	g_return_if_fail(str != NULL);
 
-	for(i=0; str[i] != '\0'; i++)
-		if(str[i]==what)
-			str[i]=with;
+	for(i=0; str[i] != '\0'; i++) {
+		if(str[i]==' ')
+			str[i]='·';
+		else if(str[i]=='·')
+			str[i]=' ';
+	}
 }
 
 /* 
@@ -623,14 +626,14 @@ void display_msg(GList * list_item)
 		gchar *temp;
 
 		temp = g_strdup(msg->msgid);
-		str_replace(temp, ' ', '·');
+		invert_dot(temp);
 		gtk_text_insert(GTK_TEXT(text1), NULL, NULL, NULL,
 				temp, -1);
 		g_free(temp);
 
 		if (msg->msgstr) {
 			temp = g_strdup(msg->msgstr);
-			str_replace(temp, ' ', '·');
+			invert_dot(temp);
 			gtk_text_insert(GTK_TEXT(trans_box), NULL, NULL, NULL,
 					temp, -1);
 			g_free(temp);
@@ -679,7 +682,7 @@ void update_msg(void)
 
 		/* If spaces were substituted with dots, replace them back */
 		if(wants.dot_char)
-			str_replace(msg->msgstr, '·', ' ');
+			invert_dot(msg->msgstr);
 		if (!(msg->status & GTR_MSG_STATUS_TRANSLATED)) {
 			msg->status |= GTR_MSG_STATUS_TRANSLATED;
 			po->translated++;
