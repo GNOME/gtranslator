@@ -72,7 +72,7 @@ GtkWidget *gtranslator_sidebar_new()
 /*
  * Adds the given po file stats to the shortcut bar.
  */ 
-void gtranslator_sidebar_add_po(GtrPo *po)
+void gtranslator_sidebar_activate_views()
 {
 	g_return_if_fail(po->filename!=NULL);
 
@@ -91,7 +91,7 @@ void gtranslator_sidebar_add_po(GtrPo *po)
 /*
  * Clean the sidebar fro the icons.
  */ 
-void gtranslator_sidebar_clear()
+void gtranslator_sidebar_clear_views()
 {
 	/*
 	 * Remove the view icons/items from the sidebar model.
@@ -218,6 +218,8 @@ GdkPixbuf *get_shortcut_icon(EShortcutBar *bar, const gchar *url,
 	{
 		return NULL;
 	}
+
+	g_free(pixmap_filename);
 }
 
 /*

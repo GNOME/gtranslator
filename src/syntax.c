@@ -201,8 +201,8 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 	}
 
 	gtk_text_thaw(GTK_TEXT(textwidget));
-	
-	g_string_free(string, 0);
+
+	g_string_free(string, 1);
 }
 
 /*
@@ -211,11 +211,15 @@ void gtranslator_syntax_insert_text(GtkWidget *textwidget, const gchar *msg)
 void gtranslator_syntax_update_text(GtkWidget *textwidget)
 {
 	GString *str=g_string_new("");
+	gchar *text=g_new0(gchar,1);
+	
+	text=gtk_editable_get_chars(GTK_EDITABLE(textwidget), 0, -1);
 	
 	g_return_if_fail(textwidget!=NULL);
 
-	str=g_string_append(str, gtk_editable_get_chars(
-		GTK_EDITABLE(textwidget), 0, -1));
+	str=g_string_append(str, text);
+
+	g_free(text);
 
 	if(str->len>0)
 	{
@@ -237,6 +241,8 @@ void gtranslator_syntax_update_text(GtkWidget *textwidget)
 				GTK_EDITABLE(textwidget), pos);
 		}
 	}
+
+	g_string_free(str, 1);
 }
 
 /*
@@ -357,5 +363,7 @@ GdkColor *gtranslator_syntax_get_gdk_color(ColorName name)
 
 	gdk_color_alloc(gtk_widget_get_colormap(app1), color);
 
-	return color;
+	return gdk_color_copy(color);
+
+	gdk_color_free(color);
 }

@@ -424,7 +424,7 @@ void parse(const gchar *filename)
 	/*
 	 * Add the view for the current file.
 	 */ 
-	gtranslator_sidebar_add_po(po);
+	gtranslator_sidebar_activate_views();
 	
 	file_opened = TRUE;
 	po->file_changed = FALSE;
@@ -744,7 +744,7 @@ void close_file(GtkWidget * widget, gpointer useless)
 		return;
 	free_po();
 
-	gtranslator_sidebar_clear();
+	gtranslator_sidebar_clear_views();
 	
 	file_opened = FALSE;
 	nothing_changes = TRUE;

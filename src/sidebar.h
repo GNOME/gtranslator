@@ -37,12 +37,12 @@ GtkWidget *gtranslator_sidebar_new(void);
 /*
  * Adds the given po file to our sidebar.
  */ 
-void gtranslator_sidebar_add_po(GtrPo *po);
+void gtranslator_sidebar_activate_views(void);
 
 /*
  * Clean the sidebar. Remove all the nice icons for the views.
  */
-void gtranslator_sidebar_clear(void);
+void gtranslator_sidebar_clear_views(void);
 
 /*
  * Show the comment of the current message.
