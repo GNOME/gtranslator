@@ -59,6 +59,10 @@ static void gtranslator_learn_hash_from_node(xmlNodePtr node)
 	{
 		original=xmlNodeGetContent(node);
 	}
+	else
+	{
+		original=NULL;
+	}
 
 	while(node && nautilus_strcasecmp(node->name, "translation"))
 	{
@@ -75,6 +79,10 @@ static void gtranslator_learn_hash_from_node(xmlNodePtr node)
 		if(node && !nautilus_strcasecmp(node->name, "value"))
 		{
 			translation=xmlNodeGetContent(node);
+		}
+		else
+		{
+			translation=NULL;
 		}
 	}
 
