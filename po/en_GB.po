@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-31 13:04+0100\n"
+"POT-Creation-Date: 2004-08-01 16:18+0100\n"
 "PO-Revision-Date: 2004-07-31 13:05+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -1292,15 +1292,17 @@ msgid "Could not open file `%s' for writing!"
 msgstr "Could not open file '%s' for writing."
 
 #: src/parse.c:1036
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "File %s\n"
 "contains %d fuzzy message"
+msgid_plural ""
 "File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
 "File %s\n"
-"contains %d fuzzy message"
+"contains %d fuzzy messages"
+msgstr[1] ""
 "File %s\n"
 "contains %d fuzzy messages"
 
@@ -1746,15 +1748,6 @@ msgstr "No address found for host '%s~'."
 #: src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Transfer interrupted."
-
-#~ msgid ""
-#~ "File %s\n"
-#~ "contains %d fuzzy messageFile %s\n"
-#~ "contains %d fuzzy messages"
-#~ msgstr ""
-#~ "File %s\n"
-#~ "contains %d fuzzy messageFile %s\n"
-#~ "contains %d fuzzy messages"
 
 #, fuzzy
 #~ msgid "Please enter a string to replace with!"
