@@ -171,7 +171,13 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	gchar 		*spec;
 	gchar	 	*fontname;
 
-	g_return_if_fail(widget != NULL);
+	/*
+	 * Don't be too loud about this " widget" -- simply return.
+	 */
+	if(!widget)
+	{
+		return;
+	}
 
 	/*
 	 * Copy the style informations of the given widget.
@@ -261,12 +267,11 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	 * The final step: set the widget style.
 	 */
 	gtk_widget_set_style(widget, style);
-	
+
 	/*
-	 * Clean up
+	 * Clean up the used style + fontname variable .-)
 	 */
 	gtk_style_unref(style);
-	
 	g_free(fontname);
 }
 
