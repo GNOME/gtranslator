@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.22 (cvs)\n"
-"POT-Creation-Date: 2000-09-26 20:01+0200\n"
-"PO-Revision-Date: 2000-09-26 20:01+0200\n"
+"Project-Id-Version: gtranslator 0.22 (cvs) \n"
+"POT-Creation-Date: 2000-09-29 23:03+0200\n"
+"PO-Revision-Date: 2000-09-29 23:04+0200\n"
 "Last-Translator: Christian Meyer <linux@chrisime.de>\n"
 "Language-Team: deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -463,9 +463,13 @@ msgstr "E-Mail des Übersetzerteams :"
 msgid "Specifies the main-window geometry"
 msgstr "Legt die Geometrie des Hauptfensters fest"
 
-#: src/main.c:81
-msgid "Couldn't init the GConf library!"
-msgstr "Die GConf-Bibliothek konnte nicht initialisiert werden!"
+#. *
+#. * Print some more exact informations on the GConf init-error.
+#. *
+#: libgtranslator/main.c:74 src/main.c:84
+#, c-format
+msgid "GConf initialization error: `%s'"
+msgstr "Fehler während der GConf-Initialisierung: `%s'"
 
 #: src/parse.c:95
 #, c-format
@@ -596,10 +600,12 @@ msgstr "Rechtschreibungsüberprüfung abgeschlossen!"
 msgid "Session restored successfully."
 msgstr "Sitzung erfolgreich wiederhergestellt."
 
-#: libgtranslator/main.c:60
-msgid "gtranslatord has started successfully and will finish now...\n"
+#: libgtranslator/main.c:64
+msgid ""
+"gtranslatord has started successfully and will do some operations now ...\n"
 msgstr ""
-"gtranslatord wirde erfolgreich gestartet und wird nun fertigstellen...\n"
+"gtranslatord wurde erfolgreich gestartet und wird nun einige Aktionen "
+"durchführen...\n"
 
 #: libgtranslator/parse-db.c:33
 msgid "No language defined in the query request!"
@@ -617,8 +623,7 @@ msgstr "FYI: Auch in der übergeordneten Datenbank wird nachgesehen.\n"
 #, c-format
 msgid "Couldn't open language base file `%s.xml' in %s.\n"
 msgstr ""
-"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent "
-"werden.\n"
+"Die sprachbasierenden Dateien '%s.xml' in %s konnten nicht geöffnent werden.\n"
 
 #. *
 #. * Print some information.
@@ -676,53 +681,53 @@ msgstr "Teamdatei 'teams.xm' in %s kann nicht geöffnet werden!"
 msgid "Couldn't return the list of the apps."
 msgstr "Die Liste der Anwendungen konnte nicht zurückgegeben werden."
 
-#: libgtranslator/preferences.c:49
+#: libgtranslator/preferences.c:50
 #, c-format
-msgid "Error during Gconf initialization: `%s'!"
+msgid "Error during GConf initialization: `%s'!"
 msgstr "Fehler während der GConf-Initialisierung: `%s'!"
 
-#: libgtranslator/preferences.c:76
+#: libgtranslator/preferences.c:77
 msgid "No path defined where I could get the string from."
 msgstr "Kein Pfad definiert, von dem der String erhalten werden kann"
 
-#: libgtranslator/preferences.c:97
+#: libgtranslator/preferences.c:98
 #, c-format
 msgid "Can't set the string `%s' for a non-defined path!\n"
 msgstr ""
 "Der String '%s' kann nicht für einen nicht definierten Pfad gesetzt werden!\n"
 
-#: libgtranslator/preferences.c:103
+#: libgtranslator/preferences.c:104
 #, c-format
 msgid "No string defined for the path `%s'!"
 msgstr "Kein String für den Pfad '%s' definiert!"
 
-#: libgtranslator/preferences.c:126
+#: libgtranslator/preferences.c:127
 msgid "No path defined where I could get the integer from!"
 msgstr "Kein Pfad definiert, von den der Integerwert erhalten werden kann!"
 
-#: libgtranslator/preferences.c:127
+#: libgtranslator/preferences.c:128
 msgid "Returning `1' for assurance .."
 msgstr "Um sicher zu gehen, wird `1' zurückgegeben..."
 
-#: libgtranslator/preferences.c:145
+#: libgtranslator/preferences.c:146
 #, c-format
 msgid "Can't set the value `%i' for a non-defined path!"
 msgstr "Der Wert '%i' kann nicht für einen undefinierten Pfad gesetzt werden!"
 
-#: libgtranslator/preferences.c:151
+#: libgtranslator/preferences.c:152
 #, c-format
 msgid "No value defined for the path `%s'!"
 msgstr "Keine Werte definiert für Pfad '%s'!"
 
-#: libgtranslator/preferences.c:172
+#: libgtranslator/preferences.c:173
 msgid "No path defined where I could get the boolean from."
 msgstr "Kein Pfad definiert, von dem der Boolean-Wert erhalten werden kann"
 
-#: libgtranslator/preferences.c:173
+#: libgtranslator/preferences.c:174
 msgid "Returning `FALSE' for assurance ..."
 msgstr "Um sicher zu gehen, wird 'FALSCH' zurückgegeben..."
 
-#: libgtranslator/preferences.c:188
+#: libgtranslator/preferences.c:189
 msgid "Can't set a boolean value for a non-defined path!"
 msgstr "Boolean-Wert für einen undefinierten Pfad kann nicht gesetzt werden!"
 
@@ -889,3 +894,4 @@ msgstr "wallonisch"
 #: src/languages.h:180
 msgid "Welsh"
 msgstr "walisisch"
+
