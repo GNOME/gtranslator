@@ -36,7 +36,7 @@ gtranslator_SOURCES = \
 	htmlizer.c htmlizer.h \
 	languages.h \
 	main.c \
-	menus.h menus_main.h menus_message_status.h menus_msic.h \
+	menus.c menus.h \
 	message.c message.h \
 	messages.h \
 	nautilus-string.c nautilus-string.h \

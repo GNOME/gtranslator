@@ -83,10 +83,6 @@ gboolean gtranslator_open_po_file(gchar *file)
 		}
 	}
 
-	/*
-	 * Use the nautilus-string.h functions to detect the right extensions
-	 *  case independently for calling the right function in time.
-	 */
 	if(nautilus_istr_has_suffix(file, ".mo") || 
 		nautilus_istr_has_suffix(file, ".gmo"))
 	{

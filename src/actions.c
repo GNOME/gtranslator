@@ -21,7 +21,7 @@
 #include "actions.h"
 #include "gui.h"
 #include "menus.h"
-#include "menus_message_status.h"
+#include "message.h"
 #include "prefs.h"
 
 #include <gtk/gtk.h>

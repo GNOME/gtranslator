@@ -37,6 +37,9 @@
  */
 void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname);
 
+/* Show error messagebox to the user */
+GtkWidget * gtranslator_error(char *format, ...);
+
 /*
  * The file open/save (as) file dialogs.
  */

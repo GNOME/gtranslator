@@ -86,7 +86,7 @@ void gtranslator_session_restore(GnomeClient * client)
 	gtranslator_config_close();
 
 	gtranslator_message_go_to_no(NULL, GUINT_TO_POINTER(num));
-	g_snprintf(status, sizeof(status), _("Session restored successfully."));
-	gnome_appbar_set_status(GNOME_APPBAR(gtranslator_application_bar), status);
+	gnome_appbar_set_status(GNOME_APPBAR(gtranslator_application_bar),
+			_("Session restored successfully."));
 }
 

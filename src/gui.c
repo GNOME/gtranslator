@@ -32,19 +32,22 @@
 #include "gui.h"
 #include "header_stuff.h"
 #include "history.h"
-#include "menus_misc.h"
-#include "menus_main.h"
+#include "menus.h"
+#include "message.h"
 #include "parse.h"
 #include "prefs.h"
 #include "sidebar.h"
 #include "stylistics.h"
 #include "syntax.h"
+#include "utils.h"
 #include "views.h"
 
+#include <gdk/gdkkeysyms.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkcheckmenuitem.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtkvbox.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 #include <libgnomeui/gnome-popup-menu.h>

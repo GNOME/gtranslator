@@ -1,3 +1,24 @@
+2001-04-19  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* dialogs.* (gtranslator_error): new function. Use it everywhere.
+	
+	* gui.h (status): removed this global variable.
+
+	* parse.c (add_to_obsolete): new function.
+	(gtranslator_parse_core): don't check for file perms. open read-only.
+	Use add_to_obsolete() to add one obsolete entry when appriopriate. So
+	obsolete messages can be mixed with normal ones.
+	
+	Use nautilus-string functions to make code a bit cleaner, update to
+	error and status changes above.
+
+	* menus*: move everything into menus.c, leave only menus.h which
+	contains only extern declarations. header files should not have any
+	variables, because this can cause problems.
+
+	* Makefile.am, actions.c. gui.c, message.c, session.c:
+	update to above changes.
+
 2001-04-14  Fatih Demir <kabalak@gtranslator.org>
 
 	* header_stuff.c: Fixed a crash cause in case of fallible header

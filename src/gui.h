@@ -36,11 +36,6 @@ GtkWidget *text_box;
 GtkWidget *gtranslator_application_bar;
 
 /*
- * For the status messages
- */
-gchar status[128];
-
-/*
  * Creates the main window ans sets up the environment.
  */
 void gtranslator_create_main_window(void);

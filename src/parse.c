@@ -27,6 +27,7 @@
 
 #include "actions.h"
 #include "dialogs.h"
+#include "nautilus-string.h"
 #include "gtkspell.h"
 #include "gui.h"
 #include "history.h"
@@ -49,6 +50,7 @@
  * These are to be used only inside this file
  */
 static void append_line(gchar ** old, const gchar * tail);
+static gboolean add_to_obsolete(gchar *comment);
 static void write_the_message(gpointer data, gpointer fs);
 static gboolean actual_write(const gchar * name);
 static gchar *restore_msg(const gchar * given);
@@ -104,6 +106,29 @@ static void append_line(gchar ** old, const gchar * tail)
 	*old = result;
 }
 
+gboolean add_to_obsolete(gchar *comment)
+{
+	if(comment && strstr(comment, "#~ msgid"))
+	{
+		if(wants.keep_obsolete) {
+			if(po->obsolete == NULL)
+			{
+				po->obsolete=g_strdup(comment);
+			}
+			else
+			{
+				gchar *tmp;
+				tmp=g_strconcat(po->obsolete, "\n", 
+						comment, NULL);
+				g_free(po->obsolete);
+				po->obsolete=tmp;
+			}
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
+
 gboolean gtranslator_parse_core(void)
 {
 	FILE *fs;
@@ -115,19 +140,8 @@ gboolean gtranslator_parse_core(void)
 	 */
 	gboolean msgid_ok = FALSE, msgstr_ok = FALSE, comment_ok = FALSE;
 	GtrMsg *msg;
-	gchar *error = NULL;
 
-	/*
-	 * The write permissions aren't always guaranteed.
-	 */ 
-	if(po->no_write_perms==FALSE)
-	{
-		fs = fopen(po->filename, "r+");
-	}
-	else
-	{
-		fs = fopen(po->filename, "r");
-	}
+	fs = fopen(po->filename, "r");
 	
 	/*
 	 * As the po-file seems to exist, set the "count parameters" to 0.
@@ -160,52 +174,43 @@ gboolean gtranslator_parse_core(void)
 				msg->comment = tmp;
 			}
 		}
-		else if(msg->comment && 
-			strstr(msg->comment, "#~ msgstr") && g_strstrip(line))
-		{
-			/*
-			 * Catch up the extralong obsolete messages and make
-			 *  them stored in the right human-readable format
-			 *   and not without any newlines.
-			 */
-			gchar *zup;
-
-			zup=g_strconcat(msg->comment, "\n", NULL);
-			g_free(msg->comment);
-			msg->comment=zup;
-		}
 		else {
-			/*
-			 * Get rid of end-of-lines...
-			 */
 			g_strchomp(line);
-			if (strlen(line) == 0) {
+
+			if (line[0] == '\0') {
 				if(msgid_ok==TRUE)
 				{
 					msgstr_ok = TRUE;
+				}
+				else
+				{
+					if(add_to_obsolete(msg->comment)) {
+						g_free(msg->comment);
+						msg->comment=NULL;
+					}
 				}
 			} else
 			/*
 			 * If it's a msgid
 			 */
-			if (!g_strncasecmp(line, "msgid \"", 7)) {
+			if (nautilus_str_has_prefix(line, "msgid \"")) {
 				/*
 				 * This means the comment is completed
 				 */
 				comment_ok = TRUE;
-				if (strlen(line) - 8 > 0)
+				if (line[8] != '\0')
 					append_line(&msg->msgid, &line[6]);
 			} 
 			/*
 			 * If it's a msgstr. 
 			 */
-			else if (!g_strncasecmp(line, "msgstr \"", 8))
+			else if (nautilus_str_has_prefix(line, "msgstr \""))
 			{
 				/*
 				 * This means the msgid is completed
 				 */
 				msgid_ok = TRUE;
-				if (strlen(line) - 9 > 0)
+				if (line[9] != '\0')
 					append_line(&msg->msgstr, &line[7]);
 			}
 			else
@@ -225,13 +230,10 @@ gboolean gtranslator_parse_core(void)
 				}
 				else
 				{
-					goto ERRR;
+					g_assert_not_reached();
 				}
 			} else {
-				ERRR:
-				error = g_strdup_printf(_("Error in file \"%s\"\nat line %d.\nPlease check the file and try again."), po->filename, lines);
-				gnome_app_error(GNOME_APP(gtranslator_application), error);
-				g_free(error);
+				gtranslator_error(_("Error in file \"%s\"\nat line %d.\nPlease check the file and try again."), po->filename, lines);
 				g_free(msg);
 				return FALSE;
 			}
@@ -251,37 +253,23 @@ gboolean gtranslator_parse_core(void)
 		}
 	}
 	/*
-	 * If there was no newline at end of file
+	 * If there was no empty line at end of file
 	 */
 	if ((msgid_ok == TRUE) && (msgstr_ok == FALSE))
 	{
 		check_msg_status(msg);
 		po->messages = g_list_prepend(po->messages, (gpointer) msg);
 	}
-	else if((msgid_ok==FALSE) &&
-		  (msgstr_ok==FALSE) &&
-		  msg->comment)
+	else if(add_to_obsolete(msg->comment))
 	{
-		/*
-		 * Store the obsolete entries if wished.
-		 */
-		if(wants.keep_obsolete)
-		{
-			po->obsolete=g_strdup(msg->comment);
-		}
-		  
-		/*
-		 * Not needed allocated structure
-		 */
+		g_free(msg->comment);
 		g_free(msg);
 	}
+
 	fclose(fs);
 
 	if (po->messages == NULL) {
-		error = g_strdup_printf(_("The file is empty:\n%s"), 
-			   po->filename);
-		gnome_app_error(GNOME_APP(gtranslator_application), error);
-		g_free(error);
+		gtranslator_error(_("The file is empty:\n%s"), po->filename);
 		return FALSE;
 	}
 	
@@ -297,20 +285,15 @@ gboolean gtranslator_parse_core(void)
  */
 void gtranslator_parse_main(const gchar *filename)
 {
+	gchar *title;
+
 	/*
 	 * Test if such a file does exist.
 	 */
 	if(!g_file_exists(filename))
 	{
-		gchar *error;
-		error=g_strdup_printf(
-			_("The file `%s' doesn't exist at all!"),
+		gtranslator_error(_("The file `%s' doesn't exist at all!"),
 			filename);
-		
-		gnome_app_error(GNOME_APP(gtranslator_application), error);
-		
-		g_free(error);
-
 		return;
 	}
 
@@ -382,9 +365,9 @@ void gtranslator_parse_main(const gchar *filename)
 		gtranslator_history_add(po->filename,
 			po->header->prj_name, po->header->prj_version);
 	
-		g_snprintf(status, sizeof(status),
-			   _("gtranslator -- %s"), po->filename);
-		gtk_window_set_title(GTK_WINDOW(gtranslator_application), status);
+		title=g_strdup_printf(_("gtranslator -- %s"), po->filename);
+		gtk_window_set_title(GTK_WINDOW(gtranslator_application), title);
+		g_free(title);
 	}
 
 	/*
@@ -513,14 +496,13 @@ static gboolean actual_write(const gchar * name)
 {
 	GtrMsg *header;
 	FILE *fs;
-	regex_t *rx;
 	gchar *tempo;
 
-	rx = gnome_regex_cache_compile(rxc, ".pot$", 0);
-	if (!regexec(rx, name, 0, NULL, 0)) {
+	if (nautilus_str_has_suffix(name, ".pot")) {
 		gchar *warn;
 		warn = g_strdup_printf(_("You are trying to save file with *.pot extension.\nHowever, such files are generated by program.\nYour file should be named with *.po extension, most likely %s.po"), lc);
 		gnome_app_warning(GNOME_APP(gtranslator_application), warn);
+		g_free(warn);
 		return FALSE;
 	}
 	/*
@@ -530,6 +512,7 @@ static gboolean actual_write(const gchar * name)
 	tempo=g_strdup_printf("%s/%s", g_get_home_dir(),
 			      "gtranslator-temp-po-file");
 
+	/* FIXME: pop up save as... dialog here */
 	if(!strcmp(name, tempo))
 	{
 		/*
@@ -558,16 +541,11 @@ static gboolean actual_write(const gchar * name)
 
 	fs = fopen(name, "w");
 
-	/*
-	 * Again check if the file exists.
-	 */
-	if(!g_file_exists(name))
+	if(fs == NULL)
 	{
-		gchar *my_error=g_strdup_printf(
-			_("The file `%s' doesn't exist at all!"), name);
-		gnome_app_error(GNOME_APP(gtranslator_application), my_error);
+		gtranslator_error(_("Could not open file `%s' for writing!"),
+				  name);
 		
-		g_free(my_error);
 		return FALSE;
 	}
 
@@ -588,7 +566,7 @@ static gboolean actual_write(const gchar * name)
 	 */
 	if(wants.keep_obsolete && po->obsolete)
 	{
-		fprintf(fs, "%s", po->obsolete);
+		fprintf(fs, po->obsolete);
 	}
 	
 	fclose(fs);
@@ -747,7 +725,8 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
  */
 void compile(GtkWidget * widget, gpointer useless)
 {
-	gchar *cmd;
+	gchar *cmd, *status;
+	gchar line[128];
 	gint res = 1;
 	FILE *fs;
 
@@ -756,18 +735,18 @@ void compile(GtkWidget * widget, gpointer useless)
 	 */
 	if(!gnome_is_program_in_path("msgfmt"))
 	{
-		gnome_app_error(GNOME_APP(gtranslator_application), 
-			_("Sorry, msgfmt isn't available on your system!"));
+		gtranslator_error(_("Sorry, msgfmt isn't available on your system!"));
 		return;
 	}
 			
 	if (!file_opened) 
 		return;
 	
-#define RESULT "gtr_result.tmp"
-	actual_write(po->filename);
+	if (!actual_write(po->filename))
+		return;
 	gtranslator_actions_disable(ACT_SAVE);
 
+#define RESULT "gtr_result.tmp"
 	cmd = g_strdup_printf("msgfmt -v -c -o /dev/null %s >%s 2>&1",
 			    po->filename, RESULT);
 	res = system(cmd);
@@ -778,12 +757,11 @@ void compile(GtkWidget * widget, gpointer useless)
 	if (res != 0) {
 		gtranslator_compile_error_dialog(fs);
 	} else {
-		gchar line[128];
-		fgets(line, 128, fs);
+		fgets(line, sizeof(line), fs);
 		g_strchomp(line);
-		g_snprintf(status, sizeof(status),
-		    _("Compile successful:\n%s"), line);
+		status=g_strdup_printf(_("Compile successful:\n%s"), line);
 		gnome_app_message(GNOME_APP(gtranslator_application), status);
+		g_free(status);
 	}
 	fclose(fs);
 	remove(RESULT);
@@ -799,20 +777,19 @@ gboolean gtranslator_check_file_perms(GtrPo *po_file)
 	FILE *file;
 	gchar *error_message;
 
+	g_return_val_if_fail(po_file != NULL, FALSE);
 	/*
 	 * Open the file first for reading.
 	 */
 	file=fopen(po_file->filename, "r");
-	if(po_file && !file)
+	if(file == NULL)
 	{
 		/*
 		 * Create an error box and prevent further reading
 		 *  of the file.
 		 */  
-		error_message=g_strdup_printf(
-			_("You don't have read permissions on file `%s'"),
+		gtranslator_error(_("You don't have read permissions on file `%s'"),
 			po_file->filename);
-		gnome_app_error(GNOME_APP(gtranslator_application), error_message);
 
 		return FALSE;
 	}
@@ -822,11 +799,12 @@ gboolean gtranslator_check_file_perms(GtrPo *po_file)
 		 * Open the same file also for a write-permission check.
 		 */ 
 		file=fopen(po_file->filename, "r+");
-		if(po_file && !file)
+		if(file == NULL)
 		{
 			/*
 			 * Show a warning box to the user and warn him about
 			 *  the fact of lacking write permissions.
+			 *  FIXME: do this ONLY on file save
 			 */  
 			error_message=g_strdup_printf(
 				_("You don't have write permissions on file `%s'.\n\
