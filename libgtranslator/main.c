@@ -73,8 +73,7 @@ int main(int argc,char *argv[])
 	**/
 	CORBA_exception_init(&env);
 	/**
-	* Hm, bind to gettext ... but somehow this results
-	*  in an error "statement with no effect"...
+	* Hm, bind to gettext...
 	**/
 	/*bindtextdomain("gtranslator", GNOMELOCALEDIR);
 	textdomain("gtranslator");*/

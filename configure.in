@@ -138,13 +138,6 @@ else
 fi
 
 dnl -------------------------------------------------------------------
-dnl Test for libglade and determine the INTERFACE_DIR define.
-dnl -------------------------------------------------------------------
-AM_PATH_LIBGLADE(,,gnome)
-INTERFACE_DIR="${datadir}/gtranslator/ui"
-AC_SUBST(INTERFACE_DIR)
-
-dnl -------------------------------------------------------------------
 dnl Check for GnomeVFS via this crappy check and get the libs and 
 dnl  compile flags for it or disable GTR_VFS_HANDLE.
 dnl -------------------------------------------------------------------
