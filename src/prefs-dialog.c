@@ -73,14 +73,21 @@ static void select_row_function(GtkCList	*list,
 		table=(GtkWidget *) g_list_nth_data(GTR_PREFS_DIALOG(dialog)->widgets, row);
 		g_return_if_fail(table!=NULL);
 
+		if(GTR_PREFS_DIALOG(dialog)->content)
+		{
+			gtk_widget_hide(GTR_PREFS_DIALOG(dialog)->content);
+		}
+
+		GTR_PREFS_DIALOG(dialog)->content=table;
+
 		/*
 		 * And as we're already so bad we do simply pack the new widget
 		 *  table into the pane -- what happened to the old one? Uhm.
 		 */
 		e_paned_pack2(E_PANED(GTR_PREFS_DIALOG(dialog)->pane),
-			table, TRUE, FALSE);
+			GTR_PREFS_DIALOG(dialog)->content, TRUE, FALSE);
 
-		gtk_widget_show_all(table);
+		gtk_widget_show_all(GTR_PREFS_DIALOG(dialog)->content);
 	}
 }
 
@@ -129,7 +136,7 @@ static void clicked_function(GnomeDialog *dialog, gint button,
 GtrPrefsDialog *gtranslator_prefs_dialog_new(GVoidFunc read_all_options_func)
 {
 	GtrPrefsDialog 	*dialog;
-	gchar		*titles[] = { _("Sections") };
+	gchar		*titles[] = { _("Preferences section") };
 	
 	dialog=g_new0(GtrPrefsDialog, 1);
 
@@ -148,6 +155,7 @@ GtrPrefsDialog *gtranslator_prefs_dialog_new(GVoidFunc read_all_options_func)
 	
 	dialog->sections=NULL;
 	dialog->widgets=NULL;
+	dialog->content=NULL;
 
 	/*
 	 * We do add the pane to the main dialog and pack the clist already to
@@ -211,10 +219,12 @@ void gtranslator_prefs_dialog_append_page(GtrPrefsDialog *dialog,
 
 	if(dialog->shown && g_list_length(dialog->sections) >= 1)
 	{
+		dialog->content=table;
+		
 		e_paned_pack2(E_PANED(GTR_PREFS_DIALOG(dialog)->pane),
-			table, TRUE, FALSE);
+			GTR_PREFS_DIALOG(dialog)->content, TRUE, FALSE);
 
-		gtk_widget_show_all(table);
+		gtk_widget_show_all(GTR_PREFS_DIALOG(dialog)->content);
 	}
 }
 

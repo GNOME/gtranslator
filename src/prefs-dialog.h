@@ -41,6 +41,8 @@ typedef struct
 	
 	gint		 changes;
 
+	gpointer	 content;
+
 	GVoidFunc	 read_all_options_function;
 } GtrPrefsDialog;
 
