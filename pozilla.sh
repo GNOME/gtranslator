@@ -11,7 +11,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=1.0.1
+export POZILLA_RELEASE=1.1
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -276,6 +276,7 @@ echo "This is a mail send by Pozilla R $POZILLA_RELEASE." >> $BODY_FILE
 echo "For questions concerning Pozilla or your translator's faith" >> $BODY_FILE
 echo "- the po-files - send a mail to Fatih Demir <kabalak@gtranslator.org>" >> $BODY_FILE
 echo "Thanks." >> $BODY_FILE
+
 #
 # Send the mail to the address(es).
 #
@@ -284,6 +285,11 @@ if test "my$ADDITIONAL_MAILING_ADDRESS" = "my" ; then
 else
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST" -c "$ADDITIONAL_MAILING_ADDRESS"
 fi
+
+#
+# Clean up the rest of the mailfiles.
+#
+[ -f $BODY_FILE ] && rm -f $BODY_FILE
 
 #
 # Exit with 0. We're all happy :-0
