@@ -25,9 +25,6 @@
 #include "preferences.h"
 #include "utils.h"
 
-#include <libgnomeui/libgnomeui.h>
-#include <libgnome/gnome-util.h>
-
 /*
  * For the moment 10 bookmarks should be the upper limit.
  */
@@ -51,7 +48,7 @@ GtrBookmark *gtranslator_bookmark_new()
 	g_return_val_if_fail(po->filename!=NULL, NULL);
 
 	bookmark->file=g_strdup(po->filename);
-	GTR_STRDUP(bookmark->version, GTR_HEADER(po->header)->prj_version);
+	bookmark->version=g_strdup(po->header->prj_version);
 	
 	bookmark->position=g_list_position(po->messages, po->current);
 
@@ -99,12 +96,12 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 		filename=nautilus_str_get_prefix(tempzulu,
 			":kramkoob_rotalsnartg");
 		
-		GTR_FREE(tempzulu);
+		g_free(tempzulu);
 		g_return_val_if_fail(filename!=NULL, NULL);
 	}
 	
 	bookmark->file=g_strdup(filename);
-	GTR_FREE(filename);
+	g_free(filename);
 	
 	/*
 	 * Operate on the resting parts of the string-encoded bookmark and
@@ -112,9 +109,9 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 	 */
 	encoding_area=nautilus_str_get_after_prefix(string, "#");
 	values=g_strsplit(encoding_area, "/", 2);
-	GTR_FREE(encoding_area);
+	g_free(encoding_area);
 
-	GTR_STRDUP(bookmark->version, values[0]);
+	bookmark->version = g_strdup(values[0]);
 	
 	/*
 	 * Always be quite safe about the GtrBookmark values assigned here.
@@ -122,7 +119,7 @@ GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
 	if(values[1])
 	{
 		nautilus_str_to_int(values[1], 
-			&(GTR_BOOKMARK(bookmark)->position));
+			&(bookmark->position));
 	}
 	else
 	{
@@ -160,7 +157,7 @@ gchar *gtranslator_bookmark_new_bookmark_string()
 
 	g_return_val_if_fail(bookmark!=NULL, NULL);
 	
-	bookmark_string=gtranslator_bookmark_string_from_bookmark(GTR_BOOKMARK(bookmark));
+	bookmark_string=gtranslator_bookmark_string_from_bookmark(bookmark);
 	
 	gtranslator_bookmark_free(bookmark);
 	
@@ -172,21 +169,21 @@ gchar *gtranslator_bookmark_new_bookmark_string()
  */
 void gtranslator_bookmark_open(GtrBookmark *bookmark)
 {
-	g_return_if_fail(GTR_BOOKMARK(bookmark)!=NULL);
+	g_return_if_fail(bookmark!=NULL);
 
 	/*
 	 * Open the po file.
 	 */
-	gtranslator_open_file(GTR_BOOKMARK(bookmark)->file);
+	gtranslator_open_file(bookmark->file);
 
 	/*
 	 * Only re-setup the bookmark if the po file could be opened.
 	 */
-	if(GTR_PO(po) && GTR_BOOKMARK(bookmark)->position!=-1 &&
-		GTR_PO(po)->length >= GTR_BOOKMARK(bookmark)->position)
+	if(po && bookmark->position!=-1 &&
+	   po->length >= bookmark->position)
 	{
 		gtranslator_message_go_to_no(NULL, 
-			GINT_TO_POINTER(GTR_BOOKMARK(bookmark)->position));
+			GINT_TO_POINTER(bookmark->position));
 	}
 }
 
@@ -203,7 +200,7 @@ gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark)
 	/*
 	 * First check if there's a file with that name.
 	 */
-	if(!g_file_exists(GTR_BOOKMARK(bookmark)->file)) 
+	if(!g_file_test(bookmark->file, G_FILE_TEST_EXISTS))
 	{
 		return FALSE;
 	}
@@ -220,7 +217,7 @@ gboolean gtranslator_bookmark_resolvable(GtrBookmark *bookmark)
 					potcom++; \
 				}
 				
-		gtranslator_parse_main(GTR_BOOKMARK(bookmark)->file);
+		gtranslator_parse_main(bookmark->file);
 
 		/*
 		 * Check the header parts for equality.
@@ -320,9 +317,9 @@ gboolean gtranslator_bookmark_equal(GtrBookmark *one, GtrBookmark *two)
 gboolean gtranslator_bookmark_string_equal(GtrBookmark *bookmark, const gchar *string)
 {
 	GtrBookmark *new=gtranslator_bookmark_new_from_string(string);
-	return (gtranslator_bookmark_equal(bookmark, new));
-
+	gboolean equal=gtranslator_bookmark_equal(bookmark, new);
 	gtranslator_bookmark_free(new);
+	return equal;
 }
 
 /*
@@ -331,16 +328,15 @@ gboolean gtranslator_bookmark_string_equal(GtrBookmark *bookmark, const gchar *s
  */
 void gtranslator_bookmark_add(GtrBookmark *bookmark)
 {
-	g_return_if_fail(GTR_BOOKMARK(bookmark)!=NULL);
+	g_return_if_fail(bookmark!=NULL);
 
 	/*
 	 * Add the given GtrBookmark to the list but only is our search function
 	 *  does show up that it isn't in the list yet.
 	 */
-	if(!gtranslator_bookmark_search(GTR_BOOKMARK(bookmark)))
+	if(!gtranslator_bookmark_search(bookmark))
 	{
-		gtranslator_bookmarks=g_list_prepend(gtranslator_bookmarks, gtranslator_bookmark_copy(bookmark));
-		gtranslator_bookmarks=g_list_reverse(gtranslator_bookmarks);
+		gtranslator_bookmarks=g_list_append(gtranslator_bookmarks, gtranslator_bookmark_copy(bookmark));
 	}
 }
 
@@ -350,7 +346,7 @@ void gtranslator_bookmark_add(GtrBookmark *bookmark)
  */
 gboolean gtranslator_bookmark_remove(GtrBookmark *bookmark)
 {
-	g_return_val_if_fail(GTR_BOOKMARK(bookmark)!=NULL, FALSE);
+	g_return_val_if_fail(bookmark!=NULL, FALSE);
 
 	if(gtranslator_bookmark_search(bookmark))
 	{
@@ -381,12 +377,6 @@ gboolean gtranslator_bookmark_remove(GtrBookmark *bookmark)
 				GTR_ITER(zuper);
 			}
 		}
-
-		return FALSE;
-	}
-	else
-	{
-		return FALSE;
 	}
 
 	return FALSE;
@@ -399,7 +389,7 @@ gboolean gtranslator_bookmark_search(GtrBookmark *bookmark)
 {
 	GList 	*checklist=NULL;
 	
-	g_return_val_if_fail(GTR_BOOKMARK(bookmark)!=NULL, FALSE);
+	g_return_val_if_fail(bookmark!=NULL, FALSE);
 
 	/*
 	 * If there's no IDs list yet, return FALSE.
@@ -458,7 +448,7 @@ void gtranslator_bookmark_load_list()
 
 		path=g_strdup_printf("bookmark%d/bookmark_string", c);
 		content=gtranslator_config_get_string(path);
-		GTR_FREE(path);
+		g_free(path);
 		
 		g_return_if_fail(content!=NULL);
 		bookmark=gtranslator_bookmark_new_from_string(content);
@@ -499,7 +489,7 @@ void gtranslator_bookmark_save_list()
 			plain_string=gtranslator_bookmark_string_from_bookmark(bookmark);
 			
 			gtranslator_config_set_string(path, plain_string);
-			GTR_FREE(path);
+			g_free(path);
 			
 			c++;
 
@@ -537,16 +527,11 @@ GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *bookmark)
 {
 	GtrBookmark 	*copy=g_new0(GtrBookmark, 1);
 	
-	g_return_val_if_fail(GTR_BOOKMARK(bookmark)!=NULL, NULL);
+	g_return_val_if_fail(bookmark!=NULL, NULL);
 
-	copy->file=g_strdup(GTR_BOOKMARK(bookmark)->file);
-	
-	/*
-	 * Copy the string parts safely or set'em to NULL where needed.
-	 */
-	GTR_STRDUP(copy->version, GTR_BOOKMARK(bookmark)->version);
-	
-	copy->position=GTR_BOOKMARK(bookmark)->position;
+	copy->file=g_strdup(bookmark->file);
+	copy->version = g_strdup(bookmark->version);
+	copy->position=bookmark->position;
 
 	return copy;
 }
@@ -556,10 +541,10 @@ GtrBookmark *gtranslator_bookmark_copy(GtrBookmark *bookmark)
  */
 void gtranslator_bookmark_free(GtrBookmark *bookmark)
 {
-	if(GTR_BOOKMARK(bookmark))
+	if(bookmark)
 	{
-		GTR_FREE(GTR_BOOKMARK(bookmark)->file);
-		GTR_FREE(GTR_BOOKMARK(bookmark)->version);
-		GTR_FREE(bookmark);
+		g_free(bookmark->file);
+		g_free(bookmark->version);
+		g_free(bookmark);
 	}
 }

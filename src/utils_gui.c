@@ -26,7 +26,6 @@
 #include "utils_gui.h"
 
 #include <libgnome/gnome-url.h>
-#include <libgnome/gnome-util.h>
 
 #include <libgnomeui/libgnomeui.h>
 
@@ -52,9 +51,7 @@ GtkWidget * gtranslator_utils_error_dialog(gchar *format, ...)
  */
 void gtranslator_utils_show_home_page(GtkWidget *widget, gpointer useless)
 {
-  GError **error = NULL;
-	gnome_url_show("http://www.gtranslator.org", error);
-	// XXX cache the error
+	gnome_url_show("http://www.gtranslator.org", NULL);
 }
 
 /*
@@ -469,7 +466,7 @@ gboolean gtranslator_utils_check_program(const gchar *program_name,
 {
 	g_return_val_if_fail(program_name!=NULL, FALSE);
 	
-	if(!gnome_is_program_in_path(program_name))
+	if(!g_find_program_in_path(program_name))
 	{
 		gchar *warning_message;
 

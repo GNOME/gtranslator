@@ -261,7 +261,7 @@ GtrTranslator *gtranslator_translator_new_with_default_values()
 				new_translator->language->encoding=g_strdup(languages[i].encoding);
 				new_translator->language->bits=g_strdup(languages[i].bits);
 				
-				GTR_STRDUP(new_translator->language->group_email, languages[i].group_email);
+				new_translator->language->group_email=g_strdup(languages[i].group_email);
 				
 				break;
 			}
@@ -399,7 +399,7 @@ void gtranslator_translator_set_language(GtrTranslator *translator,
 			}
 			else
 			{
-				GTR_STRDUP(translator->language->group_email, languages[z].group_email);
+				translator->language->group_email=g_strdup(languages[z].group_email);
 			}
 				break;
 		}

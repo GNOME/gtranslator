@@ -24,22 +24,13 @@
 #endif
 
 #include "about.h"
-#include "color-schemes.h"
-#include "dialogs.h"
 
 #include <string.h>
 
-#include <gtk/gtkbox.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtktable.h>
-
-#include <libgnomeui/libgnomeui.h>
-//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-program.h>
 
 #include <libgnomeui/gnome-about.h>
-#include <libgnomeui/gnome-href.h>
-
 
 /*
  * Creates and shows the about box for gtranslator.
@@ -47,102 +38,56 @@
 void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *about = NULL;
-	
-	GtkWidget *info_table;
-	GtkWidget *scheme, *author;
-	
-	gchar 	*umfo, *url;
-	gchar 	*bottom_line;
+	GdkPixbuf *pixbuf = NULL;
+	gchar *file;
 	
 	const gchar *authors[] = {
-		"Fatih Demir            <kabalak@gtranslator.org>",
-		"Gediminas Paulauskas   <menesis@gtranslator.org>",
-		"Thomas Ziehmer         <thomas@gtranslator.org>",
-		"Peeter Vois            <peeter@gtranslator.org>",
-		"",
-		_("Messages table:"),
-		"Kevin Vandersloot      <kfv101@psu.edu>",
-		"",
-		_("Documentation:"),
-		"Emese Kovacs           <emese@gnome.hu>",
+		"Fatih Demir <kabalak@gtranslator.org>",
+		"Gediminas Paulauskas <menesis@delfi.lt>",
+		"Thomas Ziehmer <thomas@gtranslator.org>",
+		"Peeter Vois <peeter@gtranslator.org>",
+		"Kevin Vandersloot <kfv101@psu.edu>",
 		NULL
-	};
-	
-	gtranslator_raise_dialog(about);
+	};	
+	static const char *documenters[] =
+	{
+		"Emese Kovacs <emese@gnome.hu>",
+		NULL
+	};	
+	/* Translator credits */
+	const char *translator_credits = _("translator_credits");
 
-
-	/* 
-	 * Translators should localize the following string
- 	 * which will be displayed at the bottom of the about
-	 * box to give credit to the translator(s).
-	 * Translate the "Translation:", add your name and an
-	 * email address. You can span several lines with a
-	 * newline character if needed, but it shouldn't be
-	 * too long; vertical space is limited in the about
-	 * dialog.
-	 *
-	 * If you dont translate it, nothing will be added.
-	 */
-	if (strcmp (_("Translation:"), "Translation:") == 0) {
-		bottom_line = g_strdup 
-			("gtranslator is a po file editing suite with many bells and whistles.");
-	} else {
-		bottom_line = g_strconcat (
-			_("gtranslator is a po file editing suite with many bells and whistles."),
-			"\n \n",
-			_("Translation:"), NULL);
+	if (about != NULL)
+	{
+		gtk_window_present(GTK_WINDOW(about));
+		return;
 	}
 
-	/*
-	 * Create the about box via gnome_about_new.
-	 */ 
+	pixbuf = NULL;
+	
+	file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP,
+	                                  "gtranslator.png", TRUE, NULL);
+	if (file) {
+		pixbuf = gdk_pixbuf_new_from_file (file, NULL);
+		g_free (file);
+	} else
+		g_warning (G_STRLOC ": gtranslator.png cannot be found");
+
 	about =
 	    gnome_about_new("gtranslator", VERSION,
 		_("(C) 1999-2002 The Free Software Foundation"),
-		bottom_line,
+		_("gtranslator is a po file editing suite with many bells and whistles."),
 		authors,
-		NULL,
-		"",
-		NULL);
+		documenters,
+		strcmp (translator_credits, "translator_credits") != 0 ? translator_credits : NULL,
+		pixbuf);
 
-	g_free(bottom_line);
+	if (pixbuf) {
+		g_object_unref (pixbuf);
+	}
 	
-	info_table=gtk_table_new(2, 1, TRUE);
+	g_signal_connect (G_OBJECT (about), "destroy",
+			  G_CALLBACK (gtk_widget_destroyed), &about);
 	
-	/*
-	 * This string is displayed in the about box as an information about
-	 *  the currently used colorscheme.
-	 */
-	umfo=g_strdup_printf(_("Current colorscheme: \"%s\" (version %s) is brought to you by:"), theme->info->name, theme->info->version);
-	scheme=gtk_label_new(umfo);
-
-	g_free(umfo);
-
-	/*
-	 * Show author name and bind in a GnomeHREF widget for contacting
-	 *  the scheme author directly (clicking on it will raise the GNOME
-	 *   EMail handler -- whatever it is in real life then...).
-	 */
-	umfo=g_strdup_printf("\"%s\" <%s>", theme->info->author,
-		theme->info->author_email);
-	url=g_strdup_printf("mailto:%s", theme->info->author_email);
-
-	author=gnome_href_new(url, umfo);
-
-	g_free(umfo);
-	g_free(url);
-
-	/*
-	 * Add all the new widgets to the about dialog.
-	 */
-	gtk_table_attach_defaults(GTK_TABLE(info_table), GTK_WIDGET(scheme),
-		0, 1, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(info_table), GTK_WIDGET(author),
-		0, 1, 1, 2);
-
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(about)->vbox), info_table,
-		TRUE, TRUE, 0);
-
-	gtk_widget_show_all(info_table);
-	gtranslator_dialog_show(&about, "gtranslator -- about");
+	gtk_widget_show (about);
 }

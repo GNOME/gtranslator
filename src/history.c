@@ -33,7 +33,6 @@
 
 #include <string.h>
 #include <gtk/gtkmenushell.h>
-#include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 
@@ -156,7 +155,7 @@ GList *gtranslator_history_get(void)
 		if(GtrPreferences.check_recent_file)
 		{
 			if(!myentry->filename &&
-				!g_file_exists(myentry->filename))
+				!g_file_test(myentry->filename, G_FILE_TEST_EXISTS))
 			{
 				GTR_FREE(subpath);
 				GTR_FREE(myentry->filename);

@@ -119,8 +119,7 @@ void gtranslator_actions_set_up_default()
 	insert_action(ACT_NEXT_FUZZY, the_messages_menu[7], the_navibar[6]);
 	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[8], the_navibar[5]);
 	/*-----------------------------------------------------------*/
-	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
-	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
+	insert_action(ACT_FUZZY, the_msg_status_menu[0], NONE);
 	/*-----------------------------------------------------------*/
 	insert_action(ACT_END, NONE, NONE);
 }
@@ -133,7 +132,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 			ACT_FIND, ACT_FIND_AGAIN, ACT_HEADER, ACT_QUERY,
 			ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 			ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
-			ACT_FUZZY, ACT_TRANSLATED, ACT_COMMENT, ACT_EXPORT_UTF8,
+			ACT_FUZZY, ACT_COMMENT, ACT_EXPORT_UTF8,
 			ACT_REMOVE_ALL_TRANSLATIONS, ACT_COPY_MSGID2MSGSTR);
 
 	//	gtk_text_set_editable(GTK_TEXT(trans_box), FALSE);
@@ -144,7 +143,7 @@ void gtranslator_actions_set_up_file_opened(void)
 	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
 		ACT_AUTOTRANSLATE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 		ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
-		ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_TRANSLATED,
+		ACT_QUERY, ACT_GOTO, ACT_FUZZY,
 		ACT_IMPORT_UTF8, ACT_COPY_MSGID2MSGSTR);
 
 	gtranslator_actions_disable(ACT_SAVE, ACT_UNDO);
@@ -201,14 +200,5 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 	}
 
 	gtranslator_actions_disable(ACT_UNDO);
-}
-
-/*
- * Disable the corresponding menu item.
- */
-void gtranslator_actions_disable_fuzzy_menu_item(void)
-{
-	gtk_check_menu_item_set_active((GtkCheckMenuItem *) 
-		acts[ACT_FUZZY].menu, FALSE);
 }
 

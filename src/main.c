@@ -51,8 +51,6 @@
 #include <gtk/gtkmain.h>
 
 #include <libgnome/gnome-program.h>
-#include <libgnome/gnome-util.h>
-//#include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-window-icon.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
@@ -124,6 +122,7 @@ int main(int argc, char *argv[])
 	 * Initialize gettext.
 	 */ 
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset(PACKAGE, "UTF-8");
 	textdomain(PACKAGE);
 
 	/*
@@ -179,8 +178,6 @@ int main(int argc, char *argv[])
 		NICE_PRINT(BUILD_STRING);
 		g_print(_("Build GLib/Gtk+/GNOME versions:"));
 		NICE_PRINT(BUILD_VERSIONS);
-		g_print(_("Backends directory:"));
-		NICE_PRINT(BACKENDS_DIR);
 		g_print(_("Colorschemes directory:"));
 		NICE_PRINT(SCHEMESDIR);
 		g_print(_("Scripts directory:"));
@@ -275,7 +272,7 @@ int main(int argc, char *argv[])
 	/*
 	 * Test if there's a crash recovery file lying around in ~/.gtranslator.
 	 */
-	if(g_file_exists(gtranslator_runtime_config->crash_filename))
+	if(g_file_test(gtranslator_runtime_config->crash_filename, G_FILE_TEST_EXISTS))
 	{
 		gtranslator_rescue_file_dialog();
 	}

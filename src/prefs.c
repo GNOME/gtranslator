@@ -36,9 +36,6 @@
 #include "utils.h"
 #include "utils_gui.h"
 
-#include <libgnome/gnome-util.h>
-#include <libgnomeui/libgnomeui.h>
-
 /*
  * The callbacks:
  */
@@ -99,6 +96,11 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	gchar	*old_colorscheme=NULL;
 	GtkObject *adjustment;
 	
+	if(prefs != NULL) {
+		gtk_window_present(GTK_WINDOW(prefs));
+		return;
+	}
+
 	/*
 	 * Create the preferences box... 
 	 */
@@ -378,10 +380,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	g_signal_connect(G_OBJECT(prefs), "close",
 			 G_CALLBACK(gtranslator_utils_language_lists_free), NULL);
 
-	gtk_window_set_wmclass(GTK_WINDOW(prefs), "gtranslator -- prefs",
-		"gtranslator");
-	gtk_window_set_position(GTK_WINDOW(prefs), GTK_WIN_POS_CENTER);
-	gtk_widget_show_all(prefs);
+	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
 }
 
 /*
@@ -554,13 +553,13 @@ static void gtranslator_preferences_dialog_apply(GtkWidget  * box, gint page_num
 		 *  ~/.gtranslator/colorschemes directory, try the global 
 		 *   colorschemes directory.
 		 */
-		if(!g_file_exists(GtrPreferences.scheme))
+		if(!g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
 		{
 			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", 
 				SCHEMESDIR, selected_scheme_file);
 		}
 	    
-		if(g_file_exists(GtrPreferences.scheme))
+		if(g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
 		{
 			/*
 			 * Free the old used colorscheme.

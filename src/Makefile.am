@@ -7,7 +7,7 @@ SUBDIRS = pixmaps
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"                \
+	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
         -DPREFIX=\""$(prefix)"\"                                \
         -DSYSCONFDIR=\""$(sysconfdir)"\"                        \
         -DDATADIR=\""$(datadir)"\"                              \
@@ -39,7 +39,6 @@ gtranslator_SOURCES = \
 	bookmark.c bookmark.h \
 	color-schemes.c color-schemes.h \
 	comment.c comment.h \
-	convert.c convert.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	e-xml-utils.c e-xml-utils.h \

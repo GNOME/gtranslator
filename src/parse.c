@@ -53,13 +53,10 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtklabel.h>
 
-#include <libgnome/gnome-util.h>
-
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app-util.h>
 #include <libgnomeui/gnome-dialog-util.h>
 #include <libgnomeui/gnome-messagebox.h>
-//#include <libgnomeui/gnome-stock.h>
 #include <libgnomeui/gnome-uidefs.h>
 
 //#include <gal/e-paned/e-paned.h>
@@ -456,7 +453,7 @@ void gtranslator_parse_main(const gchar *filename)
 	/*
 	 * Test if such a file does exist.
 	 */
-	if(!g_file_exists(filename))
+	if(!g_file_test(filename, G_FILE_TEST_EXISTS))
 	{
 		gtranslator_utils_error_dialog(
 			_("The file `%s' doesn't exist at all!"),
@@ -1148,7 +1145,7 @@ void compile(GtkWidget * widget, gpointer useless)
 	/*
 	 * Check if msgfmt is available on the system.
 	 */
-	if(!gnome_is_program_in_path("msgfmt"))
+	if(!g_find_program_in_path("msgfmt"))
 	{
 		gtranslator_utils_error_dialog(_("Sorry, msgfmt isn't available on your system!"));
 		return;

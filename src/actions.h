@@ -63,7 +63,6 @@ enum {
 	ACT_NEXT_FUZZY,
 	ACT_NEXT_UNTRANSLATED,
 	/***********************/
-	ACT_TRANSLATED,
 	ACT_FUZZY,
 	
 	/*
@@ -98,10 +97,5 @@ void gtranslator_actions_set_up_file_opened(void);
  * The GUI Undo/Redo callbacks/functions.
  */
 void gtranslator_actions_undo(GtkWidget *widget, gpointer useless);
-
-/*
- * A wrapper function for disabling the Fuzzy menu item.
- */
-void gtranslator_actions_disable_fuzzy_menu_item(void);
 
 #endif

@@ -35,9 +35,6 @@
 #include <unistd.h>
 
 #include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-util.h>
-
-#include <gal/util/e-util.h>
 
 /*
  * The used ref' count for the language lists.
@@ -277,7 +274,7 @@ void gtranslator_utils_remove_temp_files()
 	 * Check for any lungering 'round file rests of any temporary action
 	 *  and remove these rests if any had been found.
 	 */
-	if(g_file_exists(gtranslator_runtime_config->temp_filename))
+	if(g_file_test(gtranslator_runtime_config->temp_filename, G_FILE_TEST_EXISTS))
 	{
 		remove(gtranslator_runtime_config->temp_filename);
 	}
@@ -477,47 +474,6 @@ gchar *gtranslator_utils_get_environment_locale()
 		&localename);
 
 	return localename;
-}
-
-/*
- * Returns the "official" charset name for the currently active environment locale.
- */
-gchar *gtranslator_utils_get_environment_charset()
-{
-	gchar	*locale_name=NULL;
-	gchar	*locale_charset=NULL;
-
-	locale_name=gtranslator_utils_get_environment_locale();
-
-	if(!locale_name)
-	{
-		/*
-		 * Translators: this should be your default fall back encoding
-		 *  which will be used if gtranslator can't get the current env. locale's
-		 *   default sane encoding by itself.
-		 */
-		locale_charset=g_strdup(_("iso-8859-1"));
-	}
-	else if(!nautilus_strcasecmp(locale_name, "C") || !nautilus_strcasecmp(locale_name, "POSIX"))
-	{
-		locale_charset=g_strdup(_("iso-8859-1"));
-	}
-	else
-	{
-		gint c;
-
-		for(c=0; languages[c].name!=NULL; c++)
-		{
-			if(!nautilus_strcasecmp(languages[c].locale, locale_name))
-			{
-				locale_charset=g_strdup(languages[c].encoding);
-			}
-		}
-
-		GTR_FREE(locale_name);
-	}
-
-	return locale_charset;
 }
 
 /*

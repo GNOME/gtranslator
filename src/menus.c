@@ -231,15 +231,6 @@ GnomeUIInfo the_messages_menu[] = {
 
 GnomeUIInfo the_msg_status_menu[] = {
 	{
-		GNOME_APP_UI_TOGGLEITEM, N_("_Translated"),
-		N_("Toggle translated status of a message"),
-		gtranslator_message_change_status,
-		GINT_TO_POINTER(GTR_MSG_STATUS_TRANSLATED),
-		NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
-		GDK_1, GDK_MOD1_MASK, NULL
-	},
-	{
 		GNOME_APP_UI_TOGGLEITEM, N_("_Fuzzy"),
 		N_("Toggle fuzzy status of a message"),
 		gtranslator_message_change_status,

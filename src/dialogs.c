@@ -45,7 +45,6 @@
 
 #include <string.h>
 #include <locale.h>
-#include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
 
 /*
@@ -93,7 +92,10 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 		return;
 	}
 	
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 	dialog = gtk_file_selection_new(_("gtranslator -- open po file"));
 	
 	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(dialog)->ok_button),
@@ -121,7 +123,10 @@ void gtranslator_open_file_dialog(GtkWidget * widget, gpointer useless)
 void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 {
 	static GtkWidget *dialog = NULL;
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 
 	/*
 	 * If we do have write perms for the file we can save it under each
@@ -233,7 +238,10 @@ void gtranslator_import_dialog(GtkWidget *widget, gpointer useless)
 		}
 	}
 
-	gtranslator_raise_dialog(import_dialog);
+	if(import_dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(import_dialog));
+		return;
+	}
 	import_dialog=gtk_file_selection_new(_("gtranslator -- import po file"));
 
 	g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(import_dialog)->ok_button),
@@ -275,7 +283,10 @@ void gtranslator_export_dialog(GtkWidget *widget, gpointer useless)
 	static GtkWidget *export_dialog=NULL;
 	
 	g_return_if_fail(file_opened==TRUE);
-	gtranslator_raise_dialog(export_dialog);
+	if(export_dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(export_dialog));
+		return;
+	}
 
 	export_dialog=gtk_file_selection_new(_("gtranslator -- export po file"));
 
@@ -590,7 +601,10 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 		gtk_adjustment_set_value(GTK_ADJUSTMENT(adjustment),
 					 g_list_position(po->messages,
 							 po->current) + 1);
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 	dialog = gnome_dialog_new(_("gtranslator -- go to"), NULL);
 	gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dialog),
 						_("Go!"),
@@ -667,7 +681,10 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	GtkWidget *label, *findy, *match_case;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 	dialog = gnome_dialog_new(_("Find in the po file"), NULL);
 	gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dialog),
 						_("Find"),
@@ -770,7 +787,10 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 	GtkWidget *findy, *replacy;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
 
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 	dialog=gnome_dialog_new(_("gtranslator -- replace"),
 		_("Replace"),
 		_("Replace all"),
@@ -926,7 +946,10 @@ void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless)
 	GtkWidget *entry;
 	GtkWidget *label;
 
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 
 	dialog=gnome_dialog_new(_("gtranslator -- open from URI"),
 				_("Open"), GNOME_STOCK_BUTTON_CANCEL, 
@@ -1092,7 +1115,10 @@ void gtranslator_query_dialog(void)
 
 	gint reply;
 	
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 
 	#define add2Box(x); \
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
@@ -1282,7 +1308,10 @@ void gtranslator_auto_translation_dialog(void)
     	gchar 	*message_string=NULL;
 	gint 		reply;
 
-	gtranslator_raise_dialog(dialog);
+	if(dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(dialog));
+		return;
+	}
 
 	message_string=_("Should gtranslator autotranslate the file using information\n\
 from your personal learn buffer?");

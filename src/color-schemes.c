@@ -39,11 +39,7 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
-#ifdef ENABLE_NLS
 #include <libgnome/gnome-i18n.h>
-#endif
-
-#include <libgnome/gnome-util.h>
 
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
@@ -557,13 +553,13 @@ void apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 		 *  ~/.gtranslator/colorschemes directory, try the global 
 		 *   colorschemes directory.
 		 */
-		if(!g_file_exists(GtrPreferences.scheme))
+		if(!g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
 		{
 			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", 
 				SCHEMESDIR, scheme_name);
 		}
 
-		if(g_file_exists(GtrPreferences.scheme))
+		if(g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
 		{
 			/*
 			 * Free the old used colorscheme.

@@ -35,9 +35,6 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-util.h>
-
 #include "e-xml-utils.h"
 
 /*

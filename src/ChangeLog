@@ -1,3 +1,24 @@
+2002-08-12  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* Makefile.am: don't build convert.*. fix localedir for Solaris.
+	* convert.c, convert.h: remove.
+	* runtime-config.c, utf8.c, utils.c: use glib functions for charset
+	conversion. Removed not used functions.
+	* main.c: get translations in UTF-8.
+	* about.c: show translators and documenters using new features of
+	gnome2 about dialog. Put logo in about box. Remove showing of
+	color scheme author.
+	* actions.c, actions.h, menus.h, message.c: remove 
+	Message Status/Translated menu item. It never made any sense.
+	* comment.c: disable conversion of comments to utf8, as it crashes. I
+	doubt it is needed anyway.
+	* defines.config, main.c: remove BACKENDS_DIR
+	* dialogs.h: remove gtranslator_raise_dialog...
+	* dialogs.c, header_stuff.c: ...use gtk_window_present instead
+	* prefs.c: allow only one dialog to be open.
+	* some more files: remove bogus casts and checks, don't use deprecated
+	gnome-util functions.
+
 2002-08-04  Christophe Fergeau <teuf@users.sourceforge.net>
 
 	* convert.c

@@ -33,9 +33,8 @@
 /*
  * Really nasty wrapper macros which should expand to really common constructs.
  */
-#define GTR_FREE(x) if((x)) { g_free((x)); (x)=NULL; }
+#define GTR_FREE(x) g_free((x)); (x)=NULL;
 #define GTR_ITER(x) if((x)->next) { (x)=(x)->next; } else { break; }
-#define GTR_STRDUP(to, from) if(from) { to=g_strdup(from); } else { to=NULL; }
 
 /*
  * Returns the non-prefixed and non-suffixed filename back.
@@ -110,11 +109,6 @@ void gtranslator_utils_free_list(GList *list, gboolean free_contents);
  * Return the language environmental variable.
  */
 gchar *gtranslator_utils_get_environment_locale(void);
-
-/*
- * Return the current language environment's charset.
- */
-gchar *gtranslator_utils_get_environment_charset(void);
 
 /*
  * Returns a list of (full) filenames matching the given parameters in ths

@@ -32,7 +32,6 @@
 #include "parse.h"
 #include "prefs.h"
 #include "translator.h"
-#include "utf8.h"
 #include "utils.h"
 #include "utils_gui.h"
 
@@ -312,7 +311,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		update(ph->encoding, GTK_COMBO(enc_combo)->entry);
 #undef update
 	} else {
-#define replace(what,with,entry) GTR_FREE(what); what = g_strdup(with);\
+#define replace(what,with,entry) g_free(what); what = g_strdup(with);\
 	gtk_entry_set_text(GTK_ENTRY(entry), with);
 	
 		if(ph->translator)
@@ -354,7 +353,7 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 		/*
 		 * Rescue the old header comment and free it's variable.
 		 */
-		GTR_STRDUP(prev_header_comment, ph->comment);
+		prev_header_comment=g_strdup(ph->comment);
 		GTR_FREE(ph->comment);
 
 		/*
@@ -397,7 +396,11 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	GtkWidget *label;
 	GtkWidget *foo_me_i_ve_been_wracked;
 
-	gtranslator_raise_dialog(e_header);
+	if(e_header != NULL) {
+		gtk_window_present(GTK_WINDOW(e_header));
+		return;
+	}
+
 	e_header = gnome_property_box_new();
 	gtk_window_set_title(GTK_WINDOW(e_header),
 			     _("gtranslator -- edit header"));
@@ -671,7 +674,7 @@ void substitute(gchar **item, const gchar *bad, const gchar *good)
 	   (!strcmp(*item, bad)))
 	{
 		/* Replace it with copy of good one */
-		GTR_FREE(*item);
+		g_free(*item);
 		*item=g_strdup(good);
 		have_changed=TRUE;
 	}

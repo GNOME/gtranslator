@@ -81,7 +81,7 @@ gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_str
 /*
  * Copy the given GtrComment; NULL parts are also set to NULL for the copy.
  */
-GtrComment *gtranslator_comment_copy(GtrComment **comment); 
+GtrComment *gtranslator_comment_copy(GtrComment *comment); 
 
 /*
  * Return a savely copy of the comment contents by itself.

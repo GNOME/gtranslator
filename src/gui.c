@@ -659,7 +659,10 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		     && (msg->status & GTR_MSG_STATUS_FUZZY))
 		{
 		     	gtranslator_message_status_set_fuzzy(msg, FALSE);
-			gtranslator_actions_disable_fuzzy_menu_item();
+			gtk_check_menu_item_set_active(
+				GTK_CHECK_MENU_ITEM(the_msg_status_menu[0].widget),
+				FALSE
+			);
 		}
 		if(GtrPreferences.show_messages_table)
 		{

@@ -22,7 +22,6 @@
 #include <config.h>
 #endif
 
-#include "convert.h"
 #include "preferences.h"
 #include "runtime-config.h"
 #include "utils.h"
@@ -79,9 +78,7 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		gchar *middot=NULL;
 		gchar *encoding=NULL;
 
-		encoding=gtranslator_utils_get_environment_charset();
-		middot=gtranslator_convert_string_from_utf8("·", encoding);
-		GTR_FREE(encoding);
+		middot=g_locale_from_utf8("·", -1, NULL, NULL, NULL);
 
 		if(middot && middot[0]!='\0')
 		{

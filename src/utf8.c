@@ -22,7 +22,6 @@
 #endif
 
 #include "comment.h"
-#include "convert.h"
 #include "syntax.h"
 #include "utf8.h"
 #include "utils.h"
@@ -54,11 +53,11 @@ void gtranslator_utf8_convert_message_to_utf8(GtrMsg *msg)
 
 	g_return_if_fail(msg!=NULL);
 
-	msgstr=(msg)->msgstr;
-	(msg)->msgstr=gtranslator_convert_string_to_utf8(msgstr,
-		po->header->charset);
-	
-	GTR_FREE(msgstr);
+	msgstr=msg->msgstr;
+	msg->msgstr=g_convert(msgstr, -1, 
+	                      "UTF-8", po->header->charset, 
+	                      NULL, NULL, NULL);
+	g_free(msgstr);
 }
 
 /*
@@ -70,11 +69,11 @@ void gtranslator_utf8_convert_message_from_utf8(GtrMsg *msg)
 
 	g_return_if_fail(msg!=NULL);
 
-	msgstr=(msg)->msgstr;
-	(msg)->msgstr=gtranslator_convert_string_from_utf8(msgstr,
-		po->header->charset);
-	
-	GTR_FREE(msgstr);
+	msgstr=msg->msgstr;
+	msg->msgstr=g_convert(msgstr, -1, 
+	                      po->header->charset, "UTF-8",
+	                      NULL, NULL, NULL);
+	g_free(msgstr);
 }
 
 /*
@@ -93,11 +92,11 @@ void gtranslator_utf8_convert_po_to_utf8(void)
 	/*
 	 * Convert the author name to UTF-8.
 	 */
-	author=gtranslator_convert_string_to_utf8(po->header->translator, po->header->charset);
-	GTR_FREE(po->header->translator);
-
-	po->header->translator=g_strdup(author);
-	GTR_FREE(author);
+	author=g_convert(po->header->translator, -1, 
+	                 po->header->charset, "UTF-8",
+	                 NULL, NULL, NULL);
+	g_free(po->header->translator);
+	po->header->translator=author;
 
 	/*
 	 * Convert the header comment to a GtrComment and get the UTF-8 version of it.
@@ -135,42 +134,3 @@ void gtranslator_utf8_convert_po_from_utf8(void)
 	}
 }
 
-/*
- * Return the plain string from the given UTF-8 string.
- */
-gchar *gtranslator_utf8_get_plain_string(gchar **string)
-{
-	gchar *plain_string;
-
-	g_return_val_if_fail(*string!=NULL, NULL);
-
-	plain_string=gtranslator_convert_string_from_utf8(*string,
-		po->locale_charset);
-
-	return plain_string;
-}
-
-/*
- * Return a pure UTF-8 string back.
- */
-gchar *gtranslator_utf8_get_utf8_string(gchar **string)
-{
-	gchar 	*utf8_string;
-	
-	g_return_val_if_fail(*string!=NULL, NULL);
-
-	utf8_string=gtranslator_convert_string_to_utf8(*string,
-		po->locale_charset);
-
-	return utf8_string;
-}
-
-/*
- * Return the plain msgstr (uses the function above).
- */
-gchar *gtranslator_utf8_get_plain_msgstr(GtrMsg **message)
-{
-	g_return_val_if_fail(GTR_MSG(*message)->msgstr!=NULL, NULL);
-
-	return (gtranslator_utf8_get_plain_string(&GTR_MSG(*message)->msgstr));
-}

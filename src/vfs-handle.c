@@ -21,17 +21,12 @@
 #include "utils.h"
 #include "vfs-handle.h"
 
-//#include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-util.h>
-
-#include <libgnomevfs/gnome-vfs-types.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
+#include <libgnomevfs/gnome-vfs-types.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
 #include <libgnomevfs/gnome-vfs-xfer.h>
-
-#include <gal/util/e-util.h>
 
 /*
  * Open up the given file via GnomeVFS routines.

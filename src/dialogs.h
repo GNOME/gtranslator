@@ -24,13 +24,6 @@
 #include <stdio.h>
 #include <gtk/gtkwidget.h>
 
-#define gtranslator_raise_dialog(dlg)\
-	if (dlg) {\
-		gdk_window_show(dlg->window);\
-		gdk_window_raise(dlg->window);\
-		return;\
-	}
-
 /*
  * Sets window name/class, icon for it, connects the destroy signal,
  * and shows it. The dialog should be static or global.

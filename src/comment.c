@@ -131,33 +131,39 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	 * Remove any lungering space on the beginning/end of the pure_comment 
 	 *  of the GtrComment.
 	 */
-	if(GTR_COMMENT(comment)->pure_comment)
+	if(comment->pure_comment)
 	{
-		comment->pure_comment=g_strstrip(GTR_COMMENT(comment)->pure_comment);
+		comment->pure_comment=g_strstrip(comment->pure_comment);
 	}
 	
+#ifdef UTF8_COMMENT
 	/*
 	 * Set up the UTF-8 representations for the GtrComment parts.
 	 */
-	comment->utf8_comment=gtranslator_utf8_get_utf8_string(
-		&comment->comment);
+	comment->utf8_comment=
+		g_convert(comment->comment, -1,
+	                  "UTF-8", po->header->charset,
+	                  NULL, NULL, NULL);
 
 	if(GTR_COMMENT(comment)->pure_comment)
 	{
-		comment->pure_utf8_comment=gtranslator_utf8_get_utf8_string(
-			&comment->pure_comment);
+		comment->pure_utf8_comment=
+			g_convert(comment->pure_comment, -1,
+				  "UTF-8", po->header->charset,
+				  NULL, NULL, NULL);
 	}
 	else
 	{
 		comment->pure_utf8_comment=NULL;
 	}
+#endif
 
 	/*
 	 * Set the fuzzy flag at all if the comment stands for a fuzzy message.
 	 */
 	if(strstr(comment->comment, "#, fuzzy"))
 	{
-		GTR_COMMENT(comment)->type |= FUZZY_COMMENT;
+		comment->type |= FUZZY_COMMENT;
 	}
 	
 	return comment;
@@ -193,54 +199,19 @@ void gtranslator_comment_update(GtrComment **comment, const gchar *full_comment)
 }
 
 /*
- * Copy the given Gtrcomment pointer.
+ * Copy the given GtrComment.
  */
-GtrComment *gtranslator_comment_copy(GtrComment **comment)
+GtrComment *gtranslator_comment_copy(GtrComment *comment)
 {
 	GtrComment *copy=g_new0(GtrComment, 1);
 	
-	g_return_val_if_fail(GTR_COMMENT(*comment)!=NULL, NULL);
+	g_return_val_if_fail(comment!=NULL, NULL);
 
-	/*
-	 * Copy the single elements of the GtrComment.
-	 */
-	if(GTR_COMMENT(*comment)->comment)
-	{
-		copy->comment=g_strdup(GTR_COMMENT(*comment)->comment);
-	}
-	else
-	{
-		copy->comment=NULL;
-	}
-
-	if(GTR_COMMENT(*comment)->pure_comment)
-	{
-		copy->pure_comment=g_strdup(GTR_COMMENT(*comment)->pure_comment);
-	}
-	else
-	{
-		copy->pure_comment=NULL;
-	}
-
-	if(GTR_COMMENT(*comment)->utf8_comment)
-	{
-		copy->utf8_comment=g_strdup(GTR_COMMENT(*comment)->utf8_comment);
-	}
-	else
-	{
-		copy->utf8_comment=NULL;
-	}
-
-	if(GTR_COMMENT(*comment)->pure_utf8_comment)
-	{
-		copy->pure_utf8_comment=g_strdup(GTR_COMMENT(*comment)->pure_utf8_comment);
-	}
-	else
-	{
-		 copy->pure_utf8_comment=NULL;
-	}
-
-	copy->type=GTR_COMMENT(*comment)->type;	
+	copy->comment=g_strdup(comment->comment);
+	copy->pure_comment=g_strdup(comment->pure_comment);
+	copy->utf8_comment=g_strdup(comment->utf8_comment);
+	copy->pure_utf8_comment=g_strdup(comment->pure_utf8_comment);
+	copy->type=comment->type;	
 
 	return copy;
 }
@@ -263,10 +234,10 @@ void gtranslator_comment_free(GtrComment **comment)
 {
 	if(*comment)
 	{
-		GTR_FREE(GTR_COMMENT(*comment)->comment);
-		GTR_FREE(GTR_COMMENT(*comment)->pure_comment);
-		GTR_FREE(GTR_COMMENT(*comment)->utf8_comment);
-		GTR_FREE(GTR_COMMENT(*comment)->pure_utf8_comment);
+		GTR_FREE((*comment)->comment);
+		GTR_FREE((*comment)->pure_comment);
+		GTR_FREE((*comment)->utf8_comment);
+		GTR_FREE((*comment)->pure_utf8_comment);
 		
 		GTR_FREE(*comment);
 	}

@@ -224,13 +224,10 @@ void gtranslator_message_show(GtrMsg *msg)
 	}
 #endif //NOT_PORTED
 
-#define set_active(number,flag) \
-	gtk_check_menu_item_set_active(\
-		(GtkCheckMenuItem *)(the_msg_status_menu[number].widget),\
-		msg->status & flag);
-	set_active(0, GTR_MSG_STATUS_TRANSLATED);
-	set_active(1, GTR_MSG_STATUS_FUZZY);
-#undef set_active
+	gtk_check_menu_item_set_active(
+		GTK_CHECK_MENU_ITEM(the_msg_status_menu[0].widget),
+		msg->status & GTR_MSG_STATUS_FUZZY
+	);
 	nothing_changes = FALSE;
 	message_changed = FALSE;
 }
