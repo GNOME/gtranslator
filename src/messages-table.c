@@ -176,11 +176,11 @@ static void *initialize_value_function(ETableModel *model, gint column,
 static void *value_at_function(ETableModel *model, gint column, gint row, 
 	void *useless)
 {
-	GtrMsg *message;
+	/*GtrMsg *message;
 	
-	/*message = g_list_nth_data (po->messages, row);*/
+	message = g_list_nth_data (po->messages, row);
 
-	/*if(file_opened)
+	if(file_opened)
 	{
 		if(row > 0 && row <= (po->length - 1))
 		{
