@@ -11,7 +11,6 @@
 #include <gnome.h>
 
 #include "interface.h"
-#include "support.h"
 
 int
 main (int argc, char *argv[])

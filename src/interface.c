@@ -17,7 +17,6 @@
 
 #include "callbacks.h"
 #include "interface.h"
-#include "support.h"
 
 static GnomeUIInfo file1_menu_uiinfo[] =
 {

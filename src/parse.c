@@ -38,7 +38,6 @@ void parse()
 	*/
 	check_file(fs);
 	count=0;
-	struct message *msg;
 	/*
 	* Just for now , the db-functionability is
 	* disabled ..

@@ -1,16 +1,25 @@
 /*
 *	->Fatih Demir [ kabalak@gmx.net ]
-*	Some database-search tries ...
+*	Here are the routines which could be very
+*	useful if you're think of slightly auto-
+*	generated translations ..
 */
 
 #include "msg_db.h"
-#include <db.h>
+/*
+*	Include the dyndata routines 
+*/
+#include <dyndata.h>
 
 int init_msg_db()
 {
 	FILE *db_stream;
 	db_stream=fopen(msg_db,"r+");
 	check_file(db_stream);
-	fclose(db_stream);
-	dbopen(msg_db,O_RDWR,S_IRWXU,DB_HASH,NULL);
+	/*
+	* After having checked everything create a binary
+	* tree for the translation strings ...
+	*/
+	BT *msg_tree;
+	msg_tree=create_bt();
 }

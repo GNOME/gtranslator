@@ -40,6 +40,7 @@ void cut_the_header_off_it(FILE *mfs,const char *cutties)
 	*/
 	if(_count > 1)
 	{
+		int i;
 		/*
 		*	Then copy the lines into ´header´
 		*/

@@ -9,13 +9,11 @@
 #include "parse.h"
 #include "callbacks.h"
 #include "interface.h"
-#include "support.h"
 
 /*
 *	The default msg_db location .
 */
-const char *msg_db=MSG_DB_DIR;
-msg_db+="msg_db";
+const char *msg_db=MSG_DB_DIR "msg.db";
 
 /*
 *	Init the msg-db ( open & 

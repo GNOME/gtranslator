@@ -12,7 +12,6 @@
 
 #include "callbacks.h"
 #include "interface.h"
-#include "support.h"
 #include "parse.h"
 #include <sys/types.h>
 #include <sys/stat.h>

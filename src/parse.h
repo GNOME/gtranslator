@@ -19,7 +19,12 @@
 
 #include "callbacks.h"
 #include "interface.h"
-#include "support.h" 
+
+/*
+*	Include the header for the
+*	libdyndata library-functions :
+*/
+#include <dyndata.h>
 
 /*
 *	A structure for the po-files :
@@ -31,14 +36,19 @@ typedef struct {
 } po_file ;
 
 /*
-*	The structure for the transations :	
+*	The structure for the translations :	
 */
 typedef struct {
-	static struct po_file *po;
+	struct po_file *po;
 	char *msgid;
 	char *msgstr;
 	unsigned int position;
 } message ;
+
+/*
+*	A struct-variable :
+*/
+struct message *msg;
 
 /*
 *	This are the global count variables  
