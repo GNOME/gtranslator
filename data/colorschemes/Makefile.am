@@ -13,6 +13,7 @@ schemes_DATA = \
 	menesis.xml \
 	mmc.xml \
 	nizuu.xml \
+	sepia.xml \
 	tuey.xml \
 	vim.xml \
 	waliays.xml \
