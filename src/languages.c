@@ -156,6 +156,10 @@ GtrLanguage languages[] = {
 	 "gnome-translation@gnome.gr.jp", "8bit"
 	},
 	{
+	 N_("Kannada"), "kn", "UTF-8",
+	 "kannada@sharma-home.net", "8bit"
+	},
+	{
 	 N_("Korean"), "ko", "euc-kr",
 	 "ko@li.org", "8bit"
 	},
