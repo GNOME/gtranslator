@@ -779,6 +779,11 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	nothing_changes = TRUE;
 
 	/*
+	 * Clear the messages table.
+	 */
+	gtranslator_messages_table_create();
+
+	/*
 	 * Stop gtkspell.
 	 */ 
 	if(GtrPreferences.instant_spell_check && gtkspell_running())
