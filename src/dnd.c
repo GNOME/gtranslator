@@ -14,39 +14,31 @@ void gtranslator_dnd(GtkWidget *widget,GdkDragContext *context,
 	int x,int y,GtkSelectionData *seldata, guint info,guint time,
 		gpointer data)
 {
-int ret=1;
-GList *fnames, *fnp;
-enum gtr_dnd func;
-func=(enum gtr_dnd)data;
+	int ret=1;
+	GList *fnames, *fnp;
+	func=(enum gtr_dnd)data;
 
-fnames=gnome_uri_list_extract_filenames((char *)seldata->data);
-a_counter=g_list_length(fnames);
+	fnames=gnome_uri_list_extract_filenames((char *)seldata->data);
+	a_counter=g_list_length(fnames);
 
-if (a_counter>0)
-	for (fnp = fnames; fnp; fnp = fnp->next, count--)
+	if (a_counter>0)
+		for (fnp = fnames; fnp; fnp = fnp->next, a_counter--)
+		{
+			if (func==GTR_OPEN) 
+			{
+				parse((char *)(fnp->data));
+				ret=0;
+			}
+		}	
+
+		gnome_uri_list_free_strings(fnames);
+
+	if (ret==0)
 	{
-		if (func==GTR_OPEN) ret=parse((char *)(fnp->data));
+		gtk_drag_finish(context,TRUE,FALSE,time);
 	}
-
-	gnome_uri_list_free_strings(fnames);
-
-if (ret==0)
-{
-	gtk_drag_finish(context,TRUE,FALSE,time);
-}
-else
-{
-	gtk_drag_finish(context,FALSE,FALSE,time);
-}
-
-	/**
-	* Get the drag-sets
-	**/
-	gtk_drag_dest_set(widget, GTK_DEST_DEFAULT_ALL, dragtypes,
-		sizeof(dragtypes)/sizeof(dragtypes[0]),GDK_ACTION_COPY);
-	/**
-	* Connecting the function(s)
-	**/
-	gtk_signal_connect(GTK_OBJECT(widget), "drag_data_received",
-		GTK_SIGNAL_FUNC(gtranslator_dnd), (gpointer)func);
+	else
+	{
+		gtk_drag_finish(context,FALSE,FALSE,time);
+	}
 }

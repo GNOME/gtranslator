@@ -23,6 +23,7 @@
 #include <gnome.h>
 #include "interface.h"
 #include "about.h"
+#include "dnd.h"
 #include "gtr_dialogs.h"
 #include "prefs.h"
 #include "parse.h"

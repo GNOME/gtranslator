@@ -12,6 +12,8 @@
 #define GTR_DND_H 1
 
 #include <gnome.h>
+#include <gtk/gtk.h>
+#include <glib.h>
 
 /**
 * The D'n'D types
@@ -22,9 +24,9 @@ enum gtr_dnd
 };
 
 /**
-* The taget formats
+* The target formats
 **/
-GtkTargetEntry dragtypes[] =
+static GtkTargetEntry dragtypes[] =
 {
         { "text/uri-list",0,0 }
 };
@@ -33,6 +35,11 @@ GtkTargetEntry dragtypes[] =
 * Another variable
 **/
 gint a_counter;
+
+/**
+* The gtranslator's dnd-types enumeration.
+**/
+enum gtr_dnd func;
 
 /**
 * The D'n'D function

@@ -464,5 +464,19 @@ create_app1 (void)
 	gtk_signal_connect(GTK_OBJECT(trans_box),"changed",
 		GTK_SIGNAL_FUNC(text_has_got_changed),NULL);
 	/*****************************************************************/
+	/**     
+	* The D'n'D signals
+	**/
+	/**     
+	* Get the drag-sets
+	**/
+	gtk_drag_dest_set(GTK_OBJECT(app1), GTK_DEST_DEFAULT_ALL, dragtypes,
+	        sizeof(dragtypes)/sizeof(dragtypes[0]),GDK_ACTION_COPY);
+	/**     
+	* Connecting the function
+	**/
+	gtk_signal_connect(GTK_OBJECT(app1), "drag_data_received",
+        	GTK_SIGNAL_FUNC(gtranslator_dnd), (gpointer)func);
+	/*****************************************************************/
 	return app1;
 }

@@ -7,6 +7,28 @@
 	+	Adding D'n'D sources.
 		
 		-> dnd.c/h
+
+	+	Restructured the first/back/next/last-msg-calls	
+		
+		to represent the "structured"-parsing.
+	
+	+	Removed all g_list stuff. It isn't compatible
+		
+		with my brain!
+
+	+	Removed some unneeded GList's and changed
+		
+		the head GList to a GSList.
+		
+		-> parse.h
+
+	+	Creation and filling into the strcuture
+		
+		fields ( aka "parsing" ) is theoretically
+		
+		done.
+	
+	+	Removed the useless counting-variables.
 	
 	+	Free the zamane-char.
 

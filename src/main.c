@@ -16,6 +16,7 @@
 
 #include <popt-gnome.h>
 #include "msg_db.h"
+#include "dnd.h"
 #include "interface.h"
 #include "support.h"
 #include "session.h"
@@ -124,6 +125,9 @@ int main(int argc,char *argv[])
 			file_opened=TRUE;
 		}
 	}
+	/**
+	* Disable the buttons if no file is opened.
+	**/
 	if(file_opened!=TRUE)
 	{
 		disable_buttons();

@@ -32,9 +32,14 @@
 #include "gtr_dialogs.h"
 
 /**
-* This are the global count variables  
+* These ones are only count variables
 **/
-int count,max_count;
+int c=0;
+
+/**
+* Create a first structure.
+**/
+gtr_msg msg;
 
 /**
 * A gboolean for the silly question if a file is open ...
@@ -50,11 +55,6 @@ gboolean file_changed;
 * If we're at the last/first entries ...
 **/
 gboolean first_entry,last_entry;
-
-/**
-* Center of interest are these lists -- at least for me
-**/
-GList *msgids,*msgstrs,*head,*temp;
 
 /**
 * A simple file check .
@@ -74,31 +74,27 @@ void parse_the_file(GtkWidget *widget,gpointer filename);
 /**
 * General functions are following -- these do operate on the
 *  global lists where they get the first/last/next/previous
-*   msgid & mggstr's ...
+*   msgid & msgstr's ...
 **/
 
 /**
 * Get first msgid, msgstr
 **/
-gchar *get_first_msgid();
-gchar *get_first_msgstr();
+void get_first_msg(GtkWidget *widget,gpointer useless);
 
 /**
 * Get previous msgid, msgstr 
 **/
-gchar *get_prev_msgid();
-gchar *get_prev_msgstr();
+void get_prev_msg(GtkWidget *widget,gpointer useless);
 
 /**
 * Get next msgid, msgstr
 **/
-gchar *get_next_msgid();
-gchar *get_next_msgstr();
+void get_next_msg(GtkWidget *widget,gpointer useless);
 
 /**
 * Get last msgid, msgstr
 **/
-gchar *get_last_msgid();
-gchar *get_last_msgstr();
+void get_last_msg(GtkWidget *widget,gpointer useless);
 
 #endif // GTR_PARSE_H

@@ -18,8 +18,6 @@
 **/
 FILE *fs;
 
-GList *a;
-
 /**
 * A simple stream-check (I love the ifstream.good()-func from C++ ....)
 **/
@@ -50,8 +48,6 @@ void parse(gchar *po)
 	**/
 	gchar *zamane=g_new(gchar,4);
         guint lines=1,z=0;
-	guint msgid_count,msgstr_count,comments_count;
-	msgid_count=msgstr_count=comments_count=0;
 	/**
         * If there's no selection ( is this possible within a Gtk+ fileselection ? )
         **/
@@ -73,10 +69,6 @@ void parse(gchar *po)
 	**/
 	check_file(fs);
         /**
-        * Allocate the list(s)
-        **/
-        head=g_list_alloc();
-        /**
         * Parse the file ...
         **/
         while(
@@ -97,36 +89,47 @@ void parse(gchar *po)
 		&&
 		strstr(temp_char,": ")
 		&&
-		(msgid_count<=1)&&(msgstr_count<=1)
+		(sizeof(msg)/sizeof(msg[0])<=1)
 		)
 		{
 			/**
 			* Add the current header-line
 			**/
 			g_print("HEADER : %s",temp_char);
-			head=g_list_append(head,(gpointer)temp_char);
 		}
 		if(!g_strncasecmp(temp_char,"#: ",3))
 		{
-			comments_count++;
+			/**
+			* Create the gtr_msg structure
+			*  and set the comment & position.
+			**/
+			msg[c].pos=z;
+			msg[c].comment=temp_char;
 		}
 		if(!g_strncasecmp(temp_char,"msgid \"",7))
 		{
-			msgid_count++;
+			/**
+			* The msgid itself
+			**/
+			msg[c].msgid=temp_char;
 		}
 		if(!g_strncasecmp(temp_char,"msgstr \"",8))
 		{
-			msgstr_count++;
+			/**
+			* The msgstr
+			**/
+			msg[c].msgstr=temp_char;
 		}
+		/**
+		* As all parsing efforts are finished now, we should
+		*  increase c.
+		**/
+		c++;
         }
-	/**
-        * The list length ( aka lines count )
-        **/
-        lines=g_list_length(head);
         /**
         * Show an updated status
         **/
-        sprintf(status,_("Finished reading \"%s\", %i lines."),po,lines);
+        sprintf(status,_("Finished reading \"%s\", %i lines."),po,z);
         gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	/**
 	* So the other functions can get a point 
@@ -169,4 +172,20 @@ void parse_the_file(GtkWidget *widget,gpointer filename)
 	* Call the function above
 	**/
 	parse(po_file);
+}
+
+/**
+* Get's the first msg.
+**/
+void get_first_msg(GtkWidget *widget,gpointer useless)
+{
+	gchar *i,*s;
+	gtk_text_freeze(GTK_TEXT(trans_box));
+	gtk_text_freeze(GTK_TEXT(text1));
+	i=msg[0].msgid;
+	s=msg[0].msgstr;
+	gtk_editable_insert_text(GTK_EDITABLE(text1),i,sizeof(i),0);
+	gtk_editable_insert_text(GTK_EDITABLE(trans_box),s,sizeof(s),0);
+	gtk_text_thaw(GTK_TEXT(trans_box));
+	gtk_text_thaw(GTK_TEXT(text1));
 }
