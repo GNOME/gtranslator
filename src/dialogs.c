@@ -1268,7 +1268,6 @@ Would you like to insert it into the translation?"),
 						 * Insert the text and update the
 						 * status flags for it.
 						 */
-					  // XXX correct?
 					        gtk_text_buffer_set_text(gtk_text_view_get_buffer(trans_box), result, -1);
 
 						gtranslator_translation_changed(NULL, NULL);
