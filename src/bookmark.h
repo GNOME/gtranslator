@@ -47,6 +47,11 @@ typedef struct
 GtrBookmark *gtranslator_bookmark_new(void);
 
 /*
+ * Another stupid and small convenience function for the bookmarking...
+ */
+GtrBookmark *gtranslator_bookmark_new_with_comment(const gchar *comment);
+
+/*
  * Creates the bookmark from a given gchar-string formatted by gtranslator.
  */
 GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string);

@@ -107,4 +107,9 @@ void gtranslator_file_is_not_changed_dialog(GtkWidget * widget, gpointer useless
  */
 void gtranslator_open_uri_dialog(GtkWidget *widget, gpointer useless);
 
+/*
+ * A helping dialog for the bookmarks' adding menu entry, yeah!
+ */
+void gtranslator_bookmark_adding_dialog(GtkWidget *widget, gpointer useless);
+
 #endif

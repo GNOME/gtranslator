@@ -1,6 +1,7 @@
 /*
  * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
+ *			Ross Golder <ross@gtranslator.org>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@
 
 #include "about.h"
 #include "actions.h"
+#include "bookmark.h"
 #include "color-schemes.h"
 #include "dialogs.h"
 #include "find.h"
@@ -1425,4 +1427,78 @@ from your personal learn buffer?"));
 		 */
 		gtranslator_learn_autotranslate(TRUE);
 	}
+}
+
+/*
+ * A little more enhanced bookmark adding dialog & such like comment entering.
+ */
+void gtranslator_bookmark_adding_dialog(GtkWidget *widget, gpointer useless)
+{
+	static GtkWidget *dialog=NULL;
+
+	GtkWidget 	*inner_table;
+	GtkWidget 	*comment_box;
+	
+	gint reply=0;
+
+	dialog=gtk_dialog_new_with_buttons(
+		_("gtranslator -- add bookmark with comment?"),
+		GTK_WINDOW(gtranslator_application),
+		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
+		NULL);
+
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+
+	/*
+	 * Create and pack the inner_table into the dialog.
+	 */
+	inner_table=gtk_table_new(1, 2, FALSE);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), 
+		inner_table);
+
+	/*
+	 * Use our util. function to get a labeled text box into the dialog.
+	 */
+	comment_box=gtranslator_utils_attach_text_with_label(inner_table, 1,
+		_("Comment for the bookmark:"), _("No comment"), NULL);
+
+	/*
+	 * The window should be resizable and somehow bigger then normally.
+	 */
+	gtk_window_set_resizable(GTK_WINDOW(dialog), TRUE);
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 380, 200);
+	
+	gtranslator_dialog_show(&dialog, _("gtranslator -- add bookmark with comment?"));
+	
+	reply=gtk_dialog_run(GTK_DIALOG(dialog));
+
+	/*
+	 * Now operate on the contents as the user pressed "Ok".
+	 */
+	if(reply==GTK_RESPONSE_OK)
+	{
+		GtrBookmark	*bmk;
+		gchar		*comment_dialog_contents;
+
+		GtkTextBuffer   *buff;
+		GtkTextIter     start, end;
+
+		/*
+		 * Get the comment box contents.
+		 */
+		buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(comment_box));
+		gtk_text_buffer_get_start_iter(buff, &start);
+		gtk_text_buffer_get_end_iter(buff, &end);
+		comment_dialog_contents = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
+
+		bmk=gtranslator_bookmark_new_with_comment(comment_dialog_contents);
+		gtranslator_bookmark_add(bmk);
+		gtranslator_bookmark_free(bmk);
+
+		GTR_FREE(comment_dialog_contents);
+	}
+	
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 }

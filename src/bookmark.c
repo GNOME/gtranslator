@@ -75,6 +75,28 @@ GtrBookmark *gtranslator_bookmark_new()
 }
 
 /*
+ * Return the GtrBookmark with the given comment, yeah!
+ */
+GtrBookmark *gtranslator_bookmark_new_with_comment(const gchar *comment)
+{
+	GtrBookmark *nbookmark;
+
+	nbookmark=gtranslator_bookmark_new();
+	g_return_val_if_fail(nbookmark!=NULL, NULL);
+
+	if(comment)
+	{
+		gtranslator_bookmark_set_comment(nbookmark, comment);
+	}
+	else
+	{
+		gtranslator_bookmark_set_comment(nbookmark, _("No comment"));
+	}
+
+	return nbookmark;
+}
+
+/*
  * Creates the bookmark from a given gchar-string formatted by gtranslator.
  */
 GtrBookmark *gtranslator_bookmark_new_from_string(const gchar *string)
@@ -658,6 +680,22 @@ GList *gtranslator_bookmark_get_list()
 	{
 		return (g_list_copy(gtranslator_bookmarks));
 	}
+}
+
+/*
+ * Change the comment of the given GtrBookmark with the given gchar.
+ */
+void gtranslator_bookmark_set_comment(GtrBookmark *bookmark, const gchar *newcomment)
+{
+	g_return_if_fail(bookmark!=NULL);
+	g_return_if_fail(newcomment!=NULL);
+
+	if(GTR_BOOKMARK(bookmark)->comment && GTR_BOOKMARK(bookmark)->comment[0]!='\0')
+	{
+		GTR_FREE(GTR_BOOKMARK(bookmark)->comment);
+	}
+
+	GTR_BOOKMARK(bookmark)->comment=g_strdup(newcomment);
 }
 
 /*

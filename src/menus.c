@@ -40,7 +40,6 @@
 
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
-//#include <libgnomeui/gnome-stock.h>
 
 GnomeUIInfo the_menus[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
@@ -68,6 +67,14 @@ GnomeUIInfo the_file_menu[] = {
 		update, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_REFRESH,
 		GDK_F5, 0, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
+	{
+		GNOME_APP_UI_ITEM, N_("Add bookmark"),
+		N_("Add a bookmark for this message in this po file"),
+		gtranslator_bookmark_adding_dialog, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ADD,
+		GDK_F2, 0, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{

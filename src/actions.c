@@ -90,16 +90,17 @@ void gtranslator_actions_set_up_default()
 	NONE.widget = NULL;
 	insert_action(ACT_COMPILE, the_file_menu[0], the_toolbar[4]);
 	insert_action(ACT_UPDATE, the_file_menu[1], the_toolbar[5]);
-	insert_action(ACT_AUTOTRANSLATE, the_file_menu[3], NONE);
-	insert_action(ACT_REMOVE_ALL_TRANSLATIONS, the_file_menu[5], NONE);
-	insert_action(ACT_SAVE, the_file_menu[9], the_toolbar[1]);
-	insert_action(ACT_SAVE_AS, the_file_menu[10], the_toolbar[2]);
-	insert_action(ACT_REVERT, the_file_menu[11], NONE);
-	insert_action(ACT_CLOSE, the_file_menu[12], NONE);
+	insert_action(ACT_ADD_BOOKMARK, the_file_menu[3], NONE);
+	insert_action(ACT_AUTOTRANSLATE, the_file_menu[5], NONE);
+	insert_action(ACT_REMOVE_ALL_TRANSLATIONS, the_file_menu[7], NONE);
+	insert_action(ACT_SAVE, the_file_menu[11], the_toolbar[1]);
+	insert_action(ACT_SAVE_AS, the_file_menu[12], the_toolbar[2]);
+	insert_action(ACT_REVERT, the_file_menu[13], NONE);
+	insert_action(ACT_CLOSE, the_file_menu[14], NONE);
 	/*----------------------------------------------------------*/
 #ifdef UTF8_CODE
-	insert_action(ACT_EXPORT_UTF8, the_file_menu[16], NONE);
-	insert_action(ACT_IMPORT_UTF8, the_file_menu[17], NONE);
+	insert_action(ACT_EXPORT_UTF8, the_file_menu[18], NONE);
+	insert_action(ACT_IMPORT_UTF8, the_file_menu[19], NONE);
 	/*----------------------------------------------------------*/
 #endif
 	insert_action(ACT_UNDO, the_edit_menu[0], the_toolbar[8]);
@@ -137,7 +138,8 @@ void gtranslator_actions_set_up_state_no_file(void)
 				    ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 				    ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 				    ACT_FUZZY, ACT_COMMENT, ACT_EXPORT_UTF8,
-				    ACT_REMOVE_ALL_TRANSLATIONS, ACT_COPY_MSGID2MSGSTR);
+				    ACT_REMOVE_ALL_TRANSLATIONS, ACT_COPY_MSGID2MSGSTR,
+				    ACT_ADD_BOOKMARK);
 #else
 	gtranslator_actions_disable(ACT_COMPILE, ACT_UPDATE, ACT_AUTOTRANSLATE,
 				    ACT_SAVE, ACT_SAVE_AS, ACT_REVERT, ACT_CLOSE,
@@ -146,7 +148,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 				    ACT_FIRST, ACT_BACK, ACT_NEXT, ACT_LAST, ACT_REPLACE,
 				    ACT_GOTO, ACT_NEXT_FUZZY, ACT_NEXT_UNTRANSLATED,
 				    ACT_FUZZY, ACT_COMMENT, ACT_REMOVE_ALL_TRANSLATIONS,
-				    ACT_COPY_MSGID2MSGSTR);
+				    ACT_COPY_MSGID2MSGSTR, ACT_ADD_BOOKMARK);
 #endif
 
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(trans_box), FALSE);
@@ -158,10 +160,10 @@ void gtranslator_actions_set_up_file_opened(void)
 	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
 				   ACT_AUTOTRANSLATE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 				   ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
-				   ACT_QUERY, ACT_GOTO, ACT_FUZZY,
+				   ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_ADD_BOOKMARK,
 				   ACT_IMPORT_UTF8, ACT_COPY_MSGID2MSGSTR);
 #else
-	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE,
+	gtranslator_actions_enable(ACT_COMPILE, ACT_SAVE_AS, ACT_CLOSE, ACT_ADD_BOOKMARK,
 				   ACT_AUTOTRANSLATE, ACT_CUT, ACT_COPY, ACT_PASTE, ACT_CLEAR,
 				   ACT_REPLACE, ACT_FIND, ACT_HEADER, ACT_NEXT, ACT_LAST,
 				   ACT_QUERY, ACT_GOTO, ACT_FUZZY, ACT_COPY_MSGID2MSGSTR);
