@@ -525,6 +525,8 @@ void gtranslator_bookmark_save_list()
 		}
 
 		gtranslator_config_set_int("bookmark/length", c);
+
+		g_message("Wrote %i bookmarks to the settings.\n", (c+1));
 	}
 }
 
