@@ -249,8 +249,8 @@ static GnomeUIInfo the_searchbar[] = {
 			       N_("Go to next untranslated message"),
 			       goto_next_untranslated,
 			       GNOME_STOCK_PIXMAP_BOOK_OPEN),
-	GNOMEUIINFO_ITEM_STOCK(N_("GoTo"),
-			       N_("Goto specified message number"),
+	GNOMEUIINFO_ITEM_STOCK(N_("Go to"),
+			       N_("Go to specified message number"),
 			       goto_dlg,
 			       GNOME_STOCK_PIXMAP_JUMP_TO),
 	GNOMEUIINFO_ITEM_STOCK(N_("Find"),
@@ -313,7 +313,7 @@ static void create_actions(void)
 	insert_action(ACT_BACK, the_messages_menu[1], the_searchbar[1]);
 	insert_action(ACT_NEXT, the_messages_menu[2], the_searchbar[2]);
 	insert_action(ACT_LAST, the_messages_menu[3], the_searchbar[3]);
-	insert_action(ACT_GOTO, the_messages_menu[4], the_searchbar[4]);
+	insert_action(ACT_GOTO, the_messages_menu[5], the_searchbar[5]);
 	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], NONE);
 	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], the_searchbar[5]);
 	/*------------------------------------------------ */
