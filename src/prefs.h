@@ -50,7 +50,7 @@ struct {
 	 * Options, used NOT in prefs-box.
 	 */
 	guint match_case		: 1;
-	guint find_in			: 2;
+	guint find_in			: 3;
 	guint fill_header		: 1;
 	guint update_function		: 1;
 	guint dot_char			: 1;

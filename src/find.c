@@ -65,7 +65,7 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 	regmatch_t pos[1];
 	if ((wants.find_in != 0) && (GTR_MSG(msg->data)->msgstr == NULL))
 		return FALSE;
-	if ((wants.find_in != 0) &&
+	if ((wants.find_in & findTranslated) &&
 	    (!regexec(target, GTR_MSG(msg->data)->msgstr, 1, pos, 0)))
         {
 		/*
@@ -77,7 +77,7 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 		
 		return TRUE;
 	}
-	if ((wants.find_in != 1) &&
+	if ((wants.find_in & findEnglish) &&
 	    (!regexec(target, GTR_MSG(msg->data)->msgid, 1, pos, 0)))
         {
 		/*
@@ -89,7 +89,7 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 		
 		return TRUE;
 	}
-	if((wants.find_in != 3) &&
+	if((wants.find_in & findComment) &&
 	   (!regexec(target, GTR_MSG(msg->data)->comment, 1, pos, 0)))
 	{
 		/*
@@ -103,7 +103,7 @@ static gboolean find_in_msg(GList * msg, gpointer useless)
 		
 		return TRUE;
 	}
-        return FALSE;	
+        return FALSE;
 }
 
 /*

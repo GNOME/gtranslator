@@ -22,6 +22,17 @@
 
 #include <gtk/gtkwidget.h>
 
+/*
+ * find modes
+ */
+typedef enum {
+  findEnglish    = 1,
+  findTranslated = 2,
+  findBoth       = 3,
+  findComment    = 4,
+  findAll        = 7
+} FindMode;
+
 typedef gboolean (*FEFunc) (gpointer list_item, gpointer user_data);
 
 gboolean for_each_msg(GList *first, FEFunc func, gpointer user_data);

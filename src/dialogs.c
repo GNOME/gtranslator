@@ -265,6 +265,7 @@ static void find_dlg_clicked(GnomeDialog * dialog, gint button,
 
 void find_dialog(GtkWidget * widget, gpointer useless)
 {
+	int findMenu;
 	static GtkWidget *dialog = NULL;
 	GtkWidget *label, *findy, *match_case;
 	GtkWidget *find_in, *menu, *menu_item, *option, *hbox;
@@ -284,34 +285,41 @@ void find_dialog(GtkWidget * widget, gpointer useless)
 	menu_item = gtk_menu_item_new_with_label(_("English"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(0));
+			   GINT_TO_POINTER(findEnglish));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Translated"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(1));
+			   GINT_TO_POINTER(findTranslated));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Both"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(2));
+			   GINT_TO_POINTER(findBoth));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("Comments"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(3));
+			   GINT_TO_POINTER(findComment));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label(_("In all strings"));
 	gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
 			   GTK_SIGNAL_FUNC(find_in_activated),
-			   GINT_TO_POINTER(4));
+			   GINT_TO_POINTER(findAll));
 	gtk_menu_append(GTK_MENU(menu), menu_item);
 	
-	gtk_menu_set_active(GTK_MENU(menu), wants.find_in);
+	switch (wants.find_in) {
+	case findEnglish:    findMenu = 0; break;
+	case findTranslated: findMenu = 1; break;
+	case findBoth:       findMenu = 2; break;
+	case findComment:    findMenu = 3; break;
+	case findAll:        findMenu = 4; break;
+	}
+	gtk_menu_set_active(GTK_MENU(menu), findMenu);
 
 	find_in = gtk_label_new(_("Find in: "));
 	option = gtk_option_menu_new();
