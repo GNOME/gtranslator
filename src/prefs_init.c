@@ -78,35 +78,14 @@ void gtranslator_preferences_init_default_values()
 		if(!author || !email)
 		{
 			gchar	*value=NULL;
-			gint	 i=0;
-
-			const gchar *name_env_variables[] =
-			{
-				"GTRANSLATOR_TRANSLATOR_NAME",
-				"TRANSLATOR_NAME",
-				"NAME",
-				"LOGNAME",
-				NULL
-			};
-
-			const gchar *email_env_variables[] =
-			{
-				"GTRANSLATOR_TRANSLATOR_EMAIL_ADDRESS",
-				"GTRANSLATOR_TRANSLATOR_EMAIL",
-				"TRANSLATOR_EMAIL",
-				"EMAIL_ADDRESS",
-				"EMAIL",
-				NULL
-			};
 
 			/*
-			 * Try our defined environment variables for a value.
+			 * Try to get the translator name from this envpath.
 			 */
-			while(name_env_variables[i]!=NULL && !value)
-			{
-				value=g_getenv(name_env_variables[i]);
-				i++;
-			}
+			gtranslator_utils_get_environment_value(
+				"GTRANSLATOR_TRANSLATOR_NAME:TRANSLATOR_NAME:\
+				TRANSLATOR:NAME:LOGNAME",
+				&value);
 
 			/*
 			 * If we've found a value set it as the initial 
@@ -115,22 +94,17 @@ void gtranslator_preferences_init_default_values()
 			if(value)
 			{
 				gtranslator_config_set_string("translator/name", value);
+				GTR_FREE(value);
 			}
 
 			/*
-			 * Reset the used variables to their initial values.
+			 * Now search the envpath for a valuable EMail address.
 			 */
-			i=0;
-			value=NULL;
-
-			/*
-			 * Also check the EMail address environment variables.
-			 */
-			while(email_env_variables[i]!=NULL && !value)
-			{
-				value=g_getenv(email_env_variables[i]);
-				i++;
-			}
+			gtranslator_utils_get_environment_value(
+				"GTRANSLATOR_TRANSLATOR_EMAIL_ADDRESS:\
+				GTRANSLATOR_TRANSLATOR_EMAIL:TRANSLATOR_EMAIL:\
+				EMAIL_ADDRESS:EMAIL",
+				&value);
 
 			/*
 			 * Well, the EMail address is also filled out if any
@@ -139,6 +113,7 @@ void gtranslator_preferences_init_default_values()
 			if(value && strchr(value, '@') && strchr(value, '.'))
 			{
 				gtranslator_config_set_string("translator/email", value);
+				GTR_FREE(value);
 			}
 		}
 

@@ -47,6 +47,12 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str);
 
 /*
+ * Search the "environment path" in "envpath" for a non-NULL value and sets
+ *  the "value" correspondingly.
+ */
+void gtranslator_utils_get_environment_value(const gchar *envpath, gchar **value);
+
+/*
  * Remove the non-localizeed name of the given language -- if possible.
  */
 const gchar *gtranslator_utils_get_english_language_name(const gchar *lang);

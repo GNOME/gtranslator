@@ -33,6 +33,8 @@
 #include <locale.h>
 #include <dirent.h>
 
+GList *domains=NULL;
+
 /*
  * A simply query method (wraps dgettext).
  */

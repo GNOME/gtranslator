@@ -36,7 +36,7 @@ typedef struct {
 /*
  * The generally used domains list.
  */
-GList *domains;
+extern GList *domains;
 
 /*
  * Simply query for the gettext translation for the given message in the

@@ -128,6 +128,43 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
 }
 
 /*
+ * Cruise through the "envpath" string and set the "value" if anything
+ *  could be found.
+ */
+void gtranslator_utils_get_environment_value(const gchar *envpath, gchar **value)
+{
+	gint	i=0;
+	gchar	*contents=NULL;
+	gchar	**array=NULL;
+	
+	g_return_if_fail(envpath!=NULL);
+
+	/*
+	 * Now split the envpath string into it's original parts.
+	 */
+	array=g_strsplit(envpath, ":", 0);
+	g_return_if_fail(array[0]!=NULL);
+
+	/*
+	 * Now cruise through the array and search for a value.
+	 */
+	while(array[i]!=NULL)
+	{
+		contents=g_getenv(array[i]);
+
+		if(contents)
+		{
+			*value=g_strdup(contents);
+				break;
+		}
+		
+		i++;
+	}
+
+	g_strfreev(array);
+}
+
+/*
  * Get the non-localized name for the language, if available.
  */ 
 const gchar *gtranslator_utils_get_english_language_name(const gchar *lang)
@@ -498,26 +535,11 @@ gboolean gtranslator_utils_uri_supported(const gchar *file_uri)
  */
 gchar *gtranslator_utils_get_environment_locale()
 {
-	gchar		*localename;
-	gint		 i=0;
+	gchar		*localename=NULL;
 
-	const gchar 	*checkvariables[] =
-	{
-		"GTRANSLATOR_LANGUAGE",
-		"LANGUAGE",
-		"LC_ALL",
-		"LC_MESSAGES",
-		"LANG",
-		NULL
-	};
-
-	localename=NULL;
-
-	while(checkvariables[i]!=NULL && !localename)
-	{
-		localename=g_getenv(checkvariables[i]);
-		i++;
-	}
+	gtranslator_utils_get_environment_value(
+		"GTRANSLATOR_LANGUAGE:LANGUAGE:LC_ALL:LC_MESSAGES:LANG",
+		&localename);
 
 	return localename;
 }

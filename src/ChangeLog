@@ -1,5 +1,21 @@
 2001-08-17  Fatih Demir <kabalak@gtranslator.org>
 
+	* main.c: Check here for some environment values which could give
+		us a generally different locale directory to query all
+		 domains for ("GTRANSLATOR_LOCALEDIR" and "GNOMELOCALEDIR"
+		  are searched for values currently.).
+
+	* query.c/.h: Declare the "domains" GList "extern" and declare it
+		internally in query.c.
+
+	* prefs_init.c & utils.c: Use the new function instead of using
+		own crippled versions of the same function.
+
+	* utils.c/.h: New "gtranslator_utils_get_environment_value" function
+		which holds the new logic for getting a logical environment
+		 variable value from a given defined "envpath" to search a
+		  value for the variable from.
+
 	* syntax.c: Fix a small error in Joe's multibyte code .-)
 
 2001-08-17 Joe Man <trmetal@yahoo.com.hk>

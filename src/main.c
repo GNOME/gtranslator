@@ -137,6 +137,7 @@ int main(int argc, char *argv[])
 			g_warning(_("Error during GConf initialization: %s."),
 				error->message);
 		}
+
 		g_clear_error(&error);
 	}
 	
@@ -144,7 +145,7 @@ int main(int argc, char *argv[])
 	 * Initialize gtranslator within libgnomeui.
 	 */
 	gnome_init_with_popt_table("gtranslator", VERSION, argc, argv,
-				   gtranslator_options, 0, &context);
+		gtranslator_options, 0, &context);
 
 	/*
 	 * Show up build informations if desired.
@@ -262,6 +263,7 @@ int main(int argc, char *argv[])
 	 * Test if there's a crash recovery file lying around in ~.
 	 */
 	sp_file=gtranslator_utils_get_crash_file_name();
+
 	if(g_file_exists(sp_file))
 	{
 		gtranslator_rescue_file_dialog();
@@ -274,6 +276,7 @@ int main(int argc, char *argv[])
 	 *  doesn't seem to be right apply the original default colors.
 	 */ 
 	theme=gtranslator_color_scheme_load_from_prefs();
+
 	if(!theme)
 	{
 		gtranslator_color_scheme_restore_default();
@@ -281,7 +284,8 @@ int main(int argc, char *argv[])
 	}
 	
 	/*
-	 * Parse the domains in the given directory or in GNOMELOCALEDIR.
+	 * Parse the domains in the given directory or in some other logical
+	 *  manner.
 	 */
 	if(domains_dir)
 	{
@@ -298,7 +302,32 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		gtranslator_query_domains(GNOMELOCALEDIR);
+		/*
+		 * Look into some other environment variables for a sane value
+		 *  for the locale directory where the .mo files are lying
+		 *   'round -- aka. "the gettext domains".
+		 */
+		gchar	*localedirectory=NULL;
+
+		gtranslator_utils_get_environment_value(
+			"GTRANSLATOR_LOCALEDIR:GNOMELOCALEDIR",
+			&localedirectory);
+
+		/*
+		 * If the found localedirectory is a directory, then we can
+		 *  really start querying all existing domains from this 
+		 *   read-in directory.
+		 */
+		if(localedirectory && 
+			g_file_test(localedirectory, G_FILE_TEST_ISDIR))
+		{
+			gtranslator_query_domains(localedirectory);
+			GTR_FREE(localedirectory);
+		}
+		else
+		{
+			gtranslator_query_domains(GNOMELOCALEDIR);
+		}
 	}
 	
 	/*
@@ -348,7 +377,8 @@ int main(int argc, char *argv[])
 	 * Check the session client flags, and restore state if needed 
 	 */
 	flags = gnome_client_get_flags(client);
-	if (flags & GNOME_CLIENT_RESTORED)
+
+	if(flags & GNOME_CLIENT_RESTORED)
 	{
 		gtranslator_session_restore(client);
 	}
