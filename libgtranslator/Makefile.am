@@ -2,9 +2,15 @@
 
 noinst_LIBRARIES = libgtranslator.a
 
-INCLUDES = -I$(includedir) $(IDL_CFLAGS) $(GLIB_CFLAGS) $(GNOME_CFLAGS)
+INCLUDES = -I$(includedir) $(IDL_CFLAGS) \
+	$(GLIB_CFLAGS) $(GNOME_CFLAGS) \
+	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@\" \
+	$(XML_CFLAGS)
 
-libgtranslator_a_SOURCES = $(GTRANSLATORD_SOURCES)
+libgtranslator_a_SOURCES = $(GTRANSLATORD_SOURCES) \
+	parse-db.c
+
+noinst_HEADERS = parse-db.h
 
 GTRANSLATORD_SOURCES = gtranslatord.h \
 	gtranslatord-common.c \
