@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.30\n"
-"POT-Creation-Date: 2000-10-18 22:54+0200\n"
+"POT-Creation-Date: 2000-10-19 11:14+0300\n"
 "PO-Revision-Date: 2000-10-18 14:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -273,12 +273,12 @@ msgstr "Teksti %d / %d / Tila:"
 #: src/gui.c:752
 #, c-format
 msgid "%s %s [ %i Fuzzy left ]"
-msgstr ""
+msgstr "%s %S [ %i sumeaa jäljellä ]"
 
 #: src/gui.c:756
 #, c-format
 msgid "%s %s [ No fuzzy left ]"
-msgstr ""
+msgstr "%s %S [ Ei sumeita jäljellä ]"
 
 #: src/dialogs.c:217 src/gui.c:761
 msgid "Translated"
@@ -291,7 +291,7 @@ msgstr "Naulaa"
 #: src/gui.c:775
 #, c-format
 msgid "%s %s [ %i Untranslated left ]"
-msgstr ""
+msgstr "%s %s [ %i kääntämätöntä jäljellä ] "
 
 #: src/gui.c:775 src/gui.c:779
 msgid "Untranslated"
@@ -300,7 +300,7 @@ msgstr "Kääntämätön"
 #: src/gui.c:779
 #, c-format
 msgid "%s %s [ No untranslated left ]"
-msgstr ""
+msgstr "%s %s [ Ei kääntämättömiä jäljellä ]"
 
 #: src/dialogs.c:50
 msgid "gtranslator -- open a po-file"
@@ -308,7 +308,7 @@ msgstr "gtranslator -- avaa po-tiedosto"
 
 #: src/dialogs.c:74
 msgid "gtranslator -- save file as .."
-msgstr "gtranslator -- tallenna nimellä.."
+msgstr "gtranslator -- tallenna nimellä .."
 
 #: src/dialogs.c:101
 #, c-format
@@ -705,14 +705,12 @@ msgid "Couldn't get the message! Grrr...."
 msgstr "Tekstiä ei saatu! Grrr...."
 
 #: src/find.c:122
-#, fuzzy
 msgid "There are no fuzzy messages left."
-msgstr "Sumeita tekstejä ei löydy enempää"
+msgstr "Sumeita tekstejä ei löydy enempää."
 
 #: src/find.c:146
-#, fuzzy
 msgid "All messages seem to be translated."
-msgstr "Kaikki tekstit näyttäisivät olevan käännetyt"
+msgstr "Kaikki tekstit näyttäisivät olevan käännetyt."
 
 #: src/spell.c:25
 msgid "Check spelling"
@@ -905,12 +903,11 @@ msgstr "Ei voida asettaa boolean-arvoa määrittämättömälle polulle!"
 
 #: libgtranslator/preferences.c:247
 msgid "No path defined for gfloat value"
-msgstr ""
+msgstr "Ei annettu polkua gfloat-arvolle"
 
 #: libgtranslator/preferences.c:272
-#, fuzzy
 msgid "No path defined to get the gfloat value from!"
-msgstr "Ei määritelty polkua josta integer voitaisiin hakea!"
+msgstr "Ei määritelty polkua josta gfloat-arvo voitaisiin hakea!"
 
 #. *
 #. * Set a date identifier; this ought to be also
@@ -926,55 +923,54 @@ msgstr "Päiväyksen luominen ei onnistunut!"
 
 #: libgtranslator/stylistics.c:71 libgtranslator/stylistics.c:143
 msgid "No color path found!"
-msgstr ""
+msgstr "Väripolkua ei löytynyt!"
 
 #: libgtranslator/stylistics.c:196
 msgid "No font set! Using default font"
-msgstr ""
+msgstr "Ei asetettu kirjasinta. Käytetään oletuskirjasinta."
 
 #. *
 #. * The default font for gtranslator.
 #. *
 #: libgtranslator/stylistics.c:200
 msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
+msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 
 #: libgtranslator/stylistics.c:204
 msgid "Couldn't even load default font!"
-msgstr ""
+msgstr "Edes oletuskirjasimen lataaminen ei onnistu!"
 
 #: libgtranslator/stylistics.c:224
 msgid "No widgets defined to manipulate their style"
-msgstr ""
+msgstr "Ei annettu vipuja näiden tyylien asettamiseen"
 
 #: src/languages.h:57
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 #: src/languages.h:60
 msgid "Arabic"
-msgstr "Arabia"
+msgstr "Arabic"
 
 #: src/languages.h:63
 msgid "Azeri"
-msgstr ""
+msgstr "Azeri"
 
 #: src/languages.h:66
 msgid "Basque"
-msgstr "Baski"
+msgstr "Basque"
 
 #: src/languages.h:69
-#, fuzzy
 msgid "Bielorussian"
-msgstr "Venäjä"
+msgstr "Bielorussian"
 
 #: src/languages.h:72
 msgid "Britton"
-msgstr ""
+msgstr "Britton"
 
 #: src/languages.h:75
 msgid "Bulgarian"
-msgstr "Bulgaria"
+msgstr "Bulgarian"
 
 #: src/languages.h:78
 msgid "Catalan"
@@ -982,43 +978,43 @@ msgstr "Catalan"
 
 #: src/languages.h:81
 msgid "Chinese/Simplified"
-msgstr "Kiina/yksinkertaistettu"
+msgstr "Chinese/Simplified"
 
 #: src/languages.h:84
 msgid "Chinese/Traditional"
-msgstr "Kiina/perinteinen"
+msgstr "Chinese/Traditional"
 
 #: src/languages.h:87
 msgid "Croatian"
-msgstr "Kroatia"
+msgstr "Croatian"
 
 #: src/languages.h:90
 msgid "Czech"
-msgstr "Tsekki"
+msgstr "Czech"
 
 #: src/languages.h:93
 msgid "Danish"
-msgstr "Tanska"
+msgstr "Danish"
 
 #: src/languages.h:96
 msgid "Dutch"
-msgstr ""
+msgstr "Dutch"
 
 #: src/languages.h:102
 msgid "English/Canada"
-msgstr "Englanti/Kanada"
+msgstr "English/Canada"
 
 #: src/languages.h:105
 msgid "English/GB"
-msgstr "Englanti/Iso-Britannia"
+msgstr "English/GB"
 
 #: src/languages.h:108
 msgid "English/USA"
-msgstr "Englanti/USA"
+msgstr "English/USA"
 
 #: src/languages.h:111
 msgid "Estonian"
-msgstr "Eesti"
+msgstr "Estonian"
 
 #: src/languages.h:114
 msgid "Farsi"
@@ -1026,120 +1022,119 @@ msgstr "Farsi"
 
 #: src/languages.h:117
 msgid "Finnish"
-msgstr "Suomi"
+msgstr "Finnish"
 
 #: src/languages.h:120
 msgid "French"
-msgstr "Ranska"
+msgstr "French"
 
 #: src/languages.h:123
 msgid "Galician"
-msgstr "Gael"
+msgstr "Galician"
 
 #: src/languages.h:126
 msgid "German"
-msgstr "Saksa"
+msgstr "German"
 
 #: src/languages.h:129
 msgid "Hungarian"
-msgstr "Magyar"
+msgstr "Hungarian"
 
 #: src/languages.h:132
 msgid "Indonesian"
-msgstr "Indonesia"
+msgstr "Indonesian"
 
 #: src/languages.h:135
 msgid "Italian"
-msgstr "Italia"
+msgstr "Italian"
 
 #: src/languages.h:138
 msgid "Irish"
-msgstr "Iiri"
+msgstr "Irish"
 
 #: src/languages.h:141
 msgid "Japanese"
-msgstr "Japani"
+msgstr "Japanese"
 
 #: src/languages.h:144
 msgid "Korean"
-msgstr "Korea"
+msgstr "Korean"
 
 #: src/languages.h:147
 msgid "Latvian"
-msgstr "Latvia"
+msgstr "Latvian"
 
 #: src/languages.h:150
 msgid "Lithuanian"
-msgstr "Liettua"
+msgstr "Lithuanian"
 
 #: src/languages.h:153
 msgid "Norwegian/Bokmaal"
-msgstr "Norja/bookmal"
+msgstr "Norwegian/Bokmaal"
 
 #: src/languages.h:156
 msgid "Norwegian/Nynorsk"
-msgstr "Norja/nynorsk"
+msgstr "Norwegian/Nynorsk"
 
 #: src/languages.h:159
 msgid "Polish"
-msgstr "Puola"
+msgstr "Polish"
 
 #: src/languages.h:162
 msgid "Portuguese"
-msgstr "Portugali"
+msgstr "Portuguese"
 
 #: src/languages.h:165
 msgid "Portuguese/Brazil"
-msgstr "Portugali/Brasilia"
+msgstr "Portuguese/Brazil"
 
 #: src/languages.h:168
 msgid "Russian"
-msgstr "Venäjä"
+msgstr "Russian"
 
 #: src/languages.h:171
 msgid "Serbian/Cyrillic"
-msgstr ""
+msgstr "Serbian/Cyrillic"
 
 #: src/languages.h:174
 msgid "Serbian/Latin"
-msgstr ""
+msgstr "Serbian/Latin"
 
 #: src/languages.h:177
-#, fuzzy
 msgid "Slovenian"
-msgstr "Slovaki"
+msgstr "Slovenian"
 
 #: src/languages.h:180
 msgid "Spanish"
-msgstr "Espanja"
+msgstr "Spanish"
 
 #: src/languages.h:183
 msgid "Spanish/Spain"
-msgstr "Espanja/Espanja"
+msgstr "Spanish/Spain"
 
 #: src/languages.h:186
 msgid "Spanish/Mexico"
-msgstr "Espanja/Meksiko"
+msgstr "Spanish/Mexico"
 
 #: src/languages.h:189
 msgid "Swedish"
-msgstr "Ruotsi"
+msgstr "Swedish"
 
 #: src/languages.h:192
 msgid "Thai"
-msgstr ""
+msgstr "Thai"
 
 #: src/languages.h:195
 msgid "Turkish"
-msgstr "Turkki"
+msgstr "Turkish"
 
 #: src/languages.h:198
 msgid "Ukrainian"
-msgstr "Ukraina"
+msgstr "Ukrainian"
 
 #: src/languages.h:201
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamese"
 
 #: src/languages.h:204
 msgid "Walloon"
@@ -1147,4 +1142,4 @@ msgstr "Walloon"
 
 #: src/languages.h:207
 msgid "Welsh"
-msgstr "Walesin kieli"
+msgstr "Welsh"
