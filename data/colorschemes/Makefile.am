@@ -20,6 +20,7 @@ schemes_DATA = \
 	sepia.xml \
 	spiffE.xml \
 	thinice.xml \
+	toyfactory.xml \
 	tuey.xml \
 	vim.xml \
 	waliays.xml \
