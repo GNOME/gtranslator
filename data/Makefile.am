@@ -7,7 +7,6 @@ DEFAULT_SUBDIRS = desktop \
 		oaf \
 		scripts \
 		gnome-config \
-		ui \
 		pkg-config
 
 ##
