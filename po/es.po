@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
-"POT-Creation-Date: 2001-09-30 21:48+0200\n"
-"PO-Revision-Date: 2001-09-30 19:31+0000\n"
+"POT-Creation-Date: 2001-11-03 14:29+0100\n"
+"PO-Revision-Date: 2001-11-01 23:41+0100\n"
 "Last-Translator: Juan Manuel García Molina <juanmagm@mail.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgstr "¡No se pudo recuperar la información del autor!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:308 src/translator.c:314
+#: src/color-schemes.c:308 src/translator.c:329
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -159,8 +159,8 @@ msgstr "Sensible a mayús/minús"
 msgid "English"
 msgstr "Inglés"
 
-#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:553 src/messages-table.c:448
-#: src/messages-table.c:482
+#: src/dialogs.c:700 src/dialogs.c:798 src/gui.c:560 src/messages-table.c:448
+#: src/messages-table.c:489
 msgid "Translated"
 msgstr "Traducido"
 
@@ -351,40 +351,40 @@ msgstr ""
 "No se pudo encontrar\n"
 "\"%s\""
 
-#: src/gui.c:250
+#: src/gui.c:252
 msgid "Edit comment"
 msgstr "Editar comentario"
 
-#: src/gui.c:539
+#: src/gui.c:546
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ quedan %i difusos ]"
 
-#: src/gui.c:539 src/gui.c:543 src/menus.c:352 src/messages-table.c:434
-#: src/messages-table.c:489
+#: src/gui.c:546 src/gui.c:550 src/menus.c:352 src/messages-table.c:434
+#: src/messages-table.c:496
 msgid "Fuzzy"
 msgstr "_Difuso"
 
-#: src/gui.c:543
+#: src/gui.c:550
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ no quedan difusos ]"
 
-#: src/gui.c:551
+#: src/gui.c:558
 msgid "Stick"
 msgstr "Pegar"
 
-#: src/gui.c:562
+#: src/gui.c:569
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ quedan %i no traducidos ]"
 
-#: src/gui.c:562 src/gui.c:564 src/messages-table.c:406
-#: src/messages-table.c:479
+#: src/gui.c:569 src/gui.c:571 src/messages-table.c:406
+#: src/messages-table.c:486
 msgid "Untranslated"
 msgstr "No traducido"
 
-#: src/gui.c:564
+#: src/gui.c:571
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ No quedan no traducidos ]"
@@ -392,72 +392,72 @@ msgstr "%s [ No quedan no traducidos ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:577
+#: src/gui.c:584
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Mensaje: %d / %d / Estado: %s"
 
-#: src/header_stuff.c:486
+#: src/header_stuff.c:482
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- editar cabecera"
 
-#: src/header_stuff.c:493 src/header_stuff.c:498
+#: src/header_stuff.c:489 src/header_stuff.c:494
 msgid "Project"
 msgstr "Proyecto"
 
-#: src/header_stuff.c:501
+#: src/header_stuff.c:497
 msgid "Translator and Language"
 msgstr "Traductor y Lengua"
 
-#: src/header_stuff.c:512
+#: src/header_stuff.c:508
 msgid "Comments:"
 msgstr "Comentarios:"
 
-#: src/header_stuff.c:518
+#: src/header_stuff.c:514
 msgid "Project name:"
 msgstr "Nombre del proyecto:"
 
-#: src/header_stuff.c:521
+#: src/header_stuff.c:517
 msgid "Project version:"
 msgstr "Versión del proyecto:"
 
-#: src/header_stuff.c:524
+#: src/header_stuff.c:520
 msgid "Pot file creation date:"
 msgstr "Fecha de creación del archivo pot:"
 
-#: src/header_stuff.c:529
+#: src/header_stuff.c:525
 msgid "Po file revision date:"
 msgstr "Fecha de revisión del archivo po:"
 
-#: src/header_stuff.c:536
+#: src/header_stuff.c:532
 msgid "Generator:"
 msgstr "Generador:"
 
-#: src/header_stuff.c:546
+#: src/header_stuff.c:542
 msgid "Use my options to complete the following entries:"
 msgstr "Usar mis opciones para completar las siguientes entradas:"
 
-#: src/header_stuff.c:559
+#: src/header_stuff.c:555
 msgid "Translator's name:"
 msgstr "Nombre del Traductor:"
 
-#: src/header_stuff.c:562
+#: src/header_stuff.c:558
 msgid "Translator's e-mail:"
 msgstr "E-mail del Traductor:"
 
-#: src/header_stuff.c:565 src/prefs.c:162
+#: src/header_stuff.c:561 src/prefs.c:166
 msgid "Language:"
 msgstr "Idioma:"
 
-#: src/header_stuff.c:571
+#: src/header_stuff.c:567
 msgid "Language group's e-mail:"
 msgstr "Correo del grupo del idioma:"
 
-#: src/header_stuff.c:576 src/prefs.c:178
+#: src/header_stuff.c:572 src/prefs.c:182
 msgid "Charset:"
 msgstr "Juego de caracteres:"
 
-#: src/header_stuff.c:581 src/prefs.c:183
+#: src/header_stuff.c:577 src/prefs.c:187
 msgid "Encoding:"
 msgstr "Codificación:"
 
@@ -749,84 +749,88 @@ msgstr "Valón"
 msgid "Welsh"
 msgstr "Galés"
 
-#: src/main.c:78
-msgid "Show build information/specifications"
-msgstr "Mostrar informaciones/especificaciones de construcción"
+#: src/main.c:80
+msgid "Auto translate the po file & exit"
+msgstr "Traduce automáticamente el archivo po y sale"
 
-#: src/main.c:82
-msgid "Specify main window geometry"
-msgstr "Especifica la geometría de la ventana principal"
-
-#: src/main.c:82
-msgid "GEOMETRY"
-msgstr "GEOMETRÍA"
-
-#: src/main.c:86
-msgid "Learn the file completely & exit"
-msgstr "Aprender el archivo completamente y salir"
-
-#: src/main.c:86
+#: src/main.c:80 src/main.c:92
 msgid "FILENAME"
 msgstr "NOMBREARCHIVO"
 
-#: src/main.c:90
+#: src/main.c:84
+msgid "Show build information/specifications"
+msgstr "Mostrar informaciones/especificaciones de construcción"
+
+#: src/main.c:88
+msgid "Specify main window geometry"
+msgstr "Especifica la geometría de la ventana principal"
+
+#: src/main.c:88
+msgid "GEOMETRY"
+msgstr "GEOMETRÍA"
+
+#: src/main.c:92
+msgid "Learn the file completely & exit"
+msgstr "Aprender el archivo completamente y salir"
+
+#: src/main.c:96
 msgid "Don't load any backend modules"
 msgstr "No cargar ningún módulo dorsal"
 
-#: src/main.c:94
+#: src/main.c:100
 msgid "Define another query-domains directory"
 msgstr "Definir otro directorio para dominios de consulta"
 
-#: src/main.c:94
+#: src/main.c:100
 msgid "LOCALEDIR"
 msgstr "DIRLOCAL"
 
-#: src/main.c:98
+#: src/main.c:104
 msgid "HTML file to write to"
 msgstr "Archivo HTML al que escribir"
 
-#: src/main.c:98
+#: src/main.c:104
 msgid "HTMLFILE"
 msgstr "ARCHIVOHTML"
 
-#: src/main.c:138
+#: src/main.c:144
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Error durante la inicialización de GConf: %s."
 
-#: src/main.c:161
+#: src/main.c:167
 msgid "gtranslator build information/specs:"
 msgstr "información/especificaciones de construcción de gtranslator:"
 
-#: src/main.c:163
+#: src/main.c:169
 msgid "Version and build date:"
 msgstr "Versión y día de construcción:"
 
-#: src/main.c:165
+#: src/main.c:171
 msgid "Build GLib/Gtk+/GNOME versions:"
 msgstr "Versiones de construcción de GLib/Gtk+/GNOME:"
 
-#: src/main.c:167
+#: src/main.c:173
 msgid "Backends directory:"
 msgstr "Directorio de dorsales:"
 
-#: src/main.c:169
+#: src/main.c:175
 msgid "Colorschemes directory:"
 msgstr "Directorio de esquemas de color:"
 
-#: src/main.c:171
+#: src/main.c:177
 msgid "Scripts directory:"
 msgstr "Directorio de scripts:"
 
-#: src/main.c:173
+#: src/main.c:179
 msgid "Window icon:"
 msgstr "Icono de ventana:"
 
-#: src/main.c:175
+#: src/main.c:181
 msgid "Own locale directory:"
 msgstr "Directorio de locales propios:"
 
-#: src/main.c:195
+#: src/main.c:211
 msgid "GModule implementation doesn't support loading dynamic modules!"
 msgstr "¡La implementación de GModule no admite cargar módulos dinámicamente!"
 
@@ -834,7 +838,7 @@ msgstr "¡La implementación de GModule no admite cargar módulos dinámicamente!"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:440
+#: src/main.c:517
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "Aprendizaje de '%s' exitoso.\n"
@@ -1179,7 +1183,7 @@ msgstr "No traducido (%i)"
 msgid "Fuzzy (%i)"
 msgstr "Confuso (%i)"
 
-#: src/messages-table.c:485
+#: src/messages-table.c:492
 msgid "Sticky"
 msgstr "Pegado"
 
@@ -1207,7 +1211,7 @@ msgstr "¡No se pudo abrir el archivo %s de gettext '%s'!"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "¡No se pudo abrir el archivo zip `%s'!"
 
-#: src/parse.c:120
+#: src/parse.c:122
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -1216,7 +1220,7 @@ msgstr ""
 "Nuevo carácter de escape encontrado: \\%c\n"
 "Añadir esto a parse.c, línea %i."
 
-#: src/parse.c:369
+#: src/parse.c:371
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1227,7 +1231,7 @@ msgstr ""
 "en línea %d.\n"
 "Por favor verifique el archivo e inténtelo de nuevo."
 
-#: src/parse.c:415
+#: src/parse.c:417
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1236,17 +1240,17 @@ msgstr ""
 "El archivo está vacío:\n"
 "%s"
 
-#: src/parse.c:439
+#: src/parse.c:441
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "¡El archivo '%s' no existe de ninguna manera!"
 
-#: src/parse.c:568
+#: src/parse.c:570
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:751
+#: src/parse.c:753
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1257,12 +1261,12 @@ msgstr ""
 "Los archivos pot se generan en el proceso de compilación.\n"
 "Sus archivo deberían nombrarse como '%s.po'."
 
-#: src/parse.c:813
+#: src/parse.c:815
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "¡No se pudo abrir el archivo `%s' para escritura!"
 
-#: src/parse.c:859
+#: src/parse.c:861
 #, c-format
 msgid ""
 "File %s\n"
@@ -1271,7 +1275,7 @@ msgstr ""
 "El archivo %s\n"
 "contiene %d mensajes difusos"
 
-#: src/parse.c:896
+#: src/parse.c:898
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -1282,15 +1286,15 @@ msgstr ""
 "%s\n"
 "¿Desea salvarlo de cualquier modo?"
 
-#: src/parse.c:904
+#: src/parse.c:906
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- no cambiado"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:989
+#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:991
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/parse.c:1016
+#: src/parse.c:1018
 #, c-format
 msgid ""
 "File %s\n"
@@ -1299,11 +1303,11 @@ msgstr ""
 "El archivo %s cambió.\n"
 "¿Desea volver a una copia guardada?"
 
-#: src/parse.c:1167
+#: src/parse.c:1169
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "¡Lo siente, msgfmt no está disponible en su sistema!"
 
-#: src/parse.c:1202
+#: src/parse.c:1204
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1312,79 +1316,241 @@ msgstr ""
 "Compilado con éxito:\n"
 "%s"
 
-#: src/prefs.c:109
+#: src/prefs.c:111
 msgid "gtranslator -- options"
 msgstr "gtranslator -- opciones"
 
-#: src/prefs.c:115
+#: src/prefs.c:117
 msgid "Personal information"
 msgstr "Información personal"
 
-#: src/prefs.c:117
+#: src/prefs.c:119
 msgid "Language settings"
 msgstr "Preferencias de Idioma"
 
-#: src/prefs.c:119
+#: src/prefs.c:121
 msgid "Po file editing"
 msgstr "Editando archivo Po"
 
-#: src/prefs.c:121
+#: src/prefs.c:123
 msgid "Miscellaneous"
 msgstr "Miscelánea"
 
-#: src/prefs.c:123
+#: src/prefs.c:125
 msgid "Recent files & spell checking"
 msgstr "Archivos recientes y revisión ortográfica"
 
-#: src/prefs.c:125
+#: src/prefs.c:127
 msgid "Fonts, colors and color schemes"
 msgstr "Fuentes, colores y esquemas de color"
 
-#: src/prefs.c:127
+#: src/prefs.c:129
 msgid "Autosaving"
 msgstr "Guardar automáticamente"
 
-#: src/prefs.c:129
+#: src/prefs.c:131
 msgid "Messages table"
 msgstr "Tabla de mensajes"
 
-#: src/prefs.c:135
+#: src/prefs.c:133
+msgid "Learn buffer & autotranslation"
+msgstr "Búifer de aprendizaje y traducción automática"
+
+#: src/prefs.c:139
 msgid "Author's name:"
 msgstr "Nombre del Autor:"
 
-#: src/prefs.c:138
+#: src/prefs.c:142
 msgid "Author's EMail:"
 msgstr "Correo del Autor:"
 
-#: src/prefs.c:151
+#: src/prefs.c:155
 msgid "Default query domain:"
 msgstr "Dominio por defecto para la consulta:"
 
-#: src/prefs.c:167
+#: src/prefs.c:171
 msgid "Language code:"
 msgstr "Código del idioma:"
 
-#: src/prefs.c:173
+#: src/prefs.c:177
 msgid "Language group's EMail:"
 msgstr "Correo del grupo del idioma:"
 
-#: src/prefs.c:192
+#: src/prefs.c:196
 msgid "Remove fuzzy status if message changed"
 msgstr "Borrar el estado de confuso si se modifica el mensaje"
 
-#: src/prefs.c:196
+#: src/prefs.c:200
 msgid "Warn if the po file contains fuzzy translations"
 msgstr "Avisar si el archivo po contiene traducciones ambiguas"
 
-#: src/prefs.c:200
+#: src/prefs.c:204
 msgid "Don't save unchanged po files"
 msgstr "No guardar los archivos po que no hayan cambiado"
 
-#: src/prefs.c:204
+#: src/prefs.c:208
 msgid "Warn me if I'm trying to save an unchanged file"
 msgstr "Avisar al tratar de guardar un fichero que no ha cambiado"
 
-#: src/prefs.c:208
+#: src/prefs.c:212
+msgid "Keep obsolete message in the po files"
+msgstr "Mantener mensajes obsoletos en los archivos po"
+
+#: src/prefs.c:219
+msgid "Use special character to indicate free space"
+msgstr "Usar caracteres especiales para indicar el espacio libre"
+
+#: src/prefs.c:222
+msgid "Enable the popup menu"
+msgstr "Activar el menú emergente"
+
+#: src/prefs.c:225
+msgid "Enable the functionality to update a po file from within gtranslator"
+msgstr "Activar la funcionalidad de actualizar un archivo po desde gtranslator"
+
+#: src/prefs.c:228
+msgid "Enable the functionality to remove all translations from a po file"
+msgstr ""
+"Activar la funcionalidad de borrar todas las traducciones de un archivo po"
+
+#: src/prefs.c:231
+msgid "Delete compiled files (e.g. \"project.gmo\")"
+msgstr "Borrar los archivos compilados (ej. \"project.gmo\")"
+
+#: src/prefs.c:234
+msgid "Load all backends on startup"
+msgstr "Cargar todos los dorsales al inicio"
+
+#: src/prefs.c:237
+msgid "Save geometry on exit & restore it on startup"
+msgstr ""
+"Guardar la geometría de gtranslator al salir & restablecerla al iniciar"
+
+#: src/prefs.c:240
+msgid "Show instant comment view in the main pane"
+msgstr "Mostrar la vista de comentarios instantáneos en el panel principal"
+
+#: src/prefs.c:243
+msgid "Show the views sidebar"
+msgstr "Mostrar la barra lateral de vistas"
+
+#: src/prefs.c:250
+msgid "Maximum number of entries in the recent files' list:"
+msgstr "Número máximo de entradas en la lista de archivos recientes:"
+
+#: src/prefs.c:254
+msgid "Check recent files before showing in recent files' list"
+msgstr "Verificar la existencia de cada archivo reciente antes de listarlo."
+
+#: src/prefs.c:257
+msgid "Instant spell checking"
+msgstr "Revisión ortográfica instantánea"
+
+#: src/prefs.c:260
+msgid "Use special dictionary"
+msgstr "Utilizar diccionario especial"
+
+#: src/prefs.c:264
+msgid "Dictionary to use:"
+msgstr "Diccionario a utilizar:"
+
+#: src/prefs.c:307
+msgid "Syntax color scheme to use:"
+msgstr "Esquema de colores de sintaxis a usar:"
+
+#: src/prefs.c:312
+msgid "Apply own fonts:"
+msgstr "Aplicar fuentes propias:"
+
+#: src/prefs.c:316
+msgid "Original text font:"
+msgstr "Fuente de texto original:"
+
+#: src/prefs.c:316
+msgid "gtranslator -- font selection/msgid font"
+msgstr "gtranslator -- selección de fuente/fuente de msgid"
+
+#: src/prefs.c:320
+msgid "Translation font:"
+msgstr "Fuente de traducción:"
+
+#: src/prefs.c:320
+msgid "gtranslator -- font selection/msgstr font"
+msgstr "gtranslator -- selección de fuente/fuente de msgstr"
+
+#: src/prefs.c:324
+msgid "Apply own colors:"
+msgstr "Aplicar colores propios:"
+
+#: src/prefs.c:328
+msgid "Foreground color:"
+msgstr "Color de primer plano:"
+
+#: src/prefs.c:328
+msgid "gtranslator -- foreground color"
+msgstr "gtranslator -- color de primer plano"
+
+#: src/prefs.c:332
+msgid "Background color:"
+msgstr "Color de fondo:"
+
+#: src/prefs.c:332
+msgid "gtranslator -- background color"
+msgstr "gtranslator -- color de fondo"
+
+#: src/prefs.c:339
+msgid "Save po files automatically at regular intervals"
+msgstr "Guardar los archivos po automáticamente a intervalos regulares"
+
+#: src/prefs.c:343
+msgid "Append a special suffix to the automatically saved files"
+msgstr "Añadir un sufijo especial a los archivos guardados automáticamente"
+
+#: src/prefs.c:347
+msgid "Autosave suffix:"
+msgstr "Sufijo de guardado automático:"
+
+#: src/prefs.c:351
+msgid "Autosave timeout in minutes:"
+msgstr "Tiempo en minutos para guardar automáticamente:"
+
+#: src/prefs.c:358
+msgid "Show the messages table (requires gtranslator restart)"
+msgstr "Mostrar la tabla de mensajes (requiere que se reinicie gtranslator)"
+
+#: src/prefs.c:362
+msgid "Collapse translated entries by default"
+msgstr "Obviar las entradas traducidas por defecto"
+
+#: src/prefs.c:366
+msgid "Use own colors for the messages table groups"
+msgstr "Usar colores personalizados para los grupos de la tabla de mensajes"
+
+#: src/prefs.c:370
+msgid "Untranslated entries color:"
+msgstr "Color de las entradas no traducidas"
+
+#: src/prefs.c:370
+msgid "gtranslator -- untranslated entries' color"
+msgstr "gtranslator -- color de las entradas no traducidas"
+
+#: src/prefs.c:374
+msgid "Fuzzy entries color:"
+msgstr "Color de las entradas dudosas:"
+
+#: src/prefs.c:374
+msgid "gtranslator -- fuzzy entries' color"
+msgstr "gtranslator -- color de entradas dudosas"
+
+#: src/prefs.c:378
+msgid "Translated entries color:"
+msgstr "Color de las entradas traducidas:"
+
+#: src/prefs.c:378
+msgid "gtranslator -- translated entries' color"
+msgstr "gtranslator -- color de las entradas traducidas"
+
+#: src/prefs.c:386
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
@@ -1392,175 +1558,39 @@ msgstr ""
 "Consultar también el búfer de aprendizaje personal mientras se traducen "
 "automáticamente los mensajes no traducidos"
 
-#: src/prefs.c:212
+#: src/prefs.c:390
 msgid "Automatically learn a newly translated message"
 msgstr "Aprender automáticamente un mensaje nuevo traducido"
 
-#: src/prefs.c:216
-msgid "Keep obsolete message in the po files"
-msgstr "Mantener mensajes obsoletos en los archivos po"
-
-#: src/prefs.c:223
-msgid "Use special character to indicate free space"
-msgstr "Usar caracteres especiales para indicar el espacio libre"
-
-#: src/prefs.c:226
-msgid "Enable the popup menu"
-msgstr "Activar el menú emergente"
-
-#: src/prefs.c:229
-msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr "Activar la funcionalidad de actualizar un archivo po desde gtranslator"
-
-#: src/prefs.c:232
-msgid "Enable the functionality to remove all translations from a po file"
+#.
+#. * Translators: With "fuzzy" I mean a more enhanced (and more
+#. *  crappy) logic while searching for appropriate translations
+#. *   for a original string.
+#.
+#: src/prefs.c:398
+msgid "Use \"fuzzy\" matching routines for the learn buffer queries"
 msgstr ""
-"Activar la funcionalidad de borrar todas las traducciones de un archivo po"
+"Usar rutinas de coincidencia \"confusas\" para las consultas del búfer de "
+"aprendizaje"
 
-#: src/prefs.c:235
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Borrar los archivos compilados (ej. \"project.gmo\")"
-
-#: src/prefs.c:238
-msgid "Save geometry on exit & restore it on startup"
+#: src/prefs.c:401
+msgid "Minimal required similarity percentage while doing autotranslation"
 msgstr ""
-"Guardar la geometría de gtranslator al salir & restablecerla al iniciar"
+"Porcentaje de similitud mínimo requerido al hacer la traducción automática"
 
-#: src/prefs.c:241
-msgid "Show the views sidebar"
-msgstr "Mostrar la barra lateral de vistas"
-
-#: src/prefs.c:248
-msgid "Maximum number of recent files shown in the recent files' list:"
-msgstr ""
-"Número máximo de archivos recientes a mostrar en la lista de archivos "
-"recientes:"
-
-#: src/prefs.c:252
-msgid "Check recent files before showing in recent files' list"
-msgstr "Verificar la existencia de cada archivo reciente antes de listarlo."
-
-#: src/prefs.c:255
-msgid "Instant spell checking"
-msgstr "Revisión ortográfica instantánea"
-
-#: src/prefs.c:258
-msgid "Use special dictionary"
-msgstr "Utilizar diccionario especial"
-
-#: src/prefs.c:261
-msgid "Dictionary to use:"
-msgstr "Diccionario a utilizar:"
-
-#: src/prefs.c:304
-msgid "Syntax color scheme to use:"
-msgstr "Esquema de colores de sintaxis a usar:"
-
-#: src/prefs.c:309
-msgid "Apply own fonts:"
-msgstr "Aplicar fuentes propias:"
-
-#: src/prefs.c:313
-msgid "Original text font:"
-msgstr "Fuente de texto original:"
-
-#: src/prefs.c:313
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- selección de fuente/fuente de msgid"
-
-#: src/prefs.c:317
-msgid "Translation font:"
-msgstr "Fuente de traducción:"
-
-#: src/prefs.c:317
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- selección de fuente/fuente de msgstr"
-
-#: src/prefs.c:321
-msgid "Apply own colors:"
-msgstr "Aplicar colores propios:"
-
-#: src/prefs.c:325
-msgid "Foreground color:"
-msgstr "Color de primer plano:"
-
-#: src/prefs.c:325
-msgid "gtranslator -- foreground color"
-msgstr "gtranslator -- color de primer plano"
-
-#: src/prefs.c:329
-msgid "Background color:"
-msgstr "Color de fondo:"
-
-#: src/prefs.c:329
-msgid "gtranslator -- background color"
-msgstr "gtranslator -- color de fondo"
-
-#: src/prefs.c:336
-msgid "Save po files automatically at regular intervals"
-msgstr "Guardar los archivos po automáticamente a intervalos regulares"
-
-#: src/prefs.c:340
-msgid "Append a special suffix to the automatically saved files"
-msgstr "Añadir un sufijo especial a los archivos guardados automáticamente"
-
-#: src/prefs.c:344
-msgid "Autosave suffix:"
-msgstr "Sufijo de guardado automático:"
-
-#: src/prefs.c:348
-msgid "Autosave timeout in minutes:"
-msgstr "Tiempo en minutos para guardar automáticamente:"
-
-#: src/prefs.c:355
-msgid "Show the messages table (requires gtranslator restart)"
-msgstr "Mostrar la tabla de mensajes (requiere que se reinicie gtranslator)"
-
-#: src/prefs.c:359
-msgid "Collapse translated entries by default"
-msgstr "Obviar las entradas traducidas por defecto"
-
-#: src/prefs.c:363
-msgid "Use own colors for the messages table groups"
-msgstr "Usar colores personalizados para los grupos de la tabla de mensajes"
-
-#: src/prefs.c:367
-msgid "Untranslated entries color:"
-msgstr "Color de las entradas no traducidas"
-
-#: src/prefs.c:367
-msgid "gtranslator -- untranslated entries' color"
-msgstr "gtranslator -- color de las entradas no traducidas"
-
-#: src/prefs.c:371
-msgid "Fuzzy entries color:"
-msgstr "Color de las entradas dudosas:"
-
-#: src/prefs.c:371
-msgid "gtranslator -- fuzzy entries' color"
-msgstr "gtranslator -- color de entradas dudosas"
-
-#: src/prefs.c:375
-msgid "Translated entries color:"
-msgstr "Color de las entradas traducidas:"
-
-#: src/prefs.c:375
-msgid "gtranslator -- translated entries' color"
-msgstr "gtranslator -- color de las entradas traducidas"
-
-#: src/prefs.c:420
+#: src/prefs.c:446
 msgid "Please enter your name!"
 msgstr "¡Por favor, introduzca su nombre!"
 
-#: src/prefs.c:434
+#: src/prefs.c:460
 msgid "Please enter your EMail address!"
 msgstr "¡Por favor, introduzca su dirección de correo electrónico!"
 
-#: src/prefs.c:447
+#: src/prefs.c:473
 msgid "Please enter a valid EMail address!"
 msgstr "¡Por favor, introduzca una dirección de correo electrónico válida!"
 
-#: src/prefs.c:688
+#: src/prefs.c:738
 msgid ""
 "The Preferences box allows you to customise gtranslator\n"
 "to work in ways you find comfortable and productive."
@@ -1568,7 +1598,7 @@ msgstr ""
 "El diálogo de preferencias le permite personalizar gtranslator\n"
 "para trabajar de modo confortable y productivo."
 
-#: src/prefs-dialog.c:116
+#: src/prefs-dialog.c:123
 msgid ""
 "\t\tThe Preferences box allows you to customise gtranslator\n"
 "\t\tto work in ways you find comfortable and productive."
@@ -1576,14 +1606,14 @@ msgstr ""
 "\t\tEl diálogo de preferencias le permite personalizar gtranslator\n"
 "\t\tpara trabajar de modo confortable y productivo."
 
-#: src/prefs-dialog.c:132
-msgid "Sections"
-msgstr "Secciones"
+#: src/prefs-dialog.c:139
+msgid "Preferences section"
+msgstr "Sección de preferencias"
 
 #.
 #. * Now the "simple" widget creation routines are following.
 #.
-#: src/prefs-dialog.c:139 src/prefs-dialog.c:302
+#: src/prefs-dialog.c:146 src/prefs-dialog.c:312
 msgid "gtranslator -- preferences"
 msgstr "gtranslator -- preferencias"
 
@@ -1591,7 +1621,7 @@ msgstr "gtranslator -- preferencias"
 #. * Build up a quite informative question dialog with the count
 #. *  of changes which are still pending.
 #.
-#: src/prefs-dialog.c:297
+#: src/prefs-dialog.c:307
 #, c-format
 msgid ""
 "%i preferences changes have been made.\n"
@@ -1608,12 +1638,12 @@ msgstr "¡No se pudo generar el día actual!"
 msgid "No replacements made!"
 msgstr "¡No hubo cambios!"
 
-#: src/save-differently.c:117
+#: src/save.c:117
 #, c-format
 msgid "Couldn't save compiled gettext file `%s'!"
 msgstr "¡No se pudo guardar el archivo compilado de gettext '%s'!"
 
-#: src/save-differently.c:160
+#: src/save.c:160
 #, c-format
 msgid "Couldn't save compressed gettext file `%s'!"
 msgstr "¡No se pudo abrir el archivo comprimido de gettext '%s'!"
@@ -1622,12 +1652,12 @@ msgstr "¡No se pudo abrir el archivo comprimido de gettext '%s'!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/save-differently.c:170
+#: src/save.c:170
 #, c-format
 msgid "Couldn't save %s'd gettext file `%s'!"
 msgstr "No se pudo guardar el archivo de gettext *%2$s' comprimido con %1$s"
 
-#: src/save-differently.c:229
+#: src/save.c:229
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
 msgstr "¡No se pudo abrir el archivo po comprimido con zip '%s'!"
@@ -1698,7 +1728,7 @@ msgstr "La actualización se realizó con éxito."
 msgid "An error occurred while updating the po file."
 msgstr "Ocurrió un error mientras se actualizaba el archivo po."
 
-#: src/utils.c:313 src/utils.c:330
+#: src/utils.c:314 src/utils.c:331
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "¡No se pudo crear el directorio `%s'!"
