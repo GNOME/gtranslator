@@ -7,7 +7,8 @@ DEFAULT_SUBDIRS = desktop \
 		oaf \
 		scripts \
 		gnome-config \
-		ui
+		ui \
+		pkg-config
 
 ##
 ## Extend it with the gconf-files if it's detected.
