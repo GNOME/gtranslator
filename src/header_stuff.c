@@ -32,6 +32,7 @@
 #include "prefs.h"
 #include "utf8.h"
 #include "utils.h"
+#include "utils_gui.h"
 
 #include <locale.h>
 #include <time.h>

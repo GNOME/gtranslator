@@ -32,6 +32,7 @@
 #include "query.h"
 #include "stylistics.h"
 #include "utils.h"
+#include "utils_gui.h"
 
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>

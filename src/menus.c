@@ -27,7 +27,7 @@
 #include "message.h"
 #include "parse.h"
 #include "prefs.h"
-#include "utils.h"
+#include "utils_gui.h"
 #include "views.h"
 
 #include "pixmaps/untrans.xpm"

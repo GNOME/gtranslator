@@ -31,7 +31,7 @@
 #include "prefs.h"
 #include "syntax.h"
 #include "utf8.h"
-#include "utils.h"
+#include "utils_gui.h"
 
 #include <string.h>
 #include <gtk/gtk.h>

@@ -37,9 +37,12 @@
 #include "session.h"
 #include "sighandling.h"
 #include "utils.h"
+#include "utils_gui.h"
 
 #include <signal.h>
+
 #include <gmodule.h>
+
 #include <gtk/gtkmain.h>
 
 #include <libgnome/gnome-util.h>

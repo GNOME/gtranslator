@@ -24,7 +24,7 @@
 
 #include "message.h"
 #include "parse.h"
-#include "utils.h"
+#include "utils_gui.h"
 
 #include <libgnome/gnome-i18n.h>
 

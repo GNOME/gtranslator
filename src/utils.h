@@ -22,13 +22,11 @@
 #define GTR_UTILS_H 1
 
 #include <glib.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtksignal.h>
 
 #include "parse.h"
 
 /*
- * Utility function for use within gtranslator.
+ * Non-GUI utility functions for gtranslator.
  */
  
 /*
@@ -88,47 +86,6 @@ gchar *gtranslator_utils_get_locale_name(void);
 gchar *gtranslator_utils_get_locale_charset(void);
 
 /*
- * Show the homepage of gtranslator.
- */
-void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);
-
-/*
- * Invert the dots in the message.
- */
-void gtranslator_utils_invert_dot(gchar *str);
-
-/*
- * Routines for saving/restoring/setting geometry of the main window.
- */
-void gtranslator_utils_save_geometry(void);
-void gtranslator_utils_restore_geometry(gchar *gstr);
-
-/*
- * Convenience functions for adding items 
- */
-GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget * table, 
-	gint row, const char *label_text, GList * list, const char *value,
-	GtkSignalFunc callback, gpointer user_data);
-
-GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget * table, 
-	gint row, const char *label_text, const char *value,
-	GtkSignalFunc callback);
-
-GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget * table, 
-	gint row, const char *label_text, gboolean value,
-	GtkSignalFunc callback);
-
-GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget * table, 
-	gint row, const char *label_text, const char *value,
-	GtkSignalFunc callback);
-
-/*
- * Returns the added GtkTable to the preferences box.
- */ 
-GtkWidget *gtranslator_utils_append_page_to_preferences_dialog(
-	GtkWidget * probox, gint rows, gint cols, const char *label_text);
-
-/*
  * The lists for the language informations -- are all changed 
  *  accordingly automatically.
  */
@@ -142,12 +99,6 @@ GList *languages_list, *encodings_list, *lcodes_list, *group_emails_list,
 void gtranslator_utils_language_lists_create(void);
 gboolean gtranslator_utils_language_lists_free(GtkWidget *widget, 
 	gpointer useless);
-
-/*
- * Checks the given file for the right permissions for
- *  open/writing the files.
- */
-gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file);
 
 /*
  * Convert the fg/bg settings from < 2001-03-03 to the new places.

@@ -42,6 +42,7 @@
 #include "syntax.h"
 #include "undo.h"
 #include "utils.h"
+#include "utils_gui.h"
 #include "views.h"
 
 #include <gdk/gdkkeysyms.h>
