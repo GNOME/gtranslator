@@ -42,7 +42,7 @@
 
 #include <popt-gnome.h>
 
-#ifdef USE_WINDOW_ICON
+#ifdef WINDOW_ICON
 #include <libgnomeui/gnome-window-icon.h>
 #endif
 
@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 	/*
 	 * Show the application window (with icon, if requested)
 	 */
-	#ifdef USE_WINDOW_ICON
+	#ifdef WINDOW_ICON
 	gnome_window_icon_set_default_from_file(WINDOW_ICON);
 	#endif
 	
