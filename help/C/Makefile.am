@@ -26,6 +26,7 @@ endif
 gtranslator_htmlfiles = \
 	authors.html \
 	bugs.html \
+	glossary.html \
 	index.html \
 	license.html \
 	prefs.html \
