@@ -375,9 +375,9 @@ void gtranslator_messages_table_update (void)
  */
 void gtranslator_messages_table_update_row(GtrMsg *message)
 {
-	ETreePath node=NULL;
+	/*ETreePath node=NULL;
 	
-	/* FIXME: this is not the way to go. Perhaps create a hash
+	FIXME: this is not the way to go. Perhaps create a hash
 	table with all the nodes and message->pos entries 
 	node=e_tree_model_get_node_by_id(tree_model, id);
 	if(node) g_print ("%s\n", message->msgid);
