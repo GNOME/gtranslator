@@ -177,19 +177,6 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 	 */
 	spec=gtranslator_config_get_string(path);
 
-	if(!spec)
-	{
-		/*
-		 * Possibly convert the old color specs to their new place.
-		 */
-		gtranslator_utils_old_colors_to_new_location();
-		
-		/*
-		 * And reread the specs from the now correct location.
-		 */
-		spec=gtranslator_config_get_string(path);
-	}
-
 	if(spec)
 	{
 		gdk_color_parse(spec, &color);

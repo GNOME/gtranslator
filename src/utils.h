@@ -34,7 +34,6 @@
 /*
  * Really nasty wrapper macros which should expand to really common constructs.
  */
-/* #define GTR_FREE(x) if(x) { g_free((x)); } else { g_assert(x); } (x)=NULL; */
 #define GTR_FREE(x) g_free((x)); (x)=NULL;
 #define GTR_ITER(x) if((x)->next) { (x)=(x)->next; } else { break; }
 
@@ -153,11 +152,6 @@ gboolean gtranslator_utils_language_lists_free(GtkWidget *widget,
 	gpointer useless);
 
 /*
- * Convert the fg/bg settings from < 2001-03-03 to the new places.
- */
-void gtranslator_utils_old_colors_to_new_location(void);
-
-/*
  * Setup the real language names ala "tr_TR" to get the localized values
  *  for the given "halfwise" language name.
  */
@@ -167,7 +161,6 @@ gchar *gtranslator_utils_get_full_language_name(gchar *lang);
  * Own getline implementation to handle very long comments.
  */
 gchar *gtranslator_utils_getline (FILE* stream);
-
 
 /*
  * These functions are all taken from GAL and integrated simply to here.

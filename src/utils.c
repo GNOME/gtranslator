@@ -872,37 +872,6 @@ gboolean gtranslator_utils_language_lists_free(GtkWidget  * widget, gpointer use
 	return FALSE;
 }
 
-/*
- * Try to convert the < 0.37 color preferences to their new location.
- */
-void gtranslator_utils_old_colors_to_new_location()
-{
-	gchar *value;
-	gboolean converted=FALSE;
-	
-	value=gtranslator_config_get_string("colors/fg");
-
-	if(value && value[0]=='#')
-	{
-		gtranslator_config_set_string("colors/own_fg", value);
-		converted=TRUE;
-	}
-
-	value=gtranslator_config_get_string("colors/bg");
-
-	if(value && value[0]=='#')
-	{
-		gtranslator_config_set_string("colors/own_bg", value);
-		converted=TRUE;
-	}
-
-	if(converted)
-	{
-		gtranslator_config_set_string("colors/fg", "black");
-		gtranslator_config_set_string("colors/bg", "white");
-	}
-}
-
 /* gtranslator_utils_getline
  *
  * reads newline (or CR) or EOF terminated line from stream, allocating the
