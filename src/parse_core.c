@@ -99,7 +99,8 @@ void gtranslator_parse(const gchar *filename)
 	po->length = g_list_length(po->messages);
 
 	/*
-	 * Set the utf8 field of the GtrPo to TRUE if we are editing an UTF-8 file.
+	 * Set the utf8 field of the GtrPo to TRUE if we are editing an UTF-8 
+	 *  encoded file.
 	 */
 	if(gtranslator_utf8_po_file_is_utf8())
 	{

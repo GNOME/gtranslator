@@ -71,15 +71,24 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 }
 
 /*
- * Remove the gtranslator-generated temp.-file.
+ * Remove the gtranslator-generated temp.-files.
  */
-void gtranslator_utils_remove_temp_file()
+void gtranslator_utils_remove_temp_files()
 {
 	gchar *tempfile=gtranslator_utils_get_temp_file_name();
 
 	/*
-	 * Test if the file is present and clean it up.
+	 * Check and clean up our "namespace" in ~/.gtranslator.
 	 */
+	 
+	if(g_file_exists(tempfile))
+	{
+		remove(tempfile);
+	}
+
+	g_free(tempfile);
+	tempfile=gtranslator_utils_get_save_differently_file_name();
+
 	if(g_file_exists(tempfile))
 	{
 		remove(tempfile);
@@ -194,6 +203,20 @@ gchar *gtranslator_utils_get_crash_file_name()
 		g_get_home_dir());
 
 	return crashfile;
+}
+
+/*
+ * Get the different filename for the save-differently.c/.h routines.
+ */
+gchar *gtranslator_utils_get_save_differently_file_name()
+{
+	gchar *sd_file;
+
+	sd_file=g_strdup_printf(
+		"%s/.gtranslator/gtranslator-save-differently-temp-po-file",
+		g_get_home_dir());
+
+	return sd_file;
 }
 
 /*

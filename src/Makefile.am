@@ -62,6 +62,7 @@ gtranslator_SOURCES = \
 	prefs.c prefs_init.c prefs.h \
 	query.c query.h \
 	replace.c replace.h \
+	save-differently.c save-differently.h \
 	session.c session.h \
 	sidebar.c sidebar.h \
 	sighandling.c sighandling.h \
@@ -69,7 +70,6 @@ gtranslator_SOURCES = \
 	syntax.c syntax.h \
 	syntax-elements.h \
 	translation-memory.c translation-memory.h \
-	undo-core.c undo-core.h \
 	undo.c undo.h \
 	update.c \
 	utf8.c utf8.h \

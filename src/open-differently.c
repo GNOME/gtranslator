@@ -42,6 +42,15 @@
 void open_compressed_po_file(gchar *file, gchar *command);
 
 /*
+ * Internally used functions' prototypes.
+ */ 
+void gtranslator_open_compiled_po_file(gchar *file);
+void gtranslator_open_gzipped_po_file(gchar *file);
+void gtranslator_open_bzip2ed_po_file(gchar *file);
+void gtranslator_open_compressed_po_file(gchar *file);
+void gtranslator_open_ziped_po_file(gchar *file); 
+
+/*
  * Detects whether we can open up the given file with the
  *  "special" open functions of gtranslator.
  */

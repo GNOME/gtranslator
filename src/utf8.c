@@ -144,7 +144,7 @@ gchar *gtranslator_utf8_get_utf8_string(gchar **string)
 
 	utf8_string=gtranslator_convert_string_to_utf8(*string,
 		po->header->charset);
-	
+
 	return utf8_string;
 }
 
@@ -218,7 +218,7 @@ void gtranslator_utf8_set_gtk_text_from_utf8_string(GtkWidget *text,
 	plain_string=gtranslator_convert_string_from_utf8(utf8_string,
 		po->header->charset);
 	g_return_if_fail(plain_string!=NULL);
-	
+
 	/*
 	 * We'll use our syntax highlighted insertion method also here .-)
 	 */

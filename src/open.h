@@ -23,38 +23,12 @@
 #include <glib.h>
 
 /*
- * These functions are good for opening up compiled gettext/gzipped
- *  po files.
+ * Opening files differently: opening gzip'ed/bzip2'ed etc. files via utility functions.
  */
 
 /*
  * Detects if we can open it with our "special" open functions.
  */
-gboolean gtranslator_open_po_file(gchar *file); 
-
-/*
- * Open up a compiled gettext po file.
- */ 
-void gtranslator_open_compiled_po_file(gchar *file);
-
-/*
- * Open up a gzip'ed plain gettext po file (.po.gz).
- */
-void gtranslator_open_gzipped_po_file(gchar *file);
-
-/*
- * Open up a bzip2'ed plain gettext po file (.po.bz2).
- */
-void gtranslator_open_bzip2ed_po_file(gchar *file);
-
-/*
- * Open up a compress'ed plain gettext po file (.po.Z).
- */ 
-void gtranslator_open_compressed_po_file(gchar *file);
-
-/*
- * Open a zip'ed gettext po file (.po.zip).
- */
-void gtranslator_open_ziped_po_file(gchar *file); 
+gboolean gtranslator_open_po_file(gchar *file);
 
 #endif

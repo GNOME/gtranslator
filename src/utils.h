@@ -35,9 +35,9 @@
 gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 
 /*
- * Remove the possibly generated temporary file of gtranslator.
+ * Remove the possibly generated temporary files of gtranslator.
  */
-void gtranslator_utils_remove_temp_file(void); 
+void gtranslator_utils_remove_temp_files(void); 
 
 /*
  * Return the filename of our generally used temporary filename.
@@ -48,6 +48,11 @@ gchar *gtranslator_utils_get_temp_file_name(void);
  * Return the name of our crash-security filename.
  */
 gchar *gtranslator_utils_get_crash_file_name(void);
+
+/*
+ * Return the name of the pre-differently save filename.
+ */
+gchar *gtranslator_utils_get_save_differently_file_name(void);
 
 /*
  * Set up our temporary file names for the test compile run.

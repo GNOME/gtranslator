@@ -17,35 +17,15 @@
  *
  */
 
-#ifndef GTR_UNDO_CORE_H
-#define GTR_UNDO_CORE_H 1
+#ifndef GTR_SAVE_DIFFERENTLY_H
+#define GTR_SAVE_DIFFERENTLY_H 1
 
 #include <glib.h>
 
 /*
- * The GtrUndoCore structure -- not used directly but as the base for all the
- *  Undo/Redo stuff it's needed here.
+ * Try to save the file "differently" -- very similar to the open-differently
+ *  interface for opening the files "differently".
  */
-typedef struct {
-	GFunc		function;
-	GFunc		reverse_function;
-	
-	gchar		*name;
-	
-	gpointer	once;
-	gpointer	twice;
-	gpointer	trice;
-} GtrUndoCore;
-
-#define GTR_UNDO_CORE(x) ((GtrUndoCore *) x)
-
-/*
- * Creation/deletion functions.
- */
-GtrUndoCore *gtranslator_undo_core_new(GFunc function, GFunc reverse_function,
-	const gchar *name, gconstpointer once, gconstpointer twice,
-	gconstpointer trice);
-
-void gtranslator_undo_core_free(GtrUndoCore **core);
+gboolean gtranslator_save_po_file(const gchar *filename);
 
 #endif

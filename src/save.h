@@ -17,13 +17,15 @@
  *
  */
 
-#ifndef GTR_UNDO_H
-#define GTR_UNDO_H 1
+#ifndef GTR_SAVE_DIFFERENTLY_H
+#define GTR_SAVE_DIFFERENTLY_H 1
 
 #include <glib.h>
 
 /*
- * FIXME: Redesign.
+ * Try to save the file "differently" -- very similar to the open-differently
+ *  interface for opening the files "differently".
  */
+gboolean gtranslator_save_po_file(const gchar *filename);
 
 #endif

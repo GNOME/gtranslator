@@ -269,7 +269,7 @@ int main(int argc, char *argv[])
 	 * Clean up the temporary file in the user's home dir eventually 
 	 *  created by gtranslator.
 	 */
-	gtranslator_utils_remove_temp_file();
+	gtranslator_utils_remove_temp_files();
 
 	/*
 	 * Test if there's a crash recovery file lying around in ~.

@@ -283,7 +283,7 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Remove any lungering temp. file.
 	 */
-	gtranslator_utils_remove_temp_file();
+	gtranslator_utils_remove_temp_files();
 	
 	/*
 	 * Store the current date.
