@@ -31,6 +31,6 @@
 /*
  * Opens up the given file via GnomeVFS routines.
  */
-void gtranslator_vfs_handle_open_file(gchar *filestring);
+void 		gtranslator_vfs_handle_open_file(gchar *filestring);
 
 #endif

@@ -1,27 +1,28 @@
-/**
-*
-* (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
-*
-* This is distributed under the GNU GPL V 2.0 or higher which can be
-*  found in the file COPYING for further studies.
-*
-* Enjoy this piece of software, brain-crack and other nice things.
-*
-* WARNING: Trying to decode the source-code may be hazardous for all your
-*	future development in direction to better IQ-Test rankings!
-*
-* PSC: This has been completely written with vim; the best editor of all.
-*
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ *
+ * libgtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *    (at your option) any later version.
+ *
+ * libgtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
-/**
-* Include the header.
-**/
 #include <libgtranslator/stylistics.h>
 
-/**
-* This routines sets all the nice colors.
-**/
+/*
+ * Saves the colors from the given GnomeColorPicker.
+ */
 void gtranslator_color_values_set(GnomeColorPicker *colorpicker,
 	ColorValueType Type)
 {
@@ -49,11 +50,13 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker,
 			g_warning(_("No color path found!"));
 			return;
 	}
+	
 	gnome_color_picker_get_i16(GNOME_COLOR_PICKER(colorpicker),
 		&red, &green, &blue, &alpha);
-	/**
-	* Store the color values.
-	**/
+	
+	/*
+	 * Store the color values.
+	 */
 #define set_color(key,val) \
 	g_snprintf(path, 23, "colors/%s_%s", section, key);\
 	gtranslator_config_set_int(path, val);
@@ -64,9 +67,9 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker,
 #undef set_color
 }
 
-/**
-* And this sets the values to the given GnomeColorPicker.
-**/
+/*
+ * Restores the GnomeColorPicker colors.
+ */
 void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 	ColorValueType Type)
 {
@@ -94,9 +97,10 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 			g_warning(_("No color path found!"));
 			return;
 	}
-	/**
-	* Store the color values.
-	**/
+	
+	/*
+	 * Restore the color values from the preferences.
+	 */
 #define get_color(key,val) \
 	g_snprintf(path, 23, "colors/%s_%s", section, key);\
 	val = gtranslator_config_get_int(path);
@@ -105,90 +109,94 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker,
 	get_color("blue", blue);
 	get_color("alpha", alpha);
 #undef get_color
-	/**
-	* Set the values in the given GnomeColorPicker.
-	**/
+	
 	gnome_color_picker_set_i16(colorpicker, red,
 		green, blue, alpha);
 }		
 
-/**
-* This function parses the stored informations about font/colors
-*  and restores them.
-**/
+/*
+ * Sets the style informations for the given widget
+ *  (foreground, background and font).
+ */
 void gtranslator_set_style(GtkWidget *widget)
 {
-	/**
-	* The stuff around this.
-	**/
 	GtkStyle *style;
 	GdkColor *fg, *bg;
 	gchar *fontname;
 
 	gtranslator_config_init();
-	/**
-	* Get the fontname.
-	**/
+	
+	/*
+	 * The stored font setting.
+	 */
 	fontname=gtranslator_config_get_string("font/name");
-	/**
-	* Test the font name.
-	**/
+
 	if(!fontname)
 	{
 		g_warning(_("No font set! Using default font"));
-		/**
-		* The default font for gtranslator.
-		**/
+		/*
+		 * Use gtranslator's font in this case.
+		 */
 		fontname=_("-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1");
 	}
-	/**
-	* Check if the widget is existent and get it's style.
-	**/
-	if(widget) {
-		/**
-		* Get the style of the given widget.
-		**/
+	/*
+	 * Check the given widget and get the widget style.
+	 */
+	if(widget)
+	{
+		/*
+		 * Copy the style informations of the given widget.
+		 */
 		style=gtk_style_copy(gtk_widget_get_style(widget));
-	} else {
+	}
+	else
+	{
 		g_error ("No widgets defined to manipulate their style");
 		return;
 	}
-	/**
-	* Get the background and set the values.
-	**/
+	
+	/*
+	 * Get the background informations/values of the widget.
+	 */
 	bg=&style->base[0];
-	/**
-	* Get the values for the style as integers, so multiplicate the
-	*  float values from the GnomeColorPicker with 65536 to get the nearer
-	*   integer value guaranteed by the cast.
-	**/
+	
+	/*
+	 * Set up the stored values for the background from the preferences.
+	 */
 	bg->red=gtranslator_config_get_int("colors/bg_red");
 	bg->green=gtranslator_config_get_int("colors/bg_green");
 	bg->blue=gtranslator_config_get_int("colors/bg_blue");
-	/**
-	* And the same for the foreground.
-	**/
+	
+	/*
+	 * Do the same for the foreground.
+	 */
 	fg=&style->text[0];
 	fg->red=gtranslator_config_get_int("colors/fg_red");
 	fg->green=gtranslator_config_get_int("colors/fg_green");
 	fg->blue=gtranslator_config_get_int("colors/fg_blue");
-	/**
-	* Release the font.
-	**/
+	
+	/*
+	 * Unref/free the widget font.
+	 */
 	gdk_font_unref(style->font);
-	/**
-	* And set the stored font.
-	**/
+	
+	/*
+	 * Set the font for the widget from the stored fontname.
+	 */
 	style->font=gdk_font_load(fontname);
 	if(!style->font)
+	{	
 		g_error(_("Couldn't even load default font!"));
-	/**
-	* Finally set the style
-	**/
+	}
+	
+	/*
+	 * The final step: set the widget style.
+	 */
 	gtk_widget_set_style(GTK_WIDGET(widget), style);
-	/**
-	* Unref/clean up the style.
-	**/
+	
+	/*
+	 * Clean up and close gtranslator's config interface.
+	 */
 	gtk_style_unref(style);
 	g_free(fontname);
 	gtranslator_config_close();

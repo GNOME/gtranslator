@@ -30,6 +30,6 @@
 /*
  * This initializes the default team database.
  */
-GtranslatorTeamDatabase *gtranslator_init_team_db();
+GtranslatorTeamDatabase 	*gtranslator_init_team_db();
 
 #endif

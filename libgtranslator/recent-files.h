@@ -29,21 +29,31 @@
 /*
  * Returns the list of the recent files.
  */
-GList *gtranslator_get_recent_files(gboolean delete_nonexistent);
+GList 		*gtranslator_get_recent_files(gboolean delete_nonexistent);
 
 /*
- * Saves the given list of (probably) recent filenames.
+ *
  */
-void gtranslator_set_recent_files(GList *filenames);
+void		gtranslator_set_recent_files(GList *filenames);
+
+/*
+ * Clears the list of the recent files.
+ */
+void 		gtranslator_clear_recent_files();
+
+/*
+ * Appends the given filename to the list of recent files.
+ */
+void		gtranslator_append_recent_file(gchar *filename);
 
 /*
  * Returns the length of the "private" recent files' list.
  */
-gint gtranslator_get_recent_files_length();
+gint 		gtranslator_get_recent_files_length();
 
 /*
  * Returns the requested nth element in the recent files' list.
  */
-gchar *gtranslator_get_recent_files_entry(gint n);
+gchar 		*gtranslator_get_recent_files_entry(gint n);
 
 #endif

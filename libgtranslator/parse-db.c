@@ -1,27 +1,32 @@
-/**
-*
-* (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
-*
-* This is distributed under the GNU GPL V 2.0 or higher which can be
-*  found in the file COPYING for further studies.
-*
-* Enjoy this piece of software, brain-crack and other nice things.
-*
-* WARNING: Trying to decode the source-code may be hazardous for all your
-*	future development in direction to better IQ-Test rankings!
-*
-* PSC: This has been completely written with vim; the best editor of all.
-*
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *		Gediminas Paulauskas <menesis@delfi.lt>
+ * 
+ * libgtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *    (at your option) any later version.
+ *
+ * libgtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #include <libgtranslator/parse-db.h>
 #include <libgtranslator/translation-database.h>
 #include <libgtranslator/messages.h>
 
-/**
-* Parses the lang.xml file into a GtranslatorDatabase.
-**/
-GtranslatorDatabase * parse_db_for_lang(gchar *language)
+/*
+ * Loads the given language's database and returns the created
+ *  language database.
+ */
+GtranslatorDatabase *parse_db_for_lang(gchar *language)
 {
 	gchar 			*file;
 	gboolean 		lusp=FALSE;
@@ -29,43 +34,39 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 	xmlDocPtr 		xmldoc;
 	GtranslatorDatabase	*db;
 	GList			*messages = NULL;
-	/**
-	* Check if we did get a language to search for ..
-	**/
+	
 	if(!language)
 	{
 		g_warning(_("No language defined in the query request!"));
 	}
-	/**
-	* Check if we got a 'tr_TR' alike language request ..
-	**/
+	
+	/*
+	 * If the requested language is coded in a long sequence (e.g. "tr_TR").
+	 */
 	if(strchr(language, '_'))
 	{
-		/**
-		* If a 'tr_TR' isn't found then we go to the superclass db: 'tr'.
-		* Just show a message that tells this.
-		**/
+		/*
+		 * If a subclass message/translation database should be loaded,
+		 *  we'd also look for the superclass message database.
+		 */
 		g_print(_("FYI: Will also lookup the superclass message db.\n"));
 		lusp=TRUE;
 	}
+	
 	file=g_strdup_printf("%s/%s.xml",MESSAGE_DB_DIR,language);
  	db = g_new(GtranslatorDatabase, 1);
 	db->header = g_new(GtranslatorDatabaseHeader, 1);
-	/**
-	* Set the filename of the DB.
-	**/
+	
+	/*
+	 * Show some informations to the user.
+	 */
 	GTR_DB_FILENAME(db)=file;
-	/**
-	* Print some information to the user.
-	**/
 	g_print(_("Using %s as the message database... \n"), file);
-	/**
-	* Parse the xml file.
-	**/
+	
 	xmldoc=xmlParseFile(file);
-	/**
-	* If there's no such file print an error .
-	**/
+	/*
+	 * Check the resulting xml document.
+	 */
 	if(xmldoc==NULL)
 	{
 		if(lusp==FALSE)
@@ -75,78 +76,67 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 		}
 		else
 		{
-			/**
-			* A string array and get the language name into the array's
-			*  first element.
-			**/
 			gchar **sarr;
+			/*
+			 * Split up the language code into it's parts.
+			 */
 			sarr=g_strsplit(language,"_",1);
-			/**
-			* Print some information.
-			**/
+	
+			/*
+			 * Print out some information.
+			 */
 			g_print(_("Subclass file `%s.xml' not found.\n"),language);
 			g_print(_("Trying superclass-file `%s.xml' ...\n"),sarr[0]);
-			/**
-			* Set the language name.
-			**/
+	
+			/*
+			 * Get the language's name itself.
+			 */
 			GTR_DB_LANG(db)=sarr[0];
-			/**
-			* Recurse within the same function with the new language  word ..
-			**/
+
+			/*
+			 * Recursively call this function again for the superclass
+			 *  message database.
+			 */
 			parse_db_for_lang(sarr[0]);
-			/**
-			* Free the string array.
-			**/
-			if(sarr)
-			{
-				g_strfreev(sarr);
-			}	
+	
+			g_strfreev(sarr);
 		}
 	}
-	/**
-	* Get the nodes.
-	**/
 	node=xmldoc->xmlRootNode->xmlChildrenNode;
-	/**
-	* Set the author name.
-	**/
+	/*
+	 * Get the database author's name.
+	 */
 	GTR_DB_TRANSLATOR(db)=g_strdup(
 		xmlGetProp(xmldoc->xmlRootNode, "author"));
-	/**
-	* Print the informations about the message database.
-	**/
-	g_print(_("Database creator/administrator: %s\n"), GTR_DB_TRANSLATOR(db));
-	/**
-	* And the author email for the DB.
-	**/
 	GTR_DB_TRANSLATOR_EMAIL(db)=g_strdup(
 		xmlGetProp(xmldoc->xmlRootNode, "email"));
-	/**
-	* Again inform the user about some parts of it.
-	**/
+
+	/*
+	 * Again print out some informations.
+	 */
+	g_print(_("Database creator/administrator: %s\n"), GTR_DB_TRANSLATOR(db));
 	g_print(_("EMail: %s\n"), GTR_DB_TRANSLATOR_EMAIL(db));
-	/**
-	* Get the nodes.
-	**/
+	
 	while(node!=NULL)
 	{
                 GtrMsg *msg=g_new0(GtrMsg,1);
-		/**
-		* Get the serial.
-		**/
+		/*
+		 * Set up the serial information of the database.
+		 */
 		if(!strcmp(node->name, "serial"))
 		{
-			/**
-			* Print these informations out! We wanna know
-			*  the contact persons.
-			**/
+			/*
+			 * Print out the general informations about the
+			 *  message database.
+			 */
 			g_print(_("Message database informations:\n"));
 			g_print(_("Date: %s\nSerial: %s\n"),
 				xmlGetProp(node, "date"),
 				xmlNodeGetContent(node));
-			/**
-			* Set the serial information of the DB.
-			**/
+			/*
+			 * Set up the serial information of the message
+			 *  database.
+			 */
 			GTR_DB_SERIAL(db)=(gint)xmlNodeGetContent(node);
 		}
 		if(!strcmp(node->name, "msgid"))
@@ -155,34 +145,33 @@ GtranslatorDatabase * parse_db_for_lang(gchar *language)
 			newnode=node->xmlChildrenNode;
 			if(newnode)
 			{
-				/**
-				* Get the message entries.
-				**/
+				/*
+				 * Get the GtrMsg parts out of the database.
+				 */
 				msg->msgid=xmlGetProp(node, "name");
 				msg->msgstr=xmlNodeGetContent(newnode);
-				/**
-				* Add them to the list.
-				**/
+	
+				/*
+				 * Append the GtrMsg to the list.
+				 */
 				messages=g_list_prepend(messages,
 					(gpointer) msg);
-				/**
-				* Free the node.
-				**/
+	
 				xmlFreeNode(newnode);
-			}	
+			}
 		}
 		node=node->next;
 	}
-	/**
-	* Now reverse the list.
-	**/
+	/*
+	 * Reverse the list as we did _pre_pend all the items
+	 *  till now.
+	 */
 	messages=g_list_reverse(messages);
-	/**
-	* Set the database messages list to the current list.
-	**/
+	
+	/*
+	 * Set up the database's messages list.
+	 */
 	GTR_DB_LIST(db)=messages;
-	/**
-	* Return the parsed database.
-	**/
+	
 	return db;
 }

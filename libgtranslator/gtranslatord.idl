@@ -1,15 +1,20 @@
 //
-// (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
+// (C) 2000 	Fatih Demir <kabalak@gmx.net>
 //
-// This is distributed under the GNU GPL V 2.0 or higher which can be
-//  found in the file COPYING for further studies.
+// gtranslatord is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation; either version 2 of the License, or
+//    (at your option) any later version.
 //
-// Enjoy this piece of software, brain-crack and other nice things.
+// gtranslatord is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
 //
-// WARNING: Trying to decode the source-code may be hazardous for all your
-//  future development in direction to better IQ-Test rankings!
+// You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// PSC: This has been completely written with vim; the best editor of all.
 //
 
 #ifndef GTRANSLATORD_IDL
@@ -18,9 +23,15 @@
 module libgtranslator
 {
 	interface gtranslatord {
-		// the stringlist for the results.
+	
+		//
+		// The stringlist for the results.
+		//
 		typedef sequence<string> ResultStrings;
-		// enum for query.
+		
+		//
+		// The Query results are handled in this enumeration.
+		//
 		enum QueryResult {
 			SUCCESS,
 			MULTIPLESUCCESS,
@@ -28,26 +39,58 @@ module libgtranslator
 			DEADSERVER,
 			NOMSGDB
 		};
-		// exceptions.
+		
+		//
+		// The exceptions.
+		//
 		exception gtranslatordNoMsgDb {};
 		exception gtranslatordNoServer {};
 		exception gtranslatordNoShutDown { string error; };
-		// create new server.
-		long gtranslatorServerNew(in string host) raises(gtranslatordNoServer);
-		// shutdown server. 
-		// 1) By hostname (localhost)
-		void gtranslatorServerShutDown(in string host) raises(gtranslatordNoShutDown);
-		// 2) By host_id (23)
-		void gtranslatorServerShutDownById(in long hostId) raises(gtranslatordNoShutDown);
-		// gets the hostname for the given host_id
+		
+		//
+		// Creates a new server.
+		//
+		long gtranslatorServerNew(in string host) 
+			raises(gtranslatordNoServer);
+		
+		//
+		// Shutdown the server.
+		//
+		// 1 - By the hostname (e.g. "localhost")
+		//
+		void gtranslatorServerShutDown(in string host)
+			raises(gtranslatordNoShutDown);
+		
+		//	
+		// 2 - By the host id (e.g. 23)
+		//
+		void gtranslatorServerShutDownById(in long hostId)
+			raises(gtranslatordNoShutDown);
+		//	
+		// Returns the hostname of the given hostid.
+		//
 		string gtranslatorServerGetHost(in long hostId);
-		// query the message db.
+		
+		//
+		// Query the message database for the given "query".
+		//
 		void gtranslatordQuery(in string query,out string result);
-		// query the message db with some args.
-		void gtranslatordQueryWithLength(in string query,in long minimumLength);
-		// establish a connection with a client
+		
+		//
+		// Query the message server for the given "query"
+		//  requiring a "minimumLength" equality.
+		//
+		void gtranslatordQueryWithLength(in string query,
+			in long minimumLength);
+			
+		//	
+		// Establish a connection to the given client.
+		//
 		void gtranslatordConnect(in string host,in string client);
-		// and disconnect ..
+		
+		//
+		// Disconnect from the given client.
+		//
 		void gtranslatordDisConnect(in string host,in string client);
 	};
 };

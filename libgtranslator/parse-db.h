@@ -1,42 +1,48 @@
-/**
-*
-* (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
-*
-* This is distributed under the GNU GPL V 2.0 or higher which can be
-*  found in the file COPYING for further studies.
-*
-* Enjoy this piece of software, brain-crack and other nice things.
-*
-* WARNING: Trying to decode the source-code may be hazardous for all your
-*	future development in direction to better IQ-Test rankings!
-*
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *
+ * libgtranslator is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *    (at your option) any later version.
+ *
+ * libgtranslator is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
 #ifndef LIBGTRANSLATOR_PARSE_DB_H
 #define LIBGTRANSLATOR_PARSE_DB_H 1
 
+/*
+ * The old parse_db interface for the message database stuff.
+ */ 
+
 #include <glib.h>
 #include <string.h>
-
-/**
-* The libxml includes.
-**/
 #include <tree.h>
 #include <parser.h>
 #include <xmlmemory.h>
 
-/**
-* Include the database header.
-**/
+/*
+ * Include the message/translation database header.
+ */
 #include "translation-database.h"
 
-/* Maybe we have already included this stuff */
+/*
+ * Maybe we have already included this stuff
+ */
 #ifndef __GNOME_I18N_H__
 
-/**
-* If NLS is requested include the headers and set the define and if it's
-*  not requested, simply make a foo-define.
-*/
+/*
+ * If NLS is requested include the headers and set the define.
+ */
 #ifdef ENABLE_NLS
 #    include <libintl.h>
 #    define _(String) gettext(String)
@@ -57,10 +63,9 @@
 
 #endif
 
-/**
-* Loads the message database for the specified language
-*  and returns the loaded database.
-**/
-GtranslatorDatabase * parse_db_for_lang(gchar *language_code);
+/*
+ * Loads the message/translation database for the given language code.
+ */
+GtranslatorDatabase 		*parse_db_for_lang(gchar *language_code);
 
 #endif

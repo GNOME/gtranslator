@@ -49,7 +49,7 @@ GtranslatorTeamDatabase *gtranslator_init_team_db()
 		 */
 		g_warning(
 		_("Couldn't open the team database file `%s'!"),
-			filename);
+			MESSAGE_DB_DIR "/teams.xml");
 		return NULL;
 	}
 	

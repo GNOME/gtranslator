@@ -20,6 +20,7 @@
 #include "dialogs.h"
 #include "gui.h"
 #include <libgnome/gnome-history.h>
+#include <libgtranslator/recent-files.h>
 
 /* These are to be used only inside this file */
 static void append_line(gchar ** old, const gchar * tail);
@@ -156,7 +157,8 @@ static gboolean actual_parse(void)
 	/**
 	* Add a GNOME history entry.
 	**/
-	gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");
+	/*gnome_history_recently_used(po->filename, "application/x-po", "gtranslator", "Gettext po-file");*/
+	gtranslator_append_recent_file(po->filename);
 	
 	/**
 	* As the po-file seems to exist, set the "count parameters" to 0.

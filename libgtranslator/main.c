@@ -1,24 +1,25 @@
-/**
-*
-* (C) 2000 Fatih Demir -- kabalak / kabalak@gmx.net
-*
-* This is distributed under the GNU GPL V 2.0 or higher which can be
-*  found in the file COPYING for further studies.
-*
-* Enjoy this piece of software, brain-crack and other nice things.
-*
-* WARNING: Trying to decode the source-code may be hazardous for all your
-*	future development in direction to better IQ-Test rankings!
-*
-**/
+/*
+ * (C) 2000 	Fatih Demir <kabalak@gmx.net>
+ *
+ * gtranslatord is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *    (at your option) any later version.
+ *
+ * gtranslatord is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
 
-/**
-* This is probably the main file for gtranslatord.
-**/
-
-/**
-* The local includes.
-**/
+/*
+ * gtranslatord's main source file.
+ */
 
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
@@ -27,32 +28,16 @@
 #include <libgtranslator/gtranslatord.h>
 #include <libgtranslator/libgtranslator.h>
 #include <popt-gnome.h>
-
-/**
-* The OAF includes.
-**/
 #include <liboaf/liboaf.h>
 
-/**
-* Simply undefine and redefine the G_LOG_DOMAIN
-*  value just for more logicness as gtranslatord
-*   has/will have got also own warning/error
-*    messages which do appear with the G_LOG_DOMAIN
-*     information.
-**/
-#ifdef G_LOG_DOMAIN
-#undef G_LOG_DOMAIN
-#define G_LOG_DOMAIN "gtranslatord"
-#endif
-
-/**
-* The static gchar for the language to parse.
-**/
+/*
+ * The static variable used for the popt argument.
+ */
 static gchar	*lang=NULL;
 
-/**
-* The poptTable for gtranslatord.
-**/
+/*
+ * gtranslatord's options as a poptTable.
+ */
 static struct poptOption gtranslatord_options[] = {
 	{
 		"parse-db", 'p', POPT_ARG_STRING, &lang,
@@ -61,9 +46,9 @@ static struct poptOption gtranslatord_options[] = {
 	POPT_AUTOHELP{NULL}
 };
 
-/**
-* The mainloop.
-**/
+/*
+ * gtranslatord's main loop.
+ */
 int main(int argc,char *argv[])
 {
 	CORBA_ORB		orb;
@@ -72,61 +57,59 @@ int main(int argc,char *argv[])
 	#ifdef GCONF_IS_PRESENT
 	GError			*error=NULL;
 	#endif
-	/**
-	* Init the environment.
-	**/
+	
 	CORBA_exception_init(&env);
-	/**
-	* Hm, bind to gettext...
-	**/
+	/*
+	 * Hm, bind to gettext...
+	 */
 	bindtextdomain("gtranslator", GNOMELOCALEDIR);
 	textdomain("gtranslator");
-	/**
-	* Get the arguments and the context.
-	**/
+	
+	/*
+	 * Parse the arguments.
+	 */
 	context=poptGetContext("gtranslatord", argc, argv,
 		gtranslatord_options, 0);
 	while(poptGetNextOpt(context)>=0)
 	{
 	}
-	/**
-	* Free the context.
-	**/
+	
+	/*
+	 * Free the used poptContext.
+	 */
 	poptFreeContext(context);
-	/**
-	* Init OAF.
-	**/
+	
+	/*
+	 * Initialize OAF and do some small pieces of work till we
+	 *  can do much more within gtranslatord.
+	 */
 	orb=oaf_init(argc,argv);
-	/**
-	* Print a simply statement till we can do more.
-	**/
 	if(orb)
 	{
 		g_print(_("gtranslatord has started successfully and will do some operations now ...\n"));
+		
 		if(lang)
 		{
-			/**
-			* Parse the requested language database.
-			**/
+			/*
+			 * Now parse the requested language's database via the old
+			 *  parse_db interface.
+			 */
 			GtranslatorDatabase *db;
 			db=parse_db_for_lang(lang);
 		}
-		/**
-		* Again this preliminary GConf stuff.
-		**/
+		
+		/*
+		 * Initialize GConf or print out the occured error.
+		 */ 
 		#ifdef GCONF_IS_PRESENT
 		if(!(gconf_init(argc,argv, &error)))
 		{
-			/**
-			* Print some more exact informations on the GConf init-error.
-			**/
-			g_warning(_("GConf initialization error: `%s'"), error->message);
-			/**
-			* Free the GError.
-			**/
+			g_warning(_("GConf initialization error:\n`%s'"),
+				error->message);
 			g_clear_error(&error);
 		}
 		#endif
 	}
+	
 	exit(0);
 }
