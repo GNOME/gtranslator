@@ -1,5 +1,7 @@
 2003-06-01  Ross Golder  <ross@golder.org>
 
+	* parse.c (restore_msg): Only break line if not in the middle of
+	   a multibyte character.
 	* parse.c (gtranslator_parse_core): Add warning if parser finds
 	   a line containing invalif utf-8. Useful for debugging.
 

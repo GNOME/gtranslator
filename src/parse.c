@@ -684,7 +684,8 @@ static gchar *restore_msg(const gchar * given)
 				g_string_prepend(rest, "\"\n\"");
 				here -= 7;
 			} else {
-				if(rest->str)
+				/* Only break line if current line is valid UTF8 */
+				if(rest->str && g_utf8_validate(rest->str, rest->len, NULL))
 				{
 					g_string_insert(rest,
 							(strrchr(rest->str, ' ') -
@@ -1254,4 +1255,3 @@ void gtranslator_set_progress_bar(void)
 			percentage);
 	}
 }
-
