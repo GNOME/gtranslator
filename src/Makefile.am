@@ -3,15 +3,9 @@
 #   and autoconf. 
 # -------------------------------------------------------
 
-#ifdef EMACS_LOVER
-extra_flags = -DEMACS_LOVER=2000
-#else
-extra_flags = 
-#endif
-
 myicon = -DWINDOW_ICON=\"${datadir}/pixmaps/gtranslator.png\"
 
-INCLUDES = $(extra_flags) $(myicon)\
+INCLUDES = $(myicon)\
 	-I$(top_srcdir)/intl \
 	-DG_LOG_DOMAIN=\"$(PACKAGE)\" \
 	$(GNOME_INCLUDEDIR) $(GLIB_CFLAGS)
@@ -33,6 +27,7 @@ gtranslator_SOURCES = \
 	languages.h \
 	main.c 
 
-gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS)
+gtranslator_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS) $(GLIB_LIBS) \
+	../libgtranslator/libgtranslator.a
 
 EXTRA_DIST = ChangeLog

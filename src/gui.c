@@ -96,7 +96,7 @@ void compile(GtkWidget *widget,gpointer useless)
 		if(gtranslator_get_filename()!=NULL)
 		{
 			sprintf(cmd,"%s %s %s","msgfmt ",gtranslator_get_filename()," -o /tmp/foo.mo");
-			res=execlp(cmd);
+			res=execlp(cmd,NULL);
 			/**
 			* If there has been an error show an error-box
 			**/
