@@ -49,8 +49,8 @@ lang languages[] =
 	{ _("Basque"),"eu","iso-8859-1","linux-eu@chanae.alphanet.ch" },
         { _("Bulgarian"),"bg","windows-1251","bg@li.org" },
         { _("Catalan"),"ca","iso-8859-1","" },
-        { _("Chinese/Simplified"),"zh_CN","GB2312","" },
-        { _("Chinese/Traditional"),"zh_TW","BIG5","" },
+        { _("Chinese/Simplified"),"zh_CN","GB2312","cn@linux-mandrake.com" },
+        { _("Chinese/Traditional"),"zh_TW","BIG5","zh@li.org" },
 	{ _("Croatian"),"hr","iso-8859-2","" },
 	{ _("Czech"),"cs","iso-8859-2","" },
         { _("Danish"),"da","iso-8859-1","da@li.org" },
@@ -73,7 +73,7 @@ lang languages[] =
         { _("Korean"),"ko","euc-kr","" },
         { _("Norwegian/Bookmal"),"no","iso-8859-1","no@li.org" },
 	{ _("Norwegian/Nynorsk"),"no@nynorsk","iso-8859-1","no@li.org" }
-        { _("Polish"),"pl","iso-8859-2","" },
+        { _("Polish"),"pl","iso-8859-2","gnomepl@pandora.info.bielsko.pl" },
         { _("Portuguese"),"pt","iso-8859-1","pt@li.org" },
         { _("Portuguese/Brazil"),"pt_BR","iso-8859-1","" },
         { _("Russian"),"ru","koi8-r","ru@li.org" },
@@ -83,7 +83,7 @@ lang languages[] =
         { _("Spanish/Mexico"),"es_MX","iso-8859-1","" },
         { _("Swedish"),"sv","iso-8859-1","sv@li.org" },
         { _("Turkish"),"tr","iso-8859-9","tr@li.org" },
-        { _("Ukrainian"),"uk","koi8-u","" },
+        { _("Ukrainian"),"uk","koi8-u","linux@linux.org.ua" },
 	{ _("Walloon"),"wa","iso-8859-1","linux-wa@chanae.alphanet.ch" },
         /**
         * This structures-list has to be NULL-terminated
