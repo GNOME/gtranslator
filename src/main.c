@@ -194,10 +194,6 @@ int main(int argc, char *argv[])
 		 */
 		if(g_module_supported()==FALSE)
 		{
-			/*
-			 * The bad case; print a warning and set our module
-			 *  list to NULL.
-			 */
 			g_warning(_("Unfortunately your GModule implementation doesn't support loading dynamic modules!"));
 			backends=NULL;
 		}

@@ -307,13 +307,15 @@ void gtranslator_htmlizer(GtrPo *po, gchar *save_to)
 	 * Finish the table and the html file.
 	 */ 
 	fprintf(fstream, "</table>\n<p align=\"center\">");
+	
 	/*
 	 * This is printed at the end of the HTML page and should also include
 	 *  the hyperlink in the translations.
 	 *
-	 * In the output it looks then like "HTML output of "tr.po" produced 
+	 * In the output it looks then like "HTML output of "tr.po" produced
 	 *  by gtranslator version 0.39".
 	 *
+	 * Please don't forget to include the HTML tags in the msgid.
 	 */
 	fprintf(fstream, _("HTML output of \"%s\" produced by <a href=\"http://www.gtranslator.org\">gtranslator</a> version %s."), 
 		po->filename, VERSION);

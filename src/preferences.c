@@ -222,11 +222,7 @@ void gtranslator_config_set_last_run_date(void)
 	present_time=time(NULL);
 	timebox=localtime(&present_time);
 	
-	/*
-	 * The generally used date format -- i18n this please,
-	 *  translators ,-)
-	 */
-	strftime(date, 30, _("%Y-%m-%d %H:%M"), timebox);
+	strftime(date, 30, "%Y-%m-%d %H:%M", timebox);
 	
 	/*
 	 * Check if we did get any date string.

@@ -63,8 +63,8 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 	hbox=gtk_hbox_new(TRUE, 0);
 	
 	/*
-	 * Print out some colorscheme informations in a label which will be
-	 *  followed by the author name/email address.
+	 * This string is displayed in the about box as an information about
+	 *  the currently used colorscheme.
 	 */
 	umfo=g_strdup_printf(_("Current colorscheme: \"%s\" (version %s) by"), 
 		theme->info->name, theme->info->version);

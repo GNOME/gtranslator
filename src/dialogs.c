@@ -856,10 +856,6 @@ void gtranslator_open_uri_dialog_clicked(GnomeDialog *dialog, gint button,
 		
 		if(uri->len <= 0)
 		{
-			/*
-			 * Show an error dialog but don't close down the 
-			 *  Open from URI dialog.
-			 */  
 			gtranslator_utils_error_dialog(_("No URI given!"));	
 		}
 		else

@@ -347,12 +347,9 @@ gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file)
 	file=fopen(po_file->filename, "r");
 	if(file == NULL)
 	{
-		/*
-		 * Create an error box and prevent further reading
-		 *  of the file.
-		 */  
-		gtranslator_utils_error_dialog(_("You don't have read permissions on file `%s'"),
-			po_file->filename);
+		gtranslator_utils_error_dialog(
+			_("You don't have read permissions on file `%s'"),
+				po_file->filename);
 
 		return FALSE;
 	}
