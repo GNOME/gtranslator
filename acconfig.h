@@ -1,4 +1,5 @@
 #undef BIND_MIME
+#undef BUILD_NV
 #undef ENABLE_NLS
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT

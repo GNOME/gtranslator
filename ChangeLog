@@ -1,7 +1,25 @@
 2001-02-27  Fatih Demir	<kabalak@gtranslator.org>
 
+	* README: Information about the new nautilus-gtranslator-view which
+		is now also part of gtranslator.
+
+	* DEPENDS: Added more info for package users and about the
+		nautilus-gtranslator-view.
+
+	* NEWS: Added a news item about the nautilus-gtranslator-view.
+
+	* acconfig.h: Added BUILD_NV undef.
+
+	* Makefile.am: Added the nautilus-view subdirectory conditionally
+		to the SUBDIRS as the last dir as it depends on src objects.
+
 	* configure.in: Added the new colorschemes, oaf and ui subdirectory
-		of our data repository.
+		of our data repository to the output Makefiles and added
+		 a nautilus prefix option and a check around it to make it
+		  possible to also compile the nautilus-view if possible
+		   (if a prefix is given it checks for the mainly used
+		     nautilus_view_standard_mail_multi function from 
+		      libnautilus).
 
 2001-02-26  Fatih Demir	<kabalak@gtranslator.org>
 

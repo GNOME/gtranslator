@@ -2,7 +2,9 @@ Dependencies of gtranslator:
 ---------------------------
 
 For the full feature set of gtranslator you do need the
- following libraries and versions:
+ following libraries and versions (if you're using packages
+  you do also need -dev/-devel packages as gtranslator depends
+   also on the headers):
 
 glib		>= 1.2.3
 gtk+		>= 1.2.4
@@ -24,6 +26,12 @@ If you build from CVS you do need also the xml-i18n-tools
   version of xml-i18n-tools which can be found at:
 
   ftp://ftp.gnome.org/pub/GNOME/stable/sources/xml-i18n-tools
+
+If you want to also compile the nautilus-gtranslator-view you
+ do also need a recent nautilus installation including the
+  -dev/-devel package of libnautilus/nautilus:
+
+nautilus	>= 0.8.1 (aka. PR3)
 
 --
 Fatih Demir, <kabalak@gtranslator.org>
