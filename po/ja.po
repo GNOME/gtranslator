@@ -2,11 +2,12 @@
 # Copyright (C) 2000-2002 Free Software Foundation, Inc.
 # Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2002.
 #
+#, no-wrap
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.42\n"
-"POT-Creation-Date: 2002-06-23 10:57+0200\n"
-"PO-Revision-Date: 2002-06-12 11:59+0900\n"
+"Project-Id-Version: gtranslator 0.43\n"
+"POT-Creation-Date: 2002-09-16 23:00+0900\n"
+"PO-Revision-Date: 2002-09-16 02:26+0900\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -173,7 +174,7 @@ msgstr "検索する文字列の入力:"
 
 #: src/dialogs.c:685
 msgid "Case sensitive"
-msgstr "大小文字を区別しない"
+msgstr "大小文字を区別する"
 
 #: src/dialogs.c:690 src/languages.c:91
 msgid "English"
@@ -1289,7 +1290,7 @@ msgstr ""
 "ファイル %s には\n"
 "%d 個の fuzzy なメッセージがあります"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:970
+#: src/parse.c:970 data/desktop/gtranslator.desktop.in.h:2
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -1389,7 +1390,7 @@ msgstr "翻訳メッセージの書式を強調表示する"
 
 #: src/prefs.c:195
 msgid "Check messages for syntactical correctness"
-msgstr "書式/文法が妥当かどうかメッセージをチェックする"
+msgstr "書式が分布的に妥当かどうかメッセージをチェックする"
 
 #: src/prefs.c:202
 msgid "Use special character to indicate free space"
@@ -1413,7 +1414,7 @@ msgstr "コンパイルしたファイル (例: \"project.gmo\") を削除する"
 
 #: src/prefs.c:217
 msgid "Directory to put compiled po files into"
-msgstr "コンパイルした .po ファイルを格納するディレクトリ"
+msgstr "コンパイル済みの .po ファイルを格納するディレクトリ"
 
 #: src/prefs.c:220
 msgid "Load all backends on startup"
@@ -1652,8 +1653,8 @@ msgid ""
 "The po file was changed and the changes weren't saved yet. Do you still want "
 "to update the po file now?"
 msgstr ""
-".po ファイルが変更されましたが、まだ保存されていません。新たに .po ファイルを"
-"更新しますか？"
+".po ファイルが変更されましたが、未だ保存されていません。まだ .po ファイルを更"
+"新しますか？"
 
 #: src/update.c:120
 msgid "No POTFILES.in found!"
@@ -1719,15 +1720,15 @@ msgid ""
 "\n"
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
-"次のファイル\n"
+"ファイル\n"
 "\n"
 "   %s\n"
 "\n"
-"は既に他の gtranslator でオープンされています！\n"
-"このファイルを扱っている他の gtranslator を閉じて\n"
-"再度、このファイルをオープンして下さい。\n"
+"は他の gtranslator プロセスが既にオープンしています！\n"
+"現在このファイルを編集している他の gtranslator プロセスを\n"
+"閉じて、このファイルへのアクセスをやり直して下さい。\n"
 "\n"
-"このファイルを強制的に開きますか？"
+"このファイルをオープンしている gtranslator を終了しますか？"
 
 #: src/utils_gui.c:474
 #, c-format
