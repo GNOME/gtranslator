@@ -1,0 +1,38 @@
+// gtranslatord.idl -- kabalak / kabalak@gmx.net
+
+#include <Bonobo.idl>
+
+#ifndef GTRANSLATORD_IDL
+#define GTRANSLATORD_IDL 1
+
+module libgtranslator
+{
+	interface gtranslatord : Bonobo::Unknown {
+		// enum for query.
+		enum query_result {
+			SUCCESS,
+			MULTIPLE_SUCCESS,
+			NO_RESULT,
+			DEAD_SERVER,
+			DEAD_MSG_DB
+		};
+		// exceptions.
+		exception gtranslatord_no_msg_db {};
+		exception gtranslatord_no_server {};
+		// create new server.
+		long gtranslator_server_new(in string host) raises(gtranslatord_no_server);
+		// shutdown server. 
+		// 1) By hostname (localhost)
+		void gtranslator_server_shutdown(in string host);
+		// 2) By host_id (23)
+		void gtranslator_server_shutdown_by_id(in long host_id);
+		// gets the hostname for the given host_id
+		string gtranslator_server_get_host(in long host_id);
+		// query the message db.
+		void gtranslatord_query(in string query,out string result);
+		// query the message db with some args.
+		void gtranslatord_query_up(in string query,in long minimum_length);
+	};
+};
+
+#endif
