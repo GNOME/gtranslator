@@ -742,6 +742,7 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					
 				case GDK_Insert:
 					gtranslator_bookmark_add_direct();
+					g_message("Added bookmark!\n");
 					break;
 
 				default:
