@@ -1,5 +1,8 @@
 2003-08-10  Fatih Demir <kabalak@gtranslator.org>
 
+	* parse.c: Fix the writing of plural forms, we were also writing the
+		"msgstr[2]" item out as a "msgstr[1]" item -- fixed now.
+
 	* message.c: Did the editing job for the plural forms dialog, it's now
 		capable of saving, displaying the changed strings for the
 		 plural forms and works, yeah!

@@ -192,6 +192,11 @@ static void plural_forms_edited(GtkCellRendererText *crtext, gchar *path, gchar 
 		gtk_tree_store_set(GTK_TREE_STORE(plural_forms_store), &iter,
 			1, GTR_MSG(message)->msgstr, -1);
 	}
+
+	/*
+	 * Update the translation specs, statistics etc.
+	 */
+	gtranslator_translation_changed(NULL, NULL);
 }
 
 /* 

@@ -802,7 +802,7 @@ static void write_the_message(gpointer data, gpointer fs)
 		{
 			id=restore_msg(msg->msgstr_2);
 
-			string=g_string_append(string, "\"\nmsgstr[1] \"");
+			string=g_string_append(string, "\"\nmsgstr[2] \"");
 			string=g_string_append(string, id);
 			GTR_FREE(id);
 		}
