@@ -1,6 +1,7 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2000-2003 	Fatih Demir <kabalak@gtranslator.org>
  *			Gediminas Paulauskas <menesis@gtranslator.org>
+ *			Ross Golder <ross@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -194,7 +195,7 @@ void gtranslator_parse(const gchar *filename)
 	/*
 	 * If the first message is header (it always should be)
 	 */
-	po->header = gtranslator_header_get(FIRST_MSG);
+	po->header = GTR_HEADER(gtranslator_header_get(FIRST_MSG));
 
 	if (po->header)
 	{
