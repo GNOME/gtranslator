@@ -112,6 +112,12 @@ static void gtranslator_learn_buffer_export_hash_entry(gpointer key,
 static gchar *gtranslator_learn_buffer_escape(gchar *str);
 
 /*
+ * Escapes the hash'd strings for the writing in pure po file form -- it's a
+ *  helper function for the learn buffer exporting functions.
+ */
+static gchar *gtranslator_learn_buffer_escape_hash_entry(gchar *hstr);
+
+/*
  * Internal GtrLearnResources list sort routine.
  */
 static gint gtranslator_learn_buffer_sort_learn_resource(
@@ -237,17 +243,48 @@ static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer val
 }
 
 /*
+ * Escape some special character cases to allow us a clean and right-formed
+ *  export of the learn buffer's hash entries into the pure/plain po file form.
+ */
+static gchar *gtranslator_learn_buffer_escape_hash_entry(gchar *hstr)
+{
+	gchar	*escaped_str=NULL;
+	
+	g_return_val_if_fail(hstr!=NULL, NULL);
+
+	escaped_str=nautilus_str_replace_substring(hstr, "\"", "\\\"");
+	escaped_str=nautilus_str_replace_substring(escaped_str, "\n", "\\n\n");
+
+	return escaped_str;
+}
+
+/*
  * Exports a single message/translation pair to the given po file.
  */
 static void gtranslator_learn_buffer_export_hash_entry(gpointer key, 
 	gpointer value, gpointer po_filestream)
 {
+	gchar *wstr=NULL;
+
 	g_return_if_fail(key!=NULL);
 	g_return_if_fail(value!=NULL);
 	g_return_if_fail(po_filestream!=NULL);
 
-	fprintf(((FILE *) po_filestream), "msgid \"%s\"\nmsgstr \"%s\"\n\n",
-		(gchar *) key, (gchar *) value);
+	/*
+	 * Simply escape the hash entries and write them via pure fstream
+	 *  functionality -- not enhanced, but working and easy to do :-)
+	 */
+	wstr=gtranslator_learn_buffer_escape_hash_entry((gchar *) key);
+	g_return_if_fail(wstr!=NULL);
+
+	fprintf(((FILE *) po_filestream), "msgid \"%s\"\n", wstr);
+	GTR_FREE(wstr);
+
+	wstr=gtranslator_learn_buffer_escape_hash_entry((gchar *) value);
+	g_return_if_fail(wstr!=NULL);
+
+	fprintf(((FILE *) po_filestream), "msgstr \"%s\"\n\n", wstr);
+	GTR_FREE(wstr);
 }
 
 /*
@@ -766,12 +803,12 @@ void gtranslator_learn_export_to_po_file(const gchar *po_file)
 				if(resource->updated)
 				{
 					fprintf(file, "
-# %i. %s (%s)", i, resource->package, resource->updated);
+# %i. %s (dated from \"%s\").", i, resource->package, resource->updated);
 				}
 				else
 				{
 					fprintf(file, "
-# %i. %s", i, resource->package);					
+# %i. %s.", i, resource->package);					
 				}
 			}
 

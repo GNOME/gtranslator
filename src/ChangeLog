@@ -1,3 +1,20 @@
+2002-01-26  Fatih Demir <kabalak@gtranslator.org>
+
+	* learn.c: Added a hash entry -> po file entry escaping function; now
+		we should have a fully working fix/implementation for b.g.o
+		 #61791 ("learn bufffer -> po file export"); also corrected/
+		  improved some small parts of the exported po file's header
+		   parts -- just some wording/punctuation changes.
+
+	* syntax.c: Slightly more assertions to be a bit more safer -- won't
+		crash that often now, but the syntax highlighting is now a bit
+		 more wrong :-(
+
+	* syntax-elements.h: While we're at it :-) Added some more common URI
+		prefixes like "gnome-help:", "vfolder:" etc. and some keywords
+		 about translation memory formats (of course, "UMTF" is now a
+		  keyword :-)).
+
 2002-01-25  Roy-Magne Mo <rmo@sunnmore.net>
 
 	* syntax-elements.h: Adding gtranslator to keyword :) 
