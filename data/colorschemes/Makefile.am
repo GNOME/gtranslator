@@ -8,6 +8,7 @@ schemes_DATA = \
 	extremely-kabalak.xml \
 	kabalak.xml \
 	kbabel.xml \
-	menesis.xml
+	menesis.xml \
+	zuper.xml
 
 EXTRA_DIST = $(schemes_DATA)
