@@ -111,8 +111,6 @@ static void check_msg_status(GtrMsg * msg)
  * Formats tail to look good when displayed and easier to maintain. Removes/
  * unneeded \'s and "'s and replaces \\n with real newline.
  * Then appends this to *old and updates the pointer.
- * 
- * TODO: make this use GString
  */
 static void append_line(gchar ** old, const gchar * tail)
 {
