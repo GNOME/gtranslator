@@ -42,6 +42,7 @@ void check_file(FILE *stream)
 void parse_the_file(GtkWidget *widget,gpointer filename)
 {
 	gchar *po_file;
+	gchar temp_char[126];
 	guint lines=1;
 	/**
 	* Some variables ..
@@ -89,6 +90,6 @@ void parse_the_file(GtkWidget *widget,gpointer filename)
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),status);
 	for(count=1;count<lines;count++)
 	{
-		get_header((gpointer)g_list_nth_data(temp,count));
+		/** TODO **/ 
 	}
 }

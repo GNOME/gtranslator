@@ -40,7 +40,6 @@ gchar *po_file;
 /**
 * A gboolean for the silly question if a file is open ...
 **/
-
 gboolean file_opened;
 
 /**

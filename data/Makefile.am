@@ -20,7 +20,7 @@ Application_DATA = gtranslator.desktop
 Applicationicon_DATA = gtranslator.png
 Mimeicon_DATA = application-x-po.png
 
-## include thess nice pieces into a dist .
+## include these nice pieces into a dist .
 EXTRA_DIST=$(Application_DATA) $(Applicationicon_DATA) $(mimeinfofiles_DATA) \
                         $(Mimeicon_DATA) gtranslator.keys.in gtranslator.mime \
 			gtranslator.keys

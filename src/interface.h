@@ -16,6 +16,7 @@
 #endif // HAVE_CONFIG_H
 
 #include <gnome.h>
+#include "parse.h"
 
 GtkWidget* create_app1 (void);
 

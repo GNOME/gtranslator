@@ -46,22 +46,22 @@ void call_help_viewer(GtkWidget *widget,gpointer useless)
 **/
 void cut_clipboard(GtkWidget *widget,gpointer useless)
 {
-	gtk_editable_cut_clipboard(trans_box);
+	gtk_editable_cut_clipboard(GTK_EDITABLE(trans_box));
 }
 
 void copy_clipboard(GtkWidget *widget,gpointer useless)
 {
-        gtk_editable_copy_clipboard(trans_box);
+        gtk_editable_copy_clipboard(GTK_EDITABLE(trans_box));
 }
 
 void paste_clipboard(GtkWidget *widget,gpointer useless)
 {
-        gtk_editable_paste_clipboard(trans_box);
+        gtk_editable_paste_clipboard(GTK_EDITABLE(trans_box));
 }
 
 void clear_selection(GtkWidget *widget,gpointer useless)
 {
-	gtk_editable_clear_selection(trans_box);
+	gtk_editable_delete_selection(GTK_EDITABLE(trans_box));
 }
 
 /**
@@ -69,7 +69,7 @@ void clear_selection(GtkWidget *widget,gpointer useless)
 **/
 void text_has_got_changed(GtkWidget *widget,gpointer useless)
 {
-	changed=TRUE;
+	file_changed=TRUE;
 }
 
 /**
