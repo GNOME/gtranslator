@@ -773,5 +773,5 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 		}
 	}
 	
-	return TRUE;
+	return FALSE;
 }
