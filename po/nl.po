@@ -1,16 +1,12 @@
-# Gtranslator translation.
-# Copyright (C) 2000 Free Software Foundation, Inc.
-# Dennis Smit <synap@area101.penguin.nl>, 2000.
-# Meilof Veeningen <meilof@hotmail.com>, 2001
-# Vincent van Adrighem <valium@sourceforge.net>, 2001
+# Commentaar:
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.40\n"
-"POT-Creation-Date: 2002-12-29 15:48+0100\n"
-"PO-Revision-Date: 2002-11-05 14:46+0100\n"
-"Last-Translator: Vincent van Adrighem <vincent@dirck.mine.nu>\n"
-"Language-Team: Dutch <nl@li.org>\n"
+"POT-Creation-Date: 2003-01-04 04:52+0100\n"
+"PO-Revision-Date: 2003-01-05 00:31+0100\n"
+"Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
+"Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,8 +17,8 @@ msgid "translator_credits"
 msgstr "Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>"
 
 #: src/about.c:78
-msgid "(C) 1999-2002 The Free Software Foundation"
-msgstr "© 1999-2002 The Free Software Foundation"
+msgid "(C) 1999-2003 The Free Software Foundation"
+msgstr "Â© 1999-2003 The Free Software Foundation"
 
 #: src/about.c:79
 msgid "gtranslator is a po file editing suite with many bells and whistles."
@@ -52,8 +48,8 @@ msgid "<Not Given>"
 msgstr "<niet gegeven>"
 
 #: src/color-schemes.c:472
-msgid "_Settings/_Colorschemes/"
-msgstr "_Instellingen/_Kleurenschema's/"
+msgid "_View/_Colorschemes/"
+msgstr "B_eeld/_Kleurenschema's/"
 
 #: src/color-schemes.c:502
 #, c-format
@@ -127,7 +123,7 @@ msgstr "Ga naar bericht nummer:"
 msgid "Find in the po file"
 msgstr "Zoeken in .po bestand"
 
-#: src/dialogs.c:690 src/menus.c:339
+#: src/dialogs.c:690 src/menus.c:337
 msgid "Find"
 msgstr "Zoeken"
 
@@ -143,7 +139,7 @@ msgstr "Hoofdlettergevoelig"
 msgid "English"
 msgstr "Engels"
 
-#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:559 src/messages-table.c:220
+#: src/dialogs.c:713 src/dialogs.c:814 src/gui.c:554 src/messages-table.c:212
 msgid "Translated"
 msgstr "Vertaald"
 
@@ -167,7 +163,7 @@ msgstr "Zoek in: "
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- vervangen"
 
-#: src/dialogs.c:795 src/menus.c:343
+#: src/dialogs.c:795 src/menus.c:341
 msgid "Replace"
 msgstr "Vervangen"
 
@@ -195,7 +191,7 @@ msgstr "Er deed zich een fout voor voor tijdens het uitvoeren van msgfmt:\n"
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- openen vanuit URI"
 
-#: src/dialogs.c:955 src/menus.c:270
+#: src/dialogs.c:955 src/menus.c:268
 msgid "Open"
 msgstr "Openen"
 
@@ -265,7 +261,7 @@ msgstr "Hier kunt u de standaardvertalingen opvragen vanuit uw leerbuffer."
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "gtranslator -- vertaling opzoeken in uw leerbuffer"
 
-#: src/dialogs.c:1136 src/menus.c:348
+#: src/dialogs.c:1136 src/menus.c:346
 msgid "Query"
 msgstr "Opvragen"
 
@@ -323,38 +319,38 @@ msgstr ""
 "Kon niet vinden:\n"
 "\"%s\""
 
-#: src/gui.c:228
+#: src/gui.c:229
 msgid "Edit comment"
 msgstr "Commentaar bewerken"
 
-#: src/gui.c:545
+#: src/gui.c:540
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgstr "%s [ %i onzeker over ]"
 
-#: src/gui.c:545 src/gui.c:549 src/menus.c:329 src/messages-table.c:214
+#: src/gui.c:540 src/gui.c:544 src/menus.c:327 src/messages-table.c:206
 msgid "Fuzzy"
 msgstr "Onzeker"
 
-#: src/gui.c:549
+#: src/gui.c:544
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Geen onzekere vertalingen over ]"
 
-#: src/gui.c:557
+#: src/gui.c:552
 msgid "Sticky (Message & translation are the same)"
 msgstr "Niet vertalen (Bericht & vertaling zijn hetzelfde)"
 
-#: src/gui.c:568
+#: src/gui.c:563
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgstr "%s [ %i Onvertaald over ]"
 
-#: src/gui.c:568 src/gui.c:570 src/messages-table.c:208
+#: src/gui.c:563 src/gui.c:565 src/messages-table.c:200
 msgid "Untranslated"
 msgstr "Onvertaald"
 
-#: src/gui.c:570
+#: src/gui.c:565
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Niets onvertaald over ]"
@@ -362,7 +358,7 @@ msgstr "%s [ Niets onvertaald over ]"
 #.
 #. * Assign the first part.
 #.
-#: src/gui.c:583
+#: src/gui.c:578
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Bericht %d / %d / Status: %s"
@@ -608,191 +604,171 @@ msgid "Japanese"
 msgstr "Japans"
 
 #: src/languages.c:159
+msgid "Kannada"
+msgstr "Kannada"
+
+#: src/languages.c:163
 msgid "Korean"
 msgstr "Koreaans"
 
-#: src/languages.c:163
+#: src/languages.c:167
 msgid "Latvian"
 msgstr "Letland"
 
-#: src/languages.c:167
+#: src/languages.c:171
 msgid "Lithuanian"
 msgstr "Lithouws"
 
-#: src/languages.c:171
+#: src/languages.c:175
 msgid "Malay/Bahasa Melayu"
 msgstr "Malay/Bahasa Melayu"
 
-#: src/languages.c:175
+#: src/languages.c:179
 msgid "Maltese"
 msgstr "Maltees"
 
-#: src/languages.c:179
+#: src/languages.c:183
 msgid "Norwegian/Bokmaal"
 msgstr "Noors/Bokmaal"
 
-#: src/languages.c:183
+#: src/languages.c:187
 msgid "Norwegian/Nynorsk"
 msgstr "Noors/Nynorsk"
 
-#: src/languages.c:187
+#: src/languages.c:191
 msgid "Polish"
 msgstr "Pools"
 
-#: src/languages.c:191
+#: src/languages.c:195
 msgid "Portuguese"
 msgstr "Portugees"
 
-#: src/languages.c:195
+#: src/languages.c:199
 msgid "Portuguese/Brazil"
 msgstr "Portugees/Brazilie"
 
-#: src/languages.c:199
+#: src/languages.c:203
 msgid "Romanian"
 msgstr "Roemeens"
 
-#: src/languages.c:203
+#: src/languages.c:207
 msgid "Russian"
 msgstr "Russisch"
 
-#: src/languages.c:207
+#: src/languages.c:211
 msgid "Serbian/Cyrillic"
 msgstr "Servisch/Cyrillisch"
 
-#: src/languages.c:211
+#: src/languages.c:215
 msgid "Serbian/Latin"
 msgstr "Servisch/Latijn"
 
-#: src/languages.c:215
+#: src/languages.c:219
 msgid "Slovak"
 msgstr "Sloveens"
 
-#: src/languages.c:219
+#: src/languages.c:223
 msgid "Slovenian"
 msgstr "Sloveens"
 
-#: src/languages.c:223
+#: src/languages.c:227
 msgid "Spanish"
 msgstr "Spaans"
 
-#: src/languages.c:227
+#: src/languages.c:231
 msgid "Spanish/Spain"
 msgstr "Spaans/Spanje"
 
-#: src/languages.c:231
+#: src/languages.c:235
 msgid "Spanish/Mexico"
 msgstr "Spaans/Mexico"
 
-#: src/languages.c:235
+#: src/languages.c:239
 msgid "Swedish"
 msgstr "Sweeds"
 
-#: src/languages.c:239
+#: src/languages.c:243
 msgid "Tamil"
 msgstr "Tamil"
 
-#: src/languages.c:243
+#: src/languages.c:247
 msgid "Thai"
 msgstr "Thais"
 
-#: src/languages.c:247
+#: src/languages.c:251
 msgid "Turkish"
 msgstr "Turks"
 
-#: src/languages.c:251
+#: src/languages.c:255
 msgid "Ukrainian"
 msgstr "Oekrains"
 
-#: src/languages.c:255
+#: src/languages.c:259
 msgid "Uzbekian"
 msgstr "Oesbekisch"
 
-#: src/languages.c:259
+#: src/languages.c:263
 msgid "Vietnamese"
 msgstr "Vietnamees"
 
-#: src/languages.c:263
+#: src/languages.c:267
 msgid "Walloon"
 msgstr "Wallonisch"
 
-#: src/languages.c:267
+#: src/languages.c:271
 msgid "Welsh"
 msgstr "Welsh"
 
-#: src/main.c:81
-msgid "Auto translate the po file & exit"
-msgstr ".po bestand automatisch vertalen & Afsluiten"
-
-#: src/main.c:81 src/main.c:97
-msgid "FILENAME"
-msgstr "FILENAME"
-
-#: src/main.c:85
+#: src/main.c:89
 msgid "Show build information/specifications"
 msgstr "Geef build informatie / specificaties"
 
-#: src/main.c:89
-msgid "Export learn buffer to a plain po file"
-msgstr "Exporteer leerbuffer naar een normaal .po-bestand"
-
-#: src/main.c:89
-msgid "PO_FILE"
-msgstr "PO_BESTAND"
-
-#: src/main.c:93
-msgid "Specify main window geometry"
-msgstr "Specificeer de afmetingen van het hoofdvenster"
-
-#: src/main.c:93
-msgid "GEOMETRY"
-msgstr "AFMETINGEN"
-
-#: src/main.c:97
+#: src/main.c:103
 msgid "Learn the file completely & exit"
 msgstr "Leer het hele bestand & sluit af"
 
-#: src/main.c:101
+#: src/main.c:103
+msgid "FILENAME"
+msgstr "FILENAME"
+
+#: src/main.c:107
 msgid "HTML file to write to"
 msgstr "HTML bestand om naar te schrijven"
 
-#: src/main.c:101
+#: src/main.c:107
 msgid "HTMLFILE"
 msgstr "HTMLFILE"
 
-#: src/main.c:105
-msgid "Don't highlight syntax"
-msgstr "Tekst niet kleuren"
-
-#: src/main.c:147
+#: src/main.c:155
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Fout bij initialisatie van GConf: %s."
 
-#: src/main.c:175
+#: src/main.c:183
 msgid "gtranslator build information/specs:"
 msgstr "Gtranslator buildinformatie/specificaties:"
 
-#: src/main.c:177
+#: src/main.c:185
 msgid "Version and build date:"
 msgstr "Versie en aanmaakdatum:"
 
-#: src/main.c:179
+#: src/main.c:187
 msgid "Build GLib/Gtk+/GNOME versions:"
 msgstr "Glib/Gtk+/Gnome versies:"
 
-#: src/main.c:181
+#: src/main.c:189
 msgid "Colorschemes directory:"
 msgstr "Kleurenschema map:"
 
-#: src/main.c:183
+#: src/main.c:191
 msgid "Scripts directory:"
 msgstr "Scriptmap:"
 
-#: src/main.c:185
+#: src/main.c:193
 msgid "Window icon:"
 msgstr "Vensterpictogram: "
 
-#: src/main.c:187
+#: src/main.c:195
 msgid "Own locale directory:"
 msgstr "Eigen map voor vertalingen:"
 
@@ -800,7 +776,7 @@ msgstr "Eigen map voor vertalingen:"
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:440
+#: src/main.c:448
 #, c-format
 msgid "Learned `%s' successfully.\n"
 msgstr "'%s' succesvol geleerd.\n"
@@ -808,76 +784,72 @@ msgstr "'%s' succesvol geleerd.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:482
+#: src/main.c:490
 #, c-format
 msgid "Exported learn buffer to `%s'.\n"
-msgstr "Leerbuffer geëxporteerd naar `%s'.\n"
-
-#: src/menus.c:48
-msgid "_Messages"
-msgstr "Be_richten"
+msgstr "Leerbuffer geÃ«xporteerd naar `%s'.\n"
 
 #: src/menus.c:49
-msgid "Mess_age status"
-msgstr "Bericht_status"
+msgid "_Go"
+msgstr "_Gaan!"
 
-#: src/menus.c:60
+#: src/menus.c:59
 msgid "_Compile"
 msgstr "_Compileren"
 
-#: src/menus.c:61 src/menus.c:284
+#: src/menus.c:60 src/menus.c:282
 msgid "Compile the po file"
 msgstr "Compileer het .po bestand"
 
-#: src/menus.c:67
+#: src/menus.c:66
 msgid "_Update"
 msgstr "_Vernieuw"
 
-#: src/menus.c:68 src/menus.c:288
+#: src/menus.c:67 src/menus.c:286
 msgid "Update the po file"
 msgstr "Het .po bestand bijwerken"
 
-#: src/menus.c:75
+#: src/menus.c:74
 msgid "Aut_otranslate..."
 msgstr "Aut_overtaal..."
 
-#: src/menus.c:76
+#: src/menus.c:75
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr "Automatisch vertalen met informatie vanuit leerbuffer"
 
-#: src/menus.c:83
+#: src/menus.c:82
 msgid "Remove all translations..."
 msgstr "Alle vertalingen verwijderen..."
 
-#: src/menus.c:84
+#: src/menus.c:83
 msgid "Remove all existing translations from the po file"
 msgstr "Alle vertalingen verwijderen uit het huidige .po bestand"
 
-#: src/menus.c:92
+#: src/menus.c:91
 msgid "Open from _URI..."
 msgstr "_URI openen..."
 
-#: src/menus.c:93
+#: src/menus.c:92
 msgid "Open a po file from a given URI"
 msgstr "Open een .po bestand vanuit een URI (ftp, http e.d.)"
 
-#: src/menus.c:103
+#: src/menus.c:102
 msgid "Recen_t files"
 msgstr "Recen_te bestanden"
 
-#: src/menus.c:106
+#: src/menus.c:105
 msgid "_Export to UTF-8..."
 msgstr "_Exporteer naar UTF-8"
 
-#: src/menus.c:107
+#: src/menus.c:106
 msgid "Export the current po file to UTF-8"
 msgstr "Exporteer het huidige .po bestand naar UTF-8"
 
-#: src/menus.c:113
+#: src/menus.c:112
 msgid "_Import from UTF-8..."
 msgstr "_Importeer vanuit UTF-8..."
 
-#: src/menus.c:114
+#: src/menus.c:113
 msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
 msgstr "Importeer het .po bestand vanuit UTF-8 codering"
 
@@ -885,7 +857,7 @@ msgstr "Importeer het .po bestand vanuit UTF-8 codering"
 msgid "_Query..."
 msgstr "_Opvragen..."
 
-#: src/menus.c:145 src/menus.c:349
+#: src/menus.c:145 src/menus.c:347
 msgid "Query for a string"
 msgstr "Een bestaande vertaling opvragen."
 
@@ -913,201 +885,189 @@ msgstr "Kopieer _bericht -> vertaling"
 msgid "Copy the original message contents and paste them as translation"
 msgstr "Kopieer het originele bericht en plak deze als vertaling"
 
-#: src/menus.c:179
-msgid "_First"
-msgstr "_Eerste"
+#: src/menus.c:176
+msgid "Fu_zzy"
+msgstr "On_zeker"
 
-#: src/menus.c:180 src/menus.c:305
-msgid "Go to the first message"
-msgstr "Ga naar het eerste bericht"
-
-#: src/menus.c:186
-msgid "_Back"
-msgstr "_Vorige"
-
-#: src/menus.c:187 src/menus.c:309
-msgid "Move back one message"
-msgstr "Ga een bericht terug"
-
-#: src/menus.c:194
-msgid "_Next"
-msgstr "V_olgende"
-
-#: src/menus.c:195 src/menus.c:314
-msgid "Move forward one message"
-msgstr "Ga een bericht vooruit"
-
-#: src/menus.c:201
-msgid "_Last"
-msgstr "_Laatste"
-
-#: src/menus.c:202 src/menus.c:318
-msgid "Go to the last message"
-msgstr "Ga naar het laatste bericht"
-
-#: src/menus.c:209
-msgid "_Go to..."
-msgstr "_Ga naar..."
-
-#: src/menus.c:210
-msgid "Goto specified message number"
-msgstr "Ga naar gespecificeerde berichtnummer."
-
-#: src/menus.c:216
-msgid "Next fuz_zy"
-msgstr "Volgende on_zekere"
-
-#: src/menus.c:217
-msgid "Go to next fuzzy message"
-msgstr "Ga naar het volgende onzekere bericht"
-
-#: src/menus.c:223
-msgid "Next _untranslated"
-msgstr "Volgende _onvertaalde"
-
-#: src/menus.c:224 src/menus.c:323
-msgid "Go to next untranslated message"
-msgstr "Ga naar het volgende onvertaalde bericht"
-
-#: src/menus.c:234
-msgid "_Fuzzy"
-msgstr "_Onzeker"
-
-#: src/menus.c:235
+#: src/menus.c:177
 msgid "Toggle fuzzy status of a message"
 msgstr "Dit bericht de status 'onzeker' geven"
 
-#: src/menus.c:252
+#: src/menus.c:191
+msgid "_First"
+msgstr "_Eerste"
+
+#: src/menus.c:192 src/menus.c:303
+msgid "Go to the first message"
+msgstr "Ga naar het eerste bericht"
+
+#: src/menus.c:198
+msgid "_Back"
+msgstr "_Vorige"
+
+#: src/menus.c:199 src/menus.c:307
+msgid "Move back one message"
+msgstr "Ga een bericht terug"
+
+#: src/menus.c:206
+msgid "_Next"
+msgstr "V_olgende"
+
+#: src/menus.c:207 src/menus.c:312
+msgid "Move forward one message"
+msgstr "Ga een bericht vooruit"
+
+#: src/menus.c:213
+msgid "_Last"
+msgstr "_Laatste"
+
+#: src/menus.c:214 src/menus.c:316
+msgid "Go to the last message"
+msgstr "Ga naar het laatste bericht"
+
+#: src/menus.c:221
+msgid "_Go to..."
+msgstr "_Ga naar..."
+
+#: src/menus.c:222
+msgid "Goto specified message number"
+msgstr "Ga naar gespecificeerde berichtnummer."
+
+#: src/menus.c:228
+msgid "Next fuz_zy"
+msgstr "Volgende on_zekere"
+
+#: src/menus.c:229
+msgid "Go to next fuzzy message"
+msgstr "Ga naar het volgende onzekere bericht"
+
+#: src/menus.c:235
+msgid "Next _untranslated"
+msgstr "Volgende _onvertaalde"
+
+#: src/menus.c:236 src/menus.c:321
+msgid "Go to next untranslated message"
+msgstr "Ga naar het volgende onvertaalde bericht"
+
+#: src/menus.c:246
 msgid "_Colorschemes"
 msgstr "_Kleurenschema"
 
-#: src/menus.c:258
+#: src/menus.c:256
 msgid "gtranslator _website"
 msgstr "Gtranslator _website"
 
-#: src/menus.c:259
+#: src/menus.c:257
 msgid "gtranslator's homepage on the web"
 msgstr "gtranslator's homepage op het web"
 
-#: src/menus.c:271
+#: src/menus.c:269
 msgid "Open a po file"
 msgstr "Een .po bestand openen"
 
-#: src/menus.c:274
+#: src/menus.c:272
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/menus.c:275
+#: src/menus.c:273
 msgid "Save File"
 msgstr "Bestand opslaan"
 
-#: src/menus.c:278
+#: src/menus.c:276
 msgid "Save as"
 msgstr "Opslaan als"
 
-#: src/menus.c:279
+#: src/menus.c:277
 msgid "Save file with a different name"
 msgstr "Bestand onder een andere naam opslaan"
 
-#: src/menus.c:283
+#: src/menus.c:281
 msgid "Compile"
 msgstr "Compileren"
 
-#: src/menus.c:287
+#: src/menus.c:285
 msgid "Update"
 msgstr "Vernieuwen"
 
-#: src/menus.c:291
+#: src/menus.c:289
 msgid "Header"
 msgstr "Kop"
 
-#: src/menus.c:292
+#: src/menus.c:290
 msgid "Edit the header"
 msgstr "Kop aanpassen"
 
-#: src/menus.c:296
+#: src/menus.c:294
 msgid "Undo"
 msgstr "Herstellen"
 
-#: src/menus.c:297
+#: src/menus.c:295
 msgid "Undo the last performed action"
 msgstr "De laatste actie herstellen"
 
-#: src/menus.c:304
+#: src/menus.c:302
 msgid "First"
 msgstr "Eerste"
 
-#: src/menus.c:308
+#: src/menus.c:306
 msgid "Back"
 msgstr "Vorige"
 
-#: src/menus.c:313
+#: src/menus.c:311
 msgid "Next"
 msgstr "Volgende"
 
-#: src/menus.c:317
+#: src/menus.c:315
 msgid "Last"
 msgstr "Laatste"
 
-#: src/menus.c:322
+#: src/menus.c:320
 msgid "Missing"
 msgstr "Onvertaald"
 
-#: src/menus.c:330
+#: src/menus.c:328
 msgid "Go to the next fuzzy translation"
 msgstr "Ga naar de volgende onzekere vertaling"
 
-#: src/menus.c:335
+#: src/menus.c:333
 msgid "Go to"
 msgstr "Ga naar"
 
-#: src/menus.c:336
+#: src/menus.c:334
 msgid "Go to specified message number"
 msgstr "Ga naar gespecificeerde berichtnummer"
 
-#: src/menus.c:340
+#: src/menus.c:338
 msgid "Find string in po file"
 msgstr "Zoek naar tekst in .po bestand"
 
-#: src/menus.c:344
+#: src/menus.c:342
 msgid "Replace string in po file"
 msgstr "Vervang tekst in .po bestand"
 
-#: src/message.c:81
+#: src/message.c:82
 msgid "Couldn't get the message!"
 msgstr "Kan bericht niet verkrijgen! Grrr...."
 
-#: src/message.c:103
+#: src/message.c:104
 msgid "There are no fuzzy messages left."
 msgstr "Er zijn geen onzekere berichten over."
 
-#: src/message.c:127
+#: src/message.c:128
 msgid "All messages seem to be translated."
 msgstr "Het lijkt erop dat alle berichten vertaald zijn."
 
-#: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:5
+#: src/messages-table.c:135 data/etspecs/messages-table.etspec.h:5
 msgid "Status"
 msgstr "Status"
 
-#: src/messages-table.c:138 data/etspecs/messages-table.etspec.h:3
-msgid "Number"
-msgstr "Nummers"
-
-#: src/messages-table.c:139 data/etspecs/messages-table.etspec.h:2
-msgid "Line"
-msgstr "Regel"
-
-#: src/messages-table.c:140 data/etspecs/messages-table.etspec.h:4
+#: src/messages-table.c:136 data/etspecs/messages-table.etspec.h:4
 msgid "Original"
 msgstr "Origineel"
 
-#: src/messages-table.c:141 data/etspecs/messages-table.etspec.h:6
+#: src/messages-table.c:137 data/etspecs/messages-table.etspec.h:6
 msgid "Translation"
 msgstr "Vertaling"
-
-#: src/messages-table.c:142 data/etspecs/messages-table.etspec.h:1
-msgid "Comment"
-msgstr "Commentaar"
 
 #: src/open.c:141
 #, c-format
@@ -1490,7 +1450,7 @@ msgstr "Er is niets vervangen!"
 #. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
 #. *
 #. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot ('�') in the
+#. *  another than a 'Y' to avoid the usage of the mid dot ('·') in the
 #. *   text displaying routines of gtranslator.
 #.
 #: src/runtime-config.c:76
@@ -1573,17 +1533,17 @@ msgstr "Kon de map '%s' aanmaken!"
 msgid "iso-8859-1"
 msgstr "iso-8859-15"
 
-#: src/utils_gui.c:134
+#: src/utils_gui.c:142
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "De geometrie reeks \"%s\" kon niet benoemd worden!"
 
-#: src/utils_gui.c:356
+#: src/utils_gui.c:363
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "U heeft geen toegang tot het bestand '%s'."
 
-#: src/utils_gui.c:374
+#: src/utils_gui.c:381
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1594,7 +1554,7 @@ msgstr ""
 "Dit betekent dat u het bestand het beste kunt opslaan onder een\n"
 "andere naam in een lokale map."
 
-#: src/utils_gui.c:444
+#: src/utils_gui.c:451
 #, c-format
 msgid ""
 "The file\n"
@@ -1617,12 +1577,12 @@ msgstr ""
 "\n"
 "Zal ik dit bestand toch openen?"
 
-#: src/utils_gui.c:489
+#: src/utils_gui.c:496
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Het benodigde decompressieprogramma '%s' is niet aanwezig!"
 
-#: src/utils_gui.c:494
+#: src/utils_gui.c:501
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Het benodigde compressieprogramma '%s' is niet aanwezig!"
@@ -1665,6 +1625,18 @@ msgstr "Overdracht onderbroken!"
 msgid "The Gnome translation program"
 msgstr "Het Gnome vertaalprogramma"
 
+#: data/etspecs/messages-table.etspec.h:1
+msgid "Comment"
+msgstr "Commentaar"
+
+#: data/etspecs/messages-table.etspec.h:2
+msgid "Line"
+msgstr "Regel"
+
+#: data/etspecs/messages-table.etspec.h:3
+msgid "Number"
+msgstr "Nummers"
+
 #: data/mime/gtranslator.keys.in.h:1
 msgid "Compiled gettext po file"
 msgstr "Gecompileerd .po bestand"
@@ -1676,6 +1648,36 @@ msgstr "Gecomprimeerd .po bestand"
 #: data/mime/gtranslator.keys.in.h:3
 msgid "Gettext po file"
 msgstr ".po bestand"
+
+#~ msgid "_Settings/_Colorschemes/"
+#~ msgstr "_Instellingen/_Kleurenschema's/"
+
+#~ msgid "Auto translate the po file & exit"
+#~ msgstr ".po bestand automatisch vertalen & Afsluiten"
+
+#~ msgid "Export learn buffer to a plain po file"
+#~ msgstr "Exporteer leerbuffer naar een normaal .po-bestand"
+
+#~ msgid "PO_FILE"
+#~ msgstr "PO_BESTAND"
+
+#~ msgid "Specify main window geometry"
+#~ msgstr "Specificeer de afmetingen van het hoofdvenster"
+
+#~ msgid "GEOMETRY"
+#~ msgstr "AFMETINGEN"
+
+#~ msgid "Don't highlight syntax"
+#~ msgstr "Tekst niet kleuren"
+
+#~ msgid "_Messages"
+#~ msgstr "Be_richten"
+
+#~ msgid "Mess_age status"
+#~ msgstr "Bericht_status"
+
+#~ msgid "_Fuzzy"
+#~ msgstr "_Onzeker"
 
 #~ msgid ""
 #~ "The translation for message `%s'\n"
