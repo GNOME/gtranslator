@@ -66,16 +66,13 @@ more work like you want it to .", 39},
   {"Happy translation !", 43},
   {"Inited reading process .", 44},
   {"Reading now msgid's ...", 45},
-  {"Error while parsing the msgid's !", 46},
-  {"Reading now the msgstr's ...", 47},
-  {"Error while parsing the msgstr's !", 48},
-  {"Couldn't find pixmap file: %s", 49},
-  {"Couldn't create pixmap from file: %s", 50},
-  {"The msgids will appear here .", 51},
-  {"Your translation goes here .", 52},
+  {"Couldn't find pixmap file: %s", 46},
+  {"Couldn't create pixmap from file: %s", 47},
+  {"The msgids will appear here .", 48},
+  {"Your translation goes here .", 49},
   {"\
 gtranslator is a GnomeApplication for translation .po-files more comfortable \
-than in (X)Emacs .", 53},
+than in (X)Emacs .", 50},
 };
 
-int _msg_tbl_length = 53;
+int _msg_tbl_length = 50;
