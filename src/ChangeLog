@@ -1,3 +1,14 @@
+2001-02-13  Fatih Demir	<kabalak@gtranslator.org>
+
+	* gui.c: Made all conditional inclusion of GnomeVFS sources
+		and functions normal used sources. Less ifdef/endifs.
+
+	* Makefile.am: Added vfs sources generally, deleted not
+		needed checks and XML flags.
+
+	* open-differently.c: Also pass the local "file:/" URIs to
+		GnomeVFS methods.
+
 2001-02-12  Fatih Demir	<kabalak@gtranslator.org>
 
 	* shortcutbar.c: Do not intend that we do have a MDI with "Files:";

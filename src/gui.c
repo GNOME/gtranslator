@@ -34,9 +34,7 @@
 
 #include "stylistics.h"
 
-#ifdef USE_VFS_STUFF
 #include <libgnomevfs/gnome-vfs-init.h>
-#endif
 
 #include <gal/e-paned/e-hpaned.h>
 #include "shortcutbar.h"
@@ -614,7 +612,7 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_config_init();
 	gtranslator_config_set_last_run_date();
 	gtranslator_config_close();
-	#ifdef USE_VFS_STUFF
+	
 	/*
 	 * Say "Bye, bye" to GnomeVFS... but only if it has been up yet :-)
 	 */
@@ -622,7 +620,7 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	{
 		gnome_vfs_shutdown();
 	}
-	#endif
+	
 	/*
 	 * Quit with the normal Gtk+ quit.
 	 */

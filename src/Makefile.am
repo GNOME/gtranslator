@@ -15,26 +15,15 @@ gconf_cflags =
 gconf_libs =
 endif
 
-if USE_VFS_STUFF
-vfs_cflags = $(VFS_CFLAGS) -DUSE_VFS_STUFF=7
-vfs_sources = vfs-handle.c vfs-handle.h
-vfs_libs = $(VFS_LIBS)
-else
-vfs_cflags =
-vfs_sources =
-vfs_libs =
-endif
-
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
-	$(vfs_cflags) \
 	$(GAL_CFLAGS) \
+	$(VFS_CFLAGS) \
 	$(GNOME_INCLUDEDIR) \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DSCRIPTSDIR=\""$(datadir)/gtranslator/scripts"\" \
-	$(XML_CFLAGS) \
 	$(gconf_cflags) \
 	$(myicon)
 
@@ -62,7 +51,7 @@ gtranslator_SOURCES = \
 	shortcutbar.c shortcutbar.h \
 	stylistics.c stylistics.h \
 	update.c \
-	$(vfs_sources)
+	vfs-handle.c vfs-handle.h
 
 gtranslator_LDADD = \
 	-L/usr/X11R6/lib \
@@ -70,10 +59,7 @@ gtranslator_LDADD = \
 	$(GNOMEUI_LIBS) \
 	$(INTLLIBS) \
 	$(gconf_libs) \
-	$(XML_LIBS) \
-	$(vfs_libs) \
+	$(VFS_LIBS) \
 	$(GAL_LIBS)
 
-EXTRA_DIST = ChangeLog \
-	vfs-handle.c \
-	vfs-handle.h
+EXTRA_DIST = ChangeLog

@@ -34,7 +34,8 @@ gboolean gtranslator_open_po_file(gchar *file)
 
 	if(!g_strncasecmp(file, "http://", 7)||
 		!g_strncasecmp(file, "ftp://", 6)||
-		!g_strncasecmp(file, "www.", 4))
+		!g_strncasecmp(file, "www.", 4)||
+		!g_strncasecmp(file, "file:/", 6))
 	{
 	
 		file=gtranslator_vfs_handle_open_file(file);
