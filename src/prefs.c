@@ -205,7 +205,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 		GtrPreferences.warn_if_fuzzy, gtranslator_preferences_dialog_changed);
 	keep_obsolete =
 	    gtranslator_utils_attach_toggle_with_label(third_page, 4,
-		_("Keep obsolete message in the po files"),
+		_("Keep obsolete messages in the po files"),
 		GtrPreferences.keep_obsolete, gtranslator_preferences_dialog_changed);
 
 	/*
