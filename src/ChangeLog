@@ -1,3 +1,25 @@
+2001-03-03  Fatih Demir	<kabalak@gtranslator.org>
+
+	* stylistics.c: Hm, don't free up the now simply given color value
+		paths.
+
+	* prefs_init.c: Changed the initial color values according to the
+		new color value path.
+
+	* gui.c & stylistics.c: Split up the color setting locations to "fg/bg"
+		for color schemes and "own_fg/own_bg" for the GnomeColorPickers
+		 to avoid very nice and immenant black color values.
+
+	* gui.c: Insert a separator between the toolbar icons/menu items
+		for navigating to first/back and next/last message and also
+		 implemented an own keyhandler which now receives the Ctrl+
+		  Left/Right and Ctrl+Up/Down keys which are the new keyboard
+		   shortcuts for the navigation.
+	
+	* prefs.c: Added scheme definition GnomeFileEntry and the stuff around
+		in the preferences box and entries; reinit the colors after
+		 a color scheme change on the fly.
+
 2001-03-02  Fatih Demir <kabalak@gtranslator.org>
 
 	* gui.c: Hmm, check status before freeing it -- it could also not be

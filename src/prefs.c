@@ -27,8 +27,10 @@
 #include "gui.h"
 #include "find.h"
 #include "stylistics.h"
+#include "color-schemes.h"
 #include "languages.h"
 
+#include <libgnome/gnome-util.h>
 #include <libgnomeui/libgnomeui.h>
 
 /*
@@ -339,14 +341,11 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 
 	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(scheme_file),
 		SCHEMESDIR);
-	
+
 	own_specs=attach_toggle_with_label(sixth_page, 1,
 		_("Apply special font/colors"),
 		wants.use_own_specs, prefs_box_changed);
 	
-	/*
-	 * The used labels onn the sixth page.
-	 */	
 	font_label=gtk_label_new(_("Font:"));
 	fg_color_label=gtk_label_new(_("Foreground color:"));
 	bg_color_label=gtk_label_new(_("Background color:"));
@@ -404,7 +403,8 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(background), "color_set",
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(GTK_EDITABLE(scheme_file)), "changed",
+	gtk_signal_connect(GTK_OBJECT(gnome_file_entry_gtk_entry(
+			   GNOME_FILE_ENTRY(scheme_file))), "changed",
 			   GTK_SIGNAL_FUNC(prefs_box_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(prefs), "apply",
 			   GTK_SIGNAL_FUNC(prefs_box_apply), NULL);
@@ -466,17 +466,29 @@ static void prefs_box_apply(GtkWidget  * box, gint page_num, gpointer useless)
 	g_free(wants.font);
 	wants.font=g_strdup(gnome_font_picker_get_font_name(GNOME_FONT_PICKER(font)));
 	gtranslator_config_set_string("font/name", wants.font);
+
+	/*
+	 * Apply the given color scheme.
+	 */ 
+	g_free(wants.scheme);
+	wants.scheme=gtk_editable_get_chars(
+		GTK_EDITABLE(gnome_file_entry_gtk_entry(
+		GNOME_FILE_ENTRY(scheme_file))), 0, -1);
+
+	if(wants.scheme && g_file_exists(wants.scheme))
+	{
+		gtranslator_color_scheme_apply(wants.scheme);
+		theme=gtranslator_color_scheme_load_from_prefs();
+
+		init_colors();
+	}
 	
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(foreground), COLOR_FG);
 	gtranslator_color_values_set(GNOME_COLOR_PICKER(background), COLOR_BG);
 
-	/* Change style if text boxes immediately */
-	if(wants.use_own_specs)
-	{
-		gtranslator_set_style(text1);
-		gtranslator_set_style(trans_box);
-	}
-	
+	gtranslator_set_style(text1);
+	gtranslator_set_style(trans_box);
+
 	gtranslator_config_set_bool("toggles/save_geometry", wants.save_geometry);
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", wants.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 
@@ -577,7 +589,6 @@ static void prefs_box_changed(GtkWidget  * widget, gpointer flag)
 
 void read_prefs(void)
 {
-
 	/*
 	 * Initialize the preferences with default values if this is our first
 	 *  startup of gtranslator.
@@ -594,7 +605,8 @@ void read_prefs(void)
 	enc = gtranslator_config_get_string("language/encoding");
 	wants.font = gtranslator_config_get_string("font/name");
 	wants.dictionary = gtranslator_config_get_string("dict/file");
-	
+	wants.scheme =  gtranslator_config_get_string("scheme/filename");
+
 	wants.instant_spell_check = 
 	    gtranslator_config_get_bool("toggles/instant_spell_check");
 	wants.save_geometry =

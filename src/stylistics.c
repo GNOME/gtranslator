@@ -25,14 +25,13 @@
 #include "stylistics.h"
 #include "color-schemes.h"
 #include "preferences.h"
+#include "prefs.h"
 
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 
-static gchar *get_path_from_type(ColorType Type);
-static void init_colors(void);
+gchar *get_path_from_type(ColorType Type);
 
-static GdkColor colors[COLOR_END];
 
 /*
  * Given a color type, returns a configuration path. Must be freed
@@ -88,9 +87,17 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 	gchar spec[8];
 	gchar *path;
 	
-	path=get_path_from_type(Type);
-	g_return_if_fail(path!=NULL);
+	if(Type==COLOR_FG)
+	{
+		path="colors/own_fg";
+	}
+	else if(Type==COLOR_BG)
+	{
+		path="colors/own_bg";
+	}
 
+	g_return_if_fail(path!=NULL);
+	
 	gnome_color_picker_get_i8(GNOME_COLOR_PICKER(colorpicker),
 		&red, &green, &blue, NULL);
 	
@@ -99,7 +106,6 @@ void gtranslator_color_values_set(GnomeColorPicker *colorpicker, ColorType Type)
 	 */
 	g_snprintf(spec, 8, "#%02x%02x%02x", red, green, blue);
 	gtranslator_config_set_string(path, spec);
-	g_free(path);
 }
 
 /*
@@ -111,13 +117,22 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 	gchar *spec;
 	gchar *path;
 	
-	path=get_path_from_type(Type);
+	if(Type==COLOR_FG)
+	{
+		path="colors/own_fg";
+	}
+	else if(Type==COLOR_BG)
+	{
+		path="colors/own_bg";
+	}
+	
 	g_return_if_fail(path!=NULL);
 
 	/*
 	 * Restore the color values from the preferences.
 	 */
 	spec=gtranslator_config_get_string(path);
+
 	if(spec)
 	{
 		gdk_color_parse(spec, &color);
@@ -125,7 +140,6 @@ void gtranslator_color_values_get(GnomeColorPicker *colorpicker, ColorType Type)
 			color.green, color.blue, 0);
 		g_free(spec);
 	}
-	g_free(path);
 }		
 
 /*
@@ -149,7 +163,15 @@ void gtranslator_set_style(GtkWidget *widget)
 	/*
 	 * Set up the stored values for the background from the preferences.
 	 */
-	spec=gtranslator_config_get_string("colors/bg");
+	if(wants.use_own_specs)
+	{
+		spec=gtranslator_config_get_string("colors/own_bg");
+	}
+	else
+	{
+		spec=gtranslator_config_get_string("colors/bg");
+	}
+	
 	if(spec)
 	{
 		gdk_color_parse(spec, &style->base[0]);
@@ -159,7 +181,15 @@ void gtranslator_set_style(GtkWidget *widget)
 	/*
 	 * Do the same for the foreground.
 	 */
-	spec=gtranslator_config_get_string("colors/fg");
+	if(wants.use_own_specs)
+	{
+		spec=gtranslator_config_get_string("colors/own_fg");
+	}
+	else
+	{
+		spec=gtranslator_config_get_string("colors/fg");
+	}
+	
 	if(spec)
 	{
 		gdk_color_parse(spec, &style->text[0]);

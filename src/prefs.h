@@ -59,6 +59,7 @@ struct {
 	gchar *spell_command;
 	gchar *dictionary;
 	gchar *font;
+	gchar *scheme;
 } wants;
 
 /*

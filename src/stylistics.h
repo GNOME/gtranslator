@@ -45,6 +45,9 @@ typedef enum {
 	COLOR_END
 } ColorType;
 
+GdkColor colors[COLOR_END];
+void init_colors(void);
+
 /*
  * Saves the color values from the GnomeColorPicker.
  */

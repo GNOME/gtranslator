@@ -82,6 +82,11 @@ static gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 			     gpointer useless);
 
 /*
+ * To get the left/right moves from the cursor.
+ */ 
+static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event);
+
+/*
  * The target formats
  */
 static  GtkTargetEntry dragtypes[] = {
@@ -167,44 +172,52 @@ static GnomeUIInfo the_messages_menu[] = {
 	 N_("Go to the first message"),
 	 goto_first_msg, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FIRST,
-	 GDK_F9, 0, NULL},
+	 GDK_Up, GDK_CONTROL_MASK, NULL
+	},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Back"),
 	 N_("Go one message back"),
 	 goto_prev_msg, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BACK,
-	 GDK_F10, 0, NULL},
+	 GDK_Left, GDK_CONTROL_MASK, NULL
+	},
+	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_Next"),
 	 N_("Go one message forward"),
 	 goto_next_msg, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_FORWARD,
-	 GDK_F11, 0, NULL},
+	 GDK_Right, GDK_CONTROL_MASK, NULL
+	},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Last"),
 	 N_("Go to the last message"),
 	 goto_last_msg, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_LAST,
-	 GDK_F12, 0, NULL},
+	 GDK_Down, GDK_CONTROL_MASK, NULL
+	},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_Go to..."),
 	 N_("Goto specified message number"),
 	 goto_dlg, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
-	 'G', GDK_CONTROL_MASK, NULL},
+	 'G', GDK_CONTROL_MASK, NULL
+	},
 	{
 	 GNOME_APP_UI_ITEM, N_("Next fuz_zy"),
 	 N_("Go to next fuzzy message"),
 	 goto_next_fuzzy, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
-	 'Z', GDK_MOD1_MASK, NULL},
+	 'Z', GDK_MOD1_MASK, NULL
+	},
 	{
 	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
 	 N_("Go to next untranslated message"),
 	 goto_next_untranslated, NULL, NULL,
 	 GNOME_APP_PIXMAP_DATA, untrans_xpm,
-	 'U', GDK_MOD1_MASK, NULL},
+	 'U', GDK_MOD1_MASK, NULL
+	},
 	GNOMEUIINFO_END
 };
 
@@ -315,6 +328,7 @@ static GnomeUIInfo the_searchbar[] = {
 			       N_("Go one message back"),
 			       goto_prev_msg,
 			       GNOME_STOCK_PIXMAP_BACK),
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
 			       N_("Go one message forward"),
 			       goto_next_msg,
@@ -436,17 +450,17 @@ static void create_actions(void)
 	insert_action(ACT_COPY, the_edit_menu[3], NONE);
 	insert_action(ACT_PASTE, the_edit_menu[4], NONE);
 	insert_action(ACT_CLEAR, the_edit_menu[5], NONE);
-	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[7]);
+	insert_action(ACT_FIND, the_edit_menu[7], the_searchbar[8]);
 	insert_action(ACT_FIND_AGAIN, the_edit_menu[8], NONE);
 	insert_action(ACT_HEADER, the_edit_menu[10], the_toolbar[6]);
 	/*------------------------------------------------*/
 	insert_action(ACT_FIRST, the_messages_menu[0], the_searchbar[0]);
 	insert_action(ACT_BACK, the_messages_menu[1], the_searchbar[1]);
-	insert_action(ACT_NEXT, the_messages_menu[2], the_searchbar[2]);
-	insert_action(ACT_LAST, the_messages_menu[3], the_searchbar[3]);
-	insert_action(ACT_GOTO, the_messages_menu[5], the_searchbar[6]);
-	insert_action(ACT_NEXT_FUZZY, the_messages_menu[6], the_searchbar[5]);
-	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[7], the_searchbar[4]);
+	insert_action(ACT_NEXT, the_messages_menu[3], the_searchbar[3]);
+	insert_action(ACT_LAST, the_messages_menu[4], the_searchbar[4]);
+	insert_action(ACT_GOTO, the_messages_menu[6], the_searchbar[7]);
+	insert_action(ACT_NEXT_FUZZY, the_messages_menu[7], the_searchbar[6]);
+	insert_action(ACT_NEXT_UNTRANSLATED, the_messages_menu[8], the_searchbar[5]);
 	/*------------------------------------------------*/
 	insert_action(ACT_TRANSLATED, the_msg_status_menu[0], NONE);
 	insert_action(ACT_FUZZY, the_msg_status_menu[1], NONE);
@@ -594,6 +608,9 @@ void create_app1(void)
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
+
+	gtk_signal_connect(GTK_OBJECT(app1), "key_press_event",
+			   GTK_SIGNAL_FUNC(gtranslator_keyhandler), NULL);
 	/*
 	 * The D'n'D signals
 	 */
@@ -1105,4 +1122,57 @@ static void text_has_got_changed(GtkWidget  * widget, gpointer useless)
 	}
 
 	gtranslator_syntax_update_text(trans_box);
+}
+
+/*
+ * The own keyhandler to get the left/right actions.
+ */ 
+static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
+{
+	g_return_val_if_fail(widget!=NULL, FALSE);
+	g_return_val_if_fail(event!=NULL, FALSE);
+	#define IfGood(x) \
+	if(GTK_WIDGET_SENSITIVE(GTK_WIDGET(((GnomeUIInfo)(x)).widget)))
+
+	if(file_opened)
+	{
+		if(event->state & GDK_CONTROL_MASK)
+		{
+			switch(event->keyval)
+			{
+				case GDK_Left:
+					IfGood(the_searchbar[1])
+					{
+						goto_prev_msg(NULL, NULL);
+					}
+					break;
+				
+				case GDK_Right:
+					IfGood(the_searchbar[3])
+					{
+						goto_next_msg(NULL, NULL);
+					}
+					break;
+
+				case GDK_Up:
+					IfGood(the_searchbar[0])
+					{
+						goto_first_msg(NULL, NULL);
+					}
+					break;
+					
+				case GDK_Down:
+					IfGood(the_searchbar[4])
+					{
+						goto_last_msg(NULL, NULL);
+					}
+					break;
+					
+				default:
+					break;
+			}
+		}
+	}
+	
+	return TRUE;
 }

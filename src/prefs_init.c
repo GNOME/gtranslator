@@ -77,14 +77,16 @@ void prefs_init_syntax_colors()
 	gtranslator_config_init();
 	
 	/*
-	 * Set black on white as default colors.
+	 * Set black on white as default colors for the color pickers.
 	 */ 
-	gtranslator_config_set_string("colors/fg", "black");
-	gtranslator_config_set_string("colors/bg", "white");
+	gtranslator_config_set_string("colors/own_fg", "#000000");
+	gtranslator_config_set_string("colors/own_bg", "#FFFFFF");
 	
 	/*
 	 * The default syntax colors.
 	 */
+	gtranslator_config_set_string("colors/fg", "black");
+	gtranslator_config_set_string("colors/bg", "white");
 	gtranslator_config_set_string("colors/special_char", "grey");
 	gtranslator_config_set_string("colors/hotkey", "blue");
 	gtranslator_config_set_string("colors/c_format", "red");
