@@ -324,7 +324,11 @@ gboolean gtranslator_parse_core(GtrPo *po)
 			 */
 			line = g_convert(rawline, strlen(rawline), "utf-8", po->header->charset, NULL, NULL, &errv);
 			if(!line) {
-				g_warning("%s:%d: could not convert line from '%s' to UTF-8: %s", po->filename, lines, po->header->charset, errv->message);
+				if (errv == NULL) {
+					g_warning("%s:%d: could not convert line from '%s' to UTF-8: %s", po->filename, lines, po->header->charset, errv->message);
+				} else {
+					g_warning("%s:%d: could not convert line from '%s' to UTF-8: [NULL ERRV]", po->filename, lines, po->header->charset);
+				}
 				continue;
 			}
 		}
