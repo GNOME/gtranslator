@@ -478,7 +478,7 @@ void insert_text_handler (GtkEditable *editable, const gchar *text,
 
 	result=g_strdup(text);
 	gtranslator_utils_invert_dot(result);
-
+	
 	gtk_signal_handler_block_by_func(GTK_OBJECT(editable),
 					 GTK_SIGNAL_FUNC(insert_text_handler),
 					 data);
@@ -512,6 +512,11 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					IfGood(the_navibar[1])
 					{
 						gtranslator_message_go_to_previous(NULL, NULL);
+
+						gtranslator_undo_add("Go to previous",
+							"gtranslator_message_go_to_previous",
+							(GFunc) gtranslator_message_go_to_no, 
+							g_list_position(po->messages, po->current));
 					}
 					break;
 				
@@ -520,6 +525,11 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					IfGood(the_navibar[3])
 					{
 						gtranslator_message_go_to_next(NULL, NULL);
+						
+						gtranslator_undo_add("Go to previous",
+							"gtranslator_message_go_to_previous",
+							(GFunc) gtranslator_message_go_to_no, 
+							g_list_position(po->messages, po->current));
 					}
 					break;
 
@@ -527,6 +537,11 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					IfGood(the_navibar[0])
 					{
 						gtranslator_message_go_to_first(NULL, NULL);
+						
+						gtranslator_undo_add("Go to previous",
+							"gtranslator_message_go_to_previous",
+							(GFunc) gtranslator_message_go_to_no, 
+							g_list_position(po->messages, po->current));
 					}
 					break;
 					
@@ -534,6 +549,11 @@ static gint gtranslator_keyhandler(GtkWidget *widget, GdkEventKey *event)
 					IfGood(the_navibar[4])
 					{
 						gtranslator_message_go_to_last(NULL, NULL);
+						
+						gtranslator_undo_add("Go to previous",
+							"gtranslator_message_go_to_previous",
+							(GFunc) gtranslator_message_go_to_no, 
+							g_list_position(po->messages, po->current));
 					}
 					break;
 					

@@ -288,11 +288,7 @@ void gtranslator_undo()
 
 		if(core)
 		{
-			gtranslator_undo_core_run(&core, NULL);
-			gtranslator_redo_add("Redo an Undo", 
-				"redo_add", 
-				(GFunc) core->function, core->data);
-			
+			gtranslator_undo_core_run(&core, NULL);		
 		}
 	}
 }

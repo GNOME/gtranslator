@@ -37,7 +37,7 @@ typedef struct {
 
 /*
  * Almost the same like the "gtranslator_undo_new_register" function
- *  but doesn't return any GtrUndo and handles the data locally.
+ *  but doesn't return any GtrUndo and handles the data locally:
  */
 void gtranslator_undo_add(const gchar *description,
 	const gchar *actionname, GFunc function, gpointer data);
