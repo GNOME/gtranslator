@@ -190,6 +190,7 @@ static void *value_at_function(ETreeModel *model, ETreePath path, int column,
 	GtrMsg *message;
 	
 	message = e_tree_memory_node_get_data (tree_memory, path);
+	g_return_val_if_fail(message!=NULL, NULL);
 	
 	switch (column) {
 	case COL_ORIG:
@@ -261,6 +262,7 @@ row_selected (ETree *tree, int row, ETreePath node, gpointer data)
 	gint model_row;
 	
 	message=e_tree_memory_node_get_data (tree_memory, node);
+	g_return_if_fail(message);
 	
 	/* This sucks. Should use e_tree_view_to_model_row here
 	** but that seems to return the view row. Sigh.*/

@@ -781,7 +781,7 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	/*
 	 * Clear the messages table.
 	 */
-	gtranslator_messages_table_create();
+	gtranslator_messages_table_clear();
 
 	/*
 	 * Stop gtkspell.
