@@ -10,7 +10,7 @@
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=3.1
+export POZILLA_RELEASE=3.5
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -25,16 +25,18 @@ export CONFIG_DIR="$HOME/.pozilla"
 export BODY_FILE="$CONFIG_DIR/mail.body"
 
 #
-# Save the old LANG evironment and unset it after that.
+# Save the old locale evironment and unset it after that.
 #
 _LANG="$LANG"
 _LANGUAGE="$LANGUAGE"
+_LC_ALL="$LC_ALL"
 
-unset LANG
-unset LANGUAGE
+export LANG=C
+export LANGUAGE=C
+export LC_ALL=C
 
 #
-# set the default po directory to ./po
+# Set the default po directory to ./po
 #
 export PO_DIR="."
 
@@ -75,7 +77,15 @@ for app in msgfmt msgmerge make grep sed awk mutt
 	if test "%$confirmation" = "%n" -o "%$confirmation" = "%N" -o \
 		"%$confirmation" = "%" ; then
 		echo "---------------------------------------------------------------"
-		echo "!ERROR¡ Confirmation not succeeded."
+		echo "!ERROR¡ "
+		echo ""
+		echo "Confirmation not succeeded; you need to confirm the use"
+		echo " of pozilla.sh to gain it's revolutionary use and/or easiness."
+		echo ""
+		echo "Please look into the manual page for pozilla.sh before playing"
+		echo " 'round with it as it could cause heart attacks for some of"
+		echo "   your package's translators ,-)"
+		echo ""
 		echo "---------------------------------------------------------------"
 			exit 1
 	fi
@@ -103,10 +113,11 @@ do
 	echo "-a --additional   Defines an additional mail address to mail to"
 	echo "-d --days         Days remaining for release"
 	echo "-p --podirectory  Defines the po directory location (default: ./po)"
-	echo "-s --sendto       Send the merged po files to the given languages"
+	echo "-A --send-to-all  Send the merged po files for all languages"
+	echo "-s --send-to      Send the merged po files to the given languages"
 	echo "-i --ignore       Don't operate for these languages (ignore them)"
 	echo ""
-	echo "Important: Both of the \"--send\" and \"--ignore\" options do "
+	echo "Important: Both of the \"--send-to\" and \"--ignore\" options do "
 	echo " await a ':' separated list like \"az:tr:uk\"."
 	echo ""
 	echo "-r --release      Specifies the coming release's number"
@@ -114,6 +125,9 @@ do
 	echo "-m --mailinglist  Changed the mailing list to the given arguments"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
+	echo "---------------------------------------------------------------"
+	echo "Please consult pozilla.sh's manual page for more usage examples"
+	echo " and informations; you can reach it via \"man pozilla.sh\"."
 	echo "---------------------------------------------------------------"
 		exit 1
 	;;
@@ -205,19 +219,34 @@ do
 		echo "---------------------------------------------------------------"
 	fi
 	;;
-	-s|--sendto)
+	-A|--send-to-all)
 	shift 1
-	if test "sendto$1" = "sendto" ; then
 		echo "---------------------------------------------------------------"
-		echo "No language given to send the po file to."
+		echo "Sending po files to all languages..."
 		echo "---------------------------------------------------------------"
-	else
-
+		SEND_TO_ALL_LANGUAGES=yes
+	;;
+	-s|--send-to)
+	shift 1
+	if test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
 		echo "---------------------------------------------------------------"
-		export SENDTO_LANGS="`echo $1|sed -e 's/:/\ /g'`"
-		shift 1
-		echo "Sending the merged po files to this/these lang(s): $SENDTO_LANGS"
+		echo "Sending the po files to all languages switch is already active.."
+		echo "Ignoring arguments.."
 		echo "---------------------------------------------------------------"
+		
+		if test "foo$1" != "foo" ; then shift 1 ; fi
+	else	
+		if test "sendto$1" = "sendto" ; then
+			echo "---------------------------------------------------------------"
+			echo "No language given to send the po file to."
+			echo "---------------------------------------------------------------"
+		else
+			echo "---------------------------------------------------------------"
+			export SEND_TO_LANGS="`echo $1|sed -e 's/:/\ /g'`"
+			shift 1
+			echo "Sending the merged po files to this/these lang(s): $SEND_TO_LANGS"
+			echo "---------------------------------------------------------------"
+		fi
 	fi
 	;;
 	-S|--statistics)
@@ -282,17 +311,74 @@ if test "o$PO_DIR" != "o`pwd`" ; then
 fi	
 
 #
-# Get the common values.
+# Check if we've got a configure.in present and operate accordingly.
 #
-export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|sed -e 's/^.*(//g' -e 's/,.*$//g'`
+if test -f configure.in ; then
+	export PACKAGE=`grep \^AM_INIT_AUTOMAKE configure.in|sed -e 's/^.*(//g' -e 's/,.*$//g'`
+
+	#
+	# Test if we'd get a PACKAGE and try some other plays if we'dn't get it.
+	#
+	if test "z$PACKAGE" = "z" ; then
+		export PACKAGE=`basename ${PWD:-`pwd`}`
+
+		echo "---------------------------------------------------------------"
+		echo "Couldn't automatically determine package name, taking local"
+		echo " directory name \"$PACKAGE\" instead..."
+		echo "---------------------------------------------------------------"
+	fi
+else
+	echo "---------------------------------------------------------------"
+	echo "No configure.in found in ${PWD:-`pwd`}, so you do now"
+
+	read -p " please enter the package name: " package_name
+
+	if test "z$package_name" != "z" ; then
+		export PACKAGE=$package_name
+
+		echo ""
+		echo "Setting package name to \"$PACKAGE\"..."
+	else
+		echo "---------------------------------------------------------------"
+		echo "!ERROR¡ You didn't enter any package name!"
+		echo "---------------------------------------------------------------"
+			exit 1
+	fi
+	
+	echo "---------------------------------------------------------------"
+fi
 
 #
 # Hopefully the other apps are using plain version strings
-#  like "0.8" or "0.32".
+#  like "0.8" or "0.32" -- if not, query the admin.
 #
 if test "y$MY_RELEASE" = "y" ; then
 	export RELEASE=`grep \^AM_INIT_AUTOMAKE configure.in|\
 		sed -e 's/^.*(//g' -e 's/.*,//g' -e 's/).*//g' -e 's/\ //g'`
+	
+	if test "r$RELEASE" = "r" ; then
+		echo "---------------------------------------------------------------"
+		echo "Couldn't automatically determine package version and as no"
+		echo " special version string was specified using the \"-r\" switch,"
+		read -p "  please enter the version : " version_string
+
+		if test "v$version_string" != "v" ; then
+			export RELEASE=$version_string
+			
+			echo ""
+			echo "Taking \"$RELEASE\" as version..."
+		else
+			echo "---------------------------------------------------------------"
+			echo "!ERROR¡"
+			echo ""
+			echo "No version detected/entered, please try using the \"-r\" switch"
+			echo " switch from the command line next time."
+			echo "---------------------------------------------------------------"
+				exit 1
+		fi
+		
+		echo "---------------------------------------------------------------"
+	fi
 else
 	export RELEASE="$MY_RELEASE"
 fi
@@ -311,16 +397,23 @@ export SUBJECT="[ Pozilla #$POZILLA_NO ] $PACKAGE R $RELEASE"
 #
 # Here we build up a recent pot file for the project.
 #
-if test -f Makefile -a -f POTFILES ; then
+if test "q`which xml-i18n-update`" != "q" ; then
+	xml-i18n-update --pot 2>&1 >/dev/null
+elif test -f Makefile -a -f POTFILES.in ; then
 	[ -f $PACKAGE.pot ] && rm -f $PACKAGE.pot
+	[ -f POTFILES ] && rm -f POTFILES
+	make POTFILES 2>&1 >/dev/null
 	make $PACKAGE.pot 2>&1 >/dev/null
-elif test -x ./update.sh ; then
-	./update.sh -P 2>&1 >/dev/null
 elif test -x ./update.pl ; then
 	./update.pl -P 2>&1 >/dev/null
+elif test -x ./update.sh ; then
+	./update.sh -P 2>&1 >/dev/null
 else
 	echo "---------------------------------------------------------------"
-	echo "!ERROR¡: No update.(sh|pl) or usable Makefile found!"
+	echo "!ERROR¡:"
+	echo ""
+	echo "Neither \"xml-i18n-update\" nor usable Makefile/update scripts"
+	echo " like \"./update.pl\" or \"./update.sh\" found!"
 	echo "---------------------------------------------------------------"
 		exit 1
 fi
@@ -368,7 +461,7 @@ for i in $PO_FILES
 	cp $i $i.backup
 	language=`basename $i .po|sed -e s/\.Big5//g -e s/\.GB2312//g`
 	
-	merge_status=`LANG=C LANGUAGE=C OLD_PO_FILE_INPUT=yes msgmerge $i $PACKAGE.pot -o $i 2>&1`
+	merge_status=`OLD_PO_FILE_INPUT=yes msgmerge $i $PACKAGE.pot -o $i 2>&1`
 	
 	if echo $merge_status|grep -sq warning ; then
 		mv $i.backup $i
@@ -389,7 +482,7 @@ $language\t\t------------- Failure due to an error -------------"
 	#
 	# Get the values for the messages statistics.
 	#
-	statistics=(`LANG=C LANGUAGE=C OLD_PO_FILE_INPUT=yes msgfmt -v $i 2>&1`)
+	statistics=(`OLD_PO_FILE_INPUT=yes msgfmt -v $i 2>&1`)
 	translated=${statistics[0]}
 	fuzzy=${statistics[3]:-0}
 	untranslated=${statistics[6]:-0}
@@ -415,19 +508,24 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 		if test "b$DAYS_REMAINING" != "b" ; then
 			echo "$PACKAGE will release R $RELEASE in $DAYS_REMAINING days, so" >> $BODY_FILE
 			echo " that you should update your translation till then." >> $BODY_FILE
+			echo "" >> $BODY_FILE
 		fi
-		echo "" >> $BODY_FILE
 		echo "Your po-file $i's statistics are:" >> $BODY_FILE
 		echo "${statistics[*]} [$percent%]" >>$BODY_FILE
 		echo "" >> $BODY_FILE
-		if test "s$SENDTO_LANGS" != "s" ; then
+		if test "q$SEND_TO_ALL_LANGUAGES" != "q" -o "s$SEND_TO_LANGS" != "s" ; then
 			_lang=`echo $i|sed -e 's/.po//g'`
-			echo $SENDTO_LANGS|grep -sq $_lang && {
+			if  test "q$SEND_TO_ALL_LANGUAGES" != "q" ; then
 				gzip --best -cf < $i > $PACKAGE.$i.gz
-			echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
-			echo " immediately start with your update of $i." >> $BODY_FILE
-			echo "" >> $BODY_FILE
-			}
+				echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
+				echo " immediately start with your update of $i." >> $BODY_FILE
+				echo "" >> $BODY_FILE
+			elif echo $SEND_TO_LANGS|grep -sq $_lang ; then
+				gzip --best -cf < $i > $PACKAGE.$i.gz
+				echo "An updated and merged $i file is attached to this message, so that you can" >> $BODY_FILE
+				echo " immediately start with your update of $i." >> $BODY_FILE
+				echo "" >> $BODY_FILE
+			fi
 		fi
 		echo "Have fun with po-updating :-)" >> $BODY_FILE
 	;;
@@ -466,6 +564,11 @@ echo "and you all should update your translator for it please." >> $BODY_FILE
 echo "" >> $BODY_FILE
 echo "Possibly you'll also get a \"private\" message from pozilla informing" >> $BODY_FILE
 echo "you about the coming release with the specs/status of your po-file." >> $BODY_FILE
+if test "Q$SEND_TO_ALL_LANGUAGES" != "Q" ; then
+echo "" >> $BODY_FILE
+echo "Updated and merged po files have been sent to all last translators" >> $BODY_FILE
+echo "of $PACKAGE." >> $BODY_FILE
+fi
 echo "" >> $BODY_FILE
 echo "Current po files statistics table:" >> $BODY_FILE
 echo -e "$STAT_TABLE" >> $BODY_FILE
@@ -502,6 +605,7 @@ fi
 #
 export LANG="$_LANG"
 export LANGUAGE="$_LANGUAGE"
+export LC_ALL="$_LC_ALL"
 
 #
 # Exit with 0. We're all happy :-0

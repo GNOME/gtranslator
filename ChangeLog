@@ -1,10 +1,21 @@
 2001-06-12  Fatih Demir <kabalak@gtranslator.org>
 
-	* NEWS, pozilla.sh: Release 3.1 -- use the "OLD_PO_FILE_INPUT=yes"
+	* man/pozilla.sh.1: Updated the manual page according to the new
+		option and added also the long options to the SYNTAX section.
+
+	* NEWS, pozilla.sh: Release 3.5 -- use the "OLD_PO_FILE_INPUT=yes"
 		variable to get merging to work also for non-valid gettext po
 		 files on 0.10.38 which are working for previous releases;
 		  also applied Abel's patch to set up the "C" environment --
 		   also added an IP test on the first run of pozilla.sh.
+		
+		Added "-A"/"--send-to-all" option to send the updated po files
+		 to all languages, made some small options renaming and made
+		  the  package name and version checks/determinations more 
+		   proof and "assertive"; also checks for  configure.in's and
+		    allows now also the use of pozilla.sh for non-autoconf/
+		     automake based projects -- much stuff, there we did
+		      climb a major step up to 3.5.
 
 2001-06-11  Fatih Demir <kabalak@gtranslator.org>
 
