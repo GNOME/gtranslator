@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-08-19 23:32+0200\n"
+"POT-Creation-Date: 2000-09-15 18:30+0200\n"
 "PO-Revision-Date: 2000-08-19 23:48+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -13,21 +13,243 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: src/about.c:27
+#: src/about.c:26
 msgid ""
-"gtranslator will be a GNOME framework for translating and managing the "
-"translation of the important po-files and othe i18/19/20..n issues."
-msgstr "gtranslator vil bli et GNOME program for oversetting og håndtering av oversettelsen av viktige po-filer og andre i18n ting."
+"gtranslator will be a Gnome framework for translating these emminent "
+"important po-files.\n"
+"It will be based upon a gtranslatord and a gtranslator client. Wish the best "
+"for us translators and for me!"
+msgstr ""
 
-#: src/dialogs.c:46
+#: src/gui.c:55
+msgid "_Compile"
+msgstr "_Kompilér"
+
+#: src/gui.c:56 src/gui.c:200
+msgid "Compile the po-file"
+msgstr "Kompiler po-filen "
+
+#: src/gui.c:82
+msgid "_Header..."
+msgstr "_Header..."
+
+#: src/gui.c:83 src/gui.c:216
+msgid "Edit the header"
+msgstr "Rediger headeren"
+
+#: src/gui.c:86
+msgid "_Spell check..."
+msgstr ""
+
+#: src/gui.c:87
+msgid "Check the spelling of translation"
+msgstr ""
+
+#: src/gui.c:95
+msgid "_First"
+msgstr "_Første"
+
+#: src/gui.c:96 src/gui.c:233
+msgid "Go to the first message"
+msgstr "Gå til første melding"
+
+#: src/gui.c:101
+msgid "_Back"
+msgstr "_Tilbake"
+
+#: src/gui.c:102 src/gui.c:237
+msgid "Go one message back"
+msgstr "Gå tilbake en melding"
+
+#: src/gui.c:107
+msgid "_Next"
+msgstr "_Neste"
+
+#: src/gui.c:108 src/gui.c:241
+msgid "Go one message forward"
+msgstr "Gå frem en melding"
+
+#: src/gui.c:113
+msgid "_Last"
+msgstr "_Siste"
+
+#: src/gui.c:114 src/gui.c:245
+#, fuzzy
+msgid "Go to the last message"
+msgstr "Gå til siste melding"
+
+#: src/gui.c:120
+msgid "_Go to..."
+msgstr "_Gå til..."
+
+#: src/gui.c:121 src/gui.c:253
+msgid "Goto specified message number"
+msgstr "Gå til spesifisert meldingsnummer"
+
+#: src/gui.c:126
+msgid "Next fuz_zy"
+msgstr ""
+
+#: src/gui.c:127
+#, fuzzy
+msgid "Go to next fuzzy message"
+msgstr "Gå til første melding"
+
+#: src/gui.c:132
+#, fuzzy
+msgid "Next _untranslated"
+msgstr "Oversatt"
+
+#: src/gui.c:133 src/gui.c:249
+#, fuzzy
+msgid "Go to next untranslated message"
+msgstr "Gå til siste melding"
+
+#: src/gui.c:142
+#, fuzzy
+msgid "_Translated"
+msgstr "Oversatt"
+
+#: src/gui.c:143
+msgid "Toggle translated status of a message"
+msgstr "Slå på/av oversatt-status for en melding"
+
+#: src/gui.c:150
+#, fuzzy
+msgid "_Fuzzy"
+msgstr "Uferdig"
+
+#: src/gui.c:151
+msgid "Toggle fuzzy status of a message"
+msgstr "Slå på/av uferdig-status for en melding"
+
+#: src/gui.c:158
+#, fuzzy
+msgid "_Stick"
+msgstr "Lim"
+
+#: src/gui.c:159
+msgid "Stick this message"
+msgstr "Lim denne meldingen"
+
+#: src/gui.c:177
+msgid "gtranslator _website"
+msgstr "gtranslator _webside"
+
+#: src/gui.c:178
+msgid "gtranslator's homepage on the web"
+msgstr "gtranslators hjemmeside på web"
+
+#: src/gui.c:187
+msgid "_Messages"
+msgstr "_Meldinger"
+
+#: src/gui.c:188
+msgid "Message _status"
+msgstr "Meldings_status"
+
+#: src/gui.c:199
+msgid "Compile"
+msgstr "Kompilér"
+
+#: src/gui.c:203
+msgid "Open"
+msgstr "Åpne"
+
+#: src/gui.c:204
+msgid "Open a po-file"
+msgstr "Åpne en po-fil"
+
+#: src/gui.c:207
+msgid "Save"
+msgstr "Lagre"
+
+#: src/gui.c:208
+msgid "Save File"
+msgstr "Lagre fil"
+
+#: src/gui.c:211
+msgid "Save as"
+msgstr "Lagre som"
+
+#: src/gui.c:212
+msgid "Save file with a different name"
+msgstr "Lagre filen med nytt navn"
+
+#: src/gui.c:215
+msgid "Header"
+msgstr "Header"
+
+#: src/gui.c:220
+msgid "Options"
+msgstr "Alternativer"
+
+#: src/gui.c:221
+msgid "gtranslator options"
+msgstr "gtranslator alternativer"
+
+#: src/gui.c:224 src/gui.c:225
+msgid "Exit"
+msgstr "Avslutt"
+
+#: src/gui.c:232
+msgid "First"
+msgstr "Første"
+
+#: src/gui.c:236
+msgid "Back"
+msgstr "Tilbake"
+
+#: src/gui.c:240
+msgid "Next"
+msgstr "Neste"
+
+#: src/gui.c:244
+msgid "Last"
+msgstr "Siste"
+
+#: src/gui.c:248
+msgid "Missing"
+msgstr ""
+
+#: src/gui.c:252
+#, fuzzy
+msgid "GoTo"
+msgstr "Gå til"
+
+#: src/dialogs.c:201 src/gui.c:256
+msgid "Find"
+msgstr "Finn"
+
+#: src/gui.c:257
+msgid "Find string in po-file"
+msgstr "Finn streng i po-filen "
+
+#. *
+#. * Create the app
+#. *
+#: src/gui.c:360
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: src/gui.c:439
+msgid "Bye bye!"
+msgstr "Ha det!"
+
+#: src/gui.c:545
+#, fuzzy, c-format
+msgid "Message: %d / %d"
+msgstr "Meldings_database"
+
+#: src/dialogs.c:49
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- åpne en po-fil"
 
-#: src/dialogs.c:70
+#: src/dialogs.c:73
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- lagre fil som .."
 
-#: src/dialogs.c:97
+#: src/dialogs.c:100
 #, c-format
 msgid ""
 "File %s\n"
@@ -36,609 +258,199 @@ msgstr ""
 "Filen %s\n"
 "ble endret. Lagre?"
 
-#: src/dialogs.c:134
-msgid "GoTo message entry"
-msgstr "Gå til meldingsoppføring"
+#: src/dialogs.c:141
+#, fuzzy
+msgid "gtranslator -- go to"
+msgstr "gtranslator alternativer"
 
-#: src/dialogs.c:135
+#: src/dialogs.c:141
 msgid "Go!"
 msgstr "Gå!"
 
-#: src/dialogs.c:141
-msgid "Goto the specified message entry."
-msgstr "Gå til spesifisert meldingsoppføring."
+#: src/dialogs.c:145
+#, fuzzy
+msgid "Go to message number:"
+msgstr "Gå til spesifisert meldingsnummer"
 
-#: src/dialogs.c:190
+#: src/dialogs.c:201
 msgid "Find in the po-file"
 msgstr "Finn i po-filen "
-
-#: src/dialogs.c:191 src/gui.c:301
-msgid "Find"
-msgstr "Finn"
 
 #. *
 #. * Create the widgets.
 #. *
-#: src/dialogs.c:197
+#: src/dialogs.c:206
 msgid "Enter your desired search string:"
 msgstr "Skriv inn ønsket søkestreng: "
 
-#: src/dialogs.c:199
+#: src/dialogs.c:209
 msgid "Case sensitive"
 msgstr "Skill mellom store og små bokstaver"
 
-#. *
-#. * Create a helping label.
-#. *
-#: src/dialogs.c:244
-msgid ""
-"With this query window you can query\n"
-"the message db for an existing entry\n"
-"with your query string."
-msgstr ""
-"I dette spørringsvinduet kan du gjøre\n"
-"spørringer i meldingsdatabasen etter\n"
-"treff som er lik det du spør om."
-
-#: src/dialogs.c:263 src/gui.c:313
-msgid "Query"
-msgstr "Spør"
-
-#. *
-#. * Set the window-properties.
-#. *
-#: src/dialogs.c:308
-msgid "gtranslator -- query the message db"
-msgstr "gtranslator -- kjør spørring mot meldingsdatabasen"
-
-#: src/dialogs.c:340
-#, c-format
-msgid "Result: `%s'"
-msgstr "Resultat: `%s'"
-
-#: src/dialogs.c:357
-msgid "Insert"
-msgstr "Sett inn"
-
-#. *
-#. * Set the window properties.
-#. *
-#: src/dialogs.c:361
-msgid "gtranslator -- result for your query"
-msgstr "gtranslator -- resultat for spørring"
-
-#: src/header_stuff.c:117
-msgid "The header doesn't seem to be parsed rightly."
-msgstr "Headeren kunne ikke leses riktig."
-
-#: src/header_stuff.c:120
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- rediger header"
-
-#: src/header_stuff.c:125
-msgid "Project name:"
-msgstr "Prosjektnavn:"
-
-#: src/header_stuff.c:126
-msgid "Project version:"
-msgstr "Prosjektversjon:"
-
-#: src/header_stuff.c:127
-msgid "Use my personal options to fill out the rest of the header."
-msgstr "Bruk mine personlige alternativer til å fylle ut resten av headeren."
-
-#: src/gui.c:56
-msgid "_Compile"
-msgstr "_Kompilér"
-
-#: src/gui.c:57 src/gui.c:223
-msgid "Compile the po-file"
-msgstr "Kompiler po-filen "
-
-#: src/gui.c:84
-msgid "_Header..."
-msgstr "_Header..."
-
-#: src/gui.c:85 src/gui.c:247
-msgid "Edit the header"
-msgstr "Rediger headeren"
-
-#: src/gui.c:95
-msgid "_First"
-msgstr "_Første"
-
-#: src/gui.c:96 src/gui.c:271
-msgid "Go to the first message"
-msgstr "Gå til første melding"
-
-#: src/gui.c:102
-msgid "_Back"
-msgstr "_Tilbake"
-
-#: src/gui.c:103 src/gui.c:277
-msgid "Go one message back"
-msgstr "Gå tilbake en melding"
-
-#: src/gui.c:109
-msgid "_Next"
-msgstr "_Neste"
-
-#: src/gui.c:110 src/gui.c:283
-msgid "Go one message forward"
-msgstr "Gå frem en melding"
-
-#: src/gui.c:116
-msgid "_Last"
-msgstr "_Siste"
-
-#: src/gui.c:117 src/gui.c:289
-msgid "Go to the Last message"
-msgstr "Gå til siste melding"
-
-#: src/gui.c:124
-msgid "_Go to..."
-msgstr "_Gå til..."
-
-#: src/gui.c:125 src/gui.c:295
-msgid "Goto specified message number"
-msgstr "Gå til spesifisert meldingsnummer"
-
-#: src/gui.c:136
-msgid "Translated"
-msgstr "Oversatt"
-
-#: src/gui.c:137
-msgid "Toggle translated status of a message"
-msgstr "Slå på/av oversatt-status for en melding"
-
-#: src/gui.c:145
-msgid "Fuzzy"
-msgstr "Uferdig"
-
-#: src/gui.c:146
-msgid "Toggle fuzzy status of a message"
-msgstr "Slå på/av uferdig-status for en melding"
-
-#: src/gui.c:154
-msgid "Stick"
-msgstr "Lim"
-
-#: src/gui.c:155
-msgid "Stick this message"
-msgstr "Lim denne meldingen"
-
-#: src/gui.c:168
-msgid "_Add the current message"
-msgstr "_Legg melding inn i meldingsdatabasen"
-
-#: src/gui.c:169
-msgid "Add the current message to the messages DB"
-msgstr "Legg meldingen inn i meldingsdatabasen"
-
-#: src/gui.c:175
-msgid "_Query for a message..."
-msgstr "Spør etter en melding..."
-
-#: src/gui.c:176
-msgid "Query the messages DB for the current msgid"
-msgstr "Spør i meldingsdatabasen etter aktiv msgid"
-
-#: src/gui.c:195
-msgid "gtranslator _website"
-msgstr "gtranslator _webside"
-
-#: src/gui.c:196
-msgid "gtranslator's homepage on the web"
-msgstr "gtranslators hjemmeside på web"
-
-#: src/gui.c:207
-msgid "_Messages"
-msgstr "_Meldinger"
-
-#: src/gui.c:208
-msgid "Message _status"
-msgstr "Meldings_status"
-
-#: src/gui.c:209
-msgid "Message _db"
-msgstr "Meldings_database"
-
-#: src/gui.c:222
-msgid "Compile"
-msgstr "Kompilér"
-
-#: src/gui.c:228
-msgid "Open"
-msgstr "Åpne"
-
-#: src/gui.c:229
-msgid "Open a po-file"
-msgstr "Åpne en po-fil"
-
-#: src/gui.c:234
-msgid "Save"
-msgstr "Lagre"
-
-#: src/gui.c:235
-msgid "Save File"
-msgstr "Lagre fil"
-
-#: src/gui.c:240
-msgid "Save as"
-msgstr "Lagre som"
-
-#: src/gui.c:241
-msgid "Save file with a different name"
-msgstr "Lagre filen med nytt navn"
-
-#: src/gui.c:246
-msgid "Header"
-msgstr "Header"
-
-#: src/gui.c:253
-msgid "Options"
-msgstr "Alternativer"
-
-#: src/gui.c:254
-msgid "gtranslator options"
-msgstr "gtranslator alternativer"
-
-#: src/gui.c:259 src/gui.c:260
-msgid "Exit"
-msgstr "Avslutt"
-
-#: src/gui.c:270
-msgid "First"
-msgstr "Første"
-
-#: src/gui.c:276
-msgid "Back"
-msgstr "Tilbake"
-
-#: src/gui.c:282
-msgid "Next"
-msgstr "Neste"
-
-#: src/gui.c:288
-msgid "Last"
-msgstr "Siste"
-
-#: src/gui.c:294
-msgid "Goto"
-msgstr "Gå til"
-
-#: src/gui.c:302
-msgid "Find string in po-file"
-msgstr "Finn streng i po-filen "
-
-#: src/gui.c:307
-msgid "Add"
-msgstr "Legg til"
-
-#: src/gui.c:308
-msgid "Add to the messages db"
-msgstr "Legg til i meldingsdatabasen"
-
-#: src/gui.c:314
-msgid "Query for a message in db"
-msgstr "Søk etter en melding i databasen"
-
-#. *
-#. * Create the app
-#. *
-#: src/gui.c:436
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#. *
-#. * Show a Good Bye!-typo message.
-#. *
-#: src/gui.c:560
-msgid "Bye bye!"
-msgstr "Ha det!"
-
-#: src/gui.c:579
-msgid "Couldn't store current geometry!"
-msgstr "Kunne ikke lagre aktiv geometri!"
-
-#: src/gui.c:684
-msgid "You've reached the first message"
-msgstr "Du har nådd den første meldingen"
-
-#: src/gui.c:704
-msgid "You've reached the last message."
-msgstr "Du har nådd den siste meldingen."
-
-#: src/gui.c:804
-#, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-"Kunne ikke finne\n"
-"\"%s\""
-
-#: src/languages.h:59
-msgid "Arabic"
-msgstr "Arabisk"
-
-#: src/languages.h:63
-msgid "Basque"
-msgstr "Baskisk"
-
-#: src/languages.h:67
-msgid "Bulgarian"
-msgstr "Bulgarsk"
-
-#: src/languages.h:71
-msgid "Catalan"
-msgstr "Katalansk"
-
-#: src/languages.h:75
-msgid "Chinese/Simplified"
-msgstr "Kinesisk/Forenklet"
-
-#: src/languages.h:79
-msgid "Chinese/Traditional"
-msgstr "Kinesisk/Tradisjonell"
-
-#: src/languages.h:83
-msgid "Croatian"
-msgstr "Koratisk"
-
-#: src/languages.h:87
-msgid "Czech"
-msgstr "Tjekkisk"
-
-#: src/languages.h:91
-msgid "Danish"
-msgstr "Dansk"
-
-#: src/languages.h:95
+#: src/dialogs.c:215 src/languages.h:84
 msgid "English"
 msgstr "Engelsk"
 
-#: src/languages.h:99
-msgid "English/Canada"
-msgstr "Engelsk/Kanada"
+#: src/dialogs.c:217
+msgid "Translated"
+msgstr "Oversatt"
 
-#: src/languages.h:103
-msgid "English/GB"
-msgstr "Engelsk/GB"
+#: src/dialogs.c:219
+msgid "Both"
+msgstr ""
 
-#: src/languages.h:107
-msgid "English/USA"
-msgstr "Engelsk/USA"
+#: src/dialogs.c:222
+#, fuzzy
+msgid "Find in: "
+msgstr "Finn"
 
-#: src/languages.h:111
-msgid "Estonian"
-msgstr "Estlandsk"
+#: src/dialogs.c:264
+#, fuzzy
+msgid "An error occured while msgfmt was executed:\n"
+msgstr ""
+"En feil oppstod under kjøring av msgfmt.\n"
+"Vennligst sjekk din .po fil igjen."
 
-#: src/languages.h:115
-msgid "Farsi"
-msgstr "Farsi"
+#: src/prefs.c:188
+#, fuzzy
+msgid "gtranslator -- options"
+msgstr "gtranslator alternativer"
 
-#: src/languages.h:119
-msgid "Finnish"
-msgstr "Finsk"
+#. *
+#. * The tables for holding all the entries below
+#. *
+#: src/prefs.c:192
+msgid "Personal information"
+msgstr "Personlig informasjon"
 
-#: src/languages.h:123
-msgid "French"
-msgstr "Fransk"
+#: src/prefs.c:193
+msgid "Language options"
+msgstr "Språkalternativer"
 
-#: src/languages.h:127
-msgid "Galician"
-msgstr "Galisisk"
+#: src/prefs.c:194
+msgid "Po file options"
+msgstr "Alternativer for po fil"
 
-#: src/languages.h:131
-msgid "German"
-msgstr "Tysk"
+#: src/prefs.c:200
+msgid "Author's name :"
+msgstr "Forfatters navn:"
 
-#: src/languages.h:135
-msgid "Greek"
-msgstr "Gresk"
+#: src/prefs.c:203
+msgid "Author's EMail :"
+msgstr "Forfatters e-post:"
 
-#: src/languages.h:139
-msgid "Hungarian"
-msgstr "Ungarsk"
+#: src/header_stuff.c:306 src/prefs.c:211
+msgid "Language :"
+msgstr "Språk:"
 
-#: src/languages.h:143
-msgid "Indonesian"
-msgstr "Indonesisk"
+#: src/prefs.c:215
+msgid "Language code :"
+msgstr "Språkkode:"
 
-#: src/languages.h:147
-msgid "Italian"
-msgstr "Italiensk"
+#: src/prefs.c:220
+msgid "Language group's EMail :"
+msgstr "Språkgruppens e-post:"
 
-#: src/languages.h:151
-msgid "Irish"
-msgstr "Irsk"
+#: src/header_stuff.c:315 src/prefs.c:224
+msgid "Charset :"
+msgstr ""
 
-#: src/languages.h:155
-msgid "Japanese"
-msgstr "Japansk"
+#: src/header_stuff.c:319 src/prefs.c:228
+msgid "Encoding :"
+msgstr "Koding:"
 
-#: src/languages.h:159
-msgid "Korean"
-msgstr "Koreansk"
+#: src/prefs.c:236
+#, fuzzy
+msgid "Set non-fuzzy status, if message was changed"
+msgstr "Slå på/av uferdig-status for en melding"
 
-#: src/languages.h:163
-msgid "Lithuanian"
-msgstr "Lithausk"
+#: src/prefs.c:240
+msgid "Warn if the .po-file contains fuzzy translations"
+msgstr "Gi advarsel hvis .po-filen inneholder fuzzy oversettelser"
 
-#: src/languages.h:167
-msgid "Norwegian/Bookmal"
-msgstr "Norsk/Bokmål"
+#: src/prefs.c:244
+msgid "Don't save unchanged .po-files"
+msgstr "Ikke lagre uendrede .po-filer"
 
-#: src/languages.h:171
-msgid "Norwegian/Nynorsk"
-msgstr "Norsk/Nynorsk"
+#: src/prefs.c:248
+msgid "Warn me if I'm trying to save an unchanged file"
+msgstr "Gi advarsel ved lagring av uendret fil"
 
-#: src/languages.h:175
-msgid "Polish"
-msgstr "Polsk"
+#: src/prefs.c:252
+msgid "Save geometry on exit & restore it on startup"
+msgstr "Lagre geometri ved avslutting og gjenopprett ved oppstart"
 
-#: src/languages.h:179
-msgid "Portuguese"
-msgstr "Portugisisk"
+#: src/prefs.c:318
+msgid ""
+"With the Preferences box you can define some variables\n"
+"with which you can make gtranslator make more work\n"
+"like YOU want it to work!"
+msgstr ""
+"I brukervalg boksen kan du definere noen variabler som\n"
+"kan la deg bestemme hvordan gtranslator skal fungere!"
 
-#: src/languages.h:183
-msgid "Portuguese/Brazil"
-msgstr "Portugisisk/Brasil"
+#: src/prefs.c:457
+#, fuzzy, c-format
+msgid "The geometry string \"%s\" couldn't be parsed!"
+msgstr "Geometri-stren \"%s\" kunne ikke leses!"
 
-#: src/languages.h:187
-msgid "Russian"
-msgstr "Russisk"
+#: src/header_stuff.c:250
+msgid "gtranslator -- edit header"
+msgstr "gtranslator -- rediger header"
 
-#: src/languages.h:191
-msgid "Slovak"
-msgstr "Slovensk"
+#: src/header_stuff.c:254
+#, fuzzy
+msgid "Project"
+msgstr "Prosjektnavn:"
 
-#: src/languages.h:195
-msgid "Spanish"
-msgstr "Spansk"
+#: src/header_stuff.c:255
+msgid "Translator and Language"
+msgstr ""
 
-#: src/languages.h:199
-msgid "Spanish/Spain"
-msgstr "Spansk/Spania"
+#: src/header_stuff.c:264
+msgid "Comments :"
+msgstr "Kommentarer:"
 
-#: src/languages.h:203
-msgid "Spanish/Mexico"
-msgstr "Spansk/Mexico"
+#: src/header_stuff.c:268
+msgid "Project name:"
+msgstr "Prosjektnavn:"
 
-#: src/languages.h:207
-msgid "Swedish"
-msgstr "Svensk"
+#: src/header_stuff.c:271
+msgid "Project version:"
+msgstr "Prosjektversjon:"
 
-#: src/languages.h:211
-msgid "Turkish"
-msgstr "Tyrkisk"
+#: src/header_stuff.c:274
+msgid "pot file creation date :"
+msgstr ""
 
-#: src/languages.h:215
-msgid "Ukrainian"
-msgstr "Ukrainsk"
+#: src/header_stuff.c:278
+msgid "po file revision date :"
+msgstr ""
 
-#: src/languages.h:219
-msgid "Walloon"
-msgstr "Walloon"
+#: src/header_stuff.c:287
+#, fuzzy
+msgid "Use my options to fill the following entries."
+msgstr "Bruk mine personlige alternativer til å fylle ut resten av headeren."
 
-#: src/languages.h:223
-msgid "Welsh"
-msgstr "Walisisk"
+#: src/header_stuff.c:300
+#, fuzzy
+msgid "Translator's name :"
+msgstr "Forfatters navn:"
 
-#: src/main.c:39
-msgid "Sets the minimum match for query"
-msgstr "Setter minste treff for spørring"
+#: src/header_stuff.c:303
+msgid "Translator's e-mail :"
+msgstr ""
 
-#: src/main.c:43
+#: src/header_stuff.c:311
+#, fuzzy
+msgid "Language group's e-mail :"
+msgstr "Språkgruppens e-post:"
+
+#: src/main.c:38
 msgid "Specifies the main-window geometry"
 msgstr "Spesifiserer geometri for hovedvinduet"
 
-#: src/main.c:47
-msgid "The messages db to use"
-msgstr "Meldingsdatabase som skal brukes"
-
-#: src/main.c:51
-msgid "Query the messages db & exit"
-msgstr "Spør i meldingsdatabasen og avslutt"
-
-#. *
-#. * Simply print it out.
-#. *
-#: src/main.c:110
-#, c-format
-msgid "Getting results for query: `%s' ...\n"
-msgstr "Henter resultatet av spørringen: `%s'...\n"
-
-#: src/main.c:115
-#, c-format
-msgid "Result                   :  %s."
-msgstr "Resultat                 : %s."
-
-#: src/main.c:117
-msgid "End of query.\n"
-msgstr "Slutt på spørring.\n"
-
-#: src/main.c:177
-#, c-format
-msgid "The geometry string \"%s\" coulnd't be parsed!"
-msgstr "Geometri-stren \"%s\" kunne ikke leses!"
-
-#: src/msg_db.c:39
-#, c-format
-msgid "No message db found! Creating one in `%s'."
-msgstr "Ingen meldingsdatabase funnet! Oppretter en i `%s'."
-
-#. *
-#. * 3.1) No list, no fun
-#. *
-#: src/msg_db.c:77
-msgid "gtranslator lost the list of translations!\n"
-msgstr "gtranslator mistet listen med oversettelser!\n"
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:118
-#, c-format
-msgid "The message db `%s' hasn't been initted yet!\n"
-msgstr "Meldingsdatabasen `%s' er ikke initiert ennå!\n"
-
-#. *
-#. * Warn if there isn't any message which could be added
-#. *  to the msg_db .
-#. *
-#: src/msg_db.c:129
-msgid "Got no message entry!\n"
-msgstr "Fikk ingen meldingsoppføring!\n"
-
-#: src/msg_db.c:137
-msgid "New message entry has wrong/non-logical length.\n"
-msgstr "Ny meldingsoppføring har feil/ikke-logisk lengde.\n"
-
-#. *
-#. * Show a little warning ...
-#. *
-#: src/msg_db.c:208
-#, c-format
-msgid "The message db `%s' seems not to be initted!\n"
-msgstr "Meldingsdatabasen `%s' ser ikke ut til å være initiert!\n"
-
-#. *
-#. * Return a very "explaining" char* ...
-#. *
-#: src/msg_db.c:212
-msgid "Not available"
-msgstr "Ikke tilgjengelig"
-
-#. *
-#. * If there's no msg_list
-#. *  print an error message
-#. *
-#: src/msg_db.c:220
-msgid "No messages list ( msg_list ) available for acting on it!\n"
-msgstr "Ingen meldingsliste (msg_list) å utføre handlinger på tilgjengelig!\n"
-
-#: src/msg_db.c:260
-msgid "No entry found in the messages db "
-msgstr "Ingen oppføring funnet i meldingsdatabasen "
-
-#: src/msg_db.c:271
-msgid "The messages db isn't inited."
-msgstr "Meldingsdatabasen er ikke initiert."
-
-#. *
-#. * Gives a warning message.
-#. *
-#: src/msg_db.c:301
-msgid "Trying to set an irregular challange length!"
-msgstr "Prøver å sette en uvanlig utfordringslengde!"
-
-#. *
-#. * If there are any problems , give a
-#. *  message ..
-#. *
-#: src/parse.c:34
+#: src/parse.c:39
 #, c-format
 msgid ""
 "\n"
@@ -649,33 +461,36 @@ msgstr ""
 "Filstrømmen er tapt!\n"
 "%s"
 
-#: src/parse.c:114
-#, c-format
-msgid "There's no file to open or I couldn't understand `%s'!"
-msgstr "Ingen fil å åpne, eller jeg forsto ikke `%s'!"
+#: src/parse.c:220
+#, fuzzy, c-format
+msgid ""
+"The file is empty:\n"
+"%s"
+msgstr "Meldingsdatabasen er tom!"
 
-#. *
-#. * Set up a status message
-#. *
-#: src/parse.c:119
+#: src/parse.c:269
 #, c-format
-msgid "Current file : \"%s\"."
-msgstr "Aktiv fil : \"%s\"."
+msgid "Successfully parsed the file \"%s\""
+msgstr ""
 
-#. *
-#. * Show an updated status
-#. *
-#: src/parse.c:230
-#, c-format
-msgid "Successfully finished parsing \"%s\", %i lines."
-msgstr "Fullført lesing av \"%s\", %i linjer."
+#: src/parse.c:272
+#, fuzzy, c-format
+msgid "gtranslator -- %s"
+msgstr "gtranslator"
 
-#: src/parse.c:375
+#: src/parse.c:372
 #, c-format
+msgid ""
+"You are trying to save file with *.pot extension.\n"
+"However, such files are generated by program.\n"
+"Your file should be named with *.po extension, most likely %s.po"
+msgstr ""
+
+#: src/parse.c:416
+#, fuzzy, c-format
 msgid ""
 "You didn't change anything in\n"
 "%s\n"
-"!\n"
 "Do you want to save it anyway?"
 msgstr ""
 "Du endret ikke noe i\n"
@@ -683,7 +498,7 @@ msgstr ""
 "!\n"
 "Vil du lagre den likevel?"
 
-#: src/parse.c:427
+#: src/parse.c:479
 #, c-format
 msgid ""
 "File %s\n"
@@ -692,105 +507,43 @@ msgstr ""
 "Filen %s\n"
 "ble endret. Vil du gå tilbake til en lagret kopi?"
 
-#: src/parse.c:475
+#: src/parse.c:531
+#, c-format
 msgid ""
-"An error occured while msgfmt was executed.\n"
-"Please check your .po file again."
+"Compile successful:\n"
+"%s"
 msgstr ""
-"En feil oppstod under kjøring av msgfmt.\n"
-"Vennligst sjekk din .po fil igjen."
 
-#: src/parse.c:479
-msgid "Po-file has been compiled successfully."
+#: src/find.c:84
+#, c-format
+msgid ""
+"Could not find\n"
+"\"%s\""
+msgstr ""
+"Kunne ikke finne\n"
+"\"%s\""
+
+#: src/find.c:110
+msgid "There are no more fuzzy messages"
+msgstr ""
+
+#: src/find.c:134
+#, fuzzy
+msgid "All messages seem to be translated"
+msgstr "Meldingsdatabasen `%s' ser ikke ut til å være initiert!\n"
+
+#: src/spell.c:25
+msgid "Check spelling"
+msgstr ""
+
+#: src/spell.c:55
+msgid "Spell checking complete!"
+msgstr ""
+
+#: src/session.c:68
+#, fuzzy
+msgid "Session restored successfully."
 msgstr "Po-filen ble kompilert."
-
-#. *
-#. * The tables for holding all the entries below
-#. *
-#: src/prefs.c:156
-msgid "Personal information"
-msgstr "Personlig informasjon"
-
-#: src/prefs.c:157
-msgid "Language options"
-msgstr "Språkalternativer"
-
-#: src/prefs.c:158
-msgid "Po file options"
-msgstr "Alternativer for po fil"
-
-#: src/prefs.c:199
-msgid "Language :"
-msgstr "Språk:"
-
-#: src/prefs.c:201
-msgid "MIME type :"
-msgstr "MIME-type:"
-
-#: src/prefs.c:203
-msgid "Language code :"
-msgstr "Språkkode:"
-
-#: src/prefs.c:205
-msgid "Encoding :"
-msgstr "Koding:"
-
-#: src/prefs.c:207
-msgid "Language group's EMail :"
-msgstr "Språkgruppens e-post:"
-
-#: src/prefs.c:212
-msgid "Add the additional comments to the header"
-msgstr "Legg til tilleggskommentarer i headeren"
-
-#: src/prefs.c:215
-msgid "Save geometry on exit & restore it on startup"
-msgstr "Lagre geometri ved avslutting og gjenopprett ved oppstart"
-
-#: src/prefs.c:218
-msgid "Warn me if I'm trying to save an unchanged file"
-msgstr "Gi advarsel ved lagring av uendret fil"
-
-#: src/prefs.c:221
-msgid "Warn if the .po-file contains fuzzy translations"
-msgstr "Gi advarsel hvis .po-filen inneholder fuzzy oversettelser"
-
-#: src/prefs.c:224
-msgid "Don't save unchanged .po-files"
-msgstr "Ikke lagre uendrede .po-filer"
-
-#: src/prefs.c:227
-msgid "Use the messages db"
-msgstr "Bruk meldingsdatabasen"
-
-#: src/prefs.c:233
-msgid "Author's name :"
-msgstr "Forfatters navn:"
-
-#: src/prefs.c:235
-msgid "Author's EMail :"
-msgstr "Forfatters e-post:"
-
-#: src/prefs.c:237
-msgid "Comments :"
-msgstr "Kommentarer:"
-
-#: src/prefs.c:300
-msgid ""
-"With the Preferences box you can define some variables\n"
-"with which you can make gtranslator make more work\n"
-"like YOU want it to work!"
-msgstr ""
-"I brukervalg boksen kan du definere noen variabler som\n"
-"kan la deg bestemme hvordan gtranslator skal fungere!"
-
-#: src/find.c:32
-msgid "Nothing appropriate found!"
-msgstr "Ingenting funnet!"
-
-#: src/find.c:54
-msgid "No query, no fun."
-msgstr "Ingen spørring, ingen morro."
 
 #: libgtranslator/parse-db.c:32
 msgid "No language defined in the query request!"
@@ -822,27 +575,357 @@ msgstr "Underklasse-fil `%s.xml' ikke funnet.\n"
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Prøver overklasse-fil `%s.xml'...\n"
 
-#: libgtranslator/parse-db.c:137
+#: libgtranslator/parse-db.c:133
 msgid "The message db file is empty!"
 msgstr "Meldingsdatabasen er tom!"
 
-#: libgtranslator/parse-db.c:143
+#: libgtranslator/parse-db.c:139
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr "Meldingsdatabasen ser ikke ut til å være en mdb-xml-fil."
 
-#: libgtranslator/team-handle.c:32
+#: libgtranslator/handle-db.c:35
+msgid "No node name given!"
+msgstr ""
+
+#: libgtranslator/handle-db.c:43
+#, c-format
+msgid "No content for the node `%s' given! Leaving node empty.."
+msgstr ""
+
+#: libgtranslator/handle-db.c:51
+#, c-format
+msgid "No document present to add the node `%s'\n"
+msgstr ""
+
+#: libgtranslator/handle-db.c:67
+#, fuzzy
+msgid "Couldn't get the nodes!"
+msgstr "Kunne ikke returnere listen over applikasjonene."
+
+#: libgtranslator/team-handle.c:31
 msgid "No language/team code defined to register!"
 msgstr "Ingen språk/gruppe kode definert for registrering!"
 
-#: libgtranslator/team-handle.c:67
+#: libgtranslator/team-handle.c:66
 msgid "Team is already registered!"
 msgstr "Gruppen er allerede registrert!"
 
-#: libgtranslator/team-handle.c:113
+#: libgtranslator/team-handle.c:112
 #, c-format
 msgid "Teams file `teams.xml` in %s couldn't be opened!"
 msgstr "Gruppe-fil `teams.xml` i %s kunne ikke åpnes!"
 
-#: libgtranslator/team-handle.c:149
+#: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
 msgstr "Kunne ikke returnere listen over applikasjonene."
+
+#: src/languages.h:57
+msgid "Arabic"
+msgstr "Arabisk"
+
+#: src/languages.h:60
+msgid "Basque"
+msgstr "Baskisk"
+
+#: src/languages.h:63
+msgid "Bulgarian"
+msgstr "Bulgarsk"
+
+#: src/languages.h:66
+msgid "Catalan"
+msgstr "Katalansk"
+
+#: src/languages.h:69
+msgid "Chinese/Simplified"
+msgstr "Kinesisk/Forenklet"
+
+#: src/languages.h:72
+msgid "Chinese/Traditional"
+msgstr "Kinesisk/Tradisjonell"
+
+#: src/languages.h:75
+msgid "Croatian"
+msgstr "Koratisk"
+
+#: src/languages.h:78
+msgid "Czech"
+msgstr "Tjekkisk"
+
+#: src/languages.h:81
+msgid "Danish"
+msgstr "Dansk"
+
+#: src/languages.h:87
+msgid "English/Canada"
+msgstr "Engelsk/Kanada"
+
+#: src/languages.h:90
+msgid "English/GB"
+msgstr "Engelsk/GB"
+
+#: src/languages.h:93
+msgid "English/USA"
+msgstr "Engelsk/USA"
+
+#: src/languages.h:96
+msgid "Estonian"
+msgstr "Estlandsk"
+
+#: src/languages.h:99
+msgid "Farsi"
+msgstr "Farsi"
+
+#: src/languages.h:102
+msgid "Finnish"
+msgstr "Finsk"
+
+#: src/languages.h:105
+msgid "French"
+msgstr "Fransk"
+
+#: src/languages.h:108
+msgid "Galician"
+msgstr "Galisisk"
+
+#: src/languages.h:111
+msgid "German"
+msgstr "Tysk"
+
+#: src/languages.h:114
+msgid "Hungarian"
+msgstr "Ungarsk"
+
+#: src/languages.h:117
+msgid "Indonesian"
+msgstr "Indonesisk"
+
+#: src/languages.h:120
+msgid "Italian"
+msgstr "Italiensk"
+
+#: src/languages.h:123
+msgid "Irish"
+msgstr "Irsk"
+
+#: src/languages.h:126
+msgid "Japanese"
+msgstr "Japansk"
+
+#: src/languages.h:129
+msgid "Korean"
+msgstr "Koreansk"
+
+#: src/languages.h:132
+#, fuzzy
+msgid "Latvian"
+msgstr "Koratisk"
+
+#: src/languages.h:135
+msgid "Lithuanian"
+msgstr "Lithausk"
+
+#: src/languages.h:138
+msgid "Norwegian/Bookmal"
+msgstr "Norsk/Bokmål"
+
+#: src/languages.h:141
+msgid "Norwegian/Nynorsk"
+msgstr "Norsk/Nynorsk"
+
+#: src/languages.h:144
+msgid "Polish"
+msgstr "Polsk"
+
+#: src/languages.h:147
+msgid "Portuguese"
+msgstr "Portugisisk"
+
+#: src/languages.h:150
+msgid "Portuguese/Brazil"
+msgstr "Portugisisk/Brasil"
+
+#: src/languages.h:153
+msgid "Russian"
+msgstr "Russisk"
+
+#: src/languages.h:156
+msgid "Slovak"
+msgstr "Slovensk"
+
+#: src/languages.h:159
+msgid "Spanish"
+msgstr "Spansk"
+
+#: src/languages.h:162
+msgid "Spanish/Spain"
+msgstr "Spansk/Spania"
+
+#: src/languages.h:165
+msgid "Spanish/Mexico"
+msgstr "Spansk/Mexico"
+
+#: src/languages.h:168
+msgid "Swedish"
+msgstr "Svensk"
+
+#: src/languages.h:171
+msgid "Turkish"
+msgstr "Tyrkisk"
+
+#: src/languages.h:174
+msgid "Ukrainian"
+msgstr "Ukrainsk"
+
+#: src/languages.h:177
+msgid "Walloon"
+msgstr "Walloon"
+
+#: src/languages.h:180
+msgid "Welsh"
+msgstr "Walisisk"
+
+#~ msgid ""
+#~ "gtranslator will be a GNOME framework for translating and managing the "
+#~ "translation of the important po-files and othe i18/19/20..n issues."
+#~ msgstr ""
+#~ "gtranslator vil bli et GNOME program for oversetting og håndtering av "
+#~ "oversettelsen av viktige po-filer og andre i18n ting."
+
+#~ msgid "GoTo message entry"
+#~ msgstr "Gå til meldingsoppføring"
+
+#~ msgid "Goto the specified message entry."
+#~ msgstr "Gå til spesifisert meldingsoppføring."
+
+#~ msgid ""
+#~ "With this query window you can query\n"
+#~ "the message db for an existing entry\n"
+#~ "with your query string."
+#~ msgstr ""
+#~ "I dette spørringsvinduet kan du gjøre\n"
+#~ "spørringer i meldingsdatabasen etter\n"
+#~ "treff som er lik det du spør om."
+
+#~ msgid "Query"
+#~ msgstr "Spør"
+
+#~ msgid "gtranslator -- query the message db"
+#~ msgstr "gtranslator -- kjør spørring mot meldingsdatabasen"
+
+#~ msgid "Result: `%s'"
+#~ msgstr "Resultat: `%s'"
+
+#~ msgid "Insert"
+#~ msgstr "Sett inn"
+
+#~ msgid "gtranslator -- result for your query"
+#~ msgstr "gtranslator -- resultat for spørring"
+
+#~ msgid "The header doesn't seem to be parsed rightly."
+#~ msgstr "Headeren kunne ikke leses riktig."
+
+#~ msgid "_Add the current message"
+#~ msgstr "_Legg melding inn i meldingsdatabasen"
+
+#~ msgid "Add the current message to the messages DB"
+#~ msgstr "Legg meldingen inn i meldingsdatabasen"
+
+#~ msgid "_Query for a message..."
+#~ msgstr "Spør etter en melding..."
+
+#~ msgid "Query the messages DB for the current msgid"
+#~ msgstr "Spør i meldingsdatabasen etter aktiv msgid"
+
+#~ msgid "Add"
+#~ msgstr "Legg til"
+
+#~ msgid "Add to the messages db"
+#~ msgstr "Legg til i meldingsdatabasen"
+
+#~ msgid "Query for a message in db"
+#~ msgstr "Søk etter en melding i databasen"
+
+#~ msgid "Couldn't store current geometry!"
+#~ msgstr "Kunne ikke lagre aktiv geometri!"
+
+#~ msgid "You've reached the first message"
+#~ msgstr "Du har nådd den første meldingen"
+
+#~ msgid "You've reached the last message."
+#~ msgstr "Du har nådd den siste meldingen."
+
+#~ msgid "Greek"
+#~ msgstr "Gresk"
+
+#~ msgid "Sets the minimum match for query"
+#~ msgstr "Setter minste treff for spørring"
+
+#~ msgid "The messages db to use"
+#~ msgstr "Meldingsdatabase som skal brukes"
+
+#~ msgid "Query the messages db & exit"
+#~ msgstr "Spør i meldingsdatabasen og avslutt"
+
+#~ msgid "Getting results for query: `%s' ...\n"
+#~ msgstr "Henter resultatet av spørringen: `%s'...\n"
+
+#~ msgid "Result                   :  %s."
+#~ msgstr "Resultat                 : %s."
+
+#~ msgid "End of query.\n"
+#~ msgstr "Slutt på spørring.\n"
+
+#~ msgid "No message db found! Creating one in `%s'."
+#~ msgstr "Ingen meldingsdatabase funnet! Oppretter en i `%s'."
+
+#~ msgid "gtranslator lost the list of translations!\n"
+#~ msgstr "gtranslator mistet listen med oversettelser!\n"
+
+#~ msgid "The message db `%s' hasn't been initted yet!\n"
+#~ msgstr "Meldingsdatabasen `%s' er ikke initiert ennå!\n"
+
+#~ msgid "Got no message entry!\n"
+#~ msgstr "Fikk ingen meldingsoppføring!\n"
+
+#~ msgid "New message entry has wrong/non-logical length.\n"
+#~ msgstr "Ny meldingsoppføring har feil/ikke-logisk lengde.\n"
+
+#~ msgid "Not available"
+#~ msgstr "Ikke tilgjengelig"
+
+#~ msgid "No messages list ( msg_list ) available for acting on it!\n"
+#~ msgstr ""
+#~ "Ingen meldingsliste (msg_list) å utføre handlinger på tilgjengelig!\n"
+
+#~ msgid "No entry found in the messages db "
+#~ msgstr "Ingen oppføring funnet i meldingsdatabasen "
+
+#~ msgid "The messages db isn't inited."
+#~ msgstr "Meldingsdatabasen er ikke initiert."
+
+#~ msgid "Trying to set an irregular challange length!"
+#~ msgstr "Prøver å sette en uvanlig utfordringslengde!"
+
+#~ msgid "There's no file to open or I couldn't understand `%s'!"
+#~ msgstr "Ingen fil å åpne, eller jeg forsto ikke `%s'!"
+
+#~ msgid "Current file : \"%s\"."
+#~ msgstr "Aktiv fil : \"%s\"."
+
+#~ msgid "Successfully finished parsing \"%s\", %i lines."
+#~ msgstr "Fullført lesing av \"%s\", %i linjer."
+
+#~ msgid "MIME type :"
+#~ msgstr "MIME-type:"
+
+#~ msgid "Add the additional comments to the header"
+#~ msgstr "Legg til tilleggskommentarer i headeren"
+
+#~ msgid "Use the messages db"
+#~ msgstr "Bruk meldingsdatabasen"
+
+#~ msgid "Nothing appropriate found!"
+#~ msgstr "Ingenting funnet!"
+
+#~ msgid "No query, no fun."
+#~ msgstr "Ingen spørring, ingen morro."

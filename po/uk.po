@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.17\n"
-"POT-Creation-Date: 2000-09-14 09:58+0300\n"
+"POT-Creation-Date: 2000-09-15 18:30+0200\n"
 "PO-Revision-Date: 2000-05-05 09:45+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
@@ -19,9 +19,9 @@ msgid ""
 "It will be based upon a gtranslatord and a gtranslator client. Wish the best "
 "for us translators and for me!"
 msgstr ""
-"Перекуладач - ╕нструментар╕й GNOME для перекладу славнозв╕сних po-файл╕в.\n "
-"В╕н базу╓ться на gtranslatord та кл╕╓нт╕ gtranslator. Спод╕ваюсь, стане "
-"у пригод╕ перекладачам ╕ мен╕!"
+"Перекуладач - ╕нструментар╕й GNOME для перекладу славнозв╕сних po-файл╕в.\n"
+" В╕н базу╓ться на gtranslatord та кл╕╓нт╕ gtranslator. Спод╕ваюсь, стане у "
+"пригод╕ перекладачам ╕ мен╕!"
 
 #: src/gui.c:55
 msgid "_Compile"
@@ -83,12 +83,13 @@ msgstr "Перейти до останнього пов╕домлення"
 msgid "_Go to..."
 msgstr "Перейти..."
 
-#: src/gui.c:121 src/gui.c:249
+#: src/gui.c:121 src/gui.c:253
 msgid "Goto specified message number"
 msgstr "Перейти до вказаного пов╕домлення"
 
 #: src/gui.c:126
-msgid "Next fuzz_y"
+#, fuzzy
+msgid "Next fuz_zy"
 msgstr "Ноступне невизначене"
 
 #: src/gui.c:127
@@ -99,7 +100,7 @@ msgstr "Перейти до наступного невизначеного пов╕домлення"
 msgid "Next _untranslated"
 msgstr "Наступне неперекладене"
 
-#: src/gui.c:133
+#: src/gui.c:133 src/gui.c:249
 msgid "Go to next untranslated message"
 msgstr "Перейти до наступного неперекладеного пов╕домлення"
 
@@ -204,29 +205,33 @@ msgid "Last"
 msgstr "Останн╕й"
 
 #: src/gui.c:248
+msgid "Missing"
+msgstr ""
+
+#: src/gui.c:252
 msgid "GoTo"
 msgstr "Перейти"
 
-#: src/dialogs.c:201 src/gui.c:253
+#: src/dialogs.c:201 src/gui.c:256
 msgid "Find"
 msgstr "Шукати"
 
-#: src/gui.c:254
+#: src/gui.c:257
 msgid "Find string in po-file"
 msgstr "Пошук рядка у po-файл╕"
 
 #. *
 #. * Create the app
 #. *
-#: src/gui.c:354
+#: src/gui.c:360
 msgid "gtranslator"
 msgstr "Перекладач"
 
-#: src/gui.c:433
+#: src/gui.c:439
 msgid "Bye bye!"
 msgstr "Бувай!"
 
-#: src/gui.c:539
+#: src/gui.c:545
 #, c-format
 msgid "Message: %d / %d"
 msgstr "Пов╕домлення: %d / %d"
@@ -291,7 +296,7 @@ msgstr "Обидва"
 msgid "Find in: "
 msgstr "Шукати в: "
 
-#: src/dialogs.c:260
+#: src/dialogs.c:264
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Виникла помилка п╕д час виконання msgfmt:\n"
 
@@ -322,7 +327,7 @@ msgstr "Назва автора:"
 msgid "Author's EMail :"
 msgstr "Е-пошта автора: "
 
-#: src/header_stuff.c:297 src/prefs.c:211
+#: src/header_stuff.c:306 src/prefs.c:211
 msgid "Language :"
 msgstr "Мова:"
 
@@ -334,11 +339,11 @@ msgstr "Код мови:"
 msgid "Language group's EMail :"
 msgstr "Е-пошта мовно╖ групи:"
 
-#: src/header_stuff.c:306 src/prefs.c:224
+#: src/header_stuff.c:315 src/prefs.c:224
 msgid "Charset :"
 msgstr "Наб╕р символ╕в:"
 
-#: src/header_stuff.c:310 src/prefs.c:228
+#: src/header_stuff.c:319 src/prefs.c:228
 msgid "Encoding :"
 msgstr "Кодування:"
 
@@ -377,51 +382,51 @@ msgstr ""
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Неможливо пронанал╕зувати рядок геометр╕╖: \"%s\""
 
-#: src/header_stuff.c:241
+#: src/header_stuff.c:250
 msgid "gtranslator -- edit header"
 msgstr "Перекладач -- редагування заголовку"
 
-#: src/header_stuff.c:245
+#: src/header_stuff.c:254
 msgid "Project"
 msgstr "Проект"
 
-#: src/header_stuff.c:246
+#: src/header_stuff.c:255
 msgid "Translator and Language"
 msgstr "Перекладач та мова"
 
-#: src/header_stuff.c:255
+#: src/header_stuff.c:264
 msgid "Comments :"
 msgstr "Коментар╕:"
 
-#: src/header_stuff.c:259
+#: src/header_stuff.c:268
 msgid "Project name:"
 msgstr "Назва проекту:"
 
-#: src/header_stuff.c:262
+#: src/header_stuff.c:271
 msgid "Project version:"
 msgstr "Верс╕я проекту:"
 
-#: src/header_stuff.c:265
+#: src/header_stuff.c:274
 msgid "pot file creation date :"
 msgstr "дата створення фойлу pot:"
 
-#: src/header_stuff.c:269
+#: src/header_stuff.c:278
 msgid "po file revision date :"
 msgstr "дата видання файлу po:"
 
-#: src/header_stuff.c:278
+#: src/header_stuff.c:287
 msgid "Use my options to fill the following entries."
 msgstr "Використовувати мо╖ налаштування для цих запис╕в."
 
-#: src/header_stuff.c:291
+#: src/header_stuff.c:300
 msgid "Translator's name :"
 msgstr "Назва перекладача:"
 
-#: src/header_stuff.c:294
+#: src/header_stuff.c:303
 msgid "Translator's e-mail :"
 msgstr "Електронна адреса перекладача:"
 
-#: src/header_stuff.c:302
+#: src/header_stuff.c:311
 msgid "Language group's e-mail :"
 msgstr "Електронна адреса мовно╖ групи:"
 
@@ -445,9 +450,7 @@ msgstr ""
 msgid ""
 "The file is empty:\n"
 "%s"
-msgstr ""
-"Файл порожн╕й:"
-"%s"
+msgstr "Файл порожн╕й:%s"
 
 #: src/parse.c:269
 #, c-format
@@ -499,7 +502,7 @@ msgstr ""
 "Скомп╕льовано усп╕шно:\n"
 "%s"
 
-#: src/find.c:74
+#: src/find.c:84
 #, c-format
 msgid ""
 "Could not find\n"
@@ -508,11 +511,11 @@ msgstr ""
 "Не знайдено\n"
 "\"%s\""
 
-#: src/find.c:94
+#: src/find.c:110
 msgid "There are no more fuzzy messages"
 msgstr "Б╕льше нема╓ неч╕тких пов╕домлень"
 
-#: src/find.c:112
+#: src/find.c:134
 msgid "All messages seem to be translated"
 msgstr "Схоже вс╕ пов╕домлення перекладено"
 
@@ -558,11 +561,11 @@ msgstr "Файл п╕дкласу \"%s.xml\" не знайдено.\n"
 msgid "Trying superclass-file `%s.xml' ...\n"
 msgstr "Спроба використовувати файл суперкласу \"%s.xml\" ...\n"
 
-#: libgtranslator/parse-db.c:137
+#: libgtranslator/parse-db.c:133
 msgid "The message db file is empty!"
 msgstr "Файл бази пов╕домлень порожн╕й!"
 
-#: libgtranslator/parse-db.c:143
+#: libgtranslator/parse-db.c:139
 msgid "The message db doesn't seem to be a message db xml file."
 msgstr "База пов╕домлень не схожа на xml-файл бази пов╕домлень."
 
@@ -584,20 +587,20 @@ msgstr "Нема╓ наявних документ╕в для додавання до вузла \"%s\"\n"
 msgid "Couldn't get the nodes!"
 msgstr "Не вдалося торимати вузли!"
 
-#: libgtranslator/team-handle.c:32
+#: libgtranslator/team-handle.c:31
 msgid "No language/team code defined to register!"
 msgstr "Не визначено код мови/команди для ре╓страц╕╖!"
 
-#: libgtranslator/team-handle.c:67
+#: libgtranslator/team-handle.c:66
 msgid "Team is already registered!"
 msgstr "Команду вже заре╓стровано!"
 
-#: libgtranslator/team-handle.c:113
+#: libgtranslator/team-handle.c:112
 #, c-format
 msgid "Teams file `teams.xml` in %s couldn't be opened!"
 msgstr "Файл команди \"teams.xml\" в %s не може бути в╕дкрито!"
 
-#: libgtranslator/team-handle.c:149
+#: libgtranslator/team-handle.c:144
 msgid "Couldn't return the list of the apps."
 msgstr "Неможливо повернути список пов╕домлень."
 
@@ -674,97 +677,96 @@ msgid "German"
 msgstr "Н╕мецька"
 
 #: src/languages.h:114
-msgid "Greek"
-msgstr "Грецька"
-
-#: src/languages.h:117
 msgid "Hungarian"
 msgstr "Угорська"
 
-#: src/languages.h:120
+#: src/languages.h:117
 msgid "Indonesian"
 msgstr "╤ндонез╕йська"
 
-#: src/languages.h:123
+#: src/languages.h:120
 msgid "Italian"
 msgstr "╤тал╕йська"
 
-#: src/languages.h:126
+#: src/languages.h:123
 msgid "Irish"
 msgstr "╤рландська"
 
-#: src/languages.h:129
+#: src/languages.h:126
 msgid "Japanese"
 msgstr "Японська"
 
-#: src/languages.h:132
+#: src/languages.h:129
 msgid "Korean"
 msgstr "Корейська"
 
-#: src/languages.h:135
+#: src/languages.h:132
 msgid "Latvian"
 msgstr "Латв╕йська"
 
-#: src/languages.h:138
+#: src/languages.h:135
 msgid "Lithuanian"
 msgstr "Литовська"
 
-#: src/languages.h:141
+#: src/languages.h:138
 msgid "Norwegian/Bookmal"
 msgstr "Норвежська/Букмель"
 
-#: src/languages.h:144
+#: src/languages.h:141
 msgid "Norwegian/Nynorsk"
 msgstr "Норвежська/Ньорск"
 
-#: src/languages.h:147
+#: src/languages.h:144
 msgid "Polish"
 msgstr "Польська"
 
-#: src/languages.h:150
+#: src/languages.h:147
 msgid "Portuguese"
 msgstr "Португальська"
 
-#: src/languages.h:153
+#: src/languages.h:150
 msgid "Portuguese/Brazil"
 msgstr "Португальська/Бразил╕я"
 
-#: src/languages.h:156
+#: src/languages.h:153
 msgid "Russian"
 msgstr "Рос╕йська"
 
-#: src/languages.h:159
+#: src/languages.h:156
 msgid "Slovak"
 msgstr "Словацька"
 
-#: src/languages.h:162
+#: src/languages.h:159
 msgid "Spanish"
 msgstr "╤спанська"
 
-#: src/languages.h:165
+#: src/languages.h:162
 msgid "Spanish/Spain"
 msgstr "╤спанська/╤спан╕я"
 
-#: src/languages.h:168
+#: src/languages.h:165
 msgid "Spanish/Mexico"
 msgstr "╤спанська/Мексика"
 
-#: src/languages.h:171
+#: src/languages.h:168
 msgid "Swedish"
 msgstr "Шведська"
 
-#: src/languages.h:174
+#: src/languages.h:171
 msgid "Turkish"
 msgstr "Турецька"
 
-#: src/languages.h:177
+#: src/languages.h:174
 msgid "Ukrainian"
 msgstr "Укра╖нська"
 
-#: src/languages.h:180
+#: src/languages.h:177
 msgid "Walloon"
 msgstr "Валонська"
 
-#: src/languages.h:183
+#: src/languages.h:180
 msgid "Welsh"
 msgstr "Уельська"
+
+#~ msgid "Greek"
+#~ msgstr "Грецька"

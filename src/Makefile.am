@@ -40,4 +40,4 @@ gtranslator_LDADD = \
 	$(INTLLIBS) \
 	$(XML_LIBS)
 
-EXTRA_DIST = ChangeLog TODO
+EXTRA_DIST = ChangeLog TODO.src
