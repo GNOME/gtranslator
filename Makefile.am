@@ -2,10 +2,6 @@
 
 SUBDIRS = macros intl po data src help man
 
-##
-## The team database get's installed into gtranslator's main datadir.
-##
-
 EXTRA_DIST= \
 		kabalak_generate_all_the_files.sh \
 		DEPENDS \
