@@ -1,6 +1,6 @@
 ## the main Makefile.am
 
-SUBDIRS = macros intl po data libgtranslator src message-db.d help man
+SUBDIRS = macros intl po data libgtranslator src help man
 
 ##
 ## The team database get's installed into gtranslator's main datadir.
