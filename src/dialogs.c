@@ -421,8 +421,12 @@ void gtranslator_file_dialogs_set_directory(GtkWidget **fileselection)
 {
 	gchar *directory;
 	
-	if(po && po->filename)
+	if(file_opened)
 	{
+		/* check we got a real po and po->filename */
+		g_return_if_fail(po != NULL);
+		g_return_if_fail(po->filename != NULL);
+
 		directory=g_path_get_dirname(po->filename);
 		gtk_file_selection_complete(GTK_FILE_SELECTION(*fileselection),
 			directory);

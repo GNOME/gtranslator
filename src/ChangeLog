@@ -1,5 +1,7 @@
 2005-02-05  Ross Golder  <ross@golder.org>
 
+	* dialogs.c, parse.c: Clear pointers when freeing po (Loic Minier
+	#146653)
 	* menu.c, gui.[ch]: Fixed a crash when cancelling the confirmation
 	dialog when closing without saving changes (Loic Minier #158550)
 	* gui.c: Removed superfluous po->fuzzy decrementor (Loic Minier #132734)

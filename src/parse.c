@@ -1044,23 +1044,32 @@ void gtranslator_save_current_file_dialog(GtkWidget * widget, gpointer useless)
  */
 void gtranslator_po_free(GtrPo *po)
 {
+	/* in this function, we force clearing so we will notice if we reuse
+	 * any var mistakingly */
+
 	g_return_if_fail(po!=NULL);
 
-	if (po->messages) 
+	if (po->messages)
 	{
 		g_list_foreach(po->messages, gtranslator_message_free, NULL);
 		g_list_free(po->messages);
+		po->messages = NULL;
 	}
 	
 	if (po->header)
 	{
 		gtranslator_header_free(po->header);
+		po->header = NULL;
 	}
 	
 	GTR_FREE(po->locale_charset);
+	po->locale_charset = NULL;
 	GTR_FREE(po->filename);
+	po->filename = NULL;
 	GTR_FREE(po->obsolete);
+	po->obsolete = NULL;
 	GTR_FREE(po);
+	po = NULL;
 }
 
 void gtranslator_file_close(GtkWidget * widget, gpointer useless)
