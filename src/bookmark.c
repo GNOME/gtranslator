@@ -475,6 +475,9 @@ void gtranslator_bookmark_load_list()
 
 		gtranslator_bookmarks=g_list_prepend(gtranslator_bookmarks,
 			gtranslator_bookmark_copy(bookmark));
+		
+		g_message("Bookmark #%i: File %s,\n\tVersion: %s, message %i\n",
+				(c+1), bookmark->file, bookmark->version, bookmark->position);
 
 		gtranslator_bookmark_free(bookmark);
 	}
