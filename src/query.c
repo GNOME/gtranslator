@@ -35,24 +35,27 @@ gchar *setup_language(gchar *lang);
 /*
  * A simply query method (wraps dgettext).
  */
-gchar *gtranslator_query_simple(const gchar *domain, const char *message,
-	gchar *language)
+GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 {
+	GtrQueryResult *result;
 	GString *str=g_string_new("");
 
-	g_return_val_if_fail(language!=NULL, NULL);
-	g_return_val_if_fail(domain!=NULL, NULL);
-	g_return_val_if_fail(message!=NULL, NULL);
+	g_return_val_if_fail(query->language!=NULL, NULL);
+	g_return_val_if_fail(query->domain!=NULL, NULL);
+	g_return_val_if_fail(query->message!=NULL, NULL);
 
-	language=setup_language(language);
+	query->language=setup_language(query->language);
 	
-	setlocale(LC_ALL, language);
+	setlocale(LC_ALL, query->language);
 
-	str=g_string_append(str, dgettext(domain, message));
+	str=g_string_append(str, dgettext(query->domain, query->message));
 
 	if(str->len > 0)
 	{
-		return str->str;
+		result->translation=str->str;
+		result->domain=query->domain;
+
+		return result;
 	}
 	else
 	{
@@ -119,7 +122,8 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 	gchar *language)
 {
 	GList *matches=NULL;
-	gchar *translation;
+	GtrQuery *query;
+	GtrQueryResult *result;
 	
 	g_return_val_if_fail(domainlist!=NULL, NULL);
 	
@@ -133,18 +137,20 @@ GList *gtranslator_query_list(GList *domainlist, const gchar *message,
 
 	while(domainlist)
 	{
-		translation=gtranslator_query_simple(
-			((const gchar *)domainlist->data),
-			message, language);
+		query->domain=g_strdup(domainlist->data);
+		query->message=g_strdup(message);
+		query->language=g_strdup(language);
+		
+		result=gtranslator_query_simple(query);
 
 		/*
 		 * Only add the result to the list if it's a translation
 		 *  ever -- dgettext returns the queried string if it didn't
 		 *   find anything for it, so that we should drop that cases.
 		 */   
-		if(strcmp(translation, message))
+		if(strcmp(result->translation, query->message))
 		{
-			matches=g_list_append(matches, translation);
+			matches=g_list_append(matches, result->translation);
 		}
 
 		domainlist=domainlist->next;
@@ -178,15 +184,63 @@ GList *gtranslator_query_domains(const gchar *directory)
 	 */ 
 	while((entry=readdir(dir))!=NULL)
 	{
-		if((strcmp(entry->d_name, ".") && strcmp(entry->d_name, "..")) &&
-			(!strcmp(entry->d_name, ".mo") || 
-			!strcmp(entry->d_name, ".gmo")))
+		/*
+		 * Don't use non-gettext objects.
+		 */ 
+		if((strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))
+			&& (	strstr(entry->d_name, ".mo") ||
+				strstr(entry->d_name, ".gmo")))
 		{
-			/* FIXME TODO FIXME */
+			gchar *domainname;
+
+			domainname=gtranslator_strip_out(entry->d_name);
+
+			/*
+			 * Check the pure filename before adding it to the
+			 *  domains' list.
+			 */
+			if(domainname)
+			{
+				domains=g_list_append(domains, domainname);
+			}
 		}
 	}
 
 	closedir(dir);
 
+	domains=g_list_sort(domains, (GCompareFunc) domains);
+
 	return domains;
+}
+
+/*
+ * Strip the filename to get a "raw" enough filename.
+ */ 
+gchar *gtranslator_strip_out(gchar *filename)
+{
+	GString *o=g_string_new("");
+	gint count=0;
+
+	filename=g_basename(filename);
+
+	/*
+	 * Strip all extensions after the _first_ point.
+	 */ 
+	while(filename[count]!='.')
+	{
+		o=g_string_append_c(o, filename[count]);
+
+		count++;
+	}
+
+	if(o->len > 0)
+	{
+		return o->str;
+	}
+	else
+	{
+		return NULL;
+	}
+
+	g_string_free(o, 1);
 }

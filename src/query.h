@@ -23,21 +23,43 @@
 #include "parse.h"
 
 /*
+ * Quite simple structure for the queries and results.
+ */
+typedef struct {
+	gchar *domain;
+	gchar *message;
+	gchar *language;
+} GtrQuery;
+
+typedef struct {
+	gchar *domain;
+	gchar *translation;
+} GtrQueryResult;
+
+#define GTR_QUERY(x) ((GtrQuery *)(x))
+#define GTR_QUERY_RESULT(x) ((GtrQueryResult *)(x))
+
+/*
+ * Returns the non-prefixed and non-suffixed filename back.
+ */
+gchar *gtranslator_strip_out(gchar *filename);
+
+/*
  * Simply query for the gettext translation for the given message in the
  *  domain (program/package) and for the given language.
  */ 
-gchar *gtranslator_query_simple(const gchar *domain, const gchar *message,
-	gchar *language);
+GtrQueryResult *gtranslator_query_simple(GtrQuery *query);
 
 /*
  * Get all ocurrences for the message in the given domainlist and return a
- *  GList out of gchar's.
+ *  GList out of GtrQueryResults.
  */
 GList *gtranslator_query_list(GList *domainlist, const gchar *message,
-	gchar *language);	
+	gchar *language);
 
 /*
- * Returns a list of all found domains in directory.
+ * Returns a list of all found domains in directory (the list consists of
+ *  gchars).
  */
 GList *gtranslator_query_domains(const gchar *directory);
 
