@@ -6,7 +6,6 @@ SUBDIRS = \
 	etspecs \
 	gconf \
 	mime \
-	oaf \
 	pixmaps \
 	scripts \
 	ui
