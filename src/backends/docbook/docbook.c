@@ -29,13 +29,35 @@
 #include "../../nautilus-string.h"
 #include "../../parse.h"
 
-const gchar *gtranslator_backend_init(const gchar *filename)
+gboolean backend_open(const gchar *filename)
 {
 	g_message("Write docbook -> po converting functions..");
-	return filename;
+	return TRUE;
 }
 
-void gtranslator_backend_close(void)
+gboolean backend_save(void)
+{
+	g_message("Write po -> docbook saving functions..");
+	return TRUE;
+}
+
+gboolean backend_save_as(const gchar *filename)
+{
+	g_message("Save to %s", filename);
+	return TRUE;
+}
+
+gboolean backend_is_compilable(void)
+{
+	return TRUE;
+}
+
+void backend_compile(void)
+{
+	g_message("Compile!");
+}
+
+void backend_close(void)
 {
 	g_message("Closing docbook backend...");
 }

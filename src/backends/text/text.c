@@ -25,16 +25,84 @@
 #include <config.h>
 #endif
 
+#include "../../header_stuff.h"
 #include "../../nautilus-string.h"
 #include "../../parse.h"
 
-const gchar *gtranslator_backend_init(const gchar *filename)
+/*
+ * Opens the given filename via it's own stuff.
+ */
+gboolean backend_open(const gchar *filename)
 {
-	g_message("Write text -> po converting functions..");
-	return filename;
+	FILE *f;
+	gchar line[256];
+	gchar *str=NULL;
+	gchar *e;
+	GtrHeader *h;
+	
+	h=gtranslator_header_create_from_prefs();
+	h->prj_name=g_strdup(filename);
+	h->prj_version="0.1";
+
+	f=fopen(filename, "r");
+
+	while(fgets(line, sizeof(line), f))
+	{
+		if(!g_strstrip(line))
+		{
+			GtrMsg *msg=g_new0(GtrMsg, 1);
+
+			msg->msgid=g_strdup(str);
+			msg->msgstr="";
+			msg->comment="";
+
+			g_free(str);
+
+			po->messages=g_list_append(po->messages, msg);
+		}
+		else
+		{
+			e=str;
+			str=g_strdup_printf("%s\n%s", e, line);
+
+			g_free(e);
+		}
+	}
+	
+	return TRUE;
 }
 
-void gtranslator_backend_close(void)
+/*
+ * The save "callback".
+ */
+gboolean backend_save(void)
 {
-	g_message("Closing text backend...");
+	g_message("Write po -> text save functions..");
+	return TRUE;
+}
+
+/*
+ * Save to a different file.
+ */
+gboolean backend_save_as(const gchar *filename)
+{
+	g_message("Save to %s", filename);
+	return TRUE;
+}
+
+/*
+ * Should return TRUE/FALSE to enable/disable the Compile menu entries/toolbar
+ *  icons.
+ */
+gboolean backend_is_compilable(void)
+{
+	return FALSE;
+}
+
+/*
+ * Cleanup functions should be here.
+ */
+void backend_close(void)
+{
+	gtranslator_po_free();
 }
