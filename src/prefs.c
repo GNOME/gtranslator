@@ -43,7 +43,7 @@
  * The callbacks:
  */
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer useless);
-static void gtranslator_preferences_dialog_close(GtkWidget  * widget, gint page_num,
+static void gtranslator_preferences_dialog_close(GtkWidget  * widget, gint response_id,
 			    gpointer useless);
 static void toggle_sensitive(GtkWidget *widget, gpointer data);
 
@@ -332,7 +332,8 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 		_("gtranslator -- options"),
 		GTK_WINDOW(gtranslator_application),
 		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL);
 	gtk_dialog_set_default_response(GTK_DIALOG(prefs), GTK_RESPONSE_CLOSE);
  
@@ -621,7 +622,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 /*
  * The actions to take when the user presses "Apply".
  */
-static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_num, gpointer useless)
+static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint response_id, gpointer useless)
 {
 	gchar	*selected_scheme_file=NULL;
 	gchar	*translator_str=NULL;
@@ -635,7 +636,7 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint page_n
 	/*
 	 * If nothing changed, just return
 	 */
-	if(!prefs_changed) {
+	if(response_id != GTK_RESPONSE_OK || !prefs_changed) {
 		gtk_widget_destroy(GTK_WIDGET(prefs));
 		return;
 	}
