@@ -221,15 +221,21 @@ GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row
 	GtkWidget *label;
 	GtkWidget *widget;
 	GtkWidget *scroll;
+	GtkTextBuffer *buff;
+	GtkTextIter start;
+
 	label = gtk_label_new(label_text);
 	scroll = gtk_scrolled_window_new(NULL, NULL);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	widget = gtk_text_view_new();
-	//	gtk_text_set_editable(GTK_TEXT(widget), TRUE);
-	if (value)
-	  //		gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL, value, -1);
+	if (value) {
+		buff = gtk_text_buffer_new(NULL);
+		gtk_text_buffer_get_start_iter(buff, &start);
+		gtk_text_buffer_insert(buff, &start, value, strlen(value));
+		gtk_text_view_set_buffer(GTK_TEXT_VIEW(widget), buff);
+	}
 	gtk_container_add(GTK_CONTAINER(scroll), widget);
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
 	gtk_table_attach_defaults(GTK_TABLE(table), scroll, 1, 2, row, row + 1);

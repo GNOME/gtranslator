@@ -1,8 +1,12 @@
-2003-05-24  Ross Golder  <rossg@golder.org>
+2003-05-24  Ross Golder  <ross@golder.org>
+
+	* header_stuff.c: Fix handling of po header comment field.
 
 	* utils_gui.c (gtranslator_utils_invert_dot): Would only run if
 	string was less than 0 characters in length (never?!)
-	
+	* utils_gui.c (gtranslator_utils_attach_text_with_label): Create
+	and use a GtkTextBuffer with the GtkTextView widget.
+
 	* gui.c (gtranslator_keyhandler): Fixed shifted keypresses being
 	blocked
 	* gui.c: Re-instated 'changed' callback.

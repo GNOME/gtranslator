@@ -96,7 +96,7 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 	while (lines[i] != NULL) {
 		pair = g_strsplit(lines[i], ": ", 2);
 
-#define if_key_is(str) if (!g_strcasecmp(pair[0],str))
+#define if_key_is(str) if (pair[0] && !g_strcasecmp(pair[0],str))
 		if_key_is("Project-Id-Version") {
 			gchar *space;
 			space = strrchr (pair[1], ' ');
@@ -277,6 +277,8 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	GtrHeader 	*ph = po->header;
 	gchar		*prev_translator,
 			*prev_translator_email;
+	GtkTextBuffer   *buff;
+	GtkTextIter     start, end;
 
 	prev_translator=prev_translator_email=NULL;
 
@@ -287,7 +289,12 @@ static void gtranslator_header_edit_apply(GtkWidget * box, gint page_num, gpoint
 	value = gtk_editable_get_chars(GTK_EDITABLE(widget),0,-1);
 	update(ph->prj_name, prj_name);
 	update(ph->prj_version, prj_version);
-	update(ph->comment, prj_comment);
+
+	buff = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
+	gtk_text_buffer_get_start_iter(buff, &start);
+	gtk_text_buffer_get_start_iter(buff, &end);
+	GTR_FREE(ph->comment);
+	ph->comment = gtk_text_buffer_get_text(buff, &start, &end, FALSE);
 
 	if (!GtrPreferences.fill_header) {
 		
