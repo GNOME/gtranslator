@@ -50,11 +50,13 @@ void gtranslator_preferences_init_default_values()
 		/*
 		 * Determine the language name from the environment.
 		 */
-		if(!gtranslator_translator->language->locale)
+		if(!gtranslator_translator || 
+			!gtranslator_translator->language->locale)
 		{
 			gchar	*language_name_for_prefs_init=NULL;
+			gchar	*locale=NULL;
 			
-			gtranslator_translator->language->locale=gtranslator_utils_get_environment_locale();
+			locale=gtranslator_utils_get_environment_locale();
 
 			/*
 			 * Well, if we couldn't determine any locale (or the
@@ -62,14 +64,16 @@ void gtranslator_preferences_init_default_values()
 			 *   like for the posix portable locale "C"]), assume
 			 *    English to be our language.
 			 */
-			if(!gtranslator_translator->language->locale || (strlen(gtranslator_translator->language->locale) <= 1))
+			if(!locale || (strlen(locale) <= 1))
 			{
 				gtranslator_utils_set_language_values_by_language("English");
 			}
 			else
 			{
-				language_name_for_prefs_init=gtranslator_utils_get_language_name_by_locale_code(gtranslator_translator->language->locale);
+				language_name_for_prefs_init=gtranslator_utils_get_language_name_by_locale_code(locale);
 				g_return_if_fail(language_name_for_prefs_init!=NULL);
+
+				GTR_FREE(locale);
 
 				gtranslator_utils_set_language_values_by_language(language_name_for_prefs_init);
 			}

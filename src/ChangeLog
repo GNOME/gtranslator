@@ -1,3 +1,14 @@
+2001-09-03  Fatih Demir <kabalak@gtranslator.org>
+
+	* prefs.c: Place the prefs dialog always in the center of the screen;
+		fixes #59201 (I'd got to go back to GtkWindow level calls to
+		 get this fixed; GnomeDialog level calls or the util function
+		  "gtranslator_dialog_raise/show" aren't working here).
+
+	* prefs_init.c: Heh, work with a local gchar string before going for
+		bigger dimensions like a GtrTranslator -- fixes first init
+		 values grepping.
+
 2001-09-02  Fatih Demir <kabalak@gtranslator.org>
 
 	* dialogs.c, gui.c & prefs.c: Some more mem leak hunting! Mainly

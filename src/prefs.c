@@ -100,8 +100,6 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	gchar	*old_colorscheme=NULL;
 	gchar	*personal_schemes_directory=NULL;
 	
-	gtranslator_raise_dialog(prefs);
-	
 	/*
 	 * Create the preferences box... 
 	 */
@@ -383,8 +381,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	gtk_signal_connect(GTK_OBJECT(prefs), "close",
 			   GTK_SIGNAL_FUNC(gtranslator_utils_language_lists_free), NULL);
 
-	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
+	gtk_window_set_wmclass(GTK_WINDOW(prefs), "gtranslator -- prefs",
+		"gtranslator");
 	gtk_window_set_position(GTK_WINDOW(prefs), GTK_WIN_POS_CENTER);
+	gtk_widget_show_all(prefs);
 }
 
 /*
