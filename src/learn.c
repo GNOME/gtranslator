@@ -35,35 +35,54 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 
-#define UMTF_FILENAME "autolearn-umtf.xml"
+/*
+ * The GtrLearnBuffer structure which holds all informations/parts of the
+ *  learn buffer related stuff -- some say personal translation memory to it..
+ */
+typedef struct
+{
+	GHashTable	*hash;
+	
+	gchar		*filename;
+	gchar		*serial_date;
+
+	gint		serial;
+	gboolean	init_status;
+	xmlDocPtr	doc;
+	xmlNodePtr	current_node;
+} GtrLearnBuffer;
+
+#define GTR_LEARN_BUFFER(x) ((GtrLearnBuffer *) x)
 
 /*
- * The internally used variables for learning.
+ * The generally used GtrLearnBuffer -- should hold all elements of the
+ *  learn process.
  */
-static gboolean 	init_status=FALSE;
-static gint		serial=0;
-static GHashTable	*learn_hash=NULL;
+static GtrLearnBuffer	*gtranslator_learn_buffer=NULL;
 
 /*
- * Do the hard hash work.
+ * Do the hard internal work -- mostly GHashTable related.
  */
-static void gtranslator_learn_hash_from_node(xmlNodePtr node);
-static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpointer useless);
-static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node);
+static void gtranslator_learn_buffer_hash_from_current_node(void);
+static void gtranslator_learn_buffer_free_hash_entry(gpointer key, gpointer value, gpointer useless);
+static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer value, gpointer useless);
 
-/*
- * Return an UMTF date string.
- */
-static gchar *gtranslator_learn_get_umtf_date(void);
+static void gtranslator_learn_buffer_set_umtf_date(void);
 
 /*
  * Hash the entries from the given node point.
  */
-static void gtranslator_learn_hash_from_node(xmlNodePtr node)
+static void gtranslator_learn_buffer_hash_from_current_node()
 {
-	gchar	*original, *translation;
+	xmlNodePtr	node;
+
+	gchar		*original;
+	gchar		*translation;
 
 	original = translation = NULL;
+
+	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
+	node=gtranslator_learn_buffer->current_node;
 
 	while(node && nautilus_strcasecmp(node->name, "value"))
 	{
@@ -72,7 +91,8 @@ static void gtranslator_learn_hash_from_node(xmlNodePtr node)
 
 	if(node && !nautilus_strcasecmp(node->name, "value"))
 	{
-		original=xmlNodeGetContent(node);
+		original=xmlNodeListGetString(gtranslator_learn_buffer->doc,
+			node->xmlChildrenNode, 1);
 	}
 
 	while(node && nautilus_strcasecmp(node->name, "translation"))
@@ -89,13 +109,14 @@ static void gtranslator_learn_hash_from_node(xmlNodePtr node)
 
 		if(node && !nautilus_strcasecmp(node->name, "value"))
 		{
-			translation=xmlNodeGetContent(node);
+			translation=xmlNodeListGetString(gtranslator_learn_buffer->doc,
+				node->xmlChildrenNode, 1);
 		}
 	}
 
 	if(original && translation)
 	{
-		g_hash_table_insert(learn_hash, 
+		g_hash_table_insert(gtranslator_learn_buffer->hash, 
 			g_strdup(original), g_strdup(translation));
 
 		g_free(original);
@@ -106,25 +127,32 @@ static void gtranslator_learn_hash_from_node(xmlNodePtr node)
 /*
  * Free the hash table entry/data.
  */
-static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpointer useless)
+static void gtranslator_learn_buffer_free_hash_entry(gpointer key, gpointer value, gpointer useless)
 {
-	g_free(key);
-	g_free(value);
+	if(key)
+	{
+		g_free(key);
+	}
+	
+	if(value)
+	{
+		g_free(value);
+	}
 }
 
 /*
  * Write the hash entries -- one entry for a msgid/msgstr pair.
  */
-static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node)
+static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer value, gpointer useless)
 {
 	xmlNodePtr new_node;
 	xmlNodePtr value_node;
 	xmlNodePtr translation_node;
 	xmlNodePtr translation_value_node;
 
-	g_return_if_fail(node!=NULL);
+	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 
-	new_node=xmlNewChild(node, NULL, "message", NULL);
+	new_node=xmlNewChild(gtranslator_learn_buffer->current_node, NULL, "message", NULL);
 	value_node=xmlNewChild(new_node, NULL, "value", (gchar *) key);
 
 	translation_node=xmlNewChild(new_node, NULL, "translation", NULL);
@@ -132,22 +160,39 @@ static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpo
 }
 
 /*
- * Create/return an UMTF formed date string.
+ * Set the UMTF serial date for our internal GtrLearnBuffer.
  */
-static gchar *gtranslator_learn_get_umtf_date()
+static void gtranslator_learn_buffer_set_umtf_date()
 {
 	gchar		*date_string;
 	struct tm	*time_struct;
 	time_t		now;
 
+	g_return_if_fail(gtranslator_learn_buffer->init_status==TRUE);
+
 	date_string=g_malloc(20);
 
+	/*
+	 * Get the time/date elements.
+	 */
 	now=time(NULL);
 	time_struct=localtime(&now);
 
+	/*
+	 * Buold the UMTF alike date string.
+	 */
 	strftime(date_string, 20, "%Y-%m-%d %H:%M:%S", time_struct);
 
-	return date_string;
+	/*
+	 * Free any old serial date in our structure.
+	 */
+	if(gtranslator_learn_buffer->serial_date)
+	{
+		g_free(gtranslator_learn_buffer->serial_date);
+	}
+	
+	gtranslator_learn_buffer->serial_date=g_strdup(date_string);
+	g_free(date_string);
 }
 
 /*
@@ -155,78 +200,88 @@ static gchar *gtranslator_learn_get_umtf_date()
  */
 void gtranslator_learn_init()
 {
-	gchar		*learn_base_file;
-	
-	g_return_if_fail(init_status==FALSE);
+	gtranslator_learn_buffer->filename=g_strdup_printf(
+		"%s/.gtranslator/umtf-learn-buffer.xml", g_get_home_dir());
 
-	learn_base_file=g_strdup_printf("%s/.gtranslator/" UMTF_FILENAME,
-		g_get_home_dir());
-
-	learn_hash=g_hash_table_new(g_str_hash, g_str_equal);
+	gtranslator_learn_buffer->hash=g_hash_table_new(g_str_hash, g_str_equal);
 
 	/*
-	 * Read in our autolearn xml document.
+	 * Read in our autolearned xml document.
 	 */
-	if(g_file_test(learn_base_file, G_FILE_TEST_ISFILE))
+	if(g_file_test(gtranslator_learn_buffer->filename, G_FILE_TEST_ISFILE))
 	{
-		xmlDocPtr doc;
 		xmlNodePtr node;
+		
+		gtranslator_learn_buffer->doc=xmlParseFile(gtranslator_learn_buffer->filename);
+		g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
 
-		doc=xmlParseFile(learn_base_file);
-		g_return_if_fail(doc!=NULL);
+		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode;
+		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 
-		node=doc->xmlRootNode;
-		g_return_if_fail(node!=NULL);
+		node=gtranslator_learn_buffer->current_node;
 
 		/*
-		 * Parse the message entry via gtranslator_learn_hash_from_node
+		 * Parse the message entry via gtranslator_learn_buffer_hash_from_current_node
 		 *  function.
 		 */
-		while(node)
+		while(node && node->name)
 		{
 			/*
 			 * Read in the serial number.
 			 */
-			if(node->name && !nautilus_strcasecmp(node->name, "serial"))
+			if(!nautilus_strcasecmp(node->name, "serial"))
 			{
-				gchar	*contentstring;
+				gchar		*contentstring=NULL;
 
-				contentstring=xmlNodeGetContent(node);
+				contentstring=xmlNodeListGetString(gtranslator_learn_buffer->doc,
+					node->xmlChildrenNode, 1);
 				
 				if(contentstring)
 				{
 					/*
-					 * Read the serial number in and 
-					 *  increment it by one.
+					 * Read the serial number from the node contents.
 					 */
-					sscanf(contentstring, "%i", &serial);
+					sscanf(contentstring, "%i", 
+						&gtranslator_learn_buffer->serial);
+					
 					g_free(contentstring);
-
-					serial++;
 				}
+				else
+				{
+					gtranslator_learn_buffer->serial=0;
+				}
+
+				/*
+				 * Increment the serial number of the learn buffer.
+				 */
+				gtranslator_learn_buffer->serial++;
 			}
 			
-			if(node->name && !nautilus_strcasecmp(node->name, "message"))
+			if(!nautilus_strcasecmp(node->name, "message"))
 			{
-				gtranslator_learn_hash_from_node(node);
+				gtranslator_learn_buffer->current_node=node;
+				gtranslator_learn_buffer_hash_from_current_node();
 			}
 
 			node=node->next;
 		}
 
-		xmlFreeDoc(doc);
+		xmlFreeDoc(gtranslator_learn_buffer->doc);
 	}
 	else
 	{
 		/*
-		 * Setup a foo'sh hash content for the empty cases: Use 
-		 *  "gtranslator" as a msgid/msgstr pair ,-)
+		 * If no learn buffer is present (e.g. on first gtranslator startup)
+		 *  set up a really foo'sh hash table with only one entry: "gtranslator" .-)
 		 */
-		g_hash_table_insert(learn_hash, 
+		g_hash_table_insert(gtranslator_learn_buffer->hash,
 			g_strdup("gtranslator"), g_strdup("gtranslator"));
 	}
 	
-	init_status=TRUE;
+	/*
+	 * Now we'd be inited after all.
+	 */
+	gtranslator_learn_buffer->init_status=TRUE;
 }
 
 /*
@@ -234,7 +289,7 @@ void gtranslator_learn_init()
  */
 gboolean gtranslator_learn_initialized()
 {
-	return init_status;
+	return (gtranslator_learn_buffer->init_status);
 }
 
 /*
@@ -242,33 +297,28 @@ gboolean gtranslator_learn_initialized()
  */
 void gtranslator_learn_shutdown()
 {
-	xmlDocPtr	doc;
-	
 	xmlNodePtr	root_node;
 	xmlNodePtr	language_node;
 	xmlNodePtr	translator_node;
 	xmlNodePtr	serial_node;
 	
-	gchar 		*filename;
-	gchar		*date;
 	gchar		*serial_string;
 	
-	g_return_if_fail(init_status==TRUE);
-
-	filename=g_strdup_printf("%s/.gtranslator/" UMTF_FILENAME,
-		g_get_home_dir());
+	g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
+	g_return_if_fail(gtranslator_learn_buffer->filename!=NULL);
+	g_return_if_fail(gtranslator_learn_buffer->init_status==TRUE);
 
 	/*
 	 * Create the XML document.
 	 */
-	doc=xmlNewDoc("1.0");
+	gtranslator_learn_buffer->doc=xmlNewDoc("1.0");
 
 	/*
 	 * Set up the main <umtf> document root node and set it's version attribute.
 	 */
-	root_node=xmlNewDocNode(doc, NULL, "umtf", NULL);
+	root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, "umtf", NULL);
 	xmlSetProp(root_node, "version", "0.6");
-	xmlDocSetRootElement(doc, root_node);
+	xmlDocSetRootElement(gtranslator_learn_buffer->doc, root_node);
 
 	/*
 	 * Set the header <language> tag with language informations.
@@ -307,17 +357,18 @@ void gtranslator_learn_shutdown()
 	}
 
 	/*
-	 * Get the current date in UMTF-alike form.
+	 * Set the UMTF date string for our internal GtrLearnBuffer.
 	 */
-	date=gtranslator_learn_get_umtf_date();
+	gtranslator_learn_buffer_set_umtf_date();
+	g_return_if_fail(gtranslator_learn_buffer->serial_date!=NULL);
 
 	/*
 	 * Build the serial string -- the serial number must be in gchar form to be
 	 *  written by xmlSetProp.
 	 */
-	if(serial>=1)
+	if(gtranslator_learn_buffer->serial > 1)
 	{
-		serial_string=g_strdup_printf("%i", serial);
+		serial_string=g_strdup_printf("%i", gtranslator_learn_buffer->serial);
 	}
 	else
 	{
@@ -325,27 +376,36 @@ void gtranslator_learn_shutdown()
 	}
 
 	/*
-	 * Add the <serial> node with erial string and date.
+	 * Add the <serial> node with the serial string and date.
 	 */
 	serial_node=xmlNewChild(root_node, NULL, "serial", serial_string);
-	xmlSetProp(serial_node, "date", date);
-
+	xmlSetProp(serial_node, "date", gtranslator_learn_buffer->serial_date);
 	g_free(serial_string);
-	g_free(date);
 	
 	/*
 	 * Clean up the hash table we're using, write it's contents, free them and destroy
 	 *  the hash table.
 	 */
-	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_write_hash_entry, root_node); 
-	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_free_hash_entry, NULL);
-	g_hash_table_destroy(learn_hash);
+	gtranslator_learn_buffer->current_node=serial_node;
+	
+	g_hash_table_foreach(gtranslator_learn_buffer->hash, 
+		(GHFunc) gtranslator_learn_buffer_write_hash_entry, NULL);
+	
+	g_hash_table_foreach(gtranslator_learn_buffer->hash, 
+		(GHFunc) gtranslator_learn_buffer_free_hash_entry, NULL);
+	
+	g_hash_table_destroy(gtranslator_learn_buffer->hash);
 
 	/*
-	 * Save the file and free our used XML document.
+	 * Save the file and free all our used elements.
 	 */
-	xmlSaveFile(filename, doc);
-	xmlFreeDoc(doc);
+	xmlSaveFile(gtranslator_learn_buffer->filename, gtranslator_learn_buffer->doc);
+	xmlFreeDoc(gtranslator_learn_buffer->doc);
+	xmlFreeNode(gtranslator_learn_buffer->current_node);
+
+	g_free(gtranslator_learn_buffer->serial_date);
+	g_free(gtranslator_learn_buffer->filename);
+	g_free(gtranslator_learn_buffer);
 }
 
 /*
@@ -362,7 +422,7 @@ void gtranslator_learn_string(const gchar *id_string, const gchar *str_string)
 	 */
 	if(!gtranslator_learn_learned(id_string))
 	{
-		g_hash_table_insert(learn_hash, 
+		g_hash_table_insert(gtranslator_learn_buffer->hash, 
 			g_strdup(id_string), g_strdup(str_string));
 	}
 }
@@ -377,7 +437,7 @@ gboolean gtranslator_learn_learned(const gchar *string)
 	/*
 	 * Simple lookup encapsulation.
 	 */
-	if(g_hash_table_lookup(learn_hash, (gconstpointer) string))
+	if(g_hash_table_lookup(gtranslator_learn_buffer->hash, (gconstpointer) string))
 	{
 		return TRUE;
 	}
@@ -393,14 +453,16 @@ gboolean gtranslator_learn_learned(const gchar *string)
  */
 gchar *gtranslator_learn_get_learned_string(const gchar *search_string)
 {
-	gchar	*found_string;
+	gchar		*found_string;
 	
 	g_return_val_if_fail(search_string!=NULL, NULL);
+	g_return_val_if_fail(gtranslator_learn_buffer->init_status==TRUE, NULL);
 
 	/*
 	 * Look the given search_string up in our internally used hash table.
 	 */
-	found_string=(gchar *) g_hash_table_lookup(learn_hash, (gconstpointer) search_string);
+	found_string=(gchar *) g_hash_table_lookup(gtranslator_learn_buffer->hash, 
+		(gconstpointer) search_string);
 
 	/*
 	 * Return it via g_strdup, free it or return NULL in bad case .-(
