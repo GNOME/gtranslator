@@ -29,8 +29,8 @@
 
 #include <time.h>
 
-#include <libxml/parser.h>
-#include <libxml/tree.h>
+#include <gnome-xml/parser.h>
+#include <gnome-xml/tree.h>
 
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
