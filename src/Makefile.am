@@ -61,7 +61,10 @@ gtranslator_SOURCES = \
 	preferences-functions.c \
 	preferences-functions.h \
 	preferences-interface.c \
-	preferences-interface.h
+	preferences-interface.h \
+	open-differently.c \
+	open-differently.h \
+	update.c
 
 gtranslator_LDADD = \
 	$(top_builddir)/libgtranslator/libgtranslator.la \

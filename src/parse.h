@@ -92,17 +92,7 @@ void close_file(GtkWidget * widget, gpointer useless);
 void compile(GtkWidget * widget, gpointer useless);
 
 /**
-* Opens a given .mo/.gmo-file
-**/ 
-void gtranslator_open_mo_file(gchar *file);
-
-/**
-* This opens up a gzipped po-file or tries it at least..
-**/
-void gtranslator_open_gzipped_po_file(gchar *file);
-
-/**
-* The update function.
+* The update function (now outsources to update.c).
 **/
 void update(GtkWidget *widget, gpointer useless);
 

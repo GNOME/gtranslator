@@ -701,7 +701,10 @@ void update_msg(void)
 
 void toggle_msg_status(GtkWidget * item, gpointer which)
 {
-	GtrMsgStatus *stat = &(GTR_MSG(po->current->data)->status);
+	/**
+	* Hm, this is for now unused, so it's uncommented.
+	* GtrMsgStatus *stat = &(GTR_MSG(po->current->data)->status);
+	**/ 
 	gint flag = GPOINTER_TO_INT(which);
 	if (nothing_changes)
 		return;

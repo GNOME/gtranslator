@@ -130,84 +130,11 @@ int main(int argc, char *argv[])
 	args = poptGetArgs(context);
 	
 	/**
-	* Now with extra-crusty VFS stuff, yumm ,-)
+	* Hm, open the first given file...
 	**/
 	if (args)
 	{
-		/**
-		* Is this not a http/ftp/file URI then leave it as it is.
-		**/
-		if(!strncmp(args[0], "ftp://", 6)||
-			(!strncmp(args[0], "http://", 7))||
-			(!strncmp(args[0], "file://", 7)))
-		{
-			#ifdef USE_VFS_STUFF
-			gchar *localfile;
-			/**
-			* Use the new VFS based function from the library.
-			**/ 
-			gtranslator_open_file((char *)args[0]);
-			/**
-			* Get the stored filename....
-			**/ 
-			gtranslator_config_init();
-			localfile=gtranslator_config_get_string("vfs/file_to_open");
-			gtranslator_config_close();
-			/**
-			* Did we get any filename ?
-			**/ 
-			if(localfile)
-			{
-				/**
-				* Then parse the local file..
-				**/ 
-				parse(args[0]);
-			}
-			#endif
-		}
-		else
-		{
-			/**
-			* Do we have got a gzip'ed file?
-			*
-			* Note: This is a stupid suffix-check, so it's
-			*  quite crap.
-			**/
-			if(     (args[0][strlen(args[0])-1]=='z') &&
-				(args[0][strlen(args[0])-2]=='g') &&
-				(args[0][strlen(args[0])-3]=='.') )
-			{
-				gtranslator_open_gzipped_po_file((gchar *)args[0]);
-			}
-			else
-			{
-				/**
-				* Check if it seems to be a mo-file ...
-				*  or a gmo-file..
-				**/
-				if( ((args[0][strlen(args[0])-1]=='o') &&
-				     (args[0][strlen(args[0])-2]=='m') &&
-				     (args[0][strlen(args[0])-3]=='.'))
-						||
-				    ((args[0][strlen(args[0])-1]=='o') &&
-				     (args[0][strlen(args[0])-2]=='m') &&
-				     (args[0][strlen(args[0])-3]=='g') &&
-				     (args[0][strlen(args[0])-4]=='.')) )
-				{
-					/**
-					* Open the mo-file via a new routine
-					**/
-					gtranslator_open_mo_file((gchar *) args[0]);
-				}
-				else
-				{
-					/**
-					* Open up the plain po-file.
-					**/
-					parse(args[0]);
-				}
-			}
-		}
+		parse(args[0]);
 	}
 	poptFreeContext(context);
 	/* Disable the buttons if no file is opened. */

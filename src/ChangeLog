@@ -1,3 +1,20 @@
+2000-12-31  Fatih Demir	<kabalak@gmx.net>
+
+	* gui.c: Commented out the stat GtrMsgStatus variable as it's
+		not used for now.
+
+	* main.c: Removed all this gmo/po.gz opening stuff from the
+		main part of the argument parsing.
+
+	* Makefile.am: Added the new source files to the gtranslator
+		sources list.
+
+	* open-differently.c/.h: Outsourced these "special" open file
+		functions into these new files.
+	
+	* update.c & parse.c: Outsourced the update functions to it's
+		own source file.	
+
 2000-12-30  Fatih Demir	<kabalak@gmx.net>
 
 	* Makefile.am: Define the necessary USE_VFS_STUFF and

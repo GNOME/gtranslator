@@ -359,20 +359,7 @@ void parse_the_file(GtkWidget * widget, gpointer of_dlg)
 {
 	gchar *po_file;
 	po_file = gtk_file_selection_get_filename(GTK_FILE_SELECTION(of_dlg));
-	/**
-	* Test if this seems to be a mo/gmo-file..
-	**/
-	if((!strcmp(po_file, ".mo")) || (!strcmp(po_file, ".gmo")))
-	{
-		/**
-		* Then open it up with the new function...
-		**/
-		gtranslator_open_mo_file(po_file);
-	}
-	else
-	{
-		parse(po_file);
-	}
+	parse(po_file);
 	/* Destroy the dialog */
 	gtk_widget_destroy(GTK_WIDGET(of_dlg));
 }
@@ -830,56 +817,6 @@ void gtranslator_display_recent(void)
 }
 
 /**
-* The update function.
-**/
-void update(GtkWidget *widget, gpointer useless)
-{
-	gint res=1;
-	gchar *command;
-	gchar *newfile;
-
-	/**
-	* Build this magical line.
-	* FIXME: use real ./update.pl found in packages
-	**/
-	command=g_strdup_printf("%s %s %s 2>&1 1>/dev/null", SCRIPTSDIR "/update.sh",
-		po->filename, po->header->prj_name);
-	/**
-	* Get the filename.
-	**/
-	newfile=g_strdup(po->filename);
-	/**
-	* Close the file before updating
-	**/
-	close_file(NULL, NULL);
-	if (file_opened != FALSE) {
-		g_free(newfile);
-		g_free(command);
-		return;
-	}
-
-	/**
-	* Execute the command.
-	**/
-	res=system(command);
-	/**
-	* If you wish'em, you get'em ..
-	**/
-	if(wants.uzi_dialogs)
-	{
-		if(res!=0)
-			gnome_app_message(GNOME_APP(app1),
-				_("An update would cause no changes."));
-		else
-			gnome_app_message(GNOME_APP(app1),
-				_("The update was successfull."));
-	}
-	parse(newfile);
-	g_free(command);
-	g_free(newfile);
-}
-
-/**
 * A helper function simply increments the "translated" variable of the
 *  po-file.
 **/
@@ -917,93 +854,4 @@ void gtranslator_set_progress_bar(void)
 	* Set the progressbar status.
 	**/
 	gnome_appbar_set_progress(GNOME_APPBAR(appbar1), percentage);
-}
-
-/**
-* Opens the given mo-file...
-**/
-void gtranslator_open_mo_file(gchar *file)
-{
-	gchar *cmd;
-	gchar *tempfilename;
-	/**
-	* Set the temporary filename...
-	**/
-	tempfilename=g_strdup_printf("%s/temp_po_file",
-		((g_getenv("TMPDIR")) ? g_getenv("TMPDIR"): "/tmp"));
-	/**
-	* Build up the command to execute in the shell.
-	**/
-	cmd=g_strdup_printf("msgunfmt %s -o %s",
-		file,
-		tempfilename);
-	/**
-	* Execute the command.
-	**/
-	if(!system(cmd))
-	{
-		/**
-		* Yes, it worked for us...
-		**/
-		parse(tempfilename);
-	}
-	else
-	{
-		/**
-		* "Misuse" cmd
-		**/
-		cmd=g_strdup_printf(_("Couldn't open mo-file `%s'!"),
-			file);
-		/**
-		* Sorry, didn't work...
-		**/
-		gnome_app_warning(GNOME_APP(app1), cmd);
-	}
-	g_free(cmd);
-	g_free(tempfilename);
-}
-
-/**
-* This is mostly only a copy&pasted part of the mo/gmo-file
-*  opening function which is just adapted to use gunzip ...
-**/
-void gtranslator_open_gzipped_po_file(gchar *file)
-{
-	gchar *cmd;
-	gchar *tempfilename;
-	/**
-	* Set the temporary filename...
-	**/
-	tempfilename=g_strdup_printf("%s/temp_po_file",
-		((g_getenv("TMPDIR")) ? g_getenv("TMPDIR"): "/tmp"));
-	/**
-	* Build up the command to execute in the shell.
-	**/
-	cmd=g_strdup_printf("gzip -dc < %s > %s",
-		file,
-		tempfilename);
-	/**
-	* Execute the command.
-	**/
-	if(!system(cmd))
-	{
-		/**
-		* Yes, it worked for us...
-		**/
-		parse(tempfilename);
-	}
-	else
-	{
-		/**
-		* "Misuse" cmd
-		**/
-		cmd=g_strdup_printf(_("Couldn't open gzipped po-file `%s'!"),
-			file);
-		/**
-		* Sorry, didn't work...
-		**/
-		gnome_app_warning(GNOME_APP(app1), cmd);
-	}
-	g_free(cmd);
-	g_free(tempfilename);
 }
