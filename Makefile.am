@@ -1,6 +1,6 @@
 ## the main Makefile.am
 
-SUBDIRS = data intl macros src nautilus-view po man help
+SUBDIRS = data help intl macros man po src nautilus-view
 
 bin_SCRIPTS = pozilla.sh
 
