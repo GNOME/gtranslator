@@ -17,15 +17,22 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "learn.h"
 #include "nautilus-string.h"
 #include "parse.h"
 #include "prefs.h"
 #include "utils.h"
 
+#include <time.h>
+
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 
 #define UMTF_FILENAME "autolearn-umtf.xml"
@@ -34,6 +41,7 @@
  * The internally used variables for learning.
  */
 static gboolean 	init_status=FALSE;
+static gint		serial=0;
 static GHashTable	*learn_hash=NULL;
 
 /*
@@ -41,7 +49,12 @@ static GHashTable	*learn_hash=NULL;
  */
 static void gtranslator_learn_hash_from_node(xmlNodePtr node);
 static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpointer useless);
-static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node);
+static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer doc);
+
+/*
+ * Return an UMTF date string.
+ */
+static gchar *gtranslator_learn_get_umtf_date(void);
 
 /*
  * Hash the entries from the given node point.
@@ -101,18 +114,41 @@ static void gtranslator_learn_free_hash_entry(gpointer key, gpointer value, gpoi
 /*
  * Write the hash entries -- one entry for a msgid/msgstr pair.
  */
-static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer node)
+static void gtranslator_learn_write_hash_entry(gpointer key, gpointer value, gpointer doc)
 {
+	xmlNodePtr node;
 	xmlNodePtr new_node;
 	xmlNodePtr value_node;
 	xmlNodePtr translation_node;
 	xmlNodePtr translation_value_node;
+
+	node=((xmlDocPtr) doc)->xmlRootNode->xmlChildrenNode;
+	g_return_if_fail(node!=NULL);
 
 	new_node=xmlNewChild(node, NULL, "message", NULL);
 	value_node=xmlNewChild(new_node, NULL, "value", (gchar *) key);
 
 	translation_node=xmlNewChild(new_node, NULL, "translation", NULL);
 	translation_value_node=xmlNewChild(translation_node, NULL, "value", (gchar *) value);
+}
+
+/*
+ * Create/return an UMTF formed date string.
+ */
+static gchar *gtranslator_learn_get_umtf_date()
+{
+	gchar		*date_string;
+	struct tm	*time_struct;
+	time_t		now;
+
+	date_string=g_malloc(20);
+
+	now=time(NULL);
+	time_struct=localtime(&now);
+
+	strftime(date_string, 20, "%Y-%m-%d %H:%M:%S", time_struct);
+
+	return date_string;
 }
 
 /*
@@ -141,13 +177,35 @@ void gtranslator_learn_init()
 		g_return_if_fail(doc!=NULL);
 
 		node=doc->xmlRootNode;
+		g_return_if_fail(node!=NULL);
 
 		/*
 		 * Parse every message entry via the gtranslator_learn_hash_from_node
 		 *  function.
 		 */
-		while(node && node->name)
+		while(node)
 		{
+			/*
+			 * Read in the serial number.
+			 */
+			if(!nautilus_strcasecmp(node->name, "serial"))
+			{
+				gchar	*contentstring;
+
+				contentstring=xmlNodeGetContent(node);
+				
+				if(contentstring)
+				{
+					/*
+					 * Read the serial number in and increment it by one.
+					 */
+					sscanf(contentstring, "%i", &serial);
+					g_free(contentstring);
+
+					serial++;
+				}
+			}
+			
 			if(!nautilus_strcasecmp(node->name, "message"))
 			{
 				gtranslator_learn_hash_from_node(node);
@@ -189,8 +247,11 @@ void gtranslator_learn_shutdown()
 	xmlNodePtr	root_node;
 	xmlNodePtr	language_node;
 	xmlNodePtr	translator_node;
+	xmlNodePtr	serial_node;
 	
 	gchar 		*filename;
+	gchar		*date;
+	gchar		*serial_string;
 	
 	g_return_if_fail(init_status==TRUE);
 
@@ -217,16 +278,17 @@ void gtranslator_learn_shutdown()
 	if(language)
 	{
 		xmlSetProp(language_node, "ename", language);
-	}
-
-	if(lg)
-	{
-		xmlSetProp(language_node, "email", lg);
+		xmlSetProp(language_node, "name", _(language));
 	}
 
 	if(lc)
 	{
 		xmlSetProp(language_node, "code", lc);
+	}
+
+	if(lg)
+	{
+		xmlSetProp(language_node, "email", lg);
 	}
 
 	/*
@@ -243,14 +305,39 @@ void gtranslator_learn_shutdown()
 	{
 		xmlSetProp(translator_node, "email", email);
 	}
+
+	/*
+	 * Get the current date in UMTF-alike form.
+	 */
+	date=gtranslator_learn_get_umtf_date();
+
+	/*
+	 * Build the serial string -- the serial number must be in gchar form to be
+	 *  written by xmlSetProp.
+	 */
+	if(serial>=1)
+	{
+		serial_string=g_strdup_printf("%i", serial);
+	}
+	else
+	{
+		serial_string=g_strdup_printf("%i", 1);
+	}
+
+	/*
+	 * Add the <serial> node with erial string and date.
+	 */
+	serial_node=xmlNewChild(root_node, NULL, "serial", serial_string);
+	xmlSetProp(serial_node, "date", date);
+
+	g_free(serial_string);
+	g_free(date);
 	
 	/*
 	 * Clean up the hash table we're using, write it's contents, free them and destroy
 	 *  the hash table.
 	 */
-	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_write_hash_entry, 
-		doc->xmlRootNode);
-
+	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_write_hash_entry, doc); 
 	g_hash_table_foreach(learn_hash, (GHFunc) gtranslator_learn_free_hash_entry, NULL);
 	g_hash_table_destroy(learn_hash);
 
