@@ -1,12 +1,12 @@
 # Lithuanian translation of gtranslator.
 # Copyright (C) 2000 Free Software Foundation, Inc.
-# Gediminas Paulauskas <menesis@delfi.lt>, 2000.
+# Gediminas Paulauskas <menesis@delfi.lt>, 2001.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.32\n"
-"POT-Creation-Date: 2001-01-07 03:22+0200\n"
-"PO-Revision-Date: 2001-01-07 03:12+0200\n"
+"Project-Id-Version: gtranslator 0.33\n"
+"POT-Creation-Date: 2001-01-23 23:28+0200\n"
+"PO-Revision-Date: 2001-01-23 23:30+0200\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Visur"
 msgid "Find in: "
 msgstr "Ieðkoti kur:"
 
-#: src/dialogs.c:308
+#: src/dialogs.c:309
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "Ávyko klaida, vykdant msgfmt:\n"
 
@@ -238,7 +238,7 @@ msgstr "Uþraðo bû_sena"
 msgid "Open"
 msgstr "Atidaryti"
 
-#: src/gui.c:256 src/open-po-file-dialog-interface.c:49
+#: src/gui.c:256
 msgid "Open a po-file"
 msgstr "Atidaryti po bylà"
 
@@ -325,7 +325,7 @@ msgstr "Rasti eilutæ po byloje"
 #.
 #. * Create the app
 #.
-#: src/gui.c:488
+#: data/desktop/gtranslator.desktop.in.h:2 src/gui.c:488
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -638,7 +638,7 @@ msgstr "Nurodo pagrindinio lango geometrijà"
 msgid "Error during GConf initialization: %s."
 msgstr "Klaida inicializuojant GConf: %s."
 
-#: src/parse.c:136
+#: src/parse.c:135
 #, c-format
 msgid ""
 "New escaped char found: \\%c\n"
@@ -647,12 +647,12 @@ msgstr ""
 "Rastas naujas specialus þenklas: \\%c\n"
 "Pridëk já á parse.c, eilutë %i."
 
-#: src/parse.c:174 src/parse.c:585
+#: src/parse.c:173 src/parse.c:584
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "Byla ¥%s´ iðvis neegzistuoja"
 
-#: src/parse.c:265
+#: src/parse.c:264
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -663,7 +663,7 @@ msgstr ""
 "eilutëje %d.\n"
 "Pataisyk bylà, ir bandyk vël."
 
-#: src/parse.c:300
+#: src/parse.c:299
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -672,25 +672,25 @@ msgstr ""
 "Byla yra tuðèia:\n"
 "%s"
 
-#: src/parse.c:320 src/parse.c:326
+#: src/parse.c:319 src/parse.c:325
 msgid "There's no file to open!"
 msgstr "Nenurodyta, kokià bylà atidaryti!"
 
-#: src/parse.c:366
+#: src/parse.c:365
 msgid "The file has no header!"
 msgstr "Byla neturi antraðtës!"
 
-#: src/parse.c:369
+#: src/parse.c:368
 #, c-format
 msgid "Successfully parsed the file \"%s\""
 msgstr "Sëkmingai iðnagrinëta byla ¥%s´"
 
-#: src/parse.c:372
+#: src/parse.c:371
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:547
+#: src/parse.c:546
 #, c-format
 msgid ""
 "You are trying to save file with *.pot extension.\n"
@@ -701,7 +701,7 @@ msgstr ""
 "Deja, tokios bylos yra generuojamos programomis.\n"
 "Tavo byla turëtø bûti pavadinta su *.po plëtiniu, tikriausiai %s.po"
 
-#: src/parse.c:633
+#: src/parse.c:632
 #, c-format
 msgid ""
 "You didn't change anything in\n"
@@ -712,11 +712,11 @@ msgstr ""
 "%s\n"
 "Ar nori vis tiek jà iðsaugoti?"
 
-#: src/parse.c:641
+#: src/parse.c:640
 msgid "gtranslator -- unchanged"
 msgstr "gtranslator -- nepakeistas"
 
-#: src/parse.c:715
+#: src/parse.c:714
 #, c-format
 msgid ""
 "File %s\n"
@@ -725,11 +725,11 @@ msgstr ""
 "Byla %s\n"
 "buvo pakeista. Ar nori atstatyti ið iðsaugotos kopijos?"
 
-#: src/parse.c:754
+#: src/parse.c:753
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Gaila, bet tavo sistemoje nëra msgfmt!"
 
-#: src/parse.c:779
+#: src/parse.c:778
 #, c-format
 msgid ""
 "Compile successfull:\n"
@@ -738,11 +738,11 @@ msgstr ""
 "Kompiliavimas sëkmingas:\n"
 "%s"
 
-#: src/parse.c:802
+#: src/parse.c:801
 msgid "_File/Recen_t files/"
 msgstr "_Byla/Pas_tarosios bylos/"
 
-#: src/parse.c:843
+#: src/parse.c:842
 #, c-format
 msgid "Open %s"
 msgstr "Atidaryti %s"
@@ -924,21 +924,25 @@ msgstr "Negalëjau atidaryti sukompiliuotos gettext bylos ¥%s´!"
 msgid "Couldn't open gzip'd gettext file `%s'!"
 msgstr "Negalëjau atidaryti archyvuotos bylso ¥%s´!"
 
-#: src/open-po-file-dialog-interface.c:109
-msgid "Filename: "
-msgstr "Bylos vardas:"
+#: data/oaf/Gtranslator_Gtranslatord.oaf.in.h:1
+msgid "gtranslatord daemon"
+msgstr "gtranslatord demonas"
 
-#: src/open-po-file-dialog-interface.c:135
-msgid "File size:   "
-msgstr "Bylos dydis:   "
+#: data/oaf/Gtranslator_Gtranslatord.oaf.in.h:2
+msgid "gtranslatord message database and team management daemon"
+msgstr "gtranslatord uþraðø duomenø bazës ir komandø tvarkymo demonas"
 
-#: src/open-po-file-dialog-interface.c:161
-msgid "Last edit: "
-msgstr "Paskutinákart taisyta: "
+#: data/desktop/gtranslator.desktop.in.h:1
+msgid "The Gnome translation program"
+msgstr "Gnome vertimo árankis"
 
-#: src/open-po-file-dialog-interface.c:187
-msgid "Revision: "
-msgstr ""
+#: data/mime/gtranslator.keys.in.h:1
+msgid "Compiled gettext po files"
+msgstr "Sukompiliuotos gettext po bylos"
+
+#: data/mime/gtranslator.keys.in.h:2
+msgid "Gettext po files"
+msgstr "gettext po bylos"
 
 #.
 #. * Print out a warning and exit from the
@@ -950,7 +954,7 @@ msgstr "Nenurodyta jokia byla!"
 
 #: libgtranslator/handle-db.c:58
 msgid "The given filepath isn't absolute!"
-msgstr ""
+msgstr "Duotas bylos kelias nëra absoliutus!"
 
 #: libgtranslator/handle-db.c:69
 #, c-format
@@ -1116,7 +1120,7 @@ msgstr "Nepavyko sugeneruoti esamos datos!"
 
 #: libgtranslator/stylistics.c:50 libgtranslator/stylistics.c:97
 msgid "No color path found!"
-msgstr ""
+msgstr "Nerastas spalvos kelias!"
 
 #: libgtranslator/stylistics.c:136
 msgid "No font set! Using default font"
@@ -1143,31 +1147,32 @@ msgstr "Negalëjau atidaryti komandø duombazës ¥%s´!"
 msgid "Couldn't create the temporary directory `%s'."
 msgstr "Negalëjau sukurti laikino katalogo ¥%s´."
 
-#: libgtranslator/vfs-handle.c:90
+#: libgtranslator/vfs-handle.c:94
 #, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "Negaliu rasti bylos ¥%s´!"
 
-#: libgtranslator/vfs-handle.c:95
+#: libgtranslator/vfs-handle.c:99
 #, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr ""
 
-#: libgtranslator/vfs-handle.c:100
+#: libgtranslator/vfs-handle.c:104
 #, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "Negaliu rasti hosto ¥%s´!"
 
-#: libgtranslator/vfs-handle.c:105
+#: libgtranslator/vfs-handle.c:109
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "Hosto vardas ¥%s´ yra neteisingas!"
 
-#: libgtranslator/vfs-handle.c:110
+#: libgtranslator/vfs-handle.c:114
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "Hostas ¥%s´ neturi adreso!"
 
-#: libgtranslator/vfs-handle.c:115
+#: libgtranslator/vfs-handle.c:119
 msgid "Transfer interrupted!"
 msgstr "Siuntimas nutrauktas!"
+

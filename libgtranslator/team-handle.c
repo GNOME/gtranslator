@@ -28,7 +28,7 @@ GList *gtranslator_get_apps_for_node(xmlNodePtr ptr);
 /*
  * Initializes the default team database.
  */
-GtranslatorTeamDatabase *gtranslator_init_team_db()
+GtranslatorTeamDatabase *gtranslator_init_team_db(void)
 {
 	/*
 	 * Some local variables.

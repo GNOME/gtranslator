@@ -22,7 +22,7 @@ export MAILING_LIST='GNOME I18N List <gnome-i18n@gnome.org>'
 #
 # The configuration dir, the mail body & mail.
 #
-export CONFIG_DIR="$HOME/.kabalak/pozilla"
+export CONFIG_DIR="$HOME/.pozilla"
 export BODY_FILE="$CONFIG_DIR/mail.body"
 
 #
