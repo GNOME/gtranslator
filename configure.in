@@ -61,20 +61,21 @@ ALL_LINGUAS="da de en_GB es fi fr gl hu it ja ko lt nl no pl pt_BR ru sv tr uk"
 AM_GNOME_GETTEXT
 
 dnl -------------------------------------------------------------------
-dnl Check for the window-icon feature of gnome-libs > 1.0.59.
+dnl Check for the window-icon feature of gnome-libs > 1.2.0
 dnl -------------------------------------------------------------------
 MY_CFLAGS=$CFLAGS
 MY_LIBS=$LIBS
 CFLAGS="$CFLAGS `gnome-config --cflags gnomeui`"
 LIBS="$LIBS `gnome-config --libs gnomeui`"
+use_window_icon=yes
 AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, 
 	AC_MSG_RESULT(["+++ Will use window-icon feature..."])
-	AC_DEFINE(USE_WINDOW_ICON)
 	,[
-	w
-	AC_MSG_RESULT(["+++ Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])])
+	AC_MSG_RESULT(["+++ Cannot use the window-icon feature as you have not got a recent enough gnome-libs version"])
+	use_window_icon=no])
 CFLAGS=$MY_CFLAGS
 LIBS=$MY_LIBS
+AM_CONDITIONAL(USE_WINDOW_ICON, test z$use_window_icon = zyes)
 
 dnl -------------------------------------------------------------------
 dnl Check for GConf >= 0.9 and the stuff around it ..
