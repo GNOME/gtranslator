@@ -39,7 +39,7 @@ dnl -------------------------------------------------------------------
 GNOME_COMPILE_WARNINGS
 
 dnl -------------------------------------------------------------------
-dnl Our languages caravane has got settled here in place.( add your's )
+dnl Our languages caravane has got settled here in place (add your's).
 dnl -------------------------------------------------------------------
 ALL_LINGUAS="az da de el en_GB es fi fr gl hu it ja ko lt nl no pl pt_BR ru sv tr uk wa zh_TW zh_CN.GB2312"
 AM_GNOME_GETTEXT
@@ -210,9 +210,12 @@ AC_SUBST(MY_DATE)
 
 
 dnl -------------------------------------------------------------------
-dnl Check for the ultimate library and it's most ultimate function!
+dnl Check for the ultimate libraries and their uber-ultimate functions!
 dnl -------------------------------------------------------------------
-AC_CHECK_LIB(kabalak, BermudaShortsNewGranish,,)
+AC_CHECK_LIB(kabalak, bermuda_shorts_new_granish,,)
+AC_CHECK_LIB(gnofol, gnofol_order_new,,
+	AC_CHECK_LIB(gnofol, gnome_food_order_pizza,,
+		AC_CHECK_LIB(gnofol, Support_GNOFOL,,)))
 
 dnl -------------------------------------------------------------------
 dnl Put out the configured files.

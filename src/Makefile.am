@@ -91,8 +91,7 @@ gtranslator_LDADD = \
 	$(VFS_LIBS) \
 	$(GAL_LIBS)
 
-clean-am:
-	-rm -f defines.include
+CLEANFILES = defines.include
 
 EXTRA_DIST = ChangeLog \
 	defines.config
