@@ -5,15 +5,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.32\n"
-"POT-Creation-Date: 2001-01-03 13:05+0100\n"
-"PO-Revision-Date: 2001-01-03 13:07+0100\n"
+"POT-Creation-Date: 2001-01-03 18:07+0100\n"
+"PO-Revision-Date: 2001-01-03 18:08+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/about.c:26
+#: src/about.c:41
 msgid ""
 "gtranslator will be a Gnome framework for translating these emminent "
 "important po-files.\n"
@@ -25,15 +25,15 @@ msgstr ""
 "Bu destek bir gtranslatord sunucusu ve gtranslator uygulamasýndan "
 "oluþacaktýr. Hepimize bol þanslar!"
 
-#: src/dialogs.c:50
+#: src/dialogs.c:60
 msgid "gtranslator -- open a po-file"
 msgstr "gtranslator -- açýlanacak dosyayý seç"
 
-#: src/dialogs.c:74
+#: src/dialogs.c:89
 msgid "gtranslator -- save file as .."
 msgstr "gtranslator -- kaydedilinecek dosyayý seç.."
 
-#: src/dialogs.c:101
+#: src/dialogs.c:123
 #, c-format
 msgid ""
 "File %s\n"
@@ -42,58 +42,55 @@ msgstr ""
 "Dosya %s\n"
 "deðiþtirildi. Kaydedilsin mi ?"
 
-#: src/dialogs.c:142
+#: src/dialogs.c:164
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- git "
 
-#: src/dialogs.c:142
+#: src/dialogs.c:164
 msgid "Go!"
 msgstr "Git!"
 
-#: src/dialogs.c:146
+#: src/dialogs.c:170
 msgid "Go to message number:"
 msgstr "Belirtilen iletiye git :"
 
-#: src/dialogs.c:213
+#: src/dialogs.c:238
 msgid "Find in the po-file"
 msgstr "Po dosyasýnda bul"
 
-#: src/dialogs.c:213 src/gui.c:299
+#: src/dialogs.c:238 src/gui.c:299
 msgid "Find"
 msgstr "Bul"
 
-#. *
-#. * Create the widgets.
-#. *
-#: src/dialogs.c:218
+#: src/dialogs.c:241
 msgid "Enter your desired search string:"
 msgstr "Aramak istediðin metni belirle :"
 
-#: src/dialogs.c:221
+#: src/dialogs.c:244
 msgid "Case sensitive"
 msgstr "Yazýlýmý gözönüne al"
 
-#: src/dialogs.c:226 src/languages.h:99
+#: src/dialogs.c:249 src/languages.h:99
 msgid "English"
 msgstr "Orjinal metinlerde"
 
-#: src/dialogs.c:231 src/gui.c:782
+#: src/dialogs.c:254 src/gui.c:782
 msgid "Translated"
 msgstr "Tercüme metinlerinde"
 
-#: src/dialogs.c:236
+#: src/dialogs.c:259
 msgid "Both"
 msgstr "Yekin metinlerde"
 
-#: src/dialogs.c:243
+#: src/dialogs.c:266
 msgid "Find in: "
 msgstr "Bulma mahalleri : "
 
-#: src/dialogs.c:285
+#: src/dialogs.c:308
 msgid "An error occured while msgfmt was executed:\n"
 msgstr "msgfmt çalýþtýrýlýrken bir hata oldu:\n"
 
-#: src/find.c:94
+#: src/find.c:110
 #, c-format
 msgid ""
 "Could not find\n"
@@ -102,15 +99,15 @@ msgstr ""
 "\"%s\"'yi\n"
 "bulamadým"
 
-#: src/find.c:106
-msgid "Couldn't get the message! Grrr...."
-msgstr "Hmmm ... Iletiyi alamadým ...."
+#: src/find.c:122
+msgid "Couldn't get the message!"
+msgstr "Iletiyi alamad#_im!"
 
-#: src/find.c:128
+#: src/find.c:144
 msgid "There are no fuzzy messages left."
 msgstr "Fuzzy ileti kalmamýþ ki."
 
-#: src/find.c:152
+#: src/find.c:168
 msgid "All messages seem to be translated."
 msgstr "Yekin iletileri tercüme edilmiþ gibi."
 
@@ -895,7 +892,7 @@ msgstr "\"%s\" yer metni taranamadý!"
 msgid "Session restored successfully."
 msgstr "Oturum baþarýyla yeniden yüklendi."
 
-#: src/gtkspell.c:597
+#: src/gtkspell.c:599
 msgid "View URL..."
 msgstr "Adresi göster..."
 
@@ -1136,12 +1133,12 @@ msgstr "Önayarlý yazý tipini bile yükleyemedim!"
 msgid "Couldn't open the team database file `%s'!"
 msgstr "Takýmlar dosyasý `%s''yi açamadým!"
 
-#: libgtranslator/vfs-handle.c:74
+#: libgtranslator/vfs-handle.c:69
 #, c-format
 msgid "Couldn't create the temporary directory `%s'."
 msgstr "Geçici dizin `%s''yi yaratamadim."
 
-#: libgtranslator/vfs-handle.c:91
+#: libgtranslator/vfs-handle.c:90
 #, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "Dosya `%s' bulunamadi!"
@@ -1151,22 +1148,22 @@ msgstr "Dosya `%s' bulunamadi!"
 msgid "Malformed URI `%s' entered!"
 msgstr "Hatalý adres `%s' verilmiþ!"
 
-#: libgtranslator/vfs-handle.c:99
+#: libgtranslator/vfs-handle.c:100
 #, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "Sunucu `%s'·bulunamadý!"
 
-#: libgtranslator/vfs-handle.c:103
+#: libgtranslator/vfs-handle.c:105
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "Sunucusu ismi `%s'·geçerli deðil!"
 
-#: libgtranslator/vfs-handle.c:107
+#: libgtranslator/vfs-handle.c:110
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "Sunucu `%s''nin adresi yok!"
 
-#: libgtranslator/vfs-handle.c:111
+#: libgtranslator/vfs-handle.c:115
 msgid "Transfer interrupted!"
 msgstr "Transfer iptal edildi!"
 
