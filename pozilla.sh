@@ -26,7 +26,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.2
+export POZILLA_RELEASE=4.3
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -149,6 +149,7 @@ do
 	echo "-S --statistics   Print out the statistics table at the end"
 	echo "-o --output-file  Print the eventual statistics table to the given file"
 	echo "-D --dry-run      Don't send any EMails, create statistics (implies -S)"
+	echo "-N --no-list      Don't send any EMails to the list"
 	echo "-n --no-personal  Don't send personal EMails to the last translators"
 	echo "-v --version      Version informations"
 	echo "-h --help         This help screen"
@@ -183,6 +184,17 @@ do
 		echo "Not sending any personal EMails; only sending to the list..."
 		echo "---------------------------------------------------------------"
 		export NO_PERSONAL=yes
+	fi
+	;;
+	-N|--no-list)
+	shift 1
+	if test "say_$RUN_DRY" = "say_yes" ; then
+		dry_run_information_message
+	else
+		echo "---------------------------------------------------------------"
+		echo "Not sending any EMails to the list..."
+		echo "---------------------------------------------------------------"
+		export NO_LIST=yes
 	fi
 	;;
 	-o|--output-file)
@@ -696,8 +708,12 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 	#
 	# Clean up any resting backup file (due to --dry-run/--no-personal).
 	#
-	[ -f $i ] && rm -f $i
-	mv $i.backup $i
+	if test "say_$NO_LIST" != "say_yes" ; then 
+		if test -f $i -a -f $i.backup ; then 
+			rm -f $i
+			mv $i.backup $i
+		fi
+	fi
 	
         done
 
@@ -705,6 +721,8 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 # Send a mail to the mailing list -- if we're running in "wet-modus".
 #
 if test "say_$RUN_DRY" != "say_yes" ; then
+
+if test "say_$NO_LIST" != "say_yes" ; then
 
 echo "Dear translators of $PACKAGE:" > $BODY_FILE
 echo "" >> $BODY_FILE
@@ -742,7 +760,10 @@ if test "my$ADDITIONAL_MAILING_ADDRESS" = "my" ; then
 else
 	cat $BODY_FILE|mutt -s "$SUBJECT" "$MAILING_LIST" -c "$ADDITIONAL_MAILING_ADDRESS"
 fi
-
+	#
+	# Again some nested if's.
+	#
+	fi
 fi
 
 #

@@ -1,4 +1,4 @@
-.TH "pozilla.sh" "1" "4.2" "Fatih Demir" "Pozilla -- neat i18 stuff"
+.TH "pozilla.sh" "1" "4.3" "Fatih Demir" "Pozilla -- neat i18 stuff"
 .SH "NAME"
 .LP 
 pozilla.sh \-\- a i18n and admin helper script for the pre\-release status of a project, awaking/warning the translators to update their translations and to print out neat statistics tables.
@@ -23,6 +23,8 @@ pozilla.sh [\fI\-A\fP | \fI\-\-send\-to\-all\fP]
 pozilla.sh [\fI\-D\fP | \fI\-\-dry\-run\fP]
 .br 
 pozilla.sh [\fI\-n\fP | \fI\-\-no\-personal\fP]
+.br 
+pozilla.sh [\fI\-N\fP | \fI\-\-no\-list\fP]
 .br 
 pozilla.sh [\fI\-o\fP | \fI\-\-output\-file\fP]
 .SH "DESCRIPTION"
@@ -68,6 +70,9 @@ Runs pozilla.sh in dry mode, so that the statistics table is shown at the end bu
 .TP 
 \fB\-n\fR
 Causes pozilla.sh to not send any personal statistics EMail to the last translators, but to send the statistics EMail to the mailing list \-\- avoids the personal EMail spammage for the last translators if not wished.
+.TP 
+\fB\-N\fR
+No EMails are sent to the mailing list or any giving additional mail address.
 .TP 
 \fB\-o\fR \fIOutput_Filename\fP
 Print the eventually requested statistics table into the given \fIOutput_Filename\fR instead of simply printing it out to \fBstdout\fR.
