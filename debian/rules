@@ -1,66 +1,107 @@
-#!/usr/bin/make -f
-#
-# (C) 2001 Fatih Demir <kabalak@gtranslator.org>
-#
-# An own written rules file -- debhelper-alike.
-#
+#! /usr/bin/make -f
+# This is not a -*- Makefile -*- I'm just faking it
+# *sigh*
 
-deb_mandir=`pwd`/debian/tmp/usr/share/man
+checkdir=test -f debian/control 
+checkroot=test `id -u` -eq 0
 
-build: configure-step build-step
+configure: configure-stamp
+configure-stamp:
+	$(checkdir)
 
-configure: configure-step
-configure-step:
-	dh_testdir
-	./configure --prefix=/usr --mandir=/usr/share/man \
-		--sysconfdir=/etc \
-		--enable-mime-bind=yes
+	./configure --prefix=/usr			\
+		--mandir=\$${prefix}/share/man		\
+		--infodir=\$${prefix}/share/info	\
+		--sysconfdir=/etc
 
-	touch configure-step
+	touch configure-stamp
 
-build-step:
-	dh_testdir
+build: configure build-stamp
+build-stamp:
+	$(checkdir)
+
 	$(MAKE)
 
-	touch build-step
+	touch build-stamp
+
+install: install-stamp
+install-stamp:
+	$(checkdir)
+	$(checkroot)
+
+	$(MAKE) install \
+		prefix=`pwd`/debian/tmp/usr \
+		sysconfdir=`pwd`/debian/tmp/etc \
+		SC_OMFDIR=`pwd`/debian/tmp/usr/share/omf
+
+	find debian/tmp -type d -print0 | xargs -0 chmod 755
+	find debian/tmp/etc -name '%gconf.xml' -print0 | xargs -0 chmod 644
+
+	strip -R .note -R .comment debian/tmp/usr/bin/gtranslator \
+				   debian/tmp/usr/lib/gtranslator/backends/docbook/docbook.so \
+				   debian/tmp/usr/lib/gtranslator/backends/text/text.so
+
+	chmod 644 debian/tmp/usr/lib/gtranslator/backends/text/text.la \
+		  debian/tmp/usr/lib/gtranslator/backends/text/text.so \
+		  debian/tmp/usr/lib/gtranslator/backends/docbook/docbook.la \
+		  debian/tmp/usr/lib/gtranslator/backends/docbook/docbook.so
+
+	touch install-stamp
 
 clean:
-	dh_testdir
-	dh_testroot
-	rm -f build-step configure-step
-	
+	$(checkdir)
+	$(checkroot)
+
 	-$(MAKE) distclean
-	dh_clean
+	-rm -rf build-stamp configure-stamp install-stamp
+	-rm -rf debian/tmp
+	-rm -rf debian/files debian/substvars
 
-install: build
-	dh_testdir
-	dh_testroot
-	dh_clean -k
-	dh_installdirs
-	
-	$(MAKE) prefix=`pwd`/debian/tmp/usr \
-		mandir=$(deb_mandir) \
-		sysconfdir=`pwd`/debian/tmp/etc \
-		SC_OMFDIR=`pwd`/debian/tmp/usr/share/omf install
-
-	dh_movefiles
+binary-indep:
+	echo "No architecture-independant files to build."
 
 binary-arch: build install
-	dh_testdir 
-	dh_testroot 
-	dh_installmenu 
-	dh_installdocs
-	dh_installchangelogs ChangeLog
-	dh_link 
-	dh_strip 
-	dh_compress 
-	dh_fixperms 
-	dh_installdeb 
-	dh_makeshlibs
-	dh_shlibdeps 
-	dh_gencontrol 
-	dh_md5sums 
-	dh_builddeb
-	
-binary: binary-arch
-.PHONY: build clean binary-arch binary install
+	$(checkdir)
+	$(checkroot)
+
+	# Install stuff	
+	install -d -m 755 -o root -g root debian/tmp/DEBIAN
+	install -d -m 755 -o root -g root debian/tmp/usr/lib/menu
+	install -d -m 755 -o root -g root debian/tmp/usr/share/doc/gtranslator
+
+	install -m 644 -o root -g root README			\
+		debian/tmp/usr/share/doc/gtranslator/README
+	install -m 644 -o root -g root ChangeLog		\
+		debian/tmp/usr/share/doc/gtranslator/changelog
+
+	install -m 644 -o root -g root debian/copyright		\
+		debian/tmp/usr/share/doc/gtranslator
+	install -m 644 -o root -g root debian/changelog		\
+		debian/tmp/usr/share/doc/gtranslator/changelog.Debian
+
+	install -m 644 -o root -g root debian/menu		\
+		debian/tmp/usr/lib/menu/gtranslator
+
+	install -m 755 -o root -g root debian/postinst		\
+		debian/tmp/DEBIAN/postinst
+	install -m 755 -o root -g root debian/prerm		\
+		debian/tmp/DEBIAN/prerm
+	install -m 755 -o root -g root debian/postrm		\
+		debian/tmp/DEBIAN/postrm
+
+	# And gzip it
+	gzip -9f debian/tmp/usr/share/doc/gtranslator/README
+	gzip -9f debian/tmp/usr/share/doc/gtranslator/changelog
+	gzip -9f debian/tmp/usr/share/doc/gtranslator/changelog.Debian
+
+	# Build packages (dpkg-deb, shlibdeps)	
+	dpkg-shlibdeps -Tdebian/substvars			\
+		debian/tmp/usr/bin/gtranslator
+	dpkg-gencontrol -pgtranslator -isp -Pdebian/tmp -Tdebian/substvars
+	dpkg --build debian/tmp ..
+
+# Build packages (dpkg-deb)
+
+binary:	binary-indep binary-arch
+
+.PHONY: configure build binary-indep binary-arch binary clean

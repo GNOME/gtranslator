@@ -1,6 +1,6 @@
-#!/bin/sh -e
+#! /bin/sh
 
-if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L \
-	/usr/doc/gtranslator ] ; then
-		rm -rf /usr/doc/gtranslator
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/gtranslator ];
+then
+        rm -f /usr/doc/gtranslator
 fi

@@ -3,7 +3,6 @@
 ##
 
 EXTRA_DIST = \
-	README.Debian \
 	changelog \
 	conffiles \
 	control \

@@ -1,16 +1,16 @@
 Source: gtranslator
 Section: x11
 Priority: optional
-Maintainer: Fatih Demir <kabalak@gtranslator.org>
-Build-Depends: libgconf-dev, libgnomeui-dev, libgal-dev, libgnome-vfs-dev
-Standards-Version: 3.0.1
+Maintainer: Ryan Murray <rmurray@debian.org>
+Build-Depends: libgal-dev (>= 0.10.99), libgnome-vfs-dev (>= 0.4.1), libgconf-dev (>= 1.0), scrollkeeper (>= 0.1.4), gettext
+Standards-Version: 3.5.2.0
 
 Package: gtranslator
 Architecture: any
-Section: x11
-Priority: optional
-Depends: ${shlibs:Depends}
-Description:A comfortable po file editor with many features.
- gtranslator is a comfortable po file editor with many bells and whistles.
- It features many useful function which ease the work of translators of po
- files immenantly.
+Depends: ${shlibs:Depends}, scrollkeeper (>= 0.1.4)
+Description: PO-file editor by the Gnome I18N team
+ A 'translation-supporting' program, which makes translating programs easy
+ even for non-programmers.
+ .
+ You might want to subscribe to the gnome-i18n-mailing list (see
+ developer.gnome.org for instructions) for more translation information.
