@@ -70,11 +70,11 @@ GtrLanguage languages[] = {
 	 "ca@dodds.net", "8bit"
 	},
 	{
-	 N_("Chinese/Simplified"), "zh_CN.GB2312", "GB2312",
+	 N_("Chinese/Simplified"), "zh_CN", "GB2312",
 	 "i18n-translation@lists.linux.net.cn", "8bit"
 	},
 	{
-	 N_("Chinese/Traditional"), "zh_TW.Big5", "Big5",
+	 N_("Chinese/Traditional"), "zh_TW", "Big5",
 	 "zh-l10n@linux.org.tw", "8bit"
 	},
 	{
