@@ -504,7 +504,7 @@ create_app1 (void)
   gtk_text_set_editable (GTK_TEXT (trans_box), TRUE);
   gtk_widget_realize (trans_box);
 
-  appbar1 = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_NEVER);
+  appbar1 = gnome_appbar_new (TRUE, TRUE, GNOME_PREFERENCES_NEVER);
   gtk_widget_set_name (appbar1, "appbar1");
   gtk_widget_ref (appbar1);
   gtk_object_set_data_full (GTK_OBJECT (app1), "appbar1", appbar1,

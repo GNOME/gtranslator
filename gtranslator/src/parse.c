@@ -50,9 +50,12 @@ void init_reading(void)
         fgets(sline[0],255,input_strs);
         gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline,-1);
         gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,sline,-1);
+	at_the_first=TRUE;
+	max_count=0;
 	#ifdef DEBUGGY
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Inited reading process ."));
 	#endif
+	gnome_appbar_set_progress(GNOME_APPBAR(appbar1),15);
 }
 
 /*
@@ -64,9 +67,8 @@ void parse_this_file_all_through()
 	*	Parse the prepared files to the char[]-arrays 
 	*/ 
 	/* 1. -> For the msgid's */
-	max_count=0;
-	for(count=1;count<=65000;++count)
-	{	
+	at_the_first=FALSE;
+	count=1;
 		while(fgets(iline[count],sizeof(iline[count]),input_ids) != NULL)
 		{
 			#ifdef DEBUGGY
@@ -74,53 +76,16 @@ void parse_this_file_all_through()
 			#endif
 			fgets(iline[count],sizeof(iline[count]),input_ids);
 			count++;
-			max_count++;
 		}
-	}
-	/*
-	if(count < 65000 || count > 0 )
-	{
-		max_count=count;
-	}
-	else if(count < 0 )
-	{
-		max_count=0;
-	}
-	else
-	{*/
-		/* 
-		*	If the read fails , notify the user
-		*/	
-	/*	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Error while parsing the msgid's !"));
-	}*/
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),55);
 	/* 2, -> For the msgstr's */
-	max_count=0;
-	for(count=1;count<=65000;++count)
-	{
+	at_the_first=FALSE;
+	
 		while(fgets(sline[count],sizeof(sline[count]),input_strs) != NULL)
 		{
 			fgets(sline[count],sizeof(sline[count]),input_strs);
 			count++;
 			max_count++;
 		}
-	}
-	/*
-	if(count < 65000 || count >= 0 )
-        {
-                max_count=count;
-		#ifdef DEBUGGY
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Reading now the msgstr's ..."));
-		#endif
-        }
-        else if(count < 0 )
-        {
-                max_count=0;
-        }
-        else
-        {*/
-		/*
-		*	The same thing as above ...
-		*/
-           /*     gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Error while parsing the msgstr's !"));
-        }*/
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),95);
 }

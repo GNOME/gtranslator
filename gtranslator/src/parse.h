@@ -21,11 +21,13 @@
 #include "interface.h"
 #include "support.h" 
 
+char iline[256][65000],sline[256][65000];
+FILE *input_ids,*input_strs;
+
 /*
 *	This are the dimensioneers for the *line-array ..
 */
-static int count=0;
-static int max_count=65000;
+static int count,max_count;
 char ids_file[256],strs_file[256];
 
 /*
@@ -38,6 +40,16 @@ gboolean file_opened;
 *	A silly question wants a silly answer ...
 */
 gboolean file_changed;
+
+/*
+*	For a simple check if we're at the first string 
+*/
+gboolean at_the_first;
+
+/*
+*	... and if we're at the last string ....
+*/
+gboolean at_the_last;
 
 /*
 *	A simple file check .

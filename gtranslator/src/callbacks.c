@@ -185,9 +185,10 @@ on_first_button_pressed                (GtkButton       *button,
 	{
 		gtk_text_backward_delete(GTK_TEXT(text1),gtk_text_get_length(GTK_TEXT(text1)));
 		count=0;
-	    gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline[count],-1);
-        gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
+		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline[count],-1);
+	        gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
 	  	gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,sline[count],-1);
+		at_the_first=TRUE;
 	}
 	else
 	{
@@ -200,20 +201,27 @@ void
 on_back_button_pressed                 (GtkButton       *button,
                                         gpointer         user_data)
 {
-	if(file_opened==TRUE)
+	if(at_the_first==TRUE)
 	{
-		if(count<max_count)
-		{
-			gtk_text_backward_delete(GTK_TEXT(text1),gtk_text_get_length(GTK_TEXT(text1)));
-			count--;
-			gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline[count],-1);
-			gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
-			gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,sline[count],-1);
-		}
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("You're already at the first translatable string !"));
 	}
 	else
 	{
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Open a .po-file first !"));
+		if(file_opened==TRUE)
+		{
+			if(count<max_count)
+			{
+				gtk_text_backward_delete(GTK_TEXT(text1),gtk_text_get_length(GTK_TEXT(text1)));
+				count--;
+				gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline[count],-1);
+				gtk_text_backward_delete(GTK_TEXT(trans_box),gtk_text_get_length(GTK_TEXT(trans_box)));
+				gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,sline[count],-1);
+			}
+		}
+		else
+		{
+			gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Open a .po-file first !"));
+		}
 	}
 }
 
@@ -222,6 +230,7 @@ void
 on_next_button_pressed                 (GtkButton       *button,
                                         gpointer         user_data)
 {
+	at_the_first=FALSE;
 	if(file_opened==TRUE)
 	{
 		if(count<max_count)
@@ -247,6 +256,7 @@ void
 on_last_button_pressed                 (GtkButton       *button,
                                         gpointer         user_data)
 {
+	at_the_first=FALSE;
 	if(file_opened==TRUE)
 	{
 		if(max_count > 0)
@@ -273,9 +283,16 @@ void
 on_compile_button_pressed              (GtkButton       *button,
                                         gpointer         user_data)
 {
-	GtkWidget* comp_;
-	comp_=create_compiling_po();
-	gtk_widget_show(comp_);
+	if(file_opened==TRUE)
+	{
+		GtkWidget* comp_;
+		comp_=create_compiling_po();
+		gtk_widget_show(comp_);
+	}
+	else
+	{
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("No .po-file is opened at the moment !"));	
+	}
 }
 
 
@@ -307,15 +324,22 @@ void
 on_back1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	if(file_opened==TRUE)
+	if(at_the_first==TRUE)
 	{
-		count--;
-		gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline[count],-1);
-		gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,sline[count],-1);
+		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("You are at the first translatable string !"));
 	}
 	else
 	{
-		gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Open a .po-file first !"));
+		if(file_opened==TRUE)
+		{
+			count--;
+			gtk_text_insert(GTK_TEXT(text1),NULL,NULL,NULL,iline[count],-1);
+			gtk_text_insert(GTK_TEXT(trans_box),NULL,NULL,NULL,sline[count],-1);
+		}
+		else
+		{
+			gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Open a .po-file first !"));
+		}
 	}
 }
 
@@ -324,6 +348,7 @@ void
 on_next1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
+	at_the_first=FALSE;
 	if(file_opened==TRUE)
 	{
 		count++;
@@ -361,6 +386,7 @@ on_trans_box_changed                   (GtkWidget	*w,
 {
 	file_changed=TRUE;	
 	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_(""));
+	g_warning("File %s changed !",filename);
 }
 
 
