@@ -103,7 +103,7 @@ static void append_line(gchar ** old, const gchar * tail)
 				to_add[d++] = '\\';
 				to_add[d++] = tail[s];
 				g_warning
-				    ("New escaped char found: \\%c\nAddthis to parse.c, line %i",
+				    (_("New escaped char found: \\%c\nAdd this to parse.c, line %i."),
 				     tail[s], __LINE__);
 			}
 		} else {
@@ -188,7 +188,7 @@ static gboolean actual_parse(void)
 					goto ERRR;
 			} else {
 				ERRR:
-				error = g_strdup_printf("Error in file \"%s\"\nat line %d.\nPlease check the file and try again.", po->filename, lines);
+				error = g_strdup_printf(_("Error in file \"%s\"\nat line %d.\nPlease check the file and try again."), po->filename, lines);
 				gnome_app_error(GNOME_APP(app1), error);
 				g_free(error);
 				g_free(msg);
@@ -235,7 +235,7 @@ void parse(const char *filename)
 {
 
 	if ((!filename) || (filename[0] == '\0')) {
-		g_warning("There's no file to open!\n");
+		g_warning(_("There's no file to open!\n"));
 		return;
 	}
 
@@ -263,7 +263,7 @@ void parse(const char *filename)
 		free_a_message(header_li->data, NULL);
 		g_list_free_1(header_li);
 	} else
-		g_warning("The file has no header!");
+		g_warning(_("The file has no header!"));
 	
 	g_snprintf(status, sizeof(status),
 		   _("Successfully parsed the file \"%s\""), po->filename);
@@ -528,7 +528,7 @@ void compile(GtkWidget * widget, gpointer useless)
 		fgets(line, 128, fs);
 		g_strchomp(line);
 		g_snprintf(status, sizeof(status),
-		    _("Compile successful:\n%s"), line);
+		    _("Compile successfull:\n%s"), line);
 		gnome_app_message(GNOME_APP(app1), status);
 	}
 	fclose(fs);
