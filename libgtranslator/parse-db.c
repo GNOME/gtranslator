@@ -35,6 +35,7 @@ void parse_db_for_lang(gchar *language)
 {
 	gchar file[256];
 	gboolean lusp=FALSE;
+	xmlNodePtr node;
 	/**
 	* Check if we did get a language to search for ..
 	**/
@@ -60,6 +61,13 @@ void parse_db_for_lang(gchar *language)
 	* Parse the xml file.
 	**/
 	xmldoc=xmlParseFile(file);
+	/**
+	* Check the file ..
+	**/
+	parse_db_check(xmldoc);
+	/**
+	* If there's no such file print an error .
+	**/
 	if(xmldoc==NULL)
 	{
 		if(lusp==FALSE)
@@ -68,15 +76,65 @@ void parse_db_for_lang(gchar *language)
 		}
 		else
 		{
+			/**
+			* A string array and get the language name into the array's
+			*  first element.
+			**/
 			gchar **sarr;
 			sarr=g_strsplit(language,"_",1);
+			/**
+			* Print some information.
+			**/
 			g_print(_("Subclass file `%s.xml' not found.\n"),language);
 			g_print(_("Trying superclass-file `%s.xml' ...\n"),sarr[0]);
+			/**
+			* Recurse within the same function with the new language  word ..
+			**/
 			parse_db_for_lang(sarr[0]);
+			/**
+			* Free the string array.
+			**/
 			if(sarr)
 			{
 				g_strfreev(sarr);
 			}	
+		}
+	}
+	/**
+	* Allocate the db_list.
+	**/
+	db_list=g_list_alloc();
+	db_list=NULL;
+	/**
+	* Get the nodes.
+	**/
+	node=xmldoc->xmlRootNode->xmlChildrenNode;
+	while(node)
+	{
+		if(!strcmp(node->name, "msgid"))
+		{
+			xmlNodePtr newnode;
+			newnode=node->xmlChildrenNode;
+			g_print("Node: %s - %s\n",xmlGetProp(node, "name"),xmlNodeGetContent(newnode));
+		}
+		node=node->next;
+	}
+}
+
+gint parse_db_check(xmlDocPtr test)
+{
+	xmlNodePtr muhaha;
+	muhaha=xmlDocGetRootElement(test);
+	if(!muhaha)
+	{
+		xmlFreeDoc(test);
+		g_error(_("The message db file is empty!"));
+	}
+	else
+	{
+		if(strcmp(muhaha->name, "db"))
+		{
+			g_error(_("The message db doesn't seem to be a message db xml file."));
 		}
 	}
 }

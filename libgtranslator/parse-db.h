@@ -28,6 +28,16 @@
 #include <xmlmemory.h>
 
 /**
+* The messages structure headers.
+**/
+#include <messages.h>
+
+/**
+* The message db list.
+**/
+GList *db_list;
+
+/**
 * The doc-pointer.
 **/
 static xmlDocPtr xmldoc;
@@ -36,6 +46,11 @@ static xmlDocPtr xmldoc;
 * Loads the message db base for the specified language.
 **/
 void parse_db_for_lang(gchar *language_code);
+
+/**
+* Checks the type of the message db file.
+**/
+gint parse_db_check(xmlDocPtr testit);
 
 /**
 * Simply reloads the current message db.

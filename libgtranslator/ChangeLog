@@ -1,5 +1,23 @@
 2000-08-01  Fatih Demir	<kabalak@gmx.net>
 
+	* parse-db.c: Perform some checks for the file ( if it's
+		empty and if it's the right type 
+		 [ if it starts with a <db> type entry .. ] ).
+
+	* Makefile.am: Install the idl files into $(datadir)/idl;
+		use libtool to build the library and build also a
+		 dynamic version of it ( without version suffix ).
+		
+	* .cvsignore: Don't ignore all *.c/*.h files, just the ones
+		generated from gtranslatord.idl.
+		
+	* parse-db.h: Added it to the headers' list ( install it ).	
+		
+	* gtranslator.idl: Removed it.	
+
+	* gtranslatord.idl: Get rid of the warnings; don't
+		use underscores.
+
 	* Makefile.am: Added gtranslator.idl to the sources
 		and to the clean target; added the message-db.d
  		 dir define.

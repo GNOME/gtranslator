@@ -1,35 +1,37 @@
 # the Makefile.am for libgtranslator
 
-noinst_LIBRARIES = libgtranslator.a
+lib_LTLIBRARIES = libgtranslator.la
 
 INCLUDES = -I$(includedir) $(IDL_CFLAGS) \
 	$(GLIB_CFLAGS) $(GNOME_CFLAGS) \
-	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\" \
-	$(XML_CFLAGS) -I../src
+	$(OAF_CFLAGS) $(XML_CFLAGS) -I../src \
+	-DMESSAGE_DB_DIR=\"@MESSAGE_DB_DIR@/message-db.d\"
 
-libgtranslator_a_SOURCES = $(GTRANSLATORD_SOURCES) \
-	$(GTRANSLATOR_EXTRA_SOURCES) \
+libgtranslator_la_SOURCES = $(GTRANSLATORD_SOURCES) \
 	parse-db.c
 
-noinst_HEADERS = parse-db.h
+libgtranslator_la_LDFLAGS = -avoid-version
+
+libgtranslator_la_LIBADD = $(IDL_LIBS) $(GLIB_LIBS) \
+	$(XML_LIBS) $(OAF_LIBS)
+
+libgtranslator_include_dir = $(includedir)/libgtranslator
+
+libgtranslator_include__DATA = parse-db.h
+
+idl_dir = $(datadir)/idl
+
+idl__DATA = gtranslatord.idl
 
 GTRANSLATORD_SOURCES = gtranslatord.h \
 	gtranslatord-common.c \
 	gtranslatord-skels.c \
 	gtranslatord-stubs.c
 
-GTRANSLATOR_EXTRA_SOURCES = gtranslator.h \
-	gtranslator-common.c \
-	gtranslator-skels.c \
-	gtranslator-stubs.c
-
 $(GTRANSLATORD_SOURCES): gtranslatord.idl
 	orbit-idl $(IDL_CFLAGS) gtranslatord.idl
 
-$(GTRANSLATOR_EXTRA_SOURCES): gtranslator.idl
-	orbit-idl $(IDL_CFLAGS) gtranslator.idl
-
 clean-am:
-	-rm -f $(GTRANSLATORD_SOURCES) $(GTRANSLATOR_EXTRA_SOURCES)
+	-rm -f $(GTRANSLATORD_SOURCES)
 
-EXTRA_DIST = gtranslatord.idl gtranslator.idl
+EXTRA_DIST = $(idl__DATA)
