@@ -16,6 +16,10 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
+ 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include "convert.h"
 #include "syntax.h"
@@ -36,6 +40,8 @@
  */
 gboolean gtranslator_utf8_po_file_is_utf8()
 {
+	g_return_val_if_fail(file_opened!=FALSE, FALSE);
+	g_return_val_if_fail(po->header!=NULL, FALSE);
 	g_return_val_if_fail(po->header->charset!=NULL, FALSE);
 
 	if(!g_strcasecmp(po->header->charset, "utf-8") ||
