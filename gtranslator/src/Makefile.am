@@ -1,11 +1,16 @@
+## ------------------------------------------------------
 ## Process this file with automake to produce Makefile.in
+## ------------------------------------------------------
+## Put the -DDEBUGGY , so on CVS a debuggable version 
+## should be build , too .
+## ------------------------------------------------------
 
 scriptsdir = $(datadir)/$(PACKAGE)/scripts/
 
 INCLUDES = \
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR)  \
-	-DSCRIPTS_DIR=\""$(scriptsdir)"\"
+	-DSCRIPTS_DIR=\""$(scriptsdir)"\" -DDEBUGGY
 
 bin_PROGRAMS = gtranslator
 
