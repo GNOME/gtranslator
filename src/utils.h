@@ -37,6 +37,11 @@
 gchar *gtranslator_utils_get_raw_file_name(gchar *filename);
 
 /*
+ * Remove the possibly generated temporary file of gtranslator.
+ */
+void gtranslator_utils_remove_temp_file(void); 
+
+/*
  * Returns a list of (full) filenames matching the given parameters in ths
  *  given directory; extension means extension _with_ point (".xml").
  */

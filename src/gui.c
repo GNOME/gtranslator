@@ -271,8 +271,6 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	/*
 	 * Free the undo/redo lists on exit.
 	 */
-	gtranslator_undo_get_undo_list();
-	gtranslator_redo_get_redo_list();
 	gtranslator_undo_free_lists();
 	
 	/*
@@ -280,6 +278,11 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	 */
 	gtranslator_preferences_free();
 	gnome_regex_cache_destroy(rxc);
+
+	/*
+	 * Remove any lungering temp. file.
+	 */
+	gtranslator_utils_remove_temp_file();
 	
 	/*
 	 * Store the current date.

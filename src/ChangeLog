@@ -1,13 +1,27 @@
+2001-05-28  Fatih Demir <kabalak@gtranslator.org>
+
+	* sidebar.c: Re-mark the sidebar strings for translation.
+
+	* gui.c: Also remove the temp. file exit; removed the undo/redo
+		debug messages from the code.
+
+	* main.c: Use the new function to clean up the temp file on startup.
+
+	* utils.c/.h: New util function "gtranslator_utils_remove_temp_file"
+		which cleans up the gtranslator-generated temp. file in the
+		 user's home dir; also include <libgnome/gnome-util.h> for
+		  g_file_exists function.
+
 2001-05-27  Fatih Demir <kabalak@gtranslator.org>
 
 	* parse.c/.h: Renamed "actual_write" to "gtranslator_save_file" and
 		made it be declared publically.
 
-	* menus.c & prefs.c: Use "po file" stringenlty everywhere instead of
+	* menus.c & prefs.c: Use "po file" stringently everywhere instead of
 		"po-file" in strings.
 
-	* parse.c/.h: Call up "gtranslator_file_dialogs_store_directory" from the
-		"actual_write" function to store the directory name.
+	* parse.c/.h: Call up "gtranslator_file_dialogs_store_directory" from
+		the "actual_write" function to store the directory name.
 
 	* parse.c/.h & dialogs.c: Renamed "parse_the_file" to the better name
 		"gtranslator_parse_the_file_from_file_dialog".

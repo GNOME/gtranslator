@@ -247,20 +247,12 @@ int main(int argc, char *argv[])
 	 */
 	gtranslator_create_main_window();
 	gtranslator_utils_restore_geometry(gtranslator_geometry);
-	
-	/*
-	 * Check if a temporary file from the last session had been
-	 *  left.
-	 */
-	sp_file=g_strdup_printf("%s/%s", g_get_home_dir(),
-		"gtranslator-temp-po-file");
-	
-	if(g_file_exists(sp_file))
-	{
-		unlink(sp_file);
-	}
 
-	g_free(sp_file);
+	/*
+	 * Clean up the temporary file in the user's home dir eventually 
+	 *  created by gtranslator.
+	 */
+	gtranslator_utils_remove_temp_file();
 
 	/*
 	 * Test if there's a crash recovery file lying around in ~.

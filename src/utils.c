@@ -27,8 +27,10 @@
 
 #include <dirent.h>
 
-#include <libgnome/gnome-url.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-url.h>
+#include <libgnome/gnome-util.h>
+
 #include <libgnomeui/libgnomeui.h>
 
 /*
@@ -66,6 +68,25 @@ gchar *gtranslator_utils_get_raw_file_name(gchar *filename)
 	}
 
 	g_string_free(o, FALSE);
+}
+
+/*
+ * Remove the gtranslator-generated temp.-file.
+ */
+void gtranslator_utils_remove_temp_file()
+{
+	gchar *tempfile=g_strdup_printf("%s/gtranslator-temp-po-file", 
+		g_get_home_dir());
+
+	/*
+	 * Test if the file is present and clean it up.
+	 */
+	if(g_file_exists(tempfile))
+	{
+		unlink(tempfile);
+	}
+
+	g_free(tempfile);
 }
 
 /*
