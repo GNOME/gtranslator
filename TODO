@@ -1,33 +1,29 @@
-Things that need attention:
+###############################################################
+### TODO for gtranslator :                                    #
 
-    - The file containing the msgstr's has an extra empty
-      line at the top. So all messages are off by one. I
-      think the problem is in the scripts. And probably
-      it's related to the next problem.
-      
-    - msgid's starting on the line following msgid "" aren't
-      taken into account. ie
-      msgid ""
-      "The string starts on this line"
-      msgstr ""
-      "The translation starts here"
-      
-    - sed is not found if it's in /bin
-    
-    - the scripts use /usr/share/ even if the default (/usr/local/share)
-      is used. The problem is in using gnome-config to add $DATADIR when
-      installing in a different prefix than gnome-libs is in.
++-> Jumps to last/first/next/prev. untranslated message
+	( the framework for this is done -> src/messages.h )
 
-    - segfault if you walk backwards past the first message
-    
-    - segfault when walking back and forth a few times
++-> Build/open/save/append etc. the msg_db ...
 
-    - segfault when pressing "Last" button sometimes
-    
-    - could some of the code from emacs' po-mode.el be stolen for
-      handling of .po files?
-      
-    - gettext's po-mode.el contains regexps for a complete msgid and
-      msgstr, maybe use these to fix the two first problems.
++-> Much more translation files ( yes, the .po files we're 
+	working for ... )
 
-    - 
++-> Search option for the db ....
+
++-> Drag'n Drop support ...
+
++-> Make it ready for Gnome 2.0 techniques ...
+
++-> Bonobo-tech ( especially the msg_db component could be
+	"misused" for some other sensefull work ) ...
+
++-> Make this "wishlist" a little bit lighter ...
+
+###############################################################
+
+By the CVS trips, add everything you'd wish from gtranslator
+here ( if it'll be done is another story ... :)) .
+
+	(Fatih Demir)->(kabalak@gmx.net)->(200-04-13)
+###############################################################
