@@ -352,11 +352,11 @@ void edit_header(GtkWidget * widget, gpointer useless)
 	    attach_entry_with_label(prj_page, 2, _("Project version:"),
 	    			    ph->prj_version, edit_header_changed);
 	pot_date =
-	    attach_entry_with_label(prj_page, 3, _("pot file creation date:"),
+	    attach_entry_with_label(prj_page, 3, _("Pot file creation date:"),
 				    ph->pot_date, edit_header_changed);
 	gtk_widget_set_sensitive(pot_date, FALSE);
 	po_date =
-	    attach_entry_with_label(prj_page, 4, _("po file revision date:"),
+	    attach_entry_with_label(prj_page, 4, _("Po file revision date:"),
 				    ph->po_date, edit_header_changed);
 	gtk_widget_set_sensitive(po_date, FALSE);
 

@@ -704,13 +704,15 @@ static void invert_dot(gchar *str)
 
 	for(i=0; str[i] != '\0'; i++) {
 		if(str[i]==' ') {
-			/* The "·" is the "middle dot" (00B7), it is
+			/*
+			 * The "·" is the "middle dot" (00B7), it is
 			 * used by gtranslator as special char to make
 			 * blanks visible.
 			 * If your language uses that char for another
 			 * purpose or if you use another enocoding
 			 * than latin1, feel free to change it to
-			 * whatever you think will be better */
+			 * whatever you think will be better 
+			 */
 			str[i]=(_("·"))[0];
 		} else if(str[i]==(_("·"))[0]) {
 			str[i]=' ';

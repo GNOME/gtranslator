@@ -237,7 +237,7 @@ void prefs_box(GtkWidget  * widget, gpointer useless)
 	 * The tables for holding all the entries below.
 	 */
 	first_page = append_page_table(prefs, 3, 2, _("Personal informations"));
-	second_page = append_page_table(prefs, 5, 2, _("Language"));
+	second_page = append_page_table(prefs, 5, 2, _("Language settings"));
 	third_page = append_page_table(prefs, 4, 1, _("Po file editing"));
 	fourth_page = append_page_table(prefs, 5, 1, _("Miscellaneous"));
 	fifth_page = append_page_table(prefs, 4, 2, _("Recent files & spell checking"));
