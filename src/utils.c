@@ -628,6 +628,7 @@ gfloat gtranslator_utils_calculate_similarity(const gchar *a, const gchar *b)
 	{
 		if((a[i] <= 32) || (b[i] <= 32))
 		{
+			i++;
 			continue;
 		}
 		else if(a[i]==b[i])
