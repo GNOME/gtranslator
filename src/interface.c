@@ -9,7 +9,7 @@
  **/
 
 #ifdef HAVE_CONFIG_H
-#        include <config.h>
+	#include <config.h>
 #endif
 
 #include <sys/types.h>
@@ -226,6 +226,10 @@ create_app1 (void)
 				tmp_toolbar_icon , NULL, NULL);
 	gtk_widget_show(po_button);
 	/**
+	 * Add a spacer element ..
+	 **/
+	gtk_toolbar_append_space(GTK_TOOLBAR(search_bar));
+	/**
 	 * Now the old ones ( from GLADE-times .. ) :
 	 **/
 	tmp_toolbar_icon = gnome_stock_pixmap_widget (app1, GNOME_STOCK_PIXMAP_CONVERT);
@@ -342,7 +346,7 @@ create_app1 (void)
 	gtk_text_set_editable (GTK_TEXT (trans_box), TRUE);
 	gtk_widget_realize (trans_box);
 
-	appbar1 = gnome_appbar_new (TRUE ,FALSE , GNOME_PREFERENCES_NEVER);
+	appbar1 = gnome_appbar_new (TRUE ,TRUE , GNOME_PREFERENCES_NEVER);
 	gtk_widget_show (appbar1);
 	gnome_app_set_statusbar (GNOME_APP (app1), appbar1);
 
@@ -410,7 +414,7 @@ create_about1 (void)
         about1 = gnome_about_new ("gtranslator", VERSION,
                               _("(C) 1999-2000 Fatih Demir ( kabalak@gmx.net )"),
                               authors,
-                              _("gtranslator is a GnomeApplication for translating .po-files more comfortable than in (X)Emacs .\nTill now you can't see much , but that will change !"),
+                              _("gtranslator is a Gnome Application for translating .po-files more comfortable than in (X)Emacs .\nTill now you can't see much , but that will change !"),
                               NULL);
         gtk_widget_set_name (about1, "about1");
         gtk_object_set_data (GTK_OBJECT (about1), "about1", about1);

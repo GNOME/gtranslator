@@ -9,7 +9,7 @@
  **/
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+	#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -45,7 +45,7 @@ on_open1_activate                      (GtkMenuItem     *menuitem,
 	GtkWidget* open_my_file;
 	open_my_file=create_open_file();
 	gtk_widget_show(open_my_file);
-	// gnome_appbar_set_status(GNOME_APPBAR(appbar1),"Open->");
+	gnome_appbar_set_status(GNOME_APPBAR(appbar1),_("Open"));
 }
 
 
