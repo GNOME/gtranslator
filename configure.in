@@ -82,10 +82,10 @@ if test "x$enable_emacs_lover" = "xyes" ; then
 	AC_DEFINE(EMACS_LOVER)
         AC_MSG_RESULT(["Ha!"
 "********** You are an _X_Emacs lover!"
-" I will convince you to use gtranslator later on .."])
+"********** I will convince you to use gtranslator later on."])
 else
         AC_MSG_RESULT(["Well done!"
-"********** You get the original about message ... "])
+"********** You get the original about message ..."])
 fi
 
 dnl -------------------------------------------------------------------
@@ -93,7 +93,9 @@ dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
 GNOME_COMPILE_WARNINGS
 
-
+dnl -------------------------------------------------------------------
+dnl Put out the configured files.
+dnl -------------------------------------------------------------------
 AC_OUTPUT([
 Makefile
 data/Makefile
@@ -106,3 +108,20 @@ src/Makefile
 intl/Makefile
 po/Makefile.in
 ])
+
+dnl ------------------------------------------------------------------
+dnl Print an information screen at the end of the process
+dnl ------------------------------------------------------------------
+echo "
+------------------------------------------------------------------
+-- gtranslator compilage options
+
+gtranslator version	:	${VERSION}
+
+bind the po-files  
+ with gtranslator  	:	${enable_mime_bind:-possibly}	
+
+(X)Emacs-friendly
+ about message     	:	${enable_emacs_lover:-possibly}
+------------------------------------------------------------------
+"
