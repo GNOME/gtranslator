@@ -860,6 +860,22 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		replaceme=gtk_editable_get_chars(GTK_EDITABLE(
 			gnome_entry_gtk_entry(GNOME_ENTRY(replacy))), 0, -1);
 
+		if(!findme || strlen(findme)<=0)
+		{
+			gnome_app_error(GNOME_APP(gtranslator_application),
+				_("Please enter a string to replace!"));
+
+			return;
+		}
+
+		if(!replaceme || strlen(replaceme)<=0)
+		{
+			gnome_app_error(GNOME_APP(gtranslator_application),
+				_("Please enter a string to replace with!"));
+
+			return;
+		}
+
 		if(reply==1)
 		{
 			rpl=gtranslator_replace_new(findme, replaceme, TRUE, 0,
