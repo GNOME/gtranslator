@@ -462,7 +462,9 @@ void create_app1(void)
 			   GTK_SIGNAL_FUNC(gtranslator_quit), NULL);
 	gtk_signal_connect(GTK_OBJECT(trans_box), "changed",
 			   GTK_SIGNAL_FUNC(text_has_got_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(vbox1), "button_press_event",
+	gtk_signal_connect(GTK_OBJECT(text1), "button_press_event",
+			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
+	gtk_signal_connect(GTK_OBJECT(trans_box), "button_press_event",
 			   GTK_SIGNAL_FUNC(create_popup_menu), NULL);
 	/**
 	* The D'n'D signals

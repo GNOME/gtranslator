@@ -42,18 +42,6 @@ void gtranslator_config_init()
 	client=gconf_client_get_default();
 	gconf_client_add_dir(client,"/apps/gtranslator",
 		GCONF_CLIENT_PRELOAD_NONE, &error);
-	/**
-	* Check for error descriptions.
-	**/	
-	if(error)
-	{
-		g_warning(_("Error during GConf initialization through libgtranslator:\n%s"),
-			error->message);
-		/**
-		* Clean up the error.
-		**/
-		g_clear_error(&error);	
-	}
 	#else
 	gnome_config_push_prefix("/gtranslator/");
 	#endif
