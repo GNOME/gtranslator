@@ -1,0 +1,33 @@
+.TH "nautilus-gtranslator-view" "1" "@VERSION@" "Fatih Demir" "Nautilus views"
+.SH "NAME"
+.LP 
+nautilus\-gtranslator\-view \-\- a Nautilus view based on gtranslator's sources and a "preview" view for al kinds of po files which gtranslator can also open.
+.SH "SYNTAX"
+.LP 
+nautilus\-gtranslator\-view
+.SH "DESCRIPTION"
+.LP 
+nautilus\-gtranslator\-view allows you to preview gettext po files and all kind of relatives of gettext po files within Nautilus.
+.TP 
+You can also edit some parts of the po file within the view itself or open gtranslator for full editing of the po file.
+.SH "OPTIONS"
+.LP 
+.TP 
+\fB\-\-help\fR
+Shows you a small help screen with the standard Gtk+/GNOME command line options.
+.TP 
+\fB\-\-version\fR
+Prints out the nautilus\-gtranslator\-view version.
+.SH "FILES"
+.LP 
+\fIGNOMEPREFIX/share/gnome/ui/nautilus\-gtranslator\-view\-ui.xml\fP
+.TP 
+The Bonobo ui file is stored here.
+.TP 
+.br 
+\fIGNOMEPREFIX/share/oaf/Nautilus_Gtranslator_View.oaf\fP 
+.TP 
+The oaf file for nautilus\-gtranslator\-view is stored there (without the oaf file the view will not work inside Nautilus).
+.SH "AUTHORS"
+.LP 
+Fatih Demir <kabalak@gtranslator.org>
