@@ -100,8 +100,13 @@ AM_PATH_GCONF(0.9.0,,gconf_is_present=no,gconf-gtk)
 if test "q$gconf_is_present" = "qno" ; then
 	AC_MSG_RESULT([********** Will NOT use GConf ...])
 else
+	if test "ENV$NO_GCONF" = "ENVyes" ; then
+	gconf_is_present=no
+	AC_MSG_RESULT([********** Won't use the found GConf as \$NO_GCONF is set to "yes" ...])
+	else
 	AC_MSG_RESULT([********** Will use GConf ...])
 	AC_DEFINE(GCONF_IS_PRESENT)
+	fi
 fi
 GNOME_CFLAGS=`gnome-config --cflags gnome`
 GNOME_LIBS=`gnome-config --libs gnome`
