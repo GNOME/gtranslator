@@ -30,6 +30,7 @@
 typedef struct
 {
 	gchar	*temp_filename;
+	gchar	*check_filename;
 	gchar	*crash_filename;
 	gchar	*backend_filename;
 	
