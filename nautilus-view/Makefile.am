@@ -19,7 +19,8 @@ INCLUDES = \
 
 nautilus_gtranslator_view_SOURCES = \
 	main.c \
-	nautilus-gtranslator-view.c
+	nautilus-gtranslator-view.c \
+	nautilus-gtranslator-view.h
 
 nautilus_gtranslator_view_DEPENDENCIES = \
 	$(sourcedir)/about.o \
