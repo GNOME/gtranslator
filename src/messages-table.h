@@ -39,9 +39,14 @@ enum
  * Returns the ready widget with all the specs.
  */
 GtkWidget *gtranslator_messages_table_new(void);
+
+/*
+ * Clear the table
+ */
+void gtranslator_messages_table_clear(void);
  
 /*
- * Clear the table and populate with the messages
+ * Populate table with the messages
  */
 void gtranslator_messages_table_create(void);
 

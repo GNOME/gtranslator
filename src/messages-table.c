@@ -373,25 +373,43 @@ GtkWidget *gtranslator_messages_table_new()
 }
 
 /*
- * Clear the table if it exists and populate with the messages
+ * Clear the table
+ */
+void gtranslator_messages_table_clear(void)
+{
+	if(root_node)
+	{
+		e_tree_memory_node_remove(tree_memory, root_node);
+		root_node=NULL;
+	}
+	
+	if(hash_table)
+	{
+		g_hash_table_destroy(hash_table);
+		hash_table=NULL;
+	}
+}		
+
+/*
+ * Populate with the messages
  */
 void gtranslator_messages_table_create (void)
 {
-	GList *list=po->messages;
+	GList *list;
 	gint i=0;
-	
-	if(root_node)
-		e_tree_memory_node_remove (tree_memory, root_node);
-	root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
-	e_tree_root_node_set_visible (E_TREE(tree), FALSE);
-	
-	if(hash_table)
-		g_hash_table_destroy(hash_table);
-	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
 	
 	if(!file_opened)
 		return;
-
+	
+	list=po->messages;
+	
+	gtranslator_messages_table_clear();
+	
+	root_node = e_tree_memory_node_insert (tree_memory, NULL, 0, NULL);
+	e_tree_root_node_set_visible (E_TREE(tree), FALSE);
+	
+	hash_table=g_hash_table_new(g_direct_hash, g_direct_equal);
+	
 	while(list)
 	{
 		GtrMsg *message=list->data;
