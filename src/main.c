@@ -78,14 +78,17 @@ static struct poptOption gtranslator_options[] = {
 	 	NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
 	 	0, NULL, NULL
 	},
+	/* FIXME: Enable again if working...
 	{
 		"auto-translate", 'a', POPT_ARG_STRING, &auto_translate_file,
 		0, N_("Auto translate the po file & exit"), N_("FILENAME")
 	},
+	*/
 	{
 		"build-information", 'b', POPT_ARG_NONE, &build_information,
 		0, N_("Show build information/specifications"), NULL
 	},
+	/* FIXME: Enable when working again...
 	{
 		"export-learn-buffer", 'e', POPT_ARG_STRING, &exporting_po_file,
 		0, N_("Export learn buffer to a plain po file"), N_("PO_FILE")
@@ -94,6 +97,7 @@ static struct poptOption gtranslator_options[] = {
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
 		0, N_("Specify main window geometry"), N_("GEOMETRY")
 	},
+	*/
 	{
 		"learn", 'l', POPT_ARG_STRING, &learn_file,
 		0, N_("Learn the file completely & exit"), N_("FILENAME")
@@ -102,10 +106,12 @@ static struct poptOption gtranslator_options[] = {
 		"webalize", 'w', POPT_ARG_STRING, &save_html_output_file,
 		0, N_("HTML file to write to"), N_("HTMLFILE")
 	},
+	/* FIXME: Enable when it works again...
 	{
 		"nosyntax", 'y', POPT_ARG_NONE, &nosyntax,
 		0, N_("Don't highlight syntax"), NULL 
 	},
+	*/
 	POPT_AUTOHELP {NULL}
 };
 
@@ -119,12 +125,6 @@ int main(int argc, char *argv[])
 	const char 	**args=NULL;
 	
 	GError		*error=NULL;
-
-	/*
-	 * FIXME: Temporary Semerkent check...
-	 */
-	SemerFile	*semerfile=NULL;
-	SemerEntry	*semerentry=NULL;
 
 	/*
 	 * Initialize gettext.
@@ -170,47 +170,6 @@ int main(int argc, char *argv[])
 	/* XXX fix it! */
 	// 0, &context);
 
-	/*
-	 * FIXME: Temporary chech for Semerkent...
-	 */
-	semerkent_init();
-	
-	semerfile=semer_file_new();
-	semer_file_set_filename(semerfile, "Gtranslator_Test_TMX.xml");
-	semerfile->type=SEMER_TMX;
-
-	semerentry=semer_entry_new_with_specs(NULL,
-		"Yessss, it works!", "EN-US",
-		"Yeaaahaha, gnanaaaa waaa!", "EN-GTRANSLATOR",
-		"A test string for the Semerkent integration in gtranslator.");
-	semer_file_add_entry(semerfile, semerentry);
-	semer_entry_free(semerentry);
-
-	semerentry=semer_entry_new_with_specs(NULL,
-		"Naaaaa, maybe not?!", "EN-US",
-		"Uhm *pos*!!!", "EN-GTRANSLATOR",
-		"Another test string...");
-	semer_file_add_entry(semerfile, semerentry);
-	semer_entry_free(semerentry);
-
-	semer_tmx_save_file(semerfile);
-
-	semer_file_set_filename(semerfile, "Gtranslator_Test_UMTF.xml");
-	semerfile->type=SEMER_UMTF;
-	semer_umtf_save_file(semerfile);
-
-	semer_file_set_filename(semerfile, "Gtranslator_Test_OpenTag.otf");
-	semerfile->type=SEMER_OPENTAG;
-	semer_opentag_save_file(semerfile);
-
-	semer_file_set_filename(semerfile, "Gtranslator_Test_CSV.csv");
-	semerfile->type=SEMER_CSV;
-	semer_csv_save_file(semerfile);
-	
-	semer_file_free(semerfile);
-		
-	semerkent_shutdown();
-	
 	/*
 	 * Show up build information if desired.
 	 */
