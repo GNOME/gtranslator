@@ -114,7 +114,7 @@ void gtranslator_parse(const gchar *filename)
 	else
 	{
 		po->utf8=FALSE;
-		po->locale_charset=NULL;
+		po->locale_charset=gtranslator_utils_get_locale_charset();
 	}
 
 	/*
