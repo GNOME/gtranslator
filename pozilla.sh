@@ -26,7 +26,7 @@ no_personal_information_message () {
 #
 # Pozilla has got also releases :-)
 # 
-export POZILLA_RELEASE=4.1
+export POZILLA_RELEASE=4.2
 
 #
 # Here we do define the corresponding i18n mailing list
@@ -587,7 +587,13 @@ for i in $PO_FILES
 	cp $i $i.backup
 	language=`basename $i .po|sed -e s/\.Big5//g -e s/\.GB2312//g`
 	
-	merge_status=`OLD_PO_FILE_INPUT=yes msgmerge $i $PACKAGE.pot -o $i 2>&1`
+	merge_status=`msgmerge $i $PACKAGE.pot -o $i 2>&1`
+
+	if echo $merge_status|grep -sq invalid\ control ; then
+		extra_args="OLD_PO_FILE_INPUT=yes"
+	fi
+
+	merge_status=`$extra_args msgmerge $i $PACKAGE.pot -o $i 2>&1`
 	
 	if echo $merge_status|grep -sq warning ; then
 		mv $i.backup $i
@@ -608,7 +614,7 @@ $language\t\t------------- Failure due to an error -------------"
 	#
 	# Get the values for the messages statistics.
 	#
-	statistics=(`OLD_PO_FILE_INPUT=yes msgfmt -v $i 2>&1`)
+	statistics=(`$extra_args msgfmt -v $i 2>&1`)
 	translated=${statistics[0]}
 	fuzzy=${statistics[3]:-0}
 	untranslated=${statistics[6]:-0}
@@ -623,7 +629,7 @@ $language\t\t$messages\t\t$translated\t\t$percent%\t\t$missing"
 	#
 	# Compile the current merged po file.
 	#
-	msgfmt -vv $i 2>/dev/null
+	$extra_args msgfmt -vv $i 2>/dev/null
 	
 	#
 	# Only operate if we don't need to run drily or to send personal mails.
