@@ -29,7 +29,7 @@ gtranslator_man__DATA = \
 	$(nv_man) \
 	$(pozilla_man)
 
-clean-generic:
+clean-am:
 	@-rm -f $(gtranslator_man__DATA)
 
 EXTRA_DIST = \
