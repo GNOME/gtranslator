@@ -3,8 +3,10 @@
 ##
 ## First set the default subdirs.
 ##
-DEFAULT_SUBDIRS = desktop \
-		scripts
+DEFAULT_SUBDIRS = \
+	colorschemes \
+	desktop \
+	scripts
 
 ##
 ## Extend it with the gconf-files if it's detected.
@@ -25,6 +27,19 @@ MIME_SUBDIRS =
 endif
 
 ##
+## The nautilus-gtranslator-view subdirectories.
+##
+if BUILD_NV
+NV_DIRS = oaf ui
+else
+NV_DIRS =
+endif
+
+##
 ## And now the complete subdirs
 ##
-SUBDIRS = ${DEFAULT_SUBDIRS} ${GCONF_SUBDIRS} ${MIME_SUBDIRS}
+SUBDIRS = \
+	$(DEFAULT_SUBDIRS) \
+	$(GCONF_SUBDIRS) \
+	$(MIME_SUBDIRS) \
+	$(NV_DIRS) 
