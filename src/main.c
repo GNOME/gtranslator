@@ -85,6 +85,7 @@ int main(int argc, char *argv[])
 	GnomeClientFlags flags;
 	poptContext context;
 	const char **args;
+	gchar *sp_file;
 	
 	/*
 	 * GConf error handling variable.
@@ -167,24 +168,26 @@ int main(int argc, char *argv[])
 	 * Check if a temporary file from the last session had been
 	 *  left.
 	 */
-	if(g_file_exists(g_strdup_printf("%s/%s",
-				g_get_home_dir(),
-				"gtranslator-temp-po-file")))
+	sp_file=g_strdup_printf("%s/%s", g_get_home_dir(),
+		"gtranslator-temp-po-file");
+	
+	if(g_file_exists(sp_file))
 	{
-		unlink(g_strdup_printf("%s/%s",
-				g_get_home_dir(), 
-				"gtranslator-temp-po-file"));
+		unlink(sp_file);
 	}
 
 	/*
 	 * Test if there's a crash recovery file lying around in ~.
-	 */ 
-	if(g_file_exists(g_strdup_printf("%s/%s", 
-				g_get_home_dir(),
-				".crash-gtranslator.po")))
+	 */
+	sp_file=g_strdup_printf("%s/%s", g_get_home_dir(),
+		".crash-gtranslator.po");
+	
+	if(g_file_exists(sp_file))
 	{
 		crash_recovery_dialog();
 	}
+
+	g_free(sp_file);
 	
 	/*
 	 * Load the given color scheme file.

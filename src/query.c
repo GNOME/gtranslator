@@ -38,6 +38,7 @@ gchar *setup_language(gchar *lang);
 GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 {
 	gchar *str;
+	gchar *originallang;
 
 	g_return_val_if_fail(query!=NULL, NULL);
 	g_return_val_if_fail(query->domain!=NULL, NULL);
@@ -45,9 +46,21 @@ GtrQueryResult *gtranslator_query_simple(GtrQuery *query)
 
 	query->language=setup_language(query->language);
 	
-	setlocale(LC_ALL, query->language);
+	/*
+	 * Rescue the current locale.
+	 */
+	originallang=setlocale(LC_ALL, NULL);
 
+	/*
+	 * Query the under the preferences' language.
+	 */
+	setlocale(LC_ALL, query->language);
 	str=dgettext(query->domain, query->message);
+
+	/*
+	 * And now reset the language locale to it's original settings.
+	 */
+	setlocale(LC_ALL, originallang);
 
 	if(strcmp(str, query->message))
 	{
@@ -169,7 +182,7 @@ GList *gtranslator_query_domains(const gchar *directory)
 {
 	struct dirent *entry;
 	DIR *dir;
-	GList *domains=NULL;
+	GList *domainlist=NULL;
 		
 	g_return_val_if_fail(directory!=NULL, NULL);
 	
@@ -204,16 +217,16 @@ GList *gtranslator_query_domains(const gchar *directory)
 			 */
 			if(domainname)
 			{
-				domains=g_list_append(domains, domainname);
+				domainlist=g_list_append(domainlist, domainname);
 			}
 		}
 	}
 
 	closedir(dir);
 
-	domains=g_list_sort(domains, (GCompareFunc) strcmp);
+	domainlist=g_list_sort(domainlist, (GCompareFunc) strcmp);
 
-	return domains;
+	return domainlist;
 }
 
 /*

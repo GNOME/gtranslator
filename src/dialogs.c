@@ -570,14 +570,13 @@ void query_dialog(void)
 	GtkWidget *query_entry;
 	GtkWidget *domain;
 	GtkWidget *label;
-	gchar *query_text;
 	GList *domains=NULL;
+	gchar *query_text;
 	gint reply;
 	
 	#define add2Box(x); \
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dialog)->vbox), x, \
 		FALSE, FALSE, 0);
-	
 
 	query_text=g_strdup_printf("%s/%s/%s", GNOMELOCALEDIR, lc,
 		"LC_MESSAGES");
@@ -616,7 +615,7 @@ void query_dialog(void)
 
 	reply=gnome_dialog_run(GNOME_DIALOG(dialog));
 
-	if(reply==GNOME_NO)
+	if(reply==GNOME_CANCEL)
 	{
 		gnome_dialog_close(GNOME_DIALOG(dialog));
 
@@ -624,10 +623,8 @@ void query_dialog(void)
 	}
 	else if(reply==GNOME_YES)
 	{
-		gchar *text;
-
-		text=gtk_editable_get_chars(GTK_EDITABLE(gnome_entry_gtk_entry(
-			GNOME_ENTRY(query_entry))), 0, -1);
+		gchar *text=gtk_editable_get_chars(GTK_EDITABLE(
+		gnome_entry_gtk_entry(GNOME_ENTRY(query_entry))), 0, -1);
 
 		if(!text)
 		{
@@ -638,11 +635,15 @@ void query_dialog(void)
 		{
 			GtrQuery *query;
 			GtrQueryResult *result;
+			gchar *text;
 			
 			query->message=text;
 			query->language=lc;
-			query->domain=gtk_editable_get_chars(GTK_EDITABLE(
+			text=gtk_editable_get_chars(GTK_EDITABLE(
 				GTK_COMBO(domain)->entry), 0, -1);
+
+			query->domain=text;
+			g_free(text);
 
 			result=gtranslator_query_simple(query);
 
@@ -650,6 +651,8 @@ void query_dialog(void)
 			{
 				gnome_app_warning(GNOME_APP(app1),
 				_("Couldn't find any result for the query!"));
+
+				gnome_dialog_close(GNOME_DIALOG(dialog));
 			}
 			else
 			{
@@ -661,6 +664,8 @@ void query_dialog(void)
 				g_free(resulttext);
 
 				gnome_dialog_close(GNOME_DIALOG(dialog));
+
+				g_free(result);
 			}
 		}
 	}
