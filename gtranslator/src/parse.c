@@ -11,7 +11,7 @@
 */
 const char *idf,*strf,*homedir;
 FILE *is,*os;
-
+int old_count;
 
 void home_maker()
 {
@@ -83,6 +83,8 @@ void parse()
 		count++;
 	}
 	max_count=((count - 10 ) / 3);
+	old_count=count;
+		
 }
 
 /*
