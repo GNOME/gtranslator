@@ -67,4 +67,4 @@ gtranslator_LDADD = \
 	$(XML_LIBS) \
 	$(vfs_libs)
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST = ChangeLog pixmaps/untrans.xpm
