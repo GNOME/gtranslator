@@ -60,7 +60,7 @@ static gchar 	*gtranslator_geometry=NULL;
 static gchar 	*save_html_output_file=NULL;
 static gchar 	*domains_dir=NULL;
 static gchar	*learn_file=NULL;
-static gboolean	build_informations=FALSE;
+static gboolean	build_information=FALSE;
 static gboolean	no_modules=FALSE;
 
 /*
@@ -72,8 +72,8 @@ static struct poptOption gtranslator_options[] = {
 	 	0, NULL, NULL
 	},
 	{
-		"build-informations", 'b', POPT_ARG_NONE, &build_informations,
-		0, N_("Show build informations/specifications"), NULL
+		"build-information", 'b', POPT_ARG_NONE, &build_information,
+		0, N_("Show build information/specifications"), NULL
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
@@ -148,16 +148,16 @@ int main(int argc, char *argv[])
 		gtranslator_options, 0, &context);
 
 	/*
-	 * Show up build informations if desired.
+	 * Show up build information if desired.
 	 */
-	if(build_informations)
+	if(build_information)
 	{
 		#define NICE_PRINT(x); \
 			g_print("\n\t\t%s", x); \
 			g_print("\n\t");
 
 		g_print("\t");
-		g_print(_("gtranslator build informations/specs:"));
+		g_print(_("gtranslator build information/specs:"));
 		g_print("\n\n\t");
 		g_print(_("Version and build date:"));
 		NICE_PRINT(BUILD_STRING);

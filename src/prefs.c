@@ -121,7 +121,7 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	 * The tables for holding all the entries below.
 	 */
 	first_page = gtranslator_utils_append_page_to_preferences_dialog(prefs, 
-		3, 2, _("Personal informations")); 
+		3, 2, _("Personal information")); 
 	second_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,
 		5, 2, _("Language settings"));
 	third_page = gtranslator_utils_append_page_to_preferences_dialog(prefs,

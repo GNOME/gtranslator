@@ -301,7 +301,7 @@ GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node)
 
 	if(!*node)
 	{
-		g_warning(_("Couldn't retrieve author informations!"));
+		g_warning(_("Couldn't retrieve author information!"));
 
 		/*
 		 * Translators: These strings are used as author informations if
