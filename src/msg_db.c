@@ -210,7 +210,7 @@ gchar *get_from_msg_db(const gchar *get_similar)
 						emp_i++;
 					}
 					emp_i++;emp_i++;
-					for(i=0;i<((strlen(msg_messages))-emp_i-1);++i)
+					for(i=0;i<((strlen(msg_messages)-emp_i-1));++i)
 					{
 						emp[i]=msg_messages[emp_i];
 						emp_i++;

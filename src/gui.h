@@ -8,8 +8,8 @@
 * -- the header
 **/
 
-#ifndef GTR_INTERFACE_H 
-#define GTR_INTERFACE_H 1
+#ifndef GTR_GUI_H
+#define GTR_GUI_H 1
 
 #ifdef HAVE_CONFIG_H
 	#include <config.h>
