@@ -303,7 +303,6 @@ GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node)
 	infos->name=xmlGetProp(*node, "name");
 	infos->version=xmlGetProp(*node, "version");
 
-	g_message("name: %s version %s", infos->name, infos->version);
 	*node=(*node)->xmlChildrenNode;
 
 	/*

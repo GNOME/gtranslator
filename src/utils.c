@@ -551,7 +551,6 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
  */
 void gtranslator_utils_free_list(GList *list, gboolean free_contents)
 {
-  g_message("list : %X", (int)list);
 	if(!list)
 	{
 		/*
