@@ -511,6 +511,17 @@ int main(int argc, char *argv[])
 	}
 	
 	gtk_widget_show_all(gtranslator_application);
+
+	/*
+	 * Create the list of colorschemes if we are starting up in a GUI.
+	 */
+	gtranslator_color_scheme_create_schemes_list();
+
+	/*
+	 * Now do also show up the full colorschemes list in the "_Settings"
+	 *  main menu.
+	 */
+	gtranslator_color_scheme_show_list();
 	
 	gtk_main();
 	return 0;

@@ -68,9 +68,10 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 
 	/*
 	 * Based on a suggestion by Pablo; translator: you should translate
-	 *  this empty string to avoid the usage of the mid dot ('·'). The contents
-	 *   of your translations are irrelevant in this case.
+	 *  this empty string to avoid the usage of the mid dot ('·'). 
+	 *   The contents of your translation are irrelevant in this case.
 	 */
+	/* FIXME: XXX -> compile problems...
 	if (_("")[0]=='\0')
 	{
 		gchar *middot=NULL;
@@ -86,13 +87,16 @@ GtrRuntimeConfig *gtranslator_runtime_config_new()
 		}
 		else
 		{
-			config->special_char=_("^")[0];
+			*/
+			config->special_char='^'; /* FIXME: XXX: _("^")[0];*/
+	/* FIXME: XXX -> compile problems..		
 		}
         }
 	else
 	{
                 config->special_char=_("^")[0];
         }
+	*/
 
 	return config;
 }

@@ -251,8 +251,14 @@ GnomeUIInfo the_msg_status_menu[] = {
 	GNOMEUIINFO_END
 };
 
+GnomeUIInfo the_colorschemes_menu[] = {
+	GNOMEUIINFO_END
+};
+
 GnomeUIInfo the_settings_menu[] = {
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gtranslator_preferences_dialog_create, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_SUBTREE(N_("_Colorschemes"), the_colorschemes_menu),
 	GNOMEUIINFO_END
 };
 

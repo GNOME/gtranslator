@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,10 +25,16 @@
 #include <sys/param.h>
 
 #include "color-schemes.h"
+#include "defines.include"
+#include "gui.h"
+#include "nautilus-string.h"
 #include "parse.h"
-#include "prefs.h"
 #include "preferences.h"
+#include "prefs.h"
+#include "stylistics.h"
 #include "utils.h"
+
+#include <gtk/gtkmenushell.h>
 
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
@@ -39,10 +45,30 @@
 
 #include <libgnome/gnome-util.h>
 
+#include <libgnomeui/gnome-app.h>
+#include <libgnomeui/gnome-app-helper.h>
+
 /*
  * The globally used GtrColorScheme.
  */
 GtrColorScheme	*theme=NULL;
+
+/*
+ * This list is now the general home of all colorscheme which we can
+ *  find -- a central list should avoid too much mem-shuffling for such stuff.
+ */
+GList		*colorschemes=NULL;
+
+/*
+ * A lend function from history.c -- free's some information about the
+ *  menu items we're inserting for the colorschemes.
+ */
+void free_data(GtkWidget *widget, gpointer userdata);
+
+/*
+ * Apply the given (gpointer'ized) colorscheme from the colorschemes menu.
+ */
+void apply_colorscheme(GtkWidget *widget, gchar *scheme_name);
 
 /*
  * Check if the given xml file is a gtranslator color scheme file.
@@ -378,6 +404,182 @@ void gtranslator_color_scheme_free(GtrColorScheme **scheme)
 		GTR_FREE((*scheme)->spell_error);
 		GTR_FREE(*scheme);
 	}
+}
+
+/*
+ * Create a list of all available color schemes in our common
+ *  directories where we are searching for the colorschemes.
+ */
+void gtranslator_color_scheme_create_schemes_list()
+{
+	gchar 	*personal_schemes_directory=NULL;
+
+	personal_schemes_directory=g_strdup_printf(
+		"%s/.gtranslator/colorschemes", g_get_home_dir());
+
+	/*
+	 * First load all colorschemes from ~/.gtranslator/colorschemes.
+	 */
+	colorschemes=gtranslator_utils_file_names_from_directory(
+		personal_schemes_directory, ".xml", TRUE, TRUE, FALSE);
+	GTR_FREE(personal_schemes_directory);
+
+	/*
+	 * Now append the colorschemes from the global colorschemes reservoire.
+	 */
+	if(!colorschemes)
+	{
+		colorschemes=gtranslator_utils_file_names_from_directory(
+			SCHEMESDIR, ".xml", TRUE, TRUE, FALSE);
+	}
+	else
+	{
+		GList	*global_colorschemes=NULL;
+
+		global_colorschemes=gtranslator_utils_file_names_from_directory(
+			SCHEMESDIR, ".xml", TRUE, TRUE, FALSE);
+
+		/*
+		 * Append and resort the colorschemes list (now consisting of 
+		 *  global + personal colorschemes directory contents).
+		 */
+		colorschemes=g_list_concat(colorschemes, global_colorschemes);
+		colorschemes=g_list_sort(colorschemes, 
+			(GCompareFunc) nautilus_strcmp_compare_func);
+	}
+}
+
+/*
+ * Clean the list of the colorschemes up -- free the list and it's values.
+ */
+void gtranslator_color_scheme_delete_schemes_list()
+{
+	if(colorschemes)
+	{
+		gtranslator_utils_free_list(colorschemes, TRUE);
+	}
+}
+
+/*
+ * Creates the menu with the colorschemes as toggle items -- easier
+ *  access to the favourites of kabalak :-)
+ */
+void gtranslator_color_scheme_show_list()
+{
+	GnomeUIInfo 	*menu;
+	
+	GList 		*onelist;
+
+	gint		 i=0;
+	
+	gchar 		*menupath=_("_Settings/_Colorschemes/");
+
+	/*
+	 * Delete the old entries.
+	 */
+	gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), 
+		menupath, 0, i);
+
+	/*
+	 * Parse the list.
+	 */
+	for(onelist=g_list_last(colorschemes); onelist!=NULL; onelist=g_list_previous(onelist))
+	{
+		gchar *colorscheme_name=NULL;
+
+		colorscheme_name=((gchar *) (onelist->data));
+		menu=g_new0(GnomeUIInfo, 2);
+
+		/*
+		 * Set the label name.
+		 */
+		if(colorscheme_name)
+		{
+			menu->label=g_strdup_printf("%s", colorscheme_name);
+		}
+		
+		/*
+		 * Set the GnomeUIInfo settings and labels.
+		 */
+		menu->type=GNOME_APP_UI_ITEM;
+		menu->hint=g_strdup_printf(_("Activate colorscheme %s"), colorscheme_name);
+		menu->moreinfo=(gpointer)apply_colorscheme;
+		menu->user_data=colorscheme_name;
+		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
+
+		/*
+		 * Insert this item into menu
+		 */
+		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
+		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
+
+		gtk_signal_connect(GTK_OBJECT(menu->widget), "destroy",
+			   GTK_SIGNAL_FUNC(free_data), menu->hint);
+
+		/*
+		 * Free the string and the GnomeUIInfo structure.
+		 */
+		GTR_FREE(menu->label);
+		GTR_FREE(menu);
+	}
+}
+
+/*
+ * Helper function for free'ing action.
+ */
+void free_data(GtkWidget *widget, gpointer userdata)
+{
+	GTR_FREE(userdata);
+}
+
+/*
+ * Apply the given scheme name from the colorschemes list.
+ */
+void apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
+{
+	if(scheme_name)
+	{
+		/*
+		 * First check if there's such a colorscheme in 
+		 *  ~/.gtranslator/colorschemes before checking the global 
+		 *   colorschemes directory.
+		 */
+		GtrPreferences.scheme=g_strdup_printf(
+			"%s/.gtranslator/colorschemes/%s.xml", g_get_home_dir(), 
+				scheme_name);
+
+		/*
+		 * If there's no such colorscheme in the 
+		 *  ~/.gtranslator/colorschemes directory, try the global 
+		 *   colorschemes directory.
+		 */
+		if(!g_file_exists(GtrPreferences.scheme))
+		{
+			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", 
+				SCHEMESDIR, scheme_name);
+		}
+
+		if(g_file_exists(GtrPreferences.scheme))
+		{
+			/*
+			 * Free the old used colorscheme.
+			 */
+			gtranslator_color_scheme_free(&theme);
+			
+			/*
+			 * Read in the new colorscheme, initialize the colors.
+			 */
+			gtranslator_color_scheme_apply(GtrPreferences.scheme);
+			theme=gtranslator_color_scheme_load_from_prefs();
+			
+			gtranslator_colors_initialize();
+		}
+
+		GTR_FREE(scheme_name);
+	}
+
+	gtranslator_set_style(text_box, 0);
+        gtranslator_set_style(trans_box, 1);
 }
 
 /*

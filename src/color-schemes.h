@@ -1,5 +1,5 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@gtranslator.org>
+ * (C) 2001-2002 	Fatih Demir <kabalak@gtranslator.org>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -67,6 +67,11 @@ typedef struct {
 extern GtrColorScheme *theme; 
 
 /*
+ * The list of all available colorschemes for gtranslator.
+ */
+extern GList *colorschemes;
+
+/*
  * Free the given GtrColorScheme.
  */
 void gtranslator_color_scheme_free(GtrColorScheme **scheme);
@@ -92,6 +97,22 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs(void);
  *  colors up.
  */
 void gtranslator_color_scheme_restore_default(void);
+
+/*
+ * Set the list up which contains all accessable colorschemes.
+ */
+void gtranslator_color_scheme_create_schemes_list(void);
+
+/*
+ * This deletes/cleans up the list of the colorschemes.
+ */
+void gtranslator_color_scheme_delete_schemes_list(void);
+
+/*
+ * Shows the list of all available coloschemes in a submenu in
+ *  the "_Settings" main menu area.
+ */
+void gtranslator_color_scheme_show_list(void);
 
 /*
  * Copy the given GtrColorScheme(Informations).

@@ -1,3 +1,33 @@
+2002-02-17  Fatih Demir <kabalak@gtranslator.org>
+
+	* gui.c, main.c: Create, show and delete the general colorschemes' list
+		for the GUI menus; fixes b.g.o #71188.
+
+	* color-schemes.c/.h: Adept the way we're creating the recent files'
+		list and show the list of the colorschemes in the "_Settings"
+		 main submenu.
+
+	* runtime-config.c: Temporarily fix the compile problems by just setting
+		the '^' in show -- there must be a way to let the original
+		 source code lines compile; I just can't find it... a half-way
+		  fix for b.g.o #70256.
+
+	* menus.c/.h: Added "_Settings/_Colorschemes" menu subtree -- it'll be
+		filled out by special "color-schemes.c/.h" functions like done
+		 for the GtrHistoryEntry structures in the recent files' list.
+
+	* syntax.c & utils_gui.c: Remove the "zpmd.h" includes as we've now
+		moved the "special char" to the GtrRuntimeConfig structure.
+
+	* gui.c & main.c: Create the colorschemes list once upon the GUI start
+		and delete the colorschemes list subsequently on the GUI exit.
+
+	* color-schemes.c/.h & prefs.c: Added "new" (it's been only moved)
+		"gtranslator_color_scheme_create_schemes_list" function to get
+		  the list of all available colorschemes; also added finally a
+		   colorschemes list free'ing function (why didn't we have one 
+		    yet?) named "gtranslator_color_scheme_delete_schemes_list".
+
 2002-02-17  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* runtime-config.c: add missing includes and fix middot.

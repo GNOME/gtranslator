@@ -450,6 +450,12 @@ gint gtranslator_quit(GtkWidget  * widget, GdkEventAny  * e,
 	gtranslator_preferences_free();
 
 	/*
+	 * Now clean up the list of all colorschemes -- should be safe to do it
+	 *  here if we've already shut down most of the GUI elements.
+	 */
+	gtranslator_color_scheme_delete_schemes_list();
+
+	/*
 	 * Remove any lungering temp. file.
 	 */
 	gtranslator_utils_remove_temp_files();

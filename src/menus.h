@@ -31,6 +31,7 @@ extern GnomeUIInfo the_last_files_menus[];
 extern GnomeUIInfo the_edit_menu[];
 extern GnomeUIInfo the_messages_menu[];
 extern GnomeUIInfo the_msg_status_menu[];
+extern GnomeUIInfo the_colorschemes_menu[];
 extern GnomeUIInfo the_settings_menu[];
 extern GnomeUIInfo the_help_menu[];
 

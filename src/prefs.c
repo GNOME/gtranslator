@@ -101,9 +101,7 @@ static GtkWidget *prefs = NULL;
 
 void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 {
-	GList 	*colorschemeslist=NULL;
 	gchar	*old_colorscheme=NULL;
-	gchar	*personal_schemes_directory=NULL;
 	GtkObject *adjustment;
 	
 	/*
@@ -258,44 +256,10 @@ void gtranslator_preferences_dialog_create(GtkWidget  *widget, gpointer useless)
 	/*
 	 * The sixth page with the special font/color stuff.
 	 */
-	personal_schemes_directory=g_strdup_printf("%s/.gtranslator/colorschemes",
-		g_get_home_dir());
-
-	/*
-	 * First load all colorschemes from ~/.gtranslator/colorschemes.
-	 */
-	colorschemeslist=gtranslator_utils_file_names_from_directory(personal_schemes_directory,
-		".xml", TRUE, TRUE, FALSE);
-	GTR_FREE(personal_schemes_directory);
-
-	/*
-	 * Now append/set up the colorschemes from the global colorschemes
-	 *  reservoire.
-	 */
-	if(!colorschemeslist)
-	{
-		colorschemeslist=gtranslator_utils_file_names_from_directory(SCHEMESDIR,
-			".xml", TRUE, TRUE, FALSE);
-	}
-	else
-	{
-		GList	*global_colorschemes=NULL;
-
-		global_colorschemes=gtranslator_utils_file_names_from_directory(SCHEMESDIR,
-			".xml", TRUE, TRUE, FALSE);
-
-		/*
-		 * Append and resort the colorschemes list (now consisting of global +
-		 *  personal colorschemes directory contents).
-		 */
-		colorschemeslist=g_list_concat(colorschemeslist, global_colorschemes);
-		colorschemeslist=g_list_sort(colorschemeslist, (GCompareFunc) nautilus_strcmp);
-	}
-	
 	old_colorscheme=gtranslator_utils_get_raw_file_name(GtrPreferences.scheme);
 	
 	scheme_file=gtranslator_utils_attach_combo_with_label(sixth_page, 0,
-		_("Syntax color scheme to use:"), colorschemeslist, old_colorscheme,
+		_("Syntax color scheme to use:"), colorschemes, old_colorscheme,
 		FALSE,
 		gtranslator_preferences_dialog_changed, NULL);
 	 
