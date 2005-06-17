@@ -147,6 +147,7 @@ void gtranslator_file_chooser_analyse(gpointer dialog, FileselMode mode)
 				} else {
 					gtranslator_save_file_dialog(GTK_WIDGET(dialog));
 				}
+				break;
 			case GTK_RESPONSE_CANCEL:
 				gtk_widget_hide(GTK_WIDGET(dialog));
 				break;
