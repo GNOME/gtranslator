@@ -11,7 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: TransDict server\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
@@ -23,7 +23,7 @@ msgstr ""
 
 #. Translator credits
 #: src/about.c:60
-msgid "translator_credits"
+msgid "translator-credits"
 msgstr "lokalizacija@linux.hr"
 
 #: src/about.c:80
@@ -191,17 +191,17 @@ msgid "An error occurred while msgfmt was executed:\n"
 msgstr ""
 
 #: src/dialogs.c:994
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
+#msgid ""
+#"The file\n"
+#"\n"
+#"   %s\n"
+#"\n"
+#"is already open in another instance of gtranslator!\n"
+#"Please close the other instance of gtranslator handling\n"
+#"this file currently to re-gain access to this file.\n"
+#"\n"
+#"Shall fool gtranslator open this file anyway ?"
+#msgstr ""
 
 #: src/dialogs.c:1035
 msgid ""
@@ -338,6 +338,7 @@ msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ %i Fuzzy ostalo ]"
 msgstr[1] "%s [ %i Fuzzy ostalo ]"
+msgstr[2] "%s [ %i Fuzzy ostalo ]"
 
 #: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
 msgid "Fuzzy"
@@ -363,6 +364,7 @@ msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ %i ostalo neprevedeno ]"
 msgstr[1] "%s [ %i ostalo neprevedeno ]"
+msgstr[2] "%s [ %i ostalo neprevedeno ]"
 
 #: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
 msgid "Untranslated"
@@ -1188,11 +1190,11 @@ msgstr ""
 #. plural form
 #: src/parse.c:1038
 #, c-format
-msgid "File %s\n"
-"contains %d fuzzy message"
-msgid_plural "File %s\n"
-"contains %d fuzzy messages"
-msgstr[0] "------"
+#msgid "File %s\n"
+#"contains %d fuzzy message"
+#msgid_plural "File %s\n"
+#"contains %d fuzzy messages"
+#msgstr[0] "------"
 
 #: src/parse.c:1310
 msgid "Sorry, msgfmt isn't available on your system!"
