@@ -36,8 +36,6 @@
 #include "runtime-config.h"
 #include "utils.h"
 
-#include <gdk/gdkkeysyms.h>
-
 /*
  * We're now defining the highlighting colors once here at the top via macros.
  */
@@ -188,6 +186,12 @@ GtkWidget *gtranslator_messages_table_new(GtrPo *po)
   GtkTreeStore *store;
   GtkTreeSelection *selection;
 
+	GList *list;
+	GtrMsg *msg;
+	const char *msgid, *msgstr;
+
+	g_return_if_fail(po != NULL);
+
   store = gtk_tree_store_new (
 		N_COLUMNS,
 		G_TYPE_STRING,
@@ -233,13 +237,6 @@ GtkWidget *gtranslator_messages_table_new(GtrPo *po)
   g_signal_connect (G_OBJECT(selection), "changed", 
 		    G_CALLBACK(gtranslator_messages_table_selection_changed), 
 		    NULL);
-
-	GList *list;
-	GtrMsg *msg;
-	const char *msgid, *msgstr;
-
-	g_return_if_fail(po != NULL);
-	g_assert(messages_table == NULL);
 
 	list = po->messages;
 
