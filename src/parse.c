@@ -49,7 +49,6 @@
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtklabel.h>
-#include <gtkspell/gtkspell.h>
 
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app-util.h>
@@ -344,7 +343,6 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), current_page->num);
 	gtk_widget_show_all(notebook_widget);	
 	
-/* Maybe this should go in a callback from the tab taking focus */
 #ifdef HOLD_ON_A_SEC
 	/*
 	 * Set window title
@@ -364,11 +362,6 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	gtranslator_application_bar_update(0);
 
 	/*
-	 * Update the recent files list.
-	 */
-	gtranslator_history_show();
-
-	/*
 	 * Iterate to the main GUI thread -- well, no locks for the GUI should
 	 *  be visible -- avoids "the clean my gtranslator window with dialog"
 	 *   party game ,-)
@@ -379,6 +372,11 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	}
 
 #endif
+
+	/*
+	 * Update the recent files list.
+	 */
+	gtranslator_history_show();
 
 	gtranslator_actions_set_up_file_opened();
 

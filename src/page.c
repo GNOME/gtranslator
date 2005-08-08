@@ -140,15 +140,22 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 	 * If required, set up the messages table
 	 */	
 	if(GtrPreferences.show_messages_table)
-	{
-		GtkWidget *messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-		page->messages_tree = (GtkWidget*)gtranslator_messages_table_new();
-		gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), page->messages_tree);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-		
-		gtk_paned_pack1(GTK_PANED(page->table_pane), messages_table_scrolled_window, FALSE, TRUE);
-		gtk_paned_pack2(GTK_PANED(page->table_pane), page->content_pane, FALSE, TRUE);
-	}
+		gtranslator_page_messages_table_show(page);
 
 	return page;
+}
+
+void gtranslator_page_messages_table_show(GtrPage *page) {
+	GtkWidget *messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+
+	page->messages_tree = (GtkWidget*)gtranslator_messages_table_new(page->po);
+
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), page->messages_tree);
+		
+	gtk_paned_pack1(GTK_PANED(page->table_pane), messages_table_scrolled_window, FALSE, TRUE);
+	gtk_paned_pack2(GTK_PANED(page->table_pane), page->content_pane, FALSE, TRUE);
+}
+
+void gtranslator_page_messages_table_hide(GtrPage *page) {
 }

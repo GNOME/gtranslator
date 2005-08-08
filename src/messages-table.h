@@ -24,6 +24,7 @@
 
 #include <gtk/gtkwidget.h>
 #include "message.h"
+#include "page.h"
 
 enum
 {
@@ -40,25 +41,20 @@ enum
 /*
  * Returns the ready widget with all the specs.
  */
-GtkWidget *gtranslator_messages_table_new(void);
+GtkWidget *gtranslator_messages_table_new(GtrPo *po);
  
-/*
- * Populate table with the messages
- */
-void gtranslator_messages_table_create(void);
-
 /*
  * Update the data in a single row
  */
-void gtranslator_messages_table_update_row(GtrMsg *message); 
+void gtranslator_messages_table_update_row(GtrPage *page, GtrMsg *message); 
 
 /*
  * Select given message
  */
-void gtranslator_messages_table_select_row(GtrMsg *message);
+void gtranslator_messages_table_select_row(GtrPage *page, GtrMsg *message);
 
 /*
- * Returns the ready widget with all the specs.
+ * Frees resources allocated to this messages table
  */
 void gtranslator_messages_table_free(GtkWidget *messages_table);
  

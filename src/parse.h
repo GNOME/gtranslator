@@ -132,11 +132,6 @@ gboolean gtranslator_open(const gchar *po, GError **error);
 gboolean gtranslator_save_file(GtrPo *po, const gchar *name, GError **error);
 
 /*
- * The parts that sets up the GUI after it's been parsed
- */
-void gtranslator_parse_set_gui_from(GtrPo *po);
-
-/*
  * Callbacks for the widgets
  */
 void gtranslator_parse_the_file_from_file_dialog(GtkWidget  * widget);

@@ -40,14 +40,19 @@
 #include <string.h>
 #include <regex.h>
 #include <gtk/gtk.h>
-#include <gtkspell/gtkspell.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-util.h>
+
+#ifdef HAVE_GTKSPELL
+#include <gtkspell/gtkspell.h>
+#endif
 
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
+#ifdef HAVE_GTKSPELL
 GtkSpell *gtrans_spell = NULL;
+#endif
 
 /*
  * Calls function func on each item in list 'begin'. Starts from 
@@ -193,7 +198,7 @@ void gtranslator_message_show(GtrMsg *msg)
 	 */
 	gtranslator_comment_display(GTR_COMMENT(msg->comment));
 
-#ifdef NOTYET
+#ifdef HAVE_GTKSPELL
 	/*
 	 * Use instant spell checking via gtkspell only if the corresponding
 	 *  setting in the preferences is set.
@@ -252,9 +257,9 @@ void gtranslator_message_update(void)
 	/*
 	 * Go to the corresponding row in the messages table.
 	 */
-	if(GtrPreferences.show_messages_table)
+	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_update_row(msg);
+		gtranslator_messages_table_update_row(current_page, msg);
 	}
 
 	/*
@@ -292,9 +297,9 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	}
 	
 	gtranslator_message_update();
-	if(GtrPreferences.show_messages_table)
+	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_update_row(GTR_MSG(po->current->data));
+		gtranslator_messages_table_update_row(current_page, GTR_MSG(po->current->data));
 	}
 }
 
@@ -324,9 +329,9 @@ void gtranslator_message_go_to(GList * to_go)
 	po->current = to_go;
 	gtranslator_message_show(po->current->data);
 
-	if(GtrPreferences.show_messages_table)
+	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_select_row(GTR_MSG(po->current->data));
+		gtranslator_messages_table_select_row(current_page, GTR_MSG(po->current->data));
 	}
 	
 	pos = g_list_position(po->messages, po->current);

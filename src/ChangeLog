@@ -1,7 +1,11 @@
 2005-08-08  Ross Golder  <ross@golder.org>
 
-	* gui.c/parser.c: Removed unnecessary #include <gtkspell/gtkspell.h>
-	* message.c: Make use of HAVE_GTKSPELL.
+	* gui.c/parse.c: Removed unnecessary #include <gtkspell/gtkspell.h>
+	* message.c: Check for HAVE_GTKSPELL.
+	* parse.h: Remove redundant 'gtranslator_parse_set_gui_from'.
+	* page.[ch]: Add 'gtranslator_page_messages_table_[show|hide]'.
+	* messages_table.[ch]: Removed 'gtranslator_messages_table_create',
+	combining it into 'gtranslator_messages_table_new'.
 
 2005-06-17  Ross Golder  <ross@golder.org>
 
@@ -9,7 +13,7 @@
 
 2005-03-12  Ross Golder  <ross@golder.org>
 
-	* parser.[ch], dialogs.c: Updated to use GtkFileChooser for open and
+	* parse.[ch], dialogs.c: Updated to use GtkFileChooser for open and
 	save operations (thanks to code borrowed from Vital Khilko).
 	* utils_gui.c: Stopped saving 'depht' (misspelled too) to gconf.
 	* gui.c: Respect window geometry config and disable actions that

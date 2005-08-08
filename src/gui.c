@@ -59,7 +59,6 @@
 #include <libgnomeui/gnome-popup-menu.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
-#include <gtkspell/gtkspell.h>
 
 /*
  * Global external variables
@@ -628,9 +627,9 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 				FALSE
 			);
 		}
-		if(GtrPreferences.show_messages_table)
+		if(current_page->messages_table)
 		{
-			gtranslator_messages_table_update_row(msg);
+			gtranslator_messages_table_update_row(current_page, msg);
 		}
 	}
 }
@@ -787,21 +786,8 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	/*
 	 * If required, set up the messages table
 	 */	
-	if(GtrPreferences.show_messages_table)
-	{
-		GtkWidget *messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-		current_page->messages_tree = gtranslator_messages_table_new();
-		gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), current_page->messages_tree);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-		
-		gtk_paned_pack1(GTK_PANED(current_page->table_pane), messages_table_scrolled_window, FALSE, TRUE);
-		gtk_paned_pack2(GTK_PANED(current_page->table_pane), current_page->content_pane, FALSE, TRUE);
-	}
-
-	/*
-	 * Set the main window
-	 */
 	if(GtrPreferences.show_messages_table) {
+		gtranslator_page_messages_table_show(current_page);
 		return current_page->table_pane;
 	}
 	

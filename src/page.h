@@ -68,4 +68,10 @@ extern GtrPage *current_page;
  */
 GtrPage* gtranslator_page_new(GtrPo *po);
 
+/*
+ * Show/hide the messages table
+ */
+void gtranslator_page_messages_table_show(GtrPage *page);
+void gtranslator_page_messages_table_hide(GtrPage *page);
+
 #endif
