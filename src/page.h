@@ -58,7 +58,6 @@ typedef struct {
 extern GList *pages;
 
 /*
-/*
  * A pointer to the current page
  */
 extern GtrPage *current_page;
