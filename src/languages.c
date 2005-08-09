@@ -51,7 +51,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Basque"), "eu", "iso-8859-1",
-	 "linux-eu@chanae.alphanet.ch", "8bit"
+	 "translation-team-eu@lists.sourceforge.net", "8bit"
 	},
 	{
 	 N_("Belarusian"), "be", "UTF-8",
