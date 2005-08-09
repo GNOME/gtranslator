@@ -814,7 +814,7 @@ gint gtranslator_xml_get_integer_prop_by_name_with_default (const xmlNode *paren
 	
 	if(prop!=NULL)
 	{
-		(void) sscanf(prop, "%d", &ret_val);
+		(void) sscanf((gchar *) prop, "%d", &ret_val);
 		xmlFree (prop);
 	}
 
@@ -830,7 +830,7 @@ void gtranslator_xml_set_integer_prop_by_name (xmlNode *parent, const xmlChar *p
 	g_return_if_fail(prop_name!=NULL);
 
 	valuestr=g_strdup_printf("%d", value);
-	xmlSetProp(parent, prop_name, valuestr);
+	xmlSetProp(parent, prop_name, (xmlChar *) valuestr);
 	g_free(valuestr);
 }
 
@@ -847,7 +847,7 @@ gchar *gtranslator_xml_get_string_prop_by_name_with_default(const xmlNode *paren
 	
 	if(prop!=NULL)
 	{
-		ret_val=g_strdup(prop);
+		ret_val=g_strdup((gchar *) prop);
 		xmlFree(prop);
 	}
 	else
@@ -867,7 +867,7 @@ void gtranslator_xml_set_string_prop_by_name(xmlNode *parent, const xmlChar *pro
 
 	if(value!=NULL)
 	{
-		xmlSetProp(parent, prop_name, value);
+		xmlSetProp(parent, prop_name, (xmlChar *) value);
 	}
 }
 

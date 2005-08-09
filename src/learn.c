@@ -141,7 +141,7 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 	node=gtranslator_learn_buffer->current_node->xmlChildrenNode;
 
-	while(node && nautilus_strcasecmp(node->name, "value"))
+	while(node && nautilus_strcasecmp((gchar *) node->name, "value"))
 	{
 		GTR_ITER(node);
 	}
@@ -149,16 +149,16 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 	/*
 	 * Get the original message's value by the <value> node.
 	 */
-	if(node && !nautilus_strcasecmp(node->name, "value"))
+	if(node && !nautilus_strcasecmp((gchar *) node->name, "value"))
 	{
-		original=xmlNodeListGetString(gtranslator_learn_buffer->doc,
+		original=(gchar *) xmlNodeListGetString(gtranslator_learn_buffer->doc,
 			node->xmlChildrenNode, 1);
 	}
 
 	/*
 	 * Cruise through the nodes searching the next <translation> node.
 	 */
-	while(node && nautilus_strcasecmp(node->name, "translation"))
+	while(node && nautilus_strcasecmp((gchar *) node->name, "translation"))
 	{
 		GTR_ITER(node);
 	}
@@ -174,7 +174,7 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 		/*
 		 * Now go for the <value> node under the <translation> node.
 		 */
-		while(node && nautilus_strcasecmp(node->name, "value"))
+		while(node && nautilus_strcasecmp((gchar *) node->name, "value"))
 		{
 			GTR_ITER(node);
 		}
@@ -182,9 +182,9 @@ static void gtranslator_learn_buffer_hash_from_current_node()
 		/*
 		 * Here we do get the node contents.
 		 */
-		if(node && !nautilus_strcasecmp(node->name, "value"))
+		if(node && !nautilus_strcasecmp((gchar *) node->name, "value"))
 		{
-			translation=xmlNodeListGetString(gtranslator_learn_buffer->doc,
+			translation=(gchar *) xmlNodeListGetString(gtranslator_learn_buffer->doc,
 				node->xmlChildrenNode, 1);
 		}
 	}
@@ -227,23 +227,23 @@ static void gtranslator_learn_buffer_write_hash_entry(gpointer key, gpointer val
 	g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
 
 	new_node=xmlNewChild(gtranslator_learn_buffer->current_node, NULL, 
-		"message", NULL);
+		(xmlChar *) "message", NULL);
 
 	/*
 	 * Escape the string to the right and necessary form before writing it.
 	 */
 	string_to_write=gtranslator_learn_buffer_escape((gchar *) key);
-	value_node=xmlNewChild(new_node, NULL, "value", string_to_write);
+	value_node=xmlNewChild(new_node, NULL, (xmlChar *) "value", (xmlChar*) string_to_write);
 	g_free(string_to_write);
 
-	translation_node=xmlNewChild(new_node, NULL, "translation", NULL);
+	translation_node=xmlNewChild(new_node, NULL, (xmlChar *) "translation", NULL);
 
 	/*
 	 * Again escape the values to be given to the libxml routines.
 	 */
 	string_to_write=gtranslator_learn_buffer_escape((gchar *) value);
 	translation_value_node=xmlNewChild(translation_node, NULL, 
-		"value", string_to_write);
+		(xmlChar *) "value", (xmlChar *) string_to_write);
 	g_free(string_to_write);
 }
 
@@ -455,7 +455,7 @@ void gtranslator_learn_init()
 		
 		gtranslator_learn_buffer->doc=xmlParseFile(gtranslator_learn_buffer->filename);
 		g_return_if_fail(gtranslator_learn_buffer->doc!=NULL);
-		gtranslator_learn_buffer->encoding=gtranslator_xml_get_string_prop_by_name_with_default(gtranslator_learn_buffer->doc->xmlRootNode, "encoding", "UTF-8");
+		gtranslator_learn_buffer->encoding=gtranslator_xml_get_string_prop_by_name_with_default(gtranslator_learn_buffer->doc->xmlRootNode, (xmlChar *) "encoding", "UTF-8");
 
 		gtranslator_learn_buffer->current_node=gtranslator_learn_buffer->doc->xmlRootNode->xmlChildrenNode;
 		g_return_if_fail(gtranslator_learn_buffer->current_node!=NULL);
@@ -471,11 +471,11 @@ void gtranslator_learn_init()
 			/*
 			 * Read in the serial number.
 			 */
-			if(!nautilus_strcasecmp(node->name, "serial"))
+			if(!nautilus_strcasecmp((gchar *) node->name, "serial"))
 			{
 				gchar		*contentstring=NULL;
 
-				contentstring=xmlNodeListGetString(gtranslator_learn_buffer->doc,
+				contentstring=(gchar *) xmlNodeListGetString(gtranslator_learn_buffer->doc,
 					node->xmlChildrenNode, 1);
 				
 				if(contentstring)
@@ -502,7 +502,7 @@ void gtranslator_learn_init()
 			/*
 			 * Read in any resources' found in the index.
 			 */
-			if(!nautilus_strcasecmp(node->name, "index"))
+			if(!nautilus_strcasecmp((gchar *) node->name, "index"))
 			{
 				xmlNodePtr	resources_node;
 
@@ -512,10 +512,10 @@ void gtranslator_learn_init()
 				{
 					GtrLearnResource *resource=g_new0(GtrLearnResource, 1);
 
-					resource->package=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, "package", NULL);
-					resource->updated=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, "updated", NULL);
-					resource->premiereversion=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, "premiereversion", NULL);
-					resource->index=gtranslator_xml_get_integer_prop_by_name_with_default(resources_node, "index", 1);
+					resource->package=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, (xmlChar *) "package", NULL);
+					resource->updated=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, (xmlChar *) "updated", NULL);
+					resource->premiereversion=gtranslator_xml_get_string_prop_by_name_with_default(resources_node, (xmlChar *) "premiereversion", NULL);
+					resource->index=gtranslator_xml_get_integer_prop_by_name_with_default(resources_node, (xmlChar *) "index", 1);
 
 					/*
 					 * Add the current parsed in resource to the learn buffer's
@@ -540,7 +540,7 @@ void gtranslator_learn_init()
 				}
 			}
 			
-			if(!nautilus_strcasecmp(node->name, "message"))
+			if(!nautilus_strcasecmp((gchar *) node->name, "message"))
 			{
 				gtranslator_learn_buffer->current_node=node;
 				gtranslator_learn_buffer_hash_from_current_node();
@@ -598,7 +598,7 @@ void gtranslator_learn_shutdown()
 		/*
 		 * Create the XML document.
 		 */
-		gtranslator_learn_buffer->doc=xmlNewDoc("1.0");
+		gtranslator_learn_buffer->doc=xmlNewDoc((xmlChar *) "1.0");
 	
 		/*
 		 * Set the encoding of the XML file to get a cleanly-structured 
@@ -606,7 +606,7 @@ void gtranslator_learn_shutdown()
 		 */
 		if(gtranslator_learn_buffer->encoding)
 		{
-			gtranslator_learn_buffer->doc->encoding=g_strdup(gtranslator_learn_buffer->encoding);
+			gtranslator_learn_buffer->doc->encoding=(xmlChar *) g_strdup(gtranslator_learn_buffer->encoding);
 			g_free(gtranslator_learn_buffer->encoding);
 		}
 	
@@ -614,30 +614,30 @@ void gtranslator_learn_shutdown()
 		 * Set up the main <umtf> document root node.
 		 */
 		root_node=xmlNewDocNode(gtranslator_learn_buffer->doc, NULL, 
-			"umtf", NULL);
+			(xmlChar *) "umtf", NULL);
 	
-		xmlSetProp(root_node, "version", "0.6");
+		xmlSetProp(root_node, (xmlChar *) "version", (xmlChar *) "0.6");
 		xmlDocSetRootElement(gtranslator_learn_buffer->doc, root_node);
 	
 		/*
 		 * Set the header <language> tag with language informations.
 		 */
-		language_node=xmlNewChild(root_node, NULL, "language", NULL);
+		language_node=xmlNewChild(root_node, NULL, (xmlChar *) "language", NULL);
 		
-		gtranslator_xml_set_string_prop_by_name(language_node, "ename", 
+		gtranslator_xml_set_string_prop_by_name(language_node, (xmlChar *) "ename", 
 			gtranslator_translator->language->name);
-		gtranslator_xml_set_string_prop_by_name(language_node, "code", 
+		gtranslator_xml_set_string_prop_by_name(language_node, (xmlChar *) "code", 
 			gtranslator_translator->language->locale);
-		gtranslator_xml_set_string_prop_by_name(language_node, "email", 
+		gtranslator_xml_set_string_prop_by_name(language_node, (xmlChar *) "email", 
 			gtranslator_translator->language->group_email);
 	
 		/*
 		 * Set <translator> node with translator informations -- if available.
 		 */
-		translator_node=xmlNewChild(root_node, NULL, "translator", NULL);
+		translator_node=xmlNewChild(root_node, NULL, (xmlChar *) "translator", NULL);
 		
-		gtranslator_xml_set_string_prop_by_name(translator_node, "name", gtranslator_translator->name);
-		gtranslator_xml_set_string_prop_by_name(translator_node, "email", gtranslator_translator->email);
+		gtranslator_xml_set_string_prop_by_name(translator_node, (xmlChar *) "name", gtranslator_translator->name);
+		gtranslator_xml_set_string_prop_by_name(translator_node, (xmlChar *) "email", gtranslator_translator->email);
 	
 		/*
 		 * Set the UMTF date string for our internal GtrLearnBuffer.
@@ -662,14 +662,14 @@ void gtranslator_learn_shutdown()
 		/*
 		 * Add the <serial> node with the serial string and date.
 		 */
-		serial_node=xmlNewChild(root_node, NULL, "serial", serial_string);
-		xmlSetProp(serial_node, "date", gtranslator_learn_buffer->serial_date);
+		serial_node=xmlNewChild(root_node, NULL, (xmlChar *) "serial", (xmlChar *) serial_string);
+		xmlSetProp(serial_node, (xmlChar *) "date", (xmlChar *) gtranslator_learn_buffer->serial_date);
 		g_free(serial_string);
 	
 		/*
 		 * Write the <index> area -- if possible with contents.
 		 */
-		index_node=xmlNewChild(root_node, NULL, "index", NULL);
+		index_node=xmlNewChild(root_node, NULL, (xmlChar *) "index", NULL);
 	
 		if(index_node)
 		{
@@ -693,17 +693,17 @@ void gtranslator_learn_shutdown()
 				GtrLearnResource *resource=GTR_LEARN_RESOURCE(
 					gtranslator_learn_buffer->resources->data);
 	
-				resource_node=xmlNewChild(index_node, NULL, "resource", NULL);
+				resource_node=xmlNewChild(index_node, NULL, (xmlChar *) "resource", NULL);
 				g_return_if_fail(resource_node!=NULL);
 				
 				/*
 				 * Write all the attributes for a resource entry.
 				 */
-				gtranslator_xml_set_string_prop_by_name(resource_node, "package", resource->package);
-				gtranslator_xml_set_string_prop_by_name(resource_node, "updated", resource->updated);
-				gtranslator_xml_set_string_prop_by_name(resource_node, "premiereversion", (resource->premiereversion?resource->premiereversion:"1")); 
+				gtranslator_xml_set_string_prop_by_name(resource_node, (xmlChar *) "package", resource->package);
+				gtranslator_xml_set_string_prop_by_name(resource_node, (xmlChar *) "updated", resource->updated);
+				gtranslator_xml_set_string_prop_by_name(resource_node, (xmlChar *) "premiereversion", (resource->premiereversion?resource->premiereversion:"1")); 
 				
-				gtranslator_xml_set_integer_prop_by_name(resource_node, "index", resource->index);
+				gtranslator_xml_set_integer_prop_by_name(resource_node, (xmlChar *) "index", resource->index);
 				
 				GTR_ITER(gtranslator_learn_buffer->resources);
 			}
