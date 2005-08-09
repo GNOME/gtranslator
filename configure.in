@@ -144,11 +144,17 @@ dnl Check for gtkspell >= 2.0 and use it if found
 dnl -------------------------------------------------------------------
 AC_MSG_CHECKING([for a gtkspell >= $GTKSPELL_OPTIONAL])
 PKG_CHECK_EXISTS([gtkspell-2.0 >= $GTKSPELL_OPTIONAL], [
-	PKG_CHECK_MODULES(GTRANSLATOR, [gtkspell-2.0 >= $GTKSPELL_OPTIONAL])
+	PKG_CHECK_MODULES(GTRANSLATOR_XTRA, [gtkspell-2.0 >= $GTKSPELL_OPTIONAL])
 	AC_DEFINE(HAVE_GTKSPELL, [true], [A usable GtkSpell library was found])
 ],[
 	echo "not found - spellchecking disabled."
 ])
+
+dnl -------------------------------------------------------------------
+dnl Necessary to hook the GTKSPELL cflags up - otherwise GNOME CFLAGS
+dnl	are lost...
+dnl -------------------------------------------------------------------
+GTRANSLATOR_CFLAGS="$GTRANSLATOR_CFLAGS $GTRANSLATOR_XTRA"
 
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
