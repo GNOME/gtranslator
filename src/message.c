@@ -215,7 +215,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		char *errortext = NULL;
 		
 		if (gtrans_spell == NULL && trans_vbox != NULL) {
-		    gtrans_spell = gtkspell_new_attach(trans_box, NULL, &error);
+		    gtrans_spell = gtkspell_new_attach(trans_vbox, NULL, &error);
 		    if (gtrans_spell == NULL) {
 			g_print(_("gtkspell error: %s\n"), error->message);
 			errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);

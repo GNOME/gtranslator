@@ -60,7 +60,7 @@ gtranslator_SOURCES = \
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \
-	$(GTRANSLATOR_LIBS)
+	$(GTRANSLATOR_LIBS) \
 	$(GTKSPELL_LIBS)
 	
 gtranslator_LDFLAGS = \
