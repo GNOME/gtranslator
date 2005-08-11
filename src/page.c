@@ -140,22 +140,64 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 	 * If required, set up the messages table
 	 */	
 	if(GtrPreferences.show_messages_table)
-		gtranslator_page_messages_table_show(page);
+		gtranslator_page_show_messages_table(page);
 
 	return page;
 }
 
-void gtranslator_page_messages_table_show(GtrPage *page) {
+void gtranslator_page_show_messages_table(GtrPage *page) {
 	GtkWidget *messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 
-	page->messages_tree = (GtkWidget*)gtranslator_messages_table_new(page->po);
+	page->messages_table = gtranslator_messages_table_new();
+	gtranslator_messages_table_populate(page->messages_table, page->po->messages);
 
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), page->messages_tree);
+	gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), page->messages_table->widget);
 		
 	gtk_paned_pack1(GTK_PANED(page->table_pane), messages_table_scrolled_window, FALSE, TRUE);
 	gtk_paned_pack2(GTK_PANED(page->table_pane), page->content_pane, FALSE, TRUE);
 }
 
-void gtranslator_page_messages_table_hide(GtrPage *page) {
+void gtranslator_page_hide_messages_table(GtrPage *page) {
+	// FIXME
+}
+
+gboolean gtranslator_page_autosave(GtrPage *page) {
+	char *folder, *filename;
+	gchar *autosave_filename;
+	GError *error;
+	
+	/*
+	 * As the file didn't change, we don't need to autosave it, but
+	 *  the timeout function must still return TRUE for getting it's
+	 *   periodic sense.
+	 */
+	if(!page->po->file_changed) return TRUE;
+
+	/*
+	 * OK, save the file to an autosave file
+	 */
+	folder = (char *)dirname(page->po->filename);
+	filename = (char *)basename(page->po->filename);
+	autosave_filename = g_strdup_printf("%s/.%s.autosave.%ld",
+				folder, filename, (long int)getpid());
+	gtranslator_save_file(page->po, autosave_filename, &error);
+	g_free(autosave_filename);
+		
+	if(error != NULL) {
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new(
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK,
+			_("Error autosaving file: %s"), error->message);
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(dialog);
+		g_clear_error(&error);
+		return FALSE;
+	}
+		
+	return TRUE;
+
 }

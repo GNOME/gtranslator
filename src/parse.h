@@ -103,12 +103,14 @@ typedef struct {
 
 #define GTR_PO(x) ((GtrPo *)x)
 
+#ifdef REDUNDANT
 /*
  * The main global PO file reference. Eventually, I hope gtranslator
  * becomes an MDI application, like gedit, and this will either become
  * redundant or will point to the current PO file being editted.
  */
 extern GtrPo *po;
+#endif
 
 /*
  * Parse the given po file, and return a new document handle. Set error
@@ -116,8 +118,8 @@ extern GtrPo *po;
  */
 GtrPo *gtranslator_parse(const gchar *filename, GError **error);
 
-/* We really only want ONE parser function */
 #ifdef REDUNDANT
+/* We really only want ONE main parser function, if possible */
 gboolean gtranslator_parse_core(GtrPo *po);
 #endif
 

@@ -58,19 +58,6 @@ enum
 static void read_messages_table_colors(void);
 static void free_messages_table_colors(void);
 
-static void 
-gtranslator_messages_table_selection_changed(GtrPage *page, GtkTreeSelection *selection,
-					     gpointer data);
-
-
-/*
- * Message category nodes container.
- */
-typedef struct {
-	GtkTreeIter untranslated_node;
-	GtkTreeIter fuzzy_node;
-	GtkTreeIter translated_node;
-} GtrMessagesTable;
 
 /*
  * Own messages table color container - contains the defined color strings and the GdkColors.
@@ -85,8 +72,6 @@ typedef struct
 	GdkColor fuzzy_color;
 	GdkColor translated_color;
 } GtrMessagesTableColors;
-
-static GtrMessagesTable *messages_table;
 
 static GtrMessagesTableColors *messages_table_colors;
 
@@ -176,177 +161,221 @@ void gtranslator_tree_size_allocate(
 
 
 /*
+ * Callback for when Select message based on the GtkTreeSelection chosen
+ */
+static void 
+gtranslator_messages_table_selection_changed(GtkTreeSelection *selection, gpointer data)
+{
+  GtkTreeIter iter;
+  GtkTreeModel* model;
+  GtrMsg* msg;
+  GList* messages;
+  
+  /* Ignore 'null' selections */
+  if(!selection) return;
+  
+  if (gtk_tree_selection_get_selected(selection, &model, &iter) == TRUE) {
+    gtk_tree_model_get(model, &iter, MSG_PTR_COLUMN, &msg, -1);
+    if (msg != NULL)
+      gtranslator_message_show(msg);
+  }
+}
+
+
+/*
  * Create the new messages table
  */
-GtkWidget *gtranslator_messages_table_new(GtrPo *po)
+GtrMessagesTable *gtranslator_messages_table_new()
 {
-  GtkWidget *tree;
-  GtkTreeViewColumn *column;
-  GtkCellRenderer *renderer;
-  GtkTreeStore *store;
-  GtkTreeSelection *selection;
-
-	GList *list;
+	GtkWidget *tree;
+	GtkTreeViewColumn *column;
+  	GtkCellRenderer *renderer;
+	GtkTreeSelection *selection;
 	GtrMsg *msg;
-	const char *msgid, *msgstr;
+	GtrMessagesTable *table;
 
-	g_return_if_fail(po != NULL);
+	/*
+	 * Allocate some memory
+	 */
+	table = g_new0(GtrMessagesTable, 1);
 
-  store = gtk_tree_store_new (
+	/*
+	 * FIXME: move this call to application start-up and put a 'free/read' pair
+	 * into the preferences in case the user changes them mid-session. Othewise
+	 * it will be possible to double-allocate.
+	 */	 
+	read_messages_table_colors();
+
+	/*
+	 * Create the store and the view
+	 */
+	table->store = gtk_tree_store_new (
 		N_COLUMNS,
 		G_TYPE_STRING,
 		G_TYPE_STRING,
 		G_TYPE_POINTER,
 		GDK_TYPE_COLOR);
-  
-  tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
-  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(tree), TRUE);
+	table->widget = gtk_tree_view_new_with_model (GTK_TREE_MODEL (table->store));
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(table->widget), TRUE);
 
-  g_object_unref (G_OBJECT (store));
+	/* ? */
+	//g_object_unref (G_OBJECT (store));
 
-  /*
-   * pv, this for managing column widths
-   */
-  g_signal_connect(G_OBJECT(tree), "size-allocate",
+	/*
+   	 * pv, this for managing column widths
+	 */
+	g_signal_connect(G_OBJECT(table->widget), "size-allocate",
 		G_CALLBACK(gtranslator_tree_size_allocate), NULL );
 
-  /*
-   * Add the original msgid column with the color defs attached to it.
-   */
-  renderer=gtk_cell_renderer_text_new();
-  column=gtk_tree_view_column_new_with_attributes(_("Original"), renderer,
-	"text", ORIGINAL_COLUMN, "foreground-gdk", COLOR_COLUMN, NULL);
+	/*
+	 * Add the original msgid column with the color defs attached to it.
+	 */
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes(_("Original"), renderer,
+		"text", ORIGINAL_COLUMN,
+		"foreground-gdk", COLOR_COLUMN,
+		NULL);
+	gtk_tree_view_column_set_sort_column_id (column, ORIGINAL_COLUMN);
+	gtk_tree_view_column_set_resizable(column, TRUE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW(table->widget), column);
 
-  gtk_tree_view_column_set_sort_column_id (column, ORIGINAL_COLUMN);
-  gtk_tree_view_column_set_resizable(column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW(tree), column);
+	/*
+	 * The same now again for the translation - msgid.
+	 */
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes(_("Translation"), renderer,
+		"text", TRANSLATION_COLUMN,
+		"foreground-gdk", COLOR_COLUMN,
+		NULL);
+	gtk_tree_view_column_set_sort_column_id (column, TRANSLATION_COLUMN);
+	gtk_tree_view_column_set_resizable(column, TRUE);
+  	gtk_tree_view_append_column (GTK_TREE_VIEW(table->widget), column);
 
-  /*
-   * The same now again for the translation - msgid.
-   */
-  renderer=gtk_cell_renderer_text_new();
-  column=gtk_tree_view_column_new_with_attributes(_("Translation"), renderer,
-	"text", TRANSLATION_COLUMN, "foreground-gdk", COLOR_COLUMN, NULL);
+	/*
+	 * Hook up the 'selection changed' callback
+	 */
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(table->widget));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+	g_signal_connect (G_OBJECT(selection), "changed", 
+		G_CALLBACK(gtranslator_messages_table_selection_changed), 
+		NULL);
 
-  gtk_tree_view_column_set_sort_column_id (column, TRANSLATION_COLUMN);
-  gtk_tree_view_column_set_resizable(column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW(tree), column);
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(tree));
-  gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
-  g_signal_connect (G_OBJECT(selection), "changed", 
-		    G_CALLBACK(gtranslator_messages_table_selection_changed), 
-		    NULL);
-
-	list = po->messages;
-
-	read_messages_table_colors();
-
-	messages_table=g_new0(GtrMessagesTable, 1);
-
-	gtk_tree_store_append (store, &messages_table->untranslated_node, NULL);
-	gtk_tree_store_set (store, &messages_table->untranslated_node, 
+	/*
+	 * Set up the initial Untranslated/Fuzzy/Translated parent nodes
+	 */
+	gtk_tree_store_append (table->store, &table->untranslated_node, NULL);
+	gtk_tree_store_set (table->store, &table->untranslated_node, 
 		      ORIGINAL_COLUMN, _("Untranslated"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      COLOR_COLUMN, &messages_table_colors->untranslated_color,
 		      -1);
 
-	gtk_tree_store_append (store, &messages_table->fuzzy_node, NULL);
-	gtk_tree_store_set (store, &messages_table->fuzzy_node, 
+	gtk_tree_store_append (table->store, &table->fuzzy_node, NULL);
+	gtk_tree_store_set (table->store, &table->fuzzy_node, 
 		      ORIGINAL_COLUMN, _("Fuzzy"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      COLOR_COLUMN, &messages_table_colors->fuzzy_color,
 		      -1);
 
-	gtk_tree_store_append (store, &messages_table->translated_node, NULL);
-	gtk_tree_store_set (store, &messages_table->translated_node, 
+	gtk_tree_store_append (table->store, &table->translated_node, NULL);
+	gtk_tree_store_set (table->store, &table->translated_node, 
 		      ORIGINAL_COLUMN, _("Translated"), 
 			  TRANSLATION_COLUMN, "",
 		      MSG_PTR_COLUMN, NULL,
 		      COLOR_COLUMN, &messages_table_colors->translated_color,
 		      -1);
 
-	while (list) {
-		msg = GTR_MSG(list->data);
-		msgid = po_message_msgstr(msg->message);
-		msgstr = po_message_msgstr(msg->message);
-		if(msg->is_fuzzy) {
-			gtk_tree_store_append(store, &msg->iter,
-				&messages_table->fuzzy_node);
-			gtk_tree_store_set(store, &msg->iter, ORIGINAL_COLUMN,
-				msgid, TRANSLATION_COLUMN,
-				msgstr, MSG_PTR_COLUMN,
-				msg, COLOR_COLUMN,
-				&messages_table_colors->fuzzy_color, -1);
-		}
-		else if(msgstr[0] != '\0') {
-			gtk_tree_store_append(store, &msg->iter,
-				&messages_table->translated_node);
-			gtk_tree_store_set(store, &msg->iter, ORIGINAL_COLUMN,
-				msgid, TRANSLATION_COLUMN,
-				msgstr, MSG_PTR_COLUMN, msg,
-				COLOR_COLUMN,
-				&messages_table_colors->translated_color, -1);
-		}
-		else {
-			gtk_tree_store_append(store, &msg->iter,
-				&messages_table->untranslated_node);
-			gtk_tree_store_set(store, &msg->iter, ORIGINAL_COLUMN,
-				msgid, TRANSLATION_COLUMN,
-				msgstr, MSG_PTR_COLUMN, msg,
-				COLOR_COLUMN,
-				&messages_table_colors->untranslated_color, -1);
-		}
-
-		list = g_list_next(list);
-	}
-
 	if(GtrPreferences.collapse_all) {
-		gtk_tree_view_collapse_all(GTK_TREE_VIEW(tree));
+		gtk_tree_view_collapse_all(GTK_TREE_VIEW(table->widget));
 	}
 	else {
-		gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
+		gtk_tree_view_expand_all(GTK_TREE_VIEW(table->widget));
 	}
+
+	return table;
+}
+
+
+/*
+ * Populate a messages table from a given po
+ */
+void gtranslator_messages_table_populate(GtrMessagesTable *table, GList *messages)
+{
+	GtrMsg *msg;
+	const char *msgid, *msgstr;
 	
-  return tree;
+	g_assert(table!=NULL);
 
+	while (messages) {
+		msg = GTR_MSG(messages->data);
+		msgid = po_message_msgid(msg->message);
+		msgstr = po_message_msgstr(msg->message);
+		if(msg->is_fuzzy) {
+			gtk_tree_store_append(table->store, &msg->iter,
+				&table->fuzzy_node);
+			gtk_tree_store_set(table->store, &msg->iter,
+				ORIGINAL_COLUMN, msgid,
+				TRANSLATION_COLUMN, msgstr,
+				MSG_PTR_COLUMN,	msg,
+				COLOR_COLUMN, &messages_table_colors->fuzzy_color,
+				-1);
+		}
+		else if(msgstr[0] != '\0') {
+			gtk_tree_store_append(table->store, &msg->iter,
+				&table->translated_node);
+			gtk_tree_store_set(table->store, &msg->iter,
+				ORIGINAL_COLUMN, msgid,
+				TRANSLATION_COLUMN, msgstr,
+				MSG_PTR_COLUMN, msg,
+				COLOR_COLUMN, &messages_table_colors->translated_color,
+				-1);
+		}
+		else {
+			gtk_tree_store_append(table->store, &msg->iter,
+				&table->untranslated_node);
+			gtk_tree_store_set(table->store, &msg->iter,
+				ORIGINAL_COLUMN, msgid,
+				TRANSLATION_COLUMN, msgstr,
+				MSG_PTR_COLUMN, msg,
+				COLOR_COLUMN, &messages_table_colors->untranslated_color,
+				-1);
+		}
 
+		messages = g_list_next(messages);
+	}
 }
 
 /*
  * Update the data in a single row
  */
-void gtranslator_messages_table_update_row(GtrPage *page, GtrMsg *msg)
+void gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *msg)
 {
 	GtkTreeStore *model;
 	const char *msgid, *msgstr;
 
-	g_return_if_fail(page->po != NULL);
-	g_return_if_fail(page->messages_tree != NULL);
-
-	model = GTK_TREE_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(page->messages_tree)));
+	g_assert(table != NULL);
 
 	msgid = po_message_msgid(msg->message);
 	msgstr = po_message_msgstr(msg->message);
 	if(msg->is_fuzzy) {
-		gtk_tree_store_append(model, &msg->iter, &messages_table->fuzzy_node);
-		gtk_tree_store_set(model, &msg->iter, ORIGINAL_COLUMN,
+		gtk_tree_store_append(table->store, &msg->iter, &table->fuzzy_node);
+		gtk_tree_store_set(table->store, &msg->iter, ORIGINAL_COLUMN,
 			msgid, TRANSLATION_COLUMN, msgstr, MSG_PTR_COLUMN, msg,
 			COLOR_COLUMN, messages_table_colors->fuzzy, -1);
 	}
 	else if(msgstr[0] != '\0') {
-		gtk_tree_store_append(model, &msg->iter,
-			&messages_table->translated_node);
-		gtk_tree_store_set(model, &msg->iter, ORIGINAL_COLUMN, msgid,
+		gtk_tree_store_append(table->store, &msg->iter,
+			&table->translated_node);
+		gtk_tree_store_set(table->store, &msg->iter, ORIGINAL_COLUMN, msgid,
 			 TRANSLATION_COLUMN, msgstr, MSG_PTR_COLUMN, msg,
 			 COLOR_COLUMN, messages_table_colors->translated, -1);
 	}
 	else {
-		gtk_tree_store_append(model, &msg->iter,
-			&messages_table->untranslated_node);
-		gtk_tree_store_set(model, &msg->iter, ORIGINAL_COLUMN,
+		gtk_tree_store_append(table->store, &msg->iter,
+			&table->untranslated_node);
+		gtk_tree_store_set(table->store, &msg->iter, ORIGINAL_COLUMN,
 			msgid, TRANSLATION_COLUMN, msgstr, MSG_PTR_COLUMN, msg, 
 			COLOR_COLUMN, messages_table_colors->untranslated, -1);
 	}
@@ -355,36 +384,23 @@ void gtranslator_messages_table_update_row(GtrPage *page, GtrMsg *msg)
 /*
  * Select given message
  */
-void gtranslator_messages_table_select_row(GtrPage *page, GtrMsg *msg)
+void gtranslator_messages_table_select_row(GtrMessagesTable *table, GtrMsg *msg)
 {
-	GtkTreeSelection	*selection=NULL;
+	GtkTreeSelection *selection=NULL;
 
-	g_return_if_fail(page->messages_tree != NULL);
+	g_return_if_fail(table->store!=NULL);
 
-	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(page->messages_tree));
+	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(table->store));
 	gtk_tree_selection_select_iter(selection, &msg->iter);
-}
-
-static void 
-gtranslator_messages_table_selection_changed(GtrPage *page, GtkTreeSelection *selection,
-					     gpointer data)
-{
-  GtkTreeIter iter;
-  GtkTreeModel* model;
-  GtrMsg* msg;
-
-  if (gtk_tree_selection_get_selected(selection, &model, &iter) == TRUE) {
-    gtk_tree_model_get(model, &iter, MSG_PTR_COLUMN, &msg, -1);
-    if (msg != NULL)
-      gtranslator_message_go_to(g_list_find(page->po->messages, msg));
-  }
-
 }
 
 /*
  * Finish with messages table
  */
-void gtranslator_message_table_free(GtkWidget *messages_table) {
-	gtk_widget_destroy(messages_table);
+void gtranslator_message_table_free(GtrMessagesTable *table) {
+	gtk_widget_destroy(table->widget);
+	gtk_object_destroy(GTK_OBJECT(table->widget));
 	free_messages_table_colors();
+	g_free(table);
 }
+

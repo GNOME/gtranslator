@@ -25,6 +25,7 @@
 
 #include "gui.h"
 #include "parse.h"
+#include "messages-table.h"
 
 /*
  * This class encapsulated all the widgets related to a PO file
@@ -37,8 +38,7 @@ typedef struct {
 
 	GtkWidget *content_pane;
 
-	GtkWidget *messages_table;
-	GtkWidget *messages_tree;
+	GtrMessagesTable *messages_table;
 	
 	GtkWidget *comment;
 	GtkWidget *edit_button;
@@ -70,7 +70,12 @@ GtrPage* gtranslator_page_new(GtrPo *po);
 /*
  * Show/hide the messages table
  */
-void gtranslator_page_messages_table_show(GtrPage *page);
-void gtranslator_page_messages_table_hide(GtrPage *page);
+void gtranslator_page_show_messages_table(GtrPage *page);
+void gtranslator_page_hide_messages_table(GtrPage *page);
+
+/*
+ * Called at autosave time
+ */
+gboolean gtranslator_page_autosave(GtrPage *page);
 
 #endif

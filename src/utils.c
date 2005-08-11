@@ -305,65 +305,10 @@ void gtranslator_utils_create_gtranslator_directory()
 gboolean gtranslator_utils_autosave(gpointer data)
 {
 	GError *error = NULL;
-	GtrPo *po;
-	
-	g_return_val_if_fail(po!=NULL,FALSE);
-
-	po = (GtrPo*)data;
 
 	/*
-	 * As the file didn't change, we don't need to autosave it, but
-	 *  the timeout function must still return TRUE for getting it's
-	 *   periodic sense.
+	 * Call autosave on any currently open pages
 	 */
-	g_return_val_if_fail(po->file_changed,TRUE);
-
-	/*
-	 * Should we use a different suffix for the autosaved files?
-	 *  (Should help differing the own-saved/autosaved po files.)
-	 */
-	if(GtrPreferences.autosave_with_suffix) 
-	{
-		gchar *autosave_filename;
-		
-		/*
-		 * Take "autosave" as the fallback autosave suffix.
-		 */
-		if(GtrPreferences.autosave_suffix)
-		{
-			autosave_filename=g_strdup_printf("%s.%s",
-				po->filename, 
-				GtrPreferences.autosave_suffix);
-		}
-		else
-		{
-			autosave_filename=g_strdup_printf("%s.autosave",
-				po->filename);
-		}
-
-		gtranslator_save_file(po, autosave_filename, &error);
-		g_free(autosave_filename);
-	}
-	else
-	{
-		gtranslator_save_file(po, po->filename, &error);
-	}
-		
-	if(error != NULL) {
-		GtkWidget *dialog;
-		dialog = gtk_message_dialog_new(
-			GTK_WINDOW(gtranslator_application),
-			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_WARNING,
-			GTK_BUTTONS_OK,
-			_("Error autosaving file: %s"), error->message);
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
-		g_clear_error(&error);
-		return FALSE;
-	}
-		
-	return TRUE;
 }
 
 /*

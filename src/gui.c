@@ -787,7 +787,7 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	 * If required, set up the messages table
 	 */	
 	if(GtrPreferences.show_messages_table) {
-		gtranslator_page_messages_table_show(current_page);
+		gtranslator_page_show_messages_table(current_page);
 		return current_page->table_pane;
 	}
 	

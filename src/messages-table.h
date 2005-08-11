@@ -23,39 +23,44 @@
 #define GTR_MESSAGES_TABLE_H 1
 
 #include <gtk/gtkwidget.h>
+#include <gtk/gtktreestore.h>
 #include "message.h"
-#include "page.h"
 
-enum
-{
-	COL_NUMBER,
-	COL_LINE,
-	COL_ORIGINAL,
-	COL_TRANSLATION,
-	COL_COMMENT,
-	COL_STATUS,
-	COL_BOLD,
-	COL_COLOR,
-};
+/*
+ * Attributes of the messages table
+ */
+typedef struct {
+	GtkWidget *widget;
+	GtkTreeStore *store;
+	GtkTreeIter untranslated_node;
+	GtkTreeIter fuzzy_node;
+	GtkTreeIter translated_node;
+} GtrMessagesTable;
+
 
 /*
  * Returns the ready widget with all the specs.
  */
-GtkWidget *gtranslator_messages_table_new(GtrPo *po);
- 
+GtrMessagesTable *gtranslator_messages_table_new();
+
+/*
+ * Populate a messages table from a given po
+ */
+void gtranslator_messages_table_populate(GtrMessagesTable *table, GList *messages);
+
 /*
  * Update the data in a single row
  */
-void gtranslator_messages_table_update_row(GtrPage *page, GtrMsg *message); 
+void gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *message); 
 
 /*
  * Select given message
  */
-void gtranslator_messages_table_select_row(GtrPage *page, GtrMsg *message);
+void gtranslator_messages_table_select_row(GtrMessagesTable *table, GtrMsg *message);
 
 /*
  * Frees resources allocated to this messages table
  */
-void gtranslator_messages_table_free(GtkWidget *messages_table);
+void gtranslator_messages_table_free(GtrMessagesTable *table);
  
 #endif

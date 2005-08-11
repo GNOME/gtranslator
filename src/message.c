@@ -140,6 +140,7 @@ void gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer us
  */
 void gtranslator_message_show(GtrMsg *msg)
 {
+	GtkBox *text_vbox, *trans_vbox;
 	GtkTextBuffer *buf;
 	const char *msgid, *msgid_plural, *msgstr[15];
 
@@ -149,15 +150,17 @@ void gtranslator_message_show(GtrMsg *msg)
 	 * Clear up previous message widgets from the original/translated
 	 * fields
 	 */
+	text_vbox = GTK_BOX(current_page->text_vbox);
 	while(g_list_length(GTK_BOX(current_page->text_vbox)->children) > 0) {
-		gpointer widget = GTK_BOX(current_page->text_vbox)->children->data;
+		gpointer widget = text_vbox->children->data;
 		gtk_widget_destroy(GTK_WIDGET(widget));
-		GTK_BOX(current_page->text_vbox)->children = GTK_BOX(current_page->text_vbox)->children->next;
+		text_vbox->children = text_vbox->children->next;
 	}
-	while(g_list_length(GTK_BOX(current_page->trans_vbox)->children) > 0) {
-		gpointer widget = GTK_BOX(current_page->trans_vbox)->children->data;
+	trans_vbox = GTK_BOX(current_page->trans_vbox);
+	while(g_list_length(trans_vbox->children) > 0) {
+		gpointer widget = trans_vbox->children->data;
 		gtk_widget_destroy(GTK_WIDGET(widget));
-		GTK_BOX(current_page->text_vbox)->children = GTK_BOX(current_page->trans_vbox)->children->next;
+		trans_vbox->children = trans_vbox->children->next;
 	}
 	
 	/*
@@ -259,7 +262,7 @@ void gtranslator_message_update(void)
 	 */
 	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_update_row(current_page, msg);
+		gtranslator_messages_table_update_row(current_page->messages_table, msg);
 	}
 
 	/*
@@ -299,7 +302,7 @@ void gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	gtranslator_message_update();
 	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_update_row(current_page, GTR_MSG(po->current->data));
+		gtranslator_messages_table_update_row(current_page->messages_table, GTR_MSG(po->current->data));
 	}
 }
 
@@ -331,7 +334,7 @@ void gtranslator_message_go_to(GList * to_go)
 
 	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_select_row(current_page, GTR_MSG(po->current->data));
+		gtranslator_messages_table_select_row(current_page->messages_table, GTR_MSG(po->current->data));
 	}
 	
 	pos = g_list_position(po->messages, po->current);
