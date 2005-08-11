@@ -82,11 +82,6 @@ void gtranslator_utils_create_gtranslator_directory(void);
 gboolean gtranslator_utils_autosave(gpointer data);
 
 /*
- * Returns whether the given file_uri's prefix is supported.
- */
-gboolean gtranslator_utils_uri_supported(const gchar *file_uri);
-
-/*
  * Free's the list data and the list itself safely.
  */
 void gtranslator_utils_free_list(GList *list, gboolean free_contents);

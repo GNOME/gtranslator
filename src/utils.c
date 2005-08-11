@@ -304,31 +304,17 @@ void gtranslator_utils_create_gtranslator_directory()
  */
 gboolean gtranslator_utils_autosave(gpointer data)
 {
-	GError *error = NULL;
+	GList	*pagelist;
+	GtrPage	*page;
 
 	/*
 	 * Call autosave on any currently open pages
 	 */
-}
-
-/*
- * Test the prefixes of the given file_uri for support.
- */
-gboolean gtranslator_utils_uri_supported(const gchar *file_uri)
-{
-	if(nautilus_istr_has_prefix(file_uri, "http://") ||
-		nautilus_istr_has_prefix(file_uri, "https://") ||
-		nautilus_istr_has_prefix(file_uri, "ftp://") ||
-		nautilus_istr_has_prefix(file_uri, "file:/") ||
-		nautilus_istr_has_prefix(file_uri, "www.") ||
-		nautilus_istr_has_prefix(file_uri, "ftp.") ||
-		nautilus_istr_has_prefix(file_uri, "nfs:/"))
-	{
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
+	pagelist = pages;
+	while(pagelist) {
+		page = (GtrPage*)pagelist->data;
+		gtranslator_page_autosave(page);
+		pagelist = pagelist->next;
 	}
 }
 
