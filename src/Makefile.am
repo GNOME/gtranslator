@@ -7,13 +7,14 @@ INCLUDES = \
 	-I$(includedir)						\
 	-I$(srcdir)/semerkent					\
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
-	-DPREFIX=\""$(prefix)"\"				\
-	-DSYSCONFDIR=\""$(sysconfdir)"\"			\
-	-DDATADIR=\""$(datadir)"\"				\
-	-DLIBDIR=\""$(libdir)"\"				\
-	$(GTRANSLATOR_CFLAGS)					\
-	$(DEPRECATED_FLAGS)					\
-	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"				\
+        -DPREFIX=\""$(prefix)"\"                                \
+        -DSYSCONFDIR=\""$(sysconfdir)"\"                        \
+        -DDATADIR=\""$(datadir)"\"                              \
+        -DLIBDIR=\""$(libdir)"\"                                \
+	$(GTRANSLATOR_CFLAGS)                                   \
+	$(GTKSPELL_CFLAGS)                                      \
+	$(DEPRECATED_FLAGS)                                     \
+	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"                         \
 	-DSCHEMESDIR=\""$(datadir)"/gtranslator/colorschemes\"	\
 	-DSCRIPTSDIR=\""$(datadir)"/gtranslator/scripts\"	\
 	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"
@@ -60,6 +61,7 @@ gtranslator_SOURCES = \
 gtranslator_LDADD = \
 	$(INTLLIBS) \
 	$(GTRANSLATOR_LIBS)
+	$(GTKSPELL_LIBS)
 	
 gtranslator_LDFLAGS = \
 	-Wall
