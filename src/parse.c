@@ -51,7 +51,6 @@
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtklabel.h>
-#include <gtkspell/gtkspell.h>
 
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app-util.h>

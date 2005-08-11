@@ -64,7 +64,6 @@
 #include <libgnomeui/gnome-popup-menu.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
-#include <gtkspell/gtkspell.h>
 
 /*
  * Global external variables

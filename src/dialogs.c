@@ -359,17 +359,19 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		gtranslator_actions_enable(ACT_SAVE);
 
 		/*
+		 * Set the label contents in the GUI.
+		 */
+		gtk_label_set_text(GTK_LABEL(extra_content_view->comment),
+			comment_string->str);
+		gtk_widget_set_sensitive(extra_content_view->edit_button,
+			strlen(comment_string->str) > 0);
+
+		/*
 		 * Free all the used stuff here.
 		 */
 		GTR_FREE(comment_dialog_contents);
 		g_strfreev(checkarray);
 		g_string_free(comment_string, TRUE);
-		
-		/*
-		 * Set the label contents in the GUI.
-		 */
-		gtk_label_set_text(GTK_LABEL(extra_content_view->comment),
-			comment->pure_comment);
 	}
 	
 	gtk_widget_destroy(GTK_WIDGET(dialog));

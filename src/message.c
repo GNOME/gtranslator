@@ -41,14 +41,19 @@
 #include <string.h>
 #include <regex.h>
 #include <gtk/gtk.h>
-#include <gtkspell/gtkspell.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-util.h>
+
+#ifdef HAVE_GTKSPELL
+#include <gtkspell/gtkspell.h>
+#endif
 
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
+#ifdef HAVE_GTKSPELL
 GtkSpell *gtrans_spell = NULL;
+#endif
 
 /*
  * The callback handling the editing of the plural forms and the correcponding tree handle.
@@ -253,6 +258,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		gtk_text_buffer_set_text(buf, msg->msgstr, -1);
 	}
 
+#ifdef HAVE_GTKSPELL
 	/*
 	 * Use instant spell checking via gtkspell only if the corresponding
 	 *  setting in the preferences is set.
@@ -279,6 +285,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		gtrans_spell = NULL;
 	    }
 	}
+#endif
 
 	gtk_check_menu_item_set_active(
 		GTK_CHECK_MENU_ITEM(the_edit_menu[19].widget),
