@@ -3,17 +3,20 @@
 # --------------------------------------------------------
 
 INCLUDES = \
-	-I$(top_srcdir) \
-	-I$(includedir) \
-	-I$(srcdir)/semerkent \
+	-I$(top_srcdir)						\
+	-I$(includedir)						\
+	-I$(srcdir)/semerkent					\
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
-        -DPREFIX=\""$(prefix)"\"                                \
-        -DSYSCONFDIR=\""$(sysconfdir)"\"                        \
-        -DDATADIR=\""$(datadir)"\"                              \
-        -DLIBDIR=\""$(libdir)"\"                                \
-	$(GTRANSLATOR_CFLAGS)                                   \
-	$(DEPRECATED_FLAGS)                                     \
-	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"
+	-DPREFIX=\""$(prefix)"\"				\
+	-DSYSCONFDIR=\""$(sysconfdir)"\"			\
+	-DDATADIR=\""$(datadir)"\"				\
+	-DLIBDIR=\""$(libdir)"\"				\
+	$(GTRANSLATOR_CFLAGS)					\
+	$(DEPRECATED_FLAGS)					\
+	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"				\
+	-DSCHEMESDIR=\""$(datadir)"/gtranslator/colorschemes\"	\
+	-DSCRIPTSDIR=\""$(datadir)"/gtranslator/scripts\"	\
+	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"
 
 bin_PROGRAMS = \
 	gtranslator
@@ -21,27 +24,12 @@ bin_PROGRAMS = \
 #	gtranslator-auto-learn \
 #	gtranslator-export-learn-buffer
 
-GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shell pkg-config --modversion gtk+-2.0) / $(shell pkg-config --modversion libgnomeui-2.0) / $(shell pkg-config --modversion libxml-2.0)"
-
-defines.h: $(srcdir)/defines.config
-	sed \
-	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
-	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
-	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
-	-e s,"&SCHEMESDIR","$(datadir)/gtranslator/colorschemes",g \
-	-e s,"&SCRIPTSDIR","$(datadir)/gtranslator/scripts",g \
-	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
-		< $< > $@
-
-BUILT_SOURCES = defines.h
-
 gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
 	bookmark.c bookmark.h \
 	comment.c comment.h \
 	compile.c compile.h \
-	defines.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
@@ -85,7 +73,4 @@ gtranslator_LDFLAGS = \
 #gtranslator_export_learn_buffer_SOURCES = \
 #	export-learn-buffer.c
 #	
-#CLEANFILES = defines.h
-
-EXTRA_DIST = ChangeLog \
-	defines.config
+EXTRA_DIST = ChangeLog

@@ -26,7 +26,6 @@
 #include <config.h>
 #endif
 
-#include "defines.h"
 #include "learn.h"
 #include "messages-table.h"
 #include "message.h"

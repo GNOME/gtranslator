@@ -26,7 +26,6 @@
 #include <gnome.h>
 
 #include "config.h"
-#include "defines.h"
 #include "learn.h"
 #include "prefs.h"
 #include "runtime-config.h"
@@ -49,7 +48,6 @@
  */
 static gchar 	*gtranslator_geometry=NULL;
 
-static gboolean build_information=FALSE;
 static gboolean learn_statistics=FALSE;
 
 /*
@@ -64,10 +62,6 @@ static struct poptOption gtranslator_options[] = {
 	{
 	 	NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE,
 	 	0, NULL, NULL
-	},
-	{
-		"build-information", 'b', POPT_ARG_NONE, &build_information,
-		0, N_("Show build specifications"), NULL
 	},
 	{
 		"geometry", 'g', POPT_ARG_STRING, &gtranslator_geometry,
@@ -279,30 +273,4 @@ int main(int argc, char *argv[])
 	gtk_main();
 	
 	return 0;
-}
-
-void show_build_information() {
-	#define NICE_PRINT(x); \
-		g_print("\n\t%s\n", x);
-
-	g_print("\t\n");
-	g_print(_("gtranslator build information/specs:"));
-	g_print("\n\n");
-	g_print(_("Version and build date:"));
-	NICE_PRINT(BUILD_STRING);
-	g_print(_("Build GLib / Gtk+ / GNOME / XML versions:"));
-	NICE_PRINT(BUILD_VERSIONS);
-	g_print(_("Colorschemes directory:"));
-	NICE_PRINT(SCHEMESDIR);
-	g_print(_("Scripts directory:"));
-	NICE_PRINT(SCRIPTSDIR);
-	g_print(_("Window icon:"));
-	NICE_PRINT(WINDOW_ICON);
-	g_print(_("Own locale directory:"));
-	NICE_PRINT(DATADIR "/locale");
-	g_print(_("Default learn buffer file location:"));
-	NICE_PRINT("~/.gtranslator/umtf/personal-learn-buffer.xml");
-	g_print("\n");
-
-	#undef NICE_PRINT
 }
