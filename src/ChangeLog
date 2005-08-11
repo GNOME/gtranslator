@@ -1,3 +1,14 @@
+2005-08-12  Jordi Mallach  <jordi@sindominio.net>
+
+	* main.c: Get rid of the build_information function entirely.
+	
+	* Makefile.am (INCLUDES): Add defines from defines.config here and
+	stop generating defines.h.
+	* color-schemes.c, main.c, menus.c, messages-table.c,
+	prefs.c, prefs_init.c, update.c: Don't include defines.h.
+	
+	* defines.config: Removed.
+
 2005-08-12  Ross Golder  <ross@golder.org>
 
 	* dialogs.c: Fixed crash when deleting comment (#146193)

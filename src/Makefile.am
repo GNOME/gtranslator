@@ -15,23 +15,12 @@ INCLUDES = \
         -DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
 	$(DEPRECATED_FLAGS)                                     \
-	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"
+	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"				\
+	-DSCHEMESDIR=\""$(datadir)"/gtranslator/colorschemes\"	\
+	-DSCRIPTSDIR=\""$(datadir)"/gtranslator/scripts\"	\
+	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"
 
 bin_PROGRAMS = gtranslator
-
-GTRANSLATOR_BUILD_VERSIONS = "$(shell pkg-config --modversion glib-2.0) / $(shell pkg-config --modversion gtk+-2.0) / $(shell pkg-config --modversion libgnomeui-2.0) / $(shell pkg-config --modversion libxml-2.0)"
-
-defines.h: $(srcdir)/defines.config
-	sed \
-	-e s,"&GNOMELOCALEDIR","$(datadir)/locale",g \
-	-e s,"&BUILD_STRING","$(VERSION) -- $(shell date +%Y-%m-%d\ %H:%M:%S)",g \
-	-e s,"&BUILD_VERSIONS",$(GTRANSLATOR_BUILD_VERSIONS),g \
-	-e s,"&SCHEMESDIR","$(datadir)/gtranslator/colorschemes",g \
-	-e s,"&SCRIPTSDIR","$(datadir)/gtranslator/scripts",g \
-	-e s,"&WINDOW_ICON","$(datadir)/pixmaps/gtranslator.png",g \
-		< $< > $@
-
-BUILT_SOURCES = defines.h
 
 gtranslator_SOURCES = \
 	about.c about.h \
@@ -39,7 +28,6 @@ gtranslator_SOURCES = \
 	bookmark.c bookmark.h \
 	color-schemes.c color-schemes.h \
 	comment.c comment.h \
-	defines.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
@@ -75,7 +63,4 @@ gtranslator_LDADD = \
 	$(GTRANSLATOR_LIBS) \
 	semerkent/libsemerkent.a
 
-#CLEANFILES = defines.h
-
-EXTRA_DIST = ChangeLog \
-	defines.config
+EXTRA_DIST = ChangeLog

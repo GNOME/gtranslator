@@ -28,7 +28,6 @@
 #include "actions.h"
 #include "bookmark.h"
 #include "color-schemes.h"
-#include "defines.h"
 #include "dialogs.h"
 #include "gui.h"
 #include "learn.h"
@@ -69,7 +68,6 @@ static gchar	*learn_file=NULL;
 static gchar	*auto_translate_file=NULL;
 static gchar	*exporting_po_file=NULL;
 
-static gboolean	build_information=FALSE;
 static gboolean learn_statistics=FALSE;
 
 /*
@@ -83,10 +81,6 @@ static struct poptOption gtranslator_options[] = {
 	{
 		"auto-translate", 'a', POPT_ARG_STRING, &auto_translate_file,
 		0, N_("Auto translate the po file"), N_("FILENAME")
-	},
-	{
-		"build-information", 'b', POPT_ARG_NONE, &build_information,
-		0, N_("Show build specifications"), NULL
 	},
 	{
 		"export-learn-buffer", 'e', POPT_ARG_STRING, &exporting_po_file,
@@ -167,38 +161,6 @@ int main(int argc, char *argv[])
 			   NULL);
 	context = gnome_program_preinit(program, PACKAGE, VERSION, argc, argv);
 	bind_textdomain_codeset(PACKAGE, "UTF-8");
-
-	/*
-	 * Show up build information if desired.
-	 */
-	if(build_information)
-	{
-		#define NICE_PRINT(x); \
-			g_print("\n\t%s\n", x);
-
-		g_print("\t\n");
-		g_print(_("gtranslator build information/specs:"));
-		g_print("\n\n");
-		g_print(_("Version and build date:"));
-		NICE_PRINT(BUILD_STRING);
-		g_print(_("Build GLib / Gtk+ / GNOME / XML versions:"));
-		NICE_PRINT(BUILD_VERSIONS);
-		g_print(_("Colorschemes directory:"));
-		NICE_PRINT(SCHEMESDIR);
-		g_print(_("Scripts directory:"));
-		NICE_PRINT(SCRIPTSDIR);
-		g_print(_("Window icon:"));
-		NICE_PRINT(WINDOW_ICON);
-		g_print(_("Own locale directory:"));
-		NICE_PRINT(DATADIR "/locale");
-		g_print(_("Default learn buffer file location:"));
-		NICE_PRINT("~/.gtranslator/umtf/personal-learn-buffer.xml");
-		g_print("\n");
-
-		#undef NICE_PRINT
-
-		exit(1);
-	}
 
 	/* Initialize configuration client */
 	gtranslator_config_init();

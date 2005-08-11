@@ -26,7 +26,6 @@
 #endif
 
 #include "color-schemes.h"
-#include "defines.h"
 #include "dialogs.h"
 #include "find.h"
 #include "gui.h"
