@@ -71,11 +71,6 @@ static struct poptOption gtranslator_options[] = {
 };
 
 /*
- * Internal function prototypes
- */
-void show_build_information();
-
-/*
  * The ubiquitous main function...
  */
 int main(int argc, char *argv[])
@@ -136,15 +131,6 @@ int main(int argc, char *argv[])
 			   NULL);
 	context = gnome_program_preinit(program, PACKAGE, VERSION, argc, argv);
 	bind_textdomain_codeset(PACKAGE, "UTF-8");
-
-	/*
-	 * Show up build information if desired.
-	 */
-	if(build_information)
-	{
-		show_build_information();
-		exit(1);
-	}
 
 	/* Initialize configuration client */
 	gtranslator_config_init();
