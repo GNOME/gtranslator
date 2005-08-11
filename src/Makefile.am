@@ -2,7 +2,7 @@
 # Welcome to the gtranslator-automake-autoconf Wonderland!
 # --------------------------------------------------------
 
-SUBDIRS = pixmaps semerkent
+SUBDIRS = pixmaps
 
 INCLUDES = \
 	-I$(top_srcdir) \
@@ -14,6 +14,7 @@ INCLUDES = \
         -DDATADIR=\""$(datadir)"\"                              \
         -DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
+	$(GTKSPELL_CFLAGS)                                   \
 	$(DEPRECATED_FLAGS)                                     \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"				\
 	-DSCHEMESDIR=\""$(datadir)"/gtranslator/colorschemes\"	\
@@ -61,6 +62,6 @@ gtranslator_SOURCES = \
 gtranslator_LDADD = \
 	$(INTLLIBS) \
 	$(GTRANSLATOR_LIBS) \
-	semerkent/libsemerkent.a
+	$(GTKSPELL_LIBS)
 
 EXTRA_DIST = ChangeLog
