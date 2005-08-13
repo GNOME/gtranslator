@@ -5,7 +5,6 @@ SUBDIRS = data doc help man src po
 EXTRA_DIST= \
 		DEPENDS \
 		HACKING \
-		kabalak_generate_all_the_files.sh \
 		gtranslator.spec.in \
 		gtranslator.spec \
 		intltool-extract.in \
