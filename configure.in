@@ -59,7 +59,7 @@ dnl -------------------------------------------------------------------
 GETTEXT_PACKAGE=gtranslator
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE(GETTEXT_PACKAGE,[gtranslator],[Package name for use by gettext library])
-ALL_LINGUAS="am az be bg bs ca cs da de el en_CA en_GB es et eu fa fi fr ga gl hr hu id is it ja ko lt lv nb nl nn no pa pl pt pt_BR ru rw sk sq sr sr@Latn sv ta th tk tr uk vi wa zh_CN zh_TW"
+ALL_LINGUAS="am az be bg bs ca cs da de el en_CA en_GB es et eu fa fi fr ga gl hr hu id is it ja ko ku lt lv nb nl nn no pa pl pt pt_BR ru rw sk sq sr sr@Latn sv ta th tk tr uk vi wa zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 AC_CHECK_FUNC(bind_textdomain_codeset,,[AC_CHECK_LIB(intl,bind_textdomain_codeset)])
 
