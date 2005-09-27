@@ -30,16 +30,13 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-program.h>
 
-#include <libgnomeui/gnome-about.h>
+#include <gtk/gtk.h>
 
 /*
  * Creates and shows the about box for gtranslator.
  */ 
 void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 {
-	static GtkWidget *about = NULL;
-	GdkPixbuf *pixbuf = NULL;
-	gchar *file;
 	
 	const gchar *authors[] = {
 		"Ross Golder <ross@golder.org>",
@@ -57,26 +54,30 @@ void gtranslator_about_dialog(GtkWidget * widget, gpointer useless)
 		NULL
 	};	
 
+	GdkPixbuf *pixbuf = NULL;
+	gchar *image = gnome_program_locate_file(NULL, GNOME_FILE_DOMAIN_PIXMAP, "gtranslator.png",TRUE, NULL);
+	GdkPixbuf *file = gdk_pixbuf_new_from_file (image, NULL);
+	GtkWidget *about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
+                                     "name", PACKAGE_NAME, 
+                                     "version", VERSION,
+			             "copyright", _("(C) 1999-2005 The Free Software Foundation, Inc."),
+				     "comments", _("gtranslator is a po file editing suite with many bells and whistles."),
+			             "authors", authors,
+			             "documenters", documenters,
+			             "translator-credits", _("translator-credits"),
+				     "logo", file,
+                                     NULL);
 	if (about != NULL)
 	{
 		gtk_window_present(GTK_WINDOW(about));
 		return;
 	}
 
-	pixbuf = NULL;
-	
-	file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP,
-	                                  "gtranslator.png", TRUE, NULL);
 	if (file) {
-		pixbuf = gdk_pixbuf_new_from_file (file, NULL);
+		pixbuf = gdk_pixbuf_new_from_file (image, NULL);
 		g_free (file);
 	} else
 		g_warning (G_STRLOC ": gtranslator.png cannot be found");
-
-	about = gnome_about_new(PACKAGE_NAME, PACKAGE_VERSION,
-		_("(C) 1999 The Free Software Foundation, Inc."),
-		_("gtranslator is a po file editing suite with many bells and whistles."),
-		authors, documenters, _("translator-credits"), pixbuf);
 
 	if (pixbuf) {
 		g_object_unref (pixbuf);
