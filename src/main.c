@@ -25,7 +25,6 @@
 #endif
 #include <gnome.h>
 
-#include "config.h"
 #include "learn.h"
 #include "prefs.h"
 #include "runtime-config.h"
