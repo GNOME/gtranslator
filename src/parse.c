@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <error.h>
 
 #include <sys/param.h>
 
@@ -78,7 +79,7 @@ void gtranslator_parser_dialog_create(void) {
 	 * Prepare a graphical tail :) (the notorious GTK+ FAQ)
 	 */
 	view = gtk_text_view_new ();
-	gtk_window_set_default_size(GTK_WINDOW(view), 320, 200);
+	gtk_widget_set_size_request(GTK_WIDGET(view), 320, 200);
 	g_object_set(view, "editable", FALSE, NULL);
 	parser_dialog_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 	parser_dialog = gtk_dialog_new_with_buttons (_("Parser output"),
@@ -101,7 +102,10 @@ void gtranslator_parser_dialog_destroy(GtkWidget *widget)
 	parser_dialog = NULL;
 }
 
-/* Error handler functions for gettext parser */
+/*
+ * Error handler functions for gettext parser.
+ * See gettext-po.h for more info.
+ */
 void gettext_error(int status, int errnum, const char *format, ...) {
 	va_list args;
 	GtkTextIter iter;
@@ -118,39 +122,58 @@ void gettext_error(int status, int errnum, const char *format, ...) {
 	gtk_text_buffer_insert (parser_dialog_buffer, &iter, buf, -1);
 	g_free(buf);
 	va_end(args);
+
+	/* According to gettext-po.h, we must do this */
+	error_message_count++;
 }
 
 void gettext_error_at_line(int status, int errnum, const char *filename,
 	unsigned int lineno, const char *format, ...) {
 	va_list args;
-	GtkTextIter iter;
 	char *buf = NULL, *errmsg;
-
-	/* Kick off a parser dialog if one doesn't exist */
-	if(parser_dialog == NULL)
-		gtranslator_parser_dialog_create();
 
 	/* Obtain post-formatted error message */
 	va_start(args, format);
 	buf = g_strdup_printf(format, args);
-	errmsg = g_strdup_printf("%s:%d: %s", filename, lineno, buf);
-	gtk_text_buffer_get_iter_at_offset (parser_dialog_buffer, &iter, -1);
-	gtk_text_buffer_insert (parser_dialog_buffer, &iter, buf, -1);
+	errmsg = g_strdup_printf("%s:%u: %s\n", filename, lineno, buf);
+	gettext_error(status, errnum, errmsg);
 	g_free(errmsg);
 	g_free(buf);
 	va_end(args);
 }
 
 void gettext_multiline_warning(char *prefix, char *message) {
-	g_message("gettext_multiline_warning(%s, %s)", prefix, message);
-	free((void *)prefix);
-	free((void *)message);
+	char *buf = NULL;
+	GtkTextIter iter;
+
+	/* Kick off a parser dialog if one doesn't exist */
+	if(parser_dialog == NULL)
+		gtranslator_parser_dialog_create();
+
+	/* Obtain post-formatted error message */
+	buf = g_strdup_printf("warning (%s): %s\n", prefix, message);
+	gtk_text_buffer_get_iter_at_offset (parser_dialog_buffer, &iter, -1);
+	gtk_text_buffer_insert (parser_dialog_buffer, &iter, buf, -1);
+	g_free(buf);
+
+	/* According to gettext-po.h, we must do this */
+	if(prefix != NULL)
+		error_message_count++;
 }
 
 void gettext_multiline_error(char *prefix, char *message) {
-	g_message("gettext_multiline_error(%s, %s)", prefix, message);
-	free((void *)prefix);
-	free((void *)message);
+	char *buf = NULL;
+	GtkTextIter iter;
+
+	/* Kick off a parser dialog if one doesn't exist */
+	if(parser_dialog == NULL)
+		gtranslator_parser_dialog_create();
+
+	/* Obtain post-formatted error message */
+	buf = g_strdup_printf("error (%s): %s", prefix, message);
+	gtk_text_buffer_get_iter_at_offset (parser_dialog_buffer, &iter, -1);
+	gtk_text_buffer_insert (parser_dialog_buffer, &iter, buf, -1);
+	g_free(buf);
 }
 
 struct po_error_handler gettext_error_handler = {
