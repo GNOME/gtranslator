@@ -210,6 +210,10 @@ GtrLanguage languages[] = {
 	 "indlinux-marathi@lists.sourceforge.net", "8bit"
 	},
 	{
+	 N_("Mongolian"), "mn", "UTF-8",
+	 "l10n@linux.org.mn", "8bit"
+	},
+	{
 	 N_("Norwegian/Bokmaal"), "no", "iso-8859-1",
 	 "i18n-nb@lister.ping.uio.no", "8bit"
 	},
