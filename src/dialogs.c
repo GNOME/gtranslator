@@ -135,31 +135,24 @@ void gtranslator_file_chooser_analyse(gpointer dialog, FileselMode mode)
 {	
 	gint reply;
 
-	gchar *po_file;
-	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
-	
-	do{
-		reply = gtk_dialog_run(GTK_DIALOG (dialog));
-		switch (reply){
-			case GTK_RESPONSE_ACCEPT:
-				if (mode == FILESEL_OPEN){
-					gtranslator_parse_the_file_from_file_dialog(GTK_WIDGET(dialog));
-				} else {
-					gtranslator_save_file_dialog(GTK_WIDGET(dialog));
-				}
-				break;
-			case GTK_RESPONSE_CANCEL:
-				gtk_widget_hide(GTK_WIDGET(dialog));
-				break;
-			case GTK_RESPONSE_DELETE_EVENT:
-				gtk_widget_hide(GTK_WIDGET(dialog));
-				break;
-			default:
-				break;
-		}
-	} while (GTK_WIDGET_VISIBLE(dialog));
-	
-	gtk_widget_destroy(GTK_WIDGET(dialog));
+	reply = gtk_dialog_run(GTK_DIALOG (dialog));
+	switch (reply){
+		case GTK_RESPONSE_ACCEPT:
+			if (mode == FILESEL_OPEN){
+				gtranslator_parse_the_file_from_file_dialog(GTK_WIDGET(dialog));
+			} else {
+				gtranslator_save_file_dialog(GTK_WIDGET(dialog));
+			}
+			break;
+		case GTK_RESPONSE_CANCEL:
+			gtk_widget_hide(GTK_WIDGET(dialog));
+			break;
+		case GTK_RESPONSE_DELETE_EVENT:
+			gtk_widget_hide(GTK_WIDGET(dialog));
+			break;
+		default:
+			break;
+	}
 }
 
 /*
