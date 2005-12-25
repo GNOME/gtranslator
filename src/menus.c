@@ -164,7 +164,7 @@ GnomeUIInfo the_edit_menu[] = {
 		N_("Toggle fuzzy status of a message"),
 		gtranslator_message_status_toggle_fuzzy,
 		NULL, NULL,
-		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
+		GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/fuzzy_small.png",
 		GDK_2, GDK_MOD1_MASK, NULL
 	},
 	GNOMEUIINFO_SEPARATOR,
@@ -214,14 +214,14 @@ GnomeUIInfo the_go_menu[] = {
 	 GNOME_APP_UI_ITEM, N_("Next fuz_zy"),
 	 N_("Go to next fuzzy message"),
 	 gtranslator_message_go_to_next_fuzzy, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy_small.png",
+	 GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/fuzzy_small.png",
 	 'Z', GDK_MOD1_MASK, NULL
 	},
 	{
 	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
 	 N_("Go to next untranslated message"),
 	 gtranslator_message_go_to_next_untranslated, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, "gtranslator/untranslated_small.png",
+	 GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/untranslated_small.png",
 	 'U', GDK_MOD1_MASK, NULL
 	},
 	GNOMEUIINFO_END
@@ -311,14 +311,14 @@ GnomeUIInfo the_navibar[] = {
 		GNOME_APP_UI_ITEM, N_("Missing"),
 		N_("Go to next untranslated message"),
 		gtranslator_message_go_to_next_untranslated, NULL, NULL,
-		GNOME_APP_PIXMAP_FILENAME, "gtranslator/untranslated.png",
+		GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/untranslated.png",
 		0, 0, NULL
 	},
 	{
 		GNOME_APP_UI_ITEM, N_("Fuzzy"),
 		N_("Go to the next fuzzy translation"),
 		gtranslator_message_go_to_next_fuzzy, NULL, NULL,
-		GNOME_APP_PIXMAP_FILENAME, "gtranslator/fuzzy.png",
+		GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/fuzzy.png",
 		0, 0, NULL
 	},
 	GNOMEUIINFO_ITEM_STOCK(N_("Go to"),
