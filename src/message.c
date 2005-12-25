@@ -151,16 +151,16 @@ void gtranslator_message_show(GtrMsg *msg)
 	 * fields
 	 */
 	text_vbox = GTK_BOX(current_page->text_vbox);
-	while(g_list_length(GTK_BOX(current_page->text_vbox)->children) > 0) {
-		gpointer widget = text_vbox->children->data;
-		gtk_widget_destroy(GTK_WIDGET(widget));
-		text_vbox->children = text_vbox->children->next;
+	while(g_list_length(text_vbox->children) > 0) {
+		GtkBoxChild *boxchild = text_vbox->children->data;
+		gtk_widget_destroy(boxchild->widget);
+		g_list_remove(text_vbox->children, boxchild);
 	}
 	trans_vbox = GTK_BOX(current_page->trans_vbox);
 	while(g_list_length(trans_vbox->children) > 0) {
-		gpointer widget = trans_vbox->children->data;
-		gtk_widget_destroy(GTK_WIDGET(widget));
-		trans_vbox->children = trans_vbox->children->next;
+		GtkBoxChild *boxchild = trans_vbox->children->data;
+		gtk_widget_destroy(boxchild->widget);
+		g_list_remove(trans_vbox->children, boxchild);
 	}
 	
 	/*
@@ -178,7 +178,8 @@ void gtranslator_message_show(GtrMsg *msg)
 			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 		}
 		current_page->text_msgid = gtk_text_view_new_with_buffer(buf);
-		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid, FALSE, FALSE, 0);
+		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid, TRUE, TRUE, 0);
+		gtk_widget_show(current_page->text_msgid);
 	}
 	msgid_plural = po_message_msgid_plural(msg->message);
 	if(msgid_plural) {
@@ -191,8 +192,9 @@ void gtranslator_message_show(GtrMsg *msg)
 		else {
 			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 		}
-		current_page->text_msgid = gtk_text_view_new_with_buffer(buf);
-		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid, FALSE, FALSE, 0);
+		current_page->text_msgid_plural = gtk_text_view_new_with_buffer(buf);
+		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid_plural, TRUE, TRUE, 0);
+		gtk_widget_show(current_page->text_msgid_plural);
 	}
 	msgstr[0] = po_message_msgstr(msg->message);
 	

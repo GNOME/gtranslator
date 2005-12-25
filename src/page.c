@@ -118,6 +118,7 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	page->text_vbox = gtk_vbox_new(TRUE, 1);
+	gtk_box_set_homogeneous(page->text_vbox, TRUE);
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(original_text_scrolled_window), page->text_vbox);
 
 	/* Translation box is a vbox, containing one textview in most cases,
@@ -128,6 +129,7 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	page->trans_vbox = gtk_vbox_new(TRUE, 1);
+	gtk_box_set_homogeneous(page->trans_vbox, TRUE);
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(translation_text_scrolled_window), page->trans_vbox);
 
 	/*
@@ -165,7 +167,7 @@ void gtranslator_page_hide_messages_table(GtrPage *page) {
 gboolean gtranslator_page_autosave(GtrPage *page) {
 	char *folder, *filename;
 	gchar *autosave_filename;
-	GError *error;
+	GError *error = NULL;
 	
 	/*
 	 * As the file didn't change, we don't need to autosave it, but
