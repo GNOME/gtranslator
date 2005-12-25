@@ -68,58 +68,50 @@ GtrComment *gtranslator_comment_new(const gchar *comment_string)
 	
 	g_return_val_if_fail(comment_string!=NULL, NULL);
 
+	if(comment_string[0]!='#')
+		return NULL;
+
 	comment->comment=g_strdup(comment_string);
 
-	/*
-	 * Categorize the current given comment.
-	 */
-	if(comment->comment[0]!='#')
-	{
-		g_free(comment->comment);
-		return NULL;
-	}
-	else
-	{
-		gint	c=0;
+	gint	c=0;
 		
+	/*
+	 * Check for any match in our prefix/types table.
+	 */
+	while(GtrPrefixTypes[c].prefix!=NULL)
+	{
 		/*
-		 * Check for any match in our prefix/types table.
+		 * If the prefix could be "matched", get type and 
+		 *  pure_comment out of the full comment text.
 		 */
-		while(GtrPrefixTypes[c].prefix!=NULL)
+		if(nautilus_istr_has_prefix(comment->comment, 
+			GtrPrefixTypes[c].prefix))
 		{
+			gint 	i=0;
+			
 			/*
-			 * If the prefix could be "matched", get type and 
-			 *  pure_comment out of the full comment text.
+			 * Set the current type flag.
 			 */
-			if(nautilus_istr_has_prefix(comment->comment, 
-				GtrPrefixTypes[c].prefix))
+			comment->type |= GtrPrefixTypes[c].type;
+
+			/*
+			 * Strip the matched prefix out of the string.
+			 */
+			comment->pure_comment=nautilus_str_replace_substring(comment->comment, GtrPrefixTypes[c].prefix, "");
+
+			/*
+			 * Now do also strip all the other prefixes out
+			 *  of the pure_comment.
+			 */
+			while(GtrPrefixTypes[i].prefix!=NULL)
 			{
-				gint 	i=0;
-			
-				/*
-				 * Set the current type flag.
-				 */
-				comment->type |= GtrPrefixTypes[c].type;
-
-				/*
-				 * Strip the matched prefix out of the string.
-				 */
-				comment->pure_comment=nautilus_str_replace_substring(comment->comment, GtrPrefixTypes[c].prefix, "");
-
-				/*
-				 * Now do also strip all the other prefixes out
-				 *  of the pure_comment.
-				 */
-				while(GtrPrefixTypes[i].prefix!=NULL)
-				{
-					comment->pure_comment=nautilus_str_replace_substring(comment->pure_comment, GtrPrefixTypes[i].prefix, "");
+				comment->pure_comment=nautilus_str_replace_substring(comment->pure_comment, GtrPrefixTypes[i].prefix, "");
 					
-					i++;
-				}
+				i++;
 			}
-			
-			c++;
 		}
+		
+		c++;
 	}
 
 	/*
