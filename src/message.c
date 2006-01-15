@@ -143,7 +143,8 @@ void gtranslator_message_show(GtrMsg *msg)
 	GtkBox *text_vbox, *trans_vbox;
 	GtkTextBuffer *buf;
 	const char *msgid, *msgid_plural, *msgstr[15];
-
+	int i;
+	
 	g_assert(current_page != NULL);
 
 	/*
@@ -178,7 +179,8 @@ void gtranslator_message_show(GtrMsg *msg)
 			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 		}
 		current_page->text_msgid = gtk_text_view_new_with_buffer(buf);
-		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid, TRUE, TRUE, 0);
+		gtk_text_view_set_editable(GTK_TEXT_VIEW(current_page->text_msgid), FALSE);
+		gtk_box_pack_start(text_vbox, current_page->text_msgid, TRUE, TRUE, 0);
 		gtk_widget_show(current_page->text_msgid);
 	}
 	msgid_plural = po_message_msgid_plural(msg->message);
@@ -193,10 +195,41 @@ void gtranslator_message_show(GtrMsg *msg)
 			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 		}
 		current_page->text_msgid_plural = gtk_text_view_new_with_buffer(buf);
-		gtk_box_pack_end(GTK_BOX(current_page->text_vbox), current_page->text_msgid_plural, TRUE, TRUE, 0);
+		gtk_text_view_set_editable(GTK_TEXT_VIEW(current_page->text_msgid), FALSE);
+		gtk_box_pack_start(text_vbox, current_page->text_msgid_plural, TRUE, TRUE, 0);
 		gtk_widget_show(current_page->text_msgid_plural);
 	}
 	msgstr[0] = po_message_msgstr(msg->message);
+	if(msgstr[0]) {
+		buf = gtk_text_buffer_new(NULL);
+		if(GtrPreferences.dot_char) {
+			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr[0]);
+			gtk_text_buffer_set_text(buf, temp, -1);
+			g_free(temp);
+		}
+		else {
+			gtk_text_buffer_set_text(buf, (gchar*)msgstr[0], -1);
+		}
+		current_page->trans_msgstr[0] = gtk_text_view_new_with_buffer(buf);
+		gtk_box_pack_start(trans_vbox, current_page->trans_msgstr[0], TRUE, TRUE, 0);
+		gtk_widget_show(current_page->trans_msgstr[0]);
+	}
+	i=2;
+	while(msgid_plural && (msgstr[i] = po_message_msgstr_plural(msg->message, i - 1))) {
+		buf = gtk_text_buffer_new(NULL);
+		if(GtrPreferences.dot_char) {
+			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr[i]);
+			gtk_text_buffer_set_text(buf, temp, -1);
+			g_free(temp);
+		}
+		else {
+			gtk_text_buffer_set_text(buf, (gchar*)msgstr[i], -1);
+		}
+		current_page->trans_msgstr[i] = gtk_text_view_new_with_buffer(buf);
+		gtk_box_pack_start(trans_vbox, current_page->trans_msgstr[i], TRUE, TRUE, 0);
+		gtk_widget_show(current_page->trans_msgstr[i]);
+		i++;
+	}
 	
 	/*
 	 * Set up the comment display.

@@ -629,7 +629,7 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		}
 		if(current_page->messages_table)
 		{
-			gtranslator_messages_table_update_row(current_page, msg);
+			gtranslator_messages_table_update_row(current_page->messages_table, msg);
 		}
 	}
 }
@@ -759,8 +759,8 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	/* Message string box is a vbox, containing one textview in most cases,
 	   or two in the case of a plural message */
 	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_start(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(vertical_box), gtk_hseparator_new(), FALSE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(vertical_box), gtk_hseparator_new(), FALSE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(original_text_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
@@ -770,7 +770,7 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	/* Translation box is a vbox, containing one textview in most cases,
 	   or more in the case of a plural message */
 	translation_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_start(GTK_BOX(vertical_box), translation_text_scrolled_window, TRUE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(vertical_box), translation_text_scrolled_window, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(translation_text_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
