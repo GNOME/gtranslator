@@ -128,7 +128,8 @@ static GtrLanguage *gtranslator_translator_read_language()
 		"language/mime_type");
 	gtranslator_translator_read_value(&language->bits,
 		"language/encoding");
-
+	gtranslator_translator_read_value(&language->plural,
+		"language/plural_form_string");
 	return language;
 }
 
@@ -148,10 +149,25 @@ GtrTranslator *gtranslator_translator_new()
 	/*
 	 * Read the translator specific values from the preferences.
 	 */
+#ifdef GTR_ABOUT_ME
+	gchar	*name = NULL;
+	gchar	*email = NULL;
+	
+	if(gtranslator_config_get_bool("toggles/use_about_me")) 
+		if (gtranslator_config_about_me(&name, &email) && 
+						!(name == NULL || name == '\0') &&
+						email != NULL) {
+		new_translator->name = name;
+		new_translator->email = email;
+	} else {
+#endif
 	gtranslator_translator_read_value(&new_translator->name, 
 		"translator/name");
 	gtranslator_translator_read_value(&new_translator->email, 
 		"translator/email");
+#ifdef GTR_ABOUT_ME
+	}
+#endif
 	gtranslator_translator_read_value(&new_translator->learn_buffer,
 		"translator/learn_buffer");
 	gtranslator_translator_read_value(&new_translator->tm_buffer,
@@ -422,9 +438,14 @@ void gtranslator_translator_save(GtrTranslator *translator)
 	/*
 	 * Save the translator's personal settings.
 	 */
+#ifdef GTR_ABOUT_ME
+	if(!gtranslator_config_get_bool("toggles/use_about_me")) {
+#endif
 	gtranslator_config_set_string("translator/name", translator->name);
 	gtranslator_config_set_string("translator/email", translator->email);
-	
+#ifdef GTR_ABOUT_ME
+	}
+#endif
 	/*
 	 * Save the language settings.
 	 */
@@ -438,7 +459,8 @@ void gtranslator_translator_save(GtrTranslator *translator)
 		translator->language->encoding);
 	gtranslator_config_set_string("language/encoding", 
 		translator->language->bits);
-
+	gtranslator_config_set_string("language/plural_form_string", 
+		translator->language->plural);
 	/*
 	 * Save the TM/auto translation settings.
 	 */
@@ -455,7 +477,9 @@ void gtranslator_translator_free(GtrTranslator *translator)
 {
 	if(translator)
 	{
+		if (translator->name != NULL)
 		g_free(translator->name);
+		if (translator->email != NULL)
 		g_free(translator->email);
 		g_free(translator->learn_buffer);
 		g_free(translator->tm_buffer);
@@ -465,6 +489,7 @@ void gtranslator_translator_free(GtrTranslator *translator)
 		g_free(translator->language->encoding);
 		g_free(translator->language->group_email);
 		g_free(translator->language->bits);
+		g_free(translator->language->plural);
 		g_free(translator->language);
 
 		g_free(translator);

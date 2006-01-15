@@ -159,4 +159,8 @@ void gtranslator_xml_set_integer_prop_by_name(xmlNode *parent, const xmlChar *pr
 
 int  gtranslator_mkdir_hier (const char *path, mode_t mode);
 	
+GdkPixbuf *gtranslator_pixbuf_from_file(gchar *file);
+
+gchar *gtranslator_config_plural_form_string(gchar *lang);
+	
 #endif

@@ -56,6 +56,12 @@ typedef struct {
 	 * 5 - The transfer bit count for the language (e.g. "8bit").
 	 */
 	gchar *bits;
+
+	/*
+	 * 6 - plural form string;
+	 */
+	gchar *plural;
+
 } GtrLanguage;
 
 /*

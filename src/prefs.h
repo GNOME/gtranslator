@@ -48,7 +48,6 @@ struct {
 	guint show_messages_table	: 1;
 	guint show_comment		: 1;
 	guint collapse_all		: 1;
-	guint show_plural_forms		: 1;
 
 	/*
 	 * Special options, taken by value in the prefs-box.
@@ -60,16 +59,15 @@ struct {
 	guint dot_char			: 1;
 	guint check_recent_file		: 1;
 	guint use_own_fonts		: 1;
-	guint use_own_colors		: 1;
-	guint use_own_mt_colors		: 1;
 	guint instant_spell_check	: 1;
-	guint use_own_dict		: 1;
 	guint keep_obsolete		: 1;
 	guint sweep_compile_file	: 1;
 	guint autosave			: 1;
 	guint autosave_with_suffix	: 1;
 	guint max_history_entries	: 10;
-
+#ifdef GTR_ABOUT_ME
+	guint use_about_me		: 1;
+#endif
 	guint hotkey_char;
 
 	/*
@@ -82,11 +80,8 @@ struct {
 	 * User-specified strings.
 	 */
 	gchar *autosave_suffix; 
-	gchar *spell_command;
-	gchar *dictionary;
 	gchar *msgid_font;
 	gchar *msgstr_font;
-	gchar *scheme;
 } GtrPreferences;
 
 /*

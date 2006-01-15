@@ -225,7 +225,7 @@ void gtranslator_utils_set_language_values_by_language(const gchar *language)
 			
 			gtranslator_config_set_string("language/mime_type", languages[i].encoding);
 			gtranslator_config_set_string("language/encoding", languages[i].bits);
-
+			gtranslator_config_set_string("language/plural_string", languages[i].plural);
 			return;
 		}
 	}
@@ -832,4 +832,78 @@ int gtranslator_mkdir_hier(const char *path, mode_t mode)
 
         g_free(copy);
         return 0;
+}
+
+GdkPixbuf*
+gtranslator_pixbuf_from_file(gchar *file)
+{
+    GdkPixbuf    *pixbuf;
+    GError       *error = NULL;
+    pixbuf = gdk_pixbuf_new_from_file(file, &error);
+
+    if (error){
+		g_critical ("Could not load pixbuf: %s\n", error->message);
+		g_error_free(error);
+		return NULL;
+    }
+    return pixbuf;
+}
+
+gchar*
+gtranslator_get_plural_form_string(gchar *lang)
+{
+
+#define BUF_SIZE 2048
+	
+	gchar	*cmd, 
+			*po_test_file,
+			**pair,
+			buf[BUF_SIZE],
+			*plural_forms = NULL;
+	FILE 	*fs;
+		
+	g_return_val_if_fail(lang!=NULL,NULL);
+	
+	/*
+	 * Check if msginit is available on the system.
+	 */
+	if(!g_find_program_in_path("msginit")) {
+		gtranslator_utils_error_dialog(_("Sorry, msginit isn't available on your system!"));
+		return NULL;
+	}	
+	po_test_file = g_strconcat ("# SOME DESCRIPTIVE TITLE.\n",
+				"# Copyright (C) YEAR Free Software Foundation, Inc.\n",
+				"# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n",
+				"#\n",
+				"#, fuzzy\n",
+				"msgid \"\"\n",
+				"msgstr \"\"\n",
+				"\"Project-Id-Version: PACKAGE VERSION\\n\"\n",
+				"\"POT-Creation-Date: 2002-06-25 03:23+0200\\n\"\n",
+				"\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n",
+				"\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"\n",
+				"\"Language-Team: LANGUAGE <LL@li.org>\\n\"\n",
+				"\"MIME-Version: 1.0\\n\"\n",
+				"\"Content-Type: text/plain; charset=CHARSET\\n\"\n",
+				"\"Content-Transfer-Encoding: ENCODING\\n\"\n",
+				NULL);
+	
+	cmd = g_strdup_printf("echo '%s' | msginit -i- -l %s -o- --no-translator --no-wrap 2>/dev/null",
+							po_test_file, lang);
+	
+	fs = popen(cmd,"r");
+
+#define if_key_is(str) if (pair[0] && !strcmp(pair[0],str))
+	while(fgets(buf, BUF_SIZE, fs) != NULL)
+	{
+		pair = g_strsplit(buf, ": ", 2);		
+		if_key_is("\"Plural-Forms")
+		{
+		    plural_forms = g_strdup(*g_strsplit(pair[1], "\\n\"", 0));						
+		}
+		g_strfreev(pair);
+	}
+	
+	pclose(fs);
+	return plural_forms;
 }

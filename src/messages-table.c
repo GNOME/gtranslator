@@ -84,30 +84,10 @@ static void read_messages_table_colors()
 	/*
 	 * Read the values from the prefs in -- but only if desired.
 	 */
-	if(GtrPreferences.use_own_mt_colors)
-	{
-		gchar	*value;
-		
-#define set_color(key,member,defaultcolor) \
-		value=gtranslator_config_get_string("colors/messages_table_" key);  \
-		if(value && value[0]=='#') {                                        \
-			messages_table_colors->member=g_strdup(value);                  \
-			g_free(value);                                                  \
-		}                                                                   \
-		else {                                                              \
-			messages_table_colors->member=g_strdup(defaultcolor);           \
-		}
-		set_color("untranslated", untranslated, TABLE_UNTRANSLATED_COLOR);
-		set_color("translated", translated, TABLE_TRANSLATED_COLOR);
-		set_color("fuzzy", fuzzy, TABLE_FUZZY_COLOR);
-#undef set_color
-	}
-	else
-	{
 		messages_table_colors->untranslated=g_strdup(TABLE_UNTRANSLATED_COLOR);
 		messages_table_colors->fuzzy=g_strdup(TABLE_FUZZY_COLOR);
 		messages_table_colors->translated=g_strdup(TABLE_TRANSLATED_COLOR);
-	}
+
 
 	/*
 	 * Now parse our defined color strings into the GdkColor structs of 
