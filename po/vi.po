@@ -6,8 +6,8 @@ msgid ""
 ""
 msgstr "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-10 04:04+0100\n"
-"PO-Revision-Date: 2006-01-11 14:11+1030\n"
+"POT-Creation-Date: 2006-01-16 04:13+0100\n"
+"PO-Revision-Date: 2006-01-16 15:19+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,8 @@ msgstr "Bản quyền © năm 1999-2005 Tổ chức Phần mềm Tự do"
 
 #:../src/about.c:64
 msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr "gtranslator là bộ ứng dụng soạn thảo tập tin dạng .po với nhiều chuông vào còi."
+msgstr "gtranslator là bộ ứng dụng soạn thảo tập tin dạng .po với nhiều chuông vào "
+"còi."
 
 #:../src/about.c:67
 msgid "translator-credits"
@@ -58,7 +59,7 @@ msgstr "Không thể gọi nhận thông tin về tác giả."
 #.* Translators: These strings are used as author informations if
 #.*  no author informations could be retrieved:
 #.
-#:../src/color-schemes.c:323 ../src/translator.c:318
+#:../src/color-schemes.c:323 ../src/translator.c:334
 msgid "Unknown"
 msgstr "Không biết"
 
@@ -168,7 +169,7 @@ msgstr "Ghi chú"
 msgid "English"
 msgstr "Tiếng Anh"
 
-#:../src/dialogs.c:607 ../src/dialogs.c:736 ../src/messages-table.c:245
+#:../src/dialogs.c:607 ../src/dialogs.c:736 ../src/messages-table.c:225
 msgid "Translation"
 msgstr "Câu dịch"
 
@@ -224,8 +225,8 @@ msgstr "Tập tin\n"
 "\n"
 "    %s\n"
 "\n"
-"đã mở trong một bản gtranslator tứa thời khác.\n "
-"Vui lòng đóng bản gtranslator tức thời khác\n"
+"đã mở trong một bản gtranslator tứa thời khác.\n"
+" Vui lòng đóng bản gtranslator tức thời khác\n"
 "cũng xử lý tập tin này, để có thể truy cập lại tập tin này.\n"
 "\n"
 "Gtranslator dại dột vẫn nên cố mở tập tin này không?"
@@ -341,7 +342,7 @@ msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ %i mờ còn lại ]"
 
 #:../src/gui.c:396 ../src/gui.c:400 ../src/menus.c:318
-#:../src/messages-table.c:275
+#:../src/messages-table.c:255
 msgid "Fuzzy"
 msgstr "Mờ"
 
@@ -350,7 +351,7 @@ msgstr "Mờ"
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Hết mờ ]"
 
-#:../src/gui.c:409 ../src/messages-table.c:283
+#:../src/gui.c:409 ../src/messages-table.c:263
 msgid "Translated"
 msgstr "Đã dịch"
 
@@ -360,7 +361,7 @@ msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ %i câu chưa dịch ]"
 
-#:../src/gui.c:417 ../src/gui.c:419 ../src/messages-table.c:267
+#:../src/gui.c:417 ../src/gui.c:419 ../src/messages-table.c:247
 msgid "Untranslated"
 msgstr "Chưa dịch"
 
@@ -436,19 +437,19 @@ msgstr "Tên người dịch:"
 msgid "Translator's e-mail:"
 msgstr "Địa chỉ thư của người dịch:"
 
-#:../src/header_stuff.c:553 ../src/prefs.c:457
+#:../src/header_stuff.c:553 ../src/prefs.c:872
 msgid "Language:"
 msgstr "Ngôn ngữ :"
 
-#:../src/header_stuff.c:560 ../src/prefs.c:469
+#:../src/header_stuff.c:560 ../src/prefs.c:901
 msgid "Language group's email:"
 msgstr "Địa chỉ thư nhóm dịch:"
 
-#:../src/header_stuff.c:567 ../src/prefs.c:475
+#:../src/header_stuff.c:567 ../src/prefs.c:887
 msgid "Charset:"
 msgstr "Bộ ký tự :"
 
-#:../src/header_stuff.c:574 ../src/prefs.c:480
+#:../src/header_stuff.c:574 ../src/prefs.c:894
 msgid "Encoding:"
 msgstr "Mã hóa:"
 
@@ -1060,12 +1061,12 @@ msgstr "Không còn thông điệp mờ nào nữa."
 msgid "All messages seem to be translated."
 msgstr "Hình như mọi thông điệp đã được dịch."
 
-#:../src/message.c:222
+#:../src/message.c:255
 #,c-format
 msgid "gtkspell error: %s\n"
 msgstr "lỗi gtkspell (trình chính tả): %s\n"
 
-#:../src/message.c:223
+#:../src/message.c:256
 #,c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1073,7 +1074,7 @@ msgid ""
 msgstr "GtkSpell không thể khởi động.\n"
 " %s"
 
-#:../src/messages-table.c:233
+#:../src/messages-table.c:213
 msgid "Original"
 msgstr "Gốc"
 
@@ -1135,233 +1136,263 @@ msgstr[0] "Tập tin %s\n"
 msgid "Couldn't generate the current date!"
 msgstr "Không thể phát sinh ngày tháng hiện giờ!"
 
-#:../src/prefs.c:209
-msgid "Hotkey indicating character:"
-msgstr "Phím nóng chỉ ký tự :"
+#:../src/prefs.c:462 ../src/prefs.c:566
+msgid " Categories: "
+msgstr " Phân loại:"
 
-#:../src/prefs.c:309
+#:../src/prefs.c:481
+msgid ""
+"Note: It was not possible to determine GNU header for plural forms. Maybe "
+"your GNU gettext tools are too old or they do not contain a suggested value "
+"for your language."
+msgstr "Ghi chú : không thể quyết định phần đầu GNU cho dạng thức ở số nhiều. Có lẽ bộ công cụ gettext GNU của bạn quá cũ, hoặc không chứa giá trị đã đệ nghị cho ngôn ngữ của bạn."
+
+#:../src/prefs.c:490
+msgid ""
+"Note: Your settings could not contain plural forms string. This data "
+"retrieved from GNU gettext tools."
+msgstr "Ghi chú : thiết lập của bạn không thể chứa chuỗi dạng thức ở số nhiều. Dữ liệu này được gọi từ bộ công cụ gettext của GNU."
+
+#:../src/prefs.c:495
+msgid ""
+"Note: Your settings contain invalid plural forms string. This data retrieved "
+"from GNU gettext tools."
+msgstr "Ghi chú : thiết lập của bạn chứa chuỗi dạng thức ở số nhiều không hợp lệ. Dữ liệu này được gọi từ bộ công cụ gettext của GNU."
+
+#:../src/prefs.c:545
 msgid "gtranslator -- options"
 msgstr "gtranslator -- tùy chọn"
 
-#.
-#.* Files page
-#.
-#:../src/prefs.c:328
+#:../src/prefs.c:597
 msgid "Files"
 msgstr "Tập tin"
 
-#:../src/prefs.c:329 ../src/prefs.c:487 ../src/prefs.c:522
+#.General item
+#:../src/prefs.c:604
 msgid "General"
 msgstr "Chung"
 
-#:../src/prefs.c:330
+#:../src/prefs.c:612
 msgid "Warn if po file contains fuzzy translations"
 msgstr "Cảnh báo nếu tập tin .po chứa câu dịch mờ"
 
-#:../src/prefs.c:334
+#:../src/prefs.c:616
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "Xóa các tập tin biên dịch (v.d. « dự_án.gmo »)"
 
-#:../src/prefs.c:338
+#.Autosave item
+#:../src/prefs.c:622
 msgid "Autosave"
 msgstr "Tự động lưu"
 
-#:../src/prefs.c:339
+#:../src/prefs.c:630
 msgid "Automatically save at regular intervals"
 msgstr "Tự động lưu một cách đều đặn"
 
-#:../src/prefs.c:347
+#:../src/prefs.c:638
 msgid "Autosave interval:"
 msgstr "Trễ tự động lưu :"
 
-#:../src/prefs.c:348
+#:../src/prefs.c:639
 msgid "Append a suffix to automatically saved files"
 msgstr "Phụ thêm hậu tố vào tập tin được lưu tự động"
 
-#:../src/prefs.c:355
+#:../src/prefs.c:646
 msgid "Suffix:"
 msgstr "Hậu tố :"
 
-#:../src/prefs.c:356
+#.Recent item
+#:../src/prefs.c:648
 msgid "Recent files"
 msgstr "Tập tin gần đây"
 
-#:../src/prefs.c:364
+#:../src/prefs.c:663
 msgid "Maximum number of entries in the recent files list:"
 msgstr "Số mục nhập tối đa trong danh sách « Tập tin gần đây »:"
 
-#:../src/prefs.c:365
+#:../src/prefs.c:664
 msgid "Check recent files before showing in recent files list"
 msgstr "Kiểm tra tập tin trong danh sách « Tập tin gần đây » trước khi hiển thị"
 
-#.
-#.* Editor page
-#.
-#:../src/prefs.c:373
+#:../src/prefs.c:675
 msgid "Editor"
 msgstr "Bộ soạn thảo"
 
-#:../src/prefs.c:376
+#.Text item
+#:../src/prefs.c:680
 msgid "Text display"
 msgstr "Hiển thị chữ"
 
-#:../src/prefs.c:377
+#:../src/prefs.c:694
 msgid "Highlight syntax of the translation message"
 msgstr "Nổi bật cú pháp của thông điệp dịch"
 
-#:../src/prefs.c:382
+#:../src/prefs.c:699
 msgid "Use special character to indicate white space"
 msgstr "Dùng ký tự đặc biệt để thể hiện khoảng trắng"
 
-#:../src/prefs.c:390
+#:../src/prefs.c:704
+msgid "Hotkey indicating character:"
+msgstr "Phím nóng chỉ ký tự :"
+
+#:../src/prefs.c:713
 msgid "Apply own fonts"
 msgstr "Áp dụng phông chữ riêng"
 
-#:../src/prefs.c:394
+#:../src/prefs.c:717
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- phông chữ tự chọn/msgid"
 
-#:../src/prefs.c:398
+#:../src/prefs.c:721
 msgid "Original text font:"
 msgstr "Font chữ gốc:"
 
-#:../src/prefs.c:399
+#:../src/prefs.c:722
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- phông chữ tự chọn/msgstr"
 
-#:../src/prefs.c:403
+#:../src/prefs.c:726
 msgid "Translation font:"
 msgstr "Phông chữ câu dịch:"
 
-#:../src/prefs.c:404
+#.Contents item
+#:../src/prefs.c:729
 msgid "Contents"
 msgstr "Nội dung"
 
-#:../src/prefs.c:405
+#:../src/prefs.c:742
 msgid "Remove fuzzy status if message is changed"
 msgstr "Gỡ bỏ trạng thái mờ nếu thông điệp đã thay đổi"
 
-#:../src/prefs.c:409
+#:../src/prefs.c:746
 msgid "Keep obsolete messages in the po files"
 msgstr "Giữ nguyên thông điệp cũ trong tập tin po"
 
-#:../src/prefs.c:413
-msgid "Spell checking"
-msgstr "Kiểm tra chính tả"
-
-#:../src/prefs.c:414
+#:../src/prefs.c:751
 msgid "Instant spell checking"
 msgstr "Kiểm tra chính tả tức thì"
 
-#:../src/prefs.c:420
-msgid "Use special dictionary:"
-msgstr "Dùng từ điển đặc biệt:"
-
-#.
-#.* PO header page
-#.
-#:../src/prefs.c:438
+#:../src/prefs.c:762 ../src/prefs.c:777
 msgid "PO header"
 msgstr "Phần đầu PO"
 
-#:../src/prefs.c:441
+#:../src/prefs.c:771
 msgid "Personal Information"
 msgstr "Thông tin cá nhân"
 
-#:../src/prefs.c:445
+#:../src/prefs.c:788
+msgid "Use self contact info from Evolution Data Server"
+msgstr "Dùng thông tin tự liên lạc từ trình Evolution Data Server"
+
+#:../src/prefs.c:798
+msgid "<i>Unable to get email from Evolution Data Server.</i>"
+msgstr "<i>Không thể lấy thư điện tử từ trình Evolution Data Server.</i>"
+
+#:../src/prefs.c:803
+msgid "My name:"
+msgstr "Tên tôi:"
+
+#:../src/prefs.c:808
+msgid "My E.mail:"
+msgstr "Địa chỉ thư tôi:"
+
+#:../src/prefs.c:812
+msgid "<b>Author's info</b>"
+msgstr "<b>Thông tin tác giả</b>"
+
+#:../src/prefs.c:816
+msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
+msgstr "<i>Không thể lấy thông tin cá nhân từ trình Evolution Data Server.</i>"
+
+#:../src/prefs.c:834
 msgid "Author's name:"
 msgstr "Tên tác giả:"
 
-#:../src/prefs.c:449
+#:../src/prefs.c:840
 msgid "Author's email:"
 msgstr "Địa chỉ thư của tác giả:"
 
-#:../src/prefs.c:450
+#.Language item
+#:../src/prefs.c:851
 msgid "Language settings"
 msgstr "Thiết lập ngôn ngữ"
 
-#:../src/prefs.c:463
+#:../src/prefs.c:879
 msgid "Language code:"
 msgstr "Mã ngôn ngữ :"
 
-#.
-#.* Functionality page
-#.
-#:../src/prefs.c:485
+#:../src/prefs.c:905
+msgid "Plural forms string:"
+msgstr "Chuỗi dạng thức ở số nhiều :"
+
+#:../src/prefs.c:920
 msgid "Functionality"
 msgstr "Chức năng"
 
-#:../src/prefs.c:488
-msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr "Cho phép chức năng cập nhật tập tin .po từ trong gtranslator"
+#:../src/prefs.c:935
+msgid "The Possibility to update a po file from within gtranslator"
+msgstr "Khả năng cập nhật tập tin .po từ trong gtranslator"
 
-#:../src/prefs.c:492
-msgid "Enable the functionality to remove all translations from a po file"
-msgstr "Cho phép chức năng gỡ bỏ mọi câu dịch trong tập tin .po"
+#:../src/prefs.c:939
+msgid "The Possibility to remove all translations from a po file"
+msgstr "Khả năng gỡ bỏ mọi câu dịch trong tập tin .po"
 
-#:../src/prefs.c:496
+#:../src/prefs.c:943
 msgid "Show instant comment view in main pane"
 msgstr "Hiển thị xem ghi chú tức thì trong ô chính"
 
-#:../src/prefs.c:500
-msgid "Display special dialog for messages with plural forms"
-msgstr "Hiển thị hộp thoại đặc biệt cho thông điệp kiểu ở số nhiều"
-
-#:../src/prefs.c:504
+#:../src/prefs.c:947
 msgid "Save geometry on exit and restore it on startup"
 msgstr "Lư vị trí khi thoát và phục hồi lại khi khởi động"
 
-#:../src/prefs.c:508
+#.Messages table item
+#:../src/prefs.c:953
 msgid "Messages table"
 msgstr "Bảng thông điệp"
 
-#:../src/prefs.c:509
+#:../src/prefs.c:961
 msgid "Show the messages table (requires restart)"
 msgstr "Hiện bảng thông điệp (cần khởi chạy lại gtranslator)"
 
-#:../src/prefs.c:513
+#:../src/prefs.c:965
 msgid "Collapse all entries by default"
 msgstr "Mặc định thu gọn các câu đã dịch"
 
-#.
-#.* Autotranslate page
-#.
-#:../src/prefs.c:521
+#:../src/prefs.c:976
 msgid "Autotranslation"
 msgstr "Tự động dịch"
 
-#:../src/prefs.c:523
-msgid ""
-"Also query the personal learn buffer while autotranslating untranslated "
-"messages"
-msgstr "Ngoài ra truy vấn bộ đệm học biết cá nhân trong khi tự động dịch các thông điệp "
-"chưa dịch"
+#:../src/prefs.c:988
+msgid "Query the personal learn buffer while autotranslating"
+msgstr "Ngoài ra truy vấn bộ đệm học biết cá nhân trong khi tự động dịch các thông "
+"điệp chưa dịch"
 
-#:../src/prefs.c:527
+#:../src/prefs.c:992
 msgid "Automatically learn a newly translated message"
 msgstr "Tự động học biết thông điệp mới dịch"
 
-#:../src/prefs.c:531
+#.Fuzzy item
+#:../src/prefs.c:998
 msgid "Fuzzy matching"
 msgstr "Khớp mờ"
 
-#:../src/prefs.c:538
+#:../src/prefs.c:1012
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr "Dùng hàm so khớp « mờ » cho truy vấn bộ đệm học biết"
 
-#:../src/prefs.c:545
+#:../src/prefs.c:1019
 msgid "Minimal required similarity persentage for fuzzy queries:"
 msgstr "Phần trăm tương tự tối thiểu cần thiết cho truy vấn mờ :"
 
-#:../src/prefs.c:593
+#:../src/prefs.c:1076
 msgid "Please enter your name!"
 msgstr "Vui lòng gõ tên bạn."
 
-#:../src/prefs.c:613
+#:../src/prefs.c:1105
 msgid "Please enter your EMail address!"
 msgstr "Vui lòng gõ địa chỉ thư của bạn."
 
-#:../src/prefs.c:633
+#:../src/prefs.c:1125
 msgid "Please enter a valid EMail address!"
 msgstr "Vui lòng gõ một địa chỉ thư hợp lệ."
 
@@ -1434,8 +1465,13 @@ msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
 msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-utf-8"
 
 #:../src/utils.c:274 ../src/utils.c:291
+#,c-format
 msgid "Can't create directory `%s'!"
 msgstr "Không thể tạo thư mục « %s »."
+
+#:../src/utils.c:871
+msgid "Sorry, msginit isn't available on your system!"
+msgstr "Rất tiết, msgfmt không sẵn sàng trên hệ thống của bạn."
 
 #:../src/utils_gui.c:141
 #,c-format
