@@ -479,7 +479,7 @@ void gtranslator_preferences_plural_string_request(gchar *locale){
 	gchar *plural_str = NULL, *msg = NULL;
 	
 	msg = _("Note: It was not possible to determine GNU header for plural forms. \
-Maybe your GNU gettext tools are too old or they do not contain \
+Your GNU gettext tools may be too old or they do not contain \
 a suggested value for your language.");
 
 	plural_str = gtranslator_get_plural_form_string(locale);
@@ -487,12 +487,12 @@ a suggested value for your language.");
 	if (g_string_equal(g_string_new(""), g_string_new(gtk_entry_get_text(GTK_ENTRY(plural)))))
 	{
 		if (plural_str != NULL)
-				msg = _("Note: Your settings could not contain plural forms string. This data retrieved from GNU gettext tools.");		  
+				msg = _("Note: Your settings do not contain a plural forms string. These data retrieved from GNU gettext tools.");		  
 	} else {
 		if (!g_string_equal(g_string_new(plural_str), g_string_new(gtk_entry_get_text(GTK_ENTRY(plural)))))
 		{	
 			if (plural_str != NULL) {
-				msg = _("Note: Your settings contain invalid plural forms string. This data retrieved from GNU gettext tools.");
+				msg = _("Note: Your settings contain an invalid plural forms string. These data retrieved from GNU gettext tools.");
 			} else {
 				gtk_label_set_text(GTK_LABEL(plural_note),"");
 				return;
@@ -805,7 +805,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 			gtk_label_set_justify(GTK_LABEL(my_email), GTK_JUSTIFY_LEFT);
 			gtranslator_preferences_pack_start_with_label(about_me_box, my_email,
 							personal_label_size_group, 
-						    NULL, _("My E.mail:"),FALSE);
+						    NULL, _("My Email:"),FALSE);
 		}
 		
 		GtkWidget *another_info;
