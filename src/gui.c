@@ -290,6 +290,7 @@ void gtranslator_quit()
 				return;
 			}
 		}
+		pagelist = g_list_remove(pagelist, page);
 	}
 
 	if(GtrPreferences.show_messages_table && (current_page != NULL))
