@@ -322,7 +322,7 @@ void remove_duplicate_entries(GList *list, GtrHistoryEntry *entry)
 			GList *r=rest;
 			
 			GTR_ITER(rest);
-			g_list_remove_link(list, r);
+			list = g_list_remove_link(list, r);
 
 			gtranslator_history_entry_free(GTR_HISTORY_ENTRY(r->data));
 			g_list_free_1(r);

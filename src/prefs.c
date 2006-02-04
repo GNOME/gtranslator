@@ -1288,6 +1288,7 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 
 static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)
 {
+	const gchar *locale;
 	gint c = 0;
 	G_CONST_RETURN gchar *current;
 
@@ -1306,8 +1307,8 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 				set_text(mime_type, encoding);
 				set_text(encoding, bits);
 				set_text(lg_email, group_email);
-				gtranslator_preferences_plural_string_request(
-						gtk_entry_get_text(GTK_ENTRY(GTK_BIN(lcode)->child)));
+				locale = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(lcode)->child));
+				gtranslator_preferences_plural_string_request((char *)locale);
 				break;
 			}
 			c++;
@@ -1321,8 +1322,8 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 				set_text(mime_type, encoding);
 				set_text(encoding, bits);
 				set_text(lg_email, group_email);
-				gtranslator_preferences_plural_string_request(
-						gtk_entry_get_text(GTK_ENTRY(GTK_BIN(lcode)->child)));
+				locale = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(lcode)->child));
+				gtranslator_preferences_plural_string_request((char *)locale);
 				break;
 			}
 			c++;

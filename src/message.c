@@ -155,13 +155,13 @@ void gtranslator_message_show(GtrMsg *msg)
 	while(g_list_length(text_vbox->children) > 0) {
 		GtkBoxChild *boxchild = text_vbox->children->data;
 		gtk_widget_destroy(boxchild->widget);
-		g_list_remove(text_vbox->children, boxchild);
+		text_vbox->children = g_list_remove(text_vbox->children, boxchild);
 	}
 	trans_vbox = GTK_BOX(current_page->trans_vbox);
 	while(g_list_length(trans_vbox->children) > 0) {
 		GtkBoxChild *boxchild = trans_vbox->children->data;
 		gtk_widget_destroy(boxchild->widget);
-		g_list_remove(trans_vbox->children, boxchild);
+		trans_vbox->children = g_list_remove(trans_vbox->children, boxchild);
 	}
 	
 	/*

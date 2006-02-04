@@ -373,7 +373,7 @@ gboolean gtranslator_bookmark_remove(GtrBookmark *bookmark)
 				GList *removeme=zuper;
 
 				GTR_ITER(zuper);
-				g_list_remove_link(gtranslator_bookmarks, removeme);
+				gtranslator_bookmarks = g_list_remove_link(gtranslator_bookmarks, removeme);
 
 				gtranslator_bookmark_free(GTR_BOOKMARK(removeme->data));
 				g_list_free_1(removeme);

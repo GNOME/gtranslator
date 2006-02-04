@@ -118,7 +118,7 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	page->text_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_box_set_homogeneous(page->text_vbox, TRUE);
+	gtk_box_set_homogeneous(GTK_BOX(page->text_vbox), TRUE);
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(original_text_scrolled_window), page->text_vbox);
 
 	/* Translation box is a vbox, containing one textview in most cases,
@@ -129,7 +129,7 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	page->trans_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_box_set_homogeneous(page->trans_vbox, TRUE);
+	gtk_box_set_homogeneous(GTK_BOX(page->trans_vbox), TRUE);
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(translation_text_scrolled_window), page->trans_vbox);
 
 	/*
@@ -165,7 +165,7 @@ void gtranslator_page_hide_messages_table(GtrPage *page) {
 }
 
 gboolean gtranslator_page_autosave(GtrPage *page) {
-	char *folder, *filename;
+	char *filename;
 	gchar *autosave_filename;
 	GError *error = NULL;
 	
@@ -179,10 +179,12 @@ gboolean gtranslator_page_autosave(GtrPage *page) {
 	/*
 	 * OK, save the file to an autosave file
 	 */
-	folder = (char *)dirname(page->po->filename);
-	filename = (char *)basename(page->po->filename);
+	filename = g_strdup(page->po->filename);
 	autosave_filename = g_strdup_printf("%s/.%s.autosave.%ld",
-				folder, filename, (long int)getpid());
+		dirname(filename),
+		basename(filename),
+		(long int)getpid());
+	g_free(filename);
 	gtranslator_save_file(page->po, autosave_filename, &error);
 	g_free(autosave_filename);
 		

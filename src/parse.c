@@ -189,11 +189,13 @@ struct po_error_handler gettext_error_handler = {
 GtrPo *gtranslator_parse(const gchar *filename, GError **error)
 {
 	GtrPo *po;
+	GtrMsg *msg;
 	gchar *base;
 	int i = 0;
 	po_message_iterator_t iter;
 	po_message_t message;
 	const char * const *domains;
+	const char *msgstr;
 	
 	g_return_val_if_fail(filename!=NULL, NULL);
 
@@ -246,19 +248,32 @@ GtrPo *gtranslator_parse(const gchar *filename, GError **error)
 		return NULL;
 	}
 	while(domains[i]) {
-		g_list_append(po->domains, g_strdup(domains[i]));
+		po->domains = g_list_append(po->domains, g_strdup(domains[i]));
 		i++;
 	}
-	
+
 	/*
-	 * Post-process these into a linked list of GtrMsgs.
+	 * Determine whether first message is the header or not, and
+	 * if so, process it seperately. Otherwise, treat as a normal
+	 * message.
 	 */
 	po->messages = NULL;
 	iter = po_message_iterator(po->gettext_po_file, NULL);
+	message = po_next_message(iter);
+	msgstr = po_message_msgstr(message);
+	if(!strncmp(msgstr, "Project-Id-Version: ", 20)) {
+		/* TODO: parse into our header structure */
+	}
+	else {
+		/* Reset our pointer */
+		iter = po_message_iterator(po->gettext_po_file, NULL);
+	}
+		
+	/*
+	 * Post-process these into a linked list of GtrMsgs.
+	 */
 	while((message = po_next_message(iter)))
 	{
-		GtrMsg *msg;
-
 		/* Unpack into a GtrMsg */
 		msg = g_new0(GtrMsg, 1);
 		msg->message = message;
@@ -344,7 +359,7 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	 * Create a page to add to our list of open files
 	 */
 	page = gtranslator_page_new(po);
-	g_list_append(pages, (gpointer)page);
+	pages = g_list_append(pages, (gpointer)page);
 	
 	/*
 	 * Make this our current page
