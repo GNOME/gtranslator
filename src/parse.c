@@ -320,6 +320,7 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 		if(!strcmp(page->po->filename, filename)) {
 			/* Tell user and maybe active that tab */
 			g_warning("File '%s' is already open.", page->po->filename);
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), page->num);
 			return TRUE;
 		}
 		pagelist = pagelist->next;
@@ -362,25 +363,24 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	pages = g_list_append(pages, (gpointer)page);
 	
 	/*
-	 * Make this our current page
-	 */
-	current_page = page;
-	
-	/*
 	 * Create a notebook page to display it in the GUI
 	 */
 	page_label = gtk_label_new(po->filename);
 	if(GtrPreferences.show_messages_table) {
-		current_page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
-			current_page->table_pane, page_label);
+		page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
+			page->table_pane, page_label);
 	}
 	else {
-		current_page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
-			current_page->content_pane, page_label);
+		page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
+			page->content_pane, page_label);
 	}
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), current_page->num);
-	gtk_widget_show_all(notebook_widget);	
+	gtk_widget_show_all(notebook_widget);
 	
+	/*
+	 * Switch to that page
+	 */
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), page->num);
+
 #ifdef HOLD_ON_A_SEC
 	/*
 	 * Set window title

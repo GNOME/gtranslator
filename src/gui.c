@@ -95,6 +95,11 @@ static void selection_get_handler(GtkWidget *widget,
 #endif /* REDUNDANT */
 
 /*
+ * Defined later
+ */
+void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *notebook_page, guint pagenum, gpointer user_data);
+
+/*
  * The target formats
  */
 static  GtkTargetEntry dragtypes[] = {
@@ -200,6 +205,9 @@ void gtranslator_create_main_window(void)
 	 */
 	notebook_widget = GTK_WIDGET(gtk_notebook_new());
 	gnome_app_set_contents(GNOME_APP(gtranslator_application), notebook_widget);
+	
+	/* Add a callback to set 'current_page' on a tab change */
+	g_signal_connect(notebook_widget, "switch-page", G_CALLBACK(gtranslator_gui_switch_page), NULL);
 	
 	/*
 	 * Resize the window accordingly
@@ -793,6 +801,38 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	}
 	
 	return current_page->content_pane;
+}
+
+/*
+ * Notebook callback used whenever the page is changed
+ */
+void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *notebook_page, guint pagenum, gpointer user_data) {
+	GList *pagelist;
+	GtrPage *page;
+	
+	/*
+	 * Set the 'current_page' global pointer, so the right widgets/files_added
+	 * get updated etc.
+	 */
+	pagelist = pages;
+	while(pagelist) {
+		page = (GtrPage*)pagelist->data;
+		if(page->num == pagenum) {
+			current_page = page;
+			break;
+		}
+		pagelist = pagelist->next;
+	}
+	
+	/*
+	 * Set 'save' and 'revert' etc.
+	 */
+	if(current_page->po->file_changed) {
+		gtranslator_actions_enable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+	}
+	else {
+		gtranslator_actions_disable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+	}
 }
 
 /*
