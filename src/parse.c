@@ -69,6 +69,7 @@ GQuark gtranslator_parser_error_quark (void)
 /* Parser dialog components */
 GtkWidget *parser_dialog;
 GtkTextBuffer *parser_dialog_buffer;
+gboolean parser_errors;
 
 void gtranslator_parser_dialog_destroy(GtkWidget *widget);
 
@@ -90,7 +91,7 @@ void gtranslator_parser_dialog_create(void) {
 		NULL);
 	g_signal_connect_swapped (parser_dialog, "response",
 		G_CALLBACK (gtranslator_parser_dialog_destroy),
-		parser_dialog);
+		NULL);
 
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(parser_dialog)->vbox), view);
 	gtk_widget_show_all (parser_dialog);
@@ -123,6 +124,9 @@ void gettext_error(int status, int errnum, const char *format, ...) {
 	g_free(buf);
 	va_end(args);
 
+	/* Don't open the file after all */
+	parser_errors = TRUE;
+
 	/* According to gettext-po.h, we must do this */
 	error_message_count++;
 }
@@ -140,6 +144,12 @@ void gettext_error_at_line(int status, int errnum, const char *filename,
 	g_free(errmsg);
 	g_free(buf);
 	va_end(args);
+
+	/* Don't open the file after all */
+	parser_errors = TRUE;
+
+	/* According to gettext-po.h, we must do this */
+	error_message_count++;
 }
 
 void gettext_multiline_warning(char *prefix, char *message) {
@@ -157,8 +167,8 @@ void gettext_multiline_warning(char *prefix, char *message) {
 	g_free(buf);
 
 	/* According to gettext-po.h, we must do this */
-	if(prefix != NULL)
-		error_message_count++;
+	g_free(prefix);
+	g_free(message);
 }
 
 void gettext_multiline_error(char *prefix, char *message) {
@@ -174,6 +184,16 @@ void gettext_multiline_error(char *prefix, char *message) {
 	gtk_text_buffer_get_iter_at_offset (parser_dialog_buffer, &iter, -1);
 	gtk_text_buffer_insert (parser_dialog_buffer, &iter, buf, -1);
 	g_free(buf);
+	
+	/* Don't open the file after all */
+	parser_errors = TRUE;
+
+	/* According to gettext-po.h, we must do this */
+	g_free(message);
+	if(prefix != NULL) {
+		error_message_count++;
+		g_free(prefix);
+	}
 }
 
 struct po_error_handler gettext_error_handler = {
@@ -225,6 +245,7 @@ GtrPo *gtranslator_parse(const gchar *filename, GError **error)
 	/*
 	 * Open the PO file, using gettext's utility function
 	 */
+	parser_errors = FALSE;
 	po->gettext_po_file = po_file_read(po->filename, &gettext_error_handler);
 	if(po->gettext_po_file == NULL) {
 		g_set_error(error,
@@ -235,7 +256,15 @@ GtrPo *gtranslator_parse(const gchar *filename, GError **error)
 		gtranslator_po_free(po);
 		return NULL;
 	}
-
+	
+	/*
+	 * If there were errors, abandon this page
+	 */
+	if(parser_errors) {
+		gtranslator_po_free(po);
+		return NULL;
+	}
+	
 	/*
 	 * Determine the message domains to track
 	 */
@@ -487,8 +516,11 @@ void gtranslator_parse_the_file_from_file_dialog(GtkWidget * dialog)
 	 * Open the file via our centralized opening function.
 	 */
 	if(!gtranslator_open(po_file, &error)) {
-		gnome_app_warning(GNOME_APP(gtranslator_application),
-			error->message);
+		if(error) {
+			gnome_app_warning(GNOME_APP(gtranslator_application),
+				error->message);
+			g_error_free(error);
+		}
 	}
 
 	/*
@@ -690,7 +722,11 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 	 */
 	if(!gtranslator_open(current_page->po->filename, &error))
 	{
-		gnome_app_warning(GNOME_APP(gtranslator_application), error->message);
+		if(error) {
+			gnome_app_warning(GNOME_APP(gtranslator_application),
+				error->message);
+			g_error_free(error);
+		}
 		return;
 	}
 }

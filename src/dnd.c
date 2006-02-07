@@ -41,6 +41,11 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	{
 		GError *error = NULL;
 		if(!gtranslator_open(file, &error)) {
+			if(error) {
+				gnome_app_warning(GNOME_APP(gtranslator_application),
+					error->message);
+				g_error_free(error);
+			}
 			return;
 		}
 		gtk_drag_finish(context, TRUE, FALSE, time);

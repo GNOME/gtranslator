@@ -148,7 +148,6 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection, gpoint
   GtkTreeIter iter;
   GtkTreeModel* model;
   GtrMsg* msg;
-  GList* messages;
   
   /* Ignore 'null' selections */
   if(!selection) return;
@@ -166,11 +165,9 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection, gpoint
  */
 GtrMessagesTable *gtranslator_messages_table_new()
 {
-	GtkWidget *tree;
 	GtkTreeViewColumn *column;
   	GtkCellRenderer *renderer;
 	GtkTreeSelection *selection;
-	GtrMsg *msg;
 	GtrMessagesTable *table;
 
 	/*
@@ -331,7 +328,6 @@ void gtranslator_messages_table_populate(GtrMessagesTable *table, GList *message
  */
 void gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *msg)
 {
-	GtkTreeStore *model;
 	const char *msgid, *msgstr;
 
 	g_assert(table != NULL);

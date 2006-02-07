@@ -589,10 +589,12 @@ void gtranslator_open_file_dialog_from_bookmark(GtkWidget *widget, gchar *filena
 {
 	GError *error;
 
-	if(!gtranslator_open(filename, &error))
-	{
-		gnome_app_warning(GNOME_APP(gtranslator_application),
-			error->message);
+	if(!gtranslator_open(filename, &error)) {
+		if(error) {
+			gnome_app_warning(GNOME_APP(gtranslator_application),
+				error->message);
+			g_error_free(error);
+		}
 	}
 }
 

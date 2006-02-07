@@ -254,8 +254,11 @@ void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filenam
 	GError *error = NULL;
 
 	if(!gtranslator_open(filename, &error)) {
-		gnome_app_warning(GNOME_APP(gtranslator_application),
+		if(error) {
+			gnome_app_warning(GNOME_APP(gtranslator_application),
 				error->message);
+			g_error_free(error);
+		}
 	}
 }
 

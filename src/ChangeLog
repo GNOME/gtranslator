@@ -1,5 +1,12 @@
 2006-02-07  Ross Golder  <ross@golder.org>
 
+	* main.c: Include necessary headers to avoid compiler warnings.
+	* messages-table.c: Removed some unused variables.
+	* gui.c, page.c, prefs.c: Fix a couple of compiler warnings (w/ -Wall)
+	* parse.c: Don't open the file if there are parser errors. 
+	* history.c, bookmark.c, dnd.c, dialogs.c, parse.c: Handle error from
+	  gtranslator_open sensibly.
+	* utils.c: Use 'gnome_app_warning' instead of 'gtr.._error_dialog'.
 	* parse.c: Ensure that correct tab is focussed when file is opened.
 	* gui.c: Add callback to set current_page on page switch.
 	* message.c: Add 'gtranslator_message_translation_update' method.

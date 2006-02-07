@@ -714,7 +714,7 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	GtkWidget *original_text_scrolled_window;
 	GtkWidget *translation_text_scrolled_window;
 	
-	g_return_if_fail(po!=NULL);
+	g_return_val_if_fail(po!=NULL, NULL);
 
 	/*
 	 * Set up a document view structure to contain the widgets related

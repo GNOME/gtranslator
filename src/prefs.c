@@ -44,7 +44,9 @@ static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer
 static void gtranslator_preferences_dialog_close(GtkWidget  * widget, gint response_id,
 			    gpointer useless);
 static void toggle_sensitive(GtkWidget *widget, gpointer data);
+#ifdef GTR_ABOUT_ME
 static void toggle_insensitive(GtkWidget *widget, gpointer data);
+#endif
 
 typedef struct {
 	GtkTreeIter file_node;
@@ -108,7 +110,7 @@ static GtkWidget
 	*own_fonts, *instant_spell_checking, 
 	*keep_obsolete, *autosave, *autosave_with_suffix,
 	*sweep_compile_file, *use_learn_buffer,
-	*show_messages_table, *rambo_function, *use_own_mt_colors,
+	*show_messages_table, *rambo_function,
 	*collapse_all_entries, *auto_learn, *fuzzy_matching,
 #ifdef GTR_ABOUT_ME
 	*use_about_me,
@@ -290,7 +292,7 @@ gtranslator_preferences_combo_new(GList *list,
 GtkWidget*
 gtranslator_preferences_hotkey_char_widget_new()
 {
-	GtkWidget *box, *label, *rb_1, *rb_2;
+	GtkWidget *box, *rb_1, *rb_2;
 	GtkSizeGroup *size_group;
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -510,7 +512,7 @@ a suggested value for your language.");
 }
 
 #ifdef GTR_ABOUT_ME
-void gtransaltor_preferences_no_aboutme(gchar *message)
+void gtranslator_preferences_no_aboutme(gchar *message)
 {
 	GtkWidget *about_me_note;
 	about_me_note = gtk_label_new(message);
@@ -526,7 +528,6 @@ void gtransaltor_preferences_no_aboutme(gchar *message)
 
 void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 {
- 	gchar	*old_colorscheme=NULL;
  	GtkObject *adjustment;
 
 	GtkWidget *page, *category_box, *hbox, *control, *dialog_hbox, *label;
@@ -813,7 +814,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 		gtk_label_set_use_markup(GTK_LABEL(another_info), TRUE);
 		gtk_box_pack_start (GTK_BOX(personal_info_box), another_info, FALSE, FALSE, 5);
 	} else {
-		gtransaltor_preferences_no_aboutme(_("<i>Unable to get personal info from Evolution Data Server.</i>"));
+		gtranslator_preferences_no_aboutme(_("<i>Unable to get personal info from Evolution Data Server.</i>"));
 	}
 	gtk_box_pack_start (GTK_BOX(category_box), about_me_box, FALSE, FALSE, 0);
 	gtk_widget_set_sensitive(about_me_box, gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(use_about_me)));	
@@ -850,8 +851,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	/* Language item */
 	gchar *language_str = _("Language settings");
 	
-	GtkSizeGroup *language_label_size_group, *language_control_size_group,
-				 *language_short_label_size_group, *language_short_control_size_group;
+	GtkSizeGroup *language_label_size_group, *language_control_size_group;
 	language_label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	language_control_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	
@@ -1358,6 +1358,7 @@ void toggle_sensitive(GtkWidget *widget, gpointer data)
 	prefs_changed = TRUE;
 }
 
+#ifdef GTR_ABOUT_ME
 void toggle_insensitive(GtkWidget *widget, gpointer data)
 {
 	gboolean active;
@@ -1365,6 +1366,7 @@ void toggle_insensitive(GtkWidget *widget, gpointer data)
 	gtk_widget_set_sensitive(GTK_WIDGET(data), !active);
 	prefs_changed = TRUE;
 }
+#endif
 
 void gtranslator_preferences_read(void)
 {

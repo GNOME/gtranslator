@@ -30,6 +30,8 @@
 #include "dialogs.h"
 #include "prefs.h"
 
+#include <libgen.h>
+
 /*
  * The currently active pages
  */
@@ -54,9 +56,7 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 	GtkWidget *original_text_scrolled_window;
 	GtkWidget *translation_text_scrolled_window;
 	
-	gchar 	*title;
-	
-	g_return_if_fail(po!=NULL);
+	g_return_val_if_fail(po!=NULL, NULL);
 
 	/* Allocate a new page */
 	page = g_new0(GtrPage, 1);

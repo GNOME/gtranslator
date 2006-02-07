@@ -205,8 +205,6 @@ void gtranslator_save_file_as_dialog(GtkWidget * widget, gpointer useless)
 	}
 	else
 	{
-		gchar *filename=NULL;
-		
 		dialog = gtranslator_file_chooser_new(NULL, 
 											FILESEL_SAVE,
 											_("Save local copy of file as..."));
@@ -974,9 +972,13 @@ void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 		}
 		else
 		{
-				gtk_widget_destroy(GTK_WIDGET(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
 			if(!gtranslator_open(uri->str, &error)) {
-				gtranslator_utils_error_dialog(error->message);
+				if(error) {
+					gnome_app_warning(GNOME_APP(gtranslator_application),
+						error->message);
+					g_error_free(error);
+				}
 			}
 		}
 	}
@@ -1059,8 +1061,11 @@ and may contain your hard work!\n"),
 			original_filename);
 
 		if(!gtranslator_open(original_filename, &error)) {
-			gnome_app_warning(GNOME_APP(gtranslator_application),
-				error->message);
+			if(error) {
+				gnome_app_warning(GNOME_APP(gtranslator_application),
+					error->message);
+				g_error_free(error);
+			}
 		}
 	}
 	else if(reply==GTK_RESPONSE_REJECT)

@@ -316,6 +316,8 @@ gboolean gtranslator_utils_autosave(gpointer data)
 		gtranslator_page_autosave(page);
 		pagelist = pagelist->next;
 	}
+	
+	return TRUE;
 }
 
 /*
@@ -868,7 +870,8 @@ gtranslator_get_plural_form_string(gchar *lang)
 	 * Check if msginit is available on the system.
 	 */
 	if(!g_find_program_in_path("msginit")) {
-		gtranslator_utils_error_dialog(_("Sorry, msginit isn't available on your system!"));
+		gnome_app_warning(GNOME_APP(gtranslator_application),
+			_("Sorry, msginit isn't available on your system!"));
 		return NULL;
 	}	
 	po_test_file = g_strconcat ("# SOME DESCRIPTIVE TITLE.\n",

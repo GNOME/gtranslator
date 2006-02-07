@@ -25,12 +25,16 @@
 #endif
 #include <gnome.h>
 
+#include "bookmark.h"
+#include "dialogs.h"
+#include "gui.h"
 #include "learn.h"
 #include "prefs.h"
 #include "runtime-config.h"
 #include "session.h"
 #include "sighandling.h"
 #include "translator.h"
+#include "utils.h"
 
 #include <locale.h>
 #include <libintl.h>
@@ -42,12 +46,12 @@
 
 #include <libgnomevfs/gnome-vfs-init.h>
 
+#include <gconf/gconf.h>
+
 /*
  * The static variables used in the poptTable.
  */
 static gchar 	*gtranslator_geometry=NULL;
-
-static gboolean learn_statistics=FALSE;
 
 /*
  * List of files that are currently open
