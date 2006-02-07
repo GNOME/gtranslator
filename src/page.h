@@ -78,4 +78,9 @@ void gtranslator_page_hide_messages_table(GtrPage *page);
  */
 gboolean gtranslator_page_autosave(GtrPage *page);
 
+/*
+ * Callback for when a translation is updated
+ */
+void gtranslator_page_dirty(GtkTextBuffer *textbuffer, gpointer user_data);
+
 #endif

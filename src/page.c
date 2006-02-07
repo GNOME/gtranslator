@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include "actions.h"
 #include "page.h"
 #include "dialogs.h"
 #include "prefs.h"
@@ -204,4 +205,18 @@ gboolean gtranslator_page_autosave(GtrPage *page) {
 		
 	return TRUE;
 
+}
+
+void gtranslator_page_dirty(GtkTextBuffer *textbuffer, gpointer user_data) {
+	/* Unpack the page pointer */
+	GtrPage *page;
+
+	g_assert(user_data != NULL);
+	
+	page = (GtrPage*)user_data;
+	page->po->file_changed = TRUE;
+	
+	// TODO: make notebook tab go red with an asterisk to mark an unsaved page
+	
+	gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);
 }

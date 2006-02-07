@@ -50,6 +50,12 @@
 static gboolean is_fuzzy(GList *msg, gpointer useless);
 static gboolean is_untranslated(GList *msg, gpointer useless);
 
+/*
+ * Write the change back to the gettext PO instance in memory and
+ * mark the page dirty
+ */
+void gtranslator_message_translation_update(GtkTextBuffer *textbuffer, gpointer *user_data);
+
 #ifdef HAVE_GTKSPELL
 GtkSpell *gtrans_spell = NULL;
 #endif
@@ -148,6 +154,12 @@ void gtranslator_message_show(GtrMsg *msg)
 	g_assert(current_page != NULL);
 
 	/*
+	 * Update current_page->po->current
+	 */
+	i = g_list_index(current_page->po->messages, msg);
+	current_page->po->current = g_list_nth(current_page->po->messages, i);
+
+	/*
 	 * Clear up previous message widgets from the original/translated
 	 * fields
 	 */
@@ -184,7 +196,11 @@ void gtranslator_message_show(GtrMsg *msg)
 		gtk_widget_show(current_page->text_msgid);
 	}
 	msgid_plural = po_message_msgid_plural(msg->message);
-	if(msgid_plural) {
+	if(!msgid_plural) {
+		msgstr[0] = po_message_msgstr(msg->message);
+	}
+	else {
+		msgstr[0] = po_message_msgstr_plural(msg->message, 0);
 		buf = gtk_text_buffer_new(NULL);
 		if(GtrPreferences.dot_char) {
 			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgid);
@@ -195,11 +211,10 @@ void gtranslator_message_show(GtrMsg *msg)
 			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 		}
 		current_page->text_msgid_plural = gtk_text_view_new_with_buffer(buf);
-		gtk_text_view_set_editable(GTK_TEXT_VIEW(current_page->text_msgid), FALSE);
+		gtk_text_view_set_editable(GTK_TEXT_VIEW(current_page->text_msgid_plural), FALSE);
 		gtk_box_pack_start(text_vbox, current_page->text_msgid_plural, TRUE, TRUE, 0);
 		gtk_widget_show(current_page->text_msgid_plural);
 	}
-	msgstr[0] = po_message_msgstr(msg->message);
 	if(msgstr[0]) {
 		buf = gtk_text_buffer_new(NULL);
 		if(GtrPreferences.dot_char) {
@@ -210,6 +225,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		else {
 			gtk_text_buffer_set_text(buf, (gchar*)msgstr[0], -1);
 		}
+		g_signal_connect(buf, "changed", G_CALLBACK(gtranslator_message_translation_update), current_page);
 		current_page->trans_msgstr[0] = gtk_text_view_new_with_buffer(buf);
 		gtk_box_pack_start(trans_vbox, current_page->trans_msgstr[0], TRUE, TRUE, 0);
 		gtk_widget_show(current_page->trans_msgstr[0]);
@@ -225,6 +241,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		else {
 			gtk_text_buffer_set_text(buf, (gchar*)msgstr[i], -1);
 		}
+		g_signal_connect(buf, "changed", G_CALLBACK(gtranslator_message_translation_update), current_page);
 		current_page->trans_msgstr[i] = gtk_text_view_new_with_buffer(buf);
 		gtk_box_pack_start(trans_vbox, current_page->trans_msgstr[i], TRUE, TRUE, 0);
 		gtk_widget_show(current_page->trans_msgstr[i]);
@@ -364,8 +381,7 @@ void gtranslator_message_go_to(GList * to_go)
 		gtranslator_actions_enable(ACT_NEXT, ACT_LAST);
 	}
 
-	po->current = to_go;
-	gtranslator_message_show(po->current->data);
+	gtranslator_message_show(to_go->data);
 
 	if(current_page->messages_table)
 	{
@@ -556,4 +572,73 @@ void gtranslator_message_status_toggle_fuzzy(GtkWidget *widget, gpointer useless
 		msg->is_fuzzy = TRUE;
 		current_page->po->fuzzy++;
 	}
+}
+
+/*
+ * Write the change back to the gettext PO instance in memory and
+ * mark the page dirty
+ */
+void gtranslator_message_translation_update(GtkTextBuffer *textbuffer, gpointer *user_data) {
+	GtkTextIter start, end;
+	GtkTextBuffer *buf;
+	GtrMsg *msg;
+	const char *check;
+	char *translation;
+	int i;
+	
+	/* Work out which message this is associated with */
+	msg = current_page->po->current->data;
+	buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
+	if(textbuffer == buf) {
+		/* Get message as UTF-8 buffer */
+		gtk_text_buffer_get_bounds(textbuffer, &start, &end);
+		translation = gtk_text_buffer_get_text(textbuffer, &start, &end, TRUE);
+		
+		/* TODO: convert to file's own encoding if not UTF-8 */
+		
+		/* Write back to PO file in memory */
+		if(!(check = po_message_msgid_plural(msg->message))) {
+			po_message_set_msgstr(msg->message, translation);
+		}
+		else {
+			po_message_set_msgstr_plural(msg->message, 0, translation);
+			//free(check);
+		}
+		g_free(translation);
+		
+		/* Activate 'save', 'revert' etc. */
+		gtranslator_page_dirty(textbuffer, user_data);
+		return;
+	}
+	i=2;
+	while(i < 16) {
+		/* Know when to break out of the loop */
+		if(!current_page->trans_msgstr[i]) {
+			break;
+		}
+		
+		/* Have we reached the one we want yet? */
+		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[i]));
+		if(textbuffer != buf) {
+			i++;
+			continue;
+		}
+		
+		/* Get message as UTF-8 buffer */
+		gtk_text_buffer_get_bounds(textbuffer, &start, &end);
+		translation = gtk_text_buffer_get_text(textbuffer, &start, &end, TRUE);
+		
+		/* TODO: convert to file's own encoding if not UTF-8 */
+		
+		/* Write back to PO file in memory */
+		po_message_set_msgstr_plural(msg->message, i - 1, translation);
+
+		/* Activate 'save', 'revert' etc. */
+		gtranslator_page_dirty(textbuffer, user_data);
+		return;
+		
+	}
+
+	/* Shouldn't get here */
+	g_return_if_reached();
 }
