@@ -206,6 +206,10 @@ GtrLanguage languages[] = {
 	 "", "8bit"
 	},
 	{
+	 N_("Mongolian"), "mn", "UTF-8",
+	 "openmn-translation@lists.sf.net", "8bit"
+	},
+	{
 	 N_("Marathi"), "mr", "UTF-8",
 	 "indlinux-marathi@lists.sourceforge.net", "8bit"
 	},
