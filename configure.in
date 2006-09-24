@@ -16,7 +16,12 @@ AM_MAINTAINER_MODE
 dnl -------------------------------------------------------------------
 dnl Use intltools.
 dnl -------------------------------------------------------------------
-AC_PROG_INTLTOOL(0.22)
+IT_PROG_INTLTOOL([0.35.0])
+GETTEXT_PACKAGE=gtranslator
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE(GETTEXT_PACKAGE,[gtranslator],[Package name for use by gettext library])
+AM_GLIB_GNU_GETTEXT
+AC_CHECK_FUNC(bind_textdomain_codeset,,[AC_CHECK_LIB(intl,bind_textdomain_codeset)])
 
 dnl -------------------------------------------------------------------
 dnl Standard bla-bla checks.
@@ -52,16 +57,6 @@ if test "x$enable_deprecations" = "xyes"; then
 -DGNOME_DISABLE_DEPRECATED"
    AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi
-
-dnl -------------------------------------------------------------------
-dnl Our languages caravane has got settled here in place (add your's).
-dnl -------------------------------------------------------------------
-GETTEXT_PACKAGE=gtranslator
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE(GETTEXT_PACKAGE,[gtranslator],[Package name for use by gettext library])
-ALL_LINGUAS="am az be bg bs ca cs da de el en_CA en_GB es et eu fa fi fr ga gl hr hu id is it ja ko ku lt lv nb nl nn pa pl pt pt_BR ru rw sk sl sq sr sr@Latn sv ta th tk tr uk vi wa zh_CN zh_TW"
-AM_GLIB_GNU_GETTEXT
-AC_CHECK_FUNC(bind_textdomain_codeset,,[AC_CHECK_LIB(intl,bind_textdomain_codeset)])
 
 dnl ==========================================================================
 dnl
