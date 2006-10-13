@@ -230,6 +230,7 @@ void gtranslator_create_main_window(void)
 	gtk_text_view_set_editable(text_box, FALSE);
 	gtk_text_view_set_wrap_mode(text_box, GTK_WRAP_CHAR);
 	gtk_text_view_set_cursor_visible(text_box, FALSE);
+	gtranslator_set_style (GTK_WIDGET(text_box), 0);
 
 	gtk_container_add(GTK_CONTAINER(original_text_scrolled_window), GTK_WIDGET(text_box));
 
@@ -243,6 +244,7 @@ void gtranslator_create_main_window(void)
 	gtk_text_view_set_editable(trans_box, TRUE);
 	gtk_text_view_set_wrap_mode(trans_box, GTK_WRAP_CHAR);
 	gtk_text_view_set_cursor_visible(trans_box, TRUE);
+	gtranslator_set_style (GTK_WIDGET(trans_box), 1);
 
 	gtk_container_add(GTK_CONTAINER(translation_text_scrolled_window), GTK_WIDGET(trans_box));
 

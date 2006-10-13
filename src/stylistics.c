@@ -212,6 +212,28 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	style=gtk_style_copy(gtk_widget_get_style(widget));
 	
 	/*
+	 * The stored font setting -- 1 should be given for the translation box.
+	 */
+	if(foo_us_and_spec_the_widget==1)
+	{
+		fontname=gtranslator_config_get_string("interface/translation_font");
+	}
+	else
+	{
+		fontname=gtranslator_config_get_string("interface/original_font");
+	}
+
+	/*
+	 * Set the font for the widget, if possible and wished.
+	 */
+	if(GtrPreferences.use_own_fonts && fontname)
+	{
+		pango_font_description_free (style->font_desc);
+		style->font_desc = pango_font_description_from_string (fontname);
+	}
+	GTR_FREE(fontname);
+
+	/*
 	 * Set up the stored values for the background from the preferences/
 	 *  colorscheme.
 	 */
@@ -247,98 +269,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 		gdk_color_parse(spec, &style->text[0]);
 		GTR_FREE(spec);
 	}
-	
-	/*
-	 * The stored font setting -- 1 should be given for the translation box.
-	 */
-	if(foo_us_and_spec_the_widget==1)
-	{
-		fontname=gtranslator_config_get_string("interface/translation_font");
-	}
-	else
-	{
-		fontname=gtranslator_config_get_string("interface/original_font");
-	}
 
-	if(!fontname && GtrPreferences.use_own_fonts)
-	{
-		g_message(_("No font set! Using default font"));
-		
-		/*
-		 * Use gtranslator's font in this case -- should be a fallback font
-		 *  for your language.
-		 */
-		fontname=_("-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1");
-		
-		gtranslator_config_set_string("interface/translation_font", fontname);
-		gtranslator_config_set_string("interface/original_font", fontname);
-	}
-	
-	/*
-	 * Set the font for the widget, if possible and wished.
-	 */
-	if(GtrPreferences.use_own_fonts)
-	{
-		XFontStruct *xfs = NULL;
-		gchar* default_font = NULL;
-		gchar* join_fonts = NULL;
-
-		font=gdk_font_load(fontname);
-		
-		if(font)
-		{
-			/**********************************************************/
-			/* for multibyte 
-			
-			   we need this header, added at top
-			   #include <gdk/gdkx.h>
-			*/
-			/*  
-			 * Is it multibyte font?
-			 */		
-			xfs = GDK_FONT_XFONT(font);
-			if (xfs->min_byte1 != 0 || xfs->max_byte1 != 0)
-			{
-	  
-			    /*
-			    *  if multibyte, use orignial_font and the selected
-			    *  multibyte font to display the translated messages
-			    */
-			
-			    if(foo_us_and_spec_the_widget==1)
-			    {
-				default_font = gtranslator_config_get_string("interface/original_font");
-				join_fonts = g_strjoin(",", default_font, fontname, NULL);
-				
-				/*
-				 * This function inform
-				 * editBox to process multibyte character
-				 */
-				font = gdk_fontset_load(join_fonts);
-	    
-				GTR_FREE(join_fonts);
-			    }		    
-			    
-			    
-			}
-		}
-		
-		/*************************************************************/
-	
-		if(font)
-		{
-			/*
-			 * FIXME: This old widget font unref'ing must now be done
-			 *  inside GtkStyle and the PangoFontDescription structure.
-			 *
-			 * But for now, let's do the old dirty dancing...
-			 *
-			 */
-		    	g_object_unref(style->private_font);
-		  	style->private_font=font;
-		}
-	}
-	
 	/*
 	 * The final step: set the widget style.
 	 */
@@ -348,7 +279,6 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	 * Clean up the used style + fontname variable .-)
 	 */
 	g_object_unref(style);
-	GTR_FREE(fontname);
 }
 
 static gboolean colors_initialized=FALSE;

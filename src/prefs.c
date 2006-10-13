@@ -1111,18 +1111,6 @@ void gtranslator_preferences_read(void)
 		"toggles/collapse_all");
 	GtrPreferences.show_plural_forms = gtranslator_config_get_bool(
 		"toggles/show_plural_forms");
-
-	/*
-	 * Check if we'd to use special styles.
-	 */
-	if(GtrPreferences.use_own_fonts || GtrPreferences.use_own_colors)
-	{
-		/*
-		 * Set the own specs for colors and for the font.
-		 */
-		gtranslator_set_style(GTK_WIDGET(text_box), 0);
-		gtranslator_set_style(GTK_WIDGET(trans_box), 1);
-	}
 }
 
 /*
