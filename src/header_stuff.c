@@ -146,11 +146,11 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		if_key_is("Content-Type") {
 			gchar *prefix;
 			
-			prefix = strstr (pair[1], "text/plain; charset=");
+			prefix = strstr (pair[1], "charset=");
 			if (prefix)
 				ph->charset = g_strdup (prefix + 20);
 			else
-				ph->charset = g_strdup (pair[1]);
+				ph->charset = g_strdup ("UTF-8");
 		}
 		else
 		if_key_is("Content-Transfer-Encoding")
