@@ -151,7 +151,7 @@ GtrHeader *gtranslator_header_get(const char *string)
 			
 			prefix = strstr (pair[1], "charset=");
 			if (prefix)
-				ph->charset = g_strdup (prefix + 20);
+				ph->charset = g_strdup (prefix + 8);
 			else
 				ph->charset = g_strdup ("UTF-8");
 		}
