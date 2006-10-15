@@ -190,6 +190,10 @@ GtrLanguage languages[] = {
 	 "ko@li.org", "8bit"
 	},
 	{
+	 N_("Kurdish"), "ku", "UTF-8",
+	 "", "8bit"
+	},
+	{
 	 N_("Latvian"), "lv", "iso-8859-13",
 	 "", "8bit"
 	},
@@ -300,6 +304,10 @@ GtrLanguage languages[] = {
 	{
 	 N_("Ukrainian"), "uk", "koi8-u",
 	 "linux@linux.org.ua", "8bit"
+	},
+	{
+	 N_("Urdu"), "ur", "UTF-8",
+	 "", "8bit"
 	},
 	{
 	 N_("Uzbekian"), "uz", "iso-8859-1",
