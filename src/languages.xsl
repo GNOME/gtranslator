@@ -56,8 +56,8 @@ GtrLanguage languages[] = {
          * This structures-list has to be NULL-terminated
          */
 	{
-	 NULL, NULL
-	 NULL, NULL, NULL,
+	 NULL, NULL,
+	 NULL, NULL, NULL
 	}
 };
 </xsl:template>
