@@ -3,6 +3,8 @@
 SUBDIRS = data doc help man src po
 
 EXTRA_DIST= \
+		AUTHORS \
+		MAINTAINERS \
 		DEPENDS \
 		HACKING \
 		kabalak_generate_all_the_files.sh \
