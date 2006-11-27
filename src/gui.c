@@ -579,7 +579,7 @@ static GtkTextBuffer* get_selection_buffer(GtkTextBuffer *buffer)
 	
 	if (!gtk_text_iter_equal(&start_iter, &end_iter)) {	
 		if (selection_buffer != NULL) {		
-			g_free(selection_buffer);
+			g_object_unref(selection_buffer);
 		}
     
 		selection_buffer = gtk_text_buffer_new(gtk_text_buffer_get_tag_table(buffer));
