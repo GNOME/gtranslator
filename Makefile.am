@@ -7,7 +7,6 @@ EXTRA_DIST= \
 		MAINTAINERS \
 		DEPENDS \
 		HACKING \
-		kabalak_generate_all_the_files.sh \
 		gtranslator.spec.in \
 		gtranslator.spec \
 		intltool-extract.in \

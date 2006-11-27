@@ -12,30 +12,17 @@ For development within the great world of CVS these build files (yes, there
    harder than necessary; so these build files have to be generated first after
     getting the sources from CVS.
 
-In order to do this you can use two ways:
-
-1) You can use the "./autogen.sh" script which is included in the main 
-    gtranslator directory to get the "./configure" and it's relatives.
-     If you want to give special options or flags to the "./configure" script
-      please give them to the "./autogen.sh" script, e.g. if you want to
-       install gtranslator (let's say into a SuSE distribution) into a
-        different prefix then "/usr/local" (which is the GNU standard for new
-	 software), then append the prefix option like "--prefix=/usr/GNOME".
+You can use the "./autogen.sh" script which is included in the main 
+ gtranslator directory to get the "./configure" and it's relatives.
+  If you want to give special options or flags to the "./configure" script
+   please give them to the "./autogen.sh" script, e.g. if you want to
+    install gtranslator (let's say into a SuSE distribution) into a
+     different prefix then "/usr/local" (which is the GNU standard for new
+      software), then append the prefix option like "--prefix=/usr/GNOME".
 	
-    To have an view over the options the "./configure" script of gtranslator
-     is using, try a "./configure --help" after the "./configure" script has
-      been generated.
-
-2) You use the `kabalak'sh' way and do a "./kabalak_generate_all_the_files.sh".
-    This does the same as the "./autogen.sh" script, but it does this work in
-     a more kabalak'sh way. You can also append special flags/parameters like 
-      "--enable-debug=yes" to the "./kabalak_generate_all_the_files.sh" script.
-       
-
-If you're running into trouble because the well known and loved "./autogen.sh"
- |"./kabalak_generate_all_the_files.sh" scripts are missing some macros then
-  try setting the ACLOCAL_FLAGS environment variable to a directory which 
-   contains the missing macros, e.g. ACLOCAL_FLAGS=/gnome/1.2/macros.
+To have an view over the options the "./configure" script of gtranslator
+ is using, try a "./configure --help" after the "./configure" script has
+  been generated.
 
 --
 Fatih Demir, <kabalak@kabalak.net>
