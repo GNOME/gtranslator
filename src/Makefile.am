@@ -7,7 +7,6 @@ SUBDIRS = pixmaps
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(includedir) \
-	-I$(srcdir)/semerkent \
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
         -DPREFIX=\""$(prefix)"\"                                \
         -DSYSCONFDIR=\""$(sysconfdir)"\"                        \

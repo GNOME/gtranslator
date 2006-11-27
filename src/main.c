@@ -58,8 +58,6 @@
 
 #include <libgnomevfs/gnome-vfs-init.h>
 
-#include <semerkent.h>
-
 /*
  * The static variables used in the poptTable.
  */
