@@ -135,7 +135,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Galician"), "gl", "iso-8859-1",
-	 "trasno@ceu.fi.udc.es", "8bit"
+	 "proxecto@trasno.net", "8bit"
 	},
 	{
 	 N_("German"), "de", "iso-8859-1",
