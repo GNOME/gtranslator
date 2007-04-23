@@ -1,5 +1,6 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
+ *			Ignacio Casal <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,8 +23,7 @@
 #include "gui.h"
 #include "parse.h"
 
-#include <gtk/gtkdnd.h>
-#include <gtk/gtktext.h>
+#include <gtk/gtk.h>
 
 /*
  * The general D'n'D function.
@@ -42,8 +42,14 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 		GError *error = NULL;
 		if(!gtranslator_open(file, &error)) {
 			if(error) {
-				gnome_app_warning(GNOME_APP(gtranslator_application),
-					error->message);
+				GtkWidget *dialog;
+				dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+								GTK_DIALOG_DESTROY_WITH_PARENT,
+								GTK_MESSAGE_WARNING,
+								GTK_BUTTONS_CLOSE,
+								error->message);
+				gtk_dialog_run (GTK_DIALOG (dialog));
+				gtk_widget_destroy (dialog);
 				g_error_free(error);
 			}
 			return;
