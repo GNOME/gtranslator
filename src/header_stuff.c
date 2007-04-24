@@ -46,19 +46,33 @@
 
 
 	 
-/*Glade path*/	 
+/*
+ * Glade path
+ */
 #define GLADE_HEADER_PATH "header_dialog.glade"
-/*Glade variables*/
-/*Header dialog*/
+
+/*
+ * Glade variables
+ */
+
+/*
+ * Header dialog
+ */
 #define GLADE_E_HEADER "e_header"
-/*Project page*/
+
+/*
+ * Project page
+ */
 #define GLADE_PRJ_COMMENT "prj_comment"
 #define GLADE_PRJ_NAME "prj_name"
 #define GLADE_PRJ_VERSION "prj_version"
 #define GLADE_POT_DATE "pot_date"
 #define GLADE_PO_DATE "po_date"
 #define GLADE_RMBT "rmbt"
-/*Translator and language page*/
+
+/*
+ * Translator and language page
+ */
 #define GLADE_TAKE_MY_OPTIONS "take_my_options"
 #define GLADE_LANG_PAGE "lang_page"
 #define GLADE_TRANSLATOR "translator"
@@ -469,20 +483,10 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	/*
 	 * The main dialog
 	 */
-	/*e_header = gtk_dialog_new_with_buttons(
-		_("gtranslator -- edit header"),
-		GTK_WINDOW(gtranslator_application),
-		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-		NULL);*/
 	glade_header = glade_xml_new(GLADE_HEADER_PATH, NULL, NULL);
 	e_header = glade_xml_get_widget(glade_header, GLADE_E_HEADER);
-	gtk_dialog_set_default_response(GTK_DIALOG(e_header), GTK_RESPONSE_CLOSE);
-
+	//gtk_dialog_set_default_response(GTK_DIALOG(e_header), GTK_RESPONSE_CLOSE);
 	
-
-	
-
 	/*
 	 * Project page
 	 */
@@ -553,28 +557,38 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 
 	/*translator entry*/
 	translator = glade_xml_get_widget(glade_header, GLADE_TRANSLATOR);
-	g_signal_connect(translator, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	gtk_entry_set_text(GTK_ENTRY(translator), last_translator_name);
+	g_signal_connect(GTK_ENTRY(translator), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
 	/*translator e-mail entry*/
 	tr_email = glade_xml_get_widget(glade_header, GLADE_TR_EMAIL);
-	g_signal_connect(tr_email, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	gtk_entry_set_text(GTK_ENTRY(tr_email), last_translator_email);
+	g_signal_connect(GTK_ENTRY(tr_email), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	
 	/*language combo*/
-	language_combo = glade_xml_get_widget(glade_header, GLADE_LANGUAGE_COMBO);
-	g_signal_connect(language_combo, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+	/*language_combo = glade_xml_get_widget(glade_header, GLADE_LANGUAGE_COMBO);
+	gtk_combo_set_popdown_strings(GTK_COMBO(language_combo), languages_list);
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(language_combo), language_name);
+	g_signal_connect(GTK_COMBO_BOX_ENTRY(language_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);*/
 	
 	/*language group's email combo*/
-	lg_combo = glade_xml_get_widget(glade_header, GLADE_LG_COMBO);
-	g_signal_connect(GTK_COMBO(lg_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
-
+/*	lg_combo = glade_xml_get_widget(glade_header, GLADE_LG_COMBO);
+	gtk_combo_set_popdown_strings(GTK_COMBO(lg_combo), group_emails_list);
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(lg_combo), language_email);
+	g_signal_connect(GTK_COMBO_BOX_ENTRY(lg_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+*/
 	/*charset combo*/
-	charset_combo = glade_xml_get_widget(glade_header, GLADE_CHARSET_COMBO);
-	g_signal_connect(GTK_COMBO(charset_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
-
+/*	charset_combo = glade_xml_get_widget(glade_header, GLADE_CHARSET_COMBO);
+	gtk_combo_set_popdown_strings(GTK_COMBO(charset_combo), encodings_list);
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(charset_combo), content_charset);
+	g_signal_connect(GTK_COMBO_BOX_ENTRY(charset_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+*/
 	/*Encoding combo*/
-	enc_combo = glade_xml_get_widget(glade_header, GLADE_ENC_COMBO);
-	g_signal_connect(GTK_COMBO(enc_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
-
+/*	enc_combo = glade_xml_get_widget(glade_header, GLADE_ENC_COMBO);
+	gtk_combo_set_popdown_strings(GTK_COMBO(enc_combo), bits_list);
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(enc_combo), content_transfer_encoding);
+	g_signal_connect(GTK_COMBO_BOX_ENTRY(enc_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
+*/
 	/*
 	 * Disable any charset changes directly from the header by making the
 	 *  charset combo non-editable.
