@@ -2,6 +2,7 @@
  * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Ross Golder <rossg@kabalak.net>
+ * 			Ignacio Casal <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -41,9 +42,34 @@
 #include <time.h>
 
 #include <gtk/gtk.h>
+#include <glade/glade.h>
+
+
+	 
+/*Glade path*/	 
+#define GLADE_HEADER_PATH "header_dialog.glade"
+/*Glade variables*/
+/*Header dialog*/
+#define GLADE_E_HEADER "e_header"
+/*Project page*/
+#define GLADE_PRJ_COMMENT "prj_comment"
+#define GLADE_PRJ_NAME "prj_name"
+#define GLADE_PRJ_VERSION "prj_version"
+#define GLADE_POT_DATE "pot_date"
+#define GLADE_PO_DATE "po_date"
+#define GLADE_RMBT "rmbt"
+/*Translator and language page*/
+#define GLADE_TAKE_MY_OPTIONS "take_my_options"
+#define GLADE_LANG_PAGE "lang_page"
+#define GLADE_TRANSLATOR "translator"
+#define GLADE_TR_EMAIL "tr_email"
+#define GLADE_LANGUAGE_COMBO "language_combo"
+#define GLADE_LG_COMBO "lg_combo"
+#define GLADE_CHARSET_COMBO "charset_combo"
+#define GLADE_ENC_COMBO "enc_combo"
 
 static GtkWidget *e_header = NULL;
-static GtkWidget *e_notebook = NULL;
+static GladeXML *glade_header;
 
 static GtkWidget *prj_page, *lang_page;
 static GtkWidget *lang_vbox;
@@ -53,6 +79,8 @@ static GtkWidget *translator, *tr_email, *pot_date, *po_date;
 static GtkWidget *language_combo, *charset_combo, *enc_combo, *lg_combo;
 
 static gboolean header_changed;
+
+
 
 /*
  * These are defined below 
@@ -441,74 +469,64 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	/*
 	 * The main dialog
 	 */
-	e_header = gtk_dialog_new_with_buttons(
+	/*e_header = gtk_dialog_new_with_buttons(
 		_("gtranslator -- edit header"),
 		GTK_WINDOW(gtranslator_application),
 		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-		NULL);
+		NULL);*/
+	glade_header = glade_xml_new(GLADE_HEADER_PATH, NULL, NULL);
+	e_header = glade_xml_get_widget(glade_header, GLADE_E_HEADER);
 	gtk_dialog_set_default_response(GTK_DIALOG(e_header), GTK_RESPONSE_CLOSE);
 
-	/*
-	 * The notebook containing the pages
-	 */
-	e_notebook = gtk_notebook_new();
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(e_header)->vbox),
-                      e_notebook);
+	
+
+	
 
 	/*
 	 * Project page
 	 */
-	prj_page = gtk_table_new(6, 2, FALSE);
-	gtk_table_set_col_spacings(GTK_TABLE(prj_page), 2);
-	gtk_table_set_row_spacings(GTK_TABLE(prj_page), 2);
 
-	prj_comment = gtk_text_view_new();
+	/*Project comment*/
+	prj_comment = glade_xml_get_widget(glade_header, GLADE_PRJ_COMMENT);
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(prj_comment));
 	//gtk_text_buffer_set_text(buffer, ph->comment, -1);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Comments:")), 0, 1, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_comment, 1, 2, 0, 1);
 	gtk_widget_set_size_request(prj_comment, 360, 90);
 	g_signal_connect(buffer, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	prj_name = gtk_entry_new();
+	/*Project name*/
+	prj_name = glade_xml_get_widget(glade_header, GLADE_PRJ_NAME);
 	gtk_entry_set_text(GTK_ENTRY(prj_name), project_name);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Project name:")), 0, 1, 1, 2);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_name, 1, 2, 1, 2);
 	g_signal_connect(prj_name, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	prj_version = gtk_entry_new();
+	/*Project version*/
+	prj_version = glade_xml_get_widget(glade_header, GLADE_PRJ_VERSION);
 	gtk_entry_set_text(GTK_ENTRY(prj_version), project_ver);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Project version:")), 0, 1, 2, 3);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), prj_version, 1, 2, 2, 3);
 	g_signal_connect(prj_version, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	pot_date = gtk_entry_new();
+	/*Pot date*/
+	pot_date = glade_xml_get_widget(glade_header, GLADE_POT_DATE);
 	gtk_widget_set_sensitive(pot_date, FALSE);
 	gtk_entry_set_text(GTK_ENTRY(pot_date), pot_creation_date);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Pot file creation date:")), 0, 1, 3, 4);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), pot_date, 1, 2, 3, 4);
 
-	po_date = gtk_entry_new();
+	/*Po date*/
+	po_date = glade_xml_get_widget(glade_header, GLADE_PO_DATE);
 	gtk_widget_set_sensitive(po_date, FALSE);
 	gtk_entry_set_text(GTK_ENTRY(po_date), po_revision_date);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Po file revision date:")), 0, 1, 4, 5);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), po_date, 1, 2, 4, 5);
 
-	rmbt = gtk_entry_new();
+	/*Report message string bugs to entry*/
+	rmbt = glade_xml_get_widget(glade_header, GLADE_RMBT);
 	gtk_entry_set_text(GTK_ENTRY(rmbt), report_msgid_bugs_to);
-
 	gtk_widget_set_sensitive(rmbt, TRUE);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Report message string bugs to:")), 0, 1, 5, 6);
-	gtk_table_attach_defaults(GTK_TABLE(prj_page), rmbt, 1, 2, 5, 6);
 
-#ifdef DONTFORGET
+
+/*#ifdef DONTFORGET
 	if(ph->generator)
-	{
+	{*/
 		/*
 		 * Resize table, and add 'generator' row
 		 */
-		gtk_table_resize(GTK_TABLE(prj_page), 7, 2);
+/*		gtk_table_resize(GTK_TABLE(prj_page), 7, 2);
 
 		foo_me_i_ve_been_wracked = gtk_entry_new();
 		gtk_widget_set_sensitive(foo_me_i_ve_been_wracked, FALSE);
@@ -516,70 +534,46 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 		gtk_table_attach_defaults(GTK_TABLE(prj_page), gtk_label_new(_("Generator:")), 0, 1, 6, 7);
 		gtk_table_attach_defaults(GTK_TABLE(prj_page), foo_me_i_ve_been_wracked, 1, 2, 6, 7);
 	}
-#endif
-
-	gtk_notebook_append_page(GTK_NOTEBOOK(e_notebook), prj_page, gtk_label_new(_("Project")));
+#endif*/
 
 	/*
 	 * Translator and language page
 	 */
-	take_my_options = gtk_check_button_new_with_label(
-		_("Use my options to complete the following entries:"));
+
+	/*Checkbox to take my options*/
+	take_my_options = glade_xml_get_widget(glade_header, GLADE_TAKE_MY_OPTIONS);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(take_my_options), 
 				     GtrPreferences.fill_header);
 	g_signal_connect(G_OBJECT(take_my_options), "toggled",
 			 G_CALLBACK(take_my_options_toggled), NULL);
 
-	lang_page = gtk_table_new(6, 2, FALSE);
-	gtk_table_set_col_spacings(GTK_TABLE(lang_page), 2);
-	gtk_table_set_row_spacings(GTK_TABLE(lang_page), 2);
+	/*Table*/
+	lang_page = glade_xml_get_widget(glade_header, GLADE_LANG_PAGE);
 	gtk_widget_set_sensitive(lang_page, !GtrPreferences.fill_header);
 
-	translator = gtk_entry_new();
-	gtk_entry_set_text(GTK_ENTRY(translator), last_translator_name);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Translator's name:")), 0, 1, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), translator, 1, 2, 0, 1);
+	/*translator entry*/
+	translator = glade_xml_get_widget(glade_header, GLADE_TRANSLATOR);
 	g_signal_connect(translator, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	tr_email = gtk_entry_new();
-	gtk_entry_set_text(GTK_ENTRY(tr_email), last_translator_email);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Translator's e-mail:")), 0, 1, 1, 2);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), tr_email, 1, 2, 1, 2);
+	/*translator e-mail entry*/
+	tr_email = glade_xml_get_widget(glade_header, GLADE_TR_EMAIL);
 	g_signal_connect(tr_email, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	
-	language_combo = gtk_combo_box_entry_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(language_combo), languages_list);
-	gtk_entry_set_text(GTK_ENTRY(language_combo), language_name);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Language:")), 0, 1, 2, 3);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), language_combo, 1, 2, 2, 3);
+	/*language combo*/
+	language_combo = glade_xml_get_widget(glade_header, GLADE_LANGUAGE_COMBO);
 	g_signal_connect(language_combo, "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	
-	lg_combo = gtk_combo_box_entry_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(lg_combo), group_emails_list);
-	gtk_entry_set_text(GTK_ENTRY(lg_combo), language_email);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Language group's email:")), 0, 1, 3, 4);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), lg_combo, 1, 2, 3, 4);
+	/*language group's email combo*/
+	lg_combo = glade_xml_get_widget(glade_header, GLADE_LG_COMBO);
 	g_signal_connect(GTK_COMBO(lg_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	charset_combo = gtk_combo_box_entry_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(charset_combo), encodings_list);
-	gtk_entry_set_text(GTK_ENTRY(charset_combo), content_charset);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Charset:")), 0, 1, 4, 5);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), charset_combo, 1, 2, 4, 5);
+	/*charset combo*/
+	charset_combo = glade_xml_get_widget(glade_header, GLADE_CHARSET_COMBO);
 	g_signal_connect(GTK_COMBO(charset_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 
-	enc_combo = gtk_combo_box_entry_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(enc_combo), bits_list);
-	gtk_entry_set_text(GTK_ENTRY(enc_combo), content_transfer_encoding);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), gtk_label_new(_("Encoding:")), 0, 1, 5, 6);
-	gtk_table_attach_defaults(GTK_TABLE(lang_page), enc_combo, 1, 2, 5, 6);
+	/*Encoding combo*/
+	enc_combo = glade_xml_get_widget(glade_header, GLADE_ENC_COMBO);
 	g_signal_connect(GTK_COMBO(enc_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
-
-	lang_vbox = gtk_vbox_new(FALSE, GNOME_PAD);
-	gtk_box_pack_start(GTK_BOX(lang_vbox), take_my_options, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(lang_vbox), lang_page, TRUE, TRUE, 0);
-
-	gtk_notebook_append_page(GTK_NOTEBOOK(e_notebook), lang_vbox, gtk_label_new(_("Translator and Language")));
 
 	/*
 	 * Disable any charset changes directly from the header by making the
