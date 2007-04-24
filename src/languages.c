@@ -25,7 +25,7 @@
 
 #include "languages.h"
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 /*
  * This is the main languages list used in gtranslator -- the languages values
