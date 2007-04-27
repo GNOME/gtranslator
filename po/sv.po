@@ -4,14 +4,14 @@
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003.
 # Daniel Nylander <po@danielnylander.se>, 2006.
 #
-# $Id$
+# $Id: sv.po,v 1.85 2006/10/16 04:55:33 dnylande Exp $
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-16 04:37+0200\n"
-"PO-Revision-Date: 2006-10-16 06:51+0100\n"
+"POT-Creation-Date: 2007-04-27 10:55+0200\n"
+"PO-Revision-Date: 2007-04-27 10:56+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -29,17 +29,33 @@ msgstr "GNOME-översättningsprogrammet"
 msgid "gtranslator PO file editor"
 msgstr "PO-filredigeraren gtranslator"
 
-#: ../src/about.c:63
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr "© 1999-2005 The Free Software Foundation, Inc."
+#: ../src/about.c:61
+msgid "gtranslator is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+msgstr "gtranslator är fri programvara. Du kan distribuera det och/eller modifiera det under villkoren i GNU General Public License, publicerad av Free Software Foundation, antingen version 2 eller (om du så vill) någon senare version."
+
+#: ../src/about.c:65
+msgid "gtranslator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
+msgstr "gtranslator distribueras i hopp om att det ska vara användbart, men UTAN NÅGON SOM HELST GARANTI, även utan underförstådd garanti om SÄLJBARHET eller LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL. Se GNU General Public License för ytterligare information."
+
+#: ../src/about.c:69
+msgid "You should have received a copy of the GNU General Public License along with gtranslator; if not, write to the Free Software Foundation,59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"
+msgstr "Du bör ha fått en kopia av GNU General Public License tillsammans med gtranslator. Om inte, skriv till Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA"
 
 # src/about.c:60
-#: ../src/about.c:64
+#: ../src/about.c:82
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator är en programsvit med många finesser för redigering av po-filer."
 
+#: ../src/about.c:84
+msgid "(C) 1999-2007 The Free Software Foundation, Inc."
+msgstr "© 1999-2007 The Free Software Foundation, Inc."
+
 # src/menus.c:265
-#: ../src/about.c:67
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/about.c:91
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander\n"
@@ -472,98 +488,96 @@ msgstr "Meddelande %d / %d / Status: %s"
 msgid "Edit comment"
 msgstr "Redigera kommentar"
 
-#: ../src/header_stuff.c:406
-msgid "No header for this file/domain"
-msgstr "Inget huvud för denna fil/domän"
-
-# src/header_stuff.c:436
-#: ../src/header_stuff.c:445
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- redigera huvudet"
-
-# src/header_stuff.c:462
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-msgid "Comments:"
-msgstr "Kommentarer:"
-
-# src/header_stuff.c:468
-#: ../src/header_stuff.c:476
-msgid "Project name:"
-msgstr "Projektnamn:"
-
-# src/header_stuff.c:471
-#: ../src/header_stuff.c:482
-msgid "Project version:"
-msgstr "Projektversion:"
-
-# src/header_stuff.c:474
-#: ../src/header_stuff.c:489
-msgid "Pot file creation date:"
-msgstr "Pot-filen skapad den:"
-
-# src/header_stuff.c:479
-#: ../src/header_stuff.c:495
-msgid "Po file revision date:"
-msgstr "Po-filen reviderad den:"
-
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr "Rapportera fel i meddelandesträngar till:"
-
-# src/header_stuff.c:486
-#: ../src/header_stuff.c:516
-msgid "Generator:"
-msgstr "Skapad av:"
-
-# src/header_stuff.c:443 src/header_stuff.c:448
-#: ../src/header_stuff.c:521
-msgid "Project"
-msgstr "Projekt"
-
-# src/header_stuff.c:496
-#: ../src/header_stuff.c:527
-msgid "Use my options to complete the following entries:"
-msgstr "Använd mina alternativ för att fylla i följande poster:"
-
-# src/header_stuff.c:509
-#: ../src/header_stuff.c:540
-msgid "Translator's name:"
-msgstr "Översättarens namn:"
-
-# src/header_stuff.c:512
-#: ../src/header_stuff.c:546
-msgid "Translator's e-mail:"
-msgstr "Översättarens e-post:"
-
-# src/header_stuff.c:515 src/prefs.c:137
-#: ../src/header_stuff.c:553
-#: ../src/prefs.c:872
-msgid "Language:"
-msgstr "Språk:"
-
-# src/header_stuff.c:520
-#: ../src/header_stuff.c:560
-#: ../src/prefs.c:901
-msgid "Language group's email:"
-msgstr "Språkgruppens e-post:"
-
 # src/header_stuff.c:524 src/prefs.c:150
-#: ../src/header_stuff.c:567
+#: ../src/header_dialog.glade.h:1
 #: ../src/prefs.c:887
 msgid "Charset:"
 msgstr "Teckentabell:"
 
+# src/header_stuff.c:462
+#: ../src/header_dialog.glade.h:2
+msgid "Comments:"
+msgstr "Kommentarer:"
+
 # src/header_stuff.c:528 src/prefs.c:154
-#: ../src/header_stuff.c:574
+#: ../src/header_dialog.glade.h:3
 #: ../src/prefs.c:894
 msgid "Encoding:"
 msgstr "Kodning:"
 
+# src/header_stuff.c:520
+#: ../src/header_dialog.glade.h:4
+#: ../src/prefs.c:901
+msgid "Language group's email:"
+msgstr "Språkgruppens e-post:"
+
+# src/header_stuff.c:515 src/prefs.c:137
+#: ../src/header_dialog.glade.h:5
+#: ../src/prefs.c:872
+msgid "Language:"
+msgstr "Språk:"
+
+# src/header_stuff.c:479
+#: ../src/header_dialog.glade.h:6
+msgid "Po file revision date:"
+msgstr "Po-filen reviderad den:"
+
+# src/header_stuff.c:474
+#: ../src/header_dialog.glade.h:7
+msgid "Pot file creation date:"
+msgstr "Pot-filen skapad den:"
+
+# src/header_stuff.c:443 src/header_stuff.c:448
+#: ../src/header_dialog.glade.h:8
+msgid "Project"
+msgstr "Projekt"
+
+# src/header_stuff.c:468
+#: ../src/header_dialog.glade.h:9
+msgid "Project name:"
+msgstr "Projektnamn:"
+
+# src/header_stuff.c:471
+#: ../src/header_dialog.glade.h:10
+msgid "Project version:"
+msgstr "Projektversion:"
+
+#: ../src/header_dialog.glade.h:11
+msgid "Report message string bugs to:"
+msgstr "Rapportera fel i meddelandesträngar till:"
+
 # src/header_stuff.c:451
-#: ../src/header_stuff.c:582
+#: ../src/header_dialog.glade.h:12
 msgid "Translator and Language"
 msgstr "Översättare och språk"
+
+# src/header_stuff.c:512
+#: ../src/header_dialog.glade.h:13
+msgid "Translator's e-mail:"
+msgstr "Översättarens e-post:"
+
+# src/header_stuff.c:509
+#: ../src/header_dialog.glade.h:14
+msgid "Translator's name:"
+msgstr "Översättarens namn:"
+
+# src/header_stuff.c:496
+#: ../src/header_dialog.glade.h:15
+msgid "Use my options to complete the following entries:"
+msgstr "Använd mina alternativ för att fylla i följande poster:"
+
+#: ../src/header_dialog.glade.h:16
+msgid "gtk-close"
+msgstr "Stäng"
+
+# src/header_stuff.c:436
+#: ../src/header_dialog.glade.h:17
+msgid "gtranslator -- edit header"
+msgstr "gtranslator -- redigera huvudet"
+
+#: ../src/header_stuff.c:448
+msgid "No header for this file/domain"
+msgstr "Inget huvud för denna fil/domän"
 
 # src/history.c:167
 #: ../src/history.c:189
