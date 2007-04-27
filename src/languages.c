@@ -226,6 +226,10 @@ GtrLanguage languages[] = {
 	 "i18n-nn@lister.ping.uio.no", "8bit"
 	},
 	{
+	 N_("Occitan"), "oci", "UTF-8",
+	 "ubuntu-l10n-oci@lists.ubuntu.com", "8bit"
+	},
+	{
 	 N_("Punjabi"), "pa", "UTF-8",
 	 "indlinux-punjabi@lists.sourceforge.net", "8bit"
 	},
