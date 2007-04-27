@@ -6,14 +6,16 @@
 # Jeremy Simon <jsimon13@yahoo.fr>, 2001.
 # Baptiste Mille-Mathias <bmm80@ifrance.com>, 2004.
 # Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007.
+# Jonathan Ernst <jonathan@ernstfamily.ch>, 2007.
+# Robert-André Mauchin <zebob.m@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-10 12:24+0100\n"
-"PO-Revision-Date: 2007-03-13 22:02+0100\n"
-"Last-Translator: Stéphane Raimbault <stephane.raimbault@gmail.com>\n"
+"POT-Creation-Date: 2007-04-27 21:14+0200\n"
+"PO-Revision-Date: 2007-04-27 21:17+0200\n"
+"Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,23 +30,62 @@ msgstr "Programme de traduction GNOME"
 msgid "gtranslator PO file editor"
 msgstr "Éditeur de fichier PO gtranslator"
 
-#: ../src/about.c:63
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2005 The Free Software Foundation, Inc."
+#: ../src/about.c:61
+msgid ""
+"gtranslator is free software; you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 2 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"gtranslator est un logiciel libre ; vous pouvez le diffuser et/ou le "
+"modifier suivant les termes de la Licence Publique Générale GNU telle que "
+"publiée par la Free Software Foundation ; soit la version 2 de cette "
+"licence, soit (à votre convenance) une version ultérieure."
 
-#: ../src/about.c:64
+#: ../src/about.c:65
+msgid ""
+"gtranslator is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"gtranslator est diffusé dans l'espoir qu'il sera utile, mais SANS AUCUNE "
+"GARANTIE ; sans même une garantie implicite de COMMERCIALISATION ou "
+"d'ADÉQUATION À UN USAGE PARTICULIER. Voyez la Licence Publique Générale GNU "
+"pour plus de détails."
+
+#: ../src/about.c:69
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"Sound Juicer; if not, write to the Free Software Foundation,59 Temple Place, "
+"Suite 330, Boston, MA  02111-1307  USA"
+msgstr ""
+"Vous devriez avoir reçu une copie de la Licence Publique Générale GNU avec "
+"ce programme ; sinon, veuillez écrire à la Free Software Foundation, Inc., "
+"59 Temple Place - Suite 330, Boston, MA 02111-1307, États-Unis."
+
+#: ../src/about.c:82
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gtranslator est une suite d'édition de fichier po avec beaucoup de carillons "
 "et de sifflements d'admiration."
 
-#: ../src/about.c:67
+#: ../src/about.c:84
+msgid "(C) 1999-2007 The Free Software Foundation, Inc."
+msgstr "(C) 1999-2007 The Free Software Foundation, Inc."
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/about.c:91
 msgid "translator-credits"
 msgstr ""
 "Christophe Merlet <redfox@redfoxcenter.org>\n"
 "Jeremy Simon <jsimon13@yahoo.fr>\n"
 "Baptiste Mille-Mathias <bmm80@ifrance.com>\n"
-"Stéphane Raimbault <stephane.raimbault@gmail.com>"
+"Stéphane Raimbault <stephane.raimbault@gmail.com>\n"
+"Jonathan Ernst <jonathan@ernstfamily.ch>"
 
 #: ../src/bookmark.c:525
 msgid "_View/_Bookmarks/"
@@ -104,11 +145,11 @@ msgstr ""
 
 #: ../src/dialogs.c:109
 msgid "Gettext translation"
-msgstr "Traduction de gettext"
+msgstr "Traduction gettext"
 
 #: ../src/dialogs.c:114
 msgid "Gettext translation template"
-msgstr "Fichier modèle de traduction de gettext"
+msgstr "Fichier modèle de traduction gettext"
 
 #: ../src/dialogs.c:119
 msgid "All files"
@@ -133,7 +174,7 @@ msgid ""
 "was changed. Save?"
 msgstr ""
 "Le fichier %s\n"
-"a été modifié. Enregistrer ?"
+"a été modifié. L'enregistrer ?"
 
 #: ../src/dialogs.c:295 ../src/dialogs.c:328
 msgid "gtranslator -- edit comment"
@@ -238,7 +279,7 @@ msgstr ""
 "   %s\n"
 "\n"
 "est déjà ouvert par une autre instance de gtranslator.\n"
-"Veuiller fermer l'autre instance de gtranslator qui utilise\n"
+"Veuillez fermer l'autre instance de gtranslator qui utilise\n"
 "actuellement ce fichier pour obtenir l'accès à ce fichier.\n"
 "\n"
 "Gtranslator doit-il malgré tout ouvrir ce fichier ?"
@@ -297,7 +338,8 @@ msgid ""
 "and may contain your hard work!\n"
 msgstr ""
 "Ouvrir le fichier de récupération « %s » ?\n"
-"Il a été enregistré par gtranslator avant la dernière fermeture de gtranslator\n"
+"Il a été enregistré par gtranslator avant la dernière fermeture de "
+"gtranslator\n"
 "et contient peut-être votre dur travail.\n"
 
 #.
@@ -402,78 +444,77 @@ msgstr "Message %d / %d / État : %s"
 msgid "Edit comment"
 msgstr "Éditer le commentaire"
 
-#: ../src/header_stuff.c:406
-msgid "No header for this file/domain"
-msgstr "Pas d'en-tête pour ce fichier/domaine"
-
-#: ../src/header_stuff.c:445
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- éditer l'en-tête"
-
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-msgid "Comments:"
-msgstr "Commentaires :"
-
-#: ../src/header_stuff.c:476
-msgid "Project name:"
-msgstr "Nom du projet :"
-
-#: ../src/header_stuff.c:482
-msgid "Project version:"
-msgstr "Version du projet :"
-
-#: ../src/header_stuff.c:489
-msgid "Pot file creation date:"
-msgstr "Date de création du fichier pot :"
-
-#: ../src/header_stuff.c:495
-msgid "Po file revision date:"
-msgstr "Date de révision du fichier po :"
-
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr "Reporter les bogues de chaîne de message à :"
-
-#: ../src/header_stuff.c:516
-msgid "Generator:"
-msgstr "Générateur :"
-
-#: ../src/header_stuff.c:521
-msgid "Project"
-msgstr "Projet"
-
-#: ../src/header_stuff.c:527
-msgid "Use my options to complete the following entries:"
-msgstr "Utiliser mes options pour remplir les entrées suivantes : "
-
-#: ../src/header_stuff.c:540
-msgid "Translator's name:"
-msgstr "Nom du traducteur :"
-
-#: ../src/header_stuff.c:546
-msgid "Translator's e-mail:"
-msgstr "Adresse électronique du traducteur :"
-
-#: ../src/header_stuff.c:553 ../src/prefs.c:872
-msgid "Language:"
-msgstr "Langue :"
-
-#: ../src/header_stuff.c:560 ../src/prefs.c:901
-msgid "Language group's email:"
-msgstr "Adresse électronique du groupe de traduction :"
-
-#: ../src/header_stuff.c:567 ../src/prefs.c:887
+#: ../src/header_dialog.glade.h:1 ../src/prefs.c:887
 msgid "Charset:"
 msgstr "Table de caractères :"
 
-#: ../src/header_stuff.c:574 ../src/prefs.c:894
+#: ../src/header_dialog.glade.h:2
+msgid "Comments:"
+msgstr "Commentaires :"
+
+#: ../src/header_dialog.glade.h:3 ../src/prefs.c:894
 msgid "Encoding:"
 msgstr "Codage :"
 
-#: ../src/header_stuff.c:582
+#: ../src/header_dialog.glade.h:4 ../src/prefs.c:901
+msgid "Language group's email:"
+msgstr "Adresse électronique du groupe de traduction :"
+
+#: ../src/header_dialog.glade.h:5 ../src/prefs.c:872
+msgid "Language:"
+msgstr "Langue :"
+
+#: ../src/header_dialog.glade.h:6
+msgid "Po file revision date:"
+msgstr "Date de révision du fichier po :"
+
+#: ../src/header_dialog.glade.h:7
+msgid "Pot file creation date:"
+msgstr "Date de création du fichier pot :"
+
+#: ../src/header_dialog.glade.h:8
+msgid "Project"
+msgstr "Projet"
+
+#: ../src/header_dialog.glade.h:9
+msgid "Project name:"
+msgstr "Nom du projet :"
+
+#: ../src/header_dialog.glade.h:10
+msgid "Project version:"
+msgstr "Version du projet :"
+
+#: ../src/header_dialog.glade.h:11
+msgid "Report message string bugs to:"
+msgstr "Reporter les bogues de chaîne de message à :"
+
+#: ../src/header_dialog.glade.h:12
 msgid "Translator and Language"
 msgstr "Traducteur et langue"
+
+#: ../src/header_dialog.glade.h:13
+msgid "Translator's e-mail:"
+msgstr "Adresse électronique du traducteur :"
+
+#: ../src/header_dialog.glade.h:14
+msgid "Translator's name:"
+msgstr "Nom du traducteur :"
+
+#: ../src/header_dialog.glade.h:15
+msgid "Use my options to complete the following entries:"
+msgstr "Utiliser mes options pour remplir les entrées suivantes : "
+
+#: ../src/header_dialog.glade.h:16
+msgid "gtk-close"
+msgstr ""
+
+#: ../src/header_dialog.glade.h:17
+msgid "gtranslator -- edit header"
+msgstr "gtranslator -- éditer l'en-tête"
+
+#: ../src/header_stuff.c:448
+msgid "No header for this file/domain"
+msgstr "Pas d'en-tête pour ce fichier/domaine"
 
 #: ../src/history.c:189
 msgid "_File/Recen_t files/"
@@ -807,7 +848,7 @@ msgstr "Nombre d'entrées : « %i »"
 
 #: ../src/main.c:71
 msgid "Specify main window geometry"
-msgstr "Spécifie la géométrie de la fenêtre principale"
+msgstr "Indique la géométrie de la fenêtre principale"
 
 #: ../src/main.c:71
 msgid "GEOMETRY"
@@ -867,7 +908,7 @@ msgstr "Supprimer toutes les traductions..."
 
 #: ../src/menus.c:93
 msgid "Remove all existing translations from the po file"
-msgstr "Supprimer toutes les traductions existantes du fichier po"
+msgstr "Supprime toutes les traductions existantes du fichier po"
 
 #: ../src/menus.c:101
 msgid "Open from _URI..."
@@ -911,7 +952,7 @@ msgstr "Appro_ximatif"
 
 #: ../src/menus.c:164
 msgid "Toggle fuzzy status of a message"
-msgstr "Bascule l'état approximatif d'un messsage"
+msgstr "Bascule l'état approximatif d'un message"
 
 #: ../src/menus.c:177
 msgid "_First"
@@ -1092,7 +1133,7 @@ msgstr "Tous les messages semblent être traduits."
 #: ../src/message.c:272
 #, c-format
 msgid "gtkspell error: %s\n"
-msgstr "erreur de gtkspell : %s\n"
+msgstr "erreur de gtkspell : %s\n"
 
 #: ../src/message.c:273
 #, c-format
@@ -1110,7 +1151,7 @@ msgstr "Original"
 #: ../src/page.c:199
 #, c-format
 msgid "Error autosaving file: %s"
-msgstr "Erreur lors de la sauvegarde automatique du fichier : %s"
+msgstr "Erreur lors de la sauvegarde automatique du fichier : %s"
 
 #: ../src/parse.c:86
 msgid "Parser output"
@@ -1119,7 +1160,7 @@ msgstr "Sortie du parser"
 #: ../src/parse.c:254
 #, c-format
 msgid "Failed opening file '%s': %s"
-msgstr "Impossible d'ouvrir le fichier '%s' : %s"
+msgstr "Impossible d'ouvrir le fichier « %s » : %s"
 
 #: ../src/parse.c:275
 msgid "Gettext returned a null message domain list."
@@ -1180,19 +1221,26 @@ msgid ""
 "Note: It was not possible to determine GNU header for plural forms. Your GNU "
 "gettext tools may be too old or they do not contain a suggested value for "
 "your language."
-msgstr "Remarque : il n'a pas été possible de déterminer les en-têtes GNU pour les formes plurielles. Vos outils GNU gettext sont peut être trop vieux ou ils ne contiennent pas de valeur suggérée pour votre langue."
+msgstr ""
+"Remarque : il n'a pas été possible de déterminer les en-têtes GNU pour les "
+"formes plurielles. Vos outils GNU gettext sont peut être trop vieux ou ils "
+"ne contiennent pas de valeur suggérée pour votre langue."
 
 #: ../src/prefs.c:492
 msgid ""
 "Note: Your settings do not contain a plural forms string. These data "
 "retrieved from GNU gettext tools."
-msgstr "Remarque : vos paramètres ne contiennent pas de chaîne pour les formes plurielles. Ces données sont récupérées à partir des outils GNU gettext."
+msgstr ""
+"Remarque : vos paramètres ne contiennent pas de chaîne pour les formes "
+"plurielles. Ces données sont récupérées à partir des outils GNU gettext."
 
 #: ../src/prefs.c:497
 msgid ""
 "Note: Your settings contain an invalid plural forms string. These data "
 "retrieved from GNU gettext tools."
-msgstr "Remarque : vos paramètres contiennent une chaîne de formes plurielles invalide. Ces données sont récupérées à partir des outils GNU gettext."
+msgstr ""
+"Remarque : vos paramètres contiennent une chaîne de formes plurielles "
+"invalide. Ces données sont récupérées à partir des outils GNU gettext."
 
 #: ../src/prefs.c:546
 msgid "gtranslator -- options"
@@ -1321,21 +1369,21 @@ msgstr "Informations personnelles"
 msgid "Use self contact info from Evolution Data Server"
 msgstr ""
 "Utiliser vos informations personnelles à partir du serveur de données "
-"Evolution."
+"Evolution (Evolution Data Server)."
 
 #: ../src/prefs.c:799
 msgid "<i>Unable to get email from Evolution Data Server.</i>"
 msgstr ""
 "<i>Impossible de récupérer votre adresse électronique depuis le serveur de "
-"données Evolution.</i>"
+"données Evolution (Evolution Data Server).</i>"
 
 #: ../src/prefs.c:804
 msgid "My name:"
-msgstr "Mon nom :"
+msgstr "Mon nom :"
 
 #: ../src/prefs.c:809
 msgid "My Email:"
-msgstr "Mon adresse électronique :"
+msgstr "Mon adresse électronique :"
 
 #: ../src/prefs.c:813
 msgid "<b>Author's info</b>"
@@ -1345,7 +1393,7 @@ msgstr "<b>Informations sur l'auteur</b>"
 msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
 msgstr ""
 "<i>Impossible de récupérer vos informations personnelles à partir du serveur "
-"de données Evolution.</i>"
+"de données Evolution (Evolution Data Server).</i>"
 
 #: ../src/prefs.c:835
 msgid "Author's name:"
@@ -1399,7 +1447,7 @@ msgstr "Afficher la table des messages (nécessite le redémarrage)"
 
 #: ../src/prefs.c:965
 msgid "Collapse all entries by default"
-msgstr "Réduire tous les entrées traduites par défaut"
+msgstr "Réduire toutes les entrées traduites par défaut"
 
 #: ../src/prefs.c:976
 msgid "Autotranslation"
@@ -1407,7 +1455,9 @@ msgstr "Traduction automatique"
 
 #: ../src/prefs.c:988
 msgid "Query the personal learn buffer while autotranslating"
-msgstr "Rechercher dans le tampon d'apprentissage personnel lors de la traduction automatique"
+msgstr ""
+"Rechercher dans le tampon d'apprentissage personnel lors de la traduction "
+"automatique"
 
 #: ../src/prefs.c:992
 msgid "Automatically learn a newly translated message"
@@ -1420,7 +1470,9 @@ msgstr "Correspondance approximative"
 
 #: ../src/prefs.c:1012
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr "Utiliser les routines de correspondance « approximatives » pour les requêtes du tampon d'apprentissage"
+msgstr ""
+"Utiliser les routines de correspondance « approximatives » pour les requêtes "
+"du tampon d'apprentissage"
 
 #: ../src/prefs.c:1019
 msgid "Minimal required similarity persentage for fuzzy queries:"
@@ -1492,7 +1544,7 @@ msgstr "Session restaurée avec succès."
 #: ../src/sighandling.c:65
 #, c-format
 msgid "Saving file failed: %s"
-msgstr "La sauvegarde du fichier a échoué : %s"
+msgstr "L'enregistrement du fichier a échoué : %s"
 
 #: ../src/stylistics.c:265
 msgid "No font set! Using default font"
@@ -1543,7 +1595,7 @@ msgstr "Impossible de trouver le fichier « %s »."
 #: ../src/vfs-handle.c:154
 #, c-format
 msgid "Malformed URI `%s' entered!"
-msgstr "Un URI « %s » malformé a été saisi."
+msgstr "Un URI « %s » erroné a été saisi."
 
 #: ../src/vfs-handle.c:159
 #, c-format
@@ -1563,3 +1615,6 @@ msgstr "L'hôte « %s » n'a pas d'adresse."
 #: ../src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Transfert interrompu."
+
+#~ msgid "Generator:"
+#~ msgstr "Générateur :"
