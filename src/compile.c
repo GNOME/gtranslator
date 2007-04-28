@@ -1,7 +1,8 @@
 /*
- * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -192,10 +193,17 @@ void compile(GtkWidget * widget, gpointer useless)
 	}
 	else
 	{
+		GtkWidget *dialog;
 		fgets(line, sizeof(line), fs);
 		g_strchomp(line);
 		status=g_strdup_printf(_("Compile successful:\n%s"), line);
-		gnome_app_message(GNOME_APP(gtranslator_application), status);
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_INFO,
+						 GTK_BUTTONS_CLOSE,
+						 status);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 		g_free(status);
 	}
 	
