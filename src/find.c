@@ -33,7 +33,6 @@
 #include <string.h>
 #include <regex.h>
 #include <gtk/gtkeditable.h>
-#include <libgnomeui/gnome-app-util.h>
 #include <gettext-po.h>
 
 #define MAXHITS 10
@@ -214,7 +213,14 @@ void gtranslator_find(GtkWidget * widget, gpointer what, gboolean find_in_commen
 	if (what) {
 		if (strlen(what) == 0) {
 			error = g_strdup_printf(_("Please enter a search string"));
-			gnome_app_message(GNOME_APP(gtranslator_application), error);
+			GtkWidget *dialog;
+			dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_INFO,
+							 GTK_BUTTONS_CLOSE,
+							 error);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			g_free(error);
 			return;
 		}
@@ -230,7 +236,15 @@ void gtranslator_find(GtkWidget * widget, gpointer what, gboolean find_in_commen
 	if (repeat_all(begin, (FEFuncRX)find_in_msg, NULL, first, find_in_comments, find_in_english, find_in_translation) == TRUE)
 		return;
 	error = g_strdup_printf(_("Could not find\n\"%s\""), pattern);
-	gnome_app_message(GNOME_APP(gtranslator_application), error);
+	//Message dialog
+	GtkWidget *dialog;
+	dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+					 GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_INFO,
+					 GTK_BUTTONS_CLOSE,
+					 error);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 	g_free(error);
 }
 
