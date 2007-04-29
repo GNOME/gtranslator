@@ -1,5 +1,6 @@
 /*
- * (C) 2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2003-2007 	Fatih Demir <kabalak@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,8 +27,6 @@
 #include "prefs.h"
 #include "replace.h"
 #include "utils.h"
-
-#include <libgnomeui/libgnomeui.h>
 
 /*
  * Do the replace task for the given data block.
@@ -159,7 +158,14 @@ void gtranslator_replace_run(GtrReplace *replace)
 	}
 	else
 	{
-		gnome_app_warning(GNOME_APP(gtranslator_application), _("No replacements made!"));
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_WARNING,
+						 GTK_BUTTONS_CLOSE,
+ 						 _("No replacements made!"));
+ 		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 	}
 }
 

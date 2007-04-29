@@ -36,7 +36,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 /*
  * The GtrLearnBuffer structure which holds all informations/parts of the
