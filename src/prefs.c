@@ -1,8 +1,9 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *                      Ross Golder <ross@golder.org>
  *                      Søren Wedel Nielsen <swn@herlevkollegiet.dk>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * 
  * gtranslator is free software; you can redistribute it and/or modify
@@ -354,23 +355,24 @@ GtkWidget *gtranslator_preferences_toggle_new(const char *label_text,
 	return toggle;
 }
 
+/*
+ * Creates a new font button widget
+ */
 GtkWidget *gtranslator_preferences_font_picker_new(const gchar *title_text,
 						   const gchar *fontspec,
 						   GtkSizeGroup *size_group, 
 						   GCallback callback)
 {
-	GtkWidget *font_selector;
-
-	font_selector = gnome_font_picker_new();
-	gnome_font_picker_set_title(GNOME_FONT_PICKER(font_selector), title_text);
+	GtkWidget *font_selector = NULL;
+	
+	font_selector = gtk_font_button_new();
+	gtk_font_button_set_title(GTK_FONT_BUTTON(font_selector), title_text);
 	if(fontspec)
-		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font_selector), fontspec);
-	gnome_font_picker_set_mode(GNOME_FONT_PICKER(font_selector),
-				   GNOME_FONT_PICKER_MODE_FONT_INFO);
+		gtk_font_button_set_font_name(GTK_FONT_BUTTON(font_selector), fontspec);
+	gtk_font_button_set_show_style(GTK_FONT_BUTTON(font_selector), TRUE);
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), GTK_WIDGET (font_selector));
 	g_signal_connect(G_OBJECT(font_selector), "font_set",
-			 G_CALLBACK(callback), NULL);
-
+		 G_CALLBACK(callback), NULL);
 	return font_selector;
 }
 
