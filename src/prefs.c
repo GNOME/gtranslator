@@ -94,7 +94,7 @@ static GtrControlAutotranItems *ctrlautotran_node;
  * Glade:
  */
 static GladeXML *glade_prefs;
-#define GLADE_PREF_PATH "preferences.glade"
+#define GLADE_PREF_PATH "../data/glade/preferences.glade"
 /**Variables**/
 #define GLADE_PREF_DIALOG "preferences_dialog"
 #define GLADE_TREE_VIEW "treeview"
@@ -105,8 +105,10 @@ static GladeXML *glade_prefs;
 //Page 1: Autosave
 #define GLADE_AUTOSAVE "autosave"
 #define GLADE_AUTOSAVE_TIMEOUT "autosave_timeout"
+#define GLADE_AUTOSAVE_TIMEOUT_LABEL "autosave_timeout_label"
 #define GLADE_AUTOSAVE_WITH_SUFFIX "autosave_with_suffix"
 #define GLADE_AUTOSAVE_SUFFIX "autosave_suffix"
+#define GLADE_AUTOSAVE_SUFFIX_LABEL "autosave_suffix_label"
 //Page 2
 #define GLADE_MAX_HISTORY_ENTRIES "max_history_entries"
 #define GLADE_CHECK_RECENT_FILES "check_recent_files"
@@ -115,7 +117,9 @@ static GladeXML *glade_prefs;
 #define GLADE_USE_DOT_CHAR "use_dot_char"
 #define GLADE_OWN_FONTS "own_fonts"
 #define GLADE_MSGID_FONT "msgid_font"
+#define GLADE_MSGID_LABEL "msgid_label"
 #define GLADE_MSGSTR_FONT "msgstr_font"
+#define GLADE_MSGSTR_LABEL "msgstr_label"
 #define GLADE_RB_1 "rb_1"
 #define GLADE_RB_2 "rb_2"
 //Page 4
@@ -167,8 +171,8 @@ static GtkWidget
 	*use_dot_char, *use_update_function,	*check_recent_files, 
 	*own_fonts, *instant_spell_checking, 
 	*keep_obsolete, *autosave, *autosave_with_suffix,
-	*sweep_compile_file, *use_learn_buffer,
-	*show_messages_table, *rambo_function,
+	*sweep_compile_file, *use_learn_buffer, *autosave_timeout_label,
+	*show_messages_table, *rambo_function, *autosave_suffix_label,
 	*collapse_all_entries, *auto_learn, *fuzzy_matching,
 #ifdef GTR_ABOUT_ME
 	*use_about_me,
@@ -184,7 +188,7 @@ static GtkWidget
 /*
  * Font/color specific widgets used in the preferences box.
  */
-static GtkWidget *msgid_font, *msgstr_font;
+static GtkWidget *msgid_font, *msgstr_font, *msgid_label, *msgstr_label;
 
 /*
  * The preferences dialog widget itself, plus a notebook.
@@ -197,7 +201,7 @@ static GtkWidget *prefs = NULL, *prefs_notebook = NULL;
 static gboolean prefs_changed;
 
 //Maybe this is useful with glade to change the colors
-GtkWidget* 
+/*GtkWidget* 
 gtranslator_preferences_category_new_pack_start(GtkWidget *page,
 												const gchar *caption,
 												gchar *image_file) 
@@ -239,45 +243,34 @@ gtranslator_preferences_category_new_pack_start(GtkWidget *page,
 	gtk_box_pack_start (GTK_BOX (page), vbox, TRUE, TRUE, 0);
 
 	return content_box;
-}
-
-
-
-/*GtkWidget*
-gtranslator_preferences_pack_start_with_label(GtkWidget *box, 
-						    GtkWidget *widget, 
-						    GtkSizeGroup *label_size_group, 
-						    GtkWidget *depend,
-						    const char *caption,
-							gboolean expand)
-{
-	GtkWidget *hbox, *label;
-
-	hbox = gtk_hbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
-
-	label = gtk_label_new(caption);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-	if (label_size_group != NULL)
-		gtk_size_group_add_widget (GTK_SIZE_GROUP (label_size_group), GTK_WIDGET (label));
-	if (widget != NULL)
-		gtk_box_pack_start (GTK_BOX (hbox), widget, expand, TRUE, 0);
-	if (depend != NULL) {
-		gtk_widget_set_sensitive(GTK_WIDGET(label), 
-					 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(depend)));
-		g_signal_connect(G_OBJECT(depend), "toggled",
-				 G_CALLBACK(toggle_sensitive), label); 
-		if (widget != NULL) {
-		gtk_widget_set_sensitive(GTK_WIDGET(widget), 
-					 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(depend)));
-		g_signal_connect(G_OBJECT(depend), "toggled",
-				 G_CALLBACK(toggle_sensitive), widget);
-	}
-	}
-	return label;
 }*/
+
+
+
+/*
+ * Set sensitive of a widget and/or a label
+ */
+static void
+gtranslator_preferences_pack_set_up_with_label(GtkWidget *widget, 
+											   GtkWidget *label,
+											   GtkWidget *depend,
+											   gboolean expand)
+{
+	if (depend != NULL) {
+		if (label != NULL){
+			gtk_widget_set_sensitive(GTK_WIDGET(label), 
+					 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(depend)));
+			g_signal_connect(G_OBJECT(depend), "toggled",
+				 G_CALLBACK(toggle_sensitive), label); 
+		}
+		if (widget != NULL) {
+			gtk_widget_set_sensitive(GTK_WIDGET(widget), 
+					 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(depend)));
+			g_signal_connect(G_OBJECT(depend), "toggled",
+				 G_CALLBACK(toggle_sensitive), widget);
+		}
+	}
+}
 
 
 //This could be useful to use it in header_stuff.c
@@ -309,7 +302,7 @@ gtranslator_preferences_combo_new(GList *list,
 		}
 		if ((list = g_list_next(list)) == NULL) break;
     }
-	
+									  
 	gtk_combo_box_set_model(GTK_COMBO_BOX(combo), GTK_TREE_MODEL(store));
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
 
@@ -653,6 +646,10 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
  	gtk_widget_set_sensitive(GTK_WIDGET(autosave_timeout), GtrPreferences.autosave);
 	g_signal_connect(G_OBJECT(autosave_timeout), "changed",
  			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
+	autosave_timeout_label = glade_xml_get_widget(glade_prefs, GLADE_AUTOSAVE_TIMEOUT_LABEL);
+	gtranslator_preferences_pack_set_up_with_label(autosave_timeout,
+												   autosave_timeout_label,
+												   autosave, FALSE);
     
 	//autosave_with_suffix check button
 	autosave_with_suffix = gtranslator_preferences_toggle_new(GLADE_AUTOSAVE_WITH_SUFFIX,
@@ -664,6 +661,11 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	autosave_suffix = gtranslator_preferences_entry_new(GtrPreferences.autosave_suffix,
 														GLADE_AUTOSAVE_SUFFIX, 
 														G_CALLBACK(gtranslator_preferences_dialog_changed));
+	autosave_suffix_label = glade_xml_get_widget(glade_prefs, GLADE_AUTOSAVE_SUFFIX_LABEL);
+	gtranslator_preferences_pack_set_up_with_label(autosave_suffix, 
+												   autosave_suffix_label, 
+												   autosave_with_suffix,
+												   FALSE);
 	
 	
 	/* Recent item */
@@ -685,7 +687,6 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(max_history_entries), GTK_ADJUSTMENT(adjustment));
 	g_signal_connect(G_OBJECT(max_history_entries), "changed",
  			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
-		
 	
 	
 	//check_recent_files check button	
@@ -734,24 +735,27 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	//Set up hotkey chars
 	gtranslator_preferences_hotkey_char_widget_new();
 	
-	
-	//gtk_box_pack_start (GTK_BOX (category_box), hotkey_chars, FALSE, FALSE, 0);
-	
+	//own_fonts toggle button	
     own_fonts = gtranslator_preferences_toggle_new(GLADE_OWN_FONTS,
-						       GtrPreferences.use_own_fonts,
-						       G_CALLBACK(gtranslator_preferences_dialog_changed));	
+												   GtrPreferences.use_own_fonts,
+												   G_CALLBACK(gtranslator_preferences_dialog_changed));	
 	
 	
 	//Set up msgid_font button maybe is not neccessary return the widget
 	msgid_font = gtranslator_preferences_font_picker_new(GLADE_MSGID_FONT, 
 							   GtrPreferences.msgid_font,
 							   G_CALLBACK(gtranslator_preferences_dialog_changed));	
+	msgid_label = glade_xml_get_widget(glade_prefs, GLADE_MSGID_LABEL);
+	gtranslator_preferences_pack_set_up_with_label(msgid_font, msgid_label, own_fonts, TRUE);
 	
 	
 	//Set up msgstr_font button
 	msgstr_font = gtranslator_preferences_font_picker_new(GLADE_MSGSTR_FONT, 
 							      GtrPreferences.msgstr_font,
 							      G_CALLBACK(gtranslator_preferences_dialog_changed));
+	msgstr_label = glade_xml_get_widget(glade_prefs, GLADE_MSGSTR_LABEL);
+	gtranslator_preferences_pack_set_up_with_label(msgstr_font, msgstr_label, own_fonts, TRUE);
+
 		
 	/* Contents item */
 	gchar *content_str = _("Contents");
