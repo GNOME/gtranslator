@@ -311,10 +311,10 @@ gtranslator_preferences_combo_new(GList *list,
     }
 	
 	gtk_combo_box_set_model(GTK_COMBO_BOX(combo), GTK_TREE_MODEL(store));
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
 
 	if (value)
 		gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo)->child), value);
-	//gtk_editable_set_editable(GTK_EDITABLE(GTK_ENTRY(GTK_BIN(combo)->child)), 0);
 	
 	g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(combo)->child)), "changed",
 			 G_CALLBACK(callback), user_data);
