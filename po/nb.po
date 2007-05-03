@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-19 16:37+0100\n"
-"PO-Revision-Date: 2007-03-19 16:40+0100\n"
+"POT-Creation-Date: 2007-05-03 10:07+0200\n"
+"PO-Revision-Date: 2007-05-03 10:13+0200\n"
 "Last-Translator: Espen Stefansen <espenas@gmail.com>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -25,16 +25,43 @@ msgstr "GNOME oversettingsprogram"
 msgid "gtranslator PO file editor"
 msgstr "gtranslator PO-fil redigerer"
 
-#: ../src/about.c:63
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2005 The Free Software Foundation, Inc."
+#: ../src/about.c:61
+msgid ""
+"gtranslator is free software; you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 2 of the License, or (at your option) "
+"any later version."
+msgstr ""
 
-#: ../src/about.c:64
+#: ../src/about.c:65
+msgid ""
+"gtranslator is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+
+#: ../src/about.c:69
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"gtranslator; if not, write to the Free Software Foundation,59 Temple Place, "
+"Suite 330, Boston, MA  02111-1307  USA"
+msgstr ""
+
+#: ../src/about.c:82
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
 "gtranslator er et program for redigering av po-filer med mange funksjoner."
 
-#: ../src/about.c:67
+#: ../src/about.c:84
+msgid "(C) 1999-2007 The Free Software Foundation, Inc."
+msgstr "(C) 1999-2007 The Free Software Foundation, Inc."
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/about.c:91
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
@@ -77,15 +104,15 @@ msgstr "_Vis/_Fargeskjema/"
 msgid "Activate colorscheme %s"
 msgstr "Aktiver fargeskjema %s"
 
-#: ../src/compile.c:80
+#: ../src/compile.c:81
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "En feil oppsto under kjøring av msgfmt:\n"
 
-#: ../src/compile.c:157
+#: ../src/compile.c:158
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Beklager, msgfmt er ikke tilgjengelig på ditt system!"
 
-#: ../src/compile.c:197
+#: ../src/compile.c:199
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -329,11 +356,11 @@ msgstr "Kommentar for bokmerket:"
 msgid "No comment"
 msgstr "Ingen kommentar"
 
-#: ../src/find.c:216
+#: ../src/find.c:215
 msgid "Please enter a search string"
 msgstr "Vennligst skriv inn en søkestreng"
 
-#: ../src/find.c:232
+#: ../src/find.c:238
 #, c-format
 msgid ""
 "Could not find\n"
@@ -393,78 +420,73 @@ msgstr "Melding %d / %d / Status: %s"
 msgid "Edit comment"
 msgstr "Rediger kommentar"
 
-#: ../src/header_stuff.c:406
-msgid "No header for this file/domain"
-msgstr ""
-
-#: ../src/header_stuff.c:445
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- rediger header"
-
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-msgid "Comments:"
-msgstr "Kommentarer:"
-
-#: ../src/header_stuff.c:476
-msgid "Project name:"
-msgstr "Prosjektnavn:"
-
-#: ../src/header_stuff.c:482
-msgid "Project version:"
-msgstr "Prosjektversjon:"
-
-#: ../src/header_stuff.c:489
-msgid "Pot file creation date:"
-msgstr "Dato for oppretting av Pot-fil:"
-
-#: ../src/header_stuff.c:495
-msgid "Po file revision date:"
-msgstr "po-fil revisjonsdato:"
-
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr "Rapporter feil i meldingsstreng til:"
-
-#: ../src/header_stuff.c:516
-msgid "Generator:"
-msgstr "Generator:"
-
-#: ../src/header_stuff.c:521
-msgid "Project"
-msgstr "Prosjekt"
-
-#: ../src/header_stuff.c:527
-msgid "Use my options to complete the following entries:"
-msgstr "Bruk mine alternativer til å fylle ut følgende oppføringer:"
-
-#: ../src/header_stuff.c:540
-msgid "Translator's name:"
-msgstr "Oversetters navn:"
-
-#: ../src/header_stuff.c:546
-msgid "Translator's e-mail:"
-msgstr "Oversetters e-post:"
-
-#: ../src/header_stuff.c:553 ../src/prefs.c:872
-msgid "Language:"
-msgstr "Språk:"
-
-#: ../src/header_stuff.c:560 ../src/prefs.c:901
-msgid "Language group's email:"
-msgstr "Språkgruppens e-postadresse:"
-
-#: ../src/header_stuff.c:567 ../src/prefs.c:887
+#: ../src/header_dialog.glade.h:1 ../src/preferences.glade.h:21
 msgid "Charset:"
 msgstr "Tegnsett:"
 
-#: ../src/header_stuff.c:574 ../src/prefs.c:894
+#: ../src/header_dialog.glade.h:2
+msgid "Comments:"
+msgstr "Kommentarer:"
+
+#: ../src/header_dialog.glade.h:3 ../src/preferences.glade.h:25
 msgid "Encoding:"
 msgstr "Koding:"
 
-#: ../src/header_stuff.c:582
+#: ../src/header_dialog.glade.h:4 ../src/preferences.glade.h:31
+msgid "Language group's email:"
+msgstr "Språkgruppens e-postadresse:"
+
+#: ../src/header_dialog.glade.h:5 ../src/preferences.glade.h:32
+msgid "Language:"
+msgstr "Språk:"
+
+#: ../src/header_dialog.glade.h:6
+msgid "Po file revision date:"
+msgstr "po-fil revisjonsdato:"
+
+#: ../src/header_dialog.glade.h:7
+msgid "Pot file creation date:"
+msgstr "Dato for oppretting av Pot-fil:"
+
+#: ../src/header_dialog.glade.h:8
+msgid "Project"
+msgstr "Prosjekt"
+
+#: ../src/header_dialog.glade.h:9
+msgid "Project name:"
+msgstr "Prosjektnavn:"
+
+#: ../src/header_dialog.glade.h:10
+msgid "Project version:"
+msgstr "Prosjektversjon:"
+
+#: ../src/header_dialog.glade.h:11
+msgid "Report message string bugs to:"
+msgstr "Rapporter feil i meldingsstreng til:"
+
+#: ../src/header_dialog.glade.h:12
 msgid "Translator and Language"
 msgstr "Oversetter og språk"
+
+#: ../src/header_dialog.glade.h:13
+msgid "Translator's e-mail:"
+msgstr "Oversetters e-post:"
+
+#: ../src/header_dialog.glade.h:14
+msgid "Translator's name:"
+msgstr "Oversetters navn:"
+
+#: ../src/header_dialog.glade.h:15
+msgid "Use my options to complete the following entries:"
+msgstr "Bruk mine alternativer til å fylle ut følgende oppføringer:"
+
+#: ../src/header_dialog.glade.h:16
+msgid "gtranslator -- edit header"
+msgstr "gtranslator -- rediger header"
+
+#: ../src/header_stuff.c:448
+msgid "No header for this file/domain"
+msgstr ""
 
 #: ../src/history.c:189
 msgid "_File/Recen_t files/"
@@ -664,102 +686,106 @@ msgid "Norwegian/Nynorsk"
 msgstr "Norsk/nynorsk"
 
 #: ../src/languages.c:229
+msgid "Occitan"
+msgstr "Occitan"
+
+#: ../src/languages.c:233
 msgid "Punjabi"
 msgstr "Punjabi"
 
-#: ../src/languages.c:233
+#: ../src/languages.c:237
 msgid "Polish"
 msgstr "Polsk"
 
-#: ../src/languages.c:237
+#: ../src/languages.c:241
 msgid "Portuguese"
 msgstr "Portugisisk"
 
-#: ../src/languages.c:241
+#: ../src/languages.c:245
 msgid "Portuguese/Brazil"
 msgstr "Portugisisk/Brasil"
 
-#: ../src/languages.c:245
+#: ../src/languages.c:249
 msgid "Romanian"
 msgstr "Rumensk"
 
-#: ../src/languages.c:249
+#: ../src/languages.c:253
 msgid "Russian"
 msgstr "Russisk"
 
-#: ../src/languages.c:253
+#: ../src/languages.c:257
 msgid "Serbian/Cyrillic"
 msgstr "Serbisk/Kyrillisk"
 
-#: ../src/languages.c:257
+#: ../src/languages.c:261
 msgid "Serbian/Latin"
 msgstr "Serbisk/Latin"
 
-#: ../src/languages.c:261
+#: ../src/languages.c:265
 msgid "Slovak"
 msgstr "Slovakisk"
 
-#: ../src/languages.c:265
+#: ../src/languages.c:269
 msgid "Slovenian"
 msgstr "Slovensk"
 
-#: ../src/languages.c:269
+#: ../src/languages.c:273
 msgid "Spanish"
 msgstr "Spansk"
 
-#: ../src/languages.c:273
+#: ../src/languages.c:277
 msgid "Spanish/Spain"
 msgstr "Spansk/Spania"
 
-#: ../src/languages.c:277
+#: ../src/languages.c:281
 msgid "Spanish/Mexico"
 msgstr "Spansk/Mexico"
 
-#: ../src/languages.c:281
+#: ../src/languages.c:285
 msgid "Swedish"
 msgstr "Svensk"
 
-#: ../src/languages.c:285
+#: ../src/languages.c:289
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: ../src/languages.c:289
+#: ../src/languages.c:293
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../src/languages.c:293
+#: ../src/languages.c:297
 msgid "Telugu"
 msgstr "Telugu"
 
-#: ../src/languages.c:297
+#: ../src/languages.c:301
 msgid "Thai"
 msgstr "Thai"
 
-#: ../src/languages.c:301
+#: ../src/languages.c:305
 msgid "Turkish"
 msgstr "Tyrkisk"
 
-#: ../src/languages.c:305
+#: ../src/languages.c:309
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
-#: ../src/languages.c:309
+#: ../src/languages.c:313
 msgid "Urdu"
 msgstr "Urdu"
 
-#: ../src/languages.c:313
+#: ../src/languages.c:317
 msgid "Uzbekian"
 msgstr "Usbekisk"
 
-#: ../src/languages.c:317
+#: ../src/languages.c:321
 msgid "Vietnamese"
 msgstr "Vietnamesisk"
 
-#: ../src/languages.c:321
+#: ../src/languages.c:325
 msgid "Walloon"
 msgstr "Walloon"
 
-#: ../src/languages.c:325
+#: ../src/languages.c:329
 msgid "Welsh"
 msgstr "Walisisk"
 
@@ -1160,272 +1186,297 @@ msgstr[1] ""
 msgid "Couldn't generate the current date!"
 msgstr "Kunne ikke generere dagens dato!"
 
-#: ../src/prefs.c:464 ../src/prefs.c:567
+#: ../src/preferences.glade.h:1 ../src/prefs.c:488
 msgid " Categories: "
 msgstr " Kategorier: "
 
-#: ../src/prefs.c:483
+#: ../src/preferences.glade.h:2
+msgid "\"&\" (KDE)"
+msgstr "«&» (KDE)"
+
+#: ../src/preferences.glade.h:3
+msgid "\"Warn if po file contains fuzzy translations\""
+msgstr "«Gi advarsel hvis po-filen inneholder uferdige oversettelser»"
+
+#: ../src/preferences.glade.h:4
+msgid "\"_\" (GNOME)"
+msgstr "«_» (GNOME)"
+
+#: ../src/preferences.glade.h:5
+msgid "<b>Autosave</b>"
+msgstr "<b>Lagre automatisk</b>"
+
+#: ../src/preferences.glade.h:6
+msgid "<b>Contents</b>"
+msgstr "<b>Innhold</b>"
+
+#: ../src/preferences.glade.h:7
+msgid "<b>Fuzzy matching</b>"
+msgstr "<b>Antatte treff</b>"
+
+#: ../src/preferences.glade.h:8
+msgid "<b>General</b>"
+msgstr "<b>Generelt</b>"
+
+#: ../src/preferences.glade.h:9
+msgid "<b>Language settings</b>"
+msgstr "<b>Språkinnstillinger</b>"
+
+#: ../src/preferences.glade.h:10
+msgid "<b>Messages table</b>"
+msgstr "<b>Meldingstabell</b>"
+
+#: ../src/preferences.glade.h:11
+msgid "<b>Personal Information</b>"
+msgstr "<b>Personlig informasjon</b>"
+
+#: ../src/preferences.glade.h:12
+msgid "<b>Recent files</b>"
+msgstr "<b>Siste filer</b>"
+
+#: ../src/preferences.glade.h:13
+msgid "<b>Text display</b>"
+msgstr "<b>Tekstvisning</b>"
+
+#: ../src/preferences.glade.h:14
+msgid "Append a suffix to automatically saved files"
+msgstr "Legg til et suffiks til automatisk lagrede filer"
+
+#: ../src/preferences.glade.h:15
+msgid "Apply own fonts"
+msgstr "Bruk egne skrifter"
+
+#: ../src/preferences.glade.h:16
+msgid "Author's email:"
+msgstr "Forfatters e-postadresse:"
+
+#: ../src/preferences.glade.h:17
+msgid "Author's name:"
+msgstr "Forfatters navn:"
+
+#: ../src/preferences.glade.h:18
+msgid "Automatically learn a newly translated message"
+msgstr "Lær en oversatt melding automatisk"
+
+#: ../src/preferences.glade.h:19
+msgid "Automatically save at regular intervals"
+msgstr "Lagre automatisk med jevne mellomrom"
+
+#: ../src/preferences.glade.h:20
+msgid "Autosave interval: "
+msgstr "Intervall for automatisk lagring: "
+
+#: ../src/preferences.glade.h:22
+msgid "Check recent files before showing in recent files list"
+msgstr "Sjekk siste filer før de vises på listen over nylig åpnede"
+
+#: ../src/preferences.glade.h:23
+msgid "Collapse all entries by default"
+msgstr "Slå sammen alle oppføringer som forvalg"
+
+#: ../src/preferences.glade.h:24
+msgid "Delete compiled files (e.g. \\\"project.gmo\\"
+msgstr "Slett kompilerte filer (f.eks «prosjekt.gmo»)"
+
+#: ../src/preferences.glade.h:26
+msgid "Highlight syntax of the translation message"
+msgstr "Marker syntaks for oversettelsesmeldingen"
+
+#: ../src/preferences.glade.h:27
+msgid "Hotkey indicating character:"
+msgstr "Tegn som indikerer hurtigtast:"
+
+#: ../src/preferences.glade.h:28
+msgid "Instant spell checking"
+msgstr "Automatisk stavekontroll"
+
+#: ../src/preferences.glade.h:29
+msgid "Keep obsolete messages in the po files"
+msgstr "Behold utgåtte meldinger i po-filer"
+
+#: ../src/preferences.glade.h:30
+msgid "Language code:"
+msgstr "Språkkode:"
+
+#: ../src/preferences.glade.h:33
+msgid "Maximum number of entries in the recent files list:"
+msgstr "Maksimalt antall oppføringer i listen over sist åpnede filer:"
+
+#: ../src/preferences.glade.h:34
+msgid "Minimal required similarity persentage for fuzzy queries:"
+msgstr "Minstekrav til likhetsprosent for spørringer på antatte:"
+
+#: ../src/preferences.glade.h:35
+msgid "Original text font:"
+msgstr "Opprinnelig skrifttype for tekst:"
+
+#: ../src/preferences.glade.h:36
+msgid "Plural forms string:"
+msgstr "Streng for flertallsformer:"
+
+#: ../src/preferences.glade.h:37
+msgid "Query the personal learn buffer while autotranslating"
+msgstr "Spør også i personlig læringsbuffer under automatisk oversetting av meldinger"
+
+#: ../src/preferences.glade.h:38
+msgid "Remove fuzzy status if message is changed"
+msgstr "Fjern antattstatus hvis meldingen endres"
+
+#: ../src/preferences.glade.h:39
+msgid "Save geometry on exit and restore it on startup"
+msgstr "Lagre geometri når programmet avsluttes og gjenopprett ved oppstart"
+
+#: ../src/preferences.glade.h:40
+msgid "Show instant comment view in main pane"
+msgstr "Vis kommentarvisning i hovedvinduet"
+
+#: ../src/preferences.glade.h:41
+msgid "Show the messages table (requires restart)"
+msgstr "Vis meldingstabellen (krever omstart)"
+
+#: ../src/preferences.glade.h:42
+msgid "Suffix: "
+msgstr "Suffiks: "
+
+#: ../src/preferences.glade.h:43
+#, fuzzy
+msgid "The Possibility to remove all translations from a po file"
+msgstr "Aktiver funksjonalitet for å fjerne alle oversettelser fra en po-fil"
+
+#: ../src/preferences.glade.h:44
+#, fuzzy
+msgid "The Possibility to update a po file from within gtranslator"
+msgstr "Aktiver funksjonalitet for å oppdatere en po-fil fra gtranslator"
+
+#: ../src/preferences.glade.h:45
+msgid "Translation font:"
+msgstr "Skrifttype for oversettelser:"
+
+#. Translators: With "fuzzy" I mean a more enhanced (and more crappy) logic while searching for appropriate translations for a original string.
+#: ../src/preferences.glade.h:47
+#, fuzzy
+msgid "Use \\\"fuzzy\\\" matching routines for learn buffer queries"
+msgstr ""
+"Bruk «fuzzy» rutiner for å finne treff under spørringer i læringsbufferen"
+
+#: ../src/preferences.glade.h:48
+msgid "Use special character to indicate white space"
+msgstr "Bruk spesielle tegn for å indikere tomrom"
+
+#: ../src/preferences.glade.h:49
+msgid "gtranslator -- font selection/msgid font"
+msgstr "gtranslator -- valg av skrifttype/msgid skrifttype"
+
+#: ../src/preferences.glade.h:50
+msgid "gtranslator -- font selection/msgstr font"
+msgstr "gtranslator -- valg av skrifttype/msgstr skrifttype"
+
+#: ../src/preferences.glade.h:51
+msgid "gtranslator -- options"
+msgstr "gtranslator -- alternativer"
+
+#: ../src/prefs.c:507
 msgid ""
 "Note: It was not possible to determine GNU header for plural forms. Your GNU "
 "gettext tools may be too old or they do not contain a suggested value for "
 "your language."
 msgstr ""
 
-#: ../src/prefs.c:492
+#: ../src/prefs.c:516
 msgid ""
 "Note: Your settings do not contain a plural forms string. These data "
 "retrieved from GNU gettext tools."
 msgstr ""
 
-#: ../src/prefs.c:497
+#: ../src/prefs.c:521
 msgid ""
 "Note: Your settings contain an invalid plural forms string. These data "
 "retrieved from GNU gettext tools."
 msgstr ""
 
-#: ../src/prefs.c:546
-msgid "gtranslator -- options"
-msgstr "gtranslator -- alternativer"
-
-#: ../src/prefs.c:598
+#: ../src/prefs.c:596
 msgid "Files"
 msgstr "Filer"
 
 #. General item
-#: ../src/prefs.c:605
+#: ../src/prefs.c:603
 msgid "General"
 msgstr "Generelt"
 
-#: ../src/prefs.c:613
-msgid "Warn if po file contains fuzzy translations"
-msgstr "Gi advarsel hvis po-filen inneholder antatte oversettelser"
-
-#: ../src/prefs.c:617
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Slett kompilerte filer (f.eks «prosjekt.gmo»)"
-
 #. Autosave item
-#: ../src/prefs.c:623
+#: ../src/prefs.c:628
 msgid "Autosave"
 msgstr "Lagre automatisk"
 
-#: ../src/prefs.c:631
-msgid "Automatically save at regular intervals"
-msgstr "Lagre automatisk med jevne mellomrom"
-
-#: ../src/prefs.c:639
-msgid "Autosave interval:"
-msgstr "Intervall for automatisk lagring:"
-
-#: ../src/prefs.c:640
-msgid "Append a suffix to automatically saved files"
-msgstr "Legg til et suffiks til automatisk lagrede filer"
-
-#: ../src/prefs.c:647
-msgid "Suffix:"
-msgstr "Suffiks:"
-
 #. Recent item
-#: ../src/prefs.c:649
+#: ../src/prefs.c:673
 msgid "Recent files"
 msgstr "Siste filer"
 
-#: ../src/prefs.c:664
-msgid "Maximum number of entries in the recent files list:"
-msgstr "Maksimalt antall oppføringer i listen over sist åpnede filer:"
-
-#: ../src/prefs.c:665
-msgid "Check recent files before showing in recent files list"
-msgstr "Sjekk siste filer før de vises på listen over nylig åpnede"
-
-#: ../src/prefs.c:676
+#: ../src/prefs.c:705
 msgid "Editor"
 msgstr "Redigering"
 
 #. Text item
-#: ../src/prefs.c:681
+#: ../src/prefs.c:710
 msgid "Text display"
 msgstr "Tekstvisning"
 
-#: ../src/prefs.c:695
-msgid "Highlight syntax of the translation message"
-msgstr "Marker syntaks for oversettelsesmeldingen"
-
-#: ../src/prefs.c:700
-msgid "Use special character to indicate white space"
-msgstr "Bruk spesielle tegn for å indikere tomrom"
-
-#: ../src/prefs.c:705
-msgid "Hotkey indicating character:"
-msgstr "Tegn som indikerer hurtigtast:"
-
-#: ../src/prefs.c:714
-msgid "Apply own fonts"
-msgstr "Bruk egne skrifter"
-
-#: ../src/prefs.c:718
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- valg av skrifttype/msgid skrifttype"
-
-#: ../src/prefs.c:722
-msgid "Original text font:"
-msgstr "Opprinnelig skrifttype for tekst:"
-
-#: ../src/prefs.c:723
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- valg av skrifttype/msgstr skrifttype"
-
-#: ../src/prefs.c:727
-msgid "Translation font:"
-msgstr "Skrifttype for oversettelser:"
-
 #. Contents item
-#: ../src/prefs.c:730
+#: ../src/prefs.c:762
 msgid "Contents"
 msgstr "Innhold"
 
-#: ../src/prefs.c:743
-msgid "Remove fuzzy status if message is changed"
-msgstr "Fjern antattstatus hvis meldingen endres"
-
-#: ../src/prefs.c:747
-msgid "Keep obsolete messages in the po files"
-msgstr "Behold utgåtte meldinger i po-filer"
-
-#: ../src/prefs.c:752
-msgid "Instant spell checking"
-msgstr "Automatisk stavekontroll"
-
-#: ../src/prefs.c:763 ../src/prefs.c:778
+#: ../src/prefs.c:801
 msgid "PO header"
 msgstr "PO-topptekst"
 
-#: ../src/prefs.c:772
+#: ../src/prefs.c:810
 msgid "Personal Information"
 msgstr "Personlig informasjon"
 
-#: ../src/prefs.c:789
-msgid "Use self contact info from Evolution Data Server"
-msgstr ""
-
-#: ../src/prefs.c:799
-msgid "<i>Unable to get email from Evolution Data Server.</i>"
-msgstr ""
-
-#: ../src/prefs.c:804
-msgid "My name:"
-msgstr "Mitt navn:"
-
-#: ../src/prefs.c:809
-msgid "My Email:"
-msgstr "Min e-post:"
-
-#: ../src/prefs.c:813
-msgid "<b>Author's info</b>"
-msgstr ""
-
-#: ../src/prefs.c:817
-msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
-msgstr ""
-
-#: ../src/prefs.c:835
-msgid "Author's name:"
-msgstr "Forfatters navn:"
-
-#: ../src/prefs.c:841
-msgid "Author's email:"
-msgstr "Forfatters e-postadresse:"
-
+#. #ifdef GTR_ABOUT_ME
+#. gtk_widget_set_sensitive(personal_info_box,
+#. !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(use_about_me)));
+#. g_signal_connect(G_OBJECT(use_about_me), "toggled",
+#. G_CALLBACK(toggle_insensitive), personal_info_box);
+#. #endif
 #. Language item
-#: ../src/prefs.c:852
+#: ../src/prefs.c:887
 msgid "Language settings"
 msgstr "Språkinnstillinger"
 
-#: ../src/prefs.c:879
-msgid "Language code:"
-msgstr "Språkkode:"
-
-#: ../src/prefs.c:905
-msgid "Plural forms string:"
-msgstr "Streng for flertallsformer:"
-
-#: ../src/prefs.c:920
+#: ../src/prefs.c:953
 msgid "Functionality"
 msgstr "Funksjonalitet"
 
-#: ../src/prefs.c:935
-#, fuzzy
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr "Aktiver funksjonalitet for å oppdatere en po-fil fra gtranslator"
-
-#: ../src/prefs.c:939
-#, fuzzy
-msgid "The Possibility to remove all translations from a po file"
-msgstr "Aktiver funksjonalitet for å fjerne alle oversettelser fra en po-fil"
-
-#: ../src/prefs.c:943
-msgid "Show instant comment view in main pane"
-msgstr "Vis kommentarvisning i hovedvinduet"
-
-#: ../src/prefs.c:947
-msgid "Save geometry on exit and restore it on startup"
-msgstr "Lagre geometri når programmet avsluttes og gjenopprett ved oppstart"
-
 #. Messages table item
-#: ../src/prefs.c:953
+#: ../src/prefs.c:990
 msgid "Messages table"
 msgstr "Meldingstabell"
 
-#: ../src/prefs.c:961
-msgid "Show the messages table (requires restart)"
-msgstr "Vis meldingstabellen (krever omstart)"
-
-#: ../src/prefs.c:965
-msgid "Collapse all entries by default"
-msgstr "Slå sammen alle oppføringer som forvalg"
-
-#: ../src/prefs.c:976
+#: ../src/prefs.c:1017
 msgid "Autotranslation"
 msgstr "Automatisk oversettelse"
 
-#: ../src/prefs.c:988
-#, fuzzy
-msgid "Query the personal learn buffer while autotranslating"
-msgstr ""
-"Spør også i personlig læringsbuffer under automatisk oversetting av "
-"uoversatte meldinger"
-
-#: ../src/prefs.c:992
-msgid "Automatically learn a newly translated message"
-msgstr "Lær en oversatt melding automatisk"
-
 #. Fuzzy item
-#: ../src/prefs.c:998
+#: ../src/prefs.c:1041
 msgid "Fuzzy matching"
 msgstr "Antatte treff"
 
-#: ../src/prefs.c:1012
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
-"Bruk «fuzzy» rutiner for å finne treff under spørringer i læringsbufferen"
-
-#: ../src/prefs.c:1019
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "Minstekrav til likhetsprosent for spørringer på antatte:"
-
-#: ../src/prefs.c:1076
+#: ../src/prefs.c:1111
 msgid "Please enter your name!"
 msgstr "Vennligst oppgi ditt navn!"
 
-#: ../src/prefs.c:1105
+#: ../src/prefs.c:1140
 msgid "Please enter your EMail address!"
 msgstr "Vennligst oppgi din e-postadresse!"
 
-#: ../src/prefs.c:1125
+#: ../src/prefs.c:1160
 msgid "Please enter a valid EMail address!"
 msgstr "Vennligst oppgi en gyldig e-postadresse!"
 
-#: ../src/replace.c:162
+#: ../src/replace.c:166
 msgid "No replacements made!"
 msgstr "Ingen erstatninger utført!"
 
@@ -1550,229 +1601,3 @@ msgstr "Vert `%s' har ingen adresse!"
 #: ../src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Overføring avbrutt!"
-
-#~ msgid "gtranslator"
-#~ msgstr "gtranslator"
-
-#~ msgid "gtranslator -- open po file"
-#~ msgstr "gtranslator -- åpne po-fil"
-
-#~ msgid "gtranslator -- save file as.."
-#~ msgstr "gtranslator -- lagre fil som..."
-
-#~ msgid "Don't save"
-#~ msgstr "Ikke lagre"
-
-#~ msgid "gtranslator -- import po file"
-#~ msgstr "gtranslator -- importer po-fil"
-
-#~ msgid "gtranslator -- export po file"
-#~ msgstr "gtranslator -- eksporter po-fil"
-
-#~ msgid "No supported URI protocol (like \"ftp://\") given!"
-#~ msgstr "Ingen støttet URI-protokoll (som \"ftp://\") oppgitt!"
-
-#~ msgid "Here you can query existing translations from your learn buffer."
-#~ msgstr ""
-#~ "Her kan du spørre etter eksisterende oversettelser fra læringsbufferen."
-
-#~ msgid "gtranslator -- query your personal learn buffer"
-#~ msgstr "gtranslator -- spørring mot personlig læringsbuffer"
-
-#~ msgid "Query"
-#~ msgstr "Spørring"
-
-#~ msgid "Query message content"
-#~ msgstr "Spør etter meldingsinnhold"
-
-#~ msgid "Query string:"
-#~ msgstr "Streng i spørring:"
-
-#~ msgid "No query string given!"
-#~ msgstr "Ingen streng oppgitt i spørring!"
-
-#~ msgid "Couldn't find any result for the query in your learn buffer!"
-#~ msgstr "Kunne ikke finne resultat av spørringen i læringsbufferen!"
-
-#~ msgid ""
-#~ "Found \"%s\" as a translation for \"%s\".\n"
-#~ "Would you like to insert it into the translation?"
-#~ msgstr ""
-#~ "Fant «%s» som en oversettelse for «%s».\n"
-#~ "Vil du bruke denne i oversettelsen?"
-
-#~ msgid "Query's result translation is already there!"
-#~ msgstr "Resultatet av spørringen er allerede der!"
-
-#~ msgid "Sticky (Message & translation are the same)"
-#~ msgstr "Klebrig (Melding og oversettelse er lik)"
-
-#~ msgid "Auto translate the po file"
-#~ msgstr "Oversett po-fil automatisk"
-
-#~ msgid "FILENAME"
-#~ msgstr "FILNAVN"
-
-#~ msgid "Show build specifications"
-#~ msgstr "Vis spesifikasjon for bygg"
-
-#~ msgid "Export learn buffer to a plain po file"
-#~ msgstr "Eksporter læringsbufferen til en vanlig po-fil"
-
-#~ msgid "PO_FILE"
-#~ msgstr "PO_FIL"
-
-#~ msgid "Learn the file completely"
-#~ msgstr "Lær hele filen"
-
-#~ msgid "Show learn buffer statistics"
-#~ msgstr "Vis statistikk for læringsbuffer"
-
-#~ msgid "gtranslator build information/specs:"
-#~ msgstr "gtranslator informasjon om bygg/spesifikasjoner:"
-
-#~ msgid "Version and build date:"
-#~ msgstr "Versjon og byggdato:"
-
-#~ msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-#~ msgstr "Bygg GLib / Gtk+ / GNOME-versjoner:"
-
-#~ msgid "Colorschemes directory:"
-#~ msgstr "Katalog for fargeskjema:"
-
-#~ msgid "Scripts directory:"
-#~ msgstr "Katalog for skript:"
-
-#~ msgid "Window icon:"
-#~ msgstr "Vindusikon:"
-
-#~ msgid "Own locale directory:"
-#~ msgstr "Katalog for eget locale:"
-
-#~ msgid "Default learn buffer file location:"
-#~ msgstr "Forvalgt filplassering for læringsbuffer:"
-
-#~ msgid "Learned file `%s' successfully for your learn buffer.\n"
-#~ msgstr "Fullført innlæring av fil «%s» for din læringsbuffer.\n"
-
-#~ msgid "Exported learn buffer to file `%s'.\n"
-#~ msgstr "Eksporterte læringsbufferen til fil «%s».\n"
-
-#~ msgid "_Export to UTF-8..."
-#~ msgstr "_Eksporter til UTF-8..."
-
-#~ msgid "Export the current po file to UTF-8"
-#~ msgstr "Eksporter aktiv po-fil til UTF-8"
-
-#~ msgid "_Import from UTF-8..."
-#~ msgstr "_Importer fra UTF-8..."
-
-#~ msgid ""
-#~ "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-#~ msgstr "Importer en UTF-8 kodet po-fil til korresponderende vanlig koding"
-
-#~ msgid "_Query..."
-#~ msgstr "_Spør..."
-
-#~ msgid "gtranslator -- edit plural forms of message translation"
-#~ msgstr "gtranslator -- rediger flertallsformer for meldingsoversettelse"
-
-#~ msgid "Couldn't open compiled gettext file `%s'!"
-#~ msgstr "Kunne ikke åpne kompilert gettext-fil `%s'!"
-
-#~ msgid "Couldn't open compressed gettext file `%s'!"
-#~ msgstr "Kunne ikke åpne komprimert gettext-fil `%s'!"
-
-#~ msgid "Couldn't open zip'ed po file `%s'!"
-#~ msgstr "Kunne ikke åpne zippet po-fil `%s'!"
-
-#~ msgid ""
-#~ "Error in file \"%s\"\n"
-#~ "at line %d.\n"
-#~ "Please check the file and try again."
-#~ msgstr ""
-#~ "Feil i fil \"%s\"\n"
-#~ "på linje %d.\n"
-#~ "Vennligst sjekk filen og prøv igjen."
-
-#~ msgid ""
-#~ "The file is empty:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Filen er tom:\n"
-#~ "%s"
-
-#~ msgid "The file `%s' doesn't exist at all!"
-#~ msgstr "Filen `%s' eksisterer ikke i det hele tatt!"
-
-#~ msgid "Header record not found - defaulting from preferences"
-#~ msgstr "Oppføring ikke funnet i hode - bruker forvalg fra brukervalg"
-
-#~ msgid "Could not open file `%s' for writing!"
-#~ msgstr "Kunne ikke åpne fil `%s' for skriving!"
-
-#~ msgid "Syntax color scheme to use:"
-#~ msgstr "Fargeskjema som skal brukes for syntaks:"
-
-#~ msgid "Apply own colors:"
-#~ msgstr "Bruk egne farger:"
-
-#~ msgid "gtranslator -- foreground color"
-#~ msgstr "gtranslator -- forgrunnsfarge"
-
-#~ msgid "Foreground color:"
-#~ msgstr "Forgrunnsfarge:"
-
-#~ msgid "gtranslator -- background color"
-#~ msgstr "gtranslator -- bakgrunnsfarge"
-
-#~ msgid "Background:"
-#~ msgstr "Bakgrunn:"
-
-#~ msgid "Spell checking"
-#~ msgstr "Stavekontroll"
-
-#~ msgid "Use special dictionary:"
-#~ msgstr "Bruk egendefinert katalog:"
-
-#~ msgid "Display special dialog for messages with plural forms"
-#~ msgstr "Vis spesiell dialog for meldinger med flertallsformer"
-
-#~ msgid "Use own colors for messages table groups"
-#~ msgstr "Bruk egne farger for meldingstabellgrupper"
-
-#~ msgid "Fuzzy entries color:"
-#~ msgstr "Farge for uferdige oppføringer:"
-
-#~ msgid "Untranslated entries color:"
-#~ msgstr "Farge for oppføringer som ikke er oversatt:"
-
-#~ msgid "Translated entries color:"
-#~ msgstr "Farge for oversatte oppføringer:"
-
-#~ msgid "No POTFILES.in found!"
-#~ msgstr "POTFILES.in ikke funnet!"
-
-#~ msgid "Po file is uptodate."
-#~ msgstr "po-fil er oppdatert."
-
-#~ msgid "The update was successfull."
-#~ msgstr "Oppdatering fullført."
-
-#~ msgid "An error occurred while updating the po file."
-#~ msgstr "En feil oppsto under oppdatering av po-fil."
-
-#~ msgid "iso-8859-1"
-#~ msgstr "iso-8859-1"
-
-#~ msgid "You are not permitted to access file '%s'."
-#~ msgstr "Du har ikke rettigheter til å aksessere filen «%s»."
-
-#~ msgid ""
-#~ "You do not have permission to modify file '%s'.\n"
-#~ "Please save a new copy of it to a place of your choice and get write\n"
-#~ "permission for it."
-#~ msgstr ""
-#~ "Du har ikke rettigheter til å endre filen «%s».\n"
-#~ "Vennligst lagre en ny kopi i en katalog du velger selv og sørg for å\n"
-#~ "få skriverettigheter på den."
