@@ -94,7 +94,7 @@ static GtrControlAutotranItems *ctrlautotran_node;
  * Glade:
  */
 static GladeXML *glade_prefs;
-#define GLADE_PREF_PATH "../data/glade/preferences.glade"
+#define GLADE_PREF_PATH "preferences.glade"
 /**Variables**/
 #define GLADE_PREF_DIALOG "preferences_dialog"
 #define GLADE_TREE_VIEW "treeview"
