@@ -38,6 +38,8 @@
 #include "utils.h"
 #include "utils_gui.h"
 
+#include <glade/glade.h>
+
 /*
  * The callbacks:
  */
