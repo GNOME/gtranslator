@@ -1,5 +1,5 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Ross Golder <rossg@kabalak.net>
  * 			Ignacio Casal <nacho.resa@gmail.com>
@@ -566,29 +566,30 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	g_signal_connect(GTK_ENTRY(tr_email), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	
 	/*language combo*/
-	/*language_combo = glade_xml_get_widget(glade_header, GLADE_LANGUAGE_COMBO);
-	gtk_combo_set_popdown_strings(GTK_COMBO(language_combo), languages_list);
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(language_combo), language_name);
-	g_signal_connect(GTK_COMBO_BOX_ENTRY(language_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);*/
+	language_combo = gtranslator_header_combo_new(languages_list,
+												  language_name,
+												  GLADE_LANGUAGE_COMBO, 
+												  G_CALLBACK(gtranslator_header_edit_changed),
+												  NULL);
 	
 	/*language group's email combo*/
-/*	lg_combo = glade_xml_get_widget(glade_header, GLADE_LG_COMBO);
-	gtk_combo_set_popdown_strings(GTK_COMBO(lg_combo), group_emails_list);
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(lg_combo), language_email);
-	g_signal_connect(GTK_COMBO_BOX_ENTRY(lg_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
-*/
+	lg_combo = gtranslator_header_combo_new(group_emails_list,
+											language_email,
+											GLADE_LG_COMBO,
+											G_CALLBACK(gtranslator_header_edit_changed),
+											NULL);
 	/*charset combo*/
-/*	charset_combo = glade_xml_get_widget(glade_header, GLADE_CHARSET_COMBO);
-	gtk_combo_set_popdown_strings(GTK_COMBO(charset_combo), encodings_list);
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(charset_combo), content_charset);
-	g_signal_connect(GTK_COMBO_BOX_ENTRY(charset_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
-*/
+	charset_combo = gtranslator_header_combo_new(encodings_list,
+												 content_charset,
+												 GLADE_CHARSET_COMBO,
+												 G_CALLBACK(gtranslator_header_edit_changed),
+												 NULL);
 	/*Encoding combo*/
-/*	enc_combo = glade_xml_get_widget(glade_header, GLADE_ENC_COMBO);
-	gtk_combo_set_popdown_strings(GTK_COMBO(enc_combo), bits_list);
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(enc_combo), content_transfer_encoding);
-	g_signal_connect(GTK_COMBO_BOX_ENTRY(enc_combo), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
-*/
+	enc_combo = gtranslator_header_combo_new(bits_list,
+											 content_transfer_encoding,
+											 GLADE_ENC_COMBO,
+											 G_CALLBACK(gtranslator_header_edit_changed),
+											 NULL);
 	/*
 	 * Disable any charset changes directly from the header by making the
 	 *  charset combo non-editable.
