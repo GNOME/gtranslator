@@ -25,7 +25,7 @@
 
 #include "languages.h"
 
-#include <glib/gi18n.h>
+#include <glib.h>
 
 /*
  * This is the main languages list used in gtranslator -- the languages values

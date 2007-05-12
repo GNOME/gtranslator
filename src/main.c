@@ -37,7 +37,7 @@
 #include "utils.h"
 
 #include <locale.h>
-#include <libintl.h>
+#include <glib.h>
 
 #include <signal.h>
 
