@@ -106,6 +106,49 @@ static gchar *get_current_year(void);
 static void substitute(gchar **item, const gchar *bad, const gchar *good);
 static void replace_substring(gchar **item, const gchar *bad, const gchar *good);
 
+/*
+ * DUPLICATED CODE: This func is in prefs.c
+ */
+static GtkWidget*
+gtranslator_header_combo_new(GList *list, 
+								  const char *value,
+								  gchar *name, 
+								  GCallback callback,
+								  gpointer user_data)
+{
+	GtkWidget *combo;
+	GtkTreeIter iter;
+	GtkListStore* store;
+	
+	enum {
+		COLUMN_STRING,
+		N_COLUMNS
+	};
+	
+	combo = glade_xml_get_widget(glade_header, name);
+									  
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+		
+	while(TRUE)
+    {
+		if (list->data != NULL || list->data != '\0'){
+			gtk_list_store_append(store, &iter);
+			gtk_list_store_set(store, &iter, COLUMN_STRING, list->data, -1);
+		}
+		if ((list = g_list_next(list)) == NULL) break;
+    }
+									  
+	gtk_combo_box_set_model(GTK_COMBO_BOX(combo), GTK_TREE_MODEL(store));
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
+
+	if (value)
+		gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo)->child), value);
+	
+	g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(combo)->child)), "changed",
+			 G_CALLBACK(callback), user_data);
+	return combo;
+}
+
 static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 {
 	char *prefix_start;
