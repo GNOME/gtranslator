@@ -608,31 +608,37 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_entry_set_text(GTK_ENTRY(tr_email), last_translator_email);
 	g_signal_connect(GTK_ENTRY(tr_email), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	
+	/* Here i have a big problem
+	 * If take_my_options is set to true and code below is uncomment
+	 * the program crashes
+	 * but is set to false, program works fine
+	 * Any idea?
+	 */
 	/*language combo*/
-	language_combo = gtranslator_header_combo_new(languages_list,
+/*	language_combo = gtranslator_header_combo_new(languages_list,
 												  language_name,
 												  GLADE_LANGUAGE_COMBO, 
 												  G_CALLBACK(gtranslator_header_edit_changed),
-												  NULL);
+												  NULL);*/
 	
 	/*language group's email combo*/
-	lg_combo = gtranslator_header_combo_new(group_emails_list,
+/*	lg_combo = gtranslator_header_combo_new(group_emails_list,
 											language_email,
 											GLADE_LG_COMBO,
 											G_CALLBACK(gtranslator_header_edit_changed),
-											NULL);
+											NULL);*/
 	/*charset combo*/
-	charset_combo = gtranslator_header_combo_new(encodings_list,
+/*	charset_combo = gtranslator_header_combo_new(encodings_list,
 												 content_charset,
 												 GLADE_CHARSET_COMBO,
 												 G_CALLBACK(gtranslator_header_edit_changed),
-												 NULL);
+												 NULL);*/
 	/*Encoding combo*/
-	enc_combo = gtranslator_header_combo_new(bits_list,
+/*	enc_combo = gtranslator_header_combo_new(bits_list,
 											 content_transfer_encoding,
 											 GLADE_ENC_COMBO,
 											 G_CALLBACK(gtranslator_header_edit_changed),
-											 NULL);
+											 NULL);*/
 	/*
 	 * Disable any charset changes directly from the header by making the
 	 *  charset combo non-editable.
