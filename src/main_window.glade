@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Tue May 15 11:56:30 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.2.0 on Wed May 16 15:49:42 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -600,6 +600,7 @@
                 <child>
                   <widget class="GtkToolButton" id="open_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Open file</property>
                     <property name="stock_id">gtk-open</property>
                     <signal name="clicked" handler="on_open_activate"/>
                   </widget>
@@ -610,6 +611,7 @@
                 <child>
                   <widget class="GtkToolButton" id="save_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Save file</property>
                     <property name="stock_id">gtk-save</property>
                     <signal name="clicked" handler="on_save_activate"/>
                   </widget>
@@ -620,6 +622,7 @@
                 <child>
                   <widget class="GtkToolButton" id="save_as_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Save file as...</property>
                     <property name="stock_id">gtk-save-as</property>
                     <signal name="clicked" handler="on_save_as_activate"/>
                   </widget>
@@ -639,6 +642,7 @@
                 <child>
                   <widget class="GtkToolButton" id="refresh_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Refresh the current file</property>
                     <property name="stock_id">gtk-refresh</property>
                     <signal name="clicked" handler="on_refresh_activate"/>
                   </widget>
@@ -658,6 +662,7 @@
                 <child>
                   <widget class="GtkToolButton" id="undo_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Undo</property>
                     <property name="stock_id">gtk-undo</property>
                     <signal name="clicked" handler="on_undo_activate"/>
                   </widget>
@@ -677,6 +682,7 @@
                 <child>
                   <widget class="GtkToolButton" id="goto_first_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">First message</property>
                     <property name="stock_id">gtk-goto-first</property>
                     <signal name="clicked" handler="on_first_activate"/>
                   </widget>
@@ -687,6 +693,7 @@
                 <child>
                   <widget class="GtkToolButton" id="go_back_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Previous message</property>
                     <property name="stock_id">gtk-go-back</property>
                     <signal name="clicked" handler="on_go_back_activate"/>
                   </widget>
@@ -706,6 +713,7 @@
                 <child>
                   <widget class="GtkToolButton" id="go_forward_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Next message</property>
                     <property name="stock_id">gtk-go-forward</property>
                     <signal name="clicked" handler="on_go_forward_activate"/>
                   </widget>
@@ -716,6 +724,7 @@
                 <child>
                   <widget class="GtkToolButton" id="goto_last_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Last message</property>
                     <property name="stock_id">gtk-goto-last</property>
                     <signal name="clicked" handler="on_goto_last_activate"/>
                   </widget>
@@ -735,6 +744,7 @@
                 <child>
                   <widget class="GtkToolButton" id="find_toolbar">
                     <property name="visible">True</property>
+                    <property name="tooltip" translatable="yes">Search</property>
                     <property name="stock_id">gtk-find</property>
                     <signal name="clicked" handler="on_find_activate"/>
                   </widget>
@@ -748,7 +758,9 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkHPaned" id="hpaned1">
+              <widget class="GtkHPaned" id="table_pane">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <child>
@@ -763,7 +775,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkVPaned" id="vpaned1">
+                  <widget class="GtkVPaned" id="content_pane">
                     <property name="visible">True</property>
                     <child>
                       <widget class="GtkHBox" id="hbox2">
@@ -782,6 +794,7 @@
                                   <widget class="GtkLabel" id="label1">
                                     <property name="visible">True</property>
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                    <property name="tooltip" translatable="yes">Current comment</property>
                                   </widget>
                                 </child>
                               </widget>
@@ -791,6 +804,7 @@
                         <child>
                           <widget class="GtkButton" id="edit_comment">
                             <property name="visible">True</property>
+                            <property name="tooltip" translatable="yes">Edit current comment</property>
                             <property name="label" translatable="yes">Edit comment</property>
                           </widget>
                           <packing>
@@ -869,11 +883,12 @@
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <child>
-                              <widget class="GtkCheckButton" id="checkbutton1">
+                              <widget class="GtkRadioButton" id="radiobutton_translated">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Translated</property>
+                                <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                               </widget>
                               <packing>
@@ -881,12 +896,14 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="checkbutton2">
+                              <widget class="GtkRadioButton" id="radiobutton_fuzzy">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Fuzzy</property>
+                                <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
+                                <property name="group">radiobutton_translated</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -894,12 +911,14 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="checkbutton3">
+                              <widget class="GtkRadioButton" id="radiobutton_untranslated">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Untranslated</property>
+                                <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
+                                <property name="group">radiobutton_translated</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -908,6 +927,8 @@
                             </child>
                           </widget>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
