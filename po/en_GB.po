@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-23 20:43+0000\n"
-"PO-Revision-Date: 2007-01-23 20:43-0000\n"
+"POT-Creation-Date: 2007-05-16 08:21+0100\n"
+"PO-Revision-Date: 2007-05-16 08:22-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,15 +23,31 @@ msgstr "The GNOME translation program"
 msgid "gtranslator PO file editor"
 msgstr "gtranslator PO file editor"
 
-#: ../src/about.c:63
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2005 The Free Software Foundation, Inc."
+#: ../src/about.c:61
+msgid "gtranslator is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+msgstr "gtranslator is free software; you can redistribute it and/or modify it under the terms of the GNU General Public Licence as published by the Free Software Foundation; either version 2 of the Licence, or (at your option) any later version."
 
-#: ../src/about.c:64
+#: ../src/about.c:65
+msgid "gtranslator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
+msgstr "gtranslator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public Licence for more details."
+
+#: ../src/about.c:69
+msgid "You should have received a copy of the GNU General Public License along with gtranslator; if not, write to the Free Software Foundation,59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"
+msgstr "You should have received a copy of the GNU General Public Licence along with gtranslator; if not, write to the Free Software Foundation,59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"
+
+#: ../src/about.c:82
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "gtranslator is a po file editing suite with many bells and whistles."
 
-#: ../src/about.c:67
+#: ../src/about.c:84
+msgid "(C) 1999-2007 The Free Software Foundation, Inc."
+msgstr "(C) 1999-2007 The Free Software Foundation, Inc."
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/about.c:91
 msgid "translator-credits"
 msgstr ""
 "Mike Newman <mike@gtnorthern.demon.co.uk>\n"
@@ -78,15 +94,15 @@ msgstr "_View/_Colourschemes/"
 msgid "Activate colorscheme %s"
 msgstr "Activate colourscheme %s"
 
-#: ../src/compile.c:80
+#: ../src/compile.c:81
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "An error occurred while executing msgfmt:\n"
 
-#: ../src/compile.c:157
+#: ../src/compile.c:158
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Sorry, msgfmt is unavailable on your system."
 
-#: ../src/compile.c:197
+#: ../src/compile.c:199
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -173,7 +189,7 @@ msgstr "Comments"
 
 #: ../src/dialogs.c:602
 #: ../src/dialogs.c:731
-#: ../src/languages.c:101
+#: ../src/languages.c:102
 msgid "English"
 msgstr "English"
 
@@ -338,11 +354,11 @@ msgstr "Comment for the bookmark:"
 msgid "No comment"
 msgstr "No comment"
 
-#: ../src/find.c:216
+#: ../src/find.c:215
 msgid "Please enter a search string"
 msgstr "Please enter a search string"
 
-#: ../src/find.c:232
+#: ../src/find.c:238
 #, c-format
 msgid ""
 "Could not find\n"
@@ -408,82 +424,81 @@ msgstr "Message %d / %d / Status: %s"
 msgid "Edit comment"
 msgstr "Edit comment"
 
-#: ../src/header_stuff.c:406
-msgid "No header for this file/domain"
-msgstr "No header for this file/domain"
-
-#: ../src/header_stuff.c:445
-msgid "gtranslator -- edit header"
-msgstr "gtranslator - edit header"
-
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-msgid "Comments:"
-msgstr "Comments:"
-
-#: ../src/header_stuff.c:476
-msgid "Project name:"
-msgstr "Project name:"
-
-#: ../src/header_stuff.c:482
-msgid "Project version:"
-msgstr "Project version:"
-
-#: ../src/header_stuff.c:489
-msgid "Pot file creation date:"
-msgstr ".pot file creation date:"
-
-#: ../src/header_stuff.c:495
-msgid "Po file revision date:"
-msgstr ".po file revision date:"
-
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr "Report message string bugs to:"
-
-#: ../src/header_stuff.c:516
-msgid "Generator:"
-msgstr "Generator:"
-
-#: ../src/header_stuff.c:521
-msgid "Project"
-msgstr "Project"
-
-#: ../src/header_stuff.c:527
-msgid "Use my options to complete the following entries:"
-msgstr "Use my options to complete the following entries:"
-
-#: ../src/header_stuff.c:540
-msgid "Translator's name:"
-msgstr "Translator's name:"
-
-#: ../src/header_stuff.c:546
-msgid "Translator's e-mail:"
-msgstr "Translator's e-mail:"
-
-#: ../src/header_stuff.c:553
-#: ../src/prefs.c:872
-msgid "Language:"
-msgstr "Language:"
-
-#: ../src/header_stuff.c:560
-#: ../src/prefs.c:901
-msgid "Language group's email:"
-msgstr "Language group's email:"
-
-#: ../src/header_stuff.c:567
-#: ../src/prefs.c:887
+#: ../src/header_dialog.glade.h:1
+#: ../src/preferences.glade.h:21
 msgid "Charset:"
 msgstr "Charset:"
 
-#: ../src/header_stuff.c:574
-#: ../src/prefs.c:894
+#: ../src/header_dialog.glade.h:2
+msgid "Comments:"
+msgstr "Comments:"
+
+#: ../src/header_dialog.glade.h:3
+#: ../src/preferences.glade.h:25
 msgid "Encoding:"
 msgstr "Encoding:"
 
-#: ../src/header_stuff.c:582
+#: ../src/header_dialog.glade.h:4
+#: ../src/preferences.glade.h:31
+msgid "Language group's email:"
+msgstr "Language group's email:"
+
+#: ../src/header_dialog.glade.h:5
+#: ../src/preferences.glade.h:32
+msgid "Language:"
+msgstr "Language:"
+
+#: ../src/header_dialog.glade.h:6
+msgid "Po file revision date:"
+msgstr ".po file revision date:"
+
+#: ../src/header_dialog.glade.h:7
+msgid "Pot file creation date:"
+msgstr ".pot file creation date:"
+
+#: ../src/header_dialog.glade.h:8
+msgid "Project"
+msgstr "Project"
+
+#: ../src/header_dialog.glade.h:9
+msgid "Project name:"
+msgstr "Project name:"
+
+#: ../src/header_dialog.glade.h:10
+msgid "Project version:"
+msgstr "Project version:"
+
+#: ../src/header_dialog.glade.h:11
+msgid "Report message string bugs to:"
+msgstr "Report message string bugs to:"
+
+#: ../src/header_dialog.glade.h:12
 msgid "Translator and Language"
 msgstr "Translator and Language:"
+
+#: ../src/header_dialog.glade.h:13
+msgid "Translator's e-mail:"
+msgstr "Translator's e-mail:"
+
+#: ../src/header_dialog.glade.h:14
+msgid "Translator's name:"
+msgstr "Translator's name:"
+
+#: ../src/header_dialog.glade.h:15
+msgid "Use my options to complete the following entries:"
+msgstr "Use my options to complete the following entries:"
+
+#: ../src/header_dialog.glade.h:16
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../src/header_dialog.glade.h:17
+msgid "gtranslator -- edit header"
+msgstr "gtranslator - edit header"
+
+#: ../src/header_stuff.c:491
+msgid "No header for this file/domain"
+msgstr "No header for this file/domain"
 
 #: ../src/history.c:189
 msgid "_File/Recen_t files/"
@@ -494,291 +509,295 @@ msgstr "_File/Recen_t files/"
 msgid "Open %s"
 msgstr "Open %s"
 
-#: ../src/languages.c:37
+#: ../src/languages.c:38
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
-#: ../src/languages.c:41
+#: ../src/languages.c:42
 msgid "Albanian"
 msgstr "Albanian"
 
-#: ../src/languages.c:45
+#: ../src/languages.c:46
 msgid "Arabic"
 msgstr "Arabic"
 
-#: ../src/languages.c:49
+#: ../src/languages.c:50
 msgid "Azerbaijani Turkish"
 msgstr "Azerbaijani Turkish"
 
-#: ../src/languages.c:53
+#: ../src/languages.c:54
 msgid "Basque"
 msgstr "Basque"
 
-#: ../src/languages.c:57
+#: ../src/languages.c:58
 msgid "Belarusian"
 msgstr "Belarusian"
 
-#: ../src/languages.c:61
+#: ../src/languages.c:62
 msgid "Bengali"
 msgstr "Bengali"
 
-#: ../src/languages.c:65
+#: ../src/languages.c:66
 msgid "Britton"
 msgstr "Breton"
 
-#: ../src/languages.c:69
+#: ../src/languages.c:70
 msgid "Bulgarian"
 msgstr "Bulgarian"
 
-#: ../src/languages.c:73
+#: ../src/languages.c:74
 msgid "Catalan"
 msgstr "Catalan"
 
-#: ../src/languages.c:77
+#: ../src/languages.c:78
 msgid "Chinese/Simplified"
 msgstr "Simplified Chinese"
 
-#: ../src/languages.c:81
+#: ../src/languages.c:82
 msgid "Chinese/Traditional"
 msgstr "Traditional Chinese"
 
-#: ../src/languages.c:85
+#: ../src/languages.c:86
 msgid "Croatian"
 msgstr "Croatian"
 
-#: ../src/languages.c:89
+#: ../src/languages.c:90
 msgid "Czech"
 msgstr "Czech"
 
-#: ../src/languages.c:93
+#: ../src/languages.c:94
 msgid "Danish"
 msgstr "Danish"
 
-#: ../src/languages.c:97
+#: ../src/languages.c:98
 msgid "Dutch"
 msgstr "Dutch"
 
-#: ../src/languages.c:105
+#: ../src/languages.c:106
 msgid "English/Canada"
 msgstr "Candian English"
 
-#: ../src/languages.c:109
+#: ../src/languages.c:110
 msgid "English/GB"
 msgstr "British English"
 
-#: ../src/languages.c:113
+#: ../src/languages.c:114
 msgid "English/USA"
 msgstr "US English"
 
-#: ../src/languages.c:117
+#: ../src/languages.c:118
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: ../src/languages.c:121
+#: ../src/languages.c:122
 msgid "Estonian"
 msgstr "Estonian"
 
-#: ../src/languages.c:125
+#: ../src/languages.c:126
 msgid "Persian"
 msgstr "Persian"
 
-#: ../src/languages.c:129
+#: ../src/languages.c:130
 msgid "Finnish"
 msgstr "Finnish"
 
-#: ../src/languages.c:133
+#: ../src/languages.c:134
 msgid "French"
 msgstr "French"
 
-#: ../src/languages.c:137
+#: ../src/languages.c:138
 msgid "Galician"
 msgstr "Galician"
 
-#: ../src/languages.c:141
+#: ../src/languages.c:142
 msgid "German"
 msgstr "German"
 
-#: ../src/languages.c:145
+#: ../src/languages.c:146
 msgid "Greek"
 msgstr "Greek"
 
-#: ../src/languages.c:149
+#: ../src/languages.c:150
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: ../src/languages.c:153
+#: ../src/languages.c:154
 msgid "Hebrew"
 msgstr "Hebrew"
 
-#: ../src/languages.c:157
+#: ../src/languages.c:158
 msgid "Hindi"
 msgstr "Hindi"
 
-#: ../src/languages.c:161
+#: ../src/languages.c:162
 msgid "Hungarian"
 msgstr "Hungarian"
 
-#: ../src/languages.c:165
+#: ../src/languages.c:166
 msgid "Icelandic"
 msgstr "Icelandic"
 
-#: ../src/languages.c:169
+#: ../src/languages.c:170
 msgid "Indonesian"
 msgstr "Indonesian"
 
-#: ../src/languages.c:173
+#: ../src/languages.c:174
 msgid "Italian"
 msgstr "Italian"
 
-#: ../src/languages.c:177
+#: ../src/languages.c:178
 msgid "Irish"
 msgstr "Irish"
 
-#: ../src/languages.c:181
+#: ../src/languages.c:182
 msgid "Japanese"
 msgstr "Japanese"
 
-#: ../src/languages.c:185
+#: ../src/languages.c:186
 msgid "Kannada"
 msgstr "Kannada"
 
-#: ../src/languages.c:189
+#: ../src/languages.c:190
 msgid "Korean"
 msgstr "Korean"
 
-#: ../src/languages.c:193
+#: ../src/languages.c:194
 msgid "Kurdish"
 msgstr "Kurdish"
 
-#: ../src/languages.c:197
+#: ../src/languages.c:198
 msgid "Latvian"
 msgstr "Latvian"
 
-#: ../src/languages.c:201
+#: ../src/languages.c:202
 msgid "Lithuanian"
 msgstr "Lithuanian"
 
-#: ../src/languages.c:205
+#: ../src/languages.c:206
 msgid "Malay/Bahasa Melayu"
 msgstr "Malay/Bahasa Melayu"
 
-#: ../src/languages.c:209
+#: ../src/languages.c:210
 msgid "Maltese"
 msgstr "Maltese"
 
-#: ../src/languages.c:213
+#: ../src/languages.c:214
 msgid "Marathi"
 msgstr "Marathi"
 
-#: ../src/languages.c:217
+#: ../src/languages.c:218
 msgid "Mongolian"
 msgstr "Mongolian"
 
-#: ../src/languages.c:221
+#: ../src/languages.c:222
 msgid "Norwegian/Bokmaal"
 msgstr "Norwegian/Bokmaal"
 
-#: ../src/languages.c:225
+#: ../src/languages.c:226
 msgid "Norwegian/Nynorsk"
 msgstr "Norwegian/Nynorsk"
 
-#: ../src/languages.c:229
+#: ../src/languages.c:230
+msgid "Occitan"
+msgstr "Occitan"
+
+#: ../src/languages.c:234
 msgid "Punjabi"
 msgstr "Punjabi"
 
-#: ../src/languages.c:233
+#: ../src/languages.c:238
 msgid "Polish"
 msgstr "Polish"
 
-#: ../src/languages.c:237
+#: ../src/languages.c:242
 msgid "Portuguese"
 msgstr "Native Portuguese"
 
-#: ../src/languages.c:241
+#: ../src/languages.c:246
 msgid "Portuguese/Brazil"
 msgstr "Brazilian Portuguese"
 
-#: ../src/languages.c:245
+#: ../src/languages.c:250
 msgid "Romanian"
 msgstr "Romanian"
 
-#: ../src/languages.c:249
+#: ../src/languages.c:254
 msgid "Russian"
 msgstr "Russian"
 
-#: ../src/languages.c:253
+#: ../src/languages.c:258
 msgid "Serbian/Cyrillic"
 msgstr "Serbian/Cyrillic"
 
-#: ../src/languages.c:257
+#: ../src/languages.c:262
 msgid "Serbian/Latin"
 msgstr "Serbian/Latin"
 
-#: ../src/languages.c:261
+#: ../src/languages.c:266
 msgid "Slovak"
 msgstr "Slovak"
 
-#: ../src/languages.c:265
+#: ../src/languages.c:270
 msgid "Slovenian"
 msgstr "Slovenian"
 
-#: ../src/languages.c:269
+#: ../src/languages.c:274
 msgid "Spanish"
 msgstr "Spanish"
 
-#: ../src/languages.c:273
+#: ../src/languages.c:278
 msgid "Spanish/Spain"
 msgstr "Native Spanish"
 
-#: ../src/languages.c:277
+#: ../src/languages.c:282
 msgid "Spanish/Mexico"
 msgstr "Mexican Spanish"
 
-#: ../src/languages.c:281
+#: ../src/languages.c:286
 msgid "Swedish"
 msgstr "Swedish"
 
-#: ../src/languages.c:285
+#: ../src/languages.c:290
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: ../src/languages.c:289
+#: ../src/languages.c:294
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../src/languages.c:293
+#: ../src/languages.c:298
 msgid "Telugu"
 msgstr "Telugu"
 
-#: ../src/languages.c:297
+#: ../src/languages.c:302
 msgid "Thai"
 msgstr "Thai"
 
-#: ../src/languages.c:301
+#: ../src/languages.c:306
 msgid "Turkish"
 msgstr "Turkish"
 
-#: ../src/languages.c:305
+#: ../src/languages.c:310
 msgid "Ukrainian"
 msgstr "Ukrainian"
 
-#: ../src/languages.c:309
+#: ../src/languages.c:314
 msgid "Urdu"
 msgstr "Urdu"
 
-#: ../src/languages.c:313
+#: ../src/languages.c:318
 msgid "Uzbekian"
 msgstr "Uzbekian"
 
-#: ../src/languages.c:317
+#: ../src/languages.c:322
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
-#: ../src/languages.c:321
+#: ../src/languages.c:326
 msgid "Walloon"
 msgstr "Walloon"
 
-#: ../src/languages.c:325
+#: ../src/languages.c:330
 msgid "Welsh"
 msgstr "Welsh"
 
@@ -1187,261 +1206,295 @@ msgstr[1] ""
 msgid "Couldn't generate the current date!"
 msgstr "Could not generate the current date."
 
-#: ../src/prefs.c:464
-#: ../src/prefs.c:567
+#: ../src/preferences.glade.h:1
+#: ../src/prefs.c:489
 msgid " Categories: "
 msgstr " Categories: "
 
-#: ../src/prefs.c:483
-msgid "Note: It was not possible to determine GNU header for plural forms. Your GNU gettext tools may be too old or they do not contain a suggested value for your language."
-msgstr "Note: It was not possible to determine GNU header for plural forms. Your GNU gettext tools may be too old or they do not contain a suggested value for your language."
+#: ../src/preferences.glade.h:2
+msgid "\"&\" (KDE)"
+msgstr "\"&\" (KDE)"
 
-#: ../src/prefs.c:492
-msgid "Note: Your settings do not contain a plural forms string. These data retrieved from GNU gettext tools."
-msgstr "Note: Your settings do not contain a plural forms string. These data retrieved from GNU gettext tools."
+#: ../src/preferences.glade.h:3
+msgid "\"Warn if po file contains fuzzy translations\""
+msgstr "\"Warn if po file contains fuzzy translations\""
 
-#: ../src/prefs.c:497
-msgid "Note: Your settings contain an invalid plural forms string. These data retrieved from GNU gettext tools."
-msgstr "Note: Your settings contain an invalid plural forms string. These data retrieved from GNU gettext tools."
+#: ../src/preferences.glade.h:4
+msgid "\"_\" (GNOME)"
+msgstr "\"_\" (GNOME)"
 
-#: ../src/prefs.c:546
+#: ../src/preferences.glade.h:5
+msgid "<b>Autosave</b>"
+msgstr "<b>Autosave</b>"
+
+#: ../src/preferences.glade.h:6
+msgid "<b>Contents</b>"
+msgstr "<b>Contents</b>"
+
+#: ../src/preferences.glade.h:7
+msgid "<b>Fuzzy matching</b>"
+msgstr "<b>Fuzzy matching</b>"
+
+#: ../src/preferences.glade.h:8
+msgid "<b>General</b>"
+msgstr "<b>General</b>"
+
+#: ../src/preferences.glade.h:9
+msgid "<b>Language settings</b>"
+msgstr "<b>Language settings</b>"
+
+#: ../src/preferences.glade.h:10
+msgid "<b>Messages table</b>"
+msgstr "<b>Messages table</b>"
+
+#: ../src/preferences.glade.h:11
+msgid "<b>Personal Information</b>"
+msgstr "<b>Personal Information</b>"
+
+#: ../src/preferences.glade.h:12
+msgid "<b>Recent files</b>"
+msgstr "<b>Recent files</b>"
+
+#: ../src/preferences.glade.h:13
+msgid "<b>Text display</b>"
+msgstr "<b>Text display</b>"
+
+#: ../src/preferences.glade.h:14
+msgid "Append a suffix to automatically saved files"
+msgstr "Append a suffix to automatically saved files"
+
+#: ../src/preferences.glade.h:15
+msgid "Apply own fonts"
+msgstr "Apply own fonts"
+
+#: ../src/preferences.glade.h:16
+msgid "Author's email:"
+msgstr "Author's email:"
+
+#: ../src/preferences.glade.h:17
+msgid "Author's name:"
+msgstr "Author's name:"
+
+#: ../src/preferences.glade.h:18
+msgid "Automatically learn a newly translated message"
+msgstr "Automatically learn a newly translated message"
+
+#: ../src/preferences.glade.h:19
+msgid "Automatically save at regular intervals"
+msgstr "Automatically save at regular intervals"
+
+#: ../src/preferences.glade.h:20
+msgid "Autosave interval: "
+msgstr "Autosave interval: "
+
+#: ../src/preferences.glade.h:22
+msgid "Check recent files before showing in recent files list"
+msgstr "Check recent files before showing in recent files list"
+
+#: ../src/preferences.glade.h:23
+msgid "Collapse all entries by default"
+msgstr "Collapse all entries by default"
+
+#: ../src/preferences.glade.h:24
+msgid "Delete compiled files (e.g. \\"
+msgstr "Delete compiled files (e.g. \\"
+
+#: ../src/preferences.glade.h:24
+msgid ");"
+msgstr ");"
+
+#: ../src/preferences.glade.h:26
+msgid "Highlight syntax of the translation message"
+msgstr "Highlight syntax of the translation message"
+
+#: ../src/preferences.glade.h:27
+msgid "Hotkey indicating character:"
+msgstr "Hotkey indicating character:"
+
+#: ../src/preferences.glade.h:28
+msgid "Instant spell checking"
+msgstr "Instant spell checking"
+
+#: ../src/preferences.glade.h:29
+msgid "Keep obsolete messages in the po files"
+msgstr "Keep obsolete messages in the po files"
+
+#: ../src/preferences.glade.h:30
+msgid "Language code:"
+msgstr "Language code:"
+
+#: ../src/preferences.glade.h:33
+msgid "Maximum number of entries in the recent files list:"
+msgstr "Maximum number of entries in the recent files list:"
+
+#: ../src/preferences.glade.h:34
+msgid "Minimal required similarity persentage for fuzzy queries:"
+msgstr "Minimal required similarity persentage for fuzzy queries:"
+
+#: ../src/preferences.glade.h:35
+msgid "Original text font:"
+msgstr "Original text font:"
+
+#: ../src/preferences.glade.h:36
+msgid "Plural forms string:"
+msgstr "Plural forms string:"
+
+#: ../src/preferences.glade.h:37
+msgid "Query the personal learn buffer while autotranslating"
+msgstr "Query the personal learn buffer while autotranslating"
+
+#: ../src/preferences.glade.h:38
+msgid "Remove fuzzy status if message is changed"
+msgstr "Remove fuzzy status if message is changed"
+
+#: ../src/preferences.glade.h:39
+msgid "Save geometry on exit and restore it on startup"
+msgstr "Save geometry on exit and restore it on startup"
+
+#: ../src/preferences.glade.h:40
+msgid "Show instant comment view in main pane"
+msgstr "Show instant comment view in main pane"
+
+#: ../src/preferences.glade.h:41
+msgid "Show the messages table (requires restart)"
+msgstr "Show the messages table (requires restart)"
+
+#: ../src/preferences.glade.h:42
+msgid "Suffix: "
+msgstr "Suffix: "
+
+#: ../src/preferences.glade.h:43
+msgid "The Possibility to remove all translations from a po file"
+msgstr "The Possibility to remove all translations from a po file"
+
+#: ../src/preferences.glade.h:44
+msgid "The Possibility to update a po file from within gtranslator"
+msgstr "The Possibility to update a po file from within gtranslator"
+
+#: ../src/preferences.glade.h:45
+msgid "Translation font:"
+msgstr "Translation font:"
+
+#. Translators: With "fuzzy" I mean a more enhanced (and more crappy) logic while searching for appropriate translations for a original string.
+#: ../src/preferences.glade.h:47
+msgid "Use \\"
+msgstr "Use \\"
+
+#: ../src/preferences.glade.h:47
+msgid " matching routines for learn buffer queries"
+msgstr " matching routines for learn buffer queries"
+
+#: ../src/preferences.glade.h:48
+msgid "Use special character to indicate white space"
+msgstr "Use special character to indicate white space"
+
+#: ../src/preferences.glade.h:49
+msgid "gtranslator -- font selection/msgid font"
+msgstr "gtranslator - font selection/msgid font"
+
+#: ../src/preferences.glade.h:50
+msgid "gtranslator -- font selection/msgstr font"
+msgstr "gtranslator - font selection/msgstr font"
+
+#: ../src/preferences.glade.h:51
 msgid "gtranslator -- options"
 msgstr "gtranslator - options"
 
-#: ../src/prefs.c:598
+#: ../src/prefs.c:508
+msgid "Note: It was not possible to determine GNU header for plural forms. Your GNU gettext tools may be too old or they do not contain a suggested value for your language."
+msgstr "Note: It was not possible to determine GNU header for plural forms. Your GNU gettext tools may be too old or they do not contain a suggested value for your language."
+
+#: ../src/prefs.c:517
+msgid "Note: Your settings do not contain a plural forms string. These data retrieved from GNU gettext tools."
+msgstr "Note: Your settings do not contain a plural forms string. These data retrieved from GNU gettext tools."
+
+#: ../src/prefs.c:522
+msgid "Note: Your settings contain an invalid plural forms string. These data retrieved from GNU gettext tools."
+msgstr "Note: Your settings contain an invalid plural forms string. These data retrieved from GNU gettext tools."
+
+#: ../src/prefs.c:597
 msgid "Files"
 msgstr "Files"
 
 #. General item
-#: ../src/prefs.c:605
+#: ../src/prefs.c:604
 msgid "General"
 msgstr "General"
 
-#: ../src/prefs.c:613
-msgid "Warn if po file contains fuzzy translations"
-msgstr "Warn if po file contains fuzzy translations"
-
-#: ../src/prefs.c:617
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Delete compiled files (e.g. \"project.gmo\")"
-
 #. Autosave item
-#: ../src/prefs.c:623
+#: ../src/prefs.c:629
 msgid "Autosave"
 msgstr "Autosave"
 
-#: ../src/prefs.c:631
-msgid "Automatically save at regular intervals"
-msgstr "Automatically save at regular intervals"
-
-#: ../src/prefs.c:639
-msgid "Autosave interval:"
-msgstr "Autosave interval:"
-
-#: ../src/prefs.c:640
-msgid "Append a suffix to automatically saved files"
-msgstr "Append a suffix to automatically saved files"
-
-#: ../src/prefs.c:647
-msgid "Suffix:"
-msgstr "Suffix:"
-
 #. Recent item
-#: ../src/prefs.c:649
+#: ../src/prefs.c:674
 msgid "Recent files"
 msgstr "Recent files"
 
-#: ../src/prefs.c:664
-msgid "Maximum number of entries in the recent files list:"
-msgstr "Maximum number of entries in the recent files list:"
-
-#: ../src/prefs.c:665
-msgid "Check recent files before showing in recent files list"
-msgstr "Check recent files before showing in recent files list"
-
-#: ../src/prefs.c:676
+#: ../src/prefs.c:706
 msgid "Editor"
 msgstr "Editor"
 
 #. Text item
-#: ../src/prefs.c:681
+#: ../src/prefs.c:711
 msgid "Text display"
 msgstr "Text display"
 
-#: ../src/prefs.c:695
-msgid "Highlight syntax of the translation message"
-msgstr "Highlight syntax of the translation message"
-
-#: ../src/prefs.c:700
-msgid "Use special character to indicate white space"
-msgstr "Use special character to indicate white space"
-
-#: ../src/prefs.c:705
-msgid "Hotkey indicating character:"
-msgstr "Hotkey indicating character:"
-
-#: ../src/prefs.c:714
-msgid "Apply own fonts"
-msgstr "Apply own fonts"
-
-#: ../src/prefs.c:718
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator - font selection/msgid font"
-
-#: ../src/prefs.c:722
-msgid "Original text font:"
-msgstr "Original text font:"
-
-#: ../src/prefs.c:723
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator - font selection/msgstr font"
-
-#: ../src/prefs.c:727
-msgid "Translation font:"
-msgstr "Translation font:"
-
 #. Contents item
-#: ../src/prefs.c:730
+#: ../src/prefs.c:763
 msgid "Contents"
 msgstr "Contents"
 
-#: ../src/prefs.c:743
-msgid "Remove fuzzy status if message is changed"
-msgstr "Remove fuzzy status if message is changed"
-
-#: ../src/prefs.c:747
-msgid "Keep obsolete messages in the po files"
-msgstr "Keep obsolete messages in the po files"
-
-#: ../src/prefs.c:752
-msgid "Instant spell checking"
-msgstr "Instant spell checking"
-
-#: ../src/prefs.c:763
-#: ../src/prefs.c:778
+#: ../src/prefs.c:802
 msgid "PO header"
 msgstr "PO header"
 
-#: ../src/prefs.c:772
+#: ../src/prefs.c:811
 msgid "Personal Information"
 msgstr "Personal Information"
 
-#: ../src/prefs.c:789
-msgid "Use self contact info from Evolution Data Server"
-msgstr "Use self contact info from Evolution Data Server"
-
-#: ../src/prefs.c:799
-msgid "<i>Unable to get email from Evolution Data Server.</i>"
-msgstr "<i>Unable to get email from Evolution Data Server.</i>"
-
-#: ../src/prefs.c:804
-msgid "My name:"
-msgstr "My name:"
-
-#: ../src/prefs.c:809
-msgid "My Email:"
-msgstr "My Email:"
-
-#: ../src/prefs.c:813
-msgid "<b>Author's info</b>"
-msgstr "<b>Author's info</b>"
-
-#: ../src/prefs.c:817
-msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
-msgstr "<i>Unable to get personal info from Evolution Data Server.</i>"
-
-#: ../src/prefs.c:835
-msgid "Author's name:"
-msgstr "Author's name:"
-
-#: ../src/prefs.c:841
-msgid "Author's email:"
-msgstr "Author's email:"
-
+#. #ifdef GTR_ABOUT_ME
+#. gtk_widget_set_sensitive(personal_info_box,
+#. !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(use_about_me)));
+#. g_signal_connect(G_OBJECT(use_about_me), "toggled",
+#. G_CALLBACK(toggle_insensitive), personal_info_box);
+#. #endif
 #. Language item
-#: ../src/prefs.c:852
+#: ../src/prefs.c:888
 msgid "Language settings"
 msgstr "Language settings."
 
-#: ../src/prefs.c:879
-msgid "Language code:"
-msgstr "Language code:"
-
-#: ../src/prefs.c:905
-msgid "Plural forms string:"
-msgstr "Plural forms string:"
-
-#: ../src/prefs.c:920
+#: ../src/prefs.c:954
 msgid "Functionality"
 msgstr "Functionality"
 
-#: ../src/prefs.c:935
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr "The Possibility to update a po file from within gtranslator"
-
-#: ../src/prefs.c:939
-msgid "The Possibility to remove all translations from a po file"
-msgstr "The Possibility to remove all translations from a po file"
-
-#: ../src/prefs.c:943
-msgid "Show instant comment view in main pane"
-msgstr "Show instant comment view in main pane"
-
-#: ../src/prefs.c:947
-msgid "Save geometry on exit and restore it on startup"
-msgstr "Save geometry on exit and restore it on startup"
-
 #. Messages table item
-#: ../src/prefs.c:953
+#: ../src/prefs.c:991
 msgid "Messages table"
 msgstr "Message table"
 
-#: ../src/prefs.c:961
-msgid "Show the messages table (requires restart)"
-msgstr "Show the messages table (requires restart)"
-
-#: ../src/prefs.c:965
-msgid "Collapse all entries by default"
-msgstr "Collapse all entries by default"
-
-#: ../src/prefs.c:976
+#: ../src/prefs.c:1018
 msgid "Autotranslation"
 msgstr "Autotranslation"
 
-#: ../src/prefs.c:988
-msgid "Query the personal learn buffer while autotranslating"
-msgstr "Query the personal learn buffer while autotranslating"
-
-#: ../src/prefs.c:992
-msgid "Automatically learn a newly translated message"
-msgstr "Automatically learn a newly translated message"
-
 #. Fuzzy item
-#: ../src/prefs.c:998
+#: ../src/prefs.c:1042
 msgid "Fuzzy matching"
 msgstr "Fuzzy matching"
 
-#: ../src/prefs.c:1012
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr "Use \"fuzzy\" matching routines for learn buffer queries"
-
-#: ../src/prefs.c:1019
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "Minimal required similarity persentage for fuzzy queries:"
-
-#: ../src/prefs.c:1076
+#: ../src/prefs.c:1112
 msgid "Please enter your name!"
 msgstr "Please enter your name"
 
-#: ../src/prefs.c:1105
+#: ../src/prefs.c:1141
 msgid "Please enter your EMail address!"
 msgstr "Please enter your e-mail address."
 
-#: ../src/prefs.c:1125
+#: ../src/prefs.c:1161
 msgid "Please enter a valid EMail address!"
 msgstr "Please enter a valid e-mail address."
 
-#: ../src/replace.c:162
+#: ../src/replace.c:166
 msgid "No replacements made!"
 msgstr "No replacements made!"
 
@@ -1569,6 +1622,20 @@ msgstr "No address found for host '%s~'."
 msgid "Transfer interrupted!"
 msgstr "Transfer interrupted."
 
+#~ msgid "Generator:"
+#~ msgstr "Generator:"
+#~ msgid "Use self contact info from Evolution Data Server"
+#~ msgstr "Use self contact info from Evolution Data Server"
+#~ msgid "<i>Unable to get email from Evolution Data Server.</i>"
+#~ msgstr "<i>Unable to get email from Evolution Data Server.</i>"
+#~ msgid "My name:"
+#~ msgstr "My name:"
+#~ msgid "My Email:"
+#~ msgstr "My Email:"
+#~ msgid "<b>Author's info</b>"
+#~ msgstr "<b>Author's info</b>"
+#~ msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
+#~ msgstr "<i>Unable to get personal info from Evolution Data Server.</i>"
 #~ msgid "gtranslator"
 #~ msgstr "gtranslator"
 #~ msgid "Show build specifications"
