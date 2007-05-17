@@ -72,8 +72,8 @@ enum {
 /*
  * Defines for convenient handling of the state changes.
  */
-#define gtranslator_actions_enable(args...) gtranslator_actions_set_up(TRUE, args, ACT_END)
-#define gtranslator_actions_disable(args...) gtranslator_actions_set_up(FALSE, args, ACT_END)
+/*#define gtranslator_actions_enable(args...) gtranslator_actions_set_up(TRUE, args, ACT_END)
+#define gtranslator_actions_disable(args...) gtranslator_actions_set_up(FALSE, args, ACT_END)*/
 
 /*
  * Set up the general binding at startup time.

@@ -1,8 +1,9 @@
 /*
- * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
+ *			Ignacio Casal <nacho.resa@gmail.com>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,18 +24,22 @@
 #ifndef GTR_GUI_H
 #define GTR_GUI_H 1
 
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkeditable.h>
+#include <gtk/gtk.h>
+/*#include <gtk/gtkwidget.h>
+#include <gtk/gtkeditable.h>*/
+#include <glade/glade-xml.h>
 
-#include <libgnomeui/libgnomeui.h>
-
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 /*
  * The globally needed widgets
  */
 extern GtkWidget *gtranslator_application;
-extern GtkWidget *gtranslator_application_bar;
+extern GtkWidget *gtranslator_status_bar;
+extern GtkWidget *gtranslator_progress_bar;
+extern GtkWidget *gtranslator_toolbar;
+
+extern GladeXML *glade;
 
 extern GtkWidget *sidebar_pane;
 
@@ -81,7 +86,9 @@ void gtranslator_clipboard_cut(GtkWidget  *widget, gpointer useless);
 void gtranslator_clipboard_copy(GtkWidget  *widget, gpointer useless);
 void gtranslator_clipboard_paste(GtkWidget  *widget, gpointer useless);
 void gtranslator_selection_clear(GtkWidget  *widget, gpointer useless);
-void gtranslator_selection_set(GtkTextView *text_view, gint start, gint end);
+//void gtranslator_selection_set(GtkTextView *text_view, gint start, gint end);
+void
+gtranslator_selection_set(GtkTextView *text_view, gint start, gint end);
 
 /*
  * A status defining callback -- now generaly defined for instance.

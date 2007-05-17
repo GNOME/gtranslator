@@ -21,12 +21,14 @@
 #include "actions.h"
 #include "comment.h"
 #include "find.h"
+#include "menus.h"
 #include "message.h"
 #include "nautilus-string.h"
 #include "page.h"
 #include "prefs.h"
 #include "replace.h"
 #include "utils.h"
+
 
 /*
  * Do the replace task for the given data block.
@@ -154,7 +156,8 @@ void gtranslator_replace_run(GtrReplace *replace)
 		 */
 		current_page->po->file_changed=TRUE;
 		
-		gtranslator_actions_enable(ACT_SAVE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->t_save, TRUE);
 	}
 	else
 	{
@@ -163,8 +166,8 @@ void gtranslator_replace_run(GtrReplace *replace)
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_WARNING,
 						 GTK_BUTTONS_CLOSE,
- 						 _("No replacements made!"));
- 		gtk_dialog_run (GTK_DIALOG (dialog));
+						 _("No replacements made!"));
+		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 	}
 }

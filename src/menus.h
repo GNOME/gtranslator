@@ -1,6 +1,7 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
+ * 			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,26 +19,77 @@
  *
  */
 
+/*With libglade this is not neccessary anymore*/
+/*With libglade we can get menus when we need it*/
+
 #ifndef GTR_MENUS_H
 #define GTR_MENUS_H 1
 
-#include <libgnomeui/gnome-app.h>
-#include <libgnomeui/gnome-app-helper.h>
+#include <gtk/gtkwidget.h>
 
-extern GnomeUIInfo the_menus[];
+/*
+ * Menu items
+ */
+typedef struct _GtrMenuItems
+{
+	//File
+	GtkWidget *compile;
+	GtkWidget *refresh;
+	GtkWidget *add_bookmark;
+	GtkWidget *autotranslate;
+	GtkWidget *remove_translations;
+	GtkWidget *open;
+	GtkWidget *open_uri;
+	GtkWidget *save;
+	GtkWidget *save_as;
+	GtkWidget *revert;
+	GtkWidget *close;
+	GtkWidget *recent_files;
+	GtkWidget *quit;
+	
+	//Edit
+	GtkWidget *undo;
+	GtkWidget *cut;
+	GtkWidget *copy;
+	GtkWidget *paste;
+	GtkWidget *clear;
+	GtkWidget *find;
+	GtkWidget *search_next;
+	GtkWidget *replace;
+	GtkWidget *header;
+	GtkWidget *comment;
+	GtkWidget *copy_message;
+	GtkWidget *fuzzy;
+	GtkWidget *preferences;
+	
+	//View
+	GtkWidget *bookmarks;
+	GtkWidget *colorschemes;
+	
+	//Go
+	GtkWidget *first;
+	GtkWidget *go_back;
+	GtkWidget *go_forward;
+	GtkWidget *goto_last;
+	GtkWidget *jump_to;
+	GtkWidget *next_fuzzy;
+	GtkWidget *next_untranslated;
+	
+	//About
+	GtkWidget *contents;
+	GtkWidget *website;
+	GtkWidget *about;
+	
+	//Toolbar
+	GtkWidget *t_save;
+	GtkWidget *t_undo;
+	
+}GtrMenuItems;
 
-extern GnomeUIInfo the_file_menu[];
-extern GnomeUIInfo the_last_files_menus[];
-extern GnomeUIInfo the_edit_menu[];
+extern GtrMenuItems *gtranslator_menuitems;
 
-extern GnomeUIInfo the_view_menu[];
-extern GnomeUIInfo the_bookmarks_menu[];
-extern GnomeUIInfo the_colorschemes_menu[];
+void gtranslator_menuitems_set_up();
 
-extern GnomeUIInfo the_go_menu[];
-extern GnomeUIInfo the_help_menu[];
-
-extern GnomeUIInfo the_toolbar[];
-extern GnomeUIInfo the_navibar[];
+void connect_menu_signals();
 
 #endif

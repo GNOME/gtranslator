@@ -1,7 +1,8 @@
 /*
- * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,6 +37,7 @@
 #include "dialogs.h"
 #include "gui.h"
 #include "history.h"
+#include "menus.h"
 #include "message.h"
 #include "messages-table.h"
 #include "nautilus-string.h"
@@ -51,11 +53,11 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtklabel.h>
 
-#include <libgnomeui/gnome-appbar.h>
+/*#include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app-util.h>
 #include <libgnomeui/gnome-dialog-util.h>
 #include <libgnomeui/gnome-messagebox.h>
-#include <libgnomeui/gnome-uidefs.h>
+#include <libgnomeui/gnome-uidefs.h>*/
 
 /* Error handler stuff */
 GQuark gtranslator_parser_error_quark (void)
@@ -245,6 +247,7 @@ GtrPo *gtranslator_parse(const gchar *filename, GError **error)
 	/*
 	 * Open the PO file, using gettext's utility function
 	 */
+	char *errno;
 	parser_errors = FALSE;
 	po->gettext_po_file = po_file_read(po->filename, &gettext_error_handler);
 	if(po->gettext_po_file == NULL) {
@@ -343,17 +346,17 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	/*
 	 * Check the file isn't already open
 	 */
-	pagelist = pages;
+	/*pagelist = pages;
 	while(pagelist) {
 		page = (GtrPage*)pagelist->data;
-		if(!strcmp(page->po->filename, filename)) {
+		if(!strcmp(page->po->filename, filename)) {*/
 			/* Tell user and maybe active that tab */
-			g_warning("File '%s' is already open.", page->po->filename);
+		/*	g_warning("File '%s' is already open.", page->po->filename);
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), page->num);
 			return TRUE;
 		}
 		pagelist = pagelist->next;
-	}
+	}*/
 	
 	/*
 	 * If the filename can't be opened, pass the error back to the caller
@@ -388,13 +391,13 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	/*
 	 * Create a page to add to our list of open files
 	 */
-	page = gtranslator_page_new(po);
-	pages = g_list_append(pages, (gpointer)page);
+	gtranslator_page_new(po);
+	//pages = g_list_append(pages, (gpointer)page);
 	
 	/*
 	 * Create a notebook page to display it in the GUI
 	 */
-	page_label = gtk_label_new(po->filename);
+	/*page_label = gtk_label_new(po->filename);
 	if(GtrPreferences.show_messages_table) {
 		page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
 			page->table_pane, page_label);
@@ -403,12 +406,12 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 		page->num = gtk_notebook_append_page(GTK_NOTEBOOK(notebook_widget),
 			page->content_pane, page_label);
 	}
-	gtk_widget_show_all(notebook_widget);
+	gtk_widget_show_all(notebook_widget);*/
 	
 	/*
 	 * Switch to that page
 	 */
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), page->num);
+	//gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_widget), page->num);
 
 #ifdef HOLD_ON_A_SEC
 	/*
@@ -458,7 +461,7 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 		/*
 		 * Then enable the Fuzzy buttons/entries in the menus
 		 */
-		gtranslator_actions_enable(ACT_NEXT_FUZZY);
+		gtk_widget_set_sensitive(gtranslator_menuitems->next_fuzzy, TRUE);
 
 		/*
 		 * If there is the corresponding pref and a fuzzy message, then
@@ -467,7 +470,7 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 		 */
 		if(GtrPreferences.rambo_function)
 		{
-			gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
+			gtk_widget_set_sensitive(gtranslator_menuitems->remove_translations, TRUE);
 		}
 	}
 	
@@ -479,7 +482,7 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 		/*
 		 * Then enable the Untranslated buttons/entries in the menus
 		 */
-		gtranslator_actions_enable(ACT_NEXT_UNTRANSLATED);
+		gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, TRUE);
 	}
 
 	/*
@@ -488,7 +491,7 @@ gboolean gtranslator_open(const gchar *filename, GError **error)
 	 */
 	if((po->translated > 1) && GtrPreferences.rambo_function)
 	{
-		gtranslator_actions_enable(ACT_REMOVE_ALL_TRANSLATIONS);
+		gtk_widget_set_sensitive(gtranslator_menuitems->remove_translations, TRUE);
 	}
 	
 	/*
@@ -517,8 +520,14 @@ void gtranslator_parse_the_file_from_file_dialog(GtkWidget * dialog)
 	 */
 	if(!gtranslator_open(po_file, &error)) {
 		if(error) {
-			gnome_app_warning(GNOME_APP(gtranslator_application),
-				error->message);
+			GtkWidget *dialog;
+			dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+								GTK_DIALOG_DESTROY_WITH_PARENT,
+								GTK_MESSAGE_WARNING,
+								GTK_BUTTONS_CLOSE,
+								error->message);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			g_error_free(error);
 		}
 	}
@@ -561,7 +570,8 @@ Your file should likely be named '%s.po'."),
 	    	(po->autosave_timeout > 1)) ||
 	    !nautilus_strcmp(po->filename, name))
 	{
-		gtranslator_actions_disable(ACT_SAVE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->save, FALSE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->t_save, FALSE);
 	}
 	
 	po->file_changed = FALSE;
@@ -658,6 +668,7 @@ void gtranslator_po_free(GtrPo *po)
 void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 {
 	GtrPo *po;
+	guint context_id;
 	
 	g_assert(current_page != NULL);
 
@@ -678,8 +689,11 @@ void gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	 * Set blank status, progress and window title
 	 */
 	gtk_window_set_title(GTK_WINDOW(gtranslator_application), _(PACKAGE_NAME));
-	gnome_appbar_clear_stack(GNOME_APPBAR(gtranslator_application_bar));
-	gnome_appbar_set_progress_percentage(GNOME_APPBAR(gtranslator_application_bar), 0.00000);
+	/*gnome_appbar_clear_stack(GNOME_APPBAR(gtranslator_application_bar));
+	gnome_appbar_set_progress_percentage(GNOME_APPBAR(gtranslator_application_bar), 0.00000);*/
+	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context_id);
+	gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(gtranslator_progress_bar), 0.00000);
+						
 
 	/*
 	 * Remove the source tag and set the source tag to '1'.
@@ -723,8 +737,14 @@ void gtranslator_file_revert(GtkWidget * widget, gpointer useless)
 	if(!gtranslator_open(current_page->po->filename, &error))
 	{
 		if(error) {
-			gnome_app_warning(GNOME_APP(gtranslator_application),
-				error->message);
+			GtkWidget *dialog;
+			dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+											GTK_DIALOG_DESTROY_WITH_PARENT,
+											GTK_MESSAGE_WARNING,
+											GTK_BUTTONS_CLOSE,
+											error->message);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			g_error_free(error);
 		}
 		return;
@@ -762,7 +782,7 @@ void gtranslator_remove_all_translations(GtrPo *po)
 	 */
 	if(po->translated < 1 || po->fuzzy < 1)
 	{
-		gtranslator_actions_disable(ACT_REMOVE_ALL_TRANSLATIONS);
+		gtk_widget_set_sensitive(gtranslator_menuitems->remove_translations, FALSE);
 	}
 
 	/*
@@ -771,12 +791,12 @@ void gtranslator_remove_all_translations(GtrPo *po)
 	 */
 	if(po->fuzzy > 0)
 	{
-		gtranslator_actions_enable(ACT_NEXT_FUZZY);
+		gtk_widget_set_sensitive(gtranslator_menuitems->next_fuzzy, TRUE);
 	}
 
 	if((g_list_length(po->messages) - po->translated) > 0)
 	{
-		gtranslator_actions_enable(ACT_NEXT_UNTRANSLATED);
+		gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, TRUE);
 	}
 }
 

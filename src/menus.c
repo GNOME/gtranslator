@@ -1,6 +1,7 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,303 +36,232 @@
 #include "prefs.h"
 #include "utils_gui.h"
 
-#include "pixmaps/auto_translation.xpm"
-#include "pixmaps/copy_msgid2msgstr.xpm"
-#include "pixmaps/edit_comment.xpm"
-
 #include <gdk/gdkkeysyms.h>
+#include <glade/glade-xml.h>
 
-#include <libgnomeui/gnome-app.h>
-#include <libgnomeui/gnome-app-helper.h>
-
-GnomeUIInfo the_menus[] = {
-	GNOMEUIINFO_MENU_FILE_TREE(the_file_menu),
-	GNOMEUIINFO_MENU_EDIT_TREE(the_edit_menu),
-	GNOMEUIINFO_MENU_VIEW_TREE(the_view_menu),
-	GNOMEUIINFO_SUBTREE(N_("_Go"), the_go_menu),
-	GNOMEUIINFO_MENU_HELP_TREE(the_help_menu),
-	GNOMEUIINFO_END
-};
+//Struct with all menuitem widgets
+GtrMenuItems *gtranslator_menuitems;
 
 /*
- * The File menu.
+ * This func is only to store all widgets to use it later
+ * to set the sensitive (gtk_widget_set_sensitive)
  */
-GnomeUIInfo the_file_menu[] = {
-	{
-		GNOME_APP_UI_ITEM, N_("_Compile"),
-		N_("Compile the po file"),
-		compile, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CONVERT,
-		GDK_C, GDK_MOD1_MASK, NULL
-	},
-	{
-		GNOME_APP_UI_ITEM, N_("_Update"),
-		N_("Update the po file"),
-		NULL, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_REFRESH,
-		GDK_F5, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-		GNOME_APP_UI_ITEM, N_("Add bookmark"),
-		N_("Add a bookmark for this message in this po file"),
-		gtranslator_bookmark_adding_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ADD,
-		GDK_F2, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-		GNOME_APP_UI_ITEM, N_("Aut_otranslate..."),
-		N_("Autotranslate the file with information from your learn buffer"),
-		gtranslator_auto_translation_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_DATA, auto_translation_xpm,
-		GDK_F4, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-		GNOME_APP_UI_ITEM, N_("Remove all translations..."),
-		N_("Remove all existing translations from the po file"),
-		gtranslator_remove_all_translations_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_DELETE,
-		0, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_OPEN_ITEM(gtranslator_open_file_dialog, NULL),
-	{
-		GNOME_APP_UI_ITEM, N_("Open from _URI..."),
-		N_("Open a po file from a given URI"),
-		gtranslator_open_uri_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_OPEN,
-		GDK_F3, GDK_MOD1_MASK, NULL
-	},
-	GNOMEUIINFO_MENU_SAVE_ITEM(gtranslator_save_current_file_dialog, NULL),
-	GNOMEUIINFO_MENU_SAVE_AS_ITEM(gtranslator_save_file_as_dialog, NULL),
-	GNOMEUIINFO_MENU_REVERT_ITEM(gtranslator_file_revert, NULL),
-	GNOMEUIINFO_MENU_CLOSE_ITEM(gtranslator_file_close, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_SUBTREE(N_("Recen_t files"), the_last_files_menus),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_QUIT_ITEM(gtranslator_menu_quit_cb, NULL),
-	GNOMEUIINFO_END
-};
+void
+gtranslator_menuitems_set_up()
+{
+	GtrMenuItems *this;
+	this = g_new0(GtrMenuItems, 1);
+	
+	//File
+	this->compile = glade_xml_get_widget(glade, "compile");
+	this->refresh = glade_xml_get_widget(glade, "refresh");
+	this->add_bookmark = glade_xml_get_widget(glade, "add_bookmark");
+	this->autotranslate = glade_xml_get_widget(glade, "autotranslate");
+	this->remove_translations = glade_xml_get_widget(glade, "remove_translations");
+	this->open = glade_xml_get_widget(glade, "open");
+	this->open_uri = glade_xml_get_widget(glade, "open_uri");
+	this->save = glade_xml_get_widget(glade, "save");
+	this->save_as = glade_xml_get_widget(glade, "save_as");
+	this->revert = glade_xml_get_widget(glade, "revert");
+	this->close = glade_xml_get_widget(glade, "close");
+	this->recent_files = glade_xml_get_widget(glade, "recent_files");
+	this->quit = glade_xml_get_widget(glade, "quit");
+	
+	//Edit
+	this->undo = glade_xml_get_widget(glade, "undo");
+	this->cut = glade_xml_get_widget(glade, "cut");
+	this->copy = glade_xml_get_widget(glade, "copy");
+	this->paste = glade_xml_get_widget(glade, "paste");
+	this->clear = glade_xml_get_widget(glade, "clear");
+	this->find = glade_xml_get_widget(glade, "find");
+	this->search_next = glade_xml_get_widget(glade, "search_next");
+	this->replace = glade_xml_get_widget(glade, "replace");
+	this->header = glade_xml_get_widget(glade, "header");
+	this->comment = glade_xml_get_widget(glade, "comment");
+	this->copy_message = glade_xml_get_widget(glade, "copy_message");
+	this->fuzzy = glade_xml_get_widget(glade, "fuzzy");
+	this->preferences = glade_xml_get_widget(glade, "preferences");
+	
+	//View
+	this->bookmarks = glade_xml_get_widget(glade, "bookmarks");
+	this->colorschemes = glade_xml_get_widget(glade, "colorschemes");
+	
+	//Go
+	this->first = glade_xml_get_widget(glade, "first");
+	this->go_back = glade_xml_get_widget(glade, "go_back");
+	this->go_forward = glade_xml_get_widget(glade, "go_forward");
+	this->goto_last = glade_xml_get_widget(glade, "goto_last");
+	this->jump_to = glade_xml_get_widget(glade, "jump_to");
+	this->next_fuzzy = glade_xml_get_widget(glade, "next_fuzzy");
+	this->next_untranslated = glade_xml_get_widget(glade, "next_untranslated");
+	
+	//About
+	this->contents = glade_xml_get_widget(glade, "contents");
+	this->website = glade_xml_get_widget(glade, "website");
+	this->about = glade_xml_get_widget(glade, "about");
+	
+	//Toolbar
+	this->t_save = glade_xml_get_widget(glade, "save_toolbar");
+	this->t_undo = glade_xml_get_widget(glade, "undo_toolbar");
+	
+	gtranslator_menuitems = this;
+}
 
-/*
- * The recenlty used menu in a little bit different manner ( this is just
- *  a placeholder.
- */
-GnomeUIInfo the_last_files_menus[] = {
-        GNOMEUIINFO_END
-};
+void
+connect_menu_signals()
+{
+	/*********************** File menu **************************/
+	
+	//Compile item
+	glade_xml_signal_connect_data(  glade, "on_compile_activate",
+					G_CALLBACK(compile), NULL );
+	
+	//Refresh item
+	//glade_xml_signal_connect_data(  glade, "on_refresh_activate",
+	//				G_CALLBACK(), NULL );
+	
+	//Add bookmark item
+	glade_xml_signal_connect_data(  glade, "on_add_bookmark_activate",
+					G_CALLBACK(gtranslator_bookmark_adding_dialog), NULL );
+					
+	//Autotranslate item
+	glade_xml_signal_connect_data(  glade, "on_autotranslate_activate",
+					G_CALLBACK(gtranslator_auto_translation_dialog), NULL );
+					
+	//Remove all translations item
+	glade_xml_signal_connect_data(  glade, "on_remove_translations_activate",
+					G_CALLBACK(gtranslator_remove_all_translations_dialog), NULL );
+					
+	//Open item
+	glade_xml_signal_connect_data(  glade, "on_open_activate",
+					G_CALLBACK(gtranslator_open_file_dialog), NULL );
+					
+	//Open from URI item
+	glade_xml_signal_connect_data(  glade, "on_open_uri_activate",
+					G_CALLBACK(gtranslator_open_uri_dialog), NULL );
+					
+	//Save item
+	glade_xml_signal_connect_data(  glade, "on_save_activate",
+					G_CALLBACK(gtranslator_save_current_file_dialog), NULL );
+					
+	//Save as item
+	glade_xml_signal_connect_data(  glade, "on_save_as_activate",
+					G_CALLBACK(gtranslator_save_file_as_dialog), NULL );
+					
+	//Revert item
+	glade_xml_signal_connect_data(  glade, "on_revert_activate",
+					G_CALLBACK(gtranslator_file_revert), NULL );
+					
+	//Close item
+	glade_xml_signal_connect_data(  glade, "on_close_activate",
+					G_CALLBACK(gtranslator_file_close), NULL );
+					
+	//Recent file item
+	//glade_xml_signal_connect_data(  glade, "on_recent_files_activate",
+	//				G_CALLBACK(the_last_files_menus), NULL );
+	
+	//Quit item
+	glade_xml_signal_connect_data(  glade, "on_quit_activate",
+					G_CALLBACK(gtranslator_menu_quit_cb), NULL );
+					
+	/*********************** Edit menu **************************/
+	
+	//Undo item
+	glade_xml_signal_connect_data(  glade, "on_undo_activate",
+					G_CALLBACK(gtranslator_actions_undo), NULL );
+	
+	//Cut item
+	glade_xml_signal_connect_data(  glade, "on_cut_activate",
+					G_CALLBACK(gtranslator_clipboard_cut), NULL );
 
-GnomeUIInfo the_edit_menu[] = {
-	GNOMEUIINFO_MENU_UNDO_ITEM(gtranslator_actions_undo, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CUT_ITEM(gtranslator_clipboard_cut, NULL),
-	GNOMEUIINFO_MENU_COPY_ITEM(gtranslator_clipboard_copy, NULL),
-	GNOMEUIINFO_MENU_PASTE_ITEM(gtranslator_clipboard_paste, NULL),
-	GNOMEUIINFO_MENU_CLEAR_ITEM(gtranslator_selection_clear, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_FIND_ITEM(gtranslator_find_dialog, NULL),
-	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtranslator_find, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM(gtranslator_replace_dialog, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	{
-		GNOME_APP_UI_ITEM, N_("_Header..."),
-		N_("Edit po file header"),
-		gtranslator_header_edit_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PROPERTIES,
-		GDK_F8, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-		GNOME_APP_UI_ITEM, N_("C_omment..."),
-		N_("Edit message comment"),
-		gtranslator_edit_comment_dialog, NULL, NULL,
-		GNOME_APP_PIXMAP_DATA, edit_comment_xpm,
-		GDK_F9, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-		GNOME_APP_UI_ITEM, N_("Copy _message -> translation"),
-		N_("Copy the original message contents and paste them as translation"),
-		gtranslator_message_copy_to_translation, NULL, NULL,
-		GNOME_APP_PIXMAP_DATA, copy_msgid2msgstr_xpm,
-		GDK_F11, 0, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-		GNOME_APP_UI_TOGGLEITEM, N_("Fu_zzy"),
-		N_("Toggle fuzzy status of a message"),
-		gtranslator_message_status_toggle_fuzzy,
-		NULL, NULL,
-		GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/fuzzy_small.png",
-		GDK_2, GDK_MOD1_MASK, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gtranslator_preferences_dialog_create, NULL),
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo the_go_menu[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("_First"),
-	 N_("Go to the first message"),
-	 gtranslator_message_go_to_first, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_FIRST,
-	 GDK_Up, GDK_CONTROL_MASK, NULL
-	},
-	{
-	 GNOME_APP_UI_ITEM, N_("_Back"),
-	 N_("Move back one message"),
-	 gtranslator_message_go_to_previous, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GO_BACK,
-	 GDK_Left, GDK_CONTROL_MASK, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("_Next"),
-	 N_("Move forward one message"),
-	 gtranslator_message_go_to_next, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GO_FORWARD,
-	 GDK_Right, GDK_CONTROL_MASK, NULL
-	},
-	{
-	 GNOME_APP_UI_ITEM, N_("_Last"),
-	 N_("Go to the last message"),
-	 gtranslator_message_go_to_last, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_LAST,
-	 GDK_Down, GDK_CONTROL_MASK, NULL
-	},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("_Go to..."),
-	 N_("Goto specified message number"),
-	 gtranslator_go_to_dialog, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_JUMP_TO,
-	 'G', GDK_CONTROL_MASK, NULL
-	},
-	{
-	 GNOME_APP_UI_ITEM, N_("Next fuz_zy"),
-	 N_("Go to next fuzzy message"),
-	 gtranslator_message_go_to_next_fuzzy, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/fuzzy_small.png",
-	 'Z', GDK_MOD1_MASK, NULL
-	},
-	{
-	 GNOME_APP_UI_ITEM, N_("Next _untranslated"),
-	 N_("Go to next untranslated message"),
-	 gtranslator_message_go_to_next_untranslated, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/untranslated_small.png",
-	 'U', GDK_MOD1_MASK, NULL
-	},
-	GNOMEUIINFO_END
-};
-
-
-GnomeUIInfo the_view_menu[] = {
-	GNOMEUIINFO_SUBTREE(N_("_Bookmarks"), the_bookmarks_menu),
-	GNOMEUIINFO_SUBTREE(N_("_Colorschemes"), the_colorschemes_menu),
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo the_bookmarks_menu[] = {
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo the_colorschemes_menu[] = {
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo the_help_menu[] = {
-	GNOMEUIINFO_HELP(PACKAGE_NAME),
-	GNOMEUIINFO_ITEM_STOCK(N_("gtranslator _website"),
-			       N_("gtranslator's homepage on the web"),
-			       gtranslator_utils_show_home_page,
-			       GTK_STOCK_HOME),
-	GNOMEUIINFO_MENU_ABOUT_ITEM(gtranslator_about_dialog, NULL),
-	GNOMEUIINFO_END
-};
-
-/*
- * The toolbar buttons
- */
-GnomeUIInfo the_toolbar[] = {
-	GNOMEUIINFO_ITEM_STOCK(N_("Open"),
-			       N_("Open a po file"),
-			       gtranslator_open_file_dialog,
-			       GTK_STOCK_OPEN),
-	GNOMEUIINFO_ITEM_STOCK(N_("Save"),
-			       N_("Save File"),
-			       gtranslator_save_current_file_dialog,
-			       GTK_STOCK_SAVE),
-	GNOMEUIINFO_ITEM_STOCK(N_("Save as"),
-			       N_("Save file with a different name"),
-			       gtranslator_save_file_as_dialog,
-			       GTK_STOCK_SAVE_AS),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("Compile"),
-			       N_("Compile the po file"),
-			       compile,
-			       GTK_STOCK_CONVERT),
-	GNOMEUIINFO_ITEM_STOCK(N_("Update"),
-			       N_("Update the po file"),
-			       NULL,
-			       GTK_STOCK_REFRESH),
-	GNOMEUIINFO_ITEM_STOCK(N_("Header"),
-			       N_("Edit the header"),
-			       gtranslator_header_edit_dialog,
-			       GTK_STOCK_PROPERTIES),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("Undo"),
-			       N_("Undo the last performed action"),
-			       gtranslator_actions_undo,
-			       GTK_STOCK_UNDO),
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo the_navibar[] = {
-	GNOMEUIINFO_ITEM_STOCK(N_("First"),
-			       N_("Go to the first message"),
-			       gtranslator_message_go_to_first,
-			       GTK_STOCK_GOTO_FIRST),
-	GNOMEUIINFO_ITEM_STOCK(N_("Back"),
-			       N_("Move back one message"),
-			       gtranslator_message_go_to_previous,
-			       GTK_STOCK_GO_BACK),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_STOCK(N_("Next"),
-			       N_("Move forward one message"),
-			       gtranslator_message_go_to_next,
-			       GTK_STOCK_GO_FORWARD),
-	GNOMEUIINFO_ITEM_STOCK(N_("Last"),
-			       N_("Go to the last message"),
-			       gtranslator_message_go_to_last,
-			       GTK_STOCK_GOTO_LAST),
-	{
-		GNOME_APP_UI_ITEM, N_("Missing"),
-		N_("Go to next untranslated message"),
-		gtranslator_message_go_to_next_untranslated, NULL, NULL,
-		GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/untranslated.png",
-		0, 0, NULL
-	},
-	{
-		GNOME_APP_UI_ITEM, N_("Fuzzy"),
-		N_("Go to the next fuzzy translation"),
-		gtranslator_message_go_to_next_fuzzy, NULL, NULL,
-		GNOME_APP_PIXMAP_FILENAME, DATADIR"/pixmaps/gtranslator/fuzzy.png",
-		0, 0, NULL
-	},
-	GNOMEUIINFO_ITEM_STOCK(N_("Go to"),
-			       N_("Go to specified message number"),
-			       gtranslator_go_to_dialog,
-			       GTK_STOCK_JUMP_TO),
-	GNOMEUIINFO_ITEM_STOCK(N_("Find"),
-			       N_("Find string in po file"),
-			       gtranslator_find_dialog,
-			       GTK_STOCK_FIND),
-	GNOMEUIINFO_ITEM_STOCK(N_("Replace"),
-			       N_("Replace string in po file"),
-			       gtranslator_replace_dialog,
-			       GTK_STOCK_FIND_AND_REPLACE),
-	GNOMEUIINFO_END
-};
+	//Copy item
+	glade_xml_signal_connect_data(  glade, "on_copy_activate",
+					G_CALLBACK(gtranslator_clipboard_copy), NULL );
+	
+	//Paste item
+	glade_xml_signal_connect_data(  glade, "on_paste_activate",
+					G_CALLBACK(gtranslator_clipboard_paste), NULL );
+	
+	//Clear item
+	glade_xml_signal_connect_data(  glade, "on_clear_activate",
+					G_CALLBACK(gtranslator_selection_clear), NULL );
+			
+	//Find item		
+	glade_xml_signal_connect_data(  glade, "on_find_activate",
+					G_CALLBACK(gtranslator_find_dialog), NULL );
+	
+	//Search next item			
+	glade_xml_signal_connect_data(  glade, "on_search_next_activate",
+					G_CALLBACK(gtranslator_find), NULL );
+	
+	//Find and replace item
+	glade_xml_signal_connect_data(  glade, "on_replace_activate",
+					G_CALLBACK(gtranslator_replace_dialog), NULL );
+	
+	//Header item	
+	glade_xml_signal_connect_data(  glade, "on_header_activate",
+					G_CALLBACK(gtranslator_header_edit_dialog), NULL );
+	
+	//Comment item		
+	glade_xml_signal_connect_data(  glade, "on_comment_activate",
+					G_CALLBACK(gtranslator_edit_comment_dialog), NULL );
+	
+	//Copy _message -> translation item
+	glade_xml_signal_connect_data(  glade, "on_copy_message_activate",
+					G_CALLBACK(gtranslator_message_copy_to_translation), NULL );
+					
+	//Fuzzy item
+	glade_xml_signal_connect_data(  glade, "on_fuzzy_activate",
+					G_CALLBACK(gtranslator_message_status_toggle_fuzzy), NULL );
+	
+	//Preferences item
+	glade_xml_signal_connect_data(  glade, "on_preferences_activate",
+					G_CALLBACK(gtranslator_preferences_dialog_create), NULL );	
+					
+					
+	/************************ Go menu ***************************/
+	
+	//First item
+	glade_xml_signal_connect_data(  glade, "on_first_activate",
+					G_CALLBACK(gtranslator_message_go_to_first), NULL );
+	
+	//Go back item
+	glade_xml_signal_connect_data(  glade, "on_go_back_activate",
+					G_CALLBACK(gtranslator_message_go_to_previous), NULL );
+	
+	//Go forward item
+	glade_xml_signal_connect_data(  glade, "on_go_forward_activate",
+					G_CALLBACK(gtranslator_message_go_to_next), NULL );
+	
+	//Goto last item
+	glade_xml_signal_connect_data(  glade, "on_goto_last_activate",
+					G_CALLBACK(gtranslator_message_go_to_last), NULL );
+	
+	//Jump to item
+	glade_xml_signal_connect_data(  glade, "on_jump_to_activate",
+					G_CALLBACK(gtranslator_go_to_dialog), NULL );
+	
+	//Next fuzzy item
+	glade_xml_signal_connect_data(  glade, "on_next_fuzzy_activate",
+					G_CALLBACK(gtranslator_message_go_to_next_fuzzy), NULL );
+	
+	//Next untranslated item
+	glade_xml_signal_connect_data(  glade, "on_next_untranslated_activate",
+					G_CALLBACK(gtranslator_message_go_to_next_untranslated), NULL );
+	
+	
+	/*********************** Help menu **************************/
+	
+	//Contents item
+/*	glade_xml_signal_connect_data(  glade, "on_contents_activate",
+					G_CALLBACK(), NULL );*/
+					
+	//Website item
+	glade_xml_signal_connect_data(  glade, "on_website_activate",
+					G_CALLBACK(gtranslator_utils_show_home_page), NULL );
+					
+	//About item
+	glade_xml_signal_connect_data(  glade, "on_about_activate",
+					G_CALLBACK(gtranslator_about_dialog), NULL );
+	
+}

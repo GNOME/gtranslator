@@ -1,9 +1,10 @@
 /*
- * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
  *			Thomas Ziehmer <thomas@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,16 +27,35 @@
 #endif
 
 #include "actions.h"
+#include "menus.h"
 #include "page.h"
 #include "dialogs.h"
 #include "prefs.h"
+#include "gui.h"
 
 #include <libgen.h>
+
+//#define GLADE_PAGE_PATH "../data/glade/tab.glade"
+/*Variables*/
+#define GLADE_CONTENT_PANE "content_pane"
+#define GLADE_TABLE_PANE "table_pane"
+#define GLADE_COMMENT "comment"
+#define GLADE_EDIT_BUTTON "edit_button"
+#define GLADE_TEXT_NOTEBOOK "text_notebook"
+#define GLADE_TEXT_MSGID "text_msgid"
+#define GLADE_TEXT_MSGID_PLURAL "text_msgid_plural"
+#define GLADE_TRANS_NOTEBOOK "trans_notebook"
+#define GLADE_TRANS_MSGSTR "trans_msgstr"
+#define GLADE_TRANS_MSGSTR_PLURAL "trans_msgstr_plural"
+/*Status widgets*/
+#define GLADE_TRANSLATED "radiobutton_translated"
+#define GLADE_FUZZY "radiobutton_fuzzy"
+#define GLADE_UNTRANSLATED "radiobutton_untranslated"
 
 /*
  * The currently active pages
  */
-GList *pages;
+//GList *pages;
 
 /*
  * The currently active page
@@ -45,93 +65,53 @@ GtrPage *current_page;
 /*
  * Set up the widgets to display the given po file
  */
-GtrPage *gtranslator_page_new(GtrPo *po)
+void gtranslator_page_new(GtrPo *po)
 {
 	GtrPage *page;
 	
-	GtkWidget *comments_viewport;
-	GtkWidget *vertical_box;
-	GtkWidget *horizontal_box;
-	GtkWidget *comments_scrolled_window;
-	GtkWidget *original_text_scrolled_window;
-	GtkWidget *translation_text_scrolled_window;
-	
-	g_return_val_if_fail(po!=NULL, NULL);
+	g_return_if_fail(po!=NULL);
 
 	/* Allocate a new page */
 	page = g_new0(GtrPage, 1);
 	page->po = po;
-	
+		
+
 	/*
 	 * Set up a document view structure to contain the widgets related
 	 * to this file
 	 */
-	page->content_pane = gtk_vpaned_new();
-	page->table_pane = gtk_hpaned_new();
+	page->content_pane = glade_xml_get_widget(glade, GLADE_CONTENT_PANE);
+	page->table_pane = glade_xml_get_widget(glade, GLADE_TABLE_PANE);
 	
-	/*
-	 * Create the hpane that will hold the messages table and the current
-	 * message, even if messages table is suppressed, so it can be
-	 * dynamically switched on/off from a menu (rather than a preference
-	 * that requires a program restart! yuk!)
-	 */
-	table_pane_position=gtranslator_config_get_int("interface/table_pane_position");
-	gtk_paned_set_position(GTK_PANED(page->table_pane), table_pane_position);
-
-	horizontal_box=gtk_hbox_new(FALSE, 1);
 
 	/*
 	 * Set up the scrolling window for the comments display
 	 */	
-	comments_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(comments_scrolled_window),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start(GTK_BOX(horizontal_box), comments_scrolled_window, TRUE, TRUE, 0);
+
+	page->comment = glade_xml_get_widget(glade, GLADE_COMMENT);
 	
-	comments_viewport = gtk_viewport_new(NULL, NULL);
-	gtk_widget_show(comments_viewport);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(comments_scrolled_window), comments_viewport);
-	
-	page->comment=gtk_label_new("");
-	gtk_container_add(GTK_CONTAINER(comments_viewport), page->comment);
-	
-	page->edit_button=gtk_button_new_with_label(_("Edit comment"));
-	gtk_widget_set_sensitive(page->edit_button, FALSE);
-	gtk_box_pack_end(GTK_BOX(horizontal_box), page->edit_button,
-		FALSE, FALSE, 0);
+	page->edit_button = glade_xml_get_widget(glade, GLADE_EDIT_BUTTON);
 	
 	gtk_paned_set_position(GTK_PANED(page->content_pane), 0);
 
-	/*
-	 * Pack the comments pane and the main content
-	 */
-	vertical_box=gtk_vbox_new(FALSE, 0);
-	gtk_paned_pack1(GTK_PANED(page->content_pane), horizontal_box, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(page->content_pane), vertical_box, FALSE, TRUE);
-	
+
 	/* Message string box is a vbox, containing one textview in most cases,
 	   or two in the case of a plural message */
-	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_start(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(vertical_box), gtk_hseparator_new(), FALSE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(original_text_scrolled_window),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	page->text_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_box_set_homogeneous(GTK_BOX(page->text_vbox), TRUE);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(original_text_scrolled_window), page->text_vbox);
-
+	page->text_notebook = glade_xml_get_widget(glade, GLADE_TEXT_NOTEBOOK);
+	page->text_msgid = glade_xml_get_widget(glade, GLADE_TEXT_MSGID);
+	page->text_msgid_plural = glade_xml_get_widget(glade, GLADE_TEXT_MSGID_PLURAL);
+	
+	
 	/* Translation box is a vbox, containing one textview in most cases,
 	   or more in the case of a plural message */
-	translation_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_start(GTK_BOX(vertical_box), translation_text_scrolled_window, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(translation_text_scrolled_window),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	page->trans_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_box_set_homogeneous(GTK_BOX(page->trans_vbox), TRUE);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(translation_text_scrolled_window), page->trans_vbox);
+	page->trans_notebook = glade_xml_get_widget(glade, GLADE_TRANS_NOTEBOOK);
+	page->trans_msgstr = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR);
+	page->trans_msgstr_plural = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR_PLURAL);
+
+	/*Status radiobuttons*/
+	page->translated = glade_xml_get_widget(glade, GLADE_TRANSLATED);
+	page->fuzzy = glade_xml_get_widget(glade, GLADE_FUZZY);
+	page->untranslated = glade_xml_get_widget(glade, GLADE_UNTRANSLATED);
 
 	/*
 	 * Tie up callback for 'comments' button
@@ -140,12 +120,19 @@ GtrPage *gtranslator_page_new(GtrPo *po)
 			 G_CALLBACK(gtranslator_edit_comment_dialog), NULL);
 
 	/*
-	 * If required, set up the messages table
+	 * If required, set up the messages table and set pane position
 	 */	
 	if(GtrPreferences.show_messages_table)
+	{
+		table_pane_position=gtranslator_config_get_int("interface/table_pane_position");
+		gtk_paned_set_position(GTK_PANED(page->table_pane), table_pane_position);
 		gtranslator_page_show_messages_table(page);
+	}else
+		gtk_paned_set_position(GTK_PANED(page->table_pane), 0);
 
-	return page;
+	gtk_widget_show(page->table_pane);
+	current_page = page;
+	
 }
 
 void gtranslator_page_show_messages_table(GtrPage *page) {
@@ -166,7 +153,7 @@ void gtranslator_page_hide_messages_table(GtrPage *page) {
 }
 
 gboolean gtranslator_page_autosave(GtrPage *page) {
-	char *filename;
+	gchar *filename;
 	gchar *autosave_filename;
 	GError *error = NULL;
 	
@@ -218,5 +205,8 @@ void gtranslator_page_dirty(GtkTextBuffer *textbuffer, gpointer user_data) {
 	
 	// TODO: make notebook tab go red with an asterisk to mark an unsaved page
 	
-	gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);
+	//Enable save and revert items
+	gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+	gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
+	gtk_widget_set_sensitive(gtranslator_menuitems->t_save, TRUE);
 }

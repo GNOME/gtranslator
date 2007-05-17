@@ -28,7 +28,6 @@
 #include "session.h"
 
 #include <gtk/gtkmain.h>
-#include <libgnomeui/gnome-appbar.h>
 
 /*
  * Quits via the normal quit.
@@ -77,10 +76,16 @@ gint gtranslator_session_sleep(GnomeClient * client, gint phase,
 void gtranslator_session_restore(GnomeClient * client)
 {
 	guint num;
+	guint id;
 
 	num = gtranslator_config_get_int("state/message_number");
 
 	gtranslator_message_go_to_no(NULL, GUINT_TO_POINTER(num));
-	gnome_appbar_set_status(GNOME_APPBAR(gtranslator_application_bar),
-			_("Session restored successfully."));
+/*	gnome_appbar_set_status(GNOME_APPBAR(gtranslator_application_bar),
+			_("Session restored successfully."));*/
+
+	id = gtk_statusbar_get_context_id(GTK_STATUSBAR(gtranslator_status_bar), "restore session");
+	gtk_statusbar_pop (GTK_STATUSBAR (gtranslator_status_bar), id);
+	gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar), id, _("Session restored successfully."));
+	
 }

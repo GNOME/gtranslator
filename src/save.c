@@ -31,10 +31,12 @@
 #include "utils_gui.h"
 #include "vfs-handle.h"
 
+#include <gtk/gtkmessagedialog.h>
+
 #include <string.h>
 #include <stdlib.h>
 
-#include <libgnomeui/gnome-app-util.h>
+//#include <libgnomeui/gnome-app-util.h>
 
 /*
  * The "backend" for the gzip. bzip2 and uncompress based functions.
@@ -118,7 +120,14 @@ void gtranslator_save_compiled_po_file(const gchar *file)
 		/*
 		 * Show a warning to the user.
 		 */
-		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+						GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_WARNING,
+						GTK_BUTTONS_CLOSE,
+						cmd);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 	}
 
 	g_free(cmd);
@@ -174,7 +183,14 @@ void save_compressed_po_file(const gchar *file, gchar *command)
 		/*
 		 * Display the warning to the user.
 		 */
-		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+						GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_WARNING,
+						GTK_BUTTONS_CLOSE,
+						cmd);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 	}
 	
 	g_free(cmd);
@@ -227,7 +243,14 @@ void gtranslator_save_ziped_po_file(const gchar *file)
 		cmd=g_strdup_printf(_("Couldn't save zip'ed po file `%s'!"),
 			file);
 
-		gnome_app_warning(GNOME_APP(gtranslator_application), cmd);
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+						GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_WARNING,
+						GTK_BUTTONS_CLOSE,
+						cmd);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 	}
 
 	g_free(cmd);

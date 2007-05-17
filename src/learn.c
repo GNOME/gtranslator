@@ -1,5 +1,6 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@
 #include "learn.h"
 #include "message.h"
 #include "messages-table.h"
+#include "menus.h"
 #include "nautilus-string.h"
 #include "prefs.h"
 #include "translator.h"
@@ -37,6 +39,7 @@
 #include <libxml/tree.h>
 
 #include <glib.h>
+#include <glib/gi18n.h>
 
 /*
  * The GtrLearnBuffer structure which holds all informations/parts of the
@@ -1042,7 +1045,9 @@ gboolean gtranslator_learn_autotranslate(GtrPo *po, gboolean visual_interface, G
 	 */
 	if(po->file_changed && visual_interface)
 	{
-		gtranslator_actions_enable(ACT_SAVE);
+		//Enable save item
+		gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->t_save, TRUE);
 		
 		gtranslator_update_translated_count(po);
 		

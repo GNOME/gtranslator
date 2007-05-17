@@ -27,6 +27,7 @@
 #include "nautilus-string.h"
 #include "prefs.h"
 #include "utils.h"
+#include "menus.h"
 
 #include <gtk/gtklabel.h>
 /*
@@ -297,13 +298,15 @@ void gtranslator_comment_display(GtrComment *comment)
 		GTR_COMMENT(comment)->type & SOURCE_COMMENT) &&
 		nautilus_strcasecmp(comment_display_str, " "))
 	{
+		//Enable widgets
 		gtk_widget_set_sensitive(current_page->edit_button, TRUE);
-		gtranslator_actions_enable(ACT_COMMENT);
+		gtk_widget_set_sensitive(gtranslator_menuitems->comment, TRUE);
 	}
 	else
 	{
+		//Disable widgets
 		gtk_widget_set_sensitive(current_page->edit_button, FALSE);
-		gtranslator_actions_disable(ACT_COMMENT);
+		gtk_widget_set_sensitive(gtranslator_menuitems->comment, FALSE);
 	}
 
 	g_free(comment_display_str);

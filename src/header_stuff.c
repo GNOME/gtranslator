@@ -30,6 +30,7 @@
 #include "gui.h"
 #include "header_stuff.h"
 #include "languages.h"
+#include "menus.h"
 #include "message.h"
 #include "nautilus-string.h"
 #include "parse.h"
@@ -105,6 +106,7 @@ static void gtranslator_header_edit_changed(GtkWidget * widget, gpointer useless
 static gchar *get_current_year(void);
 static void substitute(gchar **item, const gchar *bad, const gchar *good);
 static void replace_substring(gchar **item, const gchar *bad, const gchar *good);
+
 
 /*
  * DUPLICATED CODE: This func is in prefs.c
@@ -446,7 +448,9 @@ static void gtranslator_header_edit_close(GtkWidget * widget, gint response, gpo
 	 * Mark file as having unsaved changes
 	 */
 	current_page->po->file_changed = TRUE;
-	gtranslator_actions_enable(ACT_SAVE, ACT_REVERT);
+	gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+	gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
+
 	
 	gtk_widget_destroy(GTK_WIDGET(e_header));
 	return;
@@ -459,15 +463,15 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 {
 	GtkTextBuffer *buffer;
 	gchar *space;
-	const char *headerstr;
-	char *project_id_ver;
-	char *project_name, *project_ver;
-	char *pot_creation_date, *po_revision_date;
-	char *report_msgid_bugs_to;
-	char *last_translator, *last_translator_name, *last_translator_email;
-	char *language_team, *language_name, *language_email;
-	char *content_type, *content_charset;
-	char *content_transfer_encoding;
+	const gchar *headerstr;
+	gchar *project_id_ver;
+	gchar *project_name, *project_ver;
+	gchar *pot_creation_date, *po_revision_date;
+	gchar *report_msgid_bugs_to;
+	gchar *last_translator, *last_translator_name, *last_translator_email;
+	gchar *language_team, *language_name, *language_email;
+	gchar *content_type, *content_charset;
+	gchar *content_transfer_encoding;
 
 	header_changed = FALSE;
 
@@ -608,37 +612,31 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	gtk_entry_set_text(GTK_ENTRY(tr_email), last_translator_email);
 	g_signal_connect(GTK_ENTRY(tr_email), "changed", G_CALLBACK(gtranslator_header_edit_changed), NULL);
 	
-	/* Here i have a big problem
-	 * If take_my_options is set to true and code below is uncomment
-	 * the program crashes
-	 * but is set to false, program works fine
-	 * Any idea?
-	 */
 	/*language combo*/
-/*	language_combo = gtranslator_header_combo_new(languages_list,
-												  language_name,
-												  GLADE_LANGUAGE_COMBO, 
-												  G_CALLBACK(gtranslator_header_edit_changed),
-												  NULL);*/
+	/*language_combo = gtranslator_header_combo_new(languages_list,
+						      language_name,
+						      GLADE_LANGUAGE_COMBO, 
+						      G_CALLBACK(gtranslator_header_edit_changed),
+						      NULL);*/
 	
 	/*language group's email combo*/
-/*	lg_combo = gtranslator_header_combo_new(group_emails_list,
-											language_email,
-											GLADE_LG_COMBO,
-											G_CALLBACK(gtranslator_header_edit_changed),
-											NULL);*/
+	/*lg_combo = gtranslator_header_combo_new(group_emails_list,
+						language_email,
+						GLADE_LG_COMBO,
+						G_CALLBACK(gtranslator_header_edit_changed),
+						NULL);*/
 	/*charset combo*/
-/*	charset_combo = gtranslator_header_combo_new(encodings_list,
-												 content_charset,
-												 GLADE_CHARSET_COMBO,
-												 G_CALLBACK(gtranslator_header_edit_changed),
-												 NULL);*/
+	/*charset_combo = gtranslator_header_combo_new(encodings_list,
+						     content_charset,
+						     GLADE_CHARSET_COMBO,
+						     G_CALLBACK(gtranslator_header_edit_changed),
+						     NULL);*/
 	/*Encoding combo*/
-/*	enc_combo = gtranslator_header_combo_new(bits_list,
-											 content_transfer_encoding,
-											 GLADE_ENC_COMBO,
-											 G_CALLBACK(gtranslator_header_edit_changed),
-											 NULL);*/
+	/*enc_combo = gtranslator_header_combo_new(bits_list,
+						 content_transfer_encoding,
+						 GLADE_ENC_COMBO,
+						 G_CALLBACK(gtranslator_header_edit_changed),
+						 NULL);*/
 	/*
 	 * Disable any charset changes directly from the header by making the
 	 *  charset combo non-editable.

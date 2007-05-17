@@ -163,11 +163,12 @@ static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
 	}
 	if (find_in_translation && 1 == step) {
 		p = po_message_msgstr(message);
-		GTR_SEARCH(p, GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
+		//FIXME
+/*		GTR_SEARCH(p, GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
 		while((p = po_message_msgstr_plural(message, i))) {
 			GTR_SEARCH(p, GTK_TEXT_VIEW(current_page->trans_msgstr[i+1]));
 			i++;
-		}
+		}*/
 	}
 #ifdef DONTFORGET
 	if(find_in_comments && 2 == step) {

@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include "gui.h"
 #include "learn.h"
 #include "messages-table.h"
 #include "message.h"
@@ -41,6 +42,11 @@
 #define TABLE_FUZZY_COLOR "#ff0000"
 #define TABLE_UNTRANSLATED_COLOR "#a7453e"
 #define TABLE_TRANSLATED_COLOR "#00ff00"
+
+/*
+ * Glade defines
+ */
+#define GLADE_MESSAGES_TREE_VIEW "treeview_messages"
 
 enum
 {
@@ -191,7 +197,9 @@ GtrMessagesTable *gtranslator_messages_table_new()
 		G_TYPE_STRING,
 		G_TYPE_POINTER,
 		GDK_TYPE_COLOR);
-	table->widget = gtk_tree_view_new_with_model (GTK_TREE_MODEL (table->store));
+	//table->widget = gtk_tree_view_new_with_model (GTK_TREE_MODEL (table->store));
+	table->widget = glade_xml_get_widget(glade, GLADE_MESSAGES_TREE_VIEW);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(table->widget), GTK_TREE_MODEL(table->store));
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(table->widget), TRUE);
 
 	/* ? */

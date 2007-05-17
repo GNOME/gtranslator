@@ -32,9 +32,11 @@
  */
 typedef struct {
 	/* Page number wrt notebook_widget */
-	gint num;
+	//gint num;
 	
 	GtrPo *po;
+	
+	//GladeXML *glade;
 
 	GtkWidget *content_pane;
 
@@ -43,19 +45,29 @@ typedef struct {
 	GtkWidget *comment;
 	GtkWidget *edit_button;
 
-	GtkWidget *text_vbox;
+	/*Original text*/
+	GtkWidget *text_notebook;
 	GtkWidget *text_msgid;
 	GtkWidget *text_msgid_plural;
-	GtkWidget *trans_vbox;
-	GtkWidget *trans_msgstr[16];
-
+	
+	/*Translated text*/
+	GtkWidget *trans_notebook;
+	GtkWidget *trans_msgstr;
+	GtkWidget *trans_msgstr_plural;
+	
 	GtkWidget *table_pane;
+	
+	/*Status widgets*/
+	GtkWidget *translated;
+	GtkWidget *fuzzy;
+	GtkWidget *untranslated;
+	
 } GtrPage;
 
 /*
  * The currently active pages
  */
-extern GList *pages;
+//extern GList *pages;
 
 /*
  * A pointer to the current page
@@ -65,7 +77,7 @@ extern GtrPage *current_page;
 /*
  * Create a page to display a po file and return the widget
  */
-GtrPage* gtranslator_page_new(GtrPo *po);
+void gtranslator_page_new(GtrPo *po);
 
 /*
  * Show/hide the messages table

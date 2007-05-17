@@ -1,5 +1,6 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,6 +26,7 @@
 #include "actions.h"
 #include "comment.h"
 #include "dialogs.h"
+#include "menus.h"
 #include "page.h"
 #include "prefs.h"
 #include "undo.h"
@@ -67,7 +69,7 @@ void gtranslator_undo_register_insertion(const gchar *text, const GtkTextIter *p
 	undo->insertion=TRUE;
         memcpy(undo->position, position, sizeof(undo->position));
 
-	gtranslator_actions_enable(ACT_UNDO);
+	gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
 }
 
 /*
@@ -94,7 +96,7 @@ void gtranslator_undo_register_deletion(const gchar *text, const GtkTextIter *po
         memcpy(undo->position, position, sizeof(undo->position));
         memcpy(undo->endposition, endposition, sizeof(undo->endposition));
 
-	gtranslator_actions_enable(ACT_UNDO);
+	gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
 }
 
 /*
@@ -131,7 +133,7 @@ void gtranslator_undo_run_undo()
 	g_return_if_fail(undo->position >= 0);
 	g_return_if_fail(undo->text!=NULL);
 
-	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
+	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
 	gtk_text_buffer_get_end_iter(buffer, end);
 
 	/*

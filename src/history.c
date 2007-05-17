@@ -171,9 +171,11 @@ GList *gtranslator_history_get(void)
 	return hl;
 }
 
+#define GLADE_MENU_ITEM_RECENT_FILES "menuitem_recent_files"
 /*
  * The recent menus stuff. TODO: steal the code that works from the standard
  * GNOME2 '~/.recently-used' file (libegg/egg-recent-*.[ch]).
+ * Convert gnome app to gtk
  */
 void gtranslator_history_show(void)
 {
@@ -185,6 +187,7 @@ void gtranslator_history_show(void)
 	GnomeUIInfo *menu;
 	GList *list, *onelist;
 	GtrHistoryEntry *entry;
+	//GtkWidget *menu;
 	
 	gchar *menupath = _("_File/Recen_t files/");
 
@@ -192,6 +195,9 @@ void gtranslator_history_show(void)
 	 * Delete the old entries.
 	 */
 	gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), menupath, 0, len);
+	/*menu = glade_xml_get_widget(glade, GLADE_MENU_ITEM_RECENT_FILES);
+	gtk_menu_item_remove_submenu(GTK_MENU_ITEM(menu));*/
+	
 
 	/*
 	 * Get the old history entries.
@@ -255,8 +261,14 @@ void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filenam
 
 	if(!gtranslator_open(filename, &error)) {
 		if(error) {
-			gnome_app_warning(GNOME_APP(gtranslator_application),
-				error->message);
+			GtkWidget *dialog;
+			dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+								GTK_DIALOG_DESTROY_WITH_PARENT,
+								GTK_MESSAGE_WARNING,
+								GTK_BUTTONS_CLOSE,
+								error->message);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			g_error_free(error);
 		}
 	}

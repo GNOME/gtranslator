@@ -1,9 +1,10 @@
 /*
- * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
  *			Thomas Ziehmer <thomas@kabalak.net>
+ *			Ignacio Casal <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,7 +32,6 @@
 #include "dialogs.h"
 #include "dnd.h"
 #include "find.h"
-#include "page.h"
 #include "header_stuff.h"
 #include "history.h"
 #include "learn.h"
@@ -39,6 +39,7 @@
 #include "message.h"
 #include "messages-table.h"
 #include "nautilus-string.h"
+#include "page.h"
 #include "parse.h"
 #include "prefs.h"
 #include "runtime-config.h"
@@ -53,18 +54,37 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <gtk/gtk.h>
+#include <glade/glade.h>
 
-#include <libgnomeui/gnome-app.h>
-#include <libgnomeui/gnome-app-helper.h>
-#include <libgnomeui/gnome-popup-menu.h>
-
+#include <glib.h>
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs-init.h>
+
+/*
+ * Glade file path
+ */
+#define GLADE_PATH "main_window.glade"
+
+/*
+ * Glade widgets names
+ */
+#define GLADE_MAIN_WINDOW "main_window"
+//#define GLADE_MAIN_NOTEBOOK "main_notebook"
+#define GLADE_PROGRESS_BAR "progress_bar"
+#define GLADE_STATUS_BAR "status_bar"
+#define GLADE_TOOLBAR "toolbar"
+
 
 /*
  * Global external variables
  */
 GtkWidget *gtranslator_application;
-GtkWidget *gtranslator_application_bar;
+GtkWidget *gtranslator_status_bar;
+GtkWidget *gtranslator_progress_bar;
+GtkWidget *gtranslator_toolbar;
+
+
+GladeXML *glade;
 
 guint trans_box_insert_text_signal_id;
 guint trans_box_delete_text_signal_id;
@@ -72,7 +92,7 @@ guint trans_box_delete_text_signal_id;
 /*
  * The widgets related to displaying the current document 
  */
-GtkWidget *notebook_widget;
+//GtkWidget *notebook_widget;
 
 gboolean nothing_changes;
 
@@ -123,18 +143,30 @@ gint table_pane_position;
  */
 void gtranslator_create_main_window(void)
 {
-	GtkWidget *tool_bar;
-	GtkWidget *search_bar;
+	gchar *path_glade;
+	
+	/*
+	 * Initialize glade library, load the interface
+	 */
+	//path_glade = g_strconcat(DATADIR, GLADE_PATH, NULL);
+    glade = glade_xml_new(GLADE_PATH, NULL, NULL);
+    	
+    /*
+     * Initialize menus
+     */
+    gtranslator_menuitems_set_up();
+    connect_menu_signals();
 	
 	/*
 	 * Create the app	
 	 */
-	gtranslator_application = gnome_app_new(PACKAGE_NAME, PACKAGE_NAME);
+	//gtranslator_application = gnome_app_new(PACKAGE_NAME, PACKAGE_NAME);
+	gtranslator_application = glade_xml_get_widget(glade, GLADE_MAIN_WINDOW);
 	
 	/*
 	 * Set up the menus
 	 */
-	gnome_app_create_menus(GNOME_APP(gtranslator_application), the_menus);
+	//gnome_app_create_menus(GNOME_APP(gtranslator_application), the_menus);
 	
 	/*
 	 * Start with no document view
@@ -144,41 +176,44 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Create the tool bar
 	 */
-	tool_bar = gtk_toolbar_new();
+	/*tool_bar = gtk_toolbar_new();
 	gnome_app_fill_toolbar(GTK_TOOLBAR(tool_bar), the_toolbar, NULL);
 	gnome_app_add_toolbar(GNOME_APP(gtranslator_application),
 		GTK_TOOLBAR(tool_bar), "tool_bar", BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
-		BONOBO_DOCK_TOP, 1, 0, 0);
+		BONOBO_DOCK_TOP, 1, 0, 0);*/
 
 	/*
 	 * Create the search bar
 	 */
-	search_bar = gtk_toolbar_new();
+	/*search_bar = gtk_toolbar_new();
 	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_navibar, NULL);
 	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), 
 		GTK_TOOLBAR(search_bar), "search_bar", BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
-		BONOBO_DOCK_TOP, 2, 0, 0);
+		BONOBO_DOCK_TOP, 2, 0, 0);*/
 
 	/*
 	 * Set up the application bar
 	 */
-	gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
-	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);
+	/*gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
+	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);*/
+	gtranslator_status_bar = glade_xml_get_widget(glade, GLADE_STATUS_BAR);
+	gtranslator_progress_bar = glade_xml_get_widget(glade, GLADE_PROGRESS_BAR);
+	gtranslator_toolbar = glade_xml_get_widget(glade, GLADE_TOOLBAR);
 
 	/*
 	 * Make menu hints display on the appbar
 	 */
-	gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), the_menus);
+	//gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), the_menus);
 
 	/*
 	 * Enable the default menubar/toolbar options
 	 */
-	gtranslator_actions_set_up_default();
+	//gtranslator_actions_set_up_default();
 
 	/*
 	 * Populate the 'Files/Recent' submenu
 	 */
-	gtranslator_history_show();
+	//gtranslator_history_show();
 
 	/*
 	 * Hook up the 'close window' callback.
@@ -203,11 +238,12 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Set up the notebook widget
 	 */
-	notebook_widget = GTK_WIDGET(gtk_notebook_new());
-	gnome_app_set_contents(GNOME_APP(gtranslator_application), notebook_widget);
+	/*notebook_widget = GTK_WIDGET(gtk_notebook_new());
+	gnome_app_set_contents(GNOME_APP(gtranslator_application), notebook_widget);*/
+	//notebook_widget = glade_xml_get_widget(glade, GLADE_MAIN_NOTEBOOK);
 	
 	/* Add a callback to set 'current_page' on a tab change */
-	g_signal_connect(notebook_widget, "switch-page", G_CALLBACK(gtranslator_gui_switch_page), NULL);
+	//g_signal_connect(notebook_widget, "switch-page", G_CALLBACK(gtranslator_gui_switch_page), NULL);
 	
 	/*
 	 * Resize the window accordingly
@@ -290,7 +326,7 @@ void gtranslator_quit()
 	/*
 	 * Iterate the open files for files with changes
 	 */
-	pagelist = pages;
+/*	pagelist = pages;
 	while(pagelist && pagelist->data) {
 		page = (GtrPage*)pagelist->data;
 		if(page->po->file_changed) {
@@ -299,7 +335,7 @@ void gtranslator_quit()
 			}
 		}
 		pagelist = g_list_remove(pagelist, page);
-	}
+	}*/
 
 	if(GtrPreferences.show_messages_table && (current_page != NULL))
 	{
@@ -385,7 +421,8 @@ void gtranslator_application_bar_update(gint pos)
 	GtrMsg 	*msg;
 	GtrPo	*po;
 	const char *msgstr, *msgid_plural;
-	gnome_appbar_pop(GNOME_APPBAR(gtranslator_application_bar));
+	guint context_id;
+	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context_id);
 
 	/*
 	 * Get the po file and message.
@@ -411,7 +448,7 @@ void gtranslator_application_bar_update(gint pos)
 			/*
 			 * Also disable the corresponding button.
 			 */
-			gtranslator_actions_disable(ACT_NEXT_FUZZY);
+			gtk_widget_set_sensitive(gtranslator_menuitems->next_fuzzy, FALSE);
 		}
 
 	} else if(msgstr[0] != '\0') {
@@ -431,7 +468,8 @@ void gtranslator_application_bar_update(gint pos)
 			 * Also disable the coressponding buttons for the
 			 *  next untranslated message/accomplish function.
 			 */
-			gtranslator_actions_disable(ACT_NEXT_UNTRANSLATED, ACT_AUTOTRANSLATE);
+			gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, FALSE);
+			gtk_widget_set_sensitive(gtranslator_menuitems->autotranslate, FALSE);
 		}	
 	}
 	
@@ -452,9 +490,9 @@ void gtranslator_application_bar_update(gint pos)
 	}
 	
 	/*
-	 * Set the appbar text.
+	 * Set the statusbar text.
 	 */
-	gnome_appbar_push(GNOME_APPBAR(gtranslator_application_bar), str);
+	gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar), context_id, str);
 	
 	/*
 	 * Update the progressbar.
@@ -614,27 +652,33 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		current_page->po->file_changed = TRUE;
 		if(current_page->po->no_write_perms==FALSE||strstr(current_page->po->filename, "/.gtranslator/"))
 		{
-			gtranslator_actions_enable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+			//Enable widgets
+			gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+			gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
+			gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
 		}
 		else
 		{
-			gtranslator_actions_enable(ACT_REVERT, ACT_UNDO);
+			//Enable widgets
+			gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
+			gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
 		}
 	}
 	if (!msg->changed)
 	{
 		msg->changed = TRUE;
-		gtranslator_actions_enable(ACT_UNDO);
+		//Enable undo item
+		gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
 		if ((GtrPreferences.unmark_fuzzy) 
 		     && (msg->is_fuzzy))
 		{
 	     	gtranslator_message_status_set_fuzzy(msg, FALSE);
 	     	/* the callback on this GtkCheckMenuItem will be called 
 	     	 * and the fuzzy count will be correctly decreased */
-			gtk_check_menu_item_set_active(
+			/*gtk_check_menu_item_set_active(
 				GTK_CHECK_MENU_ITEM(the_edit_menu[17].widget),
 				FALSE
-			);
+			);*/
 		}
 		if(current_page->messages_table)
 		{
@@ -704,25 +748,42 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 
 /*
  * Set up the widgets to display the given po file
+ * This is not needed.
  */
-GtkWidget *gtranslator_gui_new_page(GtrPo *po)
+void gtranslator_gui_new_page(GtrPo *po)
 {
-	GtkWidget *comments_viewport;
+	/*GtkWidget *comments_viewport;
 	GtkWidget *vertical_box;
 	GtkWidget *horizontal_box;
 	GtkWidget *comments_scrolled_window;
 	GtkWidget *original_text_scrolled_window;
-	GtkWidget *translation_text_scrolled_window;
+	GtkWidget *translation_text_scrolled_window;*/
 	
-	g_return_val_if_fail(po!=NULL, NULL);
+	//#define GLADE_PAGE_PATH "../data/glade/tab.glade"
+	/*Variables*/
+	#define GLADE_CONTENT_PANE "content_pane"
+	#define GLADE_TABLE_PANE "table_pane"
+	#define GLADE_COMMENT "comment"
+	#define GLADE_EDIT_BUTTON "edit_button"
+	#define GLADE_TEXT_NOTEBOOK "text_notebook"
+	#define GLADE_TEXT_MSGID "text_msgid"
+	#define GLADE_TEXT_MSGID_PLURAL "text_msgid_plural"
+	#define GLADE_TRANS_NOTEBOOK "trans_notebook"
+	#define GLADE_TRANS_MSGSTR "trans_msgstr"
+	#define GLADE_TRANS_MSGSTR_PLURAL "trans_msgstr_plural"
 
+	
+	//g_return_val_if_fail(po!=NULL, NULL);
+
+	//current_page->glade = glade_xml_new(GLADE_PAGE_PATH, NULL, NULL);
+	g_printf("\n\n\nentra\n\n\n\n");
 	/*
 	 * Set up a document view structure to contain the widgets related
 	 * to this file
 	 */
 	current_page = g_new0(GtrPage, 1);
-	current_page->content_pane = gtk_vpaned_new();
-	current_page->table_pane = gtk_hpaned_new();
+	current_page->content_pane = glade_xml_get_widget(glade, GLADE_CONTENT_PANE);
+	current_page->table_pane = glade_xml_get_widget(glade, GLADE_TABLE_PANE);
 	
 	/*
 	 * Create the hpane that will hold the messages table and the current
@@ -730,61 +791,38 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	 * dynamically switched on/off from a menu (rather than a preference
 	 * that requires a program restart! yuk!)
 	 */
-	table_pane_position=gtranslator_config_get_int("interface/table_pane_position");
-	gtk_paned_set_position(GTK_PANED(current_page->table_pane), table_pane_position);
+	/*table_pane_position=gtranslator_config_get_int("interface/table_pane_position");
+	gtk_paned_set_position(GTK_PANED(current_page->table_pane), table_pane_position);*/
 
-	horizontal_box=gtk_hbox_new(FALSE, 1);
+	//horizontal_box=gtk_hbox_new(FALSE, 1);
 
 	/*
 	 * Set up the scrolling window for the comments display
 	 */	
-	comments_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(comments_scrolled_window),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start(GTK_BOX(horizontal_box), comments_scrolled_window, TRUE, TRUE, 0);
+	current_page->comment = glade_xml_get_widget(glade, GLADE_COMMENT);
 	
-	comments_viewport = gtk_viewport_new(NULL, NULL);
-	gtk_widget_show(comments_viewport);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(comments_scrolled_window), comments_viewport);
-	
-	current_page->comment=gtk_label_new("");
-	gtk_container_add(GTK_CONTAINER(comments_viewport), current_page->comment);
-	
-	current_page->edit_button=gtk_button_new_with_label(_("Edit comment"));
-	gtk_widget_set_sensitive(current_page->edit_button, FALSE);
-	gtk_box_pack_end(GTK_BOX(horizontal_box), current_page->edit_button,
-		FALSE, FALSE, 0);
+	current_page->edit_button = glade_xml_get_widget(glade, GLADE_EDIT_BUTTON);
 	
 	gtk_paned_set_position(GTK_PANED(current_page->content_pane), 0);
 
 	/*
 	 * Pack the comments pane and the main content
 	 */
-	vertical_box=gtk_vbox_new(FALSE, 0);
+	/*vertical_box=gtk_vbox_new(FALSE, 0);
 	gtk_paned_pack1(GTK_PANED(current_page->content_pane), horizontal_box, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(current_page->content_pane), vertical_box, FALSE, TRUE);
+	gtk_paned_pack2(GTK_PANED(current_page->content_pane), vertical_box, FALSE, TRUE);*/
 	
 	/* Message string box is a vbox, containing one textview in most cases,
 	   or two in the case of a plural message */
-	original_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_end(GTK_BOX(vertical_box), original_text_scrolled_window, TRUE, TRUE, 0);
-	gtk_box_pack_end(GTK_BOX(vertical_box), gtk_hseparator_new(), FALSE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(original_text_scrolled_window),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	current_page->text_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(original_text_scrolled_window), current_page->text_vbox);
+	current_page->text_notebook = glade_xml_get_widget(glade, GLADE_TEXT_NOTEBOOK);
+	current_page->text_msgid = glade_xml_get_widget(glade, GLADE_TEXT_MSGID);
+	current_page->text_msgid_plural = glade_xml_get_widget(glade, GLADE_TEXT_MSGID_PLURAL);
 
 	/* Translation box is a vbox, containing one textview in most cases,
 	   or more in the case of a plural message */
-	translation_text_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_box_pack_end(GTK_BOX(vertical_box), translation_text_scrolled_window, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(translation_text_scrolled_window),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	current_page->trans_vbox = gtk_vbox_new(TRUE, 1);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(translation_text_scrolled_window), current_page->trans_vbox);
+	current_page->trans_notebook = glade_xml_get_widget(glade, GLADE_TRANS_NOTEBOOK);
+	current_page->trans_msgstr = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR);
+	current_page->trans_msgstr_plural = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR_PLURAL);
 
 	/*
 	 * Tie up callback for 'comments' button
@@ -792,15 +830,16 @@ GtkWidget *gtranslator_gui_new_page(GtrPo *po)
 	g_signal_connect(G_OBJECT(current_page->edit_button), "clicked",
 			 G_CALLBACK(gtranslator_edit_comment_dialog), NULL);
 
+	g_printf("\n\n\n\nhola");
 	/*
 	 * If required, set up the messages table
 	 */	
 	if(GtrPreferences.show_messages_table) {
 		gtranslator_page_show_messages_table(current_page);
-		return current_page->table_pane;
+		//return current_page->table_pane;
 	}
 	
-	return current_page->content_pane;
+	//return current_page->content_pane;
 }
 
 /*
@@ -814,7 +853,7 @@ void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *noteboo
 	 * Set the 'current_page' global pointer, so the right widgets/files_added
 	 * get updated etc.
 	 */
-	pagelist = pages;
+	/*pagelist = pages;
 	while(pagelist) {
 		page = (GtrPage*)pagelist->data;
 		if(page->num == pagenum) {
@@ -822,16 +861,22 @@ void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *noteboo
 			break;
 		}
 		pagelist = pagelist->next;
-	}
+	}*/
 	
 	/*
 	 * Set 'save' and 'revert' etc.
 	 */
 	if(current_page->po->file_changed) {
-		gtranslator_actions_enable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+		//Enable widgets
+		gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
 	}
 	else {
-		gtranslator_actions_disable(ACT_SAVE, ACT_REVERT, ACT_UNDO);
+		//Disable widgets
+		gtk_widget_set_sensitive(gtranslator_menuitems->save, FALSE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->revert, FALSE);
+		gtk_widget_set_sensitive(gtranslator_menuitems->undo, FALSE);
 	}
 }
 
@@ -847,6 +892,8 @@ void gtranslator_update_progress_bar(void)
 	 */
 	percentage = 1.0 * (current_page->po->translated / g_list_length(current_page->po->messages));
 
+	//Translated is always 0, I need to check this
+	g_printf("\n%d/%d\n",current_page->po->translated, g_list_length(current_page->po->messages));
 	/*
 	 * Set the progress only if the values are reasonable.
 	 */
@@ -855,8 +902,8 @@ void gtranslator_update_progress_bar(void)
 		/*
 		 * Set the progressbar status.
 		 */
-		gnome_appbar_set_progress_percentage(
-			GNOME_APPBAR(gtranslator_application_bar),
-			percentage);
+		//g_printf("paso %f\n\n\n",percentage);
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(gtranslator_progress_bar),
+						percentage);
 	}
 }

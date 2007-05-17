@@ -74,9 +74,9 @@ gchar *gtranslator_utils_strip_all_punctuation_chars(const gchar *str)
 	g_return_val_if_fail(str!=NULL, NULL);
 	
 	/*
-	 * First strip out all the '´' characters from the string.
+	 * First strip out all the 'Å½' characters from the string.
 	 */
-	stripped_string=nautilus_str_strip_chr(str, '´');
+	stripped_string=nautilus_str_strip_chr(str, 'Å½');
 
 	/*
 	 * Now strip out all these special characters to get a more raw
@@ -310,12 +310,13 @@ gboolean gtranslator_utils_autosave(gpointer data)
 	/*
 	 * Call autosave on any currently open pages
 	 */
-	pagelist = pages;
+	/*pagelist = pages;
 	while(pagelist) {
 		page = (GtrPage*)pagelist->data;
 		gtranslator_page_autosave(page);
 		pagelist = pagelist->next;
-	}
+	}*/
+	
 	
 	return TRUE;
 }
@@ -870,8 +871,14 @@ gtranslator_get_plural_form_string(gchar *lang)
 	 * Check if msginit is available on the system.
 	 */
 	if(!g_find_program_in_path("msginit")) {
-		gnome_app_warning(GNOME_APP(gtranslator_application),
-			_("Sorry, msginit isn't available on your system!"));
+		GtkWidget *dialog;
+				dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
+								 GTK_DIALOG_DESTROY_WITH_PARENT,
+								 GTK_MESSAGE_WARNING,
+								 GTK_BUTTONS_CLOSE,
+								 _("Sorry, msginit isn't available on your system!"));
+				gtk_dialog_run (GTK_DIALOG (dialog));
+				gtk_widget_destroy (dialog);
 		return NULL;
 	}	
 	po_test_file = g_strconcat ("# SOME DESCRIPTIVE TITLE.\n",
