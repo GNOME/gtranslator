@@ -38,8 +38,6 @@
 #include "utils.h"
 #include "utils_gui.h"
 
-#include <glade/glade.h>
-
 /*
  * The callbacks:
  */
@@ -1056,8 +1054,12 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	/*
 	 * Connect the signals to the preferences box.
 	 */
-	g_signal_connect(G_OBJECT(prefs), "response",
-			 G_CALLBACK(gtranslator_preferences_dialog_close), NULL);
+	/*g_signal_connect(G_OBJECT(prefs), "response",
+			 G_CALLBACK(gtranslator_preferences_dialog_close), NULL);*/
+	glade_xml_signal_connect_data(glade_prefs, 
+								  "on_preferences_dialog_response",
+								  G_CALLBACK(gtranslator_preferences_dialog_close),
+								  prefs);
 
 	gtranslator_dialog_show(&prefs, "gtranslator -- prefs");
 }
