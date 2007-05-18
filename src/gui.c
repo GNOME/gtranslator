@@ -885,15 +885,13 @@ void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *noteboo
  */
 void gtranslator_update_progress_bar(void)
 {
-	gfloat percentage;
+	gdouble percentage;
 	
 	/*
 	 * Calculate the percentage.
 	 */
-	percentage = 1.0 * (current_page->po->translated / g_list_length(current_page->po->messages));
+	percentage = (gdouble)(current_page->po->translated / (gdouble)g_list_length(current_page->po->messages));
 
-	//Translated is always 0, I need to check this
-	g_printf("\n%d/%d\n",current_page->po->translated, g_list_length(current_page->po->messages));
 	/*
 	 * Set the progress only if the values are reasonable.
 	 */
@@ -902,7 +900,6 @@ void gtranslator_update_progress_bar(void)
 		/*
 		 * Set the progressbar status.
 		 */
-		//g_printf("paso %f\n\n\n",percentage);
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(gtranslator_progress_bar),
 						percentage);
 	}
