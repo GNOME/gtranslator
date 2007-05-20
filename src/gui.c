@@ -63,7 +63,7 @@
 /*
  * Glade file path
  */
-#define GLADE_PATH "../data/glade/main_window.glade"
+#define GLADE_PATH "main_window.glade"
 
 /*
  * Glade widgets names
