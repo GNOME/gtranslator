@@ -63,7 +63,7 @@
 /*
  * Glade file path
  */
-#define GLADE_PATH "main_window.glade"
+#define GLADE_PATH "../data/glade/main_window.glade"
 
 /*
  * Glade widgets names
@@ -73,6 +73,10 @@
 #define GLADE_PROGRESS_BAR "progress_bar"
 #define GLADE_STATUS_BAR "status_bar"
 #define GLADE_TOOLBAR "toolbar"
+#define GLADE_WARNING_LABEL "warning_label"
+#define GLADE_WARNING_BUTTON "warning_button"
+#define GLADE_WARNING_HBOX "warning_hbox"
+#define GLADE_WARNING_EVENTBOX "warning_eventbox"
 
 
 /*
@@ -88,6 +92,11 @@ GladeXML *glade;
 
 guint trans_box_insert_text_signal_id;
 guint trans_box_delete_text_signal_id;
+
+/*
+ * Warning widget
+ */
+static GtkWidget *warning_label, *warning_button, *warning_hbox, *warning_eventbox;
 
 /*
  * The widgets related to displaying the current document 
@@ -139,6 +148,56 @@ void gtranslator_repack_window(void);
 gint table_pane_position;
 
 /*
+ * Callback func called when warning button is clicked
+ */
+void warning_message_button_clicked(GtkWidget *widget, gpointer useless)
+{
+    gtk_widget_hide(warning_hbox);
+}
+
+/*
+ * Shows a warning message embedded in main window
+ * FIXME: Color is not set
+ */
+void gtranslator_show_message(const gchar *msg)
+{
+	GtkTooltips *tooltips;
+    	GtkWidget *button;
+    	GtkWidget *label;
+    	GtkStyle *style;
+    	GdkWindow *window;
+    
+    	tooltips = gtk_tooltips_new();
+    	g_object_ref(tooltips);
+    	gtk_object_sink(GTK_OBJECT(tooltips));
+    	gtk_tooltips_force_window(tooltips);
+	gtk_widget_ensure_style (tooltips->tip_window);
+        style = gtk_widget_get_style (tooltips->tip_window);
+    	
+   	gtk_widget_set_style(warning_hbox, style);
+   	
+    	gtk_label_set_text(GTK_LABEL(warning_label), msg);
+    
+	g_signal_connect(GTK_BUTTON(warning_button), "clicked",
+		     G_CALLBACK(warning_message_button_clicked), NULL);
+    
+   	gtk_paint_flat_box (warning_hbox->style, 
+                            window,
+                            GTK_STATE_NORMAL,
+                            GTK_SHADOW_OUT,
+                            NULL,
+                            warning_hbox,
+                            "tooltip",
+                            warning_hbox->allocation.x + 1,
+                            warning_hbox->allocation.y + 1,
+                            warning_hbox->allocation.width - 2,
+                            warning_hbox->allocation.height - 2);
+    
+	gtk_widget_show(warning_hbox);
+}
+
+
+/*
  * Creates the main gtranslator application window.
  */
 void gtranslator_create_main_window(void)
@@ -149,13 +208,13 @@ void gtranslator_create_main_window(void)
 	 * Initialize glade library, load the interface
 	 */
 	//path_glade = g_strconcat(DATADIR, GLADE_PATH, NULL);
-    glade = glade_xml_new(GLADE_PATH, NULL, NULL);
+	glade = glade_xml_new(GLADE_PATH, NULL, NULL);
     	
-    /*
-     * Initialize menus
-     */
-    gtranslator_menuitems_set_up();
-    connect_menu_signals();
+	/*
+	* Initialize menus
+	*/
+	gtranslator_menuitems_set_up();
+	connect_menu_signals();
 	
 	/*
 	 * Create the app	
@@ -200,6 +259,16 @@ void gtranslator_create_main_window(void)
 	gtranslator_progress_bar = glade_xml_get_widget(glade, GLADE_PROGRESS_BAR);
 	gtranslator_toolbar = glade_xml_get_widget(glade, GLADE_TOOLBAR);
 
+    
+    	/*
+    	 * Warning message widgets
+    	 */
+    	warning_label = glade_xml_get_widget(glade, GLADE_WARNING_LABEL);
+    	warning_button = glade_xml_get_widget(glade, GLADE_WARNING_BUTTON);
+    	warning_hbox = glade_xml_get_widget(glade, GLADE_WARNING_HBOX);
+    	warning_eventbox = glade_xml_get_widget(glade, GLADE_WARNING_EVENTBOX);
+    
+    
 	/*
 	 * Make menu hints display on the appbar
 	 */
