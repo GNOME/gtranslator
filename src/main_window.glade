@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Sat May 19 12:38:45 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.2.0 on Sun May 20 12:37:47 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -569,186 +569,218 @@
           </packing>
         </child>
         <child>
-          <widget class="GtkVBox" id="vbox2">
+          <widget class="GtkToolbar" id="toolbar">
             <property name="visible">True</property>
-            <property name="spacing">5</property>
             <child>
-              <widget class="GtkToolbar" id="toolbar">
+              <widget class="GtkToolButton" id="open_toolbar">
                 <property name="visible">True</property>
-                <child>
-                  <widget class="GtkToolButton" id="open_toolbar">
-                    <property name="visible">True</property>
-                    <property name="tooltip" translatable="yes">Open file</property>
-                    <property name="stock_id">gtk-open</property>
-                    <signal name="clicked" handler="on_open_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="save_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Save file</property>
-                    <property name="stock_id">gtk-save</property>
-                    <signal name="clicked" handler="on_save_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="save_as_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Save file as...</property>
-                    <property name="stock_id">gtk-save-as</property>
-                    <signal name="clicked" handler="on_save_as_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkSeparatorToolItem" id="toolbutton4">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="refresh_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Refresh the current file</property>
-                    <property name="stock_id">gtk-refresh</property>
-                    <signal name="clicked" handler="on_refresh_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkSeparatorToolItem" id="toolbutton8">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="undo_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Undo</property>
-                    <property name="stock_id">gtk-undo</property>
-                    <signal name="clicked" handler="on_undo_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkSeparatorToolItem" id="toolbutton5">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="goto_first_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">First message</property>
-                    <property name="stock_id">gtk-goto-first</property>
-                    <signal name="clicked" handler="on_first_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="go_back_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Previous message</property>
-                    <property name="stock_id">gtk-go-back</property>
-                    <signal name="clicked" handler="on_go_back_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkSeparatorToolItem" id="toolbutton21">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="go_forward_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Next message</property>
-                    <property name="stock_id">gtk-go-forward</property>
-                    <signal name="clicked" handler="on_go_forward_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="goto_last_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Last message</property>
-                    <property name="stock_id">gtk-goto-last</property>
-                    <signal name="clicked" handler="on_goto_last_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkSeparatorToolItem" id="separatortoolitem1">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkToolButton" id="find_toolbar">
-                    <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">Search</property>
-                    <property name="stock_id">gtk-find</property>
-                    <signal name="clicked" handler="on_find_activate"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
+                <property name="tooltip" translatable="yes">Open file</property>
+                <property name="stock_id">gtk-open</property>
+                <signal name="clicked" handler="on_open_activate"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
               </packing>
             </child>
+            <child>
+              <widget class="GtkToolButton" id="save_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Save file</property>
+                <property name="stock_id">gtk-save</property>
+                <signal name="clicked" handler="on_save_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="save_as_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Save file as...</property>
+                <property name="stock_id">gtk-save-as</property>
+                <signal name="clicked" handler="on_save_as_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="toolbutton1">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="refresh_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Refresh the current file</property>
+                <property name="stock_id">gtk-refresh</property>
+                <signal name="clicked" handler="on_refresh_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="toolbutton2">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="undo_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Undo</property>
+                <property name="stock_id">gtk-undo</property>
+                <signal name="clicked" handler="on_undo_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="toolbutton3">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="goto_first_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">First message</property>
+                <property name="stock_id">gtk-goto-first</property>
+                <signal name="clicked" handler="on_first_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="go_back_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Previous message</property>
+                <property name="stock_id">gtk-go-back</property>
+                <signal name="clicked" handler="on_go_back_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="toolbutton4">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="go_forward_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Next message</property>
+                <property name="stock_id">gtk-go-forward</property>
+                <signal name="clicked" handler="on_go_forward_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="goto_last_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Last message</property>
+                <property name="stock_id">gtk-goto-last</property>
+                <signal name="clicked" handler="on_goto_last_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="separatortoolitem">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="find_toolbar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="tooltip" translatable="yes">Search</property>
+                <property name="stock_id">gtk-find</property>
+                <signal name="clicked" handler="on_find_activate"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkHBox" id="warning_hbox">
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="no_show_all">True</property>
+            <child>
+              <widget class="GtkLabel" id="warning_label">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label">&lt;b&gt;Here will be warnings messages&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkButton" id="warning_button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label" translatable="yes">gtk-close</property>
+                <property name="use_stock">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkVBox" id="vbox2">
+            <property name="visible">True</property>
+            <property name="spacing">5</property>
             <child>
               <widget class="GtkHPaned" id="table_pane">
                 <property name="can_focus">True</property>
@@ -1137,13 +1169,10 @@
                   </widget>
                 </child>
               </widget>
-              <packing>
-                <property name="position">1</property>
-              </packing>
             </child>
           </widget>
           <packing>
-            <property name="position">1</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <child>
@@ -1169,7 +1198,7 @@
           </widget>
           <packing>
             <property name="expand">False</property>
-            <property name="position">2</property>
+            <property name="position">4</property>
           </packing>
         </child>
       </widget>
