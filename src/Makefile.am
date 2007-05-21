@@ -41,6 +41,7 @@ gtranslator_SOURCES = \
 	main.c \
 	menus.c menus.h \
 	message.c message.h \
+	message-area.c message-area.h \
 	messages-table.c messages-table.h \
 	nautilus-string.c nautilus-string.h \
 	parse.c parse.h \
