@@ -19,11 +19,13 @@
  */
 
 #include "config.h"
+#include "dialogs.h"
 #include "dnd.h"
 #include "gui.h"
 #include "parse.h"
 
 #include <gtk/gtk.h>
+#include <string.h>
 
 /*
  * The general D'n'D function.
@@ -33,23 +35,25 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 		     guint time, gpointer data)
 {
 	gchar *file;
-
+	gchar *file_aux;
 	dnd_type = GPOINTER_TO_UINT(data);
 	file=((gchar *) (seldata->data));
-	
+	file_aux = g_strdup(file + strlen("file://"));
 	if(dnd_type==TARGET_URI_LIST || dnd_type==TARGET_NETSCAPE_URL)
 	{
 		GError *error = NULL;
-		if(!gtranslator_open(file, &error)) {
+		if(!gtranslator_open(file_aux, &error)) {
 			if(error) {
-				GtkWidget *dialog;
+				/*GtkWidget *dialog;
 				dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
 								GTK_DIALOG_DESTROY_WITH_PARENT,
 								GTK_MESSAGE_WARNING,
 								GTK_BUTTONS_CLOSE,
-								error->message);
+								//error->message);
+								 file_aux);
 				gtk_dialog_run (GTK_DIALOG (dialog));
-				gtk_widget_destroy (dialog);
+				gtk_widget_destroy (dialog);*/
+			    	gtranslator_show_message(error->message, NULL);
 				g_error_free(error);
 			}
 			return;

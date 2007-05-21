@@ -34,6 +34,12 @@
 void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname);
 
 /*
+ * Shows a warning message embedded in main window
+ */
+void gtranslator_show_message(const gchar *primary_text,
+			      const gchar *secundary_text);
+
+/*
  * Store the current file dialogs directory.
  */
 void gtranslator_file_dialogs_store_directory(const gchar *filename); 

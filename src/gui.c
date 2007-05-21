@@ -96,7 +96,7 @@ guint trans_box_delete_text_signal_id;
 /*
  * Warning widget
  */
-static GtkWidget *warning_label, *warning_button, *warning_hbox, *warning_eventbox;
+static GtkWidget *warning_hbox;
 
 /*
  * The widgets related to displaying the current document 
@@ -148,54 +148,12 @@ void gtranslator_repack_window(void);
 gint table_pane_position;
 
 /*
- * Callback func called when warning button is clicked
+ * To get warning_hbox widget
  */
-void warning_message_button_clicked(GtkWidget *widget, gpointer useless)
+GtkWidget *gtranslator_gui_get_warning_hbox()
 {
-    gtk_widget_hide(warning_hbox);
+   	return warning_hbox;
 }
-
-/*
- * Shows a warning message embedded in main window
- * FIXME: Color is not set
- */
-void gtranslator_show_message(const gchar *msg)
-{
-	GtkTooltips *tooltips;
-    	GtkWidget *button;
-    	GtkWidget *label;
-    	GtkStyle *style;
-    	GdkWindow *window;
-    
-    	tooltips = gtk_tooltips_new();
-    	g_object_ref(tooltips);
-    	gtk_object_sink(GTK_OBJECT(tooltips));
-    	gtk_tooltips_force_window(tooltips);
-	gtk_widget_ensure_style (tooltips->tip_window);
-        style = gtk_widget_get_style (tooltips->tip_window);
-    	
-   	gtk_widget_set_style(warning_hbox, style);
-   	
-    	gtk_label_set_text(GTK_LABEL(warning_label), msg);
-    
-	g_signal_connect(GTK_BUTTON(warning_button), "clicked",
-		     G_CALLBACK(warning_message_button_clicked), NULL);
-    
-   	gtk_paint_flat_box (warning_hbox->style, 
-                            window,
-                            GTK_STATE_NORMAL,
-                            GTK_SHADOW_OUT,
-                            NULL,
-                            warning_hbox,
-                            "tooltip",
-                            warning_hbox->allocation.x + 1,
-                            warning_hbox->allocation.y + 1,
-                            warning_hbox->allocation.width - 2,
-                            warning_hbox->allocation.height - 2);
-    
-	gtk_widget_show(warning_hbox);
-}
-
 
 /*
  * Creates the main gtranslator application window.
@@ -263,12 +221,13 @@ void gtranslator_create_main_window(void)
     	/*
     	 * Warning message widgets
     	 */
-    	warning_label = glade_xml_get_widget(glade, GLADE_WARNING_LABEL);
-    	warning_button = glade_xml_get_widget(glade, GLADE_WARNING_BUTTON);
+    	//message_area = gtranslator_message_area_new();
+    	/*warning_label = glade_xml_get_widget(glade, GLADE_WARNING_LABEL);
+    	warning_button = glade_xml_get_widget(glade, GLADE_WARNING_BUTTON);*/
     	warning_hbox = glade_xml_get_widget(glade, GLADE_WARNING_HBOX);
-    	warning_eventbox = glade_xml_get_widget(glade, GLADE_WARNING_EVENTBOX);
+    	
     
-    
+	
 	/*
 	 * Make menu hints display on the appbar
 	 */

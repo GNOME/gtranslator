@@ -32,6 +32,7 @@
 #include "learn.h"
 #include "menus.h"
 #include "message.h"
+#include "message-area.h"
 #include "messages-table.h"
 #include "nautilus-string.h"
 #include "page.h"
@@ -87,6 +88,119 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 
 	gtk_widget_show_all(*dlg);
 }
+
+
+/*
+ * Callback func called when warning button is clicked
+ */
+/*void warning_message_button_clicked(GtkWidget *widget, gpointer useless)
+{
+    gtk_widget_hide(warning_hbox);
+}*/
+
+/*
+ * Message area funcs
+ */
+static void
+set_message_area_text_and_icon (GtranslatorMessageArea   *message_area,
+				const gchar      *icon_stock_id,
+				const gchar      *primary_text,
+				const gchar      *secondary_text)
+{
+	GtkWidget *hbox_content;
+	GtkWidget *image;
+	GtkWidget *vbox;
+	gchar *primary_markup;
+	gchar *secondary_markup;
+	GtkWidget *primary_label;
+	GtkWidget *secondary_label;
+
+	hbox_content = gtk_hbox_new (FALSE, 8);
+	gtk_widget_show (hbox_content);
+
+	image = gtk_image_new_from_stock (icon_stock_id, GTK_ICON_SIZE_DIALOG);
+	gtk_widget_show (image);
+	gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
+	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
+
+	vbox = gtk_vbox_new (FALSE, 6);
+	gtk_widget_show (vbox);
+	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
+
+	primary_markup = g_strdup_printf ("<b>%s</b>", primary_text);
+	primary_label = gtk_label_new (primary_markup);
+	g_free (primary_markup);
+
+	gtk_widget_show (primary_label);
+
+	gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
+	gtk_label_set_line_wrap (GTK_LABEL (primary_label), FALSE);
+	gtk_misc_set_alignment (GTK_MISC (primary_label), 0, 0.5);
+
+	GTK_WIDGET_SET_FLAGS (primary_label, GTK_CAN_FOCUS);
+
+	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
+
+  	if (secondary_text != NULL) {
+  		secondary_markup = g_strdup_printf ("<small>%s</small>",
+  						    secondary_text);
+		secondary_label = gtk_label_new (secondary_markup);
+		g_free (secondary_markup);
+
+		gtk_widget_show (secondary_label);
+
+		gtk_box_pack_start (GTK_BOX (vbox), secondary_label, TRUE, TRUE, 0);
+
+		GTK_WIDGET_SET_FLAGS (secondary_label, GTK_CAN_FOCUS);
+
+		gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
+		gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
+		gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
+		gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
+	}
+
+	gtranslator_message_area_set_contents (GTRANSLATOR_MESSAGE_AREA (message_area),
+				       hbox_content);
+}
+
+static GtkWidget*
+create_error_message_area (const gchar *primary_text,
+			   const gchar *secondary_text)
+{
+	GtkWidget *message_area;
+
+	message_area = gtranslator_message_area_new_with_buttons (
+						"gtk-close", GTK_RESPONSE_HELP,
+						NULL);
+
+	set_message_area_text_and_icon (GTRANSLATOR_MESSAGE_AREA (message_area),
+					GTK_STOCK_DIALOG_ERROR,
+					primary_text,
+					secondary_text);
+
+	return message_area;
+}
+
+
+/*
+ * Shows a warning message embedded in main window
+ */
+void gtranslator_show_message(const gchar *primary_text,
+			      const gchar *secundary_text)
+{
+    	GtkWidget *warning_hbox;
+    	GtkWidget *message_area;
+    	warning_hbox = gtranslator_gui_get_warning_hbox();
+    	message_area = create_error_message_area(primary_text,
+				  secundary_text);
+   	gtk_box_pack_start(GTK_BOX(warning_hbox), message_area, TRUE, TRUE, 0); 
+    	gtk_widget_show(message_area);
+    	gtk_widget_show(warning_hbox);
+    	//g_object_unref(message_area);
+	
+}
+
 
 /*
  * File chooser dialog
@@ -971,6 +1085,7 @@ void gtranslator_open_uri_dialog_clicked(GtkDialog *dialog, gint button,
 	{
 		/*
 		 * Get the URI data from the GnomeEntry.
+	    	 * FIXME: deprecated func
 		 */ 
 		uri=g_string_append(uri, gtk_editable_get_chars(
 			GTK_EDITABLE(gnome_entry_gtk_entry(entrydata)),

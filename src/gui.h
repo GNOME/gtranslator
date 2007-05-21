@@ -53,6 +53,10 @@ extern GtkWidget *notebook_widget;
  */
 extern gint	table_pane_position;
 
+/*
+ * To get warning_hbox widget
+ */
+GtkWidget *gtranslator_gui_get_warning_hbox();
 
 /*
  * Creates the main window and sets up the environment.
