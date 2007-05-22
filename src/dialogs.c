@@ -93,10 +93,11 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
 /*
  * Callback func called when warning button is clicked
  */
-/*void warning_message_button_clicked(GtkWidget *widget, gpointer useless)
+void warning_message_button_clicked(GtkWidget *widget, gint response_id, gpointer data)
 {
-    gtk_widget_hide(warning_hbox);
-}*/
+    if(response_id == GTK_RESPONSE_CLOSE)
+    	gtk_widget_hide(GTK_WIDGET(data));
+}
 
 /*
  * Message area funcs
@@ -171,7 +172,7 @@ create_error_message_area (const gchar *primary_text,
 	GtkWidget *message_area;
 
 	message_area = gtranslator_message_area_new_with_buttons (
-						"gtk-close", GTK_RESPONSE_HELP,
+						"gtk-close", GTK_RESPONSE_CLOSE,
 						NULL);
 
 	set_message_area_text_and_icon (GTRANSLATOR_MESSAGE_AREA (message_area),
@@ -184,7 +185,7 @@ create_error_message_area (const gchar *primary_text,
 
 
 /*
- * Shows a warning message embedded in main window
+ * Shows a warning message embeded in main window
  */
 void gtranslator_show_message(const gchar *primary_text,
 			      const gchar *secundary_text)
@@ -194,9 +195,13 @@ void gtranslator_show_message(const gchar *primary_text,
     	warning_hbox = gtranslator_gui_get_warning_hbox();
     	message_area = create_error_message_area(primary_text,
 				  secundary_text);
-   	gtk_box_pack_start(GTK_BOX(warning_hbox), message_area, TRUE, TRUE, 0); 
-    	gtk_widget_show(message_area);
     	gtk_widget_show(warning_hbox);
+   	gtk_box_pack_start(GTK_BOX(warning_hbox), message_area, TRUE, TRUE, 0); 
+    	
+    	gtk_widget_show(message_area);
+    	g_signal_connect(G_OBJECT(message_area), "response",
+			 G_CALLBACK(warning_message_button_clicked), 
+			 warning_hbox);
     	//g_object_unref(message_area);
 	
 }
