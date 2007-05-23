@@ -52,6 +52,10 @@ typedef enum {
 	FILESEL_SAVE
 } FileselMode;
 
+//Message area widget
+static GtkWidget *message_area = NULL;
+
+
 /*
  * Functions to be used only internally in this file
  */
@@ -95,8 +99,9 @@ void gtranslator_dialog_show(GtkWidget ** dlg, const gchar * wmname)
  */
 void warning_message_button_clicked(GtkWidget *widget, gint response_id, gpointer data)
 {
-    if(response_id == GTK_RESPONSE_CLOSE)
+    if(response_id == GTK_RESPONSE_CLOSE){
     	gtk_widget_hide(GTK_WIDGET(data));
+    }
 }
 
 /*
@@ -191,7 +196,8 @@ void gtranslator_show_message(const gchar *primary_text,
 			      const gchar *secundary_text)
 {
     	GtkWidget *warning_hbox;
-    	GtkWidget *message_area;
+    	if(message_area != NULL)
+		gtk_widget_destroy(message_area);
     	warning_hbox = gtranslator_gui_get_warning_hbox();
     	message_area = create_error_message_area(primary_text,
 				  secundary_text);
@@ -201,9 +207,7 @@ void gtranslator_show_message(const gchar *primary_text,
     	gtk_widget_show(message_area);
     	g_signal_connect(G_OBJECT(message_area), "response",
 			 G_CALLBACK(warning_message_button_clicked), 
-			 warning_hbox);
-    	//g_object_unref(message_area);
-	
+			 warning_hbox);	
 }
 
 
