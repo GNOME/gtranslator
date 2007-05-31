@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Sun May 27 21:11:51 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.2.0 on Thu May 31 14:54:50 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -1158,15 +1158,16 @@
           </packing>
         </child>
         <child>
-          <widget class="GtkHBox" id="hbox5">
+          <widget class="GtkHBox" id="search_hbox">
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
             <property name="no_show_all">True</property>
             <child>
-              <widget class="GtkButton" id="button1">
+              <widget class="GtkButton" id="search_button_close">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="relief">GTK_RELIEF_NONE</property>
                 <child>
                   <widget class="GtkImage" id="image1">
                     <property name="visible">True</property>
@@ -1191,7 +1192,7 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkEntry" id="entry3">
+              <widget class="GtkEntry" id="search_entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -1202,12 +1203,13 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkButton" id="button2">
+              <widget class="GtkButton" id="search_go_forward">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="label" translatable="yes">gtk-go-forward</property>
+                <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="use_stock">True</property>
               </widget>
               <packing>
@@ -1216,12 +1218,13 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkButton" id="button3">
+              <widget class="GtkButton" id="search_go_back">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="label" translatable="yes">gtk-go-back</property>
+                <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="use_stock">True</property>
               </widget>
               <packing>
@@ -1230,7 +1233,7 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkCheckButton" id="checkbutton1">
+              <widget class="GtkCheckButton" id="search_case_sensitive">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
