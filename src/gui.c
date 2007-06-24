@@ -35,7 +35,6 @@
 #include "header_stuff.h"
 #include "history.h"
 #include "learn.h"
-#include "gucharmap.h"
 #include "menus.h"
 #include "message.h"
 #include "messages-table.h"
@@ -64,7 +63,7 @@
 /*
  * Glade file path
  */
-#define GLADE_PATH "../data/glade/main_window.glade"
+#define GLADE_PATH "main_window.glade"
 
 /*
  * Glade widgets names
@@ -204,11 +203,7 @@ gtranslator_create_main_window(void)
     	warning_hbox = glade_xml_get_widget(glade, GLADE_WARNING_HBOX);
     	
     
-    	/*
-    	 * Gucharmap set up
-    	 */
-    	gtranslator_gucharmap_new();
-	
+
 	/*
 	 * Make menu hints display on the appbar
 	 */

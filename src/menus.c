@@ -103,6 +103,10 @@ gtranslator_menuitems_set_up()
 	//Toolbar
 	this->t_save = glade_xml_get_widget(glade, "save_toolbar");
 	this->t_undo = glade_xml_get_widget(glade, "undo_toolbar");
+    	this->t_first = glade_xml_get_widget(glade, "goto_first_toolbar");
+    	this->t_go_back = glade_xml_get_widget(glade, "go_back_toolbar");
+    	this->t_go_forward = glade_xml_get_widget(glade, "go_forward_toolbar");
+    	this->t_goto_last = glade_xml_get_widget(glade, "goto_last_toolbar");
 	
 	gtranslator_menuitems = this;
 }

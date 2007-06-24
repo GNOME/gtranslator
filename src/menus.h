@@ -83,6 +83,10 @@ typedef struct _GtrMenuItems
 	//Toolbar
 	GtkWidget *t_save;
 	GtkWidget *t_undo;
+    	GtkWidget *t_first;
+    	GtkWidget *t_go_back;
+    	GtkWidget *t_go_forward;
+    	GtkWidget *t_goto_last;
 	
 }GtrMenuItems;
 
