@@ -83,7 +83,8 @@ static GtrMessagesTableColors *messages_table_colors;
 /*
  * Initialize and set up the generally used messages table colors.
  */
-static void read_messages_table_colors()
+static void 
+read_messages_table_colors()
 {	
 	messages_table_colors=g_new0(GtrMessagesTableColors, 1);
 
@@ -107,7 +108,8 @@ static void read_messages_table_colors()
 /*
  * Frees the internally used GtrMessagesTableColors structure.
  */
-static void free_messages_table_colors()
+static void 
+free_messages_table_colors()
 {
 	if(messages_table_colors)
 	{
@@ -124,7 +126,8 @@ static void free_messages_table_colors()
  *  translation from the learn buffer.
  */
 
-void gtranslator_tree_size_allocate( 
+void 
+gtranslator_tree_size_allocate( 
 		GtkTreeView *widget, 
 		GtkAllocation *allocation, 
 		gpointer data )
@@ -169,7 +172,8 @@ gtranslator_messages_table_selection_changed(GtkTreeSelection *selection, gpoint
 /*
  * Create the new messages table
  */
-GtrMessagesTable *gtranslator_messages_table_new()
+GtrMessagesTable *
+gtranslator_messages_table_new()
 {
 	GtkTreeViewColumn *column;
   	GtkCellRenderer *renderer;
@@ -285,7 +289,8 @@ GtrMessagesTable *gtranslator_messages_table_new()
 /*
  * Populate a messages table from a given po
  */
-void gtranslator_messages_table_populate(GtrMessagesTable *table, GList *messages)
+void 
+gtranslator_messages_table_populate(GtrMessagesTable *table, GList *messages)
 {
 	GtrMsg *msg;
 	const char *msgid, *msgstr;
@@ -334,7 +339,8 @@ void gtranslator_messages_table_populate(GtrMessagesTable *table, GList *message
 /*
  * Update the data in a single row
  */
-void gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *msg)
+void 
+gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *msg)
 {
 	const char *msgid, *msgstr;
 
@@ -367,7 +373,8 @@ void gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *msg)
 /*
  * Select given message
  */
-void gtranslator_messages_table_select_row(GtrMessagesTable *table, GtrMsg *msg)
+void 
+gtranslator_messages_table_select_row(GtrMessagesTable *table, GtrMsg *msg)
 {
 	GtkTreeSelection *selection=NULL;
 
@@ -380,7 +387,8 @@ void gtranslator_messages_table_select_row(GtrMessagesTable *table, GtrMsg *msg)
 /*
  * Finish with messages table
  */
-void gtranslator_message_table_free(GtrMessagesTable *table) {
+void 
+gtranslator_message_table_free(GtrMessagesTable *table) {
 	gtk_widget_destroy(table->widget);
 	gtk_object_destroy(GTK_OBJECT(table->widget));
 	free_messages_table_colors();

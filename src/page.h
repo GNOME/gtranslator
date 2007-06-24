@@ -1,8 +1,9 @@
 /*
- * (C) 2000-2004 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
+ * 			Ignacio Casal <nacho.resa@gmail.com>
  * 
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,14 +31,10 @@
 /*
  * This class encapsulated all the widgets related to a PO file
  */
-typedef struct {
-	/* Page number wrt notebook_widget */
-	//gint num;
-	
+typedef struct 
+{
 	GtrPo *po;
 	
-	//GladeXML *glade;
-
 	GtkWidget *content_pane;
 
 	GtrMessagesTable *messages_table;
@@ -55,7 +52,9 @@ typedef struct {
 	GtkWidget *trans_msgstr;
 	GtkWidget *trans_msgstr_plural;
 	
+    	/*Pane widgets*/
 	GtkWidget *table_pane;
+    	GtkWidget *combobox_pane;
 	
 	/*Status widgets*/
 	GtkWidget *translated;
@@ -64,10 +63,6 @@ typedef struct {
 	
 } GtrPage;
 
-/*
- * The currently active pages
- */
-//extern GList *pages;
 
 /*
  * A pointer to the current page

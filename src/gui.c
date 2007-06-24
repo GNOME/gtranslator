@@ -35,6 +35,7 @@
 #include "header_stuff.h"
 #include "history.h"
 #include "learn.h"
+#include "gucharmap.h"
 #include "menus.h"
 #include "message.h"
 #include "messages-table.h"
@@ -63,7 +64,7 @@
 /*
  * Glade file path
  */
-#define GLADE_PATH "main_window.glade"
+#define GLADE_PATH "../data/glade/main_window.glade"
 
 /*
  * Glade widgets names
@@ -101,8 +102,6 @@ static GtkWidget *warning_hbox;
 /*
  * The widgets related to displaying the current document 
  */
-//GtkWidget *notebook_widget;
-
 gboolean nothing_changes;
 
 static GtkTextBuffer* get_selection_buffer(GtkTextBuffer *buffer);
@@ -150,7 +149,8 @@ gint table_pane_position;
 /*
  * To get warning_hbox widget
  */
-GtkWidget *gtranslator_gui_get_warning_hbox()
+GtkWidget *
+gtranslator_gui_get_warning_hbox()
 {
    	return warning_hbox;
 }
@@ -158,7 +158,8 @@ GtkWidget *gtranslator_gui_get_warning_hbox()
 /*
  * Creates the main gtranslator application window.
  */
-void gtranslator_create_main_window(void)
+void 
+gtranslator_create_main_window(void)
 {
 	gchar *path_glade;
 	
@@ -177,7 +178,6 @@ void gtranslator_create_main_window(void)
 	/*
 	 * Create the app	
 	 */
-	//gtranslator_application = gnome_app_new(PACKAGE_NAME, PACKAGE_NAME);
 	gtranslator_application = glade_xml_get_widget(glade, GLADE_MAIN_WINDOW);
 	
 	/*
@@ -191,28 +191,8 @@ void gtranslator_create_main_window(void)
 	current_page = NULL;
 
 	/*
-	 * Create the tool bar
-	 */
-	/*tool_bar = gtk_toolbar_new();
-	gnome_app_fill_toolbar(GTK_TOOLBAR(tool_bar), the_toolbar, NULL);
-	gnome_app_add_toolbar(GNOME_APP(gtranslator_application),
-		GTK_TOOLBAR(tool_bar), "tool_bar", BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
-		BONOBO_DOCK_TOP, 1, 0, 0);*/
-
-	/*
-	 * Create the search bar
-	 */
-	/*search_bar = gtk_toolbar_new();
-	gnome_app_fill_toolbar(GTK_TOOLBAR(search_bar), the_navibar, NULL);
-	gnome_app_add_toolbar(GNOME_APP(gtranslator_application), 
-		GTK_TOOLBAR(search_bar), "search_bar", BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
-		BONOBO_DOCK_TOP, 2, 0, 0);*/
-
-	/*
 	 * Set up the application bar
 	 */
-	/*gtranslator_application_bar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
-	gnome_app_set_statusbar(GNOME_APP(gtranslator_application), gtranslator_application_bar);*/
 	gtranslator_status_bar = glade_xml_get_widget(glade, GLADE_STATUS_BAR);
 	gtranslator_progress_bar = glade_xml_get_widget(glade, GLADE_PROGRESS_BAR);
 	gtranslator_toolbar = glade_xml_get_widget(glade, GLADE_TOOLBAR);
@@ -221,12 +201,13 @@ void gtranslator_create_main_window(void)
     	/*
     	 * Warning message widgets
     	 */
-    	//message_area = gtranslator_message_area_new();
-    	/*warning_label = glade_xml_get_widget(glade, GLADE_WARNING_LABEL);
-    	warning_button = glade_xml_get_widget(glade, GLADE_WARNING_BUTTON);*/
     	warning_hbox = glade_xml_get_widget(glade, GLADE_WARNING_HBOX);
     	
     
+    	/*
+    	 * Gucharmap set up
+    	 */
+    	gtranslator_gucharmap_new();
 	
 	/*
 	 * Make menu hints display on the appbar
@@ -263,15 +244,6 @@ void gtranslator_create_main_window(void)
 			 G_CALLBACK(gtranslator_dnd),
 			 GUINT_TO_POINTER(dnd_type));
 
-	/*
-	 * Set up the notebook widget
-	 */
-	/*notebook_widget = GTK_WIDGET(gtk_notebook_new());
-	gnome_app_set_contents(GNOME_APP(gtranslator_application), notebook_widget);*/
-	//notebook_widget = glade_xml_get_widget(glade, GLADE_MAIN_NOTEBOOK);
-	
-	/* Add a callback to set 'current_page' on a tab change */
-	//g_signal_connect(notebook_widget, "switch-page", G_CALLBACK(gtranslator_gui_switch_page), NULL);
 	
 	/*
 	 * Resize the window accordingly
@@ -294,7 +266,8 @@ void gtranslator_create_main_window(void)
  * An own delete text handler which should work on deletion in the translation
  *  box -- undo is called up here, too.
  */
-void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
+void 
+delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 			 GtkTextIter *end)
 {
 	return;
@@ -327,7 +300,8 @@ void delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
  * closes the main window.
  * It returns true to stop other handlers from being invoked for the event.
  */
-gboolean gtranslator_application_delete_event_cb(GtkWidget  * widget,
+gboolean 
+gtranslator_application_delete_event_cb(GtkWidget  * widget,
 						 GdkEvent  * event,
 						 gpointer user_data)
 {
@@ -338,7 +312,8 @@ gboolean gtranslator_application_delete_event_cb(GtkWidget  * widget,
 /*
  * Callback called when the user uses the quit command (^Q or Quit in the menu)
  */
-void gtranslator_menu_quit_cb(void  * data)
+void 
+gtranslator_menu_quit_cb(void  * data)
 {
 	gtranslator_quit();
 }
@@ -346,7 +321,8 @@ void gtranslator_menu_quit_cb(void  * data)
 /*
  * The own quit-code
  */
-void gtranslator_quit()
+void 
+gtranslator_quit()
 {
 	GList *pagelist;
 	GtrPage *page;
@@ -443,13 +419,15 @@ void gtranslator_quit()
 }
 
 
-void gtranslator_application_bar_update(gint pos)
+void 
+gtranslator_application_bar_update(gint pos)
 {
 	gchar 	*str, *status;
 	GtrMsg 	*msg;
 	GtrPo	*po;
 	const char *msgstr, *msgid_plural;
 	guint context_id;
+    
 	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context_id);
 
 	/*
@@ -539,7 +517,8 @@ void gtranslator_application_bar_update(gint pos)
  * Returns a buffer containing the selection contents having dots
  * properly replaced with spaces.
  */
-static GtkTextBuffer* get_selection_buffer(GtkTextBuffer *buffer)
+static GtkTextBuffer* 
+get_selection_buffer(GtkTextBuffer *buffer)
 {
 	gchar* result = NULL;
 	GtkTextIter start_iter;
@@ -575,7 +554,8 @@ static GtkTextBuffer* get_selection_buffer(GtkTextBuffer *buffer)
 /*
  * The text oriented callbacks
  */
-void gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless)
+void 
+gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless)
 {
 	GtkTextBuffer* buffer = NULL;
 	GtkTextBuffer* selection_buffer = NULL;
@@ -597,7 +577,8 @@ void gtranslator_clipboard_cut(GtkWidget  * widget, gpointer useless)
 		gtk_text_buffer_get_mark(buffer, "insert"));
 }
 
-void gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless)
+void 
+gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless)
 {
 	GtkTextBuffer* buffer = NULL;
 	GtkTextBuffer* selection_buffer = NULL;
@@ -615,7 +596,8 @@ void gtranslator_clipboard_copy(GtkWidget  * widget, gpointer useless)
 		gtk_text_buffer_get_mark(buffer, "insert"));
 }
 
-void gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless)
+void 
+gtranslator_clipboard_paste(GtkWidget  * widget, gpointer useless)
 {
 	GtkTextBuffer* buffer = NULL;
 
@@ -657,7 +639,8 @@ gtranslator_selection_set(GtkTextView *text_view, gint start, gint end)
 	gtk_text_buffer_move_mark_by_name(buffer, "selection_bound", &start_iter);
 }
 
-void gtranslator_selection_clear(GtkWidget *widget, gpointer useless)
+void 
+gtranslator_selection_clear(GtkWidget *widget, gpointer useless)
 {
 	GtkTextBuffer *buffer;
 
@@ -670,7 +653,8 @@ void gtranslator_selection_clear(GtkWidget *widget, gpointer useless)
  * Set po->file_changed to TRUE if the text in the translation box has been
  * updated.
  */
-void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
+void 
+gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 {
 	GtrMsg *msg = GTR_MSG(current_page->po->current->data);
 	if (nothing_changes)
@@ -682,14 +666,17 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		{
 			//Enable widgets
 			gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+		    	gtk_widget_set_sensitive(gtranslator_menuitems->t_save, TRUE);
 			gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
 			gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
+		    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, TRUE);
 		}
 		else
 		{
 			//Enable widgets
 			gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
 			gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
+		    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, TRUE);
 		}
 	}
 	if (!msg->changed)
@@ -697,6 +684,7 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 		msg->changed = TRUE;
 		//Enable undo item
 		gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
+	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, TRUE);
 		if ((GtrPreferences.unmark_fuzzy) 
 		     && (msg->is_fuzzy))
 		{
@@ -716,7 +704,8 @@ void gtranslator_translation_changed(GtkWidget  *buffer, gpointer useless)
 }
 
 #ifdef REDUNDANT
-void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
+void 
+selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 			   guint info, guint time_stamp, gpointer data)
 {
 	gchar *text;
@@ -736,7 +725,8 @@ void selection_get_handler(GtkWidget *widget, GtkSelectionData *selection_data,
 /*
  * When inserting text, exchange spaces with dot chars 
  */
-void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
+void 
+insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 			  const gchar *text,
 			  gint length, gpointer data)
 {
@@ -774,106 +764,12 @@ void insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 }
 #endif
 
-/*
- * Set up the widgets to display the given po file
- * This is not needed.
- */
-void gtranslator_gui_new_page(GtrPo *po)
-{
-	/*GtkWidget *comments_viewport;
-	GtkWidget *vertical_box;
-	GtkWidget *horizontal_box;
-	GtkWidget *comments_scrolled_window;
-	GtkWidget *original_text_scrolled_window;
-	GtkWidget *translation_text_scrolled_window;*/
-	
-	//#define GLADE_PAGE_PATH "../data/glade/tab.glade"
-	/*Variables*/
-	#define GLADE_CONTENT_PANE "content_pane"
-	#define GLADE_TABLE_PANE "table_pane"
-	#define GLADE_COMMENT "comment"
-	#define GLADE_EDIT_BUTTON "edit_button"
-	#define GLADE_TEXT_NOTEBOOK "text_notebook"
-	#define GLADE_TEXT_MSGID "text_msgid"
-	#define GLADE_TEXT_MSGID_PLURAL "text_msgid_plural"
-	#define GLADE_TRANS_NOTEBOOK "trans_notebook"
-	#define GLADE_TRANS_MSGSTR "trans_msgstr"
-	#define GLADE_TRANS_MSGSTR_PLURAL "trans_msgstr_plural"
-
-	
-	//g_return_val_if_fail(po!=NULL, NULL);
-
-	//current_page->glade = glade_xml_new(GLADE_PAGE_PATH, NULL, NULL);
-	g_printf("\n\n\nentra\n\n\n\n");
-	/*
-	 * Set up a document view structure to contain the widgets related
-	 * to this file
-	 */
-	current_page = g_new0(GtrPage, 1);
-	current_page->content_pane = glade_xml_get_widget(glade, GLADE_CONTENT_PANE);
-	current_page->table_pane = glade_xml_get_widget(glade, GLADE_TABLE_PANE);
-	
-	/*
-	 * Create the hpane that will hold the messages table and the current
-	 * message, even if messages table is suppressed, so it can be
-	 * dynamically switched on/off from a menu (rather than a preference
-	 * that requires a program restart! yuk!)
-	 */
-	/*table_pane_position=gtranslator_config_get_int("interface/table_pane_position");
-	gtk_paned_set_position(GTK_PANED(current_page->table_pane), table_pane_position);*/
-
-	//horizontal_box=gtk_hbox_new(FALSE, 1);
-
-	/*
-	 * Set up the scrolling window for the comments display
-	 */	
-	current_page->comment = glade_xml_get_widget(glade, GLADE_COMMENT);
-	
-	current_page->edit_button = glade_xml_get_widget(glade, GLADE_EDIT_BUTTON);
-	
-	gtk_paned_set_position(GTK_PANED(current_page->content_pane), 0);
-
-	/*
-	 * Pack the comments pane and the main content
-	 */
-	/*vertical_box=gtk_vbox_new(FALSE, 0);
-	gtk_paned_pack1(GTK_PANED(current_page->content_pane), horizontal_box, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(current_page->content_pane), vertical_box, FALSE, TRUE);*/
-	
-	/* Message string box is a vbox, containing one textview in most cases,
-	   or two in the case of a plural message */
-	current_page->text_notebook = glade_xml_get_widget(glade, GLADE_TEXT_NOTEBOOK);
-	current_page->text_msgid = glade_xml_get_widget(glade, GLADE_TEXT_MSGID);
-	current_page->text_msgid_plural = glade_xml_get_widget(glade, GLADE_TEXT_MSGID_PLURAL);
-
-	/* Translation box is a vbox, containing one textview in most cases,
-	   or more in the case of a plural message */
-	current_page->trans_notebook = glade_xml_get_widget(glade, GLADE_TRANS_NOTEBOOK);
-	current_page->trans_msgstr = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR);
-	current_page->trans_msgstr_plural = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR_PLURAL);
-
-	/*
-	 * Tie up callback for 'comments' button
-	 */
-	g_signal_connect(G_OBJECT(current_page->edit_button), "clicked",
-			 G_CALLBACK(gtranslator_edit_comment_dialog), NULL);
-
-	g_printf("\n\n\n\nhola");
-	/*
-	 * If required, set up the messages table
-	 */	
-	if(GtrPreferences.show_messages_table) {
-		gtranslator_page_show_messages_table(current_page);
-		//return current_page->table_pane;
-	}
-	
-	//return current_page->content_pane;
-}
 
 /*
  * Notebook callback used whenever the page is changed
  */
-void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *notebook_page, guint pagenum, gpointer user_data) {
+void 
+gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *notebook_page, guint pagenum, gpointer user_data) {
 	GList *pagelist;
 	GtrPage *page;
 	
@@ -897,14 +793,18 @@ void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *noteboo
 	if(current_page->po->file_changed) {
 		//Enable widgets
 		gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
+	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_save, TRUE);
 		gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
 		gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
+	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, TRUE);
 	}
 	else {
 		//Disable widgets
 		gtk_widget_set_sensitive(gtranslator_menuitems->save, FALSE);
+	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_save, FALSE);
 		gtk_widget_set_sensitive(gtranslator_menuitems->revert, FALSE);
 		gtk_widget_set_sensitive(gtranslator_menuitems->undo, FALSE);
+	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, FALSE);
 	}
 }
 

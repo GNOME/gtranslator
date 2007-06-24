@@ -35,10 +35,11 @@
 
 #include <libgen.h>
 
-//#define GLADE_PAGE_PATH "../data/glade/tab.glade"
 /*Variables*/
 #define GLADE_CONTENT_PANE "content_pane"
 #define GLADE_TABLE_PANE "table_pane"
+#define GLADE_NOTEBOOK_PANE "notebook_pane"
+#define GLADE_COMBOBOX_PANE "combobox_pane"
 #define GLADE_COMMENT "comment"
 #define GLADE_EDIT_BUTTON "edit_button"
 #define GLADE_TEXT_NOTEBOOK "text_notebook"
@@ -53,11 +54,6 @@
 #define GLADE_UNTRANSLATED "radiobutton_untranslated"
 
 /*
- * The currently active pages
- */
-//GList *pages;
-
-/*
  * The currently active page
  */
 GtrPage *current_page;
@@ -65,7 +61,8 @@ GtrPage *current_page;
 /*
  * Set up the widgets to display the given po file
  */
-void gtranslator_page_new(GtrPo *po)
+void 
+gtranslator_page_new(GtrPo *po)
 {
 	GtrPage *page;
 	
@@ -82,6 +79,7 @@ void gtranslator_page_new(GtrPo *po)
 	 */
 	page->content_pane = glade_xml_get_widget(glade, GLADE_CONTENT_PANE);
 	page->table_pane = glade_xml_get_widget(glade, GLADE_TABLE_PANE);
+    	page->combobox_pane = glade_xml_get_widget(glade, GLADE_COMBOBOX_PANE);
 	
 
 	/*
@@ -135,24 +133,63 @@ void gtranslator_page_new(GtrPo *po)
 	
 }
 
-void gtranslator_page_show_messages_table(GtrPage *page) {
-	GtkWidget *messages_table_scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+void 
+gtranslator_page_show_messages_table(GtrPage *page) 
+{
 
 	page->messages_table = gtranslator_messages_table_new();
 	gtranslator_messages_table_populate(page->messages_table, page->po->messages);
-
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(messages_table_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_container_add(GTK_CONTAINER(messages_table_scrolled_window), page->messages_table->widget);
-		
-	gtk_paned_pack1(GTK_PANED(page->table_pane), messages_table_scrolled_window, FALSE, TRUE);
-	gtk_paned_pack2(GTK_PANED(page->table_pane), page->content_pane, FALSE, TRUE);
 }
 
-void gtranslator_page_hide_messages_table(GtrPage *page) {
+/*void
+gtranslator_set_up_combobox(GtrPage *page)
+{
+	GtkWidget *combo;
+	GtkTreeIter iter;
+	GtkListStore* store;
+    	gchar data[]{
+		"Message table",
+		"Translation memories"
+	    }
+	
+	enum {
+		COLUMN_STRING,
+		N_COLUMNS
+	};
+	
+	
+	
+	combo = glade_xml_get_widget(glade, name);
+									  
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+		
+	for(i = 0; i < 2; i++)
+    {
+		gtk_list_store_append(store; &iter);
+		gtk_list_store_set(store,&iter,0,data[i],-1);
+    }
+    	
+									  
+	gtk_combo_box_set_model(GTK_COMBO_BOX(combo), GTK_TREE_MODEL(store));
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
+
+	if (value)
+		gtk_entry_set_text(GTK_ENTRY(GTK_BIN(combo)->child), value);
+	
+	g_signal_connect(GTK_ENTRY(GTK_BIN(combo)->child), "changed",
+			 G_CALLBACK(callback), user_data);
+	return combo;
+}*/
+
+void 
+gtranslator_page_hide_messages_table(GtrPage *page) 
+{
 	// FIXME
 }
 
-gboolean gtranslator_page_autosave(GtrPage *page) {
+gboolean 
+gtranslator_page_autosave(GtrPage *page) 
+{
 	gchar *filename;
 	gchar *autosave_filename;
 	GError *error = NULL;
@@ -177,15 +214,8 @@ gboolean gtranslator_page_autosave(GtrPage *page) {
 	g_free(autosave_filename);
 		
 	if(error != NULL) {
-		GtkWidget *dialog;
-		dialog = gtk_message_dialog_new(
-			GTK_WINDOW(gtranslator_application),
-			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_WARNING,
-			GTK_BUTTONS_OK,
-			_("Error autosaving file: %s"), error->message);
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
+		//Error message
+	    	gtranslator_show_message(_("Error autosaving file:"), error->message);
 		g_clear_error(&error);
 		return FALSE;
 	}
@@ -194,7 +224,9 @@ gboolean gtranslator_page_autosave(GtrPage *page) {
 
 }
 
-void gtranslator_page_dirty(GtkTextBuffer *textbuffer, gpointer user_data) {
+void
+gtranslator_page_dirty(GtkTextBuffer *textbuffer, gpointer user_data) 
+{
 	/* Unpack the page pointer */
 	GtrPage *page;
 

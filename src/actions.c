@@ -30,8 +30,7 @@
 #include "undo.h"
 
 #include <gtk/gtk.h>
-/*#include <libgnomeui/gnome-app.h>
-#include <libgnomeui/gnome-app-helper.h>*/
+
 
 typedef struct _GtrAction GtrAction;
 #define GTR_ACTION(x) ((GtrAction *)x)
@@ -273,4 +272,5 @@ void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
 	}
 
 	gtk_widget_set_sensitive(gtranslator_menuitems->undo, FALSE);
+    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, FALSE);
 }
