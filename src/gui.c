@@ -121,10 +121,6 @@ static void selection_get_handler(GtkWidget *widget,
 	guint time_stamp, gpointer data);
 #endif /* REDUNDANT */
 
-/*
- * Defined later
- */
-void gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *notebook_page, guint pagenum, gpointer user_data);
 
 /*
  * The target formats
@@ -217,7 +213,7 @@ gtranslator_create_main_window(void)
 	/*
 	 * Populate the 'Files/Recent' submenu
 	 */
-	//gtranslator_history_show();
+	gtranslator_history_show();
 
 	/*
 	 * Hook up the 'close window' callback.
@@ -759,49 +755,6 @@ insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 }
 #endif
 
-
-/*
- * Notebook callback used whenever the page is changed
- */
-void 
-gtranslator_gui_switch_page(GtkNotebook *notebook, GtkNotebookPage *notebook_page, guint pagenum, gpointer user_data) {
-	GList *pagelist;
-	GtrPage *page;
-	
-	/*
-	 * Set the 'current_page' global pointer, so the right widgets/files_added
-	 * get updated etc.
-	 */
-	/*pagelist = pages;
-	while(pagelist) {
-		page = (GtrPage*)pagelist->data;
-		if(page->num == pagenum) {
-			current_page = page;
-			break;
-		}
-		pagelist = pagelist->next;
-	}*/
-	
-	/*
-	 * Set 'save' and 'revert' etc.
-	 */
-	if(current_page->po->file_changed) {
-		//Enable widgets
-		gtk_widget_set_sensitive(gtranslator_menuitems->save, TRUE);
-	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_save, TRUE);
-		gtk_widget_set_sensitive(gtranslator_menuitems->revert, TRUE);
-		gtk_widget_set_sensitive(gtranslator_menuitems->undo, TRUE);
-	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, TRUE);
-	}
-	else {
-		//Disable widgets
-		gtk_widget_set_sensitive(gtranslator_menuitems->save, FALSE);
-	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_save, FALSE);
-		gtk_widget_set_sensitive(gtranslator_menuitems->revert, FALSE);
-		gtk_widget_set_sensitive(gtranslator_menuitems->undo, FALSE);
-	    	gtk_widget_set_sensitive(gtranslator_menuitems->t_undo, FALSE);
-	}
-}
 
 /*
  * Update the progress bar

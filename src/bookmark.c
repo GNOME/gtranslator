@@ -1,5 +1,6 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
+ * 			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,12 +26,17 @@
 #include "preferences.h"
 #include "utils.h"
 
-#include <libgnomeui/gnome-app-helper.h>
+//#include <libgnomeui/gnome-app-helper.h>
 
 /*
  * For the moment 10 bookmarks should be the upper limit.
  */
 #define MAX_BOOKMARKS 10
+
+/*
+ * Glade:
+ */
+#define GLADE_MENU_ITEM_BOOKMARKS "bookmarks"
 
 /*
  * The used GList for the GtrBookmark's -- a general way to handle with this
@@ -45,6 +51,13 @@ GList *gtranslator_bookmarks=NULL;
 void gtranslator_open_file_dialog_from_bookmark(GtkWidget *widget, gchar *filename);
 void free_userdata_bookmark(GtkWidget *widget, gpointer userdata);
 gchar *gtranslator_bookmark_escape(const gchar *str);
+
+
+/*
+ * Pushing and poping statusbar data
+ */
+guint push_statusbar_data(gchar *data);
+void pop_statusbar_data(guint context);
 
 /*
  * Create and return a GtrBookmark from the current position & po file -- 
@@ -518,17 +531,21 @@ void gtranslator_bookmark_show_list(void)
 {
 	static gint len = 0;
 	gint i;
-	GnomeUIInfo *menu;
 	GList *list, *onelist;
 	GtrBookmark *bookmark;
+	GtkWidget *bookmark_item, *item, *menu;
 	
-	gchar *menupath = _("_View/_Bookmarks/");
-
 	/*
-	 * Delete the old entries.
+	 * Delete the old entries and get menu item.
 	 */
-	gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), menupath, 0, len);
-
+	bookmark_item = glade_xml_get_widget(glade, GLADE_MENU_ITEM_BOOKMARKS);
+	gtk_menu_item_remove_submenu(GTK_MENU_ITEM(bookmark_item));
+	
+	/* 
+	 * Make a new submenu
+	 */
+	menu = gtk_menu_new();
+		
 	/*
 	 * Get the old history entries.
 	 */ 
@@ -546,38 +563,33 @@ void gtranslator_bookmark_show_list(void)
 		 */
 		bookmark=GTR_BOOKMARK(onelist->data);
 
-		menu=g_new0(GnomeUIInfo, 2);
-
 		/*
-		 * Set the label name.
+		 * Make a new menu item
 		 */
-		menu->label=g_strdup_printf("_%i: %s (%s, %i)", i--,
-			gtranslator_bookmark_escape(bookmark->file),
-			bookmark->version, bookmark->position);
+		item = gtk_menu_item_new_with_mnemonic(g_strdup_printf("_%i: %s (%s, %i)",
+								    i--,
+								    gtranslator_bookmark_escape(bookmark->file),
+								    bookmark->version, bookmark->position));
+		//Set signal
+		g_signal_connect (item, "activate",
+				  G_CALLBACK (gtranslator_open_file_dialog_from_bookmark),
+				  bookmark->file);
 		
-		/*
-		 * Set the GnomeUIInfo settings and labels.
-		 */
-		menu->type=GNOME_APP_UI_ITEM;
-		menu->hint=g_strdup_printf(_("Open %s (%s)"), bookmark->file, bookmark->comment);
-		menu->moreinfo=(gpointer)gtranslator_open_file_dialog_from_bookmark;
-		menu->user_data=bookmark->file;
-		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
-
-		/*
-		 * Insert this item into menu
-		 */
-		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
-		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
-
-		g_signal_connect(GTK_OBJECT(menu->widget), "destroy",
-				   GTK_SIGNAL_FUNC(free_userdata_bookmark), (gpointer) menu->hint);
-
-		/*
-		 * Free the string and the GnomeUIInfo structure.
-		 */
-		g_free(menu);
+		/*g_signal_connect (item, "select",
+				  G_CALLBACK (push_statusbar_data),
+				  g_strdup_printf(_("Open %s (%s)"), bookmark->file, bookmark->comment));
+		
+		g_signal_connect (item, "deselect",
+				  G_CALLBACK (pop_statusbar_data),
+				  NULL);*/
+		
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		
+		gtk_widget_show(item);
+		
 	}
+	// Set submenu
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(bookmark_item), menu);
 }
 
 void free_userdata_bookmark(GtkWidget *widget, gpointer userdata)
@@ -590,9 +602,9 @@ void gtranslator_open_file_dialog_from_bookmark(GtkWidget *widget, gchar *filena
 	GError *error;
 
 	if(!gtranslator_open(filename, &error)) {
-		if(error) {
-			gnome_app_warning(GNOME_APP(gtranslator_application),
-				error->message);
+		if(error)
+		{
+			gtranslator_show_message(error->message, NULL);
 			g_error_free(error);
 		}
 	}
@@ -671,4 +683,18 @@ void gtranslator_bookmark_free(GtrBookmark *bookmark)
 		g_free(bookmark->comment);
 		g_free(bookmark);
 	}
+}
+
+guint
+push_statusbar_data(gchar *data)
+{
+	guint context;
+	context = gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar), context, data);
+	return context;
+}
+
+void 
+pop_statusbar_data(guint context)
+{
+	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context);
 }

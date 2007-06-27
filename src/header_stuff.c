@@ -113,10 +113,10 @@ static void replace_substring(gchar **item, const gchar *bad, const gchar *good)
  */
 static GtkWidget*
 gtranslator_header_combo_new(GList *list, 
-								  const char *value,
-								  gchar *name, 
-								  GCallback callback,
-								  gpointer user_data)
+			     const char *value,
+			     gchar *name, 
+			     GCallback callback,
+			     gpointer user_data)
 {
 	GtkWidget *combo;
 	GtkTreeIter iter;

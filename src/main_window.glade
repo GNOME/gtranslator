@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Thu May 31 14:54:50 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Tue Jun 26 19:09:48 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -838,6 +838,9 @@
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                     <property name="label" translatable="yes">Original</property>
                                   </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                  </packing>
                                 </child>
                                 <child>
                                   <widget class="GtkEntry" id="entry1">
@@ -846,6 +849,7 @@
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                   </widget>
                                   <packing>
+                                    <property name="expand">False</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -866,6 +870,7 @@
                                     <property name="label" translatable="yes">Translated</property>
                                   </widget>
                                   <packing>
+                                    <property name="expand">False</property>
                                     <property name="position">3</property>
                                   </packing>
                                 </child>
@@ -876,6 +881,7 @@
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                   </widget>
                                   <packing>
+                                    <property name="expand">False</property>
                                     <property name="position">4</property>
                                   </packing>
                                 </child>
@@ -917,6 +923,28 @@
                             <property name="type">tab</property>
                           </packing>
                         </child>
+                        <child>
+                          <widget class="GtkVBox" id="gucharmap_box">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="position">2</property>
+                            <property name="tab_expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
+                          <packing>
+                            <property name="type">tab</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
                         <property name="position">1</property>
@@ -925,6 +953,7 @@
                   </widget>
                   <packing>
                     <property name="resize">False</property>
+                    <property name="shrink">True</property>
                   </packing>
                 </child>
                 <child>
@@ -936,6 +965,7 @@
                         <child>
                           <widget class="GtkScrolledWindow" id="scrolledwindow1">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                             <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                             <child>
@@ -959,6 +989,7 @@
                             <property name="visible">True</property>
                             <property name="tooltip" translatable="yes">Edit current comment</property>
                             <property name="label" translatable="yes">Edit comment</property>
+                            <property name="response_id">0</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -969,6 +1000,7 @@
                       </widget>
                       <packing>
                         <property name="resize">False</property>
+                        <property name="shrink">True</property>
                       </packing>
                     </child>
                     <child>
@@ -981,6 +1013,7 @@
                             <child>
                               <widget class="GtkScrolledWindow" id="scrolledwindow2">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                                 <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                                 <child>
@@ -1042,6 +1075,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Translated</property>
+                                <property name="response_id">0</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                               </widget>
@@ -1055,6 +1089,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Fuzzy</property>
+                                <property name="response_id">0</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">radiobutton_translated</property>
@@ -1070,6 +1105,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Untranslated</property>
+                                <property name="response_id">0</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">radiobutton_translated</property>
@@ -1093,6 +1129,7 @@
                             <child>
                               <widget class="GtkScrolledWindow" id="scrolledwindow3">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                                 <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                                 <child>
@@ -1147,8 +1184,16 @@
                           </packing>
                         </child>
                       </widget>
+                      <packing>
+                        <property name="resize">True</property>
+                        <property name="shrink">True</property>
+                      </packing>
                     </child>
                   </widget>
+                  <packing>
+                    <property name="resize">True</property>
+                    <property name="shrink">True</property>
+                  </packing>
                 </child>
               </widget>
             </child>
@@ -1168,6 +1213,7 @@
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="relief">GTK_RELIEF_NONE</property>
+                <property name="response_id">0</property>
                 <child>
                   <widget class="GtkImage" id="image1">
                     <property name="visible">True</property>
@@ -1208,9 +1254,10 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label" translatable="no">gtk-go-forward</property>
+                <property name="label">gtk-go-forward</property>
                 <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="use_stock">True</property>
+                <property name="response_id">0</property>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -1223,9 +1270,10 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label" translatable="no">gtk-go-back</property>
+                <property name="label">gtk-go-back</property>
                 <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="use_stock">True</property>
+                <property name="response_id">0</property>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -1238,6 +1286,7 @@
                 <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="label" translatable="yes">Case sensitive</property>
+                <property name="response_id">0</property>
                 <property name="draw_indicator">True</property>
               </widget>
               <packing>

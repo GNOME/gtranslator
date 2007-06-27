@@ -184,20 +184,20 @@ void gtranslator_history_show(void)
 	 */
 	static gint len = 0;
 	gint i;
-	GnomeUIInfo *menu;
+	//GnomeUIInfo *menu;
 	GList *list, *onelist;
 	GtrHistoryEntry *entry;
-	//GtkWidget *menu;
+	GtkWidget *menu, *item_files, *item;
 	
 	gchar *menupath = _("_File/Recen_t files/");
 
 	/*
 	 * Delete the old entries.
 	 */
-	gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), menupath, 0, len);
-	/*menu = glade_xml_get_widget(glade, GLADE_MENU_ITEM_RECENT_FILES);
-	gtk_menu_item_remove_submenu(GTK_MENU_ITEM(menu));*/
-	
+	//gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), menupath, 0, len);
+	//item_files = glade_xml_get_widget(glade, GLADE_MENU_ITEM_RECENT_FILES);
+	//gtk_menu_item_remove_submenu(GTK_MENU_ITEM(menu));*/
+	//menu = gtk_menu_new();
 
 	/*
 	 * Get the old history entries.
@@ -216,38 +216,44 @@ void gtranslator_history_show(void)
 		 */
 		entry=GTR_HISTORY_ENTRY(onelist->data);
 
-		menu=g_new0(GnomeUIInfo, 2);
+		//menu=g_new0(GnomeUIInfo, 2);
 
 		/*
 		 * Set the label name.
 		 */
-		menu->label=g_strdup_printf("_%i: %s -- %s", i--,
+		/*menu->label=g_strdup_printf("_%i: %s -- %s", i--,
 			gtranslator_history_escape(entry->project_id),
-			gtranslator_history_escape(g_path_get_basename(entry->filename)));
+			gtranslator_history_escape(g_path_get_basename(entry->filename)));*/
 	
 		/*
 		 * Set the GnomeUIInfo settings and labels.
 		 */
-		menu->type=GNOME_APP_UI_ITEM;
+		/*menu->type=GNOME_APP_UI_ITEM;
 		menu->hint=g_strdup_printf(_("Open %s"), entry->filename);
 		menu->moreinfo=(gpointer)gtranslator_open_file_dialog_from_history;
 		menu->user_data=entry->filename;
-		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
+		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;*/
+		
+		/*item = gtk_menu_item_new_with_label(g_strdup_printf(_("Open %s"), entry->filename));
+		
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);*/
 
 		/*
 		 * Insert this item into menu
 		 */
-		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
-		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
+		//gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
+		//gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
 
-		g_signal_connect(GTK_OBJECT(menu->widget), "destroy",
-				   GTK_SIGNAL_FUNC(free_userdata), (gpointer) menu->hint);
+		/*g_signal_connect(GTK_OBJECT(menu->widget), "destroy",
+				   GTK_SIGNAL_FUNC(free_userdata), (gpointer) menu->hint);*/
 
 		/*
 		 * Free the string and the GnomeUIInfo structure.
 		 */
-		g_free(menu);
+		//g_free(menu);
 	}
+	/*gtk_menu_item_set_submenu(GTK_MENU_ITEM(item_files), menu);
+	gtk_widget_show(item);*/
 }
 
 void free_userdata(GtkWidget *widget, gpointer userdata)
