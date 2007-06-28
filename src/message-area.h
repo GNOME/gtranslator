@@ -1,4 +1,4 @@
-/* Eye Of Gnome - Message Area 
+/* Gtranslator - Message Area 
  *
  * Copyright (C) 2007 The Free Software Foundation
  *
