@@ -242,9 +242,6 @@ void gtranslator_history_show(void)
 		
 		gtk_widget_show(item);
 
-		/*g_signal_connect(GTK_OBJECT(menu->widget), "destroy",
-				   GTK_SIGNAL_FUNC(free_userdata), (gpointer) menu->hint);*/
-
 	}
 	// Set menu to recent_files item
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item_files), menu);

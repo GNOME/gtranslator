@@ -276,10 +276,10 @@ gtranslator_preferences_pack_set_up_with_label(GtkWidget *widget,
 //This could be useful to use it in header_stuff.c
 static GtkWidget*
 gtranslator_preferences_combo_new(GList *list, 
-								  const char *value,
-								  gchar *name, 
-								  GCallback callback,
-								  gpointer user_data)
+				  const char *value,
+				  gchar *name, 
+				  GCallback callback,
+				  gpointer user_data)
 {
 	GtkWidget *combo;
 	GtkTreeIter iter;
@@ -343,8 +343,8 @@ gtranslator_preferences_hotkey_char_widget_new()
  */
 static GtkWidget*
 gtranslator_preferences_entry_new(const char *value,
-								  gchar *name, 
-								  GCallback callback)
+				  gchar *name, 
+				  GCallback callback)
 {
 	GtkWidget *entry;
 
@@ -361,8 +361,8 @@ gtranslator_preferences_entry_new(const char *value,
  */
 static GtkWidget *
 gtranslator_preferences_toggle_new(gchar *name,
-								   gboolean value,
-								   GCallback callback)
+				   gboolean value,
+				   GCallback callback)
 {
 	GtkWidget *toggle;
 	toggle = glade_xml_get_widget(glade_prefs, name);
@@ -381,8 +381,8 @@ gtranslator_preferences_toggle_new(gchar *name,
  */
 static GtkWidget *
 gtranslator_preferences_font_picker_new(const gchar *name,
-										const gchar *fontspec,
-										GCallback callback)
+					const gchar *fontspec,
+					GCallback callback)
 {
 	GtkWidget *font_selector = NULL;
 
@@ -405,14 +405,13 @@ GtkTreePath* prev_path = NULL;
 
 void
 gtranslator_control_table_node_expanded(GtkTreeView *treeview,
-                                            GtkTreeIter *arg1,
-                                            GtkTreePath *new_path,
-                                            gpointer selection)
+					GtkTreeIter *arg1,
+					GtkTreePath *new_path,
+					gpointer selection)
 {	
 	if (prev_path != NULL) {
 		if(gtk_tree_path_get_depth(prev_path) > 1)
 			gtk_tree_path_up(prev_path);
-		gtk_tree_view_collapse_row(treeview,prev_path);
 	}
 	gtk_tree_path_down(new_path);
 	gtk_tree_selection_select_path(selection,new_path);
@@ -420,47 +419,50 @@ gtranslator_control_table_node_expanded(GtkTreeView *treeview,
 
 static void 
 gtranslator_control_table_selection_changed(GtkTreeSelection *selection,
-					     gpointer data)
+					    gpointer data)
 {
-  GtkTreePath *new_path, *new_path_parent = gtk_tree_path_new();
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gint page;
-  GtkTreeView *view;
+	GtkTreePath *new_path, *new_path_parent = gtk_tree_path_new();
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	gint page;
+	GtkTreeView *view;
   
-  view = gtk_tree_selection_get_tree_view(selection);
+	view = gtk_tree_selection_get_tree_view(selection);
   
-  if (gtk_tree_selection_get_selected(selection, &model, &iter) == TRUE) {
-    gtk_tree_model_get(model, &iter, PAGENUM_COLUMN, &page, -1);
+	if (gtk_tree_selection_get_selected(selection, &model, &iter) == TRUE)
+	{
+    		gtk_tree_model_get(model, &iter, PAGENUM_COLUMN, &page, -1);
 	
-	/*compare old & new selected path*/
-	new_path = gtk_tree_model_get_path(model, &iter);
-    new_path_parent = gtk_tree_path_copy(new_path);
+		/*compare old & new selected path*/
+		new_path = gtk_tree_model_get_path(model, &iter);
+    		new_path_parent = gtk_tree_path_copy(new_path);
 	
-	if(prev_path != NULL){		
-		if(gtk_tree_path_get_depth(prev_path) > 1)
-			gtk_tree_path_up(prev_path);
-		if(gtk_tree_path_get_depth(new_path) > 1)
-			gtk_tree_path_up(new_path_parent);
+		if(prev_path != NULL)
+		{		
+			if(gtk_tree_path_get_depth(prev_path) > 1)
+				gtk_tree_path_up(prev_path);
+			if(gtk_tree_path_get_depth(new_path) > 1)
+				gtk_tree_path_up(new_path_parent);
 			
-	/*collapse old node*/
-		if(gtk_tree_path_compare(prev_path,new_path_parent) !=0)
-			gtk_tree_view_collapse_row(view,prev_path);		
-	}
-	/*expand new node*/
-	gtk_tree_view_expand_to_path(view,new_path);
+		/*collapse old node*/
+			if(gtk_tree_path_compare(prev_path,new_path_parent) !=0)
+				gtk_tree_view_collapse_row(view,prev_path);
+		}
+		/*expand new node*/
+		gtk_tree_view_expand_to_path(view,new_path);
 	
-	/*show new page*/
-	if(page !=-1){  
-	  gtk_notebook_set_current_page(GTK_NOTEBOOK(prefs_notebook),page);
-	} else { 
-	  gtk_tree_path_down(new_path);
-	  gtk_tree_selection_select_path(selection,new_path);	  
+		/*show new page*/
+		if(page !=-1)
+		{  
+	  		gtk_notebook_set_current_page(GTK_NOTEBOOK(prefs_notebook),page);
+		} else { 
+	  		gtk_tree_path_down(new_path);
+	  		gtk_tree_selection_select_path(selection,new_path);	  
+		}
+		prev_path = gtk_tree_path_copy(new_path);
+		gtk_tree_path_free(new_path);
+		gtk_tree_path_free(new_path_parent);
 	}
-	prev_path = gtk_tree_path_copy(new_path);
-	gtk_tree_path_free(new_path);
-	gtk_tree_path_free(new_path_parent);
-  }
 
 }
 
@@ -867,13 +869,13 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	
 	//authors_name entry
 	authors_name = gtranslator_preferences_entry_new(name, 
-													 GLADE_AUTHORS_NAME, 
-													 G_CALLBACK(gtranslator_preferences_dialog_changed));
+							 GLADE_AUTHORS_NAME, 
+							 G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 	//authors_email entry
 	authors_email = gtranslator_preferences_entry_new(email,
-													  GLADE_AUTHORS_EMAIL,
-													  G_CALLBACK(gtranslator_preferences_dialog_changed));
+							  GLADE_AUTHORS_EMAIL,
+							  G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 /*#ifdef GTR_ABOUT_ME
 	gtk_widget_set_sensitive(personal_info_box, 
