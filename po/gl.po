@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-10 13:29+0200\n"
-"PO-Revision-Date: 2007-06-10 13:30+0200\n"
+"POT-Creation-Date: 2007-06-28 17:26+0200\n"
+"PO-Revision-Date: 2007-06-28 17:27+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@cvs.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -89,15 +89,6 @@ msgid "translator-credits"
 msgstr ""
 "Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
 "Proxecto Trisquel - http://trisquel.uvigo.es"
-
-#: ../src/bookmark.c:525
-msgid "_View/_Bookmarks/"
-msgstr "_Ver/_Marcadores/"
-
-#: ../src/bookmark.c:562
-#, c-format
-msgid "Open %s (%s)"
-msgstr "Abrir %s (%s)"
 
 #: ../src/color-schemes.c:195
 #, c-format
@@ -224,7 +215,7 @@ msgstr "Comentarios"
 msgid "English"
 msgstr "Inglés"
 
-#: ../src/dialogs.c:735 ../src/dialogs.c:865 ../src/messages-table.c:230
+#: ../src/dialogs.c:735 ../src/dialogs.c:865 ../src/messages-table.c:234
 msgid "Translation"
 msgstr "Tradución"
 
@@ -395,50 +386,50 @@ msgstr ""
 "Non foi posible atopar\n"
 "\"%s\""
 
-#: ../src/gui.c:470
+#: ../src/gui.c:439
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ Queda %i dubidosa ]"
 msgstr[1] "%s [ Quedan %i dubidosas ]"
 
-#: ../src/gui.c:470 ../src/gui.c:474 ../src/main_window.glade.h:10
-#: ../src/messages-table.c:260
+#: ../src/gui.c:439 ../src/gui.c:443 ../src/main_window.glade.h:10
+#: ../src/messages-table.c:264
 msgid "Fuzzy"
 msgstr "Dubidosa"
 
-#: ../src/gui.c:474
+#: ../src/gui.c:443
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Non quedan dubidosas ]"
 
-#: ../src/gui.c:483 ../src/main_window.glade.h:28 ../src/messages-table.c:268
+#: ../src/gui.c:452 ../src/main_window.glade.h:28 ../src/messages-table.c:272
 msgid "Translated"
 msgstr "Traducida"
 
-#: ../src/gui.c:491
+#: ../src/gui.c:460
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ Queda %i sen traducir ]"
 msgstr[1] "%s [ Quedan %i sen traducir ]"
 
-#: ../src/gui.c:491 ../src/gui.c:493 ../src/main_window.glade.h:30
-#: ../src/messages-table.c:252
+#: ../src/gui.c:460 ../src/gui.c:462 ../src/main_window.glade.h:30
+#: ../src/messages-table.c:256
 msgid "Untranslated"
 msgstr "Sen Traducir"
 
-#: ../src/gui.c:493
+#: ../src/gui.c:462
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Non quedan mensaxes sen traducir ]"
 
-#: ../src/gui.c:513
+#: ../src/gui.c:482
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Mensaxe %d / %d / Estado: %s (A mensaxe contén formas plurais)"
 
-#: ../src/gui.c:517
+#: ../src/gui.c:486
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Mensaxe %d / %d / Estado: %s"
@@ -514,16 +505,6 @@ msgstr "gtranslator -- editar cabeceira"
 #: ../src/header_stuff.c:495
 msgid "No header for this file/domain"
 msgstr "Sen cabeceira para este ficheiro/dominio"
-
-#. GtkWidget *menu;
-#: ../src/history.c:192
-msgid "_File/Recen_t files/"
-msgstr "_Ficheiro/Ficheiros _Recentes/"
-
-#: ../src/history.c:232
-#, c-format
-msgid "Open %s"
-msgstr "Abrir %s"
 
 #: ../src/languages.c:38
 msgid "Afrikaans"
@@ -924,7 +905,7 @@ msgstr "Abrir un ficheiro"
 msgid "Open from _URI..."
 msgstr "Abrir desde _URI..."
 
-#: ../src/main_window.glade.h:17 ../src/messages-table.c:218
+#: ../src/main_window.glade.h:17 ../src/messages-table.c:222
 msgid "Original"
 msgstr "Orixinal"
 
@@ -1024,24 +1005,26 @@ msgstr "_Ver"
 msgid "gtranslator _website"
 msgstr "páxina _web do gtranslator"
 
-#: ../src/message.c:93
+#: ../src/message.c:95
 msgid "Couldn't get the message!"
 msgstr "Non foi posible obter a mensaxe!"
 
-#: ../src/message.c:120
+#. Message dialog
+#: ../src/message.c:118
 msgid "There are no fuzzy messages left."
 msgstr "Non hai máis mensaxes dubidosas."
 
-#: ../src/message.c:152
+#. Message dialog
+#: ../src/message.c:145
 msgid "All messages seem to be translated."
 msgstr "Seica están traducidas tódalas mensaxes."
 
-#: ../src/message.c:301
+#: ../src/message.c:293
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "erro de gtkspell: %s\n"
 
-#: ../src/message.c:302
+#: ../src/message.c:294
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1050,10 +1033,10 @@ msgstr ""
 "GtkSpell non foi capaz de inicializarse\n"
 " %s"
 
-#: ../src/page.c:186
-#, c-format
-msgid "Error autosaving file: %s"
-msgstr "Erro autogardando o ficheiro: %s"
+#. Error message
+#: ../src/page.c:218
+msgid "Error autosaving file:"
+msgstr "Erro autogardando o ficheiro:"
 
 #: ../src/parse.c:88
 msgid "Parser output"
