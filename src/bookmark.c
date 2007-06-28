@@ -26,8 +26,6 @@
 #include "preferences.h"
 #include "utils.h"
 
-//#include <libgnomeui/gnome-app-helper.h>
-
 /*
  * For the moment 10 bookmarks should be the upper limit.
  */
@@ -536,10 +534,9 @@ void gtranslator_bookmark_show_list(void)
 	GtkWidget *bookmark_item, *item, *menu;
 	
 	/*
-	 * Delete the old entries and get menu item.
+	 * Get menu item.
 	 */
 	bookmark_item = glade_xml_get_widget(glade, GLADE_MENU_ITEM_BOOKMARKS);
-	gtk_menu_item_remove_submenu(GTK_MENU_ITEM(bookmark_item));
 	
 	/* 
 	 * Make a new submenu

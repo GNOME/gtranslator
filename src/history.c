@@ -171,7 +171,7 @@ GList *gtranslator_history_get(void)
 	return hl;
 }
 
-#define GLADE_MENU_ITEM_RECENT_FILES "menuitem_recent_files"
+#define GLADE_MENU_ITEM_RECENT_FILES "recent_files"
 /*
  * The recent menus stuff. TODO: steal the code that works from the standard
  * GNOME2 '~/.recently-used' file (libegg/egg-recent-*.[ch]).
@@ -184,20 +184,16 @@ void gtranslator_history_show(void)
 	 */
 	static gint len = 0;
 	gint i;
-	//GnomeUIInfo *menu;
 	GList *list, *onelist;
 	GtrHistoryEntry *entry;
 	GtkWidget *menu, *item_files, *item;
-	
-	gchar *menupath = _("_File/Recen_t files/");
 
 	/*
-	 * Delete the old entries.
+	 * Get glade GtkMenuItem
 	 */
-	//gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), menupath, 0, len);
-	//item_files = glade_xml_get_widget(glade, GLADE_MENU_ITEM_RECENT_FILES);
-	//gtk_menu_item_remove_submenu(GTK_MENU_ITEM(menu));*/
-	//menu = gtk_menu_new();
+	item_files = glade_xml_get_widget(glade, GLADE_MENU_ITEM_RECENT_FILES);
+	
+	menu = gtk_menu_new();
 
 	/*
 	 * Get the old history entries.
@@ -215,15 +211,6 @@ void gtranslator_history_show(void)
 		 * Get the history entry.
 		 */
 		entry=GTR_HISTORY_ENTRY(onelist->data);
-
-		//menu=g_new0(GnomeUIInfo, 2);
-
-		/*
-		 * Set the label name.
-		 */
-		/*menu->label=g_strdup_printf("_%i: %s -- %s", i--,
-			gtranslator_history_escape(entry->project_id),
-			gtranslator_history_escape(g_path_get_basename(entry->filename)));*/
 	
 		/*
 		 * Set the GnomeUIInfo settings and labels.
@@ -234,26 +221,33 @@ void gtranslator_history_show(void)
 		menu->user_data=entry->filename;
 		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;*/
 		
-		/*item = gtk_menu_item_new_with_label(g_strdup_printf(_("Open %s"), entry->filename));
-		
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);*/
-
 		/*
-		 * Insert this item into menu
+		 * Make the new item
 		 */
-		//gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
-		//gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
+		item = gtk_menu_item_new_with_mnemonic(g_strdup_printf("_%i: %s -- %s", i--,
+			gtranslator_history_escape(entry->project_id),
+			gtranslator_history_escape(g_path_get_basename(entry->filename))));
+		
+		//Set signal
+		g_signal_connect (item, "activate",
+				  G_CALLBACK (gtranslator_open_file_dialog_from_history),
+				  entry->filename);
+		
+		/*
+		 * TODO: with "select" and "deselect" signals make push and pop 
+		 * on statusbar
+		 */
+		
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		
+		gtk_widget_show(item);
 
 		/*g_signal_connect(GTK_OBJECT(menu->widget), "destroy",
 				   GTK_SIGNAL_FUNC(free_userdata), (gpointer) menu->hint);*/
 
-		/*
-		 * Free the string and the GnomeUIInfo structure.
-		 */
-		//g_free(menu);
 	}
-	/*gtk_menu_item_set_submenu(GTK_MENU_ITEM(item_files), menu);
-	gtk_widget_show(item);*/
+	// Set menu to recent_files item
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item_files), menu);
 }
 
 void free_userdata(GtkWidget *widget, gpointer userdata)
