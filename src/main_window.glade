@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Tue Jun 26 19:09:48 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Fri Jun 29 14:24:35 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -19,95 +19,6 @@
                 <child>
                   <widget class="GtkMenu" id="menu1">
                     <property name="visible">True</property>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="compile">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Compile</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_compile_activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="menu-item-image1">
-                            <property name="visible">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="stock">gtk-convert</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="refresh">
-                        <property name="visible">True</property>
-                        <property name="label">gtk-refresh</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="on_refresh_activate"/>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem4">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="add_bookmark">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Add bookmark</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_add_bookmark_activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="menu-item-image2">
-                            <property name="visible">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="stock">gtk-add</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem5">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="autotranslate">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Aut_otranslate...</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_autotranslate_activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="menu-item-image3">
-                            <property name="visible">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="pixbuf">auto_translation.xpm</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem6">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkImageMenuItem" id="remove_translations">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Remove all translations...</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_remove_translations_activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="menu-item-image4">
-                            <property name="visible">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="stock">gtk-delete</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem7">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="open">
                         <property name="visible">True</property>
@@ -130,6 +41,19 @@
                             <property name="stock">gtk-open</property>
                           </widget>
                         </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkMenuItem" id="recent_files">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Recen_t files</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_recent_files_activate"/>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem8">
+                        <property name="visible">True</property>
                       </widget>
                     </child>
                     <child>
@@ -166,30 +90,17 @@
                       </widget>
                     </child>
                     <child>
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem1">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
                       <widget class="GtkImageMenuItem" id="close">
                         <property name="visible">True</property>
                         <property name="label">gtk-close</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <signal name="activate" handler="on_close_activate"/>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem8">
-                        <property name="visible">True</property>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkMenuItem" id="recent_files">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Recen_t files</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_recent_files_activate"/>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem1">
-                        <property name="visible">True</property>
                       </widget>
                     </child>
                     <child>
@@ -386,6 +297,104 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <signal name="activate" handler="on_preferences_activate"/>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkMenuItem" id="actions">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label" translatable="yes">_Actions</property>
+                <property name="use_underline">True</property>
+                <child>
+                  <widget class="GtkMenu" id="menu5">
+                    <property name="visible">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="compile">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">_Compile</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_compile_activate"/>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image1">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="stock">gtk-convert</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="refresh">
+                        <property name="visible">True</property>
+                        <property name="label">gtk-refresh</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_refresh_activate"/>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem4">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="add_bookmark">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">_Add bookmark</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_add_bookmark_activate"/>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image2">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="stock">gtk-add</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem5">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="autotranslate">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Aut_otranslate...</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_autotranslate_activate"/>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image3">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="pixbuf">auto_translation.xpm</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem6">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="remove_translations">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Remove all translations...</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_remove_translations_activate"/>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image4">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="stock">gtk-delete</property>
+                          </widget>
+                        </child>
                       </widget>
                     </child>
                   </widget>

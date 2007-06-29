@@ -59,6 +59,8 @@ struct {
 	guint dot_char			: 1;
 	guint check_recent_file		: 1;
 	guint use_own_fonts		: 1;
+	guint use_own_colors		: 1;
+	guint scheme			: 1;
 	guint instant_spell_check	: 1;
 	guint keep_obsolete		: 1;
 	guint sweep_compile_file	: 1;

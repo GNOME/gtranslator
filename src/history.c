@@ -32,8 +32,6 @@
 
 #include <string.h>
 #include <gtk/gtkmenushell.h>
-#include <libgnomeui/gnome-app.h>
-#include <libgnomeui/gnome-app-helper.h>
 
 /*
  * From list remove all entries with same filename as entry->filename
