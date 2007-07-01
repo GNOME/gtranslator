@@ -127,10 +127,9 @@ free_messages_table_colors()
  */
 
 void 
-gtranslator_tree_size_allocate( 
-		GtkTreeView *widget, 
-		GtkAllocation *allocation, 
-		gpointer data )
+gtranslator_tree_size_allocate(GtkTreeView *widget, 
+			       GtkAllocation *allocation, 
+			       gpointer data )
 {
 	/*
 	 * Here we will change the column widths so that the message table will look nice.
@@ -152,7 +151,8 @@ gtranslator_tree_size_allocate(
  * Callback for when Select message based on the GtkTreeSelection chosen
  */
 static void 
-gtranslator_messages_table_selection_changed(GtkTreeSelection *selection, gpointer data)
+gtranslator_messages_table_selection_changed(GtkTreeSelection *selection,
+					     gpointer data)
 {
   GtkTreeIter iter;
   GtkTreeModel* model;
@@ -290,7 +290,8 @@ gtranslator_messages_table_new()
  * Populate a messages table from a given po
  */
 void 
-gtranslator_messages_table_populate(GtrMessagesTable *table, GList *messages)
+gtranslator_messages_table_populate(GtrMessagesTable *table, 
+				    GList *messages)
 {
 	GtrMsg *msg;
 	const char *msgid, *msgstr;
@@ -374,7 +375,8 @@ gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *msg)
  * Select given message
  */
 void 
-gtranslator_messages_table_select_row(GtrMessagesTable *table, GtrMsg *msg)
+gtranslator_messages_table_select_row(GtrMessagesTable *table, 
+				      GtrMsg *msg)
 {
 	GtkTreeSelection *selection=NULL;
 
@@ -388,7 +390,8 @@ gtranslator_messages_table_select_row(GtrMessagesTable *table, GtrMsg *msg)
  * Finish with messages table
  */
 void 
-gtranslator_message_table_free(GtrMessagesTable *table) {
+gtranslator_message_table_free(GtrMessagesTable *table) 
+{
 	gtk_widget_destroy(table->widget);
 	gtk_object_destroy(GTK_OBJECT(table->widget));
 	free_messages_table_colors();
