@@ -570,31 +570,54 @@ Your file should likely be named '%s.po'."),
 }
 
 /*
+ * A callback for Overwrite in Save as
+ */
+void gtranslator_overwrite_file(GtkWidget * widget, gpointer data)
+{
+	GError *error;
+	gtranslator_save_file(current_page->po,current_page->po->filename, &error);
+	/*
+	 * TODO: Should close the file and open the new saved file
+	 */
+	//gtranslator_open_file(current_page->po->filename);
+}
+
+/*
  * A callback for OK in Save as... dialog 
  */
 void 
-gtranslator_save_file_dialog(GtkWidget *dialog)
+gtranslator_save_file_dialog(GtkWidget *widget)
 {
-	gchar *po_file;
-	GError *error = NULL;
-	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
-	if (!gtranslator_save_file(current_page->po, po_file, &error)) {
-		GtkWidget *dialog;
-		g_assert(error != NULL);
-		dialog = gtk_message_dialog_new(
-			GTK_WINDOW(gtranslator_application),
-			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_WARNING,
-			GTK_BUTTONS_OK,
-			error->message);
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
-		g_clear_error(&error);
-		return;
+	gchar *po_file,
+	      *po_file_normalized;
+ 	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(widget)));
+	po_file_normalized = g_utf8_normalize( po_file, -1, G_NORMALIZE_DEFAULT_COMPOSE);
+	g_free(po_file);
+	po_file = po_file_normalized;
+
+	if (g_file_test(po_file, G_FILE_TEST_EXISTS))
+	{
+		current_page->po->filename = g_strdup(po_file);
+		
+		GtkWidget *dialog, *button, *button1;
+	
+		dialog = gtk_message_dialog_new (NULL,
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_QUESTION,
+						 GTK_BUTTONS_CANCEL,
+						 _("The file '%s' already exists. Do you want overwrite it?"),
+						 po_file);
+		
+		button = gtk_dialog_add_button (GTK_DIALOG (dialog), "Overwrite", 1);
+		
+		g_signal_connect (G_OBJECT (button), "clicked",
+			G_CALLBACK (gtranslator_overwrite_file), NULL);
+		
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 	}
-	g_free(current_page->po->filename);
-	current_page->po->filename = g_strdup(po_file);
-	gtk_widget_destroy(GTK_WIDGET(dialog));
+	g_free(po_file);
+	gtk_widget_destroy(GTK_WIDGET(widget));
 }
 
 /*
