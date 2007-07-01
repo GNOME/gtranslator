@@ -77,7 +77,7 @@ gtranslator_menuitems_set_up()
 	this->search_next = glade_xml_get_widget(glade, "search_next");
 	this->replace = glade_xml_get_widget(glade, "replace");
 	this->header = glade_xml_get_widget(glade, "header");
-	this->comment = glade_xml_get_widget(glade, "comment");
+	this->comment = glade_xml_get_widget(glade, "comment_item");
 	this->copy_message = glade_xml_get_widget(glade, "copy_message");
 	this->fuzzy = glade_xml_get_widget(glade, "fuzzy");
 	this->preferences = glade_xml_get_widget(glade, "preferences");
