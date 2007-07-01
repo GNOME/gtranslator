@@ -780,7 +780,8 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 	else
 	{
 		GtkWidget	*entry=NULL;
-		gchar 		*find_text;
+		gchar 		*find_text,
+				*find_text_normalized;
 
 		entry=gnome_entry_gtk_entry(GNOME_ENTRY(findy));
 
@@ -795,6 +796,10 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 			g_free(find_text);
 			find_text=newstr;
 		}
+
+		find_text_normalized = g_utf8_normalize(find_text, -1, G_NORMALIZE_DEFAULT_COMPOSE);
+		g_free(find_text);
+		find_text = find_text_normalized;
 
 		GtrPreferences.fi_comments=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_comments));
 		GtrPreferences.fi_english=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(fi_english));
@@ -897,7 +902,7 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 	}
 	else
 	{
-		gchar *findme, *replaceme;
+		gchar *findme, *replaceme, *findme_normalized, *replaceme_normalized;
 		GtrReplace *rpl;
 
 		GtrPreferences.ri_comments=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(ri_comments));
@@ -910,10 +915,18 @@ void gtranslator_replace_dialog(GtkWidget *widget, gpointer useless)
 		
 		findme=gtk_editable_get_chars(GTK_EDITABLE(
 			gnome_entry_gtk_entry(GNOME_ENTRY(findy))), 0, -1);
-
+		
+		findme_normalized = g_utf8_normalize(findme, -1, G_NORMALIZE_DEFAULT_COMPOSE);
+		g_free(findme);
+		findme = findme_normalized; 
+		
 		replaceme=gtk_editable_get_chars(GTK_EDITABLE(
 			gnome_entry_gtk_entry(GNOME_ENTRY(replacy))), 0, -1);
 
+		replaceme_normalized = g_utf8_normalize(replaceme, -1, G_NORMALIZE_DEFAULT_COMPOSE);
+		g_free(replaceme);
+		replaceme = replaceme_normalized;
+		
 		if(!findme || strlen(findme)<=0)
 		{
 			GtkWidget *message_dlg;
