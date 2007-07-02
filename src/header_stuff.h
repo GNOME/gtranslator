@@ -49,6 +49,13 @@ typedef struct {
 	 *  nerves, I'm adding this to our supported tags.
 	 */
 	gchar *generator; 
+	
+	/*
+	 * This atribute is used to save the headers that other
+	 * translation aplications can write.
+	 */
+	gchar *other;
+	
 } GtrHeader;
 
 #define GTR_HEADER(x) ((GtrHeader *)x)

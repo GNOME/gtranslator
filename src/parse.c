@@ -560,7 +560,9 @@ Your file should likely be named '%s.po'."),
 			GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_WARNING,
 			GTK_BUTTONS_OK,
-			ngettext("File %s\ncontains %d fuzzy message", "File %s\ncontains %d fuzzy messages", po->fuzzy),
+			ngettext("File %s\ncontains %d fuzzy message", 
+				 "File %s\ncontains %d fuzzy messages", 
+				 po->fuzzy),
 			po->filename, po->fuzzy);
 		gtk_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(dialog);
@@ -572,7 +574,8 @@ Your file should likely be named '%s.po'."),
 /*
  * A callback for Overwrite in Save as
  */
-void gtranslator_overwrite_file(GtkWidget * widget, gpointer data)
+void
+gtranslator_overwrite_file(GtkWidget * widget, gpointer data)
 {
 	GError *error;
 	gtranslator_save_file(current_page->po,current_page->po->filename, &error);
@@ -679,6 +682,8 @@ gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	if (!gtranslator_should_the_file_be_saved_dialog(current_page))
 		return;
 	
+	po = current_page->po;
+	
 	gtranslator_po_free(po);
 	gtranslator_undo_clean_register();
 	
@@ -711,6 +716,9 @@ gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	gtranslator_config_set_string("runtime/filename", "--- No file ---");
 
 	nothing_changes = FALSE;
+	
+	// Hide table pane
+	gtk_widget_hide(current_page->table_pane);
 }
 
 void 

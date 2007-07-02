@@ -617,15 +617,19 @@ static void gtranslator_go_to_dialog_clicked(GtkDialog * dialog, gint button,
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
-void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
+void 
+gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 {
-	/*libglade*/
+	
+	/*libglade?*/
 	static GtkWidget *dialog = NULL;
 	static GtkObject *adjustment;
 	GtkWidget *spin, *label;
 	GtrPo *po;
 
 	g_assert(current_page != NULL);
+
+	po = current_page->po;
 	
 	if (dialog)
 		gtk_adjustment_set_value(GTK_ADJUSTMENT(adjustment),
@@ -635,6 +639,7 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 		gtk_window_present(GTK_WINDOW(dialog));
 		return;
 	}
+	
 	dialog = gtk_dialog_new_with_buttons(
 		_("gtranslator -- go to"),
 		GTK_WINDOW(gtranslator_application),
@@ -645,7 +650,7 @@ void gtranslator_go_to_dialog(GtkWidget * widget, gpointer useless)
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	label = gtk_label_new(_("Go to message number:"));
-	
+
 	/*
 	 * Display current message number and let it change from first to last .
 	 */

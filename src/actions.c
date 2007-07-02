@@ -202,7 +202,7 @@ void gtranslator_actions_set_up_file_opened(void)
 	gtk_widget_set_sensitive(gtranslator_menuitems->search_next, TRUE);
 	gtk_widget_set_sensitive(gtranslator_menuitems->replace, TRUE);
 	gtk_widget_set_sensitive(gtranslator_menuitems->header, TRUE);
-	gtk_widget_set_sensitive(gtranslator_menuitems->comment, FALSE);
+	gtk_widget_set_sensitive(gtranslator_menuitems->comment, TRUE);
 	gtk_widget_set_sensitive(gtranslator_menuitems->copy_message, TRUE);
 	gtk_widget_set_sensitive(gtranslator_menuitems->fuzzy, TRUE);
 	//Go
