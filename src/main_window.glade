@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Mon Jul  2 12:45:00 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Mon Jul  2 22:36:34 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -25,6 +25,8 @@
                         <property name="label">gtk-open</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_open_select"/>
+                        <signal name="deselect" handler="on_open_deselect"/>
                         <signal name="activate" handler="on_open_activate"/>
                       </widget>
                     </child>
@@ -33,6 +35,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Open from _URI...</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_open_uri_select"/>
+                        <signal name="deselect" handler="on_open_uri_deselect"/>
                         <signal name="activate" handler="on_open_uri_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image5">
@@ -62,6 +66,8 @@
                         <property name="label">gtk-save</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_save_select"/>
+                        <signal name="deselect" handler="on_save_deselect"/>
                         <signal name="activate" handler="on_save_activate"/>
                       </widget>
                     </child>
@@ -71,6 +77,8 @@
                         <property name="label">gtk-save-as</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_save_as_select"/>
+                        <signal name="deselect" handler="on_save_as_deselect"/>
                         <signal name="activate" handler="on_save_as_activate"/>
                       </widget>
                     </child>
@@ -79,6 +87,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Revert</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_revert_select"/>
+                        <signal name="deselect" handler="on_revert_deselect"/>
                         <signal name="activate" handler="on_revert_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image6">
@@ -100,6 +110,8 @@
                         <property name="label">gtk-close</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_close_select"/>
+                        <signal name="deselect" handler="on_close_deselect"/>
                         <signal name="activate" handler="on_close_activate"/>
                       </widget>
                     </child>
@@ -109,6 +121,8 @@
                         <property name="label">gtk-quit</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_quit_select"/>
+                        <signal name="deselect" handler="on_quit_deselect"/>
                         <signal name="activate" handler="on_quit_activate"/>
                       </widget>
                     </child>

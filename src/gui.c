@@ -94,7 +94,7 @@ guint trans_box_insert_text_signal_id;
 guint trans_box_delete_text_signal_id;
 
 /*Statusbar context id*/
-guint *context_id = 0;
+guint *status_id = 0;
 
 /*
  * Warning widget
@@ -160,8 +160,7 @@ void
 pop_statusbar_data(GtkWidget *widget, gpointer useless)
 {
 	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar),
-			  1);
-	g_print("%d\n\n\n\n", context_id);
+			  status_id);
 }
 
 void
@@ -169,11 +168,8 @@ push_statusbar_data(GtkWidget *widget, gpointer data)
 {
 	gchar *text;
 	text = (gchar *)data;
-	//I think this is not a good idea
-	if(context_id != 0)
-		pop_statusbar_data(NULL, NULL);
-	context_id = gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar),
-						      context_id, text);
+	gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar),
+			   status_id, text);
 }
 
 

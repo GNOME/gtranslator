@@ -231,6 +231,14 @@ void gtranslator_history_show(void)
 				  G_CALLBACK (gtranslator_open_file_dialog_from_history),
 				  entry->filename);
 		
+		g_signal_connect (item, "select",
+				  G_CALLBACK (push_statusbar_data),
+				  g_strdup_printf(_("Open %s"), entry->filename));
+		
+		g_signal_connect (item, "deselect",
+				  G_CALLBACK (pop_statusbar_data),
+				  NULL);
+		
 		/*
 		 * TODO: with "select" and "deselect" signals make push and pop 
 		 * on statusbar
@@ -256,14 +264,7 @@ void gtranslator_open_file_dialog_from_history(GtkWidget *widget, gchar *filenam
 
 	if(!gtranslator_open(filename, &error)) {
 		if(error) {
-			GtkWidget *dialog;
-			dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
-								GTK_DIALOG_DESTROY_WITH_PARENT,
-								GTK_MESSAGE_WARNING,
-								GTK_BUTTONS_CLOSE,
-								error->message);
-			gtk_dialog_run (GTK_DIALOG (dialog));
-			gtk_widget_destroy (dialog);
+			gtranslator_show_message(error->message, NULL);
 			g_error_free(error);
 		}
 	}

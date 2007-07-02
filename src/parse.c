@@ -699,8 +699,8 @@ gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	 * Set blank status, progress and window title
 	 */
 	gtk_window_set_title(GTK_WINDOW(gtranslator_application), _(PACKAGE_NAME));
-	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context_id);
-	gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(gtranslator_progress_bar), 0.00000);
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(gtranslator_progress_bar), 0.00000);
+	pop_statusbar_data(NULL, NULL);
 						
 
 	/*
@@ -819,9 +819,10 @@ static void
 determine_translation_status(gpointer data, gpointer useless_stuff)
 {
 	GtrMsg *message = GTR_MSG(data);
-	if(message->status & GTR_MSG_STATUS_TRANSLATED)
+	gchar * aux = po_message_msgstr(message->message);
+	if(aux[0] != '\0')
 		current_page->po->translated++;
-	if(message->status & GTR_MSG_STATUS_FUZZY)
+	if(message->is_fuzzy)
 		current_page->po->fuzzy++;
 }
 

@@ -562,15 +562,15 @@ void gtranslator_bookmark_show_list(void)
 								    gtranslator_bookmark_escape(bookmark->file),
 								    bookmark->version, bookmark->position));
 		//Set signal
-		g_signal_connect (item, "activate",
+		g_signal_connect (GTK_MENU_ITEM(item), "activate",
 				  G_CALLBACK (gtranslator_open_file_dialog_from_bookmark),
 				  bookmark->file);
 		
-		g_signal_connect (item, "select",
+		g_signal_connect (GTK_MENU_ITEM(item), "select",
 				  G_CALLBACK (push_statusbar_data),
 				  g_strdup_printf(_("Open %s (%s)"), bookmark->file, bookmark->comment));
 		
-		g_signal_connect (item, "deselect",
+		g_signal_connect (GTK_MENU_ITEM(item), "deselect",
 				  G_CALLBACK (pop_statusbar_data),
 				  NULL);
 		

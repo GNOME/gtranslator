@@ -53,11 +53,6 @@ gtranslator_menuitems_set_up()
 	this = g_new0(GtrMenuItems, 1);
 	
 	//File
-	this->compile = glade_xml_get_widget(glade, "compile");
-	this->refresh = glade_xml_get_widget(glade, "refresh");
-	this->add_bookmark = glade_xml_get_widget(glade, "add_bookmark");
-	this->autotranslate = glade_xml_get_widget(glade, "autotranslate");
-	this->remove_translations = glade_xml_get_widget(glade, "remove_translations");
 	this->open = glade_xml_get_widget(glade, "open");
 	this->open_uri = glade_xml_get_widget(glade, "open_uri");
 	this->save = glade_xml_get_widget(glade, "save");
@@ -81,6 +76,13 @@ gtranslator_menuitems_set_up()
 	this->copy_message = glade_xml_get_widget(glade, "copy_message");
 	this->fuzzy = glade_xml_get_widget(glade, "fuzzy");
 	this->preferences = glade_xml_get_widget(glade, "preferences");
+	
+	//Actions
+	this->compile = glade_xml_get_widget(glade, "compile");
+	this->refresh = glade_xml_get_widget(glade, "refresh");
+	this->add_bookmark = glade_xml_get_widget(glade, "add_bookmark");
+	this->autotranslate = glade_xml_get_widget(glade, "autotranslate");
+	this->remove_translations = glade_xml_get_widget(glade, "remove_translations");
 	
 	//View
 	this->bookmarks = glade_xml_get_widget(glade, "bookmarks");
@@ -116,57 +118,67 @@ connect_menu_signals()
 {
 	/*********************** File menu **************************/
 	
-	//Compile item
-	glade_xml_signal_connect_data(  glade, "on_compile_activate",
-					G_CALLBACK(compile), NULL );
-	
-	//Refresh item
-	//glade_xml_signal_connect_data(  glade, "on_refresh_activate",
-	//				G_CALLBACK(), NULL );
-	
-	//Add bookmark item
-	glade_xml_signal_connect_data(  glade, "on_add_bookmark_activate",
-					G_CALLBACK(gtranslator_bookmark_adding_dialog), NULL );
-					
-	//Autotranslate item
-	glade_xml_signal_connect_data(  glade, "on_autotranslate_activate",
-					G_CALLBACK(gtranslator_auto_translation_dialog), NULL );
-					
-	//Remove all translations item
-	glade_xml_signal_connect_data(  glade, "on_remove_translations_activate",
-					G_CALLBACK(gtranslator_remove_all_translations_dialog), NULL );
-					
 	//Open item
 	glade_xml_signal_connect_data(  glade, "on_open_activate",
 					G_CALLBACK(gtranslator_open_file_dialog), NULL );
+	glade_xml_signal_connect_data(  glade, "on_open_select",
+					G_CALLBACK(push_statusbar_data), 
+				      _("Open a po file") );
+	glade_xml_signal_connect_data(  glade, "on_open_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
 					
 	//Open from URI item
 	glade_xml_signal_connect_data(  glade, "on_open_uri_activate",
 					G_CALLBACK(gtranslator_open_uri_dialog), NULL );
-					
+	glade_xml_signal_connect_data(  glade, "on_open_uri_select",
+					G_CALLBACK(push_statusbar_data),
+				      _("Open a po file from a given URI") );
+	glade_xml_signal_connect_data(  glade, "on_open_uri_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
+	
 	//Save item
 	glade_xml_signal_connect_data(  glade, "on_save_activate",
 					G_CALLBACK(gtranslator_save_current_file_dialog), NULL );
+	glade_xml_signal_connect_data(  glade, "on_save_select",
+					G_CALLBACK(push_statusbar_data), 
+				      _("Save the file") );
+	glade_xml_signal_connect_data(  glade, "on_save_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
 					
 	//Save as item
 	glade_xml_signal_connect_data(  glade, "on_save_as_activate",
 					G_CALLBACK(gtranslator_save_file_as_dialog), NULL );
+	glade_xml_signal_connect_data(  glade, "on_save_as_select",
+					G_CALLBACK(push_statusbar_data),
+				      _("Save the file with another name") );
+	glade_xml_signal_connect_data(  glade, "on_save_as_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
 					
 	//Revert item
 	glade_xml_signal_connect_data(  glade, "on_revert_activate",
 					G_CALLBACK(gtranslator_file_revert), NULL );
+	glade_xml_signal_connect_data(  glade, "on_revert_select",
+					G_CALLBACK(push_statusbar_data), _("...") );
+	glade_xml_signal_connect_data(  glade, "on_revert_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
 					
 	//Close item
 	glade_xml_signal_connect_data(  glade, "on_close_activate",
 					G_CALLBACK(gtranslator_file_close), NULL );
+	glade_xml_signal_connect_data(  glade, "on_close_select",
+					G_CALLBACK(push_statusbar_data), 
+				      _("Close the current file") );
+	glade_xml_signal_connect_data(  glade, "on_close_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
 					
-	//Recent file item
-	//glade_xml_signal_connect_data(  glade, "on_recent_files_activate",
-	//				G_CALLBACK(the_last_files_menus), NULL );
-	
 	//Quit item
 	glade_xml_signal_connect_data(  glade, "on_quit_activate",
 					G_CALLBACK(gtranslator_menu_quit_cb), NULL );
+	glade_xml_signal_connect_data(  glade, "on_quit_select",
+					G_CALLBACK(push_statusbar_data),
+				      _("Quit the program") );
+	glade_xml_signal_connect_data(  glade, "on_quit_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
 					
 	/*********************** Edit menu **************************/
 	
@@ -222,7 +234,28 @@ connect_menu_signals()
 	glade_xml_signal_connect_data(  glade, "on_preferences_activate",
 					G_CALLBACK(gtranslator_preferences_dialog_create), NULL );	
 					
+	/*********************** Actions menu **************************/
+	
+	//Compile item
+	glade_xml_signal_connect_data(  glade, "on_compile_activate",
+					G_CALLBACK(compile), NULL );
+	
+	//Refresh item
+	//glade_xml_signal_connect_data(  glade, "on_refresh_activate",
+	//				G_CALLBACK(), NULL );
+	
+	//Add bookmark item
+	glade_xml_signal_connect_data(  glade, "on_add_bookmark_activate",
+					G_CALLBACK(gtranslator_bookmark_adding_dialog), NULL );
 					
+	//Autotranslate item
+	glade_xml_signal_connect_data(  glade, "on_autotranslate_activate",
+					G_CALLBACK(gtranslator_auto_translation_dialog), NULL );
+					
+	//Remove all translations item
+	glade_xml_signal_connect_data(  glade, "on_remove_translations_activate",
+					G_CALLBACK(gtranslator_remove_all_translations_dialog), NULL );
+	
 	/************************ Go menu ***************************/
 	
 	//First item
