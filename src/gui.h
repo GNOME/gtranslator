@@ -31,6 +31,19 @@
 
 #include <glib/gi18n.h>
 
+
+typedef struct _GtrWindow GtrWindow;
+
+struct _GtrWindow
+{
+	GtkWidget *app;
+	GtkWidget *statusbar;
+	GtkWidget *progressbar;
+	GtkWidget *toolbar;
+	GladeXML *glade;
+	guint *context_id;
+};
+	
 /*
  * The globally needed widgets
  */
@@ -42,6 +55,9 @@ extern GtkWidget *gtranslator_toolbar;
 extern GladeXML *glade;
 
 extern GtkWidget *sidebar_pane;
+
+/*Statusbar context id*/
+extern guint *context_id;
 
 /*
  * A handle on the notebook, for parse.c to add/remove pages
@@ -104,6 +120,12 @@ void gtranslator_translation_changed(GtkWidget  *widget, gpointer useless);
  * translated.
  */
 void gtranslator_update_progress_bar(void);
+
+/*
+ * Statusbar handling
+ */
+void push_statusbar_data(GtkWidget *widget, gpointer data);
+void pop_statusbar_data(GtkWidget *widget, gpointer useless);
 
 /*
  * If TRUE, means that trans_box is being changed by program, not user

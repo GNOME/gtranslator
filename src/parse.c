@@ -49,7 +49,7 @@
 #include "utils.h"
 #include "utils_gui.h"
 
-#include <gtk/gtkfilesel.h>
+#include <gtk/gtkfilechooser.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtklabel.h>
 
@@ -250,7 +250,7 @@ gtranslator_parse(const gchar *filename, GError **error)
 	{
 		po->filename = g_strdup(filename);
 	}
-	
+		
 	/*
 	 * Open the PO file, using gettext's utility function
 	 */
@@ -266,6 +266,7 @@ gtranslator_parse(const gchar *filename, GError **error)
 		gtranslator_po_free(po);
 		return NULL;
 	}
+	
 	
 	/*
 	 * If there were errors, abandon this page
@@ -342,7 +343,8 @@ gtranslator_parse(const gchar *filename, GError **error)
  * The main file opening function. Checks that the file isn't already open,
  * and if not, opens it in a new tab.
  */
-gboolean gtranslator_open(const gchar *filename, GError **error)
+gboolean 
+gtranslator_open(const gchar *filename, GError **error)
 {
 	gchar	*base;
 	gchar *title;
@@ -672,7 +674,6 @@ void
 gtranslator_file_close(GtkWidget * widget, gpointer useless)
 {
 	GtrPo *po;
-	guint context_id;
 	
 	g_assert(current_page != NULL);
 
@@ -689,14 +690,15 @@ gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	
 	nothing_changes = TRUE;
 
+	/*
+	 * Set widget sensitive
+	 */
 	gtranslator_actions_set_up_state_no_file();
 
 	/*
 	 * Set blank status, progress and window title
 	 */
 	gtk_window_set_title(GTK_WINDOW(gtranslator_application), _(PACKAGE_NAME));
-	/*gnome_appbar_clear_stack(GNOME_APPBAR(gtranslator_application_bar));
-	gnome_appbar_set_progress_percentage(GNOME_APPBAR(gtranslator_application_bar), 0.00000);*/
 	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context_id);
 	gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(gtranslator_progress_bar), 0.00000);
 						
@@ -719,6 +721,11 @@ gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	
 	// Hide table pane
 	gtk_widget_hide(current_page->table_pane);
+	
+	//Free current page
+	g_free(current_page);
+	current_page = NULL;
+	
 }
 
 void 

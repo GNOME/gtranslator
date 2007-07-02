@@ -58,6 +58,7 @@
  */
 GtrPage *current_page;
 
+
 /*
  * Set up the widgets to display the given po file
  */

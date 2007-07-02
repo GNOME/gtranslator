@@ -93,6 +93,9 @@ GladeXML *glade;
 guint trans_box_insert_text_signal_id;
 guint trans_box_delete_text_signal_id;
 
+/*Statusbar context id*/
+guint *context_id = 0;
+
 /*
  * Warning widget
  */
@@ -149,6 +152,30 @@ gtranslator_gui_get_warning_hbox()
 {
    	return warning_hbox;
 }
+
+/*
+ * Statusbar handling
+ */
+void 
+pop_statusbar_data(GtkWidget *widget, gpointer useless)
+{
+	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar),
+			  1);
+	g_print("%d\n\n\n\n", context_id);
+}
+
+void
+push_statusbar_data(GtkWidget *widget, gpointer data)
+{
+	gchar *text;
+	text = (gchar *)data;
+	//I think this is not a good idea
+	if(context_id != 0)
+		pop_statusbar_data(NULL, NULL);
+	context_id = gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar),
+						      context_id, text);
+}
+
 
 /*
  * Creates the main gtranslator application window.
@@ -417,9 +444,8 @@ gtranslator_application_bar_update(gint pos)
 	GtrMsg 	*msg;
 	GtrPo	*po;
 	const char *msgstr, *msgid_plural;
-	guint context_id;
-    
-	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context_id);
+	
+	pop_statusbar_data(NULL, NULL);
 
 	/*
 	 * Get the po file and message.
@@ -489,7 +515,7 @@ gtranslator_application_bar_update(gint pos)
 	/*
 	 * Set the statusbar text.
 	 */
-	gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar), context_id, str);
+	push_statusbar_data(NULL, str);
 	
 	/*
 	 * Update the progressbar.

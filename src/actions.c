@@ -165,7 +165,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 	gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, FALSE);
 	
 	//Toolbar
-	/*guint n_elements;
+	guint n_elements;
 	gint i;
 	GtkToolItem *item;
 	n_elements = gtk_toolbar_get_n_items(GTK_TOOLBAR(gtranslator_toolbar));
@@ -173,7 +173,7 @@ void gtranslator_actions_set_up_state_no_file(void)
 	{
 		item = gtk_toolbar_get_nth_item(GTK_TOOLBAR(gtranslator_toolbar), i);
 		gtk_widget_set_sensitive(GTK_WIDGET(item), FALSE);
-	}*/
+	}
 
 #ifdef DONTFORGET
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(trans_box), FALSE);

@@ -2,7 +2,11 @@
 
 	* parce.c: Fixed close event crash.
 	* dialogs.c: Fixed Goto func.
-	* actions.c: Fixed comment menuitem sensitive.
+	* actions.c: Fixed comment menuitem sensitive. Now is setting toolbar
+	  sensitive to FALSE when a file is closed.
+	* src/dnd.c: Fixed memory leaks.
+	* src/bookmark.c: Removed statusbar funcs.
+	* gui.c: Added statusbar funcs.
 
 2007-07-01  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 

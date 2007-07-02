@@ -52,12 +52,6 @@ gchar *gtranslator_bookmark_escape(const gchar *str);
 
 
 /*
- * Pushing and poping statusbar data
- */
-guint push_statusbar_data(gchar *data);
-void pop_statusbar_data(guint context);
-
-/*
  * Create and return a GtrBookmark from the current position & po file -- 
  *  if a file is opened yet.
  */
@@ -572,13 +566,13 @@ void gtranslator_bookmark_show_list(void)
 				  G_CALLBACK (gtranslator_open_file_dialog_from_bookmark),
 				  bookmark->file);
 		
-		/*g_signal_connect (item, "select",
+		g_signal_connect (item, "select",
 				  G_CALLBACK (push_statusbar_data),
 				  g_strdup_printf(_("Open %s (%s)"), bookmark->file, bookmark->comment));
 		
 		g_signal_connect (item, "deselect",
 				  G_CALLBACK (pop_statusbar_data),
-				  NULL);*/
+				  NULL);
 		
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 		
@@ -680,18 +674,4 @@ void gtranslator_bookmark_free(GtrBookmark *bookmark)
 		g_free(bookmark->comment);
 		g_free(bookmark);
 	}
-}
-
-guint
-push_statusbar_data(gchar *data)
-{
-	guint context;
-	context = gtk_statusbar_push(GTK_STATUSBAR(gtranslator_status_bar), context, data);
-	return context;
-}
-
-void 
-pop_statusbar_data(guint context)
-{
-	gtk_statusbar_pop(GTK_STATUSBAR(gtranslator_status_bar), context);
 }

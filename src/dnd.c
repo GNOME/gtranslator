@@ -32,7 +32,7 @@
  */ 
 void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 		     int y, GtkSelectionData * seldata, guint info,
-		     guint time, gpointer data)
+		     guint32 time, gpointer data)
 {
 	gchar *file;
 	gchar *file_aux;
@@ -42,17 +42,8 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	if(dnd_type==TARGET_URI_LIST || dnd_type==TARGET_NETSCAPE_URL)
 	{
 		GError *error = NULL;
-		if(!gtranslator_open(file_aux, &error)) {
+		if(!gtranslator_open(file, &error)) {
 			if(error) {
-				/*GtkWidget *dialog;
-				dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
-								GTK_DIALOG_DESTROY_WITH_PARENT,
-								GTK_MESSAGE_WARNING,
-								GTK_BUTTONS_CLOSE,
-								//error->message);
-								 file_aux);
-				gtk_dialog_run (GTK_DIALOG (dialog));
-				gtk_widget_destroy (dialog);*/
 			    	gtranslator_show_message(error->message, NULL);
 				g_error_free(error);
 			}
@@ -64,4 +55,5 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	{
 		gtk_drag_finish(context, FALSE, TRUE, time);
 	}
+	g_free(file_aux);
 }
