@@ -35,14 +35,14 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 		     guint32 time, gpointer data)
 {
 	gchar *file;
-	gchar *file_aux;
+	const gchar *file_aux;
 	dnd_type = GPOINTER_TO_UINT(data);
 	file=((gchar *) (seldata->data));
-	file_aux = g_strdup(file + strlen("file://"));
+	file_aux = g_strip_context(file,"file://");
 	if(dnd_type==TARGET_URI_LIST || dnd_type==TARGET_NETSCAPE_URL)
 	{
 		GError *error = NULL;
-		if(!gtranslator_open(file, &error)) {
+		if(!gtranslator_open(file_aux, &error)) {
 			if(error) {
 			    	gtranslator_show_message(error->message, NULL);
 				g_error_free(error);
@@ -55,5 +55,5 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	{
 		gtk_drag_finish(context, FALSE, TRUE, time);
 	}
-	g_free(file_aux);
+	//g_free(file_aux);
 }

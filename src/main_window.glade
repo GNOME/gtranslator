@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Mon Jul  2 22:36:34 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Tue Jul  3 15:14:37 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -144,6 +144,8 @@
                         <property name="label">gtk-undo</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_undo_select"/>
+                        <signal name="deselect" handler="on_undo_deselect"/>
                         <signal name="activate" handler="on_undo_activate"/>
                       </widget>
                     </child>
@@ -158,6 +160,8 @@
                         <property name="label">gtk-cut</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_cut_select"/>
+                        <signal name="deselect" handler="on_cut_deselect"/>
                         <signal name="activate" handler="on_cut_activate"/>
                       </widget>
                     </child>
@@ -167,6 +171,8 @@
                         <property name="label">gtk-copy</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_copy_select"/>
+                        <signal name="deselect" handler="on_copy_deselect"/>
                         <signal name="activate" handler="on_copy_activate"/>
                       </widget>
                     </child>
@@ -176,6 +182,8 @@
                         <property name="label">gtk-paste</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_paste_select"/>
+                        <signal name="deselect" handler="on_paste_deselect"/>
                         <signal name="activate" handler="on_paste_activate"/>
                       </widget>
                     </child>
@@ -185,6 +193,8 @@
                         <property name="label">gtk-clear</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_clear_select"/>
+                        <signal name="deselect" handler="on_clear_deselect"/>
                         <signal name="activate" handler="on_clear_activate"/>
                       </widget>
                     </child>
@@ -199,6 +209,8 @@
                         <property name="label">gtk-find</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_find_select"/>
+                        <signal name="deselect" handler="on_find_deselect"/>
                         <signal name="activate" handler="on_find_activate"/>
                       </widget>
                     </child>
@@ -207,6 +219,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Search next</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_search_next_select"/>
+                        <signal name="deselect" handler="on_search_next_deselect"/>
                         <signal name="activate" handler="on_search_next_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image9">
@@ -223,6 +237,8 @@
                         <property name="label">gtk-find-and-replace</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_replace_select"/>
+                        <signal name="deselect" handler="on_replace_deselect"/>
                         <signal name="activate" handler="on_replace_activate"/>
                       </widget>
                     </child>
@@ -236,6 +252,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Header...</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_header_select"/>
+                        <signal name="deselect" handler="on_header_deselect"/>
                         <signal name="activate" handler="on_header_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image10">
@@ -256,7 +274,9 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">C_omment...</property>
                         <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_comment_activate"/>
+                        <signal name="select" handler="on_comment_item_select"/>
+                        <signal name="deselect" handler="on_comment_item_deselect"/>
+                        <signal name="activate" handler="on_comment_item_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image11">
                             <property name="visible">True</property>
@@ -276,6 +296,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Copy _message -&gt; translation</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_copy_message_select"/>
+                        <signal name="deselect" handler="on_copy_message_deselect"/>
                         <signal name="activate" handler="on_copy_message_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image12">
@@ -296,6 +318,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Fuzzy</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_fuzzy_select"/>
+                        <signal name="deselect" handler="on_fuzzy_deselect"/>
                         <signal name="activate" handler="on_fuzzy_activate"/>
                       </widget>
                     </child>
@@ -310,6 +334,8 @@
                         <property name="label">gtk-preferences</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_preferences_select"/>
+                        <signal name="deselect" handler="on_preferences_deselect"/>
                         <signal name="activate" handler="on_preferences_activate"/>
                       </widget>
                     </child>
@@ -332,6 +358,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Compile</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_compile_select"/>
+                        <signal name="deselect" handler="on_compile_deselect"/>
                         <signal name="activate" handler="on_compile_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image1">
@@ -348,6 +376,8 @@
                         <property name="label">gtk-refresh</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_refresh_select"/>
+                        <signal name="deselect" handler="on_refresh_deselect"/>
                         <signal name="activate" handler="on_refresh_activate"/>
                       </widget>
                     </child>
@@ -361,6 +391,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Add bookmark</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_add_bookmark_select"/>
+                        <signal name="deselect" handler="on_add_bookmark_deselect"/>
                         <signal name="activate" handler="on_add_bookmark_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image2">
@@ -381,6 +413,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Aut_otranslate...</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_autotranslate_select"/>
+                        <signal name="deselect" handler="on_autotranslate_deselect"/>
                         <signal name="activate" handler="on_autotranslate_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image3">
@@ -401,6 +435,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Remove all translations...</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_remove_translations_select"/>
+                        <signal name="deselect" handler="on_remove_translations_deselect"/>
                         <signal name="activate" handler="on_remove_translations_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image4">
@@ -455,6 +491,8 @@
                         <property name="label">gtk-goto-first</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_first_select"/>
+                        <signal name="deselect" handler="on_first_deselect"/>
                         <signal name="activate" handler="on_first_activate"/>
                       </widget>
                     </child>
@@ -464,6 +502,8 @@
                         <property name="label">gtk-go-back</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_go_back_select"/>
+                        <signal name="deselect" handler="on_go_back_deselect"/>
                         <signal name="activate" handler="on_go_back_activate"/>
                       </widget>
                     </child>
@@ -478,6 +518,8 @@
                         <property name="label">gtk-go-forward</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_go_forward_select"/>
+                        <signal name="deselect" handler="on_go_forward_deselect"/>
                         <signal name="activate" handler="on_go_forward_activate"/>
                       </widget>
                     </child>
@@ -487,6 +529,8 @@
                         <property name="label">gtk-goto-last</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_goto_last_select"/>
+                        <signal name="deselect" handler="on_goto_last_deselect"/>
                         <signal name="activate" handler="on_goto_last_activate"/>
                       </widget>
                     </child>
@@ -501,6 +545,8 @@
                         <property name="label">gtk-jump-to</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_jump_to_select"/>
+                        <signal name="deselect" handler="on_jump_to_deselect"/>
                         <signal name="activate" handler="on_jump_to_activate"/>
                       </widget>
                     </child>
@@ -509,6 +555,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Next fuz_zy</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_next_fuzzy_select"/>
+                        <signal name="deselect" handler="on_next_fuzzy_deselect"/>
                         <signal name="activate" handler="on_next_fuzzy_activate"/>
                       </widget>
                     </child>
@@ -517,6 +565,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Next _untranslated</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_next_untranslated_select"/>
+                        <signal name="deselect" handler="on_next_untranslated_deselect"/>
                         <signal name="activate" handler="on_next_untranslated_activate"/>
                       </widget>
                     </child>
@@ -537,6 +587,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Contents</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_contents_select"/>
+                        <signal name="deselect" handler="on_contents_deselect"/>
                         <signal name="activate" handler="on_contents_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image7">
@@ -552,6 +604,8 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">gtranslator _website</property>
                         <property name="use_underline">True</property>
+                        <signal name="select" handler="on_website_select"/>
+                        <signal name="deselect" handler="on_website_deselect"/>
                         <signal name="activate" handler="on_website_activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image8">
@@ -568,6 +622,8 @@
                         <property name="label">gtk-about</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="select" handler="on_about_select"/>
+                        <signal name="deselect" handler="on_about_deselect"/>
                         <signal name="activate" handler="on_about_activate"/>
                       </widget>
                     </child>
