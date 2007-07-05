@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Tue Jul  3 15:14:37 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Wed Jul  4 20:07:58 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -1075,7 +1075,7 @@
                       <widget class="GtkVBox" id="vbox3">
                         <property name="visible">True</property>
                         <child>
-                          <widget class="GtkNotebook" id="notebook1">
+                          <widget class="GtkNotebook" id="text_notebook">
                             <property name="visible">True</property>
                             <property name="show_tabs">False</property>
                             <child>
@@ -1113,6 +1113,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                <property name="editable">False</property>
                               </widget>
                               <packing>
                                 <property name="position">1</property>
@@ -1141,7 +1142,7 @@
                             <child>
                               <widget class="GtkRadioButton" id="radiobutton_translated">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Translated</property>
                                 <property name="response_id">0</property>
@@ -1155,7 +1156,7 @@
                             <child>
                               <widget class="GtkRadioButton" id="radiobutton_fuzzy">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Fuzzy</property>
                                 <property name="response_id">0</property>
@@ -1171,7 +1172,7 @@
                             <child>
                               <widget class="GtkRadioButton" id="radiobutton_untranslated">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="label" translatable="yes">Untranslated</property>
                                 <property name="response_id">0</property>
@@ -1192,7 +1193,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkNotebook" id="notebook2">
+                          <widget class="GtkNotebook" id="trans_notebook">
                             <property name="visible">True</property>
                             <property name="show_tabs">False</property>
                             <child>
@@ -1229,6 +1230,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                <property name="wrap_mode">GTK_WRAP_WORD</property>
                               </widget>
                               <packing>
                                 <property name="position">1</property>
