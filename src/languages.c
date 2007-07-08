@@ -136,7 +136,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Galician"), "gl", "iso-8859-1",
-	 "proxecto@trasno.net", "8bit"
+	 "proxecto@trasno.net", "8bit", 2, "n != 1"
 	},
 	{
 	 N_("German"), "de", "iso-8859-1",
@@ -272,15 +272,15 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Spanish"), "es", "iso-8859-1",
-	 "es@li.org", "8bit"
+	 "es@li.org", "8bit", 2, "n != 1"
 	},
 	{
 	 N_("Spanish/Spain"), "es_ES", "iso-8859-1",
-	 "es@li.org", "8bit"
+	 "es@li.org", "8bit", 2, "n != 1"
 	},
 	{
 	 N_("Spanish/Mexico"), "es_MX", "iso-8859-1",
-	 "", "8bit"
+	 "", "8bit", 2, "n != 1"
 	},
 	{
 	 N_("Swedish"), "sv", "iso-8859-1",

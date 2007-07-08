@@ -386,6 +386,8 @@ gtranslator_open(const gchar *filename, GError **error)
 	/*
 	 * Create a page to add to our list of open files
 	 */
+	if(current_page != NULL)
+		gtranslator_file_close(NULL, NULL);
 	gtranslator_page_new(po);
 	
 	/*

@@ -72,7 +72,7 @@ GtrBookmark *gtranslator_bookmark_new()
 	bookmark->version = po_header_field(header, "Project-Id-Version");
 	bookmark->position = g_list_position(po->messages, po->current);
 	bookmark->comment = g_strdup("");
-
+	
 	return bookmark;
 }
 

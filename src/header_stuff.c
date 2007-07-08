@@ -50,7 +50,7 @@
 /*
  * Glade path
  */
-#define GLADE_HEADER_PATH "header_dialog.glade"
+#define GLADE_HEADER_PATH DATADIR "/gtranslator/header_dialog.glade"
 
 /*
  * Glade variables

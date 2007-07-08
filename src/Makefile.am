@@ -75,4 +75,12 @@ gtranslator_LDFLAGS = \
 #gtranslator_export_learn_buffer_SOURCES = \
 #	export-learn-buffer.c
 #	
-EXTRA_DIST = ChangeLog
+
+gladedir = $(pkgdatadir)
+
+glade_DATA =  \
+       header_dialog.glade \
+       main_window.glade \
+       preferences.glade
+
+EXTRA_DIST = ChangeLog $(glade_DATA)

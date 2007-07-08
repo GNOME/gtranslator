@@ -38,11 +38,11 @@ void gtranslator_dnd(GtkWidget * widget, GdkDragContext * context, int x,
 	const gchar *file_aux;
 	dnd_type = GPOINTER_TO_UINT(data);
 	file=((gchar *) (seldata->data));
-	file_aux = g_strip_context(file,"file://");
+	//file_aux = g_strip_context(file,"file://");
 	if(dnd_type==TARGET_URI_LIST || dnd_type==TARGET_NETSCAPE_URL)
 	{
 		GError *error = NULL;
-		if(!gtranslator_open(file_aux, &error)) {
+		if(!gtranslator_open(file, &error)) {
 			if(error) {
 			    	gtranslator_show_message(error->message, NULL);
 				g_error_free(error);

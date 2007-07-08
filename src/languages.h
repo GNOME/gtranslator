@@ -1,6 +1,7 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			GNOME I18N List <gnome-i18n@gnome.org>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,9 +24,6 @@
 
 #include <glib.h>
 
-/*
- * #include <libgnome/gnome-defs.h>
- */
 
 /*
  * The language structure with all the essential data for gtranslator:
@@ -58,7 +56,12 @@ typedef struct {
 	gchar *bits;
 
 	/*
-	 * 6 - plural form string;
+	 * 6 - number of plurals
+	 */
+	gushort nplural;
+	
+	/*
+	 * 7 - plural form string;
 	 */
 	gchar *plural;
 

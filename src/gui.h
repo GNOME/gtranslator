@@ -57,7 +57,7 @@ extern GladeXML *glade;
 extern GtkWidget *sidebar_pane;
 
 /*Statusbar context id*/
-extern guint *status_id;
+extern guint status_id;
 
 /*
  * A handle on the notebook, for parse.c to add/remove pages

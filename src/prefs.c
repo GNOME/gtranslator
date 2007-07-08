@@ -94,7 +94,7 @@ static GtrControlAutotranItems *ctrlautotran_node;
  * Glade:
  */
 static GladeXML *glade_prefs;
-#define GLADE_PREF_PATH "preferences.glade"
+#define GLADE_PREF_PATH DATADIR "/gtranslator/preferences.glade"
 /**Variables**/
 #define GLADE_PREF_DIALOG "preferences_dialog"
 #define GLADE_TREE_VIEW "treeview"
@@ -252,9 +252,9 @@ gtranslator_preferences_category_new_pack_start(GtkWidget *page,
  */
 static void
 gtranslator_preferences_pack_set_up_with_label(GtkWidget *widget, 
-											   GtkWidget *label,
-											   GtkWidget *depend,
-											   gboolean expand)
+					       GtkWidget *label,
+					       GtkWidget *depend,
+					       gboolean expand)
 {
 	if (depend != NULL) {
 		if (label != NULL){
@@ -615,13 +615,13 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	
 	//warn_if_fuzzy toggle button
 	warn_if_fuzzy = gtranslator_preferences_toggle_new(GLADE_WARN_IF_FUZZY,
-													   GtrPreferences.warn_if_fuzzy,
-													   G_CALLBACK(gtranslator_preferences_dialog_changed));
+							   GtrPreferences.warn_if_fuzzy,
+							   G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 	//sweep_compile_file toggle button
 	sweep_compile_file = gtranslator_preferences_toggle_new(GLADE_SWEEP_COMPILE_FILE,
-															GtrPreferences.sweep_compile_file,
-															G_CALLBACK(gtranslator_preferences_dialog_changed));
+								GtrPreferences.sweep_compile_file,
+								G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 	
 	
@@ -637,8 +637,8 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 
 	//Autosave check button
 	autosave = gtranslator_preferences_toggle_new(GLADE_AUTOSAVE,
-												  GtrPreferences.autosave,
-												  G_CALLBACK(gtranslator_preferences_dialog_changed));
+						      GtrPreferences.autosave,
+						      G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 	
 	//Autosave_timeout spin button
@@ -650,24 +650,24 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
  			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
 	autosave_timeout_label = glade_xml_get_widget(glade_prefs, GLADE_AUTOSAVE_TIMEOUT_LABEL);
 	gtranslator_preferences_pack_set_up_with_label(autosave_timeout,
-												   autosave_timeout_label,
-												   autosave, FALSE);
+						       autosave_timeout_label,
+						       autosave, FALSE);
     
 	//autosave_with_suffix check button
 	autosave_with_suffix = gtranslator_preferences_toggle_new(GLADE_AUTOSAVE_WITH_SUFFIX,
-															  GtrPreferences.autosave_with_suffix,
-															  G_CALLBACK(gtranslator_preferences_dialog_changed));
+								  GtrPreferences.autosave_with_suffix,
+								  G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 	
 	//Autosave_suffix entry
 	autosave_suffix = gtranslator_preferences_entry_new(GtrPreferences.autosave_suffix,
-														GLADE_AUTOSAVE_SUFFIX, 
-														G_CALLBACK(gtranslator_preferences_dialog_changed));
+							    GLADE_AUTOSAVE_SUFFIX, 
+							    G_CALLBACK(gtranslator_preferences_dialog_changed));
 	autosave_suffix_label = glade_xml_get_widget(glade_prefs, GLADE_AUTOSAVE_SUFFIX_LABEL);
 	gtranslator_preferences_pack_set_up_with_label(autosave_suffix, 
-												   autosave_suffix_label, 
-												   autosave_with_suffix,
-												   FALSE);
+						       autosave_suffix_label, 
+						       autosave_with_suffix,
+						       FALSE);
 	
 	
 	/* Recent item */
@@ -693,8 +693,8 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	
 	//check_recent_files check button	
 	check_recent_files = gtranslator_preferences_toggle_new(GLADE_CHECK_RECENT_FILES,
-															GtrPreferences.check_recent_file,
-															G_CALLBACK(gtranslator_preferences_dialog_changed));
+								GtrPreferences.check_recent_file,
+								G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 	 
 	/*
@@ -724,12 +724,12 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	//category_box = gtranslator_preferences_category_new_pack_start(page, display_str,"text.png");
 	
 	//highlight toggle button
-    highlight = gtranslator_preferences_toggle_new(GLADE_HIGHLIGHT,
+    	highlight = gtranslator_preferences_toggle_new(GLADE_HIGHLIGHT,
 						       GtrPreferences.highlight,
 						       G_CALLBACK(gtranslator_preferences_dialog_changed));
 
 	//use_dot_char toggle button
-    use_dot_char = gtranslator_preferences_toggle_new(GLADE_USE_DOT_CHAR,
+    	use_dot_char = gtranslator_preferences_toggle_new(GLADE_USE_DOT_CHAR,
 							  GtrPreferences.dot_char,
 							  G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
@@ -738,9 +738,9 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	gtranslator_preferences_hotkey_char_widget_new();
 	
 	//own_fonts toggle button	
-    own_fonts = gtranslator_preferences_toggle_new(GLADE_OWN_FONTS,
-												   GtrPreferences.use_own_fonts,
-												   G_CALLBACK(gtranslator_preferences_dialog_changed));	
+    	own_fonts = gtranslator_preferences_toggle_new(GLADE_OWN_FONTS,
+							   GtrPreferences.use_own_fonts,
+							   G_CALLBACK(gtranslator_preferences_dialog_changed));	
 	
 	
 	//Set up msgid_font button maybe is not neccessary return the widget
@@ -782,7 +782,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	
 		
 	//keep_obsolete toggle button
-    keep_obsolete = gtranslator_preferences_toggle_new(GLADE_KEEP_OBSOLETE,
+    	keep_obsolete = gtranslator_preferences_toggle_new(GLADE_KEEP_OBSOLETE,
 							   GtrPreferences.keep_obsolete,
 							   G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
@@ -902,43 +902,43 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	
 	//authors_language combobox
 	authors_language = gtranslator_preferences_combo_new(languages_list,
-														 gtranslator_translator->language->name,
-														 GLADE_AUTHORS_LANGUAGE,
-														 G_CALLBACK(gtranslator_preferences_dialog_changed),
-														 GINT_TO_POINTER(1));
+							     gtranslator_translator->language->name,
+							     GLADE_AUTHORS_LANGUAGE,
+							     G_CALLBACK(gtranslator_preferences_dialog_changed),
+							     GINT_TO_POINTER(1));
 	
 	//lcode combobox
 	lcode = gtranslator_preferences_combo_new(lcodes_list,
-											  gtranslator_translator->language->locale,
-											  GLADE_LCODE, 
-											  G_CALLBACK(gtranslator_preferences_dialog_changed),
-											  GINT_TO_POINTER(2));
+						  gtranslator_translator->language->locale,
+						  GLADE_LCODE, 
+						  G_CALLBACK(gtranslator_preferences_dialog_changed),
+						  GINT_TO_POINTER(2));
 	
 	//mime_type combobox
 	mime_type = gtranslator_preferences_combo_new(encodings_list,
-												  gtranslator_translator->language->encoding,
-												  GLADE_MIME_TYPE, 
-												  G_CALLBACK(gtranslator_preferences_dialog_changed),
-												  NULL);
+						      gtranslator_translator->language->encoding,
+						      GLADE_MIME_TYPE, 
+						      G_CALLBACK(gtranslator_preferences_dialog_changed),
+						      NULL);
 	
 	//encoding combobox
 	encoding = gtranslator_preferences_combo_new(bits_list,
-												 gtranslator_translator->language->bits,
-												 GLADE_ENCODING, 
-												 G_CALLBACK(gtranslator_preferences_dialog_changed),
-												 NULL);
+						     gtranslator_translator->language->bits,
+						     GLADE_ENCODING, 
+						     G_CALLBACK(gtranslator_preferences_dialog_changed),
+						     NULL);
 
 	//lg_email combobox
 	lg_email = gtranslator_preferences_combo_new(group_emails_list, 
-												 gtranslator_translator->language->group_email,
-												 GLADE_LG_EMAIL, 
-												 G_CALLBACK(gtranslator_preferences_dialog_changed),
-												 NULL);	
+						     gtranslator_translator->language->group_email,
+						     GLADE_LG_EMAIL, 
+						     G_CALLBACK(gtranslator_preferences_dialog_changed),
+						     NULL);
 
 	//plural entry
 	plural = gtranslator_preferences_entry_new(gtranslator_translator->language->plural,
-											   GLADE_PLURAL,
-											   G_CALLBACK(gtranslator_preferences_dialog_changed));
+						   GLADE_PLURAL,
+						   G_CALLBACK(gtranslator_preferences_dialog_changed));
 	
 	
 	//label showing information about plural forms

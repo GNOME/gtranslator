@@ -1371,6 +1371,13 @@ void gtranslator_bookmark_adding_dialog(GtkWidget *widget, gpointer useless)
 		gtranslator_bookmark_add_direct_with_comment(comment_dialog_contents);
 
 		g_free(comment_dialog_contents);
+		
+		/*
+		 * When a bookmark is added should be menuitems updated
+		 * FIXME: If i try to do this, the aplication crashes
+		 */
+		//gtranslator_bookmark_load_list();
+		//gtranslator_bookmark_show_list();
 	}
 	
 	gtk_widget_destroy(GTK_WIDGET(dialog));

@@ -148,6 +148,39 @@ gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer useless
 	gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, FALSE);
 }
 
+#ifdef HAVE_GTKSPELL
+void
+gtranslator_attach_gskspell()
+{
+	/*
+	 * Use instant spell checking via gtkspell only if the corresponding
+	 *  setting in the preferences is set.
+	 */
+	if(GtrPreferences.instant_spell_check)
+	{
+		/*
+		 * Start up gtkspell if not already done.
+		 */ 
+		GError *error = NULL;
+		char *errortext = NULL;
+		
+		if (gtrans_spell == NULL && current_page->trans_msgstr != NULL) {
+		    gtrans_spell = gtkspell_new_attach(GTK_TEXT_VIEW(current_page->trans_msgstr), NULL, &error);
+		    if (gtrans_spell == NULL) {
+			g_print(_("gtkspell error: %s\n"), error->message);
+			errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);
+			g_error_free(error);
+		    }
+		} 		
+	} else {
+	    if (gtrans_spell != NULL) {
+		gtkspell_detach(gtrans_spell);
+		gtrans_spell = NULL;
+	    }
+	}
+}
+#endif
+
 /*
  * Cleans up the text boxes.
  */
@@ -207,8 +240,23 @@ gtranslator_message_show(GtrMsg *msg)
 	msgid_plural = po_message_msgid_plural(msg->message);
 	if(!msgid_plural) {
 		msgstr = po_message_msgstr(msg->message);
+		/*
+		 * Disable notebook tabs
+		 */
+		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->text_notebook), FALSE);
+		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), FALSE);
 	}
 	else {
+		/*
+		 * Enable notebook tabs
+		 * FIXME: Ata 4 formas de plural pode haber según a páxina de gettext 
+		 * http://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html#Plural-forms
+		 * Débese comprobar a configuración para saber cantas solapas se deben poñer.
+		 * Se non hai nada na configuración deberase pensar que o número é 2 (Galego)
+		 * Alomenos así é como está configurado no kbabel
+		 */
+		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->text_notebook), TRUE);
+		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), TRUE);
 		msgstr_plural = po_message_msgstr_plural(msg->message, 0);
 		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->text_msgid_plural));
 		if(GtrPreferences.dot_char) {
@@ -267,32 +315,7 @@ gtranslator_message_show(GtrMsg *msg)
 	gtranslator_comment_display(GTR_COMMENT(msg->comment));
 
 #ifdef HAVE_GTKSPELL
-	/*
-	 * Use instant spell checking via gtkspell only if the corresponding
-	 *  setting in the preferences is set.
-	 */
-	if(GtrPreferences.instant_spell_check)
-	{
-		/*
-		 * Start up gtkspell if not already done.
-		 */ 
-		GError *error = NULL;
-		char *errortext = NULL;
-		
-		if (gtrans_spell == NULL && current_page->trans_msgstr != NULL) {
-		    gtrans_spell = gtkspell_new_attach(GTK_TEXT_VIEW(current_page->trans_msgstr), NULL, &error);
-		    if (gtrans_spell == NULL) {
-			g_print(_("gtkspell error: %s\n"), error->message);
-			errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);
-			g_error_free(error);
-		    }
-		} 		
-	} else {
-	    if (gtrans_spell != NULL) {
-		gtkspell_detach(gtrans_spell);
-		gtrans_spell = NULL;
-	    }
-	}
+	gtranslator_attach_gskspell();
 #endif
 
 	/*Status widgets*/

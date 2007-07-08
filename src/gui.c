@@ -63,7 +63,7 @@
 /*
  * Glade file path
  */
-#define GLADE_PATH "main_window.glade"
+#define GLADE_PATH DATADIR "/gtranslator/main_window.glade"
 
 /*
  * Glade widgets names
@@ -94,7 +94,7 @@ guint trans_box_insert_text_signal_id;
 guint trans_box_delete_text_signal_id;
 
 /*Statusbar context id*/
-guint *status_id = 0;
+guint status_id = 0;
 
 /*
  * Warning widget
@@ -184,7 +184,6 @@ gtranslator_create_main_window(void)
 	/*
 	 * Initialize glade library, load the interface
 	 */
-	//path_glade = g_strconcat(DATADIR, GLADE_PATH, NULL);
 	glade = glade_xml_new(GLADE_PATH, NULL, NULL);
     	
 	/*
@@ -197,11 +196,6 @@ gtranslator_create_main_window(void)
 	 * Create the app	
 	 */
 	gtranslator_application = glade_xml_get_widget(glade, GLADE_MAIN_WINDOW);
-	
-	/*
-	 * Set up the menus
-	 */
-	//gnome_app_create_menus(GNOME_APP(gtranslator_application), the_menus);
 	
 	/*
 	 * Start with no document view
@@ -221,13 +215,6 @@ gtranslator_create_main_window(void)
     	 */
     	warning_hbox = glade_xml_get_widget(glade, GLADE_WARNING_HBOX);
     	
-    
-
-	/*
-	 * Make menu hints display on the appbar
-	 */
-	//gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), the_menus);
-
 	/*
 	 * Enable the default menubar/toolbar options
 	 */

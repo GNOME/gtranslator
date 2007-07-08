@@ -1,6 +1,7 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
+ * 			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +35,7 @@
 #include <dirent.h>
 #include <unistd.h>
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 /*
  * The used ref' count for the language lists.
@@ -871,14 +872,7 @@ gtranslator_get_plural_form_string(gchar *lang)
 	 * Check if msginit is available on the system.
 	 */
 	if(!g_find_program_in_path("msginit")) {
-		GtkWidget *dialog;
-				dialog = gtk_message_dialog_new (GTK_WINDOW(gtranslator_application),
-								 GTK_DIALOG_DESTROY_WITH_PARENT,
-								 GTK_MESSAGE_WARNING,
-								 GTK_BUTTONS_CLOSE,
-								 _("Sorry, msginit isn't available on your system!"));
-				gtk_dialog_run (GTK_DIALOG (dialog));
-				gtk_widget_destroy (dialog);
+		gtranslator_show_message(_("Sorry, msginit isn't available on your system!"), NULL);
 		return NULL;
 	}	
 	po_test_file = g_strconcat ("# SOME DESCRIPTIVE TITLE.\n",
