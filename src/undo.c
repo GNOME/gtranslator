@@ -45,7 +45,7 @@ typedef struct
 	gboolean insertion;
 } GtrUndo;
 
-GtrUndo *undo=NULL;
+static GtrUndo *undo=NULL;
 
 /*
  * Register the given text for an insertion step.

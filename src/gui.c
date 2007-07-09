@@ -283,7 +283,7 @@ delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
 		fake_string=gtk_text_buffer_get_text(textbuf, 
 						     start, end, FALSE);
 		
-//		gtranslator_undo_register_deletion(fake_string, start, end);
+		gtranslator_undo_register_deletion(fake_string, start, end);
 		g_free(fake_string);
 	}
 	gtk_text_buffer_delete(textbuf, start, end);
@@ -301,8 +301,8 @@ delete_text_handler(GtkTextBuffer *textbuf, GtkTextIter *start,
  */
 gboolean 
 gtranslator_application_delete_event_cb(GtkWidget  * widget,
-						 GdkEvent  * event,
-						 gpointer user_data)
+					GdkEvent  * event,
+					gpointer user_data)
 {
 	gtranslator_quit();
 	return TRUE;
@@ -736,7 +736,7 @@ insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 		/*
 		* Register the text for an insertion undo action.
 		*/
-//		gtranslator_undo_register_insertion(text, pos);
+		gtranslator_undo_register_insertion(text, pos);
 
 		if(GtrPreferences.dot_char)
 		{

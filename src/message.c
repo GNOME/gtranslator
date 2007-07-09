@@ -506,6 +506,10 @@ gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number)
 void 
 gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 {
+	/*
+	 * I think this can do it with void po_message_set_fuzzy (po_message_t message, int fuzzy);
+	 * but is neccessary save the file.
+	 */
 	static int compiled = FALSE;
 	static regex_t rexf, rexc;
 	regmatch_t pos[3];

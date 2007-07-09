@@ -32,11 +32,14 @@
  * This is the main languages list used in gtranslator -- the languages values
  *  are used in many places in the sources so that this table should be quite
  *   right.
+ * You can find this information in:
+ * - http://translate.sourceforge.net/wiki/l10n/pluralforms
+ * - http://translate.sourceforge.net/wiki/pootle/wordforge_pootle#languages
  */
 GtrLanguage languages[] = {
 	{
 	 N_("Afrikaans"), "af", "iso-8859-1",
-	 "", "8bit"
+	 "", "8bit", 2, "n != 1"
 	},
 	{
 	 N_("Albanian"), "sq", "UTF-8",
@@ -240,7 +243,7 @@ GtrLanguage languages[] = {
 	},
 	{
 	 N_("Portuguese"), "pt", "iso-8859-1",
-	 "pt@li.org", "8bit"
+	 "traduz@debianpt.org", "8bit"
 	},
 	{
 	 N_("Portuguese/Brazil"), "pt_BR", "UTF-8",
