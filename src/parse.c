@@ -587,6 +587,7 @@ gtranslator_overwrite_file(GtkWidget * widget, gpointer data)
 	 * TODO: Should close the file and open the new saved file
 	 */
 	//gtranslator_open_file(current_page->po->filename);
+	gtranslator_open(current_page->po->filename, &error);
 }
 
 /*

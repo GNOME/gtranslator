@@ -179,8 +179,6 @@ push_statusbar_data(GtkWidget *widget, gpointer data)
 void 
 gtranslator_create_main_window(void)
 {
-	gchar *path_glade;
-	
 	/*
 	 * Initialize glade library, load the interface
 	 */
@@ -193,7 +191,7 @@ gtranslator_create_main_window(void)
 	connect_menu_signals();
 	
 	/*
-	 * Create the app	
+	 * Create the app
 	 */
 	gtranslator_application = glade_xml_get_widget(glade, GLADE_MAIN_WINDOW);
 	
