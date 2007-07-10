@@ -28,9 +28,10 @@
 #include <time.h>
 
 #include <gconf/gconf-client.h>
+#include <gdk/gdk.h>
 
 //#include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 GConfClient	*client=NULL;
 gchar		*private_path=NULL;
@@ -77,6 +78,23 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 	gconf_client_set_string(client, private_path, value, NULL);
 	g_free(private_path);
 }
+
+/*
+ * Color methods:
+ */
+void
+gtranslator_config_set_color(gchar *path, GdkColor *color)
+{
+	g_return_if_fail(path != NULL);
+	g_return_if_fail(color != NULL);
+
+	gchar *value;
+	value = gdk_color_to_string(color);
+	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
+	gconf_client_set_string(client, private_path, value, NULL);
+	g_free(private_path);
+}
+
 
 /*
  * Integer methods:

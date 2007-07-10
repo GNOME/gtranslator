@@ -25,6 +25,7 @@
  */
 
 #include <glib.h>
+#include <gdk/gdk.h>
 
 /*
  * gtranslator_config is only available after a initialization.
@@ -48,6 +49,11 @@ gint 		gtranslator_config_get_int(gchar *path);
  */
 void 		gtranslator_config_set_string(gchar *path, gchar *value);
 gchar 		*gtranslator_config_get_string(gchar *path);
+
+/*
+ * Color methods:
+ */
+void		gtranslator_config_set_color(gchar *path, GdkColor *color);
 
 /*
  * Gfloat methods:

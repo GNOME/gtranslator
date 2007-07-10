@@ -32,6 +32,7 @@
 #include "languages.h"
 #include "messages-table.h"
 #include "nautilus-string.h"
+#include "page.h"
 #include "prefs.h"
 #include "stylistics.h"
 #include "translator.h"
@@ -120,6 +121,11 @@ static GladeXML *glade_prefs;
 #define GLADE_MSGID_LABEL "msgid_label"
 #define GLADE_MSGSTR_FONT "msgstr_font"
 #define GLADE_MSGSTR_LABEL "msgstr_label"
+#define GLADE_OWN_COLORS "own_colors"
+#define GLADE_MSGID_COLOR "msgid_color"
+#define GLADE_MSGID_COLOR_LABEL "msgid_color_label"
+#define GLADE_MSGSTR_COLOR "msgstr_color"
+#define GLADE_MSGSTR_COLOR_LABEL "msgstr_color_label"
 #define GLADE_RB_1 "rb_1"
 #define GLADE_RB_2 "rb_2"
 //Page 4
@@ -169,7 +175,7 @@ static GtkWidget
 static GtkWidget
 	*warn_if_fuzzy, *unmark_fuzzy, *save_geometry_tb,
 	*use_dot_char, *use_update_function,	*check_recent_files, 
-	*own_fonts, *instant_spell_checking, 
+	*own_fonts, *own_colors, *instant_spell_checking, 
 	*keep_obsolete, *autosave, *autosave_with_suffix,
 	*sweep_compile_file, *use_learn_buffer, *autosave_timeout_label,
 	*show_messages_table, *rambo_function, *autosave_suffix_label,
@@ -188,7 +194,8 @@ static GtkWidget
 /*
  * Font/color specific widgets used in the preferences box.
  */
-static GtkWidget *msgid_font, *msgstr_font, *msgid_label, *msgstr_label;
+static GtkWidget *msgid_font, *msgstr_font, *msgid_label, *msgstr_label,
+		 *msgid_color, *msgstr_color, *msgid_color_label, *msgstr_color_label;
 
 /*
  * The preferences dialog widget itself, plus a notebook.
@@ -389,9 +396,24 @@ gtranslator_preferences_font_picker_new(const gchar *name,
 	font_selector = glade_xml_get_widget(glade_prefs, name);
 	if(fontspec)
 		gtk_font_button_set_font_name(GTK_FONT_BUTTON(font_selector), fontspec);
-	g_signal_connect(G_OBJECT(font_selector), "font_set",
+	g_signal_connect(G_OBJECT(font_selector), "font-set",
 			 G_CALLBACK(callback), NULL);
 	return font_selector;
+}
+
+static GtkWidget *
+gtranslator_preferences_color_button_new(const gchar *name,
+					 const GdkColor *colorspec,
+					 GCallback callback)
+{
+	GtkWidget *color_button = NULL;
+
+	color_button = glade_xml_get_widget(glade_prefs, name);
+	if(colorspec)
+		gtk_color_button_set_color(GTK_COLOR_BUTTON(color_button), colorspec);
+	g_signal_connect(G_OBJECT(color_button), "color-set",
+			 G_CALLBACK(callback), NULL);
+	return color_button;
 }
 
 enum
@@ -737,7 +759,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	//Set up hotkey chars
 	gtranslator_preferences_hotkey_char_widget_new();
 	
-	//own_fonts toggle button	
+	//own_fonts check button	
     	own_fonts = gtranslator_preferences_toggle_new(GLADE_OWN_FONTS,
 							   GtrPreferences.use_own_fonts,
 							   G_CALLBACK(gtranslator_preferences_dialog_changed));	
@@ -758,7 +780,25 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	msgstr_label = glade_xml_get_widget(glade_prefs, GLADE_MSGSTR_LABEL);
 	gtranslator_preferences_pack_set_up_with_label(msgstr_font, msgstr_label, own_fonts, TRUE);
 
-		
+	//own_colors check button
+	own_colors = gtranslator_preferences_toggle_new(GLADE_OWN_COLORS,
+							GtrPreferences.use_own_colors,
+							G_CALLBACK(gtranslator_preferences_dialog_changed));
+	
+	//Set up msgid_color button
+	msgid_color = gtranslator_preferences_color_button_new(GLADE_MSGID_COLOR,
+							       GtrPreferences.msgid_color,
+							       G_CALLBACK(gtranslator_preferences_dialog_changed));
+	msgid_color_label = glade_xml_get_widget(glade_prefs, GLADE_MSGID_COLOR_LABEL);
+	gtranslator_preferences_pack_set_up_with_label(msgid_color, msgid_color_label, own_colors, TRUE);
+	
+	//Set up msgid_color button
+	msgstr_color = gtranslator_preferences_color_button_new(GLADE_MSGSTR_COLOR,
+								GtrPreferences.msgstr_color,
+								G_CALLBACK(gtranslator_preferences_dialog_changed));
+	msgstr_color_label = glade_xml_get_widget(glade_prefs, GLADE_MSGSTR_COLOR_LABEL);
+	gtranslator_preferences_pack_set_up_with_label(msgstr_color, msgstr_color_label, own_colors, TRUE);
+	
 	/* Contents item */
 	gchar *content_str = _("Contents");
 	
@@ -1255,18 +1295,31 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 		GtrPreferences.msgid_font);
 	gtranslator_config_set_string("interface/translation_font",
 		GtrPreferences.msgstr_font);
+	
+	//Colors
+	gtk_color_button_set_color(GTK_COLOR_BUTTON(msgid_color),GtrPreferences.msgid_color);
+	gtk_color_button_set_color(GTK_COLOR_BUTTON(msgstr_color),GtrPreferences.msgstr_color);
+	
+	gtranslator_config_set_color("interface/original_color",
+				     GtrPreferences.msgid_color);
+	gtranslator_config_set_color("interface/translation_color",
+				     GtrPreferences.msgstr_color);
 
+	/*
+	 * Assign custom fonts and colors to GtkTextView
+	 * TODO: Missing plural handling
+	 */
+	gtranslator_style_set_font(current_page->text_msgid, GtrPreferences.msgid_font);
+	gtranslator_style_set_font(current_page->trans_msgstr, GtrPreferences.msgstr_font);
+	gtranslator_style_set_color(current_page->text_msgid, GtrPreferences.msgid_color);
+	gtranslator_style_set_color(current_page->trans_msgstr, GtrPreferences.msgstr_color);
+	
 	/*
 	 * Assign our attended hotkey character from the prefs dialog.
 	 */
 	gtranslator_config_set_int("editor/hotkey_char", GtrPreferences.hotkey_char);
 	
-	/*GtrNotebookPage *page;
-	page = g_list_nth_data(gtranslator_notebook_pages, 0);
-	
-	gtranslator_set_style(GTK_WIDGET(page->text_box), 0);
-	gtranslator_set_style(GTK_WIDGET(page->trans_box), 1);
-	*/
+	 
 	gtranslator_config_set_bool("toggles/save_geometry", GtrPreferences.save_geometry);
 	gtranslator_config_set_bool("toggles/warn_if_fuzzy", GtrPreferences.warn_if_fuzzy);
 	gtranslator_config_set_bool("toggles/set_non_fuzzy_if_changed", 

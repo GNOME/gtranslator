@@ -52,11 +52,12 @@ gtranslator_SOURCES = \
 	runtime-config.c runtime-config.h \
 	session.c session.h \
 	sighandling.c sighandling.h \
+	stylistics.c stylistics.h \
 	translator.c translator.h \
 	undo.c undo.h \
 	utils.c utils.h \
 	utils_gui.c utils_gui.h \
-	vfs-handle.c vfs-handle.h
+	vfs-handle.c vfs-handle.h 
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \
@@ -84,3 +85,5 @@ glade_DATA =  \
        preferences.glade
 
 EXTRA_DIST = ChangeLog $(glade_DATA)
+
+
