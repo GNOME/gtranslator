@@ -1,7 +1,8 @@
 /*
- * (C) 2000-2001 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Joe Man <trmetal@yahoo.com.hk>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -104,8 +105,8 @@ get_path_from_type(ColorType Type)
 void
 gtranslator_color_values_set(GtkColorButton *colorbutton, ColorType Type)
 {
-	GdkColor *color;
-	gchar spec[8];
+	GdkColor color;
+	gchar *spec;
 	gchar *path=NULL;
 
 	if(Type==COLOR_FG)
@@ -130,14 +131,14 @@ gtranslator_color_values_set(GtkColorButton *colorbutton, ColorType Type)
 	}
 
 	g_return_if_fail(path!=NULL);
-
-	gtk_color_button_get_color(colorbutton, color);
+	gtk_color_button_get_color(GTK_COLOR_BUTTON(colorbutton), &color);
 	
 	/*
 	 * Store the color values.
 	 */
-	g_snprintf(spec, 8, "#%02x%02x%02x", color->red, color->green, color->blue);
+	spec=gdk_color_to_string(&color);
 	gtranslator_config_set_string(path, spec);
+	g_free(spec);
 }
 
 /*
@@ -191,8 +192,7 @@ void gtranslator_color_values_get(GtkColorButton *colorbutton, ColorType Type)
  */
 void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 {
-	GtkRcStyle	*style;
-	GdkColor	*color_bg, color_fg;
+	GtkStyle	*style;
 	
 	gchar 		*spec;
 	gchar	 	*fontname;
@@ -205,7 +205,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 		return;
 	}
 	
-	style = gtk_widget_get_modifier_style(widget);
+	style=gtk_style_copy(gtk_widget_get_style(widget));	
 	
 	/*
 	 * Set up the stored values for the background from the preferences/
@@ -222,8 +222,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	
 	if(spec)
 	{
-		gdk_color_parse(spec, color_bg);
-		//gtk_widget_modify_bg(widget, GTK_STATE_NORMAL, color_bg);
+		gdk_color_parse(spec, &style->base[GTK_STATE_NORMAL]);
 		g_free(spec);
 	}
 	
@@ -241,11 +240,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	
 	if(spec)
 	{
-		gdk_color_parse(spec, &color_fg);
-		style->fg[GTK_STATE_NORMAL] = color_fg;
-		style->color_flags[GTK_STATE_NORMAL] |= GTK_RC_FG;
-		//gtk_widget_modify_fg(widget, GTK_STATE_NORMAL, &color_fg);
-		g_printf("%s\n\n", spec);
+		gdk_color_parse(spec, &style->text[GTK_STATE_NORMAL]);
 		g_free(spec);
 	}
 	
@@ -269,7 +264,7 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 		 * Use gtranslator's font in this case -- should be a fallback font
 		 *  for your language.
 		 */
-		fontname=_("Sans 12");
+		fontname=_("Sans 10");
 		
 		gtranslator_config_set_string("interface/translation_font", fontname);
 		gtranslator_config_set_string("interface/original_font", fontname);
@@ -282,18 +277,18 @@ void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
 	{
 		PangoFontDescription *pango;
 		pango = pango_font_description_from_string(fontname);
-		gtk_widget_modify_font(widget, pango);
+		style->font_desc = pango;
 	}
 	
 	/*
 	 * The final step: set the widget style.
 	 */
-	//gtk_widget_modify_style(widget, style);
+	gtk_widget_set_style(widget, style);
 	
 	/*
 	 * Clean up the used style + fontname variable .-)
 	 */
-	//g_object_unref(style);
+	g_object_unref(style);
 	g_free(fontname);
 }
 

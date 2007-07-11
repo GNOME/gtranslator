@@ -85,12 +85,6 @@ struct {
 	gchar *msgid_font;
 	gchar *msgstr_font;
 	
-	/*
-	 * User-specified colors;
-	 */
-	GdkColor *msgid_color;
-	GdkColor *msgstr_color;
-	
 } GtrPreferences;
 
 /*

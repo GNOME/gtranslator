@@ -134,7 +134,7 @@ gtranslator_page_new(GtrPo *po)
 	/*
 	 * Check if we'd to use special styles.
 	 */
-	if(GtrPreferences.use_own_fonts)
+	if(GtrPreferences.use_own_fonts || GtrPreferences.use_own_colors)
 	{
 		/*
 		 * Set the own specs for the font.
