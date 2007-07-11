@@ -41,7 +41,7 @@
 #define GLADE_NOTEBOOK_PANE "notebook_pane"
 #define GLADE_COMBOBOX_PANE "combobox_pane"
 #define GLADE_COMMENT "comment"
-#define GLADE_EDIT_BUTTON "edit_button"
+#define GLADE_EDIT_COMMENT "edit_comment"
 #define GLADE_TEXT_NOTEBOOK "text_notebook"
 #define GLADE_TEXT_MSGID "text_msgid"
 #define GLADE_TEXT_MSGID_PLURAL "text_msgid_plural"
@@ -89,7 +89,7 @@ gtranslator_page_new(GtrPo *po)
 
 	page->comment = glade_xml_get_widget(glade, GLADE_COMMENT);
 	
-	page->edit_button = glade_xml_get_widget(glade, GLADE_EDIT_BUTTON);
+	page->edit_button = glade_xml_get_widget(glade, GLADE_EDIT_COMMENT);
 	
 	gtk_paned_set_position(GTK_PANED(page->content_pane), 0);
 

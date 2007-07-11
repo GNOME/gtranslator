@@ -787,7 +787,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 							      G_CALLBACK(gtranslator_preferences_dialog_changed));
 	text_color_label = glade_xml_get_widget(glade_prefs, GLADE_TEXT_COLOR_LABEL);
 	gtranslator_preferences_pack_set_up_with_label(text_color, text_color_label, own_colors, TRUE);
-	gtranslator_color_values_get(GTK_COLOR_BUTTON(text_color), COLOR_FG);
+	//gtranslator_color_values_get(GTK_COLOR_BUTTON(text_color), COLOR_FG);
 	
 	/* Contents item */
 	gchar *content_str = _("Contents");

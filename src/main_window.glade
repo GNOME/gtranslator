@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Wed Jul  4 20:07:58 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Wed Jul 11 21:50:39 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -505,6 +505,7 @@
                         <signal name="select" handler="on_go_back_select"/>
                         <signal name="deselect" handler="on_go_back_deselect"/>
                         <signal name="activate" handler="on_go_back_activate"/>
+                        <accelerator key="Page_Up" modifiers="" signal="activate"/>
                       </widget>
                     </child>
                     <child>
@@ -521,6 +522,7 @@
                         <signal name="select" handler="on_go_forward_select"/>
                         <signal name="deselect" handler="on_go_forward_deselect"/>
                         <signal name="activate" handler="on_go_forward_activate"/>
+                        <accelerator key="Page_Down" modifiers="" signal="activate"/>
                       </widget>
                     </child>
                     <child>
@@ -558,6 +560,7 @@
                         <signal name="select" handler="on_next_fuzzy_select"/>
                         <signal name="deselect" handler="on_next_fuzzy_deselect"/>
                         <signal name="activate" handler="on_next_fuzzy_activate"/>
+                        <accelerator key="Page_Down" modifiers="GDK_CONTROL_MASK" signal="activate"/>
                       </widget>
                     </child>
                     <child>
@@ -568,6 +571,7 @@
                         <signal name="select" handler="on_next_untranslated_select"/>
                         <signal name="deselect" handler="on_next_untranslated_deselect"/>
                         <signal name="activate" handler="on_next_untranslated_activate"/>
+                        <accelerator key="Page_Down" modifiers="GDK_CONTROL_MASK" signal="activate"/>
                       </widget>
                     </child>
                   </widget>
@@ -1140,6 +1144,16 @@
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <child>
+                              <widget class="GtkLabel" id="label8">
+                                <property name="visible">True</property>
+                                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                <property name="label" translatable="yes">Translation status: </property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                              </packing>
+                            </child>
+                            <child>
                               <widget class="GtkRadioButton" id="radiobutton_translated">
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
@@ -1151,6 +1165,7 @@
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
@@ -1166,7 +1181,7 @@
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="position">1</property>
+                                <property name="position">2</property>
                               </packing>
                             </child>
                             <child>
@@ -1182,7 +1197,7 @@
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="position">2</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                           </widget>
