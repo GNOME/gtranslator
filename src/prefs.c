@@ -760,9 +760,9 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	gtranslator_preferences_hotkey_char_widget_new();
 	
 	//own_fonts check button	
-    	own_fonts = gtranslator_preferences_toggle_new(GLADE_OWN_FONTS,
-							   GtrPreferences.use_own_fonts,
-							   G_CALLBACK(gtranslator_preferences_dialog_changed));	
+	own_fonts = gtranslator_preferences_toggle_new(GLADE_OWN_FONTS,
+						       GtrPreferences.use_own_fonts,
+						       G_CALLBACK(gtranslator_preferences_dialog_changed));	
 	
 	
 	//Set up msgid_font button maybe is not neccessary return the widget
@@ -1244,6 +1244,7 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	GtrPreferences.check_recent_file = if_active(check_recent_files);
 	GtrPreferences.instant_spell_check = if_active(instant_spell_checking);
 	GtrPreferences.use_own_fonts = if_active(own_fonts);
+	GtrPreferences.use_own_colors = if_active(own_colors);
 	GtrPreferences.use_learn_buffer = if_active(use_learn_buffer);
 	GtrPreferences.fuzzy_matching = if_active(fuzzy_matching);
 	GtrPreferences.auto_learn = if_active(auto_learn);
@@ -1297,22 +1298,28 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 		GtrPreferences.msgstr_font);
 	
 	//Colors
-	gtk_color_button_set_color(GTK_COLOR_BUTTON(msgid_color),GtrPreferences.msgid_color);
-	gtk_color_button_set_color(GTK_COLOR_BUTTON(msgstr_color),GtrPreferences.msgstr_color);
+	/*GdkColor *c;
+	gtk_color_button_get_color(GTK_COLOR_BUTTON(msgid_color),c);
+	gtk_color_button_get_color(GTK_COLOR_BUTTON(msgstr_color),GtrPreferences.msgstr_color);
+	
+	g_printf("pasou\n\n");
 	
 	gtranslator_config_set_color("interface/original_color",
 				     GtrPreferences.msgid_color);
 	gtranslator_config_set_color("interface/translation_color",
 				     GtrPreferences.msgstr_color);
-
+*/
 	/*
 	 * Assign custom fonts and colors to GtkTextView
 	 * TODO: Missing plural handling
 	 */
-	gtranslator_style_set_font(current_page->text_msgid, GtrPreferences.msgid_font);
-	gtranslator_style_set_font(current_page->trans_msgstr, GtrPreferences.msgstr_font);
-	gtranslator_style_set_color(current_page->text_msgid, GtrPreferences.msgid_color);
-	gtranslator_style_set_color(current_page->trans_msgstr, GtrPreferences.msgstr_color);
+	if(current_page != NULL)
+	{
+		gtranslator_set_style(current_page->text_msgid, 0);
+		gtranslator_set_style(current_page->trans_msgstr, 1);
+		/*gtranslator_style_set_color(current_page->text_msgid, GtrPreferences.msgid_color);
+		gtranslator_style_set_color(current_page->trans_msgstr, GtrPreferences.msgstr_color);*/
+	}
 	
 	/*
 	 * Assign our attended hotkey character from the prefs dialog.
@@ -1342,6 +1349,8 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 			      GtrPreferences.instant_spell_check);
 	gtranslator_config_set_bool("toggles/use_own_fonts",
 			      GtrPreferences.use_own_fonts);
+	gtranslator_config_set_bool("toggles/use_own_colors",
+				    GtrPreferences.use_own_colors);
 	gtranslator_config_set_bool("toggles/use_learn_buffer",
 			      GtrPreferences.use_learn_buffer);
 	gtranslator_config_set_bool("toggles/fuzzy_matching",
@@ -1477,6 +1486,12 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_string("interface/original_font");
 	GtrPreferences.msgstr_font = 
 		gtranslator_config_get_string("interface/translation_font");
+	
+	/*gdk_color_parse(gtranslator_config_get_string("interface/original_color"), 
+			GtrPreferences.msgid_color);
+	
+	gdk_color_parse(gtranslator_config_get_string("interface/translation_color"), 
+			GtrPreferences.msgstr_color);*/
 
 	GtrPreferences.hotkey_char = gtranslator_config_get_int("editor/hotkey_char");
 #ifdef GTR_ABOUT_ME	
@@ -1537,6 +1552,8 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_bool("toggles/check_recent_files");
 	GtrPreferences.use_own_fonts =
 		gtranslator_config_get_bool("toggles/use_own_fonts");
+	GtrPreferences.use_own_colors =
+		gtranslator_config_get_bool("toggles/use_own_colors");
 	GtrPreferences.keep_obsolete =
 		gtranslator_config_get_bool("toggles/keep_obsolete");
 	GtrPreferences.rambo_function =
@@ -1574,18 +1591,7 @@ void gtranslator_preferences_read(void)
 		"toggles/show_messages_table");
 	GtrPreferences.collapse_all = gtranslator_config_get_bool(
 		"toggles/collapse_all");
-	/*
-	 * Check if we'd to use special styles.
-	 */
-	if(GtrPreferences.use_own_fonts)
-	{
-		/*
-		 * Set the own specs for the font.
-		 
-		gtranslator_set_style(GTK_WIDGET(page->text_box), 0);
-		gtranslator_set_style(GTK_WIDGET(page->trans_box), 1);
-		*/
-	}
+	
 }
 
 /*

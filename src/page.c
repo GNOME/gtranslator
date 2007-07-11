@@ -130,6 +130,19 @@ gtranslator_page_new(GtrPo *po)
 		gtk_paned_set_position(GTK_PANED(page->table_pane), 0);
 
 	gtk_widget_show(page->table_pane);
+	
+	/*
+	 * Check if we'd to use special styles.
+	 */
+	if(GtrPreferences.use_own_fonts)
+	{
+		/*
+		 * Set the own specs for the font.
+		 */ 
+		gtranslator_set_style(page->text_msgid, 0);
+		gtranslator_set_style(page->trans_msgstr, 1);
+	}
+	
 	current_page = page;
 	
 }

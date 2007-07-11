@@ -22,22 +22,65 @@
 #ifndef GTR_STYLISTICS_H
 #define GTR_STYLISTICS_H 1
 
-#include <gtk/gtkwidget.h>
-#include <gdk/gdk.h>
-
 /*
  * gtranslator specific style functions.
  */ 
 
-/*
- * Applies font settings for GtkTextViews.
- */
-void gtranslator_style_set_font(GtkWidget *widget, gchar *font);
+#include <gtk/gtkcolorbutton.h>
 
 /*
- * Applies color settings for GtkTextViews.
+ * ColorTypes.
  */
-void gtranslator_style_set_color(GtkWidget *widget, GdkColor *color);
+typedef enum {
+	COLOR_NONE = 1,
+	COLOR_FG,
+	COLOR_BG,
+	COLOR_TEXT_BG,
+	COLOR_SPECIAL_CHAR,
+	COLOR_HOTKEY,
+	COLOR_C_FORMAT,
+	COLOR_NUMBER,
+	COLOR_PUNCTUATION,
+	COLOR_SPECIAL,
+	COLOR_ADDRESS,
+	COLOR_KEYWORD,
+	COLOR_SPELL_ERROR,
 
+	/*
+	 * The colors for the entries in the messages table/tree.
+	 */
+	COLOR_MESSAGES_TABLE_UNTRANSLATED,
+	COLOR_MESSAGES_TABLE_FUZZY,
+	COLOR_MESSAGES_TABLE_TRANSLATED,
+	
+	/*
+	 * This is a fake color, should be the last 
+	 */
+	COLOR_END
+} ColorType;
+
+GdkColor colors[COLOR_END];
+void gtranslator_colors_initialize(void);
+
+/*
+ * Saves the color values from the GtkColorButton.
+ */
+void gtranslator_color_values_set(GtkColorButton *colorbutton, ColorType Type);
+
+/*
+ * Restores the color values for the GtkColorButton.
+ */
+void gtranslator_color_values_get(GtkColorButton *colorbutton, ColorType Type);
+
+/*
+ * Applies the foreground/background/font settings for the given
+ *  widget.
+ */
+void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget);
+
+/*
+ * Utility function for getting the stuff working.
+ */
+GdkColor *gtranslator_get_color_from_type(ColorType type);
 
 #endif

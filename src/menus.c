@@ -427,7 +427,7 @@ connect_menu_signals()
 					G_CALLBACK(gtranslator_about_dialog), NULL );
 	glade_xml_signal_connect_data(  glade, "on_about_select",
 					G_CALLBACK(push_statusbar_data),
-				      _("") );
+				      _(" ") );
 	glade_xml_signal_connect_data(  glade, "on_about_deselect",
 					G_CALLBACK(pop_statusbar_data), NULL );
 	
