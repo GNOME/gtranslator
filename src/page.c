@@ -134,14 +134,14 @@ gtranslator_page_new(GtrPo *po)
 	/*
 	 * Check if we'd to use special styles.
 	 */
-	if(GtrPreferences.use_own_fonts || GtrPreferences.use_own_colors)
-	{
+	//if(GtrPreferences.use_own_fonts || GtrPreferences.use_own_colors)
+	//{
 		/*
 		 * Set the own specs for the font.
 		 */ 
 		gtranslator_set_style(page->text_msgid, 0);
 		gtranslator_set_style(page->trans_msgstr, 1);
-	}
+	//}
 	
 	current_page = page;
 	

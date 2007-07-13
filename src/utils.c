@@ -356,7 +356,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 	g_return_val_if_fail(directory!=NULL, NULL);
 	g_return_val_if_fail(extension!=NULL, NULL);
 	g_return_val_if_fail(strlen(directory) > strlen(extension), NULL);
-
+		
 	/*
 	 * Operate on/in the given directory and search for out pattern.
 	 */
@@ -387,8 +387,7 @@ GList *gtranslator_utils_file_names_from_directory(const gchar *directory,
 			}
 
 			files=g_list_prepend(files, g_strdup(file));
-
-			g_free(file);
+			//g_free(file);
 		}
 	}
 

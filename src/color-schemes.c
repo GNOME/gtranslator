@@ -54,7 +54,7 @@ GtrColorScheme	*theme=NULL;
  * This list is now the general home of all colorscheme which we can
  *  find -- a central list should avoid too much mem-shuffling for such stuff.
  */
-GList		*colorschemes=NULL;
+GList *colorschemes=NULL;
 
 /*
  * A lend function from history.c -- free's some information about the
@@ -424,7 +424,7 @@ gtranslator_color_scheme_create_schemes_list()
 
 	personal_schemes_directory=g_strdup_printf(
 		"%s/.gtranslator/colorschemes", g_get_home_dir());
-
+	
 	/*
 	 * First load all colorschemes from ~/.gtranslator/colorschemes.
 	 */
@@ -439,6 +439,7 @@ gtranslator_color_scheme_create_schemes_list()
 	{
 		colorschemes=gtranslator_utils_file_names_from_directory(
 			SCHEMESDIR, ".xml", TRUE, TRUE, FALSE);
+		
 	}
 	else
 	{
@@ -446,7 +447,7 @@ gtranslator_color_scheme_create_schemes_list()
 
 		global_colorschemes=gtranslator_utils_file_names_from_directory(
 			SCHEMESDIR, ".xml", TRUE, TRUE, FALSE);
-
+		
 		/*
 		 * Append and resort the colorschemes list (now consisting of 
 		 *  global + personal colorschemes directory contents).
@@ -486,7 +487,9 @@ gtranslator_color_scheme_show_list()
 	item_colorschemes = glade_xml_get_widget(glade, GLADE_MENU_ITEM_COLOR_SCHEMES);
 	
 	menu = gtk_menu_new();
-
+	
+	gtranslator_color_scheme_create_schemes_list();
+	
 	/*
 	 * Parse the list.
 	 */
@@ -496,7 +499,6 @@ gtranslator_color_scheme_show_list()
 		gchar *label;
 		colorscheme_name=((gchar *) (onelist->data));
 	
-
 		/*
 		 * Create menuitem
 		 */
@@ -510,8 +512,8 @@ gtranslator_color_scheme_show_list()
 
 		
 		//Set signals
-		g_signal_connect(G_OBJECT(menu), "destroy",
-			G_CALLBACK(free_data), label);
+		/*g_signal_connect(G_OBJECT(menu), "destroy",
+			G_CALLBACK(free_data), label);*/
 		
 		g_signal_connect (item, "activate",
 				  G_CALLBACK (apply_colorscheme),
@@ -550,12 +552,13 @@ apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 {
 	if(scheme_name)
 	{
+		gchar * scheme;
 		/*
 		 * First check if there's such a colorscheme in 
 		 *  ~/.gtranslator/colorschemes before checking the global 
 		 *   colorschemes directory.
 		 */
-		GtrPreferences.scheme=g_strdup_printf(
+		scheme=g_strdup_printf(
 			"%s/.gtranslator/colorschemes/%s.xml", g_get_home_dir(), 
 				scheme_name);
 
@@ -564,13 +567,15 @@ apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 		 *  ~/.gtranslator/colorschemes directory, try the global 
 		 *   colorschemes directory.
 		 */
-		if(!g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
+		if(!g_file_test(scheme, G_FILE_TEST_EXISTS))
 		{
-			GtrPreferences.scheme=g_strdup_printf("%s/%s.xml", 
+			//scheme_name should be displayed without extension
+			scheme=g_strdup_printf("%s/%s", 
 				SCHEMESDIR, scheme_name);
+			g_printf("%s/%s\n", SCHEMESDIR, scheme_name);
 		}
 
-		if(g_file_test(GtrPreferences.scheme, G_FILE_TEST_EXISTS))
+		if(g_file_test(scheme, G_FILE_TEST_EXISTS))
 		{
 			/*
 			 * Free the old used colorscheme.
@@ -580,17 +585,19 @@ apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 			/*
 			 * Read in the new colorscheme, initialize the colors.
 			 */
-			gtranslator_color_scheme_apply(GtrPreferences.scheme);
+			gtranslator_color_scheme_apply(scheme);
 			theme=gtranslator_color_scheme_load_from_prefs();
 			
 			gtranslator_colors_initialize();
 		}
-
-		g_free(scheme_name);
+		g_free(scheme);
+		
+		if(current_page != NULL)
+		{
+			gtranslator_set_style(GTK_WIDGET(current_page->text_msgid), 0);
+        		gtranslator_set_style(GTK_WIDGET(current_page->trans_msgstr), 1);
+		}
 	}
-
-	gtranslator_set_style(GTK_WIDGET(current_page->text_msgid), 0);
-        gtranslator_set_style(GTK_WIDGET(current_page->trans_msgstr), 1);
 }
 
 /*
