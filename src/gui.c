@@ -29,6 +29,7 @@
 #include "about.h"
 #include "actions.h"
 #include "bookmark.h"
+#include "color-schemes.h"
 #include "dialogs.h"
 #include "dnd.h"
 #include "find.h"
@@ -219,10 +220,11 @@ gtranslator_create_main_window(void)
 	//gtranslator_actions_set_up_default();
 
 	/*
-	 * Populate the 'Files/Recent' submenu
+	 * Populate the 'Files/Recent' and coloshemes submenu
 	 */
 	gtranslator_history_show();
-
+	gtranslator_color_scheme_show_list();
+	
 	/*
 	 * Hook up the 'close window' callback.
 	 */

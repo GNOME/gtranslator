@@ -1,5 +1,6 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,6 +28,7 @@
 #include "color-schemes.h"
 #include "gui.h"
 #include "nautilus-string.h"
+#include "page.h"
 #include "parse.h"
 #include "preferences.h"
 #include "prefs.h"
@@ -38,10 +40,10 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
-#include <libgnomeui/gnome-app.h>
-#include <libgnomeui/gnome-app-helper.h>
+
+#define GLADE_MENU_ITEM_COLOR_SCHEMES "colorschemes"
 
 /*
  * The globally used GtrColorScheme.
@@ -83,7 +85,8 @@ void gtranslator_color_scheme_free_infos(GtrColorSchemeInformations **infos);
 /*
  * Open the xml file and return the GtrColorScheme equivalent.
  */ 
-GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
+GtrColorScheme *
+gtranslator_color_scheme_open(const gchar *filename)
 {
 	xmlDocPtr 	xmldoc;
 	xmlNodePtr 	node;
@@ -98,7 +101,7 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 			node->xmlChildrenNode, 1); \
 		g_strstrip(string); \
 		scheme->x=g_strdup(string); \
-		GTR_FREE(string); \
+		g_free(string); \
 		} \
 	}
 
@@ -183,9 +186,10 @@ GtrColorScheme *gtranslator_color_scheme_open(const gchar *filename)
 /*
  * Apply the given color scheme as default.
  */
-void gtranslator_color_scheme_apply(const gchar *filename)
+void
+gtranslator_color_scheme_apply(const gchar *filename)
 {
-  /* GtrColorScheme*/
+	/* GtrColorScheme*/
         theme=g_new0(GtrColorScheme, 1);
 
 	theme=gtranslator_color_scheme_open(filename);
@@ -244,9 +248,11 @@ void gtranslator_color_scheme_apply(const gchar *filename)
 /*
  * Loads the current GtrColorScheme from the preferences.
  */
-GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
+GtrColorScheme *
+gtranslator_color_scheme_load_from_prefs()
 {
-  /*GtrColorScheme */theme=g_new0(GtrColorScheme, 1);
+	/*GtrColorScheme */
+	theme=g_new0(GtrColorScheme, 1);
 
 	theme->info=g_new0(GtrColorSchemeInformations, 1);
 
@@ -278,7 +284,8 @@ GtrColorScheme *gtranslator_color_scheme_load_from_prefs()
 /*
  * Restore the default syntax highlighting colors.
  */ 
-void gtranslator_color_scheme_restore_default()
+void
+gtranslator_color_scheme_restore_default()
 {
 	/*
 	 * Call the function which is also called during the first
@@ -290,7 +297,8 @@ void gtranslator_color_scheme_restore_default()
 /*
  * Sniff out the GtrColorSchemeInformations from the xml document.
  */ 
-GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node)
+GtrColorSchemeInformations *
+get_color_scheme_infos(xmlNodePtr *node)
 {
 	GtrColorSchemeInformations *infos=g_new0(GtrColorSchemeInformations, 1);
 	
@@ -335,7 +343,8 @@ GtrColorSchemeInformations *get_color_scheme_infos(xmlNodePtr *node)
 /*
  * Check the given xml document for being a gtranslator color scheme.
  */
-gboolean check_if_color_scheme(xmlNodePtr *node)
+gboolean 
+check_if_color_scheme(xmlNodePtr *node)
 {
 	g_return_val_if_fail(*node!=NULL, FALSE);
 	
@@ -353,22 +362,24 @@ gboolean check_if_color_scheme(xmlNodePtr *node)
 /*
  * Free the given GtrColorSchemeInformations.
  */
-void gtranslator_color_scheme_free_infos(GtrColorSchemeInformations **infos)
+void
+gtranslator_color_scheme_free_infos(GtrColorSchemeInformations **infos)
 {
 	if(*infos)
 	{
-		GTR_FREE((*infos)->name);
-		GTR_FREE((*infos)->version);
-		GTR_FREE((*infos)->author);
-		GTR_FREE((*infos)->author_email);
-		GTR_FREE(*infos);
+		g_free((*infos)->name);
+		g_free((*infos)->version);
+		g_free((*infos)->author);
+		g_free((*infos)->author_email);
+		g_free(*infos);
 	}
 }
 
 /*
  * Free the given GtrColorScheme.
  */
-void gtranslator_color_scheme_free(GtrColorScheme **scheme)
+void
+gtranslator_color_scheme_free(GtrColorScheme **scheme)
 {
 	if(*scheme)
 	{
@@ -377,8 +388,8 @@ void gtranslator_color_scheme_free(GtrColorScheme **scheme)
 			gtranslator_color_scheme_free_infos(&(*scheme)->info);
 		}
 		
-		GTR_FREE((*scheme)->fg);
-		GTR_FREE((*scheme)->bg);
+		g_free((*scheme)->fg);
+		g_free((*scheme)->bg);
 
 		/*
 		 * The "text_bg" attribute for the colorschemes is quite new, therefore
@@ -386,19 +397,19 @@ void gtranslator_color_scheme_free(GtrColorScheme **scheme)
 		 */
 		if((*scheme)->text_bg)
 		{
-			GTR_FREE((*scheme)->text_bg);
+			g_free((*scheme)->text_bg);
 		}
 		
-		GTR_FREE((*scheme)->special_char);
-		GTR_FREE((*scheme)->hotkey);
-		GTR_FREE((*scheme)->c_format);
-		GTR_FREE((*scheme)->number);
-		GTR_FREE((*scheme)->punctuation);
-		GTR_FREE((*scheme)->special);
-		GTR_FREE((*scheme)->address);
-		GTR_FREE((*scheme)->keyword);
-		GTR_FREE((*scheme)->spell_error);
-		GTR_FREE(*scheme);
+		g_free((*scheme)->special_char);
+		g_free((*scheme)->hotkey);
+		g_free((*scheme)->c_format);
+		g_free((*scheme)->number);
+		g_free((*scheme)->punctuation);
+		g_free((*scheme)->special);
+		g_free((*scheme)->address);
+		g_free((*scheme)->keyword);
+		g_free((*scheme)->spell_error);
+		g_free(*scheme);
 	}
 }
 
@@ -406,7 +417,8 @@ void gtranslator_color_scheme_free(GtrColorScheme **scheme)
  * Create a list of all available color schemes in our common
  *  directories where we are searching for the colorschemes.
  */
-void gtranslator_color_scheme_create_schemes_list()
+void
+gtranslator_color_scheme_create_schemes_list()
 {
 	gchar 	*personal_schemes_directory=NULL;
 
@@ -418,7 +430,7 @@ void gtranslator_color_scheme_create_schemes_list()
 	 */
 	colorschemes=gtranslator_utils_file_names_from_directory(
 		personal_schemes_directory, ".xml", TRUE, TRUE, FALSE);
-	GTR_FREE(personal_schemes_directory);
+	g_free(personal_schemes_directory);
 
 	/*
 	 * Now append the colorschemes from the global colorschemes reservoire.
@@ -448,7 +460,8 @@ void gtranslator_color_scheme_create_schemes_list()
 /*
  * Clean the list of the colorschemes up -- free the list and it's values.
  */
-void gtranslator_color_scheme_delete_schemes_list()
+void
+gtranslator_color_scheme_delete_schemes_list()
 {
 	if(colorschemes)
 	{
@@ -460,21 +473,19 @@ void gtranslator_color_scheme_delete_schemes_list()
  * Creates the menu with the colorschemes as toggle items -- easier
  *  access to the favourites of kabalak :-)
  */
-void gtranslator_color_scheme_show_list()
+void
+gtranslator_color_scheme_show_list()
 {
-	GnomeUIInfo 	*menu;
-	
+	GtkWidget 	*menu, *item_colorschemes, *item;
 	GList 		*onelist;
-
 	gint		 i=0;
-	
-	gchar 		*menupath=_("_View/_Colorschemes/");
 
 	/*
-	 * Delete the old entries.
+	 * Get glade GtkMenuItem
 	 */
-	gnome_app_remove_menu_range(GNOME_APP(gtranslator_application), 
-		menupath, 0, i);
+	item_colorschemes = glade_xml_get_widget(glade, GLADE_MENU_ITEM_COLOR_SCHEMES);
+	
+	menu = gtk_menu_new();
 
 	/*
 	 * Parse the list.
@@ -482,56 +493,60 @@ void gtranslator_color_scheme_show_list()
 	for(onelist=g_list_last(colorschemes); onelist!=NULL; onelist=g_list_previous(onelist))
 	{
 		gchar *colorscheme_name=NULL;
-
+		gchar *label;
 		colorscheme_name=((gchar *) (onelist->data));
-		menu=g_new0(GnomeUIInfo, 2);
+	
 
 		/*
-		 * Set the label name.
+		 * Create menuitem
 		 */
-		if(colorscheme_name)
-		{
-			menu->label=g_strdup_printf("%s", colorscheme_name);
-		}
-		
-		/*
-		 * Set the GnomeUIInfo settings and labels.
-		 */
-		menu->type=GNOME_APP_UI_ITEM;
-		menu->hint=g_strdup_printf(_("Activate colorscheme %s"), colorscheme_name);
-		menu->moreinfo=(gpointer)apply_colorscheme;
-		menu->user_data=colorscheme_name;
-		(menu+1)->type=GNOME_APP_UI_ENDOFINFO;
+		label = g_strdup_printf("%s", colorscheme_name);
+		item = gtk_menu_item_new_with_label(label);
 
 		/*
 		 * Insert this item into menu
 		 */
-		gnome_app_insert_menus(GNOME_APP(gtranslator_application), menupath, menu);
-		gnome_app_install_menu_hints(GNOME_APP(gtranslator_application), menu);
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
-		g_signal_connect(G_OBJECT(menu->widget), "destroy",
-			G_CALLBACK(free_data), (gpointer) menu->hint);
 		
-		/*
-		 * Free the string and the GnomeUIInfo structure.
-		 */
- 		g_free((gpointer) menu->label);
-		GTR_FREE(menu);
+		//Set signals
+		g_signal_connect(G_OBJECT(menu), "destroy",
+			G_CALLBACK(free_data), label);
+		
+		g_signal_connect (item, "activate",
+				  G_CALLBACK (apply_colorscheme),
+				  colorscheme_name);
+		
+		g_signal_connect (item, "select",
+				  G_CALLBACK (push_statusbar_data),
+				  g_strdup_printf(_("Activate colorscheme %s"),
+						  colorscheme_name));
+		
+		g_signal_connect (item, "deselect",
+				  G_CALLBACK (pop_statusbar_data),
+				  NULL);
+		
+		gtk_widget_show(item);
+		
 	}
+	// Set menu to recent_files item
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item_colorschemes), menu);
 }
 
 /*
  * Helper function for free'ing action.
  */
-void free_data(GtkWidget *widget, gpointer userdata)
+void
+free_data(GtkWidget *widget, gpointer userdata)
 {
-	GTR_FREE(userdata);
+	g_free(userdata);
 }
 
 /*
  * Apply the given scheme name from the colorschemes list.
  */
-void apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
+void
+apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 {
 	if(scheme_name)
 	{
@@ -571,18 +586,18 @@ void apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 			gtranslator_colors_initialize();
 		}
 
-		GTR_FREE(scheme_name);
+		g_free(scheme_name);
 	}
 
-	gtranslator_set_style(GTK_WIDGET(text_box), 0);
-        gtranslator_set_style(GTK_WIDGET(trans_box), 1);
+	gtranslator_set_style(GTK_WIDGET(current_page->text_msgid), 0);
+        gtranslator_set_style(GTK_WIDGET(current_page->trans_msgstr), 1);
 }
 
 /*
  * Copy the given GtrColorSchemeInformation.
  */
-GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
-	GtrColorSchemeInformations *infos)
+GtrColorSchemeInformations *
+gtranslator_color_scheme_infos_copy(GtrColorSchemeInformations *infos)
 {
 	GtrColorSchemeInformations *copy=g_new(GtrColorSchemeInformations, 1);
 
@@ -598,7 +613,8 @@ GtrColorSchemeInformations *gtranslator_color_scheme_infos_copy(
 /*
  * Copy the given GtrColorScheme.
  */
-GtrColorScheme *gtranslator_color_scheme_copy(GtrColorScheme *scheme)
+GtrColorScheme *
+gtranslator_color_scheme_copy(GtrColorScheme *scheme)
 {
 	GtrColorScheme *copy=g_new(GtrColorScheme, 1);
 

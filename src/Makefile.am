@@ -28,6 +28,7 @@ gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
 	bookmark.c bookmark.h \
+	color-schemes.c color-schemes.h \
 	comment.c comment.h \
 	compile.c compile.h \
 	dialogs.c dialogs.h \

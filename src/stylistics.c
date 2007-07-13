@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-//#include "color-schemes.h"
+#include "color-schemes.h"
 #include "prefs.h"
 #include "preferences.h"
 #include "stylistics.h"
@@ -32,7 +32,6 @@
 
 #include <glib/gi18n.h>
 
-#include <gdk/gdkx.h>
 
 static gchar *get_path_from_type(ColorType Type);
 
@@ -99,25 +98,30 @@ get_path_from_type(ColorType Type)
 	return g_strdup_printf("colors/%s", section);
 }
 
+
+/*
+ * This is a copy paste of gdk_color_to_string func
+ */
 gchar *
 color_to_string (const GdkColor *color)
 {
-  PangoColor pango_color;
+	PangoColor pango_color;
 
-  g_return_val_if_fail (color != NULL, NULL);
+	g_return_val_if_fail (color != NULL, NULL);
 
-  pango_color.red = color->red;
-  pango_color.green = color->green;
-  pango_color.blue = color->blue;
+	pango_color.red = color->red;
+	pango_color.green = color->green;
+	pango_color.blue = color->blue;
 
-  return pango_color_to_string (&pango_color);
+	return pango_color_to_string (&pango_color);
 }
 
 /*
  * Saves the colors from the given GtkColorButton.
  */
 void
-gtranslator_color_values_set(GtkColorButton *colorbutton, ColorType Type)
+gtranslator_color_values_set(GtkColorButton *colorbutton,
+			     ColorType Type)
 {
 	GdkColor color;
 	gchar *spec;
@@ -158,7 +162,9 @@ gtranslator_color_values_set(GtkColorButton *colorbutton, ColorType Type)
 /*
  * Restores the GtkColorButton colors.
  */
-void gtranslator_color_values_get(GtkColorButton *colorbutton, ColorType Type)
+void
+gtranslator_color_values_get(GtkColorButton *colorbutton,
+			     ColorType Type)
 {
 	GdkColor *color;
 	gchar *spec;
@@ -204,7 +210,9 @@ void gtranslator_color_values_get(GtkColorButton *colorbutton, ColorType Type)
  * Sets the style informations for the given widget
  *  (foreground, background and font).
  */
-void gtranslator_set_style(GtkWidget *widget, gint foo_us_and_spec_the_widget)
+void
+gtranslator_set_style(GtkWidget *widget,
+		      gint foo_us_and_spec_the_widget)
 {
 	GtkStyle	*style;
 	
@@ -311,7 +319,8 @@ static gboolean colors_initialized=FALSE;
 /*
  * Return the requested GdkColor
  */
-GdkColor *gtranslator_get_color_from_type(ColorType type)
+GdkColor *
+gtranslator_get_color_from_type(ColorType type)
 {
 	g_return_val_if_fail(type < COLOR_END, NULL);
 
@@ -329,21 +338,21 @@ void gtranslator_colors_initialize(void)
 	/*
 	 * If no theme is specified/given use the default colors.
 	 */ 
-	/*if(!theme)
+	if(!theme)
 	{
 		gtranslator_color_scheme_restore_default();
 
 		theme=gtranslator_color_scheme_load_from_prefs();
-	}*/
+	}
 	
-	/*gdk_color_parse(theme->fg,		&colors[COLOR_FG]);
-	gdk_color_parse(theme->bg,		&colors[COLOR_BG]);*/
+	gdk_color_parse(theme->fg,		&colors[COLOR_FG]);
+	gdk_color_parse(theme->bg,		&colors[COLOR_BG]);
 
 	/*
 	 * As the "text_bg" field isn't mandatory we've got to check it before
 	 *  acting with it.
 	 */
-	/*if(theme->text_bg)
+	if(theme->text_bg)
 	{
 		gdk_color_parse(theme->text_bg,		&colors[COLOR_TEXT_BG]);
 	}
@@ -356,5 +365,5 @@ void gtranslator_colors_initialize(void)
 	gdk_color_parse(theme->keyword,		&colors[COLOR_KEYWORD]);
 	gdk_color_parse(theme->address,		&colors[COLOR_ADDRESS]);
 	gdk_color_parse(theme->special,		&colors[COLOR_SPECIAL]);
-	gdk_color_parse(theme->spell_error,	&colors[COLOR_SPELL_ERROR]);*/
+	gdk_color_parse(theme->spell_error,	&colors[COLOR_SPELL_ERROR]);
 }
