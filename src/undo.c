@@ -45,12 +45,14 @@ typedef struct
 	gboolean insertion;
 } GtrUndo;
 
-static GtrUndo *undo=NULL;
+static GtrUndo *undo = NULL;
 
 /*
  * Register the given text for an insertion step.
  */
-void gtranslator_undo_register_insertion(const gchar *text, const GtkTextIter *position)
+void 
+gtranslator_undo_register_insertion(const gchar *text, 
+				    const GtkTextIter *position)
 {
 	g_return_if_fail(position!=NULL);
 	g_return_if_fail(text!=NULL);
@@ -75,7 +77,10 @@ void gtranslator_undo_register_insertion(const gchar *text, const GtkTextIter *p
 /*
  * Do the same for the deletion step.
  */
-void gtranslator_undo_register_deletion(const gchar *text, const GtkTextIter *position, const GtkTextIter *endposition)
+void
+gtranslator_undo_register_deletion(const gchar *text, 
+				   const GtkTextIter *position,
+				   const GtkTextIter *endposition)
 {
 	g_return_if_fail(position!=NULL);
 	g_return_if_fail(text!=NULL);
@@ -102,7 +107,8 @@ void gtranslator_undo_register_deletion(const gchar *text, const GtkTextIter *po
 /*
  * Return whether any undo is registered.
  */
-gboolean gtranslator_undo_get_if_registered_undo()
+gboolean 
+gtranslator_undo_get_if_registered_undo()
 {
 	return (undo && undo->text);
 }
@@ -110,7 +116,8 @@ gboolean gtranslator_undo_get_if_registered_undo()
 /*
  * Reset the mainly used GtrUndo.
  */
-void gtranslator_undo_clean_register()
+void
+gtranslator_undo_clean_register()
 {
 	if(undo)
 	{
@@ -124,7 +131,8 @@ void gtranslator_undo_clean_register()
  * Undo the last action -- calls the undo stuff with the undo parameters 
  *  for doing the undo -- Undo!
  */
-void gtranslator_undo_run_undo()
+void
+gtranslator_undo_run_undo()
 {
 	GtkTextBuffer *buffer;
 	GtkTextIter *end = NULL;

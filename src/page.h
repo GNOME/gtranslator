@@ -40,7 +40,7 @@ typedef struct
 	GtrMessagesTable *messages_table;
 	
 	GtkWidget *comment;
-	GtkWidget *edit_button;
+	GtkWidget *edit_comment;
 
 	/*Original text*/
 	GtkWidget *text_notebook;
@@ -50,7 +50,7 @@ typedef struct
 	/*Translated text*/
 	GtkWidget *trans_notebook;
 	GtkWidget *trans_msgstr;
-	GtkWidget *trans_msgstr_plural;
+	GtkWidget *trans_msgstr_plural[6];
 	
     	/*Pane widgets*/
 	GtkWidget *table_pane;

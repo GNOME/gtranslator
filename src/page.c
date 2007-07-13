@@ -89,7 +89,7 @@ gtranslator_page_new(GtrPo *po)
 
 	page->comment = glade_xml_get_widget(glade, GLADE_COMMENT);
 	
-	page->edit_button = glade_xml_get_widget(glade, GLADE_EDIT_COMMENT);
+	page->edit_comment = glade_xml_get_widget(glade, GLADE_EDIT_COMMENT);
 	
 	gtk_paned_set_position(GTK_PANED(page->content_pane), 0);
 
@@ -105,7 +105,7 @@ gtranslator_page_new(GtrPo *po)
 	   or more in the case of a plural message */
 	page->trans_notebook = glade_xml_get_widget(glade, GLADE_TRANS_NOTEBOOK);
 	page->trans_msgstr = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR);
-	page->trans_msgstr_plural = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR_PLURAL);
+	//page->trans_msgstr_plural = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR_PLURAL);
 
 	/*Status radiobuttons*/
 	page->translated = glade_xml_get_widget(glade, GLADE_TRANSLATED);
@@ -115,7 +115,7 @@ gtranslator_page_new(GtrPo *po)
 	/*
 	 * Tie up callback for 'comments' button
 	 */
-	g_signal_connect(G_OBJECT(page->edit_button), "clicked",
+	g_signal_connect(G_OBJECT(page->edit_comment), "clicked",
 			 G_CALLBACK(gtranslator_edit_comment_dialog), NULL);
 
 	/*

@@ -100,9 +100,12 @@ read_messages_table_colors()
 	 * Now parse our defined color strings into the GdkColor structs of 
 	 * our messages table colors.
 	 */
-	gdk_color_parse(messages_table_colors->untranslated, &messages_table_colors->untranslated_color);
-	gdk_color_parse(messages_table_colors->translated, &messages_table_colors->translated_color);
-	gdk_color_parse(messages_table_colors->fuzzy, &messages_table_colors->fuzzy_color);
+	gdk_color_parse(messages_table_colors->untranslated, 
+			&messages_table_colors->untranslated_color);
+	gdk_color_parse(messages_table_colors->translated,
+			&messages_table_colors->translated_color);
+	gdk_color_parse(messages_table_colors->fuzzy,
+			&messages_table_colors->fuzzy_color);
 }
 
 /*
@@ -341,12 +344,13 @@ gtranslator_messages_table_populate(GtrMessagesTable *table,
  * Update the data in a single row
  */
 void 
-gtranslator_messages_table_update_row(GtrMessagesTable *table, GtrMsg *msg)
+gtranslator_messages_table_update_row(GtrMessagesTable *table,
+				      GtrMsg *msg)
 {
 	const char *msgid, *msgstr;
 
 	g_assert(table != NULL);
-
+	
 	msgid = po_message_msgid(msg->message);
 	msgstr = po_message_msgstr(msg->message);
 	if(msg->is_fuzzy) {
@@ -381,8 +385,7 @@ gtranslator_messages_table_select_row(GtrMessagesTable *table,
 	GtkTreeSelection *selection=NULL;
 
 	g_return_if_fail(table->store!=NULL);
-
-	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(table->store));
+	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(table->widget));
 	gtk_tree_selection_select_iter(selection, &msg->iter);
 }
 

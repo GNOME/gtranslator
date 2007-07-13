@@ -766,7 +766,8 @@ insert_text_handler (GtkTextBuffer *textbuffer, GtkTextIter *pos,
 /*
  * Update the progress bar
  */
-void gtranslator_update_progress_bar(void)
+void 
+gtranslator_update_progress_bar(void)
 {
 	gdouble percentage;
 	

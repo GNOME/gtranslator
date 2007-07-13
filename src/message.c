@@ -34,6 +34,7 @@
 #include "messages-table.h"
 #include "page.h"
 #include "prefs.h"
+#include "translator.h"
 #include "undo.h"
 #include "utils.h"
 #include "utils_gui.h"
@@ -171,7 +172,28 @@ gtranslator_attach_gskspell()
 			errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);
 			g_error_free(error);
 		    }
-		} 		
+		}
+		/*guint nplural = languages[].plural;
+		if( nplural >= 2 )
+		{
+			guint i;
+			GtkSpell *gtkspell[nplural-1];
+			for(i = 0; i < nplural; i++) 
+			{*/
+				/*
+				 * Doing this i think there are memory leaks
+				 * becouse i can't detach it
+				 */
+			/*	gtkspell[i] = NULL;
+				gtkspell[i] = 
+					gtkspell_new_attach(GTK_TEXT_VIEW(current_page->trans_msgstr_plural[i]), NULL, &error);
+				if (gtkspell[i] == NULL) {
+					g_print(_("gtkspell error: %s\n"), error->message);
+					errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);
+					g_error_free(error);
+		    		}
+			}
+		}*/
 	} else {
 	    if (gtrans_spell != NULL) {
 		gtkspell_detach(gtrans_spell);
@@ -205,7 +227,8 @@ void
 gtranslator_message_show(GtrMsg *msg)
 {
 	GtkTextBuffer *buf;
-	const char *msgid, *msgid_plural, *msgstr, *msgstr_plural;
+	const gchar *msgid, *msgid_plural, *msgstr_plural;
+	const gchar *msgstr;
 	int i;
 	
 	g_assert(current_page != NULL);
@@ -245,6 +268,22 @@ gtranslator_message_show(GtrMsg *msg)
 		 */
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->text_notebook), FALSE);
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), FALSE);
+		if(msgstr) 
+		{
+			g_printf("xx\n\n");
+			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
+			if(GtrPreferences.dot_char) {
+				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr);
+				gtk_text_buffer_set_text(buf, temp, -1);
+				g_free(temp);
+			}
+			else {
+				gtk_text_buffer_set_text(buf, (gchar*)msgstr, -1);
+			}
+			g_signal_connect(buf, "end-user-action",
+					 G_CALLBACK(gtranslator_message_translation_update),
+					 current_page);
+		}
 	}
 	else {
 		/*
@@ -254,10 +293,11 @@ gtranslator_message_show(GtrMsg *msg)
 		 * Débese comprobar a configuración para saber cantas solapas se deben poñer.
 		 * Se non hai nada na configuración deberase pensar que o número é 2 (Galego)
 		 * Alomenos así é como está configurado no kbabel
+		 * Pois vai ser que hai 6 formas do plural.
+		 * 
 		 */
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->text_notebook), TRUE);
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), TRUE);
-		msgstr_plural = po_message_msgstr_plural(msg->message, 0);
 		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->text_msgid_plural));
 		if(GtrPreferences.dot_char) {
 			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgid_plural);
@@ -267,7 +307,9 @@ gtranslator_message_show(GtrMsg *msg)
 		else {
 			gtk_text_buffer_set_text(buf, (gchar*)msgid_plural, -1);
 		}
-		if(msgstr_plural){
+		msgstr_plural = po_message_msgstr_plural(msg->message, 0);
+		if(msgstr_plural)
+		{
 			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
 			if(GtrPreferences.dot_char) {
 				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr_plural);
@@ -275,21 +317,11 @@ gtranslator_message_show(GtrMsg *msg)
 				g_free(temp);
 			}
 			else gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
+			
+			g_signal_connect(buf, "end-user-action",
+					 G_CALLBACK(gtranslator_message_translation_update),
+					 current_page);
 		}
-	}
-	if(msgstr) {
-		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
-		if(GtrPreferences.dot_char) {
-			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr);
-			gtk_text_buffer_set_text(buf, temp, -1);
-			g_free(temp);
-		}
-		else {
-			gtk_text_buffer_set_text(buf, (gchar*)msgstr, -1);
-		}
-		g_signal_connect(buf, "end-user-action",
-				 G_CALLBACK(gtranslator_message_translation_update),
-				 current_page);
 	}
 	/*i=2;
 	while(msgid_plural && (msgstr[i] = po_message_msgstr_plural(msg->message, i - 1))) {
@@ -432,6 +464,7 @@ gtranslator_message_go_to(GList * to_go)
 
 	if(current_page->messages_table)
 	{
+		/*Only work with move forward, with move backward don't work*/
 		gtranslator_messages_table_select_row(current_page->messages_table, GTR_MSG(po->current->data));
 	}
 	

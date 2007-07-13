@@ -402,6 +402,14 @@ gtranslator_open(const gchar *filename, GError **error)
 	 * Show the current message.
 	 */
 	gtranslator_message_show(po->current->data);
+	
+	/*
+	 * Select the current row
+	 */
+	if(current_page->messages_table)
+	{
+		gtranslator_messages_table_select_row(current_page->messages_table, GTR_MSG(po->current->data));
+	}
 
 	/*
 	 * Enable/disable application bar options

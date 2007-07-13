@@ -299,13 +299,13 @@ void gtranslator_comment_display(GtrComment *comment)
 		nautilus_strcasecmp(comment_display_str, " "))
 	{
 		//Enable widgets
-		gtk_widget_set_sensitive(current_page->edit_button, TRUE);
+		gtk_widget_set_sensitive(current_page->edit_comment, TRUE);
 		gtk_widget_set_sensitive(gtranslator_menuitems->comment, TRUE);
 	}
 	else
 	{
 		//Disable widgets
-		gtk_widget_set_sensitive(current_page->edit_button, FALSE);
+		gtk_widget_set_sensitive(current_page->edit_comment, FALSE);
 		gtk_widget_set_sensitive(gtranslator_menuitems->comment, FALSE);
 	}
 
@@ -318,6 +318,6 @@ void gtranslator_comment_display(GtrComment *comment)
 void gtranslator_comment_hide()
 {
 	gtk_label_set_text(GTK_LABEL(current_page->comment), "");
-	gtk_widget_set_sensitive(current_page->edit_button, FALSE);
+	gtk_widget_set_sensitive(current_page->edit_comment, FALSE);
 	gtk_paned_set_position(GTK_PANED(current_page->content_pane), 0);
 }

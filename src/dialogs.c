@@ -528,7 +528,7 @@ void gtranslator_edit_comment_dialog(GtkWidget *widget, gpointer useless)
 		 */
 		gtk_label_set_text(GTK_LABEL(current_page->comment),
 			comment_string->str);
-		gtk_widget_set_sensitive(current_page->edit_button,
+		gtk_widget_set_sensitive(current_page->edit_comment,
 			strlen(comment_string->str) > 0);
 
 		/*
