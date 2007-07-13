@@ -51,11 +51,6 @@ void 		gtranslator_config_set_string(gchar *path, gchar *value);
 gchar 		*gtranslator_config_get_string(gchar *path);
 
 /*
- * Color methods:
- */
-void		gtranslator_config_set_color(gchar *path, GdkColor *color);
-
-/*
  * Gfloat methods:
  */
 void		gtranslator_config_set_float(gchar *path, gfloat value);

@@ -270,7 +270,6 @@ gtranslator_message_show(GtrMsg *msg)
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), FALSE);
 		if(msgstr) 
 		{
-			g_printf("xx\n\n");
 			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
 			if(GtrPreferences.dot_char) {
 				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr);

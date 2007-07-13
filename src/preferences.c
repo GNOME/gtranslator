@@ -79,23 +79,6 @@ void gtranslator_config_set_string(gchar *path, gchar *value)
 	g_free(private_path);
 }
 
-/*
- * Color methods:
- */
-void
-gtranslator_config_set_color(gchar *path, GdkColor *color)
-{
-	g_return_if_fail(path != NULL);
-	//g_return_if_fail(color != NULL);
-
-	gchar *value;
-	value = gdk_color_to_string(color);
-	g_printf("%s\n\n\n", value);
-	private_path=g_strconcat(CONFIG_PREFIX, path, NULL);
-	gconf_client_set_string(client, private_path, value, NULL);
-	g_free(private_path);
-}
-
 
 /*
  * Integer methods:

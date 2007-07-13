@@ -99,6 +99,20 @@ get_path_from_type(ColorType Type)
 	return g_strdup_printf("colors/%s", section);
 }
 
+gchar *
+color_to_string (const GdkColor *color)
+{
+  PangoColor pango_color;
+
+  g_return_val_if_fail (color != NULL, NULL);
+
+  pango_color.red = color->red;
+  pango_color.green = color->green;
+  pango_color.blue = color->blue;
+
+  return pango_color_to_string (&pango_color);
+}
+
 /*
  * Saves the colors from the given GtkColorButton.
  */
@@ -136,7 +150,7 @@ gtranslator_color_values_set(GtkColorButton *colorbutton, ColorType Type)
 	/*
 	 * Store the color values.
 	 */
-	spec=gdk_color_to_string(&color);
+	spec=color_to_string(&color);
 	gtranslator_config_set_string(path, spec);
 	g_free(spec);
 }
