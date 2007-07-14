@@ -333,7 +333,8 @@ gtranslator_get_color_from_type(ColorType type)
 	return &colors[type];
 }
 
-void gtranslator_colors_initialize(void)
+void
+gtranslator_colors_initialize(void)
 {
 	/*
 	 * If no theme is specified/given use the default colors.
@@ -345,8 +346,8 @@ void gtranslator_colors_initialize(void)
 		theme=gtranslator_color_scheme_load_from_prefs();
 	}
 	
-	gdk_color_parse(theme->fg,		&colors[COLOR_FG]);
-	gdk_color_parse(theme->bg,		&colors[COLOR_BG]);
+	gdk_color_parse(theme->fg, &colors[COLOR_FG]);
+	gdk_color_parse(theme->bg, &colors[COLOR_BG]);
 
 	/*
 	 * As the "text_bg" field isn't mandatory we've got to check it before
@@ -354,7 +355,7 @@ void gtranslator_colors_initialize(void)
 	 */
 	if(theme->text_bg)
 	{
-		gdk_color_parse(theme->text_bg,		&colors[COLOR_TEXT_BG]);
+		gdk_color_parse(theme->text_bg,	&colors[COLOR_TEXT_BG]);
 	}
 	
 	gdk_color_parse(theme->special_char,	&colors[COLOR_SPECIAL_CHAR]);

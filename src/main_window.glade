@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Thu Jul 12 13:46:54 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Sat Jul 14 11:20:29 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -314,13 +314,13 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkMenuItem" id="fuzzy">
+                      <widget class="GtkCheckMenuItem" id="fuzzy">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Fuzzy</property>
                         <property name="use_underline">True</property>
                         <signal name="select" handler="on_fuzzy_select"/>
+                        <signal name="toggled" handler="on_fuzzy_activate"/>
                         <signal name="deselect" handler="on_fuzzy_deselect"/>
-                        <signal name="activate" handler="on_fuzzy_activate"/>
                       </widget>
                     </child>
                     <child>
@@ -1092,7 +1092,7 @@
                                   <widget class="GtkTextView" id="text_msgid">
                                     <property name="visible">True</property>
                                     <property name="editable">False</property>
-                                    <property name="wrap_mode">GTK_WRAP_WORD</property>
+                                    <property name="wrap_mode">GTK_WRAP_WORD_CHAR</property>
                                   </widget>
                                 </child>
                               </widget>
@@ -1219,7 +1219,7 @@
                                 <child>
                                   <widget class="GtkTextView" id="trans_msgstr">
                                     <property name="visible">True</property>
-                                    <property name="wrap_mode">GTK_WRAP_WORD</property>
+                                    <property name="wrap_mode">GTK_WRAP_WORD_CHAR</property>
                                   </widget>
                                 </child>
                               </widget>
