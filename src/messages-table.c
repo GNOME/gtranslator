@@ -297,7 +297,8 @@ gtranslator_messages_table_populate(GtrMessagesTable *table,
 				    GList *messages)
 {
 	GtrMsg *msg;
-	const char *msgid, *msgstr;
+	const gchar *msgid, *msgstr;
+	/*Message table should store plural forms too*/
 	
 	g_assert(table!=NULL);
 
@@ -305,7 +306,9 @@ gtranslator_messages_table_populate(GtrMessagesTable *table,
 		msg = GTR_MSG(messages->data);
 		msgid = po_message_msgid(msg->message);
 		msgstr = po_message_msgstr(msg->message);
-		if(msg->is_fuzzy) {
+		
+		//Fuzzy
+		if(po_message_is_fuzzy(msg->message)) {
 			gtk_tree_store_append(table->store, &msg->iter,
 				&table->fuzzy_node);
 			gtk_tree_store_set(table->store, &msg->iter,
@@ -315,7 +318,8 @@ gtranslator_messages_table_populate(GtrMessagesTable *table,
 				COLOR_COLUMN, &messages_table_colors->fuzzy_color,
 				-1);
 		}
-		else if(msgstr[0] != '\0') {
+		//Translated
+		else if(po_message_is_translated(msg->message)) {
 			gtk_tree_store_append(table->store, &msg->iter,
 				&table->translated_node);
 			gtk_tree_store_set(table->store, &msg->iter,
@@ -325,6 +329,7 @@ gtranslator_messages_table_populate(GtrMessagesTable *table,
 				COLOR_COLUMN, &messages_table_colors->translated_color,
 				-1);
 		}
+		//Untranslated
 		else {
 			gtk_tree_store_append(table->store, &msg->iter,
 				&table->untranslated_node);
@@ -347,25 +352,28 @@ void
 gtranslator_messages_table_update_row(GtrMessagesTable *table,
 				      GtrMsg *msg)
 {
-	const char *msgid, *msgstr;
+	const gchar *msgid, *msgstr;
 
 	g_assert(table != NULL);
 	
 	msgid = po_message_msgid(msg->message);
 	msgstr = po_message_msgstr(msg->message);
-	if(msg->is_fuzzy) {
+	//Fuzzy
+	if(po_message_is_fuzzy(msg->message)) {
 		gtk_tree_store_append(table->store, &msg->iter, &table->fuzzy_node);
 		gtk_tree_store_set(table->store, &msg->iter, ORIGINAL_COLUMN,
 			msgid, TRANSLATION_COLUMN, msgstr, MSG_PTR_COLUMN, msg,
 			COLOR_COLUMN, messages_table_colors->fuzzy, -1);
 	}
-	else if(msgstr[0] != '\0') {
+	//Translated
+	else if(po_message_is_translated(msg->message)) {
 		gtk_tree_store_append(table->store, &msg->iter,
 			&table->translated_node);
 		gtk_tree_store_set(table->store, &msg->iter, ORIGINAL_COLUMN, msgid,
 			 TRANSLATION_COLUMN, msgstr, MSG_PTR_COLUMN, msg,
 			 COLOR_COLUMN, messages_table_colors->translated, -1);
 	}
+	//Untranslated
 	else {
 		gtk_tree_store_append(table->store, &msg->iter,
 			&table->untranslated_node);

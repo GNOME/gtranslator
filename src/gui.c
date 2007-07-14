@@ -435,13 +435,12 @@ gtranslator_application_bar_update(gint pos)
 	 */
 	po = current_page->po;
 	msg = GTR_MSG(po->current->data);
-	msgstr = po_message_msgstr(msg->message);
 	msgid_plural = po_message_msgid_plural(msg->message);
 
 	/*
 	 * And append according to the message status the status name.
 	 */
-	if(msg->is_fuzzy)
+	if(po_message_is_fuzzy(msg->message))
 	{
 		if(po->fuzzy>0)
 		{
@@ -457,7 +456,7 @@ gtranslator_application_bar_update(gint pos)
 			gtk_widget_set_sensitive(gtranslator_menuitems->next_fuzzy, FALSE);
 		}
 
-	} else if(msgstr[0] != '\0') {
+	} else if(po_message_is_translated(msg->message)) {
 		status=g_strdup(_("Translated"));
 	} else {
 		/*

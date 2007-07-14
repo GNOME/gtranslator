@@ -61,13 +61,41 @@ GtkSpell *gtrans_spell = NULL;
 #endif
 
 
+
+/*
+ * Returns TRUE if the message is translated
+ */
+gboolean
+po_message_is_translated (po_message_t message)
+{
+	if (po_message_msgid_plural(message) == NULL)
+		return po_message_msgstr(message)[0] != '\0';	
+	else
+	{
+		int i;
+
+		for (i = 0; ; i++)
+		{
+			const gchar *str_i = po_message_msgstr_plural(message, i);
+			if (str_i == NULL)
+				break;
+			if (str_i[0] == '\0')
+				return FALSE;
+		}
+		
+	return TRUE;
+	}
+}
+
 /*
  * Calls function func on each item in list 'begin'. Starts from 
  * item 'begin', loops to first element, and stops at 'begin'.
  * Returns TRUE, if found, FALSE otherwise.
  */
 gboolean 
-gtranslator_message_for_each(GList * begin, FEFunc func, gpointer user_data)
+gtranslator_message_for_each(GList * begin,
+			     FEFunc func,
+			     gpointer user_data)
 {
 	GList *msg;
 
@@ -97,7 +125,7 @@ is_fuzzy(GList *msg, gpointer useless)
 		g_warning(_("Couldn't get the message!"));
 		return FALSE;
 	}
-	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_FUZZY) {
+	if (po_message_is_fuzzy(GTR_MSG(msg->data)->message)) {
 		gtranslator_message_go_to(msg);
 		return TRUE;
 	} else
@@ -105,7 +133,8 @@ is_fuzzy(GList *msg, gpointer useless)
 }
 
 void 
-gtranslator_message_go_to_next_fuzzy(GtkWidget * widget, gpointer useless)
+gtranslator_message_go_to_next_fuzzy(GtkWidget * widget,
+				     gpointer useless)
 {
 	GList *begin;
 	
@@ -125,10 +154,12 @@ gtranslator_message_go_to_next_fuzzy(GtkWidget * widget, gpointer useless)
 static gboolean 
 is_untranslated(GList *msg, gpointer useless)
 {
-	if (GTR_MSG(msg->data)->status & GTR_MSG_STATUS_TRANSLATED)
-		return FALSE;
-	gtranslator_message_go_to(msg);
-	return TRUE;
+	if(!po_message_is_translated(GTR_MSG(msg->data)->message))
+	{
+		gtranslator_message_go_to(msg);
+		return TRUE;
+	}
+	return FALSE;
 }
 
 void 
@@ -144,7 +175,7 @@ gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer useless
 	if (gtranslator_message_for_each(begin, (FEFunc)is_untranslated, NULL))
 		return;
 	//Message dialog
-    	gtranslator_show_message(_("All messages seem to be translated."), NULL);
+    	gtranslator_show_message(_("All messages seems to be translated."), NULL);
 	//Disable next_untranslated menuitem
 	gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, FALSE);
 }
@@ -349,10 +380,16 @@ gtranslator_message_show(GtrMsg *msg)
 	gtranslator_attach_gskspell();
 #endif
 
-	/*Status widgets*/
-	if(msg->is_fuzzy)
+	/*
+	 * Status widgets and fuzzy menuitem
+	 */
+	if(po_message_is_fuzzy(msg->message))
+	{
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(gtranslator_menuitems->fuzzy),
+							       TRUE);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->fuzzy), TRUE);
-	else if(msgstr[0] != '\0')
+	}
+	else if(po_message_is_translated(msg->message))
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->translated), TRUE);
 	else
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->untranslated), TRUE);
@@ -415,8 +452,8 @@ gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	gtranslator_translation_changed(NULL, NULL);
 	if (flag == GTR_MSG_STATUS_FUZZY) {
 		gtranslator_message_status_set_fuzzy(GTR_MSG(po->current->data),
-			       GTK_CHECK_MENU_ITEM(item)->active);
-		if(GTK_CHECK_MENU_ITEM(item)->active)
+			       gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(item)));
+		if(gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(item)))
 			po->fuzzy++;
 		else
 			po->fuzzy--;
@@ -425,7 +462,8 @@ gtranslator_message_change_status(GtkWidget  * item, gpointer which)
 	gtranslator_message_update();
 	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_update_row(current_page->messages_table, GTR_MSG(po->current->data));
+		gtranslator_messages_table_update_row(current_page->messages_table,
+						      GTR_MSG(po->current->data));
 	}
 }
 
@@ -464,7 +502,8 @@ gtranslator_message_go_to(GList * to_go)
 	if(current_page->messages_table)
 	{
 		/*Only work with move forward, with move backward don't work*/
-		gtranslator_messages_table_select_row(current_page->messages_table, GTR_MSG(po->current->data));
+		gtranslator_messages_table_select_row(current_page->messages_table,
+						      GTR_MSG(po->current->data));
 	}
 	
 	pos = g_list_position(po->messages, po->current);
@@ -503,52 +542,59 @@ gtranslator_message_go_to(GList * to_go)
  * Callbacks for moving around messages 
  */
 void 
-gtranslator_message_go_to_first(GtkWidget  * widget, gpointer useless)
+gtranslator_message_go_to_first(GtkWidget  * widget,
+				gpointer useless)
 {
 	gtranslator_message_go_to(g_list_first(current_page->po->messages));
 }
 
 void 
-gtranslator_message_go_to_previous(GtkWidget  * widget, gpointer useless)
+gtranslator_message_go_to_previous(GtkWidget  * widget,
+				   gpointer useless)
 {
 	gtranslator_message_go_to(g_list_previous(current_page->po->current));
 }
 
 void 
-gtranslator_message_go_to_next(GtkWidget  * widget, gpointer useless)
+gtranslator_message_go_to_next(GtkWidget  * widget,
+			       gpointer useless)
 {
 	gtranslator_message_go_to(g_list_next(current_page->po->current));
 }
 
 void 
-gtranslator_message_go_to_last(GtkWidget  * widget, gpointer useless)
+gtranslator_message_go_to_last(GtkWidget  * widget,
+			       gpointer useless)
 {
 	gtranslator_message_go_to(g_list_last(current_page->po->messages));
 }
 
 void 
-gtranslator_message_go_to_no(GtkWidget  * widget, gpointer number)
+gtranslator_message_go_to_no(GtkWidget  * widget,
+			     gpointer number)
 {
-	gtranslator_message_go_to(g_list_nth(current_page->po->messages, GPOINTER_TO_UINT(number)));
+	gtranslator_message_go_to(g_list_nth(current_page->po->messages,
+					     GPOINTER_TO_UINT(number)));
 }
 
 /*
  * Set Fuzzy status.
  */
 void 
-gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
+gtranslator_message_status_set_fuzzy(GtrMsg * msg,
+				     gboolean fuzzy)
 {
 	/*
 	 * I think this can do it with void po_message_set_fuzzy (po_message_t message, int fuzzy);
 	 * but is neccessary save the file.
 	 */
-	static int compiled = FALSE;
+/*	static int compiled = FALSE;
 	static regex_t rexf, rexc;
 	regmatch_t pos[3];
-	gchar *comment;
+	gchar *comment;*/
 
 	g_return_if_fail(msg!=NULL);
-	g_return_if_fail(msg->comment!=NULL);
+	/*g_return_if_fail(msg->comment!=NULL);
 	g_return_if_fail(GTR_COMMENT(msg->comment)->comment!=NULL);
 
 	comment=gtranslator_comment_get_comment_contents(msg->comment);
@@ -558,11 +604,11 @@ gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		regcomp(&rexc, "(^#, fuzzy$)|^#, (fuzzy,) .*$", REG_EXTENDED | REG_NEWLINE);
 		compiled = TRUE;
 	}
-
+*/
 	/* 
 	 * If fuzzy status is already correct
 	 */
-	if (((msg->status & GTR_MSG_STATUS_FUZZY) != 0) == fuzzy)
+/*	if (((msg->status & GTR_MSG_STATUS_FUZZY) != 0) == fuzzy)
 		return;
 	if (fuzzy) {
 		gchar *comchar;
@@ -578,18 +624,22 @@ gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
 		}
 
 		gtranslator_comment_update(&msg->comment, comchar);
-
+*/
 		/* No need to free comment. Fixes several crashes and file corruption bugs */
 		/* g_free(comment); */
 		
-		g_free(comchar);
+	/*	g_free(comchar);
 	} else {
 		msg->status &= ~GTR_MSG_STATUS_FUZZY;
 		if (!regexec(&rexc, comment, 3, pos, 0)) {
 			gint i = (pos[1].rm_so == -1) ? 2 : 1;
 			strcpy(comment+pos[i].rm_so, comment+pos[i].rm_eo+1);
 		}
-	}
+	}*/
+	
+	
+	po_message_set_fuzzy(msg->message, fuzzy);
+
 	//Status widget
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->fuzzy), fuzzy);
 }
@@ -598,7 +648,8 @@ gtranslator_message_status_set_fuzzy(GtrMsg * msg, gboolean fuzzy)
  * Set Sticky status.
  */
 void 
-gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
+gtranslator_message_status_set_sticky (GtrMsg * msg,
+				       gpointer useless)
 {
 	g_assert(current_page != NULL);
 
@@ -627,7 +678,8 @@ gtranslator_message_status_set_sticky (GtrMsg * msg, gpointer useless)
  * Clear the translation
  */
 void 
-gtranslator_message_clear_translation(GtrMsg *msg, gpointer useless)
+gtranslator_message_clear_translation(GtrMsg *msg,
+				      gpointer useless)
 {
 	const char *emptystr = {0x0};
 	po_message_t message = GTR_MSG(msg)->message;
@@ -645,7 +697,8 @@ gtranslator_message_clear_translation(GtrMsg *msg, gpointer useless)
  * Free the structure and it's elements.
  */
 void 
-gtranslator_message_free(gpointer data, gpointer useless)
+gtranslator_message_free(gpointer data,
+			 gpointer useless)
 {
 	g_return_if_fail(data!=NULL);
 	gtranslator_comment_free(&GTR_MSG(data)->comment);
@@ -659,10 +712,11 @@ gtranslator_message_free(gpointer data, gpointer useless)
 void 
 gtranslator_message_copy_to_translation(void)
 {
-	const char *msgid;
+	const gchar *msgid;
 
 	po_message_t message = GTR_MSG(current_page->po->current->data)->message;
 
+	/*We need to know if we are in a plural textview*/
 	msgid = po_message_msgid(message);
 	po_message_set_msgstr(message, msgid);
 	free((void *)msgid);
@@ -672,15 +726,19 @@ gtranslator_message_copy_to_translation(void)
  * Toggle the sticky status
  */
 void 
-gtranslator_message_status_toggle_fuzzy(GtkWidget *widget, gpointer useless) {
+gtranslator_message_status_toggle_fuzzy(GtkWidget *widget,
+					gpointer useless)
+{
 	GtrMsg *msg = GTR_MSG(current_page->po->current->data);
 	if(msg->is_fuzzy) {
 		msg->is_fuzzy = FALSE;
+		po_message_set_fuzzy(msg->message, FALSE);
 		current_page->po->fuzzy--;
 	}
 	else
 	{
 		msg->is_fuzzy = TRUE;
+		po_message_set_fuzzy(msg->message, TRUE);
 		current_page->po->fuzzy++;
 	}
 }
@@ -690,7 +748,9 @@ gtranslator_message_status_toggle_fuzzy(GtkWidget *widget, gpointer useless) {
  * mark the page dirty
  */
 void 
-gtranslator_message_translation_update(GtkTextBuffer *textbuffer, gpointer *user_data) {
+gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
+				       gpointer *user_data)
+{
 	GtkTextIter start, end;
 	GtkTextBuffer *buf;
 	GtrMsg *msg;

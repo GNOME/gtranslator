@@ -89,6 +89,11 @@ typedef gboolean (*FEFunc) (gpointer list_item, gpointer user_data);
 typedef gboolean (*FEFuncR) (gpointer list_item, gpointer user_data, gboolean first);
 
 /*
+ * Returns TRUE if the message is translated
+ */
+gboolean po_message_is_translated (po_message_t message);
+
+/*
  * Execute the given FEFunc for every element.
  */
 gboolean gtranslator_message_for_each(GList *first, FEFunc func, gpointer user_data);

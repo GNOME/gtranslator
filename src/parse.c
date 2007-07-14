@@ -829,11 +829,11 @@ gtranslator_remove_all_translations(GtrPo *po)
 static void 
 determine_translation_status(gpointer data, gpointer useless_stuff)
 {
-	GtrMsg *message = GTR_MSG(data);
-	gchar * aux = po_message_msgstr(message->message);
-	if(aux[0] != '\0')
+	GtrMsg *msg = GTR_MSG(data);
+	
+	if(po_message_is_translated(msg->message))
 		current_page->po->translated++;
-	if(message->is_fuzzy)
+	else if(po_message_is_fuzzy(msg->message))
 		current_page->po->fuzzy++;
 }
 
