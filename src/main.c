@@ -42,7 +42,6 @@
 #include <signal.h>
 
 #include <libgnome/gnome-program.h>
-#include <libgnomeui/gnome-window-icon.h>
 
 #include <libgnomevfs/gnome-vfs-init.h>
 
@@ -147,7 +146,13 @@ int main(int argc, char *argv[])
 	/*
 	 * Show the application window with icon.
 	 */
-	gnome_window_icon_set_default_from_file(WINDOW_ICON);
+	gtk_window_set_default_icon_from_file(WINDOW_ICON, &error);
+	if(error)
+	{
+		g_warning(_("Error setting the default window icon: %s"),
+			  error->message);
+	}
+	g_clear_error(&error);
 
 	/*
 	 * Create our own .gtranslator directory in the user's home directory.
