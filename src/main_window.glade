@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Sun Jul 15 10:10:11 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Sun Jul 15 10:25:33 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -299,7 +299,7 @@
                         <signal name="select" handler="on_copy_message_select"/>
                         <signal name="deselect" handler="on_copy_message_deselect"/>
                         <signal name="activate" handler="on_copy_message_activate"/>
-                        <accelerator key="space" modifiers="GDK_MOD1_MASK" signal="activate"/>
+                        <accelerator key="space" modifiers="GDK_CONTROL_MASK" signal="activate"/>
                         <child internal-child="image">
                           <widget class="GtkImage" id="menu-item-image12">
                             <property name="visible">True</property>
@@ -554,11 +554,8 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="menuitem5">
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem5">
                         <property name="visible">True</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="label" translatable="yes">menuitem5</property>
-                        <property name="use_underline">True</property>
                       </widget>
                     </child>
                     <child>
