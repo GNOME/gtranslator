@@ -109,6 +109,69 @@ static void replace_substring(gchar **item, const gchar *bad, const gchar *good)
 
 
 /*
+ * Grab the header string
+ */
+const gchar *
+gtranslator_header_get_header()
+{
+	const gchar *headerstr;
+	if(!(headerstr = 
+	     po_file_domain_header(current_page->po->gettext_po_file, NULL)))
+	{
+		GtkWidget *dialog;
+
+		dialog = gtk_message_dialog_new(
+			GTK_WINDOW(gtranslator_application),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK,
+			_("No header for this file/domain"));
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(dialog);
+	}
+	return headerstr;
+}
+
+/*
+ * Get plural forms from header
+ */
+gchar *
+gtranslator_header_get_plural_forms()
+{
+	gchar *plural_form;
+	const gchar *header;
+	
+	header = gtranslator_header_get_header();
+	plural_form = po_header_field(header, "Plural-Forms");
+	
+	return plural_form;
+}
+
+/*
+ * Get nplurals variable
+ */
+gushort
+gtranslator_header_get_nplurals()
+{
+	gchar *plural_form;
+	gchar *pointer;
+	
+	plural_form = gtranslator_header_get_plural_forms();
+	pointer = plural_form;
+	
+	while(*pointer != '=')
+		pointer++;
+	pointer++;
+	
+	//if there are any space between '=' and nplural number pointer++
+	while(*pointer == ' ')
+		pointer++;
+	
+	return (*pointer - '0');
+}
+
+
+/*
  * DUPLICATED CODE: This func is in prefs.c
  */
 static GtkWidget*
@@ -483,19 +546,7 @@ void gtranslator_header_edit_dialog(GtkWidget * widget, gpointer useless)
 	/*
 	 * Grab the header string
 	 */
-	if(!(headerstr = po_file_domain_header(current_page->po->gettext_po_file, NULL)))
-	{
-		GtkWidget *dialog;
-
-		dialog = gtk_message_dialog_new(
-			GTK_WINDOW(gtranslator_application),
-			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_WARNING,
-			GTK_BUTTONS_OK,
-			_("No header for this file/domain"));
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
-	}
+	headerstr = gtranslator_header_get_header();
 	
 	/*
 	 * Unpack header into values for dialog

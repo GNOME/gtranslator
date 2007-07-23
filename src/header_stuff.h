@@ -1,6 +1,7 @@
 /*
- * (C) 2000-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
  *			Gediminas Paulauskas <menesis@kabalak.net>
+ * 			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -81,6 +82,17 @@ void gtranslator_header_free(GtrHeader *header);
  * Creates and shows the dialog for editing the header
  */
 void gtranslator_header_edit_dialog(GtkWidget  * widget, gpointer useless);
+
+
+/*
+ * Get plural forms string
+ */
+gchar *gtranslator_header_get_plural_forms();
+
+/*
+ * Get nplurals variable
+ */
+gushort gtranslator_header_get_nplurals();
 
 /*
  * View <-> real form transition.
