@@ -28,12 +28,14 @@ gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
 	bookmark.c bookmark.h \
+	charmap-panel.c charmap-panel.h \
 	color-schemes.c color-schemes.h \
 	comment.c comment.h \
 	compile.c compile.h \
 	dialogs.c dialogs.h \
 	dnd.c dnd.h \
 	find.c find.h \
+	gucharmap.c gucharmap.h \
 	gui.c gui.h \
 	header_stuff.c header_stuff.h \
 	history.c history.h \
