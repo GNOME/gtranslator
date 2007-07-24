@@ -47,7 +47,6 @@
 #define GLADE_TEXT_MSGID_PLURAL "text_msgid_plural"
 #define GLADE_TRANS_NOTEBOOK "trans_notebook"
 #define GLADE_TRANS_MSGSTR "trans_msgstr"
-#define GLADE_TRANS_MSGSTR_PLURAL "trans_msgstr_plural"
 /*Status widgets*/
 #define GLADE_TRANSLATED "radiobutton_translated"
 #define GLADE_FUZZY "radiobutton_fuzzy"
@@ -66,6 +65,8 @@ void
 gtranslator_page_new(GtrPo *po)
 {
 	GtrPage *page;
+	gint i = 0;
+	gchar *widget_name;
 	
 	g_return_if_fail(po!=NULL);
 
@@ -85,7 +86,7 @@ gtranslator_page_new(GtrPo *po)
 
 	/*
 	 * Set up the scrolling window for the comments display
-	 */	
+	 */
 
 	page->comment = glade_xml_get_widget(glade, GLADE_COMMENT);
 	
@@ -101,11 +102,14 @@ gtranslator_page_new(GtrPo *po)
 	page->text_msgid_plural = glade_xml_get_widget(glade, GLADE_TEXT_MSGID_PLURAL);
 	
 	
-	/* Translation box is a vbox, containing one textview in most cases,
-	   or more in the case of a plural message */
+	/* Translation widgets*/
 	page->trans_notebook = glade_xml_get_widget(glade, GLADE_TRANS_NOTEBOOK);
-	page->trans_msgstr = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR);
-	//page->trans_msgstr_plural = glade_xml_get_widget(glade, GLADE_TRANS_MSGSTR_PLURAL);
+	do{
+		widget_name = g_strdup_printf("%s%c", GLADE_TRANS_MSGSTR, (gchar)(i+48));
+		page->trans_msgstr[i] = glade_xml_get_widget(glade, widget_name);
+		g_free(widget_name);
+		i++;
+	}while(i < MAX_PLURALS);
 
 	/*Status radiobuttons*/
 	page->translated = glade_xml_get_widget(glade, GLADE_TRANSLATED);
@@ -133,18 +137,18 @@ gtranslator_page_new(GtrPo *po)
 	
 	/*
 	 * Check if we'd to use special styles.
-	 */
-	//if(GtrPreferences.use_own_fonts || GtrPreferences.use_own_colors)
-	//{
-		/*
-		 * Set the own specs for the font.
-		 */ 
-		gtranslator_set_style(page->text_msgid, 0);
-		gtranslator_set_style(page->trans_msgstr, 1);
-	//}
+	 * Set the own specs for the style.
+	 */ 
+	gtranslator_set_style(page->text_msgid, 0);
+	gtranslator_set_style(page->text_msgid_plural, 0);
+	i = 0;
+	do
+	{
+		gtranslator_set_style(page->trans_msgstr[i], 1);
+		i++;
+	}while(i < MAX_PLURALS);
 	
 	current_page = page;
-	
 }
 
 void 
@@ -239,7 +243,8 @@ gtranslator_page_autosave(GtrPage *page)
 }
 
 void
-gtranslator_page_dirty(GtkTextBuffer *textbuffer, gpointer user_data) 
+gtranslator_page_dirty(GtkTextBuffer *textbuffer,
+		       gpointer user_data) 
 {
 	/* Unpack the page pointer */
 	GtrPage *page;

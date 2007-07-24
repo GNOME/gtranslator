@@ -31,19 +31,21 @@
 #include <stdlib.h>
 
 size_t
-nautilus_strlen (const char *string)
+nautilus_strlen (const gchar *string)
 {
 	return string == NULL ? 0 : strlen (string);
 }
 
-char *
-nautilus_strchr (const char *haystack, char needle)
+gchar *
+nautilus_strchr (const gchar *haystack,
+		 gchar needle)
 {
 	return haystack == NULL ? NULL : strchr (haystack, needle);
 }
 
-int
-nautilus_strcmp (const char *string_a, const char *string_b)
+gint
+nautilus_strcmp (const gchar *string_a, 
+		 const gchar *string_b)
 {
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL < ""', or have a flavor that does that. If we
@@ -54,8 +56,9 @@ nautilus_strcmp (const char *string_a, const char *string_b)
 		       string_b == NULL ? "" : string_b);
 }
 
-int
-nautilus_strcasecmp (const char *string_a, const char *string_b)
+gint
+nautilus_strcasecmp (const gchar *string_a,
+		     const gchar *string_b)
 {
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL < ""', or have a flavor that does that. If we
@@ -66,10 +69,11 @@ nautilus_strcasecmp (const char *string_a, const char *string_b)
 		                   string_b == NULL ? "" : string_b);
 }
 
-int
-nautilus_strcmp_case_breaks_ties (const char *string_a, const char *string_b)
+gint
+nautilus_strcmp_case_breaks_ties (const gchar *string_a,
+				  const gchar *string_b)
 {
-	int casecmp_result;
+	gint casecmp_result;
 
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL < ""', or have a flavor that does that. If we
@@ -83,11 +87,12 @@ nautilus_strcmp_case_breaks_ties (const char *string_a, const char *string_b)
 	return nautilus_strcmp (string_a, string_b);
 }
 
-int
-nautilus_strcoll (const char *string_a, const char *string_b)
+gint
+nautilus_strcoll (const gchar *string_a,
+		  const gchar *string_b)
 {
-	const char *locale;
-	int result;
+	const gchar *locale;
+	gint result;
 	
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL < ""', or have a flavor that does that. If we
@@ -112,13 +117,14 @@ nautilus_strcoll (const char *string_a, const char *string_b)
 }
 
 gboolean
-nautilus_str_is_empty (const char *string_or_null)
+nautilus_str_is_empty (const gchar *string_or_null)
 {
 	return nautilus_strcmp (string_or_null, NULL) == 0;
 }
 
 gboolean
-nautilus_str_is_equal (const char *string_a, const char *string_b)
+nautilus_str_is_equal (const gchar *string_a,
+		       const gchar *string_b)
 {
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL != ""', or have a flavor that does that. If we
@@ -129,7 +135,8 @@ nautilus_str_is_equal (const char *string_a, const char *string_b)
 }
 
 gboolean
-nautilus_istr_is_equal (const char *string_a, const char *string_b)
+nautilus_istr_is_equal (const gchar *string_a,
+			const gchar *string_b)
 {
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL != ""', or have a flavor that does that. If we
@@ -139,46 +146,50 @@ nautilus_istr_is_equal (const char *string_a, const char *string_b)
 	return nautilus_strcasecmp (string_a, string_b) == 0;
 }
 
-int
-nautilus_strcmp_compare_func (gconstpointer string_a, gconstpointer string_b)
+gint
+nautilus_strcmp_compare_func (gconstpointer string_a,
+			      gconstpointer string_b)
 {
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL < ""', or have a flavor that does that. If we
 	 * didn't have code that already relies on 'NULL == ""', I
 	 * would change it right now.
 	 */
-	return nautilus_strcmp ((const char *) string_a,
-				(const char *) string_b);
+	return nautilus_strcmp ((const gchar *) string_a,
+				(const gchar *) string_b);
 }
 
-int
-nautilus_strcoll_compare_func (gconstpointer string_a, gconstpointer string_b)
+gint
+nautilus_strcoll_compare_func (gconstpointer string_a,
+			       gconstpointer string_b)
 {
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL < ""', or have a flavor that does that. If we
 	 * didn't have code that already relies on 'NULL == ""', I
 	 * would change it right now.
 	 */
-	return nautilus_strcoll ((const char *) string_a,
-				 (const char *) string_b);
+	return nautilus_strcoll ((const gchar *) string_a,
+				 (const gchar *) string_b);
 }
 
-int
-nautilus_strcasecmp_compare_func (gconstpointer string_a, gconstpointer string_b)
+gint
+nautilus_strcasecmp_compare_func (gconstpointer string_a,
+				  gconstpointer string_b)
 {
 	/* FIXME bugzilla.eazel.com 5450: Maybe we need to make this
 	 * treat 'NULL < ""', or have a flavor that does that. If we
 	 * didn't have code that already relies on 'NULL == ""', I
 	 * would change it right now.
 	 */
-	return nautilus_strcasecmp ((const char *) string_a,
-				    (const char *) string_b);
+	return nautilus_strcasecmp ((const gchar *) string_a,
+				    (const gchar *) string_b);
 }
 
 gboolean
-nautilus_str_has_prefix (const char *haystack, const char *needle)
+nautilus_str_has_prefix (const gchar *haystack,
+			 const gchar *needle)
 {
-	const char *h, *n;
+	const gchar *h, *n;
 
 	/* Eat one character at a time. */
 	h = haystack == NULL ? "" : haystack;
@@ -195,9 +206,10 @@ nautilus_str_has_prefix (const char *haystack, const char *needle)
 }
 
 gboolean
-nautilus_str_has_suffix (const char *haystack, const char *needle)
+nautilus_str_has_suffix (const gchar *haystack,
+			 const gchar *needle)
 {
-	const char *h, *n;
+	const gchar *h, *n;
 
 	if (needle == NULL) {
 		return TRUE;
@@ -221,10 +233,11 @@ nautilus_str_has_suffix (const char *haystack, const char *needle)
 }
 
 gboolean
-nautilus_istr_has_prefix (const char *haystack, const char *needle)
+nautilus_istr_has_prefix (const gchar *haystack,
+			  const gchar *needle)
 {
-	const char *h, *n;
-	char hc, nc;
+	const gchar *h, *n;
+	gchar hc, nc;
 
 	/* Eat one character at a time. */
 	h = haystack == NULL ? "" : haystack;
@@ -245,10 +258,11 @@ nautilus_istr_has_prefix (const char *haystack, const char *needle)
 }
 
 gboolean
-nautilus_istr_has_suffix (const char *haystack, const char *needle)
+nautilus_istr_has_suffix (const gchar *haystack,
+			  const gchar *needle)
 {
-	const char *h, *n;
-	char hc, nc;
+	const gchar *h, *n;
+	gchar hc, nc;
 
 	if (needle == NULL) {
 		return TRUE;
@@ -289,11 +303,11 @@ nautilus_istr_has_suffix (const char *haystack, const char *needle)
  * If @delimiter does not occur in @source, returns
  * a copy of @source.
  **/
-char *
-nautilus_str_get_prefix (const char *source, 
-			 const char *delimiter)
+gchar *
+nautilus_str_get_prefix (const gchar *source, 
+			 const gchar *delimiter)
 {
-	char *prefix_start;
+	gchar *prefix_start;
 
 	if (source == NULL) {
 		return NULL;
@@ -327,11 +341,11 @@ nautilus_str_get_prefix (const char *source,
  * If @delimiter does not occur in @source, returns
  * NULL
  **/
-char *
-nautilus_str_get_after_prefix (const char *source,
-			       const char *delimiter)
+gchar *
+nautilus_str_get_after_prefix (const gchar *source,
+			       const gchar *delimiter)
 {
-	char *prefix_start;
+	gchar *prefix_start;
 	
 	if (source == NULL) {
 		return NULL;
@@ -351,10 +365,11 @@ nautilus_str_get_after_prefix (const char *source,
 }
 
 gboolean
-nautilus_str_to_int (const char *string, int *integer)
+nautilus_str_to_int (const gchar *string,
+		     gint *integer)
 {
 	long result;
-	char *parse_end;
+	gchar *parse_end;
 
 	/* Check for the case of an empty string. */
 	if (string == NULL || *string == '\0') {
@@ -395,11 +410,12 @@ nautilus_str_to_int (const char *string, int *integer)
  * Return value: A copy of @source, after removing all occurrences
  * of @remove_this.
  */
-char *
-nautilus_str_strip_chr (const char *source, char remove_this)
+gchar *
+nautilus_str_strip_chr (const gchar *source, 
+			gchar remove_this)
 {
-	char *result, *out;
-	const char *in;
+	gchar *result, *out;
+	const gchar *in;
 	
         if (source == NULL) {
 		return NULL;
@@ -427,8 +443,9 @@ nautilus_str_strip_chr (const char *source, char remove_this)
  * Return value: @source, after removing trailing occurrences
  * of @remove_this.
  */
-char *
-nautilus_str_strip_trailing_chr (const char *source, char remove_this)
+gchar *
+nautilus_str_strip_trailing_chr (const gchar *source,
+				 gchar remove_this)
 {
 	const char *end;
 	
@@ -445,10 +462,11 @@ nautilus_str_strip_trailing_chr (const char *source, char remove_this)
         return g_strndup (source, end - source);
 }
 
-char *   
-nautilus_str_strip_trailing_str (const char *source, const char *remove_this)
+gchar *   
+nautilus_str_strip_trailing_str (const gchar *source,
+				 const gchar *remove_this)
 {
-	const char *end;
+	const gchar *end;
 	if (source == NULL) {
 		return NULL;
 	}
@@ -466,7 +484,8 @@ nautilus_str_strip_trailing_str (const char *source, const char *remove_this)
 }
 
 gboolean
-nautilus_eat_str_to_int (char *source, int *integer)
+nautilus_eat_str_to_int (gchar *source,
+			 gint *integer)
 {
 	gboolean result;
 
@@ -475,13 +494,13 @@ nautilus_eat_str_to_int (char *source, int *integer)
 	return result;
 }
 
-char *
-nautilus_str_double_underscores (const char *string)
+gchar *
+nautilus_str_double_underscores (const gchar *string)
 {
-	int underscores;
-	const char *p;
-	char *q;
-	char *escaped;
+	gint underscores;
+	const gchar *p;
+	gchar *q;
+	gchar *escaped;
 	
 	if (string == NULL) {
 		return NULL;
@@ -496,7 +515,7 @@ nautilus_str_double_underscores (const char *string)
 		return g_strdup (string);
 	}
 
-	escaped = g_new (char, strlen (string) + underscores + 1);
+	escaped = g_new (gchar, strlen (string) + underscores + 1);
 	for (p = string, q = escaped; *p != '\0'; p++, q++) {
 		/* Add an extra underscore. */
 		if (*p == '_') {
@@ -509,10 +528,10 @@ nautilus_str_double_underscores (const char *string)
 	return escaped;
 }
 
-char *
-nautilus_str_capitalize (const char *string)
+gchar *
+nautilus_str_capitalize (const gchar *string)
 {
-	char *capitalized;
+	gchar *capitalized;
 
 	if (string == NULL) {
 		return NULL;
@@ -533,16 +552,16 @@ nautilus_str_capitalize (const char *string)
  * and nautilus_str_*_truncate so that they match better and reflect
  * their different behavior.
  */
-char *
-nautilus_str_middle_truncate (const char *string,
+gchar *
+nautilus_str_middle_truncate (const gchar *string,
 			      guint truncate_length)
 {
-	char *truncated;
+	gchar *truncated;
 	guint length;
 	guint num_left_chars;
 	guint num_right_chars;
 
-	const char delimter[] = "...";
+	const gchar delimter[] = "...";
 	const guint delimter_length = strlen (delimter);
 	const guint min_truncate_length = delimter_length + 2;
 
@@ -588,8 +607,8 @@ nautilus_str_middle_truncate (const char *string,
  * Return value: @count, the 'c' occurance count.
  */
 guint
-nautilus_str_count_characters (const char	*string,
-			       char		c)
+nautilus_str_count_characters (const gchar *string,
+			       gchar c)
 {
 	guint count = 0;
 
@@ -604,11 +623,11 @@ nautilus_str_count_characters (const char	*string,
 	return count;
 }
 
-char *
-nautilus_str_strip_substring_and_after (const char *string,
-					const char *substring)
+gchar *
+nautilus_str_strip_substring_and_after (const gchar *string,
+					const gchar *substring)
 {
-	const char *substring_position;
+	const gchar *substring_position;
 
 	g_return_val_if_fail (substring != NULL, g_strdup (string));
 	g_return_val_if_fail (substring[0] != '\0', g_strdup (string));
@@ -626,14 +645,14 @@ nautilus_str_strip_substring_and_after (const char *string,
 			  substring_position - string);
 }
 
-char *
-nautilus_str_replace_substring (const char *string,
-				const char *substring,
-				const char *replacement)
+gchar *
+nautilus_str_replace_substring (const gchar *string,
+				const gchar *substring,
+				const gchar *replacement)
 {
-	int substring_length, replacement_length, result_length, remaining_length;
-	const char *p, *substring_position;
-	char *result, *result_position;
+	gint substring_length, replacement_length, result_length, remaining_length;
+	const gchar *p, *substring_position;
+	gchar *result, *result_position;
 
 	g_return_val_if_fail (substring != NULL, g_strdup (string));
 	g_return_val_if_fail (substring[0] != '\0', g_strdup (string));
@@ -680,14 +699,14 @@ nautilus_str_replace_substring (const char *string,
 /* Removes strings enclosed by the '[' and ']' characters.  Strings
    that have unbalanced open and closed brackets will return the
    string itself. */
-char *
-nautilus_str_remove_bracketed_text (const char *text)
+gchar *
+nautilus_str_remove_bracketed_text (const gchar *text)
 {
-	char *unbracketed_text;
-	char *unbracketed_segment, *new_unbracketed_text;
-	const char *current_text_location;
-	const char *next_open_bracket, *next_close_bracket;
-	int bracket_depth;
+	gchar *unbracketed_text;
+	gchar *unbracketed_segment, *new_unbracketed_text;
+	const gchar *current_text_location;
+	const gchar *next_open_bracket, *next_close_bracket;
+	gint bracket_depth;
 	
 
 	g_return_val_if_fail (text != NULL, NULL);

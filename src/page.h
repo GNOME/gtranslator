@@ -28,6 +28,8 @@
 #include "parse.h"
 #include "messages-table.h"
 
+#define MAX_PLURALS 7 //Number of plurals + 1
+
 /*
  * This class encapsulated all the widgets related to a PO file
  */
@@ -49,8 +51,7 @@ typedef struct
 	
 	/*Translated text*/
 	GtkWidget *trans_notebook;
-	GtkWidget *trans_msgstr;
-	GtkWidget *trans_msgstr_plural[6];
+	GtkWidget *trans_msgstr[MAX_PLURALS];
 	
     	/*Pane widgets*/
 	GtkWidget *table_pane;

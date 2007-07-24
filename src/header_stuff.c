@@ -167,7 +167,7 @@ gtranslator_header_get_nplurals()
 	while(*pointer == ' ')
 		pointer++;
 	
-	return (*pointer - '0');
+	return g_ascii_digit_value(*pointer);
 }
 
 

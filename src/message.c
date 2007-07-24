@@ -40,7 +40,6 @@
 #include "utils_gui.h"
 
 #include <string.h>
-#include <regex.h>
 #include <gtk/gtk.h>
 
 #ifdef HAVE_GTKSPELL
@@ -57,7 +56,7 @@ static gboolean is_untranslated(GList *msg, gpointer useless);
 void gtranslator_message_translation_update(GtkTextBuffer *textbuffer, gpointer *user_data);
 
 #ifdef HAVE_GTKSPELL
-GtkSpell *gtrans_spell = NULL;
+GtkSpell *gtrans_spell[MAX_PLURALS];
 #endif
 
 
@@ -72,7 +71,7 @@ po_message_is_translated (po_message_t message)
 		return po_message_msgstr(message)[0] != '\0';	
 	else
 	{
-		int i;
+		gint i;
 
 		for (i = 0; ; i++)
 		{
@@ -83,7 +82,7 @@ po_message_is_translated (po_message_t message)
 				return FALSE;
 		}
 		
-	return TRUE;
+		return TRUE;
 	}
 }
 
@@ -147,8 +146,8 @@ gtranslator_message_go_to_next_fuzzy(GtkWidget * widget,
 		return;
 	//Message dialog
     	gtranslator_show_message(_("There are no fuzzy messages left."), NULL);
-	//Disable next_fuzzy menu_item
-	gtk_widget_set_sensitive(gtranslator_menuitems->next_fuzzy, FALSE);
+	//Disable next_fuzzy item
+	gtk_widget_set_sensitive(widget, FALSE);
 }
 
 static gboolean 
@@ -163,7 +162,8 @@ is_untranslated(GList *msg, gpointer useless)
 }
 
 void 
-gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer useless)
+gtranslator_message_go_to_next_untranslated(GtkWidget * widget,
+					    gpointer useless)
 {
 	GList *begin;
     
@@ -177,7 +177,7 @@ gtranslator_message_go_to_next_untranslated(GtkWidget * widget, gpointer useless
 	//Message dialog
     	gtranslator_show_message(_("All messages seems to be translated."), NULL);
 	//Disable next_untranslated menuitem
-	gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, FALSE);
+	gtk_widget_set_sensitive(widget, FALSE);
 }
 
 #ifdef HAVE_GTKSPELL
@@ -194,42 +194,31 @@ gtranslator_attach_gskspell()
 		 * Start up gtkspell if not already done.
 		 */ 
 		GError *error = NULL;
-		char *errortext = NULL;
+		gchar *errortext = NULL;
 		
-		if (gtrans_spell == NULL && current_page->trans_msgstr != NULL) {
-		    gtrans_spell = gtkspell_new_attach(GTK_TEXT_VIEW(current_page->trans_msgstr), NULL, &error);
-		    if (gtrans_spell == NULL) {
-			g_print(_("gtkspell error: %s\n"), error->message);
-			errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);
-			g_error_free(error);
-		    }
-		}
-		/*guint nplural = languages[].plural;
-		if( nplural >= 2 )
+		guint nplural = 0;// = languages[].plural;
+		guint i;
+		for(i = 0; i <= nplural; i++) 
 		{
-			guint i;
-			GtkSpell *gtkspell[nplural-1];
-			for(i = 0; i < nplural; i++) 
-			{*/
-				/*
-				 * Doing this i think there are memory leaks
-				 * becouse i can't detach it
-				 */
-			/*	gtkspell[i] = NULL;
-				gtkspell[i] = 
-					gtkspell_new_attach(GTK_TEXT_VIEW(current_page->trans_msgstr_plural[i]), NULL, &error);
-				if (gtkspell[i] == NULL) {
+			if(gtrans_spell[i] == NULL && current_page->trans_msgstr[i] != NULL)
+			{
+				gtrans_spell[i] = NULL;
+				gtrans_spell[i] = 
+					gtkspell_new_attach(GTK_TEXT_VIEW(current_page->trans_msgstr[i]), NULL, &error);
+				if (gtrans_spell[i] == NULL) {
 					g_print(_("gtkspell error: %s\n"), error->message);
 					errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"), error->message);
 					g_error_free(error);
 		    		}
 			}
-		}*/
+			else
+				break;
+		}
 	} else {
-	    if (gtrans_spell != NULL) {
-		gtkspell_detach(gtrans_spell);
-		gtrans_spell = NULL;
-	    }
+		if(gtrans_spell[0] != NULL) {
+			gtkspell_detach(gtrans_spell[0]);
+			gtrans_spell[0] = NULL;
+		}
 	}
 }
 #endif
@@ -237,7 +226,8 @@ gtranslator_attach_gskspell()
 /*
  * Cleans up the text boxes.
  */
-void gtranslator_text_boxes_clean()
+void
+gtranslator_text_boxes_clean()
 {
 	GtkTextIter start, end;
 	GtkTextBuffer *buffer;
@@ -246,9 +236,42 @@ void gtranslator_text_boxes_clean()
 	gtk_text_buffer_get_bounds(buffer, &start, &end);
 	gtk_text_buffer_delete(buffer, &start, &end);
 
-	buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr)));
+	buffer = GTK_TEXT_BUFFER(gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[0])));
 	gtk_text_buffer_get_bounds(buffer, &start, &end);
 	gtk_text_buffer_delete(buffer, &start, &end);
+}
+
+void
+gtranslator_message_plural_forms(GtrMsg *msg)
+{
+	GtkTextBuffer *buf;
+	const gchar *msgstr_plural;
+	gint i;
+
+	/*
+	 * Should show the number of plural forms defined in header
+	 */
+	for(i = 0; ; i++)
+	{
+		msgstr_plural = po_message_msgstr_plural(msg->message, i);
+		if(msgstr_plural == NULL)
+			break;
+		else {
+			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[i]));
+			if(GtrPreferences.dot_char) {
+				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr_plural);
+				gtk_text_buffer_set_text(buf, temp, -1);
+				g_free(temp);
+			}
+			else gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
+		
+			g_signal_connect(buf, "end-user-action",
+					 G_CALLBACK(gtranslator_message_translation_update),
+					 current_page);
+			if(i > 0)
+				gtk_widget_show(current_page->trans_msgstr[i]);
+		}
+	}
 }
 
 /* 
@@ -258,9 +281,9 @@ void
 gtranslator_message_show(GtrMsg *msg)
 {
 	GtkTextBuffer *buf;
-	const gchar *msgid, *msgid_plural, *msgstr_plural;
-	const gchar *msgstr;
-	int i;
+	const gchar *msgid, *msgid_plural;
+	const gchar *msgstr, *msgstr_plural;
+	gint i;
 	
 	g_assert(current_page != NULL);
 	
@@ -301,7 +324,7 @@ gtranslator_message_show(GtrMsg *msg)
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), FALSE);
 		if(msgstr) 
 		{
-			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
+			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
 			if(GtrPreferences.dot_char) {
 				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr);
 				gtk_text_buffer_set_text(buf, temp, -1);
@@ -316,16 +339,6 @@ gtranslator_message_show(GtrMsg *msg)
 		}
 	}
 	else {
-		/*
-		 * Enable notebook tabs
-		 * FIXME: Ata 4 formas de plural pode haber según a páxina de gettext 
-		 * http://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html#Plural-forms
-		 * Débese comprobar a configuración para saber cantas solapas se deben poñer.
-		 * Se non hai nada na configuración deberase pensar que o número é 2 (Galego)
-		 * Alomenos así é como está configurado no kbabel
-		 * Pois vai ser que hai 6 formas do plural.
-		 * 
-		 */
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->text_notebook), TRUE);
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), TRUE);
 		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->text_msgid_plural));
@@ -337,39 +350,8 @@ gtranslator_message_show(GtrMsg *msg)
 		else {
 			gtk_text_buffer_set_text(buf, (gchar*)msgid_plural, -1);
 		}
-		msgstr_plural = po_message_msgstr_plural(msg->message, 0);
-		if(msgstr_plural)
-		{
-			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
-			if(GtrPreferences.dot_char) {
-				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr_plural);
-				gtk_text_buffer_set_text(buf, temp, -1);
-				g_free(temp);
-			}
-			else gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
-			
-			g_signal_connect(buf, "end-user-action",
-					 G_CALLBACK(gtranslator_message_translation_update),
-					 current_page);
-		}
+		gtranslator_message_plural_forms(msg);
 	}
-	/*i=2;
-	while(msgid_plural && (msgstr[i] = po_message_msgstr_plural(msg->message, i - 1))) {
-		buf = gtk_text_buffer_new(NULL);
-		if(GtrPreferences.dot_char) {
-			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr[i]);
-			gtk_text_buffer_set_text(buf, temp, -1);
-			g_free(temp);
-		}
-		else {
-			gtk_text_buffer_set_text(buf, (gchar*)msgstr[i], -1);
-		}
-		g_signal_connect(buf, "changed", G_CALLBACK(gtranslator_message_translation_update), current_page);
-		current_page->trans_msgstr[i] = gtk_text_view_new_with_buffer(buf);
-		gtk_box_pack_start(trans_vbox, current_page->trans_msgstr[i], TRUE, TRUE, 0);
-		gtk_widget_show(current_page->trans_msgstr[i]);
-		i++;
-	}*/
 	
 	/*
 	 * Set up the comment display.
@@ -384,13 +366,11 @@ gtranslator_message_show(GtrMsg *msg)
 	 * Status widgets and fuzzy menuitem
 	 */
 	if(po_message_is_fuzzy(msg->message))
-	{
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(gtranslator_menuitems->fuzzy),
-							       TRUE);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->fuzzy), TRUE);
-	}
+	
 	else if(po_message_is_translated(msg->message))
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->translated), TRUE);
+	
 	else
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->untranslated), TRUE);
 
@@ -413,15 +393,15 @@ gtranslator_message_update(void)
 	/*
 	 * Update the statusbar informations.
 	 */
-	gtranslator_application_bar_update(g_list_position(po->messages, 
-		po->current));
+	gtranslator_application_bar_update(g_list_position(po->messages,
+							   po->current));
 
 	/*
 	 * Go to the corresponding row in the messages table.
 	 */
 	if(current_page->messages_table)
 	{
-		gtranslator_messages_table_update_row(current_page->messages_table, msg);
+		gtranslator_messages_table_select_row(current_page->messages_table, msg);
 	}
 
 	/*
@@ -432,14 +412,13 @@ gtranslator_message_update(void)
 	{
 		gtk_widget_set_sensitive(gtranslator_menuitems->remove_translations, TRUE);
 	}
-	//	gtk_text_thaw( GTK_TEXT(trans_box) );
-	//	gtk_editable_set_position( GTK_EDITABLE(trans_box), pos );
 
 	msg->changed = FALSE;
 }
 
 void 
-gtranslator_message_change_status(GtkWidget  * item, gpointer which)
+gtranslator_message_change_status(GtkWidget  * item,
+				  gpointer which)
 {
 	GtrPo *po;
 	gint flag;
@@ -499,13 +478,6 @@ gtranslator_message_go_to(GList * to_go)
 
 	gtranslator_message_show(to_go->data);
 
-	if(current_page->messages_table)
-	{
-		/*Only work with move forward, with move backward don't work*/
-		gtranslator_messages_table_select_row(current_page->messages_table,
-						      GTR_MSG(po->current->data));
-	}
-	
 	pos = g_list_position(po->messages, po->current);
 	
 	if (pos == 0)
@@ -584,59 +556,7 @@ void
 gtranslator_message_status_set_fuzzy(GtrMsg * msg,
 				     gboolean fuzzy)
 {
-	/*
-	 * I think this can do it with void po_message_set_fuzzy (po_message_t message, int fuzzy);
-	 * but is neccessary save the file.
-	 */
-/*	static int compiled = FALSE;
-	static regex_t rexf, rexc;
-	regmatch_t pos[3];
-	gchar *comment;*/
-
 	g_return_if_fail(msg!=NULL);
-	/*g_return_if_fail(msg->comment!=NULL);
-	g_return_if_fail(GTR_COMMENT(msg->comment)->comment!=NULL);
-
-	comment=gtranslator_comment_get_comment_contents(msg->comment);
-	
-	if (!compiled) {
-		regcomp(&rexf, "^(#), c-format", REG_EXTENDED | REG_NEWLINE);
-		regcomp(&rexc, "(^#, fuzzy$)|^#, (fuzzy,) .*$", REG_EXTENDED | REG_NEWLINE);
-		compiled = TRUE;
-	}
-*/
-	/* 
-	 * If fuzzy status is already correct
-	 */
-/*	if (((msg->status & GTR_MSG_STATUS_FUZZY) != 0) == fuzzy)
-		return;
-	if (fuzzy) {
-		gchar *comchar;
-		
-		msg->status |= GTR_MSG_STATUS_FUZZY;
-
-		if (!regexec(&rexf, comment, 3, pos, 0)) {
-			comment[pos[1].rm_so] = '\0';
-			comchar = g_strdup_printf("%s#, fuzzy%s", comment, 
-					    comment+pos[1].rm_eo);
-		} else {
-			comchar = g_strdup_printf("%s#, fuzzy\n", comment);
-		}
-
-		gtranslator_comment_update(&msg->comment, comchar);
-*/
-		/* No need to free comment. Fixes several crashes and file corruption bugs */
-		/* g_free(comment); */
-		
-	/*	g_free(comchar);
-	} else {
-		msg->status &= ~GTR_MSG_STATUS_FUZZY;
-		if (!regexec(&rexc, comment, 3, pos, 0)) {
-			gint i = (pos[1].rm_so == -1) ? 2 : 1;
-			strcpy(comment+pos[i].rm_so, comment+pos[i].rm_eo+1);
-		}
-	}*/
-	
 	
 	po_message_set_fuzzy(msg->message, fuzzy);
 
@@ -730,17 +650,35 @@ gtranslator_message_status_toggle_fuzzy(GtkWidget *widget,
 					gpointer useless)
 {
 	GtrMsg *msg = GTR_MSG(current_page->po->current->data);
-	if(msg->is_fuzzy) {
-		msg->is_fuzzy = FALSE;
+	if(po_message_is_fuzzy(msg->message))
+	{
 		po_message_set_fuzzy(msg->message, FALSE);
 		current_page->po->fuzzy--;
+		if(po_message_is_translated(msg->message))
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->translated),
+					     TRUE);
+		else
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->untranslated),
+					     TRUE);
 	}
 	else
 	{
-		msg->is_fuzzy = TRUE;
 		po_message_set_fuzzy(msg->message, TRUE);
 		current_page->po->fuzzy++;
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current_page->fuzzy),
+					     TRUE);
 	}
+	
+	/*
+	 * Update message table
+	 */
+	if(current_page->messages_table)
+	{
+		gtranslator_messages_table_update_row(current_page->messages_table, msg);
+	}
+						
+	/* Activate 'save', 'revert' etc. */			
+	gtranslator_page_dirty(NULL, current_page);
 }
 
 /*
@@ -754,14 +692,15 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 	GtkTextIter start, end;
 	GtkTextBuffer *buf;
 	GtrMsg *msg;
-	const char *check;
-	char *translation;
-	int i;
+	const gchar *check;
+	gchar *translation;
+	gint i;
 	
 	/* Work out which message this is associated with */
 	msg = current_page->po->current->data;
-	buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
-	if(textbuffer == buf) {
+	buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
+	if(textbuffer == buf)
+	{
 		/* Get message as UTF-8 buffer */
 		gtk_text_buffer_get_bounds(textbuffer, &start, &end);
 		translation = gtk_text_buffer_get_text(textbuffer, &start, &end, TRUE);
@@ -782,19 +721,19 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 		gtranslator_page_dirty(textbuffer, user_data);
 		return;
 	}
-	i=2;
-	//while(i < 16) {
+	i=1;
+	while(i <= 7) {
 		/* Know when to break out of the loop */
-		/*if(!current_page->trans_msgstr) {
+		if(!current_page->trans_msgstr[i]) {
 			break;
-		}*/
+		}
 		
 		/* Have we reached the one we want yet? */
-		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr));
-		/*if(textbuffer != buf) {
+		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[i]));
+		if(textbuffer != buf) {
 			i++;
 			continue;
-		}*/
+		}
 		
 		/* Get message as UTF-8 buffer */
 		gtk_text_buffer_get_bounds(textbuffer, &start, &end);
@@ -809,7 +748,7 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 		gtranslator_page_dirty(textbuffer, user_data);
 		return;
 		
-	//}
+	}
 
 	/* Shouldn't get here */
 	g_return_if_reached();

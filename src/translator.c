@@ -26,7 +26,7 @@
 #include "translator.h"
 #include "utils.h"
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 /*
  * Instantate our "external" gtranslator_translator.

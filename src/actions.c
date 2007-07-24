@@ -162,7 +162,9 @@ void gtranslator_actions_set_up_state_no_file(void)
 	gtk_widget_set_sensitive(gtranslator_menuitems->goto_last, FALSE);
 	gtk_widget_set_sensitive(gtranslator_menuitems->jump_to, FALSE);
 	gtk_widget_set_sensitive(gtranslator_menuitems->next_fuzzy, FALSE);
+	gtk_widget_set_sensitive(gtranslator_menuitems->previously_fuzzy, FALSE);
 	gtk_widget_set_sensitive(gtranslator_menuitems->next_untranslated, FALSE);
+	gtk_widget_set_sensitive(gtranslator_menuitems->previously_untranslated, FALSE);
 	
 	//Toolbar
 	guint n_elements;
@@ -240,21 +242,18 @@ void gtranslator_actions_set_up_file_opened(void)
 
 #ifdef DONTFORGET
 	/*
-	 * Enable the editing of the msgstrs :-)
-	 */
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(trans_box), TRUE);
-
-	/*
 	 * Make it focused initially
 	 */
-	gtk_window_set_focus(GTK_WINDOW(gtranslator_application), GTK_WIDGET(trans_box));
+	gtk_window_set_focus(GTK_WINDOW(gtranslator_application), 
+			     GTK_WIDGET(current_page->trans_msgstr));
 #endif
 }
 
 /*
  * The undo callback/function.
  */
-void gtranslator_actions_undo(GtkWidget *widget, gpointer useless)
+void gtranslator_actions_undo(GtkWidget *widget,
+			      gpointer useless)
 {
 	g_debug("Undo called");
 	

@@ -19,8 +19,6 @@
  *
  */
 
-/*With libglade this is not neccessary anymore*/
-/*With libglade we can get menus when we need it*/
 
 #ifndef GTR_MENUS_H
 #define GTR_MENUS_H 1
@@ -73,7 +71,9 @@ typedef struct _GtrMenuItems
 	GtkWidget *goto_last;
 	GtkWidget *jump_to;
 	GtkWidget *next_fuzzy;
+	GtkWidget *previously_fuzzy;
 	GtkWidget *next_untranslated;
+	GtkWidget *previously_untranslated;
 	
 	//About
 	GtkWidget *contents;

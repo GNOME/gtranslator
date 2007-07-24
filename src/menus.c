@@ -95,7 +95,9 @@ gtranslator_menuitems_set_up()
 	this->goto_last = glade_xml_get_widget(glade, "goto_last");
 	this->jump_to = glade_xml_get_widget(glade, "jump_to");
 	this->next_fuzzy = glade_xml_get_widget(glade, "next_fuzzy");
+	this->previously_fuzzy = glade_xml_get_widget(glade, "previously_fuzzy");
 	this->next_untranslated = glade_xml_get_widget(glade, "next_untranslated");
+	this->previously_untranslated = glade_xml_get_widget(glade, "previously_untranslated");
 	
 	//About
 	this->contents = glade_xml_get_widget(glade, "contents");
@@ -397,6 +399,16 @@ connect_menu_signals()
 	glade_xml_signal_connect_data(  glade, "on_next_fuzzy_deselect",
 					G_CALLBACK(pop_statusbar_data), NULL );
 	
+	//Previously fuzzy item
+	glade_xml_signal_connect_data(  glade, "on_previously_fuzzy_activate",
+					G_CALLBACK(gtranslator_message_go_to_next_fuzzy),
+				      NULL );
+	glade_xml_signal_connect_data(  glade, "on_previously_fuzzy_select",
+					G_CALLBACK(push_statusbar_data),
+				      _("Go to previously fuzzy message") );
+	glade_xml_signal_connect_data(  glade, "on_previously_fuzzy_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
+	
 	//Next untranslated item
 	glade_xml_signal_connect_data(  glade, "on_next_untranslated_activate",
 					G_CALLBACK(gtranslator_message_go_to_next_untranslated), NULL );
@@ -404,6 +416,15 @@ connect_menu_signals()
 					G_CALLBACK(push_statusbar_data),
 				      _("Go to next untranslated message") );
 	glade_xml_signal_connect_data(  glade, "on_next_untranslated_deselect",
+					G_CALLBACK(pop_statusbar_data), NULL );
+	
+	//Previously untranslated item
+	glade_xml_signal_connect_data(  glade, "on_previously_untranslated_activate",
+					G_CALLBACK(gtranslator_message_go_to_next_untranslated), NULL );
+	glade_xml_signal_connect_data(  glade, "on_previously_untranslated_select",
+					G_CALLBACK(push_statusbar_data),
+				      _("Go to previously untranslated message") );
+	glade_xml_signal_connect_data(  glade, "on_previously_untranslated_deselect",
 					G_CALLBACK(pop_statusbar_data), NULL );
 	
 	
