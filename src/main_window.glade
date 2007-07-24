@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Sun Jul 15 10:25:33 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Tue Jul 24 16:22:59 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -888,7 +888,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="show_tabs">False</property>
                         <child>
                           <widget class="GtkScrolledWindow" id="scrolledwindow4">
                             <property name="visible">True</property>
@@ -910,9 +909,15 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <widget class="GtkLabel" id="label15">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="label" translatable="yes">label</property>
+                          </widget>
                           <packing>
                             <property name="type">tab</property>
+                            <property name="tab_expand">False</property>
+                            <property name="tab_fill">False</property>
                           </packing>
                         </child>
                         <child>
@@ -1020,18 +1025,22 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <widget class="GtkLabel" id="label16">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="label" translatable="yes">label</property>
+                          </widget>
                           <packing>
                             <property name="type">tab</property>
+                            <property name="position">1</property>
+                            <property name="tab_expand">False</property>
+                            <property name="tab_fill">False</property>
                           </packing>
                         </child>
                         <child>
                           <widget class="GtkVBox" id="gucharmap_box">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <child>
-                              <placeholder/>
-                            </child>
                             <child>
                               <placeholder/>
                             </child>
@@ -1042,9 +1051,16 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <widget class="GtkLabel" id="label17">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="label" translatable="yes">label</property>
+                          </widget>
                           <packing>
                             <property name="type">tab</property>
+                            <property name="position">2</property>
+                            <property name="tab_expand">False</property>
+                            <property name="tab_fill">False</property>
                           </packing>
                         </child>
                       </widget>
@@ -1247,7 +1263,7 @@
                                 <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                                 <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                                 <child>
-                                  <widget class="GtkTextView" id="trans_msgstr">
+                                  <widget class="GtkTextView" id="trans_msgstr0">
                                     <property name="visible">True</property>
                                     <property name="wrap_mode">GTK_WRAP_WORD_CHAR</property>
                                   </widget>
@@ -1270,7 +1286,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkTextView" id="trans_msgstr_plural_1">
+                              <widget class="GtkTextView" id="trans_msgstr1">
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <property name="wrap_mode">GTK_WRAP_WORD</property>
@@ -1294,7 +1310,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkTextView" id="trans_msgstr_plural2">
+                              <widget class="GtkTextView" id="trans_msgstr2">
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                               </widget>
@@ -1317,7 +1333,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkTextView" id="trans_msgstr_plural3">
+                              <widget class="GtkTextView" id="trans_msgstr3">
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                               </widget>
@@ -1340,7 +1356,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkTextView" id="trans_msgstr_plural4">
+                              <widget class="GtkTextView" id="trans_msgstr4">
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                               </widget>
@@ -1363,7 +1379,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkTextView" id="trans_msgstr_plural5">
+                              <widget class="GtkTextView" id="trans_msgstr5">
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                               </widget>
@@ -1386,7 +1402,7 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkTextView" id="trans_msgstr_plural6">
+                              <widget class="GtkTextView" id="trans_msgstr6">
                                 <property name="can_focus">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                               </widget>

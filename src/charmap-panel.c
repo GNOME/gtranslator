@@ -24,12 +24,19 @@
 #endif
 
 #include "charmap-panel.h"
+
+#include <glib.h>
+#include <glib-object.h>
+#include <gtk/gtk.h>
+#include <gucharmap/gucharmap-table.h>
 #include <gucharmap/gucharmap-script-chapters.h>
 
 #define GTR_CHARMAP_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_CHARMAP_PANEL,     \
 						 GtranslatorCharmapPanelPrivate))
+
+G_DEFINE_TYPE(GtranslatorCharmapPanel, gtranslator_charmap_panel, GTK_TYPE_VBOX)
 
 struct _GtranslatorCharmapPanelPrivate
 {

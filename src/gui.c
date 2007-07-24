@@ -33,6 +33,7 @@
 #include "dialogs.h"
 #include "dnd.h"
 #include "find.h"
+#include "gucharmap.h"
 #include "header_stuff.h"
 #include "history.h"
 #include "learn.h"
@@ -213,6 +214,11 @@ gtranslator_create_main_window(void)
     	 * Warning message widgets
     	 */
     	warning_hbox = glade_xml_get_widget(glade, GLADE_WARNING_HBOX);
+	
+	/*
+	 * Gucharmap integration
+	 */
+	gtranslator_gucharmap_create();
     	
 	/*
 	 * Enable the default menubar/toolbar options
