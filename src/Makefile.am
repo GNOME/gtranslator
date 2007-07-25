@@ -33,8 +33,11 @@ gtranslator_SOURCES = \
 	comment.c comment.h \
 	compile.c compile.h \
 	dialogs.c dialogs.h \
+	dictionary.c dictionary.h \
+	dict-panel.c dict-panel.h \
 	dnd.c dnd.h \
 	find.c find.h \
+	gdict-sidebar.c gdict-sidebar.h \
 	gucharmap.c gucharmap.h \
 	gui.c gui.h \
 	header_stuff.c header_stuff.h \

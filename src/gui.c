@@ -31,6 +31,7 @@
 #include "bookmark.h"
 #include "color-schemes.h"
 #include "dialogs.h"
+#include "dictionary.h"
 #include "dnd.h"
 #include "find.h"
 #include "gucharmap.h"
@@ -219,6 +220,9 @@ gtranslator_create_main_window(void)
 	 * Gucharmap integration
 	 */
 	gtranslator_gucharmap_create();
+	
+	gtranslator_dictionary_create();
+
     	
 	/*
 	 * Enable the default menubar/toolbar options

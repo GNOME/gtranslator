@@ -1,3 +1,19 @@
+2007-07-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* Makefile.am: Added gdict-sidebar.ch, gdict-panel.ch, dictionary.ch.
+	* gdict-sidebar.ch, gdict-panel.ch, dictionary.ch: Widgets to make
+	possible gnome-dictionary integration.
+	* gui.c: Added call to dictionary func.
+
+2007-07-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* page.ch: trans_msgstr now is an array. (For plural forms)
+	* nautilus-string.c: Just stylistic indentation change.
+	* message.c: Some changes in plural forms work. Removed regex dependecie.
+	* translator.c Switched to glib/gi18n
+	* header_stuff.c: Changed to g_ascii_digit_value.
+	* menus.ch, actions.c: Added previously untranslated/fuzzy items.
+
 2007-07-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* gui.c, gucharmap.ch, charmap-panel.c, main_window.glade: 
