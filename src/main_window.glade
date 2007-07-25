@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.3.1 on Tue Jul 24 16:22:59 2007 by nacho@ansalon-->
+<!--Generated with glade3 3.3.1 on Wed Jul 25 01:07:13 2007 by nacho@ansalon-->
 <glade-interface>
   <widget class="GtkWindow" id="main_window">
     <property name="default_width">614</property>
@@ -878,6 +878,7 @@
                       <widget class="GtkComboBox" id="combobox_pane">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="items" translatable="yes"></property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -912,7 +913,7 @@
                           <widget class="GtkLabel" id="label15">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Message table</property>
                           </widget>
                           <packing>
                             <property name="type">tab</property>
@@ -1028,7 +1029,7 @@
                           <widget class="GtkLabel" id="label16">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Translation memories</property>
                           </widget>
                           <packing>
                             <property name="type">tab</property>
@@ -1054,11 +1055,37 @@
                           <widget class="GtkLabel" id="label17">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Charmap</property>
                           </widget>
                           <packing>
                             <property name="type">tab</property>
                             <property name="position">2</property>
+                            <property name="tab_expand">False</property>
+                            <property name="tab_fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkVBox" id="dictionary_box">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="position">3</property>
+                            <property name="tab_expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label18">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="label" translatable="yes">label</property>
+                          </widget>
+                          <packing>
+                            <property name="type">tab</property>
+                            <property name="position">3</property>
                             <property name="tab_expand">False</property>
                             <property name="tab_fill">False</property>
                           </packing>
