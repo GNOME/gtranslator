@@ -21,506 +21,238 @@
 
 #include "dict-panel.h"
 #include "gdict-sidebar.h"
+#include "gdict-common.h"
 
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gdict/gdict.h>
+#include <gconf/gconf-client.h>
 
 #define GTR_DICT_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_DICT_PANEL,     \
 						 GtranslatorDictPanelPrivate))
 
+#define GDICT_GCONF_DIR                     "/apps/gnome-dictionary"
+#define GDICT_GCONF_DATABASE_KEY            GDICT_GCONF_DIR "/database"
+#define GDICT_GCONF_STRATEGY_KEY            GDICT_GCONF_DIR "/strategy"
+#define GDICT_DEFAULT_SOURCE_NAME           "Default"
+#define GDICT_GCONF_SOURCE_KEY              GDICT_GCONF_DIR "/source-name"
+
 /* sidebar pages logical ids */
 #define GDICT_SIDEBAR_SPELLER_PAGE      "speller"
 #define GDICT_SIDEBAR_DATABASES_PAGE    "db-chooser"
 #define GDICT_SIDEBAR_STRATEGIES_PAGE   "strat-chooser"
 
-#define GDICT_DEFAULT_SOURCE_NAME       "Default"
-
-enum
-{
-	COMPLETION_TEXT_COLUMN,
-
-	COMPLETION_N_COLUMNS
-};
-
-enum
-{
-  PROP_0,
-
-  PROP_ACTION,
-  PROP_SOURCE_LOADER,
-  PROP_SOURCE_NAME,
-  PROP_PRINT_FONT,
-  PROP_DEFBOX_FONT,
-  PROP_WORD,
-  PROP_WINDOW_ID
-};
-
 G_DEFINE_TYPE(GtranslatorDictPanel, gtranslator_dict_panel, GTK_TYPE_VBOX)
 
 struct _GtranslatorDictPanelPrivate
 {
-	GtkWidget *button;
-	GtkWidget *entry;
-	GtkWidget *defbox;
-	GtkWidget *strat_chooser;
-	GtkWidget *speller;
-	GtkWidget *db_chooser;
-	GtkWidget *sidebar;
-	
-	gchar *source_name;
-	GdictSourceLoader *loader;
-	
-	GdictContext *context;
-	guint definition_id;
-	guint lookup_start_id;
-	guint lookup_end_id;
-	guint error_id;
-	
-	GtkEntryCompletion *completion;
-	GtkListStore *completion_model;
-	
-	gchar *word;
-	gint max_definition;
-	gint last_definition;
-	gint current_definition;
+	GtkTooltips *tooltips;
+  
+	GConfClient *gconf_client;
+	guint notify_id;
 	
 	gchar *database;
 	gchar *strategy;
+	gchar *source_name;  
+
+	gchar *word;  
+	GdictContext *context;
+	guint lookup_start_id;
+	guint lookup_end_id;
+	guint error_id;
+
+	GdictSourceLoader *loader;
+
+	GtkWidget *speller;
+	GtkWidget *db_chooser;
+	GtkWidget *strat_chooser;
+	GtkWidget *entry;
+	GtkWidget *button;
+	GtkWidget *defbox;
+	GtkWidget *sidebar;
 };
 
+static void
+clear_cb (GtkWidget   *widget,
+	  GtranslatorDictPanel *panel)
+{
+	GtranslatorDictPanelPrivate *priv = panel->priv;
 
+	gtk_entry_set_text (GTK_ENTRY (priv->entry), "");
 
+	if (!priv->defbox)
+		return;
+  
+	gdict_defbox_clear (GDICT_DEFBOX (priv->defbox));
+}
 
 static void
-gdict_window_set_database (GtranslatorDictPanel *panel,
-			   const gchar *database)
+gtranslator_dict_panel_entry_activate_cb (GtkWidget   *widget,
+					  GtranslatorDictPanel *panel)
 {
-	g_free (panel->priv->database);
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+	const gchar *text;
+	
+	text = gtk_entry_get_text (GTK_ENTRY(priv->entry));
+	
+	if (!text)
+		return;
+  
+	g_free (priv->word);
+	priv->word = g_strdup(text);
+
+	gdict_defbox_lookup (GDICT_DEFBOX (priv->defbox), priv->word);
+}
+
+static void
+gtranslator_dict_panel_set_database (GtranslatorDictPanel *panel,
+				     const gchar *database)
+{
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+  
+	g_free (priv->database);
 
 	if (database)
-		panel->priv->database = g_strdup (database);
-	/*else
-		panel->priv->database = gdict_gconf_get_string_with_default (window->gconf_client,
-							    GDICT_GCONF_DATABASE_KEY,
-							    GDICT_DEFAULT_DATABASE);*/
-
-	if (panel->priv->defbox)
-	gdict_defbox_set_database (GDICT_DEFBOX (panel->priv->defbox),
-				   panel->priv->database);
-}
-
-static void
-gdict_window_set_strategy (GtranslatorDictPanel *panel,
-			   const gchar *strategy)
-{
-	if (panel->priv->strategy)
-		g_free (panel->priv->strategy);
-
-	panel->priv->strategy = g_strdup (strategy);
-}
-
-
-static void
-gdict_window_set_word (GtranslatorDictPanel *panel,
-		       const gchar *word,
-		       const gchar *database)
-{
-	gchar *title;
-  
-	g_free (panel->priv->word);
-	panel->priv->word = NULL;
-
-	if (word && word[0] != '\0')
-		panel->priv->word = g_strdup (word);
+		priv->database = g_strdup (database);
 	else
-		return;
+		priv->database = gdict_gconf_get_string_with_default (priv->gconf_client,
+								      GDICT_GCONF_DATABASE_KEY,
+								      GDICT_DEFAULT_DATABASE);
+	if (priv->defbox)
+		gdict_defbox_set_database (GDICT_DEFBOX (priv->defbox),
+					   priv->database);
+}
 
-	if (!database || database[0] == '\0')
-		database = panel->priv->database;
-
-	/*if (panel->priv->word)
-		title = g_strdup_printf (_("%s - Dictionary"), panel->priv->word);
+static void
+gtranslator_dict_panel_set_strategy (GtranslatorDictPanel *panel,
+				     const gchar *strategy)
+{
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+	
+	g_free (priv->strategy);
+	
+	if (strategy)
+		priv->strategy = g_strdup (strategy);
 	else
-		title = g_strdup (_("Dictionary"));
-  
-	gtk_window_set_title (GTK_WINDOW (window), title);
-	g_free (title);*/
-
-	if (panel->priv->defbox)
-	{
-		gdict_defbox_set_database (GDICT_DEFBOX (panel->priv->defbox), database);
-		gdict_defbox_lookup (GDICT_DEFBOX (panel->priv->defbox), word);
-	}
-}
-
-static void
-gdict_window_definition_cb (GdictContext    *context,
-			    GdictDefinition *definition,
-			    GtranslatorDictPanel *panel)
-{
-	gint total, n;
-  /*gdouble fraction;
-
-  g_assert (GDICT_IS_WINDOW (window));
-
-  total = gdict_definition_get_total (definition);*/
-	n = panel->priv->current_definition + 1;
-
-  /*fraction = CLAMP (((gdouble) n / (gdouble) total), 0.0, 1.0);
-
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (window->progress),
-		  		 fraction);*/
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-
-	panel->priv->current_definition = n;
-}
-
-static void
-gdict_window_lookup_start_cb (GdictContext *context,
-			      GtranslatorDictPanel *panel)
-{
-	gchar *message;
-
-	if (!panel->priv->word)
-		return;
-
-	/*if (!window->busy_cursor)
-		window->busy_cursor = gdk_cursor_new (GDK_WATCH);*/
-
-	message = g_strdup_printf (_("Searching for '%s'..."), panel->priv->word);
-  
-	/*if (window->status)
-		gtk_statusbar_push (GTK_STATUSBAR (window->status), 0, message);
-
-  if (window->progress)
-    gtk_widget_show (window->progress);*/
-
-	panel->priv->max_definition = -1;
-	panel->priv->last_definition = 0;
-	panel->priv->current_definition = 0;
-
-	/*gdk_window_set_cursor (GTK_WIDGET (window)->window,
-		         window->busy_cursor);*/
-	g_free (message);
-}
-
-static void
-gdict_window_lookup_end_cb (GdictContext *context,
-			    GtranslatorDictPanel *panel)
-{
-	gchar *message;
-	gint count;
-	GtkTreeIter iter;
-
-	count = panel->priv->current_definition;
-
-	panel->priv->max_definition = count - 1;
-
-	if (count == 0)
-		message = g_strdup (_("No definitions found"));
-	else 
-		message = g_strdup_printf (ngettext("A definition found",
-						    "%d definitions found",
-						    count),
-					   count);
-
-	/*if (window->status)
-		gtk_statusbar_push (GTK_STATUSBAR (window->status), 0, message);
-
-	if (window->progress)
-		gtk_widget_hide (window->progress);*/
-
-	gtk_list_store_append (panel->priv->completion_model, &iter);
-	gtk_list_store_set (panel->priv->completion_model, &iter,
-			    COMPLETION_TEXT_COLUMN, panel->priv->word,
-			    -1);
-
-  //gdk_window_set_cursor (GTK_WIDGET (window)->window, NULL);
-	g_free (message);
-}
-
-static void
-gdict_window_error_cb (GdictContext *context,
-		       const GError *error,
-		       GtranslatorDictPanel *panel)
-{
-	gint count;
-  
-	//gdk_window_set_cursor (GTK_WIDGET (window)->window, NULL);
-  
-	/*gtk_statusbar_push (GTK_STATUSBAR (window->status), 0,
-		      _("No definitions found"));*/
-
-	//gtk_widget_hide (window->progress);
-
-	/* launch the speller only on NO_MATCH */
-	if (error->code == GDICT_CONTEXT_ERROR_NO_MATCH)
-	{
-		GdictSource *source;
-		GdictContext *context;
-
-		//gdict_window_set_sidebar_visible (window, TRUE);
-		gdict_sidebar_view_page (GDICT_SIDEBAR (panel->priv->sidebar),
-					 GDICT_SIDEBAR_SPELLER_PAGE);
-
-		/* we clone the context, so that the signals that it
-		* fires do not get caught by the signal handlers we
-		* use for getting the definitions.
-		*/
-		source = gdict_source_loader_get_source (panel->priv->loader,
-							 panel->priv->source_name);
-		context = gdict_source_get_context (source);
-
-		gdict_speller_set_context (GDICT_SPELLER (panel->priv->speller),
-					   context);
-		g_object_unref (context);
-		g_object_unref (source);
-      
-		gdict_speller_set_strategy (GDICT_SPELLER (panel->priv->speller),
-					    panel->priv->strategy);
-      
-		gdict_speller_match (GDICT_SPELLER (panel->priv->speller),
-				     panel->priv->word);
-    }
-}
-
-static void
-gdict_window_set_context (GtranslatorDictPanel *panel,
-			  GdictContext *context)
-{
-	if (panel->priv->context)
-	{
-		g_signal_handler_disconnect (panel->priv->context, panel->priv->definition_id);
-		g_signal_handler_disconnect (panel->priv->context, panel->priv->lookup_start_id);
-		g_signal_handler_disconnect (panel->priv->context, panel->priv->lookup_end_id);
-		g_signal_handler_disconnect (panel->priv->context, panel->priv->error_id);
-
-		panel->priv->definition_id = 0;
-		panel->priv->lookup_start_id = 0;
-		panel->priv->lookup_end_id = 0;
-		panel->priv->error_id = 0;
-		
-		g_object_unref (panel->priv->context);
-		panel->priv->context = NULL;
-	}
-
-	if (panel->priv->defbox)
-	{
-		gdict_defbox_set_context (GDICT_DEFBOX (panel->priv->defbox), context);
-	}
-
-	if (!context)
-		return;
-  
-	/* attach our callbacks */
-	panel->priv->definition_id   = g_signal_connect (context, "definition-found",
-							 G_CALLBACK (gdict_window_definition_cb),
-							 panel);
-	panel->priv->lookup_start_id = g_signal_connect (context, "lookup-start",
-							 G_CALLBACK (gdict_window_lookup_start_cb),
-							 panel);
-	panel->priv->lookup_end_id   = g_signal_connect (context, "lookup-end",
-		  			      G_CALLBACK (gdict_window_lookup_end_cb),
-					      panel);
-	panel->priv->error_id        = g_signal_connect (context, "error",
-		  			      G_CALLBACK (gdict_window_error_cb),
-					      panel);
-  
-	panel->priv->context = context;
+		priv->strategy = gdict_gconf_get_string_with_default (priv->gconf_client,
+								      GDICT_GCONF_STRATEGY_KEY,
+								      GDICT_DEFAULT_STRATEGY);
 }
 
 static GdictContext *
 get_context_from_loader (GtranslatorDictPanel *panel)
 {
+	GtranslatorDictPanelPrivate *priv = panel->priv;
 	GdictSource *source;
 	GdictContext *retval;
 
-	if (!panel->priv->source_name)
-		panel->priv->source_name = g_strdup (GDICT_DEFAULT_SOURCE_NAME);
+	if (!priv->source_name)
+		priv->source_name = g_strdup (GDICT_DEFAULT_SOURCE_NAME);
 
-	source = gdict_source_loader_get_source (panel->priv->loader,
-						 panel->priv->source_name);
-	if (!source &&
-		strcmp (panel->priv->source_name, GDICT_DEFAULT_SOURCE_NAME) != 0)
-	{
-		g_free (panel->priv->source_name);
-		panel->priv->source_name = g_strdup (GDICT_DEFAULT_SOURCE_NAME);
-
-		source = gdict_source_loader_get_source (panel->priv->loader,
-							 panel->priv->source_name);
-	}
-  
+	source = gdict_source_loader_get_source (priv->loader,
+						 priv->source_name);
 	if (!source)
 	{
 		gchar *detail;
 		
 		detail = g_strdup_printf (_("No dictionary source available with name '%s'"),
-					  panel->priv->source_name);
+					  priv->source_name);
 
-		/*gdict_show_error_dialog (GTK_WINDOW (window),
-                               _("Unable to find dictionary source"),
-                               NULL);*/
 		g_warning(_("Unable to find dictionary source"));
-      
 		g_free (detail);
 
 		return NULL;
 	}
-  
-	gdict_window_set_database (panel, gdict_source_get_database (source));
-	gdict_window_set_strategy (panel, gdict_source_get_strategy (source));
-  
+
+	gtranslator_dict_panel_set_database (panel, gdict_source_get_database (source));
+	gtranslator_dict_panel_set_strategy (panel, gdict_source_get_strategy (source));
+
 	retval = gdict_source_get_context (source);
 	if (!retval)
 	{
 		gchar *detail;
-      
+
 		detail = g_strdup_printf (_("No context available for source '%s'"),
 					  gdict_source_get_description (source));
       				
-      /*gdict_show_error_dialog (GTK_WINDOW (window),
+      /*gdict_show_error_dialog (NULL,
                                _("Unable to create a context"),
                                detail);*/
 		g_warning(_("Unable to create a context"));
-      
+
 		g_free (detail);
 		g_object_unref (source);
-      
+
 		return NULL;
 	}
-  
+
 	g_object_unref (source);
-  
+	
 	return retval;
 }
 
 static void
-gdict_window_set_source_name (GtranslatorDictPanel *panel,
-			      const gchar *source_name)
+gtranslator_dict_panel_set_context (GtranslatorDictPanel *panel,
+				    GdictContext *context)
 {
-	GdictContext *context;
+	GtranslatorDictPanelPrivate *priv = panel->priv;
 
-	g_free (panel->priv->source_name);
-
-	if (source_name)
+	if (priv->context)
 	{
-		g_warning("hay sourcename");
-		panel->priv->source_name = g_strdup (source_name);
+		g_signal_handler_disconnect (priv->context, priv->lookup_start_id);
+		g_signal_handler_disconnect (priv->context, priv->lookup_end_id);
+		g_signal_handler_disconnect (priv->context, priv->error_id);
+
+		priv->lookup_start_id = 0;
+		priv->lookup_end_id = 0;
+		priv->error_id = 0;
+		
+		g_object_unref (priv->context);
+		priv->context = NULL;
 	}
-	/*else
-	panel->priv->source_name = gdict_gconf_get_string_with_default (window->gconf_client,
-							       GDICT_GCONF_SOURCE_KEY,
-							       GDICT_DEFAULT_SOURCE_NAME);*/
+	
+	if (priv->defbox)
+		gdict_defbox_set_context (GDICT_DEFBOX (priv->defbox), context);
+	
+	if (!context)
+		return;
+	
+	/* attach our callbacks */
+	/* priv->lookup_start_id = g_signal_connect (context, "lookup-start",
+					    G_CALLBACK (gdict_applet_lookup_start_cb),
+					    panel);
+  priv->lookup_end_id   = g_signal_connect (context, "lookup-end",
+					    G_CALLBACK (gdict_applet_lookup_end_cb),
+					    panel);*/
+  /*priv->error_id        = g_signal_connect (context, "error",
+		  			    G_CALLBACK (gdict_applet_error_cb),
+					    panel);*/
+
+	priv->context = context;
+}
+
+static void
+gtranslator_dict_panel_set_source_name (GtranslatorDictPanel *panel,
+					const gchar *source_name)
+{
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+	GdictContext *context;
+	
+	g_free (priv->source_name);
+	
+	if (source_name)
+		priv->source_name = g_strdup (source_name);
+	else
+		priv->source_name = gdict_gconf_get_string_with_default (priv->gconf_client,
+									 GDICT_GCONF_SOURCE_KEY,
+									 GDICT_DEFAULT_SOURCE_NAME);
 
 	context = get_context_from_loader (panel);
-	gdict_window_set_context (panel, context);
-}
-
-
-static void
-gdict_window_set_property (GObject      *object,
-			   guint         prop_id,
-			   const GValue *value,
-			   GParamSpec   *pspec)
-{
-  GtranslatorDictPanel *panel = GTR_DICT_PANEL (object);
-  
-  switch (prop_id)
-    {
-    /*case PROP_ACTION:
-      window->action = g_value_get_enum (value);
-      break;*/
-    case PROP_SOURCE_LOADER:
-      if (panel->priv->loader)
-        g_object_unref (panel->priv->loader);
-      panel->priv->loader = g_value_get_object (value);
-      g_object_ref (panel->priv->loader);
-      break;
-    case PROP_SOURCE_NAME:
-      gdict_window_set_source_name (panel, g_value_get_string (value));
-	    g_warning("source-name");
-      break;
-    case PROP_WORD:
-      gdict_window_set_word (panel, g_value_get_string (value), NULL);
-      break;
-    /*case PROP_PRINT_FONT:
-      gdict_window_set_print_font (window, g_value_get_string (value));
-      break;*/
-    /*case PROP_DEFBOX_FONT:
-      gdict_window_set_defbox_font (window, g_value_get_string (value));
-      break;*/
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
-
-static void
-gdict_window_get_property (GObject    *object,
-			   guint       prop_id,
-			   GValue     *value,
-			   GParamSpec *pspec)
-{
-  GtranslatorDictPanel *panel = GTR_DICT_PANEL(object);
-  
-  switch (prop_id)
-    {
-    /*case PROP_ACTION:
-      g_value_set_enum (value, window->action);
-      break;*/
-    case PROP_SOURCE_LOADER:
-      g_value_set_object (value, panel->priv->loader);
-      break;
-    case PROP_SOURCE_NAME:
-      g_value_set_string (value, panel->priv->source_name);
-      break;
-    case PROP_WORD:
-      g_value_set_string (value, panel->priv->word);
-      break;
-    /*case PROP_PRINT_FONT:
-      g_value_set_string (value, window->print_font);
-      break;
-    case PROP_DEFBOX_FONT:
-      g_value_set_string (value, window->defbox_font);
-      break;
-    case PROP_WINDOW_ID:
-      g_value_set_uint (value, window->window_id);
-      break;*/
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-	g_warning("entra en get");
-}
-
-static void
-lookup_word (GtranslatorDictPanel *panel,
-             gpointer dummy)
-{
-	const gchar *word;
-
-	g_assert (GTR_IS_DICT_PANEL (panel));
-  
-	if (!panel->priv->context)
-	{
-		g_warning("There is no context\n");
-		return;
-	}
-  
-	word = gtk_entry_get_text (GTK_ENTRY (panel->priv->entry));
-	if (!word || *word == '\0')
-	{
-		g_warning("There is no word\n");
-		return;
-	}
-
-	gdict_window_set_word (panel, word, NULL);
+	gtranslator_dict_panel_set_context (panel, context);
 }
 
 static void
@@ -529,9 +261,10 @@ strategy_activated_cb (GdictStrategyChooser *chooser,
                        const gchar          *strat_desc,
                        GtranslatorDictPanel *panel)
 {
-	gdict_window_set_strategy (panel, strat_name);
-
-  /*if (window->status)
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+	gtranslator_dict_panel_set_strategy (panel, strat_name);
+/*
+  if (window->status)
     {
       gchar *message;
 
@@ -547,9 +280,10 @@ database_activated_cb (GdictDatabaseChooser *chooser,
 		       const gchar          *db_desc,
 		       GtranslatorDictPanel *panel)
 {
-	gdict_window_set_database (panel, db_name);
-
-  /*if (window->status)
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+	gtranslator_dict_panel_set_database (panel, db_name);
+	/*
+  if (window->status)
     {
       gchar *message;
 
@@ -560,16 +294,43 @@ database_activated_cb (GdictDatabaseChooser *chooser,
 }
 
 static void
+gtranslator_dict_panel_set_word (GtranslatorDictPanel *panel,
+				 const gchar *word,
+				 const gchar *database)
+{
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+	gchar *title;
+	
+	g_free (priv->word);
+	priv->word = NULL;
+	
+	if (word && word[0] != '\0')
+		priv->word = g_strdup (word);
+	else
+		return;
+	
+	if (!database || database[0] == '\0')
+		database = priv->database;
+	
+	if (priv->defbox)
+	{
+		gdict_defbox_set_database (GDICT_DEFBOX (priv->defbox), database);
+		gdict_defbox_lookup (GDICT_DEFBOX (priv->defbox), word);
+	}
+}
+
+static void
 speller_word_activated_cb (GdictSpeller *speller,
 			   const gchar  *word,
 			   const gchar  *db_name,
 			   GtranslatorDictPanel *panel)
 {
-	gtk_entry_set_text (GTK_ENTRY (panel->priv->entry), word);
-  
-	gdict_window_set_word (panel, word, db_name);
-
-/*  if (window->status)
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+	gtk_entry_set_text (GTK_ENTRY (priv->entry), word);
+	
+	gtranslator_dict_panel_set_word (panel, word, db_name);
+	/*
+  if (window->status)
     {
       gchar *message;
 
@@ -579,31 +340,34 @@ speller_word_activated_cb (GdictSpeller *speller,
     }*/
 }
 
+
+
 static void
 sidebar_page_changed_cb (GdictSidebar *sidebar,
 			 GtranslatorDictPanel *panel)
 {
+	GtranslatorDictPanelPrivate *priv = panel->priv;
 	const gchar *page_id;
 	const gchar *message;
-
+	
 	page_id = gdict_sidebar_current_page (sidebar);
-
+	
 	switch (page_id[0])
 	{
 		case 's':
 		{
 			switch (page_id[1])
- 			{
+			{
 				case 'p': /* speller */
 					message = _("Double-click on the word to look up");
-					if (panel->priv->word)
-						gdict_speller_match (GDICT_SPELLER (panel->priv->speller),
-								     panel->priv->word);
+				if (priv->word)
+					gdict_speller_match (GDICT_SPELLER (priv->speller),
+							     priv->word);
 				break;
 				case 't': /* strat-chooser */
 					message = _("Double-click on the matching strategy to use");
-
-					gdict_strategy_chooser_refresh (GDICT_STRATEGY_CHOOSER (panel->priv->strat_chooser));
+				
+					gdict_strategy_chooser_refresh (GDICT_STRATEGY_CHOOSER (priv->strat_chooser));
 				break;
 				default:
 					message = NULL;
@@ -612,25 +376,24 @@ sidebar_page_changed_cb (GdictSidebar *sidebar,
 		break;
 		case 'd': /* db-chooser */
 			message = _("Double-click on the database to use");
-			gdict_database_chooser_refresh (GDICT_DATABASE_CHOOSER (panel->priv->db_chooser));
+		
+		gdict_database_chooser_refresh (GDICT_DATABASE_CHOOSER (priv->db_chooser));
 		break;
 		default:
 			message = NULL;
 		break;
 	}
-
+	
 	/*if (message && window->status)
-		gtk_statusbar_push (GTK_STATUSBAR (window->status), 0, message);*/
+	gtk_statusbar_push (GTK_STATUSBAR (window->status), 0, message);*/
 }
 
 static void
-gtranslator_dict_panel_init (GtranslatorDictPanel *panel)
+gtranslator_dict_panel_draw (GtranslatorDictPanel *panel)
 {
 	GtkPaned   *paned;
 	GtkWidget  *vbox;
 	GtkWidget  *hbox;
-	
-	panel->priv = GTR_DICT_PANEL_GET_PRIVATE (panel);
 	
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
@@ -644,8 +407,8 @@ gtranslator_dict_panel_init (GtranslatorDictPanel *panel)
 	 * Look up Button
 	 */
 	panel->priv->button = gtk_button_new_with_mnemonic (_("Look _up:"));
-	g_signal_connect_swapped(panel->priv->button, "clicked",
-				 G_CALLBACK (lookup_word),
+	g_signal_connect(panel->priv->button, "clicked",
+				 G_CALLBACK (gtranslator_dict_panel_entry_activate_cb),
 				 panel);
 	gtk_button_set_relief (GTK_BUTTON (panel->priv->button), GTK_RELIEF_NONE);
 	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->button, FALSE, FALSE, 0);
@@ -654,24 +417,12 @@ gtranslator_dict_panel_init (GtranslatorDictPanel *panel)
 	/*
 	 * Entry
 	 */
-	panel->priv->completion_model = gtk_list_store_new (COMPLETION_N_COLUMNS,
-							    G_TYPE_STRING);
-  
-	panel->priv->completion = gtk_entry_completion_new ();
-	gtk_entry_completion_set_popup_completion (panel->priv->completion, TRUE);
-	gtk_entry_completion_set_model (panel->priv->completion,
-					GTK_TREE_MODEL (panel->priv->completion_model));
-	gtk_entry_completion_set_text_column (panel->priv->completion,
-					      COMPLETION_TEXT_COLUMN);
-  
 	panel->priv->entry = gtk_entry_new ();
 	if (panel->priv->word)
 		gtk_entry_set_text (GTK_ENTRY (panel->priv->entry), panel->priv->word);
   
-	gtk_entry_set_completion (GTK_ENTRY (panel->priv->entry),
-				  panel->priv->completion);
-	g_signal_connect_swapped (panel->priv->entry, "activate",
-				  G_CALLBACK (lookup_word),
+	g_signal_connect (panel->priv->entry, "activate",
+				  G_CALLBACK (gtranslator_dict_panel_entry_activate_cb),
 				  panel);
 	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->entry, TRUE, TRUE, 0);
 	gtk_widget_show (panel->priv->entry);
@@ -722,7 +473,7 @@ gtranslator_dict_panel_init (GtranslatorDictPanel *panel)
 	/*
 	 * db chooser
 	 */
-	panel->priv->db_chooser = gdict_database_chooser_new ();
+  	panel->priv->db_chooser = gdict_database_chooser_new ();
 	if (panel->priv->context)
 		gdict_database_chooser_set_context (GDICT_DATABASE_CHOOSER (panel->priv->db_chooser),
 						    panel->priv->context);
@@ -738,7 +489,7 @@ gtranslator_dict_panel_init (GtranslatorDictPanel *panel)
 	/*
 	 * Strategy chooser
 	 */
-	panel->priv->strat_chooser = gdict_strategy_chooser_new ();
+  	panel->priv->strat_chooser = gdict_strategy_chooser_new ();
 	if (panel->priv->context)
 		gdict_strategy_chooser_set_context (GDICT_STRATEGY_CHOOSER (panel->priv->strat_chooser),
 						    panel->priv->context);
@@ -753,6 +504,98 @@ gtranslator_dict_panel_init (GtranslatorDictPanel *panel)
 
 	gtk_widget_show (panel->priv->sidebar);
 	
+	
+}
+
+static void
+gtranslator_dict_panel_gconf_notify_cb (GConfClient *client,
+			      guint        cnxn_id,
+			      GConfEntry  *entry,
+			      gpointer     user_data)
+{
+	GtranslatorDictPanel *panel = GTR_DICT_PANEL (user_data);
+	GtranslatorDictPanelPrivate *priv = panel->priv;
+
+	if (strcmp (entry->key, GDICT_GCONF_SOURCE_KEY) == 0)
+	{
+		if (entry->value && (entry->value->type == GCONF_VALUE_STRING))
+			gtranslator_dict_panel_set_source_name (panel, gconf_value_get_string (entry->value));
+		else
+			gtranslator_dict_panel_set_source_name (panel, GDICT_DEFAULT_SOURCE_NAME);
+	}
+	else if (strcmp (entry->key, GDICT_GCONF_DATABASE_KEY) == 0)
+	{
+		if (entry->value && (entry->value->type == GCONF_VALUE_STRING))
+			gtranslator_dict_panel_set_database (panel, gconf_value_get_string (entry->value));
+		else
+			gtranslator_dict_panel_set_database (panel, GDICT_DEFAULT_DATABASE);
+	}
+	else if (strcmp (entry->key, GDICT_GCONF_STRATEGY_KEY) == 0)
+	{
+		if (entry->value && (entry->value->type == GCONF_VALUE_STRING))
+			gtranslator_dict_panel_set_strategy (panel, gconf_value_get_string (entry->value));
+		else
+			gtranslator_dict_panel_set_strategy (panel, GDICT_DEFAULT_STRATEGY);
+	}
+}
+
+static void
+gtranslator_dict_panel_init(GtranslatorDictPanel *panel)
+{
+	gchar * data_dir;
+	GtranslatorDictPanelPrivate *priv;
+	GError *gconf_error;
+	
+	panel->priv = GTR_DICT_PANEL_GET_PRIVATE (panel);
+	priv = panel->priv;
+	
+	if (!priv->loader)
+		panel->priv->loader = gdict_source_loader_new ();
+	
+	/* add our data dir inside $HOME to the loader's search paths */
+	data_dir = gdict_get_data_dir ();
+	gdict_source_loader_add_search_path (priv->loader, data_dir);
+	g_free (data_dir);
+	
+	
+	
+	/* get the default gconf client */
+	if (!priv->gconf_client)
+		priv->gconf_client = gconf_client_get_default ();
+
+	gconf_error = NULL;
+	gconf_client_add_dir (priv->gconf_client,
+			      GDICT_GCONF_DIR,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      &gconf_error);
+	if (gconf_error)
+	{
+		/*gdict_show_gerror_dialog (NULL,
+					  _("Unable to connect to GConf"),
+					  gconf_error);*/
+		gconf_error = NULL;
+	}
+	
+	priv->notify_id = gconf_client_notify_add (priv->gconf_client,
+						   GDICT_GCONF_DIR,
+						   gtranslator_dict_panel_gconf_notify_cb,
+						   panel, NULL,
+						   &gconf_error);
+	if (gconf_error)
+	{
+		/*gdict_show_gerror_dialog (NULL,
+					  _("Unable to get notification for preferences"),
+					  gconf_error);*/
+			
+		gconf_error = NULL;
+	}
+	
+	/* Draw widgets */
+	gtranslator_dict_panel_draw(panel);
+	
+	/* force retrieval of the configuration from GConf */
+	gtranslator_dict_panel_set_source_name (panel, NULL);
+	
 }
 
 static void
@@ -761,8 +604,6 @@ gtranslator_dict_panel_finalize (GObject *object)
 	GtranslatorDictPanel *panel = GTR_DICT_PANEL (object);
 
 	g_free (panel->priv->source_name);
-	/*g_free (panel->priv->print_font);
-	g_free (panel->priv->defbox_font);*/
 	g_free (panel->priv->word);
 	g_free (panel->priv->database);
 	g_free (panel->priv->strategy);
@@ -771,142 +612,20 @@ gtranslator_dict_panel_finalize (GObject *object)
 }
 
 static void
-gtranslator_dict_panel_dispose (GObject *gobject)
-{
-	GtranslatorDictPanel *panel = GTR_DICT_PANEL (gobject);
-  
-	if (panel->priv->context)
-	{
-		if (panel->priv->lookup_start_id)
-		{
-			g_signal_handler_disconnect (panel->priv->context,
-						     panel->priv->lookup_start_id);
-			g_signal_handler_disconnect (panel->priv->context,
-						     panel->priv->definition_id);
-			g_signal_handler_disconnect (panel->priv->context,
-						     panel->priv->lookup_end_id);
-			g_signal_handler_disconnect (panel->priv->context,
-						     panel->priv->error_id);
-			
-			panel->priv->lookup_start_id = 0;
-			panel->priv->definition_id = 0;
-			panel->priv->lookup_end_id = 0;
-			panel->priv->error_id = 0;
-		}
-		
-		g_object_unref (panel->priv->context);
-		panel->priv->context = NULL;
-	}
-
-	if (panel->priv->loader)
-	{
-		g_object_unref (panel->priv->loader);
-		panel->priv->loader = NULL;
-	}
-
-	if (panel->priv->completion)
-	{
-		g_object_unref (panel->priv->completion);
-		panel->priv->completion = NULL;
-	}
-
-	if (panel->priv->completion_model)
-	{
-		g_object_unref (panel->priv->completion_model);
-		panel->priv->completion_model = NULL;
-	}
-
-
-	G_OBJECT_CLASS (gtranslator_dict_panel_parent_class)->dispose (gobject);
-}
-
-static void
 gtranslator_dict_panel_class_init (GtranslatorDictPanelClass *klass)
-{
-	/*GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-	g_type_class_add_private (klass, sizeof (GtranslatorDictPanelPrivate));
-
-	object_class->finalize = gtranslator_dict_panel_finalize;*/
-	
+{	
 	GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 	
 	g_type_class_add_private (klass, sizeof (GtranslatorDictPanelPrivate));
 	
-	gobject_class->finalize = gtranslator_dict_panel_finalize;
-	gobject_class->dispose = gtranslator_dict_panel_dispose;
-	gobject_class->set_property = gdict_window_set_property;
-	gobject_class->get_property = gdict_window_get_property;
-	//gobject_class->constructor = gtranslator_dict_panel_constructor;
-
-	/*widget_class->style_set = gdict_window_style_set;
-	widget_class->size_allocate = gdict_window_size_allocate;*/
-  
-	/*g_object_class_install_property (gobject_class,
-  				   PROP_ACTION,
-				   g_param_spec_enum ("action",
-				   		      "Action",
-						      "The default action performed by the window",
-						      GDICT_TYPE_WINDOW_ACTION,
-						      GDICT_WINDOW_ACTION_CLEAR,
-						      (G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY)));*/
-	g_object_class_install_property (gobject_class,
-  				   PROP_SOURCE_LOADER,
-  				   g_param_spec_object ("source-loader",
-  							"Source Loader",
-  							"The GdictSourceLoader to be used to load dictionary sources",
-  							GDICT_TYPE_SOURCE_LOADER,
-  							(G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY)));
-	g_object_class_install_property (gobject_class,
-		  		   PROP_SOURCE_NAME,
-				   g_param_spec_string ("source-name",
-					   		"Source Name",
-							"The name of the GdictSource to be used",
-							GDICT_DEFAULT_SOURCE_NAME,
-							(G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT)));
-	/*g_object_class_install_property (gobject_class,
-  				   PROP_PRINT_FONT,
-  				   g_param_spec_string ("print-font",
-  				   			"Print Font",
-  				   			"The font name to be used when printing",
-  				   			GDICT_DEFAULT_PRINT_FONT,
-  				   			(G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT)));*/
-	/*g_object_class_install_property (gobject_class,
-		  		   PROP_DEFBOX_FONT,
-				   g_param_spec_string ("defbox-font",
-					   		"Defbox Font",
-							"The font name to be used by the defbox widget",
-							GDICT_DEFAULT_DEFBOX_FONT,
-							(G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT)));*/
-	g_object_class_install_property (gobject_class,
-		  		   PROP_WORD,
-				   g_param_spec_string ("word",
-					   		"Word",
-							"The word to search",
-							NULL,
-							(G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT)));
-	/*g_object_class_install_property (gobject_class,
-  				   PROP_WINDOW_ID,
-  				   g_param_spec_uint ("window-id",
-  				   		      "Window ID",
-  				   		      "The unique identifier for this window",
-  				   		      0,
-  				   		      G_MAXUINT,
-  				   		      0,
-  				   		      G_PARAM_READABLE));*/
+	gobject_class->finalize = gtranslator_dict_panel_finalize;  
+	
 }
 
 GtkWidget *
-gtranslator_dict_panel_new (GdictWindowAction  action,
-			    GdictSourceLoader *loader,
-			    const gchar       *source_name,
-			    const gchar       *word)
+gtranslator_dict_panel_new (void)
 {
-	return GTK_WIDGET (g_object_new (GTR_TYPE_DICT_PANEL,
-					 "action", action,
-					 "source-loader", loader,
-					 "source-name", source_name,
-					 NULL));
+	return GTK_WIDGET (g_object_new (GTR_TYPE_DICT_PANEL, NULL));
 }
 
 

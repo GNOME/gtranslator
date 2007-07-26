@@ -21,7 +21,6 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <gdict/gdict.h>
 
 G_BEGIN_DECLS
 
@@ -37,12 +36,6 @@ G_BEGIN_DECLS
 
 /* Private structure type */
 typedef struct _GtranslatorDictPanelPrivate	GtranslatorDictPanelPrivate;
-
-typedef enum {
-  GDICT_WINDOW_ACTION_LOOKUP,
-  GDICT_WINDOW_ACTION_MATCH,
-  GDICT_WINDOW_ACTION_CLEAR
-} GdictWindowAction;
 
 /*
  * Main object structure
@@ -72,10 +65,7 @@ struct _GtranslatorDictPanelClass
  */
 GType		 gtranslator_dict_panel_get_type	   (void) G_GNUC_CONST;
 GType		 gtranslator_dict_panel_register_type 	   (GTypeModule * module);
-GtkWidget *	 gtranslator_dict_panel_new (GdictWindowAction  action,
-					       GdictSourceLoader *loader,
-					       const gchar       *source_name,
-					       const gchar       *word);
+GtkWidget *	 gtranslator_dict_panel_new 		   (void);
 
 G_END_DECLS
 
