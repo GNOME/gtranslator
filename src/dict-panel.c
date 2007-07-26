@@ -21,7 +21,6 @@
 
 #include "dict-panel.h"
 #include "gdict-sidebar.h"
-#include "gdict-common.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -75,6 +74,31 @@ struct _GtranslatorDictPanelPrivate
 	GtkWidget *defbox;
 	GtkWidget *sidebar;
 };
+
+
+static gchar *
+gdict_get_data_dir (void)
+{
+	gchar *retval;
+	
+	retval = g_build_filename (g_get_home_dir (),
+				   ".gnome2",
+				   "gnome-dictionary",
+				   NULL);
+
+	return retval;
+}
+
+static gchar *
+gdict_gconf_get_string_with_default (GConfClient *client,
+				     const gchar *key,
+				     const gchar *def)
+{
+	gchar *val;
+	
+	val = gconf_client_get_string (client, key, NULL);
+	return val ? val : g_strdup (def);
+}
 
 static void
 clear_cb (GtkWidget   *widget,

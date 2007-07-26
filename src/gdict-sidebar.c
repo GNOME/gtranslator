@@ -1,6 +1,7 @@
 /* gdict-sidebar.c - sidebar widget
  *
  * Copyright (C) 2006  Emmanuele Bassi <ebassi@gmail.com>
+ * 		 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -58,7 +59,6 @@ struct _GdictSidebarPrivate
   GtkWidget *hbox;
   GtkWidget *notebook;
   GtkWidget *menu;
-  GtkWidget *close_button;
   GtkWidget *label;
   GtkWidget *select_button;
 };
@@ -220,14 +220,6 @@ gdict_sidebar_select_key_press_cb (GtkWidget   *widget,
   return FALSE;
 }
 
-static void
-gdict_sidebar_close_clicked_cb (GtkWidget *widget,
-				gpointer   user_data)
-{
-  GdictSidebar *sidebar = GDICT_SIDEBAR (user_data);
-
-  g_signal_emit (sidebar, sidebar_signals[CLOSED], 0);
-}
 
 static void
 gdict_sidebar_menu_deactivate_cb (GtkWidget *widget,
@@ -313,7 +305,6 @@ gdict_sidebar_init (GdictSidebar *sidebar)
   GtkWidget *hbox;
   GtkWidget *select_hbox;
   GtkWidget *select_button;
-  GtkWidget *close_button;
   GtkWidget *arrow;
 
   sidebar->priv = priv = GDICT_SIDEBAR_GET_PRIVATE (sidebar);
@@ -359,18 +350,6 @@ gdict_sidebar_init (GdictSidebar *sidebar)
 
   gtk_box_pack_start (GTK_BOX (hbox), select_button, TRUE, TRUE, 0);
   gtk_widget_show (select_button);
-
-  close_button = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (close_button), GTK_RELIEF_NONE);
-  gtk_button_set_image (GTK_BUTTON (close_button),
-		        gtk_image_new_from_stock (GTK_STOCK_CLOSE,
-						  GTK_ICON_SIZE_SMALL_TOOLBAR));
-  g_signal_connect (close_button, "clicked",
-		    G_CALLBACK (gdict_sidebar_close_clicked_cb),
-		    sidebar);
-  gtk_box_pack_end (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
-  gtk_widget_show (close_button);
-  priv->close_button = close_button;
 
   sidebar->priv->menu = gtk_menu_new ();
   g_signal_connect (sidebar->priv->menu, "deactivate",

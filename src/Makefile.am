@@ -37,7 +37,6 @@ gtranslator_SOURCES = \
 	dict-panel.c dict-panel.h \
 	dnd.c dnd.h \
 	find.c find.h \
-	gdict-common.c gdict-common.h \
 	gdict-sidebar.c gdict-sidebar.h \
 	gucharmap.c gucharmap.h \
 	gui.c gui.h \
