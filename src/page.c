@@ -27,6 +27,7 @@
 #endif
 
 #include "actions.h"
+#include "draw-spaces.h"
 #include "menus.h"
 #include "page.h"
 #include "dialogs.h"
@@ -99,7 +100,11 @@ gtranslator_page_new(GtrPo *po)
 	   or two in the case of a plural message */
 	page->text_notebook = glade_xml_get_widget(glade, GLADE_TEXT_NOTEBOOK);
 	page->text_msgid = glade_xml_get_widget(glade, GLADE_TEXT_MSGID);
+	g_signal_connect(page->text_msgid, "event-after",
+				 G_CALLBACK(on_event_after), NULL);
 	page->text_msgid_plural = glade_xml_get_widget(glade, GLADE_TEXT_MSGID_PLURAL);
+	g_signal_connect(page->text_msgid_plural, "event-after",
+				 G_CALLBACK(on_event_after), NULL);
 	
 	
 	/* Translation widgets*/
@@ -107,6 +112,8 @@ gtranslator_page_new(GtrPo *po)
 	do{
 		widget_name = g_strdup_printf("%s%c", GLADE_TRANS_MSGSTR, (gchar)(i+48));
 		page->trans_msgstr[i] = glade_xml_get_widget(glade, widget_name);
+		g_signal_connect(page->trans_msgstr[i], "event-after",
+				 G_CALLBACK(on_event_after), NULL);
 		g_free(widget_name);
 		i++;
 	}while(i < MAX_PLURALS);
