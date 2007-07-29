@@ -27,11 +27,13 @@
 #include <gtk/gtk.h>
 
 static void draw_tabs_and_spaces(GtkWidget *view, GdkEventExpose *event,
-			  GtkTextIter iter, GtkTextIter end);
+				 GtkTextIter iter, GtkTextIter end);
 
 
 void
-on_event_after(GtkWidget *view, GdkEventExpose *event, gpointer data)
+on_event_after(GtkWidget *view,
+	       GdkEventExpose *event,
+	       gpointer useless)
 {
 	if(event->type != GDK_EXPOSE ||
 	   event->window != gtk_text_view_get_window(GTK_TEXT_VIEW(view),
@@ -50,7 +52,9 @@ on_event_after(GtkWidget *view, GdkEventExpose *event, gpointer data)
 }
 
 static void
-draw_space_at_iter(cairo_t *cr, GtkWidget *view, GtkTextIter *iter)
+draw_space_at_iter(cairo_t *cr,
+		   GtkWidget *view,
+		   GtkTextIter *iter)
 {
 	GdkRectangle rect;
 	gint x, y;
@@ -66,10 +70,13 @@ draw_space_at_iter(cairo_t *cr, GtkWidget *view, GtkTextIter *iter)
 	cairo_move_to(cr, x, y);
 	cairo_arc(cr, x, y, 0.8, 0, 2 * 3.14);
 	cairo_restore(cr);
+	cairo_stroke(cr);
 }
 
 static void
-draw_nbsp_at_iter(cairo_t *cr, GtkTextView *view, GtkTextIter *iter)
+draw_nbsp_at_iter(cairo_t *cr,
+		  GtkTextView *view,
+		  GtkTextIter *iter)
 {
 	GdkRectangle rect;
 	gint x, y;
@@ -80,14 +87,20 @@ draw_nbsp_at_iter(cairo_t *cr, GtkTextView *view, GtkTextIter *iter)
 	cairo_save(cr);
 	cairo_move_to(cr, x+2, y-2);
 	cairo_rel_line_to(cr, +7, 0);
-	cairo_rel_line_to(cr, -3.5, +6.06);
-	cairo_rel_line_to(cr, -3.5, -6.06);
+	cairo_rel_line_to(cr, 0, 4);
+	cairo_rel_move_to(cr, -3, 0);
+	cairo_rel_line_to(cr, 5, 0);
+	cairo_rel_line_to(cr, -2.5, 4);
+	cairo_rel_line_to(cr, -2.5, -4);
 	cairo_restore(cr);
+	cairo_fill(cr);
 	
 }
 
 static void
-draw_tab_at_iter(cairo_t *cr, GtkTextView *view, GtkTextIter *iter)
+draw_tab_at_iter(cairo_t *cr,
+		 GtkTextView *view,
+		 GtkTextIter *iter)
 {
 	GdkRectangle rect;
 	gint x, y;
@@ -102,6 +115,7 @@ draw_tab_at_iter(cairo_t *cr, GtkTextView *view, GtkTextIter *iter)
 	cairo_rel_move_to(cr, +3, +3);
 	cairo_rel_line_to(cr, -3, +3);
 	cairo_restore(cr);
+	cairo_stroke(cr);
 }
 
 static void
@@ -120,7 +134,8 @@ draw_tabs_and_spaces(GtkWidget *view, GdkEventExpose *event,
 	while (gtk_text_iter_compare(&iter, &end) != 0)
 	{
 		c = gtk_text_iter_get_char(&iter);
-		if(c == '\t')
+		if(c == '\t')//TODO: Color should be set here to have a different color
+			//for differents char (This should be themeable
 			draw_tab_at_iter(cr, GTK_TEXT_VIEW(view), &iter);
 		else if(c == '\040')
 			draw_space_at_iter(cr, view, &iter);
@@ -129,5 +144,4 @@ draw_tabs_and_spaces(GtkWidget *view, GdkEventExpose *event,
 		if(!gtk_text_iter_forward_char(&iter))
 			break;
 	}
-	cairo_stroke(cr);
 }
