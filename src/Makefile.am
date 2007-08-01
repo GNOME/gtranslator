@@ -27,6 +27,7 @@ bin_PROGRAMS = \
 gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
+	args-tags.c args-tags.h \
 	bookmark.c bookmark.h \
 	charmap-panel.c charmap-panel.h \
 	color-schemes.c color-schemes.h \

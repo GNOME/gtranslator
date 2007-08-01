@@ -27,6 +27,7 @@
 #endif
 
 #include "actions.h"
+#include "args-tags.h"
 #include "draw-spaces.h"
 #include "menus.h"
 #include "page.h"
@@ -57,46 +58,6 @@
  * The currently active page
  */
 GtrPage *current_page;
-
-
-
-/*
- * Callback func called when a message change.
- * This change the tag to and bold of markups.
- */
-static void
-gtranslator_page_set_tag(GtkWidget *widget,
-			 gpointer useless)
-{
-	GtkTextIter start, end, aux_start;
-	GtkTextBuffer *buf;
-	gboolean initchar = FALSE;
-	gunichar c;
-	
-	buf = GTK_TEXT_BUFFER(widget);
-	gtk_text_buffer_get_bounds(buf, &start, &end);
-	
-	while(gtk_text_iter_compare(&start, &end) != 0)
-	{
-		c = gtk_text_iter_get_char(&start);
-		if(c == '<')
-		{
-			aux_start = start;
-			initchar = TRUE;
-		}
-		else if (c == '>' && initchar)
-		{
-			GtkTextTag *tag;
-			tag = gtk_text_buffer_create_tag (buf, NULL, 
-							  "weight", PANGO_WEIGHT_BOLD, 
-							  NULL);
-			gtk_text_buffer_apply_tag(buf, tag,
-						  &aux_start, &start);
-		}
-		if(!gtk_text_iter_forward_char(&start))
-			break;
-	}
-}
 
 /*
  * Set up the widgets to display the given po file
@@ -143,15 +104,15 @@ gtranslator_page_new(GtrPo *po)
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(page->text_msgid));
 	g_signal_connect(page->text_msgid, "event-after",
 				 G_CALLBACK(on_event_after), NULL);
-	g_signal_connect(buffer, "changed",
-				 G_CALLBACK(gtranslator_page_set_tag), NULL);
+	/*g_signal_connect(buffer, "changed",
+				 G_CALLBACK(gtranslator_args_tags), NULL);*/
 	
 	page->text_msgid_plural = glade_xml_get_widget(glade, GLADE_TEXT_MSGID_PLURAL);
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(page->text_msgid_plural));
 	g_signal_connect(page->text_msgid_plural, "event-after",
 				 G_CALLBACK(on_event_after), NULL);
-	g_signal_connect(buffer, "changed",
-				 G_CALLBACK(gtranslator_page_set_tag), NULL);
+	/*g_signal_connect(buffer, "changed",
+				 G_CALLBACK(gtranslator_args_tags), NULL);*/
 	
 	
 	/* Translation widgets*/
@@ -162,8 +123,8 @@ gtranslator_page_new(GtrPo *po)
 		buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(page->trans_msgstr[i]));
 		g_signal_connect(page->trans_msgstr[i], "event-after",
 				 G_CALLBACK(on_event_after), NULL);
-		g_signal_connect(buffer, "changed",
-				 G_CALLBACK(gtranslator_page_set_tag), NULL);
+		/*g_signal_connect(buffer, "changed",
+				 G_CALLBACK(gtranslator_args_tags), NULL);*/
 		g_free(widget_name);
 		i++;
 	}while(i < MAX_PLURALS);
@@ -181,7 +142,7 @@ gtranslator_page_new(GtrPo *po)
 
 	/*
 	 * If required, set up the messages table and set pane position
-	 */	
+	 */
 	if(GtrPreferences.show_messages_table)
 	{
 		table_pane_position=gtranslator_config_get_int("interface/table_pane_position");
