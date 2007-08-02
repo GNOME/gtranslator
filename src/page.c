@@ -43,10 +43,7 @@
 #define GLADE_COMMENT "comment"
 #define GLADE_EDIT_COMMENT "edit_comment"
 #define GLADE_TEXT_NOTEBOOK "text_notebook"
-#define GLADE_TEXT_MSGID "text_msgid"
-#define GLADE_TEXT_MSGID_PLURAL "text_msgid_plural"
 #define GLADE_TRANS_NOTEBOOK "trans_notebook"
-#define GLADE_TRANS_MSGSTR "trans_msgstr"
 /*Status widgets*/
 #define GLADE_TRANSLATED "radiobutton_translated"
 #define GLADE_FUZZY "radiobutton_fuzzy"
@@ -130,9 +127,9 @@ gtranslator_page_new(GtrPo *po)
 	 * Orignal text widgets
 	 */
 	page->text_notebook = glade_xml_get_widget(glade, GLADE_TEXT_NOTEBOOK);
-	page->text_msgid = gtranslator_page_append_page("Singular", page->text_notebook);
+	page->text_msgid = gtranslator_page_append_page(_("Singular"), page->text_notebook);
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(page->text_msgid), FALSE);
-	page->text_msgid_plural = gtranslator_page_append_page("Plural", page->text_notebook);
+	page->text_msgid_plural = gtranslator_page_append_page(_("Plural"), page->text_notebook);
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(page->text_msgid_plural), FALSE);
 	
 	/*
@@ -140,7 +137,7 @@ gtranslator_page_new(GtrPo *po)
 	 */
 	page->trans_notebook = glade_xml_get_widget(glade, GLADE_TRANS_NOTEBOOK);
 	do{
-		label = g_strdup_printf("Plural %d", i+1);
+		label = g_strdup_printf(_("Plural %d"), i+1);
 		page->trans_msgstr[i] = gtranslator_page_append_page(label,
 								     page->trans_notebook);
 		i++;

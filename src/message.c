@@ -184,6 +184,7 @@ gtranslator_message_go_to_next_untranslated(GtkWidget * widget,
 void
 gtranslator_attach_gskspell()
 {
+	gint i;
 	/*
 	 * Use instant spell checking via gtkspell only if the corresponding
 	 *  setting in the preferences is set.
@@ -214,10 +215,13 @@ gtranslator_attach_gskspell()
 				break;
 		}
 	} else {
-		if(gtrans_spell[0] != NULL) {
-			gtkspell_detach(gtrans_spell[0]);
-			gtrans_spell[0] = NULL;
-		}
+		do{
+			i = 0;
+			if(gtrans_spell[i] != NULL) {
+				gtkspell_detach(gtrans_spell[i]);
+				gtrans_spell[i] = NULL;
+			}
+		}while(i < (gint)GtrPreferences.nplurals);
 	}
 }
 #endif
@@ -253,18 +257,13 @@ gtranslator_message_plural_forms(GtrMsg *msg)
 	for(i = 0; i < (gint)GtrPreferences.nplurals ; i++)
 	{
 		msgstr_plural = po_message_msgstr_plural(msg->message, i);
-		if(msgstr_plural == NULL)
-			break;
-		else {
-			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[i]));
-			gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
+
+		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[i]));
+		gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
 		
-			g_signal_connect(buf, "end-user-action",
-					 G_CALLBACK(gtranslator_message_translation_update),
-					 current_page);
-			if(i > 0)
-				gtk_widget_show(current_page->trans_msgstr[i]);
-		}
+		g_signal_connect(buf, "end-user-action",
+				 G_CALLBACK(gtranslator_message_translation_update),
+				 current_page);
 	}
 }
 
