@@ -27,15 +27,13 @@
 #endif
 
 #include "actions.h"
-#include "args-tags.h"
 #include "draw-spaces.h"
 #include "menus.h"
 #include "page.h"
 #include "dialogs.h"
 #include "prefs.h"
 #include "gui.h"
-
-#include <libgen.h>
+#include "view.h"
 
 /*Variables*/
 #define GLADE_CONTENT_PANE "content_pane"
@@ -59,6 +57,31 @@
  */
 GtrPage *current_page;
 
+static GtkWidget *
+gtranslator_page_append_page(const gchar *tab_label,
+			     GtkWidget *notebook)
+{
+	GtkWidget *scroll;
+	GtkWidget *label;
+	GtkWidget *widget;
+	
+	label = gtk_label_new(tab_label);
+	
+	scroll = gtk_scrolled_window_new(NULL, NULL);
+	
+	widget = gtranslator_view_new();
+	
+	g_signal_connect(widget, "event-after",
+			 G_CALLBACK(on_event_after), NULL);
+	
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroll),
+					      widget);
+	gtk_widget_show_all(scroll);
+	
+	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), scroll, label);
+	return widget;
+}
+
 /*
  * Set up the widgets to display the given po file
  */
@@ -67,8 +90,7 @@ gtranslator_page_new(GtrPo *po)
 {
 	GtrPage *page;
 	gint i = 0;
-	gchar *widget_name;
-	GtkTextBuffer *buffer;
+	gchar *label;
 	
 	g_return_if_fail(po!=NULL);
 
@@ -97,39 +119,28 @@ gtranslator_page_new(GtrPo *po)
 	gtk_paned_set_position(GTK_PANED(page->content_pane), 0);
 
 
-	/* Message string box is a vbox, containing one textview in most cases,
-	   or two in the case of a plural message */
+	/*
+	 * Orignal text widgets
+	 */
 	page->text_notebook = glade_xml_get_widget(glade, GLADE_TEXT_NOTEBOOK);
-	page->text_msgid = glade_xml_get_widget(glade, GLADE_TEXT_MSGID);
-	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(page->text_msgid));
-	g_signal_connect(page->text_msgid, "event-after",
-				 G_CALLBACK(on_event_after), NULL);
-	/*g_signal_connect(buffer, "changed",
-				 G_CALLBACK(gtranslator_args_tags), NULL);*/
+	page->text_msgid = gtranslator_page_append_page("Singular", page->text_notebook);
+	page->text_msgid_plural = gtranslator_page_append_page("Plural", page->text_notebook);
 	
-	page->text_msgid_plural = glade_xml_get_widget(glade, GLADE_TEXT_MSGID_PLURAL);
-	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(page->text_msgid_plural));
-	g_signal_connect(page->text_msgid_plural, "event-after",
-				 G_CALLBACK(on_event_after), NULL);
-	/*g_signal_connect(buffer, "changed",
-				 G_CALLBACK(gtranslator_args_tags), NULL);*/
-	
-	
-	/* Translation widgets*/
+	/*
+	 * Translation widgets
+	 */
 	page->trans_notebook = glade_xml_get_widget(glade, GLADE_TRANS_NOTEBOOK);
 	do{
-		widget_name = g_strdup_printf("%s%c", GLADE_TRANS_MSGSTR, (gchar)(i+48));
-		page->trans_msgstr[i] = glade_xml_get_widget(glade, widget_name);
-		buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(page->trans_msgstr[i]));
-		g_signal_connect(page->trans_msgstr[i], "event-after",
-				 G_CALLBACK(on_event_after), NULL);
-		/*g_signal_connect(buffer, "changed",
-				 G_CALLBACK(gtranslator_args_tags), NULL);*/
-		g_free(widget_name);
+		label = g_strdup_printf("Plural %d", i+1);
+		page->trans_msgstr[i] = gtranslator_page_append_page(label,
+								     page->trans_notebook);
 		i++;
-	}while(i < MAX_PLURALS);
+		g_free(label);
+	}while(i < (gint)GtrPreferences.nplurals);
 
-	/*Status radiobuttons*/
+	/*
+	 * Status radiobuttons
+	 */
 	page->translated = glade_xml_get_widget(glade, GLADE_TRANSLATED);
 	page->fuzzy = glade_xml_get_widget(glade, GLADE_FUZZY);
 	page->untranslated = glade_xml_get_widget(glade, GLADE_UNTRANSLATED);
@@ -164,7 +175,7 @@ gtranslator_page_new(GtrPo *po)
 	{
 		gtranslator_set_style(page->trans_msgstr[i], 1);
 		i++;
-	}while(i < MAX_PLURALS);
+	}while(i < (gint)GtrPreferences.nplurals);
 	gtk_widget_grab_focus(page->trans_msgstr[0]);
 	
 	current_page = page;

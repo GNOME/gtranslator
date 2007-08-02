@@ -27,7 +27,6 @@ bin_PROGRAMS = \
 gtranslator_SOURCES = \
 	about.c about.h \
 	actions.c actions.h \
-	args-tags.c args-tags.h \
 	bookmark.c bookmark.h \
 	charmap-panel.c charmap-panel.h \
 	color-schemes.c color-schemes.h \
@@ -66,7 +65,8 @@ gtranslator_SOURCES = \
 	undo.c undo.h \
 	utils.c utils.h \
 	utils_gui.c utils_gui.h \
-	vfs-handle.c vfs-handle.h 
+	vfs-handle.c vfs-handle.h \
+	view.c view.h
 
 gtranslator_LDADD = \
 	$(INTLLIBS) \
