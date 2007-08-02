@@ -215,12 +215,13 @@ gtranslator_attach_gskspell()
 				break;
 		}
 	} else {
+		i = 0;
 		do{
-			i = 0;
 			if(gtrans_spell[i] != NULL) {
 				gtkspell_detach(gtrans_spell[i]);
 				gtrans_spell[i] = NULL;
 			}
+			i++;
 		}while(i < (gint)GtrPreferences.nplurals);
 	}
 }
