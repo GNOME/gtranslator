@@ -595,7 +595,7 @@ apply_colorscheme(GtkWidget *widget, gchar *scheme_name)
 		if(current_page != NULL)
 		{
 			gtranslator_set_style(GTK_WIDGET(current_page->text_msgid), 0);
-        		gtranslator_set_style(GTK_WIDGET(current_page->trans_msgstr), 1);
+        		gtranslator_set_style(GTK_WIDGET(current_page->trans_msgstr[0]), 1);
 		}
 	}
 }

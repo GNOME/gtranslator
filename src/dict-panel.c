@@ -460,6 +460,8 @@ gtranslator_dict_panel_draw (GtranslatorDictPanel *panel)
 		gdict_defbox_set_context (GDICT_DEFBOX (panel->priv->defbox),
 					  panel->priv->context);
 	
+	//Missing link signal
+	
 	gtk_container_add (GTK_CONTAINER (vbox), panel->priv->defbox);
 	gtk_widget_show (panel->priv->defbox);
 	
@@ -614,12 +616,11 @@ gtranslator_dict_panel_init(GtranslatorDictPanel *panel)
 		gconf_error = NULL;
 	}
 	
-	/* Draw widgets */
-	gtranslator_dict_panel_draw(panel);
-	
 	/* force retrieval of the configuration from GConf */
 	gtranslator_dict_panel_set_source_name (panel, NULL);
 	
+	/* Draw widgets */
+	gtranslator_dict_panel_draw(panel);
 }
 
 static void

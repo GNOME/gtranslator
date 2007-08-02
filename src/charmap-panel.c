@@ -89,7 +89,7 @@ gtranslator_charmap_panel_init (GtranslatorCharmapPanel *panel)
 static void
 gtranslator_charmap_panel_finalize (GObject *object)
 {
-	//G_OBJECT_CLASS (gtranslator_charmap_panel_parent_class)->finalize (object);
+	G_OBJECT_CLASS (gtranslator_charmap_panel_parent_class)->finalize (object);
 }
 
 static void

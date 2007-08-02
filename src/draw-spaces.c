@@ -68,7 +68,7 @@ draw_space_at_iter(cairo_t *cr,
 	
 	cairo_save(cr);
 	cairo_move_to(cr, x, y);
-	cairo_arc(cr, x, y, 0.8, 0, 2 * 3.14);
+	cairo_arc(cr, x, y, 0.8, 0, 2 * G_PI);
 	cairo_restore(cr);
 	cairo_stroke(cr);
 }

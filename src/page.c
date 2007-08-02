@@ -76,7 +76,14 @@ gtranslator_page_append_page(const gchar *tab_label,
 	
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroll),
 					      widget);
+	
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	
 	gtk_widget_show_all(scroll);
+	
+	
 	
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), scroll, label);
 	return widget;
@@ -124,7 +131,9 @@ gtranslator_page_new(GtrPo *po)
 	 */
 	page->text_notebook = glade_xml_get_widget(glade, GLADE_TEXT_NOTEBOOK);
 	page->text_msgid = gtranslator_page_append_page("Singular", page->text_notebook);
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(page->text_msgid), FALSE);
 	page->text_msgid_plural = gtranslator_page_append_page("Plural", page->text_notebook);
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(page->text_msgid_plural), FALSE);
 	
 	/*
 	 * Translation widgets

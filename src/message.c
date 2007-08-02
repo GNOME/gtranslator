@@ -196,9 +196,8 @@ gtranslator_attach_gskspell()
 		GError *error = NULL;
 		gchar *errortext = NULL;
 		
-		guint nplural = 0;// = languages[].plural;
 		guint i;
-		for(i = 0; i <= nplural; i++) 
+		for(i = 0; i <= (gint)GtrPreferences.nplurals; i++) 
 		{
 			if(gtrans_spell[i] == NULL && current_page->trans_msgstr[i] != NULL)
 			{
@@ -251,19 +250,14 @@ gtranslator_message_plural_forms(GtrMsg *msg)
 	/*
 	 * Should show the number of plural forms defined in header
 	 */
-	for(i = 0; ; i++)
+	for(i = 0; i < (gint)GtrPreferences.nplurals ; i++)
 	{
 		msgstr_plural = po_message_msgstr_plural(msg->message, i);
 		if(msgstr_plural == NULL)
 			break;
 		else {
 			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[i]));
-			if(GtrPreferences.dot_char) {
-				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr_plural);
-				gtk_text_buffer_set_text(buf, temp, -1);
-				g_free(temp);
-			}
-			else gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
+			gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
 		
 			g_signal_connect(buf, "end-user-action",
 					 G_CALLBACK(gtranslator_message_translation_update),
@@ -305,14 +299,7 @@ gtranslator_message_show(GtrMsg *msg)
 	msgid = po_message_msgid(msg->message);
 	if(msgid) {
 		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->text_msgid));
-		if(GtrPreferences.dot_char) {
-			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgid);
-			gtk_text_buffer_set_text(buf, temp, -1);
-			g_free(temp);
-		}
-		else {
-			gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
-		}
+		gtk_text_buffer_set_text(buf, (gchar*)msgid, -1);
 	}
 	msgid_plural = po_message_msgid_plural(msg->message);
 	if(!msgid_plural) {
@@ -325,14 +312,7 @@ gtranslator_message_show(GtrMsg *msg)
 		if(msgstr) 
 		{
 			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->trans_msgstr[0]));
-			if(GtrPreferences.dot_char) {
-				gchar *temp = gtranslator_utils_invert_dot((gchar*)msgstr);
-				gtk_text_buffer_set_text(buf, temp, -1);
-				g_free(temp);
-			}
-			else {
-				gtk_text_buffer_set_text(buf, (gchar*)msgstr, -1);
-			}
+			gtk_text_buffer_set_text(buf, (gchar*)msgstr, -1);
 			g_signal_connect(buf, "end-user-action",
 					 G_CALLBACK(gtranslator_message_translation_update),
 					 current_page);
@@ -342,14 +322,7 @@ gtranslator_message_show(GtrMsg *msg)
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->text_notebook), TRUE);
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(current_page->trans_notebook), TRUE);
 		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(current_page->text_msgid_plural));
-		if(GtrPreferences.dot_char) {
-			gchar *temp = gtranslator_utils_invert_dot((gchar*)msgid_plural);
-			gtk_text_buffer_set_text(buf, temp, -1);
-			g_free(temp);
-		}
-		else {
-			gtk_text_buffer_set_text(buf, (gchar*)msgid_plural, -1);
-		}
+		gtk_text_buffer_set_text(buf, (gchar*)msgid_plural, -1);
 		gtranslator_message_plural_forms(msg);
 	}
 	
@@ -722,7 +695,7 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 		return;
 	}
 	i=1;
-	while(i <= 7) {
+	while(i < (gint)GtrPreferences.nplurals) {
 		/* Know when to break out of the loop */
 		if(!current_page->trans_msgstr[i]) {
 			break;
@@ -742,7 +715,7 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 		/* TODO: convert to file's own encoding if not UTF-8 */
 		
 		/* Write back to PO file in memory */
-		po_message_set_msgstr_plural(msg->message, i - 1, translation);
+		po_message_set_msgstr_plural(msg->message, i, translation);
 
 		/* Activate 'save', 'revert' etc. */
 		gtranslator_page_dirty(textbuffer, user_data);
