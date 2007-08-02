@@ -79,6 +79,11 @@ struct {
 	gfloat min_match_percentage;
 	
 	/*
+	 * Number of plurals
+	 */
+	gfloat nplurals;
+	
+	/*
 	 * User-specified strings.
 	 */
 	gchar *autosave_suffix; 

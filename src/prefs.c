@@ -1,9 +1,9 @@
 /*
  * (C) 2000-2007 	Fatih Demir <kabalak@kabalak.net>
- *					Gediminas Paulauskas <menesis@kabalak.net>
- *                  Ross Golder <ross@golder.org>
- *                  Søren Wedel Nielsen <swn@herlevkollegiet.dk>
- *					Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *			Gediminas Paulauskas <menesis@kabalak.net>
+ *			Ross Golder <ross@golder.org>
+ *			Søren Wedel Nielsen <swn@herlevkollegiet.dk>
+ *			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * 
  * gtranslator is free software; you can redistribute it and/or modify
@@ -110,10 +110,10 @@ static GladeXML *glade_prefs;
 #define GLADE_AUTOSAVE_WITH_SUFFIX "autosave_with_suffix"
 #define GLADE_AUTOSAVE_SUFFIX "autosave_suffix"
 #define GLADE_AUTOSAVE_SUFFIX_LABEL "autosave_suffix_label"
-//Page 2
+//Page 2: Recent files
 #define GLADE_MAX_HISTORY_ENTRIES "max_history_entries"
 #define GLADE_CHECK_RECENT_FILES "check_recent_files"
-//Page 3
+//Page 3: Text display
 #define GLADE_HIGHLIGHT "highlight"
 #define GLADE_USE_DOT_CHAR "use_dot_char"
 #define GLADE_OWN_FONTS "own_fonts"
@@ -128,32 +128,33 @@ static GladeXML *glade_prefs;
 #define GLADE_TEXT_COLOR_LABEL "text_color_label"
 #define GLADE_RB_1 "rb_1"
 #define GLADE_RB_2 "rb_2"
-//Page 4
+//Page 4: Contents
 #define GLADE_UNMARK_FUZZY "unmark_fuzzy"
 #define GLADE_KEEP_OBSOLETE "keep_obsolete"
 #define GLADE_INSTANT_SPELL_CHECKING "instant_spell_checking"
 #define GLADE_AUTHORS_NAME "authors_name"
 #define GLADE_AUTHORS_EMAIL "authors_email"
-//Page 5
+//Page 5: Personal information
 #define GLADE_AUTHORS_LANGUAGE "authors_language"
 #define GLADE_LCODE "lcode"
 #define GLADE_MIME_TYPE "mime_type"
 #define GLADE_ENCODING "encoding"
 #define GLADE_LG_EMAIL "lg_email"
+#define GLADE_NUMBER_PLURALS "number_plurals"
 #define GLADE_PLURAL "plural"
 #define GLADE_PLURAL_NOTE "plural_note"
-//Page 6
+//Page 6: Language settings
 #define GLADE_USE_UPDATE_FUNCTION "use_update_function"
 #define GLADE_RAMBO_FUNCTION "rambo_function"
 #define GLADE_SHOW_COMMENT "show_comment"
 #define GLADE_SAVE_GEOMETRY_TB "save_geometry_tb"
-//Page 7
+//Page 7: General
 #define GLADE_SHOW_MESSAGES_TABLE "show_messages_table"
 #define GLADE_COLLAPSE_ALL_ENTRIES "collapse_all_entries"
-//Page 8
+//Page 8: Messages table
 #define GLADE_USE_LEARN_BUFFER "use_learn_buffer"
 #define GLADE_AUTO_LEARN "auto_learn"
-//Page 9
+//Page 9: General
 #define GLADE_FUZZY_MATCHING "fuzzy_matching"
 
 
@@ -189,7 +190,7 @@ static GtkWidget
  * The autosave etc. timeout GtkSpinButtons:
  */
 static GtkWidget
-	*autosave_timeout, *max_history_entries, *min_match_percentage;
+	*autosave_timeout, *max_history_entries, *min_match_percentage, *number_plurals;
 
 /*
  * Font/color specific widgets used in the preferences box.
@@ -251,7 +252,6 @@ gtranslator_preferences_category_new_pack_start(GtkWidget *page,
 
 	return content_box;
 }*/
-
 
 
 /*
@@ -521,12 +521,17 @@ GtkWidget *gtranslator_preferences_dialog_control_new()
 	return control;
 }
 
-void gtranslator_preferences_plural_string_request(gchar *locale){
+void
+gtranslator_preferences_plural_string_request(gchar *locale)
+{
 	gchar *plural_str = NULL, *msg = NULL;
 	
+	if(gtranslator_translator->language->plural)
+		return;
+	
 	msg = _("Note: It was not possible to determine GNU header for plural forms. \
-Your GNU gettext tools may be too old or they do not contain \
-a suggested value for your language.");
+		Your GNU gettext tools may be too old or they do not contain \
+		a suggested value for your language.");
 
 	plural_str = gtranslator_get_plural_form_string(locale);
 
@@ -570,9 +575,10 @@ void gtranslator_preferences_no_aboutme(gchar *message)
 }
 #endif
 
-void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
+void gtranslator_preferences_dialog_create(GtkWidget *widget,
+					   gpointer useless)
 {
- 	GtkObject *adjustment;
+ 	GtkAdjustment *adjustment;
 
 	GtkWidget *page, *category_box, *hbox, *control, *dialog_hbox, *label;
 
@@ -661,7 +667,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	
 	
 	//Autosave_timeout spin button
-	adjustment = gtk_adjustment_new (GtrPreferences.autosave_timeout, 1.0, 30.0, 1.0, 1.0, 1.0);
+	adjustment = (GtkAdjustment *)gtk_adjustment_new (GtrPreferences.autosave_timeout, 1.0, 30.0, 1.0, 1.0, 1.0);
 	autosave_timeout = glade_xml_get_widget(glade_prefs, GLADE_AUTOSAVE_TIMEOUT);
 	gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(autosave_timeout), GTK_ADJUSTMENT(adjustment));
  	gtk_widget_set_sensitive(GTK_WIDGET(autosave_timeout), GtrPreferences.autosave);
@@ -703,7 +709,7 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 	*/
 	
 	//max_history_entries spin button
-	adjustment = gtk_adjustment_new (GtrPreferences.max_history_entries, 3, 15, 1, 10, 10);
+	adjustment = (GtkAdjustment *)gtk_adjustment_new (GtrPreferences.max_history_entries, 3, 15, 1, 10, 10);
 	max_history_entries = glade_xml_get_widget(glade_prefs, GLADE_MAX_HISTORY_ENTRIES);
 	gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(max_history_entries), GTK_ADJUSTMENT(adjustment));
 	g_signal_connect(G_OBJECT(max_history_entries), "changed",
@@ -965,6 +971,14 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 						     G_CALLBACK(gtranslator_preferences_dialog_changed),
 						     NULL);
 
+	//number plurals spin button
+	number_plurals = glade_xml_get_widget(glade_prefs, GLADE_NUMBER_PLURALS);
+	adjustment = gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(number_plurals));
+	gtk_adjustment_set_value(adjustment, GtrPreferences.nplurals);
+	gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(number_plurals), adjustment);
+	g_signal_connect(G_OBJECT(number_plurals), "changed",
+ 			 G_CALLBACK(gtranslator_preferences_dialog_changed), NULL);
+	
 	//plural entry
 	plural = gtranslator_preferences_entry_new(gtranslator_translator->language->plural,
 						   GLADE_PLURAL,
@@ -1101,7 +1115,10 @@ void gtranslator_preferences_dialog_create(GtkWidget *widget, gpointer useless)
 /*
  * The actions to take when the user presses "Apply".
  */
-static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint response_id, gpointer useless)
+static void
+gtranslator_preferences_dialog_close(GtkWidget * widget,
+				     gint response_id,
+				     gpointer useless)
 {
 	gchar	*translator_str=NULL;
 	gchar	*translator_email_str=NULL;
@@ -1258,6 +1275,10 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	GtrPreferences.min_match_percentage =
 		gtk_spin_button_get_value(GTK_SPIN_BUTTON(
 			min_match_percentage));
+	
+	GtrPreferences.nplurals =
+		gtk_spin_button_get_value(GTK_SPIN_BUTTON(
+			number_plurals));
 
 	gtranslator_config_set_string("informations/autosave_suffix", 
 		GtrPreferences.autosave_suffix);
@@ -1270,6 +1291,9 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	
 	gtranslator_config_set_float("informations/min_match_percentage",
 		GtrPreferences.min_match_percentage);
+	
+	gtranslator_config_set_float("informations/nplurals",
+		GtrPreferences.nplurals);
 	
 	g_free(GtrPreferences.msgid_font);
 	g_free(GtrPreferences.msgstr_font);
@@ -1299,7 +1323,7 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	if(current_page != NULL)
 	{
 		gtranslator_set_style(current_page->text_msgid, 0);
-		gtranslator_set_style(current_page->trans_msgstr, 1);
+		gtranslator_set_style(current_page->trans_msgstr[0], 1);
 	}
 	
 	/*
@@ -1370,7 +1394,8 @@ static void gtranslator_preferences_dialog_close(GtkWidget * widget, gint respon
 	return;
 }
 
-static void gtranslator_preferences_dialog_changed(GtkWidget  * widget, gpointer flag)
+static void gtranslator_preferences_dialog_changed(GtkWidget  * widget,
+						   gpointer flag)
 {
 	const gchar *locale;
 	gint c = 0;
@@ -1494,6 +1519,8 @@ void gtranslator_preferences_read(void)
 		gtranslator_config_get_float("informations/max_history_entries");
 	GtrPreferences.min_match_percentage =
 		gtranslator_config_get_float("informations/min_match_percentage");
+	GtrPreferences.nplurals = 
+		gtranslator_config_get_float("informations/nplurals");
 
 	/*
 	 * Check some prefs values for sanity and set sane values if no really
@@ -1507,6 +1534,11 @@ void gtranslator_preferences_read(void)
 	if(GtrPreferences.autosave_timeout < 1.0)
 	{
 		GtrPreferences.autosave_timeout=1.0;
+	}
+	
+	if(GtrPreferences.nplurals > 6.0)
+	{
+		GtrPreferences.nplurals = 1.0;
 	}
 
 	GtrPreferences.instant_spell_check = 
