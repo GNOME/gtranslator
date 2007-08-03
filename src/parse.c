@@ -685,6 +685,7 @@ void
 gtranslator_file_close(GtkWidget * widget, gpointer useless)
 {
 	GtrPo *po;
+	gint i;
 	
 	g_assert(current_page != NULL);
 
@@ -698,6 +699,17 @@ gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	
 	gtranslator_po_free(po);
 	gtranslator_undo_clean_register();
+	
+	/*
+	 * Destroy the widgets
+	 */
+	gtk_notebook_remove_page(GTK_NOTEBOOK(current_page->text_notebook), 1);
+	gtk_notebook_remove_page(GTK_NOTEBOOK(current_page->text_notebook), 0);
+	i = (gint)GtrPreferences.nplurals;
+	do{
+		i--;
+		gtk_notebook_remove_page(GTK_NOTEBOOK(current_page->trans_notebook), i);
+	}while(i != 0);
 	
 	nothing_changes = TRUE;
 
@@ -732,6 +744,8 @@ gtranslator_file_close(GtkWidget * widget, gpointer useless)
 	
 	// Hide table pane
 	gtk_widget_hide(current_page->table_pane);
+	
+
 	
 	//Free current page
 	g_free(current_page);

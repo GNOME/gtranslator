@@ -21,6 +21,7 @@
 
 #include "dict-panel.h"
 #include "gdict-sidebar.h"
+#include "dialogs.h" //gtranslator_show_message
 
 #include <glib.h>
 #include <glib-object.h>
@@ -186,7 +187,8 @@ get_context_from_loader (GtranslatorDictPanel *panel)
 		detail = g_strdup_printf (_("No dictionary source available with name '%s'"),
 					  priv->source_name);
 
-		g_warning(_("Unable to find dictionary source"));
+		gtranslator_show_message(_("Unable to find dictionary source"), detail);
+		
 		g_free (detail);
 
 		return NULL;
@@ -203,10 +205,7 @@ get_context_from_loader (GtranslatorDictPanel *panel)
 		detail = g_strdup_printf (_("No context available for source '%s'"),
 					  gdict_source_get_description (source));
       				
-      /*gdict_show_error_dialog (NULL,
-                               _("Unable to create a context"),
-                               detail);*/
-		g_warning(_("Unable to create a context"));
+		gtranslator_show_message(_("Unable to create a context"), detail);
 
 		g_free (detail);
 		g_object_unref (source);
@@ -596,9 +595,8 @@ gtranslator_dict_panel_init(GtranslatorDictPanel *panel)
 			      &gconf_error);
 	if (gconf_error)
 	{
-		/*gdict_show_gerror_dialog (NULL,
-					  _("Unable to connect to GConf"),
-					  gconf_error);*/
+		gtranslator_show_message(_("Unable to connect to GConf"),
+					 gconf_error->message);
 		gconf_error = NULL;
 	}
 	
@@ -609,10 +607,8 @@ gtranslator_dict_panel_init(GtranslatorDictPanel *panel)
 						   &gconf_error);
 	if (gconf_error)
 	{
-		/*gdict_show_gerror_dialog (NULL,
-					  _("Unable to get notification for preferences"),
-					  gconf_error);*/
-			
+		gtranslator_show_message(_("Unable to get notification for preferences"),
+					 gconf_error->message);
 		gconf_error = NULL;
 	}
 	
