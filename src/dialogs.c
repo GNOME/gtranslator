@@ -802,7 +802,7 @@ void gtranslator_find_dialog(GtkWidget * widget, gpointer useless)
 			find_text=newstr;
 		}
 
-		find_text_normalized = g_utf8_normalize(find_text, -1, G_NORMALIZE_DEFAULT_COMPOSE);
+		find_text_normalized = g_utf8_normalize(find_text, -1, G_NORMALIZE_DEFAULT);
 		g_free(find_text);
 		find_text = find_text_normalized;
 
