@@ -118,7 +118,7 @@ dnl -------------------------------------------------------------------
 AC_CHECK_PROG(sc_present, scrollkeeper-config, yes, no)
 if test "z$sc_present" = "zyes" ; then
 	AC_MSG_CHECKING([for scrollkeeper])
-	_VERSION=`scrollkeeper-config --version|sed -e 's/\.//g'`
+	_VERSION=`scrollkeeper-config --version|sed -e 's/\.//g' | cut -d ' ' -f1`
 	if test $_VERSION -ge 0 -o $_VERSION -ge 02; then
 		AC_MSG_RESULT(yes)
 		SC_STATEDIR=`scrollkeeper-config --pkglocalstatedir`
