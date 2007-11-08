@@ -88,6 +88,8 @@ static void split_name_email(const gchar * str, gchar ** name, gchar ** email)
 GtrHeader * gtranslator_header_get(GtrMsg * msg)
 {
 	GtrHeader *ph;
+	gchar *old_translator,
+	      *old_tr_email;
 	gchar **lines, **pair, *pos;
 	gint i = 0;
 
@@ -174,6 +176,50 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 	else
 	{
 		ph->comment=g_strdup("# ");
+	}
+
+	/*
+	 * If toggle button "take_my_options" is marked then the details
+	 * about translator must be read from the preferences to update
+	 * the Last Translator when users save the file.
+	 */
+
+	if (GtrPreferences.fill_header) 
+	{
+
+		old_translator = ph->translator;		
+		ph->translator = gtranslator_translator->name;
+
+		old_tr_email = ph->tr_email;		
+		ph->tr_email = gtranslator_translator->email;
+		
+		GTR_FREE(ph->language);
+		ph->language = gtranslator_translator->language->name;
+		GTR_FREE(ph->lg_email);
+		ph->lg_email = gtranslator_translator->language->group_email;
+		GTR_FREE(ph->charset);
+		ph->charset = gtranslator_translator->language->encoding;
+		GTR_FREE(ph->encoding);
+		ph->encoding = gtranslator_translator->language->bits;
+
+		if(old_translator && old_tr_email && ph->translator &&
+		nautilus_strcasecmp(ph->translator, old_translator) &&
+		nautilus_strcasecmp(ph->comment, old_translator))
+        	{
+			gchar   *prev_header_comment;
+			gchar   *year;
+
+			prev_header_comment = ph->comment;
+                
+			year=get_current_year();
+
+			ph->comment=g_strdup_printf("%s# %s <%s>, %s.\n",
+				prev_header_comment,
+				old_translator, old_tr_email, year);
+		
+			GTR_FREE(year);
+			GTR_FREE(prev_header_comment);
+        	}
 	}
 
 	if (ph->prj_name)
