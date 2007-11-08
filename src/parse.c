@@ -105,7 +105,8 @@ static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 		if(tail[s] == '\\') {
 			switch(tail[s + 1]) {
 			case '\"':
-				s++;
+				if (s+1 != strlen(tail)-1)
+					s++;
 				break;
 			}
 		}
