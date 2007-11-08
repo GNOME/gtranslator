@@ -163,7 +163,8 @@ GtrHeader * gtranslator_header_get(GtrMsg * msg)
 		else
 		if_key_is("X-Generator")
 		    ph->generator = g_strdup(pair[1]);
-
+		else
+		    ph->other = g_strconcat(pair[0], ": ", pair[1], NULL);
 		g_strfreev(pair);
 	}
 	
@@ -236,6 +237,9 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 	gchar *group;
 	GtrMsg *msg = g_new0(GtrMsg, 1);
 	gchar *version;
+	gchar *plural_forms_line;
+	gchar *prev_msgstr;
+	gchar *other_line;
 
 	const gchar *lang=gtranslator_utils_get_english_language_name(h->language);
 
@@ -254,8 +258,6 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 		h->report_message_bugs_to=g_strdup("");
 	}
 
-	if(h->plural_forms)
-	{
 		msg->msgstr = g_strdup_printf("\n"\
 "Project-Id-Version: %s\\n\n"\
 "Report-Msgid-Bugs-To: %s\\n\n"\
@@ -265,31 +267,7 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 "Language-Team: %s\\n\n"\
 "MIME-Version: %s\\n\n"\
 "Content-Type: text/plain; charset=%s\\n\n"\
-"Content-Transfer-Encoding: %s\\n\n"\
-"Plural-Forms: %s",
-		version,
-		h->report_message_bugs_to,
-		h->pot_date,
-		h->po_date,
-		h->translator, h->tr_email,
-		group,
-		h->mime_version,
-		h->charset,
-		h->encoding,
-		h->plural_forms);
-	}
-	else
-	{
-		msg->msgstr = g_strdup_printf("\n"\
-"Project-Id-Version: %s\\n\n"\
-"Report-Msgid-Bugs-To: %s\\n\n"\
-"POT-Creation-Date: %s\\n\n"\
-"PO-Revision-Date: %s\\n\n"\
-"Last-Translator: %s <%s>\\n\n"\
-"Language-Team: %s\\n\n"\
-"MIME-Version: %s\\n\n"\
-"Content-Type: text/plain; charset=%s\\n\n"\
-"Content-Transfer-Encoding: %s",
+"Content-Transfer-Encoding: %s\\n",
 		version,
 		h->report_message_bugs_to,
 		h->pot_date,
@@ -299,8 +277,31 @@ GtrMsg * gtranslator_header_put(GtrHeader * h)
 		h->mime_version,
 		h->charset,
 		h->encoding);
-	}
 
+	/*
+ 	 * If exists 'plural forms' in the header of the po file, 
+ 	 * we save it in the new po file.
+	 */
+	if(h->plural_forms)
+	{
+		plural_forms_line = g_strdup_printf("\n\Plural-Forms: %s", h->plural_forms);
+		prev_msgstr = msg->msgstr;
+		msg->msgstr = g_strconcat(prev_msgstr, plural_forms_line, "\\n", NULL);
+		GTR_FREE(plural_forms_line);
+		GTR_FREE(prev_msgstr);
+	}
+	/*
+ 	 * If exist other headers that other aplication had written in the po file,
+ 	 * we save it in the new po file.
+ 	 */  
+	if(h->other)
+	{
+		other_line = g_strdup_printf("\n\%s", h->other);
+		prev_msgstr = msg->msgstr;
+		msg->msgstr = g_strconcat(prev_msgstr, other_line, "\\n", NULL);		 
+		GTR_FREE(other_line);
+		GTR_FREE(prev_msgstr);
+	}
 	GTR_FREE(group);
 	GTR_FREE(version);
 
@@ -371,6 +372,8 @@ void gtranslator_header_free(GtrHeader * h)
 	{
 		GTR_FREE(h->generator);
 	}
+
+	GTR_FREE(h->other);
 	
 	GTR_FREE(h);
 }
