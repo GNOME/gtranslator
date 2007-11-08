@@ -178,5 +178,11 @@ void gtranslator_xml_set_integer_prop_by_name(xmlNode *parent, const xmlChar *pr
 	gint value);
 
 int  gtranslator_mkdir_hier (const char *path, mode_t mode);
+
+/*
+ * Return the same string but with '\' escaped if exits
+ */
+
+gchar * gtranslator_utils_escape (const gchar *string);
 	
 #endif

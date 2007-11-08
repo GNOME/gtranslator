@@ -208,7 +208,8 @@ static gint find_in_msg(GList * msg, gpointer useless, gboolean first,
 void gtranslator_find(GtkWidget * widget, gpointer what, gboolean find_in_comments,
 	gboolean find_in_english, gboolean find_in_translation)
 {
-	gchar *error;
+	gchar *error,
+	      *temp;
 	GList *begin;
 	gboolean first = FALSE;
 	gtranslator_message_update();
@@ -219,9 +220,11 @@ void gtranslator_find(GtkWidget * widget, gpointer what, gboolean find_in_commen
 			GTR_FREE(error);
 			return;
 		}
-		regcomp(&target, what, eflags);
 		GTR_FREE(pattern);
 		pattern = what;
+		temp = gtranslator_utils_escape(what);
+		regcomp(&target, temp, eflags);
+		GTR_FREE(temp);
 	}
 	begin = po->current;
 	if (!begin) {

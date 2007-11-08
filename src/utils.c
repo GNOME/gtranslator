@@ -1009,3 +1009,29 @@ int gtranslator_mkdir_hier(const char *path, mode_t mode)
         GTR_FREE(copy);
         return 0;
 }
+
+/*
+ * Return the same string but with '\' escaped if exits
+ */
+
+gchar * gtranslator_utils_escape(const gchar *string)
+{
+	gchar *result;
+	GString *aux;
+	gint s;
+	
+	aux = g_string_sized_new(strlen(string));
+	
+	for(s = 0; s < strlen(string); s++)
+	{
+		if (string[s] == '\\')
+		{
+			g_string_append(aux, "\\\\");
+		}else {
+			g_string_append_c(aux, string[s]);
+		}
+	}
+	result = aux->str;
+	g_string_free(aux, FALSE);
+	return result;
+}
