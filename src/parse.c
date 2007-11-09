@@ -95,7 +95,8 @@ static void check_msg_status(GtrMsg * msg)
 static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 {
 	gchar *to_add = g_new(gchar, strlen(tail) * 2);
-	gchar *result;
+	gchar *result,
+	      *result_normalized;
 	gint s, d = 0;
 
 	if (continuation)
@@ -121,7 +122,9 @@ static void append_line(gchar ** old, const gchar * tail, gboolean continuation)
 		GTR_FREE(*old);
 		GTR_FREE(to_add);
 	}
-	*old = result;
+	result_normalized = g_utf8_normalize(result, -1, G_NORMALIZE_DEFAULT_COMPOSE);
+	GTR_FREE(result);
+	*old = result_normalized;
 }
 
 gboolean add_to_obsolete(GtrPo *po, gchar *comment)
