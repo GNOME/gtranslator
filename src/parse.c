@@ -1017,16 +1017,48 @@ Your file should likely be named '%s.po'."),
 }
 
 /*
+ * A callback for Overwrite in Save as
+ */
+void gtranslator_overwrite_file(GtkWidget * widget, gpointer data)
+{
+	gtranslator_save_file(po->filename);
+	gtranslator_open_file(po->filename);
+}
+
+/*
  * A callback for OK in Save as... dialog 
  */
 void gtranslator_save_file_dialog(GtkWidget * widget, gpointer sfa_dlg)
 {
-	gchar *po_file;
+	gchar *po_file,
+	      *po_file_normalized;
 	po_file = g_strdup(gtk_file_selection_get_filename(GTK_FILE_SELECTION(sfa_dlg)));
-	if (!gtranslator_save_file(po_file))
-		return;
-	GTR_FREE(po->filename);
-	po->filename = g_strdup(po_file);
+	po_file_normalized = g_utf8_normalize( po_file, -1, G_NORMALIZE_DEFAULT_COMPOSE);
+	GTR_FREE(po_file);
+	po_file = po_file_normalized;
+
+	if (g_file_test(po_file, G_FILE_TEST_EXISTS))
+	{
+		po->filename = g_strdup(po_file);
+		
+		GtkWidget *dialog, *button, *button1;
+	
+		dialog = gtk_message_dialog_new (NULL,
+                                 GTK_DIALOG_MODAL,
+                                 GTK_MESSAGE_QUESTION,
+				 GTK_BUTTONS_CANCEL,
+                                 _("The file '%s' already exists, Do you want overwrite it?"),
+                                 po_file);
+		
+		button = gtk_dialog_add_button (GTK_DIALOG (dialog), "Overwrite", 1);
+		
+		g_signal_connect (G_OBJECT (button), "clicked",
+			G_CALLBACK (gtranslator_overwrite_file), NULL);
+		
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+	}
+	GTR_FREE(po_file);
 	gtk_widget_destroy(GTK_WIDGET(sfa_dlg));
 }
 
