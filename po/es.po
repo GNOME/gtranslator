@@ -3,6 +3,7 @@
 # Copyright © 2000-2001,2003, 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
 #
+#: ../src/menus.c:219 ../src/menus.c:237 ../src/menus.c:246 ../src/menus.c:255
 # Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.
 # Juan Manuel García Molina <juanmagm@mail.com>, 2001.
 # Q&A, Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2003.
@@ -14,10 +15,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-17 10:37+0100\n"
-"PO-Revision-Date: 2007-07-22 17:26+0200\n"
-"Last-Translator: Urizev <urizev@gmail.com>\n"
-"Language-Team: Español <traductores@es.gnome.org>\n"
+"POT-Creation-Date: 2007-11-09 09:41+0000\n"
+"PO-Revision-Date: 2007-11-13 20:16+0100\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -154,7 +155,7 @@ msgstr "Todos los archivos"
 msgid "Open file for translation"
 msgstr "Abrir archivo para traducción"
 
-#: ../src/dialogs.c:330 ../src/main_window.glade.h:31
+#: ../src/dialogs.c:330 ../src/main_window.glade.h:27
 msgid "Save file as..."
 msgstr "Guardar archivo como..."
 
@@ -225,7 +226,7 @@ msgstr "Traducción"
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: ../src/dialogs.c:751 ../src/main_window.glade.h:11
+#: ../src/dialogs.c:751 ../src/main_window.glade.h:12
 msgid "Ignore hotkeys"
 msgstr "Ignorar combinaciones de teclas"
 
@@ -375,6 +376,66 @@ msgstr "Comentario para el marcador:"
 msgid "No comment"
 msgstr "Sin comentario"
 
+#: ../src/dict-panel.c:187
+#, c-format
+msgid "No dictionary source available with name '%s'"
+msgstr "No hay ninguna fuente de diccionario con el nombre «%s»"
+
+#: ../src/dict-panel.c:190
+msgid "Unable to find dictionary source"
+msgstr "No es posible encontrar la fuente del diccionario"
+
+#: ../src/dict-panel.c:205
+#, c-format
+msgid "No context available for source '%s'"
+msgstr "No hay contexto disponible para la fuente «%s»"
+
+#: ../src/dict-panel.c:208
+msgid "Unable to create a context"
+msgstr "Imposible crear un contexto"
+
+#. speller
+#: ../src/dict-panel.c:385
+msgid "Double-click on the word to look up"
+msgstr "Pulse dos veces en la palabra que quiere buscar"
+
+#. strat-chooser
+#: ../src/dict-panel.c:391
+msgid "Double-click on the matching strategy to use"
+msgstr "Pulse dos veces en la estrategia que usar"
+
+#. db-chooser
+#: ../src/dict-panel.c:401
+msgid "Double-click on the database to use"
+msgstr "Pulse dos veces en la base de datos que usar"
+
+#.
+#. * Look up Button
+#.
+#: ../src/dict-panel.c:432
+msgid "Look _up:"
+msgstr "_Buscar:"
+
+#: ../src/dict-panel.c:494
+msgid "Similar words"
+msgstr "Palabras similares"
+
+#: ../src/dict-panel.c:510
+msgid "Available dictionaries"
+msgstr "Diccionarios disponibles"
+
+#: ../src/dict-panel.c:526
+msgid "Available strategies"
+msgstr "Estrategias disponibles"
+
+#: ../src/dict-panel.c:598
+msgid "Unable to connect to GConf"
+msgstr "Imposible conectarse a GConf"
+
+#: ../src/dict-panel.c:610
+msgid "Unable to get notification for preferences"
+msgstr "No se pudo obtener notificación para las preferencias"
+
 #: ../src/find.c:216
 msgid "Please enter a search string"
 msgstr "Introduzca la cadena de texto que desea buscar"
@@ -388,50 +449,50 @@ msgstr ""
 "No se pudo encontrar\n"
 "«%s»"
 
-#: ../src/gui.c:447
+#: ../src/gui.c:457
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
-msgstr[0] "%s [ queda %i dudoso ]"
-msgstr[1] "%s [ quedan %i dudosos ]"
+msgstr[0] "%s [ queda %i difuso ]"
+msgstr[1] "%s [ quedan %i difusos ]"
 
-#: ../src/gui.c:447 ../src/gui.c:451 ../src/main_window.glade.h:10
+#: ../src/gui.c:457 ../src/gui.c:461 ../src/main_window.glade.h:11
 #: ../src/messages-table.c:267
 msgid "Fuzzy"
 msgstr "Dudoso"
 
-#: ../src/gui.c:451
+#: ../src/gui.c:461
 #, c-format
 msgid "%s [ No fuzzy left ]"
-msgstr "%s [ no quedandudosos ]"
+msgstr "%s [ no quedan difusos ]"
 
-#: ../src/gui.c:460 ../src/main_window.glade.h:35 ../src/messages-table.c:275
+#: ../src/gui.c:470 ../src/main_window.glade.h:30 ../src/messages-table.c:275
 msgid "Translated"
 msgstr "Traducido"
 
-#: ../src/gui.c:468
+#: ../src/gui.c:478
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ queda %i no traducido ]"
 msgstr[1] "%s [ quedan %i no traducidos ]"
 
-#: ../src/gui.c:468 ../src/gui.c:470 ../src/main_window.glade.h:38
+#: ../src/gui.c:478 ../src/gui.c:480 ../src/main_window.glade.h:34
 #: ../src/messages-table.c:259
 msgid "Untranslated"
 msgstr "No traducido"
 
-#: ../src/gui.c:470
+#: ../src/gui.c:480
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ No quedan no traducidos ]"
 
-#: ../src/gui.c:490
+#: ../src/gui.c:500
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "Mensaje: %d / %d / Estado: %s (El mensaje contiene formas plurales)"
 
-#: ../src/gui.c:494
+#: ../src/gui.c:504
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Mensaje: %d / %d / Estado: %s"
@@ -504,7 +565,7 @@ msgstr "gtk-close"
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- editar cabecera"
 
-#: ../src/header_stuff.c:495
+#: ../src/header_stuff.c:128
 msgid "No header for this file/domain"
 msgstr "No hay cabecera para este archivo/dominio"
 
@@ -874,321 +935,317 @@ msgid "C_omment..."
 msgstr "C_omentarios..."
 
 #: ../src/main_window.glade.h:5
+msgid "Charmap"
+msgstr "Mapa de caracteres"
+
+#: ../src/main_window.glade.h:6
 msgid "Copy _message -> translation"
 msgstr "Copiar _mensaje -> traducción"
 
-#: ../src/main_window.glade.h:6
+#: ../src/main_window.glade.h:7
 msgid "Current comment"
 msgstr "Comentario actual"
 
-#: ../src/main_window.glade.h:7
+#: ../src/main_window.glade.h:8
 msgid "Edit comment"
 msgstr "Editar comentario"
 
-#: ../src/main_window.glade.h:8
+#: ../src/main_window.glade.h:9
 msgid "Edit current comment"
 msgstr "Editar el comentario actual"
 
-#: ../src/main_window.glade.h:9
+#: ../src/main_window.glade.h:10
 msgid "First message"
 msgstr "Primer mensaje"
 
-#: ../src/main_window.glade.h:12
+#: ../src/main_window.glade.h:13
 msgid "Last message"
 msgstr "Último mensaje"
 
-#: ../src/main_window.glade.h:13
+#: ../src/main_window.glade.h:14
+msgid "Message table"
+msgstr "Tabla de mensajes"
+
+#: ../src/main_window.glade.h:15
 msgid "Next _untranslated"
 msgstr "Siguiente _no traducido"
 
-#: ../src/main_window.glade.h:14
+#: ../src/main_window.glade.h:16
 msgid "Next fuz_zy"
-msgstr "Siguiente _dudoso"
+msgstr "Siguiente _difuso"
 
-#: ../src/main_window.glade.h:15
+#: ../src/main_window.glade.h:17
 msgid "Next message"
 msgstr "Siguiente mensaje"
 
-#: ../src/main_window.glade.h:16
+#: ../src/main_window.glade.h:18
 msgid "Open file"
 msgstr "Abrir archivo"
 
-#: ../src/main_window.glade.h:17
+#: ../src/main_window.glade.h:19
 msgid "Open from _URI..."
 msgstr "Abrir desde _URI..."
 
-#: ../src/main_window.glade.h:18 ../src/messages-table.c:225
+#: ../src/main_window.glade.h:20 ../src/messages-table.c:225
 msgid "Original"
 msgstr "Original"
 
-#: ../src/main_window.glade.h:19
-msgid "Plural"
-msgstr "Plural"
-
-#: ../src/main_window.glade.h:20
-msgid "Plural 2"
-msgstr "Plural 2"
-
 #: ../src/main_window.glade.h:21
-msgid "Plural 3"
-msgstr "Plural 3"
-
-#: ../src/main_window.glade.h:22
-msgid "Plural 4"
-msgstr "Plural 4"
-
-#: ../src/main_window.glade.h:23
-msgid "Plural 5"
-msgstr "Plural 5"
-
-#: ../src/main_window.glade.h:24
-msgid "Plural 6"
-msgstr "Plural 6"
-
-#: ../src/main_window.glade.h:25
 msgid "Previous message"
 msgstr "Mensaje anterior"
 
-#: ../src/main_window.glade.h:26
+#: ../src/main_window.glade.h:22
 msgid "Previously fuzz_y"
-msgstr "Anterior _dudoso"
+msgstr "Anterior _difuso"
 
-#: ../src/main_window.glade.h:27
+#: ../src/main_window.glade.h:23
 msgid "Recen_t files"
 msgstr "Archivos recien_tes"
 
-#: ../src/main_window.glade.h:28
+#: ../src/main_window.glade.h:24
 msgid "Refresh the current file"
 msgstr "Actualizar el archivo actual"
 
-#: ../src/main_window.glade.h:29
+#: ../src/main_window.glade.h:25
 msgid "Remove all translations..."
 msgstr "Borrar todas las traducciones..."
 
-#: ../src/main_window.glade.h:30
+#: ../src/main_window.glade.h:26
 msgid "Save file"
 msgstr "Guardar archivo"
 
-#: ../src/main_window.glade.h:32
+#: ../src/main_window.glade.h:28
 msgid "Search"
 msgstr "Buscar"
 
-#: ../src/main_window.glade.h:33
+#: ../src/main_window.glade.h:29
 msgid "Search: "
 msgstr "Buscar: "
 
-#: ../src/main_window.glade.h:34
-msgid "Single"
-msgstr "Único"
+#: ../src/main_window.glade.h:31
+msgid "Translation memories"
+msgstr "Memorias de traducción"
 
-#: ../src/main_window.glade.h:36
+#: ../src/main_window.glade.h:32
 msgid "Translation status: "
 msgstr "Estado de la traducción: "
 
-#: ../src/main_window.glade.h:37
+#: ../src/main_window.glade.h:33
 msgid "Undo"
 msgstr "Deshacer"
 
-#: ../src/main_window.glade.h:39
+#: ../src/main_window.glade.h:35
 msgid "_Actions"
 msgstr "_Acciones"
 
-#: ../src/main_window.glade.h:40
+#: ../src/main_window.glade.h:36
 msgid "_Add bookmark"
 msgstr "_Añadir marcador"
 
-#: ../src/main_window.glade.h:41
+#: ../src/main_window.glade.h:37
 msgid "_Bookmarks"
 msgstr "_Marcadores"
 
-#: ../src/main_window.glade.h:42
+#: ../src/main_window.glade.h:38
 msgid "_Colorschemes"
 msgstr "Esquemas de _color"
 
-#: ../src/main_window.glade.h:43
+#: ../src/main_window.glade.h:39
 msgid "_Compile"
 msgstr "_Compilar"
 
-#: ../src/main_window.glade.h:44
+#: ../src/main_window.glade.h:40
 msgid "_Contents"
 msgstr "_Contenido"
 
-#: ../src/main_window.glade.h:45
+#: ../src/main_window.glade.h:41
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../src/main_window.glade.h:46
+#: ../src/main_window.glade.h:42
 msgid "_File"
 msgstr "_Archivo"
 
-#: ../src/main_window.glade.h:47
+#: ../src/main_window.glade.h:43
 msgid "_Go"
 msgstr "_Ir"
 
-#: ../src/main_window.glade.h:48
+#: ../src/main_window.glade.h:44
 msgid "_Header..."
 msgstr "_Cabecera..."
 
-#: ../src/main_window.glade.h:49
+#: ../src/main_window.glade.h:45
 msgid "_Help"
 msgstr "Ay_uda"
 
-#: ../src/main_window.glade.h:50
+#: ../src/main_window.glade.h:46
 msgid "_Previously unstranslated"
 msgstr "_Anterior no traducido"
 
-#: ../src/main_window.glade.h:51
+#: ../src/main_window.glade.h:47
 msgid "_Revert"
 msgstr "_Revertir"
 
-#: ../src/main_window.glade.h:52
+#: ../src/main_window.glade.h:48
 msgid "_Search next"
 msgstr "Buscar _siguiente"
 
-#: ../src/main_window.glade.h:53
+#: ../src/main_window.glade.h:49
 msgid "_View"
 msgstr "_Ver"
 
-#: ../src/main_window.glade.h:54
+#: ../src/main_window.glade.h:50
 msgid "gtranslator _website"
 msgstr "Sitio _web de gtranslator"
 
-#: ../src/menus.c:126
+#: ../src/main_window.glade.h:51
+msgid "label"
+msgstr "etiqueta"
+
+#: ../src/menus.c:128
 msgid "Open a po file"
 msgstr "Abrir archivo po"
 
-#: ../src/menus.c:135
+#: ../src/menus.c:137
 msgid "Open a po file from a given URI"
 msgstr "Abrir un archivo po desde un URI dado"
 
-#: ../src/menus.c:144
+#: ../src/menus.c:146
 msgid "Save the file"
 msgstr "Guardar el archivo"
 
-#: ../src/menus.c:153
+#: ../src/menus.c:155
 msgid "Save the file with another name"
 msgstr "Guardar el archivo con otro nombre"
 
-#: ../src/menus.c:161
+#: ../src/menus.c:163
 msgid "..."
 msgstr "…"
 
-#: ../src/menus.c:170
+#: ../src/menus.c:172
 msgid "Close the current file"
 msgstr "Cerrar el archivo actual"
 
-#: ../src/menus.c:179
+#: ../src/menus.c:181
 msgid "Quit the program"
 msgstr "Salir del programa"
 
-#: ../src/menus.c:190
+#: ../src/menus.c:192
 msgid "Undo last operation"
 msgstr "Deshacer la última operación"
 
-#: ../src/menus.c:199
+#: ../src/menus.c:201
 msgid "Cut the selected text"
 msgstr "Cortar el texto seleccionado"
 
-#: ../src/menus.c:208
+#: ../src/menus.c:210
 msgid "Copy the selected text"
 msgstr "Copiar el texto seleccionado"
 
-#: ../src/menus.c:226
+#: ../src/menus.c:228
 msgid "Clear the translation text box"
 msgstr "Limpiar la cadena traducida"
 
-#: ../src/menus.c:262
+#: ../src/menus.c:264
 msgid "Edit po file header"
 msgstr "Editar la cabecera del archivo po"
 
-#: ../src/menus.c:271
+#: ../src/menus.c:273
 msgid "Edit message comment"
 msgstr "Editar el comentario del mensaje"
 
-#: ../src/menus.c:280
+#: ../src/menus.c:282
 msgid "Copy the original message contents and paste them as translation"
 msgstr "Copiar el contenido del mensaje original y pegarlo como traducción"
 
-#: ../src/menus.c:289
+#: ../src/menus.c:291
 msgid "Toggle fuzzy status of a message"
-msgstr "Conmutar el estado dudoso de un mensaje"
+msgstr "Conmutar el estado difuso de un mensaje"
 
-#: ../src/menus.c:298
+#: ../src/menus.c:300
 msgid "Edit gtranslator preferences"
 msgstr "Editar las preferencias de GTranslator"
 
-#: ../src/menus.c:309
+#: ../src/menus.c:311
 msgid "Compile the po file"
 msgstr "Compilar el archivo po"
 
-#: ../src/menus.c:322
+#: ../src/menus.c:324
 msgid "Add a bookmark for this message in this po file"
 msgstr "Añadir marcador para este mensaje en este archivo po"
 
-#: ../src/menus.c:331
+#: ../src/menus.c:333
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr "Autotraducir el archivo con la información de tu búfer de aprendizaje"
 
-#: ../src/menus.c:340
+#: ../src/menus.c:342
 msgid "Remove all existing translations from the po file"
 msgstr "Borrar todas la traducciones existentes en el archivo po"
 
-#: ../src/menus.c:351
+#: ../src/menus.c:353
 msgid "Go to first message"
 msgstr "Ir al primer mensaje"
 
-#: ../src/menus.c:360
+#: ../src/menus.c:362
 msgid "Move back one message"
 msgstr "Ir al mensaje anterior"
 
-#: ../src/menus.c:369
+#: ../src/menus.c:371
 msgid "Move forward one message"
 msgstr "Ir al siguiente mensaje"
 
-#: ../src/menus.c:378
+#: ../src/menus.c:380
 msgid "Go to the last message"
 msgstr "Ir al último mensaje"
 
-#: ../src/menus.c:387
+#: ../src/menus.c:389
 msgid "Go to especified message number"
 msgstr "Ir al mensaje número"
 
-#: ../src/menus.c:396
+#: ../src/menus.c:398
 msgid "Go to next fuzzy message"
-msgstr "Ir al siguiente mensaje dudoso"
+msgstr "Ir al siguiente mensaje difuso"
 
-#: ../src/menus.c:405
+#: ../src/menus.c:408
+msgid "Go to previously fuzzy message"
+msgstr "Ir al mensaje difuso anterior"
+
+#: ../src/menus.c:417
 msgid "Go to next untranslated message"
 msgstr "Ir al siguiente mensaje sin traducir"
 
-#: ../src/menus.c:421
+#: ../src/menus.c:426
+msgid "Go to previously untranslated message"
+msgstr "Ir al mensaje sin traducir anterior"
+
+#: ../src/menus.c:442
 msgid "gtranslator's homepage on the web"
 msgstr "Ir a la página web de GTranslator"
 
-#: ../src/menus.c:430
+#: ../src/menus.c:451
 msgid " "
 msgstr " "
 
-#: ../src/message.c:125
+#: ../src/message.c:124
 msgid "Couldn't get the message!"
 msgstr "No se pudo obtener el mensaje"
 
 #. Message dialog
-#: ../src/message.c:149
+#: ../src/message.c:148
 msgid "There are no fuzzy messages left."
-msgstr "No quedan más mensajes dudosos."
+msgstr "No quedan más mensajes difusos."
 
 #. Message dialog
 #: ../src/message.c:178
 msgid "All messages seems to be translated."
 msgstr "Parece que todos los mensajes están traducidos."
 
-#: ../src/message.c:202
+#: ../src/message.c:209
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "error de gtkspell: %s\n"
 
-#: ../src/message.c:203
+#: ../src/message.c:210
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1197,8 +1254,21 @@ msgstr ""
 "GtkSpell no fue capaz de inicializarse.\n"
 " %s"
 
+#: ../src/page.c:130
+msgid "Singular"
+msgstr "Singular"
+
+#: ../src/page.c:132
+msgid "Plural"
+msgstr "Plural"
+
+#: ../src/page.c:140
+#, c-format
+msgid "Plural %d"
+msgstr "Plural %d"
+
 #. Error message
-#: ../src/page.c:232
+#: ../src/page.c:272
 msgid "Error autosaving file:"
 msgstr "Error al autoguardar el archivo:"
 
@@ -1252,10 +1322,10 @@ msgid_plural ""
 "contains %d fuzzy messages"
 msgstr[0] ""
 "El archivo %s\n"
-"contiene %d mensaje dudoso"
+"contiene %d mensaje difuso"
 msgstr[1] ""
 "El archivo %s\n"
-"contiene %d mensajes dudosos"
+"contiene %d mensajes difusoos"
 
 #: ../src/parse.c:624
 #, c-format
@@ -1288,7 +1358,7 @@ msgstr "<b>Contenido</b>"
 
 #: ../src/preferences.glade.h:6
 msgid "<b>Fuzzy matching</b>"
-msgstr "<b>Coincidencia difusa</b>"
+msgstr "<b>Coincidencia difuso</b>"
 
 #: ../src/preferences.glade.h:7
 msgid "<b>General</b>"
@@ -1388,7 +1458,7 @@ msgstr "Máximo número de entradas en la lista de archivos recientes:"
 
 #: ../src/preferences.glade.h:35
 msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "Porcentaje de similitud mínimo requerido para consultas difusas:"
+msgstr "Porcentaje de similitud mínimo requerido para consultas difusos:"
 
 #: ../src/preferences.glade.h:36
 msgid "Number of plurals: "
@@ -1408,7 +1478,7 @@ msgstr "Consultar el búfer de aprendizaje personal mientras al autotraducir"
 
 #: ../src/preferences.glade.h:40
 msgid "Remove fuzzy status if message is changed"
-msgstr "Quitar el estado dudoso si se modifica el mensaje"
+msgstr "Quitar el estado difuso si se modifica el mensaje"
 
 #: ../src/preferences.glade.h:41
 msgid "Save geometry on exit and restore it on startup"
@@ -1446,7 +1516,7 @@ msgstr "Tipografía de la traducción:"
 #: ../src/preferences.glade.h:50
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr ""
-"Usar rutinas de coincidencia «difusas» para las consultas del búfer de "
+"Usar rutinas de coincidencia «difusos» para las consultas del búfer de "
 "aprendizaje"
 
 #: ../src/preferences.glade.h:51
@@ -1469,17 +1539,17 @@ msgstr "gtranslator -- selección de tipografía/tipografía de msgstr"
 msgid "gtranslator -- options"
 msgstr "gtranslator -- opciones"
 
-#: ../src/prefs.c:527
+#: ../src/prefs.c:532
 msgid ""
-"Note: It was not possible to determine GNU header for plural forms. Your GNU "
-"gettext tools may be too old or they do not contain a suggested value for "
-"your language."
+"Note: It was not possible to determine GNU header for plural forms. \t\tYour "
+"GNU gettext tools may be too old or they do not contain \t\ta suggested "
+"value for your language."
 msgstr ""
-"Nota: no fue posible determinar la cabecera de GNU para las formas "
-"pluerales. Sus herramientas gettext de GNU quizá sean demasiado antiguas o "
-"no contengan un valor sugerido para su idioma."
+"Nota: no se pudo determinar la cabecera de GNU para las formas plurales. \t\tQuizá "
+"sus herramientas gettext de GNU sean demasiado antiguas o no contengan\t\tun valor "
+"sugerido para su idioma."
 
-#: ../src/prefs.c:536
+#: ../src/prefs.c:541
 msgid ""
 "Note: Your settings do not contain a plural forms string. These data "
 "retrieved from GNU gettext tools."
@@ -1487,7 +1557,7 @@ msgstr ""
 "Nota: Su configuración no contiene una cadena de formas plurales. Estos "
 "datos se obtuvieron de las herramientas gettext de GNU."
 
-#: ../src/prefs.c:541
+#: ../src/prefs.c:546
 msgid ""
 "Note: Your settings contain an invalid plural forms string. These data "
 "retrieved from GNU gettext tools."
@@ -1495,44 +1565,44 @@ msgstr ""
 "Nota: Su configuración contiene una cadena de formas plurales inválida. "
 "Estos datos se obtuvieron de las herramientas gettext de GNU."
 
-#: ../src/prefs.c:616
+#: ../src/prefs.c:622
 msgid "Files"
 msgstr "Archivos"
 
 #. General item
-#: ../src/prefs.c:623
+#: ../src/prefs.c:629
 msgid "General"
 msgstr "General"
 
 #. Autosave item
-#: ../src/prefs.c:648
+#: ../src/prefs.c:654
 msgid "Autosave"
 msgstr "Guardar automáticamente"
 
 #. Recent item
-#: ../src/prefs.c:693
+#: ../src/prefs.c:699
 msgid "Recent files"
 msgstr "Archivos recientes"
 
-#: ../src/prefs.c:725
+#: ../src/prefs.c:731
 msgid "Editor"
 msgstr "Editor"
 
 #. Text item
-#: ../src/prefs.c:730
+#: ../src/prefs.c:736
 msgid "Text display"
 msgstr "Pantalla de texto"
 
 #. Contents item
-#: ../src/prefs.c:793
+#: ../src/prefs.c:799
 msgid "Contents"
 msgstr "Contenido"
 
-#: ../src/prefs.c:832
+#: ../src/prefs.c:838
 msgid "PO header"
 msgstr "Cabecera PO"
 
-#: ../src/prefs.c:841
+#: ../src/prefs.c:847
 msgid "Personal Information"
 msgstr "Información personal"
 
@@ -1543,37 +1613,37 @@ msgstr "Información personal"
 #. G_CALLBACK(toggle_insensitive), personal_info_box);
 #. #endif
 #. Language item
-#: ../src/prefs.c:918
+#: ../src/prefs.c:924
 msgid "Language settings"
 msgstr "Preferencias del idioma"
 
-#: ../src/prefs.c:984
+#: ../src/prefs.c:998
 msgid "Functionality"
 msgstr "Funcionalidad"
 
 #. Messages table item
-#: ../src/prefs.c:1021
+#: ../src/prefs.c:1035
 msgid "Messages table"
 msgstr "Tabla de mensajes"
 
-#: ../src/prefs.c:1048
+#: ../src/prefs.c:1062
 msgid "Autotranslation"
 msgstr "Traducción automática"
 
 #. Fuzzy item
-#: ../src/prefs.c:1072
+#: ../src/prefs.c:1086
 msgid "Fuzzy matching"
-msgstr "Coincidencia difusa"
+msgstr "Coincidencia difuso"
 
-#: ../src/prefs.c:1147
+#: ../src/prefs.c:1164
 msgid "Please enter your name!"
 msgstr "Introduzca su nombre."
 
-#: ../src/prefs.c:1176
+#: ../src/prefs.c:1193
 msgid "Please enter your EMail address!"
 msgstr "Introduzca su dirección de correo electrónico."
 
-#: ../src/prefs.c:1196
+#: ../src/prefs.c:1213
 msgid "Please enter a valid EMail address!"
 msgstr "Introduzca una dirección de correo electrónico válida."
 
@@ -1624,7 +1694,7 @@ msgstr "No se pudo guardar comprimido con %s el archivo gettext «%s»"
 msgid "Couldn't save zip'ed po file `%s'!"
 msgstr "No se pudo abrir el archivo po comprimido con zip «%s»"
 
-#: ../src/session.c:89
+#: ../src/session.c:88
 msgid "Session restored successfully."
 msgstr "Sesión restablecida con éxito."
 
