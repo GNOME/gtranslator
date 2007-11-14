@@ -438,6 +438,8 @@ void gtranslator_messages_table_update_row(GtrMsg *message)
 void gtranslator_messages_table_select_row(GtrMsg *message)
 {
 	GtkTreeSelection	*selection=NULL;
+	GtkTreeModel		*model;
+	GtkTreePath		*path;
 
 	if(!file_opened)
 	{
@@ -446,6 +448,17 @@ void gtranslator_messages_table_select_row(GtrMsg *message)
 
 	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(tree));
 	gtk_tree_selection_select_iter(selection, &message->iter);
+	
+	model=gtk_tree_view_get_model(GTK_TREE_VIEW(tree));
+	path=gtk_tree_model_get_path(GTK_TREE_MODEL(model), &message->iter);
+
+	gtk_tree_view_scroll_to_cell(GTK_TREE_VIEW(tree),
+					path,
+					NULL,
+					FALSE,
+					0.0, 0.0);
+
+	gtk_tree_path_free(path);
 }
 
 static void 
