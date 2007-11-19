@@ -348,6 +348,11 @@ gboolean gtranslator_parse_core(GtrPo *po)
 					}
 				}
 			}
+			else if (nautilus_str_has_prefix(line, "msgctxt \"")) {
+				comment_ok = TRUE;
+				if (line[10] != '\0')
+					append_line(&msg->msgctxt, &line[8], FALSE);
+			}
 			else if (nautilus_str_has_prefix(line, "msgid \"")) {
 				/*
 				 * This means the comment is completed
@@ -799,6 +804,19 @@ static void write_the_message(gpointer data, gpointer fs)
 	else
 	{
 		string=g_string_new("");
+	}
+
+	/*
+	 * Check if exists msgctxt line. If that's so it'll be written it.
+	 */
+
+	if(msg->msgctxt)
+	{
+		string = g_string_append(string, "msgctxt \"");
+		id = restore_msg(msg->msgctxt);
+		string = g_string_append(string, id);
+		string = g_string_append(string, "\"\n");
+		GTR_FREE(id);
 	}
 
 	/*

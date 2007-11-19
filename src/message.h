@@ -55,6 +55,7 @@ typedef enum {
 typedef struct {
 	GtrComment 	*comment;
 
+	gchar		*msgctxt;
 	gchar 		*msgid;
 	gchar 		*msgstr;
 	
