@@ -319,7 +319,7 @@ void gtranslator_message_show(GtrMsg *msg)
 			_("gtranslator -- edit plural forms of message translation"),
 			GTK_WINDOW(gtranslator_application),
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+			GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			NULL);
 
 		plural_forms_store=gtk_tree_store_new(N_COL, G_TYPE_STRING, G_TYPE_STRING);
@@ -365,7 +365,7 @@ void gtranslator_message_show(GtrMsg *msg)
 		
 		gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), tree,
 			FALSE, FALSE, 0);
-		gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_CANCEL);
+		gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_CLOSE);
 
 		gtranslator_dialog_show(&dialog, "gtranslator -- edit plural forms of message translation");
 
