@@ -187,32 +187,6 @@ static void free_messages_table_colors()
 }
 
 /*
- * Pops up on a right click in the messages table -- should show any found 
- *  translation from the learn buffer.
- */
-
-void gtranslator_tree_size_allocate( 
-		GtkTreeView *widget, 
-		GtkAllocation *allocation, 
-		gpointer data )
-{
-	/*
-	 * Here we will change the column widths so that the message table will look nice.
-	 * This function will be called when the size of treeview widget will be changed.
-	 */
-	GtkTreeViewColumn *col;
-	gint width;
-	width = allocation->width >> 1;
-	col = gtk_tree_view_get_column( widget, ORIGINAL_COLUMN );
-	gtk_tree_view_column_set_min_width( col, width );
-	gtk_tree_view_column_set_max_width( col, width );
-	col = gtk_tree_view_get_column( widget, TRANSLATION_COLUMN );
-	gtk_tree_view_column_set_min_width( col, width );
-	gtk_tree_view_column_set_max_width( col, width );
-}
-
-
-/*
  * Create the new messages table
  */
 GtkWidget *gtranslator_messages_table_new()
@@ -235,17 +209,13 @@ GtkWidget *gtranslator_messages_table_new()
   g_object_unref (G_OBJECT (store));
 
   /*
-   * pv, this for managing column widths
-   */
-  g_signal_connect( G_OBJECT( tree ), "size-allocate",
-		G_CALLBACK( gtranslator_tree_size_allocate ), NULL );
-
-  /*
    * Add the original msgid column with the color defs attached to it.
    */
   renderer=gtk_cell_renderer_text_new();
+  g_object_set(G_OBJECT(renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
   column=gtk_tree_view_column_new_with_attributes(_("Original"), renderer,
 	"text", ORIGINAL_COLUMN, "foreground-gdk", COLOR_COLUMN, NULL);
+  gtk_tree_view_column_set_expand(column, TRUE);
 
   gtk_tree_view_column_set_sort_column_id (column, ORIGINAL_COLUMN);
   gtk_tree_view_column_set_resizable(column, TRUE);
@@ -255,8 +225,10 @@ GtkWidget *gtranslator_messages_table_new()
    * The same now again for the translation - msgid.
    */
   renderer=gtk_cell_renderer_text_new();
+  g_object_set(G_OBJECT(renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
   column=gtk_tree_view_column_new_with_attributes(_("Translation"), renderer,
 	"text", TRANSLATION_COLUMN, "foreground-gdk", COLOR_COLUMN, NULL);
+  gtk_tree_view_column_set_expand(column, TRUE);
 
   gtk_tree_view_column_set_sort_column_id (column, TRANSLATION_COLUMN);
   gtk_tree_view_column_set_resizable(column, TRUE);
