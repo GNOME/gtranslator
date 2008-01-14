@@ -202,6 +202,10 @@ GtrLanguage languages[] = {
 	 "komp_lt@konferencijos.lt", "8bit"
 	},
 	{
+	 N_("Macedonian"), "mk", "UTF-8",
+	 "ossm-members@hedona.on.net.mk", "8bit"
+	},
+	{
 	 N_("Malay/Bahasa Melayu"), "ms", "iso-8859-1",
 	 "gabai-penyumbang@lists.sourceforge.net", "8bit"
 	},
