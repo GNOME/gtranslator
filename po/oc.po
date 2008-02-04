@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-27 13:30+0100\n"
+"POT-Creation-Date: 2008-02-02 21:54+0100\n"
 "PO-Revision-Date: 2007-12-27 15:28+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -408,9 +408,11 @@ msgstr ""
 "\"%s\""
 
 #: ../src/gui.c:457
-#, c-format
+#, fuzzy, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ demòran %i aproximats ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ demòran %i aproximats ]"
+msgstr[1] "%s [ demòran %i aproximats ]"
 
 #: ../src/gui.c:457 ../src/gui.c:461 ../src/main_window.glade.h:11
 #: ../src/messages-table.c:267
@@ -427,9 +429,11 @@ msgid "Translated"
 msgstr "Revirat"
 
 #: ../src/gui.c:478
-#, c-format
+#, fuzzy, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ demòran %i messatges pas revirats ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ demòran %i messatges pas revirats ]"
+msgstr[1] "%s [ demòran %i messatges pas revirats ]"
 
 #: ../src/gui.c:478 ../src/gui.c:480 ../src/main_window.glade.h:34
 #: ../src/messages-table.c:259
@@ -1265,16 +1269,20 @@ msgid ""
 msgstr ""
 
 #: ../src/parse.c:575
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "File %s\n"
 "contains %d fuzzy message"
+msgid_plural ""
 "File %s\n"
 "contains %d fuzzy messages"
-msgstr ""
+msgstr[0] ""
 "Lo fichièr %s\n"
-"conten %d messatge aproximat"
+"conten %d messatge aproximatLo fichièr %s\n"
+"conten %d messatges aproximats"
+msgstr[1] ""
 "Lo fichièr %s\n"
+"conten %d messatge aproximatLo fichièr %s\n"
 "conten %d messatges aproximats"
 
 #: ../src/parse.c:624
@@ -1348,11 +1356,11 @@ msgstr "Aplicar las poliças personalizadas"
 
 #: ../src/preferences.glade.h:16
 msgid "Author's email:"
-msgstr "Adreça electronica del autor :"
+msgstr "Adreça electronica de l'autor :"
 
 #: ../src/preferences.glade.h:17
 msgid "Author's name:"
-msgstr "Nom del autor :"
+msgstr "Nom de l'autor :"
 
 #: ../src/preferences.glade.h:18
 msgid "Automatically learn a newly translated message"
@@ -1458,7 +1466,8 @@ msgstr "La foncionalitat per suprimir totas las reviradas d'un fichièr po"
 
 #: ../src/preferences.glade.h:47
 msgid "The Possibility to update a po file from within gtranslator"
-msgstr "Activar la foncionalitat per metre a jorn un fichièr po dins gtranslator"
+msgstr ""
+"Activar la foncionalitat per metre a jorn un fichièr po dins gtranslator"
 
 #: ../src/preferences.glade.h:48
 msgid "Translation text font:"
