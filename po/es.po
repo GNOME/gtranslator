@@ -1,21 +1,21 @@
-# translation of gtranslator.HEAD.es.po to Spanish
+# translation of gtranslator.gtranslator_1_1_8.po to Español
 # Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.
 # Juan Manuel García Molina <juanmagm@mail.com>, 2001.
 # Q&A, Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2003.
 # Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2003.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004.
-# Jorge González <jorgegonz@svn.gnome.org>, 2007.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008.
 # gtranslator's Spanish translation.
-# Copyright © 2000-2001,2003, 2007 Free Software Foundation, Inc.
+# Copyright © 2000-2001,2003, 2007, 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator.gtranslator_1_1_8.es\n"
+"Project-Id-Version: gtranslator.gtranslator_1_1_8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-19 12:14+0000\n"
-"PO-Revision-Date: 2007-11-21 14:58+0100\n"
+"POT-Creation-Date: 2008-01-14 16:52+0000\n"
+"PO-Revision-Date: 2008-03-01 13:46+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Spanish <traductores@es.gnome.org>\n"
+"Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "The GNOME translation program"
 msgstr "El programa de traducción de GNOME"
 
-#: ../data/desktop/gtranslator.desktop.in.h:2 ../src/parse.c:1146
+#: ../data/desktop/gtranslator.desktop.in.h:2 ../src/parse.c:1164
 msgid "gtranslator"
 msgstr "gtranslator"
 
@@ -34,6 +34,7 @@ msgstr "gtranslator"
 #: ../src/about.c:60
 msgid "translator_credits"
 msgstr ""
+"Jorge González González <jorgegonz@svn.gnome.org>\n"
 "Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Francisco Javier Fernández <serrador@arrakis.es>\n"
 "Germán Poo Caamaño <gpoo@ubiobio.cl>"
@@ -162,7 +163,7 @@ msgstr "Comentarios"
 msgid "English"
 msgstr "Inglés"
 
-#: ../src/dialogs.c:601 ../src/dialogs.c:736 ../src/messages-table.c:258
+#: ../src/dialogs.c:601 ../src/dialogs.c:736 ../src/messages-table.c:229
 msgid "Translation"
 msgstr "Traducción"
 
@@ -267,11 +268,11 @@ msgid ""
 "file:///<PO-FILE> or\n"
 "http://www.DOMAIN.COM/PO-FILE"
 msgstr ""
-"Las URIs se utilizan para ubicar archivos únicos en sistemas diferentes.\n"
-"Las direcciones estándar de Internet (URLs) también son URIs -- puede\n"
+"Las URI se utilizan para ubicar archivos únicos en sistemas diferentes.\n"
+"Las direcciones estándar de Internet (URL) también son URI -- puede\n"
 "utilizarlas para abrir archivos po remotos que residan en servidores\n"
 "con protocolos estándar como «http», «ftp» o cualquier otro método\n"
-"de acceso admitido por GnomeVFS. Algunos ejemplos aclaratorios de URIs\n"
+"de acceso admitido por GnomeVFS. Algunos ejemplos aclaratorios de URI\n"
 "(éstos se admiten):\n"
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
 "ftp://anonymous@ftp.algunsitio.com/<ARCHIVO-PO-REMOTO>\n"
@@ -396,23 +397,23 @@ msgstr "Editar comentario"
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ queda %i difuso ]"
-msgstr[1] "%s [ quedan %i vagos ]"
+msgstr[1] "%s [ quedan %i difusos ]"
 
 #: ../src/gui.c:494 ../src/gui.c:498 ../src/menus.c:323
-#: ../src/messages-table.c:319
+#: ../src/messages-table.c:291
 msgid "Fuzzy"
-msgstr "Vaga"
+msgstr "Difuso"
 
 #: ../src/gui.c:498
 #, c-format
 msgid "%s [ No fuzzy left ]"
-msgstr "%s [ no quedan difusos]"
+msgstr "%s [ No quedan difusos ]"
 
 #: ../src/gui.c:506
 msgid "Sticky (Message & translation are the same)"
 msgstr "Permanente (mensaje y traducción son lo mismo)"
 
-#: ../src/gui.c:508 ../src/messages-table.c:327
+#: ../src/gui.c:508 ../src/messages-table.c:299
 msgid "Translated"
 msgstr "Traducido"
 
@@ -423,7 +424,7 @@ msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ queda %i no traducido ]"
 msgstr[1] "%s [ quedan %i no traducidos ]"
 
-#: ../src/gui.c:517 ../src/gui.c:519 ../src/messages-table.c:310
+#: ../src/gui.c:517 ../src/gui.c:519 ../src/messages-table.c:282
 msgid "Untranslated"
 msgstr "No traducido"
 
@@ -488,7 +489,7 @@ msgstr "Nombre del traductor:"
 
 #: ../src/header_stuff.c:650
 msgid "Translator's e-mail:"
-msgstr "E-mail del traductor:"
+msgstr "Correo-e del traductor:"
 
 #: ../src/header_stuff.c:657 ../src/prefs.c:500
 msgid "Language:"
@@ -684,126 +685,130 @@ msgid "Lithuanian"
 msgstr "Lituano"
 
 #: ../src/languages.c:205
+msgid "Macedonian"
+msgstr "Macedonio"
+
+#: ../src/languages.c:209
 msgid "Malay/Bahasa Melayu"
 msgstr "Malayo/Bahasa Melayu"
 
-#: ../src/languages.c:209
+#: ../src/languages.c:213
 msgid "Maltese"
 msgstr "Maltés"
 
-#: ../src/languages.c:213
+#: ../src/languages.c:217
 msgid "Mongolian"
 msgstr "Mongol"
 
-#: ../src/languages.c:217
+#: ../src/languages.c:221
 msgid "Marathi"
 msgstr "Marathi"
 
-#: ../src/languages.c:221
+#: ../src/languages.c:225
 msgid "Norwegian/Bokmaal"
 msgstr "Noruego/Bokmaal"
 
-#: ../src/languages.c:225
+#: ../src/languages.c:229
 msgid "Norwegian/Nynorsk"
 msgstr "Noruego/Nynorsk"
 
-#: ../src/languages.c:229
+#: ../src/languages.c:233
 msgid "Punjabi"
 msgstr "Punjabi"
 
-#: ../src/languages.c:233
+#: ../src/languages.c:237
 msgid "Polish"
 msgstr "Polaco"
 
-#: ../src/languages.c:237
+#: ../src/languages.c:241
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: ../src/languages.c:241
+#: ../src/languages.c:245
 msgid "Portuguese/Brazil"
 msgstr "Portugués/Brasil"
 
-#: ../src/languages.c:245
+#: ../src/languages.c:249
 msgid "Romanian"
 msgstr "Rumano"
 
-#: ../src/languages.c:249
+#: ../src/languages.c:253
 msgid "Russian"
 msgstr "Ruso"
 
-#: ../src/languages.c:253
+#: ../src/languages.c:257
 msgid "Serbian/Cyrillic"
 msgstr "Serbio/Cirílico"
 
-#: ../src/languages.c:257
+#: ../src/languages.c:261
 msgid "Serbian/Latin"
 msgstr "Serbio/Latín"
 
-#: ../src/languages.c:261
+#: ../src/languages.c:265
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: ../src/languages.c:265
+#: ../src/languages.c:269
 msgid "Slovenian"
 msgstr "Esloveno"
 
-#: ../src/languages.c:269
+#: ../src/languages.c:273
 msgid "Spanish"
 msgstr "Español"
 
-#: ../src/languages.c:273
+#: ../src/languages.c:277
 msgid "Spanish/Spain"
 msgstr "Español/España"
 
-#: ../src/languages.c:277
+#: ../src/languages.c:281
 msgid "Spanish/Mexico"
 msgstr "Español/México"
 
-#: ../src/languages.c:281
+#: ../src/languages.c:285
 msgid "Swedish"
 msgstr "Sueco"
 
-#: ../src/languages.c:285
+#: ../src/languages.c:289
 msgid "Tagalog"
 msgstr "Tagalo"
 
-#: ../src/languages.c:289
+#: ../src/languages.c:293
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../src/languages.c:293
+#: ../src/languages.c:297
 msgid "Telugu"
 msgstr "Telugu"
 
-#: ../src/languages.c:297
+#: ../src/languages.c:301
 msgid "Thai"
 msgstr "Tailandés"
 
-#: ../src/languages.c:301
+#: ../src/languages.c:305
 msgid "Turkish"
 msgstr "Turco"
 
-#: ../src/languages.c:305
+#: ../src/languages.c:309
 msgid "Ukrainian"
 msgstr "Ucraniano"
 
-#: ../src/languages.c:309
+#: ../src/languages.c:313
 msgid "Urdu"
 msgstr "Urdu"
 
-#: ../src/languages.c:313
+#: ../src/languages.c:317
 msgid "Uzbekian"
 msgstr "Uzbeco"
 
-#: ../src/languages.c:317
+#: ../src/languages.c:321
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
-#: ../src/languages.c:321
+#: ../src/languages.c:325
 msgid "Walloon"
 msgstr "Valón"
 
-#: ../src/languages.c:325
+#: ../src/languages.c:329
 msgid "Welsh"
 msgstr "Galés"
 
@@ -984,7 +989,7 @@ msgstr "Copia el contenido del mensaje original y lo pega como traducción"
 
 #: ../src/menus.c:167
 msgid "Fu_zzy"
-msgstr "_Vaga"
+msgstr "Di_fuso"
 
 #: ../src/menus.c:168
 msgid "Toggle fuzzy status of a message"
@@ -1032,7 +1037,7 @@ msgstr "Ir al número de mensaje especificado"
 
 #: ../src/menus.c:219
 msgid "Next fuz_zy"
-msgstr "Siguiente _ambiguo"
+msgstr "Siguiente di_fuso"
 
 #: ../src/menus.c:220
 msgid "Go to next fuzzy message"
@@ -1080,7 +1085,7 @@ msgstr "Guardar archivo"
 
 #: ../src/menus.c:272
 msgid "Save as"
-msgstr "Guardar como..."
+msgstr "Guardar como"
 
 #: ../src/menus.c:273
 msgid "Save file with a different name"
@@ -1184,7 +1189,7 @@ msgstr ""
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "gtranslator -- editar formas plurales de la traducción del mensaje"
 
-#: ../src/messages-table.c:247
+#: ../src/messages-table.c:216
 msgid "Original"
 msgstr "Original"
 
@@ -1212,7 +1217,7 @@ msgstr "No se pudo abrir el archivo %s de gettext «%s»"
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "No se pudo abrir el archivo zip «%s»"
 
-#: ../src/parse.c:459
+#: ../src/parse.c:464
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1223,7 +1228,7 @@ msgstr ""
 "en la línea %d.\n"
 "Revise el archivo e inténtelo nuevamente."
 
-#: ../src/parse.c:514
+#: ../src/parse.c:519
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1232,7 +1237,7 @@ msgstr ""
 "El archivo está vacío:\n"
 "%s"
 
-#: ../src/parse.c:536
+#: ../src/parse.c:541
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "El archivo «%s» no existe"
@@ -1240,16 +1245,16 @@ msgstr "El archivo «%s» no existe"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: ../src/parse.c:668
+#: ../src/parse.c:673
 msgid "Header record not found - defaulting from preferences"
 msgstr "Registro de cabecera no encontrado - usando preferencias predeterminadas"
 
-#: ../src/parse.c:684
+#: ../src/parse.c:689
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: ../src/parse.c:896
+#: ../src/parse.c:914
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1258,14 +1263,14 @@ msgid ""
 msgstr ""
 "Está intentando guardar con extensión .pot.\n"
 "Los archivos pot se generan en el proceso de compilación.\n"
-"Su archivo debería nombrarse como «%s.po»."
+"Su archivo debería llamarse «%s.po»."
 
-#: ../src/parse.c:958
+#: ../src/parse.c:976
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "No se pudo abrir el archivo «%s» para escritura"
 
-#: ../src/parse.c:1010
+#: ../src/parse.c:1028
 #, c-format
 msgid ""
 "File %s\n"
@@ -1280,16 +1285,16 @@ msgstr[1] ""
 "El archivo %s\n"
 "contiene %d mensajes vagos"
 
-#: ../src/parse.c:1050
+#: ../src/parse.c:1068
 #, c-format
 msgid "The file '%s' already exists, Do you want overwrite it?"
 msgstr "El archivo «%s» ya existe, ¿quiere sobreescribirlo?"
 
-#: ../src/parse.c:1313
+#: ../src/parse.c:1331
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "msgfmt no está disponible en su sistema"
 
-#: ../src/parse.c:1348
+#: ../src/parse.c:1366
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1323,7 +1328,7 @@ msgstr "General"
 
 #: ../src/prefs.c:352
 msgid "Warn if po file contains fuzzy translations"
-msgstr "Avisar si el archivo po contiene traducciones vagas"
+msgstr "Avisar si el archivo po contiene traducciones difusas"
 
 #: ../src/prefs.c:356
 msgid "Delete compiled files (e.g. \"project.gmo\")"
@@ -1430,7 +1435,7 @@ msgstr "Índice"
 
 #: ../src/prefs.c:448
 msgid "Remove fuzzy status if message is changed"
-msgstr "Borrar el estado vaguedad si se modifica el mensaje"
+msgstr "Quitar el estado difuso si se modifica el mensaje"
 
 #: ../src/prefs.c:452
 msgid "Keep obsolete messages in the po files"
@@ -1522,7 +1527,7 @@ msgstr "Usar colores personalizados para los grupos de la tabla de mensajes"
 
 #: ../src/prefs.c:569
 msgid "Fuzzy entries color:"
-msgstr "Color de las entradas vagas:"
+msgstr "Color de las entradas difusas:"
 
 #: ../src/prefs.c:575
 msgid "Untranslated entries color:"
@@ -1553,17 +1558,17 @@ msgstr "Aprender automáticamente un mensaje nuevo traducido"
 
 #: ../src/prefs.c:596
 msgid "Fuzzy matching"
-msgstr "Coincidencia vaga"
+msgstr "Coincidencia difusa"
 
 #: ../src/prefs.c:603
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr ""
-"Usar rutinas de coincidencia «vagas» para las consultas del búfer de "
+"Usar rutinas de coincidencia «difusas» para las consultas del búfer de "
 "aprendizaje"
 
 #: ../src/prefs.c:610
 msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "Porcentaje de similitud mínimo requerido para consultas vagas:"
+msgstr "Porcentaje de similitud mínimo requerido para consultas difusas:"
 
 #: ../src/prefs.c:659
 msgid "Please enter your name!"
