@@ -1,6 +1,1289 @@
-2007-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+2008-01-27  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* dialogs.c: Applied Pablo Sanxiao patch.
+	* utils_gui.ch:
+	* main.c:
+	Now about dialogs have the link button.
+
+2008-01-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* message-table.c:
+	Now the load is faster.
+
+2008-01-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* msg.ch:
+	* comment.c:
+	Added msgctxt support.
+
+	* Makefile.am: Removed compile.h.
+
+2008-01-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/utils.c:
+	* src/utils.h:
+	* src/translator.c:
+	* src/translator.h:
+	* src/nautilus-string.c:
+	* src/nautilus-string.h:
+	* src/sighandling.c:
+	* src/sighandling.h:
+	* src/learn.c:
+	* src/learn.h:
+	* src/languages.c:
+	* src/languages.h:
+	* src/compile.c:
+	* src/languages.xsl:
+	* src/compile.h:
+	* src/header_stuff.c:
+	* src/header_stuff.h:
+	* src/bookmark.c:
+	* src/bookmark.h:
+	* src/Makefile.am:
+	Cleanup all unneccessary sources.
+
+2008-01-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.h: Added missed func.
+
+2008-01-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* glossary:
+	* dictionary:
+	* charmap:
+	* alternate-language:
+ 	  Removed useless directories.
+
+2008-01-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* Makefile.am:
+	* window.c: Added get_all_tab func and removed old
+	plugins load system.
+
+2007-01-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: Added plugin load at window startup.
+
+2007-01-05  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* notebook.{c,h}:
+	* window.c:
+		Allow closure of tabs, by Ignacio Casal Quinteiro.
+
+2008-01-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-file.c:
+	* notebook.c:
+	* tab.ch:
+	* window.c:
+	Added new property to tab object to notify the
+	state. Now it stores the status to notify if the
+	tab was modified and then change the name or set
+	the sensitivity of the save actions.
+
+	gtranslator-enum-types.{c,h}.template:
+	Added for glib-mkenums autogeneration.
+
+	* Makefile.am:
+	Added glib-mkenums autogeneration and clean up.
+
+2008-01-02  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* po.c:
+	* header-dialog.c:
+	Fixed header dialog to show email address correctly.
+
+2008-01-02  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* actions-file.c:
+	* window.c:
+		Use Project-Id-Version as display name in recent files.
+
+2008-01-01  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* msg.c:
+	* po.c:
+		Free memory when closing a file, by Ignacio Casal Quinteiro.
+
+2008-01-01  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* message-table.c: Focus on current message when GtkTreeView is sorted.
+
+2008-01-01  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* actions-file.c: Focus translation editing box on file open, part of a
+		patch from Ignacio Casal Quinteiro.
+
+2008-01-01  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* pixmaps/: Remove unused directory.
+
+2007-12-31  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* alternatelanguage/alternate-language.c:
+	* alternatelanguage/alternate-language-panel.c:
+	* charmap/charmap.c:
+	* dialogs/file-dialogs.h:
+	* dialogs/header-dialog.c:
+	* dialogs/preferences-dialog.c:
+	* po.c:
+	* prefs-manager.h:
+	* window.{c,h}:
+		Clean up all warnings; add functions to headers, include headers,
+		duplicate const strings, remove unused variables, etc.
+
+2008-01-01  Djihed Afifi  <djihed@gmail.com>
+
+	* messages-table.c: Sortable original and translation rows.
+
+2007-12-31  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* message-table.c: Make sort a bit more predictable. Fixes some issues
+		with tree going to default sort and leaving our messages list
+		improperly sorted.
+
+2007-12-31  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* message-table.c: Remove expensive and seemingly unnecessary function
+		call.
+
+2007-12-31  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* message-table.c:
+	* msg.h:
+		A bit of rearranging and we can reuse an earlier enum.
+
+2007-12-30  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* message-table.c:
+	* msg.{c,h}:
+	* po.{c,h}:
+	* window.c:
+		Add the ability to sort by either message position or status.
+
+2007-12-30  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* messages-table.c: Remove unnecessary variables.
+
+2007-12-30  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* messages-table.c: Add icon column (using gtk+ stock icons for now) and
+		remove status colors.
+
+2007-12-30  Djihed Afifi  <djihed@gmail.com>
+
+	* dialogs/preferences-dialog.c: Fix sidepane position for RTL languages.
+	* messages-table.c: Left align translated column for all lang
+	directions.
+
+2007-12-29  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* messages-table.c: Proper column sizing for original and translated text.
+
+2007-12-29  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	*msg.h, msg.c:
+	Added functions gtranslator_msg_get_filename 
+	and gtranslator_msg_get_file_line by Ignacio Casal Quinteiro
+
+2007-12-29  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	*dialogs/header-dialog.c:
+	Added signals and callback functions in order to edit the values in
+	header dialog.
+
+2007-12-29  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	*dialogs/header-dialog.c:
+	Added function gtranslator_header_dialog_fill_from_header.
+	Now header dialog shows the values.
+	*window.h, window.c:
+	Added function gtranslator_window_get_header_from_tab in order to
+	get header object from current tab in window.
+	*header.c:
+	Fixed function gtranslator_header_set_lg_email because of bad implementation.
+
+2007-12-29  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	*dialogs/header-dialog.glade:
+	*dialogs/header-dialog.c: 
+	Merged prj_name and prj_version into prj_id_version.
+	Changed combo_boxes to text_entries.
+	*header.h, header.c, notebook.c:
+	Changed name of atribute and functions project_id_version to prj_id_version.
+	*po.c:
+	Fixed parse function to parse comments and charset correctly.
+	
+				      
+2007-12-26  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* dialogs/header-dialog.glade:
+	* actions-help.c:
+	* main.c:
+	* window.c:
+		Various string fixes.
+
+2007-12-26  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* tab.c:
+	* window.c:
+		Remove translation status area and add entry to status bar, by Ignacio
+		Casal Quinteiro.
+
+2007-12-26  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* alternatelanguage/alternate-language-panel.c: Minor fix.
+	* dialogs/header-dialog.c: Remove unneeded header.
+	* application.c: Remove unnecessary warnings.
+	* notebook.c: Correct tab style.
+	* po.c: Remove unnecessary return.
+	* window.c: Fill some blank strings and remove unnecessary warning.
+
+2007-12-25  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* tab.c: Don't show notebook borders if we have no tabs.
+
+2007-12-25  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* dialogs/comment-dialog.c:
+	* comment.{c,h}:
+	* prefs-manager-app.{c,h}:
+	* tab.c:
+		Move comment display into content area, by Ignacio Casal Quinteiro.
+
+2007-12-24  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* po.c: Fix previous/next fuzzy/untranslated behavior.
+
+2007-12-22  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* actions-help.c: More cleaning.
+
+2007-12-22  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* dialogs/comment-dialog.c:
+	* dialogs/header-dialog.c:
+	* dialogs/preferences-dialog.{c,glade}:
+	* toolbareditor/egg-editable-toolbar.c:
+	* actions-help.c:
+	* window.c:
+		Cleanup strings.
+
+2007-12-22  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* header.{c,h}:
+	* notebook.c:
+	* po.{c,h}:
+		Set tab name when opening file.
+
+2007-12-22  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* header_stuff.h: Remove redefine.
+
+2007-12-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/preferences-dialog.c/glade:
+	* prefs-manager.ch:
+	* window.c:
+	Now you can choose if you want the side panel in the right
+	or in the left. (Fixes bug #502917)
+
+2007-12-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: Added a few key bindings following hig book.
+
+2007-12-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* po.h: Removed useless comment.
+	* actions-edit.c: Added user-action func in undo and redo funcs.
+	* Makefile.am: Removed header_dialog.glade.
+
+2007-12-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* alternatelanguage/alternate-language-panel.c:
+	Fixed search. Now compares with utf8 support.
+
+	* actions-file.c:
+	* tab.c:
+	* window.c:
+	* po.c:
+	* msg.c:
+	Now the message status is stored indiviually so
+	now is not neccessary parse all the list to get
+	the global status.
+
+2007-12-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* alternatelanguage/*
+	Added this plugin. I now the interface need more work
+	but it is working, i think perfect.
+	* window.c: Added alternatelanguage plugin.
+	* actions-file.c: Added g_free call.
+	* Makfile.am: Added alternatelanguage lib.
+	* po.c: Added comment.
+
+2007-12-19  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* header-dialog.c, header-dialog.glade:
+	Adapted header dialog to Gnome Human Interface Guidelines.
+	* window.c: Added callback gtranslator_actions_edit_header 
+	to Edit menu.
+
+2007-12-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-file.c:
+	* window.c:
+	Added dialogs to show the errors.
+	* tab.c: Removed unneccessary comment.
+
+2007-12-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* message-table.c: 
+	Now is listening the message-changed signal to change 
+	the colors and the message.
+	* tab.c: Removed call to update row func of message table.
+
+2007-12-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/comment-dialog.glade:
+	* dialogs/bookmarks-dialog.glade:
+	Removed some strings marked as translatables.(Ex. gtk-close).
+
+	* tab.c: Added comment.
+	* actions-edit: Added message-changed singal emitting
+	in copy_to_translation func.
+
+2007-12-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* po.ch:
+	* window.c:
+	* actions-file.c:
+	Improved po_parser func. Now it sets the error
+	and now the errors are managed well.
+
+2007-12-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/comment-dialog.glade:
+	* dialogs/comment-dialog.c: 
+	Added shadow and a label to the dialog.
+
+2007-12-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* comment: Removed comment folder.
+
+2007-12-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/comment-dialog.ch:
+	* dialogs/comment-dialog.glade:
+	* dialogs/Makefile.am:
+	Added dialog to edit message comments.
+
+	* actions.h:
+	* actions-edit.c: 
+	Added dialog comment dialog call.
+	
+	* tab.ch: Added comment panel get function for comment panel.
+	* window.c: Added comment dialog call.
+	* msg.ch: Added msg_set_comment function.
+	* Makefile.am: Removed comment library.
+
+2007-12-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/bookmarks-dialog.glade: Added bookmarks dialog.
+
+2007-12-16  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-search.c:
+	* actions-file.c:
+	* actions-edit.c:
+	* tab.c:
+	gtranslator_tab_show_message is a private method now, so
+	we have to use gtranslator_tab_message_go_to instead.
+
+	window.c: Fixed problem with statusbar. Now it shows
+	the status of the message.
+	* statusbar.ch: Fixed some isuess the overwrite mode.
+	Now works fine. (Fixes bug #498834).
+
+2007-12-15  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* statusbar.c: Commit for help.
+
+2007-12-15  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* tab.ch: status_widgets have to be updated when the message
+	is showed too.
+	Fixed showed-message signal bug and now emits the showed message
+	too.
+	* message-table.c
+	* comment/comment.c:
+	  Changed showed-message func to the new specification.
+
+2007-12-14  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* message-table.c:
+	* window.c:
+	* comment/comment-panel.c:
+		Clarify and HIGify text.
+
+2007-12-13  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* Makefile.am:
+	* messagestable/:
+	* message-table.{ch}:
+	* msg.{ch}:
+	* tab.c:
+	* window.c:
+		Merge message table into main code and update upon msgstr
+		change.
+
+2007-12-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* action-edit.c: Added message_changed emission.
+	* tab.ch: Added message_changed signal.
+	* window.c: Added message_changed signal to update statusbar.
+
+2007-12-10  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* prefs-manager-app.c:
+	* tab.c:
+		General cleanup.
+
+2007-12-10  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* tab.c: Remove unnecessary element.
+
+2007-12-09  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* prefs-manager-app.c:
+	* tab.c:
+		Allow persistent message table size.
+
+2007-12-09  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* charmap/charmap.c: Make sure the panel is a GObject before we try to
+		unreference it.
+
+2007-12-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* statusbar.ch: Added to manage statusbar funcs.
+	* Makefile.am: Added statusbar.ch.
+	* po.c: Removed free of iterator.
+	* actions-file:
+	* actions-go:
+	  Commented _window_update_statusbar func.
+	* window.c: Added statusbar widget.
+	Now statusbar shows if INS or OVR is set.
+
+2007-12-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: Removed scheme colors menu entry.
+
+2007-12-09  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* prefs-manager.h: Correct macro name.
+
+2007-12-09  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* Makefile.am:
+	* actions.h:
+	* actions-view.c:
+	* prefs-manager.{ch}:
+	* application.c:
+	* window.c:
+		Add persistent side pane visibility and corresponding menu item.
+
+2007-12-08  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* prefs-manager.h: Fix gconf key paths.
+
+2007-12-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* po.c: Added some warnings on gtranslator_po_parse func.
+
+2007-12-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-search.c: I think the search engine is working.
+	It search with any flag you want and it replaces perfect
+	one occurrence or all occurrences in the messages list.
+
+2007-12-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* view.h: Fixed indentation.
+	* po.c: Added string.h dependencie.
+	* prefs-manager-app.c: Changed default window size and changed
+	 config place to .config instead of deprecated .gnome2
+	* application.c: Fixed size problem when the window is closed maximized.
+	* view.c:
+	* draw-spaces.c:
+	* charmap/charmap.c:
+	* charmap/charmap-panel.c:
+	* utils_gui.c: 
+	* actions_search.c:
+	* io-error-message-area.c:
+	  Fixed license problems.
+
+2007-12-04  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	*po.c: Fixed problem to parse header.
+
+2007-12-04  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	*header-dialog.h, header_dialog.c: Added GtranslatorHeaderDialog class.
+	*window.c: Added Callback for edit header.
+	*actions.h, actions-edit.c: Added action for edit header.
+	*prefs-manager.h, prefs-manager.c: Added button "take my options" into gconf.
+
+2007-12-03  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* header.c, header.h: Added Files in order to implement
+	GtranslatorHeader class to use instead of GtrHeader structure.
+	* po.c: Added parse header's fields into GtranslatorHeader.
+
+2007-12-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialog/preferences-dialog.glade: Removed some strings
+	marked as translatables. (e.g. "gtk-help")
+
+2007-12-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-help.c: Removed show_home_page func.
+	Now home page is stored in about dialog.
+	* window.c: Removed website menuitem.
+
+2007-12-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils.ch: Removed unneccessary funcs.
+	* actions-search.c: Now it remembers lastest options.
+	* utils_gui.ch: Removed unneccsary funcs and dependencies.
+	* actions-file.c: Removed runtime-config dependencie.
+	* runtime-config.ch: Removed.
+	* save.ch: Removed.
+	* main.c: Cleaned and fixed locale problems.
+	* Makefile.am: Removed header_stuff.h, runtime-config.ch
+	and save.ch files.
+
+2007-12-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* vfs-handler.ch:
+	* Makefile.am:
+	* main.c:
+	  Removed gnome-vfs because it will be deprecated in
+	next glib major release in favor of gio.
+	* utils-gui.ch: Is needed to port this to gio.
+	* dialogs/search-dialog.c: Added default values.
+
+2007-12-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions.search.c:
+	  Fixed problem in find.
+
+2007-12-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-search.c:
+	* view.ch:
+	  Moved get_selected_text func to view.c as gtranslator_view_get_selected_text.
+	* prefs-manager.h: Unmark fuzzy is now true by default.
+	* tab.c: Now detects if unmark fuzzy option is true or false.
+
+2007-12-02  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* dialogs/preferences-dialog.c:
+	* dialogs/preferences-dialog.glade:
+	* prefs-manager.c:
+	* prefs-manager.h:
+	* prefs-manager-app.c:
+	* tab.c:
+	* view.c:
+		Rewrite preferences dialog for ease of navigation and increased HIG
+		compliance/consistency with other GNOME apps.
+
+2007-11-30  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs:
+		search-dialog.ch:
+		search-dialog.glade: Added fuzzy checkbutton.
+	* actions-search.c: Search is now more or less working,
+	now you can check if you want to search in original, translated
+	and fuzzy messages.
+	* application.ch:
+	* tab.ch:
+	* window.ch: 
+		Now in get_all_views funcs you can decide if you 
+	want original, tranlated or both views.
+	* prefs-manager-app.c: Addapted to new get_views func specification.
+
+2007-11-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/search-dialog.c: Fixed some errors.
+	* dialogs/search-dialog.glade: Fixed some name variables.
+	* utils_gui.ch: Added g_utf8_caselessmatch func to normalize.
+	* window.c: Added calls to replace and find funcs in menus.
+	* view.c: Added funcs to manage the search in views.
+	* tab.c: Added po_check_po_file func.
+	* view.h: Added search macros.
+	* Makefile.am: Added actions-search.c
+	* actions-search.c: Added to manage the search.
+
+2007-11-23  Cosimo Cecchi  <cosimoc@svn.gnome.org>
+
+	* Makefile.am: Fix glib-genmarshal.
+
+2007-11-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gtranslator-marshal.list: Added to create custom closures.
+	* Makefile.am: Added glib-genmarshal.
+
+2007-11-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs.ch:
+	* replace.ch:
+	* find.ch:
+	  Removed. They aren't neccessary.
+
+2007-11-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs:
+		* search-dialog.ch: Added search dialog.
+		* Makefile.am: Added search-dialog.ch.
+	* utils_gui.ch: Added escape_search_text and unescape_search_text
+	funcs.
+
+2007-11-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* update-history-entry.sh: Now is update-from-gedit.sh
+	 Now updates: message-area, history-entry and panel.
+	* Makefile.am: Added history-entry.ch.
+	* dialogs/Makefile.am: Changed preferences.glade to preferences-dialog.glade
+
+2007-11-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* history-entry.ch: Added from gedit repository.
+	* update-history-entry.sh: Added to update history entry widget.
+	* window.c: Added string.
+
+2007-11-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/preferences-dialog.c:
+	* dialogs/preferences.glade:
+	  Changed the name to preferences-dialog.glade
+	* dialogs/search-dialog.glade: Added search dialog.
+	* window.c: Added Bookmarks menu.
+
+2007-11-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable/messages-table-panel.c:
+	  Now messages table wraps the text.
+	* dialogs/preferences-dialog.c: Removed PIXMAPSDIR define.
+	* dialogs/Makefile.am: Added PIXMAPSDIR variable.
+	* tab.c: Removed useless func.
+
+2007-11-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* comment/comment.ch: Added to manage the comment plugin.
+	* comment/Makefile.am: Added comment.ch.
+	* msg.h: Added get_extracted_comments func.
+	* window.c: Added call to comment_activate func.
+
+2007-11-16  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* prefs-manager-app.c: Added listener for dot char option.
+	* tab.c: Removed draw-spaces.h dependencie. Now is a dependencie
+	of view.c.
+	 Now the position of the panel is 200.
+	* view.ch: Added draw-spaces dependencie. Added enable_dot_char
+	func to manage draw-spaces.
+
+2007-11-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable/messages-table-panel.c:
+	Fixed scroll problem (Fixes bug #494911).
+
+2007-11-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* glossary-panel.ch: Moved to glossary folder.
+	* Makefile.am: Fixed an error with comment lib.
+
+2007-11-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* comment-panel.ch: Moved to comment folder.
+	* alternate-language.ch: Moved to alternatelanguage folder.
+	* Makefile.am: Removed comment-panel.ch.
+	* tab.c: Removed comment-panel.h dependencie.
+
+2007-11-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable/messages-table-panel.c:
+	  If the message is already showed then is not neccessary
+	  show it again.
+	* prefs-manager.h: Added number_plurals funcs.
+	* tab.c: Added plural forms support and added comments.
+	* msg.c: Fixed a bug in msg_check func that makes
+	gtranslator crash if xerror2 is not setted.
+
+2007-11-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* parse.ch: Removed.
+	* po.c:
+	* tab.c: 
+	* actions-file.c
+		 Added people to license.
+	* toolbareditor: Sync from egg svn repository.
+	* message-area.c: Sync from gedit svn repository.
+	* message-area.h: 
+	* io-error-message-area.c: Changed GTRANSLATOR to GTR.
+
+2007-11-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable:
+		* messages-table-panel.c: Now if a new messages is showed
+		the messages table select that message row.
+
+2007-11-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable:
+		* messages-table-panel.c: Now is showed the 
+		messages selected in the messages table.
+		Added application dependencie to get the active window.
+		* Makefile.am: Added reference to toolbareditor.
+	* actions-go.c: 
+	* tab.c: Changed the name of gtranslator_message_go_to func
+	to gtranslator_tab_message_go_to.
+	* application.ch: Added get_active_window func.
+
+2007-11-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable/messages-table-panel.c: Switched to
+	GtkListStore instead of GtkTreeStore.
+
+2007-11-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable/Makefile.am: I forgot it.
+
+2007-11-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagestable/messages-table-panel.ch: Now this is used
+	to create the widget.
+	* messagestable/messages-table.ch: Used to implement
+	func activate.
+	* tab.c: Added get panel func.
+	* window.c: Added call to messages_table_activate func.
+
+2007-11-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messagetable: Now messages-table.ch are ubicated here,
+	becouse i'll start with the conversion of this code to
+	a standalone plugin like charmap.
+	* tab.c: Added showed-message signal and removed 
+	calls to messages-table funcs.
+
+2007-11-04  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messages-table.c: Added ID column.
+
+2007-11-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messages-table.c:
+	* tab.c: 
+	Some string fixes.
+
+2007-11-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* messages-table.ch: Ported to GObject.
+	There are some missing features like update a message when
+	is changed.
+	* tab.c: Added messages-table widget to the panel.
+
+2007-11-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils_gui.ch: Removed useless funcs and added some funcs
+	to manage uris.
+	* actions-file.c: Added funcs to manage uris in drag 'n drop.
+	* window.c: Added drag n' drop support.
+	* dnd.ch: Removed. is not neccessary anymore.
+	* Makefile.am: Removed dnd.h.
+
+2007-11-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils_gui.h: Removed stylistics.h dependencie.
+	* color-schemes.ch:
+	* stylistics.ch:
+	* Makefile.am:
+	 Removed. It isn't neccessary anymore.
+
+2007-11-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* prefs-manager-app.c: Added listener for syntax highlight.
+	* view.c: Now sets the highlight according to preferences.
+
+2007-11-01  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: Fixed bug in get_all_views func that makes 
+	program crash if there aren't tabs loaded.
+
+2007-10-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* prefs-manager-app.c: Added listener for instant spellchecking.
+	* application, window, tab: get_all_views funcs now have a boolean
+	to choose if you want original textviews too.
+	Added comments.
+	* view.c: Added comments and removed useless comments.
+
+2007-10-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/preferences.glade: Removed color edition.
+
+2007-10-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* prefs-manager.h: Added GPM_FONT_DIR to store font configuration
+	in gconf.
+	* prefs-manager-app.c: Added listener for fonts changes.
+	Added func to manage font changes.
+	* application.ch: Added application_get_views to return a list
+	of all views in the application.
+	* tab.ch: Added get_all_views func to get a list with all views
+	in a tab.
+	* window.ch: Added get_all_views to get a list with all views in
+	a window.
+	* view.ch: Added change fonts calls in init func.
+	Added set font func.
+
+2007-10-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: gTranslator now remembers sidebar position.
+
+2007-10-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-file.c: Fixed some things in quit func.
+	* prefs-manager.h: Added glib dependencie.
+	* application.c: Now destroy the program when all windows
+	are closed. And added window size and state when a new window
+	is created.
+	* window.c: Added save_panes_state func to store window size,
+	panel size and window state.
+	Added destroy event. When a window is destroyed the size should
+	be saved. Added configure event to store width and height values.
+	* main.c: Now main func call to gtranslator_prefs_manager_app_init func
+	instead of gtranslator_prefs_manager_init and calls 
+	_prefs_manager_app_shutdown when gtk_main loop is finished to store
+	the state window preferences.
+	* Makefile.am: Added prefs-manager-app.ch.
+	* prefs-manager-app.ch: Added to manage the preferences in the window.
+	If something is changed in the preferences dialog window should change.
+
+2007-10-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* about.ch: Removed.
+	* actions-help.c: Following new specifications.
+	Now this have about and show home page funcs.
+	Missing help func.
+	* window.c: Removed home page func.
+	* actions.h: Added about and home page funcs.
+	* Makefile.am: Added actions-help.c and removed about.ch files.
+
+2007-10-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* preferences.ch: Removed.
+	* runtime-config.c: 
+	* dialogs/file-dialogs.c:
+		Removed preferences.c dependencie.
+
+2007-10-14  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* view.c: Becouse of a gsv 2 bug i need to manage
+	the dirs with a gchar **. Syntax highlight is now 
+	perfectly working.
+
+2007-10-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* Makefile.am: Removed dictionary plugin.
+
+2007-10-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils.c:
+	* translator.c:
+	* utils_gui.c:
+	* tab.c:
+	* window.c:
+	Removed old prefs system.
+
+	* view.c: Switched to gtksourceview2
+	* dictionary: It is not added becouse in debian there aren't the
+	right packages to install it.
+
+2007-10-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils.c:
+	* translator.c:
+	* dialogs/file-dialogs.c:
+	* actions-file.c:
+	* application.c: Commented old config funcs calls.
+	* actions.h:
+	* actions-edit.c: Added gtranslator_actions_edit_preferences
+	to call the preferences dialog.
+	* dialogs/preferences-dialog.c: Now works but is neccessary
+	add more configurable things.
+	* dialogs/preferences-dialog.h: _show_preferences_dialog is now
+	a void func.
+	* dialogs/Makefile.am: Added DATADIR constant and preferences-dialog.ch
+	files.
+	* dialogs/preferences.glade: Added and removed some things.
+	* utils_gui.ch: Added gtranslator_utils_get_glade_widgets func
+	that i copied from gedit code.
+	* prefs-manager.c: Added lots of defines for configuration funcs.
+	* prefs-manager.h: Added lots of defines for prefs-manager funcs.
+	* main.c: Added new preferences manager.
+	* Makefile.am: Added new preferences manager and removed old manager.
+
+2007-10-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/preferences-dialog.c: Updated.
+
+2007-10-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/preferences-dialog.ch: Remade the preferences dialog.
+	* prefs-manager.ch:
+	* prefs-manager-private.h: Added new preferences system to 
+	manage all configuration stuff.
+	This files will replace prefs.ch, preferences.ch and prefs_init.c
+	files.
+
+2007-09-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils.c:
+	* utils-gui.c:
+	* prefs.c: Removed gui.h dependency.
+	* view.c: Improved spellcheck support.
+
+2007-09-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gui.ch: Removed.
+
+2007-09-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* tab.c:
+	* view.ch: Improved spellcheck support.
+
+2007-09-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* about.c: Fixed spaces in license.
+
+2007-09-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/toolbareditor/egg-toolbar-editor.c:
+	* src/toolbareditor/egg-editable-toolbar.c:
+	  Updated from svn server.
+
+2007-09-10  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: Now if you try to add char from charmap panel
+	and if there aren't any file opened the program don't crashes.
+
+2007-09-10  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	Path by Sean de Búrca:
+	* dialogs/Makefile.am: Added preferences.glade.
+	* prefs.c: Changed glade definition.
+	* application.c: Fixed bug in toolbar path.
+
+2007-09-10  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dialogs/preferences.glade: Moved becouse dialogs should be
+	there, so missing move preferences dialog to dialogs folder.
+	* Makefile.am: Removed preferences.glade.
+
+2007-09-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* application.c: Addded DATADIR patch to search for gtr-toolbar.xml
+
+2007-09-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* tab.c: Status widgets works fine but it is an ugly
+	implementation.
+	* actions-edit.c: If the fuzzy menuitem is clicked
+	now emits a changed signal (Really ugly).
+
+2007-09-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* msg.h: Added gtranslator_msg_set_fuzzy func.
+	* tab.c: Now if a message change and it was fuzzy
+	now the status change to translate or untranslate.
+
+2007-09-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* prefs.c: Removed messages-table.h dependencie.
+	* dictionary/dict-panel.ch:
+	* dictionary/dictionary.c: Now dictionary stores the
+	paned position.
+	* view.c: Added gtkspellcheck support (This is experimental)
+	if you want use it you should undef gtkspell and add gtkspellcheck
+	to configure.in.
+
+2007-09-07  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* message-area.c: Fixed some bugs and added style
+	properties. You can see bug #467623 and #474334.
+
+2007-09-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dict-panel: Added link text support.
+
+2007-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* undo.ch: Removed.
+
+2007-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* message.ch: Removed.
+
+2007-09-01  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* comment.ch: Removed.
+
+2007-08-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* tab.c, view.c: Moved gtkspell support from tab.c to view.c.
+	* message-area.c: Finally working perfect.
+
+2007-08-30  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* message-area.c: Improved message-area widget.
+
+2007-08-30  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* po.c, msg.ch: Improved gtranslator_msg_check func.
+
+2007-08-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-file.c: Added call to set_sensitive_according_to_window func.
+	* window.c: Added set_sensitive_according_to_window, 
+	can_undo, can_redo, notebook_tab_added funcs and connected page-added
+	signal.
+	* po.c: Using simple if instead of g_return_val_if_fail.
+
+2007-08-28  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gtranslator-ui.xml: Added find previous item.
+	* actions-go.c: Added call to set_sensitive_according_to_message func.
+	* window.c: Added find previous item.
+	Added set_sensitive_according_to_message func.
+	* po.c: Fixed gtranslator_po_get_untranslated_count func.
+
+2007-08-28  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* action.h, actions-edit.c: Added copy, paste, cut, 
+	undo and redo funcs.
+	* view.ch: Added copy, paste and cut funcs to manage 
+	clipboard.
+	* window.c: Added calls to copy, paste, cut, undo and
+	redo funcs.
+
+2007-08-27  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: Subdivied ui into always_sensitive_entries
+	and entries.
+	Now accel keys works fine.
+	Added call to deactivate panel funcs.
+
+2007-08-27  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* dictionary/dict-panel.c: Removed gtranslator_show_message func.
+	* dictionary/dictionary.ch: Added activate and deactivate funcs.
+	* dictionary/Makefile.am: Added dictionary.ch files.
+	* window.c: Added dictionary panel.
+	* Makefile.am: Added dictionary dependencie.
+
+2007-08-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-file.c: Added gtranslator_file_quit func.
+	* application.c: Added delete_event signal.
+	* window.c: Added call to gtranslator_file_quit.
+	* draw-spaces.c: Changed the color.
+	* view.c: Commented highlight_current_line func.
+
+2007-08-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-file.c:
+	* actions-go.c: Added calls to update statusbar and progress bar.
+	* dialogs.c: Applied Pablo's patch.
+	* tab.c: Switched to g_signal_connect_after in status_widget func. (Now work)
+	* window.ch: Added statusbar update.
+	* po.c: Now parse don't load obsolete messages, and added get funcs for message count.
+
+2007-08-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* charmap/charmap-panel.c: Switched to block-chapters.
+	* window.c: Added set_sensitive_according_to_tab func and
+	  notebook_switch_page to manage the switch-page signal.
+
+2007-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* prefs.c: Removed some useless comments.
+	* charmap/charmap.c: Now gets the active view.
+	* tab.c: Added gtranslator_tab_get_active_view func and
+	  removed some useless comments.
+	* window.c: Added charmap panel and window_get_active view func.
+	* msg.c: Added comments.
+	* Makefile.am: Added charmap.
+
+2007-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* io-error-message-area.ch: Added to create the message area dialogs.
+	* comment-panel.c: Now shows the comments.
+	* tab.c: Added plural forms support.
+	  Now shows an error message if there are errors in the message
+	  before go to another message.
+	* view.c: Added line highlight.
+	* msg.ch: Added msg_get_msgstr_plural, msg_get_comment,
+	  msg_get_extracted_comments and msg_check funcs.
+	* message-area.c: Switched to GtkTooltip.
+
+2007-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* comment-panel.ch: Added to manage the comment in tabs.
+	* utils.c, 
+	* translator.c: Changed indentation rules.
+	* actions.h: Added gtranslator_save_current_file_dialog func.
+	* nautilus-string.ch: Removed nautilus_str_has_prefix,
+	  nautilus_str_has_suffix, nautilus_istr_has_prefix and
+	  nautilus_istr_has_suffix funcs.
+	* actions-file.c: Added gtranslator_save_file func and
+	  gtranslator_save_current_file_dialog.
+	* prefs.c: Removed "page.c" dependencie.
+	* save.c: Ported the funcs to the new api.
+	* alternate-language.c: Added activate and deactivate funcs.
+	* application.c: Now session funcs are here.
+	* bookmark.c: Added indentation rules.
+	* tab.c: Added horizontal panel and added in the comment-panel.
+	* window.c: Added call to save file.
+	* main.c: Removed session funcs.
+	* Makefile.am: Added save.ch ,comment-panel.ch  and removed session.h
+	  and main_window.glade files
+
+2007-08-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* session.ch: Removed.
+
+2007-08-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions.c:
+	* main_window.glade:
+	* menus.ch:
+	* page.ch: Removed, is not neccessary anymore.
+
+2007-08-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* about.c: Added me and switched to GPL v3.
+	* gtranslator-ui.xml: Added search menu.
+	* actions-edit.c: Added message_copy_to_translation func.
+	* compile.c: Modified to work in new gtranslator.
+	* tab.c: Added status_widgets callback func.
+	* window.c: Modified menubar.
+	* gtr-toolbar.xml: Added actions.
+	* msg.ch: Added msg_set_msgstr_plural func.
+
+2007-08-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-go.c:
+	* actions-edit.c: Added to manage go and edit menu actions.
+	* notebook.c: Switched to GtkTooltip.
+	* tab: Added gtk spell and added message show support, and
+	goto message func.
+	* window.c: Added call to menu funcs.
+	* po.ch: Added set and gets funcs.
+	* msg.ch: Added set and get funcs.
+	* Makefile.am: Added actions-go.c and actions-edit.c
+
+2007-08-15  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* panel.c: Is now using GtkTooltip instead of deprecated
+	  GtkTooltips. (Now is required gtk+ >= 2.11.6)
+	* window.c: Modified recent files implementation.
+
+2007-08-15  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions.h, actions-file.c: Added to manage the menu
+	 actions callback funcs.
+	* file-dialogs.ch: Removed some funcs.
+	* tab.c: Improved finalize func.
+	* window.c: Added calls to save_as and close menuitems.
+	* po.c: Improved finalize func.
+
+
+2007-08-14  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* history.ch: Removed from svn repository.
+	* Makefile.am: Removed history.ch
+	* tab.c: Removed gtranslator_tab_set_po func and
+	  gtranslator_tab_set_trans_text func.
+	* window.c: Added gtranslator_open func.
+	* po.c: Added comments, removed gtranslator_open func.
+	* msg.c: Added comments.
+	* Makefile.am: Added actions-file.c and actions.h.
+
+2007-08-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c: Added GtkRecentManager to manage the history.
+	  history.ch is not needed anymore with this.
+
+2007-08-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* alternate-language.ch: Added. This is a panel to manage
+	  an alternative language (Bug #365231). This is not finished yet.
+
+2007-08-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* bookmark.c, compile.c, history.c, colorschemes.ch, session.c
+	  vfs-handle.c, message-table.c, message.ch, parse.ch: 
+		Removed from Makefile.am. 
+	* msg.ch: Added to replace message.ch.
+	* po.ch: Added to replace parse.ch.
+	* window.ch: Added some get and set funcs.
+	* application.c: Added create window func.
+	* main.c, prefs.c: Removed some func calls becouse of missing files.
+
+2007-08-07  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* tab.c: Added status widgets.
+	* window.c: Added stock menuitems and sidebar widget.
+	* panel.ch: Based in gedit sidebar widget.
+	* Makefile.am: Added panel.ch
+
+2007-08-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c, gtranslator-ui.xml: Added Edit toolbar dialog.
+
+2007-08-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gtr-toolbar.xml: This file is neccessary to manage the
+	defaults items in toolbar.
+
+2007-08-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* application.ch: Added to manage general app stuffs
+	something like gui.ch.
+	* Makefile.am: Added application.ch.
+	* window.ch: Modified some little things.
+	* main.c: Added call to gtranslator_application_open_window func.
+
+2007-08-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* Makefile.am: Added toolbareditor things to compile.
+	* window.c: Added toolbar.
+
+2007-08-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* toolbareditor/*: Added egg toolbar editor.
+	* Makefile.am: Added toolbareditor folder.
+	* gtranslator-ui.xml: File related to menubar.
+
+2007-08-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.ch: Window related class. 
+	* notebook.ch: main notebook to manage po files.
+	* tab.ch: Single tab for main notebook.
+	* Makefile.am: Addded window.ch, notebook.ch and tab.ch
+
+###################Initial Rewrite########################
 
 2007-08-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 

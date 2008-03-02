@@ -1,1 +1,1 @@
-SUBDIRS = UMTF
+SUBDIRS = reference UMTF

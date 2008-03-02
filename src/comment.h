@@ -1,110 +1,81 @@
 /*
- * (C) 2001 	Fatih Demir <kabalak@kabalak.net>
- *
- * gtranslator is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or   
- *    (at your option) any later version.
- *    
- * gtranslator is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
- *    GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
+ * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ * 
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * 
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#ifndef GTR_COMMENT_H
-#define GTR_COMMENT_H 1
+
+#ifndef __COMMENT_PANEL_H__
+#define __COMMENT_PANEL_H__
 
 #include <glib.h>
+#include <glib-object.h>
+#include <gtk/gtk.h>
+
+G_BEGIN_DECLS
 
 /*
- * The supported comment types.
+ * Type checking and casting macros
  */
-typedef enum
-{
-	OBSOLETE		= 0,
-	REFERENCE_COMMENT	= (1 << 0),
-	SOURCE_COMMENT		= (1 << 1),
-	TRANSLATOR_COMMENT	= (1 << 2),
-	FLAG_COMMENT		= (1 << 3),
-	FUZZY_COMMENT		= (1 << 4),
-	FUZZY_C_FORMAT_COMMENT	= (1 << 5),
-	C_FORMAT_COMMENT	= (1 << 6),
-	INTERNAL_COMMENT	= (1 << 7),
-	NO_COMMENT		= (1 << 8)
-} GtrCommentType;
+#define GTR_TYPE_COMMENT_PANEL		(gtranslator_comment_panel_get_type ())
+#define GTR_COMMENT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_COMMENT_PANEL, GtranslatorCommentPanel))
+#define GTR_COMMENT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_COMMENT_PANEL, GtranslatorCommentPanelClass))
+#define GTR_IS_COMMENT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_COMMENT_PANEL))
+#define GTR_IS_COMMENT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_COMMENT_PANEL))
+#define GTR_COMMENT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_COMMENT_PANEL, GtranslatorCommentPanelClass))
+
+/* Private structure type */
+typedef struct _GtranslatorCommentPanelPrivate	GtranslatorCommentPanelPrivate;
 
 /*
- * The new comment structure -- the home for all kinds of comments.
+ * Main object structure
  */
-typedef struct
-{
-	gchar		*comment;
-#ifdef UTF8_COMMENT
-	gchar		*utf8_comment;
-#endif
+typedef struct _GtranslatorCommentPanel		GtranslatorCommentPanel;
 
-	gchar		*pure_comment;
-#ifdef UTF8_COMMENT
-	gchar		*pure_utf8_comment;
-#endif
+struct _GtranslatorCommentPanel
+{
+	GtkVBox parent_instance;
 	
-	GtrCommentType	type;
-} GtrComment;
-
-#define GTR_COMMENT(x) ((GtrComment *) x)
-#define GTR_COMMENT_TYPE(x) (GTR_COMMENT(x)->type)
+	/*< private > */
+	GtranslatorCommentPanelPrivate *priv;
+};
 
 /*
- * Creates and returns a new GtrComment -- the comment type is automatically
- *  determined from the comment_string.
+ * Class definition
  */
-GtrComment *gtranslator_comment_new(const gchar *comment_string);
+typedef struct _GtranslatorCommentPanelClass	GtranslatorCommentPanelClass;
+
+struct _GtranslatorCommentPanelClass
+{
+	GtkVBoxClass parent_class;
+};
 
 /*
- * Append another comment string to the given GtrComment.
+ * Public methods
  */
-void gtranslator_comment_append(GtrComment **comment, const gchar *comment_string);
+GType		 gtranslator_comment_panel_get_type	   (void) G_GNUC_CONST;
 
-/*
- * Assign the given full_comment (which must be a full comment string _with_ 
- *  prefix) to the comment and update the comment informations/fields.
- */
-void gtranslator_comment_update(GtrComment **comment, const gchar *full_comment);
+GType		 gtranslator_comment_panel_register_type   (GTypeModule * module);
 
-/*
- * Check if the given string is contained in any comment field of the GtrComment.
- */
-gboolean gtranslator_comment_search(GtrComment *comment, const gchar *search_string);
+GtkWidget	*gtranslator_comment_panel_new	           (GtkWidget *tab);
 
-/*
- * Copy the given GtrComment; NULL parts are also set to NULL for the copy.
- */
-GtrComment *gtranslator_comment_copy(GtrComment *comment); 
+void             gtranslator_comment_panel_set_comments    (GtranslatorCommentPanel *panel,
+							    const gchar *comments);
 
-/*
- * Return a savely copy of the comment contents by itself.
- */
-gchar *gtranslator_comment_get_comment_contents(GtrComment *comment);
+void             gtranslator_comment_panel_set_extracted_comments
+							   (GtranslatorCommentPanel *panel,
+						            const gchar *extracted_comments);
 
-/*
- * Free the GtrComment.
- */
-void gtranslator_comment_free(GtrComment **comment); 
+G_END_DECLS
 
-/*
- * Display the current comment in it's full beautifulness .-)
- */
-void gtranslator_comment_display(GtrComment *comment); 
-
-/*
- * Clears/hides the comment viewing (area).
- */
-void gtranslator_comment_hide(void);
-
-#endif
+#endif /* __COMMENT_PANEL_H__ */

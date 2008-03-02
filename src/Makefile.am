@@ -2,20 +2,29 @@
 # Welcome to the gtranslator-automake-autoconf Wonderland!
 # --------------------------------------------------------
 
+SUBDIRS = toolbareditor \
+	  dialogs \
+	  plugin-system
+
+noinst_LTLIBRARIES = libgtranslator.la
+
 INCLUDES = \
 	-I$(top_srcdir)						\
 	-I$(includedir)						\
+	-I$(top_srcdir)/src/dialogs				\
+	-I$(top_srcdir)/src/toolbareditor			\
+	-I$(top_srcdir)/src/plugin-system			\
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
-        -DPREFIX=\""$(prefix)"\"                                \
-        -DSYSCONFDIR=\""$(sysconfdir)"\"                        \
-        -DDATADIR=\""$(datadir)"\"                              \
-        -DLIBDIR=\""$(libdir)"\"                                \
+	-DPREFIX=\""$(prefix)"\"                                \
+	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
+	-DDATADIR=\""$(pkgdatadir)"\"                              \
+	-DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
 	$(GTKSPELL_CFLAGS)                                      \
+	$(SPELLCHECK_CFLAGS)					\
 	$(DEPRECATED_FLAGS)                                     \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"                         \
-	-DSCHEMESDIR=\""$(datadir)"/gtranslator/colorschemes\"	\
-	-DSCRIPTSDIR=\""$(datadir)"/gtranslator/scripts\"	\
+	-DSCRIPTSDIR=\""$(pkgdatadir)"/scripts\"	\
 	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"
 
 bin_PROGRAMS = \
@@ -24,58 +33,82 @@ bin_PROGRAMS = \
 #	gtranslator-auto-learn \
 #	gtranslator-export-learn-buffer
 
-gtranslator_SOURCES = \
-	about.c about.h \
-	actions.c actions.h \
-	bookmark.c bookmark.h \
-	charmap-panel.c charmap-panel.h \
-	color-schemes.c color-schemes.h \
-	comment.c comment.h \
-	compile.c compile.h \
-	dialogs.c dialogs.h \
-	dictionary.c dictionary.h \
-	dict-panel.c dict-panel.h \
-	dnd.c dnd.h \
+gtranslator_SOURCES = main.c
+
+gtranslator_LDADD = libgtranslator.la $(GTRANSLATOR_LIBS) $(GTKSPELL_LIBS) $(INTLLIBS)
+
+gtranslator_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
+
+libgtranslator_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
+
+BUILT_SOURCES =                         \
+        gtranslator-marshal.h  \
+        gtranslator-marshal.c	\
+	gtranslator-enum-types.h \
+	gtranslator-enum-types.c
+
+INST_H_FILES =				\
+	application.h \
+	comment.h \
+	header.h \
+	io-error-message-area.h \
+	message-area.h \
+	message-table.h \
+	msg.h \
+	notebook.h \
+	po.h \
+	statusbar.h \
+	tab.h \
+	utils_gui.h \
+	view.h \
+	window.h
+
+headerdir = $(prefix)/include/gtranslator-@GTR_API_VERSION@/gtranslator
+
+header_DATA = \
+	$(INST_H_FILES)
+
+libgtranslator_la_SOURCES = \
+	$(BUILT_SOURCES) \
+	application.c \
 	draw-spaces.c draw-spaces.h \
-	find.c find.h \
-	gdict-sidebar.c gdict-sidebar.h \
-	glossary-panel.c glossary-panel.h \
-	gucharmap.c gucharmap.h \
-	gui.c gui.h \
-	header_stuff.c header_stuff.h \
-	history.c history.h \
-	languages.c languages.h \
-	learn.c learn.h \
-	main.c \
-	menus.c menus.h \
-	message.c message.h \
-	message-area.c message-area.h \
-	messages-table.c messages-table.h \
-	nautilus-string.c nautilus-string.h \
-	parse.c parse.h \
-	page.c page.h \
-	preferences.c preferences.h \
-	prefs.c prefs_init.c prefs.h \
-	replace.c replace.h \
-	runtime-config.c runtime-config.h \
-	session.c session.h \
-	sighandling.c sighandling.h \
-	stylistics.c stylistics.h \
-	translator.c translator.h \
-	undo.c undo.h \
-	utils.c utils.h \
-	utils_gui.c utils_gui.h \
-	vfs-handle.c vfs-handle.h \
-	view.c view.h
+	message-area.c \
+	message-table.c \
+	message-table-model.c \
+	message-table-model.h \
+	notebook.c \
+	tab.c \
+	view.c \
+	window.c \
+	po.c \
+	utils_gui.c \
+	msg.c \
+	actions.h \
+	actions-file.c \
+	actions-go.c \
+	actions-edit.c \
+	actions-view.c \
+	actions-help.c \
+	io-error-message-area.c \
+	prefs-manager.c \
+	prefs-manager.h \
+	prefs-manager-private.h \
+	prefs-manager-app.c \
+	prefs-manager-app.h \
+	history-entry.c \
+	history-entry.h \
+	actions-search.c \
+	header.c \
+	statusbar.c \
+	comment.c \
+	$(INST_H_FILES) 
 
-gtranslator_LDADD = \
-	$(INTLLIBS) \
+libgtranslator_la_LIBADD = \
 	$(GTRANSLATOR_LIBS) \
-	$(GTKSPELL_LIBS)
+	dialogs/libdialogs.la \
+	toolbareditor/libtoolbareditor.la \
+	plugin-system/libpluginsystem.la 
 	
-gtranslator_LDFLAGS = \
-	-Wall
-
 #gtranslator_auto_learn_SOURCES = \
 #	auto-learn.c
 #	
@@ -86,13 +119,19 @@ gtranslator_LDFLAGS = \
 #	export-learn-buffer.c
 #	
 
-gladedir = $(pkgdatadir)
+gtranslator-enum-types.h: gtranslator-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	(cd $(srcdir) && $(GLIB_MKENUMS) --template gtranslator-enum-types.h.template $(INST_H_FILES)) > $@
+	
+gtranslator-enum-types.c: gtranslator-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	(cd $(srcdir) && $(GLIB_MKENUMS) --template gtranslator-enum-types.c.template $(INST_H_FILES)) > $@
 
-glade_DATA =  \
-       header_dialog.glade \
-       main_window.glade \
-       preferences.glade
+gtranslator-marshal.h: gtranslator-marshal.list $(GLIB_GENMARSHAL)
+	$(GLIB_GENMARSHAL) $< --header --prefix=gtranslator_marshal > $@
 
-EXTRA_DIST = ChangeLog $(glade_DATA)
+gtranslator-marshal.c: gtranslator-marshal.list $(GLIB_GENMARSHAL)
+	$(GLIB_GENMARSHAL) $< --body --header --prefix=gtranslator_marshal > $@
+
+EXTRA_DIST = ChangeLog gtranslator-marshal.list
 
 
+CLEANFILES = $(BUILT_SOURCES)

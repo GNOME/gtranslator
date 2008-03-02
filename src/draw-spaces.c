@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *		 2006  Paolo Borelli
+ * 		 2007  Steve Frécinaux
+ *
+ * Based in gedit draw spaces plugin.
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -127,7 +131,7 @@ draw_tabs_and_spaces(GtkWidget *view, GdkEventExpose *event,
 	gunichar c;
 	cr = gdk_cairo_create(event->window);
 	//This color should be configurable
-	gdk_color_parse("#000000", &color);
+	gdk_color_parse("#444444", &color);
 	gdk_cairo_set_source_color(cr, &color);
 	cairo_set_line_width(cr, 0.8);
 	

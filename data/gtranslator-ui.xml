@@ -1,0 +1,83 @@
+<ui>
+  <menubar name="MainMenu">
+    <menu name="FileMenu" action="File">
+      <menuitem name="FileOpenMenu" action="FileOpen"/>
+      <menuitem name="FileOpenCopyMenu" action="FileOpenUri"/>
+      <menuitem name="FileRecentFilesMenu" action="FileRecentFiles"/>
+      <separator/>
+      <menuitem name="FileSaveMenu" action="FileSave"/>
+      <menuitem name="FileSaveAsMenu" action="FileSaveAs"/>
+      <separator/>
+      <menuitem name="FileCloseWindowMenu" action="FileCloseWindow"/>
+      <menuitem name="FileQuitWindowMenu" action="FileQuitWindow"/>
+    </menu>
+
+    <menu name="EditMenu" action="Edit">
+      <menuitem name="EditUndoMenu" action="EditUndo"/>
+      <menuitem name="EditRedoMenu" action="EditRedo"/>
+      <separator/>
+      <menuitem name="EditCutMenu" action="EditCut"/>
+      <menuitem name="EditCopyMenu" action="EditCopy"/>
+      <menuitem name="EditPasteMenu" action="EditPaste"/>
+      <menuitem name="EditClearMenu" action="EditClear"/>
+      <separator/>
+      <menuitem name="EditHeaderMenu" action="EditHeader"/>
+      <separator/>
+      <menuitem name="EditCommentMenu" action="EditComment"/>
+      <separator/>
+      <menuitem name="EditMessage2TransMenu" action="EditMessage2Trans"/>
+      <separator/>
+      <menuitem name="EditFuzzyMenu" action="EditFuzzy"/>
+      <separator/>
+      <menuitem name="EditToolbarMenu" action="EditToolbar"/>
+      <menuitem name="EditPreferencesMenu" action="EditPreferences"/>
+    </menu>
+
+    <menu name="ViewMenu" action="View">
+      <menuitem name="ViewSidePaneMenu" action="ViewSidePane"/>
+    </menu>
+
+    <?--<menu name="BookmarksMenu" action="Bookmarks">
+      <menuitem name="BookmarksAddMenu" action="BookmarksAdd"/>
+      <menuitem name="BookmarksEditMenu" action="BookmarksEdit"/>
+    </menu>
+
+    <menu name="ActionsMenu" action="Actions">
+      <menuitem name="ActionsCompileMenu" action="ActionsCompile"/>
+      <menuitem name="ActionsRefreshMenu" action="ActionsRefresh"/>
+      <separator/>
+      <menuitem name="ActionsAutotranslateMenu" action="ActionsAutotranslate"/>
+      <separator/>
+      <menuitem name="ActionsRemoveTranslationsMenu" action="ActionsRemoveTranslations"/>
+    </menu>--?>
+
+    <menu name="GoMenu" action="Go">
+      <menuitem name="GoFirstMenu" action="GoFirst"/>
+      <menuitem name="GoPreviousMenu" action="GoPrevious"/>
+      <separator/>
+      <menuitem name="GoForwardMenu" action="GoForward"/>
+      <menuitem name="GoLastMenu" action="GoLast"/>
+      <separator/>
+      <menuitem name="GoJumpToMenu" action="GoJumpTo"/>
+      <separator/>
+      <menuitem name="GoNextFuzzyMenu" action="GoNextFuzzy"/>
+      <menuitem name="GoPreviousFuzzyMenu" action="GoPreviousFuzzy"/>
+      <separator/>
+      <menuitem name="GoNextUntranslatedMenu" action="GoNextUntranslated"/>
+      <menuitem name="GoPreviousUntranslatedMenu" action="GoPreviousUntranslated"/>
+    </menu>
+
+    <menu name="SearchMenu" action="Search">
+      <menuitem name="SearchFindMenu" action="SearchFind"/>
+      <menuitem name="SearchFindNextMenu" action="SearchFindNext"/>
+      <menuitem name="SearchFindPreviousMenu" action="SearchFindPrevious"/>
+      <separator/>
+      <menuitem name="SearchReplaceMenu" action="SearchReplace"/>
+    </menu>
+
+    <menu name="HelpMenu" action="Help">
+      <menuitem name="HelpContentsMenu" action="HelpContents"/>
+      <menuitem name="HelpAboutMenu" action="HelpAbout"/>
+    </menu>
+  </menubar>
+</ui>

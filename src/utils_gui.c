@@ -1,5 +1,9 @@
 /*
- * (C) 2001-2003 	Fatih Demir <kabalak@kabalak.net>
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
+ * 			Ignacio Casal <nacho.resa@gmail.com>
+ * 			Paolo Maggi 
+ *
+ * 	Based in gedit utils funcs.
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,356 +21,510 @@
  *
  */
 
-#include "dialogs.h"
-#include "gui.h"
-#include "nautilus-string.h"
-#include "parse.h"
-#include "prefs.h"
-#include "runtime-config.h"
-#include "utils.h"
 #include "utils_gui.h"
 
-#include <libgnome/gnome-url.h>
+#include <string.h>
 
-#include <libgnomeui/libgnomeui.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <glade/glade.h>
+#include <gtk/gtk.h>
 
-/*
- * Show an error message.
- */
-GtkWidget * gtranslator_utils_error_dialog(gchar *format, ...)
+
+GtkWidget *
+gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
+				      const gchar *stock_id)
 {
-	gchar *error;
-	va_list ap;
-	GtkWidget *w;
-	
-	va_start(ap, format);
-	error = g_strdup_vprintf(format, ap);
-	va_end(ap);
-	w = gnome_app_error(GNOME_APP(gtranslator_application), error);
-	g_free(error);
-	return w;
+	GtkWidget *button;
+
+	button = gtk_button_new_with_mnemonic (label);
+	gtk_button_set_image (GTK_BUTTON (button),
+			      gtk_image_new_from_stock (stock_id,
+							GTK_ICON_SIZE_BUTTON));
+
+        return button;
 }
 
-/*
- * Shows the gtranslator homepage on the web.
- */
-void gtranslator_utils_show_home_page(GtkWidget *widget, gpointer useless)
+void
+gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
+					gint     *x,
+					gint     *y,
+					gboolean *push_in,
+					gpointer  user_data)
 {
-	gnome_url_show("http://gtranslator.sourceforge.net", NULL);
-}
+	GtkWidget *w = GTK_WIDGET (user_data);
+	GtkRequisition requisition;
 
-/*
- * Go through the characters and search for free spaces
- * and replace them with '·''s.
- */
-gchar *gtranslator_utils_invert_dot(gchar *str)
-{
-	GString *newstr;
-	gunichar middot;
-	const char *p;
+	gdk_window_get_origin (w->window, x, y);
+	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
-	g_return_val_if_fail(str != NULL, NULL);
-	g_return_val_if_fail(strlen(str) >= 0, str);
-	
-	newstr = g_string_sized_new(strlen(str)+10);
-	middot = g_utf8_get_char("Â·");
-	p = str;
-	while(*p) {
-		gunichar c = g_utf8_get_char(p);
-		if (c == middot)
-			g_string_append_c(newstr, ' ');
-		else if (g_unichar_break_type(c) == G_UNICODE_BREAK_SPACE)
-			g_string_append_unichar(newstr, middot);
-		else
-			g_string_append_unichar(newstr, c);
-		p = g_utf8_next_char(p);
-	}
-	return(g_string_free(newstr, FALSE));
-}
-
-/*
- * Save the current application main window's geometry.
- */
-void gtranslator_utils_save_geometry(void)
-{
-	if (GtrPreferences.save_geometry == TRUE) {
-		gint x, y, w, h, d;
-		
-		/*
-		 * Use the Gdk functions to get the window typistics and then
-		 *  store the data - we're currently stumping the silly "depth"
-		 *   data also, but well...
-		 */
-		gdk_window_get_geometry(GDK_WINDOW(gtranslator_application->window),
-			&x, &y, &w, &h, &d);
-		
-		gtranslator_config_set_int("geometry/x", x);
-		gtranslator_config_set_int("geometry/y", y);
-		gtranslator_config_set_int("geometry/width", w);
-		gtranslator_config_set_int("geometry/height", h);
-	}
-}
-
-/*
- * Restore the geometry.
- */
-void gtranslator_utils_restore_geometry(gchar  * gstr)
-{
-	gint x=0, y=0, width=0, height=0;
-
-	/*
-	 * Set the main window's geometry from the preferences.
-	 */
-	if (gstr == NULL)
+	if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
 	{
-		if(GtrPreferences.save_geometry == TRUE)
-		{
-			x=gtranslator_config_get_int("geometry/x");
-			y=gtranslator_config_get_int("geometry/y");
-			width=gtranslator_config_get_int("geometry/width");
-			height=gtranslator_config_get_int("geometry/height");
-		}
-		else
-		{
-			return;
-		}
+		*x += w->allocation.x + w->allocation.width - requisition.width;
 	}
-	/*
-	 * If a geometry definition had been defined try to parse it.
-	 */
 	else
 	{
-		if(!gtk_window_parse_geometry(GTK_WINDOW(gtranslator_application->window), gstr))
-		{
-			g_warning(_("The geometry string \"%s\" couldn't be parsed!"), gstr);
-			return;
-		}
+		*x += w->allocation.x;
 	}
-	if (x != -1)
-		gtk_window_move(GTK_WINDOW(gtranslator_application), x, y);
-	if ((width > 0) && (height > 0))
-		gtk_window_resize(GTK_WINDOW(gtranslator_application), width, height);
+
+	*y += w->allocation.y + w->allocation.height;
+
+	*push_in = TRUE;
 }
 
-GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget  * table, gint row,
-				   const char *label_text,
-				   GList  * list, const char *value,
-				   gboolean editable,
-				   GCallback callback,
-				   gpointer user_data)
+void
+gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
+					   gint     *x,
+					   gint     *y,
+					   gboolean *push_in,
+					   gpointer  user_data)
 {
-	GtkWidget *label;
-	GtkWidget *combo;
-	label = gtk_label_new(label_text);
-	combo = gtk_combo_new();
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo), list);
-	if (value)
-		gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), value);
+	GtkTreeView *tree = GTK_TREE_VIEW (user_data);
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
 	
-	gtk_editable_set_editable(GTK_EDITABLE(GTK_COMBO(combo)->entry), editable);
-	
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), combo, 1, 2, row, row + 1);
-	
-	g_signal_connect(G_OBJECT(GTK_COMBO(combo)->entry), "changed",
-			 G_CALLBACK(callback), user_data);
-	return combo;
-}
+	model = gtk_tree_view_get_model (tree);
+	g_return_if_fail (model != NULL);
 
-GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget  * table, gint row,
-				    const char *label_text,
-				    gboolean value,
-				    GCallback callback)
-{
-	GtkWidget *toggle;
-	toggle = gtk_check_button_new_with_label(label_text);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(toggle), value);
-	gtk_table_attach_defaults(GTK_TABLE(table), toggle,
-	                          0, GTK_TABLE(table)->ncols > 1 ? 2 : 1,
-	                          row, row + 1);
+	selection = gtk_tree_view_get_selection (tree);
+	g_return_if_fail (selection != NULL);
 
-	if(callback)
+	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 	{
-		g_signal_connect(G_OBJECT(toggle), "toggled",
-			         G_CALLBACK(callback), NULL);
-	}
+		GtkTreePath *path;
+		GdkRectangle rect;
 
-	return toggle;
-}
-
-GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget  * table, gint row,
-				   const char *label_text,
-				   const char *value,
-				   GCallback callback)
-{
-	GtkWidget *label;
-	GtkWidget *entry;
-	label = gtk_label_new(label_text);
-	entry = gtk_entry_new();
-	if (value)
-		gtk_entry_set_text(GTK_ENTRY(entry), value);
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), entry, 1, 2, row, row + 1);
-	g_signal_connect(G_OBJECT(entry), "changed",
-			 G_CALLBACK(callback), NULL);
-	return entry;
-}
-
-GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget  * table, gint row,
-				  const char *label_text,
-				  const char *value,
-				  GCallback callback)
-{
-	GtkWidget *label;
-	GtkWidget *widget;
-	GtkWidget *scroll;
-	GtkTextBuffer *buff;
-	GtkTextIter start;
-
-	label = gtk_label_new(label_text);
-	scroll = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	widget = gtk_text_view_new();
-	if (value) {
-		buff = gtk_text_buffer_new(NULL);
-		gtk_text_buffer_get_start_iter(buff, &start);
-		gtk_text_buffer_insert(buff, &start, value, strlen(value));
-		gtk_text_view_set_buffer(GTK_TEXT_VIEW(widget), buff);
-		if(callback)
-		{
-			g_signal_connect(G_OBJECT(buff), "changed",
-					 G_CALLBACK(callback), NULL);
-		}
-
-	}
-	gtk_container_add(GTK_CONTAINER(scroll), widget);
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), scroll, 1, 2, row, row + 1);
-
-	return widget;
-}
-
-GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
-	gint row, const gchar *label_text, gfloat minimum, gfloat maximum,
-	gfloat value, GCallback callback)
-{
-	GtkWidget *label;
-	GtkWidget *spin_button;
-	GtkObject *adjustment;
-
-	label=gtk_label_new(label_text);
-	adjustment=gtk_adjustment_new(value, minimum, maximum, 1.0, 1.0, 1.0);
-
-	spin_button=gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 1, 0);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button), value);
-
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), spin_button, 1, 2, row, row + 1);
-
-	g_signal_connect(G_OBJECT(spin_button), "changed",
-		G_CALLBACK(callback), NULL);
-	
-	return spin_button;
-}
-
-/*
- * Adds a GnomeFontPicker to the given table.
- */
-GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
-	gint row, const gchar *label_text, const gchar *title_text,
-	const gchar *fontspec, GCallback callback)
-{
-	GtkWidget *label;
-	GtkWidget *font_selector;
+		gdk_window_get_origin (GTK_WIDGET (tree)->window, x, y);
+			
+		path = gtk_tree_model_get_path (model, &iter);
+		gtk_tree_view_get_cell_area (tree, path,
+					     gtk_tree_view_get_column (tree, 0), /* FIXME 0 for RTL ? */
+					     &rect);
+		gtk_tree_path_free (path);
 		
-	label=gtk_label_new(label_text);
-	
-	font_selector=gnome_font_picker_new();
-	
-	gnome_font_picker_set_title(GNOME_FONT_PICKER(font_selector), 
-		title_text);
-	
-	if(fontspec)
-	{
-		gnome_font_picker_set_font_name(GNOME_FONT_PICKER(font_selector),
-			fontspec);
+		*x += rect.x;
+		*y += rect.y + rect.height;
+		
+		if (gtk_widget_get_direction (GTK_WIDGET (tree)) == GTK_TEXT_DIR_RTL)
+		{
+			GtkRequisition requisition;
+			gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+			*x += rect.width - requisition.width;
+		}
 	}
-	
-	gnome_font_picker_set_mode(GNOME_FONT_PICKER(font_selector),
-		GNOME_FONT_PICKER_MODE_FONT_INFO);
-	
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), font_selector, 1, 2, 
-		row, row + 1);
-	
-	g_signal_connect(G_OBJECT(font_selector), "font_set",
-		G_CALLBACK(callback), NULL);
-	
-	return font_selector;
+	else
+	{
+		/* no selection -> regular "under widget" positioning */
+		gtranslator_utils_menu_position_under_widget (menu,
+							x, y, push_in,
+							tree);
+	}
 }
 
-/*
- * Check if the given file is already opened by gtranslator.
+
+/**
+ * gtranslator_utils_get_glade_widgets:
+ * @filename: the path to the glade file
+ * @root_node: the root node in the glade file
+ * @error_widget: a pointer were a #GtkLabel
+ * @widget_name: the name of the first widget
+ * @...: a pointer were the first widget is returned, followed by more
+ *       name / widget pairs and terminated by NULL.
+ *
+ * This function gets the requested widgets from a glade file. In case
+ * of error it returns FALSE and sets error_widget to a GtkLabel containing
+ * the error message to display.
+ *
+ * Returns FALSE if an error occurs, TRUE on success.
  */
-gboolean gtranslator_utils_reopen_if_already_open(const gchar *filename)
+gboolean
+gtranslator_utils_get_glade_widgets (const gchar *filename,
+				     const gchar *root_node,
+				     GtkWidget **error_widget,
+				     const gchar *widget_name,
+				     ...)
 {
-	gchar *resultfilename;
+	GtkWidget *label;
+	GladeXML *gui;
+	va_list args;
+	const gchar *name;
+	gchar *msg;
+	gchar *filename_markup;
+	gchar *msg_plain;
+	gboolean ret = TRUE;
 
-	g_return_val_if_fail(filename!=NULL, FALSE);
+	g_return_val_if_fail (filename != NULL, FALSE);
+	g_return_val_if_fail (error_widget != NULL, FALSE);
+	g_return_val_if_fail (widget_name != NULL, FALSE);
 
-	resultfilename=gtranslator_config_get_string("runtime/filename");
+	*error_widget = NULL;
 
-	/*
-	 * Test if we've got a filename and then test it for equality with our
-	 *  currently in another instance opened po file.
-	 */
-	if(resultfilename && (!nautilus_strcasecmp(resultfilename, filename)) &&
-		(strlen(resultfilename)==strlen(filename)))
+	gui = glade_xml_new (filename, root_node, NULL);
+	if (!gui)
 	{
-		gint reply;
-		reply = gtranslator_already_open_dialog(NULL, (gpointer)filename);
-		if(reply == GTK_RESPONSE_NO)
+		filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
+		msg_plain = g_strdup_printf (_("Unable to find file %s."),
+				filename_markup);
+		msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
+				msg_plain, "</span>\n\n",
+				_("Please check your installation."), NULL);
+		label = gtk_label_new (msg);
+
+		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+		gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+		
+		g_free (filename_markup);
+		g_free (msg_plain);
+		g_free (msg);
+
+		gtk_misc_set_padding (GTK_MISC (label), 5, 5);
+ 		
+		*error_widget = label;
+
 		return FALSE;
 	}
 
-	/*
-	 * Assume we want to open it
-	 */
+	va_start (args, widget_name);
+	for (name = widget_name; name; name = va_arg (args, const gchar *) )
+	{
+		GtkWidget **wid;
+
+		wid = va_arg (args, GtkWidget **);
+		*wid = glade_xml_get_widget (gui, name);
+		if (*wid == NULL)
+		{
+			g_warning ("Cannot find widget '%s' inside file '%s'.",
+				   name,
+				   filename);
+				   
+			filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
+			msg_plain = g_strdup_printf (
+					_("Unable to find the required widgets inside file %s."),
+					filename_markup);
+			msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
+					msg_plain, "</span>\n\n",
+					_("Please check your installation."), NULL);
+			label = gtk_label_new (msg);
+
+			gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+			gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+			
+			g_free (filename_markup);
+			g_free (msg_plain);
+			g_free (msg);
+
+			gtk_misc_set_padding (GTK_MISC (label), 5, 5);
+ 			
+			*error_widget = label;
+
+			ret = FALSE;
+
+			break;
+		}
+	}
+	va_end (args);
+
+	g_object_unref (gui);
+
+	return ret;
+}
+
+static gboolean
+is_valid_scheme_character (gchar c)
+{
+	return g_ascii_isalnum (c) || c == '+' || c == '-' || c == '.';
+}
+
+static gboolean
+has_valid_scheme (const gchar *uri)
+{
+	const gchar *p;
+
+	p = uri;
+
+	if (!is_valid_scheme_character (*p)) {
+		return FALSE;
+	}
+
+	do {
+		p++;
+	} while (is_valid_scheme_character (*p));
+
+	return *p == ':';
+}
+
+gboolean
+gtranslator_utils_is_valid_uri (const gchar *uri)
+{
+	const guchar *p;
+
+	if (uri == NULL)
+		return FALSE;
+
+	if (!has_valid_scheme (uri))
+		return FALSE;
+
+	/* We expect to have a fully valid set of characters */
+	for (p = (const guchar *)uri; *p; p++) {
+		if (*p == '%')
+		{
+			++p;
+			if (!g_ascii_isxdigit (*p))
+				return FALSE;
+
+			++p;		
+			if (!g_ascii_isxdigit (*p))
+				return FALSE;
+		}
+		else
+		{
+			if (*p <= 32 || *p >= 128)
+				return FALSE;
+		}
+	}
+
 	return TRUE;
 }
 
-/*
- * Check for a needed program -- returns FALSE on failure (how logical, not ,-)).
+/**
+ * gtranslator_utils_drop_get_uris:
+ * @selection_data: the #GtkSelectionData from drag_data_received
+ * @info: the info from drag_data_received
+ *
+ * Create a list of valid uri's from a uri-list drop.
+ * 
+ * Return value: a string array which will hold the uris or NULL if there 
+ *		 were no valid uris. g_strfreev should be used when the 
+ *		 string array is no longer used
  */
-gboolean gtranslator_utils_check_program(const gchar *program_name,
-	const gint type_int)
+gchar **
+gtranslator_utils_drop_get_uris (GtkSelectionData *selection_data)
 {
-	g_return_val_if_fail(program_name!=NULL, FALSE);
+	gchar **uris;
+	gint i;
+	gint p = 0;
+	gchar **uri_list;
+
+	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+	uri_list = g_new0(gchar *, g_strv_length (uris) + 1);
+
+	for (i = 0; uris[i] != NULL; i++)
+	{
+		/* Silently ignore malformed URI/filename */
+		if (gtranslator_utils_is_valid_uri (uris[i]))
+			uri_list[p++] = g_strdup (uris[i]);
+	}
+
+	if (*uri_list == NULL)
+	{
+		g_free(uri_list);
+		return NULL;
+	}
+
+	return uri_list;
+}
+
+gchar *
+gtranslator_utils_escape_search_text (const gchar* text)
+{
+	GString *str;
+	gint length;
+	const gchar *p;
+ 	const gchar *end;
+
+	if (text == NULL)
+		return NULL;
+
+    	length = strlen (text);
+
+	/* no escape when typing.
+	 * The short circuit works only for ascii, but we only
+	 * care about not escaping a single '\' */
+	if (length == 1)
+		return g_strdup (text);
+
+	str = g_string_new ("");
+
+	p = text;
+  	end = text + length;
+
+  	while (p != end)
+    	{
+      		const gchar *next;
+      		next = g_utf8_next_char (p);
+
+		switch (*p)
+        	{
+       			case '\n':
+          			g_string_append (str, "\\n");
+          			break;
+			case '\r':
+          			g_string_append (str, "\\r");
+          			break;
+			case '\t':
+          			g_string_append (str, "\\t");
+          			break;
+			case '\\':
+          			g_string_append (str, "\\\\");
+          			break;
+        		default:
+          			g_string_append_len (str, p, next - p);
+          			break;
+        	}
+
+      		p = next;
+    	}
+
+	return g_string_free (str, FALSE);
+}
+
+gchar *
+gtranslator_utils_unescape_search_text (const gchar *text)
+{
+	GString *str;
+	gint length;
+	gboolean drop_prev = FALSE;
+	const gchar *cur;
+	const gchar *end;
+	const gchar *prev;
 	
-	if(!g_find_program_in_path(program_name))
+	if (text == NULL)
+		return NULL;
+
+	length = strlen (text);
+
+	str = g_string_new ("");
+
+	cur = text;
+	end = text + length;
+	prev = NULL;
+	
+	while (cur != end) 
 	{
-		gchar *warning_message;
+		const gchar *next;
+		next = g_utf8_next_char (cur);
 
-		if(type_int==0)
+		if (prev && (*prev == '\\')) 
 		{
-			warning_message=g_strdup_printf(
-				_("The necessary decompression program `%s' is not installed!"), program_name);
-		}
-		else
+			switch (*cur) 
+			{
+				case 'n':
+					str = g_string_append (str, "\n");
+				break;
+				case 'r':
+					str = g_string_append (str, "\r");
+				break;
+				case 't':
+					str = g_string_append (str, "\t");
+				break;
+				case '\\':
+					str = g_string_append (str, "\\");
+					drop_prev = TRUE;
+				break;
+				default:
+					str = g_string_append (str, "\\");
+					str = g_string_append_len (str, cur, next - cur);
+				break;
+			}
+		} 
+		else if (*cur != '\\') 
 		{
-			warning_message=g_strdup_printf(
-				_("The necessary compression program `%s' is not installed!"), program_name);
+			str = g_string_append_len (str, cur, next - cur);
+		} 
+		else if ((next == end) && (*cur == '\\')) 
+		{
+			str = g_string_append (str, "\\");
+		}
+		
+		if (!drop_prev)
+		{
+			prev = cur;
+		}
+		else 
+		{
+			prev = NULL;
+			drop_prev = FALSE;
 		}
 
-		gnome_app_warning(GNOME_APP(gtranslator_application), warning_message);
-		g_free(warning_message);
-
-		return FALSE;
+		cur = next;
 	}
-	else
+
+	return g_string_free (str, FALSE);
+}
+
+/*
+ * n: len of the string in bytes
+ */
+gboolean 
+g_utf8_caselessnmatch (const gchar *s1,
+		       const gchar *s2,
+		       gssize n1,
+		       gssize n2)
+{
+	gchar *casefold;
+	gchar *normalized_s1;
+      	gchar *normalized_s2;
+	gint len_s1;
+	gint len_s2;
+	gboolean ret = FALSE;
+
+	g_return_val_if_fail (s1 != NULL, FALSE);
+	g_return_val_if_fail (s2 != NULL, FALSE);
+	g_return_val_if_fail (n1 > 0, FALSE);
+	g_return_val_if_fail (n2 > 0, FALSE);
+
+	casefold = g_utf8_casefold (s1, n1);
+	normalized_s1 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
+	g_free (casefold);
+
+	casefold = g_utf8_casefold (s2, n2);
+	normalized_s2 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
+	g_free (casefold);
+
+	len_s1 = strlen (normalized_s1);
+	len_s2 = strlen (normalized_s2);
+
+	if (len_s1 < len_s2)
+		goto finally_2;
+
+	ret = (strncmp (normalized_s1, normalized_s2, len_s2) == 0);
+	
+finally_2:
+	g_free (normalized_s1);
+	g_free (normalized_s2);	
+
+	return ret;
+}
+
+void
+gtranslator_utils_activate_url (GtkAboutDialog *dialog,
+				const gchar *url,
+				gpointer data)
+{
+	gchar **open;
+	gchar *program;
+	GPtrArray *array;
+
+	if (g_find_program_in_path ("xdg-open"))
 	{
-		return TRUE;
+		program = g_strdup ("xdg-open");
 	}
+	else return;
+	
+	array = g_ptr_array_new ();
+	g_ptr_array_add (array, program);
+	g_ptr_array_add (array, g_strdup (url));
+	
+	open = (gchar **)g_ptr_array_free (array, FALSE);
+					
+	gdk_spawn_on_screen (gdk_screen_get_default (),
+			     NULL,
+			     open,
+			     NULL,
+			     G_SPAWN_SEARCH_PATH,
+			     NULL,
+			     NULL, NULL, NULL);
+					
+	g_strfreev (open);
 }

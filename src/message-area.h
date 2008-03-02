@@ -1,11 +1,8 @@
-/* Gtranslator - Message Area 
+/*
+ * message-area.h
+ * This file is part of gtranslator
  *
- * Copyright (C) 2007 The Free Software Foundation
- *
- * 	Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *
- * Based on gedit code (gedit/gedit-message-area.h) by: 
- * 	- Paolo Maggi <paolo@gnome.org>
+ * Copyright (C) 2005 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,42 +16,74 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA.
+ */
+ 
+/*
+ * Modified by the gtranslator Team, 2005. See the AUTHORS file for a 
+ * list of people on the gtranslator Team.  
+ * See the ChangeLog files for a list of changes. 
+ *
+ * $Id: message-area.h 5666 2007-06-29 19:52:25Z sfre $
  */
 
-#ifndef __GTRANSLATOR_MESSAGE_AREA_H__
-#define __GTRANSLATOR_MESSAGE_AREA_H__
+#ifndef __GTR_MESSAGE_AREA_H__
+#define __GTR_MESSAGE_AREA_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkhbox.h>
 
 G_BEGIN_DECLS
 
-typedef struct _GtranslatorMessageArea GtranslatorMessageArea;
-typedef struct _GtranslatorMessageAreaClass GtranslatorMessageAreaClass;
+/*
+ * Type checking and casting macros
+ */
+#define GTR_TYPE_MESSAGE_AREA              (gtranslator_message_area_get_type())
+#define GTR_MESSAGE_AREA(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_MESSAGE_AREA, GtranslatorMessageArea))
+#define GTR_MESSAGE_AREA_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_MESSAGE_AREA, GtranslatorMessageAreaClass))
+#define GTR_IS_MESSAGE_AREA(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_MESSAGE_AREA))
+#define GTR_IS_MESSAGE_AREA_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_MESSAGE_AREA))
+#define GTR_MESSAGE_AREA_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_MESSAGE_AREA, GtranslatorMessageAreaClass))
+
+/* Private structure type */
 typedef struct _GtranslatorMessageAreaPrivate GtranslatorMessageAreaPrivate;
 
-#define GTRANSLATOR_TYPE_MESSAGE_AREA            (gtranslator_message_area_get_type())
-#define GTRANSLATOR_MESSAGE_AREA(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj), GTRANSLATOR_TYPE_MESSAGE_AREA, GtranslatorMessageArea))
-#define GTRANSLATOR_MESSAGE_AREA_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass), GTRANSLATOR_TYPE_MESSAGE_AREA, GtranslatorMessageAreaClass))
-#define GTRANSLATOR_IS_MESSAGE_AREA(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTRANSLATOR_TYPE_MESSAGE_AREA))
-#define GTRANSLATOR_IS_MESSAGE_AREA_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTRANSLATOR_TYPE_MESSAGE_AREA))
-#define GTRANSLATOR_MESSAGE_AREA_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTRANSLATOR_TYPE_MESSAGE_AREA, GtranslatorMessageAreaClass))
+/*
+ * Main object structure
+ */
+typedef struct _GtranslatorMessageArea GtranslatorMessageArea;
 
-struct _GtranslatorMessageArea {
+struct _GtranslatorMessageArea 
+{
 	GtkHBox parent;
 
+	/*< private > */
 	GtranslatorMessageAreaPrivate *priv;
 };
 
-struct _GtranslatorMessageAreaClass {
+/*
+ * Class definition
+ */
+typedef struct _GtranslatorMessageAreaClass GtranslatorMessageAreaClass;
+
+struct _GtranslatorMessageAreaClass 
+{
 	GtkHBoxClass parent_class;
 
-	void (* response) (GtranslatorMessageArea *message_area, 
-			   gint            response_id);
+	/* Signals */
+	void (* response) (GtranslatorMessageArea *message_area, gint response_id);
 
+	/* Keybinding signals */
 	void (* close)    (GtranslatorMessageArea *message_area);
+
+	/* Padding for future expansion */
+	void (*_gtranslator_reserved1) (void);
+	void (*_gtranslator_reserved2) (void);	
 };
 
+/*
+ * Public methods
+ */
 GType 		 gtranslator_message_area_get_type 		(void) G_GNUC_CONST;
 
 GtkWidget	*gtranslator_message_area_new      		(void);
@@ -62,10 +91,10 @@ GtkWidget	*gtranslator_message_area_new      		(void);
 GtkWidget	*gtranslator_message_area_new_with_buttons	(const gchar      *first_button_text,
                                         		 ...);
 
-void		 gtranslator_message_area_set_contents	        (GtranslatorMessageArea *message_area,
+void		 gtranslator_message_area_set_contents	(GtranslatorMessageArea *message_area,
                                              		 GtkWidget        *contents);
                               		 
-void		 gtranslator_message_area_add_action_widget	(GtranslatorMessageArea   *message_area,
+void		 gtranslator_message_area_add_action_widget	(GtranslatorMessageArea *message_area,
                                          		 GtkWidget        *child,
                                          		 gint              response_id);
                                          		 
@@ -74,26 +103,27 @@ GtkWidget	*gtranslator_message_area_add_button        	(GtranslatorMessageArea *
                                          		 gint              response_id);
              		 
 GtkWidget	*gtranslator_message_area_add_stock_button_with_text 
-							(GtranslatorMessageArea   *message_area, 
+							(GtranslatorMessageArea *message_area, 
 				    			 const gchar      *text, 
 				    			 const gchar      *stock_id, 
 				    			 gint              response_id);
 
-void       	 gtranslator_message_area_add_buttons 	        (GtranslatorMessageArea *message_area,
+void       	 gtranslator_message_area_add_buttons 	(GtranslatorMessageArea *message_area,
                                          		 const gchar      *first_button_text,
                                          		 ...);
 
 void		 gtranslator_message_area_set_response_sensitive 
-							(GtranslatorMessageArea   *message_area,
+							(GtranslatorMessageArea *message_area,
                                         		 gint              response_id,
                                         		 gboolean          setting);
 void 		 gtranslator_message_area_set_default_response 
 							(GtranslatorMessageArea *message_area,
                                         		 gint              response_id);
 
+/* Emit response signal */
 void		 gtranslator_message_area_response           	(GtranslatorMessageArea *message_area,
                                     			 gint              response_id);
 
 G_END_DECLS
 
-#endif  /* __GTRANSLATOR_MESSAGE_AREA_H__ */
+#endif  /* __GTR_MESSAGE_AREA_H__  */

@@ -20,80 +20,44 @@
 #ifndef GTR_UTILS_GUI_H
 #define GTR_UTILS_GUI_H 1
 
-#include "parse.h"
-#include "stylistics.h"
-
 #include <gtk/gtkwidget.h>
-#include <gtk/gtksignal.h>
+#include <gtk/gtkmenu.h>
+#include <gtk/gtkaboutdialog.h>
 
-/*
- * GUI related utility functions for gtranslator.
- */
+GtkWidget     *gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
+				      const gchar *stock_id);
 
-/*
- * Show an error messagebox to the user. 
- */
-GtkWidget *gtranslator_utils_error_dialog(gchar *format, ...);
+void           gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
+					gint     *x,
+					gint     *y,
+					gboolean *push_in,
+					gpointer  user_data);
+					
+void           gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
+					   gint     *x,
+					   gint     *y,
+					   gboolean *push_in,
+					   gpointer  user_data);
 
-/*
- * Show the homepage of gtranslator.
- */
-void gtranslator_utils_show_home_page(GtkWidget  *widget, gpointer useless);
+gboolean       gtranslator_utils_get_glade_widgets    (const gchar *filename,
+						       const gchar *root_node,
+						       GtkWidget **error_widget,
+						       const gchar *widget_name,
+						       ...)G_GNUC_NULL_TERMINATED;
 
-/*
- * Invert the dots in the message.
- */
-gchar *gtranslator_utils_invert_dot(gchar *str);
+gchar        **gtranslator_utils_drop_get_uris        (GtkSelectionData *selection_data);
 
-/*
- * Routines for saving/restoring/setting geometry of the main window.
- */
-void gtranslator_utils_save_geometry(void);
-void gtranslator_utils_restore_geometry(gchar *gstr);
+gchar         *gtranslator_utils_escape_search_text   (const gchar* text);
 
-/*
- * Convenience functions for adding items 
- */
-GtkWidget *gtranslator_utils_attach_combo_with_label(GtkWidget * table, 
-	gint row, const char *label_text, GList * list, const char *value,
-	gboolean editable, GCallback callback, gpointer user_data);
+gchar         *gtranslator_utils_unescape_search_text (const gchar *text);
 
-GtkWidget *gtranslator_utils_attach_entry_with_label(GtkWidget * table, 
-	gint row, const char *label_text, const char *value,
-	GCallback callback);
+gboolean       g_utf8_caselessnmatch                  (const gchar *s1,
+						       const gchar *s2,
+						       gssize n1,
+						       gssize n2);
 
-GtkWidget *gtranslator_utils_attach_toggle_with_label(GtkWidget * table, 
-	gint row, const char *label_text, gboolean value,
-	GCallback callback);
-
-GtkWidget *gtranslator_utils_attach_text_with_label(GtkWidget * table, 
-	gint row, const char *label_text, const char *value,
-	GCallback callback);
-
-GtkWidget *gtranslator_utils_attach_spin_with_label(GtkWidget *table,
-	gint row, const gchar *label_text, gfloat minimum, gfloat maximum,
-	gfloat value, GCallback callback);
-	
-GtkWidget *gtranslator_utils_attach_font_with_label(GtkWidget *table,
-	gint row, const gchar *label_text, const gchar *title_text,
-	const gchar *fontspec, GCallback callback);
-	
-/*
- * Checks the given file for the right permissions for
- *  open/writing the files.
- */
-gboolean gtranslator_utils_check_file_permissions(GtrPo *po_file);
-
-/*
- * Checks if we've been started with the given file yet.
- */
-gboolean gtranslator_utils_check_file_being_open(const gchar *filename);
-
-/*
- * Check for a given program being in the user's path -- should be useful
- *  for the "differently" opening/saving functions...
- */
-gboolean gtranslator_utils_check_program(const gchar *program_name,
-	const gint type_int);
+void           gtranslator_utils_activate_url         (GtkAboutDialog *dialog,
+						       const gchar *url,
+						       gpointer data);
 
 #endif

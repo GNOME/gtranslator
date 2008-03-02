@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ Author: Ignacio Casal Quinteiro
+ Copyright (C) 2007 Ignacio Casal Quinteiro
+
+     This program is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation, either version 3 of the License, or
+     (at your option) any later version.
+ 
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+ 
+     You should have received a copy of the GNU General Public License
+     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<language id="gtranslator" _name="gtranslator highlight" version="2.0" _section="Others">
+  <metadata>
+    <property name="mimetypes">text/x-po;text/x-pot;text/x-pox;text/x-gettext-translation</property>
+    <property name="globs">*.po;*.pot</property>
+    <property name="line-comment-start">#</property>
+  </metadata>
+
+  <styles>
+    <style id="tag" _name="Tag" map-to="xml:element-name"/>
+    <style id="special-variable" _name="Special variable" map-to="python:special-variable"/>
+  </styles>
+
+  <definitions>
+    <context id="gtranslator">
+      <include>
+        <context ref="def:escape"/>
+        <context ref="def:line-continue"/>
+        <context ref="def:email-address"/>
+        <context ref="def:net-address"/>
+        <context id="hotkey" style-ref="def:special-char">
+          <match>[&amp;_][a-zA-Z]</match>
+        </context>
+        <context style-ref="tag">
+	  <match>&lt;[a-zA-Z\=\"\/ ]+&gt;</match>
+	</context>
+        <context ref="python:format" style-ref="special-variable"/>
+        <context ref="c:printf"/>
+      </include>
+    </context>
+  </definitions>
+</language>

@@ -1,18 +1,310 @@
-2007-10-23  Pablo Sanxiao <psanxiao@gmail.com>
+2008-02-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* configure.in: Applied Sindre Pedersen patch (to see bug #489379).
+	* plugins/alternate-language: Now it shows the status of
+	the alternate language and it uses GtranslatorView instead
+	of GtkTextView.
 
-2007-09-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+2008-02-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* AUTHORS: Added Pablo and Juanjo.
+	* src/utils_gui.c: Fixed drop uris func.
+
+2008-02-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/utils_gui.c: Removed useless func.
+
+2008-02-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* help/Makefile.am: Removed oc folder.
+
+2008-02-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/tab.c: Now is showed message table at startup.
+	(Fixes bug #513994)
+
+2008-02-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/notebook.c: Added tooltip in the tab to
+	show the path of the file.
+
+2008-02-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Changed some libraries from REQUIRED
+	to OPTIONAL.
+
+2008-02-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: I removed the libxml dependency
+	because we aren't using it.
+
+2008-02-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/open-tran/open-tran-dialog.glade:
+	Fixed strings by Gil Forcada.
+
+2008-02-04  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/open-tran:
+	Added configuration dialog and improved.
+	Now you can choose the search code too.
+
+2008-02-04  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/application.c:
+	Now you can edit the menu shortcuts. (Fixes bug #514177)
+
+2008-02-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/message-table.c:
+	* src/message-table-model.ch:
+	* Makefile.am:
+	Switched to the new model. Now the load it is faster.
+	
+	* src/update-from-gedit.sh:
+	Removed gedit-panel.ch
+
+	* tab.c: Added exception. 
+
+2008-02-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/po.c: Improving a bit more the parse.
+
+2008-02-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/message-table-model.ch:
+	Object that implements our own GtkTreeModel.
+
+2008-02-02  Ignacio Casal Quinteiro  <nacho.reas@gmail.com>
+
+	* src/po.c: Fixed crash when the file doesn't exist.
+
+2008-02-01  Ignacio Casal Quinteiro  <nacho.reas@gmail.com>
+
+	* src/window.h:
+	* plugins/alternate-lang:
+	Removed plugin.h includes by Silvia Miranda.
+
+2008-02-01  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Now you can instruct gtkspell to on or off
+	fixes (Bug #380022).
+
+2008-01-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src:
+		tab.c:
+		message-table.c:
+		comment.c:
+		Now widgets are showed with gtk_widget_show instead
+		of gtk_widget_show_all.
+
+2008-01-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src:
+		* actions-help:
+			Changed copyright date.
+		* window.c:
+		* tab.c:
+			Added some comments.
+	* configure.ac:
+		Changed vesion to 1.9.3.
+
+2008-01-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/alternate-language/alternate-language-plugin.c
+	* plugins/open-tran/open-tran.gtranslator-plugin.desktop.in
+	* src/panel.c
+	* src/panel.h
+	* src/tab.c
+	* src/tab.h
+	* src/Makefile.am
+	* doc/reference/gtranslator.types
+	* doc/reference/gtranslator-docs.sgml
+	Switched to GtkNotebook instead of GtranslatorPanel.
+
+2008-01-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* data/layout.xml: I forgot this file.
+
+2008-01-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/open-tran/open-tran-plugin.c:
+	* plugins/dictionary/dict-panel.c:
+	* plugins/dictionary/dictionary-plugin.c:
+	* plugins/charmap/charmap-plugin.c:
+	* src/prefs-manager-app.c:
+	* src/actions.h:
+	* src/dialogs/preferences-dialog.c:
+	* src/window.c:
+	* src/actions-view.c:
+	* src/window.h:
+	* src/prefs-manager.c:
+	* src/prefs-manager.h:
+	* configure.ac:
+	* data/Makefile.am:
+	* data/gtranslator-ui.xml:
+	Switched to gdl and removed some useless menus.
+
+
+2008-01-27  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/dictionary/dictionary-plugin.c:
+	Fixed warning.
+
+2008-01-27  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac:
+	* src/application:
+	* src/utils_gui.ch:
+	* src/actions-file.c:
+	Removed gnome-vfs dependency.
+
+2008-01-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+        * plugins/open-tran/open-tran-plugin.c:
+        Added deactivate functionality.
+
+2008-01-26  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* src/application.c:
+	* src/main.c:
+	* configure.ac:
+		Remove dependencies on libgnome and libgnomeui, by Ignacio Casal
+		Quinteiro and myself.
+
+2008-01-26  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* plugins/charmap/charmap-plugin.c:
+	* plugins/open-tran/open-tran-plugin.c:
+		Fix compile warnings.
+
+2008-01-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/ChangeLog:
+	Removed. It's better use the main ChangeLog file.
+
+2008-01-26  Seán de Búrca  <sdeburca@svn.gnome.org>
+	* plugins/dictionary/dict-panel.c:
+	* plugins/dictionary/dictionary-plugin.c:
+	* plugins/dictionary/gdict-sidebar.c:
+	* plugins/dictionary/dictionary-plugin.h:
+	* plugins/dictionary/gdict-sidebar.h:
+		Fix compile errors and warnings.
+
+2008-01-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac:
+	* doc/Makefile.am:
+	* doc/reference:
+	  Added gtk-doc support.
+
+2008-01-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins:
+	* Makefile.am:
+	* configure.ac:
+	Added new plugins.
+
+2008-01-13  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* data/Makefile.am:
+	* data/gtranslator.pc.in:
+	* src/dialogs/Makefile.am:
+	* src/dialogs/preferences-dialog.{c,glade}:
+	* src/plugin-system/:
+	* src/Makefile.am:
+	* src/application.{c,h}:
+	* src/main.c:
+	* src/utils_gui.{c,h}:
+	* INSTALL:
+	* configure.ac:
+		Add plugin functionality, by Ignacio Casal Quinteiro with some help
+		from myself.
+
+2007-12-31  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* configure.ac: Remove deleted directory.
+
+2007-12-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Added alternate language.
+
+2007-12-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Removed comment directory.
+
+2007-12-15  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Removed scheme colors.
+
+2007-12-13  Seán de Búrca  <sdeburca@svn.gnome.org>
+
+	* configure.ac: Removed messagestable directory.
+
+2007-11-23  Cosimo Cecchi  <cosimoc@svn.gnome.org>
+
+	* configure.ac: Fix glib-genmarshal.
+
+2007-11-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Updated glib-genmarshal variable.
+
+2007-11-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Added comment lib.
+
+2007-11-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Added messages table lib.
+
+2007-10-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Applied Sindre Pedersen path that fixes
+	fedora build problem. (Fixes bug #489379)
+
+2007-10-12  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac: Switched to gtksourceview 2 and removed dictionary.
+
+2007-09-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	Patch by Sean Burke: Thanks a lot.
+
+	This patch does a few things: it renames configure.in to configure.ac (to start
+	cleaning up build and using more recent conventions), removes
+	SPELLCHECKER_CFLAGS from the Makefile as it appears to be undefined, forces use
+	of a more recent automake version, moves the UI XML files to data/ and modifies
+	the Makefile there to install it and modifies the source file that opens
+	gtranslator-ui to point to the correct directory. It also fixes the
+	aforementioned build errors.
 
 2007-09-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* AUTHORS: Added me.
+        * AUTHORS: Added me.
 
 2007-09-01  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* MAINTAINERS: Follow new format regulations.
+
+2007-08-27  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.in: Added dictionary Makefile.
+
+2007-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.in: Added charmap Makefile.
+
+2007-08-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.in: Switched to gtk+ >= 2.11.6 becouse
+	of GtkTooltip. Switched to 1.9.2 version.
+
+2007-08-15  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.in: Now is required gtk+ >= 2.10.0
+
+2007-08-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.in: Added all related to toolbareditor
 
 2007-08-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
