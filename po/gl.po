@@ -19,12 +19,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-20 13:38+0100\n"
-"PO-Revision-Date: 2008-02-20 13:42+0100\n"
+"POT-Creation-Date: 2008-03-04 00:36+0100\n"
+"PO-Revision-Date: 2008-03-04 00:38+0100\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type:  text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
@@ -55,19 +55,34 @@ msgstr "Etiqueta"
 msgid "gtranslator highlight"
 msgstr "resaltado de gtranslator"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:87
+#: ../plugins/alternate-language/alternate-language-panel.c:107
 msgid "Message not found"
 msgstr "Mensaxe non atopada"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:175
+#: ../plugins/alternate-language/alternate-language-panel.c:203
 msgid "Open file for alternate language"
 msgstr "Abrir ficheiro para lingua alternativa"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:188
+#: ../plugins/alternate-language/alternate-language-panel.c:216
 msgid "File closed"
 msgstr "Ficheiro pechado"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:245
+#: ../plugins/alternate-language/alternate-language-panel.c:275
+#: ../src/window.c:706
+msgid "Translated"
+msgstr "Traducida"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:281
+#: ../src/dialogs/search-dialog.glade.h:1 ../src/window.c:708
+msgid "Fuzzy"
+msgstr "Dubidosa"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:286
+#: ../src/window.c:704
+msgid "Untranslated"
+msgstr "Sen Traducir"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:301
 msgid "There isn't any file loaded"
 msgstr "Non hai ningún ficheiro cargado"
 
@@ -182,15 +197,15 @@ msgstr "gtk-cancel"
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../plugins/open-tran/open-tran-panel.c:191
+#: ../plugins/open-tran/open-tran-panel.c:215
 msgid "WRONG! Can't get result element 1\n"
 msgstr "FATAL! Non se pode obter o resultado do elemento 1\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:196
+#: ../plugins/open-tran/open-tran-panel.c:220
 msgid "WRONG! Result element 1 is not a struct"
 msgstr "FATAL! O resultado do elemento 1 non é unha estrutura"
 
-#: ../plugins/open-tran/open-tran-panel.c:221
+#: ../plugins/open-tran/open-tran-panel.c:269
 #, c-format
 msgid "Error: %d %s\n"
 msgstr "Erro: %d %s\n"
@@ -198,64 +213,81 @@ msgstr "Erro: %d %s\n"
 #.
 #. * Translators: XMLRPC is the name of the protocol
 #.
-#: ../plugins/open-tran/open-tran-panel.c:233
+#: ../plugins/open-tran/open-tran-panel.c:281
 msgid "Could not parse XMLRPC response\n"
 msgstr "Non se puido analizar a resposta XMLRPC\n"
 
 #.
 #. * Translators: XMLRPC is the name of the protocol
 #.
-#: ../plugins/open-tran/open-tran-panel.c:243
+#: ../plugins/open-tran/open-tran-panel.c:291
 msgid "No response value in XMLRPC response\n"
 msgstr "Non hai valor de respota na respota XMLRPC\n"
 
 #.
 #. * Translators: XMLRPC is the name of the protocol
 #.
-#: ../plugins/open-tran/open-tran-panel.c:252
+#: ../plugins/open-tran/open-tran-panel.c:300
 msgid "Could not extract result from XMLRPC response\n"
 msgstr "Non se puido extraer o resultado da resposta XMLRPC\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:262
+#: ../plugins/open-tran/open-tran-panel.c:310
+#: ../plugins/open-tran/open-tran-panel.c:454
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "FATAL! Non se pode obter o resultado do elemento %d\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:268
+#: ../plugins/open-tran/open-tran-panel.c:316
 #, c-format
 msgid "WRONG! Result element %d is not a struct"
 msgstr "FATAL! O elemento %d do resultado non é unha estrutura"
 
-#: ../plugins/open-tran/open-tran-panel.c:289
+#: ../plugins/open-tran/open-tran-panel.c:337
+#: ../plugins/open-tran/open-tran-panel.c:470
 msgid "Phrase not found"
 msgstr "Frase non atopada"
 
-#: ../plugins/open-tran/open-tran-panel.c:311
+#: ../plugins/open-tran/open-tran-panel.c:350
+#: ../plugins/open-tran/open-tran-panel.c:443
+msgid "ERROR: could not parse response\n"
+msgstr "ERRO: Non se puido analizar a resposta\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:380
 #, c-format
 msgid "Could not create web service request to '%s'\n"
 msgstr "Non foi posible crear o servizo web de resposta a '%s'\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:342
+#: ../plugins/open-tran/open-tran-panel.c:427
+#, c-format
+msgid "ERROR: %d %s\n"
+msgstr "ERRO: %d %s\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:438
+#, c-format
+msgid "FAULT: %d %s\n"
+msgstr "FALLO: %d %s\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:493
 msgid "You have to provide a phrase to search"
 msgstr "Ten que proveer unha frase para buscar"
 
-#: ../plugins/open-tran/open-tran-panel.c:352
+#: ../plugins/open-tran/open-tran-panel.c:503
 msgid "You have to provide a search language code"
 msgstr "Ten que proveer un código de lingua para buscar"
 
-#: ../plugins/open-tran/open-tran-panel.c:362
+#: ../plugins/open-tran/open-tran-panel.c:513
 msgid "You have to provide a language code for your language"
 msgstr "Ten que proveer un código de lingua para a súa lingua"
 
-#: ../plugins/open-tran/open-tran-panel.c:391
+#: ../plugins/open-tran/open-tran-panel.c:542
 msgid "Type"
 msgstr "Tipo"
 
-#: ../plugins/open-tran/open-tran-panel.c:402
+#: ../plugins/open-tran/open-tran-panel.c:553
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/open-tran-panel.c:441
+#: ../plugins/open-tran/open-tran-panel.c:592
 msgid "Look for:"
 msgstr "Buscar:"
 
@@ -268,32 +300,23 @@ msgstr "Open Tran"
 msgid "Look for phrases in Open tran memory translation database."
 msgstr "Buscar frases na memoria de tradución de Open Tran"
 
-#: ../src/actions-file.c:183
+#: ../src/actions-file.c:164
 msgid "Open file for translation"
 msgstr "Abrir ficheiro para tradución"
 
-#: ../src/actions-file.c:240
-#, c-format
-msgid "The file '%s' already exists. Do you want overwrite it?"
-msgstr "O ficheiro '%s' xa existe. Quere substituílo?"
-
-#: ../src/actions-file.c:279
+#: ../src/actions-file.c:277
 msgid "Save file as..."
 msgstr "Gardar ficheiro como..."
-
-#: ../src/actions-file.c:285
-msgid "Save local copy of file as..."
-msgstr "Gardar copia local do ficheiro como..."
 
 #: ../src/actions-help.c:44
 msgid "Current Developers"
 msgstr "Desenvolvedores actuais"
 
-#: ../src/actions-help.c:49
+#: ../src/actions-help.c:50
 msgid "Previous Developers"
 msgstr "Desenvolvedores anteriores"
 
-#: ../src/actions-help.c:67
+#: ../src/actions-help.c:68
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -305,7 +328,7 @@ msgstr ""
 "Foundation; xa sexa na versión 3 da Licenza como (segundo a súa escolla) en "
 "calquera versión posterior."
 
-#: ../src/actions-help.c:71
+#: ../src/actions-help.c:72
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -317,7 +340,7 @@ msgstr ""
 "PARA UN PROPÓSITO PARTICULAR. Para máis detalles vexa a Licenza Pública "
 "Xeral de GNU."
 
-#: ../src/actions-help.c:75
+#: ../src/actions-help.c:76
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
@@ -325,7 +348,7 @@ msgstr ""
 "Debeu recibir unha copia da Licenza Pública Xeral de GNU xunto con este "
 "programa.  Se non, vexa <http://www.gnu.org/licenses/>."
 
-#: ../src/actions-help.c:87
+#: ../src/actions-help.c:88
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -333,11 +356,11 @@ msgstr ""
 "Suite de edición de ficheiros de tradución para localización de aplicacións "
 "e bibliotecas."
 
-#: ../src/actions-help.c:89
+#: ../src/actions-help.c:90
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr "Copyright © 1999-2008 Free Software Foundation, Inc."
 
-#: ../src/actions-help.c:93
+#: ../src/actions-help.c:94
 msgid "About Gtranslator"
 msgstr "Sobre Gtranslator"
 
@@ -345,11 +368,11 @@ msgstr "Sobre Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:98
+#: ../src/actions-help.c:99
 msgid "translator-credits"
 msgstr "Ignacio Casal Quinteiro <nacho.resa@gmail.com>"
 
-#: ../src/actions-help.c:102
+#: ../src/actions-help.c:103
 msgid "Gtranslator Web Site"
 msgstr "Sitio web do gtranslator"
 
@@ -381,19 +404,19 @@ msgstr "Editar comentario"
 msgid "<b>Write your comments bellow:</b>"
 msgstr "<b>Escriba os seus comentarios embaixo:</b>"
 
-#: ../src/dialogs/file-dialogs.c:66
+#: ../src/dialogs/file-dialogs.c:54
 msgid "Gettext translation"
 msgstr "Tradución Gettext"
 
-#: ../src/dialogs/file-dialogs.c:71
+#: ../src/dialogs/file-dialogs.c:59
 msgid "Gettext translation template"
 msgstr "Modelo de tradución Gettext"
 
-#: ../src/dialogs/file-dialogs.c:76
+#: ../src/dialogs/file-dialogs.c:64
 msgid "All files"
 msgstr "Todos os ficheiros"
 
-#: ../src/dialogs/header-dialog.c:207 ../src/dialogs/header-dialog.glade.h:3
+#: ../src/dialogs/header-dialog.c:213 ../src/dialogs/header-dialog.glade.h:3
 msgid "Edit Header"
 msgstr "Editar cabeceira"
 
@@ -619,10 +642,6 @@ msgstr "Substituír _todo"
 msgid "_Replace"
 msgstr "_Substituír"
 
-#: ../src/dialogs/search-dialog.glade.h:1 ../src/window.c:708
-msgid "Fuzzy"
-msgstr "Dubidosa"
-
 #: ../src/dialogs/search-dialog.glade.h:2
 msgid "Match _entire word only"
 msgstr "Facer coincidir só a palabra _completa"
@@ -689,7 +708,12 @@ msgstr "Texto orixinal"
 msgid "Translated Text"
 msgstr "Texto traducido"
 
-#: ../src/notebook.c:134
+#: ../src/notebook.c:89
+#, c-format
+msgid "<b>Path:</b> %s"
+msgstr "<b>Camiño:</b> %s"
+
+#: ../src/notebook.c:146
 msgid "Close document"
 msgstr "Pechar o documento"
 
@@ -703,23 +727,23 @@ msgstr "Fallou ao abrir o ficheiro '%s': %s"
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext devolveu unha lista de dominios de mensaxe nula."
 
-#: ../src/po.c:444
+#: ../src/po.c:457
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Non se obtuveron mensaxes do analizador."
 
-#: ../src/po.c:476
-#, fuzzy, c-format
+#: ../src/po.c:511
+#, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
-"\t\t\t     Pot files are generated by the compilation process.\n"
-"\t\t\t     Your file should likely be named '%s.po'."
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
 msgstr ""
 "Está tentando gardar o ficheiro coa extensión .pot.\n"
-"Nembargantes, eses ficheiros pot son xerados por un proceso de compilación.\n"
-"Seu ficheiro debería nomearse como '%s.po'."
+"Porén, eses ficheiros pot son xerados por un proceso de compilación.\n"
+"O seu ficheiro debería nomearse como '%s.po'."
 
-#: ../src/po.c:489
+#: ../src/po.c:595
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Houbo un erro escribindo o ficheiro PO: %s"
@@ -773,15 +797,15 @@ msgstr "Non se pode inicializar o xestor de preferencias."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Esperábase `%s' pero obteuse `%s' para a clave %s"
 
-#: ../src/statusbar.c:86 ../src/statusbar.c:124
+#: ../src/statusbar.c:87 ../src/statusbar.c:125
 msgid "INS"
 msgstr "INS"
 
-#: ../src/statusbar.c:86 ../src/statusbar.c:123
+#: ../src/statusbar.c:87 ../src/statusbar.c:124
 msgid "OVR"
 msgstr "SOB"
 
-#: ../src/tab.c:443
+#: ../src/tab.c:444
 msgid "Message Table"
 msgstr "Táboa de mensaxes"
 
@@ -1083,14 +1107,6 @@ msgstr "Buscar para atrás o mesmo texto"
 msgid "Search for and replace text"
 msgstr "Buscar e substituír texto"
 
-#: ../src/window.c:704
-msgid "Untranslated"
-msgstr "Sen Traducir"
-
-#: ../src/window.c:706
-msgid "Translated"
-msgstr "Traducida"
-
 #: ../src/window.c:713
 #, c-format
 msgid "Status: %s"
@@ -1116,11 +1132,16 @@ msgstr "Dubidosas: %d"
 msgid "Untranslated: %d"
 msgstr "Sen Traducir: %d"
 
-#: ../src/window.c:1120
+#: ../src/window.c:1123
 msgid "Toolbar Editor"
 msgstr "Editor da barra de ferramentas"
 
-#: ../src/window.c:1401
+#: ../src/window.c:1404
 msgid "Documents"
 msgstr "Documentos"
 
+#~ msgid "The file '%s' already exists. Do you want overwrite it?"
+#~ msgstr "O ficheiro '%s' xa existe. Quere substituílo?"
+
+#~ msgid "Save local copy of file as..."
+#~ msgstr "Gardar copia local do ficheiro como..."
