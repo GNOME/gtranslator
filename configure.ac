@@ -174,7 +174,7 @@ if test "x$enable_opentran" != "xno"; then
 		libsoup-2.2,
 		have_libsoup_2_2=yes,
 		have_libsoup_2_2=no)
-	if test x"$have_libsoup" = "xno"; then
+	if test x"$have_libsoup_2_2" = "xno"; then
 		PKG_CHECK_MODULES(SOUP,
 			libsoup-2.4,
 			have_libsoup_2_4=yes,
