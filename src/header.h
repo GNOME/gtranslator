@@ -89,6 +89,9 @@ void		 gtranslator_header_set_translator	(GtranslatorHeader *header, gchar *data
 gchar		*gtranslator_header_get_tr_email	(GtranslatorHeader *header);
 void		 gtranslator_header_set_tr_email	(GtranslatorHeader *header, gchar *data);
 
+gchar		*gtranslator_header_get_prev_translator	(GtranslatorHeader *header);
+void		 gtranslator_header_set_prev_translator (GtranslatorHeader *header, gchar *data);
+
 gchar		*gtranslator_header_get_language	(GtranslatorHeader *header);
 void		 gtranslator_header_set_language	(GtranslatorHeader *header, gchar *data);
 

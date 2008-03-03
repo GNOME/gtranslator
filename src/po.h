@@ -76,45 +76,50 @@ enum
 /*
  * Public methods
  */
-GQuark           gtranslator_po_error_quark            (void);
+GQuark          gtranslator_po_error_quark		(void);
 
-GType		 gtranslator_po_get_type	       (void) G_GNUC_CONST;
+GType		gtranslator_po_get_type			(void) G_GNUC_CONST;
 
-GType		 gtranslator_po_register_type	       (GTypeModule * module);
+GType		gtranslator_po_register_type		(GTypeModule * module);
 
-GtranslatorPo   *gtranslator_po_new                    (void);
+GtranslatorPo   *gtranslator_po_new			(void);
 
-void             gtranslator_po_parse                  (GtranslatorPo *po,
+void            gtranslator_po_parse			(GtranslatorPo *po,
 							const gchar *filename,
 							GError **error);
 
-gchar           *gtranslator_po_get_filename           (GtranslatorPo *po);
+gboolean	gtranslator_po_save_file		(GtranslatorPo *po,
+		      					const gchar *name,
+		      					GError **error);
 
-void             gtranslator_po_set_filename           (GtranslatorPo *po,
+gchar           *gtranslator_po_get_filename		(GtranslatorPo *po);
+
+void            gtranslator_po_set_filename		(GtranslatorPo *po,
 							gchar *data);
 
-gboolean         gtranslator_po_get_write_perms        (GtranslatorPo *po);
+gboolean         gtranslator_po_get_write_perms		(GtranslatorPo *po);
 
-GList           *gtranslator_po_get_messages           (GtranslatorPo *po);
+GList           *gtranslator_po_get_messages		(GtranslatorPo *po);
 
 void		gtranslator_po_set_messages		(GtranslatorPo *po,
-							 GList *messages);
+							GList *messages);
 
-GList           *gtranslator_po_get_current_message    (GtranslatorPo *po);
+GList           *gtranslator_po_get_current_message	(GtranslatorPo *po);
 
-GList           *gtranslator_po_get_domains            (GtranslatorPo *po);
+GList           *gtranslator_po_get_domains		(GtranslatorPo *po);
 
-po_file_t        gtranslator_po_get_po_file            (GtranslatorPo *po);
+po_file_t        gtranslator_po_get_po_file		(GtranslatorPo *po);
 
-GList           *gtranslator_po_get_next_fuzzy         (GtranslatorPo *po);
+GList           *gtranslator_po_get_next_fuzzy		(GtranslatorPo *po);
 
-GList           *gtranslator_po_get_prev_fuzzy         (GtranslatorPo *po);
+GList           *gtranslator_po_get_prev_fuzzy		(GtranslatorPo *po);
 
-GList           *gtranslator_po_get_next_untrans       (GtranslatorPo *po);
+GList           *gtranslator_po_get_next_untrans	(GtranslatorPo *po);
 
-GList           *gtranslator_po_get_prev_untrans       (GtranslatorPo *po);
+GList           *gtranslator_po_get_prev_untrans	(GtranslatorPo *po);
 
-GtranslatorHeader	*gtranslator_po_get_header	(GtranslatorPo *po);
+GtranslatorHeader	
+		*gtranslator_po_get_header		(GtranslatorPo *po);
 
 G_END_DECLS
 

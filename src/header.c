@@ -58,17 +58,22 @@ struct _GtranslatorHeaderPrivate
 	gchar *translator;
 	
 	/*
-	 * Translator Email; 
+	 * Translator Email 
 	 */
 	gchar *tr_email;
-	
+
 	/*
-	 * Language Name;
+	 * Previous Translator Name and Email
+	 */
+	gchar *prev_translator;
+
+	/*
+	 * Language Name
 	 */
 	gchar *language;
 
 	/*
-	 * Traslation group email;
+	 * Traslation group email
 	 */
 	gchar *lg_email;
 	
@@ -217,6 +222,18 @@ void gtranslator_header_set_tr_email (GtranslatorHeader *header, gchar *data)
 	if(header->priv->tr_email)
 		g_free(header->priv->tr_email);
 	header->priv->tr_email = g_strdup(data);
+}
+
+gchar *gtranslator_header_get_prev_translator (GtranslatorHeader *header)
+{
+	return header->priv->prev_translator;
+}
+
+void gtranslator_header_set_prev_translator (GtranslatorHeader *header, gchar *data)
+{
+	if(header->priv->prev_translator)
+		g_free(header->priv->prev_translator);
+	header->priv->prev_translator = g_strdup(data);
 }
 
 gchar *gtranslator_header_get_language (GtranslatorHeader *header)

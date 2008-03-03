@@ -83,6 +83,12 @@ take_my_options_checkbutton_toggled(GtkToggleButton *button,
 	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->take_my_options));
 	
 	gtranslator_prefs_manager_set_take_my_options(gtk_toggle_button_get_active(button));
+	
+	gtk_widget_set_sensitive(dlg->priv->translator, !gtk_toggle_button_get_active(button));
+	gtk_widget_set_sensitive(dlg->priv->tr_email, !gtk_toggle_button_get_active(button));
+	gtk_widget_set_sensitive(dlg->priv->language, !gtk_toggle_button_get_active(button));
+	gtk_widget_set_sensitive(dlg->priv->lg_email, !gtk_toggle_button_get_active(button));
+	gtk_widget_set_sensitive(dlg->priv->encoding, !gtk_toggle_button_get_active(button));
 }
 
 static void
@@ -255,6 +261,10 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->take_my_options),
 				     gtranslator_prefs_manager_get_take_my_options());
+
+	gtk_widget_set_sensitive(dlg->priv->pot_date, FALSE);
+	gtk_widget_set_sensitive(dlg->priv->po_date, FALSE);
+	gtk_widget_set_sensitive(dlg->priv->charset, FALSE);
 
 	/*Connect signals*/
 	g_signal_connect(dlg->priv->take_my_options, "toggled",
