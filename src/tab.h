@@ -99,8 +99,7 @@ gint                   gtranslator_tab_get_active_text_tab (GtranslatorTab *tab)
 
 gint                   gtranslator_tab_get_active_trans_tab(GtranslatorTab *tab);
 
-GtranslatorCommentPanel 
-                      *gtranslator_tab_get_comment_panel   (GtranslatorTab *tab);
+GtranslatorCommentPanel *gtranslator_tab_get_comment_panel   (GtranslatorTab *tab);
 
 GtranslatorView       *gtranslator_tab_get_active_view     (GtranslatorTab *tab);
 

@@ -445,6 +445,9 @@ gtranslator_msg_get_msgctxt(GtranslatorMsg *msg)
 	return po_message_msgctxt(msg->priv->message);
 }
 
+/*
+ * Functions to manage the gettext errors
+ */
 static void
 on_gettext_po_xerror(gint severity,
 		     po_message_t message,

@@ -35,9 +35,10 @@
 #include "tab.h"
 #include "window.h"
 
+#define GTR_TAB_SAVE_AS "gtranslator-tab-save-as"
 
-static void gtranslator_save_file_dialog(GtkWidget *widget,
-					 GtranslatorWindow *window);
+static void load_file_list(GtranslatorWindow *window,
+			   const GSList *uris);
 
 
 /*
@@ -63,7 +64,7 @@ gtranslator_open(const gchar *filename,
 	po = gtranslator_po_new();
 	gtranslator_po_parse(po, filename, error);
 	
-	if(*error != NULL)
+	if((*error != NULL) && (((GError *)*error)->code != GTR_PO_ERROR_RECOVERY))
 		return FALSE;
 
 	header = gtranslator_po_get_header(po);
@@ -97,39 +98,24 @@ gtranslator_open(const gchar *filename,
 }
 
 static void 
-gtranslator_po_parse_file_from_dialog(GtkWidget * dialog,
-				      GtranslatorWindow *window)
+gtranslator_po_parse_files_from_dialog (GtkWidget * dialog,
+					GtranslatorWindow *window)
 {
-	gchar *po_file;
-	GError *error = NULL;
-	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
-
-	gtranslator_file_dialogs_store_directory(po_file);
+	GSList *po_files;
+	
+	po_files = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dialog));
 
 	/*
 	 * Open the file via our centralized opening function.
 	 */
-	if(!gtranslator_open(po_file, window, &error)) {
-		if(error) 
-		{
-			/*
-			 * We have to show the error in a dialog
-			 */
-			gtk_message_dialog_new(GTK_WINDOW(window),
-					       GTK_DIALOG_DESTROY_WITH_PARENT,
-					       GTK_MESSAGE_ERROR,
-					       GTK_BUTTONS_CLOSE,
-					       error->message);
-			g_error_free(error);
-		}
-	}
+	load_file_list (window, (const GSList *)po_files);
 
-	g_free(po_file);
+	g_slist_free (po_files);
 	
 	/*
 	 * Destroy the dialog 
 	 */
-	gtk_widget_destroy(dialog);
+	gtk_widget_destroy (dialog);
 }
 
 
@@ -144,10 +130,8 @@ gtranslator_file_chooser_analyse(gpointer dialog,
 	switch (reply){
 		case GTK_RESPONSE_ACCEPT:
 			if (mode == FILESEL_OPEN){
-				gtranslator_po_parse_file_from_dialog(GTK_WIDGET(dialog),
-								      window);
-			} else {
-				gtranslator_save_file_dialog(GTK_WIDGET(dialog), window);
+				gtranslator_po_parse_files_from_dialog(GTK_WIDGET(dialog),
+								       window);
 			}
 			break;
 		case GTK_RESPONSE_CANCEL:
@@ -169,7 +153,7 @@ void
 gtranslator_open_file_dialog(GtkAction * action,
 			     GtranslatorWindow *window)
 {
-	GtkWindow *dialog = NULL;
+	GtkWidget *dialog = NULL;
 
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -184,124 +168,148 @@ gtranslator_open_file_dialog(GtkAction * action,
 	 * remote requests and use gnome-vfs to retrieve a temporary file to 
 	 * work on, and transmit it back when saved.
 	 */
-	gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
+	//gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
 
 	gtranslator_file_chooser_analyse((gpointer) dialog, FILESEL_OPEN, window);
 }
 
-
-/*
- * A callback for Overwrite in Save as
- */
 static void
-gtranslator_overwrite_file(GtkWidget * widget,
-			   GtranslatorWindow *window)
+save_dialog_response_cb (GtkDialog *dialog,
+                         gint                    response_id,
+                         GtranslatorWindow      *window)
 {
-	GError *error;
-	//gtranslator_save_file(current_page->po,current_page->po->filename, &error);
-	/*
-	 * TODO: Should close the file and open the new saved file
-	 */
-	//gtranslator_open_file(current_page->po->filename);
-	//gtranslator_open(current_page->po->filename, window, &error);
+	GError *error = NULL;
+	GtranslatorPo *po;
+	GtranslatorTab *tab;
+	gchar *filename;
+	
+	tab = GTR_TAB (g_object_get_data (G_OBJECT (dialog),
+					  GTR_TAB_SAVE_AS));
+				
+	g_return_if_fail (GTK_IS_FILE_CHOOSER (dialog));
+				     
+	po = gtranslator_tab_get_po (tab);
+
+	if (response_id != GTK_RESPONSE_ACCEPT)
+	{
+		gtk_widget_destroy (GTK_WIDGET (dialog));
+		return;
+	}
+		
+	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+	g_return_if_fail (filename != NULL);
+	
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+	
+	if (po != NULL)
+	{
+		gtranslator_po_set_filename (po, filename);
+		
+		gtranslator_po_save_file (po, &error);
+	
+		if (error)
+		{
+			GtkWidget *dialog;
+			dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_WARNING,
+							 GTK_BUTTONS_OK,
+							 error->message);
+			gtk_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(dialog);
+			g_clear_error(&error);
+			g_free (filename);
+			return;
+		}
+	
+		/* We have to change the state of the tab */
+		gtranslator_tab_set_state(tab, GTR_TAB_STATE_SAVED);	
+			
+		g_free (filename);
+	}
 }
 
-/*
- * A callback for OK in Save as... dialog 
- */
-static void 
-gtranslator_save_file_dialog(GtkWidget *widget,
-			     GtranslatorWindow *window)
+static GtkFileChooserConfirmation
+confirm_overwrite_callback (GtkFileChooser *dialog,
+			    gpointer        data)
 {
-	gchar *po_file,
-	      *po_file_normalized;
-	GtranslatorPo *po;
-	
-	//po = gtranslator_window_get_active_po(window);
-	
- 	po_file = g_strdup(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(widget)));
-	po_file_normalized = g_utf8_normalize( po_file, -1, G_NORMALIZE_DEFAULT_COMPOSE);
-	g_free(po_file);
-	po_file = po_file_normalized;
+	gchar *uri;
+	GtkFileChooserConfirmation res;
 
-	if (g_file_test(po_file, G_FILE_TEST_EXISTS))
-	{
-		//gtranslator_po_set_filename(po, po_file);
-		
-		GtkWidget *dialog, *button;
-	
-		dialog = gtk_message_dialog_new (NULL,
-						 GTK_DIALOG_MODAL,
-						 GTK_MESSAGE_QUESTION,
-						 GTK_BUTTONS_CANCEL,
-						 _("The file '%s' already exists. Do you want overwrite it?"),
-						 po_file);
-		
-		button = gtk_dialog_add_button (GTK_DIALOG (dialog), "Overwrite", 1);
-		
-		g_signal_connect (G_OBJECT (button), "clicked",
-			G_CALLBACK (gtranslator_overwrite_file), window);
-		
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-	}
-	g_free(po_file);
-	gtk_widget_destroy(GTK_WIDGET(widget));
+	uri = gtk_file_chooser_get_uri (dialog);
+
+	/*
+	 * FIXME: We have to detect if the file is read-only
+	 */
+
+	/* fall back to the default confirmation dialog */
+	res = GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
+
+	g_free (uri);
+
+	return res;
 }
 
 /*
  * "Save as" dialog.
  */
 void
-gtranslator_save_file_as_dialog(GtkAction * action,
-				GtranslatorWindow *window)
+gtranslator_save_file_as_dialog (GtkAction * action,
+				 GtranslatorWindow *window)
 {
-	GtkWindow *dialog = NULL;
+	GtkWidget *dialog = NULL;
 	GtranslatorTab *current_page;
 	GtranslatorPo *po;
+	const gchar *filename;
+	gchar *uri = NULL;
+	gboolean uri_set = FALSE;
 	
-	if(dialog != NULL) {
-		gtk_window_present(GTK_WINDOW(dialog));
+	if (dialog != NULL) {
+		gtk_window_present (GTK_WINDOW (dialog));
 		return;
 	}
 
-	current_page = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current_page);
+	current_page = gtranslator_window_get_active_tab (window);
+	po = gtranslator_tab_get_po (current_page);
 	
-	if(gtranslator_po_get_write_perms(po)==FALSE ||
-	   strstr((const char*)gtranslator_po_get_filename, "/.gtranslator/"))
-	{
-		dialog = gtranslator_file_chooser_new(GTK_WINDOW(window),
-						      FILESEL_SAVE,
-						      _("Save file as..."));
-	}
-	else
-	{
-		dialog = gtranslator_file_chooser_new(GTK_WINDOW(window),
-						      FILESEL_SAVE,
-						      _("Save local copy of file as..."));
-		
-		/*
-		 * Set a local filename in the users home directory with the 
-		 *  same filename as the original but with a project prefix
-		 *   (e.g. "gtranslator-tr.po").
-		 */ 
-		gtk_file_chooser_select_filename(GTK_FILE_CHOOSER(dialog),
-						 gtranslator_po_get_filename(po));
-		gtranslator_file_dialogs_store_directory(gtranslator_po_get_filename(po));
-	}
-
+	dialog = gtranslator_file_chooser_new (GTK_WINDOW (window),
+					       FILESEL_SAVE,
+					       _("Save file as..."));
+	
+	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog),
+							TRUE);
+	g_signal_connect (dialog,
+			  "confirm-overwrite",
+			  G_CALLBACK (confirm_overwrite_callback),
+			  NULL);
+			  
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	
+	/*Set the suggested file */
+	filename = gtranslator_po_get_filename (po);
+	
+	uri = g_filename_to_uri (filename, NULL, NULL);
+	
+	if (uri)
+		uri_set = gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (dialog),
+						    uri);
+	
+	g_free (uri);
+	
 	/*
-	 * With the gettext parser/writer API, we can't currently read/write
-	 * to remote files with gnome-vfs. Eventually, we should intercept
-	 * remote requests and use gnome-vfs to retrieve a temporary file to 
-	 * work on, and transmit it back when saved.
+	 * FIXME: If we can't set the uri we should add a default path and name
 	 */
-	gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
+	 
+	g_object_set_data (G_OBJECT (dialog),
+			   GTR_TAB_SAVE_AS,
+			   current_page);
+	 
+	g_signal_connect (dialog,
+			  "response",
+			  G_CALLBACK (save_dialog_response_cb),
+			  window);
 
-	gtranslator_file_chooser_analyse((gpointer) dialog, FILESEL_SAVE, window);
-	
-	//gtranslator_dialog_show(&dialog, "gtranslator -- save");
+	gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 void 
@@ -315,18 +323,6 @@ gtranslator_file_close(GtkAction * widget,
 	current_page = gtranslator_window_get_active_tab(window);
 	nb = gtranslator_window_get_notebook(window);
 	g_assert(current_page != NULL);
-
-	/*
-	 * If user doesn't know what to do with changed file, return
-	 */
-	/*if (!gtranslator_should_the_file_be_saved_dialog(current_page))
-		return;*/
-
-	/*
-	 * "Remove" the stored "runtime/filename" key.
-	 * Is this really neccessary with tabs?
-	 */
-	//gtranslator_config_set_string("runtime/filename", "--- No file ---");
 	
 	i = gtk_notebook_page_num(GTK_NOTEBOOK(nb), GTK_WIDGET(current_page));
 	if (i != -1)
@@ -336,8 +332,8 @@ gtranslator_file_close(GtkAction * widget,
 }
 
 void
-gtranslator_file_quit(GtkAction *action,
-		      GtranslatorWindow *window)
+gtranslator_file_quit (GtkAction *action,
+		       GtranslatorWindow *window)
 {	
 	GtranslatorNotebook *nb;
 	gint pages;
@@ -354,86 +350,32 @@ gtranslator_file_quit(GtkAction *action,
 
 	
 	gtk_widget_destroy(GTK_WIDGET(window));
-	/*
-	 * Get the EPaned's position offset.
-	 */
-	//table_pane_position=gtk_paned_get_position(GTK_PANED(gtranslator_window_get_paned(window)));
-	/*
-	 * Store the pane position in the preferences.
-	 */
-	//gtranslator_config_set_int("interface/table_pane_position", table_pane_position);
-	
-	//gtranslator_utils_save_geometry();
-
-	/*
-	 * "Flush" our runtime config string for the current filename.
-	 */
-	//gtranslator_config_set_string("runtime/filename", "--- No file ---");
-
-	/*
-	 * Free the used GtrTranslator structure.
-	 */
-	//gtranslator_translator_free(gtranslator_translator);
-
-	/*
-	 * Free any lungering stuff 'round -- free prefs.
-	 */
-//	gtranslator_preferences_free();
-
-	/*
-	 * Remove any lungering temp. file.
-	 */
-	//gtranslator_utils_remove_temp_files();
-
-	/*
-	 * Free our used runtime config structure.
-	 */
-	//gtranslator_runtime_config_free(gtranslator_runtime_config);
-	
-	/*
-	 * Store the current date.
-	 */
-//	gtranslator_config_set_last_run_date();
-
-	/*
-	 * Shutdown the eventually (non-)initialized stuff from GnomeVFS.
-	 */
-	/*if(gnome_vfs_initialized())
-	{
-		gnome_vfs_shutdown();
-	}*/
-
-	/*
-	 * Quit with the normal Gtk+ quit.
-	 */
-	//gtk_main_quit();
 }
 
 /*
  * A callback for Save
  */
 void 
-gtranslator_save_current_file_dialog(GtkWidget * widget,
-				     GtranslatorWindow *window)
+gtranslator_save_current_file_dialog (GtkWidget * widget,
+				      GtranslatorWindow *window)
 {
-	GError *error;
+	GError *error = NULL;
 	GtranslatorTab *current;
 	GtranslatorPo *po;
 	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
+	current = gtranslator_window_get_active_tab (window);
+	po = gtranslator_tab_get_po (current);
 	
-	//g_return_if_fail(current_page->po->file_changed);
-
-	if (!gtranslator_po_save_file(po, gtranslator_po_get_filename(po), &error)) {
+	gtranslator_po_save_file (po, &error);
+	
+	if (error)
+	{
 		GtkWidget *dialog;
-		g_assert(error != NULL);
-		dialog = gtk_message_dialog_new(
-			GTK_WINDOW(window),
-			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_WARNING,
-			GTK_BUTTONS_OK,
-			error->message);
+		dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_WARNING,
+						 GTK_BUTTONS_OK,
+						 error->message);
 		gtk_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(dialog);
 		g_clear_error(&error);
@@ -467,9 +409,10 @@ load_file_list(GtranslatorWindow *window,
 	const GSList  *l;
 	GError *error = NULL;
 	gchar *path;
+	GtkWidget *tab;
 	
 	g_return_if_fail ((uris != NULL) && (uris->data != NULL));
-		
+
 	/* Remove the uris corresponding to documents already open
 	 * in "window" and remove duplicates from "uris" list */
 	l = uris;
@@ -477,42 +420,30 @@ load_file_list(GtranslatorWindow *window,
 	{
 		if (!is_duplicated_uri (uris_to_load, uris->data))
 		{
-			
 			/*We need to now if is already loaded in any tab*/
-			
-			/*tab = get_tab_from_uri (win_docs, (const gchar *)uris->data);
+			tab = gtranslator_window_get_tab_from_uri (window,
+								   (const gchar *)uris->data);
+
 			if (tab != NULL)
 			{
 				if (uris == l)
 				{
-					gedit_window_set_active_tab (window, tab);
-					jump_to = FALSE;
-
-					if (line_pos > 0)
-					{
-						GeditDocument *doc;
-						GeditView *view;
-
-						doc = gedit_tab_get_document (tab);
-						view = gedit_tab_get_view (tab);
-
-						gedit_document_goto_line (doc, line_pos);
-						gedit_view_scroll_to_cursor (view);
-					}
+					gtranslator_window_set_active_tab (window,
+									   tab);
 				}
 
-				++loaded_files;
 			}
 			else
-			{*/
+			{
 				uris_to_load = g_slist_prepend (uris_to_load, 
 								uris->data);
-			//}
+			}
+
 		}
 
 		uris = g_slist_next (uris);
 	}
-	
+
 	if (uris_to_load == NULL)
 		return;
 	
@@ -539,14 +470,18 @@ load_file_list(GtranslatorWindow *window,
 	if(error != NULL)
 	{
 		g_free(path);
+		
+		GtkWidget *dialog;
 		/*
 		 * We have to show the error in a dialog
 		 */
-		gtk_message_dialog_new(GTK_WINDOW(window),
-				       GTK_DIALOG_DESTROY_WITH_PARENT,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_CLOSE,
-				       error->message);
+		dialog = gtk_message_dialog_new(GTK_WINDOW(window),
+						GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_ERROR,
+						GTK_BUTTONS_CLOSE,
+						error->message);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 		g_error_free(error);
 	}
 	

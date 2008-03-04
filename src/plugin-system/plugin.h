@@ -152,7 +152,7 @@ register_gtranslator_plugin (GTypeModule *module)					\
 		(GInstanceInitFunc) plugin_name##_init				\
 	};									\
 										\
-	g_warning( "Registering " #PluginName);	\
+	g_message( "Registering " #PluginName);	\
 										\
 	/* Initialise the i18n stuff */						\
 	bindtextdomain (GETTEXT_PACKAGE, GTR_LOCALEDIR);			\
@@ -217,7 +217,7 @@ object_name##_register_type (GTypeModule *module)					\
 		(GInstanceInitFunc) object_name##_init				\
 	};									\
 										\
-	g_warning( "Registering " #ObjectName);	\
+	g_message( "Registering " #ObjectName);	\
 										\
 	g_define_type_id = g_type_module_register_type (module,			\
 					   	        PARENT_TYPE,		\

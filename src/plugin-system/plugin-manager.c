@@ -142,7 +142,7 @@ configure_button_cb (GtkWidget          *button,
 
 	g_return_if_fail (info != NULL);
 
-	g_warning( "Configuring: %s\n", 
+	g_message( "Configuring: %s\n", 
 			     gtranslator_plugin_info_get_name (info));
 
 	toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm)));
@@ -150,7 +150,7 @@ configure_button_cb (GtkWidget          *button,
 	gtranslator_plugins_engine_configure_plugin (pm->priv->engine,
 					       info, toplevel);
 
-	g_warning( "Done");	
+	g_message( "Done");	
 }
 
 static void
@@ -336,7 +336,7 @@ plugin_manager_set_active (GtranslatorPluginManager *pm,
 	{
 		/* activate the plugin */
 		if (!gtranslator_plugins_engine_activate_plugin (pm->priv->engine, info)) {
-			g_warning( "Could not activate %s.\n", 
+			g_message( "Could not activate %s.\n", 
 					     gtranslator_plugin_info_get_name (info));
 
 			res = FALSE;
@@ -346,7 +346,7 @@ plugin_manager_set_active (GtranslatorPluginManager *pm,
 	{
 		/* deactivate the plugin */
 		if (!gtranslator_plugins_engine_deactivate_plugin (pm->priv->engine, info)) {
-			g_warning( "Could not deactivate %s.\n", 
+			g_message( "Could not deactivate %s.\n", 
 					     gtranslator_plugin_info_get_name (info));
 
 			res = FALSE;

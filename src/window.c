@@ -1031,6 +1031,7 @@ gtranslator_recent_chooser_item_activated_cb (GtkRecentChooser *chooser,
 {
 	gchar *uri, *path;
 	GError *error = NULL;
+	GtkWidget *dialog;
 
 	uri = gtk_recent_chooser_get_current_uri (chooser);
 
@@ -1043,18 +1044,23 @@ gtranslator_recent_chooser_item_activated_cb (GtkRecentChooser *chooser,
 		return;
 	}
 	
-	
+	/*
+	 * FIXME: We have to detect if the file is already opened
+	 * If it is we should display a warning dialog.
+	 */
 	gtranslator_open (path, window, &error);
 	if(error)
 	{
 		/*
 		 * We have to show the error in a dialog
 		 */
-		gtk_message_dialog_new(GTK_WINDOW(window),          
-				      GTK_DIALOG_DESTROY_WITH_PARENT,
-				      GTK_MESSAGE_ERROR,
-				      GTK_BUTTONS_CLOSE,
-				      error->message);
+		dialog = gtk_message_dialog_new(GTK_WINDOW(window),          
+						GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_ERROR,
+						GTK_BUTTONS_CLOSE,
+						error->message);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 
 		if(error->code == GTR_PO_ERROR_FILENAME)
 			gtranslator_recent_remove (window, path);
@@ -1702,4 +1708,50 @@ _gtranslator_window_get_layout_manager (GtranslatorWindow *window)
 	g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
 	
 	return G_OBJECT (window->priv->layout_manager);
+}
+
+GtkWidget *
+gtranslator_window_get_tab_from_uri (GtranslatorWindow *window,
+				     const gchar *uri)
+{
+	GList *tabs;
+	GtranslatorPo *po;
+	const gchar *po_uri;
+	
+	g_return_if_fail (GTR_IS_WINDOW (window));
+	
+	gchar *good_uri = g_filename_from_uri (uri, NULL, NULL);
+
+	tabs = gtranslator_window_get_all_tabs (window);
+	
+	while (tabs != NULL)
+	{
+		po = gtranslator_tab_get_po (GTR_TAB (tabs->data));
+		
+		po_uri = gtranslator_po_get_filename (po);
+	
+		if (g_utf8_collate (good_uri, po_uri) == 0)
+		{
+			g_free (good_uri);
+			return tabs->data;
+		}
+		
+		tabs = tabs->next;
+	}
+	
+	g_free (good_uri);
+	return NULL;
+}
+
+void
+gtranslator_window_set_active_tab (GtranslatorWindow *window,
+				   GtkWidget *tab)
+{
+	gint page;
+	
+	page = gtk_notebook_page_num (GTK_NOTEBOOK (window->priv->notebook),
+				      tab);
+	
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook),
+				       page);
 }

@@ -63,7 +63,7 @@ _gtranslator_plugin_info_unref (GtranslatorPluginInfo *info)
 
 	if (info->plugin != NULL)
 	{
-		g_warning( "Unref plugin %s", info->name);
+		g_message( "Unref plugin %s", info->name);
 
 		g_object_unref (info->plugin);
 		
@@ -123,7 +123,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 
 	g_return_val_if_fail (file != NULL, NULL);
 
-	g_warning( "Loading plugin: %s", file);
+	g_message( "Loading plugin: %s", file);
 
 	info = g_new0 (GtranslatorPluginInfo, 1);
 	info->refcount = 1;
@@ -141,7 +141,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 				 "IAge",
 				 NULL))
 	{
-		g_warning(
+		g_message(
 				     "IAge key does not exist in file: %s", file);
 		goto error;
 	}
@@ -152,7 +152,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 				    "IAge",
 				    NULL) != 2)
 	{
-		g_warning(
+		g_message(
 				     "Wrong IAge in file: %s", file);
 		goto error;
 	}
@@ -181,7 +181,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 							 NULL);
 	if (info->dependencies == NULL)
 	{
-		g_warning( "Could not find 'Depends' in %s", file);
+		g_message( "Could not find 'Depends' in %s", file);
 		info->dependencies = g_new0 (gchar *, 1);
 	}
 
@@ -226,7 +226,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->desc = str;
 	else
-		g_warning( "Could not find 'Description' in %s", file);
+		g_message( "Could not find 'Description' in %s", file);
 
 	/* Get Icon */
 	str = g_key_file_get_locale_string (plugin_file,
@@ -236,7 +236,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->icon_name = str;
 	else
-		g_warning( "Could not find 'Icon' in %s, using 'plugin'", file);
+		g_message( "Could not find 'Icon' in %s, using 'plugin'", file);
 	
 
 	/* Get Authors */
@@ -246,7 +246,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 						    NULL,
 						    NULL);
 	if (info->authors == NULL)
-		g_warning( "Could not find 'Authors' in %s", file);
+		g_message( "Could not find 'Authors' in %s", file);
 
 
 	/* Get Copyright */
@@ -257,7 +257,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->copyright = str;
 	else
-		g_warning( "Could not find 'Copyright' in %s", file);
+		g_message( "Could not find 'Copyright' in %s", file);
 
 	/* Get Website */
 	str = g_key_file_get_string (plugin_file,
@@ -267,7 +267,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->website = str;
 	else
-		g_warning( "Could not find 'Website' in %s", file);
+		g_message( "Could not find 'Website' in %s", file);
 		
 	g_key_file_free (plugin_file);
 	
@@ -306,7 +306,7 @@ gtranslator_plugin_info_is_available (GtranslatorPluginInfo *info)
 gboolean
 gtranslator_plugin_info_is_configurable (GtranslatorPluginInfo *info)
 {
-	g_warning( "Is '%s' configurable?", info->name);
+	g_message( "Is '%s' configurable?", info->name);
 
 	g_return_val_if_fail (info != NULL, FALSE);
 

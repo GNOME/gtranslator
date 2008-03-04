@@ -84,8 +84,7 @@ GType		  gtranslator_message_table_model_get_type	       (void) G_GNUC_CONST;
 
 GType		  gtranslator_message_table_model_register_type	       (GTypeModule * module);
 
-GtranslatorMessageTableModel
-                 *gtranslator_message_table_model_new                  (void);
+GtranslatorMessageTableModel *gtranslator_message_table_model_new                  (void);
                  
 void              gtranslator_message_table_model_append             (GtranslatorMessageTableModel *model,
 								      GtranslatorMsg *msg,

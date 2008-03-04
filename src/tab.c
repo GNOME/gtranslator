@@ -332,38 +332,38 @@ update_status(GtranslatorTab *tab,
 
 	if((status == GTR_MSG_STATUS_FUZZY) && !gtranslator_msg_is_fuzzy(msg))
 	{
-		gtranslator_po_increase_decrease_fuzzy(tab->priv->po, FALSE);
+		_gtranslator_po_increase_decrease_fuzzy(tab->priv->po, FALSE);
 		if(gtranslator_msg_is_translated(msg))
 		{
 			status = GTR_MSG_STATUS_TRANSLATED;
-			gtranslator_po_increase_decrease_translated(tab->priv->po, TRUE);
+			_gtranslator_po_increase_decrease_translated(tab->priv->po, TRUE);
 		}
 		else {
 			status = GTR_MSG_STATUS_UNTRANSLATED;
-			gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
+			_gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
 		}
 	}
 	else if((status == GTR_MSG_STATUS_TRANSLATED) && !gtranslator_msg_is_translated(msg))
 	{
 		status = GTR_MSG_STATUS_UNTRANSLATED;
-		gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
+		_gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
 	}
 	else if((status == GTR_MSG_STATUS_TRANSLATED) && gtranslator_msg_is_fuzzy(msg))
 	{
 		status = GTR_MSG_STATUS_FUZZY;
-		gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
-		gtranslator_po_increase_decrease_fuzzy(tab->priv->po, TRUE);
+		_gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
+		_gtranslator_po_increase_decrease_fuzzy(tab->priv->po, TRUE);
 	}
 	else if((status == GTR_MSG_STATUS_UNTRANSLATED) && gtranslator_msg_is_translated(msg))
 	{
 		if(gtranslator_msg_is_fuzzy(msg))
 		{
 			status = GTR_MSG_STATUS_FUZZY;
-			gtranslator_po_increase_decrease_fuzzy(tab->priv->po, TRUE);
+			_gtranslator_po_increase_decrease_fuzzy(tab->priv->po, TRUE);
 		}
 		else {
 			status = GTR_MSG_STATUS_TRANSLATED;
-			gtranslator_po_increase_decrease_translated(tab->priv->po, TRUE);
+			_gtranslator_po_increase_decrease_translated(tab->priv->po, TRUE);
 		}
 	}
 

@@ -1,3 +1,30 @@
+2008-03-04  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* plugin-system/plugin.h:
+	* plugin-system/plugins-engine.c:
+	* plugin-system/module.c:
+	* plugin-system/update-from-gedit.sh:
+	* plugin-system/plugin-manager.c:
+	* plugin-system/plugin-info.c:
+	Now plugin-system uses g_message instead g_warning
+	(By Ignacio Casal Quinteiro)
+
+	* dialogs/file-dialogs.{c,h}:
+	Now gtranslator checks when you save, if the file
+	already exits. Fixed bug 423276
+	(By Ignacio Casal Quinteiro)
+
+	* application.{c,h}:
+	* tab.{c,h}:
+	* window.{c,h}:
+	* statusbar.c:
+	* message-table-model.h:
+	* actions-file.c:
+	* po.{c,h}:
+	* msg.{c,h}:
+	Fixed some bugs and memory leaks
+	(By Ignacio Casal Quinteiro)
+	
 2008-03-03  Pablo Sanxiao  <psanxiao@gmail.com>
 
 	* dialogs/header-dialog.c:

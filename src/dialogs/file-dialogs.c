@@ -26,26 +26,9 @@
 #include "window.h"
 
 /*
-  * Store the given filename's directory for our file dialogs completion-routine.
- */
-void
-gtranslator_file_dialogs_store_directory(const gchar *filename)
-{
-	gchar *directory;
-
-	g_return_if_fail(filename!=NULL);
-	
-	directory=g_path_get_dirname(filename);
-	
-//	gtranslator_config_set_string("informations/last_directory", directory);
-
-	g_free(directory);
-}
-
-/*
  * File chooser dialog
  */
-GtkWindow *
+GtkWidget *
 gtranslator_file_chooser_new (GtkWindow *parent,
 			      FileselMode mode,
 			      gchar *title)
@@ -61,26 +44,29 @@ gtranslator_file_chooser_new (GtkWindow *parent,
 					     NULL);
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_ACCEPT);
 	if (mode != FILESEL_SAVE)
-		{
-			filter = gtk_file_filter_new();
-			gtk_file_filter_set_name(filter,_("Gettext translation"));
-			gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation");
-			gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
+	{
+		/* We set a multi selection dialog */
+		gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog),
+						      TRUE);
+		
+		/* Now we set the filters */
+		filter = gtk_file_filter_new();
+		gtk_file_filter_set_name(filter,_("Gettext translation"));
+		gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation");
+		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
 	
-			filter = gtk_file_filter_new();
-			gtk_file_filter_set_name(filter,_("Gettext translation template"));
-			gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation-template");
-			gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
-			
-			filter = gtk_file_filter_new();
-			gtk_file_filter_set_name(filter,_("All files"));
-			gtk_file_filter_add_pattern(filter,"*");
-			gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
-			
-//			gtranslator_file_dialogs_set_directory(&dialog);
-		} 
+		filter = gtk_file_filter_new();
+		gtk_file_filter_set_name(filter,_("Gettext translation template"));
+		gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation-template");
+		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
+		
+		filter = gtk_file_filter_new();
+		gtk_file_filter_set_name(filter,_("All files"));
+		gtk_file_filter_add_pattern(filter,"*");
+		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
+	} 
 		
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(parent));
-	gtk_widget_show_all(GTK_WIDGET(dialog));
-	return GTK_WINDOW(dialog);
+	
+	return dialog;
 }

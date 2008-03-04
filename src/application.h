@@ -83,10 +83,11 @@ GList            *gtranslator_application_get_views           (GtranslatorApplic
 							       gboolean original,
 							       gboolean translated);
 
+GtranslatorWindow *gtranslator_application_open_window (GtranslatorApplication *app);
+
 GtranslatorWindow *gtranslator_application_get_active_window  (GtranslatorApplication * app);
 
-const GList *
-gtranslator_application_get_windows (GtranslatorApplication *app);
+const GList      *gtranslator_application_get_windows (GtranslatorApplication *app);
 
 G_END_DECLS
 

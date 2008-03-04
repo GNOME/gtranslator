@@ -27,9 +27,7 @@ typedef enum {
 	FILESEL_SAVE
 } FileselMode;
 
-void		gtranslator_file_dialogs_store_directory	(const gchar *filename);
-
-GtkWindow	*gtranslator_file_chooser_new			(GtkWindow *parent,
+GtkWidget	*gtranslator_file_chooser_new			(GtkWindow *parent,
 								 FileselMode mode,
 								 gchar *title);
 

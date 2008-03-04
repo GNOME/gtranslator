@@ -70,27 +70,29 @@ enum
 {
 	GTR_PO_ERROR_GETTEXT,
 	GTR_PO_ERROR_FILENAME,
+	GTR_PO_ERROR_RECOVERY,
 	GTR_PO_ERROR_OTHER,
 };
 
 /*
  * Public methods
  */
-GQuark          gtranslator_po_error_quark		(void);
+GQuark		gtranslator_po_error_quark		(void);
 
 GType		gtranslator_po_get_type			(void) G_GNUC_CONST;
 
 GType		gtranslator_po_register_type		(GTypeModule * module);
 
-GtranslatorPo   *gtranslator_po_new			(void);
+GtranslatorPo	*gtranslator_po_new			(void);
 
-void            gtranslator_po_parse			(GtranslatorPo *po,
+void		gtranslator_po_parse			(GtranslatorPo *po,
 							const gchar *filename,
 							GError **error);
 
-gboolean	gtranslator_po_save_file		(GtranslatorPo *po,
-		      					const gchar *name,
-		      					GError **error);
+void		gtranslator_po_save_file           	(GtranslatorPo *po,
+							GError **error);
+
+gchar           *gtranslator_po_get_filename		(GtranslatorPo *po);
 
 gchar           *gtranslator_po_get_filename		(GtranslatorPo *po);
 
@@ -101,7 +103,7 @@ gboolean         gtranslator_po_get_write_perms		(GtranslatorPo *po);
 
 GList           *gtranslator_po_get_messages		(GtranslatorPo *po);
 
-void		gtranslator_po_set_messages		(GtranslatorPo *po,
+void             gtranslator_po_set_messages		(GtranslatorPo *po,
 							GList *messages);
 
 GList           *gtranslator_po_get_current_message	(GtranslatorPo *po);
@@ -118,8 +120,28 @@ GList           *gtranslator_po_get_next_untrans	(GtranslatorPo *po);
 
 GList           *gtranslator_po_get_prev_untrans	(GtranslatorPo *po);
 
-GtranslatorHeader	
+GtranslatorHeader  
 		*gtranslator_po_get_header		(GtranslatorPo *po);
+
+gint             gtranslator_po_get_translated_count	(GtranslatorPo *po);
+
+gint             gtranslator_po_get_fuzzy_count		(GtranslatorPo *po);
+
+gint             gtranslator_po_get_untranslated_count	(GtranslatorPo *po);
+
+gint             gtranslator_po_get_messages_count	(GtranslatorPo *po);
+
+gint             gtranslator_po_get_message_position	(GtranslatorPo *po);
+
+const gchar     *gtranslator_po_check_po_file		(GtranslatorPo *po);
+
+/* Unexported funcs */
+void            _gtranslator_po_increase_decrease_translated
+                                                       (GtranslatorPo *po,
+							gboolean increase);
+
+void            _gtranslator_po_increase_decrease_fuzzy(GtranslatorPo *po,
+							gboolean increase);
 
 G_END_DECLS
 

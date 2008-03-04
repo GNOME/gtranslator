@@ -91,10 +91,8 @@ GtranslatorTab   *gtranslator_window_get_active_tab   (GtranslatorWindow *window
 
 GList            *gtranslator_window_get_all_tabs     (GtranslatorWindow *window);
 
-GtranslatorNotebook
-                 *gtranslator_window_get_notebook     (GtranslatorWindow *window);
-GtranslatorHeader
-		*gtranslator_window_get_header_from_active_tab (GtranslatorWindow *window);
+GtranslatorNotebook *gtranslator_window_get_notebook     (GtranslatorWindow *window);
+GtranslatorHeader *gtranslator_window_get_header_from_active_tab (GtranslatorWindow *window);
 
 GtkStatusbar 	 *gtranslator_window_get_statusbar    (GtranslatorWindow *window);
 
@@ -128,6 +126,12 @@ void              gtranslator_window_remove_widget    (GtranslatorWindow *window
 
 GObject *        _gtranslator_window_get_layout_manager
 						      (GtranslatorWindow *window);
+
+GtkWidget        *gtranslator_window_get_tab_from_uri (GtranslatorWindow *window,
+						       const gchar *uri);
+
+void              gtranslator_window_set_active_tab   (GtranslatorWindow *window,
+						       GtkWidget *tab);
 
 G_END_DECLS
 

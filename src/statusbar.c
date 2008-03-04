@@ -29,7 +29,8 @@
 
 #include "statusbar.h"
 
-#define GTR_STATUSBAR_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GTR_TYPE_STATUSBAR, GtranslatorStatusbarPrivate))
+#define GTR_STATUSBAR_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
+					  GTR_TYPE_STATUSBAR, GtranslatorStatusbarPrivate))
 
 struct _GtranslatorStatusbarPrivate
 {
@@ -76,20 +77,20 @@ gtranslator_statusbar_init (GtranslatorStatusbar *statusbar)
 	gtk_widget_style_get (GTK_WIDGET (statusbar), "shadow-type", &shadow_type, NULL);
 	
 	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME(frame), shadow_type);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), shadow_type);
 	gtk_widget_show (frame);
 	
 	statusbar->priv->overwrite_mode_label = gtk_label_new ("");
 	gtk_label_set_single_line_mode (GTK_LABEL (statusbar->priv->overwrite_mode_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (statusbar->priv->overwrite_mode_label), 0.0, 0.5);
-	gtk_label_set_width_chars(GTK_LABEL(statusbar->priv->overwrite_mode_label),
-				  MAX(g_utf8_strlen(_("INS"), -1)+1, g_utf8_strlen(_("OVR"), -1)+1));
+	gtk_label_set_width_chars (GTK_LABEL (statusbar->priv->overwrite_mode_label),
+				  MAX (g_utf8_strlen(_("INS"), -1)+1, g_utf8_strlen (_("OVR"), -1)+1));
 						    
 	
 	gtk_container_add (GTK_CONTAINER (frame), statusbar->priv->overwrite_mode_label);
 	gtk_widget_show (statusbar->priv->overwrite_mode_label);
 	
-	gtk_box_pack_start(GTK_BOX(statusbar), frame, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (statusbar), frame, FALSE, FALSE, 0);
 	
 }
 

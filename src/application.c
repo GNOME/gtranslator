@@ -36,8 +36,6 @@
 
 G_DEFINE_TYPE(GtranslatorApplication, gtranslator_application, G_TYPE_OBJECT)
 
-#define CONFIG_DIRECTORY ".config/gtranslator"
-
 struct _GtranslatorApplicationPrivate
 {
 	GList *windows;
@@ -84,7 +82,6 @@ save_accels (void)
 	gchar *filename;
 
 	filename = get_accel_file ();
-	g_warning (filename);
 	if (filename != NULL)
 	{
 		gtk_accel_map_save (filename);
@@ -135,10 +132,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 	}
 
 	egg_toolbars_model_set_flags (priv->toolbars_model, 0,
-				      EGG_TB_MODEL_NOT_REMOVABLE);
-	
-	/* We build our config directory */
-	
+				      EGG_TB_MODEL_NOT_REMOVABLE);	
 	
 	load_accels ();
 }
@@ -183,7 +177,7 @@ gtranslator_application_get_default (void)
 	return instance;
 }
 
-void
+GtranslatorWindow *
 gtranslator_application_open_window (GtranslatorApplication *app)
 {
 	GtranslatorWindow *window;
@@ -213,7 +207,9 @@ gtranslator_application_open_window (GtranslatorApplication *app)
 	g_signal_connect(window, "destroy",
 			 G_CALLBACK(on_window_destroy_cb), GTR_APP);
 
-	gtk_widget_show(GTK_WIDGET(window));	
+	gtk_widget_show(GTK_WIDGET(window));
+	
+	return window;
 }
 				     
 
@@ -271,12 +267,24 @@ gtranslator_application_get_views (GtranslatorApplication *app,
 	return res;
 }
 
+/**
+ * gtranslator_application_get_active_window:
+ * @app: a #GtranslatorApplication
+ * 
+ * Return value: the active #GtranslatorWindow
+ **/
 GtranslatorWindow *
 gtranslator_application_get_active_window(GtranslatorApplication * app)
 {
 	return GTR_WINDOW(app->priv->active_window);
 }
 
+/**
+ * gtranslator_application_get_windows:
+ * @app: a #GtranslatorApplication
+ * 
+ * Return value: a list of all opened windows.
+ **/
 const GList *
 gtranslator_application_get_windows (GtranslatorApplication *app)
 {

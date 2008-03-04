@@ -83,8 +83,7 @@ po_message_t      gtranslator_msg_get_message          (GtranslatorMsg *msg);
 void              gtranslator_msg_set_message          (GtranslatorMsg *msg,
 							po_message_t message);
 
-GtkTreeRowReference
-                 *gtranslator_msg_get_row_reference    (GtranslatorMsg *msg);
+GtkTreeRowReference *gtranslator_msg_get_row_reference    (GtranslatorMsg *msg);
 
 void              gtranslator_msg_set_row_reference    (GtranslatorMsg *msg,
 							GtkTreeRowReference *row_reference);
@@ -99,8 +98,7 @@ void              gtranslator_msg_set_fuzzy            (GtranslatorMsg *msg,
 void              gtranslator_msg_set_status           (GtranslatorMsg *msg,
 							GtranslatorMsgStatus status);
 
-GtranslatorMsgStatus
-                  gtranslator_msg_get_status           (GtranslatorMsg *msg);
+GtranslatorMsgStatus gtranslator_msg_get_status           (GtranslatorMsg *msg);
 
 const gchar      *gtranslator_msg_get_msgid            (GtranslatorMsg *msg);
 
@@ -123,10 +121,10 @@ const gchar      *gtranslator_msg_get_comment          (GtranslatorMsg *msg);
 void              gtranslator_msg_set_comment          (GtranslatorMsg *msg,
 							const gchar *comment);
 
-gint		gtranslator_msg_get_po_position		(GtranslatorMsg *msg);
+gint              gtranslator_msg_get_po_position      (GtranslatorMsg *msg);
 
-void		gtranslator_msg_set_po_position		(GtranslatorMsg *msg,
-							 gint po_position);
+void              gtranslator_msg_set_po_position      (GtranslatorMsg *msg,
+							gint po_position);
 
 const gchar      *gtranslator_msg_get_extracted_comments
                                                        (GtranslatorMsg *msg);

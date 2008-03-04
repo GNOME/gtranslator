@@ -101,7 +101,7 @@ gtranslator_module_load (GTypeModule *gmodule)
 	GtranslatorModule *module = GTR_MODULE (gmodule);
 	GtranslatorModuleRegisterFunc register_func;
 
-	g_warning( "Loading %s", module->path);
+	g_message( "Loading %s", module->path);
 
 	module->library = g_module_open (module->path, 0);
 
@@ -148,7 +148,7 @@ gtranslator_module_unload (GTypeModule *gmodule)
 {
 	GtranslatorModule *module = GTR_MODULE (gmodule);
 
-	g_warning( "Unloading %s", module->path);
+	g_message( "Unloading %s", module->path);
 
 	g_module_close (module->library);
 
@@ -167,7 +167,7 @@ gtranslator_module_get_path (GtranslatorModule *module)
 GObject *
 gtranslator_module_new_object (GtranslatorModule *module)
 {
-	g_warning( "Creating object of type %s", g_type_name (module->type));
+	g_message( "Creating object of type %s", g_type_name (module->type));
 
 	if (module->type == 0)
 	{
@@ -180,7 +180,7 @@ gtranslator_module_new_object (GtranslatorModule *module)
 static void
 gtranslator_module_init (GtranslatorModule *module)
 {
-	g_warning( "GtranslatorModule %p initialising", module);
+	g_message( "GtranslatorModule %p initialising", module);
 }
 
 static void
@@ -188,7 +188,7 @@ gtranslator_module_finalize (GObject *object)
 {
 	GtranslatorModule *module = GTR_MODULE (object);
 
-	g_warning( "GtranslatorModule %p finalising", module);
+	g_message( "GtranslatorModule %p finalising", module);
 
 	g_free (module->path);
 
