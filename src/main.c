@@ -28,7 +28,7 @@
 #include "application.h"
 #include "prefs-manager-app.h"
 #include "plugins-engine.h"
-#include "utils_gui.h"
+#include "utils.h"
 
 #include <locale.h>
 #include <glib.h>

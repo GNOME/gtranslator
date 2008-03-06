@@ -23,7 +23,7 @@
 #include "comment-dialog.h"
 #include "comment.h"
 #include "tab.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "window.h"
 
 #include <glib.h>

@@ -22,7 +22,7 @@
 
 #include "preferences-dialog.h"
 #include "prefs-manager.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "plugin-manager.h"
 
 #include <glib.h>

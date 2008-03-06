@@ -39,7 +39,7 @@
 
 #include "search-dialog.h"
 #include "history-entry.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "gtranslator-marshal.h"
 
 #define GTR_SEARCH_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \

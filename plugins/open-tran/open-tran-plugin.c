@@ -29,7 +29,7 @@
 #include <gtk/gtkentry.h>
 #include <gtk/gtkdialog.h>
 #include "window.h"
-#include "utils_gui.h"
+#include "utils.h"
 
 #define OPEN_TRAN_PLUGIN_ICON PIXMAPSDIR"/open-tran.png"
 #define WINDOW_DATA_KEY	"GtranslatorOpenTranPluginWindowData"

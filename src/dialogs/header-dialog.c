@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include "header-dialog.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "prefs-manager.h"
 #include "po.h"
 

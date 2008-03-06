@@ -29,7 +29,7 @@
 
 #include "draw-spaces.h"
 #include "prefs-manager.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "view.h"
 
 #include <glib.h>

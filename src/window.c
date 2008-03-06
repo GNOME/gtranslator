@@ -29,7 +29,7 @@
 #include "plugins-engine.h"
 #include "po.h"
 #include "statusbar.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "window.h"
 
 #include "egg-toolbars-model.h"
@@ -69,9 +69,6 @@ struct _GtranslatorWindowPrivate
 	
 	GtkWidget *notebook;
 	GtranslatorTab *active_tab;
-	
-	GtkWidget *sidebar;
-	gint sidebar_size;
 	
 	GtkWidget *dock;
  	GdlDockLayout *layout_manager;
@@ -1146,14 +1143,6 @@ gtranslator_window_cmd_edit_toolbar (GtkAction *action,
 			  G_CALLBACK (gtranslator_window_cmd_edit_toolbar_cb),
 			  window);
 	gtk_widget_show_all (dialog);
-}
-
-static void
-window_sidebar_position_change_cb(GObject    *gobject,
-				  GParamSpec *arg1,
-				  GtranslatorWindow *window)
-{
-	window->priv->sidebar_size = gtk_paned_get_position(GTK_PANED(gobject));
 }
 
 static void

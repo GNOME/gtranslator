@@ -34,7 +34,7 @@
 
 #include "actions.h"
 #include "msg.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "view.h"
 #include "window.h"
 #include "dialogs/search-dialog.h"

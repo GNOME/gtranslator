@@ -59,7 +59,7 @@ INST_H_FILES =				\
 	po.h \
 	statusbar.h \
 	tab.h \
-	utils_gui.h \
+	utils.h \
 	view.h \
 	window.h
 
@@ -81,7 +81,7 @@ libgtranslator_la_SOURCES = \
 	view.c \
 	window.c \
 	po.c \
-	utils_gui.c \
+	utils.c \
 	msg.c \
 	actions.h \
 	actions-file.c \

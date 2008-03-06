@@ -479,7 +479,7 @@ gtranslator_po_parse(GtranslatorPo *po,
  **/
 void
 gtranslator_po_save_file(GtranslatorPo *po,
-			     GError **error)
+			 GError **error)
 {
 	struct po_xerror_handler handler;
 	po_message_iterator_t iter;
@@ -539,7 +539,10 @@ gtranslator_po_save_file(GtranslatorPo *po,
 	now_here = localtime(&now);
 	strftime(t, 22, "%Y-%m-%d %H:%M%z", now_here);
 	strftime(year, 5, "%Y", now_here);
-	gtranslator_header_set_po_date(header, g_strdup(t));
+	
+	aux = g_strdup (t);
+	gtranslator_header_set_po_date (header, aux);
+	g_free (aux);
 	
 	/*
          * Update the header's comment
