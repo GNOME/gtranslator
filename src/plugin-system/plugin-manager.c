@@ -39,7 +39,7 @@
 #include <glade/glade-xml.h>
 
 #include "plugin-manager.h"
-#include "utils_gui.h"
+#include "utils.h"
 #include "plugins-engine.h"
 #include "plugin.h"
 //#include "gtranslator-debug.h"

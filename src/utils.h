@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GTR_UTILS_GUI_H
-#define GTR_UTILS_GUI_H 1
+#ifndef GTR_UTILS_H
+#define GTR_UTILS_H 1
 
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkmenu.h>
