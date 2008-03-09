@@ -87,8 +87,7 @@ struct _GtranslatorPreferencesDialogPrivate
 	GtkWidget *number_plurals_spinbutton;
 	
 	/*Inteface*/
-	GtkWidget *left_radiobutton;
-	GtkWidget *right_radiobutton;
+	GtkWidget *gdl_combobox;
 	
 	/*Plugins*/
 	GtkWidget *plugins_box;
@@ -461,12 +460,30 @@ setup_po_header_pages(GtranslatorPreferencesDialog *dlg)
 
 
 /***************Interface pages****************/
-
+static void
+style_changed_cb (GtkComboBox *combobox,
+		  GtranslatorPreferencesDialog *dlg)
+{
+	g_return_if_fail(combobox == GTK_COMBO_BOX(dlg->priv->gdl_combobox));
+	
+	gtranslator_prefs_manager_set_gdl_style (gtk_combo_box_get_active (combobox));
+}
 
 static void
 setup_interface_pages(GtranslatorPreferencesDialog *dlg)
 {
+	gint gdl_style;
 	
+	/*Set initial value*/
+	gdl_style = gtranslator_prefs_manager_get_gdl_style ();
+	if (gdl_style)
+		gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
+					  gdl_style);
+		
+	/*Connect signals*/
+	g_signal_connect(dlg->priv->gdl_combobox, "changed",
+			 G_CALLBACK (style_changed_cb),
+			 dlg);
 }
 
 static void
@@ -579,8 +596,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"number_plurals_spinbutton", &dlg->priv->number_plurals_spinbutton,
 		"plurals_entry", &dlg->priv->plurals_entry,
 		*/				  
-		"left_radiobutton", &dlg->priv->left_radiobutton,
-		"right_radiobutton", &dlg->priv->right_radiobutton,
+		"gdl_combobox", &dlg->priv->gdl_combobox,
 		
 		"plugins_box", &dlg->priv->plugins_box,
 		NULL);

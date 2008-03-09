@@ -57,22 +57,10 @@ static void gtranslator_prefs_manager_visible_whitespace_changed(GConfClient *cl
 							       GConfEntry  *entry, 
 							       gpointer     user_data);
 
-static void gtranslator_prefs_manager_gdl_style_changed (GConfClient* client, guint id,
-							 GConfEntry* entry,
-							 gpointer user_data);
-
-/*
-static void gtranslator_prefs_manager_system_font_changed	(GConfClient *client,
-							 guint        cnxn_id,
-							 GConfEntry  *entry,
-							 gpointer     user_data);
-
-
-
-static void gtranslator_prefs_manager_auto_save_changed	(GConfClient *client,
-							 guint        cnxn_id,
-							 GConfEntry  *entry,
-							 gpointer     user_data);*/
+static void gtranslator_prefs_manager_gdl_style_changed(GConfClient *client,
+							guint        cnxn_id, 
+							GConfEntry  *entry, 
+							gpointer     user_data);
 
 
 /* GUI state is serialized to a .desktop file, not in gconf */
@@ -625,14 +613,15 @@ gtranslator_prefs_manager_visible_whitespace_changed (GConfClient *client,
 }
 
 static void
-gtranslator_prefs_manager_gdl_style_changed (GConfClient* client, guint id,
-					     GConfEntry* entry,
-					     gpointer user_data)
+gtranslator_prefs_manager_gdl_style_changed(GConfClient *client,
+					    guint        cnxn_id, 
+					    GConfEntry  *entry, 
+					    gpointer     user_data)
 {
 	GtranslatorWindow *window = GTR_WINDOW (user_data);
 	GdlSwitcherStyle style;
 	GdlDockLayout *layout_manager;
-	
+
 	style = gtranslator_prefs_manager_get_gdl_style ();
 	
 	layout_manager = GDL_DOCK_LAYOUT (_gtranslator_window_get_layout_manager (window));
