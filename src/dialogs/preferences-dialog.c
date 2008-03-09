@@ -66,6 +66,12 @@ struct _GtranslatorPreferencesDialogPrivate
 	GtkWidget *unmark_fuzzy_checkbutton;
 	GtkWidget *keep_obsolete_checkbutton;
 	GtkWidget *spellcheck_checkbutton;
+
+	/*Profiles*/
+	GtkWidget *profile_treeview;
+	GtkWidget *add_button;
+	GtkWidget *edit_button;
+	GtkWidget *delete_button;
 	
 	/*PO header->Personal information*/
 	GtkWidget *name_entry;
@@ -493,6 +499,12 @@ dialog_response_handler (GtkDialog *dlg,
 }
 
 static void
+add_button_pulsed (GtkWidget *button, GtranslatorPreferencesDialog *dlg)
+{
+	gtranslator_show_profile_dialog(dlg);
+}
+
+static void
 gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 {
 	gboolean ret;
@@ -551,7 +563,12 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"keep_obsolete_checkbutton", &dlg->priv->keep_obsolete_checkbutton,
 		"spellcheck_checkbutton", &dlg->priv->spellcheck_checkbutton,
 
-		"name_entry", &dlg->priv->name_entry,
+		"profile_treeview", &dlg->priv->profile_treeview,
+		"add_button", &dlg->priv->add_button,
+		"edit_button", &dlg->priv->edit_button,
+		"delete_button", &dlg->priv->delete_button,
+
+		/*"name_entry", &dlg->priv->name_entry,
 		"email_entry", &dlg->priv->email_entry,
 
 		"language_comboentry", &dlg->priv->language_comboentry,
@@ -561,7 +578,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"team_email_comboentry", &dlg->priv->team_email_comboentry,
 		"number_plurals_spinbutton", &dlg->priv->number_plurals_spinbutton,
 		"plurals_entry", &dlg->priv->plurals_entry,
-						  
+		*/				  
 		"left_radiobutton", &dlg->priv->left_radiobutton,
 		"right_radiobutton", &dlg->priv->right_radiobutton,
 		
@@ -584,6 +601,11 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 	
 	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 	
+	g_signal_connect (dlg->priv->add_button,
+				"clicked",
+				G_CALLBACK (add_button_pulsed),
+				dlg);
+
 	setup_files_pages(dlg);
 	setup_editor_pages(dlg);
 	setup_po_header_pages(dlg);

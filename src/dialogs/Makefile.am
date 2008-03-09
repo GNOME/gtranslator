@@ -23,7 +23,9 @@ libdialogs_la_SOURCES = \
 	header-dialog.c \
 	header-dialog.h \
 	comment-dialog.c \
-	comment-dialog.h
+	comment-dialog.h \
+	profile-dialog.c \
+	profile-dialog.h
 
 gladedir = $(pkgdatadir)
 
@@ -31,7 +33,8 @@ glade_DATA =  \
 		preferences-dialog.glade \
 		search-dialog.glade \
 		header-dialog.glade \
-		comment-dialog.glade
+		comment-dialog.glade \
+		profile-dialog.glade
 
 EXTRA_DIST = \
 		$(glade_DATA)
