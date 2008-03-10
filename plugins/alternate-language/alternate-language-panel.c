@@ -188,7 +188,7 @@ static void
 open_button_clicked_cb (GtkWidget *open_button,
 			GtranslatorAlternateLangPanel *panel)
 {
-	GtkWindow *dialog = NULL;
+	GtkWidget *dialog = NULL;
 			       
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -229,7 +229,6 @@ gtranslator_alternate_lang_panel_draw (GtranslatorAlternateLangPanel *panel)
 	GtkWidget *hbox;
 	GtkWidget *buttonbox;
 	GtkWidget *scroll;
-	GSList *group;
 	
 	/*
 	 * Hbox
@@ -275,15 +274,14 @@ gtranslator_alternate_lang_panel_draw (GtranslatorAlternateLangPanel *panel)
 								   _("Translated"));
 	gtk_widget_show (panel->priv->translated);
 	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->translated, FALSE, TRUE, 0);
-	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (panel->priv->translated));
 	
-	panel->priv->fuzzy = gtk_radio_button_new_with_label (group,
-							      _("Fuzzy"));
+	panel->priv->fuzzy = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (panel->priv->translated),
+									  _("Fuzzy"));
 	gtk_widget_show (panel->priv->fuzzy);
 	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->fuzzy, FALSE, TRUE, 0);
 	
-	panel->priv->untranslated = gtk_radio_button_new_with_label (group,
-								     _("Untranslated"));
+	panel->priv->untranslated = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (panel->priv->translated),
+										 _("Untranslated"));
 	gtk_widget_show (panel->priv->untranslated);
 	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->untranslated, FALSE, TRUE, 0);
 	
