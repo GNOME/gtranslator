@@ -73,7 +73,7 @@
 #define GPM_PLURALS			GPM_LANGUAGE_SETTINGS_DIR "/plurals"
 
 /* Interface */
-#define GPM_INTERFACE_DIR		GTR_BASE_KEY "/interface"
+#define GPM_INTERFACE_DIR		GPM_PREFS_DIR "/interface"
 #define GPM_GDL_STYLE			GPM_INTERFACE_DIR "/gdl_style"
 
 /* Fallback default values. Keep in sync with gtranslator.schemas */

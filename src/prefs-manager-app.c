@@ -618,9 +618,11 @@ gtranslator_prefs_manager_gdl_style_changed(GConfClient *client,
 					    GConfEntry  *entry, 
 					    gpointer     user_data)
 {
-	GtranslatorWindow *window = GTR_WINDOW (user_data);
+	GtranslatorWindow *window;
 	GdlSwitcherStyle style;
 	GdlDockLayout *layout_manager;
+
+	window = gtranslator_application_get_active_window (GTR_APP);
 
 	style = gtranslator_prefs_manager_get_gdl_style ();
 	
