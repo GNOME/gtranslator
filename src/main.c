@@ -85,6 +85,12 @@ main(gint argc,
 	}
 	
 	/*
+	 * We set the default icon dir
+	 */
+	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
+					   PIXMAPSDIR);
+	
+	/*
 	 * Init preferences manager
 	 */
 	gtranslator_prefs_manager_app_init();

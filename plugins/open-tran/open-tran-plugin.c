@@ -28,10 +28,12 @@
 #include <gconf/gconf-client.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkdialog.h>
+ 
+#include "application.h"
 #include "window.h"
 #include "utils.h"
 
-#define OPEN_TRAN_PLUGIN_ICON PIXMAPSDIR"/open-tran.png"
+#define OPEN_TRAN_PLUGIN_ICON "open-tran.png"
 #define WINDOW_DATA_KEY	"GtranslatorOpenTranPluginWindowData"
 #define GLADE_FILE DATADIR"/open-tran-dialog.glade"
 
@@ -114,6 +116,9 @@ impl_activate (GtranslatorPlugin *plugin,
 		image = gtk_image_new_from_icon_set(iconset,
 						    GTK_ICON_SIZE_MENU);
 	}*/
+	
+	gtranslator_application_register_icon (GTR_APP, "open-tran.png",
+					       "open-tran-plugin-icon");
 
 	opentran = gtranslator_open_tran_panel_new(window);
 
@@ -121,7 +126,7 @@ impl_activate (GtranslatorPlugin *plugin,
 				       opentran,
 				       "GtranslatorOpenTranPlugin",
 				       _("Open Tran"),
-				       NULL,
+				       "open-tran-plugin-icon",
 				       GTR_WINDOW_PLACEMENT_LEFT);
 
 	g_object_set_data(G_OBJECT(window),

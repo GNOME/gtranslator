@@ -89,6 +89,10 @@ GtranslatorWindow *gtranslator_application_get_active_window  (GtranslatorApplic
 
 const GList      *gtranslator_application_get_windows (GtranslatorApplication *app);
 
+void              gtranslator_application_register_icon (GtranslatorApplication *app,
+							 const gchar *icon,
+				       			 const gchar *stock_id);
+
 G_END_DECLS
 
 #endif /* __APPLICATION_H__ */

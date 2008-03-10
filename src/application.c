@@ -43,6 +43,8 @@ struct _GtranslatorApplicationPrivate
 	
 	gchar *toolbars_file;
 	EggToolbarsModel *toolbars_model;
+	
+	GtkIconFactory *icon_factory;
 };
 
 static gchar *
@@ -135,12 +137,21 @@ gtranslator_application_init (GtranslatorApplication *application)
 				      EGG_TB_MODEL_NOT_REMOVABLE);	
 	
 	load_accels ();
+	
+	/* Create Icon factory */
+	application->priv->icon_factory = gtk_icon_factory_new ();
+	gtk_icon_factory_add_default (application->priv->icon_factory);
 }
 
 
 static void
 gtranslator_application_finalize (GObject *object)
 {
+	GtranslatorApplication *app = GTR_APPLICATION (object);
+	
+	if (app->priv->icon_factory)
+		g_object_unref (app->priv->icon_factory);
+	
 	G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
 }
 
@@ -296,3 +307,25 @@ gtranslator_application_get_windows (GtranslatorApplication *app)
 	return app->priv->windows;
 }
 
+void
+gtranslator_application_register_icon (GtranslatorApplication *app,
+				       const gchar *icon,
+				       const gchar *stock_id)
+{
+	GtkIconSet *icon_set;
+	GtkIconSource *	icon_source = gtk_icon_source_new ();
+	gchar *path;
+	
+	path = g_strconcat (PIXMAPSDIR, "/", icon, NULL);
+	
+	GdkPixbuf* pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+	if (pixbuf)
+	{
+		icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
+		gtk_icon_factory_add (app->priv->icon_factory, stock_id, icon_set);
+		g_object_unref (pixbuf);
+	}
+	
+	g_free (path);
+	gtk_icon_source_free (icon_source);
+}

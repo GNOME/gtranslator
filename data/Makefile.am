@@ -18,8 +18,12 @@ ui_DATA = \
 		po.lang \
 		layout.xml
 
+icondir = $(datadir)/pixmaps/gtranslator
+icon_DATA = gtranslator-plugin.png
+
 EXTRA_DIST = \
 		$(ui_DATA) \
+		$(icon_DATA)\
 		gtranslator.pc.in
 
 CLEANFILES =	 			\

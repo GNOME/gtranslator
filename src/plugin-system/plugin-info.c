@@ -344,7 +344,7 @@ gtranslator_plugin_info_get_icon_name (GtranslatorPluginInfo *info)
 				     info->icon_name))
 		return info->icon_name;
 	else
-		return "plugin";
+		return "gtranslator-plugin";
 }
 
 const gchar **
