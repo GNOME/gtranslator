@@ -25,7 +25,8 @@ INCLUDES = \
 	$(DEPRECATED_FLAGS)                                     \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"                         \
 	-DSCRIPTSDIR=\""$(pkgdatadir)"/scripts\"	\
-	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"
+	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"  \
+	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"
 
 bin_PROGRAMS = \
 	gtranslator
