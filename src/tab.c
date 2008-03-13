@@ -125,6 +125,7 @@ static void
 gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 				       GtranslatorTab *tab)
 {
+	GtranslatorHeader *header;
 	GtkTextIter start, end;
 	GtkTextBuffer *buf;
 	GList *msg_aux;
@@ -134,6 +135,8 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 	gint i;
 		
 	/* Work out which message this is associated with */
+	
+	header = gtranslator_po_get_header (tab->priv->po);
 	
 	msg_aux = gtranslator_po_get_current_message(tab->priv->po);
 	msg = msg_aux->data;
@@ -162,7 +165,8 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 		return;
 	}
 	i=1;
-	while(i < gtranslator_prefs_manager_get_number_plurals()) {
+	while(i < gtranslator_header_get_nplurals (header))
+	{
 		/* Know when to break out of the loop */
 		if(!tab->priv->trans_msgstr[i]) {
 			break;
@@ -184,7 +188,6 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 		/* Write back to PO file in memory */
 		gtranslator_msg_set_msgstr_plural(msg, i, translation);
 		return;
-		
 	}
 
 	/* Shouldn't get here */
@@ -227,27 +230,28 @@ gtranslator_tab_append_page(const gchar *tab_label,
 }
 
 static void
-gtranslator_message_plural_forms(GtranslatorTab *tab,
-				 GtranslatorMsg *msg)
+gtranslator_message_plural_forms (GtranslatorTab *tab,
+				  GtranslatorMsg *msg)
 {
+	GtranslatorHeader *header;
 	GtkTextBuffer *buf;
 	const gchar *msgstr_plural;
 	gint i;
 
-	g_return_if_fail(tab != NULL);
-	g_return_if_fail(msg != NULL);
-	/*
-	 * Should show the number of plural forms defined in header
-	 */
-	for(i = 0; i < gtranslator_prefs_manager_get_number_plurals(); i++)
+	g_return_if_fail (tab != NULL);
+	g_return_if_fail (msg != NULL);
+	
+	header = gtranslator_po_get_header (tab->priv->po);
+	
+	for (i = 0; i < gtranslator_header_get_nplurals (header); i++)
 	{
-		msgstr_plural = gtranslator_msg_get_msgstr_plural(msg, i);
-		if(msgstr_plural)
+		msgstr_plural = gtranslator_msg_get_msgstr_plural (msg, i);
+		if (msgstr_plural)
 		{
-			buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(tab->priv->trans_msgstr[i]));
-			gtk_source_buffer_begin_not_undoable_action(GTK_SOURCE_BUFFER(buf));
-			gtk_text_buffer_set_text(buf, (gchar*)msgstr_plural, -1);
-			gtk_source_buffer_end_not_undoable_action(GTK_SOURCE_BUFFER(buf));
+			buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
+			gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+			gtk_text_buffer_set_text (buf, (gchar*)msgstr_plural, -1);
+			gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
 		}
 	}
 }
@@ -416,14 +420,43 @@ content_pane_position_changed (GObject		*tab_gobject,
 }
 
 static void
+gtranslator_tab_add_msgstr_tabs (GtranslatorTab *tab)
+{
+	GtranslatorHeader *header;
+	GtranslatorTabPrivate *priv = tab->priv;
+	gchar *label;
+	GtkTextBuffer *buf;
+	gint i = 0;
+	
+	/*
+	 * We get the header of the po file
+	 */
+	header = gtranslator_po_get_header (tab->priv->po);
+	
+	do{
+		label = g_strdup_printf (_("Plural %d"), i+1);
+		priv->trans_msgstr[i] = gtranslator_tab_append_page (label,
+								     priv->trans_notebook,
+								     TRUE);
+		buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
+		g_signal_connect (buf, "end-user-action",
+				  G_CALLBACK (gtranslator_message_translation_update),
+				  tab);
+		
+		g_signal_connect_after (buf, "end_user_action",
+					G_CALLBACK (emit_message_changed_signal),
+					tab);
+		i++;
+		g_free (label);
+	}while (i < gtranslator_header_get_nplurals (header));
+}
+
+static void
 gtranslator_tab_draw (GtranslatorTab *tab)
 {
 	GtkWidget *image;
 	GtkWidget *vertical_box;
-	GtkTextBuffer *buf;
-	gchar *label;
 	GtkWidget *label_widget;
-	gint i = 0;
 	
 	GtranslatorTabPrivate *priv = tab->priv;
 	
@@ -508,22 +541,6 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	priv->trans_notebook = gtk_notebook_new();
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(priv->trans_notebook), FALSE);
 	gtk_widget_show (priv->trans_notebook);
-	do{
-		label = g_strdup_printf(_("Plural %d"), i+1);
-		priv->trans_msgstr[i] = gtranslator_tab_append_page(label,
-								    priv->trans_notebook,
-								    TRUE);
-		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(priv->trans_msgstr[i]));
-		g_signal_connect(buf, "end-user-action",
-				 G_CALLBACK(gtranslator_message_translation_update),
-				 tab);
-		
-		g_signal_connect_after(buf, "end_user_action",
-				 G_CALLBACK(emit_message_changed_signal),
-				 tab);
-		i++;
-		g_free(label);
-	}while(i < gtranslator_prefs_manager_get_number_plurals());
 
 	gtk_box_pack_start(GTK_BOX(vertical_box), priv->trans_notebook, TRUE, TRUE, 0);	
 
@@ -618,6 +635,12 @@ gtranslator_tab_new (GtranslatorPo *po)
 	tab = g_object_new (GTR_TYPE_TAB, NULL);
 	
 	tab->priv->po = po;
+	
+	/*
+	 * Now we have to initialize the number of msgstr tabs
+	 */
+	gtranslator_tab_add_msgstr_tabs (tab);
+	
 	gtranslator_message_table_populate(GTR_MESSAGE_TABLE(tab->priv->message_table),
 					   gtranslator_po_get_messages(tab->priv->po));
 	

@@ -107,7 +107,10 @@ void		 gtranslator_header_set_charset		(GtranslatorHeader *header, gchar *data);
 gchar		*gtranslator_header_get_encoding	(GtranslatorHeader *header);
 void		 gtranslator_header_set_encoding	(GtranslatorHeader *header, gchar *data);
 
-gchar		*gtranslator_header_get_plural_forms	(GtranslatorHeader *header);
-void		 gtranslator_header_set_plural_forms	(GtranslatorHeader *header, gchar *data);
+const gchar	*gtranslator_header_get_plural_forms	(GtranslatorHeader *header);
+void             gtranslator_header_set_plural_forms    (GtranslatorHeader *header,
+							 const gchar *plural_forms);
+							 
+gint             gtranslator_header_get_nplurals        (GtranslatorHeader *header);
 
 #endif /* __HEADER_H__ */

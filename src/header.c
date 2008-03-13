@@ -1,5 +1,6 @@
 /*
  * (C) 2007 	Pablo Sanxiao <psanxiao@gmail.com>
+ *	        Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *			
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,6 +18,7 @@
  */
 
 #include "header.h"
+#include "prefs-manager.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -89,8 +91,35 @@ struct _GtranslatorHeaderPrivate
 	 */
 	gchar *encoding;
 
+	/*
+	 * Plural forms and number of plurals
+	 */
 	gchar *plural_forms;
+	gint nplurals;
 };
+
+/*
+ * Set nplurals variable
+ */
+static void
+parse_nplurals (GtranslatorHeader *header)
+{
+	gchar *pointer;
+	
+	g_return_if_fail (header->priv->plural_forms != NULL);
+	
+	pointer = header->priv->plural_forms;
+	
+	while (*pointer != '=')
+		pointer++;
+	pointer++;
+	
+	//if there are any space between '=' and nplural number pointer++
+	while(*pointer == ' ')
+		pointer++;
+	
+	header->priv->nplurals = g_ascii_digit_value(*pointer);
+}
 
 static void gtranslator_header_init (GtranslatorHeader *header)
 {
@@ -296,17 +325,78 @@ void gtranslator_header_set_encoding (GtranslatorHeader *header, gchar *data)
 	header->priv->encoding = g_strdup(data);
 }
 
-gchar *gtranslator_header_get_plural_forms (GtranslatorHeader *header)
+/**
+ * gtranslator_header_get_plural_forms:
+ * @header: a #GtranslatorHeader.
+ *
+ * Return value: the plural form of the po file.
+ */
+const gchar *
+gtranslator_header_get_plural_forms (GtranslatorHeader *header)
 {
-	return header->priv->plural_forms;
+	g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+	
+	return (const gchar *)header->priv->plural_forms;
 }
 
-void gtranslator_header_set_plural_forms (GtranslatorHeader *header, gchar *data)
+/**
+ * gtranslator_header_set_plural_forms:
+ * @header: a #GtranslatorHeader
+ * @plural_forms: the plural forms string.
+ *
+ * Sets the plural form string in the @header and it sets the number of plurals.
+ */
+void
+gtranslator_header_set_plural_forms (GtranslatorHeader *header,
+				     const gchar *plural_forms)
 {
-	if(header->priv->plural_forms)
-		g_free(header->priv->plural_forms);
-	header->priv->plural_forms;
+	g_return_if_fail (GTR_IS_HEADER (header));
+	
+	if (header->priv->plural_forms)
+		g_free (header->priv->plural_forms);
+	
+	if (!plural_forms)
+	{
+		header->priv->plural_forms = NULL;
+		return;
+	}
+	
+	header->priv->plural_forms = g_strdup (plural_forms);
+	
+	/*Now we parse the plural forms to know the number of plurals*/
+	parse_nplurals (header);
 }
 
-
-
+/**
+ * gtranslator_header_get_plural:
+ * @header: a #GtranslatorHeader
+ *
+ * Return value: The number of plurals of the po file, if there is not a plural
+ * form in the po file it returns the predefined by user number of plurals 
+ * or 0 if there is not a plural form string stored.
+ */
+gint 
+gtranslator_header_get_nplurals (GtranslatorHeader *header)
+{
+	const gchar *plural_form;
+	
+	g_return_val_if_fail (GTR_IS_HEADER (header), -1);
+	
+	/*
+	 * If the priv->plural_forms exists that means that there is a plural
+	 * form in our po file, If not we have to use the predefined plural form
+	 * by the user.
+	 */
+	if (header->priv->plural_forms)
+		return header->priv->nplurals;
+	else if (plural_form = gtranslator_prefs_manager_get_plural_form ())
+	{
+		gtranslator_header_set_plural_forms (header, plural_form);
+		/*
+		 * FIXME: To don't produce a gettext error maybe we have to set the
+		 * plural form in the gettext header field too.
+		 */
+		return header->priv->nplurals;
+	}
+	else return 1;
+}

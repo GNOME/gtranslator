@@ -69,8 +69,9 @@
 #define GPM_CHARSET			GPM_LANGUAGE_SETTINGS_DIR "/charset"
 #define GPM_TRANSFER_ENCODING		GPM_LANGUAGE_SETTINGS_DIR "/transfer_encoding"
 #define GPM_TEAM_EMAIL			GPM_LANGUAGE_SETTINGS_DIR "/team_email"
-#define GPM_NUMBER_PLURALS		GPM_LANGUAGE_SETTINGS_DIR "/number_plurals"
-#define GPM_PLURALS			GPM_LANGUAGE_SETTINGS_DIR "/plurals"
+
+/*FIXME: With profiles i think that this has to change*/
+#define GPM_PLURAL_FORM			GPM_LANGUAGE_SETTINGS_DIR "/plural_form"
 
 /* Interface */
 #define GPM_INTERFACE_DIR		GPM_PREFS_DIR "/interface"
@@ -109,8 +110,7 @@
 #define GPM_MIME_TYPE			GPM_LANGUAGE_SETTINGS_DIR "/mime_type"
 #define GPM_ENCODING			GPM_LANGUAGE_SETTINGS_DIR "/encoding"
 #define GPM_LG_EMAIL			GPM_LANGUAGE_SETTINGS_DIR "/lg_email"*/
-#define GPM_DEFAULT_NUMBER_PLURALS	2
-#define GPM_DEFAULT_PLURALS		(const gchar*) ""
+#define GPM_DEFAULT_PLURAL_FORM		(const gchar*) ""
 
 /* Interface */
 #define GPM_DEFAULT_GDL_STYLE           2 //Both icons and text
@@ -189,11 +189,11 @@ const gchar *            gtranslator_prefs_manager_get_name                     
 void                     gtranslator_prefs_manager_set_email                    (const gchar *email);
 const gchar *            gtranslator_prefs_manager_get_email                    (void);
 
-/*number plurals*/
-void                     gtranslator_prefs_manager_set_number_plurals           (gint plurals);
-gint                     gtranslator_prefs_manager_get_number_plurals           (void);
+/*Plural form*/
+void                     gtranslator_prefs_manager_set_plural_form              (const gchar *plural_form);
+const gchar *            gtranslator_prefs_manager_get_plural_form              (void);
 
-/*gdl style*/
+/*Gdl style*/
 void                     gtranslator_prefs_manager_set_gdl_style                (gint style);
 gint                     gtranslator_prefs_manager_get_gdl_style                (void);
 

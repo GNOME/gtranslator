@@ -158,7 +158,10 @@ gtranslator_po_finalize (GObject *object)
 		g_list_free (po->priv->messages);
 	}
 	if (po->priv->domains)
+	{
+		g_list_foreach (po->priv->domains, (GFunc)g_free, NULL);
 		g_list_free (po->priv->domains);
+	}
 
 	g_free (po->priv->filename);
 	g_free (po->priv->obsolete);
@@ -336,16 +339,16 @@ gtranslator_po_parse(GtranslatorPo *po,
 		
 		gchar *comment, *prj_id_version, *rmbt, *pot_date, *po_date,
 		      *translator, *tr_email, *language, *lg_email, *mime_version,
-		      *charset, *encoding;
+		      *charset, *encoding, *plural_forms;
 
 		gchar *space1, *space2, *space3;
 
 		comment = g_strdup(po_message_comments(message));
 		
 		prj_id_version = po_header_field(msgstr, "Project-Id-Version");
-		rmbt = g_strdup(po_header_field(msgstr, "Report-Msgid-Bugs-To"));
-		pot_date = g_strdup(po_header_field(msgstr, "POT-Creation-Date"));
-		po_date = g_strdup(po_header_field(msgstr, "PO-Revision-Date"));
+		rmbt = po_header_field(msgstr, "Report-Msgid-Bugs-To");
+		pot_date = po_header_field(msgstr, "POT-Creation-Date");
+		po_date = po_header_field(msgstr, "PO-Revision-Date");
 
 		gchar *translator_temp = po_header_field(msgstr, "Last-Translator");
 		space1 = g_strrstr(translator_temp, " <");
@@ -371,9 +374,9 @@ gtranslator_po_parse(GtranslatorPo *po,
 			lg_email = g_strndup(space2 + 2, strlen(space2)-3);
 		}
 
-		mime_version = g_strdup(po_header_field(msgstr, "MIME-Version"));
+		mime_version = po_header_field(msgstr, "MIME-Version");
 
-		gchar *charset_temp = g_strdup(po_header_field(msgstr, "Content-Type"));
+		gchar *charset_temp = po_header_field(msgstr, "Content-Type");
 		space3 = g_strrstr(charset_temp, "=");
 
 		if (!space3)
@@ -383,7 +386,12 @@ gtranslator_po_parse(GtranslatorPo *po,
 			charset = g_strdup(space3 +1);
 		}
 		
-		encoding = g_strdup(po_header_field(msgstr, "Content-Transfer-Encoding"));
+		encoding = po_header_field(msgstr, "Content-Transfer-Encoding");
+		
+		/*
+		 * Plural forms:
+		 */
+		plural_forms = po_header_field (msgstr, "Plural-Forms");
 	
 		gtranslator_header_set_comment(priv->header, comment);
 		gtranslator_header_set_prj_id_version(priv->header, prj_id_version);
@@ -398,6 +406,8 @@ gtranslator_po_parse(GtranslatorPo *po,
 		gtranslator_header_set_mime_version(priv->header, mime_version);
 		gtranslator_header_set_charset(priv->header, charset);
 		gtranslator_header_set_encoding(priv->header, encoding);
+		gtranslator_header_set_plural_forms (priv->header, 
+						     plural_forms);
 		
 		g_free (translator_temp);
 		g_free (language_temp);
@@ -414,6 +424,7 @@ gtranslator_po_parse(GtranslatorPo *po,
 		g_free (mime_version);
 		g_free (charset);
 		g_free (encoding);
+		g_free (plural_forms);
 	}
 	else {
 		/* Reset our pointer */
@@ -530,6 +541,11 @@ gtranslator_po_save_file(GtranslatorPo *po,
          */
 	iter = po_message_iterator(gtranslator_po_get_po_file(po), NULL);
 	message = po_next_message(iter);
+	/*
+	 * FIXME: We have to use our msg class to manage this kind of things,
+	 * and we have to encapsulate the funcs like po_header_set_field in
+	 * our header class.
+	 */
 	msgstr = po_message_msgstr(message);
 
 	/*
