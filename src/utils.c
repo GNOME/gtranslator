@@ -528,3 +528,68 @@ gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 					
 	g_strfreev (open);
 }
+
+void
+gtranslator_utils_help_display (GtkWindow   *parent,
+				const gchar *doc_id,
+				const gchar *file_name)
+{
+
+	GError *error = NULL;
+	GdkScreen *screen;
+	gchar *command;
+	const gchar *lang;
+	const gchar * const *langs;
+	gchar *uri = NULL;
+	gint i;
+	
+	g_return_if_fail (file_name != NULL);
+
+	langs = g_get_language_names ();
+	for (i = 0; langs[i]; i++)
+	{
+		lang = langs[i];
+		if (strchr (lang, '.'))
+			continue;
+
+		uri = g_build_filename (DATADIR, "/gnome/help/", doc_id,
+					lang, file_name, NULL);
+
+		if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
+			break;
+		}
+		g_free (uri);
+		uri = NULL;
+	}
+
+	if (uri == NULL)
+	{
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (parent,
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 _("Unable to display help. "
+						 "Please make sure Gtranslator "
+						 "documentation package is installed."));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		
+		return;
+	}
+	
+	command = g_strconcat ("gnome-help ghelp://", uri,  NULL);
+	g_free (uri);
+
+	screen = gtk_widget_get_screen (GTK_WIDGET (parent));
+	gdk_spawn_command_line_on_screen (screen, command, &error);
+	if (error != NULL)
+	{
+		g_warning ("Error executing help application: %s",
+				   error->message);
+		g_error_free (error);
+		
+		return;
+	}
+	g_free (command);
+}
