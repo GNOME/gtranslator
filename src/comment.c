@@ -94,6 +94,8 @@ gtranslator_comment_panel_draw(GtranslatorCommentPanel *panel)
 	 */	
 	priv->extracted_comments = gtk_text_view_new();
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(priv->extracted_comments), FALSE);
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (priv->extracted_comments),
+				     GTK_WRAP_WORD);
 	gtk_container_add(GTK_CONTAINER(comments_scrolled_window), GTK_WIDGET(priv->extracted_comments));
 	gtk_widget_show (priv->extracted_comments);
 
@@ -114,6 +116,8 @@ gtranslator_comment_panel_draw(GtranslatorCommentPanel *panel)
 	 */
 	priv->comments = gtk_text_view_new();
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(priv->comments), FALSE);
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (priv->comments),
+				     GTK_WRAP_WORD);
 	gtk_container_add(GTK_CONTAINER(comments_scrolled_window),
 			  GTK_WIDGET(priv->comments));
 	gtk_widget_show (priv->comments);
