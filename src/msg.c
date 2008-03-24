@@ -430,7 +430,7 @@ gtranslator_msg_get_file_line(GtranslatorMsg *msg,
 	return (gint *)po_filepos_start_line(filepos);
 }
 
-/*
+/**
  * gtranslator_msg_get_msgctxt:
  * @msg: a #GtranslatorMsg
  *
@@ -443,6 +443,36 @@ gtranslator_msg_get_msgctxt(GtranslatorMsg *msg)
     	g_return_val_if_fail(GTR_IS_MSG(msg), NULL);
 
 	return po_message_msgctxt(msg->priv->message);
+}
+
+/**
+ * gtranslator_msg_get_format:
+ * @msg: a #GtranslatorMsg
+ *
+ * Return the pretty name associated with a format type.
+ * For example, for "csharp-format", return "C#".
+ * Return NULL if the are no format type in the message.
+ * 
+ * Return value: the pretty name associated with a format type or NULL
+ * if the message hasn't any format type.
+ */
+const gchar *
+gtranslator_msg_get_format (GtranslatorMsg *msg)
+{
+	const gchar * const *format_list;
+	gint i;
+	
+	g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+	
+	format_list = po_format_list ();
+	
+	for (i = 0; format_list[i] != NULL; i++)
+	{
+		if (po_message_is_format (msg->priv->message, format_list[i]))
+			return po_format_pretty_name (format_list[i]);
+	}
+	
+	return NULL;
 }
 
 /*

@@ -44,31 +44,34 @@ struct _GtranslatorCommentPanelPrivate
 };
 
 static void
-showed_message_cb(GtranslatorTab *tab,
-		  GtranslatorMsg *msg,
-		  GtranslatorCommentPanel *panel)
+showed_message_cb (GtranslatorTab *tab,
+		   GtranslatorMsg *msg,
+		   GtranslatorCommentPanel *panel)
 {
 	
 	gchar *extracted;
 	gchar *context;
+	gchar *format;
     	gchar *toset;
     
-    	context = g_strconcat(_("Context:\n"), gtranslator_msg_get_msgctxt (msg), NULL);
-    	extracted = g_strconcat(_("Extracted comments:\n"),
-				gtranslator_msg_get_extracted_comments(msg), NULL);
+	format = g_strconcat (_("Format: "), gtranslator_msg_get_format (msg), NULL);
+    	context = g_strconcat (_("Context:\n"), gtranslator_msg_get_msgctxt (msg), NULL);
+    	extracted = g_strconcat (_("Extracted comments:\n"),
+				 gtranslator_msg_get_extracted_comments(msg), NULL);
     
-   	toset = g_strdup_printf("%s\n%s", context, extracted);
+   	toset = g_strdup_printf("%s\n%s\n%s", format, context, extracted);
     
-    	g_free(context);
-    	g_free(extracted);
+    	g_free (format);
+    	g_free (context);
+    	g_free (extracted);
 
-	gtranslator_comment_panel_set_extracted_comments(panel,
-							 toset);
+	gtranslator_comment_panel_set_extracted_comments (panel,
+							  toset);
     
-    	g_free(toset);
+    	g_free (toset);
 
-	gtranslator_comment_panel_set_comments(panel,
-					       gtranslator_msg_get_comment(msg));
+	gtranslator_comment_panel_set_comments (panel,
+					        gtranslator_msg_get_comment(msg));
 }
 
 static void
