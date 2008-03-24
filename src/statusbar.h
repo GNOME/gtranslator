@@ -21,7 +21,7 @@
 #ifndef GTR_STATUSBAR_H
 #define GTR_STATUSBAR_H
 
-#include <gtk/gtkstatusbar.h>
+#include <gtk/gtkhbox.h>
 
 G_BEGIN_DECLS
 
@@ -38,7 +38,7 @@ typedef struct _GtranslatorStatusbarClass	GtranslatorStatusbarClass;
 
 struct _GtranslatorStatusbar
 {
-        GtkStatusbar parent;
+        GtkHBox parent;
 
 	/* <private/> */
         GtranslatorStatusbarPrivate *priv;
@@ -46,13 +46,19 @@ struct _GtranslatorStatusbar
 
 struct _GtranslatorStatusbarClass
 {
-        GtkStatusbarClass parent_class;
+        GtkHBoxClass parent_class;
 };
 
-GType		 gtranslator_statusbar_get_type		(void) G_GNUC_CONST;
+GType		 gtranslator_statusbar_get_type	                (void) G_GNUC_CONST;
 
 GtkWidget	*gtranslator_statusbar_new			(void);
 
+guint            gtranslator_statusbar_push                     (GtranslatorStatusbar *statusbar,
+								 guint context_id,
+								 const gchar *text);
+
+void             gtranslator_statusbar_pop                      (GtranslatorStatusbar *statusbar,
+								 guint context_id);
 
 void		 gtranslator_statusbar_set_overwrite		(GtranslatorStatusbar   *statusbar,
 								 gboolean          overwrite);
@@ -63,6 +69,11 @@ void		 gtranslator_statusbar_flash_message		(GtranslatorStatusbar   *statusbar,
 							 	 guint             context_id,
 							 	 const gchar      *format,
 							 	 ...) G_GNUC_PRINTF(3, 4);
+
+void             gtranslator_statusbar_update_progress_bar      (GtranslatorStatusbar *statusbar,
+								 gdouble translated_count,
+								 gdouble messages_count);
+
 G_END_DECLS
 
 #endif

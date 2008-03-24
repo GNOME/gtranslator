@@ -77,9 +77,7 @@ struct _GtranslatorWindowPrivate
 	GtkWidget *statusbar;
 	guint generic_message_cid;
 	guint tip_message_cid;
-	
-	GtkWidget *progressbar;
-	
+		
 	GtkUIManager *ui_manager;
 	GtkRecentManager *recent_manager;
 	GtkWidget *recent_menu;
@@ -716,12 +714,12 @@ gtranslator_window_update_statusbar_message_count(GtranslatorTab *tab,
 	msg = g_strconcat("    ", current, "    ", status_msg, "    ", total,
 			  "    ", fuzzy_msg, "    ", untranslated_msg, NULL);
 	
-	gtk_statusbar_pop(GTK_STATUSBAR(window->priv->statusbar),
-			  0);
+	gtranslator_statusbar_pop (GTR_STATUSBAR (window->priv->statusbar),
+				   0);
 	
-	gtk_statusbar_push(GTK_STATUSBAR(window->priv->statusbar),
-			   0,
-			   msg);
+	gtranslator_statusbar_push (GTR_STATUSBAR (window->priv->statusbar),
+				    0,
+				    msg);
 	
 	g_free(msg);			 
 	g_free(current);
@@ -729,6 +727,13 @@ gtranslator_window_update_statusbar_message_count(GtranslatorTab *tab,
 	g_free(total);
 	g_free(fuzzy_msg);
 	g_free(untranslated_msg);
+	
+	/*
+	 * We have to update the progress bar too
+	 */
+	gtranslator_statusbar_update_progress_bar (GTR_STATUSBAR (window->priv->statusbar),
+						   (gdouble)gtranslator_po_get_translated_count (po),
+						   (gdouble)gtranslator_po_get_messages_count (po));
 }
 
 static GtranslatorWindow *
@@ -1299,16 +1304,9 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	hbox = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start( GTK_BOX(priv->main_box), hbox, FALSE, FALSE, 0);
 	gtk_widget_show(hbox);
-	
-	/*
-	 * progressbar
-	 */
-	priv->progressbar = gtk_progress_bar_new();
-	gtk_box_pack_start( GTK_BOX(hbox), priv->progressbar, FALSE, FALSE, 0);
-	gtk_widget_show(priv->progressbar);
 			
 	/*
-	 * statusbar
+	 * statusbar & progress bar
 	 */
 	window->priv->statusbar = gtranslator_statusbar_new ();
 
@@ -1563,10 +1561,10 @@ gtranslator_window_get_notebook(GtranslatorWindow *window)
 	return GTR_NOTEBOOK(window->priv->notebook);
 }
 
-GtkStatusbar *
+GtkWidget *
 gtranslator_window_get_statusbar(GtranslatorWindow *window)
 {
-	return GTK_STATUSBAR(window->priv->statusbar);
+	return window->priv->statusbar;
 }
 
 GtkUIManager *
@@ -1635,38 +1633,6 @@ gtranslator_window_get_all_views(GtranslatorWindow *window,
 	}
 	
 	return views;
-}
-
-/*
- * Update the progress bar
- */
-void 
-gtranslator_window_update_progress_bar(GtranslatorWindow *window)
-{
-	gdouble percentage;
-	GtranslatorTab *current_page;
-	GtranslatorPo *po;
-	
-	current_page = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current_page);
-	
-	/*
-	 * Calculate the percentage.
-	 */
-	percentage = (gdouble)(gtranslator_po_get_translated_count(po)
-			       / (gdouble)gtranslator_po_get_messages_count(po));
-	
-	/*
-	 * Set the progress only if the values are reasonable.
-	 */
-	if(percentage > 0.0 || percentage < 1.0)
-	{
-		/*
-		 * Set the progressbar status.
-		 */
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(window->priv->progressbar),
-					      percentage);
-	}
 }
 
 void

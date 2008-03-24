@@ -94,7 +94,7 @@ GList            *gtranslator_window_get_all_tabs     (GtranslatorWindow *window
 GtranslatorNotebook *gtranslator_window_get_notebook     (GtranslatorWindow *window);
 GtranslatorHeader *gtranslator_window_get_header_from_active_tab (GtranslatorWindow *window);
 
-GtkStatusbar 	 *gtranslator_window_get_statusbar    (GtranslatorWindow *window);
+GtkWidget        *gtranslator_window_get_statusbar    (GtranslatorWindow *window);
 
 GtkUIManager     *gtranslator_window_get_ui_manager   (GtranslatorWindow *window);
 

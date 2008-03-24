@@ -32,6 +32,7 @@
 #include "file-dialogs.h"
 #include "notebook.h"
 #include "po.h"
+#include "statusbar.h"
 #include "tab.h"
 #include "window.h"
 
@@ -92,7 +93,9 @@ gtranslator_open(const gchar *filename,
 	active_view = gtranslator_tab_get_active_view(tab);
 	gtk_widget_grab_focus(GTK_WIDGET(active_view));
 	
-	gtranslator_window_update_progress_bar(window);
+	gtranslator_statusbar_update_progress_bar (GTR_STATUSBAR (gtranslator_window_get_statusbar (window)),
+						   (gdouble)gtranslator_po_get_translated_count (po),
+						   (gdouble)gtranslator_po_get_messages_count (po));
 	
 	return TRUE;
 }
