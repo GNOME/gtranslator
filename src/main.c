@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include "actions.h"
 #include "application.h"
 #include "prefs-manager-app.h"
 #include "plugins-engine.h"
@@ -33,8 +34,54 @@
 #include <locale.h>
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 
 #include <gconf/gconf.h>
+
+static gchar **file_arguments = NULL;
+
+static const GOptionEntry options [] =
+{
+	{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &file_arguments,
+	  NULL, N_("[FILE...]") }, /* collects file arguments */
+
+	{NULL}
+};
+
+static GSList *
+get_command_line_data ()
+{
+	GSList *file_list = NULL;
+	
+	if (file_arguments)
+	{
+		gint i;
+
+		for (i = 0; file_arguments[i]; i++) 
+		{			
+			GFile  *file;
+			gchar *uri;
+
+			file = g_file_new_for_commandline_arg (file_arguments[i]);
+			uri = g_file_get_uri (file);
+			g_object_unref (file);
+
+			
+			if (uri != NULL){
+				file_list = g_slist_prepend (file_list, 
+							     uri);
+				
+			}
+			else
+				g_print (_("%s: malformed file name or URI.\n"),
+					 file_arguments[i]);
+		}
+
+		file_list = g_slist_reverse (file_list);
+	}
+	
+	return file_list;
+}
 
 /*
  * The ubiquitous main function...
@@ -45,6 +92,9 @@ main(gint argc,
 {
 	GError *error = NULL;
 	GtranslatorPluginsEngine *engine;
+	GtranslatorWindow *window;
+	GSList *file_list = NULL;
+	GOptionContext *context;
 	
 	/*
 	 * Initialize gettext.
@@ -56,6 +106,10 @@ main(gint argc,
 	textdomain(GETTEXT_PACKAGE);
 
 	g_set_application_name(_("Gtranslator"));
+	
+	/* Setup command line options */
+	context = g_option_context_new (_("- Edit PO files"));
+	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
 
 	/*
 	 * Initialize the GConf library.
@@ -72,6 +126,8 @@ main(gint argc,
 	}
 
 	gtk_init(&argc, &argv);
+	
+	g_option_context_parse(context, &argc, &argv, NULL);
 
 	/*
 	 * Show the application window with icon.
@@ -105,7 +161,18 @@ main(gint argc,
 	/* 
 	 * Create the main app-window. 
 	 */
-	gtranslator_application_open_window(GTR_APP);
+	window = gtranslator_application_open_window(GTR_APP);
+	
+	/*
+	 * Now we open the files passed as arguments
+	 */
+	file_list = get_command_line_data ();
+	if (file_list)
+	{
+		gtranslator_actions_load_uris (window, (const GSList *)file_list);
+		g_slist_foreach (file_list, (GFunc) g_free, NULL);
+		g_slist_free (file_list);
+	}
 	
 	/*
 	 * Enter main GTK loop
