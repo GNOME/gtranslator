@@ -133,13 +133,13 @@ AC_SUBST(SC_OMFDIR)
 AC_SUBST(SC_STATEDIR)
 
 dnl -------------------------------------------------------------------
-dnl Check for gettext >= 0.16.0 - uses it's parser/writer functions
+dnl Check for gettext >= 0.17.0 - uses it's parser/writer functions
 dnl -------------------------------------------------------------------
 AC_CHECK_HEADER([gettext-po.h])
-AC_CHECK_LIB([gettextpo], [po_message_create], [
+AC_CHECK_LIB([gettextpo], [po_message_is_format], [
 	LDFLAGS="$LDFLAGS -lgettextpo"
 ],[
-	AC_MSG_ERROR(Missing or inadequate gettext library. Need at least version 0.14.2)
+	AC_MSG_ERROR(Missing or inadequate gettext library. Need at least version 0.17.0)
 ])
 
 dnl -------------------------------------------------------------------

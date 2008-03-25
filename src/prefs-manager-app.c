@@ -34,6 +34,7 @@
 #include "prefs-manager-private.h"
 #include "prefs-manager-app.h"
 #include "application.h"
+#include "utils.h"
 #include "view.h"
 #include "window.h"
 
@@ -71,7 +72,7 @@ static void gtranslator_prefs_manager_gdl_style_changed(GConfClient *client,
 #define GTR_STATE_DEFAULT_CONTENT_PANE_POS	325
 #define GTR_STATE_DEFAULT_COMMENT_PANE_POS	525
 
-#define GTR_STATE_FILE_LOCATION ".config/gtranslator"
+#define GTR_STATE_FILE_NAME "gtranslator.config"
 
 #define GTR_STATE_WINDOW_GROUP "window"
 #define GTR_STATE_WINDOW_STATE "state"
@@ -93,22 +94,17 @@ get_gtranslator_state_file ()
 
 	if (state_file == NULL)
 	{
-		const gchar *home;
+		gchar *config_folder;
 		gchar *path;
 		GError *err = NULL;
 
 		state_file = g_key_file_new ();
 
-		home = g_get_home_dir ();
-		if (home == NULL)
-		{
-			g_warning ("Could not get HOME directory\n");
-			goto out;
-		}
-
-		path = g_build_filename (home,
-					 GTR_STATE_FILE_LOCATION,
+		config_folder = gtranslator_utils_get_user_config_dir ();
+		path = g_build_filename (config_folder,
+					 GTR_STATE_FILE_NAME,
 					 NULL);
+		g_free (config_folder);
 
 		if (!g_key_file_load_from_file (state_file,
 						path,
@@ -126,7 +122,6 @@ get_gtranslator_state_file ()
 		g_free (path);
 	}
 
- out:
 	g_return_val_if_fail (state_file != NULL, NULL);
 	return state_file;
 }
@@ -188,7 +183,7 @@ static gboolean
 gtranslator_state_file_sync ()
 {
 	GKeyFile *state_file;
-	const gchar *home;
+	gchar *config_folder;
 	gchar *path;
 	gchar *content;
 	gsize length;
@@ -198,16 +193,11 @@ gtranslator_state_file_sync ()
 	state_file = get_gtranslator_state_file ();
 	g_return_val_if_fail (state_file != NULL, FALSE);
 
-	home = g_get_home_dir ();
-	if (home == NULL)
-	{
-		g_warning ("Could not get HOME directory\n");
-		return ret;
-	}
-
-	path = g_build_filename (home,
-				 GTR_STATE_FILE_LOCATION,
+	config_folder = gtranslator_utils_get_user_config_dir ();
+	path = g_build_filename (config_folder,
+				 GTR_STATE_FILE_NAME,
 				 NULL);
+	g_free (config_folder);
 
 	content = g_key_file_to_data (state_file,
 				      &length,

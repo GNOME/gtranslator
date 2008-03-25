@@ -593,3 +593,11 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 	}
 	g_free (command);
 }
+
+gchar *
+gtranslator_utils_get_user_config_dir (void)
+{
+	return g_build_filename (g_get_user_config_dir (),
+				 "gtranslator",
+				 NULL);
+}

@@ -64,5 +64,7 @@ void           gtranslator_utils_activate_url         (GtkAboutDialog *dialog,
 void           gtranslator_utils_help_display         (GtkWindow   *parent,
 						       const gchar *doc_id,
 						       const gchar *file_name);
+						       
+gchar         *gtranslator_utils_get_user_config_dir  (void);
 
 #endif

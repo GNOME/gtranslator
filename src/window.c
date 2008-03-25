@@ -1331,6 +1331,7 @@ gtranslator_window_init (GtranslatorWindow *window)
 	gint active_page;
 	GtkWidget *view_menu;
 	gchar *filename;
+	gchar *config_folder;
 	
 	window->priv = GTR_WINDOW_GET_PRIVATE (window);
 	
@@ -1397,12 +1398,16 @@ gtranslator_window_init (GtranslatorWindow *window)
 	/*
 	 * Loading dock layout
 	 */
-	filename = g_strdup_printf ("%s/.config/gtranslator-layout.xml",
-				    g_get_home_dir());
+	config_folder = gtranslator_utils_get_user_config_dir ();
+	filename = g_build_filename (config_folder,
+				     "gtranslator-layout.xml",
+				     NULL);
+				    
 	gtranslator_window_layout_load (window,
 					filename,
 					NULL);
 	g_free (filename);
+	g_free (config_folder);
 }
 
 static void
@@ -1435,6 +1440,7 @@ static void
 save_panes_state(GtranslatorWindow *window)
 {
 	gchar *filename;
+	gchar *config_folder;
 
         if (gtranslator_prefs_manager_window_size_can_set ())
         	gtranslator_prefs_manager_set_window_size (window->priv->width,
@@ -1443,10 +1449,15 @@ save_panes_state(GtranslatorWindow *window)
         if (gtranslator_prefs_manager_window_state_can_set ())
 		gtranslator_prefs_manager_set_window_state (window->priv->window_state);
 
-	filename = g_strdup_printf ("%s/.config/gtranslator-layout.xml",
-				    g_get_home_dir());
+	config_folder = gtranslator_utils_get_user_config_dir ();
+	filename = g_build_filename (config_folder,
+				     "gtranslator-layout.xml",
+				     NULL);
         gtranslator_window_layout_save (window,
 					filename, NULL);
+					
+	g_free (filename);
+	g_free (config_folder);
 }
 
 static void

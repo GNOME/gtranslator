@@ -21,11 +21,13 @@
 #endif
 
 #include "application.h"
+#include "utils.h"
 #include "window.h"
 #include "egg-toolbars-model.h"
 
 #include <glib.h>
 #include <glib-object.h>
+#include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
@@ -50,16 +52,16 @@ struct _GtranslatorApplicationPrivate
 static gchar *
 get_accel_file (void)
 {
-	const gchar *home;
+	gchar *config;
 
-	home = g_get_home_dir();
+	config = gtranslator_utils_get_user_config_dir ();
 
-	if (home != NULL)
+	if (config != NULL)
 	{
-		return g_build_filename (home,
-					 ".config",
+		return g_build_filename (config,
 					 "gtranslator-accels",
 					 NULL);
+		g_free (config);
 	}
 
 	return NULL;
@@ -112,26 +114,78 @@ on_window_destroy_cb(GtranslatorWindow *window,
 static void
 gtranslator_application_init (GtranslatorApplication *application)
 {
+	gchar *gtranslator_folder;
+	gchar *filename;
+
 	GtranslatorApplicationPrivate * priv;
 	
 	application->priv = GTR_APPLICATION_GET_PRIVATE (application);
 	priv = application->priv;
 	
 	priv->windows = NULL;
+	
+	/*
+	 * Creating config folder
+	 */
+	gtranslator_folder = gtranslator_utils_get_user_config_dir ();
+
+	if (!g_file_test (gtranslator_folder, G_FILE_TEST_IS_DIR))
+	{
+		GFile *file;
+		GError *error = NULL;
+		
+		file = g_file_new_for_path (gtranslator_folder);
+		
+		if (g_file_test (gtranslator_folder, G_FILE_TEST_IS_REGULAR))
+		{
+			if (!g_file_delete (file, NULL, &error))
+			{
+				g_warning ("There was an error deleting the "
+					   "old gtranslator file: %s", error->message);
+				g_error_free (error);
+				g_object_unref (file);
+				gtranslator_application_shutdown (application);
+			}
+		}
+		
+		if (!g_file_make_directory (file, NULL, &error))
+		{
+			g_warning ("There was an error making the gtranslator config directory: %s",
+				   error->message);
+					   
+			g_error_free (error);
+			g_object_unref (file);
+			gtranslator_application_shutdown (application);
+		}
+		
+		g_object_unref (file);
+	}
 
 	priv->toolbars_model = egg_toolbars_model_new ();
+				     
+	priv->toolbars_file = g_build_filename (gtranslator_folder,
+						"gtr-toolbar.xml",
+						NULL);
+						
+	g_warning (priv->toolbars_file);
 
-	priv->toolbars_file = g_strdup_printf(
-				     "%s/.gtranslator/gtr-toolbar.xml", g_get_home_dir());
+	filename = g_build_filename (DATADIR,
+				     "gtr-toolbar.xml",
+				     NULL);
+
+	g_free (gtranslator_folder);
 	
 	egg_toolbars_model_load_names (priv->toolbars_model,
-				       DATADIR"/gtr-toolbar.xml");
+				       filename);
 
 	if (!egg_toolbars_model_load_toolbars (priv->toolbars_model,
-					       priv->toolbars_file)) {
+					       priv->toolbars_file)) 
+	{
 		egg_toolbars_model_load_toolbars (priv->toolbars_model,
-						  DATADIR"/gtr-toolbar.xml");
+						  filename);
 	}
+	
+	g_free (filename);
 
 	egg_toolbars_model_set_flags (priv->toolbars_model, 0,
 				      EGG_TB_MODEL_NOT_REMOVABLE);	
@@ -316,7 +370,9 @@ gtranslator_application_register_icon (GtranslatorApplication *app,
 	GtkIconSource *	icon_source = gtk_icon_source_new ();
 	gchar *path;
 	
-	path = g_strconcat (PIXMAPSDIR, "/", icon, NULL);
+	path = g_build_filename (PIXMAPSDIR,
+				 icon,
+				 NULL);
 	
 	GdkPixbuf* pixbuf = gdk_pixbuf_new_from_file (path, NULL);
 	if (pixbuf)
