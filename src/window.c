@@ -59,7 +59,6 @@ G_DEFINE_TYPE(GtranslatorWindow, gtranslator_window, GTK_TYPE_WINDOW)
 struct _GtranslatorWindowPrivate
 {
 	GtkWidget *main_box;
-	GtkWidget *hpaned;
 	
 	GtkWidget *menubar;
 	GtkWidget *view_menu;
@@ -840,7 +839,9 @@ notebook_switch_page(GtkNotebook *nb,
 	po = gtranslator_tab_get_po(tab);
 	msg = gtranslator_po_get_current_message(po);
 	gtranslator_window_update_statusbar_message_count(tab,msg->data, window);
-					    
+
+	gtranslator_plugins_engine_update_plugins_ui (gtranslator_plugins_engine_get_default (),
+						      window, FALSE);
 }
 
 static void
@@ -851,6 +852,9 @@ notebook_tab_close_request (GtranslatorNotebook *notebook,
 	/* Note: we are destroying the tab before the default handler
 	 * seems to be ok, but we need to keep an eye on this. */
 	gtranslator_file_close (NULL, window);
+	
+	gtranslator_plugins_engine_update_plugins_ui (gtranslator_plugins_engine_get_default (),
+						      window, FALSE);
 }
 
 static void
@@ -957,6 +961,9 @@ notebook_tab_added(GtkNotebook *notebook,
 			 "notify::state",
 			  G_CALLBACK (sync_state), 
 			  window);
+			  
+	gtranslator_plugins_engine_update_plugins_ui (gtranslator_plugins_engine_get_default (),
+						      window, FALSE);
 }
 
 void
@@ -1584,17 +1591,12 @@ gtranslator_window_get_ui_manager(GtranslatorWindow *window)
 	return window->priv->ui_manager;
 }
 
-GtkWidget *
-gtranslator_window_get_paned(GtranslatorWindow *window)
-{
-	return window->priv->hpaned;
-}
-
 /**
  * gtranslator_window_get_active_view:
  * @window: a #GtranslationWindow
  *
- * Return value: the active translation view in the #GtranslationWindow
+ * Return value: the active translation view in the #GtranslationWindow or
+ * NULL if there is not tab opened.
  **/
 GtranslatorView *
 gtranslator_window_get_active_view(GtranslatorWindow *window)
@@ -1602,11 +1604,11 @@ gtranslator_window_get_active_view(GtranslatorWindow *window)
 	GtranslatorTab *current_tab;
 	current_tab = gtranslator_window_get_active_tab(window);
 	
-	g_return_if_fail(current_tab != NULL);
+	if (!current_tab)
+		return NULL;
 	
 	return gtranslator_tab_get_active_view(current_tab);
 }
-
 
 /**
  * gtranslator_window_get_all_views:
