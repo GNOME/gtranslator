@@ -502,21 +502,16 @@ gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 				const gchar *url,
 				gpointer data)
 {
-	gchar **open;
-	gchar *program;
-	GPtrArray *array;
+	gchar *open[3];
 
 	if (g_find_program_in_path ("xdg-open"))
 	{
-		program = g_strdup ("xdg-open");
+		open[0] = "xdg-open";
 	}
 	else return;
 	
-	array = g_ptr_array_new ();
-	g_ptr_array_add (array, program);
-	g_ptr_array_add (array, g_strdup (url));
-	
-	open = (gchar **)g_ptr_array_free (array, FALSE);
+	open[1] = (gchar *)url;
+	open[2] = NULL;
 					
 	gdk_spawn_on_screen (gdk_screen_get_default (),
 			     NULL,
@@ -525,8 +520,6 @@ gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 			     G_SPAWN_SEARCH_PATH,
 			     NULL,
 			     NULL, NULL, NULL);
-					
-	g_strfreev (open);
 }
 
 void
