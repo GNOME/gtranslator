@@ -136,7 +136,7 @@ dnl -------------------------------------------------------------------
 dnl Check for gettext >= 0.17.0 - uses it's parser/writer functions
 dnl -------------------------------------------------------------------
 AC_CHECK_HEADER([gettext-po.h])
-AC_CHECK_LIB([gettextpo], [po_message_is_format], [
+AC_CHECK_LIB([gettextpo], [po_format_list], [
 	LDFLAGS="$LDFLAGS -lgettextpo"
 ],[
 	AC_MSG_ERROR(Missing or inadequate gettext library. Need at least version 0.17.0)
@@ -288,8 +288,9 @@ po/Makefile.in
 plugins/Makefile
 plugins/alternate-language/Makefile
 plugins/charmap/Makefile
-plugins/open-tran/Makefile
 plugins/dictionary/Makefile
+plugins/open-tran/Makefile
+plugins/insert-tags/Makefile
 src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile

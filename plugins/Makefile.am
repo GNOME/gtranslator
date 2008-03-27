@@ -1,5 +1,6 @@
 SUBDIRS = 					\
-	alternate-language
+	alternate-language			\
+	insert-tags
 
 if USE_CHARMAP
 SUBDIRS += charmap
