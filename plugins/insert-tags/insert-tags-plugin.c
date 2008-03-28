@@ -109,11 +109,13 @@ on_menuitem_activated (GtkMenuItem *item,
 	
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 	
+	gtk_text_buffer_begin_user_action (buffer);
 	gtk_text_buffer_insert_at_cursor (buffer,
 					  str[0], strlen (str[0]));
 					  
 	gtk_text_buffer_insert_at_cursor (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)),
 					  str[1], strlen (str[1]));
+	gtk_text_buffer_end_user_action (buffer);
 	
 	gtk_text_buffer_get_iter_at_mark (buffer, &iter,
 					  gtk_text_buffer_get_insert (buffer));
