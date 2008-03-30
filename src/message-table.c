@@ -72,8 +72,12 @@ gtranslator_message_table_selection_changed (GtkTreeSelection *selection,
 		gtk_tree_model_get (model, &iter,
 				    GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN,
 				    &msg, -1);
-		if (msg != NULL && msg != current_msg)
+		
+		if (msg != NULL && g_utf8_collate (gtranslator_msg_get_msgid (msg->data),
+						   gtranslator_msg_get_msgid (current_msg->data)))
+		{
 			gtranslator_tab_message_go_to (table->priv->tab, msg);
+		}
 	}
 }
 
