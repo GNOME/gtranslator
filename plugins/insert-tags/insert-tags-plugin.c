@@ -26,14 +26,47 @@
 #include "window.h"
 
 #include <glib/gi18n-lib.h>
+#include <gtk/gtk.h>
 #include <string.h>
 
 #define WINDOW_DATA_KEY "GtranslatorInsertTagsPluginWindowData"
 
 GTR_PLUGIN_REGISTER_TYPE(GtranslatorInsertTagsPlugin, gtranslator_insert_tags_plugin)
 
+static GSList *tags = NULL;
+static gint tag_position;
+
+static void
+on_next_tag_activated (GtkAction *action,
+		       GtranslatorWindow *window)
+{
+	GtranslatorView *view;
+	GtkTextBuffer *buffer;
+	GSList *tag;
+	
+	if (tag_position >= g_slist_length (tags))
+		tag_position = 0;
+	
+	tag = g_slist_nth (tags, tag_position);
+	
+	view = gtranslator_window_get_active_view (window);
+	
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+	
+	gtk_text_buffer_begin_user_action (buffer);
+	gtk_text_buffer_insert_at_cursor (buffer,
+					  (const gchar *)tag->data,
+					  strlen (tag->data));
+	gtk_text_buffer_end_user_action (buffer);
+	
+	tag_position++;
+}
+
 static const GtkActionEntry action_entries[] =
 {
+	{ "NextTag", NULL, N_("_Next Tag"), "<control><shift>I",
+	 N_("Insert the next tag of the message"),
+	 G_CALLBACK (on_next_tag_activated)}, 
 	{ "InsertTags", NULL, N_("_Insert Tags") }
 };
 
@@ -42,6 +75,7 @@ const gchar submenu[] =
 "  <menubar name='MainMenu'>"
 "    <menu name='EditMenu' action='Edit'>"
 "      <placeholder name='EditOps_1'>"
+"        <menuitem name='EditNextTag' action='NextTag' />"
 "        <menuitem name='EditInsertTags' action='InsertTags' />"
 "      </placeholder>"
 "    </menu>"
@@ -76,6 +110,12 @@ update_ui_real (GtranslatorWindow *window,
 	gtk_action_set_sensitive (action,
 				  (view != NULL) &&
 				  gtk_text_view_get_editable (view));
+	
+	action = gtk_action_group_get_action (data->action_group,
+					      "NextTag");
+	gtk_action_set_sensitive (action,
+				  (view != NULL) &&
+				  gtk_text_view_get_editable (view));
 }
 
 static void
@@ -95,15 +135,11 @@ on_menuitem_activated (GtkMenuItem *item,
 {
 	const gchar *name;
 	GtkWidget *label;
-	gchar **str;
 	GtranslatorView *view;
 	GtkTextBuffer *buffer;
-	GtkTextIter iter;
 	
 	label = gtk_bin_get_child (GTK_BIN (item));
 	name = gtk_label_get_text (GTK_LABEL (label));
-	
-	str = g_strsplit (name, "|", 2);
 	
 	view = gtranslator_window_get_active_view (window);
 	
@@ -111,42 +147,29 @@ on_menuitem_activated (GtkMenuItem *item,
 	
 	gtk_text_buffer_begin_user_action (buffer);
 	gtk_text_buffer_insert_at_cursor (buffer,
-					  str[0], strlen (str[0]));
-					  
-	gtk_text_buffer_insert_at_cursor (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)),
-					  str[1], strlen (str[1]));
+					  name, strlen (name));
 	gtk_text_buffer_end_user_action (buffer);
-	
-	gtk_text_buffer_get_iter_at_mark (buffer, &iter,
-					  gtk_text_buffer_get_insert (buffer));
-	
-	gtk_text_iter_backward_cursor_positions (&iter, strlen (str[1]));
-	gtk_text_buffer_place_cursor (buffer, &iter);
-	
-	g_strfreev (str);
 }
 
 static void
-parse_arrays (GSList *start,
-	      GSList *close,
-	      GtranslatorWindow *window)
+parse_list (GtranslatorWindow *window)
 {
 	GtkUIManager *manager;
 	GtkWidget *insert_tags;
 	GtkWidget *menuitem;
 	GtkWidget *menu;
-	static guint i = 1;
+	GSList *l = tags;
+	guint i = 1;
 	
 	manager = gtranslator_window_get_ui_manager (window);
 	
 	insert_tags = gtk_ui_manager_get_widget (manager,
-					  "/MainMenu/EditMenu/EditOps_1/EditInsertTags");
+						 "/MainMenu/EditMenu/EditOps_1/EditInsertTags");
 	
-	if (start == NULL || close == NULL)
+	if (tags == NULL)
 	{
 		gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_tags), NULL);
 		gtk_widget_set_sensitive (insert_tags, FALSE);
-		i = 1;
 		return;
 	}
 	
@@ -156,32 +179,26 @@ parse_arrays (GSList *start,
 	gtk_menu_set_accel_group (GTK_MENU (menu),
 				  gtk_ui_manager_get_accel_group(manager));
 	
-	close = g_slist_reverse (close);
-	
 	do{
-		gchar *name, *accel_path;
+		gchar *accel_path;
 		
-		if (!close)
-			return;
-		
-		name = g_strdup_printf ("%s|%s", (gchar *)start->data, (gchar *)close->data);
-		menuitem = gtk_menu_item_new_with_label (name);
+		menuitem = gtk_menu_item_new_with_label ((const gchar *)l->data);
 		gtk_widget_show (menuitem);
 		
-		accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Insert Tags/%s", name);
+		accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Insert Tags/%s",
+					      (const gchar *)tags->data);
 		
 		gtk_menu_item_set_accel_path (GTK_MENU_ITEM (menuitem), accel_path);
 		gtk_accel_map_add_entry (accel_path, i+48, GDK_CONTROL_MASK);
 
 		g_free (accel_path);
-		g_free (name);
 		
 		g_signal_connect (menuitem, "activate",
 				  G_CALLBACK (on_menuitem_activated), window);
 		
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 		i++;
-	}while ((start = g_slist_next (start)));
+	}while ((l = g_slist_next (l)));
 	
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_tags), menu);
 }
@@ -194,40 +211,38 @@ showed_message_cb (GtranslatorTab *tab,
 	const gchar *msgid;
 	GRegex *regex;
 	GMatchInfo *match_info;
-	GSList *start = NULL, *close = NULL;
 	gchar *word;
+	
+	if (tags != NULL)
+	{
+		g_slist_foreach (tags, (GFunc)g_free, NULL);
+		g_slist_free (tags);
+		tags = NULL;
+	}
+	
+	/*
+	 * If we show another message we have to restart the index
+	 * of the tags
+	 */
+	tag_position = 0;
 	
 	msgid = gtranslator_msg_get_msgid (msg);
 	
 	/*
-	 * Start regular expression like "<b>"
+	 * Regular expression
 	 */
-	regex = g_regex_new ("<[a-zA-Z=\" ]+>", 0, 0, NULL);
+	regex = g_regex_new ("<[a-zA-Z=\"/ ]+>", 0, 0, NULL);
 	g_regex_match (regex, msgid, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
 		word = g_match_info_fetch (match_info, 0);
-		start = g_slist_append (start, word);
+		tags = g_slist_append (tags, word);
 		g_match_info_next (match_info, NULL);
 	}
 	g_match_info_free (match_info);
 	g_regex_unref (regex);
 	
-	/*
-	 * Close regular expression like "</b>"
-	 */
-	regex = g_regex_new ("</[a-zA-Z ]+>", 0, 0, NULL);
-	g_regex_match (regex, msgid, 0, &match_info);
-	while (g_match_info_matches (match_info))
-	{
-		word = g_match_info_fetch (match_info, 0);
-		close = g_slist_append (close, word);
-		g_match_info_next (match_info, NULL);
-	}
-	g_match_info_free (match_info);
-	g_regex_unref (regex);
-	
-	parse_arrays (start, close, window);
+	parse_list (window);
 }
 
 
