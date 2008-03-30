@@ -41,7 +41,7 @@
           <match>[&amp;_][a-zA-Z]</match>
         </context>
         <context style-ref="tag">
-	  <match>&lt;[a-zA-Z\=\"\/ ]+&gt;</match>
+	  <match>&lt;[0-9a-zA-Z=\"/\- ]+&gt;</match>
 	</context>
         <context ref="python:format" style-ref="special-variable"/>
         <context ref="c:printf"/>
