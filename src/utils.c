@@ -294,7 +294,7 @@ gtranslator_utils_is_valid_uri (const gchar *uri)
  *
  * Create a list of valid uri's from a uri-list drop.
  * 
- * Return value: a string array which will hold the uris or NULL if there 
+ * Returns: a string array which will hold the uris or NULL if there 
  *		 were no valid uris. g_strfreev should be used when the 
  *		 string array is no longer used
  */

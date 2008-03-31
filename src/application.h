@@ -72,11 +72,6 @@ struct _GtranslatorApplicationClass
 GType		         gtranslator_application_get_type	   (void) G_GNUC_CONST;
 GtranslatorApplication	*gtranslator_application_get_default	           (void);
 
-
-EggToolbarsModel *gtranslator_application_get_toolbars_model  (GtranslatorApplication   *application);
-
-void              gtranslator_application_save_toolbars_model (GtranslatorApplication   *application);
-
 void              gtranslator_application_shutdown            (GtranslatorApplication *app);
 
 GList            *gtranslator_application_get_views           (GtranslatorApplication *app,
@@ -92,6 +87,12 @@ const GList      *gtranslator_application_get_windows (GtranslatorApplication *a
 void              gtranslator_application_register_icon (GtranslatorApplication *app,
 							 const gchar *icon,
 				       			 const gchar *stock_id);
+
+/* Non exported funcs */
+
+EggToolbarsModel *_gtranslator_application_get_toolbars_model  (GtranslatorApplication   *application);
+
+void              _gtranslator_application_save_toolbars_model (GtranslatorApplication   *application);
 
 G_END_DECLS
 

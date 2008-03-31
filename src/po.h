@@ -94,8 +94,6 @@ void		gtranslator_po_save_file           	(GtranslatorPo *po,
 
 gchar           *gtranslator_po_get_filename		(GtranslatorPo *po);
 
-gchar           *gtranslator_po_get_filename		(GtranslatorPo *po);
-
 void            gtranslator_po_set_filename		(GtranslatorPo *po,
 							gchar *data);
 

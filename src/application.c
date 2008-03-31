@@ -281,13 +281,13 @@ gtranslator_application_open_window (GtranslatorApplication *app)
 				     
 
 EggToolbarsModel *
-gtranslator_application_get_toolbars_model (GtranslatorApplication *application)
+_gtranslator_application_get_toolbars_model (GtranslatorApplication *application)
 {
 	return application->priv->toolbars_model;
 }
 
 void
-gtranslator_application_save_toolbars_model (GtranslatorApplication *application)
+_gtranslator_application_save_toolbars_model (GtranslatorApplication *application)
 {
         egg_toolbars_model_save_toolbars (application->priv->toolbars_model,
 			 	          application->priv->toolbars_file, "1.0");

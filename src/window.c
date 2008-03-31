@@ -1118,7 +1118,7 @@ gtranslator_window_cmd_edit_toolbar_cb (GtkDialog *dialog,
 	GtranslatorWindow *window = GTR_WINDOW (data);
         egg_editable_toolbar_set_edit_mode
 			(EGG_EDITABLE_TOOLBAR (window->priv->toolbar), FALSE);
-	gtranslator_application_save_toolbars_model (GTR_APP);
+	_gtranslator_application_save_toolbars_model (GTR_APP);
         gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
@@ -1142,7 +1142,7 @@ gtranslator_window_cmd_edit_toolbar (GtkAction *action,
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 	  
 	editor = egg_toolbar_editor_new (window->priv->ui_manager,
-					 gtranslator_application_get_toolbars_model (GTR_APP));
+					 _gtranslator_application_get_toolbars_model (GTR_APP));
 	gtk_container_set_border_width (GTK_CONTAINER (editor), 5);
 	gtk_box_set_spacing (GTK_BOX (EGG_TOOLBAR_EDITOR (editor)), 5);
              
@@ -1256,7 +1256,7 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	priv->toolbar = GTK_WIDGET 
 	  (g_object_new (EGG_TYPE_EDITABLE_TOOLBAR,
 			 "ui-manager", priv->ui_manager,
-			 "model", gtranslator_application_get_toolbars_model(GTR_APP),
+			 "model", _gtranslator_application_get_toolbars_model (GTR_APP),
 			 NULL));
 
 	egg_editable_toolbar_show (EGG_EDITABLE_TOOLBAR (priv->toolbar),
