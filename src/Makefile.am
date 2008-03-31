@@ -58,6 +58,7 @@ INST_H_FILES =				\
 	msg.h \
 	notebook.h \
 	po.h \
+	profile.h \
 	statusbar.h \
 	tab.h \
 	utils.h \
@@ -82,6 +83,7 @@ libgtranslator_la_SOURCES = \
 	view.c \
 	window.c \
 	po.c \
+	profile.c \
 	utils.c \
 	msg.c \
 	actions.h \

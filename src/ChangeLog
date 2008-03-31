@@ -1,3 +1,23 @@
+2008-03-31  Pablo Sanxiao  <psanxiao@gmail.com>
+	
+	* profile.{h,c}:
+	Added these files that implement the profile class
+
+2008-03-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+	
+	* utils.c:
+	Fixed comment.
+	* application.{ch}:
+	* window.c:
+	Marked funcs as non exportables.
+	* po.h:
+	Removed duplicate definition of a func.
+
+2008-03-30  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* message-table.c:
+	Now message-showed signal is emitted once. (Fixes bug #524783)
+
 2008-03-26  Pablo Sanxiao  <psanxiao@gmail.com>
 
 	* /dialogs/profile-dialog.glade:
@@ -7,42 +27,42 @@
 
 2008-03-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/utils.c:
+	* utils.c:
 	Minor fixes in gtranslator_utils_activate_url func.
 
 2008-03-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/actions-go.c:
-	* src/window.ch:
-	* src/statusbar.ch:
-	* src/actions-file.c:
+	* actions-go.c:
+	* window.ch:
+	* statusbar.ch:
+	* actions-file.c:
 	Now progress bar is inside of our statusbar class.
 	(Fixes bug #514758).
 
 2008-03-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/msg.ch:
-	* src/comment.c:
+	* msg.ch:
+	* comment.c:
 	Added pretty format visualization (Fixes bug #520496)
 
 2008-03-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/comments.c:
+	* comments.c:
 	Set the wrap mode to word.
 
 2008-03-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/utils.ch:
+	* utils.ch:
 	Added func to show the help. Now we need help to show.
 
 2008-03-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/tab.c:
-	* src/po.c:
-	* src/prefs-manager.c:
-	* src/header.c:
-	* src/prefs-manager.h:
-	* src/header.h:
+	* tab.c:
+	* po.c:
+	* prefs-manager.c:
+	* header.c:
+	* prefs-manager.h:
+	* header.h:
 	Added better support for plural forms. This already needs
 	work but i think i'll get it acomplished once Pablo finish
 	the profiles stuff.
@@ -57,9 +77,9 @@
 
 2008-03-10  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/prefs-manager-app.c:
-	* src/dialogs/preferences-dialog.c:
-	* src/dialogs/preferences-dialog.glade:
+	* prefs-manager-app.c:
+	* dialogs/preferences-dialog.c:
+	* dialogs/preferences-dialog.glade:
 	Now you can choose the anchor style.
 
 2008-03-09  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
@@ -89,22 +109,22 @@
 2008-03-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* plugins/open-tran/open-tran-plugin.c:
-	* src/utils.c:
-	* src/utils.h:
-	* src/dialogs/preferences-dialog.c:
-	* src/dialogs/comment-dialog.c:
-	* src/dialogs/search-dialog.c:
-	* src/dialogs/header-dialog.c:
-	* src/actions-search.c:
-	* src/utils_gui.c:
-	* src/window.c:
-	* src/utils_gui.h:
-	* src/view.c:
-	* src/main.c:
-	* src/Makefile.am:
+	* utils.c:
+	* utils.h:
+	* dialogs/preferences-dialog.c:
+	* dialogs/comment-dialog.c:
+	* dialogs/search-dialog.c:
+	* dialogs/header-dialog.c:
+	* actions-search.c:
+	* utils_gui.c:
+	* window.c:
+	* utils_gui.h:
+	* view.c:
+	* main.c:
+	* Makefile.am:
 	Renamed utils_gui.{ch} to utils.{ch}
 
-	* src/po.c:
+	* po.c:
 	Fixed memory leak.
 
 2008-03-04  Pablo Sanxiao  <psanxiao@gmail.com>
@@ -164,26 +184,26 @@
 
 2008-01-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* src/utils.c:
-	* src/utils.h:
-	* src/translator.c:
-	* src/translator.h:
-	* src/nautilus-string.c:
-	* src/nautilus-string.h:
-	* src/sighandling.c:
-	* src/sighandling.h:
-	* src/learn.c:
-	* src/learn.h:
-	* src/languages.c:
-	* src/languages.h:
-	* src/compile.c:
-	* src/languages.xsl:
-	* src/compile.h:
-	* src/header_stuff.c:
-	* src/header_stuff.h:
-	* src/bookmark.c:
-	* src/bookmark.h:
-	* src/Makefile.am:
+	* utils.c:
+	* utils.h:
+	* translator.c:
+	* translator.h:
+	* nautilus-string.c:
+	* nautilus-string.h:
+	* sighandling.c:
+	* sighandling.h:
+	* learn.c:
+	* learn.h:
+	* languages.c:
+	* languages.h:
+	* compile.c:
+	* languages.xsl:
+	* compile.h:
+	* header_stuff.c:
+	* header_stuff.h:
+	* bookmark.c:
+	* bookmark.h:
+	* Makefile.am:
 	Cleanup all unneccessary sources.
 
 2008-01-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
