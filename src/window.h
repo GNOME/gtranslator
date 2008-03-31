@@ -104,11 +104,6 @@ GList            *gtranslator_window_get_all_views    (GtranslatorWindow *window
 						       gboolean original,
 						       gboolean translated);
 
-void              gtranslator_window_update_statusbar (GtranslatorWindow *window);
-
-void              gtranslator_window_update_progress_bar
-                                                      (GtranslatorWindow *window);
-
 void              set_sensitive_according_to_message  (GtranslatorWindow *window,
 						       GtranslatorPo *po);
 

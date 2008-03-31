@@ -72,10 +72,6 @@ GtkWidget	*gtranslator_comment_panel_new	           (GtkWidget *tab);
 void             gtranslator_comment_panel_set_comments    (GtranslatorCommentPanel *panel,
 							    const gchar *comments);
 
-void             gtranslator_comment_panel_set_extracted_comments
-							   (GtranslatorCommentPanel *panel,
-						            const gchar *extracted_comments);
-
 G_END_DECLS
 
 #endif /* __COMMENT_PANEL_H__ */
