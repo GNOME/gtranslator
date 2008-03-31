@@ -186,7 +186,7 @@ parse_list (GtranslatorWindow *window)
 		gtk_widget_show (menuitem);
 		
 		accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Insert Tags/%s",
-					      (const gchar *)tags->data);
+					      (const gchar *)l->data);
 		
 		gtk_menu_item_set_accel_path (GTK_MENU_ITEM (menuitem), accel_path);
 		gtk_accel_map_add_entry (accel_path, i+48, GDK_CONTROL_MASK);
@@ -231,7 +231,7 @@ showed_message_cb (GtranslatorTab *tab,
 	/*
 	 * Regular expression
 	 */
-	regex = g_regex_new ("<[a-zA-Z=\"/ ]+>", 0, 0, NULL);
+	regex = g_regex_new ("<[-0-9a-zA-Z=\"/ ]+>", 0, 0, NULL);
 	g_regex_match (regex, msgid, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
