@@ -4,6 +4,7 @@ plugindir = $(libdir)/gtranslator/plugins
 INCLUDES = \
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src				\
+	-I$(top_srcdir)/src/toolbareditor               \
 	-I$(top_srcdir)/src/plugin-system		\
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(GUCHARMAP_CFLAGS)				\
@@ -23,6 +24,10 @@ libcharmap_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
 	$(GTRANSLATOR_LIBS)					\
 	$(GUCHARMAP_LIBS)
+
+pixmaps_dir = $(datadir)/pixmaps/gtranslator
+pixmaps__DATA = \
+        gucharmap.ico
 
 # Plugin Info
 

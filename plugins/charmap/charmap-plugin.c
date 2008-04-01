@@ -26,6 +26,7 @@
 #include "charmap-panel.h"
 
 #include <glib/gi18n-lib.h>
+#include "application.h"
 #include "window.h"
 #include <gucharmap/gucharmap-table.h>
 #include <gucharmap/gucharmap-unicode-info.h>
@@ -234,13 +235,16 @@ impl_activate (GtranslatorPlugin *plugin,
 		image = gtk_image_new_from_icon_name ("gucharmap",
 						      GTK_ICON_SIZE_MENU);*/
 
+	gtranslator_application_register_icon (GTR_APP, "gucharmap.ico",
+					       "charmap-plugin-icon");
+	
 	data->panel = create_charmap_panel (window);
 	
 	gtranslator_window_add_widget (window,
 				       data->panel,
 				       "GtranslatorCharmapPlugin",
 				       _("Character Map"),
-				       NULL,
+				       "charmap-plugin-icon",
 				       GTR_WINDOW_PLACEMENT_LEFT);
 
 	//gtk_object_sink (GTK_OBJECT (image));
