@@ -280,10 +280,10 @@ gtranslator_application_open_window (GtranslatorApplication *app)
 }
 				     
 
-EggToolbarsModel *
+GObject *
 _gtranslator_application_get_toolbars_model (GtranslatorApplication *application)
 {
-	return application->priv->toolbars_model;
+	return G_OBJECT (application->priv->toolbars_model);
 }
 
 void

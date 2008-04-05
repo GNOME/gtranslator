@@ -1142,7 +1142,7 @@ gtranslator_window_cmd_edit_toolbar (GtkAction *action,
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 	  
 	editor = egg_toolbar_editor_new (window->priv->ui_manager,
-					 _gtranslator_application_get_toolbars_model (GTR_APP));
+					 EGG_TOOLBARS_MODEL (_gtranslator_application_get_toolbars_model (GTR_APP)));
 	gtk_container_set_border_width (GTK_CONTAINER (editor), 5);
 	gtk_box_set_spacing (GTK_BOX (EGG_TOOLBAR_EDITOR (editor)), 5);
              

@@ -23,7 +23,6 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "egg-toolbars-model.h"
 #include "window.h"
 
 G_BEGIN_DECLS
@@ -90,7 +89,7 @@ void              gtranslator_application_register_icon (GtranslatorApplication 
 
 /* Non exported funcs */
 
-EggToolbarsModel *_gtranslator_application_get_toolbars_model  (GtranslatorApplication   *application);
+GObject          *_gtranslator_application_get_toolbars_model  (GtranslatorApplication   *application);
 
 void              _gtranslator_application_save_toolbars_model (GtranslatorApplication   *application);
 
