@@ -175,23 +175,22 @@ dnl -------------------------------------------------------------------
 if test "x$enable_opentran" != "xno"; then
 	PKG_CHECK_MODULES(SOUP,                            \
 		libsoup-2.2,
-		have_libsoup_2_2=yes,
-		have_libsoup_2_2=no)
-	if test x"$have_libsoup_2_2" = "xno"; then
+		have_libsoup=yes,
+		have_libsoup=no)
+	if test x"$have_libsoup" = "xno"; then
 		PKG_CHECK_MODULES(SOUP,
 			libsoup-2.4,
-			have_libsoup_2_4=yes,
-			have_libsoup_2_4=no)
-	fi
-	if test x"$have_libsoup_2_2" = "xyes"; then
+			have_libsoup=yes,
+			have_libsoup=no)
+		if test x"$have_libsoup" = "xyes"; then
+			AC_DEFINE(LIBSOUP_2_4, 1, [Define if libsoup support is enabled])
+		fi
+	else
 		AC_DEFINE(LIBSOUP_2_2, 1, [Define if libsoup support is enabled])
-	elif test x"$have_libsoup_2_4" = "xyes"; then
-                AC_DEFINE(LIBSOUP_2_4, 1, [Define if libsoup support is enabled])
 	fi
 fi
 
-AM_CONDITIONAL(USE_LIBSOUP, test x"$have_libsoup_2_2" = "xyes")
-AM_CONDITIONAL(USE_LIBSOUP, test x"$have_libsoup_2_4" = "xyes")
+AM_CONDITIONAL(USE_LIBSOUP, test x"$have_libsoup" = "xyes")
 
 # ================================================================
 # gdict
