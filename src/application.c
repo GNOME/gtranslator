@@ -168,8 +168,6 @@ gtranslator_application_init (GtranslatorApplication *application)
 	priv->toolbars_file = g_build_filename (gtranslator_folder,
 						"gtr-toolbar.xml",
 						NULL);
-						
-	g_warning (priv->toolbars_file);
 
 	filename = g_build_filename (DATADIR,
 				     "gtr-toolbar.xml",
