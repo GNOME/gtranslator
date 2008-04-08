@@ -1,5 +1,6 @@
 SUBDIRS = 					\
 	alternate-language			\
+	fullscreen				\
 	insert-tags
 
 if USE_CHARMAP

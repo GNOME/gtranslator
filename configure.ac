@@ -288,8 +288,9 @@ plugins/Makefile
 plugins/alternate-language/Makefile
 plugins/charmap/Makefile
 plugins/dictionary/Makefile
-plugins/open-tran/Makefile
+plugins/fullscreen/Makefile
 plugins/insert-tags/Makefile
+plugins/open-tran/Makefile
 src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile
