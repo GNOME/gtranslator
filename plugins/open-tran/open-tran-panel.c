@@ -34,11 +34,6 @@
 #include <gtk/gtk.h>
 #include <libsoup/soup.h>
 
-#ifdef LIBSOUP_2_2
-#include <libsoup/soup-xmlrpc-message.h>
-#include <libsoup/soup-xmlrpc-response.h>
-#endif
-
 #define GTR_OPEN_TRAN_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_OPEN_TRAN_PANEL,     \
@@ -122,25 +117,17 @@ static void
 print_struct_to_tree_view(gpointer value,
 			  GtranslatorOpenTranPanel *panel)
 {
-#ifdef LIBSOUP_2_2
-	gchar *str;
-#elif LIBSOUP_2_4
 	const gchar *str;
-#endif
 	GdkPixbuf *icon;
 	GtkTreeIter iter;
 
 	/*
 	 * Text value
 	 */
-#ifdef LIBSOUP_2_2	 
-	if (soup_xmlrpc_value_get_string (value, &str))
-	{
-#elif LIBSOUP_2_4
 	if (G_VALUE_HOLDS_STRING (value))
 	{
 		str = g_value_get_string (value);
-#endif
+
 		/*
 		 * We have to parse the first character of str:
 		 * G - Gnome
@@ -185,47 +172,9 @@ print_struct_field (gpointer key,
 	GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL(data);
 	GHashTable *hash;
 	GList *values;
-#ifdef LIBSOUP_2_2
-	gchar *str;
-	SoupXmlrpcValue *result;
-	SoupXmlrpcValueArrayIterator *ar_iter;
-#elif LIBSOUP_2_4
 	GValueArray *array;
 	const gchar *str;
-#endif
 	
-
-#ifdef LIBSOUP_2_2	
-	/*
-	 * Text value
-	 */
-	if (soup_xmlrpc_value_get_string (value, &str))
-	{
-		panel->priv->text = str;
-	}
-	
-	/*
-	 * Now we have to detect the type of the text (Gnome, Kde...)
-	 */
-	if (soup_xmlrpc_value_array_get_iterator (value, &ar_iter)) 
-	{
-		if(!soup_xmlrpc_value_array_iterator_get_value(ar_iter, &result))
-		{
-			show_error_dialog(panel->priv->window,
-					  _("WRONG! Can't get result element 1\n"));
-			return;
-		}
-		if (!soup_xmlrpc_value_get_struct (result, &hash)) {
-			show_error_dialog(panel->priv->window,
-					  _("WRONG! Result element 1 is not a struct"));
-			return;
-		}
-	
-		values = g_hash_table_get_values(hash);
-		if((values = g_list_next(values)))
-			print_struct_to_tree_view(values->data, panel);
-	}
-#elif LIBSOUP_2_4
 	if (G_VALUE_HOLDS_STRING (value))
 	{
 		str = g_value_get_string (value);
@@ -247,100 +196,8 @@ print_struct_field (gpointer key,
 		if((values = g_list_next(values)))
 			print_struct_to_tree_view(values->data, panel);
 	}
-#endif
 }
 
-#ifdef LIBSOUP_2_2
-static void
-got_response (SoupMessage *msg,
-	      gpointer data)
-{
-	GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL(data);
-	SoupXmlrpcResponse *response;
-	SoupXmlrpcValue *value;
-	GHashTable *hash;
-	SoupXmlrpcValueArrayIterator *iter;
-	SoupXmlrpcValue *result;
-	GtkTreeIter treeiter;
-	gint i;
-	
-	if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code)) {
-		show_error_dialog(panel->priv->window,
-				  _("Error: %d %s\n"),
-				  msg->status_code,
-				  msg->reason_phrase);
-		return;
-	}
-
-	response = soup_xmlrpc_message_parse_response (SOUP_XMLRPC_MESSAGE (msg));
-	if (!response) {
-		show_error_dialog(panel->priv->window,
-				 /*
-				  * Translators: XMLRPC is the name of the protocol
-				  */
-				  _("Could not parse XMLRPC response\n"));
-		return;
-	}
-
-	value = soup_xmlrpc_response_get_value (response);
-	if (!value) {
-		show_error_dialog(panel->priv->window,
-				 /*
-				  * Translators: XMLRPC is the name of the protocol
-				  */
-				  _("No response value in XMLRPC response\n"));
-		return;
-	}
-
-	if (!soup_xmlrpc_value_array_get_iterator (value, &iter)) {
-		show_error_dialog(panel->priv->window,
-				 /*
-				  * Translators: XMLRPC is the name of the protocol
-				  */
-				  _("Could not extract result from XMLRPC response\n"));
-		return;
-	}
-
-	i = 0;
-	while(iter)
-	{
-		if(!soup_xmlrpc_value_array_iterator_get_value(iter, &result))
-		{
-			show_error_dialog(panel->priv->window,
-					  _("WRONG! Can't get result element %d\n"), i + 1);
-			g_object_unref (response);
-			return;
-		}
-		if (!soup_xmlrpc_value_get_struct (result, &hash)) {
-			show_error_dialog(panel->priv->window,
-					  _("WRONG! Result element %d is not a struct"), i + 1);
-			g_object_unref (response);
-			return;
-		}
-		
-		g_hash_table_foreach(hash, print_struct_field, data);
-		iter = soup_xmlrpc_value_array_iterator_next(iter);
-		i++;
-	}
-
-	g_object_unref (response);
-	
-	/*
-	 * We have to check if we didn't find any text
-	 */
-	if(!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(panel->priv->store),
-                                          &treeiter))
-	{
-		gtk_list_store_append(panel->priv->store, &treeiter);
-		gtk_list_store_set(panel->priv->store, &treeiter,
-				   ICON_COLUMN, NULL,
-				   TEXT_COLUMN, _("Phrase not found"),
-				   -1);
-	}
-}
-#endif
-
-#ifdef LIBSOUP_2_4
 static void
 check_xmlrpc (GValue *value, GType type, ...)
 {
@@ -356,7 +213,6 @@ check_xmlrpc (GValue *value, GType type, ...)
 	SOUP_VALUE_GETV (value, type, args);
 	va_end (args);
 }
-#endif
 
 static void
 open_connection(GtranslatorOpenTranPanel *panel,
@@ -365,34 +221,6 @@ open_connection(GtranslatorOpenTranPanel *panel,
 		const gchar *own_code)
 {
 	const gchar *uri = "http://open-tran.eu/RPC2";
-
-#ifdef LIBSOUP_2_2
-	SoupXmlrpcMessage *msg;
-	SoupUri *proxy = NULL; //This can be useful in a future
-
-	panel->priv->session = soup_session_async_new_with_options (
-		SOUP_SESSION_PROXY_URI, proxy,
-		NULL);
-
-	msg = soup_xmlrpc_message_new (uri);
-	if (!msg) {
-		show_error_dialog(panel->priv->window,
-				  _("Could not create web service request to '%s'\n"), uri);
-		return;
-	}
-
-	soup_xmlrpc_message_start_call (msg, "suggest2");
-	soup_xmlrpc_message_start_param (msg);
-	soup_xmlrpc_message_write_string (msg, text);
-	soup_xmlrpc_message_write_string (msg, search_code);
-	soup_xmlrpc_message_write_string (msg, own_code);
-	soup_xmlrpc_message_end_param (msg);
-	soup_xmlrpc_message_end_call (msg);
-
-	soup_xmlrpc_message_persist (msg);
-	soup_session_queue_message (panel->priv->session, SOUP_MESSAGE (msg),
-				    got_response, panel);
-#elif LIBSOUP_2_4
 	SoupMessage *msg;
 	gchar *body;
 	GValueArray *array;
@@ -473,7 +301,6 @@ open_connection(GtranslatorOpenTranPanel *panel,
 	
 	soup_session_abort (panel->priv->session);
 	g_object_unref (panel->priv->session);
-#endif
 }
 
 static void
