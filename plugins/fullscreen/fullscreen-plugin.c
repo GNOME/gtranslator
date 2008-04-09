@@ -43,7 +43,7 @@ on_fullscreen_activated (GtkToggleAction *action,
 
 static const GtkToggleActionEntry action_entries[] =
 {
-	{ "Fullscreen", NULL, N_("_Fullscreen"), NULL,
+	{ "Fullscreen", NULL, N_("_Fullscreen"), "F11",
 	 N_("Place window on fullscreen state"),
 	 G_CALLBACK (on_fullscreen_activated)}, 
 };
