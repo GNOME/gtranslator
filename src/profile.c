@@ -83,6 +83,14 @@ static void gtranslator_profile_finalize (GObject *object)
 	GtranslatorProfile *profile = GTR_PROFILE(object);
 	
 	g_free (profile->priv->name);
+	g_free (profile->priv->author_name);
+	g_free (profile->priv->author_email);
+	g_free (profile->priv->language_name);
+	g_free (profile->priv->language_code);
+	g_free (profile->priv->charset);
+	g_free (profile->priv->encoding);
+	g_free (profile->priv->group_email);
+	g_free (profile->priv->plurals);
 	
 	G_OBJECT_CLASS (gtranslator_profile_parent_class)->finalize (object);
 }
