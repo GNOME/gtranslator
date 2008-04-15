@@ -155,7 +155,7 @@ static void
 parse_list (GtranslatorWindow *window)
 {
 	GtkUIManager *manager;
-	GtkWidget *insert_tags;
+	GtkWidget *insert_tags, *next_tag;
 	GtkWidget *menuitem;
 	GtkWidget *menu;
 	GSList *l = tags;
@@ -165,15 +165,19 @@ parse_list (GtranslatorWindow *window)
 	
 	insert_tags = gtk_ui_manager_get_widget (manager,
 						 "/MainMenu/EditMenu/EditOps_1/EditInsertTags");
+	next_tag = gtk_ui_manager_get_widget (manager,
+					      "/MainMenu/EditMenu/EditOps_1/EditNextTag");
 	
 	if (tags == NULL)
 	{
 		gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_tags), NULL);
 		gtk_widget_set_sensitive (insert_tags, FALSE);
+		gtk_widget_set_sensitive (next_tag, FALSE);
 		return;
 	}
 	
 	gtk_widget_set_sensitive (insert_tags, TRUE);
+	gtk_widget_set_sensitive (next_tag, TRUE);
 	
 	menu = gtk_menu_new ();
 	gtk_menu_set_accel_group (GTK_MENU (menu),
