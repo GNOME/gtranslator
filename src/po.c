@@ -27,6 +27,7 @@
 #include "file-dialogs.h"
 #include "po.h"
 #include "msg.h"
+#include "gtranslator-enum-types.h"
 
 #include <string.h>
 #include <errno.h>
@@ -111,9 +112,37 @@ struct _GtranslatorPoPrivate
 	 * Header object
 	 */
 	GtranslatorHeader *header;
+	
+	GtranslatorPoState state;
+};
+
+enum
+{
+	PROP_0,
+	PROP_STATE
 };
 
 static gchar *message_error = NULL;
+
+static void
+gtranslator_po_get_property (GObject    *object,
+			     guint       prop_id,
+			     GValue     *value,
+			     GParamSpec *pspec)
+{
+	GtranslatorPo *po = GTR_PO (object);
+
+	switch (prop_id)
+	{
+		case PROP_STATE:
+			g_value_set_enum (value,
+					  gtranslator_po_get_state (po));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
 
 /*
  * A helper function simply increments the "translated" variable of the
@@ -180,6 +209,16 @@ gtranslator_po_class_init (GtranslatorPoClass *klass)
 	g_type_class_add_private (klass, sizeof (GtranslatorPoPrivate));
 
 	object_class->finalize = gtranslator_po_finalize;
+	object_class->get_property = gtranslator_po_get_property;	
+	
+	g_object_class_install_property (object_class,
+					 PROP_STATE,
+					 g_param_spec_enum ("state",
+							    "State",
+							    "The po's state",
+							    GTR_TYPE_PO_STATE,
+							    GTR_PO_STATE_SAVED,
+							    G_PARAM_READABLE));
 }
 
 /*
@@ -478,6 +517,9 @@ gtranslator_po_parse(GtranslatorPo *po,
 	priv->current = g_list_first(priv->messages);
 	
 	gtranslator_po_update_translated_count(po);
+	
+	/* Initialize Tab state*/
+	po->priv->state = GTR_PO_STATE_SAVED;
 }
 
 /**
@@ -637,7 +679,7 @@ gtranslator_po_save_file(GtranslatorPo *po,
  * 
  * Return value: the file name string
  **/
-gchar *
+const gchar *
 gtranslator_po_get_filename(GtranslatorPo *po)
 {
 	return po->priv->filename;
@@ -660,6 +702,34 @@ gtranslator_po_set_filename(GtranslatorPo *po,
 	if(po->priv->filename)
 		g_free(po->priv->filename);
 	po->priv->filename = g_strdup(data);
+}
+
+/**
+ * gtranslator_po_get_state:
+ * @po: a #GtranslatorPo
+ *
+ * Return value: the #GtranslatorPoState value of the @po.
+ */
+GtranslatorPoState
+gtranslator_po_get_state(GtranslatorPo *po)
+{
+	return po->priv->state;
+}
+
+/**
+ * gtranslator_po_set_state:
+ * @po: a #GtranslatorPo
+ * @state: a #GtranslatorPoState
+ *
+ * Sets the state for a #GtranslatorPo
+ */
+void
+gtranslator_po_set_state(GtranslatorPo *po,
+			 GtranslatorPoState state)
+{
+	po->priv->state = state;
+	
+	g_object_notify (G_OBJECT (po), "state");
 }
 
 /*

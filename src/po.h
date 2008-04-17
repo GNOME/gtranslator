@@ -74,6 +74,12 @@ enum
 	GTR_PO_ERROR_OTHER,
 };
 
+typedef enum
+{
+	GTR_PO_STATE_SAVED,
+	GTR_PO_STATE_MODIFIED
+}GtranslatorPoState;
+
 /*
  * Public methods
  */
@@ -91,8 +97,13 @@ void		gtranslator_po_parse			(GtranslatorPo *po,
 
 void		gtranslator_po_save_file           	(GtranslatorPo *po,
 							GError **error);
+							
+GtranslatorPoState    gtranslator_po_get_state          (GtranslatorPo *po);
 
-gchar           *gtranslator_po_get_filename		(GtranslatorPo *po);
+void            gtranslator_po_set_state                (GtranslatorPo *po,
+							 GtranslatorPoState state);
+
+const gchar    *gtranslator_po_get_filename		(GtranslatorPo *po);
 
 void            gtranslator_po_set_filename		(GtranslatorPo *po,
 							gchar *data);

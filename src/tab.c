@@ -25,7 +25,6 @@
 #endif
 
 #include "comment.h"
-#include "gtranslator-enum-types.h"
 #include "io-error-message-area.h"
 #include "message-area.h"
 #include "message-table.h"
@@ -52,8 +51,6 @@ G_DEFINE_TYPE(GtranslatorTab, gtranslator_tab, GTK_TYPE_VBOX)
 struct _GtranslatorTabPrivate
 {
 	GtranslatorPo *po;
-	
-	GtranslatorTabState state;
 	
 	GtkWidget *table_pane;
 	GtkWidget *content_pane;
@@ -88,34 +85,7 @@ enum
 	LAST_SIGNAL
 };
 
-enum
-{
-	PROP_0,
-	PROP_STATE
-};
-
 static guint signals[LAST_SIGNAL];
-
-static void
-gtranslator_tab_get_property (GObject    *object,
-			      guint       prop_id,
-			      GValue     *value,
-			      GParamSpec *pspec)
-{
-	GtranslatorTab *tab = GTR_TAB (object);
-
-	switch (prop_id)
-	{
-		case PROP_STATE:
-			g_value_set_enum (value,
-					  gtranslator_tab_get_state (tab));
-			break;
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
-}
-
 
 /*
  * Write the change back to the gettext PO instance in memory and
@@ -331,8 +301,10 @@ update_status(GtranslatorTab *tab,
 	      gpointer useless)
 {
 	GtranslatorMsgStatus status;
+	GtranslatorPoState po_state;
 	
-	status = gtranslator_msg_get_status(msg);
+	status = gtranslator_msg_get_status (msg);
+	po_state = gtranslator_po_get_state (tab->priv->po);
 
 	if((status == GTR_MSG_STATUS_FUZZY) && !gtranslator_msg_is_fuzzy(msg))
 	{
@@ -371,11 +343,11 @@ update_status(GtranslatorTab *tab,
 		}
 	}
 
-	gtranslator_msg_set_status(msg, status);
+	gtranslator_msg_set_status (msg, status);
 	
 	/* We need to update the tab state too if is neccessary*/
-	if(tab->priv->state != GTR_TAB_STATE_MODIFIED)
-		gtranslator_tab_set_state(tab, GTR_TAB_STATE_MODIFIED);
+	if (po_state != GTR_PO_STATE_MODIFIED)
+		gtranslator_po_set_state(tab->priv->po, GTR_PO_STATE_MODIFIED);
 }
 
 static void
@@ -560,9 +532,6 @@ gtranslator_tab_init (GtranslatorTab *tab)
 			 G_CALLBACK(update_status), NULL);
 	
 	gtranslator_tab_draw(tab);
-	
-	/* Initialize Tab state*/
-	tab->priv->state = GTR_TAB_STATE_SAVED;
 }
 
 static void
@@ -585,16 +554,6 @@ gtranslator_tab_class_init (GtranslatorTabClass *klass)
 	g_type_class_add_private (klass, sizeof (GtranslatorTabPrivate));
 
 	object_class->finalize = gtranslator_tab_finalize;
-	object_class->get_property = gtranslator_tab_get_property;
-	
-	g_object_class_install_property (object_class,
-					 PROP_STATE,
-					 g_param_spec_enum ("state",
-							    "State",
-							    "The tab's state",
-							    GTR_TYPE_TAB_STATE,
-							    GTR_TAB_STATE_SAVED,
-							    G_PARAM_READABLE));	
 	
 	signals[SHOWED_MESSAGE] = 
 		g_signal_new("showed-message",
@@ -658,34 +617,6 @@ GtranslatorPo *
 gtranslator_tab_get_po(GtranslatorTab *tab)
 {
 	return tab->priv->po;
-}
-
-/**
- * gtranslator_tab_get_state:
- * @tab: a #GtranslatorTab
- *
- * Return value: the #GtranslatorTabState value of the @tab.
- */
-GtranslatorTabState
-gtranslator_tab_get_state(GtranslatorTab *tab)
-{
-	return tab->priv->state;
-}
-
-/**
- * gtranslator_tab_set_state:
- * @tab: a #GtranslatorTab
- * @state: a #GtranslatorTabState
- *
- * Sets the state for a #GtranslatorTab
- */
-void
-gtranslator_tab_set_state(GtranslatorTab *tab,
-			  GtranslatorTabState state)
-{
-	tab->priv->state = state;
-	
-	g_object_notify(G_OBJECT(tab), "state");
 }
 
 /**
@@ -803,14 +734,16 @@ gchar *
 gtranslator_tab_get_name(GtranslatorTab *tab)
 {
 	GtranslatorHeader *header;
+	GtranslatorPoState state;
 	gchar *str;
 	gchar *tab_name;
 
 	header = gtranslator_po_get_header(tab->priv->po);
+	state = gtranslator_po_get_state (tab->priv->po);
 
 	str = gtranslator_header_get_prj_id_version(header);
 
-	if(tab->priv->state == GTR_TAB_STATE_MODIFIED)
+	if(state == GTR_PO_STATE_MODIFIED)
 	{
 		tab_name = g_strdup_printf("*%s", str);
 		return tab_name;

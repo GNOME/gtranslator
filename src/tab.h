@@ -71,12 +71,6 @@ struct _GtranslatorTabClass
 				  GtranslatorMsg *msg);
 };
 
-typedef enum
-{
-	GTR_TAB_STATE_SAVED,
-	GTR_TAB_STATE_MODIFIED
-}GtranslatorTabState;
-
 /*
  * Public methods
  */
@@ -87,11 +81,6 @@ GType	               gtranslator_tab_register_type       (GTypeModule * module);
 GtranslatorTab        *gtranslator_tab_new	           (GtranslatorPo *po);
 
 GtranslatorPo         *gtranslator_tab_get_po              (GtranslatorTab *tab);
-
-GtranslatorTabState    gtranslator_tab_get_state           (GtranslatorTab *tab);
-
-void                   gtranslator_tab_set_state           (GtranslatorTab *tab,
-							    GtranslatorTabState state);
 
 GtkWidget             *gtranslator_tab_get_panel           (GtranslatorTab *tab);
 

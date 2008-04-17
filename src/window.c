@@ -610,7 +610,7 @@ set_sensitive_according_to_tab(GtranslatorWindow *window,
 	GtkSourceBuffer *buf;
 	GtkAction *action;
 	GList *current;
-	GtranslatorTabState state;
+	GtranslatorPoState state;
 	
 	view = gtranslator_tab_get_active_view(tab);
 	po = gtranslator_tab_get_po(tab);
@@ -621,11 +621,11 @@ set_sensitive_according_to_tab(GtranslatorWindow *window,
 		gtk_action_group_set_sensitive(window->priv->action_group, TRUE);
 	
 	/*File*/
-	state = gtranslator_tab_get_state(tab);
+	state = gtranslator_po_get_state(po);
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileSave");
 	gtk_action_set_sensitive (action,
-				  state == GTR_TAB_STATE_MODIFIED);
+				  state == GTR_PO_STATE_MODIFIED);
 	
 	/*Edit*/
 	action = gtk_action_group_get_action(window->priv->action_group,

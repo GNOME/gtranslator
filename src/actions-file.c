@@ -226,7 +226,7 @@ save_dialog_response_cb (GtkDialog *dialog,
 		}
 	
 		/* We have to change the state of the tab */
-		gtranslator_tab_set_state(tab, GTR_TAB_STATE_SAVED);	
+		gtranslator_po_set_state(po, GTR_PO_STATE_SAVED);	
 			
 		g_free (filename);
 	}
@@ -386,7 +386,7 @@ gtranslator_save_current_file_dialog (GtkWidget * widget,
 	}
 	
 	/* We have to change the state of the tab */
-	gtranslator_tab_set_state(current, GTR_TAB_STATE_SAVED);
+	gtranslator_po_set_state(po, GTR_PO_STATE_SAVED);
 }
 
 static gboolean
