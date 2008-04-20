@@ -904,11 +904,12 @@ can_redo(GtkSourceBuffer *doc,
 }
 
 static void
-sync_state (GtranslatorTab    *tab,
+sync_state (GtranslatorPo    *po,
 	    GParamSpec  *pspec,
 	    GtranslatorWindow *window)
 {	
-	set_sensitive_according_to_tab (window, tab);
+	set_sensitive_according_to_tab (window,
+					gtranslator_tab_get_from_document (po));
 }
 
 static void
@@ -957,7 +958,7 @@ notebook_tab_added(GtkNotebook *notebook,
 				G_CALLBACK(gtranslator_window_update_statusbar_message_count),
 				window);
 				
-	g_signal_connect (tab, 
+	g_signal_connect (gtranslator_tab_get_po (tab), 
 			 "notify::state",
 			  G_CALLBACK (sync_state), 
 			  window);
