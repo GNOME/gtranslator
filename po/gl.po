@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 19:29+0200\n"
+"POT-Creation-Date: 2008-04-20 21:01+0200\n"
 "PO-Revision-Date: 2008-03-30 19:31+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
@@ -93,7 +93,7 @@ msgstr "Lingua alternativa"
 msgid "Load an alternate language."
 msgstr "Cargar unha lingua alternativa"
 
-#: ../plugins/charmap/charmap-plugin.c:242
+#: ../plugins/charmap/charmap-plugin.c:246
 #: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
 msgid "Character Map"
 msgstr "Mapa de caracteres"
@@ -166,6 +166,22 @@ msgstr "Dicionario"
 msgid "Look up words in a dictionary."
 msgstr "Buscar palabras nun dicionario."
 
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
+msgid "_Fullscreen"
+msgstr ""
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:47
+msgid "Place window on fullscreen state"
+msgstr ""
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr ""
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr ""
+
 #: ../plugins/insert-tags/insert-tags-plugin.c:67
 msgid "_Next Tag"
 msgstr "_Seguinte etiqueta"
@@ -215,97 +231,51 @@ msgstr "gtk-cancel"
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../plugins/open-tran/open-tran-panel.c:215
-msgid "WRONG! Can't get result element 1\n"
-msgstr "FATAL! Non se pode obter o resultado do elemento 1\n"
-
-#: ../plugins/open-tran/open-tran-panel.c:220
-msgid "WRONG! Result element 1 is not a struct"
-msgstr "FATAL! O resultado do elemento 1 non é unha estrutura"
-
-#: ../plugins/open-tran/open-tran-panel.c:269
-#, c-format
-msgid "Error: %d %s\n"
-msgstr "Erro: %d %s\n"
-
-#.
-#. * Translators: XMLRPC is the name of the protocol
-#.
-#: ../plugins/open-tran/open-tran-panel.c:281
-msgid "Could not parse XMLRPC response\n"
-msgstr "Non se puido analizar a resposta XMLRPC\n"
-
-#.
-#. * Translators: XMLRPC is the name of the protocol
-#.
-#: ../plugins/open-tran/open-tran-panel.c:291
-msgid "No response value in XMLRPC response\n"
-msgstr "Non hai valor de respota na respota XMLRPC\n"
-
-#.
-#. * Translators: XMLRPC is the name of the protocol
-#.
-#: ../plugins/open-tran/open-tran-panel.c:300
-msgid "Could not extract result from XMLRPC response\n"
-msgstr "Non se puido extraer o resultado da resposta XMLRPC\n"
-
-#: ../plugins/open-tran/open-tran-panel.c:310
-#: ../plugins/open-tran/open-tran-panel.c:454
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "FATAL! Non se pode obter o resultado do elemento %d\n"
-
-#: ../plugins/open-tran/open-tran-panel.c:316
-#, c-format
-msgid "WRONG! Result element %d is not a struct"
-msgstr "FATAL! O elemento %d do resultado non é unha estrutura"
-
-#: ../plugins/open-tran/open-tran-panel.c:337
-#: ../plugins/open-tran/open-tran-panel.c:470
-msgid "Phrase not found"
-msgstr "Frase non atopada"
-
-#: ../plugins/open-tran/open-tran-panel.c:350
-#: ../plugins/open-tran/open-tran-panel.c:443
+#: ../plugins/open-tran/open-tran-panel.c:207
+#: ../plugins/open-tran/open-tran-panel.c:271
 msgid "ERROR: could not parse response\n"
 msgstr "ERRO: Non se puido analizar a resposta\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:380
-#, c-format
-msgid "Could not create web service request to '%s'\n"
-msgstr "Non foi posible crear o servizo web de resposta a '%s'\n"
-
-#: ../plugins/open-tran/open-tran-panel.c:427
+#: ../plugins/open-tran/open-tran-panel.c:255
 #, c-format
 msgid "ERROR: %d %s\n"
 msgstr "ERRO: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:438
+#: ../plugins/open-tran/open-tran-panel.c:266
 #, c-format
 msgid "FAULT: %d %s\n"
 msgstr "FALLO: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:493
+#: ../plugins/open-tran/open-tran-panel.c:282
+#, c-format
+msgid "WRONG! Can't get result element %d\n"
+msgstr "FATAL! Non se pode obter o resultado do elemento %d\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:298
+msgid "Phrase not found"
+msgstr "Frase non atopada"
+
+#: ../plugins/open-tran/open-tran-panel.c:320
 msgid "You have to provide a phrase to search"
 msgstr "Ten que proveer unha frase para buscar"
 
-#: ../plugins/open-tran/open-tran-panel.c:503
+#: ../plugins/open-tran/open-tran-panel.c:330
 msgid "You have to provide a search language code"
 msgstr "Ten que proveer un código de lingua para buscar"
 
-#: ../plugins/open-tran/open-tran-panel.c:513
+#: ../plugins/open-tran/open-tran-panel.c:340
 msgid "You have to provide a language code for your language"
 msgstr "Ten que proveer un código de lingua para a súa lingua"
 
-#: ../plugins/open-tran/open-tran-panel.c:542
+#: ../plugins/open-tran/open-tran-panel.c:369
 msgid "Type"
 msgstr "Tipo"
 
-#: ../plugins/open-tran/open-tran-panel.c:553
+#: ../plugins/open-tran/open-tran-panel.c:380
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/open-tran-panel.c:592
+#: ../plugins/open-tran/open-tran-panel.c:419
 msgid "Look for:"
 msgstr "Buscar:"
 
@@ -318,11 +288,11 @@ msgstr "Open Tran"
 msgid "Look for phrases in Open tran memory translation database."
 msgstr "Buscar frases na memoria de tradución de Open Tran"
 
-#: ../src/actions-file.c:167
+#: ../src/actions-file.c:168
 msgid "Open file for translation"
 msgstr "Abrir ficheiro para tradución"
 
-#: ../src/actions-file.c:280
+#: ../src/actions-file.c:281
 msgid "Save file as..."
 msgstr "Gardar ficheiro como..."
 
@@ -394,15 +364,23 @@ msgstr "Ignacio Casal Quinteiro <nacho.resa@gmail.com>"
 msgid "Gtranslator Web Site"
 msgstr "Sitio web do gtranslator"
 
-#: ../src/comment.c:57
+#: ../src/comment.c:91
+msgid "Please, install gedit to be able to show the file"
+msgstr ""
+
+#: ../src/comment.c:288
+msgid "Paths:\n"
+msgstr ""
+
+#: ../src/comment.c:299
 msgid "Format: "
 msgstr "Formato: "
 
-#: ../src/comment.c:58
+#: ../src/comment.c:300
 msgid "Context:\n"
 msgstr "Contexto:\n"
 
-#: ../src/comment.c:59
+#: ../src/comment.c:301
 msgid "Extracted comments:\n"
 msgstr "Comentarios extraídos:\n"
 
@@ -418,6 +396,50 @@ msgstr "<b>Localización</b>"
 #: ../src/dialogs/preferences-dialog.glade.h:7
 msgid "<b>Name</b>"
 msgstr "<b>Nome</b>"
+
+#: ../src/dialogs/close-confirmation-dialog.c:131
+msgid "Close _without Saving"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:165
+msgid "Question"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:380
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:547
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:553
+#, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:571
+msgid "Docum_ents with unsaved changes:"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:573
+msgid "S_elect the documents you want to save:"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:592
+msgid "Saving has been disabled by the system administrator."
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:594
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr ""
 
 #: ../src/dialogs/comment-dialog.c:98
 msgid "Edit Comment"
@@ -759,47 +781,47 @@ msgstr "Erro na inicialización de GConf: %s."
 msgid "Error setting the default window icon: %s"
 msgstr "Erro establecendo a icona por defecto da ventá: %s"
 
-#: ../src/message-table.c:278
+#: ../src/message-table.c:282
 msgid "Status"
 msgstr "Estado"
 
-#: ../src/message-table.c:291
+#: ../src/message-table.c:295
 msgid "ID"
 msgstr "ID"
 
-#: ../src/message-table.c:307
+#: ../src/message-table.c:311
 msgid "Original Text"
 msgstr "Texto orixinal"
 
-#: ../src/message-table.c:323
+#: ../src/message-table.c:327
 msgid "Translated Text"
 msgstr "Texto traducido"
 
-#: ../src/notebook.c:89
+#: ../src/notebook.c:88
 #, c-format
 msgid "<b>Path:</b> %s"
 msgstr "<b>Camiño:</b> %s"
 
-#: ../src/notebook.c:146
+#: ../src/notebook.c:145
 msgid "Close document"
 msgstr "Pechar o documento"
 
-#: ../src/po.c:293
+#: ../src/po.c:332
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Fallou ao abrir o ficheiro '%s': %s"
 
-#: ../src/po.c:316
+#: ../src/po.c:355
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext devolveu unha lista de dominios de mensaxe nula."
 
-#: ../src/po.c:468
+#: ../src/po.c:507
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Non se obtuveron mensaxes do analizador."
 
-#: ../src/po.c:522
+#: ../src/po.c:564
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -810,7 +832,7 @@ msgstr ""
 "Porén, eses ficheiros pot son xerados por un proceso de compilación.\n"
 "O seu ficheiro debería nomearse como '%s.po'."
 
-#: ../src/po.c:614
+#: ../src/po.c:656
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Houbo un erro escribindo o ficheiro PO: %s"
@@ -872,24 +894,24 @@ msgstr "INS"
 msgid "OVR"
 msgstr "SOB"
 
-#: ../src/tab.c:437
+#: ../src/tab.c:411
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
-#: ../src/tab.c:477
+#: ../src/tab.c:451
 msgid "Message Table"
 msgstr "Táboa de mensaxes"
 
-#: ../src/tab.c:527
+#: ../src/tab.c:501
 msgid "Singular"
 msgstr "Singular"
 
-#: ../src/tab.c:531
+#: ../src/tab.c:505
 msgid "Plural"
 msgstr "Plural"
 
-#: ../src/tab.c:855
+#: ../src/tab.c:791
 msgid "There is an error in the message:"
 msgstr "Hai un erro na mensaxe:"
 
@@ -1214,6 +1236,30 @@ msgstr "Editor da barra de ferramentas"
 #: ../src/window.c:1399
 msgid "Documents"
 msgstr "Documentos"
+
+#~ msgid "WRONG! Can't get result element 1\n"
+#~ msgstr "FATAL! Non se pode obter o resultado do elemento 1\n"
+
+#~ msgid "WRONG! Result element 1 is not a struct"
+#~ msgstr "FATAL! O resultado do elemento 1 non é unha estrutura"
+
+#~ msgid "Error: %d %s\n"
+#~ msgstr "Erro: %d %s\n"
+
+#~ msgid "Could not parse XMLRPC response\n"
+#~ msgstr "Non se puido analizar a resposta XMLRPC\n"
+
+#~ msgid "No response value in XMLRPC response\n"
+#~ msgstr "Non hai valor de respota na respota XMLRPC\n"
+
+#~ msgid "Could not extract result from XMLRPC response\n"
+#~ msgstr "Non se puido extraer o resultado da resposta XMLRPC\n"
+
+#~ msgid "WRONG! Result element %d is not a struct"
+#~ msgstr "FATAL! O elemento %d do resultado non é unha estrutura"
+
+#~ msgid "Could not create web service request to '%s'\n"
+#~ msgstr "Non foi posible crear o servizo web de resposta a '%s'\n"
 
 #~ msgid "Number of pl_urals:"
 #~ msgstr "Número de pl_urais:"
