@@ -46,6 +46,8 @@
 
 #define MAX_PLURALS 6
 
+#define GTR_TAB_KEY "GtranslatorTabFromDocument"
+
 G_DEFINE_TYPE(GtranslatorTab, gtranslator_tab, GTK_TYPE_VBOX)
 
 struct _GtranslatorTabPrivate
@@ -594,6 +596,7 @@ gtranslator_tab_new (GtranslatorPo *po)
 	tab = g_object_new (GTR_TYPE_TAB, NULL);
 	
 	tab->priv->po = po;
+	g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
 	
 	/*
 	 * Now we have to initialize the number of msgstr tabs
@@ -731,25 +734,25 @@ gtranslator_tab_get_all_views(GtranslatorTab *tab,
  * Return value: a new allocated string with the name of the @tab.
  */
 gchar *
-gtranslator_tab_get_name(GtranslatorTab *tab)
+gtranslator_tab_get_name (GtranslatorTab *tab)
 {
 	GtranslatorHeader *header;
 	GtranslatorPoState state;
 	gchar *str;
 	gchar *tab_name;
 
-	header = gtranslator_po_get_header(tab->priv->po);
+	header = gtranslator_po_get_header (tab->priv->po);
 	state = gtranslator_po_get_state (tab->priv->po);
 
-	str = gtranslator_header_get_prj_id_version(header);
+	str = gtranslator_header_get_prj_id_version (header);
 
-	if(state == GTR_PO_STATE_MODIFIED)
+	if (state == GTR_PO_STATE_MODIFIED)
 	{
-		tab_name = g_strdup_printf("*%s", str);
+		tab_name = g_strdup_printf ("*%s", str);
 		return tab_name;
 	}
 	
-	return g_strdup(str);
+	return g_strdup (str);
 }
 
 /**
@@ -796,4 +799,22 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 	 */
 	g_signal_emit(G_OBJECT(tab), signals[SHOWED_MESSAGE], 0, GTR_MSG(to_go->data)); 
 	
+}
+
+gboolean
+_gtranslator_tab_can_close (GtranslatorTab *tab)
+{
+	return gtranslator_po_get_state (tab->priv->po) == GTR_PO_STATE_SAVED;
+}
+
+GtranslatorTab *
+gtranslator_tab_get_from_document (GtranslatorPo *po)
+{
+	gpointer res;
+	
+	g_return_val_if_fail (GTR_IS_PO (po), NULL);
+	
+	res = g_object_get_data (G_OBJECT (po), GTR_TAB_KEY);
+	
+	return (res != NULL) ? GTR_TAB (res) : NULL;
 }

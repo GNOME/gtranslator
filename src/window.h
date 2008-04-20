@@ -127,6 +127,9 @@ GtkWidget        *gtranslator_window_get_tab_from_uri (GtranslatorWindow *window
 
 void              gtranslator_window_set_active_tab   (GtranslatorWindow *window,
 						       GtkWidget *tab);
+						       
+void             _gtranslator_window_close_tab        (GtranslatorWindow *window,
+						       GtranslatorTab *tab);
 
 G_END_DECLS
 

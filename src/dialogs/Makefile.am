@@ -14,6 +14,8 @@ noinst_LTLIBRARIES = \
 	libdialogs.la
 
 libdialogs_la_SOURCES = \
+	close-confirmation-dialog.c \
+	close-confirmation-dialog.h \
 	file-dialogs.c \
 	file-dialogs.h \
 	preferences-dialog.c \

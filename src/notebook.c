@@ -66,7 +66,7 @@ tab_label_style_set_cb (GtkWidget *hbox,
 }
 
 static void
-sync_name (GtranslatorTab *tab,
+sync_name (GtranslatorPo *po,
 	   GParamSpec *pspec,
 	   GtkWidget *hbox)
 {
@@ -74,12 +74,11 @@ sync_name (GtranslatorTab *tab,
 	GtkWidget *label;
 	GtkWidget *ebox;
 	gchar *tooltip;
-	GtranslatorPo *po;
+	GtranslatorTab *tab;
 	
 	label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label-ebox"));
-	
-	po = gtranslator_tab_get_po (tab);
+	tab = gtranslator_tab_get_from_document (po);
 	
 	str = gtranslator_tab_get_name (tab);
 	g_return_if_fail (str != NULL);
@@ -229,28 +228,31 @@ gtranslator_notebook_new()
 }
 
 void
-gtranslator_notebook_add_page(GtranslatorNotebook *notebook,
-			      GtranslatorTab *tab)
+gtranslator_notebook_add_page (GtranslatorNotebook *notebook,
+			       GtranslatorTab *tab)
 {
 	GtranslatorNotebookPrivate *priv = notebook->priv;
+	GtranslatorPo *po;
 	GtkWidget *label;
 
-	g_return_if_fail(GTR_IS_NOTEBOOK(notebook));
-	g_return_if_fail(GTR_IS_TAB(tab));
+	g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
+	g_return_if_fail (GTR_IS_TAB (tab));
 	
-	label = build_tab_label(notebook, tab);
+	po = gtranslator_tab_get_po (tab);
+	
+	label = build_tab_label (notebook, tab);
 
-	sync_name (tab, NULL, label);
+	sync_name (po, NULL, label);
 		         
-	g_signal_connect_object (tab, 
+	g_signal_connect_object (po, 
 				 "notify::state",
 			         G_CALLBACK (sync_name), 
 			         label, 
 			         0);
 
-	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),
-				 GTK_WIDGET(tab), label);
-	priv->pages = g_list_append(priv->pages, tab);
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+				  GTK_WIDGET (tab), label);
+	priv->pages = g_list_append (priv->pages, tab);
 }
 
 GtranslatorTab *

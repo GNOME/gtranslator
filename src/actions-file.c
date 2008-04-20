@@ -29,6 +29,7 @@
 #include <string.h>
 
 #include "actions.h"
+#include "dialogs/close-confirmation-dialog.h"
 #include "file-dialogs.h"
 #include "notebook.h"
 #include "po.h"
@@ -315,25 +316,6 @@ gtranslator_save_file_as_dialog (GtkAction * action,
 	gtk_widget_show (GTK_WIDGET (dialog));
 }
 
-void 
-gtranslator_file_close(GtkAction * widget,
-		       GtranslatorWindow *window)
-{
-	GtranslatorNotebook *nb;
-	GtranslatorTab *current_page;
-	gint i;
-	
-	current_page = gtranslator_window_get_active_tab(window);
-	nb = gtranslator_window_get_notebook(window);
-	g_assert(current_page != NULL);
-	
-	i = gtk_notebook_page_num(GTK_NOTEBOOK(nb), GTK_WIDGET(current_page));
-	if (i != -1)
-		gtk_notebook_remove_page(GTK_NOTEBOOK(nb), i);
-	
-	set_sensitive_according_to_window(window);
-}
-
 void
 gtranslator_file_quit (GtkAction *action,
 		       GtranslatorWindow *window)
@@ -506,4 +488,108 @@ gtranslator_actions_load_uris (GtranslatorWindow *window,
 	g_return_if_fail ((uris != NULL) && (uris->data != NULL));
 	
 	load_file_list (window, uris);
+}
+
+static void
+save_and_close_document (GtranslatorPo *po,
+			 GtranslatorWindow *window)
+{
+	GtranslatorTab *tab;
+	
+	gtranslator_save_current_file_dialog (NULL, window);
+	
+	tab = gtranslator_tab_get_from_document (po);
+	
+	_gtranslator_window_close_tab (window, tab);
+}
+
+static void
+close_confirmation_dialog_response_handler (GtranslatorCloseConfirmationDialog *dlg,
+					    gint                          response_id,
+					    GtranslatorWindow            *window)
+{
+	GList *selected_documents;
+	const GList *unsaved_documents;
+
+	gtk_widget_hide (GTK_WIDGET (dlg));
+
+	switch (response_id)
+	{
+		case GTK_RESPONSE_YES: /* Save and Close */
+			selected_documents = gtranslator_close_confirmation_dialog_get_selected_documents (dlg);
+			if (selected_documents == NULL)
+			{
+				g_return_if_reached ();
+			}
+			else
+			{
+				/*if (is_closing_all)
+				{
+					save_and_close_all_documents (selected_documents,
+								      window);
+				}
+				else
+				{*/
+					save_and_close_document (selected_documents->data,
+								 window);
+				//}
+			}
+
+			g_list_free (selected_documents);
+
+			break;
+
+		case GTK_RESPONSE_NO: /* Close without Saving */
+			/*if (is_closing_all)
+			{
+				gtk_widget_destroy (GTK_WIDGET (dlg));
+
+				close_all_tabs (window);
+
+				return;
+			}
+			else
+			{*/
+				
+
+				unsaved_documents = gtranslator_close_confirmation_dialog_get_unsaved_documents (dlg);
+				g_return_if_fail (unsaved_documents->next == NULL);
+
+				_gtranslator_window_close_tab (window,
+							       gtranslator_tab_get_from_document (unsaved_documents->data));
+			//}
+
+			break;
+		default: /* Do not close */
+			break;
+	}
+
+	gtk_widget_destroy (GTK_WIDGET (dlg));
+}
+
+void 
+gtranslator_file_close (GtkAction * widget,
+			GtranslatorWindow *window)
+{
+	GtranslatorTab *tab;
+	
+	tab = gtranslator_window_get_active_tab (window);
+	
+	if (!_gtranslator_tab_can_close (tab))
+	{
+		GtkWidget     *dlg;
+
+		dlg = gtranslator_close_confirmation_dialog_new_single (GTK_WINDOW (window),
+									gtranslator_tab_get_po (tab),
+									FALSE);
+
+		g_signal_connect (dlg,
+				  "response",
+				  G_CALLBACK (close_confirmation_dialog_response_handler),
+				  window);
+
+		gtk_widget_show (dlg);
+	}
+	else 
+		_gtranslator_window_close_tab (window, tab);
 }

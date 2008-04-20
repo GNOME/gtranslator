@@ -100,6 +100,10 @@ gchar                 *gtranslator_tab_get_name            (GtranslatorTab *tab)
 
 void                   gtranslator_tab_message_go_to       (GtranslatorTab *tab,
 							    GList * to_go);
+							    
+GtranslatorTab        *gtranslator_tab_get_from_document   (GtranslatorPo *po);
+							    
+gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 
 G_END_DECLS
 
