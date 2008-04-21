@@ -95,6 +95,8 @@ void		gtranslator_po_parse			(GtranslatorPo *po,
 							const gchar *filename,
 							GError **error);
 
+void		gtranslator_po_save_header_in_msg	(GtranslatorPo *po);
+
 void		gtranslator_po_save_file           	(GtranslatorPo *po,
 							GError **error);
 							

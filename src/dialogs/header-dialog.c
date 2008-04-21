@@ -198,6 +198,11 @@ gtranslator_header_dialog_fill_from_header (GtranslatorHeaderDialog *dlg, Gtrans
 	gtk_entry_set_text(GTK_ENTRY(dlg->priv->encoding), gtranslator_header_get_encoding(header));
 }
 
+static void save_header(GtranslatorPo *po)
+{
+	gtranslator_po_save_header_in_msg (po);
+} 
+
 static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 {
 	gboolean ret;
@@ -277,7 +282,12 @@ void gtranslator_show_header_dialog (GtranslatorWindow *window)
 	
 	static GtkWidget *dlg = NULL;
 	
+	GtranslatorPo *po;
+	GtranslatorTab *tab;
 	GtranslatorHeader *header;
+
+	tab = gtranslator_window_get_active_tab (window);
+	po = gtranslator_tab_get_po (tab);
 
 	g_return_if_fail(GTR_IS_WINDOW(window));
 
@@ -295,6 +305,13 @@ void gtranslator_show_header_dialog (GtranslatorWindow *window)
 				  &dlg);
 		gtk_widget_show_all(dlg);
 	}
+
+	/*
+	 * Connect signal to save header in msg
+	 */
+	g_signal_connect_swapped (dlg, "destroy",
+			 G_CALLBACK(save_header),
+			 po);
 
 	/*
 	 * Write header's values on Header dialog
