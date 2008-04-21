@@ -20,136 +20,45 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <child>
+              <widget class="GtkScrolledWindow" id="scrolledwindow1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="border_width">6</property>
+                <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                <child>
+                  <widget class="GtkTextView" id="prj_comment">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="editable">False</property>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label3">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Comment</property>
+              </widget>
+              <packing>
+                <property name="type">tab</property>
+                <property name="position">2</property>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkTable" id="table1">
                 <property name="visible">True</property>
+                <property name="border_width">6</property>
                 <property name="n_rows">5</property>
                 <property name="n_columns">3</property>
                 <property name="row_spacing">6</property>
                 <child>
-                  <widget class="GtkEntry" id="rmbt">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
-                    <property name="top_attach">4</property>
-                    <property name="bottom_attach">5</property>
-                    <property name="y_options"></property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label26">
-                    <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="xpad">12</property>
-                    <property name="label" translatable="yes">Report message _bugs to:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">rmbt</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">4</property>
-                    <property name="bottom_attach">5</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkEntry" id="po_date">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="editable">False</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label25">
-                    <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="xpad">12</property>
-                    <property name="label" translatable="yes">Po file _revision date:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">po_date</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkEntry" id="pot_date">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="editable">False</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
-                    <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label24">
-                    <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="xpad">12</property>
-                    <property name="label" translatable="yes">Pot _file creation date:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">pot_date</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkEntry" id="prj_id_version">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                    <property name="y_options"></property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label23">
-                    <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="xpad">12</property>
-                    <property name="label" translatable="yes">Project Id _version:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">prj_version</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"></property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
                   <widget class="GtkLabel" id="label15">
@@ -210,13 +119,12 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label21">
+                  <widget class="GtkLabel" id="label23">
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
                     <property name="xpad">12</property>
-                    <property name="label" translatable="yes">Co_mment</property>
+                    <property name="label" translatable="yes">Project Id _version:</property>
                     <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">prj_comment</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -226,18 +134,115 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkTextView" id="prj_comment">
+                  <widget class="GtkEntry" id="prj_id_version">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label24">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="xpad">12</property>
+                    <property name="label" translatable="yes">Pot _file creation date:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">pot_date</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkEntry" id="pot_date">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
                     <property name="editable">False</property>
                   </widget>
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="right_attach">3</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label25">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="xpad">12</property>
+                    <property name="label" translatable="yes">Po file _revision date:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">po_date</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkEntry" id="po_date">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="editable">False</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label26">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="xpad">12</property>
+                    <property name="label" translatable="yes">Report message _bugs to:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">rmbt</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkEntry" id="rmbt">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                    <property name="y_options"></property>
                   </packing>
                 </child>
               </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkLabel" id="label1">
@@ -246,12 +251,14 @@
               </widget>
               <packing>
                 <property name="type">tab</property>
+                <property name="position">1</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
             <child>
               <widget class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
+                <property name="border_width">6</property>
                 <child>
                   <widget class="GtkCheckButton" id="take_my_options">
                     <property name="visible">True</property>
@@ -262,6 +269,7 @@
                     <property name="draw_indicator">True</property>
                   </widget>
                   <packing>
+                    <property name="expand">False</property>
                     <property name="padding">6</property>
                   </packing>
                 </child>
@@ -531,7 +539,7 @@
                 </child>
               </widget>
               <packing>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -541,7 +549,7 @@
               </widget>
               <packing>
                 <property name="type">tab</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
