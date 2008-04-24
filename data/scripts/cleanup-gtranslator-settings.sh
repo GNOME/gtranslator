@@ -23,6 +23,9 @@ case $1 in
 esac
 
 remove_commands ()  {
+	# Default path for killall
+	KILLALL=/usr/bin/killall
+
 	# Check if we have killall or pkill
 	case `uname` in
 	FreeBSD)
@@ -38,6 +41,9 @@ remove_commands ()  {
 		KILLALL=/usr/bin/killall
 		fi
 	;;
+        *)
+		echo "Unknown OS, using default path: /usr/bin/killall"
+        ;;
 	esac
 
 	$KILLALL gtranslator 2>&1 >/dev/null ; sleep 3 && \
