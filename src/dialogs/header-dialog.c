@@ -201,6 +201,7 @@ gtranslator_header_dialog_fill_from_header (GtranslatorHeaderDialog *dlg, Gtrans
 static void save_header(GtranslatorPo *po)
 {
 	gtranslator_po_save_header_in_msg (po);
+	gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
 } 
 
 static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
