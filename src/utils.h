@@ -24,6 +24,11 @@
 #include <gtk/gtkmenu.h>
 #include <gtk/gtkaboutdialog.h>
 #include <gtk/gtkwindow.h>
+#include <libxml/tree.h>
+
+xmlDocPtr      gtranslator_xml_new_doc (const gchar *name);
+
+xmlDocPtr      gtranslator_xml_open_file (const gchar *filename);
 
 GtkWidget     *gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
 				      const gchar *stock_id);

@@ -21,6 +21,7 @@
 
 #include <glib.h>
 #include <glib-object.h>
+#include <libxml/tree.h>
 
 /*
  * Utility Macros
@@ -94,4 +95,11 @@ void 		 gtranslator_profile_set_group_email 	(GtranslatorProfile *profile, gchar
 
 gchar 		*gtranslator_profile_get_plurals 	(GtranslatorProfile *profile);
 void 		 gtranslator_profile_set_plurals 	(GtranslatorProfile *profile, gchar *data);
+
+void		gtranslator_profile_xml_new_entry	(xmlDocPtr doc, GtranslatorProfile *profile);
+GtranslatorProfile
+               *gtranslator_profile_xml_get_entry      (xmlNodePtr child);
+
+GList          *gtranslator_profile_get_profiles_from_xml_file   (gchar *filename);
+
 #endif /* __PROFILE_H__ */

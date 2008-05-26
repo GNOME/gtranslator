@@ -18,6 +18,7 @@
  
 #include "profile.h"
 #include "preferences-dialog.h"
+#include "utils.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -223,4 +224,99 @@ void gtranslator_profile_set_plurals (GtranslatorProfile *profile, gchar *data)
 	if (profile->priv->plurals)
 		g_free (profile->priv->plurals);
 	profile->priv->plurals = g_strdup (data);
+}
+
+/**
+ * gtranslator_profile_xml_new_entry:
+ * @doc: a #xmlDocPtr.
+ * @profile: a #GtranslatorProfile object.
+ *
+ * This function create a new #xmlNodePtr entry into #xmlDocPtr.
+ *
+ */
+void gtranslator_profile_xml_new_entry (xmlDocPtr doc, GtranslatorProfile *profile)
+{
+	xmlNodePtr root;
+	xmlNodePtr profile_node;
+	
+	root = xmlDocGetRootElement (doc);
+	profile_node = xmlNewChild (root, NULL, "profile", NULL);
+	xmlNewChild (profile_node, NULL, "profile_name", profile->priv->name);
+	xmlNewChild (profile_node, NULL, "author_name", profile->priv->author_name);
+	xmlNewChild (profile_node, NULL, "autor_email", profile->priv->author_email);
+	xmlNewChild (profile_node, NULL, "language_name", profile->priv->language_name);
+	xmlNewChild (profile_node, NULL, "language_code", profile->priv->language_code);
+	xmlNewChild (profile_node, NULL, "charset", profile->priv->charset);
+	xmlNewChild (profile_node, NULL, "encoding", profile->priv->encoding);
+	xmlNewChild (profile_node, NULL, "group_email", profile->priv->group_email);
+	xmlNewChild (profile_node, NULL, "plurals", profile->priv->plurals);
+}
+
+/**
+ * gtranslator_profile_xml_get_entry:
+ * @child: a #xmlNodePtr.
+ *
+ * This function get the values of the #xmlNodePtr and save them into
+ * a #GtranslatorProfile object.
+ *
+ * Returns: a #GtranslatorProfile object.
+ */ 
+GtranslatorProfile *gtranslator_profile_xml_get_entry (xmlNodePtr child)
+{
+  xmlNodePtr node;
+  GtranslatorProfile *profile;
+
+  profile = gtranslator_profile_new ();
+
+  node = child->xmlChildrenNode;
+
+  profile->priv->name = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->author_name = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->author_email = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->language_name = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->language_code = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->charset = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->encoding = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->group_email = xmlNodeGetContent (node);
+  node = node->next;
+  profile->priv->plurals = xmlNodeGetContent (node);
+
+  return profile;
+}
+
+/**
+ * gtranslator_profile_get_profiles_from_xml_file:
+ * @filename: a filename path.
+ *
+ * This function get the profiles saved in a xml file
+ * and return a #GList of #GtranslatorProfile objects.
+ *
+ * returns: a #GList
+ */  
+GList *gtranslator_profile_get_profiles_from_xml_file (gchar *filename)
+{
+  GList *profiles_list = NULL;
+  GtranslatorProfile *profile;
+  xmlNodePtr root, child;
+  xmlDocPtr doc;
+
+  doc = gtranslator_xml_open_file (filename);
+
+  root = xmlDocGetRootElement (doc);
+  child = root->xmlChildrenNode;
+
+  while (child != NULL) {
+    profile = gtranslator_profile_xml_get_entry (child);
+    profiles_list = g_list_append (profiles_list, profile);
+    child = child->next;
+  }
+  
+  return profiles_list;
 }

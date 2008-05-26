@@ -1,3 +1,19 @@
+2008-05-26  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* utils.{ch}:
+	Added functions gtranslator_xml_new_doc that
+	create a new xmlDocPtr from a gchar and
+	gtranslator_xml_open_file that open a xml file
+	from filename.
+
+	* profile.{ch}:
+	Added functions gtranslator_profile_xml_new_entry that
+	create a new xml with the values of the gtranslator
+	profile object, gtranslator_profile_xml_get_entry that
+	obtain the values from the xmlNodePtr and save them into
+	gtranslator profile and gtranslator_profile_get_profiles_
+	from_xml_file that obtain a list of profiles from a xml file.
+	
 2008-04-28  Pablo Sanxiao  <psanxiao@gmail.com>
 
 	* dialogs/header-dialog.c:

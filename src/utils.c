@@ -30,6 +30,25 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 
+xmlDocPtr 
+gtranslator_xml_new_doc (const gchar *name) 
+{
+	xmlNodePtr root;
+	xmlDocPtr doc;
+	doc = xmlNewDoc ("1.0");
+	root = xmlNewDocNode (doc, NULL, name, NULL);
+	xmlDocSetRootElement (doc, root);
+	return doc;
+}
+
+xmlDocPtr 
+gtranslator_xml_open_file (const gchar *filename) 
+{
+  xmlDocPtr doc;
+  g_return_if_fail (filename != NULL);
+  doc = xmlParseFile (filename);
+  return doc;
+}
 
 GtkWidget *
 gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
