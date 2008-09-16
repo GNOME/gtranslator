@@ -102,6 +102,8 @@ impl_activate (GtranslatorPlugin *plugin,
 	if (data->ui_id == 0)
 	{
 		g_warning (error->message);
+		g_error_free (error);
+		g_free (data);
 		return;
 	}
 

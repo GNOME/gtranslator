@@ -76,7 +76,14 @@ GType		  gtranslator_msg_get_type	       (void) G_GNUC_CONST;
 
 GType		  gtranslator_msg_register_type	       (GTypeModule * module);
 
-GtranslatorMsg   *gtranslator_msg_new                  (po_message_iterator_t iter);
+GtranslatorMsg   *gtranslator_msg_new                  (po_message_iterator_t iter,
+							po_message_t message);
+
+po_message_iterator_t
+                  gtranslator_msg_get_iterator         (GtranslatorMsg *msg);
+
+void              gtranslator_msg_set_iterator         (GtranslatorMsg *msg,
+							po_message_iterator_t iter);
 
 po_message_t      gtranslator_msg_get_message          (GtranslatorMsg *msg);
 
@@ -139,7 +146,7 @@ const gchar      *gtranslator_msg_get_msgctxt          (GtranslatorMsg *msg);
 
 const gchar      *gtranslator_msg_get_format           (GtranslatorMsg *msg);
 
-const gchar      *gtranslator_msg_check                (GtranslatorMsg *msg);
+gchar            *gtranslator_msg_check                (GtranslatorMsg *msg);
 
 G_END_DECLS
 

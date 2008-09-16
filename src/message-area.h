@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: message-area.h 5666 2007-06-29 19:52:25Z sfre $
+ * $Id: message-area.h 6138 2008-02-01 14:32:22Z icq $
  */
 
 #ifndef __GTR_MESSAGE_AREA_H__

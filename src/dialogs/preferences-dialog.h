@@ -19,10 +19,17 @@
 #ifndef __PREFERENCES_DIALOG_H__
 #define __PREFERENCES_DIALOG_H__
 
+#include "application.h"
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include "window.h"
+
+enum {
+    PROFILE_NAME_COL,
+    TOGGLE_COL,
+    N_COLUMNS_PROFILES
+  };
 
 G_BEGIN_DECLS
 
@@ -70,6 +77,11 @@ GType		 gtranslator_preferences_dialog_get_type               (void) G_GNUC_CONS
 GType		 gtranslator_preferences_dialog_register_type          (GTypeModule * module);
 
 void	         gtranslator_show_preferences_dialog                   (GtranslatorWindow *window);
+
+GtkWidget        *gtranslator_preferences_dialog_get_treeview          (GtranslatorPreferencesDialog *dlg);
+
+void             gtranslator_preferences_fill_profile_treeview         (GtranslatorPreferencesDialog *dlg,
+									GtkTreeModel *model);
 
 G_END_DECLS
 

@@ -102,4 +102,6 @@ GtranslatorProfile
 
 GList          *gtranslator_profile_get_profiles_from_xml_file   (gchar *filename);
 
+void           gtranslator_profile_save_profiles_in_xml (gchar *filename);
+
 #endif /* __PROFILE_H__ */

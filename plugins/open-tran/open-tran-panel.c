@@ -43,6 +43,9 @@
 #define KDE_ICON     PIXMAPSDIR"/kde.ico"
 #define MOZILLA_ICON PIXMAPSDIR"/mozilla.png"
 #define DEBIAN_ICON  PIXMAPSDIR"/debian.png"
+#define SUSE_ICON    PIXMAPSDIR"/suse.png"
+#define XFCE_ICON    PIXMAPSDIR"/xfce.png"
+#define INKSCAPE_ICON PIXMAPSDIR"/inkscape.png"
 
 GTR_PLUGIN_DEFINE_TYPE(GtranslatorOpenTranPanel, gtranslator_open_tran_panel, GTK_TYPE_VBOX)
 
@@ -128,27 +131,21 @@ print_struct_to_tree_view(gpointer value,
 	{
 		str = g_value_get_string (value);
 
-		/*
-		 * We have to parse the first character of str:
-		 * G - Gnome
-		 * K - KDE
-		 * M - Mozilla
-		 * D - Debian Installer
-		 * F - Frysian dictionary
-		 */
-		switch(*str)
-		{
-			case 'G': icon = create_pixbuf(GNOME_ICON);
-				break;
-			case 'K': icon = create_pixbuf(KDE_ICON);
-				break;
-			case 'M': icon = create_pixbuf(MOZILLA_ICON);
-				break;
-			case 'D': icon = create_pixbuf(DEBIAN_ICON);
-				break;
-			default: icon = NULL;
-				break;
-		}
+		if (strcmp ("GNOME", str) == 0)
+			icon = create_pixbuf (GNOME_ICON);
+		else if (strcmp ("KDE", str) == 0)
+			icon = create_pixbuf (KDE_ICON);
+		else if (strcmp ("MOZILLA", str) == 0)
+			icon = create_pixbuf (MOZILLA_ICON);
+		else if (strcmp ("DEBIAN", str) == 0)
+			icon = create_pixbuf (DEBIAN_ICON);
+		else if (strcmp ("SUSE", str) == 0)
+			icon = create_pixbuf (SUSE_ICON);
+		else if (strcmp ("XFCE", str) == 0)
+			icon = create_pixbuf (XFCE_ICON);
+		else if (strcmp ("Inkscape", str) == 0)
+			icon = create_pixbuf (INKSCAPE_ICON);
+		else icon = NULL;
 		
 		gtk_list_store_append(panel->priv->store, &iter);
 		gtk_list_store_set(panel->priv->store, &iter,
@@ -157,6 +154,9 @@ print_struct_to_tree_view(gpointer value,
 				   -1);
 				   
 		g_free (panel->priv->text);
+		
+		if (icon)
+			g_object_unref (icon);
 	}
 }
 

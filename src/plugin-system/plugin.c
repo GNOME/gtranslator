@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugin.c 4509 2006-01-06 16:45:20Z pborelli $
+ * $Id: plugin.c 6448 2008-08-25 10:28:33Z icq $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -72,6 +72,13 @@ gtranslator_plugin_init (GtranslatorPlugin *plugin)
 	/* Empty */
 }
 
+/**
+ * gtranslator_plugin_activate:
+ * @plugin: a #GtranslatorPlugin
+ * @window: a #GtranslatorWindow
+ * 
+ * Activates the plugin.
+ */
 void
 gtranslator_plugin_activate (GtranslatorPlugin *plugin,
 		       GtranslatorWindow *window)
@@ -82,6 +89,13 @@ gtranslator_plugin_activate (GtranslatorPlugin *plugin,
 	GTR_PLUGIN_GET_CLASS (plugin)->activate (plugin, window);
 }
 
+/**
+ * gtranslator_plugin_deactivate:
+ * @plugin: a #GtranslatorPlugin
+ * @window: a #GtranslatorWindow
+ * 
+ * Deactivates the plugin.
+ */
 void
 gtranslator_plugin_deactivate	(GtranslatorPlugin *plugin,
 			 GtranslatorWindow *window)
@@ -91,7 +105,15 @@ gtranslator_plugin_deactivate	(GtranslatorPlugin *plugin,
 
 	GTR_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, window);
 }
-				 
+
+/**
+ * gtranslator_plugin_update_ui:
+ * @plugin: a #GtranslatorPlugin
+ * @window: a #GtranslatorWindow
+ *
+ * Triggers an update of the user interface to take into account state changes
+ * caused by the plugin.
+ */		 
 void
 gtranslator_plugin_update_ui	(GtranslatorPlugin *plugin,
 			 GtranslatorWindow *window)
@@ -102,6 +124,14 @@ gtranslator_plugin_update_ui	(GtranslatorPlugin *plugin,
 	GTR_PLUGIN_GET_CLASS (plugin)->update_ui (plugin, window);
 }
 
+/**
+ * gtranslator_plugin_is_configurable:
+ * @plugin: a #GtranslatorPlugin
+ *
+ * Whether the plugin is configurable.
+ *
+ * Returns: TRUE if the plugin is configurable:
+ */
 gboolean
 gtranslator_plugin_is_configurable (GtranslatorPlugin *plugin)
 {
@@ -110,6 +140,14 @@ gtranslator_plugin_is_configurable (GtranslatorPlugin *plugin)
 	return GTR_PLUGIN_GET_CLASS (plugin)->is_configurable (plugin);
 }
 
+/**
+ * gtranslator_plugin_create_configure_dialog:
+ * @plugin: a #GtranslatorPlugin
+ *
+ * Creates the configure dialog widget for the plugin.
+ *
+ * Returns: the configure dialog widget for the plugin.
+ */
 GtkWidget *
 gtranslator_plugin_create_configure_dialog (GtranslatorPlugin *plugin)
 {

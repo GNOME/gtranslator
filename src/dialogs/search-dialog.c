@@ -369,7 +369,7 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
-	ret = gtranslator_utils_get_glade_widgets (DATADIR"/search-dialog.glade",
+	ret = gtranslator_utils_get_glade_widgets (PKGDATADIR"/search-dialog.glade",
 					     "search_dialog_content",
 					     &error_widget,
 					     "search_dialog_content", &content,

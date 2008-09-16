@@ -49,7 +49,62 @@ struct _GtranslatorMsgPrivate
 	gint po_position;
 };
 
+enum
+{
+	PROP_0,
+	PROP_GETTEXT_ITER,
+	PROP_GETTEXT_MSG
+};
+
 static gchar *message_error = NULL;
+
+static void
+gtranslator_msg_set_property (GObject      *object,
+			      guint         prop_id,
+			      const GValue *value,
+			      GParamSpec   *pspec)
+{
+	GtranslatorMsg *msg = GTR_MSG (object);
+
+	switch (prop_id)
+	{
+		case PROP_GETTEXT_ITER:
+			gtranslator_msg_set_iterator (msg,
+						      g_value_get_pointer (value));
+			break;
+		case PROP_GETTEXT_MSG:
+			gtranslator_msg_set_message (msg,
+						     g_value_get_pointer (value));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;			
+	}
+}
+
+static void
+gtranslator_msg_get_property (GObject    *object,
+			      guint       prop_id,
+			      GValue     *value,
+			      GParamSpec *pspec)
+{
+	GtranslatorMsg *msg = GTR_MSG (object);
+
+	switch (prop_id)
+	{
+		case PROP_GETTEXT_ITER:
+			g_value_set_pointer (value,
+					     gtranslator_msg_get_iterator (msg));
+			break;
+		case PROP_GETTEXT_MSG:
+			g_value_set_pointer (value,
+					     gtranslator_msg_get_message (msg));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
 
 static void
 gtranslator_msg_init (GtranslatorMsg *msg)
@@ -59,8 +114,7 @@ gtranslator_msg_init (GtranslatorMsg *msg)
 
 static void
 gtranslator_msg_finalize (GObject *object)
-{
-	g_free(message_error);
+{	
 	G_OBJECT_CLASS (gtranslator_msg_parent_class)->finalize (object);
 }
 
@@ -72,6 +126,22 @@ gtranslator_msg_class_init (GtranslatorMsgClass *klass)
 	g_type_class_add_private (klass, sizeof (GtranslatorMsgPrivate));
 
 	object_class->finalize = gtranslator_msg_finalize;
+	object_class->set_property = gtranslator_msg_set_property;
+	object_class->get_property = gtranslator_msg_get_property;	
+	
+	g_object_class_install_property (object_class,
+					 PROP_GETTEXT_MSG,
+					 g_param_spec_pointer ("gettext-iter",
+							       "Gettext iterator",
+							       "The po_message_iterator_t pointer",
+							       G_PARAM_READWRITE));
+	
+	g_object_class_install_property (object_class,
+					 PROP_GETTEXT_MSG,
+					 g_param_spec_pointer ("gettext-msg",
+							       "Gettext msg",
+							       "The po_message_t pointer",
+							       G_PARAM_READWRITE));	
 }
 
 /***************************** Public funcs ***********************************/
@@ -79,17 +149,61 @@ gtranslator_msg_class_init (GtranslatorMsgClass *klass)
 /**
  * gtranslator_msg_new:
  * 
+ * Creates a new #GtranslatorMsg.
+ * 
  * Return value: a new #GtranslatorMsg object
  **/
 GtranslatorMsg *
-gtranslator_msg_new(po_message_iterator_t iter)
+gtranslator_msg_new (po_message_iterator_t iter,
+		     po_message_t message)
 {
 	GtranslatorMsg *msg;
 	
 	msg = g_object_new (GTR_TYPE_MSG, NULL);
-	msg->priv->iterator = iter;
+	
+	gtranslator_msg_set_iterator (msg, iter);
+	gtranslator_msg_set_message (msg, message);
+	
+	/* Set the status */
+	if (gtranslator_msg_is_fuzzy (msg))
+		gtranslator_msg_set_status (msg, GTR_MSG_STATUS_FUZZY);
+	else if (gtranslator_msg_is_translated (msg))
+		gtranslator_msg_set_status (msg, GTR_MSG_STATUS_TRANSLATED);
+	else gtranslator_msg_set_status (msg, GTR_MSG_STATUS_UNTRANSLATED);
 	
 	return msg;
+}
+
+/**
+ * gtranslator_msg_get_iterator:
+ * @msg: a #GtranslatorMsg
+ *
+ * Return value: the message iterator in gettext format
+ **/
+po_message_iterator_t
+gtranslator_msg_get_iterator (GtranslatorMsg *msg)
+{
+	g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+	
+	return msg->priv->iterator;
+}
+
+/**
+ * gtranslator_msg_set_iterator:
+ * @msg: a #GtranslatorMsg
+ * @message: the po_message_iterator_t to set into the @msg
+ *
+ * Sets the iterator into the #GtranslatorMsg class.
+ **/
+void
+gtranslator_msg_set_iterator (GtranslatorMsg *msg,
+			      po_message_iterator_t iter)
+{
+	g_return_if_fail (GTR_IS_MSG (msg));
+	
+	msg->priv->iterator = iter;
+	
+	g_object_notify (G_OBJECT (msg), "gettext-iter");
 }
 
 /**
@@ -99,8 +213,10 @@ gtranslator_msg_new(po_message_iterator_t iter)
  * Return value: the message in gettext format
  **/
 po_message_t
-gtranslator_msg_get_message(GtranslatorMsg *msg)
+gtranslator_msg_get_message (GtranslatorMsg *msg)
 {
+	g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+	
 	return msg->priv->message;
 }
 
@@ -116,14 +232,17 @@ gtranslator_msg_set_message(GtranslatorMsg *msg,
 			    po_message_t message)
 {
 	msg->priv->message = message;
+	
+	g_object_notify (G_OBJECT (msg), "gettext-msg");
 }
 
 /**
  * gtranslator_msg_get_row_reference:
  * @msg: a #GtranslatorMsg
  *
- * Return value: the GtkTreeRowReference corresponding to the message's place in the message table
- **/
+ * Returns: the #GtkTreeRowReference corresponding to the message's place
+ * in the message table
+ */
 GtkTreeRowReference *
 gtranslator_msg_get_row_reference(GtranslatorMsg *msg)
 {
@@ -484,7 +603,9 @@ on_gettext_po_xerror(gint severity,
 		     const gchar *filename, size_t lineno, size_t column,
 		     gint multiline_p, const gchar *message_text)
 {
-	message_error = g_strdup(message_text);
+	if (message_text)
+		message_error = g_strdup (message_text);
+	else message_error = NULL;
 }
 
 static void
@@ -504,31 +625,35 @@ on_gettext_po_xerror2(gint severity,
  * gtranslator_msg_check:
  * @msg: a #GtranslatorMsg
  * 
- * Return value: the message error or NULL if there is not any error.
+ * Return value: the message error or NULL if there is not any error. Must be
+ * freed with g_free.
  *
  * Test whether the message translation is a valid format string if the message
  * is marked as being a format string.  
  **/
-const gchar *
+gchar *
 gtranslator_msg_check(GtranslatorMsg *msg)
 {
 	struct po_xerror_handler handler;
 	
 	g_return_val_if_fail(msg != NULL, NULL);
+	
+	/* We are not freeing the message_error so at start should be NULL
+	 * always for us
+	 */
+	message_error = NULL;
 
 	handler.xerror = &on_gettext_po_xerror;
 	handler.xerror2 = &on_gettext_po_xerror2;
 	
-	if(message_error != NULL)
-	{
-		g_free(message_error);
-		message_error = NULL;
-	}
-	
 	po_message_check_all(msg->priv->message, msg->priv->iterator, &handler);
 	
 	if(gtranslator_msg_is_fuzzy(msg) || !gtranslator_msg_is_translated(msg))
+	{
+		if (message_error)
+			g_free (message_error);
 		message_error = NULL;
+	}
 
 	/*Are there any other way to do this?*/
 	return message_error;

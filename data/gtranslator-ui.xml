@@ -2,7 +2,6 @@
   <menubar name="MainMenu">
     <menu name="FileMenu" action="File">
       <menuitem name="FileOpenMenu" action="FileOpen"/>
-      <menuitem name="FileOpenCopyMenu" action="FileOpenUri"/>
       <menuitem name="FileRecentFilesMenu" action="FileRecentFiles"/>
       <separator/>
       <menuitem name="FileSaveMenu" action="FileSave"/>
@@ -29,6 +28,8 @@
       <separator/>
       <menuitem name="EditFuzzyMenu" action="EditFuzzy"/>
       <separator/>
+      <menuitem name="EditTranslationMemory" action="EditTranslationMemory"/>
+      <separator/>
       <placeholder name="EditOps_1" />
       <separator/>
       <menuitem name="EditToolbarMenu" action="EditToolbar"/>
@@ -39,7 +40,10 @@
       <separator/>
       <placeholder name="ViewOps_1" />
       <separator/>
-      <menuitem name="ViewSidePaneMenu" action="ViewSidePane"/>
+      <menuitem name="ViewContextMenu" action="ViewContext"/>
+      <menuitem name="ViewTranslationMemoryMenu" action="ViewTranslationMemory"/>
+      <placeholder name="ViewOps_2" />
+      <separator/>
     </menu>
 
     <?--<menu name="BookmarksMenu" action="Bookmarks">
@@ -63,22 +67,29 @@
       <menuitem name="GoForwardMenu" action="GoForward"/>
       <menuitem name="GoLastMenu" action="GoLast"/>
       <separator/>
-      <menuitem name="GoJumpToMenu" action="GoJumpTo"/>
-      <separator/>
       <menuitem name="GoNextFuzzyMenu" action="GoNextFuzzy"/>
       <menuitem name="GoPreviousFuzzyMenu" action="GoPreviousFuzzy"/>
       <separator/>
       <menuitem name="GoNextUntranslatedMenu" action="GoNextUntranslated"/>
       <menuitem name="GoPreviousUntranslatedMenu" action="GoPreviousUntranslated"/>
+      <separator/>
+      <menuitem name="GoNextFuzzyUntranslatedMenu" action="GoNextFuzzyUntranslated"/>
+      <menuitem name="GoPreviousFuzzyUntranslatedMenu" action="GoPreviousFuzzyUntranslated"/>
+      <separator/>
+      <menuitem name="GoJumpMenu" action="GoJump"/>
     </menu>
 
     <menu name="SearchMenu" action="Search">
       <menuitem name="SearchFindMenu" action="SearchFind"/>
-      <menuitem name="SearchFindNextMenu" action="SearchFindNext"/>
+    <?--  <menuitem name="SearchFindNextMenu" action="SearchFindNext"/>
       <menuitem name="SearchFindPreviousMenu" action="SearchFindPrevious"/>
-      <separator/>
+      <separator/>--?>
       <menuitem name="SearchReplaceMenu" action="SearchReplace"/>
     </menu>
+
+    <placeholder name="SubversionPlaceholder" />
+
+    <placeholder name="ExtraMenu_1" />
 
     <menu name="HelpMenu" action="Help">
       <menuitem name="HelpContentsMenu" action="HelpContents"/>

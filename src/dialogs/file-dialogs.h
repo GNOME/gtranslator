@@ -29,6 +29,7 @@ typedef enum {
 
 GtkWidget	*gtranslator_file_chooser_new			(GtkWindow *parent,
 								 FileselMode mode,
-								 gchar *title);
+								 const gchar *title,
+								 const gchar *dir);
 
 #endif

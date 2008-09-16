@@ -35,12 +35,6 @@
 #include "plugin-info.h"
 #include "plugin.h"
 
-typedef enum
-{
-	GTR_PLUGIN_LOADER_C,
-	GTR_PLUGIN_LOADER_PY,
-} GtranslatorPluginLoader;
-
 struct _GtranslatorPluginInfo
 {
 	gint               refcount;
@@ -48,8 +42,8 @@ struct _GtranslatorPluginInfo
 	gchar             *file;
 
 	gchar             *module_name;
-	GtranslatorPluginLoader  loader;
-	GTypeModule       *module;
+	GType              module_type;
+	GtranslatorModule       *module;
 	gchar            **dependencies;
 
 	gchar             *name;

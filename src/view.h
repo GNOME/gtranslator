@@ -108,6 +108,8 @@ void             gtranslator_view_set_search_text        (GtranslatorView *view,
 gchar           *gtranslator_view_get_search_text        (GtranslatorView *view,
 							  guint         *flags);
 
+void             gtranslator_view_reload_scheme_color    (GtranslatorView *view);
+
 
 /* Search macros */
 #define GTR_SEARCH_IS_DONT_SET_FLAGS(sflags) ((sflags & GTR_SEARCH_DONT_SET_FLAGS) != 0)

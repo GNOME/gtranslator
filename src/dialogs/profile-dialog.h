@@ -23,8 +23,14 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
+#include "profile.h"
 #include "window.h"
 #include "preferences-dialog.h"
+
+enum {
+    NEW_PROFILE,
+    EDIT_PROFILE
+  };
 
 /*
  * Type checking and casting macros
@@ -69,6 +75,8 @@ GType		 gtranslator_profile_dialog_get_type               (void) G_GNUC_CONST;
 
 GType		 gtranslator_profile_dialog_register_type          (GTypeModule * module);
 
-void	         gtranslator_show_profile_dialog                   (GtranslatorPreferencesDialog *dialog);
+void	         gtranslator_show_profile_dialog                   (GtranslatorPreferencesDialog *dialog,
+								    GtranslatorProfile *profile,
+								    gint action);
 
 #endif

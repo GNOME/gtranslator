@@ -28,6 +28,11 @@ libdict_la_LDFLAGS = \
 	$(GTRANSLATOR_LIBS)					\
 	$(DICTIONARY_LIBS)
 
+pixmaps_dir = $(datadir)/pixmaps/gtranslator
+pixmaps__DATA = \
+        gnome-dictionary.png
+
+
 # Plugin Info
 
 plugin_in_files = dict.gtranslator-plugin.desktop.in
@@ -36,7 +41,7 @@ plugin_in_files = dict.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+EXTRA_DIST = $(pixmaps__DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

@@ -33,13 +33,14 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: module.h 5263 2006-10-08 14:26:02Z pborelli $
+ * $Id: module.h 6263 2008-05-05 10:52:10Z sfre $
  */
  
-#ifndef GTR_MODULE_H
-#define GTR_MODULE_H
+#ifndef __GTR_MODULE_H__
+#define __GTR_MODULE_H__
 
 #include <glib-object.h>
+#include <gmodule.h>
 
 G_BEGIN_DECLS
 
@@ -47,18 +48,42 @@ G_BEGIN_DECLS
 #define GTR_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_MODULE, GtranslatorModule))
 #define GTR_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_MODULE, GtranslatorModuleClass))
 #define GTR_IS_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_MODULE))
-#define GTR_IS_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), GTR_TYPE_MODULE))
+#define GTR_IS_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_MODULE))
 #define GTR_MODULE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_MODULE, GtranslatorModuleClass))
 
-typedef struct _GtranslatorModule	GtranslatorModule;
+typedef struct _GtranslatorModule GtranslatorModule;
+
+struct _GtranslatorModule
+{
+	GTypeModule parent;
+
+	GModule *library;
+
+	gchar *path;
+	gchar *module_name;
+	GType type;
+};
+
+typedef struct _GtranslatorModuleClass GtranslatorModuleClass;
+
+struct _GtranslatorModuleClass
+{
+	GTypeModuleClass parent_class;
+
+	/* Virtual class methods */
+	void		 (* garbage_collect)	();
+};
 
 GType		 gtranslator_module_get_type		(void) G_GNUC_CONST;
 
-GtranslatorModule	*gtranslator_module_new		(const gchar *path);
-
 const gchar	*gtranslator_module_get_path		(GtranslatorModule *module);
 
+const gchar	*gtranslator_module_get_module_name	(GtranslatorModule *module);
+
 GObject		*gtranslator_module_new_object	(GtranslatorModule *module);
+
+void		 gtranslator_module_class_garbage_collect
+						(GtranslatorModuleClass *klass);
 
 G_END_DECLS
 
