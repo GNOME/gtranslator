@@ -60,12 +60,16 @@ get_command_line_data ()
 		for (i = 0; file_arguments[i]; i++) 
 		{			
 			GFile  *file;
+			gchar *uri;
 
 			file = g_file_new_for_commandline_arg (file_arguments[i]);
+			uri = g_file_get_uri (file);
+			g_object_unref (file);
+
 			
-			if (file != NULL){
+			if (uri != NULL){
 				file_list = g_slist_prepend (file_list, 
-							     file);
+							     uri);
 				
 			}
 			else
@@ -83,19 +87,15 @@ get_command_line_data ()
  * The ubiquitous main function...
  */
 gint
-main (gint argc,
-      gchar *argv[])
+main(gint argc,
+     gchar *argv[])
 {
 	GError *error = NULL;
 	GtranslatorPluginsEngine *engine;
 	GtranslatorWindow *window;
 	GSList *file_list = NULL;
 	GOptionContext *context;
-	gchar *filename;
-	gchar *config_folder;
-	GList *profiles_list = NULL;
-	GFile *file;
-
+	
 	/*
 	 * Initialize gettext.
 	 */ 
@@ -125,7 +125,6 @@ main (gint argc,
 		g_clear_error(&error);
 	}
 
-	if (!g_thread_supported()) g_thread_init(NULL);
 	gtk_init(&argc, &argv);
 	
 	g_option_context_parse(context, &argc, &argv, NULL);
@@ -158,23 +157,7 @@ main (gint argc,
 	engine = gtranslator_plugins_engine_get_default ();
 	
 	gtk_about_dialog_set_url_hook (gtranslator_utils_activate_url, NULL, NULL);
-	gtk_about_dialog_set_email_hook (gtranslator_utils_activate_email, NULL, NULL);
 
-	/*
-	 * Load profiles list
-	 */
-	 config_folder = gtranslator_utils_get_user_config_dir ();
-	 filename = g_build_filename (config_folder,
-				      "profiles.xml",
-				      NULL);
-	 file = g_file_new_for_path (filename);
-  
-	 if (g_file_query_exists (file, NULL)) {
-	   profiles_list = gtranslator_profile_get_profiles_from_xml_file (filename);
-	 }
-
-	 gtranslator_application_set_profiles (GTR_APP, profiles_list);
-		
 	/* 
 	 * Create the main app-window. 
 	 */
@@ -186,12 +169,10 @@ main (gint argc,
 	file_list = get_command_line_data ();
 	if (file_list)
 	{
-		gtranslator_actions_load_locations (window, (const GSList *)file_list);
-		g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
+		gtranslator_actions_load_uris (window, (const GSList *)file_list);
+		g_slist_foreach (file_list, (GFunc) g_free, NULL);
 		g_slist_free (file_list);
 	}
-	
-	g_option_context_free (context);
 	
 	/*
 	 * Enter main GTK loop

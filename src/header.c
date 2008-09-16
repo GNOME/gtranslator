@@ -96,11 +96,6 @@ struct _GtranslatorHeaderPrivate
 	 */
 	gchar *plural_forms;
 	gint nplurals;
-
-        /*
-         * Check if header has changed
-         */
-        gboolean header_changed;
 };
 
 /*
@@ -370,35 +365,6 @@ gtranslator_header_set_plural_forms (GtranslatorHeader *header,
 	
 	/*Now we parse the plural forms to know the number of plurals*/
 	parse_nplurals (header);
-}
-
-/**
- * gtranslator_header_get_header_changed:
- * @header: a #GtranslatorHeader.
- *
- * Return value: TRUE if the header has changed, FALSE if not.
- */
-
-gboolean
-gtranslator_header_get_header_changed (GtranslatorHeader *header)
-{
-  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
-
-  return header->priv->header_changed;
-}
-
-/**
- * gtranslator_header_set_header_changed:
- * @header: a #GtranslatorHeader
- * @gboolean: Indicate if the header has changed or not.
- *
- * Sets the state of the header, TRUE if has changed, FALSE if not.
- */
-
-void
-gtranslator_header_set_header_changed (GtranslatorHeader *header, gboolean change)
-{
-  header->priv->header_changed = change;
 }
 
 /**

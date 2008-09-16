@@ -1,17 +1,14 @@
 ## the main Makefile.am
 
-SUBDIRS = data help man src doc plugins po
+SUBDIRS = data doc help man src plugins po
 
 EXTRA_DIST= \
 		DEPENDS \
 		HACKING \
 		gtranslator.spec.in \
 		gtranslator.spec \
+		intltool-extract.in \
+		intltool-merge.in \
+		intltool-update.in \
 		omf.make \
-		xmldocs.make \
-		gnome-doc-utils.make
-
-DISTCLEANFILES = 		\
-	gnome-doc-utils.make    
-
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --enable-gtk-doc
+		xmldocs.make

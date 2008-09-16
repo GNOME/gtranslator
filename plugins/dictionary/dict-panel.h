@@ -22,8 +22,6 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "window.h"
-
 G_BEGIN_DECLS
 
 /*
@@ -69,7 +67,7 @@ GType		 gtranslator_dict_panel_get_type	   (void) G_GNUC_CONST;
 
 GType		 gtranslator_dict_panel_register_type    (GTypeModule * module);
 
-GtkWidget *	 gtranslator_dict_panel_new 		   (GtranslatorWindow *window);
+GtkWidget *	 gtranslator_dict_panel_new 		   (void);
 
 void             gtranslator_dict_panel_set_position     (GtranslatorDictPanel *panel,
 						    gint pos);

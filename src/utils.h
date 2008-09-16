@@ -25,9 +25,6 @@
 #include <gtk/gtkaboutdialog.h>
 #include <gtk/gtkwindow.h>
 #include <libxml/tree.h>
-#include <gio/gio.h>
-
-gchar **       gtranslator_utils_split_string_in_words (const gchar *string);
 
 xmlDocPtr      gtranslator_xml_new_doc (const gchar *name);
 
@@ -54,7 +51,7 @@ gboolean       gtranslator_utils_get_glade_widgets    (const gchar *filename,
 						       const gchar *widget_name,
 						       ...)G_GNUC_NULL_TERMINATED;
 
-GSList        *gtranslator_utils_drop_get_locations   (GtkSelectionData *selection_data);
+gchar        **gtranslator_utils_drop_get_uris        (GtkSelectionData *selection_data);
 
 gchar         *gtranslator_utils_escape_search_text   (const gchar* text);
 
@@ -68,25 +65,11 @@ gboolean       g_utf8_caselessnmatch                  (const gchar *s1,
 void           gtranslator_utils_activate_url         (GtkAboutDialog *dialog,
 						       const gchar *url,
 						       gpointer data);
-
-void           gtranslator_utils_activate_email       (GtkAboutDialog *dialog,
-						       const gchar *email,
-						       gpointer data);
 						       
 void           gtranslator_utils_help_display         (GtkWindow   *parent,
 						       const gchar *doc_id,
 						       const gchar *file_name);
 						       
 gchar         *gtranslator_utils_get_user_config_dir  (void);
-
-gchar         *gtranslator_utils_get_current_date (void);
-
-gchar         *gtranslator_utils_get_current_time (void);
-
-gchar         *gtranslator_utils_get_current_year (void);
-
-void           gtranslator_utils_scan_dir              (GFile *dir,
-							GSList **list,
-							const gchar *po_name);
 
 #endif

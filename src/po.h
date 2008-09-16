@@ -23,7 +23,6 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include <gettext-po.h>
-#include <gio/gio.h>
 
 #include "header.h"
 
@@ -72,7 +71,6 @@ enum
 	GTR_PO_ERROR_GETTEXT,
 	GTR_PO_ERROR_FILENAME,
 	GTR_PO_ERROR_RECOVERY,
-	GTR_PO_ERROR_FILE_EMPTY,
 	GTR_PO_ERROR_OTHER,
 };
 
@@ -94,8 +92,8 @@ GType		gtranslator_po_register_type		(GTypeModule * module);
 GtranslatorPo	*gtranslator_po_new			(void);
 
 void		gtranslator_po_parse			(GtranslatorPo *po,
-							 GFile *filename,
-							 GError **error);
+							const gchar *filename,
+							GError **error);
 
 void		gtranslator_po_save_header_in_msg	(GtranslatorPo *po);
 
@@ -107,10 +105,10 @@ GtranslatorPoState    gtranslator_po_get_state          (GtranslatorPo *po);
 void            gtranslator_po_set_state                (GtranslatorPo *po,
 							 GtranslatorPoState state);
 
-GFile          *gtranslator_po_get_location             (GtranslatorPo *po);
+const gchar    *gtranslator_po_get_filename		(GtranslatorPo *po);
 
-void            gtranslator_po_set_location		(GtranslatorPo *po,
-							 GFile *location);
+void            gtranslator_po_set_filename		(GtranslatorPo *po,
+							gchar *data);
 
 gboolean         gtranslator_po_get_write_perms		(GtranslatorPo *po);
 
@@ -133,13 +131,6 @@ GList           *gtranslator_po_get_next_untrans	(GtranslatorPo *po);
 
 GList           *gtranslator_po_get_prev_untrans	(GtranslatorPo *po);
 
-GList           *gtranslator_po_get_next_fuzzy_or_untrans (GtranslatorPo *po);
-
-GList           *gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo *po);
-
-GList           *gtranslator_po_get_msg_from_number     (GtranslatorPo *po,
-							 gint number);
-
 GtranslatorHeader  
 		*gtranslator_po_get_header		(GtranslatorPo *po);
 
@@ -153,7 +144,7 @@ gint             gtranslator_po_get_messages_count	(GtranslatorPo *po);
 
 gint             gtranslator_po_get_message_position	(GtranslatorPo *po);
 
-gchar           *gtranslator_po_check_po_file		(GtranslatorPo *po);
+const gchar     *gtranslator_po_check_po_file		(GtranslatorPo *po);
 
 /* Unexported funcs */
 void            _gtranslator_po_increase_decrease_translated

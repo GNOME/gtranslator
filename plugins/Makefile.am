@@ -1,8 +1,7 @@
 SUBDIRS = 					\
 	alternate-language			\
 	fullscreen				\
-	insert-tags				\
-	source-code-view
+	insert-tags
 
 if USE_CHARMAP
 SUBDIRS += charmap
@@ -14,8 +13,4 @@ endif
 
 if USE_DICTIONARY
 SUBDIRS += dictionary
-endif
-
-if BUILD_SVN
-SUBDIRS += subversion
 endif

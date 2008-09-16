@@ -20,7 +20,9 @@
 #ifndef __EGG_TREE_MULTI_DND_H__
 #define __EGG_TREE_MULTI_DND_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtktreemodel.h>
+#include <gtk/gtktreeview.h>
+#include <gtk/gtkdnd.h>
 
 G_BEGIN_DECLS
 

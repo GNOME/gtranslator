@@ -20,7 +20,6 @@
 #define __ACTIONS_H__
 
 #include <gtk/gtkaction.h>
-#include <gio/gio.h>
 #include "window.h"
 
 G_BEGIN_DECLS
@@ -35,12 +34,9 @@ void       gtranslator_save_current_file_dialog (GtkWidget * widget,
 void       gtranslator_save_file_as_dialog      (GtkAction * action,
 						 GtranslatorWindow *window);
 
-gboolean   gtranslator_open                     (GFile *location,
+gboolean   gtranslator_open                     (const gchar *filename,
 						 GtranslatorWindow *window,
 						 GError **error);
-
-void       gtranslator_close_tab                (GtranslatorTab *tab,
-						 GtranslatorWindow *window);
 
 void       gtranslator_file_close               (GtkAction * widget,
 						 GtranslatorWindow *window);
@@ -48,8 +44,8 @@ void       gtranslator_file_close               (GtkAction * widget,
 void       gtranslator_file_quit                (GtkAction *action,
 						 GtranslatorWindow *window);
 
-void       gtranslator_actions_load_locations   (GtranslatorWindow *window,
-						 const GSList      *locations);
+void       gtranslator_actions_load_uris        (GtranslatorWindow *window,
+						 const GSList        *uris);
 
 /*Edit*/
 void       gtranslator_actions_edit_undo        (GtkAction   *action,
@@ -84,16 +80,7 @@ void       gtranslator_message_status_toggle_fuzzy
 void       gtranslator_actions_edit_preferences (GtkAction *action,
 						 GtranslatorWindow *window);
 
-void       gtranslator_actions_edit_clear       (GtkAction *action,
-						 GtranslatorWindow *window);
-
 /* View */
-void       gtranslator_actions_view_context     (GtkAction *action,
-						 GtranslatorWindow *window);
-
-void       gtranslator_actions_view_translation_memory
-						(GtkAction *action,
-						 GtranslatorWindow *window);
 
 /*Go*/
 void       gtranslator_message_go_to_first      (GtkAction  * action,
@@ -122,17 +109,6 @@ void       gtranslator_message_go_to_prev_untranslated
                                                 (GtkAction *action,
 						 GtranslatorWindow *window);
 
-void       gtranslator_message_go_to_next_fuzzy_or_untranslated
-						(GtkAction *action,
-						 GtranslatorWindow *window);
-
-void       gtranslator_message_go_to_prev_fuzzy_or_untranslated
-						(GtkAction *action,
-						 GtranslatorWindow *window);
-
-void       gtranslator_message_jump             (GtkAction *action,
-						 GtranslatorWindow *window);
-
 /*Search*/
 void       _gtranslator_actions_search_find     (GtkAction   *action,
 						 GtranslatorWindow *window);
@@ -143,9 +119,6 @@ void       _gtranslator_actions_search_replace  (GtkAction   *action,
 /*Help*/
 void       gtranslator_window_show_home_page    (GtkAction *action,
 						 gpointer useless);
-
-void       gtranslator_cmd_help_contents        (GtkAction *action,
-                                                 GtranslatorWindow *window);
 
 void       gtranslator_about_dialog             (GtkAction *action,
 						 GtranslatorWindow *window);

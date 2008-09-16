@@ -1,356 +1,161 @@
-2008-09-09  Seán de Búrca  <leftmostcat@gmail.com>
+2008-05-26  Pablo Sanxiao  <psanxiao@gmail.com>
 
-	* dialogs/preferences-dialog.c: Don't grey out label.
+	* utils.{ch}:
+	Added functions gtranslator_xml_new_doc that
+	create a new xmlDocPtr from a gchar and
+	gtranslator_xml_open_file that open a xml file
+	from filename.
 
-2008-09-09  Seán de Búrca  <leftmostcat@gmail.com>
-
-	* po.c: Remove unnecessary leading space.
-
-2008-09-08  Seán de Búrca  <leftmostcat@gmail.com>
-
-	* profile.c: Fix function calls.
-
-2008-09-08  Seán de Búrca  <leftmostcat@gmail.com>
-
-	* profile.c: Correct tag name. Breaks format.
-
-2008-09-08  Seán de Búrca  <leftmostcat@gmail.com>
-
-	* profile.c: Make sure we don't make an illegal XML file.
-
-2008-09-08  Pablo Sanxiao  <psanxiao@gmail.com>
-
-	* window.c:
-	Fixed problem when single file is opened state of 
-	file is not expressed.
-
-	Applied patch by Baris Cicek (bug #551073)
+	* profile.{ch}:
+	Added functions gtranslator_profile_xml_new_entry that
+	create a new xml with the values of the gtranslator
+	profile object, gtranslator_profile_xml_get_entry that
+	obtain the values from the xmlNodePtr and save them into
+	gtranslator profile and gtranslator_profile_get_profiles_
+	from_xml_file that obtain a list of profiles from a xml file.
 	
-2008-09-08  Pablo Sanxiao  <psanxiao@gmail.com>
+2008-04-28  Pablo Sanxiao  <psanxiao@gmail.com>
 
-	* window.c:
-	(set_window_title):
-	Fixed problem when sets the title window when tab
-	number drecreases to one.
-
-	Applied patch by Baris Cicek (bug #551068)
+	* dialogs/header-dialog.c:
+	Now when you edit the header, po file is
+	marked to be saved.
 	
-2008-09-04  Pablo Sanxiao  <psanxiao@gmail.com>
+2008-04-21  Pablo Sanxiao  <psanxiao@gmail.com>
 
-	* plugin-system/plugins-engine.c:
-	(gtranslator_plugins_engine_load_all):
-	Changed g_list_foreach and g_list_free to
-	g_slist_foreach and g_slist_free because their target
-	is a GSList.
-
-2008-09-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* plugin-system/plugins-engine.c:
-	Fixed memory leak.
-
-2008-09-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* tab.c (update_status):
-	Improved performance when updating the status.
-
-2008-09-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* main.c (main):
-	Fixed another memory leak.
+	* po.{hc}:
+	* dialogs/header-dialog.c:
+	Now header's values are saved into msg when 
+	close the header dialog.
 	
-	* view.c:
-	Added doc.
+2008-04-21  Pablo Sanxiao  <psanxiao@gmail.com>
 
-2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+	* /dialogs/header-dialog.glade:
+	Minor changes.
 
-	* tab.c: Message edition finished signal must not be
-	emitted if the first message was not shown.
-
-2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* draw-spaces.c (draw_tabs_and_spaces):
-	* po.c (gtranslator_po_init), (gtranslator_po_parse):
-	* translation-memory/berkeley/berkeley.c
-	(gtranslator_berkeley_store), (gtranslator_berkeley_lookup):
-	* translation-memory/translation-memory-ui.c (showed_message_cb),
-	(tree_view_size_cb):
-	* utils.c (check_good_word),
-	(gtranslator_utils_split_string_in_words):
-	Fixed lots of memory leaks. Thanks to José Dapena Paz.
-
-2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* application.c (gtranslator_application_init):
-	* translation-memory/berkeley/berkeley.c
-	(gtranslator_berkeley_lookup),
-	(gtranslator_berkeley_set_max_items),
-	(gtranslator_translation_memory_iface_init),
-	(gtranslator_berkeley_init):
-	* translation-memory/translation-memory.c
-	(gtranslator_translation_memory_set_max_items),
-	(gtranslator_translation_memory_set_max_items_default),
-	(gtranslator_translation_memory_base_init):
-	* translation-memory/translation-memory.h:
-	Added set_max_default funcs to get less items when searching in database.
-
-2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* dialogs/jump-dialog.c (dialog_response_handler),
-	(gtranslator_jump_dialog_init), (gtranslator_jump_dialog_finalize),
-	(gtranslator_jump_dialog_class_init),
-	(gtranslator_show_jump_dialog):
-	* dialogs/jump-dialog.glade:
-	* dialogs/jump-dialog.h:
-	Forgot to add the files in the previous commit.
-
-2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* actions-go.c (gtranslator_message_jump):
-	* actions.h:
-	* dialogs/Makefile.am:
-	* po.c (gtranslator_po_get_msg_from_number):
-	* po.h:
-	* tab.c (gtranslator_tab_go_to_number),
-	(gtranslator_tab_set_message_area):
-	* tab.h:
-	* window.c:
-	Added jump dialog/menuitem.
-
-2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* tab.c (gtranslator_tab_edition_finished),
-	(gtranslator_tab_set_message_area):
-	* tab.h:
-	Added the neccessary API to manage the message area in a plugin.
-
-2008-09-01  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* Makefile.am:
-	* dialogs/bookmarks-dialog.glade:
-	Removed unneccessary glade file.
-
-2008-08-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* dialogs/assistant.c (create_start_page):
-	Fixed typo.
-
-2008-08-28  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* history-entry.c (gtranslator_history_entry_class_init),
-	(gtranslator_history_entry_save_history), (remove_item),
-	(gtranslator_history_entry_load_history):
-	* message-area.c:
-	* message-area.h:
-	Sync with gedit to get the docs I added.
-
-2008-08-28  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* Makefile.am:
-	* utils.c (gtranslator_utils_help_display):
-	Added DATADIR variable.
-
-2008-08-28  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* Makefile.am:
-	* application.c (gtranslator_application_init):
-	* dialogs/Makefile.am:
-	* dialogs/comment-dialog.c (gtranslator_comment_dialog_init):
-	* dialogs/header-dialog.c (gtranslator_header_dialog_init):
-	* dialogs/preferences-dialog.c
-	(gtranslator_preferences_dialog_init):
-	* dialogs/profile-dialog.c (gtranslator_profile_dialog_init):
-	* dialogs/search-dialog.c (gtranslator_search_dialog_init):
-	* utils.c (gtranslator_utils_help_display):
-	* view.c (gtranslator_view_init):
-	* window.c (gtranslator_window_layout_load),
-	(gtranslator_window_draw):
-	Changed DATADIR to PKGDATADIR.
-
-2008-08-27  Pablo Sanxiao  <psanxiao@gmail.com>
-
-	* po.c:
-	(gtranslator_po_save_header_in_msg):
-	Changed strcmp to g_utf8_collate.
-
-	Fixed bug #549381.
+	Added patch by Ignacio Casal Quinteiro
 	
-2008-08-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* dialogs/search-dialog.glade:
-	Put more clear the search in fuzzy messages string. (Fixes #549371)
-
-2008-08-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* window.c (set_window_title), (notebook_switch_page),
-	(notebook_page_removed), (notebook_tab_added),
-	(gtranslator_window_draw):
-	If there is only one tab add the path to the window title. (Fixes #549369)
-
-2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* plugin-system/plugin-manager.c (about_button_cb):
-	* plugin-system/plugin.c:
-	* plugin-system/plugin.h:
-	* plugin-system/update-from-gedit.sh:
-	Sinchronized to get the doc I added to gedit. And fixed a bug in the
-	update script.
-
-2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* debug.h:
-	Added documentation.
-
-2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* actions-file.c (save_dialog_response_cb),
-	(gtranslator_save_current_file_dialog):
-	Added status message when saving.
-
-2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* translation-memory/translation-memory.c:
-	Added documentation.
-
-2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* translation-memory/translation-memory-ui.c (on_activate_item_cb),
-	(showed_message_cb):
-	Pass the data to the menuitem instead of split the string or try to get
-	the data from the end of the string. (Fixes bug #549200).
-
-2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* translation-memory/translation-memory-ui.c (on_activate_item_cb):
-	We can split a type of text as we are going to get problem sppliting it.
-
-2008-08-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* translation-memory/translation-memory-ui.c (on_activate_item_cb):
-	Using glib func instead of atoi. A try to fix bug 549200.
-
-2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* actions-go.c
-	(gtranslator_message_go_to_next_fuzzy_or_untranslated),
-	(gtranslator_message_go_to_prev_fuzzy_or_untranslated):
-	* actions.h:
-	* po.c (gtranslator_po_get_next_fuzzy_or_untrans),
-	(gtranslator_po_get_prev_fuzzy_or_untrans):
-	* po.h:
-	* tab.c (gtranslator_tab_go_to_next_fuzzy_or_untrans),
-	(gtranslator_tab_go_to_prev_fuzzy_or_untrans):
-	* tab.h:
-	* window.c (set_sensitive_according_to_message):
-	Now you can jump to next/prev fuzzy or untranslated message. I know
-	we are under feature freeze but this is really useful and it was really
-	easy to implement.
-
-2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* msg.c (gtranslator_msg_new):
-	* po.c (gtranslator_po_parse):
-	The init status of the message must be set in the constructor of the
-	GtranslatorMsg.
-
-2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* actions-file.c (gtranslator_po_parse_files_from_dialog):
-	Fixed crash opening files with filechooser (Fixes #548923).
-	Thanks to Jorge González and Christian Kirbach.
-
-2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* toolbareditor/egg-editable-toolbar.c
-	(toolbar_visibility_refresh), (new_separator_pixbuf):
-	* toolbareditor/egg-editable-toolbar.h:
-	* toolbareditor/egg-toolbar-editor.c
-	(egg_toolbar_editor_set_model):
-	* toolbareditor/egg-toolbar-editor.h:
-	* toolbareditor/egg-toolbars-model.c:
-	* toolbareditor/egg-toolbars-model.h:
-	* toolbareditor/eggtreemultidnd.c:
-	* toolbareditor/eggtreemultidnd.h:
-	Synchornized from server.
-
-2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* dialogs/header-dialog.glade:
-	* dialogs/preferences-dialog.glade:
-	Removed all gtk-* strings as translatables. Patch by Christian Kirbach.
-
-2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* actions-file.c (is_duplicated_location):
-	A try to fix the bug #548923.
-
-2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* dialogs/header-dialog.c (gtranslator_header_dialog_init):
-	* dialogs/header-dialog.glade:
-	Fixed glade warning.
-
-2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* msg.c (gtranslator_msg_new):
-	Fixed bug added in the previous commit.
-
-2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* msg.c (gtranslator_msg_set_property),
-	(gtranslator_msg_get_property), (gtranslator_msg_class_init),
-	(gtranslator_msg_new), (gtranslator_msg_get_iterator),
-	(gtranslator_msg_set_iterator), (gtranslator_msg_get_message),
-	(gtranslator_msg_set_message):
-	* msg.h:
-	* po.c (gtranslator_po_parse):
-	Fixed message constructor, po_message_t must be an argument in the
-	constructor. Added the iter as a property too.
-
-2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* msg.c (gtranslator_msg_set_property),
-	(gtranslator_msg_get_property), (gtranslator_msg_class_init):
-	Now the gettext message is an attribute.
-
-2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
-
-	* notebook.c (gtranslator_notebook_add_page),
-	(gtranslator_notebook_remove_page),
-	(gtranslator_notebook_get_page):
-	* notebook.h:
-	* window.c (_gtranslator_window_close_tab):
-	Now tabs are only shown if there are more than one file opened.
-
-2008-08-22  Pablo Sanxiao  <psanxiao@gmail.com>
+2008-04-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* actions-file.c:
-	(gtranslator_file_quit):
-	Checking if the profiles list is empty before saving 
-	profiles in xml.
-	* dialogs/preferences-dialog.c:
-	(setup_tm_pages):
-	Checking if filename is NULL before calling
-	(gtranslator_prefs_manager_set_tm_lang_entry).
+	Finished the close confirmation dialog stuff.
 
-2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+2008-04-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* po.c: Now it does not check if the file is right
-	so it does not send bogus warning for untranslated
-	messages. (Fixes #548548).
+	* window.c:
+	Fixed sensitive bug.
 
-2008-08-22  Pablo Sanxiao  <psanxiao@gmail.com>
+2008-04-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* dialogs/preferences-dialog:
-        (setup_tm_pages):
-        Added check to know if there is active profile before
-        fill the lang_tm_entry by default.
-        * dialogs/profile-dialog:
-        (save_new_profile):
-        Added check to know if the profiles list is empty and if so
-        creating it and set the profile as active.
-    
-        Now when there is no profile and try to access to preferences
-        the program does not crash.t i think i'll get it acomplished once Pablo finish
+	* dialogs/close-confirmation-dialog.ch:
+	* dialogs/Makefile.am:
+	Added close confirmation dialogs.
+
+	* window.ch:
+	* tab.ch:
+	* actions-file.c:
+	* notebook.c:
+	Added close dialog for a single tab.
+
+2008-04-17  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* po.ch:
+	* tab.ch:
+	* actions-file:
+	* window.c:
+	Changed GtranslatorTabState to GtranslatorPoState. It has
+	more sense.
+
+2008-04-09  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* profile.c:
+	Fixed function gtranslator_profile_finalize.
+
+2008-04-06  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* application.c:
+	Removed useless g_warning.
+
+2008-04-05  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* application.{ch}:
+	* window.c:
+	Now _gtranslator_application_get_toolbars_model return a G_OBJECT
+	instead of EggToolbarsModel.
+
+2008-03-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+        * commnet.{ch}:
+        Now you can see the source code in gedit.
+        * window.h:
+        Removed useless funcs declarations.
+
+2008-03-31  Pablo Sanxiao  <psanxiao@gmail.com>
+	
+	* profile.{h,c}:
+	Added these files that implement the profile class
+
+2008-03-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+	
+	* utils.c:
+	Fixed comment.
+	* application.{ch}:
+	* window.c:
+	Marked funcs as non exportables.
+	* po.h:
+	Removed duplicate definition of a func.
+
+2008-03-30  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* message-table.c:
+	Now message-showed signal is emitted once. (Fixes bug #524783)
+
+2008-03-26  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* /dialogs/profile-dialog.glade:
+	Removed spinbutton for plurals.
+	* /dialogs/profile-dialog.c:
+	Added tooltip for plurals entry.
+
+2008-03-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils.c:
+	Minor fixes in gtranslator_utils_activate_url func.
+
+2008-03-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-go.c:
+	* window.ch:
+	* statusbar.ch:
+	* actions-file.c:
+	Now progress bar is inside of our statusbar class.
+	(Fixes bug #514758).
+
+2008-03-24  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* msg.ch:
+	* comment.c:
+	Added pretty format visualization (Fixes bug #520496)
+
+2008-03-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* comments.c:
+	Set the wrap mode to word.
+
+2008-03-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* utils.ch:
+	Added func to show the help. Now we need help to show.
+
+2008-03-13  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* tab.c:
+	* po.c:
+	* prefs-manager.c:
+	* header.c:
+	* prefs-manager.h:
+	* header.h:
+	Added better support for plural forms. This already needs
+	work but i think i'll get it acomplished once Pablo finish
 	the profiles stuff.
 
 2008-03-10  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>

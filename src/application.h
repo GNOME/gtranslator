@@ -23,9 +23,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "profile.h"
 #include "window.h"
-#include "dialogs/preferences-dialog.h"
 
 G_BEGIN_DECLS
 
@@ -83,41 +81,17 @@ GtranslatorWindow *gtranslator_application_open_window (GtranslatorApplication *
 
 GtranslatorWindow *gtranslator_application_get_active_window  (GtranslatorApplication * app);
 
-const GList       *gtranslator_application_get_windows (GtranslatorApplication *app);
-
-GtranslatorProfile *gtranslator_application_get_active_profile (GtranslatorApplication *app);
-
-void              gtranslator_application_set_active_profile (GtranslatorApplication *app,
-							      GtranslatorProfile *profile);
-
-GList             *gtranslator_application_get_profiles (GtranslatorApplication *app);
-
-void              gtranslator_application_set_profiles (GtranslatorApplication *app,
-							GList *profiles);
-
-GtranslatorPreferencesDialog *
-gtranslator_application_get_preferences_dialog (GtranslatorApplication *app);
-
-void
-gtranslator_application_set_preferences_dialog (GtranslatorApplication *app,
-						GtranslatorPreferencesDialog *dlg);
+const GList      *gtranslator_application_get_windows (GtranslatorApplication *app);
 
 void              gtranslator_application_register_icon (GtranslatorApplication *app,
 							 const gchar *icon,
 				       			 const gchar *stock_id);
-				       			 
-GObject          *gtranslator_application_get_translation_memory (GtranslatorApplication *app);
 
 /* Non exported funcs */
 
 GObject          *_gtranslator_application_get_toolbars_model  (GtranslatorApplication   *application);
 
 void              _gtranslator_application_save_toolbars_model (GtranslatorApplication   *application);
-
-const gchar *     _gtranslator_application_get_last_dir        (GtranslatorApplication *app);
-
-void              _gtranslator_application_set_last_dir        (GtranslatorApplication *app,
-							        const gchar *last_dir);
 
 G_END_DECLS
 

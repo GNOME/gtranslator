@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: history-entry.c 6377 2008-08-10 14:45:44Z pborelli $
+ * $Id: history-entry.c 5931 2007-09-25 20:05:40Z pborelli $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -158,8 +158,7 @@ gtranslator_history_entry_class_init (GtranslatorHistoryEntryClass *klass)
 							      "History ID",
 							      "History ID",
 							      NULL,
-							      G_PARAM_READWRITE |
-							      G_PARAM_STATIC_STRINGS));
+							      G_PARAM_READWRITE));
 
 	g_object_class_install_property (object_class,
 					 PROP_HISTORY_LENGTH,
@@ -169,8 +168,7 @@ gtranslator_history_entry_class_init (GtranslatorHistoryEntryClass *klass)
 							    0,
 							    G_MAXUINT,
 							    GTR_HISTORY_ENTRY_HISTORY_LENGTH_DEFAULT,
-							    G_PARAM_READWRITE |
-							    G_PARAM_STATIC_STRINGS));
+							    G_PARAM_READWRITE));
 
 	/* TODO: Add enable-completion property */
 
@@ -260,7 +258,6 @@ gtranslator_history_entry_save_history (GtranslatorHistoryEntry *entry)
 			      gconf_items,
 			      NULL);
 
-	g_slist_foreach (gconf_items, (GFunc) g_free, NULL);
 	g_slist_free (gconf_items);
 	g_free (key);
 }
@@ -290,11 +287,8 @@ remove_item (GtkListStore *store,
 		    strcmp (item_text, text) == 0)
 		{
 			gtk_list_store_remove (store, &iter);
-			g_free (item_text);
 			return TRUE;
 		}
-
-		g_free (item_text);
 
 	} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter));
 
@@ -412,9 +406,8 @@ gtranslator_history_entry_load_history (GtranslatorHistoryEntry *entry)
 				    -1);
 	}
 
-	g_slist_foreach (gconf_items, (GFunc) g_free, NULL);
-	g_slist_free (gconf_items);
 	g_free (key);
+	g_slist_free (gconf_items);
 }
 
 void

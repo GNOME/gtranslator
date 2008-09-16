@@ -70,7 +70,7 @@ static const GtkActionEntry action_entries[] =
 	{ "InsertTags", NULL, N_("_Insert Tags") }
 };
 
-static const gchar submenu[] =
+const gchar submenu[] =
 "<ui>"
 "  <menubar name='MainMenu'>"
 "    <menu name='EditMenu' action='Edit'>"
@@ -126,12 +126,6 @@ gtranslator_insert_tags_plugin_init (GtranslatorInsertTagsPlugin *message_table)
 static void
 gtranslator_insert_tags_plugin_finalize (GObject *object)
 {
-	if (tags != NULL)
-	{
-		g_slist_free (tags);
-		tags = NULL;
-	}
-	
 	G_OBJECT_CLASS (gtranslator_insert_tags_plugin_parent_class)->finalize (object);
 }
 
@@ -199,7 +193,7 @@ parse_list (GtranslatorWindow *window)
 					      (const gchar *)l->data);
 		
 		gtk_menu_item_set_accel_path (GTK_MENU_ITEM (menuitem), accel_path);
-		gtk_accel_map_add_entry (accel_path, i+48, GDK_CONTROL_MASK | GDK_MOD1_MASK);
+		gtk_accel_map_add_entry (accel_path, i+48, GDK_CONTROL_MASK);
 
 		g_free (accel_path);
 		
@@ -241,7 +235,7 @@ showed_message_cb (GtranslatorTab *tab,
 	/*
 	 * Regular expression
 	 */
-	regex = g_regex_new ("<[-0-9a-zA-Z=.:?\"/ ]+>", 0, 0, NULL);
+	regex = g_regex_new ("<[-0-9a-zA-Z=\"/ ]+>", 0, 0, NULL);
 	g_regex_match (regex, msgid, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
@@ -296,11 +290,9 @@ impl_activate (GtranslatorPlugin *plugin,
 							 submenu,
 							 -1,
 							 &error);
-	if (error)
+	if (data->ui_id == 0)
 	{
 		g_warning (error->message);
-		g_error_free (error);
-		g_free (data);
 		return;
 	}
 
@@ -352,12 +344,6 @@ impl_deactivate(GtranslatorPlugin *plugin,
 	g_signal_handlers_disconnect_by_func(notebook,
 					     page_added_cb,
 					     window);
-	
-	if (tags != NULL)
-	{
-		g_slist_free (tags);
-		tags = NULL;
-	}
 }
 
 static void

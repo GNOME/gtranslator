@@ -15,8 +15,7 @@
  *  along with this program; if not, write to the Free Software
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-#include "application.h" 
+ 
 #include "profile.h"
 #include "preferences-dialog.h"
 #include "utils.h"
@@ -242,15 +241,15 @@ void gtranslator_profile_xml_new_entry (xmlDocPtr doc, GtranslatorProfile *profi
 	
 	root = xmlDocGetRootElement (doc);
 	profile_node = xmlNewChild (root, NULL, "profile", NULL);
-	xmlNewTextChild (profile_node, NULL, "profile_name", profile->priv->name);
-	xmlNewTextChild (profile_node, NULL, "author_name", profile->priv->author_name);
-	xmlNewTextChild (profile_node, NULL, "author_email", profile->priv->author_email);
-	xmlNewTextChild (profile_node, NULL, "language_name", profile->priv->language_name);
-	xmlNewTextChild (profile_node, NULL, "language_code", profile->priv->language_code);
-	xmlNewTextChild (profile_node, NULL, "charset", profile->priv->charset);
-	xmlNewTextChild (profile_node, NULL, "encoding", profile->priv->encoding);
-	xmlNewTextChild (profile_node, NULL, "group_email", profile->priv->group_email);
-	xmlNewTextChild (profile_node, NULL, "plurals", profile->priv->plurals);
+	xmlNewChild (profile_node, NULL, "profile_name", profile->priv->name);
+	xmlNewChild (profile_node, NULL, "author_name", profile->priv->author_name);
+	xmlNewChild (profile_node, NULL, "autor_email", profile->priv->author_email);
+	xmlNewChild (profile_node, NULL, "language_name", profile->priv->language_name);
+	xmlNewChild (profile_node, NULL, "language_code", profile->priv->language_code);
+	xmlNewChild (profile_node, NULL, "charset", profile->priv->charset);
+	xmlNewChild (profile_node, NULL, "encoding", profile->priv->encoding);
+	xmlNewChild (profile_node, NULL, "group_email", profile->priv->group_email);
+	xmlNewChild (profile_node, NULL, "plurals", profile->priv->plurals);
 }
 
 /**
@@ -305,19 +304,13 @@ GList *gtranslator_profile_get_profiles_from_xml_file (gchar *filename)
 {
   GList *profiles_list = NULL;
   GtranslatorProfile *profile;
-  xmlNodePtr root, child, active;
+  xmlNodePtr root, child;
   xmlDocPtr doc;
-  gchar *active_profile;
-  GList *l;
 
   doc = gtranslator_xml_open_file (filename);
 
   root = xmlDocGetRootElement (doc);
   child = root->xmlChildrenNode;
-  active = child->xmlChildrenNode;
-
-  active_profile = xmlNodeGetContent (active);
-  child = child->next;
 
   while (child != NULL) {
     profile = gtranslator_profile_xml_get_entry (child);
@@ -325,39 +318,5 @@ GList *gtranslator_profile_get_profiles_from_xml_file (gchar *filename)
     child = child->next;
   }
   
-  for (l = profiles_list; l; l = l->next) {
-    GtranslatorProfile *profile;
-    profile = (GtranslatorProfile *)l->data;
-    if (!strcmp(gtranslator_profile_get_name (profile), active_profile))
-      gtranslator_application_set_active_profile (GTR_APP, profile);
-  }
-  
   return profiles_list;
-}
-
-void gtranslator_profile_save_profiles_in_xml (gchar *filename) {
-  
-  xmlNodePtr root, child, active;
-  xmlDocPtr doc;
-  GList *profiles_list, *l;
-  GtranslatorProfile *active_profile;
-
-  doc = gtranslator_xml_new_doc ("list_of_profiles");
-  
-  profiles_list = gtranslator_application_get_profiles (GTR_APP);
-  active_profile = gtranslator_application_get_active_profile (GTR_APP);
-
-  root = xmlDocGetRootElement (doc);
-  child = root->xmlChildrenNode;
-  active = child->xmlChildrenNode;
-
-  xmlNewChild (root, NULL, "active", gtranslator_profile_get_name (active_profile));
-  
-  for (l = profiles_list; l; l = l->next) {
-    GtranslatorProfile *profile;
-    profile = (GtranslatorProfile *)l->data;
-    gtranslator_profile_xml_new_entry (doc, profile);
-  }
-  
-  xmlSaveFile (filename, doc);
 }
