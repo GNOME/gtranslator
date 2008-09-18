@@ -1,10 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gtranslator-prefs-manager.c
+ * prefs-manager.h
  * This file is part of gtranslator based in gedit
  *
  * Copyright (C) 2002  Paolo Maggi 
- *		       Ignacio Casal Quinteiro
+ * 		 2007  Ignacio Casal Quinteiro
+ *               2008  Igalia
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +20,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. 
+ * Boston, MA 02111-1307, USA.
+ *
+ * Authors:
+ *   Paolo Maggi
+ *   Ignacio Casal Quinteiro
+ *   Pablo Sanxiao <psanxiao@gmail.com>
  */
-
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
