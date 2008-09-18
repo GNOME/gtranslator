@@ -192,7 +192,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 	/*
 	 * If the config folder exists but there is no profile
 	 */
-	profiles_file = g_strconcat (gtranslator_folder, "/", "profiles.xml", NULL);
+	profiles_file = g_build_filename (gtranslator_folder, "profiles.xml", NULL);
 	if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
 	    priv->first_run = TRUE;
 	g_free (profiles_file);
