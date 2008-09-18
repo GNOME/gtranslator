@@ -44,6 +44,9 @@ on_next_tag_activated (GtkAction *action,
 	GtkTextBuffer *buffer;
 	GSList *tag;
 	
+	if (tags == NULL)
+		return;
+	
 	if (tag_position >= g_slist_length (tags))
 		tag_position = 0;
 	
