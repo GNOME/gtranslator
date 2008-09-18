@@ -26,3 +26,4 @@ all-am: gtranslator.keys
 
 EXTRA_DIST = $(icon_DATA) $(mime_DATA) $(keys_predata)
 
+CLEANFILES = $(keys_DATA)

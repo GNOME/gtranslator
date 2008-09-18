@@ -33,77 +33,40 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: module.c 5367 2006-12-17 14:29:49Z pborelli $
+ * $Id: module.c 6314 2008-06-05 12:57:53Z pborelli $
  */
 
 #include "config.h"
 
 #include "module.h"
-//#include "gtranslator-debug.h"
-
-#include <gmodule.h>
-
-typedef struct _GtranslatorModuleClass GtranslatorModuleClass;
-
-struct _GtranslatorModuleClass
-{
-	GTypeModuleClass parent_class;
-};
-
-struct _GtranslatorModule
-{
-	GTypeModule parent_instance;
-
-	GModule *library;
-
-	gchar *path;
-	GType type;
-};
+#include "debug.h"
 
 typedef GType (*GtranslatorModuleRegisterFunc) (GTypeModule *);
 
-static void gtranslator_module_init		(GtranslatorModule *action);
-static void gtranslator_module_class_init	(GtranslatorModuleClass *class);
+enum {
+	PROP_0,
+	PROP_MODULE_NAME,
+	PROP_PATH
+};
 
-static GObjectClass *parent_class = NULL;
-
-GType
-gtranslator_module_get_type (void)
-{
-	static GType type = 0;
-
-	if (G_UNLIKELY (type == 0))
-	{
-		static const GTypeInfo type_info =
-		{
-			sizeof (GtranslatorModuleClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) gtranslator_module_class_init,
-			(GClassFinalizeFunc) NULL,
-			NULL,
-			sizeof (GtranslatorModule),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) gtranslator_module_init,
-		};
-
-		type = g_type_register_static (G_TYPE_TYPE_MODULE,
-					       "GtranslatorModule",
-					       &type_info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (GtranslatorModule, gtranslator_module, G_TYPE_TYPE_MODULE);
 
 static gboolean
 gtranslator_module_load (GTypeModule *gmodule)
 {
 	GtranslatorModule *module = GTR_MODULE (gmodule);
 	GtranslatorModuleRegisterFunc register_func;
+	gchar *path;
 
-	g_message( "Loading %s", module->path);
+	DEBUG_PRINT ( "Loading %s module from %s",
+			     module->module_name, module->path);
 
-	module->library = g_module_open (module->path, 0);
+	path = g_module_build_path (module->path, module->module_name);
+	g_return_val_if_fail (path != NULL, FALSE);
+	DEBUG_PRINT ( "Module filename: %s", path);
+
+	module->library = g_module_open (path, 0);
+	g_free (path);
 
 	if (module->library == NULL)
 	{
@@ -136,7 +99,7 @@ gtranslator_module_load (GTypeModule *gmodule)
 
 	if (module->type == 0)
 	{
-		g_warning ("Invalid gtranslator plugin contained by module %s", module->path);
+		g_warning ("Invalid gtranslator plugin contained by module %s", module->module_name);
 		return FALSE;
 	}
 
@@ -148,12 +111,134 @@ gtranslator_module_unload (GTypeModule *gmodule)
 {
 	GtranslatorModule *module = GTR_MODULE (gmodule);
 
-	g_message( "Unloading %s", module->path);
+	DEBUG_PRINT ( "Unloading %s", module->path);
 
 	g_module_close (module->library);
 
 	module->library = NULL;
 	module->type = 0;
+}
+
+static void
+gtranslator_module_class_real_garbage_collect (void)
+{
+	/* Do nothing */
+}
+
+static void
+gtranslator_module_init (GtranslatorModule *module)
+{
+	DEBUG_PRINT ( "GtranslatorModule %p initialising", module);
+}
+
+static void
+gtranslator_module_finalize (GObject *object)
+{
+	GtranslatorModule *module = GTR_MODULE (object);
+
+	DEBUG_PRINT ( "GtranslatorModule %p finalising", module);
+
+	g_free (module->path);
+	g_free (module->module_name);
+
+	G_OBJECT_CLASS (gtranslator_module_parent_class)->finalize (object);
+}
+
+static void
+gtranslator_module_get_property (GObject    *object,
+			   guint       prop_id,
+			   GValue     *value,
+			   GParamSpec *pspec)
+{
+	GtranslatorModule *module = GTR_MODULE (object);
+
+	switch (prop_id)
+	{
+		case PROP_MODULE_NAME:
+			g_value_set_string (value, module->module_name);
+			break;
+		case PROP_PATH:
+			g_value_set_string (value, module->path);
+			break;
+		default:
+			g_return_if_reached ();
+	}
+}
+
+static void
+gtranslator_module_set_property (GObject      *object,
+			   guint         prop_id,
+			   const GValue *value,
+			   GParamSpec   *pspec)
+{
+	GtranslatorModule *module = GTR_MODULE (object);
+
+	switch (prop_id)
+	{
+		case PROP_MODULE_NAME:
+			module->module_name = g_value_dup_string (value);
+			g_type_module_set_name (G_TYPE_MODULE (object),
+						module->module_name);
+			break;
+		case PROP_PATH:
+			module->path = g_value_dup_string (value);
+			break;
+		default:
+			g_return_if_reached ();
+	}
+}
+
+static void
+gtranslator_module_class_init (GtranslatorModuleClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GTypeModuleClass *module_class = G_TYPE_MODULE_CLASS (klass);
+
+	object_class->set_property = gtranslator_module_set_property;
+	object_class->get_property = gtranslator_module_get_property;
+	object_class->finalize = gtranslator_module_finalize;
+
+	module_class->load = gtranslator_module_load;
+	module_class->unload = gtranslator_module_unload;
+
+	klass->garbage_collect = gtranslator_module_class_real_garbage_collect;
+
+	g_object_class_install_property (object_class,
+					 PROP_MODULE_NAME,
+					 g_param_spec_string ("module-name",
+							      "Module Name",
+							      "The module to load for this plugin",
+							      NULL,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property (object_class,
+					 PROP_PATH,
+					 g_param_spec_string ("path",
+							      "Path",
+							      "The path to use when loading this module",
+							      NULL,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
+}
+
+void
+gtranslator_module_class_garbage_collect (GtranslatorModuleClass *klass)
+{
+	g_return_if_fail (GTR_IS_MODULE_CLASS (klass));
+
+	GTR_MODULE_CLASS (klass)->garbage_collect ();
+}
+
+GObject *
+gtranslator_module_new_object (GtranslatorModule *module)
+{
+	g_return_val_if_fail (module->type != 0, NULL);
+
+	DEBUG_PRINT ( "Creating object of type %s",
+			     g_type_name (module->type));
+
+	return g_object_new (module->type, NULL);
 }
 
 const gchar *
@@ -164,65 +249,10 @@ gtranslator_module_get_path (GtranslatorModule *module)
 	return module->path;
 }
 
-GObject *
-gtranslator_module_new_object (GtranslatorModule *module)
+const gchar *
+gtranslator_module_get_module_name (GtranslatorModule *module)
 {
-	g_message( "Creating object of type %s", g_type_name (module->type));
+	g_return_val_if_fail (GTR_IS_MODULE (module), NULL);
 
-	if (module->type == 0)
-	{
-		return NULL;
-	}
-
-	return g_object_new (module->type, NULL);
-}
-
-static void
-gtranslator_module_init (GtranslatorModule *module)
-{
-	g_message( "GtranslatorModule %p initialising", module);
-}
-
-static void
-gtranslator_module_finalize (GObject *object)
-{
-	GtranslatorModule *module = GTR_MODULE (object);
-
-	g_message( "GtranslatorModule %p finalising", module);
-
-	g_free (module->path);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-static void
-gtranslator_module_class_init (GtranslatorModuleClass *class)
-{
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
-	GTypeModuleClass *module_class = G_TYPE_MODULE_CLASS (class);
-
-	parent_class = (GObjectClass *) g_type_class_peek_parent (class);
-
-	object_class->finalize = gtranslator_module_finalize;
-
-	module_class->load = gtranslator_module_load;
-	module_class->unload = gtranslator_module_unload;
-}
-
-GtranslatorModule *
-gtranslator_module_new (const gchar *path)
-{
-	GtranslatorModule *result;
-
-	if (path == NULL || path[0] == '\0')
-	{
-		return NULL;
-	}
-
-	result = g_object_new (GTR_TYPE_MODULE, NULL);
-
-	g_type_module_set_name (G_TYPE_MODULE (result), path);
-	result->path = g_strdup (path);
-
-	return result;
+	return module->module_name;
 }

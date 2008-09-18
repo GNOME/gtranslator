@@ -33,6 +33,7 @@
 #define __GTR_PLUGIN_INFO_H__
 
 #include <glib-object.h>
+#include "module.h"
 
 G_BEGIN_DECLS
 

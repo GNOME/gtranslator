@@ -76,7 +76,8 @@ gtranslator_message_table_selection_changed (GtkTreeSelection *selection,
 		if (msg != NULL && g_utf8_collate (gtranslator_msg_get_msgid (msg->data),
 						   gtranslator_msg_get_msgid (current_msg->data)))
 		{
-			gtranslator_tab_message_go_to (table->priv->tab, msg);
+			gtranslator_tab_message_go_to (table->priv->tab, msg,
+						       FALSE, GTR_TAB_MOVE_NONE);
 		}
 	}
 }
@@ -245,7 +246,8 @@ static void sort_message_list (GtkTreeViewColumn *column,
 	gtranslator_po_set_messages (po, messages);
 
 	gtranslator_tab_message_go_to (table->priv->tab,
-				       g_list_first (messages));
+				       g_list_first (messages),
+				       FALSE, GTR_TAB_MOVE_NONE);
 }
 
 static void
@@ -383,6 +385,14 @@ gtranslator_message_table_class_init (GtranslatorMessageTableClass *klass)
 	object_class->finalize = gtranslator_message_table_finalize;
 }
 
+/**
+ * gtranslator_message_table_new:
+ * @tab: a #GtranslatorTab
+ *
+ * Creates a new #GtranslatorMessageTable object.
+ *
+ * Returns: the newly created #GtranslatorMessageTable
+ */
 GtkWidget *
 gtranslator_message_table_new (GtkWidget *tab)
 {
@@ -400,6 +410,14 @@ gtranslator_message_table_new (GtkWidget *tab)
 	return GTK_WIDGET(obj);
 }
 
+/**
+ * gtranslator_message_table_populate:
+ * @table: a #GtranslatorMessageTable
+ * @messages: a list of #GtranslatorMsg
+ *
+ * Populates the #GtranslatorMessageTable with the list of #GtranslatorMsg and
+ * sort them.
+ */
 void 
 gtranslator_message_table_populate(GtranslatorMessageTable *table, 
 				   GList *messages)

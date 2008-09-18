@@ -79,6 +79,9 @@ GtkWidget       *gtranslator_notebook_new	           (void);
 void             gtranslator_notebook_add_page             (GtranslatorNotebook *notebook,
 							    GtranslatorTab *pax);
 
+void             gtranslator_notebook_remove_page          (GtranslatorNotebook *notebook,
+							    gint i);
+
 GtranslatorTab  *gtranslator_notebook_get_page             (GtranslatorNotebook *notebook);
 
 G_END_DECLS

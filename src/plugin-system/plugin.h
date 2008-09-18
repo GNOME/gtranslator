@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugin.h 5666 2007-06-29 19:52:25Z sfre $
+ * $Id: plugin.h 6448 2008-08-25 10:28:33Z icq $
  */
 
 #ifndef __GTR_PLUGIN_H__
@@ -34,7 +34,7 @@
 #include <glib-object.h>
 
 #include "window.h"
-//#include <gtranslator/gtranslator-debug.h>
+#include "debug.h"
 
 /* TODO: add a .h file that includes all the .h files normally needed to
  * develop a plugin */ 
@@ -112,10 +112,10 @@ gboolean	 gtranslator_plugin_is_configurable	(GtranslatorPlugin *plugin);
 GtkWidget	*gtranslator_plugin_create_configure_dialog		
 						(GtranslatorPlugin *plugin);
 
-/*
- * Utility macro used to register plugins
+/**
+ * GTR_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):
  *
- * use: GTR_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE)
+ * Utility macro used to register plugins with additional code.
  */
 #define GTR_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE)	\
 										\
@@ -152,7 +152,7 @@ register_gtranslator_plugin (GTypeModule *module)					\
 		(GInstanceInitFunc) plugin_name##_init				\
 	};									\
 										\
-	g_message( "Registering " #PluginName);	\
+	DEBUG_PRINT ( "Registering " #PluginName);	\
 										\
 	/* Initialise the i18n stuff */						\
 	bindtextdomain (GETTEXT_PACKAGE, GTR_LOCALEDIR);			\
@@ -169,18 +169,18 @@ register_gtranslator_plugin (GTypeModule *module)					\
 	return plugin_name##_type;						\
 }
 
-/*
- * Utility macro used to register plugins
- *
- * use: GTR_PLUGIN_REGISTER_TYPE(PluginName, plugin_name)
+/**
+ * GTR_PLUGIN_REGISTER_TYPE(PluginName, plugin_name):
+ * 
+ * Utility macro used to register plugins.
  */
 #define GTR_PLUGIN_REGISTER_TYPE(PluginName, plugin_name)			\
 	GTR_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, ;)
 
-/*
- * Utility macro used to register gobject types in plugins with additional code
+/**
+ * GTR_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE):
  *
- * use: GTR_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE)
+ * Utility macro used to register gobject types in plugins with additional code.
  */
 #define GTR_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE)	\
 										\
@@ -217,7 +217,7 @@ object_name##_register_type (GTypeModule *module)					\
 		(GInstanceInitFunc) object_name##_init				\
 	};									\
 										\
-	g_message( "Registering " #ObjectName);	\
+	DEBUG_PRINT ( "Registering " #ObjectName);	\
 										\
 	g_define_type_id = g_type_module_register_type (module,			\
 					   	        PARENT_TYPE,		\
@@ -230,10 +230,10 @@ object_name##_register_type (GTypeModule *module)					\
 	return g_define_type_id;						\
 }
 
-/*
- * Utility macro used to register gobject types in plugins
+/**
+ * GTR_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE):
  *
- * use: GTR_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE)
+ * Utility macro used to register gobject types in plugins.
  */
 #define GTR_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE)		\
 	GTR_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, ;)

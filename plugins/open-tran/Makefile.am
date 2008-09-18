@@ -38,7 +38,10 @@ pixmaps__DATA = \
         kde.ico \
         mozilla.png \
         debian.png \
-	open-tran.png
+	open-tran.png \
+	suse.png \
+	xfce.png \
+	inkscape.png
 
 # Plugin Info
 

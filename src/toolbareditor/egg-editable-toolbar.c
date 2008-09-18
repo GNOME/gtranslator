@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- *  $Id: egg-editable-toolbar.c 826 2007-08-16 08:05:50Z carlosgc $
+ *  $Id: egg-editable-toolbar.c 891 2008-08-08 21:14:52Z friemann $
  */
 
 #include "config.h"
@@ -25,26 +25,7 @@
 #include "egg-toolbars-model.h"
 #include "egg-toolbar-editor.h"
 
-#include <gtk/gtkvseparator.h>
-#include <gtk/gtkiconfactory.h>
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkdnd.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkimage.h>
-#include <gtk/gtktoggleaction.h>
-#include <gtk/gtkcheckmenuitem.h>
-#include <gtk/gtkimagemenuitem.h>
-#include <gtk/gtkseparatormenuitem.h>
-#include <gtk/gtkmenu.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtktoolbar.h>
-#include <gtk/gtktoolitem.h>
-#include <gtk/gtktoolbutton.h>
-#include <gtk/gtkseparatortoolitem.h>
-#include <gtk/gtkicontheme.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <string.h>
 
@@ -935,7 +916,7 @@ toolbar_visibility_refresh (EggEditableToolbar *etoolbar)
        * produce duplicates, but don't worry about it. If your language
        * normally has a mnemonic at the start, please use the _. If not,
        * please remove. */
-      action_label = g_strdup_printf (_("Show \"_%s\""), tmp);
+      action_label = g_strdup_printf (_("Show “_%s”"), tmp);
       g_free (tmp);
       
       sprintf(action_name, "ToolbarToggle%d", i);
@@ -1827,7 +1808,7 @@ new_pixbuf_from_widget (GtkWidget *widget)
 }
 
 static GdkPixbuf *
-new_separator_pixbuf ()
+new_separator_pixbuf (void)
 {
   GtkWidget *separator;
   GdkPixbuf *pixbuf;

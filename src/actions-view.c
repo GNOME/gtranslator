@@ -16,3 +16,29 @@
  */
 
 #include "actions.h"
+
+void
+gtranslator_actions_view_context (GtkAction *action,
+				  GtranslatorWindow *window)
+{
+	GtranslatorTab *tab;
+	GtkWidget *context;
+	
+	tab = gtranslator_window_get_active_tab (window);
+	context = GTK_WIDGET (gtranslator_tab_get_context_panel (tab));
+	
+	gtranslator_tab_show_lateral_panel_widget (tab, context);
+}
+
+void
+gtranslator_actions_view_translation_memory (GtkAction *action,
+					     GtranslatorWindow *window)
+{
+	GtranslatorTab *tab;
+	GtkWidget *tm_ui;
+	
+	tab = gtranslator_window_get_active_tab (window);
+	tm_ui = GTK_WIDGET (gtranslator_tab_get_translation_memory_ui (tab));
+	
+	gtranslator_tab_show_lateral_panel_widget (tab, tm_ui);
+}

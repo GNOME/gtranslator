@@ -75,6 +75,8 @@ sync_name (GtranslatorPo *po,
 	GtkWidget *ebox;
 	gchar *tooltip;
 	GtranslatorTab *tab;
+	GFile *location;
+	gchar *path;
 	
 	label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label-ebox"));
@@ -84,11 +86,17 @@ sync_name (GtranslatorPo *po,
 	g_return_if_fail (str != NULL);
 	
 	gtk_label_set_text (GTK_LABEL (label), str);
-	
+
+	location = gtranslator_po_get_location (po);
+	path = g_file_get_path (location);
+	g_object_unref (location);
+
 	tooltip = g_strdup_printf (_("<b>Path:</b> %s"),
-				   gtranslator_po_get_filename (po));
+				   path);
+	
 	gtk_widget_set_tooltip_markup (ebox, tooltip);
 	
+	g_free (path);
 	g_free (tooltip);
 	g_free (str);
 }
@@ -195,6 +203,11 @@ gtranslator_notebook_init (GtranslatorNotebook *notebook)
 static void
 gtranslator_notebook_finalize (GObject *object)
 {
+	GtranslatorNotebook *notebook = GTR_NOTEBOOK (object);
+	
+	if (notebook->priv->pages)
+		g_list_free (notebook->priv->pages);
+	
 	G_OBJECT_CLASS (gtranslator_notebook_parent_class)->finalize (object);
 }
 
@@ -221,12 +234,26 @@ gtranslator_notebook_class_init (GtranslatorNotebookClass *klass)
 
 /***************************** Public funcs ***********************************/
 
+/**
+ * gtranslator_notebook_new:
+ * 
+ * Creates a new #GtranslatorNotebook.
+ * 
+ * Returns: a new #GtranslatorNotebook object
+ */
 GtkWidget *
 gtranslator_notebook_new()
 {
 	return GTK_WIDGET(g_object_new(GTR_TYPE_NOTEBOOK, NULL));
 }
 
+/**
+ * gtranslator_notebook_add_page:
+ * @notebook: a #GtranslatorNotebook
+ * @tab: a #GtranslatorTab
+ * 
+ * Adds a new #GtranslatorTab to @notebook.
+ */
 void
 gtranslator_notebook_add_page (GtranslatorNotebook *notebook,
 			       GtranslatorTab *tab)
@@ -239,7 +266,7 @@ gtranslator_notebook_add_page (GtranslatorNotebook *notebook,
 	g_return_if_fail (GTR_IS_TAB (tab));
 	
 	po = gtranslator_tab_get_po (tab);
-	
+
 	label = build_tab_label (notebook, tab);
 
 	sync_name (po, NULL, label);
@@ -253,8 +280,48 @@ gtranslator_notebook_add_page (GtranslatorNotebook *notebook,
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
 				  GTK_WIDGET (tab), label);
 	priv->pages = g_list_append (priv->pages, tab);
+	
+	if (g_list_length (notebook->priv->pages) == 1)
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+	else
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 }
 
+/**
+ * gtranslator_notebook_remove_page:
+ * @notebook: a #GtranslatorNotebook
+ * @page_num: the index of a notebook page, starting from 0.
+ *
+ * Removes a page from the notebook given its index in the notebook.
+ */
+void
+gtranslator_notebook_remove_page (GtranslatorNotebook *notebook,
+				  gint page_num)
+{
+	GtkWidget *tab;
+	
+	g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
+	
+	tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), page_num);
+	
+	if (page_num != -1)
+		gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), page_num);
+	
+	notebook->priv->pages = g_list_remove (notebook->priv->pages,
+					       tab);
+	
+	if (g_list_length (notebook->priv->pages) == 1)
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+}
+
+/**
+ * gtranslator_notebook_get_page:
+ * @notebook: a #GtranslatorNotebook
+ * 
+ * Gets the selected page in the #GtranslatorNotebook.
+ * 
+ * Returns: the selected page in the @notebook
+ */
 GtranslatorTab *
 gtranslator_notebook_get_page(GtranslatorNotebook *notebook)
 {
@@ -264,5 +331,3 @@ gtranslator_notebook_get_page(GtranslatorNotebook *notebook)
 	
 	return GTR_TAB(gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), num));
 }
-
-

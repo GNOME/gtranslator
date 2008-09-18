@@ -4,7 +4,7 @@ INCLUDES =                                                      \
         -I$(top_srcdir)/src                                     \
         -I$(top_builddir)/src                                   \
 	-I$(top_srcdir)/src/plugin-system			\
-	-DDATADIR=\""$(pkgdatadir)"\"				\
+	-DPKGDATADIR=\""$(pkgdatadir)"\"			\
 	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"	\
         $(GTRANSLATOR_CFLAGS)                                   \
         $(WARN_CFLAGS)                                          \
@@ -27,7 +27,11 @@ libdialogs_la_SOURCES = \
 	comment-dialog.c \
 	comment-dialog.h \
 	profile-dialog.c \
-	profile-dialog.h
+	profile-dialog.h \
+	assistant.c \
+	assistant.h \
+	jump-dialog.c \
+	jump-dialog.h
 
 gladedir = $(pkgdatadir)
 
@@ -36,7 +40,8 @@ glade_DATA =  \
 		search-dialog.glade \
 		header-dialog.glade \
 		comment-dialog.glade \
-		profile-dialog.glade
+		profile-dialog.glade \
+		jump-dialog.glade
 
 EXTRA_DIST = \
 		$(glade_DATA)

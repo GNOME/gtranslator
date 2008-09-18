@@ -26,7 +26,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugin-manager.c 6079 2008-01-12 20:18:55Z sdeburca $
+ * $Id: plugin-manager.c 6406 2008-08-13 20:04:04Z pborelli $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -36,13 +36,12 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
 
 #include "plugin-manager.h"
 #include "utils.h"
 #include "plugins-engine.h"
 #include "plugin.h"
-//#include "gtranslator-debug.h"
+#include "debug.h"
 
 enum
 {
@@ -104,7 +103,7 @@ about_button_cb (GtkWidget          *button,
 		gtk_widget_destroy (pm->priv->about);
 
 	pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
-		"name", gtranslator_plugin_info_get_name (info),
+		"program-name", gtranslator_plugin_info_get_name (info),
 		"copyright", gtranslator_plugin_info_get_copyright (info),
 		"authors", gtranslator_plugin_info_get_authors (info),
 		"comments", gtranslator_plugin_info_get_description (info),
@@ -142,7 +141,7 @@ configure_button_cb (GtkWidget          *button,
 
 	g_return_if_fail (info != NULL);
 
-	g_message( "Configuring: %s\n", 
+	DEBUG_PRINT ( "Configuring: %s\n", 
 			     gtranslator_plugin_info_get_name (info));
 
 	toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm)));
@@ -150,7 +149,7 @@ configure_button_cb (GtkWidget          *button,
 	gtranslator_plugins_engine_configure_plugin (pm->priv->engine,
 					       info, toplevel);
 
-	g_message( "Done");	
+	DEBUG_PRINT ( "Done");	
 }
 
 static void
@@ -336,7 +335,7 @@ plugin_manager_set_active (GtranslatorPluginManager *pm,
 	{
 		/* activate the plugin */
 		if (!gtranslator_plugins_engine_activate_plugin (pm->priv->engine, info)) {
-			g_message( "Could not activate %s.\n", 
+			DEBUG_PRINT ( "Could not activate %s.\n", 
 					     gtranslator_plugin_info_get_name (info));
 
 			res = FALSE;
@@ -346,7 +345,7 @@ plugin_manager_set_active (GtranslatorPluginManager *pm,
 	{
 		/* deactivate the plugin */
 		if (!gtranslator_plugins_engine_deactivate_plugin (pm->priv->engine, info)) {
-			g_message( "Could not deactivate %s.\n", 
+			DEBUG_PRINT ( "Could not deactivate %s.\n", 
 					     gtranslator_plugin_info_get_name (info));
 
 			res = FALSE;
