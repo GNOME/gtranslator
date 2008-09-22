@@ -303,6 +303,7 @@ plugins/dictionary/Makefile
 plugins/fullscreen/Makefile
 plugins/insert-tags/Makefile
 plugins/open-tran/Makefile
+plugins/source-view/Makefile
 src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile

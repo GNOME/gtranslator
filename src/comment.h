@@ -71,6 +71,8 @@ GtkWidget	*gtranslator_comment_panel_new	           (GtkWidget *tab);
 
 void             gtranslator_comment_panel_set_comments    (GtranslatorCommentPanel *panel,
 							    const gchar *comments);
+							    
+GtkTextView     *gtranslator_comment_panel_get_extracted_text_view (GtranslatorCommentPanel *panel);
 
 G_END_DECLS
 
