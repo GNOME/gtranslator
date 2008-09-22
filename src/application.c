@@ -47,7 +47,7 @@ struct _GtranslatorApplicationPrivate
         GList *profiles;
         GtranslatorProfile *active_profile;
 	
-  GtranslatorPreferencesDialog *preferences_dialog;
+        GtranslatorPreferencesDialog *preferences_dialog;
 
 	gchar *toolbars_file;
 	EggToolbarsModel *toolbars_model;
@@ -405,6 +405,70 @@ gtranslator_application_get_windows (GtranslatorApplication *app)
 		
 	return app->priv->windows;
 }
+
+/**
+ * gtranslator_application_get_active_profile:
+ * @app: a #GtranslatorApplication
+ * 
+ * Return value: the active #GtranslatorProfile
+ **/
+GtranslatorProfile *
+gtranslator_application_get_active_profile (GtranslatorApplication *app)
+{
+	return app->priv->active_profile;
+}
+
+/**
+ * gtranslator_application_set_profiles:
+ * @app: a #GtranslatorApplication
+ * @profiles: a #GList
+ *
+ **/
+void
+gtranslator_application_set_active_profile (GtranslatorApplication *app,
+					    GtranslatorProfile *profile) {
+  app->priv->active_profile = profile;
+}
+
+/**
+ * gtranslator_application_get_profiles:
+ * @app: a #GtranslatorApplication
+ * 
+ * Return value: a list of all profiles.
+ **/
+GList *
+gtranslator_application_get_profiles (GtranslatorApplication *app)
+{
+	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+
+	return app->priv->profiles;
+}
+
+/**
+ * gtranslator_application_set_profiles:
+ * @app: a #GtranslatorApplication
+ * @profiles: a #GList
+ *
+ **/
+void
+gtranslator_application_set_profiles (GtranslatorApplication *app, 
+				      GList *profiles) {
+   app->priv->profiles = profiles;   
+}
+
+GtranslatorPreferencesDialog *
+gtranslator_application_get_preferences_dialog (GtranslatorApplication *app)
+{
+  return app->priv->preferences_dialog;
+}
+
+void
+gtranslator_application_set_preferences_dialog (GtranslatorApplication *app,
+						GtranslatorPreferencesDialog *dlg)
+{
+  app->priv->preferences_dialog = dlg;
+}
+
 
 /**
  * gtranslator_application_register_icon:
