@@ -199,7 +199,7 @@ parse_list (GtranslatorWindow *window)
 					      (const gchar *)l->data);
 		
 		gtk_menu_item_set_accel_path (GTK_MENU_ITEM (menuitem), accel_path);
-		gtk_accel_map_add_entry (accel_path, i+48, GDK_CONTROL_MASK);
+		gtk_accel_map_add_entry (accel_path, i+48, GDK_CONTROL_MASK | GDK_MOD1_MASK);
 
 		g_free (accel_path);
 		
