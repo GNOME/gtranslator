@@ -194,6 +194,8 @@ gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine *engine)
 		gtranslator_plugins_engine_load_dir (engine, pdirs[i], active_plugins);
 
 	g_strfreev (pdirs);
+	g_list_foreach (active_plugins, (GFunc) g_free, NULL);
+	g_list_free (active_plugins);
 }
 
 static void
