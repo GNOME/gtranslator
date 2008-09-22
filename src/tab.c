@@ -69,11 +69,13 @@ struct _GtranslatorTabPrivate
 	GtkWidget *message_area;
 	
 	/*Original text*/
+        GtkWidget *msgid_hbox; 
 	GtkWidget *text_notebook;
 	GtkWidget *text_msgid;
 	GtkWidget *text_msgid_plural;
 	
 	/*Translated text*/
+        GtkWidget *msgstr_hbox;
 	GtkWidget *trans_notebook;
 	GtkWidget *trans_msgstr[MAX_PLURALS];
 	
@@ -509,6 +511,8 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	GtkWidget *image;
 	GtkWidget *vertical_box;
 	GtkWidget *label_widget;
+	GtkWidget *msgid_label;
+	GtkWidget *msgstr_label;
 	GtkWidget *notebook, *tm_layout, *tm, *comments_label, *tm_label, *scroll;
 	GtranslatorTabPrivate *priv = tab->priv;
 	
@@ -594,6 +598,17 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	/*
 	 * Orignal text widgets
 	 */
+	priv->msgid_hbox = gtk_hbox_new (FALSE, 0);
+	gtk_widget_show (priv->msgid_hbox);
+	
+	msgid_label = gtk_label_new (NULL);
+	gtk_label_set_markup (GTK_LABEL (msgid_label),
+			      "<b>Original Text:</b>");
+	gtk_misc_set_padding (GTK_MISC (msgid_label), 0, 5);
+	gtk_widget_show (msgid_label);
+
+	gtk_box_pack_start(GTK_BOX(priv->msgid_hbox), msgid_label, FALSE, FALSE, 0);
+
 	priv->text_notebook = gtk_notebook_new();
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(priv->text_notebook), FALSE);
 	gtk_widget_show (priv->text_notebook);
@@ -605,16 +620,30 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 							      priv->text_notebook,
 							      FALSE);
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(priv->text_msgid_plural), FALSE);
+
+	gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgid_hbox, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(vertical_box), priv->text_notebook, TRUE, TRUE, 0);
 
 	
 	/*
 	 * Translation widgets
 	 */
+	priv->msgstr_hbox = gtk_hbox_new (FALSE, 0);
+	gtk_widget_show (priv->msgstr_hbox);
+	
+	msgstr_label = gtk_label_new (NULL);
+	gtk_label_set_markup_with_mnemonic (GTK_LABEL (msgstr_label),
+					    "<b>Tran_slated Text:</b>");
+	gtk_misc_set_padding (GTK_MISC (msgstr_label), 0, 5);
+	gtk_widget_show (msgstr_label);
+
+	gtk_box_pack_start(GTK_BOX(priv->msgstr_hbox), msgstr_label, FALSE, FALSE, 0);
+
 	priv->trans_notebook = gtk_notebook_new();
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(priv->trans_notebook), FALSE);
 	gtk_widget_show (priv->trans_notebook);
 
+	gtk_box_pack_start(GTK_BOX(vertical_box), priv->msgstr_hbox, FALSE, FALSE, 0);	
 	gtk_box_pack_start(GTK_BOX(vertical_box), priv->trans_notebook, TRUE, TRUE, 0);	
 
 	gtk_paned_pack1(GTK_PANED(priv->comment_pane), vertical_box, FALSE, FALSE);
