@@ -581,8 +581,23 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	gchar *year;
 	gchar *new_date;
 	gchar *aux;
+	gchar *aux2;
+	gchar *comments;
+	gchar **comments_lines;
+	gchar **comments_translator_values;
 
 	gboolean take_my_options;
+
+	gint i = 0;
+	gint j;
+	gint k = 0;
+	gint l;
+
+	gchar *new_comments = "";
+	gchar *old_line;
+	gchar *line = "";
+	gchar *comp_year;
+	gchar *line_without_dot;
 
 	take_my_options = gtranslator_prefs_manager_get_take_my_options ();
 
@@ -639,25 +654,77 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	gtranslator_header_set_po_date (header, new_date);
 
 	g_free (new_date);
-	
+
 	/*
          * Update the header's comment
          */
-        aux = g_strconcat(gtranslator_header_get_translator(header), " ", "<", 
+	comments = po_message_comments (message);
+	comments_lines = g_strsplit (comments, "\n", -1);
+	
+	/*
+	 * Searching if the current translator is in comments.
+	 */
+	while (comments_lines[i] != NULL) {
+	  if (g_str_has_prefix (comments_lines[i], prev_translator)) {
+	    comments_translator_values = g_strsplit (comments_lines[i], ",", -1);
+	    j = i;
+	  }
+	  i++;
+	}
+	
+	aux = g_strconcat(gtranslator_header_get_translator(header), " ", "<",
 			  gtranslator_header_get_tr_email(header), ">", NULL);
+	
+	comp_year = g_strconcat (" ", year, "\.", NULL);
+
+	/*
+	 * Current translator is already in comments but its last year < current year.
+	 */
+	if (!strcmp (prev_translator, aux) && 
+	    (strcmp(comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year))) {
+	  
+	  /*
+	   * Current translator is in the last line in comments.
+	   */
+	  if (j == g_strv_length (comments_lines)-1) {
+	    aux2 = g_strconcat (comments, ", ", year, ".", NULL);
+	    po_message_set_comments (message, aux2);
+	    g_free (aux2);
+	  }else {
+	    line_without_dot = g_utf8_strncpy (line_without_dot, comments_lines[j], strlen(comments_lines[j])-1);
+	    line = g_strconcat (line_without_dot, ", ", year, ".", NULL);
+	   
+	    for (l=j; l<(g_strv_length (comments_lines)); l++) {
+	      comments_lines[l] = comments_lines[l+1];
+	    }
+	    
+	    comments_lines[g_strv_length (comments_lines)-1] = line;
+	    while (comments_lines[k] != NULL) {
+	      new_comments = g_strconcat (new_comments, comments_lines[k], "\n", NULL);
+	      k++;
+	    }
+	    po_message_set_comments (message, new_comments);
+	    
+	    g_free (line_without_dot);
+	    g_free (line);
+	    g_free (new_comments);
+	  }
+	}    
+
+	/*
+	 * Current translator is not in the comments.
+	 */
 	if (strcmp(prev_translator, aux))
-	{
-		gchar *aux2;
-		
-		header_comment = po_message_comments (message);
+	  {
+	  header_comment = po_message_comments (message);
 		aux2 = g_strconcat(header_comment, gtranslator_header_get_translator(header), " ", "<",
-				   gtranslator_header_get_tr_email(header), ">", ",", " ", year, NULL);
+				   gtranslator_header_get_tr_email(header), ">", ",", " ", year, ".", NULL);
 		
 		po_message_set_comments (message, aux2);
 		g_free (aux2);
 	}
 	g_free (aux);
-
+	
 	/*
          * Write the header's fields
          */

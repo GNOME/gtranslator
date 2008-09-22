@@ -1,4 +1,16 @@
-2008-08-05  Pablo Sanxiao  <psanxiao@gamil.com>
+2008-08-06  Pablo Sanxiao  <psanxiao@gamil.com>
+
+	* dialogs/header-dialog:
+	(save_header):
+	Removed unnecessary call to gtranslator_po_save_header_in_msg, only
+	should be called in gtranslator_po_save.
+	* po.c:
+	(gtranslator_po_save_header_in_msg):
+	Fixed bug in updtate comments. Now if the current translator
+	already exists in comments update the year correctly if it
+	is necessary.
+	
+2008-08-05  Pablo Sanxiao  <psanxiao@gmail.com>
 
 	Minor Fixes: cleanning warnings.
 	
@@ -10,7 +22,7 @@
 	(gtranslator_tab_class_init):
 	Added Comment button when there is a custom comment on the message.
 
-2008-08-04  Pablo Sanxiao  <psanxiao@gamil.com>
+2008-08-04  Pablo Sanxiao  <psanxiao@gmail.com>
 
 	* translation-memory/translation-memory-ui.c:
 	Removed comment.h dependency because it isn't necessary really.
@@ -23,7 +35,7 @@
 	(gtranslator_tab_draw):
 	Added labels to Original and Translated text boxes.:src/ChangeLog
 
-2008-08-04  Ignacio Casal Quinteiro  <nacho@ansalon>
+2008-08-04  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* po.c (po_file_is_empty), (gtranslator_po_parse):
 	* po.h:

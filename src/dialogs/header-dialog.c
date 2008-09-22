@@ -214,7 +214,6 @@ static void save_header(GtranslatorPo *po)
 {
         GtranslatorHeader *header;
 
-	gtranslator_po_save_header_in_msg (po);
 	header = gtranslator_po_get_header (po);
 
         if (gtranslator_header_get_header_changed (header))
