@@ -43,6 +43,8 @@ struct _GtranslatorTranslationMemoryIface {
 			       gsize omits);
 	void (*set_max_delta) (GtranslatorTranslationMemory *obj,
 			       gsize delta);
+	void (*set_max_items) (GtranslatorTranslationMemory *obj,
+			       gint items);
 };
 
 typedef struct _GtranslatorTranslationMemoryMatch GtranslatorTranslationMemoryMatch;
@@ -65,6 +67,9 @@ void      gtranslator_translation_memory_set_max_omits    (GtranslatorTranslatio
 
 void      gtranslator_translation_memory_set_max_delta    (GtranslatorTranslationMemory *obj,
 							   gsize delta);
+
+void      gtranslator_translation_memory_set_max_items    (GtranslatorTranslationMemory *obj,
+							   gint items);
 
 G_END_DECLS
 

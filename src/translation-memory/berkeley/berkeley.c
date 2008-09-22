@@ -57,6 +57,7 @@ struct _GtranslatorBerkeleyPrivate
 	
 	gsize max_omits;
 	gsize max_delta;
+	gint max_items;
 };
 
 static gboolean
@@ -503,7 +504,7 @@ gtranslator_berkeley_lookup (GtranslatorTranslationMemory *tm,
 		
 		if (array != NULL)
 		{
-			while (i < array->len -1)
+			while (i < array->len -1 && i < ber->priv->max_items)
 			{
 				g_hash_table_insert (hash, g_ptr_array_index (array, i),
 						     GINT_TO_POINTER (100));
@@ -520,9 +521,9 @@ gtranslator_berkeley_lookup (GtranslatorTranslationMemory *tm,
 	// MAX_DELTA is max difference in sentences lengths).
 	// Start with best matches first, continue to worse ones.
 	words = gtranslator_utils_split_string_in_words (phrase);
-	for (omits = 0; omits <= ber->priv->max_omits; omits++)
+	for (omits = 0; omits <= ber->priv->max_omits && g_hash_table_size (hash) < ber->priv->max_items; omits++)
 	{
-		for (delta = 0; delta <= ber->priv->max_delta; delta++)
+		for (delta = 0; delta <= ber->priv->max_delta && g_hash_table_size (hash) < ber->priv->max_items; delta++)
 		{
 			look_fuzzy (ber, words, &hash, omits, delta);
 		}
@@ -563,12 +564,22 @@ gtranslator_berkeley_set_max_delta (GtranslatorTranslationMemory *tm,
 }
 
 static void
+gtranslator_berkeley_set_max_items (GtranslatorTranslationMemory *tm,
+				    gint items)
+{
+	GtranslatorBerkeley *ber = GTR_BERKELEY (tm);
+	
+	ber->priv->max_items = items;
+}
+
+static void
 gtranslator_translation_memory_iface_init (GtranslatorTranslationMemoryIface *iface)
 {
 	iface->store = gtranslator_berkeley_store;
 	iface->lookup = gtranslator_berkeley_lookup;
 	iface->set_max_omits = gtranslator_berkeley_set_max_omits;
 	iface->set_max_delta = gtranslator_berkeley_set_max_delta;
+	iface->set_max_items = gtranslator_berkeley_set_max_items;
 }
 
 static void
@@ -581,6 +592,7 @@ gtranslator_berkeley_init (GtranslatorBerkeley *pf)
 	pf->priv->words = gtranslator_db_words_new ();
 	pf->priv->max_omits = 0;
 	pf->priv->max_delta = 0;
+	pf->priv->max_items = 0;
 }
 
 static void

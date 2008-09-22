@@ -223,6 +223,8 @@ gtranslator_application_init (GtranslatorApplication *application)
  						      gtranslator_prefs_manager_get_missing_words ());
  	gtranslator_translation_memory_set_max_delta (application->priv->tm,
 						      gtranslator_prefs_manager_get_sentence_length ());
+	gtranslator_translation_memory_set_max_items (application->priv->tm,
+						      10);
 }
 
 

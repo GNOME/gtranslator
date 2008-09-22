@@ -1,5 +1,20 @@
 2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* application.c (gtranslator_application_init):
+	* translation-memory/berkeley/berkeley.c
+	(gtranslator_berkeley_lookup),
+	(gtranslator_berkeley_set_max_items),
+	(gtranslator_translation_memory_iface_init),
+	(gtranslator_berkeley_init):
+	* translation-memory/translation-memory.c
+	(gtranslator_translation_memory_set_max_items),
+	(gtranslator_translation_memory_set_max_items_default),
+	(gtranslator_translation_memory_base_init):
+	* translation-memory/translation-memory.h:
+	Added set_max_default funcs to get less items when searching in database.
+
+2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* dialogs/jump-dialog.c (dialog_response_handler),
 	(gtranslator_jump_dialog_init), (gtranslator_jump_dialog_finalize),
 	(gtranslator_jump_dialog_class_init),

@@ -112,6 +112,28 @@ gtranslator_translation_memory_set_max_delta_default (GtranslatorTranslationMemo
 	g_return_if_reached ();
 }
 
+/**
+ * gtranslator_translation_memory_set_max_items:
+ * @items: the max item to return in lookup
+ *
+ * Sets the number of item to return in gtranslator_translation_memory_lookup().
+ */
+void
+gtranslator_translation_memory_set_max_items (GtranslatorTranslationMemory *obj,
+					      gint items)
+{
+	g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
+	GTR_TRANSLATION_MEMORY_GET_IFACE (obj)->set_max_items (obj, items);
+}
+
+/* Default implementation */
+static void
+gtranslator_translation_memory_set_max_items_default (GtranslatorTranslationMemory *obj,
+						      gint items)
+{
+	g_return_if_reached ();
+}
+
 static void
 gtranslator_translation_memory_base_init (GtranslatorTranslationMemoryIface* klass)
 {
@@ -121,6 +143,7 @@ gtranslator_translation_memory_base_init (GtranslatorTranslationMemoryIface* kla
 	klass->lookup = gtranslator_translation_memory_lookup_default;
 	klass->set_max_omits = gtranslator_translation_memory_set_max_omits_default;
 	klass->set_max_delta = gtranslator_translation_memory_set_max_delta_default;
+	klass->set_max_items = gtranslator_translation_memory_set_max_items_default;
 	
 	if (!initialized) {
 
