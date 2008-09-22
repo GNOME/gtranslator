@@ -1,4 +1,31 @@
-2008-07-30  Pablos Sanxiao <psanxiao@gmail.com>
+2008-07-30  Pablo Sanxiao <psanxiao@gmail.com>
+
+	* translation-memory/Makefile.am:
+	Added translation-memory-ui.{ch}.
+	* translation-memory/translation-memory-ui.{ch}:
+	Implemented translation memory ui, including creating 
+	the treeview and model in order to show the options and
+	its handlers.
+	* dialogs/preferences-dialog.glade:
+	Added translation memory tab.
+	* dialogs/preferences-dialog.{ch}:
+	Added support to configurate and create the translation memory
+	from one directory parsing the files into this directory
+	and adding the translated messages to translation memorye
+	database.
+	* tab.c:
+	(gtranslator_tab_draw):
+	Added notebook to show the translation memory and comments in
+	diferent tabs.
+	* window.c:
+	Added translation memory to Edit menu.
+	* msg.{ch}:
+	Added a tm list to GtranslatorMsg including methods get
+	and set.
+
+	Added the translation memory ui.
+	
+2008-07-30  Pablo Sanxiao <psanxiao@gmail.com>
 
 	* utils.{ch}:
 	Added functions in order to get the current date,
