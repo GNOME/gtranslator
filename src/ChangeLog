@@ -1,5 +1,35 @@
 2008-08-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* actions-edit.c (gtranslator_message_copy_to_translation):
+	* actions-file.c (gtranslator_open):
+	* actions-go.c (gtranslator_message_go_to_first),
+	(gtranslator_message_go_to_previous),
+	(gtranslator_message_go_to_next), (gtranslator_message_go_to_last),
+	(gtranslator_message_go_to_next_fuzzy),
+	(gtranslator_message_go_to_prev_fuzzy),
+	(gtranslator_message_go_to_next_untranslated),
+	(gtranslator_message_go_to_prev_untranslated):
+	* actions-search.c (find_in_list), (do_replace_all):
+	* dialogs/assistant.c (on_assistant_apply),
+	(gtranslator_assistant_class_init):
+	* message-table.c (gtranslator_message_table_selection_changed),
+	(sort_message_list):
+	* tab.c (gtranslator_tab_message_go_to),
+	(gtranslator_tab_go_to_next), (gtranslator_tab_go_to_prev),
+	(gtranslator_tab_go_to_first), (gtranslator_tab_go_to_last),
+	(gtranslator_tab_go_to_next_fuzzy),
+	(gtranslator_tab_go_to_prev_fuzzy),
+	(gtranslator_tab_go_to_next_untrans),
+	(gtranslator_tab_go_to_prev_untrans):
+	* tab.h:
+	Now actions-go.c is not managing directly the list, it calls the respective
+	funcs in tab.ch.
+	Now when you change within messages and the current message has plurals
+	it is going to change within the plural tabs instead of changing to the
+	next message.
+
+2008-08-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* dialogs/assistant.c (on_assistant_close), (add_to_database),
 	(destroy_idle_data), (on_assistant_apply), (on_assistant_prepare),
 	(on_profile1_entry_changed), (on_profile2_entry_changed),

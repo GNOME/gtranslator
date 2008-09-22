@@ -73,6 +73,13 @@ struct _GtranslatorTabClass
 					    GtranslatorMsg *msg);
 };
 
+typedef enum
+{
+	GTR_TAB_MOVE_NONE,
+	GTR_TAB_MOVE_NEXT,
+	GTR_TAB_MOVE_PREV
+}GtranslatorTabMove;
+
 /*
  * Public methods
  */
@@ -104,7 +111,8 @@ gchar                 *gtranslator_tab_get_name            (GtranslatorTab *tab)
 
 void                   gtranslator_tab_message_go_to       (GtranslatorTab *tab,
 							    GList * to_go,
-							    gboolean searching);
+							    gboolean searching,
+							    GtranslatorTabMove move);
 							    
 GtranslatorTab        *gtranslator_tab_get_from_document   (GtranslatorPo *po);
 
@@ -133,6 +141,22 @@ void                   gtranslator_tab_clear_msgstr_views  (GtranslatorTab *tab)
 void                   gtranslator_tab_block_movement      (GtranslatorTab *tab);
 
 void                   gtranslator_tab_unblock_movement    (GtranslatorTab *tab);
+
+void                   gtranslator_tab_go_to_next          (GtranslatorTab *tab);
+
+void                   gtranslator_tab_go_to_prev          (GtranslatorTab *tab);
+
+void                   gtranslator_tab_go_to_first         (GtranslatorTab *tab);
+
+void                   gtranslator_tab_go_to_last          (GtranslatorTab *tab);
+
+gboolean               gtranslator_tab_go_to_next_fuzzy    (GtranslatorTab *tab);
+
+gboolean               gtranslator_tab_go_to_prev_fuzzy    (GtranslatorTab *tab);
+
+gboolean               gtranslator_tab_go_to_next_untrans  (GtranslatorTab *tab);
+
+gboolean               gtranslator_tab_go_to_prev_untrans  (GtranslatorTab *tab);
 							    
 gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 

@@ -76,12 +76,6 @@ typedef struct _IdleData
 	GtkWindow *parent;
 }IdleData;
 
-static void
-on_assistant_close (GtkAssistant* assistant)
-{
-	gtk_widget_destroy (GTK_WIDGET (assistant));
-}
-
 static gboolean
 add_to_database (gpointer data_pointer)
 {
@@ -206,7 +200,6 @@ on_assistant_apply (GtkAssistant *assistant)
 	
 	gtk_widget_show (as->priv->add_db_progressbar);
 	
-	g_signal_handlers_block_by_func (assistant, on_assistant_close, NULL);
 	g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
 			 (GSourceFunc)add_to_database,
 			 data,
@@ -756,7 +749,6 @@ gtranslator_assistant_class_init (GtranslatorAssistantClass *klass)
 	assistant_class->prepare = on_assistant_prepare;
 	assistant_class->apply = on_assistant_apply;
 	assistant_class->cancel = on_assistant_cancel;
-	//assistant_class->close = on_assistant_cancel;
 }
 
 void

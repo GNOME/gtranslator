@@ -153,7 +153,7 @@ gtranslator_message_copy_to_translation(GtkAction *action,
 	if(gtranslator_msg_is_fuzzy(msg->data) && gtranslator_prefs_manager_get_unmark_fuzzy())
 		gtranslator_msg_set_fuzzy(msg->data, FALSE);
 		
-	gtranslator_tab_message_go_to(current, msg, FALSE);
+	gtranslator_tab_message_go_to(current, msg, FALSE, GTR_TAB_MOVE_NONE);
 	
 	/*
 	 * Emit that message was changed.

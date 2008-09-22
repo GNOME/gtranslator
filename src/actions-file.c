@@ -93,7 +93,7 @@ gtranslator_open(const gchar *filename,
 	 * Show the current message.
 	 */
 	current = gtranslator_po_get_current_message(po);
-	gtranslator_tab_message_go_to (tab, current, FALSE);
+	gtranslator_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
 	
 	/*
 	 * Grab the focus

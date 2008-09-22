@@ -288,7 +288,7 @@ find_in_list(GtranslatorWindow *window,
 				}
 				else l = l->prev;
 			}
-			gtranslator_tab_message_go_to(tab, l, TRUE);
+			gtranslator_tab_message_go_to(tab, l, TRUE, GTR_TAB_MOVE_NONE);
 		}
 		else{
 			while(viewsaux != NULL)
@@ -298,7 +298,7 @@ find_in_list(GtranslatorWindow *window,
 				found = run_search(GTR_VIEW(viewsaux->data), found);
 				if(found)
 				{
-					gtranslator_tab_message_go_to (tab, l, FALSE);
+					gtranslator_tab_message_go_to (tab, l, FALSE, GTR_TAB_MOVE_NONE);
 					run_search (GTR_VIEW (viewsaux->data), aux);
 					return TRUE;
 				}
@@ -323,7 +323,7 @@ find_in_list(GtranslatorWindow *window,
 				}
 				else l = l->prev;
 			}
-			gtranslator_tab_message_go_to(tab, l, TRUE);
+			gtranslator_tab_message_go_to(tab, l, TRUE, GTR_TAB_MOVE_NONE);
 			viewsaux = views;
 		}
 	}while(l != current);
@@ -544,10 +544,10 @@ do_replace_all (GtranslatorSearchDialog *dialog,
 		if(aux->next == NULL)
 			aux = g_list_first(aux);
 		else aux = aux->next;
-		gtranslator_tab_message_go_to(tab, aux, TRUE);
+		gtranslator_tab_message_go_to(tab, aux, TRUE, GTR_TAB_MOVE_NONE);
 	}while(current_msg != aux);
 
-	gtranslator_tab_message_go_to(tab, aux, FALSE);
+	gtranslator_tab_message_go_to(tab, aux, FALSE, GTR_TAB_MOVE_NONE);
 	
 	if (count > 0)
 	{

@@ -1100,9 +1100,10 @@ gtranslator_tab_get_name (GtranslatorTab *tab)
  * in the #GtranslatorView.
 **/
 void 
-gtranslator_tab_message_go_to(GtranslatorTab *tab,
-			      GList * to_go,
-			      gboolean searching)
+gtranslator_tab_message_go_to (GtranslatorTab *tab,
+			       GList * to_go,
+			       gboolean searching,
+			       GtranslatorTabMove move)
 {
 	GtranslatorPo *po;
 	GList *current_msg;
@@ -1125,7 +1126,50 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 	
 	if (!tab->priv->blocking || first_msg)
 	{
-		gtranslator_tab_show_message (tab, to_go->data);
+		gboolean plurals;
+		gint current_page, n_pages;
+		/*
+		 * If the current message is plural and we press next/prev
+		 * we have to change to the next/prev plural tab in case is not
+		 * the last
+		 * To implement that:
+		 * if the tabs are showed then we check if we want prev or 
+		 * next and then if we need to change the tab we change it 
+		 * in other case we show the message
+		 * 
+		 * I don't like too much this implementation so if anybody can
+		 * rewrite this is a better way would be great.
+		 */
+		plurals = gtk_notebook_get_show_tabs (GTK_NOTEBOOK (tab->priv->trans_notebook));
+		current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook));
+		n_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (tab->priv->trans_notebook));
+		if ((plurals == TRUE) && (move != GTR_TAB_MOVE_NONE))
+		{
+			if ((n_pages - 1) == current_page && move == GTR_TAB_MOVE_NEXT)
+			{
+				gtk_notebook_set_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook),
+							       0);
+				gtranslator_tab_show_message (tab, to_go->data);
+			}
+			else if (current_page == 0 && move == GTR_TAB_MOVE_PREV)
+			{
+				gtk_notebook_set_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook),
+							       n_pages - 1);
+				gtranslator_tab_show_message (tab, to_go->data);
+			}
+			else
+			{
+				if (move == GTR_TAB_MOVE_NEXT)
+					gtk_notebook_set_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook),
+								       current_page + 1);
+				else
+					gtk_notebook_set_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook),
+								       current_page - 1);
+				return;
+			}
+		}
+		else
+			gtranslator_tab_show_message (tab, to_go->data);
 		first_msg = FALSE;
 	}
 	else
@@ -1393,4 +1437,188 @@ gtranslator_tab_unblock_movement (GtranslatorTab *tab)
 	g_return_if_fail (GTR_IS_TAB (tab));
 	
 	tab->priv->blocking = FALSE;
+}
+
+/**
+ * gtranslator_tab_go_to_next:
+ * @tab: a #GtranslatorTab
+ *
+ * Moves to the next message or plural tab in case the message has plurals.
+ */
+void
+gtranslator_tab_go_to_next (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	gtranslator_tab_message_go_to (tab,
+				       g_list_next (gtranslator_po_get_current_message (po)),
+				       FALSE,
+				       GTR_TAB_MOVE_NEXT);
+}
+
+/**
+ * gtranslator_tab_go_to_prev:
+ * @tab: a #GtranslatorTab
+ *
+ * Moves to the previous message or plural tab in case the message has plurals.
+ */
+void
+gtranslator_tab_go_to_prev (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	gtranslator_tab_message_go_to (tab,
+				       g_list_previous (gtranslator_po_get_current_message (po)),
+				       FALSE,
+				       GTR_TAB_MOVE_PREV);
+}
+
+/**
+ * gtranslator_tab_go_to_first:
+ * @tab: a #GtranslatorTab
+ *
+ * Jumps to the first message.
+ */
+void
+gtranslator_tab_go_to_first (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	gtranslator_tab_message_go_to (tab,
+				       g_list_first (gtranslator_po_get_current_message (po)),
+				       FALSE,
+				       GTR_TAB_MOVE_NONE);
+}
+
+/**
+ * gtranslator_tab_go_to_last:
+ * @tab: a #GtranslatorTab 
+ *
+ * Jumps to the last message.
+ */
+void
+gtranslator_tab_go_to_last (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	gtranslator_tab_message_go_to (tab,
+				       g_list_last (gtranslator_po_get_current_message (po)),
+				       FALSE,
+				       GTR_TAB_MOVE_NONE);
+}
+
+/**
+ * gtranslator_tab_go_to_next_fuzzy:
+ * @tab: a #GtranslatorTab
+ *
+ * If there is a next fuzzy message it jumps to it.
+ *
+ * Returns: TRUE if there is a next fuzzy message.
+ */
+gboolean
+gtranslator_tab_go_to_next_fuzzy (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	GList *msg;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	msg = gtranslator_po_get_next_fuzzy (po);
+	if(msg != NULL)
+	{
+		gtranslator_tab_message_go_to (tab, msg, FALSE,
+					       GTR_TAB_MOVE_NONE);
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
+/**
+ * gtranslator_tab_go_to_prev_fuzzy:
+ * @tab: a #GtranslatorTab
+ *
+ * If there is a prev fuzzy message it jumps to it.
+ *
+ * Returns: TRUE if there is a prev fuzzy message.
+ */
+gboolean
+gtranslator_tab_go_to_prev_fuzzy (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	GList *msg;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	msg = gtranslator_po_get_prev_fuzzy (po);
+	if(msg != NULL)
+	{
+		gtranslator_tab_message_go_to (tab, msg, FALSE,
+					       GTR_TAB_MOVE_NONE);
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
+/**
+ * gtranslator_tab_go_to_next_untrans:
+ * @tab: a #GtranslatorTab
+ *
+ * If there is a next untranslated message it jumps to it.
+ *
+ * Returns: TRUE if there is a next untranslated message.
+ */
+gboolean
+gtranslator_tab_go_to_next_untrans (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	GList *msg;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	msg = gtranslator_po_get_next_untrans (po);
+	if(msg != NULL)
+	{
+		gtranslator_tab_message_go_to (tab, msg, FALSE,
+					       GTR_TAB_MOVE_NONE);
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
+/**
+ * gtranslator_tab_go_to_prev_untrans:
+ * @tab: a #GtranslatorTab
+ *
+ * If there is a prev untranslated message it jumps to it.
+ *
+ * Returns: TRUE if there is a prev untranslated message.
+ */
+gboolean
+gtranslator_tab_go_to_prev_untrans (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	GList *msg;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	msg = gtranslator_po_get_prev_untrans (po);
+	if(msg != NULL)
+	{
+		gtranslator_tab_message_go_to (tab, msg, FALSE,
+					       GTR_TAB_MOVE_NONE);
+		return TRUE;
+	}
+	
+	return FALSE;
 }
