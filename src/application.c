@@ -142,7 +142,8 @@ gtranslator_application_init (GtranslatorApplication *application)
 	priv->windows = NULL;
 	priv->last_dir = NULL;
 	priv->first_run = FALSE;
-	
+	priv->profiles = NULL;
+
 	/*
 	 * Creating config folder
 	 */

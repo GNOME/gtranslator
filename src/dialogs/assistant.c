@@ -22,6 +22,7 @@
 
 #include "application.h"
 #include "assistant.h"
+#include "profile.h"
 #include "../translation-memory/translation-memory.h"
 #include "utils.h"
 #include "window.h"
@@ -173,6 +174,12 @@ destroy_idle_data (gpointer data)
 }
 
 static void
+on_assistant_close (GtkAssistant *assistant) 
+{
+  gtk_widget_destroy (GTK_WIDGET (assistant));
+}
+
+static void
 on_assistant_apply (GtkAssistant *assistant)
 {
 	GFile *dir;
@@ -180,11 +187,57 @@ on_assistant_apply (GtkAssistant *assistant)
 	IdleData *data;
 	GtranslatorAssistant *as = GTR_ASSISTANT (assistant);
 	const gchar *po_name;
+	GtranslatorProfile *profile;
+	GList *profiles_list;
+	gulong close_signal_id;
+
+	profile = gtranslator_profile_new ();
+
+	gtranslator_profile_set_name (profile, 
+				      gtk_entry_get_text (GTK_ENTRY (as->priv->profile_name)));
+
+	gtranslator_profile_set_author_name (profile,
+					     gtk_entry_get_text (GTK_ENTRY (as->priv->name)));
 	
+	gtranslator_profile_set_author_email (profile,
+					      gtk_entry_get_text (GTK_ENTRY (as->priv->email)));
+					      
+	gtranslator_profile_set_language_name (profile,
+					       gtk_entry_get_text (GTK_ENTRY (as->priv->language)));
+
+	gtranslator_profile_set_language_code (profile,
+					       gtk_entry_get_text (GTK_ENTRY (as->priv->lang_code)));
+
+	gtranslator_profile_set_group_email (profile,
+					     gtk_entry_get_text (GTK_ENTRY (as->priv->team_email)));
+
+	gtranslator_profile_set_charset (profile,
+					 gtk_entry_get_text (GTK_ENTRY (as->priv->charset)));
+
+	gtranslator_profile_set_encoding (profile,
+					  gtk_entry_get_text (GTK_ENTRY (as->priv->trans_enc)));
+					       
+	gtranslator_profile_set_plurals (profile,
+					 gtk_entry_get_text (GTK_ENTRY (as->priv->plural_form)));
+
+	gtranslator_application_set_active_profile (GTR_APP, profile);
+	
+	profiles_list = gtranslator_application_get_profiles (GTR_APP);
+
+	gtranslator_application_set_profiles (GTR_APP,
+					      g_list_append (profiles_list, profile));
+
+	close_signal_id = g_signal_connect (as,
+					    "close",
+					    G_CALLBACK (on_assistant_close),
+					    NULL);
+
 	dir_name = gtk_entry_get_text (GTK_ENTRY (as->priv->path));
 	if (strcmp (dir_name, "") == 0)
-		return;
+	  return;
 	
+	g_signal_handler_block (as, close_signal_id);
+
 	data = g_new0 (IdleData, 1);
 	data->list = NULL;
 	
@@ -215,7 +268,7 @@ on_assistant_prepare (GtkAssistant *assistant,
 	GtranslatorAssistant *as = GTR_ASSISTANT (assistant);
 	gchar *string;
 	const gchar *database_path;
-	
+
 	if (page != as->priv->finish_box)
 		return;
 	
@@ -749,6 +802,7 @@ gtranslator_assistant_class_init (GtranslatorAssistantClass *klass)
 	assistant_class->prepare = on_assistant_prepare;
 	assistant_class->apply = on_assistant_apply;
 	assistant_class->cancel = on_assistant_cancel;
+	//assistant_class->close = on_assistant_close;
 }
 
 void

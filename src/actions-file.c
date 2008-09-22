@@ -700,6 +700,12 @@ gtranslator_file_quit (GtkAction *action,
 	if (g_file_query_exists (file, NULL)) {
 	  g_file_delete (file, NULL, NULL);
 	  gtranslator_profile_save_profiles_in_xml (filename);
+	} else {
+	  g_file_create (file,
+			 G_FILE_CREATE_NONE,
+			 NULL,
+			 NULL);
+	  gtranslator_profile_save_profiles_in_xml (filename);
 	}
 	
 	g_free (config_folder);
