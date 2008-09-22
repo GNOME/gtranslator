@@ -96,9 +96,11 @@ on_activate_item_cb (GtkMenuItem *menuitem,
   
   gtranslator_msg_set_msgstr (msg, data[index-1]);
 
+  gtk_text_buffer_begin_user_action (buffer);
   gtk_text_buffer_set_text (buffer,
 			    data[index-1],
-			    strlen (data[index-1]));
+			    -1);
+  gtk_text_buffer_end_user_action(buffer);
 
   gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
 }
@@ -223,7 +225,7 @@ showed_message_cb (GtranslatorTab *tab,
       if (j>10)
 	break;
 
-    }while (tm_list = g_list_next (tm_list));
+    }while ((tm_list = g_list_next (tm_list)));
     
     gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
   }
