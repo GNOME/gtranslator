@@ -26,7 +26,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugin-manager.c 6079 2008-01-12 20:18:55Z sdeburca $
+ * $Id: plugin-manager.c 6371 2008-08-09 13:43:02Z jessevdk $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -36,7 +36,6 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
 
 #include "plugin-manager.h"
 #include "utils.h"

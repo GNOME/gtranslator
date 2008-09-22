@@ -1,5 +1,28 @@
 2008-08-11  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* plugin-system/module.c (gtranslator_module_load),
+	(gtranslator_module_class_real_garbage_collect),
+	(gtranslator_module_finalize), (gtranslator_module_get_property),
+	(gtranslator_module_set_property), (gtranslator_module_class_init),
+	(gtranslator_module_class_garbage_collect),
+	(gtranslator_module_new_object), (gtranslator_module_get_path),
+	(gtranslator_module_get_module_name):
+	* plugin-system/module.h:
+	* plugin-system/plugin-info-priv.h:
+	* plugin-system/plugin-info.c (_gtranslator_plugin_info_new):
+	* plugin-system/plugin-info.h:
+	* plugin-system/plugin-manager.c:
+	* plugin-system/plugins-engine.c
+	(gtranslator_plugins_engine_load_dir),
+	(gtranslator_plugins_engine_garbage_collect),
+	(compare_plugin_info_and_name),
+	(gtranslator_plugins_engine_get_plugin_info), (load_plugin_module):
+	* plugin-system/plugins-engine.h:
+	* plugin-system/update-from-gedit.sh:
+	Synchronized with gedit.
+
+2008-08-11  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* dialogs/file-dialogs.c (gtranslator_file_chooser_new):
 	Changed filter pattern. (Fixes bug #547247)
 	Patch by Baris.

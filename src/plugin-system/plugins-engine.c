@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugins-engine.c 6052 2008-01-04 17:32:52Z sfre $
+ * $Id: plugins-engine.c 6376 2008-08-10 14:01:38Z pborelli $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -84,13 +84,6 @@ static void	gtranslator_plugins_engine_activate_plugin_real (GtranslatorPluginsE
 static void	gtranslator_plugins_engine_deactivate_plugin_real (GtranslatorPluginsEngine *engine,
 							     GtranslatorPluginInfo    *info);
 
-static gint
-compare_plugin_info (GtranslatorPluginInfo *info1,
-		     GtranslatorPluginInfo *info2)
-{
-	return strcmp (info1->module_name, info2->module_name);
-}
-
 static void
 gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 			       const gchar        *dir,
@@ -129,9 +122,7 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 
 			/* If a plugin with this name has already been loaded
 			 * drop this one (user plugins override system plugins) */
-			if (g_list_find_custom (engine->priv->plugin_list,
-						info,
-						(GCompareFunc)compare_plugin_info) != NULL)
+			if (gtranslator_plugins_engine_get_plugin_info (engine, info->module_name) != NULL)
 			{
 				g_warning ("Two or more plugins named '%s'. "
 					   "Only the first will be considered.\n",
@@ -239,9 +230,15 @@ gtranslator_plugins_engine_init (GtranslatorPluginsEngine *engine)
 void
 gtranslator_plugins_engine_garbage_collect (GtranslatorPluginsEngine *engine)
 {
-#ifdef ENABLE_PYTHON
-	gtranslator_python_garbage_collect ();
-#endif
+	GType *module_types = g_type_children (GTR_TYPE_MODULE, NULL);
+	unsigned i;
+	for (i = 0; module_types[i] != 0; i++)
+	{
+		gpointer klass = g_type_class_peek (module_types[i]);
+		if (klass != NULL)
+			gtranslator_module_class_garbage_collect (klass);
+	}
+	g_free (module_types);
 }
 
 static void
@@ -325,10 +322,26 @@ gtranslator_plugins_engine_get_plugin_list (GtranslatorPluginsEngine *engine)
 	return engine->priv->plugin_list;
 }
 
+static gint
+compare_plugin_info_and_name (GtranslatorPluginInfo *info,
+			      const gchar *module_name)
+{
+	return strcmp (info->module_name, module_name);
+}
+
+GtranslatorPluginInfo *
+gtranslator_plugins_engine_get_plugin_info (GtranslatorPluginsEngine *engine,
+				      const gchar        *name)
+{
+	GList *l = g_list_find_custom (engine->priv->plugin_list,
+				       name,
+				       (GCompareFunc) compare_plugin_info_and_name);
+	return l == NULL ? NULL : (GtranslatorPluginInfo *) l->data;
+}
+
 static gboolean
 load_plugin_module (GtranslatorPluginInfo *info)
 {
-	gchar *path;
 	gchar *dirname;
 
 	//gtranslator_debug (DEBUG_PLUGINS);
@@ -338,107 +351,52 @@ load_plugin_module (GtranslatorPluginInfo *info)
 	g_return_val_if_fail (info->module_name != NULL, FALSE);
 	g_return_val_if_fail (info->plugin == NULL, FALSE);
 	g_return_val_if_fail (info->available, FALSE);
-	
-	switch (info->loader)
-	{
-		case GTR_PLUGIN_LOADER_C:
-			dirname = g_path_get_dirname (info->file);	
-			g_return_val_if_fail (dirname != NULL, FALSE);
 
-			path = g_module_build_path (dirname, info->module_name);
-			g_free (dirname);
-			g_return_val_if_fail (path != NULL, FALSE);
-	
-			info->module = G_TYPE_MODULE (gtranslator_module_new (path));
-			g_free (path);
-			
-			break;
+	dirname = g_path_get_dirname (info->file);
+	g_return_val_if_fail (dirname != NULL, FALSE);
 
 #ifdef ENABLE_PYTHON
-		case GTR_PLUGIN_LOADER_PY:
-		{
-			gchar *dir;
-			
-			if (!gtranslator_python_init ())
-			{
-				/* Mark plugin as unavailable and fails */
-				info->available = FALSE;
-				
-				g_warning ("Cannot load Python plugin '%s' since gtranslator "
-				           "was not able to initialize the Python interpreter.",
-				           info->name);
-
-				return FALSE;
-			}
-
-			dir = g_path_get_dirname (info->file);
-			
-			g_return_val_if_fail ((info->module_name != NULL) &&
-			                      (info->module_name[0] != '\0'),
-			                      FALSE);
-
-			info->module = G_TYPE_MODULE (
-					gtranslator_python_module_new (dir, info->module_name));
-					
-			g_free (dir);
-			break;
-		}
-#endif
-		default:
-			g_return_val_if_reached (FALSE);
-	}
-
-	if (!g_type_module_use (info->module))
+	if (info->module_type == GTR_TYPE_PYTHON_MODULE)
 	{
-		switch (info->loader)
+		if (!gtranslator_python_init ())
 		{
-			case GTR_PLUGIN_LOADER_C:
-				g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
-					   info->name,			           
-					   gtranslator_module_get_path (GTR_MODULE (info->module)));
-				break;
-
-			case GTR_PLUGIN_LOADER_PY:
-				g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
-					   info->name,			           
-					   info->module_name);
-				break;
-
-			default:
-				g_return_val_if_reached (FALSE);				
+			/* Mark plugin as unavailable and fail */
+			info->available = FALSE;
+			g_warning ("Cannot load Python plugin '%s' since gtranslator "
+			           "was not able to initialize the Python interpreter.",
+			           info->name);
 		}
-			   
+	}
+#endif
+
+	info->module = GTR_MODULE (g_object_new (info->module_type,
+						   "path", dirname,
+						   "module-name", info->module_name,
+						   NULL));
+
+	g_free (dirname);
+
+	if (!g_type_module_use (G_TYPE_MODULE (info->module)))
+	{
+		g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
+			   gtranslator_module_get_module_name (info->module),
+			   gtranslator_module_get_path (info->module));
+
 		g_object_unref (G_OBJECT (info->module));
 		info->module = NULL;
 
-		/* Mark plugin as unavailable and fails */
+		/* Mark plugin as unavailable and fail. */
 		info->available = FALSE;
 		
 		return FALSE;
 	}
-	
-	switch (info->loader)
-	{
-		case GTR_PLUGIN_LOADER_C:
-			info->plugin = 
-				GTR_PLUGIN (gtranslator_module_new_object (GTR_MODULE (info->module)));
-			break;
 
-#ifdef ENABLE_PYTHON
-		case GTR_PLUGIN_LOADER_PY:
-			info->plugin = 
-				GTR_PLUGIN (gtranslator_python_module_new_object (GTR_PYTHON_MODULE (info->module)));
-			break;
-#endif
+	info->plugin = GTR_PLUGIN (gtranslator_module_new_object (info->module));
 
-		default:
-			g_return_val_if_reached (FALSE);
-	}
-	
-	g_type_module_unuse (info->module);
+	g_type_module_unuse (G_TYPE_MODULE (info->module));
 
 	g_message( "End");
-	
+
 	return TRUE;
 }
 

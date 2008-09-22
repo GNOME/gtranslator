@@ -42,6 +42,10 @@
 //#include "gtranslator-debug.h"
 #include "plugin.h"
 
+#ifdef ENABLE_PYTHON
+#include "gtranslator-python-module.h"
+#endif
+
 void
 _gtranslator_plugin_info_ref (GtranslatorPluginInfo *info)
 {
@@ -192,16 +196,17 @@ _gtranslator_plugin_info_new (const gchar *file)
 				     NULL);
 	if (str && strcmp(str, "python") == 0)
 	{
-		info->loader = GTR_PLUGIN_LOADER_PY;
 #ifndef ENABLE_PYTHON
 		g_warning ("Cannot load Python plugin '%s' since gtranslator was not "
 			   "compiled with Python support.", file);
 		goto error;
+#else
+		info->module_type = GTR_TYPE_PYTHON_MODULE;
 #endif
 	}
 	else
 	{
-		info->loader = GTR_PLUGIN_LOADER_C;
+		info->module_type = GTR_TYPE_MODULE;
 	}
 	g_free (str);
 

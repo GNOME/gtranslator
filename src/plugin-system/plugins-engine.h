@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugins-engine.h 6045 2007-12-28 20:45:22Z sfre $
+ * $Id: plugins-engine.h 6264 2008-05-05 11:00:38Z sfre $
  */
 
 #ifndef __GTR_PLUGINS_ENGINE_H__
@@ -74,6 +74,9 @@ GtranslatorPluginsEngine	*gtranslator_plugins_engine_get_default	(void);
 void		 gtranslator_plugins_engine_garbage_collect	(GtranslatorPluginsEngine *engine);
 
 const GList	*gtranslator_plugins_engine_get_plugin_list 	(GtranslatorPluginsEngine *engine);
+
+GtranslatorPluginInfo	*gtranslator_plugins_engine_get_plugin_info	(GtranslatorPluginsEngine *engine,
+							 const gchar        *name);
 
 gboolean 	 gtranslator_plugins_engine_activate_plugin 	(GtranslatorPluginsEngine *engine,
 							 GtranslatorPluginInfo    *info);
