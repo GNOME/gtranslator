@@ -107,7 +107,6 @@ struct _GtranslatorPreferencesDialogPrivate
 	/*Inteface*/
 	GtkWidget *gdl_combobox;
 	GtkWidget *scheme_color_combobox;
-	GtkWidget *toolbar_combobox;
 	
 	/*Plugins*/
 	GtkWidget *plugins_box;
@@ -1216,7 +1215,6 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
  		
 		"gdl_combobox", &dlg->priv->gdl_combobox,
 		"scheme_color_combobox", &dlg->priv->scheme_color_combobox,
-		"toolbar_combobox", &dlg->priv->toolbar_combobox,
 		
 		"plugins_box", &dlg->priv->plugins_box,
 		NULL);
