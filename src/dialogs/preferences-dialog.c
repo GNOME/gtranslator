@@ -960,13 +960,19 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
 static void
 setup_plugin_pages(GtranslatorPreferencesDialog *dlg)
 {
+        GtkWidget *alignment;
 	GtkWidget *page_content;
 
+	alignment = gtk_alignment_new (0., 0., 1., 1.);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 12, 12, 12);
+	
 	page_content = gtranslator_plugin_manager_new ();
 	g_return_if_fail (page_content != NULL);
 
+	gtk_container_add (GTK_CONTAINER (alignment), page_content);
+
 	gtk_box_pack_start (GTK_BOX (dlg->priv->plugins_box),
-			    page_content,
+			    alignment,
 			    TRUE,
 			    TRUE,
 			    0);
