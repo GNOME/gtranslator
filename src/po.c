@@ -682,36 +682,40 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	if (!strcmp (prev_translator, aux) && 
 	    (strcmp(comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year))) {
 	  
+	  if (g_str_has_suffix (comments_lines[j], ".")) {
 	    line_without_dot = g_strndup (comments_lines[j], g_utf8_strlen(comments_lines[j], -1) -1);  
 	    line = g_strconcat (line_without_dot, ", ", year, ".", NULL);
-	   
-	    for (l=j; l<(g_strv_length (comments_lines)); l++) {
-	      comments_lines[l] = comments_lines[l+1];
-	    }
-	    
-	    comments_lines[g_strv_length (comments_lines)-1] = line;
-	    while (comments_lines[k] != NULL) {
-	      new_comments = g_strconcat (new_comments, comments_lines[k], "\n", NULL);
-	      k++;
-	    }
-	    po_message_set_comments (message, new_comments);
-	    
 	    g_free (line_without_dot);
-	    g_free (line);
-	    g_free (new_comments);
+	  }else {
+	    line = g_strconcat (comments_lines[j], ", ", year, ".", NULL);
+	  }
+	  
+	  for (l=j; l<(g_strv_length (comments_lines)); l++) {
+	    comments_lines[l] = comments_lines[l+1];
+	  }
+	  
+	  comments_lines[g_strv_length (comments_lines)-1] = line;
+	  while (comments_lines[k] != NULL) {
+	    new_comments = g_strconcat (new_comments, comments_lines[k], "\n", NULL);
+	    k++;
+	    }
+	  po_message_set_comments (message, new_comments);
+	  
+	  g_free (line);
+	  g_free (new_comments);
 	}    
 
 	/*
 	 * Current translator is not in the comments.
 	 */
-	if (strcmp(prev_translator, aux))
-	  {
+	if (strcmp(prev_translator, aux)) {
+	  
 	  header_comment = po_message_comments (message);
-		aux2 = g_strconcat(header_comment, gtranslator_header_get_translator(header), " ", "<",
-				   gtranslator_header_get_tr_email(header), ">", ",", " ", year, ".", NULL);
-		
-		po_message_set_comments (message, aux2);
-		g_free (aux2);
+	  aux2 = g_strconcat(header_comment, gtranslator_header_get_translator(header), " ", "<",
+			     gtranslator_header_get_tr_email(header), ">", ",", " ", year, ".", NULL);
+	  
+	  po_message_set_comments (message, aux2);
+	  g_free (aux2);
 	}
 	g_free (aux);
 	
