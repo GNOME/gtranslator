@@ -8,4 +8,10 @@ EXTRA_DIST= \
 		gtranslator.spec.in \
 		gtranslator.spec \
 		omf.make \
-		xmldocs.make
+		xmldocs.make \
+		gnome-doc-utils.make
+
+DISTCLEANFILES = 		\
+	gnome-doc-utils.make    
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --enable-gtk-doc

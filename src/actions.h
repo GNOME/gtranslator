@@ -144,6 +144,9 @@ void       _gtranslator_actions_search_replace  (GtkAction   *action,
 void       gtranslator_window_show_home_page    (GtkAction *action,
 						 gpointer useless);
 
+void       gtranslator_cmd_help_contents        (GtkAction *action,
+                                                 GtranslatorWindow *window);
+
 void       gtranslator_about_dialog             (GtkAction *action,
 						 GtranslatorWindow *window);
 

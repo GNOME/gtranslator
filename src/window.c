@@ -130,7 +130,7 @@ static const GtkActionEntry always_sensitive_entries[] = {
 		
 	/* Help menu */
 	{ "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1", NULL,
-	  NULL },
+	  G_CALLBACK (gtranslator_cmd_help_contents) },
 	{ "HelpAbout", GTK_STOCK_ABOUT, NULL, NULL, NULL,
 	  G_CALLBACK (gtranslator_about_dialog) },
 };

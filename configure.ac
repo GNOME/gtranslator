@@ -10,6 +10,7 @@ AC_INIT(gtranslator, 1.9.3,
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_MACRO_DIR([m4])
 AM_CONFIG_HEADER(config.h)
+AC_CONFIG_MACRO_DIR ([m4])
 
 GTR_API_VERSION=2.0
 AC_SUBST(GTR_API_VERSION)
@@ -37,6 +38,7 @@ AC_PROG_CC
 AC_ISC_POSIX
 AM_PROG_LIBTOOL
 AC_TYPE_SIGNAL
+GNOME_DOC_INIT
 GTK_DOC_CHECK([1.0])
 
 dnl -------------------------------------------------------------------
