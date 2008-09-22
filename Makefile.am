@@ -1,6 +1,6 @@
 ## the main Makefile.am
 
-SUBDIRS = data doc help man src plugins po
+SUBDIRS = data help man src doc plugins po
 
 EXTRA_DIST= \
 		DEPENDS \
