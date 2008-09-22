@@ -189,31 +189,6 @@ gtranslator_tab_showed_message (GtranslatorTab *tab,
 }
 
 static void
-set_message_area (GtranslatorTab  *tab,
-                  GtkWidget *message_area)
-{
-        if (tab->priv->message_area == message_area)
-                return;
-
-        if (tab->priv->message_area != NULL)
-                gtk_widget_destroy (tab->priv->message_area);
-
-        tab->priv->message_area = message_area;
-
-        if (message_area == NULL)
-                return;
-
-        gtk_box_pack_start (GTK_BOX (tab),
-                            tab->priv->message_area,
-                            FALSE,
-                            FALSE,
-                            0);         
-
-        g_object_add_weak_pointer (G_OBJECT (tab->priv->message_area), 
-                                   (gpointer *)&tab->priv->message_area);
-}
-
-static void
 gtranslator_tab_edition_finished (GtranslatorTab *tab,
 				  GtranslatorMsg *msg)
 {
@@ -239,13 +214,13 @@ gtranslator_tab_edition_finished (GtranslatorTab *tab,
 		
 		message_area = create_error_message_area (_("There is an error in the message:"),
 							  message_error);
-		set_message_area (tab, message_area);
+		gtranslator_tab_set_message_area (tab, message_area);
 		g_free (message_error);
 	}
 	else
 	{
 		gtranslator_tab_unblock_movement (tab);
-		set_message_area(tab, NULL);
+		gtranslator_tab_set_message_area (tab, NULL);
 	}
 }
 
@@ -1393,7 +1368,7 @@ gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *tab,
 /**
  * gtranslator_tab_show_lateral_panel_widget:
  * @tab: a #GtranslatorTab
- * @widget: the widget to be showed
+ * @widget: the widget to be shown.
  *
  * Shows the notebook page of the @widget.
  */
@@ -1699,4 +1674,39 @@ gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab *tab)
 	}
 	
 	return FALSE;
+}
+
+/**
+ * gtranslator_tab_set_message_area:
+ * @tab: a #GtranslatorTab
+ * @message_area: a #GtranslatorMessageArea
+ *
+ * Sets the @message_area to be shown in the @tab.
+ */
+void
+gtranslator_tab_set_message_area (GtranslatorTab  *tab,
+				  GtkWidget *message_area)
+{
+	g_return_if_fail (GTR_IS_TAB (tab));
+	g_return_if_fail (GTR_IS_MESSAGE_AREA (message_area));
+	
+        if (tab->priv->message_area == message_area)
+                return;
+
+        if (tab->priv->message_area != NULL)
+                gtk_widget_destroy (tab->priv->message_area);
+
+        tab->priv->message_area = message_area;
+
+        if (message_area == NULL)
+                return;
+
+        gtk_box_pack_start (GTK_BOX (tab),
+                            tab->priv->message_area,
+                            FALSE,
+                            FALSE,
+                            0);
+
+        g_object_add_weak_pointer (G_OBJECT (tab->priv->message_area), 
+                                   (gpointer *)&tab->priv->message_area);
 }

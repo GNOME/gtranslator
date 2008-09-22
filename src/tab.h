@@ -159,6 +159,9 @@ gboolean               gtranslator_tab_go_to_prev_untrans  (GtranslatorTab *tab)
 gboolean               gtranslator_tab_go_to_next_fuzzy_or_untrans (GtranslatorTab *tab);
 
 gboolean               gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab *tab);
+
+void                   gtranslator_tab_set_message_area    (GtranslatorTab  *tab,
+							    GtkWidget *message_area);
 							    
 gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 
