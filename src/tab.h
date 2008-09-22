@@ -122,6 +122,8 @@ void                   gtranslator_tab_add_widget_to_lateral_panel (GtranslatorT
 
 void                   gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *tab,
 									 GtkWidget *widget);
+
+void                   gtranslator_tab_clear_msgstr_views  (GtranslatorTab *tab);
 							    
 gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 

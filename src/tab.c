@@ -1190,3 +1190,23 @@ gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *tab,
 	gtk_notebook_remove_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
 				  page);
 }
+
+void
+gtranslator_tab_clear_msgstr_views (GtranslatorTab *tab)
+{
+	gint i = 0;
+	GtranslatorHeader *header;
+	GtkTextBuffer *buf;
+	
+	g_return_if_fail (GTR_IS_TAB (tab));
+	
+	header = gtranslator_po_get_header (tab->priv->po);
+	
+	do {
+		buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
+		gtk_text_buffer_begin_user_action (buf);
+		gtk_text_buffer_set_text (buf, "", -1);
+		gtk_text_buffer_end_user_action (buf);
+		i++;
+	}while (i < gtranslator_header_get_nplurals (header));
+}

@@ -80,6 +80,9 @@ void       gtranslator_message_status_toggle_fuzzy
 void       gtranslator_actions_edit_preferences (GtkAction *action,
 						 GtranslatorWindow *window);
 
+void       gtranslator_actions_edit_clear       (GtkAction *action,
+						 GtranslatorWindow *window);
+
 /* View */
 
 /*Go*/

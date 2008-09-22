@@ -207,3 +207,16 @@ gtranslator_edit_message_comment(GtkAction *action,
 {	
 	gtranslator_show_comment_dialog(window);
 }
+
+void
+gtranslator_actions_edit_clear (GtkAction *action,
+				GtranslatorWindow *window)
+{
+	GtranslatorTab *tab;
+	
+	g_return_if_fail (GTR_IS_WINDOW (window));
+	
+	tab = gtranslator_window_get_active_tab (window);
+	
+	gtranslator_tab_clear_msgstr_views (tab);
+}
