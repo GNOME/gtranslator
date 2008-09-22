@@ -543,10 +543,10 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 		   *header_comment;
 	const char *prev_translator;
 
-	time_t now;
-	struct tm *now_here;
-	char t[22];
-	gchar *year=g_malloc(5);
+	gchar *current_date;
+	gchar *current_time;
+	gchar *year;
+	gchar *new_date;
 	gchar *aux;
 
 	/*
@@ -573,14 +573,15 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	/*
 	 * Update the po date 
 	 */
-	now = time(NULL);
-	now_here = localtime(&now);
-	strftime(t, 22, "%Y-%m-%d %H:%M%z", now_here);
-	strftime(year, 5, "%Y", now_here);
-	
-	aux = g_strdup (t);
-	gtranslator_header_set_po_date (header, aux);
-	g_free (aux);
+	current_date = gtranslator_utils_get_current_date ();
+	current_time = gtranslator_utils_get_current_time ();
+	year = gtranslator_utils_get_current_year ();
+
+	new_date = g_strconcat (current_date, " ", current_time, NULL);
+
+	gtranslator_header_set_po_date (header, new_date);
+
+	g_free (new_date);
 	
 	/*
          * Update the header's comment

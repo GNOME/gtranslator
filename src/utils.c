@@ -789,3 +789,42 @@ gtranslator_utils_get_user_config_dir (void)
 				 "gtranslator",
 				 NULL);
 }
+
+gchar *gtranslator_utils_get_current_date (void)
+{
+  time_t now;
+  struct tm *now_here;
+  gchar *date = g_malloc (11);
+  
+  now = time(NULL);
+  now_here = localtime(&now);
+  strftime(date, 11, "%Y-%m-%d", now_here);
+
+  return date;
+}
+
+gchar *gtranslator_utils_get_current_time (void)
+{
+  time_t now;
+  struct tm *now_here;
+  gchar *t = g_malloc (11);
+
+  now = time(NULL);
+  now_here = localtime(&now);
+  strftime(t, 11, "%H:%M%z", now_here);
+ 
+  return t;
+}
+
+gchar *gtranslator_utils_get_current_year (void)
+{
+  time_t now;
+  struct tm *now_here;
+  gchar *year=g_malloc (5);
+
+  now = time(NULL);
+  now_here = localtime(&now);
+  strftime(year, 5, "%Y", now_here);
+
+  return year;
+}

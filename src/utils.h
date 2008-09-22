@@ -74,4 +74,10 @@ void           gtranslator_utils_help_display         (GtkWindow   *parent,
 						       
 gchar         *gtranslator_utils_get_user_config_dir  (void);
 
+gchar         *gtranslator_utils_get_current_date (void);
+
+gchar         *gtranslator_utils_get_current_time (void);
+
+gchar         *gtranslator_utils_get_current_year (void);
+
 #endif
