@@ -129,6 +129,10 @@ void                   gtranslator_tab_show_lateral_panel_widget (GtranslatorTab
 								  GtkWidget *widget);
 
 void                   gtranslator_tab_clear_msgstr_views  (GtranslatorTab *tab);
+
+void                   gtranslator_tab_block_movement      (GtranslatorTab *tab);
+
+void                   gtranslator_tab_unblock_movement    (GtranslatorTab *tab);
 							    
 gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 

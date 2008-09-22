@@ -1,3 +1,16 @@
+2008-08-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* po.c (gtranslator_po_parse), (gtranslator_po_save_file),
+	(gtranslator_po_check_po_file):
+	* po.h:
+	* tab.c (set_message_area), (gtranslator_tab_edition_finished),
+	(gtranslator_tab_message_go_to), (gtranslator_tab_block_movement),
+	(gtranslator_tab_unblock_movement):
+	* tab.h:
+	Added check to know if there are errors on save.
+	Fixed bug showing the msg error when there was one in the first msg
+	and the msg was not showed yet.
+
 2008-08-14  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* dialogs/assistant.c (on_assistant_prepare),

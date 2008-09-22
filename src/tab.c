@@ -95,6 +95,9 @@ struct _GtranslatorTabPrivate
 	gint autosave_interval;
 	guint autosave_timeout;
 	gint autosave : 1;
+	
+	/*Blocking movement*/
+	gboolean blocking;
 };
 
 enum
@@ -185,17 +188,64 @@ gtranslator_tab_showed_message (GtranslatorTab *tab,
 }
 
 static void
+set_message_area (GtranslatorTab  *tab,
+                  GtkWidget *message_area)
+{
+        if (tab->priv->message_area == message_area)
+                return;
+
+        if (tab->priv->message_area != NULL)
+                gtk_widget_destroy (tab->priv->message_area);
+
+        tab->priv->message_area = message_area;
+
+        if (message_area == NULL)
+                return;
+
+        gtk_box_pack_start (GTK_BOX (tab),
+                            tab->priv->message_area,
+                            FALSE,
+                            FALSE,
+                            0);         
+
+        g_object_add_weak_pointer (G_OBJECT (tab->priv->message_area), 
+                                   (gpointer *)&tab->priv->message_area);
+}
+
+static void
 gtranslator_tab_edition_finished (GtranslatorTab *tab,
 				  GtranslatorMsg *msg)
 {
-  GtranslatorTranslationMemory *tm;
-  
-  tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
-  
-  if (gtranslator_msg_is_translated (msg) && !gtranslator_msg_is_fuzzy (msg))
-    gtranslator_translation_memory_store (tm,
-					  gtranslator_msg_get_msgid (msg),
-					  gtranslator_msg_get_msgstr (msg));
+	GtranslatorTranslationMemory *tm;
+	gchar *message_error;
+	GtkWidget *message_area;
+	
+	tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
+	
+	if (gtranslator_msg_is_translated (msg) && !gtranslator_msg_is_fuzzy (msg))
+		gtranslator_translation_memory_store (tm,
+						      gtranslator_msg_get_msgid (msg),
+						      gtranslator_msg_get_msgstr (msg));
+	
+	/*
+	 * Checking message
+	 */
+	message_error = gtranslator_msg_check (msg);
+	
+	if (message_error != NULL)
+	{
+		gtranslator_tab_block_movement (tab);
+		
+		message_area = create_error_message_area (_("There is an error in the message:"),
+							  message_error);
+		set_message_area (tab, message_area);
+		g_free (message_error);
+	}
+	else
+	{
+		gtranslator_tab_unblock_movement (tab);
+		set_message_area(tab, NULL);
+	}
 }
 
 /*
@@ -491,31 +541,6 @@ update_status(GtranslatorTab *tab,
 	/* We need to update the tab state too if is neccessary*/
 	if (po_state != GTR_PO_STATE_MODIFIED)
 		gtranslator_po_set_state(tab->priv->po, GTR_PO_STATE_MODIFIED);
-}
-
-static void
-set_message_area (GtranslatorTab  *tab,
-                  GtkWidget *message_area)
-{
-        if (tab->priv->message_area == message_area)
-                return;
-
-        if (tab->priv->message_area != NULL)
-                gtk_widget_destroy (tab->priv->message_area);
-
-        tab->priv->message_area = message_area;
-
-        if (message_area == NULL)
-                return;
-
-        gtk_box_pack_start (GTK_BOX (tab),
-                            tab->priv->message_area,
-                            FALSE,
-                            FALSE,
-                            0);         
-
-        g_object_add_weak_pointer (G_OBJECT (tab->priv->message_area), 
-                                   (gpointer *)&tab->priv->message_area);
 }
 
 static void
@@ -1080,10 +1105,8 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 			      gboolean searching)
 {
 	GtranslatorPo *po;
-	static gint pos = 0;
 	GList *current_msg;
-	gchar *message_error;
-	GtkWidget *message_area;
+	static gboolean first_msg = TRUE;
  
 	g_return_if_fail (tab != NULL);
 	g_return_if_fail (to_go != NULL);
@@ -1091,28 +1114,22 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 		
 	po = tab->priv->po;
 	
-	current_msg = gtranslator_po_get_current_message(po);
-	message_error = gtranslator_msg_check(current_msg->data);
-	if(message_error == NULL)
+	current_msg = gtranslator_po_get_current_message (po);
+	
+	/*
+	 * Emitting message-edition-finished signal
+	 */
+	if (!searching)
+		g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
+			       0, GTR_MSG (current_msg->data));
+	
+	if (!tab->priv->blocking || first_msg)
 	{
-		/*
-		 * Emitting message-edition-finished signal
-		 */
-		if (!searching)
-			g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
-				       0, GTR_MSG (current_msg->data));
-		
-		gtranslator_tab_show_message(tab, to_go->data);
-		set_message_area(tab, NULL);
+		gtranslator_tab_show_message (tab, to_go->data);
+		first_msg = FALSE;
 	}
 	else
-	{
-		message_area = create_error_message_area(_("There is an error in the message:"),
-							 message_error);
-		set_message_area(tab, message_area);
-		g_free (message_error);
 		return;
-	}
 	
 	/*
 	 * Emitting showed-message signal
@@ -1348,4 +1365,32 @@ gtranslator_tab_clear_msgstr_views (GtranslatorTab *tab)
 		gtk_text_buffer_end_user_action (buf);
 		i++;
 	}while (i < gtranslator_header_get_nplurals (header));
+}
+
+/**
+ * gtranslator_tab_block_movement:
+ * @tab: a #GtranslatorTab
+ *
+ * Blocks the movement to the next/prev message.
+ */
+void
+gtranslator_tab_block_movement (GtranslatorTab *tab)
+{
+	g_return_if_fail (GTR_IS_TAB (tab));
+	
+	tab->priv->blocking = TRUE;
+}
+
+/**
+ * gtranslator_tab_unblock_movement:
+ * @tab: a #GtranslatorTab
+ * 
+ * Unblocks the movement to the next/prev message.
+ */
+void
+gtranslator_tab_unblock_movement (GtranslatorTab *tab)
+{
+	g_return_if_fail (GTR_IS_TAB (tab));
+	
+	tab->priv->blocking = FALSE;
 }

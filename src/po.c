@@ -354,9 +354,8 @@ gtranslator_po_parse(GtranslatorPo *po,
 		g_set_error (error,
 			     GTR_PO_ERROR,
 			     GTR_PO_ERROR_FILENAME,
-			     _("Failed opening file '%s': %s\n%s"),
-			     priv->filename, g_strerror(errno),
-			     message_error);
+			     _("Failed opening file '%s': %s"),
+			     priv->filename, g_strerror(errno));
 		g_object_unref(po);
 		return;
 	}
@@ -760,6 +759,7 @@ gtranslator_po_save_file(GtranslatorPo *po,
 			 GError **error)
 {
 	struct po_xerror_handler handler;
+	gchar *msg_error;
 	
 	/*
 	 * Initialice the handler error.
@@ -780,6 +780,21 @@ gtranslator_po_save_file(GtranslatorPo *po,
 	}
 	
 	/*
+	 * Check if the file is right
+	 */
+	msg_error = gtranslator_po_check_po_file (po);
+	if (msg_error != NULL)
+	{
+		g_set_error (error,
+			     GTR_PO_ERROR,
+			     GTR_PO_ERROR_GETTEXT,
+			     _("There is an error in the PO file: %s"),
+			     msg_error);
+		g_free (msg_error);
+	}
+	
+	
+	/*
 	 * Save header fields into msg
 	 */
 	gtranslator_po_save_header_in_msg (po);	
@@ -792,6 +807,7 @@ gtranslator_po_save_file(GtranslatorPo *po,
 			     GTR_PO_ERROR_FILENAME,
 			     _("There was an error writing the PO file: %s"),
 			     message_error);
+		g_free (message_error);
 		return;
 	}
 	
@@ -1172,9 +1188,10 @@ gtranslator_po_get_message_position (GtranslatorPo *po)
  * @po: a #GtranslatorPo
  *
  * Test whether an entire PO file is valid, like msgfmt does it.
- * Return value: If it is invalid, returns the error.
+ * Returns: If it is invalid, returns the error. The return value must be freed
+ * with g_free.
  **/
-const gchar *
+gchar *
 gtranslator_po_check_po_file (GtranslatorPo *po)
 {
 	struct po_xerror_handler handler;
@@ -1183,12 +1200,7 @@ gtranslator_po_check_po_file (GtranslatorPo *po)
 
 	handler.xerror = &on_gettext_po_xerror;
 	handler.xerror2 = &on_gettext_po_xerror2;
-	
-	if (message_error != NULL)
-	{
-		g_free (message_error);
-		message_error = NULL;
-	}
+	message_error = NULL;
 	
 	po_file_check_all (po->priv->gettext_po_file, &handler);
 

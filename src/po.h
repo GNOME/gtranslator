@@ -145,7 +145,7 @@ gint             gtranslator_po_get_messages_count	(GtranslatorPo *po);
 
 gint             gtranslator_po_get_message_position	(GtranslatorPo *po);
 
-const gchar     *gtranslator_po_check_po_file		(GtranslatorPo *po);
+gchar           *gtranslator_po_check_po_file		(GtranslatorPo *po);
 
 /* Unexported funcs */
 void            _gtranslator_po_increase_decrease_translated
