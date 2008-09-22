@@ -61,9 +61,7 @@ struct _GtranslatorSourceCodeViewPluginPrivate
 	
 	GtranslatorWindow *window;
 
-	GtkTextMark *path_start;
-	GtkTextMark *path_end;
-	GSList *tags;
+	GSList *tags;	
 };
 
 GTR_PLUGIN_REGISTER_TYPE(GtranslatorSourceCodeViewPlugin, gtranslator_source_code_view_plugin)
@@ -352,8 +350,6 @@ gtranslator_source_code_view_plugin_init (GtranslatorSourceCodeViewPlugin *plugi
 			      NULL);
 	
 	plugin->priv->tags = NULL;
-	plugin->priv->path_start = NULL;
-	plugin->priv->path_end = NULL;
 }
 
 static void
@@ -380,6 +376,7 @@ showed_message_cb (GtranslatorTab *tab,
 	GtkTextBuffer *buffer;
 	GtkTextView *view;
 	GtranslatorContextPanel *panel;
+	GtkTextMark *path_start, *path_end;
 
 	panel = gtranslator_tab_get_context_panel (tab);
 	view = gtranslator_context_panel_get_context_text_view (panel);
@@ -388,10 +385,10 @@ showed_message_cb (GtranslatorTab *tab,
 	
 	gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
 	
-	plugin->priv->path_start = gtk_text_buffer_create_mark (buffer,
-								"path start",
-								&iter,
-								TRUE);
+	path_start = gtk_text_buffer_create_mark (buffer,
+						  "path_start",
+						  &iter,
+						  TRUE);
 	gtk_text_buffer_insert (buffer, &iter, _("Paths:\n"), -1);
 	
 	filename = gtranslator_msg_get_filename (msg, i);
@@ -402,32 +399,43 @@ showed_message_cb (GtranslatorTab *tab,
 		i++;
 		filename = gtranslator_msg_get_filename (msg, i);
 	}
+	
+	/*
+	 * The tags are managed by buffer, so lets add a reference in the buffer
+	 */
+	g_object_set_data (G_OBJECT (buffer), "link_tags", plugin->priv->tags);
+	plugin->priv->tags = NULL;
 
-	plugin->priv->path_end = gtk_text_buffer_create_mark (buffer,
-							      "path end",
-							      &iter,
-							      TRUE);
+	path_end = gtk_text_buffer_create_mark (buffer,
+						"path_end",
+						&iter,
+						TRUE);
 }
 
 static void
 delete_text_and_tags (GtranslatorTab *tab,
 		      GtranslatorSourceCodeViewPlugin *plugin)
 {
-	GSList *tagp = NULL;
+	GSList *tagp = NULL, *tags;
 	GtkTextBuffer *buffer;
 	GtranslatorContextPanel *panel;
 	GtkTextView *view;
 	GtkTextIter start, end;
-	
-	if (plugin->priv->path_start == NULL)
-		return;
+	GtkTextMark *path_start, *path_end;
 	
 	panel = gtranslator_tab_get_context_panel (tab);
 	view = gtranslator_context_panel_get_context_text_view (panel);
 	
 	buffer = gtk_text_view_get_buffer (view);
+	path_start = gtk_text_buffer_get_mark (buffer, "path_start");
+	
+	if (path_start == NULL)
+		return;
+	
+	path_end = gtk_text_buffer_get_mark (buffer, "path_end");
+	tags = g_object_get_data (G_OBJECT (buffer), "link_tags");
 
-	for (tagp = plugin->priv->tags;  tagp != NULL;  tagp = tagp->next)
+	for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
 	{
 		GtkTextTag *tag = tagp->data;
 		gchar *path = g_object_get_data (G_OBJECT (tag), "path");
@@ -437,21 +445,20 @@ delete_text_and_tags (GtranslatorTab *tab,
 			g_free (path);
 		}
 	}
-	g_slist_free (plugin->priv->tags);
-	plugin->priv->tags = NULL;
+	g_slist_free (tags);
 
 	/*
 	 * Deleting the text
 	 */
-	gtk_text_buffer_get_iter_at_mark (buffer, &start, plugin->priv->path_start);
-	gtk_text_buffer_get_iter_at_mark (buffer, &end, plugin->priv->path_end);
+	gtk_text_buffer_get_iter_at_mark (buffer, &start, path_start);
+	gtk_text_buffer_get_iter_at_mark (buffer, &end, path_end);
 	gtk_text_buffer_delete (buffer, &start, &end);
 	
 	/*
 	 * Deleting the marks
 	 */
-	gtk_text_buffer_delete_mark (buffer, plugin->priv->path_start);
-	gtk_text_buffer_delete_mark (buffer, plugin->priv->path_end);
+	gtk_text_buffer_delete_mark (buffer, path_start);
+	gtk_text_buffer_delete_mark (buffer, path_end);
 }
 
 static void
@@ -473,6 +480,8 @@ page_added_cb (GtkNotebook *notebook,
 
 	panel = gtranslator_tab_get_context_panel (GTR_TAB (child));
 	view = gtranslator_context_panel_get_context_text_view (panel);
+	
+	g_return_if_fail (GTK_IS_TEXT_VIEW (view));
 
 	g_signal_connect_after (child, "showed-message",
 				G_CALLBACK (showed_message_cb), plugin);
