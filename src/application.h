@@ -105,6 +105,8 @@ gtranslator_application_set_preferences_dialog (GtranslatorApplication *app,
 void              gtranslator_application_register_icon (GtranslatorApplication *app,
 							 const gchar *icon,
 				       			 const gchar *stock_id);
+				       			 
+GObject          *gtranslator_application_get_translation_memory (GtranslatorApplication *app);
 
 /* Non exported funcs */
 

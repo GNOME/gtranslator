@@ -4,7 +4,8 @@
 
 SUBDIRS = toolbareditor \
 	  dialogs \
-	  plugin-system
+	  plugin-system \
+	  translation-memory
 
 noinst_LTLIBRARIES = libgtranslator.la
 
@@ -14,6 +15,8 @@ INCLUDES = \
 	-I$(top_srcdir)/src/dialogs				\
 	-I$(top_srcdir)/src/toolbareditor			\
 	-I$(top_srcdir)/src/plugin-system			\
+	-I$(top_srcdir)/src/translation-memory			\
+	-I$(top_srcdir)/src/translation-memory/berkeley		\
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
 	-DPREFIX=\""$(prefix)"\"                                \
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
@@ -110,7 +113,8 @@ libgtranslator_la_LIBADD = \
 	$(GTRANSLATOR_LIBS) \
 	dialogs/libdialogs.la \
 	toolbareditor/libtoolbareditor.la \
-	plugin-system/libpluginsystem.la 
+	plugin-system/libpluginsystem.la \
+	translation-memory/libtranslationmemory.la
 	
 #gtranslator_auto_learn_SOURCES = \
 #	auto-learn.c

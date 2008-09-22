@@ -25,6 +25,8 @@
 #include "window.h"
 #include "egg-toolbars-model.h"
 #include "dialogs/preferences-dialog.h"
+#include "translation-memory.h"
+#include "berkeley.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -55,6 +57,8 @@ struct _GtranslatorApplicationPrivate
 	GtkIconFactory *icon_factory;
 
 	gchar *last_dir;
+	
+	GtranslatorTranslationMemory *tm;
 };
 
 static gchar *
@@ -204,6 +208,9 @@ gtranslator_application_init (GtranslatorApplication *application)
 	/* Create Icon factory */
 	application->priv->icon_factory = gtk_icon_factory_new ();
 	gtk_icon_factory_add_default (application->priv->icon_factory);
+	
+	/* Creating translation memory */
+	application->priv->tm = GTR_TRANSLATION_MEMORY (gtranslator_berkeley_new ());
 }
 
 
@@ -216,6 +223,9 @@ gtranslator_application_finalize (GObject *object)
 		g_object_unref (app->priv->icon_factory);
 
 	g_free (app->priv->last_dir);
+	
+	if (app->priv->tm)
+		g_object_unref (app->priv->tm);
 	
 	G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
 }
@@ -530,4 +540,12 @@ _gtranslator_application_set_last_dir (GtranslatorApplication *app,
 	g_return_if_fail (GTR_IS_APPLICATION (app));
 
 	app->priv->last_dir = g_strdup (last_dir);
+}
+
+GObject *
+gtranslator_application_get_translation_memory (GtranslatorApplication *app)
+{
+	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+	
+	return G_OBJECT (app->priv->tm);
 }
