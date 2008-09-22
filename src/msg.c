@@ -159,8 +159,10 @@ gtranslator_msg_new (po_message_iterator_t iter,
 {
 	GtranslatorMsg *msg;
 	
-	msg = g_object_new (GTR_TYPE_MSG, "gettext-iter", iter,
-			    "gettext-msg", message, NULL);
+	msg = g_object_new (GTR_TYPE_MSG, NULL);
+	
+	gtranslator_msg_set_iterator (msg, iter);
+	gtranslator_msg_set_message (msg, message);
 	
 	return msg;
 }
