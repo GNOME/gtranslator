@@ -25,6 +25,7 @@
 #endif
 
 #include "application.h"
+#include "debug.h"
 #include "file-dialogs.h"
 #include "po.h"
 #include "msg.h"
@@ -1158,6 +1159,9 @@ gint
 gtranslator_po_get_untranslated_count (GtranslatorPo *po)
 {
 	g_return_val_if_fail (GTR_IS_PO (po), -1);
+	
+	/*DEBUG_PRINT ("length: %d | translated: %d | fuzzy: %d | untranslated: %d", g_list_length (po->priv->messages),
+		     po->priv->translated, po->priv->fuzzy, (g_list_length (po->priv->messages) - po->priv->translated - po->priv->fuzzy));*/
 	
 	return (g_list_length (po->priv->messages) - po->priv->translated - po->priv->fuzzy);
 }

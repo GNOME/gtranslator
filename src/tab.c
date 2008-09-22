@@ -513,7 +513,6 @@ update_status(GtranslatorTab *tab,
 		}
 		else {
 			status = GTR_MSG_STATUS_UNTRANSLATED;
-			_gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
 		}
 	}
 	else if((status == GTR_MSG_STATUS_TRANSLATED) && !gtranslator_msg_is_translated(msg))
