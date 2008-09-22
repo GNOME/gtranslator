@@ -191,6 +191,8 @@ main (gint argc,
 		g_slist_free (file_list);
 	}
 	
+	g_option_context_free (context);
+	
 	/*
 	 * Enter main GTK loop
 	 */
