@@ -101,8 +101,6 @@ subversion_utils_from_file_to_file (GInputStream *istream,
 	gsize bytes = 1;
 	GError *error = NULL;
 	gchar buffer[4096];
-	static gint i = 0;
-	i++;
 	
 	while (bytes != 0 && bytes != -1)
 	{
@@ -111,8 +109,9 @@ subversion_utils_from_file_to_file (GInputStream *istream,
 					     NULL, &error);
 		if (error)
 			break;
+
 		g_output_stream_write (ostream, buffer,
-				       sizeof (buffer),
+				       bytes,
 				       NULL, &error);
 		if (error)
 			break;
@@ -157,7 +156,6 @@ subversion_utils_get_changelog_entry_from_view (GtkWidget *view)
 	code = gtranslator_profile_get_language_code (profile);
 	date = gtranslator_utils_get_current_date ();
 	
-	//FIXME: Is missing the date
 	changelog_entry = g_strdup_printf ("%s  %s  <%s>\n"
 					   "\n\t %s.po: %s\n\n", date, name, email,
 					   code, log);
