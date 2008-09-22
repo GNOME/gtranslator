@@ -113,7 +113,7 @@ gtranslator_po_parse_files_from_dialog (GtkWidget * dialog,
 					GtranslatorWindow *window)
 {
 	GSList *po_files, *l;
-	GSList *locations;
+	GSList *locations = NULL;
 	GFile *file, *parent;
 	gchar *uri;
 	
