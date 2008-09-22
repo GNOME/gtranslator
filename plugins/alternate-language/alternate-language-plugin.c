@@ -56,7 +56,7 @@ on_alternate_lang_activated (GtkAction *action,
 
 static const GtkActionEntry action_entries[] =
 {
-	{ "AlternateLang", NULL, N_("_Alterante Language"), "<control>L",
+	{ "AlternateLang", NULL, N_("_Alternate Language"), "<control>L",
 	 N_("Show the Alternate Language panel"),
 	 G_CALLBACK (on_alternate_lang_activated)}, 
 };
