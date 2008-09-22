@@ -655,7 +655,7 @@ gtranslator_project_utils_scan_dir (GFile *dir,
 
 static void
 on_add_database_button_pulsed (GtkButton *button,
-			       gpointer data)
+			       GtranslatorPreferencesDialog *dlg)
 {
   GList *files_list = NULL;
   GList *l = NULL;
@@ -702,7 +702,7 @@ on_add_database_button_pulsed (GtkButton *button,
   g_list_foreach (files_list, (GFunc)g_free, NULL);
   g_list_free (files_list); 
 
-  dialog = gtk_message_dialog_new (NULL,
+  dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
 				   GTK_DIALOG_MODAL,
 				   GTK_MESSAGE_INFO,
 				   GTK_BUTTONS_CLOSE,
