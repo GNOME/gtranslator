@@ -17,6 +17,14 @@
 
 #include "translation-memory.h"
 
+/**
+ * gtranslator_translation_memory_store:
+ * @obj: a #GtranslatorTranslationMemory
+ * @original: the untranslated text
+ * @translation: the @original text translated
+ *
+ * Stores the @original and @translation strings in the database.
+ */
 gboolean
 gtranslator_translation_memory_store (GtranslatorTranslationMemory *obj,
 				      const gchar *original,
@@ -35,6 +43,15 @@ gtranslator_translation_memory_store_default (GtranslatorTranslationMemory *obj,
 	g_return_val_if_reached (FALSE);
 }
 
+/**
+ * gtranslator_translation_memory_lookup:
+ * @obj: a #GtranslatorTranslationMemory
+ * @phrase: the unstranslated text to search for translations.
+ *
+ * Looks for the @phrase in the database and gets a list of the #GtranslatorTranslationMemoryMatch.
+ *
+ * Returns: a list of #GtranslatorTranslationMemoryMatch.
+ */
 GList *
 gtranslator_translation_memory_lookup (GtranslatorTranslationMemory *obj,
 				       const gchar *phrase)
@@ -51,6 +68,12 @@ gtranslator_translation_memory_lookup_default (GtranslatorTranslationMemory *obj
 	g_return_val_if_reached (0);
 }
 
+/**
+ * gtranslator_translation_memory_set_max_omits:
+ * @omits: the number of omits
+ *
+ * Sets the number of omits used in the search.
+ */
 void
 gtranslator_translation_memory_set_max_omits (GtranslatorTranslationMemory *obj,
 					      gsize omits)
@@ -67,6 +90,12 @@ gtranslator_translation_memory_set_max_omits_default (GtranslatorTranslationMemo
 	g_return_if_reached ();
 }
 
+/**
+ * gtranslator_translation_memory_set_max_delta:
+ * @delta: the difference in the length of strings
+ *
+ * Sets the difference in the length of string for searching in the database.
+ */
 void
 gtranslator_translation_memory_set_max_delta (GtranslatorTranslationMemory *obj,
 					      gsize delta)
