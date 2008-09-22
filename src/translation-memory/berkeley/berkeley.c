@@ -454,6 +454,21 @@ look_fuzzy (GtranslatorBerkeley *ber,
 	RETURN_WITH_CLEANUP(FALSE)
 }
 
+static gint
+insert_match_sorted (gconstpointer a,
+		     gconstpointer b)
+{
+	GtranslatorTranslationMemoryMatch *match1 = (GtranslatorTranslationMemoryMatch *)a;
+	GtranslatorTranslationMemoryMatch *match2 = (GtranslatorTranslationMemoryMatch *)b;
+	
+	if (match1->level < match2->level)
+		return -1;
+	else if (match1->level > match2->level)
+		return 1;
+	else
+		return 0;
+}
+
 static GList *
 gtranslator_berkeley_lookup (GtranslatorTranslationMemory *tm,
 			     const gchar *phrase)
@@ -516,7 +531,8 @@ list:   g_hash_table_iter_init (&iter, hash);
 		match->match = g_strdup (hkey);
 		match->level = GPOINTER_TO_INT (value);
 		
-		matches = g_list_append (matches, match);
+		matches = g_list_insert_sorted (matches, match,
+						(GCompareFunc)insert_match_sorted);
 		index++;
 	}
 
