@@ -1,3 +1,14 @@
+2008-08-22  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* actions-file.c:
+	(gtranslator_file_quit):
+	Checking if the profiles list is empty before saving 
+	profiles in xml.
+	* dialogs/preferences-dialog.c:
+	(setup_tm_pages):
+	Checking if filename is NULL before calling
+	(gtranslator_prefs_manager_set_tm_lang_entry).
+
 2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* po.c: Now it does not check if the file is right

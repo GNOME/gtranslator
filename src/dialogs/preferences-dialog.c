@@ -858,8 +858,9 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
     gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry),
 			filename);
   }
-
-  gtranslator_prefs_manager_set_tm_lang_entry (filename);
+  
+  if (filename != NULL)
+    gtranslator_prefs_manager_set_tm_lang_entry (filename);
   
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->missing_words_spinbutton),
 			     (gdouble) gtranslator_prefs_manager_get_missing_words ());

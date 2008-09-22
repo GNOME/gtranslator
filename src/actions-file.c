@@ -692,6 +692,7 @@ gtranslator_file_quit (GtkAction *action,
 	GtranslatorPo *po;
 	gint pages;
 	GList *list = NULL;
+	GList *profiles_list = NULL;
 	gchar *config_folder;
 	gchar *filename;
 	GFile *file;
@@ -703,17 +704,20 @@ gtranslator_file_quit (GtkAction *action,
 	
 	file = g_file_new_for_path (filename);
 	
-	if (g_file_query_exists (file, NULL)) {
-	  g_file_delete (file, NULL, NULL);
-	  gtranslator_profile_save_profiles_in_xml (filename);
-	} else {
-	  g_file_create (file,
-			 G_FILE_CREATE_NONE,
-			 NULL,
-			 NULL);
-	  gtranslator_profile_save_profiles_in_xml (filename);
+	profiles_list = gtranslator_application_get_profiles (GTR_APP);
+
+	if (profiles_list != NULL) {
+	  if (g_file_query_exists (file, NULL)) {
+	    g_file_delete (file, NULL, NULL);
+	    gtranslator_profile_save_profiles_in_xml (filename);
+	  } else {
+	    g_file_create (file,
+			   G_FILE_CREATE_NONE,
+			   NULL,
+			   NULL);
+	    gtranslator_profile_save_profiles_in_xml (filename);
+	  }
 	}
-	
 	g_free (config_folder);
 	g_object_unref (file);
 
