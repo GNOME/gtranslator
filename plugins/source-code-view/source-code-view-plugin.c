@@ -82,7 +82,7 @@ insert_link (GtkTextBuffer *buffer,
 	g_object_set_data (G_OBJECT (tag), "path", g_strdup (path));
 	g_object_set_data (G_OBJECT (tag), "line", line);
 
-	text = g_strconcat (path, "\n", NULL);
+	text = g_strdup_printf ("%s:%d\n", path, GPOINTER_TO_INT (line));
 	gtk_text_buffer_insert_with_tags (buffer, iter, text, -1, tag, NULL);
 	g_free (text);
 }
