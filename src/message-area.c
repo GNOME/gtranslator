@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.
  * See the ChangeLog files for a list of changes.
  *
- * $Id: message-area.c 5887 2007-09-07 07:20:19Z pborelli $
+ * $Id: message-area.c 6468 2008-08-28 08:23:00Z icq $
  */
 
 /* TODO: Style properties */
@@ -335,6 +335,13 @@ gtranslator_message_area_add_action_widget (GtranslatorMessageArea *message_area
 				    0);
 }
 
+/**
+ * gtranslator_message_area_set_contents:
+ * @message_area: a #GtranslatorMessageArea
+ * @contents: widget you want to add to the contents area
+ *
+ * Adds the @contents widget to the contents area of #GtranslatorMessageArea.
+ */
 void
 gtranslator_message_area_set_contents	(GtranslatorMessageArea *message_area,
 				 GtkWidget        *contents)
@@ -350,6 +357,19 @@ gtranslator_message_area_set_contents	(GtranslatorMessageArea *message_area,
 			    0);
 }
 
+/**
+ * gtranslator_message_area_add_button:
+ * @message_area: a #GtranslatorMessageArea
+ * @button_text: text of button, or stock ID
+ * @response_id: response ID for the button
+ * 
+ * Adds a button with the given text (or a stock button, if button_text is a stock ID)
+ * and sets things up so that clicking the button will emit the "response" signal
+ * with the given response_id. The button is appended to the end of the message area's
+ * action area. The button widget is returned, but usually you don't need it.
+ *
+ * Returns: the button widget that was added
+ */
 GtkWidget*
 gtranslator_message_area_add_button (GtranslatorMessageArea *message_area,
 			       const gchar      *button_text,
@@ -403,6 +423,16 @@ add_buttons_valist (GtranslatorMessageArea *message_area,
 	}
 }
 
+/**
+ * gtranslator_message_area_add_buttons:
+ * @message_area: a #GtranslatorMessageArea
+ * @first_button_text: button text or stock ID
+ * @...: response ID for first button, then more text-response_id pairs
+ *
+ * Adds more buttons, same as calling gtranslator_message_area_add_button() repeatedly.
+ * The variable argument list should be NULL-terminated as with
+ * gtranslator_message_area_new_with_buttons(). Each button must have both text and response ID.
+ */
 void
 gtranslator_message_area_add_buttons (GtranslatorMessageArea *message_area,
 				const gchar      *first_button_text,
@@ -419,12 +449,33 @@ gtranslator_message_area_add_buttons (GtranslatorMessageArea *message_area,
 	va_end (args);
 }
 
+/**
+ * gtranslator_message_area_new:
+ * 
+ * Creates a new #GtranslatorMessageArea object.
+ * 
+ * Returns: a new #GtranslatorMessageArea object
+ */
 GtkWidget *
 gtranslator_message_area_new (void)
 {
 	return g_object_new (GTR_TYPE_MESSAGE_AREA, NULL);
 }
 
+/**
+ * gtranslator_message_area_new_with_buttons:
+ * @first_button_text: stock ID or text to go in first button, or NULL
+ * @...: response ID for first button, then additional buttons, ending with NULL
+ * 
+ * Creates a new #GtranslatorMessageArea with buttons. Button text/response ID pairs 
+ * should be listed, with a NULL pointer ending the list. Button text can be either
+ * a stock ID such as GTK_STOCK_OK, or some arbitrary text. A response ID can be any
+ * positive number, or one of the values in the GtkResponseType enumeration. If 
+ * the user clicks one of these dialog buttons, GtranslatorMessageArea will emit the "response"
+ * signal with the corresponding response ID.
+ *
+ * Returns: a new #GtranslatorMessageArea
+ */
 GtkWidget *
 gtranslator_message_area_new_with_buttons (const gchar *first_button_text,
                                      ...)
@@ -445,6 +496,16 @@ gtranslator_message_area_new_with_buttons (const gchar *first_button_text,
 	return GTK_WIDGET (message_area);
 }
 
+/**
+ * gtranslator_message_area_set_response_sensitive:
+ * @message_area: a #GtranslatorMessageArea
+ * @response_id: a response ID
+ * @setting: TRUE for sensitive
+ *
+ * Calls gtk_widget_set_sensitive (widget, setting) for each widget in the dialog's
+ * action area with the given response_id. A convenient way to sensitize/desensitize
+ * dialog buttons.
+ */
 void
 gtranslator_message_area_set_response_sensitive (GtranslatorMessageArea *message_area,
 					   gint              response_id,
@@ -472,6 +533,15 @@ gtranslator_message_area_set_response_sensitive (GtranslatorMessageArea *message
 	g_list_free (children);
 }
 
+/**
+ * gtranslator_message_area_set_default_response:
+ * @message_area: a #GtranslatorMessageArea
+ * @response_id: a response ID
+ *
+ * Sets the last widget in the message area's action area with the given response_id
+ * as the default widget for the dialog. Pressing "Enter" normally activates the
+ * default widget.
+ */
 void
 gtranslator_message_area_set_default_response (GtranslatorMessageArea *message_area,
 					 gint              response_id)
@@ -498,6 +568,13 @@ gtranslator_message_area_set_default_response (GtranslatorMessageArea *message_a
 	g_list_free (children);
 }
 
+/**
+ * gtranslator_message_area_set_default_response:
+ * @message_area: a #GtranslatorMessageArea
+ * @response_id: a response ID
+ *
+ * Emits the 'response' signal with the given @response_id.
+ */
 void
 gtranslator_message_area_response (GtranslatorMessageArea *message_area,
 			     gint              response_id)
@@ -510,6 +587,15 @@ gtranslator_message_area_response (GtranslatorMessageArea *message_area,
 		       response_id);
 }
 
+/**
+ * gtranslator_message_area_add_stock_button_with_text:
+ * @message_area: a #GtranslatorMessageArea
+ * @text: the text to visualize in the button
+ * @stock_id: the stock ID of the button
+ * @response_id: a response ID
+ *
+ * Same as gtranslator_message_area_add_button() but with a specific text.
+ */
 GtkWidget *
 gtranslator_message_area_add_stock_button_with_text (GtranslatorMessageArea *message_area,
 				    	       const gchar      *text,
