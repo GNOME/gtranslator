@@ -40,7 +40,8 @@ pixmaps__DATA = \
         debian.png \
 	open-tran.png \
 	suse.png \
-	xfce.png
+	xfce.png \
+	inkscape.png
 
 # Plugin Info
 

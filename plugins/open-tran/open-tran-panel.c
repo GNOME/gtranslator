@@ -45,6 +45,7 @@
 #define DEBIAN_ICON  PIXMAPSDIR"/debian.png"
 #define SUSE_ICON    PIXMAPSDIR"/suse.png"
 #define XFCE_ICON    PIXMAPSDIR"/xfce.png"
+#define INKSCAPE_ICON PIXMAPSDIR"/inkscape.png"
 
 GTR_PLUGIN_DEFINE_TYPE(GtranslatorOpenTranPanel, gtranslator_open_tran_panel, GTK_TYPE_VBOX)
 
@@ -129,7 +130,7 @@ print_struct_to_tree_view(gpointer value,
 	if (G_VALUE_HOLDS_STRING (value))
 	{
 		str = g_value_get_string (value);
-		
+
 		if (strcmp ("GNOME", str) == 0)
 			icon = create_pixbuf (GNOME_ICON);
 		else if (strcmp ("KDE", str) == 0)
@@ -142,6 +143,8 @@ print_struct_to_tree_view(gpointer value,
 			icon = create_pixbuf (SUSE_ICON);
 		else if (strcmp ("XFCE", str) == 0)
 			icon = create_pixbuf (XFCE_ICON);
+		else if (strcmp ("Inkscape", str) == 0)
+			icon = create_pixbuf (INKSCAPE_ICON);
 		else icon = NULL;
 		
 		gtk_list_store_append(panel->priv->store, &iter);
