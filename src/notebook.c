@@ -280,6 +280,38 @@ gtranslator_notebook_add_page (GtranslatorNotebook *notebook,
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
 				  GTK_WIDGET (tab), label);
 	priv->pages = g_list_append (priv->pages, tab);
+	
+	if (g_list_length (notebook->priv->pages) == 1)
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+	else
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+}
+
+/**
+ * gtranslator_notebook_remove_page:
+ * @notebook: a #GtranslatorNotebook
+ * @page_num: the index of a notebook page, starting from 0.
+ *
+ * Removes a page from the notebook given its index in the notebook.
+ */
+void
+gtranslator_notebook_remove_page (GtranslatorNotebook *notebook,
+				  gint page_num)
+{
+	GtkWidget *tab;
+	
+	g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
+	
+	tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), page_num);
+	
+	if (page_num != -1)
+		gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), page_num);
+	
+	notebook->priv->pages = g_list_remove (notebook->priv->pages,
+					       tab);
+	
+	if (g_list_length (notebook->priv->pages) == 1)
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 }
 
 /**
@@ -299,5 +331,3 @@ gtranslator_notebook_get_page(GtranslatorNotebook *notebook)
 	
 	return GTR_TAB(gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), num));
 }
-
-

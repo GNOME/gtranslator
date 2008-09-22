@@ -1879,7 +1879,7 @@ _gtranslator_window_close_tab (GtranslatorWindow *window,
 	i = gtk_notebook_page_num (GTK_NOTEBOOK (window->priv->notebook),
 				   GTK_WIDGET (tab));
 	if (i != -1)
-		gtk_notebook_remove_page (GTK_NOTEBOOK (window->priv->notebook), i);
+		gtranslator_notebook_remove_page (GTR_NOTEBOOK (window->priv->notebook), i);
 	
 	set_sensitive_according_to_window (window);
 }
