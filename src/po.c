@@ -28,6 +28,7 @@
 #include "po.h"
 #include "msg.h"
 #include "gtranslator-enum-types.h"
+#include "utils.h"
 
 #include <string.h>
 #include <errno.h>
@@ -321,7 +322,7 @@ gtranslator_po_parse(GtranslatorPo *po,
 	 * Get absolute filename.
 	 */
 	if (!g_path_is_absolute(filename)) 
-		priv->filename = g_build_filename(filename);
+		priv->filename = g_build_filename (filename, NULL);
 	else
 		priv->filename = g_strdup(filename);
 	
@@ -676,6 +677,9 @@ gtranslator_po_save_file(GtranslatorPo *po,
 			     message_error);
 		return;
 	}
+	
+	/* If we are here everything is ok and we can set the state as saved */
+	gtranslator_po_set_state (po, GTR_PO_STATE_SAVED);
 	
 	/*
 	 * If the warn if fuzzy option is enabled we have to show an error

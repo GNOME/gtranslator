@@ -105,6 +105,16 @@ void                   gtranslator_tab_message_go_to       (GtranslatorTab *tab,
 							    gboolean searching);
 							    
 GtranslatorTab        *gtranslator_tab_get_from_document   (GtranslatorPo *po);
+
+gboolean               gtranslator_tab_get_autosave_enabled (GtranslatorTab *tab);
+
+void                   gtranslator_tab_set_autosave_enabled (GtranslatorTab *tab, 
+							     gboolean enable);
+
+gint                   gtranslator_tab_get_autosave_interval (GtranslatorTab *tab);
+
+void                   gtranslator_tab_set_autosave_interval (GtranslatorTab *tab, 
+							      gint interval);
 							    
 gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 

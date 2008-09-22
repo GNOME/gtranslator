@@ -79,6 +79,12 @@ struct _GtranslatorTabPrivate
 	GtkWidget *translated;
 	GtkWidget *fuzzy;
 	GtkWidget *untranslated;
+	
+	/* Autosave */
+	GTimer *timer;
+	gint autosave_interval;
+	guint autosave_timeout;
+	gint autosave : 1;
 };
 
 enum
@@ -89,7 +95,75 @@ enum
 	LAST_SIGNAL
 };
 
+enum
+{
+	PROP_0,
+	PROP_AUTOSAVE,
+	PROP_AUTOSAVE_INTERVAL
+};
+
 static guint signals[LAST_SIGNAL];
+
+static gboolean gtranslator_tab_autosave (GtranslatorTab *tab);
+
+static void
+install_autosave_timeout (GtranslatorTab *tab)
+{
+	gint timeout;
+
+	g_return_if_fail (tab->priv->autosave_timeout <= 0);
+	g_return_if_fail (tab->priv->autosave);
+	g_return_if_fail (tab->priv->autosave_interval > 0);
+	
+	/* Add a new timeout */
+	timeout = g_timeout_add (tab->priv->autosave_interval * 1000 * 60,
+				 (GSourceFunc) gtranslator_tab_autosave,
+				 tab);
+	
+	tab->priv->autosave_timeout = timeout;
+}
+
+static gboolean
+install_autosave_timeout_if_needed (GtranslatorTab *tab)
+{	
+	g_return_val_if_fail (tab->priv->autosave_timeout <= 0, FALSE);
+
+ 	if (tab->priv->autosave)
+ 	{
+ 		install_autosave_timeout (tab);
+ 		
+ 		return TRUE;
+ 	}
+ 	
+ 	return FALSE;
+}
+
+static gboolean
+gtranslator_tab_autosave (GtranslatorTab *tab)
+{
+	GError *error = NULL;
+	
+	if (!gtranslator_po_get_state (tab->priv->po) == GTR_PO_STATE_MODIFIED)
+		return TRUE;
+	
+	gtranslator_po_save_file (tab->priv->po, &error);
+	if (error)
+	{
+		g_warning (error->message);
+		g_error_free (error);
+	}
+	
+	return TRUE;
+}
+
+static void
+remove_autosave_timeout (GtranslatorTab *tab)
+{
+	g_return_if_fail (tab->priv->autosave_timeout > 0);
+	
+	g_source_remove (tab->priv->autosave_timeout);
+	tab->priv->autosave_timeout = 0;
+}
 
 /*
  * Write the change back to the gettext PO instance in memory and
@@ -541,26 +615,85 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 static void
 gtranslator_tab_init (GtranslatorTab *tab)
 {
-	GtkWidget *image;
-	
 	tab->priv = GTR_TAB_GET_PRIVATE (tab);
 	
 	g_signal_connect(tab, "message-changed",
 			 G_CALLBACK(update_status), NULL);
 	
 	gtranslator_tab_draw(tab);
+	
+	/* Manage auto save data */
+	tab->priv->autosave = gtranslator_prefs_manager_get_autosave ();
+	tab->priv->autosave = (tab->priv->autosave != FALSE);
+
+	tab->priv->autosave_interval = gtranslator_prefs_manager_get_autosave_interval ();
+	if (tab->priv->autosave_interval <= 0)
+		tab->priv->autosave_interval = GPM_DEFAULT_AUTOSAVE_INTERVAL;
 }
 
 static void
 gtranslator_tab_finalize (GObject *object)
 {
-	GtranslatorTab *tab = GTR_TAB(object);
-	gint i;
+	GtranslatorTab *tab = GTR_TAB (object);
 	
-	if(tab->priv->po)
-		g_object_unref(tab->priv->po);
+	if (tab->priv->po)
+		g_object_unref (tab->priv->po);
+		
+	if (tab->priv->timer != NULL)
+		g_timer_destroy (tab->priv->timer);
+	
+	if (tab->priv->autosave_timeout > 0)
+		remove_autosave_timeout (tab);
 	
 	G_OBJECT_CLASS (gtranslator_tab_parent_class)->finalize (object);
+}
+
+static void
+gtranslator_tab_get_property (GObject    *object,
+			      guint       prop_id,
+			      GValue     *value,
+			      GParamSpec *pspec)
+{
+	GtranslatorTab *tab = GTR_TAB (object);
+
+	switch (prop_id)
+	{
+		case PROP_AUTOSAVE:
+			g_value_set_boolean (value,
+					     gtranslator_tab_get_autosave_enabled (tab));
+			break;
+		case PROP_AUTOSAVE_INTERVAL:
+			g_value_set_int (value,
+					 gtranslator_tab_get_autosave_interval (tab));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gtranslator_tab_set_property (GObject      *object,
+			      guint         prop_id,
+			      const GValue *value,
+			      GParamSpec   *pspec)
+{
+	GtranslatorTab *tab = GTR_TAB (object);
+
+	switch (prop_id)
+	{
+		case PROP_AUTOSAVE:
+			gtranslator_tab_set_autosave_enabled (tab,
+							      g_value_get_boolean (value));
+			break;
+		case PROP_AUTOSAVE_INTERVAL:
+			gtranslator_tab_set_autosave_interval (tab,
+							       g_value_get_int (value));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;			
+	}
 }
 
 static void
@@ -571,7 +704,10 @@ gtranslator_tab_class_init (GtranslatorTabClass *klass)
 	g_type_class_add_private (klass, sizeof (GtranslatorTabPrivate));
 
 	object_class->finalize = gtranslator_tab_finalize;
+	object_class->set_property = gtranslator_tab_set_property;
+	object_class->get_property = gtranslator_tab_get_property;
 	
+	/* Signals */
 	signals[SHOWED_MESSAGE] = 
 		g_signal_new("showed-message",
 			     G_OBJECT_CLASS_TYPE (klass),
@@ -601,6 +737,27 @@ gtranslator_tab_class_init (GtranslatorTabClass *klass)
 			     g_cclosure_marshal_VOID__POINTER,
 			     G_TYPE_NONE, 1,
 			     G_TYPE_POINTER);
+			     
+	/* Properties */
+	g_object_class_install_property (object_class,
+					 PROP_AUTOSAVE,
+					 g_param_spec_boolean ("autosave",
+							       "Autosave",
+							       "Autosave feature",
+							       TRUE,
+							       G_PARAM_READWRITE |
+							       G_PARAM_STATIC_STRINGS));
+
+	g_object_class_install_property (object_class,
+					 PROP_AUTOSAVE_INTERVAL,
+					 g_param_spec_int ("autosave-interval",
+							   "AutosaveInterval",
+							   "Time between two autosaves",
+							   0,
+							   G_MAXINT,
+							   0,
+							   G_PARAM_READWRITE |
+							   G_PARAM_STATIC_STRINGS));
 }
 
 /***************************** Public funcs ***********************************/
@@ -624,6 +781,7 @@ gtranslator_tab_new (GtranslatorPo *po)
 	
 	tab->priv->po = po;
 	g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
+	install_autosave_timeout_if_needed (tab);
 	
 	/*
 	 * Now we have to initialize the number of msgstr tabs
@@ -815,8 +973,9 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 		/*
 		 * Emitting message-edition-finished signal
 		 */
-		g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
-			       0, GTR_MSG (current_msg->data));
+		if (!searching)
+			g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
+				       0, GTR_MSG (current_msg->data));
 		
 		gtranslator_tab_show_message(tab, to_go->data);
 		set_message_area(tab, NULL);
@@ -871,4 +1030,106 @@ gtranslator_tab_get_from_document (GtranslatorPo *po)
 	res = g_object_get_data (G_OBJECT (po), GTR_TAB_KEY);
 	
 	return (res != NULL) ? GTR_TAB (res) : NULL;
+}
+
+/**
+ * gtranslator_tab_get_autosave_enabled:
+ * @tab: a #GtranslatorTab
+ * 
+ * Gets the current state for the autosave feature
+ * 
+ * Return value: TRUE if the autosave is enabled, else FALSE
+ **/
+gboolean
+gtranslator_tab_get_autosave_enabled (GtranslatorTab *tab)
+{
+	g_return_val_if_fail (GTR_IS_TAB (tab), FALSE);
+
+	return tab->priv->autosave;
+}
+
+/**
+ * gtranslator_tab_set_autosave_enabled:
+ * @tab: a #GtranslatorTab
+ * @enable: enable (TRUE) or disable (FALSE) auto save
+ * 
+ * Enables or disables the autosave feature. It does not install an
+ * autosave timeout if the document is new or is read-only
+ **/
+void
+gtranslator_tab_set_autosave_enabled (GtranslatorTab *tab, 
+				      gboolean enable)
+{
+	g_return_if_fail (GTR_IS_TAB (tab));
+
+	if (tab->priv->autosave == enable)
+		return;
+
+	tab->priv->autosave = enable;
+
+ 	if (enable && 
+ 	    (tab->priv->autosave_timeout <= 0))
+ 	{
+		install_autosave_timeout (tab);
+		
+		return;
+	}
+ 		
+ 	if (!enable && (tab->priv->autosave_timeout > 0))
+ 	{
+		remove_autosave_timeout (tab);
+		
+ 		return; 
+ 	} 
+
+ 	g_return_if_fail (!enable && (tab->priv->autosave_timeout <= 0)); 
+}
+
+/**
+ * gtranslator_tab_get_autosave_interval:
+ * @tab: a #GtranslatorTab
+ * 
+ * Gets the current interval for the autosaves
+ * 
+ * Return value: the value of the autosave
+ **/
+gint 
+gtranslator_tab_get_autosave_interval (GtranslatorTab *tab)
+{
+	g_return_val_if_fail (GTR_IS_TAB (tab), 0);
+
+	return tab->priv->autosave_interval;
+}
+
+/**
+ * gtranslator_tab_set_autosave_interval:
+ * @tab: a #GtranslatorTab
+ * @interval: the new interval
+ * 
+ * Sets the interval for the autosave feature. It does nothing if the
+ * interval is the same as the one already present. It removes the old
+ * interval timeout and adds a new one with the autosave passed as
+ * argument.
+ **/
+void 
+gtranslator_tab_set_autosave_interval (GtranslatorTab *tab, 
+				       gint interval)
+{
+	g_return_if_fail (GTR_IS_TAB (tab));
+	g_return_if_fail (interval > 0);
+
+	if (tab->priv->autosave_interval == interval)
+		return;
+
+	tab->priv->autosave_interval = interval;
+		
+	if (!tab->priv->autosave)
+		return;
+
+	if (tab->priv->autosave_timeout > 0)
+	{
+		remove_autosave_timeout (tab);
+
+		install_autosave_timeout (tab);
+	}
 }

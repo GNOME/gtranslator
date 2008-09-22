@@ -63,6 +63,10 @@ static void gtranslator_prefs_manager_gdl_style_changed(GConfClient *client,
 							GConfEntry  *entry, 
 							gpointer     user_data);
 
+static void gtranslator_prefs_manager_autosave_changed (GConfClient *client,
+							guint        cnxn_id,
+							GConfEntry  *entry,
+							gpointer     user_data);
 
 /* GUI state is serialized to a .desktop file, not in gconf */
 
@@ -435,7 +439,11 @@ gtranslator_prefs_manager_app_init (void)
 				GPM_GDL_STYLE,
 				gtranslator_prefs_manager_gdl_style_changed,
 				NULL, NULL, NULL);
-		
+
+		gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+					 GPM_AUTOSAVE,
+					 gtranslator_prefs_manager_autosave_changed,
+					 NULL, NULL, NULL);		
 	}
 
 	return gtranslator_prefs_manager != NULL;	
@@ -622,3 +630,64 @@ gtranslator_prefs_manager_gdl_style_changed(GConfClient *client,
 		      "switcher-style", style, NULL);
 }
 
+static void
+gtranslator_prefs_manager_autosave_changed (GConfClient *client,
+					    guint        cnxn_id,
+					    GConfEntry  *entry,
+					    gpointer     user_data)
+{
+	GList *tabs;
+	GList *l;
+	GtranslatorWindow *window;
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	window = gtranslator_application_get_active_window (GTR_APP);
+
+	if (strcmp (entry->key, GPM_AUTOSAVE) == 0)
+	{
+		gboolean autosave;
+
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			autosave = gconf_value_get_bool (entry->value);
+		else
+			autosave = GPM_DEFAULT_AUTOSAVE;
+
+		tabs = gtranslator_window_get_all_tabs (window);
+
+		for (l = tabs; l != NULL; l = g_list_next (l))
+		{
+			GtranslatorTab *tab = GTR_TAB (l->data);
+
+			gtranslator_tab_set_autosave_enabled (tab, autosave);
+		}
+
+		g_list_free (tabs);
+	}
+	else if (strcmp (entry->key,  GPM_AUTOSAVE_INTERVAL) == 0)
+	{
+		gint autosave_interval;
+
+		if (entry->value->type == GCONF_VALUE_INT)
+		{
+			autosave_interval = gconf_value_get_int (entry->value);
+
+			if (autosave_interval <= 0)
+				autosave_interval = GPM_DEFAULT_AUTOSAVE_INTERVAL;
+		}
+		else
+			autosave_interval = GPM_DEFAULT_AUTOSAVE_INTERVAL;
+
+		tabs = gtranslator_window_get_all_tabs (window);
+
+		for (l = tabs; l != NULL; l = g_list_next (l))
+		{
+			GtranslatorTab *tab = GTR_TAB (l->data);
+
+			gtranslator_tab_set_autosave_interval (tab, autosave_interval);
+		}
+
+		g_list_free (tabs);
+	}
+}
