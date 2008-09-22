@@ -75,9 +75,10 @@ struct _GtranslatorTabPrivate
 	GtkWidget *message_area;
 	
 	/*Original text*/
-        GtkWidget *msgid_hbox; 
-	GtkWidget *text_notebook;
+        GtkWidget *msgid_hbox;
+	GtkWidget *text_vbox;
 	GtkWidget *text_msgid;
+	GtkWidget *text_plural_scroll;
 	GtkWidget *text_msgid_plural;
 	
 	/*Translated text*/
@@ -329,9 +330,9 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 
 
 static GtkWidget *
-gtranslator_tab_append_page(const gchar *tab_label,
-			    GtkWidget *notebook,
-			    gboolean spellcheck)
+gtranslator_tab_append_msgstr_page (const gchar *tab_label,
+				    GtkWidget *box,
+				    gboolean spellcheck)
 {
 	GtkWidget *scroll;
 	GtkWidget *label;
@@ -355,8 +356,9 @@ gtranslator_tab_append_page(const gchar *tab_label,
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-		
-	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), scroll, label);
+	
+	gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
+
 	return widget;
 }
 
@@ -454,10 +456,9 @@ gtranslator_tab_show_message(GtranslatorTab *tab,
 	{
 		msgstr = gtranslator_msg_get_msgstr(msg);
 		/*
-		 * Disable notebook tabs
+		 * Disable notebook tabs and hide widgets
 		 */
-		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(priv->text_notebook), FALSE);
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(priv->text_notebook), 0);
+		gtk_widget_hide (priv->text_plural_scroll);
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(priv->trans_notebook), FALSE);
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(priv->trans_notebook), 0);
 		if(msgstr) 
@@ -469,7 +470,7 @@ gtranslator_tab_show_message(GtranslatorTab *tab,
 		}
 	}
 	else {
-		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(tab->priv->text_notebook), TRUE);
+		gtk_widget_show (priv->text_plural_scroll);
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(tab->priv->trans_notebook), TRUE);
 		buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(tab->priv->text_msgid_plural));
 		gtk_text_buffer_set_text(buf, (gchar*)msgid_plural, -1);
@@ -575,9 +576,9 @@ gtranslator_tab_add_msgstr_tabs (GtranslatorTab *tab)
 	
 	do{
 		label = g_strdup_printf (_("Plural %d"), i+1);
-		priv->trans_msgstr[i] = gtranslator_tab_append_page (label,
-								     priv->trans_notebook,
-								     TRUE);
+		priv->trans_msgstr[i] = gtranslator_tab_append_msgstr_page (label,
+									    priv->trans_notebook,
+									    TRUE);
 		buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
 		g_signal_connect (buf, "end-user-action",
 				  G_CALLBACK (gtranslator_message_translation_update),
@@ -602,6 +603,8 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	GtkWidget *msgstr_label;
 	GtkWidget *current_page;
 	GtkWidget *notebook, *tm_layout, *tm, *comments_label, *tm_label, *scroll;
+	GtkWidget *hbox;
+	GtkWidget *label;
 	GtranslatorTabPrivate *priv = tab->priv;
 	
 	/*
@@ -697,20 +700,51 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 
 	gtk_box_pack_start(GTK_BOX(priv->msgid_hbox), msgid_label, FALSE, FALSE, 0);
 
-	priv->text_notebook = gtk_notebook_new();
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(priv->text_notebook), FALSE);
-	gtk_widget_show (priv->text_notebook);
-	priv->text_msgid = gtranslator_tab_append_page(_("Singular"),
-						       priv->text_notebook,
-						       FALSE);
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(priv->text_msgid), FALSE);
-	priv->text_msgid_plural = gtranslator_tab_append_page(_("Plural"),
-							      priv->text_notebook,
-							      FALSE);
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(priv->text_msgid_plural), FALSE);
+	priv->text_vbox = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (priv->text_vbox);
+	
+	/* Singular */
+	scroll = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_show (scroll);
+	
+	priv->text_msgid = gtranslator_view_new ();
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->text_msgid), FALSE);
+	gtk_widget_show (priv->text_msgid);
+	
+	gtk_container_add (GTK_CONTAINER (scroll),
+			   priv->text_msgid);
+	
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
+				        GTK_POLICY_AUTOMATIC,
+				        GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
+					     GTK_SHADOW_IN);
+	
+	gtk_box_pack_start (GTK_BOX (priv->text_vbox), scroll, TRUE, TRUE, 0);
+	
+	/* Plural */
+	priv->text_plural_scroll = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_show (priv->text_plural_scroll);
+	
+	priv->text_msgid_plural = gtranslator_view_new ();
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->text_msgid_plural),
+				    FALSE);
+	gtk_widget_show (priv->text_msgid_plural);
+	
+	gtk_container_add (GTK_CONTAINER (priv->text_plural_scroll),
+			   priv->text_msgid_plural);
+	
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->text_plural_scroll),
+				        GTK_POLICY_AUTOMATIC,
+				        GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->text_plural_scroll),
+					     GTK_SHADOW_IN);
+	
+	gtk_box_pack_start (GTK_BOX (priv->text_vbox), priv->text_plural_scroll,
+			    TRUE, TRUE, 0);
 
 	gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgid_hbox, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vertical_box), priv->text_notebook, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vertical_box), priv->text_vbox, TRUE, TRUE, 0);
 
 	
 	/*
@@ -955,18 +989,6 @@ gtranslator_tab_get_panel(GtranslatorTab *tab)
 	g_return_val_if_fail(tab != NULL, NULL);
 	
 	return tab->priv->panel;
-}
-
-/**
- * gtranslator_tab_get_active_text_tab:
- * @tab: a #GtranslationTab
- * 
- * Return value: the number of the active original text notebook.
- **/
-gint
-gtranslator_tab_get_active_text_tab(GtranslatorTab *tab)
-{
-	return gtk_notebook_get_current_page(GTK_NOTEBOOK(tab->priv->text_notebook));
 }
 
 /**

@@ -1,5 +1,19 @@
 2008-08-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* tab.c (gtranslator_tab_show_message), (gtranslator_tab_draw):
+	Removed vertical labels.
+
+2008-08-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-edit.c (gtranslator_message_copy_to_translation):
+	* tab.c (gtranslator_tab_append_msgstr_page),
+	(gtranslator_tab_show_message), (gtranslator_tab_add_msgstr_tabs),
+	(gtranslator_tab_draw):
+	* tab.h:
+	Changed plural forms visualization from kbabel like style to poedit style.
+
+2008-08-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* translation-memory/berkeley/berkeley.c
 	(gtranslator_berkeley_lookup):
 	Now the list is sorted after all elements are prepended.

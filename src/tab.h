@@ -93,8 +93,6 @@ GtranslatorPo         *gtranslator_tab_get_po              (GtranslatorTab *tab)
 
 GtkWidget             *gtranslator_tab_get_panel           (GtranslatorTab *tab);
 
-gint                   gtranslator_tab_get_active_text_tab (GtranslatorTab *tab);
-
 gint                   gtranslator_tab_get_active_trans_tab(GtranslatorTab *tab);
 
 GtranslatorContextPanel *gtranslator_tab_get_context_panel (GtranslatorTab *tab);

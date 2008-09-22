@@ -126,15 +126,11 @@ gtranslator_message_copy_to_translation(GtkAction *action,
 	GList *msg;
 	gint page_index;
 	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	msg = gtranslator_po_get_current_message(po);
+	current = gtranslator_window_get_active_tab (window);
+	po = gtranslator_tab_get_po (current);
+	msg = gtranslator_po_get_current_message (po);
 	
-	page_index = gtranslator_tab_get_active_text_tab(current);
-	
-	if(page_index == 0)
-		msgid = gtranslator_msg_get_msgid(msg->data);
-	else msgid = gtranslator_msg_get_msgid_plural(msg->data);
+	msgid = gtranslator_msg_get_msgid (msg->data);
 	
 	if(msgid)
 	{
