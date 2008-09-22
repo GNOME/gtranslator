@@ -44,6 +44,7 @@
 #define MOZILLA_ICON PIXMAPSDIR"/mozilla.png"
 #define DEBIAN_ICON  PIXMAPSDIR"/debian.png"
 #define SUSE_ICON    PIXMAPSDIR"/suse.png"
+#define XFCE_ICON    PIXMAPSDIR"/xfce.png"
 
 GTR_PLUGIN_DEFINE_TYPE(GtranslatorOpenTranPanel, gtranslator_open_tran_panel, GTK_TYPE_VBOX)
 
@@ -139,6 +140,8 @@ print_struct_to_tree_view(gpointer value,
 			icon = create_pixbuf (DEBIAN_ICON);
 		else if (strcmp ("SUSE", str) == 0)
 			icon = create_pixbuf (SUSE_ICON);
+		else if (strcmp ("XFCE", str) == 0)
+			icon = create_pixbuf (XFCE_ICON);
 		else icon = NULL;
 		
 		gtk_list_store_append(panel->priv->store, &iter);

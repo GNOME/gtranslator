@@ -39,7 +39,8 @@ pixmaps__DATA = \
         mozilla.png \
         debian.png \
 	open-tran.png \
-	suse.png
+	suse.png \
+	xfce.png
 
 # Plugin Info
 
