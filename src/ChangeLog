@@ -4,12 +4,26 @@
 	so it does not send bogus warning for untranslated
 	messages. (Fixes #548548).
 
+2008-08-22  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* dialogs/preferences-dialog:
+        (setup_tm_pages):
+        Added check to know if there is active profile before
+        fill the lang_tm_entry by default.
+        * dialogs/profile-dialog:
+        (save_new_profile):
+        Added check to know if the profiles list is empty and if so
+        creating it and set the profile as active.
+    
+        Now when there is no profile and try to access to preferences
+        the program does not crash. (Fixed #548846).
+	
 2008-08-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* po.c (gtranslator_po_get_untranslated_count):
 	* tab.c (update_status):
 	Fixed problem showing the number of untranslated messages (Fixes #548798).
-
+	
 2008-08-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* actions-file.c (gtranslator_open),
