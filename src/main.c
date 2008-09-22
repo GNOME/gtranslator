@@ -129,6 +129,7 @@ main(gint argc,
 		g_clear_error(&error);
 	}
 
+	if (!g_thread_supported()) g_thread_init(NULL);
 	gtk_init(&argc, &argv);
 	
 	g_option_context_parse(context, &argc, &argv, NULL);

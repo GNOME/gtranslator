@@ -15,3 +15,7 @@ endif
 if USE_DICTIONARY
 SUBDIRS += dictionary
 endif
+
+if BUILD_SVN
+SUBDIRS += subversion
+endif
