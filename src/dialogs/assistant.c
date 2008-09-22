@@ -315,7 +315,7 @@ create_start_page (GtranslatorAssistant *as)
 	gtk_container_set_border_width (GTK_CONTAINER (box), 12);
 
 	label = gtk_label_new (_("This assistant will help you to create the main profile\n"
-			       "and generate you translation memory database."));
+			       "and generate your translation memory database."));
 	gtk_widget_show (label);
 	gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
