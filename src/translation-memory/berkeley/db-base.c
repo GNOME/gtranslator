@@ -43,6 +43,7 @@ G_DEFINE_TYPE(GtranslatorDbBase, gtranslator_db_base, G_TYPE_OBJECT)
 struct _GtranslatorDbBasePrivate
 {
 	DB *db;
+	gchar *path;
 };
 
 static gchar *
@@ -81,9 +82,11 @@ get_db_base_directory ()
 }
 
 static void
-gtranslator_db_base_init (GtranslatorDbBase *panel)
+gtranslator_db_base_init (GtranslatorDbBase *base)
 {
-	panel->priv = GTR_DB_BASE_GET_PRIVATE (panel);
+	base->priv = GTR_DB_BASE_GET_PRIVATE (base);
+	
+	base->priv->path = NULL;
 }
 
 static void
@@ -94,6 +97,8 @@ gtranslator_db_base_finalize (GObject *object)
 	
 	if ((err = base->priv->db->close(base->priv->db, 0)) != 0)
 	       gtranslator_db_base_show_error (base, err);
+	
+	g_free (base->priv->path);
 	
 	G_OBJECT_CLASS (gtranslator_db_base_parent_class)->finalize (object);
 }
@@ -115,7 +120,6 @@ gtranslator_db_base_create_dabatase (GtranslatorDbBase *base,
 {
 	gint error;
 	gchar *db_dir;
-	gchar *fullname;
 	
 	g_return_if_fail (GTR_IS_DB_BASE (base));
 	
@@ -127,18 +131,16 @@ gtranslator_db_base_create_dabatase (GtranslatorDbBase *base,
 	}
 	
 	db_dir = get_db_base_directory ();
-	fullname = g_build_filename (db_dir, filename, NULL);
+	base->priv->path = g_build_filename (db_dir, filename, NULL);
 	g_free (db_dir);
 
 	error = base->priv->db->open (base->priv->db,
 				      NULL,
-				      fullname,
+				      base->priv->path,
 				      NULL,
 				      type,
 				      DB_CREATE,
 				      0);
-	
-	g_free (fullname);
 	
 	if (error != 0)
 	{
@@ -152,14 +154,36 @@ gtranslator_db_base_show_error (GtranslatorDbBase *base,
 				int error)
 {
 	gchar *err = NULL;
+	DB_ENV *env;
+	gint e;
 	
-	if (error != DB_NOTFOUND)
+	switch (error)
 	{
-		err = g_strdup_printf (_("There was an error in database: %s"),
-				       db_strerror (error));
-	
-		g_warning (err);
-		g_free (err);
+		case DB_NOTFOUND:
+			break;
+		case DB_RUNRECOVERY:
+			g_warning (_("Running recovery..."));
+			
+			env = base->priv->db->get_env (base->priv->db);
+			e = env->open (env, base->priv->path,
+				       DB_RECOVER_FATAL, 0);
+			
+			if (e != 0)
+			{
+				err = g_strdup_printf (_("There was an error recovering the database: %s"),
+						       db_strerror (e));
+				
+				g_warning (err);
+				g_free (err);
+			}
+			break;
+		default:
+			err = g_strdup_printf (_("There was an error in database: %s"),
+					       db_strerror (error));
+			
+			g_warning (err);
+			g_free (err);
+			break;
 	}
 }
 
