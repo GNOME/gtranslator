@@ -84,6 +84,8 @@ struct _GtranslatorPreferencesDialogPrivate
         GtkWidget *add_database_button;
 	GtkWidget *add_database_progressbar;
 
+        GtkWidget *use_lang_profile_in_tm;
+        GtkWidget *tm_lang_entry;
         GtkWidget *show_tm_options_checkbutton;
         GtkWidget *missing_words_spinbutton;
         GtkWidget *sentence_length_spinbutton;
@@ -768,8 +770,11 @@ on_add_database_button_pulsed (GtkButton *button,
 
   dir = g_file_new_for_path (dir_name);
 
-  gtranslator_project_utils_scan_dir (dir, &data->list, NULL);
-
+  if (gtranslator_prefs_manager_get_use_lang_profile ()) {
+    gtranslator_project_utils_scan_dir (dir, &data->list, gtranslator_prefs_manager_get_tm_lang_entry());
+  } else {
+    gtranslator_project_utils_scan_dir (dir, &data->list, NULL);
+  }
   data->tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
   data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
   data->parent = GTK_WINDOW (dlg);
@@ -784,11 +789,35 @@ on_add_database_button_pulsed (GtkButton *button,
 }
 
 static void
+on_use_lang_profile_checkbutton_changed (GtkToggleButton *button,
+					 gpointer user_data)
+{ 
+  gtranslator_prefs_manager_set_use_lang_profile (gtk_toggle_button_get_active(button));
+}
+
+
+static void
 on_show_tm_options_checkbutton_changed (GtkToggleButton *button,
 					gpointer user_data)
 { 
   gtranslator_prefs_manager_set_show_tm_options (gtk_toggle_button_get_active(button));
 }
+
+static void
+tm_lang_entry_changed (GObject    *gobject,
+		       GParamSpec *arg1,
+		       GtranslatorPreferencesDialog *dlg)
+{
+	const gchar *text;
+	
+	g_return_if_fail(GTK_ENTRY(gobject) == GTK_ENTRY(dlg->priv->tm_lang_entry));
+
+	text = gtk_entry_get_text(GTK_ENTRY(gobject));
+	
+	if(text)
+	  gtranslator_prefs_manager_set_tm_lang_entry (text);
+}
+
 
 static void
 on_missing_words_spinbutton_changed (GtkSpinButton *spinbutton,
@@ -830,9 +859,26 @@ directory_entry_changed(GObject    *gobject,
 
 static void
 setup_tm_pages(GtranslatorPreferencesDialog *dlg)
-{	
+{
+  GtranslatorProfile *profile;
+  gchar *language_code;
+  const gchar *filename;
+
+  profile = gtranslator_application_get_active_profile (GTR_APP);
+  language_code = gtranslator_profile_get_language_code (profile);
+  filename = (const gchar*)g_strconcat (language_code, ".po", NULL);
+  
+
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton),
 				gtranslator_prefs_manager_get_show_tm_options ());
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->use_lang_profile_in_tm),
+				gtranslator_prefs_manager_get_use_lang_profile ());
+
+  gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry),
+		      filename);
+
+  gtranslator_prefs_manager_set_tm_lang_entry (filename);
   
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->missing_words_spinbutton),
 			     (gdouble) gtranslator_prefs_manager_get_missing_words ());
@@ -848,12 +894,20 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
 			 G_CALLBACK(directory_entry_changed),
 			 dlg);
   
+  g_signal_connect(dlg->priv->tm_lang_entry, "notify::text",
+			 G_CALLBACK(tm_lang_entry_changed),
+			 dlg);
+  
   g_signal_connect (GTK_BUTTON (dlg->priv->add_database_button), "clicked",
 		    G_CALLBACK (on_add_database_button_pulsed),
 		    dlg);
 
   g_signal_connect (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton), "toggled",
 		    G_CALLBACK (on_show_tm_options_checkbutton_changed),
+		    dlg);
+
+  g_signal_connect (GTK_TOGGLE_BUTTON (dlg->priv->use_lang_profile_in_tm), "toggled",
+		    G_CALLBACK (on_use_lang_profile_checkbutton_changed),
 		    dlg);
 
   g_signal_connect (GTK_SPIN_BUTTON (dlg->priv->missing_words_spinbutton), "value-changed",
@@ -863,6 +917,8 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
   g_signal_connect (GTK_SPIN_BUTTON (dlg->priv->sentence_length_spinbutton), "value-changed",
 		    G_CALLBACK (on_sentence_length_spinbutton_changed),
 		    dlg);
+
+  g_free (filename);
 }
 
 /***************Plugins pages****************/
@@ -1110,7 +1166,9 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
  		"search_button", &dlg->priv->search_button,
  		"add_database_button", &dlg->priv->add_database_button,
 		"add_database_progressbar", &dlg->priv->add_database_progressbar,
- 						  
+
+		"use_lang_profile_in_tm", &dlg->priv->use_lang_profile_in_tm,
+		"tm_lang_entry", &dlg->priv->tm_lang_entry,		  
  		"show_tm_options_checkbutton", &dlg->priv->show_tm_options_checkbutton,				  
  		"missing_words_spinbutton", &dlg->priv->missing_words_spinbutton,
  		"sentence_length_spinbutton", &dlg->priv->sentence_length_spinbutton,

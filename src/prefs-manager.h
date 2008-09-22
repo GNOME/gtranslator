@@ -73,6 +73,8 @@
 
 /* Translation Memory */
 #define GPM_TM_DIR                      GPM_PREFS_DIR "/tm/dir_entry"
+#define GPM_TM_USE_LANG_PROFILE         GPM_PREFS_DIR "/tm/use_lang_profile"
+#define GPM_TM_LANG_ENTRY               GPM_PREFS_DIR "/tm/tm_lang_profile"
 #define GPM_TM_SHOW_TM_OPTIONS          GPM_PREFS_DIR "/tm/show_tm_options"
 #define GPM_TM_MISSING_WORDS            GPM_PREFS_DIR "/tm/missing_words"
 #define GPM_TM_SENTENCE_LENGTH          GPM_PREFS_DIR "/tm/sentence_lenght"
@@ -123,6 +125,8 @@
 
 /* Translation Memory */
 #define GPM_DEFAULT_TM_DIR              (const gchar*) ""
+#define GPM_DEFAULT_TM_USE_LANG_PROFILE 0 /*FALSE*/
+#define GPM_DEFAULT_TM_LANG_ENTRY       (const gchar*) ""
 #define GPM_DEFAULT_TM_SHOW_TM_OPTIONS  0 /*FALSE*/
 #define GPM_DEFAULT_TM_MISSING_WORDS    2
 #define GPM_DEFAULT_TM_SENTENCE_LENGTH  2
@@ -207,6 +211,12 @@ const gchar *            gtranslator_prefs_manager_get_tm_dir                   
 
 void                     gtranslator_prefs_manager_set_show_tm_options          (gboolean show_tm_options);
 gboolean                 gtranslator_prefs_manager_get_show_tm_options          (void);
+
+void                     gtranslator_prefs_manager_set_tm_lang_entry            (const gchar *dir);
+const gchar *            gtranslator_prefs_manager_get_tm_lang_entry            (void);
+
+void                     gtranslator_prefs_manager_set_use_lang_profile         (gboolean use_lang_profile);
+gboolean                 gtranslator_prefs_manager_get_use_lang_profile         (void);
 
 void                     gtranslator_prefs_manager_set_missing_words            (gint timeout);
 gint                     gtranslator_prefs_manager_get_missing_words            (void);
