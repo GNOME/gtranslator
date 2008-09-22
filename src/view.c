@@ -41,16 +41,8 @@
 #include <gtksourceview/gtksourceiter.h>
 #include <gtksourceview/gtksourcebuffer.h>
 
-//#undef HAVE_GTKSPELL
 #ifdef HAVE_GTKSPELL
 #include <gtkspell/gtkspell.h>
-#endif
-
-#undef HAVE_SPELL_CHECK
-#ifdef HAVE_SPELL_CHECK
-#include <gtkspellcheck/client.h>
-#include <gtkspellcheck/manager.h>
-#include <gtkspellcheck/textviewclient.h>
 #endif
 
 #define GTR_VIEW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
@@ -69,11 +61,6 @@ struct _GtranslatorViewPrivate
 	
 #ifdef HAVE_GTKSPELL
 	GtkSpell *spell;
-#endif
-	
-#ifdef HAVE_SPELL_CHECK
-	GtkSpellCheckClient *client;
-	GtkSpellCheckManager *manager;
 #endif
 };
 
@@ -101,19 +88,6 @@ gtranslator_attach_gtkspell(GtranslatorView *view)
 	}
 }
 #endif
-
-#ifdef HAVE_SPELL_CHECK
-static void
-gtranslator_attach_spellcheck(GtranslatorView *view)
-{
-	view->priv->client = GTK_SPELL_CHECK_CLIENT(gtk_spell_check_text_view_client_new(GTK_TEXT_VIEW(view)));
-	view->priv->manager = gtk_spell_check_manager_new(NULL, TRUE);
-	
-	gtk_spell_check_manager_attach(view->priv->manager,
-				       view->priv->client);
-}
-#endif
-
 	       
 static void
 gtranslator_view_init (GtranslatorView *view)
@@ -266,13 +240,6 @@ gtranslator_view_enable_spellcheck(GtranslatorView *view,
 #ifdef HAVE_GTKSPELL
 		gtranslator_attach_gtkspell(view);
 #endif
-#ifdef HAVE_SPELL_CHECK
-		if(!view->priv->manager)
-			gtranslator_attach_spellcheck(view);
-		else
-			gtk_spell_check_manager_set_active(view->priv->manager,
-							   TRUE);
-#endif
 	}
 	else
 	{
@@ -280,12 +247,6 @@ gtranslator_view_enable_spellcheck(GtranslatorView *view,
 		if(!view->priv->spell)
 			return;
 		gtkspell_detach(view->priv->spell);
-#endif
-#ifdef HAVE_SPELL_CHECK
-		if(!view->priv->manager)
-			return;
-		gtk_spell_check_manager_set_active(view->priv->manager,
-						   FALSE);
 #endif
 	}
 }
@@ -509,9 +470,6 @@ gtranslator_view_set_search_text (GtranslatorView *view,
 					&begin,
 					&end);
 	}*/
-	
-	if (notify)
-		g_object_notify (G_OBJECT (doc), "can-search-again");
 }
 
 /**
