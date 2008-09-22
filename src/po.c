@@ -258,6 +258,24 @@ on_gettext_po_xerror2(gint severity,
 	message_error = g_strdup_printf("%s.\n %s",message_text1, message_text2);
 }
 
+static gboolean
+po_file_is_empty (po_file_t file)
+{
+	const gchar * const * domains = po_file_domains (file);
+	
+	for (; *domains != NULL; domains++) 
+	{
+		po_message_iterator_t iter = po_message_iterator (file, *domains);
+		if (po_next_message (iter) != NULL)
+		{
+			po_message_iterator_free (iter);
+			return FALSE;
+		}
+		po_message_iterator_free (iter);
+	}
+	return TRUE;
+}
+
 /***************************** Public funcs ***********************************/
 
 /**
@@ -333,11 +351,12 @@ gtranslator_po_parse(GtranslatorPo *po,
 					     &handler);
 	if(priv->gettext_po_file == NULL)
 	{
-		g_set_error(error,
-			    GTR_PO_ERROR,
-			    GTR_PO_ERROR_FILENAME,
-			    _("Failed opening file '%s': %s"),
-			    priv->filename, g_strerror(errno));
+		g_set_error (error,
+			     GTR_PO_ERROR,
+			     GTR_PO_ERROR_FILENAME,
+			     _("Failed opening file '%s': %s\n%s"),
+			     priv->filename, g_strerror(errno),
+			     message_error);
 		g_object_unref(po);
 		return;
 	}
@@ -350,6 +369,16 @@ gtranslator_po_parse(GtranslatorPo *po,
 			    GTR_PO_ERROR,
 			    GTR_PO_ERROR_RECOVERY,
 			    message_error);
+	}
+	
+	if (po_file_is_empty (priv->gettext_po_file))
+	{
+		g_set_error (error,
+			     GTR_PO_ERROR,
+			     GTR_PO_ERROR_FILE_EMPTY,
+			     _("The file is empty"));
+		g_object_unref(po);
+		return;
 	}
 	
 	/*
