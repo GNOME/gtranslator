@@ -83,7 +83,10 @@ GDL_REQUIRED=0.6.0
 LIBGUCHARMAP_OPTIONAL=1.6.0
 GDICT_OPTIONAL=0.11.0
 GTKSPELL_OPTIONAL=2.0.2
-LIBSVN_OPTIONAL=1.5.0
+SVN_MAJOR=1
+SVN_MINOR=5
+SVN_PATCH=0
+LIBSVN_OPTIONAL=$SVN_MAJOR.$SVN_MINOR.$SVN_PATCH
 LIBSOUP_OPTIONAL=2.4.0
 
 AC_SUBST(GTK_REQUIRED)
@@ -363,8 +366,8 @@ if test -n "$SVN_INCLUDE" ; then
 	dnl ------------------------------------
 	have_atr=no
 	PKG_CHECK_MODULES(APR,                            \
-		apr-1, have_atr=yes, have_atr=no)
-	if test x"have_atr" = "xno"; then
+		apr-1, have_apr=yes, have_apr=no)
+	if test x"$have_apr" = "xno"; then
 		SVN_INCLUDE=""
 	fi
 	
@@ -373,8 +376,8 @@ if test -n "$SVN_INCLUDE" ; then
 	dnl------------------------------------------
 	have_atr_util=no
 	PKG_CHECK_MODULES(APR_UTILS,                            \
-		apr-util-1, have_atr_util=yes, have_atr_util=no)
-	if test x"have_atr_util" = "xno"; then
+		apr-util-1, have_apr_util=yes, have_apr_util=no)
+	if test x"$have_apr_util" = "xno"; then
 		SVN_INCLUDE=""
 	fi
 	
@@ -384,9 +387,29 @@ if test -n "$SVN_INCLUDE" ; then
 	have_neon=no
 	PKG_CHECK_MODULES(NEON,                            \
                 neon, have_neon=yes, have_neon=no)
-        if test x"have_neon" = "xno"; then
+        if test x"$have_neon" = "xno"; then
 		SVN_INCLUDE=""
 	fi
+
+	dnl Make sure our SVN version is high enough
+	dnl Eww, eww, eww, this is dirty
+	AC_MSG_CHECKING([for subversion >= $LIBSVN_OPTIONAL])
+	AC_LANG(C)
+	dnl Temporarily set CFLAGS so that include dirs are found
+	CFLAGS_TMP=$CFLAGS
+	CFLAGS="-I$SVN_INCLUDE $APR_CFLAGS"
+	AC_COMPILE_IFELSE(
+		[AC_LANG_PROGRAM([[#include <svn_version.h>]],
+			[[
+				#if (SVN_VER_MAJOR < $SVN_MAJOR) || (SVN_VER_MINOR < $SVN_MINOR) || (SVN_VER_PATCH < $SVN_PATCH)
+				#	error "Version too low"
+				#endif
+			]])], AC_MSG_RESULT(yes), have_svn_version=no)
+	if test x"$have_svn_version" = "xno"; then
+		AC_MSG_RESULT(no)
+		SVN_INCLUDE=""
+	fi
+	CFLAGS=$CFLAGS_TMP
 fi
 
 dnl ------------------------------------------
@@ -394,7 +417,7 @@ dnl Finally prepare subversion build flags
 dnl ------------------------------------------
 
 if test -n "$SVN_INCLUDE" ; then
-	SVN_INCLUDE="-I$SVN_INCLUDE $APR_INCLUDE"
+	SVN_INCLUDE="-I$SVN_INCLUDE"
 	if test x != "x$SVN_LIB" ; then
 	    SVN_LIB="-L$SVN_LIB $APR_LIBS $APR_UTILS_LIBS -lsvn_client-1 -lsvn_subr-1"
 	else
@@ -491,7 +514,6 @@ else
 		echo "        Requires apr (>= 0.9.4); http://subversion.org"
 		echo "        Requires apr-util (>= 0.9.4); http://subversion.org"
 		echo "        Requires neon (>= 0.24.5); http://subversion.org"
-		echo "        Requires subversion (>= 1.0.2); http://subversion.org"
 		echo "        Requires subversion (>= 1.5.0); http://subversion.org"
 
 fi
@@ -530,7 +552,7 @@ echo "
     use http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator
 
 
-Thanks for your attention and braveness in \"compiling\" gtranslator!
+Thanks for your attention and braveness in compiling gtranslator!
 -- The website for gtranslator is http://gtranslator.sourceforge.net
 
 ------------------------------------------------------------------
