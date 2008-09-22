@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include "application.h"
 #include "context.h"
 #include "io-error-message-area.h"
 #include "message-area.h"
@@ -34,6 +35,7 @@
 #include "prefs-manager.h"
 #include "view.h"
 #include "translation-memory-ui.h"
+#include "window.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -59,11 +61,14 @@ struct _GtranslatorTabPrivate
 	GtkWidget *content_pane;
 	GtkWidget *panel;
 	GtkWidget *message_table;
-	GtkWidget *lateral_panel; //TM, Comments, etc.
+	GtkWidget *lateral_panel; //TM, Context, etc.
 
 	GtkWidget *comment_pane;
 	GtkWidget *context;
         GtkWidget *translation_memory;
+	
+	/*Comment button*/
+	GtkWidget *comment_button;
 	
 	/*Message area*/
 	GtkWidget *message_area;
@@ -167,6 +172,15 @@ remove_autosave_timeout (GtranslatorTab *tab)
 	
 	g_source_remove (tab->priv->autosave_timeout);
 	tab->priv->autosave_timeout = 0;
+}
+
+static void
+gtranslator_tab_showed_message (GtranslatorTab *tab,
+				GtranslatorMsg *msg)
+{
+	if (strcmp (gtranslator_msg_get_comment (msg), "") != 0)
+		gtk_widget_show (tab->priv->comment_button);
+	else gtk_widget_hide (tab->priv->comment_button);
 }
 
 /*
@@ -306,6 +320,38 @@ gtranslator_message_plural_forms (GtranslatorTab *tab,
 			gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
 		}
 	}
+}
+
+static GtkWidget *
+gtranslator_tab_create_comment_button ()
+{
+	GtkWidget *button;
+	GtkWidget *image;
+	
+	/* setup close button */
+	button = gtk_button_new ();
+	gtk_button_set_relief (GTK_BUTTON (button),
+			       GTK_RELIEF_NONE);
+	/* don't allow focus on the close button */
+	gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+
+	image = gtk_image_new_from_stock (GTK_STOCK_INDEX,
+					  GTK_ICON_SIZE_MENU);
+	gtk_widget_show (image);
+	gtk_container_add (GTK_CONTAINER (button), image);
+
+	gtk_widget_set_tooltip_text (button, _("Open comment dialog"));
+	
+	return button;
+}
+
+static void
+on_comment_button_clicked (GtkButton *button,
+			   gpointer useless)
+{
+	GtranslatorWindow *window = gtranslator_application_get_active_window (GTR_APP);
+	
+	gtranslator_show_comment_dialog (window);
 }
 
 /*
@@ -637,9 +683,16 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	gtk_label_set_markup_with_mnemonic (GTK_LABEL (msgstr_label),
 					    "<b>Tran_slated Text:</b>");
 	gtk_misc_set_padding (GTK_MISC (msgstr_label), 0, 5);
+	gtk_misc_set_alignment (GTK_MISC (msgstr_label), 0, 0.5);
 	gtk_widget_show (msgstr_label);
 
-	gtk_box_pack_start(GTK_BOX(priv->msgstr_hbox), msgstr_label, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(priv->msgstr_hbox), msgstr_label, TRUE, TRUE, 0);
+	
+	priv->comment_button = gtranslator_tab_create_comment_button ();
+	gtk_box_pack_start (GTK_BOX (priv->msgstr_hbox), priv->comment_button,
+			    FALSE, FALSE, 0);
+	g_signal_connect (priv->comment_button, "clicked",
+			  G_CALLBACK (on_comment_button_clicked), NULL);
 
 	priv->trans_notebook = gtk_notebook_new();
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(priv->trans_notebook), FALSE);
@@ -747,6 +800,7 @@ gtranslator_tab_class_init (GtranslatorTabClass *klass)
 	object_class->finalize = gtranslator_tab_finalize;
 	object_class->set_property = gtranslator_tab_set_property;
 	object_class->get_property = gtranslator_tab_get_property;
+	klass->showed_message = gtranslator_tab_showed_message;
 	
 	/* Signals */
 	signals[SHOWED_MESSAGE] = 
