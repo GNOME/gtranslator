@@ -84,7 +84,7 @@ GTKDOC_CFLAGS=	\
 	$(GTRANSLATOR_CFLAGS)
 
 GTKDOC_LIBS=	\
-	$(top_srcdir)/src/libgtranslator.la	\
+	$(top_builddir)/src/libgtranslator.la	\
 	$(GTRANSLATOR_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
