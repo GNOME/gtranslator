@@ -25,6 +25,7 @@
 #include <gtk/gtkaboutdialog.h>
 #include <gtk/gtkwindow.h>
 #include <libxml/tree.h>
+#include <gio/gio.h>
 
 gchar **       gtranslator_utils_split_string_in_words (const gchar *string);
 
@@ -83,5 +84,9 @@ gchar         *gtranslator_utils_get_current_date (void);
 gchar         *gtranslator_utils_get_current_time (void);
 
 gchar         *gtranslator_utils_get_current_year (void);
+
+void           gtranslator_utils_scan_dir              (GFile *dir,
+							GList **list,
+							const gchar *po_name);
 
 #endif

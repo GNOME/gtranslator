@@ -633,63 +633,6 @@ on_search_button_pulsed (GtkButton *button,
   gtk_dialog_run (GTK_DIALOG (filechooser));
 }
 
-/* FIXME: We have to remove this when we move it to utils.ch */
-static void
-gtranslator_project_utils_scan_dir (GFile *dir,
-				    GList **list,
-				    const gchar *po_name)
-{
-	GFileInfo *info;
-	GError *error;
-	GFile *file;
-	GFileEnumerator *enumerator;
-
-	error = NULL;
-	enumerator = g_file_enumerate_children (dir,
-						G_FILE_ATTRIBUTE_STANDARD_NAME,
-						G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
-						NULL,
-						&error);
-	if (enumerator) 
-	{
-		error = NULL;
-		
-		while ((info = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL) 
-		{
-			const gchar *name;
-			gchar *filename;
-			
-			name = g_file_info_get_name (info);
-			file = g_file_get_child (dir, name);
-
-			if (po_name != NULL)
-			{
-				if (g_str_has_suffix (po_name, ".po"))
-					filename = g_strdup (po_name);
-				else 
-					filename = g_strconcat (po_name, ".po", NULL);
-			}
-			else
-				filename = g_strdup (".po");
-			
-			if (g_str_has_suffix (name, filename))
-				*list = g_list_prepend (*list, g_file_get_path (file));
-			g_free (filename);
-
-			gtranslator_project_utils_scan_dir (file, list, po_name);
-			g_object_unref (file);
-			g_object_unref (info);
-		}
-		g_file_enumerator_close (enumerator, NULL, NULL);
-		g_object_unref (enumerator);
-		
-		if (error)
-		{
-			g_warning (error->message);
-		}
-	}
-}
-
 typedef struct _IdleData
 {
 	GList *list;
@@ -805,9 +748,9 @@ on_add_database_button_pulsed (GtkButton *button,
   dir = g_file_new_for_path (dir_name);
 
   if (gtranslator_prefs_manager_get_use_lang_profile ()) {
-    gtranslator_project_utils_scan_dir (dir, &data->list, gtranslator_prefs_manager_get_tm_lang_entry());
+    gtranslator_utils_scan_dir (dir, &data->list, gtranslator_prefs_manager_get_tm_lang_entry());
   } else {
-    gtranslator_project_utils_scan_dir (dir, &data->list, NULL);
+    gtranslator_utils_scan_dir (dir, &data->list, NULL);
   }
   data->tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
   data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);

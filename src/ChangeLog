@@ -1,5 +1,18 @@
 2008-08-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* dialogs/assistant.c (on_assistant_close), (add_to_database),
+	(destroy_idle_data), (on_assistant_apply), (on_assistant_prepare),
+	(on_profile1_entry_changed), (on_profile2_entry_changed),
+	(create_database_page), (create_finish_page),
+	(gtranslator_assistant_class_init):
+	* dialogs/preferences-dialog.c (on_add_database_button_pulsed):
+	* utils.c (gtranslator_utils_scan_dir):
+	* utils.h:
+	Moved _scan_dir func to utils.
+	Added add to database implementation in assistant.
+
+2008-08-18  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* po.c (gtranslator_po_parse), (gtranslator_po_save_file),
 	(gtranslator_po_check_po_file):
 	* po.h:

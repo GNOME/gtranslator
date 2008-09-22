@@ -859,3 +859,68 @@ gchar *gtranslator_utils_get_current_year (void)
 
   return year;
 }
+
+/**
+ * gtranslator_utils_scan_dir:
+ * @dir: the dir to parse
+ * @list: the list where to store the filenames
+ * @po_name: the name of the specific po file to search or NULL.
+ *
+ * Scans the directory and subdirectories of @dir looking for filenames remained
+ * wiht .po or files that matches @po_name.
+ */
+void
+gtranslator_utils_scan_dir (GFile *dir,
+			    GList **list,
+			    const gchar *po_name)
+{
+	GFileInfo *info;
+	GError *error;
+	GFile *file;
+	GFileEnumerator *enumerator;
+
+	error = NULL;
+	enumerator = g_file_enumerate_children (dir,
+						G_FILE_ATTRIBUTE_STANDARD_NAME,
+						G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
+						NULL,
+						&error);
+	if (enumerator) 
+	{
+		error = NULL;
+		
+		while ((info = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL) 
+		{
+			const gchar *name;
+			gchar *filename;
+			
+			name = g_file_info_get_name (info);
+			file = g_file_get_child (dir, name);
+
+			if (po_name != NULL)
+			{
+				if (g_str_has_suffix (po_name, ".po"))
+					filename = g_strdup (po_name);
+				else 
+					filename = g_strconcat (po_name, ".po", NULL);
+			}
+			else
+				filename = g_strdup (".po");
+			
+			if (g_str_has_suffix (name, filename))
+				*list = g_list_prepend (*list, g_file_get_path (file));
+			g_free (filename);
+
+			gtranslator_utils_scan_dir (file, list, po_name);
+			g_object_unref (file);
+			g_object_unref (info);
+		}
+		g_file_enumerator_close (enumerator, NULL, NULL);
+		g_object_unref (enumerator);
+		
+		if (error)
+		{
+			g_warning (error->message);
+		}
+	}
+}

@@ -20,7 +20,10 @@
 #include <config.h>
 #endif
 
+#include "application.h"
 #include "assistant.h"
+#include "../translation-memory/translation-memory.h"
+#include "utils.h"
 #include "window.h"
 
 #include <glib.h>
@@ -29,6 +32,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
+#include <gio/gio.h>
 
 #define GTR_ASSISTANT_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),	\
@@ -56,10 +60,160 @@ struct _GtranslatorAssistantPrivate
 	/* Database Page */
 	GtkWidget *path;
 	GtkWidget *search_button;
+	GtkWidget *po_name;
 	
 	/* Confirmation Page */
+	GtkWidget *finish_box;
 	GtkWidget *confirm_label;
+	GtkWidget *add_db_progressbar;
 };
+
+typedef struct _IdleData
+{
+	GList *list;
+	GtkProgressBar *progress;
+	GtranslatorTranslationMemory *tm;
+	GtkWindow *parent;
+}IdleData;
+
+static void
+on_assistant_close (GtkAssistant* assistant)
+{
+	gtk_widget_destroy (GTK_WIDGET (assistant));
+}
+
+static gboolean
+add_to_database (gpointer data_pointer)
+{
+	IdleData *data = (IdleData *)data_pointer;
+	static GList *l = NULL;
+	gdouble percentage;
+	
+	if (l == NULL)
+		l = data->list;
+	else
+		l = g_list_next (l);
+
+	if (l)
+	{
+		GList *msg_list = NULL;
+		GList *l2 = NULL;
+		const gchar *file_uri;
+		GError *error = NULL;
+		GtranslatorPo *po;
+		
+		po = gtranslator_po_new ();
+		file_uri = (const gchar*)l->data;
+		
+		gtranslator_po_parse (po, file_uri, &error);
+		if (error)
+			return TRUE;
+		
+		msg_list = gtranslator_po_get_messages (po);
+		
+		for (l2 = msg_list; l2; l2 = g_list_next (l2))
+		{
+			GtranslatorMsg *msg;
+			
+			msg = GTR_MSG (l2->data);
+			if (gtranslator_msg_is_translated (msg))
+				gtranslator_translation_memory_store (data->tm,
+								      gtranslator_msg_get_msgid (msg),
+								      gtranslator_msg_get_msgstr (msg));
+		}
+		
+		g_object_unref (po);
+	}
+	else
+	{
+		GtkWidget *dialog;
+		
+		gtk_progress_bar_set_fraction (data->progress,
+					       1.0);
+		
+		dialog = gtk_message_dialog_new (data->parent,
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_INFO,
+						 GTK_BUTTONS_CLOSE,
+						 NULL);
+		
+		gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
+					       _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
+		
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		
+		return FALSE;
+	}
+	
+	percentage = (gdouble)g_list_position (data->list, l) / (gdouble) g_list_length (data->list);
+
+	/*
+	 * Set the progress only if the values are reasonable.
+	 */
+	if(percentage > 0.0 || percentage < 1.0)
+	{
+		/*
+		 * Set the progressbar status.
+		 */
+		gtk_progress_bar_set_fraction (data->progress,
+					       percentage);
+	}
+	
+	return TRUE;
+}
+
+static void
+destroy_idle_data (gpointer data)
+{
+	IdleData *d = (IdleData *)data;
+	
+	gtk_widget_hide (GTK_WIDGET (d->progress));
+	
+	g_list_foreach (d->list, (GFunc)g_free, NULL);
+	g_list_free (d->list);
+	
+	gtk_widget_destroy (GTK_WIDGET (d->parent));
+	
+	g_free (d);
+}
+
+static void
+on_assistant_apply (GtkAssistant *assistant)
+{
+	GFile *dir;
+	const gchar *dir_name;
+	IdleData *data;
+	GtranslatorAssistant *as = GTR_ASSISTANT (assistant);
+	const gchar *po_name;
+	
+	dir_name = gtk_entry_get_text (GTK_ENTRY (as->priv->path));
+	if (strcmp (dir_name, "") == 0)
+		return;
+	
+	data = g_new0 (IdleData, 1);
+	data->list = NULL;
+	
+	dir = g_file_new_for_path (dir_name);
+	
+	po_name = gtk_entry_get_text (GTK_ENTRY (as->priv->po_name));
+	
+	gtranslator_utils_scan_dir (dir, &data->list, po_name);
+	
+	data->tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
+	data->progress = GTK_PROGRESS_BAR (as->priv->add_db_progressbar);
+	data->parent = GTK_WINDOW (as);
+	
+	gtk_widget_show (as->priv->add_db_progressbar);
+	
+	g_signal_handlers_block_by_func (assistant, on_assistant_close, NULL);
+	g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
+			 (GSourceFunc)add_to_database,
+			 data,
+			 (GDestroyNotify)destroy_idle_data);
+	
+	g_object_unref (dir); 
+}
 
 static void
 on_assistant_prepare (GtkAssistant *assistant,
@@ -69,7 +223,7 @@ on_assistant_prepare (GtkAssistant *assistant,
 	gchar *string;
 	const gchar *database_path;
 	
-	if (page != as->priv->confirm_label)
+	if (page != as->priv->finish_box)
 		return;
 	
 	database_path = gtk_entry_get_text (GTK_ENTRY (as->priv->path));
@@ -94,7 +248,7 @@ on_assistant_prepare (GtkAssistant *assistant,
 				  gtk_entry_get_text (GTK_ENTRY (as->priv->trans_enc)),
 				  gtk_entry_get_text (GTK_ENTRY (as->priv->plural_form)),
 				  (strcmp (database_path, "") != 0) ? database_path : _("None"));
-	
+
 	gtk_label_set_text (GTK_LABEL (as->priv->confirm_label), string);
 	g_free (string);
 }
@@ -142,7 +296,10 @@ on_profile1_entry_changed (GtkWidget *widget,
 	if (text && *text)
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
 	else
+	{
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
+		return;
+	}
 	
 	/* Translator name */
 	text = gtk_entry_get_text (GTK_ENTRY (as->priv->name));
@@ -150,7 +307,10 @@ on_profile1_entry_changed (GtkWidget *widget,
 	if (text && *text)
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
 	else
+	{
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
+		return;
+	}
 	
 	/* Translator email */
 	text = gtk_entry_get_text (GTK_ENTRY (as->priv->email));
@@ -158,7 +318,10 @@ on_profile1_entry_changed (GtkWidget *widget,
 	if (text && *text)
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
 	else
+	{
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
+		return;
+	}
 	
 	/* Language */
 	text = gtk_entry_get_text (GTK_ENTRY (as->priv->language));
@@ -166,7 +329,10 @@ on_profile1_entry_changed (GtkWidget *widget,
 	if (text && *text)
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
 	else
+	{
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
+		return;
+	}
 	
 	/* Team email */
 	text = gtk_entry_get_text (GTK_ENTRY (as->priv->team_email));
@@ -309,7 +475,10 @@ on_profile2_entry_changed (GtkWidget *widget,
 	if (text && *text)
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
 	else
+	{
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
+		return;
+	}
 	
 	/* Charset */
 	text = gtk_entry_get_text (GTK_ENTRY (as->priv->charset));
@@ -317,7 +486,10 @@ on_profile2_entry_changed (GtkWidget *widget,
 	if (text && *text)
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
 	else
+	{
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
+		return;
+	}
 	
 	/* Trans encoding */
 	text = gtk_entry_get_text (GTK_ENTRY (as->priv->trans_enc));
@@ -325,8 +497,10 @@ on_profile2_entry_changed (GtkWidget *widget,
 	if (text && *text)
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
 	else
+	{
 		gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
-	
+		return;
+	}
 	
 	/* Plural form */
 	text = gtk_entry_get_text (GTK_ENTRY (as->priv->plural_form));
@@ -502,6 +676,24 @@ create_database_page (GtranslatorAssistant *as)
 	g_signal_connect (priv->search_button, "clicked",
 			  G_CALLBACK (on_dir_find_button_clicked), as);
 	
+	/* Po name label */
+	hbox = gtk_hbox_new (FALSE, 12);
+	gtk_widget_show (hbox);
+	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
+	
+	label = gtk_label_new (NULL);
+	gtk_label_set_markup (GTK_LABEL (label),
+			      _("<b>Look for a specific PO filename:</b>"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_widget_show (label);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	
+	/* Po name entry */
+	priv->po_name = gtk_entry_new ();
+	gtk_widget_show (priv->po_name);
+	gtk_box_pack_start (GTK_BOX (hbox), priv->po_name, TRUE, TRUE, 0);
+	gtk_widget_set_tooltip_text (priv->po_name, _("E.g.: gl.po"));
+	
 	gtk_assistant_append_page (GTK_ASSISTANT (as), box);
 	gtk_assistant_set_page_title (GTK_ASSISTANT (as), box, _("Generate Database"));
 	gtk_assistant_set_page_complete (GTK_ASSISTANT (as), box, TRUE);
@@ -510,14 +702,24 @@ create_database_page (GtranslatorAssistant *as)
 static void
 create_finish_page (GtranslatorAssistant *as)
 {
+	as->priv->finish_box = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (as->priv->finish_box);
+	
 	as->priv->confirm_label = gtk_label_new (NULL);
 	gtk_widget_show (as->priv->confirm_label);
+	gtk_box_pack_start (GTK_BOX (as->priv->finish_box), as->priv->confirm_label,
+			    TRUE, TRUE, 0);
 	
-	gtk_assistant_append_page (GTK_ASSISTANT (as), as->priv->confirm_label);
-	gtk_assistant_set_page_type (GTK_ASSISTANT (as), as->priv->confirm_label,
+	as->priv->add_db_progressbar = gtk_progress_bar_new ();
+	gtk_widget_show (as->priv->add_db_progressbar);
+	gtk_box_pack_start (GTK_BOX (as->priv->finish_box), as->priv->add_db_progressbar,
+			    FALSE, FALSE, 0);
+	
+	gtk_assistant_append_page (GTK_ASSISTANT (as), as->priv->finish_box);
+	gtk_assistant_set_page_type (GTK_ASSISTANT (as), as->priv->finish_box,
 				     GTK_ASSISTANT_PAGE_CONFIRM);
-	gtk_assistant_set_page_complete (GTK_ASSISTANT (as), as->priv->confirm_label, TRUE);
-	gtk_assistant_set_page_title (GTK_ASSISTANT (as), as->priv->confirm_label, _("Confirmation"));
+	gtk_assistant_set_page_complete (GTK_ASSISTANT (as), as->priv->finish_box, TRUE);
+	gtk_assistant_set_page_title (GTK_ASSISTANT (as), as->priv->finish_box, _("Confirmation"));
 }
 
 static void
@@ -552,9 +754,9 @@ gtranslator_assistant_class_init (GtranslatorAssistantClass *klass)
 
 	object_class->finalize = gtranslator_assistant_finalize;
 	assistant_class->prepare = on_assistant_prepare;
-	/*assistant_class->apply = on_assistant_apply;*/
+	assistant_class->apply = on_assistant_apply;
 	assistant_class->cancel = on_assistant_cancel;
-	assistant_class->close = on_assistant_cancel;
+	//assistant_class->close = on_assistant_cancel;
 }
 
 void
