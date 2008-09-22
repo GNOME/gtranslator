@@ -361,94 +361,19 @@ if test -n "$SVN_INCLUDE" ; then
 	dnl ------------------------------------
 	dnl APR. Required by subversion (devel)
 	dnl ------------------------------------
-	
-	APR_CONFIGS="apr-config /usr/local/apr/bin/apr-config/ apr-1-config "
-	AC_ARG_WITH(apr-config,
-	AC_HELP_STRING([--with-apr-config=FILE],[Use the given path to apr-config when determining APR configuration; defaults to "apr-config"]),
-	[
-	if test "$withval" != "yes" -a "$withval" != ""; then
-	  APR_CONFIGS=$withval
-	fi
-	])
-	AC_MSG_CHECKING([for APR])
-	APR_CONFIG=""
-	for VALUE in $APR_CONFIGS ; do
-			if $VALUE --cflags > /dev/null 2>&1 ; then
-					APR_CONFIG=$VALUE
-					break
-			fi
-	done
-	test $VALUE && APR_CONFIG=$VALUE
-	if test $APR_CONFIG ; then
-		AC_MSG_RESULT([found])
-		APR_CFLAGS="`$APR_CONFIG --cflags` `$APR_CONFIG --cppflags`"
-		APR_INCLUDE="`$APR_CONFIG --includes`"
-		APR_LIBS="`$APR_CONFIG --link-ld --libs`"
-	else
-		AC_MSG_RESULT([not found])
-		dnl AC_MSG_ERROR([APR is required. Try --with-apr-config.])
-	fi
+	PKG_CHECK_MODULES(APR,                            \
+		apr-1)
 	
 	dnl -----------------------------------------
 	dnl APR util. Required by subversion (devel)
 	dnl------------------------------------------
-	
-	APU_CONFIGS="apu-config /usr/local/apr/bin/apu-config apu-1-config"
-	AC_ARG_WITH(apu-config,
-	AC_HELP_STRING([--with-apu-config=FILE],[Use the given path to apu-config when determining APR util configuration; defaults to "apu-config"]),
-	[
-		if test "$withval" != "yes" -a "$withval" != ""; then
-			APU_CONFIGS=$withval
-		fi
-	])
-	AC_MSG_CHECKING([for APR util])
-	APU_CONFIG=""
-	for VALUE in $APU_CONFIGS ; do
-			if $VALUE --includes > /dev/null 2>&1 ; then
-					APU_CONFIG=$VALUE
-					break
-			fi
-	done
-	if test $APU_CONFIG ; then
-		AC_MSG_RESULT([found])
-		APR_INCLUDE="$APR_INCLUDE `$APU_CONFIG --includes`"
-		APR_LIBS="$APR_LIBS `$APU_CONFIG --link-ld --libs`"
-	else
-		AC_MSG_RESULT([not found])
-	fi
+	PKG_CHECK_MODULES(APR_UTILS,                            \
+		apr-util-1)
 	
 	dnl -----------------------------------------
 	dnl NEON. Required by subversion (devel)
 	dnl------------------------------------------
-
-	dnl Check for neon. It is required by subversion libs, but for
-	dnl for some strange reason it's not in it's dependencies.
-	dnl subversion plugin will be disabled if neon (devel) is not
-	dnl installed, even if subversion (devel) is installed.
-
-	NEON_CONFIGS="neon-config"
-	AC_ARG_WITH(neon-config,
-	AC_HELP_STRING([--with-neon-config=FILE],[Use the given path to neon-config when determining Neon configuration; defaults to "neon-config"]),
-	[
-		if test "$withval" != "yes" -a "$withval" != ""; then
-			NEON_CONFIGS=$withval
-		fi
-	])
-	AC_MSG_CHECKING([for Neon])
-	NEON_CONFIG=""
-	for VALUE in $NEON_CONFIGS ; do
-			if $VALUE --cflags > /dev/null 2>&1 ; then
-					NEON_CONFIG=$VALUE
-					break
-			fi
-	done
-	if test $NEON_CONFIG ; then
-		AC_MSG_RESULT([found])
-	else
-		AC_MSG_RESULT([not found])
-		SVN_INCLUDE=""
-		SVN_LIB=""
-	fi
+	NEON_LIBRARY
 fi
 
 dnl ------------------------------------------
@@ -458,11 +383,11 @@ dnl ------------------------------------------
 if test -n "$SVN_INCLUDE" ; then
 	SVN_INCLUDE="-I$SVN_INCLUDE $APR_INCLUDE"
 	if test x != "x$SVN_LIB" ; then
-	    SVN_LIB="-L$SVN_LIB $APR_LIBS -lsvn_client-1 -lsvn_subr-1"
+	    SVN_LIB="-L$SVN_LIB $APR_LIBS $APR_UTILS_LIBS -lsvn_client-1 -lsvn_subr-1"
 	else
-	    SVN_LIB="$APR_LIBS -lsvn_client-1 -lsvn_subr-1"
+	    SVN_LIB="$APR_LIBS $APR_UTILS_LIBS -lsvn_client-1 -lsvn_subr-1"
 	fi
-	SVN_CFLAGS="$APR_CFLAGS"
+	SVN_CFLAGS="$APR_CFLAGS $APR_UTILS_CFLAGS"
 fi
 
 AM_CONDITIONAL(BUILD_SVN, [test -n "$SVN_INCLUDE"])
