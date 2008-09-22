@@ -474,14 +474,18 @@ update_status(GtranslatorTab *tab,
 {
 	GtranslatorMsgStatus status;
 	GtranslatorPoState po_state;
+	gboolean fuzzy, translated;
 	
 	status = gtranslator_msg_get_status (msg);
 	po_state = gtranslator_po_get_state (tab->priv->po);
+	
+	fuzzy = gtranslator_msg_is_fuzzy (msg);
+	translated = gtranslator_msg_is_translated (msg);
 
-	if((status == GTR_MSG_STATUS_FUZZY) && !gtranslator_msg_is_fuzzy(msg))
+	if ((status == GTR_MSG_STATUS_FUZZY) && !fuzzy)
 	{
 		_gtranslator_po_increase_decrease_fuzzy(tab->priv->po, FALSE);
-		if(gtranslator_msg_is_translated(msg))
+		if (translated)
 		{
 			status = GTR_MSG_STATUS_TRANSLATED;
 			_gtranslator_po_increase_decrease_translated(tab->priv->po, TRUE);
@@ -490,20 +494,20 @@ update_status(GtranslatorTab *tab,
 			status = GTR_MSG_STATUS_UNTRANSLATED;
 		}
 	}
-	else if((status == GTR_MSG_STATUS_TRANSLATED) && !gtranslator_msg_is_translated(msg))
+	else if ((status == GTR_MSG_STATUS_TRANSLATED) && !translated)
 	{
 		status = GTR_MSG_STATUS_UNTRANSLATED;
 		_gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
 	}
-	else if((status == GTR_MSG_STATUS_TRANSLATED) && gtranslator_msg_is_fuzzy(msg))
+	else if ((status == GTR_MSG_STATUS_TRANSLATED) && fuzzy)
 	{
 		status = GTR_MSG_STATUS_FUZZY;
 		_gtranslator_po_increase_decrease_translated(tab->priv->po, FALSE);
 		_gtranslator_po_increase_decrease_fuzzy(tab->priv->po, TRUE);
 	}
-	else if((status == GTR_MSG_STATUS_UNTRANSLATED) && gtranslator_msg_is_translated(msg))
+	else if ((status == GTR_MSG_STATUS_UNTRANSLATED) && translated)
 	{
-		if(gtranslator_msg_is_fuzzy(msg))
+		if (fuzzy)
 		{
 			status = GTR_MSG_STATUS_FUZZY;
 			_gtranslator_po_increase_decrease_fuzzy(tab->priv->po, TRUE);
