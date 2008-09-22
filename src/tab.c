@@ -1119,7 +1119,7 @@ gtranslator_tab_message_go_to (GtranslatorTab *tab,
 	/*
 	 * Emitting message-edition-finished signal
 	 */
-	if (!searching)
+	if (!searching && !first_msg)
 		g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
 			       0, GTR_MSG (current_msg->data));
 	
