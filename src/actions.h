@@ -20,6 +20,7 @@
 #define __ACTIONS_H__
 
 #include <gtk/gtkaction.h>
+#include <gio/gio.h>
 #include "window.h"
 
 G_BEGIN_DECLS
@@ -34,7 +35,7 @@ void       gtranslator_save_current_file_dialog (GtkWidget * widget,
 void       gtranslator_save_file_as_dialog      (GtkAction * action,
 						 GtranslatorWindow *window);
 
-gboolean   gtranslator_open                     (const gchar *filename,
+gboolean   gtranslator_open                     (GFile *location,
 						 GtranslatorWindow *window,
 						 GError **error);
 
@@ -47,8 +48,8 @@ void       gtranslator_file_close               (GtkAction * widget,
 void       gtranslator_file_quit                (GtkAction *action,
 						 GtranslatorWindow *window);
 
-void       gtranslator_actions_load_uris        (GtranslatorWindow *window,
-						 const GSList        *uris);
+void       gtranslator_actions_load_locations   (GtranslatorWindow *window,
+						 const GSList      *locations);
 
 /*Edit*/
 void       gtranslator_actions_edit_undo        (GtkAction   *action,

@@ -122,8 +122,9 @@ void              gtranslator_window_remove_widget    (GtranslatorWindow *window
 GObject *        _gtranslator_window_get_layout_manager
 						      (GtranslatorWindow *window);
 
-GtkWidget        *gtranslator_window_get_tab_from_uri (GtranslatorWindow *window,
-						       const gchar *uri);
+GtkWidget        *gtranslator_window_get_tab_from_location
+						      (GtranslatorWindow *window,
+						       GFile *location);
 
 void              gtranslator_window_set_active_tab   (GtranslatorWindow *window,
 						       GtkWidget *tab);

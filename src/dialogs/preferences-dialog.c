@@ -635,7 +635,7 @@ on_search_button_pulsed (GtkButton *button,
 
 typedef struct _IdleData
 {
-	GList *list;
+	GSList *list;
 	GtkProgressBar *progress;
 	GtranslatorTranslationMemory *tm;
 	GtkWindow *parent;
@@ -645,26 +645,26 @@ static gboolean
 add_to_database (gpointer data_pointer)
 {
 	IdleData *data = (IdleData *)data_pointer;
-	static GList *l = NULL;
+	static GSList *l = NULL;
 	gdouble percentage;
 	
 	if (l == NULL)
 		l = data->list;
 	else
-		l = g_list_next (l);
+		l = g_slist_next (l);
 
 	if (l)
 	{
 		GList *msg_list = NULL;
 		GList *l2 = NULL;
-		const gchar *file_uri;
+		GFile *location;
 		GError *error = NULL;
 		GtranslatorPo *po;
 		
 		po = gtranslator_po_new ();
-		file_uri = (const gchar*)l->data;
+		location = (GFile *)l->data;
 		
-		gtranslator_po_parse (po, file_uri, &error);
+		gtranslator_po_parse (po, location, &error);
 		if (error)
 			return TRUE;
 		
@@ -703,7 +703,7 @@ add_to_database (gpointer data_pointer)
 		return FALSE;
 	}
 	
-	percentage = (gdouble)g_list_position (data->list, l) / (gdouble) g_list_length (data->list);
+	percentage = (gdouble)g_slist_position (data->list, l) / (gdouble) g_slist_length (data->list);
 
 	/*
 	 * Set the progress only if the values are reasonable.
@@ -726,8 +726,8 @@ destroy_idle_data (gpointer data)
 	IdleData *d = (IdleData *)data;
 	
 	gtk_widget_hide (GTK_WIDGET (d->progress));
-	g_list_foreach (d->list, (GFunc)g_free, NULL);
-	g_list_free (d->list);
+	g_slist_foreach (d->list, (GFunc)g_object_unref, NULL);
+	g_slist_free (d->list);
 	
 	g_free (d);
 }
@@ -747,11 +747,11 @@ on_add_database_button_pulsed (GtkButton *button,
 
   dir = g_file_new_for_path (dir_name);
 
-  if (gtranslator_prefs_manager_get_use_lang_profile ()) {
+  if (gtranslator_prefs_manager_get_use_lang_profile ())
     gtranslator_utils_scan_dir (dir, &data->list, gtranslator_prefs_manager_get_tm_lang_entry());
-  } else {
+  else
     gtranslator_utils_scan_dir (dir, &data->list, NULL);
-  }
+  
   data->tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
   data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
   data->parent = GTK_WINDOW (dlg);

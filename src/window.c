@@ -748,28 +748,6 @@ get_drop_window (GtkWidget *widget)
 	return GTR_WINDOW (target_window);
 }
 
-static void
-load_uris_from_drop (GtranslatorWindow  *window,
-		     gchar       **uri_list)
-{
-	GSList *uris = NULL;
-	gint i;
-	
-	if (uri_list == NULL)
-		return;
-	
-	for (i = 0; uri_list[i] != NULL; ++i)
-	{
-		uris = g_slist_prepend (uris, uri_list[i]);
-	}
-
-	uris = g_slist_reverse (uris);
-	gtranslator_actions_load_uris (window,
-				      uris);
-
-	g_slist_free (uris);
-}
-
 /* Handle drops on the GtranslatorWindow */
 static void
 drag_data_received_cb (GtkWidget        *widget,
@@ -782,7 +760,7 @@ drag_data_received_cb (GtkWidget        *widget,
 		       gpointer          data)
 {
 	GtranslatorWindow *window;
-	gchar **uri_list;
+	GSList *locations;
 
 	window = get_drop_window (widget);
 	
@@ -791,9 +769,11 @@ drag_data_received_cb (GtkWidget        *widget,
 
 	if (info == TARGET_URI_LIST)
 	{
-		uri_list = gtranslator_utils_drop_get_uris(selection_data);
-		load_uris_from_drop (window, uri_list);
-		g_strfreev (uri_list);
+		locations = gtranslator_utils_drop_get_locations (selection_data);
+		gtranslator_actions_load_locations (window, locations);
+		
+		g_slist_foreach (locations, (GFunc)g_object_unref, NULL);
+		g_slist_free (locations);
 	}
 }
 
@@ -983,21 +963,14 @@ notebook_tab_added(GtkNotebook *notebook,
 
 void
 gtranslator_recent_add (GtranslatorWindow *window,
-			const gchar *path,
+			GFile *location,
 			gchar *project_id)
 {
 	GtkRecentData *recent_data;
 	gchar *uri;
 	GError *error = NULL;
 
-	uri = g_filename_to_uri (path, NULL, &error);
-	if (error)
-	{	
-		g_warning ("Could not convert uri \"%s\" to a local path: %s",
-			   uri, error->message);
-		g_error_free (error);
-		return;
-	}
+	uri = g_file_get_uri (location);
 
 	recent_data = g_slice_new (GtkRecentData);
 
@@ -1019,7 +992,6 @@ gtranslator_recent_add (GtranslatorWindow *window,
 	g_free (uri);
 	g_free (recent_data->app_exec);
 	g_slice_free (GtkRecentData, recent_data);
-
 }
 
 void
@@ -1053,45 +1025,21 @@ static void
 gtranslator_recent_chooser_item_activated_cb (GtkRecentChooser *chooser,
 					      GtranslatorWindow *window)
 {
-	gchar *uri, *path;
+	gchar *uri;
 	GError *error = NULL;
 	GtkWidget *dialog;
+	GSList *list = NULL;
+	GFile *location;
 
 	uri = gtk_recent_chooser_get_current_uri (chooser);
-
-	path = g_filename_from_uri (uri, NULL, NULL);
-	if (error)
-	{
-		g_warning ("Could not convert uri \"%s\" to a local path: %s",
-			   uri, error->message);
-		g_error_free (error);
-		return;
-	}
-	
-	/*
-	 * FIXME: We have to detect if the file is already opened
-	 * If it is we should display a warning dialog.
-	 */
-	gtranslator_open (path, window, &error);
-	if(error)
-	{
-		/*
-		 * We have to show the error in a dialog
-		 */
-		dialog = gtk_message_dialog_new(GTK_WINDOW(window),          
-						GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_CLOSE,
-						error->message);
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-
-		if(error->code == GTR_PO_ERROR_FILENAME)
-			gtranslator_recent_remove (window, path);
-	}
-
+	location = g_file_new_for_uri (uri);
 	g_free (uri);
-	g_free (path);
+	
+	list = g_slist_prepend (list, location);
+	
+	gtranslator_actions_load_locations (window, list);
+	g_slist_foreach (list, (GFunc)g_object_unref, NULL);
+	g_slist_free (list);
 }
 
 static GtkWidget *
@@ -1613,12 +1561,13 @@ gtranslator_window_create_tab(GtranslatorWindow *window,
 			      GtranslatorPo *po)
 {
 	GtranslatorTab *tab;
-	
+
 	tab = gtranslator_tab_new(po);
 	gtk_widget_show(GTK_WIDGET(tab));
-	
+
 	gtranslator_notebook_add_page(GTR_NOTEBOOK(window->priv->notebook),
 				      tab);
+
 	return tab;
 }
 
@@ -1854,43 +1803,40 @@ _gtranslator_window_get_layout_manager (GtranslatorWindow *window)
 /**
  * gtranslator_window_get_tab_from_uri:
  * @window: a #GtranslatorWindow
- * @uri: the path/uri of the po file of the #GtranslatorTab
+ * @location: the GFile of the po file of the #GtranslatorTab
  *
  * Gets the #GtranslatorTab of the #GtranslatorWindows that matches with the
- * @uri.
+ * @location.
  *
- * Returns: the #GtranslatorTab which @uri matches with its po file.
+ * Returns: the #GtranslatorTab which @location matches with its po file.
  */
 GtkWidget *
-gtranslator_window_get_tab_from_uri (GtranslatorWindow *window,
-				     const gchar *uri)
+gtranslator_window_get_tab_from_location (GtranslatorWindow *window,
+					  GFile *location)
 {
-	GList *tabs;
+	GList *tabs, *l;
 	GtranslatorPo *po;
-	const gchar *po_uri;
+	GFile *po_location;
 	
 	g_return_if_fail (GTR_IS_WINDOW (window));
-	
-	gchar *good_uri = g_filename_from_uri (uri, NULL, NULL);
 
 	tabs = gtranslator_window_get_all_tabs (window);
 	
-	while (tabs != NULL)
+	for (l = tabs; l != NULL; l = g_list_next (l))
 	{
-		po = gtranslator_tab_get_po (GTR_TAB (tabs->data));
+		po = gtranslator_tab_get_po (GTR_TAB (l->data));
 		
-		po_uri = gtranslator_po_get_filename (po);
-	
-		if (g_utf8_collate (good_uri, po_uri) == 0)
+		po_location = gtranslator_po_get_location (po);
+
+		if (g_file_equal (location, po_location) == TRUE)
 		{
-			g_free (good_uri);
-			return tabs->data;
+			g_object_unref (po_location);
+			
+			return l->data;
 		}
-		
-		tabs = tabs->next;
+		g_object_unref (po_location);
 	}
 	
-	g_free (good_uri);
 	return NULL;
 }
 

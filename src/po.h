@@ -23,6 +23,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include <gettext-po.h>
+#include <gio/gio.h>
 
 #include "header.h"
 
@@ -93,8 +94,8 @@ GType		gtranslator_po_register_type		(GTypeModule * module);
 GtranslatorPo	*gtranslator_po_new			(void);
 
 void		gtranslator_po_parse			(GtranslatorPo *po,
-							const gchar *filename,
-							GError **error);
+							 GFile *filename,
+							 GError **error);
 
 void		gtranslator_po_save_header_in_msg	(GtranslatorPo *po);
 
@@ -106,10 +107,10 @@ GtranslatorPoState    gtranslator_po_get_state          (GtranslatorPo *po);
 void            gtranslator_po_set_state                (GtranslatorPo *po,
 							 GtranslatorPoState state);
 
-const gchar    *gtranslator_po_get_filename		(GtranslatorPo *po);
+GFile          *gtranslator_po_get_location             (GtranslatorPo *po);
 
-void            gtranslator_po_set_filename		(GtranslatorPo *po,
-							gchar *data);
+void            gtranslator_po_set_location		(GtranslatorPo *po,
+							 GFile *location);
 
 gboolean         gtranslator_po_get_write_perms		(GtranslatorPo *po);
 

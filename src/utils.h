@@ -54,7 +54,7 @@ gboolean       gtranslator_utils_get_glade_widgets    (const gchar *filename,
 						       const gchar *widget_name,
 						       ...)G_GNUC_NULL_TERMINATED;
 
-gchar        **gtranslator_utils_drop_get_uris        (GtkSelectionData *selection_data);
+GSList        *gtranslator_utils_drop_get_locations   (GtkSelectionData *selection_data);
 
 gchar         *gtranslator_utils_escape_search_text   (const gchar* text);
 
@@ -86,7 +86,7 @@ gchar         *gtranslator_utils_get_current_time (void);
 gchar         *gtranslator_utils_get_current_year (void);
 
 void           gtranslator_utils_scan_dir              (GFile *dir,
-							GList **list,
+							GSList **list,
 							const gchar *po_name);
 
 #endif

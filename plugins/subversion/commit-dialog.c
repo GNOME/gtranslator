@@ -481,13 +481,20 @@ send_status_command (GtranslatorCommitDialog *dlg,
 	SvnStatusCommand *status_command;
 	GtranslatorTab *tab;
 	GtranslatorPo *po;
+	GFile *location, *parent;
 	
 	/* Setting up */
 	dlg->priv->window = window;
 	tab = gtranslator_window_get_active_tab (window);
 	po = gtranslator_tab_get_po (tab);
 	g_free (dlg->priv->dirname);
-	dlg->priv->dirname = g_path_get_dirname (gtranslator_po_get_filename (po));
+	
+	location = gtranslator_po_get_location (po);
+	parent = g_file_get_parent (location);
+	g_object_unref (location);
+	
+	dlg->priv->dirname = g_file_get_path (parent);
+	g_object_unref (parent);
 	
 	status_command = svn_status_command_new (dlg->priv->dirname,
 						 TRUE, TRUE);

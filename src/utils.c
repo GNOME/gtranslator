@@ -466,31 +466,27 @@ gtranslator_utils_is_valid_uri (const gchar *uri)
  *		 were no valid uris. g_strfreev should be used when the 
  *		 string array is no longer used
  */
-gchar **
-gtranslator_utils_drop_get_uris (GtkSelectionData *selection_data)
+GSList *
+gtranslator_utils_drop_get_locations (GtkSelectionData *selection_data)
 {
 	gchar **uris;
 	gint i;
-	gint p = 0;
-	gchar **uri_list;
+	GSList *locations = NULL;
 
 	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
-	uri_list = g_new0(gchar *, g_strv_length (uris) + 1);
 
 	for (i = 0; uris[i] != NULL; i++)
 	{
+		GFile *file;
 		/* Silently ignore malformed URI/filename */
 		if (gtranslator_utils_is_valid_uri (uris[i]))
-			uri_list[p++] = g_strdup (uris[i]);
+		{
+			file = g_file_new_for_uri (uris[i]);
+			locations = g_slist_prepend (locations, file);
+		}
 	}
 
-	if (*uri_list == NULL)
-	{
-		g_free(uri_list);
-		return NULL;
-	}
-
-	return uri_list;
+	return locations;
 }
 
 gchar *
@@ -863,15 +859,16 @@ gchar *gtranslator_utils_get_current_year (void)
 /**
  * gtranslator_utils_scan_dir:
  * @dir: the dir to parse
- * @list: the list where to store the filenames
+ * @list: the list where to store the GFiles
  * @po_name: the name of the specific po file to search or NULL.
  *
  * Scans the directory and subdirectories of @dir looking for filenames remained
- * wiht .po or files that matches @po_name.
+ * with .po or files that matches @po_name. The contents of @list must be freed with
+ * g_slist_foreach (list, (GFunc)g_object_unref, NULL).
  */
 void
 gtranslator_utils_scan_dir (GFile *dir,
-			    GList **list,
+			    GSList **list,
 			    const gchar *po_name)
 {
 	GFileInfo *info;
@@ -908,11 +905,10 @@ gtranslator_utils_scan_dir (GFile *dir,
 				filename = g_strdup (".po");
 			
 			if (g_str_has_suffix (name, filename))
-				*list = g_list_prepend (*list, g_file_get_path (file));
+				*list = g_slist_prepend (*list, file);
 			g_free (filename);
 
 			gtranslator_utils_scan_dir (file, list, po_name);
-			g_object_unref (file);
 			g_object_unref (info);
 		}
 		g_file_enumerator_close (enumerator, NULL, NULL);

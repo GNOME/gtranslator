@@ -567,15 +567,15 @@ void
 gtranslator_show_diff_dialog (GtranslatorWindow *window)
 {
 	static GtranslatorDiffDialog *dlg = NULL;
-	const gchar *filename;
 	GtranslatorTab *tab;
 	GtranslatorPo *po;
+	GFile *location;
 	
 	g_return_if_fail (GTR_IS_WINDOW (window));
 	
 	tab = gtranslator_window_get_active_tab (window);
 	po = gtranslator_tab_get_po (tab);
-	filename = gtranslator_po_get_filename (po);
+	location = gtranslator_po_get_location (po);
 	
 	if(dlg == NULL)
 	{
@@ -596,7 +596,7 @@ gtranslator_show_diff_dialog (GtranslatorWindow *window)
 	
 	//As we are not destroying the dialog we have to free the filename
 	g_free (dlg->priv->filename);
-	dlg->priv->filename = g_strdup (filename);
+	dlg->priv->filename = g_file_get_path (location);
 	setup_diff_filename_entry (dlg);
 	
 	if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))

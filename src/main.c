@@ -60,16 +60,12 @@ get_command_line_data ()
 		for (i = 0; file_arguments[i]; i++) 
 		{			
 			GFile  *file;
-			gchar *uri;
 
 			file = g_file_new_for_commandline_arg (file_arguments[i]);
-			uri = g_file_get_uri (file);
-			g_object_unref (file);
-
 			
-			if (uri != NULL){
+			if (file != NULL){
 				file_list = g_slist_prepend (file_list, 
-							     uri);
+							     file);
 				
 			}
 			else
@@ -87,8 +83,8 @@ get_command_line_data ()
  * The ubiquitous main function...
  */
 gint
-main(gint argc,
-     gchar *argv[])
+main (gint argc,
+      gchar *argv[])
 {
 	GError *error = NULL;
 	GtranslatorPluginsEngine *engine;
@@ -190,8 +186,8 @@ main(gint argc,
 	file_list = get_command_line_data ();
 	if (file_list)
 	{
-		gtranslator_actions_load_uris (window, (const GSList *)file_list);
-		g_slist_foreach (file_list, (GFunc) g_free, NULL);
+		gtranslator_actions_load_locations (window, (const GSList *)file_list);
+		g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
 		g_slist_free (file_list);
 	}
 	

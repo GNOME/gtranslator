@@ -75,6 +75,8 @@ sync_name (GtranslatorPo *po,
 	GtkWidget *ebox;
 	gchar *tooltip;
 	GtranslatorTab *tab;
+	GFile *location;
+	gchar *path;
 	
 	label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label-ebox"));
@@ -84,11 +86,17 @@ sync_name (GtranslatorPo *po,
 	g_return_if_fail (str != NULL);
 	
 	gtk_label_set_text (GTK_LABEL (label), str);
-	
+
+	location = gtranslator_po_get_location (po);
+	path = g_file_get_path (location);
+	g_object_unref (location);
+
 	tooltip = g_strdup_printf (_("<b>Path:</b> %s"),
-				   gtranslator_po_get_filename (po));
+				   path);
+	
 	gtk_widget_set_tooltip_markup (ebox, tooltip);
 	
+	g_free (path);
 	g_free (tooltip);
 	g_free (str);
 }
@@ -258,7 +266,7 @@ gtranslator_notebook_add_page (GtranslatorNotebook *notebook,
 	g_return_if_fail (GTR_IS_TAB (tab));
 	
 	po = gtranslator_tab_get_po (tab);
-	
+
 	label = build_tab_label (notebook, tab);
 
 	sync_name (po, NULL, label);

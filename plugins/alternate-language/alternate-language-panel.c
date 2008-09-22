@@ -142,11 +142,16 @@ open_file (GtkWidget *dialog,
 	   GtranslatorAlternateLangPanel *panel)
 {
 	GError *error = NULL;
-	gchar *po_file = g_strdup (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
-		  
+	GFile *file;
+	gchar *po_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+	
+	file = g_file_new_for_path (po_file);
+	g_free (po_file);
 		  
 	panel->priv->po = gtranslator_po_new ();
-	gtranslator_po_parse (panel->priv->po, po_file, &error);
+	gtranslator_po_parse (panel->priv->po, file, &error);
+	
+	g_object_unref (file);
 	
 	if (error != NULL)
 	{
@@ -200,9 +205,9 @@ open_button_clicked_cb (GtkWidget *open_button,
 			GtranslatorAlternateLangPanel *panel)
 {
 	GtkWidget *dialog = NULL;
-	const gchar *filename;
 	gchar *dir;
 	GtranslatorPo *tab_po;
+	GFile *location, *parent;
 			       
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -218,8 +223,12 @@ open_button_clicked_cb (GtkWidget *open_button,
 					       NULL);
 	
 	tab_po = gtranslator_tab_get_po (panel->priv->tab);
-	filename = gtranslator_po_get_filename (tab_po);
-	dir = g_path_get_dirname (filename);
+	location = gtranslator_po_get_location (tab_po);
+	parent = g_file_get_parent (location);
+	g_object_unref (location);
+	
+	dir = g_file_get_path (parent);
+	g_object_unref (parent);
 	
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), dir);
 	g_free (dir);

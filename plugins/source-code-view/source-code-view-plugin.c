@@ -173,9 +173,9 @@ follow_if_link (GtranslatorSourceCodeViewPlugin *plugin,
 	GSList *tags = NULL, *tagp = NULL;
 	GtranslatorTab *tab;
 	GtranslatorPo *po;
-	const gchar *po_path;
 	gchar *fullpath;
 	gchar *dirname;
+	GFile *location, *parent;
 	
 	tab = gtranslator_window_get_active_tab (plugin->priv->window);
 
@@ -183,8 +183,12 @@ follow_if_link (GtranslatorSourceCodeViewPlugin *plugin,
 		return;
 	po = gtranslator_tab_get_po (tab);
 
-	po_path = gtranslator_po_get_filename (po);
-	dirname = g_path_get_dirname (po_path);
+	location = gtranslator_po_get_location (po);
+	parent = g_file_get_parent (location);
+	g_object_unref (location);
+	
+	dirname = g_file_get_path (parent);
+	g_object_unref (parent);
 	
 	tags = gtk_text_iter_get_tags (iter);
 	for (tagp = tags;  tagp != NULL;  tagp = tagp->next)

@@ -96,13 +96,21 @@ on_add_activated (GtkAction *action,
 	GtranslatorTab *tab;
 	GtranslatorPo *po;
 	SvnAddCommand *add_command;
+	GFile *location;
+	gchar *path;
 	
 	tab = gtranslator_window_get_active_tab (window);
 	po = gtranslator_tab_get_po (tab);
-
-	add_command = svn_add_command_new ((gchar *)gtranslator_po_get_filename (po),
+	
+	location = gtranslator_po_get_location (po);
+	path = g_file_get_path (location);
+	g_object_unref (location);
+	
+	add_command = svn_add_command_new (path,
 					   FALSE,
 					   FALSE);
+	
+	g_free (path);
 
 	g_signal_connect (G_OBJECT (add_command), "command-finished",
 			  G_CALLBACK (on_add_command_finished),

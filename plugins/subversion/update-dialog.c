@@ -190,19 +190,20 @@ setup_dir (GtranslatorUpdateDialog *dlg)
 {
 	GtranslatorTab *tab;
 	GtranslatorPo *po;
-	gchar *dirname;
 	gchar *dir;
-	GFile *file;
+	GFile *location, *parent, *file;
 	
 	tab = gtranslator_window_get_active_tab (dlg->priv->window);
 	po = gtranslator_tab_get_po (tab);
-	dirname = g_path_get_dirname (gtranslator_po_get_filename (po));
+	location = gtranslator_po_get_location (po);
 	
-	dir = g_build_filename (dirname, "../", NULL);
-	g_free (dirname);
+	/* Get the directory of the po file */
+	parent = g_file_get_parent (location);
+	g_object_unref (location);
 	
-	file = g_file_new_for_path (dir);
-	g_free (dir);
+	/* Get the parent directory */
+	file = g_file_get_parent (parent);
+
 	dir = g_file_get_uri (file);
 	
 	gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (dlg->priv->dir_button),

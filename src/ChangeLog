@@ -1,3 +1,33 @@
+2008-08-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* actions-file.c (gtranslator_open),
+	(gtranslator_po_parse_files_from_dialog),
+	(save_dialog_response_cb), (gtranslator_save_file_as_dialog),
+	(is_duplicated_location), (load_file_list),
+	(gtranslator_actions_load_locations):
+	* actions.h:
+	* dialogs/assistant.c (add_to_database), (destroy_idle_data):
+	* dialogs/close-confirmation-dialog.c (build_single_doc_dialog),
+	(populate_model):
+	* dialogs/preferences-dialog.c (add_to_database),
+	(destroy_idle_data), (on_add_database_button_pulsed):
+	* main.c (get_command_line_data), (main):
+	* notebook.c (sync_name):
+	* po.c (gtranslator_po_init), (gtranslator_po_finalize),
+	(gtranslator_po_parse), (gtranslator_po_save_header_in_msg),
+	(gtranslator_po_save_file), (gtranslator_po_get_location),
+	(gtranslator_po_set_location):
+	* po.h:
+	* utils.c (gtranslator_utils_drop_get_locations),
+	(gtranslator_utils_scan_dir):
+	* utils.h:
+	* window.c (drag_data_received_cb), (gtranslator_recent_add),
+	(gtranslator_recent_chooser_item_activated_cb),
+	(gtranslator_window_create_tab),
+	(gtranslator_window_get_tab_from_location):
+	* window.h:
+	Switched from const gchar *uri/path to GFile.
+
 2008-08-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* tab.c (gtranslator_tab_append_msgstr_page):
