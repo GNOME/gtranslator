@@ -265,9 +265,6 @@ gtranslator_translation_memory_ui_draw(GtranslatorTranslationMemoryUi *tm_ui)
 	priv->tree_view = gtk_tree_view_new();
 	gtk_widget_show (priv->tree_view);
 	
-	gtk_container_add (GTK_CONTAINER(tm_ui),
-			   priv->tree_view);
-	
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(tm_ui),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
@@ -350,6 +347,10 @@ gtranslator_translation_memory_ui_new (GtkWidget *tab)
 			 "showed-message",
 			 G_CALLBACK(showed_message_cb),
 			 tm_ui);
+	
+	/* Scrolledwindow needs to be realized to add a widget */
+	gtk_container_add (GTK_CONTAINER(tm_ui),
+			   tm_ui->priv->tree_view);
 	
 	return GTK_WIDGET(tm_ui);
 }
