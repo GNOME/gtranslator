@@ -311,9 +311,6 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
-	GtkTooltips *tips;
-	
-	tips = g_object_new(GTK_TYPE_TOOLTIPS, NULL);
 	
 	dlg->priv = GTR_PROFILE_DIALOG_GET_PRIVATE (dlg);
 	
@@ -349,8 +346,8 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 		return;
 	}
 	
-	gtk_tooltips_set_tip(tips, GTK_WIDGET(dlg->priv->plurals_forms_entry),
-				"Example: nplurals=2; plural=(n != 1);", "");
+	gtk_widget_set_tooltip_text (dlg->priv->plurals_forms_entry,
+				     _("Example: nplurals=2; plural=(n != 1);"));
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    dlg->priv->main_box, FALSE, FALSE, 0);
