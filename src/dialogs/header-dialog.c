@@ -252,7 +252,7 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 		&error_widget,
 		"main_box", &dlg->priv->main_box,
 		"notebook", &dlg->priv->notebook,
-		"vbox1", &dlg->priv->lang_vbox,
+		"lang_vbox", &dlg->priv->lang_vbox,
 		"prj_id_version", &dlg->priv->prj_id_version,
 		"rmbt", &dlg->priv->rmbt,
 		"prj_comment", &dlg->priv->prj_comment,
