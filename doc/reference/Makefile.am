@@ -37,13 +37,11 @@ FIXXREF_OPTIONS=
 # Used for dependencies. The docs will be rebuilt if any of these change.
 HFILE_GLOB= 					\
 	$(top_srcdir)/src/*.h			\
-	$(top_srcdir)/src/plugin-system/*.h	\
-	$(top_srcdir)/src/translation-memory/*.h
+	$(top_srcdir)/src/plugin-system/*.h	
 	
 CFILE_GLOB=					\
 	$(top_srcdir)/src/*.c			\
-	$(top_srcdir)/src/plugin-system/*.c	\
-	$(top_srcdir)/src/translation-memory/*.c
+	$(top_srcdir)/src/plugin-system/*.c	
 
 # Header files to ignore when scanning (These are internal to gedit).
 IGNORE_HFILES=			\
@@ -63,7 +61,7 @@ HTML_IMAGES=
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE).
 # e.g. content_files=running.sgml building.sgml changes-2.0.sgml
-content_files=version.xml
+content_files=
 
 # SGML files where gtk-doc abbrevations (#GtkWidget) are expanded
 # These files must be listed here *and* in content_files
@@ -77,14 +75,13 @@ GTKDOC_CFLAGS=	\
 	-I$(top_srcdir)/src			\
 	-I$(top_srcdir)/src/plugin-system	\
 	-I$(top_srcdir)/src/toolbareditor	\
-	-I$(top_srcdir)/src/translation-memory	\
 	-I$(top_builddir)/src			\
 	-I$(top_srcdir)				\
 	-I$(top_builddir)			\
 	$(GTRANSLATOR_CFLAGS)
 
 GTKDOC_LIBS=	\
-	$(top_builddir)/src/libgtranslator.la	\
+	$(top_srcdir)/src/libgtranslator.la	\
 	$(GTRANSLATOR_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
@@ -92,4 +89,3 @@ include $(top_srcdir)/gtk-doc.make
 
 # Other files to distribute
 # e.g. EXTRA_DIST += version.xml.in
-EXTRA_DIST += version.xml.in

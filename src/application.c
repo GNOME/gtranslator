@@ -1,23 +1,19 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *               2008  Igalia 
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
  * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
- *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
 #ifdef HAVE_CONFIG_H
@@ -28,12 +24,6 @@
 #include "utils.h"
 #include "window.h"
 #include "egg-toolbars-model.h"
-#include "dialogs/preferences-dialog.h"
-#include "dialogs/assistant.h"
-#include "./translation-memory/translation-memory.h"
-#include "./translation-memory/berkeley/berkeley.h"
-  
-
 
 #include <glib.h>
 #include <glib-object.h>
@@ -52,22 +42,11 @@ struct _GtranslatorApplicationPrivate
 {
 	GList *windows;
 	GtranslatorWindow *active_window;
-
-        GList *profiles;
-        GtranslatorProfile *active_profile;
 	
-        GtranslatorPreferencesDialog *preferences_dialog;
-
 	gchar *toolbars_file;
 	EggToolbarsModel *toolbars_model;
 	
 	GtkIconFactory *icon_factory;
-
-	gchar *last_dir;
-	
-	GtranslatorTranslationMemory *tm;
-	
-	gboolean first_run;
 };
 
 static gchar *
@@ -137,7 +116,6 @@ gtranslator_application_init (GtranslatorApplication *application)
 {
 	gchar *gtranslator_folder;
 	gchar *filename;
-	gchar *profiles_file;
 
 	GtranslatorApplicationPrivate * priv;
 	
@@ -145,10 +123,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 	priv = application->priv;
 	
 	priv->windows = NULL;
-	priv->last_dir = NULL;
-	priv->first_run = FALSE;
-	priv->profiles = NULL;
-
+	
 	/*
 	 * Creating config folder
 	 */
@@ -185,17 +160,8 @@ gtranslator_application_init (GtranslatorApplication *application)
 			gtranslator_application_shutdown (application);
 		}
 		
-		priv->first_run = TRUE;
 		g_object_unref (file);
 	}
-
-	/*
-	 * If the config folder exists but there is no profile
-	 */
-	profiles_file = g_build_filename (gtranslator_folder, "profiles.xml", NULL);
-	if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
-	    priv->first_run = TRUE;
-	g_free (profiles_file);
 
 	priv->toolbars_model = egg_toolbars_model_new ();
 				     
@@ -203,7 +169,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 						"gtr-toolbar.xml",
 						NULL);
 
-	filename = g_build_filename (PKGDATADIR,
+	filename = g_build_filename (DATADIR,
 				     "gtr-toolbar.xml",
 				     NULL);
 
@@ -229,15 +195,6 @@ gtranslator_application_init (GtranslatorApplication *application)
 	/* Create Icon factory */
 	application->priv->icon_factory = gtk_icon_factory_new ();
 	gtk_icon_factory_add_default (application->priv->icon_factory);
-	
-	/* Creating translation memory */
-	application->priv->tm = GTR_TRANSLATION_MEMORY (gtranslator_berkeley_new ());
-	gtranslator_translation_memory_set_max_omits (application->priv->tm,
- 						      gtranslator_prefs_manager_get_missing_words ());
- 	gtranslator_translation_memory_set_max_delta (application->priv->tm,
-						      gtranslator_prefs_manager_get_sentence_length ());
-	gtranslator_translation_memory_set_max_items (application->priv->tm,
-						      10);
 }
 
 
@@ -248,12 +205,7 @@ gtranslator_application_finalize (GObject *object)
 	
 	if (app->priv->icon_factory)
 		g_object_unref (app->priv->icon_factory);
-
-	g_free (app->priv->last_dir);
 	
-	if (app->priv->tm)
-		g_object_unref (app->priv->tm);
-
 	G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
 }
 
@@ -274,13 +226,6 @@ app_weak_notify (gpointer data,
         gtk_main_quit ();
 }
 
-/**
- * gtranslator_application_get_default:
- * 
- * Returns the default instance of the application.
- * 
- * Returns: the default instance of the application.
- */
 GtranslatorApplication *
 gtranslator_application_get_default (void)
 {
@@ -297,14 +242,6 @@ gtranslator_application_get_default (void)
 	return instance;
 }
 
-/**
- * gtranslator_application_open_window:
- * @app: a #GtranslatorApplication
- *
- * Creates a new #GtranslatorWindow and shows it.
- * 
- * Returns: the #GtranslatorWindow to be opened
- */
 GtranslatorWindow *
 gtranslator_application_open_window (GtranslatorApplication *app)
 {
@@ -330,43 +267,23 @@ gtranslator_application_open_window (GtranslatorApplication *app)
 	}
 	
 	g_signal_connect(window, "delete-event",
-			 G_CALLBACK(on_window_delete_event_cb), app);
+			 G_CALLBACK(on_window_delete_event_cb), GTR_APP);
 	
 	g_signal_connect(window, "destroy",
-			 G_CALLBACK(on_window_destroy_cb), app);
+			 G_CALLBACK(on_window_destroy_cb), GTR_APP);
 
 	gtk_widget_show(GTK_WIDGET(window));
-	
-	/*
-	 * If it is the first run, the default directory was created in this
-	 * run, then we show the First run Assistant
-	 */
-	if (app->priv->first_run)
-		gtranslator_show_assistant (window);
 	
 	return window;
 }
 				     
-/**
- * _gtranslator_application_get_toolbars_model:
- * @application: a #GtranslatorApplication
- * 
- * Returns the toolbar model.
- * 
- * Retuns: the toolbar model.
- */
+
 GObject *
 _gtranslator_application_get_toolbars_model (GtranslatorApplication *application)
 {
 	return G_OBJECT (application->priv->toolbars_model);
 }
 
-/**
- * _gtranslator_application_save_toolbars_model:
- * @application: a #GtranslatorApplication
- * 
- * Saves the toolbar model.
- */
 void
 _gtranslator_application_save_toolbars_model (GtranslatorApplication *application)
 {
@@ -374,12 +291,6 @@ _gtranslator_application_save_toolbars_model (GtranslatorApplication *applicatio
 			 	          application->priv->toolbars_file, "1.0");
 }
 
-/**
- * gtranslator_application_shutdown:
- * @app: a #GtranslatorApplication
- * 
- * Shutdowns the application.
- */
 void
 gtranslator_application_shutdown(GtranslatorApplication *app)
 {
@@ -450,78 +361,6 @@ gtranslator_application_get_windows (GtranslatorApplication *app)
 	return app->priv->windows;
 }
 
-/**
- * gtranslator_application_get_active_profile:
- * @app: a #GtranslatorApplication
- * 
- * Return value: the active #GtranslatorProfile
- **/
-GtranslatorProfile *
-gtranslator_application_get_active_profile (GtranslatorApplication *app)
-{
-	return app->priv->active_profile;
-}
-
-/**
- * gtranslator_application_set_profiles:
- * @app: a #GtranslatorApplication
- * @profiles: a #GList
- *
- **/
-void
-gtranslator_application_set_active_profile (GtranslatorApplication *app,
-					    GtranslatorProfile *profile) {
-  app->priv->active_profile = profile;
-}
-
-/**
- * gtranslator_application_get_profiles:
- * @app: a #GtranslatorApplication
- * 
- * Return value: a list of all profiles.
- **/
-GList *
-gtranslator_application_get_profiles (GtranslatorApplication *app)
-{
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-
-	return app->priv->profiles;
-}
-
-/**
- * gtranslator_application_set_profiles:
- * @app: a #GtranslatorApplication
- * @profiles: a #GList
- *
- **/
-void
-gtranslator_application_set_profiles (GtranslatorApplication *app, 
-				      GList *profiles) {
-   app->priv->profiles = profiles;   
-}
-
-GtranslatorPreferencesDialog *
-gtranslator_application_get_preferences_dialog (GtranslatorApplication *app)
-{
-  return app->priv->preferences_dialog;
-}
-
-void
-gtranslator_application_set_preferences_dialog (GtranslatorApplication *app,
-						GtranslatorPreferencesDialog *dlg)
-{
-  app->priv->preferences_dialog = dlg;
-}
-
-
-/**
- * gtranslator_application_register_icon:
- * @app: a #GtranslatorApplication
- * @icon: the name of the icon
- * @stock_id: the stock id for the new icon
- * 
- * Registers a new @icon with the @stock_id.
- */
 void
 gtranslator_application_register_icon (GtranslatorApplication *app,
 				       const gchar *icon,
@@ -545,41 +384,4 @@ gtranslator_application_register_icon (GtranslatorApplication *app,
 	
 	g_free (path);
 	gtk_icon_source_free (icon_source);
-}
-
-/**
- * gtranslator_application_get_last_dir:
- * @app: a #GtranslatorApplication
- *
- * Return value: the last dir where a file was opened in the GtkFileChooser
- */
-const gchar *
-_gtranslator_application_get_last_dir (GtranslatorApplication *app)
-{
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-
-	return app->priv->last_dir;
-}
-
-/**
- * gtranslator_application_set_last_dir:
- * @app: a #GtranslatorApplication
- * @last_dir: the path of the last directory where a file was opened in the
- * GtkFileChooser.
- */
-void
-_gtranslator_application_set_last_dir (GtranslatorApplication *app,
-				       const gchar *last_dir)
-{
-	g_return_if_fail (GTR_IS_APPLICATION (app));
-
-	app->priv->last_dir = g_strdup (last_dir);
-}
-
-GObject *
-gtranslator_application_get_translation_memory (GtranslatorApplication *app)
-{
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-	
-	return G_OBJECT (app->priv->tm);
 }

@@ -21,6 +21,7 @@
 #endif
 
 #include "comment-dialog.h"
+#include "comment.h"
 #include "tab.h"
 #include "utils.h"
 #include "window.h"
@@ -44,7 +45,7 @@ struct _GtranslatorCommentDialogPrivate
 	GtkWidget *main_box;
 	GtkWidget *comment;
 };
-		    
+
 static void
 comment_changed_cb (GtkTextBuffer *buffer,
 		    GtranslatorWindow *window)
@@ -52,18 +53,23 @@ comment_changed_cb (GtkTextBuffer *buffer,
 	gchar *text;
 	GtkTextIter start, end;
 	GtranslatorTab *tab;
+	GtranslatorCommentPanel *comment;
 	GtranslatorPo *po;
 	GList *msg;
 	
 	tab = gtranslator_window_get_active_tab(window);
 	po = gtranslator_tab_get_po(tab);
+	comment = gtranslator_tab_get_comment_panel(tab);
 	msg = gtranslator_po_get_current_message(po);
 	
 	gtk_text_buffer_get_bounds(buffer, &start, &end);
 	text = gtk_text_buffer_get_text(buffer, &start, &end, TRUE);
 	
 	gtranslator_msg_set_comment(msg->data, text);
+
+	gtranslator_comment_panel_set_comments(comment, text);
 }
+		    
 
 static void
 dialog_response_handler (GtkDialog *dlg, 
@@ -107,7 +113,7 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR "/comment-dialog.glade",
+	ret = gtranslator_utils_get_glade_widgets(DATADIR "/comment-dialog.glade",
 		"main_box",
 		&error_widget,
 		
@@ -167,12 +173,11 @@ gtranslator_show_comment_dialog (GtranslatorWindow *window)
 				  "destroy",
 				  G_CALLBACK (gtk_widget_destroyed),
 				  &dlg);
-		g_signal_connect (buf,
-				  "changed",
-				  G_CALLBACK (comment_changed_cb),
-				  window);
-
-		gtk_widget_show (GTK_WIDGET(dlg));
+		g_signal_connect(buf,
+				 "changed",
+				 G_CALLBACK (comment_changed_cb),
+				 window);
+		gtk_widget_show_all(GTK_WIDGET(dlg));
 	}
 	
 	gtk_text_buffer_set_text(buf, gtranslator_msg_get_comment(msg->data), -1); 

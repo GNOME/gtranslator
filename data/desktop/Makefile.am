@@ -18,5 +18,3 @@ Applicationicon_DATA = gtranslator.png
 EXTRA_DIST = $(Application_DATA) \
 	$(Applicationicon_DATA) \
 	$(Application_predata)
-
-CLEANFILES = $(Application_DATA)

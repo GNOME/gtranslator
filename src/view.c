@@ -40,10 +40,17 @@
 #include <gtksourceview/gtksourcelanguagemanager.h>
 #include <gtksourceview/gtksourceiter.h>
 #include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
 
+//#undef HAVE_GTKSPELL
 #ifdef HAVE_GTKSPELL
 #include <gtkspell/gtkspell.h>
+#endif
+
+#undef HAVE_SPELL_CHECK
+#ifdef HAVE_SPELL_CHECK
+#include <gtkspellcheck/client.h>
+#include <gtkspellcheck/manager.h>
+#include <gtkspellcheck/textviewclient.h>
 #endif
 
 #define GTR_VIEW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
@@ -62,6 +69,11 @@ struct _GtranslatorViewPrivate
 	
 #ifdef HAVE_GTKSPELL
 	GtkSpell *spell;
+#endif
+	
+#ifdef HAVE_SPELL_CHECK
+	GtkSpellCheckClient *client;
+	GtkSpellCheckManager *manager;
 #endif
 };
 
@@ -89,6 +101,19 @@ gtranslator_attach_gtkspell(GtranslatorView *view)
 	}
 }
 #endif
+
+#ifdef HAVE_SPELL_CHECK
+static void
+gtranslator_attach_spellcheck(GtranslatorView *view)
+{
+	view->priv->client = GTK_SPELL_CHECK_CLIENT(gtk_spell_check_text_view_client_new(GTK_TEXT_VIEW(view)));
+	view->priv->manager = gtk_spell_check_manager_new(NULL, TRUE);
+	
+	gtk_spell_check_manager_attach(view->priv->manager,
+				       view->priv->client);
+}
+#endif
+
 	       
 static void
 gtranslator_view_init (GtranslatorView *view)
@@ -112,7 +137,7 @@ gtranslator_view_init (GtranslatorView *view)
 	    ++temp)
 		g_ptr_array_add(dirs, g_strdup(*temp));
 		
-	g_ptr_array_add(dirs, g_strdup(PKGDATADIR));
+	g_ptr_array_add(dirs, g_strdup(DATADIR));
 	g_ptr_array_add(dirs, NULL);
 	langs = (gchar **)g_ptr_array_free(dirs, FALSE);
 
@@ -151,11 +176,6 @@ gtranslator_view_init (GtranslatorView *view)
 	{
 		gtranslator_view_set_font (view, TRUE, NULL);
 	}
-	
-	/*
-	 * Set scheme color according to preferences
-	 */
-	gtranslator_view_reload_scheme_color (view);
 }
 
 static void
@@ -174,32 +194,17 @@ gtranslator_view_class_init (GtranslatorViewClass *klass)
 	object_class->finalize = gtranslator_view_finalize;
 }
 
-/**
- * gtranslator_view_new:
- *
- * Creates a new #GtranslatorView. An empty default buffer will be created for you.
- * 
- * Returns: a new #GtranslatorView
- */
 GtkWidget *
 gtranslator_view_new (void)
 {
 	GtkWidget *view;
 	
 	view = GTK_WIDGET (g_object_new (GTR_TYPE_VIEW, NULL));
+	gtk_widget_show_all(view);
 	return view;
 }
 
-/**
- * gtranslator_view_get_selected_text:
- * @view: a #GtranslatorView
- * @selected_text: it stores the text selected in the #GtranslatorView
- * @len: it stores the length of the @selected_text
- *
- * Gets the selected text region of the #GtranslatorView
- *
- * Returns: TRUE if the @selected_text was got correctly.
- */
+
 gboolean
 gtranslator_view_get_selected_text (GtranslatorView *view,
 				    gchar         **selected_text,
@@ -246,6 +251,13 @@ gtranslator_view_enable_spellcheck(GtranslatorView *view,
 #ifdef HAVE_GTKSPELL
 		gtranslator_attach_gtkspell(view);
 #endif
+#ifdef HAVE_SPELL_CHECK
+		if(!view->priv->manager)
+			gtranslator_attach_spellcheck(view);
+		else
+			gtk_spell_check_manager_set_active(view->priv->manager,
+							   TRUE);
+#endif
 	}
 	else
 	{
@@ -253,6 +265,12 @@ gtranslator_view_enable_spellcheck(GtranslatorView *view,
 		if(!view->priv->spell)
 			return;
 		gtkspell_detach(view->priv->spell);
+#endif
+#ifdef HAVE_SPELL_CHECK
+		if(!view->priv->manager)
+			return;
+		gtk_spell_check_manager_set_active(view->priv->manager,
+						   FALSE);
 #endif
 	}
 }
@@ -282,13 +300,6 @@ gtranslator_view_enable_visible_whitespace(GtranslatorView *view,
 	gtk_widget_queue_draw (GTK_WIDGET (view));
 }
 
-/**
- * gtranslator_view_cut_clipboard:
- * @view: a #GtranslatorView
- *
- * Copies the currently-selected text to a clipboard,
- * then deletes said text if it's editable.
- */
 void
 gtranslator_view_cut_clipboard (GtranslatorView *view)
 {
@@ -317,12 +328,6 @@ gtranslator_view_cut_clipboard (GtranslatorView *view)
 				      0.0);
 }
 
-/**
- * gtranslator_view_copy_clipboard:
- * @view: a #GtranslatorView
- *
- * Copies the currently-selected text to a clipboard.
- */
 void
 gtranslator_view_copy_clipboard (GtranslatorView *view)
 {
@@ -342,13 +347,6 @@ gtranslator_view_copy_clipboard (GtranslatorView *view)
 	/* on copy do not scroll, we are already on screen */
 }
 
-/**
- * gtranslator_view_cut_clipboard:
- * @view: a #GtranslatorView
- *
- * Pastes the contents of a clipboard at the insertion point,
- * or at override_location.
- */
 void
 gtranslator_view_paste_clipboard (GtranslatorView *view)
 {
@@ -409,13 +407,8 @@ gtranslator_view_set_font (GtranslatorView *view,
 }
 
 
-/**
- * gtranslator_view_set_search_text:
- * @view: a #GtranslatorView
- * @text: the text to set for searching
- * @flags: a #GtranslatorSearchFlags
- *
- * Stores the text to search for in the @view with some specific @flags.
+/*
+ * Search funcs
  */
 void
 gtranslator_view_set_search_text (GtranslatorView *view,
@@ -476,21 +469,14 @@ gtranslator_view_set_search_text (GtranslatorView *view,
 					&begin,
 					&end);
 	}*/
+	
+	if (notify)
+		g_object_notify (G_OBJECT (doc), "can-search-again");
 }
 
-/**
- * gtranslator_view_get_search_text:
- * @view: a #GtranslatorView
- * @flags: the #GtranslatorSearchFlags of the stored text.
- * 
- * Returns the text to search for it and the #GtranslatorSearchFlags of that
- * text.
- * 
- * Returns: the text to search for it.
- */
 gchar *
 gtranslator_view_get_search_text (GtranslatorView *view,
-				  guint         *flags)
+				guint         *flags)
 {
 	g_return_val_if_fail (GTR_IS_VIEW (view), NULL);
 
@@ -500,12 +486,6 @@ gtranslator_view_get_search_text (GtranslatorView *view,
 	return gtranslator_utils_escape_search_text (view->priv->search_text);
 }
 
-/**
- * gtranslator_view_get_can_search_again:
- * @view: a #GtranslatorView
- * 
- * Returns: TRUE if it can search again
- */
 gboolean
 gtranslator_view_get_can_search_again (GtranslatorView *view)
 {
@@ -515,24 +495,8 @@ gtranslator_view_get_can_search_again (GtranslatorView *view)
 	        (*view->priv->search_text != '\0'));
 }
 
-/**
- * gtranslator_view_search_forward:
- * @view: a #GtranslatorView
- * @start: start of search 
- * @end: bound for the search, or %NULL for the end of the buffer
- * @match_start: return location for start of match, or %NULL
- * @match_end: return location for end of match, or %NULL
- * 
- * Searches forward for str. Any match is returned by setting match_start to the
- * first character of the match and match_end to the first character after the match.
- * The search will not continue past limit.
- * Note that a search is a linear or O(n) operation, so you may wish to use limit
- * to avoid locking up your UI on large buffers. 
- * 
- * Returns: whether a match was found
- */
 gboolean
-gtranslator_view_search_forward (GtranslatorView   *view,
+gtranslator_view_search_forward (GtranslatorView     *view,
 				 const GtkTextIter *start,
 				 const GtkTextIter *end,
 				 GtkTextIter       *match_start,
@@ -603,25 +567,9 @@ gtranslator_view_search_forward (GtranslatorView   *view,
 	
 	return found;			    
 }
-
-/**
- * gtranslator_view_search_backward:
- * @view: a #GtranslatorView
- * @start: start of search 
- * @end: bound for the search, or %NULL for the end of the buffer
- * @match_start: return location for start of match, or %NULL
- * @match_end: return location for end of match, or %NULL
- * 
- * Searches backward for str. Any match is returned by setting match_start to the
- * first character of the match and match_end to the first character after the match.
- * The search will not continue past limit.
- * Note that a search is a linear or O(n) operation, so you may wish to use limit
- * to avoid locking up your UI on large buffers. 
- * 
- * Returns: whether a match was found
- */
+						 
 gboolean
-gtranslator_view_search_backward (GtranslatorView   *view,
+gtranslator_view_search_backward (GtranslatorView     *view,
 				  const GtkTextIter *start,
 				  const GtkTextIter *end,
 				  GtkTextIter       *match_start,
@@ -693,18 +641,6 @@ gtranslator_view_search_backward (GtranslatorView   *view,
 	return found;		      
 }
 
-/**
- * gtranslator_view_replace_all:
- * @view: a #GtranslatorView
- * @find: the text to find
- * @replace: the text to replace @find
- * @flags: a #GtranslatorSearchFlags
- * 
- * Replaces all matches of @find with @replace and returns the number of 
- * replacements.
- * 
- * Returns: the number of replacements made it.
- */
 gint 
 gtranslator_view_replace_all (GtranslatorView     *view,
 			      const gchar         *find, 
@@ -807,28 +743,4 @@ gtranslator_view_replace_all (GtranslatorView     *view,
 	g_free (replace_text);
 
 	return cont;
-}
-
-/**
- * gtranslator_view_reload_scheme_color:
- * @view: a #GtranslatorView
- *
- * Reloads the gtksourceview scheme color. Neccessary when the scheme color 
- * changes.
- */
-void
-gtranslator_view_reload_scheme_color (GtranslatorView *view)
-{
-	GtkSourceBuffer *buf;
-	GtkSourceStyleScheme *scheme;
-	GtkSourceStyleSchemeManager *manager;
-	const gchar *scheme_id;
-	
-	buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-	manager = gtk_source_style_scheme_manager_get_default ();
-	
-	scheme_id = gtranslator_prefs_manager_get_scheme_color ();
-	scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
-	
-	gtk_source_buffer_set_style_scheme (buf, scheme);
 }

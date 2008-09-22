@@ -94,13 +94,33 @@ static void
 impl_activate (GtranslatorPlugin *plugin,
 	       GtranslatorWindow *window)
 {
+	//GtkWidget *image = NULL;
 	GtkWidget *opentran;
+	/*GdkPixbuf *pixbuf;
+	GtkIconSet *iconset;
+	GError *error = NULL;*/
+	
+	/*pixbuf = gdk_pixbuf_new_from_file(OPEN_TRAN_PLUGIN_ICON, &error);
+	
+	if (error)
+	{
+		g_warning ("Could not load icon: %s\n", error->message);
+		g_error_free(error);
+		pixbuf = NULL;
+	}
+	
+	if(pixbuf)
+	{
+		iconset = gtk_icon_set_new_from_pixbuf(pixbuf);
+	
+		image = gtk_image_new_from_icon_set(iconset,
+						    GTK_ICON_SIZE_MENU);
+	}*/
 	
 	gtranslator_application_register_icon (GTR_APP, "open-tran.png",
 					       "open-tran-plugin-icon");
 
 	opentran = gtranslator_open_tran_panel_new(window);
-	gtk_widget_show (opentran);
 
 	gtranslator_window_add_widget (window,
 				       opentran,
@@ -112,6 +132,8 @@ impl_activate (GtranslatorPlugin *plugin,
 	g_object_set_data(G_OBJECT(window),
 			  WINDOW_DATA_KEY,
 			  opentran);
+	
+	gtk_widget_show_all(opentran);
 }
 
 static void

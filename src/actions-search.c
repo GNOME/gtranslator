@@ -274,7 +274,7 @@ find_in_list(GtranslatorWindow *window,
 				if(l->next == NULL)
 				{
 					if(!wrap_around)
-						return FALSE;
+						return;
 					l = g_list_first(l);
 				}
 				else l = l->next;
@@ -283,25 +283,19 @@ find_in_list(GtranslatorWindow *window,
 				if(l->prev == NULL)
 				{
 					if(!wrap_around)
-						return FALSE;
+						return;
 					l = g_list_last(l);
 				}
 				else l = l->prev;
 			}
-			gtranslator_tab_message_go_to(tab, l, TRUE, GTR_TAB_MOVE_NONE);
+			gtranslator_tab_message_go_to(tab, l);
 		}
 		else{
 			while(viewsaux != NULL)
 			{
-				gboolean aux = found;
-				
 				found = run_search(GTR_VIEW(viewsaux->data), found);
 				if(found)
-				{
-					gtranslator_tab_message_go_to (tab, l, FALSE, GTR_TAB_MOVE_NONE);
-					run_search (GTR_VIEW (viewsaux->data), aux);
 					return TRUE;
-				}
 				viewsaux = viewsaux->next;
 			}
 			if(!search_backwards)
@@ -309,7 +303,7 @@ find_in_list(GtranslatorWindow *window,
 				if(l->next == NULL)
 				{
 					if(!wrap_around)
-						return FALSE;
+						return;
 					l = g_list_first(l);
 				}
 				else l = l->next;
@@ -318,16 +312,16 @@ find_in_list(GtranslatorWindow *window,
 				if(l->prev == NULL)
 				{
 					if(!wrap_around)
-						return FALSE;
+						return;
 					l = g_list_last(l);
 				}
 				else l = l->prev;
 			}
-			gtranslator_tab_message_go_to(tab, l, TRUE, GTR_TAB_MOVE_NONE);
+			gtranslator_tab_message_go_to(tab, l);
 			viewsaux = views;
 		}
 	}while(l != current);
-	
+
 	return FALSE;
 }
 
@@ -544,11 +538,9 @@ do_replace_all (GtranslatorSearchDialog *dialog,
 		if(aux->next == NULL)
 			aux = g_list_first(aux);
 		else aux = aux->next;
-		gtranslator_tab_message_go_to(tab, aux, TRUE, GTR_TAB_MOVE_NONE);
+		gtranslator_tab_message_go_to(tab, aux);
 	}while(current_msg != aux);
 
-	gtranslator_tab_message_go_to(tab, aux, FALSE, GTR_TAB_MOVE_NONE);
-	
 	if (count > 0)
 	{
 		phrase_found (window, count);

@@ -30,31 +30,6 @@
 
 #include <gtk/gtkaboutdialog.h>
 
-/*
- * Show the user's guide for gtranslator
- */
-void
-gtranslator_cmd_help_contents (GtkAction   *action,
-			       GtranslatorWindow *window)
-{
-  GError *error = NULL;
-  gboolean ret;
-  GtkWidget *dialog;
-
-  ret = g_app_info_launch_default_for_uri ("ghelp:gtranslator", NULL, &error);
-
-  if (ret == FALSE) 
-  {
-    dialog = gtk_message_dialog_new (GTK_WINDOW (window), 
-				     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				     GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, 
-				     _("Unable to open help file for gtranslator"));
-   
-    gtk_dialog_run (GTK_DIALOG (dialog));
-    gtk_widget_destroy (dialog);
-    g_error_free (error);
-  }
-}
 
 /*
  * Creates and shows the about box for gtranslator.

@@ -1,30 +1,23 @@
 /*
- * (C) 2001-2007 Fatih Demir <kabalak@kabalak.net>
- *               Ignacio Casal <nacho.resa@gmail.com>
- * 		 Paolo Maggi
- *     2008      Igalia
+ * (C) 2001-2007 	Fatih Demir <kabalak@kabalak.net>
+ * 			Ignacio Casal <nacho.resa@gmail.com>
+ * 			Paolo Maggi 
  *
- * Based in gedit utils funcs
+ * 	Based in gedit utils funcs.
  *
  * gtranslator is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or   
- * (at your option) any later version.
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
  *    
  * gtranslator is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
- * GNU General Public License for more details.
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * Authors:
- *   Fatih Demir <kabalak@kabalak.net>
- *   Pablo Sanxiao <psanxiao@gmail.com>
- *   Ignacio Casal <nacho.resa@gmail.com>
- *   Paolo Maggi 
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
 
@@ -36,128 +29,6 @@
 #include <glib/gi18n.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
-
-static const gchar * badwords[]= 
-{
-	"a",
-	//"all",
-	"an",
-	//"are",
-	//"can",
-	//"for",
-	//"from",
-	"have",
-	//"it",
-	//"may",
-	//"not",
-	"of",
-	//"that",
-	"the",
-	//"this",
-	//"was",
-	"will",
-	//"with",
-	//"you",
-	//"your",
-	NULL
-};
-
-static gboolean
-check_good_word (const gchar *word, gchar **badwords)
-{
-	gboolean check = TRUE;
-	gchar *lower = g_utf8_strdown (word, -1);
-	gint i = 0;
-	
-	while (badwords[i] != NULL)
-	{
-		gchar *lower_collate = g_utf8_collate_key (lower, -1);
-		
-		if (strcmp (lower_collate, badwords[i]) == 0)
-		{
-			check = FALSE;
-			g_free (lower_collate);
-			break;
-		}
-		i++;
-		g_free (lower_collate);
-	}
-	return check;
-}
-
-/**
- * gtranslator_utils_split_string_in_words:
- * @string: the text to process
- *
- * Process a text and split it in words using pango.
- * 
- * Returns: an array of words of the processed text
- */
-gchar **
-gtranslator_utils_split_string_in_words (const gchar *string)
-{
-	PangoLanguage *lang = pango_language_from_string ("en");
-	PangoLogAttr *attrs;
-	GPtrArray *array;
-	gint char_len;
-	gint i = 0;
-	gchar *s;
-	static gchar **badwords_collate = NULL;
-	
-	if (badwords_collate == NULL)
-	{
-		gint words_size = g_strv_length ((gchar **)badwords);
-		gint x = 0;
-		
-		badwords_collate = g_new0 (gchar *, words_size + 1);
-		
-		while (badwords[x] != NULL)
-		{
-			badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
-			x++;
-		}
-		badwords_collate[x] = NULL;
-	}
-
-	char_len = g_utf8_strlen (string, -1);
-	attrs = g_new (PangoLogAttr, char_len + 1);
-	
-	pango_get_log_attrs (string,
-			     strlen (string),
-			     -1,
-			     lang,
-			     attrs,
-			     char_len + 1);
-
-	array = g_ptr_array_new ();
-	
-	s = (gchar *)string;
-	while (i <= char_len)
-	{
-		gchar *start, *end;
-		
-		if (attrs[i].is_word_start)
-			start = s;
-		if (attrs[i].is_word_end)
-		{
-			gchar *word;
-			
-			end = s;
-			word = g_strndup (start, end - start);
-			
-			if (check_good_word (word, badwords_collate))
-				g_ptr_array_add (array, word);
-		}
-
-		i++;
-		s = g_utf8_next_char (s);
-	}
-	
-	g_free (attrs);
-	g_ptr_array_add (array, NULL);
-	
-	return (gchar **)g_ptr_array_free (array, FALSE);
-}
 
 xmlDocPtr 
 gtranslator_xml_new_doc (const gchar *name) 
@@ -179,15 +50,6 @@ gtranslator_xml_open_file (const gchar *filename)
   return doc;
 }
 
-/**
- * gtranslator_gtk_button_new_with_stock_icon:
- * @label: the label of the button
- * @stock_id: the id of the stock image
- * 
- * Convenience function to create a #GtkButton with a stock image.
- * 
- * Returns: a new #GtkButton
- */
 GtkWidget *
 gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
 				      const gchar *stock_id)
@@ -202,22 +64,12 @@ gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
         return button;
 }
 
-/**
- * gtranslator_utils_menu_position_under_widget:
- * @menu: a #GtkMenu
- * @x: the x position of the widget
- * @y: the y position of the widget
- * @push_in: 
- * @user_data: the widget to get the position
- * 
- * It returns the position to popup a menu in a specific widget.
- */
 void
 gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
-					      gint     *x,
-					      gint     *y,
-					      gboolean *push_in,
-					      gpointer  user_data)
+					gint     *x,
+					gint     *y,
+					gboolean *push_in,
+					gpointer  user_data)
 {
 	GtkWidget *w = GTK_WIDGET (user_data);
 	GtkRequisition requisition;
@@ -239,22 +91,12 @@ gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
 	*push_in = TRUE;
 }
 
-/**
- * gtranslator_utils_menu_position_under_widget:
- * @menu: a #GtkMenu
- * @x: the x position of the widget
- * @y: the y position of the widget
- * @push_in: 
- * @user_data: the widget to get the position
- * 
- * It returns the position to popup a menu in a TreeView.
- */
 void
 gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
-						 gint     *x,
-						 gint     *y,
-						 gboolean *push_in,
-						 gpointer  user_data)
+					   gint     *x,
+					   gint     *y,
+					   gboolean *push_in,
+					   gpointer  user_data)
 {
 	GtkTreeView *tree = GTK_TREE_VIEW (user_data);
 	GtkTreeModel *model;
@@ -313,7 +155,7 @@ gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
  * of error it returns FALSE and sets error_widget to a GtkLabel containing
  * the error message to display.
  *
- * Returns: FALSE if an error occurs, TRUE on success.
+ * Returns FALSE if an error occurs, TRUE on success.
  */
 gboolean
 gtranslator_utils_get_glade_widgets (const gchar *filename,
@@ -467,6 +309,7 @@ gtranslator_utils_is_valid_uri (const gchar *uri)
 /**
  * gtranslator_utils_drop_get_uris:
  * @selection_data: the #GtkSelectionData from drag_data_received
+ * @info: the info from drag_data_received
  *
  * Create a list of valid uri's from a uri-list drop.
  * 
@@ -474,27 +317,31 @@ gtranslator_utils_is_valid_uri (const gchar *uri)
  *		 were no valid uris. g_strfreev should be used when the 
  *		 string array is no longer used
  */
-GSList *
-gtranslator_utils_drop_get_locations (GtkSelectionData *selection_data)
+gchar **
+gtranslator_utils_drop_get_uris (GtkSelectionData *selection_data)
 {
 	gchar **uris;
 	gint i;
-	GSList *locations = NULL;
+	gint p = 0;
+	gchar **uri_list;
 
 	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+	uri_list = g_new0(gchar *, g_strv_length (uris) + 1);
 
 	for (i = 0; uris[i] != NULL; i++)
 	{
-		GFile *file;
 		/* Silently ignore malformed URI/filename */
 		if (gtranslator_utils_is_valid_uri (uris[i]))
-		{
-			file = g_file_new_for_uri (uris[i]);
-			locations = g_slist_prepend (locations, file);
-		}
+			uri_list[p++] = g_strdup (uris[i]);
 	}
 
-	return locations;
+	if (*uri_list == NULL)
+	{
+		g_free(uri_list);
+		return NULL;
+	}
+
+	return uri_list;
 }
 
 gchar *
@@ -669,20 +516,11 @@ finally_2:
 	return ret;
 }
 
-/**
- * gtranslator_utils_activate_url:
- * @dialog: a #GtkAboutDialog
- * @url: the url to show
- * @data: useless data variable
- * 
- * Shows the corresponding @url in the default browser.
- */
 void
 gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 				const gchar *url,
 				gpointer data)
 {
-	//FIXME: gtk_url_show deprecates this func.
 	gchar *open[3];
 
 	if (g_find_program_in_path ("xdg-open"))
@@ -703,48 +541,6 @@ gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 			     NULL, NULL, NULL);
 }
 
-/**
- * gtranslator_utils_activate_email:
- * @dialog: a #GtkAboutDialog
- * @email: the email to show
- * @data: useless data variable
- * 
- * Shows the corresponding @email in the default mailer.
- */
-void
-gtranslator_utils_activate_email (GtkAboutDialog *dialog,
-				  const gchar *email,
-				  gpointer data)
-{
-	//FIXME: gtk_url_show deprecates this func.
-	gchar *open[3];
-
-	if (g_find_program_in_path ("xdg-email"))
-	{
-		open[0] = "xdg-email";
-	}
-	else return;
-	
-	open[1] = (gchar *)email;
-	open[2] = NULL;
-					
-	gdk_spawn_on_screen (gdk_screen_get_default (),
-			     NULL,
-			     open,
-			     NULL,
-			     G_SPAWN_SEARCH_PATH,
-			     NULL,
-			     NULL, NULL, NULL);
-}
-
-/**
- * gtranslator_utils_help_display:
- * @parent: a #GtkWindow
- * @doc_id: the name of the type of doc
- * @file_name: the name of the doc
- * 
- * Shows the help for an specific document in the default help browser.
- */
 void
 gtranslator_utils_help_display (GtkWindow   *parent,
 				const gchar *doc_id,
@@ -810,121 +606,10 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 	g_free (command);
 }
 
-/**
- * gtranslator_utils_get_user_config_dir:
- * 
- * Returns the default config dir for gtranslator.
- * 
- * Returns: the config dir for gtranslator.
- */
 gchar *
 gtranslator_utils_get_user_config_dir (void)
 {
 	return g_build_filename (g_get_user_config_dir (),
 				 "gtranslator",
 				 NULL);
-}
-
-gchar *gtranslator_utils_get_current_date (void)
-{
-  time_t now;
-  struct tm *now_here;
-  gchar *date = g_malloc (11);
-  
-  now = time(NULL);
-  now_here = localtime(&now);
-  strftime(date, 11, "%Y-%m-%d", now_here);
-
-  return date;
-}
-
-gchar *gtranslator_utils_get_current_time (void)
-{
-  time_t now;
-  struct tm *now_here;
-  gchar *t = g_malloc (11);
-
-  now = time(NULL);
-  now_here = localtime(&now);
-  strftime(t, 11, "%H:%M%z", now_here);
- 
-  return t;
-}
-
-gchar *gtranslator_utils_get_current_year (void)
-{
-  time_t now;
-  struct tm *now_here;
-  gchar *year=g_malloc (5);
-
-  now = time(NULL);
-  now_here = localtime(&now);
-  strftime(year, 5, "%Y", now_here);
-
-  return year;
-}
-
-/**
- * gtranslator_utils_scan_dir:
- * @dir: the dir to parse
- * @list: the list where to store the GFiles
- * @po_name: the name of the specific po file to search or NULL.
- *
- * Scans the directory and subdirectories of @dir looking for filenames remained
- * with .po or files that matches @po_name. The contents of @list must be freed with
- * g_slist_foreach (list, (GFunc)g_object_unref, NULL).
- */
-void
-gtranslator_utils_scan_dir (GFile *dir,
-			    GSList **list,
-			    const gchar *po_name)
-{
-	GFileInfo *info;
-	GError *error;
-	GFile *file;
-	GFileEnumerator *enumerator;
-
-	error = NULL;
-	enumerator = g_file_enumerate_children (dir,
-						G_FILE_ATTRIBUTE_STANDARD_NAME,
-						G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
-						NULL,
-						&error);
-	if (enumerator) 
-	{
-		error = NULL;
-		
-		while ((info = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL) 
-		{
-			const gchar *name;
-			gchar *filename;
-			
-			name = g_file_info_get_name (info);
-			file = g_file_get_child (dir, name);
-
-			if (po_name != NULL)
-			{
-				if (g_str_has_suffix (po_name, ".po"))
-					filename = g_strdup (po_name);
-				else 
-					filename = g_strconcat (po_name, ".po", NULL);
-			}
-			else
-				filename = g_strdup (".po");
-			
-			if (g_str_has_suffix (name, filename))
-				*list = g_slist_prepend (*list, file);
-			g_free (filename);
-
-			gtranslator_utils_scan_dir (file, list, po_name);
-			g_object_unref (info);
-		}
-		g_file_enumerator_close (enumerator, NULL, NULL);
-		g_object_unref (enumerator);
-		
-		if (error)
-		{
-			g_warning (error->message);
-		}
-	}
 }

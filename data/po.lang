@@ -41,13 +41,10 @@
           <match>[&amp;_][a-zA-Z]</match>
         </context>
         <context style-ref="tag">
-	  <match>&lt;[0-9a-zA-Z=.:_?\"/\- ]+&gt;</match>
+	  <match>&lt;[0-9a-zA-Z=\"/\- ]+&gt;</match>
 	</context>
         <context ref="python:format" style-ref="special-variable"/>
         <context ref="c:printf"/>
-        <context id="csharp" style-ref="c:printf">
-          <match>{[0-9][0-9:\#\%,./cdefgnrxtsuDTFGMY]*}</match>
-        </context>
       </include>
     </context>
   </definitions>

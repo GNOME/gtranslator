@@ -78,7 +78,7 @@ static void gtranslator_header_dialog_class_init (GtranslatorHeaderDialogClass *
 
 static void
 take_my_options_checkbutton_toggled(GtkToggleButton *button,
-				    GtranslatorHeaderDialog *dlg)
+				  GtranslatorHeaderDialog *dlg)
 {
 	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->take_my_options));
 	
@@ -98,8 +98,6 @@ prj_id_version_changed(GObject    *gobject,
 {
 	const gchar *text;
 
-	gtranslator_header_set_header_changed (header, TRUE);
-
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
 	if (text)
@@ -112,8 +110,6 @@ rmbt_changed(GObject    *gobject,
 		    GtranslatorHeader *header)
 {
 	const gchar *text;
-
-	gtranslator_header_set_header_changed (header, TRUE);
 
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
@@ -128,8 +124,6 @@ translator_changed(GObject    *gobject,
 {
 	const gchar *text;
 
-	gtranslator_header_set_header_changed (header, TRUE);
-
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
 	if (text)
@@ -142,8 +136,6 @@ tr_email_changed(GObject    *gobject,
 		    GtranslatorHeader *header)
 {
 	const gchar *text;
-
-	gtranslator_header_set_header_changed (header, TRUE);
 
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
@@ -158,8 +150,6 @@ language_changed(GObject    *gobject,
 {
 	const gchar *text;
 
-	gtranslator_header_set_header_changed (header, TRUE);
-
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
 	if (text)
@@ -172,8 +162,6 @@ lg_email_changed(GObject    *gobject,
 		    GtranslatorHeader *header)
 {
 	const gchar *text;
-
-	gtranslator_header_set_header_changed (header, TRUE);
 
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 	
@@ -212,12 +200,8 @@ gtranslator_header_dialog_fill_from_header (GtranslatorHeaderDialog *dlg, Gtrans
 
 static void save_header(GtranslatorPo *po)
 {
-        GtranslatorHeader *header;
-
-	header = gtranslator_po_get_header (po);
-
-        if (gtranslator_header_get_header_changed (header))
-	  gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
+	gtranslator_po_save_header_in_msg (po);
+	gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
 } 
 
 static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
@@ -247,12 +231,12 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 			  G_CALLBACK (gtk_widget_destroy),
 			  NULL);
 	
-	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR"/header-dialog.glade",
+	ret = gtranslator_utils_get_glade_widgets(DATADIR"/header-dialog.glade",
 		"main_box",
 		&error_widget,
 		"main_box", &dlg->priv->main_box,
 		"notebook", &dlg->priv->notebook,
-		"lang_vbox", &dlg->priv->lang_vbox,
+		"vbox1", &dlg->priv->lang_vbox,
 		"prj_id_version", &dlg->priv->prj_id_version,
 		"rmbt", &dlg->priv->rmbt,
 		"prj_comment", &dlg->priv->prj_comment,
@@ -287,15 +271,6 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 	gtk_widget_set_sensitive(dlg->priv->pot_date, FALSE);
 	gtk_widget_set_sensitive(dlg->priv->po_date, FALSE);
 	gtk_widget_set_sensitive(dlg->priv->charset, FALSE);
-
-	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options))) {
-	  
-	  gtk_widget_set_sensitive(dlg->priv->translator, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options)));
-	  gtk_widget_set_sensitive(dlg->priv->tr_email, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options)));
-	  gtk_widget_set_sensitive(dlg->priv->language, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options)));
-	  gtk_widget_set_sensitive(dlg->priv->lg_email, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options)));
-	  gtk_widget_set_sensitive(dlg->priv->encoding, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options)));
-	}
 
 	/*Connect signals*/
 	g_signal_connect(dlg->priv->take_my_options, "toggled",

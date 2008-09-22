@@ -25,7 +25,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugins-engine.c 6376 2008-08-10 14:01:38Z pborelli $
+ * $Id: plugins-engine.c 6052 2008-01-04 17:32:52Z sfre $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -40,7 +40,7 @@
 #include "plugins-engine.h"
 #include "plugin-info-priv.h"
 #include "plugin.h"
-#include "debug.h"
+//#include "gtranslator-debug.h"
 #include "application.h"
 
 #include "module.h"
@@ -84,6 +84,13 @@ static void	gtranslator_plugins_engine_activate_plugin_real (GtranslatorPluginsE
 static void	gtranslator_plugins_engine_deactivate_plugin_real (GtranslatorPluginsEngine *engine,
 							     GtranslatorPluginInfo    *info);
 
+static gint
+compare_plugin_info (GtranslatorPluginInfo *info1,
+		     GtranslatorPluginInfo *info2)
+{
+	return strcmp (info1->module_name, info2->module_name);
+}
+
 static void
 gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 			       const gchar        *dir,
@@ -96,7 +103,7 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 	g_return_if_fail (engine->priv->gconf_client != NULL);
 	g_return_if_fail (dir != NULL);
 
-	DEBUG_PRINT ( "DIR: %s", dir);
+	g_message( "DIR: %s", dir);
 
 	d = g_dir_open (dir, 0, &error);
 	if (!d)
@@ -122,7 +129,9 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 
 			/* If a plugin with this name has already been loaded
 			 * drop this one (user plugins override system plugins) */
-			if (gtranslator_plugins_engine_get_plugin_info (engine, info->module_name) != NULL)
+			if (g_list_find_custom (engine->priv->plugin_list,
+						info,
+						(GCompareFunc)compare_plugin_info) != NULL)
 			{
 				g_warning ("Two or more plugins named '%s'. "
 					   "Only the first will be considered.\n",
@@ -141,7 +150,7 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 
 			engine->priv->plugin_list = g_list_prepend (engine->priv->plugin_list, info);
 
-			DEBUG_PRINT ( "Plugin %s loaded", info->name);
+			g_message( "Plugin %s loaded", info->name);
 		}
 	}
 
@@ -151,7 +160,7 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 static void
 gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine *engine)
 {
-	GSList *active_plugins = NULL;
+	GSList *active_plugins;
 	const gchar *home;
 	const gchar *pdirs_env;
 	gchar **pdirs;
@@ -187,15 +196,13 @@ gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine *engine)
 	if (pdirs_env == NULL)
 		pdirs_env = GTR_PLUGINDIR;
 
-	DEBUG_PRINT ( "GTR_PLUGINS_PATH=%s", pdirs_env);
+	g_message( "GTR_PLUGINS_PATH=%s", pdirs_env);
 	pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
 
 	for (i = 0; pdirs[i] != NULL; i++)
 		gtranslator_plugins_engine_load_dir (engine, pdirs[i], active_plugins);
 
 	g_strfreev (pdirs);
-	g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
-	g_slist_free (active_plugins);
 }
 
 static void
@@ -232,15 +239,9 @@ gtranslator_plugins_engine_init (GtranslatorPluginsEngine *engine)
 void
 gtranslator_plugins_engine_garbage_collect (GtranslatorPluginsEngine *engine)
 {
-	GType *module_types = g_type_children (GTR_TYPE_MODULE, NULL);
-	unsigned i;
-	for (i = 0; module_types[i] != 0; i++)
-	{
-		gpointer klass = g_type_class_peek (module_types[i]);
-		if (klass != NULL)
-			gtranslator_module_class_garbage_collect (klass);
-	}
-	g_free (module_types);
+#ifdef ENABLE_PYTHON
+	gtranslator_python_garbage_collect ();
+#endif
 }
 
 static void
@@ -324,26 +325,10 @@ gtranslator_plugins_engine_get_plugin_list (GtranslatorPluginsEngine *engine)
 	return engine->priv->plugin_list;
 }
 
-static gint
-compare_plugin_info_and_name (GtranslatorPluginInfo *info,
-			      const gchar *module_name)
-{
-	return strcmp (info->module_name, module_name);
-}
-
-GtranslatorPluginInfo *
-gtranslator_plugins_engine_get_plugin_info (GtranslatorPluginsEngine *engine,
-				      const gchar        *name)
-{
-	GList *l = g_list_find_custom (engine->priv->plugin_list,
-				       name,
-				       (GCompareFunc) compare_plugin_info_and_name);
-	return l == NULL ? NULL : (GtranslatorPluginInfo *) l->data;
-}
-
 static gboolean
 load_plugin_module (GtranslatorPluginInfo *info)
 {
+	gchar *path;
 	gchar *dirname;
 
 	//gtranslator_debug (DEBUG_PLUGINS);
@@ -353,52 +338,107 @@ load_plugin_module (GtranslatorPluginInfo *info)
 	g_return_val_if_fail (info->module_name != NULL, FALSE);
 	g_return_val_if_fail (info->plugin == NULL, FALSE);
 	g_return_val_if_fail (info->available, FALSE);
+	
+	switch (info->loader)
+	{
+		case GTR_PLUGIN_LOADER_C:
+			dirname = g_path_get_dirname (info->file);	
+			g_return_val_if_fail (dirname != NULL, FALSE);
 
-	dirname = g_path_get_dirname (info->file);
-	g_return_val_if_fail (dirname != NULL, FALSE);
+			path = g_module_build_path (dirname, info->module_name);
+			g_free (dirname);
+			g_return_val_if_fail (path != NULL, FALSE);
+	
+			info->module = G_TYPE_MODULE (gtranslator_module_new (path));
+			g_free (path);
+			
+			break;
 
 #ifdef ENABLE_PYTHON
-	if (info->module_type == GTR_TYPE_PYTHON_MODULE)
-	{
-		if (!gtranslator_python_init ())
+		case GTR_PLUGIN_LOADER_PY:
 		{
-			/* Mark plugin as unavailable and fail */
-			info->available = FALSE;
-			g_warning ("Cannot load Python plugin '%s' since gtranslator "
-			           "was not able to initialize the Python interpreter.",
-			           info->name);
+			gchar *dir;
+			
+			if (!gtranslator_python_init ())
+			{
+				/* Mark plugin as unavailable and fails */
+				info->available = FALSE;
+				
+				g_warning ("Cannot load Python plugin '%s' since gtranslator "
+				           "was not able to initialize the Python interpreter.",
+				           info->name);
+
+				return FALSE;
+			}
+
+			dir = g_path_get_dirname (info->file);
+			
+			g_return_val_if_fail ((info->module_name != NULL) &&
+			                      (info->module_name[0] != '\0'),
+			                      FALSE);
+
+			info->module = G_TYPE_MODULE (
+					gtranslator_python_module_new (dir, info->module_name));
+					
+			g_free (dir);
+			break;
 		}
-	}
 #endif
+		default:
+			g_return_val_if_reached (FALSE);
+	}
 
-	info->module = GTR_MODULE (g_object_new (info->module_type,
-						   "path", dirname,
-						   "module-name", info->module_name,
-						   NULL));
-
-	g_free (dirname);
-
-	if (!g_type_module_use (G_TYPE_MODULE (info->module)))
+	if (!g_type_module_use (info->module))
 	{
-		g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
-			   gtranslator_module_get_module_name (info->module),
-			   gtranslator_module_get_path (info->module));
+		switch (info->loader)
+		{
+			case GTR_PLUGIN_LOADER_C:
+				g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
+					   info->name,			           
+					   gtranslator_module_get_path (GTR_MODULE (info->module)));
+				break;
 
+			case GTR_PLUGIN_LOADER_PY:
+				g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
+					   info->name,			           
+					   info->module_name);
+				break;
+
+			default:
+				g_return_val_if_reached (FALSE);				
+		}
+			   
 		g_object_unref (G_OBJECT (info->module));
 		info->module = NULL;
 
-		/* Mark plugin as unavailable and fail. */
+		/* Mark plugin as unavailable and fails */
 		info->available = FALSE;
 		
 		return FALSE;
 	}
+	
+	switch (info->loader)
+	{
+		case GTR_PLUGIN_LOADER_C:
+			info->plugin = 
+				GTR_PLUGIN (gtranslator_module_new_object (GTR_MODULE (info->module)));
+			break;
 
-	info->plugin = GTR_PLUGIN (gtranslator_module_new_object (info->module));
+#ifdef ENABLE_PYTHON
+		case GTR_PLUGIN_LOADER_PY:
+			info->plugin = 
+				GTR_PLUGIN (gtranslator_python_module_new_object (GTR_PYTHON_MODULE (info->module)));
+			break;
+#endif
 
-	g_type_module_unuse (G_TYPE_MODULE (info->module));
+		default:
+			g_return_val_if_reached (FALSE);
+	}
+	
+	g_type_module_unuse (info->module);
 
-	DEBUG_PRINT ( "End");
-
+	g_message( "End");
+	
 	return TRUE;
 }
 
@@ -536,7 +576,7 @@ reactivate_all (GtranslatorPluginsEngine *engine,
 		}
 	}
 	
-	DEBUG_PRINT ( "End");
+	g_message( "End");
 }
 
 void
@@ -561,7 +601,7 @@ gtranslator_plugins_engine_update_plugins_ui (GtranslatorPluginsEngine *engine,
 		if (!info->available || !info->active)
 			continue;
 			
-	       	DEBUG_PRINT ( "Updating UI of %s", info->name);
+	       	g_message( "Updating UI of %s", info->name);
 		
 		gtranslator_plugin_update_ui (info->plugin, window);
 	}

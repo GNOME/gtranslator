@@ -18,7 +18,10 @@
  */
 
 #include <string.h>
-#include <gtk/gtk.h>
+#include <gtk/gtktreeselection.h>
+#include <gtk/gtksignal.h>
+#include <gtk/gtkwidget.h>
+#include <gtk/gtkmain.h>
 #include "eggtreemultidnd.h"
 
 #define EGG_TREE_MULTI_DND_STRING "EggTreeMultiDndString"

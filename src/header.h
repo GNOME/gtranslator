@@ -1,23 +1,19 @@
 /*
- * (C) 2007 Pablo Sanxiao <psanxiao@gmail.com>
- *     2008 Igalia
- *  		
+ * (C) 2007 	Pablo Sanxiao <psanxiao@gmail.com>
+ *			
  * gtranslator is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or   
- * (at your option) any later version.
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
  *    
  * gtranslator is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
- * GNU General Public License for more details.
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * Authors:
- *   Pablo Sanxiao <psanxiao@gmail.com>
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __HEADER_H__
@@ -114,10 +110,6 @@ void		 gtranslator_header_set_encoding	(GtranslatorHeader *header, gchar *data);
 const gchar	*gtranslator_header_get_plural_forms	(GtranslatorHeader *header);
 void             gtranslator_header_set_plural_forms    (GtranslatorHeader *header,
 							 const gchar *plural_forms);
-
-gboolean         gtranslator_header_get_header_changed  (GtranslatorHeader *header);
-void             gtranslator_header_set_header_changed  (GtranslatorHeader *header,
-							 gboolean change);
 							 
 gint             gtranslator_header_get_nplurals        (GtranslatorHeader *header);
 

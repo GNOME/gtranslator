@@ -39,12 +39,8 @@
 
 #include "plugin-info.h"
 #include "plugin-info-priv.h"
-#include "debug.h"
+//#include "gtranslator-debug.h"
 #include "plugin.h"
-
-#ifdef ENABLE_PYTHON
-#include "gtranslator-python-module.h"
-#endif
 
 void
 _gtranslator_plugin_info_ref (GtranslatorPluginInfo *info)
@@ -67,7 +63,7 @@ _gtranslator_plugin_info_unref (GtranslatorPluginInfo *info)
 
 	if (info->plugin != NULL)
 	{
-		DEBUG_PRINT ( "Unref plugin %s", info->name);
+		g_message( "Unref plugin %s", info->name);
 
 		g_object_unref (info->plugin);
 		
@@ -127,7 +123,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 
 	g_return_val_if_fail (file != NULL, NULL);
 
-	DEBUG_PRINT ( "Loading plugin: %s", file);
+	g_message( "Loading plugin: %s", file);
 
 	info = g_new0 (GtranslatorPluginInfo, 1);
 	info->refcount = 1;
@@ -145,7 +141,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 				 "IAge",
 				 NULL))
 	{
-		DEBUG_PRINT (
+		g_message(
 				     "IAge key does not exist in file: %s", file);
 		goto error;
 	}
@@ -156,7 +152,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 				    "IAge",
 				    NULL) != 2)
 	{
-		DEBUG_PRINT (
+		g_message(
 				     "Wrong IAge in file: %s", file);
 		goto error;
 	}
@@ -185,7 +181,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 							 NULL);
 	if (info->dependencies == NULL)
 	{
-		DEBUG_PRINT ( "Could not find 'Depends' in %s", file);
+		g_message( "Could not find 'Depends' in %s", file);
 		info->dependencies = g_new0 (gchar *, 1);
 	}
 
@@ -196,17 +192,16 @@ _gtranslator_plugin_info_new (const gchar *file)
 				     NULL);
 	if (str && strcmp(str, "python") == 0)
 	{
+		info->loader = GTR_PLUGIN_LOADER_PY;
 #ifndef ENABLE_PYTHON
 		g_warning ("Cannot load Python plugin '%s' since gtranslator was not "
 			   "compiled with Python support.", file);
 		goto error;
-#else
-		info->module_type = GTR_TYPE_PYTHON_MODULE;
 #endif
 	}
 	else
 	{
-		info->module_type = GTR_TYPE_MODULE;
+		info->loader = GTR_PLUGIN_LOADER_C;
 	}
 	g_free (str);
 
@@ -231,7 +226,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->desc = str;
 	else
-		DEBUG_PRINT ( "Could not find 'Description' in %s", file);
+		g_message( "Could not find 'Description' in %s", file);
 
 	/* Get Icon */
 	str = g_key_file_get_locale_string (plugin_file,
@@ -241,7 +236,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->icon_name = str;
 	else
-		DEBUG_PRINT ( "Could not find 'Icon' in %s, using 'plugin'", file);
+		g_message( "Could not find 'Icon' in %s, using 'plugin'", file);
 	
 
 	/* Get Authors */
@@ -251,7 +246,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 						    NULL,
 						    NULL);
 	if (info->authors == NULL)
-		DEBUG_PRINT ( "Could not find 'Authors' in %s", file);
+		g_message( "Could not find 'Authors' in %s", file);
 
 
 	/* Get Copyright */
@@ -262,7 +257,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->copyright = str;
 	else
-		DEBUG_PRINT ( "Could not find 'Copyright' in %s", file);
+		g_message( "Could not find 'Copyright' in %s", file);
 
 	/* Get Website */
 	str = g_key_file_get_string (plugin_file,
@@ -272,7 +267,7 @@ _gtranslator_plugin_info_new (const gchar *file)
 	if (str)
 		info->website = str;
 	else
-		DEBUG_PRINT ( "Could not find 'Website' in %s", file);
+		g_message( "Could not find 'Website' in %s", file);
 		
 	g_key_file_free (plugin_file);
 	
@@ -311,7 +306,7 @@ gtranslator_plugin_info_is_available (GtranslatorPluginInfo *info)
 gboolean
 gtranslator_plugin_info_is_configurable (GtranslatorPluginInfo *info)
 {
-	DEBUG_PRINT ( "Is '%s' configurable?", info->name);
+	g_message( "Is '%s' configurable?", info->name);
 
 	g_return_val_if_fail (info != NULL, FALSE);
 

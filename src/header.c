@@ -1,25 +1,20 @@
 /*
- * (C) 2007 Pablo Sanxiao <psanxiao@gmail.com>
- *          Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *     2008 Igalia
- *  		
+ * (C) 2007 	Pablo Sanxiao <psanxiao@gmail.com>
+ *	        Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *			
  * gtranslator is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or   
- * (at your option) any later version.
+ *  it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or   
+ *    (at your option) any later version.
  *    
  * gtranslator is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
- * GNU General Public License for more details.
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ *    GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * Authors:
- *   Pablo Sanxiao <psanxiao@gmail.com>
- *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *  along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #include "header.h"
@@ -101,11 +96,6 @@ struct _GtranslatorHeaderPrivate
 	 */
 	gchar *plural_forms;
 	gint nplurals;
-
-        /*
-         * Check if header has changed
-         */
-        gboolean header_changed;
 };
 
 /*
@@ -375,35 +365,6 @@ gtranslator_header_set_plural_forms (GtranslatorHeader *header,
 	
 	/*Now we parse the plural forms to know the number of plurals*/
 	parse_nplurals (header);
-}
-
-/**
- * gtranslator_header_get_header_changed:
- * @header: a #GtranslatorHeader.
- *
- * Return value: TRUE if the header has changed, FALSE if not.
- */
-
-gboolean
-gtranslator_header_get_header_changed (GtranslatorHeader *header)
-{
-  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
-
-  return header->priv->header_changed;
-}
-
-/**
- * gtranslator_header_set_header_changed:
- * @header: a #GtranslatorHeader
- * @gboolean: Indicate if the header has changed or not.
- *
- * Sets the state of the header, TRUE if has changed, FALSE if not.
- */
-
-void
-gtranslator_header_set_header_changed (GtranslatorHeader *header, gboolean change)
-{
-  header->priv->header_changed = change;
 }
 
 /**

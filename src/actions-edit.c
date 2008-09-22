@@ -126,11 +126,15 @@ gtranslator_message_copy_to_translation(GtkAction *action,
 	GList *msg;
 	gint page_index;
 	
-	current = gtranslator_window_get_active_tab (window);
-	po = gtranslator_tab_get_po (current);
-	msg = gtranslator_po_get_current_message (po);
+	current = gtranslator_window_get_active_tab(window);
+	po = gtranslator_tab_get_po(current);
+	msg = gtranslator_po_get_current_message(po);
 	
-	msgid = gtranslator_msg_get_msgid (msg->data);
+	page_index = gtranslator_tab_get_active_text_tab(current);
+	
+	if(page_index == 0)
+		msgid = gtranslator_msg_get_msgid(msg->data);
+	else msgid = gtranslator_msg_get_msgid_plural(msg->data);
 	
 	if(msgid)
 	{
@@ -149,7 +153,7 @@ gtranslator_message_copy_to_translation(GtkAction *action,
 	if(gtranslator_msg_is_fuzzy(msg->data) && gtranslator_prefs_manager_get_unmark_fuzzy())
 		gtranslator_msg_set_fuzzy(msg->data, FALSE);
 		
-	gtranslator_tab_message_go_to(current, msg, FALSE, GTR_TAB_MOVE_NONE);
+	gtranslator_tab_message_go_to(current, msg);
 	
 	/*
 	 * Emit that message was changed.
@@ -202,17 +206,4 @@ gtranslator_edit_message_comment(GtkAction *action,
 				 GtranslatorWindow *window)
 {	
 	gtranslator_show_comment_dialog(window);
-}
-
-void
-gtranslator_actions_edit_clear (GtkAction *action,
-				GtranslatorWindow *window)
-{
-	GtranslatorTab *tab;
-	
-	g_return_if_fail (GTR_IS_WINDOW (window));
-	
-	tab = gtranslator_window_get_active_tab (window);
-	
-	gtranslator_tab_clear_msgstr_views (tab);
 }

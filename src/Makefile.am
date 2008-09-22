@@ -4,8 +4,7 @@
 
 SUBDIRS = toolbareditor \
 	  dialogs \
-	  plugin-system \
-	  translation-memory
+	  plugin-system
 
 noinst_LTLIBRARIES = libgtranslator.la
 
@@ -15,13 +14,10 @@ INCLUDES = \
 	-I$(top_srcdir)/src/dialogs				\
 	-I$(top_srcdir)/src/toolbareditor			\
 	-I$(top_srcdir)/src/plugin-system			\
-	-I$(top_srcdir)/src/translation-memory			\
-	-I$(top_srcdir)/src/translation-memory/berkeley		\
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
 	-DPREFIX=\""$(prefix)"\"                                \
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
-	-DPKGDATADIR=\""$(pkgdatadir)"\"                        \
-	-DDATADIR=\""$(datadir)"\"                              \
+	-DDATADIR=\""$(pkgdatadir)"\"                              \
 	-DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
 	$(GTKSPELL_CFLAGS)                                      \
@@ -54,8 +50,7 @@ BUILT_SOURCES =                         \
 
 INST_H_FILES =				\
 	application.h \
-	context.h \
-	debug.h \
+	comment.h \
 	header.h \
 	io-error-message-area.h \
 	message-area.h \
@@ -108,15 +103,14 @@ libgtranslator_la_SOURCES = \
 	actions-search.c \
 	header.c \
 	statusbar.c \
-	context.c \
+	comment.c \
 	$(INST_H_FILES) 
 
 libgtranslator_la_LIBADD = \
 	$(GTRANSLATOR_LIBS) \
 	dialogs/libdialogs.la \
 	toolbareditor/libtoolbareditor.la \
-	plugin-system/libpluginsystem.la \
-	translation-memory/libtranslationmemory.la
+	plugin-system/libpluginsystem.la 
 	
 #gtranslator_auto_learn_SOURCES = \
 #	auto-learn.c
@@ -140,10 +134,7 @@ gtranslator-marshal.h: gtranslator-marshal.list $(GLIB_GENMARSHAL)
 gtranslator-marshal.c: gtranslator-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --body --header --prefix=gtranslator_marshal > $@
 
-EXTRA_DIST =	\
-	ChangeLog			\
-	gtranslator-marshal.list	\
-	gtranslator-enum-types.h.template	\
-	gtranslator-enum-types.c.template
+EXTRA_DIST = ChangeLog gtranslator-marshal.list
+
 
 CLEANFILES = $(BUILT_SOURCES)

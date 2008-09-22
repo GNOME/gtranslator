@@ -5,7 +5,6 @@
  *
  * Copyright (C) 2002  Paolo Maggi 
  * 		 2007  Ignacio Casal Quinteiro
- *               2008  Igalia
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,12 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA.
- *
- * Authors:
- *   Paolo Maggi
- *   Ignacio Casal Quinteiro
- *   Pablo Sanxiao <psanxiao@gmail.com>
+ * Boston, MA 02111-1307, USA. 
  */
 
 #ifndef __GTR_PREFS_MANAGER_H__
@@ -37,8 +31,6 @@
 
 #define GPM_PREFS_DIR			GTR_BASE_KEY "/preferences"
 
-#define GPM_HEADER                      GTR_BASE_KEY "/header"
-
 /* Files */
 #define GPM_GENERAL_DIR			GPM_PREFS_DIR "/files/general"
 #define GPM_WARN_IF_FUZZY		GPM_GENERAL_DIR "/warn_if_fuzzy"
@@ -47,7 +39,8 @@
 #define GPM_AUTOSAVE_DIR		GPM_PREFS_DIR "/files/autosave"
 #define GPM_AUTOSAVE			GPM_AUTOSAVE_DIR "/autosave"
 #define GPM_AUTOSAVE_INTERVAL		GPM_AUTOSAVE_DIR "/autosave_interval"
-#define GPM_CREATE_BACKUP		GPM_AUTOSAVE_DIR "/create_backup"
+#define GPM_APPEND_SUFFIX		GPM_AUTOSAVE_DIR "/append_suffix"
+#define GPM_AUTOSAVE_SUFFIX		GPM_AUTOSAVE_DIR "/autosave_suffix"
 
 /* Editor */
 #define GPM_TEXT_DISPLAY_DIR		GPM_PREFS_DIR "/editor/text_display"
@@ -63,7 +56,7 @@
 #define GPM_SPELLCHECK			GPM_CONTENTS_DIR "/spellcheck"
 
 /* Edit Header */
-#define GPM_TAKE_MY_OPTIONS		GPM_HEADER "/take_my_options"
+#define GPM_TAKE_MY_OPTIONS		GPM_PREFS_DIR "/take_my_options"
 
 /* PO header */
 #define GPM_PERSONAL_INFORMATION_DIR	GPM_PREFS_DIR "/po_header/personal_information"
@@ -77,21 +70,12 @@
 #define GPM_TRANSFER_ENCODING		GPM_LANGUAGE_SETTINGS_DIR "/transfer_encoding"
 #define GPM_TEAM_EMAIL			GPM_LANGUAGE_SETTINGS_DIR "/team_email"
 
-/* Translation Memory */
-#define GPM_TM_DIR                      GPM_PREFS_DIR "/tm/dir_entry"
-#define GPM_TM_USE_LANG_PROFILE         GPM_PREFS_DIR "/tm/use_lang_profile"
-#define GPM_TM_LANG_ENTRY               GPM_PREFS_DIR "/tm/tm_lang_profile"
-#define GPM_TM_SHOW_TM_OPTIONS          GPM_PREFS_DIR "/tm/show_tm_options"
-#define GPM_TM_MISSING_WORDS            GPM_PREFS_DIR "/tm/missing_words"
-#define GPM_TM_SENTENCE_LENGTH          GPM_PREFS_DIR "/tm/sentence_lenght"
-
 /*FIXME: With profiles i think that this has to change*/
 #define GPM_PLURAL_FORM			GPM_LANGUAGE_SETTINGS_DIR "/plural_form"
 
 /* Interface */
 #define GPM_INTERFACE_DIR		GPM_PREFS_DIR "/interface"
 #define GPM_GDL_STYLE			GPM_INTERFACE_DIR "/gdl_style"
-#define GPM_SCHEME_COLOR		GPM_INTERFACE_DIR "/scheme_color"
 
 /* Fallback default values. Keep in sync with gtranslator.schemas */
 
@@ -101,7 +85,8 @@
 
 #define GPM_DEFAULT_AUTOSAVE		  0 /* FALSE */
 #define GPM_DEFAULT_AUTOSAVE_INTERVAL	  4
-#define GPM_DEFAULT_CREATE_BACKUP         0 /* FALSE */
+#define GPM_DEFAULT_APPEND_SUFFIX         0 /* FALSE */
+#define GPM_DEFAULT_AUTOSAVE_SUFFIX	  (const gchar*) "autosave"
 
 /* Editor */
 #define GPM_DEFAULT_HIGHLIGHT             1 /* TRUE */
@@ -129,15 +114,6 @@
 
 /* Interface */
 #define GPM_DEFAULT_GDL_STYLE           2 //Both icons and text
-#define GPM_DEFAULT_SCHEME_COLOR	"classic"
-
-/* Translation Memory */
-#define GPM_DEFAULT_TM_DIR              (const gchar*) ""
-#define GPM_DEFAULT_TM_USE_LANG_PROFILE 0 /*FALSE*/
-#define GPM_DEFAULT_TM_LANG_ENTRY       (const gchar*) ""
-#define GPM_DEFAULT_TM_SHOW_TM_OPTIONS  0 /*FALSE*/
-#define GPM_DEFAULT_TM_MISSING_WORDS    2
-#define GPM_DEFAULT_TM_SENTENCE_LENGTH  2
 
 /** LIFE CYCLE MANAGEMENT FUNCTIONS **/
 
@@ -169,9 +145,13 @@ gboolean                 gtranslator_prefs_manager_get_autosave                 
 void                     gtranslator_prefs_manager_set_autosave_interval        (gint timeout);
 gint                     gtranslator_prefs_manager_get_autosave_interval        (void);
 
-/*Create backup*/
-void                     gtranslator_prefs_manager_set_create_backup            (gboolean backup);
-gboolean                 gtranslator_prefs_manager_get_create_backup            (void);
+/*Append suffix*/
+void                     gtranslator_prefs_manager_set_append_suffix            (gboolean aws);
+gboolean                 gtranslator_prefs_manager_get_append_suffix            (void);
+
+/*Autosave suffix*/
+void                     gtranslator_prefs_manager_set_autosave_suffix          (const gchar *suffix);
+const gchar *            gtranslator_prefs_manager_get_autosave_suffix          (void);
 
 /*Highlight*/
 void                     gtranslator_prefs_manager_set_highlight                (gboolean highlight);
@@ -193,6 +173,10 @@ const gchar *            gtranslator_prefs_manager_get_editor_font              
 void                     gtranslator_prefs_manager_set_unmark_fuzzy             (gboolean unmark);
 gboolean                 gtranslator_prefs_manager_get_unmark_fuzzy             (void);
 
+/*keep obsolete*/
+void                     gtranslator_prefs_manager_set_keep_obsolete            (gboolean keep_obsolete);
+gboolean                 gtranslator_prefs_manager_get_keep_obsolete            (void);
+
 /*Spellcheck*/
 void                     gtranslator_prefs_manager_set_spellcheck               (gboolean spell_checking);
 gboolean                 gtranslator_prefs_manager_get_spellcheck               (void);
@@ -212,28 +196,5 @@ const gchar *            gtranslator_prefs_manager_get_plural_form              
 /*Gdl style*/
 void                     gtranslator_prefs_manager_set_gdl_style                (gint style);
 gint                     gtranslator_prefs_manager_get_gdl_style                (void);
-
-/*Scheme color*/
-void                     gtranslator_prefs_manager_set_scheme_color             (const gchar *scheme);
-const gchar *            gtranslator_prefs_manager_get_scheme_color             (void);
-
-/*Translation Memory*/
-void                     gtranslator_prefs_manager_set_tm_dir                   (const gchar *dir);
-const gchar *            gtranslator_prefs_manager_get_tm_dir                   (void);
-
-void                     gtranslator_prefs_manager_set_show_tm_options          (gboolean show_tm_options);
-gboolean                 gtranslator_prefs_manager_get_show_tm_options          (void);
-
-void                     gtranslator_prefs_manager_set_tm_lang_entry            (const gchar *dir);
-const gchar *            gtranslator_prefs_manager_get_tm_lang_entry            (void);
-
-void                     gtranslator_prefs_manager_set_use_lang_profile         (gboolean use_lang_profile);
-gboolean                 gtranslator_prefs_manager_get_use_lang_profile         (void);
-
-void                     gtranslator_prefs_manager_set_missing_words            (gint timeout);
-gint                     gtranslator_prefs_manager_get_missing_words            (void);
-
-void                     gtranslator_prefs_manager_set_sentence_length          (gint timeout);
-gint                     gtranslator_prefs_manager_get_sentence_length          (void);
 
 #endif  /* __GTR_PREFS_MANAGER_H__ */

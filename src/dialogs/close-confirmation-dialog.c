@@ -356,8 +356,7 @@ build_single_doc_dialog (GtranslatorCloseConfirmationDialog *dlg)
 	GtkWidget     *primary_label;
 	GtkWidget     *image;
 	GtranslatorPo *doc;
-	GFile         *location;
-	gchar         *doc_name;
+	const gchar   *doc_name;
 	gchar         *str;
 	gchar         *markup_str;
 
@@ -376,13 +375,10 @@ build_single_doc_dialog (GtranslatorCloseConfirmationDialog *dlg)
 	gtk_misc_set_alignment (GTK_MISC (primary_label), 0.0, 0.5);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
-	location = gtranslator_po_get_location (doc);
-	doc_name = g_file_get_path (location);
-	g_object_unref (location);
+	doc_name = gtranslator_po_get_filename (doc);
 
 	str = g_markup_printf_escaped (_("Save the changes to document \"%s\" before closing?"),
 				       doc_name);
-	g_free (doc_name);
 
 	markup_str = g_strconcat ("<span weight=\"bold\" size=\"larger\">", str, "</span>", NULL);
 	g_free (str);
@@ -419,14 +415,11 @@ populate_model (GtkTreeModel *store,
 	while (docs != NULL)
 	{
 		GtranslatorPo *po;
-		GFile *location;
-		gchar *name;
+		const gchar *name;
 
 		po = GTR_PO (docs->data);
 
-		location = gtranslator_po_get_location (po);
-		name = g_file_get_path (location);
-		g_object_unref (location);
+		name = gtranslator_po_get_filename (po);
 
 		gtk_list_store_append (GTK_LIST_STORE (store), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (store), &iter,
@@ -435,7 +428,6 @@ populate_model (GtkTreeModel *store,
 				    DOC_COLUMN, po,
 			            -1);
 
-		g_free (name);
 		docs = g_list_next (docs);
 	}
 }

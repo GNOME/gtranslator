@@ -1,23 +1,19 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *               2008  Igalia
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANMSGILITY or FITNESS FOR A PARTICULAR PURMSGSE.  See the
- * GNU General Public License for more details.
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
  * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANMSGILITY or FITNESS FOR A PARTICULAR PURMSGSE.  See the
+ *     GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
- *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
 #ifndef __MSG_H__
@@ -80,14 +76,7 @@ GType		  gtranslator_msg_get_type	       (void) G_GNUC_CONST;
 
 GType		  gtranslator_msg_register_type	       (GTypeModule * module);
 
-GtranslatorMsg   *gtranslator_msg_new                  (po_message_iterator_t iter,
-							po_message_t message);
-
-po_message_iterator_t
-                  gtranslator_msg_get_iterator         (GtranslatorMsg *msg);
-
-void              gtranslator_msg_set_iterator         (GtranslatorMsg *msg,
-							po_message_iterator_t iter);
+GtranslatorMsg   *gtranslator_msg_new                  (po_message_iterator_t iter);
 
 po_message_t      gtranslator_msg_get_message          (GtranslatorMsg *msg);
 
@@ -150,7 +139,7 @@ const gchar      *gtranslator_msg_get_msgctxt          (GtranslatorMsg *msg);
 
 const gchar      *gtranslator_msg_get_format           (GtranslatorMsg *msg);
 
-gchar            *gtranslator_msg_check                (GtranslatorMsg *msg);
+const gchar      *gtranslator_msg_check                (GtranslatorMsg *msg);
 
 G_END_DECLS
 

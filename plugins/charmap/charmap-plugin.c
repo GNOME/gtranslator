@@ -27,7 +27,6 @@
 
 #include <glib/gi18n-lib.h>
 #include "application.h"
-#include "statusbar.h"
 #include "window.h"
 #include <gucharmap/gucharmap-table.h>
 #include <gucharmap/gucharmap-unicode-info.h>
@@ -76,18 +75,18 @@ on_table_status_message (GucharmapTable *chartable,
 			 const gchar    *message,
 			 GtranslatorWindow    *window)
 {
-	GtranslatorStatusbar *statusbar;
+	GtkStatusbar *statusbar;
 	WindowData *data;
 
-	statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+	statusbar = GTK_STATUSBAR (gtranslator_window_get_statusbar (window));
 	data = (WindowData *) g_object_get_data (G_OBJECT (window),
 						 WINDOW_DATA_KEY);
 	g_return_if_fail (data != NULL);
 
-	gtranslator_statusbar_pop (statusbar, data->context_id);
+	gtk_statusbar_pop (statusbar, data->context_id);
 
 	if (message)
-		gtranslator_statusbar_push (statusbar, data->context_id, message);
+		gtk_statusbar_push (statusbar, data->context_id, message);
 }
 
 static void
@@ -218,12 +217,23 @@ static void
 impl_activate (GtranslatorPlugin *plugin,
 	       GtranslatorWindow *window)
 {
-	GtranslatorStatusbar *statusbar;
+	/*GtkWidget *image;
+	GtkIconTheme *theme;*/
+	GtkStatusbar *statusbar;
 	WindowData *data;
 
 	//gtranslator_debug (DEBUG_PLUGINS);
 
 	data = g_new (WindowData, 1);
+
+	/*theme = gtk_icon_theme_get_default ();
+	
+	if (gtk_icon_theme_has_icon (theme, "accessories-character-map"))
+		image = gtk_image_new_from_icon_name ("accessories-character-map",
+						      GTK_ICON_SIZE_MENU);
+	else
+		image = gtk_image_new_from_icon_name ("gucharmap",
+						      GTK_ICON_SIZE_MENU);*/
 
 	gtranslator_application_register_icon (GTR_APP, "gucharmap.ico",
 					       "charmap-plugin-icon");
@@ -237,9 +247,11 @@ impl_activate (GtranslatorPlugin *plugin,
 				       "charmap-plugin-icon",
 				       GTR_WINDOW_PLACEMENT_LEFT);
 
-	statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
-	data->context_id = gtranslator_statusbar_get_context_id (statusbar,
-								 "Character Description");
+	//gtk_object_sink (GTK_OBJECT (image));
+
+	statusbar = GTK_STATUSBAR (gtranslator_window_get_statusbar (window));
+	data->context_id = gtk_statusbar_get_context_id (statusbar,
+							 "Character Description");
 
 	g_object_set_data_full (G_OBJECT (window),
 				WINDOW_DATA_KEY,

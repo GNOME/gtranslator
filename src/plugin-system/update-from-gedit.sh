@@ -25,13 +25,12 @@ sed_it () {
 	-e 's/gedit-plugin-info/plugin-info/g' \
 	-e 's/gedit-plugin/plugin/g' \
 	-e 's/gedit-panel.h/panel.h/g' \
-	-e 's/#include <gedit\/gedit-window.h>/#include "window.h"/g' \
 	-e 's/gedit-window.h/window.h/g' \
 	-e 's/gedit-utils.h/utils.h/g' \
-	-e 's/#include <gedit\/gedit-debug.h>/#include "debug.h"/g' \
-	-e 's/#include "gedit-debug.h"/#include "debug.h"/g' \
+	-e 's/#include <gedit\/gedit-debug.h>/\/\/#include <gedit\/gedit-debug.h>/g' \
+	-e 's/#include "gedit-debug.h"/\/\/#include "gedit-debug.h"/g' \
 	-e 's/#include "gedit-app.h"/#include "application.h"/g' \
-	-e 's/gedit_debug_message (DEBUG_PLUGINS,/DEBUG_PRINT (/g' \
+	-e 's/gedit_debug_message (DEBUG_PLUGINS,/g_warning(/g' \
 	-e 's/gedit_debug/\/\/gedit_debug/g' \
 	-e 's/gedit_app/gtranslator_application/g' \
 	-e 's/.gnome2\/gedit\/plugins\//.gtranslator\/plugins\//g' \

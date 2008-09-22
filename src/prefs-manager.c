@@ -1,11 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * prefs-manager.h
+ * gtranslator-prefs-manager.c
  * This file is part of gtranslator based in gedit
  *
  * Copyright (C) 2002  Paolo Maggi 
- * 		 2007  Ignacio Casal Quinteiro
- *               2008  Igalia
+ *		       Ignacio Casal Quinteiro
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,13 +19,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA.
- *
- * Authors:
- *   Paolo Maggi
- *   Ignacio Casal Quinteiro
- *   Pablo Sanxiao <psanxiao@gmail.com>
+ * Boston, MA 02111-1307, USA. 
  */
+
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -283,9 +278,13 @@ DEFINE_INT_PREF(autosave_interval,
 		GPM_AUTOSAVE_INTERVAL,
 		GPM_DEFAULT_AUTOSAVE_INTERVAL)
 
-DEFINE_BOOL_PREF(create_backup,
-		 GPM_CREATE_BACKUP,
-		 GPM_DEFAULT_CREATE_BACKUP)
+DEFINE_BOOL_PREF(append_suffix,
+		 GPM_APPEND_SUFFIX,
+		 GPM_DEFAULT_APPEND_SUFFIX)
+
+DEFINE_STRING_PREF(autosave_suffix,
+		   GPM_AUTOSAVE_SUFFIX,
+		   GPM_DEFAULT_AUTOSAVE_SUFFIX)
 
 /* Editor */
 DEFINE_BOOL_PREF(highlight,
@@ -308,6 +307,10 @@ DEFINE_BOOL_PREF(unmark_fuzzy,
 		 GPM_UNMARK_FUZZY,
 		 GPM_DEFAULT_UNMARK_FUZZY)
 
+DEFINE_BOOL_PREF(keep_obsolete,
+		 GPM_KEEP_OBSOLETE,
+		 GPM_DEFAULT_KEEP_OBSOLETE)
+
 DEFINE_BOOL_PREF(spellcheck,
 		 GPM_SPELLCHECK,
 		 GPM_DEFAULT_SPELLCHECK)
@@ -329,35 +332,6 @@ DEFINE_STRING_PREF(plural_form,
 DEFINE_INT_PREF (gdl_style,
 		 GPM_GDL_STYLE,
 		 GPM_DEFAULT_GDL_STYLE)
-
-DEFINE_STRING_PREF (scheme_color,
-		    GPM_SCHEME_COLOR,
-		    GPM_DEFAULT_SCHEME_COLOR)
-
-/* Translation Memory */
-DEFINE_STRING_PREF (tm_dir,
-		    GPM_TM_DIR,
-		    GPM_DEFAULT_TM_DIR)
-
-DEFINE_INT_PREF (use_lang_profile,
-		    GPM_TM_USE_LANG_PROFILE,
-		    GPM_DEFAULT_TM_USE_LANG_PROFILE)
-
-DEFINE_STRING_PREF (tm_lang_entry,
-		    GPM_TM_LANG_ENTRY,
-		    GPM_DEFAULT_TM_LANG_ENTRY)
-
-DEFINE_INT_PREF (show_tm_options,
-		 GPM_TM_SHOW_TM_OPTIONS,
-		 GPM_DEFAULT_TM_SHOW_TM_OPTIONS)
-
-DEFINE_INT_PREF (missing_words,
-		 GPM_TM_MISSING_WORDS,
-		 GPM_DEFAULT_TM_MISSING_WORDS)
-
-DEFINE_INT_PREF (sentence_length,
-		 GPM_TM_SENTENCE_LENGTH,
-		 GPM_DEFAULT_TM_SENTENCE_LENGTH)
 
 /* The following functions are taken from gconf-client.c 
  * and partially modified. 
