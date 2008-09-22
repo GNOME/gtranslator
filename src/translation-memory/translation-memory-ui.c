@@ -139,16 +139,16 @@ showed_message_cb (GtranslatorTab *tab,
   GtkUIManager *manager;
 
   model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
+  
+  window = gtranslator_application_get_active_window (GTR_APP);
+  tm_menu = gtranslator_window_get_tm_menu (window);
 
   if (!gtranslator_prefs_manager_get_show_tm_options () && gtranslator_msg_is_translated (msg)
       && !gtranslator_msg_is_fuzzy (msg)) {
+    gtk_widget_set_sensitive (tm_menu, FALSE);
     gtk_list_store_clear (model);
     return;    
-  }else {
-
-    window = gtranslator_application_get_active_window (GTR_APP);
-    tm_menu = gtranslator_window_get_tm_menu (window);
-    
+  }else {  
     g_signal_connect (tm_ui->priv->tree_view,
 		      "size_allocate",
 		      G_CALLBACK (tree_view_size_cb),
