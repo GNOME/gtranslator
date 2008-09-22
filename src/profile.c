@@ -244,7 +244,7 @@ void gtranslator_profile_xml_new_entry (xmlDocPtr doc, GtranslatorProfile *profi
 	profile_node = xmlNewChild (root, NULL, "profile", NULL);
 	xmlTextNewChild (profile_node, NULL, "profile_name", profile->priv->name);
 	xmlTextNewChild (profile_node, NULL, "author_name", profile->priv->author_name);
-	xmlTextNewChild (profile_node, NULL, "autor_email", profile->priv->author_email);
+	xmlTextNewChild (profile_node, NULL, "author_email", profile->priv->author_email);
 	xmlTextNewChild (profile_node, NULL, "language_name", profile->priv->language_name);
 	xmlTextNewChild (profile_node, NULL, "language_code", profile->priv->language_code);
 	xmlTextNewChild (profile_node, NULL, "charset", profile->priv->charset);
