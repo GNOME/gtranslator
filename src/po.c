@@ -669,8 +669,8 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	/*
 	 * Current translator is already in comments but its last year < current year.
 	 */
-	if (!strcmp (prev_translator, aux) && 
-	    (strcmp(comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year))) {
+	if ((g_utf8_collate (prev_translator, aux) == 0) && 
+	    (g_utf8_collate (comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year) != 0)) {
 	  
 	  if (g_str_has_suffix (comments_lines[j], ".")) {
 	    line_without_dot = g_strndup (comments_lines[j], g_utf8_strlen(comments_lines[j], -1) -1);  
@@ -698,7 +698,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	/*
 	 * Current translator is not in the comments.
 	 */
-	if (strcmp(prev_translator, aux)) {
+	if (g_utf8_collate (prev_translator, aux) != 0) {
 	  
 	  header_comment = po_message_comments (message);
 	  aux2 = g_strconcat(header_comment, gtranslator_header_get_translator(header), " ", "<",

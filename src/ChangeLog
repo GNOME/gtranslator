@@ -1,3 +1,11 @@
+2008-08-27  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* po.c:
+	(gtranslator_po_save_header_in_msg):
+	Changed strcmp to g_utf8_collate.
+
+	Fixed bug #549381.
+	
 2008-08-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* dialogs/search-dialog.glade:
