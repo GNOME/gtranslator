@@ -63,7 +63,7 @@ gtranslator_file_chooser_new (GtkWindow *parent,
 	
 		filter = gtk_file_filter_new();
 		gtk_file_filter_set_name(filter,_("Gettext translation template"));
-		gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation-template");
+		gtk_file_filter_add_pattern(filter,"*.pot");
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
 		
 		filter = gtk_file_filter_new();
