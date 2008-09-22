@@ -486,7 +486,6 @@ gtranslator_berkeley_lookup (GtranslatorTranslationMemory *tm,
 	GHashTable *hash;
 	GHashTableIter iter;
 	gpointer hkey, value;
-	gint index = 0;
 	GList *matches = NULL;
 	
 	g_return_val_if_fail (GTR_IS_BERKELEY (ber), NULL);
@@ -536,10 +535,9 @@ list:   g_hash_table_iter_init (&iter, hash);
 		match->match = g_strdup (hkey);
 		match->level = GPOINTER_TO_INT (value);
 		
-		matches = g_list_insert_sorted (matches, match,
-						(GCompareFunc)insert_match_sorted);
-		index++;
+		matches = g_list_prepend (matches, match);
 	}
+	matches = g_list_sort (matches, (GCompareFunc)insert_match_sorted);
 
 	g_hash_table_unref (hash);
 	
