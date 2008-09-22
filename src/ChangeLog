@@ -1,3 +1,11 @@
+2008-09-04  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* plugin-system/plugins-engine.c:
+	(gtranslator_plugins_engine_load_all):
+	Changed g_list_foreach and g_list_free to
+	g_slist_foreach and g_slist_free because their target
+	is a GSList.
+
 2008-09-03  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* plugin-system/plugins-engine.c:

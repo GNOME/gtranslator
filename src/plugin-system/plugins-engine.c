@@ -151,7 +151,7 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 static void
 gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine *engine)
 {
-	GSList *active_plugins;
+	GSList *active_plugins = NULL;
 	const gchar *home;
 	const gchar *pdirs_env;
 	gchar **pdirs;
@@ -194,8 +194,8 @@ gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine *engine)
 		gtranslator_plugins_engine_load_dir (engine, pdirs[i], active_plugins);
 
 	g_strfreev (pdirs);
-	g_list_foreach (active_plugins, (GFunc) g_free, NULL);
-	g_list_free (active_plugins);
+	g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
+	g_slist_free (active_plugins);
 }
 
 static void
