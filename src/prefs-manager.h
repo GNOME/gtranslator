@@ -31,6 +31,8 @@
 
 #define GPM_PREFS_DIR			GTR_BASE_KEY "/preferences"
 
+#define GPM_HEADER                      GTR_BASE_KEY "/header"
+
 /* Files */
 #define GPM_GENERAL_DIR			GPM_PREFS_DIR "/files/general"
 #define GPM_WARN_IF_FUZZY		GPM_GENERAL_DIR "/warn_if_fuzzy"
@@ -55,7 +57,7 @@
 #define GPM_SPELLCHECK			GPM_CONTENTS_DIR "/spellcheck"
 
 /* Edit Header */
-#define GPM_TAKE_MY_OPTIONS		GPM_PREFS_DIR "/take_my_options"
+#define GPM_TAKE_MY_OPTIONS		GPM_HEADER "/take_my_options"
 
 /* PO header */
 #define GPM_PERSONAL_INFORMATION_DIR	GPM_PREFS_DIR "/po_header/personal_information"

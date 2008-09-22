@@ -24,10 +24,13 @@
 #include <config.h>
 #endif
 
+#include "application.h"
 #include "file-dialogs.h"
 #include "po.h"
 #include "msg.h"
 #include "gtranslator-enum-types.h"
+#include "prefs-manager.h"
+#include "profile.h"
 #include "utils.h"
 
 #include <string.h>
@@ -550,6 +553,10 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	gchar *new_date;
 	gchar *aux;
 
+	gboolean take_my_options;
+
+	take_my_options = gtranslator_prefs_manager_get_take_my_options ();
+
 	/*
 	 * Get header's fields
 	 */
@@ -570,6 +577,26 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	 * our header class.
 	 */
 	msgstr = po_message_msgstr(message);
+
+	/*
+	 * If button take_my_options is pulsed, then header's values
+	 * should be taking from default profile
+	 */
+
+	if (take_my_options) {
+
+	  GtranslatorProfile *active_profile;
+
+	  active_profile = gtranslator_application_get_active_profile (GTR_APP);
+   
+	  gtranslator_header_set_translator (header, gtranslator_profile_get_author_name (active_profile));
+	  gtranslator_header_set_tr_email (header, gtranslator_profile_get_author_email (active_profile));
+	  gtranslator_header_set_language (header, gtranslator_profile_get_language_name (active_profile));
+	  gtranslator_header_set_charset (header, gtranslator_profile_get_charset (active_profile));
+	  gtranslator_header_set_encoding (header, gtranslator_profile_get_encoding (active_profile));
+	  gtranslator_header_set_lg_email (header, gtranslator_profile_get_group_email (active_profile));
+	  gtranslator_header_set_plural_forms (header, gtranslator_profile_get_plurals (active_profile));
+	}
 
 	/*
 	 * Update the po date 

@@ -1,5 +1,19 @@
 2008-07-31  Pablo Sanxiao  <psanxiao@gmail.com>
 
+	* prefs-manager.h:
+	Changed GPM_HEADER define.
+	* po.c:
+	(gtranslator_po_save_msg_in_header):
+	Now it gets the values from the current profile if
+	the button take_my_options in the header dialog is activated.
+	* dialogs/header-dialog.c:
+	Check if the button take my options is activated and if so
+	makes the text entries non-sensitive.
+
+	Fill the header dialog with the values in the current profile.
+	
+2008-07-31  Pablo Sanxiao  <psanxiao@gmail.com>
+
 	* translation-memory/translation-memory-ui.c:
 	(showed_message_cb): Deactive translation memory
 	menu if there are no options showed in translation
