@@ -329,7 +329,7 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);
 
-	ret = gtranslator_utils_get_glade_widgets(DATADIR"/profile-dialog.glade",
+	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR"/profile-dialog.glade",
 		"profiles_dialog",
 		&error_widget,
 		"profiles_dialog", &dlg->priv->main_box,

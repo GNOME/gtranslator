@@ -190,7 +190,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 						"gtr-toolbar.xml",
 						NULL);
 
-	filename = g_build_filename (DATADIR,
+	filename = g_build_filename (PKGDATADIR,
 				     "gtr-toolbar.xml",
 				     NULL);
 

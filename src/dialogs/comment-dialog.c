@@ -107,7 +107,7 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets(DATADIR "/comment-dialog.glade",
+	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR "/comment-dialog.glade",
 		"main_box",
 		&error_widget,
 		

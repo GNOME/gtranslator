@@ -112,7 +112,7 @@ gtranslator_view_init (GtranslatorView *view)
 	    ++temp)
 		g_ptr_array_add(dirs, g_strdup(*temp));
 		
-	g_ptr_array_add(dirs, g_strdup(DATADIR));
+	g_ptr_array_add(dirs, g_strdup(PKGDATADIR));
 	g_ptr_array_add(dirs, NULL);
 	langs = (gchar **)g_ptr_array_free(dirs, FALSE);
 

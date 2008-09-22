@@ -342,7 +342,7 @@ gtranslator_window_layout_load (GtranslatorWindow *window,
 	{
 		gchar *filename;
 		
-		filename = g_build_filename (DATADIR"/layout.xml", NULL);
+		filename = g_build_filename (PKGDATADIR"/layout.xml", NULL);
 		//DEBUG_PRINT ("Layout = %s", filename);
 		if (!gdl_dock_layout_load_from_file (window->priv->layout_manager,
 						     filename))
@@ -1323,7 +1323,7 @@ gtranslator_window_draw (GtranslatorWindow *window)
 
 
 	if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-					      DATADIR"/gtranslator-ui.xml",
+					      PKGDATADIR"/gtranslator-ui.xml",
 					      &error)) {
 		g_warning ("building menus failed: %s", error->message);
 		g_error_free (error);

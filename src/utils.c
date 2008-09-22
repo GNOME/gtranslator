@@ -760,7 +760,7 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 		if (strchr (lang, '.'))
 			continue;
 
-		uri = g_build_filename (DATADIR, "/gnome/help/", doc_id,
+		uri = g_build_filename (PKGDATADIR, "/gnome/help/", doc_id,
 					lang, file_name, NULL);
 
 		if (g_file_test (uri, G_FILE_TEST_EXISTS)) {

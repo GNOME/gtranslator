@@ -20,7 +20,7 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
 	-DPREFIX=\""$(prefix)"\"                                \
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
-	-DDATADIR=\""$(pkgdatadir)"\"                              \
+	-DPKGDATADIR=\""$(pkgdatadir)"\"                        \
 	-DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
 	$(GTKSPELL_CFLAGS)                                      \

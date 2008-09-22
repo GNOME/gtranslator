@@ -247,7 +247,7 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 			  G_CALLBACK (gtk_widget_destroy),
 			  NULL);
 	
-	ret = gtranslator_utils_get_glade_widgets(DATADIR"/header-dialog.glade",
+	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR"/header-dialog.glade",
 		"main_box",
 		&error_widget,
 		"main_box", &dlg->priv->main_box,
