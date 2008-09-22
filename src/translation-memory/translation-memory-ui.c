@@ -27,6 +27,7 @@
 #include "tab.h"
 #include "window.h"
 
+#include <string.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib-object.h>
@@ -74,7 +75,6 @@ on_activate_item_cb (GtkMenuItem *menuitem,
   GList *current_msg = NULL;
   GtranslatorMsg *msg;
   const gchar *name;
-  gchar **array;
   gint index;
   GtranslatorWindow *window;
 
@@ -86,9 +86,9 @@ on_activate_item_cb (GtkMenuItem *menuitem,
   view = gtranslator_window_get_active_view (window);
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-  array = g_strsplit (name, "nº ", 2);
-
-  index = g_ascii_xdigit_value (*array[1]);
+  /* Possible this hack is not going to work with all languages neither, we
+     are supposing the integer at the end of the string */
+  index = g_ascii_xdigit_value (name[strlen (name) -1]);
 
   po = gtranslator_tab_get_po (tm_ui->priv->tab);
   current_msg = gtranslator_po_get_current_message (po);
@@ -104,8 +104,6 @@ on_activate_item_cb (GtkMenuItem *menuitem,
   gtk_text_buffer_end_user_action(buffer);
 
   gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
-
-  g_strfreev (array);
 }
 
 static void
