@@ -1173,6 +1173,63 @@ gtranslator_window_cmd_edit_toolbar (GtkAction *action,
 }
 
 static void
+menu_item_select_cb (GtkMenuItem *proxy,
+		     GtranslatorWindow *window)
+{
+	GtkAction *action;
+	char *message;
+
+	action = g_object_get_data (G_OBJECT (proxy),  "gtk-action");
+	g_return_if_fail (action != NULL);
+
+	g_object_get (G_OBJECT (action), "tooltip", &message, NULL);
+	if (message)
+	{
+		gtranslator_statusbar_push_default (GTR_STATUSBAR (window->priv->statusbar),
+						    message);
+		g_free (message);
+	}
+}
+
+static void
+menu_item_deselect_cb (GtkMenuItem *proxy,
+                       GtranslatorWindow *window)
+{
+	gtranslator_statusbar_pop_default (GTR_STATUSBAR (window->priv->statusbar));
+}
+
+static void
+connect_proxy_cb (GtkUIManager *manager,
+                  GtkAction *action,
+                  GtkWidget *proxy,
+                  GtranslatorWindow *window)
+{
+	if (GTK_IS_MENU_ITEM (proxy))
+	{
+		g_signal_connect (proxy, "select",
+				  G_CALLBACK (menu_item_select_cb), window);
+		g_signal_connect (proxy, "deselect",
+				  G_CALLBACK (menu_item_deselect_cb), window);
+	}
+}
+
+static void
+disconnect_proxy_cb (GtkUIManager *manager,
+                     GtkAction *action,
+                     GtkWidget *proxy,
+                     GtranslatorWindow *window)
+{
+	if (GTK_IS_MENU_ITEM (proxy))
+	{
+		g_signal_handlers_disconnect_by_func
+			(proxy, G_CALLBACK (menu_item_select_cb), window);
+		g_signal_handlers_disconnect_by_func
+			(proxy, G_CALLBACK (menu_item_deselect_cb), window);
+	}
+}
+
+
+static void
 side_pane_visibility_changed (GtkWidget		*side_pane,
 			      GtranslatorWindow *window)
 {
@@ -1242,6 +1299,16 @@ gtranslator_window_draw (GtranslatorWindow *window)
 		g_warning ("building menus failed: %s", error->message);
 		g_error_free (error);
 	}
+	
+	/* show tooltips in the statusbar */
+	g_signal_connect (priv->ui_manager,
+			  "connect_proxy",
+			  G_CALLBACK (connect_proxy_cb),
+			  window);
+	g_signal_connect (priv->ui_manager,
+			  "disconnect_proxy",
+			  G_CALLBACK (disconnect_proxy_cb),
+			  window);
 	
 	priv->menubar =	 gtk_ui_manager_get_widget (priv->ui_manager,
 							   "/MainMenu");
