@@ -75,6 +75,10 @@ gladedir = $(pkgdatadir)
 glade_DATA =  \
 	subversion.glade
 
+pixmaps_dir = $(datadir)/pixmaps/gtranslator
+pixmaps__DATA = \
+	subversion-icon.png
+
 subversion-enum-types.h: subversion-enum-types.h.template $(NOINST_H_FILES) $(GLIB_MKENUMS)
 	(cd $(srcdir) && $(GLIB_MKENUMS) --template subversion-enum-types.h.template $(NOINST_H_FILES)) > $@
 
