@@ -82,6 +82,7 @@ struct _GtranslatorPreferencesDialogPrivate
         GtkWidget *directory_entry;
         GtkWidget *search_button;
         GtkWidget *add_database_button;
+	GtkWidget *add_database_progressbar;
 
         GtkWidget *show_tm_options_checkbutton;
         GtkWidget *missing_words_spinbutton;
@@ -564,7 +565,7 @@ response_filechooser_cb (GtkDialog *dialog,
   if (response_id == GTK_RESPONSE_YES) {
     gtk_entry_set_text (GTK_ENTRY (dlg->priv->directory_entry),
 			gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
-    gtranslator_prefs_manager_set_tm_dir (gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog)));
+    gtranslator_prefs_manager_set_tm_dir (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
     gtk_widget_destroy (GTK_WIDGET (dialog));
   } else {
     gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -581,7 +582,7 @@ on_search_button_pulsed (GtkButton *button,
   dlg = (GtranslatorPreferencesDialog *)data;
   
   filechooser = gtk_file_chooser_dialog_new ("Select PO directory",
-					     NULL,
+					     GTK_WINDOW (dlg),
 					     GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
 					     GTK_STOCK_CANCEL,
 					     GTK_RESPONSE_CANCEL,
@@ -596,6 +597,7 @@ on_search_button_pulsed (GtkButton *button,
   gtk_dialog_run (GTK_DIALOG (filechooser));
 }
 
+/* FIXME: We have to remove this when we move it to utils.ch */
 static void
 gtranslator_project_utils_scan_dir (GFile *dir,
 				    GList **list,
@@ -652,70 +654,114 @@ gtranslator_project_utils_scan_dir (GFile *dir,
 	}
 }
 
+typedef struct _IdleData
+{
+	GList *list;
+	GtkProgressBar *progress;
+	GtranslatorTranslationMemory *tm;
+}IdleData;
+
+static gboolean
+add_to_database (gpointer data_pointer)
+{
+	IdleData *data = (IdleData *)data_pointer;
+	static GList *l = NULL;
+	gdouble percentage;
+	
+	if (l == NULL)
+		l = data->list;
+	else
+		l = g_list_next (l);
+
+	if (l)
+	{
+		GList *msg_list = NULL;
+		GList *l2 = NULL;
+		const gchar *file_uri;
+		GError *error = NULL;
+		GtranslatorPo *po;
+		
+		po = gtranslator_po_new ();
+		file_uri = (const gchar*)l->data;
+		
+		gtranslator_po_parse (po, file_uri, &error);
+		if (error)
+			return TRUE;
+		
+		msg_list = gtranslator_po_get_messages (po);
+		
+		for (l2 = msg_list; l2; l2 = l2->next) {
+			GtranslatorMsg *msg;
+			msg = GTR_MSG (l2->data);
+			if (gtranslator_msg_is_translated (msg))
+				gtranslator_translation_memory_store (data->tm,
+								      gtranslator_msg_get_msgid (msg),
+								      gtranslator_msg_get_msgstr (msg));
+		}
+		
+		g_object_unref (po);
+	}
+	else
+	{
+		gtk_progress_bar_set_fraction (data->progress,
+					       1.0);
+		return FALSE;
+	}
+	
+	percentage = (gdouble)g_list_position (data->list, l) / (gdouble) g_list_length (data->list);
+
+	/*
+	 * Set the progress only if the values are reasonable.
+	 */
+	if(percentage > 0.0 || percentage < 1.0)
+	{
+		/*
+		 * Set the progressbar status.
+		 */
+		gtk_progress_bar_set_fraction (data->progress,
+					       percentage);
+	}
+	
+	return TRUE;
+}
+
+static void
+destroy_idle_data (gpointer data)
+{
+	IdleData *d = (IdleData *)data;
+	
+	g_list_foreach (d->list, (GFunc)g_free, NULL);
+	g_list_free (d->list);
+	
+	g_free (d);
+}
 
 static void
 on_add_database_button_pulsed (GtkButton *button,
 			       GtranslatorPreferencesDialog *dlg)
 {
-  GList *files_list = NULL;
-  GList *l = NULL;
   GFile *dir;
   const gchar *dir_name;
-  GtranslatorPo *po;
-  GtranslatorTranslationMemory *tm;
-  GtkWidget *dialog;
-  
-  tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
+  IdleData *data;
+	
+  data = g_new0 (IdleData, 1);
+  data->list = NULL;
 
   dir_name = gtranslator_prefs_manager_get_tm_dir ();
 
-  dir = g_file_new_for_uri (dir_name);
+  dir = g_file_new_for_path (dir_name);
 
-  gtranslator_project_utils_scan_dir (dir, &files_list, NULL);
+  gtranslator_project_utils_scan_dir (dir, &data->list, NULL);
 
-  for (l = files_list; l; l = l->next) {
-    GList *msg_list = NULL;
-    GList *l2 = NULL;
-    const gchar *file_uri;
-    GError *error = NULL;
+  data->tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
+  data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
 
-    po = gtranslator_po_new ();
-    file_uri = (const gchar*)l->data;
-    
-    gtranslator_po_parse (po, file_uri, &error);
-    if (error)
-      continue;
-    
-    msg_list = gtranslator_po_get_messages (po);
-       
-    for (l2 = msg_list; l2; l2 = l2->next) {
-      GtranslatorMsg *msg;
-      msg = GTR_MSG (l2->data);
-      if (gtranslator_msg_is_translated (msg))
-	gtranslator_translation_memory_store (tm,
-					      gtranslator_msg_get_msgid (msg),
-					      gtranslator_msg_get_msgstr (msg));
-    }
-    
-    g_object_unref (po);
-  }
-  g_list_foreach (files_list, (GFunc)g_free, NULL);
-  g_list_free (files_list); 
-
-  dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
-				   GTK_DIALOG_MODAL,
-				   GTK_MESSAGE_INFO,
-				   GTK_BUTTONS_CLOSE,
-				   NULL);
-
-  gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-				 _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
+  g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
+		   (GSourceFunc)add_to_database,
+		   data,
+		   (GDestroyNotify)destroy_idle_data);
   
-  g_signal_connect_swapped (dialog,
-			    "response",
-			    G_CALLBACK (gtk_widget_destroy),
-			    dialog);
-  gtk_dialog_run (GTK_DIALOG (dialog));
+  g_object_unref (dir); 
 }
 
 static void
@@ -1044,6 +1090,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"directory_entry", &dlg->priv->directory_entry,
  		"search_button", &dlg->priv->search_button,
  		"add_database_button", &dlg->priv->add_database_button,
+		"add_database_progressbar", &dlg->priv->add_database_progressbar,
  						  
  		"show_tm_options_checkbutton", &dlg->priv->show_tm_options_checkbutton,				  
  		"missing_words_spinbutton", &dlg->priv->missing_words_spinbutton,
