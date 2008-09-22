@@ -810,6 +810,33 @@ update_overwrite_mode_statusbar (GtkTextView *view,
 }
 
 static void
+set_window_title (GtranslatorWindow *window,
+		  GtranslatorTab *tab,
+		  gboolean with_path)
+{
+	GtranslatorPo *po;
+	GFile *file;
+	gchar *title;
+	
+	if (with_path)
+	{
+		po = gtranslator_tab_get_po (GTR_TAB (tab));
+		file = gtranslator_po_get_location (po);
+		
+		/*
+		 * Translators: The title of the window when there is only one tab
+		 */
+		title = g_strdup_printf (_("gtranslator - %s"), g_file_get_path (file));
+		g_object_unref (file);
+	}
+	else
+		title = g_strdup (_("gtranslator"));
+	
+	gtk_window_set_title (GTK_WINDOW (window), title);
+	g_free (title);
+}
+
+static void
 notebook_switch_page(GtkNotebook *nb,
 		     GtkNotebookPage *page,
 		     gint page_num,
@@ -819,10 +846,20 @@ notebook_switch_page(GtkNotebook *nb,
 	GList *msg;
 	GtranslatorView *view;
 	GtranslatorPo *po;
+	gint n_pages;
 	
 	tab = GTR_TAB (gtk_notebook_get_nth_page (nb, page_num));
 	if (tab == window->priv->active_tab)
 		return;
+	
+	/*
+	 * Set the window title
+	 */
+	n_pages = gtk_notebook_get_n_pages (nb);
+	if (n_pages == 1)
+		set_window_title (window, tab, TRUE);
+	else
+		set_window_title (window, tab, FALSE);
 	
 	window->priv->active_tab = tab;
 	view = gtranslator_tab_get_active_view (tab);
@@ -840,6 +877,24 @@ notebook_switch_page(GtkNotebook *nb,
 
 	gtranslator_plugins_engine_update_plugins_ui (gtranslator_plugins_engine_get_default (),
 						      window, FALSE);
+}
+
+static void
+notebook_page_removed (GtkNotebook *notebook,
+		       GtkWidget   *child,
+		       guint        page_num,
+		       GtranslatorWindow *window)
+{
+	gint n_pages;
+	
+	/*
+	 * Set the window title
+	 */
+	n_pages = gtk_notebook_get_n_pages (notebook);
+	if (n_pages == 1)
+		set_window_title (window, GTR_TAB (child), TRUE);
+	else
+		set_window_title (window, GTR_TAB (child), FALSE);
 }
 
 static void
@@ -931,8 +986,18 @@ notebook_tab_added(GtkNotebook *notebook,
 	GList *views;
 	GtranslatorTab *tab = GTR_TAB(child);
 	GtkTextBuffer *buffer;
+	gint n_pages;
 	
 	g_return_if_fail(GTR_IS_TAB(tab));
+	
+	/*
+	 * Set the window title
+	 */
+	n_pages = gtk_notebook_get_n_pages (notebook);
+	if (n_pages == 1)
+		set_window_title (window, tab, TRUE);
+	else
+		set_window_title (window, tab, FALSE);
 	
 	views = gtranslator_tab_get_all_views(tab, FALSE, TRUE);
 	
@@ -1353,6 +1418,8 @@ gtranslator_window_draw (GtranslatorWindow *window)
 			 G_CALLBACK(notebook_switch_page), window);
 	g_signal_connect(priv->notebook, "page-added",
 			 G_CALLBACK(notebook_tab_added), window);
+	g_signal_connect (priv->notebook, "page-removed",
+			  G_CALLBACK (notebook_page_removed), window);
 	g_signal_connect (priv->notebook,
 			  "tab_close_request",
 			  G_CALLBACK (notebook_tab_close_request),

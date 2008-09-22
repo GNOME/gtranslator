@@ -1,3 +1,10 @@
+2008-08-26  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* window.c (set_window_title), (notebook_switch_page),
+	(notebook_page_removed), (notebook_tab_added),
+	(gtranslator_window_draw):
+	If there is only one tab add the path to the window title. (Fixes #549369)
+
 2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* plugin-system/plugin-manager.c (about_button_cb):
