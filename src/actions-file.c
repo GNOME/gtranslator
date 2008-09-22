@@ -397,12 +397,12 @@ static gboolean
 is_duplicated_location (const GSList *locations, 
 			GFile  *u)
 {
-	while (locations != NULL)
+	GSList *l;
+	
+	for (l = (GSList *)locations; l != NULL; l = g_slist_next (l))
 	{
-		if (g_file_equal (u, locations->data))
+		if (g_file_equal (u, l->data))
 			return TRUE;
-			
-		locations = g_slist_next (locations);
 	}
 	
 	return FALSE;
