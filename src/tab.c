@@ -1677,6 +1677,31 @@ gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab *tab)
 }
 
 /**
+ * gtranslator_tab_go_to_number:
+ * @tab: a #GtranslatorTab
+ * @number: the message number you want to jump
+ *
+ * Jumps to the message with the @number in the list, if the message does not
+ * exists it does not jump.
+ */
+void
+gtranslator_tab_go_to_number (GtranslatorTab *tab,
+			      gint number)
+{
+	GtranslatorPo *po;
+	GList *msg;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	msg = gtranslator_po_get_msg_from_number (po, number);
+	if(msg != NULL)
+	{
+		gtranslator_tab_message_go_to (tab, msg, FALSE,
+					       GTR_TAB_MOVE_NONE);
+	}
+}
+
+/**
  * gtranslator_tab_set_message_area:
  * @tab: a #GtranslatorTab
  * @message_area: a #GtranslatorMessageArea
@@ -1688,7 +1713,6 @@ gtranslator_tab_set_message_area (GtranslatorTab  *tab,
 				  GtkWidget *message_area)
 {
 	g_return_if_fail (GTR_IS_TAB (tab));
-	g_return_if_fail (GTR_IS_MESSAGE_AREA (message_area));
 	
         if (tab->priv->message_area == message_area)
                 return;

@@ -1114,6 +1114,22 @@ gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo *po)
 }
 
 /**
+ * gtranslator_po_get_msg_from_number:
+ * @po: a #GtranslatorPo
+ * @number: the message to jump
+ *
+ * Gets the message at the given position.
+ */
+GList *
+gtranslator_po_get_msg_from_number (GtranslatorPo *po,
+				    gint number)
+{
+	g_return_val_if_fail (GTR_IS_PO (po), NULL);
+	
+	return g_list_nth (po->priv->messages, number);
+}
+
+/**
  * gtranslator_po_get_header:
  * @po: a #GtranslatorPo
  *

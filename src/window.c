@@ -247,6 +247,9 @@ static const GtkActionEntry entries[] = {
 	{ "GoPreviousFuzzyUntranslated", GTK_STOCK_GO_BACK, N_("Pre_vious Fuzzy or Untranslated"),
 	  "<control><shift>Page_Up", N_("Go to the previous fuzzy or untranslated message"),
           G_CALLBACK (gtranslator_message_go_to_prev_fuzzy_or_untranslated) },
+	{ "GoJump", GTK_STOCK_JUMP_TO, NULL,
+	  "<control>G", N_("Jumps to a specific message"),
+          G_CALLBACK (gtranslator_message_jump) },
 
 	/* Search menu*/
 	{ "SearchFind", GTK_STOCK_FIND, NULL, "<control>F",

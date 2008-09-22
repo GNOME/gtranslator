@@ -25,6 +25,7 @@
 #include <glib/gi18n.h>
 
 #include "actions.h"
+#include "jump-dialog.h"
 #include "po.h"
 #include "tab.h"
 #include "window.h"
@@ -162,4 +163,11 @@ gtranslator_message_go_to_prev_fuzzy_or_untranslated (GtkAction *action,
 	po = gtranslator_tab_get_po (current);
 	if (gtranslator_tab_go_to_prev_fuzzy_or_untrans (current))
 		set_sensitive_according_to_message (window, po);
+}
+
+void
+gtranslator_message_jump (GtkAction *action,
+			  GtranslatorWindow *window)
+{
+	gtranslator_show_jump_dialog (window);
 }

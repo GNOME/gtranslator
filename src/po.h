@@ -137,6 +137,9 @@ GList           *gtranslator_po_get_next_fuzzy_or_untrans (GtranslatorPo *po);
 
 GList           *gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo *po);
 
+GList           *gtranslator_po_get_msg_from_number     (GtranslatorPo *po,
+							 gint number);
+
 GtranslatorHeader  
 		*gtranslator_po_get_header		(GtranslatorPo *po);
 

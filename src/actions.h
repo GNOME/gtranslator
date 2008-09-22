@@ -130,6 +130,9 @@ void       gtranslator_message_go_to_prev_fuzzy_or_untranslated
 						(GtkAction *action,
 						 GtranslatorWindow *window);
 
+void       gtranslator_message_jump             (GtkAction *action,
+						 GtranslatorWindow *window);
+
 /*Search*/
 void       _gtranslator_actions_search_find     (GtkAction   *action,
 						 GtranslatorWindow *window);
