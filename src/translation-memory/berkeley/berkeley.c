@@ -462,9 +462,9 @@ insert_match_sorted (gconstpointer a,
 	GtranslatorTranslationMemoryMatch *match2 = (GtranslatorTranslationMemoryMatch *)b;
 	
 	if (match1->level < match2->level)
-		return -1;
-	else if (match1->level > match2->level)
 		return 1;
+	else if (match1->level > match2->level)
+		return -1;
 	else
 		return 0;
 }
