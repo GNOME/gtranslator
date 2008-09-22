@@ -671,7 +671,6 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	  }
 	  i++;
 	}
-	
 	aux = g_strconcat(gtranslator_header_get_translator(header), " ", "<",
 			  gtranslator_header_get_tr_email(header), ">", NULL);
 	
@@ -683,15 +682,11 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	if (!strcmp (prev_translator, aux) && 
 	    (strcmp(comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year))) {
 	  
-	  /*
-	   * Current translator is in the last line in comments.
-	   */
-	  if (j == g_strv_length (comments_lines)-1) {
-	    aux2 = g_strconcat (comments, ", ", year, ".", NULL);
-	    po_message_set_comments (message, aux2);
-	    g_free (aux2);
-	  }else {
+	    if (!g_utf8_validate (comments_lines[j], -1, NULL))
+	      g_utf8_normalize (comments_lines[j], -1, G_NORMALIZE_DEFAULT);
+
 	    line_without_dot = g_utf8_strncpy (line_without_dot, comments_lines[j], strlen(comments_lines[j])-1);
+	    
 	    line = g_strconcat (line_without_dot, ", ", year, ".", NULL);
 	   
 	    for (l=j; l<(g_strv_length (comments_lines)); l++) {
@@ -708,7 +703,6 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	    g_free (line_without_dot);
 	    g_free (line);
 	    g_free (new_comments);
-	  }
 	}    
 
 	/*
