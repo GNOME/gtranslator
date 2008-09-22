@@ -37,6 +37,8 @@ AC_PROG_CC
 AC_ISC_POSIX
 AM_PROG_LIBTOOL
 AC_TYPE_SIGNAL
+
+GNOME_DOC_INIT
 GTK_DOC_CHECK([1.0])
 
 dnl -------------------------------------------------------------------
