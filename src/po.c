@@ -785,7 +785,7 @@ gtranslator_po_save_file(GtranslatorPo *po,
 	/*
 	 * Check if the file is right
 	 */
-	msg_error = gtranslator_po_check_po_file (po);
+	/*msg_error = gtranslator_po_check_po_file (po);
 	if (msg_error != NULL)
 	{
 		g_set_error (error,
@@ -794,7 +794,7 @@ gtranslator_po_save_file(GtranslatorPo *po,
 			     _("There is an error in the PO file: %s"),
 			     msg_error);
 		g_free (msg_error);
-	}
+	}*/
 	
 	
 	/*
