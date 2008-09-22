@@ -25,8 +25,10 @@
 #include "window.h"
 #include "egg-toolbars-model.h"
 #include "dialogs/preferences-dialog.h"
-#include "translation-memory.h"
-#include "berkeley.h"
+#include "./translation-memory/translation-memory.h"
+#include "./translation-memory/berkeley/berkeley.h"
+  
+
 
 #include <glib.h>
 #include <glib-object.h>
@@ -211,6 +213,10 @@ gtranslator_application_init (GtranslatorApplication *application)
 	
 	/* Creating translation memory */
 	application->priv->tm = GTR_TRANSLATION_MEMORY (gtranslator_berkeley_new ());
+	gtranslator_translation_memory_set_max_omits (application->priv->tm,
+ 						      gtranslator_prefs_manager_get_missing_words ());
+ 	gtranslator_translation_memory_set_max_delta (application->priv->tm,
+						      gtranslator_prefs_manager_get_sentence_length ());
 }
 
 
@@ -543,14 +549,6 @@ _gtranslator_application_set_last_dir (GtranslatorApplication *app,
 	g_return_if_fail (GTR_IS_APPLICATION (app));
 
 	app->priv->last_dir = g_strdup (last_dir);
-}
-
-GObject *
-gtranslator_application_get_translation_memory (GtranslatorApplication *app)
-{
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-	
-	return G_OBJECT (app->priv->tm);
 }
 
 GObject *

@@ -28,6 +28,9 @@
 #include "utils.h"
 #include "plugin-manager.h"
 #include "profile-dialog.h"
+#include "po.h"
+#include "utils.h"
+#include "../translation-memory/translation-memory.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -1082,6 +1085,14 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"edit_button", &dlg->priv->edit_button,
 		"delete_button", &dlg->priv->delete_button,
 
+		"directory_entry", &dlg->priv->directory_entry,
+ 		"search_button", &dlg->priv->search_button,
+ 		"add_database_button", &dlg->priv->add_database_button,
+ 						  
+ 		"show_tm_options_checkbutton", &dlg->priv->show_tm_options_checkbutton,				  
+ 		"missing_words_spinbutton", &dlg->priv->missing_words_spinbutton,
+ 		"sentence_length_spinbutton", &dlg->priv->sentence_length_spinbutton,
+ 		
 		"gdl_combobox", &dlg->priv->gdl_combobox,
 		
 		"plugins_box", &dlg->priv->plugins_box,

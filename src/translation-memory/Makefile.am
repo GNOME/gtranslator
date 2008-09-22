@@ -15,7 +15,8 @@ noinst_LTLIBRARIES = \
 	libtranslationmemory.la
 
 INST_H_FILES = \
-	translation-memory.h
+	translation-memory.h \
+	translation-memory-ui.h
 
 headerdir = $(prefix)/include/gtranslator-@GTR_API_VERSION@/gtranslator
 
@@ -24,7 +25,8 @@ header_DATA = \
 
 libtranslationmemory_la_SOURCES = \
 	$(INST_H_FILES) \
-	translation-memory.c
+	translation-memory.c \
+	translation-memory-ui.c
 
 libtranslationmemory_la_CFLAGS = \
 	$(GTRANSLATOR_CFLAGS)			\
