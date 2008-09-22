@@ -115,6 +115,13 @@ gint                   gtranslator_tab_get_autosave_interval (GtranslatorTab *ta
 
 void                   gtranslator_tab_set_autosave_interval (GtranslatorTab *tab, 
 							      gint interval);
+
+void                   gtranslator_tab_add_widget_to_lateral_panel (GtranslatorTab *tab,
+								    GtkWidget *widget,
+								    const gchar *tab_name);
+
+void                   gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *tab,
+									 GtkWidget *widget);
 							    
 gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 

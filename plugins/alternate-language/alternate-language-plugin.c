@@ -59,8 +59,6 @@ create_alternate_lang_plugin_panel (GtkNotebook *notebook,
 {
 	GtkWidget *alternatelang;
 	GtranslatorPo *po;
-	GtkWidget *panel;
-	GtkWidget *label;
 	
 	po = gtranslator_tab_get_po (GTR_TAB (child));
 	
@@ -69,14 +67,10 @@ create_alternate_lang_plugin_panel (GtkNotebook *notebook,
 	alternatelang = gtranslator_alternate_lang_panel_new (child);
 	gtk_widget_show (alternatelang);
 	
-	panel = gtranslator_tab_get_panel (GTR_TAB(child));
+	gtranslator_tab_add_widget_to_lateral_panel (GTR_TAB(child),
+						     alternatelang,
+						     _("Alternate Language"));
 	
-	label = gtk_label_new (_("Alternate Language"));
-	
-	gtk_notebook_append_page (GTK_NOTEBOOK (panel),
-				  alternatelang,
-				  label);
-
 	g_object_set_data (G_OBJECT (child),
 			   WINDOW_DATA_KEY,
 			   alternatelang);

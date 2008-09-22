@@ -1,3 +1,13 @@
+2008-08-01  Ignacio Casal Quinteiro  <nacho@ansalon>
+
+	* msg.c (gtranslator_msg_init), (gtranslator_msg_finalize):
+	* tab.c (gtranslator_tab_draw),
+	(gtranslator_tab_add_widget_to_lateral_panel),
+	(gtranslator_tab_remove_widget_from_lateral_panel):
+	* tab.h:
+	Fixed memory leak on msg.c and added public fucs to manage the lateral
+	panel.
+
 2008-07-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* translation-memory/berkeley/db-orig.c (gtranslator_db_orig_init),

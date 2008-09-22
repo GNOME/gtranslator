@@ -33,6 +33,7 @@
 #include "po.h"
 #include "prefs-manager.h"
 #include "view.h"
+#include "translation-memory-ui.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -58,6 +59,7 @@ struct _GtranslatorTabPrivate
 	GtkWidget *content_pane;
 	GtkWidget *panel;
 	GtkWidget *message_table;
+	GtkWidget *lateral_panel; //TM, Comments, etc.
 
 	GtkWidget *comment_pane;
 	GtkWidget *comment;
@@ -540,26 +542,31 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 			  G_CALLBACK (comment_pane_position_changed),
 			  tab);
 	gtk_widget_show (priv->comment_pane);
+	
+	/*
+	 * Lateral panel
+	 */
+	tab->priv->lateral_panel = gtk_notebook_new ();
+	gtk_widget_show (tab->priv->lateral_panel);
 
+	gtk_paned_pack2(GTK_PANED(priv->comment_pane), tab->priv->lateral_panel,
+			TRUE, TRUE);
+	
 	/*
 	 * Comment
-	 */	
-	comments_label = gtk_label_new ("Comments");
-	tm_label = gtk_label_new ("Translation Memory");
-
+	 */
 	priv->comment = gtranslator_comment_panel_new (GTK_WIDGET (tab));
 	gtk_widget_show (priv->comment);
+	gtranslator_tab_add_widget_to_lateral_panel (tab, priv->comment,
+						     _("Comments"));
 
+	/*
+	 * TM
+	 */
 	priv->translation_memory = gtranslator_translation_memory_ui_new (GTK_WIDGET (tab));
 	gtk_widget_show (priv->translation_memory);
-
-	notebook = gtk_notebook_new ();
-	gtk_widget_show (notebook);
-
-	gtk_paned_pack2(GTK_PANED(priv->comment_pane), notebook, TRUE, TRUE);
-	
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), priv->comment, comments_label);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), priv->translation_memory, tm_label);
+	gtranslator_tab_add_widget_to_lateral_panel (tab, priv->translation_memory,
+						     _("Translation Memory"));
 	
 	/*
 	 * Content pane; this is where the message table and message area go
@@ -1132,4 +1139,51 @@ gtranslator_tab_set_autosave_interval (GtranslatorTab *tab,
 
 		install_autosave_timeout (tab);
 	}
+}
+
+/**
+ * gtranslator_tab_add_widget_to_lateral_panel:
+ * @tab: a #GtranslatorTab
+ * @widget: a #GtkWidget
+ * @tab_name: the tab name in the notebook
+ *
+ * Adds a new widget to the laberal panel notebook.
+ */
+void
+gtranslator_tab_add_widget_to_lateral_panel (GtranslatorTab *tab,
+					     GtkWidget *widget,
+					     const gchar *tab_name)
+{
+	GtkWidget *label;
+	
+	g_return_if_fail (GTR_IS_TAB (tab));
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+	
+	label = gtk_label_new (tab_name);
+	
+	gtk_notebook_append_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
+				  widget, label);
+}
+
+/**
+ * gtranslator_tab_remove_widget_from_lateral_panel:
+ * @tab: a #GtranslatorTab
+ * @widget: a #GtkWidget
+ *
+ * Removes the @widget from the lateral panel notebook of @tab.
+ */
+void
+gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *tab,
+						  GtkWidget *widget)
+{
+	gint page;
+	
+	g_return_if_fail (GTR_IS_TAB (tab));
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+	
+	page = gtk_notebook_page_num (GTK_NOTEBOOK (tab->priv->lateral_panel),
+				      widget);
+	
+	gtk_notebook_remove_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
+				  page);
 }

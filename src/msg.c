@@ -57,11 +57,18 @@ static void
 gtranslator_msg_init (GtranslatorMsg *msg)
 {
 	msg->priv = GTR_MSG_GET_PRIVATE (msg);
+	
+	msg->priv->tm_list = NULL;
 }
 
 static void
 gtranslator_msg_finalize (GObject *object)
 {
+	GtranslatorMsg *msg = GTR_MSG (object);
+	
+	if (msg->priv->tm_list)
+		g_strfreev (msg->priv->tm_list);
+
 	G_OBJECT_CLASS (gtranslator_msg_parent_class)->finalize (object);
 }
 

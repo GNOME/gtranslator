@@ -73,15 +73,19 @@ search_message (GtranslatorAlternateLangPanel *panel,
 	GList *messages;
 	GList *l;
 	const gchar *msgid = gtranslator_msg_get_msgid (msg);
+	gchar *msgid_collate;
 	const gchar *string;
+	gchar *string_collate;
 	GtranslatorMsgStatus status;
 	
+	msgid_collate = g_utf8_collate_key (msgid, -1);
 	messages = gtranslator_po_get_messages (panel->priv->po);
 	l = messages;
 	do
 	{
 		string = gtranslator_msg_get_msgid (l->data);
-		if (g_utf8_collate(string, msgid) == 0)
+		string_collate = g_utf8_collate_key (string, -1);
+		if (strcmp (string_collate, msgid_collate) == 0)
 		{
 			gtranslator_alternate_lang_panel_set_text (panel,
 								   gtranslator_msg_get_msgstr (l->data));
@@ -99,10 +103,14 @@ search_message (GtranslatorAlternateLangPanel *panel,
 				default: break;
 			}
 			
+			g_free (string_collate);
+			g_free (msgid_collate);
 			return;
 		}
+		g_free (string_collate);
 	} while ((l = g_list_next (l)));
 	
+	g_free (msgid_collate);
 	gtranslator_alternate_lang_panel_set_text (panel,
 						   _("Message not found"));
 	
@@ -301,8 +309,11 @@ gtranslator_alternate_lang_panel_draw (GtranslatorAlternateLangPanel *panel)
 	gtk_widget_set_sensitive (panel->priv->textview, FALSE);
 	gtk_widget_show (panel->priv->textview);
 	
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroll),
-					       panel->priv->textview);
+	gtk_container_add (GTK_CONTAINER (scroll),
+			   panel->priv->textview);
+	
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
+					     GTK_SHADOW_IN);
 	
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
 					GTK_POLICY_AUTOMATIC,
