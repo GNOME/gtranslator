@@ -361,19 +361,32 @@ if test -n "$SVN_INCLUDE" ; then
 	dnl ------------------------------------
 	dnl APR. Required by subversion (devel)
 	dnl ------------------------------------
+	have_atr=no
 	PKG_CHECK_MODULES(APR,                            \
-		apr-1)
+		apr-1, have_atr=yes, have_atr=no)
+	if test x"have_atr" != "xno"; then
+		SVN_INCLUDE=""
+	fi
 	
 	dnl -----------------------------------------
 	dnl APR util. Required by subversion (devel)
 	dnl------------------------------------------
+	have_atr_util=no
 	PKG_CHECK_MODULES(APR_UTILS,                            \
-		apr-util-1)
+		apr-util-1, have_atr_util=yes, have_atr_util=no)
+	if test x"have_atr" != "xno"; then
+		SVN_INCLUDE=""
+	fi
 	
 	dnl -----------------------------------------
 	dnl NEON. Required by subversion (devel)
 	dnl------------------------------------------
-	NEON_LIBRARY
+	have_neon=no
+	PKG_CHECK_MODULES(NEON,                            \
+                neon, have_neon=yes, have_neon=no)
+        if test x"have_atr" != "xno"; then
+		SVN_INCLUDE=""
+	fi
 fi
 
 dnl ------------------------------------------
