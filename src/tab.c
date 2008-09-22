@@ -508,11 +508,13 @@ gtranslator_tab_add_msgstr_tabs (GtranslatorTab *tab)
 static void
 gtranslator_tab_draw (GtranslatorTab *tab)
 {
+        gint current_page_num;
 	GtkWidget *image;
 	GtkWidget *vertical_box;
 	GtkWidget *label_widget;
 	GtkWidget *msgid_label;
 	GtkWidget *msgstr_label;
+	GtkWidget *current_page;
 	GtkWidget *notebook, *tm_layout, *tm, *comments_label, *tm_label, *scroll;
 	GtranslatorTabPrivate *priv = tab->priv;
 	

@@ -20,7 +20,6 @@
 #endif
 
 #include "application.h"
-#include "comment.h"
 #include "po.h"
 #include "prefs-manager.h"
 #include "translation-memory.h"
@@ -218,9 +217,12 @@ showed_message_cb (GtranslatorTab *tab,
 			G_CALLBACK (on_activate_item_cb), window);
       
       gtk_menu_shell_append (GTK_MENU_SHELL (items_menu), tm_item);
-    j++;
-    }while (j<=9);
-    //while ((tm_list = g_list_next (tm_list)));
+    
+      j++;
+      if (j>10)
+	break;
+
+    }while (tm_list = g_list_next (tm_list));
     
     gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
   }
