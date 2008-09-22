@@ -1,5 +1,15 @@
 2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* plugins/source-code-view/source-code-view-plugin.c (insert_link),
+	(gtranslator_source_code_view_plugin_init), (showed_message_cb),
+	(delete_text_and_tags), (message_edition_finished_cb),
+	(page_added_cb), (impl_activate), (impl_deactivate):
+	Now it is not leaking memory when changing within messages.
+	And now it removes the text and it adds the text if we disable or enable
+	the plugin.
+
+2008-08-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* doc/reference/Makefile.am:
 	* doc/reference/gtranslator-docs.sgml:
 	* doc/reference/gtranslator.types:

@@ -61,7 +61,9 @@ struct _GtranslatorSourceCodeViewPluginPrivate
 	
 	GtranslatorWindow *window;
 
-	gint inserted_lines;
+	GtkTextMark *path_start;
+	GtkTextMark *path_end;
+	GSList *tags;
 };
 
 GTR_PLUGIN_REGISTER_TYPE(GtranslatorSourceCodeViewPlugin, gtranslator_source_code_view_plugin)
@@ -70,7 +72,8 @@ static void
 insert_link (GtkTextBuffer *buffer, 
 	     GtkTextIter *iter,
 	     const gchar *path,
-	     gint *line)
+	     gint *line,
+	     GtranslatorSourceCodeViewPlugin *plugin)
 {
 	GtkTextTag *tag;
 	gchar *text;
@@ -85,6 +88,8 @@ insert_link (GtkTextBuffer *buffer,
 	text = g_strdup_printf ("%s:%d\n", path, GPOINTER_TO_INT (line));
 	gtk_text_buffer_insert_with_tags (buffer, iter, text, -1, tag, NULL);
 	g_free (text);
+	
+	plugin->priv->tags = g_slist_prepend (plugin->priv->tags, tag);
 }
 
 static void
@@ -345,6 +350,10 @@ gtranslator_source_code_view_plugin_init (GtranslatorSourceCodeViewPlugin *plugi
 			      SOURCE_CODE_VIEW_BASE_KEY,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL,
 			      NULL);
+	
+	plugin->priv->tags = NULL;
+	plugin->priv->path_start = NULL;
+	plugin->priv->path_end = NULL;
 }
 
 static void
@@ -379,18 +388,70 @@ showed_message_cb (GtranslatorTab *tab,
 	
 	gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
 	
+	plugin->priv->path_start = gtk_text_buffer_create_mark (buffer,
+								"path start",
+								&iter,
+								TRUE);
 	gtk_text_buffer_insert (buffer, &iter, _("Paths:\n"), -1);
 	
 	filename = gtranslator_msg_get_filename (msg, i);
 	while (filename)
 	{
 		line = gtranslator_msg_get_file_line (msg, i);
-		insert_link (buffer, &iter, filename, line);
+		insert_link (buffer, &iter, filename, line, plugin);
 		i++;
 		filename = gtranslator_msg_get_filename (msg, i);
 	}
 
-	plugin->priv->inserted_lines = i;
+	plugin->priv->path_end = gtk_text_buffer_create_mark (buffer,
+							      "path end",
+							      &iter,
+							      TRUE);
+}
+
+static void
+delete_text_and_tags (GtranslatorTab *tab,
+		      GtranslatorSourceCodeViewPlugin *plugin)
+{
+	GSList *tagp = NULL;
+	GtkTextBuffer *buffer;
+	GtranslatorContextPanel *panel;
+	GtkTextView *view;
+	GtkTextIter start, end;
+	
+	if (plugin->priv->path_start == NULL)
+		return;
+	
+	panel = gtranslator_tab_get_context_panel (tab);
+	view = gtranslator_context_panel_get_context_text_view (panel);
+	
+	buffer = gtk_text_view_get_buffer (view);
+
+	for (tagp = plugin->priv->tags;  tagp != NULL;  tagp = tagp->next)
+	{
+		GtkTextTag *tag = tagp->data;
+		gchar *path = g_object_get_data (G_OBJECT (tag), "path");
+		
+		if (path) 
+		{
+			g_free (path);
+		}
+	}
+	g_slist_free (plugin->priv->tags);
+	plugin->priv->tags = NULL;
+
+	/*
+	 * Deleting the text
+	 */
+	gtk_text_buffer_get_iter_at_mark (buffer, &start, plugin->priv->path_start);
+	gtk_text_buffer_get_iter_at_mark (buffer, &end, plugin->priv->path_end);
+	gtk_text_buffer_delete (buffer, &start, &end);
+	
+	/*
+	 * Deleting the marks
+	 */
+	gtk_text_buffer_delete_mark (buffer, plugin->priv->path_start);
+	gtk_text_buffer_delete_mark (buffer, plugin->priv->path_end);
 }
 
 static void
@@ -398,40 +459,7 @@ message_edition_finished_cb (GtranslatorTab *tab,
 			     GtranslatorMsg *msg,
 			     GtranslatorSourceCodeViewPlugin *plugin)
 {
-	GSList *tags = NULL, *tagp = NULL;
-	GtkTextIter iter;
-	GtkTextBuffer *buffer;
-	gint i = 0;
-	GtranslatorContextPanel *panel;
-	GtkTextView *view;
-
-	panel = gtranslator_tab_get_context_panel (tab);
-	view = gtranslator_context_panel_get_context_text_view (panel);
-
-	buffer = gtk_text_view_get_buffer (view);
-	
-	gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
-
-	while (i < plugin->priv->inserted_lines)
-	{	
-		/*
-		 * Let's free the path
-		 */
-		tags = gtk_text_iter_get_tags (&iter);
-		for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
-		{
-			GtkTextTag *tag = tagp->data;
-			gchar *path = g_object_get_data (G_OBJECT (tag), "path");
-
-			if (path) 
-			{
-				g_free (path);
-			}
-		}
-		g_slist_free (tags);
-		gtk_text_iter_forward_line (&iter);
-		i++;
-	}
+	delete_text_and_tags (tab, plugin);
 }
 
 static void
@@ -448,8 +476,8 @@ page_added_cb (GtkNotebook *notebook,
 
 	g_signal_connect_after (child, "showed-message",
 				G_CALLBACK (showed_message_cb), plugin);
-	/*g_signal_connect (child, "message-edition-finished,
-			  G_CALLBACK (message_edition_finished_cb), plugin);*/
+	g_signal_connect (child, "message-edition-finished",
+			  G_CALLBACK (message_edition_finished_cb), plugin);
 	
 	g_signal_connect (view, "event-after", 
 			  G_CALLBACK (event_after), plugin);
@@ -558,8 +586,17 @@ impl_activate (GtranslatorPlugin *plugin,
 	tabs = gtranslator_window_get_all_tabs (window);
 	for (l = tabs; l != NULL; l = g_list_next (l))
 	{
+		GtranslatorPo *po;
+		GList *msg;
+		
 		page_added_cb (GTK_NOTEBOOK (notebook),
 			       l->data, 0, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
+		
+		po = gtranslator_tab_get_po (GTR_TAB (l->data));
+		msg = gtranslator_po_get_current_message (po);
+		
+		showed_message_cb (GTR_TAB (l->data),
+				   msg->data, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 	}
 }
 
@@ -579,6 +616,8 @@ impl_deactivate(GtranslatorPlugin *plugin,
 	{
 		panel = gtranslator_tab_get_context_panel (GTR_TAB (l->data));
 		view = gtranslator_context_panel_get_context_text_view (panel);
+		
+		delete_text_and_tags (GTR_TAB (l->data), GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 		
 		g_signal_handlers_disconnect_by_func (l->data,
 						      showed_message_cb,
