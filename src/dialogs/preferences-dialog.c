@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *               2008  Pablo Sanxiao <psanxiao@gmail.com>
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -20,14 +21,18 @@
 #include <config.h>
 #endif
 
+#include "application.h"
 #include "preferences-dialog.h"
 #include "prefs-manager.h"
+#include "profile.h"
 #include "utils.h"
 #include "plugin-manager.h"
+#include "profile-dialog.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib-object.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 
 
@@ -92,6 +97,13 @@ struct _GtranslatorPreferencesDialogPrivate
 	/*Plugins*/
 	GtkWidget *plugins_box;
 };
+
+static void setup_profile_pages (GtranslatorPreferencesDialog *dlg);
+
+GtkWidget *gtranslator_preferences_dialog_get_treeview (GtranslatorPreferencesDialog *dlg) 
+{
+  return dlg->priv->profile_treeview;
+}
 
 /***************Files pages****************/
 
@@ -390,74 +402,157 @@ setup_editor_pages(GtranslatorPreferencesDialog *dlg)
 	setup_editor_contents(dlg);
 }
 
-/***************PO header pages****************/
+/***************Profile pages****************/
 static void
-name_entry_changed(GObject    *gobject,
-		   GParamSpec *arg1,
+active_toggled_cb (GtkCellRendererToggle *cell_renderer,
+		   gchar *path_str,
 		   GtranslatorPreferencesDialog *dlg)
 {
-	const gchar *text;
-	
-	g_return_if_fail(GTK_ENTRY(gobject) == GTK_ENTRY(dlg->priv->name_entry));
+  GtkTreeIter iter;
+  GtkTreePath *path;
+  GtkTreeModel *model;
+  gboolean active;
+  gchar *profile_row;
+  GtranslatorProfile *old_profile_active;
+  GList *l = NULL, *profiles_list = NULL;
+  gchar *filename;
+  gchar *config_folder;
+  GFile *file;
 
-	text = gtk_entry_get_text(GTK_ENTRY(gobject));
-	
-	if(text)
-		gtranslator_prefs_manager_set_name(text);
+
+  config_folder = gtranslator_utils_get_user_config_dir ();
+  filename = g_build_filename (config_folder,
+			       "profiles.xml",
+			       NULL);
+  file = g_file_new_for_path (filename);
+
+  path = gtk_tree_path_new_from_string (path_str);
+  
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  g_return_if_fail (model != NULL);
+  
+  gtk_tree_model_get_iter (model, &iter, path);
+
+  gtk_tree_model_get (model, &iter, TOGGLE_COL, &active, -1);
+    
+  if (!active) {
+    
+    old_profile_active = gtranslator_application_get_active_profile (GTR_APP);
+    
+    gtk_list_store_set (GTK_LIST_STORE (model),
+			&iter,
+			TRUE,
+			TOGGLE_COL,
+			-1);
+
+    gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
+    profiles_list = gtranslator_application_get_profiles (GTR_APP);
+
+    for (l = profiles_list; l; l = l->next) {
+      GtranslatorProfile *profile;
+      profile = (GtranslatorProfile *)l->data;
+      if (!strcmp (gtranslator_profile_get_name (profile), profile_row)) {
+	gtranslator_application_set_active_profile (GTR_APP, profile);
+      }
+    }
+  }
+  gtk_list_store_clear (GTK_LIST_STORE(model));
+  gtranslator_preferences_fill_profile_treeview (dlg, model);
+  gtk_tree_path_free (path);
+}
+
+void gtranslator_preferences_fill_profile_treeview (GtranslatorPreferencesDialog *dlg,
+						    GtkTreeModel *model)
+{
+  GtkTreeIter iter;
+  GtranslatorProfile *active_profile;
+  GList *l = NULL, *profiles_list = NULL;
+
+  gtk_list_store_clear (GTK_LIST_STORE (model));
+  
+  profiles_list = gtranslator_application_get_profiles (GTR_APP);
+  active_profile = gtranslator_application_get_active_profile (GTR_APP);
+  
+  for (l = profiles_list; l; l = l->next) {
+    
+    GtranslatorProfile *profile;
+    gchar *profile_name;
+    
+    profile = (GtranslatorProfile *)l->data;
+
+    profile_name = gtranslator_profile_get_name (profile);
+    gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+   
+    if (!strcmp (gtranslator_profile_get_name (active_profile), profile_name)) {
+      gtk_list_store_set (GTK_LIST_STORE (model),
+			  &iter,
+			  PROFILE_NAME_COL,
+			  profile_name,
+			  TOGGLE_COL,
+			  TRUE,
+			  -1);
+    } else {
+      gtk_list_store_set (GTK_LIST_STORE (model),
+			  &iter,
+			  PROFILE_NAME_COL,
+			  profile_name,
+			  -1);
+    }
+  }
 }
 
 static void
-email_entry_changed(GObject    *gobject,
-		    GParamSpec *arg1,
-		    GtranslatorPreferencesDialog *dlg)
+setup_profile_pages (GtranslatorPreferencesDialog *dlg)
 {
-	const gchar *text;
-	
-	g_return_if_fail(GTK_ENTRY(gobject) == GTK_ENTRY(dlg->priv->email_entry));
+  
+  GtkTreeViewColumn *name_column, *toggle_column;
+  GtkCellRenderer *text_renderer, *toggle_renderer;
+  GtkListStore *model;
+  
+  model = gtk_list_store_new (N_COLUMNS_PROFILES, G_TYPE_STRING, G_TYPE_BOOLEAN);
 
-	text = gtk_entry_get_text(GTK_ENTRY(gobject));
-	
-	if(text)
-		gtranslator_prefs_manager_set_email(text);
+  gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->profile_treeview),
+			   GTK_TREE_MODEL (model)); 
+
+  g_object_unref (model);
+  
+  text_renderer = gtk_cell_renderer_text_new ();
+  toggle_renderer = gtk_cell_renderer_toggle_new ();
+
+  g_signal_connect (toggle_renderer,
+		    "toggled",
+		    G_CALLBACK (active_toggled_cb),
+		    dlg);
+
+  g_object_set (toggle_renderer,
+		"mode",
+		GTK_CELL_RENDERER_MODE_ACTIVATABLE,
+		NULL);
+
+  name_column = gtk_tree_view_column_new_with_attributes ("Profile",
+						     text_renderer,
+						     "text",
+						     PROFILE_NAME_COL,
+						     NULL);
+  
+  toggle_column = gtk_tree_view_column_new_with_attributes ("Active",
+							    toggle_renderer,
+							    "active",
+							    TOGGLE_COL,
+							    NULL);
+
+  gtk_tree_view_column_set_resizable (toggle_column, TRUE);
+  gtk_tree_view_column_set_resizable (name_column, TRUE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->profile_treeview), name_column);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->profile_treeview), toggle_column);
+
+  g_object_set (name_column, 
+		"expand", 
+		TRUE,
+		NULL);
+
+  gtranslator_preferences_fill_profile_treeview (dlg,GTK_TREE_MODEL(model));
 }
-
-static void
-setup_po_header_personal_information_page(GtranslatorPreferencesDialog *dlg)
-{
-	const gchar *value;
-	
-	/*Set initial value*/
-	value = gtranslator_prefs_manager_get_name();
-	if(value)
-		gtk_entry_set_text(GTK_ENTRY(dlg->priv->name_entry),
-				   value);
-	value = gtranslator_prefs_manager_get_email();
-	if(value)
-		gtk_entry_set_text(GTK_ENTRY(dlg->priv->email_entry),
-				   value);
-	
-	/*Connect signals*/
-	g_signal_connect(dlg->priv->name_entry, "notify::text",
-			 G_CALLBACK(name_entry_changed),
-			 dlg);
-	g_signal_connect(dlg->priv->email_entry, "notify::text",
-			 G_CALLBACK(email_entry_changed),
-			 dlg);
-}
-
-static void
-setup_po_header_language_settings_page(GtranslatorPreferencesDialog *dlg)
-{
-}
-
-static void
-setup_po_header_pages(GtranslatorPreferencesDialog *dlg)
-{
-	/*Children*/
-	setup_po_header_personal_information_page(dlg);
-	setup_po_header_language_settings_page(dlg);
-}
-
 
 /***************Interface pages****************/
 static void
@@ -516,9 +611,153 @@ dialog_response_handler (GtkDialog *dlg,
 }
 
 static void
-add_button_pulsed (GtkWidget *button, GtranslatorPreferencesDialog *dlg)
+add_button_pulsed (GtkWidget *button,
+		   GtranslatorPreferencesDialog *dlg)
 {
-	gtranslator_show_profile_dialog(dlg);
+  GtranslatorProfile *profile;
+  profile = gtranslator_profile_new ();
+  gtranslator_show_profile_dialog(dlg, profile, NEW_PROFILE);
+}
+
+static void
+edit_button_pulsed (GtkWidget *button,
+		    GtranslatorPreferencesDialog *dlg)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  gchar *profile_row, *old_profile_name;
+  GtranslatorProfile *edited_profile;
+  GtranslatorProfile *active_profile;
+  GList *profiles_list = NULL, *l = NULL;
+  
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  g_return_if_fail (model != NULL);
+  
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  
+  if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+    
+    gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
+    
+    profiles_list = gtranslator_application_get_profiles (GTR_APP);
+    active_profile = gtranslator_application_get_active_profile (GTR_APP);
+    
+    for (l = profiles_list; l; l = l->next) {
+      GtranslatorProfile *profile;
+      profile = (GtranslatorProfile *)l->data;
+      if (!strcmp (gtranslator_profile_get_name (profile), profile_row)) {
+	old_profile_name = gtranslator_profile_get_name (profile);
+	edited_profile = profile;
+      }
+    }
+    gtranslator_show_profile_dialog (dlg, edited_profile, EDIT_PROFILE);
+  }
+}
+
+static void
+delete_confirm_dialog_cb (GtkWidget *dialog,
+			  gint response_id,
+			  GtranslatorPreferencesDialog *dlg)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  gchar *profile_row;
+  GList *profiles_list = NULL, *l = NULL;
+  GList *new_list = NULL;
+
+  if (response_id == GTK_RESPONSE_YES) {
+    model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+    g_return_if_fail (model != NULL);
+    
+    selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+    
+    if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+      
+      gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
+      
+      profiles_list = gtranslator_application_get_profiles (GTR_APP);
+      
+      for (l = profiles_list; l; l = l->next) {
+	GtranslatorProfile *profile;
+	profile = (GtranslatorProfile *)l->data;
+	if (!strcmp (gtranslator_profile_get_name (profile), profile_row)) {
+	  new_list = g_list_remove (profiles_list, profile);
+	  gtranslator_application_set_profiles (GTR_APP, new_list);
+	}
+      }
+      gtranslator_preferences_fill_profile_treeview (dlg, model);
+    }
+    gtk_widget_destroy (dialog);
+  } else {
+    gtk_widget_destroy (dialog);
+  }
+}
+
+static void
+delete_button_pulsed (GtkWidget *button,
+		      GtranslatorPreferencesDialog *dlg)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  gchar *profile_row;
+  GtranslatorProfile *active_profile;
+  GtkWidget *dialog;
+
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  g_return_if_fail (model != NULL);
+    
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  
+  if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+    
+    gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
+    
+    active_profile = gtranslator_application_get_active_profile (GTR_APP);
+
+    if (!strcmp (gtranslator_profile_get_name (active_profile), profile_row)) {
+    
+      dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
+					     GTK_DIALOG_MODAL,
+					     GTK_MESSAGE_ERROR,
+					     GTK_BUTTONS_CLOSE,
+					     NULL);
+
+      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
+				 _("<span weight=\"bold\" size=\"large\">Impossible to remove the active profile</span>"));
+      
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						_("Another profile should be selected as active before"));
+      
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+    } else {
+      dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
+				       GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_QUESTION,
+				       GTK_BUTTONS_NONE,
+				       NULL);
+      
+      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
+				     _("<span weight=\"bold\" size=\"large\">Are you sure you want to delete this profile?</span>"));
+      
+      gtk_dialog_add_button (GTK_DIALOG (dialog),
+			     GTK_STOCK_CANCEL,
+			     GTK_RESPONSE_CANCEL);
+      
+      gtk_dialog_add_button (GTK_DIALOG (dialog),
+			     GTK_STOCK_DELETE,
+			     GTK_RESPONSE_YES);
+      
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      
+      g_signal_connect (GTK_DIALOG (dialog), "response",
+			G_CALLBACK (delete_confirm_dialog_cb),
+			dlg);
+    }
+  } 
 }
 
 static void
@@ -585,17 +824,6 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"edit_button", &dlg->priv->edit_button,
 		"delete_button", &dlg->priv->delete_button,
 
-		/*"name_entry", &dlg->priv->name_entry,
-		"email_entry", &dlg->priv->email_entry,
-
-		"language_comboentry", &dlg->priv->language_comboentry,
-		"langcode_comboentry", &dlg->priv->langcode_comboentry,
-		"charset_comboentry", &dlg->priv->charset_comboentry,
-		"encoding_comboentry", &dlg->priv->encoding_comboentry,
-		"team_email_comboentry", &dlg->priv->team_email_comboentry,
-		"number_plurals_spinbutton", &dlg->priv->number_plurals_spinbutton,
-		"plurals_entry", &dlg->priv->plurals_entry,
-		*/				  
 		"gdl_combobox", &dlg->priv->gdl_combobox,
 		
 		"plugins_box", &dlg->priv->plugins_box,
@@ -618,13 +846,23 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 	
 	g_signal_connect (dlg->priv->add_button,
-				"clicked",
-				G_CALLBACK (add_button_pulsed),
-				dlg);
+			  "clicked",
+			  G_CALLBACK (add_button_pulsed),
+			  dlg);
+
+	g_signal_connect (dlg->priv->delete_button,
+			  "clicked",
+			  G_CALLBACK (delete_button_pulsed),
+			  dlg);
+
+	g_signal_connect (dlg->priv->edit_button,
+			  "clicked",
+			  G_CALLBACK (edit_button_pulsed),
+			  dlg);
 
 	setup_files_pages(dlg);
 	setup_editor_pages(dlg);
-	setup_po_header_pages(dlg);
+	setup_profile_pages(dlg);
 	setup_interface_pages(dlg);
 	setup_plugin_pages(dlg);
 }
@@ -667,6 +905,8 @@ gtranslator_show_preferences_dialog (GtranslatorWindow *window)
 		gtk_window_set_transient_for (GTK_WINDOW (dlg),
 					      GTK_WINDOW (window));
 	}
+
+	gtranslator_application_set_preferences_dialog (GTR_APP, GTR_PREFERENCES_DIALOG(dlg));
 
 	gtk_window_present (GTK_WINDOW (dlg));
 }

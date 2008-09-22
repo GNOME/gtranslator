@@ -24,6 +24,7 @@
 #include "utils.h"
 #include "window.h"
 #include "egg-toolbars-model.h"
+#include "dialogs/preferences-dialog.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -42,7 +43,12 @@ struct _GtranslatorApplicationPrivate
 {
 	GList *windows;
 	GtranslatorWindow *active_window;
+
+        GList *profiles;
+        GtranslatorProfile *active_profile;
 	
+  GtranslatorPreferencesDialog *preferences_dialog;
+
 	gchar *toolbars_file;
 	EggToolbarsModel *toolbars_model;
 	

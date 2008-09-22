@@ -95,7 +95,11 @@ main(gint argc,
 	GtranslatorWindow *window;
 	GSList *file_list = NULL;
 	GOptionContext *context;
-	
+	gchar *filename;
+	gchar *config_folder;
+	GList *profiles_list = NULL;
+	GFile *file;
+
 	/*
 	 * Initialize gettext.
 	 */ 
@@ -158,6 +162,21 @@ main(gint argc,
 	
 	gtk_about_dialog_set_url_hook (gtranslator_utils_activate_url, NULL, NULL);
 
+	/*
+	 * Load profiles list
+	 */
+	 config_folder = gtranslator_utils_get_user_config_dir ();
+	 filename = g_build_filename (config_folder,
+				      "profiles.xml",
+				      NULL);
+	 file = g_file_new_for_path (filename);
+  
+	 if (g_file_query_exists (file, NULL)) {
+	   profiles_list = gtranslator_profile_get_profiles_from_xml_file (filename);
+	 }
+
+	 gtranslator_application_set_profiles (GTR_APP, profiles_list);
+		
 	/* 
 	 * Create the main app-window. 
 	 */

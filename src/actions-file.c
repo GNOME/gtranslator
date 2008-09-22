@@ -26,6 +26,7 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <string.h>
 #include <gio/gio.h>
 
@@ -35,6 +36,7 @@
 #include "file-dialogs.h"
 #include "notebook.h"
 #include "po.h"
+#include "profile.h"
 #include "statusbar.h"
 #include "tab.h"
 #include "window.h"
@@ -675,7 +677,22 @@ gtranslator_file_quit (GtkAction *action,
 	GtranslatorPo *po;
 	gint pages;
 	GList *list = NULL;
+	gchar *config_folder;
+	gchar *filename;
+	GFile *file;
+        
+        config_folder = gtranslator_utils_get_user_config_dir ();
+ 	filename = g_build_filename (config_folder,
+ 				     "profiles.xml",
+ 				     NULL);
 	
+	file = g_file_new_for_path (filename);
+	
+	if (g_file_query_exists (file, NULL)) {
+	  g_file_delete (file, NULL, NULL);
+	  gtranslator_profile_save_profiles_in_xml (filename);
+	}
+
 	nb = gtranslator_window_get_notebook (window);
 	pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK(nb));
 
