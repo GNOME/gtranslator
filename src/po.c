@@ -731,7 +731,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	msgstr = po_header_set_field (msgstr, "Language-Team", aux);
 	g_free (aux);
 	
-	aux = g_strconcat(" text/plain;", " charset=",
+	aux = g_strconcat("text/plain;", " charset=",
 			  gtranslator_header_get_charset(header),NULL);
 	msgstr = po_header_set_field (msgstr, "Content-Type", aux);
 	g_free (aux);
