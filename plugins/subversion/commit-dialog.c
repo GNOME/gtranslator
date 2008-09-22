@@ -259,7 +259,7 @@ add_changelog_to_text_view (GtkWidget *textview)
 	
 	buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
 	
-	log = g_strdup_printf (" * Updated %s translation",
+	log = g_strdup_printf ("Updated %s translation",
 	/*
 	 * Translators: Please change LANGUAGE for your language name in ENGLISH.
 	 * This string is used to fill the ChangeLog entry

@@ -146,18 +146,23 @@ subversion_utils_get_changelog_entry_from_view (GtkWidget *view)
 	gchar *name;
 	gchar *email;
 	gchar *changelog_entry;
+	gchar *date;
+	gchar *code;
 	
 	log = subversion_utils_get_log_from_textview (view);
 	
 	profile = gtranslator_application_get_active_profile (GTR_APP);
 	name = gtranslator_profile_get_author_name (profile);
 	email = gtranslator_profile_get_author_email (profile);
+	code = gtranslator_profile_get_language_code (profile);
+	date = gtranslator_utils_get_current_date ();
 	
 	//FIXME: Is missing the date
-	changelog_entry = g_strdup_printf ("date  %s  <%s>\n"
-					   "\n\t %s\n\n", name, email,
-					   log);
+	changelog_entry = g_strdup_printf ("%s  %s  <%s>\n"
+					   "\n\t %s.po: %s\n\n", date, name, email,
+					   code, log);
 	g_free (log);
+	g_free (date);
 	//g_free (name);
 	//g_free (email);
 	
