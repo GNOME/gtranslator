@@ -38,6 +38,9 @@ gboolean   gtranslator_open                     (const gchar *filename,
 						 GtranslatorWindow *window,
 						 GError **error);
 
+void       gtranslator_close_tab                (GtranslatorTab *tab,
+						 GtranslatorWindow *window);
+
 void       gtranslator_file_close               (GtkAction * widget,
 						 GtranslatorWindow *window);
 

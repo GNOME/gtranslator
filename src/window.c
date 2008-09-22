@@ -847,7 +847,7 @@ notebook_tab_close_request (GtranslatorNotebook *notebook,
 {
 	/* Note: we are destroying the tab before the default handler
 	 * seems to be ok, but we need to keep an eye on this. */
-	gtranslator_file_close (NULL, window);
+	gtranslator_close_tab (tab, window);
 	
 	gtranslator_plugins_engine_update_plugins_ui (gtranslator_plugins_engine_get_default (),
 						      window, FALSE);

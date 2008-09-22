@@ -6,6 +6,15 @@
 
 2008-08-07  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* actions-file.c (gtranslator_open), (gtranslator_close_tab),
+	(gtranslator_file_close), (gtranslator_file_quit):
+	* actions.h:
+	* window.c (notebook_tab_close_request):
+	Now it closes the right tab when you click on close button. 
+	And sets the opened tab as active.
+
+2008-08-07  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* translation-memory/berkeley/berkeley.c (look_fuzzy):
 	Don't replace already inserted items in the hashtable.
 

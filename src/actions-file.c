@@ -39,6 +39,7 @@
 #include "profile.h"
 #include "statusbar.h"
 #include "tab.h"
+#include "utils.h"
 #include "window.h"
 
 #define GTR_TAB_SAVE_AS "gtranslator-tab-save-as"
@@ -86,6 +87,7 @@ gtranslator_open(const gchar *filename,
 	 * Create a page to add to our list of open files
 	 */
 	tab = gtranslator_window_create_tab(window, po);
+	gtranslator_window_set_active_tab (window, GTK_WIDGET (tab));
 	
 	/*
 	 * Show the current message.
@@ -637,14 +639,10 @@ close_confirmation_dialog_response_handler (GtranslatorCloseConfirmationDialog *
 	gtk_widget_destroy (GTK_WIDGET (dlg));
 }
 
-void 
-gtranslator_file_close (GtkAction * widget,
-			GtranslatorWindow *window)
+void
+gtranslator_close_tab (GtranslatorTab *tab,
+		       GtranslatorWindow *window)
 {
-	GtranslatorTab *tab;
-	
-	tab = gtranslator_window_get_active_tab (window);
-	
 	g_object_set_data (G_OBJECT (window),
 			   GTR_IS_CLOSING_ALL,
 			   GINT_TO_POINTER (0));
@@ -666,6 +664,17 @@ gtranslator_file_close (GtkAction * widget,
 	}
 	else 
 		_gtranslator_window_close_tab (window, tab);
+}
+
+void 
+gtranslator_file_close (GtkAction * widget,
+			GtranslatorWindow *window)
+{
+	GtranslatorTab *tab;
+	
+	tab = gtranslator_window_get_active_tab (window);
+	
+	gtranslator_close_tab (tab, window);
 }
 
 void
@@ -692,6 +701,9 @@ gtranslator_file_quit (GtkAction *action,
 	  g_file_delete (file, NULL, NULL);
 	  gtranslator_profile_save_profiles_in_xml (filename);
 	}
+	
+	g_free (config_folder);
+	g_object_unref (file);
 
 	nb = gtranslator_window_get_notebook (window);
 	pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK(nb));
