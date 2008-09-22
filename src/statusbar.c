@@ -205,6 +205,24 @@ gtranslator_statusbar_pop (GtranslatorStatusbar *statusbar,
 }
 
 /**
+ * gtranslator_statusbar_get_context_id:
+ * @statusbar: a #GtranslatorStatusbar
+ * @context_description: textual description of what context the new message is being used in
+ *
+ * Returns a new context identifier, given a description of the actual context.
+ * Note that the description is not shown in the UI.
+ * 
+ * Returns: an integer id
+ */
+guint
+gtranslator_statusbar_get_context_id (GtranslatorStatusbar *statusbar,
+				      const gchar *context_description)
+{
+	return gtk_statusbar_get_context_id (statusbar->priv->statusbar,
+					     context_description);
+}
+
+/**
  * gtranslator_statusbar_set_overwrite:
  * @statusbar: a #GtranslatorStatusbar
  * @overwrite: if the overwrite mode is set

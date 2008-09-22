@@ -64,6 +64,9 @@ guint            gtranslator_statusbar_push                     (GtranslatorStat
 
 void             gtranslator_statusbar_pop                      (GtranslatorStatusbar *statusbar,
 								 guint context_id);
+								 
+guint            gtranslator_statusbar_get_context_id           (GtranslatorStatusbar *statusbar,
+								 const gchar *context_description);
 
 void		 gtranslator_statusbar_set_overwrite		(GtranslatorStatusbar   *statusbar,
 								 gboolean          overwrite);
