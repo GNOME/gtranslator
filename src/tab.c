@@ -192,9 +192,10 @@ gtranslator_tab_edition_finished (GtranslatorTab *tab,
   
   tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
   
-  gtranslator_translation_memory_store (tm,
-					gtranslator_msg_get_msgid (msg),
-					gtranslator_msg_get_msgstr (msg));
+  if (gtranslator_msg_is_translated (msg))
+    gtranslator_translation_memory_store (tm,
+					  gtranslator_msg_get_msgid (msg),
+					  gtranslator_msg_get_msgstr (msg));
 }
 
 /*
