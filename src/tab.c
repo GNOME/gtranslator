@@ -531,6 +531,9 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	gtk_notebook_append_page (GTK_NOTEBOOK (priv->panel),
 				  priv->message_table,
 				  label_widget);
+
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK (priv->panel),
+				   FALSE);
 	
 	/*
 	 * Comment pane
