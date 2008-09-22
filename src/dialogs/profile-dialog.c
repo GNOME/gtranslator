@@ -250,7 +250,14 @@ static void save_new_profile (GtkWidget *widget, GtranslatorProfile *profile)
     /*
      * Add new profile to profiles list in memory
      */
-    g_list_append (profiles_list, profile);
+    if (profiles_list == NULL) {
+      GList *initial_list = NULL;
+      initial_list = g_list_append (profiles_list, profile);
+      gtranslator_application_set_active_profile (GTR_APP, profile);
+      gtranslator_application_set_profiles (GTR_APP, initial_list); 
+    } else {
+      g_list_append (profiles_list, profile);
+    }   
   }
   
   /*

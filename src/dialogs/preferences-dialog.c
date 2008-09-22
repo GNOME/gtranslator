@@ -445,6 +445,8 @@ void gtranslator_preferences_fill_profile_treeview (GtranslatorPreferencesDialog
   gtk_list_store_clear (GTK_LIST_STORE (model));
   
   profiles_list = gtranslator_application_get_profiles (GTR_APP);
+
+  
   active_profile = gtranslator_application_get_active_profile (GTR_APP);
   
   for (l = profiles_list; l; l = l->next) {
@@ -524,7 +526,7 @@ setup_profile_pages (GtranslatorPreferencesDialog *dlg)
 		"expand", 
 		TRUE,
 		NULL);
-
+	
   gtranslator_preferences_fill_profile_treeview (dlg,GTK_TREE_MODEL(model));
 }
 
@@ -839,21 +841,23 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
 {
   GtranslatorProfile *profile;
   gchar *language_code;
-  const gchar *filename;
-
-  profile = gtranslator_application_get_active_profile (GTR_APP);
-  language_code = gtranslator_profile_get_language_code (profile);
-  filename = (const gchar*)g_strconcat (language_code, ".po", NULL);
-  
+  const gchar *filename = NULL;
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton),
 				gtranslator_prefs_manager_get_show_tm_options ());
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->use_lang_profile_in_tm),
 				gtranslator_prefs_manager_get_use_lang_profile ());
-
-  gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry),
-		      filename);
+  
+  profile = gtranslator_application_get_active_profile (GTR_APP);
+  
+  if (profile != NULL) {
+    language_code = gtranslator_profile_get_language_code (profile);
+    filename = (const gchar*)g_strconcat (language_code, ".po", NULL);
+    
+    gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry),
+			filename);
+  }
 
   gtranslator_prefs_manager_set_tm_lang_entry (filename);
   
