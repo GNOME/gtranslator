@@ -232,9 +232,6 @@ gtranslator_application_finalize (GObject *object)
 	
 	if (app->priv->tm)
 		g_object_unref (app->priv->tm);
-	
-	if (app->priv->tm)
-        g_object_unref (app->priv->tm);
 
 	G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
 }
