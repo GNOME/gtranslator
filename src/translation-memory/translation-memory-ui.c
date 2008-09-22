@@ -103,19 +103,6 @@ on_activate_item_cb (GtkMenuItem *menuitem,
   gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
 }
 
-static gint
-compare_level (GtranslatorTranslationMemoryMatch *a,
-	       GtranslatorTranslationMemoryMatch *b)
-{
-  if (a->level > b->level) {
-    return -1;
-  }else if (a->level == b->level) {
-    return 0;
-  }else {
-    return 1;
-  }
-}
-
 static void
 showed_message_cb (GtranslatorTab *tab,
 		   GtranslatorMsg *msg,
@@ -129,7 +116,6 @@ showed_message_cb (GtranslatorTab *tab,
   gint i = 1;
   gint j = 1;
   gint k = 0;
-  GList *tm_list_unsorted = NULL;
   GList *tm_list = NULL;
   GList *l = NULL;
   GList *renderers_list = NULL;
@@ -159,10 +145,7 @@ showed_message_cb (GtranslatorTab *tab,
     
     tm = (GtranslatorTranslationMemory *)gtranslator_application_get_translation_memory (GTR_APP);
     
-    tm_list_unsorted = gtranslator_translation_memory_lookup (tm,
-							      msgid);
-    tm_list = g_list_sort (tm_list_unsorted,
-    		   (GCompareFunc) compare_level);
+    tm_list = gtranslator_translation_memory_lookup (tm, msgid);
     if (tm_list == NULL) {
       gtk_widget_set_sensitive (tm_menu, FALSE);
     } else {
