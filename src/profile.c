@@ -242,15 +242,15 @@ void gtranslator_profile_xml_new_entry (xmlDocPtr doc, GtranslatorProfile *profi
 	
 	root = xmlDocGetRootElement (doc);
 	profile_node = xmlNewChild (root, NULL, "profile", NULL);
-	xmlTextNewChild (profile_node, NULL, "profile_name", profile->priv->name);
-	xmlTextNewChild (profile_node, NULL, "author_name", profile->priv->author_name);
-	xmlTextNewChild (profile_node, NULL, "author_email", profile->priv->author_email);
-	xmlTextNewChild (profile_node, NULL, "language_name", profile->priv->language_name);
-	xmlTextNewChild (profile_node, NULL, "language_code", profile->priv->language_code);
-	xmlTextNewChild (profile_node, NULL, "charset", profile->priv->charset);
-	xmlTextNewChild (profile_node, NULL, "encoding", profile->priv->encoding);
-	xmlTextNewChild (profile_node, NULL, "group_email", profile->priv->group_email);
-	xmlTextNewChild (profile_node, NULL, "plurals", profile->priv->plurals);
+	xmlNewTextChild (profile_node, NULL, "profile_name", profile->priv->name);
+	xmlNewTextChild (profile_node, NULL, "author_name", profile->priv->author_name);
+	xmlNewTextChild (profile_node, NULL, "author_email", profile->priv->author_email);
+	xmlNewTextChild (profile_node, NULL, "language_name", profile->priv->language_name);
+	xmlNewTextChild (profile_node, NULL, "language_code", profile->priv->language_code);
+	xmlNewTextChild (profile_node, NULL, "charset", profile->priv->charset);
+	xmlNewTextChild (profile_node, NULL, "encoding", profile->priv->encoding);
+	xmlNewTextChild (profile_node, NULL, "group_email", profile->priv->group_email);
+	xmlNewTextChild (profile_node, NULL, "plurals", profile->priv->plurals);
 }
 
 /**
