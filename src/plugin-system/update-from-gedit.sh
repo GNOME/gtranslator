@@ -25,6 +25,7 @@ sed_it () {
 	-e 's/gedit-plugin-info/plugin-info/g' \
 	-e 's/gedit-plugin/plugin/g' \
 	-e 's/gedit-panel.h/panel.h/g' \
+	-e 's/#include <gedit\/gedit-window.h>/#include "window.h"/g' \
 	-e 's/gedit-window.h/window.h/g' \
 	-e 's/gedit-utils.h/utils.h/g' \
 	-e 's/#include <gedit\/gedit-debug.h>/#include "debug.h"/g' \

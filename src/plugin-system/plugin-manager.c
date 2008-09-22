@@ -26,7 +26,7 @@
  * list of people on the gtranslator Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugin-manager.c 6371 2008-08-09 13:43:02Z jessevdk $
+ * $Id: plugin-manager.c 6406 2008-08-13 20:04:04Z pborelli $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -103,7 +103,7 @@ about_button_cb (GtkWidget          *button,
 		gtk_widget_destroy (pm->priv->about);
 
 	pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
-		"name", gtranslator_plugin_info_get_name (info),
+		"program-name", gtranslator_plugin_info_get_name (info),
 		"copyright", gtranslator_plugin_info_get_copyright (info),
 		"authors", gtranslator_plugin_info_get_authors (info),
 		"comments", gtranslator_plugin_info_get_description (info),
