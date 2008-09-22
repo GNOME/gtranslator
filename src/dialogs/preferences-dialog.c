@@ -730,6 +730,7 @@ destroy_idle_data (gpointer data)
 {
 	IdleData *d = (IdleData *)data;
 	
+	gtk_widget_hide (GTK_WIDGET (d->progress));
 	g_list_foreach (d->list, (GFunc)g_free, NULL);
 	g_list_free (d->list);
 	
@@ -756,6 +757,7 @@ on_add_database_button_pulsed (GtkButton *button,
   data->tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
   data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
 
+  gtk_widget_show (dlg->priv->add_database_progressbar);
   g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
 		   (GSourceFunc)add_to_database,
 		   data,
