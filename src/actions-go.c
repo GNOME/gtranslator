@@ -40,7 +40,8 @@ gtranslator_message_go_to_first(GtkAction *action,
 	current = gtranslator_window_get_active_tab(window);
 	po = gtranslator_tab_get_po(current);
 	gtranslator_tab_message_go_to(current,
-				      g_list_first(gtranslator_po_get_current_message(po)));
+				      g_list_first(gtranslator_po_get_current_message(po)),
+				      FALSE);
 	set_sensitive_according_to_message(window, po);
 }
 
@@ -54,7 +55,8 @@ gtranslator_message_go_to_previous(GtkAction *action,
 	current = gtranslator_window_get_active_tab(window);
 	po = gtranslator_tab_get_po(current);
 	gtranslator_tab_message_go_to(current,
-				      g_list_previous(gtranslator_po_get_current_message(po)));
+				      g_list_previous(gtranslator_po_get_current_message(po)),
+				      FALSE);
 	set_sensitive_according_to_message(window, po);
 }
 
@@ -68,7 +70,8 @@ gtranslator_message_go_to_next(GtkAction *action,
 	current = gtranslator_window_get_active_tab(window);
 	po = gtranslator_tab_get_po(current);
 	gtranslator_tab_message_go_to(current,
-				  g_list_next(gtranslator_po_get_current_message(po)));
+				      g_list_next(gtranslator_po_get_current_message(po)),
+				      FALSE);
 	set_sensitive_according_to_message(window, po);
 }
 
@@ -82,7 +85,8 @@ gtranslator_message_go_to_last(GtkAction *action,
 	current = gtranslator_window_get_active_tab(window);
 	po = gtranslator_tab_get_po(current);
 	gtranslator_tab_message_go_to(current,
-				      g_list_last(gtranslator_po_get_current_message(po)));
+				      g_list_last(gtranslator_po_get_current_message(po)),
+				      FALSE);
 	set_sensitive_according_to_message(window, po);
 }
 
@@ -107,7 +111,7 @@ gtranslator_message_go_to_next_fuzzy(GtkAction *action,
 	msg = gtranslator_po_get_next_fuzzy(po);
 	if(msg != NULL)
 	{
-		gtranslator_tab_message_go_to(current, msg);
+		gtranslator_tab_message_go_to(current, msg, FALSE);
 		set_sensitive_according_to_message(window, po);
 	}
 }
@@ -125,7 +129,7 @@ gtranslator_message_go_to_prev_fuzzy(GtkAction *action,
 	msg = gtranslator_po_get_prev_fuzzy(po);
 	if(msg != NULL)
 	{
-		gtranslator_tab_message_go_to(current, msg);
+		gtranslator_tab_message_go_to(current, msg, FALSE);
 		set_sensitive_according_to_message(window, po);
 	}
 }
@@ -143,7 +147,7 @@ gtranslator_message_go_to_next_untranslated(GtkAction *action,
 	msg = gtranslator_po_get_next_untrans(po);
 	if(msg != NULL)
 	{
-		gtranslator_tab_message_go_to(current, msg);
+		gtranslator_tab_message_go_to(current, msg, FALSE);
 		set_sensitive_according_to_message(window, po);
 	}
 }
@@ -161,7 +165,7 @@ gtranslator_message_go_to_prev_untranslated(GtkAction *action,
 	msg = gtranslator_po_get_prev_untrans(po);
 	if(msg != NULL)
 	{
-		gtranslator_tab_message_go_to(current, msg);
+		gtranslator_tab_message_go_to(current, msg, FALSE);
 		set_sensitive_according_to_message(window, po);
 	}
 }

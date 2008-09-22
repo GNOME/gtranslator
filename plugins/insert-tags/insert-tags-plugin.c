@@ -70,7 +70,7 @@ static const GtkActionEntry action_entries[] =
 	{ "InsertTags", NULL, N_("_Insert Tags") }
 };
 
-const gchar submenu[] =
+static const gchar submenu[] =
 "<ui>"
 "  <menubar name='MainMenu'>"
 "    <menu name='EditMenu' action='Edit'>"
@@ -126,6 +126,12 @@ gtranslator_insert_tags_plugin_init (GtranslatorInsertTagsPlugin *message_table)
 static void
 gtranslator_insert_tags_plugin_finalize (GObject *object)
 {
+	if (tags != NULL)
+	{
+		g_slist_free (tags);
+		tags = NULL;
+	}
+	
 	G_OBJECT_CLASS (gtranslator_insert_tags_plugin_parent_class)->finalize (object);
 }
 
@@ -290,9 +296,11 @@ impl_activate (GtranslatorPlugin *plugin,
 							 submenu,
 							 -1,
 							 &error);
-	if (data->ui_id == 0)
+	if (error)
 	{
 		g_warning (error->message);
+		g_error_free (error);
+		g_free (data);
 		return;
 	}
 
@@ -344,6 +352,12 @@ impl_deactivate(GtranslatorPlugin *plugin,
 	g_signal_handlers_disconnect_by_func(notebook,
 					     page_added_cb,
 					     window);
+	
+	if (tags != NULL)
+	{
+		g_slist_free (tags);
+		tags = NULL;
+	}
 }
 
 static void

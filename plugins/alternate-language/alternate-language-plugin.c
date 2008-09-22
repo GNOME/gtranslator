@@ -120,20 +120,21 @@ impl_deactivate(GtranslatorPlugin *plugin,
 	tabs = gtranslator_window_get_all_tabs(window);
 	notebook = gtranslator_window_get_notebook(window);
 
-	if(tabs == NULL)
-		return;
-	do{
-		alternatelang = g_object_get_data(G_OBJECT(tabs->data), WINDOW_DATA_KEY);
-		panel = gtranslator_tab_get_panel (GTR_TAB(tabs->data));
+	if (tabs != NULL)
+	{
+		do{
+			alternatelang = g_object_get_data(G_OBJECT(tabs->data), WINDOW_DATA_KEY);
+			panel = gtranslator_tab_get_panel (GTR_TAB(tabs->data));
 		
-		page_num = gtk_notebook_page_num (GTK_NOTEBOOK (panel),
-						  alternatelang);
-		gtk_notebook_remove_page (GTK_NOTEBOOK (panel),
-					  page_num);
+			page_num = gtk_notebook_page_num (GTK_NOTEBOOK (panel),
+							  alternatelang);
+			gtk_notebook_remove_page (GTK_NOTEBOOK (panel),
+						  page_num);
 
-		g_object_set_data (G_OBJECT (tabs->data), WINDOW_DATA_KEY, NULL);
+			g_object_set_data (G_OBJECT (tabs->data), WINDOW_DATA_KEY, NULL);
 		
-	}while((tabs = g_list_next(tabs)));
+		}while((tabs = g_list_next(tabs)));
+	}
 	
 	g_signal_handlers_disconnect_by_func(notebook,
 					     create_alternate_lang_plugin_panel,

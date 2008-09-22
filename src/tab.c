@@ -759,18 +759,20 @@ gtranslator_tab_get_name (GtranslatorTab *tab)
  * gtranslator_tab_message_go_to:
  * @tab: a #GtranslatorTab
  * @to_go: the #GtranslatorMsg you want to jump
+ * @searching: TRUE if we are searching in the message list
  *
  * Jumps to the specific @to_go pointer message and show the message
  * in the #GtranslatorView.
 **/
 void 
 gtranslator_tab_message_go_to(GtranslatorTab *tab,
-			      GList * to_go)
+			      GList * to_go,
+			      gboolean searching)
 {
 	GtranslatorPo *po;
 	static gint pos = 0;
 	GList *current_msg;
-	const gchar *message_error;
+	gchar *message_error;
 	GtkWidget *message_area;
  
 	g_return_if_fail (tab != NULL);
@@ -791,13 +793,16 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 		message_area = create_error_message_area(_("There is an error in the message:"),
 							 message_error);
 		set_message_area(tab, message_area);
+		g_free (message_error);
 		return;
 	}
 	
 	/*
 	 * Emitting showed-message signal
 	 */
-	g_signal_emit(G_OBJECT(tab), signals[SHOWED_MESSAGE], 0, GTR_MSG(to_go->data)); 
+	if (!searching)
+		g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
+			       GTR_MSG (to_go->data)); 
 	
 }
 

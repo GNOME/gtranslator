@@ -93,6 +93,11 @@ GObject          *_gtranslator_application_get_toolbars_model  (GtranslatorAppli
 
 void              _gtranslator_application_save_toolbars_model (GtranslatorApplication   *application);
 
+const gchar *     _gtranslator_application_get_last_dir        (GtranslatorApplication *app);
+
+void              _gtranslator_application_set_last_dir        (GtranslatorApplication *app,
+							        const gchar *last_dir);
+
 G_END_DECLS
 
 #endif /* __APPLICATION_H__ */

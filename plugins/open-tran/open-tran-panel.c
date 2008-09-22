@@ -157,6 +157,9 @@ print_struct_to_tree_view(gpointer value,
 				   -1);
 				   
 		g_free (panel->priv->text);
+		
+		if (icon)
+			g_object_unref (icon);
 	}
 }
 

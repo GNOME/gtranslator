@@ -47,6 +47,8 @@ struct _GtranslatorApplicationPrivate
 	EggToolbarsModel *toolbars_model;
 	
 	GtkIconFactory *icon_factory;
+
+	gchar *last_dir;
 };
 
 static gchar *
@@ -123,6 +125,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 	priv = application->priv;
 	
 	priv->windows = NULL;
+	priv->last_dir = NULL;
 	
 	/*
 	 * Creating config folder
@@ -205,6 +208,8 @@ gtranslator_application_finalize (GObject *object)
 	
 	if (app->priv->icon_factory)
 		g_object_unref (app->priv->icon_factory);
+
+	g_free (app->priv->last_dir);
 	
 	G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
 }
@@ -384,4 +389,33 @@ gtranslator_application_register_icon (GtranslatorApplication *app,
 	
 	g_free (path);
 	gtk_icon_source_free (icon_source);
+}
+
+/**
+ * gtranslator_application_get_last_dir:
+ * @app: a #GtranslatorApplication
+ *
+ * Return value: the last dir where a file was opened in the GtkFileChooser
+ */
+const gchar *
+_gtranslator_application_get_last_dir (GtranslatorApplication *app)
+{
+	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+
+	return app->priv->last_dir;
+}
+
+/**
+ * gtranslator_application_set_last_dir:
+ * @app: a #GtranslatorApplication
+ * @last_dir: the path of the last directory where a file was opened in the
+ * GtkFileChooser.
+ */
+void
+_gtranslator_application_set_last_dir (GtranslatorApplication *app,
+				       const gchar *last_dir)
+{
+	g_return_if_fail (GTR_IS_APPLICATION (app));
+
+	app->priv->last_dir = g_strdup (last_dir);
 }

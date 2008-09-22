@@ -87,15 +87,30 @@ draw_nbsp_at_iter(cairo_t *cr,
 	gtk_text_view_get_iter_location(view, iter, &rect);
 	gtk_text_view_buffer_to_window_coords(view, GTK_TEXT_WINDOW_TEXT,
 					      rect.x,
-					      rect.y + rect.height / 2, &x, &y);	
+					      rect.y + rect.height / 2, &x, &y);
+
+	
 	cairo_save(cr);
-	cairo_move_to(cr, x+2, y-2);
-	cairo_rel_line_to(cr, +7, 0);
-	cairo_rel_line_to(cr, 0, 4);
-	cairo_rel_move_to(cr, -3, 0);
-	cairo_rel_line_to(cr, 5, 0);
-	cairo_rel_line_to(cr, -2.5, 4);
-	cairo_rel_line_to(cr, -2.5, -4);
+	
+	if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_LTR)
+	{
+		cairo_move_to(cr, x+2, y-2);
+		cairo_rel_line_to(cr, +7, 0);
+		cairo_rel_line_to(cr, 0, 4);
+		cairo_rel_move_to(cr, -3, 0);
+		cairo_rel_line_to(cr, 6, 0);
+		cairo_rel_line_to(cr, -3, 4);
+		cairo_rel_line_to(cr, -3, -4);
+	}else
+	{
+		cairo_move_to (cr, x-2, y-2);
+		cairo_rel_line_to(cr, -7, 0);
+		cairo_rel_line_to(cr, 0, 4);
+		cairo_rel_move_to(cr, 3, 0);
+		cairo_rel_line_to(cr, -6, 0);
+		cairo_rel_line_to(cr, 3, 4);
+		cairo_rel_line_to(cr, 3, -4);
+	}
 	cairo_restore(cr);
 	cairo_fill(cr);
 	

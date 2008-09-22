@@ -27,8 +27,10 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <string.h>
+#include <gio/gio.h>
 
 #include "actions.h"
+#include "application.h"
 #include "dialogs/close-confirmation-dialog.h"
 #include "file-dialogs.h"
 #include "notebook.h"
@@ -87,7 +89,7 @@ gtranslator_open(const gchar *filename,
 	 * Show the current message.
 	 */
 	current = gtranslator_po_get_current_message(po);
-	gtranslator_tab_message_go_to(tab, current);
+	gtranslator_tab_message_go_to (tab, current, FALSE);
 	
 	/*
 	 * Grab the focus
@@ -107,8 +109,24 @@ gtranslator_po_parse_files_from_dialog (GtkWidget * dialog,
 					GtranslatorWindow *window)
 {
 	GSList *po_files;
+	GFile *file, *parent;
+	gchar *uri;
 	
 	po_files = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dialog));
+
+	/*
+	 * We store latest directory
+	 */
+	file = g_file_new_for_uri (po_files->data);
+	parent = g_file_get_parent (file);
+	g_object_unref (file);
+
+	uri = g_file_get_uri (parent);
+	g_object_unref (parent);
+	_gtranslator_application_set_last_dir (GTR_APP,
+					       uri);
+	
+	g_free (uri);
 
 	/*
 	 * Open the file via our centralized opening function.
@@ -166,7 +184,9 @@ gtranslator_open_file_dialog(GtkAction * action,
 	}
 	dialog = gtranslator_file_chooser_new (GTK_WINDOW(window), 
 					       FILESEL_OPEN,
-					       _("Open file for translation"));	
+					       _("Open file for translation"),
+					       _gtranslator_application_get_last_dir (GTR_APP));	
+	
 	/*
 	 * With the gettext parser/writer API, we can't currently read/write
 	 * to remote files with gnome-vfs. Eventually, we should intercept
@@ -279,7 +299,8 @@ gtranslator_save_file_as_dialog (GtkAction * action,
 	
 	dialog = gtranslator_file_chooser_new (GTK_WINDOW (window),
 					       FILESEL_SAVE,
-					       _("Save file as..."));
+					       _("Save file as..."),
+					       _gtranslator_application_get_last_dir (GTR_APP));
 	
 	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog),
 							TRUE);

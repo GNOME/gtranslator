@@ -200,7 +200,8 @@ open_button_clicked_cb (GtkWidget *open_button,
 	 */
 	dialog = gtranslator_file_chooser_new (NULL, 
 					       FILESEL_OPEN,
-					       _("Open file for alternate language"));
+					       _("Open file for alternate language"),
+					       NULL);
 			       
 	gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
 	

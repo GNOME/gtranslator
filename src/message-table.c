@@ -76,7 +76,7 @@ gtranslator_message_table_selection_changed (GtkTreeSelection *selection,
 		if (msg != NULL && g_utf8_collate (gtranslator_msg_get_msgid (msg->data),
 						   gtranslator_msg_get_msgid (current_msg->data)))
 		{
-			gtranslator_tab_message_go_to (table->priv->tab, msg);
+			gtranslator_tab_message_go_to (table->priv->tab, msg, FALSE);
 		}
 	}
 }
@@ -245,7 +245,8 @@ static void sort_message_list (GtkTreeViewColumn *column,
 	gtranslator_po_set_messages (po, messages);
 
 	gtranslator_tab_message_go_to (table->priv->tab,
-				       g_list_first (messages));
+				       g_list_first (messages),
+				       FALSE);
 }
 
 static void

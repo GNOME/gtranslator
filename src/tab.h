@@ -99,7 +99,8 @@ GList                 *gtranslator_tab_get_all_views       (GtranslatorTab *tab,
 gchar                 *gtranslator_tab_get_name            (GtranslatorTab *tab);
 
 void                   gtranslator_tab_message_go_to       (GtranslatorTab *tab,
-							    GList * to_go);
+							    GList * to_go,
+							    gboolean searching);
 							    
 GtranslatorTab        *gtranslator_tab_get_from_document   (GtranslatorPo *po);
 							    

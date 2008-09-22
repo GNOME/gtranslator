@@ -1,5 +1,50 @@
 2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* plugins/insert-tags/insert-tags-plugin.c:
+	* plugins/open-tran/open-tran-panel.c:
+	Fixed memory leaks.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/actions-go.c:
+	* src/message-table.c:
+	* src/actions-search.c:
+	* src/tab.ch:
+	* src/actions-file.c:
+	* src/actions-edit.c:
+	If we are searching in the message we shouldn't emit the
+	message-showed signal.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/insert-tags/insert-tags-plugin.c:
+	Fixed memory leaks.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* plugins/alternate-language/alternate-language-plugin.c:
+	Deactivate signal listening if we don't have tabs opened.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/dialogs/file-dialogs.ch:
+	* src/application.ch:
+	* src/actions-file.c:
+	Now it stores the last dir where a file was opened in the
+	FileChooser only for the current session.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* src/tab.c:
+	* src/msg.ch:
+	Fixed message-area freeing corruption.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* data/po.lang: Added csharp highlight support.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	 * configure.ac:
 	* src/comment.h:
 	* src/comment.c:

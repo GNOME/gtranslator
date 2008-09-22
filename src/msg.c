@@ -60,7 +60,6 @@ gtranslator_msg_init (GtranslatorMsg *msg)
 static void
 gtranslator_msg_finalize (GObject *object)
 {
-	g_free(message_error);
 	G_OBJECT_CLASS (gtranslator_msg_parent_class)->finalize (object);
 }
 
@@ -484,7 +483,9 @@ on_gettext_po_xerror(gint severity,
 		     const gchar *filename, size_t lineno, size_t column,
 		     gint multiline_p, const gchar *message_text)
 {
-	message_error = g_strdup(message_text);
+	if (message_text)
+		message_error = g_strdup (message_text);
+	else message_error = NULL;
 }
 
 static void
@@ -504,12 +505,13 @@ on_gettext_po_xerror2(gint severity,
  * gtranslator_msg_check:
  * @msg: a #GtranslatorMsg
  * 
- * Return value: the message error or NULL if there is not any error.
+ * Return value: the message error or NULL if there is not any error. Must be
+ * freed with g_free.
  *
  * Test whether the message translation is a valid format string if the message
  * is marked as being a format string.  
  **/
-const gchar *
+gchar *
 gtranslator_msg_check(GtranslatorMsg *msg)
 {
 	struct po_xerror_handler handler;
@@ -519,16 +521,14 @@ gtranslator_msg_check(GtranslatorMsg *msg)
 	handler.xerror = &on_gettext_po_xerror;
 	handler.xerror2 = &on_gettext_po_xerror2;
 	
-	if(message_error != NULL)
-	{
-		g_free(message_error);
-		message_error = NULL;
-	}
-	
 	po_message_check_all(msg->priv->message, msg->priv->iterator, &handler);
 	
 	if(gtranslator_msg_is_fuzzy(msg) || !gtranslator_msg_is_translated(msg))
+	{
+		if (message_error)
+			g_free (message_error);
 		message_error = NULL;
+	}
 
 	/*Are there any other way to do this?*/
 	return message_error;

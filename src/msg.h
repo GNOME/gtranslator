@@ -139,7 +139,7 @@ const gchar      *gtranslator_msg_get_msgctxt          (GtranslatorMsg *msg);
 
 const gchar      *gtranslator_msg_get_format           (GtranslatorMsg *msg);
 
-const gchar      *gtranslator_msg_check                (GtranslatorMsg *msg);
+gchar            *gtranslator_msg_check                (GtranslatorMsg *msg);
 
 G_END_DECLS
 
