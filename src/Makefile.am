@@ -21,6 +21,7 @@ INCLUDES = \
 	-DPREFIX=\""$(prefix)"\"                                \
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
 	-DPKGDATADIR=\""$(pkgdatadir)"\"                        \
+	-DDATADIR=\""$(datadir)"\"                              \
 	-DLIBDIR=\""$(libdir)"\"                                \
 	$(GTRANSLATOR_CFLAGS)                                   \
 	$(GTKSPELL_CFLAGS)                                      \
