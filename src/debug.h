@@ -15,6 +15,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION:debug
+ * @title: Debugging
+ * @short_description: Debug functions
+ * @include: gtranslator/debug.h
+ */
+ 
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
 
@@ -22,6 +29,13 @@
 
 G_BEGIN_DECLS
 
+/**
+ * DEBUG_PRINT:
+ *
+ * Equivalent to g_message(), except it has only effect when DEBUG is
+ * defined. Used for printing debug messages.
+ */
+ 
 #ifdef DEBUG
 #  define DEBUG_PRINT g_message
 #else

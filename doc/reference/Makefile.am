@@ -37,11 +37,13 @@ FIXXREF_OPTIONS=
 # Used for dependencies. The docs will be rebuilt if any of these change.
 HFILE_GLOB= 					\
 	$(top_srcdir)/src/*.h			\
-	$(top_srcdir)/src/plugin-system/*.h	
+	$(top_srcdir)/src/plugin-system/*.h	\
+	$(top_srcdir)/src/translation-memory/*.h
 	
 CFILE_GLOB=					\
 	$(top_srcdir)/src/*.c			\
-	$(top_srcdir)/src/plugin-system/*.c	
+	$(top_srcdir)/src/plugin-system/*.c	\
+	$(top_srcdir)/src/translation-memory/*.c
 
 # Header files to ignore when scanning (These are internal to gedit).
 IGNORE_HFILES=			\
@@ -75,6 +77,7 @@ GTKDOC_CFLAGS=	\
 	-I$(top_srcdir)/src			\
 	-I$(top_srcdir)/src/plugin-system	\
 	-I$(top_srcdir)/src/toolbareditor	\
+	-I$(top_srcdir)/src/translation-memory	\
 	-I$(top_builddir)/src			\
 	-I$(top_srcdir)				\
 	-I$(top_builddir)			\
