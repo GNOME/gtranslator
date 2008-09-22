@@ -167,7 +167,7 @@ autosave_checkbutton_toggled(GtkToggleButton *button,
 	
 	autosave = gtk_toggle_button_get_active(button);
 	
-	gtk_widget_set_sensitive(dlg->priv->autosave_hbox, autosave);
+	gtk_widget_set_sensitive(dlg->priv->autosave_interval_spinbutton, autosave);
 	gtranslator_prefs_manager_set_autosave(autosave);
 }
 
@@ -216,7 +216,7 @@ setup_files_autosave_page(GtranslatorPreferencesDialog *dlg)
 				  autosave_interval);
 	
 	/*Set sensitive*/
-	gtk_widget_set_sensitive(dlg->priv->autosave_hbox,
+	gtk_widget_set_sensitive(dlg->priv->autosave_interval_spinbutton,
 				 autosave);
 	
 	/*Connect signals*/
