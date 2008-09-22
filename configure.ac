@@ -364,7 +364,7 @@ if test -n "$SVN_INCLUDE" ; then
 	have_atr=no
 	PKG_CHECK_MODULES(APR,                            \
 		apr-1, have_atr=yes, have_atr=no)
-	if test x"have_atr" != "xno"; then
+	if test x"have_atr" = "xno"; then
 		SVN_INCLUDE=""
 	fi
 	
@@ -374,7 +374,7 @@ if test -n "$SVN_INCLUDE" ; then
 	have_atr_util=no
 	PKG_CHECK_MODULES(APR_UTILS,                            \
 		apr-util-1, have_atr_util=yes, have_atr_util=no)
-	if test x"have_atr" != "xno"; then
+	if test x"have_atr_util" = "xno"; then
 		SVN_INCLUDE=""
 	fi
 	
@@ -384,7 +384,7 @@ if test -n "$SVN_INCLUDE" ; then
 	have_neon=no
 	PKG_CHECK_MODULES(NEON,                            \
                 neon, have_neon=yes, have_neon=no)
-        if test x"have_atr" != "xno"; then
+        if test x"have_neon" = "xno"; then
 		SVN_INCLUDE=""
 	fi
 fi
