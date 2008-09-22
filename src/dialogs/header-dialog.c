@@ -289,7 +289,7 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 	gtk_widget_set_sensitive(dlg->priv->po_date, FALSE);
 	gtk_widget_set_sensitive(dlg->priv->charset, FALSE);
 
-	if (gtk_toggle_button_get_active(dlg->priv->take_my_options)) {
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options))) {
 	  
 	  gtk_widget_set_sensitive(dlg->priv->translator, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options)));
 	  gtk_widget_set_sensitive(dlg->priv->tr_email, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (dlg->priv->take_my_options)));

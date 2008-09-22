@@ -218,8 +218,8 @@ guint
 gtranslator_statusbar_get_context_id (GtranslatorStatusbar *statusbar,
 				      const gchar *context_description)
 {
-	return gtk_statusbar_get_context_id (statusbar->priv->statusbar,
-					     context_description);
+  return gtk_statusbar_get_context_id (GTK_STATUSBAR (statusbar->priv->statusbar),
+				       context_description);
 }
 
 /**

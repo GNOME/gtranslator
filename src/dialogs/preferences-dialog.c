@@ -918,7 +918,7 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
 		    G_CALLBACK (on_sentence_length_spinbutton_changed),
 		    dlg);
 
-  g_free (filename);
+  g_free ((gpointer)filename);
 }
 
 /***************Plugins pages****************/
