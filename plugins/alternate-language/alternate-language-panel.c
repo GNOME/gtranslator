@@ -33,6 +33,9 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
+#define FUZZY_ICON		"gtk-dialog-warning"
+#define UNTRANSLATED_ICON	"gtk-dialog-error"
+
 #define GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_ALTERNATE_LANG_PANEL,     \
@@ -47,12 +50,11 @@ struct _GtranslatorAlternateLangPanelPrivate
 	GtkWidget *close_button;
 	GtkWidget *textview;
 	
-	GtkWidget *translated;
-	GtkWidget *untranslated;
-	GtkWidget *fuzzy;
+	GtkWidget *status;
 	
 	GtranslatorPo *po;
 	GtranslatorMsg *first;
+	GtranslatorTab *tab;
 };
 
 static void
@@ -93,12 +95,12 @@ search_message (GtranslatorAlternateLangPanel *panel,
 			switch (status)
 			{
 				case GTR_MSG_STATUS_TRANSLATED: 
-					gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->priv->translated),
-								      TRUE);
+					gtk_image_clear (GTK_IMAGE (panel->priv->status));
 					break;
 				case GTR_MSG_STATUS_FUZZY:
-					gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->priv->fuzzy),
-								      TRUE);
+					gtk_image_set_from_stock (GTK_IMAGE (panel->priv->status),
+								  FUZZY_ICON,
+								  GTK_ICON_SIZE_SMALL_TOOLBAR);
 					break;
 				default: break;
 			}
@@ -117,8 +119,9 @@ search_message (GtranslatorAlternateLangPanel *panel,
 	/*
 	 * If we are here the status is untranslated
 	 */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->priv->untranslated),
-				      TRUE);
+	gtk_image_set_from_stock (GTK_IMAGE (panel->priv->status),
+				  UNTRANSLATED_ICON,
+				  GTK_ICON_SIZE_SMALL_TOOLBAR);
 }
 
 static void
@@ -197,6 +200,9 @@ open_button_clicked_cb (GtkWidget *open_button,
 			GtranslatorAlternateLangPanel *panel)
 {
 	GtkWidget *dialog = NULL;
+	const gchar *filename;
+	gchar *dir;
+	GtranslatorPo *tab_po;
 			       
 	if(dialog != NULL) {
 		gtk_window_present(GTK_WINDOW(dialog));
@@ -210,6 +216,13 @@ open_button_clicked_cb (GtkWidget *open_button,
 					       FILESEL_OPEN,
 					       _("Open file for alternate language"),
 					       NULL);
+	
+	tab_po = gtranslator_tab_get_po (panel->priv->tab);
+	filename = gtranslator_po_get_filename (tab_po);
+	dir = g_path_get_dirname (filename);
+	
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), dir);
+	g_free (dir);
 			       
 	gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
 	
@@ -279,20 +292,10 @@ gtranslator_alternate_lang_panel_draw (GtranslatorAlternateLangPanel *panel)
 	/*
 	 * Radio buttons
 	 */
-	panel->priv->translated = gtk_radio_button_new_with_label (NULL,
-								   _("Translated"));
-	gtk_widget_show (panel->priv->translated);
-	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->translated, FALSE, TRUE, 0);
+	panel->priv->status = gtk_image_new ();
+	gtk_widget_show (panel->priv->status);
 	
-	panel->priv->fuzzy = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (panel->priv->translated),
-									  _("Fuzzy"));
-	gtk_widget_show (panel->priv->fuzzy);
-	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->fuzzy, FALSE, TRUE, 0);
-	
-	panel->priv->untranslated = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (panel->priv->translated),
-										 _("Untranslated"));
-	gtk_widget_show (panel->priv->untranslated);
-	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->untranslated, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->status, FALSE, FALSE, 0);
 	
 	/*
 	 * Text view
@@ -356,6 +359,8 @@ gtranslator_alternate_lang_panel_new (GtkWidget *tab)
 {
 	GtranslatorAlternateLangPanel *panel;
 	panel = g_object_new (GTR_TYPE_ALTERNATE_LANG_PANEL, NULL);
+	
+	panel->priv->tab = GTR_TAB (tab);
 	
 	g_signal_connect (tab, "showed-message",
 			  G_CALLBACK (showed_message_cb),
