@@ -47,8 +47,6 @@ struct _GtranslatorMsgPrivate
 	GtkTreeRowReference *row_reference;
 
 	gint po_position;
-  
-        gchar **tm_list;
 };
 
 static gchar *message_error = NULL;
@@ -61,7 +59,7 @@ gtranslator_msg_init (GtranslatorMsg *msg)
 
 static void
 gtranslator_msg_finalize (GObject *object)
-{
+{	
 	G_OBJECT_CLASS (gtranslator_msg_parent_class)->finalize (object);
 }
 
@@ -522,6 +520,11 @@ gtranslator_msg_check(GtranslatorMsg *msg)
 	struct po_xerror_handler handler;
 	
 	g_return_val_if_fail(msg != NULL, NULL);
+	
+	/* We are not freeing the message_error so at start should be NULL
+	 * always for us
+	 */
+	message_error = NULL;
 
 	handler.xerror = &on_gettext_po_xerror;
 	handler.xerror2 = &on_gettext_po_xerror2;
@@ -537,18 +540,4 @@ gtranslator_msg_check(GtranslatorMsg *msg)
 
 	/*Are there any other way to do this?*/
 	return message_error;
-}
-
-
-gchar **
-gtranslator_msg_get_tm_list (GtranslatorMsg *msg)
-{
-  return msg->priv->tm_list;
-}
-
-void
-gtranslator_msg_set_tm_list (GtranslatorMsg *msg,
-			     gchar **tm_list)
-{
-  msg->priv->tm_list = tm_list;
 }

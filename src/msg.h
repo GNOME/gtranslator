@@ -141,10 +141,6 @@ const gchar      *gtranslator_msg_get_format           (GtranslatorMsg *msg);
 
 gchar            *gtranslator_msg_check                (GtranslatorMsg *msg);
 
-gchar            **gtranslator_msg_get_tm_list         (GtranslatorMsg *msg);
-void             gtranslator_msg_set_tm_list           (GtranslatorMsg *msg,
-							gchar **tm_list);
-
 G_END_DECLS
 
 #endif /* __MSG_H__ */

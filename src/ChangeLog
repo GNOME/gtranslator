@@ -1,3 +1,14 @@
+2008-08-08  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* msg.c (gtranslator_msg_check):
+	* msg.h:
+	* translation-memory/translation-memory-ui.c (on_activate_item_cb),
+	(free_list), (showed_message_cb),
+	(gtranslator_translation_memory_ui_init),
+	(gtranslator_translation_memory_ui_finalize):
+	Fixed memory leaks on tm ui. Fixed a bug on _msg_check that was making
+	crash the program.
+
 2008-08-08  Pablo Sanxiao  <psanxiao@gmail.com>
 
 	* dialogs/preferences-dialog:

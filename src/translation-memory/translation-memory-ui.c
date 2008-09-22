@@ -34,6 +34,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
+#define MAX_ELEMENTS 10
+
 #define GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 							(object),	               \
 							GTR_TYPE_TRANSLATION_MEMORY_UI,	       \
@@ -45,6 +47,8 @@ struct _GtranslatorTranslationMemoryUiPrivate
 {
         GtkWidget *tree_view;
 	GtranslatorTab *tab;
+	
+	gchar **tm_list;
 };
 
 enum {
@@ -61,20 +65,21 @@ tree_view_size_cb (GtkWidget     *widget,
 
 static void                
 on_activate_item_cb (GtkMenuItem *menuitem,
-		     GtranslatorWindow *window)
+		     GtranslatorTranslationMemoryUi *tm_ui)
 {
  
   GtkWidget *label;
   GtranslatorView *view;
   GtkTextBuffer *buffer;
-  GtranslatorTab *tab;
   GtranslatorPo *po;
   GList *current_msg = NULL;
   GtranslatorMsg *msg;
   const gchar *name;
   gchar **array;
   gint index;
-  gchar **data;
+  GtranslatorWindow *window;
+
+  window = gtranslator_application_get_active_window (GTR_APP);
 
   label = gtk_bin_get_child (GTK_BIN (menuitem));
   name = gtk_label_get_text (GTK_LABEL (label));
@@ -86,23 +91,32 @@ on_activate_item_cb (GtkMenuItem *menuitem,
 
   index = atoi (array[1]);
 
-  tab = gtranslator_window_get_active_tab (window);
-  po = gtranslator_tab_get_po (tab);
+  po = gtranslator_tab_get_po (tm_ui->priv->tab);
   current_msg = gtranslator_po_get_current_message (po);
 
-  msg = (GtranslatorMsg *)current_msg->data;
-
-  data = gtranslator_msg_get_tm_list (msg);
+  msg = GTR_MSG (current_msg->data);
   
-  gtranslator_msg_set_msgstr (msg, data[index-1]);
+  gtranslator_msg_set_msgstr (msg, tm_ui->priv->tm_list[index-1]);
 
   gtk_text_buffer_begin_user_action (buffer);
   gtk_text_buffer_set_text (buffer,
-			    data[index-1],
+			    tm_ui->priv->tm_list[index-1],
 			    -1);
   gtk_text_buffer_end_user_action(buffer);
 
   gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
+
+  g_strfreev (array);
+}
+
+static void
+free_list (gpointer data,
+	   gpointer useless)
+{
+	GtranslatorTranslationMemoryMatch *match = (GtranslatorTranslationMemoryMatch *)data;
+	
+	g_free (match->match);
+	g_free (match);
 }
 
 static void
@@ -126,6 +140,7 @@ showed_message_cb (GtranslatorTab *tab,
   GtkWidget *items_menu;
   GtranslatorWindow *window;
   GtkUIManager *manager;
+  gchar *item_name;
 
   model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
   
@@ -145,9 +160,10 @@ showed_message_cb (GtranslatorTab *tab,
     
     msgid = gtranslator_msg_get_msgid (msg);
     
-    tm = (GtranslatorTranslationMemory *)gtranslator_application_get_translation_memory (GTR_APP);
+    tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
     
     tm_list = gtranslator_translation_memory_lookup (tm, msgid);
+
     if (tm_list == NULL) {
       gtk_widget_set_sensitive (tm_menu, FALSE);
     } else {
@@ -155,17 +171,14 @@ showed_message_cb (GtranslatorTab *tab,
     }
     
     gtk_list_store_clear (model);
-    
-    gchar *item_name;
-    gchar **data;
-    
-    data = (gchar **)malloc ((size_t) g_list_length (tm_list)*sizeof(gchar*));
+
+    g_strfreev (tm_ui->priv->tm_list);
+    tm_ui->priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
     
     for (l = tm_list; l; l = l->next) {
       GtranslatorTranslationMemoryMatch *match;
       match = (GtranslatorTranslationMemoryMatch *)l->data;
-      data[i-1] = match->match; 
-      
+      tm_ui->priv->tm_list[i-1] = g_strdup (match->match);       
       level_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
       renderers_list = gtk_tree_view_column_get_cell_renderers (level_column);
       
@@ -185,12 +198,13 @@ showed_message_cb (GtranslatorTab *tab,
 			  -1);
       i++;
       k++;
-      if (k>9)
-	break;
+      if (k == MAX_ELEMENTS)
+        break;
     }
-    
-    gtranslator_msg_set_tm_list (msg, data);
-    
+
+    /* Ensure last element is NULL */
+    tm_ui->priv->tm_list[i-1] = NULL;
+
     /* MenuBar stuff */
     
     items_menu = gtk_menu_new();
@@ -208,7 +222,7 @@ showed_message_cb (GtranslatorTab *tab,
       tm_item = gtk_menu_item_new_with_label (item_name);
       gtk_widget_show (tm_item);
       
-      accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Insert Tags/%s", item_name);
+      accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Translation Memory/%s", item_name);
       
       gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
       gtk_accel_map_add_entry (accel_path, GDK_0+(j-1), GDK_CONTROL_MASK);
@@ -217,17 +231,22 @@ showed_message_cb (GtranslatorTab *tab,
       g_free (item_name);
       
       g_signal_connect (tm_item, "activate",
-			G_CALLBACK (on_activate_item_cb), window);
+			G_CALLBACK (on_activate_item_cb),
+			tm_ui);
       
       gtk_menu_shell_append (GTK_MENU_SHELL (items_menu), tm_item);
     
       j++;
-      if (j>10)
+      if (j > MAX_ELEMENTS)
 	break;
 
     }while ((tm_list = g_list_next (tm_list)));
     
     gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
+
+    /* Freeing the list */
+    g_list_foreach (tm_list, (GFunc)free_list, NULL);
+    g_list_free (tm_list);
   }
 }
 
@@ -316,6 +335,7 @@ static void
 gtranslator_translation_memory_ui_init (GtranslatorTranslationMemoryUi *tm_ui)
 {
 	tm_ui->priv = GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE (tm_ui);
+	tm_ui->priv->tm_list = NULL;
 	
 	gtranslator_translation_memory_ui_draw (tm_ui);
 }
@@ -323,6 +343,10 @@ gtranslator_translation_memory_ui_init (GtranslatorTranslationMemoryUi *tm_ui)
 static void
 gtranslator_translation_memory_ui_finalize (GObject *object)
 {
+	GtranslatorTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
+	
+	g_strfreev (tm_ui->priv->tm_list);
+	
 	G_OBJECT_CLASS (gtranslator_translation_memory_ui_parent_class)->finalize (object);
 }
 
