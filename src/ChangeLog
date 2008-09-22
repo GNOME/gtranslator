@@ -1,6 +1,18 @@
 2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* msg.c (gtranslator_msg_set_property),
+	(gtranslator_msg_get_property), (gtranslator_msg_class_init),
+	(gtranslator_msg_new), (gtranslator_msg_get_iterator),
+	(gtranslator_msg_set_iterator), (gtranslator_msg_get_message),
+	(gtranslator_msg_set_message):
+	* msg.h:
+	* po.c (gtranslator_po_parse):
+	Fixed message constructor, po_message_t must be an argument in the
+	constructor. Added the iter as a property too.
+
+2008-08-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* msg.c (gtranslator_msg_set_property),
 	(gtranslator_msg_get_property), (gtranslator_msg_class_init):
 	Now the gettext message is an attribute.
 

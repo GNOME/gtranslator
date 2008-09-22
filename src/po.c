@@ -516,8 +516,7 @@ gtranslator_po_parse (GtranslatorPo *po,
 		if (!po_message_is_obsolete (message))
 		{
 			/* Unpack into a GtrMsg */
-			msg = gtranslator_msg_new (iter);
-			gtranslator_msg_set_message (msg, message);
+			msg = gtranslator_msg_new (iter, message);
   
 			/* Set the status */
 			if (gtranslator_msg_is_fuzzy (msg))

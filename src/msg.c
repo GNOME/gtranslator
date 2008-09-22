@@ -52,6 +52,7 @@ struct _GtranslatorMsgPrivate
 enum
 {
 	PROP_0,
+	PROP_GETTEXT_ITER,
 	PROP_GETTEXT_MSG
 };
 
@@ -67,6 +68,10 @@ gtranslator_msg_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
+		case PROP_GETTEXT_ITER:
+			gtranslator_msg_set_iterator (msg,
+						      g_value_get_pointer (value));
+			break;
 		case PROP_GETTEXT_MSG:
 			gtranslator_msg_set_message (msg,
 						     g_value_get_pointer (value));
@@ -87,6 +92,10 @@ gtranslator_msg_get_property (GObject    *object,
 
 	switch (prop_id)
 	{
+		case PROP_GETTEXT_ITER:
+			g_value_set_pointer (value,
+					     gtranslator_msg_get_iterator (msg));
+			break;
 		case PROP_GETTEXT_MSG:
 			g_value_set_pointer (value,
 					     gtranslator_msg_get_message (msg));
@@ -122,9 +131,16 @@ gtranslator_msg_class_init (GtranslatorMsgClass *klass)
 	
 	g_object_class_install_property (object_class,
 					 PROP_GETTEXT_MSG,
+					 g_param_spec_pointer ("gettext-iter",
+							       "Gettext iterator",
+							       "The po_message_iterator_t pointer",
+							       G_PARAM_READWRITE));
+	
+	g_object_class_install_property (object_class,
+					 PROP_GETTEXT_MSG,
 					 g_param_spec_pointer ("gettext-msg",
 							       "Gettext msg",
-							       "The po_message_t object",
+							       "The po_message_t pointer",
 							       G_PARAM_READWRITE));	
 }
 
@@ -138,14 +154,47 @@ gtranslator_msg_class_init (GtranslatorMsgClass *klass)
  * Return value: a new #GtranslatorMsg object
  **/
 GtranslatorMsg *
-gtranslator_msg_new(po_message_iterator_t iter)
+gtranslator_msg_new (po_message_iterator_t iter,
+		     po_message_t message)
 {
 	GtranslatorMsg *msg;
 	
-	msg = g_object_new (GTR_TYPE_MSG, NULL);
-	msg->priv->iterator = iter;
+	msg = g_object_new (GTR_TYPE_MSG, "gettext-iter", iter,
+			    "gettext-msg", message, NULL);
 	
 	return msg;
+}
+
+/**
+ * gtranslator_msg_get_iterator:
+ * @msg: a #GtranslatorMsg
+ *
+ * Return value: the message iterator in gettext format
+ **/
+po_message_iterator_t
+gtranslator_msg_get_iterator (GtranslatorMsg *msg)
+{
+	g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+	
+	return msg->priv->iterator;
+}
+
+/**
+ * gtranslator_msg_set_iterator:
+ * @msg: a #GtranslatorMsg
+ * @message: the po_message_iterator_t to set into the @msg
+ *
+ * Sets the iterator into the #GtranslatorMsg class.
+ **/
+void
+gtranslator_msg_set_iterator (GtranslatorMsg *msg,
+			      po_message_iterator_t iter)
+{
+	g_return_if_fail (GTR_IS_MSG (msg));
+	
+	msg->priv->iterator = iter;
+	
+	g_object_notify (G_OBJECT (msg), "gettext-iter");
 }
 
 /**
@@ -155,8 +204,10 @@ gtranslator_msg_new(po_message_iterator_t iter)
  * Return value: the message in gettext format
  **/
 po_message_t
-gtranslator_msg_get_message(GtranslatorMsg *msg)
+gtranslator_msg_get_message (GtranslatorMsg *msg)
 {
+	g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+	
 	return msg->priv->message;
 }
 
@@ -172,6 +223,8 @@ gtranslator_msg_set_message(GtranslatorMsg *msg,
 			    po_message_t message)
 {
 	msg->priv->message = message;
+	
+	g_object_notify (G_OBJECT (msg), "gettext-msg");
 }
 
 /**
