@@ -98,6 +98,8 @@ prj_id_version_changed(GObject    *gobject,
 {
 	const gchar *text;
 
+	gtranslator_header_set_header_changed (header, TRUE);
+
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
 	if (text)
@@ -110,6 +112,8 @@ rmbt_changed(GObject    *gobject,
 		    GtranslatorHeader *header)
 {
 	const gchar *text;
+
+	gtranslator_header_set_header_changed (header, TRUE);
 
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
@@ -124,6 +128,8 @@ translator_changed(GObject    *gobject,
 {
 	const gchar *text;
 
+	gtranslator_header_set_header_changed (header, TRUE);
+
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
 	if (text)
@@ -136,6 +142,8 @@ tr_email_changed(GObject    *gobject,
 		    GtranslatorHeader *header)
 {
 	const gchar *text;
+
+	gtranslator_header_set_header_changed (header, TRUE);
 
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
@@ -150,6 +158,8 @@ language_changed(GObject    *gobject,
 {
 	const gchar *text;
 
+	gtranslator_header_set_header_changed (header, TRUE);
+
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 
 	if (text)
@@ -162,6 +172,8 @@ lg_email_changed(GObject    *gobject,
 		    GtranslatorHeader *header)
 {
 	const gchar *text;
+
+	gtranslator_header_set_header_changed (header, TRUE);
 
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 	
@@ -200,8 +212,13 @@ gtranslator_header_dialog_fill_from_header (GtranslatorHeaderDialog *dlg, Gtrans
 
 static void save_header(GtranslatorPo *po)
 {
+        GtranslatorHeader *header;
+
 	gtranslator_po_save_header_in_msg (po);
-	gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
+	header = gtranslator_po_get_header (po);
+
+        if (gtranslator_header_get_header_changed (header))
+	  gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
 } 
 
 static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)

@@ -110,6 +110,10 @@ void		 gtranslator_header_set_encoding	(GtranslatorHeader *header, gchar *data);
 const gchar	*gtranslator_header_get_plural_forms	(GtranslatorHeader *header);
 void             gtranslator_header_set_plural_forms    (GtranslatorHeader *header,
 							 const gchar *plural_forms);
+
+gboolean         gtranslator_header_get_header_changed  (GtranslatorHeader *header);
+void             gtranslator_header_set_header_changed  (GtranslatorHeader *header,
+							 gboolean change);
 							 
 gint             gtranslator_header_get_nplurals        (GtranslatorHeader *header);
 
