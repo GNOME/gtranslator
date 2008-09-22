@@ -81,6 +81,8 @@ GDL_REQUIRED=0.6.0
 LIBGUCHARMAP_OPTIONAL=1.6.0
 GDICT_OPTIONAL=0.10.8
 GTKSPELL_OPTIONAL=2.0.2
+LIBSVN_OPTIONAL=1.5.0
+LIBSOUP_OPTIONAL=2.4.0
 
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GLIB_REQUIRED)
@@ -338,7 +340,7 @@ dnl FIXME: This should actually be done by subversion and not by us.
 dnl ******************************************************************
 
 AC_ARG_ENABLE(plugin-subversion,
-  [  --disable-plugin-subversion        Disable subversion support in Anjuta.],
+  [  --disable-plugin-subversion        Disable subversion support in GTranslator.],
   [ if test "$enableval" = "no"; then
         user_disabled_subversion=1
     fi ],
@@ -552,7 +554,38 @@ else
 		echo "        Requires apr-util (>= 0.9.4); http://subversion.org"
 		echo "        Requires neon (>= 0.24.5); http://subversion.org"
 		echo "        Requires subversion (>= 1.0.2); http://subversion.org"
+		echo "        Requires subversion (>= 1.5.0); http://subversion.org"
+
 fi
+
+if [ test x"$have_gucharmap" = "xyes" ]; then
+	echo "Building charmap plugin: ...............................YES"
+else
+	echo "Building charmap plugin: ...............................NO"
+		echo "        Requires gucharmap >= $LIBGUCHARMAP_OPTIONAL=1.6.0"
+fi
+
+if [ test x"$have_libsoup" = "xyes" ]; then
+	echo "Building open-tran plugin: .............................YES"
+else
+	echo "Building open-tran plugin: .............................NO"
+		echo "        Requires libsoup >= $LIBSOUP_OPTIONAL"
+fi
+
+if [ test x"$have_gdict" = "xyes" ]; then
+	echo "Building dictionary plugin: ............................YES"
+else
+	echo "Building dictionary plugin: ............................NO"
+		echo "        Requires gdict-1.0 >= $GDICT_OPTIONAL"
+fi
+
+if [ test x"$have_gtkspell" = "xyes" ]; then
+	echo "Building spell support: ................................YES"
+else
+	echo "Building spell support: ................................NO"
+		echo "        Requires gtkspell >= $GTKSPELL_OPTIONAL"
+fi
+
 echo "
 ------------------------------------------------------------------
 -- For suggestions, problems & bug reports for gtranslator please
