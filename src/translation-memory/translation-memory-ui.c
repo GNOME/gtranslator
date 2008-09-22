@@ -67,28 +67,22 @@ static void
 on_activate_item_cb (GtkMenuItem *menuitem,
 		     GtranslatorTranslationMemoryUi *tm_ui)
 {
- 
-  GtkWidget *label;
   GtranslatorView *view;
   GtkTextBuffer *buffer;
   GtranslatorPo *po;
   GList *current_msg = NULL;
   GtranslatorMsg *msg;
-  const gchar *name;
   gint index;
   GtranslatorWindow *window;
 
   window = gtranslator_application_get_active_window (GTR_APP);
-
-  label = gtk_bin_get_child (GTK_BIN (menuitem));
-  name = gtk_label_get_text (GTK_LABEL (label));
   
   view = gtranslator_window_get_active_view (window);
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
   /* Possible this hack is not going to work with all languages neither, we
      are supposing the integer at the end of the string */
-  index = g_ascii_xdigit_value (name[strlen (name) -1]);
+  index = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menuitem), "option"));
 
   po = gtranslator_tab_get_po (tm_ui->priv->tab);
   current_msg = gtranslator_po_get_current_message (po);
@@ -217,6 +211,7 @@ showed_message_cb (GtranslatorTab *tab,
       item_name = g_strdup_printf (_("Insert Option nº %d"), j);
       
       tm_item = gtk_menu_item_new_with_label (item_name);
+      g_object_set_data (G_OBJECT (tm_item), "option", GINT_TO_POINTER (j));
       gtk_widget_show (tm_item);
       
       accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Translation Memory/%s", item_name);
