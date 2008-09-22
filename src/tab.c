@@ -192,7 +192,7 @@ gtranslator_tab_edition_finished (GtranslatorTab *tab,
   
   tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
   
-  if (gtranslator_msg_is_translated (msg))
+  if (gtranslator_msg_is_translated (msg) && !gtranslator_msg_is_fuzzy (msg))
     gtranslator_translation_memory_store (tm,
 					  gtranslator_msg_get_msgid (msg),
 					  gtranslator_msg_get_msgstr (msg));
@@ -969,6 +969,20 @@ gtranslator_tab_get_context_panel(GtranslatorTab *tab)
 }
 
 /**
+ * gtranslator_tab_get_translation_memory_ui:
+ * @tab: a #GtranslatorTab
+ *
+ * Returns: the #GtranslatorTranslationMemoryUi panel.
+ */
+GtkWidget *
+gtranslator_tab_get_translation_memory_ui (GtranslatorTab *tab)
+{
+	g_return_val_if_fail (GTR_IS_TAB (tab), NULL);
+	
+	return tab->priv->translation_memory;
+}
+
+/**
  * gtranslator_tab_get_active_view:
  * @tab: a #GtranslationTab
  *
@@ -1291,6 +1305,31 @@ gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *tab,
 				  page);
 }
 
+/**
+ * gtranslator_tab_show_lateral_panel_widget:
+ * @tab: a #GtranslatorTab
+ * @widget: the widget to be showed
+ *
+ * Shows the notebook page of the @widget.
+ */
+void
+gtranslator_tab_show_lateral_panel_widget (GtranslatorTab *tab,
+					   GtkWidget *widget)
+{
+	gint page;
+	
+	page = gtk_notebook_page_num (GTK_NOTEBOOK (tab->priv->lateral_panel),
+				      widget);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
+				       page);
+}
+
+/**
+ * gtranslator_tab_clear_msgstr_views:
+ * @tab: a #GtranslatorTab
+ * 
+ * Clears all text from msgstr text views.
+ */
 void
 gtranslator_tab_clear_msgstr_views (GtranslatorTab *tab)
 {

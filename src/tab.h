@@ -92,6 +92,8 @@ gint                   gtranslator_tab_get_active_trans_tab(GtranslatorTab *tab)
 
 GtranslatorContextPanel *gtranslator_tab_get_context_panel (GtranslatorTab *tab);
 
+GtkWidget             *gtranslator_tab_get_translation_memory_ui (GtranslatorTab *tab);
+
 GtranslatorView       *gtranslator_tab_get_active_view     (GtranslatorTab *tab);
 
 GList                 *gtranslator_tab_get_all_views       (GtranslatorTab *tab,
@@ -122,6 +124,9 @@ void                   gtranslator_tab_add_widget_to_lateral_panel (GtranslatorT
 
 void                   gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *tab,
 									 GtkWidget *widget);
+
+void                   gtranslator_tab_show_lateral_panel_widget (GtranslatorTab *tab,
+								  GtkWidget *widget);
 
 void                   gtranslator_tab_clear_msgstr_views  (GtranslatorTab *tab);
 							    

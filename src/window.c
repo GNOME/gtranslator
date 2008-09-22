@@ -182,9 +182,15 @@ static const GtkActionEntry entries[] = {
 
 
 	/* View menu */
-	{ "ViewSidePane", NULL, N_("Side _Pane"), "F9",
+	{ "ViewContext", NULL, N_("_Context"), "<control>J",
+	  N_("Show the Context panel"),
+	  G_CALLBACK (gtranslator_actions_view_context) },
+	{ "ViewTranslationMemory", NULL, N_("_Translation Memory"), "<control>K",
+	  N_("Show the Translation Memory panel"),
+	  G_CALLBACK (gtranslator_actions_view_translation_memory) },
+	/*{ "ViewSidePane", NULL, N_("Side _Pane"), "F9",
 	  N_("Show or hide the side pane in the current window"),
-	  NULL },
+	  NULL },*/
 	
 	/* Bookmarks menu */
 	/*{ "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",

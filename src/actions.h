@@ -87,6 +87,12 @@ void       gtranslator_actions_edit_clear       (GtkAction *action,
 						 GtranslatorWindow *window);
 
 /* View */
+void       gtranslator_actions_view_context     (GtkAction *action,
+						 GtranslatorWindow *window);
+
+void       gtranslator_actions_view_translation_memory
+						(GtkAction *action,
+						 GtranslatorWindow *window);
 
 /*Go*/
 void       gtranslator_message_go_to_first      (GtkAction  * action,
