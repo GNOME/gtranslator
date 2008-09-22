@@ -8,6 +8,34 @@
 	Added translation memory loading and added the releated libraries
 	to the Makefile.am file.
 
+2008-07-30  Pablo Sanxiao  <psanxiao@gmail.com>
+
+	* profile.{ch}:
+	(gtranslator_profile_get_profiles_from_xml):
+	Added support to get active profile.
+	(gtranslator_profile_save_profiles_in_xml),
+	* dialogs/preferences-dialog.glade:
+	Added tab to configure profiles.
+	* dialogs/preferences-dialog.{ch}:
+	Added support to manage the profiles page,
+	including create the model for the treeview and
+	handlers for the signals.
+	* dialogs/profile-dialog.glade:
+	Added ui for the profile dialog.
+	* dialogs/profile-dialog.{ch}:
+	Added GtranslatorProfileDialog class.
+	* application.{ch}:
+	Added profiles list, active profile and
+	preferences-dialog to application object, including
+	methods set and get.
+	* actions-file.c:
+	(gtranslator_file_quit): Save profiles list in xml
+	when the application is closed.
+	* main.c:
+	Load profiles list.
+	
+	Added new feature: support different profiles for the translator.
+
 2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* statusbar.c:
