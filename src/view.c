@@ -194,17 +194,32 @@ gtranslator_view_class_init (GtranslatorViewClass *klass)
 	object_class->finalize = gtranslator_view_finalize;
 }
 
+/**
+ * gtranslator_view_new:
+ *
+ * Creates a new #GtranslatorView. An empty default buffer will be created for you.
+ * 
+ * Returns: a new #GtranslatorView
+ */
 GtkWidget *
 gtranslator_view_new (void)
 {
 	GtkWidget *view;
 	
 	view = GTK_WIDGET (g_object_new (GTR_TYPE_VIEW, NULL));
-	gtk_widget_show_all(view);
 	return view;
 }
 
-
+/**
+ * gtranslator_view_get_selected_text:
+ * @view: a #GtranslatorView
+ * @selected_text: it stores the text selected in the #GtranslatorView
+ * @len: it stores the length of the @selected_text
+ *
+ * Gets the selected text region of the #GtranslatorView
+ *
+ * Returns: TRUE if the @selected_text was got correctly.
+ */
 gboolean
 gtranslator_view_get_selected_text (GtranslatorView *view,
 				    gchar         **selected_text,
@@ -300,6 +315,13 @@ gtranslator_view_enable_visible_whitespace(GtranslatorView *view,
 	gtk_widget_queue_draw (GTK_WIDGET (view));
 }
 
+/**
+ * gtranslator_view_cut_clipboard:
+ * @view: a #GtranslatorView
+ *
+ * Copies the currently-selected text to a clipboard,
+ * then deletes said text if it's editable.
+ */
 void
 gtranslator_view_cut_clipboard (GtranslatorView *view)
 {
@@ -328,6 +350,12 @@ gtranslator_view_cut_clipboard (GtranslatorView *view)
 				      0.0);
 }
 
+/**
+ * gtranslator_view_copy_clipboard:
+ * @view: a #GtranslatorView
+ *
+ * Copies the currently-selected text to a clipboard.
+ */
 void
 gtranslator_view_copy_clipboard (GtranslatorView *view)
 {
@@ -347,6 +375,13 @@ gtranslator_view_copy_clipboard (GtranslatorView *view)
 	/* on copy do not scroll, we are already on screen */
 }
 
+/**
+ * gtranslator_view_cut_clipboard:
+ * @view: a #GtranslatorView
+ *
+ * Pastes the contents of a clipboard at the insertion point,
+ * or at override_location.
+ */
 void
 gtranslator_view_paste_clipboard (GtranslatorView *view)
 {
@@ -407,8 +442,13 @@ gtranslator_view_set_font (GtranslatorView *view,
 }
 
 
-/*
- * Search funcs
+/**
+ * gtranslator_view_set_search_text:
+ * @view: a #GtranslatorView
+ * @text: the text to set for searching
+ * @flags: a #GtranslatorSearchFlags
+ *
+ * Stores the text to search for in the @view with some specific @flags.
  */
 void
 gtranslator_view_set_search_text (GtranslatorView *view,
@@ -474,9 +514,19 @@ gtranslator_view_set_search_text (GtranslatorView *view,
 		g_object_notify (G_OBJECT (doc), "can-search-again");
 }
 
+/**
+ * gtranslator_view_get_search_text:
+ * @view: a #GtranslatorView
+ * @flags: the #GtranslatorSearchFlags of the stored text.
+ * 
+ * Returns the text to search for it and the #GtranslatorSearchFlags of that
+ * text.
+ * 
+ * Returns: the text to search for it.
+ */
 gchar *
 gtranslator_view_get_search_text (GtranslatorView *view,
-				guint         *flags)
+				  guint         *flags)
 {
 	g_return_val_if_fail (GTR_IS_VIEW (view), NULL);
 
@@ -486,6 +536,12 @@ gtranslator_view_get_search_text (GtranslatorView *view,
 	return gtranslator_utils_escape_search_text (view->priv->search_text);
 }
 
+/**
+ * gtranslator_view_get_can_search_again:
+ * @view: a #GtranslatorView
+ * 
+ * Returns: TRUE if it can search again
+ */
 gboolean
 gtranslator_view_get_can_search_again (GtranslatorView *view)
 {
@@ -495,8 +551,24 @@ gtranslator_view_get_can_search_again (GtranslatorView *view)
 	        (*view->priv->search_text != '\0'));
 }
 
+/**
+ * gtranslator_view_search_forward:
+ * @view: a #GtranslatorView
+ * @start: start of search 
+ * @end: bound for the search, or %NULL for the end of the buffer
+ * @match_start: return location for start of match, or %NULL
+ * @match_end: return location for end of match, or %NULL
+ * 
+ * Searches forward for str. Any match is returned by setting match_start to the
+ * first character of the match and match_end to the first character after the match.
+ * The search will not continue past limit.
+ * Note that a search is a linear or O(n) operation, so you may wish to use limit
+ * to avoid locking up your UI on large buffers. 
+ * 
+ * Returns: whether a match was found
+ */
 gboolean
-gtranslator_view_search_forward (GtranslatorView     *view,
+gtranslator_view_search_forward (GtranslatorView   *view,
 				 const GtkTextIter *start,
 				 const GtkTextIter *end,
 				 GtkTextIter       *match_start,
@@ -567,9 +639,25 @@ gtranslator_view_search_forward (GtranslatorView     *view,
 	
 	return found;			    
 }
-						 
+
+/**
+ * gtranslator_view_search_backward:
+ * @view: a #GtranslatorView
+ * @start: start of search 
+ * @end: bound for the search, or %NULL for the end of the buffer
+ * @match_start: return location for start of match, or %NULL
+ * @match_end: return location for end of match, or %NULL
+ * 
+ * Searches backward for str. Any match is returned by setting match_start to the
+ * first character of the match and match_end to the first character after the match.
+ * The search will not continue past limit.
+ * Note that a search is a linear or O(n) operation, so you may wish to use limit
+ * to avoid locking up your UI on large buffers. 
+ * 
+ * Returns: whether a match was found
+ */
 gboolean
-gtranslator_view_search_backward (GtranslatorView     *view,
+gtranslator_view_search_backward (GtranslatorView   *view,
 				  const GtkTextIter *start,
 				  const GtkTextIter *end,
 				  GtkTextIter       *match_start,
@@ -641,6 +729,18 @@ gtranslator_view_search_backward (GtranslatorView     *view,
 	return found;		      
 }
 
+/**
+ * gtranslator_view_replace_all:
+ * @view: a #GtranslatorView
+ * @find: the text to find
+ * @replace: the text to replace @find
+ * @flags: a #GtranslatorSearchFlags
+ * 
+ * Replaces all matches of @find with @replace and returns the number of 
+ * replacements.
+ * 
+ * Returns: the number of replacements made it.
+ */
 gint 
 gtranslator_view_replace_all (GtranslatorView     *view,
 			      const gchar         *find, 

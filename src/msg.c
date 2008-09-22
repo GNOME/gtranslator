@@ -78,6 +78,8 @@ gtranslator_msg_class_init (GtranslatorMsgClass *klass)
 /**
  * gtranslator_msg_new:
  * 
+ * Creates a new #GtranslatorMsg.
+ * 
  * Return value: a new #GtranslatorMsg object
  **/
 GtranslatorMsg *
@@ -121,8 +123,9 @@ gtranslator_msg_set_message(GtranslatorMsg *msg,
  * gtranslator_msg_get_row_reference:
  * @msg: a #GtranslatorMsg
  *
- * Return value: the GtkTreeRowReference corresponding to the message's place in the message table
- **/
+ * Returns: the #GtkTreeRowReference corresponding to the message's place
+ * in the message table
+ */
 GtkTreeRowReference *
 gtranslator_msg_get_row_reference(GtranslatorMsg *msg)
 {

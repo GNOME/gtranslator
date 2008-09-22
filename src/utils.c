@@ -174,6 +174,15 @@ gtranslator_xml_open_file (const gchar *filename)
   return doc;
 }
 
+/**
+ * gtranslator_gtk_button_new_with_stock_icon:
+ * @label: the label of the button
+ * @stock_id: the id of the stock image
+ * 
+ * Convenience function to create a #GtkButton with a stock image.
+ * 
+ * Returns: a new #GtkButton
+ */
 GtkWidget *
 gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
 				      const gchar *stock_id)
@@ -188,12 +197,22 @@ gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
         return button;
 }
 
+/**
+ * gtranslator_utils_menu_position_under_widget:
+ * @menu: a #GtkMenu
+ * @x: the x position of the widget
+ * @y: the y position of the widget
+ * @push_in: 
+ * @user_data: the widget to get the position
+ * 
+ * It returns the position to popup a menu in a specific widget.
+ */
 void
 gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
-					gint     *x,
-					gint     *y,
-					gboolean *push_in,
-					gpointer  user_data)
+					      gint     *x,
+					      gint     *y,
+					      gboolean *push_in,
+					      gpointer  user_data)
 {
 	GtkWidget *w = GTK_WIDGET (user_data);
 	GtkRequisition requisition;
@@ -215,12 +234,22 @@ gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
 	*push_in = TRUE;
 }
 
+/**
+ * gtranslator_utils_menu_position_under_widget:
+ * @menu: a #GtkMenu
+ * @x: the x position of the widget
+ * @y: the y position of the widget
+ * @push_in: 
+ * @user_data: the widget to get the position
+ * 
+ * It returns the position to popup a menu in a TreeView.
+ */
 void
 gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
-					   gint     *x,
-					   gint     *y,
-					   gboolean *push_in,
-					   gpointer  user_data)
+						 gint     *x,
+						 gint     *y,
+						 gboolean *push_in,
+						 gpointer  user_data)
 {
 	GtkTreeView *tree = GTK_TREE_VIEW (user_data);
 	GtkTreeModel *model;
@@ -279,7 +308,7 @@ gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
  * of error it returns FALSE and sets error_widget to a GtkLabel containing
  * the error message to display.
  *
- * Returns FALSE if an error occurs, TRUE on success.
+ * Returns: FALSE if an error occurs, TRUE on success.
  */
 gboolean
 gtranslator_utils_get_glade_widgets (const gchar *filename,
@@ -433,7 +462,6 @@ gtranslator_utils_is_valid_uri (const gchar *uri)
 /**
  * gtranslator_utils_drop_get_uris:
  * @selection_data: the #GtkSelectionData from drag_data_received
- * @info: the info from drag_data_received
  *
  * Create a list of valid uri's from a uri-list drop.
  * 
@@ -640,11 +668,20 @@ finally_2:
 	return ret;
 }
 
+/**
+ * gtranslator_utils_activate_url:
+ * @dialog: a #GtkAboutDialog
+ * @url: the url to show
+ * @data: useless data variable
+ * 
+ * Shows the corresponding @url in the default browser.
+ */
 void
 gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 				const gchar *url,
 				gpointer data)
 {
+	//FIXME: gtk_url_show deprecates this func.
 	gchar *open[3];
 
 	if (g_find_program_in_path ("xdg-open"))
@@ -665,6 +702,14 @@ gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 			     NULL, NULL, NULL);
 }
 
+/**
+ * gtranslator_utils_help_display:
+ * @parent: a #GtkWindow
+ * @doc_id: the name of the type of doc
+ * @file_name: the name of the doc
+ * 
+ * Shows the help for an specific document in the default help browser.
+ */
 void
 gtranslator_utils_help_display (GtkWindow   *parent,
 				const gchar *doc_id,
@@ -730,6 +775,13 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 	g_free (command);
 }
 
+/**
+ * gtranslator_utils_get_user_config_dir:
+ * 
+ * Returns the default config dir for gtranslator.
+ * 
+ * Returns: the config dir for gtranslator.
+ */
 gchar *
 gtranslator_utils_get_user_config_dir (void)
 {

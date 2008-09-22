@@ -584,6 +584,8 @@ gtranslator_tab_class_init (GtranslatorTabClass *klass)
  * gtranslator_tab_new:
  * @po: a #GtranslatorPo
  * 
+ * Creates a new #GtranslatorTab.
+ * 
  * Return value: a new #GtranslatorTab object
  **/
 GtranslatorTab *
@@ -806,12 +808,28 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 	
 }
 
+/**
+ * _gtranslator_tab_can_close:
+ * @tab: a #GtranslatorTab
+ *
+ * Whether a #GtranslatorTab can be closed.
+ *
+ * Returns: TRUE if the #GtranslatorPo of the @tab is already saved
+ */
 gboolean
 _gtranslator_tab_can_close (GtranslatorTab *tab)
 {
 	return gtranslator_po_get_state (tab->priv->po) == GTR_PO_STATE_SAVED;
 }
 
+/**
+ * gtranslator_tab_get_from_document:
+ * @po: a #GtranslatorPo
+ *
+ * Returns the #GtranslatorTab for a specific #GtranslatorPo.
+ *
+ * Returns: the #GtranslatorTab for a specific #GtranslatorPo
+ */
 GtranslatorTab *
 gtranslator_tab_get_from_document (GtranslatorPo *po)
 {

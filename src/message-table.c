@@ -384,6 +384,14 @@ gtranslator_message_table_class_init (GtranslatorMessageTableClass *klass)
 	object_class->finalize = gtranslator_message_table_finalize;
 }
 
+/**
+ * gtranslator_message_table_new:
+ * @tab: a #GtranslatorTab
+ *
+ * Creates a new #GtranslatorMessageTable object.
+ *
+ * Returns: the newly created #GtranslatorMessageTable
+ */
 GtkWidget *
 gtranslator_message_table_new (GtkWidget *tab)
 {
@@ -401,6 +409,14 @@ gtranslator_message_table_new (GtkWidget *tab)
 	return GTK_WIDGET(obj);
 }
 
+/**
+ * gtranslator_message_table_populate:
+ * @table: a #GtranslatorMessageTable
+ * @messages: a list of #GtranslatorMsg
+ *
+ * Populates the #GtranslatorMessageTable with the list of #GtranslatorMsg and
+ * sort them.
+ */
 void 
 gtranslator_message_table_populate(GtranslatorMessageTable *table, 
 				   GList *messages)

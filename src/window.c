@@ -1516,6 +1516,16 @@ gtranslator_window_class_init (GtranslatorWindowClass *klass)
 
 /***************************** Public funcs ***********************************/
 
+/**
+ * gtranslator_window_create_tab:
+ * @window: a #GtranslatorWindow
+ * @po: a #GtranslatorPo
+ * 
+ * Adds a new #GtranslatorTab to the #GtranslatorNotebook and returns the
+ * #GtranslatorTab.
+ * 
+ * Returns: a new #GtranslatorTab object
+ */
 GtranslatorTab *
 gtranslator_window_create_tab(GtranslatorWindow *window,
 			      GtranslatorPo *po)
@@ -1530,12 +1540,28 @@ gtranslator_window_create_tab(GtranslatorWindow *window,
 	return tab;
 }
 
+/**
+ * gtranslator_window_get_active_tab:
+ * @window: a #GtranslatorWindow
+ * 
+ * Gets the active #GtranslatorTab of the @window.
+ *
+ * Returns: the active #GtranslatorTab of the @window.
+ */
 GtranslatorTab *
 gtranslator_window_get_active_tab(GtranslatorWindow *window)
 {
 	return gtranslator_notebook_get_page(GTR_NOTEBOOK(window->priv->notebook));
 }
 
+/**
+ * gtranslator_window_get_all_tabs:
+ * @window: a #GtranslatorWindow
+ *
+ * Gets a list of all tabs in the @window or NULL if there is no tab opened.
+ *
+ * Returns: a list of all tabs in the @window or NULL if there is no tab opened.
+ */
 GList *
 gtranslator_window_get_all_tabs(GtranslatorWindow *window)
 {
@@ -1555,6 +1581,16 @@ gtranslator_window_get_all_tabs(GtranslatorWindow *window)
 	return toret;
 }
 
+/**
+ * gtranslator_window_get_header_from_active_tab:
+ * @window: a #GtranslatorWindow
+ *
+ * Gets the #GtranslatorHeader of the #GtranslatorPo of in the active
+ * #GtranslatorTab.
+ *
+ * Returns: the #GtranslatorHeader of the #GtranslatorPo of in the active
+ * #GtranslatorTab
+ */
 GtranslatorHeader *
 gtranslator_window_get_header_from_active_tab(GtranslatorWindow *window)
 {
@@ -1574,18 +1610,42 @@ gtranslator_window_get_header_from_active_tab(GtranslatorWindow *window)
 	return header;	
 }
 
+/**
+ * gtranslator_window_get_notebook:
+ * @window: a #GtranslatorWindow
+ * 
+ * Gets the main #GtranslatorNotebook of the @window.
+ *
+ * Returns: the #GtranslatorNotebook of the @window
+ */
 GtranslatorNotebook *
 gtranslator_window_get_notebook(GtranslatorWindow *window)
 {
 	return GTR_NOTEBOOK(window->priv->notebook);
 }
 
+/**
+ * gtranslator_window_get_statusbar:
+ * @window: a #GtranslatorWindow
+ *
+ * Gets the statusbar widget of the window.
+ *
+ * Returns: the statusbar widget of the window
+ */
 GtkWidget *
 gtranslator_window_get_statusbar(GtranslatorWindow *window)
 {
 	return window->priv->statusbar;
 }
 
+/**
+ * gtranslator_window_get_ui_manager:
+ * @window: a #GtranslatorWindow
+ *
+ * Gets the #GtkUIManager of the window.
+ *
+ * Returns: the #GtkUIManager of the @window
+ */
 GtkUIManager *
 gtranslator_window_get_ui_manager(GtranslatorWindow *window)
 {
@@ -1596,7 +1656,10 @@ gtranslator_window_get_ui_manager(GtranslatorWindow *window)
  * gtranslator_window_get_active_view:
  * @window: a #GtranslationWindow
  *
- * Return value: the active translation view in the #GtranslationWindow or
+ * Gets the active translation view in the #GtranslationWindow or
+ * NULL if there is not tab opened.
+ *
+ * Returns: the active translation view in the #GtranslationWindow or
  * NULL if there is not tab opened.
  **/
 GtranslatorView *
@@ -1649,6 +1712,18 @@ gtranslator_window_get_all_views(GtranslatorWindow *window,
 	return views;
 }
 
+/**
+ * gtranslator_window_add_widget:
+ * @window: a #GtranslatorWindow
+ * @widget: the widget to add in the window
+ * @name: the name of the widged
+ * @title: the title
+ * @stock_id: the stock id for the icon
+ * @placement: a #GtranslatorWindowPlacement
+ *
+ * Adds a new widget to the @window in the placement you prefer with and 
+ * specific name, title and icon you want.
+ */
 void
 gtranslator_window_add_widget (GtranslatorWindow *window,
 			       GtkWidget *widget,
@@ -1663,6 +1738,13 @@ gtranslator_window_add_widget (GtranslatorWindow *window,
 			 placement, FALSE, NULL);
 }
 
+/**
+ * gtranslator_window_remove_widget:
+ * @window: a #GtranslatorWindow
+ * @widget: the widget to remove
+ *
+ * Removes from the @window the @widget if it exists.
+ */
 void
 gtranslator_window_remove_widget (GtranslatorWindow *window,
 				  GtkWidget *widget)
@@ -1671,6 +1753,14 @@ gtranslator_window_remove_widget (GtranslatorWindow *window,
 	remove_widget (window, widget, NULL);
 }
 
+/**
+ * _gtranslator_window_get_layout_manager:
+ * @window: a #GtranslatorWindow
+ * 
+ * Gets the GDL layout manager of the window.
+ * 
+ * Returns: the GDL layout manager of the window.
+ */
 GObject *
 _gtranslator_window_get_layout_manager (GtranslatorWindow *window)
 {
@@ -1679,6 +1769,16 @@ _gtranslator_window_get_layout_manager (GtranslatorWindow *window)
 	return G_OBJECT (window->priv->layout_manager);
 }
 
+/**
+ * gtranslator_window_get_tab_from_uri:
+ * @window: a #GtranslatorWindow
+ * @uri: the path/uri of the po file of the #GtranslatorTab
+ *
+ * Gets the #GtranslatorTab of the #GtranslatorWindows that matches with the
+ * @uri.
+ *
+ * Returns: the #GtranslatorTab which @uri matches with its po file.
+ */
 GtkWidget *
 gtranslator_window_get_tab_from_uri (GtranslatorWindow *window,
 				     const gchar *uri)
@@ -1712,6 +1812,13 @@ gtranslator_window_get_tab_from_uri (GtranslatorWindow *window,
 	return NULL;
 }
 
+/**
+ * gtranslator_window_set_active_tab:
+ * @window: a #GtranslatorWindow
+ * @tab: a #GtranslatorTab
+ *
+ * Sets the active tab for the @window.
+ */
 void
 gtranslator_window_set_active_tab (GtranslatorWindow *window,
 				   GtkWidget *tab)
@@ -1725,6 +1832,14 @@ gtranslator_window_set_active_tab (GtranslatorWindow *window,
 				       page);
 }
 
+/**
+ * _gtranslator_window_close_tab:
+ * @window: a #GtranslatorWindow
+ * @tab: a #GtranslatorTab
+ *
+ * Closes the opened @tab of the @window and sets the right sensitivity of the
+ * widgets.
+ */
 void
 _gtranslator_window_close_tab (GtranslatorWindow *window,
 			       GtranslatorTab *tab)

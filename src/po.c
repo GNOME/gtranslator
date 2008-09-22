@@ -259,7 +259,9 @@ on_gettext_po_xerror2(gint severity,
 /**
  * gtranslator_po_new:
  *
- * Return value: a new #GtranslatorPo object
+ * Creates a new #GtranslatorPo.
+ *
+ * Returns: a new #GtranslatorPo object
  **/
 GtranslatorPo *
 gtranslator_po_new(void)
@@ -277,7 +279,8 @@ gtranslator_po_new(void)
  * @filename: the filename path to open
  * @error: a variable to store the errors
  *
- * 
+ * Parses all things related to the #GtranslatorPo and initilizes all neccessary
+ * variables.
  **/
 void
 gtranslator_po_parse(GtranslatorPo *po,
@@ -692,7 +695,9 @@ gtranslator_po_save_file(GtranslatorPo *po,
  * gtranslator_po_get_filename:
  * @po: a #GtranslatorPo
  * 
- * Return value: the file name string
+ * Gets the path of the po file.
+ * 
+ * Returns: the file name string
  **/
 const gchar *
 gtranslator_po_get_filename(GtranslatorPo *po)

@@ -231,6 +231,13 @@ app_weak_notify (gpointer data,
         gtk_main_quit ();
 }
 
+/**
+ * gtranslator_application_get_default:
+ * 
+ * Returns the default instance of the application.
+ * 
+ * Returns: the default instance of the application.
+ */
 GtranslatorApplication *
 gtranslator_application_get_default (void)
 {
@@ -247,6 +254,14 @@ gtranslator_application_get_default (void)
 	return instance;
 }
 
+/**
+ * gtranslator_application_open_window:
+ * @app: a #GtranslatorApplication
+ *
+ * Creates a new #GtranslatorWindow and shows it.
+ * 
+ * Returns: the #GtranslatorWindow to be opened
+ */
 GtranslatorWindow *
 gtranslator_application_open_window (GtranslatorApplication *app)
 {
@@ -282,13 +297,26 @@ gtranslator_application_open_window (GtranslatorApplication *app)
 	return window;
 }
 				     
-
+/**
+ * _gtranslator_application_get_toolbars_model:
+ * @application: a #GtranslatorApplication
+ * 
+ * Returns the toolbar model.
+ * 
+ * Retuns: the toolbar model.
+ */
 GObject *
 _gtranslator_application_get_toolbars_model (GtranslatorApplication *application)
 {
 	return G_OBJECT (application->priv->toolbars_model);
 }
 
+/**
+ * _gtranslator_application_save_toolbars_model:
+ * @application: a #GtranslatorApplication
+ * 
+ * Saves the toolbar model.
+ */
 void
 _gtranslator_application_save_toolbars_model (GtranslatorApplication *application)
 {
@@ -296,6 +324,12 @@ _gtranslator_application_save_toolbars_model (GtranslatorApplication *applicatio
 			 	          application->priv->toolbars_file, "1.0");
 }
 
+/**
+ * gtranslator_application_shutdown:
+ * @app: a #GtranslatorApplication
+ * 
+ * Shutdowns the application.
+ */
 void
 gtranslator_application_shutdown(GtranslatorApplication *app)
 {
@@ -366,6 +400,14 @@ gtranslator_application_get_windows (GtranslatorApplication *app)
 	return app->priv->windows;
 }
 
+/**
+ * gtranslator_application_register_icon:
+ * @app: a #GtranslatorApplication
+ * @icon: the name of the icon
+ * @stock_id: the stock id for the new icon
+ * 
+ * Registers a new @icon with the @stock_id.
+ */
 void
 gtranslator_application_register_icon (GtranslatorApplication *app,
 				       const gchar *icon,

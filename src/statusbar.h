@@ -53,6 +53,11 @@ GType		 gtranslator_statusbar_get_type	                (void) G_GNUC_CONST;
 
 GtkWidget	*gtranslator_statusbar_new			(void);
 
+void             gtranslator_statusbar_push_default             (GtranslatorStatusbar *statusbar,
+								 const gchar *text);
+
+void             gtranslator_statusbar_pop_default              (GtranslatorStatusbar *statusbar);
+
 guint            gtranslator_statusbar_push                     (GtranslatorStatusbar *statusbar,
 								 guint context_id,
 								 const gchar *text);
