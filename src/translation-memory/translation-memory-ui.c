@@ -176,6 +176,7 @@ showed_message_cb (GtranslatorTab *tab,
       g_object_set (renderers_list->data,
 		    "accel-mods", GDK_CONTROL_MASK,
 		    NULL);
+      g_list_free (renderers_list);
       
       gtk_list_store_append (model, &iter);
       gtk_list_store_set (model,
@@ -262,6 +263,8 @@ tree_view_size_cb (GtkWidget     *widget,
 	g_object_set (renderers_list->data,
 		      "wrap-width", size-10,
 		      NULL);
+	
+	g_list_free (renderers_list);
 }
 
 

@@ -69,6 +69,7 @@ check_good_word (const gchar *word, gchar **badwords)
 		if (strcmp (lower_collate, badwords[i]) == 0)
 		{
 			check = FALSE;
+			g_free (lower_collate);
 			break;
 		}
 		i++;
@@ -101,7 +102,7 @@ gtranslator_utils_split_string_in_words (const gchar *string)
 		gint words_size = g_strv_length ((gchar **)badwords);
 		gint x = 0;
 		
-		badwords_collate = g_new0 (gchar *, words_size);
+		badwords_collate = g_new0 (gchar *, words_size + 1);
 		
 		while (badwords[x] != NULL)
 		{

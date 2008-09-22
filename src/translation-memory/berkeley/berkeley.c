@@ -115,6 +115,7 @@ gtranslator_berkeley_store (GtranslatorTranslationMemory *tm,
 			if (strcmp (array_word, translation_collate) == 0)
 			{
 				found = TRUE;
+				g_free (array_word);
 				break;
 			}
 			
@@ -506,11 +507,12 @@ gtranslator_berkeley_lookup (GtranslatorTranslationMemory *tm,
 		{
 			while (i < array->len -1 && i < ber->priv->max_items)
 			{
-				g_hash_table_insert (hash, g_ptr_array_index (array, i),
+				g_hash_table_insert (hash, g_strdup (g_ptr_array_index (array, i)),
 						     GINT_TO_POINTER (100));
 				i++;
 			}
 			
+			g_ptr_array_free (array, TRUE);
 		
 			goto list;
 		}

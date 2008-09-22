@@ -1,5 +1,17 @@
 2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* draw-spaces.c (draw_tabs_and_spaces):
+	* po.c (gtranslator_po_init), (gtranslator_po_parse):
+	* translation-memory/berkeley/berkeley.c
+	(gtranslator_berkeley_store), (gtranslator_berkeley_lookup):
+	* translation-memory/translation-memory-ui.c (showed_message_cb),
+	(tree_view_size_cb):
+	* utils.c (check_good_word),
+	(gtranslator_utils_split_string_in_words):
+	Fixed lots of memory leaks. Thanks to José Dapena Paz.
+
+2008-09-02  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* application.c (gtranslator_application_init):
 	* translation-memory/berkeley/berkeley.c
 	(gtranslator_berkeley_lookup),

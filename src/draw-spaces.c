@@ -163,4 +163,6 @@ draw_tabs_and_spaces(GtkWidget *view, GdkEventExpose *event,
 		if(!gtk_text_iter_forward_char(&iter))
 			break;
 	}
+	
+	cairo_destroy (cr);
 }

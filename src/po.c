@@ -180,6 +180,7 @@ gtranslator_po_init (GtranslatorPo *po)
 	po->priv = GTR_PO_GET_PRIVATE (po);
 	
 	po->priv->location = NULL;
+	po->priv->gettext_po_file = NULL;
 }
 
 static void
@@ -344,6 +345,9 @@ gtranslator_po_parse (GtranslatorPo *po,
 	po->priv->location = g_file_dup (location);
 	filename = g_file_get_path (location);
 	
+	if (po->priv->gettext_po_file)
+		po_file_free (po->priv->gettext_po_file);
+	
 	priv->gettext_po_file = po_file_read (filename,
 					      &handler);
 	if (priv->gettext_po_file == NULL)
@@ -366,7 +370,7 @@ gtranslator_po_parse (GtranslatorPo *po,
 		g_set_error(error,
 			    GTR_PO_ERROR,
 			    GTR_PO_ERROR_RECOVERY,
-			    message_error);
+			    "%s", message_error);
 	}
 	
 	if (po_file_is_empty (priv->gettext_po_file))
