@@ -34,6 +34,7 @@
 #include "po.h"
 #include "prefs-manager.h"
 #include "view.h"
+#include "translation-memory.h"
 #include "translation-memory-ui.h"
 #include "window.h"
 
@@ -181,6 +182,19 @@ gtranslator_tab_showed_message (GtranslatorTab *tab,
 	if (strcmp (gtranslator_msg_get_comment (msg), "") != 0)
 		gtk_widget_show (tab->priv->comment_button);
 	else gtk_widget_hide (tab->priv->comment_button);
+}
+
+static void
+gtranslator_tab_edition_finished (GtranslatorTab *tab,
+				  GtranslatorMsg *msg)
+{
+  GtranslatorTranslationMemory *tm;
+  
+  tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
+  
+  gtranslator_translation_memory_store (tm,
+					gtranslator_msg_get_msgid (msg),
+					gtranslator_msg_get_msgstr (msg));
 }
 
 /*
@@ -801,7 +815,8 @@ gtranslator_tab_class_init (GtranslatorTabClass *klass)
 	object_class->set_property = gtranslator_tab_set_property;
 	object_class->get_property = gtranslator_tab_get_property;
 	klass->showed_message = gtranslator_tab_showed_message;
-	
+	klass->message_edition_finished = gtranslator_tab_edition_finished;
+
 	/* Signals */
 	signals[SHOWED_MESSAGE] = 
 		g_signal_new("showed-message",
@@ -1090,7 +1105,6 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 	if (!searching)
 		g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
 			       GTR_MSG (to_go->data)); 
-	
 }
 
 /**
