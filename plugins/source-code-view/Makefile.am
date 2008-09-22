@@ -1,4 +1,4 @@
-# source-view plugin
+# source-code-view plugin
 plugindir = $(libdir)/gtranslator/plugins
 
 INCLUDES = \
@@ -12,15 +12,15 @@ INCLUDES = \
 	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
 plugin_LTLIBRARIES = \
-	libsourceview.la
+	libsourcecodeview.la
 
-libsourceview_la_SOURCES = \
-	source-view-plugin.c \
-	source-view-plugin.h \
+libsourcecodeview_la_SOURCES = \
+	source-code-view-plugin.c \
+	source-code-view-plugin.h \
 	viewer.c \
 	viewer.h
 
-libsourceview_la_LDFLAGS = \
+libsourcecodeview_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
 	$(GTRANSLATOR_LIBS)
 
@@ -28,11 +28,11 @@ gladedir = $(pkgdatadir)
 
 glade_DATA =  \
         viewer.glade \
-	source-view-dialog.glade
+	source-code-view-dialog.glade
 
 # Plugin Info
 
-plugin_in_files = source-view.gtranslator-plugin.desktop.in
+plugin_in_files = source-code-view.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 

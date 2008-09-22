@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#include "source-view-plugin.h"
+#include "source-code-view-plugin.h"
 #include "comment.h"
 #include "utils.h"
 #include "viewer.h"
@@ -33,20 +33,20 @@
 #include <gconf/gconf-client.h>
 
 /* Gconf keys */
-#define SOURCE_VIEW_BASE_KEY "/apps/gtranslator/plugins/source-view"
-#define USE_EDITOR_KEY SOURCE_VIEW_BASE_KEY "/use_editor"
-#define PROGRAM_CMD_KEY SOURCE_VIEW_BASE_KEY "/program_cmd"
-#define LINE_CMD_KEY SOURCE_VIEW_BASE_KEY "/line_cmd"
+#define SOURCE_CODE_VIEW_BASE_KEY "/apps/gtranslator/plugins/source-view"
+#define USE_EDITOR_KEY SOURCE_CODE_VIEW_BASE_KEY "/use_editor"
+#define PROGRAM_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/program_cmd"
+#define LINE_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/line_cmd"
 
 /* Glade */
 #define GLADE_FILE DATADIR"/source-view-dialog.glade"
 
-#define GTR_SOURCE_VIEW_PLUGIN_GET_PRIVATE(object) \
+#define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
-				GTR_TYPE_SOURCE_VIEW_PLUGIN,		\
-				GtranslatorSourceViewPluginPrivate))
+				GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN,		\
+				GtranslatorSourceCodeViewPluginPrivate))
 
-struct _GtranslatorSourceViewPluginPrivate
+struct _GtranslatorSourceCodeViewPluginPrivate
 {
 	GConfClient *gconf_client;
 	
@@ -64,7 +64,7 @@ struct _GtranslatorSourceViewPluginPrivate
 	gint inserted_lines;
 };
 
-GTR_PLUGIN_REGISTER_TYPE(GtranslatorSourceViewPlugin, gtranslator_source_view_plugin)
+GTR_PLUGIN_REGISTER_TYPE(GtranslatorSourceCodeViewPlugin, gtranslator_source_code_view_plugin)
 
 static void 
 insert_link (GtkTextBuffer *buffer, 
@@ -129,7 +129,7 @@ show_in_editor (const gchar *program_name,
 }
 
 static void
-show_source (GtranslatorSourceViewPlugin *plugin,
+show_source (GtranslatorSourceCodeViewPlugin *plugin,
 	     const gchar *path,
 	     gint line)
 {
@@ -166,7 +166,7 @@ show_source (GtranslatorSourceViewPlugin *plugin,
 }
 
 static void
-follow_if_link (GtranslatorSourceViewPlugin *plugin,
+follow_if_link (GtranslatorSourceCodeViewPlugin *plugin,
 		GtkWidget   *text_view, 
 		GtkTextIter *iter)
 {
@@ -208,7 +208,7 @@ follow_if_link (GtranslatorSourceViewPlugin *plugin,
 static gboolean
 event_after (GtkWidget *text_view,
 	     GdkEvent  *ev,
-	     GtranslatorSourceViewPlugin *plugin)
+	     GtranslatorSourceCodeViewPlugin *plugin)
 {
 	GtkTextIter start, end, iter;
 	GtkTextBuffer *buffer;
@@ -331,34 +331,34 @@ visibility_notify_event (GtkWidget          *text_view,
 }
 
 static void
-gtranslator_source_view_plugin_init (GtranslatorSourceViewPlugin *plugin)
+gtranslator_source_code_view_plugin_init (GtranslatorSourceCodeViewPlugin *plugin)
 {
-	plugin->priv = GTR_SOURCE_VIEW_PLUGIN_GET_PRIVATE (plugin);
+	plugin->priv = GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE (plugin);
 
 	plugin->priv->gconf_client = gconf_client_get_default ();
 
 	gconf_client_add_dir (plugin->priv->gconf_client,
-			      SOURCE_VIEW_BASE_KEY,
+			      SOURCE_CODE_VIEW_BASE_KEY,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL,
 			      NULL);
 }
 
 static void
-gtranslator_source_view_plugin_finalize (GObject *object)
+gtranslator_source_code_view_plugin_finalize (GObject *object)
 {
-	GtranslatorSourceViewPlugin *plugin = GTR_SOURCE_VIEW_PLUGIN (object);
+	GtranslatorSourceCodeViewPlugin *plugin = GTR_SOURCE_CODE_VIEW_PLUGIN (object);
 	
 	gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
 
 	g_object_unref (G_OBJECT (plugin->priv->gconf_client));
 	
-	G_OBJECT_CLASS (gtranslator_source_view_plugin_parent_class)->finalize (object);
+	G_OBJECT_CLASS (gtranslator_source_code_view_plugin_parent_class)->finalize (object);
 }
 
 static void
 showed_message_cb (GtranslatorTab *tab,
 		   GtranslatorMsg *msg,
-		   GtranslatorSourceViewPlugin *plugin)
+		   GtranslatorSourceCodeViewPlugin *plugin)
 {
 	const gchar *filename = NULL;
 	gint i = 0;
@@ -392,7 +392,7 @@ showed_message_cb (GtranslatorTab *tab,
 static void
 message_edition_finished_cb (GtranslatorTab *tab,
 			     GtranslatorMsg *msg,
-			     GtranslatorSourceViewPlugin *plugin)
+			     GtranslatorSourceCodeViewPlugin *plugin)
 {
 	GSList *tags = NULL, *tagp = NULL;
 	GtkTextIter iter;
@@ -434,7 +434,7 @@ static void
 page_added_cb (GtkNotebook *notebook,
 	       GtkWidget *child,
 	       guint page_num,
-	       GtranslatorSourceViewPlugin *plugin)
+	       GtranslatorSourceCodeViewPlugin *plugin)
 {	
 	GtranslatorCommentPanel *panel;
 	GtkTextView *view;
@@ -457,14 +457,14 @@ page_added_cb (GtkNotebook *notebook,
 
 static void
 use_editor_toggled (GtkToggleButton *button,
-		    GtranslatorSourceViewPlugin *plugin)
+		    GtranslatorSourceCodeViewPlugin *plugin)
 {
 	gtk_widget_set_sensitive (plugin->priv->program_box,
 				  gtk_toggle_button_get_active (button));
 }
 
 static GtkWidget *
-get_configuration_dialog (GtranslatorSourceViewPlugin *plugin)
+get_configuration_dialog (GtranslatorSourceCodeViewPlugin *plugin)
 {
 
 	gboolean ret;
@@ -532,7 +532,7 @@ impl_activate (GtranslatorPlugin *plugin,
 	       GtranslatorWindow *window)
 {	
 	GtkWidget *notebook;
-	GtranslatorSourceViewPlugin *source_view = GTR_SOURCE_VIEW_PLUGIN (plugin);
+	GtranslatorSourceCodeViewPlugin *source_code_view = GTR_SOURCE_CODE_VIEW_PLUGIN (plugin);
 	GList *tabs, *l;
 
 	/*
@@ -543,7 +543,7 @@ impl_activate (GtranslatorPlugin *plugin,
 	
 	notebook = GTK_WIDGET (gtranslator_window_get_notebook (window));
 	
-	source_view->priv->window = window;
+	source_code_view->priv->window = window;
 	
 	g_signal_connect (notebook, "page-added",
 			  G_CALLBACK (page_added_cb), plugin);
@@ -555,7 +555,7 @@ impl_activate (GtranslatorPlugin *plugin,
 	for (l = tabs; l != NULL; l = g_list_next (l))
 	{
 		page_added_cb (GTK_NOTEBOOK (notebook),
-			       l->data, 0, GTR_SOURCE_VIEW_PLUGIN (plugin));
+			       l->data, 0, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 	}
 }
 
@@ -597,7 +597,7 @@ impl_deactivate(GtranslatorPlugin *plugin,
 }
 
 static void
-ok_button_pressed (GtranslatorSourceViewPlugin *plugin)
+ok_button_pressed (GtranslatorSourceCodeViewPlugin *plugin)
 {
 	const gchar *program_cmd;
 	const gchar *line_cmd;
@@ -643,7 +643,7 @@ ok_button_pressed (GtranslatorSourceViewPlugin *plugin)
 static void
 configure_dialog_response_cb (GtkWidget           *widget,
 			      gint                 response,
-			      GtranslatorSourceViewPlugin *plugin)
+			      GtranslatorSourceCodeViewPlugin *plugin)
 {
 	switch (response)
 	{
@@ -666,12 +666,12 @@ impl_create_configure_dialog (GtranslatorPlugin *plugin)
 {
 	GtkWidget *dialog;
 	
-	dialog = get_configuration_dialog (GTR_SOURCE_VIEW_PLUGIN (plugin));
+	dialog = get_configuration_dialog (GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 	
 	g_signal_connect (dialog,
 			  "response",
 			  G_CALLBACK (configure_dialog_response_cb),
-			  GTR_SOURCE_VIEW_PLUGIN (plugin));
+			  GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 	g_signal_connect (dialog,
 			  "destroy",
 			  G_CALLBACK (gtk_widget_destroy),
@@ -681,16 +681,16 @@ impl_create_configure_dialog (GtranslatorPlugin *plugin)
 }
 
 static void
-gtranslator_source_view_plugin_class_init (GtranslatorSourceViewPluginClass *klass)
+gtranslator_source_code_view_plugin_class_init (GtranslatorSourceCodeViewPluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-	object_class->finalize = gtranslator_source_view_plugin_finalize;
+	object_class->finalize = gtranslator_source_code_view_plugin_finalize;
 
 	plugin_class->activate = impl_activate;
 	plugin_class->deactivate = impl_deactivate;
 	plugin_class->create_configure_dialog = impl_create_configure_dialog;
 	
-	g_type_class_add_private (object_class, sizeof (GtranslatorSourceViewPluginPrivate));
+	g_type_class_add_private (object_class, sizeof (GtranslatorSourceCodeViewPluginPrivate));
 }

@@ -2,7 +2,7 @@ SUBDIRS = 					\
 	alternate-language			\
 	fullscreen				\
 	insert-tags				\
-	source-view
+	source-code-view
 
 if USE_CHARMAP
 SUBDIRS += charmap

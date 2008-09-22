@@ -521,7 +521,7 @@ plugins/dictionary/Makefile
 plugins/fullscreen/Makefile
 plugins/insert-tags/Makefile
 plugins/open-tran/Makefile
-plugins/source-view/Makefile
+plugins/source-code-view/Makefile
 plugins/subversion/Makefile
 src/Makefile
 src/dialogs/Makefile
