@@ -767,6 +767,8 @@ gtranslator_po_save_file(GtranslatorPo *po,
 	
 	if (g_str_has_suffix (filename, ".pot"))
 	{
+		// Remove suffix
+		filename[strlen (filename) - 4] = '\0';
 		g_set_error (error,
 			     GTR_PO_ERROR,
 			     GTR_PO_ERROR_FILENAME,
