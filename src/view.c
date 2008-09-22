@@ -809,7 +809,13 @@ gtranslator_view_replace_all (GtranslatorView     *view,
 	return cont;
 }
 
-
+/**
+ * gtranslator_view_reload_scheme_color:
+ * @view: a #GtranslatorView
+ *
+ * Reloads the gtksourceview scheme color. Neccessary when the scheme color 
+ * changes.
+ */
 void
 gtranslator_view_reload_scheme_color (GtranslatorView *view)
 {
