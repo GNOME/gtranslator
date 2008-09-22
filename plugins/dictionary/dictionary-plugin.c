@@ -19,16 +19,14 @@
 #include <config.h>
 #endif
 
+#include "application.h"
 #include "dictionary-plugin.h"
 #include "dict-panel.h"
 #include "window.h"
 
 #include <glib/gi18n-lib.h>
-#include <gconf/gconf-client.h>
-//#include <gtranslator/gtranslator-debug.h>
 
 #define WINDOW_DATA_KEY	"GtranslatorDictPluginWindowData"
-#define PANEL_KEY "/apps/gtranslator/plugins/dictionary"
 
 #define GTR_DICT_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -42,20 +40,17 @@ typedef struct
 } WindowData;
 
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtranslatorDictPlugin, gtranslator_dict_plugin,
-		gtranslator_dict_panel_register_type (module);
+				    gtranslator_dict_panel_register_type (module);
 )
 
 static void
 gtranslator_dict_plugin_init (GtranslatorDictPlugin *plugin)
 {
-	//gtranslator_debug_message (DEBUG_PLUGINS, "GtranslatorDictPlugin initializing");
 }
 
 static void
 gtranslator_dict_plugin_finalize (GObject *object)
 {
-	//gtranslator_debug_message (DEBUG_PLUGINS, "GtranslatorDictPlugin finalizing");
-
 	G_OBJECT_CLASS (gtranslator_dict_plugin_parent_class)->finalize (object);
 }
 
@@ -73,59 +68,32 @@ create_dict_panel (GtranslatorWindow *window)
 {
 	GtkWidget      *panel;
 
-	panel = gtranslator_dict_panel_new ();
+	panel = gtranslator_dict_panel_new (window);
 
-	gtk_widget_show_all (panel);
+	gtk_widget_show (panel);
 
 	return panel;
-}
-
-static void
-restore_position(GtranslatorDictPanel *panel)
-{
-	GConfClient *client;
-	gint position;
-	
-	client = gconf_client_get_default();
-	position = gconf_client_get_int(client, PANEL_KEY "/panel_position", NULL);
-	gtranslator_dict_panel_set_position(panel, position);
-	
-	g_object_unref(client);
 }
 
 static void
 impl_activate (GtranslatorPlugin *plugin,
 	       GtranslatorWindow *window)
 {
-	/*GtkWidget *image;
-	GtkIconTheme *theme;*/
 	WindowData *data;
 
-	//gtranslator_debug (DEBUG_PLUGINS);
-
 	data = g_new (WindowData, 1);
-
-	/*theme = gtk_icon_theme_get_default ();
 	
-	if (gtk_icon_theme_has_icon (theme, "accessories-dictionary"))
-		image = gtk_image_new_from_icon_name ("accessories-dictionary",
-						      GTK_ICON_SIZE_MENU);
-	else
-		image = gtk_image_new_from_icon_name ("gdict",
-						      GTK_ICON_SIZE_MENU);*/
-
 	data->panel = create_dict_panel (window);
 	
-	restore_position(GTR_DICT_PANEL(data->panel));
+	gtranslator_application_register_icon (GTR_APP, "gnome-dictionary.png",
+					       "dictionary-icon");
 	
 	gtranslator_window_add_widget (window,
 				       data->panel,
 				       "GtranslatorDictionaryPlugin",
 				       _("Dictionary"),
-				       NULL,
+				       "dictionary-icon",
 				       GTR_WINDOW_PLACEMENT_LEFT);
-
-	//gtk_object_sink (GTK_OBJECT (image));
 
 	g_object_set_data_full (G_OBJECT (window),
 				WINDOW_DATA_KEY,
