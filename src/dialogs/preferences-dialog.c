@@ -659,6 +659,7 @@ typedef struct _IdleData
 	GList *list;
 	GtkProgressBar *progress;
 	GtranslatorTranslationMemory *tm;
+	GtkWindow *parent;
 }IdleData;
 
 static gboolean
@@ -703,8 +704,23 @@ add_to_database (gpointer data_pointer)
 	}
 	else
 	{
+		GtkWidget *dialog;
+		
 		gtk_progress_bar_set_fraction (data->progress,
 					       1.0);
+		
+		dialog = gtk_message_dialog_new (data->parent,
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_INFO,
+						 GTK_BUTTONS_CLOSE,
+						 NULL);
+		
+		gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
+					       _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
+		
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		
 		return FALSE;
 	}
 	
@@ -756,6 +772,7 @@ on_add_database_button_pulsed (GtkButton *button,
 
   data->tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
   data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
+  data->parent = GTK_WINDOW (dlg);
 
   gtk_widget_show (dlg->priv->add_database_progressbar);
   g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
