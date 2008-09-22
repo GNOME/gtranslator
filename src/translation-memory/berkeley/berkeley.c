@@ -381,8 +381,11 @@ look_fuzzy (GtranslatorBerkeley *ber,
 						gchar *string;
 						
 						string = (gchar *)g_ptr_array_index (array, j);
-						g_hash_table_insert (*hash, string,
-								     GINT_TO_POINTER (score));
+						
+						/* The first adding is always better */
+						if (!g_hash_table_lookup (*hash, string))
+							g_hash_table_insert (*hash, string,
+									     GINT_TO_POINTER (score));
 
 						j++;
 					}
@@ -435,8 +438,10 @@ look_fuzzy (GtranslatorBerkeley *ber,
 							gchar *string;
 							
 							string = (gchar *)g_ptr_array_index (array, j);
-							g_hash_table_insert (*hash, string,
-									     GINT_TO_POINTER (score));
+							
+							if (!g_hash_table_lookup (*hash, string))
+								g_hash_table_insert (*hash, string,
+										     GINT_TO_POINTER (score));
 							
 							j++;
 						}
