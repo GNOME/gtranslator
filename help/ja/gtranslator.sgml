@@ -1,0 +1,307 @@
+<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN" [
+<!ENTITY version "0.35">
+]>
+
+<article id="index">
+<artheader>
+	<title>gtranslator &version; ドキュメント</title>
+
+	<author>
+		<firstname>Fatih</firstname>
+		<surname>Demir</surname>
+			<affiliation>
+				<address>
+					<email>kabalak@gtranslator.org</email>
+				</address>
+			</affiliation>	
+	</author>
+	
+	<copyright>
+		<year>2001</year>
+		<holder>Fatih Demir</holder>
+	</copyright>
+
+	<author>
+		<firstname>Norihiro</firstname>
+		<surname>UMEDA</surname>
+		<affiliation>
+			<address>
+				<email>aee0372@mx9.ttcn.ne.jp</email>
+			</address>
+		</affiliation>
+	</author>
+
+	<copyright>
+	<year>2001</year>
+	<holder>UMEDA Norihiro</holder>
+	</copyright>
+
+<legalnotice id="license">
+      <para>
+		Permission is granted to make and distribute verbatim copies of
+		this manual provided the copyright notice and this permission
+		notice are preserved on all copies.
+	</para>
+	<para>
+		Permission is granted to copy and distribute modified versions of
+		this manual under the conditions for verbatim copying, provided
+		that the entire resulting derived work is distributed under the
+		terms of a permission notice identical to this one.
+	</para>
+	<para>
+		Permission is granted to copy and distribute translations of this
+		manual into another language, under the above conditions for
+		modified versions, except that this permission notice may be
+		stated in a translation approved by the Free Software Foundation.
+	</para>
+</legalnotice>
+
+<releaseinfo>
+	gtranslator ドキュメント バージョン 0.1
+</releaseinfo>
+
+<pubdate>&docdate;</pubdate>
+
+<abstract>
+	<para>
+		<application>gtransrator</application>はGNOMEや他のデスクトップ環境などの国際化(i18n)でほとんどの基盤となるgettextのpoファイルを編集するのに便利なエディタです。
+	</para>
+</abstract>
+
+</artheader>
+
+<sect1 id="introduction">
+	<title>はじめに</title>
+
+		<para>
+			<application>gtranslator</application>は使いやすいダイアログに従ってpoファイルの項目を編集できるソフトウェアです。 
+		</para>
+</sect1>
+
+<sect1 id="features">
+	<title><application>gtranslator</application>の大きな特徴</title>
+
+		<para>
+			gtranslatorはpoファイルの編集をする際に<emphasis>役立つ</emphasis>多くの特徴を備えています。その特徴とは、
+			<itemizedlist>
+				<listitem>
+					<para>安定かつ軽快にpoファイルを編集可能</para>
+				</listitem>	
+				<listitem>
+					<para>少ないメモリ消費(たったの<emphasis>800KB</emphasis>程度)</para>
+				</listitem>
+				<listitem>
+					<para>fuzzy、未翻訳、翻訳済のメッセージを区別できる</para>
+				</listitem>
+				<listitem>
+					<para>正規表現を元にした検索機能</para>
+				</listitem>
+				<listitem>
+					<para>編集したpoファイルをコンパイルできる</para>
+				</listitem>
+				<listitem>
+					<para>詳細情報を示すステータスバー、そして<emphasis>便利で正確な</emphasis>プログレスバーで現在の状態を表示</para>
+				</listitem>
+				<listitem>
+					<para>単なるファイル名に代わる高度な<emphasis>プロジェクト名・バージョン</emphasis>履歴リスト</para>
+				</listitem>
+				<listitem>
+					<para>gzip圧縮・コンパイルされたpoファイル(.mo/.gmo)を編集可能</para>
+				</listitem>
+				<listitem>
+					<para>GnomeVFS(http,ftp,nfsなど)を利用した遠隔地にあるpoファイルを編集可能</para>
+				</listitem>
+				<listitem>
+					<para>判読困難なスペースに代わる特殊文字の編集補助機能</para>
+				</listitem>
+				<listitem>
+					<para>xml-18n-toolsと併用することでpoファイルの更新が可能</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+</sect1>
+
+<sect1 id="use-of-gtranslator">
+	<title><application>gtranslator</application>の基本的な使い方</title>
+		<para>
+			<application>gtranslator</application>は一般的にpoファイル(gzip圧縮およびコンパイル済みpoファイルなどの派生物も含む）を編集する際に用いられます。 
+		</para>
+		
+		<para>
+			<application>gtranslator</application>は
+			<emphasis>
+				gtranslator filename
+			</emphasis>
+			や,
+			<emphasis>
+				gtranslator http://remotehost/filename
+			</emphasis>
+			,または
+			<emphasis>
+				gtranslator ftp://ftphost/filename
+			</emphasis>というようにコマンドラインから直接poファイルを指定して編集できます。
+		</para>
+
+		<para>
+			翻訳作業後にファイルを保存する際には、保存前にgtranslatorが必要としない翻訳文にパッチを当てること(poファイル内に#~で始まる文字列および行)を承知しておいてください。
+			</para>
+
+</sect1>
+
+<sect1 id="commandlinearguments">
+	<title>コマンドライン 引数</title>
+		<para>
+
+
+			<application>gtranslator</application>は次のコマンドライン引数を備えています:
+			<itemizedlist>
+				<listitem>
+					<para>
+					<emphasis>--help</emphasis> コマンドライン上で簡単なへルプメッセージを表示します。
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					<emphasis>--version</emphasis> <application>gtranslator</application>のバージョンを表示します。
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					<emphasis>--display</emphasis> <application>gtranslator</application>を表示するdisplayを設定します。
+					</para>
+				</listitem>	
+				<listitem>
+					<para>
+					<emphasis>--webalize</emphasis>(次の引数に出力するhtmlファイルの名前を指定して)poファイルをhtmlファイルに変換します。
+					</para>
+					<para>
+					例:
+					<emphasis>
+					<application>gtranslator</application>
+					--webalize=Evolution.html tr.po
+					</emphasis>
+
+					</para>
+				</listitem>	
+				<listitem>
+					<para>
+					<emphasis>--geometry</emphasis> gtranslatorのウインドウを開く座標を設定します。
+					</para>
+					<para>
+					例:
+					<emphasis>
+					<application>gtranslator</application>
+					--geometry="320x240+0+0" tr.po
+					</emphasis>
+
+					(この場合はgtranslatorのウインドウが"+0+0"、つまり左上の隅に、320x240の大きさで開きます。)
+					</para>
+				</listitem>	
+			</itemizedlist>	
+		</para>
+</sect1>
+
+<sect1 id="thanks">
+	<title>謝辞</title>
+		<sect2 id="contributors">
+		<title>コントリビュータ</title>
+		<para>
+			様々な部分におけるすばらしい支援は次に挙げる方々によるものです。
+			<itemizedlist mark="bullet">
+				<listitem>
+					<para>
+					<emphasis>すべて</emphasis>の<application>gtranslator</application>の翻訳者の皆様
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					The GNOME I18N list
+					<email>gnome-i18n@gnome.org</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Alexandre Hautequest
+					<email>hquest@fesppr.br</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Denis Pleic'
+					<email>dpleic@linux.hr</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Josh Jackson 
+					<email>pturing@mailandnews.com</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Robert Brady
+					<email>robert@suse.co.uk</email>
+					</para>
+				</listitem>	
+				<listitem>
+					<para>
+					Thomas Ziehmer
+					<email>thomas@gtranslator.org</email>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</sect2>
+
+	<sect2 id="packagers">
+	<title>パッケージ作成者</title>
+		<para>
+			私たちはそれぞれのフォーマットに適合する<application>gtranslator</application>のパッケージを提供していただいた次の方々に感謝します。
+			<itemizedlist mark="bullet">
+				<listitem>
+					<para>Josh Jackshon 
+					<email>pturing@mailandnews.com</email>は<application>gtranslator</application>のMandrakeパッケージを作成しました。
+					</para>
+				</listitem>
+				<listitem>
+					<para>Martijn van de Streek
+					<email>martijn@foodfight.org</email>は<application>gtranslator</application>のDebianパッケージを作成しました。
+					</para>
+				</listitem>
+				<listitem>
+					<para>Maxim Sobolev 
+					<email>sobomax@freebsd.org</email>は<application>gtranslator</application>のFreeBSD portsパッケージを作成しました。
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</sect2>
+</sect1>
+
+<sect1 id="authors">
+	<title><application>gtranslator</application>の作者一覧</title>
+		<para>
+			私たちは現在たった二人ですが、もちろん皆さんの<application>gtranslator</application>に関する開発への参加や、私たちに対する援助(もちろん金銭もOK ,-)は大歓迎です。
+			<itemizedlist>
+				<listitem>
+					<para>
+					Fatih Demir, aka. kabalak, 
+					<email>kabalak@gtranslator.org</email>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Gediminas Paulauskas, aka. menesis, 
+					<email>menesis@gtranslator.org</email>
+					</para>
+				</listitem>
+			</itemizedlist>
+			作者に関するさらに詳しい情報は<ulink url="http://www.gtranslator.org/authors.html" type="http">gtranslator.org's authors section</ulink>にあります。
+		</para>
+		<para>
+		このへルプの日本語訳は梅田 典宏<email>aee0372@mx9.ttcn.ne.jp</email>によるものです。
+		この訳に関するコメントや提案はすべて
+		<email>aee0372@mx9.ttcn.ne.jp</email>へお寄せ下さい。
+		</para>
+
+</sect1>
+</article>

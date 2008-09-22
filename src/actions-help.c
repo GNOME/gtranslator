@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#include "utils.h"
 #include "window.h"
 
 #include <glib.h>
@@ -31,16 +30,6 @@
 
 #include <gtk/gtkaboutdialog.h>
 
-/*
- * Show the user's guide for gtranslator
- */
-void
-gtranslator_actions_help_contents (GtkAction   *action,
-				   GtranslatorWindow *window)
-{
-	gtranslator_utils_help_display (GTK_WINDOW (window),
-					"gtranslator", "gtranslator.xml");
-}
 
 /*
  * Creates and shows the about box for gtranslator.

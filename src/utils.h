@@ -73,7 +73,7 @@ void           gtranslator_utils_activate_email       (GtkAboutDialog *dialog,
 						       const gchar *email,
 						       gpointer data);
 						       
-void           gtranslator_utils_help_display         (GtkWidget   *parent,
+void           gtranslator_utils_help_display         (GtkWindow   *parent,
 						       const gchar *doc_id,
 						       const gchar *file_name);
 						       

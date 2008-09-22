@@ -731,14 +731,14 @@ gtranslator_utils_activate_email (GtkAboutDialog *dialog,
 
 /**
  * gtranslator_utils_help_display:
- * @parent: a #GtkWidget
+ * @parent: a #GtkWindow
  * @doc_id: the name of the type of doc
  * @file_name: the name of the doc
  * 
  * Shows the help for an specific document in the default help browser.
  */
 void
-gtranslator_utils_help_display (GtkWidget   *parent,
+gtranslator_utils_help_display (GtkWindow   *parent,
 				const gchar *doc_id,
 				const gchar *file_name)
 {
@@ -760,7 +760,7 @@ gtranslator_utils_help_display (GtkWidget   *parent,
 		if (strchr (lang, '.'))
 			continue;
 
-		uri = g_build_filename (SHAREDIR, "/gnome/help/", doc_id,
+		uri = g_build_filename (DATADIR, "/gnome/help/", doc_id,
 					lang, file_name, NULL);
 
 		if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
@@ -773,7 +773,7 @@ gtranslator_utils_help_display (GtkWidget   *parent,
 	if (uri == NULL)
 	{
 		GtkWidget *dialog;
-		dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
+		dialog = gtk_message_dialog_new (parent,
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,

@@ -1,7 +1,7 @@
 figdir = figures
 docname = gtranslator
-lang = C
-omffile = gtranslator-C.omf
+lang = sr
+omffile = gtranslator-sr.omf
 entities = legal.xml
 include $(top_srcdir)/xmldocs.make
 dist-hook: app-dist-hook
