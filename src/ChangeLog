@@ -1,5 +1,22 @@
 2008-08-04  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* comment.c:
+	* comment.h:
+	* context.c (showed_message_cb), (gtranslator_context_panel_draw),
+	(gtranslator_context_panel_init),
+	(gtranslator_context_panel_finalize),
+	(gtranslator_context_panel_class_init),
+	(gtranslator_context_panel_new),
+	(gtranslator_context_panel_get_context_text_view):
+	* context.h:
+	* dialogs/comment-dialog.c:
+	* tab.c:
+	* tab.h:
+	* Makefile.am:
+	Renamed comment.ch as context.ch and removed the custom comment view.
+
+2008-08-04  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* translation-memory/berkeley/db-base.c (gtranslator_db_base_init),
 	(gtranslator_db_base_finalize),
 	(gtranslator_db_base_create_dabatase),

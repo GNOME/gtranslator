@@ -53,7 +53,7 @@ BUILT_SOURCES =                         \
 
 INST_H_FILES =				\
 	application.h \
-	comment.h \
+	context.h \
 	header.h \
 	io-error-message-area.h \
 	message-area.h \
@@ -106,7 +106,7 @@ libgtranslator_la_SOURCES = \
 	actions-search.c \
 	header.c \
 	statusbar.c \
-	comment.c \
+	context.c \
 	$(INST_H_FILES) 
 
 libgtranslator_la_LIBADD = \

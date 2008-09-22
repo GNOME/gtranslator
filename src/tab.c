@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include "comment.h"
+#include "context.h"
 #include "io-error-message-area.h"
 #include "message-area.h"
 #include "message-table.h"
@@ -62,7 +62,7 @@ struct _GtranslatorTabPrivate
 	GtkWidget *lateral_panel; //TM, Comments, etc.
 
 	GtkWidget *comment_pane;
-	GtkWidget *comment;
+	GtkWidget *context;
         GtkWidget *translation_memory;
 	
 	/*Message area*/
@@ -556,12 +556,12 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 			TRUE, TRUE);
 	
 	/*
-	 * Comment
+	 * Context
 	 */
-	priv->comment = gtranslator_comment_panel_new (GTK_WIDGET (tab));
-	gtk_widget_show (priv->comment);
-	gtranslator_tab_add_widget_to_lateral_panel (tab, priv->comment,
-						     _("Comments"));
+	priv->context = gtranslator_context_panel_new (GTK_WIDGET (tab));
+	gtk_widget_show (priv->context);
+	gtranslator_tab_add_widget_to_lateral_panel (tab, priv->context,
+						     _("Context"));
 
 	/*
 	 * TM
@@ -856,15 +856,15 @@ gtranslator_tab_get_active_trans_tab(GtranslatorTab *tab)
 }
 
 /**
- * gtranslator_tab_get_comment_panel:
+ * gtranslator_tab_get_context_panel:
  * @tab: a #GtranslatorTab
  *
- * Return value: the #GtranslaorCommentPanel
+ * Return value: the #GtranslaorContextPanel
  */
-GtranslatorCommentPanel *
-gtranslator_tab_get_comment_panel(GtranslatorTab *tab)
+GtranslatorContextPanel *
+gtranslator_tab_get_context_panel(GtranslatorTab *tab)
 {
-	return GTR_COMMENT_PANEL(tab->priv->comment);
+	return GTR_CONTEXT_PANEL(tab->priv->context);
 }
 
 /**

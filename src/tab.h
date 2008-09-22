@@ -23,7 +23,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "comment.h"
+#include "context.h"
 #include "msg.h"
 #include "po.h"
 #include "view.h"
@@ -90,7 +90,7 @@ gint                   gtranslator_tab_get_active_text_tab (GtranslatorTab *tab)
 
 gint                   gtranslator_tab_get_active_trans_tab(GtranslatorTab *tab);
 
-GtranslatorCommentPanel *gtranslator_tab_get_comment_panel   (GtranslatorTab *tab);
+GtranslatorContextPanel *gtranslator_tab_get_context_panel (GtranslatorTab *tab);
 
 GtranslatorView       *gtranslator_tab_get_active_view     (GtranslatorTab *tab);
 

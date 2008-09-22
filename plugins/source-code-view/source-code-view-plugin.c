@@ -21,7 +21,7 @@
 #endif
 
 #include "source-code-view-plugin.h"
-#include "comment.h"
+#include "context.h"
 #include "utils.h"
 #include "viewer.h"
 #include "window.h"
@@ -366,10 +366,10 @@ showed_message_cb (GtranslatorTab *tab,
 	GtkTextIter iter;
 	GtkTextBuffer *buffer;
 	GtkTextView *view;
-	GtranslatorCommentPanel *panel;
+	GtranslatorContextPanel *panel;
 
-	panel = gtranslator_tab_get_comment_panel (tab);
-	view = gtranslator_comment_panel_get_extracted_text_view (panel);
+	panel = gtranslator_tab_get_context_panel (tab);
+	view = gtranslator_context_panel_get_extracted_text_view (panel);
 	
 	buffer = gtk_text_view_get_buffer (view);
 	
@@ -398,11 +398,11 @@ message_edition_finished_cb (GtranslatorTab *tab,
 	GtkTextIter iter;
 	GtkTextBuffer *buffer;
 	gint i = 0;
-	GtranslatorCommentPanel *panel;
+	GtranslatorContextPanel *panel;
 	GtkTextView *view;
 
-	panel = gtranslator_tab_get_comment_panel (tab);
-	view = gtranslator_comment_panel_get_extracted_text_view (panel);
+	panel = gtranslator_tab_get_context_panel (tab);
+	view = gtranslator_context_panel_get_context_text_view (panel);
 
 	buffer = gtk_text_view_get_buffer (view);
 	
@@ -436,11 +436,11 @@ page_added_cb (GtkNotebook *notebook,
 	       guint page_num,
 	       GtranslatorSourceCodeViewPlugin *plugin)
 {	
-	GtranslatorCommentPanel *panel;
+	GtranslatorContextPanel *panel;
 	GtkTextView *view;
 
-	panel = gtranslator_tab_get_comment_panel (GTR_TAB (child));
-	view = gtranslator_comment_panel_get_extracted_text_view (panel);
+	panel = gtranslator_tab_get_context_panel (GTR_TAB (child));
+	view = gtranslator_context_panel_get_context_text_view (panel);
 
 	g_signal_connect_after (child, "showed-message",
 				G_CALLBACK (showed_message_cb), plugin);
@@ -565,7 +565,7 @@ impl_deactivate(GtranslatorPlugin *plugin,
 {
 	GList *tabs, *l;
 	GtkTextView *view;
-	GtranslatorCommentPanel *panel;
+	GtranslatorContextPanel *panel;
 	GtkWidget *notebook;
 	
 	tabs = gtranslator_window_get_all_tabs (window);
@@ -573,8 +573,8 @@ impl_deactivate(GtranslatorPlugin *plugin,
 	
 	for (l = tabs; l != NULL; l = g_list_next (l))
 	{
-		panel = gtranslator_tab_get_comment_panel (GTR_TAB (l->data));
-		view = gtranslator_comment_panel_get_extracted_text_view (panel);
+		panel = gtranslator_tab_get_context_panel (GTR_TAB (l->data));
+		view = gtranslator_context_panel_get_extracted_text_view (panel);
 		
 		g_signal_handlers_disconnect_by_func (l->data,
 						      showed_message_cb,
