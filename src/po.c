@@ -674,7 +674,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	aux = g_strconcat(gtranslator_header_get_translator(header), " ", "<",
 			  gtranslator_header_get_tr_email(header), ">", NULL);
 	
-	comp_year = g_strconcat (" ", year, "\.", NULL);
+	comp_year = g_strconcat (" ", year, ".", NULL);
 
 	/*
 	 * Current translator is already in comments but its last year < current year.
@@ -682,11 +682,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	if (!strcmp (prev_translator, aux) && 
 	    (strcmp(comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year))) {
 	  
-	    if (!g_utf8_validate (comments_lines[j], -1, NULL))
-	      g_utf8_normalize (comments_lines[j], -1, G_NORMALIZE_DEFAULT);
-
-	    line_without_dot = g_utf8_strncpy (line_without_dot, comments_lines[j], strlen(comments_lines[j])-1);
-	    
+	    line_without_dot = g_strndup (comments_lines[j], g_utf8_strlen(comments_lines[j], -1) -1);  
 	    line = g_strconcat (line_without_dot, ", ", year, ".", NULL);
 	   
 	    for (l=j; l<(g_strv_length (comments_lines)); l++) {
