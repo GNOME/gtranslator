@@ -38,7 +38,9 @@ plugin_in_files = source-code-view.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+EXTRA_DIST =	\
+	$(plugin_in_files)	\
+	$(glade_DATA)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

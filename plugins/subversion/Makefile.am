@@ -93,7 +93,12 @@ plugin_in_files = subversion.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+EXTRA_DIST =	\
+	$(glade_DATA)	\
+	$(pixmaps__DATA)	\
+	$(plugin_in_files)	\
+	subversion-enum-types.h.template \
+	subversion-enum-types.c.template	
 
 CLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
 DISTCLEANFILES = $(plugin_DATA)

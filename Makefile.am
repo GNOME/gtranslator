@@ -7,8 +7,5 @@ EXTRA_DIST= \
 		HACKING \
 		gtranslator.spec.in \
 		gtranslator.spec \
-		intltool-extract.in \
-		intltool-merge.in \
-		intltool-update.in \
 		omf.make \
 		xmldocs.make
