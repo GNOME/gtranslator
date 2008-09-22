@@ -369,7 +369,7 @@ showed_message_cb (GtranslatorTab *tab,
 	GtranslatorContextPanel *panel;
 
 	panel = gtranslator_tab_get_context_panel (tab);
-	view = gtranslator_context_panel_get_extracted_text_view (panel);
+	view = gtranslator_context_panel_get_context_text_view (panel);
 	
 	buffer = gtk_text_view_get_buffer (view);
 	
@@ -574,7 +574,7 @@ impl_deactivate(GtranslatorPlugin *plugin,
 	for (l = tabs; l != NULL; l = g_list_next (l))
 	{
 		panel = gtranslator_tab_get_context_panel (GTR_TAB (l->data));
-		view = gtranslator_context_panel_get_extracted_text_view (panel);
+		view = gtranslator_context_panel_get_context_text_view (panel);
 		
 		g_signal_handlers_disconnect_by_func (l->data,
 						      showed_message_cb,
