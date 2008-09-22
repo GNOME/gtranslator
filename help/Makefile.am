@@ -8,7 +8,3 @@ DOC_FIGURES = figures/mainwindow.png \
 	      figures/prefs.png	\
 	      figures/toolbar.png
 DOC_LINGUAS =
-
-SUBDIRS = C
-# ja
-

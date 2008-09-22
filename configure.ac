@@ -471,7 +471,6 @@ doc/reference/Makefile
 doc/reference/version.xml
 doc/UMTF/Makefile
 help/Makefile
-help/C/Makefile
 man/Makefile
 man/gtranslator.1
 po/Makefile.in
