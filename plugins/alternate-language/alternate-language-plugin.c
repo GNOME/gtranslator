@@ -105,11 +105,9 @@ static void
 impl_deactivate(GtranslatorPlugin *plugin,
 	        GtranslatorWindow *window)
 {
-	GtkWidget *panel;
 	GtranslatorNotebook *notebook;
 	GtkWidget *alternatelang;
 	GList *tabs;
-	gint page_num;
 	
 	tabs = gtranslator_window_get_all_tabs(window);
 	notebook = gtranslator_window_get_notebook(window);
@@ -118,12 +116,8 @@ impl_deactivate(GtranslatorPlugin *plugin,
 	{
 		do{
 			alternatelang = g_object_get_data(G_OBJECT(tabs->data), WINDOW_DATA_KEY);
-			panel = gtranslator_tab_get_panel (GTR_TAB(tabs->data));
-		
-			page_num = gtk_notebook_page_num (GTK_NOTEBOOK (panel),
-							  alternatelang);
-			gtk_notebook_remove_page (GTK_NOTEBOOK (panel),
-						  page_num);
+			gtranslator_tab_remove_widget_from_lateral_panel (GTR_TAB (tabs->data),
+									  alternatelang);
 
 			g_object_set_data (G_OBJECT (tabs->data), WINDOW_DATA_KEY, NULL);
 		
