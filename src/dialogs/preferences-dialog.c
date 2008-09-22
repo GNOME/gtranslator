@@ -665,7 +665,7 @@ on_add_database_button_pulsed (GtkButton *button,
   GtranslatorTranslationMemory *tm;
   GtkWidget *dialog;
   
-  tm = (GtranslatorTranslationMemory *)gtranslator_application_get_translation_memory (GTR_APP);
+  tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
 
   dir_name = gtranslator_prefs_manager_get_tm_dir ();
 
@@ -676,29 +676,31 @@ on_add_database_button_pulsed (GtkButton *button,
   for (l = files_list; l; l = l->next) {
     GList *msg_list = NULL;
     GList *l2 = NULL;
-    gchar *file_uri;
+    const gchar *file_uri;
+    GError *error = NULL;
 
     po = gtranslator_po_new ();
-    file_uri = (gchar*)l->data;
+    file_uri = (const gchar*)l->data;
     
-    gtranslator_po_parse (po, file_uri, NULL);
+    gtranslator_po_parse (po, file_uri, &error);
+    if (error)
+      continue;
+    
     msg_list = gtranslator_po_get_messages (po);
        
     for (l2 = msg_list; l2; l2 = l2->next) {
       GtranslatorMsg *msg;
-      msg = (GtranslatorMsg *)l2->data;
+      msg = GTR_MSG (l2->data);
       if (gtranslator_msg_is_translated (msg))
 	gtranslator_translation_memory_store (tm,
 					      gtranslator_msg_get_msgid (msg),
 					      gtranslator_msg_get_msgstr (msg));
     }
-    //g_list_foreach (msg_list, (GFunc)g_object_unref, NULL);
-    //g_list_free (msg_list);
-    g_free (file_uri);
+    
     g_object_unref (po);
   }
-  //g_list_foreach (files_list, (GFunc)g_object_unref, NULL);
-  //g_list_free (files_list); 
+  g_list_foreach (files_list, (GFunc)g_free, NULL);
+  g_list_free (files_list); 
 
   dialog = gtk_message_dialog_new (NULL,
 				   GTK_DIALOG_MODAL,
