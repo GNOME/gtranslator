@@ -61,6 +61,7 @@ struct _GtranslatorTabPrivate
 
 	GtkWidget *comment_pane;
 	GtkWidget *comment;
+        GtkWidget *translation_memory;
 	
 	/*Message area*/
 	GtkWidget *message_area;
@@ -84,6 +85,7 @@ enum
 {
 	SHOWED_MESSAGE,
 	MESSAGE_CHANGED,
+	MESSAGE_EDITION_FINISHED,
 	LAST_SIGNAL
 };
 
@@ -431,7 +433,7 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	GtkWidget *image;
 	GtkWidget *vertical_box;
 	GtkWidget *label_widget;
-	
+	GtkWidget *notebook, *tm_layout, *tm, *comments_label, *tm_label, *scroll;
 	GtranslatorTabPrivate *priv = tab->priv;
 	
 	/*
@@ -467,10 +469,23 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 
 	/*
 	 * Comment
-	 */
-	priv->comment = gtranslator_comment_panel_new(GTK_WIDGET(tab));
-	gtk_paned_pack2(GTK_PANED(priv->comment_pane), priv->comment, TRUE, TRUE);
+	 */	
+	comments_label = gtk_label_new ("Comments");
+	tm_label = gtk_label_new ("Translation Memory");
+
+	priv->comment = gtranslator_comment_panel_new (GTK_WIDGET (tab));
 	gtk_widget_show (priv->comment);
+
+	priv->translation_memory = gtranslator_translation_memory_ui_new (GTK_WIDGET (tab));
+	gtk_widget_show (priv->translation_memory);
+
+	notebook = gtk_notebook_new ();
+	gtk_widget_show (notebook);
+
+	gtk_paned_pack2(GTK_PANED(priv->comment_pane), notebook, TRUE, TRUE);
+	
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), priv->comment, comments_label);
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), priv->translation_memory, tm_label);
 	
 	/*
 	 * Content pane; this is where the message table and message area go
@@ -572,6 +587,16 @@ gtranslator_tab_class_init (GtranslatorTabClass *klass)
 			     G_OBJECT_CLASS_TYPE (klass),
 			     G_SIGNAL_RUN_LAST,
 			     G_STRUCT_OFFSET (GtranslatorTabClass, message_changed),
+			     NULL, NULL,
+			     g_cclosure_marshal_VOID__POINTER,
+			     G_TYPE_NONE, 1,
+			     G_TYPE_POINTER);
+	
+	signals[MESSAGE_EDITION_FINISHED] = 
+		g_signal_new("message-edition-finished",
+			     G_OBJECT_CLASS_TYPE (klass),
+			     G_SIGNAL_RUN_LAST,
+			     G_STRUCT_OFFSET (GtranslatorTabClass, message_edition_finished),
 			     NULL, NULL,
 			     g_cclosure_marshal_VOID__POINTER,
 			     G_TYPE_NONE, 1,
@@ -787,6 +812,12 @@ gtranslator_tab_message_go_to(GtranslatorTab *tab,
 	message_error = gtranslator_msg_check(current_msg->data);
 	if(message_error == NULL)
 	{
+		/*
+		 * Emitting message-edition-finished signal
+		 */
+		g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
+			       0, GTR_MSG (current_msg->data));
+		
 		gtranslator_tab_show_message(tab, to_go->data);
 		set_message_area(tab, NULL);
 	}

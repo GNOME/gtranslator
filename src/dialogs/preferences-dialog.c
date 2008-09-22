@@ -77,7 +77,16 @@ struct _GtranslatorPreferencesDialogPrivate
 	GtkWidget *add_button;
 	GtkWidget *edit_button;
 	GtkWidget *delete_button;
-	
+
+        /*Translation Memory*/
+        GtkWidget *directory_entry;
+        GtkWidget *search_button;
+        GtkWidget *add_database_button;
+
+        GtkWidget *show_tm_options_checkbutton;
+        GtkWidget *missing_words_spinbutton;
+        GtkWidget *sentence_length_spinbutton;
+
 	/*PO header->Personal information*/
 	GtkWidget *name_entry;
 	GtkWidget *email_entry;
@@ -581,6 +590,255 @@ setup_interface_pages(GtranslatorPreferencesDialog *dlg)
 			 dlg);
 }
 
+/***************Translation Memory pages****************/
+static void
+response_filechooser_cb (GtkDialog *dialog,
+			 gint       response_id,
+			 gpointer   user_data)  
+{
+  GtranslatorPreferencesDialog *dlg;
+
+  dlg = (GtranslatorPreferencesDialog *)user_data;
+  
+
+  if (response_id == GTK_RESPONSE_YES) {
+    gtk_entry_set_text (GTK_ENTRY (dlg->priv->directory_entry),
+			gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
+    gtranslator_prefs_manager_set_tm_dir (gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog)));
+    gtk_widget_destroy (GTK_WIDGET (dialog));
+  } else {
+    gtk_widget_destroy (GTK_WIDGET (dialog));
+  }
+}
+
+static void
+on_search_button_pulsed (GtkButton *button,
+			 gpointer data)
+{
+  GtkWidget *filechooser;
+  GtranslatorPreferencesDialog *dlg;
+
+  dlg = (GtranslatorPreferencesDialog *)data;
+  
+  filechooser = gtk_file_chooser_dialog_new ("Select PO directory",
+					     NULL,
+					     GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+					     GTK_STOCK_CANCEL,
+					     GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OK,
+					     GTK_RESPONSE_YES,
+					     NULL);
+ 
+  g_signal_connect (GTK_DIALOG (filechooser), "response",
+		    G_CALLBACK (response_filechooser_cb),
+		    dlg);
+
+  gtk_dialog_run (GTK_DIALOG (filechooser));
+}
+
+static void
+gtranslator_project_utils_scan_dir (GFile *dir,
+				    GList **list,
+				    const gchar *po_name)
+{
+	GFileInfo *info;
+	GError *error;
+	GFile *file;
+	GFileEnumerator *enumerator;
+
+	error = NULL;
+	enumerator = g_file_enumerate_children (dir,
+						G_FILE_ATTRIBUTE_STANDARD_NAME,
+						G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
+						NULL,
+						&error);
+	if (enumerator) 
+	{
+		error = NULL;
+		
+		while ((info = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL) 
+		{
+			const gchar *name;
+			gchar *filename;
+			
+			name = g_file_info_get_name (info);
+			file = g_file_get_child (dir, name);
+
+			if (po_name != NULL)
+			{
+				if (g_str_has_suffix (po_name, ".po"))
+					filename = g_strdup (po_name);
+				else 
+					filename = g_strconcat (po_name, ".po", NULL);
+			}
+			else
+				filename = g_strdup (".po");
+			
+			if (g_str_has_suffix (name, filename))
+				*list = g_list_prepend (*list, g_file_get_path (file));
+			g_free (filename);
+
+			gtranslator_project_utils_scan_dir (file, list, po_name);
+			g_object_unref (file);
+			g_object_unref (info);
+		}
+		g_file_enumerator_close (enumerator, NULL, NULL);
+		g_object_unref (enumerator);
+		
+		if (error)
+		{
+			g_warning (error->message);
+		}
+	}
+}
+
+
+static void
+on_add_database_button_pulsed (GtkButton *button,
+			       gpointer data)
+{
+  GList *files_list = NULL;
+  GList *l = NULL;
+  GFile *dir;
+  const gchar *dir_name;
+  GtranslatorPo *po;
+  GtranslatorTranslationMemory *tm;
+  GtkWidget *dialog;
+  
+  tm = (GtranslatorTranslationMemory *)gtranslator_application_get_translation_memory (GTR_APP);
+
+  dir_name = gtranslator_prefs_manager_get_tm_dir ();
+
+  dir = g_file_new_for_uri (dir_name);
+
+  gtranslator_project_utils_scan_dir (dir, &files_list, NULL);
+
+  for (l = files_list; l; l = l->next) {
+    GList *msg_list = NULL;
+    GList *l2 = NULL;
+    gchar *file_uri;
+
+    po = gtranslator_po_new ();
+    file_uri = (gchar*)l->data;
+    
+    gtranslator_po_parse (po, file_uri, NULL);
+    msg_list = gtranslator_po_get_messages (po);
+       
+    for (l2 = msg_list; l2; l2 = l2->next) {
+      GtranslatorMsg *msg;
+      msg = (GtranslatorMsg *)l2->data;
+      if (gtranslator_msg_is_translated (msg))
+	gtranslator_translation_memory_store (tm,
+					      gtranslator_msg_get_msgid (msg),
+					      gtranslator_msg_get_msgstr (msg));
+    }
+    //g_list_foreach (msg_list, (GFunc)g_object_unref, NULL);
+    //g_list_free (msg_list);
+    g_free (file_uri);
+    g_object_unref (po);
+  }
+  //g_list_foreach (files_list, (GFunc)g_object_unref, NULL);
+  //g_list_free (files_list); 
+
+  dialog = gtk_message_dialog_new (NULL,
+				   GTK_DIALOG_MODAL,
+				   GTK_MESSAGE_INFO,
+				   GTK_BUTTONS_CLOSE,
+				   NULL);
+
+  gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
+				 _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
+  
+  g_signal_connect_swapped (dialog,
+			    "response",
+			    G_CALLBACK (gtk_widget_destroy),
+			    dialog);
+  gtk_dialog_run (GTK_DIALOG (dialog));
+}
+
+static void
+on_show_tm_options_checkbutton_changed (GtkToggleButton *button,
+					gpointer user_data)
+{ 
+  gtranslator_prefs_manager_set_show_tm_options (gtk_toggle_button_get_active(button));
+}
+
+static void
+on_missing_words_spinbutton_changed (GtkSpinButton *spinbutton,
+				      gpointer data)
+{
+  gint value;
+
+  value = gtk_spin_button_get_value_as_int (spinbutton);
+
+  gtranslator_prefs_manager_set_missing_words (value);
+}
+
+static void
+on_sentence_length_spinbutton_changed (GtkSpinButton *spinbutton,
+				      gpointer data)
+{
+  gint value;
+
+  value = gtk_spin_button_get_value_as_int (spinbutton);
+
+  gtranslator_prefs_manager_set_sentence_length (value);
+}
+
+static void
+directory_entry_changed(GObject    *gobject,
+			GParamSpec *arg1,
+			GtranslatorPreferencesDialog *dlg)
+{
+	const gchar *text;
+	
+	g_return_if_fail(GTK_ENTRY(gobject) == GTK_ENTRY(dlg->priv->directory_entry));
+
+	text = gtk_entry_get_text(GTK_ENTRY(gobject));
+	
+	if(text)
+	  gtranslator_prefs_manager_set_tm_dir (text);
+}
+
+
+static void
+setup_tm_pages(GtranslatorPreferencesDialog *dlg)
+{	
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton),
+				gtranslator_prefs_manager_get_show_tm_options ());
+  
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->missing_words_spinbutton),
+			     (gdouble) gtranslator_prefs_manager_get_missing_words ());
+  
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->sentence_length_spinbutton),
+			     (gdouble) gtranslator_prefs_manager_get_sentence_length ());
+  
+  g_signal_connect (GTK_BUTTON (dlg->priv->search_button), "clicked",
+		    G_CALLBACK (on_search_button_pulsed),
+		    dlg);
+
+  g_signal_connect(dlg->priv->directory_entry, "notify::text",
+			 G_CALLBACK(directory_entry_changed),
+			 dlg);
+  
+  g_signal_connect (GTK_BUTTON (dlg->priv->add_database_button), "clicked",
+		    G_CALLBACK (on_add_database_button_pulsed),
+		    dlg);
+
+  g_signal_connect (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton), "toggled",
+		    G_CALLBACK (on_show_tm_options_checkbutton_changed),
+		    dlg);
+
+  g_signal_connect (GTK_SPIN_BUTTON (dlg->priv->missing_words_spinbutton), "value-changed",
+		    G_CALLBACK (on_missing_words_spinbutton_changed),
+		    dlg);
+  
+  g_signal_connect (GTK_SPIN_BUTTON (dlg->priv->sentence_length_spinbutton), "value-changed",
+		    G_CALLBACK (on_sentence_length_spinbutton_changed),
+		    dlg);
+}
+
+/***************Plugins pages****************/
 static void
 setup_plugin_pages(GtranslatorPreferencesDialog *dlg)
 {
@@ -864,6 +1122,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 	setup_editor_pages(dlg);
 	setup_profile_pages(dlg);
 	setup_interface_pages(dlg);
+	setup_tm_pages (dlg);
 	setup_plugin_pages(dlg);
 }
 

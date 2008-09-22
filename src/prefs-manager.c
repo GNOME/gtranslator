@@ -333,6 +333,23 @@ DEFINE_INT_PREF (gdl_style,
 		 GPM_GDL_STYLE,
 		 GPM_DEFAULT_GDL_STYLE)
 
+/* Translation Memory */
+DEFINE_STRING_PREF (tm_dir,
+		    GPM_TM_DIR,
+		    GPM_DEFAULT_TM_DIR)
+
+DEFINE_INT_PREF (show_tm_options,
+		 GPM_TM_SHOW_TM_OPTIONS,
+		 GPM_DEFAULT_TM_SHOW_TM_OPTIONS)
+
+DEFINE_INT_PREF (missing_words,
+		 GPM_TM_MISSING_WORDS,
+		 GPM_DEFAULT_TM_MISSING_WORDS)
+
+DEFINE_INT_PREF (sentence_length,
+		 GPM_TM_SENTENCE_LENGTH,
+		 GPM_DEFAULT_TM_SENTENCE_LENGTH)
+
 /* The following functions are taken from gconf-client.c 
  * and partially modified. 
  * The licensing terms on these is: 

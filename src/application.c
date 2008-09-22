@@ -227,6 +227,9 @@ gtranslator_application_finalize (GObject *object)
 	if (app->priv->tm)
 		g_object_unref (app->priv->tm);
 	
+	if (app->priv->tm)
+        g_object_unref (app->priv->tm);
+
 	G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
 }
 
@@ -540,6 +543,14 @@ _gtranslator_application_set_last_dir (GtranslatorApplication *app,
 	g_return_if_fail (GTR_IS_APPLICATION (app));
 
 	app->priv->last_dir = g_strdup (last_dir);
+}
+
+GObject *
+gtranslator_application_get_translation_memory (GtranslatorApplication *app)
+{
+	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+	
+	return G_OBJECT (app->priv->tm);
 }
 
 GObject *

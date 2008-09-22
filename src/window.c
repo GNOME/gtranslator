@@ -80,6 +80,8 @@ struct _GtranslatorWindowPrivate
 	GtkUIManager *ui_manager;
 	GtkRecentManager *recent_manager;
 	GtkWidget *recent_menu;
+
+        GtkWidget *tm_menu;
 	
 	gint            width;
         gint            height; 
@@ -181,7 +183,9 @@ static const GtkActionEntry entries[] = {
 	{ "EditFuzzy", NULL, N_("Toggle _Fuzzy Status"), "<control>U",
 	  N_("Toggle fuzzy status of a message"),
 	  G_CALLBACK (gtranslator_message_status_toggle_fuzzy) },
-	
+	{ "EditTranslationMemory", NULL, N_("_Translation Memory"), NULL, NULL, NULL},
+
+
 	/* View menu */
 	{ "ViewSidePane", NULL, N_("Side _Pane"), "F9",
 	  N_("Show or hide the side pane in the current window"),
@@ -1184,7 +1188,8 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	GError *error = NULL;
 	GtkWidget *dockbar;
 	GtkWidget *hbox_dock;
-	
+	GtkWidget *tm_widget;
+
 	GtranslatorWindowPrivate *priv = window->priv;
 	
 	/*
@@ -1250,6 +1255,11 @@ gtranslator_window_draw (GtranslatorWindow *window)
 					    "/MainMenu/FileMenu/FileRecentFilesMenu");
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (widget), priv->recent_menu);
 	
+	/*
+	 * Translation Memory
+	 */
+	priv->tm_menu= gtk_ui_manager_get_widget (priv->ui_manager,
+					       "/MainMenu/EditMenu/EditTranslationMemory");   
 
 	/*
 	 * Toolbar
@@ -1854,4 +1864,10 @@ _gtranslator_window_close_tab (GtranslatorWindow *window,
 		gtk_notebook_remove_page (GTK_NOTEBOOK (window->priv->notebook), i);
 	
 	set_sensitive_according_to_window (window);
+}
+
+GtkWidget
+*gtranslator_window_get_tm_menu (GtranslatorWindow *window)
+{
+        return window->priv->tm_menu;
 }

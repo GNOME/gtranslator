@@ -47,6 +47,8 @@ struct _GtranslatorMsgPrivate
 	GtkTreeRowReference *row_reference;
 
 	gint po_position;
+  
+        gchar **tm_list;
 };
 
 static gchar *message_error = NULL;
@@ -535,4 +537,18 @@ gtranslator_msg_check(GtranslatorMsg *msg)
 
 	/*Are there any other way to do this?*/
 	return message_error;
+}
+
+
+gchar **
+gtranslator_msg_get_tm_list (GtranslatorMsg *msg)
+{
+  return msg->priv->tm_list;
+}
+
+void
+gtranslator_msg_set_tm_list (GtranslatorMsg *msg,
+			     gchar **tm_list)
+{
+  msg->priv->tm_list = tm_list;
 }

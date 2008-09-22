@@ -131,6 +131,8 @@ void              gtranslator_window_set_active_tab   (GtranslatorWindow *window
 void             _gtranslator_window_close_tab        (GtranslatorWindow *window,
 						       GtranslatorTab *tab);
 
+GtkWidget        *gtranslator_window_get_tm_menu      (GtranslatorWindow *window);
+
 G_END_DECLS
 
 #endif /* __WINDOW_H__ */

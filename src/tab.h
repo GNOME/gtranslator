@@ -69,6 +69,8 @@ struct _GtranslatorTabClass
 				  GtranslatorMsg *msg);
 	void (* message_changed) (GtranslatorTab *tab,
 				  GtranslatorMsg *msg);
+	void (* message_edition_finished)  (GtranslatorTab *tab,
+					    GtranslatorMsg *msg);
 };
 
 /*

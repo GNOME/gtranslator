@@ -70,6 +70,12 @@
 #define GPM_TRANSFER_ENCODING		GPM_LANGUAGE_SETTINGS_DIR "/transfer_encoding"
 #define GPM_TEAM_EMAIL			GPM_LANGUAGE_SETTINGS_DIR "/team_email"
 
+/* Translation Memory */
+#define GPM_TM_DIR                      GPM_PREFS_DIR "/tm/dir_entry"
+#define GPM_TM_SHOW_TM_OPTIONS          GPM_PREFS_DIR "/tm/show_tm_options"
+#define GPM_TM_MISSING_WORDS            GPM_PREFS_DIR "/tm/missing_words"
+#define GPM_TM_SENTENCE_LENGTH          GPM_PREFS_DIR "/tm/sentence_lenght"
+
 /*FIXME: With profiles i think that this has to change*/
 #define GPM_PLURAL_FORM			GPM_LANGUAGE_SETTINGS_DIR "/plural_form"
 
@@ -114,6 +120,12 @@
 
 /* Interface */
 #define GPM_DEFAULT_GDL_STYLE           2 //Both icons and text
+
+/* Translation Memory */
+#define GPM_DEFAULT_TM_DIR              (const gchar*) ""
+#define GPM_DEFAULT_TM_SHOW_TM_OPTIONS  0 /*FALSE*/
+#define GPM_DEFAULT_TM_MISSING_WORDS    2
+#define GPM_DEFAULT_TM_SENTENCE_LENGTH  2
 
 /** LIFE CYCLE MANAGEMENT FUNCTIONS **/
 
@@ -196,5 +208,18 @@ const gchar *            gtranslator_prefs_manager_get_plural_form              
 /*Gdl style*/
 void                     gtranslator_prefs_manager_set_gdl_style                (gint style);
 gint                     gtranslator_prefs_manager_get_gdl_style                (void);
+
+/*Translation Memory*/
+void                     gtranslator_prefs_manager_set_tm_dir                   (const gchar *dir);
+const gchar *            gtranslator_prefs_manager_get_tm_dir                   (void);
+
+void                     gtranslator_prefs_manager_set_show_tm_options          (gboolean show_tm_options);
+gboolean                 gtranslator_prefs_manager_get_show_tm_options          (void);
+
+void                     gtranslator_prefs_manager_set_missing_words            (gint timeout);
+gint                     gtranslator_prefs_manager_get_missing_words            (void);
+
+void                     gtranslator_prefs_manager_set_sentence_length          (gint timeout);
+gint                     gtranslator_prefs_manager_get_sentence_length          (void);
 
 #endif  /* __GTR_PREFS_MANAGER_H__ */
