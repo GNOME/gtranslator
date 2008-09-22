@@ -147,7 +147,7 @@ static const GtkActionEntry action_entries[] =
 	 N_("Get a new repository copy"),
 	 G_CALLBACK (on_checkout_activated)},
 	
-	{ "Subversion", NULL, N_("_Subversion") }
+	{ "Subversion", NULL, N_("S_ubversion") }
 };
 
 static const gchar submenu[] =
