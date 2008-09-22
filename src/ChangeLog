@@ -1,5 +1,12 @@
 2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* msg.c (gtranslator_msg_new):
+	* po.c (gtranslator_po_parse):
+	The init status of the message must be set in the constructor of the
+	GtranslatorMsg.
+
+2008-08-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* actions-file.c (gtranslator_po_parse_files_from_dialog):
 	Fixed crash opening files with filechooser (Fixes #548923).
 	Thanks to Jorge González and Christian Kirbach.

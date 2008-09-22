@@ -517,13 +517,6 @@ gtranslator_po_parse (GtranslatorPo *po,
 		{
 			/* Unpack into a GtrMsg */
 			msg = gtranslator_msg_new (iter, message);
-  
-			/* Set the status */
-			if (gtranslator_msg_is_fuzzy (msg))
-				gtranslator_msg_set_status (msg, GTR_MSG_STATUS_FUZZY);
-			else if (gtranslator_msg_is_translated (msg))
-				gtranslator_msg_set_status (msg, GTR_MSG_STATUS_TRANSLATED);
-			else gtranslator_msg_set_status (msg, GTR_MSG_STATUS_UNTRANSLATED);
 
 			/* Set position in PO file */
 			gtranslator_msg_set_po_position (msg, pos++);

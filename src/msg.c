@@ -164,6 +164,13 @@ gtranslator_msg_new (po_message_iterator_t iter,
 	gtranslator_msg_set_iterator (msg, iter);
 	gtranslator_msg_set_message (msg, message);
 	
+	/* Set the status */
+	if (gtranslator_msg_is_fuzzy (msg))
+		gtranslator_msg_set_status (msg, GTR_MSG_STATUS_FUZZY);
+	else if (gtranslator_msg_is_translated (msg))
+		gtranslator_msg_set_status (msg, GTR_MSG_STATUS_TRANSLATED);
+	else gtranslator_msg_set_status (msg, GTR_MSG_STATUS_UNTRANSLATED);
+	
 	return msg;
 }
 
