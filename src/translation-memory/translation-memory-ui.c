@@ -128,6 +128,7 @@ showed_message_cb (GtranslatorTab *tab,
   const gchar *msgid;
   gint i = 1;
   gint j = 1;
+  gint k = 0;
   GList *tm_list_unsorted = NULL;
   GList *tm_list = NULL;
   GList *l = NULL;
@@ -161,7 +162,7 @@ showed_message_cb (GtranslatorTab *tab,
     tm_list_unsorted = gtranslator_translation_memory_lookup (tm,
 							      msgid);
     tm_list = g_list_sort (tm_list_unsorted,
-			   (GCompareFunc) compare_level);
+    		   (GCompareFunc) compare_level);
     if (tm_list == NULL) {
       gtk_widget_set_sensitive (tm_menu, FALSE);
     } else {
@@ -191,13 +192,16 @@ showed_message_cb (GtranslatorTab *tab,
       gtk_list_store_set (model,
 			  &iter,
 			  SHORTCUT_COLUMN,
-			  GDK_0+i,
+			  GDK_0+k,
 			  STRING_COLUMN,
 			  match->match,
 			  LEVEL_COLUMN,
 			  match->level,
 			  -1);
       i++;
+      k++;
+      if (k>9)
+	break;
     }
     
     gtranslator_msg_set_tm_list (msg, data);
@@ -222,7 +226,7 @@ showed_message_cb (GtranslatorTab *tab,
       accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Insert Tags/%s", item_name);
       
       gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
-      gtk_accel_map_add_entry (accel_path, GDK_0+j, GDK_CONTROL_MASK);
+      gtk_accel_map_add_entry (accel_path, GDK_0+(j-1), GDK_CONTROL_MASK);
       
       g_free (accel_path);
       g_free (item_name);
@@ -232,7 +236,8 @@ showed_message_cb (GtranslatorTab *tab,
       
       gtk_menu_shell_append (GTK_MENU_SHELL (items_menu), tm_item);
     j++;
-    }while ((tm_list = g_list_next (tm_list)));
+    }while (j<=9);
+    //while ((tm_list = g_list_next (tm_list)));
     
     gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
   }
