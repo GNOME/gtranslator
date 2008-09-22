@@ -46,7 +46,7 @@ struct _GtranslatorDbOrigPrivate
 static void
 gtranslator_db_orig_init (GtranslatorDbOrig *db_orig)
 {
-	db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
+	//db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
 	
 	gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_orig),
 					     _("original.db"),
@@ -64,7 +64,7 @@ gtranslator_db_orig_class_init (GtranslatorDbOrigClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (GtranslatorDbOrigPrivate));
+	//g_type_class_add_private (klass, sizeof (GtranslatorDbOrigPrivate));
 
 	object_class->finalize = gtranslator_db_orig_finalize;
 }

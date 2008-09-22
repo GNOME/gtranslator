@@ -1,5 +1,18 @@
 2008-07-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* translation-memory/berkeley/db-orig.c (gtranslator_db_orig_init),
+	(gtranslator_db_orig_class_init):
+	* translation-memory/berkeley/db-trans.c
+	(gtranslator_db_trans_init), (gtranslator_db_trans_class_init):
+	* translation-memory/berkeley/db-words.c
+	(gtranslator_db_words_init), (gtranslator_db_words_class_init):
+	* window.c (gtranslator_window_draw):
+	Commented some private addings to avoid warnings on startup.
+	Removed context ids from window.c. Now it is managed on statusbar object
+	directly.
+
+2008-07-31  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* dialogs/preferences-dialog.c (on_add_database_button_pulsed):
 	Added parent to message dialog.
 

@@ -74,8 +74,6 @@ struct _GtranslatorWindowPrivate
 	GHashTable *widgets;
 	
 	GtkWidget *statusbar;
-	guint generic_message_cid;
-	guint tip_message_cid;
 		
 	GtkUIManager *ui_manager;
 	GtkRecentManager *recent_manager;
@@ -1324,11 +1322,6 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	 * statusbar & progress bar
 	 */
 	window->priv->statusbar = gtranslator_statusbar_new ();
-
-	window->priv->generic_message_cid = gtk_statusbar_get_context_id
-		(GTK_STATUSBAR (window->priv->statusbar), "generic_message");
-	window->priv->tip_message_cid = gtk_statusbar_get_context_id
-		(GTK_STATUSBAR (window->priv->statusbar), "tip_message");
 
 	gtk_box_pack_end (GTK_BOX (hbox),
 			  window->priv->statusbar,

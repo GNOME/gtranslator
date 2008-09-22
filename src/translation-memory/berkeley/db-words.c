@@ -47,7 +47,7 @@ struct _GtranslatorDbWordsPrivate
 static void
 gtranslator_db_words_init (GtranslatorDbWords *db_words)
 {
-	db_words->priv = GTR_DB_WORDS_GET_PRIVATE (db_words);
+	//db_words->priv = GTR_DB_WORDS_GET_PRIVATE (db_words);
 	
 	gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_words),
 					     _("words.db"),
@@ -65,7 +65,7 @@ gtranslator_db_words_class_init (GtranslatorDbWordsClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (GtranslatorDbWordsPrivate));
+	//g_type_class_add_private (klass, sizeof (GtranslatorDbWordsPrivate));
 
 	object_class->finalize = gtranslator_db_words_finalize;
 }
