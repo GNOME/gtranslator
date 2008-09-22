@@ -223,6 +223,7 @@ save_dialog_response_cb (GtkDialog *dialog,
 	GtranslatorTab *tab;
 	gchar *filename;
 	GFile *location;
+	GtranslatorStatusbar *status;
 	
 	tab = GTR_TAB (g_object_get_data (G_OBJECT (dialog),
 					  GTR_TAB_SAVE_AS));
@@ -269,6 +270,10 @@ save_dialog_response_cb (GtkDialog *dialog,
 	
 		/* We have to change the state of the tab */
 		gtranslator_po_set_state(po, GTR_PO_STATE_SAVED);
+		
+		/* Flash a message */
+		status = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+		gtranslator_statusbar_flash_message (status, 0, _("File saved."));
 	}
 	g_object_unref (location);
 }
@@ -369,6 +374,7 @@ gtranslator_save_current_file_dialog (GtkWidget * widget,
 	GError *error = NULL;
 	GtranslatorTab *current;
 	GtranslatorPo *po;
+	GtranslatorStatusbar *status;
 	
 	current = gtranslator_window_get_active_tab (window);
 	po = gtranslator_tab_get_po (current);
@@ -391,6 +397,10 @@ gtranslator_save_current_file_dialog (GtkWidget * widget,
 	
 	/* We have to change the state of the tab */
 	gtranslator_po_set_state(po, GTR_PO_STATE_SAVED);
+	
+	/* Flash a message */
+	status = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+	gtranslator_statusbar_flash_message (status, 0, _("File saved."));
 }
 
 static gboolean
