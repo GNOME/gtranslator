@@ -143,7 +143,7 @@ svn_cat_command_class_init (SvnCatCommandClass *klass)
 
 
 SvnCatCommand *
-svn_cat_command_new (gchar *path, glong revision)
+svn_cat_command_new (const gchar *path, glong revision)
 {
 	SvnCatCommand *self;
 	

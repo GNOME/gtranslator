@@ -195,7 +195,7 @@ svn_diff_command_class_init (SvnDiffCommandClass *klass)
 }
 
 SvnDiffCommand *
-svn_diff_command_new (gchar *path, glong revision1, glong revision2, 
+svn_diff_command_new (const gchar *path, glong revision1, glong revision2, 
 					  gboolean recursive)
 {
 	SvnDiffCommand *self;

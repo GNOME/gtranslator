@@ -149,7 +149,7 @@ svn_commit_command_class_init (SvnCommitCommandClass *klass)
 }
 
 SvnCommitCommand *
-svn_commit_command_new (GList *paths, gchar *log_message, 
+svn_commit_command_new (GList *paths, const gchar *log_message, 
 						gboolean recursive)
 {
 	SvnCommitCommand *self;

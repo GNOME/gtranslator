@@ -1,5 +1,25 @@
 2008-08-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
+	* plugins/subversion/subversion-enum-types.c.template:
+	* plugins/subversion/svn-add-command.c (svn_add_command_new):
+	* plugins/subversion/svn-add-command.h:
+	* plugins/subversion/svn-cat-command.c (svn_cat_command_new):
+	* plugins/subversion/svn-cat-command.h:
+	* plugins/subversion/svn-command.c (svn_command_push_info),
+	(svn_command_make_canonical_path), (svn_command_get_revision):
+	* plugins/subversion/svn-command.h:
+	* plugins/subversion/svn-commit-command.c (svn_commit_command_new):
+	* plugins/subversion/svn-commit-command.h:
+	* plugins/subversion/svn-diff-command.c (svn_diff_command_new):
+	* plugins/subversion/svn-diff-command.h:
+	* plugins/subversion/svn-status-command.c (svn_status_command_new):
+	* plugins/subversion/svn-status-command.h:
+	* plugins/subversion/svn-update-command.c (svn_update_command_new):
+	* plugins/subversion/svn-update-command.h:
+	Using const where neccessary.
+
+2008-08-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
 	* configure.ac: Bumped to libdb >= 4.3 (Fixes #548766).
 
 2008-08-20  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>

@@ -60,7 +60,7 @@ struct _SvnCommand
 
 GType svn_command_get_type (void) G_GNUC_CONST;
 
-void svn_command_push_info (SvnCommand *self, gchar *message);
+void svn_command_push_info (SvnCommand *self, const gchar *message);
 
 GQueue * svn_command_get_info_queue (SvnCommand *self);
 
@@ -74,10 +74,10 @@ void svn_command_lock_ui (SvnCommand *self);
 
 void svn_command_unlock_ui (SvnCommand *self);
 
-gchar *svn_command_make_canonical_path (SvnCommand *self, gchar *path);
+gchar *svn_command_make_canonical_path (SvnCommand *self, const gchar *path);
 
 /* Static methods */
-svn_opt_revision_t *svn_command_get_revision (gchar *revision);
+svn_opt_revision_t *svn_command_get_revision (const gchar *revision);
 
 GList *svn_command_copy_path_list (GList *list);
 

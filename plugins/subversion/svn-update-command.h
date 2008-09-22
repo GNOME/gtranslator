@@ -59,7 +59,7 @@ struct _SvnUpdateCommand
 };
 
 GType svn_update_command_get_type (void) G_GNUC_CONST;
-SvnUpdateCommand * svn_update_command_new (gchar *path, gchar *revision, 
+SvnUpdateCommand * svn_update_command_new (const gchar *path, const gchar *revision, 
 										   gboolean recursive);
 void svn_update_command_destroy (SvnUpdateCommand *self);
 

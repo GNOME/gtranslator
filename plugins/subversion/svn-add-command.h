@@ -57,7 +57,7 @@ struct _SvnAddCommand
 };
 
 GType svn_add_command_get_type (void) G_GNUC_CONST;
-SvnAddCommand * svn_add_command_new (gchar *path, gboolean force, gboolean recursive);
+SvnAddCommand * svn_add_command_new (const gchar *path, gboolean force, gboolean recursive);
 void svn_add_command_destroy (SvnAddCommand *self);
 
 G_END_DECLS

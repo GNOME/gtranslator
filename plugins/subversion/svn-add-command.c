@@ -99,7 +99,7 @@ svn_add_command_class_init (SvnAddCommandClass *klass)
 
 
 SvnAddCommand *
-svn_add_command_new (gchar *path, gboolean force, gboolean recursive)
+svn_add_command_new (const gchar *path, gboolean force, gboolean recursive)
 {
 	SvnAddCommand *self;
 	

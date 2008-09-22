@@ -120,7 +120,7 @@ svn_update_command_class_init (SvnUpdateCommandClass *klass)
 
 
 SvnUpdateCommand *
-svn_update_command_new (gchar *path, gchar *revision, gboolean recursive)
+svn_update_command_new (const gchar *path, const gchar *revision, gboolean recursive)
 {
 	SvnUpdateCommand *self;
 	

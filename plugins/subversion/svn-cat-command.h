@@ -54,7 +54,7 @@ struct _SvnCatCommand
 };
 
 GType svn_cat_command_get_type (void) G_GNUC_CONST;
-SvnCatCommand * svn_cat_command_new (gchar *path, glong revision);
+SvnCatCommand * svn_cat_command_new (const gchar *path, glong revision);
 void svn_cat_command_destroy (SvnCatCommand *self);
 GQueue *svn_cat_command_get_output (SvnCatCommand *self);
 

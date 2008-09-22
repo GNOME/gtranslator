@@ -147,7 +147,7 @@ svn_status_command_class_init (SvnStatusCommandClass *klass)
 }
 
 SvnStatusCommand *
-svn_status_command_new (gchar *path, gboolean recursive, gboolean get_all_items)
+svn_status_command_new (const gchar *path, gboolean recursive, gboolean get_all_items)
 {
 	SvnStatusCommand *self;
 	

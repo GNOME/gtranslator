@@ -578,7 +578,7 @@ svn_command_class_init (SvnCommandClass *klass)
 
 
 void
-svn_command_push_info (SvnCommand *self, gchar *message)
+svn_command_push_info (SvnCommand *self, const gchar *message)
 {
 	gtranslator_async_command_lock (GTR_ASYNC_COMMAND (self));
 	g_queue_push_tail (self->priv->info_messages, g_strdup (message));
@@ -651,7 +651,7 @@ svn_command_unlock_ui (SvnCommand *self)
 }
 
 gchar *
-svn_command_make_canonical_path (SvnCommand *self, gchar *path)
+svn_command_make_canonical_path (SvnCommand *self, const gchar *path)
 {
 	const gchar *canonical_path;
 	
@@ -661,7 +661,7 @@ svn_command_make_canonical_path (SvnCommand *self, gchar *path)
 }
 
 svn_opt_revision_t *
-svn_command_get_revision (gchar *revision)
+svn_command_get_revision (const gchar *revision)
 {
 	svn_opt_revision_t* svn_revision; 
 	

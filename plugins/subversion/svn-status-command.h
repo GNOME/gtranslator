@@ -55,7 +55,7 @@ struct _SvnStatusCommand
 };
 
 GType svn_status_command_get_type (void) G_GNUC_CONST;
-SvnStatusCommand *svn_status_command_new (gchar *path, gboolean recursive, 
+SvnStatusCommand *svn_status_command_new (const gchar *path, gboolean recursive, 
 										  gboolean get_all_items);
 void svn_status_command_destroy (SvnStatusCommand *self);
 GQueue *svn_status_command_get_status_queue (SvnStatusCommand *self);

@@ -57,7 +57,7 @@ struct _SvnCommitCommand
 };
 
 GType svn_commit_command_get_type (void) G_GNUC_CONST;
-SvnCommitCommand * svn_commit_command_new (GList *paths, gchar *log_message, 
+SvnCommitCommand * svn_commit_command_new (GList *paths, const gchar *log_message, 
 										   gboolean recursive);
 void svn_commit_command_destroy (SvnCommitCommand *self);
 
