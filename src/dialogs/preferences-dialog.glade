@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Fri Jun 27 12:18:15 2008 -->
+<!--Generated with glade3 3.4.5 on Thu Jul 31 11:13:45 2008 -->
 <glade-interface>
   <widget class="GtkDialog" id="preferences_dialog">
     <property name="border_width">5</property>
@@ -185,10 +185,10 @@
                               </widget>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="append_suffix_checkbutton">
+                              <widget class="GtkCheckButton" id="create_backup_checkbutton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">Append a suffix to autosaved _files</property>
+                                <property name="label" translatable="yes">Create a _backup copy of files before saving</property>
                                 <property name="use_underline">True</property>
                                 <property name="response_id">0</property>
                                 <property name="draw_indicator">True</property>
@@ -197,39 +197,6 @@
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
                                 <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkHBox" id="autosave_suffix_hbox">
-                                <property name="visible">True</property>
-                                <property name="spacing">6</property>
-                                <child>
-                                  <widget class="GtkLabel" id="autosave_suffix_label">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">_Suffix to append:</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">autosave_suffix_entry</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkEntry" id="autosave_suffix_entry">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="text" translatable="yes">autosave</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </widget>
-                              <packing>
-                                <property name="position">2</property>
                               </packing>
                             </child>
                           </widget>
@@ -432,21 +399,6 @@
                               </widget>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="keep_obsolete_checkbutton">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">_Keep obsolete messages</property>
-                                <property name="use_underline">True</property>
-                                <property name="response_id">0</property>
-                                <property name="draw_indicator">True</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
                               <widget class="GtkCheckButton" id="spellcheck_checkbutton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -456,7 +408,7 @@
                                 <property name="draw_indicator">True</property>
                               </widget>
                               <packing>
-                                <property name="position">2</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                           </widget>
@@ -688,7 +640,7 @@ Tabs</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkAlignment" id="alignment1">
+                      <widget class="GtkAlignment" id="alignment2">
                         <property name="visible">True</property>
                         <property name="right_padding">12</property>
                         <child>
@@ -803,7 +755,7 @@ Tabs</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkAlignment" id="alignment2">
+                      <widget class="GtkAlignment" id="alignment3">
                         <property name="visible">True</property>
                         <property name="right_padding">12</property>
                         <child>
@@ -829,28 +781,23 @@ Tabs</property>
                                   <placeholder/>
                                 </child>
                                 <child>
-                                  <widget class="GtkSpinButton" id="sentence_length_spinbutton">
+                                  <widget class="GtkCheckButton" id="show_tm_options_checkbutton">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="adjustment">2 0 100 1 10 10</property>
+                                    <property name="label" translatable="yes">Show options in translated messages</property>
+                                    <property name="response_id">0</property>
+                                    <property name="draw_indicator">True</property>
                                   </widget>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="right_attach">2</property>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                  </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkLabel" id="label24">
+                                  <widget class="GtkLabel" id="label23">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Max. difference in sentence length:</property>
+                                    <property name="label" translatable="yes">Max. # of missing words:</property>
                                   </widget>
                                   <packing>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="bottom_attach">2</property>
                                     <property name="x_options">GTK_FILL</property>
                                   </packing>
                                 </child>
@@ -868,25 +815,30 @@ Tabs</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkLabel" id="label23">
+                                  <widget class="GtkLabel" id="label24">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Max. # of missing words:</property>
+                                    <property name="label" translatable="yes">Max. difference in sentence length:</property>
                                   </widget>
                                   <packing>
-                                    <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
                                     <property name="x_options">GTK_FILL</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkCheckButton" id="show_tm_options_checkbutton">
+                                  <widget class="GtkSpinButton" id="sentence_length_spinbutton">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="label" translatable="yes">Show options in translated messages</property>
-                                    <property name="response_id">0</property>
-                                    <property name="draw_indicator">True</property>
+                                    <property name="adjustment">2 0 100 1 10 10</property>
                                   </widget>
+                                  <packing>
+                                    <property name="left_attach">1</property>
+                                    <property name="right_attach">2</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
+                                    <property name="x_options">GTK_FILL</property>
+                                  </packing>
                                 </child>
                               </widget>
                               <packing>

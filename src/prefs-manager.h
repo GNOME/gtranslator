@@ -39,8 +39,7 @@
 #define GPM_AUTOSAVE_DIR		GPM_PREFS_DIR "/files/autosave"
 #define GPM_AUTOSAVE			GPM_AUTOSAVE_DIR "/autosave"
 #define GPM_AUTOSAVE_INTERVAL		GPM_AUTOSAVE_DIR "/autosave_interval"
-#define GPM_APPEND_SUFFIX		GPM_AUTOSAVE_DIR "/append_suffix"
-#define GPM_AUTOSAVE_SUFFIX		GPM_AUTOSAVE_DIR "/autosave_suffix"
+#define GPM_CREATE_BACKUP		GPM_AUTOSAVE_DIR "/create_backup"
 
 /* Editor */
 #define GPM_TEXT_DISPLAY_DIR		GPM_PREFS_DIR "/editor/text_display"
@@ -91,8 +90,7 @@
 
 #define GPM_DEFAULT_AUTOSAVE		  0 /* FALSE */
 #define GPM_DEFAULT_AUTOSAVE_INTERVAL	  4
-#define GPM_DEFAULT_APPEND_SUFFIX         0 /* FALSE */
-#define GPM_DEFAULT_AUTOSAVE_SUFFIX	  (const gchar*) "autosave"
+#define GPM_DEFAULT_CREATE_BACKUP         0 /* FALSE */
 
 /* Editor */
 #define GPM_DEFAULT_HIGHLIGHT             1 /* TRUE */
@@ -157,13 +155,9 @@ gboolean                 gtranslator_prefs_manager_get_autosave                 
 void                     gtranslator_prefs_manager_set_autosave_interval        (gint timeout);
 gint                     gtranslator_prefs_manager_get_autosave_interval        (void);
 
-/*Append suffix*/
-void                     gtranslator_prefs_manager_set_append_suffix            (gboolean aws);
-gboolean                 gtranslator_prefs_manager_get_append_suffix            (void);
-
-/*Autosave suffix*/
-void                     gtranslator_prefs_manager_set_autosave_suffix          (const gchar *suffix);
-const gchar *            gtranslator_prefs_manager_get_autosave_suffix          (void);
+/*Create backup*/
+void                     gtranslator_prefs_manager_set_create_backup            (gboolean backup);
+gboolean                 gtranslator_prefs_manager_get_create_backup            (void);
 
 /*Highlight*/
 void                     gtranslator_prefs_manager_set_highlight                (gboolean highlight);
@@ -184,10 +178,6 @@ const gchar *            gtranslator_prefs_manager_get_editor_font              
 /*Unmark fuzzy*/
 void                     gtranslator_prefs_manager_set_unmark_fuzzy             (gboolean unmark);
 gboolean                 gtranslator_prefs_manager_get_unmark_fuzzy             (void);
-
-/*keep obsolete*/
-void                     gtranslator_prefs_manager_set_keep_obsolete            (gboolean keep_obsolete);
-gboolean                 gtranslator_prefs_manager_get_keep_obsolete            (void);
 
 /*Spellcheck*/
 void                     gtranslator_prefs_manager_set_spellcheck               (gboolean spell_checking);

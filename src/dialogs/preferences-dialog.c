@@ -37,7 +37,7 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 #include <gtk/gtk.h>
-
+#include <string.h>
 
 #define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
@@ -59,9 +59,7 @@ struct _GtranslatorPreferencesDialogPrivate
 	GtkWidget *autosave_checkbutton;
 	GtkWidget *autosave_interval_spinbutton;
 	GtkWidget *autosave_hbox;
-	GtkWidget *append_suffix_checkbutton;
-	GtkWidget *autosave_suffix_entry;
-	GtkWidget *autosave_suffix_hbox;
+	GtkWidget *create_backup_checkbutton;
 	
 	/* Editor->Text display */
 	GtkWidget *highlight_checkbutton;
@@ -72,7 +70,6 @@ struct _GtranslatorPreferencesDialogPrivate
 	
 	/* Editor->Contents */
 	GtkWidget *unmark_fuzzy_checkbutton;
-	GtkWidget *keep_obsolete_checkbutton;
 	GtkWidget *spellcheck_checkbutton;
 
 	/*Profiles*/
@@ -170,17 +167,16 @@ autosave_checkbutton_toggled(GtkToggleButton *button,
 }
 
 static void
-append_suffix_checkbutton_toggled(GtkToggleButton *button,
-					 GtranslatorPreferencesDialog *dlg)
+create_backup_checkbutton_toggled (GtkToggleButton *button,
+				   GtranslatorPreferencesDialog *dlg)
 {
-	gboolean append_suffix;
+	gboolean create_backup;
 	
-	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->append_suffix_checkbutton));
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->create_backup_checkbutton));
 	
-	append_suffix = gtk_toggle_button_get_active(button);
+	create_backup = gtk_toggle_button_get_active (button);
 	
-	gtk_widget_set_sensitive(dlg->priv->autosave_suffix_hbox, append_suffix);
-	gtranslator_prefs_manager_set_append_suffix(append_suffix);
+	gtranslator_prefs_manager_set_create_backup (create_backup);
 }
 
 static void
@@ -193,31 +189,18 @@ autosave_interval_spinbutton_value_changed(GtkSpinButton *spin_button,
 }
 
 static void
-autosave_suffix_entry_changed(GObject    *gobject,
-			      GParamSpec *arg1,
-			      GtranslatorPreferencesDialog *dlg)
-{
-	const gchar *text;
-	
-	text = gtk_entry_get_text(GTK_ENTRY(gobject));
-	
-	gtranslator_prefs_manager_set_autosave_suffix(text);
-}
-
-static void
 setup_files_autosave_page(GtranslatorPreferencesDialog *dlg)
 {
-	gboolean autosave, suffix;
+	gboolean autosave, backup;
 	gint autosave_interval;
-	const gchar *autosave_suffix;
 
 	/*Set initial value*/
 	autosave = gtranslator_prefs_manager_get_autosave();
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->autosave_checkbutton),
 				     autosave);
-	suffix = gtranslator_prefs_manager_get_append_suffix();
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->append_suffix_checkbutton),
-				     suffix);
+	backup = gtranslator_prefs_manager_get_create_backup ();
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->create_backup_checkbutton),
+				      backup);
 	
 	autosave_interval = gtranslator_prefs_manager_get_autosave_interval();
 	
@@ -227,31 +210,19 @@ setup_files_autosave_page(GtranslatorPreferencesDialog *dlg)
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(dlg->priv->autosave_interval_spinbutton),
 				  autosave_interval);
 	
-	autosave_suffix = gtranslator_prefs_manager_get_autosave_suffix();
-	if(!autosave_suffix)
-		autosave_suffix = GPM_DEFAULT_AUTOSAVE_SUFFIX;
-	gtk_entry_set_text(GTK_ENTRY(dlg->priv->autosave_suffix_entry),
-			   autosave_suffix);
-	
-	
 	/*Set sensitive*/
 	gtk_widget_set_sensitive(dlg->priv->autosave_hbox,
 				 autosave);
-	gtk_widget_set_sensitive(dlg->priv->autosave_suffix_hbox,
-				 suffix);
 	
 	/*Connect signals*/
 	g_signal_connect(dlg->priv->autosave_checkbutton, "toggled",
 			 G_CALLBACK(autosave_checkbutton_toggled),
 			 dlg);
-	g_signal_connect(dlg->priv->append_suffix_checkbutton, "toggled",
-			 G_CALLBACK(append_suffix_checkbutton_toggled),
+	g_signal_connect(dlg->priv->create_backup_checkbutton, "toggled",
+			 G_CALLBACK(create_backup_checkbutton_toggled),
 			 dlg);
 	g_signal_connect(dlg->priv->autosave_interval_spinbutton, "value-changed",
 			 G_CALLBACK(autosave_interval_spinbutton_value_changed),
-			 dlg);
-	g_signal_connect(dlg->priv->autosave_suffix_entry, "notify::text",
-			 G_CALLBACK(autosave_suffix_entry_changed),
 			 dlg);
 }
 
@@ -366,15 +337,6 @@ unmark_fuzzy_checkbutton_toggled(GtkToggleButton *button,
 }
 
 static void
-keep_obsolete_checkbutton_toggled(GtkToggleButton *button,
-				  GtranslatorPreferencesDialog *dlg)
-{
-	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->keep_obsolete_checkbutton));
-
-	gtranslator_prefs_manager_set_keep_obsolete(gtk_toggle_button_get_active(button));
-}
-
-static void
 spellcheck_checkbutton_toggled(GtkToggleButton *button,
 					   GtranslatorPreferencesDialog *dlg)
 {
@@ -389,17 +351,12 @@ setup_editor_contents(GtranslatorPreferencesDialog *dlg)
 	/*Set initial values*/
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->unmark_fuzzy_checkbutton),
 				     gtranslator_prefs_manager_get_unmark_fuzzy());
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->keep_obsolete_checkbutton),
-				     gtranslator_prefs_manager_get_keep_obsolete());
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->spellcheck_checkbutton),
 				     gtranslator_prefs_manager_get_spellcheck());
 	
 	/*Connect signals*/
 	g_signal_connect(dlg->priv->unmark_fuzzy_checkbutton, "toggled",
 			 G_CALLBACK(unmark_fuzzy_checkbutton_toggled),
-			 dlg);
-	g_signal_connect(dlg->priv->keep_obsolete_checkbutton, "toggled",
-			 G_CALLBACK(keep_obsolete_checkbutton_toggled),
 			 dlg);
 	g_signal_connect(dlg->priv->spellcheck_checkbutton, "toggled",
 			 G_CALLBACK(spellcheck_checkbutton_toggled),
@@ -1066,9 +1023,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"autosave_checkbutton", &dlg->priv->autosave_checkbutton,
 		"autosave_interval_spinbutton", &dlg->priv->autosave_interval_spinbutton,
 		"autosave_hbox", &dlg->priv->autosave_hbox,
-		"append_suffix_checkbutton", &dlg->priv->append_suffix_checkbutton,
-		"autosave_suffix_entry", &dlg->priv->autosave_suffix_entry,
-		"autosave_suffix_hbox", &dlg->priv->autosave_suffix_hbox,
+		"create_backup_checkbutton", &dlg->priv->create_backup_checkbutton,
 
 		"highlight_checkbutton", &dlg->priv->highlight_checkbutton,
 		"visible_whitespace_checkbutton", &dlg->priv->visible_whitespace_checkbutton,
@@ -1077,7 +1032,6 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"editor_font_hbox", &dlg->priv->editor_font_hbox,
 
 		"unmark_fuzzy_checkbutton", &dlg->priv->unmark_fuzzy_checkbutton,
-		"keep_obsolete_checkbutton", &dlg->priv->keep_obsolete_checkbutton,
 		"spellcheck_checkbutton", &dlg->priv->spellcheck_checkbutton,
 
 		"profile_treeview", &dlg->priv->profile_treeview,
