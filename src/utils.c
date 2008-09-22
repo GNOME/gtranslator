@@ -55,28 +55,8 @@ static const gchar * badwords[]=
 	NULL
 };
 
-static gchar *
-create_word_from_positions (const gchar *string,
-			    gint start,
-			    gint end)
-{
-	gchar toret[end+1 - start];
-	gint i = start;
-	gint j = 0;
-	
-	while (i <= end)
-	{
-		toret[j] = string[i];
-		j++;
-		i++;
-	}
-	toret[j] = '\0';
-	
-	return g_strdup (toret);
-}
-
 static gboolean
-check_good_word (const gchar *word)
+check_good_word (const gchar *word, gchar **badwords)
 {
 	gboolean check = TRUE;
 	gchar *lower = g_utf8_strdown (word, -1);
@@ -84,12 +64,15 @@ check_good_word (const gchar *word)
 	
 	while (badwords[i] != NULL)
 	{
-		if (g_utf8_collate (lower, badwords[i]) == 0)
+		gchar *lower_collate = g_utf8_collate_key (lower, -1);
+		
+		if (strcmp (lower_collate, badwords[i]) == 0)
 		{
 			check = FALSE;
 			break;
 		}
 		i++;
+		g_free (lower_collate);
 	}
 	return check;
 }
@@ -110,7 +93,23 @@ gtranslator_utils_split_string_in_words (const gchar *string)
 	GPtrArray *array;
 	gint char_len;
 	gint i = 0;
-	gint start;
+	gchar *s;
+	static gchar **badwords_collate = NULL;
+	
+	if (badwords_collate == NULL)
+	{
+		gint words_size = g_strv_length ((gchar **)badwords);
+		gint x = 0;
+		
+		badwords_collate = g_new0 (gchar *, words_size);
+		
+		while (badwords[x] != NULL)
+		{
+			badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
+			x++;
+		}
+		badwords_collate[x] = NULL;
+	}
 
 	char_len = g_utf8_strlen (string, -1);
 	attrs = g_new (PangoLogAttr, char_len + 1);
@@ -124,28 +123,26 @@ gtranslator_utils_split_string_in_words (const gchar *string)
 
 	array = g_ptr_array_new ();
 	
+	s = (gchar *)string;
 	while (i <= char_len)
 	{
+		gchar *start, *end;
+		
 		if (attrs[i].is_word_start)
+			start = s;
+		if (attrs[i].is_word_end)
 		{
-			start = i;
+			gchar *word;
 			
-			if (attrs[i].is_word_end)
-			{
-				gchar *word = create_word_from_positions (string, start, i);
-				
-				if (check_good_word (word))
-					g_ptr_array_add (array, word);
-			}			
-		}
-		else if (attrs[i].is_word_end)
-		{
-			gchar *word = create_word_from_positions (string, start, i);
+			end = s;
+			word = g_strndup (start, end - start);
 			
-			if (check_good_word (word))
+			if (check_good_word (word, badwords_collate))
 				g_ptr_array_add (array, word);
 		}
+
 		i++;
+		s = g_utf8_next_char (s);
 	}
 	
 	g_free (attrs);

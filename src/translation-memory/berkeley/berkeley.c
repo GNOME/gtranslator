@@ -91,6 +91,7 @@ gtranslator_berkeley_store (GtranslatorTranslationMemory *tm,
 							     words[i],
 							     sz,
 							     key);
+			g_strfreev (words);
 		}
 		return ok;
 	}
@@ -98,22 +99,28 @@ gtranslator_berkeley_store (GtranslatorTranslationMemory *tm,
 	{
 		gboolean found = FALSE;
 		gint i = 0;
+		gchar *translation_collate;
 		GPtrArray *t = gtranslator_db_trans_read (ber->priv->trans,
 							  key);
 		if (!t)
 			return FALSE;
 		
+		translation_collate = g_utf8_collate_key (translation, -1);
 		// -1 because we know that last element is NULL
 		while (i < t->len - 1)
 		{
-			if (g_utf8_collate (g_ptr_array_index (t, i), translation) == 0)
+			gchar *array_word = g_utf8_collate_key (g_ptr_array_index (t, i), -1);
+			
+			if (strcmp (array_word, translation_collate) == 0)
 			{
 				found = TRUE;
 				break;
 			}
 			
+			g_free (array_word);
 			i++;
 		}
+		g_free (translation_collate);
 		
 		if (!found)
 		{

@@ -138,6 +138,8 @@ gtranslator_db_words_append (GtranslatorDbWords *db_words,
 		value_buf[count] = value;
 		data.data = value_buf;
 		data.size = (count + 1) * sizeof(db_recno_t);
+		
+		g_object_unref (keys);
 	}
 
 	error = gtranslator_db_base_put (GTR_DB_BASE (db_words),
