@@ -261,7 +261,7 @@ dnl  **********************************************************
 
 AC_MSG_CHECKING(for Subversion svn-config)
 AC_ARG_WITH(subversion-dir,
-		[  --with-subversion-dir=DIR           where Subversion is installed ],
+		AC_HELP_STRING([--with-subversion-dir=DIR],[where Subversion is installed]),
 		[
 				SVNCONFIG="$withval/bin/svn-config"
 		])
@@ -285,7 +285,7 @@ else
 		
 		dnl just a fallback to debian's config so that it works for me :)
 		AC_ARG_WITH(svn-include,
-								[[  --with-svn-include=DIR   Use the given path to the subversion headers.]],
+								AC_HELP_STRING([--with-svn-include=DIR],[Use the given path to the subversion headers.]),
 								[
 								if test "$withval" != "yes" -a "$withval" != ""; then
 										SVN_INCLUDES=$withval
@@ -313,7 +313,7 @@ else
 		fi
 		SVN_LIBS="/usr/local/lib /usr/lib"
 		AC_ARG_WITH(svn-lib,
-						[[  --with-svn-lib=DIR  Use the given path to the subversion libraries.]],
+						AC_HELP_STRING([--with-svn-lib=DIR],[Use the given path to the subversion libraries.]),
 						[
 							if test "$withval" != "yes" -a "$withval" != ""; then
 								SVN_LIBS=$withval
@@ -340,7 +340,7 @@ dnl FIXME: This should actually be done by subversion and not by us.
 dnl ******************************************************************
 
 AC_ARG_ENABLE(plugin-subversion,
-  [  --disable-plugin-subversion        Disable subversion support in GTranslator.],
+  AC_HELP_STRING([--disable-plugin-subversion],[Disable subversion support in GTranslator.]),
   [ if test "$enableval" = "no"; then
         user_disabled_subversion=1
     fi ],
@@ -362,8 +362,7 @@ if test -n "$SVN_INCLUDE" ; then
 	
 	APR_CONFIGS="apr-config /usr/local/apr/bin/apr-config/ apr-1-config "
 	AC_ARG_WITH(apr-config,
-	[[  --with-apr-config=FILE    Use the given path to apr-config when determining
-								APR configuration; defaults to "apr-config"]],
+	AC_HELP_STRING([--with-apr-config=FILE],[Use the given path to apr-config when determining APR configuration; defaults to "apr-config"]),
 	[
 	if test "$withval" != "yes" -a "$withval" != ""; then
 	  APR_CONFIGS=$withval
@@ -394,8 +393,7 @@ if test -n "$SVN_INCLUDE" ; then
 	
 	APU_CONFIGS="apu-config /usr/local/apr/bin/apu-config apu-1-config"
 	AC_ARG_WITH(apu-config,
-	[[  --with-apu-config=FILE    Use the given path to apu-config when determining
-								APR util configuration; defaults to "apu-config"]],
+	AC_HELP_STRING([--with-apu-config=FILE],[Use the given path to apu-config when determining APR util configuration; defaults to "apu-config"]),
 	[
 		if test "$withval" != "yes" -a "$withval" != ""; then
 			APU_CONFIGS=$withval
@@ -428,8 +426,7 @@ if test -n "$SVN_INCLUDE" ; then
 
 	NEON_CONFIGS="neon-config"
 	AC_ARG_WITH(neon-config,
-	[[  --with-neon-config=FILE    Use the given path to neon-config when determining
-								Neon configuration; defaults to "neon-config"]],
+	AC_HELP_STRING([--with-neon-config=FILE],[Use the given path to neon-config when determining Neon configuration; defaults to "neon-config"]),
 	[
 		if test "$withval" != "yes" -a "$withval" != ""; then
 			NEON_CONFIGS=$withval
@@ -475,7 +472,7 @@ dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(debug,
-	[  --enable-debug              Turn on debugging flags (default=yes)],
+	AC_HELP_STRING([--enable-debug],[Turn on debugging flags (default=yes)]),
 	,enable_debug=yes)
 AC_MSG_CHECKING([if a debug friendly version should be build])
 if test "x$enable_debug" = "xyes" ; then
