@@ -162,6 +162,7 @@ main(gint argc,
 	engine = gtranslator_plugins_engine_get_default ();
 	
 	gtk_about_dialog_set_url_hook (gtranslator_utils_activate_url, NULL, NULL);
+	gtk_about_dialog_set_email_hook (gtranslator_utils_activate_email, NULL, NULL);
 
 	/*
 	 * Load profiles list

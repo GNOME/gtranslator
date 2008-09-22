@@ -67,6 +67,10 @@ gboolean       g_utf8_caselessnmatch                  (const gchar *s1,
 void           gtranslator_utils_activate_url         (GtkAboutDialog *dialog,
 						       const gchar *url,
 						       gpointer data);
+
+void           gtranslator_utils_activate_email       (GtkAboutDialog *dialog,
+						       const gchar *email,
+						       gpointer data);
 						       
 void           gtranslator_utils_help_display         (GtkWindow   *parent,
 						       const gchar *doc_id,

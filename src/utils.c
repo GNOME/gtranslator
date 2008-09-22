@@ -700,6 +700,40 @@ gtranslator_utils_activate_url (GtkAboutDialog *dialog,
 }
 
 /**
+ * gtranslator_utils_activate_email:
+ * @dialog: a #GtkAboutDialog
+ * @email: the email to show
+ * @data: useless data variable
+ * 
+ * Shows the corresponding @email in the default mailer.
+ */
+void
+gtranslator_utils_activate_email (GtkAboutDialog *dialog,
+				  const gchar *email,
+				  gpointer data)
+{
+	//FIXME: gtk_url_show deprecates this func.
+	gchar *open[3];
+
+	if (g_find_program_in_path ("xdg-email"))
+	{
+		open[0] = "xdg-email";
+	}
+	else return;
+	
+	open[1] = (gchar *)email;
+	open[2] = NULL;
+					
+	gdk_spawn_on_screen (gdk_screen_get_default (),
+			     NULL,
+			     open,
+			     NULL,
+			     G_SPAWN_SEARCH_PATH,
+			     NULL,
+			     NULL, NULL, NULL);
+}
+
+/**
  * gtranslator_utils_help_display:
  * @parent: a #GtkWindow
  * @doc_id: the name of the type of doc
