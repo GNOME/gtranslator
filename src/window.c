@@ -909,6 +909,18 @@ sync_state (GtranslatorPo    *po,
 }
 
 static void
+showed_message_cb (GtranslatorTab *tab,
+		   GtranslatorMsg *msg,
+		   GtranslatorWindow *window)
+{
+	g_return_if_fail (GTR_IS_TAB (tab));
+	
+	gtranslator_window_update_statusbar_message_count (tab, msg, window);
+	
+	set_sensitive_according_to_message (window, gtranslator_tab_get_po (tab));
+}
+
+static void
 notebook_tab_added(GtkNotebook *notebook,
 		   GtkWidget   *child,
 		   guint        page_num,
@@ -951,7 +963,7 @@ notebook_tab_added(GtkNotebook *notebook,
 				window);
 	g_signal_connect_after (child,
 				"showed_message",
-				G_CALLBACK(gtranslator_window_update_statusbar_message_count),
+				G_CALLBACK(showed_message_cb),
 				window);
 				
 	g_signal_connect (gtranslator_tab_get_po (tab), 
