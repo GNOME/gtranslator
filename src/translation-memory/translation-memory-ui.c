@@ -27,7 +27,6 @@
 #include "tab.h"
 #include "window.h"
 
-#include <string.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib-object.h>
@@ -89,7 +88,7 @@ on_activate_item_cb (GtkMenuItem *menuitem,
 
   array = g_strsplit (name, "nº ", 2);
 
-  index = atoi (array[1]);
+  index = g_ascii_xdigit_value (*array[1]);
 
   po = gtranslator_tab_get_po (tm_ui->priv->tab);
   current_msg = gtranslator_po_get_current_message (po);
