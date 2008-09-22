@@ -325,6 +325,10 @@ DEFINE_INT_PREF (gdl_style,
 		 GPM_GDL_STYLE,
 		 GPM_DEFAULT_GDL_STYLE)
 
+DEFINE_STRING_PREF (scheme_color,
+		    GPM_SCHEME_COLOR,
+		    GPM_DEFAULT_SCHEME_COLOR)
+
 /* Translation Memory */
 DEFINE_STRING_PREF (tm_dir,
 		    GPM_TM_DIR,

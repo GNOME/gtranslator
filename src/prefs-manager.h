@@ -85,6 +85,7 @@
 /* Interface */
 #define GPM_INTERFACE_DIR		GPM_PREFS_DIR "/interface"
 #define GPM_GDL_STYLE			GPM_INTERFACE_DIR "/gdl_style"
+#define GPM_SCHEME_COLOR		GPM_INTERFACE_DIR "/scheme_color"
 
 /* Fallback default values. Keep in sync with gtranslator.schemas */
 
@@ -122,6 +123,7 @@
 
 /* Interface */
 #define GPM_DEFAULT_GDL_STYLE           2 //Both icons and text
+#define GPM_DEFAULT_SCHEME_COLOR	"classic"
 
 /* Translation Memory */
 #define GPM_DEFAULT_TM_DIR              (const gchar*) ""
@@ -204,6 +206,10 @@ const gchar *            gtranslator_prefs_manager_get_plural_form              
 /*Gdl style*/
 void                     gtranslator_prefs_manager_set_gdl_style                (gint style);
 gint                     gtranslator_prefs_manager_get_gdl_style                (void);
+
+/*Scheme color*/
+void                     gtranslator_prefs_manager_set_scheme_color             (const gchar *scheme);
+const gchar *            gtranslator_prefs_manager_get_scheme_color             (void);
 
 /*Translation Memory*/
 void                     gtranslator_prefs_manager_set_tm_dir                   (const gchar *dir);

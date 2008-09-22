@@ -40,6 +40,7 @@
 #include <gtksourceview/gtksourcelanguagemanager.h>
 #include <gtksourceview/gtksourceiter.h>
 #include <gtksourceview/gtksourcebuffer.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
 
 #ifdef HAVE_GTKSPELL
 #include <gtkspell/gtkspell.h>
@@ -150,6 +151,11 @@ gtranslator_view_init (GtranslatorView *view)
 	{
 		gtranslator_view_set_font (view, TRUE, NULL);
 	}
+	
+	/*
+	 * Set scheme color according to preferences
+	 */
+	gtranslator_view_reload_scheme_color (view);
 }
 
 static void
@@ -801,4 +807,22 @@ gtranslator_view_replace_all (GtranslatorView     *view,
 	g_free (replace_text);
 
 	return cont;
+}
+
+
+void
+gtranslator_view_reload_scheme_color (GtranslatorView *view)
+{
+	GtkSourceBuffer *buf;
+	GtkSourceStyleScheme *scheme;
+	GtkSourceStyleSchemeManager *manager;
+	const gchar *scheme_id;
+	
+	buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	manager = gtk_source_style_scheme_manager_get_default ();
+	
+	scheme_id = gtranslator_prefs_manager_get_scheme_color ();
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
+	
+	gtk_source_buffer_set_style_scheme (buf, scheme);
 }

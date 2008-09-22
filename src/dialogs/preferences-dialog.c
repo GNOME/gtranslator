@@ -38,6 +38,7 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <string.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
 
 #define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
@@ -105,6 +106,8 @@ struct _GtranslatorPreferencesDialogPrivate
 	
 	/*Inteface*/
 	GtkWidget *gdl_combobox;
+	GtkWidget *scheme_color_combobox;
+	GtkWidget *toolbar_combobox;
 	
 	/*Plugins*/
 	GtkWidget *plugins_box;
@@ -537,20 +540,52 @@ style_changed_cb (GtkComboBox *combobox,
 }
 
 static void
+scheme_color_changed_cb (GtkComboBox *combobox,
+			 GtranslatorPreferencesDialog *dlg)
+{
+	g_return_if_fail (combobox == GTK_COMBO_BOX (dlg->priv->scheme_color_combobox));
+	
+	gtranslator_prefs_manager_set_scheme_color (gtk_combo_box_get_active_text (combobox));
+}
+
+static void
 setup_interface_pages(GtranslatorPreferencesDialog *dlg)
 {
 	gint gdl_style;
+	GtkSourceStyleSchemeManager *manager;
+	const gchar * const *scheme_ids;
+	const gchar * scheme_active;
+	gint i = 0;
 	
 	/*Set initial value*/
 	gdl_style = gtranslator_prefs_manager_get_gdl_style ();
 	if (gdl_style)
 		gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
 					  gdl_style);
+	
+	/*
+	 * Scheme color
+	 */
+	manager = gtk_source_style_scheme_manager_get_default ();
+	scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
+	scheme_active = gtranslator_prefs_manager_get_scheme_color ();
+	while (scheme_ids [i] != NULL)
+	{
+		gtk_combo_box_append_text (GTK_COMBO_BOX (dlg->priv->scheme_color_combobox),
+					   scheme_ids[i]);
+		if (strcmp (scheme_ids[i], scheme_active) == 0)
+			gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->scheme_color_combobox),
+						  i);
+		i++;
+	}
 		
 	/*Connect signals*/
-	g_signal_connect(dlg->priv->gdl_combobox, "changed",
-			 G_CALLBACK (style_changed_cb),
-			 dlg);
+	g_signal_connect (dlg->priv->gdl_combobox, "changed",
+			  G_CALLBACK (style_changed_cb),
+			  dlg);
+	g_signal_connect (dlg->priv->scheme_color_combobox, "changed",
+			  G_CALLBACK (scheme_color_changed_cb),
+			  dlg);
 }
 
 /***************Translation Memory pages****************/
@@ -1174,6 +1209,8 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
  		"sentence_length_spinbutton", &dlg->priv->sentence_length_spinbutton,
  		
 		"gdl_combobox", &dlg->priv->gdl_combobox,
+		"scheme_color_combobox", &dlg->priv->scheme_color_combobox,
+		"toolbar_combobox", &dlg->priv->toolbar_combobox,
 		
 		"plugins_box", &dlg->priv->plugins_box,
 		NULL);

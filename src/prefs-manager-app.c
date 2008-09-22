@@ -68,6 +68,11 @@ static void gtranslator_prefs_manager_autosave_changed (GConfClient *client,
 							GConfEntry  *entry,
 							gpointer     user_data);
 
+static void gtranslator_prefs_manager_scheme_color_changed (GConfClient *client,
+							    guint        cnxn_id, 
+							    GConfEntry  *entry, 
+							    gpointer     user_data);
+
 /* GUI state is serialized to a .desktop file, not in gconf */
 
 #define GTR_STATE_DEFAULT_WINDOW_STATE		0
@@ -443,7 +448,12 @@ gtranslator_prefs_manager_app_init (void)
 		gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
 					 GPM_AUTOSAVE,
 					 gtranslator_prefs_manager_autosave_changed,
-					 NULL, NULL, NULL);		
+					 NULL, NULL, NULL);
+		
+		gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+					 GPM_SCHEME_COLOR,
+					 gtranslator_prefs_manager_scheme_color_changed,
+					 NULL, NULL, NULL);
 	}
 
 	return gtranslator_prefs_manager != NULL;	
@@ -689,5 +699,21 @@ gtranslator_prefs_manager_autosave_changed (GConfClient *client,
 		}
 
 		g_list_free (tabs);
+	}
+}
+
+static void
+gtranslator_prefs_manager_scheme_color_changed (GConfClient *client,
+						guint        cnxn_id, 
+						GConfEntry  *entry, 
+						gpointer     user_data)
+{
+	GList *views, *l;
+	
+	views = gtranslator_application_get_views (GTR_APP, TRUE, TRUE);
+	
+	for (l = views; l != NULL; l = g_list_next (l))
+	{
+		gtranslator_view_reload_scheme_color (GTR_VIEW (l->data));
 	}
 }
