@@ -30,6 +30,130 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 
+static const gchar * badwords[]= 
+{
+	"a",
+	//"all",
+	"an",
+	//"are",
+	//"can",
+	//"for",
+	//"from",
+	"have",
+	//"it",
+	//"may",
+	//"not",
+	"of",
+	//"that",
+	"the",
+	//"this",
+	//"was",
+	"will",
+	//"with",
+	//"you",
+	//"your",
+	NULL
+};
+
+static gchar *
+create_word_from_positions (const gchar *string,
+			    gint start,
+			    gint end)
+{
+	gchar toret[end+1 - start];
+	gint i = start;
+	gint j = 0;
+	
+	while (i <= end)
+	{
+		toret[j] = string[i];
+		j++;
+		i++;
+	}
+	toret[j] = '\0';
+	
+	return g_strdup (toret);
+}
+
+static gboolean
+check_good_word (const gchar *word)
+{
+	gboolean check = TRUE;
+	gchar *lower = g_utf8_strdown (word, -1);
+	gint i = 0;
+	
+	while (badwords[i] != NULL)
+	{
+		if (g_utf8_collate (lower, badwords[i]) == 0)
+		{
+			check = FALSE;
+			break;
+		}
+		i++;
+	}
+	return check;
+}
+
+/**
+ * gtranslator_utils_split_string_in_words:
+ * @string: the text to process
+ *
+ * Process a text and split it in words using pango.
+ * 
+ * Returns: an array of words of the processed text
+ */
+gchar **
+gtranslator_utils_split_string_in_words (const gchar *string)
+{
+	PangoLanguage *lang = pango_language_from_string ("en");
+	PangoLogAttr *attrs;
+	GPtrArray *array;
+	gint char_len;
+	gint i = 0;
+	gint start;
+
+	char_len = g_utf8_strlen (string, -1);
+	attrs = g_new (PangoLogAttr, char_len + 1);
+	
+	pango_get_log_attrs (string,
+			     strlen (string),
+			     -1,
+			     lang,
+			     attrs,
+			     char_len + 1);
+
+	array = g_ptr_array_new ();
+	
+	while (i <= char_len)
+	{
+		if (attrs[i].is_word_start)
+		{
+			start = i;
+			
+			if (attrs[i].is_word_end)
+			{
+				gchar *word = create_word_from_positions (string, start, i);
+				
+				if (check_good_word (word))
+					g_ptr_array_add (array, word);
+			}			
+		}
+		else if (attrs[i].is_word_end)
+		{
+			gchar *word = create_word_from_positions (string, start, i);
+			
+			if (check_good_word (word))
+				g_ptr_array_add (array, word);
+		}
+		i++;
+	}
+	
+	g_free (attrs);
+	g_ptr_array_add (array, NULL);
+	
+	return (gchar **)g_ptr_array_free (array, FALSE);
+}
+
 xmlDocPtr 
 gtranslator_xml_new_doc (const gchar *name) 
 {

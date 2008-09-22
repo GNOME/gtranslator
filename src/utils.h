@@ -26,6 +26,8 @@
 #include <gtk/gtkwindow.h>
 #include <libxml/tree.h>
 
+gchar **       gtranslator_utils_split_string_in_words (const gchar *string);
+
 xmlDocPtr      gtranslator_xml_new_doc (const gchar *name);
 
 xmlDocPtr      gtranslator_xml_open_file (const gchar *filename);

@@ -1,3 +1,68 @@
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+        * translation-memory/berkeley/berkeley.c:
+        Fixed bug looking for 100% matches.
+
+2008-07-29  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* translation-memory/Makefile.am:
+	* translation-memory/berkeley/Makefile.am:
+	* translation-memory/berkeley/berkeley.c
+	(gtranslator_berkeley_store), (union_of_db_keys), (advance_cycle),
+	(look_fuzzy), (gtranslator_berkeley_lookup),
+	(gtranslator_berkeley_set_max_omits),
+	(gtranslator_berkeley_set_max_delta),
+	(gtranslator_translation_memory_iface_init),
+	(gtranslator_berkeley_init), (gtranslator_berkeley_finalize),
+	(gtranslator_berkeley_class_init), (gtranslator_berkeley_new):
+	* translation-memory/berkeley/berkeley.h:
+	* translation-memory/berkeley/db-base.c (get_db_base_directory),
+	(gtranslator_db_base_init), (gtranslator_db_base_finalize),
+	(gtranslator_db_base_class_init),
+	(gtranslator_db_base_create_dabatase),
+	(gtranslator_db_base_show_error), (gtranslator_db_base_put),
+	(gtranslator_db_base_get):
+	* translation-memory/berkeley/db-base.h:
+	* translation-memory/berkeley/db-keys.c (gtranslator_db_keys_init),
+	(gtranslator_db_keys_finalize), (gtranslator_db_keys_class_init),
+	(gtranslator_db_keys_new), (gtranslator_db_keys_new_with_size),
+	(gtranslator_db_keys_get_list), (gtranslator_db_keys_get_count),
+	(gtranslator_db_keys_set_count):
+	* translation-memory/berkeley/db-keys.h:
+	* translation-memory/berkeley/db-orig.c (gtranslator_db_orig_init),
+	(gtranslator_db_orig_finalize), (gtranslator_db_orig_class_init),
+	(gtranslator_db_orig_new), (gtranslator_db_orig_write),
+	(gtranslator_db_orig_read):
+	* translation-memory/berkeley/db-orig.h:
+	* translation-memory/berkeley/db-trans.c
+	(gtranslator_db_trans_init), (gtranslator_db_trans_finalize),
+	(gtranslator_db_trans_class_init), (gtranslator_db_trans_new),
+	(gtranslator_db_trans_write_string), (gtranslator_db_trans_write),
+	(gtranslator_db_trans_read):
+	* translation-memory/berkeley/db-trans.h:
+	* translation-memory/berkeley/db-words.c
+	(gtranslator_db_words_init), (gtranslator_db_words_finalize),
+	(gtranslator_db_words_class_init), (gtranslator_db_words_new),
+	(gtranslator_db_words_append), (gtranslator_db_words_read):
+	* translation-memory/berkeley/db-words.h:
+	* translation-memory/translation-memory.c
+	(gtranslator_translation_memory_store),
+	(gtranslator_translation_memory_store_default),
+	(gtranslator_translation_memory_lookup),
+	(gtranslator_translation_memory_lookup_default),
+	(gtranslator_translation_memory_set_max_omits),
+	(gtranslator_translation_memory_set_max_omits_default),
+	(gtranslator_translation_memory_set_max_delta),
+	(gtranslator_translation_memory_set_max_delta_default),
+	(gtranslator_translation_memory_base_init),
+	(gtranslator_translation_memory_get_type):
+	* translation-memory/translation-memory.h:
+	* utils.c (create_word_from_positions), (check_good_word),
+	(gtranslator_utils_split_string_in_words):
+	* utils.h:
+	
+	Added translation-memory backend.
+
 2008-05-26  Pablo Sanxiao  <psanxiao@gmail.com>
 
 	* utils.{ch}:

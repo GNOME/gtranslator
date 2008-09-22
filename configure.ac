@@ -8,6 +8,7 @@ AC_INIT(gtranslator, 1.9.3,
 	http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator)
 
 AC_CONFIG_SRCDIR(src/main.c)
+AC_CONFIG_MACRO_DIR([m4])
 AM_CONFIG_HEADER(config.h)
 
 GTR_API_VERSION=2.0
@@ -140,6 +141,17 @@ AC_CHECK_LIB([gettextpo], [po_format_list], [
 	LDFLAGS="$LDFLAGS -lgettextpo"
 ],[
 	AC_MSG_ERROR(Missing or inadequate gettext library. Need at least version 0.17.0)
+])
+
+dnl -------------------------------------------------------------------
+dnl Check for libdb >= 4.1
+dnl -------------------------------------------------------------------
+AX_BERKELEY_DB(4.1, [
+	AC_DEFINE([HAVE_DB_BERKELEY], 1, [A usable libdb library was found])
+	AC_DEFINE_UNQUOTED(DB_HEADER, ["$DB_HEADER"])
+	LDFLAGS="$LDFLAGS $DB_LIBS"
+],[
+	AC_MSG_ERROR([Cannot find Berkeley DB >= 4.1])
 ])
 
 dnl -------------------------------------------------------------------
@@ -295,6 +307,8 @@ src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile
 src/plugin-system/Makefile
+src/translation-memory/Makefile
+src/translation-memory/berkeley/Makefile
 ])
 
 dnl ------------------------------------------------------------------
