@@ -27,7 +27,9 @@ libdialogs_la_SOURCES = \
 	comment-dialog.c \
 	comment-dialog.h \
 	profile-dialog.c \
-	profile-dialog.h
+	profile-dialog.h \
+	assistant.c \
+	assistant.h
 
 gladedir = $(pkgdatadir)
 

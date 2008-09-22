@@ -25,6 +25,7 @@
 #include "window.h"
 #include "egg-toolbars-model.h"
 #include "dialogs/preferences-dialog.h"
+#include "dialogs/assistant.h"
 #include "./translation-memory/translation-memory.h"
 #include "./translation-memory/berkeley/berkeley.h"
   
@@ -61,6 +62,8 @@ struct _GtranslatorApplicationPrivate
 	gchar *last_dir;
 	
 	GtranslatorTranslationMemory *tm;
+	
+	gboolean first_run;
 };
 
 static gchar *
@@ -138,6 +141,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 	
 	priv->windows = NULL;
 	priv->last_dir = NULL;
+	priv->first_run = FALSE;
 	
 	/*
 	 * Creating config folder
@@ -175,6 +179,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 			gtranslator_application_shutdown (application);
 		}
 		
+		priv->first_run = TRUE;
 		g_object_unref (file);
 	}
 
@@ -309,12 +314,19 @@ gtranslator_application_open_window (GtranslatorApplication *app)
 	}
 	
 	g_signal_connect(window, "delete-event",
-			 G_CALLBACK(on_window_delete_event_cb), GTR_APP);
+			 G_CALLBACK(on_window_delete_event_cb), app);
 	
 	g_signal_connect(window, "destroy",
-			 G_CALLBACK(on_window_destroy_cb), GTR_APP);
+			 G_CALLBACK(on_window_destroy_cb), app);
 
 	gtk_widget_show(GTK_WIDGET(window));
+	
+	/*
+	 * If it is the first run, the default directory was created in this
+	 * run, then we show the First run Assistant
+	 */
+	if (app->priv->first_run)
+		gtranslator_show_assistant (window);
 	
 	return window;
 }
