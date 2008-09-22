@@ -39,7 +39,7 @@
 #include "config.h"
 
 #include "module.h"
-//#include "gtranslator-debug.h"
+#include "debug.h"
 
 typedef GType (*GtranslatorModuleRegisterFunc) (GTypeModule *);
 
@@ -58,12 +58,12 @@ gtranslator_module_load (GTypeModule *gmodule)
 	GtranslatorModuleRegisterFunc register_func;
 	gchar *path;
 
-	g_message( "Loading %s module from %s",
+	DEBUG_PRINT ( "Loading %s module from %s",
 			     module->module_name, module->path);
 
 	path = g_module_build_path (module->path, module->module_name);
 	g_return_val_if_fail (path != NULL, FALSE);
-	g_message( "Module filename: %s", path);
+	DEBUG_PRINT ( "Module filename: %s", path);
 
 	module->library = g_module_open (path, 0);
 	g_free (path);
@@ -111,7 +111,7 @@ gtranslator_module_unload (GTypeModule *gmodule)
 {
 	GtranslatorModule *module = GTR_MODULE (gmodule);
 
-	g_message( "Unloading %s", module->path);
+	DEBUG_PRINT ( "Unloading %s", module->path);
 
 	g_module_close (module->library);
 
@@ -128,7 +128,7 @@ gtranslator_module_class_real_garbage_collect (void)
 static void
 gtranslator_module_init (GtranslatorModule *module)
 {
-	g_message( "GtranslatorModule %p initialising", module);
+	DEBUG_PRINT ( "GtranslatorModule %p initialising", module);
 }
 
 static void
@@ -136,7 +136,7 @@ gtranslator_module_finalize (GObject *object)
 {
 	GtranslatorModule *module = GTR_MODULE (object);
 
-	g_message( "GtranslatorModule %p finalising", module);
+	DEBUG_PRINT ( "GtranslatorModule %p finalising", module);
 
 	g_free (module->path);
 	g_free (module->module_name);
@@ -235,7 +235,7 @@ gtranslator_module_new_object (GtranslatorModule *module)
 {
 	g_return_val_if_fail (module->type != 0, NULL);
 
-	g_message( "Creating object of type %s",
+	DEBUG_PRINT ( "Creating object of type %s",
 			     g_type_name (module->type));
 
 	return g_object_new (module->type, NULL);

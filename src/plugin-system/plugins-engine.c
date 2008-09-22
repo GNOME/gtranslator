@@ -40,7 +40,7 @@
 #include "plugins-engine.h"
 #include "plugin-info-priv.h"
 #include "plugin.h"
-//#include "gtranslator-debug.h"
+#include "debug.h"
 #include "application.h"
 
 #include "module.h"
@@ -96,7 +96,7 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 	g_return_if_fail (engine->priv->gconf_client != NULL);
 	g_return_if_fail (dir != NULL);
 
-	g_message( "DIR: %s", dir);
+	DEBUG_PRINT ( "DIR: %s", dir);
 
 	d = g_dir_open (dir, 0, &error);
 	if (!d)
@@ -141,7 +141,7 @@ gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine *engine,
 
 			engine->priv->plugin_list = g_list_prepend (engine->priv->plugin_list, info);
 
-			g_message( "Plugin %s loaded", info->name);
+			DEBUG_PRINT ( "Plugin %s loaded", info->name);
 		}
 	}
 
@@ -187,7 +187,7 @@ gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine *engine)
 	if (pdirs_env == NULL)
 		pdirs_env = GTR_PLUGINDIR;
 
-	g_message( "GTR_PLUGINS_PATH=%s", pdirs_env);
+	DEBUG_PRINT ( "GTR_PLUGINS_PATH=%s", pdirs_env);
 	pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
 
 	for (i = 0; pdirs[i] != NULL; i++)
@@ -395,7 +395,7 @@ load_plugin_module (GtranslatorPluginInfo *info)
 
 	g_type_module_unuse (G_TYPE_MODULE (info->module));
 
-	g_message( "End");
+	DEBUG_PRINT ( "End");
 
 	return TRUE;
 }
@@ -534,7 +534,7 @@ reactivate_all (GtranslatorPluginsEngine *engine,
 		}
 	}
 	
-	g_message( "End");
+	DEBUG_PRINT ( "End");
 }
 
 void
@@ -559,7 +559,7 @@ gtranslator_plugins_engine_update_plugins_ui (GtranslatorPluginsEngine *engine,
 		if (!info->available || !info->active)
 			continue;
 			
-	       	g_message( "Updating UI of %s", info->name);
+	       	DEBUG_PRINT ( "Updating UI of %s", info->name);
 		
 		gtranslator_plugin_update_ui (info->plugin, window);
 	}

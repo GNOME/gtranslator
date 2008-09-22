@@ -41,7 +41,7 @@
 #include "utils.h"
 #include "plugins-engine.h"
 #include "plugin.h"
-//#include "gtranslator-debug.h"
+#include "debug.h"
 
 enum
 {
@@ -141,7 +141,7 @@ configure_button_cb (GtkWidget          *button,
 
 	g_return_if_fail (info != NULL);
 
-	g_message( "Configuring: %s\n", 
+	DEBUG_PRINT ( "Configuring: %s\n", 
 			     gtranslator_plugin_info_get_name (info));
 
 	toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm)));
@@ -149,7 +149,7 @@ configure_button_cb (GtkWidget          *button,
 	gtranslator_plugins_engine_configure_plugin (pm->priv->engine,
 					       info, toplevel);
 
-	g_message( "Done");	
+	DEBUG_PRINT ( "Done");	
 }
 
 static void
@@ -335,7 +335,7 @@ plugin_manager_set_active (GtranslatorPluginManager *pm,
 	{
 		/* activate the plugin */
 		if (!gtranslator_plugins_engine_activate_plugin (pm->priv->engine, info)) {
-			g_message( "Could not activate %s.\n", 
+			DEBUG_PRINT ( "Could not activate %s.\n", 
 					     gtranslator_plugin_info_get_name (info));
 
 			res = FALSE;
@@ -345,7 +345,7 @@ plugin_manager_set_active (GtranslatorPluginManager *pm,
 	{
 		/* deactivate the plugin */
 		if (!gtranslator_plugins_engine_deactivate_plugin (pm->priv->engine, info)) {
-			g_message( "Could not deactivate %s.\n", 
+			DEBUG_PRINT ( "Could not deactivate %s.\n", 
 					     gtranslator_plugin_info_get_name (info));
 
 			res = FALSE;

@@ -54,6 +54,7 @@ BUILT_SOURCES =                         \
 INST_H_FILES =				\
 	application.h \
 	context.h \
+	debug.h \
 	header.h \
 	io-error-message-area.h \
 	message-area.h \
