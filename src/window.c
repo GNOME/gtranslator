@@ -828,7 +828,7 @@ set_window_title (GtranslatorWindow *window,
 	
 	if (with_path)
 	{
-		po = gtranslator_tab_get_po (GTR_TAB (tab));
+		po = gtranslator_tab_get_po (GTR_TAB (gtranslator_window_get_active_tab (window)));
 		file = gtranslator_po_get_location (po);
 		
 		/*

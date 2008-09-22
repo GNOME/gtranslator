@@ -1,5 +1,14 @@
 2008-09-04  Pablo Sanxiao  <psanxiao@gmail.com>
 
+	* window.c:
+	(set_window_title):
+	Fixed problem when sets the title window when tab
+	number drecreases to one.
+
+	Applied patch by Baris Cicek (bug #551068)
+	
+2008-09-04  Pablo Sanxiao  <psanxiao@gmail.com>
+
 	* plugin-system/plugins-engine.c:
 	(gtranslator_plugins_engine_load_all):
 	Changed g_list_foreach and g_list_free to
