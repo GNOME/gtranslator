@@ -1068,6 +1068,52 @@ gtranslator_po_get_prev_untrans (GtranslatorPo *po)
 }
 
 /**
+ * gtranslator_po_get_next_fuzzy_or_untrans:
+ * @po: a #GtranslatorPo
+ *
+ * Return value: a pointer to the next fuzzy or untranslated message
+ * or NULL if there is not next fuzzy or untranslated message.
+ **/
+GList *
+gtranslator_po_get_next_fuzzy_or_untrans (GtranslatorPo *po)
+{
+	GList *msg;
+	
+	msg = po->priv->current;
+	while (msg = g_list_next (msg))
+	{
+		if (gtranslator_msg_is_fuzzy (msg->data) ||
+		    !gtranslator_msg_is_translated (msg->data))
+			return msg;
+	}
+	
+	return NULL;
+}
+
+/**
+ * gtranslator_po_get_prev_fuzzy_or_untrans:
+ * @po: a #GtranslatorPo
+ *
+ * Return value: a pointer to the previously fuzzy or untranslated message
+ * or NULL if there is not previously fuzzy or untranslated message.
+ **/
+GList *
+gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo *po)
+{
+	GList *msg;
+	
+	msg = po->priv->current;
+	while (msg = g_list_previous (msg))
+	{
+		if (gtranslator_msg_is_fuzzy (msg->data) ||
+		    !gtranslator_msg_is_translated (msg->data))
+			return msg;
+	}
+	
+	return NULL;
+}
+
+/**
  * gtranslator_po_get_header:
  * @po: a #GtranslatorPo
  *

@@ -236,6 +236,12 @@ static const GtkActionEntry entries[] = {
 	{ "GoPreviousUntranslated", GTK_STOCK_GO_BACK, N_("Previ_ous Untranslated"),
 	  "<alt>Page_Up", N_("Go to the previous untranslated message"),
           G_CALLBACK (gtranslator_message_go_to_prev_untranslated) },
+	{ "GoNextFuzzyUntranslated", GTK_STOCK_GO_FORWARD, N_("Next Fu_zzy or Untranslated"),
+	  "<control><shift>Page_Down", N_("Go to the next fuzzy or untranslated message"),
+          G_CALLBACK (gtranslator_message_go_to_next_fuzzy_or_untranslated) },
+	{ "GoPreviousFuzzyUntranslated", GTK_STOCK_GO_BACK, N_("Pre_vious Fuzzy or Untranslated"),
+	  "<control><shift>Page_Up", N_("Go to the previous fuzzy or untranslated message"),
+          G_CALLBACK (gtranslator_message_go_to_prev_fuzzy_or_untranslated) },
 
 	/* Search menu*/
 	{ "SearchFind", GTK_STOCK_FIND, NULL, "<control>F",
@@ -601,6 +607,16 @@ set_sensitive_according_to_message(GtranslatorWindow *window,
 					     "GoPreviousUntranslated");
 	gtk_action_set_sensitive (action, 
 				  gtranslator_po_get_prev_untrans(po) != NULL);
+	
+	action = gtk_action_group_get_action(window->priv->action_group,
+					     "GoNextFuzzyUntranslated");
+	gtk_action_set_sensitive (action, 
+				  gtranslator_po_get_next_fuzzy_or_untrans (po) != NULL);
+	
+	action = gtk_action_group_get_action(window->priv->action_group,
+					     "GoPreviousFuzzyUntranslated");
+	gtk_action_set_sensitive (action, 
+				  gtranslator_po_get_prev_fuzzy_or_untrans (po) != NULL);
 }
 
 static void

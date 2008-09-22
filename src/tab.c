@@ -1646,3 +1646,57 @@ gtranslator_tab_go_to_prev_untrans (GtranslatorTab *tab)
 	
 	return FALSE;
 }
+
+/**
+ * gtranslator_tab_go_to_next_fuzzy_or_untrans:
+ * @tab: a #GtranslatorTab
+ *
+ * If there is a next fuzzy or untranslated message it jumps to it.
+ *
+ * Returns: TRUE if there is a next fuzzy or untranslated message.
+ */
+gboolean
+gtranslator_tab_go_to_next_fuzzy_or_untrans (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	GList *msg;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	msg = gtranslator_po_get_next_fuzzy_or_untrans (po);
+	if(msg != NULL)
+	{
+		gtranslator_tab_message_go_to (tab, msg, FALSE,
+					       GTR_TAB_MOVE_NONE);
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
+/**
+ * gtranslator_tab_go_to_prev_fuzzy_or_untrans:
+ * @tab: a #GtranslatorTab
+ *
+ * If there is a prev fuzzy or untranslated message it jumps to it.
+ *
+ * Returns: TRUE if there is a prev fuzzy or untranslated message.
+ */
+gboolean
+gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab *tab)
+{
+	GtranslatorPo *po;
+	GList *msg;
+	
+	po = gtranslator_tab_get_po (tab);
+	
+	msg = gtranslator_po_get_prev_fuzzy_or_untrans (po);
+	if(msg != NULL)
+	{
+		gtranslator_tab_message_go_to (tab, msg, FALSE,
+					       GTR_TAB_MOVE_NONE);
+		return TRUE;
+	}
+	
+	return FALSE;
+}

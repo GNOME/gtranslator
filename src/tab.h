@@ -155,6 +155,10 @@ gboolean               gtranslator_tab_go_to_prev_fuzzy    (GtranslatorTab *tab)
 gboolean               gtranslator_tab_go_to_next_untrans  (GtranslatorTab *tab);
 
 gboolean               gtranslator_tab_go_to_prev_untrans  (GtranslatorTab *tab);
+
+gboolean               gtranslator_tab_go_to_next_fuzzy_or_untrans (GtranslatorTab *tab);
+
+gboolean               gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab *tab);
 							    
 gboolean              _gtranslator_tab_can_close           (GtranslatorTab *tab);
 

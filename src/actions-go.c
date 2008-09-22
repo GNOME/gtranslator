@@ -135,3 +135,31 @@ gtranslator_message_go_to_prev_untranslated(GtkAction *action,
 	if (gtranslator_tab_go_to_prev_untrans (current))
 		set_sensitive_according_to_message (window, po);
 }
+
+void
+gtranslator_message_go_to_next_fuzzy_or_untranslated (GtkAction *action,
+						      GtranslatorWindow *window)
+{
+	GtranslatorTab *current;
+	GtranslatorPo *po;
+	GList *msg;
+	
+	current = gtranslator_window_get_active_tab (window);
+	po = gtranslator_tab_get_po (current);
+	if (gtranslator_tab_go_to_next_fuzzy_or_untrans (current))
+		set_sensitive_according_to_message (window, po);
+}
+
+void
+gtranslator_message_go_to_prev_fuzzy_or_untranslated (GtkAction *action,
+						      GtranslatorWindow *window)
+{
+	GtranslatorTab *current;
+	GtranslatorPo *po;
+	GList *msg;
+	
+	current = gtranslator_window_get_active_tab (window);
+	po = gtranslator_tab_get_po (current);
+	if (gtranslator_tab_go_to_prev_fuzzy_or_untrans (current))
+		set_sensitive_according_to_message (window, po);
+}
