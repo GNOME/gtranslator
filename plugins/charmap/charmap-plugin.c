@@ -26,11 +26,17 @@
 #include "charmap-panel.h"
 
 #include <glib/gi18n-lib.h>
+#include "debug.h"
 #include "application.h"
 #include "statusbar.h"
 #include "window.h"
+
+#ifdef HAVE_GUCHARMAP_2
+#include <gucharmap/gucharmap.h>
+#else
 #include <gucharmap/gucharmap-table.h>
 #include <gucharmap/gucharmap-unicode-info.h>
+#endif
 
 #define WINDOW_DATA_KEY	"GtranslatorCharmapPluginWindowData"
 
@@ -66,13 +72,15 @@ gtranslator_charmap_plugin_finalize (GObject *object)
 static void
 free_window_data (WindowData *data)
 {
-	g_return_if_fail (data != NULL);
-	
-	g_free (data);
+	g_slice_free (WindowData, data);
 }
 
 static void
+#ifdef HAVE_GUCHARMAP_2
+on_table_status_message (GucharmapChartable *chartable,
+#else
 on_table_status_message (GucharmapTable *chartable,
+#endif
 			 const gchar    *message,
 			 GtranslatorWindow    *window)
 {
@@ -91,13 +99,24 @@ on_table_status_message (GucharmapTable *chartable,
 }
 
 static void
+#ifdef HAVE_GUCHARMAP_2
+on_table_sync_active_char (GucharmapChartable *chartable,
+			   GParamSpec         *psepc,
+			   GtranslatorWindow        *window)
+#else
 on_table_set_active_char (GucharmapTable *chartable,
 			  gunichar        wc,
 			  GtranslatorWindow    *window)
+#endif
 {
 	GString *gs;
 	const gchar **temps;
 	gint i;
+#ifdef HAVE_GUCHARMAP_2
+        gunichar wc;
+
+        wc = gucharmap_chartable_get_active_character (chartable);
+#endif
 
 	gs = g_string_new (NULL);
 	g_string_append_printf (gs, "U+%4.4X %s", wc, 
@@ -130,30 +149,50 @@ on_table_focus_out_event (GtkWidget      *drawing_area,
 			  GdkEventFocus  *event,
 			  GtranslatorWindow    *window)
 {
+#ifdef HAVE_GUCHARMAP_2
+	GucharmapChartable *chartable;
+#else
 	GucharmapTable *chartable;
+#endif
 	WindowData *data;
 	
 	data = (WindowData *) g_object_get_data (G_OBJECT (window),
 						 WINDOW_DATA_KEY);
 	g_return_val_if_fail (data != NULL, FALSE);
 
+#ifdef HAVE_GUCHARMAP_2
+	chartable = gtranslator_charmap_panel_get_chartable
+					(GTR_CHARMAP_PANEL (data->panel));
+#else
 	chartable = gtranslator_charmap_panel_get_table
 					(GTR_CHARMAP_PANEL (data->panel));
+#endif
 
 	on_table_status_message (chartable, NULL, window);
 	return FALSE;
 }
 
+#ifdef HAVE_GUCHARMAP_2
+static void
+on_table_activate (GucharmapChartable *chartable,
+		   GtranslatorWindow *window)
+#else
 static void
 on_table_activate (GucharmapTable *chartable, 
 		   gunichar        wc, 
 		   GtranslatorWindow    *window)
+#endif
 {
 	GtkTextView   *view;
 	GtkTextBuffer *document;
 	GtkTextIter start, end;
 	gchar buffer[6];
 	gchar length;
+#ifdef HAVE_GUCHARMAP_2
+        gunichar wc;
+
+        wc = gucharmap_chartable_get_active_character (chartable);
+#endif
 	
 	g_return_if_fail (gucharmap_unichar_validate (wc));
 	
@@ -183,31 +222,57 @@ static GtkWidget *
 create_charmap_panel (GtranslatorWindow *window)
 {
 	GtkWidget      *panel;
+#ifdef HAVE_GUCHARMAP_2
+        GucharmapChartable *chartable;
+#else
 	GucharmapTable *table;
+#endif
 
 	panel = gtranslator_charmap_panel_new ();
-	table = gtranslator_charmap_panel_get_table (GTR_CHARMAP_PANEL (panel));
 
-	g_signal_connect (table,
+#ifdef HAVE_GUCHARMAP_2
+	chartable = gtranslator_charmap_panel_get_chartable (GTR_CHARMAP_PANEL (panel));
+#else
+	table = gtranslator_charmap_panel_get_table (GTR_CHARMAP_PANEL (panel));
+#endif
+
+#ifdef HAVE_GUCHARMAP_2
+	g_signal_connect (chartable,
+			  "notify::active-character",
+			  G_CALLBACK (on_table_sync_active_char),
+			  window);
+	g_signal_connect (chartable,
+			  "focus-out-event",
+			  G_CALLBACK (on_table_focus_out_event),
+			  window);
+	g_signal_connect (chartable,
 			  "status-message",
 			  G_CALLBACK (on_table_status_message),
 			  window);
+	g_signal_connect (chartable,
+			  "activate", 
+			  G_CALLBACK (on_table_activate),
+			  window);
 
+#else
 	g_signal_connect (table,
 			  "set-active-char",
 			  G_CALLBACK (on_table_set_active_char),
 			  window);
-
 	/* Note: GucharmapTable does not provide focus-out-event ... */
 	g_signal_connect (table->drawing_area,
 			  "focus-out-event",
 			  G_CALLBACK (on_table_focus_out_event),
 			  window);
-
+	g_signal_connect (table,
+			  "status-message",
+			  G_CALLBACK (on_table_status_message),
+			  window);
 	g_signal_connect (table,
 			  "activate", 
 			  G_CALLBACK (on_table_activate),
 			  window);
+#endif /* HAVE_GUCHARMAP_2 */
 
 	gtk_widget_show_all (panel);
 
@@ -220,8 +285,6 @@ impl_activate (GtranslatorPlugin *plugin,
 {
 	GtranslatorStatusbar *statusbar;
 	WindowData *data;
-
-	//gtranslator_debug (DEBUG_PLUGINS);
 
 	data = g_new (WindowData, 1);
 
@@ -251,22 +314,30 @@ static void
 impl_deactivate	(GtranslatorPlugin *plugin,
 		 GtranslatorWindow *window)
 {
-	GucharmapTable *chartable;
 	WindowData *data;
-
-	//gtranslator_debug (DEBUG_PLUGINS);
+#ifdef HAVE_GUCHARMAP_2
+	GucharmapChartable *chartable;
+#else
+	GucharmapTable *chartable;
+#endif
 
 	data = (WindowData *) g_object_get_data (G_OBJECT (window),
 						 WINDOW_DATA_KEY);
 	g_return_if_fail (data != NULL);
 
+#ifdef HAVE_GUCHARMAP_2
+	chartable = gtranslator_charmap_panel_get_chartable
+					(GTR_CHARMAP_PANEL (data->panel));
+#else
 	chartable = gtranslator_charmap_panel_get_table
 					(GTR_CHARMAP_PANEL (data->panel));
+#endif
 	on_table_status_message (chartable, NULL, window);
 
 	gtranslator_window_remove_widget (window, data->panel);
 			 
 	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
+
 }
 
 static void

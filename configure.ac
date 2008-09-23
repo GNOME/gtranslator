@@ -80,7 +80,6 @@ LIBXML_REQUIRED=2.4.12
 LIBGLADE_REQUIRED=2.6.0
 SOURCEVIEW_REQUIRED=2.0.0
 GDL_REQUIRED=0.6.0
-LIBGUCHARMAP_OPTIONAL=1.6.0
 GDICT_OPTIONAL=0.11.0
 GTKSPELL_OPTIONAL=2.0.2
 SVN_MAJOR=1
@@ -236,25 +235,20 @@ fi
 AM_CONDITIONAL(USE_DICTIONARY, test x"$have_gdict" = "xyes")
 
 # ================================================================
-# gcharmap
+# gucharmap
 # ================================================================
 have_gucharmap=no
-AC_ARG_WITH(charmap,
-	    AC_HELP_STRING([--with-charmap],
-	    		   [Build with charmap support]),,
-	    with_charmap=auto)
+GUCHARMAP2_OPTIONAL=2.23.0
+GUCHARMAP_OPTIONAL=1.6.0
+PKG_CHECK_MODULES([GUCHARMAP],[gucharmap-2 >= $GUCHARMAP2_OPTIONAL],
+                  [have_gucharmap=yes have_gucharmap_2=yes],[have_gucharmap_2=no])
+if test "$have_gucharmap_2" = "no"; then
+	PKG_CHECK_MODULES([GUCHARMAP], [gucharmap >= $GUCHARMAP_OPTIONAL],
+        		[have_gucharmap=yes],[have_gucharmap=no])
+fi
 
-if test x"$with_charmap" != "xno"
-then
-	PKG_CHECK_MODULES([GUCHARMAP], [
-		gucharmap >= $LIBGUCHARMAP_OPTIONAL
-	], have_gucharmap=yes, have_gucharmap=no)
-	
-	if test x"$have_gucharmap" = "xyes"
-	then
-		AC_DEFINE([HAVE_CHARMAP], 1, [Have gucharmap])
-	fi
-
+if test "$have_gucharmap_2" = "yes"; then
+	AC_DEFINE([HAVE_GUCHARMAP_2],[1],[Define if gucharmap API is version 2])
 fi
 
 AM_CONDITIONAL(USE_CHARMAP, test x"$have_gucharmap" = "xyes")
@@ -521,7 +515,7 @@ if [ test x"$have_gucharmap" = "xyes" ]; then
 	echo "Building charmap plugin: ...............................YES"
 else
 	echo "Building charmap plugin: ...............................NO"
-		echo "        Requires gucharmap >= $LIBGUCHARMAP_OPTIONAL=1.6.0"
+		echo "        Requires gucharmap >= $GUCHARMAP_OPTIONAL"
 fi
 
 if [ test x"$have_libsoup" = "xyes" ]; then
