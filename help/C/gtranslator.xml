@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-    <!ENTITY legal SYSTEM "legal.xml">
-    <!ENTITY appversion "1.0">
-    <!ENTITY manualversion "0.5">
-    <!ENTITY app "gtranslator">
-]>
+	  "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+	  <!ENTITY legal SYSTEM "legal.xml">
+	  <!ENTITY appversion "2.0">
+	  <!ENTITY manualversion "0.6">
+	  <!ENTITY app "Gtranslator">
+	  ]>
 <!-- ================ Document Header ================= -->
 
 <article id="index" lang="en">
@@ -14,66 +14,87 @@
     <title>Gtranslator Manual</title>
 
     <copyright>
-	    <year>2001</year>
-	    <holder>Emese Kovacs</holder>
+      <year>2008</year>
+      <holder>Igalia</holder>
+      <year>2001</year>
+      <holder>Emese Kovacs</holder>
     </copyright>
 
     <!-- Translators: uncomment this
-    <copyright>
-	    <year>2003</year>
-	    <holder>ME_THE_TRANSLATOR</holder>
-    </copyright>
-    -->
+	 <copyright>
+	   <year>2003</year>
+	   <holder>ME_THE_TRANSLATOR</holder>
+	 </copyright>
+	 -->
 
     <publisher role="maintainer">
-	    <publishername>GNOME Documentation Project</publishername>
+      <publishername>GNOME Documentation Project</publishername>
     </publisher>
 
     <releaseinfo>This is version &manualversion; of &app; manual.</releaseinfo>
 
     <legalnotice id="feedback">
-	    <title>Feedback Information</title>
-	    <para>
-		    To report a bug or make a suggestion regarding this
-		    application or this documentation, please see the
-		    <ulink type="help" url="ghelp:gnome-feedback">
-			    GNOME Feedback Page
-		    </ulink>
-	    </para>
+      <title>Feedback Information</title>
+      <para>
+	To report a bug or make a suggestion regarding this
+	application or this documentation, please see the
+	<ulink type="help" url="ghelp:gnome-feedback">
+	  GNOME Feedback Page
+	</ulink>
+      </para>
     </legalnotice>
-
+    
     <authorgroup>
-	    <author>
-		    <firstname>Emese</firstname>
-		    <surname>Kovacs</surname>
-		    <affiliation>
-			    <orgname>GNOME Documentation Project</orgname>
-			    <address><email>emese@gnome.hu</email></address>
-		    </affiliation>
-            </author>
+      <author>
+	<firstname>Pablo</firstname>	
+	<surname>Sanxiao</surname>
+	<affiliation>
+	  <orgname>Igalia</orgname>
+	  <addres><email>psanxiao@gmail.com</email></addres>
+	</affiliation>
+      </author>
+      <author>
+	<firstname>Emese</firstname>
+	<surname>Kovacs</surname>
+	<affiliation>
+	  <orgname>GNOME Documentation Project</orgname>
+	  <address><email>emese@gnome.hu</email></address>
+	</affiliation>
+      </author>
     </authorgroup>
 
     <revhistory>
-	    <revision>
-		    <revnumber>&app; Manual V&manualversion;</revnumber>
-		    <date>August 2003</date>
-		    <revdescription>
-			    <para role="author">Abel Cheung</para>
-			    <para role="publisher">
-				GNOME Documentation Project
-			    </para>
-		    </revdescription>
-	    </revision>
-	    <revision>
-		    <revnumber>&app; Manual V0.4</revnumber>
-		    <date>August 2001</date>
-		    <revdescription>
-			    <para role="author">Emese Kovacs</para>
-			    <para role="publisher">
-				GNOME Documentation Project
-			    </para>
-		    </revdescription>
-	    </revision>
+      <revision>
+	<revnumber>&app; Manual V&manualversion;</revnumber>
+	<date>September 2008</date>
+	<revdescription>
+	  <para role="author">Pablo Sanxiao</para>
+	  <para role="publisher">
+	    Igalia
+	  </para>
+	</revdescription>
+      </revision>
+
+      <revision>
+	<revnumber>&app; Manual V&manualversion;</revnumber>
+	<date>August 2003</date>
+	<revdescription>
+	  <para role="author">Abel Cheung</para>
+	  <para role="publisher">
+	    GNOME Documentation Project
+	  </para>
+	</revdescription>
+      </revision>
+      <revision>
+	<revnumber>&app; Manual V0.4</revnumber>
+	<date>August 2001</date>
+	<revdescription>
+	  <para role="author">Emese Kovacs</para>
+	  <para role="publisher">
+	    GNOME Documentation Project
+	  </para>
+	</revdescription>
+      </revision>
     </revhistory>
 
     <abstract role="description">
@@ -82,43 +103,56 @@
 
   </articleinfo>
   
-<!-- ================ Document Body ================= -->
+  <!-- ================ Document Body ================= -->
 
-<!-- ==== Introduction ====== -->
+  <!-- ==== Introduction ====== -->
 
   <sect1 id="gtranslator-introduction">
     <title>Introduction</title>
 
     <para>
-	<application>&app;</application> offers you a comfortable graphical
-	interface to edit gettext po files. It allows you to easily
-	navigate among fuzzy, translated and untranslated messages and has
-	a status bar displaying the number of messages for each category.
+      <application>&app;</application> offers you a comfortable graphical
+      interface to edit gettext po files. It allows you to easily
+      navigate among fuzzy, translated and untranslated messages and has
+      a status bar displaying the number of messages for each category.
     </para>
 
     <para>
-	<application>&app;</application> features loading and saving of
-	compressed po files and opening of remote files via Gnome-VFS.
-	Moreover, the application makes	it possible to merge an outdated
-	po file with a recent pot file, all from the graphical interface!
+      <application>&app;</application> features opening and editing some PO 
+      files at the same time including to manage their headers, seeing the
+      developer's information for each message (comments, context) and set
+      new personal comments.
     </para>
 
     <para>
-	The autotranslate function allows you to <quote>teach</quote>
-	<application>&app;</application> msgid and msgstr pairs from a set of
-	translated po files and then translate a new project using this
-	translation memory.
+      The profiles function allows you to have different <quote>accounts</quote>
+      with the necessary information to fill the header. The option <quote>use my
+      options to complete the following entries</quote> in the edit header dialog
+      takes the information from the active profile in order to fill the header values.
     </para>
 
     <para>
-	To run <application>&app;</application>, select 
-	<menuchoice>
-	  <guimenu>Programs</guimenu>
-	  <guisubmenu>Development</guisubmenu>
-	  <guimenuitem>&app;</guimenuitem>
-	</menuchoice>
-	from the <guimenu>Main Menu</guimenu>, or type
-	<command>&app;</command> on the command line.
+      The new system of translation memories let you use your own translated PO files in
+      order to create a database that will offer you possible options to translate the 
+      current message.
+    </para>
+
+    <para>
+     <application>&app;</application> provide a plugin system which makes it easily extending.
+     It include some useful plugins such as svn plugin in order to do the checkouts from
+     the repository and commit the new translations. There are also plugins to visualize the
+     source code where a message is, search in translation memories web services like Open Tran...
+    </para>
+
+    <para>
+      To run <application>&app;</application>, select 
+      <menuchoice>
+	<guimenu>Programs</guimenu>
+	<guisubmenu>Development</guisubmenu>
+	<guimenuitem>&app;</guimenuitem>
+      </menuchoice>
+      from the <guimenu>Main Menu</guimenu>, or type
+      <command>&app;</command> on the command line.
     </para>
 
   </sect1>
@@ -127,10 +161,10 @@
     <title>Using &app;</title>
 
     <para>
-	<application>&app;</application> is a full
-	featured graphical environment that makes it possible to
-	translate po files painlessly. This section describes basic
-	usage of <application>&app;</application>.
+      <application>&app;</application> is a full
+      featured graphical environment that makes it possible to
+      translate po files painlessly. This section describes basic
+      usage of <application>&app;</application>.
     </para>
 
     <sect2 id="gtranslator-basic-usage">
@@ -155,39 +189,44 @@
 	</screenshot>
       </figure>
 
-<!--
-      <FIGURE FLOAT="0" id="MAINWINDOW-FIG">
-        <title>Gtranslator Main Window</title>
-        <SCREENSHOT>
-          <SCREENINFO>Gtranslator Main Window</SCREENINFO>
-          <GRAPHIC FILEREF="figures/mainwindow" FORMAT="PNG"
-          SRCCREDIT="emese"></GRAPHIC>
-        </SCREENSHOT>
-      </FIGURE>
--->
+      <!--
+	  <FIGURE FLOAT="0" id="MAINWINDOW-FIG">
+            <title>Gtranslator Main Window</title>
+            <SCREENSHOT>
+              <SCREENINFO>Gtranslator Main Window</SCREENINFO>
+              <GRAPHIC FILEREF="figures/mainwindow" FORMAT="PNG"
+		       SRCCREDIT="emese"></GRAPHIC>
+            </SCREENSHOT>
+	  </FIGURE>
+	  -->
 
       <para>
 	The <interface>Main window</interface> is divided into three main area:
 	<itemizedlist>
-		<listitem>
-		<para>
-			The <interface>menubar</interface>
-			allows you the access the application menu.</para>
-		</listitem>
-		<listitem>
-		<para>
-			The <interface>toolbars</interface>
-			allow you quick access to frequently used file management,
-			navigation and compile functions.
-		</para>
-		</listitem>
-		<listitem>
-		<para>
-			The <interface>workspace</interface>
-			allows you to visualize and edit the messages contained
-			in the po file.
-		</para>
-		</listitem>
+	  <listitem>
+	    <para>
+	      The <interface>menubar</interface>
+	      allows you the access the application menu.</para>
+	  </listitem>
+	  <listitem>
+	    <para>
+	      The <interface>toolbar</interface>
+	      allow you quick access to frequently used file management,
+	      navigation and compile functions.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para>
+	      The <interface>workspace</interface>
+	      allows you to visualize and edit the messages contained
+	      in the po file. This area on its part is divided in another
+	      three. On the top is the message area with all messages of
+	      the PO file and its state. Under the message area, on the left
+	      is where it's showed the original message and the box where write
+	      the translation. Finally, on the right there is a panel with
+	      auxiliar information to help in the translation process.
+	    </para>
+	  </listitem>
 	</itemizedlist>
       </para>
 
@@ -218,270 +257,336 @@
 	  you wish to open and click <guibutton>OK</guibutton>.
 	</para>
 
-	<para>
-	  <application>&app;</application> offers you the possibility to open
-	  po files using the Gnome-VFS subsystem. This means that you
-	  may use URIs to access files on a remote system. Currently
-	  supported URIs are:
-	  <itemizedlist>
-	    <listitem>
-		<para>local file:// URI as in
-		<command>file://localhost/<replaceable>path_to_file</replaceable></command></para>
-	    </listitem>
-	    <listitem>
-		<para>remote http:// URI as in
-		<command>http://www.kabalak.net/gtranslator/gtranslator.pot</command>
-		</para>
-	    </listitem>
-	    <listitem>
-		<para>remote ftp:// URI as in
-		<command>ftp://<replaceable>ftp.somewhere.org</replaceable>/<replaceable>pub/tr.po</replaceable></command>
-		</para>
-	    </listitem>
-	  </itemizedlist>
-	</para>
-
-        <note>
-	  <title>Opening compressed po files</title>
-	  <para>
-	  <application>&app;</application> can open compressed po files.
-	  Click on the <guibutton>Open</guibutton> icon. This brings up the 
-	  <guilabel>Open po file</guilabel> dialog box. Choose a compressed
-	  po file (can be identified by its .gz extension). Click on
-	  <guibutton>OK</guibutton>. If <command>gzip</command> is installed
-	  on your system, you may open gzip compressed files.</para>
-	</note>
-
       </sect3>
       
       <sect3 id="gtranslator-edit-file">
         <title>Editing po file</title>
-        <para>(TBD) Basics on panes, where to click, message status,
-        basic navigation</para>
-        <para>(TBD) Tip on on using the tree view.</para>
+        <para> 
+	  The message area show all the messages in the PO file and their state.
+	  It is possible going to one specific message by clicking on it directly.
+	  You can also move through the messages with the buttons in the toolbar:
+	   <emphasis>forward</emphasis> and <emphasis>back</emphasis>. In the menu
+	  using
+	  <menuchoice>
+	    <guisubmenu>Go</guisubmenu>
+	    <guimenuitem>next fuzzy</guimenuitem>
+	  </menuchoice>
+	  and 
+	  <menuchoice>
+	    <guisubmenu>GO</guisubmenu>
+	    <guimenuitem>previous fuzzy</guimenuitem>
+	  </menuchoice>
+	  it is possible moving directly among fuzzy messages and using
+	  <menuchoice>
+	    <guisubmenu>Go</guisubmenu>
+	    <guimenuitem>next untranslated</guimenuitem>
+	  </menuchoice>
+	  and 
+	  <menuchoice>
+	    <guisubmenu>GO</guisubmenu>
+	    <guimenuitem>previous untranslated</guimenuitem>
+	  </menuchoice>
+	  it is possible moving directly among untranslated messages.
+	</para>
+
       </sect3>
 
       <sect3 id="gtranslator-save-file">
         <title>Saving po file</title>
-        <para>(TBD) How to save, save as comressed?</para>
-        <para>(TBD) Tip on turning fuzzy warnings on/off</para>
+        <para>
+	  When a PO file has been modified (in a message or in the header)
+	  a <quote>*</quote> appears before its name in the window title or in the tab
+	  if you are editing some PO files at the same time.
+	</para>
+	<para>
+	  If you close the PO file at this moment, then, the close dialog will be showed
+	  to you with this aspect:
+	</para>
+	
+	<figure id="gtranslator-closedialog-screenshot">
+	  <title>Close Dialog</title>
+	  <screenshot>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="figures/closedialog.png" format="PNG"/>
+	      </imageobject>
+	      <textobject>
+		<phrase>&app; Close Dialog</phrase>
+	      </textobject>
+	    </mediaobject>
+	  </screenshot>
+	</figure>
+	
       </sect3>
     </sect2>
-
-
+    
     <sect2 id="gtranslator-advanced-feature">
       <title>Advanced features</title>
-      <para>(TBD) Here come the advanced features, autotranslate, regexp
-      search, update...</para>
-
-      <sect3 id="gtranslator-advanced-autotranslate">
-	<title>Autotranslate</title>
-	<para>(TBD) Autotranslate is a nice feature.</para>
-      </sect3>
-      <sect3 id="gtranslator-advanced-update">
-	<title>Update</title>
-	<para>(TBD) Update from source with <application>intltool</application></para>
-      </sect3>
-      <sect3 id="gtranslator-advanced-search">
-	<title>Regexp search</title>
-	<para>(TBD) Not implemented yet</para>
-      </sect3>
-    </sect2>
-
-    <!-- ==================== Toolbar ====================== -->
-    <sect2 id="gtranslator-toolbar">
-      <title>Toolbar</title>
       <para>
-	The toolbar provides access to several commonly used routines.
+	<application>&app;</application> offeres to translator many features in
+	order to do the translation process easier and confortable.
       </para>
 
+      <sect3 id="gtranslator-advanced-profiles">
+	<title>Profiles</title>
+	<para> The profiles feature provides to translator the possibility of
+	  having differents <quote>accounts</quote> with the basic information about
+	  herself and the language.
+	</para>
+	<para>
+	  At the same time there is only one profile active. You can choose in a easy way
+	  through the preferences which is this profile. When you save a PO file and
+	  you have activated the option <quote>use my options to complete the following
+	  entries</quote> in the header dialog, <application>&app;</application> will
+	  fill this fields with the information in the active profile.
+	</para>
+	
+	<figure id="gtranslator-profiles-screenshot">
+	  <title>Profiles Dialog</title>
+	  <screenshot>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="figures/profiles.png" format="PNG"/>
+	      </imageobject>
+	      <textobject>
+		<phrase>&app; Profiles Dialog</phrase>
+	      </textobject>
+	    </mediaobject>
+	  </screenshot>
+	</figure>
+	
+      </sect3>
+      <sect3 id="gtranslator-advanced-translation_memory">
+	<title>Translation Memory</title>
+	
+	<para>
+	  The translation memory let you reuse the translations. It is a database
+	  that contains messages and their correspondent translatation for a specific
+	  language. 
+	</para>
+	
+	<para>
+	  <application>&app;</application> offers the possibility of creating translation
+	  memories in two different ways. You can create the translation memory from a
+	  directory that contains PO files (see <xref linkend="gtranslator-preferences"/>).
+	  The program will create also a new entry in the translation memory each time that
+	  you translate a new message.
+	</para>
+	
+	<para>
+	  The manner of using the translation memory it is very easy. With the translation
+	  memory panel active (if it is not active go to 
+	  <menuchoice>
+	    <guisubmenu>View</guisubmenu>
+	    <guimenuitem>Translation Memory</guimenuitem>
+	  </menuchoice> 
+	</para>) you will can see the options that the translation memory offers you in order
+	to translate the current message. If you can choose one of them, just use the keyboard
+	acceleator associated to that option.
+
+	<figure id="gtranslator-tm-screenshot">
+	  <title>Translation Memory</title>
+	  <screenshot>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="figures/tm.png" format="PNG"/>
+	      </imageobject>
+	      <textobject>
+		<phrase>&app; Translation Memory</phrase>
+	      </textobject>
+	    </mediaobject>
+	  </screenshot>
+	</figure>
+
+	<para>
+	  The level column show you in percentage how much the option coincide with the original
+	  message. The options are ordering by level.
+	</para>
+	
+      </sect3>
+      
+    </sect2>
+ 
+   <!-- ==================== Toolbar ====================== -->
+    <sect2 id="gtranslator-toolbar">
+      <title>Toolbar</title>
+      
+      <para>
+	The toolbar provides access to several commonly used routines.
+	It is easily customizable. You can add or remove buttons as follow:
+      </para>
+      
+      <para>
+	Go to
+	<menuchoice>
+	  <guimenu>Edit</guimenu>
+	  <guimenuitem>Toolbar</guimenuitem>
+	</menuchoice>.
+	 The next dialog it will be showed you:
+      </para>
+      
       <figure id="gtranslator-toolbar-screenshot">
 	<title>Tool Bar</title>
 	<screenshot>
 	  <mediaobject>
 	    <imageobject>
-		<imagedata fileref="figures/toolbar.png" format="PNG"/>
+	      <imagedata fileref="figures/toolbar.png" format="PNG"/>
 	    </imageobject>
 	    <textobject>
-		<phrase>&app; Tool Bar</phrase>
+	      <phrase>&app; Tool Bar</phrase>
 	    </textobject>
 	  </mediaobject>
 	</screenshot>
       </figure>
 
-<!--
-      <FIGURE FLOAT="0" id="FIGURE-USAGE-TOOLBAR">
-        <title>Gtranslator Toolbar</title>
-        <SCREENSHOT>
-          <SCREENINFO>Gtranslator Toolbar</SCREENINFO>
-          <GRAPHIC FILEREF="figures/toolbar" FORMAT="PNG">
-          </GRAPHIC>
-        </SCREENSHOT>
-      </FIGURE>
--->
+      <para>
+	You can add or remove buttons just drag and drop them between 
+	the toolbar and the toolbar editor.
+      </para>
 
       <sect3 id="gtranslator-toolbar-file">
-	<title>File management toolbar</title>
+	<title>File management buttons in the toolbar</title>
 
 	<para>
-		The file management toolbar lets you access frequently
-		used file management funcions quickly.
+	  The file management buttons lets you access frequently
+	  used file management funcions quickly.
 	</para>
 	<variablelist>
 	  <varlistentry>
-		<term><guiicon>Open</guiicon></term>
-		<listitem>
-		<para>Brings up the <guilabel>Open po file</guilabel> dialog.
-		</para>
-		</listitem>
+	    <term><guiicon>Open</guiicon></term>
+	    <listitem>
+	      <para>Brings up the <guilabel>Open po file</guilabel> dialog.
+	      </para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Save</guiicon></term>
-		<listitem>
-		<para>Saves the po file.</para>
-		</listitem>
+	    <term><guiicon>Save</guiicon></term>
+	    <listitem>
+	      <para>Saves the po file.</para>
+	    </listitem>
 	  </varlistentry>
           <varlistentry>
-		<term><guiicon>Save as</guiicon></term>
-		<listitem>
-		<para>Saves the po file under a different name.</para>
-		</listitem>
+	    <term><guiicon>Save as</guiicon></term>
+	    <listitem>
+	      <para>Saves the po file under a different name.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Compile</guiicon></term>
-		<listitem>
-		<para>Compiles the po file using <command>msgfmt</command>.</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term><guiicon>Update</guiicon></term>
-		<listitem>
-		<para>
-		Updates the po file from the sources using the 
-		<command>intltool-update</command> from the
-		<application>intltool</application> package.
-		To make it work, you have to make sure there is
-		a file named <filename>POTFILES.in</filename> in
-		the same directory as your translation file does.
-		</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term><guiicon>Header</guiicon></term>
-		<listitem>
-		<para>
+	    <term><guiicon>Header</guiicon></term>
+	    <listitem>
+	      <para>
 		Brings up the <guilabel>Header dialog box</guilabel>
 		with a form that lets you fill in the fields of the po files
 		header.
-		</para>
-		</listitem>
+	      </para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Undo</guiicon></term>
-		<listitem>
-		<para>Undoes your last action.</para>
-		</listitem>
+	    <term><guiicon>Undo</guiicon></term>
+	    <listitem>
+	      <para>Undoes your last action.</para>
+	    </listitem>
 	  </varlistentry>
-<!--
-	  <varlistentry>
-		<term><guiicon>Options</guiicon></term>
-		<listitem>
-		<para>Opens the <guilabel>Preferences</guilabel> window.</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term><guiicon>Exit</guiicon></term>
-		<listitem>
-		<para>Exits the application.</para>
-		</listitem>
-	  </varlistentry>
--->
         </variablelist>
       </sect3>
 
       <sect3 id="gtranslator-toolbar-navigation">
-        <title>Navigation toolbar</title>
+        <title>Navigation buttons in the toolbar</title>
 
         <para>
-		The navigation toolbar allows you to navigate among
-		messages. It also lets you search for strings, or
-		search and replace strings.
+	  The navigation buttons allows you to navigate among
+	  messages. It also lets you search for strings, or
+	  search and replace strings.
 	</para> 
 
 	<variablelist>
 	  <varlistentry>
-		<term><guiicon>First</guiicon></term>
-		<listitem>
-		<para>Jumps to the first message.</para>
-		</listitem>
+	    <term><guiicon>First</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the first message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Back</guiicon></term>
-		<listitem>
-		<para>Jumps to the previous message.</para>
-		</listitem>
+	    <term><guiicon>Last</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the last message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Next</guiicon></term>
-		<listitem>
-		<para>Jumps to the next message.</para>
-		</listitem>
+	    <term><guiicon>Forward</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the next message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Last</guiicon></term>
-		<listitem>
-		<para>Jumps to the last message.</para>
-		</listitem>
+	    <term><guiicon>Back</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the previous message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Missing</guiicon></term>
-		<listitem>
-		<para>Jumps to the next untranslated message.</para>
-		</listitem>
+	    <term><guiicon>Next Fuzzy</guiicon></term>
+	    <listitem>
+	      <para>Jumps to next fuzzy message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Fuzzy</guiicon></term>
-		<listitem>
-		<para>Jumps to the next fuzzy message.</para>
-		</listitem>
+	    <term><guiicon>Previous Fuzzy</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the previous fuzzy message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Go to</guiicon></term>
-		<listitem>
-		<para>Jumps to the specified message number.</para>
-		</listitem>
+	    <term><guiicon>Next Untranslated</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the next untranslated message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Find</guiicon></term>
-		<listitem>
-		<para>
-			Opens the <guilabel>Find in the po file</guilabel>
-			dialog box. This dialog lets you search for strings
-			in the po file. You can choose to find strings
-			inside original messages only, translated messages,
-			comments or all of the above. 
-		</para>
-		</listitem>
+	    <term><guiicon>Previous Untranslated</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the previous untranslated message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Replace</guiicon></term>
-		<listitem>
-		<para>
-			Opens the <guilabel>Replace dialog box</guilabel>.
-			This dialog lets you enter a string to search for
-			and a string to replace it with.
-		</para>
-		</listitem>
+	    <term><guiicon>Next Fuzzy or Untranslated</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the next fuzzy or unstranslated message.</para>
+	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-		<term><guiicon>Query</guiicon></term>
-		<listitem>
-		<para>
-			Opens the <guilabel>Query gettext domain dialog
-			box</guilabel>. This dialog alows you to choose
-			a gettext domain and look up translations.
-		</para>
-		</listitem>
+	    <term><guiicon>Previous Fuzzy or Untranslated</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the previous fuzzy or untranslated message.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><guiicon>Jump to</guiicon></term>
+	    <listitem>
+	      <para>Jumps to the specified message number.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><guiicon>Find</guiicon></term>
+	    <listitem>
+	      <para>
+		Opens the <guilabel>Find in the po file</guilabel>
+		dialog box. This dialog lets you search for strings
+		in the po file. You can choose to find strings
+		inside original messages only, translated messages,
+		comments or all of the above. 
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><guiicon>Replace</guiicon></term>
+	    <listitem>
+	      <para>
+		Opens the <guilabel>Replace dialog box</guilabel>.
+		This dialog lets you enter a string to search for
+		and a string to replace it with.
+	      </para>
+	    </listitem>
 	  </varlistentry>
 	</variablelist>
       </sect3>
@@ -507,174 +612,86 @@
 	  <listitem>
 	    <para>This menu contains: 
 
-	    <itemizedlist>
+	      <itemizedlist>
 
 		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Alt</keycap><keycap>C</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Compile</guimenuitem>
-			</menuchoice>
-			This compiles the current po file.
-		</para>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keycap>Control</keycap><keycap>O</keycap>
+		      </shortcut>
+		      <guimenuitem>Open</guimenuitem>
+		    </menuchoice>
+		    This opens a po file.
+		  </para>
 		</listitem>
 
 		<listitem>
-                <para>
-			<menuchoice>
-			  <shortcut>
-				<keycap>F5</keycap>
-			  </shortcut>
-			  <guimenuitem>Update</guimenuitem>
-			</menuchoice>
-			This updates your po file from the sources.
-		</para>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Recent Files</guimenuitem>
+		    </menuchoice>
+		    This shows a list of your recently opened po files.
+		  </para>
 		</listitem>
 
 		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-				<keycap>F10</keycap>
-			  </shortcut>
-			  <guimenuitem>Autotranslate</guimenuitem>
-			</menuchoice>
-			This translates you po file automagically, using the
-			learn buffers and the gettext domain available.
-		</para>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keycombo>
+			  <keycap>Ctrl</keycap><keycap>S</keycap>
+			</keycombo>
+		      </shortcut>
+		      <guimenuitem>Save</guimenuitem>
+		    </menuchoice>
+		    This saves your file.
+		  </para>
 		</listitem>
 
 		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-				<keycap>F3</keycap>
-			  </shortcut>
-			  <guimenuitem>Open</guimenuitem>
-			</menuchoice>
-			This opens a po file.
-		</para>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keycombo>
+			  <keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>S</keycap>
+			</keycombo>
+		      </shortcut>
+		      <guimenuitem>Save as...</guimenuitem>
+		    </menuchoice>
+		    This saves your po file under a different name.
+		  </para>
 		</listitem>
 
 		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-				<keycap>F?</keycap>
-			  </shortcut>
-			  <guimenuitem>Open from URI</guimenuitem>
-			</menuchoice>
-			This opens a po file via the FTP or the HTTP protocol.
-		</para>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keycombo>
+			  <keycap>Ctrl</keycap><keycap>W</keycap>
+			</keycombo>
+		      </shortcut>
+		      <guimenuitem>Close</guimenuitem>
+		    </menuchoice>
+		    This closes your file.
+		  </para>
 		</listitem>
 
 		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>S</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Save</guimenuitem>
-			</menuchoice>
-			This saves your file.
-		</para>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keycombo>
+			  <keycap>Ctrl</keycap><keycap>Q</keycap>
+			</keycombo>
+		      </shortcut>
+		      <guimenuitem>Exit</guimenuitem>
+		    </menuchoice>
+		    This quits the application.
+		  </para>
 		</listitem>
 
-		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>S</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Save as...</guimenuitem>
-			</menuchoice>
-			This saves your po file under a different name.
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<menuchoice>
-			  <guimenuitem>Restore</guimenuitem>
-			</menuchoice>
-			This restores your po file to the last saved state.
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>W</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Close</guimenuitem>
-			</menuchoice>
-			This closes your file.
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<menuchoice>
-			  <guimenuitem>Recent files</guimenuitem>
-			</menuchoice>
-			This shows a list of your recently opened po files.
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>E</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Export to UTF-8</guimenuitem>
-			</menuchoice>
-			This exports your po file to UTF-8 encoding.
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>I</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Import from UTF-8</guimenuitem>
-			</menuchoice>
-			This imports a UTF-8 encoded file.
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>Q</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Exit</guimenuitem>
-			</menuchoice>
-			This quits the application.
-		</para>
-		</listitem>
-
-            </itemizedlist>
+              </itemizedlist>
             </para>
           </listitem>
 	</varlistentry>
@@ -687,117 +704,140 @@
             <para>This menu contains:</para> 
             <itemizedlist>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>Z</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Undo</guimenuitem>
-			</menuchoice>
-			This undoes your last change.
+		  <menuchoice>
+		    <shortcut>
+		      <keycombo>
+			<keycap>Ctrl</keycap><keycap>Z</keycap>
+		      </keycombo>
+		    </shortcut>
+		    <guimenuitem>Undo</guimenuitem>
+		  </menuchoice>
+		  This undoes your last change.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>X</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Cut</guimenuitem>
-			</menuchoice>
-			This removes any text or data which is selected and
-			places it in the buffer.
+		  <menuchoice>
+		    <shortcut>
+		      <keycombo>
+			<keycap>Ctrl</keycap><keycap>X</keycap>
+		      </keycombo>
+		    </shortcut>
+		    <guimenuitem>Cut</guimenuitem>
+		  </menuchoice>
+		  This removes any text or data which is selected and
+		  places it in the buffer.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>C</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Copy</guimenuitem>
-			</menuchoice>
-			This copies any text or data which is selected into
-			the buffer.
+		  <menuchoice>
+		    <shortcut>
+		      <keycombo>
+			<keycap>Ctrl</keycap><keycap>C</keycap>
+		      </keycombo>
+		    </shortcut>
+		    <guimenuitem>Copy</guimenuitem>
+		  </menuchoice>
+		  This copies any text or data which is selected into
+		  the buffer.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>V</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Paste</guimenuitem>
-			</menuchoice>
-			This pastes any text or data
-			which is copied into the buffer.
+		  <menuchoice>
+		    <shortcut>
+		      <keycombo>
+			<keycap>Ctrl</keycap><keycap>V</keycap>
+		      </keycombo>
+		    </shortcut>
+		    <guimenuitem>Paste</guimenuitem>
+		  </menuchoice>
+		  This pastes any text or data
+		  which is copied into the buffer.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<menuchoice>
-			  <shortcut>
-			    <keycombo>
-				<keycap>Ctrl</keycap><keycap>D</keycap>
-			    </keycombo>
-			  </shortcut>
-			  <guimenuitem>Delete</guimenuitem>
-			</menuchoice>
-			This removes the selected text.
+		  <menuchoice>
+		    <guimenuitem>Clear</guimenuitem>
+		  </menuchoice>
+		  This removes the selected text.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<guimenuitem>Find</guimenuitem>
-			This command opens the 
-                	<guilabel>Find dialog</guilabel>.
+                  <guimenuitem>Header</guimenuitem>
+		  This opens a dialog box which allows you to edit
+		  information stored in the po file header.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-                	<guimenuitem>Find Next</guimenuitem>
-			This finds the next occurance of a string
-			you have already searched for.
+                  <guimenuitem>Comment</guimenuitem>
+		  This allows to write a comment associates
+		  to one message.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<guimenuitem>Replace</guimenuitem>
-			This opens the Replace dialog.
+		  <menuchoice>
+		    <shortcut>
+		      <keycombo>
+			<keycap>Ctrl</keycap><keycap>Space</keycap>
+		      </keycombo>
+		    </shortcut>
+		    <guimenuitem>Copy Message to Translation</guimenuitem>
+		  </menuchoice>
+		  This pastes the text from the original message in the
+		  translated message.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<guimenuitem>Query</guimenuitem>
-			This opens the query dialog box. The query dialog
-			box allows you to query gettext domains for translation.
+		  <menuchoice>
+		    <shortcut>
+		      <keycombo>
+			<keycap>Ctrl</keycap><keycap>U</keycap>
+		      </keycombo>
+		    </shortcut>
+		    <guimenuitem>Toogle Fuzzy Status</guimenuitem>
+		  </menuchoice>
+		  This set the current message to fuzzy.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-                	<guimenuitem>Header</guimenuitem>
-			This opens a dialog box which allows you to edit
-			information stored in the po file header.
+		  <guimenuitem>Translation memory</guimenuitem>
+		  This shows the options in the translation memory 
+		  for the current message.
 		</para>
-		</listitem>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Toolbar</guimenuitem>
+		  This opens the <guilabel>Toolbar Editor</guilabel>.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Preferences</guimenuitem>
+		  This opens the <guilabel>Preferences Dialog</guilabel>.
+		</para>
+	      </listitem>
 
 	    </itemizedlist>
 	  </listitem>
@@ -811,13 +851,19 @@
 
 	    <itemizedlist>
 
-		<listitem>
+	      <listitem>
                 <para>
-			<guisubmenu>colorschemes</guisubmenu>
-			You can select your preferred coloring scheme for
-			message panes here. 
+		  <guisubmenu>Context</guisubmenu>
+		  This shows or hides the context panel. 
 		</para>
-		</listitem>
+	      </listitem>
+
+	      <listitem>
+                <para>
+		  <guisubmenu>Translation Memory</guisubmenu>
+		  This shows or hides the translation memory panel. 
+		</para>
+	      </listitem>
 
             </itemizedlist>
           </listitem>
@@ -831,58 +877,113 @@
 
 	    <itemizedlist>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<guimenuitem>First</guimenuitem>
-			(TBD)
+		  <guimenuitem>First</guimenuitem>
+		  Go to the first message.
 		</para>
-		</listitem>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Back</guimenuitem>
+		  Go to the previous message.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Next</guimenuitem>
+		  Go to the next message.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Last</guimenuitem>
+		  Go to the last message.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Next fuzzy</guimenuitem>
+		  Go to the next fuzzy message.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Previous fuzzy</guimenuitem>
+		  Go to the previous fuzzy message.
+		</para>
+	      </listitem>
+	     
+	      <listitem>
+		<para>
+		  <guimenuitem>Next untranslated</guimenuitem>
+		  Go to the next untranslated message.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Previous untranslated</guimenuitem>
+		  Go to the previous untranslated message.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Next fuzzy or untranslated</guimenuitem>
+		  Go to the next fuzzy or untranslated message.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Previous fuzzy or untranslated</guimenuitem>
+		  Go to the previous fuzzy or untranslated message.
+		</para>
+	      </listitem>
 
 		<listitem>
 		<para>
-			<guimenuitem>Back</guimenuitem>
-			(TBD)
+		  <guimenuitem>Jump to...</guimenuitem>
+		  Go to the message with a specific number.
 		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<guimenuitem>Next</guimenuitem>
-			(TBD)
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<guimenuitem>Last</guimenuitem>
-			(TBD)
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<guimenuitem>Go to...</guimenuitem>
-			(TBD)
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<guimenuitem>Next fuzzy</guimenuitem>
-			(TBD)
-		</para>
-		</listitem>
-
-		<listitem>
-		<para>
-			<guimenuitem>Next untranslated</guimenuitem>
-			(TBD)
-		</para>
-		</listitem>
+	      </listitem>
 
 	    </itemizedlist>
 	  </listitem>
 	</varlistentry>
+
+	<!-- ================ Search menu ================= -->
+	<varlistentry>
+	  <term><guimenu>Search</guimenu></term>
+	  <listitem>
+	    <para>This menu contains:</para> 
+
+	    <itemizedlist>
+
+	      <listitem>
+		<para>
+		  <guimenuitem>Find</guimenuitem>
+		  This command opens the 
+                  <guilabel>Find dialog</guilabel>.
+		</para>
+	      </listitem>
+	   
+	      <listitem>
+		<para>
+		  <guimenuitem>Replace</guimenuitem>
+		  This opens the <guilabel>Replace dialog</guilabel>.
+		</para>
+	      </listitem>
+
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
 
 	<!-- ================ Help menu ================= -->
 	<varlistentry>
@@ -891,33 +992,33 @@
 	    <para>This menu contains:</para>
 	    <itemizedlist>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<guimenuitem>Contents</guimenuitem>
-			This opens the 
-                	<application>GNOME Help Browser</application>
-			(or <application>Nautilus</application>)
-			and displays this manual.
+		  <guimenuitem>Contents</guimenuitem>
+		  This opens the 
+                  <application>GNOME Help Browser</application>
+		  (or <application>Nautilus</application>)
+		  and displays this manual.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<guimenuitem>&app; website</guimenuitem>
-			This opens the <application>&app;</application> webpage.
+		  <guimenuitem>&app; website</guimenuitem>
+		  This opens the <application>&app;</application> webpage.
 		</para>
-		</listitem>
+	      </listitem>
 
-		<listitem>
+	      <listitem>
 		<para>
-			<guimenuitem>About</guimenuitem>
-			This opens the <guilabel>About</guilabel> dialog
-			which shows basic information about 
-			<application>&app;</application>, such as author
-			name, the application version number, and the URL
-			for the application web page.
+		  <guimenuitem>About</guimenuitem>
+		  This opens the <guilabel>About</guilabel> dialog
+		  which shows basic information about 
+		  <application>&app;</application>, such as author
+		  name, the application version number, and the URL
+		  for the application web page.
 		</para>
-		</listitem>
+	      </listitem>
 
 	    </itemizedlist>
 	  </listitem>
@@ -930,333 +1031,532 @@
     <sect2 id="gtranslator-commandline-option">
       <title>Available commandline options</title>
       <para>
-		<application>&app;</application> understands a number of
-		command line options:
+	<application>&app;</application> understands a number of
+	command line options:
       </para>
- 
+      
       <variablelist>
 
 	<varlistentry>
           <term><varname>--help</varname></term>
           <listitem>
-		<para>
-			Shows you a short help message on the command line.
-		</para>
+	    <para>
+	      Shows you a short help message on the command line.
+	    </para>
 	  </listitem>
 	</varlistentry>
-
-	<varlistentry>
-          <term><varname>--version</varname></term>
-	  <listitem>
-		<para>
-			Shows you the version of <application>&app;</application>.
-		</para>
-	  </listitem>
-	</varlistentry>
-
-	<varlistentry>
-	  <term><varname>--display</varname></term>
-	  <listitem>
-		<para>
-			Lets you define the display to start <application>&app;</application> on.
-		</para>
-	  </listitem>
-	</varlistentry>
-
-	<varlistentry>
-	  <term>
-	    <varname>-w</varname>, <varname>--webalize=<replaceable>FILENAME</replaceable></varname>
-	  </term>
-	  <listitem>
-		<para>
-			Prints out a htmlized output file (you must give
-			the html output filename as the next argument) of the
-			po file.
-		</para>
-		<para>
-			An example would be:
-			<command>&app; --webalize=<replaceable>output.html</replaceable> <replaceable>xy.po</replaceable></command>
-		</para>
-	  </listitem>
-	</varlistentry>
-
-	<varlistentry>
-	  <term><varname>--scheme</varname></term>
-	  <listitem>
-		<para>
-			Sets the syntax color scheme to the given file.
-		</para>
-		<para>
-			For example: 
-			<command>&app; --scheme=<replaceable>Schemefile</replaceable></command>
-		</para>
-	  </listitem>
-	</varlistentry>
-
-	<varlistentry>
-	  <term><varname>--geometry</varname></term>
-	  <listitem>
-		<para>
-			Lets you define a standard geometry string to
-			which the <guilabel>gtranslator window</guilabel>
-			will conform.
-		</para>
-		<para>
-			An example call would be: 
-				<command>&app; --geometry="320x240+0+0" <replaceable>xy.po</replaceable></command>
-			(This opens gtranslator at "+0+0", the left upper
-			corner, with a size of 320x240).
-		</para>
-	  </listitem>
-        </varlistentry>
 
       </variablelist>
     </sect2>
   </sect1>
-<!-- ========== end of Using gtranslator ========== -->
+  <!-- ========== end of Using gtranslator ========== -->
 
 
-<!-- ============= Customization ============ -->
+  <!-- ============= Customization ============ -->
   <sect1 id="gtranslator-preferences">
     <title>Customization</title>
     <para>
-	To change the application settings, select 
-	<menuchoice>
-		<guimenu>Edit</guimenu>
-		<guimenuitem>Preferences...</guimenuitem>
-	</menuchoice>. This opens the 
-	<interface>Preferences</interface> dialog.
+      To change the application settings, select 
+      <menuchoice>
+	<guimenu>Edit</guimenu>
+	<guimenuitem>Preferences...</guimenuitem>
+      </menuchoice>. This opens the 
+      <interface>Preferences</interface> dialog.
     </para>
 
-    <figure id="gtranslator-preference-screenshot">
-	<title>Preference Dialog</title>
-	<screenshot>
-	  <mediaobject>
-	    <imageobject>
-	      <imagedata fileref="figures/prefs.png" format="PNG"/>
-	    </imageobject>
-	    <textobject>
-	      <phrase>&app; Preference Dialog</phrase>
-	    </textobject>
-	  </mediaobject>
-	</screenshot>
+    <figure id="gtranslator-preferences-screenshot">
+      <title>Preferences Dialog</title>
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="figures/prefs.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&app; Preferences Dialog</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
     </figure>
 
-<!--
-    <FIGURE FLOAT="0" id="PREFERENCES-FIG">
-      <title>Preferences Dialog</title>
-      <SCREENSHOT>
-        <SCREENINFO>Preferences Dialog</SCREENINFO>
-        <GRAPHIC FILEREF="figures/prefs" FORMAT="PNG"
-        SRCCREDIT="emese"></GRAPHIC>
-      </SCREENSHOT>
-    </FIGURE>
--->
-    <para>
+    <sect2 id="gtranslator-prefs-file">
+      <title>File Tab</title>
+      
+      <para>
 	The properties in the 
-	<guilabel>Personal information</guilabel> tab are: 
-    </para>
-
-    <variablelist>
-	  <varlistentry>
-		<term><guilabel>Author name</guilabel></term>
-		<listitem>
-		<para>
-			Fill in your name. This information will be saved
-			in the po file.
-		</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term><guilabel>Author e-mail address</guilabel></term>
-		<listitem>
-		<para>
-			Fill in your e-mail address. This information will
-			be saved in the po file.
-		</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term><guilabel>Default query domain</guilabel></term>
-		<listitem>
-		<para>
-			Choose a query domain from the drop down list.
-		</para>
-		</listitem>
-	  </varlistentry>
-    </variablelist>
-
-    <para>
-	The properties in the
-	<guilabel>Language settings</guilabel> tab are:
-    </para>
-
-    <variablelist>
+	<guilabel>File </guilabel> tab are: 
+      </para>
+      
+      <variablelist>
 	<varlistentry>
-		<term><guilabel>Language</guilabel></term>
-		<listitem>
-		<para>
-			Choose from the dropdown list the target language. 
-			<application>&app;</application> fills in the rest
-			of the form with default values for the given
-			language. You may modify the preset values, but
-			usually you can safely use the default settings.
-		</para>
-		</listitem>
+	  <term><guilabel>Autosave files every x minutes</guilabel></term>
+	  <listitem>
+	    <para>
+	      This option set how often <application>&app;</application> must be
+	      save the current file.
+	    </para>
+	  </listitem>
 	</varlistentry>
 	<varlistentry>
-		<term><guilabel>Language code</guilabel></term>
-		<listitem>
-		<para>
-			This field displays the ISO 639-2 language code
-			used for the language chosen above. The name of
-			the PO file will be based on this setting.
-		</para>
-		</listitem>
+	  <term><guilabel>Create a backup copy of files before saving</guilabel></term>
+	  <listitem>
+	    <para>
+	      (TBD)
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+      
+    </sect2>
+    
+    <sect2 id="gtranslator-prefs-editor">
+      <title>Editor Tab</title>
+
+      <para>
+	The properties in the 
+	<guilabel>Editor </guilabel> tab are: 
+      </para>
+      
+      <figure id="gtranslator-preferences-editor">
+      <title>Editor Tab</title>
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="figures/prefs-editor.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&app; Editor Tab</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+      </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Highlight message syntax</guilabel></term>
+	  <listitem>
+	    <para>
+	      This option allows activate the highlight syntax in the
+	      original and translated message boxes.
+	    </para>
+	  </listitem>
 	</varlistentry>
 	<varlistentry>
-        	<term><guilabel>Language group email</guilabel></term>
-		<listitem>
-		<para>
-			This field displays the email address used by the
-			language team.
-		</para>
-		</listitem>
+	  <term><guilabel>Make whitespace visible</guilabel></term>
+	  <listitem>
+	    <para>
+	      With this option active the withespace in the original and
+	      translated boxes are shown as a dot.
+	    </para>
+	  </listitem>
 	</varlistentry>
 	<varlistentry>
-		<term><guilabel>Charset</guilabel></term>
-		<listitem>
-		<para>
-			The <guilabel>Charset</guilabel> field displays
-			the encoding used to store the po file.
-			<application>&app;</application> offers you a default
-			setting.
-		</para>
-		<note>
-		  <title>Using alternate encodings</title>
-		  <para>
-			Default charset settings offered by 
-			<application>&app;</application> can be used safely
-			when translating po files for the GNOME 2.x platform.
-			GNOME 2.x uses UTF-8 encoding for all languages, thus
-			you need the alter the defaults when translating for
-			1.x platforms.
-		  </para>
-		</note>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-<!--
-	After you have made all the changes you want, click on 
-	<guibutton>OK</guibutton> to apply the changes
-    and close the 
-    <interface>Properties</interface>dialog. To
-    cancel the changes and return to previous values, click the 
-    <guibutton>Close</guibutton>button.
--->
-    <para>
-	Any changes you have made will be instantly effective.
-    </para>
+	  <term><guilabel>Use custom font</guilabel></term>
+	  <listitem>
+	    <para>
+	      This option lets you set a custom font for the original and
+	      translated boxes.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Remove fuzzy status if message is changed</guilabel></term>
+	  <listitem>
+	    <para>
+	      If this option is active the status will change automatically if
+	      you edit a message.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Check spelling</guilabel></term>
+	  <listitem>
+	    <para>
+	      This option active the check spelling for your language in
+	      the original and translated boxes.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+      
+    </sect2>
+
+    <sect2 id="gtranslator-prefs-profiles">
+      <title>Profiles Tab</title>
+
+      <para>
+	The 
+	 <guilabel>Editor</guilabel> tab contains: 
+      </para>
+      
+      <figure id="gtranslator-preferences-profiles">
+      <title>Profiles Tab</title>
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="figures/profiles.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&app;Profiles Tab</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+      </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Add button</guilabel></term>
+	  <listitem>
+	    <para>
+	      It shows the <guilabel>Profile Dialog</guilabel> in order to
+	      create a new profile.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Edit button</guilabel></term>
+	  <listitem>
+	    <para>
+	      It shows the <guilabel>Profile Dialog</guilabel> in order to
+	      edit an exists profile.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Delete button</guilabel></term>
+	  <listitem>
+	    <para>
+	      It removes the selected profile.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+     <para>
+       The entries in the <guilabel>Profiles Dialog</guilabel> are:
+     </para>
+
+      <figure id="gtranslator-profiles-dialog">
+      <title>Profiles Dialog</title>
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="figures/profiles-dialog.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&app;Profiles Dialog</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+      </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Profile Name</guilabel></term>
+	  <listitem>
+	    <para>
+	      It is the name of the profile. It is what identify the profile and
+	      it must be unique.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Translator Name</guilabel></term>
+	  <listitem>
+	    <para>
+	      This is the name of the translator to fill the value in the header.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Translator Email</guilabel></term>
+	  <listitem>
+	    <para>
+	      This is the email addres of the translator to fill the value in the
+	      header.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Language</guilabel></term>
+	  <listitem>
+	    <para>
+	      The name of the language in which they will be done the translations.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Language Code</guilabel></term>
+	  <listitem>
+	    <para>
+	      This is the ISO 639-2 language code used for the language 
+	      chosen above. The name of the PO file will be based on this setting.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Character Set</guilabel></term>
+	  <listitem>
+	    <para>
+	      This is the character set for the PO files. Gnome 2.x uses UTF-8
+	      encoding for all languages.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Transfer Encoding</guilabel></term>
+	  <listitem>
+	    <para>
+	      This is the encoding used to store the PO file.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Team Email</guilabel></term>
+	  <listitem>
+	    <para>
+	      This is the email addres of the language team.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Plural Forms</guilabel></term>
+	  <listitem>
+	    <para>
+	      Information about the plural forms in the PO files.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+      
+    </sect2>
+
+    <sect2 id="gtranslator-prefs-interface">
+      <title>Interface Tab</title>
+      
+      <para>
+	The 
+	<guilabel>Interface</guilabel> tab contains: 
+      </para>
+      
+      <figure id="gtranslator-preferences-interface">
+      <title>Interface Tab</title>
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="figures/prefs-interface.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&app;Interface Tab</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+      </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Anchor Style</guilabel></term>
+	  <listitem>
+	    <para>
+	      This lets you choose if you want to see in the toolbar only
+	      the icons, the icons with the text or use the gnome preferences.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Scheme Color</guilabel></term>
+	  <listitem>
+	    <para>
+	      This is the scheme color in the original and translated boxes.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+    </sect2>
+
+    <sect2 id="gtranslator-prefs-tm">
+      <title>Translation Memory Tab</title>
+
+      <para>
+	The 
+	 <guilabel>Translation Memory</guilabel> tab contains: 
+      </para>
+      
+      <figure id="gtranslator-preferences-tm">
+      <title>Translation Memory Tab</title>
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="figures/prefs-tm.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&app;Translation Memory Tab</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+      </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Sow options in translated messages</guilabel></term>
+	  <listitem>
+	    <para>
+	      With this option active <application>&app;</application> shows you
+	      the translation memory options in all the messages including the
+	      translated ones. If it is no active only show options in fuzzy and
+	      untranslated messages.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Use only files with this name</guilabel></term>
+	  <listitem>
+	    <para>
+	      If this option is active the translation memory will be created
+	      only using the files with this name into the directory selected.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Max # of missing words</guilabel></term>
+	  <listitem>
+	    <para>
+	      
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Max difference in sentence length</guilabel></term>
+	  <listitem>
+	    <para>
+	      It removes the selected profile.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+    </sect2>
+
+    <sect2 id="gtranslator-prefs-plugins">
+      <title>Plugins Tab</title>
+    </sect2>
+
   </sect1>
 
 
-<!-- ================ Bugs ================= -->
+  <!-- ================ Bugs ================= -->
   <sect1 id="gtranslator-bugs">
     <title>Known Bugs and Limitations</title>
     <para>
-	You can query for bugs related to 
-	<application>&app;</application> in the 
-	<ulink url="http://bugzilla.gnome.org">
-		GNOME bug tracking database.
-	</ulink>.
+      You can query for bugs related to 
+      <application>&app;</application> in the 
+      <ulink url="http://bugzilla.gnome.org">
+	GNOME bug tracking database.
+      </ulink>.
     </para>
   </sect1>
 
 
-<!-- ================ Authors ================= -->
+  <!-- ================ Authors ================= -->
   <sect1 id="gtranslator-authors">
     <title>Authors</title>
 
     <sect2 id="gtranslator-application-authors">
       <title>Application Authors</title>
-	<para>
-		<application>&app;</application> is written by Fatih Demir <email>kabalak@kabalak.net</email> and Gediminas Paulauskas <email>menesis@kabalak.net</email>.
-		Ross Golder <email>rossg@golder.org</email> is the current maintainer of GTK+ 2.x port of &app;.  
-		To find more information about <application>&app;</application>, please visit the 
-		<ulink url="http://gtranslator.sourceforge.net" type="http">Gtranslator Web page</ulink>.
-		Please send all comments, suggestions, and bug reports to the
-		<ulink url="http://bugzilla.gnome.org" type="http">GNOME bug tracking database</ulink>.
-		(Instructions for submitting bug reports can be found
-		<ulink url="http://bugzilla.gnome.org/Reporting.html" type="http">on-line</ulink>.)
-		You can also use <application>Bug Report Tool</application>
-		(<command>bug-buddy</command>), available in the
-		<menuchoice>
-			<guimenu>Application</guimenu>
-			<guisubmenu>Development</guisubmenu>
-		</menuchoice> menu,
-		for submitting bug reports.
-	</para>
+      
+      <para>
+	<application>&app;</application> was written originally by Fatih Demir <email>kabalak@kabalak.net</email> and Gediminas Paulauskas <email>menesis@kabalak.net</email>.
+	Ross Golder <email>rossg@golder.org</email> was the maintainer of GTK+ 2.x port of &app; until October 2007.
+      </para>
+      
+      <para>
+	The new version 2.0 is written by Pablo Sanxiao <email>psanxiao@gmail.com</email> and Ignacio Casal Quinteiro 
+	<email>nacho.resa@gmail.com</email>. The current maintainers are Pablo Sanxiao and Juan José Sánchez Penas 
+	<email>jjsanchez@igalia.com</email>.
+      </para>
+
+      <para>
+	To find more information about <application>&app;</application>, please visit the 
+	<ulink url="http://gtranslator.sourceforge.net" type="http">Gtranslator Web page</ulink>.
+	Please send all comments, suggestions, and bug reports to the
+	<ulink url="http://bugzilla.gnome.org" type="http">GNOME bug tracking database</ulink>.
+	(Instructions for submitting bug reports can be found
+	<ulink url="http://bugzilla.gnome.org/Reporting.html" type="http">on-line</ulink>.)
+	You can also use <application>Bug Report Tool</application>
+	(<command>bug-buddy</command>), available in the
+	<menuchoice>
+	  <guimenu>Application</guimenu>
+	  <guisubmenu>Development</guisubmenu>
+	</menuchoice> menu,
+	for submitting bug reports.
+      </para>
     </sect2>
 
 
     <sect2 id="gtranslator-contributor">
       <title>Contributors</title>
-	<para>
-		People who have contributed to the &app; project:
-	</para>
+      <para>
+	People who have contributed to the &app; project:
+      </para>
 
-	<itemizedlist>
-		<listitem>
-		<para>
-			Thomas Ziehmer <email>thomas@kabalak.net</email>
-			for the find dialog implementation.
-		</para>
-		</listitem>
+      <itemizedlist>
+	<listitem>
+	  <para>
+	    Seán de Búrca 
+	    <email>leftmostcat@gmail.co</email>
+	  </para>
+	</listitem>
 
-		<listitem>
-		<para>
-			<emphasis>All</emphasis> translators of 
-			<application>&app;</application>.
-		</para>
-		</listitem>
+	<listitem>
+	  <para>
+	    Thomas Ziehmer <email>thomas@kabalak.net</email>
+	    for the find dialog implementation.
+	  </para>
+	</listitem>
 
-		<listitem>
-		<para>
-			The GNOME I18N mailing list
-			<email>gnome-i18n@gnome.org</email>
-		</para>
-		</listitem>
+	<listitem>
+	  <para>
+	    <emphasis>All</emphasis> translators of 
+	    <application>&app;</application>.
+	  </para>
+	</listitem>
 
-		<listitem>
-		<para>
-			Alexandre Hautequest 
-			<email>hquest@fesppr.br</email>
-		</para>
-		</listitem>
+	<listitem>
+	  <para>
+	    The GNOME I18N mailing list
+	    <email>gnome-i18n@gnome.org</email>
+	  </para>
+	</listitem>
 
-		<listitem>
-		<para>
-			Denis Plei&#x107;
-			<email>dpleic@linux.hr</email>
-		</para>
-		</listitem>
+	<listitem>
+	  <para>
+	    Alexandre Hautequest 
+	    <email>hquest@fesppr.br</email>
+	  </para>
+	</listitem>
 
-		<listitem>
-		<para>
-			Josh Jackson
-			<email>pturing@mailandnews.com</email>
-		</para>
-		</listitem>
+	<listitem>
+	  <para>
+	    Denis Plei&#x107;
+	    <email>dpleic@linux.hr</email>
+	  </para>
+	</listitem>
 
-		<listitem>
-		<para>
-			Robert Brady
-			<email>robert@suse.co.uk</email>
-		</para>
-		</listitem>
+	<listitem>
+	  <para>
+	    Josh Jackson
+	    <email>pturing@mailandnews.com</email>
+	  </para>
+	</listitem>
+
+	<listitem>
+	  <para>
+	    Robert Brady
+	    <email>robert@suse.co.uk</email>
+	  </para>
+	</listitem>
       </itemizedlist>
     </sect2>
-
 
     <sect2 id="gtranslator-packagers">
       <title>Packagers</title>
@@ -1268,183 +1568,183 @@
 
       <itemizedlist>
 	<listitem>
-	<para>
-		Josh Jackshon <email>pturing@mailandnews.com</email> for
-		his Mandrake packages of <application>&app;</application> 0.34
-	</para>
+	  <para>
+	    Josh Jackshon <email>pturing@mailandnews.com</email> for
+	    his Mandrake packages of <application>&app;</application> 0.34
+	  </para>
 	</listitem>
 
 	<listitem>
-	<para>
-		Mike Newman <email>mike@gtnorthern.demon.co.uk</email> for
-		his RH7 (S)RPMs of <application>&app;</application>.
-	</para>
+	  <para>
+	    Mike Newman <email>mike@gtnorthern.demon.co.uk</email> for
+	    his RH7 (S)RPMs of <application>&app;</application>.
+	  </para>
 	</listitem>
 
 	<listitem>
-	<para>
-		Martijn van de Streek <email>martijn@foodfight.org</email> for
-		his Debian packages of <application>&app;</application>.
-	</para>
+	  <para>
+	    Martijn van de Streek <email>martijn@foodfight.org</email> for
+	    his Debian packages of <application>&app;</application>.
+	  </para>
 	</listitem>
 
 	<listitem>
-	<para>
-		Maxim Sobolev <email>sobomax@freebsd.org</email> for his
-		FreeBSD ports of <application>&app;</application>.
-	</para>
+	  <para>
+	    Maxim Sobolev <email>sobomax@freebsd.org</email> for his
+	    FreeBSD ports of <application>&app;</application>.
+	  </para>
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2 id="gtranslator-document-author">
       <title>Documentation Authors</title>
-	<para>
-		This manual was written by Emese Kovacs
-		(<email>emese@gnome.hu</email>). Please send all comments and
-		suggestions regarding this manual to the 
-		<ulink url="http://developer.gnome.org/projects/gdp" type="http">
-			GNOME Documentation Project
-		</ulink>
-		by sending an email to 
-		<email>docs@gnome.org</email>.
-		You can also add your comments online by using the 
-		<ulink url="http://developer.gnome.org/projects/gdp/doctable/" type="http">
-			GNOME Documentation Status Table
-		</ulink>.
-	</para>
+      <para>
+	This manual was written by Pablo Sanxiao (<email>psanxiao@gmail.com</email>) based on the
+	last version of the manual written by Emese Kovacs (<email>emese@gnome.hu</email>). 
+	Please send all comments and suggestions regarding this manual to the 
+	<ulink url="http://developer.gnome.org/projects/gdp" type="http">
+	  GNOME Documentation Project
+	</ulink>
+	by sending an email to 
+	<email>docs@gnome.org</email>.
+	You can also add your comments online by using the 
+	<ulink url="http://developer.gnome.org/projects/gdp/doctable/" type="http">
+	  GNOME Documentation Status Table
+	</ulink>.
+      </para>
     </sect2>
   </sect1>
 
-<!-- ================ Application License ================= -->
+  <!-- ================ Application License ================= -->
   <sect1 id="gtranslator-license">
     <title>License</title>
-	  <para>
-		  This program is free software; you can redistribute
-		  it and/or modify it under the terms of the 
-		  <ulink type="help" url="gnome-help:gpl">
-			  <citetitle>GNU General Public License</citetitle>
-	          </ulink>
-		  as published by the Free Software Foundation; either 
-		  version 2 of the License, of (at your option) any later
-		  version.
-	  </para>
-	  <para>
-		  This program is distributed in the hope that it will be
-		  useful, but WITHOUT ANY WARRANTY; without even the
-		  implied warranty of MERCHANTABILITY or FITNESS FOR A 
-		  PARTICULAR PURPOSE. See the
-		  <citetitle>GNU General Public License</citetitle>
-		  for more details.
-          </para>
-	  <para>
-		  A copy of the 
-		  <citetitle>GNU General Public License</citetitle>
-		  is included as an appendix to the 
-		  <citetitle>GNOME Users Guide</citetitle>
-		  . You may also obtain a copy of the 
-		  <citetitle>GNU General Public License</citetitle>
-		  from the Free Software Foundation by visiting
-		  <ulink type="http" url="http://www.fsf.org">
-			  their Web site
-		  </ulink>
-		  or by writing to 
-		  <address>Free Software Foundation, Inc.
-			  <street>59 Temple Place</street> - Suite 330
-			  <city>Boston</city>,
-			  <state>MA</state>
-			  <postcode>02111-1307</postcode>
-			  <country>USA</country>
-		  </address>
-	  </para>
+    <para>
+      This program is free software; you can redistribute
+      it and/or modify it under the terms of the 
+      <ulink type="help" url="gnome-help:gpl">
+	<citetitle>GNU General Public License</citetitle>
+      </ulink>
+      as published by the Free Software Foundation; either 
+      version 2 of the License, of (at your option) any later
+      version.
+    </para>
+    <para>
+      This program is distributed in the hope that it will be
+      useful, but WITHOUT ANY WARRANTY; without even the
+      implied warranty of MERCHANTABILITY or FITNESS FOR A 
+      PARTICULAR PURPOSE. See the
+      <citetitle>GNU General Public License</citetitle>
+      for more details.
+    </para>
+    <para>
+      A copy of the 
+      <citetitle>GNU General Public License</citetitle>
+      is included as an appendix to the 
+      <citetitle>GNOME Users Guide</citetitle>
+      . You may also obtain a copy of the 
+      <citetitle>GNU General Public License</citetitle>
+      from the Free Software Foundation by visiting
+      <ulink type="http" url="http://www.fsf.org">
+	their Web site
+      </ulink>
+      or by writing to 
+      <address>Free Software Foundation, Inc.
+	<street>59 Temple Place</street> - Suite 330
+	<city>Boston</city>,
+	<state>MA</state>
+	<postcode>02111-1307</postcode>
+	<country>USA</country>
+      </address>
+    </para>
   </sect1>
 
 
-<!--   <sect1 id="gtranslator-glossary"> -->
-<!--     <title>Glossary</title> -->
-<!--     <para> -->
-<!--       <variablelist> -->
-<!--         <varlistentry> -->
-<!--           <term> -->
-<!--             <command>gettext</command> -->
-<!--           </term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>po file</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>internationalization</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>localization</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>l10n</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>i18n</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>translation memory</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>ISO 3166 coutry code</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>ISO 639-2 language code</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>default query domain</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>charset</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>encoding</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--         <varlistentry> -->
-<!--           <term>URI</term> -->
-<!--           <listitem> -->
-<!--             <para></para> -->
-<!--           </listitem> -->
-<!--         </varlistentry> -->
-<!--       </variablelist> -->
-<!--     </para> -->
-<!--   </sect1> -->
+  <!--   <sect1 id="gtranslator-glossary"> -->
+  <!--     <title>Glossary</title> -->
+  <!--     <para> -->
+  <!--       <variablelist> -->
+  <!--         <varlistentry> -->
+  <!--           <term> -->
+  <!--             <command>gettext</command> -->
+  <!--           </term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>po file</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>internationalization</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>localization</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>l10n</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>i18n</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>translation memory</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>ISO 3166 coutry code</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>ISO 639-2 language code</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>default query domain</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>charset</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>encoding</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--         <varlistentry> -->
+  <!--           <term>URI</term> -->
+  <!--           <listitem> -->
+  <!--             <para></para> -->
+  <!--           </listitem> -->
+  <!--         </varlistentry> -->
+  <!--       </variablelist> -->
+  <!--     </para> -->
+  <!--   </sect1> -->
 </article>

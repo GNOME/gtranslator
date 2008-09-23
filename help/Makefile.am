@@ -5,6 +5,15 @@ DOC_MODULE = gtranslator
 DOC_ENTITIES = legal.xml
 DOC_INCLUDES =
 DOC_FIGURES = figures/mainwindow.png \
+	      figures/toolbar.png \
+	      figures/closedialog.png \
+	      figures/profiles.png \
+	      figures/tm.png \
+	      figures/toolbar.png \
 	      figures/prefs.png	\
-	      figures/toolbar.png
+	      figures/prefs-editor.png \
+	      figures/profiles.png \
+	      figures/profiles-dialog.png \
+	      figures/prefs-interface.png \
+	      figures/prefs-tm.png
 DOC_LINGUAS =
