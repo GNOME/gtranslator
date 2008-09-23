@@ -133,6 +133,7 @@ gtranslator_application_init (GtranslatorApplication *application)
 {
 	gchar *gtranslator_folder;
 	gchar *filename;
+	gchar *profiles_file;
 
 	GtranslatorApplicationPrivate * priv;
 	
@@ -183,6 +184,14 @@ gtranslator_application_init (GtranslatorApplication *application)
 		priv->first_run = TRUE;
 		g_object_unref (file);
 	}
+
+	/*
+	 * If the config folder exists but there is no profile
+	 */
+	profiles_file = g_build_filename (gtranslator_folder, "profiles.xml", NULL);
+	if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
+	    priv->first_run = TRUE;
+	g_free (profiles_file);
 
 	priv->toolbars_model = egg_toolbars_model_new ();
 				     
