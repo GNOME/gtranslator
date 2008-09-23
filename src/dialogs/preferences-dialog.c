@@ -509,13 +509,13 @@ setup_profile_pages (GtranslatorPreferencesDialog *dlg)
 		GTK_CELL_RENDERER_MODE_ACTIVATABLE,
 		NULL);
 
-  name_column = gtk_tree_view_column_new_with_attributes ("Profile",
+  name_column = gtk_tree_view_column_new_with_attributes (_("Profile"),
 						     text_renderer,
 						     "text",
 						     PROFILE_NAME_COL,
 						     NULL);
   
-  toggle_column = gtk_tree_view_column_new_with_attributes ("Active",
+  toggle_column = gtk_tree_view_column_new_with_attributes (_("Active"),
 							    toggle_renderer,
 							    "active",
 							    TOGGLE_COL,
