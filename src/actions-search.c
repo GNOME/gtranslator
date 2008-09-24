@@ -34,6 +34,7 @@
 
 #include "actions.h"
 #include "msg.h"
+#include "statusbar.h"
 #include "utils.h"
 #include "view.h"
 #include "window.h"
@@ -163,38 +164,40 @@ static void
 phrase_found (GtranslatorWindow *window,
 	      gint         occurrences)
 {
+	GtranslatorStatusbar *statusbar;
+	
+	statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+	
 	if (occurrences > 1)
 	{
-		/*gtranslator_statusbar_flash_message (GTR_STATUSBAR (window->priv->statusbar),
-					       window->priv->generic_message_cid,
-					       ngettext("Found and replaced %d occurrence",
-					     	        "Found and replaced %d occurrences",
-					     	        occurrences),
-					       occurrences);*/
+		gtranslator_statusbar_flash_message (statusbar,
+						     0,
+						     ngettext("Found and replaced %d occurrence",
+							      "Found and replaced %d occurrences",
+							      occurrences),
+						     occurrences);
 	}
 	else
 	{
-		/*if (occurrences == 1)
-			gtranslator_statusbar_flash_message (GTR_STATUSBAR (window->priv->statusbar),
-						       window->priv->generic_message_cid,
-						       _("Found and replaced one occurrence"));
+		if (occurrences == 1)
+			gtranslator_statusbar_flash_message (statusbar,
+							     0,
+							     _("Found and replaced one occurrence"));
 		else
-			gtranslator_statusbar_flash_message (GTR_STATUSBAR (window->priv->statusbar),
-						       window->priv->generic_message_cid,
-						       " ");*/
+			gtranslator_statusbar_flash_message (statusbar,
+							     0,
+							     " ");
 	}
-	g_warning(ngettext("Found and replaced one occurrence",
-			   "Found and replaced %d occurrences",
-			   occurrences));
 }
 
 static void
 phrase_not_found (GtranslatorWindow *window)
 {
-	/*gtranslator_statusbar_flash_message (GTR_STATUSBAR (window->priv->statusbar),
-				       window->priv->generic_message_cid,
-				       _("Phrase not found"));*/
-	g_warning("Phrase not found");
+	GtranslatorStatusbar *status;
+	
+	status = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+	gtranslator_statusbar_flash_message (status, 0,
+					     _("Phrase not found"));
 }
 
 static gboolean
