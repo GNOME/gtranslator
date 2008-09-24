@@ -2,6 +2,7 @@ SUBDIRS = 					\
 	alternate-language			\
 	fullscreen				\
 	insert-tags				\
+	insert-params				\
 	source-code-view
 
 if USE_CHARMAP

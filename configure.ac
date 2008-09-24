@@ -473,6 +473,7 @@ plugins/alternate-language/Makefile
 plugins/charmap/Makefile
 plugins/dictionary/Makefile
 plugins/fullscreen/Makefile
+plugins/insert-params/Makefile
 plugins/insert-tags/Makefile
 plugins/open-tran/Makefile
 plugins/source-code-view/Makefile
