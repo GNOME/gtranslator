@@ -168,7 +168,6 @@ parse_list (GtranslatorWindow *window)
 	GtkWidget *menuitem;
 	GtkWidget *menu;
 	GSList *l = tags;
-	guint i = 1;
 	
 	manager = gtranslator_window_get_ui_manager (window);
 	
@@ -189,28 +188,15 @@ parse_list (GtranslatorWindow *window)
 	gtk_widget_set_sensitive (next_tag, TRUE);
 	
 	menu = gtk_menu_new ();
-	gtk_menu_set_accel_group (GTK_MENU (menu),
-				  gtk_ui_manager_get_accel_group(manager));
 	
 	do{
-		gchar *accel_path;
-		
 		menuitem = gtk_menu_item_new_with_label ((const gchar *)l->data);
 		gtk_widget_show (menuitem);
-		
-		accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Insert Tags/%s",
-					      (const gchar *)l->data);
-		
-		gtk_menu_item_set_accel_path (GTK_MENU_ITEM (menuitem), accel_path);
-		gtk_accel_map_add_entry (accel_path, i+48, GDK_CONTROL_MASK | GDK_MOD1_MASK);
-
-		g_free (accel_path);
 		
 		g_signal_connect (menuitem, "activate",
 				  G_CALLBACK (on_menuitem_activated), window);
 		
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-		i++;
 	}while ((l = g_slist_next (l)));
 	
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_tags), menu);
@@ -225,6 +211,7 @@ showed_message_cb (GtranslatorTab *tab,
 	GRegex *regex;
 	GMatchInfo *match_info;
 	gchar *word;
+	gint i;
 	
 	if (tags != NULL)
 	{
@@ -248,8 +235,27 @@ showed_message_cb (GtranslatorTab *tab,
 	g_regex_match (regex, msgid, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
+		gchar *word_collate;
+		
 		word = g_match_info_fetch (match_info, 0);
-		tags = g_slist_append (tags, word);
+		word_collate = g_utf8_collate_key (word, -1);
+		for (i = 0; i < g_slist_length (tags); i++)
+		{
+			gchar *tag_collate;
+			gchar *tag = g_slist_nth_data (tags, i);
+			
+			tag_collate = g_utf8_collate_key (tag, -1);
+			if (strcmp (tag_collate, word_collate) == 0)
+			{
+				g_free (word);
+				word = NULL;
+			}
+			g_free (tag_collate);
+		}
+		g_free (word_collate);
+		
+		if (word != NULL)
+			tags = g_slist_append (tags, word);
 		g_match_info_next (match_info, NULL);
 	}
 	g_match_info_free (match_info);
@@ -301,7 +307,7 @@ impl_activate (GtranslatorPlugin *plugin,
 							 &error);
 	if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 		g_free (data);
 		return;

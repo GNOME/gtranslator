@@ -243,15 +243,25 @@ showed_message_cb (GtranslatorTab *tab,
 	g_regex_match (regex, msgid, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
+		gchar *word_collate;
+		
 		word = g_match_info_fetch (match_info, 0);
+		word_collate = g_utf8_collate_key (word, -1);
 		for (i = 0; i < g_slist_length (params); i++)
 		{
-			if (strcmp (g_slist_nth_data (params, i), word) == 0)
+			gchar *param_collate;
+			gchar *param = g_slist_nth_data (params, i);
+			
+			param_collate = g_utf8_collate_key (param, -1);
+			if (strcmp (param_collate, word_collate) == 0)
 			{
 				g_free (word);
 				word = NULL;
 			}
+			g_free (param_collate);
 		}
+		g_free (word_collate);
+		
 		if (word != NULL)
 			params = g_slist_append (params, word);
 		g_match_info_next (match_info, NULL);
