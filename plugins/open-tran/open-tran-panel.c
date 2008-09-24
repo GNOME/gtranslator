@@ -46,6 +46,7 @@
 #define SUSE_ICON    PIXMAPSDIR"/suse.png"
 #define XFCE_ICON    PIXMAPSDIR"/xfce.png"
 #define INKSCAPE_ICON PIXMAPSDIR"/inkscape.png"
+#define OPEN_OFFICE_ICON PIXMAPSDIR"/oo-logo.png"
 
 GTR_PLUGIN_DEFINE_TYPE(GtranslatorOpenTranPanel, gtranslator_open_tran_panel, GTK_TYPE_VBOX)
 
@@ -145,6 +146,8 @@ print_struct_to_tree_view(gpointer value,
 			icon = create_pixbuf (XFCE_ICON);
 		else if (strcmp ("Inkscape", str) == 0)
 			icon = create_pixbuf (INKSCAPE_ICON);
+		else if (strcmp ("OpenOffice.org", str) == 0)
+			icon = create_pixbuf (OPEN_OFFICE_ICON);
 		else icon = NULL;
 		
 		gtk_list_store_append(panel->priv->store, &iter);

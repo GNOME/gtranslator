@@ -41,7 +41,8 @@ pixmaps__DATA = \
 	open-tran.png \
 	suse.png \
 	xfce.png \
-	inkscape.png
+	inkscape.png \
+	oo-logo.png
 
 # Plugin Info
 
