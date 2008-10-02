@@ -54,6 +54,8 @@
 #define GTR_STOCK_FUZZY_PREV "gtranslator-fuzzy-prev"
 #define GTR_STOCK_UNTRANS_NEXT "gtranslator-untranslated-next"
 #define GTR_STOCK_UNTRANS_PREV "gtranslator-untranslated-prev"
+#define GTR_STOCK_FUZZY_UNTRANS_NEXT "gtranslator-fuzzy-untranslated-next"
+#define GTR_STOCK_FUZZY_UNTRANS_PREV "gtranslator-fuzzy-untranslated-prev"
 
 #define GTR_WINDOW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
@@ -245,10 +247,10 @@ static const GtkActionEntry entries[] = {
 	{ "GoPreviousUntranslated", GTR_STOCK_UNTRANS_PREV, N_("Previ_ous Untranslated"),
 	  "<alt>Page_Up", N_("Go to the previous untranslated message"),
           G_CALLBACK (gtranslator_message_go_to_prev_untranslated) },
-	{ "GoNextFuzzyUntranslated", GTK_STOCK_GO_FORWARD, N_("Next Fu_zzy or Untranslated"),
+	{ "GoNextFuzzyUntranslated", GTR_STOCK_FUZZY_UNTRANS_NEXT, N_("Next Fu_zzy or Untranslated"),
 	  "<control><shift>Page_Down", N_("Go to the next fuzzy or untranslated message"),
           G_CALLBACK (gtranslator_message_go_to_next_fuzzy_or_untranslated) },
-	{ "GoPreviousFuzzyUntranslated", GTK_STOCK_GO_BACK, N_("Pre_vious Fuzzy or Untranslated"),
+	{ "GoPreviousFuzzyUntranslated", GTR_STOCK_FUZZY_UNTRANS_PREV, N_("Pre_vious Fuzzy or Untranslated"),
 	  "<control><shift>Page_Up", N_("Go to the previous fuzzy or untranslated message"),
           G_CALLBACK (gtranslator_message_go_to_prev_fuzzy_or_untranslated) },
 	{ "GoJump", GTK_STOCK_JUMP_TO, NULL,

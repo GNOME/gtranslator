@@ -4,7 +4,9 @@ icon_DATA =	\
 	gtranslator-fuzzy-next.png \
 	gtranslator-fuzzy-prev.png \
 	gtranslator-untranslated-next.png \
-	gtranslator-untranslated-prev.png 
+	gtranslator-untranslated-prev.png \
+	gtranslator-fuzzy-untranslated-next.png \
+	gtranslator-fuzzy-untranslated-prev.png
 
 EXTRA_DIST = \
 		$(icon_DATA)
