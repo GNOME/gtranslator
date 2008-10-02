@@ -459,7 +459,6 @@ data/desktop/gtranslator.desktop.in
 data/mime/Makefile
 data/mime/gtranslator.keys_template
 data/pixmaps/Makefile
-data/scripts/Makefile
 doc/Makefile
 doc/reference/Makefile
 doc/reference/version.xml

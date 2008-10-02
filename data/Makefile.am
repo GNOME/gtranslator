@@ -3,7 +3,6 @@
 SUBDIRS = \
 	desktop \
 	mime \
-	scripts \
 	pixmaps
 
 pkgconfigdir = $(libdir)/pkgconfig
