@@ -63,7 +63,7 @@ gtranslator_open (GFile *location,
 	GtranslatorTab *tab;
 	GList *current;
 	GtranslatorView *active_view;
-	gchar *project_id;
+	const gchar *project_id;
 
 	/*
 	 * If the filename can't be opened, pass the error back to the caller

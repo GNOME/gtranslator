@@ -1084,7 +1084,7 @@ gtranslator_tab_get_name (GtranslatorTab *tab)
 {
 	GtranslatorHeader *header;
 	GtranslatorPoState state;
-	gchar *str;
+	const gchar *str;
 	gchar *tab_name;
 
 	header = gtranslator_po_get_header (tab->priv->po);

@@ -259,7 +259,7 @@ static void save_new_profile (GtkWidget *widget, GtranslatorProfile *profile)
       gtranslator_application_set_active_profile (GTR_APP, profile);
       gtranslator_application_set_profiles (GTR_APP, initial_list); 
     } else {
-      g_list_append (profiles_list, profile);
+      profiles_list = g_list_append (profiles_list, profile);
     }   
   }
   

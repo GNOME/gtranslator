@@ -123,108 +123,108 @@ GtranslatorProfile *gtranslator_profile_new (void)
 	return profile;
 }
 
-gchar *gtranslator_profile_get_name (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_name (GtranslatorProfile *profile)
 {
 	return profile->priv->name;
 }
 
-void gtranslator_profile_set_name (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_name (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->name)
 		g_free (profile->priv->name);
 	profile->priv->name = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_author_name (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_author_name (GtranslatorProfile *profile)
 {
 	return profile->priv->author_name;
 }
 
-void gtranslator_profile_set_author_name (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_author_name (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->author_name)
 		g_free (profile->priv->author_name);
 	profile->priv->author_name = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_author_email (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_author_email (GtranslatorProfile *profile)
 {
 	return profile->priv->author_email;
 }
 
-void gtranslator_profile_set_author_email (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_author_email (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->author_email)
 		g_free (profile->priv->author_email);
 	profile->priv->author_email = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_language_name (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_language_name (GtranslatorProfile *profile)
 {
 	return profile->priv->language_name;
 }
 
-void gtranslator_profile_set_language_name (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_language_name (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->language_name)
 		g_free (profile->priv->language_name);
 	profile->priv->language_name = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_language_code (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_language_code (GtranslatorProfile *profile)
 {
 	return profile->priv->language_code;
 }
 
-void gtranslator_profile_set_language_code (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_language_code (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->language_code)
 		g_free (profile->priv->language_code);
 	profile->priv->language_code = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_charset (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_charset (GtranslatorProfile *profile)
 {
 	return profile->priv->charset;
 }
 
-void gtranslator_profile_set_charset (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_charset (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->charset)
 		g_free (profile->priv->charset);
 	profile->priv->charset = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_encoding (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_encoding (GtranslatorProfile *profile)
 {
 	return profile->priv->encoding;
 }
 
-void gtranslator_profile_set_encoding (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_encoding (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->encoding)
 		g_free (profile->priv->encoding);
 	profile->priv->encoding = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_group_email (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_group_email (GtranslatorProfile *profile)
 {
 	return profile->priv->group_email;
 }
 
-void gtranslator_profile_set_group_email (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_group_email (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->group_email)
 		g_free (profile->priv->group_email);
 	profile->priv->group_email = g_strdup (data);
 }
 
-gchar *gtranslator_profile_get_plurals (GtranslatorProfile *profile)
+const gchar *gtranslator_profile_get_plurals (GtranslatorProfile *profile)
 {
 	return profile->priv->plurals;
 }
 
-void gtranslator_profile_set_plurals (GtranslatorProfile *profile, gchar *data)
+void gtranslator_profile_set_plurals (GtranslatorProfile *profile, const gchar *data)
 {
 	if (profile->priv->plurals)
 		g_free (profile->priv->plurals);

@@ -456,7 +456,7 @@ void gtranslator_preferences_fill_profile_treeview (GtranslatorPreferencesDialog
   for (l = profiles_list; l; l = l->next) {
     
     GtranslatorProfile *profile;
-    gchar *profile_name;
+    const gchar *profile_name;
     
     profile = (GtranslatorProfile *)l->data;
 
@@ -844,7 +844,7 @@ static void
 setup_tm_pages(GtranslatorPreferencesDialog *dlg)
 {
   GtranslatorProfile *profile;
-  gchar *language_code;
+  const gchar *language_code;
   const gchar *filename = NULL;
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton),
@@ -959,8 +959,9 @@ edit_button_pulsed (GtkWidget *button,
   GtkTreeIter iter;
   GtkTreeModel *model;
   GtkTreeSelection *selection;
-  gchar *profile_row, *old_profile_name;
-  GtranslatorProfile *edited_profile;
+  gchar *profile_row;
+  const gchar *old_profile_name;
+  GtranslatorProfile *edited_profile = NULL;
   GtranslatorProfile *active_profile;
   GList *profiles_list = NULL, *l = NULL;
   

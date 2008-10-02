@@ -73,32 +73,32 @@ GType		gtranslator_profile_register_type	(GTypeModule * module);
 GtranslatorProfile	
 		*gtranslator_profile_new		(void);
 
-gchar 		*gtranslator_profile_get_name 		(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_name 		(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_name 		(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_name 		(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_author_name 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_author_name 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_author_name 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_author_name 	(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_author_email 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_author_email 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_author_email 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_author_email 	(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_language_name 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_language_name 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_language_name 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_language_name 	(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_language_code 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_language_code 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_language_code 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_language_code 	(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_charset 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_charset 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_charset 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_charset 	(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_encoding 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_encoding 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_encoding 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_encoding 	(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_group_email 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_group_email 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_group_email 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_group_email 	(GtranslatorProfile *profile, const gchar *data);
 
-gchar 		*gtranslator_profile_get_plurals 	(GtranslatorProfile *profile);
-void 		 gtranslator_profile_set_plurals 	(GtranslatorProfile *profile, gchar *data);
+const gchar 		*gtranslator_profile_get_plurals 	(GtranslatorProfile *profile);
+void 		 gtranslator_profile_set_plurals 	(GtranslatorProfile *profile, const gchar *data);
 
 void		gtranslator_profile_xml_new_entry	(xmlDocPtr doc, GtranslatorProfile *profile);
 GtranslatorProfile
