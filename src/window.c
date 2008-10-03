@@ -1286,25 +1286,6 @@ disconnect_proxy_cb (GtkUIManager *manager,
 	}
 }
 
-
-static void
-side_pane_visibility_changed (GtkWidget		*side_pane,
-			      GtranslatorWindow *window)
-{
-	gboolean visible;
-	GtkAction *action;
-
-	visible = GTK_WIDGET_VISIBLE (side_pane);
-
-	gtranslator_prefs_manager_set_side_pane_visible (visible);
-
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-	                                      "ViewSidePane");
-
-	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-}
-
 static void
 gtranslator_window_draw (GtranslatorWindow *window)
 {
