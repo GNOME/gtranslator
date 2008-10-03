@@ -102,7 +102,8 @@ void		gtranslator_po_parse			(GtranslatorPo *po,
 							 GFile *filename,
 							 GError **error);
 
-void		gtranslator_po_save_header_in_msg	(GtranslatorPo *po);
+void		gtranslator_po_save_header_in_msg	(GtranslatorPo *po,
+							 GtranslatorHeader *header);
 
 void		gtranslator_po_save_file           	(GtranslatorPo *po,
 							GError **error);
@@ -147,6 +148,9 @@ GList           *gtranslator_po_get_msg_from_number     (GtranslatorPo *po,
 
 GtranslatorHeader  
 		*gtranslator_po_get_header		(GtranslatorPo *po);
+
+void             gtranslator_po_set_header              (GtranslatorPo *po, 
+							 GtranslatorHeader *header);
 
 gint             gtranslator_po_get_translated_count	(GtranslatorPo *po);
 

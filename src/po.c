@@ -428,6 +428,7 @@ gtranslator_po_parse (GtranslatorPo *po,
 		gchar *space1, *space2, *space3;
 
 		comment = g_strdup(po_message_comments(message));
+		gtranslator_header_set_comment (priv->header, (const gchar *)comment);
 		
 		prj_id_version = po_header_field(msgstr, "Project-Id-Version");
 		rmbt = po_header_field(msgstr, "Report-Msgid-Bugs-To");
@@ -566,13 +567,11 @@ gtranslator_po_parse (GtranslatorPo *po,
  * It saves the header's values into the msgstr
  **/
 void
-gtranslator_po_save_header_in_msg (GtranslatorPo *po)
+gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 {
 	po_message_iterator_t iter;
 	po_message_t message;
 	
-	GtranslatorHeader *header;	
-
 	const char *msgstr,
 		   *header_comment;
 	const char *prev_translator;
@@ -602,10 +601,6 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 
 	take_my_options = gtranslator_prefs_manager_get_take_my_options ();
 
-	/*
-	 * Get header's fields
-	 */
-	header = gtranslator_po_get_header(po);
 	/*
          * Save the previous translator to update the header's comment
          */
@@ -659,7 +654,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	/*
          * Update the header's comment
          */
-	comments = po_message_comments (message);
+	comments = gtranslator_header_get_comment (header);
 	comments_lines = g_strsplit (comments, "\n", -1);
 	
 	/*
@@ -682,7 +677,6 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	 */
 	if ((g_utf8_collate (prev_translator, aux) == 0) && 
 	    (g_utf8_collate (comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year) != 0)) {
-	  
 	  if (g_str_has_suffix (comments_lines[j], ".")) {
 	    line_without_dot = g_strndup (comments_lines[j], g_utf8_strlen(comments_lines[j], -1) -1);  
 	    line = g_strconcat (line_without_dot, ", ", year, ".", NULL);
@@ -700,8 +694,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	    new_comments = g_strconcat (new_comments, comments_lines[k], "\n", NULL);
 	    k++;
 	    }
-	  po_message_set_comments (message, new_comments);
-	  
+	  gtranslator_header_set_comment (header, (const gchar *)new_comments);
 	  g_free (line);
 	  g_free (new_comments);
 	}    
@@ -709,20 +702,26 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po)
 	/*
 	 * Current translator is not in the comments.
 	 */
-	if (g_utf8_collate (prev_translator, aux) != 0) {
+	if ((g_utf8_collate (prev_translator, aux) != 0) || (prev_translator == NULL)) {
 	  
-	  header_comment = po_message_comments (message);
+	  header_comment = gtranslator_header_get_comment (header);
 	  aux2 = g_strconcat(header_comment, gtranslator_header_get_translator(header), " ", "<",
 			     gtranslator_header_get_tr_email(header), ">", ",", " ", year, ".", NULL);
 	  
-	  po_message_set_comments (message, aux2);
+	  gtranslator_header_set_comment (header, (const gchar *)aux2);
+	  gtranslator_header_set_prev_translator (header, aux);
 	  g_free (aux2);
 	}
 	g_free (aux);
 	
 	/*
          * Write the header's fields
-         */
+         */  
+	gtranslator_po_set_header (po, header);
+	
+	comments = gtranslator_header_get_comment (header);
+	po_message_set_comments (message, comments);
+
 	msgstr = po_header_set_field (msgstr, "Project-Id-Version",
 				      gtranslator_header_get_prj_id_version(header));
 	msgstr = po_header_set_field (msgstr, "PO-Revision-Date",
@@ -763,7 +762,8 @@ gtranslator_po_save_file(GtranslatorPo *po,
 	struct po_xerror_handler handler;
 	gchar *msg_error;
 	gchar *filename;
-	
+	GtranslatorHeader *header;
+
 	/*
 	 * Initialice the handler error.
 	 */
@@ -805,7 +805,8 @@ gtranslator_po_save_file(GtranslatorPo *po,
 	/*
 	 * Save header fields into msg
 	 */
-	gtranslator_po_save_header_in_msg (po);	
+	header = gtranslator_po_get_header (po);
+	gtranslator_po_save_header_in_msg (po, header);	
 	
 	if (!po_file_write (gtranslator_po_get_po_file (po),
 			    filename, &handler))
@@ -1154,6 +1155,13 @@ gtranslator_po_get_header(GtranslatorPo *po)
 	g_return_val_if_fail (GTR_IS_PO (po), NULL);
 	
 	return po->priv->header;
+}
+
+void
+gtranslator_po_set_header(GtranslatorPo *po,
+			  GtranslatorHeader *header)
+{
+  po->priv->header = header;
 }
 
 /**

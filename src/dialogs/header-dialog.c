@@ -92,6 +92,23 @@ take_my_options_checkbutton_toggled(GtkToggleButton *button,
 }
 
 static void
+prj_comment_changed (GtkTextBuffer *buffer,
+		     GtranslatorHeader *header)
+{
+        const gchar *text;
+	GtkTextIter start, end;
+	gchar *text_utf8;
+	
+	gtranslator_header_set_header_changed (header, TRUE);
+
+	gtk_text_buffer_get_bounds(buffer, &start, &end);
+	text = gtk_text_buffer_get_text(buffer, &start, &end, TRUE);	
+
+	if (text)
+	  gtranslator_header_set_comment(header, g_strdup(text));
+}
+
+static void
 prj_id_version_changed(GObject    *gobject,
 		    GParamSpec *arg1,
 		    GtranslatorHeader *header)
@@ -284,6 +301,8 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->take_my_options),
 				     gtranslator_prefs_manager_get_take_my_options());
 
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->prj_comment), TRUE);
+
 	gtk_widget_set_sensitive(dlg->priv->pot_date, FALSE);
 	gtk_widget_set_sensitive(dlg->priv->po_date, FALSE);
 	gtk_widget_set_sensitive(dlg->priv->charset, FALSE);
@@ -311,6 +330,7 @@ void gtranslator_show_header_dialog (GtranslatorWindow *window)
 	GtranslatorPo *po;
 	GtranslatorTab *tab;
 	GtranslatorHeader *header;
+	GtkTextBuffer *buffer;
 
 	tab = gtranslator_window_get_active_tab (window);
 	po = gtranslator_tab_get_po (tab);
@@ -351,6 +371,12 @@ void gtranslator_show_header_dialog (GtranslatorWindow *window)
 	}
 	
 	gtk_window_present (GTK_WINDOW (dlg));
+
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (GTR_HEADER_DIALOG (dlg)->priv->prj_comment));
+
+	g_signal_connect(buffer, "changed",
+			 G_CALLBACK(prj_comment_changed),
+			 header);
 
 	/*
          * Connect signals to edit Project information on Header dialog
