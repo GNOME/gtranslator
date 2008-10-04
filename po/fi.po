@@ -6,12 +6,11 @@
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2004.
 #
 #
-#: ../src/menus.c:219 ../src/menus.c:237 ../src/menus.c:246 ../src/menus.c:255
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-19 10:13+0300\n"
+"POT-Creation-Date: 2008-10-04 16:16+0300\n"
 "PO-Revision-Date: 2006-10-15 20:37+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -21,63 +20,765 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1
-msgid "Translate programs to your own language"
-msgstr "Kotoista ohjelmia omalle kielellesi"
+msgid "Gtranslator PO Editor"
+msgstr "Gtranslator po-muokkain"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:2
-msgid "gtranslator PO file editor"
-msgstr "Gtranslator - PO-tiedostojen muokkain"
+msgid "Translate and localize applications and libraries"
+msgstr "Käännä ja kotoista ohjelmia ja kirjastoja"
 
-#: ../src/about.c:61
+#: ../data/po.lang.h:1
+msgid "Others"
+msgstr "Muut"
+
+#: ../data/po.lang.h:2
+msgid "Special variable"
+msgstr "Erikoismuuttuja"
+
+#: ../data/po.lang.h:3
+msgid "Tag"
+msgstr "Merkintä"
+
+#: ../data/po.lang.h:4
+msgid "gtranslator highlight"
+msgstr "gtranslator-korostus"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:117
+msgid "Message not found"
+msgstr "Tekstiä ei löydy"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:222
+msgid "Open file for alternate language"
+msgstr "Avaa toisenkielinen tiedosto"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:247
+msgid "File closed"
+msgstr "Tiedosto on suljettu"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:320
+msgid "There isn't any file loaded"
+msgstr "Mitään tiedostoa ei ole ladattu"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:59
+msgid "_Alternate Language"
+msgstr "_Vaihtoehtoinen kieli"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:60
+msgid "Show the Alternate Language panel"
+msgstr ""
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:123
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+msgid "Alternate Language"
+msgstr "Vaihtoehtoinen kieli"
+
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+msgid "Load an alternate language."
+msgstr "Lataa muu kuin oletuskieli."
+
+#: ../plugins/charmap/charmap-plugin.c:299
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+msgid "Character Map"
+msgstr "Merkkikartta"
+
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+msgid "Insert special characters just by clicking on them."
+msgstr "Lisää erikoismerkkejä napsauttamalla."
+
+#: ../plugins/dictionary/dict-panel.c:186
+#, c-format
+msgid "No dictionary source available with name '%s'"
+msgstr "Sanastolähdettä nimellä \"%s\" ei ole saatavilla"
+
+#: ../plugins/dictionary/dict-panel.c:189
+msgid "Unable to find dictionary source"
+msgstr "Sanastolähdettä ei löytynyt"
+
+#: ../plugins/dictionary/dict-panel.c:204
+#, c-format
+msgid "No context available for source '%s'"
+msgstr "Lähteelle \"%s\" ei löydy kontekstia"
+
+#: ../plugins/dictionary/dict-panel.c:207
+msgid "Unable to create a context"
+msgstr "Uutta kontekstia ei voi luoda"
+
+#: ../plugins/dictionary/dict-panel.c:290
+#, c-format
+msgid "Dictionary source '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:310
+#, c-format
+msgid "Strategy '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:329
+#, c-format
+msgid "Database '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:375
+#, c-format
+msgid "Word '%s' selected"
+msgstr ""
+
+#. speller
+#: ../plugins/dictionary/dict-panel.c:398
+msgid "Double-click on the word to look up"
+msgstr "Etsi sanaa kaksoisnapsauttamalla"
+
+#. strat-chooser
+#: ../plugins/dictionary/dict-panel.c:404
+msgid "Double-click on the matching strategy to use"
+msgstr "Kaksoisnapsauta käyttääksesi täsmäävät strategiaa"
+
+#. source-chooser
+#: ../plugins/dictionary/dict-panel.c:409
+msgid "Double-click on the source to use"
+msgstr "Kaksoisnapsauta käytettävää lähdettä"
+
+#. db-chooser
+#: ../plugins/dictionary/dict-panel.c:418
+msgid "Double-click on the database to use"
+msgstr "Kaksoisnapsauta käytettääksesi tietokantaa"
+
+#.
+#. * Look up Button
+#.
+#: ../plugins/dictionary/dict-panel.c:481
+msgid "Look _up:"
+msgstr "Etsi _lähteistä:"
+
+#: ../plugins/dictionary/dict-panel.c:554
+msgid "Similar words"
+msgstr "Samankaltaiset sanat"
+
+#: ../plugins/dictionary/dict-panel.c:570
+msgid "Available dictionaries"
+msgstr "Saatavilla olevat sanakirjat"
+
+#: ../plugins/dictionary/dict-panel.c:586
+msgid "Available strategies"
+msgstr "Saatavilla olevat strategiat"
+
+#: ../plugins/dictionary/dict-panel.c:597
+msgid "Dictionary sources"
+msgstr "Sanastolähteitä ei löytynyt"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/dictionary-plugin.c:94
+msgid "Dictionary"
+msgstr "Sanasto"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+msgid "Look up words in a dictionary."
+msgstr "Etsi sanoja sanastoista."
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
+msgid "_Fullscreen"
+msgstr "_Kokoruutu"
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:47
+msgid "Place window on fullscreen state"
+msgstr "Näytä ikkunan kokoruututilassa"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr "Kokoruutu"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr ""
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:70
+msgid "_Next Tag"
+msgstr "_Seuraava merkintä"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:71
+msgid "Insert the next tag of the message"
+msgstr "Lisää viestin seuraava merkintä"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:73
+msgid "_Insert Tags"
+msgstr "_Lisää merkinnät"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Tags"
+msgstr "Lisää merkinnät"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+msgid "Tags detection and easy insertion."
+msgstr "Merkintöjen tunnistus ja helppo lisäys."
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:1
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:1
+#: ../plugins/subversion/subversion.glade.h:2
+#: ../src/dialogs/preferences-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:2
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:2
+msgid "     "
+msgstr "     "
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:3
+#, fuzzy
+msgid "<b>Code language of the results:</b>"
+msgstr "<b>Kieliasetukset</b>"
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:4
+msgid "<b>Code language to query open-tran:</b>"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:5
+msgid "Open Tran Settings"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:210
+#: ../plugins/open-tran/open-tran-panel.c:274
+msgid "ERROR: could not parse response\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:258
+#, c-format
+msgid "ERROR: %d %s\n"
+msgstr "VIRHE: %d %s\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:269
+#, c-format
+msgid "FAULT: %d %s\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:285
+#, c-format
+msgid "WRONG! Can't get result element %d\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:301
+msgid "Phrase not found"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:323
+msgid "You have to provide a phrase to search"
+msgstr "Etsittävä teksti täytyy antaa"
+
+#: ../plugins/open-tran/open-tran-panel.c:333
+msgid "You have to provide a search language code"
+msgstr "Etsittävän kielen koodi täytyy antaa"
+
+#: ../plugins/open-tran/open-tran-panel.c:343
+msgid "You have to provide a language code for your language"
+msgstr "Oman kielesi kielikoodi täytyy antaa"
+
+#: ../plugins/open-tran/open-tran-panel.c:372
+msgid "Type"
+msgstr "Tyyppi"
+
+#: ../plugins/open-tran/open-tran-panel.c:383
+msgid "Open-Tran.eu"
+msgstr "Open-Tran.eu"
+
+#: ../plugins/open-tran/open-tran-panel.c:422
+msgid "Look for:"
+msgstr "Etsi:"
+
+#: ../plugins/open-tran/open-tran-plugin.c:108
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+msgid "Open Tran"
+msgstr "Avaa tran"
+
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+msgid "Look for phrases in Open tran memory translation database."
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:3
+msgid "<b>Line command:</b>"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:4
+msgid "<b>Program command:</b>"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:5
+msgid "Source View Settings"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:6
+msgid "Use external editor"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:112
+#, c-format
+msgid "Please, install %s to be able to show the file"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:392
+msgid "Paths:\n"
+msgstr "Polut:\n"
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+msgid "Show the message in the source code."
+msgstr "Näytä teksti lähdekoodissa"
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+msgid "Source Code View"
+msgstr "Lähdekoodinäkymä"
+
+#: ../plugins/source-code-view/viewer.c:74
+msgid "Source Viewer"
+msgstr "Lähdekoodin katselin"
+
+#: ../plugins/source-code-view/viewer.glade.h:1
+msgid "<b>Source code</b>"
+msgstr "<b>Lähdekoodi</b>"
+
+#: ../plugins/subversion/checkout-dialog.c:76
+msgid "Subversion: Checkout complete."
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:125
+msgid "Please, add a directory path to make the checkout"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:138
+msgid "Please, add a Subversion URL"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
+msgid "Checkout directory"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:260
+msgid "Checkout repository"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:226
+msgid "Subversion: Commit complete."
+msgstr ""
+
+#.
+#. * Translators: Please change LANGUAGE for your language name in ENGLISH.
+#. * This string is used to fill the ChangeLog entry
+#.
+#: ../plugins/subversion/commit-dialog.c:267
+msgctxt "ChangeLog entry"
+msgid "LANGUAGE"
+msgstr "KIELI"
+
+#: ../plugins/subversion/commit-dialog.c:293
+#, c-format
+msgid "The ChangeLog file '%s' does not exists"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:405
+msgid "Are you sure that you want to pass an empty log message?"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:422
+msgid "You have to select at least one file to send"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:568
+msgid "Commit Changes"
+msgstr "Toteuta muutokset"
+
+#: ../plugins/subversion/diff-dialog.c:79
+msgid "Subversion: Diff complete."
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:108
+#, c-format
+msgid "Please, install %s to be able to diff the file"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:411
+msgid "Diff file"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:479
+msgid "Diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:84
+msgid "Subversion: File will be added on next commit."
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:138
+msgid "_Update"
+msgstr "_Päivitä"
+
+#: ../plugins/subversion/subversion-plugin.c:139
+msgid "Sync your local copy with the Subversion tree"
+msgstr "Päivitä paikallinen kopio subversion-puusta"
+
+#: ../plugins/subversion/subversion-plugin.c:142
+msgid "_Commit"
+msgstr "_Toteuta"
+
+#: ../plugins/subversion/subversion-plugin.c:143
+msgid "Commit your changes to the Subversion tree"
+msgstr "Toteuta muutoket subversion-puuhun"
+
+#: ../plugins/subversion/subversion-plugin.c:146
+msgid "_Add"
+msgstr "_Lisää"
+
+#: ../plugins/subversion/subversion-plugin.c:147
+msgid "Add a new file/directory to the Subversion tree"
+msgstr "Lisää tiedosto tai kansio subversion-puuhun"
+
+#: ../plugins/subversion/subversion-plugin.c:150
+msgid "_Diff"
+msgstr "_Vertaa"
+
+#: ../plugins/subversion/subversion-plugin.c:151
+msgid "Diff local PO file with repository PO file"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:154
+msgid "C_heckout"
+msgstr "_Nouda"
+
+#: ../plugins/subversion/subversion-plugin.c:155
+msgid "Get a new repository copy"
+msgstr "Hae uusi kopio versiohallinnasta"
+
+#: ../plugins/subversion/subversion-plugin.c:158
+msgid "S_ubversion"
+msgstr "S_ubversion"
+
+#: ../plugins/subversion/subversion.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: ../plugins/subversion/subversion.glade.h:3
+msgid "        "
+msgstr "        "
+
+#: ../plugins/subversion/subversion.glade.h:4
+msgid "<b>Diff options:</b>"
+msgstr "<b>Diff-ohjelman valitsimet:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:5
+msgid "<b>Diff program:</b>"
+msgstr "<b>Diff-ohjelma:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:6
+msgid "<b>Directory to checkout:</b>"
+msgstr "<b>Tuotava kansio:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:7
+msgid "<b>Directory to update:</b>"
+msgstr "<b>Päivitettävä kansio:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:8
+msgid "<b>Information:</b>"
+msgstr "<b>Tiedot:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:9
+msgid "<b>Log Message:</b>"
+msgstr "<b>Lokiviesti:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:10
+msgid "<b>Password:</b>"
+msgstr "<b>Salasana:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:11
+msgid "<b>Realm:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:12
+msgid "<b>Select files to Commit:</b>"
+msgstr "<b>Valitse vietävät tiedostot:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:13
+msgid "<b>Subversion URL:</b>"
+msgstr "<b>Subversion-URL:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:14
+msgid "<b>Username:</b>"
+msgstr "<b>Käyttäjätunnus:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:15
+msgid "Add Log Message to ChangeLog file"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:16
+msgid "Line argument:"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:17
+msgid "Program name:"
+msgstr "Ohjelman nimi:"
+
+#: ../plugins/subversion/subversion.glade.h:18
+msgid "Remember Password"
+msgstr "Muista salasana"
+
+#: ../plugins/subversion/subversion.glade.h:19
+msgid "Remember this decision"
+msgstr "Muista tämä valinta"
+
+#: ../plugins/subversion/subversion.glade.h:20
+msgid "Repository authorization"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:21
+msgid "Retrieving status..."
+msgstr "Noudetaan tilaa..."
+
+#: ../plugins/subversion/subversion.glade.h:22
+msgid "Save the diff file"
+msgstr "Tallenna diff-tiedosto"
+
+#: ../plugins/subversion/subversion.glade.h:23
+msgid "Send Changes"
+msgstr "Lähetä muutokset"
+
+#: ../plugins/subversion/subversion.glade.h:24
+#: ../plugins/subversion/update-dialog.c:230
+msgid "Update repository"
+msgstr "Päivitä versiohallinnasta"
+
+#: ../plugins/subversion/subversion.glade.h:25
+msgid "Use configured program to view the diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:26
+msgid "label"
+msgstr "otsake"
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
+msgid "A Subversion client plugin based on libsvn."
+msgstr "Libsvn-kirjastoon perustuva subversion-asiakas."
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
+msgid "Subversion"
+msgstr "Subversion"
+
+#: ../plugins/subversion/svn-command.c:172
+#: ../plugins/subversion/svn-command.c:252
+msgid "Authentication canceled"
+msgstr "Tunnistautuminen peruttu"
+
+#: ../plugins/subversion/svn-command.c:225
+msgid "Hostname: "
+msgstr "Palvelin: "
+
+#: ../plugins/subversion/svn-command.c:226
+msgid "Fingerprint: "
+msgstr "Sormenjälki: "
+
+#: ../plugins/subversion/svn-command.c:227
+msgid "Valid from: "
+msgstr "Voimassa alkaen: "
+
+#: ../plugins/subversion/svn-command.c:228
+msgid "Valid until: "
+msgstr "Voimassa saakka: "
+
+#: ../plugins/subversion/svn-command.c:229
+msgid "Issuer DN: "
+msgstr "Myöntäjän DN: "
+
+#: ../plugins/subversion/svn-command.c:230
+msgid "DER certificate: "
+msgstr "DER-varmenne: "
+
+#: ../plugins/subversion/svn-command.c:377
+#: ../plugins/subversion/svn-command.c:393
+#, c-format
+msgid "Deleted: %s"
+msgstr "Poistettu: %s"
+
+#: ../plugins/subversion/svn-command.c:380
+#: ../plugins/subversion/svn-command.c:399
+#, c-format
+msgid "Added: %s"
+msgstr "Lisätty: %s"
+
+#: ../plugins/subversion/svn-command.c:383
+#, c-format
+msgid "Reverted: %s"
+msgstr "Palautettu: %s"
+
+#: ../plugins/subversion/svn-command.c:386
+#, c-format
+msgid "Revert failed: %s"
+msgstr "Palautus epäonnistui: %s"
+
+#: ../plugins/subversion/svn-command.c:390
+#, c-format
+msgid "Resolved: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:396
+#, c-format
+msgid "Updated: %s"
+msgstr "Päivitetty: %s"
+
+#: ../plugins/subversion/svn-command.c:402
+#, c-format
+msgid "Externally Updated: %s"
+msgstr "Päivitetty muualta: %s"
+
+#: ../plugins/subversion/svn-command.c:406
+#, c-format
+msgid "Commit Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:410
+#, c-format
+msgid "Commit Added: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:413
+#, c-format
+msgid "Commit Deleted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:417
+#, c-format
+msgid "Commit Replaced: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:421
+#, c-format
+msgid "Created File: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:436
+#, c-format
+msgid "Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:439
+#, c-format
+msgid "Merged: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:442
+#, c-format
+msgid "Conflicted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:446
+#, c-format
+msgid "Missing: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:449
+#, c-format
+msgid "Obstructed: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-update-command.c:103
+#, c-format
+msgid "Updated to revision %ld."
+msgstr "Päivitettiin revisioon %ld."
+
+#: ../plugins/subversion/update-dialog.c:74
+msgid "Subversion: Update complete."
+msgstr "Subversion: päivitys valmistui."
+
+#: ../plugins/subversion/vcs-status-tree-view.c:293
+msgid "Modified"
+msgstr "Muokattu"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:297
+msgid "Added"
+msgstr "Lisätty"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:301
+msgid "Deleted"
+msgstr "Poistettu"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:305
+msgid "Conflicted"
+msgstr "Ristiriidassa"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:309
+msgid "Missing"
+msgstr "Puuttuu"
+
+#: ../src/actions-file.c:202
+msgid "Open file for translation"
+msgstr "Avaa käännettävä tiedosto"
+
+#: ../src/actions-file.c:276 ../src/actions-file.c:403
+msgid "File saved."
+msgstr "Tiedosto tallennettu."
+
+#: ../src/actions-file.c:326
+msgid "Save file as..."
+msgstr "Tallenna tiedosto nimellä..."
+
+#: ../src/actions-help.c:51
+msgid "Unable to open help file for gtranslator"
+msgstr "Gtranslatorin ohjetiedostoa ei voi avata"
+
+#: ../src/actions-help.c:69
+msgid "Current Developers"
+msgstr "Nykyiset kehittäjät"
+
+#: ../src/actions-help.c:75
+msgid "Previous Developers"
+msgstr "Aikaisemmat kehittäjät"
+
+#: ../src/actions-help.c:93
 msgid ""
-"gtranslator is free software; you can redistribute it and/or modify it under "
-"the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
 "any later version."
 msgstr ""
-"Gtranslator on vapaa ohjelma; sitä on sallittu levittää edelleen "
-"ja muuttaa GNU yleisen lisenssin (GPL lisenssin) ehtojen mukaan "
-" sellaisina kuin Free Software Foundation on ne julkaissut; joko "
-"lisenssin version 2, tai (valinnan mukaan) minkä tahansa myöhemmän "
-"version mukaisesti."
+"Tämä on vapaa ohjelma; sitä on sallittu levittää edelleen ja muuttaa "
+"GNU yleisen lisenssin (GPL lisenssin) ehtojen mukaan  sellaisina kuin Free "
+"Software Foundation on ne julkaissut; joko lisenssin version 3, tai "
+"(valinnan mukaan) minkä tahansa myöhemmän version mukaisesti."
 
-#: ../src/about.c:65
+#: ../src/actions-help.c:97
 msgid ""
-"gtranslator is distributed in the hope that it will be useful, but WITHOUT "
+"This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 msgstr ""
-"Gtranslatoria levitetään siinä toivossa, että se olisi hyödyllinen, "
-"mutta ilman mitään takuuta; ilman edes hiljaista takuuta kaupallisesti "
-"hyväksyttävästä laadusta tai soveltuvuudesta tiettyyn tarkoitukseen. "
-"Katso GPL lisenssistä lisää yksityiskohtia."
+"Tätä ohjelmaa levitetään siinä toivossa, että se olisi hyödyllinen, mutta "
+"ilman mitään takuuta; ilman edes hiljaista takuuta kaupallisesti "
+"hyväksyttävästä laadusta tai soveltuvuudesta tiettyyn tarkoitukseen. Katso "
+"GPL lisenssistä lisää yksityiskohtia."
 
-#: ../src/about.c:69
+#: ../src/actions-help.c:101
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
-"gtranslator; if not, write to the Free Software Foundation,59 Temple Place, "
-"Suite 330, Boston, MA  02111-1307  USA"
+"this program.  If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
-"Gtranslatorin mukana pitäisi tulla kopio GPL-lisenssistä; jos näin "
-"ei ole, kirjoita osoitteeseen Free Software Foundation Inc., 51 Franklin "
-"St, Fifth Floor, Boston, MA 02110-1301, USA."
+"Gtranslatorin mukana pitäisi tulla kopio GPL-lisenssistä; jos näin ei ole, "
+"lue lisää sivulta <http://www.gnu.org/licenses/>."
 
-#: ../src/about.c:82
-msgid "gtranslator is a po file editing suite with many bells and whistles."
+#: ../src/actions-help.c:113
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
 msgstr ""
-"gtranslator on po-tiedostojen muokkausohjelma joka sisältää paljon hienoja "
-"ominaisuuksia. Suomennos: http://gnome.fi/"
+"Työkaluja ohjelmien ja kirjastojen kotoistamisen avuksi."
 
-#: ../src/about.c:84
-msgid "(C) 1999-2007 The Free Software Foundation, Inc."
-msgstr "© 1999-2007 The Free Software Foundation, Inc."
+#: ../src/actions-help.c:115
+msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+msgstr "© 1999-2008 The Free Software Foundation, Inc."
+
+#: ../src/actions-help.c:119
+msgid "About Gtranslator"
+msgstr "Tietoja gtranslatorista"
 
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/about.c:91
+#: ../src/actions-help.c:124
 msgid "translator-credits"
 msgstr ""
 "Ilkka Tuohela, 2005-2008\n"
@@ -85,1221 +786,608 @@ msgstr ""
 "\n"
 "http://gnome.fi/"
 
-#: ../src/bookmark.c:571
-#, c-format
-msgid "Open %s (%s)"
-msgstr "Avaa %s (%s)"
+#: ../src/actions-help.c:128
+msgid "Gtranslator Web Site"
+msgstr "Gtranslatorin kotisivut"
 
-#: ../src/color-schemes.c:199
-#, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr "Väriteematiedoston `%s' toteuttaminen ei onnistu!"
+#: ../src/context.c:61
+msgid "Format: "
+msgstr "Muoto:"
 
-#: ../src/color-schemes.c:325
-msgid "Couldn't retrieve author information!"
-msgstr "Tekijätietoja ei löytynyt!"
+#: ../src/context.c:62
+msgid "Context:"
+msgstr "Kohteksti:"
 
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: ../src/color-schemes.c:331 ../src/translator.c:334
-msgid "Unknown"
-msgstr "Tuntematon"
+#: ../src/context.c:63
+msgid "Extracted comments:"
+msgstr "Tuodut kommentit:"
 
-#: ../src/color-schemes.c:332
-msgid "<Not Given>"
-msgstr "<Ei Annettu>"
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:704
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr "<span weight=\"bold\" size=\"large\">Tietokantaan lisätyt sana</span>"
 
-#: ../src/color-schemes.c:524
-#, c-format
-msgid "Activate colorscheme %s"
-msgstr "Aktivoi väriteema %s"
-
-#: ../src/compile.c:81
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "Virhe msgfmt:ia suoritettaessa:\n"
-
-#: ../src/compile.c:158
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "Valitettavasti järjestelmästäsi ei löydy komentoa msgfmt!"
-
-#: ../src/compile.c:199
+#: ../src/dialogs/assistant.c:281
 #, c-format
 msgid ""
-"Compile successful:\n"
-"%s"
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
+"Database path: %s"
 msgstr ""
-"Kääntäminen onnistui:\n"
-"%s"
 
-#: ../src/dialogs.c:235
+#: ../src/dialogs/assistant.c:300
+msgid "None"
+msgstr "Ei mitään"
+
+#: ../src/dialogs/assistant.c:321
+msgid ""
+"This assistant will help you to create the main profile\n"
+"and generate your translation memory database."
+msgstr ""
+
+#: ../src/dialogs/assistant.c:327
+msgid "Assistant"
+msgstr "Avustaja"
+
+#: ../src/dialogs/assistant.c:416
+msgid "<b>Profile name:</b>"
+msgstr "<b>Profiilin nimi:</b>"
+
+#: ../src/dialogs/assistant.c:436
+msgid "<b>Translator name:</b>"
+msgstr "<b>Kääntäjän nimi:</b>"
+
+#: ../src/dialogs/assistant.c:456
+msgid "<b>Translator email:</b>"
+msgstr "<b>Kääntäjän sähköpostiosoite:</b>"
+
+#: ../src/dialogs/assistant.c:476
+msgid "<b>Language:</b>"
+msgstr "<b>Kieli:</b>"
+
+#: ../src/dialogs/assistant.c:496
+msgid "<b>Team email:</b>"
+msgstr "<b>Kääntäjäryhmän sähköpostiosoite:</b>"
+
+#: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
+#: ../src/dialogs/preferences-dialog.c:512
+msgid "Profile"
+msgstr "Profiili"
+
+#: ../src/dialogs/assistant.c:584
+msgid "<b>Language code:</b>"
+msgstr "<b>Kielikoodi:</b>"
+
+#: ../src/dialogs/assistant.c:604
+msgid "<b>Character set:</b>"
+msgstr "<b>Merkistö:</b>"
+
+#: ../src/dialogs/assistant.c:624
+msgid "<b>Transfer encoding:</b>"
+msgstr "<b>Muunnoksen merkistökoodaus:</b>"
+
+#: ../src/dialogs/assistant.c:644
+msgid "<b>Plural forms:</b>"
+msgstr "<b>Monikkomuodot:</b>"
+
+#: ../src/dialogs/assistant.c:706
+msgid "<b>Select the path to generate the database:</b>"
+msgstr "<b>Valitse polku tietokannan luontia varten:</b>"
+
+#: ../src/dialogs/assistant.c:736
+msgid "<b>Look for a specific PO filename:</b>"
+msgstr "<b>Etsi tiettyä po-tiedostonimeä:</b>"
+
+#: ../src/dialogs/assistant.c:745
+msgid "E.g.: gl.po"
+msgstr "Esim gl.po"
+
+#: ../src/dialogs/assistant.c:748
+msgid "Generate Database"
+msgstr "Luo tietokanta"
+
+#: ../src/dialogs/assistant.c:772
+msgid "Confirmation"
+msgstr "Vahvistus"
+
+#: ../src/dialogs/close-confirmation-dialog.c:131
+msgid "Close _without Saving"
+msgstr "Sulje _tallentamatta"
+
+#: ../src/dialogs/close-confirmation-dialog.c:165
+msgid "Question"
+msgstr "Kysymys"
+
+#: ../src/dialogs/close-confirmation-dialog.c:383
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:555
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:561
+#, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:579
+msgid "Docum_ents with unsaved changes:"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:581
+msgid "S_elect the documents you want to save:"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:600
+msgid "Saving has been disabled by the system administrator."
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:602
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr ""
+
+#: ../src/dialogs/comment-dialog.c:92
+msgid "Edit Comment"
+msgstr "Muokkaa kommenttia"
+
+#: ../src/dialogs/comment-dialog.glade.h:1
+msgid "<b>Write your comments bellow:</b>"
+msgstr "<b>Kirjoita omat kommenttisi alle:</b>"
+
+#: ../src/dialogs/file-dialogs.c:60
 msgid "Gettext translation"
 msgstr "Gettext-käännös"
 
-#: ../src/dialogs.c:240
+#: ../src/dialogs/file-dialogs.c:65
 msgid "Gettext translation template"
 msgstr "Gettext-käännöksen pohja"
 
-#: ../src/dialogs.c:245
+#: ../src/dialogs/file-dialogs.c:70
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: ../src/dialogs.c:302
-msgid "Open file for translation"
-msgstr "Avaa käännettävä tiedosto"
-
-#: ../src/dialogs.c:330 ../src/main_window.glade.h:27
-msgid "Save file as..."
-msgstr "Tallenna tiedosto nimellä..."
-
-#: ../src/dialogs.c:335
-msgid "Save local copy of file as..."
-msgstr "Tallenna paikallinen kopio nimellä.."
-
-#: ../src/dialogs.c:379
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Save?"
-msgstr ""
-"Tiedostoa %s\n"
-"on muutettu. Tallenna?"
-
-#: ../src/dialogs.c:422 ../src/dialogs.c:455
-msgid "gtranslator -- edit comment"
-msgstr "gtranslator -- muokkaa kommenttia"
-
-#: ../src/dialogs.c:447
-msgid "Comment:"
-msgstr "Kommentti:"
-
-#: ../src/dialogs.c:565
-#, c-format
-msgid "Should ALL translations from `%s' be removed?"
-msgstr "Poistetaanko KAIKKI käännökset tiedostosta '%s'?"
-
-#: ../src/dialogs.c:644
-msgid "gtranslator -- go to"
-msgstr "gtranslator -- siirry"
-
-#: ../src/dialogs.c:652
-msgid "Go to message number:"
-msgstr "Siirry tekstinumeroon:"
-
-#: ../src/dialogs.c:711
-msgid "Find in the po file"
-msgstr "Etsi po-tiedostosta"
-
-#: ../src/dialogs.c:720
-msgid "Enter search string:"
-msgstr "Anna hakumerkkijono:"
-
-#: ../src/dialogs.c:725 ../src/main_window.glade.h:4
-msgid "Case sensitive"
-msgstr "Kirjainkoko huomioidaan"
-
-#: ../src/dialogs.c:730
-msgid "Find in:"
-msgstr "Mistä etsitään:"
-
-#: ../src/dialogs.c:734 ../src/dialogs.c:869
-msgid "Comments"
-msgstr "Kommentit"
-
-#: ../src/dialogs.c:737 ../src/dialogs.c:872 ../src/languages.c:105
-msgid "English"
-msgstr "Englanti"
-
-#: ../src/dialogs.c:740 ../src/dialogs.c:875 ../src/messages-table.c:237
-msgid "Translation"
-msgstr "Käännös"
-
-#.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
-#.
-#: ../src/dialogs.c:751 ../src/main_window.glade.h:12
-msgid "Ignore hotkeys"
-msgstr "Älä käytä pikanäppäimiä"
-
-#: ../src/dialogs.c:848
-msgid "gtranslator -- replace"
-msgstr "gtranslator -- korvaa"
-
-#: ../src/dialogs.c:852
-msgid "Replace"
-msgstr "Korvaa"
-
-#: ../src/dialogs.c:853
-msgid "Replace all"
-msgstr "Korvaa kaikki"
-
-#: ../src/dialogs.c:858
-msgid "String to replace:"
-msgstr "Korvattava merkkijono:"
-
-#: ../src/dialogs.c:861
-msgid "Replace string:"
-msgstr "Korvaava merkkijono:"
-
-#: ../src/dialogs.c:866
-msgid "Replace in:"
-msgstr "Missä korvataan:"
-
-#: ../src/dialogs.c:944
-msgid "Please enter a string to replace!"
-msgstr "Anna korvattava merkkijono"
-
-#: ../src/dialogs.c:1002
-#, c-format
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
-"Tiedosto\n"
-"\n"
-"   %s\n"
-"\n"
-"on jo aukaistu toisessa auki olevassa gtranslatorissa.\n"
-"Sulje toinen tiedostoa parhaillaan käsittelevä gtranslator\n"
-"saadaksesi pääsyn tähän tiedostoon.\n"
-"\n"
-"Avataanko tämä tiedosto joka tapauksessa?"
-
-#: ../src/dialogs.c:1044
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
-msgstr ""
-"Tiedostoa %s\n"
-"on muutettu. Haluatko palauttaa sen tallennetun version?"
-
-#: ../src/dialogs.c:1074
-msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- avaa URI:stä"
-
-#: ../src/dialogs.c:1086
-msgid "Enter URI:"
-msgstr "Anna URI:"
-
-#: ../src/dialogs.c:1124
-msgid "No URI given!"
-msgstr "Ei URI:tä annettu!"
-
-#: ../src/dialogs.c:1152
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
-"URI:tä käytetään tiedostojen löytämiseksi erilaisissa järjestelmissä.\n"
-"Tavalliset Internet-osoitteet (URL:t) ovat myös URI:tä. -- voi käyttää\n"
-"niitä avataksesi po-tiedostoja etäpalvelimilta standardeilla protokollilla\n"
-"kuten \"http\", \"ftp\" tai millä tahansa saantikeinolla jota GnomeVFS "
-"tukee.\n"
-"Joitain URI-esimerkkejä selvennyksen vuoksi:\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.jossain.com/<ETÄ-PO-TIEDOSTO>\n"
-"\n"
-"file:///<PO-TIEDOSTO> tai\n"
-"http://www.DOMAIN.COM/PO-TIEDOSTO"
-
-#: ../src/dialogs.c:1194
-#, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
-msgstr ""
-"Avataanko palautustiedosto tiedostolle \"%s\"?\n"
-"Gtranslator tallensi tämän tiedoston ennen sen edellistä\n"
-"sulkemista ja se voi sisältää paljon tekemääsi työtä!\n"
-
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: ../src/dialogs.c:1206
-msgid "Postpone decision"
-msgstr "Lykkää päätöstä"
-
-#: ../src/dialogs.c:1208
-msgid "Ignore recovery file"
-msgstr "Ohita palautus"
-
-#: ../src/dialogs.c:1210
-msgid "Recover file"
-msgstr "Palauta tiedosto"
-
-#: ../src/dialogs.c:1272
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
-"Haluatko että gtranslator kääntää tiedoston automaattisesti\n"
-"käyttäen henkilökohtaista oppimispuskuriasi?"
-
-#: ../src/dialogs.c:1320 ../src/dialogs.c:1348
-msgid "gtranslator -- add bookmark with comment?"
-msgstr "gtranslator -- lisää kirjanmerkki kommentilla?"
-
-#: ../src/dialogs.c:1340
-msgid "Comment for the bookmark:"
-msgstr "Kommentti kirjanmerkille:"
-
-#: ../src/dialogs.c:1340
-msgid "No comment"
-msgstr "Ei kommenttia"
-
-#: ../src/dict-panel.c:187
-#, c-format
-msgid "No dictionary source available with name '%s'"
-msgstr "Sanakirjalähdettä nimellä \"%s\" ei ole saatavilla"
-
-#: ../src/dict-panel.c:190
-msgid "Unable to find dictionary source"
-msgstr "Sanakirjalähdettä ei löytynyt"
-
-#: ../src/dict-panel.c:205
-#, c-format
-msgid "No context available for source '%s'"
-msgstr "Lähteelle \"%s\" ei löydy kontekstia"
-
-#: ../src/dict-panel.c:208
-msgid "Unable to create a context"
-msgstr "Uutta kontekstia ei voi luoda"
-
-#. speller
-#: ../src/dict-panel.c:385
-msgid "Double-click on the word to look up"
-msgstr "Etsi sanaa kaksoisnapsauttamalla"
-
-#. strat-chooser
-#: ../src/dict-panel.c:391
-msgid "Double-click on the matching strategy to use"
-msgstr "Kaksoisnapsauta käyttääksesi täsmäävät strategiaa"
-
-#. db-chooser
-#: ../src/dict-panel.c:401
-msgid "Double-click on the database to use"
-msgstr "Kaksoisnapsauta käytettääksesi tietokantaa"
-
-#.
-#. * Look up Button
-#.
-#: ../src/dict-panel.c:432
-msgid "Look _up:"
-msgstr "Etsi _lähteistä:"
-
-#: ../src/dict-panel.c:494
-msgid "Similar words"
-msgstr "Samankaltaiset sanat"
-
-#: ../src/dict-panel.c:510
-msgid "Available dictionaries"
-msgstr "Saatavilla olevat sanakirjat"
-
-#: ../src/dict-panel.c:526
-msgid "Available strategies"
-msgstr "Saatavilla olevat strategiat"
-
-#: ../src/dict-panel.c:598
-msgid "Unable to connect to GConf"
-msgstr "GConf:iin ei saatu yhteyttä"
-
-#: ../src/dict-panel.c:610
-msgid "Unable to get notification for preferences"
-msgstr "Ei voitu saada huomautusta asetuksista"
-
-#: ../src/find.c:216
-#, c-format
-msgid "Please enter a search string"
-msgstr "Anna haettava merkkijono"
-
-#: ../src/find.c:239
-#, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-"Ei löydy:\n"
-"\"%s\""
-
-#: ../src/gui.c:457
-#, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgid_plural "%s [ %i Fuzzy left ]"
-msgstr[0] "%s [ %i sumea jäljellä ]"
-msgstr[1] "%s [ %i sumeaa jäljellä ]"
-
-#: ../src/gui.c:457 ../src/gui.c:461 ../src/main_window.glade.h:11
-#: ../src/messages-table.c:267
-msgid "Fuzzy"
-msgstr "Sumea"
-
-#: ../src/gui.c:461
-#, c-format
-msgid "%s [ No fuzzy left ]"
-msgstr "%s [ Ei sumeita jäljellä ]"
-
-#: ../src/gui.c:470 ../src/main_window.glade.h:30 ../src/messages-table.c:275
-msgid "Translated"
-msgstr "Käännetty"
-
-#: ../src/gui.c:478
-#, c-format
-msgid "%s [ %i Untranslated left ]"
-msgid_plural "%s [ %i Untranslated left ]"
-msgstr[0] "%s [ %i kääntämätön jäljellä ]"
-msgstr[1] "%s [ %i kääntämätöntä jäljellä ]"
-
-#: ../src/gui.c:478 ../src/gui.c:480 ../src/main_window.glade.h:34
-#: ../src/messages-table.c:259
-msgid "Untranslated"
-msgstr "Kääntämättä"
-
-#: ../src/gui.c:480
-#, c-format
-msgid "%s [ No untranslated left ]"
-msgstr "%s [ Ei kääntämättömiä jäljellä ]"
-
-#: ../src/gui.c:500
-#, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "Teksti %d / %d / Tila: %s (Teksti sisältää monikkomuotoja)"
-
-#: ../src/gui.c:504
-#, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr "Teksti %d / %d / Tila: %s"
-
-#: ../src/header_dialog.glade.h:1 ../src/preferences.glade.h:22
-msgid "Charset:"
-msgstr "Merkistö:"
-
-#: ../src/header_dialog.glade.h:2
-msgid "Comments:"
-msgstr "Kommentit:"
-
-#: ../src/header_dialog.glade.h:3 ../src/preferences.glade.h:26
-msgid "Encoding:"
-msgstr "Koodaus:"
-
-#: ../src/header_dialog.glade.h:4 ../src/preferences.glade.h:32
-msgid "Language group's email:"
-msgstr "Käännösryhmän sähköpostiosoite:"
-
-#: ../src/header_dialog.glade.h:5 ../src/preferences.glade.h:33
-msgid "Language:"
-msgstr "Kieli:"
-
-#: ../src/header_dialog.glade.h:6
-msgid "Po file revision date:"
-msgstr "Po-tiedoston muuttamispäivä:"
-
-#: ../src/header_dialog.glade.h:7
-msgid "Pot file creation date:"
-msgstr "Pot-tiedoston luontipäivä:"
-
-#: ../src/header_dialog.glade.h:8
+#: ../src/dialogs/header-dialog.c:252
+msgid "Edit Header"
+msgstr "Muokkaa otsakkeita"
+
+#: ../src/dialogs/header-dialog.glade.h:1
+msgid "Char_set:"
+msgstr "_Merkistö:"
+
+#: ../src/dialogs/header-dialog.glade.h:2
+msgid "Comment"
+msgstr "Kommentti"
+
+#: ../src/dialogs/header-dialog.glade.h:3
+msgid "Enc_oding:"
+msgstr "_Merkistökoodaus:"
+
+#: ../src/dialogs/header-dialog.glade.h:4
+msgid "Language gro_up email:"
+msgstr "Kääntäjä_ryhmän sähköpostiosoite:"
+
+#: ../src/dialogs/header-dialog.glade.h:5
+msgid "Po file _revision date:"
+msgstr "Po-tiedoston _muuttamispäivä:"
+
+#: ../src/dialogs/header-dialog.glade.h:6
+msgid "Pot _file creation date:"
+msgstr "Pot-_tiedoston luontipäivä:"
+
+#: ../src/dialogs/header-dialog.glade.h:7
 msgid "Project"
 msgstr "Projekti"
 
-#: ../src/header_dialog.glade.h:9
-msgid "Project name:"
-msgstr "Projektin nimi:"
+#: ../src/dialogs/header-dialog.glade.h:8
+msgid "Project Id _version:"
+msgstr "Projekti tunnisteen _versio:"
 
-#: ../src/header_dialog.glade.h:10
-msgid "Project version:"
-msgstr "Projektin versio:"
+#: ../src/dialogs/header-dialog.glade.h:9
+msgid "Report message _bugs to:"
+msgstr "Raportoi viestien virheet _osoitteeseen:"
 
-#: ../src/header_dialog.glade.h:11
-msgid "Report message string bugs to:"
-msgstr "Raportoi viesteissä olevat virheet osoitteeseen:"
-
-#: ../src/header_dialog.glade.h:12
+#: ../src/dialogs/header-dialog.glade.h:10
 msgid "Translator and Language"
 msgstr "Kääntäjä ja kieli"
 
-#: ../src/header_dialog.glade.h:13
-msgid "Translator's e-mail:"
-msgstr "Kääntäjän sähköpostiosoite:"
+#: ../src/dialogs/header-dialog.glade.h:11
+msgid "Translator's _email:"
+msgstr "Kääntäjän _sähköpostiosoite:"
 
-#: ../src/header_dialog.glade.h:14
-msgid "Translator's name:"
-msgstr "Kääntäjän nimi:"
+#: ../src/dialogs/header-dialog.glade.h:12
+msgid "Translator's _name:"
+msgstr "Kääntäjän _nimi:"
 
-#: ../src/header_dialog.glade.h:15
+#: ../src/dialogs/header-dialog.glade.h:13
 msgid "Use my options to complete the following entries:"
 msgstr "Käytä asetuksiani seuraavien kenttien täyttämiseen:"
 
-#: ../src/header_dialog.glade.h:16
-msgid "gtk-close"
-msgstr "gtk-close"
+#: ../src/dialogs/header-dialog.glade.h:14
+#: ../src/dialogs/profile-dialog.glade.h:9
+msgid "_Language:"
+msgstr "_Kieli:"
 
-#: ../src/header_dialog.glade.h:17
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- muokkaa otsikkoa"
+#: ../src/dialogs/jump-dialog.c:87
+msgid "Jump To"
+msgstr "Siirry kohtaan"
 
-#: ../src/header_stuff.c:128
-msgid "No header for this file/domain"
-msgstr "Tälle tiedostolle tai alueelle ei ole otsikkoa"
+#: ../src/dialogs/jump-dialog.glade.h:1
+msgid "<b>Enter message number:</b>"
+msgstr "<b>Anna viestin numero:</b>"
 
-#: ../src/history.c:236
+#: ../src/dialogs/jump-dialog.glade.h:2
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../src/dialogs/jump-dialog.glade.h:3
+msgid "gtk-ok"
+msgstr "gtk-ok"
+
+#: ../src/dialogs/preferences-dialog.c:518
+msgid "Active"
+msgstr "Käytössä"
+
+#: ../src/dialogs/preferences-dialog.c:1063
+msgid ""
+"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+"profile</span>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1066
+msgid "Another profile should be selected as active before"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1078
+msgid ""
+"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+"profile?</span>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1112
+#: ../src/dialogs/preferences-dialog.glade.h:16
+msgid "Gtranslator Preferences"
+msgstr "Gtranslatorin asetukset"
+
+#: ../src/dialogs/preferences-dialog.glade.h:2
+msgid "<b>Anchor style:</b>"
+msgstr "<b>Ankkurin tyyli:</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:3
+msgid "<b>Autosave</b>"
+msgstr "<b>Automaattitallennus</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:4
+msgid "<b>Configuration:</b>"
+msgstr "<b>Asetukset:</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:5
+msgid "<b>Contents</b>"
+msgstr "<b>Sisältö</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:6
+msgid "<b>Database:</b>"
+msgstr "<b>Tietokanta:</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:7
+msgid "<b>General</b>"
+msgstr "<b>Yleiset</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:8
+msgid "<b>Scheme color:</b>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:9
+msgid "<b>Text Display</b>"
+msgstr "<b>Tekstinäyttö</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:10
+msgid "Add to Database"
+msgstr "Lisää tietokantaan"
+
+#: ../src/dialogs/preferences-dialog.glade.h:11
+msgid "Check _spelling"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:12
+msgid "Create a _backup copy of files before saving"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:13
+msgid "Editor"
+msgstr "Muokkain"
+
+#: ../src/dialogs/preferences-dialog.glade.h:14
+msgid "Editor _font:"
+msgstr "Muokkaimen _kirjasin:"
+
+#: ../src/dialogs/preferences-dialog.glade.h:15
+msgid "Files"
+msgstr "Tiedostot"
+
+#: ../src/dialogs/preferences-dialog.glade.h:17
+msgid "Interface"
+msgstr "Käyttöliittymä"
+
+#: ../src/dialogs/preferences-dialog.glade.h:18
+msgid "Make _whitespace visible"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:19
+msgid "Max. # of missing words:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:20
+msgid "Max. difference in sentence length:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:21
+msgid "Plugins"
+msgstr "Lisäosat"
+
+#: ../src/dialogs/preferences-dialog.glade.h:22
+msgid "Profiles"
+msgstr "Profiilit"
+
+#: ../src/dialogs/preferences-dialog.glade.h:23
+msgid "Select directory contains PO files:"
+msgstr "Valitse po-tiedostoja sisältävä kansio:"
+
+#: ../src/dialogs/preferences-dialog.glade.h:24
+msgid "Show options in translated messages"
+msgstr "Näytä valinnat käännetyissä viesteissä"
+
+#: ../src/dialogs/preferences-dialog.glade.h:25
+msgid ""
+"Text\n"
+"Icons\n"
+"Text + Icons\n"
+"Gnome toolbar setting\n"
+"Tabs"
+msgstr ""
+"Teksti\n"
+"Kuvakkeet\n"
+"Teksti ja kuvakkeet\n"
+"Gnomen työkalupalkin asetukset\n"
+"Välilehdet"
+
+#: ../src/dialogs/preferences-dialog.glade.h:30 ../src/tab.c:656
+msgid "Translation Memory"
+msgstr "Käännösmuistit"
+
+#: ../src/dialogs/preferences-dialog.glade.h:31
+msgid "Use _custom font"
+msgstr "Käytä _omaa kirjasinta"
+
+#: ../src/dialogs/preferences-dialog.glade.h:32
+msgid "Use only files with this name:"
+msgstr "Käytä vain tämännimisiä tiedostoja:"
+
+#: ../src/dialogs/preferences-dialog.glade.h:33
+msgid "_Autosave files every"
+msgstr "Tallenna _automaattisesti joka"
+
+#: ../src/dialogs/preferences-dialog.glade.h:34
+msgid "_Delete compiled GMO files"
+msgstr "Poista käännetyt GMO-tiedostot"
+
+#: ../src/dialogs/preferences-dialog.glade.h:35
+msgid "_Highlight message syntax"
+msgstr "_Korosta tekstin syntaksi"
+
+#: ../src/dialogs/preferences-dialog.glade.h:36
+msgid "_Remove fuzzy status if message is changed"
+msgstr "Poista _sumea-tila muutettaesa viestiä"
+
+#: ../src/dialogs/preferences-dialog.glade.h:37
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "_Varoita jos po-tiedosto sisältää sumeita käännöksiä"
+
+#: ../src/dialogs/preferences-dialog.glade.h:38
+msgid "_minutes"
+msgstr "_minuutin ajan"
+
+#: ../src/dialogs/profile-dialog.c:248
+msgid ""
+"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">Tämänniminen profiili on jo olemassa</span>"
+
+#: ../src/dialogs/profile-dialog.c:327
+msgid "gtranslator Profile"
+msgstr "Gtranslator-profiili"
+
+#: ../src/dialogs/profile-dialog.c:360
+msgid "Example: nplurals=2; plural=(n != 1);"
+msgstr "Esimerkki: nplurals=2; plural=(n != 1);"
+
+#: ../src/dialogs/profile-dialog.glade.h:1
+msgid "<b>Language Settings</b>"
+msgstr "<b>Kieliasetukset</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:2
+msgid "<b>Profile Information</b>"
+msgstr "<b>Profiilitiedot</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:3
+msgid "<b>Translator Information</b>"
+msgstr "<b>Kääntäjän tiedot</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:4
+msgid "Character _set"
+msgstr "_Merkistö:"
+
+#: ../src/dialogs/profile-dialog.glade.h:5
+msgid "Language _code:"
+msgstr "Kie_likoodi:"
+
+#: ../src/dialogs/profile-dialog.glade.h:6
+msgid "N_ame:"
+msgstr "N_imi:"
+
+#: ../src/dialogs/profile-dialog.glade.h:7
+msgid "Transfer en_coding:"
+msgstr "Muunnokset merkistö_koodaus:"
+
+#: ../src/dialogs/profile-dialog.glade.h:8
+msgid "_Email:"
+msgstr "_Sähköposti:"
+
+#: ../src/dialogs/profile-dialog.glade.h:10
+msgid "_Name:"
+msgstr "_Nimi:"
+
+#: ../src/dialogs/profile-dialog.glade.h:11
+msgid "_Plural forms:"
+msgstr "M_onikkomuodot:"
+
+#: ../src/dialogs/profile-dialog.glade.h:12
+msgid "_Team email:"
+msgstr "_Kääntäjäryhmän sähköposti:"
+
+#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.glade.h:4
+msgid "Replace"
+msgstr "Korvaa"
+
+#: ../src/dialogs/search-dialog.c:343
+msgid "Find"
+msgstr "Etsi"
+
+#: ../src/dialogs/search-dialog.c:438
+msgid "Replace _All"
+msgstr "Korvaa k_aikki"
+
+#: ../src/dialogs/search-dialog.c:441
+msgid "_Replace"
+msgstr "Ko_rvaa"
+
+#: ../src/dialogs/search-dialog.glade.h:1
+msgid "Include fuzzy strings"
+msgstr "Huomioi myös sumeat tekstit"
+
+#: ../src/dialogs/search-dialog.glade.h:2
+msgid "Match _entire word only"
+msgstr "Täsmää vain _kokonaiset sanat"
+
+#: ../src/dialogs/search-dialog.glade.h:3
+msgid "Original text"
+msgstr "Alkuperäisen teksti"
+
+#: ../src/dialogs/search-dialog.glade.h:5
+msgid "Replace All"
+msgstr "Korvaa kaikki"
+
+#: ../src/dialogs/search-dialog.glade.h:6
+msgid "Replace _with: "
+msgstr "Korvaa _tekstillä:"
+
+#: ../src/dialogs/search-dialog.glade.h:7
+msgid "Search _backwards"
+msgstr "Etsi _taaksepäin"
+
+#: ../src/dialogs/search-dialog.glade.h:8
+msgid "Translated text"
+msgstr "Käännetty teksti"
+
+#: ../src/dialogs/search-dialog.glade.h:9
+msgid "_Match case"
+msgstr ""
+
+#: ../src/dialogs/search-dialog.glade.h:10
+msgid "_Search for: "
+msgstr "_Etsi:"
+
+#: ../src/dialogs/search-dialog.glade.h:11
+msgid "_Wrap around"
+msgstr "_rivitä"
+
+#: ../src/main.c:46
+msgid "[FILE...]"
+msgstr "[TIEDOSTO...]"
+
+#: ../src/main.c:72
 #, c-format
-msgid "Open %s"
-msgstr "Avaa %s"
-
-#: ../src/languages.c:41
-msgid "Afrikaans"
-msgstr "Afrikaani"
-
-#: ../src/languages.c:45
-msgid "Albanian"
-msgstr "Albania"
-
-#: ../src/languages.c:49
-msgid "Arabic"
-msgstr "Arabia"
-
-#: ../src/languages.c:53
-msgid "Azerbaijani Turkish"
-msgstr "Azerbaijanin turkki"
-
-#: ../src/languages.c:57
-msgid "Basque"
-msgstr "Basqi"
-
-#: ../src/languages.c:61
-msgid "Belarusian"
-msgstr "Valkovenäjä"
-
-#: ../src/languages.c:65
-msgid "Bengali"
-msgstr "Bengali"
-
-#: ../src/languages.c:69
-msgid "Britton"
-msgstr "Briton"
-
-#: ../src/languages.c:73
-msgid "Bulgarian"
-msgstr "Bulgaria"
-
-#: ../src/languages.c:77
-msgid "Catalan"
-msgstr "Katalaani"
-
-#: ../src/languages.c:81
-msgid "Chinese/Simplified"
-msgstr "Kiina (yksinkertaistettu)"
-
-#: ../src/languages.c:85
-msgid "Chinese/Traditional"
-msgstr "Kiina (perinteinen)"
-
-#: ../src/languages.c:89
-msgid "Croatian"
-msgstr "Kroatia"
-
-#: ../src/languages.c:93
-msgid "Czech"
-msgstr "Tsekki"
-
-#: ../src/languages.c:97
-msgid "Danish"
-msgstr "Tanska"
-
-#: ../src/languages.c:101
-msgid "Dutch"
-msgstr "Hollanti"
-
-#: ../src/languages.c:109
-msgid "English/Canada"
-msgstr "Englanti (Kanada)"
-
-#: ../src/languages.c:113
-msgid "English/GB"
-msgstr "Englanti (Iso-Britannia)"
-
-#: ../src/languages.c:117
-msgid "English/USA"
-msgstr "Englanti (USA)"
-
-#: ../src/languages.c:121
-msgid "Esperanto"
-msgstr "Esperanto"
-
-#: ../src/languages.c:125
-msgid "Estonian"
-msgstr "Eesti"
-
-#: ../src/languages.c:129
-msgid "Persian"
-msgstr "Persia"
-
-#: ../src/languages.c:133
-msgid "Finnish"
-msgstr "Suomi"
-
-#: ../src/languages.c:137
-msgid "French"
-msgstr "Ranska"
-
-#: ../src/languages.c:141
-msgid "Galician"
-msgstr "Galicia"
-
-#: ../src/languages.c:145
-msgid "German"
-msgstr "Saksa"
-
-#: ../src/languages.c:149
-msgid "Greek"
-msgstr "Kreikka"
-
-#: ../src/languages.c:153
-msgid "Gujarati"
-msgstr "Gujarati"
-
-#: ../src/languages.c:157
-msgid "Hebrew"
-msgstr "Heprea"
-
-#: ../src/languages.c:161
-msgid "Hindi"
-msgstr "Hindi"
-
-#: ../src/languages.c:165
-msgid "Hungarian"
-msgstr "Unkari"
-
-#: ../src/languages.c:169
-msgid "Icelandic"
-msgstr "Islanti"
-
-#: ../src/languages.c:173
-msgid "Indonesian"
-msgstr "Indonesia"
-
-#: ../src/languages.c:177
-msgid "Italian"
-msgstr "Italia"
-
-#: ../src/languages.c:181
-msgid "Irish"
-msgstr "Iiri"
-
-#: ../src/languages.c:185
-msgid "Japanese"
-msgstr "Japani"
-
-#: ../src/languages.c:189
-msgid "Kannada"
-msgstr "Kanada"
-
-#: ../src/languages.c:193
-msgid "Korean"
-msgstr "Korea"
-
-#: ../src/languages.c:197
-msgid "Kurdish"
-msgstr "Kurdi"
-
-#: ../src/languages.c:201
-msgid "Latvian"
-msgstr "Latvia"
-
-#: ../src/languages.c:205
-msgid "Lithuanian"
-msgstr "Liettua"
-
-#: ../src/languages.c:209
-msgid "Malay/Bahasa Melayu"
-msgstr "Malesia/Bahasa Melayu"
-
-#: ../src/languages.c:213
-msgid "Maltese"
-msgstr "Maltese"
-
-#: ../src/languages.c:217
-msgid "Marathi"
-msgstr "Marathi"
-
-#: ../src/languages.c:221
-msgid "Mongolian"
-msgstr "Mongolia"
-
-#: ../src/languages.c:225
-msgid "Norwegian/Bokmaal"
-msgstr "Norja/Bokmaal"
-
-#: ../src/languages.c:229
-msgid "Norwegian/Nynorsk"
-msgstr "Norja/Nynorsk"
-
-#: ../src/languages.c:233
-msgid "Occitan"
-msgstr "Occitan"
-
-#: ../src/languages.c:237
-msgid "Punjabi"
-msgstr "Punjabi"
-
-#: ../src/languages.c:241
-msgid "Polish"
-msgstr "Puola"
-
-#: ../src/languages.c:245
-msgid "Portuguese"
-msgstr "Portugali"
-
-#: ../src/languages.c:249
-msgid "Portuguese/Brazil"
-msgstr "Portugali/Brazilia"
-
-#: ../src/languages.c:253
-msgid "Romanian"
-msgstr "Romania"
-
-#: ../src/languages.c:257
-msgid "Russian"
-msgstr "Venäjä"
-
-#: ../src/languages.c:261
-msgid "Serbian/Cyrillic"
-msgstr "Serbia/Kyrillinen"
-
-#: ../src/languages.c:265
-msgid "Serbian/Latin"
-msgstr "Serbia/Latinalainen"
-
-#: ../src/languages.c:269
-msgid "Slovak"
-msgstr "Slovakia"
-
-#: ../src/languages.c:273
-msgid "Slovenian"
-msgstr "Slovenia"
-
-#: ../src/languages.c:277
-msgid "Spanish"
-msgstr "Espanja"
-
-#: ../src/languages.c:281
-msgid "Spanish/Spain"
-msgstr "Espanja/Espanja"
-
-#: ../src/languages.c:285
-msgid "Spanish/Mexico"
-msgstr "Espanja/Meksiko"
-
-#: ../src/languages.c:289
-msgid "Swedish"
-msgstr "Ruotsi"
-
-#: ../src/languages.c:293
-msgid "Tagalog"
-msgstr "Tagalog"
-
-#: ../src/languages.c:297
-msgid "Tamil"
-msgstr "Tamili"
-
-#: ../src/languages.c:301
-msgid "Telugu"
-msgstr "Telugu"
-
-#: ../src/languages.c:305
-msgid "Thai"
-msgstr "Thai"
-
-#: ../src/languages.c:309
-msgid "Turkish"
-msgstr "Turkki"
-
-#: ../src/languages.c:313
-msgid "Ukrainian"
-msgstr "Ukraina"
-
-#: ../src/languages.c:317
-msgid "Urdu"
-msgstr "Urdu"
-
-#: ../src/languages.c:321
-msgid "Uzbekian"
-msgstr "Uzbekistan"
-
-#: ../src/languages.c:325
-msgid "Vietnamese"
-msgstr "Vietnam"
-
-#: ../src/languages.c:329
-msgid "Walloon"
-msgstr "Walloon"
-
-#: ../src/languages.c:333
-msgid "Welsh"
-msgstr "Wales"
-
-#: ../src/learn.c:383
-#, c-format
-msgid "gtranslator learn buffer statistics:"
-msgstr "gtranslatorin oppimispuskurin tilastotiedot:"
-
-#: ../src/learn.c:386
-#, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr "Oppimispuskurin tiedostonimi: \"%s\""
-
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: ../src/learn.c:392
-#, c-format
-msgid "Encoding: `%s'"
-msgstr "Koodaus: \"%s\""
-
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: ../src/learn.c:398
-#, c-format
-msgid "Serial: `%i'"
-msgstr "Numero: \"%i\""
-
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: ../src/learn.c:404
-#, c-format
-msgid "Number of entries: `%i'"
-msgstr "Opittuja käännöksiä: \"%i\""
-
-#: ../src/main.c:70
-msgid "Specify main window geometry"
-msgstr "Määritä pääikkunan koko"
-
-#: ../src/main.c:70
-msgid "GEOMETRY"
-msgstr "MITTASUHTEET"
-
-#: ../src/main.c:118
+msgid "%s: malformed file name or URI.\n"
+msgstr "%s: virheellinen tiedostonimi tai URI.\n"
+
+#: ../src/main.c:108
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#. Setup command line options
+#: ../src/main.c:111
+msgid "- Edit PO files"
+msgstr "- muokkaa po-tiedostoja"
+
+#: ../src/main.c:121
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Virhe GConfin alustuksessa : %s."
 
-#: ../src/main.c:152
+#: ../src/main.c:139
 #, c-format
 msgid "Error setting the default window icon: %s"
 msgstr "Virhe asettaessa ikkunan oletuskuvaketta: %s"
 
-#: ../src/main.c:255
+#: ../src/message-table.c:284
+msgid "Status"
+msgstr "Tila"
+
+#: ../src/message-table.c:297
+msgid "ID"
+msgstr "Tunniste"
+
+#: ../src/message-table.c:313
+msgid "Original Text"
+msgstr "Alkuperäinen teksti"
+
+#: ../src/message-table.c:329
+msgid "Translated Text"
+msgstr "Käännetty teksti"
+
+#: ../src/notebook.c:94
 #, c-format
-msgid "Couldn't open '%s': %s\n"
-msgstr "Tiedostoa \"%s\" ei voi avata: %s\n"
+msgid "<b>Path:</b> %s"
+msgstr "<b>Polku:</b> %s"
 
-#: ../src/main_window.glade.h:1
-msgid "<b>Translation memories</b>"
-msgstr "<b>Käännösmuistit</b>"
+#: ../src/notebook.c:153
+msgid "Close document"
+msgstr "Sulje asiakirja"
 
-#: ../src/main_window.glade.h:2
-msgid "Aut_otranslate..."
-msgstr "Aut_omaattikäännös"
-
-#: ../src/main_window.glade.h:3
-msgid "C_omment..."
-msgstr "K_ommentti..."
-
-#: ../src/main_window.glade.h:5
-msgid "Charmap"
-msgstr "Merkkikartta"
-
-#: ../src/main_window.glade.h:6
-msgid "Copy _message -> translation"
-msgstr "Kopioi _teksti -> käännös"
-
-#: ../src/main_window.glade.h:7
-msgid "Current comment"
-msgstr "Nykyinen kommenttia"
-
-#: ../src/main_window.glade.h:8
-msgid "Edit comment"
-msgstr "Muokkaa kommenttia"
-
-#: ../src/main_window.glade.h:9
-msgid "Edit current comment"
-msgstr "Muokkaa nykyistä kommenttia"
-
-#: ../src/main_window.glade.h:10
-msgid "First message"
-msgstr "Ensimmäinen teksti"
-
-#: ../src/main_window.glade.h:13
-msgid "Last message"
-msgstr "Viimeinen teksti"
-
-#: ../src/main_window.glade.h:14
-msgid "Message table"
-msgstr "Tekstitaulu"
-
-#: ../src/main_window.glade.h:15
-msgid "Next _untranslated"
-msgstr "Seuraava kääntämät_ön"
-
-#: ../src/main_window.glade.h:16
-msgid "Next fuz_zy"
-msgstr "Seuraava s_umea"
-
-#: ../src/main_window.glade.h:17
-msgid "Next message"
-msgstr "Seuraava teksti"
-
-#: ../src/main_window.glade.h:18
-msgid "Open file"
-msgstr "Avaa tiedosto"
-
-#: ../src/main_window.glade.h:19
-msgid "Open from _URI..."
-msgstr "Avaa _netistä"
-
-#: ../src/main_window.glade.h:20 ../src/messages-table.c:225
-msgid "Original"
-msgstr "Alkuperäinen"
-
-#: ../src/main_window.glade.h:21
-msgid "Previous message"
-msgstr "Edellinen teksti"
-
-#: ../src/main_window.glade.h:22
-msgid "Previously fuzz_y"
-msgstr "Edellinen s_umea"
-
-#: ../src/main_window.glade.h:23
-msgid "Recen_t files"
-msgstr "_Pikavalinnat"
-
-#: ../src/main_window.glade.h:24
-msgid "Refresh the current file"
-msgstr "Päivitä tämänhetkinen tiedosto"
-
-#: ../src/main_window.glade.h:25
-msgid "Remove all translations..."
-msgstr "Poista kaikki käännökset..."
-
-#: ../src/main_window.glade.h:26
-msgid "Save file"
-msgstr "Tallenna tiedosto"
-
-#: ../src/main_window.glade.h:28
-msgid "Search"
-msgstr "Etsi"
-
-#: ../src/main_window.glade.h:29
-msgid "Search: "
-msgstr "Etsi:"
-
-#: ../src/main_window.glade.h:31
-msgid "Translation memories"
-msgstr "Käännösmuistit"
-
-#: ../src/main_window.glade.h:32
-msgid "Translation status: "
-msgstr "Käännöksen tila:"
-
-#: ../src/main_window.glade.h:33
-msgid "Undo"
-msgstr "Kumoa"
-
-#: ../src/main_window.glade.h:35
-msgid "_Actions"
-msgstr "_Toiminnot"
-
-#: ../src/main_window.glade.h:36
-msgid "_Add bookmark"
-msgstr "_Lisää kirjanmerkki"
-
-#: ../src/main_window.glade.h:37
-msgid "_Bookmarks"
-msgstr "_Kirjanmerkit"
-
-#: ../src/main_window.glade.h:38
-msgid "_Colorschemes"
-msgstr "_Väriteemat"
-
-#: ../src/main_window.glade.h:39
-msgid "_Compile"
-msgstr "_Käännä"
-
-#: ../src/main_window.glade.h:40
-msgid "_Contents"
-msgstr "_Sisältö"
-
-#: ../src/main_window.glade.h:41
-msgid "_Edit"
-msgstr "_Muokkaa"
-
-#: ../src/main_window.glade.h:42
-msgid "_File"
-msgstr "_Tiedosto"
-
-#: ../src/main_window.glade.h:43
-msgid "_Go"
-msgstr "_Siirry"
-
-#: ../src/main_window.glade.h:44
-msgid "_Header..."
-msgstr "_Otsikot..."
-
-#: ../src/main_window.glade.h:45
-msgid "_Help"
-msgstr "O_hje"
-
-#: ../src/main_window.glade.h:46
-msgid "_Previously unstranslated"
-msgstr "_Edellinen kääntämätön"
-
-#: ../src/main_window.glade.h:47
-msgid "_Revert"
-msgstr "_Peru"
-
-#: ../src/main_window.glade.h:48
-msgid "_Search next"
-msgstr "Etsi _seuraava"
-
-#: ../src/main_window.glade.h:49
-msgid "_View"
-msgstr "_Näytä"
-
-#: ../src/main_window.glade.h:50
-msgid "gtranslator _website"
-msgstr "gtranslatorin _kotisivu"
-
-#: ../src/main_window.glade.h:51
-msgid "label"
-msgstr "otsake"
-
-#: ../src/menus.c:128
-msgid "Open a po file"
-msgstr "Avaa po-tiedosto"
-
-#: ../src/menus.c:137
-msgid "Open a po file from a given URI"
-msgstr "Avaa po-tiedoston annetusta URI:stä"
-
-#: ../src/menus.c:146
-msgid "Save the file"
-msgstr "Tallenna tiedosto"
-
-#: ../src/menus.c:155
-msgid "Save the file with another name"
-msgstr "Tallenna tiedosto toisella nimellä"
-
-#: ../src/menus.c:163
-msgid "..."
-msgstr "..."
-
-#: ../src/menus.c:172
-msgid "Close the current file"
-msgstr "Sulje nykyinen tiedosto"
-
-#: ../src/menus.c:181
-msgid "Quit the program"
-msgstr "Lopeta ohjelma"
-
-#: ../src/menus.c:192
-msgid "Undo last operation"
-msgstr "Kumoa viimeisin toiminto"
-
-#: ../src/menus.c:201
-msgid "Cut the selected text"
-msgstr "Leikkaa valittu teksti"
-
-#: ../src/menus.c:210
-msgid "Copy the selected text"
-msgstr "Kopioi valittu teksti"
-
-#: ../src/menus.c:228
-msgid "Clear the translation text box"
-msgstr "Tyhjennä käännöstekstin kenttä"
-
-#: ../src/menus.c:264
-msgid "Edit po file header"
-msgstr "Muokkaa po-tiedoston otsikkotietoja"
-
-#: ../src/menus.c:273
-msgid "Edit message comment"
-msgstr "Muokkaa tekstin kommenttia"
-
-#: ../src/menus.c:282
-msgid "Copy the original message contents and paste them as translation"
-msgstr "Kopioi alkuperäisen kääntämättömän tekstin käännökseksi"
-
-#: ../src/menus.c:291
-msgid "Toggle fuzzy status of a message"
-msgstr "Määritä onko teksti sumea"
-
-#: ../src/menus.c:300
-msgid "Edit gtranslator preferences"
-msgstr "Muuta gtranslatorin asetuksia"
-
-#: ../src/menus.c:311
-msgid "Compile the po file"
-msgstr "Käännä (compile) po-tiedosto"
-
-#: ../src/menus.c:324
-msgid "Add a bookmark for this message in this po file"
-msgstr "Lisää tämän po-tiedoston tälle tekstille kirjanmerkki"
-
-#: ../src/menus.c:333
-msgid "Autotranslate the file with information from your learn buffer"
-msgstr ""
-"Käännä tiedosto automaattisesti oppimispuskuristasi löytyvillä tiedoilla"
-
-#: ../src/menus.c:342
-msgid "Remove all existing translations from the po file"
-msgstr "Poistaa kaikki käännökset tästä po-tiedostosta"
-
-#: ../src/menus.c:353
-msgid "Go to first message"
-msgstr "Siirry ensimmäiseen tekstiin"
-
-#: ../src/menus.c:362
-msgid "Move back one message"
-msgstr "Siirry yksi teksti takaisinpäin"
-
-#: ../src/menus.c:371
-msgid "Move forward one message"
-msgstr "Siirry yksi teksti eteenpäin"
-
-#: ../src/menus.c:380
-msgid "Go to the last message"
-msgstr "Siirry viimeiseen tekstiin"
-
-#: ../src/menus.c:389
-msgid "Go to especified message number"
-msgstr "Siirry lainattuun tekstin numeroon"
-
-#: ../src/menus.c:398
-msgid "Go to next fuzzy message"
-msgstr "Siirry seuraavaan sumeaan tekstiin"
-
-#: ../src/menus.c:408
-msgid "Go to previously fuzzy message"
-msgstr "Siirry aiemmin sumeaan tekstiin"
-
-#: ../src/menus.c:417
-msgid "Go to next untranslated message"
-msgstr "Siirry seuraavaan kääntämättömään tekstiin"
-
-#: ../src/menus.c:426
-msgid "Go to previously untranslated message"
-msgstr "Siirry aiemmin kääntämättömään tekstiin"
-
-#: ../src/menus.c:442
-msgid "gtranslator's homepage on the web"
-msgstr "gtranslatorin www-sivu"
-
-#: ../src/menus.c:451
-msgid " "
-msgstr " "
-
-#: ../src/message.c:124
-msgid "Couldn't get the message!"
-msgstr "Tekstiä ei saatu!"
-
-#. Message dialog
-#: ../src/message.c:148
-msgid "There are no fuzzy messages left."
-msgstr "Sumeita tekstejä ei löydy enempää."
-
-#. Message dialog
-#: ../src/message.c:178
-msgid "All messages seems to be translated."
-msgstr "Kaikki tekstit näyttäisivät olevan käännetty."
-
-#: ../src/message.c:209
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "gtkspell-virhe: %s\n"
-
-#: ../src/message.c:210
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"GtkSpellin käynnistäminen epäonnistui.\n"
-" %s"
-
-#: ../src/page.c:130
-msgid "Singular"
-msgstr "Yksikkö"
-
-#: ../src/page.c:132
-msgid "Plural"
-msgstr "Monikko"
-
-#: ../src/page.c:140
-#, c-format
-msgid "Plural %d"
-msgstr "Monikko %d"
-
-#. Error message
-#: ../src/page.c:272
-msgid "Error autosaving file:"
-msgstr "Virhe tallennettaessa automaattisesti tiedostoa:"
-
-#: ../src/parse.c:86
-msgid "Parser output"
-msgstr "Parserin tuloste"
-
-#: ../src/parse.c:264
+#: ../src/po.c:365
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Tiedoston \"%s\" avaus epäonnistui: %s"
 
-#: ../src/parse.c:286
+#: ../src/po.c:388
+#, c-format
+msgid "The file is empty"
+msgstr "Tiedosto on tyhjä"
+
+#: ../src/po.c:400
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext palautti tyhjän viestialuelistan."
 
-#: ../src/parse.c:328
+#: ../src/po.c:545
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Viestejä ei saatu parserilta."
 
-#: ../src/parse.c:377 ../src/parse.c:381
-msgid "N/A"
-msgstr "N/A"
-
-#.
-#. * Set window title
-#.
-#: ../src/parse.c:396
-#, c-format
-msgid "gtranslator -- %s"
-msgstr "gtranslator -- %s"
-
-#: ../src/parse.c:534
+#: ../src/po.c:782
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1310,464 +1398,462 @@ msgstr ""
 "Pot-tiedostot luodaan käännösvaiheessa automaattisesti.\n"
 "Tiedostosi nimen tulisi luultavasti olla '%s.po'."
 
-#: ../src/parse.c:575
+#: ../src/po.c:817
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "Tapahtui virhe tallennettaessa po-tiedostoa: %s"
+
+#: ../src/plugin-system/plugin-manager.c:54
+msgid "Plugin"
+msgstr "Lisäosa"
+
+#: ../src/plugin-system/plugin-manager.c:55
+msgid "Enabled"
+msgstr "Käytössä"
+
+#: ../src/plugin-system/plugin-manager.c:503
+msgid "_About"
+msgstr "_Tietoja"
+
+#: ../src/plugin-system/plugin-manager.c:511
+msgid "C_onfigure"
+msgstr "_Asetukset"
+
+#: ../src/plugin-system/plugin-manager.c:520
+msgid "A_ctivate"
+msgstr "Ota _käyttöön"
+
+#: ../src/plugin-system/plugin-manager.c:531
+msgid "Ac_tivate All"
+msgstr "_Ota kaikki käyttöön"
+
+#: ../src/plugin-system/plugin-manager.c:536
+msgid "_Deactivate All"
+msgstr "_Poista kaikki käytöstä"
+
+#: ../src/plugin-system/plugin-manager.c:795
+msgid "Active plugins"
+msgstr "Aktiiviset lisäosat"
+
+#: ../src/plugin-system/plugin-manager.c:824
+msgid "_About Plugin"
+msgstr "_Tietoja lisäosasta"
+
+#: ../src/plugin-system/plugin-manager.c:828
+msgid "C_onfigure Plugin"
+msgstr "_Lisäosan asetukset"
+
+#: ../src/prefs-manager.c:138
+msgid "Cannot initialize preferences manager."
+msgstr "Asetusten hallintaa ei voi käynnistää."
+
+#: ../src/prefs-manager.c:458
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr ""
+
+#: ../src/statusbar.c:114 ../src/statusbar.c:240
+msgid "INS"
+msgstr ""
+
+#: ../src/statusbar.c:114 ../src/statusbar.c:239
+msgid "OVR"
+msgstr ""
+
+#: ../src/tab.c:223
+msgid "There is an error in the message:"
+msgstr "Tekstissä oli virhe:"
+
+#: ../src/tab.c:396
+msgid "Open comment dialog"
+msgstr ""
+
+#: ../src/tab.c:567
+#, c-format
+msgid "Plural %d"
+msgstr "Monikko %d"
+
+#: ../src/tab.c:613
+msgid "Message Table"
+msgstr "Viestitaulu"
+
+#: ../src/tab.c:648
+msgid "Context"
+msgstr "Konteksti"
+
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:919
+#, c-format
+msgid "Show “_%s”"
+msgstr "Näytä “_%s”"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+msgid "_Move on Toolbar"
+msgstr "_Siirrä työkalupalkissa"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+msgid "Move the selected item on the toolbar"
+msgstr "Siirrä valittua kohtaa työkalupalkissa"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+msgid "_Remove from Toolbar"
+msgstr "P_oista työkalupalkista"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+msgid "Remove the selected item from the toolbar"
+msgstr "Poista valittu kohta työkalupalkista"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+msgid "_Delete Toolbar"
+msgstr "_Poista työkalupalkki"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1387
+msgid "Remove the selected toolbar"
+msgstr "Poista valittu työkalupalkki"
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
+msgid "Separator"
+msgstr "Erotin"
+
+#: ../src/translation-memory/berkeley/db-base.c:165
+msgid "Running recovery..."
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:173
+#, c-format
+msgid "There was an error recovering the database: %s"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:181
+#, c-format
+msgid "There was an error in database: %s"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-orig.c:52
+msgid "original.db"
+msgstr "original.db"
+
+#: ../src/translation-memory/berkeley/db-trans.c:52
+msgid "translations.db"
+msgstr "translations.db"
+
+#: ../src/translation-memory/berkeley/db-words.c:53
+msgid "words.db"
+msgstr "words.db"
+
+#: ../src/translation-memory/translation-memory-ui.c:215
+#, c-format
+msgid "Insert Option nº %d"
+msgstr ""
+
+#: ../src/utils.c:344
+#, c-format
+msgid "Unable to find file %s."
+msgstr "Tiedostoa %s ei löytynyt."
+
+#: ../src/utils.c:348 ../src/utils.c:384
+msgid "Please check your installation."
+msgstr "Tarkista asennuksesi."
+
+#: ../src/utils.c:380
+#, c-format
+msgid "Unable to find the required widgets inside file %s."
+msgstr ""
+
+#: ../src/utils.c:788
+msgid ""
+"Unable to display help. Please make sure Gtranslator documentation package "
+"is installed."
+msgstr ""
+
+#: ../src/view.c:82
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr "gtkspell-virhe: %s\n"
+
+#: ../src/view.c:83
 #, c-format
 msgid ""
-"File %s\n"
-"contains %d fuzzy message"
-msgid_plural ""
-"File %s\n"
-"contains %d fuzzy messages"
-msgstr[0] ""
-"Tiedosto %s\n"
-"sisältää %d sumean tekstin"
-msgstr[1] ""
-"Tiedosto %s\n"
-"sisältää %d sumeaa tekstiä"
-
-#: ../src/parse.c:624
-#, c-format
-msgid "The file '%s' already exists. Do you want overwrite it?"
-msgstr "Tiedosto \"%s\" on jo olemassa. Haluatko korvata sen?"
-
-#: ../src/preferences.c:182
-msgid "Couldn't generate the current date!"
-msgstr "Päiväyksen luominen ei onnistunut!"
-
-#: ../src/preferences.glade.h:1 ../src/prefs.c:508
-msgid " Categories: "
-msgstr "Luokat:"
-
-#: ../src/preferences.glade.h:2
-msgid "\"&\" (KDE)"
-msgstr "\"&\" (KDE)"
-
-#: ../src/preferences.glade.h:3
-msgid "\"_\" (GNOME)"
-msgstr "\"_\" (GNOME)"
-
-#: ../src/preferences.glade.h:4
-msgid "<b>Autosave</b>"
-msgstr "<b>Automaattitallennus</b>"
-
-#: ../src/preferences.glade.h:5
-msgid "<b>Contents</b>"
-msgstr "<b>Sisältö</b>"
-
-#: ../src/preferences.glade.h:6
-msgid "<b>Fuzzy matching</b>"
-msgstr "<b>Sumea täsmääminen</b>"
-
-#: ../src/preferences.glade.h:7
-msgid "<b>General</b>"
-msgstr "<b>Yleiset</b>"
-
-#: ../src/preferences.glade.h:8
-msgid "<b>Language settings</b>"
-msgstr "<b>Kieliasetukset</b>"
-
-#: ../src/preferences.glade.h:9
-msgid "<b>Messages table</b>"
-msgstr "<b>Tekstitaulu</b>"
-
-#: ../src/preferences.glade.h:10
-msgid "<b>Personal Information</b>"
-msgstr "<b>Omat tiedot</b>"
-
-#: ../src/preferences.glade.h:11
-msgid "<b>Recent files</b>"
-msgstr "<b>Viimeisimmät tiedostot</b>"
-
-#: ../src/preferences.glade.h:12
-msgid "<b>Text display</b>"
-msgstr "<b>Tekstinäyttö</b>"
-
-#: ../src/preferences.glade.h:13
-msgid "Append a suffix to automatically saved files"
-msgstr "Lisää automaattisesti tallennettuihin tiedostoihin jälkiliite:"
-
-#: ../src/preferences.glade.h:14
-msgid "Apply own colors"
-msgstr "Käytä mukautettuja värejä"
-
-#: ../src/preferences.glade.h:15
-msgid "Apply own fonts"
-msgstr "Käytä mukautettuja kirjasimia"
-
-#: ../src/preferences.glade.h:16
-msgid "Author's email:"
-msgstr "Kääntäjän sähköpostiosoite:"
-
-#: ../src/preferences.glade.h:17
-msgid "Author's name:"
-msgstr "Kääntäjän nimi:"
-
-#: ../src/preferences.glade.h:18
-msgid "Automatically learn a newly translated message"
-msgstr "Opi automaattisesti uudet käännetyt tekstit"
-
-#: ../src/preferences.glade.h:19
-msgid "Automatically save at regular intervals"
-msgstr "Tallenna po-tiedostot automaattisesti tietyin väliajoin"
-
-#: ../src/preferences.glade.h:20
-msgid "Autosave interval: "
-msgstr "Automaattitallennuksen aikaväli:"
-
-#: ../src/preferences.glade.h:21
-msgid "Background color:"
-msgstr "Taustaväri:"
-
-#: ../src/preferences.glade.h:23
-msgid "Check recent files before showing in recent files list"
-msgstr "Tarkista pikavalinnat ennen niiden näyttämistä pikavalintalistassa"
-
-#: ../src/preferences.glade.h:24
-msgid "Collapse all entries by default"
-msgstr "Näytä kaikki ryhmät oletuksena pienennettyinä"
-
-#: ../src/preferences.glade.h:25
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Poista käännetyt tiedostot (eli \"paketti.gmo\")"
-
-#: ../src/preferences.glade.h:27
-msgid "Highlight syntax of the translation message"
-msgstr "Käytä käännöstekstien syntaksiväritystä"
-
-#: ../src/preferences.glade.h:28
-msgid "Hotkey indicating character:"
-msgstr "Pikanäppäinten osoitinmerkki:"
-
-#: ../src/preferences.glade.h:29
-msgid "Instant spell checking"
-msgstr "Oikolue heti"
-
-#: ../src/preferences.glade.h:30
-msgid "Keep obsolete messages in the po files"
-msgstr "Säilytä po-tiedostojen vanhentuneet tekstit"
-
-#: ../src/preferences.glade.h:31
-msgid "Language code:"
-msgstr "Kielikoodi:"
-
-#: ../src/preferences.glade.h:34
-msgid "Maximum number of entries in the recent files list:"
-msgstr "Pikavalintojen enimmäismäärä:"
-
-#: ../src/preferences.glade.h:35
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "Vähimmäisvastaavuus sumeina tehdyille kyselyille prosentteina:"
-
-#: ../src/preferences.glade.h:36
-msgid "Number of plurals: "
-msgstr "Monikkomuotojen lukumäärä: "
-
-#: ../src/preferences.glade.h:37
-msgid "Original text font:"
-msgstr "Alkuperäisen tekstin kirjasin:"
-
-#: ../src/preferences.glade.h:38
-msgid "Plural forms string:"
-msgstr "Merkkijonon monikkomuodot:"
-
-#: ../src/preferences.glade.h:39
-msgid "Query the personal learn buffer while autotranslating"
+"GtkSpell was unable to initialize.\n"
+" %s"
 msgstr ""
-"Tee kysely myös omaan oppimispuskuriin käännettäessä tekstejä automaattisesti"
+"GtkSpellin käynnistäminen epäonnistui.\n"
+" %s"
 
-#: ../src/preferences.glade.h:40
-msgid "Remove fuzzy status if message is changed"
-msgstr "Poista teksti sumea-tilasta kun sitä muutetaan"
+#: ../src/window.c:109
+msgid "_File"
+msgstr "_Tiedosto"
 
-#: ../src/preferences.glade.h:41
-msgid "Save geometry on exit and restore it on startup"
-msgstr "Tallenna ikkunan koko lopetettaessa"
+#: ../src/window.c:110
+msgid "_Edit"
+msgstr "_Muokkaa"
 
-#: ../src/preferences.glade.h:42
-msgid "Show instant comment view in main pane"
-msgstr "Näytä kommenttinäyttö pääikkunassa"
+#: ../src/window.c:111
+msgid "_View"
+msgstr "_Näytä"
 
-#: ../src/preferences.glade.h:43
-msgid "Show the messages table (requires restart)"
-msgstr "Näytä tekstialue (vaatii uudelleenkäynnistyksen)"
+#. { "Bookmarks", NULL, N_("_Bookmarks") },
+#. { "Actions", NULL, N_("_Actions") },
+#: ../src/window.c:114
+msgid "_Search"
+msgstr "Et_si"
 
-#: ../src/preferences.glade.h:44
-msgid "Suffix: "
-msgstr "Jälkiliite:"
+#: ../src/window.c:115
+msgid "_Go"
+msgstr "_Siirry"
 
-#: ../src/preferences.glade.h:45
-msgid "Text color:"
-msgstr "Tekstin väri:"
+#: ../src/window.c:116
+msgid "_Help"
+msgstr "O_hje"
 
-#: ../src/preferences.glade.h:46
-msgid "The Possibility to remove all translations from a po file"
-msgstr "Mahdollisuus poistaa kaikki käännökset po-tiedostoista"
+#: ../src/window.c:120
+msgid "Open a PO file"
+msgstr "Avaa po-tiedosto"
 
-#: ../src/preferences.glade.h:47
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr "Mahdollisuus päivittää po-tiedostot gtranslatorista käsin"
+#: ../src/window.c:122
+msgid "_Recent Files"
+msgstr "_Viimeisimmät tiedostot"
 
-#: ../src/preferences.glade.h:48
-msgid "Translation text font:"
-msgstr "Käännöstekstin kirjasin:"
+#: ../src/window.c:125
+msgid "Quit the program"
+msgstr "Lopeta ohjelma"
 
-#. Translators: With "fuzzy" I mean a more enhanced (and more crappy) logic while searching for appropriate translations for a original string.
-#: ../src/preferences.glade.h:50
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
+#. Edit menu
+#: ../src/window.c:129
+msgid "T_oolbar"
 msgstr ""
-"Käytä \"sumeita\" vastaavuusrutiineja oppimispuskuriin tehtäville kyselyille"
 
-#: ../src/preferences.glade.h:51
-msgid "Use special character to indicate white space"
-msgstr "Käytä erikoismerkkiä kuvaamaan tyhjettä"
+#: ../src/window.c:132
+msgid "Edit gtranslator preferences"
+msgstr "Muuta gtranslatorin asetuksia"
 
-#: ../src/preferences.glade.h:52
-msgid "Warn if po file contains fuzzy translations"
-msgstr "Varoita mikäli po-tiedosto sisältää sumeita käännöksiä"
+#: ../src/window.c:134 ../src/window.c:181
+msgid "_Header..."
+msgstr "_Otsikot..."
 
-#: ../src/preferences.glade.h:53
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- kirjasimen valinta/msgid-kirjasin"
+#. Help menu
+#: ../src/window.c:138
+msgid "_Contents"
+msgstr "_Sisältö"
 
-#: ../src/preferences.glade.h:54
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- kirjasimen valinta/msgstr-kirjasin"
+#: ../src/window.c:150
+msgid "Save the current file"
+msgstr "Tallenna nykyinen tiedosto"
 
-#: ../src/preferences.glade.h:55
-msgid "gtranslator -- options"
-msgstr "gtranslator -- asetukset"
+#: ../src/window.c:153
+msgid "Save the current file with another name"
+msgstr "Tallenna nykyinen tiedosto toisella nimellä"
 
-#: ../src/prefs.c:532
-msgid ""
-"Note: It was not possible to determine GNU header for plural forms. \t\tYour "
-"GNU gettext tools may be too old or they do not contain \t\ta suggested "
-"value for your language."
+#: ../src/window.c:159
+msgid "Close the current file"
+msgstr "Sulje nykyinen tiedosto"
+
+#: ../src/window.c:164
+msgid "Undo last operation"
+msgstr "Kumoa viimeisin toiminto"
+
+#: ../src/window.c:167
+msgid "Redo last undone operation"
+msgstr "Tee uudestaan viimeisin peruttu toiminto"
+
+#: ../src/window.c:170
+msgid "Cut the selected text"
+msgstr "Leikkaa valittu teksti"
+
+#: ../src/window.c:173
+msgid "Copy the selected text"
+msgstr "Kopioi valittu teksti"
+
+#: ../src/window.c:176
+msgid "Paste the contents of the clipboard"
 msgstr ""
-"Huomautus: GNU-otsikkoa monikkomuodoille ei voitu määrittää. \t\tVersiosi GNU "
-"gettext-työkaluista voi olla liian vanha tai ei sisällä \t\tehdotettua arvoa "
-"kielellesi."
 
-#: ../src/prefs.c:541
-msgid ""
-"Note: Your settings do not contain a plural forms string. These data "
-"retrieved from GNU gettext tools."
+#: ../src/window.c:179
+msgid "Clear the selected translation"
+msgstr "Tyhjennä valittu käännösteksti"
+
+#: ../src/window.c:183
+msgid "C_omment..."
+msgstr "K_ommentti..."
+
+#: ../src/window.c:184
+msgid "Edit message comment"
+msgstr "Muokkaa tekstin kommenttia"
+
+#: ../src/window.c:186
+msgid "Copy _Message to Translation"
+msgstr "Kopioi _teksti käännökseen"
+
+#: ../src/window.c:187
+msgid "Copy original message contents to the translation field"
+msgstr "Kopioi alkuperäisen viestin sisäktö tekstin käännökseksi"
+
+#: ../src/window.c:189
+msgid "Toggle _Fuzzy Status"
+msgstr "Määritä onko teksti _sumea"
+
+#: ../src/window.c:190
+msgid "Toggle fuzzy status of a message"
+msgstr "Määritä onko teksti sumea"
+
+#: ../src/window.c:192 ../src/window.c:199
+msgid "_Translation Memory"
+msgstr "Käännös_muisti"
+
+#. View menu
+#: ../src/window.c:196
+msgid "_Context"
+msgstr "_Konteksti"
+
+#: ../src/window.c:197
+msgid "Show the Context panel"
 msgstr ""
-"Huomautus: Asetuksesi eivät sisällä monikkomuotojen merkkijonoa. Nämä tiedot "
-"haettiin GNU gettext-työkaluista."
 
-#: ../src/prefs.c:546
-msgid ""
-"Note: Your settings contain an invalid plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
-"Huomautus: asetuksesi sisältävät virheellisen monikkomuotojen merkkijonon. "
-"Tämä tieto haettiin  GNU gettext-työkaluista."
+#: ../src/window.c:200
+msgid "Show the Translation Memory panel"
+msgstr "Näytä käännösmuistin paneeli"
 
-#: ../src/prefs.c:622
-msgid "Files"
-msgstr "Tiedostot"
+#: ../src/window.c:227
+msgid "Go to the first message"
+msgstr "Siirry ensimmäiseen tekstiin"
 
-#. General item
-#: ../src/prefs.c:629
-msgid "General"
-msgstr "Yleiset"
+#: ../src/window.c:230
+msgid "Move back one message"
+msgstr "Siirry yksi teksti takaisinpäin"
 
-#. Autosave item
-#: ../src/prefs.c:654
-msgid "Autosave"
-msgstr "Automaattitallennus"
+#: ../src/window.c:233
+msgid "Move forward one message"
+msgstr "Siirry yksi teksti eteenpäin"
 
-#. Recent item
-#: ../src/prefs.c:699
-msgid "Recent files"
-msgstr "Pikavalinnat"
+#: ../src/window.c:236
+msgid "Go to the last message"
+msgstr "Siirry viimeiseen tekstiin"
 
-#: ../src/prefs.c:731
-msgid "Editor"
-msgstr "Muokkain"
+#: ../src/window.c:238
+msgid "Next Fuz_zy"
+msgstr "_Seuraava sumea"
 
-#. Text item
-#: ../src/prefs.c:736
-msgid "Text display"
-msgstr "Tekstinäyttö"
+#: ../src/window.c:239
+msgid "Go to the next fuzzy message"
+msgstr "Siirry seuraavaan sumeaan tekstiin"
 
-#. Contents item
-#: ../src/prefs.c:799
-msgid "Contents"
-msgstr "Sisältö"
+#: ../src/window.c:241
+msgid "Previous Fuzz_y"
+msgstr "_Edellinen sumea"
 
-#: ../src/prefs.c:838
-msgid "PO header"
-msgstr "PO-otsikkotiedot"
+#: ../src/window.c:242
+msgid "Go to the previous fuzzy message"
+msgstr "Siirry edelliseen sumeaan tekstiin"
 
-#: ../src/prefs.c:847
-msgid "Personal Information"
-msgstr "Henkilötiedot"
+#: ../src/window.c:244
+msgid "Next _Untranslated"
+msgstr "S_euraava kääntämätön"
 
-#. #ifdef GTR_ABOUT_ME
-#. gtk_widget_set_sensitive(personal_info_box,
-#. !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(use_about_me)));
-#. g_signal_connect(G_OBJECT(use_about_me), "toggled",
-#. G_CALLBACK(toggle_insensitive), personal_info_box);
-#. #endif
-#. Language item
-#: ../src/prefs.c:924
-msgid "Language settings"
-msgstr "Kieliasetukset"
+#: ../src/window.c:245
+msgid "Go to the next untranslated message"
+msgstr "Siirry seuraavaan kääntämättömään tekstiin"
 
-#: ../src/prefs.c:998
-msgid "Functionality"
-msgstr "Toiminnallisuus"
+#: ../src/window.c:247
+msgid "Previ_ous Untranslated"
+msgstr "E_dellinen kääntämätön"
 
-#. Messages table item
-#: ../src/prefs.c:1035
-msgid "Messages table"
-msgstr "Tekstialue"
+#: ../src/window.c:248
+msgid "Go to the previous untranslated message"
+msgstr "Siirry edelliseen kääntämättömään tekstiin"
 
-#: ../src/prefs.c:1062
-msgid "Autotranslation"
-msgstr "Automaattinen kääntäminen"
+#: ../src/window.c:250
+msgid "Next Fu_zzy or Untranslated"
+msgstr "Seu_raava sumea tai kääntämätön"
 
-#. Fuzzy item
-#: ../src/prefs.c:1086
-msgid "Fuzzy matching"
-msgstr "Sumea täsmääminen"
+#: ../src/window.c:251
+msgid "Go to the next fuzzy or untranslated message"
+msgstr "Siirry seuraavaan sumeaan tai kääntämättömään tekstiin"
 
-#: ../src/prefs.c:1164
-msgid "Please enter your name!"
-msgstr "Anna nimesi!"
+#: ../src/window.c:253
+msgid "Pre_vious Fuzzy or Untranslated"
+msgstr "Ede_llinen sumea tai kääntämätön"
 
-#: ../src/prefs.c:1193
-msgid "Please enter your EMail address!"
-msgstr "Anna sähköpostiosoitteesi!"
+#: ../src/window.c:254
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "Siirry edelliseen sumeaan tai kääntämättömään tekstiin"
 
-#: ../src/prefs.c:1213
-msgid "Please enter a valid EMail address!"
-msgstr "Anna kelvollinen sähköpostiosoite!"
+#: ../src/window.c:257
+msgid "Jumps to a specific message"
+msgstr "Siirtyy annettuun tekstiin"
 
-#: ../src/replace.c:169
-msgid "No replacements made!"
-msgstr "Ei suoritettu korvauksia!"
+#: ../src/window.c:262
+msgid "Search for text"
+msgstr "Etsi tekstiä"
+
+#: ../src/window.c:271
+msgid "Search for and replace text"
+msgstr "Etsi ja korvaa tekstiä"
+
+#: ../src/window.c:730
+msgid "Untranslated"
+msgstr "Kääntämättä"
+
+#: ../src/window.c:732
+msgid "Translated"
+msgstr "Käännetty"
+
+#: ../src/window.c:734
+msgid "Fuzzy"
+msgstr "Sumea"
+
+#: ../src/window.c:739
+#, c-format
+msgid "Status: %s"
+msgstr "Tila: %s"
+
+#: ../src/window.c:740
+#, c-format
+msgid "Current: %d"
+msgstr "Käännetty: %d"
+
+#: ../src/window.c:741
+#, c-format
+msgid "Total: %d"
+msgstr "Kaikkiaan: %d"
+
+#: ../src/window.c:742
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "Sumeita: %d"
+
+#: ../src/window.c:743
+#, -format
+msgid "Untranslated: %d"
+msgstr "Kääntämättä: %d"
 
 #.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
+#. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/runtime-config.c:72
-msgid "Y"
-msgstr "Y"
-
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
-msgid "^"
-msgstr "^"
-
-#: ../src/save.c:118
+#: ../src/window.c:847 ../src/window.c:851
 #, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "Käännetyn gettext-tiedoston '%s' tallentaminen ei onnistunut!"
+msgid "gtranslator - %s"
+msgstr "gtranslator - %s"
 
-#: ../src/save.c:168
+#: ../src/window.c:849
 #, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "Pakatun gettext-tiedoston '%s' tallentaminen ei onnistunut!"
+msgid "gtranslator - *%s"
+msgstr "gtranslator - *%s"
 
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: ../src/save.c:178
-#, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "%s-pakatun gettext-tiedoston \"%s\" tallentaminen epäonnistui!"
+#: ../src/window.c:856
+msgid "gtranslator"
+msgstr "gtranslator"
 
-#: ../src/save.c:243
-#, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "Zip-pakatun po-tiedoston `%s' tallentaminen ei onnistunut!"
+#: ../src/window.c:1205
+msgid "Toolbar Editor"
+msgstr "Työkalupalkin muokkain"
 
-#: ../src/session.c:88
-msgid "Session restored successfully."
-msgstr "Istunto palautettu onnistuneesti."
-
-#: ../src/sighandling.c:65
-#, c-format
-msgid "Saving file failed: %s"
-msgstr "Tiedoston tallennus epäonnistui: %s"
-
-#: ../src/stylistics.c:283
-msgid "No font set! Using default font"
-msgstr "Ei asetettu kirjasinta. Käytetään oletuskirjasinta."
-
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: ../src/stylistics.c:289
-msgid "Sans 10"
-msgstr "Sans 10"
-
-#: ../src/utils.c:275 ../src/utils.c:292
-#, c-format
-msgid "Can't create directory `%s'!"
-msgstr "Hakemiston '%s' luominen epäonnistui!"
-
-#: ../src/utils.c:874
-msgid "Sorry, msginit isn't available on your system!"
-msgstr "Komentoa msginit ei löydy järjestelmästäsi!"
-
-#: ../src/utils_gui.c:141
-#, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "Ikkunan koon määritystä \"%s\" ei voida tallentaa!"
-
-#: ../src/utils_gui.c:355
-#, c-format
-msgid "The necessary decompression program `%s' is not installed!"
-msgstr "Tarvittavaa purkuohjelmaa \"%s\" ei löytynyt!"
-
-#: ../src/utils_gui.c:360
-#, c-format
-msgid "The necessary compression program `%s' is not installed!"
-msgstr "Tarvittavaa pakkausohjelmaa \"%s\" ei löytynyt!"
-
-#: ../src/vfs-handle.c:121
-#, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr "Väliaikaishakemistoa '%s' ei voitu luoda!"
-
-#: ../src/vfs-handle.c:149
-#, c-format
-msgid "File `%s' couldn't be found!"
-msgstr "Tiedostoa '%s' ei löytynyt!"
-
-#: ../src/vfs-handle.c:154
-#, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr "Annettiin epäkelpo URI '%s'"
-
-#: ../src/vfs-handle.c:159
-#, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr "Isäntää '%s' ei löytynyt!"
-
-#: ../src/vfs-handle.c:164
-#, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr "Isäntänimi '%s' ei ole kelvollinen!"
-
-#: ../src/vfs-handle.c:169
-#, c-format
-msgid "Host `%s' has no address!"
-msgstr "Isännällä '%s' ei ole osoitetta!"
-
-#: ../src/vfs-handle.c:174
-msgid "Transfer interrupted!"
-msgstr "Siirto keskeytetty!"
+#: ../src/window.c:1523
+msgid "Documents"
+msgstr "Asiakirjat"
 
