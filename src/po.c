@@ -599,6 +599,8 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 	gchar *comp_year;
 	gchar *line_without_dot;
 
+	gboolean current_translator_in_comments = FALSE;
+	
 	take_my_options = gtranslator_prefs_manager_get_take_my_options ();
 
 	/*
@@ -662,6 +664,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 	 */
 	while (comments_lines[i] != NULL) {
 	  if (g_str_has_prefix (comments_lines[i], prev_translator)) {
+	    current_translator_in_comments = TRUE;
 	    comments_translator_values = g_strsplit (comments_lines[i], ",", -1);
 	    j = i;
 	  }
@@ -675,30 +678,31 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 	/*
 	 * Current translator is already in comments but its last year < current year.
 	 */
-	if ((g_utf8_collate (prev_translator, aux) == 0) && 
-	    (g_utf8_collate (comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year) != 0)) {
-	  if (g_str_has_suffix (comments_lines[j], ".")) {
-	    line_without_dot = g_strndup (comments_lines[j], g_utf8_strlen(comments_lines[j], -1) -1);  
-	    line = g_strconcat (line_without_dot, ", ", year, ".", NULL);
-	    g_free (line_without_dot);
-	  }else {
-	    line = g_strconcat (comments_lines[j], ", ", year, ".", NULL);
-	  }
-	  
-	  for (l=j; l<(g_strv_length (comments_lines)); l++) {
-	    comments_lines[l] = comments_lines[l+1];
-	  }
-	  
-	  comments_lines[g_strv_length (comments_lines)-1] = line;
-	  while (comments_lines[k] != NULL) {
-	    new_comments = g_strconcat (new_comments, comments_lines[k], "\n", NULL);
-	    k++;
+	if (current_translator_in_comments) {
+	  if ((g_utf8_collate (prev_translator, aux) == 0) && 
+	      (g_utf8_collate (comments_translator_values[g_strv_length (comments_translator_values)-1], comp_year) != 0)) {
+	    if (g_str_has_suffix (comments_lines[j], ".")) {
+	      line_without_dot = g_strndup (comments_lines[j], g_utf8_strlen(comments_lines[j], -1) -1);  
+	      line = g_strconcat (line_without_dot, ", ", year, ".", NULL);
+	      g_free (line_without_dot);
+	    }else {
+	      line = g_strconcat (comments_lines[j], ", ", year, ".", NULL);
 	    }
-	  gtranslator_header_set_comment (header, (const gchar *)new_comments);
-	  g_free (line);
-	  g_free (new_comments);
-	}    
-
+	    
+	    for (l=j; l<(g_strv_length (comments_lines)); l++) {
+	      comments_lines[l] = comments_lines[l+1];
+	    }
+	    
+	    comments_lines[g_strv_length (comments_lines)-1] = line;
+	    while (comments_lines[k] != NULL) {
+	      new_comments = g_strconcat (new_comments, comments_lines[k], "\n", NULL);
+	      k++;
+	    }
+	    gtranslator_header_set_comment (header, (const gchar *)new_comments);
+	    g_free (line);
+	    g_free (new_comments);
+	  }    
+	}
 	/*
 	 * Current translator is not in the comments.
 	 */
