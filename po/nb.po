@@ -1,14 +1,13 @@
 # Norwegian (bokmål) translation of gtranslator.
 # Copyright (C) 2000-2004 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@gnome.org>, 2000-2007. 
-# 
-#: ../src/menus.c:219 ../src/menus.c:237 ../src/menus.c:246 ../src/menus.c:255
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-02 13:39+0100\n"
-"PO-Revision-Date: 2007-11-02 13:44+0100\n"
+"POT-Creation-Date: 2008-10-07 15:01+0200\n"
+"PO-Revision-Date: 2008-10-07 15:14+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -17,1280 +16,1418 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1
-msgid "Translate programs to your own language"
-msgstr "Oversett programmer til ditt eget språk"
+msgid "Gtranslator PO Editor"
+msgstr "gtranslator PO-redigerer"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:2
-msgid "gtranslator PO file editor"
-msgstr "gtranslator PO-fil redigerer"
+msgid "Translate and localize applications and libraries"
+msgstr "Oversett og lokaliser programmer og biblioteker"
 
-#: ../src/about.c:61
-msgid ""
-"gtranslator is free software; you can redistribute it and/or modify it under "
-"the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
-"any later version."
+#: ../data/po.lang.h:1
+msgid "Others"
+msgstr "Andre"
+
+#: ../data/po.lang.h:2
+msgid "Special variable"
+msgstr "Spesiell variabel"
+
+#: ../data/po.lang.h:3
+msgid "Tag"
+msgstr "Merke"
+
+#: ../data/po.lang.h:4
+msgid "gtranslator highlight"
+msgstr "gtranslator uthev"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:117
+msgid "Message not found"
+msgstr "Melding ikke funnet"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:222
+msgid "Open file for alternate language"
+msgstr "Åpne fil for annet språk"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:247
+msgid "File closed"
+msgstr "Fil lukket"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:320
+msgid "There isn't any file loaded"
 msgstr ""
 
-#: ../src/about.c:65
-msgid ""
-"gtranslator is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details."
+#: ../plugins/alternate-language/alternate-language-plugin.c:59
+msgid "_Alternate Language"
+msgstr "_Alternativt språk"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:60
+msgid "Show the Alternate Language panel"
 msgstr ""
 
-#: ../src/about.c:69
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"gtranslator; if not, write to the Free Software Foundation,59 Temple Place, "
-"Suite 330, Boston, MA  02111-1307  USA"
+#: ../plugins/alternate-language/alternate-language-plugin.c:123
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+msgid "Alternate Language"
+msgstr "Alternativt språk"
+
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+msgid "Load an alternate language."
 msgstr ""
 
-#: ../src/about.c:82
-msgid "gtranslator is a po file editing suite with many bells and whistles."
+#: ../plugins/charmap/charmap-plugin.c:299
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+msgid "Character Map"
+msgstr "Tegnkart"
+
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+msgid "Insert special characters just by clicking on them."
 msgstr ""
-"gtranslator er et program for redigering av po-filer med mange funksjoner."
 
-#: ../src/about.c:84
-msgid "(C) 1999-2007 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2007 The Free Software Foundation, Inc."
-
-#.
-#. * Note to translators: put here your name and email so it will show
-#. * up in the "about" box
-#.
-#: ../src/about.c:91
-msgid "translator-credits"
-msgstr "Kjartan Maraas <kmaraas@gnome.org>"
-
-#: ../src/bookmark.c:575
-#, c-format
-msgid "Open %s (%s)"
-msgstr "Åpne %s (%s)"
-
-#: ../src/color-schemes.c:199
-#, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr "Kunne ikke bruke schema-fil for farger, «%s»!"
-
-#: ../src/color-schemes.c:325
-msgid "Couldn't retrieve author information!"
-msgstr "Kunne ikke hente informasjon om forfatter!"
-
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: ../src/color-schemes.c:331 ../src/translator.c:334
-msgid "Unknown"
-msgstr "Ukjent"
-
-#: ../src/color-schemes.c:332
-msgid "<Not Given>"
-msgstr "<Ikke oppgitt>"
-
-#: ../src/color-schemes.c:524
-#, c-format
-msgid "Activate colorscheme %s"
-msgstr "Aktiver fargeskjema %s"
-
-#: ../src/compile.c:81
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "En feil oppsto under kjøring av msgfmt:\n"
-
-#: ../src/compile.c:158
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "Beklager, msgfmt er ikke tilgjengelig på ditt system!"
-
-#: ../src/compile.c:199
-#, c-format
-msgid ""
-"Compile successful:\n"
-"%s"
-msgstr ""
-"Komplering fullført:\n"
-"%s"
-
-#: ../src/dialogs.c:235
-msgid "Gettext translation"
-msgstr "Gettext-oversettelse"
-
-#: ../src/dialogs.c:240
-msgid "Gettext translation template"
-msgstr "Gettext-oversettelsesmal"
-
-#: ../src/dialogs.c:245
-msgid "All files"
-msgstr "Alle filer"
-
-#: ../src/dialogs.c:302
-msgid "Open file for translation"
-msgstr "Åpne fil for oversetting"
-
-#: ../src/dialogs.c:330 ../src/main_window.glade.h:27
-msgid "Save file as..."
-msgstr "Lagre fil som..."
-
-#: ../src/dialogs.c:335
-msgid "Save local copy of file as..."
-msgstr "Lagre lokal kopi av fil som..."
-
-#: ../src/dialogs.c:379
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Save?"
-msgstr ""
-"Filen %s\n"
-"ble endret. Lagre?"
-
-#: ../src/dialogs.c:422 ../src/dialogs.c:455
-msgid "gtranslator -- edit comment"
-msgstr "gtranslator -- rediger kommentar"
-
-#: ../src/dialogs.c:447
-msgid "Comment:"
-msgstr "Kommentar:"
-
-#: ../src/dialogs.c:565
-#, c-format
-msgid "Should ALL translations from `%s' be removed?"
-msgstr "Skal ALLE oversettelser fjernes fra «%s»?"
-
-#: ../src/dialogs.c:644
-msgid "gtranslator -- go to"
-msgstr "gtranslator -- gå til"
-
-#: ../src/dialogs.c:652
-msgid "Go to message number:"
-msgstr "Gå til meldingsnummer:"
-
-#: ../src/dialogs.c:711
-msgid "Find in the po file"
-msgstr "Finn i po-filen"
-
-#: ../src/dialogs.c:720
-msgid "Enter search string:"
-msgstr "Skriv inn søkestreng:"
-
-#: ../src/dialogs.c:725 ../src/main_window.glade.h:4
-msgid "Case sensitive"
-msgstr "Skill mellom store og små bokstaver"
-
-#: ../src/dialogs.c:730
-msgid "Find in:"
-msgstr "Finn i:"
-
-#: ../src/dialogs.c:734 ../src/dialogs.c:869
-msgid "Comments"
-msgstr "Kommentarer"
-
-#: ../src/dialogs.c:737 ../src/dialogs.c:872 ../src/languages.c:105
-msgid "English"
-msgstr "Engelsk"
-
-#: ../src/dialogs.c:740 ../src/dialogs.c:875 ../src/messages-table.c:237
-msgid "Translation"
-msgstr "Oversettelse"
-
-#.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
-#.
-#: ../src/dialogs.c:751 ../src/main_window.glade.h:12
-msgid "Ignore hotkeys"
-msgstr "Overse snarveier"
-
-#: ../src/dialogs.c:848
-msgid "gtranslator -- replace"
-msgstr "gtranslator -- erstatt"
-
-#: ../src/dialogs.c:852
-msgid "Replace"
-msgstr "Erstatt"
-
-#: ../src/dialogs.c:853
-msgid "Replace all"
-msgstr "Erstatt alle"
-
-#: ../src/dialogs.c:858
-msgid "String to replace:"
-msgstr "Streng som skal erstattes:"
-
-#: ../src/dialogs.c:861
-msgid "Replace string:"
-msgstr "Erstatning:"
-
-#: ../src/dialogs.c:866
-msgid "Replace in:"
-msgstr "Erstatt i:"
-
-#: ../src/dialogs.c:944
-msgid "Please enter a string to replace!"
-msgstr "Vennligst oppgi en streng som skal erstattes!"
-
-#: ../src/dialogs.c:1002
-#, c-format
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
-"Filen\n"
-"\n"
-"   %s\n"
-"\n"
-"er allerede åpen i en annen instans av gtranslator!\n"
-"Vennligst lukk den andre instansen av gtranslator som\n"
-"bruker denne filen for å gjenvinne tilgang til filen.\n"
-"\n"
-"Skal gtranslator lures til å åpne denne filen likevel?"
-
-#: ../src/dialogs.c:1044
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
-msgstr ""
-"Filen %s\n"
-"ble endret. Vil du gå tilbake til en lagret kopi?"
-
-#: ../src/dialogs.c:1074
-msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- åpne fra URI"
-
-#: ../src/dialogs.c:1086
-msgid "Enter URI:"
-msgstr "Skriv inn URI:"
-
-#: ../src/dialogs.c:1124
-msgid "No URI given!"
-msgstr "Ingen URI oppgitt!"
-
-#: ../src/dialogs.c:1152
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
-"URIer brukes til å gi filer på forskjellige systemer unike navn.\n"
-"Standard Internett-adreser (URLer) er også URIer -- du kan\n"
-"bruke dem til å åpne eksterne po-filer som ligger på tjenere med standard\n"
-"protokoller som «http» og «ftp» eller alle andre aksessmetoder som støttes\n"
-"av GnomeVFS. Noen eksempler på URIer for å gjøre dette klarere:\n"
-"http://www.gtranslator.org/ekstern-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.nettsted.no/<EN-EKSTERN-PO-FIL>\n"
-"\n"
-"file:///<PO-FIL> eller\n"
-"http://www.domene.no/PO-FIL"
-
-#: ../src/dialogs.c:1194
-#, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
-msgstr ""
-"Åpne sikkerhetskopiert fil for «%s»?\n"
-"Den ble lagret av gtranslator før gtranslator sist ble lukket\n"
-"og kan inneholde resultatene av ditt harde arbeid!\n"
-
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: ../src/dialogs.c:1206
-msgid "Postpone decision"
-msgstr "Utsett avgjørelsen"
-
-#: ../src/dialogs.c:1208
-msgid "Ignore recovery file"
-msgstr "Overse sikkerhetskopi"
-
-#: ../src/dialogs.c:1210
-msgid "Recover file"
-msgstr "Gjenopprett fil"
-
-#: ../src/dialogs.c:1272
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
-"Skal gtranslator oversette filen automatisk med informasjon fra "
-"innlæringsbuffer?"
-
-#: ../src/dialogs.c:1320 ../src/dialogs.c:1348
-msgid "gtranslator -- add bookmark with comment?"
-msgstr "gtranslator -- legg til bokmerke med kommentar?"
-
-#: ../src/dialogs.c:1340
-msgid "Comment for the bookmark:"
-msgstr "Kommentar for bokmerket:"
-
-#: ../src/dialogs.c:1340
-msgid "No comment"
-msgstr "Ingen kommentar"
-
-#: ../src/dict-panel.c:187
+#: ../plugins/dictionary/dict-panel.c:186
 #, c-format
 msgid "No dictionary source available with name '%s'"
 msgstr ""
 
-#: ../src/dict-panel.c:190
+#: ../plugins/dictionary/dict-panel.c:189
 msgid "Unable to find dictionary source"
 msgstr ""
 
-#: ../src/dict-panel.c:205
+#: ../plugins/dictionary/dict-panel.c:204
 #, c-format
 msgid "No context available for source '%s'"
 msgstr ""
 
-#: ../src/dict-panel.c:208
+#: ../plugins/dictionary/dict-panel.c:207
 msgid "Unable to create a context"
 msgstr ""
 
+#: ../plugins/dictionary/dict-panel.c:290
+#, c-format
+msgid "Dictionary source '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:310
+#, c-format
+msgid "Strategy '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:329
+#, c-format
+msgid "Database '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:375
+#, c-format
+msgid "Word '%s' selected"
+msgstr ""
+
 #. speller
-#: ../src/dict-panel.c:385
+#: ../plugins/dictionary/dict-panel.c:398
 msgid "Double-click on the word to look up"
 msgstr ""
 
 #. strat-chooser
-#: ../src/dict-panel.c:391
+#: ../plugins/dictionary/dict-panel.c:404
 msgid "Double-click on the matching strategy to use"
 msgstr ""
 
+#. source-chooser
+#: ../plugins/dictionary/dict-panel.c:409
+msgid "Double-click on the source to use"
+msgstr ""
+
 #. db-chooser
-#: ../src/dict-panel.c:401
+#: ../plugins/dictionary/dict-panel.c:418
 msgid "Double-click on the database to use"
 msgstr ""
 
 #.
 #. * Look up Button
 #.
-#: ../src/dict-panel.c:432
+#: ../plugins/dictionary/dict-panel.c:481
 msgid "Look _up:"
 msgstr ""
 
-#: ../src/dict-panel.c:494
+#: ../plugins/dictionary/dict-panel.c:554
 msgid "Similar words"
 msgstr "Lignende ord"
 
-#: ../src/dict-panel.c:510
+#: ../plugins/dictionary/dict-panel.c:570
 msgid "Available dictionaries"
 msgstr ""
 
-#: ../src/dict-panel.c:526
+#: ../plugins/dictionary/dict-panel.c:586
 msgid "Available strategies"
 msgstr ""
 
-#: ../src/dict-panel.c:598
-msgid "Unable to connect to GConf"
+#: ../plugins/dictionary/dict-panel.c:597
+msgid "Dictionary sources"
 msgstr ""
 
-#: ../src/dict-panel.c:610
-msgid "Unable to get notification for preferences"
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/dictionary-plugin.c:94
+msgid "Dictionary"
+msgstr "Ordbok"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+msgid "Look up words in a dictionary."
 msgstr ""
 
-#: ../src/find.c:216
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
+msgid "_Fullscreen"
+msgstr "_Fullskjerm"
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:47
+msgid "Place window on fullscreen state"
+msgstr ""
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr "Fullskjerm"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr ""
+
+#: ../plugins/insert-params/insert-params-plugin.c:79
+msgid "_Next Param"
+msgstr ""
+
+#: ../plugins/insert-params/insert-params-plugin.c:80
+msgid "Insert the next param of the message"
+msgstr ""
+
+#: ../plugins/insert-params/insert-params-plugin.c:82
+msgid "_Insert Params"
+msgstr ""
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Params"
+msgstr ""
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+msgid "Parameters detection and easy insertion."
+msgstr ""
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:70
+msgid "_Next Tag"
+msgstr "_Neste merke"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:71
+#, fuzzy
+msgid "Insert the next tag of the message"
+msgstr "Gå til neste uoversatte melding"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:73
+msgid "_Insert Tags"
+msgstr ""
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Tags"
+msgstr ""
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+msgid "Tags detection and easy insertion."
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:1
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:1
+#: ../plugins/subversion/subversion.glade.h:2
+#: ../src/dialogs/preferences-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:2
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:2
+msgid "     "
+msgstr "     "
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:3
+#, fuzzy
+msgid "<b>Code language of the results:</b>"
+msgstr "<b>Språkinnstillinger</b>"
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:4
+msgid "<b>Code language to query open-tran:</b>"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:5
+msgid "Open Tran Settings"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:210
+#: ../plugins/open-tran/open-tran-panel.c:274
+msgid "ERROR: could not parse response\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:258
 #, c-format
-msgid "Please enter a search string"
-msgstr "Vennligst skriv inn en søkestreng"
+msgid "ERROR: %d %s\n"
+msgstr ""
 
-#: ../src/find.c:239
+#: ../plugins/open-tran/open-tran-panel.c:269
+#, c-format
+msgid "FAULT: %d %s\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:285
+#, c-format
+msgid "WRONG! Can't get result element %d\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:301 ../src/actions-search.c:200
+msgid "Phrase not found"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:323
+msgid "You have to provide a phrase to search"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:333
+msgid "You have to provide a search language code"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:343
+msgid "You have to provide a language code for your language"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:372
+msgid "Type"
+msgstr "Type"
+
+#: ../plugins/open-tran/open-tran-panel.c:383
+msgid "Open-Tran.eu"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:422
+msgid "Look for:"
+msgstr "Se etter:"
+
+#: ../plugins/open-tran/open-tran-plugin.c:108
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Open Tran"
+msgstr "Åpne %s"
+
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+msgid "Look for phrases in Open tran memory translation database."
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:3
+msgid "<b>Line command:</b>"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:4
+#, fuzzy
+msgid "<b>Program command:</b>"
+msgstr "<b>Personlig informasjon</b>"
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:5
+msgid "Source View Settings"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:6
+msgid "Use external editor"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:112
+#, c-format
+msgid "Please, install %s to be able to show the file"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:392
+msgid "Paths:\n"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+msgid "Show the message in the source code."
+msgstr "Vis meldingen i kildekoden."
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+msgid "Source Code View"
+msgstr "Kildekodevisning"
+
+#: ../plugins/source-code-view/viewer.c:74
+msgid "Source Viewer"
+msgstr "Kildevisning"
+
+#: ../plugins/source-code-view/viewer.glade.h:1
+msgid "<b>Source code</b>"
+msgstr "<b>Kildekode</b>"
+
+#: ../plugins/subversion/checkout-dialog.c:76
+msgid "Subversion: Checkout complete."
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:125
+msgid "Please, add a directory path to make the checkout"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:138
+msgid "Please, add a Subversion URL"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
+msgid "Checkout directory"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:260
+msgid "Checkout repository"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:226
+msgid "Subversion: Commit complete."
+msgstr ""
+
+#.
+#. * Translators: Please change LANGUAGE for your language name in ENGLISH.
+#. * This string is used to fill the ChangeLog entry
+#.
+#: ../plugins/subversion/commit-dialog.c:267
+msgctxt "ChangeLog entry"
+msgid "LANGUAGE"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:293
+#, c-format
+msgid "The ChangeLog file '%s' does not exists"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:405
+msgid "Are you sure that you want to pass an empty log message?"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:422
+msgid "You have to select at least one file to send"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:568
+msgid "Commit Changes"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:79
+msgid "Subversion: Diff complete."
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:108
+#, c-format
+msgid "Please, install %s to be able to diff the file"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:411
+msgid "Diff file"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:479
+msgid "Diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:84
+msgid "Subversion: File will be added on next commit."
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:138
+msgid "_Update"
+msgstr "_Oppdater"
+
+#: ../plugins/subversion/subversion-plugin.c:139
+msgid "Sync your local copy with the Subversion tree"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:142
+#, fuzzy
+msgid "_Commit"
+msgstr "Kommentar:"
+
+#: ../plugins/subversion/subversion-plugin.c:143
+msgid "Commit your changes to the Subversion tree"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:146
+msgid "_Add"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:147
+msgid "Add a new file/directory to the Subversion tree"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:150
+msgid "_Diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:151
+msgid "Diff local PO file with repository PO file"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:154
+msgid "C_heckout"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:155
+msgid "Get a new repository copy"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:158
+msgid "S_ubversion"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: ../plugins/subversion/subversion.glade.h:3
+msgid "        "
+msgstr "        "
+
+#: ../plugins/subversion/subversion.glade.h:4
+#, fuzzy
+msgid "<b>Diff options:</b>"
+msgstr "<b>Innhold</b>"
+
+#: ../plugins/subversion/subversion.glade.h:5
+msgid "<b>Diff program:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:6
+msgid "<b>Directory to checkout:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:7
+msgid "<b>Directory to update:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:8
+msgid "<b>Information:</b>"
+msgstr "<b>Informasjon:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:9
+#, fuzzy
+msgid "<b>Log Message:</b>"
+msgstr "<b>Meldingstabell</b>"
+
+#: ../plugins/subversion/subversion.glade.h:10
+msgid "<b>Password:</b>"
+msgstr "<b>Passord:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:11
+#, fuzzy
+msgid "<b>Realm:</b>"
+msgstr "<b>Generelt</b>"
+
+#: ../plugins/subversion/subversion.glade.h:12
+#, fuzzy
+msgid "<b>Select files to Commit:</b>"
+msgstr "<b>Siste filer</b>"
+
+#: ../plugins/subversion/subversion.glade.h:13
+msgid "<b>Subversion URL:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:14
+msgid "<b>Username:</b>"
+msgstr "<b>Brukernavn:</b>"
+
+#: ../plugins/subversion/subversion.glade.h:15
+msgid "Add Log Message to ChangeLog file"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:16
+msgid "Line argument:"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:17
+msgid "Program name:"
+msgstr "Programnavn:"
+
+#: ../plugins/subversion/subversion.glade.h:18
+msgid "Remember Password"
+msgstr "Husk passord"
+
+#: ../plugins/subversion/subversion.glade.h:19
+msgid "Remember this decision"
+msgstr "Husk dette valget"
+
+#: ../plugins/subversion/subversion.glade.h:20
+msgid "Repository authorization"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:21
+msgid "Retrieving status..."
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:22
+#, fuzzy
+msgid "Save the diff file"
+msgstr "Lagre filen"
+
+#: ../plugins/subversion/subversion.glade.h:23
+msgid "Send Changes"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:24
+#: ../plugins/subversion/update-dialog.c:230
+msgid "Update repository"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:25
+msgid "Use configured program to view the diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:26
+msgid "label"
+msgstr ""
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
+msgid "A Subversion client plugin based on libsvn."
+msgstr ""
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
+msgid "Subversion"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:172
+#: ../plugins/subversion/svn-command.c:252
+msgid "Authentication canceled"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:225
+msgid "Hostname: "
+msgstr "Vertsnavn:"
+
+#: ../plugins/subversion/svn-command.c:226
+msgid "Fingerprint: "
+msgstr "Fingeravtrykk: "
+
+#: ../plugins/subversion/svn-command.c:227
+msgid "Valid from: "
+msgstr "Gyldig fra: "
+
+#: ../plugins/subversion/svn-command.c:228
+msgid "Valid until: "
+msgstr "Gyldig til: "
+
+#: ../plugins/subversion/svn-command.c:229
+msgid "Issuer DN: "
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:230
+msgid "DER certificate: "
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:377
+#: ../plugins/subversion/svn-command.c:393
+#, c-format
+msgid "Deleted: %s"
+msgstr "Slettet: %s"
+
+#: ../plugins/subversion/svn-command.c:380
+#: ../plugins/subversion/svn-command.c:399
+#, c-format
+msgid "Added: %s"
+msgstr "La til: %s"
+
+#: ../plugins/subversion/svn-command.c:383
+#, c-format
+msgid "Reverted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:386
+#, fuzzy, c-format
+msgid "Revert failed: %s"
+msgstr "Gjenopprett fil"
+
+#: ../plugins/subversion/svn-command.c:390
+#, c-format
+msgid "Resolved: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:396
+#, c-format
+msgid "Updated: %s"
+msgstr "Oppdatert: %s"
+
+#: ../plugins/subversion/svn-command.c:402
+#, c-format
+msgid "Externally Updated: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:406
+#, c-format
+msgid "Commit Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:410
+#, c-format
+msgid "Commit Added: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:413
+#, c-format
+msgid "Commit Deleted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:417
+#, c-format
+msgid "Commit Replaced: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:421
+#, c-format
+msgid "Created File: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:436
+#, c-format
+msgid "Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:439
+#, c-format
+msgid "Merged: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:442
+#, c-format
+msgid "Conflicted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:446
+#, c-format
+msgid "Missing: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:449
+#, c-format
+msgid "Obstructed: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-update-command.c:103
+#, c-format
+msgid "Updated to revision %ld."
+msgstr ""
+
+#: ../plugins/subversion/update-dialog.c:74
+msgid "Subversion: Update complete."
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:293
+msgid "Modified"
+msgstr "Endret"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:297
+msgid "Added"
+msgstr "La til"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:301
+msgid "Deleted"
+msgstr "Slettet"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:305
+msgid "Conflicted"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:309
+msgid "Missing"
+msgstr "Mangler"
+
+#: ../src/actions-file.c:202
+msgid "Open file for translation"
+msgstr "Åpne fil for oversetting"
+
+#: ../src/actions-file.c:276 ../src/actions-file.c:403
+msgid "File saved."
+msgstr "Fil lagret."
+
+#: ../src/actions-file.c:326
+msgid "Save file as..."
+msgstr "Lagre fil som..."
+
+#: ../src/actions-help.c:51
+#, fuzzy
+msgid "Unable to open help file for gtranslator"
+msgstr "Åpne fil for oversetting"
+
+#: ../src/actions-help.c:69
+#, fuzzy
+msgid "Current Developers"
+msgstr "Aktiv kommentar"
+
+#: ../src/actions-help.c:75
+#, fuzzy
+msgid "Previous Developers"
+msgstr "Forrige melding"
+
+#: ../src/actions-help.c:93
+msgid ""
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+
+#: ../src/actions-help.c:97
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+
+#: ../src/actions-help.c:101
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+
+#: ../src/actions-help.c:113
+#, fuzzy
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr ""
+"gtranslator er et program for redigering av po-filer med mange funksjoner."
+
+#: ../src/actions-help.c:115
+msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+msgstr "Opphavsrett © 1999-2008 Free Software Foundation, Inc."
+
+#: ../src/actions-help.c:119
+msgid "About Gtranslator"
+msgstr "Om Gtranslator"
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/actions-help.c:124
+msgid "translator-credits"
+msgstr "Kjartan Maraas <kmaraas@gnome.org>"
+
+#: ../src/actions-help.c:128
+msgid "Gtranslator Web Site"
+msgstr "Gtranslator nettsted"
+
+#: ../src/actions-search.c:175
+#, c-format
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/actions-search.c:185
+msgid "Found and replaced one occurrence"
+msgstr ""
+
+#: ../src/context.c:61
+msgid "Format: "
+msgstr "Format: "
+
+#: ../src/context.c:62
+msgid "Context:"
+msgstr "Kontekst:"
+
+#: ../src/context.c:63
+#, fuzzy
+msgid "Extracted comments:"
+msgstr "Rediger kommentar"
+
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:704
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:281
 #, c-format
 msgid ""
-"Could not find\n"
-"\"%s\""
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
+"Database path: %s"
 msgstr ""
-"Kunne ikke finne\n"
-"\"%s\""
 
-#: ../src/gui.c:457
+#: ../src/dialogs/assistant.c:300
+msgid "None"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:321
+msgid ""
+"This assistant will help you to create the main profile\n"
+"and generate your translation memory database."
+msgstr ""
+
+#: ../src/dialogs/assistant.c:327
+msgid "Assistant"
+msgstr "Assistent"
+
+#: ../src/dialogs/assistant.c:416
+msgid "<b>Profile name:</b>"
+msgstr "<b>Profilnavn:</b>"
+
+#: ../src/dialogs/assistant.c:436
+msgid "<b>Translator name:</b>"
+msgstr "<b>Oversetters navn:</b>"
+
+#: ../src/dialogs/assistant.c:456
+msgid "<b>Translator email:</b>"
+msgstr "<b>Oversetters e-post:</b>"
+
+#: ../src/dialogs/assistant.c:476
+msgid "<b>Language:</b>"
+msgstr "<b>Språk:</b>"
+
+#: ../src/dialogs/assistant.c:496
+#, fuzzy
+msgid "<b>Team email:</b>"
+msgstr "<b></b>"
+
+#: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
+#: ../src/dialogs/preferences-dialog.c:512
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/dialogs/assistant.c:584
+msgid "<b>Language code:</b>"
+msgstr "<b>Språkkode:</b>"
+
+#: ../src/dialogs/assistant.c:604
+msgid "<b>Character set:</b>"
+msgstr "<b>Tegnsett:</b>"
+
+#: ../src/dialogs/assistant.c:624
+#, fuzzy
+msgid "<b>Transfer encoding:</b>"
+msgstr "<b>Språkinnstillinger</b>"
+
+#: ../src/dialogs/assistant.c:644
+#, fuzzy
+msgid "<b>Plural forms:</b>"
+msgstr "<b>Personlig informasjon</b>"
+
+#: ../src/dialogs/assistant.c:706
+msgid "<b>Select the path to generate the database:</b>"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:736
+msgid "<b>Look for a specific PO filename:</b>"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:745
+msgid "E.g.: gl.po"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:748
+msgid "Generate Database"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:772
+msgid "Confirmation"
+msgstr "Bekreftelse"
+
+#: ../src/dialogs/close-confirmation-dialog.c:131
+msgid "Close _without Saving"
+msgstr ""
+
+#: ../src/dialogs/close-confirmation-dialog.c:165
+msgid "Question"
+msgstr "Spørsmål"
+
+#: ../src/dialogs/close-confirmation-dialog.c:383
 #, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgid_plural "%s [ %i Fuzzy left ]"
-msgstr[0] "%s [ %i uferdig igjen ]"
-msgstr[1] "%s [ %i uferdige igjen ]"
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr ""
 
-#: ../src/gui.c:457 ../src/gui.c:461 ../src/main_window.glade.h:11
-#: ../src/messages-table.c:267
-msgid "Fuzzy"
-msgstr "Uferdig"
-
-#: ../src/gui.c:461
+#: ../src/dialogs/close-confirmation-dialog.c:555
 #, c-format
-msgid "%s [ No fuzzy left ]"
-msgstr "%s [ Ingen uferdige igjen ]"
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../src/gui.c:470 ../src/main_window.glade.h:30 ../src/messages-table.c:275
-msgid "Translated"
-msgstr "Oversatt"
-
-#: ../src/gui.c:478
+#: ../src/dialogs/close-confirmation-dialog.c:561
 #, c-format
-msgid "%s [ %i Untranslated left ]"
-msgid_plural "%s [ %i Untranslated left ]"
-msgstr[0] "%s [ %i uoversatt igjen ]"
-msgstr[1] "%s [ %i uoversatte igjen ]"
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../src/gui.c:478 ../src/gui.c:480 ../src/main_window.glade.h:34
-#: ../src/messages-table.c:259
-msgid "Untranslated"
-msgstr "Uoversatt"
+#: ../src/dialogs/close-confirmation-dialog.c:579
+msgid "Docum_ents with unsaved changes:"
+msgstr ""
 
-#: ../src/gui.c:480
-#, c-format
-msgid "%s [ No untranslated left ]"
-msgstr "%s [ Ingen uoversatte igjen ]"
+#: ../src/dialogs/close-confirmation-dialog.c:581
+msgid "S_elect the documents you want to save:"
+msgstr ""
 
-#: ../src/gui.c:500
-#, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "Melding %d / %d / Status: %s (Meldingen inneholder flertallsformer)"
+#: ../src/dialogs/close-confirmation-dialog.c:600
+msgid "Saving has been disabled by the system administrator."
+msgstr ""
 
-#: ../src/gui.c:504
-#, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr "Melding %d / %d / Status: %s"
+#: ../src/dialogs/close-confirmation-dialog.c:602
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr ""
 
-#: ../src/header_dialog.glade.h:1 ../src/preferences.glade.h:22
-msgid "Charset:"
-msgstr "Tegnsett:"
+#: ../src/dialogs/comment-dialog.c:92
+msgid "Edit Comment"
+msgstr "Rediger kommentar"
 
-#: ../src/header_dialog.glade.h:2
-msgid "Comments:"
-msgstr "Kommentarer:"
+#: ../src/dialogs/comment-dialog.glade.h:1
+msgid "<b>Write your comments bellow:</b>"
+msgstr ""
 
-#: ../src/header_dialog.glade.h:3 ../src/preferences.glade.h:26
-msgid "Encoding:"
-msgstr "Koding:"
+#: ../src/dialogs/file-dialogs.c:60
+msgid "Gettext translation"
+msgstr "Gettext-oversettelse"
 
-#: ../src/header_dialog.glade.h:4 ../src/preferences.glade.h:32
-msgid "Language group's email:"
+#: ../src/dialogs/file-dialogs.c:65
+msgid "Gettext translation template"
+msgstr "Gettext-oversettelsesmal"
+
+#: ../src/dialogs/file-dialogs.c:70
+msgid "All files"
+msgstr "Alle filer"
+
+#: ../src/dialogs/header-dialog.c:252
+msgid "Edit Header"
+msgstr "Rediger hode"
+
+#: ../src/dialogs/header-dialog.glade.h:1
+msgid "Char_set:"
+msgstr "Tegn_sett:"
+
+#: ../src/dialogs/header-dialog.glade.h:2
+msgid "Comment"
+msgstr "Kommentar"
+
+#: ../src/dialogs/header-dialog.glade.h:3
+msgid "Enc_oding:"
+msgstr "K_oding:"
+
+#: ../src/dialogs/header-dialog.glade.h:4
+#, fuzzy
+msgid "Language gro_up email:"
 msgstr "Språkgruppens e-postadresse:"
 
-#: ../src/header_dialog.glade.h:5 ../src/preferences.glade.h:33
-msgid "Language:"
-msgstr "Språk:"
-
-#: ../src/header_dialog.glade.h:6
-msgid "Po file revision date:"
+#: ../src/dialogs/header-dialog.glade.h:5
+#, fuzzy
+msgid "Po file _revision date:"
 msgstr "po-fil revisjonsdato:"
 
-#: ../src/header_dialog.glade.h:7
-msgid "Pot file creation date:"
+#: ../src/dialogs/header-dialog.glade.h:6
+#, fuzzy
+msgid "Pot _file creation date:"
 msgstr "Dato for oppretting av Pot-fil:"
 
-#: ../src/header_dialog.glade.h:8
+#: ../src/dialogs/header-dialog.glade.h:7
 msgid "Project"
 msgstr "Prosjekt"
 
-#: ../src/header_dialog.glade.h:9
-msgid "Project name:"
-msgstr "Prosjektnavn:"
-
-#: ../src/header_dialog.glade.h:10
-msgid "Project version:"
+#: ../src/dialogs/header-dialog.glade.h:8
+#, fuzzy
+msgid "Project Id _version:"
 msgstr "Prosjektversjon:"
 
-#: ../src/header_dialog.glade.h:11
-msgid "Report message string bugs to:"
+#: ../src/dialogs/header-dialog.glade.h:9
+#, fuzzy
+msgid "Report message _bugs to:"
 msgstr "Rapporter feil i meldingsstreng til:"
 
-#: ../src/header_dialog.glade.h:12
+#: ../src/dialogs/header-dialog.glade.h:10
 msgid "Translator and Language"
 msgstr "Oversetter og språk"
 
-#: ../src/header_dialog.glade.h:13
-msgid "Translator's e-mail:"
-msgstr "Oversetters e-post:"
+#: ../src/dialogs/header-dialog.glade.h:11
+msgid "Translator's _email:"
+msgstr "Oversetters _e-post:"
 
-#: ../src/header_dialog.glade.h:14
-msgid "Translator's name:"
-msgstr "Oversetters navn:"
+#: ../src/dialogs/header-dialog.glade.h:12
+msgid "Translator's _name:"
+msgstr "Oversetters _navn:"
 
-#: ../src/header_dialog.glade.h:15
+#: ../src/dialogs/header-dialog.glade.h:13
 msgid "Use my options to complete the following entries:"
 msgstr "Bruk mine alternativer til å fylle ut følgende oppføringer:"
 
-#: ../src/header_dialog.glade.h:16
-msgid "gtk-close"
+#: ../src/dialogs/header-dialog.glade.h:14
+#: ../src/dialogs/profile-dialog.glade.h:9
+msgid "_Language:"
+msgstr "S_pråk:"
+
+#: ../src/dialogs/jump-dialog.c:87
+msgid "Jump To"
+msgstr "Hopp til"
+
+#: ../src/dialogs/jump-dialog.glade.h:1
+#, fuzzy
+msgid "<b>Enter message number:</b>"
+msgstr "Gå til meldingsnummer:"
+
+#: ../src/dialogs/jump-dialog.glade.h:2
+msgid "gtk-cancel"
 msgstr ""
 
-#: ../src/header_dialog.glade.h:17
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- rediger header"
-
-#: ../src/header_stuff.c:128
-msgid "No header for this file/domain"
+#: ../src/dialogs/jump-dialog.glade.h:3
+msgid "gtk-ok"
 msgstr ""
 
-#: ../src/history.c:236
+#: ../src/dialogs/preferences-dialog.c:518
+msgid "Active"
+msgstr "Aktiv"
+
+#: ../src/dialogs/preferences-dialog.c:1063
+msgid ""
+"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+"profile</span>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1066
+msgid "Another profile should be selected as active before"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1078
+msgid ""
+"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+"profile?</span>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1112
+#: ../src/dialogs/preferences-dialog.glade.h:16
+msgid "Gtranslator Preferences"
+msgstr "Brukervalg for Gtranslator"
+
+#: ../src/dialogs/preferences-dialog.glade.h:2
+#, fuzzy
+msgid "<b>Anchor style:</b>"
+msgstr "<b>Lagre automatisk</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:3
+msgid "<b>Autosave</b>"
+msgstr "<b>Lagre automatisk</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:4
+msgid "<b>Configuration:</b>"
+msgstr "<b>Konfigurasjon:</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:5
+msgid "<b>Contents</b>"
+msgstr "<b>Innhold</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:6
+msgid "<b>Database:</b>"
+msgstr "<b>Database:</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:7
+msgid "<b>General</b>"
+msgstr "<b>Generelt</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:8
+msgid "<b>Scheme color:</b>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:9
+msgid "<b>Text Display</b>"
+msgstr "<b>Tekstvisning</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:10
+msgid "Add to Database"
+msgstr "Legg til i database"
+
+#: ../src/dialogs/preferences-dialog.glade.h:11
+msgid "Check _spelling"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:12
+msgid "Create a _backup copy of files before saving"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:13
+msgid "Editor"
+msgstr "Redigering"
+
+#: ../src/dialogs/preferences-dialog.glade.h:14
+msgid "Editor _font:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:15
+msgid "Files"
+msgstr "Filer"
+
+#: ../src/dialogs/preferences-dialog.glade.h:17
+msgid "Interface"
+msgstr "Grensesnitt"
+
+#: ../src/dialogs/preferences-dialog.glade.h:18
+msgid "Make _whitespace visible"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:19
+msgid "Max. # of missing words:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:20
+msgid "Max. difference in sentence length:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:21
+msgid "Plugins"
+msgstr "Tillegg"
+
+#: ../src/dialogs/preferences-dialog.glade.h:22
+msgid "Profiles"
+msgstr "Profiler"
+
+#: ../src/dialogs/preferences-dialog.glade.h:23
+msgid "Select directory contains PO files:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:24
+#, fuzzy
+msgid "Show options in translated messages"
+msgstr "Gå til neste uoversatte melding"
+
+#: ../src/dialogs/preferences-dialog.glade.h:25
+msgid ""
+"Text\n"
+"Icons\n"
+"Text + Icons\n"
+"Gnome toolbar setting\n"
+"Tabs"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:30 ../src/tab.c:656
+msgid "Translation Memory"
+msgstr "Oversettelsesminne"
+
+#: ../src/dialogs/preferences-dialog.glade.h:31
+msgid "Use _custom font"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:32
+#, fuzzy
+msgid "Use only files with this name:"
+msgstr "Lagre filen med nytt navn"
+
+#: ../src/dialogs/preferences-dialog.glade.h:33
+#, fuzzy
+msgid "_Autosave files every"
+msgstr "Intervall for automatisk lagring: "
+
+#: ../src/dialogs/preferences-dialog.glade.h:34
+#, fuzzy
+msgid "_Delete compiled GMO files"
+msgstr "Slett kompilerte filer (f.eks «prosjekt.gmo»)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:35
+msgid "_Highlight message syntax"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:36
+#, fuzzy
+msgid "_Remove fuzzy status if message is changed"
+msgstr "Fjern antattstatus hvis meldingen endres"
+
+#: ../src/dialogs/preferences-dialog.glade.h:37
+#, fuzzy
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "«Gi advarsel hvis po-filen inneholder uferdige oversettelser»"
+
+#: ../src/dialogs/preferences-dialog.glade.h:38
+msgid "_minutes"
+msgstr "_minutter"
+
+#: ../src/dialogs/profile-dialog.c:248
+msgid ""
+"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
+msgstr ""
+
+#: ../src/dialogs/profile-dialog.c:327
+#, fuzzy
+msgid "gtranslator Profile"
+msgstr "gtranslator PO-fil redigerer"
+
+#: ../src/dialogs/profile-dialog.c:360
+msgid "Example: nplurals=2; plural=(n != 1);"
+msgstr ""
+
+#: ../src/dialogs/profile-dialog.glade.h:1
+msgid "<b>Language Settings</b>"
+msgstr "<b>Språkinnstillinger</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:2
+msgid "<b>Profile Information</b>"
+msgstr "<b>Profilinformasjon</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:3
+msgid "<b>Translator Information</b>"
+msgstr "<b>Informasjon om oversetter</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:4
+msgid "Character _set"
+msgstr "Tegn_sett"
+
+#: ../src/dialogs/profile-dialog.glade.h:5
+#, fuzzy
+msgid "Language _code:"
+msgstr "Språkkode:"
+
+#: ../src/dialogs/profile-dialog.glade.h:6
+msgid "N_ame:"
+msgstr "N_avn:"
+
+#: ../src/dialogs/profile-dialog.glade.h:7
+msgid "Transfer en_coding:"
+msgstr ""
+
+#: ../src/dialogs/profile-dialog.glade.h:8
+msgid "_Email:"
+msgstr "_E-post:"
+
+#: ../src/dialogs/profile-dialog.glade.h:10
+msgid "_Name:"
+msgstr "_Navn:"
+
+#: ../src/dialogs/profile-dialog.glade.h:11
+#, fuzzy
+msgid "_Plural forms:"
+msgstr "Streng for flertallsformer:"
+
+#: ../src/dialogs/profile-dialog.glade.h:12
+msgid "_Team email:"
+msgstr ""
+
+#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.glade.h:4
+msgid "Replace"
+msgstr "Erstatt"
+
+#: ../src/dialogs/search-dialog.c:343
+msgid "Find"
+msgstr "Finn"
+
+#: ../src/dialogs/search-dialog.c:438
+msgid "Replace _All"
+msgstr "Erstatt _alle"
+
+#: ../src/dialogs/search-dialog.c:441
+msgid "_Replace"
+msgstr "E_rstatt"
+
+#: ../src/dialogs/search-dialog.glade.h:1
+msgid "Include fuzzy strings"
+msgstr ""
+
+#: ../src/dialogs/search-dialog.glade.h:2
+msgid "Match _entire word only"
+msgstr ""
+
+#: ../src/dialogs/search-dialog.glade.h:3
+msgid "Original text"
+msgstr "Opprinnelig tekst"
+
+#: ../src/dialogs/search-dialog.glade.h:5
+msgid "Replace All"
+msgstr "Erstatt alle"
+
+#: ../src/dialogs/search-dialog.glade.h:6
+msgid "Replace _with: "
+msgstr "Erstatt _med: "
+
+#: ../src/dialogs/search-dialog.glade.h:7
+msgid "Search _backwards"
+msgstr "Søk _bakover"
+
+#: ../src/dialogs/search-dialog.glade.h:8
+msgid "Translated text"
+msgstr "Oversatt tekst"
+
+#: ../src/dialogs/search-dialog.glade.h:9
+msgid "_Match case"
+msgstr ""
+
+#: ../src/dialogs/search-dialog.glade.h:10
+msgid "_Search for: "
+msgstr "_Søk etter: "
+
+#: ../src/dialogs/search-dialog.glade.h:11
+msgid "_Wrap around"
+msgstr ""
+
+#: ../src/main.c:46
+msgid "[FILE...]"
+msgstr "[FIL...]"
+
+#: ../src/main.c:72
 #, c-format
-msgid "Open %s"
-msgstr "Åpne %s"
-
-#: ../src/languages.c:41
-msgid "Afrikaans"
-msgstr "Afrikaans"
-
-#: ../src/languages.c:45
-msgid "Albanian"
-msgstr "Albansk"
-
-#: ../src/languages.c:49
-msgid "Arabic"
-msgstr "Arabisk"
-
-#: ../src/languages.c:53
-msgid "Azerbaijani Turkish"
-msgstr "Asserbadsjansk tyrkisk"
-
-#: ../src/languages.c:57
-msgid "Basque"
-msgstr "Baskisk"
-
-#: ../src/languages.c:61
-msgid "Belarusian"
-msgstr "Hviterussisk"
-
-#: ../src/languages.c:65
-msgid "Bengali"
-msgstr "Bengali"
-
-#: ../src/languages.c:69
-msgid "Britton"
-msgstr "Britton"
-
-#: ../src/languages.c:73
-msgid "Bulgarian"
-msgstr "Bulgarsk"
-
-#: ../src/languages.c:77
-msgid "Catalan"
-msgstr "Katalansk"
-
-#: ../src/languages.c:81
-msgid "Chinese/Simplified"
-msgstr "Kinesisk/Forenklet"
-
-#: ../src/languages.c:85
-msgid "Chinese/Traditional"
-msgstr "Kinesisk/Tradisjonell"
-
-#: ../src/languages.c:89
-msgid "Croatian"
-msgstr "Koratisk"
-
-#: ../src/languages.c:93
-msgid "Czech"
-msgstr "Tjekkisk"
-
-#: ../src/languages.c:97
-msgid "Danish"
-msgstr "Dansk"
-
-#: ../src/languages.c:101
-msgid "Dutch"
-msgstr "Nederlandsk"
-
-#: ../src/languages.c:109
-msgid "English/Canada"
-msgstr "Engelsk/Kanada"
-
-#: ../src/languages.c:113
-msgid "English/GB"
-msgstr "Engelsk/GB"
-
-#: ../src/languages.c:117
-msgid "English/USA"
-msgstr "Engelsk/USA"
-
-#: ../src/languages.c:121
-msgid "Esperanto"
-msgstr "Esperanto"
-
-#: ../src/languages.c:125
-msgid "Estonian"
-msgstr "Estlandsk"
-
-#: ../src/languages.c:129
-msgid "Persian"
-msgstr "Persisk"
-
-#: ../src/languages.c:133
-msgid "Finnish"
-msgstr "Finsk"
-
-#: ../src/languages.c:137
-msgid "French"
-msgstr "Fransk"
-
-#: ../src/languages.c:141
-msgid "Galician"
-msgstr "Galisisk"
-
-#: ../src/languages.c:145
-msgid "German"
-msgstr "Tysk"
-
-#: ../src/languages.c:149
-msgid "Greek"
-msgstr "Gresk"
-
-#: ../src/languages.c:153
-msgid "Gujarati"
-msgstr "Gujarati"
-
-#: ../src/languages.c:157
-msgid "Hebrew"
-msgstr "Hebraisk"
-
-#: ../src/languages.c:161
-msgid "Hindi"
-msgstr "Hindi"
-
-#: ../src/languages.c:165
-msgid "Hungarian"
-msgstr "Ungarsk"
-
-#: ../src/languages.c:169
-msgid "Icelandic"
-msgstr "Islandsk"
-
-#: ../src/languages.c:173
-msgid "Indonesian"
-msgstr "Indonesisk"
-
-#: ../src/languages.c:177
-msgid "Italian"
-msgstr "Italiensk"
-
-#: ../src/languages.c:181
-msgid "Irish"
-msgstr "Irsk"
-
-#: ../src/languages.c:185
-msgid "Japanese"
-msgstr "Japansk"
-
-#: ../src/languages.c:189
-msgid "Kannada"
-msgstr "Kanadisk"
-
-#: ../src/languages.c:193
-msgid "Korean"
-msgstr "Koreansk"
-
-#: ../src/languages.c:197
-msgid "Kurdish"
-msgstr "Kurdisk"
-
-#: ../src/languages.c:201
-msgid "Latvian"
-msgstr "Latvisk"
-
-#: ../src/languages.c:205
-msgid "Lithuanian"
-msgstr "Lithausk"
-
-#: ../src/languages.c:209
-msgid "Malay/Bahasa Melayu"
-msgstr "Malay/Bahasa Melayu"
-
-#: ../src/languages.c:213
-msgid "Maltese"
-msgstr "Maltesisk"
-
-#: ../src/languages.c:217
-msgid "Marathi"
-msgstr "Marathi"
-
-#: ../src/languages.c:221
-msgid "Mongolian"
-msgstr "Mongolsk"
-
-#: ../src/languages.c:225
-msgid "Norwegian/Bokmaal"
-msgstr "Norsk/Bokmål"
-
-#: ../src/languages.c:229
-msgid "Norwegian/Nynorsk"
-msgstr "Norsk/nynorsk"
-
-#: ../src/languages.c:233
-msgid "Occitan"
-msgstr "Occitan"
-
-#: ../src/languages.c:237
-msgid "Punjabi"
-msgstr "Punjabi"
-
-#: ../src/languages.c:241
-msgid "Polish"
-msgstr "Polsk"
-
-#: ../src/languages.c:245
-msgid "Portuguese"
-msgstr "Portugisisk"
-
-#: ../src/languages.c:249
-msgid "Portuguese/Brazil"
-msgstr "Portugisisk/Brasil"
-
-#: ../src/languages.c:253
-msgid "Romanian"
-msgstr "Rumensk"
-
-#: ../src/languages.c:257
-msgid "Russian"
-msgstr "Russisk"
-
-#: ../src/languages.c:261
-msgid "Serbian/Cyrillic"
-msgstr "Serbisk/Kyrillisk"
-
-#: ../src/languages.c:265
-msgid "Serbian/Latin"
-msgstr "Serbisk/Latin"
-
-#: ../src/languages.c:269
-msgid "Slovak"
-msgstr "Slovakisk"
-
-#: ../src/languages.c:273
-msgid "Slovenian"
-msgstr "Slovensk"
-
-#: ../src/languages.c:277
-msgid "Spanish"
-msgstr "Spansk"
-
-#: ../src/languages.c:281
-msgid "Spanish/Spain"
-msgstr "Spansk/Spania"
-
-#: ../src/languages.c:285
-msgid "Spanish/Mexico"
-msgstr "Spansk/Mexico"
-
-#: ../src/languages.c:289
-msgid "Swedish"
-msgstr "Svensk"
-
-#: ../src/languages.c:293
-msgid "Tagalog"
-msgstr "Tagalog"
-
-#: ../src/languages.c:297
-msgid "Tamil"
-msgstr "Tamil"
-
-#: ../src/languages.c:301
-msgid "Telugu"
-msgstr "Telugu"
-
-#: ../src/languages.c:305
-msgid "Thai"
-msgstr "Thai"
-
-#: ../src/languages.c:309
-msgid "Turkish"
-msgstr "Tyrkisk"
-
-#: ../src/languages.c:313
-msgid "Ukrainian"
-msgstr "Ukrainsk"
-
-#: ../src/languages.c:317
-msgid "Urdu"
-msgstr "Urdu"
-
-#: ../src/languages.c:321
-msgid "Uzbekian"
-msgstr "Usbekisk"
-
-#: ../src/languages.c:325
-msgid "Vietnamese"
-msgstr "Vietnamesisk"
-
-#: ../src/languages.c:329
-msgid "Walloon"
-msgstr "Walloon"
-
-#: ../src/languages.c:333
-msgid "Welsh"
-msgstr "Walisisk"
-
-#: ../src/learn.c:383
-#, c-format
-msgid "gtranslator learn buffer statistics:"
-msgstr "statistikk for gtranslator læringsbuffer::"
-
-#: ../src/learn.c:386
-#, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr "Filnavn for læringsbuffer: «%s»"
-
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: ../src/learn.c:392
-#, c-format
-msgid "Encoding: `%s'"
-msgstr "Koding: «%s»"
-
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: ../src/learn.c:398
-#, c-format
-msgid "Serial: `%i'"
-msgstr "Serienummer: «%i»"
-
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: ../src/learn.c:404
-#, c-format
-msgid "Number of entries: `%i'"
-msgstr "Antall oppføringer: «%i»"
-
-#: ../src/main.c:70
-msgid "Specify main window geometry"
-msgstr "Spesifiser geometri for hovedvinduet"
-
-#: ../src/main.c:70
-msgid "GEOMETRY"
-msgstr "GEOMETRI"
-
-#: ../src/main.c:118
+msgid "%s: malformed file name or URI.\n"
+msgstr ""
+
+#: ../src/main.c:108
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#. Setup command line options
+#: ../src/main.c:111
+msgid "- Edit PO files"
+msgstr "- Rediger PO-filer"
+
+#: ../src/main.c:121
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Feil under initiering av GConf: %s."
 
-#: ../src/main.c:152
+#: ../src/main.c:139
 #, c-format
 msgid "Error setting the default window icon: %s"
 msgstr ""
 
-#: ../src/main.c:255
+#: ../src/message-table.c:284
+msgid "Status"
+msgstr "Status"
+
+#: ../src/message-table.c:297
+msgid "ID"
+msgstr "ID"
+
+#: ../src/message-table.c:313
+msgid "Original Text"
+msgstr "Original tekst"
+
+#: ../src/message-table.c:329
+msgid "Translated Text"
+msgstr "Oversatt tekst"
+
+#: ../src/notebook.c:94
 #, c-format
-msgid "Couldn't open '%s': %s\n"
-msgstr "Kunne ikke åpne '%s': %s\n"
+msgid "<b>Path:</b> %s"
+msgstr "<b>Sti:</b> %s"
 
-#: ../src/main_window.glade.h:1
-msgid "<b>Translation memories</b>"
-msgstr ""
+#: ../src/notebook.c:153
+msgid "Close document"
+msgstr "Lukk dokument"
 
-#: ../src/main_window.glade.h:2
-msgid "Aut_otranslate..."
-msgstr "_Oversett automatisk..."
-
-#: ../src/main_window.glade.h:3
-msgid "C_omment..."
-msgstr "K_ommentar..."
-
-#: ../src/main_window.glade.h:5
-msgid "Charmap"
-msgstr ""
-
-#: ../src/main_window.glade.h:6
-msgid "Copy _message -> translation"
-msgstr "Kopier _melding -> oversettelse"
-
-#: ../src/main_window.glade.h:7
-msgid "Current comment"
-msgstr "Aktiv kommentar"
-
-#: ../src/main_window.glade.h:8
-msgid "Edit comment"
-msgstr "Rediger kommentar"
-
-#: ../src/main_window.glade.h:9
-msgid "Edit current comment"
-msgstr "Rediger denne kommentaren"
-
-#: ../src/main_window.glade.h:10
-msgid "First message"
-msgstr "Første melding"
-
-#: ../src/main_window.glade.h:13
-msgid "Last message"
-msgstr "Siste melding"
-
-#: ../src/main_window.glade.h:14
-msgid "Message table"
-msgstr "Meldingstabell"
-
-#: ../src/main_window.glade.h:15
-msgid "Next _untranslated"
-msgstr "Neste _uoversatte"
-
-#: ../src/main_window.glade.h:16
-msgid "Next fuz_zy"
-msgstr "Neste uferdi_ge"
-
-#: ../src/main_window.glade.h:17
-msgid "Next message"
-msgstr "Neste melding"
-
-#: ../src/main_window.glade.h:18
-msgid "Open file"
-msgstr "Åpne fil"
-
-#: ../src/main_window.glade.h:19
-msgid "Open from _URI..."
-msgstr "Åpne fra _URI..."
-
-#: ../src/main_window.glade.h:20 ../src/messages-table.c:225
-msgid "Original"
-msgstr "Original"
-
-#: ../src/main_window.glade.h:21
-msgid "Previous message"
-msgstr "Forrige melding"
-
-#: ../src/main_window.glade.h:22
-msgid "Previously fuzz_y"
-msgstr ""
-
-#: ../src/main_window.glade.h:23
-msgid "Recen_t files"
-msgstr "Sis_te filer"
-
-#: ../src/main_window.glade.h:24
-#, fuzzy
-msgid "Refresh the current file"
-msgstr "Siste filer"
-
-#: ../src/main_window.glade.h:25
-msgid "Remove all translations..."
-msgstr "Fjern alle oversettelser..."
-
-#: ../src/main_window.glade.h:26
-msgid "Save file"
-msgstr "Lagre fil"
-
-#: ../src/main_window.glade.h:28
-msgid "Search"
-msgstr "Søk"
-
-#: ../src/main_window.glade.h:29
-msgid "Search: "
-msgstr "Søk: "
-
-#: ../src/main_window.glade.h:31
-#, fuzzy
-msgid "Translation memories"
-msgstr "Oversettelse"
-
-#: ../src/main_window.glade.h:32
-#, fuzzy
-msgid "Translation status: "
-msgstr "Skrifttype for oversettelser:"
-
-#: ../src/main_window.glade.h:33
-msgid "Undo"
-msgstr "Angre"
-
-#: ../src/main_window.glade.h:35
-msgid "_Actions"
-msgstr "H_andlinger"
-
-#: ../src/main_window.glade.h:36
-msgid "_Add bookmark"
-msgstr "_Legg til bokmerke"
-
-#: ../src/main_window.glade.h:37
-msgid "_Bookmarks"
-msgstr "_Bokmerker"
-
-#: ../src/main_window.glade.h:38
-msgid "_Colorschemes"
-msgstr "_Fargeskjema"
-
-#: ../src/main_window.glade.h:39
-msgid "_Compile"
-msgstr "_Kompiler"
-
-#: ../src/main_window.glade.h:40
-msgid "_Contents"
-msgstr "_Innhold"
-
-#: ../src/main_window.glade.h:41
-msgid "_Edit"
-msgstr "R_ediger"
-
-#: ../src/main_window.glade.h:42
-msgid "_File"
-msgstr "_Filer"
-
-#: ../src/main_window.glade.h:43
-msgid "_Go"
-msgstr "Kjør"
-
-#: ../src/main_window.glade.h:44
-msgid "_Header..."
-msgstr "_Hode..."
-
-#: ../src/main_window.glade.h:45
-msgid "_Help"
-msgstr "_Hjelp"
-
-#: ../src/main_window.glade.h:46
-#, fuzzy
-msgid "_Previously unstranslated"
-msgstr "Neste _uoversatte"
-
-#: ../src/main_window.glade.h:47
-msgid "_Revert"
-msgstr ""
-
-#: ../src/main_window.glade.h:48
-msgid "_Search next"
-msgstr "_Søk neste"
-
-#: ../src/main_window.glade.h:49
-msgid "_View"
-msgstr "_Vis"
-
-#: ../src/main_window.glade.h:50
-msgid "gtranslator _website"
-msgstr "gtranslator _webside"
-
-#: ../src/main_window.glade.h:51
-msgid "label"
-msgstr ""
-
-#: ../src/menus.c:128
-msgid "Open a po file"
-msgstr "Åpne en po-fil"
-
-#: ../src/menus.c:137
-msgid "Open a po file from a given URI"
-msgstr "Åpne en po-fil fra en gitt URI"
-
-#: ../src/menus.c:146
-msgid "Save the file"
-msgstr "Lagre filen"
-
-#: ../src/menus.c:155
-#, fuzzy
-msgid "Save the file with another name"
-msgstr "Lagre filen med nytt navn"
-
-#: ../src/menus.c:163
-msgid "..."
-msgstr "..."
-
-#: ../src/menus.c:172
-#, fuzzy
-msgid "Close the current file"
-msgstr "Kompiler po-filen"
-
-#: ../src/menus.c:181
-msgid "Quit the program"
-msgstr "Avslutt programmet"
-
-#: ../src/menus.c:192
-#, fuzzy
-msgid "Undo last operation"
-msgstr "Angre sist utførte handling"
-
-#: ../src/menus.c:201
-msgid "Cut the selected text"
-msgstr ""
-
-#: ../src/menus.c:210
-msgid "Copy the selected text"
-msgstr "Kopier valgt tekst"
-
-#: ../src/menus.c:228
-#, fuzzy
-msgid "Clear the translation text box"
-msgstr "Gettext-oversettelsesmal"
-
-#: ../src/menus.c:264
-msgid "Edit po file header"
-msgstr "Rediger hode i po-fil"
-
-#: ../src/menus.c:273
-msgid "Edit message comment"
-msgstr "Rediger kommentar for melding"
-
-#: ../src/menus.c:282
-msgid "Copy the original message contents and paste them as translation"
-msgstr "Kopier opprinnelig meldingsinnhold og lim dem inn som oversettelse"
-
-#: ../src/menus.c:291
-msgid "Toggle fuzzy status of a message"
-msgstr "Slå på/av uferdig-status for en melding"
-
-#: ../src/menus.c:300
-#, fuzzy
-msgid "Edit gtranslator preferences"
-msgstr "gtranslator -- erstatt"
-
-#: ../src/menus.c:311
-msgid "Compile the po file"
-msgstr "Kompiler po-filen"
-
-#: ../src/menus.c:324
-msgid "Add a bookmark for this message in this po file"
-msgstr "Legg til et bokmerke for denne meldingen i denne po-filen"
-
-#: ../src/menus.c:333
-msgid "Autotranslate the file with information from your learn buffer"
-msgstr "Oversett filen automatisk med informasjon fra innlæringsbuffer"
-
-#: ../src/menus.c:342
-msgid "Remove all existing translations from the po file"
-msgstr "Fjern alle eksisterende oversettelser fra po-filen"
-
-#: ../src/menus.c:353
-msgid "Go to first message"
-msgstr "Gå til første melding"
-
-#: ../src/menus.c:362
-msgid "Move back one message"
-msgstr "Gå tilbake en melding"
-
-#: ../src/menus.c:371
-msgid "Move forward one message"
-msgstr "Gå frem en melding"
-
-#: ../src/menus.c:380
-msgid "Go to the last message"
-msgstr "Gå til siste melding"
-
-#: ../src/menus.c:389
-#, fuzzy
-msgid "Go to especified message number"
-msgstr "Gå til spesifisert meldingsnummer"
-
-#: ../src/menus.c:398
-msgid "Go to next fuzzy message"
-msgstr "Gå til neste uferdige melding"
-
-#: ../src/menus.c:408
-#, fuzzy
-msgid "Go to previously fuzzy message"
-msgstr "Gå til neste uferdige melding"
-
-#: ../src/menus.c:417
-msgid "Go to next untranslated message"
-msgstr "Gå til neste uoversatte melding"
-
-#: ../src/menus.c:426
-#, fuzzy
-msgid "Go to previously untranslated message"
-msgstr "Gå til neste uoversatte melding"
-
-#: ../src/menus.c:442
-msgid "gtranslator's homepage on the web"
-msgstr "gtranslators hjemmeside på web"
-
-#: ../src/menus.c:451
-msgid " "
-msgstr " "
-
-#: ../src/message.c:124
-msgid "Couldn't get the message!"
-msgstr "Kunne ikke hente meldingen!"
-
-#. Message dialog
-#: ../src/message.c:148
-msgid "There are no fuzzy messages left."
-msgstr "Det finnes ingen uferdige meldinger."
-
-#. Message dialog
-#: ../src/message.c:178
-#, fuzzy
-msgid "All messages seems to be translated."
-msgstr "Alle meldinger ser ut til å være oversatt."
-
-#: ../src/message.c:209
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "gtkspell-feil: %s\n"
-
-#: ../src/message.c:210
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"GtkSpell kunne ikke initieres.\n"
-" %s"
-
-#: ../src/page.c:130
-msgid "Singular"
-msgstr ""
-
-#: ../src/page.c:132
-msgid "Plural"
-msgstr ""
-
-#: ../src/page.c:140
-#, c-format
-msgid "Plural %d"
-msgstr ""
-
-#. Error message
-#: ../src/page.c:272
-#, fuzzy
-msgid "Error autosaving file:"
-msgstr "Feil ved automatisk lagring av fil: %s"
-
-#: ../src/parse.c:86
-msgid "Parser output"
-msgstr ""
-
-#: ../src/parse.c:264
+#: ../src/po.c:365
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Feil ved åpning av fil '%s': %s"
 
-#: ../src/parse.c:286
+#: ../src/po.c:388
+#, c-format
+msgid "The file is empty"
+msgstr "Filen er tom"
+
+#: ../src/po.c:400
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr ""
 
-#: ../src/parse.c:328
+#: ../src/po.c:545
 #, c-format
 msgid "No messages obtained from parser."
 msgstr ""
 
-#: ../src/parse.c:377 ../src/parse.c:381
-msgid "N/A"
-msgstr "N/A"
-
-#.
-#. * Set window title
-#.
-#: ../src/parse.c:396
-#, c-format
-msgid "gtranslator -- %s"
-msgstr "gtranslator -- %s"
-
-#: ../src/parse.c:534
+#: ../src/po.c:786
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1301,464 +1438,487 @@ msgstr ""
 ".pot-filer genereres ved kompilering.\n"
 "Din fil bør mest sannsynlig få navnet «%s.po»."
 
-#: ../src/parse.c:575
+#: ../src/po.c:821
 #, c-format
-msgid ""
-"File %s\n"
-"contains %d fuzzy message"
-msgid_plural ""
-"File %s\n"
-"contains %d fuzzy messages"
-msgstr[0] ""
-"Fil %s\n"
-"inneholder %d uferdig melding"
-msgstr[1] ""
-"Fil %s\n"
-"inneholder %d uferdige meldinger"
+msgid "There was an error writing the PO file: %s"
+msgstr ""
 
-#: ../src/parse.c:624
+#: ../src/plugin-system/plugin-manager.c:54
+msgid "Plugin"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:55
+msgid "Enabled"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:503
+msgid "_About"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:511
+msgid "C_onfigure"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:520
+msgid "A_ctivate"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:531
+msgid "Ac_tivate All"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:536
+msgid "_Deactivate All"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:795
+msgid "Active plugins"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:824
+msgid "_About Plugin"
+msgstr ""
+
+#: ../src/plugin-system/plugin-manager.c:828
+msgid "C_onfigure Plugin"
+msgstr ""
+
+#: ../src/prefs-manager.c:138
+msgid "Cannot initialize preferences manager."
+msgstr ""
+
+#: ../src/prefs-manager.c:458
 #, c-format
-msgid "The file '%s' already exists. Do you want overwrite it?"
-msgstr "Filen «%s» eksisterer allerede. Vil du overskrive den?"
-
-#: ../src/preferences.c:182
-msgid "Couldn't generate the current date!"
-msgstr "Kunne ikke generere dagens dato!"
-
-#: ../src/preferences.glade.h:1 ../src/prefs.c:509
-msgid " Categories: "
-msgstr " Kategorier: "
-
-#: ../src/preferences.glade.h:2
-msgid "\"&\" (KDE)"
-msgstr "«&» (KDE)"
-
-#: ../src/preferences.glade.h:3
-msgid "\"_\" (GNOME)"
-msgstr "«_» (GNOME)"
-
-#: ../src/preferences.glade.h:4
-msgid "<b>Autosave</b>"
-msgstr "<b>Lagre automatisk</b>"
-
-#: ../src/preferences.glade.h:5
-msgid "<b>Contents</b>"
-msgstr "<b>Innhold</b>"
-
-#: ../src/preferences.glade.h:6
-msgid "<b>Fuzzy matching</b>"
-msgstr "<b>Antatte treff</b>"
-
-#: ../src/preferences.glade.h:7
-msgid "<b>General</b>"
-msgstr "<b>Generelt</b>"
-
-#: ../src/preferences.glade.h:8
-msgid "<b>Language settings</b>"
-msgstr "<b>Språkinnstillinger</b>"
-
-#: ../src/preferences.glade.h:9
-msgid "<b>Messages table</b>"
-msgstr "<b>Meldingstabell</b>"
-
-#: ../src/preferences.glade.h:10
-msgid "<b>Personal Information</b>"
-msgstr "<b>Personlig informasjon</b>"
-
-#: ../src/preferences.glade.h:11
-msgid "<b>Recent files</b>"
-msgstr "<b>Siste filer</b>"
-
-#: ../src/preferences.glade.h:12
-msgid "<b>Text display</b>"
-msgstr "<b>Tekstvisning</b>"
-
-#: ../src/preferences.glade.h:13
-msgid "Append a suffix to automatically saved files"
-msgstr "Legg til et suffiks til automatisk lagrede filer"
-
-#: ../src/preferences.glade.h:14
-#, fuzzy
-msgid "Apply own colors"
-msgstr "Bruk egne skrifter"
-
-#: ../src/preferences.glade.h:15
-msgid "Apply own fonts"
-msgstr "Bruk egne skrifter"
-
-#: ../src/preferences.glade.h:16
-msgid "Author's email:"
-msgstr "Forfatters e-postadresse:"
-
-#: ../src/preferences.glade.h:17
-msgid "Author's name:"
-msgstr "Forfatters navn:"
-
-#: ../src/preferences.glade.h:18
-msgid "Automatically learn a newly translated message"
-msgstr "Lær en oversatt melding automatisk"
-
-#: ../src/preferences.glade.h:19
-msgid "Automatically save at regular intervals"
-msgstr "Lagre automatisk med jevne mellomrom"
-
-#: ../src/preferences.glade.h:20
-msgid "Autosave interval: "
-msgstr "Intervall for automatisk lagring: "
-
-#: ../src/preferences.glade.h:21
-msgid "Background color:"
-msgstr "Bakgrunnsfarge:"
-
-#: ../src/preferences.glade.h:23
-msgid "Check recent files before showing in recent files list"
-msgstr "Sjekk siste filer før de vises på listen over nylig åpnede"
-
-#: ../src/preferences.glade.h:24
-msgid "Collapse all entries by default"
-msgstr "Slå sammen alle oppføringer som forvalg"
-
-#: ../src/preferences.glade.h:25
-#, fuzzy
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Slett kompilerte filer (f.eks «prosjekt.gmo»)"
-
-#: ../src/preferences.glade.h:27
-msgid "Highlight syntax of the translation message"
-msgstr "Marker syntaks for oversettelsesmeldingen"
-
-#: ../src/preferences.glade.h:28
-msgid "Hotkey indicating character:"
-msgstr "Tegn som indikerer hurtigtast:"
-
-#: ../src/preferences.glade.h:29
-msgid "Instant spell checking"
-msgstr "Automatisk stavekontroll"
-
-#: ../src/preferences.glade.h:30
-msgid "Keep obsolete messages in the po files"
-msgstr "Behold utgåtte meldinger i po-filer"
-
-#: ../src/preferences.glade.h:31
-msgid "Language code:"
-msgstr "Språkkode:"
-
-#: ../src/preferences.glade.h:34
-msgid "Maximum number of entries in the recent files list:"
-msgstr "Maksimalt antall oppføringer i listen over sist åpnede filer:"
-
-#: ../src/preferences.glade.h:35
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "Minstekrav til likhetsprosent for spørringer på antatte:"
-
-#: ../src/preferences.glade.h:36
-#, fuzzy
-msgid "Number of plurals: "
-msgstr "Antall oppføringer: «%i»"
-
-#: ../src/preferences.glade.h:37
-msgid "Original text font:"
-msgstr "Opprinnelig skrifttype for tekst:"
-
-#: ../src/preferences.glade.h:38
-msgid "Plural forms string:"
-msgstr "Streng for flertallsformer:"
-
-#: ../src/preferences.glade.h:39
-msgid "Query the personal learn buffer while autotranslating"
-msgstr ""
-"Spør også i personlig læringsbuffer under automatisk oversetting av meldinger"
-
-#: ../src/preferences.glade.h:40
-msgid "Remove fuzzy status if message is changed"
-msgstr "Fjern antattstatus hvis meldingen endres"
-
-#: ../src/preferences.glade.h:41
-msgid "Save geometry on exit and restore it on startup"
-msgstr "Lagre geometri når programmet avsluttes og gjenopprett ved oppstart"
-
-#: ../src/preferences.glade.h:42
-msgid "Show instant comment view in main pane"
-msgstr "Vis kommentarvisning i hovedvinduet"
-
-#: ../src/preferences.glade.h:43
-msgid "Show the messages table (requires restart)"
-msgstr "Vis meldingstabellen (krever omstart)"
-
-#: ../src/preferences.glade.h:44
-msgid "Suffix: "
-msgstr "Suffiks: "
-
-#: ../src/preferences.glade.h:45
-msgid "Text color:"
-msgstr "Tekstfarge:"
-
-#: ../src/preferences.glade.h:46
-#, fuzzy
-msgid "The Possibility to remove all translations from a po file"
-msgstr "Aktiver funksjonalitet for å fjerne alle oversettelser fra en po-fil"
-
-#: ../src/preferences.glade.h:47
-#, fuzzy
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr "Aktiver funksjonalitet for å oppdatere en po-fil fra gtranslator"
-
-#: ../src/preferences.glade.h:48
-#, fuzzy
-msgid "Translation text font:"
-msgstr "Skrifttype for oversettelser:"
-
-#. Translators: With "fuzzy" I mean a more enhanced (and more crappy) logic while searching for appropriate translations for a original string.
-#: ../src/preferences.glade.h:50
-#, fuzzy
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
-"Bruk «fuzzy» rutiner for å finne treff under spørringer i læringsbufferen"
-
-#: ../src/preferences.glade.h:51
-msgid "Use special character to indicate white space"
-msgstr "Bruk spesielle tegn for å indikere tomrom"
-
-#: ../src/preferences.glade.h:52
-#, fuzzy
-msgid "Warn if po file contains fuzzy translations"
-msgstr "«Gi advarsel hvis po-filen inneholder uferdige oversettelser»"
-
-#: ../src/preferences.glade.h:53
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- valg av skrifttype/msgid skrifttype"
-
-#: ../src/preferences.glade.h:54
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- valg av skrifttype/msgstr skrifttype"
-
-#: ../src/preferences.glade.h:55
-msgid "gtranslator -- options"
-msgstr "gtranslator -- alternativer"
-
-#: ../src/prefs.c:533
-msgid ""
-"Note: It was not possible to determine GNU header for plural forms. \t\tYour "
-"GNU gettext tools may be too old or they do not contain \t\ta suggested "
-"value for your language."
+msgid "Expected `%s' got `%s' for key %s"
 msgstr ""
 
-#: ../src/prefs.c:542
-msgid ""
-"Note: Your settings do not contain a plural forms string. These data "
-"retrieved from GNU gettext tools."
+#: ../src/statusbar.c:114 ../src/statusbar.c:240
+msgid "INS"
 msgstr ""
 
-#: ../src/prefs.c:547
-msgid ""
-"Note: Your settings contain an invalid plural forms string. These data "
-"retrieved from GNU gettext tools."
+#: ../src/statusbar.c:114 ../src/statusbar.c:239
+msgid "OVR"
 msgstr ""
 
-#: ../src/prefs.c:631
-msgid "Files"
-msgstr "Filer"
+#: ../src/tab.c:223
+msgid "There is an error in the message:"
+msgstr ""
 
-#. General item
-#: ../src/prefs.c:638
-msgid "General"
-msgstr "Generelt"
+#: ../src/tab.c:396
+msgid "Open comment dialog"
+msgstr ""
 
-#. Autosave item
-#: ../src/prefs.c:663
-msgid "Autosave"
-msgstr "Lagre automatisk"
+#: ../src/tab.c:567
+#, c-format
+msgid "Plural %d"
+msgstr ""
 
-#. Recent item
-#: ../src/prefs.c:708
-msgid "Recent files"
-msgstr "Siste filer"
-
-#: ../src/prefs.c:740
-msgid "Editor"
-msgstr "Redigering"
-
-#. Text item
-#: ../src/prefs.c:745
-msgid "Text display"
-msgstr "Tekstvisning"
-
-#. Contents item
-#: ../src/prefs.c:807
-msgid "Contents"
-msgstr "Innhold"
-
-#: ../src/prefs.c:845
-msgid "PO header"
-msgstr "PO-topptekst"
-
-#: ../src/prefs.c:853
-msgid "Personal Information"
-msgstr "Personlig informasjon"
-
-#. #ifdef GTR_ABOUT_ME
-#. gtk_widget_set_sensitive(personal_info_box,
-#. !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(use_about_me)));
-#. g_signal_connect(G_OBJECT(use_about_me), "toggled",
-#. G_CALLBACK(toggle_insensitive), personal_info_box);
-#. #endif
-#. Language item
-#: ../src/prefs.c:926
-msgid "Language settings"
-msgstr "Språkinnstillinger"
-
-#: ../src/prefs.c:999
-msgid "Functionality"
-msgstr "Funksjonalitet"
-
-#. Messages table item
-#: ../src/prefs.c:1035
-msgid "Messages table"
+#: ../src/tab.c:613
+msgid "Message Table"
 msgstr "Meldingstabell"
 
-#: ../src/prefs.c:1062
-msgid "Autotranslation"
-msgstr "Automatisk oversettelse"
+#: ../src/tab.c:648
+msgid "Context"
+msgstr "Kontekst"
 
-#. Fuzzy item
-#: ../src/prefs.c:1086
-msgid "Fuzzy matching"
-msgstr "Antatte treff"
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:919
+#, c-format
+msgid "Show “_%s”"
+msgstr "Vis «_%s»"
 
-#: ../src/prefs.c:1164
-msgid "Please enter your name!"
-msgstr "Vennligst oppgi ditt navn!"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+msgid "_Move on Toolbar"
+msgstr ""
 
-#: ../src/prefs.c:1193
-msgid "Please enter your EMail address!"
-msgstr "Vennligst oppgi din e-postadresse!"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+#, fuzzy
+msgid "Move the selected item on the toolbar"
+msgstr "Kopier valgt tekst"
 
-#: ../src/prefs.c:1213
-msgid "Please enter a valid EMail address!"
-msgstr "Vennligst oppgi en gyldig e-postadresse!"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+msgid "_Remove from Toolbar"
+msgstr ""
 
-#: ../src/replace.c:173
-msgid "No replacements made!"
-msgstr "Ingen erstatninger utført!"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+msgid "Remove the selected item from the toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+msgid "_Delete Toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1387
+msgid "Remove the selected toolbar"
+msgstr "Fjern valgt verktøylinje"
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
+msgid "Separator"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:165
+msgid "Running recovery..."
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:173
+#, c-format
+msgid "There was an error recovering the database: %s"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:181
+#, c-format
+msgid "There was an error in database: %s"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-orig.c:52
+msgid "original.db"
+msgstr "original.db"
+
+#: ../src/translation-memory/berkeley/db-trans.c:52
+msgid "translations.db"
+msgstr "oversettelser.db"
+
+#: ../src/translation-memory/berkeley/db-words.c:53
+msgid "words.db"
+msgstr "ord.db"
+
+#: ../src/translation-memory/translation-memory-ui.c:215
+#, c-format
+msgid "Insert Option nº %d"
+msgstr ""
+
+#: ../src/utils.c:344
+#, c-format
+msgid "Unable to find file %s."
+msgstr ""
+
+#: ../src/utils.c:348 ../src/utils.c:384
+msgid "Please check your installation."
+msgstr ""
+
+#: ../src/utils.c:380
+#, c-format
+msgid "Unable to find the required widgets inside file %s."
+msgstr ""
+
+#: ../src/utils.c:788
+msgid ""
+"Unable to display help. Please make sure Gtranslator documentation package "
+"is installed."
+msgstr ""
+
+#: ../src/view.c:82
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr "gtkspell-feil: %s\n"
+
+#: ../src/view.c:83
+#, c-format
+msgid ""
+"GtkSpell was unable to initialize.\n"
+" %s"
+msgstr ""
+"GtkSpell kunne ikke initieres.\n"
+" %s"
+
+#: ../src/window.c:109
+msgid "_File"
+msgstr "_Filer"
+
+#: ../src/window.c:110
+msgid "_Edit"
+msgstr "R_ediger"
+
+#: ../src/window.c:111
+msgid "_View"
+msgstr "_Vis"
+
+#. { "Bookmarks", NULL, N_("_Bookmarks") },
+#. { "Actions", NULL, N_("_Actions") },
+#: ../src/window.c:114
+msgid "_Search"
+msgstr "_Søk"
+
+#: ../src/window.c:115
+msgid "_Go"
+msgstr "Kjør"
+
+#: ../src/window.c:116
+msgid "_Help"
+msgstr "_Hjelp"
+
+#: ../src/window.c:120
+msgid "Open a PO file"
+msgstr "Åpne en PO-fil"
+
+#: ../src/window.c:122
+msgid "_Recent Files"
+msgstr "_Siste filer"
+
+#: ../src/window.c:125
+msgid "Quit the program"
+msgstr "Avslutt programmet"
+
+#. Edit menu
+#: ../src/window.c:129
+msgid "T_oolbar"
+msgstr "Verkt_øylinje"
+
+#: ../src/window.c:132
+msgid "Edit gtranslator preferences"
+msgstr "Rediger brukervalg for Gtranslator"
+
+#: ../src/window.c:134 ../src/window.c:181
+msgid "_Header..."
+msgstr "_Hode..."
+
+#. Help menu
+#: ../src/window.c:138
+msgid "_Contents"
+msgstr "_Innhold"
+
+#: ../src/window.c:150
+#, fuzzy
+msgid "Save the current file"
+msgstr "Kompiler po-filen"
+
+#: ../src/window.c:153
+#, fuzzy
+msgid "Save the current file with another name"
+msgstr "Lagre filen med nytt navn"
+
+#: ../src/window.c:159
+#, fuzzy
+msgid "Close the current file"
+msgstr "Kompiler po-filen"
+
+#: ../src/window.c:164
+#, fuzzy
+msgid "Undo last operation"
+msgstr "Angre sist utførte handling"
+
+#: ../src/window.c:167
+#, fuzzy
+msgid "Redo last undone operation"
+msgstr "Angre sist utførte handling"
+
+#: ../src/window.c:170
+msgid "Cut the selected text"
+msgstr ""
+
+#: ../src/window.c:173
+msgid "Copy the selected text"
+msgstr "Kopier valgt tekst"
+
+#: ../src/window.c:176
+msgid "Paste the contents of the clipboard"
+msgstr ""
+
+#: ../src/window.c:179
+#, fuzzy
+msgid "Clear the selected translation"
+msgstr "Gettext-oversettelsesmal"
+
+#: ../src/window.c:183
+msgid "C_omment..."
+msgstr "K_ommentar..."
+
+#: ../src/window.c:184
+msgid "Edit message comment"
+msgstr "Rediger kommentar for melding"
+
+#: ../src/window.c:186
+#, fuzzy
+msgid "Copy _Message to Translation"
+msgstr "Kopier _melding -> oversettelse"
+
+#: ../src/window.c:187
+#, fuzzy
+msgid "Copy original message contents to the translation field"
+msgstr "Kopier opprinnelig meldingsinnhold og lim dem inn som oversettelse"
+
+#: ../src/window.c:189
+#, fuzzy
+msgid "Toggle _Fuzzy Status"
+msgstr "Slå på/av uferdig-status for en melding"
+
+#: ../src/window.c:190
+msgid "Toggle fuzzy status of a message"
+msgstr "Slå på/av uferdig-status for en melding"
+
+#: ../src/window.c:192 ../src/window.c:199
+#, fuzzy
+msgid "_Translation Memory"
+msgstr "Oversettelse"
+
+#. View menu
+#: ../src/window.c:196
+msgid "_Context"
+msgstr "_Kontekst"
+
+#: ../src/window.c:197
+msgid "Show the Context panel"
+msgstr ""
+
+#: ../src/window.c:200
+#, fuzzy
+msgid "Show the Translation Memory panel"
+msgstr "Oversettelse"
+
+#: ../src/window.c:227
+#, fuzzy
+msgid "Go to the first message"
+msgstr "Gå til første melding"
+
+#: ../src/window.c:230
+msgid "Move back one message"
+msgstr "Gå tilbake en melding"
+
+#: ../src/window.c:233
+msgid "Move forward one message"
+msgstr "Gå frem en melding"
+
+#: ../src/window.c:236
+msgid "Go to the last message"
+msgstr "Gå til siste melding"
+
+#: ../src/window.c:238
+#, fuzzy
+msgid "Next Fuz_zy"
+msgstr "Neste uferdi_ge"
+
+#: ../src/window.c:239
+#, fuzzy
+msgid "Go to the next fuzzy message"
+msgstr "Gå til neste uferdige melding"
+
+#: ../src/window.c:241
+msgid "Previous Fuzz_y"
+msgstr ""
+
+#: ../src/window.c:242
+#, fuzzy
+msgid "Go to the previous fuzzy message"
+msgstr "Gå til neste uferdige melding"
+
+#: ../src/window.c:244
+#, fuzzy
+msgid "Next _Untranslated"
+msgstr "Neste _uoversatte"
+
+#: ../src/window.c:245
+#, fuzzy
+msgid "Go to the next untranslated message"
+msgstr "Gå til neste uoversatte melding"
+
+#: ../src/window.c:247
+#, fuzzy
+msgid "Previ_ous Untranslated"
+msgstr "Neste _uoversatte"
+
+#: ../src/window.c:248
+#, fuzzy
+msgid "Go to the previous untranslated message"
+msgstr "Gå til neste uoversatte melding"
+
+#: ../src/window.c:250
+#, fuzzy
+msgid "Next Fu_zzy or Untranslated"
+msgstr "Neste _uoversatte"
+
+#: ../src/window.c:251
+#, fuzzy
+msgid "Go to the next fuzzy or untranslated message"
+msgstr "Gå til neste uoversatte melding"
+
+#: ../src/window.c:253
+#, fuzzy
+msgid "Pre_vious Fuzzy or Untranslated"
+msgstr "Neste _uoversatte"
+
+#: ../src/window.c:254
+#, fuzzy
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "Gå til neste uoversatte melding"
+
+#: ../src/window.c:257
+#, fuzzy
+msgid "Jumps to a specific message"
+msgstr "Gå til spesifisert meldingsnummer"
+
+#: ../src/window.c:262
+msgid "Search for text"
+msgstr "Søk etter tekst"
+
+#: ../src/window.c:271
+msgid "Search for and replace text"
+msgstr ""
+
+#: ../src/window.c:730
+msgid "Untranslated"
+msgstr "Uoversatt"
+
+#: ../src/window.c:732
+msgid "Translated"
+msgstr "Oversatt"
+
+#: ../src/window.c:734
+msgid "Fuzzy"
+msgstr "Uferdig"
+
+#: ../src/window.c:739
+#, c-format
+msgid "Status: %s"
+msgstr "Status: %s"
+
+#: ../src/window.c:740
+#, c-format
+msgid "Current: %d"
+msgstr "Aktiv: %d"
+
+#: ../src/window.c:741
+#, c-format
+msgid "Total: %d"
+msgstr "Totalt: %d"
+
+#: ../src/window.c:742
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "Uferdig: %d"
+
+#: ../src/window.c:743
+#, c-format
+msgid "Untranslated: %d"
+msgstr "Uoversatt: %d"
 
 #.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
+#. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/runtime-config.c:72
-msgid "Y"
-msgstr "Y"
-
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
-msgid "^"
-msgstr "^"
-
-#: ../src/save.c:118
+#: ../src/window.c:847 ../src/window.c:851
 #, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "Kunne ikke lagre kompilert gettext-fil `%s'!"
+msgid "gtranslator - %s"
+msgstr "gtranslator - %s"
 
-#: ../src/save.c:168
+#: ../src/window.c:849
 #, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "Kunne ikke lagre komprimert gettext-fil `%s'!"
+msgid "gtranslator - *%s"
+msgstr "gtranslator - *%s"
 
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: ../src/save.c:178
-#, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "Kunne ikke lagre %s gettext-fil `%s'!"
+#: ../src/window.c:856
+msgid "gtranslator"
+msgstr "gtranslator"
 
-#: ../src/save.c:243
-#, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "Kunne ikke lagre zippet po-fil `%s'!"
+#: ../src/window.c:1205
+msgid "Toolbar Editor"
+msgstr "Redigering av verktøylinje"
 
-#: ../src/session.c:88
-msgid "Session restored successfully."
-msgstr "Gjenoppretting av sesjonen fullført."
+#: ../src/window.c:1523
+msgid "Documents"
+msgstr "Dokumenter"
 
-#: ../src/sighandling.c:69
-#, c-format
-msgid "Saving file failed: %s"
-msgstr "Lagring av fil feilet: %s"
-
-#: ../src/stylistics.c:283
-msgid "No font set! Using default font"
-msgstr "Skrifttype ikke satt! Bruker standard skrifttype"
-
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: ../src/stylistics.c:289
-msgid "Sans 10"
-msgstr "Sans 10"
-
-#: ../src/utils.c:275 ../src/utils.c:292
-#, c-format
-msgid "Can't create directory `%s'!"
-msgstr "Kan ikke opprette katalog `%s'!"
-
-#: ../src/utils.c:874
-msgid "Sorry, msginit isn't available on your system!"
-msgstr "Beklager, msginit er ikke tilgjengelig på ditt system!"
-
-#: ../src/utils_gui.c:145
-#, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "Geometri-streng \"%s\" kunne ikke leses!"
-
-#: ../src/utils_gui.c:359
-#, c-format
-msgid "The necessary decompression program `%s' is not installed!"
-msgstr "Nødvendig program for dekomprimering, «%s», er ikke installert!"
-
-#: ../src/utils_gui.c:364
-#, c-format
-msgid "The necessary compression program `%s' is not installed!"
-msgstr "Nødvendig program for komprimering, «%s», er ikke installert!"
-
-#: ../src/vfs-handle.c:125
-#, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr "Kunne ikke opprette midlertidig katalog `%s'!"
-
-#: ../src/vfs-handle.c:153
-#, c-format
-msgid "File `%s' couldn't be found!"
-msgstr "Fil `%s' ble ikke funnet!"
-
-#: ../src/vfs-handle.c:158
-#, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr "Feilutformet URI `%s' oppgitt!"
-
-#: ../src/vfs-handle.c:163
-#, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr "Vert `%s' ble ikke funnet!"
-
-#: ../src/vfs-handle.c:168
-#, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr "Ugyldig vertsnavn `%s'!"
-
-#: ../src/vfs-handle.c:173
-#, c-format
-msgid "Host `%s' has no address!"
-msgstr "Vert `%s' har ingen adresse!"
-
-#: ../src/vfs-handle.c:178
-msgid "Transfer interrupted!"
-msgstr "Overføring avbrutt!"
