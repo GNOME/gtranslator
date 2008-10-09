@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 23:48+0200\n"
-"PO-Revision-Date: 2008-09-25 23:34+0200\n"
+"POT-Creation-Date: 2008-10-09 23:43+0200\n"
+"PO-Revision-Date: 2008-10-10 00:00+0200\n"
 "Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -194,6 +194,26 @@ msgstr "Vollbild"
 msgid "Place window in the fullscreen state."
 msgstr "Fenster in den Vollbildmodus schalten"
 
+#: ../plugins/insert-params/insert-params-plugin.c:79
+msgid "_Next Param"
+msgstr "_Nächster Platzhalter"
+
+#: ../plugins/insert-params/insert-params-plugin.c:80
+msgid "Insert the next param of the message"
+msgstr "Den nächsten Platzhalter in die Meldung einfügen"
+
+#: ../plugins/insert-params/insert-params-plugin.c:82
+msgid "_Insert Params"
+msgstr "Platzhalter _einfügen"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Params"
+msgstr "Platzhalter einfügen"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+msgid "Parameters detection and easy insertion."
+msgstr "Platzhalter erkennen und leicht einfügen."
+
 #: ../plugins/insert-tags/insert-tags-plugin.c:70
 msgid "_Next Tag"
 msgstr "_Nächste Marke"
@@ -258,7 +278,7 @@ msgstr "FEHLER: %d %s\n"
 msgid "WRONG! Can't get result element %d\n"
 msgstr "FALSCH! Ergebniselement »%d« kann nicht geholt werden\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:301
+#: ../plugins/open-tran/open-tran-panel.c:301 ../src/actions-search.c:200
 msgid "Phrase not found"
 msgstr "Begriff nicht gefunden"
 
@@ -791,6 +811,17 @@ msgstr ""
 msgid "Gtranslator Web Site"
 msgstr "Gtranslator-_Internet-Seite"
 
+#: ../src/actions-search.c:175
+#, c-format
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "%d Übereinstimmung wurde gefunden und ersetzt"
+msgstr[1] "%d Übereinstimmungen wurden gefunden und ersetzt"
+
+#: ../src/actions-search.c:185
+msgid "Found and replaced one occurrence"
+msgstr "Eine Übereinstimmung wurde gefunden und ersetzt"
+
 #: ../src/context.c:61
 msgid "Format: "
 msgstr "Format: "
@@ -980,7 +1011,7 @@ msgstr "Gettext-Übersetzungsvorlage"
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: ../src/dialogs/header-dialog.c:235
+#: ../src/dialogs/header-dialog.c:252
 msgid "Edit Header"
 msgstr "Die _Kopfzeilen bearbeiten"
 
@@ -1053,7 +1084,7 @@ msgstr "<b>Geben Sie die Nachrichtenzahl ein:</b>"
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../src/dialogs/preferences-dialog.c:1062
+#: ../src/dialogs/preferences-dialog.c:1063
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
@@ -1061,11 +1092,11 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Das aktive Profil darf nicht entfernt "
 "werden</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1065
+#: ../src/dialogs/preferences-dialog.c:1066
 msgid "Another profile should be selected as active before"
 msgstr "EIn anderes Profil sollte zuvor aktiviert werden"
 
-#: ../src/dialogs/preferences-dialog.c:1077
+#: ../src/dialogs/preferences-dialog.c:1078
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
@@ -1073,7 +1104,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Sind Sie Sicher, dass sie das Profil "
 "löschen wollen?</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1111
+#: ../src/dialogs/preferences-dialog.c:1112
 #: ../src/dialogs/preferences-dialog.glade.h:16
 msgid "Gtranslator Preferences"
 msgstr "Gtranslator-Einstellungen anpassen"
@@ -1398,12 +1429,12 @@ msgstr "Die Datei ist leer"
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext hat eine leere Meldungsdomänenliste zurückgegeben."
 
-#: ../src/po.c:544
+#: ../src/po.c:545
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Vom Parser wurden keine Meldungen erhalten."
 
-#: ../src/po.c:782
+#: ../src/po.c:786
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1414,7 +1445,7 @@ msgstr ""
 "Diese Dateien werden durch das Kompilieren generiert.\n"
 "Ihre Datei sollte die po-Endung besitzen, also »%s.po«"
 
-#: ../src/po.c:816
+#: ../src/po.c:821
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Es gab einen Fehler beim Schreiben der po-Datei: %s"
@@ -1605,249 +1636,249 @@ msgstr ""
 "GtkSpell konnte nicht initializiert werden.\n"
 " %s"
 
-#: ../src/window.c:107
+#: ../src/window.c:109
 msgid "_File"
 msgstr "_Datei"
 
-#: ../src/window.c:108
+#: ../src/window.c:110
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
-#: ../src/window.c:109
+#: ../src/window.c:111
 msgid "_View"
 msgstr "_Darstellung"
 
 #. { "Bookmarks", NULL, N_("_Bookmarks") },
 #. { "Actions", NULL, N_("_Actions") },
-#: ../src/window.c:112
+#: ../src/window.c:114
 msgid "_Search"
 msgstr "_Suchen"
 
-#: ../src/window.c:113
+#: ../src/window.c:115
 msgid "_Go"
 msgstr "_Navigation"
 
-#: ../src/window.c:114
+#: ../src/window.c:116
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../src/window.c:118
+#: ../src/window.c:120
 msgid "Open a PO file"
 msgstr "Eine po-Datei öffnen"
 
-#: ../src/window.c:120
+#: ../src/window.c:122
 msgid "_Recent Files"
 msgstr "_Zuletzt geöffnete Dateien"
 
-#: ../src/window.c:123
+#: ../src/window.c:125
 msgid "Quit the program"
 msgstr "Die Anwendung beenden"
 
 #. Edit menu
-#: ../src/window.c:127
+#: ../src/window.c:129
 msgid "T_oolbar"
 msgstr "_Werkzeugleiste"
 
-#: ../src/window.c:130
+#: ../src/window.c:132
 msgid "Edit gtranslator preferences"
 msgstr "gtranslator-Einstellungen anpassen"
 
-#: ../src/window.c:132 ../src/window.c:179
+#: ../src/window.c:134 ../src/window.c:181
 msgid "_Header..."
 msgstr "_Kopfzeilen …"
 
 #. Help menu
-#: ../src/window.c:136
+#: ../src/window.c:138
 msgid "_Contents"
 msgstr "_Inhalt"
 
-#: ../src/window.c:148
+#: ../src/window.c:150
 msgid "Save the current file"
 msgstr "Die aktuelle Datei speichern"
 
-#: ../src/window.c:151
+#: ../src/window.c:153
 msgid "Save the current file with another name"
 msgstr "Die aktuelle Datei unter einem anderen Namen speichern"
 
-#: ../src/window.c:157
+#: ../src/window.c:159
 msgid "Close the current file"
 msgstr "Die aktuelle Datei schließen"
 
-#: ../src/window.c:162
+#: ../src/window.c:164
 msgid "Undo last operation"
 msgstr "Die letzte Aktion zurücknehmen"
 
-#: ../src/window.c:165
+#: ../src/window.c:167
 msgid "Redo last undone operation"
 msgstr "Die letzte Aktion wiederholen"
 
-#: ../src/window.c:168
+#: ../src/window.c:170
 msgid "Cut the selected text"
 msgstr "Den markierten Text ausschneiden"
 
-#: ../src/window.c:171
+#: ../src/window.c:173
 msgid "Copy the selected text"
 msgstr "Den markierten Text kopieren"
 
-#: ../src/window.c:174
+#: ../src/window.c:176
 msgid "Paste the contents of the clipboard"
 msgstr "Inhalt der Zwischenablage einfügen"
 
-#: ../src/window.c:177
+#: ../src/window.c:179
 msgid "Clear the selected translation"
 msgstr "Den übersetzten Meldungstext entfernen"
 
-#: ../src/window.c:181
+#: ../src/window.c:183
 msgid "C_omment..."
 msgstr "K_ommentar …"
 
-#: ../src/window.c:182
+#: ../src/window.c:184
 msgid "Edit message comment"
 msgstr "Kommentar zur Meldung bearbeiten"
 
-#: ../src/window.c:184
+#: ../src/window.c:186
 msgid "Copy _Message to Translation"
 msgstr "Orginalmeldung übertragen"
 
-#: ../src/window.c:185
+#: ../src/window.c:187
 msgid "Copy original message contents to the translation field"
 msgstr ""
 "Den Inhalt der Originalmeldung kopieren und ihn als Übersetzung einfügen"
 
-#: ../src/window.c:187
+#: ../src/window.c:189
 msgid "Toggle _Fuzzy Status"
 msgstr "Den Status »Unklar« umschalten"
 
-#: ../src/window.c:188
+#: ../src/window.c:190
 msgid "Toggle fuzzy status of a message"
 msgstr "Den Status »Unklar« einer Meldung umschalten"
 
-#: ../src/window.c:190 ../src/window.c:197
+#: ../src/window.c:192 ../src/window.c:199
 msgid "_Translation Memory"
 msgstr "Ü_bersetzungsnotizen"
 
 #. View menu
-#: ../src/window.c:194
+#: ../src/window.c:196
 msgid "_Context"
 msgstr "_Inhalt"
 
-#: ../src/window.c:195
+#: ../src/window.c:197
 msgid "Show the Context panel"
 msgstr "Das Kontextpanel anzeigen"
 
-#: ../src/window.c:198
+#: ../src/window.c:200
 msgid "Show the Translation Memory panel"
 msgstr "Übersetzungsnotizen zeigen"
 
-#: ../src/window.c:225
+#: ../src/window.c:227
 msgid "Go to the first message"
 msgstr "Zur ersten Übersetzung gehen"
 
-#: ../src/window.c:228
+#: ../src/window.c:230
 msgid "Move back one message"
 msgstr "Eine Übersetzung zurückgehen"
 
-#: ../src/window.c:231
+#: ../src/window.c:233
 msgid "Move forward one message"
 msgstr "Eine Übersetzung vorwärtsgehen"
 
-#: ../src/window.c:234
+#: ../src/window.c:236
 msgid "Go to the last message"
 msgstr "Zur letzten Übersetzung gehen"
 
-#: ../src/window.c:236
+#: ../src/window.c:238
 msgid "Next Fuz_zy"
 msgstr "_Nächste Ungenaue"
 
-#: ../src/window.c:237
+#: ../src/window.c:239
 msgid "Go to the next fuzzy message"
 msgstr "Zur nächsten ungenauen Übersetzung gehen"
 
-#: ../src/window.c:239
+#: ../src/window.c:241
 msgid "Previous Fuzz_y"
 msgstr "V_orhergehende Ungenaue"
 
-#: ../src/window.c:240
+#: ../src/window.c:242
 msgid "Go to the previous fuzzy message"
 msgstr "Zur vorhergehenden ungenauen Übersetzung gehen"
 
-#: ../src/window.c:242
+#: ../src/window.c:244
 msgid "Next _Untranslated"
 msgstr "Nächste _Unübersetzte"
 
-#: ../src/window.c:243
+#: ../src/window.c:245
 msgid "Go to the next untranslated message"
 msgstr "Zum nächsten unübersetzten Text gehen"
 
-#: ../src/window.c:245
+#: ../src/window.c:247
 msgid "Previ_ous Untranslated"
 msgstr "Vorhergehende U_nübersetzte"
 
-#: ../src/window.c:246
+#: ../src/window.c:248
 msgid "Go to the previous untranslated message"
 msgstr "Zum vorhergehenden unübersetzten Text gehen"
 
-#: ../src/window.c:248
+#: ../src/window.c:250
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Nächste _Unklare oder nicht Übersetzte"
 
-#: ../src/window.c:249
+#: ../src/window.c:251
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Zur nächsten unklaren oder fehlenden Übersetzung gehen"
 
-#: ../src/window.c:251
+#: ../src/window.c:253
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Vorhergehende U_nklare oder nicht Übersetzte"
 
-#: ../src/window.c:252
+#: ../src/window.c:254
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Zur vorhergehenden unklaren oder fehlenden Übersetzung gehen"
 
-#: ../src/window.c:255
+#: ../src/window.c:257
 msgid "Jumps to a specific message"
 msgstr "Zu einer bestimmten Meldung gehen"
 
-#: ../src/window.c:260
+#: ../src/window.c:262
 msgid "Search for text"
 msgstr "Text suchen"
 
-#: ../src/window.c:269
+#: ../src/window.c:271
 msgid "Search for and replace text"
 msgstr "Test suchen und ersetzen"
 
-#: ../src/window.c:728
+#: ../src/window.c:730
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
-#: ../src/window.c:730
+#: ../src/window.c:732
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: ../src/window.c:732
+#: ../src/window.c:734
 msgid "Fuzzy"
 msgstr "Unklar"
 
-#: ../src/window.c:737
+#: ../src/window.c:739
 #, c-format
 msgid "Status: %s"
 msgstr "Status: %s"
 
-#: ../src/window.c:738
+#: ../src/window.c:740
 #, c-format
 msgid "Current: %d"
 msgstr "Derzeit: %d"
 
-#: ../src/window.c:739
+#: ../src/window.c:741
 #, c-format
 msgid "Total: %d"
 msgstr "Insgesamt: %d"
 
-#: ../src/window.c:740
+#: ../src/window.c:742
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Unklar: %d"
 
-#: ../src/window.c:741
+#: ../src/window.c:743
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Unübersetzt: %d"
@@ -1855,27 +1886,37 @@ msgstr "Unübersetzt: %d"
 #.
 #. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/window.c:845 ../src/window.c:849
+#: ../src/window.c:847 ../src/window.c:851
 #, c-format
 msgid "gtranslator - %s"
 msgstr "gtranslator - %s"
 
-#: ../src/window.c:847
+#: ../src/window.c:849
 #, c-format
 msgid "gtranslator - *%s"
 msgstr "gtranslator - *%s"
 
-#: ../src/window.c:854
+#: ../src/window.c:856
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1203
+#: ../src/window.c:1205
 msgid "Toolbar Editor"
 msgstr "Werkzeugleisteneditor"
 
-#: ../src/window.c:1540
+#: ../src/window.c:1523
 msgid "Documents"
 msgstr "Dokumente"
+
+#~ msgctxt "ChangeLog entry"
+#~ msgid "LANGUAGE"
+#~ msgstr "GERMAN"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
 
 #~ msgid "<b>Bookmarks</b>"
 #~ msgstr "<b>Lesezeichen</b>"
