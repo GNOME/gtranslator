@@ -261,8 +261,10 @@ add_changelog_to_text_view (GtkWidget *textview)
 	
 	log = g_strdup_printf ("Updated %s translation",
 	/*
-	 * Translators: Please change LANGUAGE for your language name in ENGLISH.
+	 * Translators: Please change LANGUAGE for your language name in English.
 	 * This string is used to fill the ChangeLog entry
+	 * For example: "Updated Galician translation"
+	 * where LANGUAGE = Galician.
 	 */
 			       C_("ChangeLog entry", "LANGUAGE"));
 	
