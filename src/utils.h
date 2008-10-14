@@ -83,14 +83,16 @@ void           gtranslator_utils_help_display         (GtkWindow   *parent,
 						       
 gchar         *gtranslator_utils_get_user_config_dir  (void);
 
-gchar         *gtranslator_utils_get_current_date (void);
+gchar         *gtranslator_utils_get_current_date     (void);
 
-gchar         *gtranslator_utils_get_current_time (void);
+gchar         *gtranslator_utils_get_current_time     (void);
 
-gchar         *gtranslator_utils_get_current_year (void);
+gchar         *gtranslator_utils_get_current_year     (void);
 
-void           gtranslator_utils_scan_dir              (GFile *dir,
-							GSList **list,
-							const gchar *po_name);
+void           gtranslator_utils_scan_dir             (GFile *dir,
+						       GSList **list,
+						       const gchar *po_name);
+
+gchar *        gtranslator_utils_reduce_path        (const gchar *path);
 
 #endif

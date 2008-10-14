@@ -1079,12 +1079,16 @@ gtranslator_recent_add (GtranslatorWindow *window,
 	GtkRecentData *recent_data;
 	gchar *uri;
 	GError *error = NULL;
+	gchar *path;
+	gchar *display_name;
 
 	uri = g_file_get_uri (location);
+	path = g_file_get_path (location);
+	display_name = gtranslator_utils_reduce_path ((const gchar *)path);
 
 	recent_data = g_slice_new (GtkRecentData);
 
-	recent_data->display_name   = project_id;
+	recent_data->display_name   = display_name;
 	recent_data->description    = NULL;
 	recent_data->mime_type      = "text/x-gettext-translation";
 	recent_data->app_name       = (gchar *) g_get_application_name ();
@@ -1100,6 +1104,8 @@ gtranslator_recent_add (GtranslatorWindow *window,
 	}
 
 	g_free (uri);
+	g_free (path);
+	g_free (display_name);
 	g_free (recent_data->app_exec);
 	g_slice_free (GtkRecentData, recent_data);
 }
@@ -1165,6 +1171,7 @@ create_recent_chooser_menu (GtranslatorWindow *window,
 	gtk_recent_chooser_set_show_icons (GTK_RECENT_CHOOSER (recent_menu), FALSE);
 	gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (recent_menu), GTK_RECENT_SORT_MRU);
 	gtk_recent_chooser_menu_set_show_numbers (GTK_RECENT_CHOOSER_MENU (recent_menu), TRUE);
+	gtk_recent_chooser_set_show_tips (GTK_RECENT_CHOOSER (recent_menu), TRUE);
 
 	filter = gtk_recent_filter_new ();
 	gtk_recent_filter_add_application (filter, g_get_application_name());
