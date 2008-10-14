@@ -826,6 +826,11 @@ gtranslator_show_assistant (GtranslatorWindow *window)
 
 		gtk_widget_show (GTK_WIDGET(assist));
 	}
+
+	/*
+	 * Make asssitant modal preventing using application without profile
+	 */
+	gtk_window_set_modal (GTK_WINDOW (assist), TRUE);
 	
 	if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (assist)))
 	{
