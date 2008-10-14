@@ -86,7 +86,7 @@ gtranslator_charmap_panel_init (GtranslatorCharmapPanel *panel)
         GtkWidget *scrolled_window, *view, *chartable;
         GtkTreeSelection *selection;
         GucharmapChaptersModel *model;
-#elif
+#else
 	GucharmapCodepointList *codepoint_list;
 #endif
 
