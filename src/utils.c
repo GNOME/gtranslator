@@ -937,12 +937,12 @@ gtranslator_utils_reduce_path (const gchar *path)
   
   array = g_strsplit (path, "/", -1);
 
-  new_str = g_strconcat (array[1], "/../", array[g_strv_length (array)-1], NULL);
+  new_str = g_build_filename (array[1], "/../", array[g_strv_length (array)-1], NULL);
   
   if (strlen (new_str) >= 30)
     {
       g_free (new_str);
-      new_str = g_strconcat ("../", array[g_strv_length (array)-1], NULL);
+      new_str = g_build_filename ("../", array[g_strv_length (array)-1], NULL);
     }
   return new_str;
 }
