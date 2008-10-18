@@ -341,7 +341,7 @@ GList *gtranslator_profile_get_profiles_from_xml_file (gchar *filename)
 
 void gtranslator_profile_save_profiles_in_xml (gchar *filename) {
   
-  xmlNodePtr root, child, active;
+  xmlNodePtr root;
   xmlDocPtr doc;
   GList *profiles_list, *l;
   GtranslatorProfile *active_profile;
@@ -352,8 +352,6 @@ void gtranslator_profile_save_profiles_in_xml (gchar *filename) {
   active_profile = gtranslator_application_get_active_profile (GTR_APP);
 
   root = xmlDocGetRootElement (doc);
-  child = root->xmlChildrenNode;
-  active = child->xmlChildrenNode;
 
   xmlNewChild (root, NULL, "active", gtranslator_profile_get_name (active_profile));
   
