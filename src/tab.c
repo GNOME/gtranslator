@@ -683,7 +683,7 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	
 	msgid_label = gtk_label_new (NULL);
 	gtk_label_set_markup (GTK_LABEL (msgid_label),
-			      "<b>Original Text:</b>");
+			      _("<b>Original Text:</b>"));
 	gtk_misc_set_padding (GTK_MISC (msgid_label), 0, 5);
 	gtk_widget_show (msgid_label);
 
@@ -744,7 +744,7 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	
 	msgstr_label = gtk_label_new (NULL);
 	gtk_label_set_markup_with_mnemonic (GTK_LABEL (msgstr_label),
-					    "<b>Tran_slated Text:</b>");
+					    _("<b>Tran_slated Text:</b>"));
 	gtk_misc_set_padding (GTK_MISC (msgstr_label), 0, 5);
 	gtk_misc_set_alignment (GTK_MISC (msgstr_label), 0, 0.5);
 	gtk_widget_show (msgstr_label);
