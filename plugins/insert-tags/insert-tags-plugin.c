@@ -210,8 +210,6 @@ showed_message_cb (GtranslatorTab *tab,
 	const gchar *msgid;
 	GRegex *regex;
 	GMatchInfo *match_info;
-	gchar *word;
-	gint i;
 	
 	if (tags != NULL)
 	{
@@ -235,27 +233,10 @@ showed_message_cb (GtranslatorTab *tab,
 	g_regex_match (regex, msgid, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
-		gchar *word_collate;
+		gchar *word;
 		
 		word = g_match_info_fetch (match_info, 0);
-		word_collate = g_utf8_collate_key (word, -1);
-		for (i = 0; i < g_slist_length (tags); i++)
-		{
-			gchar *tag_collate;
-			gchar *tag = g_slist_nth_data (tags, i);
-			
-			tag_collate = g_utf8_collate_key (tag, -1);
-			if (strcmp (tag_collate, word_collate) == 0)
-			{
-				g_free (word);
-				word = NULL;
-			}
-			g_free (tag_collate);
-		}
-		g_free (word_collate);
-		
-		if (word != NULL)
-			tags = g_slist_append (tags, word);
+		tags = g_slist_append (tags, word);
 		g_match_info_next (match_info, NULL);
 	}
 	g_match_info_free (match_info);
