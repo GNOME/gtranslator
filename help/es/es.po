@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.help.HEAD\n"
-"POT-Creation-Date: 2008-10-19 10:51+0000\n"
-"PO-Revision-Date: 2008-10-19 13:00+0200\n"
+"POT-Creation-Date: 2008-10-19 11:01+0000\n"
+"PO-Revision-Date: 2008-10-19 13:27+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -373,7 +373,7 @@ msgstr "Cargar un archivo po"
 #: C/gtranslator.xml:248(para)
 msgid ""
 "To load a po file, use the <menuchoice><guisubmenu>File</"
-"guisubmenu><guimenuitem>Open...</guimenuitem></menuchoice> menuitem. It will "
+"guisubmenu><guimenuitem>Open</guimenuitem></menuchoice> menuitem. It will "
 "bring up the <guilabel>Open file for translation</guilabel> dialog box. "
 "Browse through your computer filesystem, choose the po file you wish to open "
 "and click <guibutton>OK</guibutton>."
@@ -469,6 +469,11 @@ msgid ""
 "application> will fill this fields with the information in the active "
 "profile."
 msgstr ""
+"Sólo puede haber un perfil activo. Puede elegir de forma fácil en las "
+"preferencias cuál es el perfil. Cuando guarda un archivo PO y ha activado la "
+"opción <quote>Usar mis opciones para completar las siguientes entradas</"
+"quote> en el diálogo de cabecera, <application>Gtranslator</application> "
+"rellenará estos campos con la información del perfil activo."
 
 #: C/gtranslator.xml:345(title) C/gtranslator.xml:1239(title)
 msgid "Profiles Dialog"
@@ -899,12 +904,16 @@ msgid ""
 "<guimenuitem>Header</guimenuitem> This opens a dialog box which allows you "
 "to edit information stored in the po file header."
 msgstr ""
+"<guimenuitem>Cabecera</guimenuitem> Esto abre un cuadro de diálogo que le "
+"permite editar la información almacenada en la cabecera del archivo PO."
 
 #: C/gtranslator.xml:784(para)
 msgid ""
 "<guimenuitem>Comment</guimenuitem> This allows to write a comment associates "
 "to one message."
 msgstr ""
+"<guimenuitem>Comentario</guimenuitem> Esto permite escribir un comentario "
+"asociado a un mensaje."
 
 #: C/gtranslator.xml:792(para)
 msgid ""
@@ -913,6 +922,10 @@ msgid ""
 "menuchoice> This pastes the text from the original message in the translated "
 "message."
 msgstr ""
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>Espacio</"
+"keycap></keycombo></shortcut><guimenuitem>Copiar el mensaje a la traducción</"
+"guimenuitem></menuchoice> Esto pega el texto del mensaje original en el "
+"mensaje traducido."
 
 #: C/gtranslator.xml:807(para)
 msgid ""
@@ -973,58 +986,68 @@ msgstr "Ir"
 
 #: C/gtranslator.xml:881(para)
 msgid "<guimenuitem>First</guimenuitem> Go to the first message."
-msgstr ""
+msgstr "<guimenuitem>Primero</guimenuitem> Va al primer mensaje."
 
 #: C/gtranslator.xml:888(para)
 msgid "<guimenuitem>Back</guimenuitem> Go to the previous message."
-msgstr ""
+msgstr "<guimenuitem>Anterior</guimenuitem> Va al mensaje anterior."
 
 #: C/gtranslator.xml:895(para)
 msgid "<guimenuitem>Next</guimenuitem> Go to the next message."
-msgstr ""
+msgstr "<guimenuitem>Siguiente</guimenuitem> Va al siguiente mensaje."
 
 #: C/gtranslator.xml:902(para)
 msgid "<guimenuitem>Last</guimenuitem> Go to the last message."
-msgstr ""
+msgstr "<guimenuitem>Último</guimenuitem> Va al último mensaje."
 
 #: C/gtranslator.xml:909(para)
 msgid "<guimenuitem>Next fuzzy</guimenuitem> Go to the next fuzzy message."
 msgstr ""
+"<guimenuitem>Siguiente difuso</guimenuitem> Va al siguiente mensaje difuso."
 
 #: C/gtranslator.xml:916(para)
 msgid ""
 "<guimenuitem>Previous fuzzy</guimenuitem> Go to the previous fuzzy message."
 msgstr ""
+"<guimenuitem>Anterior difuso</guimenuitem> Va al anterior mensaje difuso."
 
 #: C/gtranslator.xml:923(para)
 msgid ""
 "<guimenuitem>Next untranslated</guimenuitem> Go to the next untranslated "
 "message."
 msgstr ""
+"<guimenuitem>Siguiente sin traducir</guimenuitem> Va al siguiente mensaje "
+"sin traducir."
 
 #: C/gtranslator.xml:930(para)
 msgid ""
 "<guimenuitem>Previous untranslated</guimenuitem> Go to the previous "
 "untranslated message."
 msgstr ""
+"<guimenuitem>Anterior sin traducir</guimenuitem> Va al anterior mensaje sin "
+"traducir."
 
 #: C/gtranslator.xml:937(para)
 msgid ""
 "<guimenuitem>Next fuzzy or untranslated</guimenuitem> Go to the next fuzzy "
 "or untranslated message."
 msgstr ""
+"<guimenuitem>Siguiente difuso o sin traducir</guimenuitem> Va al siguiente "
+"mensaje difuso o sin traducir."
 
 #: C/gtranslator.xml:944(para)
 msgid ""
 "<guimenuitem>Previous fuzzy or untranslated</guimenuitem> Go to the previous "
 "fuzzy or untranslated message."
 msgstr ""
+"<guimenuitem>Anterior difuso o sin traducir</guimenuitem> Va al anterior "
+"mensaje difuso o sin traducir."
 
 #: C/gtranslator.xml:951(para)
 msgid ""
 "<guimenuitem>Jump to...</guimenuitem> Go to the message with a specific "
 "number."
-msgstr ""
+msgstr "<guimenuitem>Ir a</guimenuitem> Va al mensaje de número especificado."
 
 #: C/gtranslator.xml:963(guimenu)
 msgid "Search"
@@ -1108,10 +1131,10 @@ msgstr "Personalizar"
 #: C/gtranslator.xml:1058(para)
 msgid ""
 "To change the application settings, select <menuchoice><guimenu>Edit</"
-"guimenu><guimenuitem>Preferences...</guimenuitem></menuchoice>. This opens "
-"the <interface>Preferences</interface> dialog."
+"guimenu><guimenuitem>Preferences</guimenuitem></menuchoice>. This opens the "
+"<interface>Preferences</interface> dialog."
 msgstr ""
-"Para cambiar los ajustes de la aplicación, seleccione "
+"Para cambiar los ajustes de la aplicación seleccione "
 "<menuchoice><guimenu>Editar</guimenu><guimenuitem>Preferencias</"
 "guimenuitem></menuchoice>. Esto abre el diálogo <interface>Preferencias</"
 "interface>."
@@ -1150,7 +1173,7 @@ msgstr "Crear un respaldo de los archivos antes de guardar"
 
 #: C/gtranslator.xml:1102(para)
 msgid "(TBD)"
-msgstr ""
+msgstr "(Por determinar)"
 
 #: C/gtranslator.xml:1112(title) C/gtranslator.xml:1120(title)
 msgid "Editor Tab"
