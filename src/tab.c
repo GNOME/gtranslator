@@ -1423,6 +1423,34 @@ gtranslator_tab_clear_msgstr_views (GtranslatorTab *tab)
 }
 
 /**
+ * gtranslator_tab_copy_to_translation:
+ * @tab: a #GtranslatorTab
+ *
+ * Copies the text from the original text box to the translation text box.
+ */
+void
+gtranslator_tab_copy_to_translation (GtranslatorTab *tab)
+{
+	GtkTextBuffer *msgstr, *msgid;
+	gint page_index;
+	const gchar *text;
+	GtkTextIter start, end;
+	
+	g_return_if_fail (GTR_IS_TAB (tab));
+	
+	page_index = gtranslator_tab_get_active_trans_tab (tab);
+	
+	msgstr = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[page_index]));
+	msgid = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->text_msgid));
+	
+	gtk_text_buffer_begin_user_action (msgstr);
+	gtk_text_buffer_get_bounds (msgid, &start, &end);
+	text = gtk_text_buffer_get_text (msgid, &start, &end, FALSE);
+	gtk_text_buffer_set_text (msgstr, text, -1);
+	gtk_text_buffer_end_user_action (msgstr);
+}
+
+/**
  * gtranslator_tab_block_movement:
  * @tab: a #GtranslatorTab
  *

@@ -120,41 +120,11 @@ void
 gtranslator_message_copy_to_translation(GtkAction *action,
 					GtranslatorWindow *window)
 {
-	const gchar *msgid;
 	GtranslatorTab *current;
-	GtranslatorPo *po;
-	GList *msg;
-	gint page_index;
 	
 	current = gtranslator_window_get_active_tab (window);
-	po = gtranslator_tab_get_po (current);
-	msg = gtranslator_po_get_current_message (po);
 	
-	msgid = gtranslator_msg_get_msgid (msg->data);
-	
-	if(msgid)
-	{
-		page_index = gtranslator_tab_get_active_trans_tab(current);
-		
-		if(page_index == 0)
-			gtranslator_msg_set_msgstr(msg->data, msgid);
-		else
-			gtranslator_msg_set_msgstr_plural(msg->data, page_index, msgid);
-	}
-	
-	/*
-	 * should we change the state of the message?
-	 * if we have then put the message as translated
-	 */
-	if(gtranslator_msg_is_fuzzy(msg->data) && gtranslator_prefs_manager_get_unmark_fuzzy())
-		gtranslator_msg_set_fuzzy(msg->data, FALSE);
-		
-	gtranslator_tab_message_go_to(current, msg, FALSE, GTR_TAB_MOVE_NONE);
-	
-	/*
-	 * Emit that message was changed.
-	 */
-	g_signal_emit_by_name(current, "message_changed", msg->data);
+	gtranslator_tab_copy_to_translation (current);
 }
 
 /*
