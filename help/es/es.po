@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.help.HEAD\n"
 "POT-Creation-Date: 2008-10-18 04:09+0000\n"
-"PO-Revision-Date: 2008-10-18 22:09+0200\n"
+"PO-Revision-Date: 2008-10-19 11:13+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -198,7 +198,7 @@ msgid ""
 "the number of messages for each category."
 msgstr ""
 "<application>Gtranslator</application> le ofrece una interfaz gráfica "
-"confortable para editar archivos po gettext. Le permite navegar fácilmente "
+"confortable para editar archivos PO gettext. Le permite navegar fácilmente "
 "entre los mensajes difusos, traducidos y sin traducir y tiene una barra de "
 "estado que muestra el número de mensajes para cada categoría."
 
@@ -209,6 +209,10 @@ msgid ""
 "developer's information for each message (comments, context) and set new "
 "personal comments."
 msgstr ""
+"<application>Gtranslator</application> es capaz de abrir y editar algunos "
+"archivos PO al mismo tiempo, incluyendo la gestión de sus cabeceras, ver la "
+"información del desarrollador para cada mensaje (comentarios, contexto) y "
+"establecer nuevos comentarios personales."
 
 #: C/gtranslator.xml:127(para)
 msgid ""
@@ -218,6 +222,11 @@ msgid ""
 "takes the information from the active profile in order to fill the header "
 "values."
 msgstr ""
+"La característica de perfiles le permite tener diferentes <quote>cuentas</"
+"quote> con la información necesaria para rellenar la cabecera. La opción "
+"<quote>Usar mis opciones para completar las siguientes entradas</quote> en "
+"la cabecera del diálogo obtiene la información del perfil activo para "
+"rellenar los valores de cabecera."
 
 #: C/gtranslator.xml:134(para)
 msgid ""
@@ -237,6 +246,12 @@ msgid ""
 "translations. There are also plugins to visualize the source code where a "
 "message is, search in translation memories web services like Open Tran..."
 msgstr ""
+"<application>Gtranslator</application> proporciona un sistema de "
+"complementos que lo hace fácilmente extensible. Incluye algunos complementos "
+"útiles tales como un complemento SVN para realizar los «checkout» del "
+"repositorio y subir las traducciones nuevas. También existen complementos "
+"para visualizar el código donde está un mensaje, buscar en los servicios de "
+"memorias de traducción como Open Tran..."
 
 #: C/gtranslator.xml:147(para)
 msgid ""
@@ -246,6 +261,11 @@ msgid ""
 "<guimenu>Main Menu</guimenu>, or type <command>Gtranslator</command> on the "
 "command line."
 msgstr ""
+"Para ejecutar <application>Gtranslator</application> seleccione "
+"<menuchoice><guimenu>Programas</guimenu><guisubmenu>Desarrollo</"
+"guisubmenu><guimenuitem>Gtranslator</guimenuitem></menuchoice> del "
+"<command>Menú principal</command> o escriba <application>Gtranslator</"
+"application> en la línea de comandos."
 
 #: C/gtranslator.xml:161(title)
 msgid "Using Gtranslator"
@@ -257,6 +277,9 @@ msgid ""
 "environment that makes it possible to translate po files painlessly. This "
 "section describes basic usage of <application>Gtranslator</application>."
 msgstr ""
+"<application>Gtranslator</application> es un entorno gráfico con muchas "
+"características que hace posible traducir archivos PO sin dolor. Esta "
+"sección describe el uso básico de <application>Gtranslator</application>."
 
 #: C/gtranslator.xml:171(title)
 msgid "Basic usage"
@@ -267,6 +290,8 @@ msgid ""
 "Starting <application>Gtranslator</application> opens the <interface>Main "
 "window</interface>."
 msgstr ""
+"Al iniciar <application>Gtranslator</application> se abre la "
+"<interface>Ventana principal</interface>."
 
 #: C/gtranslator.xml:179(title)
 msgid "Main Window"
@@ -281,6 +306,8 @@ msgid ""
 "The <interface>menubar</interface> allows you the access the application "
 "menu."
 msgstr ""
+"La <interface>barra de menú</interface> le permite acceder al menú de la "
+"aplicación."
 
 #: C/gtranslator.xml:212(para)
 msgid ""
@@ -957,7 +984,7 @@ msgstr "--help"
 
 #: C/gtranslator.xml:1043(para)
 msgid "Shows you a short help message on the command line."
-msgstr ""
+msgstr "Muestra un pequeño mensaje de ayuda en la línea de comandos."
 
 #: C/gtranslator.xml:1057(title)
 msgid "Customization"
@@ -976,7 +1003,7 @@ msgstr "Diálogo de preferencias"
 
 #: C/gtranslator.xml:1075(phrase)
 msgid "Gtranslator Preferences Dialog"
-msgstr ""
+msgstr "Diálogo Preferencias de Gtranslator"
 
 #: C/gtranslator.xml:1082(title)
 msgid "File Tab"
@@ -984,11 +1011,11 @@ msgstr "Solapa Archivo"
 
 #: C/gtranslator.xml:1084(para)
 msgid "The properties in the <guilabel>File </guilabel> tab are:"
-msgstr ""
+msgstr "Las propiedades en la solapa <guilabel>Archivo</guilabel> son:"
 
 #: C/gtranslator.xml:1091(guilabel)
 msgid "Autosave files every x minutes"
-msgstr ""
+msgstr "Autoguardar archivos cada x minutos"
 
 #: C/gtranslator.xml:1093(para)
 msgid ""
@@ -1028,7 +1055,7 @@ msgstr ""
 
 #: C/gtranslator.xml:1144(guilabel)
 msgid "Make whitespace visible"
-msgstr ""
+msgstr "Hacer visibles los espacios en blanco"
 
 #: C/gtranslator.xml:1146(para)
 msgid ""
@@ -1044,6 +1071,8 @@ msgstr "Usar tipografía personalizada"
 msgid ""
 "This option lets you set a custom font for the original and translated boxes."
 msgstr ""
+"Esta opción le permite establecer una tipografía personalizada para las "
+"cajas original y traducida."
 
 #: C/gtranslator.xml:1162(guilabel)
 msgid "Remove fuzzy status if message is changed"
@@ -1054,6 +1083,8 @@ msgid ""
 "If this option is active the status will change automatically if you edit a "
 "message."
 msgstr ""
+"Si esta opción está activada el estado cambiará automáticamente si edita un "
+"mensaje."
 
 #: C/gtranslator.xml:1171(guilabel)
 msgid "Check spelling"
@@ -1064,18 +1095,20 @@ msgid ""
 "This option active the check spelling for your language in the original and "
 "translated boxes."
 msgstr ""
+"Esta opción activa la corrección ortográfica para su idioma en las cajas "
+"original y traducida."
 
 #: C/gtranslator.xml:1184(title) C/gtranslator.xml:1192(title)
 msgid "Profiles Tab"
-msgstr ""
+msgstr "Solapa Perfiles"
 
 #: C/gtranslator.xml:1186(para)
 msgid "The <guilabel>Editor</guilabel> tab contains:"
-msgstr ""
+msgstr "La solapa <guilabel>Editor</guilabel> contiene:"
 
 #: C/gtranslator.xml:1199(phrase)
 msgid "GtranslatorProfiles Tab"
-msgstr ""
+msgstr "Solapa Perfiles de Gtranslator"
 
 #: C/gtranslator.xml:1207(guilabel)
 msgid "Add button"
@@ -1086,6 +1119,7 @@ msgid ""
 "It shows the <guilabel>Profile Dialog</guilabel> in order to create a new "
 "profile."
 msgstr ""
+"Muestra el diálogo <guilabel>Perfil</guilabel> para crear un nuevo perfil."
 
 #: C/gtranslator.xml:1216(guilabel)
 msgid "Edit button"
@@ -1096,6 +1130,8 @@ msgid ""
 "It shows the <guilabel>Profile Dialog</guilabel> in order to edit an exists "
 "profile."
 msgstr ""
+"Muestra el diálogo <guilabel>Perfil</guilabel> para editar un perfil "
+"existente."
 
 #: C/gtranslator.xml:1225(guilabel)
 msgid "Delete button"
@@ -1107,7 +1143,7 @@ msgstr "Elimina el perfil seleccionado."
 
 #: C/gtranslator.xml:1234(para)
 msgid "The entries in the <guilabel>Profiles Dialog</guilabel> are:"
-msgstr "Las entradas en el <guilabel>Diálogo de preferencias</guilabel> son:"
+msgstr "Las entradas en el diálogo <guilabel>Preferencias</guilabel> son:"
 
 #: C/gtranslator.xml:1246(phrase)
 msgid "GtranslatorProfiles Dialog"
@@ -1251,6 +1287,10 @@ msgid ""
 "ones. If it is no active only show options in fuzzy and untranslated "
 "messages."
 msgstr ""
+"Con esta opción activa <application>Gtranslator</application> le muestra las "
+"opciones de la memoria de traducción en todos los mensajes, incluyendo los "
+"mensajes traducidos. Si no está activa sólo muestra opciones en los mensajes "
+"difusos y sin traducir."
 
 #: C/gtranslator.xml:1412(guilabel)
 msgid "Use only files with this name"
@@ -1266,11 +1306,11 @@ msgstr ""
 
 #: C/gtranslator.xml:1421(guilabel)
 msgid "Max # of missing words"
-msgstr ""
+msgstr "Número máximo de palabras faltantes"
 
 #: C/gtranslator.xml:1429(guilabel)
 msgid "Max difference in sentence length"
-msgstr ""
+msgstr "Diferencia máxima en la longitud de cadena"
 
 #: C/gtranslator.xml:1441(title)
 msgid "Plugins Tab"
@@ -1305,6 +1345,11 @@ msgid ""
 "<email>menesis@kabalak.net</email>. Ross Golder <email>rossg@golder.org</"
 "email> was the maintainer of GTK+ 2.x port of Gtranslator until October 2007."
 msgstr ""
+"Originalmente Fatih Demir <email>kabalak@kabalak.net</email> y Gediminas "
+"Paulauskas <application>menesis@kabalak.net</application> escribieron "
+"<application>Gtranslator</application>. Ross Golder <email>rossg@golder.org</"
+"email> era el mantenedor del porte a GTK+2.x de Gtranslator hasta octubre de "
+"2007."
 
 #: C/gtranslator.xml:1472(para)
 msgid ""
@@ -1313,6 +1358,10 @@ msgid ""
 "resa@gmail.com</email>. The current maintainers are Pablo Sanxiao and Juan "
 "José Sánchez Penas <email>jjsanchez@igalia.com</email>."
 msgstr ""
+"Pablo Sanxiao <email>psanxiao@gmail.com</email> e Ignacio Casal Quinteiro "
+"<email>nacho.resa@gmail.com</email> escribieron la mayoría de la nueva "
+"versión 2.0. Los mantenedores actuales son Pablo Sanxiao y Juan José Sánchez "
+"Penas <email>jjsanchez@igalia.com</email>."
 
 #: C/gtranslator.xml:1477(para)
 msgid ""
