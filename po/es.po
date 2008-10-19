@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:44+0000\n"
-"PO-Revision-Date: 2008-10-11 13:28+0200\n"
+"POT-Creation-Date: 2008-10-18 21:58+0000\n"
+"PO-Revision-Date: 2008-10-19 11:04+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -384,28 +384,30 @@ msgid "Subversion: Commit complete."
 msgstr "Subversion: Commit completo."
 
 #.
-#. * Translators: Please change LANGUAGE for your language name in ENGLISH.
+#. * Translators: Please change LANGUAGE for your language name in English.
 #. * This string is used to fill the ChangeLog entry
+#. * For example: "Updated Galician translation"
+#. * where LANGUAGE = Galician.
 #.
-#: ../plugins/subversion/commit-dialog.c:267
+#: ../plugins/subversion/commit-dialog.c:269
 msgctxt "ChangeLog entry"
 msgid "LANGUAGE"
 msgstr "Spanish"
 
-#: ../plugins/subversion/commit-dialog.c:293
+#: ../plugins/subversion/commit-dialog.c:295
 #, c-format
 msgid "The ChangeLog file '%s' does not exists"
 msgstr "El archivo ChangeLog «%s» no existe"
 
-#: ../plugins/subversion/commit-dialog.c:405
+#: ../plugins/subversion/commit-dialog.c:407
 msgid "Are you sure that you want to pass an empty log message?"
 msgstr "¿Está seguro de que quiere pasar un mensaje de registro vacío?"
 
-#: ../plugins/subversion/commit-dialog.c:422
+#: ../plugins/subversion/commit-dialog.c:424
 msgid "You have to select at least one file to send"
 msgstr "Debe seleccionar al menos un archivo para enviar"
 
-#: ../plugins/subversion/commit-dialog.c:568
+#: ../plugins/subversion/commit-dialog.c:570
 msgid "Commit Changes"
 msgstr "Subir cambios"
 
@@ -1542,6 +1544,14 @@ msgstr "Tabla de mensajes"
 msgid "Context"
 msgstr "Contexto"
 
+#: ../src/tab.c:686
+msgid "<b>Original Text:</b>"
+msgstr "<b>Texto original:</b>"
+
+#: ../src/tab.c:747
+msgid "<b>Tran_slated Text:</b>"
+msgstr "<b>Texto _traducido:</b>"
+
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
 #. * on the toolbar, and is placed at the %s. Note the _ before the %s
@@ -1912,11 +1922,11 @@ msgstr "gtranslator - *%s"
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1205
+#: ../src/window.c:1212
 msgid "Toolbar Editor"
 msgstr "Editor de la barra de herramientas"
 
-#: ../src/window.c:1523
+#: ../src/window.c:1530
 msgid "Documents"
 msgstr "Documentos"
 
