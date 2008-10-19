@@ -7,1252 +7,1451 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arabic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-21 12:55+0100\n"
-"PO-Revision-Date: 2007-04-14 18:49+0100\n"
+"POT-Creation-Date: 2008-10-19 14:51+0100\n"
+"PO-Revision-Date: 2008-06-16 04:10+0300\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabeyes <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type:  text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: ../data/desktop/gtranslator.desktop.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.in.h:1
+msgid "Gtranslator PO Editor"
+msgstr "مترجم‌ج - محرر PO"
+
+#: ../data/desktop/gtranslator.desktop.in.in.h:2
+msgid "Translate and localize applications and libraries"
+msgstr "ترجم التطبيقات والمكتبات"
+
+#: ../data/po.lang.h:1
+msgid "Others"
+msgstr "أخرى"
+
+#: ../data/po.lang.h:2
+msgid "Special variable"
+msgstr "متغيّر خاص"
+
+#: ../data/po.lang.h:3
+msgid "Tag"
+msgstr "وسم"
+
+#: ../data/po.lang.h:4
+msgid "gtranslator highlight"
+msgstr "إبراز مترجم‌ج"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:117
+msgid "Message not found"
+msgstr "لم يُعثر على الرسالة"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:222
+msgid "Open file for alternate language"
+msgstr "افتح ملفا باللغة البديلة"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:247
+msgid "File closed"
+msgstr "أُغلق الملف"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:320
+msgid "There isn't any file loaded"
+msgstr "لا ملفات مُحمّلة"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:59
 #, fuzzy
-msgid "The GNOME translation program"
-msgstr "فِرَق ترجمة جنوم"
+msgid "_Alternate Language"
+msgstr "اللغة البديلة"
 
-#: ../data/desktop/gtranslator.desktop.in.h:2
+#: ../plugins/alternate-language/alternate-language-plugin.c:60
 #, fuzzy
-msgid "gtranslator PO file editor"
-msgstr "محرر الحسابات الشخصية للمستخدمين"
+msgid "Show the Alternate Language panel"
+msgstr "اللغة البديلة"
 
-#: ../src/about.c:63
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr ""
+#: ../plugins/alternate-language/alternate-language-plugin.c:123
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+msgid "Alternate Language"
+msgstr "اللغة البديلة"
 
-#: ../src/about.c:64
-msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr ""
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+msgid "Load an alternate language."
+msgstr "حمّل لغة بديلة"
 
-#: ../src/about.c:67
-#, fuzzy
-msgid "translator-credits"
-msgstr "المترجمون:"
+#: ../plugins/charmap/charmap-plugin.c:299
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+msgid "Character Map"
+msgstr "خريطة المحارف"
 
-#: ../src/bookmark.c:525
-#, fuzzy
-msgid "_View/_Bookmarks/"
-msgstr "/ علامة الموقع "
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+msgid "Insert special characters just by clicking on them."
+msgstr "أدرج المحارف الخاة بمجرد النقر عليهم"
 
-#: ../src/bookmark.c:562
-#, fuzzy, c-format
-msgid "Open %s (%s)"
-msgstr "%s (%s)"
-
-#: ../src/color-schemes.c:195
-#, fuzzy, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr "تعذّر تحليل الملف '%s' !"
-
-#: ../src/color-schemes.c:317
-#, fuzzy
-msgid "Couldn't retrieve author information!"
-msgstr "تعذّر الحصول على بيانات الطقس"
-
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: ../src/color-schemes.c:323 ../src/translator.c:334
-msgid "Unknown"
-msgstr "مجهول"
-
-#: ../src/color-schemes.c:324
-#, fuzzy
-msgid "<Not Given>"
-msgstr "غير نشط"
-
-#: ../src/color-schemes.c:471
-#, fuzzy
-msgid "_View/_Colorschemes/"
-msgstr "مخطط ال_لون"
-
-#: ../src/color-schemes.c:501
-#, fuzzy, c-format
-msgid "Activate colorscheme %s"
-msgstr "الألوان النشطة"
-
-#: ../src/compile.c:80
-#, fuzzy
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "حدث خطأ عند اختبار المحفوظة."
-
-#: ../src/compile.c:157
-#, fuzzy
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "لا يتوفّر التوسيع لنظام الملفات هذا"
-
-#: ../src/compile.c:197
-#, fuzzy, c-format
-msgid ""
-"Compile successful:\n"
-"%s"
-msgstr "_نجح الولوج:"
-
-#: ../src/dialogs.c:109
-#, fuzzy
-msgid "Gettext translation"
-msgstr "ترجمة gettext"
-
-#: ../src/dialogs.c:114
-#, fuzzy
-msgid "Gettext translation template"
-msgstr "ترجمة gettext"
-
-#: ../src/dialogs.c:119
-msgid "All files"
-msgstr "جميع الملفات"
-
-#: ../src/dialogs.c:176
-#, fuzzy
-msgid "Open file for translation"
-msgstr "افتح ملف من موقع مخصّص"
-
-#: ../src/dialogs.c:204
-msgid "Save file as..."
-msgstr "احفظ الملف بإسم..."
-
-#: ../src/dialogs.c:210
-#, fuzzy
-msgid "Save local copy of file as..."
-msgstr "احفظ الملف بإسم..."
-
-#: ../src/dialogs.c:253
-#, fuzzy, c-format
-msgid ""
-"File %s\n"
-"was changed. Save?"
-msgstr "الملف%sلم يتغير \n"
-
-#: ../src/dialogs.c:295 ../src/dialogs.c:328
-msgid "gtranslator -- edit comment"
-msgstr ""
-
-#: ../src/dialogs.c:320
-#, fuzzy
-msgid "Comment:"
-msgstr "ال_تعليق:"
-
-#: ../src/dialogs.c:437
+#: ../plugins/dictionary/dict-panel.c:186
 #, c-format
-msgid "Should ALL translations from `%s' be removed?"
-msgstr ""
+msgid "No dictionary source available with name '%s'"
+msgstr "لا يوجد مصدر قاموس بالاسم '%s'"
 
-#: ../src/dialogs.c:510
-msgid "gtranslator -- go to"
-msgstr ""
+#: ../plugins/dictionary/dict-panel.c:189
+msgid "Unable to find dictionary source"
+msgstr "تعذّر العثور على مصدر القاموس"
 
-#: ../src/dialogs.c:518
-#, fuzzy
-msgid "Go to message number:"
-msgstr "خمن عدداً"
-
-#: ../src/dialogs.c:576
-#, fuzzy
-msgid "Find in the po file"
-msgstr "الخط المستخدم في العنوان"
-
-#: ../src/dialogs.c:585
-#, fuzzy
-msgid "Enter search string:"
-msgstr "سلسلة البحث"
-
-#: ../src/dialogs.c:590
-#, fuzzy
-msgid "Case sensitive"
-msgstr "حساس لل_حالة"
-
-#: ../src/dialogs.c:595
-#, fuzzy
-msgid "Find in:"
-msgstr "اعثر على الوصلات:"
-
-#: ../src/dialogs.c:599 ../src/dialogs.c:728
-#, fuzzy
-msgid "Comments"
-msgstr "_تعليقات:"
-
-#: ../src/dialogs.c:602 ../src/dialogs.c:731 ../src/languages.c:101
-#, fuzzy
-msgid "English"
-msgstr "الإنجليزية القديمة"
-
-#: ../src/dialogs.c:605 ../src/dialogs.c:734 ../src/messages-table.c:222
-msgid "Translation"
-msgstr "ترجمة"
-
-#.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
-#.
-#: ../src/dialogs.c:616
-#, fuzzy
-msgid "Ignore hotkeys"
-msgstr "أهمل المخفي"
-
-#: ../src/dialogs.c:707
-msgid "gtranslator -- replace"
-msgstr ""
-
-#: ../src/dialogs.c:711 ../src/menus.c:332
-#, fuzzy
-msgid "Replace"
-msgstr "المبدل"
-
-#: ../src/dialogs.c:712
-#, fuzzy
-msgid "Replace all"
-msgstr "استبدّل الكل"
-
-#: ../src/dialogs.c:717
-#, fuzzy
-msgid "String to replace:"
-msgstr "الكلمة التي ستتغيّر"
-
-#: ../src/dialogs.c:720
-#, fuzzy
-msgid "Replace string:"
-msgstr "سلسلة البحث"
-
-#: ../src/dialogs.c:725
-#, fuzzy
-msgid "Replace in:"
-msgstr "ا_ستبدال"
-
-#: ../src/dialogs.c:795
-#, fuzzy
-msgid "Please enter a string to replace!"
-msgstr "من فضلك أدخل عبارة سر لتستخدمها"
-
-#: ../src/dialogs.c:852
+#: ../plugins/dictionary/dict-panel.c:204
 #, c-format
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
+msgid "No context available for source '%s'"
+msgstr "لا يتوفر سياق للمصدر '%s'"
 
-#: ../src/dialogs.c:893
-#, fuzzy, c-format
-msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
-msgstr "الملف موجود. هل تريد أن تكتب فوقه؟"
+#: ../plugins/dictionary/dict-panel.c:207
+msgid "Unable to create a context"
+msgstr "تعذّر إنشاء سياق"
 
-#: ../src/dialogs.c:922
-msgid "gtranslator -- open from URI"
-msgstr ""
-
-#: ../src/dialogs.c:934
-#, fuzzy
-msgid "Enter URI:"
-msgstr "أدخل العنوان"
-
-#: ../src/dialogs.c:971
-#, fuzzy
-msgid "No URI given!"
-msgstr "لا URI"
-
-#: ../src/dialogs.c:989
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
-
-#: ../src/dialogs.c:1029
+#: ../plugins/dictionary/dict-panel.c:290
 #, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
+msgid "Dictionary source '%s' selected"
 msgstr ""
 
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: ../src/dialogs.c:1041
-#, fuzzy
-msgid "Postpone decision"
-msgstr "وجهة النشر"
-
-#: ../src/dialogs.c:1043
-#, fuzzy
-msgid "Ignore recovery file"
-msgstr "لقد فشل المفسّر."
-
-#: ../src/dialogs.c:1045
-#, fuzzy
-msgid "Recover file"
-msgstr "ملفّات محذوفة"
-
-#: ../src/dialogs.c:1101
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
-
-#: ../src/dialogs.c:1141 ../src/dialogs.c:1169
-msgid "gtranslator -- add bookmark with comment?"
-msgstr ""
-
-#: ../src/dialogs.c:1161
-#, fuzzy
-msgid "Comment for the bookmark:"
-msgstr "إجراء علامات المواقع الموسومة:"
-
-#: ../src/dialogs.c:1161
-#, fuzzy
-msgid "No comment"
-msgstr "تعليقات الشفرة"
-
-#: ../src/find.c:216
-#, fuzzy
-msgid "Please enter a search string"
-msgstr "رجاء ادخل إسم المستخدم"
-
-#: ../src/find.c:232
-#, fuzzy, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr "تعذّر العثور على '%s'"
-
-#: ../src/gui.c:405
+#: ../plugins/dictionary/dict-panel.c:310
 #, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgid_plural "%s [ %i Fuzzy left ]"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../src/gui.c:405 ../src/gui.c:409 ../src/menus.c:318
-#: ../src/messages-table.c:252
-msgid "Fuzzy"
+msgid "Strategy '%s' selected"
 msgstr ""
 
-#: ../src/gui.c:409
+#: ../plugins/dictionary/dict-panel.c:329
 #, c-format
-msgid "%s [ No fuzzy left ]"
+msgid "Database '%s' selected"
 msgstr ""
 
-#: ../src/gui.c:418 ../src/messages-table.c:260
-msgid "Translated"
-msgstr "مُتَرجَم"
-
-#: ../src/gui.c:426
+#: ../plugins/dictionary/dict-panel.c:375
 #, c-format
-msgid "%s [ %i Untranslated left ]"
-msgid_plural "%s [ %i Untranslated left ]"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Word '%s' selected"
+msgstr ""
 
-#: ../src/gui.c:426 ../src/gui.c:428 ../src/messages-table.c:244
+#. speller
+#: ../plugins/dictionary/dict-panel.c:398
+msgid "Double-click on the word to look up"
+msgstr "انقر مرتين على كلمة للبحث عنها"
+
+#. strat-chooser
+#: ../plugins/dictionary/dict-panel.c:404
+msgid "Double-click on the matching strategy to use"
+msgstr "انقر مرتين على استراتيجية المطابقة التي تريد استخدامها"
+
+#. source-chooser
+#: ../plugins/dictionary/dict-panel.c:409
 #, fuzzy
-msgid "Untranslated"
-msgstr "مُتَرجَم"
+msgid "Double-click on the source to use"
+msgstr "انقر مرتين على قاعدة البيانات التي تريد استخدامها"
 
-#: ../src/gui.c:428
+#. db-chooser
+#: ../plugins/dictionary/dict-panel.c:418
+msgid "Double-click on the database to use"
+msgstr "انقر مرتين على قاعدة البيانات التي تريد استخدامها"
+
+#.
+#. * Look up Button
+#.
+#: ../plugins/dictionary/dict-panel.c:481
+msgid "Look _up:"
+msgstr "اب_حث:"
+
+#: ../plugins/dictionary/dict-panel.c:554
+msgid "Similar words"
+msgstr "الكلمات الشبيهة"
+
+#: ../plugins/dictionary/dict-panel.c:570
+msgid "Available dictionaries"
+msgstr "القواميس المتوفرة"
+
+#: ../plugins/dictionary/dict-panel.c:586
+msgid "Available strategies"
+msgstr "الاستراتيجيات المتوفرة"
+
+#: ../plugins/dictionary/dict-panel.c:597
+#, fuzzy
+msgid "Dictionary sources"
+msgstr "قاموس"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/dictionary-plugin.c:94
+msgid "Dictionary"
+msgstr "قاموس"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+msgid "Look up words in a dictionary."
+msgstr "ابحث عن الكلمات في قاموس."
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
+msgid "_Fullscreen"
+msgstr "_ملء الشاشة"
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:47
+msgid "Place window on fullscreen state"
+msgstr "ضع النافذة في وضع ملء الشاشة"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr "ملء الشاشة"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr "ضع النافذة في وضع ملء الشاشة."
+
+#: ../plugins/insert-params/insert-params-plugin.c:79
+#, fuzzy
+msgid "_Next Param"
+msgstr "الو_سم التالي"
+
+#: ../plugins/insert-params/insert-params-plugin.c:80
+#, fuzzy
+msgid "Insert the next param of the message"
+msgstr "أدرج الوسم التالي في الرسالة"
+
+#: ../plugins/insert-params/insert-params-plugin.c:82
+#, fuzzy
+msgid "_Insert Params"
+msgstr "أ_درج الوسوم"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Insert Params"
+msgstr "أدرج الوسوم"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Parameters detection and easy insertion."
+msgstr "اكتشاف الوسوم وإدراجها بسهولة"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:70
+msgid "_Next Tag"
+msgstr "الو_سم التالي"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:71
+msgid "Insert the next tag of the message"
+msgstr "أدرج الوسم التالي في الرسالة"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:73
+msgid "_Insert Tags"
+msgstr "أ_درج الوسوم"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Tags"
+msgstr "أدرج الوسوم"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+msgid "Tags detection and easy insertion."
+msgstr "اكتشاف الوسوم وإدراجها بسهولة"
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:1
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:1
+#: ../plugins/subversion/subversion.glade.h:2
+#: ../src/dialogs/preferences-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:2
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:2
+msgid "     "
+msgstr "     "
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:3
+msgid "<b>Code language of the results:</b>"
+msgstr "<b>رمز لغة النتائج:</b>"
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:4
+msgid "<b>Code language to query open-tran:</b>"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:5
+msgid "Open Tran Settings"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:210
+#: ../plugins/open-tran/open-tran-panel.c:274
+msgid "ERROR: could not parse response\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:258
 #, c-format
-msgid "%s [ No untranslated left ]"
+msgid "ERROR: %d %s\n"
 msgstr ""
 
-#: ../src/gui.c:447
+#: ../plugins/open-tran/open-tran-panel.c:269
 #, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
+msgid "FAULT: %d %s\n"
 msgstr ""
 
-#: ../src/gui.c:451
-#, fuzzy, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr "حالة الرسالة"
-
-#: ../src/gui.c:754 ../src/page.c:99
-#, fuzzy
-msgid "Edit comment"
-msgstr "تعليقات الشفرة"
-
-#: ../src/header_stuff.c:406
-#, fuzzy
-msgid "No header for this file/domain"
-msgstr "النسبة لهذه العملية"
-
-#: ../src/header_stuff.c:445
-#, fuzzy
-msgid "gtranslator -- edit header"
-msgstr "ترويسة فاسدة"
-
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-#, fuzzy
-msgid "Comments:"
-msgstr "ال_تعليق:"
-
-#: ../src/header_stuff.c:476
-#, fuzzy
-msgid "Project name:"
-msgstr "اسم الكائن"
-
-#: ../src/header_stuff.c:482
-#, fuzzy
-msgid "Project version:"
-msgstr "موقع المشروع"
-
-#: ../src/header_stuff.c:489
-#, fuzzy
-msgid "Pot file creation date:"
-msgstr "فشل إنشاء الملف المؤقّت."
-
-#: ../src/header_stuff.c:495
-#, fuzzy
-msgid "Po file revision date:"
-msgstr "اسم ال_طور:"
-
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr ""
-
-#: ../src/header_stuff.c:516
-#, fuzzy
-msgid "Generator:"
-msgstr "التاريخ العام"
-
-#: ../src/header_stuff.c:521
-msgid "Project"
-msgstr "مشروع"
-
-#: ../src/header_stuff.c:527
-msgid "Use my options to complete the following entries:"
-msgstr ""
-
-#: ../src/header_stuff.c:540
-#, fuzzy
-msgid "Translator's name:"
-msgstr "المترجمون:"
-
-#: ../src/header_stuff.c:546
-#, fuzzy
-msgid "Translator's e-mail:"
-msgstr "المترجمون:"
-
-#: ../src/header_stuff.c:553 ../src/prefs.c:872
-msgid "Language:"
-msgstr "اللغة:"
-
-#: ../src/header_stuff.c:560 ../src/prefs.c:901
-#, fuzzy
-msgid "Language group's email:"
-msgstr "جدول اللغات"
-
-#: ../src/header_stuff.c:567 ../src/prefs.c:887
-#, fuzzy
-msgid "Charset:"
-msgstr "الأوراق المتبقية:"
-
-#: ../src/header_stuff.c:574 ../src/prefs.c:894
-msgid "Encoding:"
-msgstr "ترميز:"
-
-#: ../src/header_stuff.c:582
-#, fuzzy
-msgid "Translator and Language"
-msgstr "جدول الترجمة"
-
-#: ../src/history.c:189
-#, fuzzy
-msgid "_File/Recen_t files/"
-msgstr "ال_ملفات الحديثة"
-
-#: ../src/history.c:226
+#: ../plugins/open-tran/open-tran-panel.c:285
 #, c-format
-msgid "Open %s"
-msgstr "افتح %s"
-
-#: ../src/languages.c:37
-msgid "Afrikaans"
-msgstr "الأفريكانية"
-
-#: ../src/languages.c:41
-#, fuzzy
-msgid "Albanian"
-msgstr "ألبانيا"
-
-#: ../src/languages.c:45
-msgid "Arabic"
-msgstr "عربي"
-
-#: ../src/languages.c:49
-#, fuzzy
-msgid "Azerbaijani Turkish"
-msgstr "خريطة مفاتيح صن للتركية الأذربيجانية"
-
-#: ../src/languages.c:53
-msgid "Basque"
-msgstr "باسك"
-
-#: ../src/languages.c:57
-msgid "Belarusian"
-msgstr "البلا روسية"
-
-#: ../src/languages.c:61
-#, fuzzy
-msgid "Bengali"
-msgstr "ا-ص|بنغالي"
-
-#: ../src/languages.c:65
-#, fuzzy
-msgid "Britton"
-msgstr "زر"
-
-#: ../src/languages.c:69
-#, fuzzy
-msgid "Bulgarian"
-msgstr "بلغاريا"
-
-#: ../src/languages.c:73
-#, fuzzy
-msgid "Catalan"
-msgstr "ض-ي|كتلان"
-
-#: ../src/languages.c:77
-#, fuzzy
-msgid "Chinese/Simplified"
-msgstr "صيني مبسّط"
-
-#: ../src/languages.c:81
-#, fuzzy
-msgid "Chinese/Traditional"
-msgstr "صيني تقليدي"
-
-#: ../src/languages.c:85
-msgid "Croatian"
-msgstr "كرواتي"
-
-#: ../src/languages.c:89
-msgid "Czech"
-msgstr "التشيكية"
-
-#: ../src/languages.c:93
-#, fuzzy
-msgid "Danish"
-msgstr "اسباني"
-
-#: ../src/languages.c:97
-#, fuzzy
-msgid "Dutch"
-msgstr "دولوث"
-
-#: ../src/languages.c:105
-#, fuzzy
-msgid "English/Canada"
-msgstr "إنجليزي (كندا)"
-
-#: ../src/languages.c:109
-#, fuzzy
-msgid "English/GB"
-msgstr "الإنجليزية القديمة"
-
-#: ../src/languages.c:113
-#, fuzzy
-msgid "English/USA"
-msgstr "ا-ص|إنجليزي (الولايات المتّحدة)"
-
-#: ../src/languages.c:117
-msgid "Esperanto"
-msgstr "الإسبرانتو"
-
-#: ../src/languages.c:121
-msgid "Estonian"
-msgstr "الإستونيّة"
-
-#: ../src/languages.c:125
-#, fuzzy
-msgid "Persian"
-msgstr "فارسية قديمة"
-
-#: ../src/languages.c:129
-#, fuzzy
-msgid "Finnish"
-msgstr "انهاء"
-
-#: ../src/languages.c:133
-msgid "French"
-msgstr "فرنسي"
-
-#: ../src/languages.c:137
-msgid "Galician"
-msgstr "الغاليتشية"
-
-#: ../src/languages.c:141
-#, fuzzy
-msgid "German"
-msgstr "ألمانيا"
-
-#: ../src/languages.c:145
-#, fuzzy
-msgid "Greek"
-msgstr "أخضر"
-
-#: ../src/languages.c:149
-#, fuzzy
-msgid "Gujarati"
-msgstr "الجوارانية"
-
-#: ../src/languages.c:153
-#, fuzzy
-msgid "Hebrew"
-msgstr "ض-ي|عبري"
-
-#: ../src/languages.c:157
-msgid "Hindi"
-msgstr "هندي"
-
-#: ../src/languages.c:161
-#, fuzzy
-msgid "Hungarian"
-msgstr "ض-ي|مجري"
-
-#: ../src/languages.c:165
-msgid "Icelandic"
-msgstr "الأيسلندية"
-
-#: ../src/languages.c:169
-#, fuzzy
-msgid "Indonesian"
-msgstr "ا-ص|إندونيسي"
-
-#: ../src/languages.c:173
-#, fuzzy
-msgid "Italian"
-msgstr "ا-ص|إيطالي"
-
-#: ../src/languages.c:177
-msgid "Irish"
-msgstr "الإيرلندية"
-
-#: ../src/languages.c:181
-#, fuzzy
-msgid "Japanese"
-msgstr "ض-ي|ياباني"
-
-#: ../src/languages.c:185
-#, fuzzy
-msgid "Kannada"
-msgstr "ض-ي|كندي"
-
-#: ../src/languages.c:189
-#, fuzzy
-msgid "Korean"
-msgstr "ض-ي|كوري"
-
-#: ../src/languages.c:193
-msgid "Kurdish"
-msgstr "الكردية"
-
-#: ../src/languages.c:197
-msgid "Latvian"
-msgstr "اللتفية"
-
-#: ../src/languages.c:201
-#, fuzzy
-msgid "Lithuanian"
-msgstr "ليتوانيا"
-
-#: ../src/languages.c:205
-msgid "Malay/Bahasa Melayu"
+msgid "WRONG! Can't get result element %d\n"
 msgstr ""
 
-#: ../src/languages.c:209
-msgid "Maltese"
-msgstr "المالطيّة"
-
-#: ../src/languages.c:213
-#, fuzzy
-msgid "Marathi"
-msgstr "ماراثون"
-
-#: ../src/languages.c:217
-#, fuzzy
-msgid "Mongolian"
-msgstr "منغوليا"
-
-#: ../src/languages.c:221
-#, fuzzy
-msgid "Norwegian/Bokmaal"
-msgstr "نرويجي بوكمال"
-
-#: ../src/languages.c:225
-#, fuzzy
-msgid "Norwegian/Nynorsk"
-msgstr "ض-ي|نرويجي (نينرسك)"
-
-#: ../src/languages.c:229
-#, fuzzy
-msgid "Punjabi"
-msgstr "ا-ص|بنجابي"
-
-#: ../src/languages.c:233
-msgid "Polish"
-msgstr "بولندية"
-
-#: ../src/languages.c:237
-#, fuzzy
-msgid "Portuguese"
-msgstr "ا-ص|برتغالي"
-
-#: ../src/languages.c:241
-#, fuzzy
-msgid "Portuguese/Brazil"
-msgstr "برتغالي (البرازيل)"
-
-#: ../src/languages.c:245
-msgid "Romanian"
-msgstr "روماني"
-
-#: ../src/languages.c:249
-#, fuzzy
-msgid "Russian"
-msgstr "روسيا"
-
-#: ../src/languages.c:253
-#, fuzzy
-msgid "Serbian/Cyrillic"
-msgstr "سريالية بلغارية"
-
-#: ../src/languages.c:257
-#, fuzzy
-msgid "Serbian/Latin"
-msgstr "اللاتينية الصربية"
-
-#: ../src/languages.c:261
-#, fuzzy
-msgid "Slovak"
-msgstr "سلوفاكيا"
-
-#: ../src/languages.c:265
-msgid "Slovenian"
-msgstr "سلوفينية"
-
-#: ../src/languages.c:269
-msgid "Spanish"
-msgstr "اسباني"
-
-#: ../src/languages.c:273
-#, fuzzy
-msgid "Spanish/Spain"
-msgstr "اسباني"
-
-#: ../src/languages.c:277
-#, fuzzy
-msgid "Spanish/Mexico"
-msgstr "ا-ص|إسباني (المكسيك)"
-
-#: ../src/languages.c:281
-#, fuzzy
-msgid "Swedish"
-msgstr "ا-ص|سويدي"
-
-#: ../src/languages.c:285
-#, fuzzy
-msgid "Tagalog"
-msgstr "فهرس"
-
-#: ../src/languages.c:289
-#, fuzzy
-msgid "Tamil"
-msgstr "ذيل"
-
-#: ../src/languages.c:293
-#, fuzzy
-msgid "Telugu"
-msgstr "ا-ص|تلوجو"
-
-#: ../src/languages.c:297
-#, fuzzy
-msgid "Thai"
-msgstr "الطّائف"
-
-#: ../src/languages.c:301
-#, fuzzy
-msgid "Turkish"
-msgstr "ا-ص|تركي"
-
-#: ../src/languages.c:305
-#, fuzzy
-msgid "Ukrainian"
-msgstr "ا-ص|اكراني"
-
-#: ../src/languages.c:309
-msgid "Urdu"
-msgstr "الأردية"
-
-#: ../src/languages.c:313
-#, fuzzy
-msgid "Uzbekian"
-msgstr "الأزبكية"
-
-#: ../src/languages.c:317
-#, fuzzy
-msgid "Vietnamese"
-msgstr "ض-ي|فيتنامي"
-
-#: ../src/languages.c:321
-#, fuzzy
-msgid "Walloon"
-msgstr "ض-ي|والوني"
-
-#: ../src/languages.c:325
-msgid "Welsh"
-msgstr "الغالية"
-
-#: ../src/learn.c:380
-msgid "gtranslator learn buffer statistics:"
+#: ../plugins/open-tran/open-tran-panel.c:301 ../src/actions-search.c:200
+msgid "Phrase not found"
 msgstr ""
 
-#: ../src/learn.c:383
-#, fuzzy, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr "ابحث عن أسماء ملفات مثل %s"
+#: ../plugins/open-tran/open-tran-panel.c:323
+msgid "You have to provide a phrase to search"
+msgstr ""
 
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: ../src/learn.c:389
-#, fuzzy, c-format
-msgid "Encoding: `%s'"
-msgstr "الترميزات"
+#: ../plugins/open-tran/open-tran-panel.c:333
+msgid "You have to provide a search language code"
+msgstr ""
 
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: ../src/learn.c:395
-#, fuzzy, c-format
-msgid "Serial: `%i'"
-msgstr "خيارات التسلسل"
+#: ../plugins/open-tran/open-tran-panel.c:343
+msgid "You have to provide a language code for your language"
+msgstr ""
 
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: ../src/learn.c:401
-#, fuzzy, c-format
-msgid "Number of entries: `%i'"
-msgstr "_Number of retries:"
+#: ../plugins/open-tran/open-tran-panel.c:372
+msgid "Type"
+msgstr ""
 
-#: ../src/main.c:71
+#: ../plugins/open-tran/open-tran-panel.c:383
+msgid "Open-Tran.eu"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:422
+msgid "Look for:"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-plugin.c:108
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+msgid "Open Tran"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+msgid "Look for phrases in Open tran memory translation database."
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:3
 #, fuzzy
-msgid "Specify main window geometry"
-msgstr "هندسة نافذة المجموعة الأخيرة"
+msgid "<b>Line command:</b>"
+msgstr "<b>معلومات الطور</b>"
 
-#: ../src/main.c:71
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:4
 #, fuzzy
-msgid "GEOMETRY"
-msgstr "جنوم"
+msgid "<b>Program command:</b>"
+msgstr "<b>معلومات الطور</b>"
 
-#: ../src/main.c:119
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:5
+msgid "Source View Settings"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:6
+msgid "Use external editor"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:112
 #, fuzzy, c-format
-msgid "Error during GConf initialization: %s."
-msgstr "خطأ أثناء التحويل: %s"
+msgid "Please, install %s to be able to show the file"
+msgstr "من فضلك ثبّت gedit لتتمكن من الاطلاع على الملف"
 
-#: ../src/main.c:250
+#: ../plugins/source-code-view/source-code-view-plugin.c:392
+msgid "Paths:\n"
+msgstr "المسارات:\n"
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Show the message in the source code."
+msgstr "أظهر جدول الرّسائل (يتطلب إعادة تشغيل مترجم‌ج)"
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+msgid "Source Code View"
+msgstr ""
+
+#: ../plugins/source-code-view/viewer.c:74
+msgid "Source Viewer"
+msgstr ""
+
+#: ../plugins/source-code-view/viewer.glade.h:1
+#, fuzzy
+msgid "<b>Source code</b>"
+msgstr "<b>احفظ تلقائيا</b>"
+
+#: ../plugins/subversion/checkout-dialog.c:76
+msgid "Subversion: Checkout complete."
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:125
+msgid "Please, add a directory path to make the checkout"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:138
+msgid "Please, add a Subversion URL"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
+msgid "Checkout directory"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:260
+msgid "Checkout repository"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:226
+msgid "Subversion: Commit complete."
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:295
+#, c-format
+msgid "The ChangeLog file '%s' does not exists"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:407
+msgid "Are you sure that you want to pass an empty log message?"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:424
+msgid "You have to select at least one file to send"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:570
+msgid "Commit Changes"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:79
+msgid "Subversion: Diff complete."
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:108
 #, fuzzy, c-format
-msgid "Couldn't open '%s': %s\n"
-msgstr "لم يمكن فتح الملفّ '%s': %s"
+msgid "Please, install %s to be able to diff the file"
+msgstr "من فضلك ثبّت gedit لتتمكن من الاطلاع على الملف"
 
-#: ../src/menus.c:51
-msgid "_Go"
-msgstr "ا_ذهب"
+#: ../plugins/subversion/diff-dialog.c:411
+msgid "Diff file"
+msgstr ""
 
-#: ../src/menus.c:61
-#, fuzzy
-msgid "_Compile"
-msgstr "اب_تسامة"
+#: ../plugins/subversion/diff-dialog.c:479
+msgid "Diff"
+msgstr ""
 
-#: ../src/menus.c:62 ../src/menus.c:273
-#, fuzzy
-msgid "Compile the po file"
-msgstr "رتب أجزاء الصورة"
+#: ../plugins/subversion/subversion-plugin.c:84
+msgid "Subversion: File will be added on next commit."
+msgstr ""
 
-#: ../src/menus.c:68
+#: ../plugins/subversion/subversion-plugin.c:138
 msgid "_Update"
 msgstr "_حدّث"
 
-#: ../src/menus.c:69 ../src/menus.c:277
-#, fuzzy
-msgid "Update the po file"
-msgstr "المسار إلى الملف"
-
-#: ../src/menus.c:76
-#, fuzzy
-msgid "Add bookmark"
-msgstr "اضِف علامة موقع"
-
-#: ../src/menus.c:77
-#, fuzzy
-msgid "Add a bookmark for this message in this po file"
-msgstr "اضِف علامة موقع للصّفحة الحاليّة"
-
-#: ../src/menus.c:84
-#, fuzzy
-msgid "Aut_otranslate..."
-msgstr "تر_تيب لوحة ألوان..."
-
-#: ../src/menus.c:85
-msgid "Autotranslate the file with information from your learn buffer"
+#: ../plugins/subversion/subversion-plugin.c:139
+msgid "Sync your local copy with the Subversion tree"
 msgstr ""
 
-#: ../src/menus.c:92
+#: ../plugins/subversion/subversion-plugin.c:142
 #, fuzzy
-msgid "Remove all translations..."
-msgstr "ازِل ترجمة الإسم/التعليق"
+msgid "_Commit"
+msgstr "التعليق"
 
-#: ../src/menus.c:93
-#, fuzzy
-msgid "Remove all existing translations from the po file"
-msgstr "إزالة جميع الملفات من اصطفاف التشغيل"
-
-#: ../src/menus.c:101
-#, fuzzy
-msgid "Open from _URI..."
-msgstr "فتح من الـ URI"
-
-#: ../src/menus.c:102
-#, fuzzy
-msgid "Open a po file from a given URI"
-msgstr "افتح ملف من موقع مخصّص"
-
-#: ../src/menus.c:112
-#, fuzzy
-msgid "Recen_t files"
-msgstr "الملفات الحديثة"
-
-#: ../src/menus.c:139
-#, fuzzy
-msgid "_Header..."
-msgstr "_ترويسة كبيرة..."
-
-#: ../src/menus.c:140
-#, fuzzy
-msgid "Edit po file header"
-msgstr "تحرير الملف الشخصي: "
-
-#: ../src/menus.c:147
-#, fuzzy
-msgid "C_omment..."
-msgstr "ك_روم..."
-
-#: ../src/menus.c:148
-#, fuzzy
-msgid "Edit message comment"
-msgstr "_حرر رسالة"
-
-#: ../src/menus.c:155
-#, fuzzy
-msgid "Copy _message -> translation"
-msgstr "_ملاحظة للمترجمين:"
-
-#: ../src/menus.c:156
-msgid "Copy the original message contents and paste them as translation"
+#: ../plugins/subversion/subversion-plugin.c:143
+msgid "Commit your changes to the Subversion tree"
 msgstr ""
 
-#: ../src/menus.c:163
-#, fuzzy
-msgid "Fu_zzy"
-msgstr "تحديد غامض"
-
-#: ../src/menus.c:164
-#, fuzzy
-msgid "Toggle fuzzy status of a message"
-msgstr "أدخل رسالة الحالة:"
-
-#: ../src/menus.c:177
-#, fuzzy
-msgid "_First"
-msgstr "الأ_وّل:"
-
-#: ../src/menus.c:178 ../src/menus.c:294
-#, fuzzy
-msgid "Go to the first message"
-msgstr "اذهب إلى الصفحة الأولى"
-
-#: ../src/menus.c:184
-msgid "_Back"
-msgstr "_خلف"
-
-#: ../src/menus.c:185 ../src/menus.c:298
-#, fuzzy
-msgid "Move back one message"
-msgstr "يجري تفقّد رسائل جديدة"
-
-#: ../src/menus.c:192
-#, fuzzy
-msgid "_Next"
-msgstr "التالي"
-
-#: ../src/menus.c:193 ../src/menus.c:303
-#, fuzzy
-msgid "Move forward one message"
-msgstr "رسالة ممررة"
-
-#: ../src/menus.c:199
-msgid "_Last"
-msgstr "الأ_خيرة"
-
-#: ../src/menus.c:200 ../src/menus.c:307
-#, fuzzy
-msgid "Go to the last message"
-msgstr "اذهب إلى الصفحة الأخيرة"
-
-#: ../src/menus.c:207
-#, fuzzy
-msgid "_Go to..."
-msgstr "نمو..."
-
-#: ../src/menus.c:208
-#, fuzzy
-msgid "Goto specified message number"
-msgstr "اذهب إلى موقع محدد"
-
-#: ../src/menus.c:214
-#, fuzzy
-msgid "Next fuz_zy"
-msgstr "اللغز التالي"
-
-#: ../src/menus.c:215
-#, fuzzy
-msgid "Go to next fuzzy message"
-msgstr "اذهب إلى الصفحة التالية"
-
-#: ../src/menus.c:221
-#, fuzzy
-msgid "Next _untranslated"
-msgstr "ترجمة gettext"
-
-#: ../src/menus.c:222 ../src/menus.c:312
-#, fuzzy
-msgid "Go to next untranslated message"
-msgstr "اعرض الرسالة غير المقروءة التالية"
-
-#: ../src/menus.c:232
-msgid "_Bookmarks"
-msgstr "_علامات المواقع"
-
-#: ../src/menus.c:233
-#, fuzzy
-msgid "_Colorschemes"
-msgstr "مخطط ال_لون"
-
-#: ../src/menus.c:247
-#, fuzzy
-msgid "gtranslator _website"
-msgstr "المترجمون:"
-
-#: ../src/menus.c:248
-msgid "gtranslator's homepage on the web"
+#: ../plugins/subversion/subversion-plugin.c:146
+msgid "_Add"
 msgstr ""
 
-#: ../src/menus.c:259
+#: ../plugins/subversion/subversion-plugin.c:147
+msgid "Add a new file/directory to the Subversion tree"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:150
+msgid "_Diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:151
+msgid "Diff local PO file with repository PO file"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:154
+msgid "C_heckout"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:155
+msgid "Get a new repository copy"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:158
 #, fuzzy
-msgid "Open"
-msgstr "ا_فتح"
+msgid "S_ubversion"
+msgstr "سؤال"
 
-#: ../src/menus.c:260
+#: ../plugins/subversion/subversion.glade.h:1
 #, fuzzy
-msgid "Open a po file"
-msgstr "افتح ملف"
+msgid "  "
+msgstr "    "
 
-#: ../src/menus.c:263
-msgid "Save"
-msgstr "احفظ"
-
-#: ../src/menus.c:264
-msgid "Save File"
-msgstr "احفظ ملف"
-
-#: ../src/menus.c:267
+#: ../plugins/subversion/subversion.glade.h:3
 #, fuzzy
-msgid "Save as"
-msgstr "احفظ كـ"
+msgid "        "
+msgstr "     "
 
-#: ../src/menus.c:268
+#: ../plugins/subversion/subversion.glade.h:4
 #, fuzzy
-msgid "Save file with a different name"
-msgstr "احفظ الوصلة بإسم مغاير"
+msgid "<b>Diff options:</b>"
+msgstr "<b>المحتويات</b>"
 
-#: ../src/menus.c:272
+#: ../plugins/subversion/subversion.glade.h:5
+msgid "<b>Diff program:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:6
+msgid "<b>Directory to checkout:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:7
+msgid "<b>Directory to update:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:8
 #, fuzzy
-msgid "Compile"
-msgstr "مُنجز"
+msgid "<b>Information:</b>"
+msgstr "<b>معلومات الطور</b>"
 
-#: ../src/menus.c:276
+#: ../plugins/subversion/subversion.glade.h:9
 #, fuzzy
-msgid "Update"
-msgstr "_حدّث"
+msgid "<b>Log Message:</b>"
+msgstr "<b>احفظ تلقائيا</b>"
 
-#: ../src/menus.c:280
+#: ../plugins/subversion/subversion.glade.h:10
 #, fuzzy
-msgid "Header"
-msgstr "ترويسات"
+msgid "<b>Password:</b>"
+msgstr "<b>المسار:</b> %s"
 
-#: ../src/menus.c:281
+#: ../plugins/subversion/subversion.glade.h:11
 #, fuzzy
-msgid "Edit the header"
-msgstr "حرّر البحث المحفوظ"
+msgid "<b>Realm:</b>"
+msgstr "<b>الاسم</b>"
 
-#: ../src/menus.c:285
-msgid "Undo"
-msgstr "تراجع"
+#: ../plugins/subversion/subversion.glade.h:12
+msgid "<b>Select files to Commit:</b>"
+msgstr ""
 
-#: ../src/menus.c:286
+#: ../plugins/subversion/subversion.glade.h:13
+msgid "<b>Subversion URL:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:14
 #, fuzzy
-msgid "Undo the last performed action"
-msgstr "أعِد آخر عملية متراجع عنها"
+msgid "<b>Username:</b>"
+msgstr "<b>الاسم</b>"
 
-#: ../src/menus.c:293
-msgid "First"
-msgstr "الأول"
+#: ../plugins/subversion/subversion.glade.h:15
+msgid "Add Log Message to ChangeLog file"
+msgstr ""
 
-#: ../src/menus.c:297
+#: ../plugins/subversion/subversion.glade.h:16
+msgid "Line argument:"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:17
 #, fuzzy
-msgid "Back"
-msgstr "أسود"
+msgid "Program name:"
+msgstr "اسم المشروع"
 
-#: ../src/menus.c:302
-msgid "Next"
-msgstr "التالي"
+#: ../plugins/subversion/subversion.glade.h:18
+msgid "Remember Password"
+msgstr ""
 
-#: ../src/menus.c:306
-msgid "Last"
-msgstr "الأخير"
+#: ../plugins/subversion/subversion.glade.h:19
+msgid "Remember this decision"
+msgstr ""
 
-#: ../src/menus.c:311
+#: ../plugins/subversion/subversion.glade.h:20
+msgid "Repository authorization"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:21
+msgid "Retrieving status..."
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:22
 #, fuzzy
+msgid "Save the diff file"
+msgstr "احفظ الملف الحالي"
+
+#: ../plugins/subversion/subversion.glade.h:23
+msgid "Send Changes"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:24
+#: ../plugins/subversion/update-dialog.c:230
+msgid "Update repository"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:25
+msgid "Use configured program to view the diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:26
+msgid "label"
+msgstr ""
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
+msgid "A Subversion client plugin based on libsvn."
+msgstr ""
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Subversion"
+msgstr "سؤال"
+
+#: ../plugins/subversion/svn-command.c:172
+#: ../plugins/subversion/svn-command.c:252
+msgid "Authentication canceled"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:225
+#, fuzzy
+msgid "Hostname: "
+msgstr "اسم المشروع"
+
+#: ../plugins/subversion/svn-command.c:226
+msgid "Fingerprint: "
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:227
+msgid "Valid from: "
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:228
+msgid "Valid until: "
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:229
+msgid "Issuer DN: "
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:230
+msgid "DER certificate: "
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:377
+#: ../plugins/subversion/svn-command.c:393
+#, c-format
+msgid "Deleted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:380
+#: ../plugins/subversion/svn-command.c:399
+#, c-format
+msgid "Added: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:383
+#, c-format
+msgid "Reverted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:386
+#, fuzzy, c-format
+msgid "Revert failed: %s"
+msgstr "ملفّات محذوفة"
+
+#: ../plugins/subversion/svn-command.c:390
+#, c-format
+msgid "Resolved: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:396
+#, fuzzy, c-format
+msgid "Updated: %s"
+msgstr "حدّث"
+
+#: ../plugins/subversion/svn-command.c:402
+#, c-format
+msgid "Externally Updated: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:406
+#, c-format
+msgid "Commit Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:410
+#, c-format
+msgid "Commit Added: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:413
+#, c-format
+msgid "Commit Deleted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:417
+#, c-format
+msgid "Commit Replaced: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:421
+#, c-format
+msgid "Created File: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:436
+#, c-format
+msgid "Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:439
+#, c-format
+msgid "Merged: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:442
+#, c-format
+msgid "Conflicted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:446
+#, fuzzy, c-format
+msgid "Missing: %s"
+msgstr "مفقود"
+
+#: ../plugins/subversion/svn-command.c:449
+#, c-format
+msgid "Obstructed: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-update-command.c:103
+#, c-format
+msgid "Updated to revision %ld."
+msgstr ""
+
+#: ../plugins/subversion/update-dialog.c:74
+msgid "Subversion: Update complete."
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:293
+msgid "Modified"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:297
+msgid "Added"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:301
+msgid "Deleted"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:305
+#, fuzzy
+msgid "Conflicted"
+msgstr "ا_ضبط"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:309
 msgid "Missing"
 msgstr "مفقود"
 
-#: ../src/menus.c:319
+#: ../src/actions-file.c:202
+msgid "Open file for translation"
+msgstr "افتح ملفا ليُترجم"
+
+#: ../src/actions-file.c:276 ../src/actions-file.c:403
 #, fuzzy
-msgid "Go to the next fuzzy translation"
-msgstr "إذهب إلى التعريف التالي"
+msgid "File saved."
+msgstr "أُغلق الملف"
 
-#: ../src/menus.c:324
-#, fuzzy
-msgid "Go to"
-msgstr "إذهب إلى"
+#: ../src/actions-file.c:326
+msgid "Save file as..."
+msgstr "احفظ الملف باسم..."
 
-#: ../src/menus.c:325
-#, fuzzy
-msgid "Go to specified message number"
-msgstr "اذهب إلى موقع محدد"
+#: ../src/actions-help.c:55
+msgid "Current Developers"
+msgstr "المطورون الحاليون"
 
-#: ../src/menus.c:328
-#, fuzzy
-msgid "Find"
-msgstr "ا_بحث"
+#: ../src/actions-help.c:61
+msgid "Previous Developers"
+msgstr "المطورون السابقون"
 
-#: ../src/menus.c:329
-#, fuzzy
-msgid "Find string in po file"
-msgstr "تحرير ملف شخصي جديد"
-
-#: ../src/menus.c:333
-#, fuzzy
-msgid "Replace string in po file"
-msgstr "استب_دِل المشهد الموجود"
-
-#: ../src/message.c:94
-#, fuzzy
-msgid "Couldn't get the message!"
-msgstr "تعذّر جلب الرّسالة"
-
-#: ../src/message.c:116
-#, fuzzy
-msgid "There are no fuzzy messages left."
-msgstr "تشعيب قائمة الرّسائل."
-
-#: ../src/message.c:140
-#, fuzzy
-msgid "All messages seem to be translated."
-msgstr "جميع الرسائل ستُعرض هنا.\n"
-
-#: ../src/message.c:272
-#, fuzzy, c-format
-msgid "gtkspell error: %s\n"
-msgstr "خطأ Camel: %s"
-
-#: ../src/message.c:273
-#, fuzzy, c-format
+#: ../src/actions-help.c:79
 msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr "لا يمكن بدأ الأصوات\n"
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
 
-#: ../src/messages-table.c:210
+#: ../src/actions-help.c:83
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+
+#: ../src/actions-help.c:87
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+
+#: ../src/actions-help.c:99
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr "حزمة تحرير لملفات الترجمة لتوطين البرمجيات والمكتبات."
+
+#: ../src/actions-help.c:101
+msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+msgstr "حقوق النشر 1999-2008 لمؤسسة البرمجيات الحرة"
+
+#: ../src/actions-help.c:105
+msgid "About Gtranslator"
+msgstr "عن مترجم‌ج"
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/actions-help.c:110
+msgid "translator-credits"
+msgstr ""
+"فريق عربآيز للترجمة http:www.arabeyes.org :\n"
+"خالد حسني\t<khaledhosny@eglug.org>"
+
+#: ../src/actions-help.c:114
+msgid "Gtranslator Web Site"
+msgstr "موقع مترجم‌ج"
+
+#: ../src/actions-search.c:175
+#, c-format
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: ../src/actions-search.c:185
+msgid "Found and replaced one occurrence"
+msgstr ""
+
+#: ../src/context.c:61
+msgid "Format: "
+msgstr "النسق: "
+
+#: ../src/context.c:62
 #, fuzzy
-msgid "Original"
-msgstr "هامشي"
+msgid "Context:"
+msgstr "السياق:\n"
 
-#: ../src/page.c:199
-#, fuzzy, c-format
-msgid "Error autosaving file: %s"
-msgstr "خطأ أثناء حفظ الملف %s"
-
-#: ../src/parse.c:86
+#: ../src/context.c:63
 #, fuzzy
-msgid "Parser output"
-msgstr "ملف الخرْج"
+msgid "Extracted comments:"
+msgstr "التعليقات المستخلصة:\n"
 
-#: ../src/parse.c:254
-#, fuzzy, c-format
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:704
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:281
+#, c-format
+msgid ""
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
+"Database path: %s"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:300
+msgid "None"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:321
+msgid ""
+"This assistant will help you to create the main profile\n"
+"and generate your translation memory database."
+msgstr ""
+
+#: ../src/dialogs/assistant.c:327
+#, fuzzy
+msgid "Assistant"
+msgstr "الروسية"
+
+#: ../src/dialogs/assistant.c:416
+#, fuzzy
+msgid "<b>Profile name:</b>"
+msgstr "<b>معلومات الطور</b>"
+
+#: ../src/dialogs/assistant.c:436
+#, fuzzy
+msgid "<b>Translator name:</b>"
+msgstr "<b>معلومات المترجم</b>"
+
+#: ../src/dialogs/assistant.c:456
+#, fuzzy
+msgid "<b>Translator email:</b>"
+msgstr "<b>معلومات المترجم</b>"
+
+#: ../src/dialogs/assistant.c:476
+#, fuzzy
+msgid "<b>Language:</b>"
+msgstr "<b>إعدادات اللغة</b>"
+
+#: ../src/dialogs/assistant.c:496
+#, fuzzy
+msgid "<b>Team email:</b>"
+msgstr "بريد ال_فريق:"
+
+#: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
+#: ../src/dialogs/preferences-dialog.c:512
+#, fuzzy
+msgid "Profile"
+msgstr "الأطوار"
+
+#: ../src/dialogs/assistant.c:584
+#, fuzzy
+msgid "<b>Language code:</b>"
+msgstr "ر_مز اللغة:"
+
+#: ../src/dialogs/assistant.c:604
+#, fuzzy
+msgid "<b>Character set:</b>"
+msgstr "_طقم المحارف"
+
+#: ../src/dialogs/assistant.c:624
+#, fuzzy
+msgid "<b>Transfer encoding:</b>"
+msgstr "ترميز الن_قل:"
+
+#: ../src/dialogs/assistant.c:644
+#, fuzzy
+msgid "<b>Plural forms:</b>"
+msgstr "_صيغ الجموع:"
+
+#: ../src/dialogs/assistant.c:706
+msgid "<b>Select the path to generate the database:</b>"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:736
+msgid "<b>Look for a specific PO filename:</b>"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:745
+msgid "E.g.: gl.po"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:748
+msgid "Generate Database"
+msgstr ""
+
+#: ../src/dialogs/assistant.c:772
+#, fuzzy
+msgid "Confirmation"
+msgstr "الكرواتية"
+
+#: ../src/dialogs/close-confirmation-dialog.c:131
+msgid "Close _without Saving"
+msgstr "أغلق _دون حفظ"
+
+#: ../src/dialogs/close-confirmation-dialog.c:165
+msgid "Question"
+msgstr "سؤال"
+
+#: ../src/dialogs/close-confirmation-dialog.c:383
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr "أأحفظ التغييرات على المستند \"%s\" قبل غلقه؟"
+
+#: ../src/dialogs/close-confirmation-dialog.c:555
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "لن تُفقد التغييرات على أي ملفات."
+msgstr[1] "ستفقد التغييرات على ملف واحد."
+msgstr[2] "ستفقد التغييرات على ملفين."
+msgstr[3] "ستفقد التغييرات على %Id ملفات."
+msgstr[4] "ستفقد التغييرات على %Id ملفا."
+msgstr[5] "ستفقد التغييرات على %Id ملف."
+
+#: ../src/dialogs/close-confirmation-dialog.c:561
+#, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] "لا مستندات غير محفوظة."
+msgstr[1] "يوجد مستند به تغيير واحد غير محفوظ. أأحفظ التغييرات قبل الغلق؟"
+msgstr[2] "يوجد مستند به تغييرين غير محفوظين. أأحفظ التغييرات قبل الغلق؟"
+msgstr[3] "يوجد مستند به %Id تغييرات غير محفوظة. أأحفظ التغييرات قبل الغلق؟"
+msgstr[4] "يوجد مستند به %Id تغييرا غير محفوظ. أأحفظ التغييرات قبل الغلق؟"
+msgstr[5] "يوجد مستند به %Id تغيير غير محفوظ. أأحفظ التغييرات قبل الغلق؟"
+
+#: ../src/dialogs/close-confirmation-dialog.c:579
+msgid "Docum_ents with unsaved changes:"
+msgstr "ال_مستندات التي تحتوي على تغييرات غير محفوظة:"
+
+#: ../src/dialogs/close-confirmation-dialog.c:581
+msgid "S_elect the documents you want to save:"
+msgstr "ا_ختر المستندات التي تريد حفظها:"
+
+#: ../src/dialogs/close-confirmation-dialog.c:600
+msgid "Saving has been disabled by the system administrator."
+msgstr "الحفظ عطّله مدير النظام."
+
+#: ../src/dialogs/close-confirmation-dialog.c:602
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr "إذا لم تحفظ ستُفقد تغييراتك بشكل دائم."
+
+#: ../src/dialogs/comment-dialog.c:92
+msgid "Edit Comment"
+msgstr "حرر التعليق"
+
+#: ../src/dialogs/comment-dialog.glade.h:1
+msgid "<b>Write your comments bellow:</b>"
+msgstr "<b>اكتب تعليقاتك أسفل:</b>"
+
+#: ../src/dialogs/file-dialogs.c:60
+msgid "Gettext translation"
+msgstr "ترجمة جتتكست"
+
+#: ../src/dialogs/file-dialogs.c:65
+msgid "Gettext translation template"
+msgstr "قالب ترجمة جتتكست"
+
+#: ../src/dialogs/file-dialogs.c:70
+msgid "All files"
+msgstr "كل الملفات"
+
+#: ../src/dialogs/header-dialog.c:252
+msgid "Edit Header"
+msgstr "حرّر الترويسة"
+
+#: ../src/dialogs/header-dialog.glade.h:1
+msgid "Char_set:"
+msgstr "_طقم المحارف:"
+
+#: ../src/dialogs/header-dialog.glade.h:2
+msgid "Comment"
+msgstr "التعليق"
+
+#: ../src/dialogs/header-dialog.glade.h:3
+msgid "Enc_oding:"
+msgstr "ال_ترميز:"
+
+#: ../src/dialogs/header-dialog.glade.h:4
+msgid "Language gro_up email:"
+msgstr "بريد _مجموعة اللغة:"
+
+#: ../src/dialogs/header-dialog.glade.h:5
+msgid "Po file _revision date:"
+msgstr "تاريخ مراج_عة الملف:"
+
+#: ../src/dialogs/header-dialog.glade.h:6
+msgid "Pot _file creation date:"
+msgstr "تاريخ إن_شاء الملف:"
+
+#: ../src/dialogs/header-dialog.glade.h:7
+msgid "Project"
+msgstr "المشروع"
+
+#: ../src/dialogs/header-dialog.glade.h:8
+msgid "Project Id _version:"
+msgstr "إصدارة معرّ_ف المشروع:"
+
+#: ../src/dialogs/header-dialog.glade.h:9
+msgid "Report message _bugs to:"
+msgstr "أبلغ عن _علل الرسائل إلى:"
+
+#: ../src/dialogs/header-dialog.glade.h:10
+msgid "Translator and Language"
+msgstr "المترجم واللغة"
+
+#: ../src/dialogs/header-dialog.glade.h:11
+msgid "Translator's _email:"
+msgstr "_بريد المترجم:"
+
+#: ../src/dialogs/header-dialog.glade.h:12
+msgid "Translator's _name:"
+msgstr "ا_سم المترجم:"
+
+#: ../src/dialogs/header-dialog.glade.h:13
+msgid "Use my options to complete the following entries:"
+msgstr "استخدم خياراتي لإكمال هذه المُدخلات:"
+
+#: ../src/dialogs/header-dialog.glade.h:14
+#: ../src/dialogs/profile-dialog.glade.h:9
+msgid "_Language:"
+msgstr "الل_غة:"
+
+#: ../src/dialogs/jump-dialog.c:87
+msgid "Jump To"
+msgstr ""
+
+#: ../src/dialogs/jump-dialog.glade.h:1
+#, fuzzy
+msgid "<b>Enter message number:</b>"
+msgstr "اذهب للرسالة رقم:"
+
+#: ../src/dialogs/jump-dialog.glade.h:2
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../src/dialogs/jump-dialog.glade.h:3
+msgid "gtk-ok"
+msgstr "gtk-ok"
+
+#: ../src/dialogs/preferences-dialog.c:518
+#, fuzzy
+msgid "Active"
+msgstr "ن_شّط"
+
+#: ../src/dialogs/preferences-dialog.c:1063
+msgid ""
+"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+"profile</span>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1066
+msgid "Another profile should be selected as active before"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1078
+msgid ""
+"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+"profile?</span>"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.c:1112
+#: ../src/dialogs/preferences-dialog.glade.h:16
+msgid "Gtranslator Preferences"
+msgstr "تفضيلات مترجم‌ج"
+
+#: ../src/dialogs/preferences-dialog.glade.h:2
+msgid "<b>Anchor style:</b>"
+msgstr "<b>طراز المرابط</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:3
+msgid "<b>Autosave</b>"
+msgstr "<b>احفظ تلقائيا</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:4
+#, fuzzy
+msgid "<b>Configuration:</b>"
+msgstr "<b>التوطين</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:5
+msgid "<b>Contents</b>"
+msgstr "<b>المحتويات</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:6
+#, fuzzy
+msgid "<b>Database:</b>"
+msgstr "<b>الاسم</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:7
+msgid "<b>General</b>"
+msgstr "<b>عام</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:8
+#, fuzzy
+msgid "<b>Scheme color:</b>"
+msgstr "<b>طراز المرابط</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:9
+msgid "<b>Text Display</b>"
+msgstr "<b>عرض النص</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:10
+msgid "Add to Database"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:11
+msgid "Check _spelling"
+msgstr "_دقق الإملاء"
+
+#: ../src/dialogs/preferences-dialog.glade.h:12
+msgid "Create a _backup copy of files before saving"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:13
+msgid "Editor"
+msgstr "المحرر"
+
+#: ../src/dialogs/preferences-dialog.glade.h:14
+msgid "Editor _font:"
+msgstr "_خط المحرر:"
+
+#: ../src/dialogs/preferences-dialog.glade.h:15
+msgid "Files"
+msgstr "الملفات"
+
+#: ../src/dialogs/preferences-dialog.glade.h:17
+msgid "Interface"
+msgstr "الواجهة"
+
+#: ../src/dialogs/preferences-dialog.glade.h:18
+msgid "Make _whitespace visible"
+msgstr "اجعل الم_سافات البيضاء مرئية"
+
+#: ../src/dialogs/preferences-dialog.glade.h:19
+msgid "Max. # of missing words:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:20
+msgid "Max. difference in sentence length:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:21
+msgid "Plugins"
+msgstr "الملحقات"
+
+#: ../src/dialogs/preferences-dialog.glade.h:22
+msgid "Profiles"
+msgstr "الأطوار"
+
+#: ../src/dialogs/preferences-dialog.glade.h:23
+msgid "Select directory contains PO files:"
+msgstr ""
+
+#: ../src/dialogs/preferences-dialog.glade.h:24
+#, fuzzy
+msgid "Show options in translated messages"
+msgstr "اذهب إلى الرسالة غير المترجمة السابقة"
+
+#: ../src/dialogs/preferences-dialog.glade.h:25
+msgid ""
+"Text\n"
+"Icons\n"
+"Text + Icons\n"
+"Gnome toolbar setting\n"
+"Tabs"
+msgstr ""
+"نص\n"
+"أيقونات\n"
+"نص + أيقونات\n"
+"إعدادات جنوم\n"
+"ألسنة"
+
+#: ../src/dialogs/preferences-dialog.glade.h:30 ../src/tab.c:656
+#, fuzzy
+msgid "Translation Memory"
+msgstr "خط الترجمة:"
+
+#: ../src/dialogs/preferences-dialog.glade.h:31
+msgid "Use _custom font"
+msgstr "استخدم خطا _خاصا"
+
+#: ../src/dialogs/preferences-dialog.glade.h:32
+#, fuzzy
+msgid "Use only files with this name:"
+msgstr "احفظ الملف الحالي باسم مختلف"
+
+#: ../src/dialogs/preferences-dialog.glade.h:33
+msgid "_Autosave files every"
+msgstr "احفظ _تلقائيا كل"
+
+#: ../src/dialogs/preferences-dialog.glade.h:34
+msgid "_Delete compiled GMO files"
+msgstr "ا_حذف ملفات GMO المُصرّفة"
+
+#: ../src/dialogs/preferences-dialog.glade.h:35
+msgid "_Highlight message syntax"
+msgstr "أبرز _تركيب الرسالة"
+
+#: ../src/dialogs/preferences-dialog.glade.h:36
+msgid "_Remove fuzzy status if message is changed"
+msgstr "أ_زل حالة الإبهام إذا عُدّلت الرسالة"
+
+#: ../src/dialogs/preferences-dialog.glade.h:37
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "_حذّر إذا احتوى الملف على ترجمات مبهمة"
+
+#: ../src/dialogs/preferences-dialog.glade.h:38
+msgid "_minutes"
+msgstr "_دقائق"
+
+#: ../src/dialogs/profile-dialog.c:248
+msgid ""
+"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
+msgstr ""
+
+#: ../src/dialogs/profile-dialog.c:327
+msgid "gtranslator Profile"
+msgstr "طور مترجم‌ج"
+
+#: ../src/dialogs/profile-dialog.c:360
+msgid "Example: nplurals=2; plural=(n != 1);"
+msgstr ""
+
+#: ../src/dialogs/profile-dialog.glade.h:1
+msgid "<b>Language Settings</b>"
+msgstr "<b>إعدادات اللغة</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:2
+msgid "<b>Profile Information</b>"
+msgstr "<b>معلومات الطور</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:3
+msgid "<b>Translator Information</b>"
+msgstr "<b>معلومات المترجم</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:4
+msgid "Character _set"
+msgstr "_طقم المحارف"
+
+#: ../src/dialogs/profile-dialog.glade.h:5
+msgid "Language _code:"
+msgstr "ر_مز اللغة:"
+
+#: ../src/dialogs/profile-dialog.glade.h:6
+msgid "N_ame:"
+msgstr "الا_سم:"
+
+#: ../src/dialogs/profile-dialog.glade.h:7
+msgid "Transfer en_coding:"
+msgstr "ترميز الن_قل:"
+
+#: ../src/dialogs/profile-dialog.glade.h:8
+msgid "_Email:"
+msgstr "البري_د:"
+
+#: ../src/dialogs/profile-dialog.glade.h:10
+msgid "_Name:"
+msgstr "الاس_م:"
+
+#: ../src/dialogs/profile-dialog.glade.h:11
+msgid "_Plural forms:"
+msgstr "_صيغ الجموع:"
+
+#: ../src/dialogs/profile-dialog.glade.h:12
+msgid "_Team email:"
+msgstr "بريد ال_فريق:"
+
+#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.glade.h:4
+msgid "Replace"
+msgstr "استبدل"
+
+#: ../src/dialogs/search-dialog.c:343
+msgid "Find"
+msgstr "ابحث"
+
+#: ../src/dialogs/search-dialog.c:438
+msgid "Replace _All"
+msgstr "استبدل ال_كل"
+
+#: ../src/dialogs/search-dialog.c:441
+msgid "_Replace"
+msgstr "ا_ستبدل"
+
+#: ../src/dialogs/search-dialog.glade.h:1
+msgid "Include fuzzy strings"
+msgstr ""
+
+#: ../src/dialogs/search-dialog.glade.h:2
+msgid "Match _entire word only"
+msgstr "طابق الكلمات ال_كاملة فقط"
+
+#: ../src/dialogs/search-dialog.glade.h:3
+msgid "Original text"
+msgstr "النص الأصلي"
+
+#: ../src/dialogs/search-dialog.glade.h:5
+msgid "Replace All"
+msgstr "استبدل الكل"
+
+#: ../src/dialogs/search-dialog.glade.h:6
+msgid "Replace _with: "
+msgstr "استبدل _ب‍:"
+
+#: ../src/dialogs/search-dialog.glade.h:7
+msgid "Search _backwards"
+msgstr "ابحث لل_خلف"
+
+#: ../src/dialogs/search-dialog.glade.h:8
+msgid "Translated text"
+msgstr "النص المُتَرجَم"
+
+#: ../src/dialogs/search-dialog.glade.h:9
+msgid "_Match case"
+msgstr "طابق _حالة الحرف"
+
+#: ../src/dialogs/search-dialog.glade.h:10
+msgid "_Search for: "
+msgstr "ابح_ث عن:"
+
+#: ../src/dialogs/search-dialog.glade.h:11
+msgid "_Wrap around"
+msgstr "_لف"
+
+#: ../src/main.c:46
+msgid "[FILE...]"
+msgstr ""
+
+#: ../src/main.c:72
+#, c-format
+msgid "%s: malformed file name or URI.\n"
+msgstr ""
+
+#: ../src/main.c:108
+msgid "Gtranslator"
+msgstr "مترجم‌ج"
+
+#. Setup command line options
+#: ../src/main.c:111
+msgid "- Edit PO files"
+msgstr "- حرر ملفات PO"
+
+#: ../src/main.c:121
+#, c-format
+msgid "Error during GConf initialization: %s."
+msgstr ""
+
+#: ../src/main.c:139
+#, c-format
+msgid "Error setting the default window icon: %s"
+msgstr ""
+
+#: ../src/message-table.c:284
+msgid "Status"
+msgstr "الحالة"
+
+#: ../src/message-table.c:297
+msgid "ID"
+msgstr "المعرّف"
+
+#: ../src/message-table.c:313
+msgid "Original Text"
+msgstr "النص الأصلي"
+
+#: ../src/message-table.c:329
+msgid "Translated Text"
+msgstr "النص المُتَرجَم"
+
+#: ../src/notebook.c:94
+#, c-format
+msgid "<b>Path:</b> %s"
+msgstr "<b>المسار:</b> %s"
+
+#: ../src/notebook.c:153
+msgid "Close document"
+msgstr "أغلق المستند"
+
+#: ../src/po.c:365
+#, c-format
 msgid "Failed opening file '%s': %s"
-msgstr "فشل فتح الملف '%s': %s"
+msgstr "فشل فتح الملف '%s'‏: %s"
 
-#: ../src/parse.c:275
-#, fuzzy
+#: ../src/po.c:388
+#, c-format
+msgid "The file is empty"
+msgstr ""
+
+#: ../src/po.c:400
+#, c-format
 msgid "Gettext returned a null message domain list."
-msgstr "إرسال رسالة بريد إلكتروني للقائمة البريدية؟"
+msgstr ""
 
-#: ../src/parse.c:317
-#, fuzzy
+#: ../src/po.c:545
+#, c-format
 msgid "No messages obtained from parser."
-msgstr "رسالة مجهولة ارجعت من الملقم "
+msgstr ""
 
-#: ../src/parse.c:379 ../src/parse.c:383
-msgid "N/A"
-msgstr "غير متوفر"
-
-#.
-#. * Set window title
-#.
-#: ../src/parse.c:417
-#, fuzzy, c-format
-msgid "gtranslator -- %s"
-msgstr "المترجمون:"
-
-#: ../src/parse.c:539
+#: ../src/po.c:786
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1260,448 +1459,1173 @@ msgid ""
 "Your file should likely be named '%s.po'."
 msgstr ""
 
-#: ../src/parse.c:579
-#, fuzzy, c-format
-msgid ""
-"File %s\n"
-"contains %d fuzzy message"
-msgid_plural ""
-"File %s\n"
-"contains %d fuzzy messages"
-msgstr[0] "فشل إرسال %d رسالة من إجمالي %d"
-msgstr[1] "فشل إرسال %d رسالة من إجمالي %d"
-
-#: ../src/preferences.c:180
-#, fuzzy
-msgid "Couldn't generate the current date!"
-msgstr "تعذّر توليد مفتاح صدفة آمنة"
-
-#: ../src/prefs.c:464 ../src/prefs.c:567
-#, fuzzy
-msgid " Categories: "
-msgstr "الفئات:"
-
-#: ../src/prefs.c:483
-msgid ""
-"Note: It was not possible to determine GNU header for plural forms. Your GNU "
-"gettext tools may be too old or they do not contain a suggested value for "
-"your language."
-msgstr ""
-
-#: ../src/prefs.c:492
-msgid ""
-"Note: Your settings do not contain a plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
-
-#: ../src/prefs.c:497
-msgid ""
-"Note: Your settings contain an invalid plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
-
-#: ../src/prefs.c:546
-#, fuzzy
-msgid "gtranslator -- options"
-msgstr "خيارات التثبيت"
-
-#: ../src/prefs.c:598
-#, fuzzy
-msgid "Files"
-msgstr "م_لفات"
-
-#. General item
-#: ../src/prefs.c:605
-#, fuzzy
-msgid "General"
-msgstr "_عامّ"
-
-#: ../src/prefs.c:613
-msgid "Warn if po file contains fuzzy translations"
-msgstr ""
-
-#: ../src/prefs.c:617
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr ""
-
-#. Autosave item
-#: ../src/prefs.c:623
-#, fuzzy
-msgid "Autosave"
-msgstr "احفظ آلياً"
-
-#: ../src/prefs.c:631
-#, fuzzy
-msgid "Automatically save at regular intervals"
-msgstr "أخفي الشريط آليّا في الزاوية"
-
-#: ../src/prefs.c:639
-#, fuzzy
-msgid "Autosave interval:"
-msgstr "فاصل الحفظ الآلي"
-
-#: ../src/prefs.c:640
-msgid "Append a suffix to automatically saved files"
-msgstr ""
-
-#: ../src/prefs.c:647
-#, fuzzy
-msgid "Suffix:"
-msgstr "ال_لّاحقة:"
-
-#. Recent item
-#: ../src/prefs.c:649
-#, fuzzy
-msgid "Recent files"
-msgstr "الملفات الحديثة"
-
-#: ../src/prefs.c:664
-#, fuzzy
-msgid "Maximum number of entries in the recent files list:"
-msgstr "العدد الأقصى لمداخل التاريخ المحفوظة"
-
-#: ../src/prefs.c:665
-msgid "Check recent files before showing in recent files list"
-msgstr ""
-
-#: ../src/prefs.c:676
-msgid "Editor"
-msgstr "المحرر"
-
-#. Text item
-#: ../src/prefs.c:681
-#, fuzzy
-msgid "Text display"
-msgstr "نص ليُعرض"
-
-#: ../src/prefs.c:695
-msgid "Highlight syntax of the translation message"
-msgstr ""
-
-#: ../src/prefs.c:700
-#, fuzzy
-msgid "Use special character to indicate white space"
-msgstr "أدرج محارف خاصة في المستندات"
-
-#: ../src/prefs.c:705
-msgid "Hotkey indicating character:"
-msgstr ""
-
-#: ../src/prefs.c:714
-#, fuzzy
-msgid "Apply own fonts"
-msgstr "اس_تخدم الخط"
-
-#: ../src/prefs.c:718
-msgid "gtranslator -- font selection/msgid font"
-msgstr ""
-
-#: ../src/prefs.c:722
-#, fuzzy
-msgid "Original text font:"
-msgstr "المراسَل الأصلي:"
-
-#: ../src/prefs.c:723
-msgid "gtranslator -- font selection/msgstr font"
-msgstr ""
-
-#: ../src/prefs.c:727
-#, fuzzy
-msgid "Translation font:"
-msgstr "ترجمة"
-
-#. Contents item
-#: ../src/prefs.c:730
-msgid "Contents"
-msgstr "المحتويات"
-
-#: ../src/prefs.c:743
-msgid "Remove fuzzy status if message is changed"
-msgstr ""
-
-#: ../src/prefs.c:747
-#, fuzzy
-msgid "Keep obsolete messages in the po files"
-msgstr "احفظ الرسائل المنتقاه كملف نصّي"
-
-#: ../src/prefs.c:752
-#, fuzzy
-msgid "Instant spell checking"
-msgstr "فعّل المدقق الإملائي"
-
-#: ../src/prefs.c:763 ../src/prefs.c:778
-#, fuzzy
-msgid "PO header"
-msgstr "عنوان السطر"
-
-#: ../src/prefs.c:772
-msgid "Personal Information"
-msgstr "المعلومات الشخصية"
-
-#: ../src/prefs.c:789
-msgid "Use self contact info from Evolution Data Server"
-msgstr ""
-
-#: ../src/prefs.c:799
-msgid "<i>Unable to get email from Evolution Data Server.</i>"
-msgstr ""
-
-#: ../src/prefs.c:804
-#, fuzzy
-msgid "My name:"
-msgstr "اسم المفتاح:"
-
-#: ../src/prefs.c:809
-#, fuzzy
-msgid "My Email:"
-msgstr "البريد الإلكتروني:"
-
-#: ../src/prefs.c:813
-#, fuzzy
-msgid "<b>Author's info</b>"
-msgstr "<b>المؤلف:</b>"
-
-#: ../src/prefs.c:817
-msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
-msgstr ""
-
-#: ../src/prefs.c:835
-#, fuzzy
-msgid "Author's name:"
-msgstr "المؤلف:"
-
-#: ../src/prefs.c:841
-#, fuzzy
-msgid "Author's email:"
-msgstr "المؤلف:"
-
-#. Language item
-#: ../src/prefs.c:852
-#, fuzzy
-msgid "Language settings"
-msgstr "تعيين اللغة"
-
-#: ../src/prefs.c:879
-#, fuzzy
-msgid "Language code:"
-msgstr "رمز اللغة"
-
-#: ../src/prefs.c:905
-#, fuzzy
-msgid "Plural forms string:"
-msgstr "نماذج فارغة في النّهاية:"
-
-#: ../src/prefs.c:920
-#, fuzzy
-msgid "Functionality"
-msgstr "نداءات الدالات"
-
-#: ../src/prefs.c:935
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr ""
-
-#: ../src/prefs.c:939
-msgid "The Possibility to remove all translations from a po file"
-msgstr ""
-
-#: ../src/prefs.c:943
-#, fuzzy
-msgid "Show instant comment view in main pane"
-msgstr "اعرض عمود الثقة في مدير المفاتيح"
-
-#: ../src/prefs.c:947
-#, fuzzy
-msgid "Save geometry on exit and restore it on startup"
-msgstr "شدة الصوت المحفوظة لاسترجاعها عند تشغيل النظام"
-
-#. Messages table item
-#: ../src/prefs.c:953
-#, fuzzy
-msgid "Messages table"
-msgstr "مخزن الرّسائل"
-
-#: ../src/prefs.c:961
-#, fuzzy
-msgid "Show the messages table (requires restart)"
-msgstr "اظهر الرّسائل مع كل ترويسات البريد الإلكتروني"
-
-#: ../src/prefs.c:965
-#, fuzzy
-msgid "Collapse all entries by default"
-msgstr "قلّص كل الصفوف"
-
-#: ../src/prefs.c:976
-#, fuzzy
-msgid "Autotranslation"
-msgstr "ترجمة"
-
-#: ../src/prefs.c:988
-msgid "Query the personal learn buffer while autotranslating"
-msgstr ""
-
-#: ../src/prefs.c:992
-#, fuzzy
-msgid "Automatically learn a newly translated message"
-msgstr "أدرج التعابير المرسومة آلياً"
-
-#. Fuzzy item
-#: ../src/prefs.c:998
-#, fuzzy
-msgid "Fuzzy matching"
-msgstr "بمطابقة الأ_لبوم"
-
-#: ../src/prefs.c:1012
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
-
-#: ../src/prefs.c:1019
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr ""
-
-#: ../src/prefs.c:1076
-#, fuzzy
-msgid "Please enter your name!"
-msgstr "رجاء ادخل إسم المستخدم"
-
-#: ../src/prefs.c:1105
-#, fuzzy
-msgid "Please enter your EMail address!"
-msgstr "أدخل عنوان بريدك الالكتروني"
-
-#: ../src/prefs.c:1125
-#, fuzzy
-msgid "Please enter a valid EMail address!"
-msgstr "فضلاً أدخل عنوان نطاقٍ سليم و حاول مجدّداً."
-
-#: ../src/replace.c:162
-#, fuzzy
-msgid "No replacements made!"
-msgstr "غير مضاف حاليا!"
-
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
-#.
-#: ../src/runtime-config.c:72
-#, fuzzy
-msgid "Y"
-msgstr "_ص"
-
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
-msgid "^"
-msgstr "^"
-
-#: ../src/save.c:116
-#, fuzzy, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "لا يمكن حفظ الملف %s."
-
-#: ../src/save.c:159
-#, fuzzy, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "لا يمكن حفظ الملف %s."
-
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: ../src/save.c:169
-#, fuzzy, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "لا يمكن حفظ الملف %s."
-
-#: ../src/save.c:227
-#, fuzzy, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "لا يمكن حفظ الملف %s."
-
-#: ../src/session.c:85
-#, fuzzy
-msgid "Session restored successfully."
-msgstr "تم سحب الرسالة بنجاح"
-
-#: ../src/sighandling.c:65
-#, fuzzy, c-format
-msgid "Saving file failed: %s"
-msgstr "فشل إرسال الملف"
-
-#: ../src/stylistics.c:265
-#, fuzzy
-msgid "No font set! Using default font"
-msgstr "استخدم الخط الا_فتراضي"
-
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: ../src/stylistics.c:271
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
-
-#: ../src/utils.c:274 ../src/utils.c:291
-#, fuzzy, c-format
-msgid "Can't create directory `%s'!"
-msgstr "لا يمكن إنشاء الدّليل `%s': %s"
-
-#: ../src/utils.c:874
-#, fuzzy
-msgid "Sorry, msginit isn't available on your system!"
-msgstr "لا يتوفّر التوسيع لنظام الملفات هذا"
-
-#: ../src/utils_gui.c:141
-#, fuzzy, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "لا يمكن استيراد الجلسة"
-
-#: ../src/utils_gui.c:355
+#: ../src/po.c:821
 #, c-format
-msgid "The necessary decompression program `%s' is not installed!"
+msgid "There was an error writing the PO file: %s"
 msgstr ""
 
-#: ../src/utils_gui.c:360
+#: ../src/plugin-system/plugin-manager.c:54
+msgid "Plugin"
+msgstr "الملحقة"
+
+#: ../src/plugin-system/plugin-manager.c:55
+msgid "Enabled"
+msgstr "مفعّلة"
+
+#: ../src/plugin-system/plugin-manager.c:503
+msgid "_About"
+msgstr "_عن"
+
+#: ../src/plugin-system/plugin-manager.c:511
+msgid "C_onfigure"
+msgstr "ا_ضبط"
+
+#: ../src/plugin-system/plugin-manager.c:520
+msgid "A_ctivate"
+msgstr "ن_شّط"
+
+#: ../src/plugin-system/plugin-manager.c:531
+msgid "Ac_tivate All"
+msgstr "نشّط ال_كل"
+
+#: ../src/plugin-system/plugin-manager.c:536
+msgid "_Deactivate All"
+msgstr "_عطّل الكل"
+
+#: ../src/plugin-system/plugin-manager.c:795
+msgid "Active plugins"
+msgstr "الملحقات النشطة"
+
+#: ../src/plugin-system/plugin-manager.c:824
+msgid "_About Plugin"
+msgstr "_عن الملحقة"
+
+#: ../src/plugin-system/plugin-manager.c:828
+msgid "C_onfigure Plugin"
+msgstr "ا_ضبط الملحقة"
+
+#: ../src/prefs-manager.c:138
+msgid "Cannot initialize preferences manager."
+msgstr "تعذّر استبداء مدير التفضيلات."
+
+#: ../src/prefs-manager.c:458
 #, c-format
-msgid "The necessary compression program `%s' is not installed!"
+msgid "Expected `%s' got `%s' for key %s"
+msgstr "توقعت `%s' وحصلت على `%s' للمفتاح `%s'"
+
+#: ../src/statusbar.c:114 ../src/statusbar.c:240
+msgid "INS"
+msgstr "إدراج"
+
+#: ../src/statusbar.c:114 ../src/statusbar.c:239
+msgid "OVR"
+msgstr "استبدال"
+
+#: ../src/tab.c:223
+msgid "There is an error in the message:"
+msgstr "هناك رسالة خطأ في:"
+
+#: ../src/tab.c:396
+msgid "Open comment dialog"
 msgstr ""
 
-#: ../src/vfs-handle.c:121
-#, fuzzy, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr "فشل إنشاء دليل مؤقت في“%s”."
+#: ../src/tab.c:567
+#, c-format
+msgid "Plural %d"
+msgstr "الجمع %Id"
 
-#: ../src/vfs-handle.c:149
-#, fuzzy, c-format
-msgid "File `%s' couldn't be found!"
-msgstr "تعذّر العثور على المضيف."
+#: ../src/tab.c:613
+msgid "Message Table"
+msgstr "جدول الرسائل"
 
-#: ../src/vfs-handle.c:154
-#, fuzzy, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr "توقيع مشوّه"
-
-#: ../src/vfs-handle.c:159
-#, fuzzy, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr "تعذّر العثور على المضيف \"%s\"."
-
-#: ../src/vfs-handle.c:164
-#, fuzzy, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr "اسم المضيف غير سليم"
-
-#: ../src/vfs-handle.c:169
-#, fuzzy, c-format
-msgid "Host `%s' has no address!"
-msgstr "ليس للمضيف عنوان"
-
-#: ../src/vfs-handle.c:174
+#: ../src/tab.c:648
 #, fuzzy
-msgid "Transfer interrupted!"
-msgstr "أُوقِفت العملية"
+msgid "Context"
+msgstr "السياق:\n"
 
+#: ../src/tab.c:686
+#, fuzzy
+msgid "<b>Original Text:</b>"
+msgstr "النص الأصلي"
+
+#: ../src/tab.c:747
+#, fuzzy
+msgid "<b>Tran_slated Text:</b>"
+msgstr "النص المُتَرجَم"
+
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:919
+#, fuzzy, c-format
+msgid "Show “_%s”"
+msgstr "اعرض \"_%s\""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+msgid "_Move on Toolbar"
+msgstr "ا_نقل على شريط الأدوات"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+msgid "Move the selected item on the toolbar"
+msgstr "انقل العنصر المحدد على شريط الأدوات"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+msgid "_Remove from Toolbar"
+msgstr "اح_ذف من شريط الأدوات"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+msgid "Remove the selected item from the toolbar"
+msgstr "احذف العنصر المحدد من شريط الأدوات"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+msgid "_Delete Toolbar"
+msgstr "ا_حذف شريط الأدوات"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1387
+msgid "Remove the selected toolbar"
+msgstr "احذف شريط الأدوات المحدد"
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
+msgid "Separator"
+msgstr "فاصل"
+
+#: ../src/translation-memory/berkeley/db-base.c:165
+msgid "Running recovery..."
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:173
+#, fuzzy, c-format
+msgid "There was an error recovering the database: %s"
+msgstr "هناك رسالة خطأ في:"
+
+#: ../src/translation-memory/berkeley/db-base.c:181
+#, fuzzy, c-format
+msgid "There was an error in database: %s"
+msgstr "هناك رسالة خطأ في:"
+
+#: ../src/translation-memory/berkeley/db-orig.c:52
+msgid "original.db"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-trans.c:52
+#, fuzzy
+msgid "translations.db"
+msgstr "مترجم‌ج"
+
+#: ../src/translation-memory/berkeley/db-words.c:53
+msgid "words.db"
+msgstr ""
+
+#: ../src/translation-memory/translation-memory-ui.c:215
+#, c-format
+msgid "Insert Option nº %d"
+msgstr ""
+
+#: ../src/translation-memory/translation-memory-ui.c:293
+msgid "Shortcut"
+msgstr ""
+
+#: ../src/translation-memory/translation-memory-ui.c:304
+msgid "Level"
+msgstr ""
+
+#: ../src/translation-memory/translation-memory-ui.c:315
+msgid "String"
+msgstr ""
+
+#: ../src/utils.c:344
+#, c-format
+msgid "Unable to find file %s."
+msgstr "تعذّر العثور على الملف %s."
+
+#: ../src/utils.c:348 ../src/utils.c:384
+msgid "Please check your installation."
+msgstr "من فضلك راجع تثبيتك."
+
+#: ../src/utils.c:380
+#, c-format
+msgid "Unable to find the required widgets inside file %s."
+msgstr ""
+
+#: ../src/utils.c:788
+msgid ""
+"Unable to display help. Please make sure Gtranslator documentation package "
+"is installed."
+msgstr ""
+
+#: ../src/view.c:82
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr "خطأ gtkspell‏: %s\n"
+
+#: ../src/view.c:83
+#, c-format
+msgid ""
+"GtkSpell was unable to initialize.\n"
+" %s"
+msgstr ""
+
+#: ../src/window.c:109
+msgid "_File"
+msgstr "_ملف"
+
+#: ../src/window.c:110
+msgid "_Edit"
+msgstr "_تحرير"
+
+#: ../src/window.c:111
+msgid "_View"
+msgstr "_عرض"
+
+#. { "Bookmarks", NULL, N_("_Bookmarks") },
+#. { "Actions", NULL, N_("_Actions") },
+#: ../src/window.c:114
+msgid "_Search"
+msgstr "ب_حث"
+
+#: ../src/window.c:115
+msgid "_Go"
+msgstr "ا_ذهب"
+
+#: ../src/window.c:116
+msgid "_Help"
+msgstr "م_ساعدة"
+
+#: ../src/window.c:120
+msgid "Open a PO file"
+msgstr "افتح ملفا"
+
+#: ../src/window.c:122
+msgid "_Recent Files"
+msgstr "الملفات ال_حديثة"
+
+#: ../src/window.c:125
+msgid "Quit the program"
+msgstr "أغلق البرنامج"
+
+#. Edit menu
+#: ../src/window.c:129
+msgid "T_oolbar"
+msgstr "_شريط الأدوات"
+
+#: ../src/window.c:132
+msgid "Edit gtranslator preferences"
+msgstr "حرر خيارات مترجم‌ج"
+
+#: ../src/window.c:134 ../src/window.c:181
+msgid "_Header..."
+msgstr "ال_ترويسة..."
+
+#. Help menu
+#: ../src/window.c:138
+msgid "_Contents"
+msgstr "ال_محتويات"
+
+#: ../src/window.c:150
+msgid "Save the current file"
+msgstr "احفظ الملف الحالي"
+
+#: ../src/window.c:153
+msgid "Save the current file with another name"
+msgstr "احفظ الملف الحالي باسم مختلف"
+
+#: ../src/window.c:159
+msgid "Close the current file"
+msgstr "أغلق الملف الحالي"
+
+#: ../src/window.c:164
+msgid "Undo last operation"
+msgstr "تراجع عن آخر عملية"
+
+#: ../src/window.c:167
+msgid "Redo last undone operation"
+msgstr "أعِد آخر عملية تراجع عنها"
+
+#: ../src/window.c:170
+msgid "Cut the selected text"
+msgstr "قص النص المحدد"
+
+#: ../src/window.c:173
+msgid "Copy the selected text"
+msgstr "انسخ النص المحدد"
+
+#: ../src/window.c:176
+msgid "Paste the contents of the clipboard"
+msgstr "الصق محتويات الحافظة"
+
+#: ../src/window.c:179
+msgid "Clear the selected translation"
+msgstr "امسح الترجمة المحددة"
+
+#: ../src/window.c:183
+msgid "C_omment..."
+msgstr "ال_تعليق..."
+
+#: ../src/window.c:184
+msgid "Edit message comment"
+msgstr "حرر تعليق الرسالة"
+
+#: ../src/window.c:186
+msgid "Copy _Message to Translation"
+msgstr "انسخ الر_سالة إلى الترجمة"
+
+#: ../src/window.c:187
+msgid "Copy original message contents to the translation field"
+msgstr "انسخ محتويات الرسالة الأصلية إبى حقل الترجمة"
+
+#: ../src/window.c:189
+msgid "Toggle _Fuzzy Status"
+msgstr "غيّر _حالة الإبهام"
+
+#: ../src/window.c:190
+msgid "Toggle fuzzy status of a message"
+msgstr "غيّر حالة إبهام الرسالة"
+
+#: ../src/window.c:192 ../src/window.c:199
+#, fuzzy
+msgid "_Translation Memory"
+msgstr "خط الترجمة:"
+
+#. View menu
+#: ../src/window.c:196
+#, fuzzy
+msgid "_Context"
+msgstr "السياق:\n"
+
+#: ../src/window.c:197
+msgid "Show the Context panel"
+msgstr ""
+
+#: ../src/window.c:200
+#, fuzzy
+msgid "Show the Translation Memory panel"
+msgstr "قالب ترجمة جتتكست"
+
+#: ../src/window.c:227
+msgid "Go to the first message"
+msgstr "اذهب إلى الرسالة الأولى"
+
+#: ../src/window.c:230
+msgid "Move back one message"
+msgstr "اذهب للرسالة السابقة"
+
+#: ../src/window.c:233
+msgid "Move forward one message"
+msgstr "اذهب للرسالة التالية"
+
+#: ../src/window.c:236
+msgid "Go to the last message"
+msgstr "اذهب إلى الرسالة الأخيرة"
+
+#: ../src/window.c:238
+msgid "Next Fuz_zy"
+msgstr "المبه_مة التالية"
+
+#: ../src/window.c:239
+msgid "Go to the next fuzzy message"
+msgstr "اذهب إلى الرسالة المبهمة التالية"
+
+#: ../src/window.c:241
+msgid "Previous Fuzz_y"
+msgstr "المبهم_ة السابقة"
+
+#: ../src/window.c:242
+msgid "Go to the previous fuzzy message"
+msgstr "اذهب إلى الرسالة المبهمة السابقة"
+
+#: ../src/window.c:244
+msgid "Next _Untranslated"
+msgstr "_غير المترجمة التالية"
+
+#: ../src/window.c:245
+msgid "Go to the next untranslated message"
+msgstr "اذهب إلى الرسالة غير المترجمة التالية"
+
+#: ../src/window.c:247
+msgid "Previ_ous Untranslated"
+msgstr "غير المترجمة ال_سابقة"
+
+#: ../src/window.c:248
+msgid "Go to the previous untranslated message"
+msgstr "اذهب إلى الرسالة غير المترجمة السابقة"
+
+#: ../src/window.c:250
+#, fuzzy
+msgid "Next Fu_zzy or Untranslated"
+msgstr "_غير المترجمة التالية"
+
+#: ../src/window.c:251
+#, fuzzy
+msgid "Go to the next fuzzy or untranslated message"
+msgstr "اذهب إلى الرسالة غير المترجمة التالية"
+
+#: ../src/window.c:253
+#, fuzzy
+msgid "Pre_vious Fuzzy or Untranslated"
+msgstr "غير المترجمة ال_سابقة"
+
+#: ../src/window.c:254
+#, fuzzy
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "اذهب إلى الرسالة غير المترجمة السابقة"
+
+#: ../src/window.c:257
+#, fuzzy
+msgid "Jumps to a specific message"
+msgstr "اذهب إلى رقم الرسالة المحدد"
+
+#: ../src/window.c:262
+msgid "Search for text"
+msgstr "ابحث عن نص"
+
+#: ../src/window.c:271
+msgid "Search for and replace text"
+msgstr "ابحث عن النص واستبدله"
+
+#: ../src/window.c:730
+msgid "Untranslated"
+msgstr "غير مُتَرجَم"
+
+#: ../src/window.c:732
+msgid "Translated"
+msgstr "مُتَرجَم"
+
+#: ../src/window.c:734
+msgid "Fuzzy"
+msgstr "مبهم"
+
+#: ../src/window.c:739
+#, c-format
+msgid "Status: %s"
+msgstr "الحالة: %s"
+
+#: ../src/window.c:740
+#, c-format
+msgid "Current: %d"
+msgstr "الحالي: %Id"
+
+#: ../src/window.c:741
+#, c-format
+msgid "Total: %d"
+msgstr "المجموع: %Id"
+
+#: ../src/window.c:742
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "المبهم: %Id"
+
+#: ../src/window.c:743
+#, c-format
+msgid "Untranslated: %d"
+msgstr "غير المُتَرجَم: %Id"
+
+#.
+#. * Translators: The title of the window when there is only one tab
+#.
+#: ../src/window.c:847 ../src/window.c:851
+#, fuzzy, c-format
+msgid "gtranslator - %s"
+msgstr "مترجم‌ج -- %s"
+
+#: ../src/window.c:849
+#, fuzzy, c-format
+msgid "gtranslator - *%s"
+msgstr "مترجم‌ج -- %s"
+
+#: ../src/window.c:856
+#, fuzzy
+msgid "gtranslator"
+msgstr "مترجم‌ج"
+
+#: ../src/window.c:1212
+msgid "Toolbar Editor"
+msgstr "محرر شريط الأدوات"
+
+#: ../src/window.c:1530
+msgid "Documents"
+msgstr "المستندات"
+
+#~ msgid "<b>Bookmarks</b>"
+#~ msgstr "<b>العلامات</b>"
+
+#~ msgid "<b>Active</b>"
+#~ msgstr "<b>نشط:</b>"
+
+#~ msgid "Append a suffix to autosaved _files"
+#~ msgstr "ألحق لاحقة بالمل_فات المحفوظة تلقائيا"
+
+#~ msgid "_Keep obsolete messages"
+#~ msgstr "ا_ترك الرسالة الملغاة"
+
+#~ msgid "_Suffix to append:"
+#~ msgstr "اللا_حقة التي ستُضاف:"
+
+#~ msgid "autosave"
+#~ msgstr "احفظ تلقائيا"
+
+#~ msgid "gtk-add"
+#~ msgstr "gtk-add"
+
+#~ msgid "gtk-delete"
+#~ msgstr "gtk-delete"
+
+#~ msgid "gtk-edit"
+#~ msgstr "gtk-edit"
+
+#~ msgid "Singular"
+#~ msgstr "المفرد"
+
+#~ msgid "Plural"
+#~ msgstr "الجمع"
+
+#~ msgid "Open _Location..."
+#~ msgstr "افتح م_كانا..."
+
+#~ msgid "Open a PO file from a given URI"
+#~ msgstr "افتح ملفا من المسار المعطى"
+
+#~ msgid "Side _Pane"
+#~ msgstr "اللو_حة الجانبية"
+
+#~ msgid "Show or hide the side pane in the current window"
+#~ msgstr "اعرض أو أخفِ اللوحة الجانبية في النافذة الحالية"
+
+#~ msgid "Find Ne_xt"
+#~ msgstr "ال_تالي"
+
+#~ msgid "Search forward for the same text"
+#~ msgstr "ابحث للأمام عن نفس النص"
+
+#~ msgid "Find _Previous"
+#~ msgstr "ال_سابق"
+
+#~ msgid "Search backward for the same text"
+#~ msgstr "ابحث للخلف عن نفس النص"
+
+#~ msgid "The GNOME translation program"
+#~ msgstr "برنامج جنوم للترجمة"
+
+#~ msgid "_View/_Bookmarks/"
+#~ msgstr "_عرض/العلا_مات"
+
+#~ msgid "Open %s (%s)"
+#~ msgstr "افتح %s‏ (%s)"
+
+#~ msgid "Can't apply color scheme file `%s'!"
+#~ msgstr "تعذّر تطبيق مخطط الألوان `%s'!"
+
+#~ msgid "Couldn't retrieve author information!"
+#~ msgstr "تعذّر جلب على بيانات المؤلف!"
+
+#~ msgid "Unknown"
+#~ msgstr "مجهول"
+
+#~ msgid "<Not Given>"
+#~ msgstr "<غير معطى>"
+
+#~ msgid "_View/_Colorschemes/"
+#~ msgstr "_عرض/مخ_ططات الألوان"
+
+#~ msgid "Activate colorscheme %s"
+#~ msgstr "نشّط مخطط الألوان %s"
+
+#, fuzzy
+#~ msgid "An error occurred while msgfmt was executed:\n"
+#~ msgstr "حدث خطأ عند اختبار المحفوظة."
+
+#, fuzzy
+#~ msgid "Sorry, msgfmt isn't available on your system!"
+#~ msgstr "لا يتوفّر التوسيع لنظام الملفات هذا"
+
+#, fuzzy
+#~ msgid ""
+#~ "Compile successful:\n"
+#~ "%s"
+#~ msgstr "_نجح الولوج:"
+
+#~ msgid "Save local copy of file as..."
+#~ msgstr "احفظ نسحة محلية من الملف باسم..."
+
+#~ msgid ""
+#~ "File %s\n"
+#~ "was changed. Save?"
+#~ msgstr ""
+#~ "الملف %s\\n\n"
+#~ "تغيّر. أأحفظه؟"
+
+#~ msgid "Enter search string:"
+#~ msgstr "أدخل سلسلة البحث:"
+
+#~ msgid "Case sensitive"
+#~ msgstr "حساس لحالة الحرف"
+
+#~ msgid "Find in:"
+#~ msgstr "ابحث في:"
+
+#~ msgid "English"
+#~ msgstr "الإنجليزية"
+
+#~ msgid "Ignore hotkeys"
+#~ msgstr "تجاهل مفاتيح الاختصار"
+
+#~ msgid "String to replace:"
+#~ msgstr "السلسلة التي ستُستبدل:"
+
+#~ msgid "Replace string:"
+#~ msgstr "سلسلة الاستبدال:"
+
+#~ msgid "Please enter a string to replace!"
+#~ msgstr "من فضلك أدخل سلسلة لاستبدالها:"
+
+#, fuzzy
+#~ msgid ""
+#~ "File %s\n"
+#~ "was changed. Do you want to revert to saved copy?"
+#~ msgstr "الملف موجود. هل تريد أن تكتب فوقه؟"
+
+#~ msgid "Enter URI:"
+#~ msgstr "أدخل المسار:"
+
+#, fuzzy
+#~ msgid "No URI given!"
+#~ msgstr "لا URI"
+
+#, fuzzy
+#~ msgid "Postpone decision"
+#~ msgstr "وجهة النشر"
+
+#, fuzzy
+#~ msgid "Ignore recovery file"
+#~ msgstr "لقد فشل المفسّر."
+
+#, fuzzy
+#~ msgid "Comment for the bookmark:"
+#~ msgstr "إجراء علامات المواقع الموسومة:"
+
+#, fuzzy
+#~ msgid "No comment"
+#~ msgstr "تعليقات الشفرة"
+
+#, fuzzy
+#~ msgid "Please enter a search string"
+#~ msgstr "رجاء ادخل إسم المستخدم"
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not find\n"
+#~ "\"%s\""
+#~ msgstr "تعذّر العثور على '%s'"
+
+#, fuzzy
+#~ msgid "Message %d / %d / Status: %s"
+#~ msgstr "حالة الرسالة"
+
+#, fuzzy
+#~ msgid "No header for this file/domain"
+#~ msgstr "النسبة لهذه العملية"
+
+#, fuzzy
+#~ msgid "gtranslator -- edit header"
+#~ msgstr "ترويسة فاسدة"
+
+#~ msgid "Comments:"
+#~ msgstr "التعليقات:"
+
+#~ msgid "_File/Recen_t files/"
+#~ msgstr "_ملف/ال_ملفات الحديثة"
+
+#~ msgid "Afrikaans"
+#~ msgstr "الأفريكانية"
+
+#~ msgid "Albanian"
+#~ msgstr "الألبانية"
+
+#~ msgid "Arabic"
+#~ msgstr "العربية"
+
+#~ msgid "Azerbaijani Turkish"
+#~ msgstr "التركية الأذربيجانية"
+
+#~ msgid "Basque"
+#~ msgstr "الباسكية"
+
+#~ msgid "Belarusian"
+#~ msgstr "البلاروسية"
+
+#~ msgid "Bengali"
+#~ msgstr "البنغالية"
+
+#~ msgid "Britton"
+#~ msgstr "البريتونية"
+
+#~ msgid "Bulgarian"
+#~ msgstr "البلغارية"
+
+#~ msgid "Catalan"
+#~ msgstr "الكتلانية"
+
+#~ msgid "Chinese/Simplified"
+#~ msgstr "الصينية المبسّطة"
+
+#~ msgid "Chinese/Traditional"
+#~ msgstr "الصينية التقليدية"
+
+#~ msgid "Czech"
+#~ msgstr "التشيكية"
+
+#~ msgid "Danish"
+#~ msgstr "الأسبانية"
+
+#~ msgid "Dutch"
+#~ msgstr "الهولندية"
+
+#~ msgid "English/Canada"
+#~ msgstr "الإنجليزية (كندا)"
+
+#~ msgid "English/GB"
+#~ msgstr "الإنجليزية (بريطانيا)"
+
+#~ msgid "English/USA"
+#~ msgstr "الإنجليزية (الولايات المتّحدة)"
+
+#~ msgid "Esperanto"
+#~ msgstr "الإسبرانتو"
+
+#~ msgid "Estonian"
+#~ msgstr "الإستونيّة"
+
+#~ msgid "Persian"
+#~ msgstr "الفارسية"
+
+#~ msgid "Finnish"
+#~ msgstr "الفنلندية"
+
+#~ msgid "French"
+#~ msgstr "الفرنسية"
+
+#~ msgid "Galician"
+#~ msgstr "الغاليتشية"
+
+#~ msgid "German"
+#~ msgstr "الألمانية"
+
+#~ msgid "Greek"
+#~ msgstr "اليونانية"
+
+#, fuzzy
+#~ msgid "Gujarati"
+#~ msgstr "الجوارانية"
+
+#~ msgid "Hebrew"
+#~ msgstr "العبرية"
+
+#~ msgid "Hindi"
+#~ msgstr "الهندية"
+
+#~ msgid "Hungarian"
+#~ msgstr "المجرية"
+
+#~ msgid "Icelandic"
+#~ msgstr "الأيسلندية"
+
+#~ msgid "Indonesian"
+#~ msgstr "الإندونيسية"
+
+#~ msgid "Italian"
+#~ msgstr "الإيطالية"
+
+#~ msgid "Irish"
+#~ msgstr "الأيرلندية"
+
+#~ msgid "Japanese"
+#~ msgstr "اليابانية"
+
+#~ msgid "Kannada"
+#~ msgstr "الكندية"
+
+#~ msgid "Korean"
+#~ msgstr "الكورية"
+
+#~ msgid "Kurdish"
+#~ msgstr "الكردية"
+
+#~ msgid "Latvian"
+#~ msgstr "اللتفية"
+
+#~ msgid "Lithuanian"
+#~ msgstr "الليتوانية"
+
+#~ msgid "Maltese"
+#~ msgstr "المالطيّة"
+
+#, fuzzy
+#~ msgid "Marathi"
+#~ msgstr "ماراثون"
+
+#~ msgid "Mongolian"
+#~ msgstr "المنغولية"
+
+#~ msgid "Norwegian/Bokmaal"
+#~ msgstr "النرويجية (بوكمال)"
+
+#~ msgid "Norwegian/Nynorsk"
+#~ msgstr "النرويجية (نينرسك)"
+
+#~ msgid "Punjabi"
+#~ msgstr "البنجابية"
+
+#~ msgid "Portuguese"
+#~ msgstr "البرتغالية"
+
+#~ msgid "Portuguese/Brazil"
+#~ msgstr "البرتغالية (البرازيل)"
+
+#~ msgid "Romanian"
+#~ msgstr "الرومانية"
+
+#~ msgid "Serbian/Cyrillic"
+#~ msgstr "الصربية السريلية"
+
+#~ msgid "Serbian/Latin"
+#~ msgstr "الصربية اللاتينية"
+
+#~ msgid "Slovak"
+#~ msgstr "السلوفاكية"
+
+#~ msgid "Slovenian"
+#~ msgstr "السلوفينية"
+
+#~ msgid "Spanish"
+#~ msgstr "الأسبانية"
+
+#~ msgid "Spanish/Spain"
+#~ msgstr "الأسبانية (أسبانيا)"
+
+#~ msgid "Spanish/Mexico"
+#~ msgstr "الأسبانية (المكسيك)"
+
+#~ msgid "Swedish"
+#~ msgstr "السويدية"
+
+#, fuzzy
+#~ msgid "Telugu"
+#~ msgstr "ا-ص|تلوجو"
+
+#~ msgid "Thai"
+#~ msgstr "التايلندية"
+
+#~ msgid "Turkish"
+#~ msgstr "التركية"
+
+#, fuzzy
+#~ msgid "Ukrainian"
+#~ msgstr "ا-ص|اكراني"
+
+#~ msgid "Urdu"
+#~ msgstr "الأردية"
+
+#, fuzzy
+#~ msgid "Uzbekian"
+#~ msgstr "الأزبكية"
+
+#, fuzzy
+#~ msgid "Vietnamese"
+#~ msgstr "ض-ي|فيتنامي"
+
+#, fuzzy
+#~ msgid "Walloon"
+#~ msgstr "ض-ي|والوني"
+
+#~ msgid "Welsh"
+#~ msgstr "الغالية"
+
+#, fuzzy
+#~ msgid "Learn buffer filename: `%s`"
+#~ msgstr "ابحث عن أسماء ملفات مثل %s"
+
+#~ msgid "Encoding: `%s'"
+#~ msgstr "الترميز: `%s'"
+
+#~ msgid "Serial: `%i'"
+#~ msgstr "التسلسل: `%i'"
+
+#~ msgid "Number of entries: `%i'"
+#~ msgstr "عدد المُدخلات: `%i'"
+
+#~ msgid "Specify main window geometry"
+#~ msgstr "حدد أبعاد النافذة الرئيسية"
+
+#~ msgid "GEOMETRY"
+#~ msgstr "الأبعاد"
+
+#, fuzzy
+#~ msgid "Couldn't open '%s': %s\n"
+#~ msgstr "لم يمكن فتح الملفّ '%s': %s"
+
+#~ msgid "_Compile"
+#~ msgstr "_صرّف"
+
+#~ msgid "Add bookmark"
+#~ msgstr "أضِف علامة"
+
+#~ msgid "Add a bookmark for this message in this po file"
+#~ msgstr "ضع علامة على هذه الرسالة في هذا الملف"
+
+#~ msgid "Aut_otranslate..."
+#~ msgstr "ترجم آل_يا"
+
+#~ msgid "Remove all translations..."
+#~ msgstr "أزِل كل الترجمات..."
+
+#~ msgid "Remove all existing translations from the po file"
+#~ msgstr "أزِل كل الترجمات الموجودة في الملف"
+
+#~ msgid "Open from _URI..."
+#~ msgstr "افتح من _مسار..."
+
+#~ msgid "Recen_t files"
+#~ msgstr "الملفات ال_حديثة"
+
+#~ msgid "Edit po file header"
+#~ msgstr "حرر ترويسة الملف"
+
+#~ msgid "Fu_zzy"
+#~ msgstr "_مبهم"
+
+#~ msgid "_First"
+#~ msgstr "الأ_ولى"
+
+#~ msgid "_Back"
+#~ msgstr "ال_سابقة"
+
+#~ msgid "_Last"
+#~ msgstr "الأ_خيرة"
+
+#~ msgid "_Go to..."
+#~ msgstr "ا_ذهب إلى..."
+
+#~ msgid "Goto specified message number"
+#~ msgstr "اذهب إلى الرسالة المحدد رقمها"
+
+#~ msgid "_Colorschemes"
+#~ msgstr "مخططات الأ_لوان"
+
+#~ msgid "gtranslator's homepage on the web"
+#~ msgstr "صفحة مترجم‌ج على الوب"
+
+#~ msgid "Open"
+#~ msgstr "افتح"
+
+#~ msgid "Save"
+#~ msgstr "احفظ"
+
+#~ msgid "Save File"
+#~ msgstr "احفظ ملفا"
+
+#~ msgid "Save as"
+#~ msgstr "احفظ باسم"
+
+#~ msgid "Compile"
+#~ msgstr "صرّف"
+
+#~ msgid "Header"
+#~ msgstr "الترويسة"
+
+#~ msgid "Undo"
+#~ msgstr "تراجع"
+
+#~ msgid "First"
+#~ msgstr "الأولى"
+
+#~ msgid "Back"
+#~ msgstr "السابقة"
+
+#~ msgid "Next"
+#~ msgstr "التالية"
+
+#~ msgid "Last"
+#~ msgstr "الأخيرة"
+
+#~ msgid "Go to the next fuzzy translation"
+#~ msgstr "اذهب إلى الرسالة المبهمة التالية"
+
+#~ msgid "Go to"
+#~ msgstr "اذهب إلى"
+
+#~ msgid "Find string in po file"
+#~ msgstr "ابحث عن مقطع في الملف"
+
+#~ msgid "Replace string in po file"
+#~ msgstr "استبدل مقطعا في الملف"
+
+#~ msgid "Couldn't get the message!"
+#~ msgstr "تعذّر جلب الرّسالة"
+
+#~ msgid "There are no fuzzy messages left."
+#~ msgstr "لم يتبق أي رسائل مبهمة"
+
+#~ msgid "All messages seem to be translated."
+#~ msgstr "يظهر أن كل الرسائل مترجمة"
+
+#, fuzzy
+#~ msgid "Error autosaving file: %s"
+#~ msgstr "خطأ أثناء حفظ الملف %s"
+
+#~ msgid "Parser output"
+#~ msgstr "خرْج المحلل"
+
+#~ msgid "N/A"
+#~ msgstr "غير متوفر"
+
+#, fuzzy
+#~ msgid ""
+#~ "File %s\n"
+#~ "contains %d fuzzy message"
+#~ msgid_plural ""
+#~ "File %s\n"
+#~ "contains %d fuzzy messages"
+#~ msgstr[0] "فشل إرسال %d رسالة من إجمالي %d"
+#~ msgstr[1] "فشل إرسال %d رسالة من إجمالي %d"
+
+#~ msgid "Couldn't generate the current date!"
+#~ msgstr "تعذّر توليد التاريخ الحالي!"
+
+#~ msgid " Categories: "
+#~ msgstr " الفئات:"
+
+#~ msgid "Automatically save at regular intervals"
+#~ msgstr "احفظ الملف تلقائيا على فترات"
+
+#~ msgid "Suffix:"
+#~ msgstr "اللاحقة:"
+
+#, fuzzy
+#~ msgid "Use special character to indicate white space"
+#~ msgstr "أدرج محارف خاصة في المستندات"
+
+#~ msgid "Apply own fonts"
+#~ msgstr "استخدم خطا خاصا"
+
+#~ msgid "Instant spell checking"
+#~ msgstr "تدقيق إملائي آني"
+
+#~ msgid "PO header"
+#~ msgstr "ترويسة PO"
+
+#~ msgid "My name:"
+#~ msgstr "اسمي:"
+
+#~ msgid "Author's name:"
+#~ msgstr "اسم المؤلف:"
+
+#~ msgid "Author's email:"
+#~ msgstr "بريد المؤلف:"
+
+#, fuzzy
+#~ msgid "Show instant comment view in main pane"
+#~ msgstr "اعرض عمود الثقة في مدير المفاتيح"
+
+#, fuzzy
+#~ msgid "Save geometry on exit and restore it on startup"
+#~ msgstr "شدة الصوت المحفوظة لاسترجاعها عند تشغيل النظام"
+
+#~ msgid "Collapse all entries by default"
+#~ msgstr "قلّص كل المدخلات"
+
+#~ msgid "Automatically learn a newly translated message"
+#~ msgstr "تعلّم الترجمات الجديدة تلقائيا"
+
+#~ msgid "Fuzzy matching"
+#~ msgstr "المطابقة الضبابية"
+
+#~ msgid "Please enter your name!"
+#~ msgstr "رجاء أدخل اسمك"
+
+#~ msgid "Please enter your EMail address!"
+#~ msgstr "رجاء أدخل عنوانك البريدي"
+
+#~ msgid "Please enter a valid EMail address!"
+#~ msgstr "رجاء أدخل بريدا صحيحا ثم حاول ثانيا"
+
+#~ msgid "No replacements made!"
+#~ msgstr "لم يتم أي استبدال"
+
+#~ msgid "Y"
+#~ msgstr "ن"
+
+#~ msgid "^"
+#~ msgstr "^"
+
+#, fuzzy
+#~ msgid "Couldn't save compiled gettext file `%s'!"
+#~ msgstr "لا يمكن حفظ الملف %s."
+
+#, fuzzy
+#~ msgid "Couldn't save compressed gettext file `%s'!"
+#~ msgstr "لا يمكن حفظ الملف %s."
+
+#, fuzzy
+#~ msgid "Couldn't save %s'd gettext file `%s'!"
+#~ msgstr "لا يمكن حفظ الملف %s."
+
+#, fuzzy
+#~ msgid "Couldn't save zip'ed po file `%s'!"
+#~ msgstr "لا يمكن حفظ الملف %s."
+
+#, fuzzy
+#~ msgid "Session restored successfully."
+#~ msgstr "تم سحب الرسالة بنجاح"
+
+#, fuzzy
+#~ msgid "Saving file failed: %s"
+#~ msgstr "فشل إرسال الملف"
+
+#~ msgid "No font set! Using default font"
+#~ msgstr "لم يحدد أي خط، سأستخدم الخط الافتراضي"
+
+#~ msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+#~ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+
+#, fuzzy
+#~ msgid "Can't create directory `%s'!"
+#~ msgstr "لا يمكن إنشاء الدّليل `%s': %s"
+
+#, fuzzy
+#~ msgid "Sorry, msginit isn't available on your system!"
+#~ msgstr "لا يتوفّر التوسيع لنظام الملفات هذا"
+
+#, fuzzy
+#~ msgid "The geometry string \"%s\" couldn't be parsed!"
+#~ msgstr "لا يمكن استيراد الجلسة"
+
+#, fuzzy
+#~ msgid "Couldn't create temporary directory `%s'!"
+#~ msgstr "فشل إنشاء دليل مؤقت في“%s”."
+
+#, fuzzy
+#~ msgid "File `%s' couldn't be found!"
+#~ msgstr "تعذّر العثور على المضيف."
+
+#, fuzzy
+#~ msgid "Malformed URI `%s' entered!"
+#~ msgstr "توقيع مشوّه"
+
+#, fuzzy
+#~ msgid "Host `%s' couldn't be found!"
+#~ msgstr "تعذّر العثور على المضيف \"%s\"."
+
+#, fuzzy
+#~ msgid "Hostname `%s' is not valid!"
+#~ msgstr "اسم المضيف غير سليم"
+
+#, fuzzy
+#~ msgid "Host `%s' has no address!"
+#~ msgstr "ليس للمضيف عنوان"
+
+#, fuzzy
+#~ msgid "Transfer interrupted!"
+#~ msgstr "أُوقِفت العملية"
