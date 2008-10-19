@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.help.HEAD\n"
-"POT-Creation-Date: 2008-10-18 04:09+0000\n"
-"PO-Revision-Date: 2008-10-19 12:33+0200\n"
+"POT-Creation-Date: 2008-10-19 10:51+0000\n"
+"PO-Revision-Date: 2008-10-19 12:56+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -258,14 +258,14 @@ msgid ""
 "To run <application>Gtranslator</application>, select "
 "<menuchoice><guimenu>Programs</guimenu><guisubmenu>Development</"
 "guisubmenu><guimenuitem>Gtranslator</guimenuitem></menuchoice> from the "
-"<guimenu>Main Menu</guimenu>, or type <command>Gtranslator</command> on the "
+"<guimenu>Main Menu</guimenu>, or type <command>gtranslator</command> on the "
 "command line."
 msgstr ""
 "Para ejecutar <application>Gtranslator</application> seleccione "
 "<menuchoice><guimenu>Programas</guimenu><guisubmenu>Programación</"
 "guisubmenu><guimenuitem>Gtranslator</guimenuitem></menuchoice> del "
-"<command>Menú principal</command> o escriba <application>gtranslator</"
-"application> en la línea de comandos."
+"<command>Menú principal</command> o escriba <command>gtranslator</command> "
+"en la línea de comandos."
 
 #: C/gtranslator.xml:161(title)
 msgid "Using Gtranslator"
@@ -374,7 +374,7 @@ msgstr "Cargar un archivo po"
 msgid ""
 "To load a po file, use the <menuchoice><guisubmenu>File</"
 "guisubmenu><guimenuitem>Open...</guimenuitem></menuchoice> menuitem. It will "
-"bring up the <guilabel>Gtranslator -- open po file</guilabel> dialog box. "
+"bring up the <guilabel>Open file for translation</guilabel> dialog box. "
 "Browse through your computer filesystem, choose the po file you wish to open "
 "and click <guibutton>OK</guibutton>."
 msgstr ""
@@ -935,9 +935,11 @@ msgstr ""
 
 #: C/gtranslator.xml:836(para)
 msgid ""
-"<guimenuitem>Preferences</guimenuitem> This opens the <guilabel>Preferences "
-"Dialog</guilabel>."
+"<guimenuitem>Preferences</guimenuitem> This opens the <guilabel>Preferences</"
+"guilabel> dialog."
 msgstr ""
+"<guimenuitem>Preferencias</guimenuitem>. Esto abre el diálogo "
+"<guilabel>Preferencias</guilabel>."
 
 #: C/gtranslator.xml:848(guimenu)
 msgid "View"
@@ -1022,16 +1024,16 @@ msgstr "Buscar"
 
 #: C/gtranslator.xml:970(para)
 msgid ""
-"<guimenuitem>Find</guimenuitem> This command opens the <guilabel>Find "
-"dialog</guilabel>."
+"<guimenuitem>Find</guimenuitem> This command opens the <guilabel>Find</"
+"guilabel> dialog."
 msgstr ""
 "<guimenuitem>Buscar</guimenuitem>. Este comando abre el diálogo "
 "<guilabel>Buscar</guilabel>."
 
 #: C/gtranslator.xml:978(para)
 msgid ""
-"<guimenuitem>Replace</guimenuitem> This opens the <guilabel>Replace dialog</"
-"guilabel>."
+"<guimenuitem>Replace</guimenuitem> This opens the <guilabel>Replace</"
+"guilabel> dialog."
 msgstr ""
 "<guimenuitem>Reemplazar</guimenuitem>. Esto abre el diálogo "
 "<guilabel>Reemplazar</guilabel>."
@@ -1060,6 +1062,11 @@ msgid ""
 "application>, such as author name, the application version number, and the "
 "URL for the application web page."
 msgstr ""
+"<guimenuitem>Acerca de</guimenuitem> Esto abre el diálogo <guilabel>Acerca "
+"de</guilabel> que muestra información básica acerca de "
+"<application>Gtranslator</application>, tal como los nombres de los autores, "
+"el número de versión de la aplicación y el URL de la página web de la "
+"aplicación."
 
 #: C/gtranslator.xml:1032(title)
 msgid "Available commandline options"
@@ -1109,7 +1116,7 @@ msgid "File Tab"
 msgstr "Solapa Archivo"
 
 #: C/gtranslator.xml:1084(para)
-msgid "The properties in the <guilabel>File </guilabel> tab are:"
+msgid "The properties in the <guilabel>File</guilabel> tab are:"
 msgstr "Las propiedades en la solapa <guilabel>Archivo</guilabel> son:"
 
 #: C/gtranslator.xml:1091(guilabel)
@@ -1137,7 +1144,7 @@ msgid "Editor Tab"
 msgstr "Solapa Editor"
 
 #: C/gtranslator.xml:1114(para)
-msgid "The properties in the <guilabel>Editor </guilabel> tab are:"
+msgid "The properties in the <guilabel>Editor</guilabel> tab are:"
 msgstr "Las propiedades en la solapa <guilabel>Editor</guilabel> son:"
 
 #: C/gtranslator.xml:1127(phrase)
@@ -1165,6 +1172,8 @@ msgid ""
 "With this option active the withespace in the original and translated boxes "
 "are shown as a dot."
 msgstr ""
+"Con esta opción activada los espacios en blanco en las cajas original y "
+"traducido se muestran como un punto."
 
 #: C/gtranslator.xml:1153(guilabel)
 msgid "Use custom font"
@@ -1210,7 +1219,7 @@ msgid "The <guilabel>Editor</guilabel> tab contains:"
 msgstr "La solapa <guilabel>Editor</guilabel> contiene:"
 
 #: C/gtranslator.xml:1199(phrase)
-msgid "GtranslatorProfiles Tab"
+msgid "Gtranslator Profiles Tab"
 msgstr "Solapa Perfiles de Gtranslator"
 
 #: C/gtranslator.xml:1207(guilabel)
@@ -1219,10 +1228,10 @@ msgstr "Botón «Añadir»"
 
 #: C/gtranslator.xml:1209(para)
 msgid ""
-"It shows the <guilabel>Profile Dialog</guilabel> in order to create a new "
+"It shows the <guilabel>Profile</guilabel> dialog in order to create a new "
 "profile."
 msgstr ""
-"Muestra el diálogo <guilabel>Perfil</guilabel> para crear un nuevo perfil."
+"Muestra el diálogo <guilabel>Perfil</guilabel> para crear un perfil nuevo."
 
 #: C/gtranslator.xml:1216(guilabel)
 msgid "Edit button"
@@ -1230,7 +1239,7 @@ msgstr "Botón «Editar»"
 
 #: C/gtranslator.xml:1218(para)
 msgid ""
-"It shows the <guilabel>Profile Dialog</guilabel> in order to edit an exists "
+"It shows the <guilabel>Profile</guilabel> dialog in order to edit an exists "
 "profile."
 msgstr ""
 "Muestra el diálogo <guilabel>Perfil</guilabel> para editar un perfil "
@@ -1245,7 +1254,7 @@ msgid "It removes the selected profile."
 msgstr "Elimina el perfil seleccionado."
 
 #: C/gtranslator.xml:1234(para)
-msgid "The entries in the <guilabel>Profiles Dialog</guilabel> are:"
+msgid "The entries in the <guilabel>Profiles</guilabel> dialog are:"
 msgstr "Las entradas en el diálogo <guilabel>Preferencias</guilabel> son:"
 
 #: C/gtranslator.xml:1246(phrase)
@@ -1261,6 +1270,7 @@ msgid ""
 "It is the name of the profile. It is what identify the profile and it must "
 "be unique."
 msgstr ""
+"Es el nombre del perfil. Es lo que identifica al perfil y debe ser único."
 
 #: C/gtranslator.xml:1263(guilabel)
 msgid "Translator Name"
@@ -1358,6 +1368,8 @@ msgid ""
 "This lets you choose if you want to see in the toolbar only the icons, the "
 "icons with the text or use the gnome preferences."
 msgstr ""
+"Ésto le permite elegir si quiere ver en la barra de herramientas sólo los "
+"iconos, los iconos con el texto o usar las preferencias de GNOME."
 
 #: C/gtranslator.xml:1366(guilabel)
 msgid "Scheme Color"
