@@ -290,7 +290,7 @@ gtranslator_translation_memory_ui_draw(GtranslatorTranslationMemoryUi *tm_ui)
 	gtk_tree_view_set_model (GTK_TREE_VIEW (priv->tree_view), GTK_TREE_MODEL (model));
 
 	shortcut_renderer = gtk_cell_renderer_accel_new ();
-	shortcut = gtk_tree_view_column_new_with_attributes ("Shortcut",
+	shortcut = gtk_tree_view_column_new_with_attributes (_("Shortcut"),
 							     shortcut_renderer,
 							     "accel-key", SHORTCUT_COLUMN,
 							     NULL);
@@ -301,7 +301,7 @@ gtranslator_translation_memory_ui_draw(GtranslatorTranslationMemoryUi *tm_ui)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (priv->tree_view), shortcut);
 
 	level_renderer = gtk_cell_renderer_progress_new ();
-	level = gtk_tree_view_column_new_with_attributes ("Level",
+	level = gtk_tree_view_column_new_with_attributes (_("Level"),
 							  level_renderer,
 							  "value", LEVEL_COLUMN,
 							  NULL);
@@ -312,7 +312,7 @@ gtranslator_translation_memory_ui_draw(GtranslatorTranslationMemoryUi *tm_ui)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (priv->tree_view), level);
 	
 	string_renderer = gtk_cell_renderer_text_new ();
-	string = gtk_tree_view_column_new_with_attributes ("String",
+	string = gtk_tree_view_column_new_with_attributes (_("String"),
 							   string_renderer,
 							   "text", STRING_COLUMN,
 							   NULL);
