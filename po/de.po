@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-11 00:42+0200\n"
-"PO-Revision-Date: 2008-10-10 00:00+0200\n"
+"POT-Creation-Date: 2008-10-20 15:38+0200\n"
+"PO-Revision-Date: 2008-10-20 17:02+0200\n"
 "Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -129,22 +129,22 @@ msgstr "Wort »%s« ausgewählt"
 #. speller
 #: ../plugins/dictionary/dict-panel.c:398
 msgid "Double-click on the word to look up"
-msgstr "Doppelklicken Sie auf das nachzuschlagende Wort"
+msgstr "Klicken Sie doppelt auf das nachzuschlagende Wort"
 
 #. strat-chooser
 #: ../plugins/dictionary/dict-panel.c:404
 msgid "Double-click on the matching strategy to use"
-msgstr "Doppelklicken Sie auf die zu verwendende Abgleichstrategie"
+msgstr "Klicken Sie doppelt  auf die zu verwendende Abgleichstrategie"
 
 #. source-chooser
 #: ../plugins/dictionary/dict-panel.c:409
 msgid "Double-click on the source to use"
-msgstr "Doppelklicken Sie auf die zu verwendende Quelle"
+msgstr "Klicken Sie doppelt auf die zu verwendende Quelle"
 
 #. db-chooser
 #: ../plugins/dictionary/dict-panel.c:418
 msgid "Double-click on the database to use"
-msgstr "Doppelklicken Sie auf die zu verwendende Datenbank"
+msgstr "Klicken Sie doppelt auf die zu verwendende Datenbank"
 
 #.
 #. * Look up Button
@@ -379,6 +379,17 @@ msgstr "Softwarebestand des Checkout"
 #: ../plugins/subversion/commit-dialog.c:226
 msgid "Subversion: Commit complete."
 msgstr "Subversion: Commit abgeschlossen."
+
+#.
+#. * Translators: Please change LANGUAGE for your language name in English.
+#. * This string is used to fill the ChangeLog entry
+#. * For example: "Updated Galician translation"
+#. * where LANGUAGE = Galician.
+#.
+#: ../plugins/subversion/commit-dialog.c:269
+msgctxt "ChangeLog entry"
+msgid "LANGUAGE"
+msgstr "German"
 
 #: ../plugins/subversion/commit-dialog.c:295
 #, c-format
@@ -731,19 +742,15 @@ msgstr "Datei gespeichert."
 msgid "Save file as..."
 msgstr "Datei speichern unter …"
 
-#: ../src/actions-help.c:51
-msgid "Unable to open help file for gtranslator"
-msgstr "Die Hilfedatei für gtranslator kann nicht geöffnet werden "
-
-#: ../src/actions-help.c:69
+#: ../src/actions-help.c:55
 msgid "Current Developers"
 msgstr "Derzeitige Entwickler"
 
-#: ../src/actions-help.c:75
+#: ../src/actions-help.c:61
 msgid "Previous Developers"
 msgstr "Vorhergehende Entwickler"
 
-#: ../src/actions-help.c:93
+#: ../src/actions-help.c:79
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -756,7 +763,7 @@ msgstr ""
 "entweder in Version 3 der Lizenz oder (nach Ihrem Ermessen) in jeder "
 "folgenden Version."
 
-#: ../src/actions-help.c:97
+#: ../src/actions-help.c:83
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -769,7 +776,7 @@ msgstr ""
 "für weitere Informationen bitten in der GNU General Public License (GNU GPL) "
 "nach."
 
-#: ../src/actions-help.c:101
+#: ../src/actions-help.c:87
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
@@ -778,7 +785,7 @@ msgstr ""
 "License erhalten haben. Wenn dem nicht so ist, so schauen Sie bitte im "
 "Internet auf <http://www.gnu.org/licenses/> nach."
 
-#: ../src/actions-help.c:113
+#: ../src/actions-help.c:99
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -786,11 +793,11 @@ msgstr ""
 "Programmgarnitur zum Bearbeiten von Übersetzungen und der Lokalisierung\n"
 "von Programmen und Bibliotheken"
 
-#: ../src/actions-help.c:115
+#: ../src/actions-help.c:101
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr "(C) 1999-2008 The Free Software Foundation, Inc."
 
-#: ../src/actions-help.c:119
+#: ../src/actions-help.c:105
 msgid "About Gtranslator"
 msgstr "Info zu Gtranslator"
 
@@ -798,7 +805,7 @@ msgstr "Info zu Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:124
+#: ../src/actions-help.c:110
 msgid "translator-credits"
 msgstr ""
 "Christian Meyer <chrisime@gnome.org>\n"
@@ -807,7 +814,7 @@ msgstr ""
 "Hendrik Brandt <heb@gnome-de.org>\n"
 "Christian Kirbach <Christian.Kirbach@googlemail.com>"
 
-#: ../src/actions-help.c:128
+#: ../src/actions-help.c:114
 msgid "Gtranslator Web Site"
 msgstr "Gtranslator-_Internet-Seite"
 
@@ -837,8 +844,8 @@ msgstr "Kommentarauszug:"
 #: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:704
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
-"<span weight=\"bold\" size=\"large\">Zur Datenbank hinzugefügte Meldungen</"
-"span>"
+"<span weight=\"bold\" size=\"large\">Vorhandene Übersetzungen wurden zur "
+"Datenbank hinzugefügt </span>"
 
 #: ../src/dialogs/assistant.c:281
 #, c-format
@@ -1536,6 +1543,14 @@ msgstr "Meldungstabelle"
 msgid "Context"
 msgstr "Kontext"
 
+#: ../src/tab.c:686
+msgid "<b>Original Text:</b>"
+msgstr "<b>Ursprünglicher Text:</b>"
+
+#: ../src/tab.c:747
+msgid "<b>Tran_slated Text:</b>"
+msgstr "<b>Ü_bersetzung:</b>"
+
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
 #. * on the toolbar, and is placed at the %s. Note the _ before the %s
@@ -1546,7 +1561,7 @@ msgstr "Kontext"
 #: ../src/toolbareditor/egg-editable-toolbar.c:919
 #, c-format
 msgid "Show “_%s”"
-msgstr "\"_%s\" zeigen"
+msgstr "\"_%s\" anzeigen"
 
 #: ../src/toolbareditor/egg-editable-toolbar.c:1382
 msgid "_Move on Toolbar"
@@ -1606,6 +1621,18 @@ msgstr "Übersetzungsspeicher"
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Option Nr. %d einfügen"
+
+#: ../src/translation-memory/translation-memory-ui.c:293
+msgid "Shortcut"
+msgstr "Tastenkombination"
+
+#: ../src/translation-memory/translation-memory-ui.c:304
+msgid "Level"
+msgstr "Übereinstimmung"
+
+#: ../src/translation-memory/translation-memory-ui.c:315
+msgid "String"
+msgstr "Zeichenkette"
 
 #: ../src/utils.c:344
 #, c-format
@@ -1908,17 +1935,16 @@ msgstr "gtranslator - *%s"
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1205
+#: ../src/window.c:1212
 msgid "Toolbar Editor"
 msgstr "Werkzeugleisteneditor"
 
-#: ../src/window.c:1523
+#: ../src/window.c:1530
 msgid "Documents"
 msgstr "Dokumente"
 
-#~ msgctxt "ChangeLog entry"
-#~ msgid "LANGUAGE"
-#~ msgstr "German"
+#~ msgid "Unable to open help file for gtranslator"
+#~ msgstr "Die Hilfedatei für gtranslator kann nicht geöffnet werden "
 
 #~ msgid "<b>Bookmarks</b>"
 #~ msgstr "<b>Lesezeichen</b>"
