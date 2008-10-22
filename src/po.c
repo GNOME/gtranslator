@@ -382,6 +382,9 @@ gtranslator_po_parse (GtranslatorPo *po,
 	
 	if (po_file_is_empty (priv->gettext_po_file))
 	{
+        if (*error != NULL)
+            g_clear_error (error);
+
 		g_set_error (error,
 			     GTR_PO_ERROR,
 			     GTR_PO_ERROR_FILE_EMPTY,
@@ -394,6 +397,8 @@ gtranslator_po_parse (GtranslatorPo *po,
 	 * Determine the message domains to track
 	 */
 	if(!(domains = po_file_domains(priv->gettext_po_file))) {
+        if (*error != NULL)
+            g_clear_error (error);
 		g_set_error(error,
 			    GTR_PO_ERROR,
 			    GTR_PO_ERROR_GETTEXT,
@@ -539,6 +544,8 @@ gtranslator_po_parse (GtranslatorPo *po,
 	}
 	
 	if (priv->messages == NULL) {
+        if (*error != NULL)
+            g_clear_error (error);
 		g_set_error(error,
 			    GTR_PO_ERROR,
 			    GTR_PO_ERROR_OTHER,
