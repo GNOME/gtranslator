@@ -157,7 +157,7 @@ subversion_utils_get_changelog_entry_from_view (GtkWidget *view)
 	date = gtranslator_utils_get_current_date ();
 	
 	changelog_entry = g_strdup_printf ("%s  %s  <%s>\n"
-					   "\n\t %s.po: %s\n\n", date, name, email,
+					   "\n\t * %s.po: %s\n\n", date, name, email,
 					   code, log);
 	g_free (log);
 	g_free (date);
