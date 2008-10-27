@@ -1,3 +1,14 @@
+2008-10-27  Pablo Sanxiao <psanxiao@gmail.com>
+	
+	Patch by Baris Cicek  <baris@teamforce.name.tr>
+
+	* src/profile.{ch}:
+	* src/actions-file.c:
+	Now when the program is closed, the profiles file is
+	created in the tmp directory and if the profiles list
+	were stored correctly, then it's moved to the config
+	directory. (Fixes bug #556569)
+
 2008-10-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* plugins/subversion/subversion-utils.c:

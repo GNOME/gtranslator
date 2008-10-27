@@ -339,7 +339,8 @@ GList *gtranslator_profile_get_profiles_from_xml_file (gchar *filename)
   return profiles_list;
 }
 
-void gtranslator_profile_save_profiles_in_xml (gchar *filename) {
+gint
+gtranslator_profile_save_profiles_in_xml (gchar *filename) {
   
   xmlNodePtr root;
   xmlDocPtr doc;
@@ -361,5 +362,5 @@ void gtranslator_profile_save_profiles_in_xml (gchar *filename) {
     gtranslator_profile_xml_new_entry (doc, profile);
   }
   
-  xmlSaveFile (filename, doc);
+  return xmlSaveFile (filename, doc);
 }

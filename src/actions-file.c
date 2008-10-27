@@ -704,31 +704,53 @@ gtranslator_file_quit (GtkAction *action,
 	GList *list = NULL;
 	GList *profiles_list = NULL;
 	gchar *config_folder;
-	gchar *filename;
-	GFile *file;
-        
+	gchar *filename, *filename_temp;
+	GFile *file, *file_temp;
+	gint r;
+	
         config_folder = gtranslator_utils_get_user_config_dir ();
  	filename = g_build_filename (config_folder,
  				     "profiles.xml",
  				     NULL);
+	filename_temp = g_build_filename (g_get_tmp_dir (),
+					"profiles.xml",
+					NULL);
+	g_print ("Temp: %s\n", filename_temp);
 	
 	file = g_file_new_for_path (filename);
+	file_temp = g_file_new_for_path (filename_temp);
 	
 	profiles_list = gtranslator_application_get_profiles (GTR_APP);
-
-	if (profiles_list != NULL) {
-	  if (g_file_query_exists (file, NULL)) {
-	    g_file_delete (file, NULL, NULL);
-	    gtranslator_profile_save_profiles_in_xml (filename);
+	
+	
+	if (profiles_list != NULL) {		
+	  if (g_file_query_exists (file_temp, NULL)) {
+	    r = gtranslator_profile_save_profiles_in_xml (filename_temp);
 	  } else {
-	    g_file_create (file,
+	    g_file_create (file_temp,
 			   G_FILE_CREATE_NONE,
 			   NULL,
 			   NULL);
-	    gtranslator_profile_save_profiles_in_xml (filename);
+	    r = gtranslator_profile_save_profiles_in_xml (filename_temp);
 	  }
+	  if (r != -1)
+		{
+		  g_file_move (file_temp,
+			       file,
+			       G_FILE_COPY_OVERWRITE,
+			       NULL,
+			       NULL,
+			       NULL,
+			       NULL);
+		}
+		else
+		{
+			g_warning (N_("Failed to write profile data into profiles file '%s'"), filename);
+		}	
 	}
+	
 	g_free (config_folder);
+	g_object_unref (file_temp);
 	g_object_unref (file);
 
 	nb = gtranslator_window_get_notebook (window);
