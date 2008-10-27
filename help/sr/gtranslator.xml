@@ -1,591 +1,452 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-<!ENTITY legal SYSTEM "legal.xml">
-<!ENTITY appversion "2.0">
-<!ENTITY manualversion "0.6">
-<!ENTITY app "Gtranslator">
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+    <!ENTITY legal SYSTEM "legal.xml">
+    <!ENTITY appversion "1.0">
+    <!ENTITY manualversion "0.5">
+    <!ENTITY app "ГПреводилац">
 ]>
 <!-- ================ Document Header ================= -->
+
 <article id="index" lang="sr">
 
   <articleinfo>
-    <title>Gtranslator Manual</title>
+    <title>Упутство за ГПреводилац</title>
 
     <copyright>
-      <year>2008</year>
-      <holder>Igalia</holder>
-      <year>2001</year>
-      <holder>Emese Kovacs</holder>
+	    <year>2001</year>
+	    <holder>Имез Ковач (Emese Kovacs)</holder>
     </copyright>
 
-    <!-- Translators: uncomment this
-	 <copyright>
-	   <year>2003</year>
-	   <holder>ME_THE_TRANSLATOR</holder>
-	 </copyright>
-	 -->
+    <copyright>
+	    <year>2003</year>
+	    <holder>Слободан Средојевић</holder>
+    </copyright>
 
-    <publisher role="maintainer">
-      <publishername>GNOME Documentation Project</publishername>
+    <publisher>
+	    <publishername>Пројекат ГНОМ документације</publishername>
     </publisher>
 
-    <releaseinfo>This is version 0.6 of Gtranslator manual.</releaseinfo>
+    <releaseinfo>Ово је упутство за &app; , верзија документа је &manualversion;.</releaseinfo>
 
     <legalnotice id="feedback">
-      <title>Feedback Information</title>
-      <para>
-	To report a bug or make a suggestion regarding this
-	application or this documentation, please see the
-	<ulink type="help" url="ghelp:gnome-feedback">
-	  GNOME Feedback Page
-	</ulink>
-      </para>
+	    <title>Повратна информација</title>
+	    <para>
+		    Како би пријавили грешку или дали предлог везан за сам програм 
+		    или ово упутство, молим погледајте
+		    <ulink type="help" url="ghelp:gnome-feedback">
+		    ово упутство.
+		    </ulink>
+	    </para>
     </legalnotice>
-    
+
     <authorgroup>
-      <author>
-	<firstname>Pablo</firstname>	
-	<surname>Sanxiao</surname>
-	<affiliation>
-	  <orgname>Igalia</orgname>
-	  <addres><email>psanxiao@gmail.com</email></addres>
-	</affiliation>
-      </author>
-      <author>
-	<firstname>Emese</firstname>
-	<surname>Kovacs</surname>
-	<affiliation>
-	  <orgname>GNOME Documentation Project</orgname>
-	  <address><email>emese@gnome.hu</email></address>
-	</affiliation>
-      </author>
+	    <author>
+		    <firstname>Имез</firstname>
+		    <surname>Ковач</surname>
+		    <affiliation>
+			    <orgname>Пројекат Гном документације</orgname>
+			    <address><email>emese@gnome.hu</email></address>
+		    </affiliation>
+            </author>
     </authorgroup>
 
     <revhistory>
-      <revision>
-	<revnumber>Gtranslator Manual V0.6</revnumber>
-	<date>September 2008</date>
-	<revdescription>
-	  <para role="author">Pablo Sanxiao</para>
-	  <para role="publisher">
-	    Igalia
-	  </para>
-	</revdescription>
-      </revision>
-
-      <revision>
-	<revnumber>Gtranslator Manual V0.6</revnumber>
-	<date>August 2003</date>
-	<revdescription>
-	  <para role="author">Abel Cheung</para>
-	  <para role="publisher">
-	    GNOME Documentation Project
-	  </para>
-	</revdescription>
-      </revision>
-      <revision>
-	<revnumber>Gtranslator Manual V0.4</revnumber>
-	<date>August 2001</date>
-	<revdescription>
-	  <para role="author">Emese Kovacs</para>
-	  <para role="publisher">
-	    GNOME Documentation Project
-	  </para>
-	</revdescription>
-      </revision>
+	    <revision>
+		    <revnumber>&app; упутство в&manualversion;</revnumber>
+		    <date>Август 2003</date>
+		    <revdescription>
+			    <para role="author">Абел Ченг (Abel Cheung)</para>
+			    <para role="publisher">
+				Пројекат ГНОМ документације
+			    </para>
+		    </revdescription>
+	    </revision>
+	    <revision>
+		    <revnumber>&app; упутство в0.4</revnumber>
+		    <date>Август 2001</date>
+		    <revdescription>
+			    <para role="author">Имез Ковач</para>
+			    <para role="publisher">
+				Пројекат ГНОМ документације
+			    </para>
+		    </revdescription>
+	    </revision>
     </revhistory>
-
-    <abstract role="description">
-      <para>Gtranslator is an enhanced gettext PO file editor for the GNOME desktop environment.</para>
-    </abstract>
 
   </articleinfo>
   
-  <!-- ================ Document Body ================= -->
+<!-- ================ Document Body ================= -->
 
-  <!-- ==== Introduction ====== -->
+<!-- ==== Introduction ====== -->
 
   <sect1 id="gtranslator-introduction">
-    <title>Introduction</title>
+    <title>Увод</title>
 
     <para>
-      <application>Gtranslator</application> offers you a comfortable graphical
-      interface to edit gettext PO files. It allows you to easily
-      navigate among fuzzy, translated and untranslated messages and has
-      a status bar displaying the number of messages for each category.
+	<application>&app;</application> вам нуди једно удобно графичко сучеље за уређивање датотека са преводима (енгл. gettext po files). Програм вам дозвољава да се на лак начин крећете кроз нејасне, преведене и непреведене поруке и има линију са стањем која приказује број порука у свакој од наведених категорија. 
     </para>
 
     <para>
-      <application>Gtranslator</application> features opening and editing some PO 
-      files at the same time including to manage their headers, seeing the
-      developer's information for each message (comments, context) and set
-      new personal comments.
+	<application>&app;</application> има особину да може да учитава и чува сажете датотеке са преводима и да отвара удаљене датотеке кроз Гномов виртуални систем датотека (енгл. Gnome-VFS). Поред тога, програм омогућава да ускладите стару датотеку са преводом са новијом основном датотеком са преводом (енгл. pot dile), и то све из графичког сучеља!
     </para>
 
     <para>
-      The profiles function allows you to have different <quote>accounts</quote>
-      with the necessary information to fill the header. The option <quote>use my
-      options to complete the following entries</quote> in the edit header dialog
-      takes the information from the active profile in order to fill the header values.
+	Функција аутоматског превођења програма <application>&app;</application> вам дозвољава да <quote>похраните</quote> тзв. „msgid“ и „msgstr“ парове из скупа преведених датотека са преводима и да затим преведете нови пројекат коришћењем ове преводилачке меморије.
     </para>
 
     <para>
-      The new system of translation memories let you use your own translated PO files in
-      order to create a database that will offer you possible options to translate the 
-      current message.
-    </para>
-
-    <para>
-     <application>Gtranslator</application> provide a plugin system which makes it easily extending.
-     It include some useful plugins such as svn plugin in order to do the checkouts from
-     the repository and commit the new translations. There are also plugins to visualize the
-     source code where a message is, search in translation memories web services like Open Tran...
-    </para>
-
-    <para>
-      To run <application>Gtranslator</application>, select 
-      <menuchoice>
-	<guimenu>Programs</guimenu>
-	<guisubmenu>Development</guisubmenu>
-	<guimenuitem>Gtranslator</guimenuitem>
-      </menuchoice>
-      from the <guimenu>Main Menu</guimenu>, or type
-      <command>gtranslator</command> on the command line.
+	Како би покренули програм <application>&app;</application>, из <guimenu>главног менија</guimenu> одаберите редом ставке:
+	<menuchoice>
+	  <guimenu> „Програми“ </guimenu>
+	  <guisubmenu> „Развојни алати“ </guisubmenu>
+	  <guimenuitem> &app; </guimenuitem>
+	</menuchoice>
+	 или
+	у линији наредби задајте: gtranslator.
     </para>
 
   </sect1>
 
   <sect1 id="gtranslator-usage">
-    <title>Using Gtranslator</title>
+    <title>Коришћење програма</title>
 
     <para>
-      <application>Gtranslator</application> is a full
-      featured graphical environment that makes it possible to
-      translate PO files painlessly. This section describes basic
-      usage of <application>Gtranslator</application>.
+	<application>&app;</application> представља једно моћно графичко окружење  које омогућава безболно превођење датотека са преводима. Овај одељак описује основну употребу програма <application>&app;</application>.
     </para>
 
     <sect2 id="gtranslator-basic-usage">
-      <title>Basic usage</title>
+      <title>Основна употреба</title>
 
       <para>
-	Starting <application>Gtranslator</application> opens the 
-	<interface>Main window</interface>.
+	Када покренете <application>&app;</application>, отвара се
+	<interface>главни прозор програма</interface>.
       </para>
 
       <figure id="gtranslator-mainwindow-screenshot">
-	<title>Main Window</title>
+	<title>Главни прозор програма</title>
 	<screenshot>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="figures/mainwindow.png" format="PNG" contentwidth="5cm"/>
+	      <imagedata fileref="figures/mainwindow.png" format="PNG"/>
 	    </imageobject>
 	    <textobject>
-	      <phrase>Gtranslator Main Window</phrase>
+	      <phrase>&app; Main Window</phrase>
 	    </textobject>
 	  </mediaobject>
 	</screenshot>
       </figure>
 
-      <!--
-	  <FIGURE FLOAT="0" id="MAINWINDOW-FIG">
-            <title>Gtranslator Main Window</title>
-            <SCREENSHOT>
-              <SCREENINFO>Gtranslator Main Window</SCREENINFO>
-              <GRAPHIC FILEREF="figures/mainwindow" FORMAT="PNG"
-		       SRCCREDIT="emese"></GRAPHIC>
-            </SCREENSHOT>
-	  </FIGURE>
-	  -->
+<!--
+      <FIGURE FLOAT="0" id="MAINWINDOW-FIG">
+        <title>Gtranslator Main Window</title>
+        <SCREENSHOT>
+          <SCREENINFO>Gtranslator Main Window</SCREENINFO>
+          <GRAPHIC FILEREF="figures/mainwindow" FORMAT="PNG"
+          SRCCREDIT="emese"></GRAPHIC>
+        </SCREENSHOT>
+      </FIGURE>
+-->
 
       <para>
-	The <interface>Main window</interface> is divided into three main area:
+	<interface>Главни прозор програма</interface> је подељен у три веће области:
 	<itemizedlist>
-	  <listitem>
-	    <para>
-	      The <interface>menubar</interface>
-	      allows you the access the application menu.</para>
-	  </listitem>
-	  <listitem>
-	    <para>
-	      The <interface>toolbar</interface>
-	      allow you quick access to frequently used file management,
-	      navigation and compile functions.
-	    </para>
-	  </listitem>
-	  <listitem>
-	    <para>
-	      The <interface>workspace</interface>
-	      allows you to visualize and edit the messages contained
-	      in the PO file. This area on its part is divided in another
-	      three. On the top is the message area with all messages of
-	      the PO file and its state. Under the message area, on the left
-	      is where it's showed the original message and the box where write
-	      the translation. Finally, on the right there is a panel with
-	      auxiliar information to help in the translation process.
-	    </para>
-	  </listitem>
+		<listitem>
+		<para>
+			<interface> Линија менија</interface>
+			вам омогућава приступ програмском менију.</para>
+		</listitem>
+		<listitem>
+		<para>
+			<interface> Линије са алатима</interface>
+			вам омогућавају брз приступ често коришћеним функцијама за рад са датотекама, функцијама за кретање и функцијама за претварање.
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+			<interface> Радни простор</interface>
+			вам омогућава да видите и уредите поруке садржане у датотекама са преводима.
+		</para>
+		</listitem>
 	</itemizedlist>
       </para>
 
       <sect3 id="gtranslator-configuration">
-        <title>Configuration</title>
+        <title>Подешавања</title>
         <para>
-          <application>Gtranslator</application> settings can be modified by choosing
+          <application>&app;</application> подешавања се могу мењати редним бирањем следећих ставки менија: 
 	  <menuchoice>
-	    <guimenu>Edit</guimenu>
-	    <guimenuitem>Preferences</guimenuitem>
-	  </menuchoice>
-	  menuitem.
+	    <guimenu> „Уређивање“ </guimenu>
+	    <guimenuitem> „Поставке“ </guimenuitem>
+	  </menuchoice>.
 	</para>
       </sect3>
 
       <sect3 id="gtranslator-loading-file">
-	<title>Loading a PO file</title>
+	<title>Учитавање датотеке са преводом</title>
 
 	<para>
-	  To load a PO file, use the 
+	  Како би учитали датотеку са преводом, редом бирајте следеће ставке менија:
 	  <menuchoice>
-	    <guisubmenu>File</guisubmenu>
-	    <guimenuitem>Open</guimenuitem>
-	  </menuchoice>
-	  menuitem. It will
-	  bring up the <guilabel>Open file for translation</guilabel> dialog
-	  box. Browse through your computer filesystem, choose the PO file
-	  you wish to open and click <guibutton>OK</guibutton>.
+	    <guisubmenu> „Датотека“ </guisubmenu>
+	    <guimenuitem> „Отвори...“ </guimenuitem>
+	  </menuchoice>.
+	  То ће отворити прозорче: <guilabel>„&app; — Учитавање датотеке са преводом“</guilabel>.
+	  Претражите систем датотека вашег рачунара, изаберите датотеку са преводом коју желите да отворите и притисните дугме <guibutton> „У реду“ </guibutton>.
 	</para>
+
+	<para>
+	  <application>&app;</application> вам нуди могућност да отварате 
+	  датотеке са преводом коришћењем Гномовог виртуалног система датотека.
+	  Ово значи да можете да користите јединствене идентификаторе ресурса (енгл. URI - Uniform Resources Identificators) за приступ датотекама на удаљеном систему. Тренутно подржани протоколи тј. приступи су:
+	  <itemizedlist>
+	    <listitem>
+		<para>локални „file://“ приступ као у примеру:
+		<command>file://localhost/<replaceable>путања_до_датотеке</replaceable></command></para>
+	    </listitem>
+	    <listitem>
+		<para>удаљени „http://“ приступ као у примеру:
+		<command>http://www.gtranslator.org/gtranslator/gtranslator.pot</command>
+		</para>
+	    </listitem>
+	    <listitem>
+		<para>удаљени „ftp://“ приступ као у примеру:
+		<command>ftp://<replaceable>ftp.somewhere.org</replaceable>/<replaceable>pub/tr.po</replaceable></command>
+		</para>
+	    </listitem>
+	  </itemizedlist>
+	</para>
+
+        <note>
+	  <title>Учитавање сажетих датотека са преводима</title>
+	  <para>
+	  <application>&app;</application> може да отвори сажете датотеке са преводом.
+	  Притисните на иконицу <guibutton>„Отвори“</guibutton>. Ово вам отвара прозорче:
+	  <guilabel> „&app; — Учитај датотеку са преводом“ </guilabel>. Изаберите једну сажету датотеку
+	  са преводом (препознаје се по наставку .gz). Притисните дугме
+	  <guibutton> „У реду“ </guibutton>. Уколико на вашем систему имате инсталиран
+	  програм <command>gzip</command> , можете отворити
+	  датотеке сажете са овим алатом.</para>
+	</note>
 
       </sect3>
       
       <sect3 id="gtranslator-edit-file">
-        <title>Editing PO file</title>
-        <para> 
-	  The message area show all the messages in the PO file and their state.
-	  It is possible going to one specific message by clicking on it directly.
-	  You can also move through the messages with the buttons in the toolbar:
-	   <emphasis>forward</emphasis> and <emphasis>back</emphasis>. In the menu
-	  using
-	  <menuchoice>
-	    <guisubmenu>Go</guisubmenu>
-	    <guimenuitem>next fuzzy</guimenuitem>
-	  </menuchoice>
-	  and 
-	  <menuchoice>
-	    <guisubmenu>GO</guisubmenu>
-	    <guimenuitem>previous fuzzy</guimenuitem>
-	  </menuchoice>
-	  it is possible moving directly among fuzzy messages and using
-	  <menuchoice>
-	    <guisubmenu>Go</guisubmenu>
-	    <guimenuitem>next untranslated</guimenuitem>
-	  </menuchoice>
-	  and 
-	  <menuchoice>
-	    <guisubmenu>GO</guisubmenu>
-	    <guimenuitem>previous untranslated</guimenuitem>
-	  </menuchoice>
-	  it is possible moving directly among untranslated messages.
-	</para>
-
+        <title>Уређивање датотека са преводом</title>
+        <para>(Недовршено) Употреба панела, где притиснути, стање порука, основно кретање.</para>
+        <para>(Недовршено) Мали савет за коришћење „стабло“ приказа.</para>
       </sect3>
 
       <sect3 id="gtranslator-save-file">
-        <title>Saving PO file</title>
-        <para>
-	  When a PO file has been modified (in a message or in the header)
-	  a <quote>*</quote> appears before its name in the window title or in the tab
-	  if you are editing some PO files at the same time.
-	</para>
-	<para>
-	  If you close the PO file at this moment, then, the close dialog will be showed
-	  to you with this aspect:
-	</para>
-	
-	<figure id="gtranslator-closedialog-screenshot">
-	  <title>Close Dialog</title>
-	  <screenshot>
-	    <mediaobject>
-	      <imageobject>
-		<imagedata fileref="figures/closedialog.png" format="PNG"/>
-	      </imageobject>
-	      <textobject>
-		<phrase>Gtranslator Close Dialog</phrase>
-	      </textobject>
-	    </mediaobject>
-	  </screenshot>
-	</figure>
-	
+        <title>Чување датотека са преводом</title>
+        <para>(Недовршено) Како сачувати, сачувати у сажетом облику.</para>
+        <para>(Недовршено) Мали савет за укључивање и искључивање упозорења за нејасне поруке.</para>
       </sect3>
     </sect2>
-    
+
+
     <sect2 id="gtranslator-advanced-feature">
-      <title>Advanced features</title>
-      <para>
-	<application>Gtranslator</application> offeres to translator many features in
-	order to do the translation process easier and confortable.
-      </para>
+      <title>Напредне могућности</title>
+      <para>(Недовршено) Овде долазе напредне могућности, аутоматско превођење, претраживање помоћу регуларних израза, ажурирање превода...</para>
 
-      <sect3 id="gtranslator-advanced-profiles">
-	<title>Profiles</title>
-	<para> The profiles feature provides to translator the possibility of
-	  having differents <quote>accounts</quote> with the basic information about
-	  herself and the language.
-	</para>
-	<para>
-	  At the same time there is only one profile active. You can choose in a easy way
-	  through the preferences which is this profile. When you save a PO file and
-	  you have activated the option <quote>use my options to complete the following
-	  entries</quote> in the header dialog, <application>Gtranslator</application> will
-	  fill this fields with the information in the active profile.
-	</para>
-	
-	<figure id="gtranslator-profiles-screenshot">
-	  <title>Profiles Dialog</title>
-	  <screenshot>
-	    <mediaobject>
-	      <imageobject>
-		<imagedata fileref="figures/profiles.png" format="PNG"/>
-	      </imageobject>
-	      <textobject>
-		<phrase>Gtranslator Profiles Dialog</phrase>
-	      </textobject>
-	    </mediaobject>
-	  </screenshot>
-	</figure>
-	
+      <sect3 id="gtranslator-advanced-autotranslate">
+	<title>Аутоматско превођење</title>
+	<para>(Недовршено) То је лепа могућност.</para>
       </sect3>
-      <sect3 id="gtranslator-advanced-translation_memory">
-	<title>Translation Memory</title>
-	
-	<para>
-	  The translation memory let you reuse the translations. It is a database
-	  that contains messages and their correspondent translatation for a specific
-	  language. 
-	</para>
-	
-	<para>
-	  <application>Gtranslator</application> offers the possibility of creating translation
-	  memories in two different ways. You can create the translation memory from a
-	  directory that contains PO files (see <xref linkend="gtranslator-preferences"/>).
-	  The program will create also a new entry in the translation memory each time that
-	  you translate a new message.
-	</para>
-	
-	<para>
-	  The manner of using the translation memory it is very easy. With the translation
-	  memory panel active (if it is not active go to 
-	  <menuchoice>
-	    <guisubmenu>View</guisubmenu>
-	    <guimenuitem>Translation Memory</guimenuitem>
-	  </menuchoice> 
-	) you will can see the options that the translation memory offers you in order
-	to translate the current message. If you can choose one of them, just use the keyboard
-	acceleator associated to that option.
-	</para>
-
-	<figure id="gtranslator-tm-screenshot">
-	  <title>Translation Memory</title>
-	  <screenshot>
-	    <mediaobject>
-	      <imageobject>
-		<imagedata fileref="figures/tm.png" format="PNG"/>
-	      </imageobject>
-	      <textobject>
-		<phrase>Gtranslator Translation Memory</phrase>
-	      </textobject>
-	    </mediaobject>
-	  </screenshot>
-	</figure>
-
-	<para>
-	  The level column show you in percentage how much the option coincide with the original
-	  message. The options are ordering by level.
-	</para>
-	
+      <sect3 id="gtranslator-advanced-update">
+	<title>Ажурирање</title>
+	<para>(Недовршено) Коришћење <application>intltool</application> алата.</para>
       </sect3>
-      
+      <sect3 id="gtranslator-advanced-search">
+	<title>Претраживање помоћу регуларних израза</title>
+	<para>(Недовршено) Ова могућност још увек није додата у програм.</para>
+      </sect3>
     </sect2>
- 
-   <!-- ==================== Toolbar ====================== -->
+
+    <!-- ==================== Toolbar ====================== -->
     <sect2 id="gtranslator-toolbar">
-      <title>Toolbar</title>
-      
+      <title>Линија са алатима</title>
       <para>
-	The toolbar provides access to several commonly used routines.
-	It is easily customizable. You can add or remove buttons as follow:
+	Линија са алатима обезбеђује приступ неким обично често коришћеним радњама.
       </para>
-      
-      <para>
-	Go to
-	<menuchoice>
-	  <guimenu>Edit</guimenu>
-	  <guimenuitem>Toolbar</guimenuitem>
-	</menuchoice>.
-	 The next dialog it will be showed you:
-      </para>
-      
+
       <figure id="gtranslator-toolbar-screenshot">
-	<title>Tool Bar</title>
+	<title>Линија са алатима</title>
 	<screenshot>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="figures/toolbar.png" format="PNG"/>
+		<imagedata fileref="figures/toolbar.png" format="PNG"/>
 	    </imageobject>
 	    <textobject>
-	      <phrase>Gtranslator Tool Bar</phrase>
+		<phrase>&app; Tool Bar</phrase>
 	    </textobject>
 	  </mediaobject>
 	</screenshot>
       </figure>
 
-      <para>
-	You can add or remove buttons just drag and drop them between 
-	the toolbar and the toolbar editor.
-      </para>
+<!--
+      <FIGURE FLOAT="0" id="FIGURE-USAGE-TOOLBAR">
+        <title>Gtranslator Toolbar</title>
+        <SCREENSHOT>
+          <SCREENINFO>Gtranslator Toolbar</SCREENINFO>
+          <GRAPHIC FILEREF="figures/toolbar" FORMAT="PNG">
+          </GRAPHIC>
+        </SCREENSHOT>
+      </FIGURE>
+-->
 
       <sect3 id="gtranslator-toolbar-file">
-	<title>File management buttons in the toolbar</title>
+	<title>Линија са алатима за управљање датотекама</title>
 
 	<para>
-	  The file management buttons lets you access frequently
-	  used file management funcions quickly.
+		Линија са алатима за управљање датотекама вам омогућава да брзо приступите неким често коришћеним функцијама за управљање датотекама.
 	</para>
 	<variablelist>
 	  <varlistentry>
-	    <term><guiicon>Open</guiicon></term>
-	    <listitem>
-	      <para>Brings up the <guilabel>Open file for translation</guilabel> dialog.
-	      </para>
-	    </listitem>
+		<term><guiicon>Отвори</guiicon></term>
+		<listitem>
+		<para>Отвара прозорче: <guilabel>„&app; — Учитавање датотеке са преводом</guilabel>.
+		</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Save</guiicon></term>
-	    <listitem>
-	      <para>Saves the PO file.</para>
-	    </listitem>
+		<term><guiicon>Сачувај</guiicon></term>
+		<listitem>
+		<para>Чува датотеку са преводом.</para>
+		</listitem>
 	  </varlistentry>
           <varlistentry>
-	    <term><guiicon>Save as</guiicon></term>
-	    <listitem>
-	      <para>Saves the PO file under a different name.</para>
-	    </listitem>
+		<term><guiicon>Сачувај као</guiicon></term>
+		<listitem>
+		<para>Чува датотеку са преводом под другим именом.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Header</guiicon></term>
-	    <listitem>
-	      <para>
-		Brings up the <guilabel>Edit Header</guilabel> dialog box
-		with a form that lets you fill in the fields of the PO files
-		header.
-	      </para>
-	    </listitem>
+		<term><guiicon>Претвори</guiicon></term>
+		<listitem>
+		<para>Претвара датотеку са преводом у бинарни облик коришћем алата <command>msgfmt</command>.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Undo</guiicon></term>
-	    <listitem>
-	      <para>Undoes your last action.</para>
-	    </listitem>
+		<term><guiicon>Ажурирај</guiicon></term>
+		<listitem>
+		<para>
+		Ажурира датотеку са преводом из изворног кода коришћењем наредбе
+		<command>intltool-update</command> која је део
+		<application>intltool</application> пакета.
+		Како би све то радило, морате да се уверите да је датотека 
+		по имену <filename>POTFILES.in</filename> у
+		истом директоријуму у којем је и датотека са вашим преводом.
+		</para>
+		</listitem>
 	  </varlistentry>
+	  <varlistentry>
+		<term><guiicon>Заглавље</guiicon></term>
+		<listitem>
+		<para>
+		Отвара прозорче <guilabel> „ГПреводилац — Заглавље“ </guilabel>
+		са формуларом који вам дозвољава да попуните поља заглавља датотеке са преводом.
+		</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><guiicon>Опозови</guiicon></term>
+		<listitem>
+		<para>Опозива вашу последњу радњу.</para>
+		</listitem>
+	  </varlistentry>
+<!--
+	  <varlistentry>
+		<term><guiicon>Options</guiicon></term>
+		<listitem>
+		<para>Opens the <guilabel>Preferences</guilabel> window.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><guiicon>Exit</guiicon></term>
+		<listitem>
+		<para>Exits the application.</para>
+		</listitem>
+	  </varlistentry>
+-->
         </variablelist>
       </sect3>
 
       <sect3 id="gtranslator-toolbar-navigation">
-        <title>Navigation buttons in the toolbar</title>
+        <title>Линија са алатима за кретање</title>
 
         <para>
-	  The navigation buttons allows you to navigate among
-	  messages. It also lets you search for strings, or
-	  search and replace strings.
+		Линија са алатима за кретање вам дозвољава да се крећете кроз поруке. Такође вам допушта да тражите низове знакова или да вршите њихову замену.
 	</para> 
 
 	<variablelist>
 	  <varlistentry>
-	    <term><guiicon>First</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the first message.</para>
-	    </listitem>
+		<term><guiicon>Прва</guiicon></term>
+		<listitem>
+		<para>Скаче на прву поруку.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Last</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the last message.</para>
-	    </listitem>
+		<term><guiicon>Претходна</guiicon></term>
+		<listitem>
+		<para>Скаче на претходну поруку.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Forward</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the next message.</para>
-	    </listitem>
+		<term><guiicon>Следећа</guiicon></term>
+		<listitem>
+		<para>Скаче на следећу поруку.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Back</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the previous message.</para>
-	    </listitem>
+		<term><guiicon>Последња</guiicon></term>
+		<listitem>
+		<para>Скаче на последњу поруку.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Next Fuzzy</guiicon></term>
-	    <listitem>
-	      <para>Jumps to next fuzzy message.</para>
-	    </listitem>
+		<term><guiicon>Непреведена</guiicon></term>
+		<listitem>
+		<para>Скаче на следећу непреведену поруку.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Previous Fuzzy</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the previous fuzzy message.</para>
-	    </listitem>
+		<term><guiicon>Нејасна</guiicon></term>
+		<listitem>
+		<para>Скаче на следећу нејасну поруку.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Next Untranslated</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the next untranslated message.</para>
-	    </listitem>
+		<term><guiicon>Редни број</guiicon></term>
+		<listitem>
+		<para>Скаче на задати редни број поруке.</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Previous Untranslated</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the previous untranslated message.</para>
-	    </listitem>
+		<term><guiicon>Пронађи</guiicon></term>
+		<listitem>
+		<para>
+			Отвара прозорче <guilabel> „Пронађи у датотеци са преводом“ </guilabel>
+			. Оно вам допушта да претражујете поруке у датотеци са преводом. Можете изабрати да тражите низове знакова само унутар оригиналних порука, преведених порука, напомена или унутар свих наведених порука.
+		</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Next Fuzzy or Untranslated</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the next fuzzy or unstranslated message.</para>
-	    </listitem>
+		<term><guiicon>Замени</guiicon></term>
+		<listitem>
+		<para>
+			Отвара прозорче <guilabel> „&app; — Замени“ </guilabel>.
+		 Ово прозорче вам омогућава да унесете низ знакова којим замењујете други низ знакова.
+		</para>
+		</listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term><guiicon>Previous Fuzzy or Untranslated</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the previous fuzzy or untranslated message.</para>
-	    </listitem>
-	  </varlistentry>
-	  <varlistentry>
-	    <term><guiicon>Jump to</guiicon></term>
-	    <listitem>
-	      <para>Jumps to the specified message number.</para>
-	    </listitem>
-	  </varlistentry>
-	  <varlistentry>
-	    <term><guiicon>Find</guiicon></term>
-	    <listitem>
-	      <para>
-		Opens the <guilabel>Find</guilabel>
-		dialog box. This dialog lets you search for strings
-		in the PO file. You can choose to find strings
-		inside original messages only, translated messages,
-		comments or all of the above. 
-	      </para>
-	    </listitem>
-	  </varlistentry>
-	  <varlistentry>
-	    <term><guiicon>Replace</guiicon></term>
-	    <listitem>
-	      <para>
-		Opens the <guilabel>Replace dialog box</guilabel>.
-		This dialog lets you enter a string to search for
-		and a string to replace it with.
-	      </para>
-	    </listitem>
+		<term><guiicon>Упит</guiicon></term>
+		<listitem>
+		<para>
+			Отвара прозорче  <guilabel> „&app; — Претрага личног складишта знања</guilabel>. Оно вам омогућава претрагу личног складишта знања тј. преводилачке меморије.
+		</para>
+		</listitem>
 	  </varlistentry>
 	</variablelist>
       </sect3>
@@ -594,11 +455,11 @@
 
     <!-- ================ Menu bar ================= -->
     <sect2 id="gtranslator-menubar">
-      <title>Menu Bar</title>
+      <title>Линија менија</title>
 
       <para>
-	The menu bar, located at the top of the
-	<guilabel>Main Window</guilabel>, contains the following menus:
+	Линија менија, која је смештена при врху 
+	<guilabel>главног прозора програма</guilabel> , садржи следеће ставке:
       </para>
 
       <variablelist>
@@ -606,239 +467,295 @@
 	<!-- ================ File menu ================= -->
 	<varlistentry>
 
-	  <term><guimenu>File</guimenu></term>
+	  <term><guimenu>Датотека</guimenu></term>
 
 	  <listitem>
-	    <para>This menu contains: 
+	    <para>Ова ставка садржи: 
 
-	      <itemizedlist>
+	    <itemizedlist>
 
 		<listitem>
-		  <para>
-		    <menuchoice>
-		      <shortcut>
-			<keycombo>
-			  <keycap>Control</keycap><keycap>O</keycap>
-			</keycombo>
-		      </shortcut>
-		      <guimenuitem>Open</guimenuitem>
-		    </menuchoice>
-		    This opens a PO file.
-		  </para>
+		<para>
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>ALT</keycap><keycap>C</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Претвори</guimenuitem>
+			</menuchoice>
+			Овим се изворна датотека са преводом претвара у бинарни облик.
+		</para>
 		</listitem>
 
 		<listitem>
-		  <para>
-		    <menuchoice>
-		      <guimenuitem>Recent Files</guimenuitem>
-		    </menuchoice>
-		    This shows a list of your recently opened PO files.
-		  </para>
+                <para>
+			<menuchoice>
+			  <shortcut>
+				<keycap>F5</keycap>
+			  </shortcut>
+			  <guimenuitem>Ажурирај</guimenuitem>
+			</menuchoice>
+			Овим се ажурира ваша датотека са преводом из изворног кода.
+		</para>
 		</listitem>
 
 		<listitem>
-		  <para>
-		    <menuchoice>
-		      <shortcut>
-			<keycombo>
-			  <keycap>Ctrl</keycap><keycap>S</keycap>
-			</keycombo>
-		      </shortcut>
-		      <guimenuitem>Save</guimenuitem>
-		    </menuchoice>
-		    This saves your file.
-		  </para>
+		<para>
+			<menuchoice>
+			  <shortcut>
+				<keycap>F10</keycap>
+			  </shortcut>
+			  <guimenuitem>Аутоматски преведи</guimenuitem>
+			</menuchoice>
+			Овим се аутоматски преводи ваша датотека са преводом коришћењем преводилачке меморије.
+		</para>
 		</listitem>
 
 		<listitem>
-		  <para>
-		    <menuchoice>
-		      <shortcut>
-			<keycombo>
-			  <keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>S</keycap>
-			</keycombo>
-		      </shortcut>
-		      <guimenuitem>Save As</guimenuitem>
-		    </menuchoice>
-		    This saves your PO file under a different name.
-		  </para>
+		<para>
+			<menuchoice>
+			  <shortcut>
+				<keycap>F3</keycap>
+			  </shortcut>
+			  <guimenuitem>Отвори</guimenuitem>
+			</menuchoice>
+			Овим се отвара датотека са преводом.
+		</para>
 		</listitem>
 
 		<listitem>
-		  <para>
-		    <menuchoice>
-		      <shortcut>
-			<keycombo>
-			  <keycap>Ctrl</keycap><keycap>W</keycap>
-			</keycombo>
-		      </shortcut>
-		      <guimenuitem>Close</guimenuitem>
-		    </menuchoice>
-		    This closes your file.
-		  </para>
+		<para>
+			<menuchoice>
+			  <shortcut>
+				<keycap>F?</keycap>
+			  </shortcut>
+			  <guimenuitem>Отвори са адресе</guimenuitem>
+			</menuchoice>
+			Овим се отвара датотека са преводом коришћењем FTP или HTTP протокола.
+		</para>
 		</listitem>
 
 		<listitem>
-		  <para>
-		    <menuchoice>
-		      <shortcut>
-			<keycombo>
-			  <keycap>Ctrl</keycap><keycap>Q</keycap>
-			</keycombo>
-		      </shortcut>
-		      <guimenuitem>Exit</guimenuitem>
-		    </menuchoice>
-		    This quits the application.
-		  </para>
+		<para>
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>S</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Сачувај</guimenuitem>
+			</menuchoice>
+			Овим се чува ваша датотека.
+		</para>
 		</listitem>
 
-              </itemizedlist>
+		<listitem>
+		<para>
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>S</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Сачувај као...</guimenuitem>
+			</menuchoice>
+			Овим се чува ваша датотека са преводом — само под другим именом.
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<menuchoice>
+			  <guimenuitem>Врати</guimenuitem>
+			</menuchoice>
+			Овим се ваша датотека са преводом враћа у последње сачувано стање.
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>W</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Затвори</guimenuitem>
+			</menuchoice>
+			Овим се затвара ваша датотека са преводом.
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<menuchoice>
+			  <guimenuitem>Скоро отваране датотеке</guimenuitem>
+			</menuchoice>
+			Овим се приказује списак скоро отвараних датотека са преводом.
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>E</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Извези UTF-8 запис</guimenuitem>
+			</menuchoice>
+			Овим се извози ваша датотека са преводом у UTF-8 кодни запис.
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>I</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Увези UTF-8 запис</guimenuitem>
+			</menuchoice>
+			Овим се увози датотека са преводом у UTF-8 кодном запису.
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>Q</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Изађи</guimenuitem>
+			</menuchoice>
+			Овим се напушта програм.
+		</para>
+		</listitem>
+
+            </itemizedlist>
             </para>
           </listitem>
 	</varlistentry>
 
 	<!-- ================ Edit menu ================= -->
 	<varlistentry>
-          <term><guimenu>Edit</guimenu></term>
+          <term><guimenu>Уређивање</guimenu></term>
 
 	  <listitem>
-            <para>This menu contains:</para> 
+            <para>Овај мени садржи:</para> 
             <itemizedlist>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <menuchoice>
-		    <shortcut>
-		      <keycombo>
-			<keycap>Ctrl</keycap><keycap>Z</keycap>
-		      </keycombo>
-		    </shortcut>
-		    <guimenuitem>Undo</guimenuitem>
-		  </menuchoice>
-		  This undoes your last change.
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>Z</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Опозови</guimenuitem>
+			</menuchoice>
+			Овим се опозива ваша последња промена.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <menuchoice>
-		    <shortcut>
-		      <keycombo>
-			<keycap>Ctrl</keycap><keycap>X</keycap>
-		      </keycombo>
-		    </shortcut>
-		    <guimenuitem>Cut</guimenuitem>
-		  </menuchoice>
-		  This removes any text or data which is selected and
-		  places it in the buffer.
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>X</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Исеци</guimenuitem>
+			</menuchoice>
+			Овим се премешта било какав означени текст или податак у списак исечака.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <menuchoice>
-		    <shortcut>
-		      <keycombo>
-			<keycap>Ctrl</keycap><keycap>C</keycap>
-		      </keycombo>
-		    </shortcut>
-		    <guimenuitem>Copy</guimenuitem>
-		  </menuchoice>
-		  This copies any text or data which is selected into
-		  the buffer.
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>C</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Умножи</guimenuitem>
+			</menuchoice>
+			Овим се умножава било какав означени текст или податак у списак исечака.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <menuchoice>
-		    <shortcut>
-		      <keycombo>
-			<keycap>Ctrl</keycap><keycap>V</keycap>
-		      </keycombo>
-		    </shortcut>
-		    <guimenuitem>Paste</guimenuitem>
-		  </menuchoice>
-		  This pastes any text or data
-		  which is copied into the buffer.
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>V</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Убаци</guimenuitem>
+			</menuchoice>
+			Овим се преноси умножени или исечени текст или податак из списка исечака у програм.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <menuchoice>
-		    <guimenuitem>Clear</guimenuitem>
-		  </menuchoice>
-		  This removes the selected text.
+			<menuchoice>
+			  <shortcut>
+			    <keycombo>
+				<keycap>Ctrl</keycap><keycap>D</keycap>
+			    </keycombo>
+			  </shortcut>
+			  <guimenuitem>Уклони</guimenuitem>
+			</menuchoice>
+			Овим се уклања означени текст.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-                  <guimenuitem>Header...</guimenuitem>
-		  This opens a dialog box which allows you to edit
-		  information stored in the PO file header.
+			<guimenuitem>Пронађи...</guimenuitem>
+			Овим се отвара прозорче
+                	<guilabel>„Пронађи у датотеци са преводом“</guilabel>.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-                  <guimenuitem>Comment...</guimenuitem>
-		  This allows to write a comment associates
-		  to one message.
+                	<guimenuitem>Нађи следећи</guimenuitem>
+			Овим се тражи следеће појављивање низа знакова из претходне претраге.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <menuchoice>
-		    <shortcut>
-		      <keycombo>
-			<keycap>Ctrl</keycap><keycap>Space</keycap>
-		      </keycombo>
-		    </shortcut>
-		    <guimenuitem>Copy Message to Translation</guimenuitem>
-		  </menuchoice>
-		  This pastes the text from the original message in the
-		  translated message.
+			<guimenuitem>Замени...</guimenuitem>
+			Овим се отвара прозорче „ГПреводилац — Замена.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <menuchoice>
-		    <shortcut>
-		      <keycombo>
-			<keycap>Ctrl</keycap><keycap>U</keycap>
-		      </keycombo>
-		    </shortcut>
-		    <guimenuitem>Toogle Fuzzy Status</guimenuitem>
-		  </menuchoice>
-		  This set the current message to fuzzy.
+			<guimenuitem>Постави упит</guimenuitem>
+			Овим се отвара прозорче „ГПреводилац — Претрага преводилачке меморије“. Оно вам омогућава да претражујете преводилачку меморију.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <guimenuitem>Translation memory</guimenuitem>
-		  This shows the options in the translation memory 
-		  for the current message.
+                	<guimenuitem>Заглавље</guimenuitem>
+			Овим се отвара прозорче „ГПреводилац — Заглавље“, које вам омогућава да уредите информације сачуване у заглављу датотеке са преводом.
 		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Toolbar</guimenuitem>
-		  This opens the <guilabel>Toolbar Editor</guilabel>.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Preferences</guimenuitem>
-		  This opens the <guilabel>Preferences</guilabel> dialog.
-		</para>
-	      </listitem>
+		</listitem>
 
 	    </itemizedlist>
 	  </listitem>
@@ -846,25 +763,19 @@
 
 	<!-- ================ View menu ================= -->
 	<varlistentry>
-	  <term><guimenu>View</guimenu></term>
+	  <term><guimenu>Приказ</guimenu></term>
 	  <listitem>
-	    <para>This menu contains:</para> 
+	    <para>Овај мени садржи:</para> 
 
 	    <itemizedlist>
 
-	      <listitem>
+		<listitem>
                 <para>
-		  <guisubmenu>Context</guisubmenu>
-		  This shows or hides the context panel. 
+			<guisubmenu>Синтаксно осветљавање</guisubmenu>
+			Овде можете изабрати вашу омиљену комбинацију боја
+			за панеле са порукама.
 		</para>
-	      </listitem>
-
-	      <listitem>
-                <para>
-		  <guisubmenu>Translation Memory</guisubmenu>
-		  This shows or hides the translation memory panel. 
-		</para>
-	      </listitem>
+		</listitem>
 
             </itemizedlist>
           </listitem>
@@ -872,154 +783,98 @@
 
 	<!-- ================ Go menu ================= -->
 	<varlistentry>
-	  <term><guimenu>Go</guimenu></term>
+	  <term><guimenu>Порука</guimenu></term>
 	  <listitem>
-	    <para>This menu contains:</para>
+	    <para>Овај мени садржи:</para>
 
 	    <itemizedlist>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <guimenuitem>First</guimenuitem>
-		  Go to the first message.
+			<guimenuitem>Прва</guimenuitem>
+			(Недовршено)
 		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Back</guimenuitem>
-		  Go to the previous message.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Next</guimenuitem>
-		  Go to the next message.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Last</guimenuitem>
-		  Go to the last message.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Next fuzzy</guimenuitem>
-		  Go to the next fuzzy message.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Previous fuzzy</guimenuitem>
-		  Go to the previous fuzzy message.
-		</para>
-	      </listitem>
-	     
-	      <listitem>
-		<para>
-		  <guimenuitem>Next untranslated</guimenuitem>
-		  Go to the next untranslated message.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Previous untranslated</guimenuitem>
-		  Go to the previous untranslated message.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Next fuzzy or untranslated</guimenuitem>
-		  Go to the next fuzzy or untranslated message.
-		</para>
-	      </listitem>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Previous fuzzy or untranslated</guimenuitem>
-		  Go to the previous fuzzy or untranslated message.
-		</para>
-	      </listitem>
+		</listitem>
 
 		<listitem>
 		<para>
-		  <guimenuitem>Jump to</guimenuitem>
-		  Go to the message with a specific number.
+			<guimenuitem>Претходна</guimenuitem>
+			(Недовршено)
 		</para>
-	      </listitem>
+		</listitem>
+
+		<listitem>
+		<para>
+			<guimenuitem>Следећа</guimenuitem>
+			(Недовршено)
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<guimenuitem>Последња</guimenuitem>
+			(Недовршено)
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<guimenuitem>Редни број...</guimenuitem>
+			(Недовршено)
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<guimenuitem>Следећа нејасна</guimenuitem>
+			(Недовршено)
+		</para>
+		</listitem>
+
+		<listitem>
+		<para>
+			<guimenuitem>Следећа непреведена</guimenuitem>
+			(Недовршено)
+		</para>
+		</listitem>
 
 	    </itemizedlist>
 	  </listitem>
 	</varlistentry>
 
-	<!-- ================ Search menu ================= -->
-	<varlistentry>
-	  <term><guimenu>Search</guimenu></term>
-	  <listitem>
-	    <para>This menu contains:</para> 
-
-	    <itemizedlist>
-
-	      <listitem>
-		<para>
-		  <guimenuitem>Find</guimenuitem>
-		  This command opens the 
-                  <guilabel>Find</guilabel> dialog.
-		</para>
-	      </listitem>
-	   
-	      <listitem>
-		<para>
-		  <guimenuitem>Replace</guimenuitem>
-		  This opens the <guilabel>Replace</guilabel> dialog.
-		</para>
-	      </listitem>
-
-            </itemizedlist>
-          </listitem>
-        </varlistentry>
-
 	<!-- ================ Help menu ================= -->
 	<varlistentry>
-	  <term><guimenu>Help</guimenu></term>
+	  <term><guimenu>Помоћ</guimenu></term>
 	  <listitem>
-	    <para>This menu contains:</para>
+	    <para>Овај мени садржи:</para>
 	    <itemizedlist>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <guimenuitem>Contents</guimenuitem>
-		  This opens the 
-                  <application>GNOME Help Browser</application>
-		  (or <application>Nautilus</application>)
-		  and displays this manual.
+			<guimenuitem>Садржај</guimenuitem>
+			Овим се отвара
+                	<application>Гномов прегледник помоћи</application>
+			(или <application>Наутилус</application>)
+			 и приказује се упутство.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <guimenuitem>Gtranslator website</guimenuitem>
-		  This opens the <application>Gtranslator</application> webpage.
+			<guimenuitem>Интернет страна</guimenuitem>
+			Овим се отвара <application>&app;</application> интернет страна.
 		</para>
-	      </listitem>
+		</listitem>
 
-	      <listitem>
+		<listitem>
 		<para>
-		  <guimenuitem>About</guimenuitem>
-		  This opens the <guilabel>About</guilabel> dialog
-		  which shows basic information about 
-		  <application>Gtranslator</application>, such as author
-		  name, the application version number, and the URL
-		  for the application web page.
+			<guimenuitem>О програму</guimenuitem>
+			Овим се отвара прозорче <guilabel>„О програму“</guilabel>
+			у коме су приказане основне информације о програму
+			<application>&app;</application>, као што су име аутора, верзија програма
+			и интернет страна програма.
 		</para>
-	      </listitem>
+		</listitem>
 
 	    </itemizedlist>
 	  </listitem>
@@ -1030,721 +885,506 @@
 
 
     <sect2 id="gtranslator-commandline-option">
-      <title>Available commandline options</title>
+      <title>Доступни параметри линије наредби</title>
       <para>
-	<application>Gtranslator</application> understands a number of
-	command line options:
+		<application>&app;</application> може прихватити велики број параметара
+		на линији наредби:
       </para>
-      
+ 
       <variablelist>
 
 	<varlistentry>
           <term><varname>--help</varname></term>
           <listitem>
-	    <para>
-	      Shows you a short help message on the command line.
-	    </para>
+		<para>
+			Приказује кратку помоћ на линији наредби.
+		</para>
 	  </listitem>
 	</varlistentry>
+
+	<varlistentry>
+          <term><varname>--version</varname></term>
+	  <listitem>
+		<para>
+			Приказује верзију програма <application>&app;</application>.
+		</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><varname>--display</varname></term>
+	  <listitem>
+		<para>
+			Допушта вам да наведете екран где ће бити покренут и приказан <application>&app;</application> .
+		</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term>
+	    <varname>-w</varname>, <varname>--webalize=<replaceable>ДАТОТЕКА</replaceable></varname>
+	  </term>
+	  <listitem>
+		<para>
+			Ствара ХТМЛ излазну датотеку (морате навести име излазне ХТМЛ датотеке као пратећи аргумент) из датотеке са преводом.
+		</para>
+		<para>
+			Један пример би био:
+			<command>gtranslator --webalize=<replaceable>излаз.html</replaceable> <replaceable>превод.po</replaceable></command>
+		</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><varname>--scheme</varname></term>
+	  <listitem>
+		<para>
+			Поставља синтаксно осветљавање дефинисано у наведеној датотеци као параметру.
+		</para>
+		<para>
+			На пример: 
+			<command>gtranslator --scheme=<replaceable>Датотека</replaceable></command>
+		</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><varname>--geometry</varname></term>
+	  <listitem>
+		<para>
+			Можете дефинисати стандардни геометријски низ
+			према коме ће се 
+			<guilabel>прозор програма</guilabel>
+			образовати.
+		</para>
+		<para>
+			На пример, један позив би могао бити: 
+				<command>gtranslator --geometry="320x240+0+0" <replaceable>превод.po</replaceable></command>
+			(Ово смешта програм на позицију (0,0), у горњем левом углу, 
+			и са величином прозора од 320x240).
+		</para>
+	  </listitem>
+        </varlistentry>
 
       </variablelist>
     </sect2>
   </sect1>
-  <!-- ========== end of Using gtranslator ========== -->
+<!-- ========== end of Using gtranslator ========== -->
 
 
-  <!-- ============= Customization ============ -->
+<!-- ============= Customization ============ -->
   <sect1 id="gtranslator-preferences">
-    <title>Customization</title>
+    <title>Прилагођавање</title>
     <para>
-      To change the application settings, select 
-      <menuchoice>
-	<guimenu>Edit</guimenu>
-	<guimenuitem>Preferences</guimenuitem>
-      </menuchoice>. This opens the 
-      <interface>Preferences</interface> dialog.
+	Како би подесили програм, изаберите редом следеће ставке: 
+	<menuchoice>
+		<guimenu> „Уређивање“ </guimenu>
+		<guimenuitem> „Поставке...“ </guimenuitem>
+	</menuchoice>. Овим се отвара прозорче
+	<interface>„Гпреводилац — Поставке“</interface> .
     </para>
 
-    <figure id="gtranslator-preferences-screenshot">
-      <title>Preferences Dialog</title>
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="figures/prefs.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Gtranslator Preferences Dialog</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
+    <figure id="gtranslator-preference-screenshot">
+	<title>Прозорче — Поставке</title>
+	<screenshot>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="figures/prefs.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase>&app; Preference Dialog</phrase>
+	    </textobject>
+	  </mediaobject>
+	</screenshot>
     </figure>
 
-    <sect2 id="gtranslator-prefs-file">
-      <title>File Tab</title>
-      
-      <para>
-	The properties in the 
-	<guilabel>File</guilabel> tab are: 
-      </para>
-      
-      <variablelist>
-	<varlistentry>
-	  <term><guilabel>Autosave files every x minutes</guilabel></term>
-	  <listitem>
-	    <para>
-	      This option set how often <application>Gtranslator</application> must be
-	      save the current file.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Create a backup copy of files before saving</guilabel></term>
-	  <listitem>
-	    <para>
-	      (TBD)
-	    </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
-      
-    </sect2>
-    
-    <sect2 id="gtranslator-prefs-editor">
-      <title>Editor Tab</title>
-
-      <para>
-	The properties in the 
-	<guilabel>Editor</guilabel> tab are: 
-      </para>
-      
-      <figure id="gtranslator-preferences-editor">
-      <title>Editor Tab</title>
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="figures/prefs-editor.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Gtranslator Editor Tab</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-      </figure>
-
-      <variablelist>
-	<varlistentry>
-	  <term><guilabel>Highlight message syntax</guilabel></term>
-	  <listitem>
-	    <para>
-	      This option allows activate the highlight syntax in the
-	      original and translated message boxes.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Make whitespace visible</guilabel></term>
-	  <listitem>
-	    <para>
-	      With this option active the withespace in the original and
-	      translated boxes are shown as a dot.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Use custom font</guilabel></term>
-	  <listitem>
-	    <para>
-	      This option lets you set a custom font for the original and
-	      translated boxes.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Remove fuzzy status if message is changed</guilabel></term>
-	  <listitem>
-	    <para>
-	      If this option is active the status will change automatically if
-	      you edit a message.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Check spelling</guilabel></term>
-	  <listitem>
-	    <para>
-	      This option active the check spelling for your language in
-	      the original and translated boxes.
-	    </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
-      
-    </sect2>
-
-    <sect2 id="gtranslator-prefs-profiles">
-      <title>Profiles Tab</title>
-
-      <para>
-	The 
-	 <guilabel>Editor</guilabel> tab contains: 
-      </para>
-      
-      <figure id="gtranslator-preferences-profiles">
-      <title>Profiles Tab</title>
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="figures/profiles.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Gtranslator Profiles Tab</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-      </figure>
-
-      <variablelist>
-	<varlistentry>
-	  <term><guilabel>Add button</guilabel></term>
-	  <listitem>
-	    <para>
-	      It shows the <guilabel>Profile</guilabel> dialog in order to
-	      create a new profile.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Edit button</guilabel></term>
-	  <listitem>
-	    <para>
-	      It shows the <guilabel>Profile</guilabel> dialog in order to
-	      edit an exists profile.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Delete button</guilabel></term>
-	  <listitem>
-	    <para>
-	      It removes the selected profile.
-	    </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
-
-     <para>
-       The entries in the <guilabel>Profiles</guilabel> dialog are:
-     </para>
-
-      <figure id="gtranslator-profiles-dialog">
-      <title>Profiles Dialog</title>
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="figures/profiles-dialog.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>GtranslatorProfiles Dialog</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-      </figure>
-
-      <variablelist>
-	<varlistentry>
-	  <term><guilabel>Profile Name</guilabel></term>
-	  <listitem>
-	    <para>
-	      It is the name of the profile. It is what identify the profile and
-	      it must be unique.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Translator Name</guilabel></term>
-	  <listitem>
-	    <para>
-	      This is the name of the translator to fill the value in the header.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Translator Email</guilabel></term>
-	  <listitem>
-	    <para>
-	      This is the email addres of the translator to fill the value in the
-	      header.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Language</guilabel></term>
-	  <listitem>
-	    <para>
-	      The name of the language in which they will be done the translations.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Language Code</guilabel></term>
-	  <listitem>
-	    <para>
-	      This is the ISO 639-2 language code used for the language 
-	      chosen above. The name of the PO file will be based on this setting.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Character Set</guilabel></term>
-	  <listitem>
-	    <para>
-	      This is the character set for the PO files. Gnome 2.x uses UTF-8
-	      encoding for all languages.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Transfer Encoding</guilabel></term>
-	  <listitem>
-	    <para>
-	      This is the encoding used to store the PO file.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Team Email</guilabel></term>
-	  <listitem>
-	    <para>
-	      This is the email addres of the language team.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Plural Forms</guilabel></term>
-	  <listitem>
-	    <para>
-	      Information about the plural forms in the PO files.
-	    </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
-      
-    </sect2>
-
-    <sect2 id="gtranslator-prefs-interface">
-      <title>Interface Tab</title>
-      
-      <para>
-	The 
-	<guilabel>Interface</guilabel> tab contains: 
-      </para>
-      
-      <figure id="gtranslator-preferences-interface">
-      <title>Interface Tab</title>
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="figures/prefs-interface.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>GtranslatorInterface Tab</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-      </figure>
-
-      <variablelist>
-	<varlistentry>
-	  <term><guilabel>Anchor Style</guilabel></term>
-	  <listitem>
-	    <para>
-	      This lets you choose if you want to see in the toolbar only
-	      the icons, the icons with the text or use the gnome preferences.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Scheme Color</guilabel></term>
-	  <listitem>
-	    <para>
-	      This is the scheme color in the original and translated boxes.
-	    </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
-
-    </sect2>
-
-    <sect2 id="gtranslator-prefs-tm">
-      <title>Translation Memory Tab</title>
-
-      <para>
-	The 
-	 <guilabel>Translation Memory</guilabel> tab contains: 
-      </para>
-      
-      <figure id="gtranslator-preferences-tm">
-      <title>Translation Memory Tab</title>
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="figures/prefs-tm.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>GtranslatorTranslation Memory Tab</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-      </figure>
-
-      <variablelist>
-	<varlistentry>
-	  <term><guilabel>Sow options in translated messages</guilabel></term>
-	  <listitem>
-	    <para>
-	      With this option active <application>Gtranslator</application> shows you
-	      the translation memory options in all the messages including the
-	      translated ones. If it is no active only show options in fuzzy and
-	      untranslated messages.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Use only files with this name</guilabel></term>
-	  <listitem>
-	    <para>
-	      If this option is active the translation memory will be created
-	      only using the files with this name into the directory selected.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Max # of missing words</guilabel></term>
-	  <listitem>
-	    <para>
-	      
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term><guilabel>Max difference in sentence length</guilabel></term>
-	  <listitem>
-	    <para>
-	      It removes the selected profile.
-	    </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
-
-    </sect2>
-
-    <sect2 id="gtranslator-prefs-plugins">
-      <title>Plugins Tab</title>
-    </sect2>
-
-  </sect1>
-
-
-  <!-- ================ Bugs ================= -->
-  <sect1 id="gtranslator-bugs">
-    <title>Known Bugs and Limitations</title>
+<!--
+    <FIGURE FLOAT="0" id="PREFERENCES-FIG">
+      <title>Preferences Dialog</title>
+      <SCREENSHOT>
+        <SCREENINFO>Preferences Dialog</SCREENINFO>
+        <GRAPHIC FILEREF="figures/prefs" FORMAT="PNG"
+        SRCCREDIT="emese"></GRAPHIC>
+      </SCREENSHOT>
+    </FIGURE>
+-->
     <para>
-      You can query for bugs related to 
-      <application>Gtranslator</application> in the 
-      <ulink url="http://bugzilla.gnome.org">
-	GNOME bug tracking database.
-      </ulink>.
+	Поља унутар језичка 
+	<guilabel>„Заглавље“</guilabel> су: 
+    </para>
+
+    <variablelist>
+	  <varlistentry>
+		<term><guilabel>Име аутора</guilabel></term>
+		<listitem>
+		<para>
+			Упишите ваше име. Ова информација ће бити сачувана унутар датотеке са преводом.
+		</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><guilabel>Адреса е-поште аутора</guilabel></term>
+		<listitem>
+		<para>
+			Упишите вашу адресу електронске поште. Ова информација ће бити сачувана унутар датотеке са преводом.
+		</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><guilabel>Подразумевани домен за упите</guilabel></term>
+		<listitem>
+		<para>
+			Изаберите домен из падајућег списка.
+		</para>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
+
+    <para>
+	Поља која спадају у 
+	<guilabel>језичка подешавања</guilabel> су:
+    </para>
+
+    <variablelist>
+	<varlistentry>
+		<term><guilabel>Језик</guilabel></term>
+		<listitem>
+		<para>
+			Изаберите из падајућег списка језик у коме се остварује превод. 
+			<application>&app;</application> попуњава остатак формулара
+			са подразумеваним вредностима за дати изабрани језик. Ове вредности можете изменити али их обично можете мирно користити.
+		</para>
+		</listitem>
+	</varlistentry>
+	<varlistentry>
+		<term><guilabel>Код језика</guilabel></term>
+		<listitem>
+		<para>
+			Ово поље приказује ИСО 639-2 језички код који се користи за језик у којем се остварује превод. Име датотеке са преводом ће имати ову вредност.
+		</para>
+		</listitem>
+	</varlistentry>
+	<varlistentry>
+        	<term><guilabel>Е-пошта преводилачког тима</guilabel></term>
+		<listitem>
+		<para>
+			Ово поље приказује адресу електронске поште коју користи преводилачки тим.
+		</para>
+		</listitem>
+	</varlistentry>
+	<varlistentry>
+		<term><guilabel>Знаковни скуп</guilabel></term>
+		<listitem>
+		<para>
+			Поље <guilabel>Знаковни скуп</guilabel> приказује
+			запис који се користи за чување датотека са преводом.
+			<application>&app;</application> вам нуди једну подразумевану вредност.
+		</para>
+		<note>
+		  <title>Коришћење других кодних записа</title>
+		  <para>
+			Подразумевана вредност кодног записа коју поставља  
+			<application>&app;</application> може се без проблема користити
+			када преводите датотеке са преводом за Гном 2.x платформу. Гном 2.x
+			користи UTF-8 кодни запис за све језике и према томе ви треба да промените 
+			ову подразумевану вредност када преводите за 1.x платформу.
+		  </para>
+		</note>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+<!--
+	After you have made all the changes you want, click on 
+	<guibutton>OK</guibutton> to apply the changes
+    and close the 
+    <interface>Properties</interface>dialog. To
+    cancel the changes and return to previous values, click the 
+    <guibutton>Close</guibutton>button.
+-->
+    <para>
+	Било које промене које обавите одмах ступају на снагу.
     </para>
   </sect1>
 
 
-  <!-- ================ Authors ================= -->
+<!-- ================ Bugs ================= -->
+  <sect1 id="gtranslator-bugs">
+    <title>Познати проблеми и ограничења</title>
+    <para>
+	Можете претраживати грешке везане за програм
+	<application>&app;</application> у 
+	<ulink url="http://bugzilla.gnome.org">Гном бази пријављених грешака.</ulink>.
+    </para>
+  </sect1>
+
+
+<!-- ================ Authors ================= -->
   <sect1 id="gtranslator-authors">
-    <title>Authors</title>
+    <title>Аутори</title>
 
     <sect2 id="gtranslator-application-authors">
-      <title>Application Authors</title>
-      
-      <para>
-	<application>Gtranslator</application> was written originally by Fatih Demir <email>kabalak@kabalak.net</email> and Gediminas Paulauskas <email>menesis@kabalak.net</email>.
-	Ross Golder <email>rossg@golder.org</email> was the maintainer of GTK+ 2.x port of Gtranslator until October 2007.
-      </para>
-      
-      <para>
-	Most of the new version 2.0 was written by Pablo Sanxiao <email>psanxiao@gmail.com</email> and Ignacio Casal Quinteiro <email>nacho.resa@gmail.com</email>. The current maintainers are Pablo Sanxiao and Juan José Sánchez Penas 
-	<email>jjsanchez@igalia.com</email>.
-      </para>
-
-      <para>
-	To find more information about <application>Gtranslator</application>, please visit the 
-	<ulink url="http://gtranslator.sourceforge.net" type="http">Gtranslator Web page</ulink>.
-	Please send all comments, suggestions, and bug reports to the
-	<ulink url="http://bugzilla.gnome.org" type="http">GNOME bug tracking database</ulink>.
-	(Instructions for submitting bug reports can be found
-	<ulink url="http://bugzilla.gnome.org/Reporting.html" type="http">on-line</ulink>.)
-	You can also use <application>Bug Report Tool</application>
-	(<command>bug-buddy</command>), available in the
-	<menuchoice>
-	  <guimenu>Application</guimenu>
-	  <guisubmenu>Development</guisubmenu>
-	</menuchoice> menu,
-	for submitting bug reports.
-      </para>
+      <title>Аутори програма</title>
+	<para>
+		<application>&app;</application> су написали Фатих Демир (Fatih Demir) <email>kabalak@gtranslator.org</email> и Гедиминас Паулаускас (Gediminas Paulauskas) <email>menesis@gtranslator.org</email>.
+		Рос Гоулдер (Ross Golder) <email>rossg@golder.org</email> је тренутно задужен за одржавање Гтк2+ 2.x верзије програма.
+		Како би добили више информација о програму <application>&app;</application>, молим посетите
+		<ulink url="http://www.gtranslator.org" type="http">Интернет страницу пројекта</ulink>.
+		Молим, пошаљите сва запажања, предлоге и пријаве грешака на
+		<ulink url="http://bugzilla.gnome.org" type="http">Гном Бубаждају</ulink>.
+		(Упутства како да саставите ваљану пријаву грешака можете пронаћи
+		<ulink url="http://bugzilla.gnome.org/Reporting.html" type="http">овде</ulink>.)
+		Такође, можете користити и сам програм за пријаву грешака по имену <application>Брат Буба</application>
+		(<command>bug-buddy</command>), који се налази у менију:
+		<menuchoice>
+			<guimenu> „Програми“ </guimenu>
+			<guisubmenu> „Програмирање“ </guisubmenu>
+			<guisubmenu> „Пријава грешака“ </guisubmenu>
+		</menuchoice> како би саставили и послали пријаву.
+	</para>
     </sect2>
 
 
     <sect2 id="gtranslator-contributor">
-      <title>Contributors</title>
-      <para>
-	People who have contributed to the Gtranslator project:
-      </para>
+      <title>Сарадници</title>
+	<para>
+		У пројекту &app; су учествовали:
+	</para>
 
-      <itemizedlist>
-	<listitem>
-	  <para>
-	    Seán de Búrca 
-	    <email>leftmostcat@gmail.co</email>
-	  </para>
-	</listitem>
+	<itemizedlist>
+		<listitem>
+		<para>
+			Томас Цимер (Thomas Ziehmer) <email>thomas@gtranslator.org</email>
+			који је израдио прозорче — „Пронађи“.
+		</para>
+		</listitem>
 
-	<listitem>
-	  <para>
-	    Thomas Ziehmer <email>thomas@kabalak.net</email>
-	    for the find dialog implementation.
-	  </para>
-	</listitem>
+		<listitem>
+		<para>
+			<emphasis>Сви</emphasis> преводиоци програма
+			<application>&app;</application>.
+		</para>
+		</listitem>
 
-	<listitem>
-	  <para>
-	    <emphasis>All</emphasis> translators of 
-	    <application>Gtranslator</application>.
-	  </para>
-	</listitem>
+		<listitem>
+		<para>
+			Гном I18N дописно друштво
+			<email>gnome-i18n@gnome.org</email>
+		</para>
+		</listitem>
 
-	<listitem>
-	  <para>
-	    The GNOME I18N mailing list
-	    <email>gnome-i18n@gnome.org</email>
-	  </para>
-	</listitem>
+		<listitem>
+		<para>
+			Алексанер Хаутквест (Alexandre Hautequest)
+			<email>hquest@fesppr.br</email>
+		</para>
+		</listitem>
 
-	<listitem>
-	  <para>
-	    Alexandre Hautequest 
-	    <email>hquest@fesppr.br</email>
-	  </para>
-	</listitem>
+		<listitem>
+		<para>
+			Денис Плеић
+			<email>dpleic@linux.hr</email>
+		</para>
+		</listitem>
 
-	<listitem>
-	  <para>
-	    Denis Pleić
-	    <email>dpleic@linux.hr</email>
-	  </para>
-	</listitem>
+		<listitem>
+		<para>
+			Џош Џексон (Josh Jackson)
+			<email>pturing@mailandnews.com</email>
+		</para>
+		</listitem>
 
-	<listitem>
-	  <para>
-	    Josh Jackson
-	    <email>pturing@mailandnews.com</email>
-	  </para>
-	</listitem>
-
-	<listitem>
-	  <para>
-	    Robert Brady
-	    <email>robert@suse.co.uk</email>
-	  </para>
-	</listitem>
+		<listitem>
+		<para>
+			Роберт Брејди (Robert Brady)
+			<email>robert@suse.co.uk</email>
+		</para>
+		</listitem>
       </itemizedlist>
     </sect2>
 
+
     <sect2 id="gtranslator-packagers">
-      <title>Packagers</title>
+      <title>Аутори пакета</title>
 
       <para>
-	We would want to thank those persons for providing
-	packages in the corresponding formats of <application>Gtranslator</application>. 
+	Желели би да захвалимо следећим особама за израду одговарајућих облика пакета
+	за програм <application>&app;</application>:
       </para>
 
       <itemizedlist>
 	<listitem>
-	  <para>
-	    Josh Jackshon <email>pturing@mailandnews.com</email> for
-	    his Mandrake packages of <application>Gtranslator</application> 0.34
-	  </para>
+	<para>
+		Џош Џексон <email>pturing@mailandnews.com</email> је приредио Мандрак (енгл. Mandrake)
+		пакете програма <application>&app;</application> за верзију 0.34
+	</para>
 	</listitem>
 
 	<listitem>
-	  <para>
-	    Mike Newman <email>mike@gtnorthern.demon.co.uk</email> for
-	    his RH7 (S)RPMs of <application>Gtranslator</application>.
-	  </para>
+	<para>
+		Мајк Њуман (Mike Newman) <email>mike@gtnorthern.demon.co.uk</email> је приредио
+		Црвенкапа (RedHat) бинарне и пакете са изворним кодом (енгл. (S)RPM) програма <application>&app;</application>.
+	</para>
 	</listitem>
 
 	<listitem>
-	  <para>
-	    Martijn van de Streek <email>martijn@foodfight.org</email> for
-	    his Debian packages of <application>Gtranslator</application>.
-	  </para>
+	<para>
+		Мартин Ван Де Стрик (Martijn van de Streek) <email>martijn@foodfight.org</email> је приредио
+		<application>&app;</application> Дебиан (Debian) пакете.
+	</para>
 	</listitem>
 
 	<listitem>
-	  <para>
-	    Maxim Sobolev <email>sobomax@freebsd.org</email> for his
-	    FreeBSD ports of <application>Gtranslator</application>.
-	  </para>
+	<para>
+		Максим Шоболев (Maxim Sobolev) <email>sobomax@freebsd.org</email> је приредио
+		ФриБСД (FreeBSD) <application>&app;</application> портове.
+	</para>
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2 id="gtranslator-document-author">
-      <title>Documentation Authors</title>
-      <para>
-	This manual was written by Pablo Sanxiao (<email>psanxiao@gmail.com</email>) based on the
-	last version of the manual written by Emese Kovacs (<email>emese@gnome.hu</email>). 
-	Please send all comments and suggestions regarding this manual to the 
-	<ulink url="http://developer.gnome.org/projects/gdp" type="http">
-	  GNOME Documentation Project
-	</ulink>
-	by sending an email to 
-	<email>docs@gnome.org</email>.
-	You can also add your comments online by using the 
-	<ulink url="http://developer.gnome.org/projects/gdp/doctable/" type="http">
-	  GNOME Documentation Status Table
-	</ulink>.
-      </para>
+      <title>Документација</title>
+	<para>
+		Ово упутство је написао Имез Ковач
+		(<email>emese@gnome.hu</email>). Молим, пошаљите сва запажања 
+		и предлоге везане за упутство
+		<ulink url="http://developer.gnome.org/projects/gdp" type="http">
+			Гном пројекту документације
+		</ulink>
+		наводећи адресу
+		<email>docs@gnome.org</email>.
+		Такође, можете уживо додати запажања коришћењем
+		<ulink url="http://developer.gnome.org/projects/gdp/doctable/" type="http">
+			Гном табеле стања документације.
+		</ulink>.
+	</para>
     </sect2>
   </sect1>
 
-  <!-- ================ Application License ================= -->
+<!-- ================ Application License ================= -->
   <sect1 id="gtranslator-license">
-    <title>License</title>
-    <para>
-      This program is free software; you can redistribute
-      it and/or modify it under the terms of the 
-      <ulink type="help" url="gnome-help:gpl">
-	<citetitle>GNU General Public License</citetitle>
-      </ulink>
-      as published by the Free Software Foundation; either 
-      version 2 of the License, of (at your option) any later
-      version.
-    </para>
-    <para>
-      This program is distributed in the hope that it will be
-      useful, but WITHOUT ANY WARRANTY; without even the
-      implied warranty of MERCHANTABILITY or FITNESS FOR A 
-      PARTICULAR PURPOSE. See the
-      <citetitle>GNU General Public License</citetitle>
-      for more details.
-    </para>
-    <para>
-      A copy of the 
-      <citetitle>GNU General Public License</citetitle>
-      is included as an appendix to the 
-      <citetitle>GNOME Users Guide</citetitle>
-      . You may also obtain a copy of the 
-      <citetitle>GNU General Public License</citetitle>
-      from the Free Software Foundation by visiting
-      <ulink type="http" url="http://www.fsf.org">
-	their Web site
-      </ulink>
-      or by writing to 
-      <address>Free Software Foundation, Inc.
-	<street>59 Temple Place</street> - Suite 330
-	<city>Boston</city>,
-	<state>MA</state>
-	<postcode>02111-1307</postcode>
-	<country>USA</country>
-      </address>
-    </para>
+    <title>Лиценца</title>
+	  <para>
+                  Овај програм је слободан софтвер; можете га расподељивати и (или) мењати под условима  
+		  <ulink type="help" url="gnome-help:gpl">
+			  <citetitle>ГНУ-ове Опште Јавне Лиценце</citetitle>
+	          </ulink>
+                  коју је објавила „Задужбина За Слободни Софтвер“ ; било у верзији 2 лиценце, или (по вашем нахођењу) у било којој накнадној верзији.
+		  
+	  </para>
+	  <para>
+                  Овај програм се испоручује у нади да ће он бити користан, али БЕЗ ИКАКВЕ ГАРАНЦИЈЕ; чак и без евентуалног укључивања гаранције за комерцијално прихватљив квалитет или уклапања у одређену намену.
+За више детаља, погледајте
+		  <citetitle>ГНУ-ову Општу Јавну Лиценцу</citetitle>.
+          </para>
+	  <para>
+		  Примерак
+		  <citetitle>ГНУ-ове Опште Јавне Лиценце</citetitle>
+је укључен као један додатак уз
+		  <citetitle>ГНОМ-ов Кориснички Водич</citetitle>.
+Такође, ви можете затражити примерак 
+		  <citetitle>ГНУ-ове Опште Јавне Лиценце</citetitle>
+од „Задужбине За Слободни Софтвер“ одласком на 
+		  <ulink type="http" url="http://www.fsf.org">
+			  њихову интернет страну
+		  </ulink>
+		  или им можете писати на адресу:
+		  <address>Free Software Foundation, Inc.
+			  <street>59 Temple Place</street> - Suite 330
+			  <city>Boston</city>,
+			  <state>MA</state>
+			  <postcode>02111-1307</postcode>
+			  <country>USA</country>
+		  </address>
+	  </para>
   </sect1>
 
 
-  <!--   <sect1 id="gtranslator-glossary"> -->
-  <!--     <title>Glossary</title> -->
-  <!--     <para> -->
-  <!--       <variablelist> -->
-  <!--         <varlistentry> -->
-  <!--           <term> -->
-  <!--             <command>gettext</command> -->
-  <!--           </term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>po file</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>internationalization</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>localization</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>l10n</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>i18n</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>translation memory</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>ISO 3166 coutry code</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>ISO 639-2 language code</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>default query domain</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>charset</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>encoding</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--         <varlistentry> -->
-  <!--           <term>URI</term> -->
-  <!--           <listitem> -->
-  <!--             <para></para> -->
-  <!--           </listitem> -->
-  <!--         </varlistentry> -->
-  <!--       </variablelist> -->
-  <!--     </para> -->
-  <!--   </sect1> -->
+  <sect1 id="gtranslator-glossary">
+    <title>Речник</title>
+    <para>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <command>gettext</command>
+          </term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>датотека са преводом</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>интернационализација</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>локализација</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>l10n</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>i18n</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>преводилачка меморија</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>ISO 3166 код земље</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>ISO 639-2 језички код</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>подразумевани домен за упите</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>скуп знакова</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>запис</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>једнозначна адреса</term>
+          <listitem>
+            <para></para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </para>
+  </sect1>
 </article>
