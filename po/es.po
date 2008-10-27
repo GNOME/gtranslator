@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-19 10:26+0000\n"
-"PO-Revision-Date: 2008-10-19 13:51+0200\n"
+"POT-Creation-Date: 2008-10-27 16:55+0000\n"
+"PO-Revision-Date: 2008-10-27 22:20+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -742,6 +742,11 @@ msgstr "Archivo guardado."
 msgid "Save file as..."
 msgstr "Guardar archivo como..."
 
+#: ../src/actions-file.c:748
+#, c-format
+msgid "Failed to write profile data into profiles file '%s'"
+msgstr "Falló al escribir los datos del perfil en el archivo de perfiles «%s»"
+
 #: ../src/actions-help.c:55
 msgid "Current Developers"
 msgstr "Desarrolladores actuales"
@@ -1431,22 +1436,22 @@ msgstr "Cerrar el documento"
 msgid "Failed opening file '%s': %s"
 msgstr "Falló al abrir el archivo «%s»: %s"
 
-#: ../src/po.c:388
+#: ../src/po.c:391
 #, c-format
 msgid "The file is empty"
 msgstr "El archivo está vacío"
 
-#: ../src/po.c:400
+#: ../src/po.c:405
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext devolvió una lista de dominios de mensaje nula."
 
-#: ../src/po.c:545
+#: ../src/po.c:552
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "No se obtuvieron mensajes del analizador."
 
-#: ../src/po.c:786
+#: ../src/po.c:793
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1457,7 +1462,7 @@ msgstr ""
 "Los archivos pot se generan en el proceso de compilación.\n"
 "Su archivo debería nombrarse como «%s.po»."
 
-#: ../src/po.c:821
+#: ../src/po.c:828
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Hubo un error al escribir el archivo PO: %s"
