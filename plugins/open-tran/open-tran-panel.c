@@ -189,15 +189,18 @@ print_struct_field (gpointer key,
 		array = g_value_get_boxed (value);
 
 		if (G_VALUE_HOLDS (array->values, G_TYPE_HASH_TABLE))
-		{
 			hash = g_value_get_boxed (array->values);
-			g_value_array_free (array);
-		}
-		else return;
+		else
+			return;
 			
-		values = g_hash_table_get_values(hash);
-		if((values = g_list_next(values)))
-			print_struct_to_tree_view(values->data, panel);
+		values = g_hash_table_get_values (hash);
+		if ((values = g_list_next (values)))
+			print_struct_to_tree_view (values->data, panel);
+		
+		/*
+		 * It's important freeing the array after the use of its contents
+		 */
+		g_value_array_free (array);
 	}
 }
 
