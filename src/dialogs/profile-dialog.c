@@ -41,7 +41,6 @@
 						 	(object),	\
 						 	GTR_TYPE_PROFILE_DIALOG,     \
 						 	GtranslatorProfileDialogPrivate))
-#define PIXMAPSDIR "/usr/local/share/pixmaps/gtranslator"
 
 G_DEFINE_TYPE(GtranslatorProfileDialog, gtranslator_profile_dialog, GTK_TYPE_DIALOG)
 
@@ -60,11 +59,11 @@ struct _GtranslatorProfileDialogPrivate
 	GtkWidget *encoding_entry;
 	GtkWidget *language_email_entry;
 	GtkWidget *plurals_forms_entry;
-};
-
-struct data {
-  GtranslatorProfile *old_profile;
-  GtranslatorProfile *new_profile;
+	
+	GtranslatorPreferencesDialog *prefs_dlg;
+	
+	GtranslatorProfile *new_profile;
+	GtranslatorProfile *old_profile;
 };
 
 static void gtranslator_profile_dialog_finalize (GObject *object)
@@ -85,7 +84,7 @@ static void gtranslator_profile_dialog_class_init (GtranslatorProfileDialogClass
 static void
 profile_name_entry_changed (GObject    *gobject,
 			    GParamSpec *arg1,
-			    GtranslatorProfile *profile)
+			    GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -94,13 +93,14 @@ profile_name_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_name (profile, (gchar *)text);
+	  gtranslator_profile_set_name (profile_dlg->priv->new_profile,
+					(gchar *)text);
 }	
 
 static void
 author_name_entry_changed (GObject    *gobject,
 			   GParamSpec *arg1,
-			   GtranslatorProfile *profile)
+			   GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -109,13 +109,14 @@ author_name_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_author_name (profile, (gchar *)text);
+	  gtranslator_profile_set_author_name (profile_dlg->priv->new_profile,
+					       (gchar *)text);
 }		
 
 static void
 author_email_entry_changed (GObject    *gobject,
 			    GParamSpec *arg1,
-			    GtranslatorProfile *profile)
+			    GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -124,13 +125,14 @@ author_email_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_author_email (profile, (gchar *)text);
+	  gtranslator_profile_set_author_email (profile_dlg->priv->new_profile,
+						(gchar *)text);
 }
 
 static void
 language_name_entry_changed (GObject    *gobject,
 			     GParamSpec *arg1,
-			     GtranslatorProfile *profile)
+			     GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -139,13 +141,14 @@ language_name_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_language_name (profile, (gchar *)text);
+	  gtranslator_profile_set_language_name (profile_dlg->priv->new_profile,
+						 (gchar *)text);
 }
 
 static void
 language_code_entry_changed (GObject    *gobject,
 			     GParamSpec *arg1,
-			     GtranslatorProfile *profile)
+			     GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -154,13 +157,14 @@ language_code_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_language_code (profile, (gchar *)text);
+	  gtranslator_profile_set_language_code (profile_dlg->priv->new_profile,
+						 (gchar *)text);
 }
 
 static void
 charset_entry_changed (GObject    *gobject,
 		       GParamSpec *arg1,
-		       GtranslatorProfile *profile)
+		       GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 
@@ -169,13 +173,14 @@ charset_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_charset (profile, (gchar *)text);
+	  gtranslator_profile_set_charset (profile_dlg->priv->new_profile,
+					   (gchar *)text);
 }
 
 static void
 encoding_entry_changed (GObject    *gobject,
 			GParamSpec *arg1,
-			GtranslatorProfile *profile)
+			GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -184,13 +189,14 @@ encoding_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_encoding (profile, (gchar *)text);
+	  gtranslator_profile_set_encoding (profile_dlg->priv->new_profile,
+					    (gchar *)text);
 }
 
 static void
 group_email_entry_changed (GObject    *gobject,
 			   GParamSpec *arg1,
-			   GtranslatorProfile *profile)
+			   GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -199,13 +205,14 @@ group_email_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_group_email (profile, (gchar *)text);
+	  gtranslator_profile_set_group_email (profile_dlg->priv->new_profile,
+					       (gchar *)text);
 }
 
 static void
 plurals_entry_changed (GObject    *gobject,
 		       GParamSpec *arg1,
-		       GtranslatorProfile *profile)
+		       GtranslatorProfileDialog *profile_dlg)
 {
 	const gchar *text;
 	
@@ -214,10 +221,12 @@ plurals_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text (GTK_ENTRY (gobject));
 	
 	if (text)
-	  gtranslator_profile_set_plurals (profile, (gchar *)text);
+	  gtranslator_profile_set_plurals (profile_dlg->priv->new_profile,
+					   (gchar *)text);
 }
 
-static void save_new_profile (GtkWidget *widget, GtranslatorProfile *profile)
+static void save_new_profile (GtkWidget *widget,
+			      GtranslatorProfileDialog *profile_dlg)
 {
   GList *profiles_list = NULL, *l = NULL;
   GtranslatorPreferencesDialog *dlg;
@@ -232,7 +241,7 @@ static void save_new_profile (GtkWidget *widget, GtranslatorProfile *profile)
     GtranslatorProfile *profile_in_list;
     profile_in_list = (GtranslatorProfile *)l->data;
     if (!strcmp (gtranslator_profile_get_name (profile_in_list),
-		 gtranslator_profile_get_name (profile)))
+		 gtranslator_profile_get_name (profile_dlg->priv->new_profile)))
       profile_exists = TRUE;
   }
       
@@ -255,66 +264,71 @@ static void save_new_profile (GtkWidget *widget, GtranslatorProfile *profile)
      */
     if (profiles_list == NULL) {
       GList *initial_list = NULL;
-      initial_list = g_list_append (profiles_list, profile);
-      gtranslator_application_set_active_profile (GTR_APP, profile);
+      initial_list = g_list_append (profiles_list, profile_dlg->priv->new_profile);
+      gtranslator_application_set_active_profile (GTR_APP, profile_dlg->priv->new_profile);
       gtranslator_application_set_profiles (GTR_APP, initial_list); 
     } else {
-      profiles_list = g_list_append (profiles_list, profile);
+      profiles_list = g_list_append (profiles_list, profile_dlg->priv->new_profile);
     }   
   }
   
   /*
    *Reload the preferences dialog
    */
-  dlg = gtranslator_application_get_preferences_dialog (GTR_APP);
+  dlg = profile_dlg->priv->prefs_dlg;
 
   treeview = gtranslator_preferences_dialog_get_treeview (dlg);
    
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
   g_return_if_fail (GTK_IS_LIST_STORE (model));
-  
-  gtk_widget_destroy (gtk_widget_get_ancestor (widget, GTK_TYPE_DIALOG));
     
   gtranslator_preferences_fill_profile_treeview (dlg, model);
+	
+  gtk_widget_destroy (gtk_widget_get_ancestor (widget, GTK_TYPE_DIALOG));
 }
 
-static void save_modified_profile (GtkWidget *widget,
-				   GtranslatorProfile *profile)
+static void
+save_modified_profile (GtkWidget *widget,
+		       GtranslatorProfileDialog *profile_dlg)
 {
-  GtkWidget *treeview;
-  GtkTreeModel *model;
-  GtranslatorPreferencesDialog *dlg;
-
-  dlg = gtranslator_application_get_preferences_dialog (GTR_APP);
-
-  treeview = gtranslator_preferences_dialog_get_treeview (dlg);
-   
-  model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
-  g_return_if_fail (GTK_IS_LIST_STORE (model));
-  
-  gtk_widget_destroy (gtk_widget_get_ancestor (widget, GTK_TYPE_DIALOG));
-    
-  gtranslator_preferences_fill_profile_treeview (dlg, model);
+	GtkWidget *treeview;
+	GtkTreeModel *model;
+	
+	g_return_if_fail (GTR_IS_PREFERENCES_DIALOG (profile_dlg->priv->prefs_dlg));
+	
+	treeview = gtranslator_preferences_dialog_get_treeview (profile_dlg->priv->prefs_dlg);
+	
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+	g_return_if_fail (GTK_IS_LIST_STORE (model));
+	
+	gtranslator_preferences_fill_profile_treeview (profile_dlg->priv->prefs_dlg, model);
+	gtk_widget_destroy (gtk_widget_get_ancestor (widget, GTK_TYPE_DIALOG));
 }
 
-static void destroy_without_changes (GtkWidget *widget,
-				     gpointer data)
+static void
+destroy_without_changes (GtkWidget *widget,
+			 GtranslatorProfileDialog *dlg)
 {
-  struct data* sdata;
-
-  sdata = (struct data*) data;
-
-  gtranslator_profile_set_name (sdata->new_profile, gtranslator_profile_get_name (sdata->old_profile)); 
-  gtranslator_profile_set_author_name (sdata->new_profile, gtranslator_profile_get_author_name (sdata->old_profile));
-  gtranslator_profile_set_author_email (sdata->new_profile, gtranslator_profile_get_author_email (sdata->old_profile));
-  gtranslator_profile_set_language_name (sdata->new_profile, gtranslator_profile_get_language_name (sdata->old_profile));
-  gtranslator_profile_set_language_code (sdata->new_profile, gtranslator_profile_get_language_code (sdata->old_profile));
-  gtranslator_profile_set_charset (sdata->new_profile, gtranslator_profile_get_charset (sdata->old_profile));
-  gtranslator_profile_set_encoding (sdata->new_profile, gtranslator_profile_get_encoding (sdata->old_profile));
-  gtranslator_profile_set_group_email (sdata->new_profile, gtranslator_profile_get_group_email (sdata->old_profile));
-  gtranslator_profile_set_plurals (sdata->new_profile, gtranslator_profile_get_plurals (sdata->old_profile));
-
-  gtk_widget_destroy (gtk_widget_get_ancestor (widget, GTK_TYPE_DIALOG));
+	gtranslator_profile_set_name (dlg->priv->new_profile,
+				      gtranslator_profile_get_name (dlg->priv->old_profile)); 
+	gtranslator_profile_set_author_name (dlg->priv->new_profile,
+					     gtranslator_profile_get_author_name (dlg->priv->old_profile));
+	gtranslator_profile_set_author_email (dlg->priv->new_profile,
+					      gtranslator_profile_get_author_email (dlg->priv->old_profile));
+	gtranslator_profile_set_language_name (dlg->priv->new_profile,
+					       gtranslator_profile_get_language_name (dlg->priv->old_profile));
+	gtranslator_profile_set_language_code (dlg->priv->new_profile,
+					       gtranslator_profile_get_language_code (dlg->priv->old_profile));
+	gtranslator_profile_set_charset (dlg->priv->new_profile,
+					 gtranslator_profile_get_charset (dlg->priv->old_profile));
+	gtranslator_profile_set_encoding (dlg->priv->new_profile,
+					  gtranslator_profile_get_encoding (dlg->priv->old_profile));
+	gtranslator_profile_set_group_email (dlg->priv->new_profile,
+					     gtranslator_profile_get_group_email (dlg->priv->old_profile));
+	gtranslator_profile_set_plurals (dlg->priv->new_profile,
+					 gtranslator_profile_get_plurals (dlg->priv->old_profile));
+	
+	gtk_widget_destroy (gtk_widget_get_ancestor (widget, GTK_TYPE_DIALOG));
 }
 
 static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
@@ -368,33 +382,34 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 void gtranslator_show_profile_dialog (GtranslatorPreferencesDialog *dialog,
 				      GtranslatorProfile *profile,
 				      gint action)
-{
-        struct data *data;
-	data = (struct data *) malloc(sizeof(struct data));
-
-	static GtkWidget *dlg = NULL;
+{	
+	static GtranslatorProfileDialog *dlg = NULL;
 	GtkButton *ok_button, *cancel_button;
 	GtranslatorProfile *old_profile;
-
+	
 	old_profile = gtranslator_profile_new ();
 	
 	cancel_button = GTK_BUTTON (gtk_button_new_from_stock (GTK_STOCK_CANCEL));
+	gtk_widget_show (GTK_WIDGET (cancel_button));
 	ok_button = GTK_BUTTON (gtk_button_new_from_stock (GTK_STOCK_OK));
-
-	g_return_if_fail(GTR_IS_PREFERENCES_DIALOG(dialog));
+	gtk_widget_show (GTK_WIDGET (ok_button));
+	
+	g_return_if_fail (GTR_IS_PREFERENCES_DIALOG (dialog));
 	
 	if(dlg == NULL)
 	{
-	  dlg = GTK_WIDGET (g_object_new (GTR_TYPE_PROFILE_DIALOG, NULL));
-	  g_signal_connect (dlg,
-			    "destroy",
-			    G_CALLBACK (gtk_widget_destroyed),
-			    &dlg);
-	  gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), GTK_WIDGET (cancel_button));
-	  
-	  gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), GTK_WIDGET (ok_button));
-	  
-	  gtk_widget_show_all(dlg);
+		dlg = g_object_new (GTR_TYPE_PROFILE_DIALOG, NULL);
+		g_signal_connect (dlg,
+				  "destroy",
+				  G_CALLBACK (gtk_widget_destroyed),
+				  &dlg);
+		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), GTK_WIDGET (cancel_button));
+		
+		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), GTK_WIDGET (ok_button));
+	
+		dlg->priv->prefs_dlg = dialog;
+		
+		gtk_widget_show (GTK_WIDGET (dlg));
 	}
 	
 	if (GTK_WINDOW (dialog) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
@@ -402,114 +417,114 @@ void gtranslator_show_profile_dialog (GtranslatorPreferencesDialog *dialog,
 		gtk_window_set_transient_for (GTK_WINDOW (dlg),
 					      GTK_WINDOW (dialog));
 	}
-
+	
 	if (gtranslator_profile_get_name (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->profile_name_entry),
-			      gtranslator_profile_get_name (profile));
-	  gtranslator_profile_set_name (old_profile, gtranslator_profile_get_name (profile));
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->profile_name_entry),
+				    gtranslator_profile_get_name (profile));
+		gtranslator_profile_set_name (old_profile, gtranslator_profile_get_name (profile));
 	}
 	
 	if (gtranslator_profile_get_author_name (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->author_name_entry),
-			      gtranslator_profile_get_author_name (profile));
-	  gtranslator_profile_set_author_name (old_profile, gtranslator_profile_get_author_name (profile));
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->author_name_entry),
+				    gtranslator_profile_get_author_name (profile));
+		gtranslator_profile_set_author_name (old_profile, gtranslator_profile_get_author_name (profile));
 	}
 	
 	if (gtranslator_profile_get_author_email (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->author_email_entry),
-			      gtranslator_profile_get_author_email (profile));
-	  gtranslator_profile_set_author_email (old_profile, gtranslator_profile_get_author_email (profile));
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->author_email_entry),
+				    gtranslator_profile_get_author_email (profile));
+		gtranslator_profile_set_author_email (old_profile, gtranslator_profile_get_author_email (profile));
 	}
-
-        if (gtranslator_profile_get_language_name (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->language_name_entry),
-			      gtranslator_profile_get_language_name (profile));
-	  gtranslator_profile_set_language_name (old_profile, gtranslator_profile_get_language_name (profile));
+	
+	if (gtranslator_profile_get_language_name (profile) != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->language_name_entry),
+				    gtranslator_profile_get_language_name (profile));
+		gtranslator_profile_set_language_name (old_profile, gtranslator_profile_get_language_name (profile));
 	}
-
-        if (gtranslator_profile_get_language_code (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->language_code_entry),
-			      gtranslator_profile_get_language_code (profile));
-	  gtranslator_profile_set_language_code (old_profile, gtranslator_profile_get_language_code (profile));
+	
+	if (gtranslator_profile_get_language_code (profile) != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->language_code_entry),
+				    gtranslator_profile_get_language_code (profile));
+		gtranslator_profile_set_language_code (old_profile, gtranslator_profile_get_language_code (profile));
 	}
-
-        if (gtranslator_profile_get_charset (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->charset_entry),
-			      gtranslator_profile_get_charset (profile));
-	  gtranslator_profile_set_charset (old_profile, gtranslator_profile_get_charset (profile));
+	
+	if (gtranslator_profile_get_charset (profile) != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->charset_entry),
+				    gtranslator_profile_get_charset (profile));
+		gtranslator_profile_set_charset (old_profile, gtranslator_profile_get_charset (profile));
 	}
-
-        if (gtranslator_profile_get_encoding (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->encoding_entry),
-			      gtranslator_profile_get_encoding (profile));
-	  gtranslator_profile_set_encoding (old_profile, gtranslator_profile_get_encoding (profile));
+	
+	if (gtranslator_profile_get_encoding (profile) != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->encoding_entry),
+				    gtranslator_profile_get_encoding (profile));
+		gtranslator_profile_set_encoding (old_profile, gtranslator_profile_get_encoding (profile));
 	}
- 
-        if (gtranslator_profile_get_group_email (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->language_email_entry),
-			      gtranslator_profile_get_group_email (profile));
-	  gtranslator_profile_set_group_email (old_profile, gtranslator_profile_get_group_email (profile));
- }
-
-        if (gtranslator_profile_get_plurals (profile) != NULL) {
-	  gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->plurals_forms_entry),
-			      gtranslator_profile_get_plurals (profile));
-	  gtranslator_profile_set_plurals (old_profile, gtranslator_profile_get_plurals (profile));
-}
-
-	data->old_profile = old_profile;
-	data->new_profile = profile;
-
+	
+	if (gtranslator_profile_get_group_email (profile) != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->language_email_entry),
+				    gtranslator_profile_get_group_email (profile));
+		gtranslator_profile_set_group_email (old_profile, gtranslator_profile_get_group_email (profile));
+	}
+	
+	if (gtranslator_profile_get_plurals (profile) != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (GTR_PROFILE_DIALOG (dlg)->priv->plurals_forms_entry),
+				    gtranslator_profile_get_plurals (profile));
+		gtranslator_profile_set_plurals (old_profile, gtranslator_profile_get_plurals (profile));
+	}
+	
+	dlg->priv->old_profile = old_profile;
+	dlg->priv->new_profile = profile;
+	
 	/* Connect entry signals */
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->profile_name_entry, "notify::text",
 			  G_CALLBACK (profile_name_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->author_name_entry, "notify::text",
 			  G_CALLBACK (author_name_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->author_email_entry, "notify::text",
 			  G_CALLBACK (author_email_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->language_name_entry, "notify::text",
 			  G_CALLBACK (language_name_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->language_code_entry, "notify::text",
 			  G_CALLBACK (language_code_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->charset_entry, "notify::text",
 			  G_CALLBACK (charset_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->encoding_entry, "notify::text",
 			  G_CALLBACK (encoding_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->language_email_entry, "notify::text",
 			  G_CALLBACK (group_email_entry_changed),
-			  profile);
+			  dlg);
 	g_signal_connect (GTR_PROFILE_DIALOG (dlg)->priv->plurals_forms_entry, "notify::text",
 			  G_CALLBACK (plurals_entry_changed),
-			  profile);
-
+			  dlg);
+	
 	/*
 	 * Connect signals to dialog buttons.
 	 */
-
+	
 	g_signal_connect (cancel_button,
 			  "clicked",
 			  G_CALLBACK (destroy_without_changes),
-			  data);
-
+			  dlg);
+	
 	if (action == NEW_PROFILE) {
-	  g_signal_connect (ok_button,
-			    "clicked",
-			    G_CALLBACK (save_new_profile),
-			    profile);
+		g_signal_connect (ok_button,
+				  "clicked",
+				  G_CALLBACK (save_new_profile),
+				  dlg);
 	} else {
-	  if (action == EDIT_PROFILE) {
-	    g_signal_connect (ok_button,
-			      "clicked",
-			      G_CALLBACK (save_modified_profile),
-			      profile);
-	  }
+		if (action == EDIT_PROFILE) {
+			g_signal_connect (ok_button,
+					  "clicked",
+					  G_CALLBACK (save_modified_profile),
+					  dlg);
+		}
 	}
 
 }

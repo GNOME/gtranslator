@@ -118,9 +118,12 @@ struct _GtranslatorPreferencesDialogPrivate
 
 static void setup_profile_pages (GtranslatorPreferencesDialog *dlg);
 
-GtkWidget *gtranslator_preferences_dialog_get_treeview (GtranslatorPreferencesDialog *dlg) 
+GtkWidget *
+gtranslator_preferences_dialog_get_treeview (GtranslatorPreferencesDialog *dlg) 
 {
-  return dlg->priv->profile_treeview;
+	g_return_val_if_fail (GTR_IS_PREFERENCES_DIALOG (dlg), NULL);
+	
+	return dlg->priv->profile_treeview;
 }
 
 /***************Files pages****************/
@@ -1241,7 +1244,7 @@ gtranslator_show_preferences_dialog (GtranslatorWindow *window)
 				  "destroy",
 				  G_CALLBACK (gtk_widget_destroyed),
 				  &dlg);
-		gtk_widget_show_all(dlg);
+		gtk_widget_show (dlg);
 	}
 	
 	if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
@@ -1249,8 +1252,6 @@ gtranslator_show_preferences_dialog (GtranslatorWindow *window)
 		gtk_window_set_transient_for (GTK_WINDOW (dlg),
 					      GTK_WINDOW (window));
 	}
-
-	gtranslator_application_set_preferences_dialog (GTR_APP, GTR_PREFERENCES_DIALOG(dlg));
 
 	gtk_window_present (GTK_WINDOW (dlg));
 }

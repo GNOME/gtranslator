@@ -28,7 +28,6 @@
 #include "utils.h"
 #include "window.h"
 #include "egg-toolbars-model.h"
-#include "dialogs/preferences-dialog.h"
 #include "dialogs/assistant.h"
 #include "./translation-memory/translation-memory.h"
 #include "./translation-memory/berkeley/berkeley.h"
@@ -54,9 +53,7 @@ struct _GtranslatorApplicationPrivate
 	GtranslatorWindow *active_window;
 
         GList *profiles;
-        GtranslatorProfile *active_profile;
-	
-        GtranslatorPreferencesDialog *preferences_dialog;
+	GtranslatorProfile *active_profile;
 
 	gchar *toolbars_file;
 	EggToolbarsModel *toolbars_model;
@@ -499,20 +496,6 @@ gtranslator_application_set_profiles (GtranslatorApplication *app,
 				      GList *profiles) {
    app->priv->profiles = profiles;   
 }
-
-GtranslatorPreferencesDialog *
-gtranslator_application_get_preferences_dialog (GtranslatorApplication *app)
-{
-  return app->priv->preferences_dialog;
-}
-
-void
-gtranslator_application_set_preferences_dialog (GtranslatorApplication *app,
-						GtranslatorPreferencesDialog *dlg)
-{
-  app->priv->preferences_dialog = dlg;
-}
-
 
 /**
  * gtranslator_application_register_icon:
