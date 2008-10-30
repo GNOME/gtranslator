@@ -1244,7 +1244,7 @@ gtranslator_show_preferences_dialog (GtranslatorWindow *window)
 				  "destroy",
 				  G_CALLBACK (gtk_widget_destroyed),
 				  &dlg);
-		gtk_widget_show (dlg);
+		gtk_widget_show_all (dlg);
 	}
 	
 	if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
