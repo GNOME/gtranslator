@@ -567,9 +567,8 @@ setup_interface_pages(GtranslatorPreferencesDialog *dlg)
 	
 	/*Set initial value*/
 	gdl_style = gtranslator_prefs_manager_get_gdl_style ();
-	if (gdl_style)
-		gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
-					  gdl_style);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
+				  gdl_style);
 	
 	/*
 	 * Scheme color
