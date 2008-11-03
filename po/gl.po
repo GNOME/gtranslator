@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-19 13:35+0200\n"
-"PO-Revision-Date: 2008-10-19 13:35+0200\n"
+"POT-Creation-Date: 2008-11-03 10:57+0100\n"
+"PO-Revision-Date: 2008-11-03 10:58+0100\n"
 "Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -266,51 +266,51 @@ msgstr "<b>Código da lingua para acceder a open-tran:</b>"
 msgid "Open Tran Settings"
 msgstr "Configuración de Open Tran"
 
-#: ../plugins/open-tran/open-tran-panel.c:210
-#: ../plugins/open-tran/open-tran-panel.c:274
+#: ../plugins/open-tran/open-tran-panel.c:213
+#: ../plugins/open-tran/open-tran-panel.c:277
 msgid "ERROR: could not parse response\n"
 msgstr "ERRO: Non se puido analizar a resposta\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:258
+#: ../plugins/open-tran/open-tran-panel.c:261
 #, c-format
 msgid "ERROR: %d %s\n"
 msgstr "ERRO: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:269
+#: ../plugins/open-tran/open-tran-panel.c:272
 #, c-format
 msgid "FAULT: %d %s\n"
 msgstr "FALLO: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:285
+#: ../plugins/open-tran/open-tran-panel.c:288
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "FATAL! Non se pode obter o resultado do elemento %d\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:301 ../src/actions-search.c:200
+#: ../plugins/open-tran/open-tran-panel.c:304 ../src/actions-search.c:200
 msgid "Phrase not found"
 msgstr "Frase non atopada"
 
-#: ../plugins/open-tran/open-tran-panel.c:323
+#: ../plugins/open-tran/open-tran-panel.c:326
 msgid "You have to provide a phrase to search"
 msgstr "Ten que proveer unha frase para buscar"
 
-#: ../plugins/open-tran/open-tran-panel.c:333
+#: ../plugins/open-tran/open-tran-panel.c:336
 msgid "You have to provide a search language code"
 msgstr "Ten que proveer un código de lingua para buscar"
 
-#: ../plugins/open-tran/open-tran-panel.c:343
+#: ../plugins/open-tran/open-tran-panel.c:346
 msgid "You have to provide a language code for your language"
 msgstr "Ten que proveer un código de lingua para a súa lingua"
 
-#: ../plugins/open-tran/open-tran-panel.c:372
+#: ../plugins/open-tran/open-tran-panel.c:375
 msgid "Type"
 msgstr "Tipo"
 
-#: ../plugins/open-tran/open-tran-panel.c:383
+#: ../plugins/open-tran/open-tran-panel.c:386
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/open-tran-panel.c:422
+#: ../plugins/open-tran/open-tran-panel.c:425
 msgid "Look for:"
 msgstr "Buscar:"
 
@@ -747,6 +747,11 @@ msgstr "Ficheiro gardado."
 msgid "Save file as..."
 msgstr "Gardar ficheiro como..."
 
+#: ../src/actions-file.c:748
+#, c-format
+msgid "Failed to write profile data into profiles file '%s'"
+msgstr "Fallou ao escribir os datos do perfil no ficheiro de perfís '%s'"
+
 #: ../src/actions-help.c:55
 msgid "Current Developers"
 msgstr "Desenvolvedores actuais"
@@ -838,7 +843,7 @@ msgstr "Contexto:"
 msgid "Extracted comments:"
 msgstr "Comentarios extraídos:"
 
-#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:704
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:706
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Cadeas engadidas á base de datos</span>"
@@ -905,7 +910,7 @@ msgid "<b>Team email:</b>"
 msgstr "<b>Correo-e do grupo:</b>"
 
 #: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
-#: ../src/dialogs/preferences-dialog.c:512
+#: ../src/dialogs/preferences-dialog.c:515
 msgid "Profile"
 msgstr "Perfil"
 
@@ -1090,11 +1095,11 @@ msgstr "gtk-cancel"
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../src/dialogs/preferences-dialog.c:518
+#: ../src/dialogs/preferences-dialog.c:521
 msgid "Active"
 msgstr "Activo"
 
-#: ../src/dialogs/preferences-dialog.c:1063
+#: ../src/dialogs/preferences-dialog.c:1065
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
@@ -1102,11 +1107,11 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Non é posible eliminar o perfil activo</"
 "span>"
 
-#: ../src/dialogs/preferences-dialog.c:1066
+#: ../src/dialogs/preferences-dialog.c:1068
 msgid "Another profile should be selected as active before"
 msgstr "Debería seleccionar antes outro perfil como activo"
 
-#: ../src/dialogs/preferences-dialog.c:1078
+#: ../src/dialogs/preferences-dialog.c:1080
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
@@ -1114,7 +1119,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Está seguro de que quere eliminar este "
 "perfil?</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1112
+#: ../src/dialogs/preferences-dialog.c:1114
 #: ../src/dialogs/preferences-dialog.glade.h:16
 msgid "Gtranslator Preferences"
 msgstr "Preferencias de gtranslator"
@@ -1257,16 +1262,16 @@ msgstr "_Avisar se o ficheiro po contén traducións dubidosas"
 msgid "_minutes"
 msgstr "_minutos"
 
-#: ../src/dialogs/profile-dialog.c:248
+#: ../src/dialogs/profile-dialog.c:257
 msgid ""
 "<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
 msgstr "<span weight=\"bold\" size=\"large\">O nome do perfil xa existe</span>"
 
-#: ../src/dialogs/profile-dialog.c:327
+#: ../src/dialogs/profile-dialog.c:341
 msgid "gtranslator Profile"
 msgstr "Perfil de gtranslator"
 
-#: ../src/dialogs/profile-dialog.c:360
+#: ../src/dialogs/profile-dialog.c:374
 msgid "Example: nplurals=2; plural=(n != 1);"
 msgstr "Exemplo: nplurals=2;plural=(n != 1);"
 
@@ -1428,22 +1433,22 @@ msgstr "Pechar o documento"
 msgid "Failed opening file '%s': %s"
 msgstr "Fallou ao abrir o ficheiro '%s': %s"
 
-#: ../src/po.c:388
+#: ../src/po.c:391
 #, c-format
 msgid "The file is empty"
 msgstr "O ficheiro está baleiro"
 
-#: ../src/po.c:400
+#: ../src/po.c:405
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext devolveu unha lista de dominios de mensaxe nula."
 
-#: ../src/po.c:545
+#: ../src/po.c:552
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Non se obtuveron mensaxes do analizador."
 
-#: ../src/po.c:786
+#: ../src/po.c:793
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1454,7 +1459,7 @@ msgstr ""
 "Porén, eses ficheiros pot son xerados por un proceso de compilación.\n"
 "O seu ficheiro debería nomearse como '%s.po'."
 
-#: ../src/po.c:821
+#: ../src/po.c:828
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Houbo un erro escribindo o ficheiro PO: %s"
