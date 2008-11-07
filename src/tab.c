@@ -90,6 +90,7 @@ struct _GtranslatorTabPrivate
 	GtkWidget *text_msgid_plural;
 	
 	/*Translated text*/
+        GtkWidget *msgstr_label;
         GtkWidget *msgstr_hbox;
 	GtkWidget *trans_notebook;
 	GtkWidget *trans_msgstr[MAX_PLURALS];
@@ -453,6 +454,8 @@ gtranslator_tab_show_message(GtranslatorTab *tab,
 			gtk_source_buffer_begin_not_undoable_action(GTK_SOURCE_BUFFER(buf));
 			gtk_text_buffer_set_text(buf, (gchar*)msgstr, -1);
 			gtk_source_buffer_end_not_undoable_action(GTK_SOURCE_BUFFER(buf));
+			gtk_label_set_mnemonic_widget (GTK_LABEL (priv->msgstr_label),
+						       priv->trans_msgstr[0]);
 		}
 	}
 	else {
@@ -589,7 +592,6 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	GtkWidget *vertical_box;
 	GtkWidget *label_widget;
 	GtkWidget *msgid_label;
-	GtkWidget *msgstr_label;
 	GtkWidget *current_page;
 	GtkWidget *notebook, *tm_layout, *tm, *comments_label, *tm_label, *scroll;
 	GtkWidget *hbox;
@@ -742,14 +744,14 @@ gtranslator_tab_draw (GtranslatorTab *tab)
 	priv->msgstr_hbox = gtk_hbox_new (FALSE, 0);
 	gtk_widget_show (priv->msgstr_hbox);
 	
-	msgstr_label = gtk_label_new (NULL);
-	gtk_label_set_markup_with_mnemonic (GTK_LABEL (msgstr_label),
-					    _("<b>Tran_slated Text:</b>"));
-	gtk_misc_set_padding (GTK_MISC (msgstr_label), 0, 5);
-	gtk_misc_set_alignment (GTK_MISC (msgstr_label), 0, 0.5);
-	gtk_widget_show (msgstr_label);
+	priv->msgstr_label = gtk_label_new (NULL);
+	gtk_label_set_markup_with_mnemonic (GTK_LABEL (priv->msgstr_label),
+					    _("<b>Translate_d Text:</b>"));
+	gtk_misc_set_padding (GTK_MISC (priv->msgstr_label), 0, 5);
+	gtk_misc_set_alignment (GTK_MISC (priv->msgstr_label), 0, 0.5);
+	gtk_widget_show (priv->msgstr_label);
 
-	gtk_box_pack_start(GTK_BOX(priv->msgstr_hbox), msgstr_label, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(priv->msgstr_hbox), priv->msgstr_label, TRUE, TRUE, 0);
 	
 	priv->comment_button = gtranslator_tab_create_comment_button ();
 	gtk_box_pack_start (GTK_BOX (priv->msgstr_hbox), priv->comment_button,
