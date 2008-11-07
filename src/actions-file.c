@@ -715,7 +715,6 @@ gtranslator_file_quit (GtkAction *action,
 	filename_temp = g_build_filename (g_get_tmp_dir (),
 					"profiles.xml",
 					NULL);
-	g_print ("Temp: %s\n", filename_temp);
 	
 	file = g_file_new_for_path (filename);
 	file_temp = g_file_new_for_path (filename_temp);
