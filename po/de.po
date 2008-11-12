@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-20 15:38+0200\n"
-"PO-Revision-Date: 2008-10-20 17:02+0200\n"
+"POT-Creation-Date: 2008-11-12 10:33+0100\n"
+"PO-Revision-Date: 2008-11-12 11:21+0100\n"
 "Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -258,51 +258,51 @@ msgstr "<b>Codesprache, um open-tran anzufragen:</b>"
 msgid "Open Tran Settings"
 msgstr "Einstellungen von Open Tran"
 
-#: ../plugins/open-tran/open-tran-panel.c:210
-#: ../plugins/open-tran/open-tran-panel.c:274
+#: ../plugins/open-tran/open-tran-panel.c:213
+#: ../plugins/open-tran/open-tran-panel.c:277
 msgid "ERROR: could not parse response\n"
 msgstr "FEHLER: Antwort konnte nicht gelesen werden\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:258
+#: ../plugins/open-tran/open-tran-panel.c:261
 #, c-format
 msgid "ERROR: %d %s\n"
 msgstr "FEHLER: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:269
+#: ../plugins/open-tran/open-tran-panel.c:272
 #, c-format
 msgid "FAULT: %d %s\n"
 msgstr "FEHLER: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:285
+#: ../plugins/open-tran/open-tran-panel.c:288
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "FALSCH! Ergebniselement »%d« kann nicht geholt werden\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:301 ../src/actions-search.c:200
+#: ../plugins/open-tran/open-tran-panel.c:304 ../src/actions-search.c:200
 msgid "Phrase not found"
 msgstr "Begriff nicht gefunden"
 
-#: ../plugins/open-tran/open-tran-panel.c:323
+#: ../plugins/open-tran/open-tran-panel.c:326
 msgid "You have to provide a phrase to search"
 msgstr "Sie müssen einen Suchbegriff angeben"
 
-#: ../plugins/open-tran/open-tran-panel.c:333
+#: ../plugins/open-tran/open-tran-panel.c:336
 msgid "You have to provide a search language code"
 msgstr "Sie müssen einen Sprachcode zum Suchen angeben"
 
-#: ../plugins/open-tran/open-tran-panel.c:343
+#: ../plugins/open-tran/open-tran-panel.c:346
 msgid "You have to provide a language code for your language"
 msgstr "Sie müssen einen Sprachcode für Ihre Sprache angeben"
 
-#: ../plugins/open-tran/open-tran-panel.c:372
+#: ../plugins/open-tran/open-tran-panel.c:375
 msgid "Type"
 msgstr "Typ"
 
-#: ../plugins/open-tran/open-tran-panel.c:383
+#: ../plugins/open-tran/open-tran-panel.c:386
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/open-tran-panel.c:422
+#: ../plugins/open-tran/open-tran-panel.c:425
 msgid "Look for:"
 msgstr "Nach_schlagen:"
 
@@ -742,6 +742,11 @@ msgstr "Datei gespeichert."
 msgid "Save file as..."
 msgstr "Datei speichern unter …"
 
+#: ../src/actions-file.c:747
+#, c-format
+msgid "Failed to write profile data into profiles file '%s'"
+msgstr "Die Profildaten können nicht ins Profil geschrieben werden: »%s«"
+
 #: ../src/actions-help.c:55
 msgid "Current Developers"
 msgstr "Derzeitige Entwickler"
@@ -841,7 +846,7 @@ msgstr "Inhalt:"
 msgid "Extracted comments:"
 msgstr "Kommentarauszug:"
 
-#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:704
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:706
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Vorhandene Übersetzungen wurden zur "
@@ -909,7 +914,7 @@ msgid "<b>Team email:</b>"
 msgstr "<b>Team E-Mail:</b>"
 
 #: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
-#: ../src/dialogs/preferences-dialog.c:512
+#: ../src/dialogs/preferences-dialog.c:515
 msgid "Profile"
 msgstr "Profile"
 
@@ -1095,11 +1100,11 @@ msgstr "gtk-cancel"
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../src/dialogs/preferences-dialog.c:518
+#: ../src/dialogs/preferences-dialog.c:521
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../src/dialogs/preferences-dialog.c:1063
+#: ../src/dialogs/preferences-dialog.c:1065
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
@@ -1107,11 +1112,11 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Das aktive Profil darf nicht entfernt "
 "werden</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1066
+#: ../src/dialogs/preferences-dialog.c:1068
 msgid "Another profile should be selected as active before"
 msgstr "EIn anderes Profil sollte zuvor aktiviert werden"
 
-#: ../src/dialogs/preferences-dialog.c:1078
+#: ../src/dialogs/preferences-dialog.c:1080
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
@@ -1119,14 +1124,14 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Sind Sie Sicher, dass sie das Profil "
 "löschen wollen?</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1112
+#: ../src/dialogs/preferences-dialog.c:1114
 #: ../src/dialogs/preferences-dialog.glade.h:16
 msgid "Gtranslator Preferences"
 msgstr "Gtranslator-Einstellungen anpassen"
 
 #: ../src/dialogs/preferences-dialog.glade.h:2
 msgid "<b>Anchor style:</b>"
-msgstr "<b>Knopfbeschriftungen:</b>"
+msgstr "<b>Knopfbeschriftungen</b>"
 
 #: ../src/dialogs/preferences-dialog.glade.h:3
 msgid "<b>Autosave</b>"
@@ -1142,7 +1147,7 @@ msgstr "<b>Inhalt</b>"
 
 #: ../src/dialogs/preferences-dialog.glade.h:6
 msgid "<b>Database:</b>"
-msgstr "<b>Datenbank:</b>"
+msgstr "<b>Datenbank</b>"
 
 #: ../src/dialogs/preferences-dialog.glade.h:7
 msgid "<b>General</b>"
@@ -1150,7 +1155,7 @@ msgstr "<b>Allgemein</b>"
 
 #: ../src/dialogs/preferences-dialog.glade.h:8
 msgid "<b>Scheme color:</b>"
-msgstr "<b>Farbschema:</b>"
+msgstr "<b>Farbschema</b>"
 
 #: ../src/dialogs/preferences-dialog.glade.h:9
 msgid "<b>Text Display</b>"
@@ -1226,7 +1231,7 @@ msgstr ""
 "Vorgaben von Gnome\n"
 "Karteireiter"
 
-#: ../src/dialogs/preferences-dialog.glade.h:30 ../src/tab.c:656
+#: ../src/dialogs/preferences-dialog.glade.h:30 ../src/tab.c:658
 msgid "Translation Memory"
 msgstr "Übersetzungsspeicher"
 
@@ -1262,17 +1267,17 @@ msgstr "_Warnen, wenn die po-Datei ungenaue Übersetzungen enthält"
 msgid "_minutes"
 msgstr "_Minuten"
 
-#: ../src/dialogs/profile-dialog.c:248
+#: ../src/dialogs/profile-dialog.c:257
 msgid ""
 "<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Profilname ist bereits vorhanden</span>"
 
-#: ../src/dialogs/profile-dialog.c:327
+#: ../src/dialogs/profile-dialog.c:341
 msgid "gtranslator Profile"
 msgstr "Profil von gtranslator"
 
-#: ../src/dialogs/profile-dialog.c:360
+#: ../src/dialogs/profile-dialog.c:374
 msgid "Example: nplurals=2; plural=(n != 1);"
 msgstr "Beispiel: nplurals=2; plural=(n != 1);"
 
@@ -1434,22 +1439,22 @@ msgstr "Dokument schließen"
 msgid "Failed opening file '%s': %s"
 msgstr "Fehler beim Öffnen der Datei »%s«: %s"
 
-#: ../src/po.c:388
+#: ../src/po.c:391
 #, c-format
 msgid "The file is empty"
 msgstr "Die Datei ist leer"
 
-#: ../src/po.c:400
+#: ../src/po.c:405
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext hat eine leere Meldungsdomänenliste zurückgegeben."
 
-#: ../src/po.c:545
+#: ../src/po.c:552
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Vom Parser wurden keine Meldungen erhalten."
 
-#: ../src/po.c:786
+#: ../src/po.c:793
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1460,7 +1465,7 @@ msgstr ""
 "Diese Dateien werden durch das Kompilieren generiert.\n"
 "Ihre Datei sollte die po-Endung besitzen, also »%s.po«"
 
-#: ../src/po.c:821
+#: ../src/po.c:828
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Es gab einen Fehler beim Schreiben der po-Datei: %s"
@@ -1522,34 +1527,34 @@ msgstr "EINF"
 msgid "OVR"
 msgstr "ÜSCHRN"
 
-#: ../src/tab.c:223
+#: ../src/tab.c:224
 msgid "There is an error in the message:"
 msgstr "Die Meldung enthält einen Fehler:"
 
-#: ../src/tab.c:396
+#: ../src/tab.c:397
 msgid "Open comment dialog"
 msgstr "Kommentarfenster öffnen"
 
-#: ../src/tab.c:567
+#: ../src/tab.c:570
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
-#: ../src/tab.c:613
+#: ../src/tab.c:615
 msgid "Message Table"
 msgstr "Meldungstabelle"
 
-#: ../src/tab.c:648
+#: ../src/tab.c:650
 msgid "Context"
 msgstr "Kontext"
 
-#: ../src/tab.c:686
+#: ../src/tab.c:688
 msgid "<b>Original Text:</b>"
 msgstr "<b>Ursprünglicher Text:</b>"
 
-#: ../src/tab.c:747
-msgid "<b>Tran_slated Text:</b>"
-msgstr "<b>Ü_bersetzung:</b>"
+#: ../src/tab.c:749
+msgid "<b>Translate_d Text:</b>"
+msgstr "<b>Ü_bersetzer Text:</b>"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
