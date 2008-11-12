@@ -172,7 +172,6 @@ open_file (GtkWidget *dialog,
 	search_message (panel, panel->priv->first);
 	gtk_widget_set_sensitive (panel->priv->textview, TRUE);
 		  
-	g_free (po_file);
 	gtk_widget_destroy (dialog);
 }
 
