@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Nov 12 12:32:00 2008 -->
+<!--Generated with glade3 3.4.5 on Fri Nov 14 11:53:55 2008 -->
 <glade-interface>
   <widget class="GtkDialog" id="preferences_dialog">
     <property name="border_width">5</property>
@@ -55,7 +55,7 @@
                           <widget class="GtkVBox" id="vbox3">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkCheckButton" id="warn_if_fuzzy_checkbutton">
+                              <widget class="GtkCheckButton" id="warn_if_contains_fuzzy_checkbutton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="label" translatable="yes">_Warn if PO file contains fuzzy translations</property>
@@ -266,7 +266,7 @@
                           <widget class="GtkVBox" id="vbox18">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkCheckButton" id="highlight_checkbutton">
+                              <widget class="GtkCheckButton" id="highlight_syntax_checkbutton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="label" translatable="yes">_Highlight message syntax</property>
@@ -389,7 +389,7 @@
                           <widget class="GtkVBox" id="vbox20">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkCheckButton" id="unmark_fuzzy_checkbutton">
+                              <widget class="GtkCheckButton" id="unmark_fuzzy_when_changed_checkbutton">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="label" translatable="yes">_Remove fuzzy status if message is changed</property>
@@ -831,24 +831,9 @@ Tabs</property>
                             <child>
                               <widget class="GtkTable" id="table1">
                                 <property name="visible">True</property>
-                                <property name="n_rows">4</property>
+                                <property name="n_rows">3</property>
                                 <property name="n_columns">2</property>
                                 <property name="column_spacing">12</property>
-                                <child>
-                                  <placeholder/>
-                                </child>
-                                <child>
-                                  <widget class="GtkLabel" id="label24">
-                                    <property name="visible">True</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Max. difference in sentence length:</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="top_attach">3</property>
-                                    <property name="bottom_attach">4</property>
-                                    <property name="x_options">GTK_FILL</property>
-                                  </packing>
-                                </child>
                                 <child>
                                   <widget class="GtkSpinButton" id="sentence_length_spinbutton">
                                     <property name="visible">True</property>
@@ -858,16 +843,16 @@ Tabs</property>
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="right_attach">2</property>
-                                    <property name="top_attach">3</property>
-                                    <property name="bottom_attach">4</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
                                     <property name="x_options">GTK_FILL</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkLabel" id="label23">
+                                  <widget class="GtkLabel" id="label24">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Max. # of missing words:</property>
+                                    <property name="label" translatable="yes">Max. difference in sentence length:</property>
                                   </widget>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -884,30 +869,20 @@ Tabs</property>
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="right_attach">2</property>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="bottom_attach">2</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkCheckButton" id="show_tm_options_checkbutton">
+                                  <widget class="GtkLabel" id="label23">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label" translatable="yes">Show options in translated messages</property>
-                                    <property name="response_id">0</property>
-                                    <property name="draw_indicator">True</property>
-                                  </widget>
-                                </child>
-                                <child>
-                                  <widget class="GtkCheckButton" id="use_lang_profile_in_tm">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label" translatable="yes">Use only files with this name:</property>
-                                    <property name="response_id">0</property>
-                                    <property name="draw_indicator">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Max. # of missing words:</property>
                                   </widget>
                                   <packing>
                                     <property name="top_attach">1</property>
                                     <property name="bottom_attach">2</property>
+                                    <property name="x_options">GTK_FILL</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -918,9 +893,16 @@ Tabs</property>
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="right_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkCheckButton" id="use_lang_profile_in_tm">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="label" translatable="yes">Use only files with this name:</property>
+                                    <property name="response_id">0</property>
+                                    <property name="draw_indicator">True</property>
+                                  </widget>
                                 </child>
                               </widget>
                               <packing>

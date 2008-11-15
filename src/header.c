@@ -428,7 +428,7 @@ gtranslator_header_get_nplurals (GtranslatorHeader *header)
 	 */
 	if (header->priv->plural_forms)
 		return header->priv->nplurals;
-	else if (plural_form = gtranslator_prefs_manager_get_plural_form ())
+	else if (plural_form = (const gchar *)gtranslator_profile_get_plurals ())
 	{
 		gtranslator_header_set_plural_forms (header, plural_form);
 		/*

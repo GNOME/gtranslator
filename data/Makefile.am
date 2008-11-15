@@ -5,11 +5,13 @@ SUBDIRS = \
 	mime \
 	pixmaps
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = gtranslator-@GTR_API_VERSION@.pc
+schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
+schemas_in_files = gtranslator.schemas.in
+schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
+@INTLTOOL_SCHEMAS_RULE@
 
-gtranslator-@GTR_API_VERSION@.pc: gtranslator.pc
-	cp gtranslator.pc gtranslator-@GTR_API_VERSION@.pc
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gtranslator.pc
 
 uidir = $(pkgdatadir)
 ui_DATA = \
@@ -18,9 +20,18 @@ ui_DATA = \
 		po.lang \
 		layout.xml
 
-EXTRA_DIST = \
-		$(ui_DATA) \
-		gtranslator.pc.in
+install-data-local:
+	        if test -z "$(DESTDIR)" ; then \
+	                for p in $(schemas_DATA) ; do \
+	                        GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/data/$$p; \
+	                done \
+	        fi
 
-CLEANFILES =	 			\
-		$(pkgconfig_DATA)
+EXTRA_DIST =			\
+	$(schemas_in_files)	\
+	$(ui_DATA)		\
+	gtranslator.pc.in
+
+CLEANFILES =	 		\
+	$(schemas_DATA)		\
+	$(pkgconfig_DATA)

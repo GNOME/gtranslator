@@ -230,9 +230,9 @@ gtranslator_application_init (GtranslatorApplication *application)
 	/* Creating translation memory */
 	application->priv->tm = GTR_TRANSLATION_MEMORY (gtranslator_berkeley_new ());
 	gtranslator_translation_memory_set_max_omits (application->priv->tm,
- 						      gtranslator_prefs_manager_get_missing_words ());
+ 						      gtranslator_prefs_manager_get_max_missing_words ());
  	gtranslator_translation_memory_set_max_delta (application->priv->tm,
-						      gtranslator_prefs_manager_get_sentence_length ());
+						      gtranslator_prefs_manager_get_max_length_diff ());
 	gtranslator_translation_memory_set_max_items (application->priv->tm,
 						      10);
 }

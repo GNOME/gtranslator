@@ -82,7 +82,7 @@ take_my_options_checkbutton_toggled(GtkToggleButton *button,
 {
 	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->take_my_options));
 	
-	gtranslator_prefs_manager_set_take_my_options(gtk_toggle_button_get_active(button));
+	gtranslator_prefs_manager_set_use_profile_values(gtk_toggle_button_get_active(button));
 	
 	gtk_widget_set_sensitive(dlg->priv->translator, !gtk_toggle_button_get_active(button));
 	gtk_widget_set_sensitive(dlg->priv->tr_email, !gtk_toggle_button_get_active(button));
@@ -299,7 +299,7 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->take_my_options),
-				     gtranslator_prefs_manager_get_take_my_options());
+				     gtranslator_prefs_manager_get_use_profile_values());
 
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->prj_comment), TRUE);
 

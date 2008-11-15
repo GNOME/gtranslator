@@ -1,5 +1,29 @@
 2008-11-15  Pablo Sanxiao  <psanxiao@gmail.com>
 
+	Patch by Seán de Búrca <leftmostcat@gmail.com>
+	and modified by me. (Fixes bug #551400)
+	
+	* configure.ac:
+	* data/Makefile.am:
+	* data/gtranslator.schemas.in:
+	* src/application.c:
+	* src/dialogs/header-dialog.c:
+	* src/dialogs/preferences-dialog.c:
+	* src/dialogs/preferences-dialog.glade:
+	* src/header.c:
+	* src/po.c:
+	* src/prefs-manager-app.c:
+	* src/prefs-manager.c:             
+	* src/prefs-manager.h:
+	* src/tab.c:
+	* src/translation-memory/translation-memory-ui.c:
+	* src/view.c:
+	* src/window.c:
+	Cleaned up and organized preferences.
+	Now values are stored using gconf schemas.
+	
+2008-11-15  Pablo Sanxiao  <psanxiao@gmail.com>
+
 	Patch by Christian Kirbach.
 	
 	* src/dialogs/comment-dialog.glade:

@@ -421,7 +421,7 @@ gtranslator_prefs_manager_app_init (void)
 				      NULL);
 		
 		gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
-				GPM_FONT_DIR,
+				GPM_EDITOR_FONT,
 				gtranslator_prefs_manager_editor_font_changed,
 				NULL, NULL, NULL);
 		
@@ -431,7 +431,7 @@ gtranslator_prefs_manager_app_init (void)
 				NULL, NULL, NULL);
 		
 		gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
-				GPM_HIGHLIGHT,
+				GPM_HIGHLIGHT_SYNTAX,
 				gtranslator_prefs_manager_highlight_changed,
 				NULL, NULL, NULL);
 		
@@ -441,7 +441,7 @@ gtranslator_prefs_manager_app_init (void)
 				NULL, NULL, NULL);
 		
 		gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
-				GPM_GDL_STYLE,
+				GPM_PANE_SWITCHER_STYLE,
 				gtranslator_prefs_manager_gdl_style_changed,
 				NULL, NULL, NULL);
 
@@ -451,7 +451,7 @@ gtranslator_prefs_manager_app_init (void)
 					 NULL, NULL, NULL);
 		
 		gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
-					 GPM_SCHEME_COLOR,
+					 GPM_COLOR_SCHEME,
 					 gtranslator_prefs_manager_scheme_color_changed,
 					 NULL, NULL, NULL);
 	}
@@ -485,22 +485,16 @@ gtranslator_prefs_manager_editor_font_changed (GConfClient *client,
 
 	if (strcmp (entry->key, GPM_USE_CUSTOM_FONT) == 0)
 	{
-		if (entry->value->type == GCONF_VALUE_BOOL)
-			def = gconf_value_get_bool (entry->value);
-		else
-			def = !GPM_DEFAULT_USE_CUSTOM_FONT;
+		def = gconf_value_get_bool (entry->value);
 		
 		if (!def)
-			font = g_strdup(GPM_DEFAULT_EDITOR_FONT);
+			font = g_strdup("Sans 10"); // Fix to use system font
 		else
 			font = g_strdup(gtranslator_prefs_manager_get_editor_font ());
 	}
 	else if (strcmp (entry->key, GPM_EDITOR_FONT) == 0)
 	{
-		if (entry->value->type == GCONF_VALUE_STRING)
-			font = g_strdup (gconf_value_get_string (entry->value));
-		else
-			font = g_strdup (GPM_DEFAULT_EDITOR_FONT);
+		font = g_strdup (gconf_value_get_string (entry->value));
 				
 		def = gtranslator_prefs_manager_get_use_custom_font ();
 	}
@@ -557,17 +551,14 @@ gtranslator_prefs_manager_highlight_changed (GConfClient *client,
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
 
-	if (strcmp (entry->key, GPM_HIGHLIGHT) == 0)
+	if (strcmp (entry->key, GPM_HIGHLIGHT_SYNTAX) == 0)
 	{
 		gboolean enable;
 		GList *views;
 		GList *l;
 		GtkSourceBuffer *buf;
 
-		if (entry->value->type == GCONF_VALUE_BOOL)
-			enable = gconf_value_get_bool (entry->value);
-		else
-			enable = GPM_DEFAULT_HIGHLIGHT;
+		enable = gconf_value_get_bool (entry->value);
 
 		views = gtranslator_application_get_views (GTR_APP, TRUE, TRUE);
 		l = views;
@@ -601,10 +592,7 @@ gtranslator_prefs_manager_visible_whitespace_changed (GConfClient *client,
 		GList *views;
 		GList *l;
 
-		if (entry->value->type == GCONF_VALUE_BOOL)
-			enable = gconf_value_get_bool (entry->value);
-		else
-			enable = GPM_DEFAULT_VISIBLE_WHITESPACE;
+		enable = gconf_value_get_bool (entry->value);
 
 		views = gtranslator_application_get_views (GTR_APP, TRUE, TRUE);
 		l = views;
@@ -632,7 +620,7 @@ gtranslator_prefs_manager_gdl_style_changed(GConfClient *client,
 
 	window = gtranslator_application_get_active_window (GTR_APP);
 
-	style = gtranslator_prefs_manager_get_gdl_style ();
+	style = gtranslator_prefs_manager_get_pane_switcher_style ();
 	
 	layout_manager = GDL_DOCK_LAYOUT (_gtranslator_window_get_layout_manager (window));
 	
@@ -659,10 +647,7 @@ gtranslator_prefs_manager_autosave_changed (GConfClient *client,
 	{
 		gboolean autosave;
 
-		if (entry->value->type == GCONF_VALUE_BOOL)
-			autosave = gconf_value_get_bool (entry->value);
-		else
-			autosave = GPM_DEFAULT_AUTOSAVE;
+		autosave = gconf_value_get_bool (entry->value);
 
 		tabs = gtranslator_window_get_all_tabs (window);
 
@@ -679,15 +664,10 @@ gtranslator_prefs_manager_autosave_changed (GConfClient *client,
 	{
 		gint autosave_interval;
 
-		if (entry->value->type == GCONF_VALUE_INT)
-		{
-			autosave_interval = gconf_value_get_int (entry->value);
+		autosave_interval = gconf_value_get_int (entry->value);
 
-			if (autosave_interval <= 0)
-				autosave_interval = GPM_DEFAULT_AUTOSAVE_INTERVAL;
-		}
-		else
-			autosave_interval = GPM_DEFAULT_AUTOSAVE_INTERVAL;
+		if (autosave_interval <= 0)
+			autosave_interval = 1;
 
 		tabs = gtranslator_window_get_all_tabs (window);
 

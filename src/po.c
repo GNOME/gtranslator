@@ -593,7 +593,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 	gchar **comments_lines;
 	gchar **comments_translator_values;
 
-	gboolean take_my_options;
+	gboolean use_profile_values;
 
 	gint i = 0;
 	gint j;
@@ -608,7 +608,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 
 	gboolean current_translator_in_comments = FALSE;
 	
-	take_my_options = gtranslator_prefs_manager_get_take_my_options ();
+	use_profile_values = gtranslator_prefs_manager_get_use_profile_values ();
 
 	/*
          * Save the previous translator to update the header's comment
@@ -628,11 +628,11 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 	msgstr = po_message_msgstr(message);
 
 	/*
-	 * If button take_my_options is pulsed, then header's values
+	 * If button use_profile_values is pushed, then header's values
 	 * should be taking from default profile
 	 */
 
-	if (take_my_options) {
+	if (use_profile_values) {
 
 	  GtranslatorProfile *active_profile;
 

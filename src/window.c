@@ -1420,7 +1420,7 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	priv->layout_manager = gdl_dock_layout_new (GDL_DOCK (priv->dock));
 	g_object_set (priv->layout_manager->master,
 		      "switcher-style",
-		      gtranslator_prefs_manager_get_gdl_style (),
+		      gtranslator_prefs_manager_get_pane_switcher_style (),
 		      NULL);
 	g_signal_connect (priv->layout_manager,
 			  "notify::dirty",

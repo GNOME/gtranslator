@@ -139,6 +139,17 @@ fi
 AC_SUBST(SC_OMFDIR)
 AC_SUBST(SC_STATEDIR)
 
+dnl ------
+dnl GCONF
+dnl ------
+AM_GCONF_SOURCE_2
+ 	
+AC_PATH_PROG([GCONFTOOL], [gconftool-2], [no])
+ 	
+if test "$GCONFTOOL" = "no"; then
+   AC_MSG_ERROR([gconftool-2 not found])
+fi 
+
 dnl -------------------------------------------------------------------
 dnl Check for gettext >= 0.17.0 - uses it's parser/writer functions
 dnl -------------------------------------------------------------------

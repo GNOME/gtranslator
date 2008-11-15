@@ -57,7 +57,7 @@ struct _GtranslatorPreferencesDialogPrivate
 	GtkWidget *notebook;
 	
 	/* Files->General */
-	GtkWidget *warn_if_fuzzy_checkbutton;
+	GtkWidget *warn_if_contains_fuzzy_checkbutton;
 	GtkWidget *delete_compiled_checkbutton;
 	
 	/* Files->Autosave */
@@ -67,14 +67,14 @@ struct _GtranslatorPreferencesDialogPrivate
 	GtkWidget *create_backup_checkbutton;
 	
 	/* Editor->Text display */
-	GtkWidget *highlight_checkbutton;
+	GtkWidget *highlight_syntax_checkbutton;
 	GtkWidget *visible_whitespace_checkbutton;
 	GtkWidget *use_custom_font_checkbutton;
 	GtkWidget *editor_font_fontbutton;
 	GtkWidget *editor_font_hbox;
 	
 	/* Editor->Contents */
-	GtkWidget *unmark_fuzzy_checkbutton;
+	GtkWidget *unmark_fuzzy_when_changed_checkbutton;
 	GtkWidget *spellcheck_checkbutton;
 
 	/*Profiles*/
@@ -91,7 +91,6 @@ struct _GtranslatorPreferencesDialogPrivate
 
         GtkWidget *use_lang_profile_in_tm;
         GtkWidget *tm_lang_entry;
-        GtkWidget *show_tm_options_checkbutton;
         GtkWidget *missing_words_spinbutton;
         GtkWidget *sentence_length_spinbutton;
 
@@ -129,12 +128,12 @@ gtranslator_preferences_dialog_get_treeview (GtranslatorPreferencesDialog *dlg)
 /***************Files pages****************/
 
 static void
-warn_if_fuzzy_checkbutton_toggled(GtkToggleButton *button,
+warn_if_contains_fuzzy_checkbutton_toggled(GtkToggleButton *button,
 				  GtranslatorPreferencesDialog *dlg)
 {
-	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->warn_if_fuzzy_checkbutton));
+	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->warn_if_contains_fuzzy_checkbutton));
 	
-	gtranslator_prefs_manager_set_warn_if_fuzzy(gtk_toggle_button_get_active(button));
+	gtranslator_prefs_manager_set_warn_if_contains_fuzzy(gtk_toggle_button_get_active(button));
 }
 
 static void
@@ -150,14 +149,14 @@ static void
 setup_files_general_page(GtranslatorPreferencesDialog *dlg)
 {	
 	/*Set initial value*/
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->warn_if_fuzzy_checkbutton),
-				     gtranslator_prefs_manager_get_warn_if_fuzzy());
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->warn_if_contains_fuzzy_checkbutton),
+				     gtranslator_prefs_manager_get_warn_if_contains_fuzzy());
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->delete_compiled_checkbutton),
 				     gtranslator_prefs_manager_get_delete_compiled());
 	
 	/*Connect signals*/
-	g_signal_connect(dlg->priv->warn_if_fuzzy_checkbutton, "toggled",
-			 G_CALLBACK(warn_if_fuzzy_checkbutton_toggled),
+	g_signal_connect(dlg->priv->warn_if_contains_fuzzy_checkbutton, "toggled",
+			 G_CALLBACK(warn_if_contains_fuzzy_checkbutton_toggled),
 			 dlg);
 	g_signal_connect(dlg->priv->delete_compiled_checkbutton, "toggled",
 			 G_CALLBACK(delete_compiled_checkbutton_toggled),
@@ -215,10 +214,7 @@ setup_files_autosave_page(GtranslatorPreferencesDialog *dlg)
 				      backup);
 	
 	autosave_interval = gtranslator_prefs_manager_get_autosave_interval();
-	
-	if(autosave_interval <= 0)
-		autosave_interval = GPM_DEFAULT_AUTOSAVE_INTERVAL;
-	
+
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(dlg->priv->autosave_interval_spinbutton),
 				  autosave_interval);
 	
@@ -249,12 +245,12 @@ setup_files_pages(GtranslatorPreferencesDialog *dlg)
 
 /***************Editor pages****************/
 static void
-highlight_checkbutton_toggled(GtkToggleButton *button,
+highlight_syntax_checkbutton_toggled(GtkToggleButton *button,
 			      GtranslatorPreferencesDialog *dlg)
 {
-	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->highlight_checkbutton));
+	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->highlight_syntax_checkbutton));
 	
-	gtranslator_prefs_manager_set_highlight(gtk_toggle_button_get_active(button));
+	gtranslator_prefs_manager_set_highlight_syntax (gtk_toggle_button_get_active(button));
 }
 
 static void
@@ -303,8 +299,8 @@ setup_editor_text_display_page(GtranslatorPreferencesDialog *dlg)
 	const gchar *editor_font;
 	
 	/*Set initial value*/
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->highlight_checkbutton),
-				     gtranslator_prefs_manager_get_highlight());
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->highlight_syntax_checkbutton),
+				     gtranslator_prefs_manager_get_highlight_syntax ());
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->visible_whitespace_checkbutton),
 				     gtranslator_prefs_manager_get_visible_whitespace());
 	
@@ -325,8 +321,8 @@ setup_editor_text_display_page(GtranslatorPreferencesDialog *dlg)
 	gtk_widget_set_sensitive(dlg->priv->editor_font_hbox, use_custom_font);
 	
 	/*Connect signals*/
-	g_signal_connect(dlg->priv->highlight_checkbutton, "toggled",
-			 G_CALLBACK(highlight_checkbutton_toggled),
+	g_signal_connect(dlg->priv->highlight_syntax_checkbutton, "toggled",
+			 G_CALLBACK(highlight_syntax_checkbutton_toggled),
 			 dlg);
 	g_signal_connect(dlg->priv->visible_whitespace_checkbutton, "toggled",
 			 G_CALLBACK(visible_whitespace_checkbutton_toggled),
@@ -340,12 +336,12 @@ setup_editor_text_display_page(GtranslatorPreferencesDialog *dlg)
 }
 
 static void
-unmark_fuzzy_checkbutton_toggled(GtkToggleButton *button,
+unmark_fuzzy_when_changed_checkbutton_toggled(GtkToggleButton *button,
 				 GtranslatorPreferencesDialog *dlg)
 {
-	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->unmark_fuzzy_checkbutton));
+	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->unmark_fuzzy_when_changed_checkbutton));
 	
-	gtranslator_prefs_manager_set_unmark_fuzzy(gtk_toggle_button_get_active(button));
+	gtranslator_prefs_manager_set_unmark_fuzzy_when_changed (gtk_toggle_button_get_active(button));
 }
 
 static void
@@ -361,14 +357,14 @@ static void
 setup_editor_contents(GtranslatorPreferencesDialog *dlg)
 {	
 	/*Set initial values*/
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->unmark_fuzzy_checkbutton),
-				     gtranslator_prefs_manager_get_unmark_fuzzy());
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->unmark_fuzzy_when_changed_checkbutton),
+				     gtranslator_prefs_manager_get_unmark_fuzzy_when_changed());
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->spellcheck_checkbutton),
 				     gtranslator_prefs_manager_get_spellcheck());
 	
 	/*Connect signals*/
-	g_signal_connect(dlg->priv->unmark_fuzzy_checkbutton, "toggled",
-			 G_CALLBACK(unmark_fuzzy_checkbutton_toggled),
+	g_signal_connect(dlg->priv->unmark_fuzzy_when_changed_checkbutton, "toggled",
+			 G_CALLBACK(unmark_fuzzy_when_changed_checkbutton_toggled),
 			 dlg);
 	g_signal_connect(dlg->priv->spellcheck_checkbutton, "toggled",
 			 G_CALLBACK(spellcheck_checkbutton_toggled),
@@ -544,7 +540,7 @@ style_changed_cb (GtkComboBox *combobox,
 {
 	g_return_if_fail(combobox == GTK_COMBO_BOX(dlg->priv->gdl_combobox));
 	
-	gtranslator_prefs_manager_set_gdl_style (gtk_combo_box_get_active (combobox));
+	gtranslator_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text (combobox));
 }
 
 static void
@@ -553,34 +549,34 @@ scheme_color_changed_cb (GtkComboBox *combobox,
 {
 	g_return_if_fail (combobox == GTK_COMBO_BOX (dlg->priv->scheme_color_combobox));
 	
-	gtranslator_prefs_manager_set_scheme_color (gtk_combo_box_get_active_text (combobox));
+	gtranslator_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text (combobox));
 }
 
 static void
 setup_interface_pages(GtranslatorPreferencesDialog *dlg)
 {
-	gint gdl_style;
+        gint pane_switcher_style;
 	GtkSourceStyleSchemeManager *manager;
 	const gchar * const *scheme_ids;
 	const gchar * scheme_active;
 	gint i = 0;
 	
 	/*Set initial value*/
-	gdl_style = gtranslator_prefs_manager_get_gdl_style ();
-	gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
-				  gdl_style);
-	
+	pane_switcher_style = gtranslator_prefs_manager_get_pane_switcher_style ();
+ 	if (pane_switcher_style)
+  		gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
+ 					  pane_switcher_style);	
 	/*
 	 * Scheme color
 	 */
 	manager = gtk_source_style_scheme_manager_get_default ();
 	scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
-	scheme_active = gtranslator_prefs_manager_get_scheme_color ();
+	scheme_active = gtranslator_prefs_manager_get_color_scheme ();
 	while (scheme_ids [i] != NULL)
 	{
 		gtk_combo_box_append_text (GTK_COMBO_BOX (dlg->priv->scheme_color_combobox),
 					   scheme_ids[i]);
-		if (strcmp (scheme_ids[i], scheme_active) == 0)
+		if (g_strcmp0 (scheme_ids[i], scheme_active) == 0)
 			gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->scheme_color_combobox),
 						  i);
 		i++;
@@ -609,7 +605,7 @@ response_filechooser_cb (GtkDialog *dialog,
   if (response_id == GTK_RESPONSE_YES) {
     gtk_entry_set_text (GTK_ENTRY (dlg->priv->directory_entry),
 			gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
-    gtranslator_prefs_manager_set_tm_dir (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
+    gtranslator_prefs_manager_set_po_directory (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
     gtk_widget_destroy (GTK_WIDGET (dialog));
   } else {
     gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -751,12 +747,12 @@ on_add_database_button_pulsed (GtkButton *button,
   data = g_new0 (IdleData, 1);
   data->list = NULL;
 
-  dir_name = gtranslator_prefs_manager_get_tm_dir ();
+  dir_name = gtranslator_prefs_manager_get_po_directory ();
 
   dir = g_file_new_for_path (dir_name);
 
-  if (gtranslator_prefs_manager_get_use_lang_profile ())
-    gtranslator_utils_scan_dir (dir, &data->list, gtranslator_prefs_manager_get_tm_lang_entry());
+  if (gtranslator_prefs_manager_get_restrict_to_filename ())
+    gtranslator_utils_scan_dir (dir, &data->list, gtranslator_prefs_manager_get_filename_restriction());
   else
     gtranslator_utils_scan_dir (dir, &data->list, NULL);
   
@@ -777,15 +773,7 @@ static void
 on_use_lang_profile_checkbutton_changed (GtkToggleButton *button,
 					 gpointer user_data)
 { 
-  gtranslator_prefs_manager_set_use_lang_profile (gtk_toggle_button_get_active(button));
-}
-
-
-static void
-on_show_tm_options_checkbutton_changed (GtkToggleButton *button,
-					gpointer user_data)
-{ 
-  gtranslator_prefs_manager_set_show_tm_options (gtk_toggle_button_get_active(button));
+  gtranslator_prefs_manager_set_restrict_to_filename (gtk_toggle_button_get_active(button));
 }
 
 static void
@@ -800,7 +788,7 @@ tm_lang_entry_changed (GObject    *gobject,
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 	
 	if(text)
-	  gtranslator_prefs_manager_set_tm_lang_entry (text);
+	  gtranslator_prefs_manager_set_filename_restriction (text);
 }
 
 
@@ -812,7 +800,7 @@ on_missing_words_spinbutton_changed (GtkSpinButton *spinbutton,
 
   value = gtk_spin_button_get_value_as_int (spinbutton);
 
-  gtranslator_prefs_manager_set_missing_words (value);
+  gtranslator_prefs_manager_set_max_missing_words (value);
 }
 
 static void
@@ -823,7 +811,7 @@ on_sentence_length_spinbutton_changed (GtkSpinButton *spinbutton,
 
   value = gtk_spin_button_get_value_as_int (spinbutton);
 
-  gtranslator_prefs_manager_set_sentence_length (value);
+  gtranslator_prefs_manager_set_max_length_diff (value);
 }
 
 static void
@@ -838,7 +826,7 @@ directory_entry_changed(GObject    *gobject,
 	text = gtk_entry_get_text(GTK_ENTRY(gobject));
 	
 	if(text)
-	  gtranslator_prefs_manager_set_tm_dir (text);
+	  gtranslator_prefs_manager_set_po_directory (text);
 }
 
 
@@ -849,11 +837,8 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
   const gchar *language_code;
   const gchar *filename = NULL;
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton),
-				gtranslator_prefs_manager_get_show_tm_options ());
-
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->use_lang_profile_in_tm),
-				gtranslator_prefs_manager_get_use_lang_profile ());
+				gtranslator_prefs_manager_get_restrict_to_filename ());
   
   profile = gtranslator_application_get_active_profile (GTR_APP);
   
@@ -866,13 +851,13 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
   }
   
   if (filename != NULL)
-    gtranslator_prefs_manager_set_tm_lang_entry (filename);
+    gtranslator_prefs_manager_set_filename_restriction (filename);
   
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->missing_words_spinbutton),
-			     (gdouble) gtranslator_prefs_manager_get_missing_words ());
+			     (gdouble) gtranslator_prefs_manager_get_max_missing_words ());
   
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->sentence_length_spinbutton),
-			     (gdouble) gtranslator_prefs_manager_get_sentence_length ());
+			     (gdouble) gtranslator_prefs_manager_get_max_length_diff ());
   
   g_signal_connect (GTK_BUTTON (dlg->priv->search_button), "clicked",
 		    G_CALLBACK (on_search_button_pulsed),
@@ -888,10 +873,6 @@ setup_tm_pages(GtranslatorPreferencesDialog *dlg)
   
   g_signal_connect (GTK_BUTTON (dlg->priv->add_database_button), "clicked",
 		    G_CALLBACK (on_add_database_button_pulsed),
-		    dlg);
-
-  g_signal_connect (GTK_TOGGLE_BUTTON (dlg->priv->show_tm_options_checkbutton), "toggled",
-		    G_CALLBACK (on_show_tm_options_checkbutton_changed),
 		    dlg);
 
   g_signal_connect (GTK_TOGGLE_BUTTON (dlg->priv->use_lang_profile_in_tm), "toggled",
@@ -1135,7 +1116,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		
 		"notebook", &dlg->priv->notebook,
 
-		"warn_if_fuzzy_checkbutton", &dlg->priv->warn_if_fuzzy_checkbutton,
+		"warn_if_contains_fuzzy_checkbutton", &dlg->priv->warn_if_contains_fuzzy_checkbutton,
 		"delete_compiled_checkbutton", &dlg->priv->delete_compiled_checkbutton,
 
 		"autosave_checkbutton", &dlg->priv->autosave_checkbutton,
@@ -1143,13 +1124,13 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"autosave_hbox", &dlg->priv->autosave_hbox,
 		"create_backup_checkbutton", &dlg->priv->create_backup_checkbutton,
 
-		"highlight_checkbutton", &dlg->priv->highlight_checkbutton,
+		"highlight_syntax_checkbutton", &dlg->priv->highlight_syntax_checkbutton,
 		"visible_whitespace_checkbutton", &dlg->priv->visible_whitespace_checkbutton,
 		"use_custom_font_checkbutton", &dlg->priv->use_custom_font_checkbutton,
 		"editor_font_fontbutton", &dlg->priv->editor_font_fontbutton,
 		"editor_font_hbox", &dlg->priv->editor_font_hbox,
 
-		"unmark_fuzzy_checkbutton", &dlg->priv->unmark_fuzzy_checkbutton,
+		"unmark_fuzzy_when_changed_checkbutton", &dlg->priv->unmark_fuzzy_when_changed_checkbutton,
 		"spellcheck_checkbutton", &dlg->priv->spellcheck_checkbutton,
 
 		"profile_treeview", &dlg->priv->profile_treeview,
@@ -1163,8 +1144,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"add_database_progressbar", &dlg->priv->add_database_progressbar,
 
 		"use_lang_profile_in_tm", &dlg->priv->use_lang_profile_in_tm,
-		"tm_lang_entry", &dlg->priv->tm_lang_entry,		  
- 		"show_tm_options_checkbutton", &dlg->priv->show_tm_options_checkbutton,				  
+		"tm_lang_entry", &dlg->priv->tm_lang_entry,		  			  
  		"missing_words_spinbutton", &dlg->priv->missing_words_spinbutton,
  		"sentence_length_spinbutton", &dlg->priv->sentence_length_spinbutton,
  		

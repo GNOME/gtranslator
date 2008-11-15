@@ -258,7 +258,7 @@ gtranslator_message_translation_update(GtkTextBuffer *textbuffer,
 	msg = msg_aux->data;
 	buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(tab->priv->trans_msgstr[0]));
 	
-	if(gtranslator_msg_is_fuzzy(msg) && gtranslator_prefs_manager_get_unmark_fuzzy())
+	if(gtranslator_msg_is_fuzzy(msg) && gtranslator_prefs_manager_get_unmark_fuzzy_when_changed())
 		gtranslator_msg_set_fuzzy(msg, FALSE);
 	
 	if(textbuffer == buf)
@@ -787,7 +787,7 @@ gtranslator_tab_init (GtranslatorTab *tab)
 
 	tab->priv->autosave_interval = gtranslator_prefs_manager_get_autosave_interval ();
 	if (tab->priv->autosave_interval <= 0)
-		tab->priv->autosave_interval = GPM_DEFAULT_AUTOSAVE_INTERVAL;
+		tab->priv->autosave_interval = 1;
 }
 
 static void

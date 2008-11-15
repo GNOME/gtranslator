@@ -141,88 +141,82 @@ showed_message_cb (GtranslatorTab *tab,
   window = gtranslator_application_get_active_window (GTR_APP);
   tm_menu = gtranslator_window_get_tm_menu (window);
 
-  if (!gtranslator_prefs_manager_get_show_tm_options () && gtranslator_msg_is_translated (msg)
-      && !gtranslator_msg_is_fuzzy (msg)) {
-    gtk_widget_set_sensitive (tm_menu, FALSE);
-    gtk_list_store_clear (model);
-    return;    
-  }else {  
-    g_signal_connect (tm_ui->priv->tree_view,
+  g_signal_connect (tm_ui->priv->tree_view,
 		      "size_allocate",
 		      G_CALLBACK (tree_view_size_cb),
 		      tm_ui->priv->tree_view);
+  
+  msgid = gtranslator_msg_get_msgid (msg);
+  
+  tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
+  
+  tm_list = gtranslator_translation_memory_lookup (tm, msgid);
+  
+  if (tm_list == NULL) {
+    gtk_widget_set_sensitive (tm_menu, FALSE);
+  } else {
+    gtk_widget_set_sensitive (tm_menu, TRUE);
+  }
     
-    msgid = gtranslator_msg_get_msgid (msg);
-    
-    tm = GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory (GTR_APP));
-    
-    tm_list = gtranslator_translation_memory_lookup (tm, msgid);
+  gtk_list_store_clear (model);
 
-    if (tm_list == NULL) {
-      gtk_widget_set_sensitive (tm_menu, FALSE);
-    } else {
-      gtk_widget_set_sensitive (tm_menu, TRUE);
-    }
+  g_strfreev (tm_ui->priv->tm_list);
+  tm_ui->priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
+  
+  for (l = tm_list; l; l = l->next) {
+    GtranslatorTranslationMemoryMatch *match;
+    match = (GtranslatorTranslationMemoryMatch *)l->data;
+    tm_ui->priv->tm_list[i-1] = g_strdup (match->match);       
+    level_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
+    renderers_list = gtk_tree_view_column_get_cell_renderers (level_column);
     
-    gtk_list_store_clear (model);
-
-    g_strfreev (tm_ui->priv->tm_list);
-    tm_ui->priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
+    g_object_set (renderers_list->data,
+		  "accel-mods", GDK_CONTROL_MASK,
+		  NULL);
+    g_list_free (renderers_list);
     
-    for (l = tm_list; l; l = l->next) {
-      GtranslatorTranslationMemoryMatch *match;
-      match = (GtranslatorTranslationMemoryMatch *)l->data;
-      tm_ui->priv->tm_list[i-1] = g_strdup (match->match);       
-      level_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
-      renderers_list = gtk_tree_view_column_get_cell_renderers (level_column);
-      
-      g_object_set (renderers_list->data,
-		    "accel-mods", GDK_CONTROL_MASK,
-		    NULL);
-      g_list_free (renderers_list);
-      
-      gtk_list_store_append (model, &iter);
-      gtk_list_store_set (model,
-			  &iter,
-			  SHORTCUT_COLUMN,
+    gtk_list_store_append (model, &iter);
+    gtk_list_store_set (model,
+			&iter,
+			SHORTCUT_COLUMN,
 			  GDK_0+k,
-			  STRING_COLUMN,
-			  match->match,
-			  LEVEL_COLUMN,
-			  match->level,
-			  -1);
-      i++;
-      k++;
-      if (k == MAX_ELEMENTS)
-        break;
-    }
+			STRING_COLUMN,
+			match->match,
+			LEVEL_COLUMN,
+			match->level,
+			-1);
+    i++;
+    k++;
+    if (k == MAX_ELEMENTS)
+      break;
+  }
 
-    /* Ensure last element is NULL */
-    tm_ui->priv->tm_list[i-1] = NULL;
-
-    /* MenuBar stuff */
+  /* Ensure last element is NULL */
+  tm_ui->priv->tm_list[i-1] = NULL;
+  
+  /* MenuBar stuff */
+  
+  items_menu = gtk_menu_new();
+  
+  manager = gtranslator_window_get_ui_manager (window);
+  
+  gtk_menu_set_accel_group (GTK_MENU (items_menu),
+			    gtk_ui_manager_get_accel_group(manager));
+  
+  do{
+    gchar *accel_path;
     
-    items_menu = gtk_menu_new();
+    item_name = g_strdup_printf (_("Insert Option nº %d"), j);
     
-    manager = gtranslator_window_get_ui_manager (window);
+    tm_item = gtk_menu_item_new_with_label (item_name);
+    g_object_set_data (G_OBJECT (tm_item), "option", GINT_TO_POINTER (j));
+    gtk_widget_show (tm_item);
     
-    gtk_menu_set_accel_group (GTK_MENU (items_menu),
-			      gtk_ui_manager_get_accel_group(manager));
+    accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Translation Memory/%s", item_name);
     
-    do{
-      gchar *accel_path;
-      
-      item_name = g_strdup_printf (_("Insert Option nº %d"), j);
-      
-      tm_item = gtk_menu_item_new_with_label (item_name);
-      g_object_set_data (G_OBJECT (tm_item), "option", GINT_TO_POINTER (j));
-      gtk_widget_show (tm_item);
-      
-      accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/_Translation Memory/%s", item_name);
-      
-      gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
-      gtk_accel_map_add_entry (accel_path, GDK_0+(j-1), GDK_CONTROL_MASK);
-      
+    gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
+    gtk_accel_map_add_entry (accel_path, GDK_0+(j-1), GDK_CONTROL_MASK);
+    
       g_free (accel_path);
       g_free (item_name);
       
@@ -231,19 +225,18 @@ showed_message_cb (GtranslatorTab *tab,
 			tm_ui);
       
       gtk_menu_shell_append (GTK_MENU_SHELL (items_menu), tm_item);
-    
+      
       j++;
       if (j > MAX_ELEMENTS)
 	break;
-
-    }while ((tm_list = g_list_next (tm_list)));
-    
-    gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
-
-    /* Freeing the list */
-    g_list_foreach (tm_list, (GFunc)free_list, NULL);
-    g_list_free (tm_list);
-  }
+      
+  }while ((tm_list = g_list_next (tm_list)));
+  
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
+  
+  /* Freeing the list */
+  g_list_foreach (tm_list, (GFunc)free_list, NULL);
+  g_list_free (tm_list);
 }
 
 static void

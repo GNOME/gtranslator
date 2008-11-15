@@ -127,7 +127,7 @@ gtranslator_view_init (GtranslatorView *view)
 	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(view), GTK_WRAP_WORD);
 	
 	//Set syntax highlight according to preferences
-	gtk_source_buffer_set_highlight_syntax(priv->buffer, gtranslator_prefs_manager_get_highlight());
+	gtk_source_buffer_set_highlight_syntax(priv->buffer, gtranslator_prefs_manager_get_highlight_syntax());
 	
 	//Set dot char according to preferences
 	
@@ -396,7 +396,7 @@ gtranslator_view_set_font (GtranslatorView *view,
 	g_return_if_fail (GTR_IS_VIEW (view));
 
 	if (def)
-		font_name = g_strdup(GPM_DEFAULT_EDITOR_FONT);
+		font_name = g_strdup("Sans 10");
 
 	g_return_if_fail (font_name != NULL);
 
@@ -827,7 +827,7 @@ gtranslator_view_reload_scheme_color (GtranslatorView *view)
 	buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 	manager = gtk_source_style_scheme_manager_get_default ();
 	
-	scheme_id = gtranslator_prefs_manager_get_scheme_color ();
+	scheme_id = gtranslator_prefs_manager_get_color_scheme ();
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
 	
 	gtk_source_buffer_set_style_scheme (buf, scheme);
