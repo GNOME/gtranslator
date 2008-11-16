@@ -132,16 +132,17 @@
     </para>
 
     <para>
-      The new system of translation memories let you use your own translated PO files in
-      order to create a database that will offer you possible options to translate the 
+      The new system of translation memories lets you use any translated PO files in
+      order to create a database that will offer you suggestions how to translate the 
       current message.
     </para>
 
     <para>
-     <application>&app;</application> provide a plugin system which makes it easily extending.
-     It include some useful plugins such as svn plugin in order to do the checkouts from
-     the repository and commit the new translations. There are also plugins to visualize the
-     source code where a message is, search in translation memories web services like Open Tran...
+     <application>&app;</application> provides a plugin system which makes it easily extending.
+     It includes some useful plugins such as a svn plugin in that does the checkouts from
+     the repository and commits the new translations. There are also plugins to visualize the
+     source code where a message is located, to search in translation databases of web services
+     like Open Tran and many others.
     </para>
 
     <para>
@@ -201,7 +202,7 @@
 	  -->
 
       <para>
-	The <interface>Main window</interface> is divided into three main area:
+	The <interface>Main window</interface> is divided into three main areas:
 	<itemizedlist>
 	  <listitem>
 	    <para>
@@ -219,12 +220,13 @@
 	    <para>
 	      The <interface>workspace</interface>
 	      allows you to visualize and edit the messages contained
-	      in the PO file. This area on its part is divided in another
-	      three. On the top is the message area with all messages of
-	      the PO file and its state. Under the message area, on the left
-	      is where it's showed the original message and the box where write
-	      the translation. Finally, on the right there is a panel with
-	      auxiliar information to help in the translation process.
+	      in the PO file. This area is divided further into three 
+	      areas. At the top is the message area with all messages of
+	      the PO file and its state. Below the message area on the left
+	      the original message is shown and next to it is the text input
+	      field into which one writes the translation. Finally, on the
+	      right there is a panel with auxiliary information to help in the
+	      translation process.
 	    </para>
 	  </listitem>
 	</itemizedlist>
@@ -253,7 +255,7 @@
 	  </menuchoice>
 	  menuitem. It will
 	  bring up the <guilabel>Open file for translation</guilabel> dialog
-	  box. Browse through your computer filesystem, choose the PO file
+	  box. Browse through your computer file system, choose the PO file
 	  you wish to open and click <guibutton>OK</guibutton>.
 	</para>
 
@@ -262,10 +264,11 @@
       <sect3 id="gtranslator-edit-file">
         <title>Editing PO file</title>
         <para> 
-	  The message area show all the messages in the PO file and their state.
-	  It is possible going to one specific message by clicking on it directly.
-	  You can also move through the messages with the buttons in the toolbar:
-	   <emphasis>forward</emphasis> and <emphasis>back</emphasis>. In the menu
+	  The message area shows all the messages in the PO file and their state.
+	  It is possible to go to one specific message by clicking on it directly.
+	  You can also move through the messages with the 
+	  <emphasis>forward</emphasis> and <emphasis>back</emphasis> buttons in
+	  the toolbar. In the menu
 	  using
 	  <menuchoice>
 	    <guisubmenu>Go</guisubmenu>
@@ -273,20 +276,20 @@
 	  </menuchoice>
 	  and 
 	  <menuchoice>
-	    <guisubmenu>GO</guisubmenu>
+	    <guisubmenu>Go</guisubmenu>
 	    <guimenuitem>previous fuzzy</guimenuitem>
 	  </menuchoice>
-	  it is possible moving directly among fuzzy messages and using
+	  it is possible to move directly among fuzzy messages and using
 	  <menuchoice>
 	    <guisubmenu>Go</guisubmenu>
 	    <guimenuitem>next untranslated</guimenuitem>
 	  </menuchoice>
 	  and 
 	  <menuchoice>
-	    <guisubmenu>GO</guisubmenu>
+	    <guisubmenu>Go</guisubmenu>
 	    <guimenuitem>previous untranslated</guimenuitem>
 	  </menuchoice>
-	  it is possible moving directly among untranslated messages.
+	  it is possible to move directly among untranslated messages.
 	</para>
 
       </sect3>
@@ -299,7 +302,7 @@
 	  if you are editing some PO files at the same time.
 	</para>
 	<para>
-	  If you close the PO file at this moment, then, the close dialog will be showed
+	  If you close the PO file at this moment, then the close dialog will be shown
 	  to you with this aspect:
 	</para>
 	
@@ -323,22 +326,23 @@
     <sect2 id="gtranslator-advanced-feature">
       <title>Advanced features</title>
       <para>
-	<application>&app;</application> offeres to translator many features in
-	order to do the translation process easier and confortable.
+	<application>&app;</application> offers to translator many features in
+	order to do the translation process easier and more comfortable.
       </para>
 
       <sect3 id="gtranslator-advanced-profiles">
 	<title>Profiles</title>
 	<para> The profiles feature provides to translator the possibility of
-	  having differents <quote>accounts</quote> with the basic information about
-	  herself and the language.
+	  having different <quote>accounts</quote> with individual basic information about
+	  the translator and language settings.
 	</para>
 	<para>
-	  At the same time there is only one profile active. You can choose in a easy way
-	  through the preferences which is this profile. When you save a PO file and
+	  There is always only one profile active at a time. You can
+	  <guiicon>Add</guiicon>, <guiicon>Edit</guiicon> and
+	  <guiicon>Remove</guiicon> accounts. When you save a PO file and
 	  you have activated the option <quote>use my options to complete the following
 	  entries</quote> in the header dialog, <application>&app;</application> will
-	  fill this fields with the information in the active profile.
+	  fill the header fields with the information from the active profile.
 	</para>
 	
 	<figure id="gtranslator-profiles-screenshot">
@@ -360,8 +364,8 @@
 	<title>Translation Memory</title>
 	
 	<para>
-	  The translation memory let you reuse the translations. It is a database
-	  that contains messages and their correspondent translatation for a specific
+	  The translation memory lets you reuse the translations. It is a database
+	  that contains messages and their correspondent translation for a specific
 	  language. 
 	</para>
 	
@@ -382,7 +386,7 @@
 	  </menuchoice> 
 	) you will can see the options that the translation memory offers you in order
 	to translate the current message. If you can choose one of them, just use the keyboard
-	acceleator associated to that option.
+	accelerator associated to that option.
 	</para>
 
 	<figure id="gtranslator-tm-screenshot">
@@ -400,8 +404,8 @@
 	</figure>
 
 	<para>
-	  The level column show you in percentage how much the option coincide with the original
-	  message. The options are ordering by level.
+	  The level column shows you in percent how well each option matches the selected 
+	  message. The options are sorted by how well they match.
 	</para>
 	
       </sect3>
@@ -450,7 +454,7 @@
 
 	<para>
 	  The file management buttons lets you access frequently
-	  used file management funcions quickly.
+	  used file management functions quickly.
 	</para>
 	<variablelist>
 	  <varlistentry>
@@ -485,7 +489,7 @@
 	  <varlistentry>
 	    <term><guiicon>Undo</guiicon></term>
 	    <listitem>
-	      <para>Undoes your last action.</para>
+	      <para>Reverts your last action.</para>
 	    </listitem>
 	  </varlistentry>
         </variablelist>
@@ -495,8 +499,8 @@
         <title>Navigation buttons in the toolbar</title>
 
         <para>
-	  The navigation buttons allows you to navigate among
-	  messages. It also lets you search for strings, or
+	  The navigation buttons allow you to navigate among
+	  messages. They also let you search for strings, or
 	  search and replace strings.
 	</para> 
 
@@ -552,7 +556,7 @@
 	  <varlistentry>
 	    <term><guiicon>Next Fuzzy or Untranslated</guiicon></term>
 	    <listitem>
-	      <para>Jumps to the next fuzzy or unstranslated message.</para>
+	      <para>Jumps to the next fuzzy or untranslated message.</para>
 	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
@@ -583,7 +587,7 @@
 	    <term><guiicon>Replace</guiicon></term>
 	    <listitem>
 	      <para>
-		Opens the <guilabel>Replace dialog box</guilabel>.
+		Opens the <guilabel>Replace</guilabel> dialog box.
 		This dialog lets you enter a string to search for
 		and a string to replace it with.
 	      </para>
@@ -814,9 +818,9 @@
 			<keycap>Ctrl</keycap><keycap>U</keycap>
 		      </keycombo>
 		    </shortcut>
-		    <guimenuitem>Toogle Fuzzy Status</guimenuitem>
+		    <guimenuitem>Toggle Fuzzy Status</guimenuitem>
 		  </menuchoice>
-		  This set the current message to fuzzy.
+		  This toggles the current message fuzzy status.
 		</para>
 	      </listitem>
 
@@ -1032,7 +1036,7 @@
 
 
     <sect2 id="gtranslator-commandline-option">
-      <title>Available commandline options</title>
+      <title>Available command line options</title>
       <para>
 	<application>&app;</application> understands a number of
 	command line options:
@@ -1094,7 +1098,7 @@
 	  <term><guilabel>Autosave files every x minutes</guilabel></term>
 	  <listitem>
 	    <para>
-	      This option set how often <application>&app;</application> must be
+	      This option determines how often <application>&app;</application> must 
 	      save the current file.
 	    </para>
 	  </listitem>
@@ -1138,7 +1142,7 @@
 	  <term><guilabel>Highlight message syntax</guilabel></term>
 	  <listitem>
 	    <para>
-	      This option allows activate the highlight syntax in the
+	      This option activates syntax highlighting in the
 	      original and translated message boxes.
 	    </para>
 	  </listitem>
@@ -1147,8 +1151,8 @@
 	  <term><guilabel>Make whitespace visible</guilabel></term>
 	  <listitem>
 	    <para>
-	      With this option active the withespace in the original and
-	      translated boxes are shown as a dot.
+	      With this option actived whitespaces in the original and
+	      translated message boxes are shown as dots.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1157,7 +1161,7 @@
 	  <listitem>
 	    <para>
 	      This option lets you set a custom font for the original and
-	      translated boxes.
+	      translated message boxes.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1174,8 +1178,8 @@
 	  <term><guilabel>Check spelling</guilabel></term>
 	  <listitem>
 	    <para>
-	      This option active the check spelling for your language in
-	      the original and translated boxes.
+	      This option enables the spell-checking for your language in
+	      the original and translated message boxes.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1210,7 +1214,7 @@
 	  <term><guilabel>Add button</guilabel></term>
 	  <listitem>
 	    <para>
-	      It shows the <guilabel>Profile</guilabel> dialog in order to
+	      Shows the <guilabel>Profile</guilabel> dialog in order to
 	      create a new profile.
 	    </para>
 	  </listitem>
@@ -1219,7 +1223,7 @@
 	  <term><guilabel>Edit button</guilabel></term>
 	  <listitem>
 	    <para>
-	      It shows the <guilabel>Profile</guilabel> dialog in order to
+	      Shows the <guilabel>Profile</guilabel> dialog in order to
 	      edit an exists profile.
 	    </para>
 	  </listitem>
@@ -1228,7 +1232,7 @@
 	  <term><guilabel>Delete button</guilabel></term>
 	  <listitem>
 	    <para>
-	      It removes the selected profile.
+	      Removes the selected profile.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1257,8 +1261,8 @@
 	  <term><guilabel>Profile Name</guilabel></term>
 	  <listitem>
 	    <para>
-	      It is the name of the profile. It is what identify the profile and
-	      it must be unique.
+	      It is the name of the profile. It identifies the profile and
+	      must be unique.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1274,7 +1278,7 @@
 	  <term><guilabel>Translator Email</guilabel></term>
 	  <listitem>
 	    <para>
-	      This is the email addres of the translator to fill the value in the
+	      This is the email address of the translator to fill the value in the
 	      header.
 	    </para>
 	  </listitem>
@@ -1283,7 +1287,7 @@
 	  <term><guilabel>Language</guilabel></term>
 	  <listitem>
 	    <para>
-	      The name of the language in which they will be done the translations.
+	      The name of the language into which the translations will be done.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1317,7 +1321,7 @@
 	  <term><guilabel>Team Email</guilabel></term>
 	  <listitem>
 	    <para>
-	      This is the email addres of the language team.
+	      This is the email address of the language team.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1360,8 +1364,8 @@
 	  <term><guilabel>Anchor Style</guilabel></term>
 	  <listitem>
 	    <para>
-	      This lets you choose if you want to see in the toolbar only
-	      the icons, the icons with the text or use the gnome preferences.
+	      Lets you choose if you want to see only icons in the toolbar,
+	      icons with text or use the Gnome preferences.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1401,13 +1405,13 @@
 
       <variablelist>
 	<varlistentry>
-	  <term><guilabel>Sow options in translated messages</guilabel></term>
+	  <term><guilabel>Show options in translated messages</guilabel></term>
 	  <listitem>
 	    <para>
-	      With this option active <application>&app;</application> shows you
-	      the translation memory options in all the messages including the
-	      translated ones. If it is no active only show options in fuzzy and
-	      untranslated messages.
+	      With this option activated <application>&app;</application> shows you
+	      the translation memory options for all messages including the
+	      translated ones. If it is not active options are ony shown for
+	      fuzzy and untranslated messages.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -1415,7 +1419,7 @@
 	  <term><guilabel>Use only files with this name</guilabel></term>
 	  <listitem>
 	    <para>
-	      If this option is active the translation memory will be created
+	      If this option is used the translation memory will be created
 	      only using the files with this name into the directory selected.
 	    </para>
 	  </listitem>
