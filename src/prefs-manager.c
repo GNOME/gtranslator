@@ -242,7 +242,7 @@ DEFINE_BOOL_PREF(spellcheck,
 DEFINE_STRING_PREF (po_directory,
 		    GPM_PO_DIRECTORY)
 
-DEFINE_INT_PREF (restrict_to_filename,
+DEFINE_BOOL_PREF (restrict_to_filename,
 		 GPM_RESTRICT_TO_FILENAME)
 
 DEFINE_STRING_PREF (filename_restriction,
