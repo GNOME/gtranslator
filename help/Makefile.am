@@ -16,4 +16,4 @@ DOC_FIGURES = figures/mainwindow.png \
 	      figures/profiles-dialog.png \
 	      figures/prefs-interface.png \
 	      figures/prefs-tm.png
-DOC_LINGUAS = de es
+DOC_LINGUAS = de es th
