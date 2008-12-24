@@ -35,7 +35,7 @@
 
 #include <string.h>
 #include <glib/gi18n.h>
-#include <glib/gkeyfile.h>
+#include <glib.h>
 
 #include "plugin-info.h"
 #include "plugin-info-priv.h"

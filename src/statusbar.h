@@ -21,7 +21,7 @@
 #ifndef GTR_STATUSBAR_H
 #define GTR_STATUSBAR_H
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

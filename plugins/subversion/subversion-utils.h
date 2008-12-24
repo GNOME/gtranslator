@@ -22,8 +22,7 @@
 #ifndef GTR_SUBVERSION_UTILS_H
 #define GTR_SUBVERSION_UTILS_H 1
 
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 #include <gio/gio.h>
 #include "window.h"
 #include "command.h"

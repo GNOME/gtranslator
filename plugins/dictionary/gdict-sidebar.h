@@ -24,7 +24,7 @@
 #ifndef __GDICT_SIDEBAR_H__
 #define __GDICT_SIDEBAR_H__
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 #define GDICT_TYPE_SIDEBAR		(gdict_sidebar_get_type ())
 #define GDICT_SIDEBAR(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GDICT_TYPE_SIDEBAR, GdictSidebar))

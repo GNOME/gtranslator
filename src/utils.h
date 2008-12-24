@@ -24,10 +24,7 @@
 #ifndef GTR_UTILS_H
 #define GTR_UTILS_H 1
 
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkmenu.h>
-#include <gtk/gtkaboutdialog.h>
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 #include <libxml/tree.h>
 #include <gio/gio.h>
 

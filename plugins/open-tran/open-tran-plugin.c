@@ -26,8 +26,7 @@
 
 #include <glib/gi18n-lib.h>
 #include <gconf/gconf-client.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkdialog.h>
+#include <gtk/gtk.h>
  
 #include "application.h"
 #include "window.h"

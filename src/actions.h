@@ -19,7 +19,7 @@
 #ifndef __ACTIONS_H__
 #define __ACTIONS_H__
 
-#include <gtk/gtkaction.h>
+#include <gtk/gtk.h>
 #include <gio/gio.h>
 #include "window.h"
 

@@ -30,8 +30,7 @@
 #define __GTR_CLOSE_CONFIRMATION_DIALOG_H__
 
 #include <glib.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkdialog.h>
+#include <gtk/gtk.h>
 
 #include "po.h"
 

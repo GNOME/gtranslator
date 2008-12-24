@@ -20,7 +20,7 @@
 #define __IO_ERROR_MESSAGE_AREA_H__
 
 #include <glib.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

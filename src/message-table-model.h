@@ -22,7 +22,7 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 #include "msg.h"
 
 G_BEGIN_DECLS

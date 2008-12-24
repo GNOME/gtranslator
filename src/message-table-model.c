@@ -26,7 +26,7 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 
 #define G_LIST(x) ((GList *) x)
 

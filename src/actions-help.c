@@ -28,7 +28,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include <gtk/gtkaboutdialog.h>
+#include <gtk/gtk.h>
 
 /*
  * Show the user's guide for gtranslator
