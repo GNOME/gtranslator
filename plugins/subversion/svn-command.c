@@ -222,12 +222,12 @@ ssl_server_trust_prompt (SSLServerTrustArgs *args)
 	if (args->realm)
 		gtk_label_set_text (GTK_LABEL (auth_realm), args->realm);
 	
-	info = g_strconcat(_("Hostname: "), args->cert_info->hostname, "\n",
-					   _("Fingerprint: "), args->cert_info->fingerprint, "\n",
-					   _("Valid from: "), args->cert_info->valid_from, "\n",
-					   _("Valid until: "), args->cert_info->valid_until, "\n",
-					   _("Issuer DN: "), args->cert_info->issuer_dname, "\n",
-					   _("DER certificate: "), args->cert_info->ascii_cert, "\n",
+	info = g_strconcat(_("Hostname:"), args->cert_info->hostname, "\n",
+					   _("Fingerprint:"), args->cert_info->fingerprint, "\n",
+					   _("Valid from:"), args->cert_info->valid_from, "\n",
+					   _("Valid until:"), args->cert_info->valid_until, "\n",
+					   _("Issuer DN:"), args->cert_info->issuer_dname, "\n",
+					   _("DER certificate:"), args->cert_info->ascii_cert, "\n",
 					   NULL);
 	gtk_label_set_text (GTK_LABEL (server_info), info);
 	

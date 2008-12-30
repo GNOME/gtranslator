@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Fri Nov 14 11:53:55 2008 -->
+<?xml version="1.0"?>
 <glade-interface>
+  <requires-version lib="gtk+" version="2.12"/>
   <widget class="GtkDialog" id="preferences_dialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Gtranslator Preferences</property>
@@ -44,7 +43,7 @@
                         <child>
                           <widget class="GtkLabel" id="label5">
                             <property name="visible">True</property>
-                            <property name="label">    </property>
+                            <property name="xpad">8</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -121,7 +120,7 @@
                         <child>
                           <widget class="GtkLabel" id="label9">
                             <property name="visible">True</property>
-                            <property name="label">    </property>
+                            <property name="xpad">8</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -224,8 +223,8 @@
                 <property name="label" translatable="yes">Files</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -255,7 +254,7 @@
                         <child>
                           <widget class="GtkLabel" id="label17">
                             <property name="visible">True</property>
-                            <property name="label">    </property>
+                            <property name="xpad">8</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -378,7 +377,7 @@
                         <child>
                           <widget class="GtkLabel" id="label19">
                             <property name="visible">True</property>
-                            <property name="label">    </property>
+                            <property name="xpad">8</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -439,9 +438,9 @@
                 <property name="label" translatable="yes">Editor</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">1</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -536,9 +535,9 @@
                 <property name="label" translatable="yes">Profiles</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">2</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -569,7 +568,7 @@
                           <widget class="GtkLabel" id="label11">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">    </property>
+                            <property name="xpad">8</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -622,7 +621,7 @@ Tabs</property>
                           <widget class="GtkLabel" id="label14">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">    </property>
+                            <property name="xpad">8</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -662,9 +661,9 @@ Tabs</property>
                 <property name="label" translatable="yes">Interface</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">3</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -835,28 +834,33 @@ Tabs</property>
                                 <property name="n_columns">2</property>
                                 <property name="column_spacing">12</property>
                                 <child>
-                                  <widget class="GtkSpinButton" id="sentence_length_spinbutton">
+                                  <widget class="GtkCheckButton" id="use_lang_profile_in_tm">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="adjustment">2 0 100 1 10 10</property>
+                                    <property name="label" translatable="yes">Use only files with this name:</property>
+                                    <property name="response_id">0</property>
+                                    <property name="draw_indicator">True</property>
+                                  </widget>
+                                </child>
+                                <child>
+                                  <widget class="GtkEntry" id="tm_lang_entry">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="right_attach">2</property>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
-                                    <property name="x_options">GTK_FILL</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkLabel" id="label24">
+                                  <widget class="GtkLabel" id="label23">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Max. difference in sentence length:</property>
+                                    <property name="label" translatable="yes">Max. # of missing words:</property>
                                   </widget>
                                   <packing>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="bottom_attach">2</property>
                                     <property name="x_options">GTK_FILL</property>
                                   </packing>
                                 </child>
@@ -874,35 +878,30 @@ Tabs</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkLabel" id="label23">
+                                  <widget class="GtkLabel" id="label24">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Max. # of missing words:</property>
+                                    <property name="label" translatable="yes">Max. difference in sentence length:</property>
                                   </widget>
                                   <packing>
-                                    <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
                                     <property name="x_options">GTK_FILL</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <widget class="GtkEntry" id="tm_lang_entry">
+                                  <widget class="GtkSpinButton" id="sentence_length_spinbutton">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="adjustment">2 0 100 1 10 10</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="right_attach">2</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
+                                    <property name="x_options">GTK_FILL</property>
                                   </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkCheckButton" id="use_lang_profile_in_tm">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label" translatable="yes">Use only files with this name:</property>
-                                    <property name="response_id">0</property>
-                                    <property name="draw_indicator">True</property>
-                                  </widget>
                                 </child>
                               </widget>
                               <packing>
@@ -936,9 +935,9 @@ Tabs</property>
                 <property name="label" translatable="yes">Translation Memory</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">4</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
             <child>
@@ -959,9 +958,9 @@ Tabs</property>
                 <property name="label" translatable="yes">Plugins</property>
               </widget>
               <packing>
-                <property name="type">tab</property>
                 <property name="position">5</property>
                 <property name="tab_fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
           </widget>

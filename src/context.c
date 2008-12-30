@@ -58,7 +58,7 @@ showed_message_cb (GtranslatorTab *tab,
 	gtk_text_buffer_set_text (buffer, "", 0);
 	gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
 
-	format = g_strconcat (_("Format: "), gtranslator_msg_get_format (msg), NULL);
+	format = g_strconcat (_("Format:"), gtranslator_msg_get_format (msg), NULL);
     	context = g_strconcat (_("Context:"), gtranslator_msg_get_msgctxt (msg), NULL);
     	extracted = g_strconcat (_("Extracted comments:"),
 				 gtranslator_msg_get_extracted_comments(msg), NULL);
