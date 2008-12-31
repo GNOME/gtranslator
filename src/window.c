@@ -223,8 +223,14 @@ static const GtkActionEntry entries[] = {
 	  //G_CALLBACK(gtranslator_remove_all_translations_dialog) },*/
 	
         /* Go menu */
-        { "GoFirst", GTK_STOCK_GOTO_FIRST, NULL, NULL,
-          N_("Go to the first message"),
+        { "GoPrevFile", NULL, N_("Prev F_ile"), 
+	  "<control>Page_Up", N_("Go to the next file"),
+          G_CALLBACK (gtranslator_file_go_to_prev) },
+        { "GoNextFile", NULL, N_("Next Fi_le"), 
+	  "<control>Page_Down", N_("Go to the next file"),
+	  G_CALLBACK (gtranslator_file_go_to_next) },
+        { "GoFirst", GTK_STOCK_GOTO_FIRST, NULL, 
+	  "<alt>Home", N_("Go to the first message"),
           G_CALLBACK (gtranslator_message_go_to_first) },
 	{ "GoPrevious", GTK_STOCK_GO_BACK, NULL, "<alt>Left",
           N_("Move back one message"),
@@ -232,14 +238,14 @@ static const GtkActionEntry entries[] = {
 	{ "GoForward", GTK_STOCK_GO_FORWARD, NULL, "<alt>Right",
           N_("Move forward one message"),
           G_CALLBACK (gtranslator_message_go_to_next) },
-	{ "GoLast", GTK_STOCK_GOTO_LAST, NULL, NULL,
-          N_("Go to the last message"),
+	{ "GoLast", GTK_STOCK_GOTO_LAST, NULL, 
+	  "<alt>End", N_("Go to the last message"),
           G_CALLBACK (gtranslator_message_go_to_last) },
 	{ "GoNextFuzzy", GTR_STOCK_FUZZY_NEXT, N_("Next Fuz_zy"),
-	  "<control>Page_Down", N_("Go to the next fuzzy message"),
+	  "<alt><control>Page_Down", N_("Go to the next fuzzy message"),
           G_CALLBACK (gtranslator_message_go_to_next_fuzzy) },
 	{ "GoPreviousFuzzy", GTR_STOCK_FUZZY_PREV, N_("Previous Fuzz_y"),
-	  "<control>Page_Up", N_("Go to the previous fuzzy message"),
+	  "<alt><control>Page_Up", N_("Go to the previous fuzzy message"),
           G_CALLBACK (gtranslator_message_go_to_prev_fuzzy) },
 	{ "GoNextUntranslated", GTR_STOCK_UNTRANS_NEXT, N_("Next _Untranslated"),
 	  "<alt>Page_Down", N_("Go to the next untranslated message"),
@@ -637,13 +643,18 @@ static void
 set_sensitive_according_to_tab(GtranslatorWindow *window,
 			       GtranslatorTab *tab)
 {
+        GtranslatorNotebook *notebook;
 	GtranslatorView *view;
 	GtranslatorPo *po;
 	GtkSourceBuffer *buf;
 	GtkAction *action;
 	GList *current;
 	GtranslatorPoState state;
+	gint pages;
+	gint current_page;
 	
+	notebook = gtranslator_window_get_notebook (window);
+	pages = gtk_notebook_get_n_pages(GTK_NOTEBOOK(window->priv->notebook));
 	view = gtranslator_tab_get_active_view(tab);
 	po = gtranslator_tab_get_po(tab);
 	current = gtranslator_po_get_current_message(po);
@@ -681,6 +692,18 @@ set_sensitive_according_to_tab(GtranslatorWindow *window,
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (buf)));
 	
 	/*Go*/
+	current_page = gtk_notebook_page_num (GTK_NOTEBOOK (notebook), GTK_WIDGET (tab));
+	g_return_if_fail (current_page >= 0);
+	
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "GoPrevFile");
+	gtk_action_set_sensitive (action, current_page != 0);
+	
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "GoNextFile");
+	gtk_action_set_sensitive (action, 
+				  current_page < pages - 1);
+
 	set_sensitive_according_to_message(window, po);
 }
 
@@ -693,7 +716,6 @@ set_sensitive_according_to_window(GtranslatorWindow *window)
 	
 	gtk_action_group_set_sensitive(window->priv->action_group,
 				       pages > 0);
-				       
 }
 
 /*
