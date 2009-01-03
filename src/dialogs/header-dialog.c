@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
+#include "application.h"
 #include "header-dialog.h"
 #include "utils.h"
 #include "prefs-manager.h"
@@ -80,15 +81,17 @@ static void
 take_my_options_checkbutton_toggled(GtkToggleButton *button,
 				    GtranslatorHeaderDialog *dlg)
 {
-	g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->take_my_options));
-	
-	gtranslator_prefs_manager_set_use_profile_values(gtk_toggle_button_get_active(button));
-	
-	gtk_widget_set_sensitive(dlg->priv->translator, !gtk_toggle_button_get_active(button));
-	gtk_widget_set_sensitive(dlg->priv->tr_email, !gtk_toggle_button_get_active(button));
-	gtk_widget_set_sensitive(dlg->priv->language, !gtk_toggle_button_get_active(button));
-	gtk_widget_set_sensitive(dlg->priv->lg_email, !gtk_toggle_button_get_active(button));
-	gtk_widget_set_sensitive(dlg->priv->encoding, !gtk_toggle_button_get_active(button));
+  g_return_if_fail(button == GTK_TOGGLE_BUTTON(dlg->priv->take_my_options));
+
+  
+  gtranslator_prefs_manager_set_use_profile_values(gtk_toggle_button_get_active(button));
+  
+  gtk_widget_set_sensitive(dlg->priv->translator, !gtk_toggle_button_get_active(button));
+  gtk_widget_set_sensitive(dlg->priv->tr_email, !gtk_toggle_button_get_active(button));
+  gtk_widget_set_sensitive(dlg->priv->language, !gtk_toggle_button_get_active(button));
+  gtk_widget_set_sensitive(dlg->priv->lg_email, !gtk_toggle_button_get_active(button));
+  gtk_widget_set_sensitive(dlg->priv->encoding, !gtk_toggle_button_get_active(button));
+  
 }
 
 static void
@@ -298,9 +301,15 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 	
 	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 	
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->take_my_options),
+	if (gtranslator_application_get_profiles (GTR_APP) == NULL)
+	  {
+	    gtk_widget_set_sensitive (dlg->priv->take_my_options, FALSE);
+	  }
+	else
+	  {
+	    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dlg->priv->take_my_options),
 				     gtranslator_prefs_manager_get_use_profile_values());
-
+	  }
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->prj_comment), TRUE);
 
 	gtk_widget_set_sensitive(dlg->priv->pot_date, FALSE);
