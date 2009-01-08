@@ -82,6 +82,8 @@ void             gtranslator_statusbar_update_progress_bar      (GtranslatorStat
 								 gdouble translated_count,
 								 gdouble messages_count);
 
+void             gtranslator_statusbar_clear_progress_bar       (GtranslatorStatusbar *statusbar);
+
 G_END_DECLS
 
 #endif

@@ -2002,7 +2002,17 @@ _gtranslator_window_close_tab (GtranslatorWindow *window,
 				   GTK_WIDGET (tab));
 	if (i != -1)
 		gtranslator_notebook_remove_page (GTR_NOTEBOOK (window->priv->notebook), i);
-	
+
+	/*
+	 * If there is only one file opened, we have to clear the statusbar
+	 */
+	if (i == 0) 
+	  {
+	  gtranslator_statusbar_push (GTR_STATUSBAR (window->priv->statusbar),
+				      0,
+				      " ");
+	  gtranslator_statusbar_clear_progress_bar (GTR_STATUSBAR (window->priv->statusbar));
+	  }
 	set_sensitive_according_to_window (window);
 }
 

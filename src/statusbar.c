@@ -347,3 +347,16 @@ gtranslator_statusbar_update_progress_bar (GtranslatorStatusbar *statusbar,
 					       percentage);
 	}
 }
+
+/**
+ * gtranslator_statusbar_clear_progress_bar:
+ * @statusbar: a #GtranslatorStatusbar
+ *
+ * Clear the progress bar
+ */
+void
+gtranslator_statusbar_clear_progress_bar (GtranslatorStatusbar *statusbar)
+{
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (statusbar->priv->progress_bar),
+				 0.0);
+}
