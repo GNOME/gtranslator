@@ -342,6 +342,7 @@ void gtranslator_show_header_dialog (GtranslatorWindow *window)
 	GtkTextBuffer *buffer;
 
 	tab = gtranslator_window_get_active_tab (window);
+	g_return_if_fail (tab != NULL);
 	po = gtranslator_tab_get_po (tab);
 
 	g_return_if_fail(GTR_IS_WINDOW(window));
