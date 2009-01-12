@@ -27,7 +27,6 @@
 
 #include <string.h>
 
-#include "draw-spaces.h"
 #include "prefs-manager.h"
 #include "utils.h"
 #include "view.h"
@@ -265,21 +264,16 @@ gtranslator_view_enable_spellcheck(GtranslatorView *view,
  * Enables special chars for white spaces including \n and \t
 **/
 void
-gtranslator_view_enable_visible_whitespace(GtranslatorView *view,
-					   gboolean enable)
+gtranslator_view_enable_visible_whitespace (GtranslatorView *view,
+					    gboolean enable)
 {
-	g_return_if_fail(GTR_IS_VIEW(view));
+	g_return_if_fail (GTR_IS_VIEW (view));
 	
-	if(enable)
-		g_signal_connect(view, "event-after",
-				 G_CALLBACK(on_event_after), NULL);
+	if (enable)
+		gtk_source_view_set_draw_spaces (GTK_SOURCE_VIEW (view),
+						 GTK_SOURCE_DRAW_SPACES_ALL);
 	else
-		g_signal_handlers_disconnect_by_func(view,
-						     G_CALLBACK(on_event_after),
-						     NULL);
-	
-	/*It's neccessary redraw the widget when you connect or disconnect the signal*/
-	gtk_widget_queue_draw (GTK_WIDGET (view));
+		gtk_source_view_set_draw_spaces (GTK_SOURCE_VIEW (view), 0);
 }
 
 /**

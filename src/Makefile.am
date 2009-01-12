@@ -78,7 +78,6 @@ header_DATA = \
 libgtranslator_la_SOURCES = \
 	$(BUILT_SOURCES) \
 	application.c \
-	draw-spaces.c draw-spaces.h \
 	message-area.c \
 	message-table.c \
 	message-table-model.c \
