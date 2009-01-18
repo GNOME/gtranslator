@@ -140,7 +140,6 @@ gtranslator-marshal.c: gtranslator-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --body --header --prefix=gtranslator_marshal > $@
 
 EXTRA_DIST =	\
-	ChangeLog			\
 	gtranslator-marshal.list	\
 	gtranslator-enum-types.h.template	\
 	gtranslator-enum-types.c.template
