@@ -22,8 +22,10 @@
  *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  */
 
+#include "application.h"
 #include "header.h"
 #include "prefs-manager.h"
+#include "profile.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -418,7 +420,10 @@ gint
 gtranslator_header_get_nplurals (GtranslatorHeader *header)
 {
 	const gchar *plural_form;
-	
+	GtranslatorProfile *profile;
+
+	profile = gtranslator_application_get_active_profile (GTR_APP);
+
 	g_return_val_if_fail (GTR_IS_HEADER (header), -1);
 	
 	/*
@@ -428,7 +433,7 @@ gtranslator_header_get_nplurals (GtranslatorHeader *header)
 	 */
 	if (header->priv->plural_forms)
 		return header->priv->nplurals;
-	else if (plural_form = (const gchar *)gtranslator_profile_get_plurals ())
+	else if (plural_form = (const gchar *)gtranslator_profile_get_plurals (profile))
 	{
 		gtranslator_header_set_plural_forms (header, plural_form);
 		/*
