@@ -71,6 +71,7 @@ gtranslator_about_dialog(GtkAction *action,
 	{
 		"Abel Cheung <deaddog@deaddog.org>",
 		"Emese Kovacs <emese@gnome.hu>",
+		"Pablo Sanxiao <psanxiao@gmail.org>",
 		NULL
 	};	
 	
