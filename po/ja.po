@@ -1,1089 +1,1833 @@
 # gtranslator ja.po.
-# Copyright (C) 2000-2004,2006 Free Software Foundation, Inc.
-# Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2004, 2006.
+# Copyright (C) 2000-2004,2006,2009 Free Software Foundation, Inc.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2000-2004,2006,2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator HEAD\n"
+"Project-Id-Version: gtranslator trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-04 13:57+0900\n"
-"PO-Revision-Date: 2006-12-04 13:57+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"POT-Creation-Date: 2009-01-25 21:45+0900\n"
+"PO-Revision-Date: 2009-01-25 21:44+0900\n"
+"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/desktop/gtranslator.desktop.in.h:1
-msgid "The GNOME translation program"
-msgstr "GNOME 翻訳プログラムです"
+#: ../data/desktop/gtranslator.desktop.in.in.h:1
+msgid "Gtranslator PO Editor"
+msgstr "Gtranslator 翻訳エディタ"
 
-#: ../data/desktop/gtranslator.desktop.in.h:2
-msgid "gtranslator PO file editor"
-msgstr "gtranslator 翻訳エディタ"
+#: ../data/desktop/gtranslator.desktop.in.in.h:2
+msgid "Translate and localize applications and libraries"
+msgstr "アプリケーションやライブラリのメッセージを翻訳します"
 
-#: ../src/about.c:63
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr "(C) 1999-2005 フリーソフトウェア財団"
+#: ../data/gtranslator.schemas.in.h:1
+msgid "Autosave files"
+msgstr "ファイルの自動保存"
 
-#: ../src/about.c:64
-msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr ""
-"gtranslator はたくさんの付加的な機能を持った .po ファイル編集エディタです。"
+#: ../data/gtranslator.schemas.in.h:2
+msgid "Autosave interval"
+msgstr "自動保存する周期"
 
-#: ../src/about.c:67
-msgid "translator-credits"
-msgstr ""
-"相花 毅 <aihana@gnome.gr.jp>\n"
-"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
+#: ../data/gtranslator.schemas.in.h:3
+msgid "Check spelling"
+msgstr "単語のスペルチェック"
 
-#: ../src/bookmark.c:525
-msgid "_View/_Bookmarks/"
-msgstr "表示(_V)/ブックマーク(_B)/"
+#: ../data/gtranslator.schemas.in.h:4
+msgid "Color scheme"
+msgstr "色のスキーム"
 
-#: ../src/bookmark.c:562
-#, c-format
-msgid "Open %s (%s)"
-msgstr "%s (%s) を開く"
+#: ../data/gtranslator.schemas.in.h:5
+msgid "Create backup before saving"
+msgstr "バックアップの作成"
 
-#: ../src/color-schemes.c:195
-#, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr "カラースキーム・ファイル '%s' を適用できません！"
+#: ../data/gtranslator.schemas.in.h:6
+msgid "Custom font to use for edit fields."
+msgstr "独自のフォント"
 
-#: ../src/color-schemes.c:317
-msgid "Couldn't retrieve author information!"
-msgstr "作者の情報を取得できませんでした！"
+#: ../data/gtranslator.schemas.in.h:7
+msgid "Delete compiled GMO files"
+msgstr ".gmo ファイルの削除"
 
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: ../src/color-schemes.c:323 ../src/translator.c:334
-msgid "Unknown"
-msgstr "未訳"
+#: ../data/gtranslator.schemas.in.h:8
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "翻訳メモリに追加する .po ファイルを格納しておくフォルダです。"
 
-#: ../src/color-schemes.c:324
-msgid "<Not Given>"
-msgstr "<指定なし>"
+#: ../data/gtranslator.schemas.in.h:9
+msgid "Editor font"
+msgstr "編集時のフォント"
 
-#: ../src/color-schemes.c:471
-msgid "_View/_Colorschemes/"
-msgstr "表示(_V)/カラースキーム(_C)/"
+#: ../data/gtranslator.schemas.in.h:10
+msgid "Filename to restrict search to"
+msgstr "検索の対象外にするファイル"
 
-#: ../src/color-schemes.c:501
-#, c-format
-msgid "Activate colorscheme %s"
-msgstr "カラースキーム %s は利用可能です"
-
-#: ../src/compile.c:80
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "msgfmt の実行中にエラーが発生しました:\n"
-
-#: ../src/compile.c:157
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "すみませんが、このシステムでは msgfmt コマンドを利用できません！"
-
-#: ../src/compile.c:197
-#, c-format
+#: ../data/gtranslator.schemas.in.h:11
 msgid ""
-"Compile successful:\n"
-"%s"
+"Filename to which searching of the translation memory should be restricted."
+msgstr "翻訳メモリを検索する際に対象外にするファイル名です。"
+
+#: ../data/gtranslator.schemas.in.h:12
+msgid "Highlight syntax in edit fields"
+msgstr "メッセージの強調表示"
+
+#: ../data/gtranslator.schemas.in.h:13
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr "編集中のメッセージを強調表示するかどうかです。"
+
+#: ../data/gtranslator.schemas.in.h:14
+msgid "If true, automatically save files at specified intervals."
+msgstr "編集中のファイルを指定した間隔で自動的に保存するかどうかです。"
+
+#: ../data/gtranslator.schemas.in.h:15
+msgid "If true, check the spelling of translated messages."
+msgstr "翻訳した単語のスペルをチェックするかどうかです。"
+
+#: ../data/gtranslator.schemas.in.h:16
+msgid "If true, create a backup copy of a file before saving it."
+msgstr "保存する前にファイルのバックアップを作成するかどうかです。"
+
+#: ../data/gtranslator.schemas.in.h:17
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr "メッセージの中にある空白を記号として表示するかどうかです。"
+
+#: ../data/gtranslator.schemas.in.h:18
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
 msgstr ""
-"コンパイル完了:\n"
-"%s"
+"翻訳メモリで検索を行う際に指定したファイルだけを検索対象にするかどうかです。"
 
-#: ../src/dialogs.c:109
-msgid "Gettext translation"
-msgstr ".po ファイル"
+#: ../data/gtranslator.schemas.in.h:19
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+".po ファイルのヘッダ情報を現在利用しているプロファイルのそれで上書きするかど"
+"うかです。"
 
-#: ../src/dialogs.c:114
-msgid "Gettext translation template"
-msgstr ".pot ファイル"
+#: ../data/gtranslator.schemas.in.h:20
+msgid "If true, remove compiled GMO binary files when saving."
+msgstr "保存時にコンパイル済の .gmo ファイルを削除するかどうかです。"
 
-#: ../src/dialogs.c:119
-msgid "All files"
-msgstr "全てのファイル"
+#: ../data/gtranslator.schemas.in.h:21
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr "メッセージが Fuzzy 状態でなくなったら fuzzy を削除するかどうかです。"
 
-#: ../src/dialogs.c:176
+#: ../data/gtranslator.schemas.in.h:22
+msgid "If true, use a custom font for edit fields."
+msgstr "翻訳時に独自のフォントを使用するかどうかです。"
+
+#: ../data/gtranslator.schemas.in.h:23
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"保存しようとしている .po ファイルに Fuzzy 状態のメッセージが含まれていたら警"
+"告するかどうかです。"
+
+#: ../data/gtranslator.schemas.in.h:24
+msgid "Interval in minutes at which to automatically save files."
+msgstr "編集中のファイルを自動的に保存する間隔 (単位は分) です。"
+
+#: ../data/gtranslator.schemas.in.h:25
+msgid "Make whitespace visible"
+msgstr "空白の表示"
+
+#: ../data/gtranslator.schemas.in.h:26
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどうか"
+"を判定する際のしきい値で、双方のメッセージの長さがいくつまで異なることが許容"
+"できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッ"
+"セージであると判定します)。"
+
+#: ../data/gtranslator.schemas.in.h:27
+msgid "Maximum difference in message length"
+msgstr "メッセージの差異を表す最大値"
+
+#: ../data/gtranslator.schemas.in.h:28
+msgid "Maximum number of missing words"
+msgstr "メッセージに含まれていない単語数の最大値"
+
+#: ../data/gtranslator.schemas.in.h:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどうか"
+"を判定する際のしきい値で、双方のメッセージの間に含まれていない単語の数が最大"
+"いくつまで許容できるかを表す数値です (ここで指定した数だけ単語が異なっていて"
+"も同一のメッセージであると判定します)。"
+
+#: ../data/gtranslator.schemas.in.h:30
+msgid "Message list sort order"
+msgstr "メッセージを並べる順番"
+
+#: ../data/gtranslator.schemas.in.h:31
+msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+msgstr ""
+"メッセージを強調表示する際に使用する gtksourceview 提供の色のスキーム名です。"
+
+#: ../data/gtranslator.schemas.in.h:32
+msgid "PO directory"
+msgstr ".po を格納するフォルダ"
+
+#: ../data/gtranslator.schemas.in.h:33
+msgid "Remove fuzzy status when message is changed"
+msgstr "メッセージ変更時の Fuzzy 削除"
+
+#: ../data/gtranslator.schemas.in.h:34
+msgid "Restrict search by filename"
+msgstr "ファイル名による検索制限"
+
+#: ../data/gtranslator.schemas.in.h:35
+msgid "Side pane switcher style"
+msgstr "サイド・ペイン切り替え器のスタイル"
+
+#: ../data/gtranslator.schemas.in.h:36
+msgid ""
+"Sort order to use in the message list. Possible values are \"status\", \"id"
+"\", \"original_text\" and \"translated_text\"."
+msgstr ""
+"メッセージを一覧表示する際に使用する並べ方です。指定可能な値: \"status\"、"
+"\"id\"、\"original_text\"、\"translated_text\""
+
+#: ../data/gtranslator.schemas.in.h:37
+msgid ""
+"Style for switchers in the side pane. Possible values are \"icons\", \"text"
+"\", \"icons_and_text\", \"tabs\" and \"system\"."
+msgstr ""
+"サイド・ペインの切り替え器で使用するスタイルです。指定可能な値: \"icons\"、"
+"\"text\"、\"icons_and_text\"、\"tabs\"、\"system\""
+
+#: ../data/gtranslator.schemas.in.h:38
+msgid "Use custom font"
+msgstr "編集時に使用するフォント名です。"
+
+#: ../data/gtranslator.schemas.in.h:39
+msgid "Use profile values for header"
+msgstr "ヘッダ情報の上書き"
+
+#: ../data/gtranslator.schemas.in.h:40
+msgid "Warn if file contains fuzzy translations"
+msgstr "Fuzzy メッセージの警告"
+
+#: ../data/po.lang.h:1
+msgid "Others"
+msgstr "その他"
+
+#: ../data/po.lang.h:2
+msgid "Special variable"
+msgstr "特別な値"
+
+#: ../data/po.lang.h:3
+msgid "Tag"
+msgstr "タグ"
+
+#: ../data/po.lang.h:4
+msgid "gtranslator highlight"
+msgstr "Granslator の強調表示"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:117
+msgid "Message not found"
+msgstr "メッセージがありません"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:221
+msgid "Open file for alternate language"
+msgstr ""
+
+#: ../plugins/alternate-language/alternate-language-panel.c:246
+msgid "File closed"
+msgstr ""
+
+#: ../plugins/alternate-language/alternate-language-panel.c:319
+msgid "There isn't any file loaded"
+msgstr ""
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:59
+#, fuzzy
+msgid "_Alternate Language"
+msgstr "翻訳者と言語"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:60
+#, fuzzy
+msgid "Show the Alternate Language panel"
+msgstr "翻訳者と言語"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:123
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+msgid "Alternate Language"
+msgstr "代替の言語"
+
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+msgid "Load an alternate language."
+msgstr "代替の言語を読み込みます。"
+
+#: ../plugins/charmap/charmap-plugin.c:299
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+msgid "Character Map"
+msgstr "文字マップ"
+
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+msgid "Insert special characters just by clicking on them."
+msgstr "特殊な文字をクリックしながら挿入していきます。"
+
+#: ../plugins/dictionary/dict-panel.c:186
+#, c-format
+msgid "No dictionary source available with name '%s'"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:189
+msgid "Unable to find dictionary source"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:204
+#, c-format
+msgid "No context available for source '%s'"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:207
+msgid "Unable to create a context"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:290
+#, c-format
+msgid "Dictionary source '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:310
+#, c-format
+msgid "Strategy '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:329
+#, c-format
+msgid "Database '%s' selected"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:375
+#, c-format
+msgid "Word '%s' selected"
+msgstr ""
+
+#. speller
+#: ../plugins/dictionary/dict-panel.c:398
+msgid "Double-click on the word to look up"
+msgstr ""
+
+#. strat-chooser
+#: ../plugins/dictionary/dict-panel.c:404
+msgid "Double-click on the matching strategy to use"
+msgstr ""
+
+#. source-chooser
+#: ../plugins/dictionary/dict-panel.c:409
+msgid "Double-click on the source to use"
+msgstr ""
+
+#. db-chooser
+#: ../plugins/dictionary/dict-panel.c:418
+msgid "Double-click on the database to use"
+msgstr ""
+
+#.
+#. * Look up Button
+#.
+#: ../plugins/dictionary/dict-panel.c:481
+msgid "Look _up:"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:554
+msgid "Similar words"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:570
+msgid "Available dictionaries"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:586
+msgid "Available strategies"
+msgstr ""
+
+#: ../plugins/dictionary/dict-panel.c:597
+#, fuzzy
+msgid "Dictionary sources"
+msgstr "機能"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/dictionary-plugin.c:94
+msgid "Dictionary"
+msgstr "辞書"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+msgid "Look up words in a dictionary."
+msgstr "辞書を使って単語の意味を調べます。"
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
+msgid "_Fullscreen"
+msgstr ""
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:47
+msgid "Place window on fullscreen state"
+msgstr ""
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr "フルスクリーン"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr "ウィンドウをフルスクリーン表示します。"
+
+#: ../plugins/insert-params/insert-params-plugin.c:79
+#, fuzzy
+msgid "_Next Param"
+msgstr "次へ(_N)"
+
+#: ../plugins/insert-params/insert-params-plugin.c:80
+#, fuzzy
+msgid "Insert the next param of the message"
+msgstr "翻訳していない次のメッセージにジャンプします"
+
+#: ../plugins/insert-params/insert-params-plugin.c:82
+msgid "_Insert Params"
+msgstr ""
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Params"
+msgstr "引数の挿入"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+msgid "Parameters detection and easy insertion."
+msgstr "引数を検出して挿入します。"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:70
+#, fuzzy
+msgid "_Next Tag"
+msgstr "次へ(_N)"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:71
+#, fuzzy
+msgid "Insert the next tag of the message"
+msgstr "翻訳していない次のメッセージにジャンプします"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:73
+msgid "_Insert Tags"
+msgstr ""
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Tags"
+msgstr "タグの挿入"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+msgid "Tags detection and easy insertion."
+msgstr "タグを検出して挿入します。"
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:1
+msgid "<b>Code language of the results:</b>"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:2
+msgid "<b>Code language to query open-tran:</b>"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-dialog.glade.h:3
+msgid "Open Tran Settings"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:213
+#: ../plugins/open-tran/open-tran-panel.c:277
+msgid "ERROR: could not parse response\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:261
+#, c-format
+msgid "ERROR: %d %s\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:272
+#, c-format
+msgid "FAULT: %d %s\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:288
+#, c-format
+msgid "WRONG! Can't get result element %d\n"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:304 ../src/actions-search.c:200
+msgid "Phrase not found"
+msgstr "語句が見つかりませんでした"
+
+#: ../plugins/open-tran/open-tran-panel.c:326
+msgid "You have to provide a phrase to search"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:336
+msgid "You have to provide a search language code"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:346
+msgid "You have to provide a language code for your language"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:375
+msgid "Type"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:386
+msgid "Open-Tran.eu"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-panel.c:425
+msgid "Look for:"
+msgstr ""
+
+#: ../plugins/open-tran/open-tran-plugin.c:107
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+msgid "Open Tran"
+msgstr "Open-Tran"
+
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+msgid "Look for phrases in Open tran memory translation database."
+msgstr "Open-Tran という翻訳データベースで単語を調べます。"
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:1
+#, fuzzy
+msgid "<b>Line command:</b>"
+msgstr "翻訳者個人の情報"
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:2
+#, fuzzy
+msgid "<b>Program command:</b>"
+msgstr "翻訳者個人の情報"
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:3
+msgid "Source View Settings"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-dialog.glade.h:4
+msgid "Use external editor"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:112
+#, c-format
+msgid "Please, install %s to be able to show the file"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:392
+msgid "Paths:\n"
+msgstr ""
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+msgid "Show the message in the source code."
+msgstr "メッセージを含むソース・コードを表示します。"
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+msgid "Source Code View"
+msgstr "ソース・コード・ビューア"
+
+#: ../plugins/source-code-view/viewer.c:74
+msgid "Source Viewer"
+msgstr ""
+
+#: ../plugins/source-code-view/viewer.glade.h:1
+#, fuzzy
+msgid "<b>Source code</b>"
+msgstr "自動保存"
+
+#: ../plugins/subversion/checkout-dialog.c:76
+msgid "Subversion: Checkout complete."
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:125
+msgid "Please, add a directory path to make the checkout"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:138
+msgid "Please, add a Subversion URL"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
+msgid "Checkout directory"
+msgstr ""
+
+#: ../plugins/subversion/checkout-dialog.c:260
+msgid "Checkout repository"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:226
+msgid "Subversion: Commit complete."
+msgstr ""
+
+#.
+#. * Translators: Please change LANGUAGE for your language name in English.
+#. * This string is used to fill the ChangeLog entry
+#. * For example: "Updated Galician translation"
+#. * where LANGUAGE = Galician.
+#.
+#: ../plugins/subversion/commit-dialog.c:269
+msgctxt "ChangeLog entry"
+msgid "LANGUAGE"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:295
+#, c-format
+msgid "The ChangeLog file '%s' does not exists"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:407
+msgid "Are you sure that you want to pass an empty log message?"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:424
+msgid "You have to select at least one file to send"
+msgstr ""
+
+#: ../plugins/subversion/commit-dialog.c:570
+msgid "Commit Changes"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:79
+msgid "Subversion: Diff complete."
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:108
+#, c-format
+msgid "Please, install %s to be able to diff the file"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:411
+msgid "Diff file"
+msgstr ""
+
+#: ../plugins/subversion/diff-dialog.c:479
+msgid "Diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:84
+msgid "Subversion: File will be added on next commit."
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:138
+msgid "_Update"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:139
+msgid "Sync your local copy with the Subversion tree"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:142
+#, fuzzy
+msgid "_Commit"
+msgstr "コメント:"
+
+#: ../plugins/subversion/subversion-plugin.c:143
+msgid "Commit your changes to the Subversion tree"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:146
+msgid "_Add"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:147
+msgid "Add a new file/directory to the Subversion tree"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:150
+msgid "_Diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:151
+msgid "Diff local PO file with repository PO file"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:154
+msgid "C_heckout"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:155
+msgid "Get a new repository copy"
+msgstr ""
+
+#: ../plugins/subversion/subversion-plugin.c:158
+msgid "S_ubversion"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:1
+#, fuzzy
+msgid "<b>Diff options:</b>"
+msgstr "内容"
+
+#: ../plugins/subversion/subversion.glade.h:2
+msgid "<b>Diff program:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:3
+msgid "<b>Directory to checkout:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:4
+msgid "<b>Directory to update:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:5
+#, fuzzy
+msgid "<b>Information:</b>"
+msgstr "翻訳者個人の情報"
+
+#: ../plugins/subversion/subversion.glade.h:6
+#, fuzzy
+msgid "<b>Log Message:</b>"
+msgstr "自動保存"
+
+#: ../plugins/subversion/subversion.glade.h:7
+msgid "<b>Password:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:8
+#, fuzzy
+msgid "<b>Realm:</b>"
+msgstr "全般"
+
+#: ../plugins/subversion/subversion.glade.h:9
+msgid "<b>Select files to Commit:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:10
+msgid "<b>Subversion URL:</b>"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:11
+#, fuzzy
+msgid "<b>Username:</b>"
+msgstr "全般"
+
+#: ../plugins/subversion/subversion.glade.h:12
+msgid "Add Log Message to ChangeLog file"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:13
+msgid "Line argument:"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:14
+msgid "Program name:"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:15
+msgid "Remember Password"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:16
+msgid "Remember this decision"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:17
+msgid "Repository authorization"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:18
+msgid "Retrieving status..."
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:19
+#, fuzzy
+msgid "Save the diff file"
+msgstr ".po ファイルを更新します"
+
+#: ../plugins/subversion/subversion.glade.h:20
+msgid "Select Folder"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:21
+msgid "Send Changes"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:22
+#: ../plugins/subversion/update-dialog.c:230
+msgid "Update repository"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:23
+msgid "Use configured program to view the diff"
+msgstr ""
+
+#: ../plugins/subversion/subversion.glade.h:24
+msgid "label"
+msgstr ""
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
+msgid "A Subversion client plugin based on libsvn."
+msgstr "libsvn を使った Subversion クライアントのプラグインです。"
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
+msgid "Subversion"
+msgstr "Subversion"
+
+#: ../plugins/subversion/svn-command.c:172
+#: ../plugins/subversion/svn-command.c:252
+msgid "Authentication canceled"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:225
+msgid "Hostname:"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:226
+msgid "Fingerprint:"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:227
+msgid "Valid from:"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:228
+msgid "Valid until:"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:229
+msgid "Issuer DN:"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:230
+msgid "DER certificate:"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:377
+#: ../plugins/subversion/svn-command.c:393
+#, c-format
+msgid "Deleted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:380
+#: ../plugins/subversion/svn-command.c:399
+#, c-format
+msgid "Added: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:383
+#, c-format
+msgid "Reverted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:386
+#, fuzzy, c-format
+msgid "Revert failed: %s"
+msgstr "最近開いたファイル"
+
+#: ../plugins/subversion/svn-command.c:390
+#, c-format
+msgid "Resolved: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:396
+#, c-format
+msgid "Updated: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:402
+#, c-format
+msgid "Externally Updated: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:406
+#, c-format
+msgid "Commit Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:410
+#, c-format
+msgid "Commit Added: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:413
+#, c-format
+msgid "Commit Deleted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:417
+#, c-format
+msgid "Commit Replaced: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:421
+#, c-format
+msgid "Created File: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:436
+#, c-format
+msgid "Modified: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:439
+#, c-format
+msgid "Merged: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:442
+#, c-format
+msgid "Conflicted: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:446
+#, c-format
+msgid "Missing: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-command.c:449
+#, c-format
+msgid "Obstructed: %s"
+msgstr ""
+
+#: ../plugins/subversion/svn-update-command.c:103
+#, c-format
+msgid "Updated to revision %ld."
+msgstr ""
+
+#: ../plugins/subversion/update-dialog.c:74
+msgid "Subversion: Update complete."
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:293
+msgid "Modified"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:297
+msgid "Added"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:301
+msgid "Deleted"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:305
+msgid "Conflicted"
+msgstr ""
+
+#: ../plugins/subversion/vcs-status-tree-view.c:309
+msgid "Missing"
+msgstr ""
+
+#: ../src/actions-file.c:202
 msgid "Open file for translation"
-msgstr "翻訳ファイルを開く"
+msgstr "翻訳するファイルの選択"
 
-#: ../src/dialogs.c:204
+#: ../src/actions-file.c:276 ../src/actions-file.c:403
+msgid "File saved."
+msgstr "ファイルを保存しました"
+
+#: ../src/actions-file.c:326
 msgid "Save file as..."
 msgstr "別名で保存..."
 
-#: ../src/dialogs.c:210
-msgid "Save local copy of file as..."
-msgstr "別名で保存 (コピー)..."
-
-#: ../src/dialogs.c:253
+#: ../src/actions-file.c:747
 #, c-format
+msgid "Failed to write profile data into profiles file '%s'"
+msgstr "'%s' というプロファイルにデータを書き込めませんでした"
+
+#: ../src/actions-help.c:55
+msgid "Current Developers"
+msgstr "現在の開発者"
+
+#: ../src/actions-help.c:61
+msgid "Previous Developers"
+msgstr "前バージョンの開発者"
+
+#: ../src/actions-help.c:80
 msgid ""
-"File %s\n"
-"was changed. Save?"
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version."
 msgstr ""
-".po ファイル: %s\n"
-"が変更されました。保存しますか？"
+"このプログラムはフリーソフトウェアです;フリーソフトウェア財団が提供する GNU "
+"一般公衆利用許諾契約書の第二版、あるいはそれ以降の版が定める条項の下で本プロ"
+"グラムを再頒布または変更することができます。"
 
-#: ../src/dialogs.c:295 ../src/dialogs.c:328
-msgid "gtranslator -- edit comment"
-msgstr "gtranslator -- コメントの編集"
+#: ../src/actions-help.c:84
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"このプログラムは有用とは思いますが、その頒布にあたっては市場性及び特定の目"
+"的、その適合性についての暗黙の保証を含めて、いかなる保証も行ないません。詳細"
+"については GNU 一般公衆利用許諾契約書をご覧下さい。"
 
-#: ../src/dialogs.c:320
-msgid "Comment:"
-msgstr "コメント:"
+#: ../src/actions-help.c:88
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"あなたは、本プログラムと一緒に GNU 一般公衆利用許諾契約書の写しを受け取ってい"
+"るはずです。そうでない場合は <http://www.gnu.org/licenses/> をご覧下さい。"
 
-#: ../src/dialogs.c:437
-#, c-format
-msgid "Should ALL translations from `%s' be removed?"
-msgstr "'%s' から全ての日本語メッセージを削除しますか？"
+#: ../src/actions-help.c:100
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr "アプリケーションやライブラリのメッセージを編集するツールです。"
 
-#: ../src/dialogs.c:510
-msgid "gtranslator -- go to"
-msgstr "gtranslator -- ジャンプ"
+#: ../src/actions-help.c:102
+msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+msgstr "Copyright © 1999-2008 フリーソフトウェア財団"
 
-#: ../src/dialogs.c:518
-msgid "Go to message number:"
-msgstr "メッセージ番号にジャンプ:"
-
-#: ../src/dialogs.c:576
-msgid "Find in the po file"
-msgstr ".po ファイルの中から検索します"
-
-#: ../src/dialogs.c:585
-msgid "Enter search string:"
-msgstr "検索する文字列を入力して下さい:"
-
-#: ../src/dialogs.c:590
-msgid "Case sensitive"
-msgstr "大/小文字を区別しない"
-
-#: ../src/dialogs.c:595
-msgid "Find in:"
-msgstr "検索対象のファイル:"
-
-#: ../src/dialogs.c:599 ../src/dialogs.c:728
-msgid "Comments"
-msgstr "コメント"
-
-#: ../src/dialogs.c:602 ../src/dialogs.c:731 ../src/languages.c:101
-msgid "English"
-msgstr "原文"
-
-#: ../src/dialogs.c:605 ../src/dialogs.c:734 ../src/messages-table.c:222
-msgid "Translation"
-msgstr "日本語"
+#: ../src/actions-help.c:106
+msgid "About Gtranslator"
+msgstr "Gtranslator について"
 
 #.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
 #.
-#: ../src/dialogs.c:616
-msgid "Ignore hotkeys"
-msgstr "ホットキーを無視する"
+#: ../src/actions-help.c:111
+msgid "translator-credits"
+msgstr ""
+"相花 毅 <takeshi.aihana@gmail.com>\n"
+"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
 
-#: ../src/dialogs.c:707
-msgid "gtranslator -- replace"
-msgstr "gtranslator -- 置換"
+#: ../src/actions-help.c:115
+msgid "Gtranslator Web Site"
+msgstr "Gtranslator のウェブサイト"
 
-#: ../src/dialogs.c:711 ../src/menus.c:332
-msgid "Replace"
-msgstr "置換"
+#: ../src/actions-search.c:175
+#, c-format
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../src/dialogs.c:712
-msgid "Replace all"
-msgstr "全て置換"
+#: ../src/actions-search.c:185
+msgid "Found and replaced one occurrence"
+msgstr ""
 
-#: ../src/dialogs.c:717
-msgid "String to replace:"
-msgstr "置換前の文字列:"
+#: ../src/context.c:61
+msgid "Format:"
+msgstr "書式:"
 
-#: ../src/dialogs.c:720
-msgid "Replace string:"
-msgstr "置換後の文字列:"
+#: ../src/context.c:62
+msgid "Context:"
+msgstr "コンテキスト:"
 
-#: ../src/dialogs.c:725
-msgid "Replace in:"
-msgstr "置換する範囲:"
+#: ../src/context.c:63
+msgid "Extracted comments:"
+msgstr "追加のコメント:"
 
-#: ../src/dialogs.c:795
-msgid "Please enter a string to replace!"
-msgstr "置換前の文字列を入力して下さい！"
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:702
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">文字列をデータベースに追加しました</"
+"span>"
 
-#: ../src/dialogs.c:852
+#: ../src/dialogs/assistant.c:281
 #, c-format
 msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
+"Database path: %s"
 msgstr ""
-"ファイル\n"
-"\n"
-"    %s\n"
-"\n"
-"が他の gtranslator プロセスによって既にオープンされています！\n"
-"このファイルを扱っている他の gtranslator プロセスを閉じて\n"
-"このファイルへのアクセスをやり直して下さい。\n"
-"\n"
-"このファイルを開いている gtranslator を終了させますか？"
+"プロファイル名: %s\n"
+"翻訳者の名前: %s\n"
+"翻訳者の E-メール: %s\n"
+"言語の名前: %s\n"
+"翻訳チームの E-メール: %s\n"
+"言語のコード: %s\n"
+"文字集合: %s\n"
+"エンコーディング: %s\n"
+"複数形の形式: %s\n"
+"データベースのフォルダ: %s"
 
-#: ../src/dialogs.c:893
-#, c-format
+#: ../src/dialogs/assistant.c:300
+msgid "None"
+msgstr "なし"
+
+#: ../src/dialogs/assistant.c:321
 msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
+"This assistant will help you to create the main profile\n"
+"and generate your translation memory database."
 msgstr ""
-"ファイル %s\n"
-"が変更されました。保存されたものに戻しますか？"
+"このアシスタントはメイン・プロファイルを生成し、\n"
+"翻訳メモリのデータベースを作成するお手伝いをします。"
 
-#: ../src/dialogs.c:922
-msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- URI から開く"
+#: ../src/dialogs/assistant.c:327
+msgid "Assistant"
+msgstr "アシスタント"
 
-#: ../src/dialogs.c:934
-msgid "Enter URI:"
-msgstr "URI の入力:"
+#: ../src/dialogs/assistant.c:416
+msgid "<b>Profile name:</b>"
+msgstr "<b>プロファイル名:</b>"
 
-#: ../src/dialogs.c:971
-msgid "No URI given!"
-msgstr "URI が指定されていません！"
+#: ../src/dialogs/assistant.c:436
+msgid "<b>Translator name:</b>"
+msgstr "<b>翻訳者の名前:</b>"
 
-#: ../src/dialogs.c:989
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
-"URI は別のシステムにあるファイルを特定するのに使用されます。\n"
-"標準的なインターネット・アドレス (URL) もまた URI です -- これらは\n"
-"\"http\" や \"ftp\" または GNOME-VFS でサポートされているその他のアクセス方法"
-"などで\n"
-"リモート・サーバに置かれている PO ファイルを開くのに使用されます。\n"
-"次は単純な URI のサンプル (サポートしているもの):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> または\n"
-"http://www.DOMAIN.COM/PO-FILE"
+#: ../src/dialogs/assistant.c:456
+msgid "<b>Translator email:</b>"
+msgstr "<b>翻訳者の E-メール:</b>"
 
-#: ../src/dialogs.c:1029
+#: ../src/dialogs/assistant.c:476
+msgid "<b>Language:</b>"
+msgstr "<b>言語の名前:</b>"
+
+#: ../src/dialogs/assistant.c:496
+msgid "<b>Team email:</b>"
+msgstr "<b>翻訳チームの E-メール:</b>"
+
+#: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
+#: ../src/dialogs/preferences-dialog.c:511
+msgid "Profile"
+msgstr "プロファイル"
+
+#: ../src/dialogs/assistant.c:584
+msgid "<b>Language code:</b>"
+msgstr "<b>言語のコード:</b>"
+
+#: ../src/dialogs/assistant.c:604
+msgid "<b>Character set:</b>"
+msgstr "<b>文字集合:</b>"
+
+#: ../src/dialogs/assistant.c:624
+msgid "<b>Transfer encoding:</b>"
+msgstr "<b>エンコーディング:</b>"
+
+#: ../src/dialogs/assistant.c:644
+msgid "<b>Plural forms:</b>"
+msgstr "<b>複数形の形式:</b>"
+
+#: ../src/dialogs/assistant.c:706
+msgid "<b>Select the path to generate the database:</b>"
+msgstr "<b>生成したデータベースを格納するフォルダを指定指定して下さい:</b>"
+
+#: ../src/dialogs/assistant.c:736
+msgid "<b>Look for a specific PO filename:</b>"
+msgstr "<b>特定の PO ファイルを検索する:</b>"
+
+#: ../src/dialogs/assistant.c:745
+msgid "E.g.: gl.po"
+msgstr "例: ja.po"
+
+#: ../src/dialogs/assistant.c:748
+msgid "Generate Database"
+msgstr "データベースの生成"
+
+#: ../src/dialogs/assistant.c:772
+msgid "Confirmation"
+msgstr "確認"
+
+#: ../src/dialogs/close-confirmation-dialog.c:131
+msgid "Close _without Saving"
+msgstr "保存せずに閉じる(_W)"
+
+#: ../src/dialogs/close-confirmation-dialog.c:165
+msgid "Question"
+msgstr "質問"
+
+#: ../src/dialogs/close-confirmation-dialog.c:383
 #, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
-msgstr ""
-"'%s' 用の復旧ファイルを開きますか？\n"
-"このファイルは gtranslator が最後に終了した前に保存されたもので、\n"
-"正しく動作しない部分を含んでいるかもしれません！\n"
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr "閉じる前に \"%s\" ファイルへの変更点を保存しますか？"
 
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: ../src/dialogs.c:1041
-msgid "Postpone decision"
-msgstr "あとで決める"
-
-#: ../src/dialogs.c:1043
-msgid "Ignore recovery file"
-msgstr "復旧ファイルを無視する"
-
-#: ../src/dialogs.c:1045
-msgid "Recover file"
-msgstr "復旧ファイル"
-
-#: ../src/dialogs.c:1101
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
-"個人学習バッファの情報を利用して\n"
-"gtranslator による自動翻訳を実施しますか？"
-
-#: ../src/dialogs.c:1141 ../src/dialogs.c:1169
-msgid "gtranslator -- add bookmark with comment?"
-msgstr "gtranslator -- コメントつきブックマークの追加"
-
-#: ../src/dialogs.c:1161
-msgid "Comment for the bookmark:"
-msgstr "ブックマークのコメント:"
-
-#: ../src/dialogs.c:1161
-msgid "No comment"
-msgstr "コメントなし"
-
-#: ../src/find.c:216
-msgid "Please enter a search string"
-msgstr "検索する文字列を入力して下さい。"
-
-#: ../src/find.c:232
+#: ../src/dialogs/close-confirmation-dialog.c:555
 #, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-"見つかりませんでした\n"
-"\"%s\""
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "%d 個のファイルに対する変更点を完全に失うことになります。"
+msgstr[1] "%d 個のファイルに対する変更点を完全に失うことになります。"
 
-#: ../src/gui.c:405
+#: ../src/dialogs/close-confirmation-dialog.c:561
 #, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgid_plural "%s [ %i Fuzzy left ]"
-msgstr[0] "%s [ 残り %i個が fuzzy ]"
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"未だ保存していない変更点を含むファイルが %d 個あります。閉じる前に保存します"
+"か？"
+msgstr[1] ""
+"未だ保存していない変更点を含むファイルが %d 個あります。閉じる前に保存します"
+"か？"
 
-#: ../src/gui.c:405 ../src/gui.c:409 ../src/menus.c:318
-#: ../src/messages-table.c:252
-msgid "Fuzzy"
-msgstr "fuzzy"
+#: ../src/dialogs/close-confirmation-dialog.c:579
+msgid "Docum_ents with unsaved changes:"
+msgstr "未だ保存していない変更点を含むファイル(_E):"
 
-#: ../src/gui.c:409
-#, c-format
-msgid "%s [ No fuzzy left ]"
-msgstr "%s [ fuzzy のメッセージはありません ]"
+#: ../src/dialogs/close-confirmation-dialog.c:581
+msgid "S_elect the documents you want to save:"
+msgstr "保存するファイルを選択して下さい(_E):"
 
-#: ../src/gui.c:418 ../src/messages-table.c:260
-msgid "Translated"
-msgstr "翻訳済み"
+#: ../src/dialogs/close-confirmation-dialog.c:600
+msgid "Saving has been disabled by the system administrator."
+msgstr "システム管理者によってファイルの保存が禁じられています。"
 
-#: ../src/gui.c:426
-#, c-format
-msgid "%s [ %i Untranslated left ]"
-msgid_plural "%s [ %i Untranslated left ]"
-msgstr[0] "%s [ 残り %i個が未訳 ]"
+#: ../src/dialogs/close-confirmation-dialog.c:602
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr "保存しないと、全ての変更点を完全に失うことになります。"
 
-#: ../src/gui.c:426 ../src/gui.c:428 ../src/messages-table.c:244
-msgid "Untranslated"
-msgstr "未訳"
-
-#: ../src/gui.c:428
-#, c-format
-msgid "%s [ No untranslated left ]"
-msgstr "%s [ 未訳のメッセージはありません ]"
-
-#: ../src/gui.c:447
-#, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr ""
-"メッセージ数: %d/%d; ステータス: %s (メッセージに複数形が含まれています)"
-
-#: ../src/gui.c:451
-#, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr "メッセージ数 %d/%d; ステータス: %s"
-
-#: ../src/gui.c:754 ../src/page.c:99
-msgid "Edit comment"
+#: ../src/dialogs/comment-dialog.c:92
+msgid "Edit Comment"
 msgstr "コメントの編集"
 
-#: ../src/header_stuff.c:406
-msgid "No header for this file/domain"
-msgstr "このファイル/ドメインに対応するヘッダがありません"
+#: ../src/dialogs/comment-dialog.glade.h:1
+msgid "<b>Write your comments below:</b>"
+msgstr "<b>コメントを入力して下さい:</b>"
 
-#: ../src/header_stuff.c:445
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- ヘッダの編集"
+#: ../src/dialogs/file-dialogs.c:60
+msgid "Gettext translation"
+msgstr ".po ファイル"
 
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-msgid "Comments:"
-msgstr "コメント:"
+#: ../src/dialogs/file-dialogs.c:65
+msgid "Gettext translation template"
+msgstr ".pot ファイル"
 
-#: ../src/header_stuff.c:476
-msgid "Project name:"
-msgstr "プロジェクト名:"
+#: ../src/dialogs/file-dialogs.c:70
+msgid "All files"
+msgstr "全てのファイル"
 
-#: ../src/header_stuff.c:482
-msgid "Project version:"
-msgstr "プロジェクトのバージョン:"
+#: ../src/dialogs/header-dialog.c:255
+msgid "Edit Header"
+msgstr "ヘッダの編集"
 
-#: ../src/header_stuff.c:489
-msgid "Pot file creation date:"
-msgstr "pot ファイルの生成日:"
+#: ../src/dialogs/header-dialog.glade.h:1
+msgid "Char_set:"
+msgstr "文字集合(_S):"
 
-#: ../src/header_stuff.c:495
-msgid "Po file revision date:"
-msgstr "po ファイルの修正日:"
+#: ../src/dialogs/header-dialog.glade.h:2
+msgid "Comment"
+msgstr "コメント"
 
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr "バグ (誤訳) の報告先:"
+#: ../src/dialogs/header-dialog.glade.h:3
+msgid "Enc_oding:"
+msgstr "エンコーディング(_O):"
 
-#: ../src/header_stuff.c:516
-msgid "Generator:"
-msgstr "作成者:"
+#: ../src/dialogs/header-dialog.glade.h:4
+msgid "Language gro_up email:"
+msgstr "翻訳チームの E-メール(_U):"
 
-#: ../src/header_stuff.c:521
+#: ../src/dialogs/header-dialog.glade.h:5
+msgid "Po file _revision date:"
+msgstr ".po ファイルの更新日(_R):"
+
+#: ../src/dialogs/header-dialog.glade.h:6
+msgid "Pot _file creation date:"
+msgstr ".pot ファイルの生成日(_F):"
+
+#: ../src/dialogs/header-dialog.glade.h:7
 msgid "Project"
 msgstr "プロジェクト"
 
-#: ../src/header_stuff.c:527
-msgid "Use my options to complete the following entries:"
-msgstr "ここで設定したオプションを適用する:"
+#: ../src/dialogs/header-dialog.glade.h:8
+msgid "Project Id _version:"
+msgstr "プロジェクトのバージョン(_V):"
 
-#: ../src/header_stuff.c:540
-msgid "Translator's name:"
-msgstr "翻訳者の氏名:"
+#: ../src/dialogs/header-dialog.glade.h:9
+msgid "Report msgid _bugs to:"
+msgstr "バグ (誤訳) の報告先(_B):"
 
-#: ../src/header_stuff.c:546
-msgid "Translator's e-mail:"
-msgstr "翻訳者の E-メール・アドレス:"
-
-#: ../src/header_stuff.c:553 ../src/prefs.c:872
-msgid "Language:"
-msgstr "言語:"
-
-#: ../src/header_stuff.c:560 ../src/prefs.c:901
-msgid "Language group's email:"
-msgstr "言語グループの E-メール・アドレス:"
-
-#: ../src/header_stuff.c:567 ../src/prefs.c:887
-msgid "Charset:"
-msgstr "文字セット:"
-
-#: ../src/header_stuff.c:574 ../src/prefs.c:894
-msgid "Encoding:"
-msgstr "エンコード:"
-
-#: ../src/header_stuff.c:582
+#: ../src/dialogs/header-dialog.glade.h:10
 msgid "Translator and Language"
 msgstr "翻訳者と言語"
 
-#: ../src/history.c:189
-msgid "_File/Recen_t files/"
-msgstr "ファイル(_F)/最近開いたファイル(_T)/"
+#: ../src/dialogs/header-dialog.glade.h:11
+msgid "Translator's _email:"
+msgstr "翻訳者の E-メール(_E):"
 
-#: ../src/history.c:226
+#: ../src/dialogs/header-dialog.glade.h:12
+msgid "Translator's _name:"
+msgstr "翻訳者の氏名(_N):"
+
+#: ../src/dialogs/header-dialog.glade.h:13
+msgid "Use my options to complete the following entries:"
+msgstr "ここで設定したオプションを適用する:"
+
+#: ../src/dialogs/header-dialog.glade.h:14
+#: ../src/dialogs/profile-dialog.glade.h:9
+msgid "_Language:"
+msgstr "言語(_L):"
+
+#: ../src/dialogs/jump-dialog.c:87
+msgid "Jump To"
+msgstr "ジャンプ"
+
+#: ../src/dialogs/jump-dialog.glade.h:1
+msgid "<b>Enter message number:</b>"
+msgstr "<b>メッセージの番号を入力して下さい:</b>"
+
+#: ../src/dialogs/jump-dialog.glade.h:2
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../src/dialogs/jump-dialog.glade.h:3
+msgid "gtk-ok"
+msgstr "gtk-ok"
+
+#: ../src/dialogs/preferences-dialog.c:517
+msgid "Active"
+msgstr "有効"
+
+#: ../src/dialogs/preferences-dialog.c:1046
+msgid ""
+"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+"profile</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">現在有効になっているプロファイルは削除で"
+"きません</span>"
+
+#: ../src/dialogs/preferences-dialog.c:1049
+msgid "Another profile should be selected as active before"
+msgstr "未だ有効になっていない別のプロファイルを選択して下さい。"
+
+#: ../src/dialogs/preferences-dialog.c:1061
+msgid ""
+"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+"profile?</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">このプロファイルを削除してもよろしいです"
+"か？</span>"
+
+#: ../src/dialogs/preferences-dialog.c:1095
+#: ../src/dialogs/preferences-dialog.glade.h:15
+msgid "Gtranslator Preferences"
+msgstr "Gtranslator の設定"
+
+#: ../src/dialogs/preferences-dialog.glade.h:1
+msgid "<b>Anchor style</b>"
+msgstr "<b>アンカーのスタイル</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:2
+msgid "<b>Autosave</b>"
+msgstr "<b>自動保存</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:3
+msgid "<b>Configuration</b>"
+msgstr "<b>設定</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:4
+msgid "<b>Contents</b>"
+msgstr "<b>内容</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:5
+msgid "<b>Database</b>"
+msgstr "<b>データベース</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:6
+msgid "<b>General</b>"
+msgstr "<b>全般</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:7
+msgid "<b>Scheme color</b>"
+msgstr "<b>色のスキーム</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:8
+msgid "<b>Text Display</b>"
+msgstr "<b>メッセージの表示</b>"
+
+#: ../src/dialogs/preferences-dialog.glade.h:9
+msgid "Add to Database"
+msgstr "データベースに追加する"
+
+#: ../src/dialogs/preferences-dialog.glade.h:10
+msgid "Check _spelling"
+msgstr "スペルをチェックする(_S)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:11
+msgid "Create a _backup copy of files before saving"
+msgstr "保存する前にバックアップを作成する(_B)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:12
+msgid "Editor"
+msgstr "エディタ"
+
+#: ../src/dialogs/preferences-dialog.glade.h:13
+msgid "Editor _font:"
+msgstr "エディタのフォント(_F):"
+
+#: ../src/dialogs/preferences-dialog.glade.h:14
+msgid "Files"
+msgstr "ファイル"
+
+#: ../src/dialogs/preferences-dialog.glade.h:16
+msgid "Interface"
+msgstr "インタフェース"
+
+#: ../src/dialogs/preferences-dialog.glade.h:17
+msgid "Make _whitespace visible"
+msgstr "空白を記号として表示する(_W)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:18
+msgid "Max. # of missing words:"
+msgstr "無視できる単語の数 (最大値):"
+
+#: ../src/dialogs/preferences-dialog.glade.h:19
+msgid "Max. difference in sentence length:"
+msgstr "無視できるメッセージの長さ (最大値):"
+
+#: ../src/dialogs/preferences-dialog.glade.h:20
+msgid "Plugins"
+msgstr "プラグイン"
+
+#: ../src/dialogs/preferences-dialog.glade.h:21
+msgid "Profiles"
+msgstr "プロファイル"
+
+#: ../src/dialogs/preferences-dialog.glade.h:22
+msgid "Select directory contains PO files:"
+msgstr ".po ファイルを保存するフォルダ:"
+
+#: ../src/dialogs/preferences-dialog.glade.h:23
+msgid ""
+"Text\n"
+"Icons\n"
+"Text + Icons\n"
+"Gnome toolbar setting\n"
+"Tabs"
+msgstr ""
+"ラベル\n"
+"アイコン\n"
+"ラベルとアイコン\n"
+"デスクトップの設定\n"
+"タブ"
+
+#: ../src/dialogs/preferences-dialog.glade.h:28 ../src/tab.c:658
+msgid "Translation Memory"
+msgstr "翻訳メモリ"
+
+#: ../src/dialogs/preferences-dialog.glade.h:29
+msgid "Use _custom font"
+msgstr "フォントを指定する(_C):"
+
+#: ../src/dialogs/preferences-dialog.glade.h:30
+msgid "Use only files with this name:"
+msgstr "次の名前のファイルだけ使用する:"
+
+#: ../src/dialogs/preferences-dialog.glade.h:31
+msgid "_Autosave files every"
+msgstr "自動保存する(_A): "
+
+#: ../src/dialogs/preferences-dialog.glade.h:32
+msgid "_Delete compiled GMO files"
+msgstr "コンパイル後の .gmo ファイルを削除する(_D)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:33
+msgid "_Highlight message syntax"
+msgstr "メッセージを強調表示する(_H)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:34
+msgid "_Remove fuzzy status if message is changed"
+msgstr "メッセージを変更したら Fuzzy を解除する(_R)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:35
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr ".po ファイルに Fuzzy なメッセージが含まれていたら警告する(_W)"
+
+#: ../src/dialogs/preferences-dialog.glade.h:36
+msgid "_minutes"
+msgstr "分ごと(_M)"
+
+#: ../src/dialogs/profile-dialog.c:257
+msgid ""
+"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">その名前のプロファイルは既に存在していま"
+"す</span>"
+
+#: ../src/dialogs/profile-dialog.c:341
+msgid "gtranslator Profile"
+msgstr "gtranslator のプロファイル"
+
+#: ../src/dialogs/profile-dialog.c:374
+msgid "Example: nplurals=2; plural=(n != 1);"
+msgstr "例: nplurals=2; plural=(n != 1);"
+
+#: ../src/dialogs/profile-dialog.glade.h:1
+msgid "<b>Language Settings</b>"
+msgstr "<b>言語の設定</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:2
+msgid "<b>Profile Information</b>"
+msgstr "<b>プロファイルの情報</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:3
+msgid "<b>Translator Information</b>"
+msgstr "<b>翻訳者の情報</b>"
+
+#: ../src/dialogs/profile-dialog.glade.h:4
+msgid "Character _set"
+msgstr "文字集合(_S)"
+
+#: ../src/dialogs/profile-dialog.glade.h:5
+msgid "Language _code:"
+msgstr "言語のコード(_C):"
+
+#: ../src/dialogs/profile-dialog.glade.h:6
+msgid "N_ame:"
+msgstr "名前(_A):"
+
+#: ../src/dialogs/profile-dialog.glade.h:7
+msgid "Transfer en_coding:"
+msgstr "エンコーディング(_C):"
+
+#: ../src/dialogs/profile-dialog.glade.h:8
+msgid "_Email:"
+msgstr "E-メール(_E):"
+
+#: ../src/dialogs/profile-dialog.glade.h:10
+msgid "_Name:"
+msgstr "氏名(_N):"
+
+#: ../src/dialogs/profile-dialog.glade.h:11
+msgid "_Plural forms:"
+msgstr "複数形の形式(_P):"
+
+#: ../src/dialogs/profile-dialog.glade.h:12
+msgid "_Team email:"
+msgstr "翻訳チームの E-メール(_T):"
+
+#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.glade.h:4
+msgid "Replace"
+msgstr "置換"
+
+#: ../src/dialogs/search-dialog.c:343
+msgid "Find"
+msgstr "検索"
+
+#: ../src/dialogs/search-dialog.c:438
+msgid "Replace _All"
+msgstr "全て置換(_A)"
+
+#: ../src/dialogs/search-dialog.c:441
+msgid "_Replace"
+msgstr "置換(_R)"
+
+#: ../src/dialogs/search-dialog.glade.h:1
+msgid "Include fuzzy strings"
+msgstr "Fuzzy なメッセージを含める"
+
+#: ../src/dialogs/search-dialog.glade.h:2
+msgid "Match _entire word only"
+msgstr "完全に一致する文字列だけ(_E)"
+
+#: ../src/dialogs/search-dialog.glade.h:3
+msgid "Original text"
+msgstr "原文のメッセージ"
+
+#: ../src/dialogs/search-dialog.glade.h:5
+msgid "Replace All"
+msgstr "全て置換"
+
+#: ../src/dialogs/search-dialog.glade.h:6
+msgid "Replace _with: "
+msgstr "置換後の文字列(_W):"
+
+#: ../src/dialogs/search-dialog.glade.h:7
+msgid "Search _backwards"
+msgstr "先頭に向かって検索する(_B)"
+
+#: ../src/dialogs/search-dialog.glade.h:8
+msgid "Translated text"
+msgstr "翻訳済のメッセージ"
+
+#: ../src/dialogs/search-dialog.glade.h:9
+msgid "_Match case"
+msgstr "大/小文字を区別する(_M)"
+
+#: ../src/dialogs/search-dialog.glade.h:10
+msgid "_Search for: "
+msgstr "検索する文字列(_S):"
+
+#: ../src/dialogs/search-dialog.glade.h:11
+msgid "_Wrap around"
+msgstr "折り返しも対象にする(_W)"
+
+#: ../src/main.c:46
+msgid "[FILE...]"
+msgstr "[ファイル...]"
+
+#: ../src/main.c:72
 #, c-format
-msgid "Open %s"
-msgstr "%s を開く"
-
-#: ../src/languages.c:37
-msgid "Afrikaans"
-msgstr "南アフリカ語"
-
-#: ../src/languages.c:41
-msgid "Albanian"
-msgstr "アルバニア語"
-
-#: ../src/languages.c:45
-msgid "Arabic"
-msgstr "アラビア語"
-
-#: ../src/languages.c:49
-msgid "Azerbaijani Turkish"
-msgstr "アゼルバイジャン・トルコ語"
-
-#: ../src/languages.c:53
-msgid "Basque"
-msgstr "バスク語"
-
-#: ../src/languages.c:57
-msgid "Belarusian"
-msgstr "ベラルーシ語"
-
-#: ../src/languages.c:61
-msgid "Bengali"
-msgstr "ベンガル語"
-
-#: ../src/languages.c:65
-msgid "Britton"
-msgstr "ブリトン語"
-
-#: ../src/languages.c:69
-msgid "Bulgarian"
-msgstr "ブルガリア語"
-
-#: ../src/languages.c:73
-msgid "Catalan"
-msgstr "カタラン語"
-
-#: ../src/languages.c:77
-msgid "Chinese/Simplified"
-msgstr "中国語 (簡体字)"
-
-#: ../src/languages.c:81
-msgid "Chinese/Traditional"
-msgstr "中国語 (繁体字)"
-
-#: ../src/languages.c:85
-msgid "Croatian"
-msgstr "クロアチア語"
-
-#: ../src/languages.c:89
-msgid "Czech"
-msgstr "チェコ語"
-
-#: ../src/languages.c:93
-msgid "Danish"
-msgstr "デンマーク語"
-
-#: ../src/languages.c:97
-msgid "Dutch"
-msgstr "オランダ語"
-
-#: ../src/languages.c:105
-msgid "English/Canada"
-msgstr "英語 (カナダ)"
-
-#: ../src/languages.c:109
-msgid "English/GB"
-msgstr "英語 (イギリス)"
-
-#: ../src/languages.c:113
-msgid "English/USA"
-msgstr "英語 (アメリカ)"
-
-#: ../src/languages.c:117
-msgid "Esperanto"
-msgstr "エスペラント語"
-
-#: ../src/languages.c:121
-msgid "Estonian"
-msgstr "エストニア語"
-
-#: ../src/languages.c:125
-msgid "Persian"
-msgstr "ペルシア語"
-
-#: ../src/languages.c:129
-msgid "Finnish"
-msgstr "フィンランド語"
-
-#: ../src/languages.c:133
-msgid "French"
-msgstr "フランス語"
-
-#: ../src/languages.c:137
-msgid "Galician"
-msgstr "ガルシア語"
-
-#: ../src/languages.c:141
-msgid "German"
-msgstr "ドイツ語"
-
-#: ../src/languages.c:145
-msgid "Greek"
-msgstr "ギリシア語"
-
-#: ../src/languages.c:149
-msgid "Gujarati"
-msgstr "グジャラート語"
-
-#: ../src/languages.c:153
-msgid "Hebrew"
-msgstr "ヘブライ語"
-
-#: ../src/languages.c:157
-msgid "Hindi"
-msgstr "ヒンディー語"
-
-#: ../src/languages.c:161
-msgid "Hungarian"
-msgstr "ハンガリー語"
-
-#: ../src/languages.c:165
-msgid "Icelandic"
-msgstr "アイスランド語"
-
-#: ../src/languages.c:169
-msgid "Indonesian"
-msgstr "インドネシア語"
-
-#: ../src/languages.c:173
-msgid "Italian"
-msgstr "イタリア語"
-
-#: ../src/languages.c:177
-msgid "Irish"
-msgstr "アイルランド語"
-
-#: ../src/languages.c:181
-msgid "Japanese"
-msgstr "日本語"
-
-#: ../src/languages.c:185
-msgid "Kannada"
-msgstr "カンナダ語"
-
-#: ../src/languages.c:189
-msgid "Korean"
-msgstr "韓国語"
-
-#: ../src/languages.c:193
-msgid "Kurdish"
-msgstr "クルド語"
-
-#: ../src/languages.c:197
-msgid "Latvian"
-msgstr "ラトビア語"
-
-#: ../src/languages.c:201
-msgid "Lithuanian"
-msgstr "リトアニア語"
-
-#: ../src/languages.c:205
-msgid "Malay/Bahasa Melayu"
-msgstr "マレー語 (バハサ・マレー)"
-
-#: ../src/languages.c:209
-msgid "Maltese"
-msgstr "マルタ語"
-
-#: ../src/languages.c:213
-msgid "Marathi"
-msgstr "マラッタ語"
-
-#: ../src/languages.c:217
-msgid "Mongolian"
-msgstr "モンゴル語"
-
-#: ../src/languages.c:221
-msgid "Norwegian/Bokmaal"
-msgstr "ノルウェー語 (ボックマル)"
-
-#: ../src/languages.c:225
-msgid "Norwegian/Nynorsk"
-msgstr "ノルウェー語 (ニーノルスック)"
-
-#: ../src/languages.c:229
-msgid "Punjabi"
-msgstr "パンジャブ語"
-
-#: ../src/languages.c:233
-msgid "Polish"
-msgstr "ポーランド語"
-
-#: ../src/languages.c:237
-msgid "Portuguese"
-msgstr "ポルトガル語"
-
-#: ../src/languages.c:241
-msgid "Portuguese/Brazil"
-msgstr "ポルトガル語 (ブラジル)"
-
-#: ../src/languages.c:245
-msgid "Romanian"
-msgstr "ルーマニア語"
-
-#: ../src/languages.c:249
-msgid "Russian"
-msgstr "ロシア語"
-
-#: ../src/languages.c:253
-msgid "Serbian/Cyrillic"
-msgstr "セルビア語 (キリール)"
-
-#: ../src/languages.c:257
-msgid "Serbian/Latin"
-msgstr "セルビア語 (ラテン)"
-
-#: ../src/languages.c:261
-msgid "Slovak"
-msgstr "スロベキア語"
-
-#: ../src/languages.c:265
-msgid "Slovenian"
-msgstr "スロベニア語"
-
-#: ../src/languages.c:269
-msgid "Spanish"
-msgstr "スペイン語"
-
-#: ../src/languages.c:273
-msgid "Spanish/Spain"
-msgstr "スペイン語 (スペイン)"
-
-#: ../src/languages.c:277
-msgid "Spanish/Mexico"
-msgstr "スペイン語 (メキシコ)"
-
-#: ../src/languages.c:281
-msgid "Swedish"
-msgstr "スウェーデン語"
-
-#: ../src/languages.c:285
-msgid "Tagalog"
-msgstr "タガログ語"
-
-#: ../src/languages.c:289
-msgid "Tamil"
-msgstr "タミル語"
-
-#: ../src/languages.c:293
-msgid "Telugu"
-msgstr "テルグ語"
-
-#: ../src/languages.c:297
-msgid "Thai"
-msgstr "タイ語"
-
-#: ../src/languages.c:301
-msgid "Turkish"
-msgstr "トルコ語"
-
-#: ../src/languages.c:305
-msgid "Ukrainian"
-msgstr "ウクライナ語"
-
-#: ../src/languages.c:309
-msgid "Urdu"
-msgstr "ウルドゥー語"
-
-#: ../src/languages.c:313
-msgid "Uzbekian"
-msgstr "ウズベキスタン語"
-
-#: ../src/languages.c:317
-msgid "Vietnamese"
-msgstr "ベトナム語"
-
-#: ../src/languages.c:321
-msgid "Walloon"
-msgstr "ワロン語"
-
-#: ../src/languages.c:325
-msgid "Welsh"
-msgstr "ウェールズ語"
-
-#: ../src/learn.c:380
-msgid "gtranslator learn buffer statistics:"
-msgstr "gtranslator 学習バッファの統計:"
-
-#: ../src/learn.c:383
-#, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr "学習バッファのファイル名: `%s'"
-
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: ../src/learn.c:389
-#, c-format
-msgid "Encoding: `%s'"
-msgstr "エンコード: `%s'"
-
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: ../src/learn.c:395
-#, c-format
-msgid "Serial: `%i'"
-msgstr "シリアル: `%i'"
-
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: ../src/learn.c:401
-#, c-format
-msgid "Number of entries: `%i'"
-msgstr "エントリの数: `%i'"
-
-#: ../src/main.c:71
-msgid "Specify main window geometry"
-msgstr "メイン・ウィンドウの位置を指定する"
-
-#: ../src/main.c:71
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: ../src/main.c:119
+msgid "%s: malformed file name or URI.\n"
+msgstr "%s: ファイル名または URI が間違っています\n"
+
+#: ../src/main.c:108
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#. Setup command line options
+#: ../src/main.c:111
+msgid "- Edit PO files"
+msgstr "- .po ファイルを編集する"
+
+#: ../src/main.c:121
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "GConf の初期化中にエラー: %s"
 
-#: ../src/main.c:250
+#: ../src/main.c:139
 #, c-format
-msgid "Couldn't open '%s': %s\n"
-msgstr "'%s' を開けませんでした: %s\n"
-
-#: ../src/menus.c:51
-msgid "_Go"
-msgstr "ジャンプ(_G)"
-
-#: ../src/menus.c:61
-msgid "_Compile"
-msgstr "コンパイル(_C)"
-
-#: ../src/menus.c:62 ../src/menus.c:273
-msgid "Compile the po file"
-msgstr ".po ファイルをコンパイルして .gmo ファイルを生成します"
-
-#: ../src/menus.c:68
-msgid "_Update"
-msgstr "更新(_U)"
-
-#: ../src/menus.c:69 ../src/menus.c:277
-msgid "Update the po file"
-msgstr ".po ファイルを更新します"
-
-#: ../src/menus.c:76
-msgid "Add bookmark"
-msgstr "ブックマークの追加"
-
-#: ../src/menus.c:77
-msgid "Add a bookmark for this message in this po file"
-msgstr ".po ファイルのこのメッセージをブックマークに登録します"
-
-#: ../src/menus.c:84
-msgid "Aut_otranslate..."
-msgstr "自動翻訳(_O)..."
-
-#: ../src/menus.c:85
-msgid "Autotranslate the file with information from your learn buffer"
-msgstr "学習バッファの情報を利用してこのファイルを自動翻訳します"
-
-#: ../src/menus.c:92
-msgid "Remove all translations..."
-msgstr "全ての翻訳を削除する..."
-
-#: ../src/menus.c:93
-msgid "Remove all existing translations from the po file"
-msgstr ".po ファイルから全ての日本語メッセージを削除します"
-
-#: ../src/menus.c:101
-msgid "Open from _URI..."
-msgstr "URI から開く(_U)..."
-
-#: ../src/menus.c:102
-msgid "Open a po file from a given URI"
-msgstr "指定した URI から .po ファイルを開きます"
-
-#: ../src/menus.c:112
-msgid "Recen_t files"
-msgstr "最近開いたファイル(_T)"
-
-#: ../src/menus.c:139
-msgid "_Header..."
-msgstr "ヘッダ(_H)..."
-
-#: ../src/menus.c:140
-msgid "Edit po file header"
-msgstr ".po ファイルのヘッダを編集します"
-
-#: ../src/menus.c:147
-msgid "C_omment..."
-msgstr "コメント(_O)..."
-
-#: ../src/menus.c:148
-msgid "Edit message comment"
-msgstr "各メッセージのコメントを編集します"
-
-#: ../src/menus.c:155
-msgid "Copy _message -> translation"
-msgstr "原文 -> 日本語メッセージへコピー(_M)"
-
-#: ../src/menus.c:156
-msgid "Copy the original message contents and paste them as translation"
-msgstr "原文の内容をコピーして日本語メッセージとして貼り付けます"
-
-#: ../src/menus.c:163
-msgid "Fu_zzy"
-msgstr "fuzzy(_Z)"
-
-#: ../src/menus.c:164
-msgid "Toggle fuzzy status of a message"
-msgstr "メッセージのステータスを \"fuzzy\" に切り替えます"
-
-#: ../src/menus.c:177
-msgid "_First"
-msgstr "先頭へ(_F)"
-
-#: ../src/menus.c:178 ../src/menus.c:294
-msgid "Go to the first message"
-msgstr "先頭のメッセージにジャンプします"
-
-#: ../src/menus.c:184
-msgid "_Back"
-msgstr "戻る(_B)"
-
-#: ../src/menus.c:185 ../src/menus.c:298
-msgid "Move back one message"
-msgstr "一つ前のメッセージに戻ります"
-
-#: ../src/menus.c:192
-msgid "_Next"
-msgstr "次へ(_N)"
-
-#: ../src/menus.c:193 ../src/menus.c:303
-msgid "Move forward one message"
-msgstr "次のメッセージに進みます"
-
-#: ../src/menus.c:199
-msgid "_Last"
-msgstr "最後へ(_L)"
-
-#: ../src/menus.c:200 ../src/menus.c:307
-msgid "Go to the last message"
-msgstr "最後のメッセージにジャンプします"
-
-#: ../src/menus.c:207
-msgid "_Go to..."
-msgstr "ジャンプ(_G)..."
-
-#: ../src/menus.c:208
-msgid "Goto specified message number"
-msgstr "指定した番号のメッセージにジャンプします"
-
-#: ../src/menus.c:214
-msgid "Next fuz_zy"
-msgstr "次の fuzzy(_Z)"
-
-#: ../src/menus.c:215
-msgid "Go to next fuzzy message"
-msgstr "次の fuzzy なメッセージにジャンプします"
-
-#: ../src/menus.c:221
-msgid "Next _untranslated"
-msgstr "次の未訳へ(_U)"
-
-#: ../src/menus.c:222 ../src/menus.c:312
-msgid "Go to next untranslated message"
-msgstr "翻訳していない次のメッセージにジャンプします"
-
-#: ../src/menus.c:232
-msgid "_Bookmarks"
-msgstr "ブックマーク(_B)"
-
-#: ../src/menus.c:233
-msgid "_Colorschemes"
-msgstr "カラースキーム(_C)"
-
-#: ../src/menus.c:247
-msgid "gtranslator _website"
-msgstr "gtranslator のウェブサイト(_W)"
-
-#: ../src/menus.c:248
-msgid "gtranslator's homepage on the web"
-msgstr "gtranslator のホームページを開きます"
-
-#: ../src/menus.c:259
-msgid "Open"
-msgstr "開く"
-
-#: ../src/menus.c:260
-msgid "Open a po file"
-msgstr ".po ファイルを開きます"
-
-#: ../src/menus.c:263
-msgid "Save"
-msgstr "保存"
-
-#: ../src/menus.c:264
-msgid "Save File"
-msgstr "ファイルを保存します"
-
-#: ../src/menus.c:267
-msgid "Save as"
-msgstr "別名で保存"
-
-#: ../src/menus.c:268
-msgid "Save file with a different name"
-msgstr "名前を付けてファイルを保存します"
-
-#: ../src/menus.c:272
-msgid "Compile"
-msgstr "コンパイル"
-
-#: ../src/menus.c:276
-msgid "Update"
-msgstr "更新"
-
-#: ../src/menus.c:280
-msgid "Header"
-msgstr "ヘッダ"
-
-#: ../src/menus.c:281
-msgid "Edit the header"
-msgstr "ヘッダを編集します"
-
-#: ../src/menus.c:285
-msgid "Undo"
-msgstr "元に戻す"
-
-#: ../src/menus.c:286
-msgid "Undo the last performed action"
-msgstr "最後に変更した操作を戻します"
-
-#: ../src/menus.c:293
-msgid "First"
-msgstr "先頭へ"
-
-#: ../src/menus.c:297
-msgid "Back"
-msgstr "戻る"
-
-#: ../src/menus.c:302
-msgid "Next"
-msgstr "次へ"
-
-#: ../src/menus.c:306
-msgid "Last"
-msgstr "最後へ"
-
-#: ../src/menus.c:311
-msgid "Missing"
-msgstr "未訳"
-
-#: ../src/menus.c:319
-msgid "Go to the next fuzzy translation"
-msgstr "次の fuzzy なメッセージにジャンプします"
-
-#: ../src/menus.c:324
-msgid "Go to"
-msgstr "ジャンプ"
-
-#: ../src/menus.c:325
-msgid "Go to specified message number"
-msgstr "指定した番号のメッセージにジャンプします"
-
-#: ../src/menus.c:328
-msgid "Find"
-msgstr "検索"
-
-#: ../src/menus.c:329
-msgid "Find string in po file"
-msgstr ".po ファイルの中から文字列を検索します "
-
-#: ../src/menus.c:333
-msgid "Replace string in po file"
-msgstr ".po ファイルの中の文字列を置換します"
-
-#: ../src/message.c:94
-msgid "Couldn't get the message!"
-msgstr "メッセージが取得できませんでした！"
-
-#: ../src/message.c:116
-msgid "There are no fuzzy messages left."
-msgstr "fuzzy なメッセージは残っていません。"
-
-#: ../src/message.c:140
-msgid "All messages seem to be translated."
-msgstr "全てのメッセージが翻訳されたようです。"
-
-#: ../src/message.c:272
+msgid "Error setting the default window icon: %s"
+msgstr "デフォルトのウィンドウ・アイコンの設定でエラー: %s"
+
+#: ../src/message-table.c:284
+msgid "Status"
+msgstr "状態"
+
+#: ../src/message-table.c:297
+msgid "ID"
+msgstr "ID"
+
+#: ../src/message-table.c:313
+msgid "Original Text"
+msgstr "原文のメッセージ"
+
+#: ../src/message-table.c:329
+msgid "Translated Text"
+msgstr "翻訳済みのメッセージ"
+
+#: ../src/notebook.c:94
+#, c-format
+msgid "<b>Path:</b> %s"
+msgstr "<b>パス名:</b> %s"
+
+#: ../src/notebook.c:153
+msgid "Close document"
+msgstr "このファイルを閉じます"
+
+#: ../src/po.c:365
+#, c-format
+msgid "Failed opening file '%s': %s"
+msgstr "'%s' というファイルを開けませんでした: %s"
+
+#: ../src/po.c:391
+#, c-format
+msgid "The file is empty"
+msgstr "ファイルは空です"
+
+#: ../src/po.c:405
+#, c-format
+msgid "Gettext returned a null message domain list."
+msgstr "Gettext が null ドメイン・リストを返しました"
+
+#: ../src/po.c:552
+#, c-format
+msgid "No messages obtained from parser."
+msgstr "パーサからメッセージを取得できませんでした"
+
+#: ../src/po.c:793
+#, c-format
+msgid ""
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
+msgstr ""
+"*.pot という拡張子でファイルを保存します。\n"
+".pot ファイルはプログラムのコンパイル時に生成されます。\n"
+"翻訳するファイルには '%s.po' という名前を付けて下さい。"
+
+#: ../src/po.c:828
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr ".po ファイルの保存中にエラー: %s"
+
+#: ../src/plugin-system/plugin-manager.c:54
+msgid "Plugin"
+msgstr "プラグイン"
+
+#: ../src/plugin-system/plugin-manager.c:55
+msgid "Enabled"
+msgstr "有効"
+
+#: ../src/plugin-system/plugin-manager.c:503
+msgid "_About"
+msgstr "情報(_A)"
+
+#: ../src/plugin-system/plugin-manager.c:511
+msgid "C_onfigure"
+msgstr "設定(_O)"
+
+#: ../src/plugin-system/plugin-manager.c:520
+msgid "A_ctivate"
+msgstr "有効にする(_C)"
+
+#: ../src/plugin-system/plugin-manager.c:531
+msgid "Ac_tivate All"
+msgstr "全て有効にする(_T)"
+
+#: ../src/plugin-system/plugin-manager.c:536
+msgid "_Deactivate All"
+msgstr "全て無効にする(_D)"
+
+#: ../src/plugin-system/plugin-manager.c:795
+msgid "Active plugins"
+msgstr "利用可能なプラグインの一覧"
+
+#: ../src/plugin-system/plugin-manager.c:824
+msgid "_About Plugin"
+msgstr "プラグインについて(_A)"
+
+#: ../src/plugin-system/plugin-manager.c:828
+msgid "C_onfigure Plugin"
+msgstr "プラグインの設定(_O)"
+
+#: ../src/statusbar.c:114 ../src/statusbar.c:240
+msgid "INS"
+msgstr "[挿入]"
+
+#: ../src/statusbar.c:114 ../src/statusbar.c:239
+msgid "OVR"
+msgstr "[上書き]"
+
+#: ../src/tab.c:224
+msgid "There is an error in the message:"
+msgstr "メッセージの中にエラーが含まれています:"
+
+#: ../src/tab.c:397
+msgid "Open comment dialog"
+msgstr "コメント編集ダイアログを開きます"
+
+#: ../src/tab.c:570
+#, c-format
+msgid "Plural %d"
+msgstr "複数形 %d"
+
+#: ../src/tab.c:615
+msgid "Message Table"
+msgstr "メッセージのテーブル"
+
+#: ../src/tab.c:650
+msgid "Context"
+msgstr "コンテキスト"
+
+#: ../src/tab.c:688
+msgid "<b>Original Text:</b>"
+msgstr "<b>原文のメッセージ:</b>"
+
+#: ../src/tab.c:749
+msgid "<b>Translate_d Text:</b>"
+msgstr "<b>翻訳済のメッセージ:</b>"
+
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:919
+#, c-format
+msgid "Show “_%s”"
+msgstr "“_%s”を表示する"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+msgid "_Move on Toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+msgid "Move the selected item on the toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+msgid "_Remove from Toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+msgid "Remove the selected item from the toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+msgid "_Delete Toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1387
+msgid "Remove the selected toolbar"
+msgstr ""
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
+msgid "Separator"
+msgstr "区切り"
+
+#: ../src/translation-memory/berkeley/db-base.c:165
+msgid "Running recovery..."
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:173
+#, c-format
+msgid "There was an error recovering the database: %s"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-base.c:181
+#, c-format
+msgid "There was an error in database: %s"
+msgstr ""
+
+#: ../src/translation-memory/berkeley/db-orig.c:52
+msgid "original.db"
+msgstr "original.db"
+
+#: ../src/translation-memory/berkeley/db-trans.c:52
+msgid "translations.db"
+msgstr "translations.db"
+
+#: ../src/translation-memory/berkeley/db-words.c:53
+msgid "words.db"
+msgstr "words.db"
+
+#: ../src/translation-memory/translation-memory-ui.c:209
+#, c-format
+msgid "Insert Option nº %d"
+msgstr ""
+
+#: ../src/translation-memory/translation-memory-ui.c:286
+msgid "Shortcut"
+msgstr "ショートカット"
+
+#: ../src/translation-memory/translation-memory-ui.c:297
+msgid "Level"
+msgstr "レベル"
+
+#: ../src/translation-memory/translation-memory-ui.c:308
+msgid "String"
+msgstr "文字列"
+
+#: ../src/utils.c:344
+#, c-format
+msgid "Unable to find file %s."
+msgstr "%s というファイルが見つかりません"
+
+#: ../src/utils.c:348 ../src/utils.c:384
+msgid "Please check your installation."
+msgstr "インストールを確認して下さい"
+
+#: ../src/utils.c:380
+#, c-format
+msgid "Unable to find the required widgets inside file %s."
+msgstr "%s というファイル中には必要なウィジェットが存在しません"
+
+#: ../src/utils.c:788
+msgid ""
+"Unable to display help. Please make sure Gtranslator documentation package "
+"is installed."
+msgstr ""
+"ヘルプを表示できません (Gtranslator のドキュメントが入ったパッケージがインス"
+"トールされているか確認して下さい)"
+
+#: ../src/view.c:81
 #, c-format
 msgid "gtkspell error: %s\n"
-msgstr "gtkspell エラー: %s\n"
+msgstr "gtkspell のエラー: %s\n"
 
-#: ../src/message.c:273
+#: ../src/view.c:82
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1092,459 +1836,306 @@ msgstr ""
 "GtkSpell を初期化できませんでした。\n"
 " %s"
 
-#: ../src/messages-table.c:210
-msgid "Original"
-msgstr "オリジナル"
+#: ../src/window.c:109
+msgid "_File"
+msgstr "ファイル(_F)"
 
-#: ../src/page.c:199
+#: ../src/window.c:110
+msgid "_Edit"
+msgstr "編集(_E)"
+
+#: ../src/window.c:111
+msgid "_View"
+msgstr "表示(_V)"
+
+#. { "Bookmarks", NULL, N_("_Bookmarks") },
+#. { "Actions", NULL, N_("_Actions") },
+#: ../src/window.c:114
+msgid "_Search"
+msgstr "検索(_S)"
+
+#: ../src/window.c:115
+msgid "_Go"
+msgstr "ジャンプ(_G)"
+
+#: ../src/window.c:116
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#: ../src/window.c:120
+msgid "Open a PO file"
+msgstr ".po ファイルを開きます"
+
+#: ../src/window.c:122
+msgid "_Recent Files"
+msgstr "最近開いたファイル(_R)"
+
+#: ../src/window.c:125
+msgid "Quit the program"
+msgstr "Gtranslator を終了します"
+
+#. Edit menu
+#: ../src/window.c:129
+msgid "T_oolbar"
+msgstr "ツールバー(_O)"
+
+#: ../src/window.c:132
+msgid "Edit gtranslator preferences"
+msgstr "Gtranslator の設定を変更します"
+
+#: ../src/window.c:134 ../src/window.c:181
+msgid "_Header..."
+msgstr "ヘッダ(_H)..."
+
+#. Help menu
+#: ../src/window.c:138
+msgid "_Contents"
+msgstr "目次(_C)"
+
+#: ../src/window.c:150
+msgid "Save the current file"
+msgstr "このファイルを保存します"
+
+#: ../src/window.c:153
+msgid "Save the current file with another name"
+msgstr "このファイルに別の名前を付けて保存します"
+
+#: ../src/window.c:159
+msgid "Close the current file"
+msgstr "このファイルを閉じます"
+
+#: ../src/window.c:164
+msgid "Undo last operation"
+msgstr "最後に実施した操作を行う前に戻します"
+
+#: ../src/window.c:167
+msgid "Redo last undone operation"
+msgstr "最後に実施した操作をやり直します"
+
+#: ../src/window.c:170
+msgid "Cut the selected text"
+msgstr "選択した文字列を切り取ります"
+
+#: ../src/window.c:173
+msgid "Copy the selected text"
+msgstr "選択した文字列をコピーします"
+
+#: ../src/window.c:176
+msgid "Paste the contents of the clipboard"
+msgstr "クリップボードの内容を貼り付けます"
+
+#: ../src/window.c:179
+msgid "Clear the selected translation"
+msgstr "選択したメッセージの訳文をクリアします"
+
+#: ../src/window.c:183
+msgid "C_omment..."
+msgstr "コメント(_O)..."
+
+#: ../src/window.c:184
+msgid "Edit message comment"
+msgstr "このメッセージのコメントを編集します"
+
+#: ../src/window.c:186
+msgid "Copy _Message to Translation"
+msgstr "原文のコピー(_M)"
+
+#: ../src/window.c:187
+msgid "Copy original message contents to the translation field"
+msgstr "原文のエントリにある文字列を翻訳済のエントリにそのままコピーします"
+
+#: ../src/window.c:189
+msgid "Toggle _Fuzzy Status"
+msgstr "Fuzzy の ON/OFF(_F)"
+
+#: ../src/window.c:190
+msgid "Toggle fuzzy status of a message"
+msgstr "このメッセージの Fuzzy 状態を ON/OFF します"
+
+#: ../src/window.c:192 ../src/window.c:199
+msgid "_Translation Memory"
+msgstr "翻訳メモリ(_T)"
+
+#. View menu
+#: ../src/window.c:196
+msgid "_Context"
+msgstr "コンテキスト(_C)"
+
+#: ../src/window.c:197
+msgid "Show the Context panel"
+msgstr "このメッセージのコンテキストを表示します"
+
+#: ../src/window.c:200
+msgid "Show the Translation Memory panel"
+msgstr "翻訳メモリの一覧を表示します"
+
+#. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
+#. N_("Show or hide the side pane in the current window"),
+#. NULL },
+#. Bookmarks menu
+#. { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
+#. N_("Add a bookmark to the current message"), NULL},
+#. { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit Bookmarks"), "<control>B",
+#. N_("Edit stored bookmarks"), NULL},
+#. Action menu
+#. { "ActionsCompile", GTK_STOCK_CONVERT, N_("_Compile"), NULL,
+#. N_("Compile the current file to a MO file"), NULL },
+#. { "ActionsRefresh", GTK_STOCK_REFRESH, NULL, NULL,
+#. N_("  "), NULL },
+#. //G_CALLBACK(gtranslator_bookmark_adding_dialog) },
+#. { "ActionsAutotranslate", NULL, N_("Aut_otranslate..."), NULL,
+#. N_("Autotranslate the current file using a translation memory"), NULL},
+#. //G_CALLBACK(gtranslator_auto_translation_dialog) },
+#. { "ActionsRemoveTranslations", GTK_STOCK_REMOVE, N_("Remo_ve All Translations..."), NULL,
+#. N_("Remove all existing translations"), NULL},
+#. //G_CALLBACK(gtranslator_remove_all_translations_dialog) },
+#. Go menu
+#: ../src/window.c:226
+msgid "Prev F_ile"
+msgstr "前のファイル(_I)"
+
+#: ../src/window.c:227 ../src/window.c:230
+msgid "Go to the next file"
+msgstr "次のファイルにジャンプします"
+
+#: ../src/window.c:229
+msgid "Next Fi_le"
+msgstr "次のファイル(_L)"
+
+#: ../src/window.c:233
+msgid "Go to the first message"
+msgstr "先頭のメッセージにジャンプします"
+
+#: ../src/window.c:236
+msgid "Move back one message"
+msgstr "一つ前のメッセージにジャンプします"
+
+#: ../src/window.c:239
+msgid "Move forward one message"
+msgstr "次のメッセージにジャンプします"
+
+#: ../src/window.c:242
+msgid "Go to the last message"
+msgstr "最後のメッセージにジャンプします"
+
+#: ../src/window.c:244
+msgid "Next Fuz_zy"
+msgstr "次の fuzzy(_Z)"
+
+#: ../src/window.c:245
+msgid "Go to the next fuzzy message"
+msgstr "次の Fuzzy なメッセージにジャンプします"
+
+#: ../src/window.c:247
+msgid "Previous Fuzz_y"
+msgstr "前の Fuzzy(_Y)"
+
+#: ../src/window.c:248
+msgid "Go to the previous fuzzy message"
+msgstr "前の Fuzzy なメッセージにジャンプします"
+
+#: ../src/window.c:250
+msgid "Next _Untranslated"
+msgstr "次の未訳(_U)"
+
+#: ../src/window.c:251
+msgid "Go to the next untranslated message"
+msgstr "翻訳していない次のメッセージにジャンプします"
+
+#: ../src/window.c:253
+msgid "Previ_ous Untranslated"
+msgstr "前の未訳(_O)"
+
+#: ../src/window.c:254
+msgid "Go to the previous untranslated message"
+msgstr "翻訳していない前のメッセージにジャンプします"
+
+#: ../src/window.c:256
+msgid "Next Fu_zzy or Untranslated"
+msgstr "次の Fuzzy または未訳(_Z)"
+
+#: ../src/window.c:257
+msgid "Go to the next fuzzy or untranslated message"
+msgstr "次の Fuzzy か未訳のメッセージにジャンプします"
+
+#: ../src/window.c:259
+msgid "Pre_vious Fuzzy or Untranslated"
+msgstr "前の Fuzzy または未訳(_V)"
+
+#: ../src/window.c:260
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "前の Fuzzy か未訳のメッセージにジャンプします"
+
+#: ../src/window.c:263
+msgid "Jumps to a specific message"
+msgstr "指定した番号のメッセージにジャンプします"
+
+#: ../src/window.c:268
+msgid "Search for text"
+msgstr "文字列を検索します"
+
+#: ../src/window.c:277
+msgid "Search for and replace text"
+msgstr "文字列を検索して置換します"
+
+#: ../src/window.c:752
+msgid "Untranslated"
+msgstr "未訳"
+
+#: ../src/window.c:754
+msgid "Translated"
+msgstr "翻訳済み"
+
+#: ../src/window.c:756
+msgid "Fuzzy"
+msgstr "Fuzzy"
+
+#: ../src/window.c:761
 #, c-format
-msgid "Error autosaving file: %s"
-msgstr "ファイルを自動保存する際にエラー: %s"
+msgid "Status: %s"
+msgstr "状態: %s"
 
-#: ../src/parse.c:86
-msgid "Parser output"
-msgstr "パーサーの出力"
-
-#: ../src/parse.c:254
+#: ../src/window.c:762
 #, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "ファイル '%s' のオープンに失敗しました: %s"
+msgid "Current: %d"
+msgstr "現在: %d"
 
-#: ../src/parse.c:275
-msgid "Gettext returned a null message domain list."
-msgstr "Gettext が null ドメイン・リストを返しました。"
+#: ../src/window.c:763
+#, c-format
+msgid "Total: %d"
+msgstr "合計: %d"
 
-#: ../src/parse.c:317
-msgid "No messages obtained from parser."
-msgstr "パーサからメッセージが取得されていません。"
+#: ../src/window.c:764
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "Fuzzy: %d"
 
-#: ../src/parse.c:379 ../src/parse.c:383
-msgid "N/A"
-msgstr "N/A"
+#: ../src/window.c:765
+#, c-format
+msgid "Untranslated: %d"
+msgstr "未訳: %d"
 
 #.
-#. * Set window title
+#. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/parse.c:417
+#: ../src/window.c:869 ../src/window.c:873
 #, c-format
-msgid "gtranslator -- %s"
-msgstr "gtranslator -- %s"
+msgid "gtranslator - %s"
+msgstr "Gtranslator - %s"
 
-#: ../src/parse.c:539
+#: ../src/window.c:871
 #, c-format
-msgid ""
-"You are saving a file with a .pot extension.\n"
-"Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
-msgstr ""
-"拡張子 *.pot でファイルを保存します。\n"
-".pot ファイルはプログラムのコンパイル時に生成されます。\n"
-"翻訳するファイルは '%s.po' の名前を付ける必要があります。"
-
-#: ../src/parse.c:579
-#, c-format
-msgid ""
-"File %s\n"
-"contains %d fuzzy message"
-msgid_plural ""
-"File %s\n"
-"contains %d fuzzy messages"
-msgstr[0] ""
-"ファイル %s には\n"
-"%d個の fuzzy なメッセージがあります"
-
-#: ../src/preferences.c:180
-msgid "Couldn't generate the current date!"
-msgstr "今日の日付を生成できませんでした！"
-
-#: ../src/prefs.c:464 ../src/prefs.c:567
-msgid " Categories: "
-msgstr " カテゴリ: "
-
-#: ../src/prefs.c:483
-msgid ""
-"Note: It was not possible to determine GNU header for plural forms. Your GNU "
-"gettext tools may be too old or they do not contain a suggested value for "
-"your language."
-msgstr ""
-"注意: ヘッダの中にある複数形の定義を解析できませんでした。お使いの GNU "
-"gettext ツールが非常に古いか、あるいは日本語に対する複数形の定義が含まれてい"
-"ない可能性があります。"
-
-#: ../src/prefs.c:492
-msgid ""
-"Note: Your settings do not contain a plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
-"注意: お使いの設定には複数形の文字列が含まれていませんでした。これらのデータ"
-"は GNU gettext ツールから取得します。"
-
-#: ../src/prefs.c:497
-msgid ""
-"Note: Your settings contain an invalid plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
-"注意: お使いの設定には間違った複数形の文字列が含まれています (これらのデータ"
-"は GNU gettext ツールから取得します)。"
-
-#: ../src/prefs.c:546
-msgid "gtranslator -- options"
-msgstr "gtranslator -- 設定"
-
-#: ../src/prefs.c:598
-msgid "Files"
-msgstr "ファイル"
-
-#. General item
-#: ../src/prefs.c:605
-msgid "General"
-msgstr "全般"
-
-#: ../src/prefs.c:613
-msgid "Warn if po file contains fuzzy translations"
-msgstr ".po ファイルに \"fuzzy\" のメッセージが含まれていたら警告する"
-
-#: ../src/prefs.c:617
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "コンパイルしたファイル (例: \"project.gmo\") を削除する"
-
-#. Autosave item
-#: ../src/prefs.c:623
-msgid "Autosave"
-msgstr "自動保存"
-
-#: ../src/prefs.c:631
-msgid "Automatically save at regular intervals"
-msgstr ".po ファイルを一定周期で自動的に保存する"
-
-#: ../src/prefs.c:639
-msgid "Autosave interval:"
-msgstr "自動保存する周期:"
-
-#: ../src/prefs.c:640
-msgid "Append a suffix to automatically saved files"
-msgstr "自動的に保存するファイルに拡張子を付与する"
-
-#: ../src/prefs.c:647
-msgid "Suffix:"
-msgstr "拡張子:"
-
-#. Recent item
-#: ../src/prefs.c:649
-msgid "Recent files"
-msgstr "最近開いたファイル"
-
-#: ../src/prefs.c:664
-msgid "Maximum number of entries in the recent files list:"
-msgstr "最近開いたファイルの一覧に表示する最大数:"
-
-#: ../src/prefs.c:665
-msgid "Check recent files before showing in recent files list"
-msgstr "最近開いたファイルの一覧を表示する前にそれらのファイルをチェックする"
-
-#: ../src/prefs.c:676
-msgid "Editor"
-msgstr "エディタ"
-
-#. Text item
-#: ../src/prefs.c:681
-msgid "Text display"
-msgstr "文字列の表示"
-
-#: ../src/prefs.c:695
-msgid "Highlight syntax of the translation message"
-msgstr "日本語メッセージの書式を強調表示する"
-
-#: ../src/prefs.c:700
-msgid "Use special character to indicate white space"
-msgstr "空白に特別な文字を使用する"
-
-#: ../src/prefs.c:705
-msgid "Hotkey indicating character:"
-msgstr "ホットキーを示す頭文字:"
-
-#: ../src/prefs.c:714
-msgid "Apply own fonts"
-msgstr "使用するフォントをカスタマイズする"
-
-#: ../src/prefs.c:718
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- フォント選択 (msgid のフォント)"
-
-#: ../src/prefs.c:722
-msgid "Original text font:"
-msgstr "原文メッセージのフォント:"
-
-#: ../src/prefs.c:723
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- フォント選択 (msgstr フォント)"
-
-#: ../src/prefs.c:727
-msgid "Translation font:"
-msgstr "日本語メッセージのフォント:"
-
-#. Contents item
-#: ../src/prefs.c:730
-msgid "Contents"
-msgstr "内容"
-
-#: ../src/prefs.c:743
-msgid "Remove fuzzy status if message is changed"
-msgstr "メッセージを変更したら fuzzy を解除する"
-
-#: ../src/prefs.c:747
-msgid "Keep obsolete messages in the po files"
-msgstr ".po ファイルにある未使用メッセージを残しておく"
-
-#: ../src/prefs.c:752
-msgid "Instant spell checking"
-msgstr "スペルの簡易チェックをする"
-
-#: ../src/prefs.c:763 ../src/prefs.c:778
-msgid "PO header"
-msgstr "PO ヘッダ"
-
-#: ../src/prefs.c:772
-msgid "Personal Information"
-msgstr "翻訳者個人の情報"
-
-#: ../src/prefs.c:789
-msgid "Use self contact info from Evolution Data Server"
-msgstr "Evolution データ・サーバから連絡先を取得する"
-
-#: ../src/prefs.c:799
-msgid "<i>Unable to get email from Evolution Data Server.</i>"
-msgstr "<i>Evolution データ・サーバから E-メール・アドレスを取得できません</i>"
-
-#: ../src/prefs.c:804
-msgid "My name:"
-msgstr "氏名:"
-
-#: ../src/prefs.c:809
-msgid "My Email:"
-msgstr "E-メール:"
-
-#: ../src/prefs.c:813
-msgid "<b>Author's info</b>"
-msgstr "<b>翻訳者の情報</b>"
-
-#: ../src/prefs.c:817
-msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
-msgstr "<i>Evolution データ・サーバから翻訳者の情報を取得できません</i>"
-
-#: ../src/prefs.c:835
-msgid "Author's name:"
-msgstr "翻訳者の氏名:"
-
-#: ../src/prefs.c:841
-msgid "Author's email:"
-msgstr "翻訳者の E-メール・アドレス:"
-
-#. Language item
-#: ../src/prefs.c:852
-msgid "Language settings"
-msgstr "言語設定"
-
-#: ../src/prefs.c:879
-msgid "Language code:"
-msgstr "言語コード:"
-
-#: ../src/prefs.c:905
-msgid "Plural forms string:"
-msgstr "複数系の文字列:"
-
-#: ../src/prefs.c:920
-msgid "Functionality"
-msgstr "機能"
-
-#: ../src/prefs.c:935
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr "gtranslator で .po ファイルを更新する機能を有効にする"
-
-#: ../src/prefs.c:939
-msgid "The Possibility to remove all translations from a po file"
-msgstr ".po ファイルから全ての翻訳を削除する機能を有効にする"
-
-#: ../src/prefs.c:943
-msgid "Show instant comment view in main pane"
-msgstr "メイン・ペインの中にコメントの簡易ビューを表示する"
-
-#: ../src/prefs.c:947
-msgid "Save geometry on exit and restore it on startup"
-msgstr "終了時に gtranslator の位置を保存して起動時に復元する"
-
-#. Messages table item
-#: ../src/prefs.c:953
-msgid "Messages table"
-msgstr "メッセージ・テーブル"
-
-#: ../src/prefs.c:961
-msgid "Show the messages table (requires restart)"
-msgstr "メッセージ・テーブルを表示する (要 gtranslator の再起動)"
-
-#: ../src/prefs.c:965
-msgid "Collapse all entries by default"
-msgstr "デフォルトで翻訳済みのエントリを畳む"
-
-#: ../src/prefs.c:976
-msgid "Autotranslation"
-msgstr "自動翻訳"
-
-#: ../src/prefs.c:988
-msgid "Query the personal learn buffer while autotranslating"
-msgstr "未訳のメッセージの自動翻訳中に学習バッファにも問い合わせる"
-
-#: ../src/prefs.c:992
-msgid "Automatically learn a newly translated message"
-msgstr "新規に翻訳したメッセージを学習バッファに登録する"
-
-#. Fuzzy item
-#: ../src/prefs.c:998
-msgid "Fuzzy matching"
-msgstr "fuzzy メッセージのマッチング"
-
-#: ../src/prefs.c:1012
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr "学習バッファの問い合わせに対して \"fuzzy\" を検出する方法を使用する"
-
-#: ../src/prefs.c:1019
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "fuzzy かどうか問い合わせるための最小要求相似率:"
-
-#: ../src/prefs.c:1076
-msgid "Please enter your name!"
-msgstr "名前を入力してください！"
-
-#: ../src/prefs.c:1105
-msgid "Please enter your EMail address!"
-msgstr "E-メール・アドレスを入力してください！"
-
-#: ../src/prefs.c:1125
-msgid "Please enter a valid EMail address!"
-msgstr "正しい E-メール・アドレスを入力して下さい！"
-
-#: ../src/replace.c:162
-msgid "No replacements made!"
-msgstr "置換するものがありません！"
-
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
-#.
-#: ../src/runtime-config.c:72
-msgid "Y"
-msgstr "Y"
-
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
-msgid "^"
-msgstr "^"
-
-#: ../src/save.c:116
-#, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "コンパイルした gettext ファイル '%s' を保存できませんでした！"
-
-#: ../src/save.c:159
-#, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "圧縮済みの getttext ファイル '%s' を保存できませんでした！"
-
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: ../src/save.c:169
-#, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "%s で圧縮された gettext ファイル '%s' を保存できませんでした！"
-
-#: ../src/save.c:227
-#, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "zip で圧縮された .po ファイル '%s' 保存できませんでした！"
-
-#: ../src/session.c:85
-msgid "Session restored successfully."
-msgstr "セッションの復元が完了しました"
-
-#: ../src/sighandling.c:65
-#, c-format
-msgid "Saving file failed: %s"
-msgstr "ファイルの保存に失敗しました: %s"
-
-#: ../src/stylistics.c:265
-msgid "No font set! Using default font"
-msgstr "フォントがセットされていません！ デフォルトを使用します"
-
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: ../src/stylistics.c:271
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr "-alias-fixed-medium-r-normal-*-*-120-*-*-c-*-jisx0208.1983-0"
-
-#: ../src/utils.c:274 ../src/utils.c:291
-#, c-format
-msgid "Can't create directory `%s'!"
-msgstr "フォルダ '%s' を作成できません！"
-
-#: ../src/utils.c:874
-msgid "Sorry, msginit isn't available on your system!"
-msgstr "すみませんが、このシステムでは msginit コマンドを利用できません！"
-
-#: ../src/utils_gui.c:141
-#, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "位置情報 \"%s\" が解析できませんでした！"
-
-#: ../src/utils_gui.c:355
-#, c-format
-msgid "The necessary decompression program `%s' is not installed!"
-msgstr "必要とする解凍プログラム '%s' がインストールされていません！"
-
-#: ../src/utils_gui.c:360
-#, c-format
-msgid "The necessary compression program `%s' is not installed!"
-msgstr "必要とする圧縮プログラム '%s' がインストールされていません！"
-
-#: ../src/vfs-handle.c:121
-#, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr "作業ディレクトリ '%s' を作成できませんでした！"
-
-#: ../src/vfs-handle.c:149
-#, c-format
-msgid "File `%s' couldn't be found!"
-msgstr "ファイル '%s' が見つかりませんでした！"
-
-#: ../src/vfs-handle.c:154
-#, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr "誤った URI '%s' が入力されました！"
-
-#: ../src/vfs-handle.c:159
-#, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr "ホスト '%s' が見つかりませんでした！"
-
-#: ../src/vfs-handle.c:164
-#, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr "ホスト名 '%s' は間違っています！"
-
-#: ../src/vfs-handle.c:169
-#, c-format
-msgid "Host `%s' has no address!"
-msgstr "ホスト '%s' のアドレスがありません！"
-
-#: ../src/vfs-handle.c:174
-msgid "Transfer interrupted!"
-msgstr "転送が中断されました！"
+msgid "gtranslator - *%s"
+msgstr "Gtranslator - *%s"
+
+#: ../src/window.c:878
+msgid "gtranslator"
+msgstr "Gtranslator"
+
+#: ../src/window.c:1234
+msgid "Toolbar Editor"
+msgstr "ツールバー・エディタ"
+
+#: ../src/window.c:1552
+msgid "Documents"
+msgstr "ドキュメント"
