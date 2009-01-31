@@ -84,7 +84,7 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog *dlg)
 				GTK_RESPONSE_CANCEL,
 				NULL);
 	
-	gtk_window_set_title (GTK_WINDOW (dlg), _("Jump To"));
+	gtk_window_set_title (GTK_WINDOW (dlg), _("Go to Message"));
 	gtk_window_set_default_size(GTK_WINDOW(dlg), 300, 100);
 	gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
