@@ -121,24 +121,6 @@ AC_ARG_ENABLE(gtk_enable_broken, [  --enable-gtk-broken     Use broken GTK funct
 	AC_DEFINE(GTK_ENABLE_BROKEN, [yes], [Define this to use broken GTK functions])
 ])
 
-dnl -------------------------------------------------------------------
-dnl Check for Scrollkeeper - it must be present now...
-dnl -------------------------------------------------------------------
-AC_CHECK_PROG(sc_present, scrollkeeper-config, yes, no)
-if test "z$sc_present" = "zyes" ; then
-	AC_MSG_CHECKING([for scrollkeeper])
-	_VERSION=`scrollkeeper-config --version|sed -e 's/\.//g' | cut -d ' ' -f1`
-	if test $_VERSION -ge 0 -o $_VERSION -ge 02; then
-		AC_MSG_RESULT(yes)
-		SC_STATEDIR=`scrollkeeper-config --pkglocalstatedir`
-		SC_OMFDIR=`scrollkeeper-config --omfdir`
-	else
-		AC_MSG_ERROR(no bad bad...)
-	fi
-fi
-AC_SUBST(SC_OMFDIR)
-AC_SUBST(SC_STATEDIR)
-
 dnl ------
 dnl GCONF
 dnl ------
