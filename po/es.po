@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2009-01-08 18:54+0000\n"
-"PO-Revision-Date: 2009-01-12 23:17+0100\n"
+"POT-Creation-Date: 2009-01-31 12:40+0000\n"
+"PO-Revision-Date: 2009-02-01 12:33+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -947,7 +947,7 @@ msgstr "Desarrolladores actuales"
 msgid "Previous Developers"
 msgstr "Desarrolladores anteriores"
 
-#: ../src/actions-help.c:79
+#: ../src/actions-help.c:80
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -959,7 +959,7 @@ msgstr ""
 "Software Foundation, en la versión 3 de la licencia, o (a su elección) "
 "cualquier versión posterior."
 
-#: ../src/actions-help.c:83
+#: ../src/actions-help.c:84
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -971,7 +971,7 @@ msgstr ""
 "IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Vea la Licencia Pública General GNU "
 "para más detalles."
 
-#: ../src/actions-help.c:87
+#: ../src/actions-help.c:88
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
@@ -979,7 +979,7 @@ msgstr ""
 "Debería haber recibido una copia de la Licencia Pública General GNU junto "
 "con este programa. De lo contrario, visite <http://www.gnu.org/licenses/>."
 
-#: ../src/actions-help.c:99
+#: ../src/actions-help.c:100
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -987,11 +987,11 @@ msgstr ""
 "Suite de edición de archivos de traducción para localizar aplicaciones y "
 "bibliotecas."
 
-#: ../src/actions-help.c:101
+#: ../src/actions-help.c:102
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr "Copyright © 1999-2008 Free Software Foundation, Inc."
 
-#: ../src/actions-help.c:105
+#: ../src/actions-help.c:106
 msgid "About Gtranslator"
 msgstr "Acerca de Gtranslator"
 
@@ -999,7 +999,7 @@ msgstr "Acerca de Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:110
+#: ../src/actions-help.c:111
 msgid "translator-credits"
 msgstr ""
 "Jorge González <jorgegonz@svn.gnome.org> 2007, 2009\n"
@@ -1009,7 +1009,7 @@ msgstr ""
 "Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2001\n"
 "Javier Gómez sierras <jgomsi@apolo.umh.es>, 2000"
 
-#: ../src/actions-help.c:114
+#: ../src/actions-help.c:115
 msgid "Gtranslator Web Site"
 msgstr "Página web de Gtranslator"
 
@@ -1274,8 +1274,9 @@ msgid "_Language:"
 msgstr "_Idioma:"
 
 #: ../src/dialogs/jump-dialog.c:87
-msgid "Jump To"
-msgstr "Saltar a"
+#| msgid "Go to the last message"
+msgid "Go to Message"
+msgstr "Ir la mensaje"
 
 #: ../src/dialogs/jump-dialog.glade.h:1
 msgid "<b>Enter message number:</b>"
@@ -1837,12 +1838,12 @@ msgstr ""
 "No se pudo mostrar la ayuda. Asegúrese de que el paquete de documentación de "
 "Gtranslator está instalado."
 
-#: ../src/view.c:82
+#: ../src/view.c:81
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "error de gtkspell: %s\n"
 
-#: ../src/view.c:83
+#: ../src/view.c:82
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -2017,73 +2018,96 @@ msgstr "Ir al siguiente archivo"
 msgid "Next Fi_le"
 msgstr "Siguie_nte archivo"
 
-#: ../src/window.c:233
-msgid "Go to the first message"
-msgstr "Ir al primer mensaje"
+#: ../src/window.c:232
+#| msgid "Previ_ous Untranslated"
+msgid "_Previous Message"
+msgstr "Mensaje _anterior"
 
-#: ../src/window.c:236
+#: ../src/window.c:233
 msgid "Move back one message"
 msgstr "Ir al mensaje anterior"
 
-#: ../src/window.c:239
+#: ../src/window.c:235
+#| msgid "_Next Tag"
+msgid "_Next Message"
+msgstr "_Siguiente mensaje"
+
+#: ../src/window.c:236
 msgid "Move forward one message"
 msgstr "Ir al siguiente mensaje"
 
+#: ../src/window.c:238
+#| msgid "Go to the last message"
+msgid "_Go to Message..."
+msgstr "_Ir al mensaje..."
+
+#: ../src/window.c:239
+msgid "Jumps to a specific message"
+msgstr "Salta a un mensaje específico"
+
+#: ../src/window.c:241
+msgid "_First Message"
+msgstr "_Primer mensaje"
+
 #: ../src/window.c:242
+msgid "Go to the first message"
+msgstr "Ir al primer mensaje"
+
+#: ../src/window.c:244
+msgid "_Last Message"
+msgstr "_Último mensaje"
+
+#: ../src/window.c:245
 msgid "Go to the last message"
 msgstr "Ir al último mensaje"
 
-#: ../src/window.c:244
+#: ../src/window.c:247
 msgid "Next Fuz_zy"
 msgstr "Siguiente di_fuso"
 
-#: ../src/window.c:245
+#: ../src/window.c:248
 msgid "Go to the next fuzzy message"
 msgstr "Ir al siguiente mensaje difuso"
 
-#: ../src/window.c:247
+#: ../src/window.c:250
 msgid "Previous Fuzz_y"
 msgstr "Anterior difu_so"
 
-#: ../src/window.c:248
+#: ../src/window.c:251
 msgid "Go to the previous fuzzy message"
 msgstr "Ir al anterior mensaje difuso"
 
-#: ../src/window.c:250
+#: ../src/window.c:253
 msgid "Next _Untranslated"
 msgstr "Siguiente _sin traducir"
 
-#: ../src/window.c:251
+#: ../src/window.c:254
 msgid "Go to the next untranslated message"
 msgstr "Ir al siguiente mensaje sin traducir"
 
-#: ../src/window.c:253
+#: ../src/window.c:256
 msgid "Previ_ous Untranslated"
 msgstr "Anterior sin _traducir"
 
-#: ../src/window.c:254
+#: ../src/window.c:257
 msgid "Go to the previous untranslated message"
 msgstr "Ir al anterior mensaje sin traducir"
 
-#: ../src/window.c:256
+#: ../src/window.c:259
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Siguiente dif_uso o sin traducir"
 
-#: ../src/window.c:257
+#: ../src/window.c:260
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Ir al siguiente mensaje difuso o sin traducir"
 
-#: ../src/window.c:259
+#: ../src/window.c:262
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Ant_erior difuso o sin traducir"
 
-#: ../src/window.c:260
+#: ../src/window.c:263
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Ir al mensaje difuso o sin traducir anterior"
-
-#: ../src/window.c:263
-msgid "Jumps to a specific message"
-msgstr "Salta a un mensaje específico"
 
 #: ../src/window.c:268
 msgid "Search for text"
@@ -2154,6 +2178,9 @@ msgstr "Editor de la barra de herramientas"
 #: ../src/window.c:1552
 msgid "Documents"
 msgstr "Documentos"
+
+#~ msgid "Jump To"
+#~ msgstr "Saltar a"
 
 #~ msgid "    "
 #~ msgstr "    "
