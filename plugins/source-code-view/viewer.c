@@ -44,6 +44,7 @@ struct _GtranslatorViewerPrivate
 {
 	GtkWidget *main_box;
 	GtkWidget *view;
+	GtkWidget *filename_label;
 };		    
 
 static void
@@ -95,6 +96,7 @@ gtranslator_viewer_init (GtranslatorViewer *dlg)
 		
 		"main_box", &dlg->priv->main_box,
 		"scrolledwindow", &sw,
+		"filename_label", &dlg->priv->filename_label,
 		NULL);
 	
 	if(!ret)
@@ -429,6 +431,7 @@ gtranslator_show_viewer (GtranslatorWindow *window,
 	if (dlg == NULL)
 	{
 		GtkSourceBuffer *buffer;
+		gchar *label;
 		
 		dlg = g_object_new (GTR_TYPE_VIEWER, NULL);
 
@@ -436,6 +439,11 @@ gtranslator_show_viewer (GtranslatorWindow *window,
 		
 		open_file (buffer, path);
 		jump_to_line (GTK_TEXT_VIEW (dlg->priv->view), line);
+
+		label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
+		gtk_label_set_markup (GTK_LABEL (dlg->priv->filename_label),
+				      label);
+		g_free (label);
 		
 		g_signal_connect (dlg,
 				  "destroy",
