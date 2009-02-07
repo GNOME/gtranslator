@@ -31,6 +31,7 @@
 #include <string.h>
 #include <gio/gio.h>
 #include <gconf/gconf-client.h>
+#include <ctype.h>
 
 /* Gconf keys */
 #define SOURCE_CODE_VIEW_BASE_KEY "/apps/gtranslator/plugins/source-view"
@@ -71,7 +72,8 @@ insert_link (GtkTextBuffer *buffer,
 	     GtkTextIter *iter,
 	     const gchar *path,
 	     gint *line,
-	     GtranslatorSourceCodeViewPlugin *plugin)
+	     GtranslatorSourceCodeViewPlugin *plugin,
+	     const gchar *msgid)
 {
 	GtkTextTag *tag;
 	gchar *text;
@@ -82,6 +84,7 @@ insert_link (GtkTextBuffer *buffer,
 					  NULL);
 	g_object_set_data (G_OBJECT (tag), "path", g_strdup (path));
 	g_object_set_data (G_OBJECT (tag), "line", line);
+	g_object_set_data (G_OBJECT (tag), "msgid", g_strdup (msgid));
 
 	text = g_strdup_printf ("%s:%d\n", path, GPOINTER_TO_INT (line));
 	gtk_text_buffer_insert_with_tags (buffer, iter, text, -1, tag, NULL);
@@ -168,6 +171,64 @@ show_source (GtranslatorSourceCodeViewPlugin *plugin,
 				      path, line);
 }
 
+static gboolean
+path_is_fake (const gchar *path)
+{
+	return g_str_has_suffix (path, ".h") && !g_file_test (path, G_FILE_TEST_EXISTS);
+}
+
+static gchar *
+real_path (const gchar *path)
+{
+	gchar *result = g_strdup (path);
+
+	if (path_is_fake (path))
+		result[strlen (result) - 2] = '\0';
+
+	return result;
+}
+
+static int
+get_line_for_text (const gchar *path, const gchar *msgid)
+{
+	gchar *content, *str_found, *i, *escaped;
+	int result;
+
+	content = NULL;
+	result  = 1;
+	escaped = g_markup_escape_text (msgid, -1);
+
+	if (!g_file_get_contents (path, &content, NULL, NULL))
+		goto out;
+
+	i = content;
+	while ( (str_found = g_strstr_len (i, -1, escaped)) )
+	{
+		gchar c;
+
+		i = str_found + strlen (escaped);
+		c = *i;
+		if ( !isalpha (c)               &&
+		     !isalpha (*(str_found -1)) &&
+		     !(c == ':')                &&
+		     !(c == '_')
+		   )
+			break;
+	}
+	if (!str_found)
+		goto out;
+
+	for (i = content; i < str_found; i++)
+		if (*i == '\n')
+			result++;
+
+	out:
+	g_free (content);
+	g_free (escaped);
+
+	return result;
+}
+
 static void
 follow_if_link (GtranslatorSourceCodeViewPlugin *plugin,
 		GtkWidget   *text_view, 
@@ -201,6 +262,19 @@ follow_if_link (GtranslatorSourceCodeViewPlugin *plugin,
 		gint line = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "line"));
 
 		fullpath = g_build_filename (dirname, path, NULL);
+
+		if (path_is_fake (fullpath))
+		{
+			gchar *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
+
+			path = g_strdup (fullpath);
+			g_free (fullpath);
+			fullpath = real_path (path);
+			g_free (path);
+
+			line = get_line_for_text (fullpath, msgid);
+		}
+
 		show_source (plugin, fullpath, line);
 		
 		g_free (fullpath);
@@ -395,7 +469,7 @@ showed_message_cb (GtranslatorTab *tab,
 	while (filename)
 	{
 		line = gtranslator_msg_get_file_line (msg, i);
-		insert_link (buffer, &iter, filename, line, plugin);
+		insert_link (buffer, &iter, filename, line, plugin, gtranslator_msg_get_msgid (msg));
 		i++;
 		filename = gtranslator_msg_get_filename (msg, i);
 	}
@@ -438,12 +512,13 @@ delete_text_and_tags (GtranslatorTab *tab,
 	for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
 	{
 		GtkTextTag *tag = tagp->data;
-		gchar *path = g_object_get_data (G_OBJECT (tag), "path");
-		
-		if (path) 
-		{
+		gchar *path  = g_object_get_data (G_OBJECT (tag), "path");
+		gchar *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
+
+		if (path)
 			g_free (path);
-		}
+		if (msgid)
+			g_free (msgid);
 	}
 	g_slist_free (tags);
 
