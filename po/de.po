@@ -6,15 +6,14 @@
 # Hendrik Brandt <heb@gnome-de.org>, 2004, 2005, 2008.
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2005.
 # Hendrik Richter <hendrikr@gnome.org>, 2008.
-#
-#
 # Christian Kirbach <Christian.Kirbach@googlemail.com>, 2008, 2009.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 10:42+0100\n"
-"PO-Revision-Date: 2009-01-14 11:46+0100\n"
+"POT-Creation-Date: 2009-02-13 00:38+0100\n"
+"PO-Revision-Date: 2009-02-13 00:40+0100\n"
 "Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -134,7 +133,7 @@ msgstr ""
 #: ../data/gtranslator.schemas.in.h:21
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr ""
-"Wenn wahr, so wird der Status »Unklar« von Übersetzungen entfernt sobald "
+"Wenn wahr, so wird der Status »unklar« von Übersetzungen entfernt, sobald "
 "diese geändert wurden."
 
 #: ../data/gtranslator.schemas.in.h:22
@@ -198,7 +197,7 @@ msgstr "PO-Ordner"
 
 #: ../data/gtranslator.schemas.in.h:33
 msgid "Remove fuzzy status when message is changed"
-msgstr "Status »Unklar« entfernen, wenn die Zeichenkette geändert wird"
+msgstr "Status »unklar« entfernen, wenn die Zeichenkette geändert wird"
 
 #: ../data/gtranslator.schemas.in.h:34
 msgid "Restrict search by filename"
@@ -525,12 +524,12 @@ msgstr "Einstellungen der Quellansicht"
 msgid "Use external editor"
 msgstr "Externen Texteditor verwenden"
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:112
+#: ../plugins/source-code-view/source-code-view-plugin.c:115
 #, c-format
 msgid "Please, install %s to be able to show the file"
 msgstr "Bitte installieren Sie »%s«, um die Datei anzuzeigen"
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:392
+#: ../plugins/source-code-view/source-code-view-plugin.c:466
 msgid "Paths:\n"
 msgstr "Pfade:\n"
 
@@ -542,13 +541,9 @@ msgstr "Den Originaltext im Quellcode zeigen."
 msgid "Source Code View"
 msgstr "Quelltextansicht"
 
-#: ../plugins/source-code-view/viewer.c:74
+#: ../plugins/source-code-view/viewer.c:75
 msgid "Source Viewer"
 msgstr "Quelltextanzeige"
-
-#: ../plugins/source-code-view/viewer.glade.h:1
-msgid "<b>Source code</b>"
-msgstr "<b>Quelltext</b>"
 
 #: ../plugins/subversion/checkout-dialog.c:76
 msgid "Subversion: Checkout complete."
@@ -945,7 +940,7 @@ msgstr "Derzeitige Entwickler"
 msgid "Previous Developers"
 msgstr "Vorhergehende Entwickler"
 
-#: ../src/actions-help.c:79
+#: ../src/actions-help.c:80
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -958,7 +953,7 @@ msgstr ""
 "entweder in Version 3 der Lizenz oder (nach Ihrem Ermessen) in jeder "
 "folgenden Version."
 
-#: ../src/actions-help.c:83
+#: ../src/actions-help.c:84
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -971,7 +966,7 @@ msgstr ""
 "für weitere Informationen bitten in der GNU General Public License (GNU GPL) "
 "nach."
 
-#: ../src/actions-help.c:87
+#: ../src/actions-help.c:88
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
@@ -980,7 +975,7 @@ msgstr ""
 "License erhalten haben. Wenn dem nicht so ist, so schauen Sie bitte im "
 "Internet auf <http://www.gnu.org/licenses/> nach."
 
-#: ../src/actions-help.c:99
+#: ../src/actions-help.c:100
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -988,11 +983,11 @@ msgstr ""
 "Programmgarnitur zum Bearbeiten von Übersetzungen und der Lokalisierung\n"
 "von Programmen und Bibliotheken"
 
-#: ../src/actions-help.c:101
+#: ../src/actions-help.c:102
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr "(C) 1999-2008 The Free Software Foundation, Inc."
 
-#: ../src/actions-help.c:105
+#: ../src/actions-help.c:106
 msgid "About Gtranslator"
 msgstr "Info zu Gtranslator"
 
@@ -1000,7 +995,7 @@ msgstr "Info zu Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:110
+#: ../src/actions-help.c:111
 msgid "translator-credits"
 msgstr ""
 "Christian Meyer <chrisime@gnome.org>\n"
@@ -1009,7 +1004,7 @@ msgstr ""
 "Hendrik Brandt <heb@gnome-de.org>\n"
 "Christian Kirbach <Christian.Kirbach@googlemail.com>"
 
-#: ../src/actions-help.c:114
+#: ../src/actions-help.c:115
 msgid "Gtranslator Web Site"
 msgstr "Gtranslator-_Internet-Seite"
 
@@ -1058,7 +1053,7 @@ msgid ""
 msgstr ""
 "Profilname: %s\n"
 "Name des Übersetzers: %s\n"
-"email des Übersetzers: %s\n"
+"E-Mail des Übersetzers: %s\n"
 "Sprache: %s\n"
 "Team E-Mail: %s\n"
 "Sprachcode: %s\n"
@@ -1076,7 +1071,7 @@ msgid ""
 "This assistant will help you to create the main profile\n"
 "and generate your translation memory database."
 msgstr ""
-"Dieser Assistent wird Ihnen helfen das Hauptprofil zu erstellen und die "
+"Dieser Assistent wird Ihnen helfen, das Hauptprofil zu erstellen und die "
 "Übersetzungsdatenbank zu generieren."
 
 #: ../src/dialogs/assistant.c:327
@@ -1130,11 +1125,11 @@ msgstr "<b>Wählen Sie den Pfad zur Generierung der Datenbank:</b>"
 
 #: ../src/dialogs/assistant.c:736
 msgid "<b>Look for a specific PO filename:</b>"
-msgstr "<b>Nach einem speziellen PO Dateinamen suchen:</b>"
+msgstr "<b>Nach einem speziellen PO-Dateinamen suchen:</b>"
 
 #: ../src/dialogs/assistant.c:745
 msgid "E.g.: gl.po"
-msgstr "Z.B. de.po"
+msgstr "Z.B. »de.po«"
 
 #: ../src/dialogs/assistant.c:748
 msgid "Generate Database"
@@ -1275,8 +1270,8 @@ msgid "_Language:"
 msgstr "_Sprache:"
 
 #: ../src/dialogs/jump-dialog.c:87
-msgid "Jump To"
-msgstr "Gehe zu"
+msgid "Go to Message"
+msgstr "Springe zu Übersetzung"
 
 #: ../src/dialogs/jump-dialog.glade.h:1
 msgid "<b>Enter message number:</b>"
@@ -1601,7 +1596,7 @@ msgstr "Status"
 
 #: ../src/message-table.c:297
 msgid "ID"
-msgstr "Nr"
+msgstr "Nr."
 
 #: ../src/message-table.c:313
 msgid "Original Text"
@@ -1731,7 +1726,7 @@ msgstr "<b>Ursprünglicher Text:</b>"
 
 #: ../src/tab.c:749
 msgid "<b>Translate_d Text:</b>"
-msgstr "<b>Ü_bersetzer Text:</b>"
+msgstr "<b>Ü_bersetzter Text:</b>"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
@@ -1740,32 +1735,32 @@ msgstr "<b>Ü_bersetzer Text:</b>"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:919
+#: ../src/toolbareditor/egg-editable-toolbar.c:918
 #, c-format
 msgid "Show “_%s”"
 msgstr "\"_%s\" anzeigen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+#: ../src/toolbareditor/egg-editable-toolbar.c:1381
 msgid "_Move on Toolbar"
 msgstr "_Auf der Werkzeugleiste verschieben"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+#: ../src/toolbareditor/egg-editable-toolbar.c:1382
 msgid "Move the selected item on the toolbar"
 msgstr "Das markierte Element auf der Werkzeugleiste verschieben"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+#: ../src/toolbareditor/egg-editable-toolbar.c:1383
 msgid "_Remove from Toolbar"
 msgstr "Aus Werkzeugleiste _entfernen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+#: ../src/toolbareditor/egg-editable-toolbar.c:1384
 msgid "Remove the selected item from the toolbar"
 msgstr "Auswahl aus Werkzeugleiste _entfernen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+#: ../src/toolbareditor/egg-editable-toolbar.c:1385
 msgid "_Delete Toolbar"
 msgstr "Werkzeugleiste _löschen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1387
+#: ../src/toolbareditor/egg-editable-toolbar.c:1386
 msgid "Remove the selected toolbar"
 msgstr "Die markierte Werkzeugleiste entfernen"
 
@@ -1965,11 +1960,11 @@ msgstr ""
 
 #: ../src/window.c:189
 msgid "Toggle _Fuzzy Status"
-msgstr "Status »Unklar« umschalten"
+msgstr "Status »unklar« umschalten"
 
 #: ../src/window.c:190
 msgid "Toggle fuzzy status of a message"
-msgstr "Den Status »Unklar« einer Zeichenkette umschalten"
+msgstr "Den Status »unklar« einer Zeichenkette umschalten"
 
 #: ../src/window.c:192 ../src/window.c:199
 msgid "_Translation Memory"
@@ -2021,73 +2016,93 @@ msgstr "Zur nächsten Datei wechseln"
 msgid "Next Fi_le"
 msgstr "Nächste _Datei"
 
-#: ../src/window.c:233
-msgid "Go to the first message"
-msgstr "Zur ersten Übersetzung gehen"
+#: ../src/window.c:232
+msgid "_Previous Message"
+msgstr "_Vorhergehende Übersetzung"
 
-#: ../src/window.c:236
+#: ../src/window.c:233
 msgid "Move back one message"
 msgstr "Eine Übersetzung zurückgehen"
 
-#: ../src/window.c:239
+#: ../src/window.c:235
+msgid "_Next Message"
+msgstr "_Nächste Übersetzung"
+
+#: ../src/window.c:236
 msgid "Move forward one message"
 msgstr "Eine Übersetzung vorwärtsgehen"
 
+#: ../src/window.c:238
+msgid "_Go to Message..."
+msgstr "_Gehe zu Übersetzung …"
+
+#: ../src/window.c:239
+msgid "Jumps to a specific message"
+msgstr "Zu einer bestimmten Zeichenkette gehen"
+
+#: ../src/window.c:241
+msgid "_First Message"
+msgstr "_Erste Übersetzung"
+
 #: ../src/window.c:242
+msgid "Go to the first message"
+msgstr "Zur ersten Übersetzung gehen"
+
+#: ../src/window.c:244
+msgid "_Last Message"
+msgstr "_Letzte Übersetzung"
+
+#: ../src/window.c:245
 msgid "Go to the last message"
 msgstr "Zur letzten Übersetzung gehen"
 
-#: ../src/window.c:244
+#: ../src/window.c:247
 msgid "Next Fuz_zy"
-msgstr "_Nächste Ungenaue"
+msgstr "_Nächste ungenaue"
 
-#: ../src/window.c:245
+#: ../src/window.c:248
 msgid "Go to the next fuzzy message"
 msgstr "Zur nächsten ungenauen Übersetzung gehen"
 
-#: ../src/window.c:247
+#: ../src/window.c:250
 msgid "Previous Fuzz_y"
-msgstr "V_orhergehende Ungenaue"
+msgstr "V_orhergehende ungenaue"
 
-#: ../src/window.c:248
+#: ../src/window.c:251
 msgid "Go to the previous fuzzy message"
 msgstr "Zur vorhergehenden ungenauen Übersetzung gehen"
 
-#: ../src/window.c:250
+#: ../src/window.c:253
 msgid "Next _Untranslated"
-msgstr "Nächste _Unübersetzte"
+msgstr "Nächste _unübersetzte"
 
-#: ../src/window.c:251
+#: ../src/window.c:254
 msgid "Go to the next untranslated message"
 msgstr "Zum nächsten unübersetzten Text gehen"
 
-#: ../src/window.c:253
+#: ../src/window.c:256
 msgid "Previ_ous Untranslated"
-msgstr "Vorhergehende Unü_bersetzte"
+msgstr "Vorhergehende unü_bersetzte"
 
-#: ../src/window.c:254
+#: ../src/window.c:257
 msgid "Go to the previous untranslated message"
 msgstr "Zum vorhergehenden unübersetzten Text gehen"
 
-#: ../src/window.c:256
+#: ../src/window.c:259
 msgid "Next Fu_zzy or Untranslated"
-msgstr "Nächste Un_klare oder nicht Übersetzte"
+msgstr "Nächste un_klare oder nicht übersetzte"
 
-#: ../src/window.c:257
+#: ../src/window.c:260
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Zur nächsten unklaren oder fehlenden Übersetzung gehen"
 
-#: ../src/window.c:259
+#: ../src/window.c:262
 msgid "Pre_vious Fuzzy or Untranslated"
-msgstr "Vorhergehende Unk_lare oder nicht Übersetzte"
-
-#: ../src/window.c:260
-msgid "Go to the previous fuzzy or untranslated message"
-msgstr "Zur vorhergehenden unklaren oder fehlenden Übersetzung gehen"
+msgstr "Vorhergehende unk_lare oder nicht übersetzte"
 
 #: ../src/window.c:263
-msgid "Jumps to a specific message"
-msgstr "Zu einer bestimmten Zeichenkette gehen"
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "Zur vorhergehenden unklaren oder fehlenden Übersetzung gehen"
 
 #: ../src/window.c:268
 msgid "Search for text"
@@ -2158,6 +2173,12 @@ msgstr "Werkzeugleisteneditor"
 #: ../src/window.c:1552
 msgid "Documents"
 msgstr "Dokumente"
+
+#~ msgid "<b>Source code</b>"
+#~ msgstr "<b>Quelltext</b>"
+
+#~ msgid "Jump To"
+#~ msgstr "Gehe zu"
 
 #~ msgid "    "
 #~ msgstr "    "
@@ -2665,15 +2686,6 @@ msgstr "Dokumente"
 #~ msgid "Edit current comment"
 #~ msgstr "Aktuellen Kommentar bearbeiten"
 
-#~ msgid "First message"
-#~ msgstr "Erste Meldung"
-
-#~ msgid "Last message"
-#~ msgstr "Letzte Meldung"
-
-#~ msgid "Next message"
-#~ msgstr "Nächste Meldung"
-
 #~ msgid "Open file"
 #~ msgstr "Datei öffnen"
 
@@ -3047,9 +3059,6 @@ msgstr "Dokumente"
 
 #~ msgid "_Last"
 #~ msgstr "_Letzte"
-
-#~ msgid "_Go to..."
-#~ msgstr "_Gehe zu …"
 
 #~ msgid "Goto specified message number"
 #~ msgstr "Zur angegebenen Meldungsnummer gehen"
