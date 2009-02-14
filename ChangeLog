@@ -1,5 +1,13 @@
 2009-02-14  Pablo Sanxiao  <psanxiao@gmail.com>
 
+	Patch by Christian Kirbach.
+    
+        * src/header.c:
+        Fixed crash on first-time startup with po-file
+        as argument. (See bug #571497)
+
+2009-02-14  Pablo Sanxiao  <psanxiao@gmail.com>
+
 	Patch by Luca Ferretti.
 	
 	* configure.ac:
@@ -12,7 +20,6 @@
         Migrated from gnome-mime-data to freedesktop.org
         specs for MIME handling. (Fixes bug #150834)
  
-
 2009-02-11  Jordi Mallach  <jordi@sindominio.net>
 
 	* man/gtranslator.1.in: escape hyphen so it gets interpreted as
