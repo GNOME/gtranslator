@@ -449,8 +449,6 @@ data/Makefile
 data/gtranslator.pc
 data/desktop/Makefile
 data/desktop/gtranslator.desktop.in
-data/mime/Makefile
-data/mime/gtranslator.keys_template
 data/pixmaps/Makefile
 doc/Makefile
 doc/reference/Makefile

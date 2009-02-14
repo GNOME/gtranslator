@@ -2,7 +2,6 @@
 
 SUBDIRS = \
 	desktop \
-	mime \
 	pixmaps
 
 schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
