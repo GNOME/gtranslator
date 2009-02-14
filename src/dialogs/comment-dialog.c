@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include "po.h"
 #include "comment-dialog.h"
 #include "tab.h"
 #include "utils.h"
@@ -63,6 +64,7 @@ comment_changed_cb (GtkTextBuffer *buffer,
 	text = gtk_text_buffer_get_text(buffer, &start, &end, TRUE);
 	
 	gtranslator_msg_set_comment(msg->data, text);
+	gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
 }
 
 static void
