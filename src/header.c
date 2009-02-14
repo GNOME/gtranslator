@@ -425,6 +425,7 @@ gtranslator_header_get_nplurals (GtranslatorHeader *header)
 	profile = gtranslator_application_get_active_profile (GTR_APP);
 
 	g_return_val_if_fail (GTR_IS_HEADER (header), -1);
+	g_return_val_if_fail (profile, -1);
 	
 	/*
 	 * If the priv->plural_forms exists that means that there is a plural
