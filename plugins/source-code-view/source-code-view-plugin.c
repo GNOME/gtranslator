@@ -40,7 +40,7 @@
 #define LINE_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/line_cmd"
 
 /* Glade */
-#define GLADE_FILE DATADIR"/source-view-dialog.glade"
+#define GLADE_FILE DATADIR"/source-code-view-dialog.glade"
 
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
