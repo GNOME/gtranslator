@@ -50,7 +50,7 @@ gtranslator_db_words_init (GtranslatorDbWords *db_words)
 	//db_words->priv = GTR_DB_WORDS_GET_PRIVATE (db_words);
 	
 	gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_words),
-					     _("words.db"),
+					     "words.db",
 					     DB_HASH);
 }
 

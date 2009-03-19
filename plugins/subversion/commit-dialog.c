@@ -292,7 +292,7 @@ add_changelog_entry (GtranslatorCommitDialog *dlg)
 	changelog_file = g_file_new_for_path (changelog);
 	if (!g_file_query_exists (changelog_file, NULL))
 	{
-		g_warning (_("The ChangeLog file '%s' does not exists"),
+		g_warning (_("The ChangeLog file '%s' does not exist"),
 			   changelog);
 		g_free (changelog);
 		g_object_unref (changelog_file);

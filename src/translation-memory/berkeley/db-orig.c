@@ -49,7 +49,7 @@ gtranslator_db_orig_init (GtranslatorDbOrig *db_orig)
 	//db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
 	
 	gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_orig),
-					     _("original.db"),
+					     "original.db",
 					     DB_HASH);
 }
 

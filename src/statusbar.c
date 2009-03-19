@@ -236,7 +236,9 @@ gtranslator_statusbar_set_overwrite (GtranslatorStatusbar *statusbar,
 	g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
 	if (overwrite)
+	/* Translators: Overwrite mode */
 		gtk_label_set_text(GTK_LABEL(statusbar->priv->overwrite_mode_label), _("OVR"));
+	/* Translators: Insert mode */
 	else gtk_label_set_text(GTK_LABEL(statusbar->priv->overwrite_mode_label), _("INS"));
 }
 

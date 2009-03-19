@@ -49,7 +49,7 @@ gtranslator_db_trans_init (GtranslatorDbTrans *db_trans)
 	//db_trans->priv = GTR_DB_TRANS_GET_PRIVATE (db_trans);
 	
 	gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_trans),
-					     _("translations.db"),
+					     "translations.db",
 					     DB_RECNO);
 }
 

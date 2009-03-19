@@ -122,7 +122,7 @@ dialog_response_handler (GtranslatorCheckoutDialog *dlg,
 									    GTK_DIALOG_DESTROY_WITH_PARENT,
 									    GTK_MESSAGE_WARNING,
 									    GTK_BUTTONS_CLOSE,
-									    _("Please, add a directory path to make the checkout"));
+									    _("Please add a directory path to make the checkout"));
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
 				break;
@@ -135,7 +135,7 @@ dialog_response_handler (GtranslatorCheckoutDialog *dlg,
 									    GTK_DIALOG_DESTROY_WITH_PARENT,
 									    GTK_MESSAGE_WARNING,
 									    GTK_BUTTONS_CLOSE,
-									    _("Please, add a Subversion URL"));
+									    _("Please add a Subversion URL"));
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
 				break;
