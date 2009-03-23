@@ -112,6 +112,11 @@ AC_SUBST(GTRANSLATOR_LIBS)
 AC_PATH_PROG([GLIB_GENMARSHAL], [glib-genmarshal])
 AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
 
+dnl -----------------------------------
+dnl Plugins libraries compilation flags
+dnl -----------------------------------
+PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
+AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
 dnl -------------------------------------------------------------------
 dnl Whether we use the broken, unsupported gtk+ functions
