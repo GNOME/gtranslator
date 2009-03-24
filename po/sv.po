@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 20:34+0100\n"
-"PO-Revision-Date: 2009-02-11 21:30+0100\n"
+"POT-Creation-Date: 2009-03-24 10:16+0100\n"
+"PO-Revision-Date: 2009-03-24 10:17+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -495,7 +495,7 @@ msgstr "Använd extern redigerare"
 
 #: ../plugins/source-code-view/source-code-view-plugin.c:115
 #, c-format
-msgid "Please, install %s to be able to show the file"
+msgid "Please install %s to be able to show the file"
 msgstr "Installera %s för att kunna visa filen"
 
 #: ../plugins/source-code-view/source-code-view-plugin.c:466
@@ -519,11 +519,11 @@ msgid "Subversion: Checkout complete."
 msgstr "Subversion: Utcheckningen är färdig."
 
 #: ../plugins/subversion/checkout-dialog.c:125
-msgid "Please, add a directory path to make the checkout"
+msgid "Please add a directory path to make the checkout"
 msgstr "Lägg till en katalogsökväg för att göra utcheckningen"
 
 #: ../plugins/subversion/checkout-dialog.c:138
-msgid "Please, add a Subversion URL"
+msgid "Please add a Subversion URL"
 msgstr "Lägg till en Subversion-URL"
 
 #: ../plugins/subversion/checkout-dialog.c:172
@@ -552,7 +552,7 @@ msgstr "SPRÅK"
 
 #: ../plugins/subversion/commit-dialog.c:295
 #, c-format
-msgid "The ChangeLog file '%s' does not exists"
+msgid "The ChangeLog file '%s' does not exist"
 msgstr "ChangeLog-filen \"%s\" finns inte"
 
 #: ../plugins/subversion/commit-dialog.c:407
@@ -573,7 +573,7 @@ msgstr "Subversion: Diff färdig."
 
 #: ../plugins/subversion/diff-dialog.c:108
 #, c-format
-msgid "Please, install %s to be able to diff the file"
+msgid "Please install %s to be able to diff the file"
 msgstr "Installera %s för att kunna diff:a filen"
 
 #: ../plugins/subversion/diff-dialog.c:411
@@ -1156,7 +1156,7 @@ msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Om du inte sparar så kommer dina ändringar att gå förlorade."
 
 # src/sidebar.c:107
-#: ../src/dialogs/comment-dialog.c:92
+#: ../src/dialogs/comment-dialog.c:94
 msgid "Edit Comment"
 msgstr "Redigera kommentar"
 
@@ -1261,14 +1261,6 @@ msgstr "Gå till meddelande"
 #: ../src/dialogs/jump-dialog.glade.h:1
 msgid "<b>Enter message number:</b>"
 msgstr "<b>Ange meddelandenummer:</b>"
-
-#: ../src/dialogs/jump-dialog.glade.h:2
-msgid "gtk-cancel"
-msgstr "Avbryt"
-
-#: ../src/dialogs/jump-dialog.glade.h:3
-msgid "gtk-ok"
-msgstr "OK"
 
 # src/prefs.c:114
 #: ../src/dialogs/preferences-dialog.c:517
@@ -1448,8 +1440,8 @@ msgstr "<span weight=\"bold\" size=\"large\">Profilens namn finns redan</span>"
 
 # src/dialogs.c:390
 #: ../src/dialogs/profile-dialog.c:341
-msgid "gtranslator Profile"
-msgstr "gtranslator-profil"
+msgid "Gtranslator Profile"
+msgstr "Gtranslator-profil"
 
 #: ../src/dialogs/profile-dialog.c:374
 msgid "Example: nplurals=2; plural=(n != 1);"
@@ -1702,13 +1694,15 @@ msgstr "_Om insticksmodul"
 msgid "C_onfigure Plugin"
 msgstr "K_onfigurera insticksmodul"
 
+#. Translators: Insert mode
 #: ../src/statusbar.c:114
-#: ../src/statusbar.c:240
+#: ../src/statusbar.c:242
 msgid "INS"
 msgstr "INF"
 
+#. Translators: Overwrite mode
 #: ../src/statusbar.c:114
-#: ../src/statusbar.c:239
+#: ../src/statusbar.c:240
 msgid "OVR"
 msgstr "ÖVR"
 
@@ -1797,19 +1791,6 @@ msgstr "Det uppstod ett fel vid återställning av databasen: %s"
 msgid "There was an error in database: %s"
 msgstr "Det fanns ett fel i databasen: %s"
 
-#: ../src/translation-memory/berkeley/db-orig.c:52
-msgid "original.db"
-msgstr "original.db"
-
-# src/prefs.c:239
-#: ../src/translation-memory/berkeley/db-trans.c:52
-msgid "translations.db"
-msgstr "translations.db"
-
-#: ../src/translation-memory/berkeley/db-words.c:53
-msgid "words.db"
-msgstr "words.db"
-
 #: ../src/translation-memory/translation-memory-ui.c:209
 #, c-format
 msgid "Insert Option nº %d"
@@ -1843,7 +1824,7 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Kunde inte hitta de nödvändiga widgetarna inuti filen %s."
 
 #: ../src/utils.c:788
-msgid "Unable to display help. Please make sure Gtranslator documentation package is installed."
+msgid "Unable to display help. Please make sure the Gtranslator documentation package is installed."
 msgstr "Kunde inte visa hjälp. Försäkra dig om att Gtranslators dokumentationspaket är installerat."
 
 #: ../src/view.c:81
@@ -2233,6 +2214,18 @@ msgstr "Verktygsradsredigerare"
 msgid "Documents"
 msgstr "Dokument"
 
+#~ msgid "gtk-cancel"
+#~ msgstr "Avbryt"
+#~ msgid "gtk-ok"
+#~ msgstr "OK"
+#~ msgid "original.db"
+#~ msgstr "original.db"
+
+# src/prefs.c:239
+#~ msgid "translations.db"
+#~ msgstr "translations.db"
+#~ msgid "words.db"
+#~ msgstr "words.db"
 # src/prefs.c:114
 #~ msgid "<b>Source code</b>"
 #~ msgstr "<b>Källkod</b>"
