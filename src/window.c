@@ -498,7 +498,7 @@ add_widget_full (GtranslatorWindow *window,
 	menuitem = GTK_CHECK_MENU_ITEM (gtk_check_menu_item_new_with_label (title));
 	gtk_widget_show (GTK_WIDGET (menuitem));
 	gtk_check_menu_item_set_active (menuitem, TRUE);
-	gtk_menu_append (GTK_MENU (window->priv->view_menu), GTK_WIDGET (menuitem));
+	gtk_menu_shell_append (GTK_MENU_SHELL (window->priv->view_menu), GTK_WIDGET (menuitem));
 
 	if (locked)
 		g_object_set( G_OBJECT(menuitem), "visible", FALSE, NULL);
@@ -1266,7 +1266,7 @@ menu_item_select_cb (GtkMenuItem *proxy,
 	GtkAction *action;
 	char *message;
 
-	action = gtk_widget_get_action (GTK_WIDGET (proxy));
+	action = gtk_activatable_get_related_action (GTK_ACTIVATABLE (proxy));
 	g_return_if_fail (action != NULL);
 
 	g_object_get (G_OBJECT (action), "tooltip", &message, NULL);

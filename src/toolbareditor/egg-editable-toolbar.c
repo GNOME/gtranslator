@@ -200,7 +200,7 @@ drag_begin_cb (GtkWidget          *widget,
   
   gtk_widget_hide (widget);
 
-  action = gtk_widget_get_action (widget);
+  action = gtk_activatable_get_related_action (GTK_ACTIVATABLE (widget));
   if (action == NULL) return;
   
   flags = egg_toolbars_model_get_name_flags (etoolbar->priv->model,
@@ -226,7 +226,7 @@ drag_end_cb (GtkWidget          *widget,
     {
       gtk_widget_show (widget);
 
-      action = gtk_widget_get_action(widget);
+      action = gtk_activatable_get_related_action(GTK_ACTIVATABLE (widget));
       if (action == NULL) return;
       
       flags = egg_toolbars_model_get_name_flags (etoolbar->priv->model,
@@ -497,7 +497,7 @@ configure_item_cursor (GtkToolItem *item,
 static void
 configure_item_tooltip (GtkToolItem *item)
 {
-  GtkAction *action = gtk_widget_get_action (GTK_WIDGET (item));
+  GtkAction *action = gtk_activatable_get_related_action (GTK_ACTIVATABLE (item));
   
   if (action != NULL)
     {

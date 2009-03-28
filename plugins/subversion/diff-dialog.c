@@ -509,8 +509,11 @@ gtranslator_diff_dialog_init (GtranslatorDiffDialog *dlg)
 	if(!ret)
 	{
 		gtk_widget_show (error_widget);
-		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-					     error_widget);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+				    error_widget,
+				    TRUE,
+				    TRUE,
+				    0);
 		
 		return;
 	}

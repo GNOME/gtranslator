@@ -373,8 +373,11 @@ get_configuration_dialog (GtranslatorSubversionPlugin *plugin)
 	if(!ret)
 	{
 		gtk_widget_show (error_widget);
-		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (plugin->priv->dialog)->vbox),
-					     error_widget);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (plugin->priv->dialog)->vbox),
+				    error_widget,
+				    TRUE,
+				    TRUE,
+				    0);
 		
 		return plugin->priv->dialog;
 	}
