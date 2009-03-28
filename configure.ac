@@ -73,7 +73,7 @@ dnl it too, or it will never make it into the spec file!
 dnl
 dnl ==========================================================================
 
-GTK_REQUIRED=2.11.6
+GTK_REQUIRED=2.16.0
 GLIB_REQUIRED=2.15.5
 GCONF_REQUIRED=2.18.0
 LIBXML_REQUIRED=2.4.12
