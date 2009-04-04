@@ -50,10 +50,11 @@ gboolean	 gtranslator_plugin_info_is_configurable	(GtranslatorPluginInfo *info);
 
 const gchar	*gtranslator_plugin_info_get_name		(GtranslatorPluginInfo *info);
 const gchar	*gtranslator_plugin_info_get_description	(GtranslatorPluginInfo *info);
-const gchar	*gtranslator_plugin_info_get_icon_name	(GtranslatorPluginInfo *info);
+const gchar	*gtranslator_plugin_info_get_icon_name	        (GtranslatorPluginInfo *info);
 const gchar    **gtranslator_plugin_info_get_authors		(GtranslatorPluginInfo *info);
 const gchar	*gtranslator_plugin_info_get_website		(GtranslatorPluginInfo *info);
-const gchar	*gtranslator_plugin_info_get_copyright	(GtranslatorPluginInfo *info);
+const gchar	*gtranslator_plugin_info_get_copyright	        (GtranslatorPluginInfo *info);
+const gchar     *gtranslator_plugin_info_get_license            (GtranslatorPluginInfo *info);
 
 G_END_DECLS
 

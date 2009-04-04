@@ -264,6 +264,16 @@ _gtranslator_plugin_info_new (const gchar *file)
 	else
 		DEBUG_PRINT ( "Could not find 'Copyright' in %s", file);
 
+	/* Get License */
+	str = g_key_file_get_string (plugin_file,
+				     "Gtranslator Plugin",
+				     "License",
+				     NULL);
+	if (str)
+		info->license = str;
+	else
+		DEBUG_PRINT ( "Could not find 'Copyright' in %s", file);
+
 	/* Get Website */
 	str = g_key_file_get_string (plugin_file,
 				     "Gtranslator Plugin",
@@ -374,4 +384,12 @@ gtranslator_plugin_info_get_copyright (GtranslatorPluginInfo *info)
 	g_return_val_if_fail (info != NULL, NULL);
 
 	return info->copyright;
+}
+
+const gchar *
+gtranslator_plugin_info_get_license (GtranslatorPluginInfo *info)
+{
+        g_return_val_if_fail (info != NULL, NULL);
+	
+	return info->license;
 }

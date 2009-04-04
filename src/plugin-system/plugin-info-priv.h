@@ -52,6 +52,7 @@ struct _GtranslatorPluginInfo
 	gchar            **authors;
 	gchar             *copyright;
 	gchar             *website;
+        gchar             *license;
 
 	GtranslatorPlugin       *plugin;
 
